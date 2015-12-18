@@ -1,0 +1,968 @@
+# Translation of Network Admin in Dutch
+# This file is distributed under the same license as the Network Admin package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-11-26 00:00:19+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Network Admin\n"
+
+#: wp-admin/network/site-users.php:329 wp-admin/network/user-new.php:106
+msgid "A password reset link will be sent to the user via email."
+msgstr "Een link om het wachtwoord te herstellen wordt verstuurd naar de gebruiker via e-mail."
+
+#. translators: 1: NOBLOGREDIRECT 2: wp-config.php
+#: wp-admin/network/settings.php:142
+msgid "If registration is disabled, please set %1$s in %2$s to a URL you will redirect visitors to if they visit a non-existent site."
+msgstr "Wanneer registratie is uitgeschakeld zet de %1$s in de %2$s naar een URL waar de gebruikers naartoe verwezen kunnen worden als ze een niet-bestaande site bezoeken."
+
+#: wp-admin/network/site-users.php:41
+msgid "Site users list navigation"
+msgstr "Sitegebruikerslijst navigatie"
+
+#: wp-admin/network/site-users.php:42
+msgid "Site users list"
+msgstr "Sitegebruikerslijst"
+
+#: wp-admin/network/sites.php:50
+msgid "Sites list navigation"
+msgstr "Sitelijst navigatie"
+
+#: wp-admin/network/sites.php:51
+msgid "Sites list"
+msgstr "Sitelijst"
+
+#: wp-admin/network/themes.php:256
+msgid "Themes list navigation"
+msgstr "Themalijst navigatie"
+
+#. translators: 1: WP_ALLOW_MULTISITE 2: wp-config.php
+#: wp-admin/network.php:44
+msgid "You must define the %1$s constant as true in your %2$s file to allow creation of a Network."
+msgstr "Het is noodzakelijk om de constante %1$s als 'true' te definiëren in het %2$s bestand om een netwerk te kunnen activeren."
+
+#: wp-admin/network/site-new.php:95
+msgid "The domain or path entered conflicts with an existing username."
+msgstr "Het ingevoerde domein of pad conflicteert met een bestaande gebruikersnaam."
+
+#: wp-admin/network/site-new.php:178
+msgid "Only lowercase letters (a-z) and numbers are allowed."
+msgstr "Alleen kleine letters (a-z) en nummers toegestaan."
+
+#: wp-admin/network/site-themes.php:38
+msgid "Site themes list navigation"
+msgstr "Sitethema'slijst navigatie"
+
+#: wp-admin/network/site-themes.php:39
+msgid "Site themes list"
+msgstr "Sitethema'slijst"
+
+#: wp-admin/network/site-users.php:40
+msgid "Filter site users list"
+msgstr "Sitegebruikerslijst filteren"
+
+#: wp-admin/network/site-themes.php:37
+msgid "Filter site themes list"
+msgstr "Sitethema'slijst filteren"
+
+#: wp-admin/network/sites.php:78
+msgid "The requested action is not valid."
+msgstr "De opgevraagde actie is ongeldig."
+
+#: wp-admin/network/sites.php:69
+msgid "You are about to mark the site %s as mature."
+msgstr "Je staat op het punt de site %s te markeren als volwassen."
+
+#: wp-admin/network/sites.php:70
+msgid "You are about to mark the site %s as not mature."
+msgstr "Je staat op het punt de site %s te markeren als niet volwassen."
+
+#: wp-admin/network/sites.php:68
+msgid "You are about to delete the site %s."
+msgstr "Je staat op het punt om de website %s te verwijderen."
+
+#: wp-admin/network/sites.php:67
+msgid "You are about to mark the site %s as spam."
+msgstr "Je staat op het punt de site %s te markeren als geen spam. "
+
+#: wp-admin/network/sites.php:66
+msgid "You are about to unspam the site %s."
+msgstr "Je staat op het punt de site %s te markeren als geen spam."
+
+#: wp-admin/network/sites.php:65
+msgid "You are about to archive the site %s."
+msgstr "Je staat op het punt de site %s te archiveren."
+
+#: wp-admin/network/sites.php:64
+msgid "You are about to unarchive the site %s."
+msgstr "Je staat op het punt de site %s te herstellen vanuit het archief."
+
+#: wp-admin/network/sites.php:63
+msgid "You are about to deactivate the site %s"
+msgstr "Je staat op het punt de site %s te deactiveren"
+
+#: wp-admin/network/sites.php:62
+msgid "You are about to activate the site %s"
+msgstr "Je staat op het punt de site %s te activeren"
+
+#: wp-admin/network/site-info.php:46 wp-admin/network/site-settings.php:43
+#: wp-admin/network/site-themes.php:66 wp-admin/network/site-users.php:59
+msgid "The requested site does not exist."
+msgstr "De opgevraagde site bestaat niet."
+
+#: wp-admin/network/site-info.php:170 wp-admin/network/site-info.php:177
+msgid "Site URL"
+msgstr "Site URL"
+
+#: wp-admin/network/upgrade.php:32
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Updates_Screen\" target=\"_blank\">Documentation on Upgrade Network</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Updates_Screen\" target=\"_blank\">Documentatie over het upgraden van een Netwerk</a>"
+
+#: wp-admin/network/user-new.php:29 wp-admin/network/users.php:171
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Users_Screen\" target=\"_blank\">Documentation on Network Users</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Users_Screen\" target=\"_blank\">Documentatie over Netwerk-gebruikers</a>"
+
+#: wp-admin/network.php:67 wp-admin/network.php:78
+msgid "<a href=\"https://codex.wordpress.org/Tools_Network_Screen\" target=\"_blank\">Documentation on the Network Screen</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Tools_Network_Screen\" target=\"_blank\">Documentatie over het netwerkscherm</a>"
+
+#: wp-admin/network/index.php:53
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin\" target=\"_blank\">Documentation on the Network Admin</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin\" target=\"_blank\">Documentatie over de Netwerk Admin</a>"
+
+#: wp-admin/network/site-info.php:34 wp-admin/network/site-new.php:32
+#: wp-admin/network/site-settings.php:32 wp-admin/network/site-themes.php:32
+#: wp-admin/network/site-users.php:35 wp-admin/network/sites.php:45
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Sites_Screen\" target=\"_blank\">Documentation on Site Management</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Sites_Screen\" target=\"_blank\">Documentatie over Site Management</a>"
+
+#: wp-admin/network.php:66 wp-admin/network.php:77
+msgid "<a href=\"https://codex.wordpress.org/Create_A_Network\" target=\"_blank\">Documentation on Creating a Network</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Create_A_Network\" target=\"_blank\">Documentatie over maken van een netwerk</a>"
+
+#: wp-admin/network/themes.php:250
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Themes_Screen\" target=\"_blank\">Documentation on Network Themes</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Themes_Screen\" target=\"_blank\">Documentatie over Netwerk Thema&#39;s</a>"
+
+#: wp-admin/network/settings.php:43
+msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\" target=\"_blank\">Documentation on Network Settings</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\" target=\"_blank\">Documentatie over de Netwerk instellingen</a>"
+
+#. translators: 1: site url, 2: server error message
+#: wp-admin/network/upgrade.php:76
+msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
+msgstr "Waarschuwing! Er is een probleem met het bijwerken van %1$s. De server is mogelijk niet in staat om verbinding te maken met de sites die er op draaien. Foutmelding: %2$s"
+
+#: wp-admin/network/site-themes.php:172 wp-admin/network/themes.php:281
+msgid "%s theme enabled."
+msgid_plural "%s themes enabled."
+msgstr[0] "%s thema ingeschakeld."
+msgstr[1] "%s thema's ingeschakeld."
+
+#: wp-admin/network/site-themes.php:180 wp-admin/network/themes.php:289
+msgid "%s theme disabled."
+msgid_plural "%s themes disabled."
+msgstr[0] "%s thema uitgeschakeld."
+msgstr[1] "%s thema's uitgeschakeld."
+
+#: wp-admin/network/themes.php:170
+msgid "Are you sure you wish to delete this theme?"
+msgstr "Weet je zeker dat je dit thema wilt verwijderen?"
+
+#: wp-admin/network/themes.php:187
+msgid "Yes, delete these themes"
+msgstr "Ja, deze thema's verwijderen"
+
+#: wp-admin/network/themes.php:157
+msgid "Delete Themes"
+msgstr "Thema's verwijderen"
+
+#: wp-admin/network/themes.php:159
+msgid "You are about to remove the following themes:"
+msgstr "Je staat op het punt om de volgende thema's te verwijderen:"
+
+#: wp-admin/network/themes.php:158
+msgid "These themes may be active on other sites in the network."
+msgstr "Deze thema's kunnen actief zijn op andere sites in het netwerk."
+
+#: wp-admin/network/themes.php:297
+msgid "%s theme deleted."
+msgid_plural "%s themes deleted."
+msgstr[0] "%s thema is verwijderd."
+msgstr[1] "%s thema's zijn verwijderd."
+
+#: wp-admin/network/settings.php:367
+msgid "Enable menus"
+msgstr "Menu's activeren"
+
+#: wp-admin/network/site-info.php:203
+msgid "Set site attributes"
+msgstr "Site attributen instellen"
+
+#: wp-admin/network/settings.php:294
+msgid "Allowed file types. Separate types by spaces."
+msgstr "Toegestane bestandstypen. De bestandstypes scheiden met spaties."
+
+#: wp-admin/network/settings.php:134
+msgid "New registrations settings"
+msgstr "Nieuwe registratie instellingen"
+
+#: wp-admin/network/settings.php:304
+msgid "Size in kilobytes"
+msgstr "Grootte in kilobytes"
+
+#: wp-admin/network/sites.php:103
+msgid "Confirm your action"
+msgstr "De acties bevestigen"
+
+#: wp-admin/network/index.php:54 wp-admin/network/site-info.php:35
+#: wp-admin/network/site-new.php:33 wp-admin/network/site-settings.php:33
+#: wp-admin/network/site-themes.php:33 wp-admin/network/site-users.php:36
+#: wp-admin/network/sites.php:46 wp-admin/network/user-new.php:30
+#: wp-admin/network/users.php:172
+msgid "<a href=\"https://wordpress.org/support/forum/multisite/\" target=\"_blank\">Support Forums</a>"
+msgstr "<a href=\"https://nl.forums.wordpress.org/\" target=\"_blank\">Support Forums</a>"
+
+#: wp-admin/network/settings.php:118
+msgid "This email address will receive notifications. Registration and support emails will also come from this address."
+msgstr "Dit e-mailadres zal meldingen ontvangen. Registraties en onderhoudsberichten worden ook vanaf dit adres verstuurd."
+
+#: wp-admin/network/users.php:162
+msgid "Hover over any user on the list to make the edit links appear. The Edit link on the left will take you to their Edit User profile page; the Edit link on the right by any site name goes to an Edit Site screen for that site."
+msgstr "Hover over een gebruiker in de lijst om de bewerken link te tonen. De linker bewerken link brengt je naar je eigen Profiel bewerken pagina; de bewerken link aan de rechterzijde naast een sitenaam gaat naar het Site bewerken scherm van dit site."
+
+#: wp-admin/network/index.php:39
+msgid "To add a new user, <strong>click Create a New User</strong>."
+msgstr "Om een nieuwe gebruiker toe te voegen, <strong>klik Nieuwe gebruiker toevoegen</strong>."
+
+#: wp-admin/network/index.php:40
+msgid "To add a new site, <strong>click Create a New Site</strong>."
+msgstr "Om een nieuwe site toe te voegen, <strong>klik Nieuwe site toevoegen</strong>."
+
+#: wp-admin/network/index.php:43
+msgid "To search for a site, <strong>enter the path or domain</strong>."
+msgstr "Om een site te zoeken, <strong>vul het pad of domeinnaam in</strong>."
+
+#: wp-admin/network/index.php:42
+msgid "To search for a user, <strong>enter an email address or username</strong>. Use a wildcard to search for a partial username, such as user&#42;."
+msgstr "Om een gebruiker te zoeken, <strong>vul een e-mailadres of gebruikersnaam in</strong>. Gebruik een wildcard om op een gedeelte van een gebruikersnaam te zoeken, zoals gebrui&#42;."
+
+#: wp-admin/network/settings.php:96
+msgid "Options saved."
+msgstr "Opties opgeslagen"
+
+#: wp-admin/network/index.php:29
+msgid "Update your network"
+msgstr "Netwerk bijwerken"
+
+#: wp-admin/network/index.php:30
+msgid "Modify global network settings"
+msgstr "Globale instellingen bewerken"
+
+#: wp-admin/network/index.php:27
+msgid "Add and manage sites or users"
+msgstr "Sites en gebruikers toevoegen en beheren"
+
+#: wp-admin/network/index.php:25
+msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
+msgstr "Welkom bij het netwerkbeheer. Dit onderdeel van het beheerscherm wordt gebruikt om alle aspecten van multisite te beheren."
+
+#: wp-admin/network/index.php:28
+msgid "Install and activate themes or plugins"
+msgstr "Thema&#39;s installeren en activeren"
+
+#: wp-admin/network/index.php:41
+msgid "To search for a user or site, use the search boxes."
+msgstr "Om te zoeken naar gebruikers of site, maak gebruik van de zoekboxen."
+
+#: wp-admin/network/index.php:47
+msgid "Quick Tasks"
+msgstr "Snelle taken"
+
+#: wp-admin/network/index.php:38
+msgid "The Right Now widget on this screen provides current user and site counts on your network."
+msgstr "De op-dit-moment widget op dit scherm biedt informatie over gebruikers en website aantallen van je netwerk."
+
+#: wp-admin/network/index.php:26
+msgid "From here you can:"
+msgstr "Hier kun je:"
+
+#: wp-admin/network/menu.php:22 wp-admin/network/upgrade.php:18
+#: wp-admin/network/upgrade.php:42 wp-admin/network/upgrade.php:119
+msgid "Upgrade Network"
+msgstr "Netwerk upgraden"
+
+#: wp-admin/network/upgrade.php:25
+msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
+msgstr "Dit scherm alleen gebruiken wanneer je WordPress hebt bijgewerkt via Nieuwe updates beschikbaar (in het netwerkbeheer navigatiemenu of in de toolbar). Het klikken op de bijwerkenknop zorgt ervoor dat alle database wijzigingen worden doorgevoerd voor elke site (5 tegelijkertijd) op alle sites in het netwerk."
+
+#: wp-admin/network/upgrade.php:115
+msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
+msgstr "WordPress is succesvol bijgewerkt! Voordat je verder gaat moeten eerst alle individuele sites in je netwerk bijgewerkt worden."
+
+#. translators: 1: user login, 2: site url, 3: site name/title
+#: wp-admin/network/site-new.php:123
+msgid ""
+"New site created by %1$s\n"
+"\n"
+"Address: %2$s\n"
+"Name: %3$s"
+msgstr ""
+"Nieuwe website gemaakt door %1$s\n"
+"\n"
+"Adres: %2$s\n"
+"Naam: %3$s"
+
+#: wp-admin/network.php:62
+msgid "Add the designated lines of code to wp-config.php (just before <code>/*...stop editing...*/</code>) and <code>.htaccess</code> (replacing the existing WordPress rules)."
+msgstr "De volgende gegenereerde regels toevoegen aan wp-config.php (vlak voor <code>/* ...stop editing... */</code> en aan <code>.htaccess</code> (vervang hier de bestaande WordPress regels)."
+
+#: wp-admin/network/site-users.php:297 wp-admin/network/user-new.php:110
+msgid "Add User"
+msgstr "Gebruiker toevoegen"
+
+#: wp-admin/network/themes.php:17
+msgid "You do not have sufficient permissions to manage network themes."
+msgstr "Je hebt onvoldoende rechten om netwerk thema&#39;s te beheren."
+
+#: wp-admin/network/themes.php:100
+msgid "You do not have sufficient permissions to delete themes for this site."
+msgstr "Je hebt onvoldoende rechten om thema&#39;s voor deze website te verwijderen."
+
+#: wp-admin/network/themes.php:153
+msgid "Delete Theme"
+msgstr "Thema verwijderen"
+
+#: wp-admin/network/themes.php:154
+msgid "This theme may be active on other sites in the network."
+msgstr "Dit thema kan actief zijn op andere websites in het netwerk."
+
+#: wp-admin/network/themes.php:155
+msgid "You are about to remove the following theme:"
+msgstr "Je staat op het punt om het volgende thema te verwijderen:"
+
+#: wp-admin/network/themes.php:172
+msgid "Are you sure you wish to delete these themes?"
+msgstr "Weet je zeker dat je de thema&#39;s wilt verwijderen?"
+
+#: wp-admin/network/themes.php:185
+msgid "Yes, delete this theme"
+msgstr "Ja, dit thema verwijderen"
+
+#: wp-admin/network/themes.php:195
+msgid "No, return me to the theme list"
+msgstr "Nee, breng mij terug naar de themalijst"
+
+#: wp-admin/network/themes.php:245
+msgid "Themes can be enabled on a site by site basis by the network admin on the Edit Site screen (which has a Themes tab); get there via the Edit action link on the All Sites screen. Only network admins are able to install or edit themes."
+msgstr "Thema&#39;s kunnen worden geactiveerd per site door de netwerkbeheerder op de pagina Site-scherm (welke een tabblad Thema&#39;s heeft). Je komt daar via het de link Bewerken op het overzicht van alle sites. Alleen netwerkbeheerders kunnen them&#39;'s installeren of bewerken."
+
+#: wp-admin/network/site-themes.php:170 wp-admin/network/themes.php:279
+msgid "Theme enabled."
+msgstr "Thema activeren."
+
+#: wp-admin/network/site-themes.php:178 wp-admin/network/themes.php:287
+msgid "Theme disabled."
+msgstr "Thema deactiveren."
+
+#: wp-admin/network/site-themes.php:184 wp-admin/network/themes.php:301
+msgid "No theme selected."
+msgstr "Geen thema geselecteerd."
+
+#: wp-admin/network/site-info.php:25 wp-admin/network/site-settings.php:23
+#: wp-admin/network/site-themes.php:23 wp-admin/network/site-users.php:26
+msgid "The menu is for editing information specific to individual sites, particularly if the admin area of a site is unavailable."
+msgstr "Het menu is voor het bewerken van specifieke informatie over individuele sites, met name wanneer het admin gebied van een site niet beschikbaar is."
+
+#: wp-admin/network/site-info.php:28 wp-admin/network/site-settings.php:26
+#: wp-admin/network/site-themes.php:26 wp-admin/network/site-users.php:29
+msgid "<strong>Themes</strong> &mdash; This area shows themes that are not already enabled across the network. Enabling a theme in this menu makes it accessible to this site. It does not activate the theme, but allows it to show in the site&#8217;s Appearance menu. To enable a theme for the entire network, see the <a href=\"%s\">Network Themes</a> screen."
+msgstr "<strong>Thema&#39;s</strong> - Dit onderdeel toont thema&#39;s die nog niet zijn ingeschakeld voor het hele netwerk. Wanneer een thema in dit menu wordt ingeschakeld, wordt het zichtbaar voor deze site. Dit activeert het thema niet, maar maakt het zichtbaar in het Weergavemenu. Om een thema voor het hele netwerk beschikbaar te maken, ga je naar het <a href=\"%s\">Netwerk thema&#39;s</a> scherm."
+
+#: wp-admin/network/site-info.php:41 wp-admin/network/site-settings.php:39
+#: wp-admin/network/site-themes.php:60 wp-admin/network/site-users.php:55
+msgid "Invalid site ID."
+msgstr "Ongeldige site ID."
+
+#: wp-admin/network/site-info.php:144 wp-admin/network/site-settings.php:101
+#: wp-admin/network/site-themes.php:155 wp-admin/network/site-users.php:210
+msgid "Info"
+msgstr "Info"
+
+#: wp-admin/network/site-users.php:228
+msgid "User is already a member of this site."
+msgstr "Gebruiker is al lid van deze website."
+
+#: wp-admin/network/site-users.php:231
+msgid "Enter the username of an existing user."
+msgstr "Voer de gebruikersnaam van een bestaande gebruiker in."
+
+#: wp-admin/network/site-users.php:246
+msgid "User created."
+msgstr "Gebruiker aangemaakt."
+
+#: wp-admin/network/site-users.php:249
+msgid "Enter the username and email."
+msgstr "Voer de gebruikersnaam en e-mailadres in."
+
+#: wp-admin/network/site-settings.php:83
+msgid "Site options updated."
+msgstr "Site opties bijgewerkt."
+
+#: wp-admin/network/site-new.php:20
+msgid "You do not have sufficient permissions to add sites to this network."
+msgstr "Je hebt onvoldoende rechten om sites toe te voegen aan dit netwerk."
+
+#: wp-admin/network/site-new.php:26
+msgid "This screen is for Super Admins to add new sites to the network. This is not affected by the registration settings."
+msgstr "Dit scherm is voor Super Admins om nieuwe sites toe te voegen aan het netwerk. Dit wordt niet beïnvloed door registratie instellingen."
+
+#. translators: 1: dashboard url, 2: network admin edit url
+#: wp-admin/network/site-new.php:145
+msgid "Site added. <a href=\"%1$s\">Visit Dashboard</a> or <a href=\"%2$s\">Edit Site</a>"
+msgstr "Site toegevoegd. <a href=\"%1$s\">Bezoek het Dashboard</a> of <a href=\"%2$s\">bewerk de site </a>"
+
+#: wp-admin/network/sites.php:35
+msgid "Dashboard leads to the Dashboard for that site."
+msgstr "Dashboard leidt naar het Dashboard van de betreffende site."
+
+#: wp-admin/network/sites.php:37
+msgid "Delete which is a permanent action after the confirmation screens."
+msgstr "Verwijderen, wat een permanente actie is na de bevestiging vensters."
+
+#: wp-admin/network/sites.php:40
+msgid "Clicking on bold headings can re-sort this table."
+msgstr "Klikken op de vette koppen kan deze tabel hersorteren."
+
+#: wp-admin/network/sites.php:147
+msgid "You are not allowed to delete the site."
+msgstr "Je hebt geen toestemming om de website te verwijderen."
+
+#: wp-admin/network/sites.php:236
+msgid "You do not have permission to delete that site."
+msgstr "Je hebt onvoldoende rechten om die website te verwijderen."
+
+#: wp-admin/network/menu.php:55 wp-admin/network/settings.php:22
+msgid "Network Settings"
+msgstr "Netwerkinstellingen"
+
+#: wp-admin/network/settings.php:38
+msgid "Super admins can no longer be added on the Options screen. You must now go to the list of existing users on Network Admin > Users and click on Username or the Edit action link below that name. This goes to an Edit User page where you can check a box to grant super admin privileges."
+msgstr "Super admins kunnen niet langer worden toegevoegd via het opties scherm. Je gaat nu naar de lijst van bestaande gebruikers op Netwerk admin -> Gebruikers en klikt op de gebruikersnaam of de bewerklink onder de naam. Dit gaat naar een bewerk gebruiker pagina waar je een gebruiker super admin rechten kunt geven via een selectievakje."
+
+#: wp-admin/network/settings.php:315
+msgid "Language Settings"
+msgstr "Taalinstellingen"
+
+#: wp-admin/network/site-info.php:125
+msgid "Site info updated."
+msgstr "Site informatie bijgewerkt."
+
+#: wp-admin/network/menu.php:28
+msgid "All Sites"
+msgstr "Alle sites"
+
+#: wp-admin/network/menu.php:36
+msgid "Themes %s"
+msgstr "Thema&#39;s %s"
+
+#: wp-admin/network/menu.php:19
+msgid "Updates"
+msgstr "Updates"
+
+#: wp-admin/network/site-themes.php:187
+msgid "Network enabled themes are not shown on this screen."
+msgstr "Netwerk ingeschakeld thema&#39;s worden niet weergegeven op dit scherm."
+
+#: wp-admin/network/site-users.php:237
+msgid "Select a user to change role."
+msgstr "Een gebruiker selecteren om de rol te wijzigen."
+
+#: wp-admin/network/site-users.php:243
+msgid "Select a user to remove."
+msgstr "Een gebruiker selecteren om te verwijderen."
+
+#: wp-admin/network/site-new.php:151 wp-admin/network/site-new.php:161
+msgid "Add New Site"
+msgstr "Nieuwe site toevoegen"
+
+#: wp-admin/network/site-info.php:129 wp-admin/network/site-settings.php:86
+#: wp-admin/network/site-themes.php:142 wp-admin/network/site-users.php:182
+msgid "Edit Site: %s"
+msgstr "Site wijzigen:%s"
+
+#: wp-admin/network/menu.php:40
+msgid "Installed Themes"
+msgstr "Ge&iuml;nstalleerde thema&#39;s"
+
+#: wp-admin/network/site-themes.php:17
+msgid "You do not have sufficient permissions to manage themes for this site."
+msgstr "Je hebt onvoldoende rechten om thema&#39;s voor deze site te beheren."
+
+#: wp-admin/network/menu.php:41 wp-admin/network/themes.php:270
+msgctxt "theme"
+msgid "Add New"
+msgstr "Nieuwe toevoegen"
+
+#: wp-admin/network/themes.php:303
+msgid "You cannot delete a theme while it is active on the main site."
+msgstr "Het is niet mogelijk een thema te verwijderen welke actief is op de hoofdsite."
+
+#: wp-admin/network/user-new.php:52
+msgid "Cannot add user."
+msgstr "Toevoegen gebruiker niet mogelijk."
+
+#: wp-admin/network/sites.php:34
+msgid "An Edit link to a separate Edit Site screen."
+msgstr "Een Link Bewerken naar een apart Site wijzigen scherm."
+
+#: wp-admin/network/settings.php:166
+msgid "Allow site administrators to add new users to their site via the \"Users &rarr; Add New\" page."
+msgstr "Sta sitebeheerders toe om nieuwe gebruikers toe te voegen aan hun site via de \"Gebruikers &rarr; Nieuwe Toevoegen\" pagina."
+
+#: wp-admin/network/site-info.php:27 wp-admin/network/site-settings.php:25
+#: wp-admin/network/site-themes.php:25 wp-admin/network/site-users.php:28
+msgid "<strong>Users</strong> &mdash; This displays the users associated with this site. You can also change their role, reset their password, or remove them from the site. Removing the user from the site does not remove the user from the network."
+msgstr "<strong>Gebruikers</strong> - Dit toont gebruikers verbonden met deze site. Je kunt ook hun rol, hun wachtwoord resetten of ze verwijderen van de site. Het verwijderen van de gebruiker van de site verwijdert deze niet van het netwerk."
+
+#: wp-admin/network/sites.php:31
+msgid "Add New takes you to the Add New Site screen. You can search for a site by Name, ID number, or IP address. Screen Options allows you to choose how many sites to display on one page."
+msgstr "Nieuwe Toevoegen brengt je naar de Nieuwe Site toevoegen scherm. Je kunt zoeken naar een site op naam, ID nummer, of IP-adres. Via Schermopties kun je kiezen hoeveel sites je wilt tonen op een pagina."
+
+#: wp-admin/network/user-new.php:23
+msgid "Add User will set up a new user account on the network and send that person an email with username and password."
+msgstr "Gebruiker toevoegen zal een nieuw gebruikersaccount aan het netwerk toevoegen en deze persoon een e-mail zenden met gebruikersnaam en wachtwoord."
+
+#: wp-admin/network/site-info.php:29 wp-admin/network/site-settings.php:27
+#: wp-admin/network/site-themes.php:27 wp-admin/network/site-users.php:30
+msgid "<strong>Settings</strong> &mdash; This page shows a list of all settings associated with this site. Some are created by WordPress and others are created by plugins you activate. Note that some fields are grayed out and say Serialized Data. You cannot modify these values due to the way the setting is stored in the database."
+msgstr "<strong>Instellingen</strong> - Deze pagina toont een lijst van alle instellingen voor deze site. Sommigen zijn gemaakt door WordPress en anderen zijn gemaakt door plugins die zijn geactiveerd. Merk op dat sommige velden grijs zijn en Geserialiseerde Data melden. Je kunt deze waarden niet wijzigen vanwege de manier waarop deze instellingen worden opgeslagen in de database."
+
+#: wp-admin/network/site-info.php:26 wp-admin/network/site-settings.php:24
+#: wp-admin/network/site-themes.php:24 wp-admin/network/site-users.php:27
+msgid "<strong>Info</strong> &mdash; The site URL is rarely edited as this can cause the site to not work properly. The Registered date and Last Updated date are displayed. Network admins can mark a site as archived, spam, deleted and mature, to remove from public listings or disable."
+msgstr "<strong>Info</strong> - De site URL wordt zelden bewerkt aangezien dit kan resulteren in een site die niet naar behoren werkt. De geregistreerde datum en laatst bijgewerkte datum worden weergegeven. Netwerkbeheerders kunnen een site markeren als gearchiveerd, spam, geschrapt en volwassen, om ze uit de openbare lijst te verwijderen."
+
+#: wp-admin/network.php:29
+msgid "The Network creation panel is not for WordPress MU networks."
+msgstr "Het netwerk aanmaakpaneel is niet voor Wordpress MU netwerken."
+
+#: wp-admin/network.php:55
+msgid "Create a Network of WordPress Sites"
+msgstr "Maak een netwerk met WordPress websites"
+
+#: wp-admin/network.php:59
+msgid "This screen allows you to configure a network as having subdomains (<code>site1.example.com</code>) or subdirectories (<code>example.com/site1</code>). Subdomains require wildcard subdomains to be enabled in Apache and DNS records, if your host allows it."
+msgstr "Dit scherm laat je een netwerk instellen met subdomeinen (<code>site1.example.com</code>) of subdirectories (<code>example.com/site1</code>). Subdomeinen vereisen dat wildcard subdomeinen zijn ingeschakeld in Apache en DNS records, als je host dit toestaat."
+
+#: wp-admin/network.php:60
+msgid "Choose subdomains or subdirectories; this can only be switched afterwards by reconfiguring your install. Fill out the network details, and click install. If this does not work, you may have to add a wildcard DNS record (for subdomains) or change to another setting in Permalinks (for subdirectories)."
+msgstr "Kies subdomeinen of subdirectories; dit kan alleen achteraf gewisseld worden door je installatie te herconfigureren. Vul de netwerk details in, en klik installeren. Als het niet werkt, kun je een wildcard DNS record (voor subdomeinen) toevoegen, of wijzigen met een andere instelling in Permalinks (voor subdirectories)."
+
+#: wp-admin/network.php:61
+msgid "The next screen for Network Setup will give you individually-generated lines of code to add to your wp-config.php and .htaccess files. Make sure the settings of your FTP client make files starting with a dot visible, so that you can find .htaccess; you may have to create this file if it really is not there. Make backup copies of those two files."
+msgstr "Het volgende scherm voor Netwerk Setup geeft je individueel gegenereerde regels code die je moet toe voegen aan je wp-config.php en .htaccess-bestanden. Zorg ervoor dat de instellingen van je FTP-client zo zijn dat bestanden die met een punt beginnen zichtbaar zijn zodat je het .htaccess bestand kunt vinden. Mogelijk moet je dit bestand maken als het er echt niet is. Maak van beide bestanden uiteraard eerst een kopie. "
+
+#: wp-admin/network.php:63
+msgid "Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar."
+msgstr "Als je deze code eenmaal toegevoegd hebt en je browser ververst, zal de multisite ingeschakeld zijn. Dit scherm, nu in het Netwerk navigatiemenu, zal een archief bewaren van de toegevoegde code. Je kunt wisselen tussen Netwerkbeheerder en sitebeheerder door te klikken op het Hallo (gebruikersnaam) dropdownmenu in de rechter bovenkant van het dashboard."
+
+#: wp-admin/network.php:71
+msgid "Network"
+msgstr "Netwerk"
+
+#: wp-admin/network.php:64
+msgid "The choice of subdirectory sites is disabled if this setup is more than a month old because of permalink problems with &#8220;/blog/&#8221; from the main site. This disabling will be addressed in a future version."
+msgstr "De keuze van subdirectorie-sites is uitgeschakeld als deze setup meer dan een maand oud is, vanwege permalink problemen met &#8220;/blog/&#8221; van de hoofdsite. Dit uitschakelen zal in een toekomstige versie aangepast worden."
+
+#: wp-admin/network/site-info.php:18 wp-admin/network/site-settings.php:17
+#: wp-admin/network/site-users.php:17
+msgid "You do not have sufficient permissions to edit this site."
+msgstr "Je hebt onvoldoende rechten om deze site te bewerken."
+
+#: wp-admin/network/users.php:73
+msgid "Warning! User cannot be modified. The user %s is a network administrator."
+msgstr "Let Op! Gebruiker kan niet worden aangepast. De gebruikers %s is een netwerk admin."
+
+#: wp-admin/network/sites.php:33
+msgid "Hovering over each site reveals seven options (three for the primary site):"
+msgstr "Met de muis over je site heen gaan toont zeven opties (drie voor de primaire site):"
+
+#: wp-admin/network/sites.php:36
+msgid "Deactivate, Archive, and Spam which lead to confirmation screens. These actions can be reversed later."
+msgstr "Deactiveren, Archief en Spam welke naar de bevestiging schermen leiden. Deze acties kunnen later ongedaan gemaakt worden."
+
+#: wp-admin/network/sites.php:39
+msgid "The site ID is used internally, and is not shown on the front end of the site or to users/viewers."
+msgstr "Het site ID wordt intern gebruikt en wordt niet getoond aan de voorkant van de site of aan gebruikers/bezoekers."
+
+#: wp-admin/network/site-new.php:27
+msgid "If the admin email for the new site does not exist in the database, a new user will also be created."
+msgstr "Als de admin e-mail voor de nieuwe site niet bestaat in de database zal er een nieuwe gebruiker worden gemaakt. "
+
+#: wp-admin/network/settings.php:32
+msgid "Operational settings has fields for the network&#8217;s name and admin email."
+msgstr "Operationele instellingen bevatten velden voor de netwerk naam en admin email."
+
+#: wp-admin/network/users.php:163
+msgid "You can also go to the user&#8217;s profile page by clicking on the individual username."
+msgstr "Je kunt ook naar de gebruikers profiel pagina door op de individuele gebruikersnaam te klikken."
+
+#: wp-admin/network/users.php:165
+msgid "The bulk action will permanently delete selected users, or mark/unmark those selected as spam. Spam users will have posts removed and will be unable to sign up again with the same email addresses."
+msgstr "De bulk actie zal de geselecteerde gebruikers permanent verwijderen, of de geselecteerde markeren/demarkeren als spam. De berichten van de spam gebruikers zullen verwijderd worden. Spam gebruikers kunnen zich niet opnieuw registreren met hetzelfde email adres."
+
+#: wp-admin/network/settings.php:35
+msgid "Upload settings control the size of the uploaded files and the amount of available upload space for each site. You can change the default value for specific sites when you edit a particular site. Allowed file types are also listed (space separated only)."
+msgstr "Upload instellingen controleert de grootte van de geuploade bestanden en de overgebleven upload ruimte die nog beschikbaar is voor elke site. De standaard ruimte voor specifieke sites kan gewijzigd worden door de Super Admin. De toegestane bestandstypen staan in een overzicht (door spaties gescheiden)."
+
+#: wp-admin/network/sites.php:38
+msgid "Visit to go to the frontend site live."
+msgstr "Ga naar de frontend live site."
+
+#: wp-admin/network/settings.php:31
+msgid "This screen sets and changes options for the network as a whole. The first site is the main site in the network and network options are pulled from that original site&#8217;s options."
+msgstr "Dit scherm is voor de instellingen en wijzigingen voor het netwerk als geheel. De eerste site is de hoofdsite in het netwerk. De netwerk instellingen worden van de originele site instellingen gehaald."
+
+#: wp-admin/network/settings.php:33
+msgid "Registration settings can disable/enable public signups. If you let others sign up for a site, install spam plugins. Spaces, not commas, should separate names banned as sites for this network."
+msgstr "Registratie instellingen kunnen ingeschakeld/uitgeschakeld worden voor publieke registraties. Als je anderen laat registreren voor een site, installeer dan anti spam plugins. Namen en sites die je wilt verbannen op dit netwerk, scheiden met spaties, gebruik GEEN komma&#39;s."
+
+#: wp-admin/network/settings.php:37
+msgid "Menu setting enables/disables the plugin menus from appearing for non super admins, so that only super admins, not site admins, have access to activate plugins."
+msgstr "In- of uitschakelen van de plugin menu&#39;s voor niet super admins, zodat alleen super admins -geen site admins- toegang hebben om plugins te activeren."
+
+#: wp-admin/network/upgrade.php:26
+msgid "If a version update to core has not happened, clicking this button won&#8217;t affect anything."
+msgstr "Als er geen versie update is gedaan, zal klikken op deze knop geen enkele invloed hebben."
+
+#: wp-admin/network/upgrade.php:27
+msgid "If this process fails for any reason, users logging in to their sites will force the same update."
+msgstr "Indien dit proces mislukt om wat voor reden dan ook, zullen gebruikers die op hun site inloggen dezelfde update forceren."
+
+#: wp-admin/network/users.php:164
+msgid "You can sort the table by clicking on any of the bold headings and switch between list and excerpt views by using the icons in the upper right."
+msgstr "Je kunt het overzicht sorteren door te klikken op &#233;&#233;n van de vetgedrukte teksten en wisselen tussen lijst en samenvattingen met gebruik van de icoontjes in de rechter bovenhoek."
+
+#: wp-admin/network/user-new.php:24
+msgid "Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them."
+msgstr "Gebruikers die zijn geregistreerd op het netwerk zonder een eigen site, worden toegevoegd als inschrijvers op de hoofdsite, ze krijgen toegang in het Dashboard op hun eigen profiel pagina om hun account te beheren. Deze gebruikers zullen het Dashboard en Mijn sites alleen kunnen zien in de hoofdnavigatie, tot zijzelf een eigen site zullen bezitten."
+
+#: wp-admin/network/users.php:166
+msgid "You can make an existing user an additional super admin by going to the Edit User profile page and checking the box to grant that privilege."
+msgstr "Je kunt een bestaande gebruiker wijzigen naar Super Admin door naar de Bewerk Gebruiker profiel pagina te gaan en deze keuze toe te wijzen."
+
+#: wp-admin/network/users.php:161
+msgid "This table shows all users across the network and the sites to which they are assigned."
+msgstr "Deze tabel toont alle gebruikers in het netwerk en de sites waar ze bij horen."
+
+#: wp-admin/network/sites.php:32
+msgid "This is the main table of all sites on this network. Switch between list and excerpt views by using the icons above the right side of the table."
+msgstr "Dit is het hoofdoverzicht van alle sites op dit netwerk. Wissel tussen lijst en samenvattingen met gebruik van de icoontjes aan de rechter bovenkant van het overzicht."
+
+#: wp-admin/network/themes.php:244
+msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
+msgstr "Als de Super Admin een thema uitschakelt wat in gebruik is, kan dat thema nog steeds gebruikt worden door de site eigenaars die deze site in gebruik hebben. Kiest een site eigenaar echter een ander thema, dan zal het uitgeschakelde thema niet meer verschijnen in het Weergave -> Thema scherm."
+
+#: wp-admin/network/themes.php:243
+msgid "This screen enables and disables the inclusion of themes available to choose in the Appearance menu for each site. It does not activate or deactivate which theme a site is currently using."
+msgstr "Dit scherm laat je kiezen welke thema's beschikbaar zijn in het Weergave menu voor elke site. Het thema dat momenteel gebruikt wordt door een site, wordt hierdoor niet geactiveerd of gedeactiveerd. "
+
+#: wp-admin/network/settings.php:34
+msgid "New site settings are defaults applied when a new site is created in the network. These include welcome email for when a new site or user account is registered, and what&#8127;s put in the first post, page, comment, comment author, and comment URL."
+msgstr "Nieuwe site instellingen zijn standaard toegepast als een nieuwe site in het netwerk wordt gemaakt. Deze bevatten een welkomst email wanneer een nieuwe gebruiker of gebruikersaccount is geregistreerd. Het bevat ook berichten voor de inhoud van de site voor het eerste bericht, pagina, reactie, reactie auteur en reactie URL (internet adres). Al deze berichten kun je naar eigen inzicht wijzigen."
+
+#: wp-admin/network/site-new.php:52
+msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: <code>%s</code>"
+msgstr "De volgende woorden zijn gereserveerd voor gebruik van de WordPress functies en kunnen niet gebruikt worden als site namen: <code>%s</code>"
+
+#: wp-admin/network/settings.php:199
+msgid "If you want to ban domains from site registrations. One domain per line."
+msgstr "Als je domeinen wilt verbieden van site registraties. Een domein per regel."
+
+#: wp-admin/network/site-new.php:40
+msgid "Can&#8217;t create an empty site."
+msgstr "Aanmaken van een lege website niet mogelijk."
+
+#: wp-admin/network/upgrade.php:100
+msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
+msgstr "Als je browser de volgende pagina niet automatisch start, klik op deze link:"
+
+#: wp-admin/network/settings.php:188
+msgid "If you want to limit site registrations to certain domains. One domain per line."
+msgstr "Als je de site registraties wilt beperken tot bepaalde domeinen. Een domein per regel."
+
+#: wp-admin/network/sites.php:254
+msgid "Site marked as spam."
+msgstr "Website gemarkeerd als spam."
+
+#: wp-admin/network/sites.php:224
+msgid "Sites removed from spam."
+msgstr "Website verwijderd uit spam."
+
+#: wp-admin/network/users.php:195
+msgid "Users removed from spam."
+msgstr "Gebruikers verwijderd uit spam."
+
+#: wp-admin/network/sites.php:251
+msgid "Site removed from spam."
+msgstr "Website verwijderd uit spam."
+
+#: wp-admin/network/sites.php:227
+msgid "Sites marked as spam."
+msgstr "Websites gemarkeerd als spam."
+
+#: wp-admin/network/sites.php:230
+msgid "Sites deleted."
+msgstr "Websites verwijderd."
+
+#: wp-admin/network/sites.php:233
+msgid "Site deleted."
+msgstr "Website verwijderd."
+
+#: wp-admin/network/sites.php:248
+msgid "Site deactivated."
+msgstr "Website gedeactiveerd."
+
+#: wp-admin/network/sites.php:245
+msgid "Site activated."
+msgstr "Website geactiveerd."
+
+#: wp-admin/network/users.php:198
+msgid "Users deleted."
+msgstr "Gebruikers verwijderd."
+
+#: wp-admin/network/sites.php:242
+msgid "Site unarchived."
+msgstr "Website herstellen uit het archief."
+
+#: wp-admin/network/sites.php:239
+msgid "Site archived."
+msgstr "Website gearchiveerd."
+
+#: wp-admin/network/users.php:192
+msgid "Users marked as spam."
+msgstr "Gebruikers gemarkeerd als spam."
+
+#: wp-admin/network/site-new.php:79
+msgid "Invalid email address."
+msgstr "Ongeldig e-mailadres."
+
+#: wp-admin/network/site-new.php:100
+msgid "There was an error creating the user."
+msgstr "Er is een fout opgetreden bij het aanmaken van de gebruiker."
+
+#: wp-admin/network/sites.php:94 wp-admin/network/sites.php:160
+msgid "You are not allowed to change the current site."
+msgstr "Je bent niet geautoriseerd om de huidige site te veranderen."
+
+#: wp-admin/network/settings.php:302
+msgctxt "File size in kilobytes"
+msgid "%s KB"
+msgstr "%s KB"
+
+#: wp-admin/network/settings.php:290
+msgid "Upload file types"
+msgstr "Upload bestandstypen"
+
+#: wp-admin/network/settings.php:282
+msgid "Limit total size of files uploaded to %s MB"
+msgstr "Maximale opslagruimte voor uploads is %s MB"
+
+#: wp-admin/network/settings.php:263
+msgid "The author of the first comment on a new site."
+msgstr "De auteur van de eerste reactie op een nieuwe site."
+
+#: wp-admin/network/settings.php:234
+msgid "The first post on a new site."
+msgstr "Het eerste bericht op een nieuwe site."
+
+#: wp-admin/network/settings.php:254
+msgid "The first comment on a new site."
+msgstr "De eerste reactie op een nieuwe site."
+
+#: wp-admin/network/settings.php:244
+msgid "The first page on a new site."
+msgstr "De eerste pagina op een nieuwe site."
+
+#: wp-admin/network/settings.php:272
+msgid "The URL for the first comment on a new site."
+msgstr "De URL voor de eerste reactie op een nieuwe site."
+
+#: wp-admin/network/upgrade.php:60
+msgid "All done!"
+msgstr "Klaar!"
+
+#: wp-admin/network/settings.php:137
+msgid "Logged in users may register new sites."
+msgstr "Ingelogde gebruikers mogen nieuwe sites registreren."
+
+#: wp-admin/network/settings.php:138
+msgid "Both sites and user accounts can be registered."
+msgstr "Zowel websites als gebruikersaccounts kunnen worden geregistreerd."
+
+#: wp-admin/network/settings.php:136
+msgid "User accounts may be registered."
+msgstr "Gebruikersaccounts kunnen worden geregistreerd."
+
+#: wp-admin/network/settings.php:135
+msgid "Registration is disabled."
+msgstr "Registreren is gedeactiveerd."
+
+#: wp-admin/network/settings.php:205
+msgid "New Site Settings"
+msgstr "Nieuwe website instellingen"
+
+#: wp-admin/network/settings.php:123
+msgid "Registration Settings"
+msgstr "Registratie instellingen"
+
+#: wp-admin/network/settings.php:345
+msgid "Enable administration menus"
+msgstr "Administratiemenu&#39;s activeren"
+
+#: wp-admin/network/settings.php:104
+msgid "Operational Settings"
+msgstr "Operationele instellingen"
+
+#: wp-admin/network/settings.php:277
+msgid "Upload Settings"
+msgstr "Upload instellingen"
+
+#: wp-admin/network/site-new.php:71
+msgid "Missing or invalid site address."
+msgstr "Ontbrekend of ongeldig site adres."
+
+#: wp-admin/network/site-new.php:74
+msgid "Missing email address."
+msgstr "E-mailadres ontbreekt."
+
+#: wp-admin/network/upgrade.php:100
+msgid "Next Sites"
+msgstr "Volgende websites"
+
+#: wp-admin/network/site-new.php:131
+msgid "[%s] New Site Created"
+msgstr "[%s] Nieuwe website aangemaakt"
+
+#: wp-admin/network/settings.php:280
+msgid "Site upload space"
+msgstr "Site uploadruimte"
+
+#: wp-admin/network/settings.php:175
+msgid "Users are not allowed to register these sites. Separate names by spaces."
+msgstr "Gebruikers zijn niet toegestaan deze sites te registeren. Namen scheiden door spaties."
+
+#: wp-admin/network/settings.php:214
+msgid "The welcome email sent to new site owners."
+msgstr "De welkomsbericht is verstuurd naar de nieuwe site eigenaren."
+
+#: wp-admin/network/settings.php:159
+msgid "Send the network admin an email notification every time someone registers a site or user account."
+msgstr "Stuur de netwerk admin een e-mailnotificatie elke keer dat iemand een site of een gebruikersaccount registreert"
+
+#: wp-admin/network/sites.php:110
+msgid "Confirm"
+msgstr "Bevestigen"
+
+#: wp-admin/network/settings.php:268
+msgid "First Comment URL"
+msgstr "Eerste reactie URL"
+
+#: wp-admin/network/user-new.php:40
+msgid "Cannot create an empty user."
+msgstr "Aanmaken van lege gebruikers niet mogelijk."
+
+#: wp-admin/network/site-users.php:252
+msgid "Duplicated username or email address."
+msgstr "De gebruikersnaam of het e-mailadres is al in gebruik."
+
+#: wp-admin/network/settings.php:126
+msgid "Allow new registrations"
+msgstr "Nieuwe registraties toestaan"
+
+#: wp-admin/network/settings.php:153
+msgid "Registration notification"
+msgstr "Registratiemelding"
+
+#: wp-admin/network/settings.php:164
+msgid "Add New Users"
+msgstr "Nieuwe gebruikers toevoegen"
+
+#: wp-admin/network/settings.php:219
+msgid "Welcome User Email"
+msgstr "Welkom gebruiker e-mail"
+
+#: wp-admin/network/settings.php:224
+msgid "The welcome email sent to new users."
+msgstr "Het welkomsbericht is verstuurd naar de nieuwe gebruikers."
+
+#: wp-admin/network/settings.php:239
+msgid "First Page"
+msgstr "Eerste pagina"
+
+#: wp-admin/network/settings.php:249
+msgid "First Comment"
+msgstr "Eerste reactie"
+
+#: wp-admin/network/settings.php:259
+msgid "First Comment Author"
+msgstr "Eerste reactie van de auteur"
+
+#: wp-admin/network/site-new.php:171
+msgid "Site Address"
+msgstr "Websiteadres"
+
+#: wp-admin/network/settings.php:318
+msgid "Default Language"
+msgstr "Standaard taalinstellingen"
+
+#: wp-admin/network/site-new.php:223
+msgid "Add Site"
+msgstr "Website toevoegen"
+
+#: wp-admin/network/site-new.php:216
+msgid "Admin Email"
+msgstr "Beheerder e-mailadres"
+
+#: wp-admin/network/site-new.php:220
+msgid "A new user will be created if the above email address is not in the database."
+msgstr "Een nieuwe gebruiker wordt aangemaakt als bovenstaande e-mailadres niet voorkomt in de database."
+
+#: wp-admin/network/site-new.php:220
+msgid "The username and password will be mailed to this email address."
+msgstr "De gebruikersnaam en wachtwoord worden per e-mail verstuurd naar het e-mailadres."
+
+#: wp-admin/network/index.php:20 wp-admin/network/settings.php:20
+#: wp-admin/network/site-info.php:50 wp-admin/network/site-settings.php:47
+#: wp-admin/network/site-themes.php:70 wp-admin/network/site-users.php:63
+#: wp-admin/network/sites.php:17 wp-admin/network/sites.php:129
+#: wp-admin/network/upgrade.php:39 wp-admin/network/user-new.php:37
+#: wp-admin/network/users.php:17 wp-admin/network/users.php:26
+#: wp-admin/network/users.php:47 wp-admin/network/users.php:60
+#: wp-admin/network/users.php:109
+msgid "You do not have permission to access this page."
+msgstr "Je hebt onvoldoende rechten om deze pagina op te vragen."
+
+#: wp-admin/network/settings.php:171
+msgid "Banned Names"
+msgstr "Verboden namen"
+
+#: wp-admin/network/settings.php:181
+msgid "Limited Email Registrations"
+msgstr "E-mailregistraties beperkt"
+
+#: wp-admin/network/settings.php:194
+msgid "Banned Email Domains"
+msgstr "Verboden e-maildomeinnamen"
+
+#: wp-admin/network/settings.php:300
+msgid "Max upload file size"
+msgstr "Maximale upload bestandsgrootte"
+
+#: wp-admin/network/settings.php:209
+msgid "Welcome Email"
+msgstr "Welkomstbericht"

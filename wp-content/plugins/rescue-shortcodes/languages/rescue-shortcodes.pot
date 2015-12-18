@@ -1,0 +1,241 @@
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Rescue Shortcodes Plugin v2.0\n"
+"POT-Creation-Date: 2015-07-23 10:08-0500\n"
+"PO-Revision-Date: 2015-07-23 10:07-0500\n"
+"Last-Translator: \n"
+"Language-Team: Rescue Themes <hello@rescuethemes.com>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.8.3\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: rescue-shortcodes.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/shortcodes-button.php:8
+msgid "Shortcodes"
+msgstr ""
+
+#: includes/shortcodes-button.php:40
+msgid "Example Text"
+msgstr ""
+
+#: includes/shortcodes-button.php:48
+#, php-format
+msgid ""
+"See examples on the <a target=\"_blank\" href=\"%s\">Rescue Themes</a> site."
+msgstr ""
+
+#: includes/shortcodes-button.php:76
+msgid "Columns"
+msgstr ""
+
+#: includes/shortcodes-button.php:80
+msgid "One Half"
+msgstr ""
+
+#: includes/shortcodes-button.php:81
+msgid "One Third"
+msgstr ""
+
+#: includes/shortcodes-button.php:82
+msgid "One Fourth"
+msgstr ""
+
+#: includes/shortcodes-button.php:83
+msgid "One Fifth"
+msgstr ""
+
+#: includes/shortcodes-button.php:84
+msgid "One Sixth"
+msgstr ""
+
+#: includes/shortcodes-button.php:85
+msgid "One Seventh"
+msgstr ""
+
+#: includes/shortcodes-button.php:86
+msgid "Three Fourth"
+msgstr ""
+
+#: includes/shortcodes-button.php:87
+msgid "Two Fifth"
+msgstr ""
+
+#: includes/shortcodes-button.php:88
+msgid "Three Fifth"
+msgstr ""
+
+#: includes/shortcodes-button.php:94
+msgid "Elements"
+msgstr ""
+
+#: includes/shortcodes-button.php:97
+msgid "Button"
+msgstr ""
+
+#: includes/shortcodes-button.php:98
+msgid "Icon"
+msgstr ""
+
+#: includes/shortcodes-button.php:99
+msgid "Google Map"
+msgstr ""
+
+#: includes/shortcodes-button.php:100
+msgid "Tabbed Content"
+msgstr ""
+
+#: includes/shortcodes-button.php:101
+msgid "Toggle"
+msgstr ""
+
+#: includes/shortcodes-button.php:102
+msgid "Progress Bar"
+msgstr ""
+
+#: includes/shortcodes-button.php:103
+msgid "Spacing"
+msgstr ""
+
+#: includes/shortcodes-button.php:104
+msgid "Clear Floats"
+msgstr ""
+
+#: includes/shortcodes-button.php:108
+#, php-format
+msgid ""
+"Complete list of icon names are available on the <a target=\"_blank\" href="
+"\"%s\">Font Awesome</a> site."
+msgstr ""
+
+#: includes/shortcodes-button.php:124
+msgid "Boxes"
+msgstr ""
+
+#: includes/shortcodes-button.php:128
+msgid "Blue Box"
+msgstr ""
+
+#: includes/shortcodes-button.php:129
+msgid "Gray Box"
+msgstr ""
+
+#: includes/shortcodes-button.php:130
+msgid "Green Box"
+msgstr ""
+
+#: includes/shortcodes-button.php:131
+msgid "Red Box"
+msgstr ""
+
+#: includes/shortcodes-button.php:132
+msgid "Yellow Box"
+msgstr ""
+
+#: includes/shortcodes-button.php:138
+msgid "Highlights"
+msgstr ""
+
+#: includes/shortcodes-button.php:142
+msgid "Blue Highlight"
+msgstr ""
+
+#: includes/shortcodes-button.php:143
+msgid "Gray Highlight"
+msgstr ""
+
+#: includes/shortcodes-button.php:144
+msgid "Green Highlight"
+msgstr ""
+
+#: includes/shortcodes-button.php:145
+msgid "Red Highlight"
+msgstr ""
+
+#: includes/shortcodes-button.php:146
+msgid "Yellow Highlight"
+msgstr ""
+
+#: includes/shortcodes-button.php:152
+msgid "Animations"
+msgstr ""
+
+#: includes/shortcodes-button.php:155
+msgid "SlideInDown"
+msgstr ""
+
+#: includes/shortcodes-button.php:156
+msgid "slideInLeft"
+msgstr ""
+
+#: includes/shortcodes-button.php:157
+msgid "slideInRight"
+msgstr ""
+
+#: includes/shortcodes-button.php:158
+msgid "fadeIn"
+msgstr ""
+
+#: includes/shortcodes-button.php:159
+msgid "fadeInLeft"
+msgstr ""
+
+#: includes/shortcodes-button.php:160
+msgid "fadeInRight"
+msgstr ""
+
+#: includes/shortcodes-button.php:161
+msgid "fadeInUp"
+msgstr ""
+
+#: includes/shortcodes-button.php:162
+msgid "fadeInDown"
+msgstr ""
+
+#: includes/shortcodes-button.php:163
+msgid "bounceIn"
+msgstr ""
+
+#: includes/shortcodes-button.php:164
+msgid "bounceInLeft"
+msgstr ""
+
+#: includes/shortcodes-button.php:165
+msgid "bounceInRight"
+msgstr ""
+
+#: includes/shortcodes-button.php:166
+msgid "bounceInUp"
+msgstr ""
+
+#: includes/shortcodes-button.php:167
+msgid "bounceInDown"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Rescue Shortcodes"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://rescuethemes.com/plugins/rescue-shortcodes-plugin/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid "A lightweight shortcodes plugin."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "Rescue Themes"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "https://rescuethemes.com"
+msgstr ""

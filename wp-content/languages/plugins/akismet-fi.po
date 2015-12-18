@@ -1,0 +1,708 @@
+# Translation of Stable (latest release) in Finnish
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-12-08 13:16:17+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: views/notice.php:106
+msgid "Your Pro subscription allows the use of Akismet on only one site. Please <a href=\"%s\" target=\"_blank\">purchase additional Pro subscriptions</a> or upgrade to an Enterprise subscription that allows the use of Akismet on unlimited sites."
+msgstr "Pro-tason tilauksesi sallii käyttää Akismetia vain yhdellä sivustolla. <a href=\"%s\" target=\"_blank\">Tee lisää Pro-tilauksia</a> tai päivitä Enterprise-tilaukseen joka sallii Akismetin käyttämisen rajoittamattomalla määrällä sivustoja."
+
+#: views/notice.php:113
+msgid "To continue your service, <a href=\"%s\" target=\"_blank\">upgrade to an Enterprise subscription</a>, which covers an unlimited number of sites."
+msgstr "Jatkaaksesi palvelun käyttöä <a href=\"%s\" target=\"_blank\">päivitä Enterprise-tilaukseen</a>, joka kattaa rajoittamattoman määrän sivustoja."
+
+#: views/notice.php:99
+msgid "The connection to akismet.com cannot be established. Please refer to <a href=\"%s\" target=\"_blank\">our guide about firewalls</a> and check your server configuration."
+msgstr "Yhteyttä akismet.com:iin ei voitu muodostaa. Katso <a href=\"%s\" target=\"_blank\">oppaamme palomuureista</a> sekä tarkista palvelimesi asetukset."
+
+#: views/notice.php:98
+msgid "The key you entered could not be verified."
+msgstr "Antamaasi avainta ei voitu varmistaa."
+
+#: views/notice.php:79
+msgid "Since 2012, Akismet began using subscriptions for all accounts (even free ones). It looks like a subscription has not been assigned to your account, and we’d appreciate it if you’d <a href=\"%s\" target=\"_blank\">sign into your account</a> and choose one."
+msgstr "Vuodesta 2012 Akismet on edellyttänyt jäsnyyttä myös ilmaisille tileille. Vaikuttaa siltä, että et ole valinnut jäsenyystasoa ja arvostaisimme sitä että <a href=\"%s\" target=\"_blank\">kirjautuisit Akismet-tilillesi</a> ja valitsisit sen."
+
+#: views/notice.php:81 views/notice.php:108 views/notice.php:115
+msgid "Please <a href=\"%s\" target=\"_blank\">contact our support team</a> with any questions."
+msgstr "<a href=\"%s\" target=\"_blank\">Ota yhteyttä tukitiimiin</a>, jos sinulla on kysyttävää."
+
+#: views/notice.php:94
+msgid "Your API key is no longer valid. Please enter a new key or contact support@akismet.com."
+msgstr "API-avaimesi ei ole enää validi. Anna uusi avain tai ota yhteyttä tukeen osoitteessa support@akismet.com."
+
+#: views/config.php:95
+msgid "Enabled."
+msgstr "Käytössä."
+
+#: views/config.php:95
+msgid "All systems functional."
+msgstr "Kaikki järjestelmät toiminnassa."
+
+#: views/config.php:86
+msgid "Your Web server cannot make SSL requests; contact your Web host and ask them to add support for SSL requests."
+msgstr "WWW-palvelimesi ei voi tehdä SSL-pyyntöjä; ota yhteyttä palveluntarjoajaasi ja pyydä heitä lisäämään tuki SSL-pyynnöille."
+
+#: views/config.php:92
+msgid "Akismet encountered a problem with a previous SSL request and disabled it temporarily. It will begin using SSL for requests again shortly."
+msgstr "Akismet törmäsi ongelmaan aikaisemman SSL-pyynnön kanssa, ja on ottanut sen väliaikaisesti pois käytöstä. Akismet yrittää käyttää SSL:ää hetken kuluttua uudestaan."
+
+#: views/config.php:92
+msgid "Temporarily disabled."
+msgstr "Väliaikaisesti poissa käytöstä."
+
+#: views/config.php:83 views/config.php:86
+msgid "Disabled."
+msgstr "Poissa käytöstä."
+
+#: views/config.php:76
+msgid "SSL Status"
+msgstr "SSL Tila"
+
+#: class.akismet-admin.php:539
+msgid "This comment was reported as not spam."
+msgstr "Tämä kommentti raportoitiin olevan ei roskaviesti."
+
+#: class.akismet-admin.php:531
+msgid "This comment was reported as spam."
+msgstr "Tämä kommentti raportoitiin roskaviestiksi."
+
+#: class.akismet-admin.php:880
+msgid "Cleaning up spam takes time."
+msgstr "Roskaviestien puhdistaminen vie aikansa."
+
+#: views/config.php:127
+msgid "Spam in the <a href=\"%1$s\">spam folder</a> older than 1 day is deleted automatically."
+msgid_plural "Spam in the <a href=\"%1$s\">spam folder</a> older than %2$d days is deleted automatically."
+msgstr[0] "Yli päivän vanhat viestit <a href=\"%1$s\">Roskaviestit-kansiossa</a> poistetaan automaattisesti."
+msgstr[1] "Yli %2$d päivää vanhat viestit <a href=\"%1$s\">Roskaviestit-kansiossa</a> poistetaan automaattisesti."
+
+#. Description of the plugin/theme
+msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from comment and trackback spam</strong>. It keeps your site protected from spam even while you sleep. To get started: 1) Click the \"Activate\" link to the left of this description, 2) <a href=\"http://akismet.com/get/\">Sign up for an Akismet API key</a>, and 3) Go to your Akismet configuration page, and save your API key."
+msgstr "Miljoonien käyttämänä, Akismet on melko varmasti paras tapa maailmassa <strong>suojata blogisi haitallisilta roskaviesteiltä sekä paluuviitteiltä</strong>. Akismet pitää sivustosi suojattuna roskaviesteiltä jopa nukkuessasi. Aloittaaksesi: 1) Paina \"Ota käyttöön\" linkkiä tämän kuvauksen vasemmalla puolella, 2) <a href=\"http://akismet.com/get/\">Rekisteröidy Akismet API-avainta varten</a>, ja 3) Mene Akismetin asetuksiin, ja tallenna API-avaimesi."
+
+#. Plugin URI of the plugin/theme
+msgid "http://akismet.com/"
+msgstr "http://akismet.com/"
+
+#: class.akismet-admin.php:785
+msgid "Please check your <a href=\"%s\">Akismet configuration</a> and contact your web host if problems persist."
+msgstr "Ole hyvä ja tarkista <a href=\"%s\">Akismet-asetuksesi</a> ja ota yhteyttä palveluntarjoajaasi jos ongelma toistuu."
+
+#: views/notice.php:21
+msgid "Some comments have not yet been checked for spam by Akismet. They have been temporarily held for moderation and will automatically be rechecked later."
+msgstr "Akismet ei ole vielä tarkastanut kaikkia kommentteja roskaviestien varalta. Nämä viestit on väliaikaisesti laitettu Vireillä-tilaan, ja ne tarkastetaan automaattisesti uudelleen myöhemmin."
+
+#: views/notice.php:43
+msgid "Your web host or server administrator has disabled PHP&#8217;s <code>gethostbynamel</code> functions.  <strong>Akismet cannot work correctly until this is fixed.</strong>  Please contact your web host or firewall administrator and give them <a href=\"%s\" target=\"_blank\">this information about Akismet&#8217;s system requirements</a>."
+msgstr "Palveluntarjoajasi tai palvelimen ylläpitäjäsi on poistanut käytöstä PHP:n <code>gethostbynamel</code> -funktiot. <strong>Akismet ei toimi kunnolla ennen kuin tämä on korjattu.</strong> Ole hyvä ja ota yhteyttä palveluntarjoajaasi tai palvelimen ylläpitäjääsi, ja anna heille <a href=\"%s\" target=\"_blank\">tämä tieto Akismetin järjestelmänvaatimuksista</a>."
+
+#: views/start.php:77
+msgid "Activate Akismet"
+msgstr "Aktivoi Akismet"
+
+#: views/start.php:64 views/start.php:85
+msgid "If you already know your API key."
+msgstr "Jos tiedät jo API-avaimesi."
+
+#: views/start.php:78
+msgid "Log in or create an account to get your API key."
+msgstr "Kirjaudu sisään tai luo tunnus saadaksesi API-avaimesi."
+
+#: views/start.php:80
+msgid "Get your API key"
+msgstr "Hae API-avain"
+
+#: views/start.php:28
+msgid "Reactivate Akismet"
+msgstr "Aktivoi Akismet uudelleen"
+
+#: views/start.php:22
+msgid "Your subscription for %s is cancelled"
+msgstr "Tilauksesi osoitteelle %s on peruutettu"
+
+#: views/config.php:182
+msgid "Cancelled"
+msgstr "Peruutettu"
+
+#: views/config.php:186
+msgid "Missing"
+msgstr "Puuttuu"
+
+#: views/config.php:188
+msgid "No Subscription Found"
+msgstr "Tilausta ei löytynyt"
+
+#: views/config.php:190
+msgid "Active"
+msgstr "Toiminnassa"
+
+#: views/notice.php:72
+msgid "There is a problem with your key."
+msgstr "Avaimessasi on havaittu ongelma."
+
+#: views/config.php:184
+msgid "Suspended"
+msgstr "Jäädytetty"
+
+#: class.akismet-admin.php:196 views/config.php:114
+msgid "Strictness"
+msgstr "Tehokkuus"
+
+#: class.akismet-admin.php:196
+msgid "Choose to either discard the worst spam automatically or to always put all spam in spam folder."
+msgstr "Valitse joko hylätäksesi pahimmat roskaviestit automaattisesti tai siirtääksesi kaikki roskaviestit aina Roskaviestit-kansioon."
+
+#: views/config.php:118
+msgid "Silently discard the worst and most pervasive spam so I never see it."
+msgstr "Hylkää pahimmat roskaviestit automaattisesti, jotta en näe niitä."
+
+#: views/config.php:119
+msgid "Always put spam in the Spam folder for review."
+msgstr "Laita roskaviestit aina Roskaviestit-kansioon arviointia varten."
+
+#: class.akismet-admin.php:195 views/config.php:105
+msgid "Comments"
+msgstr "Kommentit"
+
+#: views/notice.php:77
+msgid "Your subscription is missing."
+msgstr "Tilauksesi puuttuu."
+
+#: views/notice.php:86
+msgid "Your Akismet account has been successfully set up and activated. Happy blogging!"
+msgstr "Akismet-tilisi on otettu onnistuneesti käyttöön."
+
+#: views/notice.php:90
+msgid "The key you entered is invalid. Please double-check it."
+msgstr "Antamasi avain ei kelpaa. Ole hyvä ja tarkista se."
+
+#: views/notice.php:42
+msgid "Network functions are disabled."
+msgstr "Verkko-ominaisuudet ovat poissa käytöstä."
+
+#: views/notice.php:20
+msgid "Akismet has detected a problem."
+msgstr "Akismet on havainnut ongelman."
+
+#. Author of the plugin/theme
+msgid "Automattic"
+msgstr "Automattic"
+
+#. Author URI of the plugin/theme
+msgid "http://automattic.com/wordpress-plugins/"
+msgstr "http://automattic.com/wordpress-plugins/"
+
+#: views/notice.php:30
+msgid "Akismet Error Code: %s"
+msgstr "Akismet virhekoodi: %s"
+
+#. translators: the placeholder is a clickable URL that leads to more
+#. information regarding an error code.
+#: views/notice.php:35
+msgid "For more information: %s"
+msgstr "Lisää tietoa osoitteesta: %s"
+
+#: views/notice.php:47
+msgid "We can&#8217;t connect to your site."
+msgstr "Emme pysty yhdistämään sivustollesi."
+
+#: views/notice.php:48
+msgid "Your firewall may be blocking us. Please contact your host and refer to <a href=\"%s\" target=\"_blank\">our guide about firewalls</a>."
+msgstr "Palomuurisi saattaa estää meidät. Ota yhteyttä palveluntarjoajaasi ja ohjaa heidät <a href=\"%s\" target=\"_blank\">oppaaseemme palomuureja varten</a>."
+
+#: views/notice.php:52
+msgid "Please update your payment details."
+msgstr "Ole hyvä ja päivitä maksutietosi."
+
+#: views/notice.php:53
+msgid "We cannot process your transaction. Please contact your bank for assistance, and <a href=\"%s\" target=\"_blank\">update your payment details</a>."
+msgstr "Emme pysty käsittelemään maksutapahtumaa. Ole hyvä ja ota yhteyttä pankkiisi ongelman selvittämiseksi ja <a href=\"%s\" target=\"_blank\">päivitä maksutietosi</a>."
+
+#: views/notice.php:57
+msgid "Your subscription is cancelled."
+msgstr "Tilauksesi on peruutettu."
+
+#: views/notice.php:58
+msgid "Please visit the <a href=\"%s\" target=\"_blank\">Akismet account page</a> to reactivate your subscription."
+msgstr "Ole hyvä ja vieraile <a href=\"%s\" target=\"_blank\">Akismetin tunnus-sivulla</a> aktivoidaksesi tilauksesi uudelleen."
+
+#: views/notice.php:63 views/notice.php:73
+msgid "Please contact <a href=\"%s\" target=\"_blank\">Akismet support</a> for assistance."
+msgstr "Ole hyvä ja ota yhteyttä <a href=\"%s\" target=\"_blank\">Akismetin tukeen</a> apua varten."
+
+#: views/notice.php:62
+msgid "Your subscription is suspended."
+msgstr "Tilauksesi on jäädytetty."
+
+#: views/notice.php:68
+msgid "You can help us fight spam and upgrade your account by <a href=\"%s\" target=\"_blank\">contributing a token amount</a>."
+msgstr "Voit auttaa meitä taistelemaan roskaviestejä vastaan sekä päivittää tunnuksesi <a href=\"%s\" target=\"_blank\">osallistumalla nimellisellä korvauksella</a>."
+
+#: views/start.php:40 views/start.php:74
+msgid "Akismet eliminates the comment and trackback spam you get on your site. To setup Akismet, select one of the options below."
+msgstr "Akismet karsii sivustollesi tulevat roskaviestit (kommentit sekä paluuviitteet) automaattisesti. Ottaaksesi Akismetin käyttöön, valitse jokin alla olevista vaihtoehdoista."
+
+#: views/start.php:7 views/start.php:21 views/start.php:34 views/start.php:43
+msgid "Connected via Jetpack"
+msgstr "Yhdistä Jetpackin kautta."
+
+#: views/start.php:50
+msgid "Use this Akismet account"
+msgstr "Käytä tätä Akismet-tunnusta"
+
+#: views/start.php:56
+msgid "Create a new API key with a different email address"
+msgstr "Luo uusi API-avain eri sähköpostiosoitteella"
+
+#: views/start.php:57
+msgid "Use this option if you want to setup a new Akismet account."
+msgstr "Käytä tätä valintaa, jos haluat luoda uuden Akismet-tunnuksen."
+
+#: views/start.php:59
+msgid "Register a different email address"
+msgstr "Rekisteröi eri sähköpostiosoite"
+
+#: views/start.php:63 views/start.php:84
+msgid "Manually enter an API key"
+msgstr "Lisää API-avain käsin"
+
+#: views/start.php:70 views/start.php:91
+msgid "Use this key"
+msgstr "Käytä tätä avainta"
+
+#: views/start.php:4
+msgid "Akismet eliminates the comment and trackback spam you get on your site. Register your email address below to get started."
+msgstr "Akismet karsii sivustollesi tulevat roskaviestit (kommentit sekä paluuviitteet) automaattisesti. Rekisteröi sähköpostiosoitteesi alempana aloittaaksesi."
+
+#: views/start.php:14
+msgid "Register Akismet"
+msgstr "Rekisteröi Akismet"
+
+#: views/start.php:18 views/start.php:32
+msgid "Akismet eliminates the comment and trackback spam you get on your site."
+msgstr "Akismet karsii sivustollesi tulevat roskaviestit (kommentit sekä paluuviitteet) automaattisesti."
+
+#: views/start.php:35
+msgid "Your subscription for %s is suspended"
+msgstr "TIlauksesi osoitteelle %s on jäädytetty"
+
+#: views/start.php:36
+msgid "No worries! Get in touch and we&#8217;ll help sort this out."
+msgstr "Ei hätää! Ota yhteyttä meihin niin selvitämme tämän!"
+
+#: views/start.php:37
+msgid "Contact Akismet support"
+msgstr "Ota yhteyttä Akismetin tukeen"
+
+#: views/config.php:117 views/strict.php:2 views/strict.php:3
+msgid "Akismet anti-spam strictness"
+msgstr "Akismetin roskaviestien eston tehokkuus"
+
+#: views/strict.php:4
+msgid "Strict: silently discard the worst and most pervasive spam."
+msgstr "Tehokas: hylkää pahimmat roskaviestit automaattisesti."
+
+#: views/strict.php:5
+msgid "Safe: always put spam in the Spam folder for review."
+msgstr "Turvallinen: laita roskaviestit aina Roskaviestit-kansioon arviointia varten."
+
+#: views/notice.php:27
+msgid "Akismet %s requires WordPress 3.0 or higher."
+msgstr "Akismet %s vaatii WordPress 3.0:n tai uudemman."
+
+#: views/config.php:109
+msgid "Show approved comments"
+msgstr "Näytä hyväksytyt kommentit"
+
+#: views/config.php:152
+msgid "Save Changes"
+msgstr "Tallenna muutokset"
+
+#: class.akismet-admin.php:443
+msgid "Awaiting spam check"
+msgstr "Odottaa tarkistusta"
+
+#: class.akismet-widget.php:12
+msgid "Akismet Widget"
+msgstr "Akismet-vimpain"
+
+#: class.akismet-widget.php:13
+msgid "Display the number of spam comments Akismet has caught"
+msgstr "Näytä Akismetin kiinni saamien roskaviestien määrä."
+
+#: class.akismet-widget.php:98
+msgid "<strong class=\"count\">%1$s spam</strong> blocked by <strong>Akismet</strong>"
+msgid_plural "<strong class=\"count\">%1$s spam</strong> blocked by <strong>Akismet</strong>"
+msgstr[0] "<strong>Akismetin</strong> haaviin jäi <strong class=\"count\">%1$s roskaviesti</strong>"
+msgstr[1] "<strong>Akismetin</strong> haaviin jäi <strong class=\"count\">%1$s roskaviestiä</strong>"
+
+#: class.akismet-admin.php:69 class.akismet-admin.php:191
+#: class.akismet-admin.php:589 views/config.php:60 views/stats.php:2
+msgid "Settings"
+msgstr "Asetukset"
+
+#: class.akismet-admin.php:223
+msgid "Cheatin&#8217; uh?"
+msgstr "Yritätkö huijata?"
+
+#: class.akismet-admin.php:294
+msgid "<a href=\"%1$s\">Akismet</a> has protected your site from %2$s spam comment already. "
+msgid_plural "<a href=\"%1$s\">Akismet</a> has protected your site from %2$s spam comments already. "
+msgstr[0] "<a href=\"%1$s\">Akismet</a> on suojannut sivustoasi jo %2$s roskapostikommentilta. "
+msgstr[1] "<a href=\"%1$s\">Akismet</a> on suojannut sivustoasi jo %2$s roskapostikommentilta."
+
+#: class.akismet-admin.php:447
+msgid "Flagged as spam by Akismet"
+msgstr "Merkitty roskaviestiksi Akismetilla"
+
+#: class.akismet-admin.php:467
+msgid "History"
+msgstr "Historia"
+
+#: class.akismet-admin.php:563
+msgid "Comment status was changed to %s"
+msgstr "Kommentin tila vaihdettiin tilaksi %s"
+
+#. #-#-#-#-#  tmp-akismet.pot (Akismet 3.1.3)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: class.akismet-admin.php:76 class.akismet-admin.php:78
+#: class.akismet-admin.php:842 views/config.php:3
+msgid "Akismet"
+msgstr "Akismet"
+
+#: class.akismet-widget.php:69
+msgid "Spam Blocked"
+msgstr "Roskaviesti estetty"
+
+#: class.akismet-widget.php:74
+msgid "Title:"
+msgstr "Otsikko:"
+
+#: class.akismet-admin.php:182 class.akismet-admin.php:193
+#: class.akismet-admin.php:205
+msgid "Akismet Configuration"
+msgstr "Akismet-asetukset"
+
+#: class.akismet-admin.php:169 views/stats.php:2
+msgid "Akismet Stats"
+msgstr "Akismet-tilastot"
+
+#: class.akismet-admin.php:577
+msgid "%s ago"
+msgstr "%s sitten"
+
+#: class.akismet-admin.php:467 class.akismet-admin.php:475
+msgid "View comment history"
+msgstr "Näytä kommenttihistoria"
+
+#: class.akismet-admin.php:282
+msgctxt "comments"
+msgid "Spam"
+msgstr "Roskaviesti"
+
+#: class.akismet-admin.php:104
+msgid "Remove this URL"
+msgstr "Poista tämä osoite"
+
+#: class.akismet-admin.php:105
+msgid "Removing..."
+msgstr "Poistaa..."
+
+#: class.akismet-admin.php:106
+msgid "URL removed"
+msgstr "Osoite poistettu"
+
+#: class.akismet-admin.php:107
+msgid "(undo)"
+msgstr "(peruuta)"
+
+#: class.akismet-admin.php:108
+msgid "Re-adding..."
+msgstr "Lisätään uudelleen..."
+
+#: class.akismet-admin.php:129 class.akismet-admin.php:167
+#: class.akismet-admin.php:180
+msgid "Overview"
+msgstr "Yleiskatsaus"
+
+#: class.akismet-admin.php:131 class.akismet-admin.php:142
+#: class.akismet-admin.php:153
+msgid "Akismet Setup"
+msgstr "Akismetin käyttöönotto"
+
+#: class.akismet-admin.php:132 class.akismet-admin.php:170
+#: class.akismet-admin.php:183
+msgid "Akismet filters out your comment and trackback spam for you, so you can focus on more important things."
+msgstr "Akismet karsii sivustollesi tulevat roskaviestit (kommentit sekä paluuviitteet) automaattisesti, jotta voit keskittyä olennaiseen."
+
+#: class.akismet-admin.php:133
+msgid "On this page, you are able to setup the Akismet plugin."
+msgstr "Tällä sivulla voit ottaa Akismetin käyttöön."
+
+#: class.akismet-admin.php:140
+msgid "New to Akismet"
+msgstr "Ensimmäinen kerta Akismetin parissa"
+
+#: class.akismet-admin.php:143
+msgid "You need to enter an API key to activate the Akismet service on your site."
+msgstr "Sinun täytyy syöttää API-avain aktivoidaksesti Akismetin sivustollesi."
+
+#: class.akismet-admin.php:144
+msgid "Signup for an account on %s to get an API Key."
+msgstr "Rekisteröidy osoitteessa %s saadaksesi API-avaimen."
+
+#: class.akismet-admin.php:151
+msgid "Enter an API Key"
+msgstr "Syötä API-avain"
+
+#: class.akismet-admin.php:154
+msgid "If you already have an API key"
+msgstr "Jos sinulla on jo API-avain"
+
+#: class.akismet-admin.php:156
+msgid "Copy and paste the API key into the text field."
+msgstr "Kopioi ja liitä API-avain tekstikenttään."
+
+#: class.akismet-admin.php:157
+msgid "Click the Use this Key button."
+msgstr "Klikkaa \"Käytä tätä avainta\"-painiketta."
+
+#: class.akismet-admin.php:171
+msgid "On this page, you are able to view stats on spam filtered on your site."
+msgstr "Tällä sivulla voit seurata tilastoja roskaviestien suodatuksesta sivustollasi."
+
+#: class.akismet-admin.php:184
+msgid "On this page, you are able to enter/remove an API key, view account information and view spam stats."
+msgstr "Tällä sivulla voit lisätä tai poistaa API-avaimen sekä tarkastella tunnuksesi tietoja ja roskaviestien tilastoja."
+
+#: class.akismet-admin.php:194 views/config.php:67
+msgid "API Key"
+msgstr "API-avain"
+
+#: class.akismet-admin.php:194
+msgid "Enter/remove an API key."
+msgstr "Lisää tai poista API-avain."
+
+#: views/config.php:109
+msgid "Show the number of approved comments beside each comment author"
+msgstr "Näytä hyväksyttyjen kommenttien määrä jokaisen kommentoijan kohdalla."
+
+#: class.akismet-admin.php:195
+msgid "Show the number of approved comments beside each comment author in the comments list page."
+msgstr "Näytä hyväksyttyjen kommenttien määrä jokaisen kommentoijan kohdalla Kommentit-sivulla."
+
+#: class.akismet-admin.php:203 views/config.php:165
+msgid "Account"
+msgstr "Tunnus"
+
+#: class.akismet-admin.php:206 views/config.php:170
+msgid "Subscription Type"
+msgstr "Tilauksen tyyppi"
+
+#: class.akismet-admin.php:206
+msgid "The Akismet subscription plan"
+msgstr "Akismet-tilaus"
+
+#: class.akismet-admin.php:207 views/config.php:177
+msgid "Status"
+msgstr "Tila"
+
+#: class.akismet-admin.php:207
+msgid "The subscription status - active, cancelled or suspended"
+msgstr "Tilauksen tila - aktiivinen, peruutettu tai jäädytetty"
+
+#: class.akismet-admin.php:215
+msgid "For more information:"
+msgstr "Lisää tietoa:"
+
+#: class.akismet-admin.php:217
+msgid "Akismet Support"
+msgstr "Akismetin tuki"
+
+#: class.akismet-admin.php:216
+msgid "Akismet FAQ"
+msgstr "Akismetin UKK"
+
+#: class.akismet-admin.php:284
+msgid "<a href=\"%1$s\">Akismet</a> has protected your site from <a href=\"%2$s\">%3$s spam comment</a>."
+msgid_plural "<a href=\"%1$s\">Akismet</a> has protected your site from <a href=\"%2$s\">%3$s spam comments</a>."
+msgstr[0] "<a href=\"%1$s\">Akismet</a> on suojannut sivustoasi <a href=\"%2$s\">%3$s roskaviestiltä</a>."
+msgstr[1] "<a href=\"%1$s\">Akismet</a> on suojannut sivustoasi <a href=\"%2$s\">%3$s roskaviestiltä</a>."
+
+#: class.akismet-admin.php:300
+msgid "<a href=\"%s\">Akismet</a> blocks spam from getting to your blog. "
+msgstr "<a href=\"%s\">Akismet</a> estää roskaviestejä pääsemästä blogiisi."
+
+#: class.akismet-admin.php:306
+msgid "There&#8217;s <a href=\"%2$s\">%1$s comment</a> in your spam queue right now."
+msgid_plural "There are <a href=\"%2$s\">%1$s comments</a> in your spam queue right now."
+msgstr[0] "Tällä hetkellä Roskaviestit-kansiossa on <a href=\"%2$s\">%1$s kommentti</a> jonossa."
+msgstr[1] "Tällä hetkellä Roskaviestit-kansiossa on <a href=\"%2$s\">%1$s kommenttia</a> jonossa."
+
+#: class.akismet-admin.php:312
+msgid "There&#8217;s nothing in your <a href='%s'>spam queue</a> at the moment."
+msgstr "Tällä hetkellä Roskaviestit-kansiossasi <a href='%s'>ei ole</a> mitään."
+
+#: class.akismet-admin.php:332
+msgid "Check for Spam"
+msgstr "Etsi Roskaviestejä"
+
+#: class.akismet-admin.php:449
+msgid "Cleared by Akismet"
+msgstr "Hyväksynyt Akismet"
+
+#: class.akismet-admin.php:883
+msgid "Since you joined us, Akismet has saved you %s days!"
+msgstr "Liittymisesi jälkeen, Akismet on säästänyt sinulta %s päivää!"
+
+#: class.akismet-admin.php:885
+msgid "Since you joined us, Akismet has saved you %d hours!"
+msgstr "Liittymisesi jälkeen, Akismet on säästänyt sinulta %d tuntia!"
+
+#: class.akismet-admin.php:887
+msgid "Since you joined us, Akismet has saved you %d minutes!"
+msgstr "Liittymisesi jälkeen, Akismet on säästänyt sinulta %d minuuttia!"
+
+#: class.akismet.php:1029
+msgid "Akismet %s requires WordPress %s or higher."
+msgstr "Akismet %s vaatii WordPress %s:n tai uudemman."
+
+#: class.akismet.php:1029 views/notice.php:27
+msgid "Please <a href=\"%1$s\">upgrade WordPress</a> to a current version, or <a href=\"%2$s\">downgrade to version 2.4 of the Akismet plugin</a>."
+msgstr "Ole hyvä ja <a href=\"%1$s\">päivitä WordPress</a> uusimpaan versioon, tai <a href=\"%2$s\">hae Akismetista versio 2.4</a>."
+
+#: views/config.php:12
+msgid "Summaries"
+msgstr "Yhteenvedot"
+
+#: views/config.php:18
+msgid "Past six months"
+msgstr "Viimeiseltä kuudelta kuukaudelta"
+
+#: views/config.php:20 views/config.php:25
+msgid "Spam blocked"
+msgstr "Roskaviestiä estetty"
+
+#: views/config.php:23
+msgid "All time"
+msgstr "Alusta alkaen"
+
+#: views/config.php:28
+msgid "Accuracy"
+msgstr "Tarkkuus"
+
+#: views/config.php:32
+msgid "%s missed spam, %s false positive"
+msgid_plural "%s missed spam, %s false positives"
+msgstr[0] "%s karannut roskaviesti, %s väärä päätös"
+msgstr[1] "%s karannutta roskaviestiä, %s väärää päätöstä"
+
+#: views/config.php:121
+msgid "Note:"
+msgstr "Huom:"
+
+#: views/config.php:146
+msgid "Disconnect this account"
+msgstr "Katkaise yhteys tähän tunnukseen"
+
+#: views/config.php:196
+msgid "Next Billing Date"
+msgstr "Seuraava laskutuspäivä"
+
+#: views/config.php:208
+msgid "Upgrade"
+msgstr "Päivitä"
+
+#: views/config.php:208
+msgid "Change"
+msgstr "Muuta"
+
+#: views/notice.php:11
+msgid "Activate your Akismet account"
+msgstr "Aktivoi Akismet-tunnuksesi"
+
+#: views/notice.php:14
+msgid "<strong>Almost done</strong> - activate your account and say goodbye to comment spam"
+msgstr "<strong>Melkein valmista</strong> - aktivoi tunnuksesi ja jätä hyvästit roskaviesteille"
+
+#: class.akismet-admin.php:453
+msgid "Flagged as spam by %s"
+msgstr "Roskaviestiksi merkitsi %s"
+
+#: class.akismet-admin.php:455
+msgid "Un-spammed by %s"
+msgstr "Ei-roskaviestiksi merkitsi %s"
+
+#: class.akismet-admin.php:483
+msgid "%s approved"
+msgid_plural "%s approved"
+msgstr[0] "%s hyväksytty"
+msgstr[1] "%s hyväksyttyä"
+
+#: class.akismet-admin.php:543
+msgid "Akismet caught this comment as spam during an automatic retry."
+msgstr "Akismet tulkitsi tämän kommentin roskaviestiksi tarkistettuaan sen uudelleen."
+
+#: class.akismet-admin.php:546
+msgid "Akismet cleared this comment during an automatic retry."
+msgstr "Akismet hyväksyi tämän kommentin tarkistettuaan sen uudelleen."
+
+#: views/notice.php:104
+msgid "You&#8217;re using your Akismet key on more sites than your Pro subscription allows."
+msgstr "Käytät Akismet-avaintasi liian useammalla sivustolla kuin Pro-jäsenyystaso sallii."
+
+#: views/notice.php:111
+msgid "You&#8217;re using Akismet on far too many sites for your Pro subscription."
+msgstr "Käytät Akismetia liian monella sivustolla Pro-jäsenyystasolla."
+
+#: class.akismet-admin.php:518
+msgid "Akismet re-checked and cleared this comment."
+msgstr "Akismet tarkisti uudelleen ja siivosi tämän kommentin."
+
+#: class.akismet-admin.php:515
+msgid "Akismet caught this comment as spam."
+msgstr "Akismet totesi tämän kommentin roskaviestiksi."
+
+#: class.akismet-admin.php:512
+msgid "Akismet re-checked and caught this comment as spam."
+msgstr "Akismet tarkisti uudelleen ja tämä kommentti todettiin roskaviestiksi."
+
+#: class.akismet-admin.php:524
+msgid "Comment was caught by wp_blacklist_check."
+msgstr "Kommentti jäi kiinni wp_blacklist_check-tarkistukseen."
+
+#: class.akismet-admin.php:521
+msgid "Akismet cleared this comment."
+msgstr "Akismet siivosi tämän kommentin."
+
+#: class.akismet-admin.php:528
+msgid "%s reported this comment as spam."
+msgstr "%s raportoi kommentin roskaviestiksi."
+
+#: class.akismet-admin.php:550
+msgid "Akismet was unable to check this comment (response: %s) but will automatically retry later."
+msgstr "Akismet ei onnistunut tarkistamaan tätä kommenttia (vastaus: %s) mutta yrittää automaattisesti uudelleen myöhemmin."
+
+#: class.akismet-admin.php:569
+msgid "%1$s changed the comment status to %2$s."
+msgstr "%1$s vaihtoi kommentin tilaksi %2$s."
+
+#: class.akismet-admin.php:555
+msgid "Akismet was unable to recheck this comment (response: %s)."
+msgstr "Akismet ei onnistunut tarkistamaan tätä kommenttia uudelleen (vastaus: %s)."
+
+#: class.akismet-admin.php:536
+msgid "%s reported this comment as not spam."
+msgstr "%s raportoi tämän kommentin olevan ei roskaviesti."
+
+#: class.akismet-admin.php:53
+msgid "Comment History"
+msgstr "Kommenttihistoria"

@@ -1,0 +1,311 @@
+# Translation of Twenty Fifteen in Indonesian
+# This file is distributed under the same license as the Twenty Fifteen package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-07-27 22:21:25+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Twenty Fifteen\n"
+
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "tim WordPress"
+
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentyfifteen/"
+msgstr "https://wordpress.org/themes/twentyfifteen/"
+
+#. Description of the plugin/theme
+msgid "Our 2015 default theme is clean, blog-focused, and designed for clarity. Twenty Fifteen's simple, straightforward typography is readable on a wide variety of screen sizes, and suitable for multiple languages. We designed it using a mobile-first approach, meaning your content takes center-stage, regardless of whether your visitors arrive by smartphone, tablet, laptop, or desktop computer."
+msgstr "Tema bawaan 2015 kami rapi, berorientasi blog, dan dirancang untuk kejelasan. Tipografi Twenty Fifteen yang simpel dan tegas mudah dibaca pada berbagai ukuran layar, dan cocok untuk berbagai bahasa. Kami merancangnya dengan pendekatan mobile-first, artinya konten Anda berada di area tengah dari manapun pengunjung mengaksesnya baik ponsel pintar, tablet, laptop, maupun komputer meja."
+
+#. Theme Name of the plugin/theme
+msgid "Twenty Fifteen"
+msgstr "Twenty Fifteen"
+
+#: single.php:37
+msgid "Previous post:"
+msgstr "Pos sebelumnya:"
+
+#: single.php:36
+msgid "Previous"
+msgstr "Sebelumnya"
+
+#: single.php:34
+msgid "Next post:"
+msgstr "Pos berikutnya:"
+
+#: single.php:33
+msgid "Next"
+msgstr "Selanjutnya"
+
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr "Hasil Pencarian untuk: %s"
+
+#: inc/template-tags.php:122
+msgid "% Comments"
+msgstr "% Komentar"
+
+#: inc/template-tags.php:122
+msgid "1 Comment"
+msgstr "1 Komentar"
+
+#: inc/template-tags.php:122
+msgid "Leave a comment"
+msgstr "Tinggalkan sebuah komentar"
+
+#: inc/template-tags.php:113
+msgctxt "Used before full size attachment link."
+msgid "Full size"
+msgstr "Ukuran penuh"
+
+#: inc/template-tags.php:102
+msgctxt "Used before tag names."
+msgid "Tags"
+msgstr "Tag"
+
+#: inc/template-tags.php:94
+msgctxt "Used before category names."
+msgid "Categories"
+msgstr "Kategori"
+
+#: inc/template-tags.php:91 inc/template-tags.php:99
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:85
+msgctxt "Used before post author name."
+msgid "Author"
+msgstr "Penulis"
+
+#: inc/template-tags.php:55
+msgctxt "Used before post format."
+msgid "Format"
+msgstr "Format"
+
+#: inc/template-tags.php:76
+msgctxt "Used before publish date."
+msgid "Posted on"
+msgstr "Diposkan pada"
+
+#: inc/template-tags.php:49
+msgid "Featured"
+msgstr "Andalan"
+
+#: inc/template-tags.php:30
+msgid "Newer Comments"
+msgstr "Komentar Berikutnya"
+
+#: inc/template-tags.php:26
+msgid "Older Comments"
+msgstr "Komentar Sebelumnya"
+
+#: inc/template-tags.php:23
+msgid "Comment navigation"
+msgstr "Navigasi komentar"
+
+#: inc/customizer.php:147
+msgid "Blue"
+msgstr "Biru"
+
+#: inc/customizer.php:136
+msgid "Purple"
+msgstr "Ungu"
+
+#: inc/customizer.php:125
+msgid "Pink"
+msgstr "Pink"
+
+#: inc/customizer.php:114
+msgid "Yellow"
+msgstr "Kuning"
+
+#: inc/customizer.php:103
+msgid "Dark"
+msgstr "Gelap"
+
+#: inc/customizer.php:92
+msgid "Default"
+msgstr "Bawaan"
+
+#: inc/customizer.php:62
+msgid "Header and Sidebar Background Color"
+msgstr "Warna Latar Header dan Bilah Sisi"
+
+#: inc/customizer.php:47 inc/customizer.php:63 inc/customizer.php:68
+msgid "Applied to the header on small screens and the sidebar on wide screens."
+msgstr "Diterapkan ke header pada layar kecil dan bilah sisi pada layar lebar."
+
+#: inc/customizer.php:31
+msgid "Base Color Scheme"
+msgstr "Skema Warna Dasar"
+
+#: inc/customizer.php:46
+msgid "Header and Sidebar Text Color"
+msgstr "Warna Teks Header dan Bilah Sisi"
+
+#: inc/back-compat.php:37 inc/back-compat.php:47 inc/back-compat.php:60
+msgid "Twenty Fifteen requires at least WordPress version 4.1. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Fifteen membutuhkan minimal WordPress versi 4.1. Anda menjalankan versi %s. Silakan upgrade dan coba lagi."
+
+#: image.php:84
+msgctxt "Parent post link"
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
+msgstr "<span class=\"meta-nav\">Diterbitkan di</span><span class=\"post-title\">%title</span>"
+
+#: image.php:24
+msgid "Next Image"
+msgstr "Gambar selanjutnya"
+
+#: header.php:43
+msgid "Menu and widgets"
+msgstr "Menu dan widget"
+
+#: image.php:24
+msgid "Previous Image"
+msgstr "Gambar sebelumnya"
+
+#: header.php:26
+msgid "Skip to content"
+msgstr "Lanjut ke konten"
+
+#: functions.php:256
+msgid "collapse child menu"
+msgstr "persempit menu anak"
+
+#: functions.php:255
+msgid "expand child menu"
+msgstr "perlebar menu anak"
+
+#. Translators: To add an additional character subset specific to your
+#. language, translate this to 'greek', 'cyrillic', 'devanagari' or
+#. 'vietnamese'. Do not translate into your own language.
+#: functions.php:185
+msgctxt "Add new subset (greek, cyrillic, devanagari, vietnamese)"
+msgid "no-subset"
+msgstr "no-subset"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:177
+msgctxt "Inconsolata font: on or off"
+msgid "on"
+msgstr "nyala"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Noto Serif, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:169
+msgctxt "Noto Serif font: on or off"
+msgid "on"
+msgstr "nyala"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Noto Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:161
+msgctxt "Noto Sans font: on or off"
+msgid "on"
+msgstr "nyala"
+
+#: functions.php:135
+msgid "Add widgets here to appear in your sidebar."
+msgstr "Tambahkan widget ke sini agar ditampilkan pada bilah sisi."
+
+#: functions.php:133
+msgid "Widget Area"
+msgstr "Area Widget"
+
+#: functions.php:86
+msgid "Social Links Menu"
+msgstr "Menu Tautan Sosial"
+
+#: functions.php:85
+msgid "Primary Menu"
+msgstr "Menu Utama"
+
+#: footer.php:25
+msgid "Proudly powered by %s"
+msgstr "Dengan bangga ditenagai oleh %s"
+
+#. #-#-#-#-#  twentyfifteen.pot (Twenty Fifteen 1.2)  #-#-#-#-#
+#. Author URI of the plugin/theme
+#: footer.php:25
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#: content-none.php:31
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Rupanya kami tidak dapat menemukan apa yang Anda cari. Mungkin pencarian dapat membantu."
+
+#: content-none.php:26
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Maaf, tidak ada yang cocok dengan kata yang anda cari. Silahkan coba lagi dengan kata kunci yang lain"
+
+#: content-none.php:22
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Sudah siap menerbitkan tulisan pertamamu? <a href=\"%1$s\">Mulai di sini</a>."
+
+#: content-none.php:15
+msgid "Nothing Found"
+msgstr "Tidak Menemukan Apa-apa"
+
+#: content-link.php:56 content-page.php:35 content-search.php:28
+#: content-search.php:33 content.php:57 image.php:71
+msgid "Edit"
+msgstr "Sunting"
+
+#: content-link.php:36 content-page.php:25 content.php:38 image.php:59
+msgid "Pages:"
+msgstr "Halaman:"
+
+#. translators: %s: Name of current post
+#: content-link.php:31 content.php:33 inc/template-tags.php:237
+msgid "Continue reading %s"
+msgstr "Lanjutkan membaca %s"
+
+#: comments.php:53
+msgid "Comments are closed."
+msgstr "Komentar ditutup."
+
+#: comments.php:28
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Satu tanggapan untuk &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s tanggapan untuk &ldquo;%2$s&rdquo;"
+
+#: author-bio.php:34
+msgid "View all posts by %s"
+msgstr "Tampilkan semua pos berdasarkan %s"
+
+#: author-bio.php:12
+msgid "Published by"
+msgstr "Diterbitkan oleh"
+
+#: archive.php:51 content-link.php:40 content-page.php:29 content.php:42
+#: image.php:63 index.php:48 search.php:40
+msgid "Page"
+msgstr "Laman"
+
+#: archive.php:50 index.php:47 search.php:39
+msgid "Next page"
+msgstr "Laman berikutnya"
+
+#: archive.php:49 index.php:46 search.php:38
+msgid "Previous page"
+msgstr "Laman sebelumnya"
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "Sepertinya tidak ditemukan apapun di sini. Mungkin coba pencarian?"
+
+#: 404.php:17
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ups! Laman tersebut tak ditemukan."

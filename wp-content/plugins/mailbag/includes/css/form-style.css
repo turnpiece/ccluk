@@ -1,0 +1,78 @@
+/* Front-end form styles */
+
+/* Label and Input Wrapper */
+
+.mailbag-input {
+    margin-bottom: 10px;
+    position: relative;
+}
+
+/* Hidden in place of placeholder text */
+
+
+.mailbag-input br {
+    display: none;
+}
+
+/* Form Styles */
+
+.mailbag-wrap legend {
+    margin-bottom: 10px;
+}
+
+.mailbag-wrap input, .mailbag-wrap textarea, .mailbag-wrap select {
+    font: 100% Arial, Verdana, Helvetica, sans-serif;
+    vertical-align: middle;
+}
+
+.mailbag-wrap input[type="text"], .mailbag-wrap input[type="email"], .mailbag-wrap input[type="password"], textarea {
+    font-weight: normal;
+    color: #8A949B;
+    border: none;
+    background: #EFF1F5;
+    padding: 10px;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -webkit-transition: .07s ease-in;
+    -moz-transition: .07s ease-in;
+    transition: .07s ease-in;
+}
+
+.mailbag-wrap input[type="text"]:focus, .mailbag-wrap input[type="email"]:focus, .mailbag-wrap input[type="password"]:focus, .mailbag-wrap textarea:focus {
+    background: #EBEDF0;
+    outline: none;
+    border: none;
+    -webkit-transition: .07s ease-in;
+    -moz-transition: .07s ease-in;
+    transition: .07s ease-in;
+}
+
+.mailbag-wrap input[type="submit"] {
+    background: #929CA7;
+    color: #fff;
+    font-weight: normal;
+    padding: 10px;
+    margin: 0;
+    border: none;
+    border-radius: 3px;
+    -webkit-appearance: none;
+    -webkit-transition: .07s ease-in;
+    -moz-transition: .07s ease-in;
+    transition: .07s ease-in;
+}
+
+.mailbag-wrap input[type="submit"]:hover {
+    cursor: pointer;
+    background: #5A6670;
+    -webkit-transition: .07s ease-in;
+    -moz-transition: .07s ease-in;
+    transition: .07s ease-in;
+}
+
+.success-subscribe {
+    background: #89CA6D;
+    padding: 10px;
+    color: #fff;
+    border-radius: 3px;
+    text-align: center;
+}

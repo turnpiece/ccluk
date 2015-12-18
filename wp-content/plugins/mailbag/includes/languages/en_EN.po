@@ -1,0 +1,171 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Radius\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2013-12-04 16:20-0800\n"
+"PO-Revision-Date: 2013-12-04 16:21-0800\n"
+"Last-Translator: \n"
+"Language-Team: Okay Themes\n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Poedit-KeywordsList: _e;__\n"
+"X-Poedit-Basepath: .\n"
+"X-Poedit-SourceCharset: utf-8\n"
+"X-Generator: Poedit 1.6\n"
+"X-Poedit-SearchPath-0: ../..\n"
+
+#: ../../mailbag.php:40 ../../mailbag.php:100
+msgid "Mailbag Settings"
+msgstr ""
+
+#: ../../mailbag.php:99
+msgid "Mailbag"
+msgstr ""
+
+#: ../../mailbag.php:104
+msgid "MailChimp"
+msgstr ""
+
+#: ../../mailbag.php:105
+msgid "Campaign Monitor"
+msgstr ""
+
+#: ../../mailbag.php:106
+msgid "Settings"
+msgstr ""
+
+#: ../../mailbag.php:107
+msgid "Usage"
+msgstr ""
+
+#: ../../mailbag.php:118
+msgid "MailChimp API Key"
+msgstr ""
+
+#: ../../mailbag.php:127
+msgid "MailChimp Email Lists"
+msgstr ""
+
+#: ../../mailbag.php:139 ../../mailbag.php:196
+msgid "No lists"
+msgstr ""
+
+#: ../../mailbag.php:143 ../../mailbag.php:200
+msgid "You must save your API key before you can select a list."
+msgstr ""
+
+#: ../../mailbag.php:150 ../../mailbag.php:207
+msgid "Button Text"
+msgstr ""
+
+#: ../../mailbag.php:166
+msgid "Campaign Monitor API Key"
+msgstr ""
+
+#: ../../mailbag.php:175
+msgid "Campaign Monitor Client ID"
+msgstr ""
+
+#: ../../mailbag.php:184
+msgid "Campaign Monitor Email Lists"
+msgstr ""
+
+#: ../../mailbag.php:222
+msgid "Enable/Disable Mailbag Form Styles"
+msgstr ""
+
+#: ../../mailbag.php:228
+msgid "enabled"
+msgstr ""
+
+#: ../../mailbag.php:234
+msgid "Enable"
+msgstr ""
+
+#: ../../mailbag.php:235
+msgid "Disable"
+msgstr ""
+
+#: ../../mailbag.php:248
+msgid "Adding Forms To Your Site"
+msgstr ""
+
+#: ../../mailbag.php:250
+msgid ""
+"Once you have entered your keys and chosen a subscription list, you can add "
+"the form to any of your posts or pages with a shortcode."
+msgstr ""
+
+#: ../../mailbag.php:252
+msgid "MailChimp Shortcode:"
+msgstr ""
+
+#: ../../mailbag.php:253
+msgid "Campaign Monitor Shortcode:"
+msgstr ""
+
+#: ../../mailbag.php:257
+msgid "Finding Your MailChimp API Keys"
+msgstr ""
+
+#: ../../mailbag.php:258 ../../mailbag.php:263
+msgid "Where can I find my API key?"
+msgstr ""
+
+#: ../../mailbag.php:262
+msgid "Finding Your Campaign Monitor API Keys"
+msgstr ""
+
+#: ../../mailbag.php:264
+msgid "Where can I find my Client ID?"
+msgstr ""
+
+#: ../../mailbag.php:268
+msgid "Customizing With CSS"
+msgstr ""
+
+#: ../../mailbag.php:270
+msgid ""
+"Mailbag ships with a clean and simple default style, which you can "
+"optionally disable in the Settings tab. Use these CSS classes to customize "
+"the email forms to your liking."
+msgstr ""
+
+#: ../../mailbag.php:285
+msgid "Save Settings"
+msgstr ""
+
+#: ../../mailbag.php:305 ../../mailbag.php:470
+msgid "You have been successfully subscribed!"
+msgstr ""
+
+#: ../../mailbag.php:312 ../../mailbag.php:327 ../../mailbag.php:475
+#: ../../mailbag.php:494
+msgid "Subscribe"
+msgstr ""
+
+#: ../../mailbag.php:321 ../../mailbag.php:488
+msgid "Enter your email:"
+msgstr ""
+
+#: ../../mailbag.php:399 ../../mailbag.php:516
+msgid "Your email address is invalid!"
+msgstr ""
+
+#: ../../mailbag.php:399 ../../mailbag.php:516
+msgid "Invalid Email"
+msgstr ""
+
+#: ../../mailbag.php:484
+msgid "Enter your name:"
+msgstr ""
+
+#: ../../mailbag.php:521
+msgid "Enter your name!"
+msgstr ""
+
+#: ../../mailbag.php:521
+msgid "No Name"
+msgstr ""

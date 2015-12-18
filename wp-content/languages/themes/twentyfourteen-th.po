@@ -1,0 +1,443 @@
+# Translation of Twenty Fourteen in Thai
+# This file is distributed under the same license as the Twenty Fourteen package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-03-27 00:01:51+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Twenty Fourteen\n"
+
+#. #-#-#-#-#  twentyfourteen.pot (Twenty Fourteen 1.5)  #-#-#-#-#
+#. Author URI of the plugin/theme
+#: footer.php:21
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentyfourteen/"
+msgstr "https://wordpress.org/themes/twentyfourteen/"
+
+#. translators: %s: Name of current post
+#: content-aside.php:48 content-audio.php:48 content-gallery.php:48
+#: content-image.php:48 content-link.php:48 content-quote.php:48
+#: content-video.php:48 content.php:56 inc/template-tags.php:222
+msgid "Continue reading %s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "อ่านเพิ่มเติม %s <span class=\"meta-nav\">&rarr;</span>"
+
+#: inc/customizer.php:31 inc/customizer.php:32
+msgid "May only be visible on wide screens."
+msgstr "อาจจะเห็นได้บนหน้าจอแบบกว้างเท่านั้น"
+
+#: inc/widgets.php:59
+msgid "More videos"
+msgstr "เรื่องวีดีโอเพิ่มเติม"
+
+#: inc/widgets.php:63
+msgid "More audio"
+msgstr "เรื่องไฟล์เสียงเพิ่มเติม"
+
+#: inc/widgets.php:67
+msgid "More quotes"
+msgstr "เรื่องคำคมเพิ่มเติม"
+
+#: inc/widgets.php:71
+msgid "More links"
+msgstr "เรื่องลิงก์เพิ่มเติม"
+
+#: inc/widgets.php:75
+msgid "More galleries"
+msgstr "เรื่องคลังรูปเพิ่มเติม"
+
+#: inc/widgets.php:80
+msgid "More asides"
+msgstr "เรื่องสั้นเพิ่มเติม"
+
+#. translators: used with More archives link
+#: inc/widgets.php:206
+msgid "%s <span class=\"meta-nav\">&rarr;</span>"
+msgstr "%s <span class=\"meta-nav\">&rarr;</span>"
+
+#: inc/customizer.php:108
+msgid "The home page features your choice of up to 6 posts prominently displayed in a grid or slider, controlled by a <a href=\"%1$s\">tag</a>; you can change the tag and layout in <a href=\"%2$s\">Appearance &rarr; Customize</a>. If no posts match the tag, <a href=\"%3$s\">sticky posts</a> will be displayed instead."
+msgstr "ความสามารถที่ให้คุณเลือกเรื่องได้มากถึง 6 เรื่องมาแสดงในหน้าแรก  ซึ่งจะแสดงในรูปแบบตารางหรือแบบสไลเดอร์ ซึ่งควบคุมโดย<a href=\"%1$s\">ป้ายกำกับtag</a>; คุณสามารถเปลี่ยนป้ายกำกับและหน้าตาเว็บใน <a href=\"%2$s\">รูปแบบ &rarr; ปรับแต่ง</a> ถ้าไม่มีเรื่องใดที่ตรงกับป้ายกำกับ  <a href=\"%3$s\">เรื่องปักหมุด</a> จะถูกนำมาแสดงผลแทน"
+
+#: inc/widgets.php:36
+msgid "Use this widget to list your recent Aside, Quote, Video, Audio, Image, Gallery, and Link posts."
+msgstr "ใช้ widget นี้เพื่อทำรายชื่อรูปแบบเรื่องด้านข้าง เรื่องคำคม เรื่องวีดีโอ เรื่องไฟล์เสียง เรื่องไฟล์รูปภาพ  เรื่องคลังรูปและเรื่องลิงก์ ล่าสุด"
+
+#: inc/customizer.php:42 inc/customizer.php:108 inc/featured-content.php:405
+#: inc/featured-content.php:414 inc/featured-content.php:474
+msgctxt "featured content default tag slug"
+msgid "featured"
+msgstr "บทความพิเศษ"
+
+#: inc/customizer.php:41 inc/featured-content.php:404
+msgid "Use a <a href=\"%1$s\">tag</a> to feature your posts. If no posts match the tag, <a href=\"%2$s\">sticky posts</a> will be displayed instead."
+msgstr "ใช้ <a href=\"%1$s\">ป้ายกำกับ</a> เพื่อเสนอเรื่องเด่นของคุณ  ถ้าไม่มีเรื่องใดมีป้ายกำกับนั้น <a href=\"%2$s\">เรื่องปักหมุด</a> จะถูกนำมาแสดงแทน"
+
+#: 404.php:17
+msgid "Not Found"
+msgstr "ไม่พบ"
+
+#: inc/customizer.php:27
+msgid "Display Site Title &amp; Tagline"
+msgstr "แสดงหัวข้อเว็บไซต์ &amp; คำอธิบายเว็บ"
+
+#: inc/customizer.php:110
+msgid "For an in-depth tutorial, and more tips and tricks, visit the <a href=\"%s\">Twenty Fourteen documentation</a>."
+msgstr "สำหรับคู่มือแบบละเอียด  เคล็ดลับและเทคนิค  เยี่ยมชมได้ที่ <a href=\"%s\">คู่มือ Twenty Fourteen </a>"
+
+#: archive.php:34
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: archive.php:37
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: inc/customizer.php:24
+msgid "Site Title Color"
+msgstr "สีหัวข้อเว็บ"
+
+#: inc/featured-content.php:426
+msgid "Tag Name"
+msgstr "ชื่อป้ายกำกับ"
+
+#: inc/featured-content.php:431
+msgid "Don&rsquo;t display tag on front end."
+msgstr "อย่าแสดงป้ายกำกับในหน้าแรก"
+
+#. Description of the plugin/theme
+msgid "In 2014, our default theme lets you create a responsive magazine website with a sleek, modern design. Feature your favorite homepage content in either a grid or a slider. Use the three widget areas to customize your website, and change your content's layout with a full-width page template and a contributor page to show off your authors. Creating a magazine website with WordPress has never been easier."
+msgstr "ในปี 2014 ธีมค่าเริ่มต้นของเราอนุญาตให้คุณสร้างเว็บในรูปแบบแมกกาซีนที่ตอบสนองกับผู้ใช้ มีการออกแบบที่ทันสมัย  แสดงบทความเด่นในรูปแบบตารางหรือตัวเลื่อน  ใช้ 3 พื้นที่วิดเจ็ตเพื่อปรับแต่งเว็บไซต์ของคุณ  และเปลี่ยนรูปแบบบทความของคุณด้วยรูปหน้าขนาดกว้างแบบเต็ม และหน้าผู้อุทิศตัวที่จะแสดงผู้เขียนของคุณ  การสร้างเว็บแมกกาซีนด้วยเวิร์ดเพรสจะกลายเป็นเรื่องง่ายกว่าที่เคย"
+
+#: functions.php:258
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#: functions.php:259
+msgid "Next"
+msgstr "ถัดไป"
+
+#: author.php:31
+msgid "All posts by %s"
+msgstr "เรื่องทั้งหมดโดย %s"
+
+#: content-aside.php:17 content-audio.php:17 content-featured-post.php:28
+#: content-gallery.php:17 content-image.php:17 content-link.php:17
+#: content-quote.php:17 content-video.php:17 content.php:19
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: inc/widgets.php:62 taxonomy-post_format.php:39
+msgid "Audio"
+msgstr "ไฟล์เสียง"
+
+#: inc/widgets.php:162
+msgid "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photo</a>."
+msgid_plural "This gallery contains <a href=\"%1$s\" rel=\"bookmark\">%2$s photos</a>."
+msgstr[0] "คลังรูปนี้ประกอบด้วย <a href=\"%1$s\" rel=\"bookmark\">%2$s รูป</a>"
+
+#: inc/widgets.php:255
+msgid "Title:"
+msgstr "หัวข้อ:"
+
+#: inc/widgets.php:258
+msgid "Number of posts to show:"
+msgstr "จำนวนของเรื่องที่จะแสดง:"
+
+#: inc/widgets.php:261
+msgid "Post format to show:"
+msgstr "ประเภทเรื่องที่จะแสดง"
+
+#. Template Name of the plugin/theme
+msgid "Contributor Page"
+msgstr "หน้าผู้อุทิศตัว"
+
+#: inc/customizer.php:40 inc/featured-content.php:403
+msgid "Featured Content"
+msgstr "บทความเด่น"
+
+#: inc/customizer.php:56
+msgid "Layout"
+msgstr "รูปแบบ"
+
+#: inc/template-tags.php:58
+msgid "Posts navigation"
+msgstr "เมนูนำทางเรื่อง"
+
+#: inc/template-tags.php:89
+msgid "<span class=\"meta-nav\">Published In</span>%title"
+msgstr "<span class=\"meta-nav\">เผยแพร่ใน</span>%title"
+
+#: inc/template-tags.php:91
+msgid "<span class=\"meta-nav\">Previous Post</span>%title"
+msgstr "<span class=\"meta-nav\">เรื่องก่อนหน้า</span>%title"
+
+#: inc/template-tags.php:92
+msgid "<span class=\"meta-nav\">Next Post</span>%title"
+msgstr "<span class=\"meta-nav\">เรื่องต่อไป</span>%title"
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "ดูเหมือนว่าไม่พบสิ่งใดบนที่อยู่นั้น  บางทีคุณอยากลองใช้การค้นหา?"
+
+#: functions.php:182
+msgid "Additional sidebar that appears on the right."
+msgstr "ด้านข้างเพิ่มเติมที่ปรากฎทางด้านขวา"
+
+#: functions.php:191
+msgid "Appears in the footer section of the site."
+msgstr "ปรากฎในส่วนด้านล่างของเว็บไซต์"
+
+#: functions.php:376
+msgid "%d Article"
+msgid_plural "%d Articles"
+msgstr[0] "%d บทความ"
+
+#: image.php:65
+msgid "Previous Image"
+msgstr "รูปก่อนหน้า"
+
+#: image.php:66
+msgid "Next Image"
+msgstr "รูปต่อไป"
+
+#: inc/back-compat.php:37 inc/back-compat.php:47 inc/back-compat.php:60
+msgid "Twenty Fourteen requires at least WordPress version 3.6. You are running version %s. Please upgrade and try again."
+msgstr "2014 ต้องใช้เวิร์ดเพรสรุ่น 3.6 เป็นอย่างต่ำ  คุณกำลังใช้งานรุ่น %s  โปรดอัปเกรดและลองใหม่อีกครั้ง"
+
+#: inc/customizer.php:34 inc/customizer.php:35
+msgid "Background may only be visible on wide screens."
+msgstr "พื้นหลังอาจจะมองเห็นได้บนหน้าจอแบบกว้าง"
+
+#: inc/customizer.php:60
+msgid "Grid"
+msgstr "แบบตาราง"
+
+#: inc/customizer.php:61
+msgid "Slider"
+msgstr "ตัวเลื่อน"
+
+#: inc/widgets.php:34
+msgid "Twenty Fourteen Ephemera"
+msgstr "Twenty Fourteen Ephemera"
+
+#: inc/customizer.php:109
+msgid "Enhance your site design by using <a href=\"%s\">Featured Images</a> for posts you&rsquo;d like to stand out (also known as post thumbnails). This allows you to associate an image with your post without inserting it. Twenty Fourteen uses featured images for posts and pages&mdash;above the title&mdash;and in the Featured Content area on the home page."
+msgstr "เพิ่มความสวยงามให้เว็บไซต์ของคุณโดยใช้ <a href=\"%s\">รูปพิเศษ</a> สำหรับเรื่องที่คุณอยากให้โดดเด่น (หรือที่รู้จักกันในชื่อ รูปขนาดย่อของเรื่อง)  สิ่งนี้อนุญาตคุณให้ใช้งานรูปในเรื่องของคุณโดยไม่ต้องใส่มันเข้าไป  Twenty Fourteen ใช้รูปพิเศษ สำหรับเรื่องและหน้า &mdash;ด้านบนหัวข้อ&mdash; และในบทความเด่นบนหน้าแรกของเว็บ"
+
+#: functions.php:189
+msgid "Footer Widget Area"
+msgstr "พื้นที่วิดเจ็ตด้านล่าง"
+
+#: footer.php:21
+msgid "Proudly powered by %s"
+msgstr "ภูมิใจนำเสนอโดย %s"
+
+#: archive.php:31
+msgid "Daily Archives: %s"
+msgstr "คลัีงเก็บรายวัน: %s"
+
+#: archive.php:34
+msgid "Monthly Archives: %s"
+msgstr "คลังเก็บรายเดือน: %s"
+
+#: archive.php:37
+msgid "Yearly Archives: %s"
+msgstr "คลังเก็บแบบปี: %s"
+
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "ทีมงานเวิร์ดเพรสไทย"
+
+#: comments.php:36 comments.php:54
+msgid "Newer Comments &rarr;"
+msgstr "ความเห็นที่ใหม่กว่า &rarr;"
+
+#: comments.php:35 comments.php:53
+msgid "&larr; Older Comments"
+msgstr "&larr; ความเห็นที่เก่ากว่า"
+
+#: comments.php:59
+msgid "Comments are closed."
+msgstr "ปิดการแสดงความเห็น"
+
+#: category.php:20
+msgid "Category Archives: %s"
+msgstr "คลังเก็บหมวดหมู่: %s"
+
+#: comments.php:34 comments.php:52
+msgid "Comment navigation"
+msgstr "เมนูนำทางความเห็น"
+
+#: comments.php:27
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "หนึ่งความคิดบน &ldquo;%2$s&rdquo;"
+
+#: tag.php:22
+msgid "Tag Archives: %s"
+msgstr "คลังเก็บป้ายกำกับ: %s"
+
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr "ผลลัพท์การค้นหาสำหรับ: %s"
+
+#: content-none.php:12
+msgid "Nothing Found"
+msgstr "ไม่พบสิ่งใด"
+
+#: header.php:48
+msgid "Search"
+msgstr "ค้นหา"
+
+#: archive.php:40 taxonomy-post_format.php:51
+msgid "Archives"
+msgstr "คลังเก็บ"
+
+#: inc/widgets.php:127 inc/widgets.php:172
+msgid "Continue reading <span class=\"meta-nav\">&rarr;</span>"
+msgstr "อ่านเพิ่มเติม <span class=\"meta-nav\">&rarr;</span>"
+
+#: content-aside.php:53 content-audio.php:53 content-gallery.php:53
+#: content-image.php:53 content-link.php:53 content-page.php:22
+#: content-quote.php:53 content-video.php:53 content.php:61 image.php:54
+msgid "Pages:"
+msgstr "หน้า:"
+
+#: content-aside.php:40 content-audio.php:40 content-gallery.php:40
+#: content-image.php:40 content-link.php:40 content-page.php:28
+#: content-quote.php:40 content-video.php:40 content.php:42 image.php:34
+#: page-templates/contributors.php:35
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: inc/template-tags.php:51
+msgid "Next &rarr;"
+msgstr "ต่อไป &rarr;"
+
+#: inc/template-tags.php:50
+msgid "&larr; Previous"
+msgstr "&larr; ก่อนหน้า"
+
+#: functions.php:495
+msgid "Page %s"
+msgstr "หน้า %s"
+
+#: inc/template-tags.php:85
+msgid "Post navigation"
+msgstr "เมนูนำทางเรื่อง"
+
+#: header.php:52
+msgid "Primary Menu"
+msgstr "เมนูหลัก"
+
+#: content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "ดูเหมือนว่าเราไม่มีสิ่งที่คุณกำลังหาอยู่  บางทีคำสั่งค้นหาอาจช่วยคุณได้"
+
+#: header.php:53
+msgid "Skip to content"
+msgstr "ข้ามไปยังเนื้อหา"
+
+#: content-aside.php:37 content-audio.php:37 content-gallery.php:37
+#: content-image.php:37 content-link.php:37 content-quote.php:37
+#: content-video.php:37 content.php:38 inc/widgets.php:194
+msgid "Leave a comment"
+msgstr "แสดงความคิดเห็น"
+
+#: content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "พร้อมที่จะเผยแพร่เรื่องแรกของคุณหรือไม่? <a href=\"%1$s\">เริ่มใช้งานที่นี่</a>"
+
+#: inc/template-tags.php:109
+msgid "Sticky"
+msgstr "ปักหมุด"
+
+#: content-aside.php:37 content-audio.php:37 content-gallery.php:37
+#: content-image.php:37 content-link.php:37 content-quote.php:37
+#: content-video.php:37 content.php:38 inc/widgets.php:194
+msgid "1 Comment"
+msgstr "1 ความเห็น"
+
+#: content-aside.php:37 content-audio.php:37 content-gallery.php:37
+#: content-image.php:37 content-link.php:37 content-quote.php:37
+#: content-video.php:37 content.php:38 inc/widgets.php:194
+msgid "% Comments"
+msgstr "% ความเห็น"
+
+#: functions.php:83
+msgid "Top primary menu"
+msgstr "เมนูหลักด้านบน"
+
+#: functions.php:84
+msgid "Secondary menu in left sidebar"
+msgstr "เมนูรองในด้านข้างซ้าย"
+
+#: functions.php:171
+msgid "Primary Sidebar"
+msgstr "ด้านข้างหลัก"
+
+#: functions.php:173
+msgid "Main sidebar that appears on the left."
+msgstr "ด้านข้างหลักที่ปรากฎด้านซ้าย"
+
+#: functions.php:180
+msgid "Content Sidebar"
+msgstr "เนื้อหาด้านข้าง"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Lato, translate this to 'off'. Do not translate into your own language.
+#: functions.php:213
+msgctxt "Lato font: on or off"
+msgid "on"
+msgstr "เปิด"
+
+#. #-#-#-#-#  twentyfourteen.pot (Twenty Fourteen 1.5)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/customizer.php:105
+msgid "Twenty Fourteen"
+msgstr "Twenty Fourteen"
+
+#. Template Name of the plugin/theme
+msgid "Full Width Page"
+msgstr "ความกว้างเต็มหน้า"
+
+#: inc/widgets.php:70 taxonomy-post_format.php:45
+msgid "Links"
+msgstr "ลิงก์"
+
+#: inc/widgets.php:66 taxonomy-post_format.php:42
+msgid "Quotes"
+msgstr "เรื่องคำคม"
+
+#: content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "ขอโทษครับ  แต่ไม่มีสิ่งใดตรงกับเงื่อนไขการค้นหาของคุณ  โปรดลองใหม่ด้วยคำที่ต่างออกไป"
+
+#: inc/widgets.php:58 taxonomy-post_format.php:36
+msgid "Videos"
+msgstr "เรื่องวีดีโอ"
+
+#: inc/widgets.php:54 taxonomy-post_format.php:33
+msgid "Images"
+msgstr "เรื่องรูปภาพ"
+
+#: inc/widgets.php:55
+msgid "More images"
+msgstr "เรื่องรูปภาพเพิ่มเติม"
+
+#: inc/widgets.php:74 taxonomy-post_format.php:48
+msgid "Galleries"
+msgstr "เรื่องคลังรูป"
+
+#: inc/widgets.php:79 taxonomy-post_format.php:30
+msgid "Asides"
+msgstr "เรื่องสั้น"

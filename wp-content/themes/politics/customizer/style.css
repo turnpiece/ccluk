@@ -1,0 +1,31 @@
+
+/* Plus Upgrade Controls */
+.open .politics-upgrade-link {
+  display: none !important;
+}
+.open a.upgrade-link {
+  position: relative;
+  top: 1em;
+  background-color: #93b800;
+  padding: 3px 6px;
+  color: white;
+  font-style: normal;
+  opacity: 1;
+	transition: all 0.4s ease;
+	-webkit-transition: all 0.4s ease;
+	-moz-transition: all 0.4s ease;
+	-o-transition: all 0.4s ease;
+	-ms-transition: all 0.4s ease;
+}
+.open a.upgrade-link:hover {
+  opacity: 0.8;
+}
+
+#customize-control-typography-plus ul, #customize-control-colors-plus ul, #customize-control-advanced-colors ul {
+  list-style: square;
+  margin-left: 1em;
+}
+
+ul.accordion-sub-container .customize-panel-back {
+  height: 95px;
+}
