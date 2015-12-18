@@ -1,0 +1,22 @@
+@font-face {
+	font-family: 'wpmudev-icon';
+	src:url('../fonts/icomoon.eot?fehpze');
+	src:url('../fonts/icomoon.eot?#iefixfehpze') format('embedded-opentype'),
+		url('../fonts/icomoon.woff?fehpze') format('woff'),
+		url('../fonts/icomoon.ttf?fehpze') format('truetype'),
+		url('../fonts/icomoon.svg?fehpze#icomoon') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#adminmenu #toplevel_page_wpmudev div.wp-menu-image:before {
+  font-family: 'wpmudev-icon' !important;
+  content: "\77";
+}
+
+#adminmenu .toplevel_page_wpmudev div.wp-menu-image img {
+  display: none;
+}
+
+
+/* 87274-1450471649 */
