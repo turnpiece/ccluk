@@ -1,0 +1,22 @@
+/*
+ Theme Name:   CCL UK (Mission child theme)
+ Theme URI:    http://citizensclimatelobby.uk/
+ Description:  Mission child theme for Citizens' Climate Lobby UK
+ Author:       Paul Jenkins
+ Author URI:   http://turnpiece.com
+ Template:     MissionWP24
+ Version:      1.0.0
+ License:      GNU General Public License v2 or later
+ License URI:  http://www.gnu.org/licenses/gpl-2.0.html
+ Text Domain:  ccluk
+*/
+
+.sliderLogo {
+	padding: 0.1em 0.5em;
+	background: #fff;
+	opacity: 0.94;
+}
+
+.sliderLogo:hover {
+	opacity: 1.0;
+}
