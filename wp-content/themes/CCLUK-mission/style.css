@@ -15,6 +15,7 @@
 Colours:
 
 Green: A8CF45
+Blue: 0098DA
 
 */
 
@@ -69,4 +70,9 @@ footer .widget h3, footer ul h3 {
 
 .sliderLogo:hover {
 	opacity: 1.0;
+}
+
+.postContent p {
+    font-size: 18px;
+    line-height: 30px !important; 
 }
