@@ -3,9 +3,7 @@
     <div class="sliderWrapper">
 
         <div id="slider" class="flexslider">
-                    
-                   <div class="sliderLogo"><a href="<?php echo home_url(); ?>"><img alt="" src="<?php echo ot_get_option('logo') ?>" /></a></div>
-              
+                       
         <ul class="slides">
             
                    <?php if ( function_exists( 'ot_get_option' ) ) {

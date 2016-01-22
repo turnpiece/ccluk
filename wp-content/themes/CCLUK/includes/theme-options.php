@@ -267,18 +267,6 @@ function custom_theme_options() {
         'class'       => ''
       ),
       array(
-        'id'          => 'accent',
-        'label'       => 'Accent Color',
-        'desc'        => '',
-        'std'         => '',
-        'type'        => 'colorpicker',
-        'section'     => 'bodystyling',
-        'rows'        => '',
-        'post_type'   => '',
-        'taxonomy'    => '',
-        'class'       => ''
-      ),
-      array(
         'id'          => 'buttons',
         'label'       => 'Buttons Colors',
         'desc'        => '',

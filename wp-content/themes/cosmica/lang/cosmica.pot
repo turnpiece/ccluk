@@ -1,0 +1,511 @@
+# Copyright (C) YEAR Copyright (C) 2015 codeins
+# This file is distributed under the GNU General Public License v2 or later.
+msgid ""
+msgstr ""
+"Project-Id-Version: cosmica 1.0.9\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-10-15 22:51+0530\n"
+"PO-Revision-Date: 2015-10-15 22:51+0530\n"
+"Last-Translator: codeins.org \n"
+"Language-Team: \n"
+"Language: en_US\n"
+"MIME-Version: 1.0\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+#: 404.php:5
+msgid "404"
+msgstr ""
+
+#: 404.php:6
+msgid "Not found"
+msgstr ""
+
+#: 404.php:12
+msgid "This is somewhat embarrassing, isn't it?"
+msgstr ""
+
+#: 404.php:13
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr ""
+
+#: archive.php:8 author.php:8 category.php:8 index.php:9 search.php:10
+#: tag.php:8 templates/fullwidth.php:13
+msgid "&#171; Previous Page"
+msgstr ""
+
+#: archive.php:8 author.php:8 category.php:8 index.php:9 search.php:10
+#: tag.php:8 templates/fullwidth.php:13
+msgid "Next Page &#187;"
+msgstr ""
+
+#: comments.php:3
+msgid ""
+"This post is password protected. Enter the password to view any comments."
+msgstr ""
+
+#: comments.php:17
+#, php-format
+msgid "One Response to %2$s"
+msgid_plural "%1$s Responses to %2$s"
+msgstr[0] ""
+msgstr[1] ""
+
+#: comments.php:23 comments.php:44
+msgid "<span class=\"meta-nav\">&larr;</span> Older Comments"
+msgstr ""
+
+#: comments.php:24 comments.php:45
+msgid "Newer Comments <span class=\"meta-nav\">&rarr;</span>"
+msgstr ""
+
+#: comments.php:55
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:36 includes/comica-variables.php:15
+#: includes/cosmica-customizer.php:706
+msgid "Theme by"
+msgstr ""
+
+#: footer.php:36 includes/comica-variables.php:15
+#: includes/cosmica-customizer.php:706
+msgid "Proudly Powered by"
+msgstr ""
+
+#: footer.php:39
+msgid "Go to Top"
+msgstr ""
+
+#: functions.php:11
+msgid "Primary Menu"
+msgstr ""
+
+#: functions.php:23
+msgid "Right Sidebar"
+msgstr ""
+
+#: functions.php:34
+msgid "Footer Sidebar 1"
+msgstr ""
+
+#: functions.php:45
+msgid "Footer Sidebar 2"
+msgstr ""
+
+#: functions.php:56
+msgid "Footer Sidebar 3"
+msgstr ""
+
+#: functions.php:204
+#, php-format
+msgctxt "1: post format name. 2: date"
+msgid "%1$s on %2$s"
+msgstr ""
+
+#: functions.php:210
+#, php-format
+msgid "Permalink to %s"
+msgstr ""
+
+#: functions.php:257 functions.php:268 functions.php:280 functions.php:292
+#: includes/loop-index.php:49 includes/loop-search.php:49
+msgid "Read More"
+msgstr ""
+
+#: functions.php:258 functions.php:269 functions.php:281 functions.php:293
+msgid "Buy Now"
+msgstr ""
+
+#: index-clients.php:6
+msgid "Our Client"
+msgstr ""
+
+#: index-clients.php:10
+msgid ""
+"We have successfully completed over 1000 projects in mobile and web. Here "
+"are few of them."
+msgstr ""
+
+#: searchform.php:3 searchform.php:4
+msgid "Search for:"
+msgstr ""
+
+#: searchform.php:4
+msgid "Search ..."
+msgstr ""
+
+#: includes/comica-variables.php:16 includes/cosmica-customizer.php:737
+msgid "Work Speaks Thousand Words"
+msgstr ""
+
+#: includes/comica-variables.php:17 includes/cosmica-customizer.php:754
+msgid ""
+"We are a group of passionate designers and developers who really love to "
+"create awesome wordpress themes & support."
+msgstr ""
+
+#: includes/comica-variables.php:18 includes/cosmica-customizer.php:779
+msgid "Purchase Theme"
+msgstr ""
+
+#: includes/comica-variables.php:20 includes/cosmica-customizer.php:816
+msgid "See Details"
+msgstr ""
+
+#: includes/comica-variables.php:22 includes/cosmica-customizer.php:863
+msgid "Awesome Services"
+msgstr ""
+
+#: includes/comica-variables.php:23 includes/cosmica-customizer.php:880
+msgid ""
+"We are a group of passionate designers and developers who really love to "
+"create awesome WordPress themes & support"
+msgstr ""
+
+#: includes/comica-variables.php:24 includes/comica-variables.php:26
+#: includes/comica-variables.php:28 includes/comica-variables.php:30
+#: includes/comica-variables.php:32 includes/comica-variables.php:34
+#: includes/cosmica-customizer.php:904 includes/cosmica-customizer.php:950
+#: includes/cosmica-customizer.php:994 includes/cosmica-customizer.php:1039
+#: includes/cosmica-customizer.php:1086 includes/cosmica-customizer.php:1132
+msgid "Lorem ipsum"
+msgstr ""
+
+#: includes/comica-variables.php:25 includes/comica-variables.php:27
+#: includes/comica-variables.php:29 includes/comica-variables.php:31
+#: includes/comica-variables.php:33 includes/comica-variables.php:35
+#: includes/cosmica-customizer.php:921 includes/cosmica-customizer.php:967
+#: includes/cosmica-customizer.php:1011 includes/cosmica-customizer.php:1056
+#: includes/cosmica-customizer.php:1103 includes/cosmica-customizer.php:1149
+msgid ""
+"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod "
+"tempor incididunt ut labore et dolore magna aliqua."
+msgstr ""
+
+#: includes/comica-variables.php:38 includes/comica-variables.php:43
+#: includes/comica-variables.php:48 includes/comica-variables.php:53
+#: includes/cosmica-customizer.php:235 includes/cosmica-customizer.php:310
+#: includes/cosmica-customizer.php:383 includes/cosmica-customizer.php:456
+msgid "Awesome Responsive Theme"
+msgstr ""
+
+#: includes/comica-variables.php:39 includes/comica-variables.php:44
+#: includes/comica-variables.php:49 includes/comica-variables.php:54
+#: includes/cosmica-customizer.php:252 includes/cosmica-customizer.php:327
+#: includes/cosmica-customizer.php:400 includes/cosmica-customizer.php:473
+msgid ""
+"Cosmica is responsive WordPress theme for any business purpose. Cosmica have "
+"Theme Options where you can set social media links and other customization "
+"to theme."
+msgstr ""
+
+#: includes/cosmica-customizer.php:12
+msgid "UPGRADE  TO PRO "
+msgstr ""
+
+#: includes/cosmica-customizer.php:25
+msgid "ADD REVIEW"
+msgstr ""
+
+#: includes/cosmica-customizer.php:38
+msgid "DOCUMENTATION"
+msgstr ""
+
+#: includes/cosmica-customizer.php:41
+msgid ""
+"The Pro Version gives you more opportunities to enhance your site and "
+"business. In order to create effective online presence one have to showcase "
+"their wide range of products, have to use contact us enquiry form, have to "
+"make effective about us page, have to introduce team members, etc etc . The "
+"pro version will give it all. Buy the pro version and give us a chance to "
+"serve you better. "
+msgstr ""
+
+#: includes/cosmica-customizer.php:54 includes/cosmica-customizer.php:127
+msgid "Add More Services Get Pro"
+msgstr ""
+
+#: includes/cosmica-customizer.php:67 includes/cosmica-customizer.php:145
+msgid "Add More Slides Get Pro"
+msgstr ""
+
+#: includes/cosmica-customizer.php:76
+msgid "UPGRADE  TO PRO VERSION"
+msgstr ""
+
+#: includes/cosmica-customizer.php:86 includes/cosmica-customizer.php:97
+#: includes/cosmica-customizer.php:108
+msgid "Discover Cosmica Pro"
+msgstr ""
+
+#: includes/cosmica-customizer.php:116
+msgid "Add More service"
+msgstr ""
+
+#: includes/cosmica-customizer.php:134
+msgid "Add More Slides"
+msgstr ""
+
+#: includes/cosmica-customizer.php:162 includes/cosmica-customizer.php:167
+msgid "Logo Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:163
+msgid "customize Logo"
+msgstr ""
+
+#: includes/cosmica-customizer.php:187
+msgid "Show Logo"
+msgstr ""
+
+#: includes/cosmica-customizer.php:197
+msgid "Slider Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:198 includes/cosmica-customizer.php:526
+msgid "customize Slider"
+msgstr ""
+
+#: includes/cosmica-customizer.php:202
+msgid "Cosmica Slider ON/OFF"
+msgstr ""
+
+#: includes/cosmica-customizer.php:222
+msgid "Hide Home Slider "
+msgstr ""
+
+#: includes/cosmica-customizer.php:227
+msgid "Slide 1"
+msgstr ""
+
+#: includes/cosmica-customizer.php:247 includes/cosmica-customizer.php:322
+#: includes/cosmica-customizer.php:395 includes/cosmica-customizer.php:468
+msgid "Heading"
+msgstr ""
+
+#: includes/cosmica-customizer.php:263 includes/cosmica-customizer.php:338
+#: includes/cosmica-customizer.php:411 includes/cosmica-customizer.php:484
+#: includes/cosmica-customizer.php:932 includes/cosmica-customizer.php:978
+#: includes/cosmica-customizer.php:1022 includes/cosmica-customizer.php:1067
+#: includes/cosmica-customizer.php:1114 includes/cosmica-customizer.php:1160
+msgid "Description"
+msgstr ""
+
+#: includes/cosmica-customizer.php:279 includes/cosmica-customizer.php:354
+#: includes/cosmica-customizer.php:427 includes/cosmica-customizer.php:500
+msgid "Button 1 Link "
+msgstr ""
+
+#: includes/cosmica-customizer.php:295 includes/cosmica-customizer.php:370
+#: includes/cosmica-customizer.php:443 includes/cosmica-customizer.php:516
+msgid "Button 2 Link "
+msgstr ""
+
+#: includes/cosmica-customizer.php:302
+msgid "Slide 2"
+msgstr ""
+
+#: includes/cosmica-customizer.php:375
+msgid "Slide 3"
+msgstr ""
+
+#: includes/cosmica-customizer.php:448
+msgid "Slide 4"
+msgstr ""
+
+#: includes/cosmica-customizer.php:525
+msgid "Social Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:530
+msgid "Cosmica Social"
+msgstr ""
+
+#: includes/cosmica-customizer.php:549
+msgid "Open social links in new tab"
+msgstr ""
+
+#: includes/cosmica-customizer.php:567
+msgid "Facebook Page URL"
+msgstr ""
+
+#: includes/cosmica-customizer.php:586
+msgid "Google Page URL"
+msgstr ""
+
+#: includes/cosmica-customizer.php:604
+msgid "Youtube Page URL"
+msgstr ""
+
+#: includes/cosmica-customizer.php:622
+msgid "Twitter Page URL"
+msgstr ""
+
+#: includes/cosmica-customizer.php:640
+msgid "Linkedin Page URL"
+msgstr ""
+
+#: includes/cosmica-customizer.php:645
+msgid "Contact Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:648
+msgid "Allows you to add contact email and phone number"
+msgstr ""
+
+#: includes/cosmica-customizer.php:667
+msgid "Enter Email"
+msgstr ""
+
+#: includes/cosmica-customizer.php:686
+msgid "Enter Phone Number"
+msgstr ""
+
+#: includes/cosmica-customizer.php:694
+msgid "Footer Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:698
+msgid "Footer Copyright"
+msgstr ""
+
+#: includes/cosmica-customizer.php:718
+msgid "Copyright Info"
+msgstr ""
+
+#: includes/cosmica-customizer.php:725
+msgid "Call Out Box Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:729
+msgid "Call Out Box Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:749 includes/cosmica-customizer.php:766
+msgid "Call Out Header Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:771
+msgid "Call Out Box Buttons"
+msgstr ""
+
+#: includes/cosmica-customizer.php:791
+msgid "Button 1 Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:808
+msgid "Button 1 Link"
+msgstr ""
+
+#: includes/cosmica-customizer.php:828
+msgid "Button 2 Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:845
+msgid "Button 2 Link"
+msgstr ""
+
+#: includes/cosmica-customizer.php:851
+msgid "Services Settings"
+msgstr ""
+
+#: includes/cosmica-customizer.php:855
+msgid "Services Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:875
+msgid "Title Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:891
+msgid "Description Text"
+msgstr ""
+
+#: includes/cosmica-customizer.php:896
+msgid "Services 1"
+msgstr ""
+
+#: includes/cosmica-customizer.php:916 includes/cosmica-customizer.php:962
+#: includes/cosmica-customizer.php:1006 includes/cosmica-customizer.php:1051
+#: includes/cosmica-customizer.php:1098 includes/cosmica-customizer.php:1144
+msgid "Title"
+msgstr ""
+
+#: includes/cosmica-customizer.php:942
+msgid "Services 2"
+msgstr ""
+
+#: includes/cosmica-customizer.php:986
+msgid "Services 3"
+msgstr ""
+
+#: includes/cosmica-customizer.php:1031
+msgid "Services 4"
+msgstr ""
+
+#: includes/cosmica-customizer.php:1078
+msgid "Services 5"
+msgstr ""
+
+#: includes/cosmica-customizer.php:1124
+msgid "Services 6"
+msgstr ""
+
+#: includes/loop-index.php:17 includes/loop-page.php:17
+#: includes/loop-search.php:18 includes/loop-single.php:16
+#, php-format
+msgid "View all posts by %s"
+msgstr ""
+
+#: includes/loop-index.php:25 includes/loop-page.php:24
+#: includes/loop-search.php:25 includes/loop-single.php:23
+msgid "Comments"
+msgstr ""
+
+#: includes/loop-index.php:25 includes/loop-page.php:24
+#: includes/loop-search.php:25 includes/loop-single.php:23
+msgid "Comment"
+msgstr ""
+
+#: includes/loop-index.php:31 includes/loop-index.php:53
+#: includes/loop-page.php:30 includes/loop-page.php:64
+#: includes/loop-search.php:31 includes/loop-search.php:53
+#: includes/loop-single.php:29 includes/loop-single.php:63
+msgid ", "
+msgstr ""
+
+#: includes/loop-index.php:38 includes/loop-page.php:37
+#: includes/loop-search.php:38 includes/loop-single.php:36
+msgid "Edit"
+msgstr ""
+
+#: includes/loop-page.php:51 includes/loop-single.php:50
+msgid "Pages:"
+msgstr ""
+
+#: includes/loop-page.php:55 includes/loop-single.php:54
+msgid "Page"
+msgstr ""
+
+#: includes/loop-search.php:3
+#, php-format
+msgid "Search Results for: %s"
+msgstr ""
+
+#: includes/loop-search.php:67
+msgid "Nothing Found"
+msgstr ""
+
+#: includes/loop-search.php:69
+msgid ""
+"Sorry, but nothing matched your search criteria. Please try again with some "
+"different keywords."
+msgstr ""
+
+#: includes/loop-single.php:74
+msgid "Previous Post"
+msgstr ""
+
+#: includes/loop-single.php:75
+msgid "Next Post"
+msgstr ""

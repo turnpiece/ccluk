@@ -129,7 +129,7 @@ left: -10px;
 }
 
 .flex-caption h1 {
-     font-family: 'Dosis', sans-serif;
+     font-family: 'OPen Sans', sans-serif;
       display: inline-block;
     margin: 0;
     padding: 0 10px;
@@ -199,12 +199,6 @@ margin-right: 0 !important;
 
 .sliderWrapper {  margin-bottom: 50px; }
 
-.sliderLogo {
-    position: absolute;
-    z-index: 999;
-    top: 10%;
- 
-}
 .carouselWrapper {
     background: #f6f6f6;
     padding: 20px 0;

@@ -204,7 +204,6 @@ jQuery(window).resize(function() {
 
     jQuery('.flex-caption div').css('left', 0);
     var offset = jQuery('.mainNav').offset().left;
-    jQuery('.sliderLogo').css('left', offset);
 
    
 

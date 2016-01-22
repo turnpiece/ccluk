@@ -20,7 +20,6 @@
                 $smallfooter = $options['smallfooter'];
                 $linkscolor = $options['linkscolor'];
                 $linkshovercolor = $options['linkshovercolor'];
-                $accent = $options['accent'];
 		
 	
 		?>
@@ -55,36 +54,6 @@ a.continue:hover,
 .caption-btn li a:hover
 
 { color:' . $linkshovercolor . '; }
-      
-.dd_events_post .continue, 
-.widget_btn .continue,
-.dd_causes_widget li ul a,
-.dd_news h1 a, 
-.dd_news_post h1 a
-
-{ background:' . $accent . '; }
-
-.dd_news h1, .dd_news_post h1 {
-    -webkit-box-shadow:inset 10px 0 0 ' . $accent . ';
-    -moz-box-shadow:inset 10px 0 0 ' . $accent . ';
-    box-shadow:inset 10px 0 0 ' . $accent . ';
-}
-
-.dd_news h1 a, .dd_news_post h1 a{
-    -webkit-box-shadow:10px 0 0 ' . $accent . ' ;
-    -moz-box-shadow: 10px 0 0 ' . $accent . ' ;
-    box-shadow: 10px 0 0 ' . $accent . ';
-}
-
-footer .one-third, .mainNav  {
-    border-top: 3px solid ' . $accent . ';
-}
-
-footer h3, footer ul h3  {
-    color: ' . $accent . ';
-}
-
-
      
 
 	'; 

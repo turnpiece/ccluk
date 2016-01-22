@@ -133,10 +133,6 @@ $headerimg = get_post_meta(get_the_ID(), 'headerimg', true);
             
             <div class="sixteen columns">
                 
-              <div class="sliderLogo">  
-                
-              </div>
-                
             </div>
             
         </div>
