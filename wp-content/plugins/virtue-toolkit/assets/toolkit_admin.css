@@ -1,0 +1,10 @@
+.kad_image_gallery .attachment.details .check div {background-position: -60px 0;}
+.kad_image_gallery .attachment.details .check:hover div {background-position: -60px 0;}
+.kad_image_gallery .gallery_images .details.attachment {box-shadow: none;}
+.kad_image_gallery .eig-metabox-sortable-placeholder {background: #DFDFDF;}
+.kad_image_gallery .gallery_images .attachment.details > div {width: 150px; height: 150px; box-shadow: none;}
+.kad_image_gallery .gallery_images .attachment-preview .thumbnail {cursor: move;}
+.kad_image_gallery .attachment.details div:hover .check {display:block;}
+.kad_image_gallery .gallery_images:after, .kad_image_gallery #gallery_images_container:after { content: "."; display: block; height: 0; clear: both; visibility: hidden; }
+.kad_image_gallery .gallery_images > li {float: left; cursor: move; margin: 0 20px 20px 0; width: auto;}
+.kad_image_gallery .gallery_images li.image img {width: 150px; height: auto;}

@@ -76,7 +76,16 @@
         <div class="container clearfix">
           
             <div class="sixteen columns">
-     
+                
+                <div class="siteLogo">
+                  <a href="<?php echo home_url(); ?>">
+                  <?php if (ot_get_option('logo')) : ?>
+                    <img alt="<?php echo esc_attr(get_bloginfo('name')) ?>" src="<?php echo ot_get_option('logo') ?>" />
+                  <?php else : ?>
+                    <h1><?php bloginfo('name') ?></h1>
+                  <?php endif; ?>
+                  </a>
+                </div>
                 
                  <nav class="mainNav">
 
@@ -96,102 +105,13 @@
                     );
                     ?>
                  
-               
+                  <?php if (ot_get_option('topbarsearch') == 'yes') : ?>
+                  <div class="topBarSearch clearfix">
+                    <?php get_search_form(); ?>
+                  </div>
+                  <?php endif; ?>
 
                 </nav>
-            
-            <nav class="secondaryNav">
-                
-                
-                    <div class="container mobileNav">
-                        
-                    <div class="sixteen columns mobileNavWrapper"></div>
-                    
-                </div>
-                
-                    <ul>
-                    
-                        <?php if (ot_get_option('donatelink') != '') { ?>
-                        
-                        <li class="donate"><a href="<?php echo ot_get_option('donatelink') ?>"><i class="icon-plus-circled"></i><?php echo ot_get_option('donatebtntext') ?></a></li>
-                        
-                            <?php } ?>
-                        
-                         <?php if (ot_get_option('contactlink') != '') { ?>
-                        <li class="mail"><a href="<?php echo ot_get_option('contactlink') ?>"><i class="icon-mail"></i></a></li>
-                              <?php } ?>
-                        
-                        <?php if (ot_get_option('twitterlink') != '') { ?>
-                        <li class="twitter"><a href="<?php echo ot_get_option('twitterlink') ?>"><i class="icon-twitter"></i></a></li>
-                              <?php } ?>
-                        
-                          <?php if (ot_get_option('youtubelink') != '') { ?>
-                        <li class="youtube"><a href="<?php echo ot_get_option('youtubelink') ?>"><i class="icon-youtube"></i></a></li>
-                              <?php } ?>
-                        
-                         <?php if (ot_get_option('facebooklink') != '') { ?>
-                        <li class="facebook"><a href="<?php echo ot_get_option('facebooklink') ?>"><i class="icon-facebook"></i></a></li>
-                              <?php } ?>
-                        
-                         
-                        
-                         <?php if (ot_get_option('vimeolink') != '') { ?>
-                        <li class="vimeo"><a href="<?php echo ot_get_option('vimeolink') ?>"><i class="icon-vimeo"></i></a></li>
-                              <?php } ?>
-                        
-                         <?php if (ot_get_option('googlelink') != '') { ?>
-                        <li class="google"><a href="<?php echo ot_get_option('googlelink') ?>"><i class="icon-gplus"></i></a></li>
-                              <?php } ?>
-                        
-                   
-                        
-                         <?php if (ot_get_option('flickrlink') != '') { ?>
-                        <li class="flickr"><a href="<?php echo ot_get_option('flickrlink') ?>"><i class="icon-dot-2"></i></a></li>
-                              <?php } ?>
-                        
-                  
-                        
-                              <?php if (ot_get_option('pinterestlink') != '') { ?>
-                        <li class="pinterest"><a href="<?php echo ot_get_option('pinterestlink') ?>"><i class="icon-pinterest"></i></a></li>
-                              <?php } ?>
-                               <?php if (ot_get_option('linkedinlink') != '') { ?>
-                        <li class="linkedin"><a href="<?php echo ot_get_option('linkedinlink') ?>"><i class="icon-linkedin"></i></a></li>
-                              <?php } ?>
-                          <?php if (ot_get_option('dribbblelink') != '') { ?>
-                        <li class="dribbble"><a href="<?php echo ot_get_option('dribbblelink') ?>"><i class="icon-dribbble"></i></a></li>
-                              <?php } ?>
-                        
-                        <?php if (ot_get_option('instagramlink') != '') { ?>
-                        <li class="instagram"><a href="<?php echo ot_get_option('instagramlink') ?>"><i class="icon-instagram"></i></a></li>
-                              <?php } ?>
-                        
-                         <?php if (ot_get_option('behancelink') != '') { ?>
-                        <li class="behance"><a href="<?php echo ot_get_option('behancelink') ?>"><i class="icon-behance"></i></a></li>
-                              <?php } ?>
-                        
-                        
-                         <?php if (ot_get_option('topbarsearch') == 'yes') { ?>
-                        <li class="searchForm"><a href="#"><i class="icon-search-1"></i><i class="icon-cancel"></i></a></li>
-                              <?php } ?>
-                        
-                    
-
-                </ul>
-                
-                  <?php if (ot_get_option('topbarsearch') == 'yes') { ?>
-                
-                  <div class="topBarSearch clearfix">
-                    
-                      <?php get_search_form(); ?>
-                    
-                </div>
-                
-              
-
-                
-                    <?php } ?>
-                
-            </nav>
                 
             </div>
             
@@ -214,7 +134,7 @@ $headerimg = get_post_meta(get_the_ID(), 'headerimg', true);
             <div class="sixteen columns">
                 
               <div class="sliderLogo">  
-                <a href="<?php echo home_url(); ?>"><img alt="" src="<?php echo ot_get_option('logo') ?>" /></a>
+                
               </div>
                 
             </div>

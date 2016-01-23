@@ -1,0 +1,45 @@
+@charset "UTF-8";
+
+ 
+.icon-youtube:before { content: '\55'; } /* 'U' */
+.icon-star:before { content: '\2605'; } /* '★' */
+.icon-heart:before { content: '\2665'; } /* '♥' */
+.icon-mail:before { content: '\2709'; } /* '✉' */
+.icon-cancel:before { content: '\2715'; } /* '✕' */
+.icon-plus-circled:before { content: '\2795'; } /* '➕' */
+.icon-list-add:before { content: '\e003'; } /* '' */
+.icon-video-1:before { content: '\e012'; } /* '' */
+.icon-user:before { content: '\e013'; } /* '' */
+.icon-tag:before { content: '\e70c'; } /* '' */
+.icon-export:before { content: '\e715'; } /* '' */
+.icon-comment:before { content: '\e718'; } /* '' */
+.icon-location:before { content: '\e724'; } /* '' */
+.icon-docs:before { content: '\e736'; } /* '' */
+.icon-rss:before { content: '\e73a'; } /* '' */
+.icon-left-open:before { content: '\e75d'; } /* '' */
+.icon-right-open:before { content: '\e75e'; } /* '' */
+.icon-dot-2:before { content: '\e78c'; } /* '' */
+.icon-twitter-2:before { content: '\f058'; } /* '' */
+.icon-user-male:before { content: '\f062'; } /* '' */
+.icon-twitter-1:before { content: '\f099'; } /* '' */
+.icon-facebook-1:before { content: '\f09a'; } /* '' */
+.icon-vimeo:before { content: '\f306'; } /* '' */
+.icon-twitter:before { content: '\f309'; } /* '' */
+.icon-facebook:before { content: '\f30c'; } /* '' */
+.icon-gplus:before { content: '\f30f'; } /* '' */
+.icon-pinterest:before { content: '\f312'; } /* '' */
+.icon-linkedin:before { content: '\f318'; } /* '' */
+.icon-dribbble:before { content: '\f31b'; } /* '' */
+.icon-instagram:before { content: '\f32d'; } /* '' */
+.icon-skype:before { content: '\f339'; } /* '' */
+.icon-skype-circled:before { content: '\f33a'; } /* '' */
+.icon-behance:before { content: '\f34e'; } /* '' */
+.icon-vkontakte:before { content: '\f354'; } /* '' */
+.icon-picture:before { content: '🌄'; } /* '\1f304' */
+.icon-picture-1:before { content: '\e801'; } /* '' */
+.icon-videocam:before { content: '🎥'; } /* '\1f3a5' */
+.icon-video:before { content: '🎬'; } /* '\1f3ac' */
+.icon-user-1:before { content: '👤'; } /* '\1f464' */
+.icon-calendar:before { content: '📅'; } /* '\1f4c5' */
+.icon-phone:before { content: '📞'; } /* '\1f4de' */
+.icon-search-1:before { content: '\e800'; } /* '' */
