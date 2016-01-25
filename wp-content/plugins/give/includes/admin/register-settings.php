@@ -50,13 +50,14 @@ class Give_Plugin_Settings {
 
 		//Custom CMB2 Settings Fields
 		add_action( 'cmb2_render_give_title', 'give_title_callback', 10, 5 );
+		add_action( 'cmb2_render_give_description', 'give_description_callback', 10, 5 );
 		add_action( 'cmb2_render_enabled_gateways', 'give_enabled_gateways_callback', 10, 5 );
 		add_action( 'cmb2_render_default_gateway', 'give_default_gateway_callback', 10, 5 );
 		add_action( 'cmb2_render_email_preview_buttons', 'give_email_preview_buttons_callback', 10, 5 );
 		add_action( 'cmb2_render_system_info', 'give_system_info_callback', 10, 5 );
 		add_action( 'cmb2_render_api', 'give_api_callback', 10, 5 );
 		add_action( 'cmb2_render_license_key', 'give_license_key_callback', 10, 5 );
-		add_action( "cmb2_save_options-page_fields", array( $this, 'settings_notices' ), 10, 3 );
+		add_action( 'admin_notices', array( $this, 'settings_notices' ) );
 
 		// Include CMB CSS in the head to avoid FOUC
 		add_action( "admin_print_styles-give_forms_page_give-settings", array( 'CMB2_hookup', 'enqueue_cmb_css' ) );
@@ -179,7 +180,7 @@ class Give_Plugin_Settings {
 				'fields'     => apply_filters( 'give_settings_general', array(
 						array(
 							'name' => __( 'General Settings', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'type' => 'give_title',
 							'id'   => 'give_title_general_settings_1'
 						),
@@ -222,7 +223,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Currency Settings', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'type' => 'give_title',
 							'id'   => 'give_title_general_settings_2'
 						),
@@ -272,7 +273,7 @@ class Give_Plugin_Settings {
 				'fields'     => apply_filters( 'give_settings_gateways', array(
 						array(
 							'name' => __( 'Gateways Settings', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_gateway_settings_1',
 							'type' => 'give_title'
 						),
@@ -296,7 +297,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'PayPal Standard', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'type' => 'give_title',
 							'id'   => 'give_title_gateway_settings_2',
 						),
@@ -331,7 +332,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Offline Donations', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'type' => 'give_title',
 							'id'   => 'give_title_gateway_settings_3',
 						),
@@ -379,7 +380,7 @@ class Give_Plugin_Settings {
 				'fields'     => apply_filters( 'give_settings_display', array(
 						array(
 							'name' => __( 'Display Settings', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_display_settings_1',
 							'type' => 'give_title'
 						),
@@ -403,7 +404,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Post Types', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_display_settings_2',
 							'type' => 'give_title'
 						),
@@ -439,7 +440,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Taxonomies', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_display_settings_3',
 							'type' => 'give_title'
 						),
@@ -469,7 +470,7 @@ class Give_Plugin_Settings {
 				'fields'     => apply_filters( 'give_settings_emails', array(
 						array(
 							'name' => __( 'Email Settings', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_email_settings_1',
 							'type' => 'give_title'
 						),
@@ -502,7 +503,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Donation Receipt', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_email_settings_2',
 							'type' => 'give_title'
 						),
@@ -522,7 +523,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'New Donation Notification', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_email_settings_3',
 							'type' => 'give_title'
 						),
@@ -580,7 +581,7 @@ class Give_Plugin_Settings {
 				'fields'     => apply_filters( 'give_settings_advanced', array(
 						array(
 							'name' => __( 'Session Control', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_session_control_1',
 							'type' => 'give_title'
 						),
@@ -598,7 +599,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Data Control', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_data_control_2',
 							'type' => 'give_title'
 						),
@@ -610,7 +611,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Filter Control', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_filter_control',
 							'type' => 'give_title'
 						),
@@ -622,7 +623,7 @@ class Give_Plugin_Settings {
 						),
 						array(
 							'name' => __( 'Script Loading', 'give' ),
-							'desc' => '<hr>',
+							'desc' => '',
 							'id'   => 'give_title_script_control',
 							'type' => 'give_title'
 						),
@@ -684,15 +685,10 @@ class Give_Plugin_Settings {
 	 * @param $updated
 	 * @param $cmb
 	 */
-	public function settings_notices( $object_id, $updated, $cmb ) {
+	public function settings_notices() {
 
-		//Sanity check
-		if ( $object_id !== $this->key ) {
+		if ( ! isset( $_POST['give_settings_saved'] ) ) {
 			return;
-		}
-
-		if ( did_action( 'cmb2_save_options-page_fields' ) === 1 ) {
-			settings_errors( 'give-notices' );
 		}
 
 		add_settings_error( 'give-notices', 'global-settings-updated', __( 'Settings updated.', 'give' ), 'updated' );
@@ -847,6 +843,46 @@ function give_get_settings() {
 
 }
 
+
+/**
+ * Give Settings Array Insert
+ *
+ * @description: Allows other Add-ons and plugins to insert Give settings at a desired position
+ *
+ * @since      1.3.5
+ *
+ * @param $array
+ * @param $position |int|string Expects an array key or 'id' of the settings field to appear after
+ * @param $insert   |array a valid array of options to insert
+ *
+ * @return array
+ */
+function give_settings_array_insert( $array, $position, $insert ) {
+	if ( is_int( $position ) ) {
+		array_splice( $array, $position, 0, $insert );
+	} else {
+
+		foreach ( $array as $index => $subarray ) {
+			if ( isset( $subarray['id'] ) && $subarray['id'] == $position ) {
+				$pos = $index;
+			}
+		}
+
+		if ( ! isset( $pos ) ) {
+			return $array;
+		}
+
+		$array = array_merge(
+			array_slice( $array, 0, $pos ),
+			$insert,
+			array_slice( $array, $pos )
+		);
+	}
+
+	return $array;
+}
+
+
 /**
  * Gateways Callback
  *
@@ -934,7 +970,7 @@ function give_default_gateway_callback( $field_object, $escaped_value, $object_i
 /**
  * Give Title
  *
- * Renders custom section titles output; Really only an <hr> because CMB2's output is a bit funky
+ * Renders custom section titles output; Really only an  because CMB2's output is a bit funky
  *
  * @since 1.0
  *
@@ -948,7 +984,29 @@ function give_title_callback( $field_object, $escaped_value, $object_id, $object
 	$title             = $field_type_object->field->args['name'];
 	$field_description = $field_type_object->field->args['desc'];
 
-	echo '<hr>';
+	echo '<hr>' . $field_description;
+
+}
+
+/**
+ * Give Description
+ *
+ * @description: Renders custom description text which any plugin can use to output content, html, php, etc.
+ *
+ * @since      1.3.5
+ *
+ * @param       $field_object , $escaped_value, $object_id, $object_type, $field_type_object
+ *
+ * @return void
+ */
+function give_description_callback( $field_object, $escaped_value, $object_id, $object_type, $field_type_object ) {
+
+	$id                = $field_type_object->field->args['id'];
+	$title             = $field_type_object->field->args['name'];
+	$field_description = $field_type_object->field->args['desc'];
+
+
+	echo $field_description;
 
 }
 
@@ -1003,7 +1061,7 @@ function give_modify_cmb2_form_output( $form_format, $object_id, $cmb ) {
 	//only modify the give settings form
 	if ( 'give_settings' == $object_id && 'options_page' == $cmb->cmb_id ) {
 
-		return '<form class="cmb-form" method="post" id="%1$s" enctype="multipart/form-data" encoding="multipart/form-data"><input type="hidden" name="object_id" value="%2$s">%3$s<div class="give-submit-wrap"><input type="submit" name="submit-cmb" value="' . __( 'Save Settings', 'give' ) . '" class="button-primary"></div></form>';
+		return '<form class="cmb-form" method="post" id="%1$s" enctype="multipart/form-data" encoding="multipart/form-data"><input type="hidden" name="give_settings_saved" value="true"><input type="hidden" name="object_id" value="%2$s">%3$s<div class="give-submit-wrap"><input type="submit" name="submit-cmb" value="' . __( 'Save Settings', 'give' ) . '" class="button-primary"></div></form>';
 	}
 
 	return $form_format;

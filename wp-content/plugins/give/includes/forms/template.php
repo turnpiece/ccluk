@@ -528,7 +528,7 @@ function give_get_cc_form( $form_id ) {
 			</div>
 		<?php endif; ?>
 		<p id="give-card-number-wrap-<?php echo $form_id ?>" class="form-row form-row-two-thirds">
-			<label for="card_number" class="give-label">
+			<label for="card_number-<?php echo $form_id ?>" class="give-label">
 				<?php _e( 'Card Number', 'give' ); ?>
 				<span class="give-required-indicator">*</span>
 				<span class="give-tooltip give-icon give-icon-question" data-tooltip="<?php _e( 'The (typically) 16 digits on the front of your credit card.', 'give' ); ?>"></span>
@@ -539,7 +539,7 @@ function give_get_cc_form( $form_id ) {
 		</p>
 
 		<p id="give-card-cvc-wrap-<?php echo $form_id ?>" class="form-row form-row-one-third">
-			<label for="card_cvc" class="give-label">
+			<label for="card_cvc-<?php echo $form_id ?>" class="give-label">
 				<?php _e( 'CVC', 'give' ); ?>
 				<span class="give-required-indicator">*</span>
 				<span class="give-tooltip give-icon give-icon-question" data-tooltip="<?php _e( 'The 3 digit (back) or 4 digit (front) value on your card.', 'give' ); ?>"></span>
@@ -549,7 +549,7 @@ function give_get_cc_form( $form_id ) {
 		</p>
 
 		<p id="give-card-name-wrap-<?php echo $form_id ?>" class="form-row form-row-two-thirds">
-			<label for="card_name" class="give-label">
+			<label for="card_name-<?php echo $form_id ?>" class="give-label">
 				<?php _e( 'Name on the Card', 'give' ); ?>
 				<span class="give-required-indicator">*</span>
 				<span class="give-tooltip give-icon give-icon-question" data-tooltip="<?php _e( 'The name printed on the front of your credit card.', 'give' ); ?>"></span>
@@ -804,11 +804,11 @@ function give_get_register_fields( $form_id ) {
 
 			<p id="give-user-pass-confirm-wrap" class="give_register_password form-row form-row-one-third">
 				<label for="password_again">
-					<?php _e( 'Password Again', 'give' ); ?>
+					<?php _e( 'Confirm Password', 'give' ); ?>
 					<?php if ( give_no_guest_checkout( $form_id ) ) { ?>
 						<span class="give-required-indicator">*</span>
 					<?php } ?>
-					<span class="give-tooltip give-icon give-icon-question" data-tooltip="<?php _e( 'Confirm your password.', 'give' ); ?>"></span>
+					<span class="give-tooltip give-icon give-icon-question" data-tooltip="<?php _e( 'Please retype your password to confirm.', 'give' ); ?>"></span>
 				</label>
 
 				<input name="give_user_pass_confirm" id="give_user_pass_confirm" class="<?php if ( give_no_guest_checkout( $form_id ) ) {
@@ -1184,7 +1184,7 @@ function give_show_goal_progress( $form_id, $args ) {
 		$progress = 100;
 	}
 
-	$output = '<div class="goal-progress">';
+	$output = '<div class="give-goal-progress">';
 
 	//Goal Progress Text
 	if ( ! empty( $show_text ) ) {
@@ -1194,13 +1194,13 @@ function give_show_goal_progress( $form_id, $args ) {
 	}
 	//Goal Progress Bar
 	if ( ! empty( $show_bar ) ) {
-		$output .= '<div class="progress-bar">';
+		$output .= '<div class="give-progress-bar">';
 		$output .= '<span style="width: ' . esc_attr( $progress ) . '%;';
 		if ( ! empty( $color ) ) {
 			$output .= 'background-color:' . $color;
 		}
 		$output .= '"></span>';
-		$output .= '</div><!-- /.progress-bar -->';
+		$output .= '</div><!-- /.give-progress-bar -->';
 	}
 
 	$output .= '</div><!-- /.goal-progress -->';

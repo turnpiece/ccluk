@@ -5,9 +5,10 @@
  * Description: The most robust, flexible, and intuitive way to accept donations on WordPress.
  * Author: WordImpress
  * Author URI: http://wordimpress.com
- * Version: 1.3.4
+ * Version: 1.3.5
  * Text Domain: give
  * Domain Path: /languages
+ * GitHub Plugin URI: https://github.com/WordImpress/Give
  *
  * Give is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -202,7 +203,7 @@ if ( ! class_exists( 'Give' ) ) : /**
 
 			// Plugin version
 			if ( ! defined( 'GIVE_VERSION' ) ) {
-				define( 'GIVE_VERSION', '1.3.4' );
+				define( 'GIVE_VERSION', '1.3.5' );
 			}
 
 			// Plugin Folder Path
@@ -213,6 +214,11 @@ if ( ! class_exists( 'Give' ) ) : /**
 			// Plugin Folder URL
 			if ( ! defined( 'GIVE_PLUGIN_URL' ) ) {
 				define( 'GIVE_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
+			}
+
+			// Plugin Basename aka: "give/give.php"
+			if ( ! defined( 'GIVE_PLUGIN_BASENAME' ) ) {
+				define( 'GIVE_PLUGIN_BASENAME', plugin_basename( __FILE__ ) );
 			}
 
 			// Plugin Root File
@@ -360,10 +366,10 @@ if ( ! class_exists( 'Give' ) ) : /**
 				// Look in global /wp-content/languages/give folder
 				load_textdomain( 'give', $mofile_global );
 			} elseif ( file_exists( $mofile_local ) ) {
-				// Look in local /wp-content/plugins/give/languages/ folder
+				// Look in local location from filter `give_languages_directory`
 				load_textdomain( 'give', $mofile_local );
 			} else {
-				// Load the default language files
+				// Load the default language files packaged up w/ Give
 				load_plugin_textdomain( 'give', false, $give_lang_dir );
 			}
 		}

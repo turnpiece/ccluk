@@ -165,7 +165,7 @@ function give_get_users_completed_donations( $user = 0, $status = 'complete' ) {
 /**
  * Has Purchases
  *
- * Checks to see if a user has purchased at least one item.
+ * Checks to see if a user has donated to at least one form.
  *
  * @access      public
  * @since       1.0
@@ -196,7 +196,6 @@ function give_has_purchases( $user_id = null ) {
  * @since       1.0
  *
  * @param       $user int|string - the ID or email of the donor to retrieve stats for
- * @param       $mode string - "test" or "live"
  *
  * @return      array
  */
@@ -212,15 +211,20 @@ function give_get_purchase_stats_by_user( $user = '' ) {
 
 	}
 
+	$stats    = array();
 	$customer = Give()->customers->get_customer_by( $field, $user );
 
-	$customer = new Give_Customer( $customer->id );
+	if ( $customer ) {
 
-	$stats                = array();
-	$stats['purchases']   = absint( $customer->purchase_count );
-	$stats['total_spent'] = give_sanitize_amount( $customer->purchase_value );
+		$customer = new Give_Customer( $customer->id );
 
-	return (array) apply_filters( 'give_donation_stats_by_user', $stats, $user );
+		$stats['purchases']   = absint( $customer->purchase_count );
+		$stats['total_spent'] = give_sanitize_amount( $customer->purchase_value );
+
+	}
+
+
+	return (array) apply_filters( 'give_purchase_stats_by_user', $stats, $user );
 }
 
 
@@ -241,7 +245,7 @@ function give_count_purchases_of_customer( $user = null ) {
 		$user = get_current_user_id();
 	}
 
-	$stats = give_get_purchase_stats_by_user( $user );
+	$stats = ! empty( $user ) ? give_get_purchase_stats_by_user( $user ) : false;
 
 	return isset( $stats['purchases'] ) ? $stats['purchases'] : 0;
 }

@@ -205,7 +205,7 @@ add_shortcode( 'give_register', 'give_register_form_shortcode' );
  */
 function give_receipt_shortcode( $atts, $content = null ) {
 
-	global $give_receipt_args;
+	global $give_receipt_args, $payment;
 
 	$give_receipt_args = shortcode_atts( array(
 		'error'          => __( 'Sorry, it appears the viewing window for this donation receipt has expired or you do not have the permission to view this donation receipt.', 'give' ),
@@ -222,12 +222,11 @@ function give_receipt_shortcode( $atts, $content = null ) {
 	//set payment key var
 	if ( isset( $_GET['payment_key'] ) ) {
 		$payment_key = urldecode( $_GET['payment_key'] );
+	} elseif ( $session ) {
+		$payment_key = $session['purchase_key'];
 	} elseif ( $give_receipt_args['payment_key'] ) {
 		$payment_key = $give_receipt_args['payment_key'];
-	} else if ( $session ) {
-		$payment_key = $session['purchase_key'];
 	}
-
 
 	// No key found
 	if ( ! isset( $payment_key ) ) {

@@ -958,17 +958,17 @@ jQuery(document).ready(function($) {
 			if ( 'undefined' === typeof args.medium_file || 'undefined' === typeof args.large_file ) {
 				return args.orig_file;
 			}
-			
+
 			// Check if the image is being served by Photon (using a regular expression on the hostname).
-			
+
 			var imageLinkParser = document.createElement( 'a' );
 			imageLinkParser.href = args.large_file;
 
-			var isPhotonUrl = ( imageLinkParser.hostname.match(/^i[\d]{1}.wp.com$/i) != null );
-									
+			var isPhotonUrl = ( imageLinkParser.hostname.match( /^i[\d]{1}.wp.com$/i ) != null );
+
 			var medium_size_parts	= gallery.jp_carousel( 'getImageSizeParts', args.medium_file, args.orig_width, isPhotonUrl );
 			var large_size_parts	= gallery.jp_carousel( 'getImageSizeParts', args.large_file, args.orig_width, isPhotonUrl );
-									
+
 			var large_width       = parseInt( large_size_parts[0], 10 ),
 				large_height      = parseInt( large_size_parts[1], 10 ),
 				medium_width      = parseInt( medium_size_parts[0], 10 ),
@@ -987,26 +987,37 @@ jQuery(document).ready(function($) {
 			if ( medium_width >= args.max_width || medium_height >= args.max_height ) {
 				return args.medium_file;
 			}
+			
+			if ( isPhotonUrl ) {
+				// args.orig_file doesn't point to a Photon url, so in this case we use args.large_file
+				// to return the photon url of the original image.
+				var largeFileIndex = args.large_file.lastIndexOf( '?' );
+				var origPhotonUrl = args.large_file;
+				if ( -1 !== largeFileIndex ) {
+					origPhotonUrl = args.large_file.substring( 0, largeFileIndex );
+				}
+				return origPhotonUrl;
+			}
 
 			return args.orig_file;
 		},
-		
+
 		getImageSizeParts: function( file, orig_width, isPhotonUrl ) {
 			var size		= isPhotonUrl ?
 							file.replace( /.*=([\d]+%2C[\d]+).*$/, '$1' ) :
 							file.replace( /.*-([\d]+x[\d]+)\..+$/, '$1' );
-						
+
 			var size_parts  = ( size !== file ) ?
 							( isPhotonUrl ? size.split( '%2C' ) : size.split( 'x' ) ) :
 							[ orig_width, 0 ];
 
 			// If one of the dimensions is set to 9999, then the actual value of that dimension can't be retrieved from the url.
 			// In that case, we set the value to 0.
-			if ( size_parts[0] === '9999' ) {
+			if ( '9999' === size_parts[0] ) {
 				size_parts[0] = '0';
 			}
 			
-			if ( size_parts[1] === '9999' ) {
+			if ( '9999' === size_parts[1] ) {
 				size_parts[1] = '0';
 			}
 
@@ -1466,6 +1477,7 @@ jQuery(document).ready(function($) {
 
 	// Makes carousel work on page load and when back button leads to same URL with carousel hash (ie: no actual document.ready trigger)
 	$( window ).on( 'hashchange', function () {
+
 		var hashRegExp = /jp-carousel-(\d+)/,
 			matches, attachmentId, galleries, selectedThumbnail;
 
