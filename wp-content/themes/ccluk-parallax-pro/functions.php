@@ -6,7 +6,7 @@ include_once( get_template_directory() . '/lib/init.php' );
 include_once( get_stylesheet_directory() . '/lib/theme-defaults.php' );
 
 //* Set Localization (do not remove)
-load_child_theme_textdomain( 'parallax', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'parallax' ) );
+load_child_theme_textdomain( 'ccluk', apply_filters( 'child_theme_textdomain', get_stylesheet_directory() . '/languages', 'ccluk' ) );
 
 //* Add Image upload to WordPress Theme Customizer
 add_action( 'customize_register', 'parallax_customizer' );
@@ -20,7 +20,7 @@ function parallax_customizer(){
 include_once( get_stylesheet_directory() . '/lib/output.php' );
 
 //* Child theme (do not remove)
-define( 'CHILD_THEME_NAME', 'Parallax Pro Theme' );
+define( 'CHILD_THEME_NAME', 'CCL UK' );
 define( 'CHILD_THEME_URL', 'http://my.studiopress.com/themes/parallax/' );
 define( 'CHILD_THEME_VERSION', '1.2.2' );
 
@@ -68,10 +68,10 @@ genesis_unregister_layout( 'sidebar-sidebar-content' );
 
 //* Add support for additional color styles
 add_theme_support( 'genesis-style-selector', array(
-	'parallax-pro-blue'   => __( 'Parallax Pro Blue', 'parallax' ),
-	'parallax-pro-green'  => __( 'Parallax Pro Green', 'parallax' ),
-	'parallax-pro-orange' => __( 'Parallax Pro Orange', 'parallax' ),
-	'parallax-pro-pink'   => __( 'Parallax Pro Pink', 'parallax' ),
+	'parallax-pro-blue'   => __( 'Parallax Pro Blue', 'ccluk' ),
+	'parallax-pro-green'  => __( 'Parallax Pro Green', 'ccluk' ),
+	'parallax-pro-orange' => __( 'Parallax Pro Orange', 'ccluk' ),
+	'parallax-pro-pink'   => __( 'Parallax Pro Pink', 'ccluk' ),
 ) );
 
 //* Unregister secondary sidebar
@@ -125,26 +125,26 @@ add_action( 'genesis_after_entry', 'genesis_after_entry_widget_area', 5 );
 //* Register widget areas
 genesis_register_sidebar( array(
 	'id'          => 'home-section-1',
-	'name'        => __( 'Home Section 1', 'parallax' ),
-	'description' => __( 'This is the home section 1 section.', 'parallax' ),
+	'name'        => __( 'Home Section 1', 'ccluk' ),
+	'description' => __( 'This is the home section 1 section.', 'ccluk' ),
 ) );
 genesis_register_sidebar( array(
 	'id'          => 'home-section-2',
-	'name'        => __( 'Home Section 2', 'parallax' ),
-	'description' => __( 'This is the home section 2 section.', 'parallax' ),
+	'name'        => __( 'Home Section 2', 'ccluk' ),
+	'description' => __( 'This is the home section 2 section.', 'ccluk' ),
 ) );
 genesis_register_sidebar( array(
 	'id'          => 'home-section-3',
-	'name'        => __( 'Home Section 3', 'parallax' ),
-	'description' => __( 'This is the home section 3 section.', 'parallax' ),
+	'name'        => __( 'Home Section 3', 'ccluk' ),
+	'description' => __( 'This is the home section 3 section.', 'ccluk' ),
 ) );
 genesis_register_sidebar( array(
 	'id'          => 'home-section-4',
-	'name'        => __( 'Home Section 4', 'parallax' ),
-	'description' => __( 'This is the home section 4 section.', 'parallax' ),
+	'name'        => __( 'Home Section 4', 'ccluk' ),
+	'description' => __( 'This is the home section 4 section.', 'ccluk' ),
 ) );
 genesis_register_sidebar( array(
 	'id'          => 'home-section-5',
-	'name'        => __( 'Home Section 5', 'parallax' ),
-	'description' => __( 'This is the home section 5 section.', 'parallax' ),
+	'name'        => __( 'Home Section 5', 'ccluk' ),
+	'description' => __( 'This is the home section 5 section.', 'ccluk' ),
 ) );

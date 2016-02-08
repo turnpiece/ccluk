@@ -898,7 +898,7 @@ Site Header
 ---------------------------------------------------------------------------------------------------- */
 
 .site-header {
-	background-color: #000;
+	background-color: #fff;
 	left: 0;
 	position: fixed;
 	top: 0;
@@ -935,7 +935,7 @@ Site Header
 
 .site-title a,
 .site-title a:hover {
-	color: #fff !important;
+	color: #000 !important;
 }
 
 .header-image .title-area {
@@ -969,7 +969,7 @@ Site Header
 .site-header .widget-area,
 .site-header .widget-area a,
 .site-header .widget-area h4 {
-	color: #fff;
+	color: #000;
 }
 
 .site-header .widget-area a:hover {
@@ -987,7 +987,7 @@ Site Navigation
 
 .genesis-nav-menu {
 	clear: both;
-	color: #fff;
+	color: #000;
 	font-family: Montserrat, sans-serif;
 	font-size: 16px;
 	font-weight: 400;
@@ -1006,7 +1006,7 @@ Site Navigation
 }
 
 .genesis-nav-menu a {
-	color: #fff;
+	color: #000;
 	display: block;
 	font-family: Montserrat, sans-serif;
 	padding: 27px 20px;
@@ -1065,7 +1065,7 @@ Site Navigation
 }
 
 .genesis-nav-menu > .right {
-	color: #fff;
+	color: #000;
 	display: inline-block;
 	list-style-type: none;
 	padding: 27px 20px;
@@ -1130,7 +1130,7 @@ Site Navigation
 }
 
 .responsive-menu-icon::before {
-	color: #fff;
+	color: #000;
 	content: "\f333";
 	font: normal 24px/1 'dashicons';
 	margin: 0 auto;
@@ -1175,7 +1175,7 @@ Content Area
 .home-odd h6,
 .home-odd .featured-content .entry-title a,
 .home-odd .widget-title {
-	color: #fff;
+	color: #000;
 }
 
 .home-odd .featured-content .entry-title a:hover {

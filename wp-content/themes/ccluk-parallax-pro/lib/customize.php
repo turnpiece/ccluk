@@ -22,15 +22,15 @@ class Child_Parallax_Image_Control extends WP_Customize_Image_Control {
 	 * @param array $args
 	 */
 	public function __construct( $manager, $id, $args ) {
-		$this->statuses = array( '' => __( 'No Image', 'parallax' ) );
+		$this->statuses = array( '' => __( 'No Image', 'ccluk' ) );
 
 		parent::__construct( $manager, $id, $args );
 
-		$this->add_tab( 'upload-new', __( 'Upload New', 'parallax' ), array( $this, 'tab_upload_new' ) );
-		$this->add_tab( 'uploaded',   __( 'Uploaded', 'parallax' ),   array( $this, 'tab_uploaded' ) );
+		$this->add_tab( 'upload-new', __( 'Upload New', 'ccluk' ), array( $this, 'tab_upload_new' ) );
+		$this->add_tab( 'uploaded',   __( 'Uploaded', 'ccluk' ),   array( $this, 'tab_uploaded' ) );
 		
 		if ( $this->setting->default )
-			$this->add_tab( 'default',  __( 'Default', 'parallax' ),  array( $this, 'tab_default_background' ) );
+			$this->add_tab( 'default',  __( 'Default', 'ccluk' ),  array( $this, 'tab_default_background' ) );
 
 		// Early priority to occur before $this->manager->prepare_controls();
 		add_action( 'customize_controls_init', array( $this, 'prepare_control' ), 5 );
@@ -51,7 +51,7 @@ class Child_Parallax_Image_Control extends WP_Customize_Image_Control {
 	$images = apply_filters( 'parallax_images', array( '1', '3', '5' ) );
 	
 	$wp_customize->add_section( 'parallax-settings', array(
-		'title'    => __( 'Background Images', 'parallax' ),
+		'title'    => __( 'Background Images', 'ccluk' ),
 		'priority' => 35,
 	) );
 
@@ -63,7 +63,7 @@ class Child_Parallax_Image_Control extends WP_Customize_Image_Control {
 		) );
 
 		$wp_customize->add_control( new Child_Parallax_Image_Control( $wp_customize, $image .'-image', array(
-			'label'    => sprintf( __( 'Featured Section %s Image:', 'parallax' ), $image ),
+			'label'    => sprintf( __( 'Featured Section %s Image:', 'ccluk' ), $image ),
 			'section'  => 'parallax-settings',
 			'settings' => $image .'-image',
 			'priority' => $image+1,
