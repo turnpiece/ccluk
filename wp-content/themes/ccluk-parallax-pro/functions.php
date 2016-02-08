@@ -67,13 +67,14 @@ genesis_unregister_layout( 'sidebar-content-sidebar' );
 genesis_unregister_layout( 'sidebar-sidebar-content' );
 
 //* Add support for additional color styles
+/*
 add_theme_support( 'genesis-style-selector', array(
 	'parallax-pro-blue'   => __( 'Parallax Pro Blue', 'ccluk' ),
 	'parallax-pro-green'  => __( 'Parallax Pro Green', 'ccluk' ),
 	'parallax-pro-orange' => __( 'Parallax Pro Orange', 'ccluk' ),
 	'parallax-pro-pink'   => __( 'Parallax Pro Pink', 'ccluk' ),
 ) );
-
+*/
 //* Unregister secondary sidebar
 unregister_sidebar( 'sidebar-alt' );
 

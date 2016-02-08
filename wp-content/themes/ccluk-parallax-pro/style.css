@@ -244,7 +244,7 @@ h4,
 h5,
 h6 {
 	color: #000;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-weight: 400;
 	line-height: 1.2;
 	margin: 0 0 20px;
@@ -417,7 +417,7 @@ input[type="submit"],
 	border: none;
 	color: #fff;
 	cursor: pointer;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	letter-spacing: 1px;
@@ -456,7 +456,7 @@ input[type="search"]::-webkit-search-results-button {
 .home-odd a.button {
 	background: transparent;
 	clear: both;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 18px;
 	font-weight: 400;
 	letter-spacing: 1px;
@@ -924,7 +924,7 @@ Site Header
 }
 
 .site-title {
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 30px;
 	font-weight: 400;
 	letter-spacing: 1px;
@@ -988,7 +988,7 @@ Site Navigation
 .genesis-nav-menu {
 	clear: both;
 	color: #000;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 16px;
 	font-weight: 400;
 	letter-spacing: 1px;
@@ -1008,7 +1008,7 @@ Site Navigation
 .genesis-nav-menu a {
 	color: #000;
 	display: block;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	padding: 27px 20px;
 }
 
@@ -1428,7 +1428,7 @@ p.entry-meta {
 	color: #fff;
 	cursor: pointer;
 	display: inline-block;
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 14px;
 	letter-spacing: 1px;
 	padding: 8px 12px;
@@ -1626,7 +1626,7 @@ Site Footer
 ---------------------------------------------------------------------------------------------------- */
 
 .site-footer {
-	background-color: #000;
+	background-color: #fff;
 	padding: 40px 0;
 	text-align: center;
 }
@@ -1634,15 +1634,15 @@ Site Footer
 .site-footer,
 .site-footer a,
 .site-footer p {
-	color: #fff;
+	color: #999;
 }
 
 .site-footer a:hover {
-	color: #f04848;
+	color: #000;
 }
 
 .site-footer p {
-	font-family: Montserrat, sans-serif;
+	font-family: 'Open Sans', sans-serif;
 	font-size: 12px;
 	letter-spacing: 1px;
 	margin-bottom: 0;
@@ -1655,13 +1655,7 @@ Color Styles
 ---------------------------------------------------------------------------------------------------- */
 
 .parallax-pro-blue a:hover,
-.parallax-pro-blue .entry-title a,
-.parallax-pro-green a:hover,
-.parallax-pro-green .entry-title a,
-.parallax-pro-orange a:hover,
-.parallax-pro-orange .entry-title a,
-.parallax-pro-pink a:hover,
-.parallax-pro-pink .entry-title a {
+.parallax-pro-blue .entry-title a {
 	color: #000;
 }
 
@@ -1669,23 +1663,8 @@ Color Styles
 .parallax-pro-blue .button:hover,
 .parallax-pro-blue .genesis-nav-menu a,
 .parallax-pro-blue .home-odd a:hover,
-.parallax-pro-blue .site-footer a,
-.parallax-pro-green .button,
-.parallax-pro-green .button:hover,
-.parallax-pro-green .genesis-nav-menu a,
-.parallax-pro-green .home-odd a:hover,
-.parallax-pro-green .site-footer a,
-.parallax-pro-orange .button,
-.parallax-pro-orange .button:hover,
-.parallax-pro-orange .genesis-nav-menu a,
-.parallax-pro-orange .home-odd a:hover,
-.parallax-pro-orange .site-footer a,
-.parallax-pro-pink .button,
-.parallax-pro-pink .button:hover,
-.parallax-pro-pink .genesis-nav-menu a,
-.parallax-pro-pink .home-odd a:hover,
-.parallax-pro-pink .site-footer a {
-	color: #fff;
+.parallax-pro-blue .site-footer a {
+	color: #666;
 }
 
 /* Parallax Pro Blue
@@ -1700,7 +1679,7 @@ Color Styles
 .parallax-pro-blue .home-odd .featured-content .entry-title a:hover,
 .parallax-pro-blue .site-footer a:hover,
 .parallax-pro-blue .site-header .widget-area a:hover {
-	color: #44ace8;
+	color: #0098DA;
 }
 
 .parallax-pro-blue input:hover[type="button"],
@@ -1711,103 +1690,13 @@ Color Styles
 .parallax-pro-blue .button:hover,
 .parallax-pro-blue .footer-widgets,
 .parallax-pro-blue .pricing-table a.button:hover {
-	background-color: #44ace8;
+	background-color: #0098DA;
 }
 
 .parallax-pro-blue .pricing-table a.button:hover {
-	border: 3px solid #44ace8;
+	border: 3px solid #0098DA;
 }
 
-
-/* Parallax Pro Green
---------------------------------------------- */
-
-.parallax-pro-green a,
-.parallax-pro-green .entry-title a:hover,
-.parallax-pro-green .genesis-nav-menu a:hover,
-.parallax-pro-green .genesis-nav-menu .current-menu-item > a,
-.parallax-pro-green .genesis-nav-menu .sub-menu a:hover,
-.parallax-pro-green .genesis-nav-menu .sub-menu .current-menu-item > a:hover,
-.parallax-pro-green .home-odd .featured-content .entry-title a:hover,
-.parallax-pro-green .site-footer a:hover,
-.parallax-pro-green .site-header .widget-area a:hover {
-	color: #35c379;
-}
-
-.parallax-pro-green input:hover[type="button"],
-.parallax-pro-green input:hover[type="reset"],
-.parallax-pro-green input:hover[type="submit"],
-.parallax-pro-green .archive-pagination li a:hover,
-.parallax-pro-green .archive-pagination .active a,
-.parallax-pro-green .button:hover,
-.parallax-pro-green .footer-widgets,
-.parallax-pro-green .pricing-table a.button:hover {
-	background-color: #35c379;
-}
-
-.parallax-pro-green .pricing-table a.button:hover {
-	border: 3px solid #35c379;
-}
-
-/* Parallax Pro Orange
---------------------------------------------- */
-
-.parallax-pro-orange a,
-.parallax-pro-orange .entry-title a:hover,
-.parallax-pro-orange .genesis-nav-menu a:hover,
-.parallax-pro-orange .genesis-nav-menu .current-menu-item > a,
-.parallax-pro-orange .genesis-nav-menu .sub-menu a:hover,
-.parallax-pro-orange .genesis-nav-menu .sub-menu .current-menu-item > a:hover,
-.parallax-pro-orange .home-odd .featured-content .entry-title a:hover,
-.parallax-pro-orange .site-footer a:hover,
-.parallax-pro-orange .site-header .widget-area a:hover {
-	color: #e58c29;
-}
-
-.parallax-pro-orange input:hover[type="button"],
-.parallax-pro-orange input:hover[type="reset"],
-.parallax-pro-orange input:hover[type="submit"],
-.parallax-pro-orange .archive-pagination li a:hover,
-.parallax-pro-orange .archive-pagination .active a,
-.parallax-pro-orange .button:hover,
-.parallax-pro-orange .footer-widgets,
-.parallax-pro-orange .pricing-table a.button:hover {
-	background-color: #e58c29;
-}
-
-.parallax-pro-orange .pricing-table a.button:hover {
-	border: 3px solid #e58c29;
-}
-
-/* Parallax Pro Pink
---------------------------------------------- */
-
-.parallax-pro-pink a,
-.parallax-pro-pink .entry-title a:hover,
-.parallax-pro-pink .genesis-nav-menu a:hover,
-.parallax-pro-pink .genesis-nav-menu .current-menu-item > a,
-.parallax-pro-pink .genesis-nav-menu .sub-menu a:hover,
-.parallax-pro-pink .genesis-nav-menu .sub-menu .current-menu-item > a:hover,
-.parallax-pro-pink .home-odd .featured-content .entry-title a:hover,
-.parallax-pro-pink .site-footer a:hover,
-.parallax-pro-pink .site-header .widget-area a:hover {
-	color: #cb4082;
-}
-
-.parallax-pro-pink input:hover[type="button"],
-.parallax-pro-pink input:hover[type="reset"],
-.parallax-pro-pink input:hover[type="submit"],
-.parallax-pro-pink .archive-pagination li a:hover,
-.parallax-pro-pink .archive-pagination .active a,
-.parallax-pro-pink .button:hover,
-.parallax-pro-pink .footer-widgets,
-.parallax-pro-pink .pricing-table a.button:hover {
-	background-color: #cb4082;
-}
-
-.parallax-pro-pink .pricing-table a.button:hover {
-	border: 3px solid #cb4082;
-}
 
 
 /*
