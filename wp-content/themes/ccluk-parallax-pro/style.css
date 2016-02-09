@@ -1175,11 +1175,27 @@ Content Area
 .home-odd h6,
 .home-odd .featured-content .entry-title a,
 .home-odd .widget-title {
-	color: #000;
+	color: #fff;
+	background-color: #0098DA;
+	opacity: 0.85;
 }
 
 .home-odd .featured-content .entry-title a:hover {
 	color: #f04848;
+	background-color: #000;
+}
+
+.home-odd .textwidget {
+	color: #000;
+	background-color: #A8CF45;
+	max-width: 600px;
+	margin: 0 auto;
+}
+
+.home-odd .widget-title,
+.home-odd .textwidget {
+	padding: 0.4em;
+	opacity: 0.85;
 }
 
 .home-even p:last-child,
@@ -1201,6 +1217,15 @@ Content Area
 	-webkit-background-size: cover;
 	-moz-background-size:    cover;
 	background-size:         cover;
+}
+
+.featured-content .post {
+	clear: both;
+}
+
+.featured-content .post .entry-header {
+	width: 50%;
+	float: left;
 }
 
 /* Pricing Table

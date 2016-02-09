@@ -1,0 +1,48 @@
+/**
+ * Plugin: Genesis Layout Extras
+ *
+ * @package    Genesis Layout Extras
+ * @subpackage Frontend Styles - Layout: PBC + PAC - HTML5
+ * @author     David Decker - DECKERWEB
+ * @copyright  Copyright (c) 2013, David Decker - DECKERWEB
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
+ * @link       http://genesisthemes.de/en/wp-plugins/genesis-layout-extras/
+ * @link       http://deckerweb.de/twitter
+ *
+ * @since	   2.0.0
+ * @version	   2.0.0
+ */
+
+/* Table of Contents
+
+* Additional Layout: PBC + PAC
+
+*/
+
+
+/* Additional Layout: PBC + PAC
+------------------------------------------------------------ */
+
+.content-sidebar-wrap {
+	float: none;
+	width: 100%;
+}
+
+.primary-below-content .content,
+.primary-above-content .content {
+	clear: both;
+	width: 98%;
+}
+
+.primary-below-content .sidebar-primary,
+.primary-above-content .sidebar-primary {
+	display: block;
+	width: 100%;
+}
+
+.primary-below-content .content,
+.primary-above-content .content,
+.primary-below-content .sidebar-primary,
+.primary-above-content .sidebar-primary {
+	float: none;
+}

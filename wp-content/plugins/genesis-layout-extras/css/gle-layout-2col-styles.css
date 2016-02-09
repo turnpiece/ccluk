@@ -1,0 +1,68 @@
+/**
+ * Plugin: Genesis Layout Extras
+ *
+ * @package    Genesis Layout Extras
+ * @subpackage Frontend Styles - Layout: CSA/SAC - XHTML
+ * @author     David Decker - DECKERWEB
+ * @copyright  Copyright (c) 2013, David Decker - DECKERWEB
+ * @license    http://www.opensource.org/licenses/gpl-license.php GPL-2.0+
+ * @link       http://genesisthemes.de/en/wp-plugins/genesis-layout-extras/
+ * @link       http://deckerweb.de/twitter
+ *
+ * @since	   2.0.0
+ * @version	   2.0.0
+ */
+
+/* Table of Contents
+
+* Additional Layouts: CSA & SAC
+* Responsive Design (Media Queries)
+
+*/
+
+
+/* Additional Layouts: CSA & SAC
+------------------------------------------------------------ */
+
+/* Content-Sidebar Wrapper */
+.content-sidebaralt #content-sidebar-wrap,
+.sidebaralt-content #content-sidebar-wrap {
+	width: 77%;
+}
+
+.sidebaralt-content #content-sidebar-wrap {
+	float: right;
+}
+
+/* Sidebar-Alt */
+.content-sidebaralt #sidebar-alt,
+.sidebaralt-content #sidebar-alt {
+	width: 19%;
+}
+
+.content-sidebaralt #sidebar-alt {
+	float: right;
+}
+
+/* Content */
+.content-sidebaralt #content,
+.sidebaralt-content #content {
+	width: 100%;
+}
+
+.sidebaralt-content #content {
+	float: right;
+}
+
+
+/* Responsive Design (Media Queries)
+------------------------------------------------------------ */
+
+@media only screen and (max-width: 768px) {
+
+	.content-sidebaralt #content,
+	.sidebaralt-content #content {
+		width: 100%;
+	}
+
+}
