@@ -61,9 +61,9 @@
             return $plugins;
         });
 
-        add_filter( 'quicktags_settings', function ( $qtInit, $editor_id ) {
+        add_filter( 'quicktags_settings', function ( $qtInit ) {
             // Remove 'link' from the quicktag button to prevent errors.
-            if ( ( $key = array_search( 'link', $qtInit['buttons'] ) ) !== false ) {
+            if ( !empty($qtInit['buttons'] ) ) {
                 $qtInit['buttons'] = str_replace( 'link,', '', $qtInit['buttons'] );
             }
             return $qtInit;

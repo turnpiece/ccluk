@@ -343,6 +343,10 @@ body.single-item.groups #main {
     display: -webkit-flex;
     display: -ms-flexbox;
     display: flex;
+
+    /* This is added to fix search layout issue after load more */
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
 }
 
 .search-content,
@@ -423,7 +427,7 @@ body.full-width .site-content,
 
     -webkit-box-flex: 1;
     -webkit-flex: 1 1 0;
-    -ms-flex: 1 1 0;
+    -ms-flex: 1 1 0%;
     flex: 1 1 0;
 
     min-width: 1px; /* Firefox-34-ignoring-max-width-for-flexbox */
@@ -692,6 +696,11 @@ header-aside,
     /* border-left: 1px solid rgba(0,0,0,0.1); */
 }
 
+/* GeoDirectory - Directory Plugin */
+.gd-google-maps #header-search form {
+    z-index: 2000;
+}
+
 #header-search form input[type="text"] {
     height: 100%;
     width: 100%;
@@ -823,6 +832,11 @@ header-aside,
     text-align: left
 }
 
+.tablet .header-account-login > a {
+    position: relative;
+    z-index: -1;
+}
+
 .header-account-login .count {
     background: #54ae68;
     border-radius: 100%;
@@ -859,7 +873,8 @@ header-aside,
     left: -3px;
 }
 
-.header-account-login:hover .pop {
+.tablet .header-account-login .pop.hover,
+body:not(.tablet) .header-account-login:hover .pop {
     opacity: 1;
     visibility: visible;
 }
@@ -873,7 +888,8 @@ header-aside,
     position: relative;
 }
 
-.header-account-login .pop a {
+.header-account-login .pop a,
+.header-account-login .pop .ab-item {
     color: #333;
     display: block;
     font-size: 13px;
@@ -2836,6 +2852,7 @@ div#mobile-check {
     line-height: inherit;
     vertical-align: bottom;
     margin-right: 7px;
+    float:left;
 }
 
 #group-create-body label sup {

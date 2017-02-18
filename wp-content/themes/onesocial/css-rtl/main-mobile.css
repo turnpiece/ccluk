@@ -3578,6 +3578,20 @@ body.logged-in #wpadminbar div.quicklinks ul#wp-admin-bar-root-default,
     margin-top: 8px;
 }
 
+div#wpadminbar li#wp-admin-bar-mycred-account {
+    margin: 10px 0;
+}
+
+#wp-admin-bar-mycred-account > .ab-item.ab-empty-item {
+    background: #3c3c44;
+    margin-bottom: 5px;
+}
+
+#wp-admin-bar-mycred-account .ab-item.ab-empty-item {
+    color: #fff;
+    padding: 6px 25px;
+}
+
 /* Separators */
 #wpadminbar div.quicklinks ul li.menupop div.ab-sub-wrapper ul > li.menupop > a.ab-item {
     background: #3C3C44;

@@ -2,7 +2,7 @@
 
 function onesocial_login_fonts() {
     // FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
-	wp_register_style( 'fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css", false, null );
+	wp_register_style( 'fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css", false, null );
 	wp_enqueue_style( 'fontawesome' );
 }
 add_action( 'login_enqueue_scripts', 'onesocial_login_fonts' );
@@ -21,7 +21,7 @@ function onesocial_custom_login_scripts() {
 	if ( ! $show ) {
 		return;
 	} ?>
-	
+
 	<script>
         document.addEventListener("DOMContentLoaded", function(event) {
             document.getElementById("user_login").setAttribute( "placeholder", "Username" );
@@ -30,7 +30,7 @@ function onesocial_custom_login_scripts() {
     </script>
 
 	<?php
-	
+
 	if( 'image' == $admin_logo ) {
 		$boss_wp_loginbox_width	 = 312;
 		$boss_logo_url			 = $logo_img[ 0 ];
@@ -63,7 +63,7 @@ function onesocial_custom_login_scripts() {
 
 		echo '</style>';
 	}
-	
+
 	if( 'title' == $admin_logo ) {
 		$title_font = onesocial_get_option( 'admin_site_title' );
 
@@ -130,14 +130,14 @@ function onesocial_custom_login_scripts() {
 			box-shadow: none;
 			padding: 10px 0;
 		}
-		
+
 		.wp-social-login-connect-with,
 		#loginform label {
 			color: <?php echo esc_attr( onesocial_get_option( 'admin_screen_text_color' ) ); ?>;
 			font-size: 15px;
 			font-weight: 600;
 		}
-		
+
 		#loginform input[type=text],
 		#loginform input[type=password] {
 			background: <?php echo esc_attr( onesocial_get_option( 'admin_screen_background_color' ) ); ?> !important;
@@ -149,23 +149,23 @@ function onesocial_custom_login_scripts() {
 			font-weight: 300;
 			margin: 5px 0 35px;
 		}
-		
+
 		#rememberme {
 			border: 2px solid <?php echo esc_attr( onesocial_get_option( 'admin_screen_button_color' ) ); ?>;
 			height: 16px;
 			width: 16px;
 			box-shadow: none !important;
 		}
-		
+
 		#rememberme:focus {
 			box-shadow: none !important;
 		}
-		
+
 		#login form p.submit {
 			clear: both;
 			overflow: hidden;
 		}
-		
+
 		input#wp-submit {
 			display: block;
 			width: 100%;
@@ -178,13 +178,13 @@ function onesocial_custom_login_scripts() {
 			height: 40px;
 			line-height: 40px;
 		}
-		
+
 		#rememberme:checked:before {
 			font-size: 25px;
 			margin: -7px -6px;
 			color: <?php echo esc_attr( onesocial_get_option( 'admin_screen_text_color' ) ); ?>;
 		}
-		
+
 		body.login {
 			background-color: <?php echo esc_attr( onesocial_get_option( 'admin_screen_background_color' ) ); ?> !important;
 		}
@@ -204,26 +204,26 @@ function onesocial_custom_login_scripts() {
 			background-color: <?php echo esc_attr( onesocial_get_option( 'admin_screen_button_color' ) ); ?> !important;
 			box-shadow: none;
 		}
-		
+
 		body.login #backtoblog,
 		body.login #nav {
 			padding: 0;
 		}
-		
+
 		::-webkit-input-placeholder { color: #999; }
 		::-moz-placeholder { color: #999; } /* firefox 19+ */
 		:-ms-input-placeholder { color: #999; } /* ie */
 		input:-moz-placeholder { color: #999; }
-		
+
 		.wp-social-login-connect-with {
 			font-weight: bold;
 			font-size: 14px;
 		}
-		
+
 		.wp-social-login-provider-list.wp-social-login-provider-list {
 			padding: 15px 0 20px;
 		}
-		
+
 		.wp-social-login-provider-list.wp-social-login-provider-list a {
 			border-radius: 40px;
 			color: #fff;
@@ -238,7 +238,7 @@ function onesocial_custom_login_scripts() {
 			text-align: center;
 			text-transform: uppercase;
 		}
-		
+
 		.wp-social-login-provider-list img {
 			display: none;
 		}

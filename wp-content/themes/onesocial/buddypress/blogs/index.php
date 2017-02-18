@@ -19,10 +19,8 @@ do_action( 'bp_before_directory_blogs_page' );
 
 	<?php do_action( 'bp_before_directory_blogs_content' ); ?>
 
-	<div id="blog-dir-search" class="dir-search boss-search-wrapper" role="search">
-		<?php bp_directory_blogs_search_form(); ?>
-	</div><!-- #blog-dir-search -->
-
+	<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+	
 	<form action="" method="post" id="blogs-directory-form" class="dir-form">
 
 		<div id="subnav" class="item-list-tabs" role="navigation">

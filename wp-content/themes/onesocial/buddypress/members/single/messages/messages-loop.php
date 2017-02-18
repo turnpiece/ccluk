@@ -19,7 +19,8 @@
                     <th scope="col" class="thread-checkbox"><input id="select-all-messages" type="checkbox"><strong></strong></th>
 					<th scope="col" class="thread-from"><?php _e( 'From', 'buddypress' ); ?></th>
 					<th scope="col" class="thread-info"><?php _e( 'Subject', 'buddypress' ); ?></th>
-					<th scope="col" class="thread-options"><?php _e( 'Date', 'buddypress' ); ?></th>
+					<th scope="col" class="thread-date"><?php _e( 'Date', 'buddypress' ); ?></th>
+					<th scope="col" class="thread-options"><?php _e( 'Actions', 'buddypress' ); ?></th>
                     <?php
 
 					/**
@@ -70,12 +71,7 @@
 							<p class="thread-excerpt"><?php bp_message_thread_excerpt(); ?></p>
 						</td>
 
-						<?php do_action( 'bp_messages_inbox_list_item' ); ?>
-
-						<td class="thread-options">
-                            <span class="activity"><?php  echo buddyboss_format_time(strtotime( bp_get_message_thread_last_post_date_raw() )); ?></span>
-						</td>
-				        <?php
+						<?php
 
 						/**
 						 * Fires inside the messages box table row to add a new column.
@@ -87,11 +83,29 @@
 						 */
 						do_action( 'bp_messages_inbox_list_item' ); ?>
 
-						<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
-							<td class="thread-star">
-								<?php bp_the_message_star_action_link( array( 'thread_id' => bp_get_message_thread_id() ) ); ?>
-							</td>
-						<?php endif; ?>
+						<td class="thread-date">
+							<span class="activity"><?php  echo buddyboss_format_time(strtotime( bp_get_message_thread_last_post_date_raw() )); ?></span>
+						</td>
+
+						<td class="thread-options">
+							<?php if ( bp_message_thread_has_unread() ) : ?>
+								<a class="read" href="<?php bp_the_message_thread_mark_read_url(); ?>"><?php _e( 'Read', 'onesocial' ); ?></a><br />
+							<?php else : ?>
+								<a class="unread" href="<?php bp_the_message_thread_mark_unread_url(); ?>"><?php _e( 'Unread', 'onesocial' ); ?></a><br />
+							<?php endif; ?>
+
+							<a class="delete" href="<?php bp_message_thread_delete_link(); ?>"><?php _e( 'Delete', 'onesocial' ); ?></a>
+
+							<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
+								<div class="thread-star">
+									<?php
+									if ( function_exists( 'bp_the_message_star_action_link' ) ) {
+										bp_the_message_star_action_link( array( 'thread_id' => bp_get_message_thread_id() ) );
+									}
+									?>
+								</div>
+							<?php endif; ?>
+						</td>
 					</tr>
 
 				<?php endwhile; ?>

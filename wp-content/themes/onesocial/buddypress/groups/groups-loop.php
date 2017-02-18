@@ -98,6 +98,10 @@
 
 				</div>
 
+                <div class="after_group_content">
+                <?php do_action('bb_after_group_content'); ?>
+                </div>
+
 				<?php
 				$total_members	 = bp_get_group_total_members();
 
@@ -128,7 +132,8 @@
 						endif;
 						?>
 
-					</div><?php
+					</div>
+                <?php
 				}
 				?>
 			</li>

@@ -7,8 +7,7 @@ if ( $show_social_links && is_array( $social_links ) ) {
 
 	<div id="footer-icons">
 
-		<ul class="social-icons">
-			<?php
+		<ul class="social-icons"><?php
 			foreach ( $social_links as $key => $link ) {
 				if ( !empty( $link ) ) {
 					$href = ( $key == 'email' ) ? 'mailto:' . sanitize_email( $link ) : esc_url( $link );
@@ -21,8 +20,7 @@ if ( $show_social_links && is_array( $social_links ) ) {
 					<?php
 				}
 			}
-			?>
-		</ul>
+		?></ul>
 
 	</div>
 

@@ -120,7 +120,7 @@
 
 						<ul class="helper-links">
 
-							<?php if ( function_exists( 'sap_get_bookmark_button' )  && is_singular( 'post' ) ) { ?>
+							<?php if ( function_exists( 'sap_get_bookmark_button' ) && is_singular( 'post' ) && is_user_logged_in() ) { ?>
 								<li>
 									<?php
 									$button = sap_get_bookmark_button();

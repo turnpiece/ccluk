@@ -6,10 +6,8 @@
 
 	<?php do_action( 'bp_before_directory_groups_content' ); ?>
 
-	<div id="group-dir-search" class="dir-search boss-search-wrapper" role="search">
-		<?php bp_directory_groups_search_form(); ?>
-	</div><!-- #group-dir-search -->
-
+	<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+	
 	<form action="" method="post" id="groups-directory-form" class="dir-form">
 
 		<?php do_action( 'template_notices' ); ?>
@@ -42,6 +40,13 @@
 
 			</ul>
 		</div><!-- .item-list-tabs -->
+
+
+		<?php if ( bp_get_current_group_directory_type() ) : ?>
+			
+			<?php bp_current_group_directory_type_message() ?>
+
+		<?php endif; ?>
 
 		<div id="groups-dir-list" class="groups dir-list">
 			<?php bp_get_template_part( 'groups/groups-loop' ); ?>

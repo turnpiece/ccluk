@@ -892,6 +892,8 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				array( 'slug' => 'admin_screen_text_color', 'title' => 'Login Screen Text', 'subtitle' => 'Links and text such as "Remember Me".', 'desc' => '', 'type' => 'color', 'default' => '#333333' ),
 				array( 'slug' => 'admin_screen_button_color', 'title' => 'Login Screen Button', 'subtitle' => 'Submit button on login screen.', 'desc' => '', 'type' => 'color', 'default' => '#54ae68' ),
 			);
+			
+			$color_scheme_elements = apply_filters( 'onesocial_color_element_options', $style_elements );
 
 			$style_fields = array();
 
@@ -918,7 +920,7 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 				)
 			);
 
-			foreach ( $style_elements as $elem ) {
+			foreach ( $color_scheme_elements as $elem ) {
 				if ( $elem[ 'type' ] == 'color' ) {
 					$style_fields[] = array(
 						'id'		 => $elem[ 'slug' ],
@@ -1359,23 +1361,38 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 		 */
 		public function boss_customizer_xprofile_field_choices() {
 			$options = array();
-			if ( function_exists( 'bp_is_active' ) ) {
-				if ( bp_is_active( 'xprofile' ) && bp_has_profile( array( 'user_id' => get_current_user_id(), 'hide_empty_groups' => false, 'hide_empty_fields' => false ) ) ) {
-					while ( bp_profile_groups() ) {
-						bp_the_profile_group();
-						$fields = array();
-						while ( bp_profile_fields() ) {
-							bp_the_profile_field();
-							$fields[ bp_get_the_profile_field_id() ] = bp_get_the_profile_field_name();
+			if ( function_exists( 'bp_is_active' ) && bp_is_active( 'xprofile' ) ) {
+				global $wpdb, $bp;
+				$field_groups = array();
+
+				$dbfields = $wpdb->get_results(
+				"SELECT g.id as 'group_id', g.name as 'group_name', f.id, f.name "
+				. " FROM {$bp->profile->table_name_fields} f JOIN {$bp->profile->table_name_groups} g ON f.group_id=g.id "
+				. " WHERE f.parent_id=0 "
+				. " ORDER BY f.name ASC "
+				);
+
+				if ( !empty( $dbfields ) ) {
+					foreach ( $dbfields as $dbfield ) {
+						if ( !isset( $field_groups[ $dbfield->group_id ] ) ) {
+							$field_groups[ $dbfield->group_id ] = array(
+								'name'	 => $dbfield->group_name,
+								'fields' => array(),
+							);
 						}
 
-						global $profile_template;
-						if ( $profile_template->group_count > 1 ) {
-							$options[ bp_get_the_profile_group_name() ] = $fields;
+						$field_groups[ $dbfield->group_id ][ 'fields' ][ $dbfield->id ] = $dbfield->name;
+					}
+
+					$show_opt_group = count( $field_groups ) > 1 ? true : false;
+					foreach ( $field_groups as $group_id => $group ) {
+						if ( $show_opt_group ) {
+							//optgroup > options
+							$options[ $group[ 'name' ] ] = $group[ 'fields' ];
 						} else {
-							//no need to show 'optgroup' is there is only one xprofiel field group
-							foreach ( $fields as $k => $l ) {
-								$options[ $k ] = $l;
+							foreach ( $group[ 'fields' ] as $id => $name ) {
+								//direct options
+								$options[ $id ] = $name;
 							}
 						}
 					}

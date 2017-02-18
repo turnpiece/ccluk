@@ -6,10 +6,8 @@
 
 	<?php do_action( 'bp_before_directory_members_content' ); ?>
 
-	<div id="members-dir-search" class="dir-search boss-search-wrapper" role="search">
-		<?php bp_directory_members_search_form(); ?>
-	</div><!-- #members-dir-search -->
-
+	<?php bp_get_template_part( 'common/search/dir-search-form' ); ?>
+	
 	<?php do_action( 'bp_before_directory_members_tabs' ); ?>
 
 	<form action="" method="post" id="members-directory-form" class="dir-form">

@@ -109,6 +109,32 @@ do_action( 'bp_before_create_group_page' );
 
 				</div>
 
+				<?php // Group type selection ?>
+				<?php if ( $group_types = bp_groups_get_group_types( array( 'show_in_create_screen' => true ), 'objects' ) ): ?>
+
+
+						<h4><?php _e( 'Group Types', 'buddypress' ); ?></h4>
+
+						<p><?php _e( 'Select the types this group should be a part of.', 'buddypress' ); ?></p>
+
+
+						<?php foreach ( $group_types as $type ) : ?>
+
+							<div class="checkbox">
+								<label for="<?php printf( 'group-type-%s', $type->name ); ?>"><input type="checkbox" name="group-types[]" id="<?php printf( 'group-type-%s', $type->name ); ?>" value="<?php echo esc_attr( $type->name ); ?>" /> <?php echo esc_html( $type->labels['name'] ); ?>
+									<?php if ( ! empty( $type->description ) ) {
+										/* translators: Group type description shown when creating a group. */
+										printf( __( '&ndash; %s', 'buddypress' ), '<span class="bp-group-type-desc">' . esc_html( $type->description ) . '</span>' );
+									}
+									?>
+								</label>
+							</div>
+
+						<?php endforeach; ?>
+
+				<?php endif; ?>
+
+
 				<h4><?php _e( 'Group Invitations', 'onesocial' ); ?></h4>
 
 				<p><strong><?php _e( 'Which members of this group are allowed to invite others?', 'onesocial' ); ?></strong></p>

@@ -45,12 +45,34 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 						<p class="username-wrap">
 							<!-- fake fields are a workaround for chrome autofill getting the wrong fields -->
 							<input style="display:none" type="password" name="fakepasswordremembered"/>
-							<input type="text" id="register_username" name="register_username" placeholder="Username" class="input" />
+							<input type="text" id="register_username" name="register_username" placeholder="<?php _e( 'Username', 'onesocial' ) ?>" class="input" />
 						</p>
 
 						<p class="password-wrap">
-							<input type="password" id="register_password" name="register_password" placeholder="Password" class="input" />
+							<input type="password" id="register_password" name="register_password" placeholder="<?php _e( 'Password', 'onesocial' ) ?>" class="input" />
 						</p>
+
+						<?php
+
+						/**
+						 * Fires and displays any extra member registration details fields.
+						 *
+						 * @since 1.2
+						 */
+						do_action( 'bp_account_details_fields' ); ?>
+
+						<?php
+
+						/**
+						 * Fires after the display of member registration account details fields.
+						 *
+						 * @since 1.1.0
+						 */
+						do_action( 'bp_after_account_details_fields' ); ?>
+
+						<?php /***** Extra Profile Details ******/ ?>
+
+						<br/>
 
 						<?php do_action( 'onesocial_registration_fields' ); ?>
 
@@ -163,7 +185,7 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 	</div>
 
 	<div class="joined" style="display:none">
-		<h4 class="popup_title"><?php _e( 'Welcome to ' . get_bloginfo( 'name' ), 'onesocial' ); ?></h4>
+		<h4 class="popup_title"><?php  printf( __( 'Welcome to %s', 'onesocial' ), get_bloginfo( 'name' ) ) ?></h4>
 
 		<p class="express"><?php _e( 'To finish activating your account, check your inbox for our Welcome message and confirm your email address.', 'onesocial' ); ?></p>
 

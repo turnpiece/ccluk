@@ -31,11 +31,8 @@
 					 */
 					do_action( 'bp_messages_inbox_list_header' ); ?>
 
-					<th scope="col" class="thread-options"><?php _e( 'Date', 'buddypress' ); ?></th>
-
-					<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
-						<th scope="col" class="thread-star"><span class="message-action-star"></span> <span class="screen-reader-text"><?php _e( 'Star', 'onesocial' ); ?></span></span></th>
-					<?php endif; ?>
+					<th scope="col" class="thread-date"><?php _e( 'Date', 'buddypress' ); ?></th>
+					<th scope="col" class="thread-options"><?php _e( 'Actions', 'buddypress' ); ?></th>
 				</tr>
 			</thead>
 
@@ -79,16 +76,29 @@
 						 */
 						do_action( 'bp_messages_inbox_list_item' ); ?>
 
-						<td class="thread-options">
+						<td class="thread-date">
 							<span class="activity"><?php  echo buddyboss_format_time(strtotime( bp_get_message_thread_last_post_date_raw() )); ?></span>
 						</td>
 
+						<td class="thread-options">
+							<?php if ( bp_message_thread_has_unread() ) : ?>
+								<a class="read" href="<?php bp_the_message_thread_mark_read_url(); ?>"><?php _e( 'Read', 'onesocial' ); ?></a><br />
+							<?php else : ?>
+								<a class="unread" href="<?php bp_the_message_thread_mark_unread_url(); ?>"><?php _e( 'Unread', 'onesocial' ); ?></a><br />
+							<?php endif; ?>
 
-						<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
-							<td class="thread-star">
-								<?php bp_the_message_star_action_link( array( 'thread_id' => bp_get_message_thread_id() ) ); ?>
-							</td>
-						<?php endif; ?>
+							<a class="delete" href="<?php bp_message_thread_delete_link(); ?>"><?php _e( 'Delete', 'onesocial' ); ?></a>
+
+							<?php if ( bp_is_active( 'messages', 'star' ) ) : ?>
+								<div class="thread-star">
+									<?php
+									if ( function_exists( 'bp_the_message_star_action_link' ) ) {
+										bp_the_message_star_action_link( array( 'thread_id' => bp_get_message_thread_id() ) );
+									}
+									?>
+								</div>
+							<?php endif; ?>
+						</td>
 					</tr>
 
 				<?php endwhile; ?>
@@ -127,5 +137,4 @@
 
 <?php endif; ?>
 
-<?php
-do_action( 'bp_after_member_messages_loop' );
+<?php do_action( 'bp_after_member_messages_loop' );

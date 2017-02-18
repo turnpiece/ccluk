@@ -1,5 +1,5 @@
 <?php $pageWasRefreshed = isset($_SERVER['HTTP_CACHE_CONTROL']) && $_SERVER['HTTP_CACHE_CONTROL'] === 'max-age=0'; ?>
-<div id="buddypress" <?php if(onesocial_get_option( 'boss_cover_group_size' ) != 200 && !$pageWasRefreshed ) echo "style='margin-top:-260px'"; ?> data-page-refreshed="<?php echo ($pageWasRefreshed)?1:0; ?>"  data-cover-size="<?php echo onesocial_get_option( 'boss_cover_group_size' ); ?>">
+<div id="buddypress" <?php if(onesocial_get_option( 'boss_cover_group_size' ) != 200 && !$pageWasRefreshed ) echo "style='margin-top:-260px;'"; ?> data-page-refreshed="<?php echo ($pageWasRefreshed)?1:0; ?>"  data-cover-size="<?php echo onesocial_get_option( 'boss_cover_group_size' ); ?>">
 
 <?php if ( bp_has_groups() ) : while ( bp_groups() ) : bp_the_group(); ?>
 
@@ -11,7 +11,7 @@
 			<div class="buddypress-content-wrap">
 
 				<section class="buddypress-content">
-					
+
 				<?php
 				/**
 				 * Fires before the display of the group home content.
@@ -126,7 +126,7 @@
 			</section>
 
 			<div id="secondary" class="widget-area" role="complementary">
-				
+
 				<div class="bb-group-avatar-wrap-desktop">
 
 					<div id="item-header-avatar" class="bb-group-avatar-wrap">
@@ -172,12 +172,20 @@
 						</div>
 					</div><!-- #item-header-content -->
 
+					<?php if ( $group_type_list =  bp_get_group_type_list( bp_get_group_id() ) ): ?>
+						<div id="group-types-list">
+
+							<?php echo $group_type_list ?>
+
+						</div><!-- #group-types-list-->
+					<?php endif; ?>
+
 					<div id="item-buttons" class="group">
 
 						<?php do_action( 'bp_group_header_actions' ); ?>
 
 					</div><!-- #item-buttons -->
-				
+
 				</div>
 
 				<?php

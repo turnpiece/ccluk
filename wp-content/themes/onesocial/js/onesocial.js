@@ -18,6 +18,17 @@
  */
 var jq = $ = jQuery;
 
+/*--------------------------------------------------------------------------------------------------------
+Group Load Scroll
+ --------------------------------------------------------------------------------------------------------*/
+$(document).ready(function($) {
+    $( '.single-item #buddypress' ).attr( 'style', '');
+    $body = $('body');
+    if ( $body.hasClass( 'single-item' ) && $body.hasClass( 'groups' ) && $body.scrollTop() == 0 && $( '#buddypress' ).data( 'cover-size' ) !== 200 && !$( '#buddypress' ).data( 'page-refreshed' ) ) {
+
+        $( "html,body" ).scrollTop( 260 );
+    }
+});
 /**
  * 2. Main BuddyBoss Class
  *
@@ -551,16 +562,6 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             $( '.LoginBox' ).removeClass( 'go' );
         } );
 
-        $( 'body' ).on( 'touchstart', '.medium-insert-buttons-show', function ( e ) {
-            e.preventDefault();
-            $( this ).trigger( 'click' );
-        } );
-
-        $( 'body' ).on( 'touchstart', '.medium-insert-action', function ( e ) {
-            e.preventDefault();
-            $( this ).trigger( 'click' );
-        } );
-
         $( '#groups-dir-list' ).on( 'click', '.group-button a', function () {
             $( this ).parent().addClass( 'loading' );
         } );
@@ -575,7 +576,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
 
         $( 'body' ).on( 'change keyup keydown paste cut', '#comment', function () {
             $( this ).height( 0 ).height( this.scrollHeight );
-        } ).find( 'textarea' ).change();
+        } ).find( 'textarea#comment' ).change();
 
         $( 'body' ).on( 'change keyup keydown paste cut focusout focus', '#whats-new', function () {
             $( this ).unbind( 'focus blur' );
@@ -590,7 +591,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             } else {
                 $( '.boss-insert-video' ).show();
             }
-        } ).find( 'textarea' ).change();
+        } ).find( 'textarea#whats-new' ).change();
 
         /*--------------------------------------------------------------------------------------------------------
          3.21 - Responsive Menus (...)
@@ -1036,8 +1037,8 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
         /*--------------------------------------------------------------------------------------------------------
          3.16 - Profile Settings Radio Buttons
          --------------------------------------------------------------------------------------------------------*/
-        $( '#buddypress table.notification-settings .yes input[type="radio"]' ).after( '<label>Yes</label>' );
-        $( '#buddypress table.notification-settings .no input[type="radio"]' ).after( '<label>No</label>' );
+        $( '#buddypress table.notification-settings .yes input[type="radio"]' ).after( '<label>'+translation.yes+'</label>' );
+        $( '#buddypress table.notification-settings .no input[type="radio"]' ).after( '<label>'+translation.no+'</label>' );
 
         /*--------------------------------------------------------------------------------------------------------
          3.17 - 404 carousel posts
@@ -1230,41 +1231,12 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
         } );
 
         /*--------------------------------------------------------------------------------------------------------
-         3.22 - Calculate cover
-         --------------------------------------------------------------------------------------------------------*/
-        function coverWidth() {
-            if ( !is_mobile ) {
-                var wwidth = viewport().width;
-                if ( $( '.page-right-sidebar' ).length ) {
-                    var $cover = $( '.bb-cover-photo' );
-                    $( '#primary' ).prepend( $cover );
-                } else {
-                    if ( wwidth > 1200 ) {
-                        $( '.bb-cover-photo' ).css( {
-                            width: wwidth,
-                            left: ( wwidth - 1140 ) / 2
-                        } );
-                    } else {
-                        $( '.bb-cover-photo' ).css( {
-                            width: $( '#primary' ).width() + 60,
-                            left: 30
-                        } );
-                    }
-                }
-            } else {
-                $( '.bb-cover-photo' ).width( '100%' );
-            }
-        }
-        //coverWidth();
-        //$( window ).resize( coverWidth );
-
-        /*--------------------------------------------------------------------------------------------------------
          3.25 - Better Radios and Checkboxes Styling
          --------------------------------------------------------------------------------------------------------*/
         function initCheckboxes() {
             if ( !inputsEnabled ) {
                 //only few buddypress and bbpress related fields
-                $( '#buddypress table.notifications input, #send_message_form input[type="checkbox"], #profile-edit-form input[type="checkbox"],  #profile-edit-form input[type="radio"], #message-threads input, #settings-form input[type="radio"], #create-group-form input[type="radio"], #create-group-form input[type="checkbox"], #invite-list input[type="checkbox"], #group-settings-form input[type="radio"], #group-settings-form input[type="checkbox"], #new-post input[type="checkbox"], .bbp-form input[type="checkbox"], .bbp-form .input[type="radio"], .register-section .input[type="radio"], .register-section input[type="checkbox"], .message-check, #select-all-messages' ).each( function () {
+                $( '#frm_buddyboss-media-tag-friends input[type="checkbox"], #buddypress table.notifications input, #send_message_form input[type="checkbox"], #profile-edit-form input[type="checkbox"],  #profile-edit-form input[type="radio"], #message-threads input, #settings-form input[type="radio"], #create-group-form input[type="radio"], #create-group-form input[type="checkbox"], #invite-list input[type="checkbox"], #group-settings-form input[type="radio"], #group-settings-form input[type="checkbox"], #new-post input[type="checkbox"], .bbp-form input[type="checkbox"], .bbp-form .input[type="radio"], .register-section .input[type="radio"], .register-section input[type="checkbox"], .message-check, #select-all-messages' ).each( function () {
                     var $this = $( this );
                     $this.addClass( 'styled' );
                     if ( $this.next( "label" ).length == 0 && $this.next( "strong" ).length == 0 ) {
@@ -1292,6 +1264,10 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
 
         initCheckboxes();
 
+        $( document ).ajaxSuccess( function () {
+            initCheckboxes();
+        });
+
 //        $('#buddypress table.notification-settings td input').after('<label></label>');
         $( '#buddypress table.notifications input' ).after( '<strong></strong>' );
 
@@ -1301,34 +1277,46 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
             } );
         }
 
-        /*--------------------------------------------------------------------------------------------------------
-         3.26 - Group Load Scroll
-         --------------------------------------------------------------------------------------------------------*/
-
-        // Remove inline styling
-        $.fn.removeStyle = function ( style )
-        {
-            var search = new RegExp( style + '[^;]+;?', 'g' );
-
-            return this.each( function ()
-            {
-                $( this ).attr( 'style', function ( i, style )
-                {
-                    if ( style ) {
-                        return style.replace( search, '' );
-                    }
-                } );
-            } );
-        };
-
-        $( '.single-item #buddypress' ).removeStyle( 'margin-top' );
-        if ( $body.hasClass( 'single-item' ) && $body.hasClass( 'groups' ) && $body.scrollTop() == 0 && $( '#buddypress' ).data( 'cover-size' ) !== 200 && !$( '#buddypress' ).data( 'page-refreshed' ) ) {
-
-            $( "html,body" ).scrollTop( 260 );
-        }
-
         $( ".header-notifications .pending-count" ).html( '<b>' + jQuery( ".header-notifications .pending-count" ).html() + '</b>' );
 
+        /*--------------------------------------------------------------------------------------------------------
+         3.27 - Account Menu PopUp On Touch For Tablets
+         --------------------------------------------------------------------------------------------------------*/
+        $( '.tablet .header-account-login' ).on( "click touch", function ( e ) {
+            $( this ).find( '.pop' ).toggleClass( 'hover' );
+        } );
+
+        $( '.tablet .header-account-login > a' ).on( "click touch", function ( e ) {
+            e.preventDefault();
+        } );
+        /*--------------------------------------------------------------------------------------------------------
+         3.28 - BuddyPress Group Email Subscription
+         --------------------------------------------------------------------------------------------------------*/
+
+        $( '#item-meta .group-subscription-options-link' ).on("click", function() {
+            stheid = $(this).attr('id').split('-');
+            group_id = stheid[1];
+            $( '.group-subscription-options' ).slideToggle();
+        });
+
+        $( '#item-meta .group-subscription-close' ).on("click", function() {
+            stheid = $(this).attr('id').split('-');
+            group_id = stheid[1];
+            $( '.group-subscription-options' ).slideToggle();
+        });
+
+        /*--------------------------------------------------------------------------------------------------------
+         3.29 - Cart Dropdown
+         --------------------------------------------------------------------------------------------------------*/
+
+        $(document).on('change','#calc_shipping_country', function(){
+            var $field = $('#calc_shipping_state_field');
+            if($field.find('input').length > 0){
+                $field.addClass('plain-input');
+            } else {
+                $field.removeClass('plain-input');
+            }
+        });
 
         /*------------------------------------------------------------------------------------------------------
          Heartbeat functions
@@ -1412,79 +1400,11 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
 
     buddyboss_cover_photo = function ( option ) {
 
-        object = $( ".bb-cover-photo" ).first().data( "obj" );
-        object_id = $( ".bb-cover-photo" ).first().data( "objid" );
-        nonce = $( ".bb-cover-photo" ).first().data( "nonce" );
+        $bb_cover_photo = $( "#page .bb-cover-photo:last" );
+        object = $bb_cover_photo.data( "obj" ); // user or group
+        object_id = $bb_cover_photo.data( "objid" ); // id of user or group
+        nonce = $bb_cover_photo.data( "nonce" );
         $refresh_button = $( "#refresh-cover-photo-btn" );
-
-
-        ploption = {
-            runtimes: 'html5,flash,silverlight,html4',
-            browse_button: 'update-cover-photo-btn', // you can pass in id...
-            container: jQuery( ".bb-cover-photo" ).get( 0 ), // ... or DOM Element itself
-            max_file_size: '4mb',
-            url: ajaxurl,
-            multi_selection: false,
-            flash_swf_url: option.flash_swf_url || '',
-            silverlight_xap_url: option.uploader_xap_url || '',
-            multipart_params: {
-                'action': 'buddyboss_cover_photo',
-                'cookie': encodeURIComponent( document.cookie ),
-                'object': object,
-                'object_id': object_id,
-                'nonce': option.nonce
-            },
-            filters: [
-                { title: "Image files", extensions: "jpg,gif,png,jpeg" },
-            ],
-            init: {
-                FilesAdded: function ( up, files ) {
-                    uploader.start(); //auto start
-                },
-                PostInit: function () {
-                },
-                UploadProgress: function ( up, file ) {
-                    $( "#update-cover-photo-btn" ).prop( "disabled", true ).removeClass( 'uploaded' ).addClass( 'disabled' ).find( "i" ).fadeIn();
-                    $( '.bb-cover-photo' ).find( ".progress" ).show().find( "span" ).css( "width", file.percent + '%' );
-                },
-                Error: function ( up, err ) {
-                    $( '.bb-cover-photo' ).find( ".progress" ).hide().find( "span" ).css( "width", '0%' );
-
-                    $.growl.error( { message: err.message } );
-                    //$('console').innerHTML += "\nError #" + err.code + ": " + err.message;
-                },
-                FileUploaded: function ( up, file, info ) {
-                    var responseJSON = $.parseJSON( info.response );
-
-                    $( "#update-cover-photo-btn" ).prop( "disabled", false ).removeClass( 'disabled' ).addClass( 'uploaded' ).find( "i.fa-spin" ).fadeOut();
-                    $( '.bb-cover-photo' ).find( ".progress" ).fadeOut().find( "span" ).css( "width", '0%' );
-
-                    if ( !responseJSON ) {
-                        $.growl.error( { title: "", message: BuddyBossOptions.bb_cover_photo_failed_upload } );
-                    }
-
-                    if ( responseJSON.error ) {
-                        $.growl.error( { title: "", message: responseJSON.error } );
-                    } else {
-                        image = responseJSON.image;
-                        $( '.bb-cover-photo' ).find( ".holder" ).remove();
-                        $( '.bb-cover-photo' ).append( '<div class="holder"></div>' );
-                        $( '.bb-cover-photo' ).find( ".holder" ).css( "background-image", 'url(' + image + ')' );
-                        $.growl.notice( { title: "", message: responseJSON.success } );
-                        if ( $refresh_button.length > 0 ) {
-                            $refresh_button.find( '.fa-refresh' ).removeClass( 'fa-refresh' ).addClass( 'fa-times' );
-                            $refresh_button.find( '>div' ).html( BuddyBossOptions.bb_cover_photo_remove_title + '<i class="fa fa-spinner fa-spin" style="display: none;"></i>' );
-                            $refresh_button.attr( 'title', BuddyBossOptions.bb_cover_photo_remove_title );
-                            $refresh_button.data( 'routine', 'remove' );
-                        }
-                    }
-
-                }
-            }
-        };
-        var uploader = new plupload.Uploader( ploption );
-
-        uploader.init();
 
         rebind_refresh_cover_events = function () {
             $refresh_button.click( function () {
@@ -1515,12 +1435,13 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                         if ( responseJSON.error ) {
                             $.growl.error( { title: "", message: responseJSON.error } );
                         } else {
-                            $( '.bb-cover-photo' ).find( ".holder" ).remove();
-                            if ( 'refresh' == $refresh_button.data( 'routine' ) ) {
-                                image = responseJSON.image;
-                                $( '.bb-cover-photo' ).append( '<div class="holder"></div>' );
-                                $( '.bb-cover-photo' ).find( ".holder" ).css( "background-image", 'url(' + image + ')' );
+                            $bb_cover_photo.find( ".holder" ).remove();
 
+                            image = responseJSON.image;
+                            $bb_cover_photo.append( '<div class="holder"></div>' );
+                            $bb_cover_photo.find( ".holder" ).css( "background-image", 'url(' + image + ')' );
+
+                            if ( 'refresh' == $refresh_button.data( 'routine' ) ) {
                                 $refresh_button.parent().toggleClass( 'no-photo' );
                                 $refresh_button.find( '.fa-refresh' ).removeClass( 'fa-refresh' ).addClass( 'fa-times' );
                                 $refresh_button.find( '>div' ).html( BuddyBossOptions.bb_cover_photo_remove_title + '<i class="fa fa-spinner fa-spin" style="display: none;"></i>' );
@@ -1537,7 +1458,7 @@ var BuddyBossMain = ( function ( $, window, undefined ) {
                         }
                     },
                     error: function ( ) {
-                        $( '.bb-cover-photo' ).find( ".progress" ).hide().find( "span" ).css( "width", '0%' );
+                        $bb_cover_photo.find( ".progress" ).hide().find( "span" ).css( "width", '0%' );
 
                         $.growl.error( { message: 'Error' } );
                     }

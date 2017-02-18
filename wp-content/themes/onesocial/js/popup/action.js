@@ -196,7 +196,7 @@
         onesocialModalPopup( '.onesocial-lost-password-popup-link', '.mfp-content .LostPasswordBox' );
 
         /* This will open popup on each link of login page */
-        $( '.boss-modal-form .forgetme' ).on( 'click', function ( e ) {
+        $( document ).on( 'click', '.boss-modal-form .forgetme, #ajax_login_messages a[href$="lost-password/"]', function ( e ) {
             e.preventDefault();
             $( '.onesocial-lost-password-popup-link' ).trigger( 'click' );
 
@@ -261,15 +261,20 @@
     }
 
     //Fix: WP_EDITOR on Frontend in modal doesn't work properly
-    function oneSocialTinyMceFix(){
-        if( typeof tinyMCE == 'undefined' )
+    function oneSocialTinyMceFix() {
+        if ( typeof tinyMCE == 'undefined' )
             return;
-        
-        $('.field_type_textarea').each(function(){
-            id = $(this).find('textarea').attr('id');
-            tinymce.remove('#'+id);
-            tinyMCE.execCommand('mceToggleEditor', false, id );
-        });
+
+        try {
+            $( '.field_type_textarea' ).each( function () {
+                var id = $( this ).find( 'textarea' ).attr( 'id' );
+                tinymce.remove( '#' + id );
+                tinyMCE.execCommand( 'mceToggleEditor', false, id );
+            });
+        } catch (e) {
+
+        }
+
     }
 
 }( jQuery ) );

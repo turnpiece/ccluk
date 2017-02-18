@@ -31,7 +31,7 @@
 	<ul id="member-list" class="item-list bb-group-members">
 
 		<?php while ( bp_group_members() ) : bp_group_the_member(); ?>
-
+			<?php $user_id = bp_get_member_user_id(); ?>
 			<li>
 
 				<div class="item-avatar">

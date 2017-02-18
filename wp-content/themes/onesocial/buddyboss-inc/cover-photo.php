@@ -71,7 +71,7 @@ function buddyboss_cover_photo_get( $object, $object_id ) {
 	if ( !in_array( $object, $bb_cover_photo_support ) ) { //return nothing.
 		return false;
 	}
-
+    
 	$attachment = null;
 
 	//user
@@ -82,11 +82,6 @@ function buddyboss_cover_photo_get( $object, $object_id ) {
 			'object_dir' => 'members',
 			'item_id'	 => $object_id,
 		) );
-		
-		if(!empty($meta[ 'attachment' ])) {
-			$meta[ "last_update" ]	 = gmdate( "Y-m-d H:i:s" );
-		}
-		
 		// or use the one from theme meta
 		if ( !$meta[ 'attachment' ] ) {
 			$meta = get_user_meta( $object_id, '_bb_cover_photo', true );
@@ -107,13 +102,8 @@ function buddyboss_cover_photo_get( $object, $object_id ) {
 			'object_dir' => 'groups',
 			'item_id'	 => $object_id,
 		) );
-		
-		if(!empty($meta[ 'attachment' ])) {
-			$meta[ "last_update" ]	 = gmdate( "Y-m-d H:i:s" );
-		}
-		
 		// or use the one from theme meta
-		if ( !$meta[ 'attachment' ] ) {
+		if ( !$meta[ 'attachment' ] && bp_is_active('groups') ) {
 			$meta = groups_get_groupmeta( $object_id, '_bb_cover_photo', true );
 		}
 		return (array) @$meta;
@@ -169,9 +159,6 @@ function buddyboss_cover_photo_update( $object, $object_id, $value ) {
 
 function buddyboss_cover_photo( $object, $object_id ) {
 
-	//look if it need default stock or not.
-	buddyboss_cover_photo_update_default( $object, $object_id ); //simple.
-
 	$cover_photo = buddyboss_cover_photo_get( $object, $object_id );
 
 	if ( !$cover_photo ) { //its not a valid object.
@@ -182,17 +169,43 @@ function buddyboss_cover_photo( $object, $object_id ) {
 		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
 	}
 
-//	if ( $object == "group" && !onesocial_get_option( 'boss_cover_group' ) ) { //return nothing.
+//	if ( $object == "group" && !onesocial_get_option( 'social_portfolio_cover_group' ) ) { //return nothing.
 	if ( $object == "group" && bp_disable_group_cover_image_uploads() ) { //return nothing.
 		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
 	}
 
-	if ( $object == "group" && !onesocial_get_option( 'boss_cover_group' ) ) { //return nothing.
-		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
-	}
-
-	if ( empty( $cover_photo[ "attachment" ] ) ) { //return nothing.
-		return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
+    /**
+     * $cover_photo['attachment'] will be blank, when we are viewing a fresh profile, 
+     * since the user hasn't done anything with his/her cover photo yet.
+     * $cover_photo['attachment'] will also be blank when user has deleted his/her cover photo. 
+     * But, in this case we have a timestamp of when it was deleted.
+     * 
+     * We need to make sure that we do display it for fresh profiles.
+     */
+	if ( empty( $cover_photo[ "attachment" ] ) ) { 
+        
+        if( isset( $cover_photo['last_update'] ) && !empty( $cover_photo['last_update'] ) ){
+            //cover image is blank becuase it was removed.
+            //return nothing.
+            return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
+        } else {
+            //cover image is blank because this is a fresh profile
+            //set a cover photo
+            
+            //only for user ?
+            if( 'user'==$object ){
+                //check for default-cover-photo-setting first
+                $cover_default = onesocial_get_option('boss_profile_cover_default' );
+                if( isset( $cover_default['url'] ) && !empty( $cover_default['url'] ) ){
+                    $cover_photo['attachment'] = $cover_default['url'];
+                } else {
+                    //set one from our stock photo
+                    $cover_photo = buddyboss_cover_photo_new_default( $object, $object_id );
+                }
+            } else {
+                return buddyboss_no_cover_photo( $object, $object_id ); //return blank cover photo
+            }
+        }
 	}
 
 	// check if theme meta is returned
@@ -250,7 +263,12 @@ function buddyboss_cover_photo( $object, $object_id ) {
 function buddyboss_no_cover_photo( $object, $object_id ) {
 
 	if ( !buddyboss_cover_photo_can_edit( $object, $object_id ) ) {
-		return '<div class="bb-cover-photo no-photo"></div>';
+        $profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
+		$cover_default = isset( $profile_cover_default['url'] ) ? $profile_cover_default['url'] : '';
+        
+		return '<div class="bb-cover-photo no-photo">
+                <div class="holder" id="header-cover-image" style="background-image:url('. $cover_default .')"></div>
+            </div>';
 	}
 
 	if ( $object == "user" && bp_disable_cover_image_uploads() ) { //return nothing.
@@ -261,23 +279,31 @@ function buddyboss_no_cover_photo( $object, $object_id ) {
 		return '<div class="bb-cover-photo no-photo"></div>';
 	}
 
-	if ( $object == "group" && !onesocial_get_option( 'boss_cover_group' ) ) { //return nothing.
-		return '<div class="bb-cover-photo no-photo"></div>';
-	}
-
 	if ( $object == 'group' ) {
 		$permalink = bp_get_group_permalink() . 'admin/group-cover-image/';
+		$group_cover_default = onesocial_get_option('boss_group_cover_default' );
+		$cover_default = $group_cover_default['url'];
 	}
 
 	if ( $object == 'user' ) {
-		$permalink = bp_get_member_permalink() . 'profile/change-cover-image/';
+
+		// Determine user to use.
+		if ( bp_displayed_user_domain() ) {
+			$user_domain = bp_displayed_user_domain();
+		} elseif ( bp_loggedin_user_domain() ) {
+			$user_domain = bp_loggedin_user_domain();
+		}
+
+		$permalink = $user_domain . 'profile/change-cover-image/';
+		$profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
+		$cover_default = isset( $profile_cover_default['url'] ) ? $profile_cover_default['url'] : '';
 	}
 
 	return '
     <div class="bb-cover-photo no-photo" data-obj="' . $object . '" data-objid="' . $object_id . '">
       <button class="update-cover-photo" onclick="window.location.href = \'' . $permalink . '\'"><i class="fa fa-camera"></i><div> ' . __( "Update Cover Photo", 'onesocial' ) . '<i class="fa fa-spinner fa-spin" style="display:none"></i></div></button>
       <button class="update-cover-photo refresh-cover-photo" data-routine="refresh" title="' . __( "Get a random cover photo", 'onesocial' ) . '" id="refresh-cover-photo-btn"><i class="fa fa-refresh"></i><div>' . __( "Get a random cover photo", 'onesocial' ) . '<i class="fa fa-spinner fa-spin" style="display:none"></i></div></button>
-        <div class="progress"><span></span></div><div class="holder" id="header-cover-image"></div>
+        <div class="progress"><span></span></div><div class="holder" id="header-cover-image" style="background-image:url('. $cover_default .')"></div>
     </div>' .
 	buddyboss_cover_photo_js();
 }
@@ -291,7 +317,7 @@ function buddyboss_cover_photo_can_edit( $object, $object_id ) {
 		}
 	}
 
-	if ( $object == "group" ) {
+	if ( $object == "group"  && bp_is_active('groups') ) {
 		if ( groups_is_user_admin( get_current_user_id(), $object_id ) ) {
 			$can_edit = true;
 		}
@@ -304,8 +330,6 @@ function buddyboss_cover_photo_js() {
 	return "<script>
       jQuery('document').ready(function() {
          option = {
-           flash_swf_url:'" . get_template_directory_uri() . "/js/plupload/Moxie.swf',
-           uploader_xap_url:'" . get_template_directory_uri() . "/js/plupload/Moxie.xap',
            nonce:'" . wp_create_nonce( 'cover-photo-upload' ) . "'
          };
          buddyboss_cover_photo(option);
@@ -323,85 +347,44 @@ function buddyboss_cover_photo_js_vars( $vars ) {
 
 add_filter( "buddyboss_js_vars", "buddyboss_cover_photo_js_vars" );
 
-/*
- * Update the default cover photo
- * this will update the cover photo from stock images on the first time.
+/**
+ * Pick out random cover image from stock cover images
+ * at images/cover-stocks/boss-cover-{1-32}.jpg
+ *
+ * @return mixed|void a path to the file
  */
-
-function buddyboss_cover_photo_update_default( $object, $object_id ) {
-
-	$cover_photo = buddyboss_cover_photo_get( $object, $object_id );
-
-	if ( !$cover_photo ) { //its not a valid object.
-		return false;
-	}
-	if ( !@empty( $cover_photo[ "last_update" ] ) ) { //looks if its first time or not.
-		return false;
-	}
-	//if its first time, let the magic happen!.
-
-	$value					 = array();
-	$value[ "attachment" ]	 = buddyboss_cover_photo_get_stock_sample(); //get an stock attachment
-	$value[ "last_update" ]	 = gmdate( "Y-m-d H:i:s" );
-	$value[ "is_stock" ]	 = '1'; //mark it as stock
-	buddyboss_cover_photo_update( $object, $object_id, $value );
-}
-
-/*
- * Upload Stock Sample Attachment and return the ID.
- * @return <int> ID of attachment
- * */
-
-function buddyboss_cover_photo_get_stock_sample() {
+function buddyboss_cover_photo_get_stock_sample_file() {
 	global $onesocial;
 
+	//pick random number
 	$random_num	 = rand( 1, 23 ); //currently we have 23 images.
 	$random_num	 = apply_filters( "buddyboss_photo_cover_random_stock_num", $random_num );
-
-	$default_cover_photo = '';
-
-	if ( function_exists( 'bp_is_user' ) && bp_is_user() ) {
-		$default_cover_photo = onesocial_get_option( 'boss_profile_cover_default', 'id' );
-	}
-
-	if ( function_exists( 'bp_is_group' ) && bp_is_group() ) {
-		$default_cover_photo = onesocial_get_option( 'boss_group_cover_default', 'id' );
-	}
-
-	//Check default cover is available and media is image file
-	if ( !empty( $default_cover_photo ) && wp_attachment_is_image( $default_cover_photo ) ) {
-		return $default_cover_photo;
-	}
 
 	//pick the random image
 	$filename	 = $onesocial->tpl_dir . '/images/cover-stocks/boss-cover-' . $random_num . ".jpg";
 	$filename	 = apply_filters( "buddyboss_cover_photo_stock_pick_filename", $filename );
 
-	// Check the type of file. We'll use this as the 'post_mime_type'.
-	$filetype		 = wp_check_filetype( basename( $filename ), null );
-	// Get the path to the upload directory.
-	$wp_upload_dir	 = wp_upload_dir();
+	return apply_filters( 'buddyboss_cover_photo_get_stock_sample_file', $filename );
+}
 
-	//copy  it
-	copy( $filename, $wp_upload_dir[ 'path' ] . '/' . basename( $filename ) );
+/**
+ * Pick out random cover image from stock cover images and return its url
+ * 
+ * @global $onesocial
+ * @return string file url
+ */
+function buddyboss_cover_photo_get_stock_sample(){
+    global $onesocial;
 
-	$filename	 = $wp_upload_dir[ 'path' ] . '/' . basename( $filename ); //new path
-	// Prepare an array of post data for the attachment.
-	$attachment	 = array(
-		'guid'			 => $wp_upload_dir[ 'url' ] . '/' . basename( $filename ),
-		'post_mime_type' => $filetype[ 'type' ],
-		'post_title'	 => 'Cover Photo Stock Image',
-		'post_content'	 => '',
-		'post_status'	 => 'inherit'
-	);
+	//pick random number
+	$random_num	 = rand( 1, 23 ); //currently we have 23 images.
+	$random_num	 = apply_filters( "buddyboss_photo_cover_random_stock_num", $random_num );
 
-	// Insert the attachment.
-	$attach_id	 = wp_insert_attachment( $attachment, $filename, 0 );
-	require_once( ABSPATH . 'wp-admin/includes/image.php' );
-	$attach_data = wp_generate_attachment_metadata( $attach_id, $filename );
-	wp_update_attachment_metadata( $attach_id, $attach_data );
+	//pick the random image
+	$filename	 = $onesocial->tpl_url . '/images/cover-stocks/boss-cover-' . $random_num . ".jpg";
+	$filename	 = apply_filters( "buddyboss_cover_photo_stock_pick_fileurl", $filename );
 
-	return $attach_id;
+	return apply_filters( 'buddyboss_cover_photo_get_stock_sample_fileurl', $filename );
 }
 
 /**
@@ -497,8 +480,8 @@ function buddyboss_cover_photo_upload() {
 	}
 }
 
-add_action( 'wp_ajax_buddyboss_cover_photo', 'buddyboss_cover_photo_upload' );
-add_action( 'wp_ajax_nopriv_buddyboss_cover_photo', 'buddyboss_cover_photo_upload' );
+//add_action( 'wp_ajax_buddyboss_cover_photo', 'buddyboss_cover_photo_upload' );
+//add_action( 'wp_ajax_nopriv_buddyboss_cover_photo', 'buddyboss_cover_photo_upload' );
 add_action( 'wp_ajax_buddyboss_cover_photo_refresh', 'buddyboss_cover_photo_refresh' );
 add_action( 'wp_ajax_nopriv_buddyboss_cover_photo_refresh', 'buddyboss_cover_photo_refresh' );
 
@@ -538,35 +521,86 @@ function buddyboss_cover_photo_refresh() {
 		exit;
 	}
 
-	//check for permission
-	if ( !buddyboss_cover_photo_can_edit( $object, $object_id ) ) {
+	// We need it to carry on. {
+	$bp_params =  array(
+		'object'  => $object,
+		'item_id' => $object_id,
+	);
+
+	// Set object for the user's case.
+	if ( 'user' === $bp_params['object'] ) {
+
+		$bp_params['component'] = 'xprofile';
+		$bp_params['dir']       = 'members';
+
+		// Set it for any other cases.
+	} else {
+		$bp_params['component'] = $bp_params['object'] . 's';
+		$bp_params['dir']       = $bp_params['component'];
+	}
+
+	// Capability check.
+	if ( ! bp_attachments_current_user_can( 'edit_cover_image', $bp_params ) ) {
 		$return[ "error" ] = __( "You don't have permission to update cover photo.", 'onesocial' );
 		echo json_encode( $return );
 		exit;
 	}
 
-	$get_object = buddyboss_cover_photo_get_object( $object, $object_id );
-
-	if ( empty( $get_object ) ) {
+	// Stop here in case of a missing parameter for the object.
+	if ( empty( $bp_params['dir'] ) || empty( $bp_params['component'] ) ) {
 		$return[ "error" ] = __( "The section you uploading cover does not exists.", 'onesocial' );
 		echo json_encode( $return );
 		exit;
 	}
 
 	if ( 'refresh' == $routine ) {
-		//fetch new
-		$cover_photo = buddyboss_cover_photo_new_default( $object, $object_id );
 
-		$attachment = wp_get_attachment_image_src( $cover_photo[ "attachment" ], "boss-cover-image" );
+		//pick the random image
+		$filename = buddyboss_cover_photo_get_stock_sample_file();
+
+		$create_arr = array(
+			'item_id'   => $bp_params['item_id'],
+			'object'    => $bp_params['object'],
+			'component' => $bp_params['component'],
+			'image'     => $filename
+		);
+
+		//set an attachment type for a given item
+		bp_attachments_create_item_type( 'cover_image', $create_arr );
 
 		$return[ "success" ] = __( "Cover photo is successfully updated.", 'onesocial' );
-		$return[ "image" ]	 = $attachment[ 0 ];
+
+		$get_arr = array(
+			'item_id'       => $bp_params['item_id'],
+			'object_dir'    => $bp_params['dir'],
+			'type'          => 'cover-image'
+		);
+
+		$return[ "image" ]	 = bp_attachments_get_attachment( 'url', $get_arr );
+
 		die( json_encode( $return ) );
 	} else {
-		//remove current
+
+		// Handle delete.
+		bp_attachments_delete_file( array( 'item_id' => $bp_params['item_id'], 'object_dir' => $bp_params['dir'], 'type' => 'cover-image' ) );
+
+		//Keep buddyboss_cover_photo_remove to remove cover image set using the Boss Theme cover image feture
+		//for backward compatibility
 		buddyboss_cover_photo_remove( $object, $object_id );
+
 		$return[ "success" ] = __( "Cover photo is removed.", 'onesocial' );
 		$return[ "image" ]	 = '';
+
+		if (  $bp_params['object'] == 'group' ) {
+			$group_cover_default = onesocial_get_option('boss_group_cover_default' );
+			$return[ "image" ] = $group_cover_default['url'];
+		}
+
+		if (  $bp_params['object'] == 'user' ) {
+			$profile_cover_default = onesocial_get_option('boss_profile_cover_default' );
+			$return[ "image" ] = $profile_cover_default['url'];
+		}
+
 		die( json_encode( $return ) );
 	}
 }

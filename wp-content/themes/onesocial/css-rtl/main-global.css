@@ -109,7 +109,8 @@ This is the Global stylesheet, served to all devices.
 16.0 - BuddyBoss Media
 17.0 - BuddyBoss Global Search
 18.0 - BuddyPress User Blog
-19.0 - Inline Comments
+19.0 - BuddyPress Group Email Subscription
+20.0 - Inline Comments
 */
 /*----------------------------------------------------------------
 >>> WORDPRESS
@@ -1216,6 +1217,12 @@ img.wp-smiley,
     margin: 0;
     padding: 0 0 70px;
     text-align: center;
+
+    /* This is added to fix search layout issue after load more */
+    -webkit-box-flex: 0;
+    -ms-flex: 0 0 100%;
+    flex: 0 0 100%;
+
 }
 
 .sap-pagination {
@@ -2193,6 +2200,10 @@ div.footer-inner ul.social-icons {
     text-align: center;
 }
 
+.social-icons:empty {
+    display: none;
+}
+
 div.footer-inner-bottom ul.social-icons li {
     display: inline-block;
     list-style: none;
@@ -2489,6 +2500,10 @@ div.footer-inner ul.social-icons li span:before {
     text-rendering: auto;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+}
+
+.widget.onesocial_social_links .social-icons span {
+    font-family: FontAwesome;
 }
 
 
@@ -3352,7 +3367,7 @@ body #onesocial_recommend:before {
 
 .a2a_dd.addtoany_no_icon {
     cursor: pointer;
-    font-size: 10px;
+    font-size: 10px !important;
     line-height: 1;
     position: relative;
     text-align: center;
@@ -4242,7 +4257,7 @@ body article.error404 .entry-header {
     font-weight: normal;
 }
 
-.search-content .pagination-below {
+.search-content-wrap .pagination-below {
     padding-top: 70px;
 }
 
@@ -5341,7 +5356,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
     -ms-flex-flow: row wrap;
     flex-flow: row wrap;
 
-    overflow-x: hidden;
+    /*overflow-x: hidden;*/ /* Removed - This cause some content getting hidden on members page */
 }
 
 #buddypress .dir-list ul.item-list > li {
@@ -5472,7 +5487,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .bb-member-quick-link-wrapper {
-    display: inline;
+    display: inline-block;
     position: relative;
     vertical-align: top;
 }
@@ -5531,7 +5546,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .author-follow div.generic-button a,
-#main .inner-avatar-wrap .generic-button a {
+#main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close) {
     background: transparent;
     color: transparent;
     font-size: 10px;
@@ -5556,7 +5571,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 #page #main .author-follow div.generic-button.loading a:before,
-#page #main .inner-avatar-wrap .generic-button.loading a:before {
+#page #main .inner-avatar-wrap .generic-button.loading a:not(.group-sub):not(.group-subscription-close):before {
     content: "H";
     color: #fff;
     font-family: 'onesocial';
@@ -5567,7 +5582,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .author-follow div.generic-button a:hover,
-#main .inner-avatar-wrap .generic-button a:hover {
+#main .inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):hover {
     background: transparent;
     color: #888;
     box-shadow: none;
@@ -5575,7 +5590,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .author-follow div.generic-button a:before,
-.inner-avatar-wrap .generic-button a:before {
+.inner-avatar-wrap .generic-button a:not(.group-sub):not(.group-subscription-close):before {
     background: #50A9E5;
     border-radius: 100%;
     color: #fff;
@@ -5627,7 +5642,7 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
 }
 
 .author-follow div.generic-button a:after,
-.inner-avatar-wrap div.generic-button a:after,
+.inner-avatar-wrap div.generic-button a:not(.group-sub):not(.group-subscription-close):after,
 .inner-avatar-wrap .awaiting_response_friend a:after,
 .inner-avatar-wrap .pending_friend:not(.add) a:after,
 #primary .author-follow .pending_friend:not(.add) a:after,
@@ -5693,7 +5708,6 @@ label[for="groupblog-create-new-no"] .buddyboss-select {
     color: #54ae68;
     float: right;
     margin-left: 20px;
-    margin-top: -6px;
 }
 
 .bb-group-avatar-wrap .action {
@@ -9016,6 +9030,15 @@ body.single-item #secondary.bp-legacy {
     }
 }
 
+@media screen and (max-width: 800px) {
+    .bp-user-blog #header-aside-inner > .header-notifications {
+        display: none;
+    }
+    .woocommerce #header-aside-inner > .header-notifications {
+        display: none;
+    }
+}
+
 @media screen and (max-width: 630px) {
     #buddypress .dir-list ul.item-list > li {
         width: 50%;
@@ -11104,6 +11127,17 @@ html .woocommerce form .form-row textarea {
     border-bottom-color: #fff;
 }
 
+.plain-input .buddyboss-select-inner {
+    height: auto;
+    line-height: normal;
+    padding-left: 0; 
+}
+.plain-input .buddyboss-select-inner span {
+    display: none;
+}
+.plain-input .buddyboss-select-inner:after {
+    display: none;
+}
 /*--------------------------------------------------------------
 7.0 - BuddyPress Activity Plus
 --------------------------------------------------------------*/
@@ -11310,6 +11344,16 @@ form#places-form #new-place-content input[type="time"],
 
 #buddypress .dir-list ul.item-list.albums-list > li .item-avatar {
     margin: 0;
+}
+
+body #buddypress div.buddyboss-media-form-wrapper div#invite-list ul li {
+    margin-right: 2px;
+}
+
+#buddypress div.buddyboss-media-form-wrapper input[type="checkbox"] + strong {
+    top: -1px;
+    right: 4px;
+    margin-right: 6px;
 }
 
 /*--------------------------------------------------------------
@@ -11666,7 +11710,78 @@ body .bb-global-search-ac .bbls-category:not(:first-child) {
 }
 
 /*--------------------------------------------------------------
-19.0 - Inline Comments
+19.0 - BuddyPress Group Email Subscription
+--------------------------------------------------------------*/
+
+#groups-list .after_group_content {
+    position: relative;
+}
+
+body #groups-dir-list .group-subscription-div,
+body #groups-list .group-subscription-div {
+    padding-top: 0;
+    margin-bottom: 20px;
+}
+
+#secondary div.generic-button.group-subscription-options,
+body #groups-dir-list .group-subscription-options,
+body #groups-list .group-subscription-options {
+    position: absolute;
+    width: 100%;
+    margin-right: 0;
+    background-color: #fff;
+    height: auto;
+    margin-top: -10px;
+    z-index: 4;
+    font-size: 11px;
+    line-height: 1.2;
+    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.11);
+}
+
+#secondary #item-meta {
+    position: relative;
+}
+
+#secondary div.generic-button.group-subscription-options a.group-sub,
+#buddypress #groups-list a.group-sub {
+    display: block;
+    width: 100%;
+    margin-bottom: 2px;
+    margin-top: 12px;
+}
+
+#secondary div.generic-button.group-subscription-options a.group-sub:first-child,
+#buddypress #groups-list a.group-sub:first-child {
+    margin-top: 0;
+}
+
+#secondary div.generic-button.group-subscription-options .fa-spinner,
+#buddypress #groups-list a.group-subscription-close .fa-spinner,
+#secondary div.generic-button.group-subscription-options a.group-sub .fa-spinner,
+#buddypress #groups-list a.group-sub .fa-spinner {
+    display: none;
+}
+
+#secondary div.generic-button.group-subscription-options a.group-subscription-close,
+#buddypress #groups-list a.group-subscription-close {
+    background-color: transparent;
+    margin-top: 4px;
+    margin-bottom: 4px;
+    color: #000;
+    padding: 0;
+    display: block;
+    height: auto;
+}
+
+#secondary div.generic-button.group-subscription-options {
+    display: none;
+    max-width: 200px;
+    left: 0;
+    margin-top: 5px;
+}
+
+/*--------------------------------------------------------------
+20.0 - Inline Comments
 --------------------------------------------------------------*/
 #incom_wrapper .incom-bubble-style {
     background: transparent;
@@ -12911,7 +13026,11 @@ p.description:empty {
 }
 
 .boss-modal-form.popup-content .datebox select {
-    margin: 0 2px;
+    margin: 0 0 0 25px;
+}
+
+.boss-modal-form.popup-content .datebox select:last-child {
+    margin: 0;
 }
 
 .wp-social-login-provider-list a:before {
@@ -13199,6 +13318,25 @@ p.description:empty {
     text-align: right;
     line-height: 22px;
     padding-bottom: 0;
+}
+
+.popup-content fieldset {
+    border: 0;
+    padding: 0;
+}
+
+.popup-content .datebox > legend {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.popup-content .editfield.field_bmt_member_type {
+    margin-bottom: 40px;
+}
+
+.popup-content .editfield.field_bmt_member_type label {
+    margin-bottom: 10px;
 }
 
 .wp-social-login-provider-list img {
@@ -15466,10 +15604,6 @@ body .fancybox-inner .buddyboss-comment-media-bulk-uploader-uploaded .file img {
     line-height: 25px;
 }
 
-.medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li {
-    display: inline-block !important;
-}
-
 #avatar-to-crop img,
 #avatar-crop-pane img {
     opacity: 1;
@@ -15672,8 +15806,11 @@ a.liked span.sl-count,
 .page-template-homepage.home:not(.groups) .entry-header {
     display: none;
 }
+.page-template-homepage:not(.home) .entry-header {
+    margin-top: 40px;
+}
 .page-template-homepage #primary {
-    padding: 0;
+    /*padding: 0;*/ /* This is not required VC composer should handle this automatically */
 }
 .is-mobile.page-template-homepage #primary {
     /* margin-top: 40px; */
@@ -15915,9 +16052,9 @@ a.liked span.sl-count,
     min-height: 1px;
 }
 
-[dir='rtl'] .slick-slide {
+/*[dir='rtl'] .slick-slide {
     float: left;
-}
+}*/
 
 .slick-slide img {
     display: block;
@@ -16622,6 +16759,31 @@ input#discount_code_button {
     position: relative;
     top: -3px;
     margin: 0;
+}
+
+.registerfields select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+
+    background: url('./../images/angle-arrow-down.svg') 98% / 15% no-repeat;
+    background-size: 9px;
+    border: 0;
+    border-bottom: 1px solid #e1e1e1;
+    border-radius: 0;
+    font-size: 16px;
+    height: 42px;
+    outline: none;
+    padding: 5px 0 5px 35px;
+}
+
+.bmt-member-type {
+    width: 100%;
+}
+
+.registerfields select:-moz-focusring {
+    color: transparent;
+    text-shadow: 0 0 0 #000;
 }
 
 /*--------------------------------------------------------------

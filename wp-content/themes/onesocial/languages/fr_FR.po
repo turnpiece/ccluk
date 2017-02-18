@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OneSocial\n"
 "Report-Msgid-Bugs-To: http://www.buddyboss.com/contact/\n"
-"POT-Creation-Date: 2016-07-13 10:53:48+00:00\n"
+"POT-Creation-Date: 2016-09-03 08:31:11+00:00\n"
 "PO-Revision-Date: 2016-05-01 14:01-0400\n"
 "Last-Translator: jean-pierre michaud <nexialys@yahoo.com>\n"
 "Language-Team: jean-pierre michaud <nexialys@yahoo.com>\n"
@@ -40,7 +40,7 @@ msgstr ""
 msgid "Latest Articles"
 msgstr "Dernières Nouvelles"
 
-#: 404.php:68 404.php:92 buddyboss-inc/theme-functions.php:1424
+#: 404.php:68 404.php:92 buddyboss-inc/theme-functions.php:1426
 #: buddyboss-inc/vc-functions.php:381 buddyboss-inc/vc-functions.php:448
 #: buddypress-global-search/loop/bpgs_cpt-product.php:42
 #: buddypress-global-search/loop/bpgs_cpt.php:36
@@ -53,17 +53,17 @@ msgstr "Dernières Nouvelles"
 msgid "Permalink to %s"
 msgstr "Permalink à %s"
 
-#: 404.php:75 404.php:84 buddyboss-inc/theme-functions.php:826
-#: buddyboss-inc/theme-functions.php:2393
-#: buddyboss-inc/theme-functions.php:2822 template-parts/content.php:178
+#: 404.php:75 404.php:84 buddyboss-inc/theme-functions.php:828
+#: buddyboss-inc/theme-functions.php:2397
+#: buddyboss-inc/theme-functions.php:2826 template-parts/content.php:178
 #: template-parts/content.php:183
 msgid "View all posts by %s"
 msgstr "Voir tous les messages de %s"
 
 #. Translators: used between list items, there is a space after the comma.
 #. translators: used between list items, there is a space after the comma
-#: 404.php:82 buddyboss-inc/theme-functions.php:820
-#: buddyboss-inc/theme-functions.php:823 buddyboss-inc/theme-functions.php:3106
+#: 404.php:82 buddyboss-inc/theme-functions.php:822
+#: buddyboss-inc/theme-functions.php:825 buddyboss-inc/theme-functions.php:3110
 msgid ", "
 msgstr ","
 
@@ -132,12 +132,12 @@ msgstr ""
 msgid "This user has not created any topics."
 msgstr "Cet utilisateur n’a créé aucun sujet."
 
-#: bbpress.php:32 buddyboss-inc/theme-functions.php:888 image.php:93
+#: bbpress.php:32 buddyboss-inc/theme-functions.php:890 image.php:93
 #: template-parts/content-page.php:19 template-parts/content.php:94
 msgid "Pages:"
 msgstr "Pages:"
 
-#: bp-user-blog/sap-blog-page.php:81 buddyboss-inc/theme-functions.php:1302
+#: bp-user-blog/sap-blog-page.php:81 buddyboss-inc/theme-functions.php:1304
 msgid "Load More"
 msgstr "Lire la Suite"
 
@@ -744,13 +744,15 @@ msgstr "Lire la Suite"
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/password/field_password.php:62
 #: buddyboss-inc/buddyboss-widgets/buddyboss-profile-widget-loader.php:80
-#: template-parts/site-login.php:45 welcome-experience/login.php:43
+#: template-parts/site-login.php:45 template-parts/site-register.php:52
+#: welcome-experience/login.php:43
 msgid "Password"
 msgstr "Mot de passe"
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/password/field_password.php:63
 #: buddyboss-inc/buddyboss-widgets/buddyboss-profile-widget-loader.php:71
-#: template-parts/site-login.php:39 welcome-experience/login.php:36
+#: template-parts/site-login.php:39 template-parts/site-register.php:48
+#: welcome-experience/login.php:36
 msgid "Username"
 msgstr "Nom d’utilisateur"
 
@@ -2940,12 +2942,12 @@ msgstr ""
 msgid "Plugins"
 msgstr "Extensions"
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1403
-#: buddyboss-inc/buddyboss-framework/options-init.php:1404
+#: buddyboss-inc/buddyboss-framework/options-init.php:1418
+#: buddyboss-inc/buddyboss-framework/options-init.php:1419
 msgid "OneSocial Theme"
 msgstr "Thème OneSocial"
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1492
+#: buddyboss-inc/buddyboss-framework/options-init.php:1507
 msgid ""
 "<p>To access any of your saved options from within your code you can use "
 "your global variable: <strong>$%1$s</strong></p>"
@@ -2953,7 +2955,7 @@ msgstr ""
 "<p>Pour accéder à vos options enregistrées à partir de votre code, vous "
 "pouvez utiliser votre variable globale: <strong>$%1$s</strong></p>"
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1494
+#: buddyboss-inc/buddyboss-framework/options-init.php:1509
 msgid ""
 "<p>This text is displayed above the options panel. It isn't required, but "
 "more info is always better! The intro_text field accepts all HTML.</p>"
@@ -3002,7 +3004,7 @@ msgstr "Mesure à prendre"
 
 #: buddyboss-inc/buddyboss-framework/plugin-support.php:328
 #: buddyboss-inc/buddyboss-framework/plugin-support.php:407
-#: buddyboss-inc/theme-functions.php:2844 buddypress.php:113 buddypress.php:139
+#: buddyboss-inc/theme-functions.php:2848 buddypress.php:113 buddypress.php:139
 #: image.php:37
 msgid "Edit"
 msgstr "Modifier"
@@ -3124,57 +3126,57 @@ msgstr "Afficher les abonnés"
 msgid "Show followings"
 msgstr "Afficher les Abonnements"
 
-#: buddyboss-inc/cover-photo.php:225 buddyboss-inc/cover-photo.php:278
+#: buddyboss-inc/cover-photo.php:238 buddyboss-inc/cover-photo.php:304
 msgid "Update Cover Photo"
 msgstr "Mettre à Jour la Photo de Couverture"
 
-#: buddyboss-inc/cover-photo.php:234
+#: buddyboss-inc/cover-photo.php:247
 msgid "Remove cover photo"
 msgstr "Enlever la photo de couverture"
 
-#: buddyboss-inc/cover-photo.php:279 buddyboss-inc/cover-photo.php:320
+#: buddyboss-inc/cover-photo.php:305 buddyboss-inc/cover-photo.php:344
 msgid "Get a random cover photo"
 msgstr "Avoir une photo de couverture au hasard"
 
-#: buddyboss-inc/cover-photo.php:317
+#: buddyboss-inc/cover-photo.php:341
 msgid "Error uploading cover photo."
 msgstr "Erreur en transférant une photo de couverture."
 
-#: buddyboss-inc/cover-photo.php:318
+#: buddyboss-inc/cover-photo.php:342
 msgid "Error refreshing cover photo."
 msgstr "Erreur en rafraichissant la photo de couverture."
 
-#: buddyboss-inc/cover-photo.php:319
+#: buddyboss-inc/cover-photo.php:343
 msgid "Remove cover photo."
 msgstr "Supprimer la photo de couverture."
 
-#: buddyboss-inc/cover-photo.php:422 buddyboss-inc/cover-photo.php:430
-#: buddyboss-inc/cover-photo.php:521 buddyboss-inc/cover-photo.php:529
+#: buddyboss-inc/cover-photo.php:405 buddyboss-inc/cover-photo.php:413
+#: buddyboss-inc/cover-photo.php:504 buddyboss-inc/cover-photo.php:512
 msgid "Invalid request try again later."
 msgstr "Requête invalide, essayer plus tard."
 
-#: buddyboss-inc/cover-photo.php:437 buddyboss-inc/cover-photo.php:536
+#: buddyboss-inc/cover-photo.php:420 buddyboss-inc/cover-photo.php:519
 msgid "Security error try later again."
 msgstr "Erreur de sécurité, essayer plus tard."
 
-#: buddyboss-inc/cover-photo.php:444 buddyboss-inc/cover-photo.php:543
+#: buddyboss-inc/cover-photo.php:427 buddyboss-inc/cover-photo.php:544
 msgid "You don't have permission to update cover photo."
 msgstr ""
 "Vous n’avez pas la permission de mettre votre photo de couverture à jour."
 
-#: buddyboss-inc/cover-photo.php:452 buddyboss-inc/cover-photo.php:551
+#: buddyboss-inc/cover-photo.php:435 buddyboss-inc/cover-photo.php:551
 msgid "The section you uploading cover does not exists."
 msgstr "La section pour laquelle vous ajouter une couverture n'existe pas."
 
-#: buddyboss-inc/cover-photo.php:489 buddyboss-inc/cover-photo.php:562
+#: buddyboss-inc/cover-photo.php:472 buddyboss-inc/cover-photo.php:571
 msgid "Cover photo is successfully updated."
 msgstr "La couverture a été mise à jour avec succès."
 
-#: buddyboss-inc/cover-photo.php:494
+#: buddyboss-inc/cover-photo.php:477
 msgid "Error while uploading the cover photo, try later again."
 msgstr "Erreur en transférant cette photo de couverture, essayer plus tard."
 
-#: buddyboss-inc/cover-photo.php:568
+#: buddyboss-inc/cover-photo.php:591
 msgid "Cover photo is removed."
 msgstr "Photo de couverture supprimée."
 
@@ -3437,79 +3439,87 @@ msgstr "Voir comme un Ordinateur de Table"
 msgid "View as Mobile"
 msgstr "Affichage Mobile"
 
-#: buddyboss-inc/theme-functions.php:621
+#: buddyboss-inc/theme-functions.php:288
+msgid "Yes"
+msgstr ""
+
+#: buddyboss-inc/theme-functions.php:289
+msgid "No"
+msgstr ""
+
+#: buddyboss-inc/theme-functions.php:623
 msgid "Page %s"
 msgstr "La page %s"
 
-#: buddyboss-inc/theme-functions.php:799
+#: buddyboss-inc/theme-functions.php:801
 msgid "Post navigation"
 msgstr "Poster navigation"
 
-#: buddyboss-inc/theme-functions.php:800
+#: buddyboss-inc/theme-functions.php:802
 msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
 msgstr "<span class=\"meta-nav\">&larr;</span> Les seniors messages"
 
-#: buddyboss-inc/theme-functions.php:801
+#: buddyboss-inc/theme-functions.php:803
 msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
 msgstr "Les nouveaux messages <span class=\"meta-nav\">&rarr;</span>"
 
-#: buddyboss-inc/theme-functions.php:1352
+#: buddyboss-inc/theme-functions.php:1354
 msgid "View Profile"
 msgstr "Voir le profil"
 
-#: buddyboss-inc/theme-functions.php:1389
+#: buddyboss-inc/theme-functions.php:1391
 msgid "Articles"
 msgstr "Articles"
 
-#: buddyboss-inc/theme-functions.php:1410 template-parts/content-author.php:43
+#: buddyboss-inc/theme-functions.php:1412 template-parts/content-author.php:43
 msgid "Most recommended stories"
 msgstr "Histoires les Plus Recommandées"
 
-#: buddyboss-inc/theme-functions.php:1410 template-parts/content-author.php:44
+#: buddyboss-inc/theme-functions.php:1412 template-parts/content-author.php:44
 msgid "Latest stories"
 msgstr "Derniers articles"
 
-#: buddyboss-inc/theme-functions.php:1483
+#: buddyboss-inc/theme-functions.php:1485
 msgid "No stories found"
 msgstr "Aucun récit trouvé"
 
-#: buddyboss-inc/theme-functions.php:1623
+#: buddyboss-inc/theme-functions.php:1625
 msgid "You haven't added any friend connections yet."
 msgstr "Vous n'avez pas encore établi de contact"
 
-#: buddyboss-inc/theme-functions.php:1623
+#: buddyboss-inc/theme-functions.php:1625
 msgid "%s hasn't created any friend connections yet."
 msgstr "%s n&#39;a pas encore établi de contact"
 
-#: buddyboss-inc/theme-functions.php:1753
+#: buddyboss-inc/theme-functions.php:1755
 msgid "You don't have any followers yet."
 msgstr "Vous n'avez pas encore des adeptes."
 
-#: buddyboss-inc/theme-functions.php:1753
+#: buddyboss-inc/theme-functions.php:1755
 msgid "%s doesn't have any followers yet."
 msgstr "%s n'a pas encore d'adepte."
 
-#: buddyboss-inc/theme-functions.php:1755
+#: buddyboss-inc/theme-functions.php:1757
 msgid "You don't have any following yet."
 msgstr "Vous n'avez pas tout de suite encore."
 
-#: buddyboss-inc/theme-functions.php:1755
+#: buddyboss-inc/theme-functions.php:1757
 msgid "%s doesn't have any following yet."
 msgstr "%s ne suis personne encore."
 
-#: buddyboss-inc/theme-functions.php:1826
+#: buddyboss-inc/theme-functions.php:1828
 msgid "%s reply"
 msgid_plural "%s replies"
 msgstr[0] "%s réponse"
 msgstr[1] "%s réponses"
 
-#: buddyboss-inc/theme-functions.php:1837
+#: buddyboss-inc/theme-functions.php:1839
 msgid "%s topic"
 msgid_plural "%s topics"
 msgstr[0] "%s sujet"
 msgstr[1] "%s sujets"
 
-#: buddyboss-inc/theme-functions.php:1846
+#: buddyboss-inc/theme-functions.php:1848
 msgid ""
 "<span class=\"post-num\">%1$s and %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s</span>"
@@ -3517,7 +3527,7 @@ msgstr ""
 "<span class=« post-num »>%1$s et %2$s</span> <span class=« last-"
 "activity »>Dernière mise à jour par %3$s %4$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1848
+#: buddyboss-inc/theme-functions.php:1850
 msgid ""
 "<span class=\"post-num\">%1$s and %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s<span>"
@@ -3525,8 +3535,8 @@ msgstr ""
 "<span class=« post-num »>%1$s et %2$s</span> <span class=« last-"
 "activity »>Dernière mise à jour par %3$s %4$s<span> </span> </span>"
 
-#: buddyboss-inc/theme-functions.php:1853
 #: buddyboss-inc/theme-functions.php:1855
+#: buddyboss-inc/theme-functions.php:1857
 msgid ""
 "<span class=\"post-num\">%1$s</span> <span class=\"last-activity\">Last "
 "updated by %2$s %3$s</span>"
@@ -3534,27 +3544,27 @@ msgstr ""
 "<span class=\"post-num\">%1$s</span> <span class=\"last-activity\">Mis à "
 "jour par %2$s %3$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1865
 #: buddyboss-inc/theme-functions.php:1867
+#: buddyboss-inc/theme-functions.php:1869
 msgid "<span class=\"post-num\">%1$s and %2$s</span>"
 msgstr "<span class=« post-num »>%1$s et %2$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1874
 #: buddyboss-inc/theme-functions.php:1876
+#: buddyboss-inc/theme-functions.php:1878
 msgid "<span class=\"post-num\">%1$s</span>"
 msgstr "<span class=\"post-num\">%1$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1879
+#: buddyboss-inc/theme-functions.php:1881
 msgid "<span class=\"post-num\">0 topics and 0 posts</span>"
 msgstr "<span class=\"post-num\">0 sujets et 0 messages</span>"
 
-#: buddyboss-inc/theme-functions.php:1951
+#: buddyboss-inc/theme-functions.php:1953
 msgid "%s voice"
 msgid_plural "%s voices"
 msgstr[0] "%s voix"
 msgstr[1] "%s voix"
 
-#: buddyboss-inc/theme-functions.php:1957
+#: buddyboss-inc/theme-functions.php:1959
 msgid ""
 "<span class=\"post-num\">%1$s, %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s</span>"
@@ -3562,87 +3572,87 @@ msgstr ""
 "<span class=\"post-num\">%1$s, %2$s</span> <span class=\"last-activity\">Mis "
 "à jour par %3$s %4$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1961
+#: buddyboss-inc/theme-functions.php:1963
 msgid "<span class=\"post-num\">%1$s, %2$s</span>"
 msgstr "<span class=\"post-num\">%1$s, %2$s</span>"
 
-#: buddyboss-inc/theme-functions.php:1965
+#: buddyboss-inc/theme-functions.php:1967
 msgid "<span class=\"post-num\">0 replies</span>"
 msgstr "<span class=\"post-num\">0 réponses</span>"
 
-#: buddyboss-inc/theme-functions.php:2356
+#: buddyboss-inc/theme-functions.php:2360
 msgid "No new notifications"
 msgstr "Aucune notification"
 
 #. translators: 1: date, 2: time
-#: buddyboss-inc/theme-functions.php:2550
-#: buddyboss-inc/theme-functions.php:2830
+#: buddyboss-inc/theme-functions.php:2554
+#: buddyboss-inc/theme-functions.php:2834
 msgid "%1$s at %2$s"
 msgstr "%1$s à %2$s"
 
-#: buddyboss-inc/theme-functions.php:2619
+#: buddyboss-inc/theme-functions.php:2623
 msgid "Notes"
 msgstr "Notes"
 
-#: buddyboss-inc/theme-functions.php:2653
+#: buddyboss-inc/theme-functions.php:2657
 #: buddyboss-media/groups/single/buddyboss-media-album-edit.php:55
 #: buddyboss-media/members/single/buddyboss-media-album-edit.php:58
 #: template-parts/create-post.php:33
 msgid "Save"
 msgstr "Sauver"
 
-#: buddyboss-inc/theme-functions.php:2657
+#: buddyboss-inc/theme-functions.php:2661
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr "Connecté en tant que <a href=“%1$s”>que%2$s.</a>"
 
-#: buddyboss-inc/theme-functions.php:2660
+#: buddyboss-inc/theme-functions.php:2664
 msgid "Leave a note"
 msgstr "Laissez une note"
 
-#: buddyboss-inc/theme-functions.php:2709
+#: buddyboss-inc/theme-functions.php:2713
 msgid " min read"
 msgstr " min de lecture"
 
-#: buddyboss-inc/theme-functions.php:2711
+#: buddyboss-inc/theme-functions.php:2715
 msgid " sec read"
 msgstr " sec. de lecture"
 
-#: buddyboss-inc/theme-functions.php:2737 searchform.php:13
+#: buddyboss-inc/theme-functions.php:2741 searchform.php:13
 msgid "Type to Search"
 msgstr "Type de recherche..."
 
-#: buddyboss-inc/theme-functions.php:2801
+#: buddyboss-inc/theme-functions.php:2805
 msgid "Pingback:"
 msgstr "Pingback:"
 
-#: buddyboss-inc/theme-functions.php:2801
+#: buddyboss-inc/theme-functions.php:2805
 msgid "(Edit)"
 msgstr "(Editer)"
 
-#: buddyboss-inc/theme-functions.php:2827
+#: buddyboss-inc/theme-functions.php:2831
 msgid "Post author"
 msgstr "Auteur du sujet"
 
-#: buddyboss-inc/theme-functions.php:2836
+#: buddyboss-inc/theme-functions.php:2840
 msgid "Your comment is awaiting moderation."
 msgstr "Votre commentaire est en attente de modération."
 
-#: buddyboss-inc/theme-functions.php:2845
+#: buddyboss-inc/theme-functions.php:2849
 msgid "Reply <span>&darr;</span>"
 msgstr "Répondre"
 
-#: buddyboss-inc/theme-functions.php:3000
-#: buddyboss-inc/theme-functions.php:3050
+#: buddyboss-inc/theme-functions.php:3004
+#: buddyboss-inc/theme-functions.php:3054
 #: buddypress/groups/single/admin.php:226
 #: buddypress/groups/single/admin.php:257
 msgid "Profile picture of %s"
 msgstr "Image de profil de %s"
 
-#: buddyboss-inc/theme-functions.php:3007
+#: buddyboss-inc/theme-functions.php:3011
 msgid "No Admins"
 msgstr "Pas Admins"
 
-#: buddyboss-inc/theme-functions.php:3060
+#: buddyboss-inc/theme-functions.php:3064
 msgid "No Mods"
 msgstr "Aucun Mods"
 
@@ -4143,11 +4153,11 @@ msgstr "Privé"
 msgid "Group"
 msgstr "Groupe"
 
-#: buddypress/groups/groups-loop.php:108 buddypress/groups/single/admin.php:280
+#: buddypress/groups/groups-loop.php:112 buddypress/groups/single/admin.php:280
 msgid "Members"
 msgstr "Membres"
 
-#: buddypress/groups/groups-loop.php:161
+#: buddypress/groups/groups-loop.php:166
 msgid "There were no groups found."
 msgstr "Il n'y a aucun groupe trouvé."
 
@@ -4726,6 +4736,9 @@ msgstr[1] "%s nouveaux"
 msgctxt "Change profile field visibility level"
 msgid "Change"
 msgstr "Enregistrer les modifications"
+
+#~ msgid "Star"
+#~ msgstr "Étoile"
 
 #, fuzzy
 #~ msgid "Registering as a vendor."

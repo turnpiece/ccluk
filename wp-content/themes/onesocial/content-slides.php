@@ -5,7 +5,7 @@ if ( onesocial_get_option( 'boss_slider_switch' ) && is_array( $slides ) && !emp
 	?>
 
 	<div class="bb-slider-container">
-		<div class="bb-slider-wrapper">
+		<div class="bb-slider-wrapper" data-rtl="<?php echo is_rtl(); ?>">
 
 			<?php
 			foreach ( $slides as $slide ) {
@@ -62,6 +62,7 @@ if ( onesocial_get_option( 'boss_slider_switch' ) && is_array( $slides ) && !emp
 	    jQuery( document ).ready( function () {
 
 	        var $slider = $( '.bb-slider-wrapper' );
+			var rtl = ($slider.data('rtl')===1?true:false);
 
 	        $slider.slick( {
 	            dots: true,
@@ -73,6 +74,7 @@ if ( onesocial_get_option( 'boss_slider_switch' ) && is_array( $slides ) && !emp
 	            adaptiveHeight: true,
 	            autoplay: true,
 	            autoplaySpeed: 4500,
+				rtl: rtl,
 	            cssEase: 'linear'
 	        } );
 

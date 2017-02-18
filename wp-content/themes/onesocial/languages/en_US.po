@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OneSocial v1.0.2\n"
 "Report-Msgid-Bugs-To: http://www.buddyboss.com/contact/\n"
-"POT-Creation-Date: 2016-07-13 10:53:48+00:00\n"
+"POT-Creation-Date: 2016-11-05 22:14:10+00:00\n"
 "PO-Revision-Date: 2016-02-23 20:29+0700\n"
 "Last-Translator: BuddyBoss <support@buddyboss.com>\n"
 "Language-Team: BuddyBoss <support@buddyboss.com>\n"
@@ -38,7 +38,7 @@ msgstr ""
 msgid "Latest Articles"
 msgstr ""
 
-#: 404.php:68 404.php:92 buddyboss-inc/theme-functions.php:1424
+#: 404.php:68 404.php:92 buddyboss-inc/theme-functions.php:1426
 #: buddyboss-inc/vc-functions.php:381 buddyboss-inc/vc-functions.php:448
 #: buddypress-global-search/loop/bpgs_cpt-product.php:42
 #: buddypress-global-search/loop/bpgs_cpt.php:36
@@ -51,17 +51,17 @@ msgstr ""
 msgid "Permalink to %s"
 msgstr ""
 
-#: 404.php:75 404.php:84 buddyboss-inc/theme-functions.php:826
-#: buddyboss-inc/theme-functions.php:2393
-#: buddyboss-inc/theme-functions.php:2822 template-parts/content.php:178
+#: 404.php:75 404.php:84 buddyboss-inc/theme-functions.php:828
+#: buddyboss-inc/theme-functions.php:2395
+#: buddyboss-inc/theme-functions.php:2824 template-parts/content.php:178
 #: template-parts/content.php:183
 msgid "View all posts by %s"
 msgstr ""
 
 #. Translators: used between list items, there is a space after the comma.
 #. translators: used between list items, there is a space after the comma
-#: 404.php:82 buddyboss-inc/theme-functions.php:820
-#: buddyboss-inc/theme-functions.php:823 buddyboss-inc/theme-functions.php:3106
+#: 404.php:82 buddyboss-inc/theme-functions.php:822
+#: buddyboss-inc/theme-functions.php:825 buddyboss-inc/theme-functions.php:3108
 msgid ", "
 msgstr ""
 
@@ -89,6 +89,7 @@ msgstr ""
 
 #: bbpress/form-search.php:15
 #: buddyboss-inc/buddyboss-framework/options-init.php:210
+#: buddypress/common/search/dir-search-form.php:15
 #: template-parts/header-aside.php:53
 msgid "Search"
 msgstr ""
@@ -129,12 +130,12 @@ msgstr ""
 msgid "This user has not created any topics."
 msgstr ""
 
-#: bbpress.php:32 buddyboss-inc/theme-functions.php:888 image.php:93
+#: bbpress.php:32 buddyboss-inc/theme-functions.php:890 image.php:93
 #: template-parts/content-page.php:19 template-parts/content.php:94
 msgid "Pages:"
 msgstr ""
 
-#: bp-user-blog/sap-blog-page.php:81 buddyboss-inc/theme-functions.php:1302
+#: bp-user-blog/sap-blog-page.php:81 buddyboss-inc/theme-functions.php:1304
 msgid "Load More"
 msgstr ""
 
@@ -197,14 +198,14 @@ msgid "Draft"
 msgstr ""
 
 #: buddyboss-inbox/drafts.php:68 buddyboss-inbox/drafts.php:137
-#: buddyboss-inbox/members/single/messages/messages-loop.php:66
-#: buddypress/members/single/messages/messages-loop.php:69
+#: buddyboss-inbox/members/single/messages/messages-loop.php:63
+#: buddypress/members/single/messages/messages-loop.php:70
 msgid "View Message"
 msgstr ""
 
 #: buddyboss-inbox/drafts.php:183
-#: buddyboss-inbox/members/single/messages/messages-loop.php:125
-#: buddypress/members/single/messages/messages-loop.php:127
+#: buddyboss-inbox/members/single/messages/messages-loop.php:135
+#: buddypress/members/single/messages/messages-loop.php:141
 msgid "Sorry, no messages were found."
 msgstr ""
 
@@ -228,8 +229,31 @@ msgstr ""
 msgid "Send Message"
 msgstr ""
 
-#: buddyboss-inbox/members/single/messages/messages-loop.php:37
-msgid "Star"
+#: buddyboss-inbox/members/single/messages/messages-loop.php:35
+#: buddypress/members/single/messages/messages-loop.php:23
+msgid "Actions"
+msgstr ""
+
+#: buddyboss-inbox/members/single/messages/messages-loop.php:85
+#: buddypress/members/single/messages/messages-loop.php:92
+msgid "Read"
+msgstr ""
+
+#: buddyboss-inbox/members/single/messages/messages-loop.php:87
+#: buddypress/members/single/messages/messages-loop.php:94
+msgid "Unread"
+msgstr ""
+
+#: buddyboss-inbox/members/single/messages/messages-loop.php:90
+#: buddyboss-inbox/members/single/messages/single.php:24
+#: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/slides/field_slides.php:167
+#: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/slides/field_slides.php:220
+#: buddyboss-inc/buddyboss-framework/boss-extensions/extensions/custom_slides/custom_slides/field_custom_slides.php:194
+#: buddyboss-inc/buddyboss-framework/boss-extensions/extensions/custom_slides/custom_slides/field_custom_slides.php:256
+#: buddyboss-inc/buddyboss-framework/plugin-support.php:369
+#: buddypress/activity/comment.php:43 buddypress/activity/entry.php:74
+#: buddypress/members/single/messages/messages-loop.php:97
+msgid "Delete"
 msgstr ""
 
 #: buddyboss-inbox/members/single/messages/single.php:14
@@ -243,16 +267,6 @@ msgstr ""
 #: buddyboss-inbox/members/single/messages/single.php:24
 #: buddypress/members/single/messages/notices-loop.php:33
 msgid "Delete Message"
-msgstr ""
-
-#: buddyboss-inbox/members/single/messages/single.php:24
-#: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/slides/field_slides.php:167
-#: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/slides/field_slides.php:220
-#: buddyboss-inc/buddyboss-framework/boss-extensions/extensions/custom_slides/custom_slides/field_custom_slides.php:194
-#: buddyboss-inc/buddyboss-framework/boss-extensions/extensions/custom_slides/custom_slides/field_custom_slides.php:256
-#: buddyboss-inc/buddyboss-framework/plugin-support.php:369
-#: buddypress/activity/comment.php:43 buddypress/activity/entry.php:74
-msgid "Delete"
 msgstr ""
 
 #: buddyboss-inbox/members/single/messages/single.php:95
@@ -511,7 +525,7 @@ msgid "Press return or enter to expand"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/extensions/import_export/extension_import_export.php:120
-#: buddyboss-inc/buddyboss-framework/options-init.php:1342
+#: buddyboss-inc/buddyboss-framework/options-init.php:1344
 msgid "Import / Export"
 msgstr ""
 
@@ -722,13 +736,15 @@ msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/password/field_password.php:62
 #: buddyboss-inc/buddyboss-widgets/buddyboss-profile-widget-loader.php:80
-#: template-parts/site-login.php:45 welcome-experience/login.php:43
+#: template-parts/site-login.php:45 template-parts/site-register.php:52
+#: welcome-experience/login.php:43
 msgid "Password"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/fields/password/field_password.php:63
 #: buddyboss-inc/buddyboss-widgets/buddyboss-profile-widget-loader.php:71
-#: template-parts/site-login.php:39 welcome-experience/login.php:36
+#: template-parts/site-login.php:39 template-parts/site-register.php:48
+#: welcome-experience/login.php:36
 msgid "Username"
 msgstr ""
 
@@ -796,16 +812,16 @@ msgstr ""
 #: buddyboss-inc/buddyboss-framework/options-init.php:582
 #: buddyboss-inc/buddyboss-framework/options-init.php:591
 #: buddyboss-inc/buddyboss-framework/options-init.php:619
-#: buddyboss-inc/buddyboss-framework/options-init.php:1012
-#: buddyboss-inc/buddyboss-framework/options-init.php:1032
-#: buddyboss-inc/buddyboss-framework/options-init.php:1063
-#: buddyboss-inc/buddyboss-framework/options-init.php:1154
-#: buddyboss-inc/buddyboss-framework/options-init.php:1224
-#: buddyboss-inc/buddyboss-framework/options-init.php:1240
-#: buddyboss-inc/buddyboss-framework/options-init.php:1258
-#: buddyboss-inc/buddyboss-framework/options-init.php:1286
-#: buddyboss-inc/buddyboss-framework/options-init.php:1295
-#: buddyboss-inc/buddyboss-framework/options-init.php:1303
+#: buddyboss-inc/buddyboss-framework/options-init.php:1014
+#: buddyboss-inc/buddyboss-framework/options-init.php:1034
+#: buddyboss-inc/buddyboss-framework/options-init.php:1065
+#: buddyboss-inc/buddyboss-framework/options-init.php:1156
+#: buddyboss-inc/buddyboss-framework/options-init.php:1226
+#: buddyboss-inc/buddyboss-framework/options-init.php:1242
+#: buddyboss-inc/buddyboss-framework/options-init.php:1260
+#: buddyboss-inc/buddyboss-framework/options-init.php:1288
+#: buddyboss-inc/buddyboss-framework/options-init.php:1297
+#: buddyboss-inc/buddyboss-framework/options-init.php:1305
 msgid "On"
 msgstr ""
 
@@ -821,16 +837,16 @@ msgstr ""
 #: buddyboss-inc/buddyboss-framework/options-init.php:583
 #: buddyboss-inc/buddyboss-framework/options-init.php:592
 #: buddyboss-inc/buddyboss-framework/options-init.php:620
-#: buddyboss-inc/buddyboss-framework/options-init.php:1013
-#: buddyboss-inc/buddyboss-framework/options-init.php:1033
-#: buddyboss-inc/buddyboss-framework/options-init.php:1064
-#: buddyboss-inc/buddyboss-framework/options-init.php:1155
-#: buddyboss-inc/buddyboss-framework/options-init.php:1225
-#: buddyboss-inc/buddyboss-framework/options-init.php:1241
-#: buddyboss-inc/buddyboss-framework/options-init.php:1259
-#: buddyboss-inc/buddyboss-framework/options-init.php:1287
-#: buddyboss-inc/buddyboss-framework/options-init.php:1296
-#: buddyboss-inc/buddyboss-framework/options-init.php:1304
+#: buddyboss-inc/buddyboss-framework/options-init.php:1015
+#: buddyboss-inc/buddyboss-framework/options-init.php:1035
+#: buddyboss-inc/buddyboss-framework/options-init.php:1066
+#: buddyboss-inc/buddyboss-framework/options-init.php:1157
+#: buddyboss-inc/buddyboss-framework/options-init.php:1227
+#: buddyboss-inc/buddyboss-framework/options-init.php:1243
+#: buddyboss-inc/buddyboss-framework/options-init.php:1261
+#: buddyboss-inc/buddyboss-framework/options-init.php:1289
+#: buddyboss-inc/buddyboss-framework/options-init.php:1298
+#: buddyboss-inc/buddyboss-framework/options-init.php:1306
 msgid "Off"
 msgstr ""
 
@@ -1108,7 +1124,7 @@ msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/tracking.php:166
 #: buddypress/activity/post-form.php:94 template-parts/create-post.php:38
-#: template-parts/site-register.php:92
+#: template-parts/site-register.php:114
 msgid "Close"
 msgstr ""
 
@@ -1873,7 +1889,7 @@ msgid "Credits"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/inc/welcome/welcome.php:354
-#: buddyboss-inc/buddyboss-framework/options-init.php:1328
+#: buddyboss-inc/buddyboss-framework/options-init.php:1330
 msgid "Support"
 msgstr ""
 
@@ -1888,7 +1904,8 @@ msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/templates/panel/footer.tpl.php:57
 #: buddyboss-inc/buddyboss-framework/admin/ReduxCore/templates/panel/header_stickybar.tpl.php:21
-#: buddypress/groups/single/admin.php:44 buddypress/groups/single/admin.php:129
+#: buddypress/groups/single/admin/edit-details.php:56
+#: buddypress/groups/single/admin/group-settings.php:119
 #: buddypress/members/single/settings/general.php:37
 msgid "Save Changes"
 msgstr ""
@@ -2010,7 +2027,7 @@ msgid "Open link in a new window/tab?"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/options-init.php:66
-#: buddyboss-inc/buddyboss-framework/options-init.php:1172
+#: buddyboss-inc/buddyboss-framework/options-init.php:1174
 msgid "Logo"
 msgstr ""
 
@@ -2475,13 +2492,13 @@ msgid "Sites to Allow"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/options-init.php:653
-#: buddyboss-inc/buddyboss-framework/options-init.php:1171
-#: buddyboss-inc/buddyboss-framework/options-init.php:1178
+#: buddyboss-inc/buddyboss-framework/options-init.php:1173
+#: buddyboss-inc/buddyboss-framework/options-init.php:1180
 msgid "Site Title"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/options-init.php:654
-#: buddyboss-inc/buddyboss-framework/options-init.php:1179
+#: buddyboss-inc/buddyboss-framework/options-init.php:1181
 msgid "Specify the site title properties."
 msgstr ""
 
@@ -2573,229 +2590,229 @@ msgstr ""
 msgid "Typography"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:954
+#: buddyboss-inc/buddyboss-framework/options-init.php:956
 msgid "Styling"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:985
+#: buddyboss-inc/buddyboss-framework/options-init.php:987
 msgid "Footer"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:992
+#: buddyboss-inc/buddyboss-framework/options-init.php:994
 msgid "Footer Style"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1009
+#: buddyboss-inc/buddyboss-framework/options-init.php:1011
 msgid "Copyright Text"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1010
+#: buddyboss-inc/buddyboss-framework/options-init.php:1012
 msgid "Enter your custom copyright text."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1029
+#: buddyboss-inc/buddyboss-framework/options-init.php:1031
 msgid "Social Links"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1030
+#: buddyboss-inc/buddyboss-framework/options-init.php:1032
 msgid ""
 "Define and reorder your social icons in the footer. Keep the input field "
 "empty for any social icon you do not wish to display."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1045
+#: buddyboss-inc/buddyboss-framework/options-init.php:1047
 msgid "Sign into %s"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1048
+#: buddyboss-inc/buddyboss-framework/options-init.php:1050
 msgid " or create an account"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1053
+#: buddyboss-inc/buddyboss-framework/options-init.php:1055
 msgid "Register/Login"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1060
+#: buddyboss-inc/buddyboss-framework/options-init.php:1062
 msgid "Register/Login Overlays"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1061
+#: buddyboss-inc/buddyboss-framework/options-init.php:1063
 msgid "Toggle the custom register/login overlays on or off."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1069
+#: buddyboss-inc/buddyboss-framework/options-init.php:1071
 msgid "Login Overlay"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1075
+#: buddyboss-inc/buddyboss-framework/options-init.php:1077
 msgid "Login Title"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1076
+#: buddyboss-inc/buddyboss-framework/options-init.php:1078
 msgid "Welcome back!"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1082
+#: buddyboss-inc/buddyboss-framework/options-init.php:1084
 msgid "Login Description"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1088
+#: buddyboss-inc/buddyboss-framework/options-init.php:1090
 msgid "Social Login Message"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1090
+#: buddyboss-inc/buddyboss-framework/options-init.php:1092
 msgid "We will never post to Twitter or Facebook without your permission."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1101
+#: buddyboss-inc/buddyboss-framework/options-init.php:1103
 msgid "Register Overlay"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1107
+#: buddyboss-inc/buddyboss-framework/options-init.php:1109
 msgid "Register Title"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1108
+#: buddyboss-inc/buddyboss-framework/options-init.php:1110
 #: buddyboss-inc/buddyboss-widgets/buddyboss-profile-widget-loader.php:89
 #: template-parts/header-user-links.php:9
-#: template-parts/header-user-links.php:21 template-parts/site-register.php:176
+#: template-parts/header-user-links.php:21 template-parts/site-register.php:198
 #: welcome-experience/register.php:53
 msgid "Register"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1114
+#: buddyboss-inc/buddyboss-framework/options-init.php:1116
 msgid "Register Description"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1115
+#: buddyboss-inc/buddyboss-framework/options-init.php:1117
 msgid "Join %s"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1121
+#: buddyboss-inc/buddyboss-framework/options-init.php:1123
 msgid "Reset Password Overlay"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1127
+#: buddyboss-inc/buddyboss-framework/options-init.php:1129
 msgid "Reset Password Title"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1134
+#: buddyboss-inc/buddyboss-framework/options-init.php:1136
 msgid "Reset Password Description"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1143
+#: buddyboss-inc/buddyboss-framework/options-init.php:1145
 msgid "WordPress Login"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1151
+#: buddyboss-inc/buddyboss-framework/options-init.php:1153
 msgid "Custom Login Screen"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1152
+#: buddyboss-inc/buddyboss-framework/options-init.php:1154
 msgid "Toggle the custom WordPress login screen design on or off."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1160
+#: buddyboss-inc/buddyboss-framework/options-init.php:1162
 msgid "WordPress Login Screen"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1166
+#: buddyboss-inc/buddyboss-framework/options-init.php:1168
 msgid "Title/Logo"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1167
+#: buddyboss-inc/buddyboss-framework/options-init.php:1169
 msgid "Display the site title or upload a logo."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1198
+#: buddyboss-inc/buddyboss-framework/options-init.php:1200
 msgid "Custom Logo"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1199
+#: buddyboss-inc/buddyboss-framework/options-init.php:1201
 msgid "We display a custom logo in place of the default WordPress logo."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1206
+#: buddyboss-inc/buddyboss-framework/options-init.php:1208
 msgid "Custom Colors"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1207
+#: buddyboss-inc/buddyboss-framework/options-init.php:1209
 msgid ""
 "Edit the admin login screen colors in the <a href=\"javascript:void(0);\" "
 "class=\"redux-group-tab-link-a\" data-key=\"8\" data-rel=\"8\">Styling "
 "section</a>, under the \"Admin Screen\"."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1214
+#: buddyboss-inc/buddyboss-framework/options-init.php:1216
 msgid "Custom Codes"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1221
+#: buddyboss-inc/buddyboss-framework/options-init.php:1223
 msgid "Tracking Code"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1222
+#: buddyboss-inc/buddyboss-framework/options-init.php:1224
 msgid ""
 "Paste your Google Analytics (or other) tracking code here. This will be "
 "added before the closing of body tag."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1237
+#: buddyboss-inc/buddyboss-framework/options-init.php:1239
 msgid "CSS"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1238
+#: buddyboss-inc/buddyboss-framework/options-init.php:1240
 msgid ""
 "Quickly add some CSS here to make design adjustments. It is a much better "
 "solution then manually editing the theme. You may also consider using a "
 "child theme."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1255
+#: buddyboss-inc/buddyboss-framework/options-init.php:1257
 msgid "JavaScript"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1256
+#: buddyboss-inc/buddyboss-framework/options-init.php:1258
 msgid ""
 "Quickly add some JavaScript code here. It is a much better solution then "
 "manually editing the theme. You may also consider using a child theme."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1275
+#: buddyboss-inc/buddyboss-framework/options-init.php:1277
 msgid "Optimizations"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1283
+#: buddyboss-inc/buddyboss-framework/options-init.php:1285
 msgid "Minify CSS"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1284
+#: buddyboss-inc/buddyboss-framework/options-init.php:1286
 msgid ""
 "By default the theme loads stylesheets that are not minified. You can enable "
 "this setting to instead load minified and combined stylesheets."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1292
+#: buddyboss-inc/buddyboss-framework/options-init.php:1294
 msgid "Minify JavaScript"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1293
+#: buddyboss-inc/buddyboss-framework/options-init.php:1295
 msgid ""
 "By default the theme loads scripts that are not minified. You can enable "
 "this setting to instead load minified and combined JS files."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1301
+#: buddyboss-inc/buddyboss-framework/options-init.php:1303
 msgid "Form Inputs JavaScript"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1302
+#: buddyboss-inc/buddyboss-framework/options-init.php:1304
 msgid ""
 "To improve compatibility with certain setups, turn the JavaScript off "
 "related to dropdowns, checkboxes, and radios."
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1312
+#: buddyboss-inc/buddyboss-framework/options-init.php:1314
 #: template-parts/header-dashboard-links.php:19
 #: template-parts/header-dashboard-links.php:41
 #: template-parts/header-dashboard-links.php:65
@@ -2803,18 +2820,18 @@ msgstr ""
 msgid "Plugins"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1403
-#: buddyboss-inc/buddyboss-framework/options-init.php:1404
+#: buddyboss-inc/buddyboss-framework/options-init.php:1420
+#: buddyboss-inc/buddyboss-framework/options-init.php:1421
 msgid "OneSocial Theme"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1492
+#: buddyboss-inc/buddyboss-framework/options-init.php:1509
 msgid ""
 "<p>To access any of your saved options from within your code you can use "
 "your global variable: <strong>$%1$s</strong></p>"
 msgstr ""
 
-#: buddyboss-inc/buddyboss-framework/options-init.php:1494
+#: buddyboss-inc/buddyboss-framework/options-init.php:1511
 msgid ""
 "<p>This text is displayed above the options panel. It isn't required, but "
 "more info is always better! The intro_text field accepts all HTML.</p>"
@@ -2857,7 +2874,7 @@ msgstr ""
 
 #: buddyboss-inc/buddyboss-framework/plugin-support.php:328
 #: buddyboss-inc/buddyboss-framework/plugin-support.php:407
-#: buddyboss-inc/theme-functions.php:2844 buddypress.php:113 buddypress.php:139
+#: buddyboss-inc/theme-functions.php:2846 buddypress.php:113 buddypress.php:139
 #: image.php:37
 msgid "Edit"
 msgstr ""
@@ -2935,8 +2952,8 @@ msgstr ""
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:158
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:174
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:194
-#: buddypress/blogs/index.php:46 buddypress/forums/index.php:38
-#: buddypress/groups/index.php:34 buddypress/members/index.php:32
+#: buddypress/blogs/index.php:44 buddypress/forums/index.php:38
+#: buddypress/groups/index.php:32 buddypress/members/index.php:30
 #: buddypress/members/single/groups.php:28
 msgid "Last Active"
 msgstr ""
@@ -2944,15 +2961,15 @@ msgstr ""
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:159
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:175
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:195
-#: buddypress/members/index.php:33
+#: buddypress/members/index.php:31
 msgid "Newest Registered"
 msgstr ""
 
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:160
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:176
 #: buddyboss-inc/buddyboss-widgets/custom-widgets.php:196
-#: buddypress/blogs/index.php:48 buddypress/groups/index.php:37
-#: buddypress/members/index.php:36 buddypress/members/single/groups.php:31
+#: buddypress/blogs/index.php:46 buddypress/groups/index.php:35
+#: buddypress/members/index.php:34 buddypress/members/single/groups.php:31
 msgid "Alphabetical"
 msgstr ""
 
@@ -2977,56 +2994,56 @@ msgstr ""
 msgid "Show followings"
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:225 buddyboss-inc/cover-photo.php:278
+#: buddyboss-inc/cover-photo.php:238 buddyboss-inc/cover-photo.php:304
 msgid "Update Cover Photo"
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:234
+#: buddyboss-inc/cover-photo.php:247
 msgid "Remove cover photo"
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:279 buddyboss-inc/cover-photo.php:320
+#: buddyboss-inc/cover-photo.php:305 buddyboss-inc/cover-photo.php:344
 msgid "Get a random cover photo"
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:317
+#: buddyboss-inc/cover-photo.php:341
 msgid "Error uploading cover photo."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:318
+#: buddyboss-inc/cover-photo.php:342
 msgid "Error refreshing cover photo."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:319
+#: buddyboss-inc/cover-photo.php:343
 msgid "Remove cover photo."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:422 buddyboss-inc/cover-photo.php:430
-#: buddyboss-inc/cover-photo.php:521 buddyboss-inc/cover-photo.php:529
+#: buddyboss-inc/cover-photo.php:405 buddyboss-inc/cover-photo.php:413
+#: buddyboss-inc/cover-photo.php:504 buddyboss-inc/cover-photo.php:512
 msgid "Invalid request try again later."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:437 buddyboss-inc/cover-photo.php:536
+#: buddyboss-inc/cover-photo.php:420 buddyboss-inc/cover-photo.php:519
 msgid "Security error try later again."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:444 buddyboss-inc/cover-photo.php:543
+#: buddyboss-inc/cover-photo.php:427 buddyboss-inc/cover-photo.php:544
 msgid "You don't have permission to update cover photo."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:452 buddyboss-inc/cover-photo.php:551
+#: buddyboss-inc/cover-photo.php:435 buddyboss-inc/cover-photo.php:551
 msgid "The section you uploading cover does not exists."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:489 buddyboss-inc/cover-photo.php:562
+#: buddyboss-inc/cover-photo.php:472 buddyboss-inc/cover-photo.php:571
 msgid "Cover photo is successfully updated."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:494
+#: buddyboss-inc/cover-photo.php:477
 msgid "Error while uploading the cover photo, try later again."
 msgstr ""
 
-#: buddyboss-inc/cover-photo.php:568
+#: buddyboss-inc/cover-photo.php:591
 msgid "Cover photo is removed."
 msgstr ""
 
@@ -3269,204 +3286,210 @@ msgstr ""
 msgid "View as Mobile"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:621
+#: buddyboss-inc/theme-functions.php:288
+msgid "Yes"
+msgstr ""
+
+#: buddyboss-inc/theme-functions.php:289
+msgid "No"
+msgstr ""
+
+#: buddyboss-inc/theme-functions.php:623
 msgid "Page %s"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:799
+#: buddyboss-inc/theme-functions.php:801
 msgid "Post navigation"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:800
+#: buddyboss-inc/theme-functions.php:802
 msgid "<span class=\"meta-nav\">&larr;</span> Older posts"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:801
+#: buddyboss-inc/theme-functions.php:803
 msgid "Newer posts <span class=\"meta-nav\">&rarr;</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1352
+#: buddyboss-inc/theme-functions.php:1354
 msgid "View Profile"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1389
+#: buddyboss-inc/theme-functions.php:1391
 msgid "Articles"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1410 template-parts/content-author.php:43
+#: buddyboss-inc/theme-functions.php:1412 template-parts/content-author.php:43
 msgid "Most recommended stories"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1410 template-parts/content-author.php:44
+#: buddyboss-inc/theme-functions.php:1412 template-parts/content-author.php:44
 msgid "Latest stories"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1483
+#: buddyboss-inc/theme-functions.php:1485
 msgid "No stories found"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1623
+#: buddyboss-inc/theme-functions.php:1625
 msgid "You haven't added any friend connections yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1623
+#: buddyboss-inc/theme-functions.php:1625
 msgid "%s hasn't created any friend connections yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1753
+#: buddyboss-inc/theme-functions.php:1755
 msgid "You don't have any followers yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1753
+#: buddyboss-inc/theme-functions.php:1755
 msgid "%s doesn't have any followers yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1755
+#: buddyboss-inc/theme-functions.php:1757
 msgid "You don't have any following yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1755
+#: buddyboss-inc/theme-functions.php:1757
 msgid "%s doesn't have any following yet."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1826
+#: buddyboss-inc/theme-functions.php:1828
 msgid "%s reply"
 msgid_plural "%s replies"
 msgstr[0] ""
 msgstr[1] ""
 
-#: buddyboss-inc/theme-functions.php:1837
+#: buddyboss-inc/theme-functions.php:1839
 msgid "%s topic"
 msgid_plural "%s topics"
 msgstr[0] ""
 msgstr[1] ""
 
-#: buddyboss-inc/theme-functions.php:1846
+#: buddyboss-inc/theme-functions.php:1848
 msgid ""
 "<span class=\"post-num\">%1$s and %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1848
+#: buddyboss-inc/theme-functions.php:1850
 msgid ""
 "<span class=\"post-num\">%1$s and %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s<span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1853
 #: buddyboss-inc/theme-functions.php:1855
+#: buddyboss-inc/theme-functions.php:1857
 msgid ""
 "<span class=\"post-num\">%1$s</span> <span class=\"last-activity\">Last "
 "updated by %2$s %3$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1865
 #: buddyboss-inc/theme-functions.php:1867
+#: buddyboss-inc/theme-functions.php:1869
 msgid "<span class=\"post-num\">%1$s and %2$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1874
 #: buddyboss-inc/theme-functions.php:1876
+#: buddyboss-inc/theme-functions.php:1878
 msgid "<span class=\"post-num\">%1$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1879
+#: buddyboss-inc/theme-functions.php:1881
 msgid "<span class=\"post-num\">0 topics and 0 posts</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1951
+#: buddyboss-inc/theme-functions.php:1953
 msgid "%s voice"
 msgid_plural "%s voices"
 msgstr[0] ""
 msgstr[1] ""
 
-#: buddyboss-inc/theme-functions.php:1957
+#: buddyboss-inc/theme-functions.php:1959
 msgid ""
 "<span class=\"post-num\">%1$s, %2$s</span> <span class=\"last-activity"
 "\">Last updated by %3$s %4$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1961
+#: buddyboss-inc/theme-functions.php:1963
 msgid "<span class=\"post-num\">%1$s, %2$s</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:1965
+#: buddyboss-inc/theme-functions.php:1967
 msgid "<span class=\"post-num\">0 replies</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2356
+#: buddyboss-inc/theme-functions.php:2357
 msgid "No new notifications"
 msgstr ""
 
 #. translators: 1: date, 2: time
-#: buddyboss-inc/theme-functions.php:2550
-#: buddyboss-inc/theme-functions.php:2830
+#: buddyboss-inc/theme-functions.php:2552
+#: buddyboss-inc/theme-functions.php:2832
 msgid "%1$s at %2$s"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2619
+#: buddyboss-inc/theme-functions.php:2621
 msgid "Notes"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2653
+#: buddyboss-inc/theme-functions.php:2655
 #: buddyboss-media/groups/single/buddyboss-media-album-edit.php:55
 #: buddyboss-media/members/single/buddyboss-media-album-edit.php:58
 #: template-parts/create-post.php:33
 msgid "Save"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2657
+#: buddyboss-inc/theme-functions.php:2659
 msgid "Logged in as <a href=\"%1$s\">%2$s</a>."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2660
+#: buddyboss-inc/theme-functions.php:2662
 msgid "Leave a note"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2709
+#: buddyboss-inc/theme-functions.php:2711
 msgid " min read"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2711
+#: buddyboss-inc/theme-functions.php:2713
 msgid " sec read"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2737 searchform.php:13
+#: buddyboss-inc/theme-functions.php:2739 searchform.php:13
 msgid "Type to Search"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2801
+#: buddyboss-inc/theme-functions.php:2803
 msgid "Pingback:"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2801
+#: buddyboss-inc/theme-functions.php:2803
 msgid "(Edit)"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2827
+#: buddyboss-inc/theme-functions.php:2829
 msgid "Post author"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2836
+#: buddyboss-inc/theme-functions.php:2838
 msgid "Your comment is awaiting moderation."
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:2845
+#: buddyboss-inc/theme-functions.php:2847
 msgid "Reply <span>&darr;</span>"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:3000
-#: buddyboss-inc/theme-functions.php:3050
-#: buddypress/groups/single/admin.php:226
-#: buddypress/groups/single/admin.php:257
+#: buddyboss-inc/theme-functions.php:3002
+#: buddyboss-inc/theme-functions.php:3052
 msgid "Profile picture of %s"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:3007
+#: buddyboss-inc/theme-functions.php:3009
 msgid "No Admins"
 msgstr ""
 
-#: buddyboss-inc/theme-functions.php:3060
+#: buddyboss-inc/theme-functions.php:3062
 msgid "No Mods"
 msgstr ""
 
@@ -3571,7 +3594,7 @@ msgstr ""
 msgid "The public activity for everyone on this site."
 msgstr ""
 
-#: buddypress/activity/index.php:19 buddypress/members/index.php:25
+#: buddypress/activity/index.php:19 buddypress/members/index.php:23
 msgid "All Members <span>%s</span>"
 msgstr ""
 
@@ -3579,7 +3602,7 @@ msgstr ""
 msgid "The activity of my friends only."
 msgstr ""
 
-#: buddypress/activity/index.php:29 buddypress/members/index.php:22
+#: buddypress/activity/index.php:29 buddypress/members/index.php:20
 msgid "My Friends <span>%s</span>"
 msgstr ""
 
@@ -3587,7 +3610,7 @@ msgstr ""
 msgid "The activity of groups I am a member of."
 msgstr ""
 
-#: buddypress/activity/index.php:41 buddypress/groups/index.php:24
+#: buddypress/activity/index.php:41 buddypress/groups/index.php:22
 msgid "My Groups <span>%s</span>"
 msgstr ""
 
@@ -3676,19 +3699,19 @@ msgstr ""
 msgid "Sorry, there were no sites found."
 msgstr ""
 
-#: buddypress/blogs/index.php:30
+#: buddypress/blogs/index.php:28
 msgid "All Sites <span>%s</span>"
 msgstr ""
 
-#: buddypress/blogs/index.php:34
+#: buddypress/blogs/index.php:32
 msgid "My Sites <span>%s</span>"
 msgstr ""
 
-#: buddypress/blogs/index.php:44 buddypress/forums/index.php:36
+#: buddypress/blogs/index.php:42 buddypress/forums/index.php:36
 msgid "Order By:"
 msgstr ""
 
-#: buddypress/blogs/index.php:47
+#: buddypress/blogs/index.php:45
 msgid "Newest"
 msgstr ""
 
@@ -3756,7 +3779,8 @@ msgstr ""
 msgid "Group Description <sup>*</sup>"
 msgstr ""
 
-#: buddypress/groups/create.php:78 buddypress/groups/single/admin.php:68
+#: buddypress/groups/create.php:78
+#: buddypress/groups/single/admin/group-settings.php:38
 msgid "Privacy Options"
 msgstr ""
 
@@ -3769,17 +3793,20 @@ msgstr ""
 msgid "public group"
 msgstr ""
 
-#: buddypress/groups/create.php:83 buddypress/groups/single/admin.php:75
+#: buddypress/groups/create.php:83
+#: buddypress/groups/single/admin/group-settings.php:45
 msgid "Any site member can join this group."
 msgstr ""
 
 #: buddypress/groups/create.php:84 buddypress/groups/create.php:95
-#: buddypress/groups/single/admin.php:76 buddypress/groups/single/admin.php:86
+#: buddypress/groups/single/admin/group-settings.php:46
+#: buddypress/groups/single/admin/group-settings.php:54
 msgid ""
 "This group will be listed in the groups directory and in search results."
 msgstr ""
 
-#: buddypress/groups/create.php:85 buddypress/groups/single/admin.php:77
+#: buddypress/groups/create.php:85
+#: buddypress/groups/single/admin/group-settings.php:47
 msgid "Group content and activity will be visible to any site member."
 msgstr ""
 
@@ -3787,12 +3814,14 @@ msgstr ""
 msgid "private group"
 msgstr ""
 
-#: buddypress/groups/create.php:94 buddypress/groups/single/admin.php:85
+#: buddypress/groups/create.php:94
+#: buddypress/groups/single/admin/group-settings.php:53
 msgid "Only users who request membership and are accepted can join the group."
 msgstr ""
 
 #: buddypress/groups/create.php:96 buddypress/groups/create.php:107
-#: buddypress/groups/single/admin.php:87 buddypress/groups/single/admin.php:97
+#: buddypress/groups/single/admin/group-settings.php:55
+#: buddypress/groups/single/admin/group-settings.php:63
 msgid ""
 "Group content and activity will only be visible to members of the group."
 msgstr ""
@@ -3801,122 +3830,146 @@ msgstr ""
 msgid "hidden group"
 msgstr ""
 
-#: buddypress/groups/create.php:105 buddypress/groups/single/admin.php:95
+#: buddypress/groups/create.php:105
+#: buddypress/groups/single/admin/group-settings.php:61
 msgid "Only users who are invited can join the group."
 msgstr ""
 
-#: buddypress/groups/create.php:106 buddypress/groups/single/admin.php:96
+#: buddypress/groups/create.php:106
+#: buddypress/groups/single/admin/group-settings.php:62
 msgid ""
 "This group will not be listed in the groups directory or search results."
 msgstr ""
 
-#: buddypress/groups/create.php:112 buddypress/groups/single/admin.php:104
+#: buddypress/groups/create.php:116
+#: buddypress/groups/single/admin/group-settings.php:73
+msgid "Group Types"
+msgstr ""
+
+#: buddypress/groups/create.php:118
+#: buddypress/groups/single/admin/group-settings.php:75
+msgid "Select the types this group should be a part of."
+msgstr ""
+
+#. translators: Group type description shown when creating a group.
+#: buddypress/groups/create.php:127
+#: buddypress/groups/single/admin/group-settings.php:83
+msgid "&ndash; %s"
+msgstr ""
+
+#: buddypress/groups/create.php:138
+#: buddypress/groups/single/admin/group-settings.php:95
 msgid "Group Invitations"
 msgstr ""
 
-#: buddypress/groups/create.php:114 buddypress/groups/single/admin.php:106
+#: buddypress/groups/create.php:140
+#: buddypress/groups/single/admin/group-settings.php:97
 msgid "Which members of this group are allowed to invite others?"
 msgstr ""
 
-#: buddypress/groups/create.php:119 buddypress/groups/single/admin.php:111
+#: buddypress/groups/create.php:145
+#: buddypress/groups/single/admin/group-settings.php:101
 msgid "All group members"
 msgstr ""
 
-#: buddypress/groups/create.php:124 buddypress/groups/single/admin.php:116
+#: buddypress/groups/create.php:150
+#: buddypress/groups/single/admin/group-settings.php:103
 msgid "Group admins and mods only"
 msgstr ""
 
-#: buddypress/groups/create.php:129 buddypress/groups/single/admin.php:121
+#: buddypress/groups/create.php:155
+#: buddypress/groups/single/admin/group-settings.php:105
 msgid "Group admins only"
 msgstr ""
 
-#: buddypress/groups/create.php:135
+#: buddypress/groups/create.php:161
 msgid "Group Forums"
 msgstr ""
 
-#: buddypress/groups/create.php:139
+#: buddypress/groups/create.php:165
 msgid "Should this group have a forum?"
 msgstr ""
 
-#: buddypress/groups/create.php:142 buddypress/groups/single/admin.php:59
+#: buddypress/groups/create.php:168
+#: buddypress/groups/single/admin/group-settings.php:27
 msgid "Enable discussion forum"
 msgstr ""
 
-#: buddypress/groups/create.php:146
+#: buddypress/groups/create.php:172
 msgid ""
 "<strong>Attention Site Admin:</strong> Group forums require the <a href=\"%s"
 "\">correct setup and configuration</a> of a bbPress installation."
 msgstr ""
 
-#: buddypress/groups/create.php:178
+#: buddypress/groups/create.php:204
 msgid ""
 "Upload an image to use as a profile photo for this group. The image will be "
 "shown on the main group page, and in search results."
 msgstr ""
 
-#: buddypress/groups/create.php:181
+#: buddypress/groups/create.php:207
 msgid "Select an image"
 msgstr ""
 
-#: buddypress/groups/create.php:183 buddypress/groups/single/admin.php:143
+#: buddypress/groups/create.php:209
 msgid "Upload Image"
 msgstr ""
 
-#: buddypress/groups/create.php:187
+#: buddypress/groups/create.php:213
 msgid ""
 "To skip the group profile photo upload process, hit the \"Next Step\" button."
 msgstr ""
 
-#: buddypress/groups/create.php:202
+#: buddypress/groups/create.php:228
 msgid "Crop Group Profile Photo"
 msgstr ""
 
-#: buddypress/groups/create.php:204
+#: buddypress/groups/create.php:230
 msgid "Profile photo to crop"
 msgstr ""
 
-#: buddypress/groups/create.php:207
+#: buddypress/groups/create.php:233
 msgid "Profile photo preview"
 msgstr ""
 
-#: buddypress/groups/create.php:210 buddypress/groups/single/admin.php:169
+#: buddypress/groups/create.php:236
 msgid "Crop Image"
 msgstr ""
 
-#: buddypress/groups/create.php:248 buddypress/groups/single/admin.php:197
+#: buddypress/groups/create.php:274
 msgid "The Cover Image will be used to customize the header of your group."
 msgstr ""
 
-#: buddypress/groups/create.php:268 buddypress/groups/create.php:296
+#: buddypress/groups/create.php:294 buddypress/groups/create.php:322
 #: buddypress/groups/single/send-invites.php:23
 msgid "Select people to invite from your friends list."
 msgstr ""
 
-#: buddypress/groups/create.php:314
+#: buddypress/groups/create.php:340
 #: buddypress/groups/single/send-invites.php:44
 msgid "Remove Invite"
 msgstr ""
 
-#: buddypress/groups/create.php:331
+#: buddypress/groups/create.php:357
 #: buddypress/groups/single/send-invites.php:75
 msgid ""
 "Once you have built up friend connections you will be able to invite others "
 "to your group."
 msgstr ""
 
-#: buddypress/groups/create.php:359
+#: buddypress/groups/create.php:385
 msgid "Previous"
 msgstr ""
 
-#: buddypress/groups/create.php:366
+#: buddypress/groups/create.php:392
 msgid "Next Step"
 msgstr ""
 
-#: buddypress/groups/create.php:373
+#: buddypress/groups/create.php:399
 msgid "Create Group and Continue"
 msgstr ""
 
-#: buddypress/groups/create.php:380
+#: buddypress/groups/create.php:406
 msgid "Finish"
 msgstr ""
 
@@ -3936,166 +3989,123 @@ msgstr ""
 msgid "Group"
 msgstr ""
 
-#: buddypress/groups/groups-loop.php:108 buddypress/groups/single/admin.php:280
+#: buddypress/groups/groups-loop.php:112
+#: buddypress/groups/single/admin/manage-members.php:211
 msgid "Members"
 msgstr ""
 
-#: buddypress/groups/groups-loop.php:161
+#: buddypress/groups/groups-loop.php:166
 msgid "There were no groups found."
 msgstr ""
 
-#: buddypress/groups/index.php:27
+#: buddypress/groups/index.php:25
 msgid "All Groups <span>%s</span>"
 msgstr ""
 
-#: buddypress/groups/index.php:31 buddypress/members/index.php:30
+#: buddypress/groups/index.php:29 buddypress/members/index.php:28
 msgid "Order by "
 msgstr ""
 
-#: buddypress/groups/index.php:35 buddypress/members/single/groups.php:29
+#: buddypress/groups/index.php:33 buddypress/members/single/groups.php:29
 msgid "Most Members"
 msgstr ""
 
-#: buddypress/groups/index.php:36 buddypress/members/single/groups.php:30
+#: buddypress/groups/index.php:34 buddypress/members/single/groups.php:30
 msgid "Newly Created"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:25
+#: buddypress/groups/single/admin/edit-details.php:11
+msgid "Manage Group Details"
+msgstr ""
+
+#: buddypress/groups/single/admin/edit-details.php:23
 msgid "Group Name (required)"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:30
+#: buddypress/groups/single/admin/edit-details.php:28
 msgid "Group Description (required)"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:38
+#: buddypress/groups/single/admin/edit-details.php:43
 msgid "Notify group members of these changes via email"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:73
+#: buddypress/groups/single/admin/group-settings.php:11
+msgid "Manage Group Settings"
+msgstr ""
+
+#: buddypress/groups/single/admin/group-settings.php:42
 msgid "This is a public group"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:83
+#: buddypress/groups/single/admin/group-settings.php:50
 msgid "This is a private group"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:93
+#: buddypress/groups/single/admin/group-settings.php:58
 msgid "This is a hidden group"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:139
-msgid ""
-"Upload an image to use as an avatar for this group. The image will be shown "
-"on the main group page, and in search results."
+#: buddypress/groups/single/admin/manage-members.php:11
+msgid "Manage Members"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:149
-msgid ""
-"If you'd like to remove the existing avatar but not upload a new one, please "
-"use the delete avatar button."
-msgstr ""
-
-#: buddypress/groups/single/admin.php:151
-msgid "Delete Avatar"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:161
-msgid "Crop Avatar"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:163
-msgid "Avatar to crop"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:166
-msgid "Avatar preview"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:186
-msgid "Change Cover Image"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:218
+#: buddypress/groups/single/admin/manage-members.php:25
 msgid "Administrators"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:235
-#: buddypress/groups/single/admin.php:266
+#: buddypress/groups/single/admin/manage-members.php:72
+#: buddypress/groups/single/admin/manage-members.php:165
 msgid "Demote to Member"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:250
+#: buddypress/groups/single/admin/manage-members.php:110
+msgid "No group administrators were found."
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:117
 msgid "Moderators"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:265
-#: buddypress/groups/single/admin.php:326
+#: buddypress/groups/single/admin/manage-members.php:164
+#: buddypress/groups/single/admin/manage-members.php:274
 msgid "Promote to Admin"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:311
+#: buddypress/groups/single/admin/manage-members.php:204
+msgid "No group moderators were found."
+msgstr ""
+
+#: buddypress/groups/single/admin/manage-members.php:248
 msgid "(banned)"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:320
+#: buddypress/groups/single/admin/manage-members.php:268
 msgid "Unban this member"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:320
+#: buddypress/groups/single/admin/manage-members.php:268
 msgid "Remove Ban"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:324
-msgid "Kick and ban this member"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:324
+#: buddypress/groups/single/admin/manage-members.php:272
 msgid "Kick &amp; Ban"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:325
+#: buddypress/groups/single/admin/manage-members.php:273
 msgid "Promote to Mod"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:330
-msgid "Remove this member"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:330
+#: buddypress/groups/single/admin/manage-members.php:278
 msgid "Remove from group"
 msgstr ""
 
-#: buddypress/groups/single/admin.php:345
-msgid "This group has no members."
+#: buddypress/groups/single/admin/manage-members.php:317
+msgid "No group members were found."
 msgstr ""
 
-#: buddypress/groups/single/admin.php:375
-#: buddypress/members/single/groups/invites.php:28
-msgid "Accept"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:377
-#: buddypress/members/single/groups/invites.php:29
-msgid "Reject"
-msgstr ""
-
-#: buddypress/groups/single/admin.php:390
-msgid "There are no pending membership requests."
-msgstr ""
-
-#: buddypress/groups/single/admin.php:407
-msgid ""
-"WARNING: Deleting this group will completely remove ALL content associated "
-"with it. There is no way back, please be careful with this option."
-msgstr ""
-
-#: buddypress/groups/single/admin.php:414
-msgid "I understand the consequences of deleting this group."
-msgstr ""
-
-#: buddypress/groups/single/admin.php:419
-msgid "Delete Group"
+#: buddypress/groups/single/admin.php:10
+msgid "Group secondary navigation"
 msgstr ""
 
 #: buddypress/groups/single/group-header.php:54
@@ -4117,6 +4127,14 @@ msgstr ""
 
 #: buddypress/members/single/groups/invites.php:16
 msgid "%s members"
+msgstr ""
+
+#: buddypress/members/single/groups/invites.php:28
+msgid "Accept"
+msgstr ""
+
+#: buddypress/members/single/groups/invites.php:29
+msgid "Reject"
 msgstr ""
 
 #: buddypress/members/single/groups/invites.php:43
@@ -4391,7 +4409,7 @@ msgstr ""
 msgid "Forgot password?"
 msgstr ""
 
-#: template-parts/site-login.php:60 template-parts/site-register.php:140
+#: template-parts/site-login.php:60 template-parts/site-register.php:162
 #: welcome-experience/login.php:56 welcome-experience/register.php:58
 msgid "Sign In"
 msgstr ""
@@ -4423,29 +4441,33 @@ msgstr ""
 msgid "Reset Password"
 msgstr ""
 
-#: template-parts/site-register.php:78 template-parts/site-register.php:99
+#: template-parts/site-register.php:100 template-parts/site-register.php:121
 msgid "This field can be seen by: %s"
 msgstr ""
 
-#: template-parts/site-register.php:87
+#: template-parts/site-register.php:109
 msgid "Who can see this field?"
 msgstr ""
 
-#: template-parts/site-register.php:135
+#: template-parts/site-register.php:157
 msgid "Register Now"
 msgstr ""
 
-#: template-parts/site-register.php:140 welcome-experience/register.php:57
+#: template-parts/site-register.php:162 welcome-experience/register.php:57
 msgid "Already a member?"
 msgstr ""
 
-#: template-parts/site-register.php:168
+#: template-parts/site-register.php:188
+msgid "Welcome to %s"
+msgstr ""
+
+#: template-parts/site-register.php:190
 msgid ""
 "To finish activating your account, check your inbox for our Welcome message "
 "and confirm your email address."
 msgstr ""
 
-#: template-parts/site-register.php:170
+#: template-parts/site-register.php:192
 msgid "Okay"
 msgstr ""
 
@@ -4491,7 +4513,7 @@ msgid_plural "%s new"
 msgstr[0] ""
 msgstr[1] ""
 
-#: template-parts/site-register.php:82
+#: template-parts/site-register.php:104
 msgctxt "Change profile field visibility level"
 msgid "Change"
 msgstr ""

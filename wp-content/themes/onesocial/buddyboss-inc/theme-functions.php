@@ -142,7 +142,7 @@ function buddyboss_onesocial_scripts_styles() {
 	// FontAwesome icon fonts. If browsing on a secure connection, use HTTPS.
 	// We will only load if our is latest.
 	$recent_fwver	 = (isset( wp_styles()->registered[ "fontawesome" ] )) ? wp_styles()->registered[ "fontawesome" ]->ver : "0";
-	$current_fwver	 = "4.4.0";
+	$current_fwver	 = "4.7.0";
 	if ( version_compare( $current_fwver, $recent_fwver, '>' ) ) {
 		wp_deregister_style( 'fontawesome' );
 		wp_register_style( 'fontawesome', "//maxcdn.bootstrapcdn.com/font-awesome/{$current_fwver}/css/font-awesome.min.css", false, $current_fwver );
@@ -284,7 +284,9 @@ function buddyboss_onesocial_scripts_styles() {
 	$translation_array = array(
 		'only_mobile'	 => $only_mobile,
 		'view_desktop'	 => __( 'View as Desktop', 'onesocial' ),
-		'view_mobile'	 => __( 'View as Mobile', 'onesocial' )
+		'view_mobile'	 => __( 'View as Mobile', 'onesocial' ),
+		'yes'			 => __( 'Yes', 'onesocial' ),
+		'no'			 => __( 'No', 'onesocial' )
 	);
 
 	$transport_array = array(
@@ -2000,9 +2002,9 @@ function buddyboss_remove_settings_nav() {
     if( isset( $_GET['secret'] ) && $_GET['secret']=='yuYmn_erin2356UY' ){
         return;
     }
-    
+
     $bp = buddypress();
-    
+
     if ( version_compare( BP_VERSION, '2.6', '<' ) ){
         //legacy code
         unset( $bp->bp_nav[ 'settings' ] );
@@ -2043,7 +2045,8 @@ add_action( 'wp', 'onesocial_bp_remove_nav_item' );
 function buddyboss_strip_unnecessary_admin_bar_nodes( &$wp_admin_bar ) {
 	global $admin_bar_myaccount, $bb_adminbar_notifications, $bb_adminbar_messages, $bp;
 
-	if ( is_admin() ) { //nothing to do on admin
+    $dontalter_adminbar = apply_filters( 'onesocial_prevent_adminbar_processing', is_admin() );
+	if ( $dontalter_adminbar ) { //nothing to do on admin
 		return;
 	}
 	$nodes = $wp_admin_bar->get_nodes();
@@ -2149,7 +2152,8 @@ function buddyboss_memory_admin_bar_nodes() {
 	static $bb_memory_admin_bar_step;
 	global $bb_adminbar_myaccount;
 
-	if ( is_admin() ) { //nothing to do on admin
+	$dontalter_adminbar = apply_filters( 'onesocial_prevent_adminbar_processing', is_admin() );
+	if ( $dontalter_adminbar ) { //nothing to do on admin
 		return;
 	}
 
@@ -2325,22 +2329,19 @@ add_filter( 'heartbeat_settings', 'buddyboss_heartbeat_settings' );
  *
  */
 function buddyboss_notification_count_heartbeat( $response, $data, $screen_id ) {
-
-	if ( !function_exists( 'bp_is_active' ) ) {
-		return;
-	}
-
-	$notifications			 = null;
-	$notification_content	 = null;
+    $notifications = array();
 
 	if ( function_exists( "bp_friend_get_total_requests_count" ) )
 		$friend_request_count	 = bp_friend_get_total_requests_count();
 	if ( function_exists( "bp_notifications_get_all_notifications_for_user" ) )
 		$notifications			 = bp_notifications_get_all_notifications_for_user( get_current_user_id() );
-    
+
 	$notification_count		 = count( $notifications );
+
 	if ( function_exists( "bp_notifications_get_all_notifications_for_user" ) ) {
-		if( !empty( $notifications ) ){
+		$notifications			 = bp_notifications_get_notifications_for_user( get_current_user_id() );
+		$notification_content	 = '';
+        if( !empty( $notifications ) ){
             foreach ( (array) $notifications as $notification ) {
                 if( is_array( $notification ) ){
                     if( isset( $notification['link'] ) && isset( $notification['text'] ) ){
@@ -2351,7 +2352,7 @@ function buddyboss_notification_count_heartbeat( $response, $data, $screen_id ) 
                 }
             }
         }
-        
+
 		if ( empty( $notification_content ) )
 			$notification_content = '<a href="' . bp_loggedin_user_domain() . '' . BP_NOTIFICATIONS_SLUG . '/">' . __( "No new notifications", "buddypress" ) . '</a>';
 	}
@@ -2370,6 +2371,7 @@ function buddyboss_notification_count_heartbeat( $response, $data, $screen_id ) 
 
 // Logged in users:
 add_filter( 'heartbeat_received', 'buddyboss_notification_count_heartbeat', 10, 3 );
+
 
 /**
  * Add avatar to comment form
@@ -3105,13 +3107,12 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 		/* translators: used between list items, there is a space after the comma */
 		$categories_list = get_the_category_list( __( ', ', 'onesocial' ) );
 		if ( $categories_list && onesocial_categorized_blog() ) {
-			printf( '<span class="cat-links">' . $categories_list . '</span>' );
+			print( '<span class="cat-links">' . $categories_list . '</span>' );
 		}
 	}
 
 	function onesocial_posted_on() {
-		printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date( 'M j, Y' ) )
-		);
+                    printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date( 'M j, Y' ) ));
 	}
 
 	if ( !function_exists( 'buddyboss_slider' ) ) {
@@ -3187,36 +3188,65 @@ if( !function_exists( 'buddyboss_bp_options_nav' ) ):
  */
 function buddyboss_bp_options_nav( $component_index = false, $current_item = false ){
     $secondary_nav_items = false;
-    
+
     $bp = buddypress();
-    
+
     $version_compare = version_compare( BP_VERSION, '2.6', '<' );
     if ( $version_compare ){
         /**
          * @todo In future updates, remove the version compare check completely and get rid of legacy code
          */
-        
+
         //legacy code
-        $secondary_nav_items = isset( $bp->bp_options_nav[ $component_index ] ) ? $bp->bp_options_nav[ $component_index ] : false; 
+        $secondary_nav_items = isset( $bp->bp_options_nav[ $component_index ] ) ? $bp->bp_options_nav[ $component_index ] : false;
     } else {
         //new navigation apis
-        
-        // Default to the Members nav. 
+
+        // Default to the Members nav.
         if( !bp_is_single_item() ){
             $secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => $component_index ) );
         } else {
             $component_index =  $component_index ? $component_index : bp_current_component();
             $current_item = $current_item ? $current_item : bp_current_item();
-            
+
             // If the nav is not defined by the parent component, look in the Members nav.
-            if ( ! isset( $bp->{$component_index}->nav ) ) { 
-                $secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => $current_item ) ); 
-            } else { 
-                $secondary_nav_items = $bp->{$component_index}->nav->get_secondary( array( 'parent_slug' => $current_item ) ); 
-            } 
+            if ( ! isset( $bp->{$component_index}->nav ) ) {
+                $secondary_nav_items = $bp->members->nav->get_secondary( array( 'parent_slug' => $current_item ) );
+            } else {
+                $secondary_nav_items = $bp->{$component_index}->nav->get_secondary( array( 'parent_slug' => $current_item ) );
+            }
         }
     }
-    
+
     return $secondary_nav_items;
 }
 endif;
+
+// BuddyPress Group Email Subscription support
+if ( function_exists('ass_loader') ) {
+	remove_action ( 'bp_directory_groups_actions', 'ass_group_subscribe_button' );
+	add_action ( 'bb_after_group_content', 'ass_group_subscribe_button' );
+}
+
+//Search Form for Groups Manage Members Screens (Trac https://buddypress.trac.wordpress.org/ticket/6385)
+add_action( 'bp_before_group_admin_form',    'onesocial_theme_group_manage_members_add_search', 5 );
+
+/**
+ * Add a search box to a single group's manage members screen.
+ *
+ * @since 2.7.0
+ *
+ * @return string HTML for the search form.
+ */
+function onesocial_theme_group_manage_members_add_search() {
+	if ( bp_is_action_variable( 'manage-members' ) ) :
+
+	//Remove legacy search box to a single group's manage members screen.
+	remove_action( 'bp_before_group_admin_form', 'bp_legacy_theme_group_manage_members_add_search' );
+	?>
+	<div id="members-dir-search" class="dir-search no-ajax boss-search-wrapper" role="search">
+		<?php bp_directory_members_search_form(); ?>
+	</div>
+	<?php
+endif;
+}
