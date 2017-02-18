@@ -4,12 +4,12 @@
  *
  * @package     Give
  * @subpackage  Functions/Templates
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -35,26 +35,90 @@ function give_get_templates_url() {
 }
 
 /**
+ * Get other templates, passing attributes and including the file.
+ *
+ * @since 1.6
+ *
+ * @param string $template_name Template file name.
+ * @param array  $args          Passed arguments. Default is empty array().
+ * @param string $template_path Template file path. Default is empty.
+ * @param string $default_path  Default path. Default is empty.
+ */
+function give_get_template( $template_name, $args = array(), $template_path = '', $default_path = '' ) {
+    if ( ! empty( $args ) && is_array( $args ) ) {
+        extract( $args );
+    }
+
+    $template_names = array( $template_name . '.php' );
+
+    $located = give_locate_template( $template_names, $template_path, $default_path );
+
+    if ( ! file_exists( $located ) ) {
+		/* translators: %s: the template */
+        give_output_error( sprintf( __( 'The %s template was not found.', 'give' ), $located ), true );
+        return;
+    }
+
+    // Allow 3rd party plugin filter template file from their plugin.
+    $located = apply_filters( 'give_get_template', $located, $template_name, $args, $template_path, $default_path );
+
+	/**
+	 * Fires in give template, before the file is included.
+	 *
+	 * Allows you to execute code before the file is included.
+	 *
+	 * @since 1.6
+	 *
+	 * @param string $template_name Template file name.
+	 * @param string $template_path Template file path.
+	 * @param string $located       Template file filter by 3rd party plugin.
+	 * @param array  $args          Passed arguments.
+	 */
+    do_action( 'give_before_template_part', $template_name, $template_path, $located, $args );
+
+    include( $located );
+
+	/**
+	 * Fires in give template, after the file is included.
+	 *
+	 * Allows you to execute code after the file is included.
+	 *
+	 * @since 1.6
+	 *
+	 * @param string $template_name Template file name.
+	 * @param string $template_path Template file path.
+	 * @param string $located       Template file filter by 3rd party plugin.
+	 * @param array  $args          Passed arguments.
+	 */
+    do_action( 'give_after_template_part', $template_name, $template_path, $located, $args );
+}
+
+/**
  * Retrieves a template part
  *
- * @since v1.0
+ * Taken from bbPress.
  *
- * Taken from bbPress
+ * @since 1.0
  *
- * @param string $slug
- * @param string $name Optional. Default null
- * @param bool   $load
+ * @param string $slug Template part file slug {slug}.php.
+ * @param string $name Optional. Template part file name {slug}-{name}.php. Default is null.
+ * @param bool   $load If true the template file will be loaded, if it is found.
  *
- * @return string
- *
- * @uses  give_locate_template()
- * @uses  load_template()
- * @uses  get_template_part()
+ * @return string 
  */
 function give_get_template_part( $slug, $name = null, $load = true ) {
 
-	// Execute code for this part
-	do_action( 'get_template_part_' . $slug, $slug, $name );
+	/**
+	 * Fires in give template part, before the template part is retrieved.
+	 *
+	 * Allows you to execute code before retrieving the template part.
+	 *
+	 * @since 1.0
+	 *
+	 * @param string $slug Template part file slug {slug}.php.
+	 * @param string $name Template part file name {slug}-{name}.php.
+	 */
+	do_action( "get_template_part_{$slug}", $slug, $name );
 
 	// Setup possible parts
 	$templates = array();
@@ -82,8 +146,8 @@ function give_get_template_part( $slug, $name = null, $load = true ) {
  * @since 1.0
  *
  * @param string|array $template_names Template file(s) to search for, in order.
- * @param bool         $load           If true the template file will be loaded if it is found.
- * @param bool         $require_once   Whether to require_once or require. Default true.
+ * @param bool $load If true the template file will be loaded if it is found.
+ * @param bool $require_once Whether to require_once or require. Default true.
  *                                     Has no effect if $load is false.
  *
  * @return string The template filename if one is located.
@@ -180,7 +244,7 @@ add_action( 'wp_head', 'give_version_in_header' );
  */
 function give_is_donation_history_page() {
 
-	$ret = is_page( give_get_option( 'purchase_history_page' ) );
+	$ret = is_page( give_get_option( 'history_page' ) );
 
 	return apply_filters( 'give_is_donation_history_page', $ret );
 }
@@ -243,13 +307,13 @@ add_filter( 'body_class', 'give_add_body_classes' );
 /**
  * Add Post Class Filter
  *
- * @description Adds extra post classes for forms
+ * Adds extra post classes for forms
  *
  * @since       1.0
  *
  * @param array        $classes
  * @param string|array $class
- * @param int          $post_id
+ * @param int|string   $post_id
  *
  * @return array
  */
@@ -270,33 +334,6 @@ function give_add_post_class( $classes, $class = '', $post_id = '' ) {
 
 add_filter( 'post_class', 'give_add_post_class', 20, 3 );
 
-
-/**
- * Get an image size.
- *
- * Variable is filtered by give_get_image_size_{image_size}
- *
- * @param string $image_size
- *
- * @return array
- */
-function give_get_image_size( $image_size ) {
-	if ( in_array( $image_size, array( 'give_form_thumbnail', 'give_form_single' ) ) ) {
-		$size           = get_option( $image_size . '_image_size', array() );
-		$size['width']  = isset( $size['width'] ) ? $size['width'] : '300';
-		$size['height'] = isset( $size['height'] ) ? $size['height'] : '300';
-		$size['crop']   = isset( $size['crop'] ) ? $size['crop'] : 0;
-	} else {
-		$size = array(
-			'width'  => '300',
-			'height' => '300',
-			'crop'   => 1
-		);
-	}
-
-	return apply_filters( 'give_get_image_size_' . $image_size, $size );
-}
-
 /**
  * Get the placeholder image URL for forms etc
  *
@@ -305,9 +342,7 @@ function give_get_image_size( $image_size ) {
  */
 function give_get_placeholder_img_src() {
 
-	$image_size = give_get_image_size( 'give_form_thumbnail' );
-
-	$placeholder_url = 'http://placehold.it/' . $image_size['width'] . 'x' . $image_size['height'] . '&text=' . __( 'Give+Placeholder+Image+', 'give' ) . '(' . $image_size['width'] . 'x' . $image_size['height'] . ')';
+	$placeholder_url = '//placehold.it/600x600&text=' . urlencode( esc_attr__( 'Give Placeholder Image', 'give' ) );
 
 	return apply_filters( 'give_placeholder_img_src', $placeholder_url );
 }
@@ -359,11 +394,10 @@ if ( ! function_exists( 'give_get_forms_sidebar' ) ) {
 if ( ! function_exists( 'give_show_form_images' ) ) {
 
 	/**
-	 * Output the product image before the single product summary.
+	 * Output the donation form featured image.
 	 */
 	function give_show_form_images() {
-		$featured_image_option = give_get_option( 'disable_form_featured_img' );
-		if ( $featured_image_option !== 'on' ) {
+		if ( give_is_setting_enabled( give_get_option( 'form_featured_img' ) ) ) {
 			give_get_template_part( 'single-give-form/featured-image' );
 		}
 	}
@@ -372,7 +406,7 @@ if ( ! function_exists( 'give_show_form_images' ) ) {
 if ( ! function_exists( 'give_template_single_title' ) ) {
 
 	/**
-	 * Output the product title.
+	 * Output the form title.
 	 */
 	function give_template_single_title() {
 		give_get_template_part( 'single-give-form/title' );
@@ -385,6 +419,82 @@ if ( ! function_exists( 'give_show_avatars' ) ) {
 	 * Output the product title.
 	 */
 	function give_show_avatars() {
-		echo do_shortcode( '[give_donators_gravatars]' );
+		echo do_shortcode( '[give_donors_gravatars]' );
+	}
+}
+
+/**
+ * Conditional Functions
+ */
+
+if ( ! function_exists( 'is_give_form' ) ) {
+
+	/**
+	 * is_give_form
+	 *
+	 * Returns true when viewing a single form.
+	 *
+	 * @since 1.6
+	 *
+	 * @return bool
+	 */
+	function is_give_form() {
+		return is_singular( array( 'give_form' ) );
+	}
+}
+
+if ( ! function_exists( 'is_give_category' ) ) {
+
+	/**
+	 * is_give_category
+	 *
+	 * Returns true when viewing give form category archive.
+	 *
+	 * @since 1.6
+	 *
+	 * @param string $term The term slug your checking for.
+	 *                     Leave blank to return true on any.
+	 *                     Default is blank.
+	 *
+	 * @return bool
+	 */
+	function is_give_category( $term = '' ) {
+		return is_tax( 'give_forms_category', $term );
+	}
+}
+
+if ( ! function_exists( 'is_give_tag' ) ) {
+
+	/**
+	 * is_give_tag
+	 *
+	 * Returns true when viewing give form tag archive.
+	 *
+	 * @since 1.6
+	 *
+	 * @param string $term The term slug your checking for.
+	 *                     Leave blank to return true on any.
+	 *                     Default is blank.
+	 *
+	 * @return bool
+	 */
+	function is_give_tag( $term = '' ) {
+		return is_tax( 'give_forms_tag', $term );
+	}
+}
+
+if ( ! function_exists( 'is_give_taxonomy' ) ) {
+
+	/**
+	 * is_give_taxonomy
+	 *
+	 * Returns true when viewing a give form taxonomy archive.
+	 *
+	 * @since 1.6
+	 *
+	 * @return bool
+	 */
+	function is_give_taxonomy() {
+		return is_tax( get_object_taxonomies( 'give_form' ) );
 	}
 }

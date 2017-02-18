@@ -4,12 +4,12 @@
  *
  * @package     Give
  * @subpackage  Admin/Reports
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -48,7 +48,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 		parent::__construct( array(
 			'singular' => give_get_forms_label_singular(),    // Singular name of the listed records
 			'plural'   => give_get_forms_label_plural(),        // Plural name of the listed records
-			'ajax'     => false                        // Does this table support ajax?
+			'ajax'     => false,// Does this table support ajax?
 		) );
 	}
 
@@ -73,12 +73,12 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 			echo '<input type="hidden" name="order" value="' . esc_attr( $_REQUEST['order'] ) . '" />';
 		}
 		?>
-		<p class="search-box">
+		<p class="search-box" role="search">
 			<label class="screen-reader-text" for="<?php echo $input_id ?>"><?php echo $text; ?>:</label>
-			<input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>" />
+			<input type="search" id="<?php echo $input_id ?>" name="s" value="<?php _admin_search_query(); ?>"/>
 			<?php submit_button( $text, 'button', false, false, array( 'ID' => 'search-submit' ) ); ?>
 		</p>
-	<?php
+		<?php
 	}
 
 	/**
@@ -90,10 +90,10 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'ID'      => __( 'Log ID', 'give' ),
-			'details' => __( 'Request Details', 'give' ),
-			'ip'      => __( 'Request IP', 'give' ),
-			'date'    => __( 'Date', 'give' )
+			'ID'      => esc_html__( 'Log ID', 'give' ),
+			'details' => esc_html__( 'Request Details', 'give' ),
+			'ip'      => esc_html__( 'Request IP', 'give' ),
+			'date'    => esc_html__( 'Date', 'give' ),
 		);
 
 		return $columns;
@@ -129,27 +129,27 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 	 */
 	public function column_details( $item ) {
 		?>
-		<a href="#TB_inline?width=640&amp;inlineId=log-details-<?php echo $item['ID']; ?>" class="thickbox" title="<?php _e( 'View Request Details', 'give' ); ?> "><?php _e( 'View Request', 'give' ); ?></a>
+		<a href="#TB_inline?width=640&amp;inlineId=log-details-<?php echo $item['ID']; ?>" class="thickbox"><?php esc_html_e( 'View Request', 'give' ); ?></a>
 		<div id="log-details-<?php echo $item['ID']; ?>" style="display:none;">
 			<?php
 
 			$request = get_post_field( 'post_excerpt', $item['ID'] );
 			$error   = get_post_field( 'post_content', $item['ID'] );
-			echo '<p><strong>' . __( 'API Request:', 'give' ) . '</strong></p>';
+			echo '<p><strong>' . esc_html__( 'API Request:', 'give' ) . '</strong></p>';
 			echo '<div>' . $request . '</div>';
 			if ( ! empty( $error ) ) {
-				echo '<p><strong>' . __( 'Error', 'give' ) . '</strong></p>';
+				echo '<p><strong>' . esc_html__( 'Error', 'give' ) . '</strong></p>';
 				echo '<div>' . esc_html( $error ) . '</div>';
 			}
-			echo '<p><strong>' . __( 'API User:', 'give' ) . '</strong></p>';
+			echo '<p><strong>' . esc_html__( 'API User:', 'give' ) . '</strong></p>';
 			echo '<div>' . get_post_meta( $item['ID'], '_give_log_user', true ) . '</div>';
-			echo '<p><strong>' . __( 'API Key:', 'give' ) . '</strong></p>';
+			echo '<p><strong>' . esc_html__( 'API Key:', 'give' ) . '</strong></p>';
 			echo '<div>' . get_post_meta( $item['ID'], '_give_log_key', true ) . '</div>';
-			echo '<p><strong>' . __( 'Request Date:', 'give' ) . '</strong></p>';
+			echo '<p><strong>' . esc_html__( 'Request Date:', 'give' ) . '</strong></p>';
 			echo '<div>' . get_post_field( 'post_date', $item['ID'] ) . '</div>';
 			?>
 		</div>
-	<?php
+		<?php
 	}
 
 	/**
@@ -157,10 +157,43 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @return mixed String if search is present, false otherwise
+	 * @return string|bool String if search is present, false otherwise
 	 */
 	public function get_search() {
 		return ! empty( $_GET['s'] ) ? urldecode( trim( $_GET['s'] ) ) : false;
+	}
+
+
+	/**
+	 * Display Tablenav (extended)
+	 *
+	 * Display the table navigation above or below the table even when no items in the logs, so nav doesn't disappear
+	 *
+	 * @see    : https://github.com/WordImpress/Give/issues/564
+	 *
+	 * @since  1.4.1
+	 * @access protected
+	 *
+	 * @param string $which
+	 */
+	protected function display_tablenav( $which ) {
+		if ( 'top' === $which ) {
+			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+		}
+		?>
+		<div class="tablenav <?php echo esc_attr( $which ); ?>">
+
+			<div class="alignleft actions bulkactions">
+				<?php $this->bulk_actions( $which ); ?>
+			</div>
+			<?php
+			$this->extra_tablenav( $which );
+			$this->pagination( $which );
+			?>
+
+			<br class="clear"/>
+		</div>
+		<?php
 	}
 
 	/**
@@ -181,7 +214,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 			if ( filter_var( $search, FILTER_VALIDATE_IP ) ) {
 				// This is an IP address search
 				$key = '_give_log_request_ip';
-			} else if ( is_email( $search ) ) {
+			} elseif ( is_email( $search ) ) {
 				// This is an email search
 				$userdata = get_user_by( 'email', $search );
 
@@ -212,7 +245,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 			$meta_query[] = array(
 				'key'     => $key,
 				'value'   => $search,
-				'compare' => '='
+				'compare' => '=',
 			);
 		}
 
@@ -238,7 +271,6 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 	 * @return void
 	 */
 	function bulk_actions( $which = '' ) {
-		// These aren't really bulk actions but this outputs the markup in the right place
 		give_log_views();
 	}
 
@@ -258,7 +290,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 		$log_query = array(
 			'log_type'   => 'api_request',
 			'paged'      => $paged,
-			'meta_query' => $this->get_meta_query()
+			'meta_query' => $this->get_meta_query(),
 		);
 
 		$logs = $give_logs->get_connected_logs( $log_query );
@@ -269,7 +301,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 				$logs_data[] = array(
 					'ID'   => $log->ID,
 					'ip'   => get_post_meta( $log->ID, '_give_log_request_ip', true ),
-					'date' => $log->post_date
+					'date' => $log->post_date,
 				);
 			}
 		}
@@ -303,7 +335,7 @@ class Give_API_Request_Log_Table extends WP_List_Table {
 		$this->set_pagination_args( array(
 				'total_items' => $total_items,
 				'per_page'    => $this->per_page,
-				'total_pages' => ceil( $total_items / $this->per_page )
+				'total_pages' => ceil( $total_items / $this->per_page ),
 			)
 		);
 	}

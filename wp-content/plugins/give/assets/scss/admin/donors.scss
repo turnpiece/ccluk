@@ -3,16 +3,24 @@
  *
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
-/* Donors Listing Page Style
--------------------------------------------------------------- */
+//--------------------------------------------------------------
+// Donors Listing Page Style
+//--------------------------------------------------------------
 .give_forms_page_give-donors {
   .wrap > h2 {
 	margin-bottom: 15px;
   }
+
+  .nav-tab-wrapper .dashicons {
+    position: relative;
+    top:2px;
+    margin: 0 3px 0 0;
+  }
+
   #give-donors-filter {
 	position: relative;
 	p.search-box {
@@ -27,68 +35,24 @@
   }
 }
 
-/* Donor Styles
--------------------------------------------------------------- */
-
-#customer-tab-wrapper {
-
-}
-
-#customer-tab-wrapper-list {
-
-  border-bottom: 1px solid #ccc;
-  padding: 5px 15px 0 10px;
-
-  li {
-
-	display: inline-block;
-	margin: 0 0 -1px;
-	padding: 0;
-
-	a {
-	  padding: 6px 10px;
-	  font-weight: bold;
-	  font-size: 15px;
-	  line-height: 24px;
-	  border: 1px solid #ccc;
-	  border-bottom: none;
-	  background: #e4e4e4;
-	  color: #555;
-	  display: inline-block;
-	  text-decoration: none;
-	  margin: 0;
-	}
-
-  }
-
-  .active {
-	padding: 6px 10px;
-	font-weight: bold;
-	font-size: 15px;
-	line-height: 24px;
-	border: 1px solid #ccc;
-	border-bottom: 1px solid #f1f1f1;
-	background: #f1f1f1;
-	color: #000;
-  }
-  .dashicons {
-	font-size: 20px;
-	line-height: 26px;
-  }
-}
-
+//--------------------------------------------------------------
+// Donor Styles
+//--------------------------------------------------------------
 #give-customer-card-wrapper {
   margin-left: -1px;
   z-index: 2;
   min-height: 200px;
 
+
   input {
 	font-weight: normal;
   }
+
   .customer-section {
 	border-bottom: 1px solid #eee;
 	margin-bottom: 10px;
   }
+
   .customer-section table {
 	margin-bottom: 0;
   }
@@ -96,6 +60,7 @@
   > div:first-child {
 	padding-top: 20px;
   }
+
   > div:last-child {
 	padding-bottom: 20px;
 	border: none;
@@ -106,6 +71,7 @@
 	padding: 0 15px 15px 0;
 	text-align: center;
 	float: left;
+
 	img {
 	  border-radius: 3px;
 	}
@@ -120,8 +86,6 @@
 
   //Donor Header (non-avatar content)
   .donor-bio-header {
-	float: left;
-	width: 33%;
 
 	.customer-since {
 	  margin: 10px 0;
@@ -129,16 +93,18 @@
 	}
 
 	.customer-id {
+      display: inline-block;
 	  font-size: 24px;
 	  font-weight: 600;
-	  float: left;
 	  margin-right: 10px;
 	}
 
+    .customer-name-wrap {
+      display: inline-block;
+    }
+
 	.customer-edit-link {
 	  margin-bottom: 15px;
-	  float: left;
-
 	}
 
   }
@@ -146,6 +112,7 @@
 }
 
 .customer-main-wrapper {
+  clear: both;
   margin: 0 0 20px;
 
   @media(max-width: 655px) {
@@ -155,6 +122,7 @@
   table {
 	margin: 0;
   }
+
   input {
 	width: 200px;
   }
@@ -177,7 +145,6 @@
   }
 
 }
-
 #give-customer-card-wrapper .customer-address-wrapper {
   width: 202px;
 
@@ -192,7 +159,6 @@
 }
 
 #give-customer-card-wrapper .customer-info {
-  margin-top: 1px;
   min-height: 185px;
 }
 
@@ -270,11 +236,14 @@
   text-align: center;
 }
 
-#customer-tables-wrapper .downloads tr > th:first-child, #customer-tables-wrapper .downloads tr > td:first-child {
+#customer-tables-wrapper .donations tr > th:first-child,
+#customer-tables-wrapper .donations tr > td:first-child,
+#customer-tables-wrapper .emails tr > th:first-child,
+#customer-tables-wrapper .emails tr > td:first-child {
   text-align: left;
 }
 
-#customer-tables-wrapper .downloads tr > td:only-child {
+#customer-tables-wrapper .donations tr > td:only-child {
   text-align: center;
 }
 

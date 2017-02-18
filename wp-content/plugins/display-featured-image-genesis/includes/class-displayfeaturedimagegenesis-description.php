@@ -3,8 +3,8 @@
  * @package   DisplayFeaturedImageGenesis
  * @author    Robin Cornett <hello@robincornett.com>
  * @license   GPL-2.0+
- * @link      http://robincornett.com
- * @copyright 2014-2015 Robin Cornett Creative, LLC
+ * @link      https://robincornett.com
+ * @copyright 2014-2016 Robin Cornett Creative, LLC
  */
 
 class Display_Featured_Image_Genesis_Description {
@@ -30,15 +30,21 @@ class Display_Featured_Image_Genesis_Description {
 		$headline = $intro_text = $itemprop = '';
 
 		if ( genesis_html5() ) {
-			$itemprop = 'itemprop="headline"';
+			$itemprop = ' itemprop="headline"';
 		}
-		$headline = sprintf( '<h1 class="entry-title" ' . $itemprop . '>%s</h1>', get_the_title() );
+
+		$setting  = displayfeaturedimagegenesis_get_setting();
+		if ( ! $setting['keep_titles'] ) {
+			$headline = sprintf( '<h1 class="entry-title"%s>%s</h1>', $itemprop, get_the_title() );
+		}
 
 		if ( has_excerpt() ) {
 			$intro_text = apply_filters( 'display_featured_image_genesis_singular_description', get_the_excerpt() );
 		}
 		if ( $headline || $intro_text ) {
-			printf( '<div class="excerpt">%s</div>', wp_kses_post( $headline . wpautop( $intro_text ) ) );
+			$print = $headline . wpautop( $intro_text );
+			$class = 'excerpt';
+			$this->print_description( $print, $class, $class );
 		}
 	}
 
@@ -61,14 +67,15 @@ class Display_Featured_Image_Genesis_Description {
 
 		// set front page and posts page variables
 		$title      = $this->get_front_blog_title();
-		$itemprop   = genesis_html5() ? 'itemprop="headline"' : '';
-		$headline   = empty( $title ) ? '' : sprintf( '<h1 class="entry-title" ' . $itemprop . '>%s</h1>', $title );
+		$itemprop   = genesis_html5() ? ' itemprop="headline"' : '';
+		$headline   = empty( $title ) ? '' : sprintf( '<h1 class="entry-title"%s>%s</h1>', $itemprop, $title );
 		$intro_text = $this->get_front_blog_intro_text();
 
 		if ( $headline || $intro_text ) {
-			printf( '<div class="excerpt">%s</div>', wp_kses_post( $headline . wpautop( $intro_text ) ) );
+			$print = $headline . wpautop( $intro_text );
+			$class = 'excerpt';
+			$this->print_description( $print, $class, $class );
 		}
-
 	}
 
 	/**
@@ -94,20 +101,18 @@ class Display_Featured_Image_Genesis_Description {
 			return;
 		}
 
-		if ( get_query_var( 'paged' ) >= 2 ) {
-			return;
-		}
-
 		$term = is_tax() ? get_term_by( 'slug', get_query_var( 'term' ), get_query_var( 'taxonomy' ) ) : $wp_query->get_queried_object();
 
-		if ( ! $term || ! isset( $term->meta ) ) {
+		if ( ! $term ) {
 			return;
 		}
 
-		$intro_text = apply_filters( 'display_featured_image_genesis_term_description', $term->meta['intro_text'] );
+		$intro_text = displayfeaturedimagegenesis_get_term_meta( $term, 'intro_text' );
+		$intro_text = apply_filters( 'display_featured_image_genesis_term_description', $intro_text );
 
 		if ( $intro_text ) {
-			printf( '<div class="archive-description taxonomy-description">%s</div>', wp_kses_post( wpautop( $intro_text ) ) );
+			$class = 'archive-description taxonomy-description';
+			$this->print_description( $intro_text, $class );
 		}
 
 	}
@@ -135,7 +140,8 @@ class Display_Featured_Image_Genesis_Description {
 		$intro_text = apply_filters( 'display_featured_image_genesis_author_description', get_the_author_meta( 'intro_text', (int) get_query_var( 'author' ) ) );
 
 		if ( $intro_text ) {
-			printf( '<div class="archive-description author-description">%s</div>', wp_kses_post( wpautop( $intro_text ) ) );
+			$class = 'archive-description author-description';
+			$this->print_description( $intro_text, $class );
 		}
 
 	}
@@ -164,14 +170,11 @@ class Display_Featured_Image_Genesis_Description {
 			return;
 		}
 
-		if ( get_query_var( 'paged' ) >= 2 ) {
-			return;
-		}
-
 		$intro_text = apply_filters( 'display_featured_image_genesis_cpt_description', genesis_get_cpt_option( 'intro_text' ) );
 
 		if ( $intro_text ) {
-			printf( '<div class="archive-description cpt-archive-description">%s</div>', wp_kses_post( wpautop( $intro_text ) ) );
+			$class = 'archive-description cpt-archive-description';
+			$this->print_description( $intro_text, $class );
 		}
 
 	}
@@ -227,5 +230,20 @@ class Display_Featured_Image_Genesis_Description {
 			$intro_text = empty( $postspage->post_excerpt ) ? '' : $postspage->post_excerpt;
 		}
 		return apply_filters( 'display_featured_image_genesis_front_blog_description', $intro_text );
+	}
+
+	/**
+	 * Actually print the description for the archive page. Adds hooks for moving output.
+	 * @param $intro_text string the archive intro text.
+	 * @param string $class optional class for the div.
+	 *
+	 * @since 2.5.0
+	 */
+	protected function print_description( $intro_text, $class = '', $context = 'archive_intro' ) {
+		printf( '<div class="%s">', esc_html( $class ) );
+		do_action( "displayfeaturedimagegenesis_before_{$context}" );
+		echo wp_kses_post( wpautop( $intro_text ) );
+		do_action( "displayfeaturedimagegenesis_after_{$context}" );
+		echo '</div>';
 	}
 }

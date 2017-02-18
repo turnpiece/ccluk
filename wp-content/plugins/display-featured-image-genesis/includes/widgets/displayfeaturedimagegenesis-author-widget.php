@@ -1,5 +1,14 @@
 <?php
 
+/**
+ * Class Display_Featured_Image_Genesis_Author_Widget
+ * @package   DisplayFeaturedImageGenesis
+ * @author    Robin Cornett <hello@robincornett.com>
+ * @license   GPL-2.0+
+ * @link      https://robincornett.com
+ * @copyright 2014-2016 Robin Cornett Creative, LLC
+ */
+
 class Display_Featured_Image_Genesis_Author_Widget extends WP_Widget {
 
 	/**
@@ -32,8 +41,9 @@ class Display_Featured_Image_Genesis_Author_Widget extends WP_Widget {
 		);
 
 		$widget_ops = array(
-			'classname'   => 'author-profile',
-			'description' => __( 'Displays user profile block with Gravatar', 'display-featured-image-genesis' ),
+			'classname'                   => 'author-profile',
+			'description'                 => __( 'Displays user profile block with Gravatar', 'display-featured-image-genesis' ),
+			'customize_selective_refresh' => true,
 		);
 
 		$control_ops = array(

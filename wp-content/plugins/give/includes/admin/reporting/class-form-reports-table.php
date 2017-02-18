@@ -4,12 +4,12 @@
  *
  * @package     Give
  * @subpackage  Admin/Reports
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -67,7 +67,7 @@ class Give_Form_Reports_Table extends WP_List_Table {
 	 * @access public
 	 * @since  1.0
 	 *
-	 * @param array  $item        Contains all the data of the downloads
+	 * @param array  $item        Contains all the data of the donation form
 	 * @param string $column_name The name of the column
 	 *
 	 * @return string Column Name
@@ -81,7 +81,7 @@ class Give_Form_Reports_Table extends WP_List_Table {
 			case 'average_earnings' :
 				return give_currency_filter( give_format_amount( $item[ $column_name ] ) );
 			case 'details' :
-				return '<a href="' . admin_url( 'edit.php?post_type=give_forms&page=give-reports&view=forms&form-id=' . $item['ID'] ) . '">' . __( 'View Detailed Report', 'give' ) . '</a>';
+				return '<a href="' . admin_url( 'edit.php?post_type=give_forms&page=give-reports&tab=forms&form-id=' . $item['ID'] ) . '">' . esc_html__( 'View Detailed Report', 'give' ) . '</a>';
 			default:
 				return $item[ $column_name ];
 		}
@@ -96,12 +96,12 @@ class Give_Form_Reports_Table extends WP_List_Table {
 	 */
 	public function get_columns() {
 		$columns = array(
-			'title'            => give_get_forms_label_singular(),
-			'sales'            => __( 'Donations', 'give' ),
-			'earnings'         => __( 'Income', 'give' ),
-			'average_sales'    => __( 'Monthly Average Donations', 'give' ),
-			'average_earnings' => __( 'Monthly Average Income', 'give' ),
-			'details'          => __( 'Detailed Report', 'give' )
+			'title'            => esc_html__( 'Form', 'give' ),
+			'sales'            => esc_html__( 'Donations', 'give' ),
+			'earnings'         => esc_html__( 'Income', 'give' ),
+			'average_sales'    => esc_html__( 'Monthly Average Donations', 'give' ),
+			'average_earnings' => esc_html__( 'Monthly Average Income', 'give' ),
+			'details'          => esc_html__( 'Detailed Report', 'give' )
 		);
 
 		return $columns;
@@ -171,8 +171,7 @@ class Give_Form_Reports_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function bulk_actions( $which = '' ) {
-		// These aren't really bulk actions but this outputs the markup in the right place
-		give_report_views();
+
 	}
 
 	/**
@@ -185,13 +184,17 @@ class Give_Form_Reports_Table extends WP_List_Table {
 	 */
 	protected function display_tablenav( $which ) {
 
-		if ( 'top' == $which ) {
+		if ( 'top' === $which ) {
 			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
 		}
 		?>
 		<div class="tablenav give-clearfix <?php echo esc_attr( $which ); ?>">
 
-			<h3 class="alignleft reports-earnings-title"><span><?php _e( 'Form Report', 'give' ); ?></span></h3>
+			<?php if ( 'top' === $which ) { ?>
+				<h3 class="alignleft reports-earnings-title">
+					<span><?php esc_html_e( 'Donation Forms Report', 'give' ); ?></span>
+				</h3>
+			<?php } ?>
 
 			<div class="alignright tablenav-right">
 				<div class="actions bulkactions">

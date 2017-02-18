@@ -1,11 +1,10 @@
-@charset "UTF-8";
 /*!
  * Give Frontend SCSS/CSS
  *
  * @description: The Main SCSS file for FRONTEND styles which is compiled and minified via Gulp taskrunner
  * @package:     Give
  * @subpackage:  SCSS/Frontend
- * @copyright:   Copyright (c) 2015, WordImpress
+ * @copyright:   Copyright (c) 2016, WordImpress
  * @license:     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /**
@@ -16,8 +15,7 @@
  */
 .give-clearfix {
   *zoom: 1; }
-  .give-clearfix:before,
-  .give-clearfix:after {
+  .give-clearfix:before, .give-clearfix:after {
     content: " ";
     display: table; }
   .give-clearfix:after {
@@ -31,32 +29,50 @@
  * CSS3 Easing
  */
 .give-item-label {
-  padding: 0.2em 0.6em 0.3em;
-  font-size: 85%;
-  font-weight: 700;
+  padding: .2em .4em .3em;
+  font-size: 11px;
   line-height: 1;
   color: #fff;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em; }
+  .give-item-label:hover {
+    color: #fff;
+    text-decoration: none; }
 
 .give-item-label-gray {
   background-color: #929292; }
 
+.give-item-label-orange {
+  background-color: #ffba00; }
+
+.give-item-label {
+  padding: .2em .4em .3em;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em; }
+  .give-item-label:hover {
+    color: #fff;
+    text-decoration: none; }
+
 /**
  * Give Frontend Fonts SCSS
  *
- * @description: Fonts are from icomoon and the src paths need to be relative to template directory
+ * Fonts are from icomoon and the src paths need to be relative to template directory.
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 @font-face {
   font-family: 'give-icomoon';
   src: url("../assets/fonts/icomoon.eot?kdnr3d");
-  src: url("../assets/fonts/icomoon.eot?kdnr3d#iefix") format("embedded-opentype"), url("../assets/fonts/icomoon.woff?kdnr3d") format("woff"), url("../assets/fonts/icomoon.ttf?kdnr3d") format("truetype"), url("../assets/fonts/icomoon.svg?kdnr3d#icomoon") format("svg");
+  src: url("../assets/fonts/icomoon.eot?kdnr3d#iefix") format("embedded-opentype"), url("../assets/fonts/icomoon.woff?kdnr3d") format("woff"), url("../assets/fonts/icomoon.svg?kdnr3d#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -68,7 +84,6 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -105,7 +120,7 @@
 .give-icon-minus:before {
   content: "\e041"; }
 
-.give-icon-locked:before, #give_secure_site_wrapper span.padlock:before {
+.give-icon-locked:before, [id*='give_secure_site_wrapper'] span.padlock:before {
   content: "\e600"; }
 
 .dashicons-give:before {
@@ -116,16 +131,15 @@
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\e800"; }
 
-.fa-spin, form[id*='give-form'] .give-loading-animation:before {
-  -webkit-animation: fa-spin 2s infinite linear;
-  animation: fa-spin 2s infinite linear; }
+.fa-spin, form[id*='give-form'] .give-loading-animation {
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear; }
 
-@-webkit-keyframes fa-spin {
+@-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
@@ -133,7 +147,7 @@
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
-@keyframes fa-spin {
+@keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
@@ -210,6 +224,8 @@
   direction: ltr; }
 
 .qtip-icon, .qtip-icon .ui-icon {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   text-decoration: none; }
 
@@ -219,7 +235,7 @@
   line-height: 14px;
   text-align: center;
   text-indent: 0;
-  font: normal bold 10px/13px Tahoma, sans-serif;
+  font: normal bold 10px/13px Tahoma,sans-serif;
   color: inherit;
   background: transparent none no-repeat -100em -100em; }
 
@@ -322,26 +338,38 @@
   background-position: -2px 0; }
 
 .qtip-shadow {
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15); }
 
 /* Add rounded corners to your tooltips in: FF3+, Chrome 2+, Opera 10.6+, IE9+, Safari 2+ */
 .qtip-rounded,
 .qtip-tipsy,
 .qtip-bootstrap {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   border-radius: 5px; }
 
 .qtip-rounded .qtip-titlebar {
+  -moz-border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0; }
 
 /* Youtube tooltip style */
 .qtip-youtube {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
+  -webkit-box-shadow: 0 0 3px #333;
+  -moz-box-shadow: 0 0 3px #333;
   box-shadow: 0 0 3px #333;
   color: white;
   border: 0 solid transparent;
   background: #4A4A4A;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4A4A4A), color-stop(100%, black));
   background-image: -webkit-linear-gradient(top, #4A4A4A 0, black 100%);
+  background-image: -moz-linear-gradient(top, #4A4A4A 0, black 100%);
+  background-image: -ms-linear-gradient(top, #4A4A4A 0, black 100%);
   background-image: -o-linear-gradient(top, #4A4A4A 0, black 100%); }
 
 .qtip-youtube .qtip-titlebar {
@@ -365,11 +393,17 @@
   background: #232323;
   background: rgba(0, 0, 0, 0.7);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#717171), to(#232323));
+  background-image: -moz-linear-gradient(top, #717171, #232323);
   background-image: -webkit-linear-gradient(top, #717171, #232323);
+  background-image: -ms-linear-gradient(top, #717171, #232323);
   background-image: -o-linear-gradient(top, #717171, #232323);
   border: 2px solid #ddd;
   border: 2px solid #f1f1f1;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
+  -webkit-box-shadow: 0 0 12px #333;
+  -moz-box-shadow: 0 0 12px #333;
   box-shadow: 0 0 12px #333; }
 
 /* IE Specific */
@@ -396,6 +430,8 @@
 
 /* Cluetip style */
 .qtip-cluetip {
+  -webkit-box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
   background-color: #D9D9C2;
   color: #111;
@@ -442,6 +478,8 @@
 /* Tipped style */
 .qtip-tipped {
   border: 3px solid #959FA9;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   background-color: #F9F9F9;
   color: #454545;
@@ -454,6 +492,8 @@
   background: #3A79B8;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3A79B8), to(#2E629D));
   background-image: -webkit-linear-gradient(top, #3A79B8, #2E629D);
+  background-image: -moz-linear-gradient(top, #3A79B8, #2E629D);
+  background-image: -ms-linear-gradient(top, #3A79B8, #2E629D);
   background-image: -o-linear-gradient(top, #3A79B8, #2E629D);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D)"; }
@@ -482,8 +522,14 @@
   background-color: #ffffff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
   background-clip: padding-box; }
 
 .qtip-bootstrap .qtip-titlebar {
@@ -495,6 +541,8 @@
   line-height: 18px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0; }
 
 .qtip-bootstrap .qtip-titlebar .qtip-close {
@@ -558,8 +606,7 @@
 /* IE9 fix - removes all filters */
 .qtip:not(.ie9haxors) div.qtip-content,
 .qtip:not(.ie9haxors) div.qtip-titlebar {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
   -ms-filter: none; }
 
 .qtip .qtip-tip {
@@ -620,14 +667,12 @@ x:-o-prefocus, .qtip .qtip-tip {
  *
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
-/* =Receipt Page
--------------------------------------------------------------- */
 body.give_receipt_page {
   background-color: #fff;
-  color:   #141412;
+  color: #141412;
   margin: 0;
   font-family: Helvetica, sans-serif;
   font-size: 12px; }
@@ -660,8 +705,6 @@ body.give_receipt_page {
     display: block;
     font-weight: bold; }
 
-/* =Purchase Summary Tables
--------------------------------------------------------------- */
 table#give_donation_receipt_products,
 table#give_donation_receipt {
   width: 100%; }
@@ -669,25 +712,36 @@ table#give_donation_receipt {
 table#give_donation_receipt td, table#give_donation_receipt th, table#give_donation_receipt td, table#give_donation_receipt th {
   text-align: left; }
 
+table#give_donation_receipt .give-receipt-thead-text {
+  font-size: 18px;
+  text-align: center;
+  display: block; }
+  table#give_donation_receipt .give-receipt-thead-text > span {
+    font-size: 16px; }
+
 table#give_donation_receipt li {
-  list-style: none;
   margin: 0 0 8px 10px; }
 
 table#give_donation_receipt ul {
   margin: 0;
-  padding: 0; }
+  padding: 0;
+  list-style: none; }
 
 table#give_donation_receipt .give_receipt_payment_status.pending,
 table#give_donation_receipt .give_receipt_payment_status.revoked,
 table#give_donation_receipt .give_receipt_payment_status.failed {
   color: #f73f2e; }
 
+table#give_donation_receipt span.donation-level-text-wrap {
+  font-style: italic;
+  display: block; }
+
 /**
  * Give Frontend Forms SCSS
  *
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /*------------------------------------
@@ -695,8 +749,7 @@ Layout
 --------------------------------------*/
 .give-clearfix {
   *zoom: 1; }
-  .give-clearfix:before,
-  .give-clearfix:after {
+  .give-clearfix:before, .give-clearfix:after {
     content: " ";
     display: table; }
   .give-clearfix:after {
@@ -726,6 +779,9 @@ Layout
     height: auto;
     box-shadow: none; }
 
+[id*='give-form'] .give-custom-amount-text {
+  clear: both; }
+
 [id*='give-form'] div.summary {
   width: 58%;
   float: right; }
@@ -739,11 +795,17 @@ Layout
 [id*='give-form'] div.give-form-content-wrap {
   margin: 0 0 20px; }
 
+[id*='give-form'] div.give-form-content-wrap.give_post_form-content {
+  margin: 20px 0 0 0; }
+
 [id*='give-form'].give-display-reveal .give-btn, [id*='give-form'].give-display-modal .give-btn {
   margin: 0 0 15px; }
 
 [id*='give-form'].give-display-reveal #give-payment-mode-select, [id*='give-form'].give-display-reveal #give_purchase_form_wrap, [id*='give-form'].give-display-modal #give-payment-mode-select, [id*='give-form'].give-display-modal #give_purchase_form_wrap {
   display: none; }
+
+[id*='give-form'] .cc-address {
+  margin-bottom: 15px; }
 
 /*------------------------------------
 Single Forms
@@ -753,8 +815,7 @@ Single Forms
 
 .single-give_forms .give_forms {
   *zoom: 1; }
-  .single-give_forms .give_forms:before,
-  .single-give_forms .give_forms:after {
+  .single-give_forms .give_forms:before, .single-give_forms .give_forms:after {
     content: " ";
     display: table; }
   .single-give_forms .give_forms:after {
@@ -779,104 +840,217 @@ Gravatar List
 /*------------------------------------
 Base Form Styles
 --------------------------------------*/
-form[id*='give-form'], #give-recurring-form, form.give-form {
-  color: #333;
+form[id*='give-form'],
+#give-recurring-form,
+form.give-form {
   margin: 0 0 25px;
   padding: 0; }
-  form[id*='give-form'] .give-hidden, #give-recurring-form .give-hidden, form.give-form .give-hidden {
+  form[id*='give-form'] .give-hidden,
+  #give-recurring-form .give-hidden,
+  form.give-form .give-hidden {
     display: none; }
-  form[id*='give-form'] .give-tooltip, #give-recurring-form .give-tooltip, form.give-form .give-tooltip {
+  form[id*='give-form'] .give-tooltip,
+  #give-recurring-form .give-tooltip,
+  form.give-form .give-tooltip {
     margin: 0 3px;
     padding: 0;
     font-size: 14px;
-    -webkit-transition: 0.2s all linear;
-            transition: 0.2s all linear;
+    -moz-transition: 0.2s all linear;
+    -o-transition: 0.2s all linear;
+    transition: 0.2s all linear;
     color: rgba(51, 51, 51, 0.5); }
-    form[id*='give-form'] .give-tooltip:hover, #give-recurring-form .give-tooltip:hover, form.give-form .give-tooltip:hover {
+    form[id*='give-form'] .give-tooltip:hover,
+    #give-recurring-form .give-tooltip:hover,
+    form.give-form .give-tooltip:hover {
       color: #333; }
-  form[id*='give-form'] legend, form[id*='give-form'] h3.give-section-break, form[id*='give-form'] h4.give-section-break, #give-recurring-form legend, #give-recurring-form h3.give-section-break, #give-recurring-form h4.give-section-break, form.give-form legend, form.give-form h3.give-section-break, form.give-form h4.give-section-break {
+  form[id*='give-form'] legend,
+  form[id*='give-form'] h3.give-section-break,
+  form[id*='give-form'] h4.give-section-break,
+  #give-recurring-form legend,
+  #give-recurring-form h3.give-section-break,
+  #give-recurring-form h4.give-section-break,
+  form.give-form legend,
+  form.give-form h3.give-section-break,
+  form.give-form h4.give-section-break {
+    font-size: 1.15em;
     font-weight: bold;
     margin: 10px 0 15px;
-    padding: 0 0 10px;
-    border-bottom: 1px solid #EDEDED;
+    padding: 0 0 5px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     width: 100%; }
-    form[id*='give-form'] legend span.sub-text, form[id*='give-form'] h3.give-section-break span.sub-text, form[id*='give-form'] h4.give-section-break span.sub-text, #give-recurring-form legend span.sub-text, #give-recurring-form h3.give-section-break span.sub-text, #give-recurring-form h4.give-section-break span.sub-text, form.give-form legend span.sub-text, form.give-form h3.give-section-break span.sub-text, form.give-form h4.give-section-break span.sub-text {
+    form[id*='give-form'] legend span.sub-text,
+    form[id*='give-form'] h3.give-section-break span.sub-text,
+    form[id*='give-form'] h4.give-section-break span.sub-text,
+    #give-recurring-form legend span.sub-text,
+    #give-recurring-form h3.give-section-break span.sub-text,
+    #give-recurring-form h4.give-section-break span.sub-text,
+    form.give-form legend span.sub-text,
+    form.give-form h3.give-section-break span.sub-text,
+    form.give-form h4.give-section-break span.sub-text {
       font-style: italic;
       font-weight: normal; }
-  form[id*='give-form'] div[id^='section-'] .give-section-break, #give-recurring-form div[id^='section-'] .give-section-break, form.give-form div[id^='section-'] .give-section-break {
-    margin: 0; }
-  form[id*='give-form'] .form-row, #give-recurring-form .form-row, form.give-form .form-row {
+  form[id*='give-form'] .form-row,
+  #give-recurring-form .form-row,
+  form.give-form .form-row {
     *zoom: 1;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     margin: 0 0 15px;
+    overflow: visible;
     padding: 0; }
-    form[id*='give-form'] .form-row:before,
-    form[id*='give-form'] .form-row:after, #give-recurring-form .form-row:before,
-    #give-recurring-form .form-row:after, form.give-form .form-row:before,
+    form[id*='give-form'] .form-row:before, form[id*='give-form'] .form-row:after,
+    #give-recurring-form .form-row:before,
+    #give-recurring-form .form-row:after,
+    form.give-form .form-row:before,
     form.give-form .form-row:after {
       content: " ";
       display: table; }
-    form[id*='give-form'] .form-row:after, #give-recurring-form .form-row:after, form.give-form .form-row:after {
+    form[id*='give-form'] .form-row:after,
+    #give-recurring-form .form-row:after,
+    form.give-form .form-row:after {
       clear: both; }
-    form[id*='give-form'] .form-row label, #give-recurring-form .form-row label, form.give-form .form-row label {
+    form[id*='give-form'] .form-row:last-child,
+    #give-recurring-form .form-row:last-child,
+    form.give-form .form-row:last-child {
+      margin-bottom: 15px; }
+    form[id*='give-form'] .form-row label,
+    #give-recurring-form .form-row label,
+    form.give-form .form-row label {
       display: block;
       margin: 0 0 5px;
       position: relative;
-      line-height: 1.7;
-      text-align: left; }
-      form[id*='give-form'] .form-row label.checkbox, #give-recurring-form .form-row label.checkbox, form.give-form .form-row label.checkbox {
+      line-height: 1.7; }
+      form[id*='give-form'] .form-row label.checkbox,
+      #give-recurring-form .form-row label.checkbox,
+      form.give-form .form-row label.checkbox {
         display: inline; }
-    form[id*='give-form'] .form-row select, form[id*='give-form'] .form-row textarea, form[id*='give-form'] .form-row input[type="text"], form[id*='give-form'] .form-row input[type="tel"], form[id*='give-form'] .form-row input[type="email"], form[id*='give-form'] .form-row input[type="password"], #give-recurring-form .form-row select, #give-recurring-form .form-row textarea, #give-recurring-form .form-row input[type="text"], #give-recurring-form .form-row input[type="tel"], #give-recurring-form .form-row input[type="email"], #give-recurring-form .form-row input[type="password"], form.give-form .form-row select, form.give-form .form-row textarea, form.give-form .form-row input[type="text"], form.give-form .form-row input[type="tel"], form.give-form .form-row input[type="email"], form.give-form .form-row input[type="password"] {
+    form[id*='give-form'] .form-row select, form[id*='give-form'] .form-row textarea, form[id*='give-form'] .form-row input[type="text"], form[id*='give-form'] .form-row input[type="tel"], form[id*='give-form'] .form-row input[type="email"], form[id*='give-form'] .form-row input[type="password"],
+    #give-recurring-form .form-row select,
+    #give-recurring-form .form-row textarea,
+    #give-recurring-form .form-row input[type="text"],
+    #give-recurring-form .form-row input[type="tel"],
+    #give-recurring-form .form-row input[type="email"],
+    #give-recurring-form .form-row input[type="password"],
+    form.give-form .form-row select,
+    form.give-form .form-row textarea,
+    form.give-form .form-row input[type="text"],
+    form.give-form .form-row input[type="tel"],
+    form.give-form .form-row input[type="email"],
+    form.give-form .form-row input[type="password"] {
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
       box-sizing: border-box;
       width: 100%;
       border-radius: 0;
       outline: none;
-      color: #333; }
-      form[id*='give-form'] .form-row select.required, form[id*='give-form'] .form-row textarea.required, form[id*='give-form'] .form-row input[type="text"].required, form[id*='give-form'] .form-row input[type="tel"].required, form[id*='give-form'] .form-row input[type="email"].required, form[id*='give-form'] .form-row input[type="password"].required, #give-recurring-form .form-row select.required, #give-recurring-form .form-row textarea.required, #give-recurring-form .form-row input[type="text"].required, #give-recurring-form .form-row input[type="tel"].required, #give-recurring-form .form-row input[type="email"].required, #give-recurring-form .form-row input[type="password"].required, form.give-form .form-row select.required, form.give-form .form-row textarea.required, form.give-form .form-row input[type="text"].required, form.give-form .form-row input[type="tel"].required, form.give-form .form-row input[type="email"].required, form.give-form .form-row input[type="password"].required {
+      color: #333;
+      background-color: #FDFDFD;
+      border: 1px solid #ccc;
+      margin: 0;
+      padding: .5em; }
+      form[id*='give-form'] .form-row select:focus, form[id*='give-form'] .form-row textarea:focus, form[id*='give-form'] .form-row input[type="text"]:focus, form[id*='give-form'] .form-row input[type="tel"]:focus, form[id*='give-form'] .form-row input[type="email"]:focus, form[id*='give-form'] .form-row input[type="password"]:focus,
+      #give-recurring-form .form-row select:focus,
+      #give-recurring-form .form-row textarea:focus,
+      #give-recurring-form .form-row input[type="text"]:focus,
+      #give-recurring-form .form-row input[type="tel"]:focus,
+      #give-recurring-form .form-row input[type="email"]:focus,
+      #give-recurring-form .form-row input[type="password"]:focus,
+      form.give-form .form-row select:focus,
+      form.give-form .form-row textarea:focus,
+      form.give-form .form-row input[type="text"]:focus,
+      form.give-form .form-row input[type="tel"]:focus,
+      form.give-form .form-row input[type="email"]:focus,
+      form.give-form .form-row input[type="password"]:focus {
+        background-color: #fff; }
+      form[id*='give-form'] .form-row select.required, form[id*='give-form'] .form-row textarea.required, form[id*='give-form'] .form-row input[type="text"].required, form[id*='give-form'] .form-row input[type="tel"].required, form[id*='give-form'] .form-row input[type="email"].required, form[id*='give-form'] .form-row input[type="password"].required,
+      #give-recurring-form .form-row select.required,
+      #give-recurring-form .form-row textarea.required,
+      #give-recurring-form .form-row input[type="text"].required,
+      #give-recurring-form .form-row input[type="tel"].required,
+      #give-recurring-form .form-row input[type="email"].required,
+      #give-recurring-form .form-row input[type="password"].required,
+      form.give-form .form-row select.required,
+      form.give-form .form-row textarea.required,
+      form.give-form .form-row input[type="text"].required,
+      form.give-form .form-row input[type="tel"].required,
+      form.give-form .form-row input[type="email"].required,
+      form.give-form .form-row input[type="password"].required {
         color: #333; }
   form[id*='give-form'] .form-row-first,
   form[id*='give-form'] .form-row-last,
-  form[id*='give-form'] .form-row-two-thirds, #give-recurring-form .form-row-first,
+  #give-recurring-form .form-row-first,
   #give-recurring-form .form-row-last,
-  #give-recurring-form .form-row-two-thirds, form.give-form .form-row-first,
-  form.give-form .form-row-last,
-  form.give-form .form-row-two-thirds {
+  form.give-form .form-row-first,
+  form.give-form .form-row-last {
     float: left;
-    width: 48.5%;
-    overflow: visible; }
-  form[id*='give-form'] .form-row-two-thirds, #give-recurring-form .form-row-two-thirds, form.give-form .form-row-two-thirds {
-    float: left;
-    width: 65.75%; }
-    form[id*='give-form'] .form-row-two-thirds.form-row-first, #give-recurring-form .form-row-two-thirds.form-row-first, form.give-form .form-row-two-thirds.form-row-first {
-      margin-left: 0; }
-  form[id*='give-form'] .form-row-one-third, #give-recurring-form .form-row-one-third, form.give-form .form-row-one-third {
-    float: left;
-    width: 31.25%;
-    margin-left: 3%; }
-    form[id*='give-form'] .form-row-one-third.form-row-first, #give-recurring-form .form-row-one-third.form-row-first, form.give-form .form-row-one-third.form-row-first {
-      margin-left: 0; }
-  form[id*='give-form'] .form-row-last, #give-recurring-form .form-row-last, form.give-form .form-row-last {
+    width: 48.5%; }
+  form[id*='give-form'] .form-row-last,
+  #give-recurring-form .form-row-last,
+  form.give-form .form-row-last {
     float: right; }
-  form[id*='give-form'] .form-row-wide, #give-recurring-form .form-row-wide, form.give-form .form-row-wide {
+  form[id*='give-form'] .form-row-wide,
+  #give-recurring-form .form-row-wide,
+  form.give-form .form-row-wide {
     *zoom: 1;
     clear: both; }
-    form[id*='give-form'] .form-row-wide:before,
-    form[id*='give-form'] .form-row-wide:after, #give-recurring-form .form-row-wide:before,
-    #give-recurring-form .form-row-wide:after, form.give-form .form-row-wide:before,
+    form[id*='give-form'] .form-row-wide:before, form[id*='give-form'] .form-row-wide:after,
+    #give-recurring-form .form-row-wide:before,
+    #give-recurring-form .form-row-wide:after,
+    form.give-form .form-row-wide:before,
     form.give-form .form-row-wide:after {
       content: " ";
       display: table; }
-    form[id*='give-form'] .form-row-wide:after, #give-recurring-form .form-row-wide:after, form.give-form .form-row-wide:after {
+    form[id*='give-form'] .form-row-wide:after,
+    #give-recurring-form .form-row-wide:after,
+    form.give-form .form-row-wide:after {
       clear: both; }
-  form[id*='give-form'] .give-required-indicator, #give-recurring-form .give-required-indicator, form.give-form .give-required-indicator {
+  form[id*='give-form'] .form-row-two-thirds,
+  #give-recurring-form .form-row-two-thirds,
+  form.give-form .form-row-two-thirds {
+    float: left;
+    width: 65.75%; }
+    form[id*='give-form'] .form-row-two-thirds.form-row-first,
+    #give-recurring-form .form-row-two-thirds.form-row-first,
+    form.give-form .form-row-two-thirds.form-row-first {
+      margin-left: 0; }
+  form[id*='give-form'] .form-row-one-third,
+  #give-recurring-form .form-row-one-third,
+  form.give-form .form-row-one-third {
+    float: left;
+    width: 31.25%;
+    margin-left: 3%; }
+    form[id*='give-form'] .form-row-one-third.form-row-first,
+    #give-recurring-form .form-row-one-third.form-row-first,
+    form.give-form .form-row-one-third.form-row-first {
+      margin-left: 0; }
+  @media (max-width: 480px) {
+    form[id*='give-form'] .form-row-responsive,
+    #give-recurring-form .form-row-responsive,
+    form.give-form .form-row-responsive {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%; } }
+  form[id*='give-form'] .give-error,
+  form[id*='give-form'] .give-required-indicator,
+  #give-recurring-form .give-error,
+  #give-recurring-form .give-required-indicator,
+  form.give-form .give-error,
+  form.give-form .give-required-indicator {
     color: #a00; }
-  form[id*='give-form'] .card-expiration > select, #give-recurring-form .card-expiration > select, form.give-form .card-expiration > select {
+  form[id*='give-form'] .card-expiration > select,
+  #give-recurring-form .card-expiration > select,
+  form.give-form .card-expiration > select {
     width: 44%;
     margin: 0; }
-  form[id*='give-form'] .card-expiration > span.exp-divider, #give-recurring-form .card-expiration > span.exp-divider, form.give-form .card-expiration > span.exp-divider {
+  form[id*='give-form'] .card-expiration > span.exp-divider,
+  #give-recurring-form .card-expiration > span.exp-divider,
+  form.give-form .card-expiration > span.exp-divider {
     display: inline;
     text-align: center; }
-  form[id*='give-form'] .card-expiration select.card-expiry-year, #give-recurring-form .card-expiration select.card-expiry-year, form.give-form .card-expiration select.card-expiry-year {
+  form[id*='give-form'] .card-expiration select.card-expiry-year,
+  #give-recurring-form .card-expiration select.card-expiry-year,
+  form.give-form .card-expiration select.card-expiry-year {
     float: right; }
 
 /*---------------------------------
@@ -888,13 +1062,16 @@ form[id*='give-form'] .give-donation-amount {
     background-color: #f2f2f2;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    color: #333;
     margin: 0;
     padding: 0 12px;
-    float: left;
     height: 35px;
     line-height: 35px;
     font-size: 18px;
-    box-sizing: border-box; }
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    float: left; }
     form[id*='give-form'] .give-donation-amount .give-currency-symbol.give-currency-position-before {
       border-left: 1px solid #ccc;
       border-right: none; }
@@ -903,38 +1080,51 @@ form[id*='give-form'] .give-donation-amount {
       border-right: 1px solid #ccc; }
   form[id*='give-form'] .give-donation-amount #give-amount,
   form[id*='give-form'] .give-donation-amount #give-amount-text {
-    float: left;
     border: 1px solid #ccc;
+    background: #FFF;
     border-radius: 0;
     height: 35px;
     line-height: 35px;
     padding: 0 12px;
     margin: 0;
     font-size: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
-    width: 125px; }
+    min-width: 125px;
+    float: left; }
     form[id*='give-form'] .give-donation-amount #give-amount.invalid-amount,
     form[id*='give-form'] .give-donation-amount #give-amount-text.invalid-amount {
       border: 1px solid red; }
+  form[id*='give-form'] .give-donation-amount input.give-amount-top {
+    width: 125px; }
   form[id*='give-form'] .give-donation-amount span.give-final-total-amount {
-    float: left;
     border: 1px solid #ccc;
+    background: #FFF;
     border-radius: 0;
     height: 35px;
     line-height: 35px;
     padding: 0 12px;
     margin: 0;
     font-size: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
     cursor: not-allowed;
-    background: #FFF; }
+    background: #FFF;
+    float: left; }
+
+form[id*='give-form'] #give_terms_agreement legend {
+  display: none; }
+
+form[id*='give-form'] #give_terms_agreement label {
+  display: inline-block; }
 
 form[id*='give-form'] #give-final-total-wrap {
-  margin: 25px 0;
+  margin: 10px 0 25px;
   padding: 0;
   *zoom: 1; }
-  form[id*='give-form'] #give-final-total-wrap:before,
-  form[id*='give-form'] #give-final-total-wrap:after {
+  form[id*='give-form'] #give-final-total-wrap:before, form[id*='give-form'] #give-final-total-wrap:after {
     content: " ";
     display: table; }
   form[id*='give-form'] #give-final-total-wrap:after {
@@ -943,116 +1133,109 @@ form[id*='give-form'] #give-final-total-wrap {
     background-color: #f2f2f2;
     border-top: 1px solid #ccc;
     border-bottom: 1px solid #ccc;
+    color: #333;
     margin: 0;
     padding: 0 12px;
-    float: left;
     height: 35px;
     line-height: 35px;
     font-size: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
+    float: left;
     border: 1px solid #ccc; }
+    @media (max-width: 480px) {
+      form[id*='give-form'] #give-final-total-wrap .give-donation-total-label {
+        display: block;
+        float: none; } }
   form[id*='give-form'] #give-final-total-wrap .give-final-total-amount {
     font-size: 18px;
-    float: left;
     border: 1px solid #ccc;
+    background: #FFF;
     border-radius: 0;
     height: 35px;
     line-height: 35px;
     padding: 0 12px;
     margin: 0;
     font-size: 18px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box;
-    border-left: none; }
+    border-left: none;
+    float: left; }
+    @media (max-width: 480px) {
+      form[id*='give-form'] #give-final-total-wrap .give-final-total-amount {
+        border: 1px solid #ccc;
+        border-top: 0;
+        display: block;
+        float: none; } }
 
-/*---------------------------------
-Notices, Warnings & Errors
------------------------------------*/
-.give_error, .give_success {
-  position: relative;
-  margin: 15px 0;
-  background: #F9F9F9;
-  padding: 1em 1em 1em 2em;
-  border-left: 4px solid #a00;
-  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
-  clear: both; }
-  .give_error > p, .give_success > p {
-    margin: 0 !important; }
-  .give_error:before, .give_success:before {
-    font-family: 'give-icomoon';
-    speak: none;
-    font-style: normal;
-    font-weight: normal;
-    font-variant: normal;
-    text-transform: none;
-    line-height: 1;
-    /* Better Font Rendering =========== */
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-    position: absolute;
-    top: 50%;
-    margin-top: -15px;
-    left: -17px;
-    background-color: #a00;
-    color: #FFF;
-    width: 30px;
-    height: 30px;
-    border-radius: 100%;
-    text-align: center;
-    line-height: 30px;
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
-    content: '\f02d'; }
-  .give_error.give_warning, .give_success.give_warning {
-    border-color: #ffba00; }
-    .give_error.give_warning:before, .give_success.give_warning:before {
-      background-color: #ffba00;
-      text-shadow: 1px 1px rgba(0, 0, 0, 0.1); }
+.give-display-button-only > *:not(form) {
+  display: none !important; }
 
-.give_success {
-  border-color: #7ad03a; }
-  .give_success:before {
-    background-color: #7ad03a;
-    content: '\e601';
-    text-shadow: 1px 1px rgba(0, 0, 0, 0.2); }
+.give-display-button-only form > *:not(.give-btn-modal) {
+  display: none !important; }
 
 /*---------------------------------
 Radio Lists
 -----------------------------------*/
-#give-donation-level-radio-list {
+form[id*='give-form'] input[type="radio"] {
+  margin: 0 .5em 0 0; }
+
+form[id*='give-form'] #give-donation-level-radio-list {
   margin: 0 0 15px;
   padding: 0;
   list-style: none;
   clear: both; }
-  #give-donation-level-radio-list > li {
-    margin: 0 0 5px;
+  form[id*='give-form'] #give-donation-level-radio-list > li {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
     padding: 0; }
-    #give-donation-level-radio-list > li label {
-      cursor: pointer; }
-    #give-donation-level-radio-list > li input[type="radio"] {
-      margin: 0 5px 0 0;
-      outline: none; }
+    form[id*='give-form'] #give-donation-level-radio-list > li label {
+      cursor: pointer;
+      display: inline-block;
+      margin: 0; }
+    form[id*='give-form'] #give-donation-level-radio-list > li input[type="radio"] {
+      margin: 0 .5em 0 0;
+      outline: none;
+      width: auto; }
 
-#give-gateway-radio-list {
+form[id*='give-form'] #give-gateway-radio-list {
   *zoom: 1;
-  float: left;
-  margin: 0 0 25px;
+  margin: 0 0 15px;
   padding: 0;
   list-style: none; }
-  #give-gateway-radio-list:before,
-  #give-gateway-radio-list:after {
+  form[id*='give-form'] #give-gateway-radio-list:before, form[id*='give-form'] #give-gateway-radio-list:after {
     content: " ";
     display: table; }
-  #give-gateway-radio-list:after {
+  form[id*='give-form'] #give-gateway-radio-list:after {
     clear: both; }
-  #give-gateway-radio-list > li {
-    float: left;
-    margin-right: 15px;
-    margin-left: 0;
-    list-style-type: none; }
-    #give-gateway-radio-list > li .give-gateway-option {
-      cursor: pointer; }
-      #give-gateway-radio-list > li .give-gateway-option input[type="radio"] {
-        margin: 0 5px 0 0;
-        outline: none; }
+  form[id*='give-form'] #give-gateway-radio-list > li {
+    list-style-type: none;
+    list-style-image: none;
+    margin: 0;
+    padding: 0; }
+    @media (min-width: 480px) {
+      form[id*='give-form'] #give-gateway-radio-list > li {
+        display: inline-block;
+        margin-right: 15px;
+        margin-left: 0; } }
+    form[id*='give-form'] #give-gateway-radio-list > li label.give-gateway-option {
+      cursor: pointer;
+      display: inline;
+      margin: 0; }
+    form[id*='give-form'] #give-gateway-radio-list > li input[type="radio"] {
+      margin: 0 .25em 0 0;
+      outline: none;
+      width: auto;
+      display: inline; }
+
+/*---------------------------------
+Checkboxes
+-----------------------------------*/
+form[id*='give-form'] input[type="checkbox"] {
+  margin: 0 .25em 0 0; }
 
 /*---------------------------------
 Donation Level: Dropdown/Select
@@ -1062,7 +1245,12 @@ form[id*='give-form'] select.give-select-level {
   border-radius: 0;
   min-width: 155px;
   border: 1px solid #ccc;
-  margin: 0 0 15px; }
+  margin: 0 0 15px;
+  display: block;
+  clear: both;
+  color: #333;
+  background-color: #FDFDFD;
+  padding: .5em; }
 
 /*---------------------------------
 Buttons
@@ -1073,14 +1261,14 @@ Buttons
   padding: 0;
   clear: both;
   list-style: none; }
-  #give-donation-level-button-wrap:before,
-  #give-donation-level-button-wrap:after {
+  #give-donation-level-button-wrap:before, #give-donation-level-button-wrap:after {
     content: " ";
     display: table; }
   #give-donation-level-button-wrap:after {
     clear: both; }
   #give-donation-level-button-wrap > li {
     list-style-type: none;
+    list-style-image: none;
     float: left;
     margin: 0 5px 5px 0; }
 
@@ -1090,11 +1278,11 @@ Buttons
 /*---------------------------------
 CC Validation
 -----------------------------------*/
-#give_secure_site_wrapper {
+[id*='give_secure_site_wrapper'] {
   padding: 4px 4px 15px 0;
   font-size: 16px;
   line-height: 20px; }
-  #give_secure_site_wrapper span.padlock {
+  [id*='give_secure_site_wrapper'] span.padlock {
     font-family: 'give-icomoon';
     speak: none;
     font-style: normal;
@@ -1102,12 +1290,11 @@ CC Validation
     font-variant: normal;
     text-transform: none;
     line-height: 1;
-    /* Better Font Rendering =========== */
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 16px;
     line-height: 20px; }
-    #give_secure_site_wrapper span.padlock :before {
+    [id*='give_secure_site_wrapper'] span.padlock :before {
       display: inline-block; }
 
 #give_purchase_form_wrap input.give-input.card-number.valid {
@@ -1172,34 +1359,24 @@ Loading Animation
   100% {
     opacity: 0; } }
 
-.give-loading-text span.elipsis {
-  -webkit-animation-name: opacity;
-  -webkit-animation-duration: 1s;
-  -webkit-animation-iteration-count: infinite;
-  -moz-animation-name: opacity;
-  -moz-animation-duration: 1s;
-  -moz-animation-iteration-count: infinite; }
-  .give-loading-text span.elipsis:nth-child(1) {
-    -webkit-animation-delay: 100ms;
-    -moz-animation-delay: 100ms; }
-  .give-loading-text span.elipsis:nth-child(2) {
-    -webkit-animation-delay: 300ms;
-    -moz-animation-delay: 300ms; }
-  .give-loading-text span.elipsis:nth-child(3) {
-    -webkit-animation-delay: 500ms;
-    -moz-animation-delay: 500ms; }
+@-moz-keyframes opacity {
+  0% {
+    opacity: 1; }
+  100% {
+    opacity: 0; } }
 
-form[id*='give-form'] p.give-loading-text {
+form[id*='give-form'] p.give-loading-text,
+form[id*='give-form'] span.give-loading-text {
   display: none;
   float: right;
+  height: 16px;
+  width: 16px;
   margin: 0;
   padding: 0;
   font-style: italic;
   line-height: 20px;
-  font-size: 16px; }
-  form[id*='give-form'] p.give-loading-text.give-updating-price-loader {
-    float: left;
-    margin: 6px 0 0 20px; }
+  font-size: 16px;
+  font-weight: normal; }
 
 form[id*='give-form'] .give-loading-animation {
   font-family: 'give-icomoon';
@@ -1209,52 +1386,71 @@ form[id*='give-form'] .give-loading-animation {
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   float: left;
-  width: 20px;
-  height: 20px;
-  line-height: 20px;
+  height: 16px;
+  width: 16px;
+  line-height: 1;
   font-size: 16px;
-  margin: 0 3px 0 0;
+  margin: 0 5px 0 0;
   background-size: 20px 20px;
   background-repeat: no-repeat;
   background-color: transparent; }
 
-/* Login and Register */
-#give-login-account-wrap {
-  *zoom: 1; }
-  #give-login-account-wrap:before,
-  #give-login-account-wrap:after {
-    content: " ";
-    display: table; }
-  #give-login-account-wrap:after {
-    clear: both; }
-  #give-login-account-wrap > p {
-    float: left;
-    margin: 0 0 15px;
+form[id*='give-form'] .give-payment-mode-label .give-loading-text {
+  float: right; }
+
+/*---------------------------------
+User Login
+-----------------------------------*/
+/*
+ * User Login within Donation Form
+ * (visible when Form Display > Login is enabled)
+ */
+[id*='give-form'] .give-login-account-wrap {
+  margin: 0 0 15px;
+  position: relative; }
+  [id*='give-form'] .give-login-account-wrap .give-login-message {
+    margin: 0;
     padding: 0; }
-  #give-login-account-wrap p.give-login-message {
-    margin-right: 10px; }
+  [id*='give-form'] .give-login-account-wrap .give-loading-text {
+    position: absolute;
+    right: 0;
+    top: .25em; }
 
-/* User Login */
-#give-user-login-submit input.give-submit, #give-user-login-submit span.give-loading-animation, .give-submit-button-wrap input.give-submit, .give-submit-button-wrap span.give-loading-animation {
-  float: left; }
+[id*='give-form'] fieldset[id^="give-login-fields"] {
+  margin: 0 0 15px; }
 
-#give-user-login-submit span.give-loading-animation, .give-submit-button-wrap span.give-loading-animation {
-  margin: 3px 6px;
+[id*='give-form'] .give-new-account-link {
+  margin: 0 0 15px;
+  padding: 0; }
+
+[id*='give-form'] .give_login_forgot_password {
+  float: right; }
+
+[id^='give-user-login-submit'] input.give-cancel-login,
+.give-submit-button-wrap input.give-cancel-login {
+  margin-left: 5px; }
+
+[id^='give-user-login-submit'] span.give-loading-animation,
+.give-submit-button-wrap span.give-loading-animation {
+  margin: 0 0 0 .5em;
   display: none; }
 
-p.give-recurring-login-toggle {
-  font-style: italic; }
+[id^='give-user-login-submit'] .give-submit,
+.give-submit-button-wrap .give-submit {
+  float: left; }
 
 /* Login Shortcode Form */
-#give-login-form legend, #give-login-form div.give-login, #give-register-form legend, #give-register-form div.give-login {
+#give-login-form legend, #give-login-form div.give-login,
+#give-register-form legend,
+#give-register-form div.give-login {
   line-height: 2;
   margin-bottom: 15px; }
 
-#give-login-form label, #give-register-form label {
+#give-login-form label,
+#give-register-form label {
   min-width: 100px;
   display: inline-block; }
 
@@ -1264,9 +1460,6 @@ Modal - Magnific Popup
 div.give-form-wrap.mfp-hide {
   display: block !important; }
 
-div.mfp-content .give-form-content-wrap, div.mfp-content .give-donation-amount, div.mfp-content .give-select-level {
-  display: none; }
-
 div.mfp-content fieldset p, div.mfp-content fieldset ol, div.mfp-content fieldset ul {
   margin-bottom: 1.2em;
   line-height: 1.4; }
@@ -1275,23 +1468,93 @@ div.mfp-content fieldset p, div.mfp-content fieldset ol, div.mfp-content fieldse
 Basic Button Style
 -----------------------------------*/
 .give-btn {
-  background: #eeeeee;
+  background: #EDEDED;
   border: 1px solid #ccc;
+  color: #333;
   padding: 8px 10px;
   cursor: pointer;
   line-height: 1.2em;
-  font-size: 14px; }
+  font-size: 1em; }
   .give-btn:hover {
     background: #dbdbdb; }
+
+/*---------------------------------
+Email Access Form
+-----------------------------------*/
+form#give-email-access-form div.g-recaptcha, form#give-email-access-form input#give-email {
+  margin: 0 0 15px; }
+
+form#give-email-access-form input#give-email {
+  width: 305px; }
 
 /*---------------------------------
 Responsiveness
 -----------------------------------*/
 @media (max-width: 768px) {
-  /* Layout */
   [id*='give-form'] div.images, [id*='give-form'] div.summary {
     width: 100%;
+    float: none; }
+  [id*='give-form'] div#give-sidebar-left {
+    width: 100%;
     float: none; } }
+
+/*---------------------------------
+Section Breaks
+-----------------------------------*/
+.give-form-wrap .give-form h3.give-section-break,
+.give-form-wrap .give-form h4.give-section-break {
+  margin: 10px 0 0; }
+
+/*---------------------------------
+Notices, Warnings & Errors
+-----------------------------------*/
+.give_error, .give_success {
+  position: relative;
+  margin: 15px 0;
+  background: #F9F9F9;
+  padding: 1em 1em 1em 2em;
+  border-left: 4px solid #a00;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.125);
+  clear: both; }
+  .give_error > p, .give_success > p {
+    margin: 0 !important;
+    color: #333; }
+  .give_error:before, .give_success:before {
+    font-family: 'give-icomoon';
+    speak: none;
+    font-style: normal;
+    font-weight: normal;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    position: absolute;
+    top: 50%;
+    font-size: 16px;
+    margin-top: -15px;
+    left: -17px;
+    background-color: #a00;
+    color: #FFF;
+    width: 30px;
+    height: 30px;
+    border-radius: 100%;
+    text-align: center;
+    line-height: 30px;
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.5);
+    content: '\f02d'; }
+  .give_error.give_warning, .give_success.give_warning {
+    border-color: #ffba00; }
+    .give_error.give_warning:before, .give_success.give_warning:before {
+      background-color: #ffba00;
+      text-shadow: 1px 1px rgba(0, 0, 0, 0.1); }
+
+.give_success {
+  border-color: #7ad03a; }
+  .give_success:before {
+    background-color: #7ad03a;
+    content: '\e601';
+    text-shadow: 1px 1px rgba(0, 0, 0, 0.2); }
 
 /* Magnific Popup CSS */
 .mfp-bg {
@@ -1303,8 +1566,7 @@ Responsiveness
   overflow: hidden;
   position: fixed;
   background: #0b0b0b;
-  opacity: 0.8;
-  filter: alpha(opacity=80); }
+  opacity: 0.8; }
 
 .mfp-wrap {
   top: 0;
@@ -1352,12 +1614,14 @@ Responsiveness
   cursor: progress; }
 
 .mfp-zoom-out-cur, .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+  cursor: -moz-zoom-out;
   cursor: -webkit-zoom-out;
   cursor: zoom-out; }
 
 .mfp-zoom {
   cursor: pointer;
   cursor: -webkit-zoom-in;
+  cursor: -moz-zoom-in;
   cursor: zoom-in; }
 
 .mfp-auto-cursor .mfp-content {
@@ -1369,8 +1633,7 @@ Responsiveness
 .mfp-counter {
   -webkit-user-select: none;
   -moz-user-select: none;
-  -ms-user-select: none;
-      user-select: none; }
+  user-select: none; }
 
 .mfp-loading.mfp-figure {
   display: none; }
@@ -1399,8 +1662,7 @@ Responsiveness
 .mfp-s-error .mfp-content {
   display: none; }
 
-button.mfp-close,
-button.mfp-arrow {
+button.mfp-close, button.mfp-arrow {
   overflow: visible;
   cursor: pointer;
   background: transparent;
@@ -1410,7 +1672,8 @@ button.mfp-arrow {
   outline: none;
   padding: 0;
   z-index: 1046;
-  box-shadow: none; }
+  box-shadow: none;
+  touch-action: manipulation; }
 
 button::-moz-focus-inner {
   padding: 0;
@@ -1426,16 +1689,13 @@ button::-moz-focus-inner {
   text-decoration: none;
   text-align: center;
   opacity: 0.65;
-  filter: alpha(opacity=65);
   padding: 0 0 18px 10px;
   color: #FFF;
   font-style: normal;
   font-size: 28px;
   font-family: Arial, Baskerville, monospace; }
-  .mfp-close:hover,
-  .mfp-close:focus {
-    opacity: 1;
-    filter: alpha(opacity=100); }
+  .mfp-close:hover, .mfp-close:focus {
+    opacity: 1; }
   .mfp-close:active {
     top: 1px; }
 
@@ -1462,7 +1722,6 @@ button::-moz-focus-inner {
 .mfp-arrow {
   position: absolute;
   opacity: 0.65;
-  filter: alpha(opacity=65);
   margin: 0;
   top: 50%;
   margin-top: -55px;
@@ -1472,14 +1731,9 @@ button::-moz-focus-inner {
   -webkit-tap-highlight-color: transparent; }
   .mfp-arrow:active {
     margin-top: -54px; }
-  .mfp-arrow:hover,
-  .mfp-arrow:focus {
-    opacity: 1;
-    filter: alpha(opacity=100); }
-  .mfp-arrow:before,
-  .mfp-arrow:after,
-  .mfp-arrow .mfp-b,
-  .mfp-arrow .mfp-a {
+  .mfp-arrow:hover, .mfp-arrow:focus {
+    opacity: 1; }
+  .mfp-arrow:before, .mfp-arrow:after {
     content: '';
     display: block;
     width: 0;
@@ -1490,36 +1744,30 @@ button::-moz-focus-inner {
     margin-top: 35px;
     margin-left: 35px;
     border: medium inset transparent; }
-  .mfp-arrow:after,
-  .mfp-arrow .mfp-a {
+  .mfp-arrow:after {
     border-top-width: 13px;
     border-bottom-width: 13px;
     top: 8px; }
-  .mfp-arrow:before,
-  .mfp-arrow .mfp-b {
+  .mfp-arrow:before {
     border-top-width: 21px;
     border-bottom-width: 21px;
     opacity: 0.7; }
 
 .mfp-arrow-left {
   left: 0; }
-  .mfp-arrow-left:after,
-  .mfp-arrow-left .mfp-a {
+  .mfp-arrow-left:after {
     border-right: 17px solid #FFF;
     margin-left: 31px; }
-  .mfp-arrow-left:before,
-  .mfp-arrow-left .mfp-b {
+  .mfp-arrow-left:before {
     margin-left: 25px;
     border-right: 27px solid #3F3F3F; }
 
 .mfp-arrow-right {
   right: 0; }
-  .mfp-arrow-right:after,
-  .mfp-arrow-right .mfp-a {
+  .mfp-arrow-right:after {
     border-left: 17px solid #FFF;
     margin-left: 39px; }
-  .mfp-arrow-right:before,
-  .mfp-arrow-right .mfp-b {
+  .mfp-arrow-right:before {
     border-left: 27px solid #3F3F3F; }
 
 .mfp-iframe-holder {
@@ -1645,48 +1893,24 @@ img.mfp-img {
 @media all and (max-width: 900px) {
   .mfp-arrow {
     -webkit-transform: scale(0.75);
-    -ms-transform: scale(0.75);
-        transform: scale(0.75); }
+    transform: scale(0.75); }
   .mfp-arrow-left {
     -webkit-transform-origin: 0;
-    -ms-transform-origin: 0;
-        transform-origin: 0; }
+    transform-origin: 0; }
   .mfp-arrow-right {
     -webkit-transform-origin: 100%;
-    -ms-transform-origin: 100%;
-        transform-origin: 100%; }
+    transform-origin: 100%; }
   .mfp-container {
     padding-left: 6px;
     padding-right: 6px; } }
 
-.mfp-ie7 .mfp-img {
-  padding: 0; }
-
-.mfp-ie7 .mfp-bottom-bar {
-  width: 600px;
-  left: 50%;
-  margin-left: -300px;
-  margin-top: 5px;
-  padding-bottom: 5px; }
-
-.mfp-ie7 .mfp-container {
-  padding: 0; }
-
-.mfp-ie7 .mfp-content {
-  padding-top: 44px; }
-
-.mfp-ie7 .mfp-close {
-  top: 0;
-  right: 0;
-  padding-top: 0; }
-
-/*!
+/**
  * Give Layouts SCSS/CSS
  *
  * @description: This file provides layout styles for various themes such as the default WordPress themes and others if applicable; Most themes handle Give's template system just fine ;)
  * @package:     Give
  * @subpackage:  SCSS/Frontend
- * @copyright:   Copyright (c) 2015, WordImpress
+ * @copyright:   Copyright (c) 2016, WordImpress
  * @license:     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /**
@@ -1771,7 +1995,7 @@ Avada
  *
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 .give-goal-progress {
@@ -1805,7 +2029,7 @@ Avada
 /*!
  * Float Labels
  *
- * Version: 1.0.7
+ * Version: 1.0.8
  * Author: Paul Ryley (http://geminilabs.io)
  * URL: https://github.com/geminilabs/float-labels.js
  * License: MIT
@@ -1813,10 +2037,11 @@ Avada
 form.floated-labels .floatlabel {
   position: relative; }
   form.floated-labels .floatlabel input,
-  form.floated-labels .floatlabel select {
+  form.floated-labels .floatlabel select,
+  form.floated-labels .floatlabel textarea {
     font-size: 16px;
     line-height: normal;
-    background-color: inherit;
+    background-color: #fff;
     border: 1px solid #ccc;
     padding: 12px; }
   form.floated-labels .floatlabel select {
@@ -1832,12 +2057,17 @@ form.floated-labels .floatlabel {
   form.floated-labels .floatlabel.is-active select,
   form.floated-labels .floatlabel.is-active textarea {
     color: #333;
-    background-color: inherit;
+    background-color: #fff;
     border-color: #ccc;
     padding-top: 20px;
     padding-bottom: 4px; }
   form.floated-labels .floatlabel.is-focused label.floatlabel-label {
     color: #007ba4; }
+  form.floated-labels .floatlabel.is-focused input,
+  form.floated-labels .floatlabel.is-focused select,
+  form.floated-labels .floatlabel.is-focused textarea {
+    background-color: #fff;
+    border-color: #ccc; }
   form.floated-labels .floatlabel label.floatlabel-label {
     position: absolute;
     display: block;
@@ -1848,8 +2078,7 @@ form.floated-labels .floatlabel {
     line-height: 1;
     opacity: 0;
     visibility: hidden;
-    -webkit-transition: all 0.3s ease-in-out;
-            transition: all 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
     padding: 0 1px; }
     form.floated-labels .floatlabel label.floatlabel-label.is-visible {
       opacity: 1;
@@ -1857,8 +2086,7 @@ form.floated-labels .floatlabel {
 
 form.floated-labels .styled.select {
   position: relative; }
-  form.floated-labels .styled.select:before,
-  form.floated-labels .styled.select:after {
+  form.floated-labels .styled.select:before, form.floated-labels .styled.select:after {
     content: '';
     position: absolute;
     display: block;
@@ -1869,21 +2097,17 @@ form.floated-labels .styled.select {
     z-index: 2; }
   form.floated-labels .styled.select:before {
     right: 18px;
-    -webkit-transform: skew(0deg, 45deg);
-        -ms-transform: skew(0deg, 45deg);
-            transform: skew(0deg, 45deg); }
+    transform: skew(0deg, 45deg); }
   form.floated-labels .styled.select:after {
     right: 12px;
-    -webkit-transform: skew(0deg, -45deg);
-        -ms-transform: skew(0deg, -45deg);
-            transform: skew(0deg, -45deg); }
+    transform: skew(0deg, -45deg); }
 
 /**
  * Give Magnific Modal Custom SCSS
  *
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 .give-modal {
@@ -1891,7 +2115,7 @@ form.floated-labels .styled.select {
   left: 0;
   width: 100%;
   height: 100%;
-  z-index: 1043;
+  z-index: 2147483540;
   position: fixed;
   outline: none !important;
   -webkit-backface-visibility: hidden; }
@@ -1910,6 +2134,8 @@ form.floated-labels .styled.select {
     left: 0;
     top: 0;
     padding: 0 8px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
     box-sizing: border-box; }
   .give-modal .mfp-container:before {
     content: '';
@@ -1928,10 +2154,11 @@ form.floated-labels .styled.select {
     width: auto;
     max-width: 500px;
     margin: 40px auto;
-    z-index: 1045; }
-    .give-modal .mfp-content .give-donation-levels-wrap, .give-modal .mfp-content .give-btn-modal {
-      display: none; }
-    .give-modal .mfp-content [id*='give-form'] #give-payment-mode-select, .give-modal .mfp-content [id*='give-form'] #give_purchase_form_wrap {
+    z-index: 2147483640; }
+    .give-modal .mfp-content [id*='give-form'] #give-payment-mode-select,
+    .give-modal .mfp-content [id*='give-form'] #give_purchase_form_wrap,
+    .give-modal .mfp-content [id*='give-form'].give-display-button-only .give-donation-amount,
+    .give-modal .mfp-content [id*='give-form'].give-display-button-only .give-donation-levels-wrap {
       display: block; }
   .give-modal .mfp-inline-holder .mfp-content,
   .give-modal .mfp-ajax-holder .mfp-content {
@@ -1940,11 +2167,13 @@ form.floated-labels .styled.select {
   .give-modal .mfp-ajax-cur {
     cursor: progress; }
   .give-modal .mfp-zoom-out-cur, .give-modal .mfp-zoom-out-cur .mfp-image-holder .mfp-close {
+    cursor: -moz-zoom-out;
     cursor: -webkit-zoom-out;
     cursor: zoom-out; }
   .give-modal .mfp-zoom {
     cursor: pointer;
     cursor: -webkit-zoom-in;
+    cursor: -moz-zoom-in;
     cursor: zoom-in; }
   .give-modal .mfp-auto-cursor .mfp-content {
     cursor: auto; }
@@ -1954,8 +2183,9 @@ form.floated-labels .styled.select {
   .give-modal .mfp-counter {
     -webkit-user-select: none;
     -moz-user-select: none;
-    -ms-user-select: none;
-        user-select: none; }
+    user-select: none; }
+  .give-modal .mfp-close:hover {
+    background-color: transparent; }
   .give-modal .mfp-loading.mfp-figure {
     display: none; }
 
@@ -1964,7 +2194,7 @@ form.floated-labels .styled.select {
  *
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 table.give-table {
@@ -1980,10 +2210,9 @@ table.give-table {
   table.give-table thead {
     font-weight: bold; }
     table.give-table thead th:first-child {
-      border-left: none;
       text-align: left; }
   table.give-table th {
-    padding: 21px 25px 22px 25px;
+    padding: 21px 25px;
     border-top: 1px solid #E8E8E8;
     border-bottom: 1px solid #e0e0e0;
     border-left: 1px solid #e0e0e0;
@@ -1999,7 +2228,8 @@ table.give-table {
       border-top: 1px solid #ffffff;
       border-bottom: 1px solid #e0e0e0;
       border-left: 1px solid #e0e0e0;
-      background: #FFF; }
+      background: #FFF;
+      text-align: center; }
     table.give-table tbody tr td:first-child {
       text-align: left;
       border-left: 0; }
@@ -2012,7 +2242,7 @@ table.give-table {
  * @description: The following styles help Give look good and fixes CSS conflicts with popular WordPress themes
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 .give-divi .qtip-tipsy {
@@ -2021,16 +2251,13 @@ table.give-table {
 body.give-twentysixteen div.entry-summary {
   margin: 0; }
 
-body.give-twentysixteen .give-btn {
+body.give-twentysixteen button.give-btn {
   color: #333; }
 
 body.give-twentysixteen .give-submit {
   color: #FFF; }
 
-body.give-twentysixteen form[id*="give"] fieldset {
-  margin-bottom: 0; }
-
 body.give-twentysixteen fieldset#give_terms_agreement {
   padding-left: 0; }
 
-/*# sourceMappingURL=give.css.map */
+/*# sourceMappingURL=../assets/sourcemaps/give.css.map */

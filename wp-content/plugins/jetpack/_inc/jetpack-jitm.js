@@ -90,9 +90,15 @@
 		});
 
 		$body.on( 'click', '.jp-jitm .launch', function() {
+			var $jitm = $(this).closest( '.jp-jitm' );
+
+			if ( $jitm.data( 'stats_url' ) ) {
+				data.jitm_stats_url = $jitm.data( 'stats_url' );
+				new Image().src = data.jitm_stats_url;
+			}
+
+			data.jitmModule = $jitm.data( 'track' ) ? $jitm.data( 'track' ) : $(this).data( 'module' );
 			data.jitmActionToTake = 'launch';
-			module_slug = $(this).data( 'module' );
-			data.jitmModule = module_slug;
 			// ajax request to save click in stat
 			$.post( jitmL10n.ajaxurl, data );
 		} );
@@ -110,7 +116,7 @@
 						var jitmTemplate = wp.template( 'jitm-photon' ),
 							$menu = wp.media.frame.$el.find( '.media-menu' ),
 							$jitm;
-						if ( $menu.length > 0 ) {
+						if ( $menu.length > 0 && 0 === $menu.find( '.jp-jitm' ).length ) {
 							$jitm = $menu.append( jitmTemplate() ).find( '.jp-jitm' );
 
 							// JITM is visible to user, track it.

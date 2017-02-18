@@ -4,7 +4,7 @@
  * @description: The following styles help Give look good and fixes CSS conflicts with popular WordPress themes
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 
@@ -24,16 +24,12 @@ body.give-twentysixteen {
 	margin: 0;
   }
 
-  .give-btn {
+  button.give-btn {
 	color: #333;
   }
 
   .give-submit {
 	color: #FFF;
-  }
-
-  form[id*="give"] fieldset {
-    margin-bottom: 0;
   }
 
   fieldset#give_terms_agreement {

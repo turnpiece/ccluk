@@ -4,12 +4,15 @@
  *
  * @package     Give
  * @subpackage  Admin
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.3.0
  */
 
-defined( 'ABSPATH' ) or exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Give_Shortcode_Register extends Give_Shortcode_Generator {
 
@@ -18,8 +21,8 @@ class Give_Shortcode_Register extends Give_Shortcode_Generator {
 	 */
 	public function __construct() {
 
-		$this->shortcode['title'] = __( 'Register', 'give' );
-		$this->shortcode['label'] = __( 'Register', 'give' );
+		$this->shortcode['title'] = esc_html__( 'Register', 'give' );
+		$this->shortcode['label'] = esc_html__( 'Register', 'give' );
 
 		parent::__construct( 'give_register' );
 	}
@@ -34,13 +37,13 @@ class Give_Shortcode_Register extends Give_Shortcode_Generator {
 		return array(
 			array(
 				'type' => 'container',
-				'html' => sprintf( '<p class="no-margin">%s</p>', __( 'Redirect URL (optional):', 'give' ) ),
+				'html' => sprintf( '<p class="no-margin">%s</p>', esc_html__( 'Redirect URL (optional):', 'give' ) ),
 			),
 			array(
 				'type'     => 'textbox',
 				'name'     => 'redirect',
 				'minWidth' => 320,
-				'tooltip'  => __( 'Enter an URL here to redirect to after registering.', 'give' ),
+				'tooltip'  => esc_attr__( 'Enter an URL here to redirect to after registering.', 'give' ),
 			),
 		);
 	}

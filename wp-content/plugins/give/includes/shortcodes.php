@@ -4,33 +4,54 @@
  *
  * @package     Give
  * @subpackage  Shortcodes
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-
 /**
- * Purchase History Shortcode
+ * Donation History Shortcode
  *
- * Displays a user's purchase history.
+ * Displays a user's donation history.
  *
- * @since 1.0
+ * @since  1.0
+ *
  * @return string
  */
 function give_donation_history() {
-	if ( is_user_logged_in() ) {
+
+	// If payment_key query arg exists, return receipt instead of donation history.
+	if ( isset( $_GET['payment_key'] ) ) {
+		ob_start();
+		echo give_receipt_shortcode( array() );
+		echo '<a href="' . esc_url( give_get_history_page_uri() ) . '">&laquo; ' . esc_html__( 'Return to All Donations', 'give' ) . '</a>';
+
+		return ob_get_clean();
+	}
+
+	$email_access = give_get_option( 'email_access' );
+
+	//Is user logged in? Does a session exist? Does an email-access token exist?
+	if ( is_user_logged_in() || Give()->session->get_session_expiration() !== false || ( $email_access == 'on' && Give()->email_access->token_exists ) ) {
 		ob_start();
 		give_get_template_part( 'history', 'donations' );
 
 		return ob_get_clean();
+	} //Is Email-based access enabled?
+	elseif ( give_is_setting_enabled( $email_access ) ) {
+
+		ob_start();
+		give_get_template_part( 'email', 'login-form' );
+
+		return ob_get_clean();
 	} else {
-		echo apply_filters( 'give_donation_history_nonuser_message', '<div class="give_error give_warning"><p>' . __( 'You must be logged in to view your donation history. Please login using your account or create an account using the same email you used to donate with.', 'give' ) . '</p></div>' );
+		$message = esc_html__( 'You must be logged in to view your donation history. Please login using your account or create an account using the same email you used to donate with.', 'give' );
+		echo apply_filters( 'give_donation_history_nonuser_message', give_output_error( $message, false ), $message );
 	}
 }
 
@@ -39,16 +60,15 @@ add_shortcode( 'donation_history', 'give_donation_history' );
 /**
  * Donation Form Shortcode
  *
- * @description Show the Give donation form.
+ * Show the Give donation form.
  *
- * @since       1.0
+ * @since  1.0
  *
- * @param array  $atts Shortcode attributes
- * @param string $content
+ * @param  array $atts Shortcode attributes
  *
  * @return string
  */
-function give_form_shortcode( $atts, $content = null ) {
+function give_form_shortcode( $atts ) {
 	$atts = shortcode_atts( array(
 		'id'            => '',
 		'show_title'    => true,
@@ -58,33 +78,9 @@ function give_form_shortcode( $atts, $content = null ) {
 		'display_style' => '',
 	), $atts, 'give_form' );
 
-	foreach ( $atts as $key => $value ) {
-		//convert shortcode_atts values to booleans
-		if ( $key == 'show_title' ) {
-			$atts[ $key ] = filter_var( $atts[ $key ], FILTER_VALIDATE_BOOLEAN );
-		} elseif ( $key == 'show_goal' ) {
-			$atts[ $key ] = filter_var( $atts[ $key ], FILTER_VALIDATE_BOOLEAN );
-		}
-
-		//validate show_content value
-		if ( $key == 'show_content' ) {
-			if ( ! in_array( $value, array( 'none', 'above', 'below' ) ) ) {
-				$atts[ $key ] = '';
-			} else if ( $value == 'above' ) {
-				$atts[ $key ] = 'give_pre_form';
-			} else if ( $value == 'below' ) {
-				$atts[ $key ] = 'give_post_form';
-			}
-		}
-
-		//validate display_style and float_labels value
-		if ( ( $key == 'display_style' && ! in_array( $value, array( 'onpage', 'reveal', 'modal' ) ) )
-		     || ( $key == 'float_labels' && ! in_array( $value, array( 'enabled', 'disabled' ) ) )
-		) {
-
-			$atts[ $key ] = '';
-		}
-	}
+	// Convert string to bool.
+	$atts['show_title'] = filter_var( $atts['show_title'], FILTER_VALIDATE_BOOLEAN );
+	$atts['show_goal']  = filter_var( $atts['show_goal'], FILTER_VALIDATE_BOOLEAN );
 
 	//get the Give Form
 	ob_start();
@@ -97,18 +93,17 @@ function give_form_shortcode( $atts, $content = null ) {
 add_shortcode( 'give_form', 'give_form_shortcode' );
 
 /**
- * Donation Form Goal Shortcode
+ * Donation Form Goal Shortcode.
  *
- * @description Show the Give donation form goals.
+ * Show the Give donation form goals.
  *
- * @since       1.0
+ * @since  1.0
  *
- * @param array  $atts Shortcode attributes
- * @param string $content
+ * @param  array $atts Shortcode attributes.
  *
  * @return string
  */
-function give_goal_shortcode( $atts, $content = null ) {
+function give_goal_shortcode( $atts ) {
 	$atts = shortcode_atts( array(
 		'id'        => '',
 		'show_text' => true,
@@ -116,20 +111,20 @@ function give_goal_shortcode( $atts, $content = null ) {
 	), $atts, 'give_goal' );
 
 
-	//get the Give Form
+	//get the Give Form.
 	ob_start();
 
-	//Sanity check 1: ensure there is an ID Provided
+	//Sanity check 1: ensure there is an ID Provided.
 	if ( empty( $atts['id'] ) ) {
-		give_output_error( __( 'Error: No Donation form ID for the shortcode provided.', 'give' ), true );
+		give_output_error( esc_html__( 'The shortcode is missing Donation Form ID attribute.', 'give' ), true );
 	}
 
-	//Sanity check 2: Check that this form even has Goals enabled
-	$goal_option = get_post_meta( $atts['id'], '_give_goal_option', true );
-	if ( empty( $goal_option ) || $goal_option !== 'yes' ) {
-		give_output_error( __( 'Error: This form does not have Goals enabled.', 'give' ), true );
+	//Sanity check 2: Check the form even has Goals enabled.
+	if ( ! give_is_setting_enabled( get_post_meta( $atts['id'], '_give_goal_option', true ) ) ) {
+
+		give_output_error( esc_html__( 'The form does not have Goals enabled.', 'give' ), true );
 	} else {
-		//Passed all sanity checks: output Goal
+		//Passed all sanity checks: output Goal.
 		give_show_goal_progress( $atts['id'], $atts );
 	}
 
@@ -142,78 +137,84 @@ add_shortcode( 'give_goal', 'give_goal_shortcode' );
 
 
 /**
- * Login Shortcode
+ * Login Shortcode.
  *
  * Shows a login form allowing users to users to log in. This function simply
  * calls the give_login_form function to display the login form.
  *
- * @since 1.0
+ * @since  1.0
  *
- * @param array  $atts Shortcode attributes
- * @param string $content
+ * @param  array $atts Shortcode attributes.
  *
- * @uses  give_login_form()
+ * @uses   give_login_form()
+ *
  * @return string
  */
-function give_login_form_shortcode( $atts, $content = null ) {
-	extract( shortcode_atts( array(
-			'redirect' => '',
-		), $atts, 'give_login' )
-	);
+function give_login_form_shortcode( $atts ) {
+	$atts = shortcode_atts( array(
+		// Add backward compatibility for redirect attribute.
+		'redirect' => '',
 
-	return give_login_form( $redirect );
+		'login-redirect'  => '',
+		'logout-redirect' => '',
+	), $atts, 'give_login' );
+
+	// Check login-redirect attribute first, if it empty or not found then check for redirect attribute and add value of this to login-redirect attribute.
+	$atts['login-redirect'] = ! empty( $atts['login-redirect'] ) ? $atts['login-redirect'] : ( ! empty( $atts['redirect'] ) ? $atts['redirect'] : '' );
+
+	return give_login_form( $atts['login-redirect'], $atts['logout-redirect'] );
 }
 
 add_shortcode( 'give_login', 'give_login_form_shortcode' );
 
 /**
- * Register Shortcode
+ * Register Shortcode.
  *
- * Shows a registration form allowing users to users to register for the site
+ * Shows a registration form allowing users to users to register for the site.
  *
- * @since 1.0
+ * @since  1.0
  *
- * @param array  $atts Shortcode attributes
- * @param string $content
+ * @param  array $atts Shortcode attributes.
  *
- * @uses  give_register_form()
+ * @uses   give_register_form()
+ *
  * @return string
  */
-function give_register_form_shortcode( $atts, $content = null ) {
-	extract( shortcode_atts( array(
-			'redirect' => '',
-		), $atts, 'give_register' )
-	);
+function give_register_form_shortcode( $atts ) {
+	$atts = shortcode_atts( array(
+		'redirect' => '',
+	), $atts, 'give_register' );
 
-	return give_register_form( $redirect );
+	return give_register_form( $atts['redirect'] );
 }
 
 add_shortcode( 'give_register', 'give_register_form_shortcode' );
 
-
 /**
- * Receipt Shortcode
+ * Receipt Shortcode.
  *
- * Shows an order receipt.
+ * Shows a donation receipt.
  *
- * @since 1.0
+ * @since  1.0
  *
- * @param array  $atts Shortcode attributes
- * @param string $content
+ * @param  array $atts Shortcode attributes.
  *
  * @return string
  */
-function give_receipt_shortcode( $atts, $content = null ) {
+function give_receipt_shortcode( $atts ) {
 
 	global $give_receipt_args, $payment;
 
 	$give_receipt_args = shortcode_atts( array(
-		'error'          => __( 'Sorry, it appears the viewing window for this donation receipt has expired or you do not have the permission to view this donation receipt.', 'give' ),
+		'error'          => esc_html__( 'You are missing the payment key to view this donation receipt.', 'give' ),
 		'price'          => true,
+		'donor'          => true,
 		'date'           => true,
 		'payment_key'    => false,
 		'payment_method' => true,
-		'payment_id'     => true
+		'payment_id'     => true,
+		'payment_status' => false,
+		'status_notice'  => true,
 	), $atts, 'give_receipt' );
 
 	//set $session var
@@ -228,21 +229,44 @@ function give_receipt_shortcode( $atts, $content = null ) {
 		$payment_key = $give_receipt_args['payment_key'];
 	}
 
-	// No key found
-	if ( ! isset( $payment_key ) ) {
-		return '<div class="give_errors"><p class="give_error">' . $give_receipt_args['error'] . '</p></div>';
+	$email_access = give_get_option( 'email_access' );
+
+	// No payment_key found & Email Access is Turned on:
+	if ( ! isset( $payment_key ) && give_is_setting_enabled( $email_access ) && ! Give()->email_access->token_exists ) {
+
+		ob_start();
+
+		give_get_template_part( 'email-login-form' );
+
+		return ob_get_clean();
+
+	} elseif ( ! isset( $payment_key ) ) {
+
+		return give_output_error( $give_receipt_args['error'], false, 'error' );
+
 	}
 
 	$payment_id    = give_get_purchase_id_by_key( $payment_key );
 	$user_can_view = give_can_view_receipt( $payment_key );
 
-	// Key was provided, but user is logged out. Offer them the ability to login and view the receipt
-	if ( ! $user_can_view && ! empty( $payment_key ) && ! is_user_logged_in() && ! give_is_guest_payment( $payment_id ) ) {
+	// Key was provided, but user is logged out. Offer them the ability to login and view the receipt.
+	if ( ! $user_can_view && give_is_setting_enabled( $email_access ) && ! Give()->email_access->token_exists ) {
+
+		ob_start();
+
+		give_get_template_part( 'email-login-form' );
+
+		return ob_get_clean();
+
+	} elseif ( ! $user_can_view ) {
+
 		global $give_login_redirect;
+
 		$give_login_redirect = give_get_current_page_url();
 
 		ob_start();
-		echo '<div class="give_errors"><p class="give_error">' . __( 'You must be logged in to view this payment receipt.', 'give' ) . '</p></div>';
+
+		give_output_error( apply_filters( 'give_must_be_logged_in_error_message', esc_html__( 'You must be logged in to view this donation receipt.', 'give' ) ) );
 
 		give_get_template_part( 'shortcode', 'login' );
 
@@ -252,19 +276,15 @@ function give_receipt_shortcode( $atts, $content = null ) {
 	}
 
 	/*
-	 * Check if the user has permission to view the receipt
+	 * Check if the user has permission to view the receipt.
 	 *
 	 * If user is logged in, user ID is compared to user ID of ID stored in payment meta
-	 *
-	 * Or if user is logged out and purchase was made as a guest, the purchase session is checked for
-	 *
-	 * Or if user is logged in and the user can view sensitive shop data
+	 * or if user is logged out and donation was made as a guest, the donation session is checked for
+	 * or if user is logged in and the user can view sensitive shop data.
 	 *
 	 */
-
-
 	if ( ! apply_filters( 'give_user_can_view_receipt', $user_can_view, $give_receipt_args ) ) {
-		return '<p class="edd-alert edd-alert-error">' . $give_receipt_args['error'] . '</p>';
+		return give_output_error( $give_receipt_args['error'], false, 'error' );
 	}
 
 	ob_start();
@@ -274,14 +294,12 @@ function give_receipt_shortcode( $atts, $content = null ) {
 	$display = ob_get_clean();
 
 	return $display;
-
-
 }
 
 add_shortcode( 'give_receipt', 'give_receipt_shortcode' );
 
 /**
- * Profile Editor Shortcode
+ * Profile Editor Shortcode.
  *
  * Outputs the Give Profile Editor to allow users to amend their details from the
  * front-end. This function uses the Give templating system allowing users to
@@ -293,12 +311,11 @@ add_shortcode( 'give_receipt', 'give_receipt_shortcode' );
  *
  * @since  1.0
  *
- * @param array $atts attributes
- * @param null  $content
+ * @param  array $atts Shortcode attributes.
  *
  * @return string Output generated from the profile editor
  */
-function give_profile_editor_shortcode( $atts, $content = null ) {
+function give_profile_editor_shortcode( $atts ) {
 
 	ob_start();
 
@@ -312,15 +329,15 @@ function give_profile_editor_shortcode( $atts, $content = null ) {
 add_shortcode( 'give_profile_editor', 'give_profile_editor_shortcode' );
 
 /**
- * Process Profile Updater Form
+ * Process Profile Updater Form.
  *
- * Processes the profile updater form by updating the necessary fields
+ * Processes the profile updater form by updating the necessary fields.
  *
  * @since  1.0
  *
- * @param array $data Data sent from the profile editor
+ * @param  array $data Data sent from the profile editor.
  *
- * @return false
+ * @return bool
  */
 function give_process_profile_editor_updates( $data ) {
 	// Profile field change request
@@ -352,7 +369,7 @@ function give_process_profile_editor_updates( $data ) {
 		'first_name'   => $first_name,
 		'last_name'    => $last_name,
 		'display_name' => $display_name,
-		'user_email'   => $email
+		'user_email'   => $email,
 	);
 
 
@@ -362,24 +379,40 @@ function give_process_profile_editor_updates( $data ) {
 		'city'    => $city,
 		'state'   => $state,
 		'zip'     => $zip,
-		'country' => $country
+		'country' => $country,
 	);
 
+	/**
+	 * Fires before updating user profile.
+	 *
+	 * @since 1.0
+	 *
+	 * @param int   $user_id  The ID of the user.
+	 * @param array $userdata User info, including ID, first name, last name, display name and email.
+	 */
 	do_action( 'give_pre_update_user_profile', $user_id, $userdata );
 
 	// New password
 	if ( ! empty( $data['give_new_user_pass1'] ) ) {
 		if ( $data['give_new_user_pass1'] !== $data['give_new_user_pass2'] ) {
-			give_set_error( 'password_mismatch', __( 'The passwords you entered do not match. Please try again.', 'give' ) );
+			give_set_error( 'password_mismatch', esc_html__( 'The passwords you entered do not match. Please try again.', 'give' ) );
 		} else {
 			$userdata['user_pass'] = $data['give_new_user_pass1'];
 		}
 	}
 
-	// Make sure the new email doesn't belong to another user
-	if ( $email != $old_user_data->user_email ) {
+	if ( empty( $email ) ) {
+		// Make sure email should not be empty.
+		give_set_error( 'email_empty', esc_html__( 'The email you entered is empty.', 'give' ) );
+
+	} else if ( ! is_email( $email ) ) {
+		// Make sure email should be valid.
+		give_set_error( 'email_not_valid', esc_html__( 'The email you entered is not valid. Please use another', 'give' ) );
+
+	} else if ( $email != $old_user_data->user_email ) {
+		// Make sure the new email doesn't belong to another user
 		if ( email_exists( $email ) ) {
-			give_set_error( 'email_exists', __( 'The email you entered belongs to another user. Please use another.', 'give' ) );
+			give_set_error( 'email_exists', esc_html__( 'The email you entered belongs to another user. Please use another.', 'give' ) );
 		}
 	}
 
@@ -397,6 +430,15 @@ function give_process_profile_editor_updates( $data ) {
 	$updated = wp_update_user( $userdata );
 
 	if ( $updated ) {
+
+		/**
+		 * Fires after updating user profile.
+		 *
+		 * @since 1.0
+		 *
+		 * @param int   $user_id  The ID of the user.
+		 * @param array $userdata User info, including ID, first name, last name, display name and email.
+		 */
 		do_action( 'give_user_profile_updated', $user_id, $userdata );
 		wp_redirect( add_query_arg( 'updated', 'true', $data['give_redirect'] ) );
 		give_die();
@@ -406,4 +448,3 @@ function give_process_profile_editor_updates( $data ) {
 }
 
 add_action( 'give_edit_user_profile', 'give_process_profile_editor_updates' );
-

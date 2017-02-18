@@ -557,12 +557,6 @@ $meta_boxes[] = array(
 				'type' => 'kad_gallery',
 			),
 			array(
-				'name' => __('If Cyclone Slider', 'virtue-toolkit'),
-				'desc' => __('Paste Cyclone slider shortcode here (example: [cycloneslider id="slider1"])', 'virtue-toolkit'),
-				'id'   => $prefix . 'shortcode_slider',
-				'type' => 'textarea_code',
-			),
-			array(
 				'name' => __('Max Image/Slider Height', 'virtue-toolkit'),
 				'desc' => __('Default is: 400 (Note: just input number, example: 350)', 'virtue-toolkit'),
 				'id'   => $prefix . 'posthead_height',
@@ -626,7 +620,7 @@ $meta_boxes[] = array(
 			),
 			array(
                 'name' => __('Use Map', 'virtue-toolkit'),
-                'desc' => '',
+                'desc' => __('You need free api for google maps to work, add in the theme options > misc settings.',  'virtue-toolkit'),
                 'id' => $prefix .'contact_map',
                 'type'    => 'select',
 				'options' => array(
@@ -1061,7 +1055,7 @@ $meta_boxes[] = array(
 			),
 			array(
                 'name' => __('Use Map', 'virtue-toolkit'),
-                'desc' => '',
+                'desc' => __('You need free api for google maps to work, add in the theme options > misc settings.',  'virtue-toolkit'),
                 'id' => $prefix .'contact_map',
                 'type'    => 'select',
 				'options' => array(

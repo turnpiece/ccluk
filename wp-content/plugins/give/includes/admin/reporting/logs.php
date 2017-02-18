@@ -4,12 +4,12 @@
  *
  * @package     Give
  * @subpackage  Admin/Reports
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -68,41 +68,39 @@ function give_logs_view_api_requests() {
 	$logs_table->prepare_items();
 	?>
 	<div class="wrap">
-		<?php do_action( 'give_logs_api_requests_top' ); ?>
-		<form id="give-logs-filter" method="get" action="<?php echo admin_url( 'edit.php?post_type=give_forms&page=give-reports&tab=logs' ); ?>">
+
+		<?php
+		/**
+		 * Fires before displaying API requests logs.
+		 *
+		 * @since 1.0
+		 */
+		do_action( 'give_logs_api_requests_top' );
+		?>
+
+		<form id="give-logs-filter" method="get" action="<?php echo 'edit.php?post_type=give_forms&page=give-tools&tab=logs'; ?>">
 			<?php
-			$logs_table->search_box( __( 'Search', 'give' ), 'give-api-requests' );
+			$logs_table->search_box( esc_html__( 'Search', 'give' ), 'give-api-requests' );
 			$logs_table->display();
 			?>
-			<input type="hidden" name="post_type" value="give_forms" />
-			<input type="hidden" name="page" value="give-reports" />
-			<input type="hidden" name="tab" value="logs" />
+			<input type="hidden" name="post_type" value="give_forms"/>
+			<input type="hidden" name="page" value="give-tools"/>
+			<input type="hidden" name="tab" value="logs"/>
 		</form>
-		<?php do_action( 'give_logs_api_requests_bottom' ); ?>
+		<?php
+		/**
+		 * Fires after displaying API requests logs.
+		 *
+		 * @since 1.0
+		 */
+		do_action( 'give_logs_api_requests_bottom' );
+		?>
+
 	</div>
-<?php
+	<?php
 }
 
 add_action( 'give_logs_view_api_requests', 'give_logs_view_api_requests' );
-
-
-/**
- * Default Log Views
- *
- * @since 1.0
- * @return array $views Log Views
- */
-function give_log_default_views() {
-	$views = array(
-		'sales'          => __( 'Donations', 'give' ),
-		'gateway_errors' => __( 'Payment Errors', 'give' ),
-		'api_requests'   => __( 'API Requests', 'give' )
-	);
-
-	$views = apply_filters( 'give_log_views', $views );
-
-	return $views;
-}
 
 /**
  * Renders the Reports page views drop down
@@ -111,24 +109,30 @@ function give_log_default_views() {
  * @return void
  */
 function give_log_views() {
-	$views        = give_log_default_views();
-	$current_view = isset( $_GET['view'] ) && array_key_exists( $_GET['view'], give_log_default_views() ) ? sanitize_text_field( $_GET['view'] ) : 'sales';
+	$current_section = give_get_current_setting_section();
+
+	// If there are not any event attach to action then do not show form.
+	if ( ! has_action( 'give_log_view_actions' ) ) {
+		return;
+	}
 	?>
-	<form id="give-logs-filter" method="get" action="edit.php">
-		<select id="give-logs-view" name="view">
-			<option value="-1"><?php _e( 'Log Type', 'give' ); ?></option>
-			<?php foreach ( $views as $view_id => $label ): ?>
-				<option value="<?php echo esc_attr( $view_id ); ?>" <?php selected( $view_id, $current_view ); ?>><?php echo $label; ?></option>
-			<?php endforeach; ?>
-		</select>
+	<form id="give-logs-filter" method="get" action="<?php echo 'edit.php?post_type=give_forms&page=give-tools&tab=logs&section=' . $current_section; ?>">
+		<?php
+		/**
+		 * Fires after displaying the reports page views drop down.
+		 *
+		 * Allows you to add view actions.
+		 *
+		 * @since 1.0
+		 */
+		do_action( 'give_log_view_actions' );
+		?>
 
-		<?php do_action( 'give_log_view_actions' ); ?>
+		<input type="hidden" name="post_type" value="give_forms"/>
+		<input type="hidden" name="page" value="give-tools"/>
+		<input type="hidden" name="tab" value="logs"/>
 
-		<input type="hidden" name="post_type" value="give_forms" />
-		<input type="hidden" name="page" value="give-reports" />
-		<input type="hidden" name="tab" value="logs" />
-
-		<?php submit_button( __( 'Apply', 'give' ), 'secondary', 'submit', false ); ?>
+		<?php submit_button( esc_html__( 'Apply', 'give' ), 'secondary', 'submit', false ); ?>
 	</form>
-<?php
+	<?php
 }

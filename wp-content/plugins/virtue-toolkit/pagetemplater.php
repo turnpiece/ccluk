@@ -24,6 +24,8 @@ class Kadence_Page_Templater_Pinnacle {
 
                 add_filter('template_include', array( $this, 'view_project_template') );
 
+                add_filter('theme_page_templates', array( $this, 'register_project_templates_update') );
+
                 $this->templates = array(
                         'template-contact.php' => __('Contact', 'virtue-toolkit'),
                 );
@@ -35,7 +37,7 @@ class Kadence_Page_Templater_Pinnacle {
                 // Create the key used for the themes cache
                 $cache_key = 'page_templates-' . md5( get_theme_root() . '/' . get_stylesheet() );
 
-		$templates = wp_get_theme()->get_page_templates();
+		       $templates = wp_get_theme()->get_page_templates();
 
                 if ( empty( $templates ) ) {
                         $templates = array();
@@ -54,7 +56,15 @@ class Kadence_Page_Templater_Pinnacle {
                 return $atts;
 
         } 
+        public function register_project_templates_update($templates ) {
+                if ( ! version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
 
+                    $templates = array_merge( $templates, $this->templates );
+
+                }
+                return $templates;
+
+        } 
         /**
          * Checks if the template is assigned to the page
          */
@@ -112,6 +122,8 @@ class Kadence_Page_Templater_Virtue {
 
                 add_filter('template_include', array( $this, 'view_project_template') );
 
+                add_filter('theme_page_templates', array( $this, 'register_project_templates_update') );
+
                 $this->templates = array(
                         'page-contact.php' => __('Contact', 'virtue-toolkit'),
                 );
@@ -140,6 +152,15 @@ class Kadence_Page_Templater_Virtue {
                 wp_cache_add( $cache_key, $templates, 'themes', 1800 );
 
                 return $atts;
+
+        } 
+        public function register_project_templates_update($templates ) {
+                if ( ! version_compare( $GLOBALS['wp_version'], '4.7', '<' ) ) {
+
+                    $templates = array_merge( $templates, $this->templates );
+
+                }
+                return $templates;
 
         } 
 

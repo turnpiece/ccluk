@@ -3,14 +3,14 @@
  * Content wrappers
  *
  * @package     Give
- * @subpackage  Templates/GlobaL
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @subpackage  Templates/Global
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // Exit if accessed directly
+	exit; // Exit if accessed directly.
 }
 
 $template = get_option( 'template' );
@@ -43,6 +43,18 @@ switch ( $template ) {
 		break;
 	case 'philanthropy-parent' :
 		echo '</div></div></div></div>';
+		break;
+	case 'zerif-lite' :
+		echo '</main></article></div></div></div>';
+		break;
+	case 'customizr' :
+		echo '</div>';
+		break;
+	case 'catch-evolution' :
+		echo '</div>';
+		break;
+	case 'twentyseventeen' :
+		echo '</div>';
 		break;
 	default :
 		echo apply_filters( 'give_default_wrapper_end', '</div></div>' );

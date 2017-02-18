@@ -1,34 +1,35 @@
 <?php
 /**
- * Gateway Error Log View Class
+ * Gateway Error Log View Class.
  *
  * @package     Give
  * @subpackage  Admin/Reports
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
-// Load WP_List_Table if not loaded
+// Load WP_List_Table if not loaded.
 if ( ! class_exists( 'WP_List_Table' ) ) {
 	require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 }
 
 /**
- * Give_Gateway_Error_Log_Table Class
+ * Give_Gateway_Error_Log_Table Class.
  *
- * Renders the gateway errors list table
+ * Renders the gateway errors list table.
  *
  * @access      private
  * @since       1.0
  */
 class Give_Gateway_Error_Log_Table extends WP_List_Table {
+
 	/**
-	 * Number of items per page
+	 * Number of items per page.
 	 *
 	 * @var int
 	 * @since 1.0
@@ -36,19 +37,17 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 	public $per_page = 30;
 
 	/**
-	 * Get things started
+	 * Get things started.
 	 *
 	 * @since 1.0
 	 * @see   WP_List_Table::__construct()
 	 */
 	public function __construct() {
-		global $status, $page;
-
-		// Set parent defaults
+		// Set parent defaults.
 		parent::__construct( array(
-			'singular' => give_get_forms_label_singular(),    // Singular name of the listed records
-			'plural'   => give_get_forms_label_plural(),        // Plural name of the listed records
-			'ajax'     => false                        // Does this table support ajax?
+			'singular' => give_get_forms_label_singular(),    // Singular name of the listed records.
+			'plural'   => give_get_forms_label_plural(),        // Plural name of the listed records.
+			'ajax'     => false                        // Does this table support ajax?.
 		) );
 	}
 
@@ -58,42 +57,45 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 	 * @access public
 	 * @since  1.0
 	 *
-	 * @param array  $item        Contains all the data of the discount code
-	 * @param string $column_name The name of the column
+	 * @param array  $item Contains all the data of the log item.
+	 * @param string $column_name The name of the column.
 	 *
-	 * @return string Column Name
+	 * @return string Column Name.
 	 */
 	public function column_default( $item, $column_name ) {
+
 		switch ( $column_name ) {
 			case 'ID' :
 				return $item['ID_label'];
+			case 'payment_id' :
+				return empty( $item->payment_id ) ? esc_html__( 'n/a', 'give' ) : $item->payment_id;
+			case 'gateway' :
+				return empty( $item->gateway ) ? esc_html__( 'n/a', 'give' ) : $item->gateway;
 			case 'error' :
-				return get_the_title( $item['ID'] ) ? get_the_title( $item['ID'] ) : __( 'Payment Error', 'give' );
+				return get_the_title( $item['ID'] ) ? get_the_title( $item['ID'] ) : esc_html__( 'Payment Error', 'give' );
 			default:
 				return $item[ $column_name ];
 		}
 	}
 
 	/**
-	 * Output Error Message Column
+	 * Output Error Message Column.
 	 *
 	 * @access public
 	 * @since  1.0
 	 *
-	 * @param array $item Contains all the data of the log
+	 * @param array $item Contains all the data of the log.
 	 *
 	 * @return void
 	 */
-	public function column_message( $item ) {
-
-		?>
-		<a href="#TB_inline?width=640&amp;inlineId=log-message-<?php echo $item['ID']; ?>" class="thickbox" title="<?php _e( 'View Log Message', 'give' ); ?> "><?php _e( 'View Log Message', 'give' ); ?></a>
+	public function column_message( $item ) { ?>
+		<a href="#TB_inline?width=640&amp;inlineId=log-message-<?php echo $item['ID']; ?>" class="thickbox give-error-log-details-link button button-small" data-tooltip="<?php esc_attr_e( 'View Log Message', 'give' ); ?>"><span class="dashicons dashicons-visibility"></span></a>
 		<div id="log-message-<?php echo $item['ID']; ?>" style="display:none;">
 			<?php
 
 			$log_message = get_post_field( 'post_content', $item['ID'] );
 
-			$serialized  = strpos( $log_message, '{"' );
+			$serialized = strpos( $log_message, '{"' );
 
 			// Check to see if the log message contains serialized information
 			if ( $serialized !== false ) {
@@ -102,7 +104,7 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 				$data   = substr( $log_message, $serialized, strlen( $log_message ) - 1 );
 
 				echo wpautop( $intro );
-				echo wpautop( __( '<strong>Log data:</strong>', 'give' ) );
+				echo wpautop( '<strong>' . esc_html__( 'Log data:', 'give' ) . '</strong>' );
 				echo '<div style="word-wrap: break-word;">' . wpautop( $data ) . '</div>';
 			} else {
 				// No serialized data found
@@ -110,24 +112,24 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 			}
 			?>
 		</div>
-	<?php
+		<?php
 	}
 
 	/**
-	 * Retrieve the table columns
+	 * Retrieve the table columns.
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @return array $columns Array of all the list table columns
+	 * @return array $columns Array of all the list table columns.
 	 */
 	public function get_columns() {
 		$columns = array(
-			'ID'         => __( 'Log ID', 'give' ),
-			'payment_id' => __( 'Payment ID', 'give' ),
-			'error'      => __( 'Error', 'give' ),
-			'message'    => __( 'Error Message', 'give' ),
-			'gateway'    => __( 'Gateway', 'give' ),
-			'date'       => __( 'Date', 'give' )
+			'ID'         => esc_html__( 'Log ID', 'give' ),
+			'error'      => esc_html__( 'Error', 'give' ),
+			'gateway'    => esc_html__( 'Gateway', 'give' ),
+			'payment_id' => esc_html__( 'Donation ID', 'give' ),
+			'date'       => esc_html__( 'Date', 'give' ),
+			'message'    => esc_html__( 'Details', 'give' )
 		);
 
 		return $columns;
@@ -152,22 +154,23 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function bulk_actions( $which = '' ) {
-		// These aren't really bulk actions but this outputs the markup in the right place
 		give_log_views();
 	}
 
 	/**
-	 * Gets the log entries for the current view
+	 * Gets the log entries for the current view.
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @global object $give_logs Give Logs Object
-	 * @return array $logs_data Array of all the Log entires
+	 *
+	 * @return array $logs_data Array of all the Log entries.
 	 */
 	public function get_logs() {
-		global $give_logs;
 
-		// Prevent the queries from getting cached. Without this there are occasional memory issues for some installs
+		$give_logs = new Give_Logging();
+
+		// Prevent the queries from getting cached.
+		// Without this there are occasional memory issues for some installs.
 		wp_suspend_cache_addition( true );
 
 		$logs_data = array();
@@ -197,11 +200,44 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 	}
 
 	/**
+	 * Display Tablenav (extended).
+	 *
+	 * Display the table navigation above or below the table even when no items in the logs,
+	 * so nav doesn't disappear.
+	 *
+	 * @see: https://github.com/WordImpress/Give/issues/564
+	 *
+	 * @since 1.4.1
+	 * @access protected
+	 *
+	 * @param string $which
+	 */
+	protected function display_tablenav( $which ) {
+		if ( 'top' === $which ) {
+			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
+		}
+		?>
+		<div class="tablenav <?php echo esc_attr( $which ); ?>">
+
+			<div class="alignleft actions bulkactions">
+				<?php $this->bulk_actions( $which ); ?>
+			</div>
+			<?php
+			$this->extra_tablenav( $which );
+			$this->pagination( $which );
+			?>
+
+			<br class="clear"/>
+		</div>
+		<?php
+	}
+
+	/**
 	 * Setup the final data for the table
 	 *
 	 * @access public
 	 * @since  1.0
-	 * @global object $give_logs Give Logs Object
+	 *
 	 * @uses   Give_Gateway_Error_Log_Table::get_columns()
 	 * @uses   WP_List_Table::get_sortable_columns()
 	 * @uses   Give_Gateway_Error_Log_Table::get_pagenum()
@@ -210,13 +246,12 @@ class Give_Gateway_Error_Log_Table extends WP_List_Table {
 	 * @return void
 	 */
 	public function prepare_items() {
-		global $give_logs;
 
+		$give_logs             = new Give_logging();
 		$columns               = $this->get_columns();
 		$hidden                = array(); // No hidden columns
 		$sortable              = $this->get_sortable_columns();
 		$this->_column_headers = array( $columns, $hidden, $sortable );
-		$current_page          = $this->get_pagenum();
 		$this->items           = $this->get_logs();
 		$total_items           = $give_logs->get_log_count( 0, 'gateway_error' );
 

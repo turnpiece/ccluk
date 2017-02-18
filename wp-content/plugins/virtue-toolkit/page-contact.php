@@ -2,8 +2,7 @@
 /*
 Template Name: Contact
 */
-?>
-	<?php global $virtue, $post; 
+ global $virtue, $post; 
 		$map 				= get_post_meta( $post->ID, '_kad_contact_map', true ); 
 		$form_math 			= get_post_meta( $post->ID, '_kad_contact_form_math', true );
 		$contactformtitle 	= get_post_meta( $post->ID, '_kad_contact_form_title', true );
@@ -17,13 +16,16 @@ Template Name: Contact
 			});</script>
 			<script type="text/javascript" src="<?php echo get_template_directory_uri(); ?>/assets/js/jquery.validate.js"></script>
 		<?php } 
-		if ($map == 'yes') { ?>
-		    <script type="text/javascript" src="https://maps.google.com/maps/api/js?sensor=false"></script>
-		    	<?php 	$address 	= get_post_meta( $post->ID, '_kad_contact_address', true ); 
+		if ($map == 'yes') { 
+		    		 	$address 	= get_post_meta( $post->ID, '_kad_contact_address', true ); 
 						$maptype 	= get_post_meta( $post->ID, '_kad_contact_maptype', true ); 
 						$height 	= get_post_meta( $post->ID, '_kad_contact_mapheight', true );
 						$mapzoom 	= get_post_meta( $post->ID, '_kad_contact_zoom', true );
-							
+						if(isset($virtue['google_map_api']) && !empty($virtue['google_map_api'])) {
+				    		$gmap_api = $virtue['google_map_api'];
+					    } else {
+					    	$gmap_api = 'AIzaSyBt7JOCM4XQTEi9jzdqB8alFc1Vm_3mbfQ';
+					    }
 							if(!empty($height)) {
 								$mapheight = $height;
 							} else {
@@ -34,13 +36,14 @@ Template Name: Contact
 							} else {
 								$zoom = 15;
 							} ?>
+				<script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?key=<?php echo esc_attr($gmap_api);?>"></script>
 		    	<script type="text/javascript">
 					jQuery(window).load(function() {
 					jQuery('#map_address').gmap3({
 						map: {
-						    address:"<?php echo $address;?>",
+						    address:"<?php echo esc_js($address);?>",
 							options: {
-			              		zoom:<?php echo $zoom;?>,
+			              		zoom:<?php echo esc_js($zoom);?>,
 								draggable: true,
 								mapTypeControl: true,
 								mapTypeId: google.maps.MapTypeId.<?php echo esc_attr($maptype);?>,
@@ -54,8 +57,8 @@ Template Name: Contact
 						},
 						marker:{
 			            values:[
-			            		 {address: "<?php echo $address;?>",
-						 	    data:"<div class='mapinfo'>'<?php echo $address;?>'</div>",
+			            		 {address: "<?php echo esc_js($address);?>",
+						 	    data:"<div class='mapinfo'>'<?php echo esc_js($address);?>'</div>",
 						 	},
 			            ],
 			            options:{
@@ -93,7 +96,8 @@ Template Name: Contact
 
 	if(isset($_POST['submitted'])) {
 		if(isset($form_math) && $form_math == 'yes') {
-			if(md5($_POST['kad_captcha']) != $_POST['hval']) {
+			$math_answer = trim($_POST['kad_captcha']);
+			if(md5($math_answer) != $_POST['hval']) {
 				$kad_captchaError = __('Check your math.', 'virtue-toolkit');
 				$hasError = true;
 			}
@@ -108,7 +112,7 @@ Template Name: Contact
 	if(trim($_POST['email']) === '')  {
 		$emailError = __('Please enter your email address.', 'virtue-toolkit');
 		$hasError = true;
-	} else if (!preg_match("/^[[:alnum:]][a-z0-9_.-]*@[a-z0-9.-]+\.[a-z]{2,4}$/i", trim($_POST['email']))) {
+	} else if (!is_email($_POST['email'])) {
 		$emailError = __('You entered an invalid email address.', 'virtue-toolkit');
 		$hasError = true;
 	} else {
@@ -127,6 +131,10 @@ Template Name: Contact
 	}
 
 	if(!isset($hasError)) {
+		$name = wp_filter_kses( $name );
+		$email = wp_filter_kses( $email );
+		$comments = wp_filter_kses( $comments );
+
 		if (isset($virtue['contact_email'])) {
 			$emailTo = $virtue['contact_email'];
 		} else {

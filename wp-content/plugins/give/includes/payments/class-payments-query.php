@@ -4,18 +4,22 @@
  *
  * @package     Give
  * @subpackage  Classes/Stats
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.0
  */
 
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Give_Payments_Query Class
  *
- * This class is for retrieving payments data
+ * This class is for retrieving payments data.
  *
- * Payments can be retrieved for date ranges and pre-defined periods
+ * Payments can be retrieved for date ranges and pre-defined periods.
  *
  * @since 1.0
  */
@@ -24,18 +28,20 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * The args to pass to the give_get_payments() query
 	 *
-	 * @var array
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
+	 * @var    array
 	 */
 	public $args = array();
 
 	/**
 	 * The payments found based on the criteria set
 	 *
-	 * @var array
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
+	 * @var    array
 	 */
 	public $payments = array();
 
@@ -45,10 +51,10 @@ class Give_Payments_Query extends Give_Stats {
 	 * Not all of these are valid arguments that can be passed to WP_Query. The ones that are not, are modified before
 	 * the query is run to convert them to the proper syntax.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
 	 *
-	 * @param $args array The array of arguments that can be passed in and used for setting up this payment query.
+	 * @param  $args array The array of arguments that can be passed in and used for setting up this payment query.
 	 */
 	public function __construct( $args = array() ) {
 		$defaults = array(
@@ -61,7 +67,7 @@ class Give_Payments_Query extends Give_Stats {
 			'orderby'         => 'ID',
 			'order'           => 'DESC',
 			'user'            => null,
-			'status'          => 'any',
+			'status'          => give_get_payment_status_keys(),
 			'meta_key'        => null,
 			'year'            => null,
 			'month'           => null,
@@ -70,7 +76,7 @@ class Give_Payments_Query extends Give_Stats {
 			'search_in_notes' => false,
 			'children'        => false,
 			'fields'          => null,
-			'give_forms'      => null
+			'give_forms'      => null,
 		);
 
 		$this->args = wp_parse_args( $args, $defaults );
@@ -81,8 +87,11 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Set a query variable.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
+	 * @param $query_var
+	 * @param $value
 	 */
 	public function __set( $query_var, $value ) {
 		if ( in_array( $query_var, array( 'meta_query', 'tax_query' ) ) ) {
@@ -95,8 +104,10 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Unset a query variable.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
+	 * @param $query_var
 	 */
 	public function __unset( $query_var ) {
 		unset( $this->args[ $query_var ] );
@@ -105,8 +116,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Modify the query/query arguments before we retrieve payments.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function init() {
@@ -115,6 +127,7 @@ class Give_Payments_Query extends Give_Stats {
 		add_action( 'give_post_get_payments', array( $this, 'date_filter_post' ) );
 
 		add_action( 'give_pre_get_payments', array( $this, 'orderby' ) );
+		add_filter( 'posts_orderby', array( $this, 'custom_orderby' ), 10, 2 );
 		add_action( 'give_pre_get_payments', array( $this, 'status' ) );
 		add_action( 'give_pre_get_payments', array( $this, 'month' ) );
 		add_action( 'give_pre_get_payments', array( $this, 'per_page' ) );
@@ -133,17 +146,30 @@ class Give_Payments_Query extends Give_Stats {
 	 * query is run, or the filter on the arguments (existing mainly for backwards
 	 * compatibility).
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return object
 	 */
 	public function get_payments() {
 
+		/**
+		 * Fires before retrieving payments.
+		 *
+		 * @since 1.0
+		 *
+		 * @param Give_Payments_Query $this Payments query object.
+		 */
 		do_action( 'give_pre_get_payments', $this );
 
 		$query = new WP_Query( $this->args );
 
-		if ( 'payments' != $this->args['output'] ) {
+		$custom_output = array(
+			'payments',
+			'give_payments',
+		);
+
+		if ( ! in_array( $this->args['output'], $custom_output ) ) {
 			return $query->posts;
 		}
 
@@ -151,29 +177,22 @@ class Give_Payments_Query extends Give_Stats {
 			while ( $query->have_posts() ) {
 				$query->the_post();
 
-				$details = new stdClass;
-
 				$payment_id = get_post()->ID;
+				$payment    = new Give_Payment( $payment_id );
 
-				$details->ID          = $payment_id;
-				$details->date        = get_post()->post_date;
-				$details->post_status = get_post()->post_status;
-				$details->total       = give_get_payment_amount( $payment_id );
-				$details->fees        = give_get_payment_fees( $payment_id );
-				$details->key         = give_get_payment_key( $payment_id );
-				$details->gateway     = give_get_payment_gateway( $payment_id );
-				$details->user_info   = give_get_payment_meta_user_info( $payment_id );
-
-				if ( give_get_option( 'enable_sequential' ) ) {
-					$details->payment_number = give_get_payment_number( $payment_id );
-				}
-
-				$this->payments[] = apply_filters( 'give_payment', $details, $payment_id, $this );
+				$this->payments[] = apply_filters( 'give_payment', $payment, $payment_id, $this );
 			}
 
 			wp_reset_postdata();
 		}
 
+		/**
+		 * Fires after retrieving payments.
+		 *
+		 * @since 1.0
+		 *
+		 * @param Give_Payments_Query $this Payments query object.
+		 */
 		do_action( 'give_post_get_payments', $this );
 
 		return $this->payments;
@@ -182,8 +201,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * If querying a specific date, add the proper filters.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function date_filter_pre() {
@@ -200,8 +220,9 @@ class Give_Payments_Query extends Give_Stats {
 	 * If querying a specific date, remove filters after the query has been run
 	 * to avoid affecting future queries.
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function date_filter_post() {
@@ -215,8 +236,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Post Status
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function status() {
@@ -231,8 +253,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Current Page
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function page() {
@@ -247,8 +270,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Posts Per Page
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function per_page() {
@@ -269,8 +293,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Current Month
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function month() {
@@ -283,10 +308,11 @@ class Give_Payments_Query extends Give_Stats {
 	}
 
 	/**
-	 * Order
+	 * Order by
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function orderby() {
@@ -295,6 +321,16 @@ class Give_Payments_Query extends Give_Stats {
 				$this->__set( 'orderby', 'meta_value_num' );
 				$this->__set( 'meta_key', '_give_payment_total' );
 				break;
+
+			case 'status' :
+				$this->__set( 'orderby', 'post_status' );
+				break;
+
+			case 'donation_form' :
+				$this->__set( 'orderby', 'meta_value' );
+				$this->__set( 'meta_key', '_give_payment_form_title' );
+				break;
+
 			default :
 				$this->__set( 'orderby', $this->args['orderby'] );
 				break;
@@ -302,10 +338,38 @@ class Give_Payments_Query extends Give_Stats {
 	}
 
 	/**
+	 * Custom orderby.
+	 * Note: currently custom sorting is only used for donation listing page.
+	 *
+	 * @since  1.8
+	 * @access public
+	 *
+	 * @param string   $order
+	 * @param WP_Query $query
+	 *
+	 * @return mixed
+	 */
+	public function custom_orderby( $order, $query ) {
+		$post_types = is_array( $query->query['post_type'] ) ? $query->query['post_type'] : array( $query->query['post_type'] );
+		if ( ! in_array( 'give_payment', $post_types ) || is_array( $query->query['orderby'] ) ) {
+			return $order;
+		}
+
+		switch ( $query->query['orderby'] ) {
+			case 'post_status':
+				$order = 'wp_posts.post_status ' . strtoupper( $query->query['order'] );
+				break;
+		}
+
+		return $order;
+	}
+
+	/**
 	 * Specific User
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function user() {
@@ -321,15 +385,16 @@ class Give_Payments_Query extends Give_Stats {
 
 		$this->__set( 'meta_query', array(
 			'key'   => $user_key,
-			'value' => $this->args['user']
+			'value' => $this->args['user'],
 		) );
 	}
 
 	/**
 	 * Search
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function search() {
@@ -366,7 +431,7 @@ class Give_Payments_Query extends Give_Stats {
 			$search_meta = array(
 				'key'     => $key,
 				'value'   => $search,
-				'compare' => 'LIKE'
+				'compare' => 'LIKE',
 			);
 
 			$this->__set( 'meta_query', $search_meta );
@@ -376,7 +441,7 @@ class Give_Payments_Query extends Give_Stats {
 
 			$search_meta = array(
 				'key'   => '_give_payment_user_id',
-				'value' => trim( str_replace( 'user:', '', strtolower( $search ) ) )
+				'value' => trim( str_replace( 'user:', '', strtolower( $search ) ) ),
 			);
 
 			$this->__set( 'meta_query', $search_meta );
@@ -386,7 +451,7 @@ class Give_Payments_Query extends Give_Stats {
 				$search_meta = array(
 					'key'     => '_give_payment_number',
 					'value'   => $search,
-					'compare' => 'LIKE'
+					'compare' => 'LIKE',
 				);
 
 				$this->__set( 'meta_query', $search_meta );
@@ -408,7 +473,7 @@ class Give_Payments_Query extends Give_Stats {
 			$search_meta = array(
 				'key'     => '_give_payment_number',
 				'value'   => $search,
-				'compare' => 'LIKE'
+				'compare' => 'LIKE',
 			);
 
 			$this->__set( 'meta_query', $search_meta );
@@ -425,10 +490,11 @@ class Give_Payments_Query extends Give_Stats {
 				$this->__set( 'post__in', $arr );
 				$this->__unset( 's' );
 			}
-
 		} elseif ( '#' == substr( $search, 0, 1 ) ) {
 
-			$this->__set( 'give_forms', str_replace( '#', '', $search ) );
+			$search = str_replace( '#:', '', $search );
+			$search = str_replace( '#', '', $search );
+			$this->__set( 'give_forms', $search );
 			$this->__unset( 's' );
 
 		} else {
@@ -441,8 +507,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Payment Mode
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function mode() {
@@ -454,15 +521,16 @@ class Give_Payments_Query extends Give_Stats {
 
 		$this->__set( 'meta_query', array(
 			'key'   => '_give_payment_mode',
-			'value' => $this->args['mode']
+			'value' => $this->args['mode'],
 		) );
 	}
 
 	/**
 	 * Children
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function children() {
@@ -475,8 +543,9 @@ class Give_Payments_Query extends Give_Stats {
 	/**
 	 * Specific Give Form
 	 *
-	 * @access public
 	 * @since  1.0
+	 * @access public
+	 *
 	 * @return void
 	 */
 	public function give_forms() {
@@ -485,45 +554,22 @@ class Give_Payments_Query extends Give_Stats {
 			return;
 		}
 
-		global $give_logs;
-
-		$args = array(
-			//			'post_id'                => $this->args['give_forms'],
-			'log_type'               => 'sale',
-			'post_status'            => array( 'publish' ),
-			'nopaging'               => true,
-			'no_found_rows'          => true,
-			'update_post_term_cache' => false,
-			'update_post_meta_cache' => false,
-			'cache_results'          => false,
-			'fields'                 => 'ids'
-		);
+		$compare = '=';
 
 		if ( is_array( $this->args['give_forms'] ) ) {
-			unset( $args['post_parent'] );
-			$args['post_parent__in'] = $this->args['give_forms'];
+			$compare = 'IN';
 		}
 
-		$sales = $give_logs->get_connected_logs( $args );
-
-		if ( ! empty( $sales ) ) {
-
-			$payments = array();
-
-			foreach ( $sales as $sale ) {
-				$payments[] = get_post_meta( $sale, '_give_log_payment_id', true );
-			}
-
-			$this->__set( 'post__in', $payments );
-
-		} else {
-
-			// Set post_parent to something crazy so it doesn't find anything
-			$this->__set( 'post_parent', 999999999999999 );
-
-		}
+		$this->__set( 'meta_query', array(
+			array(
+				'key'     => '_give_payment_form_id',
+				'value'   => $this->args['give_forms'],
+				'compare' => $compare,
+			),
+		) );
 
 		$this->__unset( 'give_forms' );
 
 	}
+
 }

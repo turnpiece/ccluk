@@ -1,16 +1,15 @@
 <?php
 
 /*
-Plugin Name: Virtue / Pinnacle ToolKit
-Description: Custom Portfolio and Shortcode functionality for Virtue and Pinnacle Wordpress Theme
-Version: 3.2
+Plugin Name: Kadence Toolkit
+Description: Custom Portfolio and Shortcode functionality for free Kadence WordPress themes
+Version: 3.8
 Author: Kadence Themes
-Author URI: http://kadencethemes.com/
+Author URI: https://kadencethemes.com/
 License: GPLv2 or later
 */
 
 function virtue_toolkit_activation() {
-	kad_portfolio_post_init();
 	flush_rewrite_rules();
 	get_option('kadence_toolkit_flushpermalinks', '1');
 }

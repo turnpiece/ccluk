@@ -1,8 +1,20 @@
 <?php
 
+/**
+ * Class Display_Featured_Image_Genesis_Author
+ * @package   DisplayFeaturedImageGenesis
+ * @author    Robin Cornett <hello@robincornett.com>
+ * @license   GPL-2.0+
+ * @link      https://robincornett.com
+ * @copyright 2014-2016 Robin Cornett Creative, LLC
+ */
+
 class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genesis_Helper {
 
-	protected $settings;
+	/**
+	 * The key for the plugin user meta.
+	 * @var string $name
+	 */
 	protected $name;
 
 	/**
@@ -12,8 +24,7 @@ class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genes
 	 */
 	public function set_author_meta() {
 
-		$this->settings = new Display_Featured_Image_Genesis_Settings();
-		$this->name     = 'displayfeaturedimagegenesis';
+		$this->name = 'displayfeaturedimagegenesis';
 		// current user
 		add_action( 'profile_personal_options', array( $this, 'do_author_fields' ) );
 		add_action( 'personal_options_update', array( $this, 'save_profile_fields' ) );
@@ -22,6 +33,10 @@ class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genes
 		add_action( 'edit_user_profile_update', array( $this, 'save_profile_fields' ) );
 	}
 
+	/**
+	 * Add the featured image row to the user profile.
+	 * @param $user object the user being edited.
+	 */
 	public function do_author_fields( $user ) {
 
 		$id = get_the_author_meta( $this->name, $user->ID );
@@ -29,21 +44,27 @@ class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genes
 		echo '<table class="form-table">';
 
 			echo '<tr class="user-featured-image-wrap">';
-				echo '<th scope="row"><label for="' . esc_attr( $this->name ) . '">Featured Image</label></th>';
+				printf( '<th scope="row"><label for="%s">%s</label></th>', esc_attr( $this->name ), __( 'Featured Image', 'display-featured-image-genesis' ) );
 
 				echo '<td>';
 				if ( $id ) {
-					echo wp_kses_post( $this->render_image_preview( $id ) );
+					echo wp_kses_post( $this->render_image_preview( $id, $user->display_name ) );
 				}
 
 				$this->render_buttons( $id, $this->name );
-				echo '<p class="description">Upload an image to use as your author page featured image.</p>';
+				printf( '<p class="description">%s</p>', __( 'Upload an image to use as your author page featured image.', 'display-featured-image-genesis' ) );
 				echo '</td>';
 			echo '</tr>';
 
 		echo '</table>';
 	}
 
+	/**
+	 * Update the user meta.
+	 * @param $user_id int The user being updated
+	 *
+	 * @return bool
+	 */
 	public function save_profile_fields( $user_id ) {
 
 		if ( ! current_user_can( 'edit_user', $user_id ) ) {
@@ -76,7 +97,7 @@ class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genes
 		$valid  = $this->is_valid_img_ext( $source[0] );
 		$width  = $source[1];
 
-		if ( ! $new_value  || ( $new_value && $valid && $width > $medium ) ) {
+		if ( ! $new_value || ( $new_value && $valid && $width > $medium ) ) {
 			return $new_value;
 		}
 
@@ -90,23 +111,20 @@ class Display_Featured_Image_Genesis_Author extends Display_Featured_Image_Genes
 	 * User profile error message
 	 * @param  var $errors error message depending on what's wrong
 	 * @param  var $update whether or not to update
-	 * @param  var $user   user being updated
+	 * @param  object $user   user being updated
 	 * @return error message
 	 *
 	 * @since 2.3.0
 	 */
 	public function user_profile_error_message( $errors, $update, $user ) {
 		$new_value = (int) $_POST['displayfeaturedimagegenesis'];
-		$medium    = get_option( 'medium_size_w' );
 		$source    = wp_get_attachment_image_src( $new_value, 'full' );
 		$valid     = $this->is_valid_img_ext( $source[0] );
-		$width     = $source[1];
 		$reset     = sprintf( __( ' The %s Featured Image has been reset to the last valid setting.', 'display-featured-image-genesis' ), $user->display_name );
+		$error     = __( 'Sorry, your image is too small.', 'display-featured-image-genesis' );
 
 		if ( ! $valid ) {
 			$error = __( 'Sorry, that is an invalid file type.', 'display-featured-image-genesis' );
-		} elseif ( $width <= $medium ) {
-			$error = __( 'Sorry, your image is too small.', 'display-featured-image-genesis' );
 		}
 		$errors->add( 'profile_error', $error . $reset );
 	}

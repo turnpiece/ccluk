@@ -5,7 +5,7 @@
  * @package   DisplayFeaturedImageGenesis
  * @author    Robin Cornett <hello@robincornett.com>
  * @link      https://github.com/robincornett/display-featured-image-genesis/
- * @copyright 2015 Robin Cornett
+ * @copyright 2015-2016 Robin Cornett
  * @license   GPL-2.0+
  */
 
@@ -77,7 +77,7 @@ function display_featured_image_genesis_get_term_image_url( $size = 'displayfeat
  */
 function display_featured_image_genesis_get_default_image_id( $image_id = '' ) {
 
-	$displaysetting = get_option( 'displayfeaturedimagegenesis' );
+	$displaysetting = displayfeaturedimagegenesis_get_setting();
 	$fallback       = $displaysetting['default'];
 	$image_id       = displayfeaturedimagegenesis_check_image_id( $fallback );
 
@@ -110,7 +110,7 @@ function display_featured_image_genesis_get_default_image_url( $size = 'displayf
 function display_featured_image_genesis_get_cpt_image_id( $image_id = '' ) {
 
 	$post_type      = '';
-	$displaysetting = get_option( 'displayfeaturedimagegenesis' );
+	$displaysetting = displayfeaturedimagegenesis_get_setting();
 	$object         = get_queried_object();
 	if ( ! $object || is_admin() ) {
 		return;
@@ -214,4 +214,38 @@ function display_featured_image_genesis_add_archive_thumbnails() {
 function displayfeaturedimagegenesis_check_image_id( $image_id = '' ) {
 	$image_id = is_numeric( $image_id ) ? $image_id : Display_Featured_Image_Genesis_Common::get_image_id( $image_id );
 	return $image_id;
+}
+
+/**
+ * Helper function to get the plugin settings.
+ * @return mixed|void
+ *
+ * @since 2.4.2
+ */
+function displayfeaturedimagegenesis_get_setting() {
+	return apply_filters( 'displayfeaturedimagegenesis_get_setting', false );
+}
+
+/**
+ * Get the term meta (generally headline or intro text). Backwards compatible,
+ * but uses new term meta (as of Genesis 2.2.7)
+ * @param $term object the term
+ * @param $key string meta key to retrieve
+ * @param string $value string output of the term meta
+ *
+ * @return mixed|string
+ *
+ * @ since 2.5.0
+ */
+function displayfeaturedimagegenesis_get_term_meta( $term, $key, $value = '' ) {
+	if ( ! $term ) {
+		return $value;
+	}
+	if ( function_exists( 'get_term_meta' ) ) {
+		$value = get_term_meta( $term->term_id, $key, true );
+	}
+	if ( ! $value && isset( $term->meta[ $key ] ) ) {
+		$value = $term->meta[ $key ];
+	}
+	return $value;
 }

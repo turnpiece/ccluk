@@ -5,7 +5,7 @@
  * @package   DisplayFeaturedImageGenesis
  * @author    Robin Cornett <hello@robincornett.com>
  * @link      https://github.com/robincornett/display-featured-image-genesis/
- * @copyright 2014-2015 Robin Cornett
+ * @copyright 2014-2016 Robin Cornett
  * @license   GPL-2.0+
  */
 
@@ -16,17 +16,102 @@
  */
 class Display_Featured_Image_Genesis {
 
-	function __construct( $admin, $author, $common, $description, $output, $rss, $settings, $taxonomies ) {
+	/**
+	 * Admin area class: handles columns.
+	 * @var Display_Featured_Image_Genesis_Admin $admin
+	 */
+	protected $admin;
+
+	/**
+	 * Adds new author meta.
+	 * @var Display_Featured_Image_Genesis_Author $author
+	 */
+	protected $author;
+
+	/**
+	 * Common class: sets image ID, post title, handles database query
+	 * @var Display_Featured_Image_Genesis_Common $common
+	 */
+	protected $common;
+
+	/**
+	 * @var $customizer Display_Featured_Image_Genesis_Customizer
+	 */
+	protected $customizer;
+
+	/**
+	 * All archive description functions.
+	 * @var Display_Featured_Image_Genesis_Description $description
+	 */
+	protected $description;
+
+	/**
+	 * Manages help tabs for settings page.
+	 * @var $helptabs Display_Featured_Image_Genesis_HelpTabs
+	 */
+	protected $helptabs;
+
+	/**
+	 * Handles all image output functionality
+	 * @var Display_Featured_Image_Genesis_Output $output
+	 */
+	protected $output;
+
+	/**
+	 * Updates metabox on post edit page
+	 * @var Display_Featured_Image_Genesis_Post_Meta $post_meta
+	 */
+	protected $post_meta;
+
+	/**
+	 * Handles RSS feed output
+	 * @var Display_Featured_Image_Genesis_RSS $rss
+	 */
+	protected $rss;
+
+	/**
+	 * Sets up settings page for the plugin.
+	 * @var Display_Featured_Image_Genesis_Settings $settings
+	 */
+	protected $settings;
+
+	/**
+	 * Handles term meta.
+	 * @var Display_Featured_Image_Genesis_Taxonomies $taxonomies
+	 */
+	protected $taxonomies;
+
+	/**
+	 * Display_Featured_Image_Genesis constructor.
+	 *
+	 * @param $admin
+	 * @param $author
+	 * @param $common
+	 * @param $customizer
+	 * @param $description
+	 * @param $helptabs
+	 * @param $output
+	 * @param $rss
+	 * @param $settings
+	 * @param $taxonomies
+	 */
+	function __construct( $admin, $author, $common, $customizer, $description, $helptabs, $output, $post_meta, $rss, $settings, $taxonomies ) {
 		$this->admin       = $admin;
 		$this->author      = $author;
 		$this->common      = $common;
+		$this->customizer  = $customizer;
 		$this->description = $description;
+		$this->helptabs    = $helptabs;
 		$this->output      = $output;
+		$this->post_meta   = $post_meta;
 		$this->rss         = $rss;
 		$this->settings    = $settings;
 		$this->taxonomies  = $taxonomies;
 	}
 
+	/**
+	 * Main plugin function. Starts up all the things.
+	 */
 	public function run() {
 		if ( 'genesis' !== basename( get_template_directory() ) ) {
 			add_action( 'admin_init', array( $this, 'deactivate' ) );
@@ -35,18 +120,37 @@ class Display_Featured_Image_Genesis {
 
 		require plugin_dir_path( __FILE__ ) . 'helper-functions.php';
 
+		// Plugin setup
 		add_action( 'after_setup_theme', array( $this, 'add_plugin_supports' ) );
-		add_action( 'admin_init', array( $this, 'check_settings' ) );
+		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
+		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_filter( 'plugin_action_links_' . DISPLAYFEATUREDIMAGEGENESIS_BASENAME, array( $this, 'add_settings_link' ) );
+
+		// Admin
+		add_action( 'admin_init', array( $this->admin, 'set_up_columns' ) );
+		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+
+		// Taxonomies, Author, Post Meta
+		add_filter( 'displayfeaturedimagegenesis_get_taxonomies', array( $this->taxonomies, 'remove_post_status_terms' ) );
 		add_action( 'admin_init', array( $this->taxonomies, 'set_taxonomy_meta' ) );
 		add_action( 'admin_init', array( $this->author, 'set_author_meta' ) );
-		add_action( 'widgets_init', array( $this, 'register_widgets' ) );
-		add_action( 'admin_init', array( $this->admin, 'set_up_columns' ) );
-		add_action( 'plugins_loaded', array( $this, 'load_textdomain' ) );
+		add_filter( 'admin_post_thumbnail_html', array( $this->post_meta, 'meta_box' ), 10, 2 );
+		add_action( 'save_post', array( $this->post_meta, 'save_meta' ) );
+
+		// Settings
 		add_action( 'admin_menu', array( $this->settings, 'do_submenu_page' ) );
+		add_filter( 'displayfeaturedimagegenesis_get_setting', array( $this->settings, 'get_display_setting' ) );
+		add_action( 'load-appearance_page_displayfeaturedimagegenesis', array( $this->helptabs, 'help' ) );
+
+		// Customizer
+		add_action( 'customize_register', array( $this->customizer, 'customizer' ) );
+
+		// Front End Output
 		add_action( 'get_header', array( $this->output, 'manage_output' ) );
+		add_filter( 'genesis_get_image_default_args', array( $this->output, 'change_thumbnail_fallback' ) );
+
+		// RSS
 		add_action( 'template_redirect', array( $this->rss, 'maybe_do_feed' ) );
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
-		add_filter( 'plugin_action_links_' . DISPLAYFEATUREDIMAGEGENESIS_BASENAME, array( $this, 'add_settings_link' ) );
 
 	}
 
@@ -92,9 +196,15 @@ class Display_Featured_Image_Genesis {
 	 * @since 1.3.0
 	 */
 	public function add_plugin_supports() {
-		add_image_size( 'displayfeaturedimage_backstretch', 2000, 2000, false );
 
-		$displaysetting = get_option( 'displayfeaturedimagegenesis' );
+		$args = apply_filters( 'displayfeaturedimagegenesis_custom_image_size', array(
+			'width'  => 2000,
+			'height' => 2000,
+			'crop'   => false,
+		) );
+		add_image_size( 'displayfeaturedimage_backstretch', (int) $args['width'], (int) $args['height'], (bool) $args['crop'] );
+
+		$displaysetting = displayfeaturedimagegenesis_get_setting();
 		if ( $displaysetting['move_excerpts'] ) {
 			add_post_type_support( 'page', 'excerpt' );
 		}
@@ -107,7 +217,7 @@ class Display_Featured_Image_Genesis {
 	 */
 	public function check_settings() {
 
-		$displaysetting = get_option( 'displayfeaturedimagegenesis' );
+		$displaysetting = displayfeaturedimagegenesis_get_setting();
 
 		// return early if the option doesn't exist yet
 		if ( empty( $displaysetting ) ) {

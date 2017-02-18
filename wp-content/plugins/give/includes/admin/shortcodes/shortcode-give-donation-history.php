@@ -4,12 +4,15 @@
  *
  * @package     Give
  * @subpackage  Admin
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.3.0
  */
 
-defined( 'ABSPATH' ) or exit;
+// Exit if accessed directly.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 class Give_Shortcode_Donation_History extends Give_Shortcode_Generator {
 
@@ -18,7 +21,7 @@ class Give_Shortcode_Donation_History extends Give_Shortcode_Generator {
 	 */
 	public function __construct() {
 
-		$this->shortcode['label'] = __( 'Donation History', 'give' );
+		$this->shortcode['label'] = esc_html__( 'Donation History', 'give' );
 
 		parent::__construct( 'donation_history' );
 	}

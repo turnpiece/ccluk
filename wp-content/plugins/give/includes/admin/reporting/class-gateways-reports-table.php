@@ -4,12 +4,12 @@
  *
  * @package     Give
  * @subpackage  Admin/Reports
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.5
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
+ * @since       1.0
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -57,7 +57,7 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * This function renders most of the columns in the list table.
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 *
 	 * @param array  $item        Contains all the data of the form
 	 * @param string $column_name The name of the column
@@ -75,15 +75,16 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * Retrieve the table columns
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 * @return array $columns Array of all the list table columns
 	 */
 	public function get_columns() {
 		$columns = array(
-			'label'          => __( 'Gateway', 'give' ),
-			'complete_sales' => __( 'Complete Sales', 'give' ),
-			'pending_sales'  => __( 'Pending / Failed Sales', 'give' ),
-			'total_sales'    => __( 'Total Sales', 'give' )
+			'label'           => esc_attr__( 'Gateway', 'give' ),
+			'complete_sales'  => esc_attr__( 'Complete Transactions', 'give' ),
+			'pending_sales'   => esc_attr__( 'Pending / Failed Transactions', 'give' ),
+			'total_sales'     => esc_attr__( 'Total Transactions', 'give' ),
+			'total_donations' => esc_attr__( 'Total Donated', 'give' )
 		);
 
 		return $columns;
@@ -94,7 +95,7 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * Retrieve the current page number
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 * @return int Current page number
 	 */
 	public function get_paged() {
@@ -106,12 +107,11 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * Outputs the reporting views
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 * @return void
 	 */
 	public function bulk_actions( $which = '' ) {
-		// These aren't really bulk actions but this outputs the markup in the right place
-		give_report_views();
+
 	}
 
 	/**
@@ -124,19 +124,21 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 */
 	protected function display_tablenav( $which ) {
 
-		if ( 'top' == $which ) {
+		if ( 'top' === $which ) {
 			wp_nonce_field( 'bulk-' . $this->_args['plural'] );
 		}
 		?>
 		<div class="tablenav gateways-report-tablenav give-clearfix <?php echo esc_attr( $which ); ?>">
 
-			<h3 class="alignleft reports-earnings-title"><span><?php _e( 'Payment Methods Report', 'give' ); ?></span></h3>
+			<?php if ( 'top' === $which ) { ?>
+				<h3 class="alignleft reports-earnings-title">
+					<span><?php esc_html_e( 'Donation Methods Report', 'give' ); ?></span>
+				</h3>
+			<?php } ?>
 
 			<div class="alignright tablenav-right">
 				<div class="actions bulkactions">
-					<?php
-					$this->bulk_actions( $which ); ?>
-
+					<?php $this->bulk_actions( $which ); ?>
 				</div>
 				<?php
 				$this->extra_tablenav( $which );
@@ -148,7 +150,7 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 			<br class="clear" />
 
 		</div>
-	<?php
+		<?php
 	}
 
 
@@ -156,13 +158,14 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * Build all the reports data
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 * @return array $reports_data All the data for donor reports
 	 */
 	public function reports_data() {
 
 		$reports_data = array();
 		$gateways     = give_get_payment_gateways();
+		$stats        = new Give_Payment_Stats();
 
 		foreach ( $gateways as $gateway_id => $gateway ) {
 
@@ -170,11 +173,12 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 			$pending_count  = give_count_sales_by_gateway( $gateway_id, array( 'pending', 'failed' ) );
 
 			$reports_data[] = array(
-				'ID'             => $gateway_id,
-				'label'          => $gateway['admin_label'],
-				'complete_sales' => give_format_amount( $complete_count, false ),
-				'pending_sales'  => give_format_amount( $pending_count, false ),
-				'total_sales'    => give_format_amount( $complete_count + $pending_count, false )
+				'ID'              => $gateway_id,
+				'label'           => $gateway['admin_label'],
+				'complete_sales'  => give_format_amount( $complete_count, false ),
+				'pending_sales'   => give_format_amount( $pending_count, false ),
+				'total_sales'     => give_format_amount( $complete_count + $pending_count, false ),
+				'total_donations' => give_currency_filter( give_format_amount( $stats->get_earnings( 0, 0, 0, $gateway_id ) ) )
 			);
 		}
 
@@ -186,7 +190,7 @@ class Give_Gateawy_Reports_Table extends WP_List_Table {
 	 * Setup the final data for the table
 	 *
 	 * @access public
-	 * @since  1.5
+	 * @since  1.0
 	 * @uses   Give_Gateway_Reports_Table::get_columns()
 	 * @uses   Give_Gateway_Reports_Table::get_sortable_columns()
 	 * @uses   Give_Gateway_Reports_Table::reports_data()

@@ -4,18 +4,18 @@
  *
  * @package     WordImpress
  * @subpackage  Includes/Forms
- * @copyright   Copyright (c) 2015, WordImpress
- * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-license GNU Public License
  * @since       1.1
  */
 
-// Exit if accessed directly
+// Exit if accessed directly.
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
 /**
- * Filter: Do not show the Give shortcut button on Give Forms or Campaign posts
+ * Filter: Do not show the Give shortcut button on Give Forms CPT
  *
  * @return bool
  */
@@ -23,7 +23,7 @@ function give_shortcode_button_condition() {
 
 	global $typenow;
 
-	if ( $typenow != 'give_forms' && $typenow != 'give_campaigns' ) {
+	if ( $typenow != 'give_forms' ) {
 		return true;
 	}
 
@@ -36,7 +36,7 @@ add_filter( 'give_shortcode_button_condition', 'give_shortcode_button_condition'
 /**
  * Get the form ID from the form $args
  *
- * @param $args
+ * @param array $args
  *
  * @return int|false
  */
@@ -71,24 +71,25 @@ function give_is_float_labels_enabled( $args ) {
 		$float_labels = get_post_meta( $args['form_id'], '_give_form_floating_labels', true );
 	}
 
-	if ( empty( $float_labels ) ) {
-		$float_labels = give_get_option( 'enable_floatlabels' ) ? 'enabled' : 'disabled';
+	if ( empty( $float_labels ) || ( 'global' === $float_labels ) ) {
+		$float_labels = give_get_option( 'floatlabels', 'disabled' );
 	}
 
-	return ( $float_labels == 'enabled' ) ? true : false;
+	return give_is_setting_enabled( $float_labels );
 }
 
 /**
  * Determines if a user can checkout or not
  *
+ * Allows themes and plugins to set donation checkout conditions
+ *
  * @since 1.0
- * @global $give_options Array of all the Give Options
+ *
  * @return bool Can user checkout?
  */
 function give_can_checkout() {
-	global $give_options;
 
-	$can_checkout = true; // Always true for now
+	$can_checkout = true;
 
 	return (bool) apply_filters( 'give_can_checkout', $can_checkout );
 }
@@ -98,10 +99,11 @@ function give_can_checkout() {
  *
  * @access      public
  * @since       1.0
+ *
  * @return      string
  */
 function give_get_success_page_uri() {
-	global $give_options;
+	$give_options = give_get_settings();
 
 	$success_page = isset( $give_options['success_page'] ) ? get_permalink( absint( $give_options['success_page'] ) ) : get_bloginfo( 'url' );
 
@@ -112,10 +114,11 @@ function give_get_success_page_uri() {
  * Determines if we're currently on the Success page.
  *
  * @since 1.0
+ *
  * @return bool True if on the Success page, false otherwise.
  */
 function give_is_success_page() {
-	global $give_options;
+	$give_options    = give_get_settings();
 	$is_success_page = isset( $give_options['success_page'] ) ? is_page( $give_options['success_page'] ) : false;
 
 	return apply_filters( 'give_is_success_page', $is_success_page );
@@ -124,7 +127,7 @@ function give_is_success_page() {
 /**
  * Send To Success Page
  *
- * Sends the user to the succes page.
+ * Sends the user to the success page.
  *
  * @param string $query_string
  *
@@ -133,7 +136,6 @@ function give_is_success_page() {
  * @return      void
  */
 function give_send_to_success_page( $query_string = null ) {
-	global $give_options;
 
 	$redirect = give_get_success_page_uri();
 
@@ -149,10 +151,9 @@ function give_send_to_success_page( $query_string = null ) {
 
 
 /**
- * Send back to checkout.
+ * Send back to donation form.
  *
- * Used to redirect a user back to the purchase
- * page if there are errors present.
+ * Used to redirect a user back to the donation form if there are errors present.
  *
  * @param array $args
  *
@@ -162,24 +163,62 @@ function give_send_to_success_page( $query_string = null ) {
  */
 function give_send_back_to_checkout( $args = array() ) {
 
-	$redirect = ( isset( $_POST['give-current-url'] ) ) ? $_POST['give-current-url'] : '';
-	$form_id  = isset( $_POST['give-form-id'] ) ? $_POST['give-form-id'] : 0;
+	$url = isset( $_POST['give-current-url'] ) ? sanitize_text_field( $_POST['give-current-url'] ) : '';
+	$form_id = 0;
+
+	// Set the form_id.
+	if ( isset( $_POST['give-form-id'] ) ) {
+		$form_id = sanitize_text_field( $_POST['give-form-id'] );
+	}
+
+	// Need a URL to continue. If none, redirect back to single form.
+	if ( empty( $url ) ) {
+		wp_safe_redirect( get_permalink( $form_id ) );
+		give_die();
+	}
 
 	$defaults = array(
-		'form-id' => (int) $form_id
+		'form-id' => (int) $form_id,
 	);
 
-	// Check for backward compatibility
+	// Set the $level_id.
+	if ( isset( $_POST['give-price-id'] ) ) {
+		$defaults['level-id'] = sanitize_text_field( $_POST['give-price-id'] );
+	}
+
+	// Check for backward compatibility.
 	if ( is_string( $args ) ) {
 		$args = str_replace( '?', '', $args );
 	}
 
 	$args = wp_parse_args( $args, $defaults );
 
-	$redirect = add_query_arg( $args, $redirect ) . '#give-form-' . $form_id . '-wrap';
+	// Merge URL query with $args to maintain third-party URL parameters after redirect.
+	$url_data = wp_parse_url( $url );
 
-	wp_redirect( apply_filters( 'give_send_back_to_checkout', $redirect, $args ) );
+	// Check if an array to prevent notices before parsing.
+	if ( isset( $url_data['query'] ) && ! empty( $url_data['query'] ) ) {
+		parse_str( $url_data['query'], $query );
+
+		// Precaution: don't allow any CC info.
+		unset( $query['card_number'] );
+		unset( $query['card_cvc'] );
+
+	} else {
+		// No $url_data so pass empty array.
+		$query = array();
+	}
+
+	$new_query        = array_merge( $args, $query );
+	$new_query_string = http_build_query( $new_query );
+
+	// Assemble URL parts.
+	$redirect = home_url( '/' . $url_data['path'] . '?' . $new_query_string . '#give-form-' . $form_id . '-wrap' );
+
+	// Redirect them.
+	wp_safe_redirect( apply_filters( 'give_send_back_to_checkout', $redirect, $args ) );
 	give_die();
+
 }
 
 /**
@@ -194,28 +233,29 @@ function give_send_back_to_checkout( $args = array() ) {
  * @return      string
  */
 function give_get_success_page_url( $query_string = null ) {
-	global $give_options;
 
-	$success_page = get_permalink( $give_options['success_page'] );
+	$success_page = give_get_option( 'success_page', 0 );
+	$success_page = get_permalink( $success_page );
+
 	if ( $query_string ) {
 		$success_page .= $query_string;
 	}
 
 	return apply_filters( 'give_success_page_url', $success_page );
+
 }
 
 /**
- * Get the URL of the Transaction Failed page
+ * Get the URL of the Failed Donation Page
  *
  * @since 1.0
- * @global     $give_options Array of all the Give Options
  *
- * @param bool $extras       Extras to append to the URL
+ * @param bool $extras Extras to append to the URL
  *
- * @return mixed|void Full URL to the Transaction Failed page, if present, home page if it doesn't exist
+ * @return mixed|void Full URL to the Failed Donation Page, if present, home page if it doesn't exist
  */
 function give_get_failed_transaction_uri( $extras = false ) {
-	global $give_options;
+	$give_options = give_get_settings();
 
 	$uri = ! empty( $give_options['failure_page'] ) ? trailingslashit( get_permalink( $give_options['failure_page'] ) ) : home_url();
 	if ( $extras ) {
@@ -226,20 +266,20 @@ function give_get_failed_transaction_uri( $extras = false ) {
 }
 
 /**
- * Determines if we're currently on the Failed Transaction page.
+ * Determines if we're currently on the Failed Donation Page.
  *
  * @since 1.0
- * @return bool True if on the Failed Transaction page, false otherwise.
+ * @return bool True if on the Failed Donation Page, false otherwise.
  */
 function give_is_failed_transaction_page() {
-	global $give_options;
-	$ret = isset( $give_options['failure_page'] ) ? is_page( $give_options['failure_page'] ) : false;
+	$give_options = give_get_settings();
+	$ret          = isset( $give_options['failure_page'] ) ? is_page( $give_options['failure_page'] ) : false;
 
 	return apply_filters( 'give_is_failure_page', $ret );
 }
 
 /**
- * Mark payments as Failed when returning to the Failed Transaction page
+ * Mark payments as Failed when returning to the Failed Donation Page
  *
  * @access      public
  * @since       1.0
@@ -260,6 +300,21 @@ function give_listen_for_failed_payments() {
 
 add_action( 'template_redirect', 'give_listen_for_failed_payments' );
 
+/**
+ * Retrieve the Donation History page URI
+ *
+ * @access      public
+ * @since       1.7
+ *
+ * @return      string
+ */
+function give_get_history_page_uri() {
+	$give_options = give_get_settings();
+
+	$history_page = isset( $give_options['history_page'] ) ? get_permalink( absint( $give_options['history_page'] ) ) : get_bloginfo( 'url' );
+
+	return apply_filters( 'give_get_history_page_uri', $history_page );
+}
 
 /**
  * Check if a field is required
@@ -273,154 +328,10 @@ add_action( 'template_redirect', 'give_listen_for_failed_payments' );
  */
 function give_field_is_required( $field = '', $form_id ) {
 
-	$required_fields = give_purchase_form_required_fields( $form_id );
+	$required_fields = give_get_required_fields( $form_id );
 
 	return array_key_exists( $field, $required_fields );
 }
-
-/**
- * Retrieve an array of banned_emails
- *
- * @since       1.0
- * @return      array
- */
-function give_get_banned_emails() {
-	$emails = array_map( 'trim', give_get_option( 'banned_emails', array() ) );
-
-	return apply_filters( 'give_get_banned_emails', $emails );
-}
-
-/**
- * Determines if an email is banned
- *
- * @since       2.0
- * @return      bool
- */
-function give_is_email_banned( $email = '' ) {
-
-	if ( empty( $email ) ) {
-		return false;
-	}
-
-	$ret = in_array( trim( $email ), give_get_banned_emails() );
-
-	return apply_filters( 'give_is_email_banned', $ret, $email );
-}
-
-/**
- * Determines if secure checkout pages are enforced
- *
- * @since       1.0
- * @return      bool True if enforce SSL is enabled, false otherwise
- */
-function give_is_ssl_enforced() {
-	$ssl_enforced = give_get_option( 'enforce_ssl', false );
-
-	return (bool) apply_filters( 'give_is_ssl_enforced', $ssl_enforced );
-}
-
-/**
- * Handle redirections for SSL enforced checkouts
- *
- * @since 1.0
- * @global $give_options Array of all the Give Options
- * @return void
- */
-function give_enforced_ssl_redirect_handler() {
-	if ( ! give_is_ssl_enforced() || is_admin() || is_ssl() ) {
-		return;
-	}
-
-	if ( isset( $_SERVER["HTTPS"] ) && $_SERVER["HTTPS"] == "on" ) {
-		return;
-	}
-
-	$uri = 'https://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'];
-
-	wp_safe_redirect( $uri );
-	exit;
-}
-
-//add_action( 'template_redirect', 'give_enforced_ssl_redirect_handler' );
-
-/**
- * Handle rewriting asset URLs for SSL enforced checkouts
- *
- * @since 1.0
- * @return void
- */
-function give_enforced_ssl_asset_handler() {
-	if ( ! give_is_ssl_enforced() || is_admin() ) {
-		return;
-	}
-
-	$filters = array(
-		'post_thumbnail_html',
-		'wp_get_attachment_url',
-		'wp_get_attachment_image_attributes',
-		'wp_get_attachment_url',
-		'option_stylesheet_url',
-		'option_template_url',
-		'script_loader_src',
-		'style_loader_src',
-		'template_directory_uri',
-		'stylesheet_directory_uri',
-		'site_url'
-	);
-
-	$filters = apply_filters( 'give_enforced_ssl_asset_filters', $filters );
-
-	foreach ( $filters as $filter ) {
-		add_filter( $filter, 'give_enforced_ssl_asset_filter', 1 );
-	}
-}
-
-//add_action( 'template_redirect', 'give_enforced_ssl_asset_handler' );
-
-/**
- * Filter filters and convert http to https
- *
- * @since 1.0
- *
- * @param mixed $content
- *
- * @return mixed
- */
-function give_enforced_ssl_asset_filter( $content ) {
-
-	if ( is_array( $content ) ) {
-
-		$content = array_map( 'give_enforced_ssl_asset_filter', $content );
-
-	} else {
-
-		// Detect if URL ends in a common domain suffix. We want to only affect assets
-		$suffixes = array(
-			'br',
-			'ca',
-			'cn',
-			'com',
-			'de',
-			'dev',
-			'edu',
-			'fr',
-			'in',
-			'info',
-			'jp',
-			'local',
-			'mobi',
-			'name',
-			'net',
-			'nz',
-			'org',
-			'ru',
-		);
-
-	}
-
-	return $content;
-}
-
 
 /**
  * Record Sale In Log
@@ -444,12 +355,12 @@ function give_record_sale_in_log( $give_form_id = 0, $payment_id, $price_id = fa
 		'post_parent'   => $give_form_id,
 		'log_type'      => 'sale',
 		'post_date'     => isset( $sale_date ) ? $sale_date : null,
-		'post_date_gmt' => isset( $sale_date ) ? $sale_date : null
+		'post_date_gmt' => isset( $sale_date ) ? $sale_date : null,
 	);
 
 	$log_meta = array(
 		'payment_id' => $payment_id,
-		'price_id'   => (int) $price_id
+		'price_id'   => (int) $price_id,
 	);
 
 	$give_logs->insert_log( $log_data, $log_meta );
@@ -461,14 +372,16 @@ function give_record_sale_in_log( $give_form_id = 0, $payment_id, $price_id = fa
  *
  * @since 1.0
  *
- * @param int $give_form_id Give Form ID
+ * @param int $form_id  Give Form ID
+ * @param int $quantity Quantity to increase donation count by
  *
  * @return bool|int
  */
-function give_increase_purchase_count( $give_form_id = 0 ) {
-	$form = new Give_Donate_Form( $give_form_id );
+function give_increase_purchase_count( $form_id = 0, $quantity = 1 ) {
+	$quantity = (int) $quantity;
+	$form     = new Give_Donate_Form( $form_id );
 
-	return $form->increase_sales();
+	return $form->increase_sales( $quantity );
 }
 
 /**
@@ -476,14 +389,16 @@ function give_increase_purchase_count( $give_form_id = 0 ) {
  *
  * @since 1.0
  *
- * @param int $give_form_id Give Form ID
+ * @param int $form_id  Give Form ID
+ * @param int $quantity Quantity to increase donation count by
  *
  * @return bool|int
  */
-function give_decrease_purchase_count( $give_form_id = 0 ) {
-	$form = new Give_Donate_Form( $give_form_id );
+function give_decrease_purchase_count( $form_id = 0, $quantity = 1 ) {
+	$quantity = (int) $quantity;
+	$form     = new Give_Donate_Form( $form_id );
 
-	return $form->decrease_sales();
+	return $form->decrease_sales( $quantity );
 }
 
 /**
@@ -503,17 +418,17 @@ function give_increase_earnings( $give_form_id = 0, $amount ) {
 }
 
 /**
- * Decreases the total earnings of a form. Primarily for when a purchase is refunded.
+ * Decreases the total earnings of a form. Primarily for when a donation is refunded.
  *
  * @since 1.0
  *
- * @param int $give_form_id Give Form ID
- * @param int $amount       Earnings
+ * @param int $form_id Give Form ID
+ * @param int $amount  Earnings
  *
  * @return bool|int
  */
-function give_decrease_earnings( $give_form_id = 0, $amount ) {
-	$form = new Give_Donate_Form( $give_form_id );
+function give_decrease_earnings( $form_id = 0, $amount ) {
+	$form = new Give_Donate_Form( $form_id );
 
 	return $form->decrease_earnings( $amount );
 }
@@ -524,12 +439,12 @@ function give_decrease_earnings( $give_form_id = 0, $amount ) {
  *
  * @since 1.0
  *
- * @param int $give_form_id Give Form ID
+ * @param int $form_id Give Form ID
  *
  * @return int $earnings Earnings for a certain form
  */
-function give_get_form_earnings_stats( $give_form_id = 0 ) {
-	$give_form = new Give_Donate_Form( $give_form_id );
+function give_get_form_earnings_stats( $form_id = 0 ) {
+	$give_form = new Give_Donate_Form( $form_id );
 
 	return $give_form->earnings;
 }
@@ -604,13 +519,13 @@ function give_get_average_monthly_form_earnings( $form_id = 0 ) {
 /**
  * Get Price Option Name (Text)
  *
- * @description Retrieves the name of a variable price option
+ * Retrieves the name of a variable price option
  *
  * @since       1.0
  *
- * @param int $form_id    ID of the download
- * @param int $price_id   ID of the price option
- * @param int $payment_id optional payment ID for use in filters
+ * @param int $form_id    ID of the donation form.
+ * @param int $price_id   ID of the price option.
+ * @param int $payment_id payment ID for use in filters ( optional ).
  *
  * @return string $price_name Name of the price option
  */
@@ -622,11 +537,13 @@ function give_get_price_option_name( $form_id = 0, $price_id = 0, $payment_id = 
 	foreach ( $prices as $price ) {
 
 		if ( intval( $price['_give_id']['level_id'] ) == intval( $price_id ) ) {
-			$price_name = isset( $price['_give_text'] ) ? $price['_give_text'] : '';
+
+			$price_text     = isset( $price['_give_text'] ) ? $price['_give_text'] : '';
+			$price_fallback = give_currency_filter( give_format_amount( $price['_give_amount'] ) );
+			$price_name     = ! empty( $price_text ) ? $price_text : $price_fallback;
+
 		}
-
 	}
-
 
 	return apply_filters( 'give_get_price_option_name', $price_name, $form_id, $payment_id, $price_id );
 }
@@ -653,6 +570,54 @@ function give_price_range( $form_id = 0 ) {
 
 
 /**
+ * Get Lowest Price ID
+ *
+ * Retrieves the ID for the cheapest price option of a variable donation form
+ *
+ * @since 1.5
+ *
+ * @param int $form_id ID of the donation
+ *
+ * @return int ID of the lowest price
+ */
+function give_get_lowest_price_id( $form_id = 0 ) {
+
+	if ( empty( $form_id ) ) {
+		$form_id = get_the_ID();
+	}
+
+	if ( ! give_has_variable_prices( $form_id ) ) {
+		return give_get_form_price( $form_id );
+	}
+
+	$prices = give_get_variable_prices( $form_id );
+
+	$min = $min_id = 0;
+
+	if ( ! empty( $prices ) ) {
+
+		foreach ( $prices as $key => $price ) {
+
+			if ( empty( $price['_give_amount'] ) ) {
+				continue;
+			}
+
+			if ( ! isset( $min ) ) {
+				$min = $price['_give_amount'];
+			} else {
+				$min = min( $min, $price['_give_amount'] );
+			}
+
+			if ( $price['_give_amount'] == $min ) {
+				$min_id = $price['_give_id']['level_id'];
+			}
+		}
+	}
+
+	return (int) $min_id;
+}
+
+/**
  * Retrieves cheapest price option of a variable priced form
  *
  * @since 1.0
@@ -672,9 +637,11 @@ function give_get_lowest_price_option( $form_id = 0 ) {
 
 	$prices = give_get_variable_prices( $form_id );
 
-	$low = 0.00;
+	$low = 0;
 
 	if ( ! empty( $prices ) ) {
+
+		$min = $min_id = 0;
 
 		foreach ( $prices as $key => $price ) {
 
@@ -725,7 +692,7 @@ function give_get_highest_price_option( $form_id = 0 ) {
 
 	if ( ! empty( $prices ) ) {
 
-		$max = 0;
+		$max_id = $max = 0;
 
 		foreach ( $prices as $key => $price ) {
 			if ( empty( $price['_give_amount'] ) ) {
@@ -763,18 +730,38 @@ function give_get_form_price( $form_id = 0 ) {
 
 	$form = new Give_Donate_Form( $form_id );
 
-	return $form->price;
+	return $form->__get( 'price' );
 }
 
+/**
+ * Returns the minimum price amount of a form, only enforced for the custom amount input.
+ *
+ * @since 1.3.6
+ *
+ * @param int $form_id ID number of the form to retrieve the minimum price for
+ *
+ * @return mixed string|int Minimum price of the form
+ */
+function give_get_form_minimum_price( $form_id = 0 ) {
+
+	if ( empty( $form_id ) ) {
+		return false;
+	}
+
+	$form = new Give_Donate_Form( $form_id );
+
+	return $form->__get( 'minimum_price' );
+
+}
 
 /**
  * Displays a formatted price for a donation form
  *
  * @since 1.0
  *
- * @param int  $form_id  ID of the form price to show
- * @param bool $echo     Whether to echo or return the results
- * @param int  $price_id Optional price id for variable pricing
+ * @param int      $form_id  ID of the form price to show
+ * @param bool     $echo     Whether to echo or return the results
+ * @param bool|int $price_id Optional price id for variable pricing
  *
  * @return int $formatted_price
  */
@@ -790,14 +777,13 @@ function give_price( $form_id = 0, $echo = true, $price_id = false ) {
 
 		if ( false !== $price_id ) {
 
-			//loop through multi-prices to see which is default
+			// loop through multi-prices to see which is default
 			foreach ( $prices as $price ) {
-				//this is the default price
+				// this is the default price
 				if ( isset( $price['_give_default'] ) && $price['_give_default'] === 'default' ) {
 					$price = (float) $price['_give_amount'];
 				};
 			}
-
 		} else {
 
 			$price = give_get_lowest_price_option( $form_id );
@@ -833,7 +819,6 @@ add_filter( 'give_form_price', 'give_currency_filter', 20 );
  *
  * @param int $form_id  ID of the form
  * @param int $price_id ID of the price option
- * @param     int       @payment_id ID of the payment
  *
  * @return float $amount Amount of the price option
  */
@@ -843,8 +828,9 @@ function give_get_price_option_amount( $form_id = 0, $price_id = 0 ) {
 	$amount = 0.00;
 
 	foreach ( $prices as $price ) {
-		if ( isset( $price['_give_id']['level_id'] ) && $price['_give_id']['level_id'] === $price_id ) {
+		if ( isset( $price['_give_id']['level_id'] ) && $price['_give_id']['level_id'] == $price_id ) {
 			$amount = isset( $price['_give_amount'] ) ? $price['_give_amount'] : 0.00;
+			break;
 		};
 	}
 
@@ -873,7 +859,7 @@ function give_get_form_goal( $form_id = 0 ) {
 }
 
 /**
- * Displays a formatted goal for a donation form
+ * Display/Return a formatted goal for a donation form
  *
  * @since 1.0
  *
@@ -903,3 +889,109 @@ function give_goal( $form_id = 0, $echo = true ) {
 
 add_filter( 'give_form_goal', 'give_format_amount', 10 );
 add_filter( 'give_form_goal', 'give_currency_filter', 20 );
+
+
+/**
+ * Checks if users can only donate when logged in
+ *
+ * @since  1.0
+ *
+ * @param  int $form_id Give form ID
+ *
+ * @return bool  $ret Whether or not the logged_in_only setting is set
+ */
+function give_logged_in_only( $form_id ) {
+	// If _give_logged_in_only is set to enable then guest can donate from that specific form.
+	// Other wise it is member only donation form.
+	$ret = ! give_is_setting_enabled( get_post_meta( $form_id, '_give_logged_in_only', true ) );
+
+	return (bool) apply_filters( 'give_logged_in_only', $ret, $form_id );
+}
+
+
+/**
+ * Checks the option for the "Register / Login Option"
+ *
+ * @since 1.4.1
+ *
+ * @param int $form_id
+ *
+ * @return string
+ */
+function give_show_login_register_option( $form_id ) {
+
+	$show_register_form = get_post_meta( $form_id, '_give_show_register_form', true );
+
+	return apply_filters( 'give_show_register_form', $show_register_form, $form_id );
+
+}
+
+
+/**
+ * Get pre fill form field values.
+ *
+ * Note: this function will extract form field values from give_purchase session data.
+ *
+ * @since  1.8
+ *
+ * @param  int $form_id Form ID.
+ *
+ * @return array
+ */
+function _give_get_prefill_form_field_values( $form_id ) {
+	$logged_in_donor_info = array();
+
+	if ( is_user_logged_in() ) :
+		$donor_data    = get_userdata( get_current_user_id() );
+		$donor_address = get_user_meta( get_current_user_id(), '_give_user_address', true );
+
+		$logged_in_donor_info = array(
+			// First name.
+			'give_first'      => $donor_data->first_name,
+
+			// Last name.
+			'give_last'       => $donor_data->last_name,
+
+			// Email.
+			'give_email'      => $donor_data->user_email,
+
+			// Street address 1.
+			'card_address'    => ( ! empty( $donor_address['line1'] ) ? $donor_address['line1'] : '' ),
+
+			// Street address 2.
+			'card_address_2'  => ( ! empty( $donor_address['line2'] ) ? $donor_address['line2'] : '' ),
+
+			// Country.
+			'billing_country' => ( ! empty( $donor_address['country'] ) ? $donor_address['country'] : '' ),
+
+			// State.
+			'card_state'      => ( ! empty( $donor_address['state'] ) ? $donor_address['state'] : '' ),
+
+			// City.
+			'card_city'       => ( ! empty( $donor_address['city'] ) ? $donor_address['city'] : '' ),
+
+			// Zipcode
+			'card_zip'        => ( ! empty( $donor_address['zip'] ) ? $donor_address['zip'] : '' ),
+		);
+	endif;
+
+	// Bailout: Auto fill form field values only form form which donor is donating.
+	if (
+		empty( $_GET['form-id'] )
+		|| ! $form_id
+		|| ( $form_id !== absint( $_GET['form-id'] ) )
+	) {
+		return $logged_in_donor_info;
+	}
+
+	// Get purchase data.
+	$give_purchase_data = Give()->session->get( 'give_purchase' );
+
+	// Get donor info from form data.
+	$give_donor_info_in_session = empty( $give_purchase_data['post_data'] )
+		? array()
+		: $give_purchase_data['post_data'];
+
+	// Output.
+	return wp_parse_args( $give_donor_info_in_session, $logged_in_donor_info );
+}

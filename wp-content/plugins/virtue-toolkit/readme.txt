@@ -1,17 +1,17 @@
-=== Virtue / Pinnacle ToolKit ===
+=== Kadence Themes Toolkit ===
 Contributors: britner
 Tags: 
-Requires at least: 3.5
-Tested up to: 4.2
-Stable tag: 3.2
+Requires at least: 4.0
+Tested up to: 4.7
+Stable tag: 3.8
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
-Custom Portfolio and Shortcode functionality for Virtue and Pinnacle Wordpress Theme
+Custom Portfolio and Shortcode functionality for free Kadence WordPress Themes
 
 == Description ==
 
-Custom Portfolio and Shortcode functionality for Virtue and Pinnacle Wordpress Themes, by Kadence Themes
+Custom Portfolio and Shortcode functionality for free Kadence WordPress Themes, by Kadence Themes
 
 Not intended to work with any other themes.
 
@@ -31,7 +31,7 @@ Not intended to work with any other themes.
 
 * **Contact Form Page Template** - includes page template that has options for a google map and a contact form.
 
-* **Gallery Styling for Wordpress Gallery** - this allows the Kadence Theme to override the wordpress gallery with theme specific styling. You can turn this off in the theme options > misc settings.
+* **Gallery Styling for Wordpress Gallery** - this allows the Kadence Theme to override the WordPress gallery with theme specific styling. You can turn this off in the theme options > misc settings.
 
 * **Gallery Metaboxs for post and pages** - allows for a gallery to be added to a post for a post slider or page for page slider using the featured template.
 
@@ -42,6 +42,24 @@ Install the plugin into the `/wp-content/plugins/` folder, and activate it.
 
 
 == Changelog ==
+
+= 3.8 =
+* Update: Contact page template in 4.7
+
+= 3.7 =
+* Update: Contact page template in 4.7
+
+= 3.6 =
+* Update: Few Small updates
+
+= 3.5 =
+* fix: Img src set for gallery.
+
+= 3.4 =
+* fix: Img src set for gallery.
+
+= 3.3 =
+* Add: Img src set for gallery.
 
 = 3.2 =
 * Add: filter for portfolio-type slug.

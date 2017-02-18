@@ -3,8 +3,8 @@
  * @package   DisplayFeaturedImageGenesis
  * @author    Robin Cornett <hello@robincornett.com>
  * @license   GPL-2.0+
- * @link      http://robincornett.com
- * @copyright 2014-2015 Robin Cornett Creative, LLC
+ * @link      https://robincornett.com
+ * @copyright 2014-2016 Robin Cornett Creative, LLC
  */
 
 class Display_Featured_Image_Genesis_RSS {
@@ -17,14 +17,11 @@ class Display_Featured_Image_Genesis_RSS {
 	 */
 	public function maybe_do_feed() {
 
-		$settings       = new Display_Featured_Image_Genesis_Settings();
-		$displaysetting = $settings->get_display_setting();
+		$displaysetting = displayfeaturedimagegenesis_get_setting();
 		$feed_image     = $displaysetting['feed_image'];
-		$post_types     = array();
-		$skipped_types  = apply_filters( 'display_featured_image_genesis_skipped_posttypes', $post_types );
 
 		// if the user isn't sending images to the feed, we're done
-		if ( ! $feed_image || ( in_array( get_post_type(), $skipped_types ) ) ) {
+		if ( ! $feed_image || Display_Featured_Image_Genesis_Common::is_in_array( 'skipped_posttypes' ) ) {
 			return;
 		}
 
@@ -87,7 +84,10 @@ class Display_Featured_Image_Genesis_RSS {
 		}
 
 		// reset size to large so we don't send huge files to the feed
-		$size = 'large';
+		$size  = 'large';
+		$align = '';
+		$style = 'display:block;margin:10px auto;';
+		$class = 'rss-featured-image';
 		if ( class_exists( 'SendImagesRSS' ) ) {
 			// if the user is using Send Images to RSS, send the right images to the right feeds
 			if ( ! $rss_setting['simplify_feed'] && ( ( $rss_setting['alternate_feed'] && is_feed( 'email' ) ) || ! $rss_setting['alternate_feed'] ) ) {
@@ -95,10 +95,6 @@ class Display_Featured_Image_Genesis_RSS {
 				$class = 'rss-mailchimp';
 			}
 		}
-
-		$align = '';
-		$style = 'display:block;margin:10px auto;';
-		$class = 'rss-featured-image';
 
 		// if the feed output is descriptions only, change image size to thumbnail with small alignment
 		if ( '1' === $rss_option ) {
@@ -118,10 +114,8 @@ class Display_Featured_Image_Genesis_RSS {
 				'class' => $class,
 			)
 		);
-		$image = apply_filters( 'display_featured_image_genesis_modify_rss_image', $image );
+		$image = apply_filters( 'display_featured_image_genesis_modify_rss_image', $image, $align, $style, $class );
 
 		return $image . $content;
-
 	}
-
 }

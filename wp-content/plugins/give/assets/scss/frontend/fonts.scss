@@ -1,10 +1,10 @@
 /**
  * Give Frontend Fonts SCSS
  *
- * @description: Fonts are from icomoon and the src paths need to be relative to template directory
+ * Fonts are from icomoon and the src paths need to be relative to template directory.
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 @font-face {
@@ -12,7 +12,6 @@
   src: url('../assets/fonts/icomoon.eot?kdnr3d');
   src: url('../assets/fonts/icomoon.eot?kdnr3d#iefix') format('embedded-opentype'),
   url('../assets/fonts/icomoon.woff?kdnr3d') format('woff'),
-  url('../assets/fonts/icomoon.ttf?kdnr3d') format('truetype'),
   url('../assets/fonts/icomoon.svg?kdnr3d#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
@@ -27,7 +26,7 @@
   text-transform: none;
   line-height: 1;
 
-  /* Better Font Rendering =========== */
+  // Better Font Rendering
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -89,32 +88,33 @@
   content: "\e800";
 }
 
+// --------------------------
 // Spinning Icons
 // --------------------------
 
 .fa-spin {
-  -webkit-animation: fa-spin 2s infinite linear;
-  animation: fa-spin 2s infinite linear;
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear;
 }
 
-@-webkit-keyframes fa-spin {
+@-webkit-keyframes spin {
   0% {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-	-webkit-transform: rotate(359deg);
-	transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }
 
-@keyframes fa-spin {
+@keyframes spin {
   0% {
-	-webkit-transform: rotate(0deg);
-	transform: rotate(0deg);
+    -webkit-transform: rotate(0deg);
+    transform: rotate(0deg);
   }
   100% {
-	-webkit-transform: rotate(359deg);
-	transform: rotate(359deg);
+    -webkit-transform: rotate(359deg);
+    transform: rotate(359deg);
   }
 }

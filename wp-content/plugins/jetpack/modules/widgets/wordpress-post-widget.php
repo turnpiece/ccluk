@@ -145,8 +145,13 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 			apply_filters( 'jetpack_widget_name', __( 'Display WordPress Posts', 'jetpack' ) ),
 			array(
 				'description' => __( 'Displays a list of recent posts from another WordPress.com or Jetpack-enabled blog.', 'jetpack' ),
+				'customize_selective_refresh' => true,
 			)
 		);
+
+		if ( is_customize_preview() ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		}
 	}
 
 	/**
@@ -264,7 +269,7 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 		if ( isset( $parsed_data->error ) ) {
 			return new WP_Error(
 				'remote_error',
-				__( 'We cannot display information for this blog.', 'jetpack' ),
+				__( 'It looks like the WordPress site URL is incorrectly configured. Please check it in your widget settings.', 'jetpack' ),
 				$parsed_data->error
 			);
 		}
@@ -597,21 +602,22 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 			return false;
 		}
 
-		/**
-		 * If Jetpack is not active or in development mode, we don't want to update widget data.
-		 */
-		if ( ! Jetpack::is_active() && ! Jetpack::is_development_mode() ) {
-			return false;
+		if ( ! defined( 'IS_WPCOM' ) || ! IS_WPCOM ) {
+			/**
+			 * If Jetpack is not active or in development mode, we don't want to update widget data.
+			 */
+			if ( ! Jetpack::is_active() && ! Jetpack::is_development_mode() ) {
+				return false;
+			}
+
+			/**
+			 * If Extra Sidebar Widgets module is not active, we don't need to update widget data.
+			 */
+			if ( ! Jetpack::is_module_active( 'widgets' ) ) {
+				return false;
+			}
 		}
-
-		/**
-		 * If Extra Sidebar Widgets module is not active, we don't need to update widget data.
-		 */
-		if ( ! Jetpack::is_module_active( 'widgets' ) ) {
-			return false;
-		}
-
-
+		
 		/**
 		 * If none of the above checks failed, then we definitely want to update widget data.
 		 */
@@ -722,13 +728,24 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
+		/** This action is documented in modules/widgets/gravatar-profile.php */
+		do_action( 'jetpack_stats_extra', 'widget_view', 'display_posts' );
 
-		/** This filter is documented in core/src/wp-includes/default-widgets.php */
-		$title = apply_filters( 'widget_title', $instance['title'] );
-
-		wp_enqueue_style( 'jetpack_display_posts_widget', plugins_url( 'wordpress-post-widget/style.css', __FILE__ ) );
+		// Enqueue front end assets.
+		$this->enqueue_scripts();
 
 		echo $args['before_widget'];
+
+		if ( empty( $instance['url'] ) ) {
+			if ( current_user_can( 'manage_options' ) ) {
+				echo '<p>';
+				/* Translators: the "Blog URL" field mentioned is the input field labeled as such in the widget form. */
+				esc_html_e( 'The Blog URL is not properly setup in the widget.', 'jetpack' );
+				echo '</p>';
+			}
+			echo $args['after_widget'];
+			return;
+		}
 
 		$data = $this->get_blog_data( $instance['url'] );
 
@@ -742,8 +759,10 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 
 		$site_info = $data['site_info']['data'];
 
-		if ( ! empty( $title ) ) {
-			echo $args['before_title'] . esc_html( $title . ': ' . $site_info->name ) . $args['after_title'];
+		if ( ! empty( $instance['title'] ) ) {
+			/** This filter is documented in core/src/wp-includes/default-widgets.php */
+			$instance['title'] = apply_filters( 'widget_title', $instance['title'] );
+			echo $args['before_title'] . esc_html( $instance['title'] . ': ' . $site_info->name ) . $args['after_title'];
 		}
 		else {
 			echo $args['before_title'] . esc_html( $site_info->name ) . $args['after_title'];
@@ -790,7 +809,7 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 				 * @param array $args Array of Photon Parameters.
 				 */
 				$image_params = apply_filters( 'jetpack_display_posts_widget_image_params', array() );
-				echo '<a title="' . esc_attr( $post_title ) . '" href="' . esc_url( $single_post['url'] ) . '"><img src="' . jetpack_photon_url( $featured_image, $image_params ) . '" alt="' . esc_attr( $post_title ) . '"/></a>';
+				echo '<a title="' . esc_attr( $post_title ) . '" href="' . esc_url( $single_post['url'] ) . '"' . $target . '><img src="' . jetpack_photon_url( $featured_image, $image_params ) . '" alt="' . esc_attr( $post_title ) . '"/></a>';
 			}
 
 			if ( $instance['show_excerpts'] == true ) {
@@ -882,6 +901,15 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 	}
 
 	/**
+	 * Enqueue CSS and JavaScript.
+	 *
+	 * @since 4.0.0
+	 */
+	public function enqueue_scripts() {
+		wp_enqueue_style( 'jetpack_display_posts_widget', plugins_url( 'wordpress-post-widget/style.css', __FILE__ ) );
+	}
+
+	/**
 	 * Display the widget administration form.
 	 *
 	 * @param array $instance Widget instance configuration.
@@ -926,7 +954,12 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 				<?php _e( "Enter a WordPress.com or Jetpack WordPress site URL.", 'jetpack' ); ?>
 			</i>
 			<?php
-			if ( empty( $url ) ) {
+			/**
+			 * Show an error if the URL field was left empty.
+			 *
+			 * The error is shown only when the widget was already saved.
+			 */
+			if ( empty( $url ) && ! preg_match( '/__i__|%i%/', $this->id ) ) {
 				?>
 				<br />
 				<i class="error-message"><?php echo __( 'You must specify a valid blog URL!', 'jetpack' ); ?></i>
@@ -968,10 +1001,10 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 			 * Prepare the error messages.
 			 */
 
-			$what_broke_down = '';
+			$where_message = '';
 			switch ( $update_errors['where'] ) {
 				case 'posts':
-					$what_broke_down .= __( 'posts list', 'jetpack' );
+					$where_message .= __( 'An error occurred while downloading blog posts list', 'jetpack' );
 					break;
 
 				/**
@@ -981,19 +1014,13 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 				 */
 				case 'site_info':
 				default:
-					$what_broke_down .= __( 'information', 'jetpack' );
+					$where_message .= __( 'An error occurred while downloading blog information', 'jetpack' );
 					break;
 			}
 
-			$where_message = sprintf(
-				__( 'An error occurred while downloading blog %s', 'jetpack' ),
-				$what_broke_down
-			);
-
-
 			?>
 			<p class="error-message">
-				<?php echo $where_message; ?>:
+				<?php echo esc_html( $where_message ); ?>:
 				<br />
 				<i>
 					<?php echo esc_html( $update_errors['message'] ); ?>
@@ -1005,7 +1032,7 @@ class Jetpack_Display_Posts_Widget extends WP_Widget {
 						?>
 						<br />
 						<br />
-						<?php echo __( 'Detailed information', 'jetpack' ); ?>:
+						<?php esc_html_e( 'Detailed information', 'jetpack' ); ?>:
 						<br />
 						<?php echo esc_html( $update_errors['debug'] ); ?>
 						<?php

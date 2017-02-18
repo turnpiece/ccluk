@@ -1,10 +1,10 @@
 /*!
  * Give Admin SCSS/CSS
  *
- * @description: The Main SCSS file for admin styles which is compiled and minified via Gulp taskrunner
+ * @description: The Main SCSS file for ADMIN styles which is compiled and minified via Gulp taskrunner
  * @package:     Give
  * @subpackage:  SCSS/Admin
- * @copyright:   Copyright (c) 2015, WordImpress
+ * @copyright:   Copyright (c) 2016, WordImpress
  * @license:     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /**
@@ -12,8 +12,7 @@
  */
 .give-clearfix {
   *zoom: 1; }
-  .give-clearfix:before,
-  .give-clearfix:after {
+  .give-clearfix:before, .give-clearfix:after {
     content: " ";
     display: table; }
   .give-clearfix:after {
@@ -27,18 +26,36 @@
  * CSS3 Easing
  */
 .give-item-label {
-  padding: 0.2em 0.6em 0.3em;
-  font-size: 85%;
-  font-weight: 700;
+  padding: .2em .4em .3em;
+  font-size: 11px;
   line-height: 1;
   color: #fff;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em; }
+  .give-item-label:hover {
+    color: #fff;
+    text-decoration: none; }
 
-.give-item-label-gray {
+.give-item-label-gray, #give-payments-filter .give-payment-id {
   background-color: #929292; }
+
+.give-item-label-orange {
+  background-color: #ffba00; }
+
+.give-item-label {
+  padding: .2em .4em .3em;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em; }
+  .give-item-label:hover {
+    color: #fff;
+    text-decoration: none; }
 
 /**
  * Give CSS Variables
@@ -112,6 +129,8 @@
   direction: ltr; }
 
 .qtip-icon, .qtip-icon .ui-icon {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   text-decoration: none; }
 
@@ -121,7 +140,7 @@
   line-height: 14px;
   text-align: center;
   text-indent: 0;
-  font: normal bold 10px/13px Tahoma, sans-serif;
+  font: normal bold 10px/13px Tahoma,sans-serif;
   color: inherit;
   background: transparent none no-repeat -100em -100em; }
 
@@ -224,26 +243,38 @@
   background-position: -2px 0; }
 
 .qtip-shadow {
+  -webkit-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
+  -moz-box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15);
   box-shadow: 1px 1px 3px 1px rgba(0, 0, 0, 0.15); }
 
 /* Add rounded corners to your tooltips in: FF3+, Chrome 2+, Opera 10.6+, IE9+, Safari 2+ */
 .qtip-rounded,
 .qtip-tipsy,
 .qtip-bootstrap {
+  -moz-border-radius: 5px;
+  -webkit-border-radius: 5px;
   border-radius: 5px; }
 
 .qtip-rounded .qtip-titlebar {
+  -moz-border-radius: 4px 4px 0 0;
+  -webkit-border-radius: 4px 4px 0 0;
   border-radius: 4px 4px 0 0; }
 
 /* Youtube tooltip style */
 .qtip-youtube {
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
+  -webkit-box-shadow: 0 0 3px #333;
+  -moz-box-shadow: 0 0 3px #333;
   box-shadow: 0 0 3px #333;
   color: white;
   border: 0 solid transparent;
   background: #4A4A4A;
   background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #4A4A4A), color-stop(100%, black));
   background-image: -webkit-linear-gradient(top, #4A4A4A 0, black 100%);
+  background-image: -moz-linear-gradient(top, #4A4A4A 0, black 100%);
+  background-image: -ms-linear-gradient(top, #4A4A4A 0, black 100%);
   background-image: -o-linear-gradient(top, #4A4A4A 0, black 100%); }
 
 .qtip-youtube .qtip-titlebar {
@@ -267,11 +298,17 @@
   background: #232323;
   background: rgba(0, 0, 0, 0.7);
   background-image: -webkit-gradient(linear, left top, left bottom, from(#717171), to(#232323));
+  background-image: -moz-linear-gradient(top, #717171, #232323);
   background-image: -webkit-linear-gradient(top, #717171, #232323);
+  background-image: -ms-linear-gradient(top, #717171, #232323);
   background-image: -o-linear-gradient(top, #717171, #232323);
   border: 2px solid #ddd;
   border: 2px solid #f1f1f1;
+  -moz-border-radius: 2px;
+  -webkit-border-radius: 2px;
   border-radius: 2px;
+  -webkit-box-shadow: 0 0 12px #333;
+  -moz-box-shadow: 0 0 12px #333;
   box-shadow: 0 0 12px #333; }
 
 /* IE Specific */
@@ -298,6 +335,8 @@
 
 /* Cluetip style */
 .qtip-cluetip {
+  -webkit-box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
+  -moz-box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
   box-shadow: 4px 4px 5px rgba(0, 0, 0, 0.4);
   background-color: #D9D9C2;
   color: #111;
@@ -344,6 +383,8 @@
 /* Tipped style */
 .qtip-tipped {
   border: 3px solid #959FA9;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
   border-radius: 3px;
   background-color: #F9F9F9;
   color: #454545;
@@ -356,6 +397,8 @@
   background: #3A79B8;
   background-image: -webkit-gradient(linear, left top, left bottom, from(#3A79B8), to(#2E629D));
   background-image: -webkit-linear-gradient(top, #3A79B8, #2E629D);
+  background-image: -moz-linear-gradient(top, #3A79B8, #2E629D);
+  background-image: -ms-linear-gradient(top, #3A79B8, #2E629D);
   background-image: -o-linear-gradient(top, #3A79B8, #2E629D);
   filter: progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D);
   -ms-filter: "progid:DXImageTransform.Microsoft.gradient(startColorstr=#3A79B8,endColorstr=#2E629D)"; }
@@ -384,8 +427,14 @@
   background-color: #ffffff;
   border: 1px solid #ccc;
   border: 1px solid rgba(0, 0, 0, 0.2);
+  -webkit-border-radius: 6px;
+  -moz-border-radius: 6px;
   border-radius: 6px;
+  -webkit-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -moz-box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
   box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+  -webkit-background-clip: padding-box;
+  -moz-background-clip: padding;
   background-clip: padding-box; }
 
 .qtip-bootstrap .qtip-titlebar {
@@ -397,6 +446,8 @@
   line-height: 18px;
   background-color: #f7f7f7;
   border-bottom: 1px solid #ebebeb;
+  -webkit-border-radius: 5px 5px 0 0;
+  -moz-border-radius: 5px 5px 0 0;
   border-radius: 5px 5px 0 0; }
 
 .qtip-bootstrap .qtip-titlebar .qtip-close {
@@ -460,8 +511,7 @@
 /* IE9 fix - removes all filters */
 .qtip:not(.ie9haxors) div.qtip-content,
 .qtip:not(.ie9haxors) div.qtip-titlebar {
-  -webkit-filter: none;
-          filter: none;
+  filter: none;
   -ms-filter: none; }
 
 .qtip .qtip-tip {
@@ -520,16 +570,16 @@ x:-o-prefocus, .qtip .qtip-tip {
 /**
  * Give Frontend Fonts SCSS
  *
- * @description: Fonts are from icomoon and the src paths need to be relative to template directory
+ * Fonts are from icomoon and the src paths need to be relative to template directory.
  * @package     Give
  * @subpackage  SCSS/Frontend
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 @font-face {
   font-family: 'give-icomoon';
   src: url("../assets/fonts/icomoon.eot?kdnr3d");
-  src: url("../assets/fonts/icomoon.eot?kdnr3d#iefix") format("embedded-opentype"), url("../assets/fonts/icomoon.woff?kdnr3d") format("woff"), url("../assets/fonts/icomoon.ttf?kdnr3d") format("truetype"), url("../assets/fonts/icomoon.svg?kdnr3d#icomoon") format("svg");
+  src: url("../assets/fonts/icomoon.eot?kdnr3d#iefix") format("embedded-opentype"), url("../assets/fonts/icomoon.woff?kdnr3d") format("woff"), url("../assets/fonts/icomoon.svg?kdnr3d#icomoon") format("svg");
   font-weight: normal;
   font-style: normal; }
 
@@ -541,7 +591,6 @@ x:-o-prefocus, .qtip .qtip-tip {
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale; }
 
@@ -589,16 +638,15 @@ x:-o-prefocus, .qtip .qtip-tip {
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   content: "\e800"; }
 
 .fa-spin {
-  -webkit-animation: fa-spin 2s infinite linear;
-  animation: fa-spin 2s infinite linear; }
+  -webkit-animation: spin 1000ms infinite linear;
+  animation: spin 1000ms infinite linear; }
 
-@-webkit-keyframes fa-spin {
+@-webkit-keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
@@ -606,37 +654,90 @@ x:-o-prefocus, .qtip .qtip-tip {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
 
-@keyframes fa-spin {
+@keyframes spin {
   0% {
     -webkit-transform: rotate(0deg);
     transform: rotate(0deg); }
   100% {
     -webkit-transform: rotate(359deg);
     transform: rotate(359deg); } }
+
+@font-face {
+  font-family: 'give-icomoon';
+  font-weight: normal;
+  font-style: normal; }
+
+.give-metabox-tabs li a:before {
+  font-family: 'give-icomoon';
+  src: url("../assets/fonts/icomoon.eot?kdnr3d");
+  src: url("../assets/fonts/icomoon.eot?kdnr3d#iefix") format("embedded-opentype"), url("../assets/fonts/icomoon.woff?kdnr3d") format("woff"), url("../assets/fonts/icomoon.svg?kdnr3d#icomoon") format("svg");
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 12px;
+  vertical-align: top;
+  line-height: 20px;
+  margin: 0 5px 0 0;
+  content: "\e903"; }
+
+.give-metabox-tabs li.form_field_options_tab > a:before {
+  content: "\e604"; }
+
+.give-metabox-tabs li.donation_goal_options_tab > a:before {
+  content: "\e901"; }
+
+.give-metabox-tabs li.form_display_options_tab > a:before {
+  content: "\e90c"; }
+
+.give-metabox-tabs li.form_content_options_tab > a:before {
+  content: "\e902"; }
+
+.give-metabox-tabs li.form_terms_options_tab > a:before {
+  position: relative;
+  top: 1px;
+  content: "\e900"; }
+
+.give-metabox-tabs li.offline_donations_options_tab > a:before {
+  content: "\e8df"; }
 
 /**
  * Give Forms SCSS
  *
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /*------------------------------------
 Forms CPT
 --------------------------------------*/
 /* Hide conditional fields */
-.cmb2-id--give-set-price, .cmb2-id--give-levels-header, .cmb2-id--give-levels-header + .cmb-repeat-group-wrap, .cmb2-id--give-display-style, .post-type-give_forms .tablenav #post-query-submit, .give-hidden, .cmb2-id--give-form-content, .cmb2-id--give-reveal-label, .cmb2-id--give-custom-amount-text, .cmb2-id--give-offline-checkout-notes {
+.cmb2-id--give-set-price,
+.cmb2-id--give-levels-header,
+.cmb2-id--give-levels-header + .cmb-repeat-group-wrap,
+.cmb2-id--give-display-style,
+.post-type-give_forms .tablenav #post-query-submit,
+.give-hidden,
+.cmb2-id--give-form-content,
+.cmb2-id--give-reveal-label,
+.cmb2-id--give-custom-amount-minimum,
+.cmb2-id--give-custom-amount-text,
+.cmb2-id--give-offline-checkout-notes,
+.cmb-type-levels-id,
+#_give_donation_levels_repeat .cmb-group-title,
+#_give_donation_levels_repeat .cmb-row > .cmb-remove-group-row,
+#_give_donation_levels_repeat .cmb-row > .handlediv {
   display: none; }
 
 /* Donation Levels Repeating Field */
 #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row .cmb2-radio-list label {
   font-size: 12px; }
 
-#_give_donation_levels_repeat .cmb-group-title, #_give_donation_levels_repeat .cmb-row > .cmb-remove-group-row, #_give_donation_levels_repeat .cmb-row > .handlediv {
-  display: none; }
-
-/* Table Rows */
 div.cmb-type-levels-repeater-header + div.cmb-repeat-group-wrap {
   padding: 0 !important;
   margin: 0 !important;
@@ -662,10 +763,12 @@ div.cmb-type-levels-repeater-header + div.cmb-repeat-group-wrap {
         vertical-align: middle;
         padding: 10px 15px;
         border-right: 1px solid #e9e9e9; }
+        .cmb2-id--give-levels-header .table-container > .table-row > .table-cell.col-id {
+          display: none; }
 
 #_give_donation_levels_repeat {
   background: #F7F7F7;
-  padding: 0 12px 20px;
+  padding: 0 1px 20px 12px;
   box-sizing: border-box; }
   #_give_donation_levels_repeat .cmb-row, #_give_donation_levels_repeat .inside {
     margin: 0; }
@@ -690,56 +793,54 @@ div.cmb-type-levels-repeater-header + div.cmb-repeat-group-wrap {
   margin-left: 0; }
 
 .give-money-symbol {
-  border: 1px solid #e9e9e9;
+  border: 1px solid #DDD;
   background: #FCFCFC;
   margin: 0;
   font-size: 14px;
   padding: 5px 8px; }
 
 .give-money-symbol-before {
-  border-right: 0; }
+  border-right: 0;
+  margin-right: -4px; }
 
 .give-money-symbol-after {
-  border-left: 0; }
+  margin-left: -1px; }
 
-p.give-level-id {
-  border-radius: 50%;
-  border: 1px solid #e9e9e9;
-  background: #FCFCFC;
-  padding: 2px 7px;
-  font-size: 11px; }
+.give_options_panel input[type="text"] {
+  padding: 5px;
+  width: 100%; }
+
+input.give-text_small,
+input.give-text-small {
+  width: 100px !important; }
+
+input.give-text-medium,
+input.give-text_medium {
+  width: 200px !important; }
 
 .give-underline {
   text-decoration: underline; }
-
-#poststuff .give-subfield {
-  background: #FAFAFA; }
-  #poststuff .give-subfield .cmb-th label {
-    padding-left: 16px; }
-  #poststuff .give-subfield .cmb-td {
-    padding-right: 10px;
-    box-sizing: border-box; }
 
 .postbox-container .cmb-row {
   margin: 0; }
   .postbox-container .cmb-row .cmb-th label {
     padding-left: 8px; }
 
-/* Smaller Resolution Desktops AND UP */
 @media only screen and (min-width: 851px) {
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row > .cmb-th {
-    display: none; }
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row > .cmb-td {
-    float: left;
-    width: 100%; }
   #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row {
     float: left;
-    border-bottom: none; }
+    border-bottom: none;
+    padding-right: 10px; }
+    #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row > .cmb-th {
+      display: none; }
+    #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-row > .cmb-td {
+      float: left;
+      width: 100%; }
   .cmb-type-give-default-radio-inline .cmb-td {
     margin-top: 5px; } }
 
 /* Smaller Resolution Desktops */
-@media only screen and (min-width: 851px) and (max-width: 1285px) {
+@media only screen and (min-width: 851px) and (max-width: 1201px) {
   #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-remove-field-row {
     width: 100%;
     padding-top: 0; }
@@ -747,28 +848,18 @@ p.give-level-id {
     width: 105px; }
   #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list input.cmb2-text-money {
     width: 65px; }
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-type-text {
-    width: 180px;
-    padding-right: 20px; }
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-type-radio-inline {
+  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list .give-multilevel-text-field {
+    width: 160px; }
+  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list .cmb-type-radio-inline {
     margin-left: 20px; }
-  .col-id {
-    width: 15px; }
-  p.give-level-id {
-    margin: 7px 15px 0 0; }
   .col-amount {
     width: 70px; }
   .col-text {
-    width: 165px; }
+    width: 140px; }
   .col-sort {
-    display: none !important; } }
-
-@media only screen and (min-width: 1000px) {
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-type-text {
-    width: 220px;
-    padding-right: 20px; }
-  .col-text {
-    width: 205px; } }
+    display: none !important; }
+  .give-money-field {
+    width: 55px; } }
 
 @media only screen and (min-width: 1201px) {
   #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-remove-field-row {
@@ -777,37 +868,19 @@ p.give-level-id {
     padding-right: 20px; }
   #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-remove-field-row.cmb-row {
     padding-right: 0; }
-  #_give_donation_levels_repeat .regular-text {
-    width: 100%; }
-  .col-id {
-    width: 20px; }
-  p.give-level-id {
-    margin: 6px 0 0; }
   .col-amount {
-    width: 85px; }
+    width: 93px; }
   .col-text {
     width: 195px; }
   .col-sort {
-    width: 100px; } }
+    width: 100px; }
+  .give-multilevel-text-field {
+    width: 205px; } }
 
-@media only screen and (min-width: 1375px) {
-  .col-text {
-    width: 270px; }
-  #_give_donation_levels_repeat > .cmb-repeatable-grouping .cmb-field-list > .cmb-type-text {
-    width: 290px; } }
-
-/* Small Resolution Repeater */
 @media only screen and (max-width: 850px) {
   div.cmb-type-levels-repeater-header {
-    display: none !important; }
-  p.give-level-id {
-    float: left;
-    font-weight: bold;
-    margin-top: 5px; } }
+    display: none !important; } }
 
-/*-------------------------------------
-Publish Metabox
--------------------------------------*/
 /*Shortcode Input */
 .shortcode-wrap {
   margin: 1px 14px 12px 11px; }
@@ -819,9 +892,6 @@ Publish Metabox
     margin: 0;
     width: 100%; }
 
-/*-------------------------------------
-Content Options
--------------------------------------*/
 .cmb2-id--give-content-option,
 .cmb2-id--give-terms-option,
 .cmb2-id--give-offline-donation-enable-billing-fields-single,
@@ -867,22 +937,226 @@ ASIDE
 
 .cmb2-metabox-description {
   font-size: 13px;
-  line-height: 1.5; }
+  line-height: 1.5;
+  display: block; }
 
-/*-------------------------------------
-Tooltips
--------------------------------------*/
 .give-tooltip {
   margin: 0 3px;
   padding: 0;
   font-size: 14px;
-  -webkit-transition: 0.2s all linear;
-          transition: 0.2s all linear;
+  -moz-transition: 0.2s all linear;
+  -o-transition: 0.2s all linear;
+  transition: 0.2s all linear;
   color: rgba(51, 51, 51, 0.5);
   position: relative;
   top: 1px; }
   .give-tooltip:hover {
     color: #333; }
+
+#give-metabox-form-data .inside {
+  margin: 0;
+  padding: 0; }
+
+#give-metabox-form-data .give-metabox-panel-wrap {
+  background: #fff;
+  overflow: hidden; }
+
+#give-metabox-form-data .give_options_panel {
+  padding-left: 170px; }
+  #give-metabox-form-data .give_options_panel .give-field-wrap {
+    padding: 1em 20px 1em 162px !important;
+    margin: 0;
+    border-bottom: 1px solid #eee; }
+    #give-metabox-form-data .give_options_panel .give-field-wrap > label, #give-metabox-form-data .give_options_panel .give-field-wrap > span.give-field-label {
+      float: left;
+      width: 135px;
+      padding: 0;
+      margin: 2px 0 0 -150px;
+      line-height: 18px;
+      font-size: 12px;
+      font-weight: 400; }
+    #give-metabox-form-data .give_options_panel .give-field-wrap .give-field-description {
+      color: #aaaaaa;
+      font-size: 12px;
+      line-height: 18px;
+      display: block;
+      padding-top: 10px;
+      font-style: italic; }
+    #give-metabox-form-data .give_options_panel .give-field-wrap ul {
+      margin: 0; }
+    #give-metabox-form-data .give_options_panel .give-field-wrap .mce-container iframe, #give-metabox-form-data .give_options_panel .give-field-wrap textarea {
+      min-height: 250px !important; }
+  #give-metabox-form-data .give_options_panel .give-field-wrap:last-child {
+    border-bottom: 0; }
+  #give-metabox-form-data .give_options_panel textarea.give-field {
+    width: 100%; }
+  #give-metabox-form-data .give_options_panel .give-field-wrap:hover .give-field-row-actions {
+    display: block; }
+  #give-metabox-form-data .give_options_panel .give-field-wrap:last-child {
+    border-bottom: 0; }
+  #give-metabox-form-data .give_options_panel .give-inline-radio-fields li {
+    display: inline-block;
+    margin-right: 15px; }
+  #give-metabox-form-data .give_options_panel .give-repeatable-field-section {
+    padding: 10px;
+    background: #f5f5f5; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-repeatable-fields-section-wrapper {
+      width: 100%;
+      background-color: white;
+      border-collapse: collapse; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row {
+      border-bottom: 15px solid #f5f5f5;
+      background-color: white; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-template {
+      display: none; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row:last-child {
+      border-bottom: 10px solid #f5f5f5; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-column {
+      padding: 0; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-remove {
+      float: right;
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      display: block;
+      text-align: center;
+      line-height: 34px;
+      font-size: 21px;
+      font-weight: 300;
+      cursor: pointer; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-remove:hover {
+      background-color: red;
+      color: white;
+      width: 30px;
+      height: 30px;
+      border-radius: 30px;
+      margin-top: 3px;
+      line-height: 28px; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row-head {
+      border-bottom: 1px solid #eee;
+      cursor: move; }
+      #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row-head h2 {
+        text-align: left !important; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row.closed .toggle-indicator:before {
+      content: "\f140"; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-add-repeater-field-section-row-wrap {
+      background-color: #f5f5f5; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-add-repeater-field-section-row {
+      margin: 5px 5px; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-field-wrap:last-child {
+      border-bottom: 1px solid #eee; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-ui-placeholder-state-highlight {
+      background-color: #68bb6c; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-repeater-field-name {
+      border: 0 !important;
+      padding: 0 !important; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-repeater-field-description {
+      color: #aaaaaa;
+      font-size: 12px;
+      line-height: 18px;
+      display: block;
+      padding-bottom: 10px;
+      font-style: italic; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .ui-sortable-helper {
+      display: table !important; }
+    #give-metabox-form-data .give_options_panel .give-repeatable-field-section .give-row.ui-sortable-helper {
+      border-bottom: 0; }
+
+#give-metabox-form-data .give-metabox-tabs {
+  margin: 0;
+  min-width: 170px;
+  float: left;
+  line-height: 1em;
+  padding: 0 0 10px;
+  position: relative;
+  background-color: #fafafa;
+  border-right: 1px solid #eee;
+  box-sizing: border-box; }
+  #give-metabox-form-data .give-metabox-tabs:after {
+    content: "";
+    display: block;
+    width: 100%;
+    height: 9999em;
+    position: absolute;
+    bottom: -9999em;
+    left: 0;
+    background-color: #fafafa;
+    border-right: 1px solid #eee; }
+  #give-metabox-form-data .give-metabox-tabs li {
+    margin: 0;
+    padding: 0;
+    display: block;
+    position: relative; }
+    #give-metabox-form-data .give-metabox-tabs li a {
+      margin: 0;
+      padding: 10px;
+      display: block;
+      box-shadow: none;
+      text-decoration: none;
+      line-height: 20px !important;
+      border-bottom: 1px solid #eee;
+      overflow: hidden; }
+      #give-metabox-form-data .give-metabox-tabs li a span {
+        width: 122px;
+        display: inline-block; }
+  #give-metabox-form-data .give-metabox-tabs .give-metabox-sub-tabs li {
+    background-color: #f1f1f1; }
+    #give-metabox-form-data .give-metabox-tabs .give-metabox-sub-tabs li a {
+      border-bottom-color: #e5e5e5; }
+  #give-metabox-form-data .give-metabox-tabs li.active > a {
+    color: #555;
+    position: relative;
+    background-color: #eee; }
+  #give-metabox-form-data .give-metabox-tabs li.has-sub-fields.active > a {
+    background-color: #ddd; }
+  #give-metabox-form-data .give-metabox-tabs li.has-sub-fields:not(.active):hover ul.give-metabox-sub-tabs {
+    display: block;
+    position: absolute;
+    bottom: 0;
+    left: 170px;
+    width: 170px;
+    max-height: 250px;
+    overflow-y: scroll; }
+
+@media only screen and (min-width: 851px) and (max-width: 1025px), (max-width: 550px) {
+  #give-metabox-form-data ul.give-metabox-tabs {
+    min-width: 40px; }
+    #give-metabox-form-data ul.give-metabox-tabs li > a {
+      text-align: center; }
+      #give-metabox-form-data ul.give-metabox-tabs li > a:before {
+        margin-right: 0;
+        font-size: 15px; }
+      #give-metabox-form-data ul.give-metabox-tabs li > a span {
+        display: none; }
+  #give-metabox-form-data .give_options_panel {
+    padding-left: 40px; } }
+
+#give-export-payments .give_forms_categories,
+#give-export-payments .give_forms_tags {
+  min-width: 250px;
+  margin: 0 0 10px 0;
+  display: block; }
+  #give-export-payments .give_forms_categories input,
+  #give-export-payments .give_forms_tags input {
+    color: #999; }
+
+#give-export-payments div.chosen-container:first-of-type {
+  margin-top: 10px; }
+
+/*-------------------------------------
+Doc Links
+-------------------------------------*/
+.give-docs-link {
+  text-align: right;
+  margin-right: 15px; }
+  .give-docs-link a {
+    color: #999;
+    text-decoration: none;
+    font-style: italic; }
+    .give-docs-link a:hover {
+      color: #0073aa; }
+    .give-docs-link a span {
+      font-style: normal; }
 
 /**
  * Give Add-ons SCSS
@@ -890,7 +1164,7 @@ Tooltips
  * @description Add-on Styles
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 .type-download {
@@ -906,6 +1180,7 @@ Tooltips
   min-height: 365px;
   overflow: hidden;
   background: #f5f5f5;
+  -webkit-box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.2), inset 0 -1px 0 rgba(0, 0, 0, 0.1);
   -webkit-transition-property: border, background, color;
   transition-property: border, background, color;
@@ -921,8 +1196,7 @@ Tooltips
   .type-download .addon-content {
     *zoom: 1;
     padding: 15px 20px; }
-    .type-download .addon-content:before,
-    .type-download .addon-content:after {
+    .type-download .addon-content:before, .type-download .addon-content:after {
       content: " ";
       display: table; }
     .type-download .addon-content:after {
@@ -956,12 +1230,17 @@ Tooltips
  * @description Payment History Styles
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 #give-dashboard-widgets-wrap .inside {
   padding-top: 0;
-  padding-bottom: 0; }
+  padding-bottom: 0;
+  /* counteract extra padding in Income Report graph */ }
+  .give_forms_page_give-reports #give-dashboard-widgets-wrap .inside {
+    padding-left: 0; }
+  #give-dashboard-widgets-wrap .inside #give-graphs-filter {
+    float: none; }
 
 #give-dashboard-widgets-wrap .postbox {
   margin-bottom: 10px; }
@@ -969,37 +1248,28 @@ Tooltips
 #give-dashboard-widgets-wrap table.reports-table {
   clear: none; }
 
-#give-dashboard-widgets-wrap #give-graphs-filter .tablenav {
-  margin: 0; }
-  #give-dashboard-widgets-wrap #give-graphs-filter .tablenav .actions {
-    padding: 0; }
-
 #give-dashboard-widgets-wrap #give-date-range-options {
-  clear: both;
-  overflow: hidden;
-  padding: 8px 0; }
+  float: left; }
   #give-dashboard-widgets-wrap #give-date-range-options > span {
     float: left;
     line-height: 30px;
     font-style: italic;
     padding: 0 5px 0 0; }
-  #give-dashboard-widgets-wrap #give-date-range-options #give-graphs-year-end {
-    margin-right: 0; }
 
-#give-dashboard-widgets-wrap a.give-refresh-reports-button {
-  display: inline-block;
-  clear: right;
-  margin: 8px 0 0; }
+#give-graphs-filter {
+  float: right; }
+  #give-graphs-filter .tablenav {
+    margin: 0 0 0 17px; }
+    #give-graphs-filter .tablenav .actions {
+      padding: 0; }
 
-/* Global Graph Styles
--------------------------------------------------------------- */
 .give-graph .y1Axis {
   color: #66bb6a !important; }
 
 .give-graph .y2Axis {
   color: #546e7a !important; }
 
-body.give_forms_page_give-reports h1.nav-tab-wrapper, body.give_forms_page_give-payment-history h1.nav-tab-wrapper {
+body.give_forms_page_give-reports h1.nav-tab-wrapper, body.give_forms_page_give-reports h2.nav-tab-wrapper, body.give_forms_page_give-payment-history h1.nav-tab-wrapper, body.give_forms_page_give-payment-history h2.nav-tab-wrapper {
   margin-bottom: 10px; }
 
 body.give_forms_page_give-reports .actions, body.give_forms_page_give-payment-history .actions {
@@ -1053,24 +1323,103 @@ body.give_forms_page_give-reports .widefat tbody td, body.give_forms_page_give-r
   padding-top: 12px;
   padding-bottom: 12px; }
 
-/*---------------------
-Export Options Styles
----------------------------*/
 body.give_forms_page_give-reports table.export-options-table tbody td {
-  padding: 20px 12px; }
+  padding: 20px 12px;
+  vertical-align: top; }
 
-/*---------------------
-Payment Methods
----------------------------*/
+body.give_forms_page_give-reports table.export-options-table .give-export-form {
+  position: relative; }
+  body.give_forms_page_give-reports table.export-options-table .give-export-form .notice-wrap {
+    background-color: transparent;
+    padding: 12px 12px 4px;
+    margin: 2px 0 -16px -11px;
+    overflow: auto; }
+    body.give_forms_page_give-reports table.export-options-table .give-export-form .notice-wrap .spinner {
+      margin: -2px -12px 8px 0; }
+
+body.give_forms_page_give-reports table.export-options-table span#give-start-wrap input, body.give_forms_page_give-reports table.export-options-table span#give-end-wrap input {
+  width: 100px; }
+
+#export-donor-options-wrap p {
+  padding: 20px 0 0;
+  margin: 0;
+  font-weight: bold; }
+
+#export-donor-options-wrap ul {
+  max-width: 900px;
+  overflow: hidden; }
+  #export-donor-options-wrap ul li {
+    margin: 0;
+    padding: 0 5px 5px 0;
+    box-sizing: border-box;
+    float: left;
+    width: 33%; }
+
+#give-tools-recount-form .notice-wrap {
+  position: relative;
+  min-height: 25px;
+  margin: 10px -12px -12px;
+  background: #EFEFEF;
+  padding: 10px 12px 12px;
+  border-top: 1px solid #E5E5E5; }
+  #give-tools-recount-form .notice-wrap .give-progress {
+    position: absolute;
+    top: 15px; }
+  #give-tools-recount-form .notice-wrap .spinner {
+    position: absolute;
+    right: 14px;
+    top: 13px;
+    margin: 0; }
+  #give-tools-recount-form .notice-wrap #give-batch-success {
+    margin-bottom: 6px; }
+
+.give-progress {
+  height: 15px;
+  width: 95%;
+  border-radius: 4px;
+  overflow: hidden; }
+  .give-progress > div {
+    height: 100%;
+    width: 0; }
+
+.admin-color-fresh .give-export-form .give-progress div, .give-export-form .give-progress div {
+  background: #0073aa; }
+
+.admin-color-light .give-export-form .give-progress div {
+  background: #888; }
+
+.admin-color-blue .give-export-form .give-progress div {
+  background: #096484; }
+
+.admin-color-coffee .give-export-form .give-progress div {
+  background: #c7a589; }
+
+.admin-color-ectoplasm .give-export-form .give-progress div {
+  background: #a3b745; }
+
+.admin-color-midnight .give-export-form .give-progress div {
+  background: #e14d43; }
+
+.admin-color-sunrise .give-export-form .give-progress div {
+  background: #dd823b; }
+
+.recount-stats-controls form {
+  display: inline; }
+
+.give-recount-stats-descriptions {
+  margin: 8px 0 0;
+  display: block; }
+  .give-recount-stats-descriptions span {
+    line-height: 24px;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: normal;
+    color: #aaa;
+    margin: 0;
+    display: none; }
+
 .gateways-report-tablenav .actions.bulkactions {
   padding-right: 0; }
-
-/*---------------------
-Table List Styles
----------------------------*/
-.widefat .column-name, .widefat .column-label {
-  font-size: 14px;
-  font-weight: bold; }
 
 table.give-table td {
   vertical-align: middle; }
@@ -1086,9 +1435,9 @@ table.give-table td.row-title p {
   color: #aaa;
   margin: 0; }
 
-/*-------------------------
-Logs
-----------------------------*/
+#give-graphs-filter > .tablenav {
+  height: auto; }
+
 #give-logs-filter .search-box {
   float: right; }
 
@@ -1103,26 +1452,50 @@ Logs
  * @description Displays when user activates the plugin
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
-*/
+ */
 .welcome-h1 {
   display: inline-block;
   margin-right: 15px !important; }
 
-.feature-section span.dashicons {
-  width: 16px;
-  height: 16px;
+.about-wrap h3 {
+  margin: 1.5em 0 .6em; }
+
+.about-wrap img {
+  border: none; }
+
+.give-badge {
+  padding-top: 150px;
+  height: 52px;
+  width: 185px;
+  color: #FFF;
+  font-weight: bold;
   font-size: 14px;
-  margin: 6px 0 0 0; }
+  text-align: center;
+  text-shadow: 0 1px 0 rgba(0, 0, 0, 0.8);
+  margin: 0 -5px;
+  position: absolute;
+  top: 0;
+  right: 0; }
 
-.feature-section .feature-section-item {
-  width: 48%;
-  float: left; }
+.introduction {
+  padding: 0 0 20px;
+  margin: 0 0 20px; }
 
-.feature-section div.last-feature {
-  margin-right: 0;
-  margin-left: 4%; }
+.feature-section {
+  margin-top: 40px; }
+  .feature-section span.dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 14px;
+    margin: 6px 0 0 0; }
+  .feature-section .feature-section-item {
+    width: 48%;
+    float: left; }
+  .feature-section div.last-feature {
+    margin-right: 0;
+    margin-left: 4%; }
 
 [class^="dashboard_page_give-"] .about-text, [class*="dashboard_page_give-"] .about-text {
   min-height: 0; }
@@ -1154,6 +1527,7 @@ Logs
     padding: 3px; }
   .give-newsletter-form-wrap div.give-newsletter-confirmation {
     background: #fff;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
     margin: 5px 10px 4px 5px;
     padding: 1px 12px;
@@ -1169,45 +1543,101 @@ Logs
  * @description Payment History Styles
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
-#give_donor_export_download {
+#give_donor_export_form {
   margin: 0 0 5px; }
+
+#give-payments-filter .give-donation-status {
+  display: inline-block; }
+
+.column-status .give-donation-status, .column-status .give-test-mode-transactions-label {
+  display: inline-block; }
+
+.column-status .give-test-mode-transactions-label {
+  margin: 0 5px;
+  vertical-align: middle; }
 
 /**
  * Give Settings SCSS
  *
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
-/*------------------------------------
-Settings
---------------------------------------*/
-.give_settings_page .nav-tab-wrapper {
-  margin-bottom: 5px; }
+.give-settings-page .nav-tab-wrapper {
+  margin-bottom: 5px;
+  overflow: visible; }
 
-.give_settings_page span.cmb2-metabox-description {
-  font-size: 13px; }
-
-.give_settings_page .cmb2-wrap .cmb-type-checkbox input[type="checkbox"] {
+.give-settings-page .cmb2-wrap .cmb-type-checkbox input[type="checkbox"] {
   display: block;
   margin-bottom: 5px; }
 
-.give_settings_page div.give-submit-wrap {
+.give-settings-page div.give-submit-wrap {
   margin: 20px 0; }
 
-.give_settings_page .give_forms_page_give-payment-history .postbox .hndle {
+.give-settings-page .give_forms_page_give-payment-history .postbox .hndle {
   cursor: default; }
 
-/* Section Titles */
-.cmb-type-give-title label {
+.give-settings-page .give-input-field {
+  width: 25em; }
+
+.give-settings-page table table input[type="text"] {
+  width: 15em; }
+
+.give-setting-tab-header {
+  clear: both;
+  overflow: hidden;
+  margin: 30px 0; }
+  .give-setting-tab-header h2 {
+    margin-top: 8px; }
+
+.give-radio-inline ul {
+  margin-top: 0; }
+
+.give-radio-inline li {
+  display: inline-block;
+  margin: 0 0 0 15px; }
+
+.give-radio-inline li:first-child {
+  margin-left: 0; }
+
+.give-tools-setting-page .bulkactions {
+  overflow: visible; }
+
+.form-table td.give-radio-inline fieldset li > label {
+  margin: 5px 0 0 !important; }
+
+p.give-field-description, .cmb2-metabox-description {
+  color: #aaaaaa;
+  font-style: italic;
+  font-size: 13px !important; }
+
+.give-image-thumb {
+  position: relative;
+  margin-top: 14px; }
+  .give-image-thumb span.give-delete-image-thumb {
+    position: absolute;
+    background: red;
+    color: white;
+    border-radius: 30px;
+    left: -10px;
+    top: -10px; }
+  .give-image-thumb img {
+    max-width: 400px;
+    border: 4px solid white; }
+
+.cmb-type-give-title label,
+.give-setting-tab-header h2 {
   float: left;
+  display: inline-block;
   width: 220px;
   font-style: italic;
-  color: #AAA; }
+  color: #AAA;
+  margin: 0;
+  font-size: 14px; }
 
 .postbox-container #_give_donation_levels_repeat > .cmb-repeatable-grouping:not(:last-of-type) {
   border-bottom: 1px solid #e9e9e9;
@@ -1216,7 +1646,6 @@ Settings
 .cmb-type-enabled-gateways .cmb-td > p:first-of-type {
   display: none; }
 
-/* CMB2 Checkbox Revised Styles */
 .cmb-type-checkbox .cmb-td {
   width: 80%; }
   .cmb-type-checkbox .cmb-td label {
@@ -1241,8 +1670,30 @@ Settings
 .cmb2-id-give-title > div.cmb-td {
   padding-bottom: 5px; }
 
-/* System Info page styles
--------------------------------------------------------------- */
+.give-payment-gatways-list li.ui-sortable-handle span.give-drag-handle {
+  padding: 3px 4px 0 0;
+  font-size: 15px;
+  font-weight: normal;
+  color: #bdbdbd;
+  cursor: move; }
+  .give-payment-gatways-list li.ui-sortable-handle span.give-drag-handle:hover {
+    color: #333; }
+
+.give-email-tags-wrap {
+  margin: 5px 0 0; }
+  .give-email-tags-wrap code {
+    font-style: normal;
+    padding: 1px 2px;
+    font-size: 12px; }
+  .give-email-tags-wrap span {
+    display: block;
+    color: #AAA;
+    font-style: italic;
+    margin: 0 0 2px;
+    font-size: 13px; }
+  .give-email-tags-wrap .give_price_tag {
+    display: none; }
+
 #system-info-textarea {
   width: 800px;
   height: 600px;
@@ -1250,13 +1701,13 @@ Settings
   background: #FFF;
   white-space: pre;
   overflow: auto;
-  display: block; }
+  display: block;
+  /*rtl:ignore*/
+  direction: ltr; }
 
 #give-download-sysinfo {
   margin: 0; }
 
-/* API
--------------------------------------------------------------- */
 .cmb2-id-api .cmb-td {
   padding: 0; }
 
@@ -1273,7 +1724,8 @@ Settings
 .give_user_search_results {
   position: absolute;
   left: 0;
-  top: 27px; }
+  top: 27px;
+  z-index: 100; }
   .give_user_search_results a.give-ajax-user-cancel {
     position: absolute;
     right: 6px;
@@ -1287,32 +1739,104 @@ Settings
     max-height: 200px;
     overflow-y: scroll; }
 
-.give_forms_page_give-settings .tablenav .actions {
+#api .tablenav .actions {
   overflow: visible; }
 
 a.give-delete {
   color: #a00; }
 
-/* License
--------------------------------------------------------------- */
-.cmb2-wrap .give-license-deactivate {
+.give-settings-wrap-licenses .give-license-deactivate {
   margin: 1px 0 0 10px;
   height: 30px; }
 
-.cmb2-wrap .give-license-field {
-  background-image: url("../images/close.png");
-  background-color: #FFF;
-  background-repeat: no-repeat;
+.give-settings-wrap-licenses .give-license-field {
+  background: #FFF url("../images/close.png") no-repeat;
   background-position: 98.5% center;
   background-size: 18px; }
 
-.cmb2-wrap .give-license-active, .cmb2-wrap .give-license-active:focus {
+.give-settings-wrap-licenses .give-license-active, .give-settings-wrap-licenses .give-license-active:focus {
   background-image: url("../images/tick.png");
   background-color: #FFF;
   background-repeat: no-repeat;
   background-position: 98.5% center;
   outline: none;
-  background-size: 16px; }
+  background-size: 16px;
+  width: 100%; }
+
+/* Addon grid design */
+.give-settings-page {
+  margin-top: 20px; }
+  .give-settings-page .give-settings-wrap-licenses {
+    display: block;
+    position: relative;
+    float: left;
+    width: 30.5%;
+    min-height: 180px;
+    margin: 20px 1% 20px 0; }
+  .give-settings-page .give-license-key label {
+    margin: 0 0 0 10px;
+    padding: 10px 0;
+    display: block;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: default; }
+  .give-settings-page .give-license-block {
+    margin: 0 10px; }
+  .give-settings-page input[type="text"].give-license-field,
+  .give-settings-page input[type="password"].give-license-field {
+    width: 100%; }
+  .give-settings-page .give-license-block input[type="submit"] {
+    position: absolute;
+    top: 3px;
+    right: 10px;
+    height: 24px;
+    line-height: 22px;
+    padding: 0 8px 1px;
+    font-size: 11px; }
+  .give-settings-page .give-license-status-notice {
+    background: #fff;
+    border-left: 4px solid #fff;
+    -webkit-box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.1);
+    margin: 5px 0 2px;
+    padding: 1px 12px; }
+    .give-settings-page .give-license-status-notice p {
+      padding: 10px 0;
+      margin: 0; }
+    .give-settings-page .give-license-status-notice a {
+      color: #444;
+      cursor: pointer; }
+      .give-settings-page .give-license-status-notice a:hover {
+        text-decoration: none; }
+  .give-settings-page .give-license-status-notice.give-license-expires-soon {
+    border-color: #00a0d2; }
+  .give-settings-page .give-license-status-notice.give-inactive,
+  .give-settings-page .give-license-status-notice.give-license-expired {
+    border-color: #e24e4e; }
+  .give-settings-page .give-license-status-notice.give-license-error,
+  .give-settings-page .give-license-status-notice.give-license-no_activations_left,
+  .give-settings-page .give-license-status-notice.give-license-missing,
+  .give-settings-page .give-license-status-notice.give-license-invalid,
+  .give-settings-page .give-license-status-notice.give-license-site_inactive,
+  .give-settings-page .give-license-status-notice.give-license-item_name_mismatch {
+    border-color: orange; }
+  .give-settings-page .give-license-status-notice.give-license-lifetime-notice,
+  .give-settings-page .give-license-status-notice.give-license-expiration-date {
+    border-color: #46b450; }
+  .give-settings-page .give-license-status-notice.give-license-expires-soon a:hover,
+  .give-settings-page .give-license-status-notice.give-license-expired a:hover {
+    text-decoration: none; }
+
+/* Responsive fixes: Addon grid design */
+@media screen and (max-width: 1100px) {
+  .give-settings-page .give-settings-wrap-licenses {
+    width: 45%;
+    min-height: 150px; } }
+
+@media screen and (max-width: 600px) {
+  .give-settings-page .give-settings-wrap-licenses {
+    width: 100%;
+    max-width: 320px; } }
 
 /* Tables */
 .give-table thead th {
@@ -1321,13 +1845,72 @@ a.give-delete {
 .give_settings .cmb-td hr + hr {
   display: none; }
 
+.post-type-give_forms .mce-container iframe, .post-type-give_forms .wp-editor-area {
+  min-height: 400px; }
+
+.give-field-description {
+  color: #aaaaaa;
+  font-style: italic;
+  margin: 0;
+  padding-top: .5em; }
+
+h2.give-nav-tab-wrapper {
+  overflow: hidden;
+  height: 35px; }
+
+@media screen and (max-width: 600px) {
+  h2.give-nav-tab-wrapper {
+    height: 50px; } }
+
+@media screen and (max-width: 414px) {
+  .give-nav-tab-wrapper > a {
+    width: 75%; } }
+
+.give-sub-nav-tab-wrapper {
+  position: relative;
+  display: inline-block;
+  z-index: 9999; }
+  .give-sub-nav-tab-wrapper nav.give-sub-nav-tab {
+    border: 1px solid #ccc;
+    border-bottom: 0;
+    position: absolute;
+    top: 32px;
+    right: 0; }
+    .give-sub-nav-tab-wrapper nav.give-sub-nav-tab a {
+      float: left;
+      background: white;
+      padding: 6px 10px;
+      clear: both;
+      text-decoration: none;
+      border-bottom: 1px solid #ccc;
+      min-width: 170px;
+      color: #555;
+      font-size: 14px; }
+    .give-sub-nav-tab-wrapper nav.give-sub-nav-tab a:hover {
+      background: #e5e5e5; }
+
+.give-sub-nav-tab-wrapper {
+  display: none; }
+
+#give-show-sub-nav {
+  text-decoration: none;
+  padding: 3px 5px;
+  border-bottom: 1px solid #ccc;
+  line-height: 0;
+  background: white;
+  border-radius: 4px; }
+
+#give-show-sub-nav:hover, #give-show-sub-nav:active {
+  outline: none;
+  box-shadow: inset 0px 0px 4px #ddd; }
+
 /**
  * Give Payment History SCSS
  *
  * @description Payment History Styles
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 #give-payment-filters, .give-submit-wrap {
@@ -1355,7 +1938,7 @@ a.give-delete {
     margin-left: 5px; }
 
 #give-payments-filter ul.subsubsub {
-  margin: 0 0 12px; }
+  margin-bottom: 12px; }
 
 #give-payments-filter .tablenav.top {
   float: none; }
@@ -1370,21 +1953,18 @@ a.give-delete {
 #give-payments-filter #the-list .check-column input {
   margin-top: 1px; }
 
+#give-payments-filter .column-details {
+  width: 50px; }
+
+#give-payments-filter .column-amount {
+  width: 120px; }
+
 tr.status-refunded td {
   background: #cecece;
   border-top-color: #ccc; }
 
-.wp-list-table.forms th#ID {
-  width: 80px; }
-
-.wp-list-table.forms th#details {
-  width: 130px; }
-
 .wp-list-table.forms th#date {
   width: 140px; }
-
-.wp-list-table.forms th#user {
-  width: 130px; }
 
 .give-mobile-link {
   line-height: 32px;
@@ -1395,14 +1975,13 @@ tr.status-refunded td {
   height: auto;
   float: left; }
 
-/*---------------------
-Status Colors
----------------------------*/
 .give-donation-status > span {
-  float: left;
+  display: inline-block;
   width: 12px;
   height: 12px;
-  margin: 3px 4px 0 0;
+  position: relative;
+  top: 1px;
+  margin: 0;
   padding: 0;
   border-radius: 50%;
   background: #888;
@@ -1426,31 +2005,55 @@ Status Colors
 .give-donation-status.status-revoked > span {
   background-color: #d9534f; }
 
-.give-donation-status.status-subscription > span, .give-donation-status.status-give_subscription > span {
+.give-donation-status.status-subscription > span, .give-donation-status.status-renewal > span, .give-donation-status.status-give_subscription > span {
   background-color: #5bc0de; }
 
-#give-payments-filter .give-payment-id {
-  padding: 0.2em 0.6em 0.3em;
-  font-size: 85%;
-  font-weight: 700;
+#test-payment-label {
+  padding: .2em .4em .3em;
+  font-size: 11px;
   line-height: 1;
   color: #fff;
   text-align: center;
   white-space: nowrap;
   vertical-align: baseline;
   border-radius: .25em;
-  background-color: #929292; }
+  background-color: #ffba00;
+  margin: 0 15px;
+  vertical-align: middle; }
+  #test-payment-label:hover {
+    color: #fff;
+    text-decoration: none; }
+
+#give-payments-filter .give-payment-id {
+  padding: .2em .4em .3em;
+  font-size: 11px;
+  line-height: 1;
+  color: #fff;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: .25em;
+  font-weight: normal; }
+  #give-payments-filter .give-payment-id:hover {
+    color: #fff;
+    text-decoration: none; }
 
 #give-payments-filter .column-details {
   padding-right: 30px; }
 
-/* Payment View Metabox */
+#give-payments-filter .give-donation-status {
+  display: inline-block; }
+
 #give-order-update .give-donation-status {
   display: inline-block;
   float: none;
-  margin: 0 0 0 10px;
+  margin: 0 10px;
   position: relative;
   top: 3px; }
+
+.column-donation_form .donation-level-text-wrap {
+  font-style: italic;
+  display: block; }
 
 /*---------------------
 Responsiveness
@@ -1470,12 +2073,9 @@ Responsiveness
 
 .give-admin-box-inside {
   margin: 0;
-  padding: 3px 12px;
+  padding: 3px 10px;
   clear: both;
   border-bottom: 1px solid #eee; }
-
-.rtl .give-admin-box-inside {
-  padding: 5px 10px 5px 0; }
 
 .give-admin-box-inside .strong {
   font-weight: 600; }
@@ -1486,10 +2086,6 @@ Responsiveness
 
 .give-admin-box .right {
   float: right; }
-
-.rtl .give-admin-box .right {
-  float: left;
-  margin-left: 10px; }
 
 #give-order-update .inside,
 #give-order-details .inside {
@@ -1511,6 +2107,9 @@ Responsiveness
 
 .give-order-update-box #major-publishing-actions .button-secondary {
   margin-right: 10px; }
+
+#give-donation-overview th {
+  text-align: left; }
 
 #give-donation-overview .give-select-chosen {
   width: 196px; }
@@ -1541,89 +2140,74 @@ Responsiveness
 #give-donation-overview .inside > ul > li {
   display: inline-block;
   position: relative;
-  vertical-align: top;
-  margin-right: 5%; }
-
-#give-donation-overview li.actions {
-  text-align: right;
-  min-width: 200px; }
-
-#give-donation-overview ul li.remove {
-  text-align: right; }
-
-#give-donation-overview .row {
-  padding: 12px;
-  border-bottom: 1px solid #eee; }
+  vertical-align: top; }
 
 #give-donation-overview ul {
   font-size: 0; }
-
-#give-donation-overview ul li {
-  font-size: 13px; }
+  #give-donation-overview ul li {
+    font-size: 13px; }
+    #give-donation-overview ul li.actions {
+      text-align: right;
+      min-width: 200px; }
+    #give-donation-overview ul li.remove {
+      text-align: right; }
+  #give-donation-overview ul .row {
+    padding: 12px;
+    border-bottom: 1px solid #eee; }
 
 #give-order-data .data span {
   color: #666;
   font-weight: 600; }
 
-#give-donation-overview .inside {
-  padding: 12px; }
-
-.give-price-field {
-  width: 80px; }
-
-.give_repeatable_upload_wrapper .pricing select, .give_repeatable_product_wrapper .give-select,
-#give_products .give-select {
-  min-width: 100%;
-  max-width: 200px; }
+input.give-price-field {
+  width: 80px;
+  padding: 3px 5px; }
 
 .give_forms_page_give-payment-history.js .postbox .hndle {
   cursor: default; }
 
-@media screen and (max-width: 782px) {
-  .order-data-column input[type="email"] {
-    padding: 6px 10px; } }
+#give-payment-notes textarea {
+  min-height: 150px; }
 
-@media screen and (max-width: 1024px) {
-  #give-edit-order-form .column {
-    width: 49%; } }
+#give-payment-notes #give-add-payment-note {
+  margin: 6px 0 15px; }
 
-@media screen and (max-width: 1280px) and (min-width: 1279px) {
-  #give-edit-order-form .column {
-    width: 32%; } }
+#give-billing-details .column > div {
+  margin: 0 0 10px; }
 
-@media screen and (min-width: 1280px) {
+#give-billing-details label {
+  display: block; }
+
+#give-billing-details .column-container {
+  padding: 5px 0 10px; }
+
+#give-billing-details input[type="text"] {
+  width: 95%; }
+
+#give-billing-details .chosen-container {
+  width: 98% !important; }
+
+@media screen and (min-width: 1200px) {
   #give-edit-order-form .column {
-    width: 32%;
-    margin-right: 3%; }
-  #give-edit-order-form .columns-4 .column, #give-donation-overview.columns-4 .row > ul > li,
-  #give-donation-overview.columns-4 .inside > ul > li {
-    width: 22%;
-    margin-right: 2%; }
-  #give-edit-order-form .columns-3 .column:nth-child(2n+1),
-  #give-edit-order-form .columns-4 .column:nth-child(3n+1),
-  #give-edit-order-form .column:nth-child(2n+1) {
-    margin-right: 0; }
-  #give-donation-overview.columns-4 li.download {
     width: 33%; }
-  #give-donation-overview.columns-4 li.price,
-  #give-donation-overview.columns-3 .row > ul > li.price,
-  #give-donation-overview.columns-3 .inside > ul > li.price {
-    width: 14%; }
   #give-donation-overview.columns-4 li.actions {
     width: 25%;
     margin-top: 0;
     margin-right: 0; } }
 
-@media screen and (max-width: 1284px) {
-  #give-edit-order-form .column strong {
-    display: block; } }
+@media screen and (max-width: 1199px) {
+  #give-edit-order-form .column {
+    width: 49%; } }
 
-/*------------------------------------------
-Donation Details
---------------------------------------------*/
-#give-customer-details .inside {
-  padding-top: 15px;
-  padding-bottom: 15px; }
+@media screen and (max-width: 782px) {
+  .order-data-column input[type="email"] {
+    padding: 6px 10px; } }
+
+#give-donor-details .inside, #give-donation-overview .inside {
+  margin-top: 0; }
+
+.give_forms_page_give-payment-history #give-dashboard-widgets-wrap #side-sortables {
+  padding-top: 0; }
 
 /**
  * Give Admin Dashboard SCSS
@@ -1631,7 +2215,7 @@ Donation Details
  * @description Styles the Give dashboard widget
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 .give-dashboard-widget .give-dashboard-today {
@@ -1648,7 +2232,7 @@ Donation Details
     font-weight: bold;
     margin: 15px 0 0;
     line-height: 1; }
-  .give-dashboard-widget .give-dashboard-today .give-orders-today {
+  .give-dashboard-widget .give-dashboard-today .give-donations-today {
     font-size: 18px;
     font-weight: bold;
     margin: 0 0 30px;
@@ -1686,18 +2270,36 @@ Donation Details
 #give_dashboard_sales .give-table-stats tr#give-table-stats-tr-1 td {
   border-bottom: 1px solid #ececec; }
 
+#dashboard_right_now .give-forms-count:before {
+  font-family: 'give-icomoon';
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-size: 18px;
+  width: 18px;
+  height: 18px;
+  content: "\e800"; }
+
 /**
  * Give Forms SCSS
  *
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
-/* Donors Listing Page Style
--------------------------------------------------------------- */
 .give_forms_page_give-donors .wrap > h2 {
   margin-bottom: 15px; }
+
+.give_forms_page_give-donors .nav-tab-wrapper .dashicons {
+  position: relative;
+  top: 2px;
+  margin: 0 3px 0 0; }
 
 .give_forms_page_give-donors #give-donors-filter {
   position: relative; }
@@ -1708,40 +2310,6 @@ Donation Details
 .give_forms_page_give-donors .tablenav.top {
   float: right;
   clear: none; }
-
-/* Donor Styles
--------------------------------------------------------------- */
-#customer-tab-wrapper-list {
-  border-bottom: 1px solid #ccc;
-  padding: 5px 15px 0 10px; }
-  #customer-tab-wrapper-list li {
-    display: inline-block;
-    margin: 0 0 -1px;
-    padding: 0; }
-    #customer-tab-wrapper-list li a {
-      padding: 6px 10px;
-      font-weight: bold;
-      font-size: 15px;
-      line-height: 24px;
-      border: 1px solid #ccc;
-      border-bottom: none;
-      background: #e4e4e4;
-      color: #555;
-      display: inline-block;
-      text-decoration: none;
-      margin: 0; }
-  #customer-tab-wrapper-list .active {
-    padding: 6px 10px;
-    font-weight: bold;
-    font-size: 15px;
-    line-height: 24px;
-    border: 1px solid #ccc;
-    border-bottom: 1px solid #f1f1f1;
-    background: #f1f1f1;
-    color: #000; }
-  #customer-tab-wrapper-list .dashicons {
-    font-size: 20px;
-    line-height: 26px; }
 
 #give-customer-card-wrapper {
   margin-left: -1px;
@@ -1769,22 +2337,21 @@ Donation Details
     text-decoration: none;
     color: #ff0000;
     margin-right: 5px; }
-  #give-customer-card-wrapper .donor-bio-header {
-    float: left;
-    width: 33%; }
-    #give-customer-card-wrapper .donor-bio-header .customer-since {
-      margin: 10px 0;
-      font-size: 16px; }
-    #give-customer-card-wrapper .donor-bio-header .customer-id {
-      font-size: 24px;
-      font-weight: 600;
-      float: left;
-      margin-right: 10px; }
-    #give-customer-card-wrapper .donor-bio-header .customer-edit-link {
-      margin-bottom: 15px;
-      float: left; }
+  #give-customer-card-wrapper .donor-bio-header .customer-since {
+    margin: 10px 0;
+    font-size: 16px; }
+  #give-customer-card-wrapper .donor-bio-header .customer-id {
+    display: inline-block;
+    font-size: 24px;
+    font-weight: 600;
+    margin-right: 10px; }
+  #give-customer-card-wrapper .donor-bio-header .customer-name-wrap {
+    display: inline-block; }
+  #give-customer-card-wrapper .donor-bio-header .customer-edit-link {
+    margin-bottom: 15px; }
 
 .customer-main-wrapper {
+  clear: both;
   margin: 0 0 20px; }
   @media (max-width: 655px) {
     .customer-main-wrapper {
@@ -1816,7 +2383,6 @@ Donation Details
   width: 200px; }
 
 #give-customer-card-wrapper .customer-info {
-  margin-top: 1px;
   min-height: 185px; }
 
 #give-customer-card-wrapper .info-wrapper {
@@ -1876,10 +2442,13 @@ Donation Details
 #customer-tables-wrapper th {
   text-align: center; }
 
-#customer-tables-wrapper .downloads tr > th:first-child, #customer-tables-wrapper .downloads tr > td:first-child {
+#customer-tables-wrapper .donations tr > th:first-child,
+#customer-tables-wrapper .donations tr > td:first-child,
+#customer-tables-wrapper .emails tr > th:first-child,
+#customer-tables-wrapper .emails tr > td:first-child {
   text-align: left; }
 
-#customer-tables-wrapper .downloads tr > td:only-child {
+#customer-tables-wrapper .donations tr > td:only-child {
   text-align: center; }
 
 #customer-notes-wrapper {
@@ -1921,7 +2490,7 @@ Donation Details
  *
  * @package     Give
  * @subpackage  SCSS/Admin
- * @copyright   Copyright (c) 2015, WordImpress
+ * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
 */
 /*=Give Shortcode Button
@@ -1942,6 +2511,29 @@ Donation Details
   padding-right: 10px;
   padding-left: 10px; }
 
+/*=Admin Buttons w/ Icons
+--------------------------------------*/
+/* extends .wp-core-ui .button */
+.wp-core-ui .give-admin-button {
+  padding-left: 7px;
+  padding-right: 7px; }
+
+/* matches style of Add Media and Give Shortcodes buttons */
+.give-admin-button-icon {
+  display: inline-block;
+  width: 18px;
+  height: 18px;
+  vertical-align: text-top;
+  margin: 0 2px;
+  /* specific DashIcon styles */ }
+  .give-admin-button-icon:before {
+    font: 400 18px/1 dashicons;
+    speak: none;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; }
+  .give-admin-button-icon-update:before {
+    content: "\f463"; }
+
 /* =Primary button in shortcode tinymce dialog
 -------------------------------------------------------------- */
 .mce-primary.mce-sc-primary button {
@@ -1959,6 +2551,10 @@ Donation Details
     margin-bottom: 0; }
   .mce-sc-popup p.margin-top {
     margin-top: 1em; }
+
+.mce-sc-popup .mce-listbox button {
+  text-overflow: ellipsis;
+  overflow: hidden !important; }
 
 /* =Shortcode button above wp_editor
 -------------------------------------------------------------- */
@@ -2029,4 +2625,71 @@ div.sc-shortcode {
   opacity: 0.7;
   filter: alpha(opacity=70); }
 
-/*# sourceMappingURL=give-admin.css.map */
+/**
+ * Give System Info SCSS
+ *
+ * @description System Info Styles
+ * @package     Give
+ * @subpackage  SCSS/Admin
+ * @copyright   Copyright (c) 2016, WordImpress
+ * @license     https://opensource.org/licenses/gpl-3.0/ GNU Public License
+ *
+ * The following code is a derivative work of the code from the WooCommerce
+ * plugin, which is licensed GPLv3. This code therefore is also licensed under
+ * the terms of the GNU Public License, version 3.
+ *
+ * Copyright (c) 2015 WooThemes
+ * Copyright (c) 2016 WordImpress, LLC
+*/
+.give-status-table {
+  margin-bottom: 1em; }
+  .give-status-table h2 {
+    font-size: 14px;
+    margin: 0; }
+  .give-status-table tr:nth-child(2n) th,
+  .give-status-table tr:nth-child(2n) td {
+    background: #fcfcfc; }
+  .give-status-table th {
+    font-weight: 700;
+    padding: 9px; }
+  .give-status-table td:first-child {
+    width: 33%; }
+  .give-status-table td.help {
+    width: 1em; }
+  .give-status-table td {
+    padding: 9px;
+    font-size: 1.1em; }
+    .give-status-table td mark {
+      background: transparent none; }
+    .give-status-table td mark.yes {
+      color: #7ad03a; }
+    .give-status-table td mark.no {
+      color: #999; }
+    .give-status-table td mark.error {
+      color: #a00; }
+    .give-status-table td ul {
+      margin: 0; }
+
+.wrap div.give-debug-report-wrapper {
+  margin-top: 1em; }
+
+.give-debug-report {
+  display: none;
+  margin: 10px 0;
+  padding: 0;
+  position: relative; }
+  .give-debug-report textarea {
+    font-family: monospace;
+    width: 100%;
+    margin: 0;
+    height: 300px;
+    padding: 20px;
+    -moz-border-radius: 0;
+    -webkit-border-radius: 0;
+    border-radius: 0;
+    resize: none;
+    font-size: 12px;
+    line-height: 20px;
+    outline: 0; }
+
+/*# sourceMappingURL=../sourcemaps/give-admin.css.map */
