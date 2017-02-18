@@ -1,0 +1,8 @@
+<wpml-config>  
+	<admin-texts>
+        <key name="onesocial_options">
+            <key name="boss_logo" />
+            <key name="boss_mobile_logo" />
+        </key>
+	</admin-texts>
+</wpml-config>
