@@ -602,7 +602,7 @@ body.full-width .site-content,
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 160px;
+    width: 360px;
 }
 
 .site-title a {
@@ -648,7 +648,7 @@ body.full-width .site-content,
 
 #logo-area {
     padding-right: 20px;
-    width: 180px;
+    width: 380px;
 }
 
 #site-navigation {
