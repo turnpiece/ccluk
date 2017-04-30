@@ -22,7 +22,13 @@ You're the boss, so have fun editing!
 1.0 - Global Styles
 --------------------------------------------------------------*/
 
+#logo-area {
+    width: 380px;
+}
 
+.site-header .site-title {
+    width: 360px;
+}
 
 
 

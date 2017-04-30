@@ -453,14 +453,41 @@ h2.give-nav-tab-wrapper {
 }
 
 @media screen and (max-width: 600px) {
-	h2.give-nav-tab-wrapper {
-		height: 50px;
-	}
-}
+	.give-nav-tab-wrapper {
+		position: relative;
+		padding-top:0 !important;
 
-@media screen and (max-width: 414px) {
-	.give-nav-tab-wrapper > a {
-		width: 75%;
+		> a {
+			width: 100%;
+			box-sizing: border-box;
+			margin:0;
+			&:hover {
+				border-bottom: 1px solid #ccc;
+			}
+		}
+
+		div.give-sub-nav-tab-wrapper {
+			position: absolute;
+			top:0;
+			right:0;
+
+			#give-show-sub-nav {
+				height: 28px;
+				width: 30px;
+				border-radius: 0;
+				margin:0;
+				> span.dashicons {
+					margin: 6px auto 0;
+					display: block;
+				}
+
+			}
+
+			nav.give-sub-nav-tab {
+				top:35px;
+			}
+		}
+
 	}
 }
 
@@ -468,6 +495,8 @@ h2.give-nav-tab-wrapper {
 	position: relative;
 	display: inline-block;
 	z-index: 9999;
+	float: left;
+
 	nav.give-sub-nav-tab {
 		border: 1px solid #ccc;
 		border-bottom: 0;
@@ -500,11 +529,18 @@ h2.give-nav-tab-wrapper {
 
 #give-show-sub-nav {
 	text-decoration: none;
-	padding: 3px 5px;
+	padding: 3px 4px;
 	border-bottom: 1px solid #ccc;
 	line-height: 0;
 	background: white;
 	border-radius: 4px;
+    margin-top:5px;
+
+	> span.dashicons {
+      font-size:16px;
+      height:16px;
+      width:16px;
+	}
 }
 
 #give-show-sub-nav:hover, #give-show-sub-nav:active {
