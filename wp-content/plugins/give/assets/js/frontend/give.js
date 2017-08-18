@@ -91,6 +91,22 @@ jQuery(function ($) {
 
 	});
 
+	// Auto hide frontend notices.
+	var give_notices = jQuery('.give_notice[data-auto-dismissible="1"]');
+	if(  give_notices.length ){
+		give_notices.each(function( index, $notice ){
+			$notice = $( $notice );
+
+			// auto hide setting message in 5 seconds.
+			window.setTimeout(
+				function () {
+					$notice.slideUp();
+				},
+				$notice.data('dismiss-interval')
+			);
+		});
+	}
+
 });
 
 /**
@@ -106,6 +122,8 @@ function give_open_form_modal($form_wrap, $form) {
 	jQuery.magnificPopup.open({
 		mainClass   : give_global_vars.magnific_options.main_class,
 		closeOnBgClick : give_global_vars.magnific_options.close_on_bg_click,
+		fixedContentPos: true,
+		fixedBgPos: true,
 		items: {
 			src: $form,
 			type: 'inline'

@@ -55,7 +55,7 @@ function give_get_template( $template_name, $args = array(), $template_path = ''
 
     if ( ! file_exists( $located ) ) {
 		/* translators: %s: the template */
-        give_output_error( sprintf( __( 'The %s template was not found.', 'give' ), $located ), true );
+        Give()->notices->print_frontend_notice( sprintf( __( 'The %s template was not found.', 'give' ), $located ), true );
         return;
     }
 
@@ -410,16 +410,6 @@ if ( ! function_exists( 'give_template_single_title' ) ) {
 	 */
 	function give_template_single_title() {
 		give_get_template_part( 'single-give-form/title' );
-	}
-}
-
-if ( ! function_exists( 'give_show_avatars' ) ) {
-
-	/**
-	 * Output the product title.
-	 */
-	function give_show_avatars() {
-		echo do_shortcode( '[give_donors_gravatars]' );
 	}
 }
 

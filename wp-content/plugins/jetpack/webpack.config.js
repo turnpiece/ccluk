@@ -60,6 +60,10 @@ var webpackConfig = {
 			{
 				test: /\.scss$/,
 				loader: ExtractTextPlugin.extract( 'style-loader', 'css!sass' )
+			},
+			{
+				test: /\.svg/,
+				loader: 'url-loader'
 			}
 		]
 	},
@@ -89,9 +93,7 @@ var webpackConfig = {
 
 			// NODE_ENV is used inside React to enable/disable features that should only
 			// be used in development
-			'process.env': {
-				NODE_ENV: JSON.stringify( NODE_ENV )
-			}
+			'process.env.NODE_ENV': JSON.stringify( NODE_ENV )
 		}),
 		new ExtractTextPlugin( '[name].dops-style.css' )
 	],
@@ -106,10 +108,8 @@ var webpackConfig = {
 if ( NODE_ENV === 'production' ) {
 
 	webpack.DefinePlugin( {
-		"process.env": {
-			// This has effect on the react lib size
-			"NODE_ENV": JSON.stringify(process.env.NODE_ENV) // TODO switch depending on actual environment
-		}
+		// This has effect on the react lib size
+		'process.env.NODE_ENV': JSON.stringify( process.env.NODE_ENV ) // TODO switch depending on actual environment
 	} );
 }
 

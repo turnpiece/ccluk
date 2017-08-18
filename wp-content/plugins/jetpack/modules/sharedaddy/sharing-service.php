@@ -44,7 +44,6 @@ class Sharing_Service {
 		// if you update this list, please update the REST API tests
 		// in bin/tests/api/suites/SharingTest.php
 		$services = array(
-			'email'             => 'Share_Email',
 			'print'             => 'Share_Print',
 			'facebook'          => 'Share_Facebook',
 			'linkedin'          => 'Share_LinkedIn',
@@ -59,6 +58,20 @@ class Sharing_Service {
 			'jetpack-whatsapp'  => 'Jetpack_Share_WhatsApp',
 			'skype'             => 'Share_Skype',
 		);
+
+		/**
+		 * Filters if Email Sharing is enabled.
+		 *
+		 * E-Mail sharing is often problematic due to spam concerns, so this filter enables it to be quickly and simply toggled.
+		 * @module sharedaddy
+		 *
+		 * @since 5.1.0
+		 *
+		 * @param bool $email Is e-mail sharing enabled? Default false if Akismet is not active or true if Akismet is active.
+		 */
+		if ( apply_filters( 'sharing_services_email', Jetpack::is_akismet_active() ) ) {
+			$services['email'] = 'Share_Email';
+		}
 
 		if ( $include_custom ) {
 			// Add any custom services in
@@ -176,7 +189,10 @@ class Sharing_Service {
 		 * @see https://github.com/Automattic/jetpack/issues/6121
 		 */
 		if ( ! is_array( $options ) || ! isset( $options['button_style'], $options['global'] ) ) {
-			$options = array( 'global' => $this->get_global_options() );
+			$global_options = array( 'global' => $this->get_global_options() );
+			$options = is_array( $options )
+				? array_merge( $options, $global_options )
+				: $global_options;
 		}
 
 		$global = $options['global'];
@@ -547,7 +563,6 @@ function sharing_add_footer() {
 		);
 		wp_localize_script( 'sharing-js', 'sharing_js_options', $sharing_js_options);
 	}
-
 	$sharer = new Sharing_Service();
 	$enabled = $sharer->get_blog_services();
 	foreach ( array_merge( $enabled['visible'], $enabled['hidden'] ) AS $service ) {
@@ -773,6 +788,8 @@ function sharing_display( $text = '', $echo = false ) {
 				$ver = '20141212';
 			}
 			wp_register_script( 'sharing-js', plugin_dir_url( __FILE__ ).'sharing.js', array( 'jquery' ), $ver );
+
+			// Enqueue scripts for the footer
 			add_action( 'wp_footer', 'sharing_add_footer' );
 		}
 	}

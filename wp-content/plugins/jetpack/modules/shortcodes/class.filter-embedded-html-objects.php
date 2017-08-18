@@ -230,7 +230,10 @@ class Filter_Embedded_HTML_Objects {
 
 		foreach ( self::$failed_embeds as $entry ) {
 			$html   = sprintf( '<a href="%s">%s</a>', esc_url( $entry['src'] ), esc_url( $entry['src'] ) );
-			$string = str_replace( $entry['match'], $html, $string );
+			// Check if the string doesn't contain iframe, before replace.
+			if ( ! preg_match( '/<iframe /', $string ) ) {
+				$string = str_replace( $entry['match'], $html, $string );
+			}
 		}
 
 		self::$failed_embeds = array();
@@ -239,6 +242,10 @@ class Filter_Embedded_HTML_Objects {
 	}
 
 	static function get_attrs( $html ) {
+		if ( ! ( function_exists( 'libxml_use_internal_errors' ) && function_exists( 'simplexml_load_string' ) ) ) {
+			trigger_error( __( "PHP's XML extension is not available. Please contact your hosting provider to enable PHP's XML extension." ) );
+			return array();
+		}
 		// We have to go through DOM, since it can load non-well-formed XML (i.e. HTML).  SimpleXML cannot.
 		$dom = new DOMDocument;
 		// The @ is not enough to suppress errors when dealing with libxml,

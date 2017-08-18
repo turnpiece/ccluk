@@ -3,7 +3,7 @@
  * Plugin Name: Rescue Shortcodes
  * Plugin URI:  https://rescuethemes.com/plugins/rescue-shortcodes-plugin/
  * Description: A lightweight shortcodes plugin.
- * Version:     2.2.1
+ * Version:     2.3
  * Author:      Rescue Themes
  * Author URI:  https://rescuethemes.com
  * Text Domain: rescue-shortcodes

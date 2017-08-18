@@ -23,7 +23,7 @@ if( !function_exists ('rescue_shortcodes_scripts') ) :
 		 * Stylesheets
 		 */
 		wp_register_style('rescue_animate', plugin_dir_url( __FILE__ ) . 'css/animate.min.css', array(), '3.5.1', 'all' );
-		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'fonts/font-awesome.min.css', array(), '4.6.1', 'all' );
+		wp_enqueue_style( 'font-awesome', plugin_dir_url( __FILE__ ) . 'fonts/font-awesome.min.css', array(), '4.7', 'all' );
 		wp_enqueue_style('rescue_shortcode_styles', plugin_dir_url( __FILE__ ) . 'css/rescue_shortcodes_styles.css' );
 
 	}

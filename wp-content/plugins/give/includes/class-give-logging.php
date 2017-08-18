@@ -228,7 +228,7 @@ class Give_Logging {
 		// Set log meta, if any
 		if ( $log_id && ! empty( $log_meta ) ) {
 			foreach ( (array) $log_meta as $key => $meta ) {
-				update_post_meta( $log_id, '_give_log_' . sanitize_key( $key ), $meta );
+				give_update_meta( $log_id, '_give_log_' . sanitize_key( $key ), $meta );
 			}
 		}
 
@@ -283,7 +283,7 @@ class Give_Logging {
 		if ( $log_id && ! empty( $log_meta ) ) {
 			foreach ( (array) $log_meta as $key => $meta ) {
 				if ( ! empty( $meta ) ) {
-					update_post_meta( $log_id, '_give_log_' . sanitize_key( $key ), $meta );
+					give_update_meta( $log_id, '_give_log_' . sanitize_key( $key ), $meta );
 				}
 			}
 		}
@@ -320,6 +320,7 @@ class Give_Logging {
 			'post_status'    => 'publish',
 			'paged'          => get_query_var( 'paged' ),
 			'log_type'       => false,
+			'date_query'     => null
 		);
 
 		$query_args = wp_parse_args( $args, $defaults );
@@ -332,6 +333,26 @@ class Give_Logging {
 					'terms'    => $query_args['log_type'],
 				),
 			);
+		}
+
+		// Retrieve logs based on specific timeframe
+		if ( !empty ( $query_args['date_query'] ) && is_array( $query_args['date_query'] ) ) {
+			if ( ! empty( $query_args['date_query']['start_date'] ) ) {
+				$query_args['date_query']['after'] =  array(
+					'year'  => date( 'Y', strtotime( $query_args['date_query']['start_date'] ) ),
+					'month' => date( 'm', strtotime( $query_args['date_query']['start_date'] ) ),
+					'day'   => date( 'd', strtotime( $query_args['date_query']['start_date'] ) )
+				);
+			}
+
+			if ( ! empty( $query_args['date_query']['end_date'] ) ) {
+				$query_args['date_query']['before'] =  array(
+					'year'  => date( 'Y', strtotime( $query_args['date_query']['end_date'] ) ),
+					'month' => date( 'm', strtotime( $query_args['date_query']['end_date'] ) ),
+					'day'   => date( 'd', strtotime( $query_args['date_query']['end_date'] ) )
+				);
+			}
+			$query_args['date_query']['inclusive'] = true;
 		}
 
 		$logs = get_posts( $query_args );
@@ -391,15 +412,15 @@ class Give_Logging {
 		}
 
 		// Get cache key for current query.
-		$cache_key = give_get_cache_key( 'get_log_count', $query_args );
+		$cache_key = Give_Cache::get_key( 'get_log_count', $query_args );
 
 		// check if cache already exist or not.
-		if ( ! ( $logs_count = get_option( $cache_key ) ) ) {
+		if ( ! ( $logs_count = Give_Cache::get( $cache_key ) ) ) {
 			$logs       = new WP_Query( $query_args );
 			$logs_count = (int) $logs->post_count;
 
 			// Cache results.
-			add_option( $cache_key, $logs_count, '', 'no' );
+			Give_Cache::set( $cache_key, $logs_count );
 		}
 
 		return $logs_count;
@@ -460,7 +481,8 @@ class Give_Logging {
 	 * @param int $post_id
 	 */
 	public function background_process_delete_cache( $post_id ) {
-		wp_schedule_single_event( time(), 'give_delete_log_cache' );
+		// Delete log cache immediately
+		wp_schedule_single_event( time() - 5, 'give_delete_log_cache' );
 	}
 
 	/**
@@ -473,12 +495,18 @@ class Give_Logging {
 	 */
 	public function delete_cache() {
 		global $wpdb;
-		$cache_option_names = $wpdb->get_results(
+
+		// Add log related keys to delete.
+		$cache_option_names = $wpdb->get_col(
 			$wpdb->prepare(
-				"SELECT option_name FROM {$wpdb->options} where option_name LIKE '%%%s%%'",
-				'give_cache'
+				"SELECT *
+						FROM {$wpdb->options}
+						where option_name LIKE '%%%s%%'
+						OR option_name LIKE '%%%s%%'",
+				'give_cache_get_logs',
+				'give_cache_get_log_count'
 			),
-			ARRAY_A
+			1 // option_name
 		);
 
 		// Bailout.
@@ -486,10 +514,7 @@ class Give_Logging {
 			return false;
 		}
 
-		// Delete log cache.
-		foreach ( $cache_option_names as $option_name ) {
-			delete_option( $option_name['option_name'] );
-		}
+		Give_Cache::delete( $cache_option_names );
 	}
 }
 

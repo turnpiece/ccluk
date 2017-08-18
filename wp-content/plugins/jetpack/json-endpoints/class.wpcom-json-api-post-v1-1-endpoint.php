@@ -112,7 +112,16 @@ abstract class WPCOM_JSON_API_Post_v1_1_Endpoint extends WPCOM_JSON_API_Endpoint
 			setup_postdata( $post );
 		}
 
-		$response = $this->render_response_keys( $post, $context, array_keys( $this->post_object_format ) );
+		$keys_to_render = array_keys( $this->post_object_format );
+		if ( isset( $this->api->query[ 'fields' ] ) ) {
+			$limit_to_fields = array_map( 'trim', explode( ',', $this->api->query['fields'] ) );
+			$keys_to_render = array_intersect( $keys_to_render, $limit_to_fields );
+		}
+
+		// always include some keys because processors require it to validate access
+		$keys_to_render = array_unique( array_merge( $keys_to_render, array( 'type', 'status', 'password' ) ) );
+
+		$response = $this->render_response_keys( $post, $context, $keys_to_render );
 
 		unset( $GLOBALS['post'] );
 

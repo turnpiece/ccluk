@@ -5,9 +5,9 @@ Contributors: rescuethemes, jami0821
 Donate link: https://rescuethemes.com
 Tags: shortcodes, buttons, columns, tabs, animations, spacing, highlight
 Requires at least: 4.0
-Tested up to: 4.5
+Tested up to: 4.7
 
-Stable tag: 2.2.1
+Stable tag: 2.3
 
 A lightweight WordPress shortcodes plugin.
 
@@ -70,6 +70,10 @@ MIT License - https://github.com/imakewebthings/waypoints/blob/master/licenses.t
 Copyright: @foodgoesinmouth
 
 == Changelog ==
+= 2.3, March 20, 2017 =
+* Updated Font Awesome to version 4.7
+
+
 = 2.2.1, July 8, 2016 =
 * Added API key support for Google Maps
 
