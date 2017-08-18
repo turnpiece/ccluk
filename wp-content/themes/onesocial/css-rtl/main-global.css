@@ -712,6 +712,7 @@ textarea {
 }
 
 input[type="text"]:focus,
+input[type="search"]:focus,
 input[type="tel"]:focus,
 input[type="email"]:focus,
 input[type="password"]:focus,
@@ -1559,7 +1560,7 @@ strong, b {
 .screen-reader-text, .assistive-text {
     clip: rect(1px, 1px, 1px, 1px);
     position: absolute !important;
-    height: 1px;
+    height: 0.1px;
     width: 1px;
     overflow: hidden;
 }
@@ -1921,6 +1922,7 @@ section[role="banner"] {
 }
 
 .widget_search #searchform,
+.widget .woocommerce-product-search,
 .widget #bbp-search-index-form {
     border-bottom: 1px solid rgba(0,0,0,0.1);
     padding-bottom: 10px;
@@ -1942,6 +1944,7 @@ section[role="banner"] {
 }
 
 .widget_search #searchform button,
+.widget .woocommerce-product-search button,
 .widget #bbp-search-index-form button {
     background: transparent;
     padding: 5px 0;
@@ -1950,6 +1953,7 @@ section[role="banner"] {
 }
 
 .widget-area .widget_search input[type="text"],
+.widget .woocommerce-product-search input[type="search"],
 .widget-area .widget_display_search input[type="text"] {
     width: 80%;
     height: 35px;
@@ -1965,12 +1969,14 @@ section[role="banner"] {
 }
 
 .widget_search #searchform button i:before,
+.widget .woocommerce-product-search button:i:before,
 .widget #bbp-search-index-form button i:before {
     color: #54ae68;
     vertical-align: bottom;
 }
 
 .widget-area .widget_search input[type="text"],
+.widget .woocommerce-product-search input[type="search"],
 .widget-area .widget_display_search input[type="text"] {
     background: transparent;
     border: none;
@@ -2042,7 +2048,8 @@ section[role="banner"] {
     margin: 20px 0;
 }
 
-.widget #bbp-search-index-form button#bbp_search_submit {
+.widget #bbp-search-index-form button#bbp_search_submit,
+.widget .woocommerce-product-search label+button[type="submit"] {
     text-align: center;
     display: block;
     padding: 0;
@@ -2051,11 +2058,13 @@ section[role="banner"] {
     line-height: 30px;
 }
 
+.widget .woocommerce-product-search input[type="search"],
 .widget #bbp_search {
     padding-right: 0;
     padding-left: 0;
 }
 
+.widget .woocommerce-product-search label,
 .widget .bb-search-forums-label {
     overflow: hidden;
 }
@@ -2429,7 +2438,8 @@ div.footer-inner ul.social-icons li span:before {
 }
 
 .widget_mc4wp_form_widget form p,
-.widget.widget_newsletterwidget form p {
+.widget.widget_newsletterwidget form p,
+.widget.widget_newsletterwidget form div {
     display: table-cell;
     vertical-align: middle;
     width: 100%;
@@ -2441,11 +2451,20 @@ div.footer-inner ul.social-icons li span:before {
 }
 
 .widget_mc4wp_form_widget form p input[type="email"],
-.widget.widget_newsletterwidget form p input[type="email"] {
+.widget.widget_newsletterwidget form p input[type="email"],
+.widget.widget_newsletterwidget form div input[type="email"] {
     width: 100%;
     background-color: #fff;
-    padding: 14px 20px;
     border: 1px solid rgba(0,0,0,0.11);
+}
+
+.widget_mc4wp_form_widget form p input[type="email"] {
+    padding: 14px 20px;
+}
+
+.widget.widget_newsletterwidget form p input[type="email"],
+.widget.widget_newsletterwidget form div input[type="email"] {
+    padding: 12px 20px;
 }
 
 .widget_mc4wp_form_widget form p button {
@@ -2458,7 +2477,8 @@ div.footer-inner ul.social-icons li span:before {
 }
 
 .widget_mc4wp_form_widget form p button,
-.widget.widget_newsletterwidget form p input[type="submit"] {
+.widget.widget_newsletterwidget form p input[type="submit"],
+.widget.widget_newsletterwidget form div input[type="submit"] {
     width: 46px;
     height: 46px;
     line-height: 1;
@@ -2473,14 +2493,26 @@ div.footer-inner ul.social-icons li span:before {
     border: none;
 }
 
-.widget.widget_newsletterwidget form p input[type="submit"]:hover {
+.widget.widget_newsletterwidget form p input[type="submit"],
+.widget.widget_newsletterwidget form div input[type="submit"]  {
+    height: 44px;
+}
+
+.widget.widget_newsletterwidget form p:last-child,
+.widget.widget_newsletterwidget form div:last-child {
+    vertical-align: bottom;
+}
+
+.widget.widget_newsletterwidget form p input[type="submit"]:hover,
+.widget.widget_newsletterwidget form div input[type="submit"]:hover {
     -moz-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
     -webkit-box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
     box-shadow: inset 0 0 1000px rgba(0, 0, 0, 0.25);
 }
 
 .widget_mc4wp_form_widget form p:last-child,
-.widget.widget_newsletterwidget form p:last-child {
+.widget.widget_newsletterwidget form p:last-child,
+.widget.widget_newsletterwidget form div:last-child {
     width: 46px;
     position: relative;
     right: -1px;
@@ -2492,7 +2524,8 @@ div.footer-inner ul.social-icons li span:before {
     display: block;
 }
 
-.widget.widget_newsletterwidget form p input[type="submit"]:before {
+.widget.widget_newsletterwidget form p input[type="submit"]:before,
+.widget.widget_newsletterwidget form div input[type="submit"]:before {
     content: "\f0e0";
     display: inline-block;
     font: normal normal normal 14px/1 FontAwesome;
@@ -2611,7 +2644,7 @@ div.footer-inner ul.social-icons li span:before {
     font-weight: 400;
     vertical-align: middle;
     margin-right: 10px;
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
 }
 .entry-header.has-image .entry-title a.post-edit-link {
     font-size: 12px;
@@ -4673,10 +4706,12 @@ form#whats-new-form.isCollapsed {
     opacity: 0;
 }
 
+body.single-item.groups.photos #buddypress div#subnav.item-list-tabs,
 body.bp-user.my-account.photos #buddypress div#subnav.item-list-tabs {
     margin-bottom: 40px;
 }
 
+body.single-item.groups.photos form#whats-new-form,
 body.bp-user.my-account.photos form#whats-new-form {
     border: 0;
     height: auto;
@@ -4690,19 +4725,23 @@ body.groups.photos #buddypress #whats-new-options,
     display: none !important;
 }
 
+body.single-item.groups.photos #whats-new-content,
 body.bp-user.my-account.photos #whats-new-content {
     display: block;
 }
 
+body.single-item.groups.photos #buddypress #whats-new-textarea,
 body.bp-user.my-account.photos #buddypress #whats-new-textarea {
     opacity: 1;
 }
 
+body.single-item.groups.photos #buddypress form#whats-new-form #whats-new-content,
 body.bp-user.my-account.photos #buddypress form#whats-new-form #whats-new-content {
     margin-top: 0;
     padding: 0;
 }
 
+body.single-item.groups.photos #buddypress #whats-new-options,
 body.bp-user.my-account.photos #buddypress #whats-new-options {
     display: none !important;
 }
@@ -5138,6 +5177,7 @@ body #buddypress div.activity-comments form#frm_buddypress-edit-activity .ac-tex
 }
 
 #buddypress div.dir-search input[type="submit"],
+.widget .woocommerce-product-search button[type="submit"],
 #bbpress-forums #bbp-search-index-form input#bbp_search_submit,
 #buddypress #search-message-form input#messages_search_submit {
     float: right;
@@ -9210,6 +9250,7 @@ body.bbpress article.forum {
 }
 
 #bbpress-forums #bbp-search-index-form input#bbp_search,
+.widget .woocommerce-product-search button[type="submit"],
 #bbp-search-index-form button#bbp_search_submit {
     height: 66px;
     border: none;
@@ -9235,6 +9276,7 @@ body.bbpress article.forum {
 }
 
 #bbp-search-index-form button#bbp_search_submit,
+.widget .woocommerce-product-search button,
 #buddypress input#messages_search_submit {
     background-color: transparent;
     width: 66px;
@@ -9268,6 +9310,7 @@ body.bbpress article.forum {
 }
 
 body.bbpress #bbp-search-index-form button#bbp_search_submit:hover,
+.widget .woocommerce-product-search button[type="submit"]:hover,
 #buddypress input#messages_search_submit:hover {
     -moz-box-shadow: none;
     -webkit-box-shadow: none;
@@ -15800,7 +15843,7 @@ body .fancybox-inner .buddyboss-comment-media-bulk-uploader-uploaded .file img {
 
 .sap-container {
     position: relative;
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
 }
 
 .sap-container-wrapper .sap-story-publish {
@@ -16273,6 +16316,7 @@ a.liked span.sl-count,
     border: none;
     border-radius: 0;
     margin-bottom: 0;
+    overflow: hidden;
 }
 .onesocial-slider {
     margin-right: -4px;
@@ -16476,7 +16520,7 @@ body .vc_tta-color-white.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-title>
     color: #333;
 }
 body .vc_tta-color-white.vc_tta-style-classic .vc_tta-panel .vc_tta-panel-title>a {
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
     text-transform: uppercase;
     font-size: 12px;
 }
@@ -16568,7 +16612,7 @@ body .vc_tta.vc_general .vc_tta-panel-title>a {
 
 .vc_row .post-box h3 a {
     color: #333;
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
     font-weight: 300;
 }
 
@@ -16583,14 +16627,18 @@ body .vc_tta.vc_general .vc_tta-panel-title>a {
     vertical-align: middle;
 }
 .vc_row .post-box p {
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
     font-weight: 300;
     font-size: 14px;
 }
 
 .vc_row .post-box .entry-summary .button {
-    font-family: 'Lato', sans-serif;
+    /*font-family: 'Lato', sans-serif;*/
     padding: 12px 30px;
+}
+
+body.is-mobile .vc_grid.vc_row .vc_grid-item {
+    clear: both;
 }
 
 /** Testimonials */

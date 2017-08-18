@@ -26,22 +26,27 @@
             /* Show Spinner */
             ele_this.prop( 'disabled', true ).find( '.fa-spin' ).show();
 
-            var dologin = $.post( transport.eh_url_path + "/?ajax-login",
-                {
-                    'ajax-login-security': $( "#ajax-login-security" ).val(),
-                    'username': $( "#login_username" ).val(),
-                    "password": $( "#login_password" ).val(),
-                    "rememberme": $( "#login_rememberme" ).val()
-                }
-            );
+            //Requesting fresh nonce
+            $.post( ajaxurl, { action: 'onesocial_create_nonce' }, function( nonce ){
 
-            /* Login Done Event */
-            dologin.done( function ( d ) {
-                ele_this.prop( 'disabled', false ).find( '.fa-spin' ).hide();
-                $.globalEval( d );
-            } );
+                var dologin = $.post( transport.eh_url_path + "/?ajax-login",
+                    {
+                        'ajax-login-security': nonce,
+                        'username': $( "#login_username" ).val(),
+                        "password": $( "#login_password" ).val(),
+                        "rememberme": $( "#login_rememberme" ).val()
+                    }
+                );
 
-        } );
+                /* Login Done Event */
+                dologin.done( function ( d ) {
+                    ele_this.prop( 'disabled', false ).find( '.fa-spin' ).hide();
+                    $.globalEval( d );
+                } );
+
+            });
+
+        });
 
         /* Open Register Form */
         $( '.joinbutton' ).on( 'click', function ( e ) {
@@ -142,6 +147,20 @@
          }
          } );*/
 
+        if ( $('#siteRegisterBox #blog-details-section').length != 0 ) {
+            var blog_checked = $('#siteRegisterBox #signup_with_blog');
+
+            // hide "Blog Details" block if not checked by default
+            if ( ! blog_checked.prop('checked') ) {
+                $('#siteRegisterBox #blog-details').toggle();
+            }
+
+            // toggle "Blog Details" block whenever checkbox is checked
+            blog_checked.change(function() {
+                $('#siteRegisterBox #blog-details').toggle();
+            });
+        }
+
         var frm_siteRegister_ajaxform_options = {
             dataType: 'json',
             currentform: false,
@@ -236,15 +255,21 @@
     }
 
     /* Initialize Modal Popup */
+    var startWindowScroll = 0;
     function onesocialModalPopup( elem, modal ) {
         $( elem ).magnificPopup( {
             type: 'inline',
             closeOnBgClick: false,
+            fixedContentPos: true,
+            //fixedBgPos: true,
             closeMarkup: '<button title="%title%" class="mfp-close bb-icon-close"></button>',
-            //removalDelay: 400, //delay removal by X to allow out-animation
+            //removalDelay: 400, //delay removal by X to allow out-animation,
             callbacks: {
                 beforeOpen: function () {
                     this.st.mainClass = 'onesocial-popup';
+                    $('html').addClass('mfp-helper');
+                    $('#main-wrap').css('height', '0');
+                    startWindowScroll = $(window).scrollTop();
                 },
                 open: function () {
                     $( 'body' ).addClass( 'popup-open' );
@@ -254,7 +279,9 @@
                 },
                 close: function () {
                     $( 'body' ).removeClass( 'popup-open' );
-                    oneSocialTinyMceFix();
+                    $('html').removeClass('mfp-helper');
+                    $('#main-wrap').css('height', '');
+                    $(window).scrollTop(startWindowScroll);
                 }
             }
         } );

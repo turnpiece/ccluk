@@ -11,7 +11,7 @@
 
 <?php if ( buddyboss_media_has_albums( ) ) : ?>
 	<?php while ( buddyboss_media_albums() ) : buddyboss_media_the_album(); ?>
-		<h2 class="entry-title edit-album-title"><?php _e( 'Edit Album', 'buddyboss-media' );?> 
+		<h2 class="entry-title edit-album-title"><?php _e( 'Edit Album', 'onesocial' );?> 
 			<?php buddyboss_media_btn_delete_album(); ?>
 		</h2>
 
@@ -22,27 +22,27 @@
 				<input type="hidden" name="hdn_album_id" value="<?php buddyboss_media_album_id(); ?>" >
 
 				<div class="editfield">
-					<label for="album_title"><?php _e( 'Title (required)', 'buddyboss-media' );?></label>
+					<label for="album_title"><?php _e( 'Title (required)', 'onesocial' );?></label>
 					<input type="text" name="album_title" value="<?php echo esc_attr( buddyboss_media_album_get_title() );?>">
 				</div>
 
 				<div class="editfield">
-					<label for="album_description"><?php _e( 'Description', 'buddyboss-media' );?></label>
+					<label for="album_description"><?php _e( 'Description', 'onesocial' );?></label>
 					<textarea name="album_description"><?php buddyboss_media_album_description();?></textarea>
 				</div>
 
 				<div class="editfield">
-					<label for="album_privacy"><?php _e( 'Visibility (required)', 'buddyboss-media' );?></label>
+					<label for="album_privacy"><?php _e( 'Visibility (required)', 'onesocial' );?></label>
 					<select name="album_privacy">
 					<?php 
 					$options = array(
-						'public'	=> __('Everyone', 'buddyboss-media'),
-						'private'	=> __('Only Me', 'buddyboss-media'),
-						'members'	=> __('Logged In Users', 'buddyboss-media'),
+						'public'	=> __('Everyone', 'onesocial'),
+						'private'	=> __('Only Me', 'onesocial'),
+						'members'	=> __('Logged In Users', 'onesocial'),
 					);
 
 					if( bp_is_active( 'friends' ) ){
-						$options['friends'] = __('My Friends', 'buddyboss-media');
+						$options['friends'] = __('My Friends', 'onesocial');
 					}
 					
 					$selected_option = buddyboss_media_album_get_privacy();
@@ -55,7 +55,7 @@
 				</div>
 
 				<div class="submit">
-					<input type="submit" name="btn_submit" value="<?php esc_attr_e( 'Save', 'buddyboss-media' );?>">
+					<input type="submit" name="btn_submit" value="<?php esc_attr_e( 'Save', 'onesocial' );?>">
 				</div>
 
 			</form>
@@ -65,6 +65,6 @@
 
 <?php else: ?>
 	<div id="message" class="info">
-		<p><?php _e( 'There were no albums found.', 'buddyboss-media' ); ?></p>
+		<p><?php _e( 'There were no albums found.', 'onesocial' ); ?></p>
 	</div>
 <?php endif; ?>

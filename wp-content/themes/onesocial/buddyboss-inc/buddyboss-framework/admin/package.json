@@ -1,6 +1,6 @@
 {
   "name": "redux-framework",
-  "version": "3.5.8",
+  "version": "3.6.4",
   "title": "ReduxFramework",
   "description": "Redux is a simple, truly extensible options framework for WordPress themes and plugins.",
   "main": "Gruntfile.js",
@@ -16,7 +16,7 @@
     "url": "https://github.com/ReduxFramework/ReduxFramework/issues"
   },
   "author": "Redux Framework Team",
-  "license": "GPLv3+",
+  "license": "GPLv2+",
   "homepage": "http://reduxframework.com",
   "devDependencies": {
     "compass-options": "^0.1.1",

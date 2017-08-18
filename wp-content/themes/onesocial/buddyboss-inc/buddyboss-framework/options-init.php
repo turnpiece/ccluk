@@ -1354,6 +1354,22 @@ if ( !class_exists( 'onesocial_Redux_Framework_config' ) ) {
 					),
 				),
 			);
+
+			//Miscellaneous settings
+			$entry_content		 = apply_filters( 'onesocial_entry_content', array( 'content' => 'Post Content', 'excerpt' => 'Post Excerpt' ) );
+			$this->sections[] = array(
+				'title'		 => __( 'Miscellaneous', 'onesocial' ),
+				'icon'		 => 'el-icon-th',
+				'fields'	 => array(
+					array(
+						'id'		 => 'onesocial_entry_content',
+						'type'		 => 'select',
+						'title'		 => __( 'Entry Content', 'onesocial' ),
+						'options'	 => $entry_content,
+						'default'	 => 'excerpt',
+					)
+				)
+			);
 		}
 
 		/**

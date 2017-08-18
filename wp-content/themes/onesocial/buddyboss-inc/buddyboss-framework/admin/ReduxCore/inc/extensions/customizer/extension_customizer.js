@@ -1,4 +1,4 @@
-/* global redux, setting */
+/* global jQuery, document, redux, redux_change, setting */
 
 /*!
  SerializeJSON jQuery plugin.
@@ -51,27 +51,27 @@
             customTypes: {}, // override defaultTypes
             defaultTypes: {
                 string: function( str ) {
-                    return String( str )
+                    return String( str );
                 },
                 number: function( str ) {
-                    return Number( str )
+                    return Number( str );
                 },
                 boolean: function( str ) {
-                    return (["false", "null", "undefined", "", "0"].indexOf( str ) === -1)
+                    return (["false", "null", "undefined", "", "0"].indexOf( str ) === -1);
                 },
                 null: function( str ) {
-                    return (["false", "null", "undefined", "", "0"].indexOf( str ) !== -1) ? null : str
+                    return (["false", "null", "undefined", "", "0"].indexOf( str ) !== -1) ? null : str;
                 },
                 array: function( str ) {
-                    return JSON.parse( str )
+                    return JSON.parse( str );
                 },
                 object: function( str ) {
-                    return JSON.parse( str )
+                    return JSON.parse( str );
                 },
                 auto: function( str ) {
                     return $.serializeJSON.parseValue(
                         str, null, {parseNumbers: true, parseBooleans: true, parseNulls: true}
-                    )
+                    );
                 } // try again with something like "parseAll"
             },
 
@@ -83,36 +83,37 @@
             var opt, validOpts, defaultOptions, optWithDefault, parseAll, f;
             f = $.serializeJSON;
 
-            if ( options == null ) options = {};       // options ||= {}
+            if ( options === null || options === undefined ) options = {};       // options ||= {}
             defaultOptions = f.defaultOptions || {}; // defaultOptions
 
             // Make sure that the user didn't misspell an option
             validOpts = ['checkboxUncheckedValue', 'parseNumbers', 'parseBooleans', 'parseNulls', 'parseAll', 'parseWithFunction', 'customTypes', 'defaultTypes', 'useIntKeysAsArrayIndex']; // re-define because the user may override the defaultOptions
             for ( opt in options ) {
                 if ( validOpts.indexOf( opt ) === -1 ) {
-                    throw new Error( "serializeJSON ERROR: invalid option '" + opt + "'. Please use one of " + validOpts.join( ', ' ) );
+                    throw new Error(
+                        "serializeJSON ERROR: invalid option '" + opt + "'. Please use one of " + validOpts.join(
+                            ', '
+                        )
+                    );
                 }
             }
 
             // Helper to get the default value for this option if none is specified by the user
             optWithDefault = function( key ) {
                 return (options[key] !== false) && (options[key] !== '') && (options[key] || defaultOptions[key]);
-            }
+            };
 
             // Return computed options (opts to be used in the rest of the script)
             parseAll = optWithDefault( 'parseAll' );
             return {
                 checkboxUncheckedValue: optWithDefault( 'checkboxUncheckedValue' ),
-
                 parseNumbers: parseAll || optWithDefault( 'parseNumbers' ),
                 parseBooleans: parseAll || optWithDefault( 'parseBooleans' ),
                 parseNulls: parseAll || optWithDefault( 'parseNulls' ),
                 parseWithFunction: optWithDefault( 'parseWithFunction' ),
-
                 typeFunctions: $.extend( {}, optWithDefault( 'defaultTypes' ), optWithDefault( 'customTypes' ) ),
-
                 useIntKeysAsArrayIndex: optWithDefault( 'useIntKeysAsArrayIndex' ),
-            }
+            };
         },
 
         // Given a string, apply the type or the relevant "parse" options, to return the parsed value
@@ -152,9 +153,9 @@
             } else {
                 var keys = [];
                 for ( var key in obj ) {
-                    keys.push( key )
+                    keys.push( key );
                 }
-                ;
+
                 return keys;
             }
         }, // polyfill Object.keys to get option keys in IE<9
@@ -202,7 +203,11 @@
                 if ( validTypes.indexOf( match[2] ) !== -1 ) {
                     return [match[1], match[2]];
                 } else {
-                    throw new Error( "serializeJSON ERROR: Invalid type " + match[2] + " found in input name '" + name + "', please use one of " + validTypes.join( ', ' ) )
+                    throw new Error(
+                        "serializeJSON ERROR: Invalid type " + match[2] + " found in input name '" + name + "', please use one of " + validTypes.join(
+                            ', '
+                        )
+                    )
                 }
             } else {
                 return [name, '_']; // no defined type, then use parse options
@@ -317,7 +322,6 @@
 
 }( window.jQuery || window.$ ));
 
-
 (function( $ ) {  //This functions first parameter is named $
     'use strict';
 
@@ -335,25 +339,58 @@
                 $.redux.initFields();
             }
         );
+
+        redux.args.disable_save_warn = true;
+        var reduxChange = redux_change;
+        redux_change = function( variable ) {
+            variable = $( variable );
+            reduxChange.apply( this, arguments );
+            redux.customizer.save( variable )
+        };
+
+        var redux_initFields = $.redux.initFields;
+        $.redux.initFiles = function() {
+            redux_initFields();
+        }
     };
-    redux.customizer.save = function( $obj, $container ) {
+
+    redux.customizer.save = function( $obj ) {
         var $parent = $obj.hasClass( 'redux-field' ) ? $obj : $obj.parents( '.redux-field-container:first' );
+        redux.customizer.inputSave( $parent );
+    };
+    redux.customizer.inputSave = function( $parent ) {
+
+        if ( !$parent.hasClass( 'redux-field-container' ) ) {
+            $parent = $parent.parents( '[class^="redux-field-container"]' );
+        }
+
         var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
 
-        var $nData = $parent.serializeJSON();
+        if ( !$id ) {
+            $parent = $parent.parents( '.redux-container-repeater:first' );
+            var $id = $parent.parent().find( '.redux-customizer-input' ).data( 'id' );
+        }
+
+        //var $nData = $parent.serializeJSON();
+        var $nData = $parent.find( ':input' ).serializeJSON();
 
         $.each(
             $nData, function( $k, $v ) {
                 $nData = $v;
             }
         );
-        //console.log( $nData );
+
+        var $key = $parent.parent().find( '.redux-customizer-input' ).data( 'key' );
+        if ( $nData[$key] ) {
+            $nData = $nData[$key];
+        }
 
         var $control = wp.customize.control( $id );
 
-        $control.active.sync();
-        //console.log($control);
-
+        // Customizer hack since they didn't code it to save order...
+        if ( JSON.stringify( $control.setting._value ) !== JSON.stringify( $nData ) ) {
+            $control.setting._value = null;
+        }
         $control.setting.set( $nData );
-    };
+    }
 })( jQuery );

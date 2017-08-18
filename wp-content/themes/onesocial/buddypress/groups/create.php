@@ -113,9 +113,9 @@ do_action( 'bp_before_create_group_page' );
 				<?php if ( $group_types = bp_groups_get_group_types( array( 'show_in_create_screen' => true ), 'objects' ) ): ?>
 
 
-						<h4><?php _e( 'Group Types', 'buddypress' ); ?></h4>
+						<h4><?php _e( 'Group Types', 'onesocial' ); ?></h4>
 
-						<p><?php _e( 'Select the types this group should be a part of.', 'buddypress' ); ?></p>
+						<p><?php _e( 'Select the types this group should be a part of.', 'onesocial' ); ?></p>
 
 
 						<?php foreach ( $group_types as $type ) : ?>
@@ -124,7 +124,7 @@ do_action( 'bp_before_create_group_page' );
 								<label for="<?php printf( 'group-type-%s', $type->name ); ?>"><input type="checkbox" name="group-types[]" id="<?php printf( 'group-type-%s', $type->name ); ?>" value="<?php echo esc_attr( $type->name ); ?>" /> <?php echo esc_html( $type->labels['name'] ); ?>
 									<?php if ( ! empty( $type->description ) ) {
 										/* translators: Group type description shown when creating a group. */
-										printf( __( '&ndash; %s', 'buddypress' ), '<span class="bp-group-type-desc">' . esc_html( $type->description ) . '</span>' );
+										printf( __( '&ndash; %s', 'onesocial' ), '<span class="bp-group-type-desc">' . esc_html( $type->description ) . '</span>' );
 									}
 									?>
 								</label>
@@ -271,7 +271,7 @@ do_action( 'bp_before_create_group_page' );
 
 				<div id="header-cover-image"></div>
 
-				<p><?php _e( 'The Cover Image will be used to customize the header of your group.', 'buddypress' ); ?></p>
+				<p><?php _e( 'The Cover Image will be used to customize the header of your group.', 'onesocial' ); ?></p>
 
 				<?php bp_attachments_get_template_part( 'cover-images/index' ); ?>
 

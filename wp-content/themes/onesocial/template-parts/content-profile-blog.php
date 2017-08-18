@@ -18,9 +18,15 @@ $post_content = $post->post_content;
 
             <a class="formatted-content" href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" rel="bookmark">
                 <?php
+					remove_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
+					add_filter( 'get_the_excerpt', 'onesocial_trim_excerpt' );
                     add_filter( 'excerpt_length', 'onesocial_custom_excerpt_length', 999 );
+
                     the_excerpt();
+
                     remove_filter( 'excerpt_length', 'onesocial_custom_excerpt_length', 999 );
+					remove_filter( 'get_the_excerpt', 'onesocial_trim_excerpt' );
+					add_filter( 'get_the_excerpt', 'wp_trim_excerpt' );
                 ?>
             </a>
         </div>

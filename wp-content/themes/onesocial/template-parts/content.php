@@ -73,9 +73,15 @@
 			<?php
 			global $post;
 			$post_content = $post->post_content;
-			?>
 
-			<?php the_excerpt(); ?>
+			//entry-content
+			if ( 'excerpt' === onesocial_get_option( 'onesocial_entry_content' ) ):
+				the_excerpt();
+			else:
+				the_content();
+			endif;
+
+			?>
 
 			<footer class="entry-meta">
 				<a href="<?php the_permalink(); ?>" title="<?php echo esc_attr( sprintf( __( 'Permalink to %s', 'onesocial' ), the_title_attribute( 'echo=0' ) ) ); ?>" class="read-more"><?php _e( 'Continue reading', 'onesocial' ); ?></a>

@@ -8,18 +8,18 @@ do_action( 'bp_before_member_settings_template' );
 	<?php if ( !is_super_admin() ) : ?>
 
 		<div class="clearfix current-password-wrapper">
-			<label for="pwd"><?php _e( 'Current Password', 'buddypress' ); ?></label>
-			<a class="lost-password" href="<?php echo wp_lostpassword_url(); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'buddypress' ); ?>"><?php _e( 'Lost your password?', 'buddypress' ); ?></a>
+			<label for="pwd"><?php _e( 'Current Password', 'onesocial' ); ?></label>
+			<a class="lost-password" href="<?php echo wp_lostpassword_url(); ?>" title="<?php esc_attr_e( 'Password Lost and Found', 'onesocial' ); ?>"><?php _e( 'Lost your password?', 'onesocial' ); ?></a>
 		</div>
 
-		<input type="password" name="pwd" id="pwd" size="16" value="" placeholder="<?php _e( 'Enter', 'buddypress' ); ?>" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?> />
+		<input type="password" name="pwd" id="pwd" size="16" value="" placeholder="<?php _e( 'Enter', 'onesocial' ); ?>" class="settings-input small" <?php bp_form_field_attributes( 'password' ); ?> />
 
 	<?php endif; ?>
 
-	<label for="email"><?php _e( 'Account Email', 'buddypress' ); ?></label>
+	<label for="email"><?php _e( 'Account Email', 'onesocial' ); ?></label>
 	<input type="email" name="email" id="email" value="<?php echo bp_get_displayed_user_email(); ?>" class="settings-input" <?php bp_form_field_attributes( 'email' ); ?>/>
 
-	<label for="pass1"><?php _e( 'Change Password <span>(leave blank for no change)</span>', 'buddypress' ); ?></label>
+	<label for="pass1"><?php _e( 'Change Password <span>(leave blank for no change)</span>', 'onesocial' ); ?></label>
 	<input type="password" name="pass1" id="pass1" size="16" value="" class="settings-input small password-entry" <?php bp_form_field_attributes( 'password' ); ?> placeholder="<?php _e( 'New Password', 'buddypress' ); ?>"/>
 	<div id="pass-strength-result"></div>
 	<input type="password" name="pass2" id="pass2" size="16" value="" class="settings-input small password-entry-confirm" <?php bp_form_field_attributes( 'password' ); ?> placeholder="<?php _e( 'Repeat New Password', 'buddypress' ); ?>"/>
@@ -34,7 +34,7 @@ do_action( 'bp_before_member_settings_template' );
 	?>
 
 	<div class="submit">
-		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'buddypress' ); ?>" id="submit" class="auto" />
+		<input type="submit" name="submit" value="<?php esc_attr_e( 'Save Changes', 'onesocial' ); ?>" id="submit" class="auto" />
 	</div>
 
 	<?php

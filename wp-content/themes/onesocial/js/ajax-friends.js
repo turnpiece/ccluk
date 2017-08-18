@@ -31,8 +31,8 @@
         ajaxCall( $( this ) );
     } );
 
-    if ( $( '#friends-filter' ).length > 0 ) {
-        ajaxCall( $( '#friends-filter a#default' ) );
-    }
+    //if ( $( '#friends-filter' ).length > 0 ) {
+        //ajaxCall( $( '#friends-filter a#default' ) );
+    //}
 
 } )( jQuery );

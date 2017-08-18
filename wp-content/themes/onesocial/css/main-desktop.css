@@ -458,7 +458,7 @@ body.full-width .site-content,
     text-align: left;
     visibility: hidden;
     min-width: 264px;
-    padding: 10px 20px;
+    padding: 10px 10px;
     width: 100%;
     z-index: 21;
     white-space: initial;
@@ -488,6 +488,60 @@ body.full-width .site-content,
     visibility: visible;
 }
 
+#all-notificatios .pop span.notification-icon:before {
+    font-family: 'FontAwesome';
+    font-weight: normal;
+    font-style: normal;
+    text-rendering: auto;
+    content: "\f06a";
+    -webkit-font-smoothing: antialiased;
+    speak: none;
+    vertical-align: top;
+    float: left;
+    font-size: 16px;
+    margin-right: 10px;
+}
+#all-notificatios .pop span.notification-icon.friendship_accepted:before,
+#all-notificatios .pop span.notification-icon.friendship_request:before {
+    content: "\f0c0";
+}
+#all-notificatios .pop span.notification-icon.bbp_new_reply:before {
+    content: "\f211";
+}
+#all-notificatios .pop span.notification-icon.new_follow:before {
+    content: "\f234";
+}
+#all-notificatios .pop span.notification-icon.comment_reply:before,
+#all-notificatios .pop span.notification-icon.update_reply:before {
+    content: "\f086";
+}
+#all-notificatios .pop span.notification-icon.new_at_mention:before {
+    content: "\f1fa";
+}
+#all-notificatios .pop span.notification-icon.new_message:before {
+    content: "\f27a";
+}
+#all-notificatios .pop span.notification-icon.group_invite:before {
+    content: "\f2b6";
+}
+#all-notificatios .pop span.notification-icon.membership_request_accepted:before,
+#all-notificatios .pop span.notification-icon.new_membership_request:before {
+    content: "\f2c2";
+}
+#all-notificatios .pop span.notification-icon.member_promoted_to_mod:before,
+#all-notificatios .pop span.notification-icon.member_promoted_to_admin:before {
+    content: "\f21b";
+}
+#all-notificatios .pop span.notification-icon.buddyboss_wall_like_notifier:before {
+    content: "\f004";
+}
+#all-notificatios .pop span.notification-icon.buddyboss_media_tagged:before {
+    content: "\f02c";
+}
+#all-notificatios .bb-adminbar-notifications > li {
+    padding: 1px 0;
+    clear: both;
+}
 .header-notifications #ab-pending-notifications,
 .header-notifications a.notification-link span {
     font-size: 0;
@@ -498,7 +552,7 @@ body.full-width .site-content,
     font-size: 0;
 }
 
-.header-notifications a span:before {
+.header-notifications > a span:before {
     content: "I";
     font-family: "onesocial";
     font-style: normal;
@@ -602,7 +656,7 @@ body.full-width .site-content,
     text-align: left;
     text-overflow: ellipsis;
     white-space: nowrap;
-    width: 360px;
+    width: 160px;
 }
 
 .site-title a {
@@ -648,7 +702,7 @@ body.full-width .site-content,
 
 #logo-area {
     padding-right: 20px;
-    width: 380px;
+    width: 180px;
 }
 
 #site-navigation {
@@ -824,6 +878,18 @@ header-aside,
 .header-button:hover {
     color: #fff;
     background-color: #54ae68;
+}
+
+.header-notifications a.header-button span>b {
+    background: #54ae68;
+    border-radius: 100%;
+    color: #fff!important;
+    font-size: 11px;
+    line-height: 1;
+    padding: 3px 5px;
+    position: absolute;
+    right: 10px;
+    top: 10px;
 }
 
 /* User Avatar and Links */
@@ -1848,6 +1914,12 @@ body.search h1.entry-title {
     }
 }
 
+@media screen and (min-width: 900px) {
+    .home-inner-wrap #secondary .widget:first-child {
+        padding-top: 30px;
+    }
+}
+
 /*----------------------------------------------------------------
 >>> BUDDYPRESS
 ----------------------------------------------------------------*/
@@ -2379,6 +2451,10 @@ body.activity-permalink #buddypress li.mini .activity-meta {
 
 #buddypress .activity-list .activity-comments {
     margin: 0 0 0 30%;
+}
+
+#buddypress #activity-stream li .activity-comments.buddyboss-activity-comments-form {
+    margin-left: 30%;
 }
 
 body.activity-permalink #buddypress .activity-list .activity-comments {

@@ -37,7 +37,7 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 
 				<p class="username-wrap">
 					<label for="login_username"><?php _e( 'Username', 'onesocial' ); ?></label>
-					<input type="text" id="login_username" placeholder="<?php _e( 'Enter', 'onesocial' ); ?>" class="input" />
+					<input type="text" id="login_username" placeholder="<?php _e( 'Enter', 'onesocial' ); ?>" class="input" autocapitalize="none" />
 				</p>
 
 				<p class="password-wrap">
@@ -59,8 +59,6 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 				<p>
 					<button id="login_button" class="button"><i class="fa fa-spinner fa-spin" style="display: none"></i> <?php _e( 'Sign In', 'onesocial' ); ?></button>
 				</p>
-
-				<?php wp_nonce_field( 'ajax-login-security', 'ajax-login-security' ); ?>
 
 				<?php if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) : ?>
 					<h6><?php _e( 'Not a member?', 'onesocial' ); ?> <a href="#siteRegisterBox" class="joinbutton"><?php _e( 'Sign Up Now!', 'onesocial' ); ?></a></h6>

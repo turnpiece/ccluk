@@ -40,7 +40,7 @@ do_action( 'bp_before_activity_comment' ); ?>
 
 		<?php if ( bp_activity_user_can_delete() ) : ?>
 
-			<a href="<?php bp_activity_comment_delete_link(); ?>" class="delete acomment-delete confirm bp-secondary-action" rel="nofollow"><?php _e( 'Delete', 'buddypress' ); ?></a>
+			<a href="<?php bp_activity_comment_delete_link(); ?>" class="delete acomment-delete confirm bp-secondary-action" rel="nofollow"><?php _e( 'Delete', 'onesocial' ); ?></a>
 
 		<?php endif; ?>
 

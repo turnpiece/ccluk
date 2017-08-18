@@ -160,7 +160,7 @@ class OneSocial_Profile_Widget extends WP_Widget {
 								<li><a href="alphabetically"><?php _e( 'Alphabetical', 'onesocial' ); ?></a></li>
 							</ul>
 						</div>
-						<div id="following-results" class="members-list-results"></div>
+						<div id="following-results" class="members-list-results"><?php echo buddyboss_get_follow('following'); ?></div>
 					</div><?php
 				}
 				if ( $followers_count != 0 && $is_followers ) {
@@ -176,7 +176,7 @@ class OneSocial_Profile_Widget extends WP_Widget {
 								<li><a href="alphabetically"><?php _e( 'Alphabetical', 'onesocial' ); ?></a></li>
 							</ul>
 						</div>
-						<div id="followers-results" class="members-list-results"></div>
+						<div id="followers-results" class="members-list-results"><?php echo buddyboss_get_follow('followers'); ?></div>
 					</div><?php
 				}
 			}
@@ -196,7 +196,7 @@ class OneSocial_Profile_Widget extends WP_Widget {
 								<li><a href="alphabetically"><?php _e( 'Alphabetical', 'onesocial' ); ?></a></li>
 							</ul>
 						</div>
-						<div class="friends-results members-list-results"></div>
+						<div class="friends-results members-list-results"><?php echo buddyboss_get_friends( 'recently_active', 5 ) ?></div>
 					</div>
 					<?php
 				}

@@ -150,7 +150,13 @@ Class BuddyBoss_Theme {
 		}
 
 		// Add Redux Framework
-		require_once( $this->inc_dir . '/buddyboss-framework/admin-init.php' );
+		if ( $this->backend_should_load() ) {
+			require_once( $this->inc_dir . '/buddyboss-framework/admin-init.php' );
+		}
+
+        if(!is_admin()) {
+        	add_action( 'wp_head', array( $this, 'output_typography_css' ), 150 );
+        }
 
 		// Option settings
 		require_once( $this->inc_dir . '/buddyboss-framework/options/setting-options.php' );
@@ -183,10 +189,61 @@ Class BuddyBoss_Theme {
 		// Custom Widgets
 		require_once( $this->inc_dir . '/buddyboss-widgets/custom-widgets.php' );
 
+		//Cache update hook
+		require_once( $this->inc_dir . '/cache-update-hook.php' );
+
 		// Allow automatic updates via the WordPress dashboard
 		require_once( $this->inc_dir . '/buddyboss-theme-updater.php' );
-		new buddyboss_updater_theme( 'http://update.buddyboss.com/theme', basename( get_template_directory() ), 170 );
+		//new buddyboss_updater_theme( 'http://update.buddyboss.com/theme', basename( get_template_directory() ), 170 );
 	}
+
+	function backend_should_load() {
+
+		if(is_admin()) {
+			return true;
+		}
+
+        $onesocial_typography = get_transient("onesocial_typography");
+
+		if(empty($onesocial_typography)) {
+			return true;
+		}
+
+		return false;
+	}
+
+    /**
+     * Output the theme typography css
+     *
+     */
+    public function output_typography_css() {
+
+        $onesocial_typography = get_transient("onesocial_typography");
+
+        if(empty($onesocial_typography)) {
+
+        	global $reduxConfig;
+
+        	$reduxFramework = $reduxConfig->ReduxFramework;
+	        $protocol           = ( ! empty ( $_SERVER['HTTPS'] ) && $_SERVER['HTTPS'] !== 'off' || $_SERVER['SERVER_PORT'] == 443 ) ? "https:" : "http:";
+	        $typography         = new ReduxFramework_typography ( null, null, $reduxFramework );
+	        $google_fontlink    = $protocol.$typography->makeGoogleWebfontLink( $reduxFramework->typography );
+
+	  		$onesocial_typography["google_font_link"] = $google_fontlink;
+	  		$onesocial_typography["css"] = $reduxFramework->outputCSS;
+
+		    set_transient( 'onesocial_typography', $onesocial_typography );
+
+        }
+
+        $google_fontlink    = $onesocial_typography["google_font_link"];
+        $outputCSS          = $onesocial_typography["css"];
+
+	    wp_enqueue_style( 'redux-google-fonts-onesocial-options', $google_fontlink, array(), '1.0' );
+
+        echo '<style type="text/css" title="dynamic-css" class="options-output">' . $outputCSS . '</style>';
+
+    }
 
 	/**
 	 * Actions and filters

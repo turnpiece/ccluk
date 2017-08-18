@@ -33,17 +33,17 @@
 
 	<li class="bbp-footer">
 
-		<div class="bbp-reply-author"><?php  _e( 'Author',  'bbpress' ); ?></div>
+		<div class="bbp-reply-author"><?php  _e( 'Author',  'onesocial' ); ?></div>
 
 		<div class="bbp-reply-content">
 
 			<?php if ( !bbp_show_lead_topic() ) : ?>
 
-				<?php _e( 'Posts', 'bbpress' ); ?>
+				<?php _e( 'Posts', 'onesocial' ); ?>
 
 			<?php else : ?>
 
-				<?php _e( 'Replies', 'bbpress' ); ?>
+				<?php _e( 'Replies', 'onesocial' ); ?>
 
 			<?php endif; ?>
 

@@ -16,7 +16,7 @@ if ( !is_user_logged_in() ) {
 		//get_template_part( 'template-parts/site-login' );
 	} else {
 
-		if ( bp_get_signup_allowed() ) {
+		if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
 			?>
 			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button boss-tooltip" data-tooltip="<?php _e( 'Register', 'onesocial' ); ?>"><i class="bb-icon-pencil-square-o"></i></a>
 		<?php } ?>

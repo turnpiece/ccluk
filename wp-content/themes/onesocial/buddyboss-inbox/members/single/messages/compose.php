@@ -2,7 +2,7 @@
 
 	<?php do_action( 'bp_before_messages_compose_content' ); ?>
 
-	<label for="send-to-input"><?php _e("Send To (Username or Friend's Name)", 'buddypress' ); ?></label>
+	<label for="send-to-input"><?php _e("Send To (Username or Friend's Name)", 'onesocial' ); ?></label>
 	
 	<ul class="first acfb-holder">
 		<li>
@@ -31,10 +31,10 @@
 	</label>
 	<?php endif; ?>
 
-	<label for="subject"><?php _e( 'Subject', 'buddypress' ); ?></label>
+	<label for="subject"><?php _e( 'Subject', 'onesocial' ); ?></label>
 	<input type="text" name="subject" id="subject" value="<?php echo ( isset($draft_detail->draft_subject) && !empty($draft_detail->draft_subject) ) ? $draft_detail->draft_subject : bp_get_messages_subject_value(); ?>" />
 
-	<label for="content"><?php _e( 'Message', 'buddypress' ); ?></label>
+	<label for="content"><?php _e( 'Message', 'onesocial' ); ?></label>
 
     <?php
     $content = ( isset($draft_detail->draft_content) && !empty($draft_detail->draft_content) ) ? $draft_detail->draft_content : bp_get_messages_content_value();
@@ -86,7 +86,7 @@
 	<?php do_action( 'bp_after_messages_compose_content' ); ?>
 
 	<div class="submit">
-		<input type="submit" value="<?php esc_attr_e( "Send Message", 'buddypress' ); ?>" name="send" id="send" />
+		<input type="submit" value="<?php esc_attr_e( "Send Message", 'onesocial' ); ?>" name="send" id="send" />
 	</div>
 
 	<?php wp_nonce_field( 'messages_send_message' ); ?>

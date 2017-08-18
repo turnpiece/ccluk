@@ -17,8 +17,8 @@
 			<thead>
 				<tr>
 					<th scope="col" class="thread-checkbox"><input id="select-all-messages" type="checkbox"><strong></strong></th>
-					<th scope="col" class="thread-from"><?php _e( 'From', 'buddypress' ); ?></th>
-					<th scope="col" class="thread-info"><?php _e( 'Subject', 'buddypress' ); ?></th>
+					<th scope="col" class="thread-from"><?php _e( 'From', 'onesocial' ); ?></th>
+					<th scope="col" class="thread-info"><?php _e( 'Subject', 'onesocial' ); ?></th>
 					<?php
 
 					/**
@@ -31,8 +31,8 @@
 					 */
 					do_action( 'bp_messages_inbox_list_header' ); ?>
 
-					<th scope="col" class="thread-date"><?php _e( 'Date', 'buddypress' ); ?></th>
-					<th scope="col" class="thread-options"><?php _e( 'Actions', 'buddypress' ); ?></th>
+					<th scope="col" class="thread-date"><?php _e( 'Date', 'onesocial' ); ?></th>
+					<th scope="col" class="thread-options"><?php _e( 'Actions', 'onesocial' ); ?></th>
 				</tr>
 			</thead>
 

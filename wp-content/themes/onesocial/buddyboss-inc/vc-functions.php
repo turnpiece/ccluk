@@ -261,7 +261,7 @@ function onesocial_addShortcodes(){
             $output .= '<div class="wpb_gallery_slides' . $type . '" data-interval="' . $interval . '"' . $flex_fx . '>' . $slides_wrap_start . $gal_images . $slides_wrap_end . '</div>';
             $output .= "\n\t\t" . '</div> ';
             $output .= "\n\t" . '</div> ';
-            echo $output;
+            return $output;
         }
     }
 

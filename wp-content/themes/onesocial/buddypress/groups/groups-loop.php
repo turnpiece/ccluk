@@ -37,13 +37,13 @@
 									$group = & $groups_template->group;
 
 								if ( 'public' == $group->status ) {
-									$type = '<i class="fa bb-icon fa-unlock-alt"></i><span>' . __( 'Public', 'buddypress' ) . '</span>';
+									$type = '<i class="fa bb-icon fa-unlock-alt"></i><span>' . __( 'Public', 'onesocial' ) . '</span>';
 								} elseif ( 'hidden' == $group->status ) {
-									$type = '<i class="fa bb-icon fa-eye-slash"></i><span>' . __( 'Hidden', 'buddypress' ) . '</span>';
+									$type = '<i class="fa bb-icon fa-eye-slash"></i><span>' . __( 'Hidden', 'onesocial' ) . '</span>';
 								} elseif ( 'private' == $group->status ) {
-									$type = '<i class="fa bb-icon fa-lock"></i><span>' . __( 'Private', 'buddypress' ) . '</span>';
+									$type = '<i class="fa bb-icon fa-lock"></i><span>' . __( 'Private', 'onesocial' ) . '</span>';
 								} else {
-									$type = ucwords( $group->status ) . ' ' . __( 'Group', 'buddypress' );
+									$type = ucwords( $group->status ) . ' ' . __( 'Group', 'onesocial' );
 								}
 
 								echo $type;

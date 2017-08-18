@@ -22,7 +22,7 @@
 	<?php else : ?>
         <?php 		
             $t = array(
-                'before' => '<div class="bbp-topic-tags"><span>' . esc_html__( 'Tagged', 'bbpress' ) . '</span>',
+                'before' => '<div class="bbp-topic-tags"><span>' . esc_html__( 'Tagged', 'onesocial' ) . '</span>',
                 'sep'    => '',
                 'after'  => '</div>'
             );

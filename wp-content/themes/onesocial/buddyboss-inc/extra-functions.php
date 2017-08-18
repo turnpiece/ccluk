@@ -124,3 +124,20 @@ function lost_pass_callback() {
 
 add_action( 'wp_ajax_nopriv_lost_pass', 'lost_pass_callback' );
 add_action( 'wp_ajax_lost_pass', 'lost_pass_callback' );
+
+/**
+ * Output fresh nonces instead of cached ones
+ *
+ * @return string
+ */
+function onesocial_create_nonce() {
+	// It's clear that form submissions and AJAX requests, especially sensible ones, need "nonces" to avoid certain exploits.
+	// However, with heavy use of caching systems it becomes harder to generate them and output fresh nonces instead of cached ones.
+	// To solve the problem I thought about creating an AJAX function that returns a fresh nonce, to be requested before a form is submitted.
+	// This nonce will be then appended to the form as a hidden field.
+	echo wp_create_nonce('ajax-login-security');
+	die;
+}
+
+add_action('wp_ajax_onesocial_create_nonce', 'onesocial_create_nonce');
+add_action('wp_ajax_nopriv_onesocial_create_nonce', 'onesocial_create_nonce');

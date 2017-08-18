@@ -9,7 +9,7 @@
 
 <?php do_action( 'template_notices' ); ?>
 
-<h2 class="entry-title"><?php _e( 'Albums', 'buddyboss-media' ); ?>
+<h2 class="entry-title"><?php _e( 'Albums', 'onesocial' ); ?>
 	<?php
 	if ( bp_is_my_profile() ) {
 		global $bp;
@@ -17,7 +17,7 @@
 		$create_album_url	 = esc_url( add_query_arg( 'album', 'new', $create_album_url ) );
 		?>
 		<a href="<?php echo esc_url( $create_album_url ); ?>" class="button album-create bp-title-button">
-			<?php _e( 'Create an Album', 'buddyboss-media' ); ?>
+			<?php _e( 'Create an Album', 'onesocial' ); ?>
 		</a>
 		<?php
 	}
@@ -80,7 +80,7 @@
 		<?php else: ?>
 
 			<div id="message" class="info">
-				<p><?php _e( 'There were no albums found.', 'buddyboss-media' ); ?></p>
+				<p><?php _e( 'There were no albums found.', 'onesocial' ); ?></p>
 			</div>
 
 		<?php endif; ?>

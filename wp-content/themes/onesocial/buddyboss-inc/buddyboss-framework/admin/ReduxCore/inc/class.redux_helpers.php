@@ -489,7 +489,7 @@
                         $sysinfo['wp_remote_post_error'] = $response->get_error_message();
                     }
 
-                    $response = wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' );
+                    $response = @wp_remote_get( 'http://reduxframework.com/wp-admin/admin-ajax.php?action=get_redux_extensions' );
 
                     if ( ! is_wp_error( $response ) && $response['response']['code'] >= 200 && $response['response']['code'] < 300 ) {
                         $sysinfo['wp_remote_get']       = 'true';
@@ -699,6 +699,17 @@
                 }
 
                 return $ret;
+            }
+
+            public static function get_extension_dir( $dir ) {
+                return trailingslashit( wp_normalize_path( dirname( $dir ) ) );
+            }
+
+            public static function get_extension_url( $dir ) {
+                $ext_dir = Redux_Helpers::get_extension_dir( $dir );
+                $ext_url = str_replace( wp_normalize_path( WP_CONTENT_DIR ), WP_CONTENT_URL, $ext_dir );
+
+                return $ext_url;
             }
         }
     }

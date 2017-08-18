@@ -227,7 +227,7 @@ function os_ajax_register(){
             // Create errors for required fields without values.
             if ( xprofile_check_is_required_field( $field_id ) && empty( $_POST[ 'field_' . $field_id ] ) && ! bp_current_user_can( 'bp_moderate' ) ){
                 $all_fields_valid = false;
-                $response['js'] .= 'jQuery(".editfield.field_'. $field_id .'").after("<p class=\"ctmessage error field_erorr\">'. __( 'This is a required field', 'buddypress' ) .'</p>");';
+                $response['js'] .= 'jQuery(".editfield.field_'. $field_id .'").after("<p class=\"ctmessage error field_erorr\">'. __( 'This is a required field', 'onesocial' ) .'</p>");';
             }
             
             if ( !empty( $_POST['field_' . $field_id] ) )
@@ -245,6 +245,26 @@ function os_ajax_register(){
         // Must have at least one profile field
         $usermeta["profile_field_ids"] = '1';
         $usermeta["field_1"] = $username;
+    }
+
+    // Finally, let's check the blog details, if the user wants a blog and blog creation is enabled.
+    if ( isset( $_POST['signup_with_blog'] ) ) {
+        $active_signup = bp_core_get_root_option( 'registration' );
+
+        if ( 'blog' == $active_signup || 'all' == $active_signup ) {
+            $blog_details = bp_core_validate_blog_signup( $_POST['signup_blog_url'], $_POST['signup_blog_title'] );
+
+            // If there are errors with blog details, set them for display.
+            if ( !empty( $blog_details['errors']->errors['blogname'] ) ) {
+                $response['js'] .= 'jQuery("#signup_blog_url").after("<p class=\"ctmessage error field_erorr\">'. $blog_details['errors']->errors['blogname'][0] .'</p>");';
+                die( json_encode($response) );
+            }
+
+            if ( !empty( $blog_details['errors']->errors['blog_title'] ) ) {
+                $response['js'] .= 'jQuery("#signup_blog_title").after("<p class=\"ctmessage error field_erorr\">'. $blog_details['errors']->errors['blog_title'][0] .'</p>");';
+                die( json_encode($response) );
+            }
+        }
     }
 
     $usermeta['password'] = wp_hash_password( $password );
@@ -267,10 +287,14 @@ function os_ajax_register(){
     $orig = buddypress()->members->admin->signups_page;
     buddypress()->members->admin->signups_page = 888;//random number
 
-    bp_core_signup_user($username,$password,$email,$usermeta);
+    // Finally, sign up the user and/or blog.
+    if ( isset( $_POST['signup_with_blog'] ) && is_multisite() )
+        bp_core_signup_blog( $blog_details['domain'], $blog_details['path'], $blog_details['blog_title'], $username, $email, $usermeta );
+    else
+        bp_core_signup_user($username,$password,$email,$usermeta);
 
     buddypress()->members->admin->signups_page = $orig;
-    
+
     $response['status'] = true;
     $response['js'] = 'jQuery("#siteRegisterBox").find(".registerfields").hide();jQuery("#siteRegisterBox").find(".joined").fadeIn();';
     die( json_encode( $response ) );

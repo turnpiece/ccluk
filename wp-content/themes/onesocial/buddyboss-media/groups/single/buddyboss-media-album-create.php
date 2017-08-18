@@ -9,19 +9,19 @@
 
 <?php //do_action( 'template_notices' ); ?>
 
-<h2 class="entry-title create-album-title"><?php _e( 'Create an Album', 'buddyboss-media' );?></h2>
+<h2 class="entry-title create-album-title"><?php _e( 'Create an Album', 'onesocial' );?></h2>
 
 <div id="buddypress" class="album-wrapper">
 	<form method="POST" id="buddyboss-media-album-create-form" class="standard-form album-create-form">
 		<?php wp_nonce_field( 'buddyboss_media_edit_album' );?>
 			
 		<div class="editfield">
-			<label for="album_title"><?php _e( 'Title (required)', 'buddyboss-media' );?></label>
+			<label for="album_title"><?php _e( 'Title (required)', 'onesocial' );?></label>
 			<input type="text" name="album_title" value="<?php if( isset( $_POST['album_title'] ) ){ echo esc_attr($_POST['album_title']); }?>">
 		</div>
 
 		<div class="editfield">
-			<label for="album_description"><?php _e( 'Description', 'buddyboss-media' );?></label>
+			<label for="album_description"><?php _e( 'Description', 'onesocial' );?></label>
 			<textarea name="album_description"><?php if( isset( $_POST['album_description'] ) ){ echo esc_attr($_POST['album_description']); }?></textarea>
 		</div>
 
@@ -47,7 +47,7 @@
 		</div>
 
 		<div class="submit">
-			<input type="submit" name="btn_submit" value="<?php esc_attr_e( 'Create Album', 'buddyboss-media' );?>">
+			<input type="submit" name="btn_submit" value="<?php esc_attr_e( 'Create Album', 'onesocial' );?>">
 		</div>
 
 	</form>

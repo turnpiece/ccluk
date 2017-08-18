@@ -73,7 +73,7 @@ function func_ajax_login() {
 		$creds['user_password'] = $password;
 		$creds['remember'] = true;
 		
-		$user = wp_signon( $creds, false );
+		$user = wp_signon( $creds );
 		
 		if ( is_wp_error($user) ) {
 			$jshtml = $user->get_error_message();

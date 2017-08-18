@@ -161,3 +161,22 @@ if ( !function_exists( 'redux_disable_dev_mode_plugin' ) ) {
 
 	add_action( 'redux/construct', 'redux_disable_dev_mode_plugin' );
 }
+
+/**
+ * When the last save mode is the normal save options
+ */
+if ( !function_exists('redux_options_onesocial_saved' ) ) {
+
+    function redux_options_onesocial_saved() {
+
+	     if(isset($_POST["action"]) && $_POST["action"] == "onesocial_options_ajax_save") {
+	        delete_transient('onesocial_typography');
+	        delete_transient('onesocial_compressed_custom_css');
+	     }
+
+    }
+
+    add_action( 'redux/options/onesocial_options/saved', 'redux_options_onesocial_saved' );
+
+}
+

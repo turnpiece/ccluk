@@ -35,7 +35,7 @@
         ajaxCall( $( this ), $( '#followers-results' ), 'followers' );
     } );
 
-    ajaxCall( $( '#following-filter a#default' ), $( '#following-results' ), 'following' );
-    ajaxCall( $( '#followers-filter a#default' ), $( '#followers-results' ), 'followers' );
+    //ajaxCall( $( '#following-filter a#default' ), $( '#following-results' ), 'following' );
+    //ajaxCall( $( '#followers-filter a#default' ), $( '#followers-results' ), 'followers' );
 
 } )( jQuery );

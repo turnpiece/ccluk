@@ -97,28 +97,28 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 									<p class="field-visibility-settings-toggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
 										<?php
 										printf(
-											__( 'This field can be seen by: %s', 'buddypress' ),
+											__( 'This field can be seen by: %s', 'onesocial' ),
 											'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
 										);
 										?>
-										<a href="#" class="visibility-toggle-link"><?php _ex( 'Change', 'Change profile field visibility level', 'buddypress' ); ?></a>
+										<a href="#" class="visibility-toggle-link"><?php _ex( 'Change', 'Change profile field visibility level', 'onesocial' ); ?></a>
 									</p>
 
 									<div class="field-visibility-settings" id="field-visibility-settings-<?php bp_the_profile_field_id() ?>" style="display: none;">
 										<fieldset>
-											<legend><?php _e( 'Who can see this field?', 'buddypress' ) ?></legend>
+											<legend><?php _e( 'Who can see this field?', 'onesocial' ) ?></legend>
 
 											<?php bp_profile_visibility_radio_buttons() ?>
 
 										</fieldset>
-										<a class="field-visibility-settings-close" href="#"><?php _e( 'Close', 'buddypress' ) ?></a>
+										<a class="field-visibility-settings-close" href="#"><?php _e( 'Close', 'onesocial' ) ?></a>
 									</div>
 
 								<?php else : ?>
 									<p class="field-visibility-settings-notoggle" id="field-visibility-settings-toggle-<?php bp_the_profile_field_id() ?>">
 										<?php
 										printf(
-											__( 'This field can be seen by: %s', 'buddypress' ),
+											__( 'This field can be seen by: %s', 'onesocial' ),
 											'<span class="current-visibility-level">' . bp_get_the_profile_field_visibility_level_label() . '</span>'
 										);
 										?>
@@ -152,6 +152,92 @@ if ( $WORDPRESS_SOCIAL_LOGIN_VERSION ) {
 	                    do_action( 'bp_signup_profile_fields' ); ?>
                         
                         <?php remove_filter( 'bp_xprofile_is_richtext_enabled_for_field', 'onesocial_disable_richtext_for_fields', 90 );?>
+
+						<?php if ( bp_get_blog_signup_allowed() ) : ?>
+
+							<?php
+
+							/**
+							 * Fires before the display of member registration blog details fields.
+							 *
+							 * @since 1.1.0
+							 */
+							do_action( 'bp_before_blog_details_fields' ); ?>
+
+							<?php /***** Blog Creation Details ******/ ?>
+
+							<div class="register-section" id="blog-details-section">
+
+								<h2><?php _e( 'Blog Details', 'buddypress' ); ?></h2>
+
+								<p><label for="signup_with_blog"><input type="checkbox" name="signup_with_blog" id="signup_with_blog" value="1"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes, I\'d like to create a new site', 'buddypress' ); ?></label></p>
+
+								<div id="blog-details"<?php if ( (int) bp_get_signup_with_blog_value() ) : ?>class="show"<?php endif; ?>>
+
+									<label for="signup_blog_url"><?php _e( 'Blog URL', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+									<?php
+
+									/**
+									 * Fires and displays any member registration blog URL errors.
+									 *
+									 * @since 1.1.0
+									 */
+									do_action( 'bp_signup_blog_url_errors' ); ?>
+
+									<?php if ( is_subdomain_install() ) : ?>
+										http:// <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" /> .<?php bp_signup_subdomain_base(); ?>
+									<?php else : ?>
+										<?php echo home_url( '/' ); ?> <input type="text" name="signup_blog_url" id="signup_blog_url" value="<?php bp_signup_blog_url_value(); ?>" />
+									<?php endif; ?>
+
+									<label for="signup_blog_title"><?php _e( 'Site Title', 'buddypress' ); ?> <?php _e( '(required)', 'buddypress' ); ?></label>
+									<?php
+
+									/**
+									 * Fires and displays any member registration blog title errors.
+									 *
+									 * @since 1.1.0
+									 */
+									do_action( 'bp_signup_blog_title_errors' ); ?>
+									<input type="text" name="signup_blog_title" id="signup_blog_title" value="<?php bp_signup_blog_title_value(); ?>" />
+
+									<fieldset class="register-site">
+										<legend class="label"><?php _e( 'Privacy: I would like my site to appear in search engines, and in public listings around this network.', 'buddypress' ); ?></legend>
+										<?php
+
+										/**
+										 * Fires and displays any member registration blog privacy errors.
+										 *
+										 * @since 1.1.0
+										 */
+										do_action( 'bp_signup_blog_privacy_errors' ); ?>
+
+										<label for="signup_blog_privacy_public"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_public" value="public"<?php if ( 'public' == bp_get_signup_blog_privacy_value() || !bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'Yes', 'buddypress' ); ?></label>
+										<label for="signup_blog_privacy_private"><input type="radio" name="signup_blog_privacy" id="signup_blog_privacy_private" value="private"<?php if ( 'private' == bp_get_signup_blog_privacy_value() ) : ?> checked="checked"<?php endif; ?> /> <?php _e( 'No', 'buddypress' ); ?></label>
+									</fieldset>
+
+									<?php
+
+									/**
+									 * Fires and displays any extra member registration blog details fields.
+									 *
+									 * @since 1.9.0
+									 */
+									do_action( 'bp_blog_details_fields' ); ?>
+
+								</div>
+
+							</div><!-- #blog-details-section -->
+
+							<?php
+							/**
+							 * Fires after the display of member registration blog details fields.
+							 *
+							 * @since 1.1.0
+							 */
+							do_action( 'bp_after_blog_details_fields' ); ?>
+
+						<?php endif; ?>
 
 						<p>
 							<button id="register_button" class="button" type="submit"><i class="fa fa-spinner fa-spin" style="display: none"></i> <?php _e( 'Register Now', 'onesocial' ); ?></button>

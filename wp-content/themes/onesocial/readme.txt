@@ -1,8 +1,8 @@
 === OneSocial Theme ===
 Contributors: BuddyBoss
 Requires at least: 3.8
-Tested up to: 4.6.1
-Version: 1.2.0
+Tested up to: 4.8
+Version: 1.4.0
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -20,6 +20,44 @@ OneSocial is a responsive WordPress/BuddyPress theme that focuses on simplicity 
 6. Activate 'OneSocial' from your Themes page.
 
 == Changelog ==
+
+= 1.4.0 =
+* Fix - Improved memory performance
+* Fix - Typography setting stopped working
+* Fix - Footer broken for logged out user
+* Fix - Redux option styling fix
+* Fix - Notification component is active check added
+* Fix - Remove redux loading on frontend
+
+= 1.3.1 =
+* Enhancement - Licence Module
+= 1.3.0 =
+* Fix - Checkbox style tweak inside popup
+* Fix - Tagging drop down misplaced
+* Fix - If post has the line break in content then this line break should appear in blog listing on hover 
+* Fix - Notification tab shows NO Notification after every page refresh but appears after some time
+* Fix - Blog Page- sidebar widgets fix
+* Fix - Web page held / not responding when scroll down / up
+* Fix - Left menu double click issue fix
+* Fix - Notification auto updated fixes
+* Fix - Add avatars and icons to notification dropdowns
+* Fix - New site register not displaying on the overlay register form
+* Fix - Button height tweak
+* Fix - My Profile menu items does not add link to left menu on mobile version
+* Fix - Slider widget issue with 2 columns layout in visual composer
+* Fix - Buddyboss Media - Group Photos - Form to upload photos is hidden
+* Fix - VC Post Grid do not display filter on Mobile
+* Fix - viewport issue inside check_is_mobile function in onesocial.js
+* Fix - "Blog posts" vc element , thumbnails are loading very slow
+* Fix - Friends/Followers load time fix 
+* Fix - Slider widget issue with 2 columns layout in visual composer fix
+* Fix - Newsletter plugin version 4.7.4 not showing like demo
+* Fix - Posts in "All Posts" or "My Posts" views seem to be ignoring new line character
+* Fix - Safari browser footer issue 
+* Fix - Make register and login boxes smaller on mobile
+* Fix - Text domain bbPress
+* Fix - OneSocial theme typography font settings are not working on few places
+* Fix - My Profile menu items does not add link to left menu on mobile version 
 
 = 1.2.1 =
 * Fix - Select2 fixes for WooCommerce 3.0

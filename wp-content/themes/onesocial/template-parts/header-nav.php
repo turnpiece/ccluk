@@ -1,4 +1,4 @@
-<nav id="site-navigation" class="main-navigation" data-widthfix="120">
+<nav id="site-navigation" class="main-navigation">
 
 	<div class="nav-inner">
 

@@ -7,6 +7,8 @@ if(!function_exists("get_option")) {
 
 function func_ajax_login() {
 
+	@ini_set( 'display_errors', 0 ); // Turn off display_errors during AJAX events to prevent malformed output
+	
 	if(isset($_GET["ajax-login"])) {
 
 		/**
@@ -26,7 +28,7 @@ function func_ajax_login() {
 
 		if (!isset( $_POST['ajax-login-security'] ) || ! wp_verify_nonce( $_POST['ajax-login-security'], 'ajax-login-security' )) { //Security check etc.
 
-		  $txt = __("Sorry security didn't verified, refresh page and try again.",'onesocial');
+		  $txt = __("Sorry security didn't verified, refresh the page and try again.",'onesocial');
 		  echo '
 		  jQuery("#ajax_login_messages").html("<div class=\"ctmessage error\"><p>'.escapeJavaScriptText($txt).'</p></div>");
 		  ';
@@ -37,7 +39,7 @@ function func_ajax_login() {
 
 		$username = @$_POST["username"];
 		$password = @$_POST["password"];
-
+		$redirect = '';
 
 		if(empty($username)) {
 		$txt = __("Enter an Username.",'onesocial');
@@ -73,7 +75,7 @@ function func_ajax_login() {
 		$creds['user_password'] = $password;
 		$creds['remember'] = true;
 
-		$user = wp_signon( $creds, false );
+		$user = wp_signon( $creds );
 
         if(isset($_COOKIE['login_redirect']) && $_COOKIE['login_redirect'] != '') {
         	if($_COOKIE['login_redirect'] == 'vendor'){
@@ -116,7 +118,7 @@ function func_ajax_login() {
 
 			if($redirect) {
                 echo 'window.location ="'.$redirect.'";';
-                echo 'jQuery("#ajax_login_messages").html("<div class=\"ctmessage updated\"><p>'.escapeJavaScriptText($redirect).'</p></div>");';
+                echo 'jQuery("#ajax_login_messages").html("<div class=\"ctmessage updated\"><p>'.escapeJavaScriptText($txt).'</p></div>");';
             } else {
 				echo '
 				jQuery("#ajax_login_messages").html("<div class=\"ctmessage updated\"><p>'.escapeJavaScriptText($txt).'</p></div>");

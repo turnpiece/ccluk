@@ -289,7 +289,8 @@ function buddyboss_onesocial_scripts_styles() {
 		'view_desktop'	 => __( 'View as Desktop', 'onesocial' ),
 		'view_mobile'	 => __( 'View as Mobile', 'onesocial' ),
 		'yes'			 => __( 'Yes', 'onesocial' ),
-		'no'			 => __( 'No', 'onesocial' )
+		'no'			 => __( 'No', 'onesocial' ),
+		'other'			 => __( 'Other', 'onesocial')
 	);
 
 	$transport_array = array(
@@ -323,6 +324,7 @@ function buddyboss_onesocial_scripts_styles() {
 
 		wp_localize_script( 'onesocial-main-min', 'BuddyBossOptions', $buddyboss_js_vars );
 		wp_enqueue_script( 'onesocial-main-min' );
+
 	} else {
 
 		/* Modernizr */
@@ -533,46 +535,50 @@ function buddyboss_members_latest_update_filter( $latest ) {
 add_filter( 'bp_get_activity_latest_update_excerpt', 'buddyboss_members_latest_update_filter' );
 
 /**
+ * Remove an anonymous object filter.
+ *
+ * @param string $tag Hook name.
+ * @param string $class Class name
+ * @param string $method Method name
+ * @return void
+ */
+function buddyboss_remove_anonymous_object_filter( $tag, $class, $method ) {
+	$filters = $GLOBALS['wp_filter'][ $tag ];
+
+	if ( empty ( $filters ) ) {
+		return;
+	}
+
+	foreach ( $filters as $priority => $filter ) {
+		foreach ( $filter as $identifier => $function ) {
+			if ( is_array( $function)
+                && is_array( $function['function'] )
+				&& is_a( $function['function'][0], $class )
+				&& $method === $function['function'][1]
+			) {
+				remove_filter(
+					$tag,
+					array ( $function['function'][0], $method ),
+					$priority
+				);
+			}
+		}
+	}
+}
+
+/**
  * Moves sitewide notices to the header
  *
  * Since BuddyPress doesn't give us access to BP_Legacy, let
  * us begin the hacking
  *
- * @since OneSocial Theme 1.0.0
+ * @since Boss 1.0.0
  */
 function buddyboss_fix_sitewide_notices() {
-// Check if BP_Legacy is being used and messages are active
+	// Check if BP_Legacy is being used and messages are active
 	if ( class_exists( 'BP_Legacy' ) && bp_is_active( 'messages' ) ) {
-		remove_action( 'wp_footer', array( 'BP_Legacy', 'sitewide_notices' ), 9999 );
-
-		global $wp_filter;
-
-		// Get the wp_footer callbacks
-		$footer = !empty( $wp_filter[ 'wp_footer' ] ) && is_array( $wp_filter[ 'wp_footer' ] ) ? $wp_filter[ 'wp_footer' ] : false;
-
-		// Make sure we have some
-		if ( is_array( $footer ) && count( $footer ) > 0 ) {
-			$new_footer_cbs = array();
-
-			// Cycle through each callback and remove any with sitewide_notices in it,
-			// then replace and add to the header
-			foreach ( $footer as $priority => $footer_cb ) {
-				if ( is_array( $footer_cb ) && !empty( $footer_cb ) ) {
-					$keys	 = array_keys( $footer_cb );
-					$key	 = $keys[ 0 ];
-
-					if ( stristr( $key, 'sitewide_notices' ) ) {
-						add_action( 'buddyboss_inside_wrapper', 'buddyboss_print_sitewide_notices', 9999 );
-					} else {
-						$new_footer_cbs[ $priority ] = $footer_cb;
-					}
-				} else {
-					$new_footer_cbs[ $priority ] = $footer_cb;
-				}
-			}
-
-			$wp_filter[ 'wp_footer' ] = $new_footer_cbs;
-		}
+		buddyboss_remove_anonymous_object_filter( 'wp_footer', 'BP_Legacy', 'sitewide_notices' );
+		add_action( 'buddyboss_inside_wrapper', 'buddyboss_print_sitewide_notices', 9999 );
 	}
 }
 
@@ -1506,6 +1512,7 @@ function buddyboss_ajax_posts() {
 add_action( 'wp_ajax_nopriv_buddyboss_get_group_members', 'buddyboss_get_group_members' );
 add_action( 'wp_ajax_buddyboss_get_group_members', 'buddyboss_get_group_members' );
 
+
 function buddyboss_get_group_members() {
 
 	$nonce = $_POST[ 'membersNonce' ];
@@ -1569,10 +1576,10 @@ function buddyboss_get_group_members() {
  *
  *
  */
-add_action( 'wp_ajax_nopriv_buddyboss_get_friends', 'buddyboss_get_friends' );
-add_action( 'wp_ajax_buddyboss_get_friends', 'buddyboss_get_friends' );
+add_action( 'wp_ajax_nopriv_buddyboss_get_friends', 'buddyboss_ajax_friends' );
+add_action( 'wp_ajax_buddyboss_get_friends', 'buddyboss_ajax_friends' );
 
-function buddyboss_get_friends() {
+function buddyboss_ajax_friends() {
 
 	$nonce = $_POST[ 'friendsNonce' ];
 
@@ -1582,20 +1589,26 @@ function buddyboss_get_friends() {
 	$sort		 = $_POST[ 'sort' ];
 	$page		 = $_POST[ 'page' ];
 	$count_num	 = $_POST[ 'count' ];
-	$sort		 = 'friends_get_' . $sort;
+
 //	if ( !$friend_ids = wp_cache_get( 'friends_friend_ids_' . bp_displayed_user_id(), 'bp' ) ) {
 
-	if ( $page == 'single' ) {
-		$id = bp_displayed_user_id();
-	} else {
-		$id = bp_get_member_user_id();
-	}
+	echo buddyboss_get_friends( $sort, $count_num );
 
-	$friends = $sort( bp_displayed_user_id(), 5 );
+	die();
+}
 
-//		wp_cache_set( 'friends_friend_ids_' . bp_displayed_user_id(), $friend_ids, 'bp' );
-//	}
-	?>
+/**
+ * Get the friends list
+ * @param $sort
+ * @param $count_num
+ * @return string
+ */
+function buddyboss_get_friends( $sort, $count_num ) {
+
+	$sort		= 'friends_get_' . $sort;
+	$friends 	= $sort( bp_displayed_user_id(), 5 );
+
+	ob_start(); ?>
 
 	<?php if ( $friends[ 'users' ] ) { ?>
 
@@ -1631,7 +1644,9 @@ function buddyboss_get_friends() {
 		<?php
 	}
 
-	die();
+	$friends_list = ob_get_clean();
+
+	return $friends_list;
 }
 
 /**
@@ -1698,10 +1713,10 @@ function get_follow( $user_id, $group, $sort ) {
  *
  * @return html
  */
-add_action( 'wp_ajax_nopriv_buddyboss_get_follow', 'buddyboss_get_follow' );
-add_action( 'wp_ajax_buddyboss_get_follow', 'buddyboss_get_follow' );
+add_action( 'wp_ajax_nopriv_buddyboss_get_follow', 'buddyboss_ajax_follow' );
+add_action( 'wp_ajax_buddyboss_get_follow', 'buddyboss_ajax_follow' );
 
-function buddyboss_get_follow() {
+function buddyboss_ajax_follow() {
 	if ( !class_exists( 'BP_Follow_Component' ) ) {
 		return;
 	}
@@ -1714,10 +1729,24 @@ function buddyboss_get_follow() {
 	$sort	 = isset( $_POST[ 'sort' ] ) ? $_POST[ 'sort' ] : 'recently_active';
 	$group	 = $_POST[ 'group' ];
 
+	echo buddyboss_get_follow( $sort, $group );
+
+	die();
+}
+
+/**
+ * Get the follower/following list
+ * @param $group
+ * @param string $sort
+ * @return string
+ */
+function buddyboss_get_follow( $group, $sort = 'recently_active' ) {
+
 	global $bp;
 
 	$follow = get_follow( bp_displayed_user_id(), $group, $sort );
-	?>
+
+	ob_start(); ?>
 
 	<?php if ( $follow ) { ?>
 
@@ -1764,7 +1793,9 @@ function buddyboss_get_follow() {
 		<?php
 	}
 
-	die();
+	$follow_list = ob_get_clean();
+
+	return $follow_list;
 }
 
 /**
@@ -2296,7 +2327,7 @@ function buddyboss_js_correct_notification_count() {
 		return;
 	}
 
-	$notifications = bp_notifications_get_all_notifications_for_user( bp_loggedin_user_id() );
+	$notifications = bp_notifications_get_notifications_for_user( bp_loggedin_user_id() );
 
 	if ( !empty( $notifications ) ) {
 		$count = count( $notifications );
@@ -2339,16 +2370,20 @@ function buddyboss_notification_count_heartbeat( $response, $data, $screen_id ) 
 	if ( function_exists( "bp_notifications_get_all_notifications_for_user" ) )
 		$notifications			 = bp_notifications_get_all_notifications_for_user( get_current_user_id() );
 
-	$notification_count		 = count( $notifications );
+	$notification_count = 0;
 
 	if ( function_exists( "bp_notifications_get_all_notifications_for_user" ) ) {
-		$notifications			 = bp_notifications_get_notifications_for_user( get_current_user_id() );
+		$notifications = bp_notifications_get_notifications_for_user( get_current_user_id(), 'object' );
+		$notification_count		 = $notifications ? count( $notifications ) : 0;
 		$notification_content	 = '';
         if( !empty( $notifications ) ){
             foreach ( (array) $notifications as $notification ) {
-                if( is_array( $notification ) ){
-                    if( isset( $notification['link'] ) && isset( $notification['text'] ) ){
-                        $notification_content .= "<a href='". esc_url( $notification['link'] ) ."'>{$notification['text']}</a>";
+                if( is_object( $notification ) ){
+                    if( isset( $notification->href ) && isset( $notification->content ) ){
+                        //$notification_content .= "<a href='". esc_url( $notification['link'] ) ."'>{$notification['text']}</a>";
+						$notification_content .= '<li>';
+						$notification_content .= '<a href="' . $notification->href . '"><span class="notification-icon '. $notification->component_name. ' ' .$notification->component_action .'"></span><span class="notification-content">' . $notification->content . '</span></a>';
+						$notification_content .=  '</li>';
                     }
                 } else {
                     $notification_content .= $notification;
@@ -2357,7 +2392,7 @@ function buddyboss_notification_count_heartbeat( $response, $data, $screen_id ) 
         }
 
 		if ( empty( $notification_content ) )
-			$notification_content = '<a href="' . bp_loggedin_user_domain() . '' . BP_NOTIFICATIONS_SLUG . '/">' . __( "No new notifications", "buddypress" ) . '</a>';
+			$notification_content = '<a href="' . bp_loggedin_user_domain() . '' . BP_NOTIFICATIONS_SLUG . '/">' . __( "No new notifications", "onesocial" ) . '</a>';
 	}
 	if ( function_exists( "messages_get_unread_count" ) )
 		$unread_message_count = messages_get_unread_count();
@@ -3009,7 +3044,7 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 					<?php } ?>
 				</ul>
 			<?php } else { ?>
-				<span class="activity"><?php _e( 'No Admins', 'buddypress' ) ?></span>
+				<span class="activity"><?php _e( 'No Admins', 'onesocial' ) ?></span>
 			<?php } ?>
 			<?php
 		}
@@ -3062,7 +3097,7 @@ if ( !function_exists( 'buddyboss_comment' ) ) {
 
 			<?php else : ?>
 
-				<span class="activity"><?php _e( 'No Mods', 'buddypress' ) ?></span>
+				<span class="activity"><?php _e( 'No Mods', 'onesocial' ) ?></span>
 
 			<?php
 			endif;
@@ -3253,3 +3288,69 @@ function onesocial_theme_group_manage_members_add_search() {
 	<?php
 endif;
 }
+
+/**
+ * Return the tags onesocial_trim_excerpt allow
+ * @return string
+ */
+function onesocial_excerpt_allowedtags() {
+	// Add custom tags to this string
+	return '<em>,<i>,<br>,<p>,<a>';
+}
+
+/**
+ * Return OneSocial custom excerpt that will allow few tags
+ * @param $wpse_excerpt
+ * @return mixed|string|void
+ */
+function onesocial_trim_excerpt($wpse_excerpt) {
+
+	$raw_excerpt = $wpse_excerpt;
+
+	if ( '' == $wpse_excerpt ) {
+
+		$wpse_excerpt = get_the_content('');
+		$wpse_excerpt = strip_shortcodes( $wpse_excerpt );
+		$wpse_excerpt = apply_filters( 'the_content', $wpse_excerpt );
+		$wpse_excerpt = str_replace( ']]>', ']]>', $wpse_excerpt );
+		$wpse_excerpt = strip_tags( $wpse_excerpt, onesocial_excerpt_allowedtags() ); /*IF you need to allow just certain tags. Delete if all tags are allowed */
+
+		//Set the excerpt word count and only break after sentence is complete.
+		$excerpt_length 	= apply_filters( 'excerpt_length', 55 );
+		$tokens 			= array();
+		$excerpt_output 	= '';
+		$count 				= 0;
+
+		// Divide the string into tokens; HTML tags, or words, followed by any whitespace
+		preg_match_all( '/(<[^>]+>|[^<>\s]+)\s*/u', $wpse_excerpt, $tokens );
+
+		foreach ( $tokens[0] as $token ) {
+
+			if ( $count >= $excerpt_length ) {
+				// Limit reached, continue until , ; ? . or ! occur at the end
+				$excerpt_output .= trim($token);
+				break;
+			}
+
+			// Add words to complete sentence
+			$count++;
+
+			// Append what's left of the token
+			$excerpt_output .= $token;
+		}
+
+		$wpse_excerpt = trim( force_balance_tags( $excerpt_output ) );
+
+		if ( $count >= $excerpt_length ) {
+			$excerpt_end 	= '...';
+			$excerpt_more 	= apply_filters( 'excerpt_more', ' ' . $excerpt_end );
+			$wpse_excerpt 	.= $excerpt_more; /*Add read more in new paragraph */
+		}
+
+		return $wpse_excerpt;
+
+	}
+
+	return apply_filters( 'onesocial_trim_excerpt', $wpse_excerpt, $raw_excerpt );
+}
+

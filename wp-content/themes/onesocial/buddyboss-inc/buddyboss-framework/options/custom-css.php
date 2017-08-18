@@ -7,18 +7,35 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 
 	function boss_generate_option_css() {
 
-		$accent_color	 = onesocial_get_option( 'accent_color' );
-		?>
+		$custom_css	 = get_transient( 'onesocial_compressed_custom_css' );
 
-		<style>
+		if(!empty($custom_css) && isset($custom_css["css"])) {
+
+			echo "
+			<style id=\"onesocial-style\">
+				{$custom_css["css"]}
+			</style>
+			";
+
+			return false;
+
+		}
+
+		$accent_color = onesocial_get_option( 'accent_color' );
+
+		?>
+		<style id="onesocial-style">
+
+		<?php ob_start(); ?>
 
 			/* Accent color */
 			a { color: <?php echo $accent_color; ?>; }
-            .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form p input[type="submit"],
+            .widget_mc4wp_form_widget form p input[type="submit"], .widget.widget_newsletterwidget form div input[type="submit"],
+			.widget.widget_newsletterwidget form p input[type="submit"],
             .footer-widget #switch-mode input[type="submit"],
-            .woocommerce #respond input#submit, 
-            .woocommerce a.button, 
-            .woocommerce button.button, 
+            .woocommerce #respond input#submit,
+            .woocommerce a.button,
+            .woocommerce button.button,
             .woocommerce input.button,
 			button,
 			input[type="button"],
@@ -126,6 +143,7 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.entry-header .entry-title a:hover,
 			.widget_search #searchform button i:before,
 			.widget #bbp-search-index-form button i:before,
+			.widget .woocommerce-product-search button i:before,
 			.entry-meta a.read-more,
 			.settings #buddypress div#subnav.item-list-tabs ul li.current a,
 			.bb-user-notifications .avatar + a,
@@ -344,11 +362,11 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			body, body #main-wrap, .formatted-content {
 				background-color: <?php echo $primary_color; ?>;
 			}
-            
+
             @media screen and (max-width: 1024px) and (min-width: 768px) {
                 .side-panel {
                     background-color: <?php echo $primary_color; ?>;
-                }                
+                }
             }
 
             body:not(.buddypress) #content article, body.buddypress #content article.error404, .site-content nav.nav-single, .site-content #comments, .bp-legacy div#item-body,
@@ -437,7 +455,30 @@ if ( !function_exists( 'boss_generate_option_css' ) ) {
 			.footer-inner-bottom {
 				background-color: <?php echo onesocial_get_option( 'footer_background' ) ?>;
 			}
+
+		<?php
+
+		$css = ob_get_contents();
+		// Remove comments
+		$css = preg_replace('!/\*[^*]*\*+([^/][^*]*\*+)*/!', '', $css);
+		// Remove space after colons
+		$css = str_replace(': ', ':', $css);
+		// Remove whitespace
+		$css = str_replace(array("\r\n", "\r", "\n", "\t", '  ', '    ', '    '), '', $css);
+
+		ob_end_clean();
+
+		echo $css;
+
+		$custom_css["css"] = $css;
+
+		?>
+
 		</style><?php
+
+		// sacve processed css.
+	    set_transient( 'onesocial_compressed_custom_css', $custom_css );
+
 	}
 
 	/* Add Action */

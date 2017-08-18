@@ -412,16 +412,6 @@ span.description {
         margin-top: -70px;
     }
 
-    body:not(.wp-customizer) #onesocial_options-boss_logo,
-    #onesocial_options-boss_login_message,
-    body:not(.wp-customizer) #onesocial_options-boss_copyright {
-        margin-top: -30px;
-    }
-
-    body:not(.wp-customizer) #boss_footer_social_links-list {
-        margin-top: -40px;
-    }
-
     body:not(.wp-customizer) #onesocial_options-boss_slides {
         margin-top: -20px;
     }
