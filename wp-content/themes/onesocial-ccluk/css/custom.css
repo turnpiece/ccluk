@@ -86,6 +86,11 @@ body.page-template-homepage .slide-content .button {
 	    color: #000;
 	}
 
+	#mobile-header .left-btn:before,
+	#mobile-header .right-btn:before {
+		color: #333;
+	}
+
 }/* don't delete this closing bracket */
 
 
