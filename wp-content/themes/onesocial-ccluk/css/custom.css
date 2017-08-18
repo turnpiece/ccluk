@@ -30,7 +30,27 @@ You're the boss, so have fun editing!
     width: 360px;
 }
 
+body.page-template-homepage .slide_content > .slide_content_wrap > .inner > .slide_text {
+	display: table;
+	margin: 0 auto;
+	padding: 15px;
+	color: #fff;
+	background-color: rgba(0, 152, 218, 0.85);
+}
 
+body.page-template-homepage .bb-slider-container .readmore a, 
+body.page-template-homepage .slide-content .button {
+    text-transform: uppercase;
+    border-radius: 5px;
+    padding: 14px 30px 13px;
+    color: #fff;
+    border: 2px solid;
+    background-color: #4EAE47;
+    margin-left: 5px;
+    margin-right: 5px;
+    display: inline-block;
+    font-weight: 500;
+}
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
