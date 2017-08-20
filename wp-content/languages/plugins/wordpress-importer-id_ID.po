@@ -1,0 +1,209 @@
+# Translation of Stable (latest release) in Indonesian
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-09-02 10:04:43+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n > 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#. Author of the plugin/theme
+msgid "wordpressdotorg"
+msgstr "wordpressdotorg"
+
+#: wordpress-importer.php:264
+msgid "Assign Authors"
+msgstr "Tetapkan Penulis"
+
+#: wordpress-importer.php:1142
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr "Pilih berkas WXR (.xml) untuk mengunggah, lalu klik Unggah berkas dan impor."
+
+#: wordpress-importer.php:1014
+msgid "Zero size file downloaded"
+msgstr "Berkas kosong terunduh"
+
+#: wordpress-importer.php:1002
+msgid "Remote server returned error response %1$d %2$s"
+msgstr "Server remot mengembalikan respon galat %1$d %2$s"
+
+#: wordpress-importer.php:238
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr "Gagal mengimpor penulis %s. Tulisan mereka akan diatribusikan ke pengguna kini."
+
+#: wordpress-importer.php:265
+msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
+msgstr "Untuk memudahkan Anda menyunting dan menyimpan konten yang diimpor, Anda mungkin ingin mengatur penulis dari pokok terimpor ke pengguna yang ada di situs ini. Contoh, Anda mungkin ingin mengimpor semua entri sebagai entri milik <code>admin</code>."
+
+#: wordpress-importer.php:605
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr "Gagal mengimpor &#8220;%s&#8221;: Tipe tulisan tidak sah %s"
+
+#: wordpress-importer.php:516 wordpress-importer.php:738
+msgid "Failed to import %s %s"
+msgstr "Gagal mengimpor %s %s"
+
+#: wordpress-importer.php:311
+msgid "as a new user:"
+msgstr "sebagai pengguna baru:"
+
+#: wordpress-importer.php:424
+msgid "Failed to import category %s"
+msgstr "Gagal mengimpor kategori %s"
+
+#: wordpress-importer.php:467
+msgid "Failed to import post tag %s"
+msgstr "Gagal mengimpor tag tulisan %s"
+
+#: wordpress-importer.php:642
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr "%s &#8220;%s&#8221; sudah ada."
+
+#: wordpress-importer.php:869
+msgid "Menu item skipped due to missing menu slug"
+msgstr "Isi menu dilewat karena slug menu tidak ada"
+
+#: wordpress-importer.php:704
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr "Gagal mengimpor %s &#8220;%s&#8221;"
+
+#: wordpress-importer.php:319
+msgid "assign posts to an existing user:"
+msgstr "mengalokasikan tulisan ke pengguna yang ada:"
+
+#: wordpress-importer.php:213
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr "Berkas WXR ini (versi %s) mungkin tidak didukung oleh pengimpor versi ini. Silahkan pertimbangkan untuk memperbaruinya."
+
+#: wordpress-importer.php:267
+msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
+msgstr "Jika pengguna baru diciptakan oleh WordPress, sebuah kata sandi baru akan diciptakan secara acak dan peran pengguna baru akan diaatur sebagai %s. Mengubah secara manual keterangan pengguna baru tersebut mungkin diperlukan."
+
+#: wordpress-importer.php:876
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr "Item menu dilewati karena slug menu tidak sah:%s"
+
+#: wordpress-importer.php:939
+msgid "Fetching attachments is not enabled"
+msgstr "Pengambilan lampiran tidak diaktifkan"
+
+#: wordpress-importer.php:177
+msgid "Remember to update the passwords and roles of imported users."
+msgstr "Ingatlah untuk memperbarui kata sandi dan peran milik pengguna yang diimpor."
+
+#: wordpress-importer.php:133
+msgid "The file does not exist, please try again."
+msgstr "Berkas tidak ada, silakan coba lagi."
+
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:495
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr "Ini sepertinya bukan berkas WXR, nomor versi WXR tidak ada/tidak sah"
+
+#: parsers.php:43
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr "Rincian ditampilkan di atas. Importir sekarang akan mencoba lagi dengan parser yang berbeda..."
+
+#. Description of the plugin/theme
+msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
+msgstr "Impor tulisan, halaman, komentar, ruas tersuai, kategori, tag dan lainnya dari berkas ekspor WordPress."
+
+#: wordpress-importer.php:1126
+msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
+msgstr "Sebuah versi baru dari importir kini tersedia. Silahkan perbarui ke versi %s untuk memastikan kompatibilitas dengan berkas ekspor baru."
+
+#: parsers.php:42 parsers.php:72 parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr "Ada masalah saat membaca berkas WXR ini"
+
+#: wordpress-importer.php:308
+msgid "or create new user with login name:"
+msgstr "atau ciptakan pengguna baru dengan nama log masuk:"
+
+#: wordpress-importer.php:372
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr "Gagal ketika membuat pengguna baru untuk %s. Tulisan mereka akan dikaitkan dengan pengguna saat ini."
+
+#: wordpress-importer.php:321
+msgid "or assign posts to an existing user:"
+msgstr "atau tetapkan tulisannya ke pengguna yang ada:"
+
+#. Author URI of the plugin/theme
+msgid "http://wordpress.org/"
+msgstr "http://wordpress.org/"
+
+#. Plugin Name of the plugin/theme
+msgid "WordPress Importer"
+msgstr "Pengimpor WordPress"
+
+#: wordpress-importer.php:284
+msgid "Submit"
+msgstr "Kirim"
+
+#: wordpress-importer.php:322
+msgid "- Select -"
+msgstr "- Pilih -"
+
+#: wordpress-importer.php:176
+msgid "All done."
+msgstr "Sudah selesai."
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wordpress-importer/"
+msgstr "http://wordpress.org/extend/plugins/wordpress-importer/"
+
+#: wordpress-importer.php:1119
+msgid "Import WordPress"
+msgstr "Impor WordPress"
+
+#: wordpress-importer.php:1009
+msgid "Remote file is incorrect size"
+msgstr "Berkas jarak jauh memiliki ukuran yang salah"
+
+#: wordpress-importer.php:280
+msgid "Download and import file attachments"
+msgstr "Unduh dan impor lampiran berkas"
+
+#: wordpress-importer.php:1020
+msgid "Remote file is too large, limit is %s"
+msgstr "Berkas jarak jauh terlalu besar, batasnya adalah %s"
+
+#: wordpress-importer.php:176
+msgid "Have fun!"
+msgstr "Selamat menikmati!"
+
+#: wordpress-importer.php:952
+msgid "Invalid file type"
+msgstr "Tipe berkas tidak sah"
+
+#: wordpress-importer.php:297
+msgid "Import author:"
+msgstr "Impor penulis:"
+
+#: wordpress-importer.php:277
+msgid "Import Attachments"
+msgstr "Impor Lampiran"
+
+#: wordpress-importer.php:996
+msgid "Remote server did not respond"
+msgstr "Server jarak jauh tidak merespon"
+
+#: wordpress-importer.php:1216
+msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
+msgstr "Impor <strong>tulisan, halaman, komentar, ruas tersuai, kategori, dan tag</strong> dari berkas ekspor WordPress."
+
+#: wordpress-importer.php:132 wordpress-importer.php:141
+#: wordpress-importer.php:192 wordpress-importer.php:196
+#: wordpress-importer.php:205
+msgid "Sorry, there has been an error."
+msgstr "Maaf, ada galat."
+
+#: wordpress-importer.php:1141
+msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
+msgstr "Halo! Unggah berkas WordPress eXtended RSS (WXR) Anda dan kami akan mengimpor tulisan, halaman, komentar, ruas tersuai, kategori, dan tag ke situs ini."
+
+#: wordpress-importer.php:197
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr "Berkas ekspor tidak ditemukan di <code>%s</code>. Kemungkinan disebabkan oleh masalah perizinan."

@@ -54,13 +54,28 @@ body.page-template-homepage .slide-content .button {
 
 body.page-template-homepage #secondary {
 	width: auto;
-	max-width: 800px;
 	margin-left: auto;
 	margin-right: auto;
+	padding: 15px 0;
 }
 
 body.page-template-homepage #secondary.widget-area .widget h3.widgettitle {
 	text-align: center;
+}
+
+body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li {
+	width: 30%;
+	float: left;
+	clear: right;
+	margin-right: 3%;
+}
+
+body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li > a > img {
+	clear: both;
+}
+
+body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title{
+	display: block;
 }
 
 /*--------------------------------------------------------------

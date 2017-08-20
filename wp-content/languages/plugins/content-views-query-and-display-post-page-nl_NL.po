@@ -1,0 +1,663 @@
+# Translation of Plugins - Content Views &#8211; Post Grid &amp; List for WordPress - Stable (latest release) in Dutch
+# This file is distributed under the same license as the Plugins - Content Views &#8211; Post Grid &amp; List for WordPress - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-03-02 20:39:29+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: nl\n"
+"Project-Id-Version: Plugins - Content Views &#8211; Post Grid &amp; List for WordPress - Stable (latest release)\n"
+
+#: public/content-views.php:257
+msgid "See View"
+msgstr "View bekijken"
+
+#: includes/values.php:107
+msgid "AND - show posts which match ALL selected terms"
+msgstr "EN - geef berichten/pagina's weer die voldoen aan alle geselecteerde voorwaarden"
+
+#: includes/values.php:106
+msgid "NOT IN - show posts which DO NOT match ANY selected terms"
+msgstr "NIET IN - geef berichten/pagina's weer die NIET voldoen aan alle geselecteerde voorwaarden"
+
+#: includes/values.php:105
+msgid "IN - show posts which match ANY selected terms"
+msgstr "IN - geef berichten/pagina's weer die voldoen aan alle geselecteerde voorwaarden"
+
+#: includes/settings.php:416
+msgid "Read More text"
+msgstr "Tekst 'Verder lezen'"
+
+#: includes/settings.php:398
+msgid "Use manual excerpt (in the Excerpt field under the post edit box)"
+msgstr "Gebruik handmatige samenvatting (in het samenvattingsveld onder het vak bericht/pagina bewerken)"
+
+#: admin/views/view.php:347
+msgid "The logical relationship between above taxonomies"
+msgstr "De logische relatie tussen de taxonomieën hierboven"
+
+#: public/content-views.php:252
+msgctxt "add new on admin bar"
+msgid "Content View"
+msgstr "Content-view"
+
+#: includes/values.php:346
+msgid "Show thumbnail on the left/right of text"
+msgstr "Thumbnail links/rechts van de tekst weergeven"
+
+#: includes/values.php:345
+msgid "Show thumbnail & text vertically"
+msgstr "Thumbnail & tekst verticaal weergeven"
+
+#: admin/views/view.php:546 includes/hooks.php:76
+msgid "Format"
+msgstr "Opmaak"
+
+#: admin/views/view.php:507
+msgid "Responsive"
+msgstr "Responsive"
+
+#: admin/views/view.php:477 includes/hooks.php:71 includes/hooks.php:95
+msgid "Layout"
+msgstr "Layout"
+
+#: admin/views/view.php:239
+msgid "Advance"
+msgstr "Geavanceerd"
+
+#: admin/views/view.php:157
+msgid "Common"
+msgstr "Wat te tonen"
+
+#: includes/settings.php:285
+msgid "Show Custom Fields, show Title above Thumbnail..."
+msgstr "Toon aangepaste velden, toon titel boven thumbnail..."
+
+#: includes/settings.php:100
+msgid "Sort by drag & drop, custom field, slug, random order, menu order"
+msgstr "Sorteer aangepast veld, slug, willekeurige volgorde, menuvolgorde door verslepen"
+
+#: admin/views/view.php:504
+msgid "More amazing layouts (Pinterest, Timeline...)"
+msgstr "Meer opmerkelijke layouts (Pinterest, Tijdlijn...)"
+
+#: includes/functions.php:625
+msgid "Error: View %s may not exist"
+msgstr "Fout: View %s bestaat mogelijk niet"
+
+#: admin/views/view.php:454
+msgid "It will search keyword in title, excerpt, content of posts"
+msgstr "Er wordt op het trefwoord gezocht in titel, samenvatting, inhoud of berichten"
+
+#: includes/settings.php:875
+msgid "get Pro version"
+msgstr "Pro-versie aanschaffen"
+
+#: admin/views/view.php:607
+msgid "Disable this format on small screens (less than 481 pixels)"
+msgstr "Schakel deze opmaak uit op kleine schermen (minder dan 481 pixels)"
+
+#: admin/content-views-admin.php:224
+msgid "If post excerpt contains shortcode of theme or another plugin, please save this View, paste its shortcode to a page, then view that page"
+msgstr "Als het bericht/pagina-uittreksel shortcode van een thema of een andere plugin bevat, sla deze View dan op, plak de shortcode ervan in een pagina en bekijk dan de pagina"
+
+#. translators: If your word count is based on single characters (e.g. East
+#. Asian characters), enter 'characters_excluding_spaces' or
+#. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
+#. into your own language.
+#: includes/functions.php:297
+msgctxt "Word count type. Do not translate!"
+msgid "words"
+msgstr "words"
+
+#: includes/values.php:287
+msgid "Published date"
+msgstr "Publicatiedatum"
+
+#: includes/html.php:118
+msgid "Loading..."
+msgstr "Aan het laden..."
+
+#: admin/views/view.php:528
+msgid "Mobile"
+msgstr "Smartphone"
+
+#: admin/views/view.php:515
+msgid "Tablet"
+msgstr "Tablet"
+
+#: includes/values.php:409
+msgid "Full Size"
+msgstr "Volledige grootte"
+
+#: includes/values.php:284
+msgid "Select"
+msgstr "Selecteren"
+
+#: includes/settings.php:807
+msgid "Open the first item by default"
+msgstr "Open standaard het eerste item"
+
+#: includes/settings.php:721 includes/values.php:236
+msgid "Tags"
+msgstr "Tags"
+
+#: includes/settings.php:721 includes/values.php:236
+msgid "Categories"
+msgstr "Categorieën"
+
+#: includes/settings.php:721
+msgid "Show Taxonomies (%s, %s...)"
+msgstr "Taxonomieën (%s, %s...) weergeven"
+
+#: includes/settings.php:655
+msgid "Featured Image"
+msgstr "Uitgelichte afbeelding"
+
+#: includes/settings.php:655
+msgid "In this lite version, thumbnail is only shown if the post has %s"
+msgstr "In deze gratis versie wordt de thumbnail alleen weergegeven als bericht/pagina een %s bevat"
+
+#: includes/settings.php:602
+msgid "Comment"
+msgstr "Reactie"
+
+#: includes/settings.php:602
+msgid "Show Meta Fields"
+msgstr "Meta-velden weergeven"
+
+#: includes/settings.php:440
+msgid "Meta fields"
+msgstr "Meta-velden"
+
+#: includes/settings.php:331
+msgid "Content"
+msgstr "Inhoud"
+
+#: includes/settings.php:312
+msgid "Thumbnail"
+msgstr "Thumbnail"
+
+#: includes/settings.php:167
+msgid "If value of the %s setting is not empty, this value should be smaller than that"
+msgstr "Als de waarde van instelling %s niet leeg is, moet deze waarde kleiner zijn dan die waarde"
+
+#: includes/html.php:859 includes/settings.php:422
+msgid "Read more..."
+msgstr "Verder lezen..."
+
+#: includes/functions.php:586
+msgid "Cheatin&#8217; uh?"
+msgstr "Aan het valsspelen?"
+
+#: admin/views/view.php:655
+msgid "Others"
+msgstr "Overig"
+
+#: admin/views/view.php:432
+msgid "Select post status"
+msgstr "Selecteer berichtstatus"
+
+#: admin/views/view.php:398
+msgid "Not by author"
+msgstr "Niet op auteur"
+
+#: admin/views/view.php:382
+msgid "By author"
+msgstr "Op auteur"
+
+#: admin/views/view.php:356 admin/views/view.php:359 includes/settings.php:88
+#: includes/values.php:238
+msgid "Sort by"
+msgstr "Sorteren op"
+
+#: admin/views/view.php:295
+msgid "Select taxonomy"
+msgstr "Selecteer taxonomie"
+
+#: admin/views/view.php:291 includes/settings.php:602 includes/values.php:236
+msgid "Taxonomy"
+msgstr "Taxonomie"
+
+#: admin/views/view.php:291 admin/views/view.php:379 admin/views/view.php:414
+#: admin/views/view.php:439
+msgid "Filter by %s"
+msgstr "Filteren op %s"
+
+#: admin/views/view.php:63
+msgid "To see live output, please click %s button"
+msgstr "Klikt op de knop %s om live uitvoer te bekijken"
+
+#: admin/content-views-admin.php:317 admin/content-views-admin.php:375
+#: admin/content-views-admin.php:469 public/content-views.php:253
+msgctxt "post"
+msgid "Add New"
+msgstr "Nieuw toevoegen"
+
+#: admin/views/view.php:210
+msgid "Enter ID of parent page to show its children"
+msgstr "Voer het ID van de bovenliggende pagina in om de onderliggende pagina's weer te geven"
+
+#: includes/settings.php:890
+msgid "Notice"
+msgstr "Opmerking"
+
+#: admin/views/view.php:351
+msgid "In this lite version, when you select any term above, it will not replace posts layout in term page (for example: %s) with layout of this View"
+msgstr "Als je een term hierboven selecteert zal hij bij deze gratis versie de berichtenlayout op de termen-pagina (bijvoorbeeld: %s) niet vervangen door de layout van deze View"
+
+#: includes/settings.php:627
+msgid "Size"
+msgstr "Grootte"
+
+#: includes/settings.php:203
+msgid "Style"
+msgstr "Stijl"
+
+#: includes/settings.php:175
+msgid "Type"
+msgstr "Type"
+
+#: admin/views/view.php:179
+msgid "List of post IDs to show (comma-separated values, for example: 1,2,3)"
+msgstr "Lijst met weer te geven bericht/pagina-ID's (door komma's gescheiden, bijvoorbeeld: 1,2,3)"
+
+#: includes/settings.php:650
+msgid "Check this option if thumbnail looks blurry"
+msgstr "Vink deze optie aan als de thumbnail er onscherp uitziet"
+
+#: includes/settings.php:648
+msgid "Disable responsive image of WordPress"
+msgstr "Responsive afbeelding van WordPress uitschakelen"
+
+#: includes/values.php:211
+msgid "Descending"
+msgstr "Aflopend"
+
+#: includes/values.php:210
+msgid "Ascending"
+msgstr "Oplopend"
+
+#: admin/views/view.php:313
+msgid "Filter by custom taxonomies"
+msgstr "Filteren op aangepaste taxonomieën"
+
+#: admin/views/view.php:172
+msgid "Include only"
+msgstr "Alleen opnemen"
+
+#: admin/views/view.php:152
+msgid "Filter custom post type (product, event...)"
+msgstr "Aangepast berichttype filteren (product, evenement...)"
+
+#. Author URI of the plugin/theme
+msgid "http://profiles.wordpress.org/pt-guy"
+msgstr "https://profiles.wordpress.org/pt-guy"
+
+#. Description of the plugin/theme
+msgid "Query and display <strong>posts, pages</strong> in awesome layouts (<strong>grid, scrollable list, collapsible list</strong>) easier than ever, without coding!"
+msgstr "<strong>Berichten, pagina's</strong> opvragen en weergeven in prachtige layouts (<strong>raster, scrollbare lijst, samenvouwbare lijst</strong>), eenvoudiger dan ooit, zonder code te hoeven kennen."
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/plugins/content-views-query-and-display-post-page/"
+msgstr "http://wordpress.org/plugins/content-views-query-and-display-post-page/"
+
+#. #-#-#-#-#  content-views-query-and-display-post-page-code.pot (Content Views
+#. 1.9.9.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin/content-views-admin.php:309
+msgid "Content Views"
+msgstr "Inhoud Views"
+
+#: public/content-views.php:262
+msgid "No views found in Trash."
+msgstr "Geen views gevonden in de prullenbak."
+
+#: public/content-views.php:261
+msgid "No views found."
+msgstr "Geen views gevonden."
+
+#: public/content-views.php:260
+msgid "Parent Views:"
+msgstr "Hoofd-Views"
+
+#: public/content-views.php:259
+msgid "Search Views"
+msgstr "Views doorzoeken"
+
+#: public/content-views.php:255
+msgid "New View"
+msgstr "Nieuwe View"
+
+#: public/content-views.php:251
+msgctxt "admin menu"
+msgid "Views"
+msgstr "Views"
+
+#: public/content-views.php:250
+msgctxt "post type singular name"
+msgid "View"
+msgstr "View"
+
+#: public/content-views.php:249
+msgctxt "post type general name"
+msgid "Views"
+msgstr "Views"
+
+#: includes/values.php:433
+msgid "Right"
+msgstr "Rechts"
+
+#: includes/values.php:432
+msgid "Left"
+msgstr "Links"
+
+#: includes/values.php:361
+msgid "New tab"
+msgstr "Nieuw tabblad"
+
+#: includes/values.php:360
+msgid "Current tab"
+msgstr "Huidig tabblad"
+
+#: includes/values.php:306
+msgid "Scrollable List"
+msgstr "Scrollbare lijst"
+
+#: includes/values.php:305
+msgid "Collapsible List"
+msgstr "Samenvouwbare lijst"
+
+#: includes/values.php:304
+msgid "Grid"
+msgstr "Raster"
+
+#: includes/values.php:288
+msgid "Modified date"
+msgstr "Gewijzigd op"
+
+#: admin/views/view.php:96 includes/settings.php:290 includes/values.php:286
+msgid "Title"
+msgstr "Titel"
+
+#: includes/values.php:285
+msgid "ID"
+msgstr "ID"
+
+#: includes/values.php:195
+msgid "Numbered pagination"
+msgstr "Genummerde paginering"
+
+#: includes/values.php:180
+msgid "Normal"
+msgstr "Normaal"
+
+#: includes/values.php:179
+msgid "Ajax"
+msgstr "Ajax"
+
+#: includes/values.php:163
+msgid "No"
+msgstr "Nee"
+
+#: includes/values.php:162
+msgid "Yes"
+msgstr "Ja"
+
+#: includes/values.php:95
+msgid "OR"
+msgstr "OF"
+
+#: includes/values.php:94
+msgid "AND"
+msgstr "EN"
+
+#: includes/settings.php:741
+msgid "Show Comment Count"
+msgstr "Aantal reacties weergeven"
+
+#: includes/settings.php:702
+msgid "Show Author"
+msgstr "Auteur weergeven"
+
+#: includes/settings.php:683
+msgid "Show Date"
+msgstr "Datum weergeven"
+
+#: includes/settings.php:583
+msgid "Show Content"
+msgstr "Inhoud weergeven"
+
+#: includes/settings.php:564
+msgid "Show Title"
+msgstr "Titel laten zien"
+
+#: includes/settings.php:544
+msgid "Show Thumbnail"
+msgstr "Thumbnail weergeven"
+
+#: includes/settings.php:512
+msgid "Thumbnail position"
+msgstr "Thumbnailpositie"
+
+#: includes/settings.php:408
+msgid "Allow HTML tags (a, br, strong, em, strike, i, ul, ol, li) in excerpt"
+msgstr "Maak HTML-codes (a, br, strong, em, strike, i, ul, ol, li) mogelijk in de samenvatting"
+
+#: includes/settings.php:393
+msgid "Generate excerpt by selecting the first X words of post content"
+msgstr "Genereer samenvatting door het selecteren van de eerste X woorden van de inhoud"
+
+#: includes/settings.php:384
+msgid "Excerpt settings"
+msgstr "Instellingen voor samenvatting"
+
+#: includes/settings.php:344
+msgid "Show Excerpt"
+msgstr "Toon samenvatting"
+
+#: includes/settings.php:343
+msgid "Show Full Content"
+msgstr "Toon volledige inhoud"
+
+#: includes/settings.php:246
+msgid "How to open item when click on Title, Thumbnail, Read-more button"
+msgstr "Hoe een item geopend moet worden als er geklikt wordt op Titel, Thumbnail of de knop 'Verder lezen'"
+
+#: includes/settings.php:238
+msgid "Open item in"
+msgstr "Open het item in"
+
+#: includes/settings.php:146
+msgid "Enable"
+msgstr "Inschakelen"
+
+#: admin/views/view.php:638 includes/hooks.php:87
+msgid "Pagination"
+msgstr "Paginering"
+
+#: includes/settings.php:104
+msgid "Order"
+msgstr "Volgorde"
+
+#: includes/settings.php:58
+msgid "Operator"
+msgstr "Medewerker"
+
+#: includes/settings.php:42
+msgid "Select terms"
+msgstr "Termen selecteren"
+
+#: includes/html.php:755
+msgid "Go to page"
+msgstr "Ga naar pagina"
+
+#: includes/html.php:754
+msgid "Current page is"
+msgstr "Huidige pagina is"
+
+#: includes/html.php:753
+msgid "Go to last page"
+msgstr "Ga naar de laatste pagina"
+
+#: includes/html.php:752
+msgid "Go to next page"
+msgstr "Ga naar de volgende pagina"
+
+#: includes/html.php:751
+msgid "Go to previous page"
+msgstr "Ga naar de vorige pagina"
+
+#: includes/html.php:750
+msgid "Go to first page"
+msgstr "Ga naar de eerste pagina"
+
+#: includes/html.php:855
+msgid "Read More"
+msgstr "Verder lezen"
+
+#: admin/views/view.php:515 admin/views/view.php:528 includes/hooks.php:95
+#: includes/settings.php:767
+msgid "Items per row"
+msgstr "Aantal items per rij"
+
+#: includes/hooks.php:87 includes/settings.php:154
+msgid "Items per page"
+msgstr "Aantal items per pagina"
+
+#: includes/hooks.php:56
+msgid "Please set value in"
+msgstr "Stel een waarde in voor"
+
+#: includes/hooks.php:55
+msgid "Please select an option in"
+msgstr "Selecteer een optie in"
+
+#: includes/html.php:250
+msgid "No posts found."
+msgstr "﻿Geen berichten gevonden"
+
+#: includes/functions.php:520 includes/html.php:395
+msgid "(no title)"
+msgstr "(geen titel)"
+
+#: admin/views/view.php:620 includes/hooks.php:81
+msgid "Fields settings"
+msgstr "Veldinstellingen"
+
+#: admin/views/view.php:454
+msgid "Enter keyword to searching for posts"
+msgstr "Geef het trefwoord om naar berichten/pagina's te zoeken"
+
+#: admin/views/view.php:439 includes/values.php:239
+msgid "Keyword"
+msgstr "Trefwoord"
+
+#: admin/views/view.php:414 includes/values.php:237
+msgid "Status"
+msgstr "Status"
+
+#: admin/views/view.php:338
+msgid "Relation"
+msgstr "Relatie"
+
+#: admin/views/view.php:219 includes/settings.php:167
+msgid "Limit"
+msgstr "Limiet"
+
+#: admin/views/view.php:203
+msgid "Parent page"
+msgstr "Hoofdpagina"
+
+#: admin/views/view.php:194
+msgid "List of post IDs to exclude (comma-separated values, for example: 1,2,3)"
+msgstr "Lijst met uit te sluiten bericht/pagina-ID's (door komma's gescheiden, bijvoorbeeld: 1,2,3)"
+
+#: admin/views/view.php:187
+msgid "Exclude"
+msgstr "Uitsluiten"
+
+#: admin/views/view.php:140 includes/hooks.php:66
+msgid "Content type"
+msgstr "Inhoudstype"
+
+#: admin/views/view.php:125 includes/hooks.php:60
+msgid "Display Settings"
+msgstr "Weergave-instellingen"
+
+#: admin/views/view.php:121 includes/hooks.php:59
+msgid "Filter Settings"
+msgstr "Filterinstellingen"
+
+#: admin/views/view.php:114 admin/views/view.php:686
+msgid "Save"
+msgstr "Opslaan"
+
+#: admin/views/view.php:103
+msgid "Enter a name to identify your views easily"
+msgstr "Voer een naam in om de View gemakkelijk te kunnen identificeren"
+
+#: admin/views/view.php:56
+msgid "Preview"
+msgstr "Voorvertoning"
+
+#: admin/views/view.php:35 public/content-views.php:256
+msgid "Edit View"
+msgstr "View bewerken"
+
+#: includes/settings.php:843
+msgid "There is no option"
+msgstr "Er is geen optie"
+
+#: admin/content-views-admin.php:429 includes/settings.php:602
+msgid "Date"
+msgstr "Datum"
+
+#: admin/content-views-admin.php:428 admin/views/view.php:379
+#: includes/settings.php:602 includes/values.php:240
+msgid "Author"
+msgstr "Auteur"
+
+#: admin/content-views-admin.php:427
+msgid "Shortcode"
+msgstr "Shortcode"
+
+#: admin/content-views-admin.php:409 admin/content-views-admin.php:469
+msgid "Edit"
+msgstr "Bewerken"
+
+#: admin/content-views-admin.php:321 admin/content-views-admin.php:374
+msgid "Settings"
+msgstr "Instellingen"
+
+#: admin/content-views-admin.php:317 public/content-views.php:254
+msgid "Add New View"
+msgstr "Nieuwe View toevoegen"
+
+#: admin/content-views-admin.php:313 public/content-views.php:258
+msgid "All Views"
+msgstr "Alle Views"
+
+#: admin/content-views-admin.php:309 admin/content-views-admin.php:321
+msgid "Content Views Settings"
+msgstr "Instellingen 'Inhoud Views'"
+
+#: admin/content-views-admin.php:230
+msgid "Update Preview"
+msgstr "Ververs voorvertoning"
+
+#: admin/content-views-admin.php:229
+msgid "Hide Preview"
+msgstr "Verberg voorvertoning"
+
+#: admin/content-views-admin.php:228 admin/views/view.php:63
+#: admin/views/view.php:73
+msgid "Show Preview"
+msgstr "Toon voorvertoning"
+
+#: admin/content-views-admin.php:223
+msgid "There is no taxonomy for selected content type"
+msgstr "Er is geen taxonomie voor het geselecteerde inhoudtype"

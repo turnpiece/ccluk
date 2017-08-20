@@ -1,0 +1,205 @@
+# Translation of Stable (latest release) in Thai
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-08-01 21:43:48+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#. Author of the plugin/theme
+msgid "wordpressdotorg"
+msgstr "wordpressdotorg"
+
+#: wordpress-importer.php:284
+msgid "Submit"
+msgstr "ส่ง"
+
+#: wordpress-importer.php:264
+msgid "Assign Authors"
+msgstr "มอบหมายผู้เขียน"
+
+#: wordpress-importer.php:1142
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr "เลือกไฟล์ WXR (.xml) ที่ต้องการอัปโหลด แล้วกดอัปโหลดไฟล์และนำเข้า"
+
+#: wordpress-importer.php:213
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr "ไฟล์ WXR นี้ (รุ่น %s) อาจจะไม่สนับสนุนโดยรุ่นนี้  โปรดพิจารณาการอัปเดต"
+
+#: wordpress-importer.php:267
+msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
+msgstr "ถ้าผู้ใช้ใหม่ถูกสร้างโดยเวิร์ดเพรส  รหัสผ่านใหม่จะถูกสุ่มสร้างขึ้นและบทบาทผู้ใช้ใหม่จะถูกตั้งค่าเป็น %s การเปลี่ยนข้อมูลผู้ใช้ใหม่ด้วยตัวเอง จะเป็นสิ่งจำเป็น"
+
+#: wordpress-importer.php:876
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr "รายการเมนูถูกข้ามไปเนื่องจากเมนู slug ไม่ถูกต้อง: %s"
+
+#: wordpress-importer.php:939
+msgid "Fetching attachments is not enabled"
+msgstr "ยังไม่เปิดใช้งานการดึงข้อมูลไฟล์แนบ"
+
+#: wordpress-importer.php:177
+msgid "Remember to update the passwords and roles of imported users."
+msgstr "อย่าลืมอัปเดทรหัสผ่านและกำหนดบทบาทของผู้ใช้งานที่นำเข้ามา"
+
+#: wordpress-importer.php:133
+msgid "The file does not exist, please try again."
+msgstr "ไม่พบไฟล์ที่ต้องการ กรุณาลองใหม่อีกครั้ง"
+
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:495
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr "เหมือนว่าสิ่งนี้ไม่ได้เป็นไฟล์ WXR เพราะเลขที่รุ่น WXR สูญหาย/ไม่ถูกต้อง"
+
+#: parsers.php:43
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr "รายละเอียดที่แสดงข้างบน ตัวนำเข้าจะลองใหม่อีกครั้งตอนนี้ด้วยตัวแปลอื่น..."
+
+#. Description of the plugin/theme
+msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
+msgstr "นำเข้าเรื่อง หน้า ความคิดเห็น ช่องปรับแต่ง หมวดหมู่ ป้ายกำกับ และอื่น ๆ จากไฟล์นำออกเวิร์ดเพรส"
+
+#: wordpress-importer.php:1126
+msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
+msgstr "มีรุ่นที่ใหม่กว่าของตัวนำเข้านี้ให้ใช้งานได้แล้ว. กรุณาอัปเดทไปเป็นรุ่น %s เพื่อให้แน่ใจว่าจะทำงานเข้ากันได้ไฟล์นำออกที่ใหม่กว่า"
+
+#: parsers.php:42 parsers.php:72 parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr "มีข้อผิดพลาดเมื่อทำการอ่านไฟล์ WXR นี้"
+
+#: wordpress-importer.php:308
+msgid "or create new user with login name:"
+msgstr "หรือสร้างผู้ใช้ใหม่ด้วยชื่อผู้ใช้:"
+
+#: wordpress-importer.php:372
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr "ล้มเหลวในการสร้างผู้ใช้ใหม่สำหรับ %s  เรื่องของพวกเขาจะเป็นของผู้ใช้ปัจจุบัน"
+
+#: wordpress-importer.php:321
+msgid "or assign posts to an existing user:"
+msgstr "หรือโอนเรื่องให้กับผู้ใช้ที่มีอยู่"
+
+#: wordpress-importer.php:1014
+msgid "Zero size file downloaded"
+msgstr "ขนาดไฟล์ 0 ที่ดาวน์โหลดแล้ว"
+
+#: wordpress-importer.php:1002
+msgid "Remote server returned error response %1$d %2$s"
+msgstr "รีโมทเซิร์ฟเวอร์คืนค่าผิดพลากกลับมา %1$d %2$s"
+
+#: wordpress-importer.php:238
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr "ล้มเหลวในการนำเข้าผู้เขียน %s เรื่องของพวกเขาจะเป็นของผู้ใช้ปัจจุบัน"
+
+#: wordpress-importer.php:605
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr "นำเข้าข้อมูล &#8220;%s&#8221; ล้มเหลว: ชนิดเรื่องไม่ถูกต้อง %s"
+
+#: wordpress-importer.php:516 wordpress-importer.php:738
+msgid "Failed to import %s %s"
+msgstr "นำเข้าข้อมูล %s %s ล้มเหลว"
+
+#: wordpress-importer.php:424
+msgid "Failed to import category %s"
+msgstr "นำเข้าหมวดหมู่ %s ล้มเหลว"
+
+#: wordpress-importer.php:467
+msgid "Failed to import post tag %s"
+msgstr "นำเข้าป้ายกำกับเรื่อง %s ล้มเหลว"
+
+#: wordpress-importer.php:642
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr "%s &#8220;%s&#8221; มีอยู่แล้ว"
+
+#: wordpress-importer.php:869
+msgid "Menu item skipped due to missing menu slug"
+msgstr "รายการเมนูถูกข้ามไปเนื่องจากไม่มีเมนู slug"
+
+#: wordpress-importer.php:704
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr "นำเข้า %s &#8220;%s&#8221; ล้มเหลว"
+
+#: wordpress-importer.php:319
+msgid "assign posts to an existing user:"
+msgstr "โอนเรื่องให้กับผู้ใช้งานที่มีอยู่:"
+
+#: wordpress-importer.php:311
+msgid "as a new user:"
+msgstr "เป็นสมาชิกใหม่:"
+
+#: wordpress-importer.php:265
+msgid "To make it easier for you to edit and save the imported content, you may want to reassign the author of the imported item to an existing user of this site. For example, you may want to import all the entries as <code>admin</code>s entries."
+msgstr "เพื่อทำให้ง่ายขึ้นสำหรับคุณในการแก้ไขและบันทุนเนื้อหาที่นำเข้า  คุณอาจต้องการมอบหมายผู้เขียนของเรื่องที่นำเข้าให้กับผู้เขียนที่มีอยู่บนเว็บไซต์นี้  สำหรับตัวอย่าง คุณอาจต้องการนำเข้าเรื่องทั้งหมดเป็นเรื่องของ  <code>ผู้ควบคุม</code>"
+
+#: wordpress-importer.php:1141
+msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
+msgstr "สวัสดี  อัปโหลด ไฟล์เวิร์ดเพรส eXtended RSS (WXR) ของคุณ และเราจะนำเข้า เรื่อง หน้า ความเห็น ช่องปรับแต่ง หมวดหมู่ และป้ายกำกับมายังเว็บไซต์นี้"
+
+#: wordpress-importer.php:1119
+msgid "Import WordPress"
+msgstr "นำเข้า เวิร์ดเพรส"
+
+#. Author URI of the plugin/theme
+msgid "http://wordpress.org/"
+msgstr "http://wordpress.org/"
+
+#: wordpress-importer.php:280
+msgid "Download and import file attachments"
+msgstr "ดาวน์โหลดและนำเข้าไฟล์แนบ"
+
+#. Plugin Name of the plugin/theme
+msgid "WordPress Importer"
+msgstr "ตัวนำเข้าเวิร์ดเพรส"
+
+#: wordpress-importer.php:322
+msgid "- Select -"
+msgstr "- เลือก -"
+
+#: wordpress-importer.php:1020
+msgid "Remote file is too large, limit is %s"
+msgstr "ไฟล์รีโมทใหญ่เกินไป  ขนาดจำกัดคือ %s"
+
+#: wordpress-importer.php:176
+msgid "All done."
+msgstr "ทั้งหมดสำเร็จแล้ว"
+
+#: wordpress-importer.php:176
+msgid "Have fun!"
+msgstr "ขอให้มีความสุขกับการเขียนบล็อก"
+
+#: wordpress-importer.php:952
+msgid "Invalid file type"
+msgstr "ชนิดไฟล์ไม่ถูกต้อง"
+
+#: wordpress-importer.php:297
+msgid "Import author:"
+msgstr "นำเข้าชื่อผู้เขียน:"
+
+#: wordpress-importer.php:277
+msgid "Import Attachments"
+msgstr "นำเข้าไฟล์แนบ"
+
+#: wordpress-importer.php:996
+msgid "Remote server did not respond"
+msgstr "รีโมทเซิร์ฟเวอร์ไม่ตอบสนอง"
+
+#: wordpress-importer.php:1216
+msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
+msgstr "นำเข้า <strong>เรื่อง หน้า ความเห็น ช่องปรับแต่ง หมวดหมู่ และป้ายกำกับ</strong> จากไฟล์นำออกเวิร์ดเพรส"
+
+#: wordpress-importer.php:132 wordpress-importer.php:141
+#: wordpress-importer.php:192 wordpress-importer.php:196
+#: wordpress-importer.php:205
+msgid "Sorry, there has been an error."
+msgstr "ขออภัย, เกิดข้อผิดพลาดบางอย่าง"
+
+#. Plugin URI of the plugin/theme
+msgid "http://wordpress.org/extend/plugins/wordpress-importer/"
+msgstr "http://wordpress.org/extend/plugins/wordpress-importer/"
+
+#: wordpress-importer.php:1009
+msgid "Remote file is incorrect size"
+msgstr "รีโมทไฟล์มีขนาดไม่ถูกต้อง"

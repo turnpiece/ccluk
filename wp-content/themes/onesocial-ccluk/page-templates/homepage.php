@@ -19,11 +19,11 @@ get_header();
 			<?php get_template_part( 'template-parts/content', 'page' ); ?>
 			<?php comments_template( '', true ); ?>
 		<?php endwhile; // end of the loop.  ?>
-
-        <?php get_sidebar(); ?>
         
 	</div>
 
+ 	<?php get_sidebar(); ?>
+ 	
 </div>
 
 <?php
