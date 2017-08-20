@@ -1,0 +1,503 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: BuddyPress User Blog\n"
+"Report-Msgid-Bugs-To: https://www.buddyboss.com/contact/\n"
+"POT-Creation-Date: 2017-06-03 07:36:16+00:00\n"
+"PO-Revision-Date: 2016-05-01 17:45-0400\n"
+"Last-Translator: jean-pierre michaud <nexialys@yahoo.com>\n"
+"Language-Team: jean-pierre michaud <nexialys@yahoo.com>\n"
+"Language: fr_FR\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n > 1);\n"
+"X-Generator: Poedit 1.8.6\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: bp-user-blog.php\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
+"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;"
+"_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: includes/recommend-posts.php:475
+msgid "0"
+msgstr "0"
+
+#: bp-user-blog.php:79
+msgid "Couldn't load main class at:<br/>%s"
+msgstr "Impossible de charger les composantes sur:<br/>%s"
+
+#: bp-user-blog.php:83 bp-user-blog.php:115
+msgid "<h1>Fatal error:</h1><hr/><pre>%s</pre>"
+msgstr "<h1>Erreur fatale:</h1><hr/><pre>%s</pre>"
+
+#: bp-user-blog.php:109
+msgid "Couldn't load SAP_Plugin_Check class at:<br/>%s"
+msgstr "N'a pas pu charger la classe BPCP_Plugin_Check à :<br>%s"
+
+#: includes/admin.php:178
+msgid "General Settings"
+msgstr "Réglages généraux"
+
+#: includes/admin.php:181
+msgid "Enable User Publishing"
+msgstr "Activer les Publications par Usagers"
+
+#: includes/admin.php:182
+msgid "Create New Post Page"
+msgstr "Créer une nouvelle page d'articles"
+
+#: includes/admin.php:183
+msgid "Enable Bookmarks"
+msgstr "Activer les favoris"
+
+#: includes/admin.php:184
+msgid "Bookmarks Page"
+msgstr "Page des favoris"
+
+#: includes/admin.php:185
+msgid "Enable Recommend Posts"
+msgstr "Activier la recommandation d'articles"
+
+#: includes/admin.php:189
+msgid "Support"
+msgstr "Support"
+
+#: includes/admin.php:212
+msgid ""
+"Allow users to publish posts. If unchecked, they can only submit drafts for "
+"review."
+msgstr ""
+"Autoriser les membres à publier leurs articles. Si la case n'est pas cochée, "
+"ils ne pourront que soumettre leurs brouillons pour un examen."
+
+#: includes/admin.php:227
+msgid "Allow users to bookmark posts."
+msgstr "Autoriser les membres à marquer des articles en favoris."
+
+#: includes/admin.php:242
+msgid "Allow users to recommend posts."
+msgstr "Autoriser les membres à recommander des articles."
+
+#: includes/admin.php:252 includes/admin.php:268
+msgid "- None -"
+msgstr "- Aucun -"
+
+#: includes/admin.php:255 includes/admin.php:271
+msgid "New Page"
+msgstr "Nouvelle Page"
+
+#: includes/admin.php:257 includes/admin.php:273
+#: templates/sap-post-create.php:53
+msgid "View"
+msgstr "Afficher"
+
+#: includes/admin.php:259 includes/admin.php:275
+msgid ""
+"You may need to reset your permalinks after changing this setting. Go to "
+"Settings > Permalinks."
+msgstr ""
+"Vous devrez peut-être réinitialiser vos permaliens après avoir modifié ce "
+"paramètre. Allez dans Réglages > Permaliens."
+
+#: includes/admin.php:327 includes/buddyboss-plugin-updater.php:10
+msgid "BuddyPress User Blog"
+msgstr "Blogue des Membres BuddyPress"
+
+#: includes/admin.php:332
+msgid "Settings updated."
+msgstr "Réglages mis à jour."
+
+#: includes/admin.php:341
+msgid "Save Changes"
+msgstr "Enregistrer les modifications"
+
+#: includes/admin.php:372
+msgid "Settings"
+msgstr "Réglages"
+
+#: includes/bookmarks.php:18
+msgid "Sorry, there was a problem processing your request."
+msgstr "Désolé, il y a eu un problème lors du traitement de votre demande."
+
+#: includes/bookmarks.php:164
+msgid "Bookmark this story to read later"
+msgstr "Ajouter cette histoire aux favoris pour la lire plus tard"
+
+#: includes/bookmarks.php:166
+msgid "Bookmark"
+msgstr "Marque-pages"
+
+#: includes/buddyboss-plugin-updater.php:49
+msgid ""
+"To receive updates for BuddyBoss products, please install and activate the "
+"plugin %s"
+msgstr ""
+
+#: includes/help-support.php:5
+msgid "Here are some video tutorials to get you started:"
+msgstr "Voici quelques tutoriels vidéo pour vous lancer:"
+
+#: includes/help-support.php:13
+msgid "Need more help?"
+msgstr "Besoin d'aide?"
+
+#: includes/help-support.php:16
+msgid "Frequently Asked Questions"
+msgstr "Foire aux questions"
+
+#: includes/help-support.php:17
+msgid "How to Update"
+msgstr "Comment mettre à jour"
+
+#: includes/main-class.php:197 includes/main-class.php:206
+msgid "Cheatin&#8217; huh?"
+msgstr "On triche, hum?"
+
+#: includes/recommend-posts.php:21 includes/recommend-posts.php:303
+msgid "Recommend this article"
+msgstr "Recommander cet article"
+
+#: includes/recommend-posts.php:22 includes/recommend-posts.php:299
+msgid "Discourage recommendation"
+msgstr "Décourager la recommandation"
+
+#: includes/recommend-posts.php:38
+msgid "Not permitted"
+msgstr "Non autorisé"
+
+#: includes/recommend-posts.php:182
+msgid "%1$s recommended the post %2$s"
+msgstr "%1$s a recommandé l'article %2$s"
+
+#: includes/recommend-posts.php:487
+msgid "You"
+msgstr "Vous"
+
+#: includes/recommend-posts.php:490
+msgid "You "
+msgstr "Vous "
+
+#: includes/recommend-posts.php:490
+msgid "and "
+msgstr "et"
+
+#: includes/recommend-posts.php:503
+msgid " other"
+msgid_plural " others"
+msgstr[0] " autre"
+msgstr[1] " autres"
+
+#: includes/recommend-posts.php:515
+msgid " recommendation"
+msgid_plural " recommendations"
+msgstr[0] " recommendation"
+msgstr[1] " recommendations"
+
+#: includes/recommend-posts.php:518
+msgid "Recommended"
+msgstr "Recommandé"
+
+#: includes/recommend-posts.php:521
+msgid "Recommend"
+msgstr "Recommander"
+
+#: includes/recommend-posts.php:539
+msgid "You Like:"
+msgstr "Vous aimez :"
+
+#: includes/recommend-posts.php:568
+msgid "You do not like anything yet."
+msgstr "Vous n'avez aucune appréciation."
+
+#: includes/requirements-class.php:22 includes/requirements-class.php:40
+msgid "Please activate BuddyPress first"
+msgstr "Veuillez d'abord activer BuddyPress"
+
+#: includes/sap-blog.php:72
+msgid "Add New Post"
+msgstr "Ajouter un Article"
+
+#: includes/sap-blog.php:82
+msgid "Latest Stories"
+msgstr "Dernières histoires"
+
+#: includes/sap-blog.php:84
+msgid "Most Recommended Stories"
+msgstr "Histoires les Plus Recommandées"
+
+#: includes/sap-blog.php:109
+#, fuzzy
+msgid "Blog <span class=\"count\">%s</span>"
+msgstr "Blogue <span class=\"count\">"
+
+#: includes/sap-blog.php:119 includes/sap-blog.php:148
+#: includes/sap-blog.php:158 templates/sap-post-create.php:95
+msgid "blog"
+msgstr "blog"
+
+#: includes/sap-blog.php:124
+msgid "Articles"
+msgstr "Articles"
+
+#: includes/sap-blog.php:126 includes/sap-blog.php:204
+#: templates/sap-post-create.php:52
+msgid "Published"
+msgstr "Publié"
+
+#: includes/sap-blog.php:145 includes/sap-blog.php:212
+#: includes/sap-class.php:149 templates/sap-post-create.php:140
+#: templates/sap-post-create.php:143
+msgid "In Review"
+msgstr "En revue"
+
+#: includes/sap-blog.php:146 includes/sap-blog.php:211
+msgid "pending"
+msgstr "pending"
+
+#: includes/sap-blog.php:155 includes/sap-blog.php:219
+msgid "Drafts"
+msgstr "Brouillons"
+
+#: includes/sap-blog.php:184
+msgid "Blog"
+msgstr "Blogue"
+
+#: includes/sap-blog.php:218
+msgid "drafts"
+msgstr "drafts"
+
+#: includes/sap-blog.php:226
+msgid "add-new"
+msgstr "add-new"
+
+#: includes/sap-blog.php:227
+msgid "Add New"
+msgstr "Ajouter une Recette"
+
+#: includes/sap-class.php:30
+msgid "SAP"
+msgstr "SAP"
+
+#: includes/sap-class.php:147
+msgid "Saving..."
+msgstr "Sauvegarde..."
+
+#: includes/sap-class.php:148 templates/sap-post-create.php:58
+#: templates/sap-post-create.php:73
+msgid "Save"
+msgstr "Sauver"
+
+#: includes/sap-class.php:150 templates/sap-post-create.php:71
+msgid "Draft"
+msgstr "Brouillon"
+
+#: includes/sap-class.php:151
+msgid "Your post has been submitted for review."
+msgstr "Votre article a été soumis pour examen."
+
+#: includes/sap-class.php:152
+msgid "Failed"
+msgstr "Échec"
+
+#: includes/sap-class.php:153
+msgid "Post title cannot be empty"
+msgstr "Le champ Titre ne doit être pas être vide"
+
+#: includes/sap-class.php:154
+msgid "Title"
+msgstr "Titre"
+
+#: includes/sap-class.php:155
+msgid "Post content cannot be empty"
+msgstr "Le contenu ne peut pas être vide"
+
+#: includes/sap-class.php:156
+msgid "Tell your story"
+msgstr "Proposer votre histoire"
+
+#: includes/sap-class.php:157
+msgid ""
+"Paste a YouTube, Vimeo, Facebook, Twitter or Instagram link and press Enter"
+msgstr ""
+
+#: includes/sap-class.php:158
+msgid "Incorrect URL format specified"
+msgstr ""
+
+#: includes/sap-class.php:172
+msgid "true"
+msgstr "vrai"
+
+#: includes/sap-class.php:258
+msgid "Your story was approved and published"
+msgstr "Votre article a été approuvé et publiée"
+
+#: includes/sap-functions.php:312
+#, fuzzy
+msgid ""
+"<div class=\"sap-no-bookmarks-content\"><p>You haven&apos;t bookmarked any "
+"stories yet.</p><p>Save stories to read later by using the <span class=\"fa "
+"bb-helper-icon fa-bookmark\"></span> bookmark button.</p></div>"
+msgstr ""
+"<div class=\"sap-no-bookmarks-content\">\n"
+"\t\t\t\t\t<p>Vous n'avez marqué aucune histoire pour le moment.</p>\n"
+"\t\t\t\t\t<p>Sauvegardez des histoires pour lire plus tard en utilisant le "
+"bouton <span class=\"fa bb-helper-icon fa-bookmark\"></span> marque-page.</"
+"p>\n"
+"\t\t\t\t</div>"
+
+#: includes/sap-functions.php:385
+msgid "Categories"
+msgstr "Catégories"
+
+#: includes/sap-functions.php:390
+msgid "Tags"
+msgstr "Mots-clés"
+
+#: includes/sap-functions.php:400
+msgid "Featured Image"
+msgstr "Image Vedette"
+
+#: includes/sap-functions.php:409
+msgid "Set Featured Image"
+msgstr "Choisir l'image à la une"
+
+#: includes/sap-functions.php:626
+msgid "Edit"
+msgstr "Modifier"
+
+#. translators: used between list items, there is a space after the comma
+#: includes/sap-functions.php:721
+msgid ", "
+msgstr ","
+
+#: includes/sap-functions.php:737
+msgid "Published in "
+msgstr "Publié dans "
+
+#: templates/profile-blog-list.php:4 templates/profile-blog-list.php:18
+msgid "Permanent Link to"
+msgstr "Lien permanent vers"
+
+#: templates/profile-blog-list.php:21
+msgid "%1$s"
+msgstr "%1$s"
+
+#: templates/sap-blog-page.php:71
+msgid "Load More"
+msgstr "Lire la Suite"
+
+#: templates/sap-blog-page.php:88
+msgid "Add your first."
+msgstr "Ajouter votre premier."
+
+#: templates/sap-blog-page.php:91
+msgid "You have no drafts."
+msgstr "Vous n'avez pas de brouillon."
+
+#: templates/sap-blog-page.php:93
+msgid "You have no posts in review."
+msgstr "Vous n'avez aucuns postes dans l'examen."
+
+#: templates/sap-blog-page.php:95
+#, fuzzy
+msgid ""
+"There are no recommended posts for you at the moment. Please check back "
+"later!"
+msgstr ""
+"À l'heure actuelle, il n'y a aucun messages de cet utilisateur. S'il vous "
+"plaît revenez plus tard !"
+
+#: templates/sap-blog-page.php:97
+msgid "You have not created any posts yet. %s"
+msgstr "Vous n'avez créé aucun article. %s"
+
+#: templates/sap-blog-page.php:101
+msgid "There are no posts by this user at the moment. Please check back later!"
+msgstr ""
+"À l'heure actuelle, il n'y a aucun messages de cet utilisateur. S'il vous "
+"plaît revenez plus tard !"
+
+#: templates/sap-bookmarks-shortcode.php:39 templates/sap-bookmarks.php:62
+msgid "Continue reading"
+msgstr "Continuer la lecture"
+
+#: templates/sap-bookmarks-shortcode.php:40 templates/sap-bookmarks.php:63
+msgid "."
+msgstr "."
+
+#: templates/sap-bookmarks.php:74
+msgid "Please login to view your bookmarks"
+msgstr "Veuillez vous connecter pour afficher vos favoris"
+
+#: templates/sap-post-create.php:49
+msgid "Revert to draft"
+msgstr "Enregistrer en brouillon..."
+
+#: templates/sap-post-create.php:55 templates/sap-post-create.php:57
+#: templates/sap-post-create.php:74
+msgid "Preview"
+msgstr "Aperçu"
+
+#: templates/sap-post-create.php:98
+msgid "Publish"
+msgstr "Publier"
+
+#: templates/sap-post-create.php:100
+msgid "Submit for Review"
+msgstr "Proposer pour approbation"
+
+#: templates/sap-post-create.php:114
+msgid "More Actions"
+msgstr "Plus d'actions"
+
+#: templates/sap-post-create.php:133
+msgid "Update"
+msgstr "Mettre à jour"
+
+#: templates/sap-post-create.php:135
+msgid "Publish post"
+msgstr "Publier"
+
+#: templates/sap-post-create.php:139 templates/sap-post-create.php:142
+msgid "Submit post for review"
+msgstr "Soumettre pour évaluation"
+
+#: templates/sap-post-create.php:148
+msgid "Show preview in new window"
+msgstr "Afficher un aperçu dans une nouvelle fenêtre"
+
+#: templates/sap-post-create.php:160 templates/sap-post-create.php:162
+msgid "Delete"
+msgstr "Supprimer"
+
+#~ msgid ""
+#~ "An Unexpected HTTP Error occurred during the API request.</p> <p><a href="
+#~ "\"?\" onclick=\"document.location.reload(); return false;\">Try again</a>"
+#~ msgstr ""
+#~ "Une erreur HTTP inattendue s’est produite lors d’une requête à "
+#~ "l’interface de programmation.</p> <p><a href=\"?\" onclick=\"document."
+#~ "location.reload(); return false;\">Réessayez</a>"
+
+#~ msgid "An unknown error occurred"
+#~ msgstr "Une erreur est survenue"
+
+#~ msgid "Support Forums"
+#~ msgstr "Forums d'aide"
+
+#~ msgid "https://www.buddyboss.com"
+#~ msgstr "https://www.buddyboss.com"
+
+#~ msgid "Let your BuddyPress users create blog posts from the frontend."
+#~ msgstr ""
+#~ "Autorise vos utilisateurs BuddyPress à créer des articles de blogs depuis "
+#~ "le front-end."
+
+#~ msgid "BuddyBoss"
+#~ msgstr "BuddyBoss"
+
+#~ msgid "http://buddyboss.com"
+#~ msgstr "http://buddyboss.com"
