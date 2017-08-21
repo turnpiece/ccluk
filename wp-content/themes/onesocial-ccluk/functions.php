@@ -6,6 +6,12 @@
  */
 
 /**
+ * Customizer additions.
+ */
+require get_stylesheet_directory() . '/inc/customizer.php';
+
+
+/**
  * Sets up theme defaults
  *
  * @since OneSocial Child Theme 1.0.0
