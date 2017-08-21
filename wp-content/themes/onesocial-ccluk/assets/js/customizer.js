@@ -1258,8 +1258,8 @@ jQuery( window ).ready( function( $ ){
     $( 'select[data-customize-setting-link="onepress_hero_layout"]').on( 'change on_custom_load', function(){
         var v = $( this).val() || '';
 
-        $( "li[id^='customize-control-onepress_hcl']").hide();
-        $( "li[id^='customize-control-onepress_hcl"+v+"']").show();
+        $( "li[id^='customize-control-ccluk_hcl']").hide();
+        $( "li[id^='customize-control-ccluk_hcl"+v+"']").show();
 
     } );
     $( 'select[data-customize-setting-link="onepress_hero_layout"]').trigger( 'on_custom_load' );
@@ -1271,12 +1271,12 @@ jQuery( window ).ready( function( $ ){
     $( 'select[data-customize-setting-link="onepress_gallery_source"]').on( 'change on_custom_load', function(){
         var v = $( this).val() || '';
 
-        $( "li[id^='customize-control-onepress_gallery_source_']").hide();
-        $( "li[id^='customize-control-onepress_gallery_api_']").hide();
-        $( "li[id^='customize-control-onepress_gallery_settings_']").hide();
-        $( "li[id^='customize-control-onepress_gallery_source_"+v+"']").show();
-        $( "li[id^='customize-control-onepress_gallery_api_"+v+"']").show();
-        $( "li[id^='customize-control-onepress_gallery_settings_"+v+"']").show();
+        $( "li[id^='customize-control-ccluk_gallery_source_']").hide();
+        $( "li[id^='customize-control-ccluk_gallery_api_']").hide();
+        $( "li[id^='customize-control-ccluk_gallery_settings_']").hide();
+        $( "li[id^='customize-control-ccluk_gallery_source_"+v+"']").show();
+        $( "li[id^='customize-control-ccluk_gallery_api_"+v+"']").show();
+        $( "li[id^='customize-control-ccluk_gallery_settings_"+v+"']").show();
 
     } );
 
@@ -1289,23 +1289,23 @@ jQuery( window ).ready( function( $ ){
         var v = $( this).val() || '';
         switch ( v ) {
             case 'slider':
-                $( "#customize-control-onepress_g_row_height, #customize-control-onepress_g_col, #customize-control-onepress_g_spacing").hide();
+                $( "#customize-control-ccluk_g_row_height, #customize-control-ccluk_g_col, #customize-control-ccluk_g_spacing").hide();
                 break;
             case 'justified':
-                $( "#customize-control-onepress_g_col, #customize-control-onepress_g_spacing").hide();
-                $( "#customize-control-onepress_g_row_height").show();
+                $( "#customize-control-ccluk_g_col, #customize-control-ccluk_g_spacing").hide();
+                $( "#customize-control-ccluk_g_row_height").show();
                 break;
             case 'carousel':
-                $( "#customize-control-onepress_g_row_height, #customize-control-onepress_g_col").hide();
-                $( "#customize-control-onepress_g_col, #customize-control-onepress_g_spacing").show();
+                $( "#customize-control-ccluk_g_row_height, #customize-control-ccluk_g_col").hide();
+                $( "#customize-control-ccluk_g_col, #customize-control-ccluk_g_spacing").show();
                 break;
             case 'masonry':
-                $( "#customize-control-onepress_g_row_height").hide();
-                $( "#customize-control-onepress_g_col, #customize-control-onepress_g_spacing").show();
+                $( "#customize-control-ccluk_g_row_height").hide();
+                $( "#customize-control-ccluk_g_col, #customize-control-ccluk_g_spacing").show();
                 break;
             default:
-                $( "#customize-control-onepress_g_row_height").hide();
-                $( "#customize-control-onepress_g_col, #customize-control-onepress_g_spacing").show();
+                $( "#customize-control-ccluk_g_row_height").hide();
+                $( "#customize-control-ccluk_g_col, #customize-control-ccluk_g_spacing").show();
 
         }
 

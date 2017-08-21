@@ -14,7 +14,7 @@ function ccluk_customize_register( $wp_customize ) {
 
 	// Load custom controls.
 	require get_stylesheet_directory() . '/inc/customizer-controls.php';
-
+/*
 	// Remove default sections.
 	$wp_customize->remove_section( 'colors' );
 	$wp_customize->remove_section( 'background_image' );
@@ -24,7 +24,7 @@ function ccluk_customize_register( $wp_customize ) {
 	$wp_customize->get_setting( 'blogname' )->transport         = 'postMessage';
 	$wp_customize->get_setting( 'blogdescription' )->transport  = 'postMessage';
 	$wp_customize->get_setting( 'header_textcolor' )->transport = 'postMessage';
-
+*/
 	/**
 	 * Hook to add other customize
 	 */
@@ -52,27 +52,7 @@ function ccluk_customize_register( $wp_customize ) {
 	/*------------------------------------------------------------------------*/
     /*  Site Identity.
     /*------------------------------------------------------------------------*/
-        /*
-         * @deprecated 1.2.0
-         */
-        /*
-    	$wp_customize->add_setting( 'ccluk_site_image_logo',
-			array(
-				'sanitize_callback' => 'ccluk_sanitize_file_url',
-				'default'           => ''
-			)
-		);
-    	$wp_customize->add_control( new WP_Customize_Image_Control(
-            $wp_customize,
-            'ccluk_site_image_logo',
-				array(
-					'label' 		=> esc_html__('Site Image Logo', 'onesocial'),
-					'section' 		=> 'title_tagline',
-					'description'   => esc_html__('Your site image logo', 'onesocial'),
-				)
-			)
-		);
-        */
+/*
         $is_old_logo = get_theme_mod( 'ccluk_site_image_logo' );
 
         $wp_customize->add_setting( 'ccluk_hide_sitetitle',
@@ -105,11 +85,11 @@ function ccluk_customize_register( $wp_customize ) {
 
             )
         );
-
+*/
 	/*------------------------------------------------------------------------*/
     /*  Site Options
     /*------------------------------------------------------------------------*/
-		$wp_customize->add_panel( 'ccluk_options',
+/*		$wp_customize->add_panel( 'ccluk_options',
 			array(
 				'priority'       => 22,
 			    'capability'     => 'edit_theme_options',
@@ -118,10 +98,10 @@ function ccluk_customize_register( $wp_customize ) {
 			    'description'    => '',
 			)
 		);
-
+*/
 		/* Global Settings
 		----------------------------------------------------------------------*/
-		$wp_customize->add_section( 'ccluk_global_settings' ,
+/*		$wp_customize->add_section( 'ccluk_global_settings' ,
 			array(
 				'priority'    => 3,
 				'title'       => esc_html__( 'Global', 'onesocial' ),
@@ -178,10 +158,10 @@ function ccluk_customize_register( $wp_customize ) {
 					'description' => esc_html__('Check this box to hide footer back to top button.', 'onesocial')
 				)
 			);
-
+*/
 		/* Colors
 		----------------------------------------------------------------------*/
-		$wp_customize->add_section( 'ccluk_colors_settings' ,
+/*		$wp_customize->add_section( 'ccluk_colors_settings' ,
 			array(
 				'priority'    => 4,
 				'title'       => esc_html__( 'Site Colors', 'onesocial' ),
@@ -229,13 +209,13 @@ function ccluk_customize_register( $wp_customize ) {
                     'description' => '',
                 )
             ));
-
+*/
 
 
 
 		/* Header
 		----------------------------------------------------------------------*/
-		$wp_customize->add_section( 'ccluk_header_settings' ,
+/*		$wp_customize->add_section( 'ccluk_header_settings' ,
 			array(
 				'priority'    => 5,
 				'title'       => esc_html__( 'Header', 'onesocial' ),
@@ -383,10 +363,10 @@ function ccluk_customize_register( $wp_customize ) {
                 'section'     => 'ccluk_header_settings',
             )
         );
-
+*/
 		/* Social Settings
 		----------------------------------------------------------------------*/
-		$wp_customize->add_section( 'ccluk_social' ,
+/*		$wp_customize->add_section( 'ccluk_social' ,
 			array(
 				'priority'    => 6,
 				'title'       => esc_html__( 'Social Profiles', 'onesocial' ),
@@ -480,10 +460,10 @@ function ccluk_customize_register( $wp_customize ) {
                     )
                 )
             );
-
+*/
 		/* Newsletter Settings
 		----------------------------------------------------------------------*/
-		$wp_customize->add_section( 'ccluk_newsletter' ,
+/*		$wp_customize->add_section( 'ccluk_newsletter' ,
 			array(
 				'priority'    => 9,
 				'title'       => esc_html__( 'Newsletter', 'onesocial' ),
@@ -538,10 +518,10 @@ function ccluk_customize_register( $wp_customize ) {
 					'description' => __( 'The newsletter form use MailChimp, please follow <a target="_blank" href="http://goo.gl/uRVIst">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>', 'onesocial' )
 				)
 			);
-
+*/
 			/* Hero options
 			----------------------------------------------------------------------*/
-			$wp_customize->add_section(
+/*			$wp_customize->add_section(
 				'ccluk_hero_options',
 				array(
 					'title'       => __( 'Hero Options', 'onesocial' ),
@@ -557,11 +537,11 @@ function ccluk_customize_register( $wp_customize ) {
 					'sanitize_callback'    => 'sanitize_text_field',
 				)
 			);
-
+*/
 			/**
 			 * @see https://github.com/daneden/animate.css
 			 */
-
+/*
 			$animations_css = 'bounce flash pulse rubberBand shake headShake swing tada wobble jello bounceIn bounceInDown bounceInLeft bounceInRight bounceInUp bounceOut bounceOutDown bounceOutLeft bounceOutRight bounceOutUp fadeIn fadeInDown fadeInDownBig fadeInLeft fadeInLeftBig fadeInRight fadeInRightBig fadeInUp fadeInUpBig fadeOut fadeOutDown fadeOutDownBig fadeOutLeft fadeOutLeftBig fadeOutRight fadeOutRightBig fadeOutUp fadeOutUpBig flipInX flipInY flipOutX flipOutY lightSpeedIn lightSpeedOut rotateIn rotateInDownLeft rotateInDownRight rotateInUpLeft rotateInUpRight rotateOut rotateOutDownLeft rotateOutDownRight rotateOutUpLeft rotateOutUpRight hinge rollIn rollOut zoomIn zoomInDown zoomInLeft zoomInRight zoomInUp zoomOut zoomOutDown zoomOutLeft zoomOutRight zoomOutUp slideInDown slideInLeft slideInRight slideInUp slideOutDown slideOutLeft slideOutRight slideOutUp';
 
 			$animations_css = explode( ' ', $animations_css );
@@ -602,10 +582,10 @@ function ccluk_customize_register( $wp_customize ) {
 				)
 			);
 
-
+*/
 			/* Custom CSS Settings
 			----------------------------------------------------------------------*/
-			$wp_customize->add_section(
+/*			$wp_customize->add_section(
 				'ccluk_custom_code',
 				array(
 					'title'       => __( 'Custom CSS', 'onesocial' ),
@@ -631,7 +611,7 @@ function ccluk_customize_register( $wp_customize ) {
 					'type'     => 'textarea'
 				)
 			);
-
+*/
 
 	/*------------------------------------------------------------------------*/
     /*  Section: Order & Styling
@@ -644,26 +624,12 @@ function ccluk_customize_register( $wp_customize ) {
 			'active_callback' => 'ccluk_showon_frontpage'
 		)
 	);
-		// Plus message
-		$wp_customize->add_setting( 'ccluk_order_styling_message',
-			array(
-				'sanitize_callback' => 'ccluk_sanitize_text',
-			)
-		);
-		$wp_customize->add_control( new CCLUK_Misc_Control( $wp_customize, 'ccluk_order_styling_message',
-			array(
-				'section'     => 'ccluk_news_settings',
-				'type'        => 'custom_message',
-				'section'     => 'ccluk_order_styling',
-				'description' => wp_kses_post( 'Check out <a target="_blank" href="https://www.famethemes.com/themes/onepress/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=ccluk_customizer#get-started">CCLUK Plus version</a> for full control over <strong>section order</strong> and <strong>section styling</strong>! ', 'onesocial' )
-			)
-		));
 
 
 	/*------------------------------------------------------------------------*/
     /*  Section: Hero
     /*------------------------------------------------------------------------*/
-
+/*
 	$wp_customize->add_panel( 'ccluk_hero_panel' ,
 		array(
 			'priority'        => 130,
@@ -1041,9 +1007,9 @@ function ccluk_customize_register( $wp_customize ) {
                     )
                 );
 
-
+*/
 				/* Layout 2 ---- */
-
+/*
 				// Layout 22 content text
 				$wp_customize->add_setting( 'ccluk_hcl2_content',
 					array(
@@ -1082,7 +1048,7 @@ function ccluk_customize_register( $wp_customize ) {
 
 
 			// END For Hero layout ------------------------
-
+*/
 	/*------------------------------------------------------------------------*/
 	/*  Section: Video Popup
 	/*------------------------------------------------------------------------*/
@@ -2852,7 +2818,8 @@ function ccluk_sanitize_html_input( $string ) {
 }
 
 function ccluk_showon_frontpage() {
-	return is_page_template( 'template-frontpage.php' );
+	return true;
+	//return is_page_template( 'template-frontpage.php' );
 }
 
 function ccluk_gallery_source_validate( $validity, $value ){
@@ -2867,14 +2834,14 @@ function ccluk_gallery_source_validate( $validity, $value ){
  * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
  */
 function ccluk_customize_preview_js() {
-    wp_enqueue_script( 'ccluk_customizer_liveview', get_template_directory_uri() . '/assets/js/customizer-liveview.js', array( 'customize-preview', 'customize-selective-refresh' ), false, true );
+    wp_enqueue_script( 'ccluk_customizer_liveview', get_stylesheet_directory_uri() . '/assets/js/customizer-liveview.js', array( 'customize-preview', 'customize-selective-refresh' ), false, true );
 }
 add_action( 'customize_preview_init', 'ccluk_customize_preview_js', 65 );
 
 
 
-add_action( 'customize_controls_enqueue_scripts', 'opneress_customize_js_settings' );
-function opneress_customize_js_settings(){
+add_action( 'customize_controls_enqueue_scripts', 'ccluk_customize_js_settings' );
+function ccluk_customize_js_settings(){
     if ( ! function_exists( 'ccluk_get_actions_required' ) ) {
         return;
     }

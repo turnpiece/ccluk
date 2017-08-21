@@ -49,12 +49,6 @@ class One_Press_Textarea_Custom_Control extends WP_Customize_Control
 	}
 }
 
-class CCLUK_Theme_Support extends WP_Customize_Control {
-	public function render_content() {
-		echo wp_kses_post( 'Upgrade to <a href="#">CCLUK Plus</a> to be able to change the section order and styling!', 'onesocial' );
-	}
-}
-
 if ( ! function_exists( 'ccluk_sanitize_checkbox' ) ) {
     function ccluk_sanitize_checkbox( $input ) {
         if ( $input == 1 ) {
