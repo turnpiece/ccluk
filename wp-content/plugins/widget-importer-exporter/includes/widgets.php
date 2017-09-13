@@ -4,14 +4,16 @@
  *
  * @package    Widget_Importer_Exporter
  * @subpackage Functions
- * @copyright  Copyright (c) 2013, churchthemes.com
- * @link       https://churchthemes.com/plugins/widget-importer-exporter
- * @license    http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
+ * @copyright  Copyright (c) 2013 - 2017, WP Ultimate
+ * @link       https://wpultimate.com/widget-importer-exporter
+ * @license    GPLv2 or later
  * @since      0.4
  */
 
-// No direct access
-if ( ! defined( 'ABSPATH' ) ) exit;
+// No direct access.
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
 
 /**
  * Available widgets
@@ -33,11 +35,10 @@ function wie_available_widgets() {
 
 	foreach ( $widget_controls as $widget ) {
 
-		if ( ! empty( $widget['id_base'] ) && ! isset( $available_widgets[$widget['id_base']] ) ) { // no dupes
-
-			$available_widgets[$widget['id_base']]['id_base'] = $widget['id_base'];
-			$available_widgets[$widget['id_base']]['name'] = $widget['name'];
-
+		// No duplicates.
+		if ( ! empty( $widget['id_base'] ) && ! isset( $available_widgets[ $widget['id_base'] ] ) ) {
+			$available_widgets[ $widget['id_base'] ]['id_base'] = $widget['id_base'];
+			$available_widgets[ $widget['id_base'] ]['name']    = $widget['name'];
 		}
 
 	}

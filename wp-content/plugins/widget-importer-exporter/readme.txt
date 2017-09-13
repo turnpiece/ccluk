@@ -1,10 +1,9 @@
 === Widget Importer & Exporter ===
-Contributors: churchthemes, stevengliebe, mauryaratan, wido
-Donate link: https://churchthemes.com/project-support/
+Contributors: wpultimate, churchthemes, stevengliebe, mauryaratan, wido
 Tags: widgets, widget, importer, exporter, import, export, widget import, widget export, widget importer, widget exporter, backup, migration
 Requires at least: 3.5
-Tested up to: 4.8
-Stable tag: 1.4.5
+Tested up to: 4.8.1
+Stable tag: 1.5.1
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -12,11 +11,11 @@ Import and export your widgets.
 
 == Description ==
 
-Widget Importer & Exporter is useful for moving widgets from one WordPress site to another, backing up widgets and for theme developers to provide users with sample widgets. See the [Plugin Details](https://churchthemes.com/plugins/widget-importer-exporter/) on churchthemes.com for a tour of features.
+Widget Importer & Exporter is useful for moving widgets from one WordPress site to another, backing up widgets and for theme developers to provide users with sample widgets. See the [details](https://wpultimate.com/widget-importer-exporter) on WP Ultimate.
 
 = Importing =
 
-Importing is a matter of uploading an export file created by the plugin. The results of an import are shown in a nicely formatted table with an explanation of what happened with each widget area (sidebar) and widget.
+Importing is done by uploading an export file created by the plugin. The results of an import are shown in a nicely formatted table with an explanation of what happened with each widget area and widget.
 
 Importation takes into consideration widget areas not existing in the current theme (widgets imported as *Inactive*), widgets that already exist in the same widget area (widgets not duplicated) and widgets that are not supported by the site (widgets not imported).
 
@@ -37,18 +36,19 @@ The following translations are available.
 * Serbian by Borisa Djuraskovic of [Web Hosting Hub](http://www.webhostinghub.com)
 * Japanese by [miccweb](https://profiles.wordpress.org/miccweb/)
 * Hebrew by [Rami Yushuvaev](https://profiles.wordpress.org/ramiy/)
+* Persian by [ekfarshid](https://profiles.wordpress.org/ekfarshid/), [Yousefzadeh](https://profiles.wordpress.org/cg-team/) and [PersianScript](https://profiles.wordpress.org/persianscript/)
 * More at [translate.wordpress.org](https://translate.wordpress.org/projects/wp-plugins/widget-importer-exporter)
 
 = Developers =
 
 The ``wie_before_import`` action fires after a file is uploaded but before the data is imported. ``wie_after_import`` fires after the data is imported. The ``wie_import_data`` filter can be used to filter data before it is imported. Other filters are used throughout. Submit an issue on GitHub if you need more hooks (pull requests encouraged).
 
-Please jump on [GitHub](https://github.com/churchthemes/widget-importer-exporter) to report issues and follow development.
+Please jump on [GitHub](https://github.com/stevengliebe/widget-importer-exporter) to report issues and follow development.
 
 = Follow us =
 
-* Visit [churchthemes.com](https://churchthemes.com)
-* We're on [Twitter](https://twitter.com/churchthemes), [Facebook](https://www.facebook.com/churchthemescom) and have a [Newsletter](https://churchthemes.com/newsletter)
+* Visit [WP Ultimate](https://wpultimate.com)
+* We're on [Twitter](https://twitter.com/WPUltimateHQ), [Facebook](https://www.facebook.com/wpultimate) and have a [Newsletter](http://wpultimate.us5.list-manage.com/subscribe?u=a0fec2c146a67b2dc509154d1&id=47f3733a8e)
 * Lead developer: [stevengliebe.com](http://stevengliebe.com)
 
 == Installation ==
@@ -70,4 +70,4 @@ The export file contains JSON data that is not compatible with any other plugin.
 
 == Changelog ==
 
-See [releases](https://github.com/churchthemes/widget-importer-exporter/releases) on GitHub.
+See [releases](https://github.com/stevengliebe/widget-importer-exporter/releases) on GitHub.
