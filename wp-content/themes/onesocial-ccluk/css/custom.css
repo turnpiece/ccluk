@@ -30,7 +30,12 @@ You're the boss, so have fun editing!
     width: 360px;
 }
 
-body.page-template-homepage .slide_content > .slide_content_wrap > .inner > .slide_text {
+.page-template-homepage .site {
+	padding-top: 70px;
+	padding-bottom: 70px;
+}
+
+.page-template-homepage .slide_content > .slide_content_wrap > .inner > .slide_text {
 	display: table;
 	margin: 0 auto;
 	padding: 15px;
@@ -38,8 +43,8 @@ body.page-template-homepage .slide_content > .slide_content_wrap > .inner > .sli
 	background-color: rgba(0, 152, 218, 0.85);
 }
 
-body.page-template-homepage .bb-slider-container .readmore a, 
-body.page-template-homepage .slide-content .button {
+.page-template-homepage .bb-slider-container .readmore a, 
+.page-template-homepage .slide-content .button {
     text-transform: uppercase;
     border-radius: 5px;
     padding: 14px 30px 13px;
@@ -52,29 +57,29 @@ body.page-template-homepage .slide-content .button {
     font-weight: 500;
 }
 
-body.page-template-homepage #secondary {
+.page-template-homepage #secondary {
 	width: auto;
 	margin-left: auto;
 	margin-right: auto;
 	padding: 15px 0;
 }
 
-body.page-template-homepage #secondary.widget-area .widget h3.widgettitle {
+.page-template-homepage #secondary.widget-area .widget h3.widgettitle {
 	text-align: center;
 }
 
-body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li {
+.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li {
 	width: 30%;
 	float: left;
 	clear: right;
 	margin-right: 3%;
 }
 
-body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li > a > img {
+.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li > a > img {
 	clear: both;
 }
 
-body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title{
+.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title{
 	display: block;
 }
 

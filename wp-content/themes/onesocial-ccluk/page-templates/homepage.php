@@ -16,8 +16,21 @@ get_header();
 	<div id="content" role="main">
 
 		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', 'page' ); ?>
-			<?php comments_template( '', true ); ?>
+			<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+
+                <header class="entry-header">
+                     <?php if (has_post_thumbnail()) : ?>
+                        <?php the_post_thumbnail(); ?>
+                    <?php endif; ?>
+
+                    <h2 class="entry-title"><?php the_title(); ?></h2>
+                </header>
+
+                <div class="entry-content">
+                    <?php the_content(); ?>
+                </div>
+
+            </article>
 		<?php endwhile; // end of the loop.  ?>
         
 	</div>
