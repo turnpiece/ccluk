@@ -122,6 +122,10 @@ You're the boss, so have fun editing!
 		color: #333;
 	}
 
+	.bb-slider-container .title {
+		font-size: 20px !important;
+	}
+
 }/* don't delete this closing bracket */
 
 
