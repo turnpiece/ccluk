@@ -89,7 +89,9 @@ input[type="submit"] {
 
 #save_as_draft, 
 #buddypress #group-settings-form input[type="submit"], 
-#buddypress .standard-form div.submit input[type="submit"] {
+#buddypress .standard-form div.submit input[type="submit"],
+.vc_btn3.vc_btn3-color-juicy-pink, 
+.vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
 	color: #fff;
 	border: none;
 	background: #54ae68;
@@ -109,6 +111,11 @@ div#register-page .security-question-section {
 
 .main-navigation li a {
 	color: rgba(0, 0, 0, 0.8);
+}
+
+.vc_btn3.vc_btn3-color-juicy-pink, 
+.vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
+	border-radius: 5px;
 }
 
 /*--------------------------------------------------------------
