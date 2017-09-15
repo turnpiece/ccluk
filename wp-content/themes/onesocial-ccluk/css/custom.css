@@ -83,6 +83,18 @@ You're the boss, so have fun editing!
 	display: block;
 }
 
+input[type="submit"] {
+	border-radius: 5px;
+}
+
+#save_as_draft, 
+#buddypress #group-settings-form input[type="submit"], 
+#buddypress .standard-form div.submit input[type="submit"] {
+	color: #fff;
+	border: none;
+	background: #54ae68;
+}
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
