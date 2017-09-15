@@ -94,7 +94,16 @@ input[type="submit"] {
 .vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
 	color: #fff;
 	border: none;
-	background: #54ae68;
+	background-color: #54ae68;
+}
+
+#save_as_draft:hover, 
+#buddypress #group-settings-form input[type="submit"]:hover, 
+#buddypress .standard-form div.submit input[type="submit"]:hover,
+.vc_btn3.vc_btn3-color-juicy-pink:hover, 
+.vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat:hover {
+	color: #000;
+	background-color: #54ae68;
 }
 
 fieldset,
