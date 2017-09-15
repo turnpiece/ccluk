@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-11 21:42:01+0000\n"
+"PO-Revision-Date: 2017-09-13 19:34:52+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1891,7 +1891,7 @@ msgstr "Déconnecter %s de tous les supports/appareils."
 
 #: wp-admin/user-edit.php:606
 msgid "Did you lose your phone or leave your account logged in at a public computer? You can log out everywhere else, and stay logged in here."
-msgstr "Avez-vous perdu votre téléphone ou laissé votre compte ouvert sur un ordinateur public&nbsp;? Vous pouvez rester connecté ici tout en vous déconnectant partout ailleurs."
+msgstr "Avez-vous perdu votre téléphone ou laissé votre compte ouvert sur un ordinateur public ? Vous pouvez rester connecté ici tout en vous déconnectant partout ailleurs."
 
 #: wp-admin/user-edit.php:555
 msgid "Generate Password"
@@ -2775,7 +2775,7 @@ msgstr "Ces suggestions sont basées sur les extensions que vous et d’autres u
 
 #: wp-admin/user-edit.php:596
 msgid "You are only logged in at this location."
-msgstr "Vous n’êtes connecté qu’à cet endroit."
+msgstr "Vous n’êtes connecté·e qu’à cet endroit."
 
 #: wp-admin/user-edit.php:614
 msgid "Log Out Everywhere"
@@ -2872,11 +2872,11 @@ msgstr "Impossible de déconnecter les sessions utilisateur. Veuillez réessayer
 #. translators: %s: User's display name.
 #: wp-admin/includes/ajax-actions.php:3185
 msgid "%s has been logged out."
-msgstr "%s a été déconnecté."
+msgstr "%s a été déconnecté·e."
 
 #: wp-admin/includes/ajax-actions.php:3181
 msgid "You are now logged out everywhere else."
-msgstr "Vous êtes désormais déconnecté partout ailleurs."
+msgstr "Vous êtes désormais déconnecté·e partout ailleurs."
 
 #: wp-admin/includes/class-wp-comments-list-table.php:332
 msgid "Filter by comment type"
@@ -3989,7 +3989,7 @@ msgstr "Nous sauvegardons cet article dans votre navigateur, par sécurité."
 
 #: wp-admin/edit-form-advanced.php:495
 msgid "<strong>Connection lost.</strong> Saving has been disabled until you&#8217;re reconnected."
-msgstr "<strong>Connexion perdue.</strong> L&rsquo;enregistrement a été désactivé jusqu&rsquo;à ce que vous soyez reconnecté."
+msgstr "<strong>Connexion perdue.</strong> L’enregistrement a été désactivé jusqu’à ce que vous soyez reconnecté·e."
 
 #: wp-admin/includes/revision.php:395
 msgid "Sorry, something went wrong. The requested comparison could not be loaded."
@@ -6405,7 +6405,7 @@ msgstr "Si vous voulez faire des modifications et ne pas les perdre à la procha
 
 #: wp-admin/users.php:32
 msgid "This screen lists all the existing users for your site. Each user has one of five defined roles as set by the site admin: Site Administrator, Editor, Author, Contributor, or Subscriber. Users with roles other than Administrator will see fewer options in the dashboard navigation when they are logged in, based on their role."
-msgstr "Cet écran liste tous les utilisateurs actuels de votre site. Chaque utilisateur a l&rsquo;un des 5 rôles prédéfinis, tel qu&rsquo;assigné par l&rsquo;administrateur du site&nbsp;: Administrateur, Éditeur, Auteur, Contributeur ou Abonné. Les utilisateurs avec un rôle autre qu&rsquo;Administrateur verront moins d&rsquo;options quand ils seront connectés, en fonction de leur rôle."
+msgstr "Cet écran liste tous les utilisateurs actuels de votre site. Chaque utilisateur a l’un des 5 rôles prédéfinis, tel qu’assigné par l’administrateur du site : Administrateur, Éditeur, Auteur, Contributeur ou Abonné. Les utilisateurs avec un rôle autre qu’Administrateur verront moins d’options quand ils seront connectés, en fonction de leur rôle."
 
 #: wp-admin/index.php:67
 msgid "The boxes on your Dashboard screen are:"
@@ -8819,7 +8819,7 @@ msgstr "bonjour-tout-le-monde"
 
 #: wp-admin/includes/upgrade.php:183
 msgid "Hello world!"
-msgstr "Bonjour tout le monde&nbsp;!"
+msgstr "Bonjour tout le monde !"
 
 #: wp-admin/includes/upgrade.php:174
 msgid "Welcome to WordPress. This is your first post. Edit or delete it, then start writing!"

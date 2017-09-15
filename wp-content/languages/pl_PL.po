@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-04 20:03:38+0000\n"
+"PO-Revision-Date: 2017-09-06 08:31:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10231,10 +10231,6 @@ msgstr "Przepraszamy, ten adres email jest już używany!"
 msgid "That email address has already been used. Please check your inbox for an activation email. It will become available in a couple of days if you do nothing."
 msgstr "Ten adres email został już użyty. Proszę sprawdzić, czy doszedł już na niego email aktywacyjny. Jeśli niczego nie zrobisz, użycie tego adresu będzie znów możliwe za kilka dni."
 
-#: wp-login.php:293
-msgid "<strong>ERROR</strong>: There is no user registered with that email address."
-msgstr "<strong>BŁĄÐ</strong>: Brak zarejestrowanego użytkownika o wprowadzonym adresie email."
-
 #: wp-includes/user.php:2310
 msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
 msgstr "<strong>BŁĄD</strong>: Wprowadzony adres email nie jest prawidłowy."
@@ -10291,6 +10287,10 @@ msgstr "Pełen ekran"
 #: wp-includes/class-wp-editor.php:1097
 msgid "Language"
 msgstr "Język"
+
+#: wp-login.php:293
+msgid "<strong>ERROR</strong>: There is no user registered with that email address."
+msgstr "<strong>BŁĄD</strong>: Brak zarejestrowanego użytkownika o wprowadzonym adresie email."
 
 #: wp-includes/class-wp-theme.php:800
 msgid "Blue"

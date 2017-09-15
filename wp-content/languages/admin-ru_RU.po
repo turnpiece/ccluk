@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-10 10:38:14+0000\n"
+"PO-Revision-Date: 2017-08-29 20:32:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -96,7 +96,7 @@ msgstr "Обновления для режима сети"
 
 #: wp-admin/about.php:214
 msgid "As fewer and fewer browsers support Silverlight, file formats which require the presence of the Silverlight plugin are being removed from core support. Files will still display as a download link, but will no longer be embedded automatically."
-msgstr "Так как все меньше браузеров поддерживают Silverlight, файловые форматы требующие наличия Silverlight плагина более не поддерживаются ядром. Файлы будут отображаться как ссылка на загрузку, но не будут автоматически встраиваться."
+msgstr "Так как все меньше браузеров поддерживают Silverlight, файловые форматы, требующие наличия Silverlight плагина, больше не поддерживаются ядром. Файлы будут отображаться как ссылка на загрузку, но не будут автоматически встраиваться."
 
 #: wp-admin/about.php:213
 msgid "Removal of Core Support for WMV and WMA Files"

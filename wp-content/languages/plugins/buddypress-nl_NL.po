@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-13 09:36:12+0000\n"
+"PO-Revision-Date: 2017-09-01 14:22:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -79,6 +79,108 @@ msgid_plural "Viewing %1$s - %2$s of %3$s members"
 msgstr[0] "Je bekijkt %1$s - %2$s van %3$s lid"
 msgstr[1] "Je bekijkt %1$s - %2$s van %3$s leden"
 
+#: bp-forums/deprecated/1.7.php:24
+msgid "Forums (Legacy)"
+msgstr "Forums (Legacy)"
+
+#: bp-core/classes/class-bp-admin.php:706
+msgid "We continue to improve our localization internals, making it easier for translation editors to ensure that BuddyPress will be available for everyone in their own language."
+msgstr "We blijven werken aan onze locale functies, om het zo makkelijk te maken om vertalingen toe te voegen, om er zeker van te zijn dat BuddyPress voor iedereen beschikbaar is zijn of haar eigen taal. "
+
+#: bp-core/classes/class-bp-admin.php:702
+msgid "More under the hood &#8230;"
+msgstr "More under the hood &#8230;"
+
+#. translators: %s: PHPMailer
+#: bp-core/classes/class-bp-admin.php:694
+msgid "Developers can specify which %s should be used when sending BuddyPress with a new filter."
+msgstr "Developers kunnen aangeven welke  %s gebruikt moeten worden, wanneer BuddyPress met een nieuw filter verzonden word,"
+
+#. translators: %s: PHPMailer
+#: bp-core/classes/class-bp-admin.php:690
+msgid "Enable choice of %s"
+msgstr "Sta de keuze van %s toe"
+
+#: bp-core/classes/class-bp-admin.php:683
+msgid "The groups widget can now be sorted alphabetically, in addition to sorting the results by recently active, popular, and newest groups."
+msgstr "De Groups widget kan nu alfabetisch worden gesorteerd, als toevoeging tot het sorteren van de resultaten op recente activiteit, populariteit en nieuwste groepen."
+
+#: bp-core/classes/class-bp-admin.php:682
+msgid "Alphabetical sorting for Groups widget"
+msgstr "Alfabetisch sorteren voor de Groups widget"
+
+#. translators: 1: search_column, 2: BP_Groups_Group::get()
+#: bp-core/classes/class-bp-admin.php:674
+msgid "The new %1$s parameter allows developers to specify which columns should be matched, as well as where wildcard characters should be placed, when searching via %2$s."
+msgstr "De nieuwe %1$s parameter staat toe dat developers specificeren welke columns hetzelfde zouden moeten zijn, hetzelfde als waar de wildcard characters geplaatst moeten worden, wanneer je zoekt via %2$s."
+
+#: bp-core/classes/class-bp-admin.php:671
+msgid "A more flexible Group search"
+msgstr "Een meer flexibele groeps zoekfunctie"
+
+#: bp-core/classes/class-bp-admin.php:666
+msgid "We've added new filters and actions for different methods throughout the Messages component."
+msgstr "Wij hebben nieuwe filters en acties toegevoegd voor de verschillende methodes in het berichten component."
+
+#: bp-core/classes/class-bp-admin.php:665
+msgid "More hooks for Messages"
+msgstr "Meer hooks voor berichten."
+
+#: bp-core/classes/class-bp-admin.php:657
+msgid "Full-width BuddyPress layout for Twenty Seventeen theme."
+msgstr "Volle-breedte BuddyPress layout voor het 2017 thema."
+
+#. translators: 1: Link to the Codex article, 2: functions.php
+#: bp-core/classes/class-bp-admin.php:650
+msgid "To change the default two-column page layout to a full-width layout as seen in the image, add the <a href=\"%1$s\">following code</a> to the  %2$s file of your Twenty Seventeen child theme."
+msgstr "Om de normale twee-colommen pagina layout to veranderen naar een volle-breedte layout zoals te zien is in het plaatje, voeg de <a href=\"%1$s\">following code</a> toe bij het %2$s bestand van jouw 2017 child theme."
+
+#: bp-core/classes/class-bp-admin.php:647
+msgid "BuddyPress looks great in WordPress's latest default theme with the new Twenty Seventeen companion stylesheet."
+msgstr "BuddyPress ziet er geweldig uit in WordPress zijn laatste default them als je gebruikt maakt van het 2017 companion stylesheet."
+
+#: bp-core/classes/class-bp-admin.php:642
+msgid "Allow users to unsubscribe from BuddyPress email notifications in some email clients such as Gmail (web), when properly configured."
+msgstr "Sta gebruikers toe om zich uit te schrijven voor de BuddyPress e-mail notificaties in sommige e-mail cliënten zoals Gmail (web), wanneer het goed geconfigureerd is,"
+
+#: bp-core/classes/class-bp-admin.php:641
+msgid "Email header showing the list-unsubscribe feature."
+msgstr "E-mail header laat de uitgeschreven functie zien."
+
+#. translators: %s: List-Unsubscribe
+#: bp-core/classes/class-bp-admin.php:638
+msgid "Support for %s header in emails"
+msgstr "Support voor %s header in e-mails."
+
+#: bp-core/classes/class-bp-admin.php:632
+msgid "When you click on the username on the \"Users > Manage Signups\" page, you can now view profile data entered by the user at the time of registration."
+msgstr "Wanneer je op gebruikersnaam klikt: ''Gebruikers > Beheer registraties'' pagina, kan je nu de profiel data bekijken van de gebruiker op het moment van registreren."
+
+#: bp-core/classes/class-bp-admin.php:631
+msgid "The improved pending account screen."
+msgstr "Het verbeterde wachten op account scherm."
+
+#: bp-core/classes/class-bp-admin.php:630
+msgid "More helpful \"Activate Pending Accounts\" screen"
+msgstr "Een verhelderend ''Activeer in afwachting op account'' scherm"
+
+#. translators: 1: BP REST API, 2: Link to Codex article
+#: bp-core/classes/class-bp-admin.php:616
+msgid "To continue the migration of legacy code to modern standards and techniques necessary for the %1$s project and other new features moving forward, <a href=\"%2$s\">BuddyPress 2.8 requires at least PHP 5.3</a>. This will allow us to build better, robust, and secure code, benefitting developers and users now and in the future."
+msgstr "Om met de moderne technieken, tegen de moderne standaard de migratie van de legacy code voort te zetten voor het %1$s project en andere nieuwe functies die nodig zijn om verder te komen <a href=\"%2$s\">BuddyPress 2.8 heeft minstens PHP 5.3 nodig </a>. Dit zorgt ervoor dat er betere, robuustere en veiligere code gebruikt word waar developers en gebruikers veel plezier van hebben. Voor nu en in de toekomst. "
+
+#: bp-core/classes/class-bp-admin.php:613
+msgid "Modernizing the Codebase"
+msgstr "De Codebase moderniseren. "
+
+#. Description of the plugin/theme
+msgid "BuddyPress helps site builders and WordPress developers add community features to their websites, with user profile fields, activity streams, messaging, and notifications."
+msgstr "BuddyPress helpt websitebouwers en WordPress developers om community functies toe te voegen aan hun websites, met gebruikersprofielen, activiteiten, berichten en notificaties."
+
+#: bp-xprofile/classes/class-bp-xprofile-group.php:750
+msgid "Field Group Name (required)"
+msgstr "Veld groepnaam (verplicht)"
+
 #: bp-xprofile/classes/class-bp-xprofile-field.php:1341
 msgctxt "XProfile admin edit field"
 msgid "Name (required)"
@@ -138,6 +240,14 @@ msgstr "Geef een eigen tijdformaat"
 msgid "Custom:"
 msgstr "Aangepast:"
 
+#: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:487
+msgid "<code>4 years ago</code>, <code>4 years from now</code>"
+msgstr "<code>4 jaar geleden</code>, <code>4 jaar vooruit</code>"
+
+#: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:487
+msgid "Time elapsed"
+msgstr "Tijd verstreken"
+
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/settings/profile.php:18
 msgid "Profile visibility settings"
@@ -163,6 +273,11 @@ msgid "Unread notifications"
 msgstr "Ongelezen meldingen"
 
 #. translators: accessibility text
+#: bp-templates/bp-legacy/buddypress/members/single/messages.php:88
+msgid "Sitewide Notices"
+msgstr "Sitebrede meldingen"
+
+#. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/messages.php:48
 msgid "Sent Messages"
 msgstr "Verzonden berichten"
@@ -181,6 +296,15 @@ msgstr "Berichten met ster"
 #: bp-templates/bp-legacy/buddypress/members/single/messages/compose.php:12
 msgid "Compose Message"
 msgstr "Bericht opstellen"
+
+#: bp-templates/bp-legacy/buddypress/members/single/home.php:38
+msgid "Member primary navigation"
+msgstr "Primaire navigatie lid"
+
+#. translators: accessibility text
+#: bp-templates/bp-legacy/buddypress/members/single/groups.php:65
+msgid "Member's groups"
+msgstr "Groep van Lid"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:60
@@ -207,6 +331,19 @@ msgstr "Mijn vrienden"
 msgid "Friendship requests"
 msgstr "Vriendschapsaanvragen"
 
+#: bp-templates/bp-legacy/buddypress/members/single/activity.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/blogs.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/forums.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/friends.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/groups.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/messages.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/notifications.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/plugins.php:21
+#: bp-templates/bp-legacy/buddypress/members/single/profile.php:11
+#: bp-templates/bp-legacy/buddypress/members/single/settings.php:11
+msgid "Member secondary navigation"
+msgstr "Secondaire navigatie lid"
+
 #: bp-templates/bp-legacy/buddypress/members/register.php:306
 msgid "Privacy: I would like my site to appear in search engines, and in public listings around this network."
 msgstr "Privacy: Ik wil dat mijn site gevonden wordt in zoekmachines en in publieke lijsten rond deze site."
@@ -216,13 +353,42 @@ msgstr "Privacy: Ik wil dat mijn site gevonden wordt in zoekmachines en in publi
 msgid "Members directory"
 msgstr "Ledenoverzicht"
 
+#: bp-templates/bp-legacy/buddypress/members/index.php:79
+msgid "Members directory secondary navigation"
+msgstr "Secondaire navigatie leden map"
+
+#: bp-templates/bp-legacy/buddypress/members/index.php:59
+msgid "Members directory main navigation"
+msgstr "Hoofd navigatie leden map"
+
 #: bp-templates/bp-legacy/buddypress/groups/single/send-invites.php:20
 msgid "Send invites"
 msgstr "Verzend uitnodigingen"
 
+#. translators: accessibility text
+#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:19
+msgid "Request form"
+msgstr "Aanvragen formulier"
+
+#: bp-templates/bp-legacy/buddypress/groups/single/home.php:39
+msgid "Group primary navigation"
+msgstr "Primaire navigatie groep"
+
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/membership-requests.php:11
 msgid "Manage Membership Requests"
 msgstr "Beheer aanvragen voor lidmaatschap"
+
+#: bp-templates/bp-legacy/buddypress/groups/single/admin/manage-members.php:317
+msgid "No group members were found."
+msgstr "Geen groepsleden gevonden"
+
+#: bp-templates/bp-legacy/buddypress/groups/single/admin/manage-members.php:206
+msgid "No group moderators were found."
+msgstr "Geen groepsmoderatoren gevonden."
+
+#: bp-templates/bp-legacy/buddypress/groups/single/admin/manage-members.php:111
+msgid "No group administrators were found."
+msgstr "Geen groepsbeheerders gevonden."
 
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:11
 msgid "Manage Group Settings"
@@ -237,6 +403,14 @@ msgstr "Beheer groepsgegevens"
 msgid "Groups directory"
 msgstr "Groepenoverzicht"
 
+#: bp-templates/bp-legacy/buddypress/groups/index.php:79
+msgid "Groups directory secondary navigation"
+msgstr "Secondaire navigatie groepen map"
+
+#: bp-templates/bp-legacy/buddypress/groups/index.php:59
+msgid "Groups directory main navigation"
+msgstr "Hoofd navigatie groepen map"
+
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/groups/create.php:229
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-avatar.php:11
@@ -249,6 +423,11 @@ msgstr "Groepsfoto"
 msgid "&ndash; %s"
 msgstr "&ndash; %s"
 
+#: bp-templates/bp-legacy/buddypress/groups/create.php:154
+#: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:76
+msgid "Select the types this group should be a part of."
+msgstr "Selecteer het type waar deze groep deel van uit zou moeten maken."
+
 #: bp-templates/bp-legacy/buddypress/groups/create.php:152
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:74
 msgid "Group Types"
@@ -258,6 +437,37 @@ msgstr "Groepstypen"
 #: bp-templates/bp-legacy/buddypress/groups/create.php:61
 msgid "Group Details"
 msgstr "Groepsgegevens"
+
+#: bp-templates/bp-legacy/buddypress/forums/index.php:80
+#: bp-templates/bp-legacy/buddypress/groups/single/forum/edit.php:20
+#: bp-templates/bp-legacy/buddypress/groups/single/forum/topic.php:17
+msgid "Forums secondary navigation"
+msgstr "Secondaire navigatie forums"
+
+#: bp-templates/bp-legacy/buddypress/forums/index.php:58
+msgid "Forums directory main navigation"
+msgstr "Hoofd navigatie forums map"
+
+#. translators: accessibility text
+#: bp-templates/bp-legacy/buddypress/blogs/index.php:118
+msgid "Sites directory"
+msgstr "Sites map"
+
+#: bp-templates/bp-legacy/buddypress/blogs/index.php:82
+msgid "Sites directory secondary navigation"
+msgstr "Secondaire navigatie sites map"
+
+#: bp-templates/bp-legacy/buddypress/blogs/index.php:60
+msgid "Sites directory main navigation"
+msgstr "Hoofd navigatie sites map"
+
+#: bp-templates/bp-legacy/buddypress/activity/index.php:143
+msgid "Activity secondary navigation"
+msgstr "Secondaire navigatie activiteit"
+
+#: bp-templates/bp-legacy/buddypress/activity/index.php:47
+msgid "Sitewide activities navigation"
+msgstr "Sitebrede navigatie activiteiten"
 
 #. translators: 1: user profile link, 2: user name, 3: activity permalink, 4:
 #. ISO8601 timestamp, 5: activity relative timestamp
@@ -270,6 +480,32 @@ msgctxt "Label for the WP users table member type column"
 msgid "Member Type"
 msgstr "Lidtype"
 
+#: bp-members/classes/class-bp-members-admin.php:2274
+msgid "Member type was changed successfully."
+msgstr "Lid type is succesvol gewijzigd."
+
+#: bp-members/classes/class-bp-members-admin.php:2271
+msgid "There was an error while changing member type. Please try again."
+msgstr "Er is een fout opgetreden tijdens het wijzigen van het lid type. Probeer opnieuw."
+
+#: bp-members/classes/class-bp-members-admin.php:2176
+msgid "No Member Type"
+msgstr "Geen lid type"
+
+#: bp-members/classes/class-bp-members-admin.php:2166
+#: bp-members/classes/class-bp-members-admin.php:2168
+msgid "Change member type to&hellip;"
+msgstr "Wijzig lid type naar&hellip;"
+
+#: bp-groups/classes/class-bp-groups-list-table.php:782
+msgid "No Group Type"
+msgstr "Geen groep type"
+
+#: bp-groups/classes/class-bp-groups-list-table.php:772
+#: bp-groups/classes/class-bp-groups-list-table.php:774
+msgid "Change group type to&hellip;"
+msgstr "Wijzig groep type naar&hellip;"
+
 #: bp-groups/classes/class-bp-groups-list-table.php:699
 msgctxt "Label for the WP groups table group type column"
 msgid "Group Type"
@@ -278,6 +514,13 @@ msgstr "Groepstype"
 #: bp-groups/bp-groups-template.php:5307
 msgid "Viewing groups of the type: %s"
 msgstr "Je bekijkt groepen met het type: %s"
+
+#: bp-groups/bp-groups-template.php:4477
+#: bp-templates/bp-legacy/buddypress/groups/single/activity.php:10
+#: bp-templates/bp-legacy/buddypress/groups/single/admin.php:10
+#: bp-templates/bp-legacy/buddypress/groups/single/forum.php:24
+msgid "Group secondary navigation"
+msgstr "Secondaire navigatie groep"
 
 #: bp-groups/bp-groups-template.php:235
 msgid "Group Types:"
@@ -288,6 +531,28 @@ msgctxt "group type URL base"
 msgid "type"
 msgstr "type"
 
+#: bp-groups/bp-groups-admin.php:1326
+msgid "Group type was changed successfully."
+msgstr "Groep type werd succesvol gewijzigd."
+
+#: bp-groups/bp-groups-admin.php:1323
+msgid "There was an error while changing group type. Please try again."
+msgstr "Er ontstond een fout bij het wijzigen van het groep type. Probeer opnieuw."
+
+#: bp-groups/bp-groups-admin.php:1058
+msgid "(Not available on the front end)"
+msgstr "(niet beschikbaar bij het front end)"
+
+#: bp-core/classes/class-bp-admin.php:931
+msgid "Thank you for installing BuddyPress! BuddyPress helps site builders and WordPress developers add community features to their websites, with user profile fields, activity streams, messaging, and notifications."
+msgstr "Bedankt voor het installeren van BuddyPress! BuddyPress helpt sitebouwers en WordPress developers om community features aan hun websites toe te voegen, met gebruikersprofielvelden, activiteitenfeeds, privéberichten en notificaties."
+
+#: bp-core/classes/class-bp-admin.php:810
+#: bp-core/classes/class-bp-admin.php:815
+#: bp-core/classes/class-bp-admin.php:820
+msgid "Community Support"
+msgstr "Community Support"
+
 #: bp-core/classes/class-bp-admin.php:775
 msgid "2.8 Release Lead"
 msgstr "2.8 Projectleider"
@@ -295,6 +560,96 @@ msgstr "2.8 Projectleider"
 #: bp-core/classes/class-bp-admin.php:770
 msgid "BuddyPress Team"
 msgstr "BuddyPress Team"
+
+#: bp-core/classes/class-bp-admin.php:715
+msgid "Continued improvements for universal access help make BuddyPress back- and front-end screens usable for everyone (and on more devices)."
+msgstr "Continue verbeteringen voor brede toegankelijkheid dragen bij aan gebruikersvriendelijkheid van BuddyPress voor back- en front-end schermen."
+
+#: bp-core/classes/class-bp-admin.php:625
+msgid "For Developers &amp; Site Builders"
+msgstr "Voor ontwikkelaars &amp; site bouwers"
+
+#: bp-core/bp-core-functions.php:3720
+msgid "You can change this or any other email notification preferences in your email settings."
+msgstr "Je kunt deze of alle andere e-mailmeldingsvoorkeuren wijzigen in je e-mail instellingen."
+
+#: bp-core/bp-core-functions.php:3692
+msgid "Please go to your notifications settings to unsubscribe from emails."
+msgstr "Ga naar je meldingsinstellingen om je af te melden voor e-mails."
+
+#: bp-core/bp-core-functions.php:3681 bp-core/bp-core-functions.php:3687
+msgid "Please log in and go to your settings to unsubscribe from notification emails."
+msgstr "Log in en ga naar je instellingen om je af te melden voor meldings-e-mails."
+
+#: bp-core/bp-core-functions.php:3680 bp-core/bp-core-functions.php:3686
+#: bp-core/bp-core-functions.php:3691
+msgid "Something has gone wrong."
+msgstr "Er is iets fout gegaan."
+
+#: bp-core/bp-core-functions.php:3627 bp-core/bp-core-functions.php:3635
+msgid "You will no longer receive emails when your request to join a group has been accepted or denied."
+msgstr "Je ontvangt niet langer e-mails als je verzoek om aan te melden voor een groep wordt geaccepteerd of afgewezen."
+
+#: bp-core/bp-core-functions.php:3614
+msgid "You will no longer receive emails when someone sends you a message."
+msgstr "Je ontvangt niet langer e-mails als iemand je een bericht stuurt."
+
+#: bp-core/bp-core-functions.php:3606
+msgid "You will no longer receive emails when someone requests to be a member of your group."
+msgstr "Je ontvangt niet langer e-mails als iemand een verzoek indient om een lid te worden van je groep."
+
+#: bp-core/bp-core-functions.php:3590 bp-core/bp-core-functions.php:3598
+msgid "You will no longer receive emails when you have been promoted in a group."
+msgstr "Je ontvangt niet langer e-mails als je gepromoveerd wordt in een groep."
+
+#: bp-core/bp-core-functions.php:3582
+msgid "You will no longer receive emails when you are invited to join a group."
+msgstr "Je ontvangt niet langer e-mails als je uitgenodigd wordt om bij een groep aan te sluiten."
+
+#: bp-core/bp-core-functions.php:3566 bp-core/bp-core-functions.php:3574
+msgid "You will no longer receive emails when one of your groups is updated."
+msgstr "Je ontvangt niet langer e-mails als één van je groepen is bijgewerkt."
+
+#: bp-core/bp-core-functions.php:3558
+msgid "You will no longer receive emails when someone accepts your friendship request."
+msgstr "Je ontvangt niet langer e-mails wanneer iemand je vriendschapsverzoek accepteert."
+
+#: bp-core/bp-core-functions.php:3550
+msgid "You will no longer receive emails when someone sends you a friend request."
+msgstr "Je ontvangt niet langer e-mails wanneer iemand je een vriendschapsverzoek stuurt."
+
+#: bp-core/bp-core-functions.php:3524 bp-core/bp-core-functions.php:3532
+msgid "You will no longer receive emails when someone mentions you in an update."
+msgstr "Je zal geen e-mails meer ontvangen wanneer iemand je noemt in een update."
+
+#: bp-core/bp-core-functions.php:3508 bp-core/bp-core-functions.php:3516
+msgid "You will no longer receive emails when someone replies to an update or comment you posted."
+msgstr "Je zal geen e-mails meer ontvangen wanneer iemand reageert op een update of reactie die jij geplaatst hebt."
+
+#: bp-core/admin/bp-core-admin-slugs.php:193
+msgid "Registration is currently disabled.  Before associating a page is allowed, please enable registration by clicking on the \"Anyone can register\" checkbox on <a href=\"%s\">this page</a>."
+msgstr "Registratie is momenteel uitgeschakeld. Om een pagina te kunnen groeperen moet je eerst de registratie toestaan door te clicken op ''iedereen kan zich registreren'' checkbox op <a href=\"%s\">deze pagina</a>."
+
+#: bp-core/admin/bp-core-admin-slugs.php:191
+msgid "Registration is currently disabled.  Before associating a page is allowed, please enable registration by selecting either the \"User accounts may be registered\" or \"Both sites and user accounts can be registered\" option on <a href=\"%s\">this page</a>."
+msgstr "Registratie is momenteel uitgeschakeld. Om een pagina te kunnen associëren dient de registratie te worden ingeschakeld door de optie \"Gebruiker accounts kunnen worden geregistreerd\" of \"Zowel sites als gebruiker accounts kunnen worden geregistreerd\" te kiezen op <a href=\"%s\">deze pagina</a>."
+
+#: bp-core/deprecated/2.8.php:194
+msgid "Your site is currently running PHP version %s, while BuddyPress 2.8 will require version 5.3+."
+msgstr "Je site draait momenteel op PHP versie %s, terwijl BuddyPress 2.8 versie 5.3 of hoger vereist."
+
+#: bp-core/deprecated/2.8.php:193
+msgid "Your site is not ready for BuddyPress 2.8."
+msgstr "Je site is niet geschikt voor BuddyPress 2.8."
+
+#: bp-core/deprecated/2.8.php:139 bp-core/deprecated/2.8.php:194
+#: bp-loader.php:64
+msgid "See <a href=\"%s\">the Codex guide</a> for more information."
+msgstr "Bekijk <a href=\"%s\">de Codex gids</a> voor meer informatie."
+
+#: bp-core/deprecated/2.8.php:138
+msgid "A BuddyPress update is available, but your system is not compatible."
+msgstr "Er is een BuddyPress update beschikbaar, maar je systeem is niet compatible."
 
 #: bp-blogs/bp-blogs-template.php:1108
 msgid "Privacy: I would like my site to appear in search engines, and in public listings around this network"
@@ -426,14 +781,40 @@ msgstr "Helemaal klaar. De instellingen zijn opgeslagen in het %s bestand in de 
 msgid "%s file location:"
 msgstr "%s bestandslocatie:"
 
+#: bp-core/classes/class-bp-core-bp-options-nav-backcompat.php:40
+#: bp-core/classes/class-bp-core-bp-options-nav-backcompat.php:80
+msgid "These globals should not be used directly and are deprecated. Please use the BuddyPress nav functions instead."
+msgstr "De globals zouden niet meer gebruikt moeten worden en zijn afgeschaft. Gebruik alsjeblieft de BuddyPress nav functie."
+
+#: bp-core/classes/class-bp-core-bp-nav-backcompat.php:66
+#: bp-core/classes/class-bp-core-bp-nav-backcompat.php:100
+#: bp-core/classes/class-bp-core-bp-nav-backcompat.php:125
+#: bp-core/classes/class-bp-core-bp-nav-backcompat.php:151
+msgid "The bp_nav and bp_options_nav globals should not be used directly and are deprecated. Please use the BuddyPress nav functions instead."
+msgstr "De bp_nav en bp_options_nav globals zouden niet meer gebruikt moeten worden en zijn afgeschaft. Gebruik alsjeblieft de BuddyPRess nav functie."
+
 #: bp-core/classes/class-bp-admin.php:986
 msgctxt "Email post type"
 msgid "Situations"
 msgstr "Situaties"
 
+#: bp-core/bp-core-moderation.php:289
+msgctxt "Comment blacklist"
+msgid "You have posted an inappropriate word."
+msgstr "Je hebt een ongepast woord gebruikt."
+
+#: bp-core/bp-core-moderation.php:176
+msgctxt "Comment moderation"
+msgid "You have posted an inappropriate word."
+msgstr "Je hebt een ongepast woord gebruikt."
+
 #: bp-core/bp-core-moderation.php:135
 msgid "You have posted too many links"
 msgstr "Je hebt teveel links geplaatst"
+
+#: bp-core/admin/bp-core-admin-tools.php:488
+msgid "It looks like you have more sites to record. Resume recording by checking the \"Repopulate site tracking records\" option."
+msgstr "Het lijkt erop dat je meer websites hebt om bij te houden. Vervolg het bijhouden door de \"Herstel de site tracking registratie.\" optie aan te vinken."
 
 #: bp-core/admin/bp-core-admin-functions.php:305
 msgid "The following active BuddyPress Components do not have associated WordPress Pages: %s."
@@ -452,6 +833,10 @@ msgstr "<a href=\"%1$s\">Log in</a> als \"%2$s\" met een bestaand wachtwoord."
 #: bp-blogs/bp-blogs-template.php:1225
 msgid "%s is your new site."
 msgstr "%s is je nieuwe site."
+
+#: bp-activity/classes/class-bp-activity-oembed-extension.php:194
+msgid "Embedded Activity Item"
+msgstr "Embedded activiteit item"
 
 #. translators: %s: Unread mention count for the current user
 #: bp-activity/classes/class-bp-activity-component.php:268
@@ -504,6 +889,16 @@ msgstr "Door %1$s op %2$s"
 #: bp-activity/bp-activity-adminbar.php:43
 msgid "Edit Activity"
 msgstr "Activiteit bewerken"
+
+#. translators: accessibility text
+#: bp-activity/bp-activity-admin.php:690
+msgid "Edit activity content"
+msgstr "Pas activiteiten content aan"
+
+#. translators: accessibility text
+#: bp-activity/bp-activity-admin.php:679
+msgid "Edit activity action"
+msgstr "aanpassen activiteiten"
 
 #: bp-activity/bp-activity-functions.php:551
 msgctxt "Post Type generic comments activity front filter"
@@ -7120,7 +7515,7 @@ msgstr "Algemene Voorkeuren"
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:465
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:471
 msgid "Date format"
-msgstr "Datumnotatie"
+msgstr "Datumformat"
 
 #: bp-templates/bp-legacy/buddypress/forums/forums-loop.php:52
 #: bp-themes/bp-default/forums/forums-loop.php:39

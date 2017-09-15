@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-14 21:32:06+0000\n"
+"PO-Revision-Date: 2017-08-27 19:09:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -671,7 +671,7 @@ msgstr "Information"
 
 #: wp-admin/includes/meta-boxes.php:872
 msgid "Need help? Use the Help tab above the screen title."
-msgstr "Brug for hjælp? Benyt Hjælp-fanebladet ovenover skærmtitlen."
+msgstr "Brug for hjælp? Brug Hjælp-fanebladet ovenover skærmtitlen."
 
 #: wp-admin/includes/menu.php:342 wp-admin/my-sites.php:16
 msgid "Sorry, you are not allowed to access this page."
@@ -769,7 +769,7 @@ msgstr "Du har desværre ikke tilladelse til at eksportere indholdet på dette w
 
 #: wp-admin/edit.php:201
 msgid "You can filter the list of posts by post status using the text links above the posts list to only show posts with that status. The default view is to show all posts."
-msgstr "Du kan filtrere listen af indlæg efter indlægstatus ved at benytte tekstlinks ovenover indlægslisten , så der kun vises indlæg med den status. Standardvisningen er at alle indlæg vises."
+msgstr "Du kan filtrere listen af indlæg efter indlægstatus ved at bruge tekstlinks ovenover indlægslisten , så der kun vises indlæg med den status. Standardvisningen er at alle indlæg vises."
 
 #. translators: %s: taxonomy name
 #: wp-admin/edit-tag-form.php:79
@@ -1025,7 +1025,7 @@ msgstr "Anmeldelser"
 
 #: wp-admin/includes/plugin-install.php:355
 msgid "You are using a development version of WordPress. These feature plugins are also under development. <a href=\"%s\">Learn more</a>."
-msgstr "Du benytter en udviklerversion af WordPress. Disse udvalgte plugins er også under udvikling. <a href=\"%s\">Lær mere</a>."
+msgstr "Du bruger en udviklerversion af WordPress. Disse udvalgte plugins er også under udvikling. <a href=\"%s\">Lær mere</a>."
 
 #: wp-admin/includes/image-edit.php:150
 msgid "Thumbnail Settings Help"
@@ -1267,7 +1267,7 @@ msgstr "Send brugernotifikation"
 #: wp-admin/nav-menus.php:822
 msgctxt "menu location"
 msgid "(Currently set to: %s)"
-msgstr "(Nuværende sat til: %s)"
+msgstr "(på nuværende tidspunkt sat til: %s)"
 
 #. translators: %s: site link
 #: wp-admin/includes/schema.php:1013 wp-admin/includes/upgrade.php:163
@@ -1878,7 +1878,7 @@ msgstr "Svar på %s."
 
 #: wp-admin/includes/user.php:478
 msgid "You&rsquo;re using the auto-generated password for your account. Would you like to change it?"
-msgstr "Du benytter en automatisk genereret adgangskode for din konto. Vil du ændre den?"
+msgstr "Du bruger en automatisk genereret adgangskode for din konto. Vil du ændre den?"
 
 #: wp-admin/users.php:365
 msgid "You have specified this user for removal:"
@@ -3079,7 +3079,7 @@ msgstr "Flere detaljer"
 #: wp-admin/includes/theme.php:214 wp-admin/includes/update.php:413
 #: wp-admin/includes/update.php:558
 msgid "Update %s now"
-msgstr "Updater %s nu"
+msgstr "Opdater %s nu"
 
 #. translators: 1: Plugin name and version.
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:458
@@ -5631,7 +5631,7 @@ msgstr "<strong>Træk og slip</strong> dine filer ind i området nedenfor. Flere
 
 #: wp-admin/edit-comments.php:180
 msgid "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
-msgstr "Mange bruger tastaturgenveje til at moderere deres kommentarer hurtigere. Benyt linket nedenfor for at lære hvordan."
+msgstr "Mange bruger tastaturgenveje til at moderere deres kommentarer hurtigere. Brug linket nedenfor for at lære hvordan."
 
 #: wp-admin/edit-form-advanced.php:385 wp-admin/edit.php:237
 msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
@@ -5901,7 +5901,7 @@ msgstr "Du har følgende muligheder for at arrangere dit skærmbillede i kontrol
 
 #: wp-admin/index.php:58
 msgid "<strong>Drag and Drop</strong> &mdash; To rearrange the boxes, drag and drop by clicking on the title bar of the selected box and releasing when you see a gray dotted-line rectangle appear in the location you want to place the box."
-msgstr "<strong>Træk og slip</strong> ‒ Benyt træk og slip for at omarrangere boksene ved at klikke på titellinjen på den valgte boks og slippe, når du ser en grå stiplet firkant, hvor du ønsker boksen placeret."
+msgstr "<strong>Træk og slip</strong> ‒ Brug træk og slip for at omarrangere boksene ved at klikke på titellinjen på den valgte boks og slippe, når du ser en grå stiplet firkant, hvor du ønsker boksen placeret."
 
 #: wp-admin/index.php:52
 msgid "Navigation"

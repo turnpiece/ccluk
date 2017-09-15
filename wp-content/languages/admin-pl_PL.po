@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-19 13:38:04+0000\n"
+"PO-Revision-Date: 2017-09-06 08:34:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -160,10 +160,6 @@ msgstr "https://make.wordpress.org/community/handbook/meetup-organizer/welcome/"
 msgid "City:"
 msgstr "Miasto:"
 
-#: wp-admin/includes/dashboard.php:1163
-msgid "Edit city"
-msgstr "Edytuj miasto"
-
 #: wp-admin/includes/dashboard.php:1105
 msgid "WordCamps"
 msgstr "WordCampy"
@@ -181,12 +177,6 @@ msgstr "Nieznany błąd API."
 #: wp-admin/includes/class-wp-community-events.php:111
 msgid "Invalid API response code (%d)"
 msgstr "Nieprawidłowy kod odpowiedzi API (%d)"
-
-#. translators: 1: the city the user searched for, 2: meetup organization
-#. documentation URL
-#: wp-admin/includes/dashboard.php:1254
-msgid "There aren&#8217;t any events scheduled near %1$s at the moment. Would you like to <a href=\"%2$s\">organize one</a>?"
-msgstr "W tej chwili nie ma zaplanowanych wydarzeń w pobliżu %1$s. Czy chcesz je <a href=\"%2$s\"> zorganizować</a>?"
 
 #. translators: %s is a placeholder for the name of a city.
 #: wp-admin/includes/dashboard.php:1211
@@ -212,6 +202,16 @@ msgstr "j.n.Y, l"
 #: wp-admin/includes/dashboard.php:56
 msgid "WordPress Events and News"
 msgstr "Wydarzenia i nowości"
+
+#. translators: 1: the city the user searched for, 2: meetup organization
+#. documentation URL
+#: wp-admin/includes/dashboard.php:1254
+msgid "There aren&#8217;t any events scheduled near %1$s at the moment. Would you like to <a href=\"%2$s\">organize one</a>?"
+msgstr "W tej chwili nie ma zaplanowanych wydarzeń w pobliżu %1$s. Czy chcesz <a href=\"%2$s\">zorganizować jedno z nich</a>?"
+
+#: wp-admin/includes/dashboard.php:1163
+msgid "Edit city"
+msgstr "Wybierz miasto"
 
 #: wp-admin/edit-tag-form.php:170 wp-admin/edit-tags.php:444
 msgid "Assign a parent term to create a hierarchy. The term Jazz, for example, would be the parent of Bebop and Big Band."
@@ -1665,13 +1665,6 @@ msgstr "Brak"
 msgid "Boxes"
 msgstr "Bloki"
 
-#: wp-admin/includes/class-wp-screen.php:1123
-msgid "%s column"
-msgid_plural "%s columns"
-msgstr[0] "%s kolumna"
-msgstr[1] "%s columny"
-msgstr[2] "%s column"
-
 #: wp-admin/includes/class-wp-screen.php:706
 msgid "Items list navigation"
 msgstr "Nawigacja listy elementów"
@@ -1698,6 +1691,13 @@ msgstr "Od %1$s %2$s"
 #: wp-admin/includes/dashboard.php:850
 msgid "M jS Y"
 msgstr "d M Y"
+
+#: wp-admin/includes/class-wp-screen.php:1123
+msgid "%s column"
+msgid_plural "%s columns"
+msgstr[0] "%s kolumna"
+msgstr[1] "%s kolumny"
+msgstr[2] "%s kolumn"
 
 #: wp-admin/includes/class-wp-press-this.php:1526
 msgid "Saving&hellip;"

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-13 22:15:40+0000\n"
+"PO-Revision-Date: 2017-08-25 23:31:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,6 +11,10 @@ msgstr ""
 "Language: sv_SE\n"
 "Project-Id-Version: Plugins - Akismet - Stable (latest release)\n"
 
+#: views/notice.php:49
+msgid "Your site can&#8217;t connect to the Akismet servers."
+msgstr "Din webbplats får inte kontakt med Akismets servrar."
+
 #: views/start.php:97
 msgid "An Akismet API key has been defined in the %s file for this site."
 msgstr "En API-nyckel för Akismet har angetts i filen %s för denna webbplats."
@@ -18,6 +22,10 @@ msgstr "En API-nyckel för Akismet har angetts i filen %s för denna webbplats."
 #: views/start.php:96
 msgid "Manual Configuration"
 msgstr "Manuell konfigurering"
+
+#: class.akismet-admin.php:211
+msgid "On this page, you are able to update your Akismet settings and view spam stats."
+msgstr "På denna sida kan du uppdatera dina inställningar för Akismet och se spam-statistik."
 
 #. Description of the plugin/theme
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
@@ -720,6 +728,10 @@ msgstr "Ditt webbhotell eller serveradministratör har inaktiverat PHPs funktion
 #: views/notice.php:44
 msgid "Network functions are disabled."
 msgstr "Nätverksfunktioner inaktiverade."
+
+#: views/notice.php:50
+msgid "Your firewall may be blocking Akismet from connecting to its API. Please contact your host and refer to <a href=\"%s\" target=\"_blank\">our guide about firewalls</a>."
+msgstr "Din brandvägg kanske blockerar Akismet från att kontakta sitt API. Vänligen kontakta ditt webbhotell/serverleverantör och referera till  <a href=\"%s\" target=\"_blank\">vår guide om brandväggar</a>."
 
 #: views/notice.php:60
 msgid "Please visit your <a href=\"%s\" target=\"_blank\">Akismet account page</a> to reactivate your subscription."

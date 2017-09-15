@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-03 22:53:12+0000\n"
+"PO-Revision-Date: 2017-09-13 13:05:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3484,7 +3484,7 @@ msgstr "Smeknamn kan inte vara längre än 50 tecken."
 #. translators: %s: user name
 #: wp-includes/user.php:166
 msgid "<strong>ERROR</strong>: The password you entered for the username %s is incorrect."
-msgstr "<strong>FEL</strong>: Lösenordet du angav för användarnamnet %s är inkorrekt."
+msgstr "<strong>FEL</strong>: Lösenordet du angav för användarnamnet %s är felaktigt."
 
 #: wp-includes/user.php:142
 msgid "<strong>ERROR</strong>: Invalid username."
@@ -6945,10 +6945,6 @@ msgctxt "Display name based on first name and last name"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: wp-includes/class-wp-xmlrpc-server.php:285
-msgid "Incorrect username or password."
-msgstr "Felaktig användarnamn eller lösenord."
-
 #: wp-includes/class-wp-xmlrpc-server.php:274
 msgid "XML-RPC services are disabled on this site."
 msgstr "Tjänsten för XML-RPC är inaktiverad för denna webbplats."
@@ -6999,6 +6995,10 @@ msgstr "Alternerande text"
 #: wp-includes/class-wp-xmlrpc-server.php:4957
 msgid "Sorry, you are not allowed to create pages as this user."
 msgstr "Du saknar behörighet för att kunna skapa sidor som den här användaren."
+
+#: wp-includes/class-wp-xmlrpc-server.php:285
+msgid "Incorrect username or password."
+msgstr "Felaktigt användarnamn eller lösenord."
 
 #: wp-includes/class-wp-admin-bar.php:418
 msgid "Skip to toolbar"
@@ -10031,10 +10031,6 @@ msgstr "Återställning av lösenordet ej tillåtet för denna användaren"
 msgid "Invalid key"
 msgstr "Ogiltig nyckel"
 
-#: wp-includes/user.php:2310
-msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
-msgstr "<strong>FEL</strong>: E-postadressen är inte riktig."
-
 #: wp-login.php:530
 msgid "Lost Password"
 msgstr "Glömt lösenordet"
@@ -10093,10 +10089,6 @@ msgstr "(Måste bestå av minst 4 tecken, endast bokstäver och siffror.)"
 #: wp-signup.php:236
 msgid "Email&nbsp;Address:"
 msgstr "E-postadress:"
-
-#: wp-signup.php:310
-msgid "There was a problem, please correct the form below and try again."
-msgstr "Ett fel har uppstått. Var vänlig kontrollera formuläret nedan och försök igen."
 
 #. translators: %s: name of the network
 #: wp-signup.php:535
@@ -10256,6 +10248,14 @@ msgstr "URL:en du angav verkar vara en e-postadress. Vill du lägga till det nö
 #: wp-includes/class-wp-editor.php:1135
 msgid "The URL you entered seems to be an external link. Do you want to add the required http:// prefix?"
 msgstr "URLen du angav verkar vara en extern länk. Vill du lägga till det nödvändiga prefixet http:// före adressen?"
+
+#: wp-includes/user.php:2310
+msgid "<strong>ERROR</strong>: The email address isn&#8217;t correct."
+msgstr "<strong>FEL</strong>: E-postadressen är inte korrekt."
+
+#: wp-signup.php:310
+msgid "There was a problem, please correct the form below and try again."
+msgstr "Ett fel har uppstått. Vänligen kontrollera formuläret nedan och försök igen."
 
 #: wp-includes/class-wp-customize-panel.php:385
 #: wp-includes/class-wp-customize-section.php:377

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-14 14:20:07+0000\n"
+"PO-Revision-Date: 2017-09-10 19:12:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2393,7 +2393,7 @@ msgstr "CSS adicional"
 
 #: wp-includes/class-wp-customize-manager.php:4142
 msgid "Scroll with Page"
-msgstr "Fuir com a página"
+msgstr "Fluir com a página"
 
 #: wp-includes/class-wp-customize-manager.php:4130
 msgid "Repeat Background Image"
@@ -3373,7 +3373,7 @@ msgstr "O nome do menu %s está em conflito com outro nome de menu. Por favor, t
 #. translators: %s: site address
 #: wp-signup.php:901
 msgid "The site you were looking for, %s, does not exist."
-msgstr "O site que está à procura, %s, não existe."
+msgstr "O site %s não existe."
 
 #. translators: %s: a link to the embedded site
 #: wp-includes/theme-compat/embed-404.php:21
@@ -3417,7 +3417,7 @@ msgstr "Isto significa que perdemos o contacto com o servidor de base de dados e
 
 #: wp-includes/wp-db.php:1689
 msgid "Error reconnecting to the database"
-msgstr "Erro ao reconectar à base de dados"
+msgstr "Erro ao religar à base de dados"
 
 #. translators: %s: support forums URL
 #: wp-includes/wp-db.php:1600 wp-includes/wp-db.php:1704
@@ -4542,7 +4542,7 @@ msgstr "Nenhum %1$s foi inicializado na array de argumentos para a barra lateral
 
 #: wp-includes/script-loader.php:582 wp-includes/script-loader.php:717
 msgid "Connection lost or the server is busy. Please try again later."
-msgstr "Conexão perdida ou o servidor está ocupado. Por favor tente mais tarde."
+msgstr "A ligação perdeu-se ou o servidor está ocupado. Por favor tente mais tarde."
 
 #: wp-includes/script-loader.php:669
 msgid "Updates may not complete if you navigate away from this page."
@@ -5342,7 +5342,7 @@ msgstr "<strong>ERRO</strong>: Este comentário não pode ser guardado. Tente ma
 #: wp-includes/update.php:130 wp-includes/update.php:322
 #: wp-includes/update.php:500
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
-msgstr "(Não foi possível estabelecer uma conexão segura com WordPress.org. Por favor entre em contacto com o administrador do seu servidor)"
+msgstr "(Não foi possível estabelecer uma ligação segura com WordPress.org. Por favor entre em contacto com o administrador do seu servidor.)"
 
 #: wp-includes/class-wp-customize-widgets.php:1186
 msgid "Shift-click to edit this widget."
@@ -7470,7 +7470,7 @@ msgstr "<a href=\"http://%1$s\">http://%2$s</a> é o seu novo site. <a href=\"%3
 #. lost password URL
 #: wp-activate.php:112
 msgid "Your site at <a href=\"%1$s\">%2$s</a> is active. You may now log in to your site using your chosen username of &#8220;%3$s&#8221;. Please check your email inbox at %4$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%5$s\">reset your password</a>."
-msgstr "O seu site, <a href=\"%1$s\">%2$s</a>, está activo. Pode agora iniciar a sessão no site com o nome de utilizador que escolheu &#8220;%3$s&#8221;. Por favor verifique a sua caixa de email em %4$s para a senha e instruções de início de sessão. Se não receber o email verifique a sua pasta de spam. Se mesmo assim não receber o email no espaço de uma hora pode <a href=\"%5$s\">pedir uma nova pasword</a>."
+msgstr "O seu site <a href=\"%1$s\">%2$s</a> está activo. Pode agora iniciar a sessão no site com o nome de utilizador que escolheu &#8220;%3$s&#8221;. Por favor verifique na sua caixa de email em %4$s a senha e instruções de início de sessão. Se não receber o email, verifique a sua pasta de spam. Se mesmo assim não receber o email no espaço de uma hora, pode <a href=\"%5$s\">pedir uma nova senha</a>."
 
 #. translators: %s: database repair URL
 #: wp-includes/functions.php:1408
@@ -8361,7 +8361,7 @@ msgstr "Já tem a sessão iniciada. Não é preciso registar-se outra vez!"
 #. translators: %s: login URL
 #: wp-signup.php:854
 msgid "You must first <a href=\"%s\">log in</a>, and then you can create a new site."
-msgstr "Deve <a href=\"%s\">iniciar a sessão</a> primeiro e só depois poderá criar um novo site."
+msgstr "Deve primeiro <a href=\"%s\">iniciar a sessão</a> e só depois poderá criar um novo site."
 
 #: wp-signup.php:127
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"

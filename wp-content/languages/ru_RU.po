@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-09 19:32:57+0000\n"
+"PO-Revision-Date: 2017-08-24 22:01:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -68,17 +68,17 @@ msgstr "Этот виджет может код, более подходящий
 msgid "Arbitrary text."
 msgstr "Произвольный текст."
 
-#: wp-includes/default-widgets.php:96
-msgid "Arbitrary HTML code."
-msgstr "Произвольный HTML код."
-
 #: wp-includes/default-widgets.php:207
 msgid "Some HTML tags are not permitted, including:"
 msgstr "Некоторые HTML теги недопустимы, включая:"
 
 #: wp-includes/default-widgets.php:103
 msgid "Custom HTML"
-msgstr "HTML код"
+msgstr "HTML-код"
+
+#: wp-includes/default-widgets.php:96
+msgid "Arbitrary HTML code."
+msgstr "Произвольный HTML-код."
 
 #: wp-includes/widgets/class-wp-widget-tag-cloud.php:141
 msgid "Show tag counts"
@@ -2025,7 +2025,7 @@ msgstr "Для создания комментария необходимо ук
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:403
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:420
 msgid "Sorry, you must be logged in to comment."
-msgstr "Извините, вы должны войти для комментирования."
+msgstr "Извините, для отправки комментария необходимо авторизоваться."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:156
 msgid "Query parameter not permitted: %s"

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-03 15:43:25+0000\n"
+"PO-Revision-Date: 2017-09-12 11:35:05+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -146,11 +146,6 @@ msgstr "城市已更新。列出 %s 附近的活動。"
 msgid "Attend an upcoming event near you."
 msgstr "參加附近即將舉行的活動。"
 
-#. translators: %s: network settings URL
-#: wp-signup.php:842
-msgid "To change or disable registration go to your <a href=\"%s\">Options page</a>."
-msgstr "前往 <a href=\"%s\"> 設定頁面</a> 變更或停用註冊。"
-
 #: wp-includes/widgets/class-wp-widget-media.php:151
 msgid "Title for the widget"
 msgstr "小工具標題"
@@ -209,6 +204,11 @@ msgstr[0] "影片小工具 (%d)"
 #: wp-includes/widgets/class-wp-widget-media.php:138
 msgid "Attachment post ID"
 msgstr "附加文章識別碼"
+
+#. translators: %s: network settings URL
+#: wp-signup.php:842
+msgid "To change or disable registration go to your <a href=\"%s\">Options page</a>."
+msgstr "前往 <a href=\"%s\"> 設定頁面</a> 變更或停用註冊。"
 
 #. translators: placeholder is URL to media library
 #: wp-includes/widgets/class-wp-widget-media.php:74
@@ -8766,11 +8766,6 @@ msgstr "註冊"
 msgid "Registration Form"
 msgstr "註冊表單"
 
-#: wp-includes/user.php:144 wp-includes/user.php:170 wp-includes/user.php:222
-#: wp-includes/user.php:242 wp-login.php:748 wp-login.php:942
-msgid "Lost your password?"
-msgstr "忘了密碼？"
-
 #: wp-login.php:862
 msgid "User registration is currently not allowed."
 msgstr "目前不允許註冊新帳號。"
@@ -10224,6 +10219,11 @@ msgstr "輸入的網址看起來像連結位址。您想要自動加上 http:// 
 #: wp-includes/script-loader.php:287
 msgid "An error occurred in the upload. Please try again later."
 msgstr "上傳時發生錯誤。請稍後再試看看。"
+
+#: wp-includes/user.php:144 wp-includes/user.php:170 wp-includes/user.php:222
+#: wp-includes/user.php:242 wp-login.php:748 wp-login.php:942
+msgid "Lost your password?"
+msgstr "忘記密碼？"
 
 #: wp-includes/general-template.php:411 wp-login.php:887 wp-login.php:919
 msgid "Log In"

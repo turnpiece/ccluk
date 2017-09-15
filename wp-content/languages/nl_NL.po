@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-26 19:34:18+0000\n"
+"PO-Revision-Date: 2017-09-11 09:43:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -42,7 +42,7 @@ msgstr "Deze widget bevat mogelijk code die beter werkt in de nieuwe &#8220;Eige
 
 #: wp-includes/widgets/class-wp-widget-text.php:419
 msgid "Hey there, looks like you just pasted HTML into the &#8220;Visual&#8221; tab of the Text widget. You may want to paste your code into the &#8220;Text&#8221; tab instead. Alternately, try out the new &#8220;Custom HTML&#8221; widget!"
-msgstr "Het lijkt erop dat je net HTML geplakt hebt in de &#8220;Visuele&#8221; tab van de tekst-widget. Je wilt mogelijk deze code knippen en plakken in de &#8220;Tekst&#8221;-tab. Of anders, probeer de nieuwe &#8220;Eigen HTML&#8221;-widget uit."
+msgstr "Het lijkt erop dat je net HTML geplakt hebt in de &#8220;Visuele&#8221; tab van de tekst-widget. Je wilt mogelijk deze code knippen en plakken in de &#8220;Tekst&#8221;-tab. Probeer anders de nieuwe &#8220;Eigen HTML&#8221;-widget uit."
 
 #: wp-includes/widgets/class-wp-widget-text.php:418
 msgid "Did you just paste HTML?"
@@ -583,7 +583,7 @@ msgstr "De maximale breedte van het ingesloten frame in pixels"
 
 #: wp-includes/class-wp-oembed-controller.php:69
 msgid "The oEmbed format to use."
-msgstr "Het oEmbed-format om te gebruiken."
+msgstr "Het te gebruiken oEmbed-format."
 
 #: wp-includes/class-wp-oembed-controller.php:63
 msgid "The URL of the resource for which to fetch oEmbed data."
@@ -880,7 +880,7 @@ msgstr "RSS Fout:"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:495
 msgid "Cannot create a comment with that type."
-msgstr "Niet mogelijk een reactie aan te maken voor dit type."
+msgstr "Niet mogelijk een reactie van dit type aan te maken."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:614
 msgid "Invalid slug."
@@ -898,7 +898,7 @@ msgstr "Ongeldige reactie-inhoud"
 
 #: wp-includes/rest-api/class-wp-rest-server.php:294
 msgid "Invalid JSONP callback function."
-msgstr "Incorrecte JSONP callback functie."
+msgstr "Incorrecte JSONP-callbackfunctie."
 
 #: wp-includes/post.php:3416
 msgid "Invalid page template."
@@ -1203,7 +1203,7 @@ msgstr "Vind ons"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1128
 msgid "Passwords cannot contain the \"\\\" character."
-msgstr "Wachtwoorden mogen niet het \"\\\"-teken bevatten."
+msgstr "Wachtwoorden mogen niet het '\\'-teken bevatten."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1124
 msgid "Passwords cannot be empty."
@@ -1234,7 +1234,7 @@ msgstr "Voorvertoning document"
 
 #: wp-includes/class-wp-customize-manager.php:3934
 msgid "Header Media"
-msgstr "Header media"
+msgstr "Headermedia"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:295
 msgid "REST base route for the taxonomy."
@@ -1248,7 +1248,7 @@ msgstr "+ %s"
 #: wp-includes/l10n.php:1198
 msgctxt "default site language"
 msgid "Site Default"
-msgstr "Site Standaard"
+msgstr "Site-standaard"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:431
 msgid "HTML description for the object, transformed for display."
@@ -1272,7 +1272,7 @@ msgstr "Met CSS kun je het uiterlijk en de layout van je site met code aanpassen
 
 #: wp-includes/class-wp-customize-manager.php:4403
 msgid "Please enter a valid YouTube URL."
-msgstr "Voer een geldige YouTube URL in."
+msgstr "Voer een geldige YouTube-URL in."
 
 #: wp-includes/script-loader.php:83
 msgid "Expand Main menu"
@@ -1284,11 +1284,11 @@ msgstr "Hoofdmenu invouwen"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:747
 msgid "Users do not support trashing. Set force=true to delete."
-msgstr "Gebruikers kunnen niet in de prullenbak gegooid worden. Zet force=true om gebruikers permanent te verwijderen."
+msgstr "Gebruikers kunnen niet in de prullenbak gegooid worden. Stel force=true in om gebruikers te verwijderen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:594
 msgid "Terms do not support trashing. Set force=true to delete."
-msgstr "Termen kunnen niet in de prullenbak gegooid worden. Zet force=true om termen permanent te verwijderen."
+msgstr "Termen kunnen niet in de prullenbak gegooid worden. Stel force=true in om termen te verwijderen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:302
 msgid "Revisions do not support trashing. Set force=true to delete."
@@ -1304,11 +1304,11 @@ msgstr "De reactie kan niet in de prullenbak worden geplaatst. Stel force=true i
 
 #: wp-includes/class-wp-customize-manager.php:4031
 msgid "Or, enter a YouTube URL:"
-msgstr "Of voer een YouTube URL in:"
+msgstr "Of voer een YouTube-URL in:"
 
 #: wp-includes/rest-api/class-wp-rest-request.php:695
 msgid "Invalid JSON body passed."
-msgstr "Ongeldige JSON body doorgegeven."
+msgstr "Ongeldige JSON-body doorgegeven."
 
 #. translators: %s: taxonomy name
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2207
@@ -1326,7 +1326,7 @@ msgstr "Reactie is langer dan de maximum toegestane lengte."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
 msgid "Taxonomies associated with post type."
-msgstr "Taxonomieën geassocieerd met post type."
+msgstr "Taxonomieën geassocieerd met berichttype."
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:67
 msgid "Display Location"
@@ -1540,7 +1540,7 @@ msgstr "De %s eigenschap heeft een ongeldige opgeslagen waarde, en kan niet bijg
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:179
 msgid "Invalid revision ID."
-msgstr "Ongeldige revisie-ID."
+msgstr "Ongeldig revisie-ID."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2273
 msgid "Status is forbidden."
@@ -1686,7 +1686,7 @@ msgstr "GUID voor het object, aangepast voor weergave."
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1743
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:491
 msgid "GUID for the object, as it exists in the database."
-msgstr "GUID voor het object, zoals het in de database bestaat."
+msgstr "GUID voor het object, zoals het in de database voorkomt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1737
 msgid "The globally unique identifier for the object."
@@ -1715,7 +1715,7 @@ msgstr "Ongeldige bericht hoofd ID."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1058
 msgid "A password protected post can not be set to sticky."
-msgstr "Een bericht dat met een wachtwoord beschermd is, kan niet op sticky gezet worden."
+msgstr "Een bericht dat met een wachtwoord beschermd is, kan niet als sticky ingesteld worden."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1051
 msgid "A sticky post can not be password protected."
@@ -1754,7 +1754,7 @@ msgstr "Je moet een zoekterm definiëren om op relevantie te kunnen sorteren."
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1452
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:86
 msgid "The password for the post if it is password protected."
-msgstr "Het wachtwoord voor het bericht als deze met een wachtwoord is beveiligd."
+msgstr "Het wachtwoord voor het bericht als dit met een wachtwoord is beveiligd."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:262
 msgid "Human-readable labels for the taxonomy for various contexts."
@@ -3248,73 +3248,73 @@ msgstr "Term-metadata kunnen niet worden toegevoegd aan termen die gedeeld worde
 #: wp-includes/class-wp-locale.php:183
 msgctxt "genitive"
 msgid "December"
-msgstr "December"
+msgstr "december"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:182
 msgctxt "genitive"
 msgid "November"
-msgstr "November"
+msgstr "november"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:181
 msgctxt "genitive"
 msgid "October"
-msgstr "Oktober"
+msgstr "oktober"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:180
 msgctxt "genitive"
 msgid "September"
-msgstr "September"
+msgstr "september"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:179
 msgctxt "genitive"
 msgid "August"
-msgstr "Augustus"
+msgstr "augustus"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:178
 msgctxt "genitive"
 msgid "July"
-msgstr "Juli"
+msgstr "juli"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:177
 msgctxt "genitive"
 msgid "June"
-msgstr "Juni"
+msgstr "juni"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:176
 msgctxt "genitive"
 msgid "May"
-msgstr "Mei"
+msgstr "mei"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:175
 msgctxt "genitive"
 msgid "April"
-msgstr "April"
+msgstr "april"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:174
 msgctxt "genitive"
 msgid "March"
-msgstr "Maart"
+msgstr "maart"
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:173
 msgctxt "genitive"
 msgid "February"
-msgstr "Februari "
+msgstr "februari "
 
 #. translators: month name, genitive
 #: wp-includes/class-wp-locale.php:172
 msgctxt "genitive"
 msgid "January"
-msgstr "Januari"
+msgstr "januari"
 
 #. translators: If months in your language require a genitive case, translate
 #. this to 'on'. Do not translate into your own language.
@@ -3901,7 +3901,7 @@ msgstr "Menunaam"
 #: wp-includes/customize/class-wp-customize-site-icon-control.php:74
 #: wp-includes/media-template.php:1260
 msgid "Preview as an app icon"
-msgstr "Voorbeeld als app-icoon"
+msgstr "Voorbeeld als een app-icoon"
 
 #: wp-includes/media-template.php:1258
 msgid "As an app icon"
@@ -3910,7 +3910,7 @@ msgstr "Als app-icoon"
 #: wp-includes/customize/class-wp-customize-site-icon-control.php:70
 #: wp-includes/media-template.php:1253
 msgid "Preview as a browser icon"
-msgstr "Voorbeeld als browsericoon"
+msgstr "Voorbeeld als een browsericoon"
 
 #: wp-includes/media-template.php:1248
 msgid "As a browser icon"
@@ -3988,7 +3988,7 @@ msgstr "Aan menu toevoegen: %1$s (%2$s)"
 
 #: wp-includes/class-wp-editor.php:1280
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
-msgstr "Bij het starten van een nieuwe alinea met één van de volgende opmaak-sneltoetsen, gevolgd door een spatie, zal de opmaak automatisch worden toegepast. Druk op Backspace of Escape om dit terug te draaien."
+msgstr "Bij het starten van een nieuwe alinea met één van de volgende opmaak-sneltoetsen, gevolgd door een spatie, zal de opmaak automatisch worden toegepast. Druk op Backspace of Escape om dit ongedaan te maken."
 
 #: wp-login.php:509
 msgid "Your password reset link has expired. Please request a new link below."
@@ -4038,7 +4038,7 @@ msgstr "Voorvertoning thema"
 #: wp-includes/customize/class-wp-customize-themes-section.php:43
 #: wp-includes/customize/class-wp-customize-themes-section.php:62
 msgid "Active theme"
-msgstr "Thema activeren"
+msgstr "Actief thema"
 
 #: wp-includes/class-wp-customize-nav-menus.php:564
 msgid "Menus can be displayed in locations defined by your theme."
@@ -4362,7 +4362,7 @@ msgstr "Dit paneel wordt gebruikt voor het beheren van navigatiemenu's voor inho
 #. translators: 1: item name, 2: item position, 3: parent item name
 #: wp-includes/class-wp-customize-nav-menus.php:470
 msgid "%1$s. Sub item number %2$d under %3$s."
-msgstr "%1$s. Subitemnummer %2$d onder %3$s."
+msgstr "%1$s. Sub-itemnummer %2$d onder %3$s."
 
 #. translators: 1: item name, 2: item position, 3: total number of items
 #: wp-includes/class-wp-customize-nav-menus.php:468
@@ -5355,7 +5355,7 @@ msgstr "Adres"
 
 #: wp-includes/class-wp-editor.php:1228
 msgid "If you&#8217;re looking to paste rich content from Microsoft Word, try turning this option off. The editor will clean up text pasted from Word automatically."
-msgstr "Probeer deze optie eens uit te zetten als je tekst wilt kopiëren vanuit Microsoft Word. De editor zal tekst automatisch opschonen na het plakken vanuit Word."
+msgstr "Zet deze functie uit als je opgemaakte tekst uit Microsoft Word wil plakken. Nu wordt de tekst geplakt als platte tekst."
 
 #. translators: %s: header size in pixels
 #: wp-includes/customize/class-wp-customize-header-image-control.php:179
