@@ -95,6 +95,12 @@ input[type="submit"] {
 	background: #54ae68;
 }
 
+fieldset,
+div#register-page .register-section, 
+div#register-page .security-question-section {
+	border: none;
+}
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
