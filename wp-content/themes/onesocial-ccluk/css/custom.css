@@ -101,6 +101,16 @@ div#register-page .security-question-section {
 	border: none;
 }
 
+.main-navigation li.current_menu_item, 
+.main-navigation li.current_page_item, 
+.main-navigation li:hover {
+	background-color: #fff;
+}
+
+.main-navigation li a {
+	color: rgba(0, 0, 0, 0.8);
+}
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
