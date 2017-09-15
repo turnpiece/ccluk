@@ -95,6 +95,7 @@ input[type="submit"] {
 	color: #fff;
 	border: none;
 	background-color: #54ae68;
+	padding: 12px 24px;
 }
 
 #save_as_draft:hover, 
