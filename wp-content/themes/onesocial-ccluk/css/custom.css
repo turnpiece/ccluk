@@ -83,6 +83,8 @@ You're the boss, so have fun editing!
 	display: block;
 }
 
+#buddypress #group-settings-form input[type="submit"], 
+#buddypress .standard-form div.submit input,
 input[type="submit"] {
 	border: none;
 	border-radius: 5px;
