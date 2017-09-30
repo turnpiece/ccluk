@@ -84,10 +84,8 @@ You're the boss, so have fun editing!
 }
 
 input[type="submit"] {
-	border-radius: 5px;
-	color: #fff;
 	border: none;
-	background-color: #54ae68;
+	border-radius: 5px;
 	padding: 12px 24px;
 }
 
@@ -181,10 +179,8 @@ li.bbp-topic-title a.bbp-topic-permalink:hover,
 .sap-publish-popup.sap-publish-popup .sap-action-button, 
 #send-private-message.generic-button a:before, 
 input[type="submit"] {
-	color: #fff;
-	border: none;
+	color: #fff !important;
 	background-color: #54ae68;
-	padding: 12px 24px;
 }
 
 #save_as_draft:hover, 
