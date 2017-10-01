@@ -14,13 +14,13 @@
 			<?php get_template_part( 'template-parts/content', 'page' ); ?>
 		<?php endwhile; // end of the loop.  ?>
 
-		<form method="get" action="https://www.writetothem.com/who">
-			<p>
+		<div class="bluebox" id="findYourMP">
+			<form method="get" action="https://www.writetothem.com/who">
 				<label for="pc"><?php _e( 'Post code', 'onesocial' ) ?></label>
 				<input type="text" name="pc" id="pc" />
 				<input type="submit" name="submit" value="Go" />
-			</p>
-		</form>
+			</form>
+		</div>
 	</div>
 </div>
 
