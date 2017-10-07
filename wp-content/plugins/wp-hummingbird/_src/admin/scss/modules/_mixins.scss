@@ -1,0 +1,90 @@
+/* ****************************************************************************
+ * MODULE: MIXINS
+ */
+ 
+// Base at-root
+@mixin optional-at-root($sel) {
+  @at-root #{if(not &, $sel, selector-append(&, $sel))} {
+    @content;
+  }
+}
+
+// Form Input Placeholder
+@mixin form-placeholder {
+  @include optional-at-root('&::-webkit-input-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('&:-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('&::-moz-placeholder') {
+    @content;
+  }
+
+  @include optional-at-root('&:-ms-input-placeholder') {
+    @content;
+  }
+}
+
+// Breakpoints
+@mixin bp($point) {
+  
+  // Phone: < 480px
+  @if $point == phone {
+    @media only screen and (max-width: $phone) { 
+      @content;
+    }
+  }
+
+  // Phone Large: < 600px
+  @if $point == phone-large {
+    @media only screen and (max-width: $phone--large) { 
+      @content;
+    }
+  }
+  
+  // Tablet: < 783px
+  @if $point == tablet {
+    @media only screen and (max-width: $tablet) { 
+      @content;
+    }
+  }
+  
+  // Desktop Small: < 960px
+  @if $point == desktop-small {
+    @media only screen and (max-width: $desktop--small) { 
+      @content;
+    }
+  }
+
+  // Desktop: < 1100px
+  @if $point == desktop {
+    @media only screen and (max-width: $desktop) { 
+      @content;
+    }
+  }
+
+  // Desktop Large: < 1200px
+  @if $point == desktop-large {
+    @media only screen and (max-width: $desktop--large) { 
+      @content;
+    }
+  }
+
+  // Desktop Wide: < 1440px
+  @if $point == desktop-wide {
+    @media only screen and (max-width: $desktop--wide) { 
+      @content;
+    }
+  }
+
+  // Desktop Very Large: < 1600px
+  @if $point == desktop-very-large {
+    @media only screen and (max-width: $desktop--very-large) { 
+      @content;
+    }
+  }
+  
+}

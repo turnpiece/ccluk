@@ -1,0 +1,245 @@
+Plugin Name: Hummingbird Pro
+Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
+Tested up to: 4.8.2
+
+Change Log:
+
+= 1.6.2 ( 2017-10-02 ) =
+- Fix: API spamming issue
+
+= 1.6.1 ( 2017-09-13 ) =
+- New: Add font types to browser and cache rules
+- New: Automatic detection of HTTP/2 and disable of combine function in minification
+- Enhance: Add a button to the cache page for saving settings (instead of ajax)
+- Enhance: Add a scrollbar to expiry settings dropdown
+- Enhance: Better sync between Hummingbird and the Hub
+- Enhance: Improve error and zone handling for Cloudflare
+- Enhance: Links to support articles will now open in a new window
+- Enhance: Gravatar caching will respect the classes of original HTML elements
+- Enhance: Accessibility on hidden form elements
+- Enhance: Gzip module page layout
+- Enhance: Add Gravatar support when using get_avatar_url()
+- Fix: Uninstall will clean out all the database rows, created by the plugin
+- Fix: Layout issues on caching page
+- Fix: Notice styles
+- Fix: Do not cache Gravatars in admin
+- Fix: Update translation strings
+- Fix: Minification link visible in admin bar for non-admins in multisite
+- Fix: Incorrect date on dashboard and Uptime module when site is down
+
+= 1.6.0 ( 2017-08-07 ) =
+- New: Gravatar caching
+- New: Caching module layout
+- New: Ability to defer scripts in minification
+- Enhance: Better detect GZIP and browser cache
+- Enhance: Do not minify files that are already minified by a theme or a plugin
+- Enhance: Better support for older PHP versions (5.2 and 5.3)
+- Enhance: Improve admin notice styles, make notices dismissable
+- Enhance: Improve dashboard layout
+- Enhance: Better connectivity with the Hub
+- Enhance: Better support for support for screen readers
+- Fix: Overlapping issues in dashboard
+- Fix: PHP notices on dashboard page and during activation/deactivation
+- Fix: Minification not working on some subsites in a network
+- Fix: Minification stuck at 10% on some installs
+
+= 1.5.5 ( 2017-07-17 ) =
+- Fix: Bug in Performance Report
+- Fix: Fatal error on activation on the free versioon
+- Fix: HTML tags in Cloudflare module
+
+= 1.5.4 ( 2017-07-13 ) =
+- Fix: Cron reports were stuck on a loop on some WordPress installations
+- Fix: Issue with reports and calculating UTC time
+- Fix: Minification was duplicating inline styles
+- Fix: IE incompatibility in minification screen
+- Fix: Compatibility with Contact Form 7
+- Fix: Mobile menus not working on Performance and Minification pages
+- Enhance: Remove jQuery and jQuery migrate from minification process
+- Enhance: Minor style changes and updates
+- Enhance: Cron reports functionality
+- Enhance: Code optimization
+- Enhance: Admin area performance improvements
+
+= 1.5.3 ( 2017-06-21 ) =
+- Fix: Avada & Google Maps scripts incompatibility
+- Fix: Bulk update not working when selecting all items in minification screen
+- Fix: Minification engine sometimes forget about files and did not clean them
+- Fix: Minification was always showing 0% saved in some cases
+- Fix: Enjoy pro features notice does not go away
+- Fix: Performance scans were not active for some users of the free version of the plugin
+- Enhance: Some code optimizations in few areas
+- Enhance: Minified files are now processed in a background task and in a bigger batch
+- Enhance: Some minor styles changes
+- Enhance: Use CDN option is not available in sites of a multisite anymore and is controlled from network admin
+- Enhance: Improved activation logic for free/pro versions
+- Some other minor fixes and refactoring
+
+= 1.5.2 ( 2017-06-05 ) =
+- First WordPress.org version
+- Fix: Minification actions in bulk update modal were not functioning properly
+
+= 1.5.1 ( 2017-06-05 ) =
+- New: Allow to customise reports with WordPress hooks
+- Enhance: Reports notifications now allow user name to be customised
+- Enhance: When free and pro versions are activated, free version is auto deactivated
+- Fix: Do not assign any user for reports notifications by default
+- Fix: Performance settings were not properly saved if there were no user emails in the list
+- Fix: Reports notifications could not be switched off
+- Performance notifications is now pro feature only
+- Moved dashboard class to pro folder
+- Introduced ES6 in some scripts
+- Some minor styles fixes
+- Some other minor fixes
+
+= 1.5 ( 2017-05-25 ) =
+- New: User Interface has been completely redesigned
+- New: Quick setup welcome modal
+- New: Performance Reports. This new feature allow users to schedule performance reports and get them right into their email boxes
+- New: Performance tests are now available for free users by triggering them manually
+- New: Clear Cache button
+- Enhance: Caching and Gzip are now auto checked when the plugin is activated
+- Enhance: Do not combine assets by default
+- Enhance: Uptime data is synced with WPMU DEV servers every 3 minutes
+- Enhance: Minification stats calculations improvements
+- Enhance: Cloudflare admin menu has been removed and integrated into Browser Cache screen
+- Fix: When performance test is run for the first time, previous score improvement was "Pending"
+- Fix: stylesheets with @import directives were always displayed as "Pending"
+- Fix: Various minor improvements and bug fixes
+
+= 1.4.3 ( 2017-04-25 ) =
+- Fix: Sometimes minification stats appeared as a negative number
+- Enhance: Minification: Make all post metadata private
+- New: Added new actions to modify where HB saves the files
+
+= 1.4.2 ( 2017-03-02 ) =
+- Fix: MarketPress incompatibility
+- Fix: In some cases, assets were not moved to footer
+- Fix: Assets were always combined if some of them were marked as "not combined" in the same group
+- Fix: Keep handle name when only one handle is enqueued in a group for better compatibility with wp_script_is function
+- Fix: add_inline_scripts/styles did not work for plugins that inject inlines too late
+- Fix: Sometimes assets are not enqueued under https if the site is SSL
+- Enhance: Cloudflare box - Show a message if there are no zones available
+- Some other minor fixes/improvements
+
+= 1.4.1 ( 2017-01-12 ) =
+- Fix: Upgrade process was triggered too early provoking a fatal error when Smart Crawler was active
+- Fix: Minify Group warning
+- Fix: Error when WPMUDEV Dashboard was not activated
+
+= 1.4 ( 2017-01-10 ) =
+- New: Brand new minification engine
+- New: Minified files are now processed in WPMUDEV's servers
+- New: Users can use WPMUDEV's CDN to store minified files
+- New: Clear Cloudflare cache feature
+- Fix: PHP code in stylesheets could potentially be exposed
+- Enhancement: stylesheets with @import directives are not minified anymore due to multiple issues that were causing
+- Some admin styles improvements
+
+= 1.3.5 ( 2016-10-24 ) =
+- New: Divi 3.0 integration
+
+= 1.3.4.1 ( 2016-10-07 ) =
+- Fixed: Minification was always enabled in some sites.
+
+= 1.3.4 ( 2016-10-03 ) =
+- PHP 5.3 required for minification
+- Fix: Javascript improvements in Cloudflare box
+- Fix: Missing Hummingbird icon in admin bar
+- Enhancement: Cloudflare now auto selects domain
+- Enhancement: Improved caching detection
+- Other minor improvements
+
+= 1.3.3 ( 2016-09-02 ) =
+- Fix: Parse error in Cloudflare module when ASP tags detection was active in PHP
+
+= 1.3.2 ( 2016-08-22 ) =
+- Fix: Error when detecting Cloudflare on activation
+
+= 1.3.1 ( 2016-08-17 ) =
+- Fix: Cloudflare was only showing 20 sites max
+- Fix: Parse error in PHP < 5.3 installations
+
+= 1.3 ( 2016-08-15 ) =
+- New: Cloudflare integration
+- New: LiteSpeed server detection
+- Enhance: Clear minification cache when a plugin/theme is activated/deactivated
+- Enhance: New better Javascript compressor
+- Enhance: Plugin performance improvements
+- Enhance: Better Uptime error display
+- Fixed: Notice in minification screen when a plugin was deleted manually
+- Fixed: replaced buttons by inputs as sometimes settings cannot be submitted in minification screen
+- Fixed: Some minified URLs where prepended 'http' even if they had already http prepended
+- Fixed: Some admin styles
+
+= 1.2.4 ( 2016-08-10 ) =
+- Fixed fatal error on activation when PHP version is < 5.3
+
+= 1.2.3 ( 2016-07-22 ) =
+- Enhance: Updated WPMU DEV styles library
+
+= 1.2.2 ( 2016-06-16 ) =
+- Fixed: Hummingbird Exception throwing fatal error in old versions of PHP (<5.3)
+- Fixed: Notice in minification screen when a plugin was deleted manually
+- Fixed: replaced buttons by inputs as sometimes settings cannot be submitted in minification screen
+- Fixed: Some minified URLs where prepended 'http' even if they had already http prepended
+- Enhance: Better Uptime error handling
+- Replaced the javascript compressor for a better one
+- Some styles improvements in admin
+
+
+= 1.2.1 ( 2016-05-17 ) =
+Fix: Sometimes excluded files did not appear on list after re checking files
+Fix: Server type not updated when user switches it
+Fixes to Google Chart API
+Enhance: Faster minification scan
+Enhance: Better GZIP htaccess code
+Enhance: Search by extension in minification page
+
+= 1.2 ( 2016-04-18 ) =
+- New: Filter by plugin, theme or filename in minification screen
+- New: Bulk actions in minification screen
+- New: Divi integration
+- New: Splitted minification chart into header and footer charts
+- Fix: Unconsistent count of enqueued files in Dashboard
+- Fix: BuddyPress warning
+- Fix: PHP 5.2.4 error
+- Fix: GZIP and caching results were cleared after 1 hour
+- Fix: Login screen errors due to minification process
+- Fix: Sometimes minificated sources were enqueued twice.
+- Admin styles improvements
+- Other minor fixes and improvements
+
+= 1.1.2 ( 2016-03-18 ) =
+- Fixed: Performance test waiting time set back to 5 minutes
+
+= 1.1.1 ( 2016-03-17 ) =
+- Fixed: Uptime not displaying chart
+- Fixed: Warning in Uptime page
+
+= 1.1 ( 2016-03-16 ) =
+- New: New filetype in Caching results
+- New: wphb_add_meta_box filter
+- New: wphb_code_snippet filter
+- Enhance: Get Uptime results when the plugin is activated
+- Enhance: Start a performance test when the plugin is activated
+- Enhance: Better errors handling in Plugin API Classes
+- Enhance: Better cache clean on deactivation
+- Fixed: Minification cached resources not being loaded via https
+- Fixed: Permissions errors in multisites
+- UX Improvements
+
+= 1.0.1 ( 2016-03-03 ) =
+- Enhance: Added plugins list action link
+- Enhance: If Browser Caching is already recommended or better, Enable button is now hidden
+- Enhance: Activate API log by using WP_DEBUG_LOG constant
+- Fixed: Warning when deleting cached files
+- Fixed: Empty file was appearing when all assets were sent to footer
+- Fixed: settings were reset to default when plugin was deactivated.
+- Some other minor enhancements/fixes
+
+= 1.0 ( 2016-02-23 ) =
+- First release
+
+
+87274-1507401885-ai

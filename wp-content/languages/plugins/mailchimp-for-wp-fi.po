@@ -1,0 +1,1061 @@
+# Translation of Stable (latest release) in Finnish
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-07-07 14:25:12+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: includes/forms/class-admin.php:84
+msgid "Optional"
+msgstr "Valinnainen"
+
+#: includes/forms/class-admin.php:87
+msgid "Preselect"
+msgstr "Esivalinta"
+
+#: includes/forms/class-admin.php:88
+msgid "Remove"
+msgstr "Poista"
+
+#: includes/views/other-settings.php:95
+msgid "Log file is not writable."
+msgstr "Lokitiedostoon ei voi kirjoittaa."
+
+#: includes/views/other-settings.php:96
+msgid "Please ensure %s has the proper <a href=\"%s\">file permissions</a>."
+msgstr "Varmista että %s -tiedostossa on kunnolliset <a href=\"%s\">oikeudet</a>."
+
+#: includes/views/parts/admin-sidebar.php:36
+msgid "Looking to improve your sign-up rates?"
+msgstr "Haluatko parantaa liittymisprosentteja?"
+
+#: includes/views/parts/admin-sidebar.php:37
+msgid "Our <a href=\"%s\">Boxzilla plugin</a> allows you to create pop-ups or slide-ins with a subscribe form. A sure way to grow your lists faster."
+msgstr "<a href=\"%s\">Boxzilla-lisäosalla</a> voi tehdä ponnahdusikkunoita tai sivusta liukuvia tilauslomakkeita. Varma tapa kasvattaa tilaajien listaa nopeammin."
+
+#: includes/admin/class-admin.php:505
+msgid "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
+msgstr "Kun haluat aloittaa MailChimp for WordPress lisäosan käytön, <a href=\"%s\">kirjoita MailChimp rajapinnan/API avain lisäosan asetukset sivulla</a>."
+
+#: integrations/woocommerce/admin-after.php:7
+msgid "Before submit button"
+msgstr "Ennen lähetä painiketta"
+
+#: integrations/woocommerce/admin-after.php:5
+msgid "After shipping details"
+msgstr "Toimitustietojen jälkeen"
+
+#: includes/forms/class-form-tags.php:123
+msgid "Property of the current page or post."
+msgstr "Nykyisen sivun tai artikkelin ominaisuus."
+
+#: integrations/woocommerce/admin-after.php:6
+msgid "After customer details"
+msgstr "Asiakkaan tietojen jälkeen"
+
+#: integrations/woocommerce/admin-after.php:18
+msgid "Position"
+msgstr "Asemointi"
+
+#: includes/forms/class-admin.php:439
+msgid "Select the form to show"
+msgstr "Valitse näytettävä lomake"
+
+#: includes/forms/views/tabs/form-messages.php:65
+msgid "No list selected"
+msgstr "Valitse lista"
+
+#: includes/forms/views/tabs/form-messages.php:68
+msgid "When offering a list choice, this is the text that shows when no lists were selected."
+msgstr "Kun tarjotaan listan valinta, tämä teksti näytetään kun mitään listaa ei ole valittu."
+
+#: includes/forms/class-admin.php:96
+msgid "Text to prefill this field with."
+msgstr "Teksti jolla kenttä esitäytetään."
+
+#: includes/forms/class-admin.php:86
+msgid "Text to show when field has no value."
+msgstr "Teksti joka näytetään kun kenttä on tyhjä."
+
+#: includes/views/other-settings.php:132
+msgid "Right now, the plugin is configured to only log errors and warnings."
+msgstr "Lisäosa on määritetty kirjaamaan lokiin vain virheet ja varoitukset."
+
+#: includes/views/other-settings.php:133
+msgid "Would you like to <a href=\"%s\">log all events</a> instead?"
+msgstr "Haluatko kirjata lokiin <a href=\"%s\">kaikki tapahtumat</a> ?"
+
+#: includes/admin/class-admin.php:475
+msgid "Log successfully emptied."
+msgstr "Loki tyhjennetty."
+
+#: includes/admin/class-ads.php:158
+msgid "Want to track all your %s sales in MailChimp so you can send emails based on the purchases of your subscribers? <a href=\"%s\">Upgrade to MailChimp for WordPress Premium</a> or <a href=\"%s\">read more about eCommerce360</a>."
+msgstr "Haluatko seurata kaikkia %s myyntejä MailChimp-ohjelmassa jotta voit lähettää sähköposteja sen perusteella, mitä tilaajat ovat ostaneet? <a href=\"%s\">Päivitä Maksulliseen MailChimp WordPressille lisäosaan</a> or <a href=\"%s\">lue lisää eCommerce360</a>."
+
+#: includes/forms/class-admin.php:75
+msgid "This field is marked as required in MailChimp."
+msgstr "MailChimp edellyttää tämän kentän käyttämistä."
+
+#: includes/views/other-settings.php:89
+msgid "Debug Log"
+msgstr "Testaustilan loki"
+
+#: includes/views/other-settings.php:89
+msgid "Filter.."
+msgstr "Suodata.."
+
+#: includes/views/other-settings.php:114
+msgid "Nothing here. Which means there are no errors!"
+msgstr "Tyhjää. Joka tarkoittaa, että ei ole virheitä!"
+
+#: includes/views/other-settings.php:124
+msgid "Empty Log"
+msgstr "Tyhjennä loki"
+
+#: includes/admin/class-admin.php:369 includes/views/other-settings.php:38
+#: includes/views/other-settings.php:48
+msgid "Other Settings"
+msgstr "Muita asetuksia"
+
+#: includes/admin/class-admin.php:370
+msgid "Other"
+msgstr "Muut"
+
+#: includes/admin/class-ads.php:40
+msgid "Want to customize the style of your form? <a href=\"%s\">Try our Styles Builder</a> & edit the look of your forms with just a few clicks."
+msgstr "Haluatko mukautetun tyylin lomakkeelle? <a href=\"%s\">Kokeile Tyylien rakentajaa</a> ja voit muokata lomakkeiden ulkonäköä muutamalla klikkauksella."
+
+#: includes/admin/class-ads.php:55
+msgid "Be notified whenever someone subscribes? <a href=\"%s\">MailChimp for WordPress Premium</a> allows you to set up email notifications for your forms."
+msgstr "Haluatko ilmoituksen kun joku tilaa? <a href=\"%s\">MailChimp WordPress:lle Premium -laajennus</a> tarjoaa mahdollisuuden liittää sähköposti-ilmoitus lomakkeisiin."
+
+#: includes/admin/class-ads.php:57
+msgid "Increased conversions? <a href=\"%s\">MailChimp for WordPress Premium</a> submits forms without reloading the entire page, resulting in a much better experience for your visitors."
+msgstr "Suurempi menestysprosentti? <a href=\"%s\">MailChimp WordPress:lle Premium -laajennus</a> lähettää lomakkeen ilman sivun päivitystä. Tämä tarjoaa paremman käyttäjäkokemuksen vierailijoille."
+
+#: includes/admin/class-ads.php:71
+msgid "Upgrade to Premium"
+msgstr "Päivitä maksulliseen Premium-versioon"
+
+#: includes/admin/class-ads.php:84
+msgid "Do you want translated forms for all of your languages? <a href=\"%s\">Try MailChimp for WordPress Premium</a>, which does just that plus more."
+msgstr "Haluatko käännetyt lomakkeet kaikille kielillesi? <a href=\"%s\">Kokeile MailChimp WordPress:lle Premium -laajennusta</a> joka tarjoaa tämän ja paljon muuta."
+
+#: includes/admin/class-ads.php:89
+msgid "Do you want to create more than one form? Our Premium add-on does just that! <a href=\"%s\">Have a look at all Premium benefits</a>."
+msgstr "Haluatko luoda useamman kuin yhden lomakkeen? Maksullinen lisäosa on sitä varten! <a href=\"%s\">Tutustu nyt kaikkiin Premium-version etuihin</a>."
+
+#: includes/admin/class-ads.php:94
+msgid "Are you enjoying this plugin? The Premium add-on unlocks several powerful features. <a href=\"%s\">Find out about all benefits now</a>."
+msgstr "Nautitko tästä lisäosasta? Maksullinen laajennus sallii käyttää useita tehokkaita ominaisuuksia. <a href=\"%s\">Tutustu nyt kaikkiin ominaisuuksiin</a>."
+
+#: includes/integrations/views/integrations.php:79
+msgid "Enabled integrations"
+msgstr "Käytössä olevat liitokset"
+
+#: includes/integrations/views/integrations.php:84
+msgid "Available integrations"
+msgstr "Saatavilla olevat liitokset"
+
+#: includes/views/parts/admin-sidebar.php:19
+msgid "Found a bug? Please <a href=\"%s\">open an issue on GitHub</a>."
+msgstr "Löysitkö 'bugin'/virheen? Ilmoita siitä <a href=\"%s\">GitHub-palvelussa</a>."
+
+#: integrations/custom/admin-before.php:9
+msgid "Subscribe to our newsletter."
+msgstr "Tilaa uutiskirjeemme."
+
+#: includes/views/parts/admin-sidebar.php:15
+msgid "Frequently Asked Questions"
+msgstr "Usein kysytyt kysymykset"
+
+#: includes/views/parts/admin-sidebar.php:16
+msgid "Code reference for developers"
+msgstr "Koodin opas kehittäjille."
+
+#: includes/views/parts/admin-sidebar.php:18
+msgid "If your answer can not be found in the resources listed above, please use the <a href=\"%s\">support forums on WordPress.org</a>."
+msgstr "Jos et löydä vastausta alla olevasta tukiaineistosta, käytä <a href=\"%s\">WordPress.org-sivuston tukifoorumeita</a>."
+
+#: includes/views/parts/admin-sidebar.php:12
+msgid "We have some resources available to help you in the right direction."
+msgstr "Meillä on jotain tukiaineistoa joka voi auttaa oikeaan suuntaan."
+
+#: includes/views/parts/admin-sidebar.php:14
+msgid "Knowledge Base"
+msgstr "Tietämyskanta"
+
+#: includes/forms/views/edit-form.php:65
+msgid "Shortcode"
+msgstr "Lyhytkoodi"
+
+#: includes/integrations/views/integrations.php:71
+msgid "The table below shows all available integrations."
+msgstr "Alla olevassa taulukossa on kaikki saatavilla olevat palveluliitokset."
+
+#: includes/integrations/views/integrations.php:72
+msgid "Click on the name of an integration to edit all settings specific to that integration."
+msgstr "Kun haluat muokata tietyn palveluliitoksen asetuksia, napsauta liitoksen nimeä."
+
+#: includes/forms/class-admin.php:83
+msgid "No available fields. Did you select a MailChimp list in the form settings?"
+msgstr "Kenttiä ei ole. Valitsitko MailChimp-listan lomakkeen asetuksissa?"
+
+#: includes/forms/class-admin.php:89
+msgid "Radio buttons"
+msgstr "Valintanapit"
+
+#: includes/forms/class-admin.php:90
+msgid "Street Address"
+msgstr "Osoite"
+
+#: includes/forms/class-admin.php:91
+msgid "State"
+msgstr "Lääni"
+
+#: includes/forms/class-admin.php:97
+msgid "ZIP"
+msgstr "Postinumero"
+
+#: includes/forms/views/edit-form.php:25
+msgid "Form"
+msgstr "Lomake"
+
+#: includes/forms/class-admin.php:79
+msgid "This field will allow your visitors to choose a list to subscribe to."
+msgstr "Vierailijat voivat tämän kentän avulla valita postituslitan johon he liittyvät."
+
+#: includes/forms/class-admin.php:70
+msgid "Dropdown"
+msgstr "Pudotusvalikko"
+
+#: includes/forms/class-admin.php:71
+msgid "Field label"
+msgstr "Kentän nimi"
+
+#: includes/forms/class-admin.php:72
+msgid "Form action"
+msgstr "Lomakkeen toiminto"
+
+#: includes/forms/class-admin.php:73
+msgid "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
+msgstr "Vierailijat voivat tämän kentän avulla valita haluavatko he tilata vai perua tilaus."
+
+#: includes/forms/class-admin.php:77
+msgid "Is this field required?"
+msgstr "Vaaditaanko tämä kenttä?"
+
+#: includes/forms/class-admin.php:81
+msgid "Min"
+msgstr "Minimi"
+
+#: includes/forms/class-admin.php:82
+msgid "Max"
+msgstr "Maksimi"
+
+#: includes/forms/class-admin.php:69
+msgid "Country"
+msgstr "Maa"
+
+#: includes/forms/class-admin.php:65
+msgid "Choices"
+msgstr "Valinnat"
+
+#: includes/forms/class-admin.php:66
+msgid "Choice type"
+msgstr "Valinnan laji"
+
+#: includes/forms/class-admin.php:68
+msgid "Close"
+msgstr "Sulje"
+
+#: includes/forms/class-admin.php:63
+msgid "City"
+msgstr "Kaupunki/postitoimipaikka"
+
+#. Description of the plugin/theme
+msgid "MailChimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site."
+msgstr "ibericode: MailChimp WordPress:ille. Lisää sivustolle monenlaisia tehokkaita (postituslistalle) liittymistapoja."
+
+#: includes/views/parts/lists-overview.php:23
+msgid "Subscribers"
+msgstr "Tilaajia"
+
+#: includes/views/parts/lists-overview.php:45
+msgid "Edit this list in MailChimp"
+msgstr "Muokkaa tätä listaa MailChimp.com-palvelussa"
+
+#: integrations/contact-form-7/admin-before.php:2
+msgid "To integrate with Contact Form 7, configure the settings below and then add %s to your CF7 form mark-up."
+msgstr "Kun haluat liitoksen Contact Form 7 -lisäosaan, tee alla olevat määritykset ja lisää sitten %s CF7 lomakkeeseen."
+
+#: integrations/custom/admin-before.php:2
+msgid "To get a custom integration to work, include the following HTML in the form you are trying to integrate with."
+msgstr "Lisää seuraava HTML lomakkeeseen johon yrität luoda liitoksen. Näin saat oman/mukautetun liitoksen toimimaan."
+
+#: integrations/woocommerce/class-woocommerce.php:114
+msgid "Order #%d"
+msgstr "Järjestä #%d"
+
+#: includes/views/other-settings.php:21
+msgid "Allow us to anonymously track how this plugin is used to help us make it better fit your needs."
+msgstr "Anna meille lupa nimettömästi seurata kuinka tätä lisäosaa käytetään. Näin voimme kehittää sitä paremmin palvelemaan tarpeitasi. "
+
+#: includes/views/other-settings.php:23
+msgid "This is what we track."
+msgstr "Näitä asioita seuraamme."
+
+#: includes/views/parts/lists-overview.php:1
+msgid "Your MailChimp Account"
+msgstr "MailChimp.com-palvelun tili"
+
+#: includes/views/parts/lists-overview.php:2
+msgid "The table below shows your MailChimp lists and their details. If you just applied changes to your MailChimp lists, please use the following button to renew the cached lists configuration."
+msgstr "Alla olevassa taulukossa on MailChimp-listat ja listojen tiedot. Jos äskettäin teit muutoksia MailChip-palvelun listoihin, paina alla olevaa painiketta jolloin listojen rakenne välimuistissa uusitaan."
+
+#: includes/views/parts/lists-overview.php:21
+msgid "List Name"
+msgstr "Listan nimi"
+
+#: includes/views/parts/lists-overview.php:22
+msgid "ID"
+msgstr "ID/tunnus"
+
+#: includes/integrations/views/integrations.php:35
+msgid "Configure this integration"
+msgstr "Muokkaa tätä liitosta"
+
+#: includes/views/general-settings.php:18
+msgid "General Settings"
+msgstr "Yleisasetukset"
+
+#: includes/integrations/views/integrations.php:18
+msgid "Description"
+msgstr "Seloste"
+
+#: includes/integrations/views/integrations.php:17
+msgid "Name"
+msgstr "Nimi"
+
+#: includes/forms/views/tabs/form-settings.php:5
+msgid "MailChimp specific settings"
+msgstr "MailChimp.com-palveluun liittyvät asetukset"
+
+#: includes/forms/views/tabs/form-settings.php:37
+msgid "Use double opt-in?"
+msgstr "Varmennettu liittyminen?"
+
+#: includes/forms/views/tabs/form-settings.php:62
+#: includes/integrations/views/integration-settings.php:179
+msgid "Select \"yes\" if you want to update existing subscribers with the data that is sent."
+msgstr "Valitse \"kyllä\" jos haluat päivittää nykyisten tilaajien tietoja lähetetyillä tiedoilla."
+
+#: includes/forms/views/tabs/form-settings.php:79
+#: includes/integrations/views/integration-settings.php:199
+msgid "Select \"no\" if you want to add the selected groupings to any previously selected groupings when updating a subscriber."
+msgstr "Kun päivitetään tilaajaa: valitse \"ei\" jos haluat lisätä valitut ryhmät aiemmin valittuihin ryhmiin."
+
+#: includes/forms/views/tabs/form-settings.php:80
+#: includes/integrations/views/integration-settings.php:200
+msgid "What does this do?"
+msgstr "Mitä tämä tarkoittaa?"
+
+#: includes/forms/views/tabs/form-settings.php:94
+msgid "Form behaviour"
+msgstr "Lomakkeen toiminta"
+
+#: includes/integrations/class-admin.php:79
+#: includes/integrations/class-admin.php:80
+#: includes/integrations/views/integration-settings.php:10
+#: includes/integrations/views/integrations.php:57
+#: includes/integrations/views/integrations.php:65
+msgid "Integrations"
+msgstr "Palveluliitokset"
+
+#: includes/integrations/views/integration-settings.php:20
+msgid "%s integration"
+msgstr "%s palveluliitos"
+
+#: includes/integrations/views/integration-settings.php:62
+msgid "Enabled?"
+msgstr "Käytössä?"
+
+#: includes/integrations/views/integration-settings.php:66
+msgid "Enable the %s integration? This will add a sign-up checkbox to the form."
+msgstr "Ota käyttöön %s-liitos? Tämä lisää lomakkeeseen valintaruudun liittymistä varten."
+
+#: includes/integrations/views/integration-settings.php:76
+msgid "Implicit?"
+msgstr "Tilaajaksi kysymättä?"
+
+#: includes/integrations/views/integration-settings.php:80
+msgid "Select \"no\" if you want to ask your visitors before they are subscribed (recommended)."
+msgstr "Valitse \"ei\" jos haluat kysyä vierailijoita ennen kuin heidät liitetään tilaajiksi (suositus)."
+
+#: includes/integrations/views/integration-settings.php:131
+msgid "Select \"yes\" if the checkbox should be pre-checked."
+msgstr "Valitse \"kyllä\" jos valintaruutu esivalitaan."
+
+#: includes/integrations/views/integration-settings.php:27
+msgid "The selected MailChimp lists require non-default fields, which may prevent this integration from working."
+msgstr "Valitut MailChimp-listat edellyttävät mukautettuja kenttiä (ei oletus-) ja tämä voi estää liitosta toimimasta."
+
+#: includes/integrations/views/integration-settings.php:28
+msgid "Please ensure you <a href=\"%s\">configure the plugin to send all required fields</a> or <a href=\"%s\">log into your MailChimp account</a> and make sure only the email & name fields are marked as required fields for the selected list(s)."
+msgstr "Varmista, että<a href=\"%s\">olet määrittänyt lisäosan lähettämään kaikki vaaditut kentät</a> tai <a href=\"%s\">Kirjaudu MailChimp.com-palvelun tilille</a> ja varmista, että sähkäpostiosoite- & nimi kentät on merkittu vaadituiksi kentiksi valitulle listalle/listoille."
+
+#: includes/forms/views/edit-form.php:22
+#: includes/integrations/views/integration-settings.php:8
+#: includes/integrations/views/integrations.php:55
+#: includes/views/general-settings.php:7 includes/views/other-settings.php:36
+msgid "You are here: "
+msgstr "Olet tässä:"
+
+#: includes/forms/views/edit-form.php:34
+msgid "Edit Form"
+msgstr "Muokkaa lomaketta"
+
+#: includes/forms/views/edit-form.php:58
+msgid "Enter form title here"
+msgstr "Kirjoita lomakkeen otsikko tähän"
+
+#: includes/forms/views/edit-form.php:59
+msgid "Enter the title of your sign-up form"
+msgstr "Kirjoita liittymislomakkeen otsikko"
+
+#: includes/forms/views/edit-form.php:67
+msgid "Get shortcode"
+msgstr "Tee lyhytkoodi"
+
+#: includes/forms/views/edit-form.php:72
+msgid "Preview this form"
+msgstr "Lomakkeen esikatselu"
+
+#: includes/forms/views/parts/add-fields-help.php:4
+#: includes/forms/views/tabs/form-fields.php:10
+msgid "Add more fields"
+msgstr "Lisää kenttiä"
+
+#: includes/forms/views/parts/add-fields-help.php:9
+msgid "To add more fields to your form, you will need to create those fields in MailChimp first."
+msgstr "Kun haluat lisätä lomakkeeseen enemmän kenttiä, kentät on ensin tehtävä MailChimp.com-palvelussa."
+
+#: includes/forms/views/parts/add-fields-help.php:12
+msgid "Here's how:"
+msgstr "Teet sen näin:"
+
+#: includes/forms/views/parts/add-fields-help.php:17
+msgid "Log in to your MailChimp account."
+msgstr "Kirjaudu MailChimp.com-palveluun."
+
+#: includes/forms/views/parts/add-fields-help.php:22
+msgid "Add list fields to any of your selected lists."
+msgstr "Lisää listan kenttiä mihin tahansa valitsemaasi listaan."
+
+#: includes/forms/views/parts/add-fields-help.php:23
+msgid "Clicking the following links will take you to the right screen."
+msgstr "Seuraavien linkkien painaminen siirtää oikealle näytölle."
+
+#: includes/forms/views/parts/add-fields-help.php:29
+msgid "Edit list fields for"
+msgstr "Muokkaa listakenttiä tällä"
+
+#: includes/forms/views/parts/add-fields-help.php:38
+msgid "Click the following button to have MailChimp for WordPress pick up on your changes."
+msgstr "Paina seuraavaa painiketta ja MailChimp WordPress:ille lisäosa hakee tekemäsi muutokset."
+
+#: includes/forms/views/parts/dynamic-content-tags.php:6
+msgid "Add dynamic form variable"
+msgstr "Lisää dynaaminen lomakkeen muuttuja"
+
+#: includes/forms/views/tabs/form-appearance.php:5
+msgid "Inherit from %s theme"
+msgstr "Noudata %s teeman tyyliä"
+
+#: includes/forms/views/tabs/form-appearance.php:6
+msgid "Basic"
+msgstr "Perustyyli"
+
+#: includes/forms/views/tabs/form-appearance.php:7
+msgid "Form Themes"
+msgstr "Lomakkeen teemat"
+
+#: includes/forms/views/tabs/form-appearance.php:25
+msgid "Form Appearance"
+msgstr "Lomakkeen ulkoasu"
+
+#: includes/forms/views/tabs/form-appearance.php:29
+msgid "Form Style"
+msgstr "Lomakkeen tyyli"
+
+#: includes/forms/views/tabs/form-fields.php:6
+msgid "Form variables"
+msgstr "Lomakkeen muuttujat"
+
+#: includes/forms/views/tabs/form-fields.php:13
+msgid "Form Fields"
+msgstr "Lomakkeen kentät"
+
+#: includes/forms/views/tabs/form-fields.php:19
+msgid "Enter the HTML code for your form fields.."
+msgstr "Kirjoita lomakkeen kentille HTML-koodit."
+
+#: includes/forms/views/tabs/form-messages.php:6
+msgid "Form Messages"
+msgstr "Lomakkeen viestit"
+
+#: includes/forms/views/edit-form.php:7
+msgid "Appearance"
+msgstr "Ulkoasu"
+
+#: includes/forms/views/edit-form.php:4
+msgid "Fields"
+msgstr "Kentät"
+
+#: includes/forms/views/edit-form.php:5
+msgid "Messages"
+msgstr "Viestit"
+
+#: includes/forms/class-form-previewer.php:146
+msgid "Form preview"
+msgstr "Lomakkeen esikatselu"
+
+#: includes/forms/class-form-tags.php:65
+msgid "Data from the URL or a submitted form."
+msgstr "Tiedot verkko-osoitteesta/URL tai lähetetystä lomakkeesta."
+
+#: includes/forms/class-form-tags.php:82
+msgid "The email address of the current visitor (if known)."
+msgstr "Nykyisen vierailijan sähköpostiosoite (jos tiedossa)."
+
+#: includes/forms/class-form-tags.php:87
+msgid "The URL of the page."
+msgstr "Sivun verkko-osoite/URL."
+
+#: includes/forms/class-form-tags.php:92
+msgid "The path of the page."
+msgstr "Sivun polku."
+
+#: includes/forms/class-form-tags.php:97
+msgid "The current date. Example: %s."
+msgstr "Päiväys nyt. Esimerkki: %s."
+
+#: includes/forms/class-form-tags.php:102
+msgid "The current time. Example: %s."
+msgstr "Aika nyt. Esimerkki: %s."
+
+#: includes/forms/class-form-tags.php:107
+msgid "The site's language. Example: %s."
+msgstr "Sivuston kieli. Esimerkki: %s."
+
+#: includes/forms/class-form-tags.php:112
+msgid "The visitor's IP address. Example: %s."
+msgstr "Vierailijan IP-osoite. Esimerkki: %s."
+
+#: includes/forms/class-form-tags.php:117
+msgid "The property of the currently logged-in user."
+msgstr "Kirjautuneen käyttäjän tieto (property)."
+
+#: includes/forms/class-form.php:133
+msgid "There is no form with ID %d, perhaps it was deleted?"
+msgstr "%s tunnuksella/ID ei ole lomaketta. Ehkä se on poistettu?"
+
+#: includes/forms/views/add-form.php:10 includes/forms/views/add-form.php:60
+msgid "Add new form"
+msgstr "Lisää uusi lomake"
+
+#: includes/forms/views/add-form.php:27
+msgid "What is the name of this form?"
+msgstr "Mikä on tämän lomakkeen nimi?"
+
+#: includes/forms/views/add-form.php:30
+msgid "Enter your form title.."
+msgstr "Kirjoita lomakkeen otsikko."
+
+#: includes/forms/views/add-form.php:37
+msgid "To which MailChimp lists should this form subscribe?"
+msgstr "Mihin MailChimp.com-palvelun listoihin tämä lomake on liitetty?"
+
+#: includes/forms/views/add-form.php:54
+msgid "No lists found. Did you <a href=\"%s\">connect with MailChimp</a>?"
+msgstr "Listoja ei löytynyt. Muodostitko <a href=\"%s\">yhteyden MailChimp.com-palveluun</a>?"
+
+#: includes/forms/class-admin.php:273
+msgid "Preview form"
+msgstr "Lomakkeen esikatselu"
+
+#: includes/forms/class-admin.php:379
+msgid "Form not found."
+msgstr "Lomaketta ei löytynyt."
+
+#: includes/forms/class-admin.php:381
+msgid "Go back"
+msgstr "Siirry takaisin"
+
+#: includes/admin/class-usage-tracking.php:57
+msgid "Once a month"
+msgstr "Kerran kuukaudessa"
+
+#: includes/admin/migrations/3.0.0-form-1-post-type.php:35
+msgid "Default sign-up form"
+msgstr "Liittymislomake, oletus"
+
+#: includes/forms/class-admin.php:144 includes/forms/class-admin.php:273
+msgid "<strong>Success!</strong> Form successfully saved."
+msgstr "<strong>Onnistui!</strong> Lomake tallennettu."
+
+#: includes/admin/class-admin.php:191
+msgid "Success! The cached configuration for your MailChimp lists has been renewed."
+msgstr "Onnistui! MialChimp.com listojen rakenne välimuistissa on uusittu."
+
+#: includes/admin/class-admin.php:296
+msgid "This is a pro-only feature. Please upgrade to the premium version to be able to use it."
+msgstr "Tämä on pro-version ominaisuus. Päivitä maksulliseen versioon jotta pääset käyttämään sitä."
+
+#: includes/admin/class-ads.php:121
+msgid "First Name"
+msgstr "Etunimi"
+
+#: config/default-form-messages.php:37
+msgid "Please select at least one list."
+msgstr "Valitse vähintään yksi lista, ole hyvä."
+
+#: includes/admin/class-admin-texts.php:80
+msgid "Documentation"
+msgstr "Ohjeistus"
+
+#: includes/api/class-api.php:84
+msgid "Read more about common connectivity issues."
+msgstr "Lisätietoja yleisistä yhdistämiseen liittyvistä asioista."
+
+#: includes/views/general-settings.php:35
+msgid "Status"
+msgstr "Tila"
+
+#: includes/views/general-settings.php:52
+msgid "The API key for connecting with your MailChimp account."
+msgstr "API-avain jolla yhdistetään MailChimp.com-palvelun tiliin."
+
+#: includes/views/other-settings.php:15
+msgid "Usage Tracking"
+msgstr "Käytön seuranta"
+
+#: includes/forms/class-admin.php:62
+msgid "Add to form"
+msgstr "Lisää lomakkeeseen"
+
+#: includes/views/parts/admin-footer.php:15
+msgid "MailChimp for WordPress is in need of translations. Is the plugin not translated in your language or do you spot errors with the current translations? Helping out is easy! Head over to <a href=\"%s\">the translation project and click \"help translate\"</a>."
+msgstr "MailChimp WordPress:ille tarvitsee käännöksiä. Lisäosa ei ole käännetty sinun kielelle tai huomaat virheitä nykyisessä käännöksessä? Auttaminen on helppoa! Siirry <a href=\"%s\">käännösprojektiin ja paina \"Auta kääntämään\"</a>."
+
+#: includes/views/parts/admin-footer.php:35
+msgid "This plugin is not developed by or affiliated with MailChimp in any way."
+msgstr "MailChimp ei ole kehittänyt mitenkään tätä lisäosaa eikä MailChimp ole millään tavalla kumppani."
+
+#: includes/views/parts/admin-sidebar.php:11
+msgid "Looking for help?"
+msgstr "Etsitkö apua?"
+
+#: includes/admin/class-ads.php:113
+msgid "More subscribers, better newsletters."
+msgstr "Enemmän tilaajia, parempia uutiskirjeitä."
+
+#: includes/admin/class-ads.php:114
+msgid "Learn how to best grow your lists & write better emails by subscribing to our monthly tips."
+msgstr "Opi kuinka parhaiten kasvatat listojasi & kirjoitat parempia sähköposteja - tilaa kuukausittaiset vinkkimme."
+
+#. Plugin URI of the plugin/theme
+msgid "https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
+msgstr "https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=plugins-page"
+
+#. Author of the plugin/theme
+msgid "ibericode"
+msgstr "ibericode"
+
+#. Author URI of the plugin/theme
+msgid "https://ibericode.com/"
+msgstr "https://ibericode.com/"
+
+#: includes/admin/class-admin-texts.php:62 includes/forms/views/edit-form.php:6
+msgid "Settings"
+msgstr "Asetukset"
+
+#: includes/admin/class-admin.php:362 includes/views/general-settings.php:28
+msgid "MailChimp API Settings"
+msgstr "MailChimp rajapinta/API-asetukset"
+
+#: includes/admin/class-admin.php:363
+#: integrations/ninja-forms/class-ninja-forms.php:32
+msgid "MailChimp"
+msgstr "MailChimp.com"
+
+#: includes/forms/class-admin.php:64
+msgid "Checkboxes"
+msgstr "Valintaruudut"
+
+#: includes/forms/views/tabs/form-settings.php:1
+msgid "Form Settings"
+msgstr "Lomakkeen asetukset"
+
+#: includes/forms/class-admin.php:109 includes/forms/class-admin.php:110
+#: includes/forms/views/edit-form.php:24
+msgid "Forms"
+msgstr "Lomakkeet"
+
+#: includes/forms/class-admin.php:95
+msgid "Initial value"
+msgstr "Alussa arvo"
+
+#: includes/admin/class-ads.php:128 includes/forms/class-admin.php:92
+msgid "Subscribe"
+msgstr "Tilaa"
+
+#: config/default-form-content.php:3
+msgid "Email address"
+msgstr "Sähköpostiosoite"
+
+#: includes/forms/class-admin.php:435 includes/forms/class-widget.php:30
+msgid "MailChimp Sign-Up Form"
+msgstr "MailChimp liittymislomake"
+
+#: includes/forms/class-widget.php:32
+msgid "Displays your MailChimp for WordPress sign-up form"
+msgstr "Näyttää MailChimp WordPress:ille tilaus-/liittymislomakkeen"
+
+#: includes/forms/class-widget.php:26
+msgid "Newsletter"
+msgstr "Uutiskirje"
+
+#: includes/forms/class-widget.php:75
+msgid "Title:"
+msgstr "Otsikko:"
+
+#: includes/forms/class-widget.php:92
+msgid "You can edit your sign-up form in the <a href=\"%s\">MailChimp for WordPress form settings</a>."
+msgstr "Voit muokata liittymislomaketta kohdassa <a href=\"%s\">MailChimp WordPress:lle lomakkeen asetukset</a>."
+
+#: config/default-form-content.php:4
+msgid "Your email address"
+msgstr "Sähköpostiosoite"
+
+#: config/default-form-content.php:5
+msgid "Sign up"
+msgstr "Tilaa"
+
+#: config/default-integration-options.php:5
+msgid "Sign me up for the newsletter!"
+msgstr "Liitä minut uutiskirjeen tilaajaksi!"
+
+#: config/default-form-messages.php:5
+msgid "Thank you, your sign-up request was successful! Please check your email inbox to confirm."
+msgstr "Kiitos, liittyminen onnistui! Katso sähköpostistasi saapuneet viestit ja vahvista liittyminen."
+
+#: config/default-form-messages.php:21
+msgid "Oops. Something went wrong. Please try again later."
+msgstr "Oho. Ei onnistunut. Yritä myöhemmin uudelleen, ole hyvä."
+
+#: config/default-form-messages.php:25
+msgid "Please provide a valid email address."
+msgstr "Kirjoita kelvollinen sähköpostiosoite, ole hyvä."
+
+#: config/default-form-messages.php:29
+msgid "Given email address is already subscribed, thank you!"
+msgstr "Tällä sähköpostiosoitteella on jo tilattu, kiitos!"
+
+#: config/default-form-messages.php:33
+msgid "Please fill in the required fields."
+msgstr "Täytä vaaditut kentät."
+
+#: config/default-form-messages.php:13
+msgid "You were successfully unsubscribed."
+msgstr "Tilaus on peruttu."
+
+#: config/default-form-messages.php:17
+msgid "Given email address is not subscribed."
+msgstr "Tällä sähköpostiosoitteella ei ole tilausta."
+
+#: includes/forms/views/tabs/form-settings.php:41
+#: includes/forms/views/tabs/form-settings.php:56
+#: includes/forms/views/tabs/form-settings.php:72
+#: includes/forms/views/tabs/form-settings.php:108
+#: includes/integrations/views/integration-settings.php:64
+#: includes/integrations/views/integration-settings.php:78
+#: includes/integrations/views/integration-settings.php:129
+#: includes/integrations/views/integration-settings.php:141
+#: includes/integrations/views/integration-settings.php:154
+#: includes/integrations/views/integration-settings.php:173
+#: includes/integrations/views/integration-settings.php:192
+#: integrations/contact-form-7/class-contact-form-7.php:69
+msgid "Yes"
+msgstr "Kyllä"
+
+#: includes/forms/views/tabs/form-settings.php:45
+#: includes/forms/views/tabs/form-settings.php:60
+#: includes/forms/views/tabs/form-settings.php:76
+#: includes/forms/views/tabs/form-settings.php:112
+#: includes/integrations/views/integration-settings.php:65
+#: includes/integrations/views/integration-settings.php:79
+#: includes/integrations/views/integration-settings.php:130
+#: includes/integrations/views/integration-settings.php:142
+#: includes/integrations/views/integration-settings.php:158
+#: includes/integrations/views/integration-settings.php:177
+#: includes/integrations/views/integration-settings.php:196
+#: integrations/contact-form-7/class-contact-form-7.php:69
+msgid "No"
+msgstr "Ei"
+
+#: includes/admin/class-ads.php:117
+msgid "Email Address"
+msgstr "Sähköpostiosoite:"
+
+#. Plugin Name of the plugin/theme
+msgid "MailChimp for WordPress"
+msgstr "Mailchimp for WordPress (MailChimp WordPress:ille)"
+
+#: includes/views/general-settings.php:39
+msgid "CONNECTED"
+msgstr "YHDISTETTY"
+
+#: includes/views/general-settings.php:41
+msgid "NOT CONNECTED"
+msgstr "EI YHDISTETTY"
+
+#: includes/views/general-settings.php:48
+msgid "API Key"
+msgstr "API-avain"
+
+#: includes/views/general-settings.php:50
+msgid "Your MailChimp API key"
+msgstr "MailChimp API-avain"
+
+#: includes/views/general-settings.php:53
+msgid "Get your API key here."
+msgstr "Saat API-avaimen täältä"
+
+#: includes/forms/views/parts/add-fields-help.php:43
+#: includes/views/parts/lists-overview.php:8
+msgid "Renew MailChimp lists"
+msgstr "Uudista MailChimp-listat"
+
+#: includes/views/parts/lists-overview.php:14
+msgid "No lists were found in your MailChimp account"
+msgstr "Listoja ei löytynyt MailChimp tililtä"
+
+#: includes/views/parts/lists-overview.php:16
+msgid "A total of %d lists were found in your MailChimp account."
+msgstr "MailChimp.com-palvelun tililtä löytyi kaikkiaan %s listaa."
+
+#: includes/views/parts/lists-overview.php:59
+msgid "%s (%s) with field type %s."
+msgstr "%s (%s) joissa kentän laji %s."
+
+#: includes/integrations/views/integration-settings.php:90
+msgid "MailChimp Lists"
+msgstr "MailChimp-listat"
+
+#: includes/forms/views/tabs/form-settings.php:18
+#: includes/integrations/views/integration-settings.php:105
+msgid "No lists found, <a href=\"%s\">are you connected to MailChimp</a>?"
+msgstr "Listoja ei löytynyt, <a href=\"%s\">oletko yhdistettynä MailChimp.com-palveluun</a>?"
+
+#: includes/integrations/views/integration-settings.php:101
+msgid "Select the list(s) to which people who check the checkbox should be subscribed."
+msgstr "Valitse lista(t) johon valintaruudun valinneet liitetetään tilaajina."
+
+#: includes/integrations/views/integration-settings.php:150
+msgid "Double opt-in?"
+msgstr "Varmennettu liittyminen?"
+
+#: includes/forms/views/tabs/form-settings.php:47
+#: includes/integrations/views/integration-settings.php:161
+msgid "Select \"yes\" if you want people to confirm their email address before being subscribed (recommended)"
+msgstr "Valitse \"kyllä\" jos haluat henkilöiden vahvistavan sähköpostiosoitteensa ennen kuin he ovat tilaajia (suositus)"
+
+#: includes/integrations/views/integration-settings.php:114
+msgid "Checkbox label text"
+msgstr "Valintaruudun nimen teksti"
+
+#: includes/integrations/views/integration-settings.php:117
+msgid "HTML tags like %s are allowed in the label text."
+msgstr "HTML tägit kuten %s sallitaan nimen/tunnuksen tekstissä."
+
+#: includes/integrations/views/integration-settings.php:127
+msgid "Pre-check the checkbox?"
+msgstr "Valintaruudun esivalinta?"
+
+#: includes/integrations/views/integration-settings.php:139
+msgid "Load some default CSS?"
+msgstr "Lataa oletus CSS-muotoilu?"
+
+#: includes/integrations/views/integration-settings.php:143
+msgid "Select \"yes\" if the checkbox appears in a weird place."
+msgstr "Valitse kyllä, jos valintaruutu on oudossa paikassa."
+
+#: integrations/woocommerce/admin-after.php:4
+msgid "After billing details"
+msgstr "Laskutustietojen alla"
+
+#: includes/forms/views/tabs/form-appearance.php:8
+msgid "Light Theme"
+msgstr "Vaalea teema"
+
+#: includes/forms/views/tabs/form-appearance.php:10
+msgid "Red Theme"
+msgstr "Punainen teema"
+
+#: includes/forms/views/tabs/form-appearance.php:11
+msgid "Green Theme"
+msgstr "Vihreä teema"
+
+#: includes/forms/views/tabs/form-appearance.php:12
+msgid "Blue Theme"
+msgstr "Sininen teema"
+
+#: includes/forms/views/tabs/form-appearance.php:9
+msgid "Dark Theme"
+msgstr "Tumma teema"
+
+#: includes/forms/views/tabs/form-appearance.php:48
+msgid "If you want to load some default CSS styles, select \"basic formatting styles\" or choose one of the color themes"
+msgstr "Jos haluat ladata jonkun CSS-oletustyylin, valitse \"perustyyli\" tai valitse joku värillisistä teemoista"
+
+#: includes/forms/views/tabs/form-settings.php:15
+msgid "Lists this form subscribes to"
+msgstr "Tämä lomake on liitetty näihin listoihin"
+
+#: includes/forms/views/tabs/form-settings.php:31
+msgid "Select the list(s) to which people who submit this form should be subscribed."
+msgstr "Valitse lista(t) johon tämän lomakkeen lähettäneet liitetetään tilaajina."
+
+#: includes/forms/views/tabs/form-fields.php:26
+msgid "Use the shortcode %s to display this form inside a post, page or text widget."
+msgstr "%s-lyhytkoodin avulla voit näyttää tämän lomakkeen artikkelin-, sivun- tai teksti vimpaimen sisällä."
+
+#: includes/forms/views/tabs/form-settings.php:52
+#: includes/integrations/views/integration-settings.php:169
+msgid "Update existing subscribers?"
+msgstr "Päivitä nykyiset tilaajat?"
+
+#: includes/forms/views/tabs/form-settings.php:68
+#: includes/integrations/views/integration-settings.php:188
+msgid "Replace interest groups?"
+msgstr "Korvaa (aihe)ryhmät?"
+
+#: includes/forms/views/tabs/form-settings.php:104
+msgid "Hide form after a successful sign-up?"
+msgstr "Piilota lomake onnistuneen tilaamisen jälkeen?"
+
+#: includes/forms/views/tabs/form-settings.php:115
+msgid "Select \"yes\" to hide the form fields after a successful sign-up."
+msgstr "Valitse \"kyllä\" kun haluat piilottaa lomakkeen onnistuneen tilaamisen jälkeen."
+
+#: includes/forms/views/tabs/form-settings.php:120
+msgid "Redirect to URL after successful sign-ups"
+msgstr "Edelleenohjaa verkko-osoitteeseen/URL onnistuneen tilauksen jälkeen."
+
+#: includes/forms/views/tabs/form-settings.php:122
+msgid "Example: %s"
+msgstr "Esimerkki: %s"
+
+#: includes/forms/views/tabs/form-settings.php:123
+msgid "Leave empty or enter <code>0</code> for no redirect. Otherwise, use complete (absolute) URLs, including <code>http://</code>."
+msgstr "Kun haluat että edelleenohjausta ei tehdä, jätä tyhjäksi tai kirjoita <code>0</code>. Muussa tapauksessa, käytä täydellistä (absoluuttista) verkko-osoitetta/URL, mukaan lukien <code>http://</code>."
+
+#: includes/forms/views/tabs/form-messages.php:16
+msgid "Successfully subscribed"
+msgstr "Tilaaminen onnistui"
+
+#: includes/forms/views/tabs/form-messages.php:19
+msgid "The text that shows when an email address is successfully subscribed to the selected list(s)."
+msgstr "Teksti joka näytetään kun sähköpostiosoite lisättiin onnistuneesti valittuun listaan/listoihin."
+
+#: includes/forms/views/tabs/form-messages.php:23
+msgid "Invalid email address"
+msgstr "Sähköpostiosoite ei kelpaa"
+
+#: includes/forms/views/tabs/form-messages.php:26
+msgid "The text that shows when an invalid email address is given."
+msgstr "Teksti joka näytetään kun on annettu epäkelpo sähköpostiosoite. "
+
+#: includes/forms/views/tabs/form-messages.php:30
+msgid "Required field missing"
+msgstr "Tarpeellinen kenttä puuttuu"
+
+#: includes/forms/views/tabs/form-messages.php:33
+msgid "The text that shows when a required field for the selected list(s) is missing."
+msgstr "Teksti joka näytetään kun valitussa listassa/listoissa vaadittava kenttä puuttuu."
+
+#: includes/forms/views/tabs/form-messages.php:37
+msgid "Already subscribed"
+msgstr "On jo tilattu"
+
+#: includes/forms/views/tabs/form-messages.php:40
+msgid "The text that shows when the given email is already subscribed to the selected list(s)."
+msgstr "Teksti joka näytetään kun annettu sähköpostiosoite on jo tilaajana listassa/listoissa."
+
+#: includes/forms/views/tabs/form-messages.php:44
+msgid "General error"
+msgstr "Yleinen virhe"
+
+#: includes/forms/views/tabs/form-messages.php:47
+msgid "The text that shows when a general error occured."
+msgstr "Teksti joka näytetään kun on tapahtunut yleinen virhe."
+
+#: includes/forms/views/tabs/form-messages.php:51
+msgid "Unsubscribed"
+msgstr "Tilaus peruttu"
+
+#: includes/forms/views/tabs/form-messages.php:54
+msgid "When using the unsubscribe method, this is the text that shows when the given email address is successfully unsubscribed from the selected list(s)."
+msgstr "Kun tilauksen peruminen menetelmä on käytössä, tämä teksti näytetään kun annettu sähköpostiosoite on onnistuneesti poistettu valitun listan/listojen tilaajien joukosta."
+
+#: includes/forms/views/tabs/form-messages.php:58
+msgid "Not subscribed"
+msgstr "Ei tilannut"
+
+#: includes/forms/views/tabs/form-messages.php:61
+msgid "When using the unsubscribe method, this is the text that shows when the given email address is not on the selected list(s)."
+msgstr "Kun tilauksen peruminen menetelmä on käytössä, tämä teksti näytetään kun annettu sähköpostiosoite ei ole valitun listan/listojen tilaajien joukossa."
+
+#: includes/forms/views/tabs/form-messages.php:89
+msgid "HTML tags like %s are allowed in the message fields."
+msgstr "HTML tägit kuten %s sallitaan viestikentissä."
+
+#: includes/forms/views/parts/dynamic-content-tags.php:8
+msgid "The following list of variables can be used to <a href=\"%s\">add some dynamic content to your form or success and error messages</a>."
+msgstr "Alla olevan listan muuttujilla saadaan lomakkeeseen <a href=\"%s\">lisättyä dynaamista sisältöä tai onnistumis- tai virheviestejä</a>."
+
+#: includes/forms/views/parts/dynamic-content-tags.php:8
+msgid "This allows you to personalise your form or response messages."
+msgstr "Tällä voit mukauttaa lomakkeen tai vastausviestit haluamallasi tavalla."
+
+#: includes/forms/class-form-tags.php:60
+msgid "Replaced with the form response (error or success messages)."
+msgstr "Korvataan lomakkeen vastauksella (virhe- tai onnistuminen viestit)."
+
+#: includes/forms/class-form-tags.php:77
+#: includes/integrations/class-integration-tags.php:45
+msgid "Replaced with the number of subscribers on the selected list(s)"
+msgstr "Korvataan tilaajien lukumäärällä valitu(i)ssa listassa/listoissa."
+
+#: includes/forms/class-admin.php:93
+msgid "Submit button"
+msgstr "Lähetä painike"
+
+#: includes/forms/class-admin.php:78
+msgid "List choice"
+msgstr "Valinta listassa"
+
+#: includes/forms/class-admin.php:85
+msgid "Placeholder"
+msgstr "Paikanvaraus"
+
+#: includes/forms/class-admin.php:94
+msgid "Wrap in paragraph tags?"
+msgstr "Kappale tägien (<p></p>) väliin?"

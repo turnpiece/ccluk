@@ -1,0 +1,55 @@
+# Translation of Stable (latest release) in German
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-04-25 06:43:40+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: post-type-switcher.php:188
+msgid "Post Type"
+msgstr "Beitragsart"
+
+#. Plugin Name of the plugin/theme
+msgid "Post Type Switcher"
+msgstr "Post Type Switcher"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/post-type-switcher/"
+msgstr "https://wordpress.org/plugins/post-type-switcher/"
+
+#. Description of the plugin/theme
+msgid "Allow switching of a post type while editing a post (in post publish section)"
+msgstr "Ermöglicht beim Bearbeiten von Beiträgen (im Abschnitt Veröffentlichen) die Beitragsart zu wechseln."
+
+#. Author of the plugin/theme
+msgid "John James Jacoby"
+msgstr "John James Jacoby"
+
+#. Author URI of the plugin/theme
+msgid "https://profiles.wordpress.org/johnjamesjacoby/"
+msgstr "https://profiles.wordpress.org/johnjamesjacoby/"
+
+#: post-type-switcher.php:153
+msgid "Type"
+msgstr "Art"
+
+#: post-type-switcher.php:135
+msgid "Cancel"
+msgstr "Abbr."
+
+#: post-type-switcher.php:134
+msgid "OK"
+msgstr "﻿OK"
+
+#: post-type-switcher.php:114
+msgid "Post Type:"
+msgstr "Beitragsart:"
+
+#: post-type-switcher.php:119
+msgid "Edit"
+msgstr "﻿Bearbeiten"

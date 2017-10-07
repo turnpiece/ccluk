@@ -1,0 +1,8 @@
+/*! Google Maps - v2.9.3
+ * http://premium.wpmudev.org/project/wordpress-google-maps-plugin
+ * Copyright (c) 2017; * Licensed GPLv2+ */
+
+.agm-form,.agm-confirm{padding:5px;border:1px solid #DDD;margin:5px 0;background:#FFE;box-shadow:0 1px 3px rgba(0,0,0,.1);position:relative}.agm-form .agm-form-close,.agm-confirm .agm-confirm-close{text-decoration:none;float:right;line-height:24px;width:24px;text-align:center;color:#CCC;font-size:20px;cursor:pointer}.agm-form .agm-form-close:hover,.agm-form .agm-form-close:focus,.agm-form .agm-form-close:active,.agm-confirm .agm-confirm-close:hover,.agm-confirm .agm-confirm-close:focus,.agm-confirm .agm-confirm-close:active{color:#999}.agm-form .agm-form-title,.agm-confirm .agm-confirm-title{font-weight:700}.agm-form .agm-form-buttons,.agm-confirm .agm-confirm-buttons{text-align:right}.agm-form .row:after{content:'';display:block;display:table;clear:both}.agm-form .row>label{float:left;width:120px}.agm_google_maps .loading{opacity:.75}.agm_google_maps .inner-modal{display:none}.agm_google_maps .loading .inner-modal{display:block;position:absolute;top:0;left:0;right:0;bottom:0;background-color:#FFF;opacity:.5}.agm-form .agm-form-delete{margin-right:40px;background:#FCC;color:#800}.agm-form .agm-form-delete:hover,.agm-form .agm-form-delete:focus{background:#FDD;color:#C00}
+
+
+/* 87274-1507402031-ai */

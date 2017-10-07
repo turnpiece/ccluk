@@ -1,0 +1,3135 @@
+# Copyright (C) 2017 WPMU DEV
+# This file is distributed under the same license as the Google Maps package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Maps 2.9.3\n"
+"Report-Msgid-Bugs-To: "
+"http://wordpress.org/support/plugin/wpmu_dev_maps_plugin\n"
+"POT-Creation-Date: 2017-04-12 06:39:09+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n 0.4.9\n"
+
+#: inc/addons/additional-behaviors.php:47
+#: release/2.9.1/inc/addons/additional-behaviors.php:47
+#: release/2.9.2/inc/addons/additional-behaviors.php:47
+msgid "Additional Behaviors"
+msgstr ""
+
+#: inc/addons/additional-behaviors.php:53
+#: release/2.9.1/inc/addons/additional-behaviors.php:53
+#: release/2.9.2/inc/addons/additional-behaviors.php:53
+msgid "Behaviors"
+msgstr ""
+
+#: inc/addons/additional-behaviors.php:64
+#: release/2.9.1/inc/addons/additional-behaviors.php:64
+#: release/2.9.2/inc/addons/additional-behaviors.php:64
+msgid "This is where you can define additional global settings for your maps."
+msgstr ""
+
+#: inc/addons/additional-behaviors.php:83
+#: release/2.9.1/inc/addons/additional-behaviors.php:83
+#: release/2.9.2/inc/addons/additional-behaviors.php:83
+msgid "Click on item in marker-list opens the detail popup"
+msgstr ""
+
+#: inc/addons/additional-behaviors.php:97
+#: release/2.9.1/inc/addons/additional-behaviors.php:97
+#: release/2.9.2/inc/addons/additional-behaviors.php:97
+msgid "Click on directions link scrolls to the directions form"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:173
+#: release/2.9.1/inc/addons/bp-group-maps.php:173
+#: release/2.9.2/inc/addons/bp-group-maps.php:173
+msgid "Group Map"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:263
+#: release/2.9.1/inc/addons/bp-group-maps.php:263
+#: release/2.9.2/inc/addons/bp-group-maps.php:263
+msgid "Group map"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:267
+#: release/2.9.1/inc/addons/bp-group-maps.php:267
+#: release/2.9.2/inc/addons/bp-group-maps.php:267
+msgid "This group has address:"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:272
+#: release/2.9.1/inc/addons/bp-group-maps.php:272
+#: release/2.9.2/inc/addons/bp-group-maps.php:272
+msgid "Show group map to:"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:275 inc/class-agm-admin-form-renderer.php:492
+#: release/2.9.1/inc/addons/bp-group-maps.php:275
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:492
+#: release/2.9.1/views/widget_settings.php:26
+#: release/2.9.2/inc/addons/bp-group-maps.php:275
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:492
+#: release/2.9.2/views/widget_settings.php:26 views/widget_settings.php:26
+msgid "All"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:279
+#: release/2.9.1/inc/addons/bp-group-maps.php:279
+#: release/2.9.2/inc/addons/bp-group-maps.php:279
+msgid "Members"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:283
+#: release/2.9.1/inc/addons/bp-group-maps.php:283
+#: release/2.9.2/inc/addons/bp-group-maps.php:283
+msgid "Moderators"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:291
+#: release/2.9.1/inc/addons/bp-group-maps.php:291
+#: release/2.9.2/inc/addons/bp-group-maps.php:291
+msgid "Show separate Group Map tab"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:299
+#: release/2.9.1/inc/addons/bp-group-maps.php:299
+#: release/2.9.2/inc/addons/bp-group-maps.php:299
+msgid "Show map on members list page"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:308
+#: release/2.9.1/inc/addons/bp-group-maps.php:308
+#: release/2.9.2/inc/addons/bp-group-maps.php:308
+msgid "Also show members locations"
+msgstr ""
+
+#: inc/addons/bp-group-maps.php:309
+#: release/2.9.1/inc/addons/bp-group-maps.php:309
+#: release/2.9.2/inc/addons/bp-group-maps.php:309
+msgid "(requires BuddyPress Profile maps add-on)"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:105
+#: release/2.9.1/inc/addons/bp-profile-maps.php:105
+#: release/2.9.2/inc/addons/bp-profile-maps.php:105
+msgid "BuddyPress profile"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:119
+#: release/2.9.1/inc/addons/bp-profile-maps.php:119
+#: release/2.9.2/inc/addons/bp-profile-maps.php:119
+msgid "Address profile field"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:126
+#: release/2.9.1/inc/addons/bp-profile-maps.php:126
+#: release/2.9.2/inc/addons/bp-profile-maps.php:126
+msgid "Show map in user profile"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:133
+#: release/2.9.1/inc/addons/bp-profile-maps.php:133
+#: release/2.9.2/inc/addons/bp-profile-maps.php:133
+msgid "Show map in members list"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:140
+#: release/2.9.1/inc/addons/bp-profile-maps.php:140
+#: release/2.9.2/inc/addons/bp-profile-maps.php:140
+msgid "Use avatars as map markers"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:147
+#: release/2.9.1/inc/addons/bp-profile-maps.php:147
+#: release/2.9.2/inc/addons/bp-profile-maps.php:147
+msgid "Global map with all members"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:182
+#: release/2.9.1/inc/addons/bp-profile-maps.php:182
+#: release/2.9.2/inc/addons/bp-profile-maps.php:182
+msgid "This profile field holds the address of my users:"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:185
+#: release/2.9.1/inc/addons/bp-profile-maps.php:185
+#: release/2.9.2/inc/addons/bp-profile-maps.php:185
+msgid "Please, select a field"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:203
+#: release/2.9.1/inc/addons/bp-profile-maps.php:203
+#: release/2.9.2/inc/addons/bp-profile-maps.php:203
+msgid "Do not show in profile"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:204
+#: release/2.9.1/inc/addons/bp-profile-maps.php:204
+#: release/2.9.2/inc/addons/bp-profile-maps.php:204
+msgid "Show map before profile fields"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:205
+#: release/2.9.1/inc/addons/bp-profile-maps.php:205
+#: release/2.9.2/inc/addons/bp-profile-maps.php:205
+msgid "Show map after profile fields"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:226
+#: release/2.9.1/inc/addons/bp-profile-maps.php:226
+#: release/2.9.2/inc/addons/bp-profile-maps.php:226
+msgid "Do not show in members list"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:227
+#: release/2.9.1/inc/addons/bp-profile-maps.php:227
+#: release/2.9.2/inc/addons/bp-profile-maps.php:227
+msgid "Show map before members list"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:228
+#: release/2.9.1/inc/addons/bp-profile-maps.php:228
+#: release/2.9.2/inc/addons/bp-profile-maps.php:228
+msgid "Show map after members list"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:249 inc/addons/user-checkin.php:1932
+#: inc/class-agm-admin-form-renderer.php:32
+#: inc/class-agm-admin-form-renderer.php:282
+#: inc/class-agm-admin-form-renderer.php:359
+#: inc/class-agm-admin-form-renderer.php:384
+#: release/2.9.1/inc/addons/bp-profile-maps.php:249
+#: release/2.9.1/inc/addons/user-checkin.php:1932
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:32
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:282
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:359
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:384
+#: release/2.9.2/inc/addons/bp-profile-maps.php:249
+#: release/2.9.2/inc/addons/user-checkin.php:1932
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:32
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:282
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:359
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:384
+msgid "No"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:250 inc/addons/user-checkin.php:1931
+#: inc/class-agm-admin-form-renderer.php:28
+#: inc/class-agm-admin-form-renderer.php:273
+#: inc/class-agm-admin-form-renderer.php:350
+#: inc/class-agm-admin-form-renderer.php:375
+#: release/2.9.1/inc/addons/bp-profile-maps.php:250
+#: release/2.9.1/inc/addons/user-checkin.php:1931
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:28
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:273
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:350
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:375
+#: release/2.9.2/inc/addons/bp-profile-maps.php:250
+#: release/2.9.2/inc/addons/user-checkin.php:1931
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:28
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:273
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:350
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:375
+msgid "Yes"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:350
+#: release/2.9.1/inc/addons/bp-profile-maps.php:350
+#: release/2.9.2/inc/addons/bp-profile-maps.php:350
+msgid "BuddyPress XProfile not activated"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:358
+#: release/2.9.1/inc/addons/bp-profile-maps.php:358
+#: release/2.9.2/inc/addons/bp-profile-maps.php:358
+msgid "No address defined"
+msgstr ""
+
+#: inc/addons/bp-profile-maps.php:364
+#: release/2.9.1/inc/addons/bp-profile-maps.php:364
+#: release/2.9.2/inc/addons/bp-profile-maps.php:364
+msgid "No map found for this address"
+msgstr ""
+
+#: inc/addons/custom-icons.php:55 inc/addons/custom-icons.php:70
+#: release/2.9.1/inc/addons/custom-icons.php:55
+#: release/2.9.1/inc/addons/custom-icons.php:70
+#: release/2.9.2/inc/addons/custom-icons.php:55
+#: release/2.9.2/inc/addons/custom-icons.php:70
+msgid "Custom icons"
+msgstr ""
+
+#: inc/addons/custom-icons.php:62 release/2.9.1/inc/addons/custom-icons.php:62
+#: release/2.9.2/inc/addons/custom-icons.php:62
+msgid "Add new icons"
+msgstr ""
+
+#: inc/addons/custom-icons.php:90 release/2.9.1/inc/addons/custom-icons.php:90
+#: release/2.9.2/inc/addons/custom-icons.php:90
+msgid "Icon"
+msgstr ""
+
+#: inc/addons/custom-icons.php:91 release/2.9.1/inc/addons/custom-icons.php:91
+#: release/2.9.2/inc/addons/custom-icons.php:91
+msgid "URL"
+msgstr ""
+
+#: inc/addons/custom-icons.php:92 release/2.9.1/inc/addons/custom-icons.php:92
+#: release/2.9.2/inc/addons/custom-icons.php:92
+msgid "Width x Height"
+msgstr ""
+
+#: inc/addons/custom-icons.php:112
+#: release/2.9.1/inc/addons/custom-icons.php:112
+#: release/2.9.2/inc/addons/custom-icons.php:112
+msgid "Icon URL"
+msgstr ""
+
+#: inc/addons/custom-icons.php:118
+#: release/2.9.1/inc/addons/custom-icons.php:118
+#: release/2.9.2/inc/addons/custom-icons.php:118
+msgid "Add this icon"
+msgstr ""
+
+#: inc/addons/custom-icons.php:119
+#: release/2.9.1/inc/addons/custom-icons.php:119
+#: release/2.9.2/inc/addons/custom-icons.php:119
+msgid "Enter a valid image URL"
+msgstr ""
+
+#: inc/addons/custom-icons.php:125
+#: release/2.9.1/inc/addons/custom-icons.php:125
+#: release/2.9.2/inc/addons/custom-icons.php:125
+msgid "Add icon from media library"
+msgstr ""
+
+#: inc/addons/custom-icons.php:129
+#: release/2.9.1/inc/addons/custom-icons.php:129
+#: release/2.9.2/inc/addons/custom-icons.php:129
+msgid ""
+"Note: All icons will be displayed in full-size on the map. In the editor "
+"and this list the icon-preview is displayed with 32 x 32 pixels."
+msgstr ""
+
+#: inc/addons/disable-scroll.php:42
+#: release/2.9.1/inc/addons/disable-scroll.php:42
+#: release/2.9.2/inc/addons/disable-scroll.php:42
+msgid "Disable scroll"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:39
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:33
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:39
+msgid "Nearby Facebook Friends"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:45 inc/addons/fb-nearby-friends.php:90
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:39
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:65
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:45
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:90
+msgid "Facebook App ID"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:52
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:46
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:52
+msgid "Scope"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:59
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:53
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:59
+msgid "Set up the App"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:74
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:74
+msgid "Note:"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:76
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:76
+msgid ""
+"Due to the deprecation of the needed features and permissions in Facebook "
+"API, the %s add-on will not work for newly created applications."
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:102
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:77
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:102
+msgid "Check for friends within "
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:111
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:86
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:111
+msgid "meters"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:116
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:91
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:116
+msgid "Search for friends in updates and photos for friends within last "
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:125
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:100
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:125
+msgid "months"
+msgstr ""
+
+#: inc/addons/fb-nearby-friends.php:132
+#: release/2.9.1/inc/addons/fb-nearby-friends.php:107
+#: release/2.9.2/inc/addons/fb-nearby-friends.php:132
+msgid "Follow these steps to set up <em>App ID</em> field"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:12
+#: release/2.9.1/inc/addons/fix-and-repair.php:12
+#: release/2.9.2/inc/addons/fix-and-repair.php:12
+msgid ""
+"Use options in this section to repair your Google Maps installation. "
+"<em>You may want to back up your WordPress database first.</em>"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:16 inc/addons/fix-and-repair.php:53
+#: inc/addons/fix-and-repair.php:85 inc/addons/fix-and-repair.php:161
+#: release/2.9.1/inc/addons/fix-and-repair.php:16
+#: release/2.9.1/inc/addons/fix-and-repair.php:53
+#: release/2.9.1/inc/addons/fix-and-repair.php:85
+#: release/2.9.1/inc/addons/fix-and-repair.php:161
+#: release/2.9.2/inc/addons/fix-and-repair.php:16
+#: release/2.9.2/inc/addons/fix-and-repair.php:53
+#: release/2.9.2/inc/addons/fix-and-repair.php:85
+#: release/2.9.2/inc/addons/fix-and-repair.php:161
+msgid "Please, wait..."
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:17
+#: release/2.9.1/inc/addons/fix-and-repair.php:17
+#: release/2.9.2/inc/addons/fix-and-repair.php:17
+msgid "Click here to reset all options to their defaults on this blog"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:18 inc/addons/fix-and-repair.php:55
+#: inc/addons/fix-and-repair.php:87 inc/addons/fix-and-repair.php:163
+#: release/2.9.1/inc/addons/fix-and-repair.php:18
+#: release/2.9.1/inc/addons/fix-and-repair.php:55
+#: release/2.9.1/inc/addons/fix-and-repair.php:87
+#: release/2.9.1/inc/addons/fix-and-repair.php:163
+#: release/2.9.2/inc/addons/fix-and-repair.php:18
+#: release/2.9.2/inc/addons/fix-and-repair.php:55
+#: release/2.9.2/inc/addons/fix-and-repair.php:87
+#: release/2.9.2/inc/addons/fix-and-repair.php:163
+msgid "Success"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:19 inc/addons/fix-and-repair.php:56
+#: inc/addons/fix-and-repair.php:88 inc/addons/fix-and-repair.php:164
+#: release/2.9.1/inc/addons/fix-and-repair.php:19
+#: release/2.9.1/inc/addons/fix-and-repair.php:56
+#: release/2.9.1/inc/addons/fix-and-repair.php:88
+#: release/2.9.1/inc/addons/fix-and-repair.php:164
+#: release/2.9.2/inc/addons/fix-and-repair.php:19
+#: release/2.9.2/inc/addons/fix-and-repair.php:56
+#: release/2.9.2/inc/addons/fix-and-repair.php:88
+#: release/2.9.2/inc/addons/fix-and-repair.php:164
+msgid "Failure"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:20
+#: release/2.9.1/inc/addons/fix-and-repair.php:20
+#: release/2.9.2/inc/addons/fix-and-repair.php:20
+msgid "Your page will automatically reload in 3s"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:23
+#: release/2.9.1/inc/addons/fix-and-repair.php:23
+#: release/2.9.2/inc/addons/fix-and-repair.php:23
+msgid "All individual map options will be preserved."
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:54
+#: release/2.9.1/inc/addons/fix-and-repair.php:54
+#: release/2.9.2/inc/addons/fix-and-repair.php:54
+msgid "Click here to fix missing tables on this blog"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:59
+#: release/2.9.1/inc/addons/fix-and-repair.php:59
+#: release/2.9.2/inc/addons/fix-and-repair.php:59
+msgid "Use this option if you suspect that your database table is missing"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:84
+#: release/2.9.1/inc/addons/fix-and-repair.php:84
+#: release/2.9.2/inc/addons/fix-and-repair.php:84
+msgid ""
+"This will delete ALL maps on this blog. Are you definitely sure you want to "
+"do this?"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:86
+#: release/2.9.1/inc/addons/fix-and-repair.php:86
+#: release/2.9.2/inc/addons/fix-and-repair.php:86
+msgid "Click here to delete ALL maps on this blog"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:91
+#: release/2.9.1/inc/addons/fix-and-repair.php:91
+#: release/2.9.2/inc/addons/fix-and-repair.php:91
+msgid ""
+"Use this option to remove ALL tables from this blog <em>(<b>Warning:</b> "
+"this option is irreversible)</em>"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:117
+#: release/2.9.1/inc/addons/fix-and-repair.php:117
+#: release/2.9.2/inc/addons/fix-and-repair.php:117
+msgid "Click here to rebuild your BuddyPress members profile maps"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:118
+#: release/2.9.1/inc/addons/fix-and-repair.php:118
+#: release/2.9.2/inc/addons/fix-and-repair.php:118
+msgid "Rebuild all profile maps <em>(<b>Warning:</b> this will take a while)</em>"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:119
+#: release/2.9.1/inc/addons/fix-and-repair.php:119
+#: release/2.9.2/inc/addons/fix-and-repair.php:119
+msgid "Please hold on while the old location buffers are purged"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:120
+#: release/2.9.1/inc/addons/fix-and-repair.php:120
+#: release/2.9.2/inc/addons/fix-and-repair.php:120
+msgid "Processing profiles... "
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:121
+#: release/2.9.1/inc/addons/fix-and-repair.php:121
+#: release/2.9.2/inc/addons/fix-and-repair.php:121
+msgid "All done!"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:162
+#: release/2.9.1/inc/addons/fix-and-repair.php:162
+#: release/2.9.2/inc/addons/fix-and-repair.php:162
+msgid "Click here to update the map shortcode on this blog"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:173
+#: release/2.9.1/inc/addons/fix-and-repair.php:173
+#: release/2.9.2/inc/addons/fix-and-repair.php:173
+msgid "Nothing needs to be fixed"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:174
+#: release/2.9.1/inc/addons/fix-and-repair.php:174
+#: release/2.9.2/inc/addons/fix-and-repair.php:174
+msgid ""
+"In this blog there is no post or page that uses the old map shortcode "
+"<code>[%s]</code>"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:180
+#: release/2.9.1/inc/addons/fix-and-repair.php:180
+#: release/2.9.2/inc/addons/fix-and-repair.php:180
+msgid ""
+"Use this option after you changed the map shortcode in the \"Options\" tab "
+"above. This will change all <code>[%s]</code> shortcodes to "
+"<code>[%s]</code> in <strong>%d</strong> pages/posts (including revisions "
+"and unpublished posts)."
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:222
+#: release/2.9.1/inc/addons/fix-and-repair.php:222
+#: release/2.9.2/inc/addons/fix-and-repair.php:222
+msgid "Fixes and repairs"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:228
+#: release/2.9.1/inc/addons/fix-and-repair.php:228
+#: release/2.9.2/inc/addons/fix-and-repair.php:228
+msgid "Reset all options to defaults"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:235
+#: release/2.9.1/inc/addons/fix-and-repair.php:235
+#: release/2.9.2/inc/addons/fix-and-repair.php:235
+msgid "Fix missing table"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:242
+#: release/2.9.1/inc/addons/fix-and-repair.php:242
+#: release/2.9.2/inc/addons/fix-and-repair.php:242
+msgid "Clear the table"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:249
+#: release/2.9.1/inc/addons/fix-and-repair.php:249
+#: release/2.9.2/inc/addons/fix-and-repair.php:249
+msgid "Rename map shortcode"
+msgstr ""
+
+#: inc/addons/fix-and-repair.php:258
+#: release/2.9.1/inc/addons/fix-and-repair.php:258
+#: release/2.9.2/inc/addons/fix-and-repair.php:258
+msgid "Rebuild BuddyPress profile maps"
+msgstr ""
+
+#: inc/addons/geotag-bp.php:98 release/2.9.1/inc/addons/geotag-bp.php:98
+#: release/2.9.2/inc/addons/geotag-bp.php:98
+msgid "Address"
+msgstr ""
+
+#: inc/addons/geotag-wp.php:46 release/2.9.1/inc/addons/geotag-wp.php:46
+#: release/2.9.2/inc/addons/geotag-wp.php:46
+msgid "Geotag my posts"
+msgstr ""
+
+#: inc/addons/geotag-wp.php:53 release/2.9.1/inc/addons/geotag-wp.php:53
+#: release/2.9.2/inc/addons/geotag-wp.php:53
+msgid "Geotagging metabox"
+msgstr ""
+
+#: inc/addons/geotag-wp.php:64 release/2.9.1/inc/addons/geotag-wp.php:64
+#: release/2.9.2/inc/addons/geotag-wp.php:64
+msgid "Show geotagging metabox for"
+msgstr ""
+
+#: inc/addons/geotag-wp.php:84 release/2.9.1/inc/addons/geotag-wp.php:84
+#: release/2.9.2/inc/addons/geotag-wp.php:84
+msgid "Location"
+msgstr ""
+
+#: inc/addons/geotag-wp.php:241 release/2.9.1/inc/addons/geotag-wp.php:241
+#: release/2.9.2/inc/addons/geotag-wp.php:241
+msgid "Read more"
+msgstr ""
+
+#: inc/addons/kml-uploader.php:73 release/2.9.1/inc/addons/kml-uploader.php:73
+#: release/2.9.2/inc/addons/kml-uploader.php:73
+msgid "KML files"
+msgstr ""
+
+#: inc/addons/kml-uploader.php:79 release/2.9.1/inc/addons/kml-uploader.php:79
+#: release/2.9.2/inc/addons/kml-uploader.php:79
+msgid "Existing KML files"
+msgstr ""
+
+#: inc/addons/kml-uploader.php:86 release/2.9.1/inc/addons/kml-uploader.php:86
+#: release/2.9.2/inc/addons/kml-uploader.php:86
+msgid "Upload a KML file"
+msgstr ""
+
+#: inc/addons/kml-uploader.php:96 release/2.9.1/inc/addons/kml-uploader.php:96
+#: release/2.9.2/inc/addons/kml-uploader.php:96
+msgid "<em>No KML files.</em>"
+msgstr ""
+
+#: inc/addons/kml-uploader.php:116
+#: release/2.9.1/inc/addons/kml-uploader.php:116
+#: release/2.9.2/inc/addons/kml-uploader.php:116
+msgid "Only files with .kml and .kmz extension are allowed."
+msgstr ""
+
+#: inc/addons/kml-uploader.php:117
+#: release/2.9.1/inc/addons/kml-uploader.php:117
+#: release/2.9.2/inc/addons/kml-uploader.php:117
+msgid "Upload"
+msgstr ""
+
+#: inc/addons/loading-message.php:127
+#: release/2.9.1/inc/addons/loading-message.php:127
+#: release/2.9.2/inc/addons/loading-message.php:127
+msgid "Map loading message"
+msgstr ""
+
+#: inc/addons/loading-message.php:133
+#: release/2.9.1/inc/addons/loading-message.php:133
+#: release/2.9.2/inc/addons/loading-message.php:133
+msgid "Add loading message to these maps"
+msgstr ""
+
+#: inc/addons/loading-message.php:154
+#: release/2.9.1/inc/addons/loading-message.php:154
+#: release/2.9.2/inc/addons/loading-message.php:154
+msgid "Auto-generated maps loading message"
+msgstr ""
+
+#: inc/addons/loading-message.php:159 inc/addons/responsive-maps.php:143
+#: release/2.9.1/inc/addons/loading-message.php:159
+#: release/2.9.1/inc/addons/responsive-maps.php:138
+#: release/2.9.2/inc/addons/loading-message.php:159
+#: release/2.9.2/inc/addons/responsive-maps.php:143
+msgid "BuddyPress member directory map"
+msgstr ""
+
+#: inc/addons/loading-message.php:164
+#: release/2.9.1/inc/addons/loading-message.php:164
+#: release/2.9.2/inc/addons/loading-message.php:164
+msgid "All maps loading message"
+msgstr ""
+
+#: inc/addons/loading-message.php:171
+#: release/2.9.1/inc/addons/loading-message.php:171
+#: release/2.9.2/inc/addons/loading-message.php:171
+msgid "Use map tiles caching"
+msgstr ""
+
+#: inc/addons/loading-message.php:176
+#: release/2.9.1/inc/addons/loading-message.php:176
+#: release/2.9.2/inc/addons/loading-message.php:176
+msgid "Map is loading, please hold on"
+msgstr ""
+
+#: inc/addons/localize-maps.php:29
+#: release/2.9.1/inc/addons/localize-maps.php:29
+#: release/2.9.2/inc/addons/localize-maps.php:29
+msgid "Localization"
+msgstr ""
+
+#: inc/addons/localize-maps.php:35
+#: release/2.9.1/inc/addons/localize-maps.php:35
+#: release/2.9.2/inc/addons/localize-maps.php:35
+msgid "Languages"
+msgstr ""
+
+#: inc/addons/localize-maps.php:46
+#: release/2.9.1/inc/addons/localize-maps.php:46
+#: release/2.9.2/inc/addons/localize-maps.php:46
+msgid "Select your language"
+msgstr ""
+
+#: inc/addons/localize-maps.php:49
+#: release/2.9.1/inc/addons/localize-maps.php:49
+#: release/2.9.2/inc/addons/localize-maps.php:49
+msgid "Browser detect (default)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:79
+#: release/2.9.1/inc/addons/localize-maps.php:79
+#: release/2.9.2/inc/addons/localize-maps.php:79
+msgid "Arabic"
+msgstr ""
+
+#: inc/addons/localize-maps.php:80 inc/addons/localize-maps.php:92
+#: release/2.9.1/inc/addons/localize-maps.php:80
+#: release/2.9.1/inc/addons/localize-maps.php:92
+#: release/2.9.2/inc/addons/localize-maps.php:80
+#: release/2.9.2/inc/addons/localize-maps.php:92
+msgid "Basque"
+msgstr ""
+
+#: inc/addons/localize-maps.php:81
+#: release/2.9.1/inc/addons/localize-maps.php:81
+#: release/2.9.2/inc/addons/localize-maps.php:81
+msgid "Bulgarian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:82
+#: release/2.9.1/inc/addons/localize-maps.php:82
+#: release/2.9.2/inc/addons/localize-maps.php:82
+msgid "Bengali"
+msgstr ""
+
+#: inc/addons/localize-maps.php:83
+#: release/2.9.1/inc/addons/localize-maps.php:83
+#: release/2.9.2/inc/addons/localize-maps.php:83
+msgid "Catalan"
+msgstr ""
+
+#: inc/addons/localize-maps.php:84
+#: release/2.9.1/inc/addons/localize-maps.php:84
+#: release/2.9.2/inc/addons/localize-maps.php:84
+msgid "Czech"
+msgstr ""
+
+#: inc/addons/localize-maps.php:85
+#: release/2.9.1/inc/addons/localize-maps.php:85
+#: release/2.9.2/inc/addons/localize-maps.php:85
+msgid "Danish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:86
+#: release/2.9.1/inc/addons/localize-maps.php:86
+#: release/2.9.2/inc/addons/localize-maps.php:86
+msgid "German"
+msgstr ""
+
+#: inc/addons/localize-maps.php:87
+#: release/2.9.1/inc/addons/localize-maps.php:87
+#: release/2.9.2/inc/addons/localize-maps.php:87
+msgid "Greek"
+msgstr ""
+
+#: inc/addons/localize-maps.php:88
+#: release/2.9.1/inc/addons/localize-maps.php:88
+#: release/2.9.2/inc/addons/localize-maps.php:88
+msgid "English"
+msgstr ""
+
+#: inc/addons/localize-maps.php:89
+#: release/2.9.1/inc/addons/localize-maps.php:89
+#: release/2.9.2/inc/addons/localize-maps.php:89
+msgid "English (Australian)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:90
+#: release/2.9.1/inc/addons/localize-maps.php:90
+#: release/2.9.2/inc/addons/localize-maps.php:90
+msgid "English (Great Britain)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:91
+#: release/2.9.1/inc/addons/localize-maps.php:91
+#: release/2.9.2/inc/addons/localize-maps.php:91
+msgid "Spanish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:93
+#: release/2.9.1/inc/addons/localize-maps.php:93
+#: release/2.9.2/inc/addons/localize-maps.php:93
+msgid "Farsi"
+msgstr ""
+
+#: inc/addons/localize-maps.php:94
+#: release/2.9.1/inc/addons/localize-maps.php:94
+#: release/2.9.2/inc/addons/localize-maps.php:94
+msgid "Finnish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:95
+#: release/2.9.1/inc/addons/localize-maps.php:95
+#: release/2.9.2/inc/addons/localize-maps.php:95
+msgid "Filipino"
+msgstr ""
+
+#: inc/addons/localize-maps.php:96
+#: release/2.9.1/inc/addons/localize-maps.php:96
+#: release/2.9.2/inc/addons/localize-maps.php:96
+msgid "French"
+msgstr ""
+
+#: inc/addons/localize-maps.php:97
+#: release/2.9.1/inc/addons/localize-maps.php:97
+#: release/2.9.2/inc/addons/localize-maps.php:97
+msgid "Galician"
+msgstr ""
+
+#: inc/addons/localize-maps.php:98
+#: release/2.9.1/inc/addons/localize-maps.php:98
+#: release/2.9.2/inc/addons/localize-maps.php:98
+msgid "Gujarati"
+msgstr ""
+
+#: inc/addons/localize-maps.php:99
+#: release/2.9.1/inc/addons/localize-maps.php:99
+#: release/2.9.2/inc/addons/localize-maps.php:99
+msgid "Hindi"
+msgstr ""
+
+#: inc/addons/localize-maps.php:100
+#: release/2.9.1/inc/addons/localize-maps.php:100
+#: release/2.9.2/inc/addons/localize-maps.php:100
+msgid "Croatian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:101
+#: release/2.9.1/inc/addons/localize-maps.php:101
+#: release/2.9.2/inc/addons/localize-maps.php:101
+msgid "Hungarian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:102
+#: release/2.9.1/inc/addons/localize-maps.php:102
+#: release/2.9.2/inc/addons/localize-maps.php:102
+msgid "Indonesian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:103
+#: release/2.9.1/inc/addons/localize-maps.php:103
+#: release/2.9.2/inc/addons/localize-maps.php:103
+msgid "Italian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:104
+#: release/2.9.1/inc/addons/localize-maps.php:104
+#: release/2.9.2/inc/addons/localize-maps.php:104
+msgid "Hebrew"
+msgstr ""
+
+#: inc/addons/localize-maps.php:105
+#: release/2.9.1/inc/addons/localize-maps.php:105
+#: release/2.9.2/inc/addons/localize-maps.php:105
+msgid "Japanese"
+msgstr ""
+
+#: inc/addons/localize-maps.php:106
+#: release/2.9.1/inc/addons/localize-maps.php:106
+#: release/2.9.2/inc/addons/localize-maps.php:106
+msgid "Kannada"
+msgstr ""
+
+#: inc/addons/localize-maps.php:107
+#: release/2.9.1/inc/addons/localize-maps.php:107
+#: release/2.9.2/inc/addons/localize-maps.php:107
+msgid "Korean"
+msgstr ""
+
+#: inc/addons/localize-maps.php:108
+#: release/2.9.1/inc/addons/localize-maps.php:108
+#: release/2.9.2/inc/addons/localize-maps.php:108
+msgid "Lithuanian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:109
+#: release/2.9.1/inc/addons/localize-maps.php:109
+#: release/2.9.2/inc/addons/localize-maps.php:109
+msgid "Latvian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:110
+#: release/2.9.1/inc/addons/localize-maps.php:110
+#: release/2.9.2/inc/addons/localize-maps.php:110
+msgid "Malayalam"
+msgstr ""
+
+#: inc/addons/localize-maps.php:111
+#: release/2.9.1/inc/addons/localize-maps.php:111
+#: release/2.9.2/inc/addons/localize-maps.php:111
+msgid "Marathi"
+msgstr ""
+
+#: inc/addons/localize-maps.php:112
+#: release/2.9.1/inc/addons/localize-maps.php:112
+#: release/2.9.2/inc/addons/localize-maps.php:112
+msgid "Dutch"
+msgstr ""
+
+#: inc/addons/localize-maps.php:113
+#: release/2.9.1/inc/addons/localize-maps.php:113
+#: release/2.9.2/inc/addons/localize-maps.php:113
+msgid "Norwegian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:114
+#: release/2.9.1/inc/addons/localize-maps.php:114
+#: release/2.9.2/inc/addons/localize-maps.php:114
+msgid "Polish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:115
+#: release/2.9.1/inc/addons/localize-maps.php:115
+#: release/2.9.2/inc/addons/localize-maps.php:115
+msgid "Portuguese"
+msgstr ""
+
+#: inc/addons/localize-maps.php:116
+#: release/2.9.1/inc/addons/localize-maps.php:116
+#: release/2.9.2/inc/addons/localize-maps.php:116
+msgid "Portuguese (Brazil)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:117
+#: release/2.9.1/inc/addons/localize-maps.php:117
+#: release/2.9.2/inc/addons/localize-maps.php:117
+msgid "Portuguese (Portugal)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:118
+#: release/2.9.1/inc/addons/localize-maps.php:118
+#: release/2.9.2/inc/addons/localize-maps.php:118
+msgid "Romanian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:119
+#: release/2.9.1/inc/addons/localize-maps.php:119
+#: release/2.9.2/inc/addons/localize-maps.php:119
+msgid "Russian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:120
+#: release/2.9.1/inc/addons/localize-maps.php:120
+#: release/2.9.2/inc/addons/localize-maps.php:120
+msgid "Slovak"
+msgstr ""
+
+#: inc/addons/localize-maps.php:121
+#: release/2.9.1/inc/addons/localize-maps.php:121
+#: release/2.9.2/inc/addons/localize-maps.php:121
+msgid "Slovenian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:122
+#: release/2.9.1/inc/addons/localize-maps.php:122
+#: release/2.9.2/inc/addons/localize-maps.php:122
+msgid "Serbian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:123
+#: release/2.9.1/inc/addons/localize-maps.php:123
+#: release/2.9.2/inc/addons/localize-maps.php:123
+msgid "Swedish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:124
+#: release/2.9.1/inc/addons/localize-maps.php:124
+#: release/2.9.2/inc/addons/localize-maps.php:124
+msgid "Tagalog"
+msgstr ""
+
+#: inc/addons/localize-maps.php:125
+#: release/2.9.1/inc/addons/localize-maps.php:125
+#: release/2.9.2/inc/addons/localize-maps.php:125
+msgid "Tamil"
+msgstr ""
+
+#: inc/addons/localize-maps.php:126
+#: release/2.9.1/inc/addons/localize-maps.php:126
+#: release/2.9.2/inc/addons/localize-maps.php:126
+msgid "Telugu"
+msgstr ""
+
+#: inc/addons/localize-maps.php:127
+#: release/2.9.1/inc/addons/localize-maps.php:127
+#: release/2.9.2/inc/addons/localize-maps.php:127
+msgid "Thai"
+msgstr ""
+
+#: inc/addons/localize-maps.php:128
+#: release/2.9.1/inc/addons/localize-maps.php:128
+#: release/2.9.2/inc/addons/localize-maps.php:128
+msgid "Turkish"
+msgstr ""
+
+#: inc/addons/localize-maps.php:129
+#: release/2.9.1/inc/addons/localize-maps.php:129
+#: release/2.9.2/inc/addons/localize-maps.php:129
+msgid "Ukrainian"
+msgstr ""
+
+#: inc/addons/localize-maps.php:130
+#: release/2.9.1/inc/addons/localize-maps.php:130
+#: release/2.9.2/inc/addons/localize-maps.php:130
+msgid "Vietnamese"
+msgstr ""
+
+#: inc/addons/localize-maps.php:131
+#: release/2.9.1/inc/addons/localize-maps.php:131
+#: release/2.9.2/inc/addons/localize-maps.php:131
+msgid "Chinese (simplified)"
+msgstr ""
+
+#: inc/addons/localize-maps.php:132
+#: release/2.9.1/inc/addons/localize-maps.php:132
+#: release/2.9.2/inc/addons/localize-maps.php:132
+msgid "Chinese (traditional)"
+msgstr ""
+
+#: inc/addons/location-shortcode.php:92 inc/addons/location-shortcode.php:123
+#: release/2.9.1/inc/addons/location-shortcode.php:92
+#: release/2.9.1/inc/addons/location-shortcode.php:123
+#: release/2.9.2/inc/addons/location-shortcode.php:92
+#: release/2.9.2/inc/addons/location-shortcode.php:123
+msgid "Could not create map from shortcode"
+msgstr ""
+
+#: inc/addons/places.php:63 release/2.9.1/inc/addons/places.php:63
+#: release/2.9.2/inc/addons/places.php:63
+msgid "Accounting"
+msgstr ""
+
+#: inc/addons/places.php:64 release/2.9.1/inc/addons/places.php:64
+#: release/2.9.2/inc/addons/places.php:64
+msgid "Airport"
+msgstr ""
+
+#: inc/addons/places.php:65 release/2.9.1/inc/addons/places.php:65
+#: release/2.9.2/inc/addons/places.php:65
+msgid "Amusement park"
+msgstr ""
+
+#: inc/addons/places.php:66 release/2.9.1/inc/addons/places.php:66
+#: release/2.9.2/inc/addons/places.php:66
+msgid "Aquarium"
+msgstr ""
+
+#: inc/addons/places.php:67 release/2.9.1/inc/addons/places.php:67
+#: release/2.9.2/inc/addons/places.php:67
+msgid "Art gallery"
+msgstr ""
+
+#: inc/addons/places.php:68 release/2.9.1/inc/addons/places.php:68
+#: release/2.9.2/inc/addons/places.php:68
+msgid "ATM"
+msgstr ""
+
+#: inc/addons/places.php:69 release/2.9.1/inc/addons/places.php:69
+#: release/2.9.2/inc/addons/places.php:69
+msgid "Bakery"
+msgstr ""
+
+#: inc/addons/places.php:70 release/2.9.1/inc/addons/places.php:70
+#: release/2.9.2/inc/addons/places.php:70
+msgid "Bank"
+msgstr ""
+
+#: inc/addons/places.php:71 release/2.9.1/inc/addons/places.php:71
+#: release/2.9.2/inc/addons/places.php:71
+msgid "Bar"
+msgstr ""
+
+#: inc/addons/places.php:72 release/2.9.1/inc/addons/places.php:72
+#: release/2.9.2/inc/addons/places.php:72
+msgid "Beauty salon"
+msgstr ""
+
+#: inc/addons/places.php:73 release/2.9.1/inc/addons/places.php:73
+#: release/2.9.2/inc/addons/places.php:73
+msgid "Bicycle store"
+msgstr ""
+
+#: inc/addons/places.php:74 release/2.9.1/inc/addons/places.php:74
+#: release/2.9.2/inc/addons/places.php:74
+msgid "Book store"
+msgstr ""
+
+#: inc/addons/places.php:75 release/2.9.1/inc/addons/places.php:75
+#: release/2.9.2/inc/addons/places.php:75
+msgid "Bowling alley"
+msgstr ""
+
+#: inc/addons/places.php:76 release/2.9.1/inc/addons/places.php:76
+#: release/2.9.2/inc/addons/places.php:76
+msgid "Bus station"
+msgstr ""
+
+#: inc/addons/places.php:77 release/2.9.1/inc/addons/places.php:77
+#: release/2.9.2/inc/addons/places.php:77
+msgid "Cafe"
+msgstr ""
+
+#: inc/addons/places.php:78 release/2.9.1/inc/addons/places.php:78
+#: release/2.9.2/inc/addons/places.php:78
+msgid "Campground"
+msgstr ""
+
+#: inc/addons/places.php:79 release/2.9.1/inc/addons/places.php:79
+#: release/2.9.2/inc/addons/places.php:79
+msgid "Car dealer"
+msgstr ""
+
+#: inc/addons/places.php:80 release/2.9.1/inc/addons/places.php:80
+#: release/2.9.2/inc/addons/places.php:80
+msgid "Car rental"
+msgstr ""
+
+#: inc/addons/places.php:81 release/2.9.1/inc/addons/places.php:81
+#: release/2.9.2/inc/addons/places.php:81
+msgid "Car repair"
+msgstr ""
+
+#: inc/addons/places.php:82 release/2.9.1/inc/addons/places.php:82
+#: release/2.9.2/inc/addons/places.php:82
+msgid "Car wash"
+msgstr ""
+
+#: inc/addons/places.php:83 release/2.9.1/inc/addons/places.php:83
+#: release/2.9.2/inc/addons/places.php:83
+msgid "Casino"
+msgstr ""
+
+#: inc/addons/places.php:84 release/2.9.1/inc/addons/places.php:84
+#: release/2.9.2/inc/addons/places.php:84
+msgid "Cemetery"
+msgstr ""
+
+#: inc/addons/places.php:85 release/2.9.1/inc/addons/places.php:85
+#: release/2.9.2/inc/addons/places.php:85
+msgid "Church"
+msgstr ""
+
+#: inc/addons/places.php:86 release/2.9.1/inc/addons/places.php:86
+#: release/2.9.2/inc/addons/places.php:86
+msgid "City hall"
+msgstr ""
+
+#: inc/addons/places.php:87 release/2.9.1/inc/addons/places.php:87
+#: release/2.9.2/inc/addons/places.php:87
+msgid "Clothing store"
+msgstr ""
+
+#: inc/addons/places.php:88 release/2.9.1/inc/addons/places.php:88
+#: release/2.9.2/inc/addons/places.php:88
+msgid "Convenience store"
+msgstr ""
+
+#: inc/addons/places.php:89 release/2.9.1/inc/addons/places.php:89
+#: release/2.9.2/inc/addons/places.php:89
+msgid "Courthouse"
+msgstr ""
+
+#: inc/addons/places.php:90 release/2.9.1/inc/addons/places.php:90
+#: release/2.9.2/inc/addons/places.php:90
+msgid "Dentist"
+msgstr ""
+
+#: inc/addons/places.php:91 release/2.9.1/inc/addons/places.php:91
+#: release/2.9.2/inc/addons/places.php:91
+msgid "Department store"
+msgstr ""
+
+#: inc/addons/places.php:92 release/2.9.1/inc/addons/places.php:92
+#: release/2.9.2/inc/addons/places.php:92
+msgid "Doctor"
+msgstr ""
+
+#: inc/addons/places.php:93 release/2.9.1/inc/addons/places.php:93
+#: release/2.9.2/inc/addons/places.php:93
+msgid "Electrician"
+msgstr ""
+
+#: inc/addons/places.php:94 release/2.9.1/inc/addons/places.php:94
+#: release/2.9.2/inc/addons/places.php:94
+msgid "Electronics store"
+msgstr ""
+
+#: inc/addons/places.php:95 release/2.9.1/inc/addons/places.php:95
+#: release/2.9.2/inc/addons/places.php:95
+msgid "Embassy"
+msgstr ""
+
+#: inc/addons/places.php:96 release/2.9.1/inc/addons/places.php:96
+#: release/2.9.2/inc/addons/places.php:96
+msgid "Establishment"
+msgstr ""
+
+#: inc/addons/places.php:97 release/2.9.1/inc/addons/places.php:97
+#: release/2.9.2/inc/addons/places.php:97
+msgid "Finance"
+msgstr ""
+
+#: inc/addons/places.php:98 release/2.9.1/inc/addons/places.php:98
+#: release/2.9.2/inc/addons/places.php:98
+msgid "Fire station"
+msgstr ""
+
+#: inc/addons/places.php:99 release/2.9.1/inc/addons/places.php:99
+#: release/2.9.2/inc/addons/places.php:99
+msgid "Florist"
+msgstr ""
+
+#: inc/addons/places.php:100 release/2.9.1/inc/addons/places.php:100
+#: release/2.9.2/inc/addons/places.php:100
+msgid "Food"
+msgstr ""
+
+#: inc/addons/places.php:101 release/2.9.1/inc/addons/places.php:101
+#: release/2.9.2/inc/addons/places.php:101
+msgid "Funeral home"
+msgstr ""
+
+#: inc/addons/places.php:102 release/2.9.1/inc/addons/places.php:102
+#: release/2.9.2/inc/addons/places.php:102
+msgid "Furniture store"
+msgstr ""
+
+#: inc/addons/places.php:103 release/2.9.1/inc/addons/places.php:103
+#: release/2.9.2/inc/addons/places.php:103
+msgid "Gas station"
+msgstr ""
+
+#: inc/addons/places.php:104 release/2.9.1/inc/addons/places.php:104
+#: release/2.9.2/inc/addons/places.php:104
+msgid "General contractor"
+msgstr ""
+
+#: inc/addons/places.php:105 release/2.9.1/inc/addons/places.php:105
+#: release/2.9.2/inc/addons/places.php:105
+msgid "Grocery or supermarket"
+msgstr ""
+
+#: inc/addons/places.php:106 release/2.9.1/inc/addons/places.php:106
+#: release/2.9.2/inc/addons/places.php:106
+msgid "Gym"
+msgstr ""
+
+#: inc/addons/places.php:107 release/2.9.1/inc/addons/places.php:107
+#: release/2.9.2/inc/addons/places.php:107
+msgid "Hair care"
+msgstr ""
+
+#: inc/addons/places.php:108 release/2.9.1/inc/addons/places.php:108
+#: release/2.9.2/inc/addons/places.php:108
+msgid "Hardware store"
+msgstr ""
+
+#: inc/addons/places.php:109 release/2.9.1/inc/addons/places.php:109
+#: release/2.9.2/inc/addons/places.php:109
+msgid "Health"
+msgstr ""
+
+#: inc/addons/places.php:110 release/2.9.1/inc/addons/places.php:110
+#: release/2.9.2/inc/addons/places.php:110
+msgid "Hindu temple"
+msgstr ""
+
+#: inc/addons/places.php:111 release/2.9.1/inc/addons/places.php:111
+#: release/2.9.2/inc/addons/places.php:111
+msgid "Home goods store"
+msgstr ""
+
+#: inc/addons/places.php:112 release/2.9.1/inc/addons/places.php:112
+#: release/2.9.2/inc/addons/places.php:112
+msgid "Hospital"
+msgstr ""
+
+#: inc/addons/places.php:113 release/2.9.1/inc/addons/places.php:113
+#: release/2.9.2/inc/addons/places.php:113
+msgid "Insurance agency"
+msgstr ""
+
+#: inc/addons/places.php:114 release/2.9.1/inc/addons/places.php:114
+#: release/2.9.2/inc/addons/places.php:114
+msgid "Jewelry store"
+msgstr ""
+
+#: inc/addons/places.php:115 release/2.9.1/inc/addons/places.php:115
+#: release/2.9.2/inc/addons/places.php:115
+msgid "Laundry"
+msgstr ""
+
+#: inc/addons/places.php:116 release/2.9.1/inc/addons/places.php:116
+#: release/2.9.2/inc/addons/places.php:116
+msgid "Lawyer"
+msgstr ""
+
+#: inc/addons/places.php:117 release/2.9.1/inc/addons/places.php:117
+#: release/2.9.2/inc/addons/places.php:117
+msgid "Library"
+msgstr ""
+
+#: inc/addons/places.php:118 release/2.9.1/inc/addons/places.php:118
+#: release/2.9.2/inc/addons/places.php:118
+msgid "Liquor store"
+msgstr ""
+
+#: inc/addons/places.php:119 release/2.9.1/inc/addons/places.php:119
+#: release/2.9.2/inc/addons/places.php:119
+msgid "Local government office"
+msgstr ""
+
+#: inc/addons/places.php:120 release/2.9.1/inc/addons/places.php:120
+#: release/2.9.2/inc/addons/places.php:120
+msgid "Locksmith"
+msgstr ""
+
+#: inc/addons/places.php:121 release/2.9.1/inc/addons/places.php:121
+#: release/2.9.2/inc/addons/places.php:121
+msgid "Lodging"
+msgstr ""
+
+#: inc/addons/places.php:122 release/2.9.1/inc/addons/places.php:122
+#: release/2.9.2/inc/addons/places.php:122
+msgid "Meal delivery"
+msgstr ""
+
+#: inc/addons/places.php:123 release/2.9.1/inc/addons/places.php:123
+#: release/2.9.2/inc/addons/places.php:123
+msgid "Meal takeaway"
+msgstr ""
+
+#: inc/addons/places.php:124 release/2.9.1/inc/addons/places.php:124
+#: release/2.9.2/inc/addons/places.php:124
+msgid "Mosque"
+msgstr ""
+
+#: inc/addons/places.php:125 release/2.9.1/inc/addons/places.php:125
+#: release/2.9.2/inc/addons/places.php:125
+msgid "Movie rental"
+msgstr ""
+
+#: inc/addons/places.php:126 release/2.9.1/inc/addons/places.php:126
+#: release/2.9.2/inc/addons/places.php:126
+msgid "Movie theater"
+msgstr ""
+
+#: inc/addons/places.php:127 release/2.9.1/inc/addons/places.php:127
+#: release/2.9.2/inc/addons/places.php:127
+msgid "Moving company"
+msgstr ""
+
+#: inc/addons/places.php:128 release/2.9.1/inc/addons/places.php:128
+#: release/2.9.2/inc/addons/places.php:128
+msgid "Museum"
+msgstr ""
+
+#: inc/addons/places.php:129 release/2.9.1/inc/addons/places.php:129
+#: release/2.9.2/inc/addons/places.php:129
+msgid "Night club"
+msgstr ""
+
+#: inc/addons/places.php:130 release/2.9.1/inc/addons/places.php:130
+#: release/2.9.2/inc/addons/places.php:130
+msgid "Painter"
+msgstr ""
+
+#: inc/addons/places.php:131 release/2.9.1/inc/addons/places.php:131
+#: release/2.9.2/inc/addons/places.php:131
+msgid "Park"
+msgstr ""
+
+#: inc/addons/places.php:132 release/2.9.1/inc/addons/places.php:132
+#: release/2.9.2/inc/addons/places.php:132
+msgid "Parking"
+msgstr ""
+
+#: inc/addons/places.php:133 release/2.9.1/inc/addons/places.php:133
+#: release/2.9.2/inc/addons/places.php:133
+msgid "Pet store"
+msgstr ""
+
+#: inc/addons/places.php:134 release/2.9.1/inc/addons/places.php:134
+#: release/2.9.2/inc/addons/places.php:134
+msgid "Pharmacy"
+msgstr ""
+
+#: inc/addons/places.php:135 release/2.9.1/inc/addons/places.php:135
+#: release/2.9.2/inc/addons/places.php:135
+msgid "Physiotherapist"
+msgstr ""
+
+#: inc/addons/places.php:136 release/2.9.1/inc/addons/places.php:136
+#: release/2.9.2/inc/addons/places.php:136
+msgid "Place of worship"
+msgstr ""
+
+#: inc/addons/places.php:137 release/2.9.1/inc/addons/places.php:137
+#: release/2.9.2/inc/addons/places.php:137
+msgid "Plumber"
+msgstr ""
+
+#: inc/addons/places.php:138 release/2.9.1/inc/addons/places.php:138
+#: release/2.9.2/inc/addons/places.php:138
+msgid "Police"
+msgstr ""
+
+#: inc/addons/places.php:139 release/2.9.1/inc/addons/places.php:139
+#: release/2.9.2/inc/addons/places.php:139
+msgid "Post office"
+msgstr ""
+
+#: inc/addons/places.php:140 release/2.9.1/inc/addons/places.php:140
+#: release/2.9.2/inc/addons/places.php:140
+msgid "Real estate agency"
+msgstr ""
+
+#: inc/addons/places.php:141 release/2.9.1/inc/addons/places.php:141
+#: release/2.9.2/inc/addons/places.php:141
+msgid "Restaurant"
+msgstr ""
+
+#: inc/addons/places.php:142 release/2.9.1/inc/addons/places.php:142
+#: release/2.9.2/inc/addons/places.php:142
+msgid "Roofing contractor"
+msgstr ""
+
+#: inc/addons/places.php:143 release/2.9.1/inc/addons/places.php:143
+#: release/2.9.2/inc/addons/places.php:143
+msgid "RV park"
+msgstr ""
+
+#: inc/addons/places.php:144 release/2.9.1/inc/addons/places.php:144
+#: release/2.9.2/inc/addons/places.php:144
+msgid "School"
+msgstr ""
+
+#: inc/addons/places.php:145 release/2.9.1/inc/addons/places.php:145
+#: release/2.9.2/inc/addons/places.php:145
+msgid "Shoe store"
+msgstr ""
+
+#: inc/addons/places.php:146 release/2.9.1/inc/addons/places.php:146
+#: release/2.9.2/inc/addons/places.php:146
+msgid "Shopping mall"
+msgstr ""
+
+#: inc/addons/places.php:147 release/2.9.1/inc/addons/places.php:147
+#: release/2.9.2/inc/addons/places.php:147
+msgid "Spa"
+msgstr ""
+
+#: inc/addons/places.php:148 release/2.9.1/inc/addons/places.php:148
+#: release/2.9.2/inc/addons/places.php:148
+msgid "Stadium"
+msgstr ""
+
+#: inc/addons/places.php:149 release/2.9.1/inc/addons/places.php:149
+#: release/2.9.2/inc/addons/places.php:149
+msgid "Storage"
+msgstr ""
+
+#: inc/addons/places.php:150 release/2.9.1/inc/addons/places.php:150
+#: release/2.9.2/inc/addons/places.php:150
+msgid "Store"
+msgstr ""
+
+#: inc/addons/places.php:151 release/2.9.1/inc/addons/places.php:151
+#: release/2.9.2/inc/addons/places.php:151
+msgid "Subway station"
+msgstr ""
+
+#: inc/addons/places.php:152 release/2.9.1/inc/addons/places.php:152
+#: release/2.9.2/inc/addons/places.php:152
+msgid "Synagogue"
+msgstr ""
+
+#: inc/addons/places.php:153 release/2.9.1/inc/addons/places.php:153
+#: release/2.9.2/inc/addons/places.php:153
+msgid "Taxi stand"
+msgstr ""
+
+#: inc/addons/places.php:154 release/2.9.1/inc/addons/places.php:154
+#: release/2.9.2/inc/addons/places.php:154
+msgid "Train station"
+msgstr ""
+
+#: inc/addons/places.php:155 release/2.9.1/inc/addons/places.php:155
+#: release/2.9.2/inc/addons/places.php:155
+msgid "Travel agency"
+msgstr ""
+
+#: inc/addons/places.php:156 release/2.9.1/inc/addons/places.php:156
+#: release/2.9.2/inc/addons/places.php:156
+msgid "University"
+msgstr ""
+
+#: inc/addons/places.php:157 release/2.9.1/inc/addons/places.php:157
+#: release/2.9.2/inc/addons/places.php:157
+msgid "Veterinary care"
+msgstr ""
+
+#: inc/addons/places.php:158 release/2.9.1/inc/addons/places.php:158
+#: release/2.9.2/inc/addons/places.php:158
+msgid "Zoo"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:108
+#: release/2.9.1/inc/addons/responsive-maps.php:103
+#: release/2.9.2/inc/addons/responsive-maps.php:108
+msgid "Responsive maps"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:114
+#: release/2.9.1/inc/addons/responsive-maps.php:109
+#: release/2.9.2/inc/addons/responsive-maps.php:114
+msgid "Make these maps responsive"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:123
+#: release/2.9.1/inc/addons/responsive-maps.php:118
+#: release/2.9.2/inc/addons/responsive-maps.php:123
+msgid ""
+"You can toggle the responsive flag in your shortcodes with "
+"<code>is_responsive=\"yes|no\"</code> shortcode attribute. You can also "
+"specify which ones of your maps should always be responsive."
+msgstr ""
+
+#: inc/addons/responsive-maps.php:135
+#: release/2.9.1/inc/addons/responsive-maps.php:130
+#: release/2.9.2/inc/addons/responsive-maps.php:135
+msgid "Auto-generated maps"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:151
+#: release/2.9.1/inc/addons/responsive-maps.php:146
+#: release/2.9.2/inc/addons/responsive-maps.php:151
+msgid ""
+"All my maps <small>(except the ones I manually exclude with "
+"<code>is_responsive=\"no\"</code> shortcode attribute)</small>"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:159
+#: release/2.9.1/inc/addons/responsive-maps.php:154
+#: release/2.9.2/inc/addons/responsive-maps.php:159
+msgid "Respect shortcode width attribute, if set"
+msgstr ""
+
+#: inc/addons/responsive-maps.php:160
+#: release/2.9.1/inc/addons/responsive-maps.php:155
+#: release/2.9.2/inc/addons/responsive-maps.php:160
+msgid ""
+"If set, this option will force your maps with width shortcode attribute set "
+"to scale relative to their original size, rather then expanding the full "
+"width of parent element."
+msgstr ""
+
+#: inc/addons/traffic-overlay.php:58
+#: release/2.9.1/inc/addons/traffic-overlay.php:58
+#: release/2.9.2/inc/addons/traffic-overlay.php:58
+msgid "Show traffic"
+msgstr ""
+
+#: inc/addons/user-checkin.php:778
+#: release/2.9.1/inc/addons/user-checkin.php:778
+#: release/2.9.2/inc/addons/user-checkin.php:778
+msgid "Guest"
+msgstr ""
+
+#: inc/addons/user-checkin.php:783
+#: release/2.9.1/inc/addons/user-checkin.php:783
+#: release/2.9.2/inc/addons/user-checkin.php:783
+msgid "By %1$s, on %2$s"
+msgstr ""
+
+#: inc/addons/user-checkin.php:785
+#: release/2.9.1/inc/addons/user-checkin.php:785
+#: release/2.9.2/inc/addons/user-checkin.php:785
+msgid "j F, Y (G:i)"
+msgstr ""
+
+#: inc/addons/user-checkin.php:803 inc/addons/user-checkin.php:1006
+#: release/2.9.1/inc/addons/user-checkin.php:803
+#: release/2.9.1/inc/addons/user-checkin.php:1006
+#: release/2.9.2/inc/addons/user-checkin.php:803
+#: release/2.9.2/inc/addons/user-checkin.php:1006
+msgid "Edit"
+msgstr ""
+
+#: inc/addons/user-checkin.php:919
+#: release/2.9.1/inc/addons/user-checkin.php:919
+#: release/2.9.2/inc/addons/user-checkin.php:919
+msgid "Google Maps: Checkins"
+msgstr ""
+
+#: inc/addons/user-checkin.php:924
+#: release/2.9.1/inc/addons/user-checkin.php:924
+#: release/2.9.2/inc/addons/user-checkin.php:924
+msgid "Check in my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:928
+#: release/2.9.1/inc/addons/user-checkin.php:928
+#: release/2.9.2/inc/addons/user-checkin.php:928
+msgid "Never submit my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:929
+#: release/2.9.1/inc/addons/user-checkin.php:929
+#: release/2.9.2/inc/addons/user-checkin.php:929
+msgid "Always ask me before submitting my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:930
+#: release/2.9.1/inc/addons/user-checkin.php:930
+#: release/2.9.2/inc/addons/user-checkin.php:930
+msgid "Submit my location and don´t ask me"
+msgstr ""
+
+#: inc/addons/user-checkin.php:935
+#: release/2.9.1/inc/addons/user-checkin.php:935
+#: release/2.9.2/inc/addons/user-checkin.php:935
+msgid "Default privacy setting"
+msgstr ""
+
+#: inc/addons/user-checkin.php:938
+#: release/2.9.1/inc/addons/user-checkin.php:938
+#: release/2.9.2/inc/addons/user-checkin.php:938
+msgid "Only I can see my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:939
+#: release/2.9.1/inc/addons/user-checkin.php:939
+#: release/2.9.2/inc/addons/user-checkin.php:939
+msgid "Only logged in users can see my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:940
+#: release/2.9.1/inc/addons/user-checkin.php:940
+#: release/2.9.2/inc/addons/user-checkin.php:940
+msgid "Everybody can see my location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:945
+#: release/2.9.1/inc/addons/user-checkin.php:945
+#: release/2.9.2/inc/addons/user-checkin.php:945
+msgid "My locations"
+msgstr ""
+
+#: inc/addons/user-checkin.php:991 inc/addons/user-checkin.php:1038
+#: release/2.9.1/inc/addons/user-checkin.php:991
+#: release/2.9.1/inc/addons/user-checkin.php:1038
+#: release/2.9.2/inc/addons/user-checkin.php:991
+#: release/2.9.2/inc/addons/user-checkin.php:1038
+msgid "Count"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1000 inc/addons/user-checkin.php:1743
+#: release/2.9.1/inc/addons/user-checkin.php:1000
+#: release/2.9.1/inc/addons/user-checkin.php:1743
+#: release/2.9.2/inc/addons/user-checkin.php:1000
+#: release/2.9.2/inc/addons/user-checkin.php:1743
+msgid "Only me"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1001 inc/addons/user-checkin.php:1744
+#: release/2.9.1/inc/addons/user-checkin.php:1001
+#: release/2.9.1/inc/addons/user-checkin.php:1744
+#: release/2.9.2/inc/addons/user-checkin.php:1001
+#: release/2.9.2/inc/addons/user-checkin.php:1744
+msgid "Logged in users"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1002 inc/addons/user-checkin.php:1745
+#: release/2.9.1/inc/addons/user-checkin.php:1002
+#: release/2.9.1/inc/addons/user-checkin.php:1745
+#: release/2.9.2/inc/addons/user-checkin.php:1002
+#: release/2.9.2/inc/addons/user-checkin.php:1745
+msgid "Everybody"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1008 inc/addons/user-checkin.php:1750
+#: inc/class-agm-admin-maps.php:300 inc/class-agm-admin-maps.php:314
+#: inc/class-agm-admin-maps.php:319 inc/class-agm-admin-maps.php:360
+#: release/2.9.1/inc/addons/user-checkin.php:1008
+#: release/2.9.1/inc/addons/user-checkin.php:1750
+#: release/2.9.1/inc/class-agm-admin-maps.php:300
+#: release/2.9.1/inc/class-agm-admin-maps.php:314
+#: release/2.9.1/inc/class-agm-admin-maps.php:319
+#: release/2.9.1/inc/class-agm-admin-maps.php:360
+#: release/2.9.2/inc/addons/user-checkin.php:1008
+#: release/2.9.2/inc/addons/user-checkin.php:1750
+#: release/2.9.2/inc/class-agm-admin-maps.php:300
+#: release/2.9.2/inc/class-agm-admin-maps.php:314
+#: release/2.9.2/inc/class-agm-admin-maps.php:319
+#: release/2.9.2/inc/class-agm-admin-maps.php:360
+msgid "Delete"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1009
+#: release/2.9.1/inc/addons/user-checkin.php:1009
+#: release/2.9.2/inc/addons/user-checkin.php:1009
+msgid "Don´t delete"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1016
+#: release/2.9.1/inc/addons/user-checkin.php:1016
+#: release/2.9.2/inc/addons/user-checkin.php:1016
+msgid "Lat"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1020
+#: release/2.9.1/inc/addons/user-checkin.php:1020
+#: release/2.9.2/inc/addons/user-checkin.php:1020
+msgid "Long"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1024 inc/addons/user-checkin.php:1731
+#: inc/class-agm-admin-maps.php:358
+#: release/2.9.1/inc/addons/user-checkin.php:1024
+#: release/2.9.1/inc/addons/user-checkin.php:1731
+#: release/2.9.1/inc/class-agm-admin-maps.php:358
+#: release/2.9.2/inc/addons/user-checkin.php:1024
+#: release/2.9.2/inc/addons/user-checkin.php:1731
+#: release/2.9.2/inc/class-agm-admin-maps.php:358
+msgid "Title"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1028 inc/addons/user-checkin.php:1735
+#: release/2.9.1/inc/addons/user-checkin.php:1028
+#: release/2.9.1/inc/addons/user-checkin.php:1735
+#: release/2.9.2/inc/addons/user-checkin.php:1028
+#: release/2.9.2/inc/addons/user-checkin.php:1735
+msgid "Description"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1032
+#: release/2.9.1/inc/addons/user-checkin.php:1032
+#: release/2.9.2/inc/addons/user-checkin.php:1032
+msgid "Last modified"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1036
+#: release/2.9.1/inc/addons/user-checkin.php:1036
+#: release/2.9.2/inc/addons/user-checkin.php:1036
+msgid "created on"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1043
+#: release/2.9.1/inc/addons/user-checkin.php:1043
+#: release/2.9.2/inc/addons/user-checkin.php:1043
+msgid "OK"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1044 inc/addons/user-checkin.php:1751
+#: inc/class-agm-admin-maps.php:320
+#: release/2.9.1/inc/addons/user-checkin.php:1044
+#: release/2.9.1/inc/addons/user-checkin.php:1751
+#: release/2.9.1/inc/class-agm-admin-maps.php:320
+#: release/2.9.2/inc/addons/user-checkin.php:1044
+#: release/2.9.2/inc/addons/user-checkin.php:1751
+#: release/2.9.2/inc/class-agm-admin-maps.php:320
+msgid "Cancel"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1245
+#: release/2.9.1/inc/addons/user-checkin.php:1245
+#: release/2.9.2/inc/addons/user-checkin.php:1245
+msgid "User check-ins"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1252 inc/class-agm-admin-maps.php:33
+#: release/2.9.1/inc/addons/user-checkin.php:1252
+#: release/2.9.1/inc/class-agm-admin-maps.php:33
+#: release/2.9.2/inc/addons/user-checkin.php:1252
+#: release/2.9.2/inc/class-agm-admin-maps.php:33
+msgid "Overview"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1260
+#: release/2.9.1/inc/addons/user-checkin.php:1260
+#: release/2.9.2/inc/addons/user-checkin.php:1260
+msgid "Allow check-ins"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1268
+#: release/2.9.1/inc/addons/user-checkin.php:1268
+#: release/2.9.2/inc/addons/user-checkin.php:1268
+msgid "Checkin details"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1286
+#: release/2.9.1/inc/addons/user-checkin.php:1286
+#: release/2.9.2/inc/addons/user-checkin.php:1286
+msgid "Checkin limits"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1294
+#: release/2.9.1/inc/addons/user-checkin.php:1294
+#: release/2.9.2/inc/addons/user-checkin.php:1294
+msgid "Map defaults"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1310 inc/addons/user-checkin.php:1314
+#: release/2.9.1/inc/addons/user-checkin.php:1310
+#: release/2.9.1/inc/addons/user-checkin.php:1314
+#: release/2.9.2/inc/addons/user-checkin.php:1310
+#: release/2.9.2/inc/addons/user-checkin.php:1314
+msgid "Shortcode"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1311
+#: release/2.9.1/inc/addons/user-checkin.php:1311
+#: release/2.9.2/inc/addons/user-checkin.php:1311
+msgid ""
+"Try to collect the user location on the page without displaying a map. No "
+"options available."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1324
+#: release/2.9.1/inc/addons/user-checkin.php:1324
+#: release/2.9.2/inc/addons/user-checkin.php:1324
+msgid ""
+"<code>user=\"1,2\"</code>: (Filter) Show locations of these users by "
+"user-ID."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1325
+#: release/2.9.1/inc/addons/user-checkin.php:1325
+#: release/2.9.2/inc/addons/user-checkin.php:1325
+msgid ""
+"<code>role=\"admin,editor\"</code>: (Filter) Show locations of users in "
+"these roles."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1326
+#: release/2.9.1/inc/addons/user-checkin.php:1326
+#: release/2.9.2/inc/addons/user-checkin.php:1326
+msgid ""
+"<code>group=\"group1,group2\"</code>: (Filter, BuddyPress) Show locations "
+"of users in these groups."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1327
+#: release/2.9.1/inc/addons/user-checkin.php:1327
+#: release/2.9.2/inc/addons/user-checkin.php:1327
+msgid ""
+"<code>guest=\"true\"</code>: (Filter) True additionally shows locations of "
+"guests. False will only show locations of registred users."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1328
+#: release/2.9.1/inc/addons/user-checkin.php:1328
+#: release/2.9.2/inc/addons/user-checkin.php:1328
+msgid ""
+"<code>last_hour=\"24\"</code>: (Filter, time) Show locations that were "
+"added or updated within the last X hours."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1329
+#: release/2.9.1/inc/addons/user-checkin.php:1329
+#: release/2.9.2/inc/addons/user-checkin.php:1329
+msgid ""
+"<code>automatic=\"true\"</code>: Try to collect the user location on page "
+"load (same as <code>[agm_add_checkin]</code>."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1330
+#: release/2.9.1/inc/addons/user-checkin.php:1330
+#: release/2.9.2/inc/addons/user-checkin.php:1330
+msgid ""
+"<code>show_button=\"true\"</code>: Add a button below the map that allows "
+"the user to manually submit his location."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1332
+#: release/2.9.1/inc/addons/user-checkin.php:1332
+#: release/2.9.2/inc/addons/user-checkin.php:1332
+msgid "If no filter is defined then all locations will be displayed on the map."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1361
+#: release/2.9.1/inc/addons/user-checkin.php:1361
+#: release/2.9.2/inc/addons/user-checkin.php:1361
+msgid "Collect location data in the background"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1364
+#: release/2.9.1/inc/addons/user-checkin.php:1364
+#: release/2.9.2/inc/addons/user-checkin.php:1364
+msgid "Never (disable this feature)"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1365
+#: release/2.9.1/inc/addons/user-checkin.php:1365
+#: release/2.9.2/inc/addons/user-checkin.php:1365
+msgid "One checkin per user"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1366
+#: release/2.9.1/inc/addons/user-checkin.php:1366
+#: release/2.9.2/inc/addons/user-checkin.php:1366
+msgid "On every page"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1367
+#: release/2.9.1/inc/addons/user-checkin.php:1367
+#: release/2.9.2/inc/addons/user-checkin.php:1367
+msgid "Manual via shortcode [agm_add_checkin]"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1369
+#: release/2.9.1/inc/addons/user-checkin.php:1369
+#: release/2.9.2/inc/addons/user-checkin.php:1369
+msgid ""
+"Location data is only collected with user agreement.<br />Guests will be "
+"asked to submit the location on each visit. Logged-in users can "
+"additionally choose to always or never submit their location."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1376
+#: release/2.9.1/inc/addons/user-checkin.php:1376
+#: release/2.9.2/inc/addons/user-checkin.php:1376
+msgid "Only logged in users can check-in their location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1383
+#: release/2.9.1/inc/addons/user-checkin.php:1383
+#: release/2.9.2/inc/addons/user-checkin.php:1383
+msgid "Guests can check-in their location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1403
+#: release/2.9.1/inc/addons/user-checkin.php:1403
+#: release/2.9.2/inc/addons/user-checkin.php:1403
+msgid "Only save the location"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1410
+#: release/2.9.1/inc/addons/user-checkin.php:1410
+#: release/2.9.2/inc/addons/user-checkin.php:1410
+msgid "Users can edit locations and add additional information"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1412
+#: release/2.9.1/inc/addons/user-checkin.php:1412
+#: release/2.9.2/inc/addons/user-checkin.php:1412
+msgid ""
+"Logged in users can optionaly enter a title and description for their "
+"check-ins and edit the location details later."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1434
+#: release/2.9.1/inc/addons/user-checkin.php:1434
+#: release/2.9.2/inc/addons/user-checkin.php:1434
+msgid "Checkins are linked to the current post/page"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1436
+#: release/2.9.1/inc/addons/user-checkin.php:1436
+#: release/2.9.2/inc/addons/user-checkin.php:1436
+msgid ""
+"When activated all checkins are linked to the current post or page.<br "
+"/>Only works on single pages, not on special pages like search results, "
+"archive or front page."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1443
+#: release/2.9.1/inc/addons/user-checkin.php:1443
+#: release/2.9.2/inc/addons/user-checkin.php:1443
+msgid "Enable geotaging of comments"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1445
+#: release/2.9.1/inc/addons/user-checkin.php:1445
+#: release/2.9.2/inc/addons/user-checkin.php:1445
+msgid ""
+"When activated there will be a new checkbox to <code>Geotag this "
+"comment</code> in the comment form."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1464
+#: release/2.9.1/inc/addons/user-checkin.php:1464
+#: release/2.9.2/inc/addons/user-checkin.php:1464
+msgid "Max number of checkins to keep for a single user"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1469
+#: release/2.9.1/inc/addons/user-checkin.php:1469
+#: release/2.9.2/inc/addons/user-checkin.php:1469
+msgid ""
+"When a new location is checked-in and the limit is reached an older "
+"location will be removed from the users collection.<br />A high value can "
+"result in a longer loading time of maps. Value between 1-100"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1475
+#: release/2.9.1/inc/addons/user-checkin.php:1475
+#: release/2.9.2/inc/addons/user-checkin.php:1475
+msgid "Max anonyoumous guest checkins to keep"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1480
+#: release/2.9.1/inc/addons/user-checkin.php:1480
+#: release/2.9.2/inc/addons/user-checkin.php:1480
+msgid ""
+"When a new location is checked-in and the limit is reached the oldest "
+"location will be removed from the guest collection.<br />A high value can "
+"result in a longer loading time of maps. Value between 1-1000"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1486
+#: release/2.9.1/inc/addons/user-checkin.php:1486
+#: release/2.9.2/inc/addons/user-checkin.php:1486
+msgid "Catch double check-ins that are closer than"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1491
+#: release/2.9.1/inc/addons/user-checkin.php:1491
+#: release/2.9.2/inc/addons/user-checkin.php:1491
+msgid ""
+"When a user checks-in a new location, the plugin will not save the location "
+"when it is closer than this distance to an already checked-in location.<br "
+"/>Only the locations of the current user are checked. Value between 1-100"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1509
+#: release/2.9.1/inc/addons/user-checkin.php:1509
+#: release/2.9.2/inc/addons/user-checkin.php:1509
+msgid "Show maps without markers"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1511
+#: release/2.9.1/inc/addons/user-checkin.php:1511
+#: release/2.9.2/inc/addons/user-checkin.php:1511
+msgid ""
+"Choose if a map that contains no location markers should be displayed or "
+"not.<br />If an empty map is displayed the map center is undefined by "
+"default, so you should provide a default position (e.g. via the "
+"\"<code>Where am I?</code>\" or \"<code>Center map on location</code>\" "
+"AddOn)."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1741
+#: release/2.9.1/inc/addons/user-checkin.php:1741
+#: release/2.9.2/inc/addons/user-checkin.php:1741
+msgid "Visible for"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1752
+#: release/2.9.1/inc/addons/user-checkin.php:1752
+#: release/2.9.2/inc/addons/user-checkin.php:1752
+msgid "Save"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1929
+#: release/2.9.1/inc/addons/user-checkin.php:1929
+#: release/2.9.2/inc/addons/user-checkin.php:1929
+msgid "Submit location?"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1930
+#: release/2.9.1/inc/addons/user-checkin.php:1930
+#: release/2.9.2/inc/addons/user-checkin.php:1930
+msgid "The webpage wants to know where you are. Send your location?"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1933
+#: release/2.9.1/inc/addons/user-checkin.php:1933
+#: release/2.9.2/inc/addons/user-checkin.php:1933
+msgid "Don´t ask me again."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1934
+#: release/2.9.1/inc/addons/user-checkin.php:1934
+#: release/2.9.2/inc/addons/user-checkin.php:1934
+msgid "Sending your location..."
+msgstr ""
+
+#: inc/addons/user-checkin.php:1935
+#: release/2.9.1/inc/addons/user-checkin.php:1935
+#: release/2.9.2/inc/addons/user-checkin.php:1935
+msgid "Location saved!"
+msgstr ""
+
+#: inc/addons/user-checkin.php:1936
+#: release/2.9.1/inc/addons/user-checkin.php:1936
+#: release/2.9.2/inc/addons/user-checkin.php:1936
+msgid "Submit my current location"
+msgstr ""
+
+#: inc/addons/where-am-i.php:30 release/2.9.1/inc/addons/where-am-i.php:30
+#: release/2.9.2/inc/addons/where-am-i.php:30
+msgid "Where am I?"
+msgstr ""
+
+#: inc/addons/where-am-i.php:36 release/2.9.1/inc/addons/where-am-i.php:36
+#: release/2.9.2/inc/addons/where-am-i.php:36
+msgid "Behavior"
+msgstr ""
+
+#: inc/addons/where-am-i.php:43 release/2.9.1/inc/addons/where-am-i.php:43
+#: release/2.9.2/inc/addons/where-am-i.php:43
+msgid "Appearance"
+msgstr ""
+
+#: inc/addons/where-am-i.php:57 release/2.9.1/inc/addons/where-am-i.php:57
+#: release/2.9.2/inc/addons/where-am-i.php:57
+msgid "I want to automatically show visitor locations on all my maps"
+msgstr ""
+
+#: inc/addons/where-am-i.php:58 release/2.9.1/inc/addons/where-am-i.php:58
+#: release/2.9.2/inc/addons/where-am-i.php:58
+msgid "Visitor location will be automatically added to all your maps"
+msgstr ""
+
+#: inc/addons/where-am-i.php:62 release/2.9.1/inc/addons/where-am-i.php:62
+#: release/2.9.2/inc/addons/where-am-i.php:62
+msgid ""
+"I want to specify which maps will show visitor location using a shortcode "
+"attribute"
+msgstr ""
+
+#: inc/addons/where-am-i.php:63 release/2.9.1/inc/addons/where-am-i.php:63
+#: release/2.9.2/inc/addons/where-am-i.php:63
+msgid ""
+"You can display visitor location on your maps by adding "
+"<code>visitor_location=&quot;yes&quot;</code> to your shortcodes"
+msgstr ""
+
+#: inc/addons/where-am-i.php:72 release/2.9.1/inc/addons/where-am-i.php:72
+#: release/2.9.2/inc/addons/where-am-i.php:72
+msgid "Automatically center map to visitor location"
+msgstr ""
+
+#: inc/addons/where-am-i.php:80 release/2.9.1/inc/addons/where-am-i.php:80
+#: release/2.9.2/inc/addons/where-am-i.php:80
+msgid "Automatically add visitor location to the marker list for my map"
+msgstr ""
+
+#: inc/addons/where-am-i.php:81 release/2.9.1/inc/addons/where-am-i.php:81
+#: release/2.9.2/inc/addons/where-am-i.php:81
+msgid ""
+"Default behavior is to add the visitor location to the map only. Enable "
+"this option if you want to include it in the marker list as well."
+msgstr ""
+
+#: inc/addons/where-am-i.php:87 inc/addons/where-am-i.php:182
+#: release/2.9.1/inc/addons/where-am-i.php:87
+#: release/2.9.1/inc/addons/where-am-i.php:182
+#: release/2.9.2/inc/addons/where-am-i.php:87
+#: release/2.9.2/inc/addons/where-am-i.php:182
+msgid "This is you"
+msgstr ""
+
+#: inc/addons/where-am-i.php:88 release/2.9.1/inc/addons/where-am-i.php:88
+#: release/2.9.2/inc/addons/where-am-i.php:88
+msgid "Visitor marker label"
+msgstr ""
+
+#: inc/addons/where-am-i.php:94 release/2.9.1/inc/addons/where-am-i.php:94
+#: release/2.9.2/inc/addons/where-am-i.php:94
+msgid "Visitor marker icon"
+msgstr ""
+
+#: inc/addons/where-am-i.php:97 release/2.9.1/inc/addons/where-am-i.php:97
+#: release/2.9.2/inc/addons/where-am-i.php:97
+msgid "Leave empty to use default icon"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:58
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:58
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:58
+msgid "ROADMAP"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:59
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:59
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:59
+msgid "SATELLITE"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:60
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:60
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:60
+msgid "HYBRID"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:61
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:61
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:61
+msgid "TERRAIN"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:80
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:80
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:80
+msgid "Get your API key <a href=\"%s\" target=\"_blank\">here</a>"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:85
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:85
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:85
+msgid ""
+"(you can also research a bit more in <a href=\"%s\" "
+"target=\"_blank\">official Google documentation</a> pages)"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:92 inc/class-agm-maps-widget.php:57
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:92
+#: release/2.9.1/inc/class-agm-maps-widget.php:57
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:92
+#: release/2.9.2/inc/class-agm-maps-widget.php:57
+msgid "Earth"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:93 inc/class-agm-maps-widget.php:58
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:93
+#: release/2.9.1/inc/class-agm-maps-widget.php:58
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:93
+#: release/2.9.2/inc/class-agm-maps-widget.php:58
+msgid "Continent"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:94 inc/class-agm-maps-widget.php:59
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:94
+#: release/2.9.1/inc/class-agm-maps-widget.php:59
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:94
+#: release/2.9.2/inc/class-agm-maps-widget.php:59
+msgid "Region"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:95 inc/class-agm-maps-widget.php:60
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:95
+#: release/2.9.1/inc/class-agm-maps-widget.php:60
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:95
+#: release/2.9.2/inc/class-agm-maps-widget.php:60
+msgid "Nearby Cities"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:96 inc/class-agm-maps-widget.php:61
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:96
+#: release/2.9.1/inc/class-agm-maps-widget.php:61
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:96
+#: release/2.9.2/inc/class-agm-maps-widget.php:61
+msgid "City Plan"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:97 inc/class-agm-maps-widget.php:62
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:97
+#: release/2.9.1/inc/class-agm-maps-widget.php:62
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:97
+#: release/2.9.2/inc/class-agm-maps-widget.php:62
+msgid "Details"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:118
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:118
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:118
+msgid "Advanced"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:135
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:135
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:135
+msgid "Basic mode"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:136
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:136
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:136
+msgid "<div>Please input the numeric zoom value.</div>"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:174
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:174
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:174
+msgid "Metric"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:175
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:175
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:175
+msgid "Imperial"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:183
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:183
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:183
+msgid "<div>These units will be used to express distances for directions</div>"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:189
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:189
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:189
+msgid "Small"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:190
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:190
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:190
+msgid "Medium"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:191
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:191
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:191
+msgid "Thumbnail"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:192
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:192
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:192
+msgid "Square"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:193
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:193
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:193
+msgid "Mini Square"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:214 inc/class-agm-admin-maps.php:381
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:214
+#: release/2.9.1/inc/class-agm-admin-maps.php:381
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:214
+#: release/2.9.2/inc/class-agm-admin-maps.php:381
+msgid "Left"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:224 inc/class-agm-admin-maps.php:382
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:224
+#: release/2.9.1/inc/class-agm-admin-maps.php:382
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:224
+#: release/2.9.2/inc/class-agm-admin-maps.php:382
+msgid "Center"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:234 inc/class-agm-admin-maps.php:383
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:234
+#: release/2.9.1/inc/class-agm-admin-maps.php:383
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:234
+#: release/2.9.2/inc/class-agm-admin-maps.php:383
+msgid "Right"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:300
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:300
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:300
+msgid "(Default)"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:395
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:395
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:395
+msgid "My posts have latitude/longitude fields"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:396
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:396
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:396
+msgid "Latitude field name:"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:399
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:399
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:399
+msgid "Longitude field name:"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:402
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:402
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:402
+msgid "My posts have an address field"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:403
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:403
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:403
+msgid "Address field name(s):"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:411
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:411
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:411
+msgid "Discard old map when my custom fields value change"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:417
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:417
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:417
+msgid ""
+"(A new map will be automatically created, using the defaults you specified "
+"above )"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:418
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:418
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:418
+msgid "Associate the new map to post:"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:420
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:420
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:420
+msgid "Automatically show the map:"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:434
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:434
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:434
+msgid ""
+"If previous option is set to \"Yes\", the new map will be shown %s the post "
+"body"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:497
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:497
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:497
+msgid "Active"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:502
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:502
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:502
+msgid "Inactive"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:514
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:514
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:514
+msgid "Add-on name"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:515
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:515
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:515
+msgid "Add-on description"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:560
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:560
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:560
+msgid "Deactivate"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:568
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:568
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:568
+msgid "Activate"
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:574
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:574
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:574
+msgid "Requires "
+msgstr ""
+
+#: inc/class-agm-admin-form-renderer.php:586
+#: release/2.9.1/inc/class-agm-admin-form-renderer.php:586
+#: release/2.9.2/inc/class-agm-admin-form-renderer.php:586
+msgid "Example:"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:30 inc/class-agm-admin-maps.php:48
+#: release/2.9.1/inc/class-agm-admin-help.php:30
+#: release/2.9.1/inc/class-agm-admin-maps.php:48
+#: release/2.9.2/inc/class-agm-admin-help.php:30
+#: release/2.9.2/inc/class-agm-admin-maps.php:48
+msgid "Options"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:39 inc/class-agm-admin-maps.php:151
+#: release/2.9.1/inc/class-agm-admin-help.php:39
+#: release/2.9.1/inc/class-agm-admin-maps.php:151
+#: release/2.9.2/inc/class-agm-admin-help.php:39
+#: release/2.9.2/inc/class-agm-admin-maps.php:151
+msgid "Custom fields"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:49 inc/class-agm-admin-maps.php:185
+#: release/2.9.1/inc/class-agm-admin-help.php:49
+#: release/2.9.1/inc/class-agm-admin-maps.php:185
+#: release/2.9.2/inc/class-agm-admin-help.php:49
+#: release/2.9.2/inc/class-agm-admin-maps.php:185
+msgid "Add-ons"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Google Maps"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:66
+#: release/2.9.1/inc/class-agm-admin-help.php:66
+#: release/2.9.2/inc/class-agm-admin-help.php:66
+msgid "Project page"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:71
+#: release/2.9.1/inc/class-agm-admin-help.php:71
+#: release/2.9.2/inc/class-agm-admin-help.php:71
+msgid "Installation and instructions page"
+msgstr ""
+
+#: inc/class-agm-admin-help.php:76
+#: release/2.9.1/inc/class-agm-admin-help.php:76
+#: release/2.9.2/inc/class-agm-admin-help.php:76
+msgid "Support forum"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:55
+#: release/2.9.1/inc/class-agm-admin-maps.php:55
+#: release/2.9.2/inc/class-agm-admin-maps.php:55
+msgid "Google maps API key"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:63
+#: release/2.9.1/inc/class-agm-admin-maps.php:63
+#: release/2.9.2/inc/class-agm-admin-maps.php:63
+msgid "Default map height"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:70
+#: release/2.9.1/inc/class-agm-admin-maps.php:70
+#: release/2.9.2/inc/class-agm-admin-maps.php:70
+msgid "Default map width"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:77
+#: release/2.9.1/inc/class-agm-admin-maps.php:77
+#: release/2.9.2/inc/class-agm-admin-maps.php:77
+msgid "Default map type"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:85
+#: release/2.9.1/inc/class-agm-admin-maps.php:85
+#: release/2.9.2/inc/class-agm-admin-maps.php:85
+msgid "Default map zoom"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:93
+#: release/2.9.1/inc/class-agm-admin-maps.php:93
+#: release/2.9.2/inc/class-agm-admin-maps.php:93
+msgid "Default map units"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:100
+#: release/2.9.1/inc/class-agm-admin-maps.php:100
+#: release/2.9.2/inc/class-agm-admin-maps.php:100
+msgid "Default image size"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:107
+#: release/2.9.1/inc/class-agm-admin-maps.php:107
+#: release/2.9.2/inc/class-agm-admin-maps.php:107
+msgid "Default image limit"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:114
+#: release/2.9.1/inc/class-agm-admin-maps.php:114
+#: release/2.9.2/inc/class-agm-admin-maps.php:114
+msgid "Default map alignment"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:121
+#: release/2.9.1/inc/class-agm-admin-maps.php:121
+#: release/2.9.2/inc/class-agm-admin-maps.php:121
+msgid "Snapping"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:128
+#: release/2.9.1/inc/class-agm-admin-maps.php:128
+#: release/2.9.2/inc/class-agm-admin-maps.php:128
+msgid "Directions Snapping"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:135
+#: release/2.9.1/inc/class-agm-admin-maps.php:135
+#: release/2.9.2/inc/class-agm-admin-maps.php:135
+msgid "Additional CSS"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:142
+#: release/2.9.1/inc/class-agm-admin-maps.php:142
+#: release/2.9.2/inc/class-agm-admin-maps.php:142
+msgid "Change shortcode"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:157
+#: release/2.9.1/inc/class-agm-admin-maps.php:157
+#: release/2.9.2/inc/class-agm-admin-maps.php:157
+msgid "Use custom Post Meta fields support"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:164
+#: release/2.9.1/inc/class-agm-admin-maps.php:164
+#: release/2.9.2/inc/class-agm-admin-maps.php:164
+msgid "Map custom fields"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:171
+#: release/2.9.1/inc/class-agm-admin-maps.php:171
+#: release/2.9.2/inc/class-agm-admin-maps.php:171
+msgid "When these fields are found, I want to"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:297
+#: release/2.9.1/inc/class-agm-admin-maps.php:297
+#: release/2.9.2/inc/class-agm-admin-maps.php:297
+msgid "Loading maps... please wait"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:298 inc/class-agm-admin-maps.php:364
+#: release/2.9.1/inc/class-agm-admin-maps.php:298
+#: release/2.9.1/inc/class-agm-admin-maps.php:364
+#: release/2.9.2/inc/class-agm-admin-maps.php:298
+#: release/2.9.2/inc/class-agm-admin-maps.php:364
+msgid "Insert this map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:299
+#: release/2.9.1/inc/class-agm-admin-maps.php:299
+#: release/2.9.2/inc/class-agm-admin-maps.php:299
+msgid "Preview/Edit"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:301 inc/class-agm-admin-maps.php:339
+#: release/2.9.1/inc/class-agm-admin-maps.php:301
+#: release/2.9.1/inc/class-agm-admin-maps.php:339
+#: release/2.9.2/inc/class-agm-admin-maps.php:301
+#: release/2.9.2/inc/class-agm-admin-maps.php:339
+msgid "Add Map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:303
+#: release/2.9.1/inc/class-agm-admin-maps.php:303
+#: release/2.9.2/inc/class-agm-admin-maps.php:303
+msgid "Next &raquo;"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:304
+#: release/2.9.1/inc/class-agm-admin-maps.php:304
+#: release/2.9.2/inc/class-agm-admin-maps.php:304
+msgid "&laquo; Prev"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:305
+#: release/2.9.1/inc/class-agm-admin-maps.php:305
+#: release/2.9.2/inc/class-agm-admin-maps.php:305
+msgid "Existing maps"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:306
+#: release/2.9.1/inc/class-agm-admin-maps.php:306
+#: release/2.9.2/inc/class-agm-admin-maps.php:306
+msgid "Preview and edit map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:307
+#: release/2.9.1/inc/class-agm-admin-maps.php:307
+#: release/2.9.2/inc/class-agm-admin-maps.php:307
+msgid "No existing maps"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:308
+#: release/2.9.1/inc/class-agm-admin-maps.php:308
+#: release/2.9.2/inc/class-agm-admin-maps.php:308
+msgid "New map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:309
+#: release/2.9.1/inc/class-agm-admin-maps.php:309
+#: release/2.9.2/inc/class-agm-admin-maps.php:309
+msgid "Advanced mode"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:310
+#: release/2.9.1/inc/class-agm-admin-maps.php:310
+#: release/2.9.2/inc/class-agm-admin-maps.php:310
+msgid ""
+"Advanced mode: Merge several maps into one new map or to delete multiple "
+"maps"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:311
+#: release/2.9.1/inc/class-agm-admin-maps.php:311
+#: release/2.9.2/inc/class-agm-admin-maps.php:311
+msgid "Creates a new map containing all markers of the selected maps"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:312
+#: release/2.9.1/inc/class-agm-admin-maps.php:312
+#: release/2.9.2/inc/class-agm-admin-maps.php:312
+msgid "Exit advanced mode"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:313
+#: release/2.9.1/inc/class-agm-admin-maps.php:313
+#: release/2.9.2/inc/class-agm-admin-maps.php:313
+msgid "Merge"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:315
+#: release/2.9.1/inc/class-agm-admin-maps.php:315
+#: release/2.9.2/inc/class-agm-admin-maps.php:315
+msgid "Create a new map that can be inserted into this post or page"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:316
+#: release/2.9.1/inc/class-agm-admin-maps.php:316
+#: release/2.9.2/inc/class-agm-admin-maps.php:316
+msgid "You have not created any maps yet."
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:317
+#: release/2.9.1/inc/class-agm-admin-maps.php:317
+#: release/2.9.2/inc/class-agm-admin-maps.php:317
+msgid "Do you want to permanently delete this map?"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:318
+#: release/2.9.1/inc/class-agm-admin-maps.php:318
+#: release/2.9.2/inc/class-agm-admin-maps.php:318
+msgid "Do you want to permanently delete all selected maps?"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:340
+#: release/2.9.1/inc/class-agm-admin-maps.php:340
+#: release/2.9.1/views/widget_settings.php:42
+#: release/2.9.2/inc/class-agm-admin-maps.php:340
+#: release/2.9.2/views/widget_settings.php:42 views/widget_settings.php:42
+msgid "Create new map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:355 inc/class-agm-dependencies.php:60
+#: release/2.9.1/inc/class-agm-admin-maps.php:355
+#: release/2.9.1/inc/class-agm-dependencies.php:60
+#: release/2.9.2/inc/class-agm-admin-maps.php:355
+#: release/2.9.2/inc/class-agm-dependencies.php:60
+msgid "There was an error geocoding your location. Check the address and try again"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:356
+#: release/2.9.1/inc/class-agm-admin-maps.php:356
+#: release/2.9.2/inc/class-agm-admin-maps.php:356
+msgid "Please type in the location"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:357
+#: release/2.9.1/inc/class-agm-admin-maps.php:357
+#: release/2.9.2/inc/class-agm-admin-maps.php:357
+msgid "Add Marker"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:359
+#: release/2.9.1/inc/class-agm-admin-maps.php:359
+#: release/2.9.2/inc/class-agm-admin-maps.php:359
+msgid "Body"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:361
+#: release/2.9.1/inc/class-agm-admin-maps.php:361
+#: release/2.9.2/inc/class-agm-admin-maps.php:361
+msgid "Save changes"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:362
+#: release/2.9.1/inc/class-agm-admin-maps.php:362
+#: release/2.9.2/inc/class-agm-admin-maps.php:362
+msgid "All changes saved!"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:363
+#: release/2.9.1/inc/class-agm-admin-maps.php:363
+#: release/2.9.2/inc/class-agm-admin-maps.php:363
+msgid "Sending data..."
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:365
+#: release/2.9.1/inc/class-agm-admin-maps.php:365
+#: release/2.9.2/inc/class-agm-admin-maps.php:365
+msgid "Map not saved"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:366
+#: release/2.9.1/inc/class-agm-admin-maps.php:366
+#: release/2.9.2/inc/class-agm-admin-maps.php:366
+msgid "Please give this map a name"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:367
+#: release/2.9.1/inc/class-agm-admin-maps.php:367
+#: release/2.9.2/inc/class-agm-admin-maps.php:367
+msgid "Please save the map first"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:368
+#: release/2.9.1/inc/class-agm-admin-maps.php:368
+#: release/2.9.2/inc/class-agm-admin-maps.php:368
+msgid "Go back"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:369
+#: release/2.9.1/inc/class-agm-admin-maps.php:369
+#: release/2.9.2/inc/class-agm-admin-maps.php:369
+msgid "Enter map title here"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:370
+#: release/2.9.1/inc/class-agm-admin-maps.php:370
+#: release/2.9.2/inc/class-agm-admin-maps.php:370
+msgid "Map options"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:371
+#: release/2.9.1/inc/class-agm-admin-maps.php:371
+#: release/2.9.2/inc/class-agm-admin-maps.php:371
+msgid "Use Map Options to change map size, appearance, alignment and image strip"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:372
+#: release/2.9.1/inc/class-agm-admin-maps.php:372
+#: release/2.9.2/inc/class-agm-admin-maps.php:372
+msgid "Drop Marker"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:373
+#: release/2.9.1/inc/class-agm-admin-maps.php:373
+#: release/2.9.2/inc/class-agm-admin-maps.php:373
+msgid ""
+"Tipp: For best map quality <strong>zoom in</strong> to place your markers "
+"before saving"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:374
+#: release/2.9.1/inc/class-agm-admin-maps.php:374
+#: release/2.9.2/inc/class-agm-admin-maps.php:374
+msgid "Associate map with this post"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:375
+#: release/2.9.1/inc/class-agm-admin-maps.php:375
+#: release/2.9.2/inc/class-agm-admin-maps.php:375
+msgid "This map is already associated with these"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:376
+#: release/2.9.1/inc/class-agm-admin-maps.php:376
+#: release/2.9.2/inc/class-agm-admin-maps.php:376
+msgid ""
+"Associating a map with a post allows for using this map in advanced ways - "
+"to show it dynamically in the sidebar widget, or in an advanced mashup"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:377
+#: release/2.9.1/inc/class-agm-admin-maps.php:377
+#: release/2.9.2/inc/class-agm-admin-maps.php:377
+msgid "Map size"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:378
+#: release/2.9.1/inc/class-agm-admin-maps.php:378
+#: release/2.9.2/inc/class-agm-admin-maps.php:378
+msgid "Use default size"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:379
+#: release/2.9.1/inc/class-agm-admin-maps.php:379
+#: release/2.9.2/inc/class-agm-admin-maps.php:379
+msgid "Map Appearance"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:380
+#: release/2.9.1/inc/class-agm-admin-maps.php:380
+#: release/2.9.2/inc/class-agm-admin-maps.php:380
+msgid "Map Alignment"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:384
+#: release/2.9.1/inc/class-agm-admin-maps.php:384
+#: release/2.9.1/views/widget_settings.php:68
+#: release/2.9.2/inc/class-agm-admin-maps.php:384
+#: release/2.9.2/views/widget_settings.php:68 views/widget_settings.php:68
+msgid "Show map"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:385
+#: release/2.9.1/inc/class-agm-admin-maps.php:385
+#: release/2.9.2/inc/class-agm-admin-maps.php:385
+msgid "Show posts"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:386
+#: release/2.9.1/inc/class-agm-admin-maps.php:386
+#: release/2.9.1/views/widget_settings.php:71
+#: release/2.9.2/inc/class-agm-admin-maps.php:386
+#: release/2.9.2/views/widget_settings.php:71 views/widget_settings.php:71
+msgid "Show marker list"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:387
+#: release/2.9.1/inc/class-agm-admin-maps.php:387
+#: release/2.9.2/inc/class-agm-admin-maps.php:387
+msgid "Images strip settings"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:388
+#: release/2.9.1/inc/class-agm-admin-maps.php:388
+#: release/2.9.1/views/widget_settings.php:74
+#: release/2.9.2/inc/class-agm-admin-maps.php:388
+#: release/2.9.2/views/widget_settings.php:74 views/widget_settings.php:74
+msgid "Show images strip"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:389
+#: release/2.9.1/inc/class-agm-admin-maps.php:389
+#: release/2.9.2/inc/class-agm-admin-maps.php:389
+msgid "Use image size"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:390
+#: release/2.9.1/inc/class-agm-admin-maps.php:390
+#: release/2.9.2/inc/class-agm-admin-maps.php:390
+msgid "Panoramio overlay"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:391
+#: release/2.9.1/inc/class-agm-admin-maps.php:391
+#: release/2.9.2/inc/class-agm-admin-maps.php:391
+msgid "Show Panoramio overlay"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:392
+#: release/2.9.1/inc/class-agm-admin-maps.php:392
+#: release/2.9.2/inc/class-agm-admin-maps.php:392
+msgid "Restrict Panoramio overlay photos to this tag"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:393
+#: release/2.9.1/inc/class-agm-admin-maps.php:393
+#: release/2.9.2/inc/class-agm-admin-maps.php:393
+msgid "Leave this field empty for no tag restrictions"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:394
+#: release/2.9.1/inc/class-agm-admin-maps.php:394
+#: release/2.9.2/inc/class-agm-admin-maps.php:394
+msgid "Show this many images"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:395
+#: release/2.9.1/inc/class-agm-admin-maps.php:395
+#: release/2.9.2/inc/class-agm-admin-maps.php:395
+msgid "Add location:"
+msgstr ""
+
+#: inc/class-agm-admin-maps.php:396
+#: release/2.9.1/inc/class-agm-admin-maps.php:396
+#: release/2.9.2/inc/class-agm-admin-maps.php:396
+msgid "Apply"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:58
+#: release/2.9.1/inc/class-agm-dependencies.php:58
+#: release/2.9.2/inc/class-agm-dependencies.php:58
+msgid "Close"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:59
+#: release/2.9.1/inc/class-agm-dependencies.php:59
+#: release/2.9.2/inc/class-agm-dependencies.php:59
+msgid "Get Directions"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:61
+#: release/2.9.1/inc/class-agm-dependencies.php:61
+#: release/2.9.2/inc/class-agm-dependencies.php:61
+msgid "Please, enter values for both point A and point B"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:62
+#: release/2.9.1/inc/class-agm-dependencies.php:62
+#: release/2.9.2/inc/class-agm-dependencies.php:62
+msgid "Directions"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:63
+#: release/2.9.1/inc/class-agm-dependencies.php:63
+#: release/2.9.2/inc/class-agm-dependencies.php:63
+msgid "Posts"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:64
+#: release/2.9.1/inc/class-agm-dependencies.php:64
+#: release/2.9.2/inc/class-agm-dependencies.php:64
+msgid "Show All"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:65
+#: release/2.9.1/inc/class-agm-dependencies.php:65
+#: release/2.9.2/inc/class-agm-dependencies.php:65
+msgid "Hide"
+msgstr ""
+
+#: inc/class-agm-dependencies.php:66
+#: release/2.9.1/inc/class-agm-dependencies.php:66
+#: release/2.9.2/inc/class-agm-dependencies.php:66
+msgid "Oops, we couldn't calculate the directions"
+msgstr ""
+
+#: inc/external/wpmu-lib/inc/class-thelib-ui.php:517
+#: release/2.9.1/inc/external/wpmu-lib/inc/class-thelib-ui.php:517
+#: release/2.9.2/inc/external/wpmu-lib/inc/class-thelib-ui.php:517
+msgid "Dismiss this notice."
+msgstr ""
+
+#: release/2.9.1/views/plugin_settings.php:2
+#: release/2.9.2/views/plugin_settings.php:2 views/plugin_settings.php:2
+msgid "Google Maps Plugin Options"
+msgstr ""
+
+#: release/2.9.1/views/plugin_settings.php:11
+#: release/2.9.2/views/plugin_settings.php:11 views/plugin_settings.php:11
+msgid "Save Changes"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:2
+#: release/2.9.2/views/widget_settings.php:2 views/widget_settings.php:2
+msgid "Title:"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:7
+#: release/2.9.2/views/widget_settings.php:7 views/widget_settings.php:7
+msgid "Map size:"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:14
+#: release/2.9.2/views/widget_settings.php:14 views/widget_settings.php:14
+msgid "Use map(s) from:"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:18
+#: release/2.9.2/views/widget_settings.php:18 views/widget_settings.php:18
+msgid "Current posts"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:22
+#: release/2.9.2/views/widget_settings.php:22 views/widget_settings.php:22
+msgid "All posts"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:30
+#: release/2.9.2/views/widget_settings.php:30 views/widget_settings.php:30
+msgid "Random map"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:34
+#: release/2.9.2/views/widget_settings.php:34 views/widget_settings.php:34
+msgid "Use this map:"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:36
+#: release/2.9.2/views/widget_settings.php:36 views/widget_settings.php:36
+msgid "Select one"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:46
+#: release/2.9.2/views/widget_settings.php:46 views/widget_settings.php:46
+msgid "Custom query"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:50
+#: release/2.9.2/views/widget_settings.php:50 views/widget_settings.php:50
+msgid ""
+"This is a network query <small>(requires <a "
+"href=\"http://premium.wpmudev.org/project/post-indexer\">Post Indexer</a> "
+"plugin) - only \"tag=...\" supported</small>"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:53
+#: release/2.9.2/views/widget_settings.php:53 views/widget_settings.php:53
+msgid "Learn more about custom queries"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:57
+#: release/2.9.2/views/widget_settings.php:57 views/widget_settings.php:57
+msgid "Show:"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:60
+#: release/2.9.2/views/widget_settings.php:60 views/widget_settings.php:60
+msgid "Show as one map"
+msgstr ""
+
+#: release/2.9.1/views/widget_settings.php:77
+#: release/2.9.2/views/widget_settings.php:77 views/widget_settings.php:77
+msgid "Show posts in markers"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "http://premium.wpmudev.org/project/wordpress-google-maps-plugin"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Easily embed, customize, and use Google maps on your WordPress site - in "
+"posts, pages or as an easy to use widget, display local images and let your "
+"site visitors get directions in seconds."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org"
+msgstr ""

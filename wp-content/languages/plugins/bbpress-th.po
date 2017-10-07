@@ -1,0 +1,4552 @@
+# Translation of Plugins - bbPress - Stable (latest release) in Thai
+# This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-09-30 16:22:45+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: th\n"
+"Project-Id-Version: Plugins - bbPress - Stable (latest release)\n"
+
+#. translators: user role
+#: includes/common/locale.php:56
+msgctxt "User role"
+msgid "Blocked"
+msgstr "Blocked"
+
+#. translators: user role
+#: includes/common/locale.php:53
+msgctxt "User role"
+msgid "Spectator"
+msgstr "Spectator"
+
+#. translators: user role
+#: includes/common/locale.php:50
+msgctxt "User role"
+msgid "Participant"
+msgstr "Participant"
+
+#. translators: user role
+#: includes/common/locale.php:47
+msgctxt "User role"
+msgid "Moderator"
+msgstr "Moderator"
+
+#. translators: user role
+#: includes/common/locale.php:44
+msgctxt "User role"
+msgid "Keymaster"
+msgstr "Keymaster"
+
+#. Author of the plugin/theme
+msgid "The bbPress Community"
+msgstr "ชุมชน bbPress "
+
+#. Plugin Name of the plugin/theme
+msgid "bbPress"
+msgstr "bbPress"
+
+#. Description of the plugin/theme
+msgid "bbPress is forum software with a twist from the creators of WordPress."
+msgstr "bbPress เป็นซอฟท์แวร์ฟอรั่มที่มาจากผู้สร้างเวิร์ดเพรส"
+
+#. #-#-#-#-#  bbpress-code.pot (bbPress 2.5.13)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  bbpress-code.pot (bbPress 2.5.13)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "https://bbpress.org"
+msgstr "http://bbpress.org"
+
+#: includes/admin/tools.php:1148
+msgid "No reply positions to recalculate!"
+msgstr "ไม่มีตำแหน่งความเห็นให้คำนวณใหม่"
+
+#: includes/admin/tools.php:1147
+msgid "Recalculating reply menu order &hellip; %s"
+msgstr "กำลังคำนวณใหม่การเรียงเมนูตอบกลับ &hellip; %s"
+
+#: includes/admin/tools.php:166
+msgid "Recalculate the position of each reply"
+msgstr "คำนวณใหม่ตำแหน่งของแต่ละความเห็น"
+
+#: templates/default/extras/page-topic-tags.php:22
+msgid "<p>This is a collection of tags that are currently popular on our forums.</p>"
+msgstr "<p>นี่คือป้ายกำกับที่กำลังได้รับความนิยมบนฟอรั่มของเรา</p>"
+
+#: templates/default/extras/page-forum-statistics.php:22
+msgid "<p>Here are the statistics and popular topics of our forums.</p>"
+msgstr "<p>นี่คือสถิติและกระทู้ยอดนิยมของฟอรั่มของเรา</p>"
+
+#: templates/default/bbpress-functions.php:426
+msgid "Please login to subscribe to this topic."
+msgstr "กรุณาเข้าสู่ระบบเพื่อรับข่าวจากกระทู้นี้"
+
+#: templates/default/bbpress-functions.php:375
+#: templates/default/bbpress-functions.php:443
+msgid "The topic could not be found."
+msgstr "ไม่พบกระทู้"
+
+#: templates/default/bbpress-functions.php:358
+msgid "Please login to make this topic a favorite."
+msgstr "กรุณาเข้าสู่ระบบเพื่อทำให้กระทู้นี้เป็นกระทู้โปรด"
+
+#: templates/default/bbpress-functions.php:353
+msgid "Favorites are no longer active."
+msgstr "กระทู้โปรดไม่เปิดใช้"
+
+#: templates/default/bbpress-functions.php:320
+#: templates/default/bbpress-functions.php:388
+#: templates/default/bbpress-functions.php:456
+msgid "The request was unsuccessful. Please try again."
+msgstr "การร้องขอไม่สำเร็จ โปรดลองใหม่อีกครั้ง"
+
+#: templates/default/bbpress-functions.php:312
+#: templates/default/bbpress-functions.php:380
+#: templates/default/bbpress-functions.php:448
+msgid "Are you sure you meant to do that?"
+msgstr "คุณแน่ใจรึเปล่าว่าต้องการทำสิ่งนั้น"
+
+#: templates/default/bbpress-functions.php:307
+msgid "The forum could not be found."
+msgstr "ไม่พบฟอรั่ม"
+
+#: templates/default/bbpress-functions.php:299
+#: templates/default/bbpress-functions.php:367
+#: templates/default/bbpress-functions.php:435
+msgid "You do not have permission to do this."
+msgstr "คุณไม่ได้รับอนุญาตให้ทำสิ่งนี้"
+
+#: templates/default/bbpress-functions.php:290
+msgid "Please login to subscribe to this forum."
+msgstr "โปรดเข้าสู่ระบบเพื่อรับข่าวจากฟอรั่มนี้"
+
+#: templates/default/bbpress-functions.php:285
+#: templates/default/bbpress-functions.php:421
+msgid "Subscriptions are no longer active."
+msgstr "การติดตามไม่ได้เปิดใช้"
+
+#: templates/default/bbpress-functions.php:248
+#: templates/default/bbpress-functions.php:257
+msgid "Something went wrong. Refresh your browser and try again."
+msgstr "มีบางสิ่งผิดปกติ  รีเฟรซเบราว์เซอร์และลองใหม่อีกครั้ง"
+
+#: templates/default/bbpress/user-topics-created.php:28
+msgid "This user has not created any topics."
+msgstr "ผู้ใช้นี้ไม่เคยสร้างกระทู้ใด ๆ"
+
+#: templates/default/bbpress/user-topics-created.php:28
+msgid "You have not created any topics."
+msgstr "คุณไม่เคยสร้างกระทู้ใด ๆ"
+
+#: templates/default/bbpress/user-topics-created.php:15
+msgid "Forum Topics Started"
+msgstr "เริ่มกระทู้ฟอรั่มแล้ว"
+
+#: templates/default/bbpress/user-subscriptions.php:47
+msgid "This user is not currently subscribed to any topics."
+msgstr "ผู้ใช้นี้ยังไม่ได้สมัครการติดตามจากกระทู้ใด ๆ ในตอนนี้"
+
+#: templates/default/bbpress/user-subscriptions.php:47
+msgid "You are not currently subscribed to any topics."
+msgstr "คุณยังไม่ได้สมัครการติดตามจากกระทู้ใดๆในขณะนี้"
+
+#: templates/default/bbpress/user-subscriptions.php:28
+msgid "This user is not currently subscribed to any forums."
+msgstr "ผู้ใช้นี้ยังไม่ได้เปิดการติดตามจากฟอรั่มใด ๆ "
+
+#: templates/default/bbpress/user-subscriptions.php:28
+msgid "You are not currently subscribed to any forums."
+msgstr "คุณยังไม่ได้เปิดการติดตามจากฟอรั่มใด ๆ "
+
+#: templates/default/bbpress/user-subscriptions.php:19
+msgid "Subscribed Forums"
+msgstr "ติดตามฟอรั่มแล้ว"
+
+#: templates/default/bbpress/user-replies-created.php:28
+msgid "This user has not replied to any topics."
+msgstr "ผู้ใช้นี้ยังไม่ได้ตอบกลับไปยังกระทู้ใด ๆ "
+
+#: templates/default/bbpress/user-replies-created.php:28
+msgid "You have not replied to any topics."
+msgstr "คุณยังไม่ได้ตอบกลับไปยังกระทู้ใด ๆ"
+
+#: templates/default/bbpress/user-replies-created.php:15
+msgid "Forum Replies Created"
+msgstr "ตอบกระทู้"
+
+#: templates/default/bbpress/user-profile.php:26
+msgid "Replies Created: %s"
+msgstr "ตอบกระทู้: %s"
+
+#: templates/default/bbpress/user-profile.php:25
+msgid "Topics Started: %s"
+msgstr "เริ่มกระทู้แล้ว: %s"
+
+#: templates/default/bbpress/user-profile.php:24
+msgid "Forum Role: %s"
+msgstr "บทบาทฟอรั่ม: %s"
+
+#: templates/default/bbpress/user-favorites.php:28
+msgid "This user has no favorite topics."
+msgstr "ผู้ใช้นี้ไม่มีรายการโปรดกระทู้"
+
+#: templates/default/bbpress/user-favorites.php:28
+msgid "You currently have no favorite topics."
+msgstr "คุณไม่มีรายการโปรดกระทู้ในตอนนี้"
+
+#: templates/default/bbpress/user-favorites.php:15
+msgid "Favorite Forum Topics"
+msgstr "รายการกระทู้ที่เก็บไว้"
+
+#: templates/default/bbpress/user-details.php:58
+msgid "%s's Subscriptions"
+msgstr "การติดตามของ %s"
+
+#: templates/default/bbpress/user-details.php:48
+msgid "%s's Favorites"
+msgstr "กระทู้ที่ %s เก็บไว้"
+
+#: templates/default/bbpress/user-details.php:41
+msgid "%s's Replies Created"
+msgstr "ตอบกระทู้ %s"
+
+#: templates/default/bbpress/user-details.php:35
+msgid "%s's Topics Started"
+msgstr "เริ่มกระทู้ของ %s แล้ว"
+
+#: templates/default/bbpress/user-details.php:29
+#: templates/default/bbpress/user-profile.php:15
+msgid "Profile"
+msgstr "ประวัติส่วนตัว"
+
+#: templates/default/bbpress/user-details.php:29
+msgid "%s's Profile"
+msgstr "ข้อมูลส่วนตัวของ %s"
+
+#: templates/default/bbpress/loop-single-topic.php:68
+msgid "in: <a href=\"%1$s\">%2$s</a>"
+msgstr "ใน: <a href=\"%1$s\">%2$s</a>"
+
+#: templates/default/bbpress/loop-single-topic.php:60
+msgid "Started by: %1$s"
+msgstr "เริ่มต้นโดย: %1$s"
+
+#: templates/default/bbpress/loop-single-reply.php:21
+msgid "in reply to: "
+msgstr "เพื่อตอบกลับ:"
+
+#: templates/default/bbpress/loop-search.php:22
+#: templates/default/bbpress/loop-search.php:44
+msgid "Search Results"
+msgstr "ผลลัพธ์การค้นหา"
+
+#: templates/default/bbpress/loop-search-topic.php:37
+msgid "in forum "
+msgstr "ในฟอรั่ม"
+
+#: templates/default/bbpress/loop-search-topic.php:33
+msgid "in group forum "
+msgstr "ในฟอรั่มกลุ่ม"
+
+#: templates/default/bbpress/loop-search-topic.php:26
+msgid "Topic: "
+msgstr "กระทู้:"
+
+#: templates/default/bbpress/loop-search-reply.php:24
+msgid "In reply to: "
+msgstr "เพื่อตอบกลับ: "
+
+#: templates/default/bbpress/loop-search-forum.php:26
+msgid "Forum: "
+msgstr "ฟอรั่ม: "
+
+#: templates/default/bbpress/loop-search-forum.php:16
+msgid "Last updated %s"
+msgstr "อัปเดต %s ครั้งสุดท้าย"
+
+#: templates/default/bbpress/form-user-roles.php:13
+msgid "Blog Role"
+msgstr "บทบาทบล็อก"
+
+#: templates/default/bbpress/form-user-register.php:18
+msgid "We use your email address to email you a secure password and verify your account."
+msgstr "เราใช้ที่อยู่อีเมลของคุณเพื่อส่งอีเมลหาคุณเพื่อส่งรหัสผ่านที่ปลอดภัยและยืนยันบัญชีของคุณ"
+
+#: templates/default/bbpress/form-user-register.php:17
+msgid "Your username must be unique, and cannot be changed later."
+msgstr "ชื่อผู้ใช้ของคุณต้องไม่ซ้ำใครและไม่สามารถเปลี่ยนได้ภายหลัง"
+
+#: templates/default/bbpress/form-user-register.php:14
+msgid "Create an Account"
+msgstr "สร้างบัญชี"
+
+#: templates/default/bbpress/form-user-lost-pass.php:27
+msgid "Reset My Password"
+msgstr "ล้างค่ารหัสผ่านของฉัน"
+
+#: templates/default/bbpress/form-user-lost-pass.php:18
+msgid "Username or Email"
+msgstr "ชื่อผู้ใช้ หรือ อีเมล"
+
+#: templates/default/bbpress/form-user-login.php:28
+msgid "Keep me signed in"
+msgstr "จำฉันไว้ในระบบ"
+
+#: templates/default/bbpress/form-user-edit.php:178
+msgid "Update User"
+msgstr "อัปเดตผู้ใช้"
+
+#: templates/default/bbpress/form-user-edit.php:178
+msgid "Update Profile"
+msgstr "อัปเดตข้อมูลส่วนตัว"
+
+#: templates/default/bbpress/form-user-edit.php:156
+msgid "Grant this user super admin privileges for the Network."
+msgstr "ให้สิทธิผู้ควบคุมสูงสุดกับผู้ใช้นี้สำหรับเครือข่าย"
+
+#: templates/default/bbpress/form-user-edit.php:153
+msgid "Network Role"
+msgstr "บทบาทเครือข่าย"
+
+#: templates/default/bbpress/form-user-edit.php:143
+#: templates/default/bbpress/form-user-edit.php:146
+msgid "User Role"
+msgstr "บทบาทผู้ใช้"
+
+#: templates/default/bbpress/form-user-edit.php:133
+msgid "Your password should be at least ten characters long. Use upper and lower case letters, numbers, and symbols to make it even stronger."
+msgstr "รหัสผ่านของคุณควรจะมีตัวอักษรอย่างน้อยสิบตัวอักษร  และใช้ตัวอักษรใหญ่และเล็ก  ตัวเลขและสัญลักษณ์ผสมกันเพื่อความปลอดภัยมากขึ้น"
+
+#: templates/default/bbpress/form-user-edit.php:130
+msgid "Type your new password again."
+msgstr "พิมพ์รหัสผ่านใหม่ของคุณอีกครั้ง"
+
+#: templates/default/bbpress/form-user-edit.php:127
+msgid "If you would like to change the password type a new one. Otherwise leave this blank."
+msgstr "ถ้าคุณต้องการเปลี่ยนรหัสผ่านใหม่  กรุณาพิมพ์รหัสผ่านใหม่  ถ้าไม่ก็ให้ช่องนี้ว่างไว้"
+
+#: templates/default/bbpress/form-user-edit.php:124
+msgid "New Password"
+msgstr "รหัสผ่านใหม่"
+
+#: templates/default/bbpress/form-user-edit.php:115
+msgid "There is a pending email address change to <code>%1$s</code>. <a href=\"%2$s\">Cancel</a>"
+msgstr "มีที่อยู่อีเมลที่รอเปลี่ยนไปเป็น <code>%1$s</code> <a href=\"%2$s\">ยกเลิก</a>"
+
+#: templates/default/bbpress/form-user-edit.php:90
+#: templates/default/bbpress/form-user-edit.php:93
+msgid "Account"
+msgstr "บัญชี"
+
+#: templates/default/bbpress/form-user-edit.php:82
+msgid "Biographical Info"
+msgstr "ข้อมูลชีวประวัติ"
+
+#: templates/default/bbpress/form-user-edit.php:74
+#: templates/default/bbpress/form-user-edit.php:77
+msgid "About the user"
+msgstr "ข้อมูลผู้ใช้"
+
+#: templates/default/bbpress/form-user-edit.php:74
+#: templates/default/bbpress/form-user-edit.php:77
+msgid "About Yourself"
+msgstr "ข้อมูลของคุณ"
+
+#: templates/default/bbpress/form-user-edit.php:49
+#: templates/default/bbpress/form-user-edit.php:52
+msgid "Contact Info"
+msgstr "ข้อมูลติดต่อ"
+
+#: templates/default/bbpress/form-user-edit.php:39
+msgid "Display Name"
+msgstr "ชื่อที่แสดง"
+
+#: templates/default/bbpress/form-user-edit.php:34
+msgid "Nickname"
+msgstr "ชื่อเล่น"
+
+#: templates/default/bbpress/form-user-edit.php:29
+msgid "Last Name"
+msgstr "นามสกุล"
+
+#: templates/default/bbpress/form-user-edit.php:24
+msgid "First Name"
+msgstr "ชื่อ"
+
+#: templates/default/bbpress/form-topic.php:234
+msgid "You must be logged in to create new topics."
+msgstr "คุณต้องเข้าสู่ระบบเพื่อสร้างกระทู้ใหม่"
+
+#: templates/default/bbpress/form-topic.php:234
+msgid "You cannot create new topics."
+msgstr "คุณไม่สามารถสร้างกระทู้ใหม่"
+
+#: templates/default/bbpress/form-topic.php:145
+msgid "Topic Status:"
+msgstr "สถานะกระทู้:"
+
+#: templates/default/bbpress/form-topic.php:133
+msgid "Topic Type:"
+msgstr "ชนิดกระทู้:"
+
+#: templates/default/bbpress/form-topic.php:101
+msgid "Topic Tags:"
+msgstr "ป้ายกำกับกระทู้:"
+
+#: templates/default/bbpress/form-topic.php:75
+msgid "Topic Title (Maximum Length: %d):"
+msgstr "หัวข้อกระทู้ (ความยาวมากสุด: %d):"
+
+#: templates/default/bbpress/form-topic.php:53
+msgid "This forum is marked as closed to new topics, however your posting capabilities still allow you to do so."
+msgstr "ฟอรั่มนี้ถูกบันทึกว่าปิดไม่ให้สร้างกระทู้ใหม่  อย่างไรก็ดีความสามารถในการเขียนของคุณยังอนุญาตให้คุณเขียนได้"
+
+#: templates/default/bbpress/form-topic.php:43
+msgid "Create New Topic in &ldquo;%s&rdquo;"
+msgstr "สร้างกระทู้ใหม่ใน &ldquo;%s&rdquo;"
+
+#: templates/default/bbpress/form-topic-tag.php:101
+msgid "Are you sure you want to delete the \"%s\" tag? This is permanent and cannot be undone."
+msgstr "คุณแน่ใจหรือว่าต้องการลบป้ายกำกับ \"%s\"? นี่เป็นการลบถาวรและไม่อาจย้อนกลับได้"
+
+#: templates/default/bbpress/form-topic-tag.php:95
+msgid "Any links to this tag will no longer function."
+msgstr "ลิงก์ใด ๆ ที่เชื่อมมายังป้ายกำกับนี้จะไม่ทำงานอีกต่อไป"
+
+#: templates/default/bbpress/form-topic-tag.php:94
+msgid "Deleting a tag cannot be undone."
+msgstr "ไม่สามารถยกเลิกการลบป้ายกำกับได้"
+
+#: templates/default/bbpress/form-topic-tag.php:91
+msgid "This does not delete your topics. Only the tag itself is deleted."
+msgstr "นี่จะไม่ลบกระทู้ของคุณ  เพียงแต่จะลบป้ายกำกับของกระทู้"
+
+#: templates/default/bbpress/form-topic-tag.php:73
+msgid "Are you sure you want to merge the \"%s\" tag into the tag you specified?"
+msgstr "คุณแน่ใจว่าต้องการรวมป้ายกำกับ \"%s\" เข้าในป้ายกำกับที่คุณระบุ"
+
+#: templates/default/bbpress/form-topic-tag.php:68
+msgid "Existing tag:"
+msgstr "ป้ายกำกับที่มีอยู่:"
+
+#: templates/default/bbpress/form-topic-tag.php:62
+msgid "Merging tags together cannot be undone."
+msgstr "ไม่สามารถยกเลิกการรวมป้ายกำกับได้"
+
+#: templates/default/bbpress/form-topic-tag.php:45
+msgid "Update"
+msgstr "อัปเดต"
+
+#: templates/default/bbpress/form-topic-tag.php:40
+msgid "Slug:"
+msgstr "Slug:"
+
+#: templates/default/bbpress/form-topic-tag.php:29
+msgid "Changing the slug affects its permalink. Any links to the old slug will stop working."
+msgstr "การเปลี่ยน slug จะกระทบต่อลิงก์ถาวร  ลิงก์ใด ๆ ที่เชื่อมไปหา slug แบบเก่าจะหยุดการทำงาน"
+
+#: templates/default/bbpress/form-topic-tag.php:25
+msgid "Leave the slug empty to have one automatically generated."
+msgstr "ปล่อย slug ให้ว่างเพื่อให้ระบบสร้างให้อัตโนมัติ"
+
+#: templates/default/bbpress/form-topic-tag.php:22
+msgid "Rename"
+msgstr "ตั้งชื่อใหม่"
+
+#: templates/default/bbpress/form-topic-tag.php:18
+msgid "Manage Tag: \"%s\""
+msgstr "จัดการ ป้ายกำกับ: \"%s\""
+
+#: templates/default/bbpress/form-topic-split.php:85
+msgid "Copy topic tags to the new topic"
+msgstr "คัดลอกป้ายกำกับกระทู้ไปยังกระทู้ใหม่"
+
+#: templates/default/bbpress/form-topic-split.php:80
+msgid "Copy favoriters to the new topic"
+msgstr "คัดลอกรายการโปรดไปยังกระทู้ใหม่"
+
+#: templates/default/bbpress/form-topic-split.php:75
+msgid "Copy subscribers to the new topic"
+msgstr "คัดลอกรายชื่อผู้รับข่าวไปยังกระทู้ใหม่"
+
+#: templates/default/bbpress/form-topic-split.php:42
+msgid "Split: %s"
+msgstr "แยก: %s"
+
+#: templates/default/bbpress/form-topic-split.php:37
+msgid "Split Method"
+msgstr "วิธีแยก"
+
+#: templates/default/bbpress/form-topic-split.php:33
+msgid "If you use the existing topic option, replies within both topics will be merged chronologically. The order of the merged replies is based on the time and date they were posted."
+msgstr "ถ้าคุณใช้ตัวเลือกกระทู้ที่มีอยู่  ข้อความตอบกลับภายในกระทู้ทั้งสองจะถูกรวมตามลำดับ  โดยลำดับของการรวมข้อความตอบกลับนั้นจะขึ้นอยู่กับวันและเวลาที่เขียนข้อความนั้น"
+
+#: templates/default/bbpress/form-topic-split.php:29
+msgid "When you split a topic, you are slicing it in half starting with the reply you just selected. Choose to use that reply as a new topic with a new title, or merge those replies into an existing topic."
+msgstr "เมื่อคุณแยกกระทู้ คุณจะตัดมันโดยเริ่มจากข้อความตอบกลับที่คุณเลือก  เลือกใช้ข้อความตอบกลับเป็นกระทู้ใหม่ด้วยหัวข้อใหม่  หรือรวมข้อความตอบกลับลงในกระทู้ที่มีอยู่แล้ว"
+
+#: templates/default/bbpress/form-topic-split.php:24
+msgid "Split topic \"%s\""
+msgstr "แบ่งกระทู้ \"%s\""
+
+#: templates/default/bbpress/form-topic-merge.php:106
+#: templates/default/bbpress/form-topic-split.php:110
+msgid "You cannot edit this topic."
+msgstr "คุณไม่สามารถแก้ไขกระทู้นี้"
+
+#: templates/default/bbpress/form-topic-merge.php:106
+#: templates/default/bbpress/form-topic-split.php:110
+msgid "You do not have the permissions to edit this topic!"
+msgstr "คุณไม่มีสิทธิแก้ไขกระทู้นี้"
+
+#: templates/default/bbpress/form-topic-merge.php:81
+msgid "Merge topic tags"
+msgstr "รวมป้ายกำกับกระทู้"
+
+#: templates/default/bbpress/form-topic-merge.php:76
+msgid "Merge topic favoriters"
+msgstr "รวมรายการโปรดกระทู้"
+
+#: templates/default/bbpress/form-topic-merge.php:71
+msgid "Merge topic subscribers"
+msgstr "รวมกระทู้รับข่าว"
+
+#: templates/default/bbpress/form-topic-merge.php:64
+#: templates/default/bbpress/form-topic-split.php:68
+msgid "Topic Extras"
+msgstr "กระทู้พิเศษ"
+
+#: templates/default/bbpress/form-topic-merge.php:56
+msgid "There are no other topics in this forum to merge with."
+msgstr "ไม่มีกระทู้อื่นในฟอรั่มนี้ให้ทำการรวมกระทู้ด้วย"
+
+#: templates/default/bbpress/form-topic-merge.php:42
+msgid "Merge with this topic:"
+msgstr "รวมกับกระทู้นี้:"
+
+#: templates/default/bbpress/form-topic-merge.php:38
+msgid "Destination"
+msgstr "เป้าหมาย"
+
+#: templates/default/bbpress/form-topic-merge.php:34
+msgid "All replies within both topics will be merged chronologically. The order of the merged replies is based on the time and date they were posted. If the destination topic was created after this one, it's post date will be updated to second earlier than this one."
+msgstr "ข้อความตอบกลับทั้งหมดภายในกระทู้ทั้งสองจะถูกรวมตามลำดับ  การเรียงของข้อความตอบกลับที่รวมกันจะขึ้นอยู่กับวันและเวลาที่พวกมันถูกเขียนขึ้น  ถ้ากระทู้เป้าหมายสร้างขึ้นหลังกระทู้นี้  วันที่เขียนจะถูกอัปเดตเปลี่ยนไปเป็นเวลาก่อนกระทู้นี้ (วินาที)"
+
+#: templates/default/bbpress/form-topic-merge.php:30
+msgid "To keep this topic as the lead, go to the other topic and use the merge tool from there instead."
+msgstr "เพื่อคงกระทู้นี้เป็นกระทู้อยู่ ไปที่กระทู้อื่นแล้วใช้เครื่องมือรวมจาำกที่นั่นแทน"
+
+#: templates/default/bbpress/form-topic-merge.php:29
+msgid "Select the topic to merge this one into. The destination topic will remain the lead topic, and this one will change into a reply."
+msgstr "เลือกกระทู้ที่จะรวมสิ่งนี้เข้าไป  กระทู้เป้าหมายจะยังคงเป็นกระทู้ และสิ่งนี้จะเปลี่ยนไปเป็นข้อความตอบกลับ"
+
+#: templates/default/bbpress/form-topic-merge.php:24
+msgid "Merge topic \"%s\""
+msgstr "รวมกระทู้ \"%s\""
+
+#: templates/default/bbpress/form-search.php:14
+msgid "Search for:"
+msgstr "ค้นหาสำหรับ:"
+
+#: templates/default/bbpress/form-reply.php:174
+msgid "You must be logged in to reply to this topic."
+msgstr "คุณต้องเข้าสู่ระบบเพื่อตอบกลับกระทู้นี้"
+
+#: templates/default/bbpress/form-reply.php:174
+msgid "You cannot reply to this topic."
+msgstr "คุณไ่ม่สามารถตอบกลับกระทู้นี้"
+
+#: templates/default/bbpress/form-reply.php:166
+#: templates/default/bbpress/form-topic.php:226
+msgid "The forum &#8216;%s&#8217; is closed to new topics and replies."
+msgstr "ฟอรั่ม &#8216;%s&#8217; ถูกปิดสำหรับกระทู้และข้อความตอบกลับใหม่"
+
+#: templates/default/bbpress/form-reply.php:158
+msgid "The topic &#8216;%s&#8217; is closed to new replies."
+msgstr "กระทู้ &#8216;%s&#8217; ถูกปิดสำหรับข้อความตอบกลับใหม่"
+
+#: templates/default/bbpress/form-reply.php:118
+#: templates/default/bbpress/form-topic.php:188
+msgid "Optional reason for editing:"
+msgstr "เหตุผลทางเลือกสำหรับการแก้ไข:"
+
+#: templates/default/bbpress/form-reply.php:114
+#: templates/default/bbpress/form-topic.php:184
+msgid "Keep a log of this edit:"
+msgstr "เก็บข้อมูลของการแก้ไขนี้:"
+
+#: templates/default/bbpress/form-reply.php:97
+#: templates/default/bbpress/form-topic.php:168
+msgid "Notify me of follow-up replies via email"
+msgstr "ส่งเมลเตือนเมื่อมีคนตอบ"
+
+#: templates/default/bbpress/form-reply.php:93
+#: templates/default/bbpress/form-topic.php:164
+msgid "Notify the author of follow-up replies via email"
+msgstr "เตือนผู้เขียนเรื่องการติดตามข้อความตอบกลับผ่านอีเมล "
+
+#: templates/default/bbpress/form-reply.php:75
+msgid "Tags:"
+msgstr "ป้ายกำกับ:"
+
+#: templates/default/bbpress/form-reply.php:36
+msgid "This topic is marked as closed to new replies, however your posting capabilities still allow you to do so."
+msgstr "กระทู้นี้ถูกบันทึกว่าปิดสำหรับข้อความตอบกลับใหม่  อย่างไรก็ตามความสามารถในการเขียนจะอนุญาตให้คุณทำได้"
+
+#: templates/default/bbpress/form-reply-move.php:85
+msgid "You cannot edit this reply."
+msgstr "คุณไม่สามารถแก้ไขกระทู้นี้"
+
+#: templates/default/bbpress/form-reply-move.php:85
+msgid "You do not have the permissions to edit this reply!"
+msgstr "คุณไม่มีสิทธิแก้ไขความเห็นนี้"
+
+#: templates/default/bbpress/form-reply-move.php:68
+#: templates/default/bbpress/form-topic-merge.php:89
+#: templates/default/bbpress/form-topic-split.php:93
+msgid "<strong>WARNING:</strong> This process cannot be undone."
+msgstr "<strong>คำเตือน:</strong> กระบวนการนี้ไม่สามารถยกเลิกได้"
+
+#: templates/default/bbpress/form-reply-move.php:49
+#: templates/default/bbpress/form-topic-split.php:49
+msgid "Use an existing topic in this forum:"
+msgstr "ใช้กระทู้ที่มีอยู่ในฟอรั่มนี้"
+
+#: templates/default/bbpress/form-reply-move.php:42
+msgid "Moved: %s"
+msgstr "ย้าย: %s แล้ว"
+
+#: templates/default/bbpress/form-reply-move.php:41
+#: templates/default/bbpress/form-topic-split.php:41
+msgid "New topic in <strong>%s</strong> titled:"
+msgstr "กระทู้ใหม่ในหัวเรื่อง <strong>%s</strong>:"
+
+#: templates/default/bbpress/form-reply-move.php:37
+msgid "Move Method"
+msgstr "วิธีย้าย"
+
+#: templates/default/bbpress/form-reply-move.php:33
+msgid "If you choose an existing topic, replies will be ordered by the time and date they were created."
+msgstr "ถ้าคุณเลือกกระทู้ที่มีอยู่แล้ว  ความเห็นจะถูกเรียงตามวันและเวลาที่มีการเขียนความเห็น"
+
+#: templates/default/bbpress/form-reply-move.php:29
+msgid "You can either make this reply a new topic with a new title, or merge it into an existing topic."
+msgstr "คุณสามารถทำให้ความเห็นนี้เป็นกระทู้ใหม่ด้วยหัวข้อใหม่  หรือรวมมันเข้ากับกระทู้ที่มีอยู่แล้ว"
+
+#: templates/default/bbpress/form-reply-move.php:24
+msgid "Move reply \"%s\""
+msgstr "ย้ายความเห็น \"%s\""
+
+#: templates/default/bbpress/form-protected.php:14
+msgid "Protected"
+msgstr "ป้องกันแล้ว"
+
+#: templates/default/bbpress/form-forum.php:169
+msgid "You must be logged in to create new forums."
+msgstr "คุณต้องเข้าสู่ระบบเพื่อสร้างฟอรั่มใหม่"
+
+#: templates/default/bbpress/form-forum.php:169
+msgid "You cannot create new forums."
+msgstr "คุณไม่สามารถสร้างฟอรั่มใหม่"
+
+#: templates/default/bbpress/form-forum.php:161
+msgid "The forum &#8216;%s&#8217; is closed to new content."
+msgstr "ฟอรั่ม &#8216;%s&#8217; ถูกปิดสำหรับบทความใหม่"
+
+#: templates/default/bbpress/form-forum.php:138
+#: templates/default/bbpress/form-reply-move.php:72
+#: templates/default/bbpress/form-reply.php:135
+#: templates/default/bbpress/form-topic-merge.php:93
+#: templates/default/bbpress/form-topic-split.php:97
+#: templates/default/bbpress/form-topic.php:203
+msgid "Submit"
+msgstr "ส่งข้อความ"
+
+#: templates/default/bbpress/form-forum.php:123
+msgid "(No Parent)"
+msgstr "(ไม่มีหมวดหลัก)"
+
+#: templates/default/bbpress/form-forum.php:91
+msgid "Forum Type:"
+msgstr "ชนิดฟอรั่ม:"
+
+#: templates/default/bbpress/form-forum.php:82
+#: templates/default/bbpress/form-reply.php:64
+#: templates/default/bbpress/form-topic.php:90
+msgid "You may use these <abbr title=\"HyperText Markup Language\">HTML</abbr> tags and attributes:"
+msgstr "คุณอาจจะใช้ป้ายกำกับและคุณสมบัติ <abbr title=\"HyperText Markup Language\">HTML</abbr> เหล่านี้:"
+
+#: templates/default/bbpress/form-forum.php:67
+msgid "Forum Name (Maximum Length: %d):"
+msgstr "ชื่อฟอรั่ม (ความยาวมากสุด: %d):"
+
+#: templates/default/bbpress/form-forum.php:55
+#: templates/default/bbpress/form-reply.php:44
+#: templates/default/bbpress/form-topic.php:61
+msgid "Your account has the ability to post unrestricted HTML content."
+msgstr "บัญชีของคุณสามารถเขียนโค้ด HTML ที่ไม่ได้ห้ามได้"
+
+#: templates/default/bbpress/form-forum.php:47
+msgid "This forum is closed to new content, however your account still allows you to do so."
+msgstr "ฟอรั่มนี้ถูกปิดสำหรับข้อความใหม่ แต่บัญชีของคุณยังอนุญาตให้คุณเขียนได้"
+
+#: templates/default/bbpress/form-forum.php:37
+msgid "Create New Forum in &ldquo;%s&rdquo;"
+msgstr "สร้างฟอรั่มใหม่ใน &ldquo;%s&rdquo;"
+
+#: templates/default/bbpress/form-forum.php:35
+#: templates/default/bbpress/form-topic.php:41
+msgid "Now Editing &ldquo;%s&rdquo;"
+msgstr "กำลังแก้ไข &ldquo;%s&rdquo;"
+
+#: templates/default/bbpress/form-anonymous.php:27
+msgid "Mail (will not be published) (required):"
+msgstr "อีเมล (จะไม่แสดงให้คนอื่นรู้) (ต้องการ):"
+
+#: templates/default/bbpress/form-anonymous.php:22
+msgid "Name (required):"
+msgstr "ชื่อ (จำเป็นต้องมี):"
+
+#: templates/default/bbpress/form-anonymous.php:17
+msgid "Your information:"
+msgstr "ข้อมูลของคุณ:"
+
+#: templates/default/bbpress/feedback-no-topics.php:13
+msgid "Oh bother! No topics were found here!"
+msgstr "ไม่พบกระทู้ หรือ คุณไม่มีสิทธิเข้าชม"
+
+#: templates/default/bbpress/feedback-no-search.php:13
+msgid "Oh bother! No search results were found here!"
+msgstr "ไม่พบผลการค้นหาใด ๆ "
+
+#: templates/default/bbpress/feedback-no-replies.php:13
+msgid "Oh bother! No replies were found here!"
+msgstr "อืม ไม่พบข้อความตอบกลับที่นี่"
+
+#: templates/default/bbpress/feedback-no-forums.php:13
+msgid "Oh bother! No forums were found here!"
+msgstr "อืม ไม่พบฟอรั่มที่นี่"
+
+#: templates/default/bbpress/feedback-no-access.php:16
+msgid "You do not have permission to view this forum."
+msgstr "คุณไม่ได้รับสิทธิ์ให้เปิดดูฟอรั่มนี้"
+
+#: templates/default/bbpress/feedback-no-access.php:13
+msgid "Private"
+msgstr "ส่วนตัว"
+
+#: templates/default/bbpress/feedback-logged-in.php:13
+msgid "You are already logged in."
+msgstr "คุณอยู่ในระบบอยู่แล้ว"
+
+#: templates/default/bbpress/content-statistics.php:64
+msgid "Hidden Replies"
+msgstr "ข้อความตอบกลับที่ซ่อนอยู่"
+
+#: templates/default/bbpress/content-statistics.php:53
+msgid "Hidden Topics"
+msgstr "กระทู้ที่ถูกซ่อน"
+
+#: templates/default/bbpress/content-statistics.php:44
+msgid "Empty Topic Tags"
+msgstr "ลบป้ายกำกับกระทู้"
+
+#: templates/default/bbpress/content-statistics.php:17
+msgid "Registered Users"
+msgstr "ผู้ใช้ลงทะเบียน"
+
+#: includes/users/template.php:1476
+msgid "Registration complete. Please check your e-mail."
+msgstr "ลงทะเบียนเสร็จแล้ว  กรุณาเช็คอีเมลของคุณ"
+
+#: includes/users/template.php:1471
+msgid "Check your e-mail for your new password."
+msgstr "เช็คอีเมลของคุณสำหรับรหัสผ่านใหม่"
+
+#: includes/users/template.php:1466
+msgid "Check your e-mail for the confirmation link."
+msgstr "เช็คอีเมลของคุณสำหรับลิงก์ยืนยัน"
+
+#: includes/users/template.php:1457
+msgid "New user registration is currently not allowed."
+msgstr "ไม่อนุญาตการลงทะเบียนผู้ใช้ใหม่ในตอนนี้"
+
+#: includes/users/template.php:1453
+msgid "You are now logged out."
+msgstr "ตอนนี้คุณได้ออกจากระบบแล้ว"
+
+#: includes/users/template.php:1255
+msgid "&mdash; No role for this site &mdash;"
+msgstr "&mdash; ไม่มีบทบาทสำหรับเว็บนี้ &mdash;"
+
+#: includes/users/template.php:1188
+msgid "This user has super admin privileges."
+msgstr "ผู้ใช้นี้มีสิทธิ์ของผู้ควบคุมสูงสุด"
+
+#: includes/users/template.php:1188
+msgid "You have super admin privileges."
+msgstr "คุณมีสิทธิผู้ควบคุมขั้นสูง"
+
+#: includes/users/template.php:1163
+msgid "User updated."
+msgstr "อัปเดตผู้ใช้"
+
+#: includes/users/template.php:895
+msgid "Favorited"
+msgstr "เก็บกระทู้ไว้แล้ว"
+
+#: includes/users/template.php:557
+msgid "Admin"
+msgstr "ผู้ควบคุม"
+
+#: includes/users/template.php:517
+msgid "Member"
+msgstr "สมาชิก"
+
+#: includes/users/template.php:507
+msgid "Inactive"
+msgstr "ไม่เปิดใช้"
+
+#: includes/users/template.php:503
+msgid "Guest"
+msgstr "ผู้เยี่ยมชม"
+
+#: includes/users/functions.php:1331
+msgid "<strong>ERROR</strong>: There was a problem subscribing to that topic!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการสมัครรับข่าวจากกระทู้นั้น"
+
+#: includes/users/functions.php:1329
+msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that topic!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการยกเลิกรับข่าวจากกระทู้นั้น"
+
+#: includes/users/functions.php:1276
+msgid "<strong>ERROR</strong>: No topic was found! Which topic are you subscribing/unsubscribing to?"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้  กระทู้ใดที่คุณ สมัคร/ยกเลิก เป็นกระทู้รับข่าว"
+
+#: includes/users/functions.php:1225
+msgid "<strong>ERROR</strong>: There was a problem subscribing to that forum!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการรับข่าวของฟอรั่มนั้น"
+
+#: includes/users/functions.php:1223
+msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that forum!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการรับข่าวจากฟอรั่มนั้น"
+
+#: includes/users/functions.php:1170
+msgid "<strong>ERROR</strong>: No forum was found! Which forum are you subscribing/unsubscribing to?"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบฟอรั่ม  ฟอรั่มใดที่คุณอยากจะรับข่าว/ปิดรับข่าว?"
+
+#: includes/users/functions.php:508
+msgid "<strong>ERROR</strong>: There was a problem favoriting that topic!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการทำรายการโปรดกระทู้นั้น"
+
+#: includes/users/functions.php:506
+msgid "<strong>ERROR</strong>: There was a problem removing that topic from favorites!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาเมื่อกำลังลบกระทู้ออกจากรายการโปรด"
+
+#: includes/users/functions.php:463 includes/users/functions.php:1178
+#: includes/users/functions.php:1284
+msgid "<strong>ERROR</strong>: You don't have the permission to edit favorites of that user!"
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิ์แก้ไขรายการโปรดของผู้ใช้นั้น"
+
+#: includes/users/functions.php:455
+msgid "<strong>ERROR</strong>: No topic was found! Which topic are you marking/unmarking as favorite?"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้  กระทู้ใดที่คุณ บันทึก/ยกเลิก เป็นรายการโปรด"
+
+#: includes/topics/template.php:3375
+msgid "View Topic Tag"
+msgstr "ดูป้ายกำกับกระทู้"
+
+#: includes/topics/template.php:3374
+msgid "New Tag Name"
+msgstr "ชื่อป้ายกำกับใหม่"
+
+#: includes/topics/template.php:3373
+msgid "Add New Tag"
+msgstr "เพิ่มป้ายกำกับใหม่"
+
+#: includes/topics/template.php:3372
+msgid "Update Tag"
+msgstr "อัปเดตหน้า"
+
+#: includes/topics/template.php:3371
+msgid "Edit Tag"
+msgstr "แก้ไขป้ายกำกับ"
+
+#: includes/topics/template.php:3370
+msgid "All Tags"
+msgstr "ป้ายกำกับทั้งหมด"
+
+#: includes/topics/template.php:3369
+msgid "Popular Tags"
+msgstr "ป้ายกำกับยอดนิยม"
+
+#: includes/topics/template.php:3368
+msgid "Search Tags"
+msgstr "ค้นหาป้ายกำกับ"
+
+#: includes/topics/template.php:3366
+#: templates/default/bbpress/content-statistics.php:37
+msgid "Topic Tags"
+msgstr "ป้ายกำกับกระทู้"
+
+#: includes/topics/template.php:3320
+msgid "This topic has no replies."
+msgstr "กระทู้นี้ไม่มีข้อความตอบกลับ"
+
+#: includes/topics/template.php:3316
+msgid "This topic contains %1$s and has %2$s."
+msgstr "กระทู้นี้ประกอบด้วย %1$s และมี %2$s"
+
+#: includes/topics/template.php:3312
+msgid "This topic contains %1$s, has %2$s, and was last updated by %3$s %4$s."
+msgstr "กระทู้นี้ประกอบด้วย %1$s มี %2$s และอัปเดตครั้งสุดท้ายโดย %3$s %4$s"
+
+#: includes/topics/template.php:3306
+msgid "%s voice"
+msgid_plural "%s voices"
+msgstr[0] "%s เสียง"
+
+#: includes/topics/template.php:3046
+msgid "This topic is in the trash."
+msgstr "กระทู้นี้อยู่ในถังขยะ"
+
+#: includes/topics/template.php:3041
+msgid "This topic is marked as spam."
+msgstr "กระทู้นี้ถูกบันทึกเป็นสแปม"
+
+#: includes/topics/template.php:2981
+msgid "Viewing topic %2$s (of %4$s total)"
+msgid_plural "Viewing %1$s topics - %2$s through %3$s (of %4$s total)"
+msgstr[0] "กำลังดู %1$s กระทู้ - %2$s ผ่านทาง %3$s (ของทั้งหมด %4$s)"
+
+#: includes/topics/template.php:2977
+msgid "Viewing %1$s topic"
+msgid_plural "Viewing %1$s topics"
+msgstr[0] "กำลังดู %1$s กระทู้"
+
+#: includes/topics/template.php:2816
+#: templates/default/bbpress/form-topic-tag.php:59
+#: templates/default/bbpress/form-topic-tag.php:73
+msgid "Merge"
+msgstr "รวมกับ"
+
+#: includes/topics/template.php:2686
+msgctxt "Topic Status"
+msgid "Open"
+msgstr "เปิดใช้งาน"
+
+#: includes/topics/template.php:2685
+msgctxt "Topic Status"
+msgid "Close"
+msgstr "ปิดใช้งาน"
+
+#: includes/topics/template.php:2295
+msgid "Tagged:"
+msgstr "ติดป้ายกำกับ:"
+
+#: includes/topics/template.php:1892
+msgid "Unfavorite"
+msgstr "ยกเลิกการเก็บกระทู้"
+
+#: includes/topics/template.php:1891 includes/users/template.php:894
+msgid "Favorite"
+msgstr "เก็บกระทู้"
+
+#: includes/topics/template.php:993
+msgid "This topic was modified %1$s by %2$s."
+msgstr "กระทู้นี้ถูกดัดแปลง %1$s โดย %2$s"
+
+#: includes/topics/template.php:991
+msgid "This topic was modified %1$s by %2$s. Reason: %3$s"
+msgstr "กระทู้นี้ถูกดัดแปลง %1$s โดย %2$s เหตุผล: %3$s "
+
+#: includes/topics/template.php:60
+msgid "No topics found in Trash"
+msgstr "ไม่พบกระทู้ในถังขยะ"
+
+#: includes/topics/template.php:59
+msgid "No topics found"
+msgstr "ไม่พบกระทู้"
+
+#: includes/topics/template.php:58
+msgid "Search Topics"
+msgstr "ค้นหากระทู้"
+
+#: includes/topics/template.php:56 includes/topics/template.php:57
+msgid "View Topic"
+msgstr "เปิดดูกระทู้"
+
+#: includes/topics/template.php:54
+msgid "Edit Topic"
+msgstr "แก้ไขกระทู้"
+
+#: includes/topics/template.php:52 templates/default/bbpress/form-topic.php:43
+msgid "Create New Topic"
+msgstr "สร้างกระทู้ใหม่"
+
+#: includes/topics/template.php:51 includes/topics/template.php:55
+msgid "New Topic"
+msgstr "กระทู้ใหม่"
+
+#: includes/topics/functions.php:2158
+msgid "<strong>ERROR</strong>: There was a problem deleting the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการลบกระทู้"
+
+#: includes/topics/functions.php:2150
+msgid "<strong>ERROR</strong>: There was a problem untrashing the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการยกเลิกกระทู้เป็นขยะ "
+
+#: includes/topics/functions.php:2142
+msgid "<strong>ERROR</strong>: There was a problem trashing the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการย้ายกระทู้เป็นขยะ"
+
+#: includes/topics/functions.php:2123
+msgid "<strong>ERROR</strong>: There was a problem marking the topic as spam."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการบันทึกกระทู้เป็นสแปม"
+
+#: includes/topics/functions.php:2123
+msgid "<strong>ERROR</strong>: There was a problem unmarking the topic as spam."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการยกเลิกกระทู้เป็นสแปม"
+
+#: includes/topics/functions.php:2113
+msgid "<strong>ERROR</strong>: There was a problem sticking the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการปักหมุดกระทู้"
+
+#: includes/topics/functions.php:2113
+msgid "<strong>ERROR</strong>: There was a problem unsticking the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการยกเลิกปักหมุดกระทู้"
+
+#: includes/topics/functions.php:2102
+msgid "<strong>ERROR</strong>: There was a problem opening the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการเปิดกระทู้"
+
+#: includes/topics/functions.php:2102
+msgid "<strong>ERROR</strong>: There was a problem closing the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการปิดกระทู้"
+
+#: includes/topics/functions.php:2089
+msgid "<strong>ERROR:</strong> You do not have the permission to do that."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิทำเช่นนั้น"
+
+#: includes/topics/functions.php:1984
+msgctxt "Make topic super sticky"
+msgid "Super Sticky"
+msgstr "ปักหมุดไปหน้าแรก"
+
+#: includes/topics/functions.php:1983
+msgctxt "Make topic sticky"
+msgid "Sticky"
+msgstr "ปักหมุด"
+
+#: includes/topics/functions.php:1982
+msgctxt "Unstick a topic"
+msgid "Normal"
+msgstr "ปกติ"
+
+#: includes/topics/functions.php:1969
+msgctxt "Mark topic as pending"
+msgid "Pending"
+msgstr "รอคอยตรวจสอบ"
+
+#: includes/topics/functions.php:1968
+msgctxt "Trash the topic"
+msgid "Trash"
+msgstr "ถังขยะ"
+
+#: includes/topics/functions.php:1967
+msgctxt "Spam the topic"
+msgid "Spam"
+msgstr "สแปม"
+
+#: includes/topics/functions.php:1966
+msgctxt "Close the topic"
+msgid "Closed"
+msgstr "ปิด"
+
+#: includes/topics/functions.php:1965
+msgctxt "Open the topic"
+msgid "Open"
+msgstr "เปิด"
+
+#: includes/topics/functions.php:1931
+msgid "<strong>ERROR</strong>: The following problem(s) have been found while deleting the tag: %s"
+msgstr "<strong>ผิดพลาด</strong>: ปัญหาต่อไปนี้ถูกพบในขณะกำลังลบป้ายกำกับ: %s "
+
+#: includes/topics/functions.php:1922
+msgid "<strong>ERROR</strong>: You do not have the permissions to delete the topic tags."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิลบป้ายกำกับกระทู้"
+
+#: includes/topics/functions.php:1890
+msgid "<strong>ERROR</strong>: The tags which are being merged can not be the same."
+msgstr "<strong>ผิดพลาด</strong>: ป้ายกำักับที่กำลังถูกรวมไม่สามารถเป็นป้ายกำกับเดียวกัน"
+
+#: includes/topics/functions.php:1881 includes/topics/functions.php:1899
+msgid "<strong>ERROR</strong>: The following problem(s) have been found while merging the tags: %s"
+msgstr "<strong>ผิดพลาด</strong>: ปัญหาต่อไปนี้ถูกพบในขณะกำลังรวมป้ายกำกับ: %s "
+
+#: includes/topics/functions.php:1842
+msgid "<strong>ERROR</strong>: The following problem(s) have been found while updating the tag: %s"
+msgstr "<strong>ผิดพลาด</strong>: ปัญหาต่อไปนี้ถูกพบในขณะอัปเดตป้ายกำกับ: %s "
+
+#: includes/topics/functions.php:1832 includes/topics/functions.php:1871
+msgid "<strong>ERROR</strong>: You need to enter a tag name."
+msgstr "<strong>ผิดพลาด</strong>: คุณต้องใส่ชื่อป้ายกำกับ"
+
+#: includes/topics/functions.php:1826 includes/topics/functions.php:1865
+msgid "<strong>ERROR</strong>: You do not have the permissions to edit the topic tags."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิแก้ไขป้ายกำักับกระทู้"
+
+#: includes/topics/functions.php:1808
+msgid "<strong>ERROR</strong>: The following problem(s) have been found while getting the tag: %s"
+msgstr "<strong>ผิดพลาด</strong>: ปัญหาต่อไปนี้ถูกพบในขณะกำลังรับป้ายกำกับ: %s"
+
+#: includes/topics/functions.php:1492
+msgid "<strong>ERROR</strong>: The topic you want to split to was not found!"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่ต้องการแยกจาก"
+
+#: includes/topics/functions.php:1470
+msgid "<strong>ERROR</strong>: You need to choose a valid split option."
+msgstr "<strong>ผิดพลาด</strong>: คุณต้องเลือกตัวเลือกแยกจากที่ใช้งานได้"
+
+#: includes/topics/functions.php:1452
+msgid "<strong>ERROR</strong>: The topic you want to split was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่ต้องการแยกจาก"
+
+#: includes/topics/functions.php:1443
+msgid "<strong>ERROR</strong>: The reply you want to split from was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบข้อความตอบกลับที่ต้องการแยกจาก"
+
+#: includes/topics/functions.php:1435
+msgid "<strong>ERROR</strong>: Reply ID to split the topic from not found!"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่ข้อความตอบกลับที่ต้องการแยกจากกระทู้"
+
+#: includes/topics/functions.php:1182
+msgid "<strong>ERROR</strong>: You do not have the permissions to edit the destination topic."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีิสิทธิแก้ไขกระทู้เป้าหมาย"
+
+#: includes/topics/functions.php:1178
+msgid "<strong>ERROR</strong>: The topic you want to merge to was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่คุณต้องการรวมกระทู้"
+
+#: includes/topics/functions.php:1172
+msgid "<strong>ERROR</strong>: Destination topic ID not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่กระทู้เป้าหมาย"
+
+#: includes/topics/functions.php:1158
+msgid "<strong>ERROR</strong>: The topic you want to merge was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่คุณต้องการรวมหัวข้อ"
+
+#: includes/topics/functions.php:602
+msgid "<strong>ERROR</strong>: Your topic cannot be edited at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถแก้ไขกระทู้ของคุณได้ในตอนนี้"
+
+#: includes/topics/functions.php:550
+msgid "<strong>ERROR</strong>: This forum is a category. No topics can be created in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นหมวดหมู่  ไม่สามารถสร้างกระทู้ในฟอรั่มนี้"
+
+#: includes/topics/functions.php:504
+msgid "<strong>ERROR</strong>: You do not have permission to edit that topic."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิแก้ไขกระทู้"
+
+#: includes/topics/functions.php:493
+msgid "<strong>ERROR</strong>: The topic you want to edit was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่คุณต้องการแก้ไข"
+
+#: includes/topics/functions.php:482 includes/topics/functions.php:1146
+msgid "<strong>ERROR</strong>: Topic ID not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่กระทู้"
+
+#: includes/topics/functions.php:270
+msgid "<strong>ERROR</strong>: Your topic cannot be created at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถสร้างกระทู้ของคุณได้ในตอนนี้"
+
+#: includes/topics/functions.php:265
+msgid "<strong>ERROR</strong>: Duplicate topic detected; it looks as though you&#8217;ve already said that!"
+msgstr "<strong>ผิดพลาด</strong>: พบกระทู้ซ้ำกัน  ดูเหมือนว่าคุณได้ส่งข้อความนี้มาแล้ว"
+
+#: includes/topics/functions.php:251 includes/topics/functions.php:569
+msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new topics in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกซ่อนและคุณไม่สามารถอ่านหรือสร้างกระทู้ใหม่ในฟอรั่มนี้ได้"
+
+#: includes/topics/functions.php:245 includes/topics/functions.php:563
+msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new topics in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นฟอรั่มส่วนตัว และคุณไม่สามารถที่จะเปิดอ่านหรือสร้างกระทู้ใหม่ในฟอรั่มนี้ได้"
+
+#: includes/topics/functions.php:239 includes/topics/functions.php:557
+msgid "<strong>ERROR</strong>: This forum has been closed to new topics."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกปิดสำหรับกระทู้ใหม่"
+
+#: includes/topics/functions.php:232
+msgid "<strong>ERROR</strong>: This forum is a category. No topics can be created in this forum."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นหมวดหมู่ ไม่สามารถสร้างกระทู้ในฟอรั่มนี้ได้"
+
+#: includes/topics/functions.php:187 includes/topics/functions.php:597
+msgid "<strong>ERROR</strong>: Your topic cannot be empty."
+msgstr "<strong>ผิดพลาด</strong>: กระทู้ของคุณไม่สามารถเว้นว่างได้"
+
+#: includes/topics/functions.php:175 includes/topics/functions.php:585
+msgid "<strong>ERROR</strong>: Your topic needs a title."
+msgstr "<strong>ผิดพลาด</strong>: กระทู้ของคุณต้องการหัวเรื่อง"
+
+#: includes/topics/functions.php:150
+msgid "<strong>ERROR</strong>: You do not have permission to create new topics."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิสร้างกระทู้ใหม่"
+
+#: includes/search/template.php:405
+msgid "Viewing %2$s results (of %4$s total)"
+msgid_plural "Viewing %1$s results - %2$s through %3$s (of %4$s total)"
+msgstr[0] "กำลังดู %1$s - %2$s ผลลัพธ์  ผ่านทาง %3$s (จากทั้งหมด %4$s ผลลัพธ์)"
+
+#: includes/search/template.php:401
+msgid "Viewing %1$s result"
+msgid_plural "Viewing %1$s results"
+msgstr[0] "กำลังดู %1$s ผลลัพธ์"
+
+#: includes/search/template.php:229
+msgid "Search Results for '%s'"
+msgstr "ค้นหาผลลัพธ์สำหรับ '%s'"
+
+#: includes/replies/template.php:2366
+msgid "Viewing %2$s post (of %4$s total)"
+msgid_plural "Viewing %1$s posts - %2$s through %3$s (of %4$s total)"
+msgstr[0] "กำลังดู %1$s ข้อความ - %2$s ผ่านทาง %3$s (ของทั้งหมด %4$s)"
+
+#: includes/replies/template.php:2362
+msgid "Viewing %1$s post"
+msgid_plural "Viewing %1$s posts"
+msgstr[0] "กำลังดู %1$s กระทู้"
+
+#: includes/replies/template.php:2354
+msgid "Viewing %2$s replies (of %4$s total)"
+msgid_plural "Viewing %1$s replies - %2$s through %3$s (of %4$s total)"
+msgstr[0] "กำลังดู %1$s ข้อความตอบกลับ - %2$s ผ่านทาง %3$s (ของทั้งหมด %4$s)"
+
+#: includes/replies/template.php:2350
+msgid "Viewing %1$s reply"
+msgid_plural "Viewing %1$s replies"
+msgstr[0] "กำลังดู %1$s ข้อความตอบกลับ"
+
+#: includes/replies/template.php:2343
+msgid "Viewing %1$s reply thread"
+msgid_plural "Viewing %1$s reply threads"
+msgstr[0] "กำลังดู %1$s ความเห็น"
+
+#: includes/replies/template.php:2237
+msgid "Split the topic from this reply"
+msgstr "แยกกระทู้จากข้อความตอบกลับนี้"
+
+#: includes/replies/template.php:2236
+msgid "Split"
+msgstr "แยก"
+
+#: includes/replies/template.php:2170
+msgid "Move this reply"
+msgstr "ย้ายความเห็นนี้"
+
+#: includes/replies/template.php:2169
+msgid "Move"
+msgstr "ย้าย"
+
+#: includes/replies/template.php:2106 includes/topics/template.php:2873
+msgid "Unspam"
+msgstr "ยกเลิกสแปม"
+
+#: includes/replies/template.php:2053 includes/topics/template.php:2634
+msgid "Are you sure you want to delete that permanently?"
+msgstr "คุณแน่ใจแล้วหรือว่าต้องการลบทิ้งถาวร?"
+
+#: includes/replies/template.php:2036 includes/topics/template.php:2617
+#: templates/default/bbpress/form-topic-tag.php:88
+#: templates/default/bbpress/form-topic-tag.php:101
+msgid "Delete"
+msgstr "ลบ"
+
+#: includes/replies/template.php:1695
+msgid "Cancel"
+msgstr "ยกเลิก"
+
+#: includes/replies/template.php:1210 includes/topics/template.php:1481
+#: includes/users/template.php:1651
+msgid "Visit %s's website"
+msgstr "เยี่ยมชมเว็บไซต์ %s"
+
+#: includes/replies/template.php:1210 includes/topics/template.php:1481
+#: includes/users/template.php:1651
+msgid "View %s's profile"
+msgstr "ดูข้อมูลส่วนตัว %s"
+
+#: includes/replies/template.php:1098 includes/topics/template.php:1368
+#: includes/users/template.php:184
+msgid "Anonymous"
+msgstr "นิรนาม"
+
+#: includes/replies/template.php:806
+msgid "This reply was modified %1$s by %2$s."
+msgstr "ข้อความตอบกลับนี้ถูกดัดแปลง %1$s โดย %2$s"
+
+#: includes/replies/template.php:804
+msgid "This reply was modified %1$s by %2$s. Reason: %3$s"
+msgstr "ข้อความตอบกลับนี้ถูกดัดแปลง %1$s โดย %2$s เหตุผล: %3$s"
+
+#: includes/replies/template.php:706 includes/topics/template.php:809
+msgctxt "date at time"
+msgid "%1$s at %2$s"
+msgstr "%1$s เวลา %2$s"
+
+#: includes/replies/template.php:60
+msgid "No replies found in Trash"
+msgstr "ไม่พบข้อความตอบกลับในถังขยะ"
+
+#: includes/replies/template.php:59
+msgid "No replies found"
+msgstr "ไม่พบข้อความตอบกลับ"
+
+#: includes/replies/template.php:58
+msgid "Search Replies"
+msgstr "ค้นหาข้อความตอบกลับ"
+
+#: includes/replies/template.php:56 includes/replies/template.php:57
+msgid "View Reply"
+msgstr "ดูข้อความตอบกลับ"
+
+#: includes/replies/template.php:54
+msgid "Edit Reply"
+msgstr "แก้ไขข้อความตอบกลับ"
+
+#: includes/replies/template.php:52
+msgid "Create New Reply"
+msgstr "ตอบกระทู้"
+
+#: includes/replies/template.php:51 includes/replies/template.php:55
+msgid "New Reply"
+msgstr "เขียนข้อความตอบกลับใหม่"
+
+#: includes/replies/functions.php:2034 includes/topics/functions.php:3464
+msgid "Replies: %s"
+msgstr "ตอบกลับ: %s"
+
+#: includes/replies/functions.php:1992
+msgid "All Posts"
+msgstr "ข้อความทั้งหมด"
+
+#: includes/replies/functions.php:1578
+msgid "<strong>ERROR</strong>: There was a problem deleting the reply!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการลบข้อความตอบกลับ"
+
+#: includes/replies/functions.php:1570
+msgid "<strong>ERROR</strong>: There was a problem untrashing the reply!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการย้ายข้อความตอบกลับออกจากถังขยะ"
+
+#: includes/replies/functions.php:1562
+msgid "<strong>ERROR</strong>: There was a problem trashing the reply!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในย้ายข้อความตอบกลับไปถังขยะ"
+
+#: includes/replies/functions.php:1543
+msgid "<strong>ERROR</strong>: There was a problem marking the reply as spam!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการบันทึกข้อความตอบกลับเป็นสแปม"
+
+#: includes/replies/functions.php:1543
+msgid "<strong>ERROR</strong>: There was a problem unmarking the reply as spam!"
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการยกเลิกข้อความตอบกลับเป็นสแปม"
+
+#: includes/replies/functions.php:1530
+msgid "<strong>ERROR:</strong> You do not have the permission to do that!"
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิทำเช่นนั้น"
+
+#: includes/replies/functions.php:1349 includes/topics/functions.php:1538
+msgid "<strong>ERROR</strong>: You do not have the permissions to create new topics. The reply could not be converted into a topic."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิสร้างกระทู้ใหม่  ข้อความตอบกลับไม่สามารถแปลงไปเป็นกระทู้ได้"
+
+#: includes/replies/functions.php:1344 includes/topics/functions.php:1533
+msgid "<strong>ERROR</strong>: There was a problem converting the reply into the topic. Please try again."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการแปลงข้อความตอบกลับเป็นกระทู้ โปรดลองใหม่อีกครั้ง"
+
+#: includes/replies/functions.php:1299 includes/replies/template.php:571
+#: includes/topics/functions.php:1294 includes/topics/functions.php:1652
+#: templates/default/bbpress/form-reply.php:29
+msgid "Reply To: %s"
+msgstr "ตอบกลับไปยัง: %s"
+
+#: includes/replies/functions.php:1290 includes/topics/functions.php:1496
+msgid "<strong>ERROR</strong>: You do not have the permissions to edit the destination topic!"
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิในการแก้ไขกระทู้เป้าหมาย"
+
+#: includes/replies/functions.php:1285
+msgid "<strong>ERROR</strong>: The topic you want to move to was not found!"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่คุณต้องการย้าย"
+
+#: includes/replies/functions.php:1275 includes/topics/functions.php:1483
+msgid "<strong>ERROR</strong>: Destination topic ID not found!"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่กระทู้เป้าหมาย"
+
+#: includes/replies/functions.php:1262
+msgid "<strong>ERROR</strong>: You need to choose a valid move option."
+msgstr "<strong>ผิดพลาด</strong>: คุณต้องเลือกคำสั่งย้ายที่ใช้งานได้"
+
+#: includes/replies/functions.php:1252 includes/topics/functions.php:1164
+#: includes/topics/functions.php:1462
+msgid "<strong>ERROR</strong>: You do not have the permissions to edit the source topic."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิในการแก้ไขกระทู้ที่มา"
+
+#: includes/replies/functions.php:1241
+msgid "<strong>ERROR</strong>: The topic you want to move from was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้ที่คุณต้องการจะย้าย"
+
+#: includes/replies/functions.php:1232
+msgid "<strong>ERROR</strong>: The reply you want to move was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบความเห็นที่คุณต้องการจะย้าย"
+
+#: includes/replies/functions.php:1223
+msgid "<strong>ERROR</strong>: Reply ID to move not found!"
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่ความเห็นที่จะย้าย!"
+
+#: includes/replies/functions.php:616
+msgid "<strong>ERROR</strong>: Your reply cannot be edited at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถแก้ไขข้อความตอบกลับของคุณได้ในขณะนี้"
+
+#: includes/replies/functions.php:533
+msgid "<strong>ERROR</strong>: You do not have permission to edit that reply."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิแก้ไขข้อความตอบกลับนี้"
+
+#: includes/replies/functions.php:522
+msgid "<strong>ERROR</strong>: The reply you want to edit was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบข้อความตอบกลับที่คุณต้องการแก้ไข"
+
+#: includes/replies/functions.php:505
+msgid "<strong>ERROR</strong>: Reply ID not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่ข้อความตอบกลับ"
+
+#: includes/replies/functions.php:377 includes/replies/functions.php:702
+msgid "<strong>ERROR</strong>: There was a problem adding the tags to the topic."
+msgstr "<strong>ผิดพลาด</strong>: มีปัญหาในการเพิ่มป้ายกำกับไปยังกระทู้"
+
+#: includes/replies/functions.php:318
+msgid "<strong>ERROR</strong>: Topic is closed."
+msgstr "<strong>ผิดพลาด</strong>: กระทู้ถูกปิดแล้ว"
+
+#: includes/replies/functions.php:294
+msgid "<strong>ERROR</strong>: Your reply cannot be created at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถสร้างข้อความตอบกลับของคุณได้ในตอนนี้"
+
+#: includes/replies/functions.php:289
+msgid "<strong>ERROR</strong>: Duplicate reply detected; it looks as though you&#8217;ve already said that!"
+msgstr "<strong>ผิดพลาด</strong>: ตรวจพบข้อความตอบกลับซ้ำกัน  ดูเหมือนว่าคุณได้ส่งข้อความนี้มาแล้ว"
+
+#: includes/replies/functions.php:279 includes/replies/functions.php:611
+msgid "<strong>ERROR</strong>: Your reply cannot be empty."
+msgstr "<strong>ผิดพลาด</strong>: ข้อความตอบกลับของคุณไม่สามารถเว้นว่าง"
+
+#: includes/replies/functions.php:246 includes/replies/functions.php:587
+msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new replies in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกซ่อน  และคุณไม่สามารถอ่านหรือสร้างข้อความตอบกลับใหม่ในฟอรั่มนี้ได้"
+
+#: includes/replies/functions.php:240 includes/replies/functions.php:581
+msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new replies in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นส่วนตัวและคุณไม่สามารถอ่านหรือสร้างข้อความตอบกลับใหม่ในฟอรั่มนี้ได้"
+
+#: includes/replies/functions.php:234 includes/replies/functions.php:575
+msgid "<strong>ERROR</strong>: This forum has been closed to new replies."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกปิดไม่ให้แสดงความเห็นใหม่"
+
+#: includes/replies/functions.php:227 includes/replies/functions.php:568
+msgid "<strong>ERROR</strong>: This forum is a category. No replies can be created in this forum."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นหมวดหมู่  ไม่สามารถตอบกลับในฟอรั่มนี้ได้"
+
+#: includes/replies/functions.php:213 includes/topics/functions.php:218
+msgid "<strong>ERROR</strong>: Forum does not exist."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบฟอรั่มนี้"
+
+#: includes/replies/functions.php:209 includes/topics/functions.php:214
+msgid "<strong>ERROR</strong>: Forum ID cannot be a negative number."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่ฟอรั่มต้องไม่เป็นตัวเลขติดลบ"
+
+#: includes/replies/functions.php:195 includes/topics/functions.php:200
+msgid "<strong>ERROR</strong>: Forum ID must be a number."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่ฟอรั่มต้องเป็นตัวเลข"
+
+#: includes/replies/functions.php:191 includes/replies/functions.php:205
+#: includes/topics/functions.php:196 includes/topics/functions.php:210
+#: includes/topics/functions.php:535
+msgid "<strong>ERROR</strong>: Forum ID is missing."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่ฟอรั่มหายไป"
+
+#: includes/replies/functions.php:172
+msgid "<strong>ERROR</strong>: Topic does not exist."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบกระทู้นี้"
+
+#: includes/replies/functions.php:168
+msgid "<strong>ERROR</strong>: Topic ID cannot be a negative number."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่กระทู้ไม่สามารถมีตัวเลขติดลบ"
+
+#: includes/replies/functions.php:158
+msgid "<strong>ERROR</strong>: Topic ID must be a number."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่กระทู้ต้องเป็นตัวเลข"
+
+#: includes/replies/functions.php:154
+msgid "<strong>ERROR</strong>: Topic ID is missing."
+msgstr "<strong>ผิดพลาด</strong>: เลขที่กระทู้หายไป"
+
+#: includes/replies/functions.php:142
+msgid "<strong>ERROR</strong>: You do not have permission to reply."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิ์ให้ตอบกลับได้"
+
+#: includes/forums/template.php:2021
+msgid "This forum is empty."
+msgstr "ฟอรั่มนี้ว่างเปล่า"
+
+#: includes/forums/template.php:2017
+msgid "This forum contains %1$s."
+msgstr "ฟอรั่มนี้ประกอบด้วย %1$s"
+
+#: includes/forums/template.php:2015
+msgid "This category contains %1$s."
+msgstr "หมวดหมู่นี้ประกอบด้วย %1$s "
+
+#: includes/forums/template.php:2007
+msgid "This forum contains %1$s and %2$s."
+msgstr "ฟอรั่มนี้ประกอบด้วย %1$s และ %2$s"
+
+#: includes/forums/template.php:2005
+msgid "This category contains %1$s and %2$s."
+msgstr "หมวดหมู่นี้ประกอบด้วย %1$s และ %2$s"
+
+#: includes/forums/template.php:1995
+msgid "This forum contains %1$s, and was last updated by %2$s %3$s."
+msgstr "ฟอรั่มนี้ประกอบด้วย %1$s และอัปเดตครั้งสุดท้ายโดย %2$s %3$s "
+
+#: includes/forums/template.php:1993
+msgid "This category contains %1$s, and was last updated by %2$s %3$s."
+msgstr "หมวดหมู่นี้ประกอบด้วย %1$s และอัปเดตครั้งสุดท้ายโดย %2$s %3$s"
+
+#: includes/forums/template.php:1987
+msgid "This forum contains %1$s and %2$s, and was last updated by %3$s %4$s."
+msgstr "ฟอรั่มนี้ประกอบด้วย %1$s และ %2$s และอัปเดตครั้งสุดท้ายโดย %3$s %4$s"
+
+#: includes/forums/template.php:1985
+msgid "This category contains %1$s and %2$s, and was last updated by %3$s %4$s."
+msgstr "หมวดหมู่นี้ประกอบด้วย %1$s และ %2$s และอัปเดตครั้งสุดท้ายโดย %3$s %4$s"
+
+#: includes/forums/template.php:1965 includes/topics/template.php:2102
+msgid "%s reply"
+msgid_plural "%s replies"
+msgstr[0] "%s ข้อความตอบกลับ"
+
+#: includes/forums/template.php:1254 includes/topics/template.php:2118
+msgid " (+ %d hidden)"
+msgstr " (+ %d ซ่อน)"
+
+#: includes/forums/template.php:1238 includes/forums/template.php:1976
+msgid "%s topic"
+msgid_plural "%s topics"
+msgstr[0] "%s กระทู้"
+
+#: includes/forums/template.php:841 includes/topics/template.php:1847
+#: includes/users/template.php:1059
+msgid "Unsubscribe"
+msgstr "ยกเลิกรับข้อมูล"
+
+#: includes/forums/template.php:840 includes/topics/template.php:1846
+#: includes/users/template.php:1058
+msgid "Subscribe"
+msgstr "สมัครรับข้อมูล"
+
+#: includes/forums/template.php:61 templates/default/bbpress/form-forum.php:118
+msgid "Parent Forum:"
+msgstr "ฟอรั่มหลัก:"
+
+#: includes/forums/template.php:60
+msgid "No forums found in Trash"
+msgstr "ไม่พบฟอรั่มในถังขยะ"
+
+#: includes/forums/template.php:59
+msgid "No forums found"
+msgstr "ไม่พบฟอรั่ม"
+
+#: includes/forums/template.php:56 includes/forums/template.php:57
+msgid "View Forum"
+msgstr "เปิดดูฟอรั่ม"
+
+#: includes/forums/template.php:54
+msgid "Edit Forum"
+msgstr "แก้ไขฟอรั่ม"
+
+#: includes/forums/template.php:52 templates/default/bbpress/form-forum.php:37
+msgid "Create New Forum"
+msgstr "สร้างฟอรั่มใหม่"
+
+#: includes/forums/template.php:51 includes/forums/template.php:55
+msgid "New Forum"
+msgstr "ฟอรั่มใหม่"
+
+#: includes/forums/functions.php:1632
+msgctxt "Make forum hidden"
+msgid "Hidden"
+msgstr "ซ่อน"
+
+#: includes/forums/functions.php:1631
+msgctxt "Make forum private"
+msgid "Private"
+msgstr "ส่วนตัว"
+
+#: includes/forums/functions.php:1630
+msgctxt "Make forum public"
+msgid "Public"
+msgstr "สาธารณะ"
+
+#: includes/forums/functions.php:1617
+msgctxt "Forum is a category"
+msgid "Category"
+msgstr "หมวดหมู่"
+
+#: includes/forums/functions.php:1616
+msgctxt "Forum accepts new topics"
+msgid "Forum"
+msgstr "ฟอรั่ม"
+
+#: includes/forums/functions.php:1603
+msgctxt "Close the forum"
+msgid "Closed"
+msgstr "ปิด"
+
+#: includes/forums/functions.php:1602
+msgctxt "Open the forum"
+msgid "Open"
+msgstr "เปิด"
+
+#: includes/forums/functions.php:472
+msgid "<strong>ERROR</strong>: Your forum cannot be edited at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถแก้ไขฟอรั่มของคุณในตอนนี้"
+
+#: includes/forums/functions.php:405
+msgid "<strong>ERROR</strong>: You do not have permission to edit that forum."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิแก้ไขฟอรั่มนั้น"
+
+#: includes/forums/functions.php:400
+msgid "<strong>ERROR</strong>: The forum you want to edit was not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบฟอรั่ม ที่คุณต้องการแก้ไข"
+
+#: includes/forums/functions.php:384
+msgid "<strong>ERROR</strong>: Forum ID not found."
+msgstr "<strong>ผิดพลาด</strong>: ไม่พบเลขที่ฟอรั่ม"
+
+#: includes/forums/functions.php:220
+msgid "<strong>ERROR</strong>: Your forum cannot be created at this time."
+msgstr "<strong>ผิดพลาด</strong>: ไม่สามารถสร้างฟอรั่มของคุณในตอนนี้"
+
+#: includes/forums/functions.php:215
+msgid "<strong>ERROR</strong>: This forum already exists."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้มีอยู่แล้ว "
+
+#: includes/forums/functions.php:210 includes/replies/functions.php:284
+#: includes/topics/functions.php:260
+msgid "<strong>ERROR</strong>: Slow down; you move too fast."
+msgstr "<strong>ผิดพลาด</strong>: ช้าลงหน่อย คุณทำงานเร็วเกินไป"
+
+#: includes/forums/functions.php:203 includes/forums/functions.php:441
+msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new forums in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกซ่อน และคุณไม่มีความสามารถอ่านหรือสร้างฟอรั่มใหม่ในนี้ได้ "
+
+#: includes/forums/functions.php:198 includes/forums/functions.php:436
+msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new forums in it."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นส่วนตัว  และคุณไม่มีความสามารถอ่านหรือสร้างฟอรั่มใหม่ในนี้ได้"
+
+#: includes/forums/functions.php:193 includes/forums/functions.php:431
+msgid "<strong>ERROR</strong>: This forum has been closed to new forums."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้ถูกปิดสำหรับฟอรั่มใหม่"
+
+#: includes/forums/functions.php:188
+msgid "<strong>ERROR</strong>: This forum is a category. No forums can be created in this forum."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มนี้เป็นหมวดหมู่  ไม่มีฟอรั่มใดสามารถสร้างในฟอรั่มนี้ได้"
+
+#: includes/forums/functions.php:181
+msgid "<strong>ERROR</strong>: Your forum must have a parent."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มของคุณต้องมีฟอรั่มหลัก"
+
+#: includes/forums/functions.php:167 includes/forums/functions.php:467
+msgid "<strong>ERROR</strong>: Your forum description cannot be empty."
+msgstr "<strong>ผิดพลาด</strong>: คำอธิบายฟอรั่มของคุณไม่สามารถเว้นว่างได้"
+
+#: includes/forums/functions.php:155 includes/forums/functions.php:455
+msgid "<strong>ERROR</strong>: Your forum needs a title."
+msgstr "<strong>ผิดพลาด</strong>: ฟอรั่มของคุณต้องการหัวข้อ"
+
+#: includes/forums/functions.php:131
+msgid "<strong>ERROR</strong>: You do not have permission to create new forums."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิสร้างฟอรั่มใหม่"
+
+#: includes/extend/buddypress/notifications.php:165
+msgid "<strong>ERROR</strong>: You do not have permission to mark notifications for that user."
+msgstr "<strong>ผิดพลาด</strong>: คุณไม่มีสิทธิเน้นคำเตือนสำหรับผู้ใช้นั้น"
+
+#: includes/extend/buddypress/notifications.php:57
+msgid "You have %d new reply to %s"
+msgstr "คุณมี %d ข้อความตอบกลับใหม่ที่ %s"
+
+#: includes/extend/buddypress/notifications.php:55
+msgid "You have %d new reply to %2$s from %3$s"
+msgstr "คุณมี %d ความเห็นใหม่ตอบกลับที่ %2$s จาก %3$s"
+
+#: includes/extend/buddypress/notifications.php:51
+msgid "You have %d new replies"
+msgstr "คุณมี %d ข้อความตอบกลับใหม่"
+
+#: includes/extend/buddypress/notifications.php:48
+msgid "Topic Replies"
+msgstr "ตอบกลับกระทู้"
+
+#: includes/extend/buddypress/loader.php:293
+#: templates/default/bbpress/user-subscriptions.php:34
+msgid "Subscribed Topics"
+msgstr "ติดตามกระทู้"
+
+#: includes/extend/buddypress/loader.php:105
+msgid "Search Forums..."
+msgstr "ค้นหาฟอรั่ม..."
+
+#: includes/extend/buddypress/groups.php:775
+msgid "This group does not currently have a forum."
+msgstr "กลุ่มนี้ยังไม่มีฟอรั่ม"
+
+#: includes/extend/buddypress/groups.php:478
+msgid "Group Forum"
+msgstr "ฟอรั่มกลุ่ม"
+
+#: includes/extend/buddypress/groups.php:437
+msgctxt "group admin edit screen"
+msgid "Discussion Forum"
+msgstr "ฟอรั่มสนทนา"
+
+#: includes/extend/buddypress/groups.php:339
+#: includes/extend/buddypress/groups.php:498
+#: includes/extend/buddypress/notifications.php:161
+#: includes/forums/functions.php:118 includes/forums/functions.php:395
+#: includes/replies/functions.php:116 includes/replies/functions.php:516
+#: includes/replies/functions.php:1246 includes/topics/functions.php:122
+#: includes/topics/functions.php:520 includes/topics/functions.php:1153
+#: includes/topics/functions.php:1456 includes/topics/functions.php:1820
+#: includes/topics/functions.php:1859 includes/topics/functions.php:1916
+#: includes/users/functions.php:459 includes/users/functions.php:1174
+#: includes/users/functions.php:1280 includes/users/functions.php:1407
+#: includes/users/functions.php:1413
+msgid "<strong>ERROR</strong>: Are you sure you wanted to do that?"
+msgstr "<strong>ผิดพลาด</strong>: คุณแน่ใจรึเปล่าว่าคุณต้องการทำแบบนั้น?"
+
+#: includes/extend/buddypress/groups.php:304
+msgid "Save Settings"
+msgstr "บันทึกการตั้งค่า"
+
+#: includes/extend/buddypress/groups.php:299
+msgid "Network administrators can reconfigure which forum belongs to this group."
+msgstr "ผู้ควบคุมเครือข่ายสามารถปรับแต่งฟอรั่มใด ๆ ที่เป็นของกลุ่มนี้"
+
+#: includes/extend/buddypress/groups.php:291
+msgid "Group Forum:"
+msgstr "ฟอรั่มกลุ่ม"
+
+#: includes/extend/buddypress/groups.php:286
+msgid "Saying no will not delete existing forum content."
+msgstr "การบอกว่าไม่ จะไม่ลบเนื้อหาฟอรั่มที่มีอยู่"
+
+#: includes/extend/buddypress/groups.php:283
+#: includes/extend/buddypress/groups.php:483
+msgid "Yes. I want this group to have a forum."
+msgstr "ใช่ ฉันต้องการให้กลุ่มนี้มีฟอรั่ม"
+
+#: includes/extend/buddypress/groups.php:279
+#: includes/extend/buddypress/groups.php:480
+msgid "Create a discussion forum to allow members of this group to communicate in a structured, bulletin-board style fashion."
+msgstr "สร้างฟอรั่มสนทนาเพื่ออนุญาตสมาชิกของกลุ่มนี้ให้สื่อสารในรูปแบบของบูเลตินบอร์ด"
+
+#: includes/extend/buddypress/groups.php:275
+#: includes/extend/buddypress/groups.php:278
+msgid "Group Forum Settings"
+msgstr "การตั้งค่าฟอรั่มกลุ่ม"
+
+#: includes/extend/buddypress/activity.php:566
+msgid "%1$s replied to the topic %2$s in the forum %3$s"
+msgstr "%1$s ตอบกลับกระทู้ %2$s ในฟอรั่ม %3$s"
+
+#: includes/extend/buddypress/activity.php:421
+msgid "%1$s started the topic %2$s in the forum %3$s"
+msgstr "%1$s ได้เริ่มกระทู้ %2$s ในฟอรั่ม %3$s"
+
+#: includes/extend/buddypress/activity.php:196
+msgid "New forum reply"
+msgstr "ความเห็นฟอรั่มเห็น"
+
+#: includes/extend/buddypress/activity.php:195
+msgid "New forum topic"
+msgstr "กระทู้ฟอรั่มใหม่"
+
+#: includes/extend/akismet.php:793
+msgid "No recorded history. Akismet has not checked this post."
+msgstr "ไม่มีข้อมูลย้อนหลัง  Akismetไม่ได้ตรวจข้อความนี้"
+
+#: includes/extend/akismet.php:735 includes/extend/akismet.php:745
+msgid "Akismet History"
+msgstr "ข้อมูลย้อนหลัง Akismet"
+
+#: includes/extend/akismet.php:489
+msgid "Akismet was unable to check this post (response: %s), will automatically retry again later."
+msgstr "Akismet ไม่สามารถตรวจสอบข้อความนี้ (การตอบสนอง: %s) จะลองใหม่อีกครั้งอัตโนมัติในภายหลัง"
+
+#: includes/extend/akismet.php:475
+msgid "Akismet cleared this post as not spam"
+msgstr "Akismet เปลี่ยนสถานะข้อความนี้เป็นไม่ใช่สแปม"
+
+#: includes/extend/akismet.php:467 includes/extend/akismet.php:482
+msgid "Post status was changed to %s"
+msgstr "สถานะข้อความถูกเปลี่ยนเป็น %s"
+
+#: includes/extend/akismet.php:463
+msgid "Akismet caught this post as spam"
+msgstr "Akismet จับข้อความนี้ได้ว่าเป็นสแปม"
+
+#: includes/extend/akismet.php:405
+msgid "No response"
+msgstr "ไม่มีการตอบรับ"
+
+#: includes/extend/akismet.php:316
+msgid "%1$s reported this %2$s as not spam"
+msgstr "%1$s รายงานว่า %2$s นี้ไม่ใช่สแปม"
+
+#: includes/extend/akismet.php:309
+msgid "%1$s reported this %2$s as spam"
+msgstr "%1$s รายงานว่า %2$s เป็นสแปม "
+
+#: includes/core/update.php:191
+msgid "Oh, and this is what a reply looks like."
+msgstr "อืม และนี่คือลักษณะหน้าตาที่ข้อความตอบกลับจะเป็น"
+
+#: includes/core/update.php:190
+msgid "Re: Hello World!"
+msgstr "ตอบกลับ:สวัสดีชาวโลก"
+
+#: includes/core/update.php:189
+msgid "I am the first topic in your new forums."
+msgstr "ฉันคือหัวข้อแรกในฟอรั่มใหม่ของคุณ"
+
+#: includes/core/update.php:188
+msgid "Hello World!"
+msgstr "สวัสดีชาวโลก"
+
+#: includes/core/update.php:187
+msgid "General chit-chat"
+msgstr "การพูดคุยทั่วไป"
+
+#: includes/core/update.php:186
+msgid "General"
+msgstr "ทั่วไป"
+
+#: includes/core/capabilities.php:531
+msgid "Editable forum roles no longer exist."
+msgstr "ไม่มีบทบาทที่แก้ไขฟอรั่มได้แล้ว"
+
+#: includes/common/widgets.php:1252
+msgid "Recent Replies"
+msgstr "ความเห็นล่าสุด"
+
+#: includes/common/widgets.php:1237
+msgid "Show reply author:"
+msgstr "แสดงผู้เขียนข้อความตอบกลับ:"
+
+#: includes/common/widgets.php:1235
+msgid "Maximum replies to show:"
+msgstr "ข้อความตอบกลับมากสุดที่จะแสดง:"
+
+#. translators: 1: reply link
+#: includes/common/widgets.php:1184
+msgctxt "widgets"
+msgid "%1$s"
+msgstr "%1$s"
+
+#. translators: 1: reply author, 2: reply link
+#: includes/common/widgets.php:1178
+msgctxt "widgets"
+msgid "%1$s on %2$s"
+msgstr "%1$s บน %2$s"
+
+#. translators: 1: reply link, 2: reply timestamp
+#: includes/common/widgets.php:1172
+msgctxt "widgets"
+msgid "%1$s %2$s"
+msgstr "%1$s %2$s"
+
+#. translators: 1: reply author, 2: reply link, 3: reply timestamp
+#: includes/common/widgets.php:1166
+msgctxt "widgets"
+msgid "%1$s on %2$s %3$s"
+msgstr "%1$s บน %2$s %3$s"
+
+#: includes/common/widgets.php:1081
+msgid "(bbPress) Recent Replies"
+msgstr "(bbPress) ข้อความตอบกลับล่าสุด"
+
+#: includes/common/widgets.php:1078
+msgid "A list of the most recent replies."
+msgstr "รายชื่อของข้อความตอบกลับล่าสุดส่วนใหญ่"
+
+#: includes/common/widgets.php:1048
+msgid "Forum Statistics"
+msgstr "สถิติฟอรั่ม"
+
+#: includes/common/widgets.php:951
+msgid "(bbPress) Statistics"
+msgstr "สถิติ (bbPress)"
+
+#: includes/common/widgets.php:948
+msgid "Some statistics from your forum."
+msgstr "สถิติบางอย่างจากฟอรั่มของคุณ"
+
+#: includes/common/widgets.php:914
+msgid "Recent Topics"
+msgstr "กระทู้ล่าสุด"
+
+#: includes/common/widgets.php:897
+msgid "Topics With Recent Replies"
+msgstr "กระทู้ที่มีข้อความตอบกลับล่าสุด"
+
+#: includes/common/widgets.php:896
+#: templates/default/extras/page-forum-statistics.php:34
+msgid "Popular Topics"
+msgstr "กระทู้ยอดนิยม"
+
+#: includes/common/widgets.php:895
+msgid "Newest Topics"
+msgstr "กระทู้ล่าสุด"
+
+#: includes/common/widgets.php:893
+msgid "Order By:"
+msgstr "เรียงโดย:"
+
+#: includes/common/widgets.php:890
+msgid "Show topic author:"
+msgstr "แสดงผู้เขียนกระทู้:"
+
+#: includes/common/widgets.php:889 includes/common/widgets.php:1236
+msgid "Show post date:"
+msgstr "แสดงวันที่เขียน:"
+
+#: includes/common/widgets.php:877
+msgid "Maximum topics to show:"
+msgstr "จำนวนกระทู้มากสุดที่แสดง:"
+
+#: includes/common/widgets.php:815
+msgctxt "widgets"
+msgid "by %1$s"
+msgstr "โดย %1$s"
+
+#: includes/common/widgets.php:695
+msgid "(bbPress) Recent Topics"
+msgstr "(bbPress) กระทู้ล่าสุด"
+
+#: includes/common/widgets.php:692
+msgid "A list of recent topics, sorted by popularity or freshness."
+msgstr "รายการของกระทู้ล่าสุด เรียงลำดับตามความนิยมหรือความใหม่"
+
+#: includes/common/widgets.php:646 includes/common/widgets.php:886
+msgid "\"0\" to show only root - \"any\" to show all"
+msgstr "\"0\" เพื่อแสดงแค่ตัวหลัก - \"any\" เพื่อแสดงทั้งหมด"
+
+#: includes/common/widgets.php:640 includes/common/widgets.php:880
+msgid "Parent Forum ID:"
+msgstr "เลขที่ฟอรั่มหลัก:"
+
+#: includes/common/widgets.php:515
+msgid "(bbPress) Forums List"
+msgstr "(bbPress) รายชื่อฟอรั่ม"
+
+#: includes/common/widgets.php:512
+msgid "A list of forums with an option to set the parent."
+msgstr "รายชื่อฟอรั่มพร้อมตัวเลือกให้ตั้งค่าเป็นฟอรั่มหลัก"
+
+#: includes/common/widgets.php:483 includes/forums/template.php:58
+msgid "Search Forums"
+msgstr "ค้นหาฟอรั่ม"
+
+#: includes/common/widgets.php:387
+msgid "(bbPress) Forum Search Form"
+msgstr "(bbPress) ฟอร์มค้นหาของฟอรั่ม "
+
+#: includes/common/widgets.php:384
+msgid "The bbPress forum search form."
+msgstr "ฟอร์มค้นหาของฟอรั่ม bbPress"
+
+#: includes/common/widgets.php:246
+msgid "(bbPress) Topic Views List"
+msgstr "(bbPress) รายชื่อดูกระทู้"
+
+#: includes/common/widgets.php:243
+msgid "A list of registered optional topic views."
+msgstr "รายการของการดูกระทู้ทางเลือกลงทะเบียน"
+
+#: includes/common/widgets.php:195
+msgid "Lost Password URI:"
+msgstr "URI สำหรับลืมรหัสผ่าน:"
+
+#: includes/common/widgets.php:190
+msgid "Register URI:"
+msgstr "URI สำหรับสมัครลงทะเบียน:"
+
+#: includes/common/widgets.php:185 includes/common/widgets.php:337
+#: includes/common/widgets.php:465 includes/common/widgets.php:634
+#: includes/common/widgets.php:876 includes/common/widgets.php:1030
+#: includes/common/widgets.php:1234
+msgid "Title:"
+msgstr "หัวข้อ:"
+
+#: includes/common/widgets.php:128
+#: templates/default/bbpress/form-user-lost-pass.php:14
+msgid "Lost Password"
+msgstr "จำรหัสผ่านไม่ได้"
+
+#: includes/common/widgets.php:122
+#: templates/default/bbpress/form-user-register.php:36
+msgid "Register"
+msgstr "ลงทะเบียน"
+
+#: includes/common/widgets.php:103
+msgid "Remember Me"
+msgstr "บันทึกการใช้งานของฉัน"
+
+#: includes/common/widgets.php:97
+#: templates/default/bbpress/form-user-login.php:22
+msgid "Password"
+msgstr "รหัสผ่าน"
+
+#: includes/common/widgets.php:92
+#: templates/default/bbpress/form-user-edit.php:98
+#: templates/default/bbpress/form-user-login.php:17
+#: templates/default/bbpress/form-user-register.php:23
+msgid "Username"
+msgstr "ชื่อผู้ใช้"
+
+#: includes/common/widgets.php:89 includes/common/widgets.php:110
+#: templates/default/bbpress/form-user-login.php:14
+#: templates/default/bbpress/form-user-login.php:35
+msgid "Log In"
+msgstr "เข้าสู่ระบบ"
+
+#: includes/common/widgets.php:42
+msgid "(bbPress) Login Widget"
+msgstr "(bbPress) Widget เข้าสู่ระบบ"
+
+#: includes/common/widgets.php:39
+msgid "A simple login form with optional links to sign-up and lost password pages."
+msgstr "ฟอร์มเข้าสู่ระบบแบบง่าย ๆ พร้อมด้วยลิงก์ทางเลือกไปยังหน้าลงทะเบียนและหน้าลืมรหัสผ่าน"
+
+#: includes/common/template.php:2646
+msgid "View: %s"
+msgstr "ดู: %s"
+
+#: includes/common/template.php:2638
+#: templates/default/bbpress/user-details.php:65
+msgid "Edit %s's Profile"
+msgstr "แก้ไขข้อมูลส่วนตัว %s"
+
+#: includes/common/template.php:2633
+msgid "Edit Your Profile"
+msgstr "แก้ไขข้อมูลส่วนตัวของคุณ"
+
+#: includes/common/template.php:2625
+msgid "%s Profile"
+msgstr "%s ประวัติส่วนตัว"
+
+#: includes/common/template.php:2621
+msgid "%s Subscriptions"
+msgstr "%s การติดตาม"
+
+#: includes/common/template.php:2617
+msgid "%s Favorites"
+msgstr "%s กระทู้ที่เก็บไว้"
+
+#: includes/common/template.php:2613
+msgid "%s Replies"
+msgstr "%s ข้อความตอบกลับ"
+
+#: includes/common/template.php:2609
+msgid "%s Topics"
+msgstr "%s กระทู้"
+
+#: includes/common/template.php:2604
+msgctxt "User viewing another users profile"
+msgid "%s's"
+msgstr "%s's"
+
+#: includes/common/template.php:2600
+msgctxt "User viewing his/her own profile"
+msgid "Your"
+msgstr "ของคุณ"
+
+#: includes/common/template.php:2582
+msgid "Topic: %s"
+msgstr "กระทู้: %s"
+
+#: includes/common/template.php:2577
+msgid "Forum: %s"
+msgstr "ฟอรั่ม: %s"
+
+#: includes/common/template.php:2570
+msgid "Topic Tag Edit: %s"
+msgstr "แก้ไขป้ายกำกับกระทู้: %s"
+
+#: includes/common/template.php:2565
+msgid "Reply Edit: %s"
+msgstr "แก้ไขความเห็น: %s"
+
+#: includes/common/template.php:2560
+msgid "Topic Edit: %s"
+msgstr "แก้ไขกระทู้: %s"
+
+#: includes/common/template.php:2555
+msgid "Forum Edit: %s"
+msgstr "แก้ไขฟอรั่ม: %s"
+
+#: includes/common/template.php:2501
+msgid "Log Out"
+msgstr "ออกจากระบบ"
+
+#: includes/common/template.php:2233
+msgid "&rsaquo;"
+msgstr "&rsaquo;"
+
+#: includes/common/template.php:2233
+msgid "&lsaquo;"
+msgstr "&lsaquo;"
+
+#: includes/common/template.php:2216 includes/forums/template.php:53
+#: includes/replies/template.php:53 includes/replies/template.php:1910
+#: includes/topics/template.php:53 includes/topics/template.php:2491
+#: templates/default/bbpress/user-details.php:65
+msgid "Edit"
+msgstr "แก้ไข"
+
+#: includes/common/template.php:2212 includes/common/template.php:2326
+#: includes/common/template.php:2591 includes/core/theme-compat.php:739
+#: templates/default/extras/taxonomy-topic-tag-edit.php:17
+#: templates/default/extras/taxonomy-topic-tag.php:17
+msgid "Topic Tag: %s"
+msgstr "ป้ายกำกับกระทู้: %s"
+
+#: includes/common/template.php:2208
+msgid "(Edit)"
+msgstr "(แก้ไข)"
+
+#: includes/common/template.php:2138
+msgid "Home"
+msgstr "หน้าแรก"
+
+#: includes/common/template.php:1467
+msgid "None available"
+msgstr "ไม่มีที่ใช้งานได้"
+
+#: includes/common/template.php:1462
+msgid "No forums available"
+msgstr "ไม่มีฟอรั่มใช้งานได้"
+
+#: includes/common/template.php:1457
+msgid "No topics available"
+msgstr "ไม่มีกระทู้ที่ใช้ได้"
+
+#: includes/common/functions.php:2026
+msgid "Conditional query tags do not work before the query is run. Before then, they always return false."
+msgstr "ป้ายกำกับ query เงื่อนไขไม่ทำงานก่อนที่ query จะทำงาน  ก่อนหน้านั้น  พวกมันส่งค่าที่ผิด"
+
+#: includes/common/functions.php:1256
+msgid ""
+"%1$s wrote:\n"
+"\n"
+"%2$s\n"
+"\n"
+"Topic Link: %3$s\n"
+"\n"
+"-----------\n"
+"\n"
+"You are receiving this email because you subscribed to a forum.\n"
+"\n"
+"Login and visit the topic to unsubscribe from these emails."
+msgstr ""
+"%1$s เขียน:\n"
+"\n"
+"%2$s\n"
+"\n"
+"ลิงก์กระทู้: %3$s\n"
+"\n"
+"-----------\n"
+"\n"
+"คุณได้รับอีเมลนี้เพราะว่าคุณได้สมัครรับข่าวจากฟอรั่ม\n"
+"\n"
+"เข้าสู่ระบบและเยี่ยมชมกระทู้เพื่อยกเลิกการรับข่าวจากอีเมลเหล่านี้"
+
+#: includes/common/functions.php:1099
+msgid ""
+"%1$s wrote:\n"
+"\n"
+"%2$s\n"
+"\n"
+"Post Link: %3$s\n"
+"\n"
+"-----------\n"
+"\n"
+"You are receiving this email because you subscribed to a forum topic.\n"
+"\n"
+"Login and visit the topic to unsubscribe from these emails."
+msgstr ""
+"%1$s เขียนว่า:\n"
+"\n"
+"%2$s\n"
+"\n"
+"ลิงก์เรื่อง: %3$s\n"
+"\n"
+"-----------\n"
+"\n"
+"คุณได้รับอีเมลนี้เพราะว่าคุณได้สมัครสมาชิกรับข่าวของกระทู้ฟอรั่มนี้\n"
+"\n"
+"เข้าสู่ระบบและเยี่ยมชมกระทู้เพื่อยกเลิกรับข่าวจากอีเมลเหล่านี้"
+
+#: includes/common/functions.php:628
+msgid "<strong>ERROR</strong>: Invalid email address submitted!"
+msgstr "<strong>ผิดพลาด</strong>: ส่งที่อยู่อีเมลที่ไม่ถูกต้อง"
+
+#: includes/common/functions.php:624
+msgid "<strong>ERROR</strong>: Invalid author name submitted!"
+msgstr "<strong>ผิดพลาด</strong>: ชื่อผู้ใช้ไม่ถูกต้องถูกส่งมา"
+
+#: includes/common/functions.php:514 includes/common/functions.php:546
+msgid "Trashed: %s"
+msgstr "ถังขยะ: %s"
+
+#: includes/common/functions.php:513 includes/common/functions.php:545
+msgid "Spammed: %s"
+msgstr "สแปม: %s"
+
+#: includes/common/functions.php:512 includes/common/functions.php:544
+msgid "Private: %s"
+msgstr "ส่วนตัว: %s"
+
+#: includes/common/functions.php:179
+msgctxt "Separator in time since"
+msgid ","
+msgstr ","
+
+#: includes/common/functions.php:124
+msgid "second"
+msgstr "วินาที"
+
+#: includes/common/functions.php:123
+msgid "minute"
+msgstr "นาที"
+
+#: includes/common/functions.php:122
+msgid "hours"
+msgstr "ชั่วโมง"
+
+#: includes/common/functions.php:122
+msgid "hour"
+msgstr "ชั่วโมง"
+
+#: includes/common/functions.php:121
+msgid "days"
+msgstr "วัน"
+
+#: includes/common/functions.php:121
+msgid "day"
+msgstr "วัน"
+
+#: includes/common/functions.php:120
+msgid "weeks"
+msgstr "สัปดาห์"
+
+#: includes/common/functions.php:120
+msgid "week"
+msgstr "สัปดาห์"
+
+#: includes/common/functions.php:119
+msgid "months"
+msgstr "เดือน"
+
+#: includes/common/functions.php:119
+msgid "month"
+msgstr "เดือน"
+
+#: includes/common/functions.php:118
+msgid "years"
+msgstr "ปี"
+
+#: includes/common/functions.php:118
+msgid "year"
+msgstr "ปี"
+
+#: includes/common/functions.php:114
+msgid "%s ago"
+msgstr "%s มาแล้ว"
+
+#: includes/common/functions.php:113
+msgid "right now"
+msgstr "ตอนนี้"
+
+#: includes/common/functions.php:112
+msgid "sometime"
+msgstr "บางเวลา"
+
+#: includes/admin/users.php:217
+msgid "Site Role"
+msgstr "บทบาทผู้ใช้ในเว็บไซต์"
+
+#: includes/admin/users.php:144
+msgid "Change"
+msgstr "เปลี่ยน"
+
+#: includes/admin/users.php:138 includes/admin/users.php:140
+msgid "Change forum role to&hellip;"
+msgstr "เปลี่ยนบทบาทผู้ใช้ในฟอรั่มเป็น&hellip;"
+
+#: includes/admin/users.php:96 includes/admin/users.php:100
+#: includes/users/template.php:1290
+msgid "&mdash; No role for these forums &mdash;"
+msgstr "&mdash; ไม่มีบทบาทสำหรับฟอรั่มเหล่านี้ &mdash;"
+
+#: includes/admin/users.php:87 includes/admin/users.php:218
+#: templates/default/bbpress/form-user-roles.php:20
+msgid "Forum Role"
+msgstr "บทบาทผู้ใช้ในฟอรั่ม"
+
+#: includes/admin/topics.php:953
+msgid "Topic draft updated. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
+msgstr "อัปเดตฉบับร่างกระทู้ <a target=\"_blank\" href=\"%s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/topics.php:946
+msgid "Topic scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview topic</a>"
+msgstr "นำกระทู้เข้าตารางเวลาสำหรับ: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/topics.php:943
+msgid "Topic submitted. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
+msgstr "ส่งกระทู้แล้ว <a target=\"_blank\" href=\"%s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/topics.php:940
+msgid "Topic saved."
+msgstr "บันทึกกระทู้แล้ว"
+
+#: includes/admin/topics.php:937
+msgid "Topic created. <a href=\"%s\">View topic</a>"
+msgstr "สร้างกระทู้แล้ว <a href=\"%s\">ดูกระทู้</a>"
+
+#. translators: %s: date and time of the revision
+#: includes/admin/topics.php:933
+msgid "Topic restored to revision from %s"
+msgstr "กระทู้ย้อนกลับไปยังรุ่นจาก %s"
+
+#: includes/admin/topics.php:928
+msgid "Topic updated."
+msgstr "อัปเดตกระทู้แล้ว"
+
+#: includes/admin/topics.php:919
+msgid "Topic updated. <a href=\"%s\">View topic</a>"
+msgstr "อัปเดตกระทู้แล้ว <a href=\"%s\">ดูกระทู้</a>"
+
+#: includes/admin/topics.php:809
+msgid "Mark this topic as spam"
+msgstr "บันทึกกระทู้เป็นสแปม"
+
+#: includes/admin/topics.php:807
+msgid "Mark the topic as not spam"
+msgstr "บันทึกกระทู้ไม่ใช่สแปม"
+
+#: includes/admin/topics.php:800 includes/topics/template.php:2747
+msgid "(to front)"
+msgstr "(ไปด้านหน้า)"
+
+#: includes/admin/topics.php:800
+msgid "Stick this topic to front"
+msgstr "ปักหมุดกระทู้นี้ไปที่หน้าแรก"
+
+#: includes/admin/topics.php:800 includes/topics/template.php:2745
+msgid "Stick"
+msgstr "ปักหมุด"
+
+#: includes/admin/topics.php:800
+msgid "Stick this topic to its forum"
+msgstr "ปักหมุดกระทู้นี้ไปที่ฟอรั่มของมัน"
+
+#: includes/admin/topics.php:797 includes/topics/template.php:2746
+msgid "Unstick"
+msgstr "ยกเลิกปักหมุด"
+
+#: includes/admin/topics.php:797
+msgid "Unstick this topic"
+msgstr "ยกเลิกปักหมุดกระทู้นี้"
+
+#: includes/admin/topics.php:788
+msgctxt "Open a Topic"
+msgid "Open"
+msgstr "เปิด"
+
+#: includes/admin/topics.php:788
+msgid "Open this topic"
+msgstr "เปิดกระทู้นี้"
+
+#: includes/admin/topics.php:786
+msgctxt "Close a Topic"
+msgid "Close"
+msgstr "ปิด"
+
+#: includes/admin/topics.php:786
+msgid "Close this topic"
+msgstr "ปิดกระทู้นี้"
+
+#: includes/admin/topics.php:729 includes/topics/template.php:2064
+msgid "No Replies"
+msgstr "ไม่มีข้อความตอบกลับ"
+
+#: includes/admin/topics.php:694 includes/extend/buddypress/groups.php:295
+#: templates/default/bbpress/form-topic.php:117
+msgid "(No Forum)"
+msgstr "(ไม่มีฟอรั่ม)"
+
+#: includes/admin/topics.php:635 templates/default/bbpress/loop-topics.php:20
+msgid "Voices"
+msgstr "เสียง"
+
+#: includes/admin/topics.php:599
+msgid "Topic \"%1$s\" successfully unmarked as spam."
+msgstr "บันทึกกระทู้ \"%1$s\" เป็นสแปมสำเร็จแล้ว"
+
+#: includes/admin/topics.php:599
+msgid "There was a problem unmarking the topic \"%1$s\" as spam."
+msgstr "มีปัญหาในการยกเลิกบันทึกกระทู้ \"%1$s\" เป็นสแปม"
+
+#: includes/admin/topics.php:595
+msgid "Topic \"%1$s\" successfully marked as spam."
+msgstr "บันทึกกระทู้ \"%1$s\" เป็นสแปมสำเร็จแล้ว"
+
+#: includes/admin/topics.php:595
+msgid "There was a problem marking the topic \"%1$s\" as spam."
+msgstr "มีปัญหาในการบันทึกกระทู้ \"%1$s\" เป็นสแปม"
+
+#: includes/admin/topics.php:591
+msgid "Topic \"%1$s\" successfully unsticked."
+msgstr "ยกเลิกปักหมุดกระทู้ \"%1$s\" สำเร็จแล้ว "
+
+#: includes/admin/topics.php:591
+msgid "There was a problem unsticking the topic \"%1$s\"."
+msgstr "มีปัญหาในการยกเลิกปักหมุดกระทู้ \"%1$s\" "
+
+#: includes/admin/topics.php:587
+msgid "Topic \"%1$s\" successfully sticked."
+msgstr "ปักหมุดกระทู้ \"%1$s\" สำเร็จแล้ว"
+
+#: includes/admin/topics.php:587
+msgid "There was a problem sticking the topic \"%1$s\"."
+msgstr "มีปัญหาในการปักหมุดกระทู้ \"%1$s\""
+
+#: includes/admin/topics.php:583
+msgid "Topic \"%1$s\" successfully sticked to front."
+msgstr "ปักหมุดกระทู้ \"%1$s\" ไปยังหน้าแรกสำเร็จแล้ว"
+
+#: includes/admin/topics.php:583
+msgid "There was a problem sticking the topic \"%1$s\" to front."
+msgstr "มีปัญหาในการปักหมุดกระทู้ \"%1$s\" ไปยังหน้าแรก"
+
+#: includes/admin/topics.php:579
+msgid "Topic \"%1$s\" successfully closed."
+msgstr "ปิดกระทู้ \"%1$s\" แล้ว"
+
+#: includes/admin/topics.php:579
+msgid "There was a problem closing the topic \"%1$s\"."
+msgstr "มีปัญหาในการปิดกระทู้ \"%1$s\""
+
+#: includes/admin/topics.php:575
+msgid "Topic \"%1$s\" successfully opened."
+msgstr "เปิดกระทู้ \"%1$s\" สำเร็จแล้ว"
+
+#: includes/admin/topics.php:575
+msgid "There was a problem opening the topic \"%1$s\"."
+msgstr "มีปัญหาในการเรียกดูกระทู้ \"%1$s\""
+
+#: includes/admin/topics.php:485
+msgid "The topic was not found!"
+msgstr "ไม่พบกระทู้"
+
+#: includes/admin/topics.php:223
+msgid "<strong>Topic Type</strong> dropdown indicates the sticky status of the topic. Selecting the super sticky option would stick the topic to the front of your forums, i.e. the topic index, sticky option would stick the topic to its respective forum. Selecting normal would not stick the topic anywhere."
+msgstr "<strong>ชนิดกระทู้</strong> เลื่อนลงเพื่อแสดงสถานะปักหมุดของกระทู้  การเลือกตัวเลือกปักหมุดขั้นสูงจะปักหมุดกระทู้ที่หน้าแรกของฟอรั่มของคุณ นั่นคือกระทู้เด่น  ตัวเลือกปักหมุดจะปักหมุดกระทู้ไปยังฟอรั่มที่กระทู้นั้นอยู่  และการเลือกปกติจะไม่ปักหมุดกระทู้"
+
+#: includes/admin/topics.php:222
+msgid "<strong>Forum</strong> dropdown determines the parent forum that the topic belongs to. Select the forum or category from the dropdown, or leave the default (No Forum) to post the topic without an assigned forum."
+msgstr "<strong>ฟอรั่ม</strong> เลื่อนลงเืพื่อกำหนดฟอรั่มหลักที่กระทู้จะอยู่ในนั้น  เลือกฟอรั่มหรือหมวดหมู่จากเมนูเลื่อนลง  หรือปล่อยไว้เพื่อใช้ค่าเริ่มต้น (ไม่มีฟอรั่ม) เพื่อเขียนกระทู้โดยไม่มีฟอรั่ม"
+
+#: includes/admin/topics.php:220
+msgid "Select the attributes that your topic should have:"
+msgstr "เลือกคุณสมบัติที่หัวข้อของคุณควรมี:"
+
+#: includes/admin/topics.php:218 includes/admin/topics.php:255
+msgid "Topic Attributes"
+msgstr "คุณสมบัติกระทู้"
+
+#: includes/admin/topics.php:213
+msgid "<strong>Featured Image</strong> - This allows you to associate an image with your topic without inserting it. This is usually useful only if your theme makes use of the featured image as a topic thumbnail on the home page, a custom header, etc."
+msgstr "<strong>รูปพิเศษ</strong> - สิ่งนี้อนุญาตให้คุณใช้งานรูปภาพกับกระทู้ของคุณโดยไม่ต้องใส่รูปลงไป สิ่งนี้จะมีประโยชน์ถ้า theme สามารถใช้รูปพิเศษเป็นรูปย่อกระทู้บนหน้าแรก ส่วนหัวปรับแต่งและอื่น ๆ ได้ "
+
+#: includes/admin/topics.php:210
+msgid "<strong>Publish</strong> - You can set the terms of publishing your topic in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a topic or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a topic to be published in the future or backdate a topic."
+msgstr "<strong>เผยแพร่</strong> - คุณสามารถตั้งเงื่อนไขสำหรับการเผยแพร่กระทู้ของคุณในกล่องเผยแพร่ สำหรับสถานะ การมองเห็น และเผยแพร่ (ทันที) กดที่ลิงก์แก้ไขเพื่อแสดงตัวเลือกที่มากขึ้น การมองเห็นได้รวมตัวเลือกสำหรับใส่รหัสป้องกันกระทู้เพื่อทำให้มันอยู่เหนืองบล็อกอย่างคุณอย่างไม่มีเงื่อนไข (ปักหมุด) เผยแพร่ (ทันที) อนุญาตคุณให้ตั้งค่าวันที่เวลาในอนาคตหรืออดีตได้ ดังนั้นคุณสามารถทำตารางเวลากระทู้ที่จะเผยแพร่ในอนาคตหรืออดีตได้ "
+
+#: includes/admin/topics.php:207
+msgid "<strong>Topic Editor</strong> - Enter the text for your topic. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your topic text. You can insert media files by clicking the icons above the topic editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular topic editor."
+msgstr "<strong>ตัวแก้ไขกระทู้</strong> - ใส่ข้อความสำหรับกระทู้ของคุณ มีสองรูปแบบในการแก้ไข:แบบมองเห็นและแบบ HTML เลือกรูปแบบการแก้ไขโดยกดบนแทบที่เหมาะสม แบบมองเห็นจะให้ตัวแก้ไข WYSIWYG (เห็นเสมือนหน้าเว็บจริง) กดที่ไอคอนสุดท้ายในแถวเพื่อเพิ่มแถบควบคุมแถวที่สอง แบบ HTML อนุญาตให้คุณใส่โค้ด HTML ไปพร้อม ๆ กับข้อความกระทู้ของคุณ คุณสามารถใส่ไฟล์สื่อโดยกดที่ไอคอนด้านบนตัวแก้ไขกระทู้และทำตามคำแนะนำ คุณสามารถไปที่การเขียนแบบไร้กังวลผ่านไอคอนเต็มหน้าจอในแบบมองเห็น (ไอคอนรองสุดท้ายในแถวบน) หรือปุ่มเต็มหน้าจอในแบบ HTML (ไอคอนสุดท้ายของแถว) ในโหมดเต็มหน้าจอ คุณสามารถทำให้ปุ่มแสดงขึ้นโดยเลื่อนเม้าส์ไปเหนือพื้นที่ส่วนบน เพื่อออกจากโหมดเต็มหน้าจอกลับไปยังการแก้ไขกระทู้แบบปกติ "
+
+#: includes/admin/topics.php:206
+msgid "<strong>Title</strong> - Enter a title for your topic. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
+msgstr "<strong>หัวข้อ</strong> - ใส่หัวข้อสำหรับกระทู้ของคุณ หลังจากคุณใส่หัวข้อ คุณจะเห็นลิงก์ถาวรด้านล่างที่คุณสามารถแก้ไขได้ "
+
+#: includes/admin/topics.php:204
+msgid "Title and Topic Editor"
+msgstr "ตัวแก้ไขหัวข้อและหัวเรื่อง"
+
+#: includes/admin/topics.php:194
+msgid "The title field and the big topic editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "ช่องหัวข้อและพื้นที่แ้ก้ไขกระทู้ขนาดใหญ่ถูกวางไว้เป็นที่ แต่คุณสามารถจัดที่ให้กับกล่องอื่นทั้งหมดโดยการลากและวาง และย่อหรือขยายมันโดยกดที่แถบหัวข้อของแต่ละกล่อง ใช้แทบหน้าจอตัวเลือกเพื่อแสดงกล่องที่ซ่อนอยู่ (เรื่องย่อ, การส่่ง Trackbacks, ช่องปรับแต่ง, การสนทนา, Slug, ผู้เขียน) หรือเลือกรูปแบบ 1- หรือ 2- คอลัมน์สำหรับหน้าจอนี้ "
+
+#: includes/admin/topics.php:173
+msgid "When using Bulk Edit, you can change the metadata (categories, author, etc.) for all selected topics at once. To remove a topic from the grouping, just click the x next to its name in the Bulk Edit area that appears."
+msgstr "เมื่อใช้การแก้ไขแบบกลุ่ม คุณสามารถเปลี่ยน metadata (หมวดหมู่ ผู้เขียนและอื่นๆ) สำหรับกระทู้ที่เลือกทั้งหมดพร้อมกัน  การลบกระทู้ออกจากกลุ่ม เพียงกด x ข้างชื่อของมันในพื้นที่การแก้ไขแบบกลุ่มที่ปรากฎขึ้นมา"
+
+#: includes/admin/topics.php:172
+msgid "You can also edit or move multiple topics to the trash at once. Select the topics you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
+msgstr "คุณยังสามารถแก้ไขหรือย้ายหลายกระทู้ไปยังถังขยะได้พร้อมกัน  เลือกกระทู้ที่คุณต้องการโดยใช้กล่องเช็ค  แล้วเลือกการกระทำที่คุณต้องการทำจากเมนูการกระทำแบบกลุ่มและกดทำงาน"
+
+#: includes/admin/topics.php:163
+msgid "<strong>Stick <em>(to front)</em></strong> will keep the selected topic &#8217;pinned&#8217; to the top of ALL forums and be visable in any forums topics list."
+msgstr "<strong>ปักหมุด <em>(มาด้านหน้า)</em></strong> จะทำให้กระทู้ที่ถูกเลือก &#8217;ปักหมุด&#8217; ไปยังด้านบนของฟอรั่มทั้งหมดและเห็นได้จากรายชื่อกระทู้ฟอรั่มทั้งหมด"
+
+#: includes/admin/topics.php:162
+msgid "<strong>Stick</strong> will keep the selected topic &#8217;pinned&#8217; to the top the parent forum topic list."
+msgstr "<strong>ปักหมุด</strong> จะทำให้กระทู้ที่ถูกเลือก &#8217;ถูกปักหมุด&#8217; ไว้ที่ด้านบนสุดของรายชื่อกระทู้ฟอรั่มหลัก"
+
+#: includes/admin/topics.php:161
+msgid "<strong>Close</strong> will mark the selected topic as &#8217;closed&#8217; and disable the option to post new replies to the topic."
+msgstr "<strong>ปิด</strong> จะบันทึกกระทู้ที่เลือกไว้เป็น &#8217;ปิดแล้ว&#8217; และปิดการเขียนความเห็นไปยังกระทู้นั้น"
+
+#: includes/admin/topics.php:160
+msgid "<strong>Preview</strong> will show you what your draft topic will look like if you publish it. View will take you to your live site to view the topic. Which link is available depends on your topic&#8217;s status."
+msgstr "<strong>ดูก่อน</strong> จะแสดงให้คุณเห็นว่าฉบับร่างกระทู้ของคุณจะมีหน้าตาเป็นอย่างไรเมื่อคุณเผยแพร่มัน การดูจะนำคุณไปยังเว็บที่ใช้งานอยู่ของคุณเพื่อดูกระทู้ ลิงก์ที่ใช้งานได้จะขึ้นอยู่กับสถานะกระทู้ของคุณ"
+
+#: includes/admin/topics.php:159
+msgid "<strong>Spam</strong> removes your topic from this list and places it in the spam queue, from which you can permanently delete it."
+msgstr "<strong>สแปม</strong> ย้ายกระทู้ของคุณออกจากรายชื่อนี้และวางมันลงในคิวสแปม ที่ซึ่งคุณสามารถลบมันได้อย่างถาวร"
+
+#: includes/admin/topics.php:158
+msgid "<strong>Trash</strong> removes your topic from this list and places it in the trash, from which you can permanently delete it."
+msgstr "<strong>ถังขยะ</strong> การลบกระทู้ของคุณออกจากรายชื่อและนำมันไปไว้ในถังขยะ  ซึ่งเป็นที่ที่คุณจะสามารถลบมันได้อย่างถาวร"
+
+#: includes/admin/topics.php:157
+msgid "<strong>Edit</strong> takes you to the editing screen for that topic. You can also reach that screen by clicking on the topic title."
+msgstr "<strong>แก้ไข</strong> จะนำคุณไปยังหน้าจอแก้ไขสำหรับกระทู้นั้น  คุณสามารถมาถึงหน้าจอนั้นได้โดยการกดที่หัวข้อกระทู้"
+
+#: includes/admin/topics.php:155
+msgid "Hovering over a row in the topics list will display action links that allow you to manage your topic. You can perform the following actions:"
+msgstr "เลื่อนเม้าส์ไปเหนือแถวในรายชื่อกระทู้จะแสดงลิงก์การกระทำที่อนุญาตคุณให้จัดการกระทู้ของคุณ  คุณสามารถกระทำสิ่งต่าง ๆ ต่อไปนี้:"
+
+#: includes/admin/topics.php:146
+msgid "You can refine the list to show only topics from a specific month by using the dropdown menus above the topics list. Click the Filter button after making your selection. You also can refine the list by clicking on the topic creator in the topics list."
+msgstr "คุณสามารถปรับแต่งรายชื่อที่จะแสดงเฉพาะกระทู้จากเดือนที่กำหนด โดยการใช้เมนู dropdown เหนือรายชื่อกระทู้  กดที่ปุ่มกรองหลังการเลือกของคุณ  คุณยังสามารถกำหนดรายชื่อโดยการกดที่ผู้สร้างกระทู้ในรายชื่อกระทู้"
+
+#: includes/admin/topics.php:145
+msgid "You can filter the list of topics by topic status using the text links in the upper left to show All, Published, or Trashed topics. The default view is to show all topics."
+msgstr "คุณสามารถกรองรายชื่อกระทู้โดยสถานะของกระทู้โดยใช้ลิงก์ตัวอักษรด้านซ้ายบนเพื่อแสดง ทั้งหมด, เผยแพร่แล้ว หรือ กระทู้ถังขยะ  มุมมองค่าเริ่มต้นคือการแสดงกระทู้ทั้งหมด"
+
+#: includes/admin/topics.php:144
+msgid "You can hide/display columns based on your needs and decide how many topics to list per screen using the Screen Options tab."
+msgstr "คุณสามารถซ่อน/แสดง คอลัมน์ขึ้นอยู่กับความต้องการของคุณ และตัดสินใจว่าจำนวนกระทู้เท่าไหร่ ที่จะแสดงต่อหน้าจอโดยใช้แท็บหน้าจอตัวเลือก"
+
+#: includes/admin/topics.php:134
+msgid "This screen displays the individual topics on your site. You can customize the display of this screen to suit your workflow."
+msgstr "หน้าจอนี้จะแสดงกระทู้แต่ละกระทู้บนเว็บไซต์ของคุณ  คุณสามารถปรับแต่งการแสดงหน้าจอนี้เพื่อให้เหมาะสมกับการทำงานของคุณ"
+
+#: includes/admin/tools.php:1370
+msgid "Deleting Roles and Capabilities&hellip; %s"
+msgstr "กำลังลบบทบาทและความสามารถ&hellip; %s "
+
+#: includes/admin/tools.php:1364
+msgid "Deleting Settings&hellip; %s"
+msgstr "กำลังลบการตั้งค่า&hellip; %s "
+
+#: includes/admin/tools.php:1352
+msgid "Deleting Conversion Table&hellip; %s"
+msgstr "กำลังลบตารางการแปลง&hellip; %s "
+
+#: includes/admin/tools.php:1336 includes/admin/tools.php:1344
+msgid "Deleting User Meta&hellip; %s"
+msgstr "กำลังลบ Meta ผู้ใช้&hellip; %s "
+
+#: includes/admin/tools.php:1331
+msgid "Deleting User&hellip; %s"
+msgstr "กำลังลบผู้ใช้&hellip; %s"
+
+#: includes/admin/tools.php:1316
+msgid "Deleting Topic Tags&hellip; %s"
+msgstr "กำลังลบป้ายกำกับกระทู้&hellip; %s"
+
+#: includes/admin/tools.php:1307
+msgid "Deleting Post Meta&hellip; %s"
+msgstr "กำลังลบ Meta ข้อความ&hellip; %s "
+
+#: includes/admin/tools.php:1294
+msgid "Deleting Posts&hellip; %s"
+msgstr "กำลังลบข้อความ&hellip; %s"
+
+#: includes/admin/tools.php:1287
+msgid "Success!"
+msgstr "สำเร็จ!"
+
+#: includes/admin/tools.php:1286
+msgid "Failed"
+msgstr "ล้มเหลว"
+
+#: includes/admin/tools.php:1253
+msgid "Reset bbPress"
+msgstr "ล้างค่า bbPress"
+
+#: includes/admin/tools.php:1245
+msgid "Human sacrifice, dogs and cats living together... mass hysteria!"
+msgstr "การเสียสละของผู้คน  สุนัขและแมวสามารถอยู่ด้วยกันได้ อุปาทานหมู่"
+
+#: includes/admin/tools.php:1244
+msgid "This process cannot be undone."
+msgstr "การดำเนินการนี้ไม่สามารถยกเลิกได้"
+
+#: includes/admin/tools.php:1240
+msgid "Are you sure you want to do this?"
+msgstr "คุณแน่ใจที่จะทำสิ่งนี้?"
+
+#: includes/admin/tools.php:1235
+msgid "Note: Resetting without this checked will delete the meta-data necessary to delete these users."
+msgstr "หมายเหตุ: การล้างค่าโดยไม่เลือกสิ่งนี้จะลบ meta-data ที่จำเป็นที่จะลบผู้ใช้เหล่านั้น"
+
+#: includes/admin/tools.php:1234
+msgid "This option will delete all previously imported users, and cannot be undone."
+msgstr "คำสั่งนี้จะลบผู้ใช้นำเข้าก่อนหน้าทั้งหมด และไม่สามารถกู้คืนได้หลังการลบ"
+
+#: includes/admin/tools.php:1233 includes/admin/tools.php:1243
+msgid "Say it ain't so!"
+msgstr "โปรดบอกว่ามันไม่เป็นเช่นนั้น"
+
+#: includes/admin/tools.php:1230
+msgid "Delete imported users?"
+msgstr "จะลบผู้ใช้ที่นำเข้า?"
+
+#: includes/admin/tools.php:1226
+msgid "Importer Helper Data"
+msgstr "ตัวนำเข้าข้อมูลผู้ช่วย"
+
+#: includes/admin/tools.php:1225
+msgid "Forum User Roles"
+msgstr "บทบาทผู้ใช้ฟอรั่ม"
+
+#: includes/admin/tools.php:1224
+msgid "Forum Activity"
+msgstr "กิจกรรมฟอรั่ม"
+
+#: includes/admin/tools.php:1223
+msgid "Forum Settings"
+msgstr "การตั้งค่าฟอรั่ม"
+
+#: includes/admin/tools.php:1222
+msgid "Related Meta Data"
+msgstr "Meta Data ที่เกี่ยวข้อง"
+
+#: includes/admin/tools.php:1221
+msgid "All Topic Tags"
+msgstr "ป้ายกำกับกระทู้ทั้งหมด"
+
+#: includes/admin/tools.php:1220 includes/replies/functions.php:1994
+#: includes/replies/template.php:50
+msgid "All Replies"
+msgstr "ข้อความตอบกลับทั้งหมด"
+
+#: includes/admin/tools.php:1219 includes/topics/functions.php:3439
+#: includes/topics/template.php:50
+msgid "All Topics"
+msgstr "กระทู้ทั้งหมด"
+
+#: includes/admin/tools.php:1218 includes/forums/template.php:50
+msgid "All Forums"
+msgstr "ทุกฟอรั่ม"
+
+#: includes/admin/tools.php:1216
+msgid "The following data will be removed:"
+msgstr "ข้อมูลต่อไปนี้จะถูกลบ:"
+
+#: includes/admin/tools.php:1210
+msgid "Backup your database before proceeding."
+msgstr "ทำการสำรองฐานข้อมูลของคุณก่อนดำเนินการ"
+
+#: includes/admin/tools.php:1209
+msgid "Revert your forums back to a brand new installation. This process cannot be undone."
+msgstr "ย้อนฟอรั่มของคุณกลับไปเหมือนเพิ่งติดตั้งใหม่ ๆ ขั้นตอนนี้เมื่อทำแล้วจะไม่สามารถย้อนกลับได้"
+
+#: includes/admin/tools.php:1100
+msgid "Recalculating the topic for each post &hellip; %s"
+msgstr "คำนวณใหม่กระทู้สำหรับแต่ละข้อความ &hellip; %s"
+
+#: includes/admin/tools.php:1046
+msgid "Recalculating the forum for each post &hellip; %s"
+msgstr "คำนวณใหม่ฟอรั่มสำหรับแต่ละข้อความ &hellip; %s"
+
+#: includes/admin/tools.php:1022
+msgid "Recalculating forum visibility &hellip; %s"
+msgstr "กำลังคำนวณใหม่การมองเห็นของฟอรั่ม &hellip; %s"
+
+#: includes/admin/tools.php:965
+msgid "Repairing the sticky topic to the parent forum relationships&hellip; %s"
+msgstr "กำลังซ่อมแซมความสัมพันธ์ของกระทู้ปักหมุดไปยังฟอรั่มหลัก&hellip; %s"
+
+#: includes/admin/tools.php:859
+msgid "Recomputing latest post in every topic and forum&hellip; %s"
+msgstr "คำนวณกระทู้ล่าสุดในทุกหัวข้อและฟอรั่มอีกครั้ง&hellip; %s"
+
+#: includes/admin/tools.php:843
+msgid "Complete! %s users updated."
+msgstr "เสร็จแล้ว อัปเดต %s ผู้ใช้แล้ว"
+
+#: includes/admin/tools.php:805
+msgid "Remapping forum role for each user on this site&hellip; %s"
+msgstr "กำลังปรับบทบาทผู้ใช้ฟอรั่มสำหรับผู้ใช้แต่ละคนบนเว็บนี้ &hellip; %s"
+
+#: includes/admin/tools.php:743
+msgid "Removing trashed forums from user subscriptions&hellip; %s"
+msgstr "ลบฟอรั่มที่อยู่ในถังขยะออกจากการติดตามของผู้ใช้&hellip; %s"
+
+#: includes/admin/tools.php:682
+msgid "Removing trashed topics from user subscriptions&hellip; %s"
+msgstr "ลบกระทู้ขยะออกจากรายการการติดตามผู้ใช้ &hellip; %s "
+
+#: includes/admin/tools.php:650 includes/admin/tools.php:711
+#: includes/admin/tools.php:772
+msgid "Nothing to remove!"
+msgstr "ไม่มีสิ่งใดให้ลบ"
+
+#: includes/admin/tools.php:620
+msgid "Removing trashed topics from user favorites&hellip; %s"
+msgstr "ลบกระทู้ขยะออกจากรายการโปรดผู้ใช้&hellip; %s"
+
+#: includes/admin/tools.php:575
+msgid "Counting the number of topics to which each user has replied&hellip; %s"
+msgstr "นับจำนวนกระทู้ที่ผู้ใช้แต่ละคนได้ตอบ&hellip; %s"
+
+#: includes/admin/tools.php:530
+msgid "Counting the number of topics each user has created&hellip; %s"
+msgstr "กำลังนับจำนวนกระทู้ที่ผู้ใช้แต่ละคนได้สร้าง&hellip; %s"
+
+#: includes/admin/tools.php:487
+msgid "Counting the number of replies in each forum&hellip; %s"
+msgstr "กำลังนับจำนวนข้อความตอบกลับในแต่ละฟอรั่ม&hellip; %s"
+
+#: includes/admin/tools.php:453
+msgid "Counting the number of topics in each forum&hellip; %s"
+msgstr "กำลังนับจำนวนกระทู้ในแต่ละฟอรั่ม&hellip; %s "
+
+#: includes/admin/tools.php:434
+msgid "Complete! %s groups updated; %s forums updated; %s forum statuses synced."
+msgstr "เสร็จแล้ว! อัปเดต %s กลุ่ม; อัปเดต %s ฟอรั่ม; เชื่อมสถานะ %s ฟอรั่ม"
+
+#: includes/admin/tools.php:418
+msgid "group-forums"
+msgstr "ฟอรั่มกลุ่ม"
+
+#: includes/admin/tools.php:417
+msgid "Group Forums"
+msgstr "กลุ่มฟอรั่ม"
+
+#: includes/admin/tools.php:316
+msgid "Repairing BuddyPress group-forum relationships&hellip; %s"
+msgstr "กำลังซ่อมแซมความสัมพันธ์ ฟอรั่มกลุ่มของ BuddyPress&hellip; %s"
+
+#: includes/admin/tools.php:291
+msgid "Counting the number of spammed and trashed replies in each topic&hellip; %s"
+msgstr "กำลังนับจำนวนข้อความตอบกลับขยะและสแปมในแต่ละกระทู้&hellip; %s "
+
+#: includes/admin/tools.php:249
+msgid "Counting the number of voices in each topic&hellip; %s"
+msgstr "กำลังนับจำนวนเสียงในแต่ละกระทู้&hellip; %s"
+
+#: includes/admin/tools.php:233 includes/admin/tools.php:276
+#: includes/admin/tools.php:302 includes/admin/tools.php:469
+#: includes/admin/tools.php:514 includes/admin/tools.php:559
+#: includes/admin/tools.php:604 includes/admin/tools.php:666
+#: includes/admin/tools.php:727 includes/admin/tools.php:788
+#: includes/admin/tools.php:950 includes/admin/tools.php:1007
+#: includes/admin/tools.php:1030 includes/admin/tools.php:1085
+#: includes/admin/tools.php:1130 includes/admin/tools.php:1186
+msgid "Complete!"
+msgstr "เสร็จแล้ว"
+
+#: includes/admin/tools.php:199 includes/admin/tools.php:250
+#: includes/admin/tools.php:292 includes/admin/tools.php:337
+#: includes/admin/tools.php:454 includes/admin/tools.php:488
+#: includes/admin/tools.php:531 includes/admin/tools.php:576
+#: includes/admin/tools.php:621 includes/admin/tools.php:683
+#: includes/admin/tools.php:744 includes/admin/tools.php:812
+#: includes/admin/tools.php:860 includes/admin/tools.php:966
+#: includes/admin/tools.php:1026 includes/admin/tools.php:1047
+#: includes/admin/tools.php:1101
+msgid "Failed!"
+msgstr "ล้มเหลว"
+
+#: includes/admin/tools.php:198
+msgid "Counting the number of replies in each topic&hellip; %s"
+msgstr "กำลังนับจำนวนข้อความตอบกลับในแต่ละกระทู้&hellip; %s"
+
+#: includes/admin/tools.php:178
+msgid "Remap existing users to default forum roles"
+msgstr "ปรับบทบาทผู้ใช้ที่มีอยู่ให้เป็นบทบาทผู้ใช้ค่าเริ่มต้นของฟอรั่ม"
+
+#: includes/admin/tools.php:177
+msgid "Remove trashed forums from user subscriptions"
+msgstr "ลบฟอรั่มที่อยู่ในถังขยะออกจากการรับข่าวของผู้ใช้"
+
+#: includes/admin/tools.php:176
+msgid "Remove trashed topics from user subscriptions"
+msgstr "ลบหัวข้อขยะออกจากกระทู้รับข่าวของผู้ใช้"
+
+#: includes/admin/tools.php:175
+msgid "Remove trashed topics from user favorites"
+msgstr "ลบหัวข้อขยะจากรายการโปรดผู้ใช้"
+
+#: includes/admin/tools.php:174
+msgid "Count replies for each user"
+msgstr "นับข้อความตอบกลับสำหรับแต่ละผู้ใช้"
+
+#: includes/admin/tools.php:173
+msgid "Count topics for each user"
+msgstr "นับกระทู้สำหรับแต่ละผู้ใช้"
+
+#: includes/admin/tools.php:172
+msgid "Count spammed & trashed replies in each topic"
+msgstr "นับข้อความตอบกลับที่เป็นขยะและสแปมในแต่ละกระทู้"
+
+#: includes/admin/tools.php:171
+msgid "Count voices in each topic"
+msgstr "นับเสียงในแต่ละกระทู้"
+
+#: includes/admin/tools.php:170
+msgid "Count replies in each topic"
+msgstr "นับจำนวนตอบกลับในแต่ละกระทู้"
+
+#: includes/admin/tools.php:169
+msgid "Count replies in each forum"
+msgstr "นับข้อความตอบกลับในแต่ละฟอรั่ม"
+
+#: includes/admin/tools.php:168
+msgid "Count topics in each forum"
+msgstr "นับกระทู้ในแต่ละฟอรั่ม"
+
+#: includes/admin/tools.php:167
+msgid "Repair BuddyPress Group Forum relationships"
+msgstr "ซ่อมแซมความสัมพันธ์ฟอรั่มกลุ่ม BuddyPress"
+
+#: includes/admin/tools.php:165
+msgid "Recalculate the sticky relationship of each topic"
+msgstr "คำนวณใหม่ความสัมพันธ์กระทู้ปักหมุดแต่ละกระทู้"
+
+#: includes/admin/tools.php:164
+msgid "Recalculate last activity in each topic and forum"
+msgstr "คำนวณการกระทำสุดท้ายในแต่ละกระทู้และฟอรั่ม"
+
+#: includes/admin/tools.php:163
+msgid "Recalculate private and hidden forums"
+msgstr "คำนวณใหม่ฟอรั่มส่วนตัวและฟอรั่มซ่อน"
+
+#: includes/admin/tools.php:162
+msgid "Recalculate the parent forum for each post"
+msgstr "คำนวณใหม่ฟอรั่มหลักสำหรับแต่ละข้อความ "
+
+#: includes/admin/tools.php:161
+msgid "Recalculate the parent topic for each post"
+msgstr "คำนวณใหม่กระทู้หลักสำหรับแต่ละข้อความ"
+
+#: includes/admin/tools.php:61
+msgid "Repair Items"
+msgstr "ซ่อมแซมรายการ"
+
+#: includes/admin/tools.php:46
+msgid "Repair"
+msgstr "ซ่อมแซม"
+
+#: includes/admin/tools.php:43
+msgid "Relationships to Repair:"
+msgstr "ความสัมพันธ์เพื่อจะซ่อมแซม:"
+
+#: includes/admin/tools.php:37
+msgid "Some of these tools create substantial database overhead. Avoid running more than 1 repair job at a time."
+msgstr "บางอย่างของเครื่องมือเหล่านี้ได้ทำงานหลายอย่างบนฐานข้อมูลสำคัญ  หลีกเลี่ยงการทำงานซ่อมแซมมากกว่าหนึ่งครั้งในเวลาเดียวกัน"
+
+#: includes/admin/tools.php:36
+msgid "bbPress keeps track of relationships between forums, topics, replies, and topic tags, and users. Occasionally these relationships become out of sync, most often after an import or migration. Use the tools below to manually recalculate these relationships."
+msgstr "bbPress ติดตามดูความสัมพันธ์ระหว่างฟอรั่ม กระทู้ ข้อความตอบกลับ ป้ายกำกับกระทู้และผู้ใช้  บางโอกาสที่ความสัมพันธ์เหล่านี้อาจจะไม่เชื่อมกัน  และส่วนใหญ่เกิดหลังจากการนำเข้าหรือการย้ายข้อมูล  ใช้เครื่องมือด้านล่างเพื่อคำนวณใหม่ความสัมพันธ์เหล่านี้ด้วยตัวเอง"
+
+#: includes/admin/settings.php:1755
+msgid "Possible %1$s conflict: %2$s"
+msgstr "เป็นไปได้ที่ %1$s ขัดแย้งกับ: %2$s"
+
+#: includes/admin/settings.php:1736
+msgid "%s page"
+msgstr "%s หน้า"
+
+#: includes/admin/settings.php:1724
+msgid "Topic tag slug"
+msgstr "slug ป้ายกำกับกระทู้"
+
+#: includes/admin/settings.php:1721
+msgid "View base"
+msgstr "ฐานการดู"
+
+#: includes/admin/settings.php:1718
+msgid "User base"
+msgstr "ฐานผู้ใช้"
+
+#: includes/admin/settings.php:1715
+msgid "Reply slug"
+msgstr "slug ข้อความตอบกลับ"
+
+#: includes/admin/settings.php:1712
+msgid "Topic slug"
+msgstr "slug กระทู้"
+
+#: includes/admin/settings.php:1709
+msgid "Forum slug"
+msgstr "slug ฟอรั่ม"
+
+#: includes/admin/settings.php:1706
+msgid "Topics base"
+msgstr "ฐานกระทู้"
+
+#: includes/admin/settings.php:1703
+msgid "Forums base"
+msgstr "ฐานฟอรั่ม"
+
+#: includes/admin/settings.php:1698
+msgid "Category base"
+msgstr "โครงสร้างหมวดหมู่"
+
+#: includes/admin/settings.php:1695
+msgid "Tag base"
+msgstr "โครงสร้างป้ายกำกับ"
+
+#: includes/admin/settings.php:1692
+msgid "Menus"
+msgstr "เมนู"
+
+#: includes/admin/settings.php:1691
+msgid "Attachments"
+msgstr "ไฟล์แนบ"
+
+#: includes/admin/settings.php:1689
+msgid "Pages"
+msgstr "หน้า"
+
+#: includes/admin/settings.php:1688
+#: templates/default/bbpress/loop-forums.php:21
+#: templates/default/bbpress/loop-replies.php:24
+#: templates/default/bbpress/loop-replies.php:66
+#: templates/default/bbpress/loop-topics.php:21
+msgid "Posts"
+msgstr "ข้อความ"
+
+#: includes/admin/settings.php:1590
+msgid "In the event of a slug collision with WordPress or BuddyPress, a warning will appear next to the problem slug(s)."
+msgstr "ในกรณีที่ slug มีความขัดแย้งกับเวิร์ดเพรสหรือ BuddyPress จะมีคำเตือนปรากฎขึ้นด้านข้าง slug ที่มีปัญหา"
+
+#: includes/admin/settings.php:1589
+msgid "\"Single Slugs\" are used as a prefix when viewing an individual forum, topic, reply, user, or view."
+msgstr "\"Slugs เดี่ยว\" ถูกใช้เป็นคำนำหน้าเมื่อกำลังดูแต่ละฟอรั่ม, กระทู้, ข้อความตอบกลับ, ผู้ใช้, หรือการดู"
+
+#: includes/admin/settings.php:1588
+msgid "\"Archive Slugs\" are used as the \"root\" for your forums and topics. If you combine these values with existing page slugs, bbPress will attempt to output the most correct title and content."
+msgstr "\"คลังเก็บ Slugs\" ถูกใช้เป็น \"แกนหลัก\" สำหรับฟอรั่มและกระทู้ของคุณ  ถ้าคุณรวมค่าเหล่านี้กับ slugs หน้าที่มีอยู่ bbPress จะพยายามแสดงผลออกมาให้ถูกต้องมากที่สุดกับหัวข้อและเนื้อหา"
+
+#: includes/admin/settings.php:1587
+msgid "The Slugs section allows you to control the permalink structure for your forums."
+msgstr "ส่วน Slugs อนุญาตคุณให้ควบคุมโครงสร้างลิงก์ถาวรสำหรับฟอรั่มของคุณ"
+
+#: includes/admin/settings.php:1586
+msgid "Slugs"
+msgstr "Slugs"
+
+#: includes/admin/settings.php:1580
+msgid "These are broken up into two separate groups: one for what appears in your theme, another for RSS feeds."
+msgstr "สิ่งเหล่านี้มีจุดต่างกันอยู่สองกลุ่ม  หนึ่งสำหรับสิ่งที่จะปรากฎใน theme ของคุณ อีกหนึ่งกลุ่มสำหรับ RSS feeds"
+
+#: includes/admin/settings.php:1579
+msgid "This is comparable to the WordPress \"Reading Settings\" page, where you can set the number of posts that should show on blog pages and in feeds."
+msgstr "นี่เทียบได้กับหน้า \"ตั้งค่าการอ่าน\" ในเวิร์ดเพรส ที่ซึ่งคุณสามารถตั้งค่าจำนวนเรื่องที่ควรแสดงบนหน้าบล็อกและใน feeds"
+
+#: includes/admin/settings.php:1578
+msgid "Per Page settings allow you to control the number of topics and replies appear on each page."
+msgstr "การตั้งค่าต่อหน้าอนุญาตคุณให้ควบคุมจำนวนของกระทู้และข้อความตอบกลับที่ปรากฎในแต่ละหน้า"
+
+#: includes/admin/settings.php:1577
+msgid "Per Page"
+msgstr "ต่อหน้า"
+
+#: includes/admin/settings.php:1571
+msgid "You must click the Save Changes button at the bottom of the screen for new settings to take effect."
+msgstr "คุณต้องกดที่ปุ่มบันทึกการเปลี่ยนแปลงที่ด้านล่างของหน้าจอสำหรับการตั้งค่าใหม่เพื่อให้เกิดการเปลี่ยนแปลง"
+
+#: includes/admin/settings.php:1568
+msgid "Auto-embed will embed the media content from a URL directly into the replies. For example: links to Flickr and YouTube."
+msgstr "การเปิดเล่นไฟล์สื่ออัตโนมัติจะเล่นไฟล์สื่อต่าง ๆ จาก URL โดยตรงมายังข้อความตอบกลับ  ตัวอย่างเช่น: ลิงก์ไปยัง Flickr และ YouTube"
+
+#: includes/admin/settings.php:1567
+msgid "The Fancy Editor brings the luxury of the Visual editor and HTML editor from the traditional WordPress dashboard into your theme."
+msgstr "ตัวแก้ไขตามจินตนาการจะนำตัวแก้ไขแบบมองเห็นและตัวแก้ไขแบบ HTML จากหน้าควบคุมเวิร์ดเพรสมาสู่ยัง theme ของคุณ"
+
+#: includes/admin/settings.php:1566
+msgid "\"Anonymous Posting\" allows guest users who do not have accounts on your site to both create topics as well as replies."
+msgstr "\"การเขียนนิรนาม\" อนุญาตผู้เยี่ยมชมที่ไม่มีบัญชีบนเว็บของคุณสามารถสร้างกระทู้และข้อความตอบกลับได้"
+
+#: includes/admin/settings.php:1565
+msgid "Topic-Tags allow users to filter topics between forums. This is enabled by default."
+msgstr "ป้ายกำกับหัวข้ออนุญาตผู้ใช้ให้กรองกระทู้ระหว่างฟอรั่ม  ซึ่งคำสั่งนี้เปิดใช้โดยค่าเริ่มต้น"
+
+#: includes/admin/settings.php:1564
+msgid "Subscriptions allow users to subscribe for notifications to topics that interest them. This is enabled by default."
+msgstr "การติดตามอนุญาตผู้ใช้สำหรับการส่งคำเตือนไปยังกระทู้ที่พวกเขาสนใจ  สิ่งนี้เปิดใช้งานโดยค่าเริ่มต้น"
+
+#: includes/admin/settings.php:1563
+msgid "Favorites are a way for users to save and later return to topics they favor. This is enabled by default."
+msgstr "การเก็บกระทู้เป็นวิธีที่ผู้ใช้จะบันทึกและกลับมายังกระทู้ที่พวกเขาชื่นชอบ  สิ่งนี้เปิดใช้งานโดยค่าเริ่มต้น"
+
+#: includes/admin/settings.php:1562
+msgid "\"Throttle time\" is the amount of time required between posts from a single author. The higher the throttle time, the longer a user will need to wait between posting to the forum."
+msgstr "\"ช่วงเว้นระยะ\" คือจำนวนเวลาที่ระบบต้องการจากผู้เขียนคนหนึ่งในการเขียนบทความอีกบทความหนึ่ง  ยิ่งค่าสูงเท่าไหร่  ก็หมายถึงเวลาที่ผู้ใช้ต้องรอระหว่างส่งข้อความหนึ่งถึงอีกข้อความหนึ่ง"
+
+#: includes/admin/settings.php:1561
+msgid "You can choose to lock a post after a certain number of minutes. \"Locking post editing\" will prevent the author from editing some amount of time after saving a post."
+msgstr "คุณสามารถเลือกที่จะล็อคบทความหลังจากเวลาไม่กี่นาที \"การล็อคบทความที่กำลังแก้ไข\" จะป้องกันผู้เขียนจากการแก้ไขเวลาหลังจากการบันทึกบทความ"
+
+#: includes/admin/settings.php:1558
+msgid "In the Main Settings you have a number of options:"
+msgstr "ในการตั้งค่าหลักคุณจะมีตัวเลือกจำนวนหนึ่ง"
+
+#: includes/admin/settings.php:1557
+msgid "Main Settings"
+msgstr "การตั้งค่าหลัก"
+
+#: includes/admin/settings.php:1551
+msgid "Please see the additional help tabs for more information on each indiviual section."
+msgstr "โปรดดูแทบการช่วยเหลือเพิ่มเติมสำหรับข้อมูลเพิ่มในแต่ละส่วน"
+
+#: includes/admin/settings.php:1550
+msgid "This screen provides access to all of the Forums settings."
+msgstr "หน้าจอนี้มีคำสั่งให้เข้าถึงการตั้งค่าทั้งหมดของฟอรั่ม"
+
+#: includes/admin/settings.php:1519
+msgid "Stop"
+msgstr "หยุดการทำงาน"
+
+#: includes/admin/settings.php:1518
+msgid "Start"
+msgstr "เริ่มทำงาน"
+
+#: includes/admin/settings.php:1488
+msgid "Non-bbPress passwords cannot be automatically converted. They will be converted as each user logs in."
+msgstr "ไม่มีรหัสผ่าน bbPress ที่ไม่สามารถแปลงโดยอัตโนมัติ  พวกมันจะถูกแปลงทันทีที่ผู้ใช้แต่ละคนเข้าสู่ระบบ"
+
+#: includes/admin/settings.php:1487
+msgid "Attempt to import user accounts from previous forums"
+msgstr "พยายามนำเข้าบัญชีผู้ใช้จากฟอรั่มก่อนหน้า"
+
+#: includes/admin/settings.php:1473
+msgid "Use this if an import failed and you want to remove that incomplete data."
+msgstr "ใช้สิ่งนี้ถ้าการนำเข้าล้มเหลวและคุณต้องการลบข้อมูลที่ไม่สมบูรณ์"
+
+#: includes/admin/settings.php:1472
+msgid "Purge all information from a previously attempted import"
+msgstr "ล้างข้อมูลทั้งหมดจากความพยายามนำเข้าครั้งก่อนหน้า"
+
+#: includes/admin/settings.php:1458
+msgid "You should clean old conversion information before starting over."
+msgstr "คุณควรจะลบข้อมูลการแปลงเก่า ๆ ก่อนเริ่มทำใหม่"
+
+#: includes/admin/settings.php:1457
+msgid "Start a fresh conversion from the beginning"
+msgstr "เริ่มการสนทนาใหม่ตั้งแต่จุดเริ่มต้น"
+
+#: includes/admin/settings.php:1443
+msgid "Keep this high to prevent too-many-connection issues."
+msgstr "ให้มันสูงไว้เพื่อป้องกันปัญหาการเชื่อมต่อมากเกินไป"
+
+#: includes/admin/settings.php:1442
+msgid "second(s) delay between each group of rows"
+msgstr "เวลาล่าช้า (เป็นวินาที) ระหว่างแต่ละกลุ่มของแถว"
+
+#: includes/admin/settings.php:1428
+msgid "Keep this low if you experience out-of-memory issues."
+msgstr "ให้มันต่ำไว้ถ้าคุณเคยมีปัญหาหน่อยความจำไม่พอ"
+
+#: includes/admin/settings.php:1427
+msgid "rows to process at a time"
+msgstr "แถวเพื่อดำเนินการในทันที"
+
+#: includes/admin/settings.php:1413
+msgid "(If converting from BuddyPress Forums, use \"wp_bb_\" or your custom prefix)"
+msgstr "(ถ้าแปลงมาจาก BuddyPress ฟอรั่ม ใช้ \"wp_bb_\" หรือคำนำหน้าของคุณเอง)"
+
+#: includes/admin/settings.php:1399
+msgid "Some optional parameters to help tune the conversion process."
+msgstr "พารามิเตอร์ทางเลือกบางตัวที่จะช่วยปรับแต่งกระบวนการแปลง"
+
+#: includes/admin/settings.php:1386
+msgid "Name of the database with your old forum data"
+msgstr "ชื่อฐานข้อมูลพร้อมข้อมูลฟอรั่มเก่าของคุณ"
+
+#: includes/admin/settings.php:1372
+msgid "Password to access the database"
+msgstr "รหัสผ่านเพื่อเข้าถึงฐานข้อมูล"
+
+#: includes/admin/settings.php:1358
+msgid "User for your database connection"
+msgstr "ผู้ใช้สำหรับการเชื่อมต่อฐานข้อมูลของคุณ"
+
+#: includes/admin/settings.php:1344
+msgid "Use default 3306 if unsure"
+msgstr "ใช้ค่าเริ่มต้น 3306 ถ้าไม่แน่ใจ"
+
+#: includes/admin/settings.php:1330
+msgid "IP or hostname"
+msgstr "ไอพีหรือชื่อโฮสท์"
+
+#: includes/admin/settings.php:1316
+msgid "is the previous forum software"
+msgstr "เป็นโปรแกรมฟอรั่มก่อนหน้า"
+
+#: includes/admin/settings.php:1286
+msgid "Information about your previous forums database so that they can be converted. <strong>Backup your database before proceeding.</strong>"
+msgstr "ข้อมูลเกี่ยวกับฐานข้อมูลฟอรั่มก่อนหน้าของคุณเพื่อที่พวกมันจะได้ถูกแปลง <strong>ทำสำเนาฐานข้อมูลของคุณก่อนเริ่มดำเนินการ</strong>"
+
+#: includes/admin/settings.php:1267
+#: templates/default/bbpress/form-user-edit.php:173
+msgid "Save Changes"
+msgstr "บันทึกการเปลี่ยนแปลง"
+
+#: includes/admin/settings.php:1258
+msgid "Forums Settings"
+msgstr "การตั้งค่าฟอรั่ม"
+
+#: includes/admin/settings.php:1235
+msgid "Allow Akismet to actively prevent forum spam."
+msgstr "อนุญาต Akismet ให้ป้องกันฟอรั่มจากการสแปม"
+
+#: includes/admin/settings.php:1218
+msgid "Forum settings for Akismet"
+msgstr "การตั้งค่าฟอรั่มสำหรับ Akismet"
+
+#: includes/admin/settings.php:1203
+msgid "Using the Forum Root is not recommended. Changing this does not move existing forums."
+msgstr "ไม่แนะนำให้ใช้ใช้ฟอรั่มแกนหลัก  การเปลี่ยนสิ่งนี้จะไม่ย้ายฟอรั่มที่มีอยู่"
+
+#: includes/admin/settings.php:1202
+msgid "is the parent for all group forums"
+msgstr "เป็นฟอรั่มหลักของฟอรั่มกลุ่มทั้งหมด"
+
+#: includes/admin/settings.php:1194
+msgid "&mdash; Forum root &mdash;"
+msgstr "&mdash; ไดเรกทอรีหลักฟอรั่ม &mdash;"
+
+#: includes/admin/settings.php:1177
+msgid "Allow BuddyPress Groups to have their own forums"
+msgstr "อนุญาตกลุ่ม BuddyPress ให้มีฟอรั่มของพวกเขาเอง"
+
+#: includes/admin/settings.php:1161
+msgid "Forum settings for BuddyPress"
+msgstr "การตั้งค่าฟอรั่มสำหรับ BuddyPress"
+
+#: includes/admin/settings.php:1043
+msgid "Custom slugs for single forums, topics, replies, tags, views, and search."
+msgstr "ปรับแต่ง slug สำหรับ ฟอรั่มเดี่ยว กระทู้ ความเห็น ป้ายกำกับ การเห็นและการค้นหา"
+
+#: includes/admin/settings.php:943
+msgid "Customize your user profile slugs."
+msgstr "ปรับแต่ง slug ประวัติผู้ใช้ของคุณ"
+
+#: includes/admin/settings.php:916
+msgid "Topics by Freshness"
+msgstr "กระทู้ต่าง ๆ ตามความใหม่"
+
+#: includes/admin/settings.php:913
+msgid "Forum Index"
+msgstr "ดัชนีฟอรั่ม"
+
+#: includes/admin/settings.php:893
+msgid "Prefix all forum content with the Forum Root slug (Recommended)"
+msgstr "ใส่คำนำหน้าเนื้อหาฟอรั่มทั้งหมดด้วย slug ฟอรั่มหลัก (แนะนำ)"
+
+#: includes/admin/settings.php:860
+msgid "Customize your Forums root. Partner with a WordPress Page and use Shortcodes for more flexibility."
+msgstr "ปรับแต่งฟอรั่มหลักของคุณ  เป็นส่วนหนึ่งกับหน้าของเวิร์ดเพรส และใช้ shortcodes เพื่อความยืดหยุ่นที่มากกว่า"
+
+#: includes/admin/settings.php:810
+msgid "How many topics and replies to show per RSS page"
+msgstr "จำนวนกระทู้และข้อความตอบกลับเท่าไหร่ที่จะแสดงต่อหนึ่งหน้า RSS"
+
+#: includes/admin/settings.php:779 includes/admin/settings.php:795
+#: includes/admin/settings.php:826 includes/admin/settings.php:842
+msgid "per page"
+msgstr "ต่อหน้า"
+
+#: includes/admin/settings.php:763
+msgid "How many topics and replies to show per page"
+msgstr "จำนวนกระทู้และข้อความตอบกลับเท่าไหร่ที่จะแสดงต่อหนึ่งหน้า"
+
+#: includes/admin/settings.php:748
+msgid "Embed media (YouTube, Twitter, Flickr, etc...) directly into topics and replies"
+msgstr "เปิดใช้งานไฟล์สื่อโดยตรง (YouTube, Twitter, Flickr และอื่น ๆ...) ไปยังกระทู้และข้อความตอบกลับ"
+
+#: includes/admin/settings.php:732
+msgid "No template packages available."
+msgstr "ไม่มี template package ที่ใช้งานได้"
+
+#: includes/admin/settings.php:728
+msgid "will serve all bbPress templates"
+msgstr "จะรองรับเทมเพลต bbPress ทั้งหมด"
+
+#: includes/admin/settings.php:722
+msgid "%1$s - %2$s"
+msgstr "%1$s - %2$s"
+
+#: includes/admin/settings.php:698
+msgid "How your forum content is displayed within your existing theme."
+msgstr "บทความฟอรั่มของคุณแสดงอย่างไรภายใน theme ที่มีอยู่ของคุณ"
+
+#: includes/admin/settings.php:685
+msgid "Add toolbar & buttons to textareas to help with HTML formatting"
+msgstr "เพิ่มแถบเครื่องมือและปุ่มไปยังพื้นที่ข้อความเพื่อช่วยกับรูปแบบ HTML"
+
+#: includes/admin/settings.php:669
+msgid "Allow topic and reply revision logging"
+msgstr "อนุญาตการเก็บข้อมูลรุ่นของกระทู้และข้อความตอบกลับ"
+
+#: includes/admin/settings.php:652
+msgid "Enable threaded (nested) replies %s levels deep"
+msgstr "เปิดใช้ความสัมพันธ์ความเห็น %s ระดับลึก"
+
+#: includes/admin/settings.php:613
+msgid "Allow forum wide search"
+msgstr "อนุญาตการค้นหาฟอรั่มแบบกว้าง"
+
+#: includes/admin/settings.php:597
+msgid "Allow topics to have tags"
+msgstr "อนุญาตให้กระทู้มีป้ายกำกับ"
+
+#: includes/admin/settings.php:581
+msgid "Allow users to subscribe to forums and topics"
+msgstr "อนุญาตผู้ใช้ให้รับข่าวฟอรั่มและกระทู้"
+
+#: includes/admin/settings.php:565
+msgid "Allow users to mark topics as favorites"
+msgstr "อนุญาตผู้ใช้ให้บันทึกกระทู้เป็นรายการโปรด"
+
+#: includes/admin/settings.php:549
+msgid "Forum features that can be toggled on and off"
+msgstr "ลักษณะพิเศษฟอรั่มที่สามารถปิดและเปิดสลับกันได้"
+
+#: includes/admin/settings.php:533
+msgid "Automatically give registered visitors the %s forum role"
+msgstr "ลงทะเบียนผู้เยี่ยมชมด้วยบทบาท %s ของฟอรั่มอัตโนมัติ"
+
+#: includes/admin/settings.php:499
+msgid "Allow guest users without accounts to create topics and replies"
+msgstr "อนุญาตผู้ใช้ที่ไม่มีบัญชีสร้างกระทู้และข้อความตอบกลับ"
+
+#: includes/admin/settings.php:483 includes/common/functions.php:124
+msgid "seconds"
+msgstr "วินาที"
+
+#: includes/admin/settings.php:467 includes/common/functions.php:123
+msgid "minutes"
+msgstr "นาที"
+
+#: includes/admin/settings.php:450
+msgid "Setting time limits and other user posting capabilities"
+msgstr "การตั้งเวลาจำกัดและความสามารถในการเขียนของผู้ใช้อื่น"
+
+#: includes/admin/settings.php:412
+msgid "Use Akismet"
+msgstr "ใช้ Akismet"
+
+#: includes/admin/settings.php:399
+msgid "Group Forums Parent"
+msgstr "ฟอรั่มหลักของกลุ่ม"
+
+#: includes/admin/settings.php:391
+msgid "Enable Group Forums"
+msgstr "เปิดใช้งานฟอรั่มของกลุ่ม"
+
+#: includes/admin/settings.php:378
+msgid "Topic Subscriptions"
+msgstr "การรับข่าวจากกระทู้"
+
+#: includes/admin/settings.php:370 includes/extend/buddypress/loader.php:285
+msgid "Favorite Topics"
+msgstr "รายการกระทู้โปรด"
+
+#: includes/admin/settings.php:362 includes/extend/buddypress/loader.php:207
+#: includes/extend/buddypress/loader.php:277
+#: templates/default/bbpress/user-details.php:41
+msgid "Replies Created"
+msgstr "ตอบกระทู้"
+
+#: includes/admin/settings.php:354 includes/extend/buddypress/loader.php:196
+#: includes/extend/buddypress/loader.php:269
+#: templates/default/bbpress/user-details.php:35
+msgid "Topics Started"
+msgstr "ตั้งกระทู้"
+
+#: includes/admin/settings.php:346
+msgid "User Base"
+msgstr "ฐานผู้ใช้"
+
+#: includes/admin/settings.php:317
+msgid "Topic View"
+msgstr "ดูกระทู้"
+
+#: includes/admin/settings.php:280
+msgid "Forum root should show"
+msgstr "ฟอรั่มหลักควรจะแสดง"
+
+#: includes/admin/settings.php:272
+msgid "Forum Prefix"
+msgstr "คำนำหน้าฟอรั่ม"
+
+#: includes/admin/settings.php:264
+msgid "Forum Root"
+msgstr "ฟอรั่มหลัก"
+
+#: includes/admin/settings.php:209
+msgid "Current Package"
+msgstr "แพคเกจปัจจุบัน"
+
+#: includes/admin/settings.php:190
+msgid "Reply Threading"
+msgstr "กำลังเพิ่มความสัมพันธ์ความเห็น"
+
+#: includes/admin/settings.php:182
+msgid "Auto-embed links"
+msgstr "ลิงก์เล่นไฟล์สื่ออัตโนมัติ"
+
+#: includes/admin/settings.php:174
+msgid "Post Formatting"
+msgstr "รูปแบบของการเขียน"
+
+#: includes/admin/settings.php:166 includes/admin/settings.php:333
+#: includes/common/template.php:2330 includes/search/template.php:225
+#: templates/default/bbpress/form-search.php:17
+msgid "Search"
+msgstr "ค้นหา"
+
+#: includes/admin/settings.php:158
+msgid "Topic tags"
+msgstr "ป้ายกำกับกระทู้"
+
+#: includes/admin/settings.php:150 includes/extend/buddypress/loader.php:230
+#: templates/default/bbpress/user-details.php:58
+msgid "Subscriptions"
+msgstr "การติดตาม"
+
+#: includes/admin/settings.php:142 includes/extend/buddypress/loader.php:218
+#: templates/default/bbpress/user-details.php:48
+msgid "Favorites"
+msgstr "รายการกระทู้ที่เก็บไว้"
+
+#: includes/admin/settings.php:134 includes/admin/settings.php:1690
+msgid "Revisions"
+msgstr "รุ่น"
+
+#: includes/admin/settings.php:115
+msgid "Auto role"
+msgstr "บทบาทอัตโนมัติ"
+
+#: includes/admin/settings.php:107
+msgid "Anonymous posting"
+msgstr "การโพสท์แบบนิรนาม"
+
+#: includes/admin/settings.php:99
+msgid "Throttle posting every"
+msgstr "บังคับการโพสท์ทุก"
+
+#: includes/admin/settings.php:91
+msgid "Disallow editing after"
+msgstr "ไม่อนุญาตการแก้ไขในภายหลัง"
+
+#: includes/admin/settings.php:69
+msgid "Akismet Integration"
+msgstr "การเชื่อมต่อกับ Akismet"
+
+#: includes/admin/settings.php:64
+msgid "BuddyPress Integration"
+msgstr "การเชื่อมต่อกับ BuddyPress"
+
+#: includes/admin/settings.php:59
+msgid "Forum User Slugs"
+msgstr "Slugs ผู้ใช้ฟอรั่ม"
+
+#: includes/admin/settings.php:54
+msgid "Single Forum Slugs"
+msgstr "Slugs ฟอรั่มเดี่ยว"
+
+#: includes/admin/settings.php:49
+msgid "Forum Root Slug"
+msgstr "Slug ฟอรั่มหลัก"
+
+#: includes/admin/settings.php:44
+msgid "Topics and Replies Per RSS Page"
+msgstr "กระทู้และความเห็นต่อหนึ่งหน้า RSS"
+
+#: includes/admin/settings.php:39
+msgid "Topics and Replies Per Page"
+msgstr "กระทู้และความเห็นต่อหนึ่งหน้า"
+
+#: includes/admin/settings.php:34
+msgid "Forum Theme Packages"
+msgstr "แพคเกจ Theme ของฟอรั่ม"
+
+#: includes/admin/settings.php:29
+msgid "Forum Features"
+msgstr "ลักษณะพิเศษฟอรั่ม"
+
+#: includes/admin/settings.php:24
+msgid "Forum User Settings"
+msgstr "การตั้งค่าผู้ใช้ฟอรั่ม"
+
+#: includes/admin/replies.php:883
+msgid "Reply draft updated. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
+msgstr "อัปเดตฉบับร่างตอบกลับแล้ว <a target=\"_blank\" href=\"%s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/replies.php:876
+msgid "Reply scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview topic</a>"
+msgstr "ตารางเวลาตอบกลับสำหรับ: <strong>%1$s</strong> <a target=\"_blank\" href=\"%2$s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/replies.php:873
+msgid "Reply submitted. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
+msgstr "ส่งข้อความตอบกลับ <a target=\"_blank\" href=\"%s\">ดูก่อนกระทู้</a>"
+
+#: includes/admin/replies.php:870
+msgid "Reply saved."
+msgstr "บันทึกข้อความตอบกลับแล้ว"
+
+#: includes/admin/replies.php:867
+msgid "Reply created. <a href=\"%s\">View topic</a>"
+msgstr "ตอบกลับเรียบร้อยแล้ว <a href=\"%s\">ดูกระทู้</a>"
+
+#. translators: %s: date and time of the revision
+#: includes/admin/replies.php:863
+msgid "Reply restored to revision from %s"
+msgstr "ข้อความตอบกลับถูกย้อนไปยังรุ่นจาก %s"
+
+#: includes/admin/replies.php:858
+msgid "Reply updated."
+msgstr "อัปเดตข้อความตอบกลับแล้ว"
+
+#: includes/admin/replies.php:849
+msgid "Reply updated. <a href=\"%s\">View topic</a>"
+msgstr "อัปเดตข้อความตอบกลับ <a href=\"%s\">ดูหัวข้อ</a>"
+
+#: includes/admin/replies.php:789 includes/admin/topics.php:859
+msgid "In all forums"
+msgstr "ในทุกฟอรั่ม"
+
+#: includes/admin/replies.php:779 includes/admin/topics.php:849
+msgid "Empty Spam"
+msgstr "ลบสแปมทั้งหมด"
+
+#: includes/admin/replies.php:753 includes/admin/topics.php:823
+msgid "Delete Permanently"
+msgstr "ลบถาวร"
+
+#: includes/admin/replies.php:753 includes/admin/topics.php:823
+#: includes/replies/template.php:2053 includes/topics/template.php:2634
+msgid "Delete this item permanently"
+msgstr "ลบสิ่งนี้ถาวร"
+
+#: includes/admin/replies.php:749 includes/admin/topics.php:819
+#: includes/replies/template.php:2034 includes/topics/template.php:2615
+msgid "Trash"
+msgstr "ถังขยะ"
+
+#: includes/admin/replies.php:749 includes/admin/topics.php:819
+#: includes/replies/template.php:2049 includes/topics/template.php:2630
+msgid "Move this item to the Trash"
+msgstr "ย้ายสิ่งนี้ไปถังขยะ"
+
+#: includes/admin/replies.php:747 includes/admin/topics.php:817
+#: includes/replies/template.php:2035 includes/topics/template.php:2616
+msgid "Restore"
+msgstr "ย้อนกลับ"
+
+#: includes/admin/replies.php:747 includes/admin/topics.php:817
+#: includes/replies/template.php:2047 includes/topics/template.php:2628
+msgid "Restore this item from the Trash"
+msgstr "กู้คืนสิ่งนี้จากถังขยะ"
+
+#: includes/admin/replies.php:738 includes/admin/topics.php:809
+#: includes/replies/template.php:2105 includes/topics/template.php:2872
+msgid "Spam"
+msgstr "สแปม"
+
+#: includes/admin/replies.php:738
+msgid "Mark this reply as spam"
+msgstr "บันทึกข้อความตอบกลับนี้เป็นสแปม"
+
+#: includes/admin/replies.php:736 includes/admin/topics.php:807
+msgid "Not spam"
+msgstr "ไม่ใช่สแปม"
+
+#: includes/admin/replies.php:736
+msgid "Mark the reply as not spam"
+msgstr "บันทึกข้อความตอบกลับไม่ใช่สแปม"
+
+#: includes/admin/replies.php:725 includes/admin/topics.php:776
+msgid "View"
+msgstr "การดู"
+
+#: includes/admin/replies.php:725 includes/admin/topics.php:776
+msgid "View &#8220;%s&#8221;"
+msgstr "ดู &#8220;%s&#8221;"
+
+#: includes/admin/replies.php:657
+msgid "(Mismatch)"
+msgstr "(จับคู่ผิด)"
+
+#: includes/admin/replies.php:651 includes/admin/replies.php:666
+#: includes/admin/topics.php:687
+msgid "No Forum"
+msgstr "ไม่มีฟอรั่ม"
+
+#: includes/admin/replies.php:625 includes/admin/replies.php:633
+msgid "No Topic"
+msgstr "ไม่มีกระทู้"
+
+#: includes/admin/replies.php:572 includes/admin/topics.php:636
+#: templates/default/bbpress/loop-replies.php:18
+#: templates/default/bbpress/loop-replies.php:60
+#: templates/default/bbpress/loop-search.php:18
+#: templates/default/bbpress/loop-search.php:40
+msgid "Author"
+msgstr "ผู้เขียน"
+
+#: includes/admin/replies.php:569
+msgid "Title"
+msgstr "หัวข้อ"
+
+#: includes/admin/replies.php:536
+msgid "Reply \"%1$s\" successfully unmarked as spam."
+msgstr "ยกเลิกบันทึกข้อความตอบกลับ \"%1$s\" เป็นสแปมสำเร็จแล้ว"
+
+#: includes/admin/replies.php:536
+msgid "There was a problem unmarking the reply \"%1$s\" as spam."
+msgstr "มีปัญหาเกี่ยวกับยกเลิกบันทึกข้อความตอบกลับ \"%1$s\" เป็นสแปม"
+
+#: includes/admin/replies.php:532
+msgid "Reply \"%1$s\" successfully marked as spam."
+msgstr "บันทึกข้อความตอบกลับ \"%1$s\" เป็นสแปมสำเร็จแล้ว"
+
+#: includes/admin/replies.php:532
+msgid "There was a problem marking the reply \"%1$s\" as spam."
+msgstr "เกิดปัญหาบางประการในการบันทึกข้อความตอบกลับ \"%1$s\" ว่าเป็นสแปม"
+
+#: includes/admin/replies.php:464 includes/admin/topics.php:488
+msgid "You do not have the permission to do that!"
+msgstr "คุณไม่มีสิทธิ์ทำเช่นนั้นได้"
+
+#: includes/admin/replies.php:461
+msgid "The reply was not found!"
+msgstr "ไม่พบข้อความตอบกลับ"
+
+#: includes/admin/replies.php:347 includes/admin/topics.php:363
+#: templates/default/bbpress/form-anonymous.php:17
+msgid "Author Information"
+msgstr "รายละเอียดผู้เขียน"
+
+#: includes/admin/replies.php:223
+msgid "<strong>Reply To</strong> determines the threading of the reply."
+msgstr "<strong>ตอบกลับ</strong> กำหนดความสัมพันธ์ของความเห็น"
+
+#: includes/admin/replies.php:222
+msgid "<strong>Topic</strong> determines the parent topic that the reply belongs to."
+msgstr "<strong>กระทู้</strong> กำหนดกระทู้หลักที่จะตอบข้อความตอบกลับ"
+
+#: includes/admin/replies.php:221
+msgid "<strong>Forum</strong> dropdown determines the parent forum that the reply belongs to. Select the forum, or leave the default (Use Forum of Topic) to post the reply in forum of the topic."
+msgstr "<strong>ฟอรั่ม</strong> เลื่อนลงเพื่อกำหนดฟอรั่มหลักที่จะใส่ข้อความตอบกลับ  เลือกฟอรั่มหรือปล่อยให้ใช้ค่าเริ่มต้น (ใช้ฟอรั่มของกระทู้) เพื่อส่งข้อความตอบกลับในฟอรั่มของกระทู้"
+
+#: includes/admin/replies.php:219
+msgid "Select the attributes that your reply should have:"
+msgstr "เลือกคุณสมบัติที่ข้อความตอบกลับของคุณควรมี:"
+
+#: includes/admin/replies.php:217 includes/admin/replies.php:255
+msgid "Reply Attributes"
+msgstr "คุณสมบัติข้อความตอบกลับ"
+
+#: includes/admin/replies.php:212
+msgid "<strong>Featured Image</strong> - This allows you to associate an image with your reply without inserting it. This is usually useful only if your theme makes use of the featured image as a reply thumbnail on the home page, a custom header, etc."
+msgstr "<strong>รูปพิเศษ</strong> - สิ่งนี้อนุญาตให้คุณใช้งานรูปภาพกับข้อความตอบกลับของคุณโดยไม่ต้องใส่รูปลงไป สิ่งนี้จะมีประโยชน์ถ้า theme สามารถใช้รูปพิเศษเป็นรูปย่อข้อความตอบกลับบนหน้าแรก ส่วนหัวปรับแต่งและอื่น ๆ ได้ "
+
+#: includes/admin/replies.php:209
+msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
+msgstr "<strong>เผยแพร่</strong> - คุณสามารถตั้งเงื่อนไขสำหรับการเผยแพร่ข้อความตอบกลับของคุณในกล่องเผยแพร่ สำหรับสถานะ การมองเห็น และเผยแพร่ (ทันที) กดที่ลิงก์แก้ไขเพื่อแสดงตัวเลือกที่มากขึ้น การมองเห็นได้รวมตัวเลือกสำหรับใส่รหัสป้องกันข้อความตอบกลับพื่อทำให้มันอยู่เหนืองบล็อกอย่างคุณอย่างไม่มีเงื่อนไข (ปักหมุด) เผยแพร่ (ทันที) อนุญาตคุณให้ตั้งค่าวันที่เวลาในอนาคตหรืออดีตได้ ดังนั้นคุณสามารถทำตารางเวลาข้อความตอบกลับที่จะเผยแพร่ในอนาคตหรืออดีตได้ "
+
+#: includes/admin/replies.php:206
+msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
+msgstr "<strong>ตัวแก้ไขข้อความตอบกลับ</strong> - ใส่ข้อความสำหรับข้อความตอบกลับของคุณ มีสองรูปแบบในการแก้ไข:แบบมองเห็นและแบบ HTML เลือกรูปแบบการแก้ไขโดยกดบนแทบที่เหมาะสม แบบมองเห็นจะให้ตัวแก้ไข WYSIWYG (เห็นเสมือนหน้าเว็บจริง) กดที่ไอคอนสุดท้ายในแถวเพื่อเพิ่มแถบควบคุมแถวที่สอง แบบ HTML อนุญาตให้คุณใส่โค้ด HTML ไปพร้อม ๆ กับข้อความตอบกลับของคุณ คุณสามารถใส่ไฟล์สื่อโดยกดที่ไอคอนด้านบนตัวแก้ไขข้อความตอบกลับและทำตามคำแนะนำ คุณสามารถไปที่การเขียนแบบไร้กังวลผ่านไอคอนเต็มหน้าจอในแบบมองเห็น (ไอคอนรองสุดท้ายในแถวบน) หรือปุ่มเต็มหน้าจอในแบบ HTML (ไอคอนสุดท้ายของแถว) ในโหมดเต็มหน้าจอ คุณสามารถทำให้ปุ่มแสดงขึ้นโดยเลื่อนเม้าส์ไปเหนือพื้นที่ส่วนบน เพื่อออกจากโหมดเต็มหน้าจอกลับไปยังการแก้ไขข้อความตอบกลับแบบปกติ"
+
+#: includes/admin/replies.php:205
+msgid "<strong>Title</strong> - Enter a title for your reply. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
+msgstr "<strong>หัวข้อ</strong> - ใส่หัวข้อสำหรับข้อความตอบกลับของคุณ  หลังจากคุณใส่หัวข้อ  คุณจะเห็นลิงก์ถาวรด้านล่างที่คุณสามารถแก้ไขได้"
+
+#: includes/admin/replies.php:203
+msgid "Title and Reply Editor"
+msgstr "ตัวแก้ไขหัวข้อและข้อความตอบกลับ"
+
+#: includes/admin/replies.php:193
+msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "ช่องหัวข้อและพื้นที่แ้ก้ไขฟอรั่มขนาดใหญ่ถูกวางไว้เป็นที่ แต่คุณสามารถจัดที่ให้กับกล่องอื่นทั้งหมดโดยการลากและวาง และย่อหรือขยายมันโดยกดที่แถบหัวข้อของแต่ละกล่อง ใช้แทบหน้าจอตัวเลือกเพื่อแสดงกล่องที่ซ่อนอยู่ (เรื่องย่อ, การส่่ง Trackbacks, ช่องปรับแต่ง, การสนทนา, Slug, ผู้เขียน) หรือเลือกรูปแบบ 1- หรือ 2- คอลัมน์สำหรับหน้าจอนี้ "
+
+#: includes/admin/replies.php:172
+msgid "When using Bulk Edit, you can change the metadata (categories, author, etc.) for all selected replies at once. To remove a reply from the grouping, just click the x next to its name in the Bulk Edit area that appears."
+msgstr "เมื่อใช้การแก้ไขแบบกลุ่ม  คุณสามารถเปลี่ยน metadata (หมวดหมู่ ผู้เขียนและอื่น ๆ) สำหรับข้อความที่เลือกทั้งหมดได้พร้อมกัน  การย้ายข้อความตอบกลับออกจากกลุ่ม  เพียงกด x ที่ด้านข้างชื่อของมันในพื้นที่การแก้ไขแบบกลุ่มที่ปรากฎขึ้นมา"
+
+#: includes/admin/replies.php:171
+msgid "You can also edit or move multiple replies to the trash at once. Select the replies you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
+msgstr "คุณสามารถแก้ไขหรือย้ายข้อความตอบกลับหลายข้อความไปยังถังขยะพร้อมกันได้  เลือกข้อความตอบกลับที่คุณต้องการโดยใช้กล่องเช็ค  แล้วเลือการกระทำที่คุณต้องการทำจากเมนูการทำงานแบบกลุ่มและกดทำงาน"
+
+#: includes/admin/replies.php:162
+msgid "<strong>Preview</strong> will show you what your draft reply will look like if you publish it. View will take you to your live site to view the reply. Which link is available depends on your reply&#8217;s status."
+msgstr "<strong>ดูก่อน</strong> จะแสดงให้คุณเห็นว่าฉบับร่างข้อความตอบกลับของคุณจะมีหน้าตาเป็นอย่างไรเมื่อคุณเผยแพร่มัน  การดูจะนำคุณไปยังเว็บที่ใช้งานอยู่ของคุณเพื่อดูข้อความตอบกลับ  ลิงก์ที่ใช้งานได้จะขึ้นอยู่กับสถานะข้อความตอบกลับของคุณ"
+
+#: includes/admin/replies.php:161
+msgid "<strong>Spam</strong> removes your reply from this list and places it in the spam queue, from which you can permanently delete it."
+msgstr "<strong>สแปม</strong> ย้ายข้อความตอบกลับของคุณออกจากรายชื่อนี้และวางมันลงในคิวสแปม ที่ซึ่งคุณสามารถลบมันได้อย่างถาวร"
+
+#: includes/admin/replies.php:160
+msgid "<strong>Trash</strong> removes your reply from this list and places it in the trash, from which you can permanently delete it."
+msgstr "<strong>ถังขยะ</strong> ย้ายข้อความตอบกลับของคุณจากรายชื่อนี้และวางมันลงในถังขยะ  ที่ซึ่งคุณสามารถลบมันอย่างถาวรได้"
+
+#: includes/admin/replies.php:158
+msgid "<strong>Edit</strong> takes you to the editing screen for that reply. You can also reach that screen by clicking on the reply title."
+msgstr "<strong>แก้ไข</strong> จะพาคุณไปยังหน้าจอการแก้ไขสำหรับข้อความตอบกลับ  คุณยังสามารถเข้าถึงหน้าจอโโยกดที่หัวข้อข้อความตอบกลับ"
+
+#: includes/admin/replies.php:156
+msgid "Hovering over a row in the replies list will display action links that allow you to manage your reply. You can perform the following actions:"
+msgstr "เลื่อนเม้าส์ไปเหนือแถวในรายการข้อความตอบกลับจะแสดงลิงก์การกระทำที่อนุญาตคุณให้จัดการข้อความตอบกลับของคุณ  คุณสามารถกระทำสิ่งต่อไปนี้:"
+
+#: includes/admin/replies.php:147
+msgid "You can refine the list to show only replies in a specific category or from a specific month by using the dropdown menus above the replies list. Click the Filter button after making your selection. You also can refine the list by clicking on the reply author, category or tag in the replies list."
+msgstr "คุณสามารถปรับรายชื่อที่จะแสดงเฉพาะข้อความตอบกลับเฉพาะในหมวดหมู่หรือจากเดือนที่ระบุ โดยใช้เมนูเลื่อนลงด้านบนรายชื่อข้อความตอบกลับ  กดที่ปุ่มกรองหลังจากคุณทำการเลือก  คุณยังสามารถปรับรายชื่อโดยการกดที่ผู้เขียนข้อความตอบกลับ หมวดหมู่หรือป้ายกำกับในรายชื่อข้อความตอบกลับ"
+
+#: includes/admin/replies.php:146
+msgid "You can view replies in a simple title list or with an excerpt. Choose the view you prefer by clicking on the icons at the top of the list on the right."
+msgstr "คุณสามารถดูข้อความตอบกลับในรายชื่อหัวข้อง่าย ๆ หรือพร้อมคำย่อ  เลือกวิธีดูที่คุณชอบโดยกดบนไอคอนที่ด้านบนของรายชื่อด้านขวามือ"
+
+#: includes/admin/replies.php:145
+msgid "You can filter the list of replies by reply status using the text links in the upper left to show All, Published, Draft, or Trashed replies. The default view is to show all replies."
+msgstr "คุณสามารถกรองรายชื่อข้อความตอบกลับโดยสถานะข้อความโดยใช้ลิงก์ตัวอักษณที่ด้านซ้ายบนเพื่อแสดงทั้งหมด, เผยแพร่, ฉบับร่าง หรือข้อความตอบกลับขยะ  ค่าการดูเริ่มต้นจะเป็นการแสดงข้อความตอบกลับทั้งหมด"
+
+#: includes/admin/replies.php:144
+msgid "You can hide/display columns based on your needs and decide how many replies to list per screen using the Screen Options tab."
+msgstr "คุณสามารถ ซ่อน/แสดง คอลัมน์ ขึ้นอยู่กับความพอใจของคุณและตัดสินใจว่าจำนวนข้อความตอบกลับเท่าไหร่ที่จะแสดงรายการในหนึ่งหน้าโดยใช้แทบหน้าจอตัวเลือก"
+
+#: includes/admin/replies.php:134
+msgid "This screen provides access to all of your replies. You can customize the display of this screen to suit your workflow."
+msgstr "หน้าจอนี้ให้สิทธิเข้าถึงข้อความตอบกลับทั้งหมดของคุณ  คุณสามารถปรับแต่งการแสดงหน้าจอนี้ให้เหมาะสมกับการทำงานของคุณ"
+
+#: includes/admin/metaboxes.php:525
+msgid "IP Address"
+msgstr "IP Address"
+
+#: includes/admin/metaboxes.php:524
+msgid "IP:"
+msgstr "ไอพี:"
+
+#: includes/admin/metaboxes.php:517
+msgid "ID"
+msgstr "เลขที่"
+
+#: includes/admin/metaboxes.php:516
+msgid "ID:"
+msgstr "เลขที่:"
+
+#: includes/admin/metaboxes.php:509
+#: templates/default/bbpress/form-user-edit.php:57
+msgid "Website"
+msgstr "เว็บไซท์"
+
+#: includes/admin/metaboxes.php:508
+#: templates/default/bbpress/form-anonymous.php:32
+msgid "Website:"
+msgstr "เว็บไซต์:"
+
+#: includes/admin/metaboxes.php:503
+#: templates/default/bbpress/form-user-edit.php:103
+#: templates/default/bbpress/form-user-register.php:28
+msgid "Email"
+msgstr "อีเมล"
+
+#: includes/admin/metaboxes.php:502
+msgid "Email:"
+msgstr "อีเมล:"
+
+#: includes/admin/metaboxes.php:497
+#: templates/default/bbpress/form-user-edit.php:14
+#: templates/default/bbpress/form-user-edit.php:19
+msgid "Name"
+msgstr "ชื่อ"
+
+#: includes/admin/metaboxes.php:496
+#: templates/default/bbpress/form-topic-tag.php:35
+msgid "Name:"
+msgstr "ชื่อ:"
+
+#: includes/admin/metaboxes.php:464
+msgid "Reply To"
+msgstr "ตอบกลับ"
+
+#: includes/admin/metaboxes.php:463
+msgid "Reply To:"
+msgstr "ตอบกลับ:"
+
+#: includes/admin/metaboxes.php:457 includes/replies/template.php:61
+msgid "Topic:"
+msgstr "กระทู้:"
+
+#: includes/admin/metaboxes.php:379 includes/admin/metaboxes.php:433
+#: includes/extend/buddypress/groups.php:1042 includes/topics/template.php:61
+#: templates/default/bbpress/form-topic.php:114
+msgid "Forum:"
+msgstr "ฟอรั่ม:"
+
+#: includes/admin/metaboxes.php:368
+msgid "Select whether to open or close the topic."
+msgstr "เลือกว่าจะเปิดหรือปิดกระทู้"
+
+#: includes/admin/metaboxes.php:356
+msgid "Topic Type"
+msgstr "ชนิดกระทู้"
+
+#: includes/admin/metaboxes.php:322
+msgid "Forum Order"
+msgstr "เรียงลำดับฟอรั่ม"
+
+#: includes/admin/metaboxes.php:321
+msgid "Order:"
+msgstr "ลำดับ:"
+
+#: includes/admin/metaboxes.php:314 includes/admin/metaboxes.php:394
+#: includes/admin/metaboxes.php:448
+msgid "&mdash; No parent &mdash;"
+msgstr "&mdash; ไม่มีกระทู้หลัก &mdash;"
+
+#: includes/admin/metaboxes.php:300
+msgid "Forum Parent"
+msgstr "ฟอรั่มหลัก"
+
+#: includes/admin/metaboxes.php:299
+msgid "Parent:"
+msgstr "หมวดหลัก:"
+
+#: includes/admin/metaboxes.php:285 includes/admin/metaboxes.php:286
+#: templates/default/bbpress/form-forum.php:109
+msgid "Visibility:"
+msgstr "การเห็น:"
+
+#: includes/admin/metaboxes.php:273 includes/admin/metaboxes.php:274
+#: includes/admin/metaboxes.php:367
+#: templates/default/bbpress/form-forum.php:100
+msgid "Status:"
+msgstr "สถานะ:"
+
+#: includes/admin/metaboxes.php:261 includes/admin/metaboxes.php:262
+#: includes/admin/metaboxes.php:355
+msgid "Type:"
+msgstr "ชนิด:"
+
+#: includes/admin/metaboxes.php:222
+msgid "You are using <span class=\"b\">bbPress %s</span>."
+msgstr "คุณกำลังใช้งาน<span class=\"b\">bbPress %s</span>"
+
+#: includes/admin/metaboxes.php:198
+msgid "Empty Topic Tag"
+msgid_plural "Empty Topic Tags"
+msgstr[0] "ลบป้ายกำกับกระทู้"
+
+#: includes/admin/metaboxes.php:176
+msgid "Hidden Reply"
+msgid_plural "Hidden Replies"
+msgstr[0] "ข้อความตอบกลับที่ซ่อนอยู่"
+
+#: includes/admin/metaboxes.php:154
+msgid "Hidden Topic"
+msgid_plural "Hidden Topics"
+msgstr[0] "กระทู้ที่ซ่อนอยู่"
+
+#: includes/admin/metaboxes.php:135
+msgid "User"
+msgid_plural "Users"
+msgstr[0] "ผู้ใช้"
+
+#: includes/admin/metaboxes.php:127
+msgid "Users &amp; Moderation"
+msgstr "ผู้ใช้และการจัดการ"
+
+#: includes/admin/metaboxes.php:103 includes/admin/settings.php:309
+#: includes/topics/template.php:3367
+msgid "Topic Tag"
+msgid_plural "Topic Tags"
+msgstr[0] "ป้ายกำกับกระทู้"
+
+#: includes/admin/metaboxes.php:84 includes/admin/settings.php:325
+#: includes/replies/template.php:49 includes/replies/template.php:1621
+#: includes/topics/template.php:2921
+msgid "Reply"
+msgid_plural "Replies"
+msgstr[0] "ตอบกลับ"
+
+#: includes/admin/metaboxes.php:67 includes/admin/metaboxes.php:458
+#: includes/admin/replies.php:571 includes/admin/settings.php:301
+#: includes/topics/template.php:49
+#: templates/default/bbpress/content-single-topic-lead.php:22
+#: templates/default/bbpress/content-single-topic-lead.php:94
+#: templates/default/bbpress/loop-topics.php:19
+msgid "Topic"
+msgid_plural "Topics"
+msgstr[0] "กระทู้"
+
+#: includes/admin/metaboxes.php:42
+msgid "Discussion"
+msgstr "สนทนา"
+
+#: includes/admin/forums.php:563
+msgid "Forum draft updated. <a target=\"_blank\" href=\"%s\">Preview forum</a>"
+msgstr "อัปเดตฉบับร่างฟอรั่มแล้ว <a target=\"_blank\" href=\"%s\">ดูก่อนฟอรั่ม</a>"
+
+#. translators: Publish box date format, see http://php.net/date
+#: includes/admin/forums.php:558 includes/admin/replies.php:878
+#: includes/admin/topics.php:948
+msgid "M j, Y @ G:i"
+msgstr "M j, Y @ G:i"
+
+#: includes/admin/forums.php:556
+msgid "Forum scheduled for: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">Preview forum</a>"
+msgstr "นำฟอรั่มเข้าตารางเวลาแล้วสำหรับ: <strong>%1$s</strong>. <a target=\"_blank\" href=\"%2$s\">ดูก่อนฟอรั่ม</a>"
+
+#: includes/admin/forums.php:553
+msgid "Forum submitted. <a target=\"_blank\" href=\"%s\">Preview forum</a>"
+msgstr "ส่งฟอรั่มแล้ว <a target=\"_blank\" href=\"%s\">ดูก่อนฟอรั่ม</a>"
+
+#: includes/admin/forums.php:550
+msgid "Forum saved."
+msgstr "บันทึกฟอรั่มแล้ว"
+
+#: includes/admin/forums.php:547
+msgid "Forum created. <a href=\"%s\">View forum</a>"
+msgstr "สร้างฟอรั่มแล้ว <a href=\"%s\">ดูฟอรั่ม</a>"
+
+#. translators: %s: date and time of the revision
+#: includes/admin/forums.php:543
+msgid "Forum restored to revision from %s"
+msgstr "ฟอรั่มถูกย้อนกลับไปรุ่นจาก  %s"
+
+#: includes/admin/forums.php:538
+msgid "Forum updated."
+msgstr "อัปเดตฟอรั่มแล้ว"
+
+#: includes/admin/forums.php:535 includes/admin/replies.php:855
+#: includes/admin/topics.php:925
+msgid "Custom field deleted."
+msgstr "ลบช่องปรับแต่งแล้ว"
+
+#: includes/admin/forums.php:532 includes/admin/replies.php:852
+#: includes/admin/topics.php:922
+msgid "Custom field updated."
+msgstr "อัปเดตช่องปรับแต่งแล้ว"
+
+#: includes/admin/forums.php:529
+msgid "Forum updated. <a href=\"%s\">View forum</a>"
+msgstr "อัปเดตฟอรั่มแล้ว <a href=\"%s\">เปิดดูฟอรั่ม</a>"
+
+#: includes/admin/forums.php:463 includes/forums/template.php:601
+msgid "No Topics"
+msgstr "ไม่มีกระทู้"
+
+#: includes/admin/forums.php:414 includes/admin/topics.php:638
+#: templates/default/bbpress/loop-forums.php:22
+#: templates/default/bbpress/loop-topics.php:22
+msgid "Freshness"
+msgstr "ล่าสุด"
+
+#: includes/admin/forums.php:413 includes/admin/replies.php:573
+#: includes/admin/topics.php:637
+msgid "Created"
+msgstr "สร้างแล้ว"
+
+#: includes/admin/forums.php:412
+#: templates/default/bbpress/content-single-topic-lead.php:18
+#: templates/default/bbpress/content-single-topic-lead.php:90
+msgid "Creator"
+msgstr "ผู้สร้าง"
+
+#: includes/admin/forums.php:411 includes/admin/settings.php:230
+#: includes/admin/settings.php:251 includes/admin/topics.php:634
+#: includes/core/theme-compat.php:646
+#: includes/extend/buddypress/activity.php:356
+#: includes/forums/template.php:2665 includes/replies/template.php:47
+#: includes/replies/template.php:48
+#: templates/default/bbpress/content-statistics.php:32
+#: templates/default/bbpress/loop-forums.php:21
+#: templates/default/bbpress/loop-replies.php:32
+#: templates/default/bbpress/loop-replies.php:70
+#: templates/default/bbpress/loop-topics.php:21
+msgid "Replies"
+msgstr "ข้อความตอบกลับ"
+
+#: includes/admin/forums.php:410 includes/admin/settings.php:222
+#: includes/admin/settings.php:243 includes/admin/topics.php:632
+#: includes/extend/buddypress/activity.php:355
+#: includes/forums/template.php:2601 includes/topics/template.php:47
+#: includes/topics/template.php:48
+#: templates/default/bbpress/content-statistics.php:27
+#: templates/default/bbpress/loop-forums.php:20
+msgid "Topics"
+msgstr "กระทู้"
+
+#: includes/admin/forums.php:409 includes/admin/metaboxes.php:50
+#: includes/admin/metaboxes.php:380 includes/admin/metaboxes.php:434
+#: includes/admin/replies.php:570 includes/admin/settings.php:293
+#: includes/admin/topics.php:633 includes/extend/buddypress/groups.php:52
+#: includes/extend/buddypress/groups.php:53 includes/forums/template.php:49
+#: templates/default/bbpress/loop-forums.php:19
+msgid "Forum"
+msgstr "ฟอรั่ม"
+
+#: includes/admin/forums.php:217 includes/admin/replies.php:229
+#: includes/admin/topics.php:229
+msgid "Publish Box"
+msgstr "กล่องเผยแพร่"
+
+#: includes/admin/forums.php:211
+msgid "<strong>Order</strong> allows you to order your forums numerically."
+msgstr "<strong>เรียงลำดับ</strong> อนุญาตคุณให้เรียงลำดับฟอรั่มของคุณตามตัวเลข"
+
+#: includes/admin/forums.php:210
+msgid "<strong>Parent</strong> dropdown determines the parent forum. Select the forum or category from the dropdown, or leave the default (No Parent) to create the forum at the root of your forums."
+msgstr "<strong>ฟอรั่มหลัก</strong> เลื่อนลงเืพื่อกำหนดฟอรั่มหลัก  เลือกฟอรั่มหรือหมวดหมู่จากเมนูเลื่อนลง  หรือปล่อยให้ทำงานโดยใช้ค่าเริ่มต้น (ไม่มีฟอรั่มหลัก) เพื่อสร้างฟอรั่มที่แกนหลักของฟอรั่มของคุณ"
+
+#: includes/admin/forums.php:209
+msgid "<strong>Visibility</strong> lets you pick the scope of each forum and what users are allowed to access it."
+msgstr "<strong>การเห็น</strong> จะให้คุณเลือกมุมมองแต่ละฟอรั่มและฟอรั่มที่ผู้ใช้จะมีสิทธิเข้าถึง"
+
+#: includes/admin/forums.php:208
+msgid "<strong>Status</strong> allows you to close a forum to new topics and forums."
+msgstr "<strong>สถานะ</strong> อนุญาตคุณให้ปิดฟอรั่มสำหรับกระทู้ใหม่และฟอรั่ม"
+
+#: includes/admin/forums.php:207
+msgid "<strong>Type</strong> indicates if the forum is a category or forum. Categories generally contain other forums."
+msgstr "<strong>ชนิด</strong> แจ้งถ้าฟอรั่มเป็นหมวดหมู่หรือฟอรั่ม  โดยทั่วไปหมวดหมู่จะประกอบด้วยฟอรั่มอื่น ๆ"
+
+#: includes/admin/forums.php:205
+msgid "Select the attributes that your forum should have:"
+msgstr "เลือกคุณสมบัติที่ฟอรั่มของคุณควรมี:"
+
+#: includes/admin/forums.php:203 includes/admin/forums.php:243
+msgid "Forum Attributes"
+msgstr "คุณสมบัติฟอรั่ม"
+
+#: includes/admin/forums.php:198
+msgid "<strong>Featured Image</strong> - This allows you to associate an image with your forum without inserting it. This is usually useful only if your theme makes use of the featured image as a forum thumbnail on the home page, a custom header, etc."
+msgstr "<strong>รูปพิเศษ</strong> - สิ่งนี้อนุญาตให้คุณใช้งานรูปภาพกับฟอรั่มของคุณโดยไม่ต้องใส่รูปลงไป  สิ่งนี้จะมีประโยชน์ถ้า theme สามารถใช้รูปพิเศษเป็นรูปย่อฟอรั่มบนหน้าแรก  ส่วนหัวปรับแต่งและอื่น ๆ ได้"
+
+#: includes/admin/forums.php:195
+msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
+msgstr "<strong>เผยแพร่</strong> - คุณสามารถตั้งเงื่อนไขสำหรับการเผยแพร่ฟอรั่มของคุณในกล่องเผยแพร่  สำหรับสถานะ  การมองเห็น และเผยแพร่ (ทันที) กดที่ลิงก์แก้ไขเพื่อแสดงตัวเลือกที่มากขึ้น  การมองเห็นได้รวมตัวเลือกสำหรับใส่รหัสป้องกันฟอรั่มเพื่อทำให้มันอยู่เหนืองบล็อกอย่างคุณอย่างไม่มีเงื่อนไข (ปักหมุด) เผยแพร่ (ทันที) อนุญาตคุณให้ตั้งค่าวันที่เวลาในอนาคตหรืออดีตได้  ดังนั้นคุณสามารถทำตารางเวลาฟอรั่มที่จะเผยแพร่ในอนาคตหรืออดีตได้"
+
+#: includes/admin/forums.php:192
+msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
+msgstr "<strong>ตัวแก้ไขฟอรั่ม</strong> - ใส่ข้อความสำหรับฟอรั่มของคุณ  มีสองรูปแบบในการแก้ไข:แบบมองเห็นและแบบ HTML เลือกรูปแบบการแก้ไขโดยกดบนแทบที่เหมาะสม  แบบมองเห็นจะให้ตัวแก้ไข WYSIWYG (เห็นเสมือนหน้าเว็บจริง)  กดที่ไอคอนสุดท้ายในแถวเพื่อเพิ่มแถบควบคุมแถวที่สอง แบบ HTML อนุญาตให้คุณใส่โค้ด HTML ไปพร้อม ๆ กับข้อความฟอรั่มของคุณ คุณสามารถใส่ไฟล์สื่อโดยกดที่ไอคอนด้านบนตัวแก้ไขฟอรั่มและทำตามคำแนะนำ  คุณสามารถไปที่การเขียนแบบไร้กังวลผ่านไอคอนเต็มหน้าจอในแบบมองเห็น (ไอคอนรองสุดท้ายในแถวบน) หรือปุ่มเต็มหน้าจอในแบบ HTML (ไอคอนสุดท้ายของแถว) ในโหมดเต็มหน้าจอ คุณสามารถทำให้ปุ่มแสดงขึ้นโดยเลื่อนเม้าส์ไปเหนือพื้นที่ส่วนบน  เพื่อออกจากโหมดเต็มหน้าจอกลับไปยังการแก้ไขฟอรั่มแบบปกติ"
+
+#: includes/admin/forums.php:191
+msgid "<strong>Title</strong> - Enter a title for your forum. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
+msgstr "<strong>หัวข้อ</strong> - ใส่หัวข้อสำหรับฟอรั่มของคุณ  หลังจากคุณใส่หัวข้อ  คุณจะเห็นลิงก์ถาวรด้านล่างที่คุณสามารถแก้ไขได้"
+
+#: includes/admin/forums.php:189
+msgid "Title and Forum Editor"
+msgstr "ตัวแก้ไขหัวข้อและฟอรั่ม"
+
+#: includes/admin/forums.php:183 includes/admin/replies.php:197
+#: includes/admin/topics.php:198
+msgid "Customizing This Display"
+msgstr "ปรับแต่งหน้าจอนี้"
+
+#: includes/admin/forums.php:179
+msgid "The title field and the big forum editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "ช่องหัวข้อและพื้นที่แ้ก้ไขฟอรั่มขนาดใหญ่ถูกวางไว้เป็นที่  แต่คุณสามารถจัดที่ให้กับกล่องอื่นทั้งหมดโดยการลากและวาง  และย่อหรือขยายมันโดยกดที่แถบหัวข้อของแต่ละกล่อง  ใช้แทบหน้าจอตัวเลือกเพื่อแสดงกล่องที่ซ่อนอยู่ (เรื่องย่อ, การส่่ง Trackbacks, ช่องปรับแต่ง, การสนทนา, Slug, ผู้เขียน) หรือเลือกรูปแบบ 1- หรือ 2- คอลัมน์สำหรับหน้าจอนี้"
+
+#: includes/admin/forums.php:165 includes/admin/forums.php:224
+#: includes/admin/replies.php:179 includes/admin/replies.php:236
+#: includes/admin/settings.php:1597 includes/admin/topics.php:180
+#: includes/admin/topics.php:236
+msgid "<a href=\"http://bbpress.org/forums/\" target=\"_blank\">bbPress Support Forums</a>"
+msgstr "<a href=\"http://bbpress.org/forums/\" target=\"_blank\">ฟอรั่มสนับสนุน bbPress</a>"
+
+#: includes/admin/forums.php:164 includes/admin/forums.php:223
+#: includes/admin/replies.php:178 includes/admin/replies.php:235
+#: includes/admin/settings.php:1596 includes/admin/topics.php:179
+#: includes/admin/topics.php:235
+msgid "<a href=\"http://codex.bbpress.org\" target=\"_blank\">bbPress Documentation</a>"
+msgstr "<a href=\"http://codex.bbpress.org\" target=\"_blank\">คู่มือ bbPress</a>"
+
+#: includes/admin/forums.php:163 includes/admin/forums.php:222
+#: includes/admin/replies.php:177 includes/admin/replies.php:234
+#: includes/admin/settings.php:1595 includes/admin/topics.php:178
+#: includes/admin/topics.php:234
+msgid "For more information:"
+msgstr "สำหรับข้อมูลเพิ่มเติม"
+
+#: includes/admin/forums.php:158
+msgid "When using Bulk Edit, you can change the metadata (categories, author, etc.) for all selected forums at once. To remove a forum from the grouping, just click the x next to its name in the Bulk Edit area that appears."
+msgstr "เมื่อใช้การแก้ไขแบบกลุ่ม คุณสามารถเปลี่ยน metadata (หมวดหมู่ ผู้เขียนและอื่น ๆ) สำหรับการเลือกฟอรั่มทั้งหมดในครั้งเดียว  การลบฟอรั่มออกจากกลุ่ม  เพียงกด x ด้านข้างของชื่อมันในพื้นที่แก้ไขแบบกลุ่มที่ปรากฎ"
+
+#: includes/admin/forums.php:157
+msgid "You can also edit or move multiple forums to the trash at once. Select the forums you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
+msgstr "คุณยังสามารถแก้ไขและย้ายหลายฟอรั่มไปยังถังขยะพร้อมกันได้  เลือกฟอรั่มที่คุณต้องการโดยใช้กล่องเช็ค  แล้วเลือกการกระทำที่คุณต้องการจากเมนูการกระทำแบบกลุ่มแล้วกดทำงาน"
+
+#: includes/admin/forums.php:155 includes/admin/replies.php:169
+#: includes/admin/topics.php:170
+msgid "Bulk Actions"
+msgstr "การทำงานแบบกลุ่ม"
+
+#: includes/admin/forums.php:148
+msgid "<strong>View</strong> will show you what your draft forum will look like if you publish it. View will take you to your live site to view the forum. Which link is available depends on your forum&#8217;s status."
+msgstr "<strong>การดู</strong> จะแสดงให้คุณเห็นฟอรั่มฉบับร่างของคุณจะมีหน้าตาเป็นอย่างไรถ้าคุณเผยแพร่มัน  การดูจะพาคุณไปยังเว็บที่ใช้งานอยู่ของคุณเพื่อดูฟอรั่ม  ลิงก์ที่สามารถใช้งานได้จะขึ้นอยู่กับสถานะฟอรั่มของคุณ"
+
+#: includes/admin/forums.php:147
+msgid "<strong>Trash</strong> removes your forum from this list and places it in the trash, from which you can permanently delete it."
+msgstr "<strong>ถังขยะ</strong> ลบฟอรั่มของคุณจากรายการนี้และวางมันลงในถังขยะ  ที่นั่นคุณจะสามารถลบมันได้อย่างถาวร"
+
+#: includes/admin/forums.php:146
+msgid "<strong>Edit</strong> takes you to the editing screen for that forum. You can also reach that screen by clicking on the forum title."
+msgstr "<strong>แก้ไข</strong> จะนำคุณไปยังหน้าจอแก้ไขสำหรับฟอรั่มนั้น  คุณยังสามารถเข้าถึงหน้าจอโดยการกดที่หัวข้อฟอรั่ม"
+
+#: includes/admin/forums.php:144
+msgid "Hovering over a row in the forums list will display action links that allow you to manage your forum. You can perform the following actions:"
+msgstr "เลื่อนเม้าส์ไปเหนือแถวในรายชื่อฟอรั่มจะแสดงลิงก์การกระทำที่อนุญาตคุณให้จัดการฟอรั่มของคุณ  คุณสามารถกระทำสิ่งต่อไปนี้ได้:"
+
+#: includes/admin/forums.php:142 includes/admin/replies.php:154
+#: includes/admin/topics.php:153
+msgid "Available Actions"
+msgstr "การกระทำที่ทำได้"
+
+#: includes/admin/forums.php:135
+msgid "You can refine the list to show only forums from a specific month by using the dropdown menus above the forums list. Click the Filter button after making your selection. You also can refine the list by clicking on the forum creator in the forums list."
+msgstr "คุณสามารถปรับรายการเพื่อแสดงเฉพาะฟอรั่มจากเดือนที่กำหนดโดยใช้เมนูเลื่อนลงเหนือรายการฟอรั่ม  กดที่ปุ่มกรองหลังจากคุณทำการเลือก  คุณยังสามารถปรับรายการโดยกดที่ผู้สร้างฟอรั่มในรายการฟอรั่ม"
+
+#: includes/admin/forums.php:134
+msgid "You can filter the list of forums by forum status using the text links in the upper left to show All, Published, or Trashed forums. The default view is to show all forums."
+msgstr "คุณสามารถกรองรายการฟอรั่มโดยสถานะฟอรั่มโดยใช้ลิงก์ข้อความด้านซ้ายบนเพื่อแสดง ทั้งหมด, เผยแพร่ หรือฟอรั่มขยะ  ค่าเริ่มต้นการเห็นจะเป็นการแสดงฟอรั่มทั้งหมด"
+
+#: includes/admin/forums.php:133
+msgid "You can hide/display columns based on your needs and decide how many forums to list per screen using the Screen Options tab."
+msgstr "คุณสามารถ ซ่อน/แสดง คอลัมน์ขึ้นอยู่กับความต้องการของคุณและตัดสินว่าจำนวนฟอรั่มเท่าไหร่ที่จะแสดงรายการต่อหน้าจอโดยใช้แทบหน้าจอตัวเลือก"
+
+#: includes/admin/forums.php:131 includes/admin/replies.php:142
+#: includes/admin/topics.php:142
+msgid "You can customize the display of this screen&#8217;s contents in a number of ways:"
+msgstr "คุณสามารถปรับแต่งการแสดงเนื้อหาของหน้าจอนี้ในหลายรูปแบบ:"
+
+#: includes/admin/forums.php:129 includes/admin/replies.php:140
+#: includes/admin/topics.php:140
+msgid "Screen Content"
+msgstr "หน้าจอบทความ"
+
+#: includes/admin/forums.php:123
+msgid "This screen displays the individual forums on your site. You can customize the display of this screen to suit your workflow."
+msgstr "หน้าจอนี้แสดงฟอรั่มแต่ละฟอรั่มบนเว็บไซต์ของคุณ  คุณสามารถปรับแต่งการแสดงหน้าจอนี้ให้เหมาะสมกับการทำงานของคุณ"
+
+#: includes/admin/forums.php:121 includes/admin/replies.php:132
+#: includes/admin/settings.php:1549 includes/admin/topics.php:132
+msgid "Overview"
+msgstr "ภาพรวม"
+
+#: includes/admin/converters/AEF.php:688
+#: includes/admin/converters/FluxBB.php:643
+#: includes/admin/converters/Invision.php:525
+#: includes/admin/converters/Kunena1.php:543
+#: includes/admin/converters/Kunena2.php:585
+#: includes/admin/converters/Kunena3.php:812
+#: includes/admin/converters/PHPFox3.php:649
+#: includes/admin/converters/PunBB.php:677
+#: includes/admin/converters/SMF.php:656
+#: includes/admin/converters/SimplePress5.php:537
+#: includes/admin/converters/Vanilla.php:535
+#: includes/admin/converters/XMB.php:705
+#: includes/admin/converters/XenForo.php:722
+#: includes/admin/converters/bbPress1.php:636
+#: includes/admin/converters/phpBB.php:816
+#: includes/admin/converters/vBulletin.php:652
+#: includes/admin/converters/vBulletin3.php:652
+msgid "Re: "
+msgstr "ตอบกลับ:"
+
+#: includes/admin/converter.php:515
+msgid "Calculating reply_to parents (%1$s - %2$s)"
+msgstr "กำลังคำนวณ reply_to parents (%1$s - %2$s)"
+
+#: includes/admin/converter.php:511
+msgid "No reply_to parents to convert"
+msgstr "ไม่มี reply_to parents ให้แปลง"
+
+#: includes/admin/converter.php:500
+msgid "Converting replies (%1$s - %2$s)"
+msgstr "กำลังแปลงข้อความตอบกลับ (%1$s - %2$s)"
+
+#: includes/admin/converter.php:496
+msgid "No replies to convert"
+msgstr "ไม่มีข้อความตอบกลับให้แปลง"
+
+#: includes/admin/converter.php:485
+msgid "Converting topic tags (%1$s - %2$s)"
+msgstr "กำลังแปลงป้ายกำกับกระทู้ (%1$s - %2$s)"
+
+#: includes/admin/converter.php:481
+msgid "No tags to convert"
+msgstr "ไม่มีป้ายกำกับให้แปลง"
+
+#: includes/admin/converter.php:470
+msgid "Calculating topic super stickies (%1$s - %2$s)"
+msgstr "กำลังคำนวณกระทู้ปักหมุดชั้นสูง (%1$s - %2$s)"
+
+#: includes/admin/converter.php:466
+msgid "No super stickies to stick"
+msgstr "ไม่มีการปักหมุดชั้นสูงให้ใช้"
+
+#: includes/admin/converter.php:455
+msgid "Calculating topic stickies (%1$s - %2$s)"
+msgstr "กำลังคำนวณกระทู้ปักหมุด (%1$s - %2$s)"
+
+#: includes/admin/converter.php:451
+msgid "No stickies to stick"
+msgstr "ไม่มีการปักหมุดให้ใช้"
+
+#: includes/admin/converter.php:440
+msgid "Converting topics (%1$s - %2$s)"
+msgstr "กำลังแปลงกระทู้ (%1$s - %2$s)"
+
+#: includes/admin/converter.php:436
+msgid "No topics to convert"
+msgstr "ไม่มีหัวข้อให้แปลง"
+
+#: includes/admin/converter.php:425
+msgid "Calculating forum hierarchy (%1$s - %2$s)"
+msgstr "กำลังคำนวณลำดับฟอรั่ม (%1$s - %2$s)"
+
+#: includes/admin/converter.php:421
+msgid "No forum parents to convert"
+msgstr "ไม่มีฟอรั่มหลักให้แปลง"
+
+#: includes/admin/converter.php:410
+msgid "Converting forums (%1$s - %2$s)"
+msgstr "กำลังแปลงฟอรั่ม (%1$s - %2$s)"
+
+#: includes/admin/converter.php:406
+msgid "No forums to convert"
+msgstr "ไม่มีฟอรั่มให้แปลง"
+
+#: includes/admin/converter.php:391
+msgid "Delete users WordPress default passwords (%1$s - %2$s)"
+msgstr "ลบรหัสผ่านค่าเริ่มต้นผู้ใช้เวิร์ดเพรส (%1$s - %2$s)"
+
+#: includes/admin/converter.php:387
+msgid "No passwords to clear"
+msgstr "ไม่มีรหัสผ่านขยะให้ทำการลบ"
+
+#: includes/admin/converter.php:371
+msgid "Converting users (%1$s - %2$s)"
+msgstr "การแปลงผู้ใช้ (%1$s - %2$s)"
+
+#: includes/admin/converter.php:367
+msgid "No users to convert"
+msgstr "ไม่มีผู้ใช้ให้แปลง"
+
+#: includes/admin/converter.php:351
+msgid "Deleting previously converted data (%1$s - %2$s)"
+msgstr "การลบข้อมูลที่แปลงมาล่าสุด (%1$s - %2$s)"
+
+#: includes/admin/converter.php:347
+msgid "No data to clean"
+msgstr "ไม่มีข้อมูลขยะให้ทำการลบ"
+
+#: includes/admin/converter.php:248 includes/admin/converter.php:525
+msgid "Conversion Complete"
+msgstr "การแปลงสำเร็จ"
+
+#: includes/admin/converter.php:223
+msgid "Starting Conversion"
+msgstr "เริ่มต้นการสนทนา"
+
+#: includes/admin/converter.php:134
+msgid "Purge Previous Import"
+msgstr "ล้างค่าการนำเข้าครั้งก่อน"
+
+#: includes/admin/converter.php:130
+msgid "Start Over"
+msgstr "เริ่มใหม่"
+
+#: includes/admin/converter.php:126
+msgid "Convert Users"
+msgstr "แปลงผู้ใช้"
+
+#: includes/admin/converter.php:122
+msgid "Delay Time"
+msgstr "เวลาล่าช้า"
+
+#: includes/admin/converter.php:118
+msgid "Rows Limit"
+msgstr "จำนวนจำกัดแถว"
+
+#: includes/admin/converter.php:115
+msgid "Options"
+msgstr "ตัวเลือก"
+
+#: includes/admin/converter.php:111
+msgid "Table Prefix"
+msgstr "คำนำหน้าตาราง"
+
+#: includes/admin/converter.php:107
+msgid "Database Password"
+msgstr "รหัสผ่านฐานข้อมูล"
+
+#: includes/admin/converter.php:103
+msgid "Database User"
+msgstr "ผู้ใช้ฐานข้อมูล"
+
+#: includes/admin/converter.php:99
+msgid "Database Name"
+msgstr "ชื่อฐานข้อมูล"
+
+#: includes/admin/converter.php:95
+msgid "Database Port"
+msgstr "พอร์ตฐานข้อมูล"
+
+#: includes/admin/converter.php:91
+msgid "Database Server"
+msgstr "เซิร์ฟเวอร์ฐานข้อมูล"
+
+#: includes/admin/converter.php:87
+msgid "Select Platform"
+msgstr "เลือกแพลตฟอร์ม"
+
+#: includes/admin/converter.php:84
+msgid "Database Settings"
+msgstr "การตั้งค่าฐานข้อมูล"
+
+#: includes/admin/admin.php:1096
+msgid "You can update all the forums on your network through this page. It works by calling the update script of each site automatically. Hit the link below to update."
+msgstr "คุณสามารถอัปเดตฟอรั่มทั้งหมดบนเครือข่ายของคุณผ่านหน้านี้  มันทำงานโดยเรียกสคริปอัปเดตแต่ละเว็บไซต์โดยอัตโนมัติ กดที่ลิงก์ด้านล่างเพื่ออัปเดต"
+
+#: includes/admin/admin.php:1078
+msgid "Next Forums"
+msgstr "ฟอรั่มถัดไป"
+
+#: includes/admin/admin.php:1077
+msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
+msgstr "ถ้าเบราว์เซอร์ของคุณไม่โหลดหน้าต่อไปโดยอัตโนมัติ  โปรดกดที่ลิงก์นี้:"
+
+#: includes/admin/admin.php:1053
+msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: <em>%2$s</em>"
+msgstr "คำเตือน มีปัญหาในการอัปเดต %1$s  เซิร์ฟเวอร์ของคุณอาจจะไม่เชื่อมต่อกับเว็บที่ใช้งานอยู่บนมัน  ข้อความผิดพลาด: <em>%2$s</em>"
+
+#: includes/admin/admin.php:983
+msgid "You can update your forum through this page. Hit the link below to update."
+msgstr "คุณสามารถอัปเดตฟอรั่มของคุณผ่านทางหน้านี้  กดที่ลิงก์ด้านล่างเพื่ออัปเดต"
+
+#: includes/admin/admin.php:974 includes/admin/admin.php:1028
+msgid "Go Back"
+msgstr "กลับไป"
+
+#: includes/admin/admin.php:973 includes/admin/admin.php:1027
+msgid "All done!"
+msgstr "ทุกอย่างเสร็จแล้ว"
+
+#: includes/admin/admin.php:962 includes/admin/admin.php:984
+msgid "Update Forum"
+msgstr "อัพเดตฟอรั่ม"
+
+#: includes/admin/admin.php:905
+msgid "Core Contributors to bbPress 2.5"
+msgstr "ผู้พัฒนาหลักของ bbPress 2.5"
+
+#: includes/admin/admin.php:896
+msgid "Bug Testing"
+msgstr "กำลังทดสอบบั๊ก"
+
+#: includes/admin/admin.php:815
+msgid "Theme Compatibility"
+msgstr "การเข้ากันได้ของ theme"
+
+#: includes/admin/admin.php:257 includes/admin/admin.php:258
+#: includes/admin/admin.php:266 includes/admin/admin.php:267
+msgid "Welcome to bbPress"
+msgstr "ยินดีต้อนรับสู่ bbPress"
+
+#: includes/admin/admin.php:530
+msgid "Right Now in Forums"
+msgstr "ตอนนี้ในฟอรั่ม"
+
+#: includes/admin/admin.php:545
+msgid "About bbPress"
+msgstr "เกี่ยวกับ bbPress"
+
+#: includes/admin/admin.php:887
+msgid "Converter Specialist"
+msgstr "ผู้เชี่ยวชาญตัวแปลง"
+
+#: bbpress.php:485
+msgid "bbPress Forums"
+msgstr "ฟอรั่ม bbPress"
+
+#: includes/admin/admin.php:816
+msgid "Better handling of styles and scripts in the template stack."
+msgstr "เป็นทางเลือกที่ดีกว่าทึ่จะจัดการ styles และ scripts ใน template stack"
+
+#: includes/admin/admin.php:515
+msgid "About"
+msgstr "เกี่ยวกับ"
+
+#: includes/admin/admin.php:865
+msgid "bbPress is created by a worldwide swarm of busy, busy bees."
+msgstr "bbPress ถูกสร้างขึ้นโดยผู้คนจำนวนมากทั่วโลก"
+
+#: includes/admin/admin.php:867
+msgid "Project Leaders"
+msgstr "ผู้นำโปรเจค"
+
+#: bbpress.php:581
+msgctxt "post"
+msgid "Spam"
+msgstr "สแปม"
+
+#: includes/admin/admin.php:208 includes/admin/functions.php:277
+#: includes/admin/settings.php:1509
+msgid "Import Forums"
+msgstr "นำเข้าฟอรั่ม"
+
+#: bbpress.php:608
+msgctxt "post"
+msgid "Hidden <span class=\"count\">(%s)</span>"
+msgid_plural "Hidden <span class=\"count\">(%s)</span>"
+msgstr[0] "ซ่อน <span class=\"count\">(%s)</span>"
+
+#: bbpress.php:595
+msgctxt "post"
+msgid "Orphan <span class=\"count\">(%s)</span>"
+msgid_plural "Orphans <span class=\"count\">(%s)</span>"
+msgstr[0] "แยก <span class=\"count\">(%s)</span>"
+
+#: bbpress.php:405 templates/default/bbpress-functions.php:51
+msgid "bbPress Default"
+msgstr "ค่าเริ่มต้น bbPress"
+
+#: bbpress.php:510
+msgid "bbPress Topics"
+msgstr "หัวข้อใน bbPress"
+
+#: bbpress.php:678
+msgid "Most popular topics"
+msgstr "กระทู้ยอดนิยม"
+
+#: bbpress.php:607
+msgctxt "post"
+msgid "Hidden"
+msgstr "ซ่อน"
+
+#: bbpress.php:571
+msgctxt "post"
+msgid "Closed <span class=\"count\">(%s)</span>"
+msgid_plural "Closed <span class=\"count\">(%s)</span>"
+msgstr[0] "ปิด <span class=\"count\">(%s)</span> แล้ว"
+
+#: bbpress.php:133 bbpress.php:140
+msgid "Cheatin&#8217; huh?"
+msgstr "กำลังโกงอยู่หรือ?"
+
+#: bbpress.php:535
+msgid "bbPress Replies"
+msgstr "ข้อความตอบกลับ bbPress"
+
+#: includes/admin/admin.php:832 includes/admin/admin.php:936
+msgid "Go to Forum Settings"
+msgstr "ไปที่การตั้งค่าฟอรั่ม"
+
+#: includes/admin/admin.php:854
+msgid "Thank you for updating! bbPress %s is waxed, polished, and ready for you to take it for a lap or two around the block!"
+msgstr "ขอบคุณสำหรับการอัปเดต bbPress %s ถูกคัดเกลาเจียรไนมาเป็นอย่างดี และพร้อมให้คุณใช้มันสำหรับชุมชนเล็กหรือใหญ่"
+
+#: bbpress.php:570
+msgctxt "post"
+msgid "Closed"
+msgstr "ปิด"
+
+#: bbpress.php:582
+msgctxt "post"
+msgid "Spam <span class=\"count\">(%s)</span>"
+msgid_plural "Spam <span class=\"count\">(%s)</span>"
+msgstr[0] "บันทึก <span class=\"count\">(%s)</span> เป็นสแปม"
+
+#: bbpress.php:594
+msgctxt "post"
+msgid "Orphan"
+msgstr "ตัดจากหมวดหลัก"
+
+#: bbpress.php:690
+msgid "Topics with no replies"
+msgstr "กระทู้ที่ไม่มีการตอบ"
+
+#: includes/admin/admin.php:218 includes/admin/functions.php:281
+#: includes/admin/tools.php:1208
+msgid "Reset Forums"
+msgstr "ล้างค่าฟอรั่ม"
+
+#: includes/admin/admin.php:219
+msgid "Forum Reset"
+msgstr "ล้างค่าฟอรั่ม"
+
+#: includes/admin/admin.php:233 includes/admin/admin.php:234
+#: includes/admin/admin.php:244 includes/admin/admin.php:245
+#: includes/admin/users.php:82 includes/common/widgets.php:662
+#: includes/extend/buddypress/loader.php:42
+#: includes/extend/buddypress/loader.php:175
+#: includes/extend/buddypress/loader.php:261
+#: includes/extend/buddypress/loader.php:312 includes/forums/template.php:47
+#: includes/forums/template.php:48
+#: templates/default/bbpress/content-statistics.php:22
+msgid "Forums"
+msgstr "ฟอรั่ม"
+
+#: includes/admin/admin.php:280 includes/admin/admin.php:281
+#: includes/admin/admin.php:302 includes/admin/admin.php:303
+#: includes/admin/admin.php:1010 includes/admin/admin.php:1097
+msgid "Update Forums"
+msgstr "อัปเดตฟอรั่ม"
+
+#: includes/admin/admin.php:510
+msgid "Settings"
+msgstr "ตั้งค่า"
+
+#: includes/admin/admin.php:639
+msgctxt "admin color scheme"
+msgid "Evergreen"
+msgstr "สี Evergreen"
+
+#: includes/admin/admin.php:720 includes/admin/admin.php:758
+msgid "%s - %s"
+msgstr "%s - %s"
+
+#: includes/admin/admin.php:776 includes/admin/admin.php:853
+msgid "Welcome to bbPress %s"
+msgstr "ยินดีต้อนรับสู่ bbPress %s"
+
+#: includes/admin/admin.php:777
+msgid "Thank you for updating! bbPress %s is bundled up and ready to weather the storm of users in your community!"
+msgstr "ขอบคุณสำหรับการอัปเดต bbPress %s ได้พัฒนาขึ้นและเตรียมพร้อมกับผู้ใช้จำนวนมากในชุมชนของคุณ"
+
+#: includes/admin/admin.php:778 includes/admin/admin.php:855
+msgid "Version %s"
+msgstr "รุ่น %s"
+
+#: includes/admin/admin.php:782 includes/admin/admin.php:859
+msgid "What&#8217;s New"
+msgstr "มีอะไรใหม่"
+
+#: includes/admin/admin.php:784 includes/admin/admin.php:861
+msgid "Credits"
+msgstr "เครดิต"
+
+#: includes/admin/admin.php:789
+msgid "Forum Subscriptions"
+msgstr "การติดตามฟอรั่ม"
+
+#: includes/admin/admin.php:793
+msgid "Subscribe to Forums"
+msgstr "รับข่าวจากฟอรั่ม"
+
+#: includes/admin/admin.php:794
+msgid "Now your users can subscribe to new topics in specific forums."
+msgstr "เวลานี้ผู้ใช้ของคุณสามารถรับข่าวจากกระทู้ใหม่ในฟอรั่มที่เจาะจง"
+
+#: includes/admin/admin.php:798
+msgid "Manage Subscriptions"
+msgstr "จัดการการติดตาม"
+
+#: includes/admin/admin.php:799
+msgid "Your users can manage all of their subscriptions in one convenient location."
+msgstr "ผู้ใช้ของคุณสามารถจัดการการติดตามทั้งหมดของพวกเขาอย่างสะดวกในพื้นที่จัดการเพียงจุดเดียว"
+
+#: includes/admin/admin.php:805
+msgid "Converters"
+msgstr "ตัวแปลง"
+
+#: includes/admin/admin.php:809
+msgid "We&#8217;re all abuzz about the hive of new importers, AEF, Drupal, FluxBB, Kunena Forums for Joomla, MyBB, Phorum, PHPFox, PHPWind, PunBB, SMF, Xenforo and XMB. Existing importers are now sweeter than honey with improved importing stickies, topic tags, forum categories and the sting is now gone if you need to remove imported users."
+msgstr "เรามีตัวนำเข้าใหม่ที่ใช้ได้กับ AEF, Drupal, FluxBB, Kunena Forums for Joomla, MyBB, Phorum, PHPFox, PHPWind, PunBB, SMF, Xenforo และ XMB ตัวนำเข้าที่มีอยู่นั้นใช้งานง่ายราวปอกกล้อยเข้าปาก  พร้อมทั้งการนำเข้าสิ่งที่ปักหมุด  ป้ายกำกับกระทู้ หมวดหมู่ฟอรั่มที่ปรับปรุงให้ดีขึ้น  และสิ่งต่าง ๆ จะหายไปถ้าคุณต้องการลบผู้ใช้ที่นำเข้า"
+
+#: includes/admin/admin.php:820
+msgid "Polyglot support"
+msgstr "สนับสนุนหลายภาษา"
+
+#: includes/admin/admin.php:821
+msgid "bbPress fully supports automatic translation updates."
+msgstr "bbPress นั้นสนับสนุนการอัปเดตคำแปลอัตโนมัติอย่างเต็มที่"
+
+#: includes/admin/admin.php:825
+msgid "User capabilities"
+msgstr "ความสามารถผู้ใช้"
+
+#: includes/admin/admin.php:826
+msgid "Roles and capabilities have been swept through, cleaned up, and simplified."
+msgstr "บทความและความสามารถได้ถูกรวมเข้าด้วยกัน  ทำให้ง่ายและสะอาดตาขึ้น"
+
+#: includes/admin/admin.php:877
+msgid "Lead Developer"
+msgstr "ผู้นำการพัฒนา"
+
+#: includes/admin/admin.php:872
+msgid "Founding Developer"
+msgstr "ผู้พัฒนาแรกเริ่ม"
+
+#: includes/admin/admin.php:630
+msgctxt "admin color scheme"
+msgid "Mint"
+msgstr "สีมิ้นท์"
+
+#: includes/admin/admin.php:198 includes/admin/functions.php:273
+#: includes/admin/tools.php:34
+msgid "Repair Forums"
+msgstr "ซ่อมแซมฟอรั่ม"
+
+#: includes/admin/admin.php:891
+msgid "Contributing Developers"
+msgstr "นักพัฒนาที่อุทิศตัว"
+
+#: includes/admin/admin.php:199
+msgid "Forum Repair"
+msgstr "ซ่อมแซมฟอรั่ม"
+
+#: includes/admin/admin.php:209
+msgid "Forum Import"
+msgstr "นำเข้าฟอรั่ม"
+
+#: includes/admin/admin.php:882 includes/admin/admin.php:901
+msgid "Feature Developer"
+msgstr "ผู้พัฒนาความสามารถเพิ่มเติม"
