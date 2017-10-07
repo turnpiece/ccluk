@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-27 12:34:13+0000\n"
+"PO-Revision-Date: 2017-09-18 14:39:36+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3392,7 +3392,7 @@ msgstr "Esta pantalla se utiliza para gestionar los temas que tienes instalados.
 
 #: wp-admin/widgets.php:395
 msgid "To activate a widget drag it to a sidebar or click on it. To deactivate a widget and delete its settings, drag it back."
-msgstr "Para activar un widget, arrástralo a la barra lateral o haz clic en él. Para desactivar un widget y borrar su configuración, arrástralo de vuelta a su lugar de origen."
+msgstr "Para activar un widget, arrástralo a la barra lateral o haz clic en él. Para desactivar un widget y borrar sus ajustes, arrástralo de vuelta a su lugar de origen."
 
 #. translators: 1: The rating
 #: wp-admin/includes/template.php:2127
@@ -4362,7 +4362,7 @@ msgstr "Gestiona <a href=\"%1$s\">widgets</a> o <a href=\"%2$s\">menús</a>"
 
 #: wp-admin/widgets.php:71
 msgid "When changing themes, there is often some variation in the number and setup of widget areas/sidebars and sometimes these conflicts make the transition a bit less smooth. If you changed themes and seem to be missing widgets, scroll down on this screen to the Inactive Widgets area, where all of your widgets and their settings will have been saved."
-msgstr "Al cambiar de tema, a menudo hay algunos cambios en el número y configuración de las áreas y barras laterales de los widgets, y a veces estos conflictos hacen que el cambio sea un poco menos fácil. Si has cambiado de tema y parece que se hubiesen perdido widgets, ve al final de esta página al área de Widgets inactivos, donde se guardan todos tus widgets inactivos, con sus configuraciones."
+msgstr "Al cambiar de tema, a menudo hay algunos cambios en el número y configuración de las áreas y barras laterales de los widgets, y a veces estos conflictos hacen que el cambio sea un poco menos fácil. Si has cambiado de tema y parece que se hubiesen perdido widgets, ve al final de esta página al área de Widgets inactivos, donde se guardan todos tus widgets inactivos, con sus ajustes."
 
 #: wp-admin/edit-tags.php:250
 msgid "<strong>Parent</strong> &mdash; Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have child categories for Bebop and Big Band. Totally optional. To create a subcategory, just choose another category from the Parent dropdown."
@@ -4370,7 +4370,7 @@ msgstr "<strong>Superior</strong> &mdash; Las categorías, al contrario que las 
 
 #: wp-admin/edit-form-advanced.php:448
 msgid "Publish Settings"
-msgstr "Configuración de publicación"
+msgstr "Ajustes de publicación"
 
 #: wp-admin/edit-form-advanced.php:430
 msgid "Several boxes on this screen contain settings for how your content will be published, including:"

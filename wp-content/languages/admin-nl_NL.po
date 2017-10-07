@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-17 08:10:48+0000\n"
+"PO-Revision-Date: 2017-10-02 09:10:59+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2368,7 +2368,7 @@ msgstr "Plugins zijn bijgewerkt."
 #: wp-admin/includes/plugin-install.php:592
 msgctxt "Active plugin installs"
 msgid "1+ Million"
-msgstr "+1 miljoen"
+msgstr "1+ miljoen"
 
 #: wp-admin/includes/plugin-install.php:590
 msgid "Active Installs:"
@@ -2376,7 +2376,7 @@ msgstr "Actieve installaties:"
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:570
 msgid "%s Active Installs"
-msgstr "%s Actieve Installaties"
+msgstr "%s actieve installaties"
 
 #: wp-admin/tools.php:41
 msgid "Press This is a little tool that lets you grab bits of the web and create new posts with ease."

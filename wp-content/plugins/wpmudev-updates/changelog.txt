@@ -1,9 +1,200 @@
 Plugin Name: WPMU DEV Dashboard
-Author: Aaron Edwards
+Author: Aaron Edwards, Philipp Stracker
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+4.4 - 9/21/2017 - Aaron & Alex
+----------------------------------------------------------------------
+- Add WP core upgrade support from Hub/Automate
+- Improve Hub remote call error responses
+- Switch background Dashboard autoupdates to use core method
+- Fix some syncing cache issues delaying the detection of available updates
+- Accessibility improvements for screenreaders
+
+4.3.2 - 7/31/2017 - Aaron & Ricardo
+----------------------------------------------------------------------
+- Make Hub initiated actions faster/more efficient by only syncing details when necessary
+- Improve debug log detail for Hub initiated actions
+- Show detailed error messages on local install failures
+- Fix various responsive UI style issues
+- Fix broken search box on Support page
+- Various spelling and text fixes
+
+4.3.1 - 6/1/2017 - Aaron & Ricardo
+----------------------------------------------------------------------
+- Redesign of the login process, headers, and home page UX
+- Add System Info tab to login page for debugging help
+- Allow HTML in features lists (Upfront Builder link)
+- Fix System info back button link
+- Text adjustments
+
+4.3 - 1/30/2017 - Aaron
+----------------------------------------------------------------------
+- Full rewrite of remote API, to support Update/Install/Activate/Deactivate/Delete from hub
+- Register all third party plugins/themes with Hub even if they don't have available updates
+- Internal API for other WPMU DEV plugins to register their own Hub actions
+- Support updates and installs from Hub on WP Engine hosting
+- Improve error detection and messages on update/install
+- Fix wrong date string on support access box and last refreshed message
+- Fix style issues on various screens
+- Fix possible infinite loop when resetting api key remotely
+
+4.2.1 - 12/15/2016 - Aaron
+----------------------------------------------------------------------
+- Comprehensive support for RTL languages
+- Fix missing strings in textdomain - props @Julian
+- Fix changelog showing error when non-allowed user clicks the link on plugins list
+- Remove broken more info links on update core list for non-allowed users
+- Bypass API cache when logging in to avoid hub sync issues
+- Fix WooCommerce notices showing up on Dashboard pages with crazy styles
+- Fix various style issues
+
+4.2 - 09/28/2016 - Aaron
+----------------------------------------------------------------------
+- Add support for wp.org repo updates from Hub!
+- Revoke outstanding support access when logging out
+- Optimize remote data refresh calls and duplicate queries
+- Add clearer error messages when logging into localhost installs
+- Don't show update notices on subsite plugin list pages in multisite, like core
+- Fix style issues of update notices for activated plugin in core plugins list
+- Fix premium/wp.org theme slug conflicts
+- Remove premium/wp.org slug conflicts for Hub wp.org updates
+- Update WPMU DEV urls
+
+4.1.2 - 08/17/2016 - Aaron
+----------------------------------------------------------------------
+- WP 4.6 compatibility fixes
+- Add support for upcoming Upfront Builder plugin (dependency management)
+- Fix PHP7 compatibility issue on system info page
+- Use new changelog on single site themes page
+
+4.1.1 - 07/21/2016 - Aaron
+----------------------------------------------------------------------
+- Enable shiny updates on core plugins list for WPMU DEV plugins
+- Fix support search location and icon click
+- Fix core update messages not being customized with our changelog
+- Fix WPMU DEV plugins on core updates page not showing WP version compatibility
+- Fix missing Upfront changelogs on Network Themes list
+- Show changelog when updating Upfront on WPMU DEV Dashboard->Themes page
+- Fix date time display when a geographic timezone is selected in settings instead of offset
+- Fix out of date upgrade membership urls
+- Change popular plugins widget selection criteria
+- Show all products to legacy single members
+- Fix available updates not showing for single members for products outside their membership
+- Fix updates not showing in core areas when logged out of Dashboard
+- Fix theme details button for active theme popup self closing in single site
+- Make popup close buttons accessible to screen readers
+- Fix false permissions error when updating WPMU DEV Dashboard on WPMU DEV Dash->Plugins list
+- Fix redirect to login page on Dashboard activation
+- Update core available update count bubbles after updating products in the Dashboard
+- Fix broken "Requires xxx" messages on incompatible plugins
+
+4.1.0 - 06/06/2016 - Philipp
+----------------------------------------------------------------------
+Enables the brand new "Update All" function in Hub! Also includes several small bugfixes and improvements.
+
+- Add support for the lightning fast "Update All" feature in Hub!
+- Add entry for WPMU DEV Dashboard to the "My Sites" menu in multisite installations.
+- Improved default display order of plugins and themes in WPMUDEV pages.
+- Improved plugin activation refreshes the page to display the plugin menu item.
+- Disable auto-update function for legacy plugins and themes that cannot be updated via the WPMU DEV Dashboard.
+- Fix remote access expiration time to use timezone defined by WordPress.
+- Fix date formatting issues in the Support tab, that displayed a weird expiration time for support access.
+- Fix a PHP warning / missing details inside the "Update Theme/Plugin" popup
+- Fix some links that point to the WPMU DEV website.
+- Fix display of special characters inside Notes-field for support access.
+- Fix rare fatal error about `Call function has_cap() on boolean` during plugin activation.
+- A handful of other small improvements, like fixing typos
+- Improve action syncing with Hub when performed on core pages
+
+4.0.9 - 3/28/2016 - Philipp
+----------------------------------------------------------------------
+- Improved error messages
+
+4.0.8 - 2/09/2016 - Philipp
+----------------------------------------------------------------------
+- Themes can now be enabled/disabled network-wide on multisite installations.
+- For those who really want to use it: The Logout button is working again!
+- Improve performance of the Dashboard.
+
+- Improve plugin performance to avoid 502 errors on WP Engine admin sites.
+- Fix install logic to first install Upfront parent before a child theme is installed.
+- Fix install logic to not enable newly installed plugins network-wide anymore.
+- Fix an issue that caused lots of duplicate SQL queries on wp-admin.
+- Fix for a few sites that had problems with new Hub features like Uptime check.
+- Fix recognition of active themes. Now themes-list on the Hub displays correct theme status.
+- Fix some PHP notices.
+
+4.0.7 - 2/03/2016 - Philipp
+----------------------------------------------------------------------
+- Available updates are now displayed above other plugins/themes.
+- We made the Dashboard much more reliable!
+
+- Add much smarter project-caching to reliably detect available updates.
+- Add check to automatically update Upfront-parent when a child theme is updated.
+- Fix fatal error (has_cap) when admin user was deleted.
+- Fix incorrect links in the search-results of the main Dashboard page.
+- Fix a possible infinite-loops that blocked wp-admin for the superadmin in rare cases.
+- Add an additional timeout to really prevent infinite-loops in any case!
+- Remove the Instructions popup from plugin; you can find Instructions on the website instead.
+- Many small changes to polish the UI and generally make plugin more stable.
+
+4.0.6 - 1/27/2016 - Philipp
+----------------------------------------------------------------------
+- Remote updates are working now!
+
+- Fixed the message "Plugin is at the latest version" when trying to remote-update a plugin.
+- Fixed notice on WordPress plugins/themes page about undefined variable "can_install".
+- A lot of improvements to make those updates reliable.
+
+
+4.0.5 - 1/25/2016 - Philipp
+----------------------------------------------------------------------
+- Plugin just got faster and more stable!
+
+- Added our own changelog to the default WordPress Updates page for WPMUDEV plugins.
+- Fixed another problem for members with Single-Membership.
+- Fixed an issue about "undefined function is_plugin_active".
+- Fixed an incompatibility with php 5.4 and lower.
+- Refactored API logic to prevent redundant API calls, which makes you site faster.
+- Improve error logging, especially with `WPMUDEV_API_DEBUG` flag enabled.
+- Countless small tweaks in the UI.
+
+4.0.4 - 1/18/2016 - Philipp
+----------------------------------------------------------------------
+- Important: Turn off automatic updates in Manage page to upgrade to this version!
+
+- Fixed the automatic updates feature, if you enable it. The Dashboard plugin will stay up to date from now on!
+- Our members with a Single-Membership can now use the Plugins and Themes page to install updates.
+
+4.0.3 - 1/15/2016 - Philipp
+----------------------------------------------------------------------
+- Add a new notification in Themes page when an update for Upfront parent is available
+- Fix bug that would show dismissed Dashboard notifications again after each API sync
+- Fix incorrect message "Theme is at latest version" during theme update
+- Fix the URL of "Get Support" button on the Support page
+- Add new button to Support page to open a new ticket if no tickets are open
+- Display error message if plugin or theme installation fails
+- Fix the "Back to Dashboard" link that is displayed right after update from v 3.5
+- Fix permission check to not display notifications while logged out
+- Fix several small PHP warnings, JS errors and layout issues
+
+4.0.2 - 1/13/2016 - Philipp
+----------------------------------------------------------------------
+- Fix an incorrectly initialized dashboard setting, that could cause troubles with other WPMUDEV plugins
+- Fix several minor UI issues (borders, margins, ...)
+- Fix problem with empty dashboard after update forcing an API-refresh on first activation
+
+4.0.1 - 1/13/2016 - Philipp
+----------------------------------------------------------------------
+- Fix broken dashboard layout that was caused by certain third-party plugins.
+- Fix a typo.
+
+4.0.0 - 1/13/2016 - Philipp
+----------------------------------------------------------------------
+- Complete redesign with new UI
 
 3.5.3 - 6/05/2015 - Aaron
 ----------------------------------------------------------------------
@@ -272,4 +463,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1450471649
+87274-1507061848

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-11 09:43:35+0000\n"
+"PO-Revision-Date: 2017-09-17 11:00:54+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1778,11 +1778,11 @@ msgstr "Een alfanumerieke identifier voor de gebruiker."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:287
 msgid "Whether to include posts in the edit listing for their post type."
-msgstr "Of berichten in de bewerklijst van hun berichttype meegenomen moeten worden."
+msgstr "Of berichten in de bewerklijst van hun berichttype opgenomen moeten worden."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:281
 msgid "Whether posts with this status should be publicly-queryable."
-msgstr "Of berichten met deze status publicly-queryable zouden moeten zijn."
+msgstr "Of berichten met deze status publiek opvraagbaar moeten zijn."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:275
 msgid "Whether posts of this status should be shown in the front end of the site."
@@ -1790,23 +1790,23 @@ msgstr "Of berichten met deze status getoond moeten worden in de front end van d
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:269
 msgid "Whether posts with this status should be protected."
-msgstr "Whether posts with this status should be protected."
+msgstr "Of berichten met deze status beschermd moeten zijn."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:263
 msgid "Whether posts with this status should be private."
-msgstr "Of een bericht met deze status privé moet zijn."
+msgstr "Of berichten met deze status privé moeten zijn."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:355
 msgid "Scope under which the request is made; determines fields present in response."
-msgstr "Scope waaronder de aanvraag gedaan wordt; bepaalt de velden die aanwezig zijn in de reactie."
+msgstr "Bereik waaronder de aanvraag gedaan wordt; bepaalt de velden die aanwezig zijn in de reactie."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:334
 msgid "Limit results to those matching a string."
-msgstr "Limiteer resultaten tot degenen die met een string overeenkomen. "
+msgstr "Beperk resultaten tot degene die overeenkomen met een tekenreeks. "
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:325
 msgid "Maximum number of items to be returned in result set."
-msgstr "Het maximale nummer van items die geretourneerd moeten worden in de resultaten."
+msgstr "Het maximumaantal items dat getoond moet worden in de resultaten."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:317
 msgid "Current page of the collection."
@@ -1829,19 +1829,19 @@ msgstr "Method '%s' niet geïmplementeerd. Moet worden overschreven in een subcl
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:42
 msgid "The register_routes() method must be overridden"
-msgstr "De register_routes() methode moet overschreven worden"
+msgstr "De methode register_routes() moet overschreven worden"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1445
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
-msgstr "Resultaten beperken tot reacties toegewezen aan een specifiek type. Autorisatie vereist."
+msgstr "Beperk resultaten tot reacties toegewezen aan een specifiek type. Autorisatie vereist."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1437
 msgid "Limit result set to comments assigned a specific status. Requires authorization."
-msgstr "Resultaten beperken tot reacties met een specifieke status. Autorisatie vereist."
+msgstr "Beperk resultaten tot reacties met een specifieke status. Autorisatie vereist."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1428
 msgid "Limit result set to comments assigned to specific post IDs."
-msgstr "Resultaten beperken tot reacties die zijn toegewezen aan specifieke bericht-ID's."
+msgstr "Beperk resultaten tot reacties, toegewezen aan specifieke bericht-ID's."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1419
 msgid "Ensure result set excludes specific parent IDs."
@@ -1876,7 +1876,7 @@ msgstr "Resultaten beperken tot specifieke ID's."
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:911
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1316
 msgid "Ensure result set excludes specific IDs."
-msgstr "Vaststellen dat de resultaten specifieke ID's niet bevat."
+msgstr "Zorg ervoor dat de resultaten specifieke ID's niet bevatten."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2086
 msgid "Limit response to posts published before a given ISO8601 compliant date."
@@ -1900,25 +1900,25 @@ msgstr "Beperk reactie tot berichten die gepubliceerd zijn na een gegeven ISO860
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1299
 msgid "Avatar URLs for the object author."
-msgstr "Avatar URLs voor de auteur van het object."
+msgstr "Avatar-URLs voor de auteur van het object."
 
 #. translators: %d: avatar image size in pixels
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1291
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1281
 msgid "Avatar URL with image size of %d pixels."
-msgstr "Avatar URL met afbeeldingsgrootte van %d pixels."
+msgstr "Avatar-URL met afbeeldingsgrootte van %d pixels."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1276
 msgid "Type of Comment for the object."
-msgstr "Type Reactie voor het object."
+msgstr "Type reactie voor het object."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1268
 msgid "State of the object."
-msgstr "Objectstatus."
+msgstr "Toestand van het object."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1262
 msgid "The ID of the associated post object."
-msgstr "Het ID van het geassocieerde bericht object."
+msgstr "Het ID van het geassocieerde berichtobject."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1256
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1815
@@ -1931,7 +1931,7 @@ msgstr "Het ID van het bovenliggend object."
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1249
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1763
 msgid "URL to the object."
-msgstr "Webadres naar het object."
+msgstr "URL naar het object."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1229
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1912
@@ -1970,7 +1970,7 @@ msgstr "E-mailadres van het auteurobject."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1173
 msgid "The ID of the user object, if author was a user."
-msgstr "ID van het auteurobject, als de auteur een gebruiker is."
+msgstr "ID van het gebruikersobject, als de auteur een gebruiker is."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:68
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1167
@@ -1979,7 +1979,7 @@ msgstr "ID van het auteurobject, als de auteur een gebruiker is."
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:96
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:496
 msgid "Unique identifier for the object."
-msgstr "Unieke identificatie van het object."
+msgstr "Unieke identifier van het object."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1095
 msgid "Invalid comment author ID."
@@ -1995,11 +1995,11 @@ msgstr "De reactie is al weggegooid."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:730
 msgid "Updating comment failed."
-msgstr "Reactie aanpassen mislukt."
+msgstr "Reactie bijwerken mislukt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:708
 msgid "Updating comment status failed."
-msgstr "Bijwerken van de status van de reactie is mislukt."
+msgstr "Bijwerken reactiestatus mislukt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:596
 msgid "Creating comment failed."
@@ -2007,11 +2007,11 @@ msgstr "Creëren van de reactie is mislukt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:536
 msgid "Creating a comment requires valid author name and email values."
-msgstr "Aanmaken van een reactie vereist een valide naam en email van een auteur."
+msgstr "Aanmaken van een reactie vereist een valide naam en e-mailadres van de auteur."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:490
 msgid "Cannot create existing comment."
-msgstr "Kan geen bestaande reactie aanmaken."
+msgstr "Bestaande reactie kan niet aangemaakt worden."
 
 #: wp-includes/comment.php:3061
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:403
@@ -2026,7 +2026,7 @@ msgstr "Queryparameter niet toegestaan: %s"
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:98
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:117
 msgid "Whether to bypass trash and force deletion."
-msgstr "Of de prullenbak overgeslagen moet worden en dus permanent verwijderd moet worden."
+msgstr "Of de prullenbak overgeslagen moet worden en er dus permanent verwijderd moet worden."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:654
 msgid "Limit result set to attachments of a particular MIME type."
@@ -2038,24 +2038,24 @@ msgstr "Resultaten beperken tot bijlagen met een specifiek mediatype."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:531
 msgid "Could not open file handle."
-msgstr "Kon file handle niet openen."
+msgstr "Kon file-handle niet openen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:515
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:702
 msgid "Content hash did not match expected."
-msgstr "De hash van de inhoud was niet zoals verwacht."
+msgstr "De hash van de inhoud was niet als verwacht."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:506
 msgid "Invalid Content-Disposition supplied. Content-Disposition needs to be formatted as `attachment; filename=\"image.png\"` or similar."
-msgstr "Incorrecte Content-Disposition meegegeven. Content-Disposition moet geformatteerd worden als `attachment; filename=\"image.png\"` of iets wat er op lijkt."
+msgstr "Incorrecte Content-Disposition verstrekt. Content-Disposition moet geformatteerd worden als `attachment; filename=\"image.png\"` of iets vergelijkbaars."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:500
 msgid "No Content-Disposition supplied."
-msgstr "Geen Content-Disposition meegegeven."
+msgstr "Geen Content-Disposition verstrekt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:496
 msgid "No Content-Type supplied."
-msgstr "Geen Content-Type meegegeven."
+msgstr "Geen Content-Type verstrekt."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:492
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:692
@@ -2068,7 +2068,7 @@ msgstr "Het ID van het bericht waar de bijlage bij hoort."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:455
 msgid "Details about the media file, specific to its type."
-msgstr "Informatie over het media bestand, specifiek voor zijn type."
+msgstr "Informatie over het mediabestand, specifiek voor zijn type."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:387
 msgid "Alternative text to display when attachment is not displayed."
@@ -2089,7 +2089,7 @@ msgstr "Je hebt geen toestemming om media te uploaden op deze site."
 
 #: wp-includes/rest-api/class-wp-rest-server.php:272
 msgid "The REST API can no longer be completely disabled, the rest_authentication_errors filter can be used to restrict access to the API, instead."
-msgstr "De REST API kan niet meer volledig uitgeschakeld worden, gebruik in plaats daarvan het rest_authentication_errors filter om toegang tot de API te beperken."
+msgstr "De REST-API kan niet meer volledig uitgeschakeld worden; gebruik in plaats daarvan het filter rest_authentication_errors om toegang tot de API te beperken."
 
 #: wp-includes/post.php:1384
 msgid "Page Attributes"
@@ -2101,11 +2101,11 @@ msgstr "Berichtattributen"
 
 #: wp-includes/post.php:1377
 msgid "View Pages"
-msgstr "Pagina's tonen"
+msgstr "Pagina's bekijken"
 
 #: wp-includes/post.php:1377
 msgid "View Posts"
-msgstr "Berichten tonen"
+msgstr "Berichten bekijken"
 
 #: wp-includes/post.php:167
 msgid "No changesets found in Trash."
@@ -2125,7 +2125,7 @@ msgstr "Alle changesets"
 
 #: wp-includes/post.php:163
 msgid "View Changeset"
-msgstr "Changeset weergeven"
+msgstr "Changeset bekijken"
 
 #: wp-includes/post.php:162
 msgid "Edit Changeset"
@@ -2170,7 +2170,7 @@ msgstr "Aangepaste CSS"
 
 #: wp-includes/post.php:69
 msgid "Attachment Attributes"
-msgstr "Eigenschappen bijlage"
+msgstr "Bijlage-attributen"
 
 #. translators: post revision title: 1: author avatar, 2: author name, 3: time
 #. ago, 4: date

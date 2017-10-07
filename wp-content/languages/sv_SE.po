@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-13 13:05:53+0000\n"
+"PO-Revision-Date: 2017-09-19 07:26:02+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2319,20 +2319,20 @@ msgstr "Det gick inte att publicera ditt inlägg."
 msgid "Post"
 msgstr "Inlägg"
 
-#: wp-includes/class-wp-customize-widgets.php:799
-#: wp-includes/class-wp-customize-widgets.php:854
-msgid "No widgets found."
-msgstr "Inga widgets hittades."
-
 #. translators: %1$s is the post type name and %2$s is the error message.
 #: wp-includes/class-wp-customize-nav-menus.php:883
 msgid "%1$s could not be created: %2$s"
 msgstr "%1$s gick inte att skapa: %2$s"
 
+#: wp-includes/class-wp-customize-widgets.php:799
+#: wp-includes/class-wp-customize-widgets.php:854
+msgid "No widgets found."
+msgstr "Inga widgetar hittades."
+
 #. translators: placeholder is the count for the number of widgets found
 #: wp-includes/class-wp-customize-widgets.php:798
 msgid "Number of widgets found: %d"
-msgstr "Antal widgets hittade: %d"
+msgstr "Antal widgetar hittade: %d"
 
 #. translators: 1: .mp4, 2: .mov
 #: wp-includes/class-wp-customize-manager.php:4379
@@ -3793,7 +3793,7 @@ msgstr "Kopiera och klistra in denna adress på din WordPress-webbplats för att
 
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:67
 msgid "When in reorder mode, additional controls to reorder widgets will be available in the widgets list above."
-msgstr "När omordningsläget är aktivt kommer extra kontroller för att ändra ordningen bli synliga i listan med widgets ovan."
+msgstr "När omordningsläget är aktivt kommer extra kontroller för att ändra ordningen bli synliga i listan med widgetar ovan."
 
 #: wp-includes/customize/class-wp-customize-themes-section.php:75
 #: wp-includes/customize/class-wp-customize-themes-section.php:76
@@ -5325,10 +5325,6 @@ msgstr "Du anpassar just nu %s"
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>FEL</strong>: Kommentaren kunde inte sparas. Vänligen försök igen senare."
 
-#: wp-includes/class-wp-customize-widgets.php:436
-msgid "Widgets are independent sections of content that can be placed into widgetized areas provided by your theme (commonly called sidebars)."
-msgstr "Widgets är oberoende delar av innehåll som kan placeras i widgetfält som tillhandahålls av ditt tema (allmänt kallade sidofält)."
-
 #. translators: %s: header width in pixels
 #: wp-includes/customize/class-wp-customize-header-image-control.php:184
 msgid "While you can crop images to your liking after clicking <strong>Add new image</strong>, your theme recommends a header width of %s pixels."
@@ -5338,6 +5334,10 @@ msgstr "Medan du kan beskära bilder efter eget tycke när du på <strong>Lägg 
 #: wp-includes/customize/class-wp-customize-header-image-control.php:189
 msgid "While you can crop images to your liking after clicking <strong>Add new image</strong>, your theme recommends a header height of %s pixels."
 msgstr "Medan du kan beskära bilder efter eget tycke när du på <strong>Lägg till ny bild</strong> så är den rekommenderade höjden för sidhuvuden i temat %s pixlar."
+
+#: wp-includes/class-wp-customize-widgets.php:436
+msgid "Widgets are independent sections of content that can be placed into widgetized areas provided by your theme (commonly called sidebars)."
+msgstr "Widgetar är oberoende delar av innehåll som kan placeras i widgetfält som tillhandahålls av ditt tema (allmänt kallade sidofält)."
 
 #: wp-includes/update.php:130 wp-includes/update.php:322
 #: wp-includes/update.php:500
@@ -5492,22 +5492,22 @@ msgstr "Ange bild"
 msgid "Save and preview changes before publishing them."
 msgstr "Spara och förhandsgranska ändringar innan publicering."
 
-#: wp-includes/class-wp-customize-widgets.php:842
-msgid "Search Widgets"
-msgstr "Sök bland widgets"
-
-#: wp-includes/class-wp-customize-widgets.php:843
-msgid "Search widgets&hellip;"
-msgstr "Sök widgets&hellip;"
-
 #: wp-includes/class-wp-editor.php:1002
 msgctxt "TinyMCE"
 msgid "Headings"
 msgstr "Rubriker"
 
+#: wp-includes/class-wp-customize-widgets.php:843
+msgid "Search widgets&hellip;"
+msgstr "Sök widgetar&hellip;"
+
+#: wp-includes/class-wp-customize-widgets.php:842
+msgid "Search Widgets"
+msgstr "Sök bland widgetar"
+
 #: wp-includes/class-wp-customize-widgets.php:787
 msgid "Trash widget by moving it to the inactive widgets sidebar."
-msgstr "Kasta widgets genom att flytta dem till panelen för inaktiva widgets."
+msgstr "Kasta widgetar genom att flytta dem till panelen för inaktiva widgetar."
 
 #: wp-includes/media-template.php:1084 wp-includes/media-template.php:1173
 msgctxt "auto preload"
@@ -10639,11 +10639,6 @@ msgstr "Sökresultat för &#8221;%s&#8221;"
 msgid "Undo"
 msgstr "Ångra"
 
-#: wp-includes/class-wp-customize-widgets.php:784
-#: wp-includes/class-wp-editor.php:1256 wp-includes/media.php:3531
-msgid "Apply"
-msgstr "Utför"
-
 #: wp-includes/script-loader.php:529
 msgid "Comments"
 msgstr "Kommentarer"
@@ -11030,6 +11025,11 @@ msgstr "Bildtext"
 #: wp-includes/script-loader.php:569
 msgid "Public"
 msgstr "Offentlig"
+
+#: wp-includes/class-wp-customize-widgets.php:784
+#: wp-includes/class-wp-editor.php:1256 wp-includes/media.php:3531
+msgid "Apply"
+msgstr "Verkställ"
 
 #: wp-activate.php:78
 msgid "Activation Key Required"

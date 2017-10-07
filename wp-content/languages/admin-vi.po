@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-06-15 11:24:18+0000\n"
+"PO-Revision-Date: 2017-09-30 10:56:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -120,12 +120,12 @@ msgstr "WordPress 4.8 thêm nhiều tính năng rất tuyệt với. Hãy sẵn 
 
 #: wp-admin/about.php:70
 msgid "An Update with You in Mind"
-msgstr "Bản cập nhật với bạn là trọng tâm"
+msgstr "Bản cập nhật dành cho bạn"
 
 #. translators: meetup organization documentation URL.
 #: wp-admin/includes/dashboard.php:1262
 msgid "There aren&#8217;t any events scheduled near you at the moment. Would you like to <a href=\"%s\">organize one</a>?"
-msgstr "Hiện không có sự kiện nào gần nơi bạn sống. Bạn có muốn <a href=\"%s\">tổ chức một sự kiện</a> không?"
+msgstr "Hiện không có sự kiện nào gần nơi bạn sống. Bạn có muốn <a href=\"%s\">trở thành người tổ chức</a> không?"
 
 #: wp-admin/about.php:167
 msgid "Nearby WordPress Events"
@@ -187,7 +187,7 @@ msgstr "Sửa thành phố"
 
 #: wp-admin/includes/dashboard.php:1105
 msgid "WordCamps"
-msgstr "WordCamps"
+msgstr "WordCamp"
 
 #: wp-admin/includes/dashboard.php:1093
 msgid "Meetups"
@@ -195,7 +195,7 @@ msgstr "Meetups"
 
 #: wp-admin/includes/dashboard.php:56
 msgid "WordPress Events and News"
-msgstr "Sự kiện và Tin tức WordPress"
+msgstr "Tin tức và sự kiện về WordPress"
 
 #. translators: Date format for upcoming events on the dashboard. Include the
 #. day of the week. See https://secure.php.net/date.
@@ -215,7 +215,7 @@ msgstr "Mã trả về của API không hợp lệ (%d)"
 
 #: wp-admin/edit-tag-form.php:170 wp-admin/edit-tags.php:444
 msgid "Assign a parent term to create a hierarchy. The term Jazz, for example, would be the parent of Bebop and Big Band."
-msgstr "Chỉ định một mục chuyên cha để tạo chuyên mục phân cấp. Ví dụ chuyên mục Jazz sẽ là chuyên mục cha của Bebop và Big Band."
+msgstr "Chỉ định một chuyên mục Cha để tạo thứ bậc. Ví dụ, bạn tạo chuyên mục Album nhạc thì có thể làm cha của chuyên mục Album nhạc Việt Nam và Album nhạc quốc tế."
 
 #. translators: %s: smiling face with smiling eyes emoji
 #: wp-admin/about.php:202
@@ -260,7 +260,7 @@ msgstr "Bạn có thể lựa chọn ngôn ngữ cho phần quản trị WordPre
 #. including locale if necessary
 #: wp-admin/update-core.php:81
 msgid "You can update to <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %2$s</a> automatically:"
-msgstr "Bạn có thể cập nhật <a href=\"https://codex.wordpress.org/Version_%1$s\">Wordpress %2$s</a> tự động:"
+msgstr "Bạn có thể cập nhật <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %2$s</a> tự động:"
 
 #: wp-admin/update-core.php:60
 msgid "If you need to re-install version %s, you can do so here:"
@@ -1535,7 +1535,7 @@ msgstr "Đang chỉnh sửa %s (hoạt động)"
 
 #: wp-admin/options-permalink.php:254
 msgid "<a href=\"https://codex.wordpress.org/Nginx\">Documentation on Nginx configuration</a>."
-msgstr "<a href=\"https://codex.wordpress.org/Nginx\">Tài liệu cấu hình Nginx</a>."
+msgstr "<a href=\"https://codex.wordpress.org/Nginx\">Hướng dẫn cấu hình Nginx</a>."
 
 #. translators: %s: local time
 #: wp-admin/options-general.php:210
@@ -1956,7 +1956,7 @@ msgstr "Trong khi bạn đang chỉnh sửa tập tin %1$s của bạn, mất m�
 #: wp-admin/includes/class-wp-list-table.php:1324
 #: wp-admin/includes/update.php:687
 msgid "Show more details"
-msgstr "Hiện thị thêm thông tin chi tiết"
+msgstr "Hiển thị chi tiết"
 
 #: wp-admin/includes/class-wp-users-list-table.php:486
 msgid "%s post by this author"
@@ -2004,15 +2004,15 @@ msgstr "Trạng thái bình luận"
 
 #: wp-admin/options-general.php:77
 msgid "Enter the address here if you <a href=\"https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory\">want your site home page to be different from your WordPress installation directory.</a>"
-msgstr "Điền địa chỉ vào đây nếu bạn <a href=\"https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory\">muốn trang chủ của mình khác với thư mục cài đặt WordPresswant.</a>"
+msgstr "Điền địa chỉ vào đây nếu bạn <a href=\"https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory\">muốn trang chủ của mình khác với thư mục cài đặt WordPress.</a>"
 
 #: wp-admin/revision.php:120
 msgid "<a href=\"https://codex.wordpress.org/Revision_Management\">Revisions Management</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Revision_Management\" target=\"_blank\">Quản Lý Bản Thảo</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Revision_Management\">Hướng dẫn quản lý bản thảo</a>"
 
 #: wp-admin/edit-form-advanced.php:420
 msgid "You can also embed media from many popular websites including Twitter, YouTube, Flickr and others by pasting the media URL on its own line into the content of your post/page. Please refer to the Codex to <a href=\"https://codex.wordpress.org/Embeds\">learn more about embeds</a>."
-msgstr "Bạn cũng có thể nhúng nội dung đa phương tiện từ những trang mạng phổ thông như Twitter, YouTube, Flickr, v.v. bằng cách dán địa chỉ liên kết tới nội dung đa phương tiện trong một dòng riêng vào bài viết / trang tĩnh của bạn. Hãy tham khảo trang Codex để <a href=\"https://codex.wordpress.org/Embeds\">biết thêm về khả năng nhúng nội dung</a>."
+msgstr "Bạn cũng có thể nhúng nội dung đa phương tiện từ những trang mạng phổ thông như Twitter, YouTube, Flickr, v.v. bằng cách dán địa chỉ liên kết tới nội dung đa phương tiện trong một dòng riêng vào bài viết / trang tĩnh của bạn. Hãy tham khảo <a href=\"https://codex.wordpress.org/Embeds\">hướng dẫn nhúng nội dung</a>."
 
 #: wp-admin/includes/dashboard.php:1606
 msgid "https://codex.wordpress.org/First_Steps_With_WordPress"
@@ -2028,23 +2028,23 @@ msgstr "WordPress không thông báo về bất kỳ <a href=\"https://codex.wor
 
 #: wp-admin/edit-tags.php:270
 msgid "<a href=\"https://codex.wordpress.org/Posts_Tags_Screen\">Documentation on Tags</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Posts_Tags_Screen\" target=\"_blank\">Tài Liệu về Thẻ Đánh Dấu</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Posts_Tags_Screen\">Hướng dẫn sử dụng Thẻ</a>"
 
 #: wp-admin/options-writing.php:45
 msgid "<a href=\"https://codex.wordpress.org/Settings_Writing_Screen\">Documentation on Writing Settings</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Settings_Writing_Screen\" target=\"_blank\">Documentation on Writing Settings</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Settings_Writing_Screen\">Hướng dẫn màn hình soạn thảo</a>"
 
 #: wp-admin/edit-form-advanced.php:396
 msgid "<a href=\"https://codex.wordpress.org/Pages_Add_New_Screen\">Documentation on Adding New Pages</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Pages_Add_New_Screen\" target=\"_blank\">Documentation on Adding New Pages</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Pages_Add_New_Screen\">Hướng dẫn thêm trang mới</a>"
 
 #: wp-admin/edit.php:249
 msgid "<a href=\"https://codex.wordpress.org/Pages_Screen\">Documentation on Managing Pages</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Pages_Screen\" target=\"_blank\">Documentation on Managing Pages</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Pages_Screen\">Hướng dẫn quản lý Trang</a>"
 
 #: wp-admin/nav-menus.php:571
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Menus_Screen\">Documentation on Menus</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Appearance_Menus_Screen\" target=\"_blank\">Tài Liệu về Thực Đơn</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Appearance_Menus_Screen\">Hướng dẫn quản lý Menu</a>"
 
 #: wp-admin/import.php:29
 msgid "<a href=\"https://codex.wordpress.org/Tools_Import_Screen\">Documentation on Import</a>"
@@ -2064,19 +2064,19 @@ msgstr "<a href=\"https://codex.wordpress.org/Appearance_Widgets_Screen\" target
 
 #: wp-admin/index.php:98
 msgid "<a href=\"https://codex.wordpress.org/Dashboard_Screen\">Documentation on Dashboard</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Dashboard_Screen\" target=\"_blank\">Hướng dẫn dùng bảng tin</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Dashboard_Screen\">Hướng dẫn sử dụng Màn hình chính</a>"
 
 #: wp-admin/edit-tags.php:268
 msgid "<a href=\"https://codex.wordpress.org/Links_Link_Categories_Screen\">Documentation on Link Categories</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Links_Link_Categories_Screen\" target=\"_blank\">Tài Liệu về  Nhóm Phân Loại Liên Kết</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Links_Link_Categories_Screen\">Hướng dẫn sử dụng Chuyên mục</a>"
 
 #: wp-admin/edit.php:228
 msgid "<a href=\"https://codex.wordpress.org/Posts_Screen\">Documentation on Managing Posts</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Posts_Screen\" target=\"_blank\">Documentation on Managing Posts</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Posts_Screen\">Hướng dẫn quản lý Bài viết</a>"
 
 #: wp-admin/edit-tags.php:266
 msgid "<a href=\"https://codex.wordpress.org/Posts_Categories_Screen\">Documentation on Categories</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Posts_Categories_Screen\" target=\"_blank\">Tài Liệu về  Nhóm Phân Loại</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Posts_Categories_Screen\">Hướng dẫn phân loại bài viết</a>"
 
 #: wp-admin/plugin-install.php:98
 msgid "<a href=\"https://codex.wordpress.org/Plugins_Add_New_Screen\">Documentation on Installing Plugins</a>"
@@ -2156,7 +2156,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Media_Library_Screen\" target=\"_b
 
 #: wp-admin/edit-form-advanced.php:397
 msgid "<a href=\"https://codex.wordpress.org/Pages_Screen#Editing_Individual_Pages\">Documentation on Editing Pages</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Pages_Screen#Editing_Individual_Pages\" target=\"_blank\">Tài Liệu về Biên Tập Trang Tĩnh</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Pages_Screen#Editing_Individual_Pages\">Hướng dẫn chỉnh sửa Trang</a>"
 
 #: wp-admin/edit-form-advanced.php:413 wp-admin/media.php:83
 msgid "<a href=\"https://codex.wordpress.org/Media_Add_New_Screen#Edit_Media\">Documentation on Edit Media</a>"
@@ -2192,7 +2192,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Comment_Spam\" target=\"_blank\">T
 
 #: wp-admin/options-general.php:342
 msgid "<a href=\"https://codex.wordpress.org/Formatting_Date_and_Time\">Documentation on date and time formatting</a>."
-msgstr "<a href=\"https://codex.wordpress.org/Formatting_Date_and_Time\">Tài Liệu về định dạng ngày và giờ</a>."
+msgstr "<a href=\"https://codex.wordpress.org/Formatting_Date_and_Time\">Tài liệu về định dạng ngày và giờ</a>."
 
 #: wp-admin/update-core.php:183
 msgid "<strong>Important:</strong> before updating, please <a href=\"https://codex.wordpress.org/WordPress_Backups\">back up your database and files</a>. For help with updates, visit the <a href=\"https://codex.wordpress.org/Updating_WordPress\">Updating WordPress</a> Codex page."
@@ -4327,7 +4327,7 @@ msgstr "Khi thay đổi chủ đề, thường sẽ có sự khác biệt về s
 
 #: wp-admin/edit-tags.php:250
 msgid "<strong>Parent</strong> &mdash; Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have child categories for Bebop and Big Band. Totally optional. To create a subcategory, just choose another category from the Parent dropdown."
-msgstr "<strong>Nguồn Gốc</strong> - Không giống như thẻ đánh dấu, nhóm nội dung có hỗ trợ thứ bậc. Bạn có thể có nhóm nội dung Nhạc Jazz, và dưới nó là các nhóm nội dung con như Ban Nhạc Bebop và Ban Nhạc Big Band. Tùy biến hoàn toàn. Để tạo một nhóm nội dung con, bạn chỉ cần chọn một nhóm nội dung khác từ danh sách xổ xuống Nguồn Gốc."
+msgstr "<strong>Chuyên mục Cha</strong> - Không giống như Thẻ, Chuyên mục có hỗ trợ thứ bậc. Bạn có thể có nhóm nội dung Văn học và dưới nó là các nhóm nội dung con như Tiểu thuyết và Truyện ngắn. Hoàn toàn không bắt buộc. Để tạo một Chuyên mục con, bạn chỉ cần chọn một Chuyên mục khác từ danh sách Chuyên mục cha."
 
 #: wp-admin/edit-form-advanced.php:448
 msgid "Publish Settings"
@@ -5593,7 +5593,7 @@ msgstr "Bạn nên sử dụng lối tắt bàn phím để kiểm duyệt bình
 
 #: wp-admin/edit-form-advanced.php:385 wp-admin/edit.php:237
 msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
-msgstr "Trang tĩnh giống với bài viết ở chỗ chúng có tiêu đề, nội dung, và siêu dữ liệu. Khác nhau ở chỗ trang tĩnh không phải là một phần của dòng nhật ký theo thứ tự thời gian. Có thể coi trang tĩnh như một bài viết vĩnh viễn không thay đổi. Trang tĩnh không thể phân loại hoặc đánh dấu, nhưng có thể có thứ bậc. Bạn có thể có trang tĩnh này là con của trang tĩnh kia bằng cách chỉ định một trang tĩnh là &#8220;Cha&#8221; của trang tĩnh khác, tạo ra một nhóm các trang tĩnh."
+msgstr "Trang giống với Bài viết ở chỗ chúng có tiêu đề, nội dung, và các trường dữ liệu. Khác nhau ở chỗ Trang không phải là một phần của dòng nhật ký theo thứ tự thời gian. Trang như một bài viết vĩnh viễn không thay đổi. Trang không thể phân loại hoặc đánh dấu, nhưng có thể có thứ bậc. Bạn có thể đặt trang này là con của trang kia bằng cách chỉ định một trang là &#8220;Cha&#8221; của trang tĩnh khác, tạo ra một nhóm các trang."
 
 #: wp-admin/upload.php:193
 msgid "All the files you&#8217;ve uploaded are listed in the Media Library, with the most recent uploads listed first. You can use the Screen Options tab to customize the display of this screen."
@@ -6983,7 +6983,7 @@ msgstr "Nội Dung Phụ có thể được sử dụng nhiều lần. Bạn có
 
 #: wp-admin/includes/meta-boxes.php:811
 msgid "(no parent)"
-msgstr "(không có trang mẹ)"
+msgstr "(không có trang cha)"
 
 #: wp-admin/edit-form-advanced.php:461
 msgid "<strong>Parent</strong> &mdash; You can arrange your pages in hierarchies. For example, you could have an &#8220;About&#8221; page that has &#8220;Life Story&#8221; and &#8220;My Dog&#8221; pages under it. There are no limits to how many levels you can nest pages."
@@ -9329,7 +9329,7 @@ msgstr "anh chị em ruột"
 #. translators: xfn: http://gmpg.org/xfn/
 #: wp-admin/includes/meta-boxes.php:1132
 msgid "parent"
-msgstr "cha mẹ"
+msgstr "cha"
 
 #. translators: xfn: http://gmpg.org/xfn/
 #: wp-admin/includes/meta-boxes.php:1129
@@ -9466,12 +9466,12 @@ msgstr "Giao diện mặc định"
 
 #: wp-admin/includes/class-wp-posts-list-table.php:1525
 msgid "Main Page (no parent)"
-msgstr "Trang chính (không có trang mẹ)"
+msgstr "Trang chính (không có trang cha)"
 
 #: wp-admin/includes/class-wp-posts-list-table.php:1519
 #: wp-admin/includes/meta-boxes.php:830
 msgid "Parent"
-msgstr "cha mẹ"
+msgstr "Cha"
 
 #: wp-admin/includes/meta-boxes.php:739
 msgid "Show comments"
@@ -10501,7 +10501,7 @@ msgstr "<a href=\"%s\">Đường dẫn</a> / Sửa"
 
 #: wp-admin/edit-tag-form.php:178 wp-admin/edit-tags.php:451
 msgid "The description is not prominent by default; however, some themes may show it."
-msgstr "Mô tả bình thường không được sử dụng trong giao diện, tuy nhiên có vài giao diện hiện thị mô tả này."
+msgstr "Thông thường mô tả này không được sử dụng trong các giao diện, tuy nhiên có vài giao diện có thể hiển thị mô tả này."
 
 #: wp-admin/edit-tag-form.php:144 wp-admin/edit-tags.php:399
 msgid "The &#8220;slug&#8221; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-27 19:09:49+0000\n"
+"PO-Revision-Date: 2017-09-27 18:31:14+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2037,7 +2037,7 @@ msgstr "https://codex.wordpress.org/First_Steps_With_WordPress"
 
 #: wp-admin/edit-form-advanced.php:436
 msgid "<strong>Format</strong> &mdash; Post Formats designate how your theme will display a specific post. For example, you could have a <em>standard</em> blog post with a title and paragraphs, or a short <em>aside</em> that omits the title and contains a short text blurb. Please refer to the Codex for <a href=\"https://codex.wordpress.org/Post_Formats#Supported_Formats\">descriptions of each post format</a>. Your theme could enable all or some of 10 possible formats."
-msgstr "<strong>Format</strong> — Indlægsformat angiver, hvordan dit tema vil vise et specifikt indlæg. For eksempel kunne du have et <em>standard</em>-blogindlæg med en titel og afsnit, eller en kort <em>sidebemærkning</em>, som udelader titlen og indeholder en kort (status) meddelelse. Kig i kodekset for <a href=\"https://codex.wordpress.org/Post_Formats#Supported_Formats\">at se beskrivelser af hvert indlægsformat</a>. Dit tema giver mulighed for at bruge alle eller nogle af de ti mulige indlægsformater."
+msgstr "<strong>Format</strong> &mdash; Indlægsformat angiver, hvordan dit tema vil vise et specifikt indlæg. For eksempel kunne du have et <em>standard</em>-blogindlæg med en titel og afsnit, eller en kort <em>sidebemærkning</em>, som udelader titlen og indeholder en kort (status) meddelelse. Kig i kodekset for <a href=\"https://codex.wordpress.org/Post_Formats#Supported_Formats\">at se beskrivelser af hvert indlægsformat</a>. Dit tema giver mulighed for at bruge alle eller nogle af de ti mulige indlægsformater."
 
 #: wp-admin/options-writing.php:177
 msgid "WordPress is not notifying any <a href=\"https://codex.wordpress.org/Update_Services\">Update Services</a> because of your site&#8217;s <a href=\"%s\">visibility settings</a>."
@@ -3223,11 +3223,11 @@ msgstr "https://wordpress.org/support/forum/how-to-and-troubleshooting"
 
 #: wp-admin/index.php:69
 msgid "<strong>At A Glance</strong> &mdash; Displays a summary of the content on your site and identifies which theme and version of WordPress you are using."
-msgstr "<strong>Overblik</strong> — Viser en opsummering af indholdet på dine websteder og finder ud af, hvilket tema og hvilken WordPress-version du bruger."
+msgstr "<strong>Overblik</strong> &mdash; Viser en opsummering af indholdet på dine websteder og finder ud af, hvilket tema og hvilken WordPress-version du bruger."
 
 #: wp-admin/index.php:59
 msgid "<strong>Box Controls</strong> &mdash; Click the title bar of the box to expand or collapse it. Some boxes added by plugins may have configurable content, and will show a &#8220;Configure&#8221; link in the title bar if you hover over it."
-msgstr "<strong>Bokskontroller</strong> — Tryk på boksens overskrift for at udvide eller klappe den sammen. Nogle bokse tilføjet af plugins kan have indstillingsmuligheder og vil have et &#8220;Tilpas&#8221;-link i titelbaren, hvis du holder musen henover den."
+msgstr "<strong>Bokskontroller</strong> &mdash; Tryk på boksens overskrift for at udvide eller klappe den sammen. Nogle bokse tilføjet af plugins kan have indstillingsmuligheder og vil have et &#8220;Tilpas&#8221;-link i titelbaren, hvis du holder musen henover den."
 
 #: wp-admin/users.php:52
 msgid "Remove allows you to remove a user from your site. It does not delete their content. You can also remove multiple users at once by using Bulk Actions."
@@ -3481,15 +3481,15 @@ msgstr ""
 
 #: wp-admin/index.php:72
 msgid "<strong>Quick Draft</strong> &mdash; Allows you to create a new post and save it as a draft. Also displays links to the 5 most recent draft posts you've started."
-msgstr "<strong>Hurtigt udkast</strong> — Giver dig mulighed for at tilføje et nyt indlæg og gemme det som udkast. Viser også links til de fem nyeste udkast, som du har påbegyndt."
+msgstr "<strong>Hurtigt udkast</strong> &mdash; Giver dig mulighed for at tilføje et nyt indlæg og gemme det som udkast. Viser også links til de fem nyeste udkast, som du har påbegyndt."
 
 #: wp-admin/index.php:70
 msgid "<strong>Activity</strong> &mdash; Shows the upcoming scheduled posts, recently published posts, and the most recent comments on your posts and allows you to moderate them."
-msgstr "<strong>Aktivitet</strong> — Viser kommende, planlagte indlæg, nyligt udgivne indlæg og de seneste kommentarer til dine indlæg, og giver dig mulighed for bedømme dem."
+msgstr "<strong>Aktivitet</strong> &mdash; Viser kommende, planlagte indlæg, nyligt udgivne indlæg og de seneste kommentarer til dine indlæg, og giver dig mulighed for bedømme dem."
 
 #: wp-admin/index.php:57
 msgid "<strong>Screen Options</strong> &mdash; Use the Screen Options tab to choose which Dashboard boxes to show."
-msgstr "<strong>Skærmindstillinger</strong> — Brug fanebladet Skærmindstillinger for at vælge, hvilke kontrolpanelbokse der skal vises."
+msgstr "<strong>Skærmindstillinger</strong> &mdash; Brug fanebladet Skærmindstillinger for at vælge, hvilke kontrolpanelbokse der skal vises."
 
 #: wp-admin/post.php:72
 msgid "Unable to submit this form, please refresh and try again."
@@ -4366,7 +4366,7 @@ msgstr "Når du skifter temaer, er der ofte en vis variation i antallet og opsæ
 
 #: wp-admin/edit-tags.php:250
 msgid "<strong>Parent</strong> &mdash; Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have child categories for Bebop and Big Band. Totally optional. To create a subcategory, just choose another category from the Parent dropdown."
-msgstr "<strong>Forælder</strong> — Kategorier kan, i modsætning til tags, være hierarkiske. Du kan fx have kategorien Jazz og under den underkategorier for Bebop og Big Band. Helt valgfrit. For at oprette en underkategori vælger du blot en anden kategori fra Forælder dropdown-menuen."
+msgstr "<strong>Forælder</strong> &mdash; Kategorier kan, i modsætning til tags, være hierarkiske. Du kan fx have kategorien Jazz og under den underkategorier for Bebop og Big Band. Helt valgfrit. For at oprette en underkategori vælger du blot en anden kategori fra Forælder dropdown-menuen."
 
 #: wp-admin/edit-form-advanced.php:448
 msgid "Publish Settings"
@@ -6449,18 +6449,13 @@ msgid ""
 "As a new WordPress user, you should go to <a href=\"%s\">your dashboard</a> to delete this page and create new pages for your content. Have fun!"
 msgstr ""
 "Dette er en eksempelside. Den er forskellig fra et blogindlæg, fordi den vil forblive det samme sted og være en del af dit websteds navigation (i de fleste temaer). De fleste vil lægge ud med en Om-side, der præsenterer dem til potentielle besøgende. Ordlyden kunne være noget i retning af:\n"
-" \n"
-" \n"
-" \n"
+"\n"
 "<blockquote>Hejsa! Jeg er cykelbud om dagen, prøver at blive skuespiller om aftenen og dette er min blog. Jeg bor i København, har en dejlig hund, der hedder King, og jeg kan lide Mojitos. (og at blive overrasket af regnvejr.)</blockquote>\n"
-" \n"
-" \n"
+"\n"
 "... eller noget i retning af:\n"
-" \n"
 "\n"
 "<blockquote>XYZ Dingenot fabrikken blev grundlagt i 1971 og har leveret kvalitetsdingenoter til offentligheden lige siden. Beliggende i Andeby, har 2.000 ansatte og bidrager med alverdens seje tiltag i lokalområdet.</blockquote>\n"
-" \n"
-" \n"
+"\n"
 "Som ny WordPress bruger, bør du gå til <a href=\"%s\">dit kontrolpanel</a> for at slette denne side og oprette nye sider til dit indhold. God fornøjelse!"
 
 #: wp-admin/user-edit.php:380
@@ -6789,7 +6784,7 @@ msgstr "Mange temaer viser visse sidebjælke-widgets som standard, indtil du æn
 
 #: wp-admin/options-permalink.php:30
 msgid "If you pick an option other than Plain, your general URL path with structure tags (terms surrounded by <code>%</code>) will also appear in the custom structure field and your path can be further modified there."
-msgstr "Hvis du vælger noget andet end Almindelig, vil din URL-sti med strukturtags og termer omgivet af <code>%</code> også blive vist i tekstfeltet Egen struktur, og du kan ændre din sti yderligere der."
+msgstr "Hvis du vælger noget andet end Almindelig, vil din URL-sti med strukturtags (termer omgivet af <code>%</code>) også blive vist i tekstfeltet Egen struktur, og du kan ændre din sti yderligere der."
 
 #: wp-admin/options-permalink.php:31
 msgid "When you assign multiple categories or tags to a post, only one can show up in the permalink: the lowest numbered category. This applies if your custom structure includes <code>%category%</code> or <code>%tag%</code>."

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Give &#8211; Donation Plugin and Fundraising Platform - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-12 09:31:58+0000\n"
+"PO-Revision-Date: 2017-10-01 16:29:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #: includes/scripts.php:366
 msgid "Something went wrong kindly try again!"
-msgstr "Une erreur s'est produite, veuillez essayer à nouveau !"
+msgstr "Une erreur s’est produite, veuillez essayer à nouveau !"
 
 #: includes/scripts.php:326
 msgid "Are you sure you want to delete all the imported donors? This process will also delete imported donations as well."
@@ -45,6 +45,233 @@ msgstr "Donneur ID"
 #: includes/misc-functions.php:1640
 msgid "Import as Meta"
 msgstr "Importé en tant que méta"
+
+#: includes/misc-functions.php:1635
+msgid "Donor Email"
+msgstr "E-mail du donateur"
+
+#: includes/misc-functions.php:1628
+msgid "Donor Last Name"
+msgstr "Nom du donateur"
+
+#: includes/misc-functions.php:1627
+msgid "Donor First Name"
+msgstr "Prénom du donateur"
+
+#: includes/misc-functions.php:1605 includes/misc-functions.php:1623
+msgid "Do not import"
+msgstr "Ne pas importer"
+
+#: includes/misc-functions.php:1548
+msgid "This donation was imported by %s"
+msgstr "Ce don a été importé par %s"
+
+#: includes/class-give-roles.php:97
+msgid "Give Donor"
+msgstr "Donateur"
+
+#: includes/admin/upgrades/views/upgrades.php:65
+msgid "needs"
+msgid_plural "need"
+msgstr[0] "besoin"
+msgstr[1] "besoins"
+
+#: includes/admin/upgrades/views/upgrades.php:65
+msgid "is"
+msgid_plural "are"
+msgstr[0] "est"
+msgstr[1] "sont"
+
+#: includes/admin/upgrades/class-give-updates.php:237
+msgid "Donations %s"
+msgstr "Dons %s"
+
+#: includes/admin/tools/views/html-admin-page-data.php:40
+msgid "Delete Imported Donors and Payments"
+msgstr "Effacer les donateurs et paiements importés"
+
+#: includes/admin/tools/views/html-admin-page-data.php:39
+msgid "Delete Test Donors and Payments"
+msgstr "Effacer les donateurs et paiements de test"
+
+#: includes/admin/tools/views/html-admin-page-data.php:38
+msgid "Delete Test Payments"
+msgstr "Effacer les paiements de test"
+
+#: includes/admin/tools/data/class-give-tools-delete-import-donors.php:278
+msgid "Imported donor and transactions successfully deleted."
+msgstr "Les donateurs et transactions importés ont été supprimés avec succès."
+
+#: includes/admin/tools/data/class-give-tools-delete-import-donors.php:257
+msgid "You do not have permission to delete Import transactions."
+msgstr "Vous n’avez pas le droit de supprimer des transactions importées."
+
+#: includes/admin/tools/class-settings-import.php:669
+#: includes/admin/tools/class-settings-import.php:672
+#: includes/admin/tools/class-settings-import.php:676
+msgid "Please upload or provide the ID to a valid CSV file."
+msgstr "Veuillez mettre en ligne ou fournir un ID d'un fichier CSV valide."
+
+#: includes/admin/tools/class-settings-import.php:610
+msgid "Delete CSV after import:"
+msgstr "Effacer le CSV après l’import :"
+
+#: includes/admin/tools/class-settings-import.php:604
+msgid "Create WP users for new donors?:"
+msgstr "Créer un utilisateur WP pour les nouveaux donateurs ?"
+
+#: includes/admin/tools/class-settings-import.php:598
+msgid "Test Mode:"
+msgstr "Mode de test :"
+
+#: includes/admin/tools/class-settings-import.php:591
+msgid "CSV Delimiter:"
+msgstr "Délimiteur du CSV :"
+
+#: includes/admin/tools/class-settings-import.php:583
+msgid "Choose a CSV file:"
+msgstr "Choisir un fichier CSV :"
+
+#: includes/admin/tools/class-settings-import.php:570
+msgid "This tool allows you to import (or merge) donation data to give from a CSV file."
+msgstr "Cet outils vous autorise à importer ou fusionner les données d’un don dans Give depuis un fichier CSV."
+
+#: includes/admin/tools/class-settings-import.php:569
+msgid "Import donations from a CSV file"
+msgstr "Importer des dons depuis un fichier CSV."
+
+#: includes/admin/tools/class-settings-import.php:530
+msgid "Done!"
+msgstr "Effectué !"
+
+#: includes/admin/tools/class-settings-import.php:528
+msgid "Column mapping"
+msgstr "Correspondance de colonne"
+
+#: includes/admin/tools/class-settings-import.php:527
+msgid "Upload CSV file"
+msgstr "Mettre en ligne un fichier CSV"
+
+#: includes/admin/tools/class-settings-import.php:367
+msgid "Map to field"
+msgstr "Faire correspondre au champs"
+
+#: includes/admin/tools/class-settings-import.php:366
+msgid "Column name"
+msgstr "Nom de la colonne"
+
+#: includes/admin/tools/class-settings-import.php:360
+msgid "Map CSV fields to donations"
+msgstr "Faites correspondre un champs de votre CSV à une donation"
+
+#: includes/admin/tools/class-settings-import.php:329
+msgid "Please select Email id or Customer ID options from the dropdown."
+msgstr "Veuillez sélectionner l’e-mail ou l'ID client dans le menu déroulant."
+
+#: includes/admin/tools/class-settings-import.php:266
+msgid "Importing"
+msgstr "En cours d'import"
+
+#: includes/admin/tools/class-settings-import.php:219
+msgid "View Donations"
+msgstr "Voir les dons"
+
+#: includes/admin/tools/class-settings-import.php:208
+msgid "Import Donation"
+msgstr "Importer les dons"
+
+#: includes/admin/tools/class-settings-import.php:202
+msgid "Failed to import %s donations"
+msgstr "Échec lors de l’import de %s dons"
+
+#: includes/admin/tools/class-settings-import.php:200
+msgid "Import complete! %s donations processed"
+msgstr "Import complet ! %s dons importés"
+
+#: includes/admin/tools/class-settings-import.php:186
+msgid "%s %s imported"
+msgstr "%s %s importé"
+
+#: includes/admin/tools/class-settings-import.php:183
+#: includes/admin/tools/class-settings-import.php:188
+msgid "donations"
+msgstr "dons"
+
+#: includes/admin/tools/class-settings-import.php:182
+#: includes/admin/tools/class-settings-import.php:187
+msgid "donation"
+msgstr "don"
+
+#: includes/admin/tools/class-settings-import.php:178
+msgid "forms"
+msgstr "formulaires"
+
+#: includes/admin/tools/class-settings-import.php:177
+msgid "form"
+msgstr "formulaire"
+
+#: includes/admin/tools/class-settings-import.php:176
+msgid "%s donation %s created"
+msgstr "%s don %s créé"
+
+#: includes/admin/tools/class-settings-import.php:171
+msgid "%s %s created"
+msgstr "%s %s créé"
+
+#: includes/admin/tools/class-settings-import.php:168
+#: includes/admin/tools/class-settings-import.php:173
+msgid "donors"
+msgstr "donateurs"
+
+#: includes/admin/tools/class-settings-import.php:167
+#: includes/admin/tools/class-settings-import.php:172
+msgid "donor"
+msgstr "donateur"
+
+#: includes/admin/settings/class-settings-advanced.php:68
+msgid "Assign default user roles for donors when donors opt to register as a WP User."
+msgstr "Assigner le rôle utilisateur par défaut lorsqu'un donateur choisi de s'enregistrer en tant qu’utilisateur WP"
+
+#: includes/admin/settings/class-settings-advanced.php:67
+msgid "Default User Role"
+msgstr "Rôle utilisateur par défaut"
+
+#: includes/admin/payments/class-payments-table.php:531
+#: includes/admin/tools/class-settings-import.php:529
+msgid "Import"
+msgstr "Import"
+
+#: includes/admin/payments/class-payments-table.php:531
+msgid "This donation was imported."
+msgstr "Ce don a été importé"
+
+#: includes/admin/class-blank-slate.php:283
+msgid "Need help? Learn more about %sDonors%s."
+msgstr "Besoin d’aide ? Apprenez en plus plus à propos des %sDonateurs%s."
+
+#: includes/admin/class-blank-slate.php:265
+#: includes/admin/class-blank-slate.php:280
+msgid "View All Forms"
+msgstr "Voir tous les formulaires"
+
+#: includes/admin/class-blank-slate.php:247
+msgid "Create Donation Form"
+msgstr "Créer un formulaire de don"
+
+#: includes/admin/class-blank-slate.php:244
+msgid "Give Icon"
+msgstr "Icône Give"
+
+#: includes/admin/admin-actions.php:491
+msgid "All donation uploaded successfully!"
+msgstr "Tous les dons ont été mis en ligne avec succès !"
+
+#: includes/admin/admin-actions.php:405
+#: includes/admin/tools/class-settings-import.php:59
+#: includes/admin/tools/class-settings-import.php:719
+#: includes/admin/tools/views/html-admin-page-imports.php:23
+msgid "Import Donations"
+msgstr "Import des dons"
 
 #: includes/scripts.php:365
 msgid "The following process will make updates to your site's database. Please create a database backup before proceeding with updates."
@@ -4459,7 +4686,7 @@ msgstr[1] "%d transactions ont bien été supprimées."
 
 #: includes/admin/admin-actions.php:272 includes/scripts.php:330
 msgid "You cannot set the success and failed pages to the same page"
-msgstr "Vous ne pouvez pas définir la même page pour les pages de succès et d'échec."
+msgstr "Vous ne pouvez pas définir la même page pour les pages de succès et d’échec."
 
 #: includes/admin/admin-pages.php:68
 msgid "Give Tools"
@@ -8817,7 +9044,7 @@ msgstr "Afficher le titre :"
 
 #: includes/admin/class-blank-slate.php:245
 msgid "No donation forms  found."
-msgstr "Aucun formulaire de don trouvé!"
+msgstr "Aucun formulaire de don trouvé !"
 
 #: includes/admin/shortcodes/shortcode-give-form.php:56
 #: includes/admin/shortcodes/shortcode-give-goal.php:57

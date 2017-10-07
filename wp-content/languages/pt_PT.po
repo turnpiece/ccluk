@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-10 19:12:13+0000\n"
+"PO-Revision-Date: 2017-09-29 08:55:44+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -7845,7 +7845,7 @@ msgstr "Conversa"
 #: wp-includes/post-formats.php:91
 msgctxt "Post format"
 msgid "Aside"
-msgstr "Nota"
+msgstr "Aparte"
 
 #: wp-includes/post.php:1380
 msgid "No posts found in Trash."
@@ -10338,7 +10338,7 @@ msgstr "Os comentários estão fechados."
 
 #: wp-includes/widgets/class-wp-widget-meta.php:59
 msgid "Comments <abbr title=\"Really Simple Syndication\">RSS</abbr>"
-msgstr "Feed <abbr title=\"Really Simple Syndication\">RSS</abbr> dos comentários."
+msgstr "Feed <abbr title=\"Really Simple Syndication\">RSS</abbr> dos comentários"
 
 #: wp-includes/post-template.php:860
 msgid "Pages:"

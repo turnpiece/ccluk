@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-15 07:20:23+0000\n"
+"PO-Revision-Date: 2017-10-04 05:23:56+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -234,7 +234,7 @@ msgstr "URL al archivo original del vídeo %s"
 #. translators: placeholder is a list of valid video file extensions
 #: wp-includes/widgets/class-wp-widget-media-video.php:45
 msgid "Sorry, we can&#8217;t display the video file type selected. Please select a supported video file (%1$s) or stream (YouTube or Vimeo) instead."
-msgstr "La siento, no podemos reproducir el tipo de archivo de vídeo seleccionado. Por favor, elige un tipo de archivo compatible (%1$s) o incrustado (YouTube o Vimeo) en su lugar."
+msgstr "Lo siento, no podemos reproducir el tipo de archivo de vídeo seleccionado. Por favor, elige un tipo de archivo compatible (%1$s) o incrustado (YouTube o Vimeo) en su lugar."
 
 #: wp-includes/widgets/class-wp-widget-media-video.php:43
 msgid "Video Widget"

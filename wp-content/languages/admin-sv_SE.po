@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.8.x - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-06-15 12:43:10+0000\n"
+"PO-Revision-Date: 2017-09-19 08:58:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -651,7 +651,7 @@ msgstr "Blogg"
 
 #: wp-admin/includes/theme.php:259
 msgid "Footer Widgets"
-msgstr "Sidfotwidgets"
+msgstr "Sidfotwidgetar"
 
 #: wp-admin/includes/theme.php:238
 msgid "Grid Layout"
@@ -1449,11 +1449,11 @@ msgstr "Du har inte behörighet att uppdatera dessa alternativ."
 
 #: wp-admin/widgets.php:441
 msgid "This will clear all items from the inactive widgets list. You will not be able to restore any customizations."
-msgstr "Detta rensar alla poster från listan med inaktiva widgets. Du kommer inte kunna återställa några anpassningar."
+msgstr "Detta rensar alla poster från listan med inaktiva widgetar. Du kommer inte kunna återställa några anpassningar."
 
 #: wp-admin/widgets.php:431
 msgid "Clear Inactive Widgets"
-msgstr "Rensa inaktiva widgets"
+msgstr "Rensa inaktiva widgetar"
 
 #: wp-admin/users.php:134
 msgid "One of the selected users is not a member of this site."
@@ -2077,7 +2077,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Plugins_Editor_Screen\">Dokumentat
 
 #: wp-admin/widgets.php:76
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Widgets_Screen\">Documentation on Widgets</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Appearance_Widgets_Screen\">Dokumentation för widgets</a>"
+msgstr "<a href=\"https://codex.wordpress.org/Appearance_Widgets_Screen\">Dokumentation för widgetar</a>"
 
 #: wp-admin/index.php:98
 msgid "<a href=\"https://codex.wordpress.org/Dashboard_Screen\">Documentation on Dashboard</a>"
@@ -2284,7 +2284,7 @@ msgstr "Du kan inte installera <a href=\"https://codex.wordpress.org/Version_%1$
 
 #: wp-admin/widgets.php:81
 msgid "The theme you are currently using isn&#8217;t widget-aware, meaning that it has no sidebars that you are able to change. For information on making your theme widget-aware, please <a href=\"https://codex.wordpress.org/Widgetizing_Themes\">follow these instructions</a>."
-msgstr "Temat du använder stöder inte widgets. Det innebär att det inte finns några sidopaneler som du kan ändra på. <a href=\"http://wp-support.se/dokumentation/Modifiering:Aktivera_widgets_för_tema\">Följ de här instruktionerna</a> för att lägga till stöd för widgets i ditt tema."
+msgstr "Temat du använder stöder inte widgetar. Det innebär att det inte finns några sidopaneler som du kan ändra på. <a href=\"https://codex.wordpress.org/Widgetizing_Themes\">Följ de här instruktionerna</a> för att lägga till stöd för widgetar i ditt tema."
 
 #: wp-admin/plugin-editor.php:292 wp-admin/theme-editor.php:279
 msgid "You need to make this file writable before you can save your changes. See <a href=\"https://codex.wordpress.org/Changing_File_Permissions\">the Codex</a> for more information."
@@ -3255,7 +3255,7 @@ msgstr "Hantera menyer"
 
 #: wp-admin/includes/dashboard.php:1597
 msgid "Manage widgets"
-msgstr "Hantera widgets"
+msgstr "Hantera widgetar"
 
 #: wp-admin/credits.php:42 wp-admin/credits.php:104
 msgid "https://make.wordpress.org/"
@@ -4358,11 +4358,11 @@ msgstr "Om du vill använda länkhanteringen, vänligen installera tillägget <a
 
 #: wp-admin/includes/dashboard.php:1594
 msgid "Manage <a href=\"%1$s\">widgets</a> or <a href=\"%2$s\">menus</a>"
-msgstr "Hantera <a href=\"%1$s\">widgets</a> eller <a href=\"%2$s\">menyer</a>"
+msgstr "Hantera <a href=\"%1$s\">widgetar</a> eller <a href=\"%2$s\">menyer</a>"
 
 #: wp-admin/widgets.php:71
 msgid "When changing themes, there is often some variation in the number and setup of widget areas/sidebars and sometimes these conflicts make the transition a bit less smooth. If you changed themes and seem to be missing widgets, scroll down on this screen to the Inactive Widgets area, where all of your widgets and their settings will have been saved."
-msgstr "När man ändrar teman så förekommer ofta variationer på antal tillgängliga widgetfält och detta kan i vissa fall röra till det. Om du byter teman och verkar sakna widgets, rulla ner en bit på denna sida, till panelen Inaktiva widgets där du hittar alla dina widgets med sina inställningar sparade."
+msgstr "När man ändrar teman så förekommer ofta variationer på antal tillgängliga widgetfält och detta kan i vissa fall röra till det. Om du byter teman och verkar sakna widgetar, rulla ner en bit på denna sida, till panelen Inaktiva widgetar där du hittar alla dina widgetar med sina inställningar sparade."
 
 #: wp-admin/edit-tags.php:250
 msgid "<strong>Parent</strong> &mdash; Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have child categories for Bebop and Big Band. Totally optional. To create a subcategory, just choose another category from the Parent dropdown."
@@ -5487,7 +5487,7 @@ msgstr "Lägga till tillägg"
 
 #: wp-admin/edit.php:222
 msgid "You can also edit or move multiple posts to the trash at once. Select the posts you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
-msgstr "Du kan också redigera eller flytta flera inlägg till papperskorgen på en gång. Markera de poster du vill ska utföra åtgärd för genom att använda kryssrutorna, välj sedan den åtgärd som du vill ta från massredigeringsmenyn och klicka på Utför."
+msgstr "Du kan också redigera eller flytta flera inlägg till papperskorgen på en gång. Markera de poster du vill ska utföra åtgärd för genom att använda kryssrutorna, välj sedan den åtgärd som du vill ta från massredigeringsmenyn och klicka på Verkställ."
 
 #: wp-admin/edit.php:192
 msgid "This screen provides access to all of your posts. You can customize the display of this screen to suit your workflow."
@@ -5607,7 +5607,7 @@ msgstr "Inaktivt sidofält (används inte)"
 
 #: wp-admin/widgets.php:68
 msgid "Missing Widgets"
-msgstr "Saknade widgets"
+msgstr "Saknade widgetar"
 
 #: wp-admin/edit-tags.php:224
 msgid "You can assign keywords to your posts using <strong>tags</strong>. Unlike categories, tags have no hierarchy, meaning there&#8217;s no relationship from one tag to another."
@@ -6600,7 +6600,7 @@ msgstr "Kom ihåg att klicka på Uppdatera Media för att spara metadata som ang
 
 #: wp-admin/widgets.php:56
 msgid "The Available Widgets section contains all the widgets you can choose from. Once you drag a widget into a sidebar, it will open to allow you to configure its settings. When you are happy with the widget settings, click the Save button and the widget will go live on your site. If you click Delete, it will remove the widget."
-msgstr "Sektionen Tillgängliga widgets innehåller alla widgets som du kan välja mellan. När du drar en widget till en sidopanel så kommer den att öppna för att låta dig konfigurera dess inställningar. När du är nöjd med widgeten inställningarna klickar du på knappen Spara och widget kommer att visas live på din webbplats. Om du klickar Radera så tas widgeten bort."
+msgstr "Sektionen Tillgängliga widgetar innehåller alla widgetar som du kan välja mellan. När du drar en widget till en sidopanel så kommer den att öppna för att låta dig konfigurera dess inställningar. När du är nöjd med widgeten inställningarna klickar du på knappen Spara och widget kommer att visas live på din webbplats. Om du klickar Ta bort så tas widgeten bort."
 
 #: wp-admin/user-new.php:322
 msgid "Email or Username"
@@ -6650,7 +6650,7 @@ msgstr "Uppdateringen börjar. Denna process kan ta ett tag på vissa webbhotell
 
 #: wp-admin/theme-install.php:196 wp-admin/theme-install.php:216
 msgid "Apply Filters"
-msgstr "Använd filter"
+msgstr "Tillämpa filter"
 
 #: wp-admin/includes/theme.php:268
 msgid "Translation Ready"
@@ -6780,7 +6780,7 @@ msgstr "FTP-lösenord"
 
 #: wp-admin/widgets.php:70
 msgid "Many themes show some sidebar widgets by default until you edit your sidebars, but they are not automatically displayed in your sidebar management tool. After you make your first widget change, you can re-add the default widgets by adding them from the Available Widgets area."
-msgstr "Många teman visar ett par widgets som standard tills du redigera din sidopaneler, men de visas inte automatiskt i widgethanteraren. När du gör dina första ändringar för widgetfälten så kan du lägga till motsvarande standardwidgets från panelen Tillgängliga widgets."
+msgstr "Många teman visar ett par widgetar som standard tills du redigera din sidopaneler, men de visas inte automatiskt i widgethanteraren. När du gör dina första ändringar för widgetfälten så kan du lägga till motsvarande standardwidgets från panelen Tillgängliga widgetar."
 
 #: wp-admin/options-permalink.php:30
 msgid "If you pick an option other than Plain, your general URL path with structure tags (terms surrounded by <code>%</code>) will also appear in the custom structure field and your path can be further modified there."
@@ -6804,7 +6804,7 @@ msgstr "För att lägga till nya användare på din webbplats, klicka på knappe
 
 #: wp-admin/widgets.php:62
 msgid "If you want to remove the widget but save its setting for possible future use, just drag it into the Inactive Widgets area. You can add them back anytime from there. This is especially helpful when you switch to a theme with fewer or different widget areas."
-msgstr "Om du vill ta bort widgets men spara dess inställningar för framtida användning, dra helt enkelt bara widgeten till panelen Inaktiva widgets. Du kan när som helst återanvända dessa widgets. Kan vara särskilt användbart när man byter till ett tema med en annan uppsättning widgets."
+msgstr "Om du vill ta bort widgetar men spara dess inställningar för framtida användning, dra helt enkelt bara widgeten till panelen Inaktiva widgetar. Du kan när som helst återanvända dessa widgetar. Kan vara särskilt användbart när man byter till ett tema med en annan uppsättning widgetar."
 
 #: wp-admin/options-general.php:26
 msgid "Most themes display the site title at the top of every page, in the title bar of the browser, and as the identifying name for syndicated feeds. The tagline is also displayed by many themes."
@@ -6849,7 +6849,7 @@ msgstr "Om du raderar en länk så kommer den att tas bort permanent då länkar
 
 #: wp-admin/link-manager.php:53
 msgid "You can add links here to be displayed on your site, usually using <a href=\"%s\">Widgets</a>. By default, links to several sites in the WordPress community are included as examples."
-msgstr "Du kan lägga till länkar här för visning på din webbplats, vanligtvis genom att använda <a href=\"%s\">widgets</a>. Som standard så inkluderas ett antal länkar till webbplatser i WordPress-communityn för att ge exempel."
+msgstr "Du kan lägga till länkar här för visning på din webbplats, vanligtvis genom att använda <a href=\"%s\">widgetar</a>. Som standard så inkluderas ett antal länkar till webbplatser i WordPress-communityn för att ge exempel."
 
 #: wp-admin/plugin-editor.php:145
 msgid "You can use the editor to make changes to any of your plugins&#8217; individual PHP files. Be aware that if you make changes, plugins updates will overwrite your customizations."
@@ -7009,7 +7009,7 @@ msgstr "<strong>Tips:</strong> var försiktig så att din sida inte kraschar nä
 
 #: wp-admin/widgets.php:55
 msgid "Widgets are independent sections of content that can be placed into any widgetized area provided by your theme (commonly called sidebars). To populate your sidebars/widget areas with individual widgets, drag and drop the title bars into the desired area. By default, only the first widget area is expanded. To populate additional widget areas, click on their title bars to expand them."
-msgstr "Widgets är oberoende delar av innehåll som kan placeras i de widgetfält som finns i ditt tema (allmänt kallat sidopanel). För att fylla dina sidopaneler/widgetfält med enskilda widgets, dra och släpp titellisterna till önskat fält. Som standard så är bara den första widgetfältet utvidgat. Om du vill fylla ytterligare widgetfält, klicka på deras titelrad för att expandera dem."
+msgstr "Widgetar är oberoende delar av innehåll som kan placeras i de widgetfält som finns i ditt tema (allmänt kallat sidopanel). För att fylla dina sidopaneler/widgetfält med enskilda widgetar, dra och släpp titellisterna till önskat fält. Som standard så är bara den första widgetfältet utvidgat. Om du vill fylla ytterligare widgetfält, klicka på deras titelrad för att expandera dem."
 
 #: wp-admin/theme-editor.php:28
 msgid "Begin by choosing a theme to edit from the dropdown menu and clicking the Select button. A list then appears of the theme&#8217;s template files. Clicking once on any file name causes the file to appear in the large Editor box."
@@ -7025,7 +7025,7 @@ msgstr "Att aktivera kompatibilitetsläge via Panelinställningar tillåter dig 
 
 #: wp-admin/widgets.php:63
 msgid "Widgets may be used multiple times. You can give each widget a title, to display on your site, but it&#8217;s not required."
-msgstr "Widgets kan användas flera gånger. Du kan ange en titel som visas på din sida för varje widget, men det är inte obligatoriskt."
+msgstr "Widgetar kan användas flera gånger. Du kan ange en titel som visas på din sida för varje widget, men det är inte obligatoriskt."
 
 #: wp-admin/includes/meta-boxes.php:811
 msgid "(no parent)"
@@ -7165,7 +7165,7 @@ msgstr "Sök bland installerade tillägg"
 
 #: wp-admin/nav-menus.php:19
 msgid "Your theme does not support navigation menus or widgets."
-msgstr "Ditt tema har inte stöd för anpassade menyer eller widgets."
+msgstr "Ditt tema har inte stöd för anpassade menyer eller widgetar."
 
 #: wp-admin/includes/import.php:170 wp-admin/tools.php:21
 #: wp-admin/tools.php:103
@@ -7715,11 +7715,11 @@ msgstr "Kategorier:"
 
 #: wp-admin/widgets.php:117
 msgid "Drag widgets here to remove them from the sidebar but keep their settings."
-msgstr "Dra widgets hit för att inaktivera dem på sidan men behålla dess inställningar."
+msgstr "Dra widgetar hit för att inaktivera dem på sidan men behålla dess inställningar."
 
 #: wp-admin/widgets.php:391
 msgid "Available Widgets"
-msgstr "Tillgängliga widgets"
+msgstr "Tillgängliga widgetar"
 
 #: wp-admin/widgets.php:343
 msgid "Error in displaying the widget settings form."
@@ -7748,7 +7748,7 @@ msgstr "Widget %s"
 
 #: wp-admin/widgets.php:114
 msgid "Inactive Widgets"
-msgstr "Inaktiva widgets"
+msgstr "Inaktiva widgetar"
 
 #: wp-admin/includes/class-wp-users-list-table.php:271
 msgid "Change"
@@ -9793,7 +9793,7 @@ msgstr "Alla bildstorlekar"
 
 #: wp-admin/includes/image-edit.php:161
 msgid "Apply changes to:"
-msgstr "Utför ändringar till:"
+msgstr "Verkställ ändringar till:"
 
 #: wp-admin/includes/image-edit.php:156
 msgid "Current thumbnail"

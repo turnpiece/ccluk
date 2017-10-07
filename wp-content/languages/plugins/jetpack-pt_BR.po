@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-05 15:19:11+0000\n"
+"PO-Revision-Date: 2017-09-30 17:54:50+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,9 +15,25 @@ msgstr ""
 msgid "Automatically use first image in post"
 msgstr "Usar automaticamente a primeira imagem do post"
 
+#: modules/theme-tools/content-options/customizer.php:230
+msgid "Learn more about Featured Images"
+msgstr "Leia mais sobre imagens destacadas"
+
 #: modules/theme-tools/content-options/customizer.php:218
 msgid "Display comment link"
 msgstr "Mostrar link do comentário"
+
+#: modules/simple-payments/simple-payments.php:260
+msgid "Simple Payments products"
+msgstr "Produtos com pagamento simplificado"
+
+#: modules/simple-payments/simple-payments.php:259
+msgid "Product"
+msgstr "Produto"
+
+#: modules/simple-payments/simple-payments.php:217
+msgid "Simple Payments orders"
+msgstr "Pedidos com pagamento simplificado"
 
 #: modules/shortcodes/recipe.php:222
 msgctxt "recipe"
@@ -62,6 +78,11 @@ msgstr "Pesquisa melhorada oferecida por Elasticsearch"
 msgctxt "Module Name"
 msgid "Search"
 msgstr "Pesquisa"
+
+#: modules/module-headings.php:107
+msgctxt "Module Description"
+msgid "Enable the Jetpack Mobile theme"
+msgstr "Habilitar o tema Jetpack Mobile"
 
 #: modules/module-headings.php:28
 msgctxt "Module Description"

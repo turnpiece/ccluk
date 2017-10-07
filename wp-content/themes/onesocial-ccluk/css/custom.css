@@ -179,6 +179,11 @@ div#register-page .security-question-section {
 	font-size: 18px;
 }
 
+.homepage-section-title > h4 {
+	font-size: 24px;
+	text-transform: uppercase;
+}
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
