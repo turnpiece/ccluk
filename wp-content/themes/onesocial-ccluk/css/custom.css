@@ -122,12 +122,19 @@ textarea {
 
 #buddypress #group-settings-form input[type="submit"], 
 #buddypress .standard-form div.submit input,
+input[type="submit"],
+.vc_btn3.vc_btn3-color-juicy-pink, 
+.vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
+	border-radius: 5px;
+	background-color: #54ae68;
+}
+
+#buddypress #group-settings-form input[type="submit"], 
+#buddypress .standard-form div.submit input,
 input[type="submit"] {
 	border: none;
-	border-radius: 5px;
 	padding: 12px 24px;
 	color: #fff !important;
-	background-color: #54ae68;
 }
 
 #save_as_draft:hover, 
@@ -155,11 +162,6 @@ div#register-page .security-question-section {
 	color: rgba(0, 0, 0, 0.8);
 }
 
-.vc_btn3.vc_btn3-color-juicy-pink, 
-.vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
-	border-radius: 5px;
-}
-
 .popup-content {
 	background: rgba( 255, 255, 255, 0.6 );
 }
@@ -168,6 +170,12 @@ div#register-page .security-question-section {
 .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
 	padding: 10px 20px 15px;
 	background: #fff;
+	font-size: 18px;
+}
+
+.widget-area .widget p, 
+.widget-area .widget li, 
+.widget-area .widget .textwidget {
 	font-size: 18px;
 }
 
