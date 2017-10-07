@@ -16,7 +16,7 @@
  *
  * @since OneSocial Child Theme 1.0.0
  */
-function onesocial_ccluk_theme_setup()
+function ccluk_theme_setup()
 {
   /**
    * Makes child theme available for translation.
@@ -28,18 +28,18 @@ function onesocial_ccluk_theme_setup()
   load_theme_textdomain( 'onesocial', get_stylesheet_directory() . '/languages' );
 
   // Translate text from the CHILD theme only.
-  // Change 'onesocial' instances in all child theme files to 'onesocial_ccluk_theme'.
-  // load_theme_textdomain( 'onesocial_ccluk_theme', get_stylesheet_directory() . '/languages' );
+  // Change 'onesocial' instances in all child theme files to 'ccluk_theme'.
+  // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
 
 }
-add_action( 'after_setup_theme', 'onesocial_ccluk_theme_setup' );
+add_action( 'after_setup_theme', 'ccluk_theme_setup' );
 
 /**
  * Enqueues scripts and styles for child theme front-end.
  *
  * @since OneSocial Child Theme  1.0.0
  */
-function onesocial_ccluk_theme_scripts_styles()
+function ccluk_theme_scripts_styles()
 {
   /**
    * Scripts and Styles loaded by the parent theme can be unloaded if needed
@@ -55,7 +55,7 @@ function onesocial_ccluk_theme_scripts_styles()
    */
   wp_enqueue_style( 'onesocial-ccluk-custom', get_stylesheet_directory_uri().'/css/custom.css' );
 }
-add_action( 'wp_enqueue_scripts', 'onesocial_ccluk_theme_scripts_styles', 9999 );
+add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 
 
 /****************************** CUSTOM FUNCTIONS ******************************/
@@ -499,3 +499,19 @@ function boss_generate_option_css() {
 
 /* Add Action */
 add_action( 'wp_head', 'boss_generate_option_css', 99 );
+
+// create news post type
+function ccluk_create_news_post_type() {
+  register_post_type( 'ccluk_news',
+    array(
+      'labels' => array(
+        'name' => __( 'News' ),
+        'singular_name' => __( 'News' )
+      ),
+      'public' => true,
+      'has_archive' => true,
+      'rewrite' => array('slug' => 'news'),
+    )
+  );
+}
+add_action( 'init', 'ccluk_create_news_post_type' );
