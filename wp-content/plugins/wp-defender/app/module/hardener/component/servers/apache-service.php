@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Hardener\Component\Servers;
 
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
 use WP_Defender\Module\Hardener\IRule_Service;
 use WP_Defender\Module\Hardener\Rule_Service;
@@ -64,18 +65,19 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
 				sprintf( __( "The file %s is not writeable", wp_defender()->domain ), $htPath ) );
 		}
-		$htConfig = file( $htPath );
-		$default  = array(
+		$htConfig 	= file( $htPath );
+		$deny 		= $this->generateHtAccessRule( false );
+		$allow 		= $this->generateHtAccessRule( true );
+		$default  	= array(
 			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
 			'<Files *.php>' . PHP_EOL .
-			'Order allow,deny' . PHP_EOL .
-			'Deny from all' . PHP_EOL .
+			$deny  .
 			'</Files>' . PHP_EOL,
 			'<Files wp-tinymce.php>' . PHP_EOL .
-			'Allow from all' . PHP_EOL .
+			$allow  .
 			'</Files>' . PHP_EOL,
 			'<Files ms-files.php>' . PHP_EOL .
-			'Allow from all' . PHP_EOL .
+			$allow  .
 			'</Files>' . PHP_EOL,
 			'## WP Defender - End ##' . PHP_EOL
 		);
@@ -107,12 +109,13 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
 				sprintf( __( "The file %s is not writeable", wp_defender()->domain ), $htPath ) );
 		}
-		$htConfig = file( $htPath );
-		$default  = array(
+		$htConfig 	= file( $htPath );
+		$deny 		= $this->generateHtAccessRule( false );
+		$allow 		= $this->generateHtAccessRule( true );
+		$default  	= array(
 			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
 			'<Files *.php>' . PHP_EOL .
-			'Order allow,deny' . PHP_EOL .
-			'Deny from all' . PHP_EOL .
+			$deny .
 			'</Files>' . PHP_EOL,
 			'## WP Defender - End ##' . PHP_EOL
 		);
@@ -125,7 +128,7 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 				$file_path = trim( preg_replace('/\s\s+/', ' ', $file_path ) ); //remove trailing new lines
 				if ( !empty( $file_path ) ) {
 					$custom_exclude[] = '<Files ' . $file_path . '> '. PHP_EOL .
-										'Allow from all' . PHP_EOL .
+										$allow  .
 										'</Files>' . PHP_EOL;
 				}
 			}
@@ -157,12 +160,12 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
 				sprintf( __( "The file %s is not writeable", wp_defender()->domain ), $htPath ) );
 		}
-		$htConfig = file_get_contents( $htPath );
-		$default  = array(
-			'## WP Defender - Protect PHP Executed ##' . PHP_EOL,
+		$htConfig 	= file_get_contents( $htPath );
+		$deny 		= $this->generateHtAccessRule( false );
+		$default  	= array(
+			PHP_EOL .'## WP Defender - Protect PHP Executed ##' . PHP_EOL,
 			'<Files *.php>' . PHP_EOL .
-			'Order allow,deny' . PHP_EOL .
-			'Deny from all' . PHP_EOL .
+			$deny  .
 			'</Files>' . PHP_EOL,
 			'## WP Defender - End ##' . PHP_EOL
 		);
@@ -188,22 +191,29 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
 				sprintf( __( "The file %s is not writeable", wp_defender()->domain ), $htPath ) );
 		}
-		$htConfig = file_get_contents( $htPath );
-		$default  = array(
-			'## WP Defender - Protect PHP Executed ##' . PHP_EOL,
+		$htConfig 	= file_get_contents( $htPath );
+		$deny 		= $this->generateHtAccessRule( false );
+		$allow 		= $this->generateHtAccessRule( true );
+		$default  	= array(
+			PHP_EOL . '## WP Defender - Protect PHP Executed ##' . PHP_EOL,
 			'<Files *.php>' . PHP_EOL .
-			'Order allow,deny' . PHP_EOL .
-			'Deny from all' . PHP_EOL .
+			$deny  .
 			'</Files>' . PHP_EOL,
 			'<Files wp-tinymce.php>' . PHP_EOL .
-			'Allow from all' . PHP_EOL .
+			$allow  .
 			'</Files>' . PHP_EOL,
 			'<Files ms-files.php>' . PHP_EOL .
-			'Allow from all' . PHP_EOL .
+			$allow  .
 			'</Files>' . PHP_EOL,
 			'## WP Defender - End ##' . PHP_EOL
 		);
-		$htConfig = str_replace( implode( '', $default ), '', $htConfig );
+
+		preg_match_all('/## WP Defender(.*?)## WP Defender - End ##/s', $htConfig, $matches);
+		if ( is_array( $matches ) && count( $matches ) > 0 ) {
+			$htConfig = str_replace( implode( '', $matches[0] ), '', $htConfig );
+		} else {
+			$htConfig = str_replace( implode( '', $default ), '', $htConfig );
+		}
 		$htConfig = trim( $htConfig );
 		file_put_contents( $htPath, $htConfig, LOCK_EX );
 	}
@@ -264,6 +274,29 @@ class Apache_Service extends Rule_Service implements IRule_Service {
 	 */
 	public function getNewHtConfig() {
 		return $this->new_htconfig;
+	}
+
+	/**
+	 * Return the correct apache rules for allow/deny
+	 *
+	 * @return String
+	 */
+	protected function generateHtAccessRule( $allow = true ) {
+		$version = Utils::instance()->determineApacheVersion();
+		if ( floatval( $version ) >= 2.4 ) {
+			if ( $allow ) {
+				return 'Require all granted' . PHP_EOL;
+			} else {
+				return 'Require all denied' . PHP_EOL;
+			}
+		} else {
+			if ( $allow ) {
+				return 'Allow from all' . PHP_EOL;
+			} else {
+				return 'Order allow,deny' . PHP_EOL .
+				'Deny from all' . PHP_EOL;
+			}
+		}
 	}
 }
 ?>

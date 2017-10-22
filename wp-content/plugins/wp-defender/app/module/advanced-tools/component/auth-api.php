@@ -6,6 +6,7 @@
 namespace WP_Defender\Module\Advanced_Tools\Component;
 
 use Hammer\Base\Component;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
 
 class Auth_API extends Component {
@@ -150,10 +151,27 @@ class Auth_API extends Component {
 		if ( ! $user instanceof \WP_User ) {
 			return false;
 		}
-		$settings           = Auth_Settings::instance();
-		$allowedForThisRole = array_intersect( $settings->userRoles, $user->roles );
+		$settings = Auth_Settings::instance();
+		if ( 0 === count( $user->roles ) ) {
+			return true;
+		}
 
-		return count( $allowedForThisRole ) > 0;
+		if ( Utils::instance()->isActivatedSingle() ) {
+			$allowedForThisRole = array_intersect( $settings->userRoles, $user->roles );
+
+			return count( $allowedForThisRole ) > 0;
+		} else {
+			$blogs     = get_blogs_of_user( $user->ID );
+			$userRoles = array();
+			foreach ( $blogs as $blog ) {
+				//get user roles for this blog
+				$u         = new \WP_User( $user->ID, '', $blog->userblog_id );
+				$userRoles = array_merge( $u->roles, $userRoles );
+			}
+			$allowedForThisRole = array_intersect( $settings->userRoles, $userRoles );
+
+			return count( $allowedForThisRole ) > 0;
+		}
 	}
 
 	/**

@@ -48,6 +48,10 @@ textarea {
 	padding: 12px;
 }
 
+h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
+	margin-bottom: 16px;
+}
+
 .bluebox {
 	width: 100%;
 	color: #fff;
@@ -144,6 +148,10 @@ input[type="submit"] {
 .vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat:hover {
 	color: #000;
 	background-color: #54ae68;
+}
+
+.vc_gitem-post-data {
+	margin-bottom: 0;
 }
 
 .vc_separator .vc_sep_holder {

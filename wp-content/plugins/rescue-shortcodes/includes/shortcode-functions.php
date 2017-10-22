@@ -81,14 +81,26 @@ if( !function_exists('rescue_button_shortcode') ) {
 			'icon_left'			=> '',
 			'icon_right'		=> '',
 			'visibility'		=> 'all',
-		), $atts ) );
 
+			 // New icon
+			'icon_enabled'  	=> '',
+			'icon_type'  		=> '',
+			'icon_size' 		=> '',
+			'icon_rotate' 		=> '',
+			'icon_flip' 		=> '',
+			'icon_animated' 	=> '',
+			'icon_color' 		=> '',
+			'icon_margin'		=> '',
+			
+		), $atts ) );
+		
 		$rel = ( $rel ) ? 'rel="'.$rel.'"' : NULL;
 
 		$button = NULL;
 
 		$button .= '<a style="background: ' . $colorhex . ';border-radius: ' . $border_radius . ' " href="' . $url . '" class="rescue-button ' . $color . ' '. $class .' rescue-'. $visibility .'" target="_'.$target.'" title="'. $title .'" '. $rel .'>';
 			$button .= '<span class="rescue-button-inner">';
+				if ( $icon_enabled == true ) $button .=  RescueButtonIcon( $atts ); 
 				if ( $icon_left ) $button .= '<span class="rescue-button-icon-left icon-'. $icon_left .'"></span>';
 				$button .= $content;
 				if ( $icon_right ) $button .= '<span class="rescue-button-icon-right icon-'. $icon_right .'"></span>';
@@ -383,6 +395,37 @@ if (! function_exists( 'RescueFontAwesome' ) ) :
 	}
 
 	add_shortcode('icon', 'RescueFontAwesome');
+endif;
+
+if (! function_exists( 'RescueButtonIcon' ) ) :
+	function RescueButtonIcon( $atts ) {
+
+	    extract(shortcode_atts(array(
+	    'icon_type'  		=> '',
+	    'icon_size' 		=> '',
+	    'icon_rotate' 		=> '',
+	    'icon_flip' 		=> '',
+	    'icon_margin' 		=> '15px',
+	    'icon_animated' 	=> '',
+	    'icon_color' 		=> '',
+
+	    ), $atts));
+
+		// load scripts
+		wp_enqueue_style('font_awesome');
+
+	    $icon_type = ($icon_type) ? 'fa-'.$icon_type. '' : '';
+	    $icon_size = ($icon_size) ? 'fa-'.$icon_size. '' : '';
+	    $icon_rotate = ($icon_rotate) ? 'fa-rotate-'.$icon_rotate. '' : '';
+	    $icon_flip = ($icon_flip) ? 'fa-flip-'.$icon_flip. '' : '';
+	    $icon_margin = ($icon_margin) ? ''.$icon_margin. '' : '';
+	    $icon_animated = ($icon_animated) ? 'fa-spin' : '';
+	    $icon_color = ($icon_color) ? ''.$icon_color. '' : '';
+
+	    $theAwesomeFont = '<i style="color:'.$icon_color.'; margin-right:'.$icon_margin.'"  class="fa '.sanitize_html_class($icon_type).' '.sanitize_html_class($icon_size).' '.sanitize_html_class($icon_rotate).' '.sanitize_html_class($icon_flip).' '.sanitize_html_class($icon_pull).' '.sanitize_html_class($icon_animated).'"></i>';
+
+	    return $theAwesomeFont;
+	}
 endif;
 
 /**

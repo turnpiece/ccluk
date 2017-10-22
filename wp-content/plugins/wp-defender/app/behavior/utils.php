@@ -599,6 +599,48 @@ class Utils extends Behavior {
 	}
 
 	/**
+	 * Determine the Apache version
+	 * Most web servers have apache_get_version disabled, so we just get a simple curl of the headers
+	 *
+	 * @return String
+	 */
+	public function determineApacheVersion() {
+		if ( !function_exists( 'apache_get_version' ) ) {
+			$version 		= '2.2'; //default supported is 2.2
+			$url     		= home_url();
+			$apache_version = get_site_transient( 'wd_util_apache_version' );
+			if ( ! is_array( $apache_version ) ) {
+				$apache_version = array();
+			}
+
+			if ( isset( $apache_version[ $url ] ) && ! empty( $apache_version[ $url ] ) ) {
+				return strtolower( $apache_version[ $url ] );
+			}
+
+			$apache_version[ $url ] = $version; //default is 2.2
+
+			if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
+				$server = explode( " ", $_SERVER['SERVER_SOFTWARE'] );
+				if ( is_array( $server ) && count( $server ) > 1 ) {
+					$server = $server[0];
+					$server = explode( "/", $server );
+					if ( is_array( $server ) && count( $server ) > 1 ) {
+						$version 				= $server[1];
+						$apache_version[ $url ] = $version;
+					}
+				}
+			}
+
+			set_site_transient( 'wd_util_apache_version', $apache_version, 3600 );
+		} else {
+			$version = apache_get_version();
+			$version = explode( '/', $version );
+			$version = $version[1];
+		}
+		return $version;
+	}
+
+	/**
 	 * @return string
 	 */
 	public function getDefUploadDir() {
@@ -679,7 +721,7 @@ class Utils extends Behavior {
 				'vulnerability_db' => 0,
 				'file_suspicious'  => 0
 			);
-			$res['last_completed'] = null;
+			$res['last_completed'] = false;
 		}
 
 		$res['scan_items'] = $scanItems;
@@ -691,7 +733,7 @@ class Utils extends Behavior {
 
 		$lastLockout = Login_Protection_Api::getLastLockout();
 		if ( is_null( $lastLockout ) ) {
-			$lastLockout = __( "Never", wp_defender()->domain );
+			$lastLockout = false;
 		} else {
 			$lastLockout = $lastLockout->date;
 		}

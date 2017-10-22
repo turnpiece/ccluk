@@ -235,7 +235,6 @@ class Main extends Controller {
 			) );
 			die;
 		} else {
-
 			if ( is_user_logged_in() ) {
 				//if current user can logged in, and no blacklisted we don't need to check the ip
 				return;
@@ -395,6 +394,7 @@ class Main extends Controller {
 					'uri'   => $uri
 				), false );
 				$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+				$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
 				$headers        = array(
 					'From: Defender <' . $no_reply_email . '>',
 					'Content-Type: text/html; charset=UTF-8'
@@ -421,6 +421,7 @@ class Main extends Controller {
 					'ip'    => $model->ip,
 				), false );
 				$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+				$no_reply_email = apply_filters( 'wd_lockout_noreply_email', $no_reply_email );
 				$headers        = array(
 					'From: Defender <' . $no_reply_email . '>',
 					'Content-Type: text/html; charset=UTF-8'
@@ -863,8 +864,19 @@ class Main extends Controller {
 		if ( ! $this->checkPermission() ) {
 			return;
 		}
+
 		$totalItems = get_site_option( 'defenderLogsTotal' );
-		$params     = array(
+		$resetFlag  = get_site_option( 'defenderMigrateNeedReset' );
+		if ( $totalItems !== false && $resetFlag === false ) {
+			//reset it
+			delete_site_option( 'defenderLogsTotal' );
+			delete_site_option( 'defenderLogsMovedCount' );
+			update_site_option( 'defenderMigrateNeedReset', 1 );
+			wp_send_json_error( array(
+				'progress' => 0
+			) );
+		}
+		$params = array(
 			'date' => array(
 				'compare' => '>=',
 				'value'   => strtotime( '-30 days' )
@@ -882,10 +894,11 @@ class Main extends Controller {
 			) );
 		}
 
-		$logs = Log_Model_Legacy::findAll( $params, 'id', 'DESC', '0,50' );
-		$logs = array_filter( $logs );
-		$ips  = IP_Model_Legacy::findAll( array(), 'id', 'DESC', '0,50' );
-		$ips  = array_filter( $ips );
+		$logs          = Log_Model_Legacy::findAll( $params, 'id', 'DESC', '0,50' );
+		$logs          = array_filter( $logs );
+		$ips           = IP_Model_Legacy::findAll( array(), 'id', 'DESC', '0,50' );
+		$ips           = array_filter( $ips );
+		$internalCount = 0;
 		if ( is_array( $logs ) && count( $logs ) ) {
 			foreach ( $logs as $item ) {
 				$model = new Log_Model();
@@ -895,6 +908,7 @@ class Main extends Controller {
 				$model->save();
 				$item->delete();
 			}
+			$internalCount += count( $logs );
 		}
 
 		if ( is_array( $ips ) && count( $ips ) ) {
@@ -906,6 +920,8 @@ class Main extends Controller {
 				$model->save();
 				$item->delete();
 			}
+
+			$internalCount += count( $ips );
 		}
 
 		if ( empty( $logs ) && empty( $ips ) ) {
@@ -914,15 +930,15 @@ class Main extends Controller {
 			delete_site_option( 'defenderLogsMovedCount' );
 			delete_site_option( 'defenderLockoutNeedUpdateLog' );
 			wp_send_json_success( array(
-				'message' => __( "Thanks for your patience. All sets!", wp_defender()->domain )
+				'message' => __( "Thanks for your patience. All set.", wp_defender()->domain )
 			) );
 		}
 
 		$count = get_site_option( 'defenderLogsMovedCount', 0 );
-		$count += 200;
+		$count += $internalCount;
 		update_site_option( 'defenderLogsMovedCount', $count );
 		wp_send_json_error( array(
-			'progress' => round( ( $count / $totalItems ) * 200, 2 ) > 100 ? 100 : round( ( $count / $totalItems ) * 200, 2 )
+			'progress' => round( ( $count / $totalItems ) * 100, 2 ) > 100 ? 100 : round( ( $count / $totalItems ) * 100, 2 )
 		) );
 	}
 }
