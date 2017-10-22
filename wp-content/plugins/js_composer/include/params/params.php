@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer shortcodes attributes class.
+ * WPBakery WPBakery Page Builder shortcodes attributes class.
  *
  * This class and functions represents ability which will allow you to create attributes settings fields to
  * control new attributes.
  * New attributes can be added to shortcode settings by using param array in wp_map function
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 

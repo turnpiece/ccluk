@@ -39,10 +39,10 @@ function vc_custom_css_admin_notice() {
 	$class = 'notice notice-warning vc_settings-custom-design-notice';
 	$message_important = __( 'Important notice', 'js_composer' );
 	if ( is_object( $current_screen ) && isset( $current_screen->id ) && 'visual-composer_page_vc-color' === $current_screen->id ) {
-		$message = __( 'You have an outdated version of Visual Composer Design Options. It is required to review and save it.', 'js_composer' );
+		$message = __( 'You have an outdated version of WPBakery Page Builder Design Options. It is required to review and save it.', 'js_composer' );
 		$html = '<p><strong>' . esc_html( $message_important ) . '</strong>: ' . esc_html( $message ) . '</p>';
 	} else {
-		$message = __( 'You have an outdated version of Visual Composer Design Options. It is required to review and save it.', 'js_composer' );
+		$message = __( 'You have an outdated version of WPBakery Page Builder Design Options. It is required to review and save it.', 'js_composer' );
 		$btnClass = 'button button-primary button-large vc_button-settings-less';
 		$btnAtts = array(
 			'href="' . admin_url( 'admin.php?page=vc-color' ) . '"',

@@ -26,7 +26,7 @@ function vc_backend_editor_register_pointer( $pointers ) {
 					'target' => '.composer-switch',
 					'options' => array(
 						'content' => sprintf( '<h3> %s </h3> <p> %s </p>',
-							__( 'Welcome to Visual Composer', 'js_composer' ),
+							__( 'Welcome to WPBakery Page Builder', 'js_composer' ),
 							__( 'Choose Backend or Frontend editor.', 'js_composer' )
 						),
 						'position' => array(

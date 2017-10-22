@@ -12,7 +12,7 @@ $vc_role = new Vc_Roles();
 	class="vc_settings-tab-content vc_settings-tab-content-active"<?php echo apply_filters( 'vc_setting-tab-form-' . $tab, '' ) ?>
 	data-vc-roles="form">
 	<div class="tab_intro">
-		<p><?php _e( 'Control user group role access to the features and options of Visual Composer - manage WordPress default and custom roles.', 'js_composer' ) ?></p>
+		<p><?php _e( 'Control user group role access to the features and options of WPBakery Page Builder - manage WordPress default and custom roles.', 'js_composer' ) ?></p>
 	</div>
 	<!-- Settings template start -->
 	<div class="vc_wp-settings">

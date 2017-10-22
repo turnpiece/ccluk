@@ -668,7 +668,7 @@ class Vc_Settings {
 		if ( 'wpb_js_composer_settings_color' === $tab['id'] ) : ?>
 			<div class="tab_intro">
 				<p>
-					<?php _e( 'Here you can tweak default Visual Composer content elements visual appearance. By default Visual Composer is using neutral light-grey theme. Changing "Main accent color" will affect all content elements if no specific "content block" related color is set.', 'js_composer' ) ?>
+					<?php _e( 'Here you can tweak default WPBakery Page Builder content elements visual appearance. By default WPBakery Page Builder is using neutral light-grey theme. Changing "Main accent color" will affect all content elements if no specific "content block" related color is set.', 'js_composer' ) ?>
 				</p>
 			</div>
 		<?php endif;

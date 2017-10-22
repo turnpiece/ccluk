@@ -20,5 +20,5 @@ vc_include_template( 'pages/partials/vc-roles-parts/_part.tpl.php', array(
 	),
 	'main_label' => __( 'Settings options', 'js_composer' ),
 	'custom_label' => __( 'Settings options', 'js_composer' ),
-	'description' => __( 'Control access rights to Visual Composer admin settings tabs (e.g. General Settings, Shortcode Mapper, ...)', 'js_composer' ),
+	'description' => __( 'Control access rights to WPBakery Page Builder admin settings tabs (e.g. General Settings, Shortcode Mapper, ...)', 'js_composer' ),
 ) );

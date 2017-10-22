@@ -36,7 +36,7 @@ class Vc_Vendor_ContactForm7 implements Vc_Vendor_Interface {
 	 */
 	public function addShortcodeSettings( $tag ) {
 		/**
-		 * Add Shortcode To Visual Composer
+		 * Add Shortcode To WPBakery Page Builder
 		 */
 		$cf7 = get_posts( 'post_type="wpcf7_contact_form"&numberposts=-1' );
 

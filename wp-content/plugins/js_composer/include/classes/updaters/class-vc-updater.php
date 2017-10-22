@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer updater
+ * WPBakery WPBakery Page Builder updater
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 
@@ -29,7 +29,7 @@ class Vc_Updater {
 	/**
 	 * @var string
 	 */
-	public $title = 'WPBakery Visual Composer';
+	public $title = 'WPBakery Page Builder';
 
 	/**
 	 * @var bool
@@ -127,7 +127,7 @@ class Vc_Updater {
 			}
 			$url = esc_url( self::getUpdaterUrl() );
 
-			return new WP_Error( 'no_credentials', __( 'To receive automatic updates license activation is required. Please visit <a href="' . $url . '' . '" target="_blank">Settings</a> to activate your Visual Composer.', 'js_composer' ) . ' ' . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', __( 'Got Visual Composer in theme?', 'js_composer' ) ) );
+			return new WP_Error( 'no_credentials', __( 'To receive automatic updates license activation is required. Please visit <a href="' . $url . '' . '" target="_blank">Settings</a> to activate your WPBakery Page Builder.', 'js_composer' ) . ' ' . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', __( 'Got WPBakery Page Builder in theme?', 'js_composer' ) ) );
 		}
 
 		$updater->strings['downloading_package_url'] = __( 'Getting download link...', 'js_composer' );

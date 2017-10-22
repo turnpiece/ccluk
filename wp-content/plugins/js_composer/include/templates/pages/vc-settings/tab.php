@@ -77,7 +77,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 		<div class="vc_settings-activation-deactivation">
 			<?php if ( vc_license()->isActivated() ) : ?>
 				<p>
-					<?php echo __( 'You have activated Visual Composer version which allows you to access all the customer benefits. Thank you for choosing Visual Composer as your page builder. If you do not wish to use Visual Composer on this WordPress site you can deactivate your license below.', 'js_composer' ) ?>
+					<?php echo __( 'You have activated WPBakery Page Builder version which allows you to access all the customer benefits. Thank you for choosing WPBakery Page Builder as your page builder. If you do not wish to use WPBakery Page Builder on this WordPress site you can deactivate your license below.', 'js_composer' ) ?>
 				</p>
 
 				<br/>
@@ -88,7 +88,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 						data-vc-action="deactivation"
 						type="button"
 						id="vc_settings-updater-button">
-						<?php echo __( 'Deactivate Visual Composer', 'js_composer' ) ?>
+						<?php echo __( 'Deactivate WPBakery Page Builder', 'js_composer' ) ?>
 					</button>
 
 					<img src="<?php echo get_admin_url() ?>/images/wpspin_light.gif" class="vc_updater-spinner"
@@ -98,7 +98,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 			<?php else : ?>
 
 				<p>
-					<?php echo __( 'In order to receive all benefits of Visual Composer, you need to activate your copy of the plugin. By activating Visual Composer license you will unlock premium options - <strong>direct plugin updates</strong>, access to <strong>template library</strong> and <strong>official support.</strong>', 'js_composer' ) ?>
+					<?php echo __( 'In order to receive all benefits of WPBakery Page Builder, you need to activate your copy of the plugin. By activating WPBakery Page Builder license you will unlock premium options - <strong>direct plugin updates</strong>, access to <strong>template library</strong> and <strong>official support.</strong>', 'js_composer' ) ?>
 				</p>
 
 				<br/>
@@ -109,7 +109,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 						data-vc-action="activation"
 						type="button"
 						id="vc_settings-updater-button">
-						<?php echo __( 'Activate Visual Composer', 'js_composer' ) ?>
+						<?php echo __( 'Activate WPBakery Page Builder', 'js_composer' ) ?>
 					</button>
 
 					<img src="<?php echo get_admin_url() ?>/images/wpspin_light.gif" class="vc_updater-spinner"
@@ -117,7 +117,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 				</p>
 
 				<p class="description">
-					<?php echo sprintf( __( 'Don\'t have direct license yet? <a href="%s" target="_blank">Purchase Visual Composer license</a>.', 'js_composer' ), esc_url( 'http://bit.ly/vcomposer' ) ) ?>
+					<?php echo sprintf( __( 'Don\'t have direct license yet? <a href="%s" target="_blank">Purchase WPBakery Page Builder license</a>.', 'js_composer' ), esc_url( 'http://bit.ly/vcomposer' ) ) ?>
 				</p>
 
 			<?php endif ?>

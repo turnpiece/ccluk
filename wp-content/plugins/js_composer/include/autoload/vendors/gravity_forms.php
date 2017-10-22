@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @since 4.4 vendors initialization moved to hooks in autoload/vendors.
  *
- * Used to add gravity forms shortcode into visual composer
+ * Used to add gravity forms shortcode into WPBakery Page Builder
  */
 add_action( 'plugins_loaded', 'vc_init_vendor_gravity_forms' );
 function vc_init_vendor_gravity_forms() {

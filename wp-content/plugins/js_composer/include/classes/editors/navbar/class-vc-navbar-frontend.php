@@ -161,7 +161,7 @@ class Vc_Navbar_Frontend extends Vc_Navbar {
 	public function getControlViewPost() {
 		return '<li class="vc_pull-right">'
 		       . '<a href="' . esc_attr( get_permalink( $this->post() ) ) . '" class="vc_icon-btn vc_back-button"'
-		       . ' title="' . esc_attr__( 'Exit Visual Composer edit mode', 'js_composer' ) . '"><i class="vc-composer-icon vc-c-icon-close"></i></a>'
+		       . ' title="' . esc_attr__( 'Exit WPBakery Page Builder edit mode', 'js_composer' ) . '"><i class="vc-composer-icon vc-c-icon-close"></i></a>'
 		       . '</li>';
 	}
 }

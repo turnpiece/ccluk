@@ -1,9 +1,9 @@
 <?php
 /*
-Plugin Name: WPBakery Visual Composer
+Plugin Name: WPBakery Page Builder
 Plugin URI: http://vc.wpbakery.com
 Description: Drag and drop page builder for WordPress. Take full control over your WordPress site, build any layout you can imagine – no programming knowledge required.
-Version: 5.2.1
+Version: 5.4.2
 Author: Michael M - WPBakery.com
 Author URI: http://wpbakery.com
 */
@@ -13,13 +13,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 	die( '-1' );
 }
 /**
- * Current visual composer version
+ * Current WPBakery Page Builder version
  */
 if ( ! defined( 'WPB_VC_VERSION' ) ) {
 	/**
 	 *
 	 */
-	define( 'WPB_VC_VERSION', '5.2.1' );
+	define( 'WPB_VC_VERSION', '5.4.2' );
 }
 
 /**
@@ -40,7 +40,7 @@ class Vc_Manager {
 	 *  none - current status is unknown, default mode;
 	 *  page - simple wp page;
 	 *  admin_page - wp dashboard;
-	 *  admin_frontend_editor - visual composer front end editor version;
+	 *  admin_frontend_editor - WPBakery Page Builder front end editor version;
 	 *  admin_settings_page - settings page
 	 *  page_editable - inline version for iframe in front end editor;
 	 *
@@ -49,7 +49,7 @@ class Vc_Manager {
 	 */
 	private $mode = 'none';
 	/**
-	 * Enables Visual Composer to act as the theme plugin.
+	 * Enables WPBakery Page Builder to act as the theme plugin.
 	 *
 	 * @since 4.2
 	 * @var bool
@@ -69,7 +69,7 @@ class Vc_Manager {
 	 */
 	private $paths = array();
 	/**
-	 * Default post types where to activate visual composer meta box settings
+	 * Default post types where to activate WPBakery Page Builder meta box settings
 	 * @since 4.2
 	 * @var array
 	 */
@@ -132,7 +132,7 @@ class Vc_Manager {
 	private function __construct() {
 		$dir = dirname( __FILE__ );
 		/**
-		 * Define path settings for visual composer.
+		 * Define path settings for WPBakery Page Builder.
 		 *
 		 * APP_ROOT        - plugin directory.
 		 * WP_ROOT         - WP application root directory.
@@ -493,7 +493,7 @@ class Vc_Manager {
 	}
 
 	/**
-	 * Returns list of default post types where user can use visual composer editors.
+	 * Returns list of default post types where user can use WPBakery Page Builder editors.
 	 *
 	 * @since  4.2
 	 * @access public
@@ -703,7 +703,7 @@ class Vc_Manager {
 	}
 
 	/**
-	 * Visual Composer.
+	 * WPBakery Page Builder.
 	 *
 	 * @since  4.2
 	 * @access public
@@ -885,7 +885,7 @@ class Vc_Manager {
 }
 
 /**
- * Main Visual composer manager.
+ * Main WPBakery Page Builder manager.
  * @var Vc_Manager $vc_manager - instance of composer management.
  * @since 4.2
  */

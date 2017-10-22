@@ -1,3 +1,26 @@
+12.10.2017 - ver 5.4
+   - Update: WPBakery Page Builder logo update
+   - Update: Navigation bar color schema in Backend and Grid Builder
+   - Update: TweetMe text update with WPBakery data
+   - Update: FontAwesome library update
+   - Update: PO/MO files with new strings
+   - Fix: Param saving dependant on checkbox
+   - Fix: Extra javascript loading with Yoast SEO activated
+   - Fix: Double shortcode parsing in WPB field
+   - Fix: Checkbox param value repeat inside param group
+   - Fix: Fixed encodeUriComponent
+   - Fix: Device icons for column responsiveness
+   - Fix: WPML vendor
+   - Fix: ZigZag separator display on Firefox
+   - Fix: Element presets category merge
+
+15.09.2017 - ver 5.3
+   - Update: WordPress native color interface
+   - Update: New interface icons
+   - Update: New SVG element icons
+   - Update: FontAwesome library is updated
+   - Update: With new color scheme comes new name WPBakery Page Builder
+
 03.08.2017 - ver 5.2.1
    Update: Function add_shortcode_param returned
    Update: Function get_row_css_class returned
@@ -23,7 +46,7 @@
    Fix: templates user access
    Fix: shortcode saving in fe adds 0=""
    Fix: duplicate icons when adding custom icon font
-   Fix: subscriber see Visual Composer welcome page
+   Fix: subscriber see WPBakery Page Builder welcome page
    Fix: WPML vendor issue
    Fix: page returns 0 when clicking add to cart from grid template
    Fix: shortcode regexp for dash in shortcode name
@@ -70,7 +93,7 @@
    Fixed: Warning for array_merge in vc_gitem_template_attribute_post_image_url
 
 09.11.2016 - ver 5.0
-   Added: Visual Composer Template Library with downloadable templates
+   Added: WPBakery Page Builder Template Library with downloadable templates
    Added: Section element to combine rows
    Added: Material icon set to icon libraries
    Added: Animate CSS animations
@@ -201,7 +224,7 @@
    - Fixed: "Editing an existing Post Grid, page IDs are displayed instead of titles."
    - Fixed: Extra CSS class name for single image in post grid
    - Fixed: Third elements not working in templates
-   - Fixed: Visual Composer button is now added even if psot doesn't support title
+   - Fixed: WPBakery Page Builder button is now added even if psot doesn't support title
    - Fixed: Yoast + single image without default value
    - Fixed: Grid builder on multisite
    - Fixed: 404 error on WP multisite
@@ -217,7 +240,7 @@
    - Fixed: Equal height in Safari
 
 7.12.2015 - ver 4.9
-   - Improved: Now Visual Composer is faster at least for 30%
+   - Improved: Now WPBakery Page Builder is faster at least for 30%
    - Added: Equal height columns
    - Added: Vertical alignment of element within a column
    - Added: Vertical aligment of column within a row
@@ -258,7 +281,7 @@
    - Fixed: Grid Element display price prefix $ per WooCommerce Settings
 
 22.10.2015 - ver 4.8
-   - New: Advanced Role manager for Visual Composer. Now you can fine tune access to Visual Composer functionality based on user roles
+   - New: Advanced Role manager for WPBakery Page Builder. Now you can fine tune access to WPBakery Page Builder functionality based on user roles
    - New: New interface with template preview option in Default Templates and My Templates sections
    - New: No need for license activation on localhost
    - New: "vc_register_settings_preset" action is added. Theme authors can add elements presets through the inner API
@@ -314,7 +337,7 @@
    - New: Param Window is resizeable
    - New: Pageable Content Element based on Tabs added
    - New: Single Image Zoom option added to On Click Action
-   - Improved: Pie Chart element has new Visual Composer colors
+   - Improved: Pie Chart element has new WPBakery Page Builder colors
    - Improved: Separator width values added
    - Improved: Custom Heading has H1 tag as an option
    - Improved: Single Image and Image Gallery Source for External Image Added
@@ -382,7 +405,7 @@
    - Grid filter logic improved
    - JS script logic for templates improved
    - Bug with wpLink fixed
-   - Visual Composer settings link in multisite fixed
+   - WPBakery Page Builder settings link in multisite fixed
 
 27.04.2015 - ver 4.5
    - New: Parallax option for row added
@@ -472,12 +495,12 @@
    - Drag icon for column added
    - Accordion title replacement bug fixed
    - Row can be stretched: full width, full width with content, full width with content (no paddings) Note: This won't work with overflow: hidden
-   - EasyTables is fully compatible with Visual Composer Frontend
+   - EasyTables is fully compatible with WPBakery Page Builder Frontend
    - Compatibility with Yoast SEO
    - Multiple fields param group added
    - Undefined offset warning removed if single image with incorrect id
    - Shortcode automapper regexp improved for better handling shortcodes without params
-   - Welcome screen typography following Visual Comopser design
+   - Welcome screen typography following WPBakery Page Builder design
    - Saving post with custom Query overriding title and slug bug fixed
    - Tour element autorotate option fixed
    - Mixed content errors in https mode removed
@@ -543,7 +566,7 @@
    - Localizations are loaded correctly now
    - Pie chart element js error fixed
    - Notifier about unsaved changes added to the Custom CSS box
-   - Custom CSS in Settings->Visual Composer->Custom CSS fixed
+   - Custom CSS in Settings->WPBakery Page Builder->Custom CSS fixed
    - CSS editor accept css3 units
    - Removed "Activation notice" if vc_set_as_theme() called
    - front_enqueue_css and front_enqueue_js added in vc_map() http://kb.wpbakery.com/index.php?title=Vc_map
@@ -597,7 +620,7 @@
    - IE10 fix for TinyMCE
 
 16.04.2014 - ver 4.1
-   - New: Shortcode Mapper, map any third party shortcode to Visual Composer with an easy to use interface
+   - New: Shortcode Mapper, map any third party shortcode to WPBakery Page Builder with an easy to use interface
    - New: Design options for Row, Columns, Text block, Single image and Video block elements. Add baackground color/image, paddings, border and margins. Tons of variations. You are a designer now!
    - New: Now you can group your params in tabs
    - White color for button added
@@ -610,7 +633,7 @@
    - Logic behind license activation button changed. Clicking activate button will save all fields
    - Image carousel popup next/prev links show correct images
    - Mobile screen width setting in design options updated to new less/css
-   - "Show only Visual Composer" in "User groups access rules" fixed
+   - "Show only WPBakery Page Builder" in "User groups access rules" fixed
    - Extra CSS class appended to the separator element
 
 27.03.2014 - ver 4.0.4
@@ -622,11 +645,11 @@
    Bug fix round
    - Cloning elements in frontend is handled better
    - Enable/Disable Respinsivness in the backend from settings page
-   - "Edit with Visual Composer" button in the admin bar now shows for correct user roles (who have access rights)
+   - "Edit with WPBakery Page Builder" button in the admin bar now shows for correct user roles (who have access rights)
    - vc_disable_frontend() function enhanced
    - "TypeError: $(...).wpColorPicker" error illuminated
    - VC button in the backend reeived a facelift
-   - Visual Composer suppor for child themes improved
+   - WPBakery Page Builder suppor for child themes improved
    - Element dependencies tweaked to work with multiple values
 
 11.03.2014 - ver 4.0.2
@@ -691,7 +714,7 @@
    - Conflict with Gantry framework fixed
    - Conflict with QuForm plugin fixed
    - Single image url fixed
-   - Third party shortcodes wraps in the text block when switching to Visual Composer mode
+   - Third party shortcodes wraps in the text block when switching to WPBakery Page Builder mode
    - .po/.mo files updated
 
 07.10.2013 - ver 3.6.14.1
@@ -752,7 +775,7 @@
    - Quotes in Accordion/Tour/Tabs now works
    - Category filter works now after wpb_remove() function call
    - Some users had "unexpected T_VAR in loop templates.html" error - fixed
-   - "Show only Visual Composer" permission fixed
+   - "Show only WPBakery Page Builder" permission fixed
 
 17.06.2013 - ver 3.6.5
    - New: Shortcode Template logic. More here: http://kb.wpbakery.com/index.php?title=Shortcode_Templates_(markup)
@@ -783,7 +806,7 @@
    - #tb_window z-index increased
 
 24.05.2013 - ver 3.6.2
-   - Safe switching added. If you had content before switching to Visual Composer mode, it will be wrapped in Text Block now
+   - Safe switching added. If you had content before switching to WPBakery Page Builder mode, it will be wrapped in Text Block now
    - CSS conflict resulting in cutting "Add element" and element edit pages fixed
    - Some localization strings fixed
 
@@ -810,7 +833,7 @@
    - prettyPhoto updated (3.1.5)
    - .po & .mo files updated
    - Overal files cleanup (plugin file size reduced)
-   - And a lot more small thigs that will make your experience with Visual Composer better
+   - And a lot more small thigs that will make your experience with WPBakery Page Builder better
 
 15.02.2013 - ver 3.5.3
    - Image selection i18nLocale fixed
@@ -853,19 +876,18 @@
 
 29.12.2012 - ver 3.4.9
    - Introduced developers methods more info http://kb.wpbakery.com/index.php?title=Category:Visual_Composer
-   - Exceprts now are working for posts/pages created with Visual Composer
+   - Exceprts now are working for posts/pages created with WPBakery Page Builder
    - Nivo slider updated (ver. 3.1)
-   - Responsive css can be turned off from Visual Composer settings page
-   -
+   - Responsive css can be turned off from WPBakery Page Builder settings page
 
 15.11.2012 - ver 3.4.8
-   - fix for qTranslate (after recent update qTranslate was hiding Visual Composer button)
+   - fix for qTranslate (after recent update qTranslate was hiding WPBakery Page Builder button)
    - new colorpicker param type added
    - Template system updated
 
 09.11.2012 - ver 3.4.7
    - Updates notifier added (beta)
-   - Toggling between Visual Composer/Classic view now works as it should be (content is updating correctly)
+   - Toggling between WPBakery Page Builder/Classic view now works as it should be (content is updating correctly)
 
 05.11.2012 - ver 3.4.6
    - Raw HTML and Raw js content blocks updated
@@ -938,9 +960,9 @@
    - Sorting in Teaser grid added
    - Extra class name for containers added
    - .js files outputs in footer
-   - If user switch Visual Composer mode when there's text already, then this text is wrapped in text block.
+   - If user switch WPBakery Page Builder mode when there's text already, then this text is wrapped in text block.
    - Administrator now can set user roles related settings in Visual Compsoer->Settings
-   - Administrator now can set Visual Composer as default editor (per user role)
+   - Administrator now can set WPBakery Page Builder as default editor (per user role)
    - Image gallery: link target added
    - Single image element: link option added
    - Posts slider: removed string "No featured image set" if no image is set
@@ -1003,13 +1025,13 @@
 
 20.12.2011
    - "no link" in VC teaser grid
-   - "Read more" button removed & image wrapped in span; Visual composer now switching default WP content area to Visual mode automatically
+   - "Read more" button removed & image wrapped in span; WPBakery Page Builder now switching default WP content area to Visual mode automatically
 
 12.12.2011
    - WP 3.3 compatibility;
    - .clear class renamed to .vc_clear;
    - Now tabs and tour slides have classname, as a result they can be targeted with css;
-   - If Visual Composer settings are empty, then columns are percent based.
+   - If WPBakery Page Builder settings are empty, then columns are percent based.
 
 22.09.2011
    - New content block added - "Text separator".

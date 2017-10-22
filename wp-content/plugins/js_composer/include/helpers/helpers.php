@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer helpers functions
+ * WPBakery WPBakery Page Builder helpers functions
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 
@@ -485,7 +485,7 @@ if ( ! function_exists( 'wpb_resize' ) ) {
 
 if ( ! function_exists( 'wpb_debug' ) ) {
 	/**
-	 * Returns bool if wpb_debug is provided in url - set visual composer debug mode.
+	 * Returns bool if wpb_debug is provided in url - set WPBakery Page Builder debug mode.
 	 * Used for example in shortcodes (end block comment for example)
 	 * @since 4.2
 	 * @return bool

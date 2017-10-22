@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Vc_Access
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  * @since 4.8
  */
 abstract class Vc_Access {

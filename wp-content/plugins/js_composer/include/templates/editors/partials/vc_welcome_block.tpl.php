@@ -17,7 +17,7 @@ $templates_total_count = count( $total_templates );
 	?>
 	<div id="vc_no-content-helper" class="vc_welcome vc_ui-font-open-sans">
 		<div class="vc_welcome-brand vc_welcome-visible-e">
-			<img src="<?php echo vc_asset_url( 'vc/logo/64x64.png' ); ?>" alt="">
+			<img src="<?php echo vc_asset_url( 'vc/logo/wpb-logo.svg' ); ?>" alt="">
 		</div>
 		<div class="vc_welcome-header vc_welcome-visible-e">
 			<?php _e( 'You have blank page <br> Start adding content or templates', 'js_composer' ) ?>
@@ -35,8 +35,8 @@ $templates_total_count = count( $total_templates );
 				   class="vc_general vc_ui-button vc_ui-button-shape-rounded vc_ui-button-info vc_welcome-visible-e"
 				   title="<?php _e( 'Add Element', 'js_composer' ) ?>"
 				   data-vc-element="add-element-action" href="#">
-					<i class="vc_ui-icon-pixel vc_ui-icon-pixel-control-plus"></i>
-					<?php _e( 'Add element', 'js_composer' ) ?>
+					<i class="vc-composer-icon vc-c-icon-add_element"></i>
+					<span><?php _e( 'Add element', 'js_composer' ) ?></span>
 				</a>
 			<?php endif; ?>
 			<?php if ( vc_user_access()
@@ -45,11 +45,11 @@ $templates_total_count = count( $total_templates );
 				->get()
 			) :  ?>
 				<a id="vc_no-content-add-text-block"
-				   class="vc_general vc_ui-button vc_ui-button-shape-rounded vc_ui-button-success"
+				   class="vc_general vc_ui-button vc_ui-button-shape-rounded vc_ui-button-info"
 				   data-vc-element="add-text-block-action" href="#"
 				   title="<?php _e( 'Add text block', 'js_composer' ) ?>">
-					<i class="vc_ui-icon-pixel vc_ui-icon-pixel-control-edit"></i>
-					<?php _e( 'Add Text Block', 'js_composer' ) ?>
+					<i class="vc-composer-icon vc-c-icon-text-block"></i>
+					<span><?php _e( 'Add Text Block', 'js_composer' ) ?></span>
 				</a>
 			<?php endif ?>
 			<?php if ( $templates_total_count > 0 && vc_user_access()
@@ -58,9 +58,9 @@ $templates_total_count = count( $total_templates );
 					->get()
 			) :  ?>
 				<a id="vc_templates-more-layouts"
-				   class="vc_general vc_ui-button vc_ui-button-shape-rounded vc_ui-button-warning" href="#">
-					<i class="vc_ui-icon-pixel vc_ui-icon-pixel-control-template"></i>
-					<?php echo __( 'Add template', 'js_composer' ); ?>
+				   class="vc_general vc_ui-button vc_ui-button-shape-rounded vc_ui-button-info" href="#">
+					<i class="vc-composer-icon vc-c-icon-add_template"></i>
+					<span><?php echo __( 'Add template', 'js_composer' ); ?></span>
 				</a>
 			<?php endif ?>
 		</div>

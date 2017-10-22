@@ -252,7 +252,7 @@ function vc_gitem_has_content( $content ) {
 }
 
 /**
- * Add sub page to Visual Composer pages
+ * Add sub page to WPBakery Page Builder pages
  *
  * @since 4.5
  */

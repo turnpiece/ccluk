@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer front end editor
+ * WPBakery WPBakery Page Builder front end editor
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 
@@ -454,7 +454,7 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 	 * @return string
 	 */
 	function setEditorTitle() {
-		return sprintf( __( 'Edit %s with Visual Composer', 'js_composer' ), $this->post_type->labels->singular_name );
+		return sprintf( __( 'Edit %s with WPBakery Page Builder', 'js_composer' ), $this->post_type->labels->singular_name );
 	}
 
 	/**
@@ -480,7 +480,7 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 	 */
 	function renderEditButton( $link ) {
 		if ( $this->showButton( get_the_ID() ) ) {
-			return $link . ' <a href="' . self::getInlineUrl() . '" id="vc_load-inline-editor" class="vc_inline-link">' . __( 'Edit with Visual Composer', 'js_composer' ) . '</a>';
+			return $link . ' <a href="' . self::getInlineUrl() . '" id="vc_load-inline-editor" class="vc_inline-link">' . __( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
 		}
 
 		return $link;
@@ -495,7 +495,7 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 		$post = get_post();
 		if ( $this->showButton( $post->ID ) ) {
 			$actions['edit_vc'] = '<a
-		href="' . $this->getInlineUrl( '', $post->ID ) . '">' . __( 'Edit with Visual Composer', 'js_composer' ) . '</a>';
+		href="' . $this->getInlineUrl( '', $post->ID ) . '">' . __( 'Edit with WPBakery Page Builder', 'js_composer' ) . '</a>';
 		}
 
 		return $actions;
@@ -532,7 +532,7 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 			if ( $this->showButton( get_the_ID() ) ) {
 				$wp_admin_bar->add_menu( array(
 					'id' => 'vc_inline-admin-bar-link',
-					'title' => __( 'Edit with Visual Composer', 'js_composer' ),
+					'title' => __( 'Edit with WPBakery Page Builder', 'js_composer' ),
 					'href' => self::getInlineUrl(),
 					'meta' => array( 'class' => 'vc_inline-link' ),
 				) );

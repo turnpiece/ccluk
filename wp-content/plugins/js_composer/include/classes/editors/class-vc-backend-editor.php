@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer admin editor
+ * WPBakery WPBakery Page Builder admin editor
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 
@@ -78,7 +78,7 @@ class Vc_Backend_Editor implements Vc_Editor_Interface {
 			visual_composer()->registerAdminJavascript();
 
 			// meta box to render
-			add_meta_box( 'wpb_visual_composer', __( 'Visual Composer', 'js_composer' ), array(
+			add_meta_box( 'wpb_visual_composer', __( 'WPBakery Page Builder', 'js_composer' ), array(
 				$this,
 				'renderEditor',
 			), $post_type, 'normal', 'high' );

@@ -64,6 +64,10 @@ class Vc_Vendor_YoastSeo implements Vc_Vendor_Interface {
 	 * @since 4.4
 	 */
 	public function enqueueJs() {
+		require_once vc_path_dir( 'PARAMS_DIR', 'vc_grid_item/editor/class-vc-grid-item-editor.php' );
+		if ( get_post_type() === Vc_Grid_Item_Editor::postType() ) {
+			return;
+		}
 		wp_enqueue_script( 'vc_vendor_yoast_js', vc_asset_url( 'js/vendors/yoast.js' ), array( 'yoast-seo-post-scraper' ), WPB_VC_VERSION, true );
 	}
 

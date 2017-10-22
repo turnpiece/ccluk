@@ -6,7 +6,10 @@
   margin: 10px auto 0;
   width: 96%;
   .vc_control {
-    font-size: 18px;
+    font-size: 13px;
+  }
+  .column_edit {
+    font-size: 14px;
   }
   > .vc-controls {
     .vc-icon {
@@ -104,7 +107,19 @@
   min-height: @vc_gitem_min_height;
   cursor: pointer;
   box-sizing: border-box;
-  background: transparent url('../vc/empty_row.png') no-repeat center center;
+  position: relative;
+  &::before {
+    font-family: 'vcpb-plugin-icons' !important;
+    content: "\e90c";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+    color: #848c92;
+    font-size: 20px;
+  }
+
   .vc_gitem-add-c-left &, .vc_gitem-add-c-right & {
     padding-top: 26px;
   }

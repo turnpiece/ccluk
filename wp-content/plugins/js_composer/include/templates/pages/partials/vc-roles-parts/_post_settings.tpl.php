@@ -12,5 +12,5 @@ vc_include_template( 'pages/partials/vc-roles-parts/_part.tpl.php', array(
 		array( false, __( 'Disabled', 'js_composer' ) ),
 	),
 	'main_label' => __( 'Page settings', 'js_composer' ),
-	'description' => __( 'Control access to Visual Composer page settings. Note: Disable page settings to restrict editing of Custom CSS through page.', 'js_composer' ),
+	'description' => __( 'Control access to WPBakery Page Builder page settings. Note: Disable page settings to restrict editing of Custom CSS through page.', 'js_composer' ),
 ) );

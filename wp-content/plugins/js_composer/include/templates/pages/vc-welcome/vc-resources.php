@@ -8,7 +8,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="vc_col-xs-6">
 			<h3><?php _e( 'Resources', 'js_composer' ); ?></h3>
 
-			<p><?php _e( 'There are several resources available to Visual Composer users to help you to get around plugin:', 'js_composer' ); ?></p>
+			<p><?php _e( 'There are several resources available to WPBakery Page Builder users to help you to get around plugin:', 'js_composer' ); ?></p>
 			<ul>
 				<li>
 					<a href="http://vc.wpbakery.com/?utm_campaign=VCplugin&amp;utm_source=vc_user&amp;utm_medium=welcome_page"
