@@ -155,7 +155,7 @@ div#register-page .security-question-section {
 .main-navigation li.current_menu_item, 
 .main-navigation li.current_page_item, 
 .main-navigation li:hover {
-	background-color: #fff;
+	background-color: #54ae68;
 }
 
 .main-navigation li a {
@@ -188,6 +188,14 @@ div#register-page .security-question-section {
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 
+#mobile-right-panel li a {
+	color: #fff;
+}
+
+#mobile-right-panel li a:active, 
+#mobile-right-panel li a:hover {
+	color: #000;
+}
 
 
 
