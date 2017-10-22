@@ -241,7 +241,11 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			//return false for now
 			return false;
 		} else {
-			$params = array_combine( $hook_data['args'], $params );
+			if ( empty( $hook_data['args'] ) && empty( $params ) ) {
+				$params = array();
+			} else {
+				$params = array_combine( $hook_data['args'], $params );
+			}
 		}
 
 		if ( isset( $hook_data['callback'] ) && ! empty( $hook_data['callback'] ) ) {

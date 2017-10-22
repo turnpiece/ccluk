@@ -24,28 +24,47 @@ class AT_Widget extends Behavior {
                 </p>
                 <div class="at-line">
                     <strong>
-						<?php _e( "2 Factor Authentication", wp_defender()->domain ) ?>
+						<?php _e( "Two-Factor Authentication", wp_defender()->domain ) ?>
                     </strong>
                     <span>
 						<?php
-						_e( "Protect your user accounts by requiring a second passcode sent to users phones in order to get past your login screen", wp_defender()->domain )
+						_e( "Add an extra layer of security to your WordPress account to ensure that you’re the only person who can log in, even if someone else knows your password", wp_defender()->domain )
 						?>
                     </span>
 					<?php
 					$settings = Auth_Settings::instance();
 					if ( $settings->enabled ):
-						?>
-                        <div class="well well-green with-cap">
-                            <i class="def-icon icon-tick"></i>
-							<?php _e( "2 factor authentication is active.", wp_defender()->domain ) ?>
-                        </div>
+						$enabledRoles = $settings->userRoles;
+						if ( count( $enabledRoles ) ):
+							?>
+                            <div class="well well-small well-green with-cap">
+                                <i class="def-icon icon-tick"></i>
+                                <span>
+                                <?php printf( __( "<strong>Two-factor authentication is now active.</strong> To turn on this feature for your account, go to <a href='%s'>Your Profile</a> to complete setup and sync your account with the Authenticator app.", wp_defender()->domain ),
+	                                admin_url( 'profile.php' ) ) ?>
+                            </span>
+                            </div>
+						<?php else: ?>
+                            <div class="well well-small well-yellow with-cap">
+                                <i class="def-icon icon-warning"></i>
+                                <span>
+                                    <?php _e( "Two-factor authentication is currently inactive. Configure and save your settings to finish setup. ", wp_defender()->domain ) ?>
+                                </span>
+                                <a href="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools' ) ?>"><?php _e( "Finish Setup", wp_defender()->domain ) ?></a>
+                            </div>
+						<?php endif; ?>
+                        <p>
+                            <span>
+                            <?php _e( "Note: Each user on your website must individually enable two-factor authentication via their user profile in order to enable and use this security feature.", wp_defender()->domain ) ?>
+                        </span>
+                        </p>
 					<?php else: ?>
                         <form method="post" id="advanced-settings-frm" class="advanced-settings-frm">
                             <input type="hidden" name="action" value="saveAdvancedSettings"/>
-	                        <?php wp_nonce_field( 'saveAdvancedSettings' ) ?>
+							<?php wp_nonce_field( 'saveAdvancedSettings' ) ?>
                             <input type="hidden" name="enabled" value="1"/>
                             <button type="submit" class="button button-primary button-small">
-		                        <?php _e( "Activate", wp_defender()->domain ) ?>
+								<?php _e( "Activate", wp_defender()->domain ) ?>
                             </button>
                         </form>
 					<?php endif; ?>

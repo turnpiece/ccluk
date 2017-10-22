@@ -10,14 +10,14 @@
                         <li class="issues-nav">
                             <a class="<?php echo \Hammer\Helper\HTTP_Helper::retrieve_get( 'view', false ) == false ? 'active' : null ?>"
                                href="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools' ) ?>">
-						        <?php _e( "2 Factor Authentication", wp_defender()->domain ) ?>
+						        <?php _e( "Two-Factor Authentication", wp_defender()->domain ) ?>
                             </a>
                         </li>
                     </ul>
                     <div class="is-hidden-tablet mline">
                         <select class="mobile-nav">
                             <option <?php selected( '', \Hammer\Helper\HTTP_Helper::retrieve_get( 'view' ) ) ?>
-                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools' ) ?>"><?php _e( "2 Factor Authentication", wp_defender()->domain ) ?></option>
+                                    value="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools' ) ?>"><?php _e( "Two Factor Authentication", wp_defender()->domain ) ?></option>
                         </select>
                     </div>
                 </div>

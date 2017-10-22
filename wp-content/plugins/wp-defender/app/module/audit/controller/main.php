@@ -451,6 +451,7 @@ class Main extends \WP_Defender\Controller {
 			$email = $user->user_email;
 
 			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+			$no_reply_email = apply_filters( 'wd_audit_noreply_email', $no_reply_email );
 			$headers        = array(
 				'From: Defender <' . $no_reply_email . '>',
 				'Content-Type: text/html; charset=UTF-8'

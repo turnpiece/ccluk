@@ -4,6 +4,18 @@ Tested up to: 4.7.4
 
 Change Log:
 
+1.7.3 - 2017-14-10
+----------------------------------------------------------------------
+- Fix: Two-factor authentication can be bypassed by user with no role.
+- Improvement:  Enhanced two-factor authentication protection across multisites.
+
+1.7.2 - 2017-09-10
+----------------------------------------------------------------------
+- Improvement: Improvement: IPv6 support for both whitelisting and blacklisting, requires IPv6 support on the server.
+- Improvement: Better UI/UX for Two-factor authentication.
+- Fix: Security tweak "Prevent PHP Execution" and "Protect Information" now support Apache 2.4 htaccess rules.
+- Other minor enhancements/fixes
+
 1.7.1 - 2017-25-09
 ----------------------------------------------------------------------
 - Improvement: Audit logging logs will be stored up to 1 year, query range can be set up to 3 months
@@ -198,4 +210,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1507401865-ai
+87274-1508694204-au

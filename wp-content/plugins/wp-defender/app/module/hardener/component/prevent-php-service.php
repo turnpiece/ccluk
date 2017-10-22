@@ -27,7 +27,6 @@ class Prevent_PHP_Service extends Rule_Service implements IRule_Service {
 			$status = wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'], 'timeout' => 10 ) );
 			if ( is_wp_error( $status ) ) {
 				//General error
-				Log_Helper::logger( $status->get_error_message() );
 				return false;
 			} else {
 				if ( 200 == wp_remote_retrieve_response_code( $status ) ) {

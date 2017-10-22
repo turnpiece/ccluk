@@ -3,10 +3,10 @@
     <table class="form-table">
         <tbody>
         <tr class="user-sessions-wrap hide-if-no-js">
-            <th><?php _e( "2 Factor Authentication", wp_defender()->domain ) ?></th>
+            <th><?php _e( "Two Factor Authentication", wp_defender()->domain ) ?></th>
             <td aria-live="assertive">
                 <div class="def-notification">
-					<?php _e( "2 factor authentication is active.", wp_defender()->domain ) ?>
+					<?php _e( "Two factor authentication is active.", wp_defender()->domain ) ?>
                 </div>
                 <button type="button" class="button" id="disableOTP">
 					<?php _e( "Disabled", wp_defender()->domain ) ?>

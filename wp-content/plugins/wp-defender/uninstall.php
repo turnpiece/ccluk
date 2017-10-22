@@ -43,3 +43,4 @@ $cache->delete( 'cleanchecksum' );
 delete_site_option( 'wp_defender' );
 delete_option( 'wp_defender' );
 delete_option( 'wd_db_version' );
+delete_site_option( 'wd_db_version' );

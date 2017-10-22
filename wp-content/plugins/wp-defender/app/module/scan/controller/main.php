@@ -475,7 +475,7 @@ class Main extends \WP_Defender\Controller {
 				//from dashboard
 				$data['url'] = network_admin_url( 'admin.php?page=wp-defender' );
 			}
-			$this->sendEmailReport();
+			$this->sendEmailReport( true );
 			$this->submitStatsToDev();
 			wp_send_json_success( $data );
 		} else {
@@ -718,9 +718,9 @@ class Main extends \WP_Defender\Controller {
 		return null;
 	}
 
-	public function sendEmailReport() {
+	public function sendEmailReport( $force = false ) {
 		$settings = Settings::instance();
-		if ( $settings->notification == false ) {
+		if ( $settings->notification == false && $force != true ) {
 			return false;
 		}
 
@@ -777,6 +777,7 @@ class Main extends \WP_Defender\Controller {
 				'message' => $email_content
 			), false );
 			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+			$no_reply_email = apply_filters( 'wd_scan_noreply_email', $no_reply_email );
 			$headers        = array(
 				'From: Defender <' . $no_reply_email . '>',
 				'Content-Type: text/html; charset=UTF-8'

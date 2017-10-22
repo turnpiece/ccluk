@@ -12,9 +12,7 @@ var config = window.mc4wp_forms_config || {};
 function scrollToForm(form) {
 	var animate = config.auto_scroll === 'animated';
 	var args = {
-		behavior: animate ? "smooth" : "instant",
-		block: "center",
-		inline: "center"
+		behavior: animate ? "smooth" : "instant"
 	};
 	form.element.scrollIntoView(args);
 }
@@ -174,11 +172,11 @@ Form.prototype.setData = function (data) {
 };
 
 Form.prototype.getData = function () {
-	return serialize(this.element, { hash: true });
+	return serialize(this.element, { hash: true, empty: true });
 };
 
 Form.prototype.getSerializedData = function () {
-	return serialize(this.element);
+	return serialize(this.element, { hash: false, empty: true });
 };
 
 Form.prototype.setResponse = function (msg) {

@@ -3,7 +3,7 @@
     <table class="form-table">
         <tbody>
         <tr class="user-sessions-wrap hide-if-no-js">
-            <th><?php _e( "2 Factor Authentication", wp_defender()->domain ) ?></th>
+            <th><?php _e( "Two Factor Authentication", wp_defender()->domain ) ?></th>
             <td aria-live="assertive">
                 <div id="def2">
                     <div class="destroy-sessions">

@@ -58,14 +58,20 @@ class MC4WP_WPForms_Integration extends MC4WP_Integration {
             }
         }
 
-
-
         $mailchimp_list_id = $form_data['fields'][$checkbox_field_id]['mailchimp_list'];
         $this->options['lists'] = array( $mailchimp_list_id );
 
         if( ! empty( $email_address ) ) {
             return $this->subscribe( array( 'EMAIL' => $email_address ), $form_data['id'] );
         }
+    }
+
+    /**
+     * @param int $form_id
+     * @return string
+     */
+    public function get_object_link( $form_id ) {
+        return '<a href="' . admin_url( sprintf( 'admin.php?page=wpforms-builder&view=fields&form_id=%d', $form_id ) ) . '">WPForms</a>';
     }
 
 }

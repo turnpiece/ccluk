@@ -1,23 +1,46 @@
 <div class="dev-box">
     <div class="box-title">
         <h3 class="def-issues-title">
-			<?php _e( "2 Factor Authentication", wp_defender()->domain ) ?>
+			<?php _e( "Two-Factor Authentication", wp_defender()->domain ) ?>
         </h3>
     </div>
     <div class="box-content issues-box-content">
         <form method="post" id="advanced-settings-frm" class="advanced-settings-frm">
-            <p class="<?php echo isset( wp_defender()->global['compatibility'] ) ? 'line' : null ?>"><?php _e( "Configure your 2 factor authentication settings, our recommendations are on by default.", wp_defender()->domain ) ?></p>
+			<?php
+			$class = 'line';
+			$enabledRoles = $settings->userRoles;
+
+			?>
+            <p class="<?php echo $class ?>"><?php _e( "Configure your two-factor authentication settings. Our recommendations are enabled by default.", wp_defender()->domain ) ?></p>
 			<?php if ( isset( wp_defender()->global['compatibility'] ) ): ?>
                 <div class="well well-error with-cap">
                     <i class="def-icon icon-warning icon-yellow "></i>
 					<?php echo implode( '<br/>', wp_defender()->global['compatibility'] ); ?>
                 </div>
 			<?php endif; ?>
+			<?php
+			if ( count( $enabledRoles ) ):
+				?>
+                <div class="well well-green with-cap">
+                    <i class="def-icon icon-tick"></i>
+					<?php
+					printf( __( "<strong>Two-factor authentication is now active.</strong> User roles with this feature enabled must visit their <a href='%s'>Profile page</a> to complete setup and sync their account with the Authenticator app.", wp_defender()->domain ),
+						admin_url( 'profile.php' ) );
+					?>
+                </div>
+			<?php else: ?>
+                <div class="well well-yellow with-cap">
+                    <i class="def-icon icon-warning"></i>
+					<?php
+					_e( "<strong>Two-factor authentication is currently inactive.</strong> Configure and save your settings to complete setup.", wp_defender()->domain )
+					?>
+                </div>
+			<?php endif; ?>
             <div class="columns">
                 <div class="column is-one-third">
                     <label><?php _e( "User Roles", wp_defender()->domain ) ?></label>
                     <span class="sub">
-                        <?php _e( "Choose what user roles you want to enable 2 factor authentication for. They must then use the Google Authenticator app to login.", wp_defender()->domain ) ?>
+                        <?php _e( "Choose the user roles you want to enable two-factor authentication for. Users with those roles will then be required to use the Google Authenticator app to login.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="column">
@@ -91,7 +114,7 @@
                 <div class="column is-one-third">
                     <label><?php _e( "Active Users", wp_defender()->domain ) ?></label>
                     <span class="sub">
-                        <?php _e( "Here’s a quick link to see which of your users have enabled 2 step verification.", wp_defender()->domain ) ?>
+                        <?php _e( "Here’s a quick link to see which of your users have enabled two-factor verification.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="column">
@@ -102,7 +125,7 @@
                 <div class="column is-one-third">
                     <label><?php _e( "Deactivate", wp_defender()->domain ) ?></label>
                     <span class="sub">
-                        <?php _e( "Turn off the 2 factor authentication feature completely.", wp_defender()->domain ) ?>
+                        <?php _e( "Disable two-factor authentication on your website.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="column">
