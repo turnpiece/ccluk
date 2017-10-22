@@ -511,6 +511,7 @@ function ccluk_create_news_post_type() {
       'public' => true,
       'has_archive' => true,
       'rewrite' => array('slug' => 'news'),
+      'supports' => array( 'title', 'editor', 'thumbnail' ),
     )
   );
 }
