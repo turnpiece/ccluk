@@ -10,6 +10,7 @@
  */
 //require get_stylesheet_directory() . '/inc/customizer.php';
 
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Sets up theme defaults
@@ -53,7 +54,7 @@ function ccluk_theme_scripts_styles()
   /*
    * Styles
    */
-  wp_enqueue_style( 'onesocial-ccluk-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+  wp_enqueue_style( 'onesocial-ccluk-custom', get_stylesheet_directory_uri().'/css/custom.'.(CCLUK_DEBUGGING ? '' : 'min.').'css' );
 }
 add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 
