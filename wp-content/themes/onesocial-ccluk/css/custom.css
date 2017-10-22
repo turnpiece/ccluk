@@ -146,6 +146,23 @@ input[type="submit"] {
 	background-color: #54ae68;
 }
 
+.vc_separator .vc_sep_holder {
+	padding: 15px 30px;
+}
+
+.vc_separator .vc_sep_holder .vc_sep_line {
+	color: #22a7f0;
+}
+
+.home-page .homepage-section-title > h4 {
+	background-color: #22a7f0;
+	padding: 15px 30px;
+	margin: 10px 30px;
+	font-size: 24px;
+	color: #fff;
+	text-transform: uppercase;
+}
+
 fieldset,
 div#register-page .register-section, 
 div#register-page .security-question-section {
@@ -179,10 +196,6 @@ div#register-page .security-question-section {
 	font-size: 18px;
 }
 
-.homepage-section-title > h4 {
-	font-size: 24px;
-	text-transform: uppercase;
-}
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
