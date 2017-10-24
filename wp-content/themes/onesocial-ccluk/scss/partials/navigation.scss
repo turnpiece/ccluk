@@ -1,0 +1,12 @@
+/** Navigation **/
+
+.main-navigation li.current_menu_item, 
+.main-navigation li.current_page_item, 
+.main-navigation li:hover {
+	background-color: $green;
+	color: #fff;
+}
+
+.main-navigation li a {
+	color: rgba(0, 0, 0, 0.8);
+}

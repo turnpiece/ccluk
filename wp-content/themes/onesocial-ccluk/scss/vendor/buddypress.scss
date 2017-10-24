@@ -1,0 +1,20 @@
+/* Buddypress */
+
+#buddypress #group-settings-form input[type="submit"], 
+#buddypress .standard-form div.submit input {
+	border-radius: 5px;
+	background-color: $green;
+}
+
+#buddypress #group-settings-form input[type="submit"], 
+#buddypress .standard-form div.submit input {
+	border: none;
+	padding: 12px 24px;
+	color: #fff !important;
+}
+
+#buddypress #group-settings-form input[type="submit"]:hover, 
+#buddypress .standard-form div.submit input[type="submit"]:hover {
+	color: #000;
+	background-color: $green;
+}

@@ -1,0 +1,128 @@
+/*--------------------------------------------------------------
+Custom stylesheet.
+
+*/
+
+/** Import partials **/
+
+@import "partials/variables";
+@import "partials/home-page";
+@import "partials/single";
+@import "partials/navigation";
+@import "partials/register";
+@import "partials/find-your-mp";
+
+
+
+/** Styles for plugins etc. **/
+
+@import "vendor/visual-composer";
+
+
+
+#logo-area {
+    width: 380px;
+}
+
+.site-header .site-title {
+    width: 360px;
+}
+
+input[type="text"], 
+input[type="tel"], 
+input[type="email"], 
+input[type="password"], 
+input[type="email"], 
+input[type="number"], 
+textarea {
+	background-color: #fff;
+	border-bottom: none;
+	border: rgba(0, 152, 218, 0.15);
+	padding: 12px;
+}
+
+h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
+	margin-bottom: 16px;
+}
+
+.bluebox {
+	width: 100%;
+	color: #fff;
+	background-color: rgba(0, 152, 218, 0.65);
+	padding: 20px 50px;
+	margin: 20px 0;
+}
+
+#save_as_draft:hover {
+	color: #000;
+	background-color: $green;
+}
+
+.widget-area .widget p, 
+.widget-area .widget li, 
+.widget-area .widget .textwidget {
+	font-size: 18px;
+}
+
+
+
+/*--------------------------------------------------------------
+Responsive media queries (mobile styles)
+--------------------------------------------------------------*/
+
+#mobile-right-panel li a {
+	color: #fff;
+}
+
+#mobile-right-panel li a:active, 
+#mobile-right-panel li a:hover {
+	color: #000;
+}
+
+/*--------------------------------------------------------------
+MAXIMUM width of 520 pixels (large phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 520px) {
+
+	@import "partials/max-width-520px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 480 pixels (phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+
+	@import "partials/max-width-480px";
+
+}
+
+
+/*--------------------------------------------------------------
+MINIMUM width of 481 pixels (phones and larger)
+--------------------------------------------------------------*/
+@media screen and (min-width: 481px)  {
+
+	.site {
+		padding-top: 0;
+	}
+
+
+}
+
+
+/*--------------------------------------------------------------
+MINIMUM width of 721 pixels (tablets and larger)
+--------------------------------------------------------------*/
+@media screen and (min-width: 721px)  {
+
+
+	/*
+	.just_an_example {
+		color: black;
+	}
+	*/
+
+
+}
