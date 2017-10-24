@@ -96,7 +96,7 @@
 	<?php else : ?>
 		<div class="entry-main">
 			<header class="entry-meta posted-on">
-				<?php onesocial_posted_on(); ?>
+				<?php the_date() ?>
 			</header>
 
 			<div class="entry-content">
