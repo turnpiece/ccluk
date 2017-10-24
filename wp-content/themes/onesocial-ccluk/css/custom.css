@@ -126,7 +126,6 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 
 #buddypress #group-settings-form input[type="submit"], 
 #buddypress .standard-form div.submit input,
-input[type="submit"],
 .vc_btn3.vc_btn3-color-juicy-pink, 
 .vc_btn3.vc_btn3-color-juicy-pink.vc_btn3-style-flat {
 	border-radius: 5px;
@@ -134,8 +133,7 @@ input[type="submit"],
 }
 
 #buddypress #group-settings-form input[type="submit"], 
-#buddypress .standard-form div.submit input,
-input[type="submit"] {
+#buddypress .standard-form div.submit input {
 	border: none;
 	padding: 12px 24px;
 	color: #fff !important;
@@ -230,7 +228,7 @@ div#register-page .security-question-section {
 	text-align: center;
 	position: absolute;
 	width: 100%;
-	top: 0;
+	top: 70px;
 	height: 100%;
 }
 
