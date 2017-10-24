@@ -205,6 +205,13 @@ div#register-page .security-question-section {
 }
 
 /** News posts **/
+.single-ccluk_news .entry-header.has-image {
+	text-align: center;
+	position: absolute;
+	width: 100%;
+	top: 0;
+	height: 100%;
+}
 .single-ccluk_news .entry-header.has-image h1 {
     color: #fff;
     font-size: 55px;
