@@ -241,7 +241,8 @@ MINIMUM width of 721 pixels (tablets and larger)
 MINIMUM width of 1025 pixels (desktops)
 --------------------------------------------------------------*/
 @media screen and (min-width: 1025px) {
-  .single .entry-post-thumbnail {
-    background-attachment: fixed; } }
+  /*
+  	@import "partials/min-width-1025px";
+  */ }
 
 /*# sourceMappingURL=custom.css.map */
