@@ -116,13 +116,17 @@ MINIMUM width of 481 pixels (phones and larger)
 MINIMUM width of 721 pixels (tablets and larger)
 --------------------------------------------------------------*/
 @media screen and (min-width: 721px)  {
+/*
+	@import "partials/min-width-721px";
+*/
+}
 
 
-	/*
-	.just_an_example {
-		color: black;
-	}
-	*/
+/*--------------------------------------------------------------
+MINIMUM width of 1025 pixels (desktops)
+--------------------------------------------------------------*/
+@media screen and (min-width: 1025px)  {
 
+	@import "partials/min-width-1025px";
 
 }
