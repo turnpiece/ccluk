@@ -55,7 +55,7 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 .bluebox {
 	width: 100%;
 	color: #fff;
-	background-color: rgba(0, 152, 218, 0.85);
+	background-color: rgba(0, 152, 218, 0.65);
 	padding: 20px 50px;
 	margin: 20px 0;
 }
@@ -81,7 +81,7 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 	margin: 0 auto;
 	padding: 15px;
 	color: #fff;
-	background-color: rgba(0, 152, 218, 0.85);
+	background-color: rgba(0, 152, 218, 0.65);
 }
 
 .page-template-homepage .bb-slider-container .readmore a, 
@@ -216,13 +216,14 @@ div#register-page .security-question-section {
 .single .entry-header.has-image h1 {
     margin: 0 auto;
     color: #fff;
-    background-color: rgba(0, 152, 218, 0.85);
+    background-color: rgba(0, 152, 218, 0.65);
     text-shadow: none;
 	padding: 30px 70px;
     font-size: 55px;
     line-height: 1.4;
     text-align: center;
     text-shadow: none;
+    margin-top: -10%;
 }
 
 .single .entry-header.has-image {
