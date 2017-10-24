@@ -213,8 +213,8 @@ div#register-page .security-question-section {
 
 .single .header-area .table {
     display: table;
-    height: 100%;
     max-width: 780px;
+    max-height: 425px;
     margin: 0 auto;
 }
 
@@ -235,7 +235,7 @@ div#register-page .security-question-section {
 	text-align: center;
 	position: absolute;
 	width: 100%;
-	top: 70px;
+	top: 0;
 	height: 100%;
 }
 

@@ -10,7 +10,7 @@
  */
 //require get_stylesheet_directory() . '/inc/customizer.php';
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Sets up theme defaults
