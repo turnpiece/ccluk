@@ -204,6 +204,13 @@ div#register-page .security-question-section {
 
 /** Post headers **/
 
+.single .entry-post-thumbnail {
+    height: 425px;
+    margin-bottom: 40px;
+    background-size: cover;
+    background-position: center center;
+}
+
 .single .header-area .table {
     display: table;
     height: 100%;
