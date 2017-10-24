@@ -234,6 +234,10 @@ div#register-page .security-question-section {
 	height: 100%;
 }
 
+.single-ccluk_news .entry-meta.posted-on {
+	margin: 1rem 0;
+}
+
 
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
@@ -303,12 +307,9 @@ div#register-page .security-question-section {
 --------------------------------------------------------------*/
 @media screen and (min-width: 481px)  {
 
-
-	/*
-	.just_an_example {
-		color: black;
+	.site {
+		padding-top: 0;
 	}
-	*/
 
 
 }/* don't delete this closing bracket */
