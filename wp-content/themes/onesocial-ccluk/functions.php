@@ -218,8 +218,7 @@ function boss_generate_option_css() {
     .breadcrumb-wrapper a:hover,
     .sap-container-wrapper .sap-author-name.sap-author-name,
     .sap-publish-popup.sap-publish-popup .sap-action-button,
-    #send-private-message.generic-button a:before,
-    input[type="submit"] {
+    #send-private-message.generic-button a:before {
       color: <?php echo $accent_color; ?>;
     }
 
