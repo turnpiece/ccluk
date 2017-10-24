@@ -239,6 +239,13 @@ div#register-page .security-question-section {
 }
 
 
+/** Social Warrior **/
+
+.nc_socialPanel:not(.nc_floater):not(.nc_socialPanelSide) {
+    margin-top: 48px !important;
+    margin-bottom: 48px !important;
+}
+
 /*--------------------------------------------------------------
 2.0 - Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
