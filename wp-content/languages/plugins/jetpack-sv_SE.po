@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-04 13:52:23+0000\n"
+"PO-Revision-Date: 2017-10-21 12:31:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -86,9 +86,37 @@ msgctxt "The home page of a website."
 msgid "Home Page"
 msgstr "Startsida"
 
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:945
+msgid "The onboarding token couldn't be deleted."
+msgstr "Token som introducerades kunde inte tas bort."
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:872
+msgid "Onboarding failed to process: %s"
+msgstr "Igångsättning kunde inte bearbetas: %s"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1893
+msgid "Not valid onboarding data."
+msgstr "Inga giltiga igångsättningsdata."
+
 #: _inc/jetpack-strings.php:584
 msgid "Thanks for choosing a Jetpack Professional plan. Jetpack is now backing up your content, scanning for security threats, and granting access to premium themes."
 msgstr "Tack för att du valde planen Jetpack Professional. Jetpack säkerhetskopierar nu ditt innehåll, söker efter säkerhetshot och ger dig tillgång till premiumteman."
+
+#: _inc/jetpack-strings.php:582
+msgid "With Jetpack Professional, you can create the perfect site with one of over 300 professionally-designed WordPress themes, including more than 100 premium themes. Customize your content with a variety of widgets, or add unlimited videos to your posts and pages -- displayed free of ads or watermarks."
+msgstr "Med Jetpack Professional kan du skapa den perfekta webbplatsen, med hjälp av över 300 professionellt designade WordPress-teman, inklusive mer än 100 premiumteman. Anpassa ditt innehåll med en mängd widgetar eller lägg till ett obegränsat antal videoklipp i dina inlägg och sidor – som visas utan annonser eller vattenstämplar."
+
+#: _inc/jetpack-strings.php:580
+msgid "Growing your following is easy with your Professional plan, thanks to content sharing and scheduling, SEO tools, and built-in subscription options. You can monetize your site with a simple payment button and in-line ads, and monitor the success of your efforts by integrating with Google Analytics."
+msgstr "Att skaffa fler följare är enkelt med vårt Professional-paket, tack vare innehållsdelning och schemaläggning, verktyg för sökmotoroptimering och inbyggda prenumerationsalternativ. Du kan tjäna pengar på din webbplats med en enkel betalningsknapp och annonsering, och övervaka resultatet av dina ansträngningar genom att integrera med Google Analytics."
+
+#: _inc/jetpack-strings.php:578
+msgid "Jetpack Professional gives you everything you need to keep your hard work safe, including on-demand backups and malware scans with one-click restores and issue resolution. Your site will be fully protected against spam, malicious code, and brute force login attempts."
+msgstr "Jetpack Professional ger dig allt du behöver för att resultatet av ditt hårda arbete ska vara i trygghet, inklusive säkerhetskopieringar på begäran och genomsökning efter skadliga program, samt återställning och problemlösning med ett klick. Din webbplats kommer att vara fullständigt skyddad mot skräppost, skadlig kod och brute force-attacker mot inloggningen."
+
+#: _inc/jetpack-strings.php:577
+msgid "Start exploring Jetpack Professional now to see all the benefits of your new plan."
+msgstr "Börja utforska Jetpack Professional nu för att se alla fördelar med ditt nya paket."
 
 #: _inc/jetpack-strings.php:576
 msgid "Install premium themes"
@@ -98,9 +126,81 @@ msgstr "Installera premiumteman"
 msgid "Review SEO features"
 msgstr "Granska SEO-funktioner"
 
+#: _inc/jetpack-strings.php:573
+msgid "Welcome Professional"
+msgstr "Välkommen till Jetpack Professional"
+
+#: _inc/jetpack-strings.php:572
+msgid "Your Professional Jetpack plan is taking care of business!"
+msgstr "Ditt Jetpack Professional-paket tar hand om verksamheten!"
+
+#: _inc/jetpack-strings.php:571
+msgid "Thanks for choosing a Jetpack Premium plan. Jetpack is now backing up your site, scanning for security threats, and enabling monetization features."
+msgstr "Tack för att du väljer ett Jetpack Premium-paket. Jetpack säkerhetskopierar nu din webbplats, skannar efter säkerhetshot och möjliggör att du kan tjäna pengar på din webbplats."
+
+#: _inc/jetpack-strings.php:569
+msgid "With Jetpack Premium, you can create the perfect site, no matter its purpose. Customize your site’s appearance with one of more than 200 free themes, or enhance your content with up to 13 GB of HD video -- all hosted free of ads or watermarks."
+msgstr "Med Jetpack Premium kan du skapa den perfekta webbplatsen, oavsett dess syfte. Anpassa din webbplats utseende med ett av fler än 200 gratisteman eller förstärk ditt innehåll med upp till 13 GB HD-video – allt utan annonser eller vattenmärken."
+
+#: _inc/jetpack-strings.php:567
+msgid "Using Jetpack’s powerful sharing tools, you can automatically share your newest posts on social media, or schedule your content to be re-shared at any date or time you choose. And along with growing your following, you can grow your business with tools like payment buttons and ads."
+msgstr "Med Jetpacks kraftfulla delningsverktyg kan du automatiskt dela dina nyaste inlägg på sociala medier, eller schemalägga innehåll för att åter delas valfritt datum och tidpunkt du själv väljer. I takt med att antalet följare ökar kan ditt företag växa med hjälp av verktyg som betalningsknappar och annonser."
+
+#: _inc/jetpack-strings.php:565
+msgid "Keeping your hard work safe is important, too. Jetpack Premium gives you brute force login protection, automated spam filtering, and malware scanning. You also get daily backups  with hassle-free restores, just in case you need them."
+msgstr "Det är också viktigt att skydda resultatet av ditt hårda arbete. Jetpack Premium ger dig skydd mot brute-force-attacker, automatisk skräppostfiltrering och genomsökning efter skadlig kod. Du får även dagliga säkerhetskopieringar med problemfria återställningar, om det skulle behövas."
+
+#: _inc/jetpack-strings.php:564
+msgid "Start exploring Jetpack Premium now to see all the benefits of your new plan."
+msgstr "Börja utforska Jetpack Premium nu för att se alla fördelar med ditt nya paket."
+
+#: _inc/jetpack-strings.php:563
+msgid "Enable premium video player"
+msgstr "Aktivera premium-videospelare"
+
+#: _inc/jetpack-strings.php:562 _inc/jetpack-strings.php:575
+msgid "Monetize your site with ads"
+msgstr "Tjäna pengar på din webbplats med hjälp av annonser"
+
+#: _inc/jetpack-strings.php:561
+msgid "Welcome Premium"
+msgstr "Välkommen till Jetpack Premium"
+
+#: _inc/jetpack-strings.php:560
+msgid "Your Premium Jetpack plan is powering up!"
+msgstr "Ditt Jetpack Premium-paket värmer upp!"
+
+#: _inc/jetpack-strings.php:559
+msgid "Thanks for choosing a Jetpack Personal plan. Jetpack is now backing up your site and scanning for security threats."
+msgstr "Tack för att du väljer ett Jetpack Personal-paket. Jetpack säkerhetskopierar nu din webbplats och skannar efter säkerhetshot."
+
+#: _inc/jetpack-strings.php:557
+msgid "With Jetpack Personal, you have access to more than 100 free, professionally-designed WordPress themes. Choose the theme that best fits your site and customize colors, images, or add a variety of new widgets."
+msgstr "Med Jetpack Personal har du tillgång till över 100 professionellt designade WordPress-teman gratis. Välj det tema som passar din webbplats bäst och anpassa färger och bilder eller lägg till nya widgetar."
+
+#: _inc/jetpack-strings.php:555
+msgid "Using Jetpack’s powerful Publicize feature and built-in sharing tools, you’ll find new ways to grow your following and increase traffic. Automatically share your newest posts on social media, or allow followers to subscribe via email for your latest content right in their inbox."
+msgstr "Med Jetpacks kraftfulla Publicera-funktion och inbyggda delningsverktyg hittar du nya sätt att få föer följare och öka trafiken till din webbplats. Dela dina senaste inlägg automatiskt på sociala medier, eller låt följare prenumerera via e-post för att få ditt senaste innehåll direkt till inkorgen."
+
+#: _inc/jetpack-strings.php:553
+msgid "Jetpack keeps you safe, too: you’re protected from spam in comments and contact forms, and our brute force login protection prevents hackers from accessing your data. And if something does go wrong, you can restore a backup of your site in a single click."
+msgstr "Jetpack håller dig även säker: du är skyddad mot skräppost i kommentarer och kontaktformulär och vårt skydd mot brute force-inloggningar hindrar hackare från att komma åt dina data. Och om något blir fel kan du återställa från en säkerhetskopia av din webbplats med ett enda klick."
+
 #: _inc/jetpack-strings.php:552
 msgid "Got it!"
 msgstr "Jag fattar!"
+
+#: _inc/jetpack-strings.php:551
+msgid "Welcome personal"
+msgstr "Välkommen till Jetpack Personal"
+
+#: _inc/jetpack-strings.php:550
+msgid "Your Personal Jetpack plan is powering up!"
+msgstr "Ditt Jetpack Personal-paket värmer upp!"
+
+#: _inc/jetpack-strings.php:280
+msgid "Enhanced site-wide search, powered by Elasticsearch (Beta)"
+msgstr "Utökad sökning av hela webbplatsen, drivs av Elasticsearch (Beta)"
 
 #: modules/theme-tools/content-options/customizer.php:309
 msgid "Automatically use first image in post"

@@ -3,6 +3,19 @@ Author: WPMU DEV
 
 Changelog:
 ----------------------------------------------------------------------
+1.9.7 - 2017-10-23
+----------------------------------------------------------------------
+- Added: New attribute show_old on the shortcode eab_calendar to allow viewing of past events
+- Added: 24 hour clock timepicker
+- Added: Disabled text input in event edit date and time fields. Date and time picker are used instead
+- Fixed: E-newsletter activation error. Tables of eneswletter would not be created
+- Fixed: Session warning when enewsletter is activated
+- Fixed: Prevent multiple clicking of event RSVP buttons after confirmation
+- Fixed: Archived Events shortcode
+- Fixed: Php notices
+- Fixed: Admin CSS alignments
+
+----------------------------------------------------------------------
 1.9.6 - 2017-09-08
 ----------------------------------------------------------------------
 
@@ -416,4 +429,4 @@ Changelog:
 - Initial release.
 
 
-87274-1507401927-ai
+87274-1509233548-au

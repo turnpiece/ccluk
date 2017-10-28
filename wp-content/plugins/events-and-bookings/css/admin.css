@@ -8,8 +8,7 @@ ul.eab-guest-list li {
     vertical-align: text-top;
 }
 .misc-eab-section label.eab-inline-label {
-    width: 45px;
-    display: inline-block;
+    width: auto;
 }
 
 .misc-eab-section label textarea {
@@ -372,5 +371,21 @@ input.incsub_event_date, input.incsub_event_time{
 	margin-bottom: 5px;
 }
 
+/**
+* Event Editor Sidebar Date and Time Design Fix
+**/
+label[for^="incsub_event_start_"], label[for^="incsub_event_end_"] {
+    display: block;
+    margin-top: 10px;
+}
+label[for^="incsub_event_start_"] span, label[for^="incsub_event_end_"] span {
+    font-weight: bold;
+    display: block;
+}
+.eab-section-block {
+    border-top: 1px solid #d7d7d7;
+    margin: 10px 0;
+}
 
-/* 87274-1507401927-ai */
+
+/* 87274-1509233548-au */

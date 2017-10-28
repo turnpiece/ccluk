@@ -42,7 +42,7 @@ class Eab_Payments_PaymentViaProducts {
 	 */
 	public function dispatch_ordering_actions () {
 		if ($this->_is_old_mp()) {
-			if (!class_exists('Eab_MP_Bridge_Legacy')) require_once('lib/class_eab_mp_bridge_legacy.php');
+			if (!class_exists('Eab_MP_Bridge_Legacy')) require_once( 'lib/class_eab_mp_bridge_legacy.php');
 			Eab_MP_Bridge_Legacy::serve();
 		} else {
 			if (!class_exists('Eab_MP_Bridge')) require_once('lib/class_eab_mp_bridge.php');
@@ -97,7 +97,7 @@ class Eab_Payments_PaymentViaProducts {
 
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
-		$tips->set_icon_url(plugins_url('events-and-bookings/img/information.png'));
+		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
 
 		$category_id = $this->_data->get_option('payment-ppvp-category');
 		$categories = get_terms('product_category', array(

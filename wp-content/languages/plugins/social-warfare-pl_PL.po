@@ -1,0 +1,397 @@
+# Translation of Plugins - Social Warfare - Development (trunk) in Polish
+# This file is distributed under the same license as the Plugins - Social Warfare - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-01-04 12:52:45+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: pl\n"
+"Project-Id-Version: Plugins - Social Warfare - Development (trunk)\n"
+
+#: functions/utilities/utility.php:355
+msgid "<b>Important:</b> We’ve made <a href=\"https://warfareplugins.com/social-warfare-2-2/\" target=\"_blank\">some changes</a> to how your Social Warfare premium license is applied. In order to continue getting all the Pro features you love, please <a href=\"https://warfareplugins.com/updates/social-warfare-pro/social-warfare-pro.zip\">download the Social Warfare - Pro</a> plugin. Once installed, all of your premium features will be immediately restored."
+msgstr "<b>Ważne:</b> Dokonaliśmy <a href=\"https://warfareplugins.com/social-warfare-2-2/\" target=\"_blank\">zmian</a> w sposobie aktywowania licencji premium. W celu korzystania z wszystkich opcji Pro, <a href=\"https://warfareplugins.com/updates/social-warfare-pro/social-warfare-pro.zip\">pobierz  Social Warfare - Pro</a>. Po instalacji wszystkie opcje premium zostaną przywrócone."
+
+#: functions/admin/options-array.php:364
+msgid "Full Content?"
+msgstr "Pełna treść?"
+
+#: functions/admin/options-array.php:359
+msgid "If your theme does not use excerpts, but instead displays the full post content on archive, category, and home pages, activate this toggle to allow the buttons to appear in those areas."
+msgstr "Jeśli Twój szablon nie używa zajawek, ale wyświetla pełną treść wpisów w archiwach, kategoriach i na stronie głównej, włącz tą opcję, żeby wyświetlić przyciski społecznościowe w tych obszarach."
+
+#: functions/admin/options-array.php:355
+msgid "Full Content vs. Excerpts"
+msgstr "Cała treść czy zajawka"
+
+#: functions/admin/options-array.php:134
+msgid "Home Page"
+msgstr "Strona Główna"
+
+#: functions/admin/options-array.php:347
+msgid "Legacy Cache Rebuilding during Page Loads"
+msgstr "Stara przebudowa cache podczas ładowania strony"
+
+#: functions/admin/options-array.php:346
+msgid "Advanced Cache Triggering"
+msgstr "Zaawansowane uruchamianie cache"
+
+#: functions/admin/options-array.php:344
+msgid "Cache Rebuild Method"
+msgstr "Metoda przebudowy cache"
+
+#: functions/admin/options-array.php:339
+msgid "If you have advanced knowledge of caching configurations, you may want to choose your own below."
+msgstr "Jeśli wiesz w jaki sposób działa Twoje cachowanie, możesz wybrać opcje poniżej."
+
+#: functions/admin/options-array.php:335
+msgid "Caching Method"
+msgstr "Metoda cache'owania"
+
+#: functions/admin/options-array.php:328
+msgid "If you want to stop content pirates from framing your content, turn this on."
+msgstr "Jeśli chcesz, żeby złodzieje treści nie mogli wstawiać Twojej treści w ramki, włącz tą opcję."
+
+#: functions/admin/options-array.php:327
+msgid "Frame Buster"
+msgstr "Ochrona przed osadzaniem w ramkach"
+
+#: functions/admin/options-array.php:322
+msgid "Advanced"
+msgstr "Zaawansowane"
+
+#: functions/admin/options-array.php:300
+msgid "Facebook App ID"
+msgstr "ID Aplikacji Facebooka"
+
+#: functions/admin/options-array.php:295
+msgid "Facebook Page URL"
+msgstr "Adres strony na Facebooku"
+
+#: functions/admin/options-array.php:290
+msgid "Pinterest Username"
+msgstr "Nazwa użytkownika na Pintereście"
+
+#: functions/admin/options-array.php:285 functions/admin/profile-fields.php:21
+msgid "Twitter Username"
+msgstr "Nazwa użytkownika na Twitterze"
+
+#: functions/admin/options-array.php:280
+msgid "If you would like to set sitewide defaults for your social identity, add them below."
+msgstr "Jeśli chcesz ustawić domyślne ustawienia kont na całej witrynie, dodaj je poniżej."
+
+#: functions/admin/options-array.php:276
+msgid "Sitewide Identity"
+msgstr "Tożsamośc na całej witrynie"
+
+#: functions/admin/options-array.php:271
+msgid "Social Identity"
+msgstr "Konta społecznościowe"
+
+#: functions/admin/options-array.php:248
+msgid "Background Color"
+msgstr "Kolor tła"
+
+#: functions/admin/options-array.php:239
+msgid "Fade In / Fade Out"
+msgstr "Zanikanie"
+
+#: functions/admin/options-array.php:238
+msgid "Slide In / Slide Out"
+msgstr "Zwijanie / Rozwijanie"
+
+#: functions/admin/options-array.php:236
+msgid "Transition"
+msgstr "Przejście"
+
+#: functions/admin/options-array.php:228
+msgid "Minimum Screen Width"
+msgstr "Minimalna szerokość ekranu"
+
+#: functions/admin/options-array.php:219
+msgid "On the left side of the page"
+msgstr "Po lewej stronie"
+
+#: functions/admin/options-array.php:218
+msgid "Bottom of the Page"
+msgstr "Dół strony"
+
+#: functions/admin/options-array.php:217
+msgid "Top of the Page"
+msgstr "Góra strony"
+
+#: functions/admin/options-array.php:215
+msgid "Float Position"
+msgstr "Pozycja przyczepionych przycisków"
+
+#: functions/admin/options-array.php:209
+msgid "If you would like to activate floating share buttons, turn this on."
+msgstr "Jeśli chcesz aktywować przyczepione przyciski społecznościowe, włącz tą opcję."
+
+#: functions/admin/options-array.php:208
+msgid "Floating Share Buttons"
+msgstr "Przyczepione Przyciski Społecznościowe"
+
+#: functions/admin/options-array.php:196
+msgid "Alignment"
+msgstr "Wyrównanie"
+
+#: functions/admin/options-array.php:189
+msgid "Comma"
+msgstr "Przecinek"
+
+#: functions/admin/options-array.php:188
+msgid "Period"
+msgstr "Kropka"
+
+#: functions/admin/options-array.php:186
+msgid "Decimal Separator"
+msgstr "Separator dziesiętny"
+
+#: functions/admin/options-array.php:179
+msgid "Two"
+msgstr "Dwa"
+
+#: functions/admin/options-array.php:178
+msgid "One"
+msgstr "Jedeno"
+
+#: functions/admin/options-array.php:177
+msgid "Zero"
+msgstr "Zero"
+
+#: functions/admin/options-array.php:174
+msgid "Decimal Places"
+msgstr "Miejsca dziesiętne"
+
+#: functions/admin/options-array.php:170
+msgid "Customize how the \"Total Shares\" section of your share buttons look."
+msgstr "Spersonalizuj, jak ma wyglądać sekcja \"Łącznej liczby udostępnień\" na przyciskach."
+
+#: functions/admin/options-array.php:160
+msgid "Styles"
+msgstr "Style"
+
+#: functions/admin/options-array.php:198
+msgid "Right"
+msgstr "Prawo"
+
+#: functions/admin/options-array.php:199
+msgid "Left"
+msgstr "Lewo"
+
+#: functions/admin/options-array.php:142
+msgid "Archive & Categories"
+msgstr "Archiwa i Kategorie"
+
+#: functions/admin/options-array.php:97
+msgid "Floating Buttons (If Activated)"
+msgstr "Przyczepione przyciski (Jeśli aktywne)"
+
+#: functions/admin/options-array.php:96
+msgid "Static Buttons"
+msgstr "Przyciski statyczne"
+
+#: functions/admin/options-array.php:95
+msgid "Post Type"
+msgstr "Typ treści"
+
+#: functions/admin/options-array.php:90
+msgid "The options below will allow you to customize the positioning of share buttons for each post type."
+msgstr "Opcje poniżej pozwalają na własne ustawienia pozycji przycisków dla każdego typu treści."
+
+#: functions/admin/options-array.php:86
+msgid "Position Share Buttons"
+msgstr "Pozycja Przycisków Społecznościowych"
+
+#: functions/admin/options-array.php:77 functions/admin/options-array.php:166
+msgid "Total Counts"
+msgstr "Łączna liczba "
+
+#: functions/admin/options-array.php:70
+msgid "Button Counts"
+msgstr "Liczby na przyciskach"
+
+#: functions/admin/options-array.php:65
+msgid "Use the toggles below to determine how to display your social proof."
+msgstr "Użyj przełączników poniżej, żeby wybrać, jak wyświetlić twój dowód uznania społeczności (ang. Social Proof)."
+
+#: functions/admin/options-array.php:61
+msgid "Share Counts"
+msgstr "Liczba udostępnień"
+
+#: functions/admin/options-array.php:38
+msgid "Drag & Drop to activate and order your share buttons."
+msgstr "Przeciągnij i upuść, żeby aktywować i uporządkować twoje przyciski społecznościowe."
+
+#: functions/admin/options-array.php:34
+msgid "Social Networks"
+msgstr "Sieci Społecznościowe"
+
+#: functions/admin/options-array.php:28
+msgid "Display"
+msgstr "Wyświetl"
+
+#: functions/admin/options-page.php:820
+msgid "No settings to save."
+msgstr "Brak ustawień do zapisania."
+
+#: functions/admin/options-page.php:813
+msgid "Security failed."
+msgstr "Zabezpieczenia zawiodły."
+
+#: functions/admin/options-page.php:791
+msgid "Press Ctrl+C to Copy this information."
+msgstr "Naciśnij CTRL+C, żeby skopiować informację."
+
+#: functions/admin/options-page.php:786
+msgid "Get System Status"
+msgstr "Pobierz Status Systemu"
+
+#: functions/admin/options-page.php:785
+msgid "Opening a support ticket? Copy your System Status by clicking the button below."
+msgstr "Tworzysz nowe zgłoszenie w pomocy? Skopiuj Status Systemu, klikając przycisk poniżej."
+
+#: functions/admin/options-page.php:784
+msgid "Need help? Check out our <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">Knowledgebase."
+msgstr "Potrzebujesz pomocy? Odwiedź nasze <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">Centrum Pomocy"
+
+#: functions/admin/options-page.php:682
+msgid "Step 3: Flip the switch below to \"ON\" and then save changes."
+msgstr "Krok 3: Przełącz przycisk poniżej do pozycji \"WŁĄCZ\", a następnie zapisz ustawienia."
+
+#: functions/admin/options-page.php:682
+msgid "Step 2: At NewShareCounts.com, Enter your domain and click the \"Sign In With Twitter\" button."
+msgstr "Krok 2: Na NewShareCounts.com wprowadź nazwę domeny i kliknij \"Sign In With Twitter\"."
+
+#: functions/admin/options-page.php:682
+msgid "Click here to visit NewShareCounts.com"
+msgstr "Kliknij, aby odwiedzić NewShareCounts.com"
+
+#: functions/admin/options-page.php:681
+msgid "In order to allow Social Warfare to track tweet counts, we've partnered with NewShareCounts.com. Follow the steps below to register with NewShareCounts and allow us to track your Twitter shares."
+msgstr "Żeby pozwolić Social Warfare na zliczanie tweetów, współpracujemy z NewShareCounts. Wykonaj kroki poniżej, żeby zarejestrować się na NewShareCounts i pozwolić nam na śledzenie twoich udostępnień na Twitterze."
+
+#: functions/admin/options-page.php:675
+msgid "Tweet Count Registration"
+msgstr "Rejestracja liczby tweetów"
+
+#: functions/admin/options-page.php:636
+msgid "Authenticated"
+msgstr "Zautoryzowano"
+
+#: functions/admin/options-page.php:634
+msgid "Connected"
+msgstr "Połączono"
+
+#: functions/admin/options-page.php:346 functions/admin/options-page.php:358
+#: functions/admin/options-page.php:386 functions/admin/options-page.php:404
+#: functions/admin/options-page.php:690
+msgid "OFF"
+msgstr "WYŁĄCZ"
+
+#: functions/admin/options-page.php:346 functions/admin/options-page.php:358
+#: functions/admin/options-page.php:386 functions/admin/options-page.php:404
+#: functions/admin/options-page.php:690
+msgid "ON"
+msgstr "WŁĄCZ"
+
+#: functions/admin/options-page.php:284
+msgid "Inactive"
+msgstr "Nieaktywne"
+
+#: functions/admin/options-page.php:251
+msgid "Active"
+msgstr "Aktywne"
+
+#: functions/admin/misc.php:21
+msgid "Settings"
+msgstr "Ustawienia"
+
+#. Author of the plugin/theme
+msgid "Warfare Plugins"
+msgstr "Warfare Plugins"
+
+#. Description of the plugin/theme
+msgid "A plugin to maximize social shares and drive more traffic using the fastest and most intelligent share buttons on the market, calls to action via in-post click-to-tweets, popular posts widgets based on share popularity, link-shortening, Google Analytics and much, much more!"
+msgstr "Wtyczka do maksymalizowania udostępnień i przyciągania ruchu przy użyciu najszybszych i najbardziej inteligentnych przycisków społecznościowych na rynku. Wezwania do działania poprzez kliknij-aby-tweetnąć we wpisach, widget popularności wpisów na podstawie liczby udostępnień, skracanie odnośników, Google Analytics i wiele, wiele więcej!"
+
+#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.2.7)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.2.7)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://warfareplugins.com"
+msgstr "http://warfareplugins.com"
+
+#. Plugin Name of the plugin/theme
+msgid "Social Warfare"
+msgstr "Social Warfare"
+
+#: functions/frontend-output/scripts.php:105
+msgid "Characters Remaining"
+msgstr "Pozostało znaków"
+
+#: functions/social-networks/twitter.php:177
+#: functions/social-networks/twitter.php:181
+msgid "Tweet"
+msgstr "Tweetnij"
+
+#: functions/social-networks/stumbleupon.php:113
+#: functions/social-networks/stumbleupon.php:117
+msgid "Stumble"
+msgstr "Stumble"
+
+#: functions/social-networks/pinterest.php:148
+#: functions/social-networks/pinterest.php:152
+msgid "Pin"
+msgstr "Przypnij"
+
+#: functions/social-networks/googlePlus.php:105
+#: functions/social-networks/googlePlus.php:109
+msgid "+1"
+msgstr "+1"
+
+#: functions/social-networks/facebook.php:104
+#: functions/social-networks/facebook.php:108
+#: functions/social-networks/linkedIn.php:105
+#: functions/social-networks/linkedIn.php:109
+msgid "Share"
+msgstr "Udostępnij"
+
+#: functions/admin/options-array.php:124
+msgid "Off"
+msgstr "Wyłącz"
+
+#: functions/admin/options-array.php:123
+msgid "On"
+msgstr "Włącz"
+
+#: functions/admin/options-array.php:106
+msgid "None/Manual Placement"
+msgstr "Brak/Ustawienia własne"
+
+#: functions/admin/options-array.php:105
+msgid "Both Above and Below the Content"
+msgstr "Ponad oraz pod treścią"
+
+#: functions/admin/options-array.php:104
+msgid "Below the Content"
+msgstr "Pod treścią"
+
+#: functions/admin/options-array.php:103
+msgid "Above the Content"
+msgstr "Ponad treścią"
+
+#: functions/click-to-tweet/clickToTweet.php:117
+msgid "Click To Tweet"
+msgstr "Kliknij, aby Tweetnąć"
+
+#: functions/frontend-output/buttons-floating.php:72
+#: functions/frontend-output/buttons-standard.php:229
+#: functions/frontend-output/buttons-standard.php:261
+#: functions/frontend-output/buttons-standard.php:265
+msgid "Shares"
+msgstr "Udostępnień"

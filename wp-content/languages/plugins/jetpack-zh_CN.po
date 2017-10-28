@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-01 02:51:46+0000\n"
+"PO-Revision-Date: 2017-10-18 08:09:13+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,197 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: zh_CN\n"
 "Project-Id-Version: Plugins - Jetpack by WordPress.com - Stable (latest release)\n"
+
+#: modules/widgets/milestone/milestone.php:404
+msgid "Milestone Reached Message"
+msgstr "“已达到里程碑”消息"
+
+#: modules/widgets/milestone/milestone.php:398
+msgid "Since your milestone"
+msgstr "自达到里程碑后"
+
+#: modules/widgets/milestone/milestone.php:386
+msgid "Until your milestone"
+msgstr "在达到里程碑前"
+
+#: modules/widgets/milestone/milestone.php:364
+#: modules/widgets/milestone/milestone.php:367
+msgid "Time Unit"
+msgstr "时间单位"
+
+#: modules/widgets/milestone/milestone.php:316
+msgid "Hours"
+msgstr "小时"
+
+#: modules/widgets/milestone/milestone.php:313
+msgid "Automatic"
+msgstr "自动"
+
+#: modules/widgets/milestone/milestone.php:210
+msgid "%1$s %2$s %3$s"
+msgstr "%1$s %2$s %3$s"
+
+#: modules/widgets/milestone/milestone.php:206
+msgid "to go."
+msgstr "以后。"
+
+#: modules/widgets/milestone/milestone.php:204
+msgid "ago."
+msgstr "之前。"
+
+#. translators: %s: Name of current post. Only visible to screen readers
+#: modules/theme-tools/content-options/blog-display.php:96
+#: modules/theme-tools/content-options/blog-display.php:138
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "继续阅读<span class=\"screen-reader-text\">“%s”</span>"
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1028
+msgid "Send us a message!"
+msgstr "向我们发送消息！"
+
+#. translators: this references a page with contact details and possibly a
+#. form.
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1027
+msgctxt "Contact page for your website."
+msgid "Contact us"
+msgstr "联系我们"
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:994
+msgid "These are the latest posts in %s."
+msgstr "这些是 %s 中的最新文章。"
+
+#. translators: this references the page where blog posts are listed.
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:993
+msgctxt "The blog of a website."
+msgid "Blog"
+msgstr "博客"
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:977
+msgid "Welcome to %s."
+msgstr "欢迎使用 %s。"
+
+#. translators: this references the home page of a site, also called front
+#. page.
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:976
+msgctxt "The home page of a website."
+msgid "Home Page"
+msgstr "首页"
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:945
+msgid "The onboarding token couldn't be deleted."
+msgstr "无法删除初始启用令牌。"
+
+#: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:872
+msgid "Onboarding failed to process: %s"
+msgstr "初始启用未能处理：%s"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1893
+msgid "Not valid onboarding data."
+msgstr "不是有效的初始启用数据。"
+
+#: _inc/jetpack-strings.php:584
+msgid "Thanks for choosing a Jetpack Professional plan. Jetpack is now backing up your content, scanning for security threats, and granting access to premium themes."
+msgstr "感谢您选择 Jetpack 专业版套餐。Jetpack 现在可以备份您的内容，扫描安全威胁，并授予对高级套餐主题的访问权限。"
+
+#: _inc/jetpack-strings.php:582
+msgid "With Jetpack Professional, you can create the perfect site with one of over 300 professionally-designed WordPress themes, including more than 100 premium themes. Customize your content with a variety of widgets, or add unlimited videos to your posts and pages -- displayed free of ads or watermarks."
+msgstr "借助 Jetpack 专业版，您可以从 300 多种经过专业设计的 WordPress 主题（包括 100 多个高级套餐主题）中选择其一来创建完美的网站。使用各种小组件自定义您的内容，或者将不限数量的视频添加到您的文章和页面 - 可无广告或无水印显示。"
+
+#: _inc/jetpack-strings.php:580
+msgid "Growing your following is easy with your Professional plan, thanks to content sharing and scheduling, SEO tools, and built-in subscription options. You can monetize your site with a simple payment button and in-line ads, and monitor the success of your efforts by integrating with Google Analytics."
+msgstr "得益于专业版套餐的内容共享和预发布功能、搜索引擎优化 (SEO) 工具及内置的订阅选项，轻轻松松即可增加粉丝人数。您可以通过一个简单的付款按钮和一些内嵌广告来利用您的站点获利，并通过与 Google Analytics（分析）集成来监控您的工作成果。"
+
+#: _inc/jetpack-strings.php:578
+msgid "Jetpack Professional gives you everything you need to keep your hard work safe, including on-demand backups and malware scans with one-click restores and issue resolution. Your site will be fully protected against spam, malicious code, and brute force login attempts."
+msgstr "Jetpack 专业版可为您提供所需的一切来保证您的努力工作安全无虞，其中包括按需备份和恶意软件扫描，以及一键还原和解决问题。您的站点将获得全面保护，有效防御垃圾邮件、恶意代码和暴力登录尝试。"
+
+#: _inc/jetpack-strings.php:577
+msgid "Start exploring Jetpack Professional now to see all the benefits of your new plan."
+msgstr "立即开始探索 Jetpack 专业版，以了解您的新套餐的全部优势。"
+
+#: _inc/jetpack-strings.php:576
+msgid "Install premium themes"
+msgstr "安装高级套餐主题"
+
+#: _inc/jetpack-strings.php:574
+msgid "Review SEO features"
+msgstr "查看 SEO 功能"
+
+#: _inc/jetpack-strings.php:573
+msgid "Welcome Professional"
+msgstr "专业版欢迎辞"
+
+#: _inc/jetpack-strings.php:572
+msgid "Your Professional Jetpack plan is taking care of business!"
+msgstr "您的专业版 Jetpack 套餐正在履行职责！"
+
+#: _inc/jetpack-strings.php:571
+msgid "Thanks for choosing a Jetpack Premium plan. Jetpack is now backing up your site, scanning for security threats, and enabling monetization features."
+msgstr "感谢您选择 Jetpack 高级版套餐。Jetpack 现在可以备份您的站点，扫描安全威胁，并支持获利功能。"
+
+#: _inc/jetpack-strings.php:569
+msgid "With Jetpack Premium, you can create the perfect site, no matter its purpose. Customize your site’s appearance with one of more than 200 free themes, or enhance your content with up to 13 GB of HD video -- all hosted free of ads or watermarks."
+msgstr "借助 Jetpack 高级版，您可以创建完美站点，无论站点用途为何。您可以从 200 多个免费主题中选择其一来自定义您的站点外观，或使用高达 13 GB 的高清视频来提升内容，所有这些均可无广告或无水印托管。"
+
+#: _inc/jetpack-strings.php:567
+msgid "Using Jetpack’s powerful sharing tools, you can automatically share your newest posts on social media, or schedule your content to be re-shared at any date or time you choose. And along with growing your following, you can grow your business with tools like payment buttons and ads."
+msgstr "使用 Jetpack 强大的共享工具，您可以在社交媒体上自动分享最新的文章，或者安排您的内容在选择的任何日期或时间进行重新共享。随着粉丝数量的不断增加，您可以借助付款按钮和广告等工具来拓展业务。"
+
+#: _inc/jetpack-strings.php:565
+msgid "Keeping your hard work safe is important, too. Jetpack Premium gives you brute force login protection, automated spam filtering, and malware scanning. You also get daily backups  with hassle-free restores, just in case you need them."
+msgstr "此外，保证您的努力工作安全无虞同样非常重要。Jetpack 高级版可为您提供暴力登录保护、自动垃圾邮件过滤和恶意软件扫描服务。您还可以通过让您无后顾之忧的还原功能获得每日备份，以备不时之需。"
+
+#: _inc/jetpack-strings.php:564
+msgid "Start exploring Jetpack Premium now to see all the benefits of your new plan."
+msgstr "立即开始探索 Jetpack 高级版，以了解您的新套餐的全部优势。"
+
+#: _inc/jetpack-strings.php:563
+msgid "Enable premium video player"
+msgstr "启用高级版视频播放器"
+
+#: _inc/jetpack-strings.php:562 _inc/jetpack-strings.php:575
+msgid "Monetize your site with ads"
+msgstr "通过在站点上投放广告获利"
+
+#: _inc/jetpack-strings.php:561
+msgid "Welcome Premium"
+msgstr "高级版欢迎辞"
+
+#: _inc/jetpack-strings.php:560
+msgid "Your Premium Jetpack plan is powering up!"
+msgstr "您的高级版 Jetpack 套餐蓄势待发！"
+
+#: _inc/jetpack-strings.php:559
+msgid "Thanks for choosing a Jetpack Personal plan. Jetpack is now backing up your site and scanning for security threats."
+msgstr "感谢您选择 Jetpack 个人版套餐。Jetpack 现在可以备份您的站点并扫描安全威胁。"
+
+#: _inc/jetpack-strings.php:557
+msgid "With Jetpack Personal, you have access to more than 100 free, professionally-designed WordPress themes. Choose the theme that best fits your site and customize colors, images, or add a variety of new widgets."
+msgstr "借助 Jetpack 个人版，您可以使用 100 多种经过专业设计的免费 WordPress 主题。选择最适合您站点的主题，并自定义颜色、图片或添加各种新的小组件。"
+
+#: _inc/jetpack-strings.php:555
+msgid "Using Jetpack’s powerful Publicize feature and built-in sharing tools, you’ll find new ways to grow your following and increase traffic. Automatically share your newest posts on social media, or allow followers to subscribe via email for your latest content right in their inbox."
+msgstr "使用 Jetpack 强大的 Publicize 功能和内置的共享工具，您将找到新的途径来提升粉丝数量并增加流量。自动在社交媒体上分享您的最新文章，或允许粉丝通过电子邮件订阅您的最新内容，在收件箱中尽情阅览。"
+
+#: _inc/jetpack-strings.php:553
+msgid "Jetpack keeps you safe, too: you’re protected from spam in comments and contact forms, and our brute force login protection prevents hackers from accessing your data. And if something does go wrong, you can restore a backup of your site in a single click."
+msgstr "此外，Jetpack 还可保障您的安全：在评论窗体和联系人窗体中，我们将保护您免受垃圾信息的侵扰，而且我们的暴力登录保护可防止黑客获取您的数据。如果出现问题，您可以一键还原站点备份。"
+
+#: _inc/jetpack-strings.php:552
+msgid "Got it!"
+msgstr "知道了！"
+
+#: _inc/jetpack-strings.php:551
+msgid "Welcome personal"
+msgstr "个人版欢迎辞"
+
+#: _inc/jetpack-strings.php:550
+msgid "Your Personal Jetpack plan is powering up!"
+msgstr "您的个人版 Jetpack 套餐蓄势待发！"
+
+#: _inc/jetpack-strings.php:280
+msgid "Enhanced site-wide search, powered by Elasticsearch (Beta)"
+msgstr "由 Elasticsearch 提供技术支持的增强版全站搜索（测试版）"
 
 #: modules/theme-tools/content-options/customizer.php:309
 msgid "Automatically use first image in post"
@@ -83,10 +274,20 @@ msgctxt "Module Name"
 msgid "Search"
 msgstr "搜索"
 
+#: modules/module-headings.php:113
+msgctxt "Jumpstart Description"
+msgid "Receive immediate notifications if your site goes down, 24/7."
+msgstr "全天候接收站点出现故障的即时通知。"
+
 #: modules/module-headings.php:107
 msgctxt "Module Description"
 msgid "Enable the Jetpack Mobile theme"
 msgstr "启用 Jetpack 移动主题"
+
+#: modules/module-headings.php:86
+msgctxt "Jumpstart Description"
+msgid "Give visitors an easy way to show they appreciate your content."
+msgstr "为访客提供一种简单的方法来显示其对您的内容的欣赏。"
 
 #: modules/module-headings.php:28
 msgctxt "Module Description"
@@ -97,6 +298,10 @@ msgstr "通过在评论中添加“点赞”按钮提高访客的参与度。"
 msgctxt "Module Name"
 msgid "Comment Likes"
 msgstr "评论点赞数"
+
+#: modules/masterbar/masterbar.php:659 modules/masterbar/masterbar.php:672
+msgid "Site Pages"
+msgstr "站点页面"
 
 #: modules/masterbar/masterbar.php:587
 msgid "View Site"
@@ -226,6 +431,130 @@ msgstr "%s 不是有效的角色。"
 msgid "The roles property must be a string or an array."
 msgstr "角色属性必须是字符串或数组。"
 
+#: functions.global.php:101
+msgid "By connecting your site you agree to our fascinating <a href=\"%s\" target=\"_blank\">Terms of Service</a> and to <a href=\"%s\" target=\"_blank\">share details</a> with WordPress.com"
+msgstr "连接您的站点即表示，您同意我们清晰易懂的<a href=\"%s\" target=\"_blank\">服务条款</a>，并同意与 WordPress.com <a href=\"%s\" target=\"_blank\">共享详细信息</a>"
+
+#: class.jetpack-connection-banner.php:803
+msgid "Paying customers also benefit from automated backups, malware scans, and priority support."
+msgstr "付费客户也可享有自动备份、恶意软件扫描以及优先支持服务。"
+
+#: class.jetpack-connection-banner.php:795
+msgid "Your site is automatically protected from brute force attacks, plus you can use single sign-on for extra security."
+msgstr "自动保护您的站点免受强力攻击的侵扰，此外，您还可以通过单点登录获取额外的安全保护。"
+
+#: class.jetpack-connection-banner.php:787
+msgid "Jetpack checks your site every few minutes, and if it's offline we'll notify you instantly."
+msgstr "Jetpack 每隔几分钟会检查您的站点，并在发现站点下线后立即通知您。"
+
+#: class.jetpack-connection-banner.php:779
+msgid "Make Sure Your Site Is Always Online"
+msgstr "确保您的站点时时在线"
+
+#: class.jetpack-connection-banner.php:755
+msgid "You also get clear and concise stats and analytics about your visitors."
+msgstr "您也可以获取有关访客的清晰准确的统计信息与分析。"
+
+#: class.jetpack-connection-banner.php:746
+msgid "Kickstart your marketing with social media automation tools, related content, email subscriptions, and sharing tools."
+msgstr "通过社交媒体自动工具、相关内容、电子邮件订阅和共享工具开始您的营销之旅。"
+
+#: class.jetpack-connection-banner.php:737
+msgid "A site without traffic is like a car without gas. Jetpack helps you fill up so that you can achieve your goals."
+msgstr "没有流量的站点犹如没有汽油的汽车。Jetpack 可以为您“加满油”，从而助您实现自己的目标。"
+
+#: class.jetpack-connection-banner.php:729
+msgid "Get The Traffic You Deserve"
+msgstr "增加您的流量"
+
+#: class.jetpack-connection-banner.php:707
+msgid "Publish with ease using WordPress.com or the official WordPress mobile apps."
+msgstr "通过 WordPress.com 或官方 WordPress 移动应用程序轻松发布。"
+
+#: class.jetpack-connection-banner.php:698
+msgid "Customization tools and widgets help you make your site look great without writing any code, and our CDN speeds up your images."
+msgstr "使用自定义工具和小组件，无需撰写任何代码也可以让您的站点拥有非凡的外观，而且我们的 CDN 可以加速您的图像传输。"
+
+#: class.jetpack-connection-banner.php:689
+msgid "Jetpack gives you access to more than 100 free and 200 premium WordPress themes."
+msgstr "通过 Jetpack，您可以访问 100 多种免费和 200 多种高级套餐 WordPress 主题。"
+
+#: class.jetpack-connection-banner.php:681
+msgid "Code-Free Design and Publishing"
+msgstr "零代码设计与发布"
+
+#: class.jetpack-connection-banner.php:649
+msgid "Connect to WordPress.com (free) to get started."
+msgstr "连接至 WordPress.com（免费），开始使用。"
+
+#: class.jetpack-connection-banner.php:640
+msgid "You get themes and tools to design your site, marketing services to make it successful, and state-of-the-art security."
+msgstr "您可以获取设计站点所需的主题和工具、帮助站点取得成功的营销服务和最先进的安全性。"
+
+#: class.jetpack-connection-banner.php:631
+msgid "Jetpack is the best way to experience WordPress, whether your site is brand new or already well established."
+msgstr "无论您的站点是全新的还是已经创建的，Jetpack 都是体验 WordPress 的最佳方式。"
+
+#: class.jetpack-connection-banner.php:615
+msgid "Keep It Safe"
+msgstr "保证其安全性"
+
+#: class.jetpack-connection-banner.php:609
+msgid "Make It Successful"
+msgstr "确保取得成功"
+
+#: class.jetpack-connection-banner.php:603
+msgid "Create Your Site"
+msgstr "创建您的站点"
+
+#: class.jetpack-connection-banner.php:536
+msgid "Jetpack includes other features that help you customize your site"
+msgstr "Jetpack 包含可帮助您定制站点的其他功能"
+
+#: class.jetpack-connection-banner.php:493
+msgid "Our mobile and desktop apps are free and available to you on Apple or Android devices once Jetpack is connected to WordPress.com"
+msgstr "我们提供免费的移动和桌面应用程序，只要将 Jetpack 连接到 WordPress.com，您就可以在 Apple 或 Android 设备上使用它们"
+
+#: class.jetpack-connection-banner.php:450
+msgid "Jetpack automatically optimizes and speeds up images using the global WordPress.com Content Delivery Network (CDN)"
+msgstr "Jetpack 使用全球 WordPress.com 内容传送网络 (CDN) 自动优化和加速图像传输"
+
+#: class.jetpack-connection-banner.php:421
+msgid "Preview, install, and activate with one-click, then use our suite of design tools to make it look just as you need it to."
+msgstr "一键预览、安装和激活您的站点，然后使用我们的设计工具包根据自己的需要设计站点。"
+
+#: class.jetpack-connection-banner.php:412
+msgid "Jetpack reduces complexity and makes this previously difficult process a breeze. Browse hundreds of themes in our showcase, or search by theme, name, style, color, or type."
+msgstr "Jetpack 简化了之前复杂繁琐的流程，使得操作更方便。浏览我们的陈列窗中的数百款主题，或按主题、名称、风格、颜色或类型进行搜索。"
+
+#: class.jetpack-connection-banner.php:403
+msgid "Choosing a design for your site is essential. It defines your brand, your layout, and your visitors’ reading experience."
+msgstr "为您的站点选择适合的设计至关重要。设计关乎您的品牌、布局和访客的阅读体验。"
+
+#: class.jetpack-connection-banner.php:395
+msgid "Choosing a design for your site is essential. It defines your brand, your layout, and your visitors’ reading experience"
+msgstr "为您的站点选择适合的设计至关重要。设计关乎您的品牌、布局和访客的阅读体验"
+
+#: class.jetpack-connection-banner.php:391
+msgid "Hundreds of beautiful themes to choose from"
+msgstr "数百款漂亮的主题供您挑选"
+
+#: class.jetpack-connection-banner.php:341
+msgid "Your site is automatically protected from brute force attacks, plus you can use single sign-on for extra security"
+msgstr "自动保护您的站点免受强力攻击的侵扰，此外，您还可以通过单点登录获取额外的安全保护"
+
+#: class.jetpack-connection-banner.php:289
+msgid "Get clear and concise stats and analytics about your visitors"
+msgstr "获取有关访客的清晰准确统计信息与分析"
+
+#: class.jetpack-connection-banner.php:227
+msgid "Jetpack is a free plugin that utilizes powerful WordPress.com servers to enhance your site and simplify managing it"
+msgstr "Jetpack 是一款免费的插件，它利用强大的 WordPress.com 服务器优化您的站点并简化站点的管理"
+
+#: class.jetpack-connection-banner.php:197
+msgid "Professional Themes"
+msgstr "专业主题"
+
 #: class.jetpack-cli.php:1025
 msgid "Request failed with code %s"
 msgstr "请求失败，代码为 %s"
@@ -250,6 +579,15 @@ msgstr "令牌 JSON 无效：%s"
 msgid "Sync errored with code: %s"
 msgstr "同步出错，代码为：%s"
 
+#: class.jetpack-cli.php:122
+msgid "Failed to test connection (empty response body)"
+msgstr "连接测试失败（回复正文为空）"
+
+#. translators: %1$s is the error code, %2$s is the error message
+#: class.jetpack-cli.php:117
+msgid "Failed to test connection (#%1$s: %2$s)"
+msgstr "连接测试失败（#%1$s：%2$s）"
+
 #: class.jetpack-cli.php:53 class.jetpack-cli.php:89
 msgid "The WordPress.com account for the primary connection is %s"
 msgstr "主要连接的 WordPress.com 帐户是 %s"
@@ -266,6 +604,26 @@ msgstr "无法提取所请求的数据。"
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1469
 msgid "Could not connect to VaultPress."
 msgstr "无法连接到 VaultPress。"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1685
+msgid "Display ads on archive pages?"
+msgstr "在存档页面上显示广告？"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1678
+msgid "Display ads on pages?"
+msgstr "在页面上显示广告？"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1671
+msgid "Display ads on posts?"
+msgstr "在文章上显示广告？"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1664
+msgid "Display ads on the front page?"
+msgstr "在首页上显示广告？"
+
+#: _inc/lib/class.core-rest-api-endpoints.php:1657
+msgid "Display second ad below post?"
+msgstr "在文章下方显示第二条广告？"
 
 #: _inc/jetpack-strings.php:542
 msgid "With this release, your contact form just got a bit sweeter. We moved the big old button right down into your editor's toolbar on the right. Yes, it's a little smaller, but it fits in a bit better, don't you think? Oh and all your forms now have a preview that can be edited all right inside the editor."
@@ -331,6 +689,14 @@ msgstr "您的 Jetpack 站点整装待发！"
 msgid "We're now collecting stats, securing your site, and speeding up your images. Pretty soon you'll be able to see everything going on with your site right through Jetpack! Welcome aboard."
 msgstr "我们现在正在收集统计信息，确保您站点的安全，以及加速处理您的图片。您很快就能在自己的站点上看到您的所有内容，全靠 Jetpack！欢迎登录。"
 
+#: _inc/jetpack-strings.php:456
+msgid "Welcome to {{s}}Jetpack %(jetpack_version)s{{/s}}! {{a}}Learn what's new{{/a}}."
+msgstr "欢迎使用 {{s}}Jetpack %(jetpack_version)s{{/s}}！{{a}}了解新增内容{{/a}}。"
+
+#: _inc/jetpack-strings.php:441
+msgid "Connect your account to get the most out of Jetpack"
+msgstr "连接您的帐户，充分利用 Jetpack"
+
 #: _inc/jetpack-strings.php:414 _inc/jetpack-strings.php:473
 msgid "Stars"
 msgstr "星级"
@@ -338,6 +704,46 @@ msgstr "星级"
 #: _inc/jetpack-strings.php:413 _inc/jetpack-strings.php:472
 msgid "Jupiter"
 msgstr "木星"
+
+#: _inc/jetpack-strings.php:360
+msgid "By connecting your site you agree to our fascinating {{tosLink}}Terms of Service{{/tosLink}} and to {{shareDetailsLink}}share details{{/shareDetailsLink}} with WordPress.com"
+msgstr "连接您的站点即表示，您同意我们清晰易懂的{{tosLink}}服务条款{{/tosLink}}，并同意与 WordPress.com {{shareDetailsLink}}共享详细信息{{/shareDetailsLink}}"
+
+#: _inc/jetpack-strings.php:609
+msgid "Jetpack Stats People"
+msgstr "Jetpack 统计查看者"
+
+#: _inc/jetpack-strings.php:608
+msgid "Hello there! Your stats have been activated."
+msgstr "您好！您的统计功能已激活。"
+
+#: _inc/jetpack-strings.php:607
+msgid "Just give us a little time to collect data so we can display it for you here."
+msgstr "请稍候片刻，正在收集数据，稍后会在此处显示相关数据。"
+
+#: _inc/jetpack-strings.php:606
+msgid "Okay, got it!"
+msgstr "好，可以了！"
+
+#: _inc/jetpack-strings.php:257
+msgid "Display ads below posts on"
+msgstr "在文章下方显示广告"
+
+#: _inc/jetpack-strings.php:253
+msgid "Archives"
+msgstr "存档"
+
+#: _inc/jetpack-strings.php:252
+msgid "Additional ad placements"
+msgstr "其他广告位置"
+
+#: _inc/jetpack-strings.php:251
+msgid "Top of each page"
+msgstr "每个页面顶部"
+
+#: _inc/jetpack-strings.php:250
+msgid "Second ad below post"
+msgstr "文章下方的第二条广告"
 
 #: _inc/jetpack-strings.php:224
 msgid "Your site is backed up."
