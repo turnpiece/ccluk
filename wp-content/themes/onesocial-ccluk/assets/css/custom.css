@@ -29,15 +29,15 @@ Custom stylesheet.
         font-size: 24px;
         color: #fff;
         text-transform: uppercase; }
-    .home-page #main .section#posts .section-content {
+    .home-page #main .section.posts .section-content {
       max-width: 1020px;
       text-align: center; }
-      .home-page #main .section#posts .section-content .post {
+      .home-page #main .section.posts .section-content article {
         width: 300px;
         margin: 20px;
         display: inline-block;
         text-align: left; }
-        .home-page #main .section#posts .section-content .post .entry-header {
+        .home-page #main .section.posts .section-content article .entry-header {
           display: block; }
 .home-page .homepage-section-title > h4 {
   background-color: #22a7f0;

@@ -34,13 +34,13 @@
 				}
 			}
 
-			&#posts {
+			&.posts {
 				
 				.section-content {
 					max-width: 1020px;
 					text-align: center;
 
-					.post {
+					article {
 						width: 300px;
 						margin: 20px;
 						display: inline-block;
