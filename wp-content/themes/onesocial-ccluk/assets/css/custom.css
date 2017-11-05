@@ -17,7 +17,8 @@ Custom stylesheet.
       max-width: 1170px;
       margin: 0 auto;
       display: -webkit-flex;
-      display: flex; }
+      display: flex;
+      justify-content: center; }
     .home-page #main .section .section-title {
       text-align: center;
       max-width: 300px;
