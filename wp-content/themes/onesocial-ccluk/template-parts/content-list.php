@@ -8,7 +8,7 @@
  */
 ?>
 
-<article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
+<article id="post-<?php the_ID(); ?>" <?php post_class('list-item'); ?>>
 
 	<header class="entry-header">
 		<?php if (has_post_thumbnail()) : ?>
@@ -16,7 +16,7 @@
 				<?php the_post_thumbnail( 'medium' ) ?>
 			</a>
 		<?php endif; ?>
-		
+
 		<a href="<?php the_permalink() ?>">
 			<h2 class="entry-title"><?php the_title(); ?></h2>
 		</a>

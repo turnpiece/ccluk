@@ -32,12 +32,12 @@ Custom stylesheet.
     .home-page #main .section.posts .section-content {
       max-width: 1020px;
       text-align: center; }
-      .home-page #main .section.posts .section-content article {
+      .home-page #main .section.posts .section-content .list-item {
         width: 300px;
         margin: 20px;
         display: inline-block;
         text-align: left; }
-        .home-page #main .section.posts .section-content article .entry-header {
+        .home-page #main .section.posts .section-content .list-item .entry-header {
           display: block; }
 .home-page .homepage-section-title > h4 {
   background-color: #22a7f0;
@@ -54,7 +54,7 @@ Custom stylesheet.
   margin: 0 auto;
   padding: 15px;
   color: #fff;
-  background-color: rgba(0, 152, 218, 0.65); }
+  background-color: rgba(0, 152, 218, 0.85); }
 .home-page .bb-slider-container .readmore a,
 .home-page .slide-content .button {
   text-transform: uppercase;
@@ -100,7 +100,7 @@ Custom stylesheet.
 .single .entry-header.has-image h1 {
   margin: 0 auto;
   color: #fff;
-  background-color: rgba(0, 152, 218, 0.65);
+  background-color: rgba(0, 152, 218, 0.85);
   text-shadow: none;
   padding: 12px 24px;
   font-size: 45px;
@@ -203,7 +203,7 @@ h3 {
 .bluebox {
   width: 100%;
   color: #fff;
-  background-color: rgba(0, 152, 218, 0.65);
+  background-color: rgba(0, 152, 218, 0.85);
   padding: 20px 50px;
   margin: 20px 0; }
 
