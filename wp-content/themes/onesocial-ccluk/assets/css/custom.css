@@ -5,6 +5,40 @@ Custom stylesheet.
 /** Import partials **/
 /** Variables **/
 /* Home page */
+.home-page #main {
+  display: block;
+  width: 100%;
+  max-width: 100%;
+  margin: 0; }
+  .home-page #main .section {
+    display: block;
+    width: 100%; }
+    .home-page #main .section .section-content {
+      max-width: 1170px;
+      margin: 0 auto;
+      display: -webkit-flex;
+      display: flex; }
+    .home-page #main .section .section-title {
+      text-align: center;
+      max-width: 300px;
+      margin: 0 auto; }
+      .home-page #main .section .section-title h4 {
+        background-color: #22a7f0;
+        padding: 15px 30px;
+        margin: 10px 30px;
+        font-size: 24px;
+        color: #fff;
+        text-transform: uppercase; }
+    .home-page #main .section#posts .section-content {
+      max-width: 1020px;
+      text-align: center; }
+      .home-page #main .section#posts .section-content .post {
+        width: 300px;
+        margin: 20px;
+        display: inline-block;
+        text-align: left; }
+        .home-page #main .section#posts .section-content .post .entry-header {
+          display: block; }
 .home-page .homepage-section-title > h4 {
   background-color: #22a7f0;
   padding: 15px 30px;
@@ -12,18 +46,17 @@ Custom stylesheet.
   font-size: 24px;
   color: #fff;
   text-transform: uppercase; }
-
-.page-template-homepage .site {
+.home-page .site {
   padding-top: 70px;
   padding-bottom: 70px; }
-.page-template-homepage .slide_content > .slide_content_wrap > .inner > .slide_text {
+.home-page .slide_content > .slide_content_wrap > .inner > .slide_text {
   display: table;
   margin: 0 auto;
   padding: 15px;
   color: #fff;
   background-color: rgba(0, 152, 218, 0.65); }
-.page-template-homepage .bb-slider-container .readmore a,
-.page-template-homepage .slide-content .button {
+.home-page .bb-slider-container .readmore a,
+.home-page .slide-content .button {
   text-transform: uppercase;
   border-radius: 5px;
   padding: 14px 30px 13px;
@@ -34,21 +67,21 @@ Custom stylesheet.
   margin-right: 5px;
   display: inline-block;
   font-weight: 500; }
-.page-template-homepage #secondary {
+.home-page #secondary {
   width: auto;
   margin-left: auto;
   margin-right: auto;
   padding: 15px 0; }
-  .page-template-homepage #secondary.widget-area .widget h3.widgettitle {
+  .home-page #secondary.widget-area .widget h3.widgettitle {
     text-align: center; }
-  .page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li {
+  .home-page #secondary .widget.recent-posts-widget-with-thumbnails ul > li {
     width: 30%;
     float: left;
     clear: right;
     margin-right: 3%; }
-    .page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li > a > img {
+    .home-page #secondary .widget.recent-posts-widget-with-thumbnails ul > li > a > img {
       clear: both; }
-    .page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title {
+    .home-page #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title {
       display: block; }
 
 .single .header-area {
