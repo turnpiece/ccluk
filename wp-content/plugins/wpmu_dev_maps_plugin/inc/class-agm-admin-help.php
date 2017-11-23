@@ -30,7 +30,7 @@ class Agm_AdminHelp {
 				'title'   => __( 'Options', AGM_LANG ),
 				'content' => '' .
 					'<p>' . __(
-						'This is where you can set up your Google Maps ' .
+						'This is where you can set up your Google Maps Pro ' .
 						'default settings.', AGM_LANG
 					) . '</p>'
 			),
@@ -59,7 +59,7 @@ class Agm_AdminHelp {
 
 	private function _get_default_sidebar() {
 		return '' .
-			'<h4>' . __( 'Google Maps', AGM_LANG ) . '</h4>' .
+			'<h4>' . __( 'Google Maps Pro', AGM_LANG ) . '</h4>' .
 			'<ul>' .
 				'<li>' .
 					'<a href="http://premium.wpmudev.org/project/wordpress-google-maps-plugin/" target="_blank">' .
@@ -85,6 +85,11 @@ class Agm_AdminHelp {
 			'admin_init',
 			array( $this, 'initialize' )
 		);
+
+		add_filter(
+			'plugin_action_links_' . AGM_PLUGIN,
+			array( $this, 'add_settings_link' )
+		);
 	}
 
 	public function initialize() {
@@ -105,6 +110,22 @@ class Agm_AdminHelp {
 				'content' => $content,
 			)
 		);
+	}
+
+	/**
+	 * Add quick link to plugin settings page.
+	 *
+	 * @param $links Links array.
+	 *
+	 * @return array
+	 */
+	public function add_settings_link( $links ) {
+
+		$plugin_link = array(
+			'<a href="' . admin_url( 'options-general.php?page=agm_google_maps' ) . '">' . __( "Settings", AGM_LANG ) . '</a>',
+		);
+
+		return array_merge( $plugin_link, $links );
 	}
 };
 

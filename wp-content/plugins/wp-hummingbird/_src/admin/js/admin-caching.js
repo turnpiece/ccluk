@@ -78,6 +78,11 @@ import Fetcher from './utils/fetcher';
                 }
 			});
 
+            $( '.tab label' ).on( 'click', function() {
+                $( this ).parent().parent().find( '.tab label.active' ).removeClass( 'active' );
+                $( this ).addClass( 'active' );
+            });
+
             return this;
         },
 
@@ -113,40 +118,6 @@ import Fetcher from './utils/fetcher';
             }
             else {
                 $( '#enable-cache-wrap' ).hide();
-            }
-        },
-
-        reloadSnippets: function() {
-            let self = this;
-            let stop = false;
-
-            for ( let i in self.$snippets ) {
-                if ( self.$snippets.hasOwnProperty( i ) ) {
-                    Fetcher.caching.reloadSnippets( i )
-                        .then( ( response ) => {
-                            if ( stop ) {
-                                return;
-                            }
-
-                            self.$snippets[response.type].text( response.code );
-
-                            // Make sure that we only do things when server displayed is the processed one
-                            if ( response.type !== self.selectedServer ) {
-                                return;
-                            }
-
-                            if ( 'apache' === response.type && response.updatedFile ) {
-                                $( '#wphb-notice-code-snippet-htaccess-updated' ).show();
-                                location.href = self.strings.recheckURL + '&caching-updated=true';
-                            } else if ( 'apache' === response.type && self.strings.cacheEnabled && ! response.updatedFile ) {
-                                $( '#wphb-notice-code-snippet-htaccess-error' ).show();
-                                location.href = self.strings.htaccessErrorURL;
-                            } else {
-                                $( '#wphb-notice-code-snippet-updated' ).show();
-                                location.href = self.strings.recheckURL + '&caching-updated=true';
-                            }
-                        });
-                }
             }
         }
     };

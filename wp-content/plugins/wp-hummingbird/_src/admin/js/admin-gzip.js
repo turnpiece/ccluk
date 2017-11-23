@@ -1,4 +1,5 @@
 import Fetcher from './utils/fetcher';
+import Clipboard from './utils/clipboard';
 
 (function($) {
     WPHB_Admin.gzip = {
@@ -12,7 +13,13 @@ import Fetcher from './utils/fetcher';
 
             this.$serverSelector = $("#wphb-server-type");
             this.selectedServer = this.$serverSelector.val();
-            let instructionsList = $(".wphb-server-instructions");
+            let instructionsList = $(".wphb-server-instructions"),
+                configureLink = $("#configure-gzip-link"),
+                troubleshootingLink = $("#troubleshooting-link"),
+                troubleshootingLinkLiteSpeed = $("#troubleshooting-link-litespeed");
+
+            new Clipboard('.wphb-code-snippet .button');
+            
             instructionsList.each(function() {
                 self.$serverInstructions[$(this).data("server")] = $(this);
             });
@@ -23,14 +30,29 @@ import Fetcher from './utils/fetcher';
                 self.showServerInstructions(value);
                 self.setServer(value);
                 self.selectedServer = value;
+                // Update tab size on select change.
+                self.updateTabSize();
             });
-            $("#toggle-apache-instructions").click(function(e) {
+            configureLink.on('click', function(e) {
                 e.preventDefault();
-                $(".apache-instructions").toggle();
+                $('html, body').animate({ scrollTop: $('#wphb-box-gzip-settings').offset().top -50 }, 'slow');
             });
-            $("#toggle-litespeed-instructions").click(function(e) {
+            troubleshootingLink.on('click', function(e) {
                 e.preventDefault();
-                $(".litespeed-instructions").toggle();
+                $('html, body').animate({ scrollTop: $('#troubleshooting-gzip').offset().top }, 'slow');
+            });
+            troubleshootingLinkLiteSpeed.on('click', function(e) {
+                e.preventDefault();
+                $('html, body').animate({ scrollTop: $('#troubleshooting-gzip-litespeed').offset().top }, 'slow');
+            });
+            $( '.tab label' ).on( 'click', function() {
+                $( this ).parent().parent().find( '.tab label.active' ).removeClass( 'active' );
+                $( this ).addClass( 'active' );
+            });
+            $( '.switch-manual' ).on( 'click', function() {
+                let lowercaseServername = self.selectedServer.toLowerCase();
+                $( '#wphb-server-instructions-' + lowercaseServername ).find( '.tab label.active' ).first().removeClass( 'active' );
+                $( this ).parents().find( '#' + lowercaseServername + '-config-manual' ).prev().addClass( 'active' );
             });
             return this;
         },
@@ -51,6 +73,13 @@ import Fetcher from './utils/fetcher';
             } else {
                 $("#enable-cache-wrap").hide();
             }
+        },
+        updateTabSize: function() {
+            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.tabs' ),
+                current = jq.find('.tab > input:checked').parent(),
+                content = current.find('.content');
+
+            jq.height( content.outerHeight() + current.outerHeight() - 6 );
         },
 
         setServer: function( value ) {

@@ -4,9 +4,8 @@
  *
  * @package Hummingbird
  *
- * @var bool   $notifications    Performance cron reports status.
  * @var object $report           Last report.
- * @var string $viewreport_link  Link to performance page.
+ * @var string $viewreport_link  Url to performance module.
  */
 
 ?>
@@ -48,13 +47,3 @@
 		</div>
 	<?php endforeach; ?>
 </div>
-
-<div class="buttons">
-	<a href="<?php echo esc_url( $viewreport_link ); ?>" class="button button-ghost alignleft">
-		<?php esc_html_e( 'View Full Report', 'wphb' ); ?>
-	</a>
-	<span class="status-text alignright">
-		<?php $notifications ? esc_html_e( 'Automated performance tests are enabled', 'wphb' ) : esc_html_e( 'Automated performance tests are disabled', 'wphb' ); ?>
-	</span>
-</div>
-<div class="clear"></div>

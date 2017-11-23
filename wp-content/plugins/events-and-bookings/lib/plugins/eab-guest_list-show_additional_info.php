@@ -126,7 +126,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 		$display_name = ('display_name' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 		$firstname = ('firstname' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 		$lastname = ('lastname' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
-		$fullname_first = ('fullname_first' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
+		$fullname_first = ('fullname_first' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';	 	 	 	 				   		
 		$fullname_last = ('fullname_last' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 
 		$show_in_admin = $this->_data->get_option('guest_lists-sai-show_in_admin') ? 'checked="checked"' : '';

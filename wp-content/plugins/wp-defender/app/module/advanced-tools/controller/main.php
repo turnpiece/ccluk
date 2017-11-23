@@ -39,7 +39,7 @@ class Main extends Controller {
 		$this->add_ajax_action( 'saveAdvancedSettings', 'saveSettings' );
 		$setting = Auth_Settings::instance();
 		if ( $setting->enabled ) {
-			$this->add_action( 'update_option_jetpack_available_modules', 'listenForJetpackOption', 10, 3 );
+			$this->add_action( 'update_option_jetpack_active_modules', 'listenForJetpackOption', 10, 3 );
 			//prepare for the login part
 			$isJetpackSSO = Auth_API::isJetPackSSO();
 			$isTML        = Auth_API::isTML();
@@ -86,7 +86,7 @@ class Main extends Controller {
 	 */
 	public function listenForJetpackOption( $old_value, $value, $option ) {
 		$settings = Auth_Settings::instance();
-		if ( array_search( 'sso', $value ) ) {
+		if ( array_search( 'sso', $value ) !== false ) {
 			$settings->markAsConflict( 'jetpack/jetpack.php' );
 		} else {
 			$settings->markAsUnConflict( 'jetpack/jetpack.php' );
@@ -304,10 +304,6 @@ class Main extends Controller {
 				$user     = $res[0];
 				$secret   = Auth_API::getUserSecret( $user->ID );
 				$redirect = HTTP_Helper::retrieve_post( 'redirect_to', admin_url() );
-				$redirect = apply_filters( 'login_redirect', $redirect );
-				if ( empty( $redirect ) ) {
-					$redirect = admin_url();
-				}
 				if ( Auth_API::compare( $secret, $otp ) ) {
 					//sign in
 					delete_user_meta( $user->ID, 'defOTPLoginToken' );

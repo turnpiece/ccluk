@@ -29,7 +29,7 @@
 	 data-filter-secondary="<?php echo esc_attr( $filter ); echo 'OTHER' === $ext ? 'other' : ''?>">
 
 	<div class="wphb-minification-file-select">
-		<label for="minification-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="screen-reader-text"><?php esc_html_e( 'Hello', 'wphb' ); ?></label>
+		<label for="minification-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="screen-reader-text"><?php esc_html_e( 'Select file', 'wphb' ); ?></label>
 		<input type="checkbox" data-type="<?php echo esc_attr( $ext ); ?>" data-handle="<?php echo esc_attr( $item['handle'] ); ?>" id="minification-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" name="minification-file[]" class="wphb-minification-file-selector">
 	</div>
 	<div class="wphb-minification-file-details">
@@ -37,27 +37,6 @@
 		<div class="wphb-filename-info">
 			<span class="wphb-filename-info-name"><?php echo esc_html( $item['handle'] ); ?></span>
 			<a class="wphb-filename-info-url" target="_blank" href="<?php echo esc_url( $full_src ); ?>"><?php echo esc_html( basename( $rel_src ) ); ?></a>
-		</div>
-	</div>
-
-	<div class="wphb-minification-exclude">
-		<div class="tooltip-box">
-			<?php $tooltip = in_array( $item['handle'], $options['block'][ $type ], true ) ? __( 'Include this file', 'wphb' ) : __( 'Exclude this file', 'wphb' ); ?>
-			<span class="toggle tooltip-s tooltip-right" tooltip="<?php echo esc_attr( $tooltip ); ?>">
-				<label for="wphb-minification-include-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
-					   class="toggle-cross"
-					   data-type="<?php echo esc_attr( $ext ); ?>"
-					   data-handle="<?php echo esc_attr( $item['handle'] ); ?>">
-					<input type="checkbox"
-						<?php disabled( in_array( 'include', $disable_switchers, true ) ); ?>
-						   id="wphb-minification-include-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
-						   class="toggle-checkbox toggle-include"
-						   name="<?php echo esc_attr( $base_name ); ?>[include]"
-						<?php checked( in_array( $item['handle'], $options['block'][ $type ], true ), false ); ?>
-						   value="1">
-					<i class="<?php echo ( in_array( $item['handle'], $options['block'][ $type ], true ) ) ? 'wdv-icon wdv-icon-refresh' : 'dev-icon dev-icon-cross'; ?>"></i>
-				</label>
-			</span>
 		</div>
 	</div>
 
@@ -73,17 +52,18 @@
 						$dont_minify = true;
 					}
 					if ( $minified_file ) {
-						$tooltip = __( 'This file is already minified', 'wphb' );
+						$tooltip = __( 'This file has already been minified', 'wphb' );
 					}
 					?>
 					<input type="checkbox" <?php disabled( in_array( 'minify', $disable_switchers, true ) || in_array( $item['handle'], $options['block'][ $type ], true ) || $minified_file ); ?>
 						   id="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 						   class="toggle-checkbox toggle-minify"
-						   name="<?php echo esc_attr( $base_name ); ?>[minify]" <?php checked( in_array( $item['handle'], $options['dont_minify'][ $type ], true ), false ); ?>>
+						   name="<?php echo esc_attr( $base_name ); ?>[minify]" <?php checked( in_array( $item['handle'], $options['dont_minify'][ $type ], true ), false ); ?>
+						   aria-label="<?php esc_attr_e( 'Minify', 'wphb' ); ?>">
 					<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
-						<span class="toggle tooltip-l" tooltip="<?php echo esc_attr( $tooltip ); ?>"></span>
-						<i class="hb-icon-minify"></i>
-						<span><?php esc_html_e( 'Minify', 'wphb' ); ?></span>
+						<span class="toggle tooltip-l" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"></span>
+						<i class="hb-icon-minify" aria-hidden="true"></i>
+						<span aria-hidden="true"><?php esc_html_e( 'Minify', 'wphb' ); ?></span>
 					</label>
 					<?php
 					$tooltip = __( 'Combine this file with others if possible', 'wphb' );
@@ -94,28 +74,40 @@
 					?>
 					<input type="checkbox" <?php disabled( in_array( 'combine', $disable_switchers, true ) || in_array( $item['handle'], $options['block'][ $type ], true ) || $is_ssl ); ?>
 						   class="toggle-checkbox toggle-combine" name="<?php echo esc_attr( $base_name ); ?>[combine]"
-						   id="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['combine'][ $type ], true ) ); ?>>
+						   id="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['combine'][ $type ], true ) ); ?>
+						   aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>">
 					<label for="wphb-minification-combine-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
-						<span class="toggle tooltip-l" tooltip="<?php echo esc_attr( $tooltip ); ?>"></span>
-						<i class="hb-icon-minify-combine"></i>
-						<span><?php esc_html_e( 'Combine', 'wphb' ); ?></span>
+						<span class="toggle tooltip-l" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"></span>
+						<i class="hb-icon-minify-combine" aria-hidden="true"></i>
+						<span aria-hidden="true"><?php esc_html_e( 'Combine', 'wphb' ); ?></span>
 					</label>
 					<input type="checkbox" <?php disabled( in_array( 'position', $disable_switchers, true ) || in_array( $item['handle'], $options['block'][ $type ], true ) ); ?>
 						   class="toggle-checkbox toggle-position-footer" name="<?php echo esc_attr( $base_name ); ?>[position]"
-						   id="wphb-minification-position-footer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( $position, 'footer' ); ?> value="footer">
+						   id="wphb-minification-position-footer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( $position, 'footer' ); ?> value="footer"
+						   aria-label="<?php esc_attr_e( 'Footer', 'wphb' ); ?>">
 					<label for="wphb-minification-position-footer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
-						<span class="toggle tooltip-l" tooltip="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>"></span>
-						<i class="hb-icon-minify-footer"></i>
-						<span><?php esc_html_e( 'Footer', 'wphb' ); ?></span>
+						<span class="toggle tooltip-l" tooltip="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>" aria-hidden="true"></span>
+						<i class="hb-icon-minify-footer" aria-hidden="true"></i>
+						<span aria-hidden="true"><?php esc_html_e( 'Footer', 'wphb' ); ?></span>
 					</label>
 					<?php if ( 'scripts' === $type ) : ?>
 						<input type="checkbox" <?php disabled( in_array( 'defer', $disable_switchers, true ) || in_array( $item['handle'], $options['block'][ $type ], true ) ); ?>
 							   class="toggle-checkbox toggle-defer" name="<?php echo esc_attr( $base_name ); ?>[defer]"
-							   id="wphb-minification-defer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['defer'][ $type ], true ) ); ?> value="1">
+							   id="wphb-minification-defer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['defer'][ $type ], true ) ); ?> value="1"
+							   aria-label="<?php esc_attr_e( 'Defer', 'wphb' ); ?>">
 						<label for="wphb-minification-defer-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
-							<span class="toggle tooltip-l" tooltip="<?php esc_attr_e( 'Force load this file after the page has loaded', 'wphb' ); ?>"></span>
-							<i class="hb-icon-minify-defer"></i>
-							<span><?php esc_html_e( 'Defer', 'wphb' ); ?></span>
+							<span class="toggle tooltip-l" tooltip="<?php esc_attr_e( 'Force load this file after the page has loaded', 'wphb' ); ?>" aria-hidden="true"></span>
+							<i class="hb-icon-minify-defer" aria-hidden="true"></i>
+							<span aria-hidden="true"><?php esc_html_e( 'Defer', 'wphb' ); ?></span>
+						</label>
+					<?php elseif ( 'styles' === $type ) : ?>
+						<input type="checkbox" <?php disabled( in_array( 'inline', $disable_switchers, true ) || in_array( $item['handle'], $options['block'][ $type ], true ) ); ?>
+							   class="toggle-checkbox toggle-inline" name="<?php echo esc_attr( $base_name ); ?>[inline]"
+							   id="wphb-minification-inline-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['inline'][ $type ], true ) ); ?> value="1">
+						<label for="wphb-minification-inline-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
+							<span class="toggle tooltip-s" tooltip="<?php esc_attr_e( 'Inline style', 'wphb' ); ?>"></span>
+							<i class="hb-icon-minify-inline"></i>
+							<span><?php esc_html_e( 'Inline', 'wphb' ); ?></span>
 						</label>
 					<?php endif; ?>
 				</div>
@@ -136,7 +128,7 @@
 					</div>
 				</div>
 			<?php elseif ( $minified_file ) : ?>
-				<span class="tooltip tooltip-s" tooltip="<?php esc_attr_e( 'This file is already minified', 'wphb' ); ?>"><?php esc_html_e( 'Ignored', 'wphb' ); ?></span>
+				<span class="tooltip tooltip-s" tooltip="<?php esc_attr_e( 'This file has already been minified', 'wphb' ); ?>"><?php esc_html_e( 'Optimized', 'wphb' ); ?></span>
 			<?php elseif ( isset( $dont_minify ) && isset( $dont_combine ) && ! in_array( $item['handle'], $options['block'][ $type ], true ) ) : ?>
 				<span class="tooltip tooltip-s" tooltip="<?php esc_attr_e( 'This file type cannot be minified and will be left alone', 'wphb' ); ?>"><?php esc_html_e( 'Ignored', 'wphb' ); ?></span>
 			<?php elseif ( in_array( $item['handle'], $options['block'][ $type ], true ) ) : ?>
@@ -146,4 +138,25 @@
 			<?php endif; ?>
 		</div><!-- end wphb-minification-file-size -->
 	</div><!-- end wphb-minification-row-details -->
+
+	<div class="wphb-minification-exclude">
+		<div class="tooltip-box">
+			<?php $tooltip = in_array( $item['handle'], $options['block'][ $type ], true ) ? __( 'Include this file', 'wphb' ) : __( 'Exclude this file', 'wphb' ); ?>
+			<span class="toggle tooltip-s tooltip-right" tooltip="<?php echo esc_attr( $tooltip ); ?>">
+				<label for="wphb-minification-include-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
+					   class="toggle-cross"
+					   data-type="<?php echo esc_attr( $ext ); ?>"
+					   data-handle="<?php echo esc_attr( $item['handle'] ); ?>">
+					<input type="checkbox"
+						<?php disabled( in_array( 'include', $disable_switchers, true ) ); ?>
+						   id="wphb-minification-include-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
+						   class="toggle-checkbox toggle-include"
+						   name="<?php echo esc_attr( $base_name ); ?>[include]"
+						<?php checked( in_array( $item['handle'], $options['block'][ $type ], true ), false ); ?>
+						   value="1">
+					<i class="<?php echo ( in_array( $item['handle'], $options['block'][ $type ], true ) ) ? 'wdv-icon wdv-icon-refresh' : 'dev-icon dev-icon-cross'; ?>" aria-hidden="true"></i>
+				</label>
+			</span>
+		</div>
+	</div>
 </div><!-- end wphb-border-row -->

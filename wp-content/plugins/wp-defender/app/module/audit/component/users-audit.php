@@ -17,7 +17,7 @@ class Users_Audit extends Event_Abstract {
 
 	public function get_hooks() {
 		return array(
-			'wp_login_failed'      => array(
+			'wp_login_failed'       => array(
 				'args'        => array( 'username' ),
 				'text'        => sprintf( esc_html__( "User login fail. Username: %s", wp_defender()->domain ), '{{username}}' ),
 				'level'       => self::LOG_LEVEL_FATAL,
@@ -25,7 +25,7 @@ class Users_Audit extends Event_Abstract {
 				'context'     => self::CONTEXT_SESSION,
 				'action_type' => self::ACTION_LOGIN,
 			),
-			'wp_login'             => array(
+			'wp_login'              => array(
 				'args'        => array( 'userlogin', 'user' ),
 				'text'        => sprintf( esc_html__( "User login success: %s", wp_defender()->domain ), '{{userlogin}}' ),
 				'level'       => self::LOG_LEVEL_INFO,
@@ -33,7 +33,7 @@ class Users_Audit extends Event_Abstract {
 				'context'     => self::CONTEXT_SESSION,
 				'action_type' => self::ACTION_LOGIN,
 			),
-			'wp_logout'            => array(
+			'wp_logout'             => array(
 				'args'        => array(),
 				'text'        => sprintf( esc_html__( "User logout success: %s", wp_defender()->domain ), '{{username}}' ),
 				'level'       => self::LOG_LEVEL_INFO,
@@ -45,7 +45,7 @@ class Users_Audit extends Event_Abstract {
 					'username' => Utils::instance()->getDisplayName( get_current_user_id() )
 				)
 			),
-			'user_register'        => array(
+			'user_register'         => array(
 				'args'         => array( 'user_id' ),
 				'text'         => is_admin() ? sprintf( esc_html__( "%s added a new user: Username: %s, Role: %s", wp_defender()->domain ), '{{wp_user}}', '{{username}}', '{{user_role}}' )
 					: sprintf( esc_html__( "A new user registered: Username: %s, Role: %s", wp_defender()->domain ), '{{username}}', '{{user_role}}' ),
@@ -70,15 +70,61 @@ class Users_Audit extends Event_Abstract {
 					)
 				)
 			),
-			'deleted_user'         => array(
-				'args'        => array( 'user_id' ),
-				'text'        => sprintf( esc_html__( "%s deleted an user: ID: %s", wp_defender()->domain ), '{{wp_user}}', '{{user_id}}' ),
-				'level'       => self::LOG_LEVEL_INFO,
-				'context'     => self::CONTEXT_USERS,
-				'action_type' => Audit_API::ACTION_DELETED,
-				'event_type'  => $this->type,
+			'delete_user'           => array(
+				'args'         => array( 'user_id' ),
+				'text'         => sprintf( esc_html__( "%s deleted a user: ID: %s, username: %s", wp_defender()->domain ), '{{wp_user}}', '{{user_id}}', '{{username}}' ),
+				'level'        => self::LOG_LEVEL_INFO,
+				'context'      => self::CONTEXT_USERS,
+				'action_type'  => Audit_API::ACTION_DELETED,
+				'event_type'   => $this->type,
+				'program_args' => array(
+					'username' => array(
+						'callable'        => 'get_user_by',
+						'params'          => array(
+							'id',
+							'{{user_id}}'
+						),
+						'result_property' => 'user_login'
+					)
+				)
 			),
-			'profile_update'       => array(
+			'remove_user_from_blog' => array(
+				'args'         => array( 'user_id', 'blog_id' ),
+				'text'         => sprintf( esc_html__( "%s removed a user: ID: %s, username: %s from blog %s", wp_defender()->domain ), '{{wp_user}}', '{{user_id}}', '{{username}}', '{{blog_id}}' ),
+				'level'        => self::LOG_LEVEL_INFO,
+				'context'      => self::CONTEXT_USERS,
+				'action_type'  => Audit_API::ACTION_DELETED,
+				'event_type'   => $this->type,
+				'program_args' => array(
+					'username' => array(
+						'callable'        => 'get_user_by',
+						'params'          => array(
+							'id',
+							'{{user_id}}'
+						),
+						'result_property' => 'user_login'
+					)
+				)
+			),
+			'wpmu_delete_user'      => array(
+				'args'         => array( 'user_id' ),
+				'text'         => sprintf( esc_html__( "%s deleted a user: ID: %s, username: %s", wp_defender()->domain ), '{{wp_user}}', '{{user_id}}', '{{username}}' ),
+				'level'        => self::LOG_LEVEL_INFO,
+				'context'      => self::CONTEXT_USERS,
+				'action_type'  => Audit_API::ACTION_DELETED,
+				'event_type'   => $this->type,
+				'program_args' => array(
+					'username' => array(
+						'callable'        => 'get_user_by',
+						'params'          => array(
+							'id',
+							'{{user_id}}'
+						),
+						'result_property' => 'user_login'
+					)
+				)
+			),
+			'profile_update'        => array(
 				'args'        => array( 'user_id', 'old_user_data' ),
 				'level'       => self::LOG_LEVEL_INFO,
 				'action_type' => Audit_API::ACTION_UPDATED,
@@ -86,7 +132,7 @@ class Users_Audit extends Event_Abstract {
 				'context'     => self::CONTEXT_PROFILE,
 				'callback'    => array( '\WP_Defender\Module\Audit\Component\Users_Audit', 'profile_update_callback' ),
 			),
-			'retrieve_password'    => array(
+			'retrieve_password'     => array(
 				'args'        => array( 'username' ),
 				'text'        => sprintf( esc_html__( "Password requested to reset for user: %s", wp_defender()->domain ), '{{username}}' ),
 				'level'       => self::LOG_LEVEL_INFO,
@@ -94,7 +140,7 @@ class Users_Audit extends Event_Abstract {
 				'event_type'  => $this->type,
 				'context'     => self::CONTEXT_PROFILE,
 			),
-			'after_password_reset' => array(
+			'after_password_reset'  => array(
 				'args'        => array( 'user' ),
 				'text'        => sprintf( esc_html__( "Password reset for user: %s", wp_defender()->domain ), '{{user_login}}' ),
 				'level'       => self::LOG_LEVEL_INFO,
@@ -105,7 +151,7 @@ class Users_Audit extends Event_Abstract {
 					'user_login' => '{{user->user_login}}'
 				)
 			),
-			'set_user_role'        => array(
+			'set_user_role'         => array(
 				'args'         => array( 'user_ID', 'new_role', 'old_role' ),
 				'text'         => sprintf( esc_html__( '%s changed user %s\'s role from %s to %s', wp_defender()->domain ), '{{wp_user}}', '{{username}}', '{{from_role}}', '{{new_role}}' ),
 				'level'        => self::LOG_LEVEL_INFO,

@@ -25,7 +25,8 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 		parent::__construct( $slug, $page_title, $menu_title, $parent, $render );
 
 		$this->tabs = array(
-			'main' => __( 'Improvements', 'wphb' ),
+			'main'    => __( 'Improvements', 'wphb' ),
+			'reports' => __( 'Reporting', 'wphb' ),
 		);
 
 		// We need to actually tweak these tasks.
@@ -48,31 +49,26 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 
 		$run_url = add_query_arg( 'run', 'true', wphb_get_admin_menu_url( 'performance' ) );
 		$run_url = wp_nonce_url( $run_url, 'wphb-run-performance-test' );
-		$next_test_on = WP_Hummingbird_Module_Performance::can_run_test();
+		$can_run_scan = WP_Hummingbird_Module_Performance::can_run_test();
 		?>
 		<div class="wphb-notice wphb-notice-success hidden" id="wphb-notice-performance-report-settings-updated">
-			<p><?php _e( 'Settings updated', 'wphb' ); ?></p>
+			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 		<section id="header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<div class="actions label-and-button">
-				<?php if ( $last_report && ! is_wp_error( $last_report ) ) : ?>
+			<div class="actions">
+				<?php if ( true === $can_run_scan ) : ?>
+					<a href="<?php echo esc_url( $run_url ); ?>" class="button button-grey"><?php esc_html_e( 'New Test', 'wphb' ); ?></a>
 					<?php
-					$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->data->time ) ) );
-					$disabled = true !== $next_test_on;
+				else :
+					/* translators: %d: number of minutes. */
+					$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $can_run_scan ) );
 					?>
-					<p class="actions-label">
-						<?php /* translators: %1$s: date, %2$s: time. */
-						printf( __( 'Your last performance test was on <strong>%1$s</strong> at <strong>%2$s</strong>', 'wphb' ), date_i18n( get_option( 'date_format' ), $data_time ), date_i18n( get_option( 'time_format' ), $data_time ) );
-						if ( $disabled ) : ?>
-							<br/><?php /* translators: %d: number of minutes. */
-							printf( __( 'Hummingbird is just catching her breath. <strong>Run again in %d minutes</strong>', 'wphb' ), $next_test_on ); ?>
-						<?php endif; ?>
-					</p>
-					<?php if ( ! $disabled ) : ?>
-						<a href="<?php echo esc_url( $run_url ); ?>" <?php disabled( $disabled ); ?> class="button"><?php _e( 'Run Test', 'wphb' ); ?></a>
-					<?php endif; ?>
+					<a href="#" class="button button-grey tooltip-l tooltip-bottom" disabled="disabled" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"><?php esc_html_e( 'New Test', 'wphb' ); ?></a>
 				<?php endif; ?>
+				<a href="<?php echo esc_url( wphb_get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+				</a>
 			</div>
 		</section><!-- end header -->
 		<?php
@@ -127,6 +123,20 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				array(
 					'box_class'         => 'dev-box content-box-one-col-center',
 					'box_content_class' => 'box-content no-side-padding',
+				)
+			);
+
+			$this->add_meta_box(
+				'reporting-summary',
+				__( 'Reports', 'wphb' ),
+				array( $this, 'reporting_metabox' ),
+				array( $this, 'reporting_metabox_header' ),
+				array( $this, 'reporting_metabox_footer' ),
+				'reports',
+				array(
+					'box_class'         => 'dev-box content-box-one-col-center',
+					'box_content_class' => 'box-content no-padding',
+					'box_footer_class'  => wphb_is_member() ? 'box-footer' : 'box-footer wphb-reporting-no-membership',
 				)
 			);
 		} else {
@@ -238,6 +248,61 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				'doing_report' => true,
 			)
 		);
+	}
+
+	/**
+	 * Reporting meta box.
+	 *
+	 * @since 1.4.5
+	 */
+	public function reporting_metabox() {
+		$settings = wphb_get_settings();
+
+		$week_days = array(
+			'Monday',
+			'Tuesday',
+			'Wednesday',
+			'Thursday',
+			'Friday',
+			'Saturday',
+			'Sunday',
+		);
+
+		$hour = mt_rand( 0, 23 );
+
+		$notification = wphb_is_member() ? $settings['email-notifications'] : false;
+		$frequency = wphb_is_member() ? $settings['email-frequency'] : 7;
+		$send_day = wphb_is_member() ? $settings['email-day'] : $week_days[ array_rand( $week_days, 1 ) ];
+		$send_time = $hour . ':00';
+		if ( wphb_is_member() ) {
+			// Remove the minutes from the hour to not confuse the user.
+			$send_time = explode( ':', $settings['email-time'] );
+			$send_time[1] = '00';
+			$send_time = implode( ':', $send_time );
+		}
+		$recipients = wphb_is_member() ? $settings['email-recipients'] : array();
+
+		$args = compact( 'notification', 'frequency', 'send_day', 'send_time', 'recipients' );
+		$this->view( 'performance/reporting-meta-box', $args );
+	}
+
+	/**
+	 * Reporting meta box header.
+	 *
+	 * @since 1.5.0
+	 */
+	public function reporting_metabox_header() {
+		$title = __( 'Reports', 'wphb' );
+		$this->view( 'performance/reporting-meta-box-header', compact( 'title' ) );
+	}
+
+	/**
+	 * Reporting meta box footer.
+	 *
+	 * @since 1.5.0
+	 */
+	public function reporting_metabox_footer() {
+		$this->view( 'performance/reporting-meta-box-footer', array() );
 	}
 
 	/**

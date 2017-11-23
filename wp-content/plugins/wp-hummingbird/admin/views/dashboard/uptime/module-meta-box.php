@@ -41,12 +41,3 @@
 		<div><?php echo esc_html( $site_date ); ?></div>
 	</div>
 </div><!-- end wphb-dash-table -->
-
-<div class="buttons">
-	<a href="<?php echo esc_url( wphb_get_admin_menu_url( 'uptime' ) ); ?>" class="button button-ghost" name="submit">
-		<?php esc_html_e( 'View stats', 'wphb' ); ?>
-	</a>
-	<span class="status-text alignright">
-		<?php esc_html_e( 'Downtime notifications are enabled', 'wphb' ); ?>
-	</span>
-</div>

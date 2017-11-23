@@ -13,11 +13,20 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	protected $transient_slug = 'caching';
 
 	/**
+	 * Module status.
+	 *
+	 * @var array $status
+	 */
+	public $status;
+
+	/**
 	 * Analyze data. Overwrites parent method.
+	 *
+	 * @param bool $check_api If set to true, the api can be checked.
 	 *
 	 * @return array
 	 */
-	public function analize_data() {
+	public function analize_data( $check_api = false ) {
 
 		$files = array(
 			'javascript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
@@ -75,7 +84,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 		} // End foreach().
 
 		// If tests fail for some reason, we fallback to an API check.
-		if ( $try_api ) {
+		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = wphb_get_api();
 			$api_results = $api->performance->check_cache();

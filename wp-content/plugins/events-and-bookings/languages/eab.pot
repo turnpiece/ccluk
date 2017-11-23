@@ -2,10 +2,10 @@
 # This file is distributed under the same license as the Events + package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Events + 1.9.7\n"
+"Project-Id-Version: Events + 1.9.8\n"
 "Report-Msgid-Bugs-To: "
 "https://wordpress.org/support/plugin/events-and-bookings\n"
-"POT-Creation-Date: 2017-10-20 18:53:56+00:00\n"
+"POT-Creation-Date: 2017-11-21 07:58:03+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -23,7 +23,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-Bookmarks: \n"
 "X-Textdomain-Support: yes\n"
-"X-Generator: grunt-wp-i18n1.0.0\n"
+"X-Generator: grunt-wp-i18n1.0.1\n"
 
 #: admin/class-eab-admin.php:56
 msgid "View all RSVPs"
@@ -564,7 +564,7 @@ msgstr ""
 
 #: events-and-bookings.php:743 events-and-bookings.php:764
 #: events-and-bookings.php:789
-#: lib/plugins/eab-events-front_page_editing.php:422
+#: lib/plugins/eab-events-front_page_editing.php:424
 msgid "No start time"
 msgstr ""
 
@@ -575,7 +575,7 @@ msgstr ""
 
 #: events-and-bookings.php:751 events-and-bookings.php:772
 #: events-and-bookings.php:797
-#: lib/plugins/eab-events-front_page_editing.php:442
+#: lib/plugins/eab-events-front_page_editing.php:444
 msgid "No end time"
 msgstr ""
 
@@ -666,7 +666,7 @@ msgid "hours"
 msgstr ""
 
 #: events-and-bookings.php:1034 lib/class_eab_admin_tutorial.php:82
-#: lib/plugins/eab-events-front_page_editing.php:457
+#: lib/plugins/eab-events-front_page_editing.php:459
 msgid "Event status"
 msgstr ""
 
@@ -675,7 +675,7 @@ msgid "What is the event status? "
 msgstr ""
 
 #: events-and-bookings.php:1039
-#: lib/plugins/eab-events-front_page_editing.php:459
+#: lib/plugins/eab-events-front_page_editing.php:461
 msgid "Open"
 msgstr ""
 
@@ -683,19 +683,19 @@ msgstr ""
 #: lib/plugins/eab-events-countdown-for-next-event.php:165
 #: lib/plugins/eab-events-countdown-for-next-event.php:315
 #: lib/plugins/eab-events-event-countdown.php:163
-#: lib/plugins/eab-events-front_page_editing.php:460
+#: lib/plugins/eab-events-front_page_editing.php:462
 #: lib/plugins/eab-events-next-event-shortcode.php:62
 #: lib/plugins/eab-events-next-event-shortcode.php:115
 msgid "Closed"
 msgstr ""
 
 #: events-and-bookings.php:1041
-#: lib/plugins/eab-events-front_page_editing.php:461
+#: lib/plugins/eab-events-front_page_editing.php:463
 msgid "Expired"
 msgstr ""
 
 #: events-and-bookings.php:1042
-#: lib/plugins/eab-events-front_page_editing.php:462
+#: lib/plugins/eab-events-front_page_editing.php:464
 msgid "Archived"
 msgstr ""
 
@@ -709,7 +709,7 @@ msgstr ""
 
 #: events-and-bookings.php:1064 lib/class_eab_exporter.php:166
 #: lib/plugins/eab-email-enewsletter_integration.php:299
-#: lib/plugins/eab-events-front_page_editing.php:473
+#: lib/plugins/eab-events-front_page_editing.php:475
 #: lib/plugins/eab-rsvps-additional_registration_fields.php:154
 #: lib/plugins/eab-rsvps-additional_registration_fields.php:198
 msgid "Yes"
@@ -720,14 +720,14 @@ msgstr ""
 #: lib/class_eab_template.php:209 lib/class_eab_template.php:520
 #: lib/class_eab_template.php:545 lib/class_eab_template.php:672
 #: lib/plugins/eab-email-enewsletter_integration.php:301
-#: lib/plugins/eab-events-front_page_editing.php:474
+#: lib/plugins/eab-events-front_page_editing.php:476
 #: lib/plugins/eab-rsvps-additional_registration_fields.php:154
 #: lib/plugins/eab-rsvps-additional_registration_fields.php:198
 msgid "No"
 msgstr ""
 
 #: events-and-bookings.php:1070
-#: lib/plugins/eab-events-front_page_editing.php:477
+#: lib/plugins/eab-events-front_page_editing.php:479
 msgid "Fee"
 msgstr ""
 
@@ -791,103 +791,103 @@ msgid_plural "Recurrent <span class=\"count\">(%s)</span>"
 msgstr[0] ""
 msgstr[1] ""
 
-#: lib/class_eab_addon_handler.php:199
+#: lib/class_eab_addon_handler.php:211
 msgid "Deactivate"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:201
+#: lib/class_eab_addon_handler.php:213
 msgid "Activate"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:207 lib/wpmudev-dash-notification.php:1184
+#: lib/class_eab_addon_handler.php:219 lib/wpmudev-dash-notification.php:1184
 msgid "Version %s"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:209
+#: lib/class_eab_addon_handler.php:221
 msgid "by %s"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:225 lib/class_eab_addon_handler.php:241
+#: lib/class_eab_addon_handler.php:237 lib/class_eab_addon_handler.php:253
 msgid "All"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:233
+#: lib/class_eab_addon_handler.php:245
 msgid "Filter"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:239
+#: lib/class_eab_addon_handler.php:251
 msgid "Show"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:242 lib/class_eab_addon_handler.php:251
+#: lib/class_eab_addon_handler.php:254 lib/class_eab_addon_handler.php:263
 msgid "Active"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:243
+#: lib/class_eab_addon_handler.php:255
 msgid "Inactive"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:248
+#: lib/class_eab_addon_handler.php:260
 msgid "Check"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:250
+#: lib/class_eab_addon_handler.php:262
 msgid "None"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:256
+#: lib/class_eab_addon_handler.php:268
 msgid ""
 "You are about to activate multiple add-ons. Are you sure you want to do "
 "this?"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:256
+#: lib/class_eab_addon_handler.php:268
 msgid "Activate selected"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:258
+#: lib/class_eab_addon_handler.php:270
 msgid ""
 "You are about to deactivate multiple add-ons. Are you sure you want to do "
 "this?"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:258
+#: lib/class_eab_addon_handler.php:270
 msgid "Deactivate selected"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:267
+#: lib/class_eab_addon_handler.php:279
 msgid "Name"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:268
+#: lib/class_eab_addon_handler.php:280
 msgid "Description"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:425
+#: lib/class_eab_addon_handler.php:437
 msgid ""
 "Something might have gone wrong with add-on manipulation, please check your "
 "add-on status"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:426
+#: lib/class_eab_addon_handler.php:438
 msgid "Add-on successfully (de)activated"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:429
+#: lib/class_eab_addon_handler.php:441
 msgid "There was something wrong with (de)activating the add-on."
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:444
+#: lib/class_eab_addon_handler.php:456
 msgid ""
 "Something might have gone wrong with add-ons manipulation, please check "
 "your add-ons respective status"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:445
+#: lib/class_eab_addon_handler.php:457
 msgid "Selected add-ons successfully (de)activated"
 msgstr ""
 
-#: lib/class_eab_addon_handler.php:448
+#: lib/class_eab_addon_handler.php:460
 msgid ""
 "There was something wrong with (de)activating at least some of the selected "
 "add-ons."
@@ -938,7 +938,7 @@ msgid ""
 msgstr ""
 
 #: lib/class_eab_admin_tutorial.php:102
-#: lib/plugins/eab-events-front_page_editing.php:556
+#: lib/plugins/eab-events-front_page_editing.php:558
 msgid "Publish"
 msgstr ""
 
@@ -967,7 +967,7 @@ msgid "Login with %s"
 msgstr ""
 
 #: lib/class_eab_api.php:87 lib/class_eab_api.php:102
-#: lib/plugins/eab-events-front_page_editing.php:559
+#: lib/plugins/eab-events-front_page_editing.php:561
 #: lib/plugins/eab-events-limit_capacity.php:273
 #: lib/plugins/eab-events-limit_capacity.php:281
 msgid "Cancel"
@@ -1177,8 +1177,8 @@ msgid "Sa"
 msgstr ""
 
 #: lib/class_eab_event_model.php:503
-#: lib/plugins/eab-events-front_page_editing.php:412
-#: lib/plugins/eab-events-front_page_editing.php:432
+#: lib/plugins/eab-events-front_page_editing.php:414
+#: lib/plugins/eab-events-front_page_editing.php:434
 #: lib/plugins/eab-import-facebook_events-main.php:201
 #: lib/plugins/eab-import-google_calendar.php:194
 #: lib/plugins/eab-rsvps-scheduled_rsvp_reset.php:83
@@ -2463,98 +2463,98 @@ msgstr ""
 msgid "Edit this Event"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:227
+#: lib/plugins/eab-events-front_page_editing.php:229
 msgid "No data received"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:233
+#: lib/plugins/eab-events-front_page_editing.php:235
 msgid "Insufficient privileges"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:269
+#: lib/plugins/eab-events-front_page_editing.php:271
 msgid "There has been an error saving this Event"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:299
+#: lib/plugins/eab-events-front_page_editing.php:301
 msgid "Event saved and published"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:302
+#: lib/plugins/eab-events-front_page_editing.php:304
 msgid "Event saved and waiting for approval"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:373
+#: lib/plugins/eab-events-front_page_editing.php:375
 msgid "Back to Event"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:376
+#: lib/plugins/eab-events-front_page_editing.php:378
 #: lib/widgets/Attendees_Widget.class.php:69
 #: lib/widgets/Popular_Widget.class.php:112
 #: lib/widgets/Upcoming_Widget.class.php:126
 msgid "Title"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:410
+#: lib/plugins/eab-events-front_page_editing.php:412
 msgid "Starts on"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:417
-#: lib/plugins/eab-events-front_page_editing.php:437
+#: lib/plugins/eab-events-front_page_editing.php:419
+#: lib/plugins/eab-events-front_page_editing.php:439
 msgid "Time"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:430
+#: lib/plugins/eab-events-front_page_editing.php:432
 msgid "Ends on"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:471
+#: lib/plugins/eab-events-front_page_editing.php:473
 msgid "Is this a paid event?"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:493
+#: lib/plugins/eab-events-front_page_editing.php:495
 msgid "Venue"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:510
+#: lib/plugins/eab-events-front_page_editing.php:512
 msgid "Category"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:536
-#: lib/plugins/eab-events-front_page_editing.php:549
+#: lib/plugins/eab-events-front_page_editing.php:538
+#: lib/plugins/eab-events-front_page_editing.php:551
 msgid "Feature Image"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:543
+#: lib/plugins/eab-events-front_page_editing.php:545
 msgid "Change the featured image"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:556
+#: lib/plugins/eab-events-front_page_editing.php:558
 msgid "Update"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:570
+#: lib/plugins/eab-events-front_page_editing.php:572
 msgid "Toggle RSVPs"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:625
+#: lib/plugins/eab-events-front_page_editing.php:627
 msgid "Please set both start and end dates and times"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:626
+#: lib/plugins/eab-events-front_page_editing.php:628
 msgid "Please check your time and date settings"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:627
+#: lib/plugins/eab-events-front_page_editing.php:629
 #: lib/plugins/eab-import-meetup.php:390 lib/plugins/eab-import-meetup.php:406
 #: lib/plugins/eab-import-meetup.php:419
 msgid "Error"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:628
+#: lib/plugins/eab-events-front_page_editing.php:630
 msgid "Save failed"
 msgstr ""
 
-#: lib/plugins/eab-events-front_page_editing.php:629
+#: lib/plugins/eab-events-front_page_editing.php:631
 msgid "All good!"
 msgstr ""
 
@@ -3563,17 +3563,17 @@ msgid ""
 "this option if you wish to remove their attendance records entirely instead."
 msgstr ""
 
-#: lib/plugins/lib/class_eab_mp_bridge.php:198
+#: lib/plugins/lib/class_eab_mp_bridge.php:199
 #: lib/plugins/lib/class_eab_mp_bridge_legacy.php:161
 msgid "... or, please select a Product"
 msgstr ""
 
-#: lib/plugins/lib/class_eab_mp_bridge.php:200
+#: lib/plugins/lib/class_eab_mp_bridge.php:201
 #: lib/plugins/lib/class_eab_mp_bridge_legacy.php:163
 msgid "Select a pricing Product"
 msgstr ""
 
-#: lib/plugins/lib/class_eab_mp_bridge.php:383
+#: lib/plugins/lib/class_eab_mp_bridge.php:384
 msgid "Click here to purchase your ticket"
 msgstr ""
 

@@ -300,6 +300,7 @@ class Main extends \WP_Defender\Controller {
 		$settings->save();
 		if ( $this->hasMethod( 'scheduleReportTime' ) ) {
 			$this->scheduleReportTime( $settings );
+			$this->submitStatsToDev();
 		}
 		wp_send_json_success( array(
 			'message' => __( "Your settings have been updated.", wp_defender()->domain )

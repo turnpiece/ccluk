@@ -89,8 +89,6 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		return wphb_get_setting( 'cloudflare-plan' );
 	}
 
-
-
 	/**
 	 * Tries to set the same caching rules in CF
 	 */

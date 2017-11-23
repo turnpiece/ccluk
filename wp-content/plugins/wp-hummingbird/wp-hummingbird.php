@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version: 1.6.2
+Version: 1.7.0.3
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author: WPMU DEV
@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.6.2' );
+	define( 'WPHB_VERSION', '1.7.0.3' );
 }
 
 if ( file_exists( trailingslashit( plugin_dir_path( __FILE__ ) ) . 'free-mods.php' ) ) {
@@ -98,6 +98,15 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 		public $core;
 
 		/**
+		 * Hummingbird Pro project ID.
+		 *
+		 * @since  1.7.0
+		 * @access private
+		 * @var    int $project_id
+		 */
+		private static $project_id = 1081721;
+
+		/**
 		 * Return the plugin instance
 		 *
 		 * @return WP_Hummingbird
@@ -106,7 +115,6 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			if ( ! self::$instance ) {
 				self::$instance = new self();
 			}
-
 
 			return self::$instance;
 		}
@@ -135,6 +143,16 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 
 			$this->load_textdomain();
 
+			// Add upgrade schedule.
+			add_action( 'wphb_upgrade_to_pro', array( $this, 'upgrade_to_pro' ) );
+			$running_cron_update = get_site_option( 'wphb_cron_update_running' );
+			// Try to update to pro version is user can do that.
+			if ( self::is_free_installed() && self::can_install_pro() && empty( $running_cron_update ) ) {
+				// Schedule upgrade.
+				wp_schedule_single_event( time(), 'wphb_upgrade_to_pro' );
+				update_site_option( 'wphb_cron_update_running', true );
+			}
+
 			add_action( 'init', array( $this, 'maybe_clear_all_cache' ) );
 
 			// This file should not exist in the official release. Just for development.
@@ -145,12 +163,10 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 
 		public function maybe_clear_all_cache() {
 			if ( isset( $_GET['wphb-clear'] ) && current_user_can( wphb_get_admin_capability() ) ) {
+
 				wphb_flush_cache();
 
 				delete_site_option( 'wphb-last-report-score' );
-				delete_site_option( 'wphb-stop-report' );
-				delete_site_option( 'wphb-last-report' );
-				delete_site_option( 'wphb-doing-report' );
 
 				if ( 'all' === $_GET['wphb-clear'] ) {
 					wphb_update_settings( wphb_get_default_settings() );
@@ -164,7 +180,6 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 				if ( wphb_is_htaccess_written( 'caching' ) ) {
 					wphb_unsave_htaccess( 'caching' );
 				}
-
 
 				wp_redirect( remove_query_arg( 'wphb-clear' ) );
 				exit;
@@ -221,15 +236,72 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 				$this->admin = new WP_Hummingbird_Admin();
 			}
 
-
 			/**
 			 * Triggered when WP Hummingbird is totally loaded
 			 */
 			do_action( 'wp_hummingbird_loaded' );
 		}
-	}
-}
 
+		private static function is_free_installed() {
+			if ( defined( 'WPHB_WPORG' ) && WPHB_WPORG && 'wp-hummingbird/wp-hummingbird.php' != plugin_basename( __FILE__ ) ) {
+				return true;
+			}
+
+			return false;
+		}
+
+		private static function can_install_pro() {
+			// Check that dashboard plugin is installed.
+			if ( ! class_exists( 'WPMUDEV_Dashboard' ) ) {
+				return false;
+			}
+
+			if ( ! is_object( WPMUDEV_Dashboard::$api ) ) {
+				return false;
+			}
+
+			if ( ! method_exists( WPMUDEV_Dashboard::$api, 'has_key' ) ) {
+				return false;
+			}
+
+			// If user can't install - exit.
+			if ( ! WPMUDEV_Dashboard::$upgrader->user_can_install( self::$project_id ) ) {
+				return false;
+			}
+
+			// Check permissions and configuration.
+			if ( ! WPMUDEV_Dashboard::$upgrader->can_auto_install( self::$project_id ) ) {
+				return false;
+			}
+
+			return true;
+		}
+
+		/**
+		 * Upgrade free version to pro.
+		 *
+		 * @since 1.7.0
+		 */
+		public function upgrade_to_pro() {
+			// If pro is already installed - exit.
+			/**
+			TODO: move out free to pro switch here from wp-hummingbird.php
+			if ( WPMUDEV_Dashboard::$upgrader->is_project_installed( $project_id ) ) {
+			//return uninstall_plugin( 'wp-hummingbird-wporg/wp-hummingbird.php' );
+			// TODO: switch to pro and delete free version.
+			}
+			*/
+
+			if ( WPMUDEV_Dashboard::$upgrader->install( self::$project_id ) ) {
+				delete_site_option( 'wphb_cron_update_running' );
+				activate_plugin( 'wp-hummingbird/wp-hummingbird.php' );
+				// Do we need to deactivate?
+				deactivate_plugins( 'hummingbird-performance/wp-hummingbird.php', true );
+				delete_plugins( array( 'hummingbird-performance/wp-hummingbird.php' ) );
+			}
+		}
+	}
+} // End if().
 
 if ( ! function_exists( 'wp_hummingbird' ) ) {
 	function wp_hummingbird() {
@@ -250,8 +322,9 @@ if ( ! function_exists( 'wphb_get_current_user_info' ) ) {
 
 		$current_user = wp_get_current_user();
 
-		if ( !($current_user instanceof WP_User) )
+		if ( ! ( $current_user instanceof WP_User ) ) {
 			return false;
+		}
 
 		if ( ! empty( $current_user->user_firstname ) ) { // First we try to grab user First Name
 			$display_name = $current_user->user_firstname;
@@ -298,9 +371,6 @@ if ( ! function_exists( 'wphb_activate' ) ) {
 	}
 	register_activation_hook( __FILE__, 'wphb_activate' );
 }
-
-
-
 
 if ( ! function_exists( 'wphb_deactivate' ) ) {
 	/**

@@ -44,6 +44,17 @@ function wphb_filter_resource_defer( $value, $handle, $type ) {
 	return true;
 }
 
+add_filter( 'wphb_inline_resource', 'wphb_filter_resource_inline', 10, 3 );
+function wphb_filter_resource_inline( $value, $handle, $type ) {
+	$options = wphb_get_settings();
+	$defer = $options['inline'][ $type ];
+	if ( ! in_array( $handle, $defer ) ) {
+		return $value;
+	}
+
+	return true;
+}
+
 add_filter( 'wphb_send_resource_to_footer', 'wphb_filter_resource_to_footer', 10, 3 );
 function wphb_filter_resource_to_footer( $value, $handle, $type ) {
 	$options = wphb_get_settings();
@@ -97,6 +108,16 @@ add_filter( 'wp_hummingbird_is_active_module_gravatar', 'wphb_gravatar_module_st
 function wphb_gravatar_module_status( $current ) {
 	$options = wphb_get_settings();
 	if ( ! $options['gravatar_cache'] ) {
+		return false;
+	}
+
+	return $current;
+}
+
+add_filter( 'wp_hummingbird_is_active_module_page-caching', 'wphb_page_caching_module_status' );
+function wphb_page_caching_module_status( $current ) {
+	$options = wphb_get_settings();
+	if ( ! $options['page_cache'] ) {
 		return false;
 	}
 

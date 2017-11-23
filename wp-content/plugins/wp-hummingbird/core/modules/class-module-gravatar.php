@@ -8,14 +8,6 @@
 class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 
 	/**
-	 * WP_Hummingbird_Filesystem class instance.
-	 *
-	 * @since 1.6.0
-	 * @var   WP_Hummingbird_Filesystem $filesystem
-	 */
-	private $filesystem;
-
-	/**
 	 * Last error.
 	 *
 	 * @since 1.6.0
@@ -29,14 +21,19 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * @since 1.6.0
 	 */
 	public function init() {
-		// Init filesystem.
-		$this->filesystem = WP_Hummingbird_Filesystem::instance( 'gravatar' );
+		global $wphb_fs;
 
-		if ( is_wp_error( $this->filesystem->status ) ) {
-			$this->error = $this->filesystem->status;
+		// Init filesystem.
+		if ( ! $wphb_fs ) {
+			$wphb_fs = WP_Hummingbird_Filesystem::instance();
+		}
+
+		if ( is_wp_error( $wphb_fs->status ) ) {
+			$this->error = $wphb_fs->status;
 		}
 
 		if ( $this->is_active() && ! is_wp_error( $this->error ) && ! is_admin() ) {
+			$wphb_fs->write( 'index.html', '', true );
 			//add_filter( 'get_avatar', array( $this, 'get_cached_avatar' ), 10, 6 );
 			add_filter( 'get_avatar_data', array( $this, 'get_avatar_data' ), 10, 2 );
 		}
@@ -56,44 +53,10 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * @since  1.6.0
 	 */
 	public function delete_files() {
-		return $this->filesystem->purge();
-	}
+		/* @var WP_Hummingbird_Filesystem $wphb_fs */
+		global $wphb_fs;
 
-	/**
-	 * Count the number of cached Gravatars.
-	 *
-	 * Because each Gravatar is cached in two different sizes, we divide the end result by 2.
-	 * Might need refactoring, because one user can hava several avatars cached (two different sizes),
-	 * and that will cause confusion for the user.
-	 *
-	 * @return bool|int
-	 * @since  1.6.0  Implemented, but not used in official release.
-	 */
-	public function get_cache_count() {
-		$dir_list = $this->filesystem->dirlist();
-
-		$files = 0;
-		foreach ( $dir_list as $directory ) {
-			$found = array_filter(
-				$directory['files'],
-				array( $this, 'array_filter_cb' )
-			);
-			$files = $files + count( $found );
-		}
-
-		return (int) ( $files / 2 );
-	}
-
-	/**
-	 * Array filter callback for backward php 5.2 compatibility.
-	 *
-	 * @since 1.6.0
-	 * @param array $resource  Resource array.
-	 *
-	 * @return bool
-	 */
-	private function array_filter_cb( $resource ) {
-		return 'f' === $resource['type'];
+		return $wphb_fs->purge( 'gravatar' );
 	}
 
 	/**
@@ -108,6 +71,9 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * @return bool|WP_Error       Returns true if file write is ok, WP_Error on error.
 	 */
 	private function get_remote_avatar( $id_or_email, $size ) {
+		/* @var WP_Hummingbird_Filesystem $wphb_fs */
+		global $wphb_fs;
+
 		$gravatar = get_avatar_data( $id_or_email, array(
 			'size' => $size,
 		));
@@ -135,7 +101,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			 */
 			$email_hash = $this->get_email_hash( $id_or_email );
 			$file = $email_hash . 'x' . $size . '.jpg';
-			return $this->filesystem->write( $file, $remote_avatar['body'] );
+			return $wphb_fs->write( $file, $remote_avatar['body'], 'gravatar' );
 		} else {
 			return new WP_Error( 'gravatar-not-found', __( 'Error fetching Gravatar. Gravatar not found.', 'wphb' ) );
 		}
@@ -180,7 +146,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			 * @param array $types An array of content types. Default only contains 'comment'.
 			 */
 			$allowed_comment_types = apply_filters( 'get_avatar_comment_types', array( 'comment' ) );
-			if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types ) ) {
+			if ( ! empty( $id_or_email->comment_type ) && ! in_array( $id_or_email->comment_type, (array) $allowed_comment_types, true ) ) {
 				$args['url'] = false;
 				/** This filter is documented in wp-includes/link-template.php */
 				return apply_filters( 'get_avatar_data', $args, $id_or_email );
@@ -222,6 +188,9 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * @deprecated 1.6.1
 	 */
 	public function get_cached_avatar( $image, $id_or_email, $size, $default, $alt, $args ) {
+		/* @var WP_Hummingbird_Filesystem $wphb_fs */
+		global $wphb_fs;
+
 		$email_hash = $this->get_email_hash( $id_or_email );
 
 		// Avatar file names for normal and retina.
@@ -238,7 +207,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 
 		foreach ( $images as $img ) {
 			// Try to save the avatar.
-			if ( $this->filesystem->find( $img['file'] ) ) {
+			if ( $wphb_fs->find( $img['file'], true ) ) {
 				break;
 			}
 
@@ -253,8 +222,8 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 
 		$gravatar_dir = trailingslashit( substr( $images['normal']['file'], 0, 3 ) );
 
-		$src = $this->filesystem->baseurl . $gravatar_dir . $images['normal']['file'];
-		$srcset = $this->filesystem->baseurl . $gravatar_dir . $images['retina']['file'];
+		$src = $wphb_fs->baseurl . $gravatar_dir . $images['normal']['file'];
+		$srcset = $wphb_fs->baseurl . $gravatar_dir . $images['retina']['file'];
 
 		$class = array( 'avatar', 'avatar-' . (int) $size, 'photo' );
 
@@ -289,6 +258,9 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 * @return mixed
 	 */
 	public function get_avatar_data( $args, $id_or_email ) {
+		/* @var WP_Hummingbird_Filesystem $wphb_fs */
+		global $wphb_fs;
+
 		$email_hash = $this->get_email_hash( $id_or_email );
 
 		if ( ! $args['found_avatar'] ) {
@@ -298,9 +270,14 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		// Try to save the avatar.
 		$file = $email_hash . 'x' . $args['size'] . '.jpg';
 
-		if ( ! $this->filesystem->find( $file ) && isset( $args['url'] ) ) {
+		if ( ! $wphb_fs->find( $file ) && isset( $args['url'] ) ) {
 			$remote_avatar = wp_remote_get( $args['url'] );
-			$file_write = $this->filesystem->write( $file, $remote_avatar['body'] );
+			// If error fetching avatar.
+			if ( is_wp_error( $remote_avatar ) ) {
+				$this->error = $remote_avatar;
+				return $args;
+			}
+			$file_write = $wphb_fs->write( $file, $remote_avatar['body'], 'gravatar' );
 
 			// If error creating file - log and return original image.
 			if ( is_wp_error( $file_write ) ) {
@@ -311,7 +288,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		}
 
 		$gravatar_dir = trailingslashit( substr( $file, 0, 3 ) );
-		$args['url'] = $this->filesystem->baseurl . $gravatar_dir . $file;
+		$args['url'] = $wphb_fs->baseurl . $gravatar_dir . $file;
 
 		return $args;
 	}

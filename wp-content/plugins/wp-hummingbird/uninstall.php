@@ -57,6 +57,8 @@ delete_site_option( 'wphb-server-type' );
 // Clean notices.
 delete_site_option( 'wphb-notice-free-rated-show' );
 delete_site_option( 'wphb-notice-http2-info-dismissed' );
+delete_site_option( 'wphb-notice-cache-cleaned' );
+delete_site_option( 'wphb-cloudflare-dash-notice' );
 
 // Clean all cron.
 wp_clear_scheduled_hook( 'wphb_performance_scan' );

@@ -32,11 +32,12 @@ if ( $expiry_selects ) : ?>
 	<div class="col-two-third">
 		<form action="" method="post">
 			<input type="hidden" class="hb-server-type" name="hb_server_type" value="<?php echo esc_attr( $server_type ); ?>">
-			<?php if ( ! $cf_active ) : ?>
+			<input type="hidden" name="expiry-settings" value="1">
 				<div class="wphb-radio-group">
 					<input type="radio" name="expiry-set-type" id="expiry-all-types" value="all" <?php checked( $all_expiry ); ?>>
 					<label for="expiry-all-types"><?php esc_html_e( 'Apply for all cache types', 'wphb' ); ?></label>
 				</div>
+			<?php if ( ! $cf_active ) : ?>
 				<div class="wphb-radio-group">
 					<input type="radio" name="expiry-set-type" id="expiry-single-type" value="single" <?php checked( ! $all_expiry ); ?>>
 					<label for="expiry-single-type"><?php esc_html_e( 'Apply for each cache type', 'wphb' ); ?></label>
@@ -75,11 +76,12 @@ if ( $expiry_selects ) : ?>
 				<?php elseif ( $cf_active ) : ?>
 					<label><?php esc_html_e( 'Choose expiry', 'wphb' ); ?></label>
 					<?php
-					wphb_get_caching_cloudflare_frequencies_dropdown( array(
-						'name'     => 'wphb-caching-cloudflare-summary-set-expiry',
-						'class'    => 'wphb-expiry-select',
-						'selected' => $cf_current,
-					));
+					wphb_get_caching_frequencies_dropdown( array(
+						'name'      => 'set-expiry-all',
+						'class'     => 'wphb-expiry-select',
+						'selected'  => $cf_current,
+						'data-type' => 'all',
+					), true );
 				endif;
 				?>
 			</div><!-- end wphb-border-frame -->
@@ -123,7 +125,7 @@ if ( $expiry_selects ) : ?>
 			<div id="wphb-server-instructions-apache" class="wphb-server-instructions hidden" data-server="apache">
 				<div class="tabs">
 					<div class="tab">
-						<label for="apache-config-auto"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
+						<label for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
 						<div class="content">
 						<span class="sub">
@@ -140,9 +142,9 @@ if ( $expiry_selects ) : ?>
 								if ( true === wphb_is_htaccess_writable() ) : ?>
 									<div id="enable-cache-wrap" class="enable-cache-wrap-apache <?php echo 'apache' === $server_type ? '' : 'hidden'; ?>">
 										<?php if ( true === $htaccess_written ) : ?>
-											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost button-large"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost button-large"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php elseif ( ! $already_enabled ) : ?>
-											<a href="<?php echo esc_url( $enable_link ); ?>" class="button button-large"><?php esc_attr_e( 'Activate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $enable_link ); ?>" class="button button-large"><?php esc_html_e( 'Activate', 'wphb' ); ?></a>
 										<?php endif; ?>
 									</div>
 								<?php endif;
@@ -171,7 +173,8 @@ if ( $expiry_selects ) : ?>
 								<div id="wphb-code-snippet">
 									<div id="wphb-code-snippet-apache" class="wphb-code-snippet">
 										<div class="wphb-block-content">
-											<pre><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
+											<button class="button button-grey" data-clipboard-target="#wphb-apache"><?php esc_html_e( 'Copy', 'wphb' ); ?></button>
+											<pre id="wphb-apache"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
 										</div>
 									</div>
 								</div>
@@ -184,7 +187,7 @@ if ( $expiry_selects ) : ?>
 			<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions hidden" data-server="LiteSpeed">
 				<div class="tabs">
 					<div class="tab">
-						<label for="litespeed-config-auto"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
+						<label for="litespeed-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="litespeed-config-type" id="litespeed-config-auto">
 						<div class="content">
 						<span class="sub">
@@ -201,9 +204,9 @@ if ( $expiry_selects ) : ?>
 								if ( true === wphb_is_htaccess_writable() ) : ?>
 									<div id="enable-cache-wrap" class="enable-cache-wrap-LiteSpeed <?php echo 'LiteSpeed' === $server_type ? '' : 'hidden'; ?>">
 										<?php if ( true === $htaccess_written ) : ?>
-											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost button-large"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost button-large"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php elseif ( ! $already_enabled ) : ?>
-											<a href="<?php echo esc_url( $enable_link ); ?>" class="button button-large"><?php esc_attr_e( 'Activate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $enable_link ); ?>" class="button button-large"><?php esc_html_e( 'Activate', 'wphb' ); ?></a>
 										<?php endif; ?>
 									</div>
 								<?php endif;
@@ -232,7 +235,8 @@ if ( $expiry_selects ) : ?>
 								<div id="wphb-code-snippet">
 									<div id="wphb-code-snippet-litespeed" class="wphb-code-snippet">
 										<div class="wphb-block-content">
-											<pre><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
+											<button class="button button-grey" data-clipboard-target="#wphb-litespeed"><?php esc_html_e( 'Copy', 'wphb' ); ?></button>
+											<pre id="wphb-litespeed"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
 										</div>
 									</div>
 								</div>
@@ -393,7 +397,7 @@ if ( $expiry_selects ) : ?>
 							<# } else { #>
 								<p><?php _e( 'It appears you have no active zones available. Double check your domain has been added to Cloudflare and try again.', 'wphb' ); ?></p>
 								<p class="cloudflare-submit">
-									<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate button button-ghost button"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>
+									<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate button button-ghost button"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 									<a href="<?php echo esc_url( wphb_get_admin_menu_url( 'caching' ) ); ?>&reload=<?php echo time(); ?>#wphb-box-dashboard-cloudflare" class="button"><?php esc_html_e( 'Re-Check', 'wphb' ); ?></a>
 								</p>
 							<# } #>
@@ -420,7 +424,7 @@ if ( $expiry_selects ) : ?>
 						<?php endif; ?>
 					</p>
 					<div class="wphb-border-frame with-padding">
-						<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate button button-ghost button-large"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>
+						<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="cloudflare-deactivate button button-ghost button-large"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 						<input type="submit" class="cloudflare-clear-cache button button-large" value="<?php esc_attr_e( 'Purge Cache', 'wphb' ); ?>">
 						<span class="spinner cloudflare-spinner"></span>
 					</div>

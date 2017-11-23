@@ -1,4 +1,7 @@
 <?php
+/**
+ * Class WP_Hummingbird_API_Request
+ */
 
 abstract class WP_Hummingbird_API_Request {
 
@@ -84,7 +87,6 @@ abstract class WP_Hummingbird_API_Request {
 		$this->api_key = $api_key;
 	}
 
-
 	public function set_timeout( $timeout ) {
 		$this->timeout = $timeout;
 	}
@@ -119,14 +121,13 @@ abstract class WP_Hummingbird_API_Request {
 		$this->headers[ $name ] = $value;
 	}
 
-
 	/**
 	 * Get the Request URL
 	 *
+	 * @param string $path Endpoint route
 	 * @return mixed
 	 */
 	abstract public function get_api_url( $path = '' );
-
 
 	/**
 	 * Make a GET API Call
@@ -140,8 +141,7 @@ abstract class WP_Hummingbird_API_Request {
 		try {
 			$result = $this->request( $path, $data, 'get' );
 			return $result;
-		}
-		catch ( WP_Hummingbird_API_Exception $e ) {
+		} catch ( WP_Hummingbird_API_Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 
@@ -159,8 +159,7 @@ abstract class WP_Hummingbird_API_Request {
 		try {
 			$result = $this->request( $path, $data, 'post' );
 			return $result;
-		}
-		catch ( WP_Hummingbird_API_Exception $e ) {
+		} catch ( WP_Hummingbird_API_Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 	}
@@ -169,8 +168,7 @@ abstract class WP_Hummingbird_API_Request {
 		try {
 			$result = $this->request( $path, $data, 'patch' );
 			return $result;
-		}
-		catch ( WP_Hummingbird_API_Exception $e ) {
+		} catch ( WP_Hummingbird_API_Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 	}
@@ -187,8 +185,7 @@ abstract class WP_Hummingbird_API_Request {
 		try {
 			$result = $this->request( $path, $data, 'head' );
 			return $result;
-		}
-		catch ( WP_Hummingbird_API_Exception $e ) {
+		} catch ( WP_Hummingbird_API_Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 
@@ -206,13 +203,11 @@ abstract class WP_Hummingbird_API_Request {
 		try {
 			$result = $this->request( $path, $data, 'delete' );
 			return $result;
-		}
-		catch ( WP_Hummingbird_API_Exception $e ) {
+		} catch ( WP_Hummingbird_API_Exception $e ) {
 			return new WP_Error( $e->getCode(), $e->getMessage() );
 		}
 
 	}
-
 
 	/**
 	 * Make an API Request
@@ -224,7 +219,7 @@ abstract class WP_Hummingbird_API_Request {
 	 * @return array|mixed|object
 	 * @throws WP_Hummingbird_API_Exception
 	 */
-	public function request( $path, $data = array(), $method = 'post'  ) {
+	public function request( $path, $data = array(), $method = 'post' ) {
 		$url = $this->get_api_url( $path );
 
 		$this->sign_request();
@@ -246,41 +241,36 @@ abstract class WP_Hummingbird_API_Request {
 		}
 
 		$this->log( "WPHB API: Sending request to $url" );
-		$this->log( "WPHB API: Arguments:" );
+		$this->log( 'WPHB API: Arguments:' );
 		$this->log( $args );
 
 		switch ( strtolower( $method ) ) {
 			case 'patch':
 			case 'delete':
- 			case 'post': {
-			    if ( is_array( $data ) ) {
-				    $args['body'] = array_merge( $data, $this->post_args );
-			    }
-			    else {
-				    $args['body'] = $data;
-			    }
+			case 'post':
+				if ( is_array( $data ) ) {
+					$args['body'] = array_merge( $data, $this->post_args );
+				} else {
+					$args['body'] = $data;
+				}
 
- 				$response = wp_remote_post( $url, $args );
+				$response = wp_remote_post( $url, $args );
 				break;
-			}
-			case 'head': {
+			case 'head':
 				$response = wp_remote_head( $url, $args );
 				break;
-			}
-			case 'get': {
+			case 'get':
 				$response = wp_remote_get( $url, $args );
 				break;
-			}
-			default: {
+			default:
 				$response = wp_remote_request( $url, $args );
-			}
+				break;
 		}
 
-		$this->log( "WPHB API: Response:" );
+		$this->log( 'WPHB API: Response:' );
 		$this->log( $response );
 
 		return $response;
-
 	}
 
 	protected function sign_request() {}

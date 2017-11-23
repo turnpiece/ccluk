@@ -4,12 +4,10 @@
  *
  * @package Hummingbird
  *
- * @var bool   $cdn_status               CDN status.
  * @var float  $compressed_size          Overall compressed files size in Kb.
  * @var float  $compressed_size_scripts  Amount of space saved by compressing JavaScript.
  * @var float  $compressed_size_styles   Amount of space saved by compressing CSS.
  * @var int    $enqueued_files           Number of enqueued files.
- * @var string $minification_url         URL to minification module.
  * @var float  $original_size            Overall original file size in Kb.
  * @var float  $percentage               Percentage saved.
  */
@@ -56,12 +54,3 @@
 		<div><?php echo esc_html( $compressed_size_styles ); ?>KB</div>
 	</div>
 </div><!-- end wphb-dash-table -->
-
-<div class="buttons">
-	<a href="<?php echo esc_url( $minification_url ); ?>" class="button button-ghost" name="submit">
-		<?php esc_html_e( 'Configure', 'wphb' ); ?>
-	</a>
-	<span class="status-text alignright">
-		<?php $cdn_status ? esc_html_e( 'WPMU DEV CDN is active', 'wphb' ) : esc_html_e( 'WPMU DEV CDN is disabled', 'wphb' ); ?>
-	</span>
-</div>

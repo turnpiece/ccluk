@@ -5,7 +5,6 @@
  */
 class AgmMapsWidget extends WP_Widget {
 	public function __construct() {
-		//parent::WP_Widget( false, $name = 'Google Maps Widget' );
 		parent::__construct( false, $name = 'Google Maps Widget' );
 		$this->model = new AgmMapModel();
 	}

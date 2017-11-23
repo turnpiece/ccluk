@@ -4,6 +4,13 @@ Tested up to: 4.7.4
 
 Change Log:
 
+1.7.4 - 2017-20-11
+----------------------------------------------------------------------
+- Fix: Conflict with Jetpack where Defender 2FA module would not detect if Jetpack 2FA was disabled.
+- Fix: Visitor would get a 404 lockout if landing on a page with many dead links.
+- Improvement: When an user is deleted, audit logging now display the user's login instead of only UID.
+- Other minor enhancements/fixes
+
 1.7.3 - 2017-14-10
 ----------------------------------------------------------------------
 - Fix: Two-factor authentication can be bypassed by user with no role.
@@ -210,4 +217,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1508694204-au
+87274-1511474743-au

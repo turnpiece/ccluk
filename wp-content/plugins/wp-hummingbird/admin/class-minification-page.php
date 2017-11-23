@@ -17,12 +17,9 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		parent::__construct( $slug, $page_title, $menu_title, $parent, $render );
 
 		$this->tabs = array(
-			'files' => __( 'Files', 'wphb' ),
+			'files'    => __( 'Files', 'wphb' ),
+			'settings' => __( 'Settings', 'wphb' ),
 		);
-
-		if ( ! is_multisite() ) {
-			$this->tabs['settings'] = __( 'Settings', 'wphb' );
-		}
 
 		add_filter( 'wphb_admin_after_tab_' . $this->get_slug(), array( $this, 'after_tab' ) );
 	}
@@ -44,9 +41,21 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			exit;
 		}
 
-		if ( isset( $_POST['clear-cache'] ) ) {
+		// Re-check files button clicked.
+		// Clear cache button click from notice.
+		if ( isset( $_POST['clear-cache'] ) || isset( $_GET['clear-cache'] ) ) {
+			// Remove notice
+			delete_site_option( 'wphb-notice-cache-cleaned-show' );
+
+			// Clear page caching if set
+			if ( isset( $_GET['clear-cache'] ) ) {
+				/* @var WP_Hummingbird_Module_Page_Caching $module */
+				$module = wphb_get_module( 'page-caching' );
+				$module->purge_cache_dir();
+			}
+
 			wphb_clear_minification_cache( false );
-			$url = remove_query_arg( 'updated' );
+			$url = remove_query_arg( array( 'updated', 'clear-cache' ) );
 			wp_safe_redirect( add_query_arg( 'wphb-cache-cleared', 'true', $url ) );
 			exit;
 		}
@@ -60,6 +69,14 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 				'enable_cdn',
 				'wphb-cache-cleared',
 			)));
+			exit;
+		}
+
+		if ( isset( $_GET['disable-minification'] ) ) {
+			wphb_toggle_minification( false );
+			wp_safe_redirect(
+				wphb_get_admin_menu_url( 'minification' )
+			);
 			exit;
 		}
 
@@ -156,6 +173,28 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 					}
 				}
 
+				$key = array_search( $handle, $options['inline'][ $type ] );
+				if ( ! isset( $item['inline'] ) && false !== $key ) {
+					unset( $options['inline'][ $type ][ $key ] );
+				}
+				elseif ( isset( $item['inline'] ) ) {
+					$options['inline'][ $type ][] = $handle;
+				}
+				$options['inline'][ $type ] = array_unique( $options['inline'][ $type ] );
+				$diff = array_merge(
+					array_diff( $current_options['inline'][ $type ], $options['inline'][ $type ] ),
+					array_diff( $options['inline'][ $type ], $current_options['inline'][ $type ] )
+				);
+
+				if ( $diff ) {
+					foreach ( $diff as $diff_handle ) {
+						$_groups = WP_Hummingbird_Module_Minify_Group::get_groups_from_handle( $diff_handle, $type );
+						if ( $_groups ) {
+							$changed_groups = array_merge( $changed_groups, $_groups );
+						}
+					}
+				}
+
 				if ( empty( $item['position'] ) ) {
 					$item['position'] = 'header';
 				}
@@ -206,15 +245,15 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		<div id="container" class="wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
 			<?php
 			if ( isset( $_GET['updated'] ) ) {
-				$this->show_notice( 'updated', __( 'Your new minify settings have been saved. Simply refresh your homepage and Hummingbird will minify and serve your newly compressed files.', 'wphb' ), 'success', false );
+				$this->admin_notices->show( 'updated', __( 'Your new minify settings have been saved. Simply refresh your homepage and Hummingbird will minify and serve your newly compressed files.', 'wphb' ), 'success', false );
 			}
 
 			if ( isset( $_GET['wphb-cache-cleared'] ) ) {
-				$this->show_notice( 'updated', __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
+				$this->admin_notices->show( 'updated', __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
 			}
 
 			if ( isset( $_GET['wphb-cache-cleared-with-cloudflare'] ) ) {
-				$this->show_notice( 'updated', __( 'Your local and Cloudflare caches have been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
+				$this->admin_notices->show( 'updated', __( 'Your local and Cloudflare caches have been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
 			}
 			?>
 			<div class="wphb-notice wphb-notice-success hidden" id="wphb-notice-minification-advanced-settings-updated">
@@ -243,30 +282,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		<?php
 	}
 
-	public function render_header() {
-		?>
-		<section id="header">
-			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<?php
-			$collection = wphb_minification_get_resources_collection();
-			$module = wphb_get_module( 'minify' );
-			if ( ( ! empty( $collection['styles'] ) && ! empty( $collection['scripts'] ) ) && $module->is_active() ) : ?>
-				<div class="actions status">
-					<div class="toggle-group toggle-group-with-buttons">
-						<div class="tooltip-box">
-							<span class="toggle" tooltip="<?php esc_attr_e( 'Turn off Minification', 'wphb' ); ?>">
-								<input type="checkbox" id="wphb-disable-minification" class="toggle-checkbox" name="wphb-disable-minification" checked>
-								<label for="wphb-disable-minification" class="toggle-label"></label>
-							</span>
-						</div>
-					</div>
-					<span class="spinner right"></span>
-				</div>
-			<?php endif; ?>
-		</section>
-		<?php
-	}
-
 	/**
 	 * Overriden from parent class
 	 */
@@ -290,9 +305,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 
 			$this->add_meta_box( 'minification/enqueued-files', __( 'Files', 'wphb' ), array( $this, 'enqueued_files_metabox' ), null, null, 'main', array( 'box_content_class' => 'box-content', 'box_footer_class' => 'box-footer') );
 
-			if ( ! is_multisite() ) {
-				$this->add_meta_box( 'minification/advanced-settings', __( 'Advanced Settings', 'wphb' ), array( $this, 'advanced_settings_metabox' ), array( $this, 'advanced_settings_metabox_header' ), null, 'settings', array( 'box_content_class' => 'box-content', 'box_footer_class' => 'box-footer') );
-			}
+			$this->add_meta_box( 'minification/advanced-settings', __( 'Advanced Settings', 'wphb' ), array( $this, 'advanced_settings_metabox' ), array( $this, 'advanced_settings_metabox_header' ), null, 'settings', array( 'box_content_class' => 'box-content', 'box_footer_class' => 'box-footer') );
 		}
 	}
 
@@ -310,7 +323,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		$scripts_rows = $this->_collection_rows( $collection['scripts'], 'scripts' );
 
 		// This will be used to disable the combine button on the bulk update modal if site is ssl.
-		$is_ssl = wphb_is_ssl();
+		$is_ssl = is_ssl();
 
 		$active_plugins = get_option('active_plugins', array() );
 		if ( is_multisite() ) {
@@ -361,7 +374,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		// This will be used to disable the combine button if site is ssl.
-		$is_ssl = wphb_is_ssl();
+		$is_ssl = is_ssl();
 
 		/**
 		 * @var WP_Hummingbird_Module_Minify $minification_module

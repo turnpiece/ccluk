@@ -6,6 +6,8 @@ import Fetcher from './utils/fetcher';
 
         init: function() {
             const self = this;
+            let cloudFlareDismissLink = $('#dismiss-cf-notice');
+            let cloudFlareDashNotice = $('.cf-dash-notice');
 
 			if (wphbDashboardStrings)
 				this.strings = wphbDashboardStrings;
@@ -39,6 +41,14 @@ import Fetcher from './utils/fetcher';
                 if ( url ) {
                     location.href = url;
                 }
+            });
+
+            cloudFlareDismissLink.click( function(e) {
+                e.preventDefault();
+                Fetcher.notice.dismissCloudflareDash();
+                cloudFlareDashNotice.slideUp();
+                cloudFlareDashNotice.parent().addClass('no-background-image');
+
             });
             return this;
         },
@@ -76,7 +86,7 @@ import Fetcher from './utils/fetcher';
          * Run performance test after quick setup.
 		 */
 		runPerformanceTest: function() {
-			// Show quick setup modal
+			// Show performance test modal
 			window.WDP.showOverlay("#run-performance-test-modal", { class: 'wphb-modal small wphb-progress-modal no-close' } );
 
 			// Run performance test

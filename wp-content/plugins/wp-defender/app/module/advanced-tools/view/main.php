@@ -13,7 +13,7 @@
 			?>
             <p class="<?php echo $class ?>"><?php _e( "Configure your two-factor authentication settings. Our recommendations are enabled by default.", wp_defender()->domain ) ?></p>
 			<?php if ( isset( wp_defender()->global['compatibility'] ) ): ?>
-                <div class="well well-error with-cap">
+                <div class="well well-error with-cap mline">
                     <i class="def-icon icon-warning icon-yellow "></i>
 					<?php echo implode( '<br/>', wp_defender()->global['compatibility'] ); ?>
                 </div>

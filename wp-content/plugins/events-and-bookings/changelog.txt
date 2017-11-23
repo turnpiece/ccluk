@@ -3,6 +3,19 @@ Author: WPMU DEV
 
 Changelog:
 ----------------------------------------------------------------------
+
+1.9.8 - 2017-11-21
+----------------------------------------------------------------------
+- Fixed: Event archive page not showing all events
+- Fixed: eab_archive shortcode
+- Fixed: eab_calendar shortcode
+- Fixed: Default to all events addon bug fix
+- Fixed: When event product is removed from cart, it still says the even is in the cart
+- Fixed: Weeks issue in eab_archive shortcode
+- Fixed: Single event view for future events
+- Fixed: Frontend editor addon
+
+
 1.9.7 - 2017-10-23
 ----------------------------------------------------------------------
 - Added: New attribute show_old on the shortcode eab_calendar to allow viewing of past events
@@ -429,4 +442,4 @@ Changelog:
 - Initial release.
 
 
-87274-1509233548-au
+87274-1511475250-au

@@ -223,7 +223,7 @@ class AgmAdminMaps {
 	 */
 	public function create_admin_menu_entry() {
 		// Show branding for singular installs.
-		$title = is_multisite() ? __( 'Google Maps', AGM_LANG ) : 'Google Maps';
+		$title = is_multisite() ? __( 'Google Maps Pro', AGM_LANG ) : 'Google Maps Pro';
 
 		// Register our google maps options page.
 		$hook = add_options_page(
@@ -299,7 +299,7 @@ class AgmAdminMaps {
 				'preview_or_edit' => __( 'Preview/Edit', AGM_LANG ),
 				'delete_map' => __( 'Delete', AGM_LANG ),
 				'add_map' => __( 'Add Map', AGM_LANG ),
-				'google_maps' => __( 'Google Maps', AGM_LANG ),
+				'google_maps' => __( 'Google Maps Pro', AGM_LANG ),
 				'load_next_maps' => __( 'Next &raquo;', AGM_LANG ),
 				'load_prev_maps' => __( '&laquo; Prev', AGM_LANG ),
 				'existing_map' => __( 'Existing maps', AGM_LANG ),
@@ -560,16 +560,19 @@ class AgmAdminMaps {
 		if ( 'publish' != $post->post_status) return false; // Draft, auto-save or something else we don't want
 
 		$opts = apply_filters( 'agm_google_maps-options', get_option( 'agm_google_maps' ) );
-		$fields = $opts['custom_fields_map'];
+		$fields = !empty($opts['custom_fields_map'])
+			? $opts['custom_fields_map']
+			: array()
+		;
 		$latitude = $longitude = $address = false;
 
-		if ( $fields['latitude_field'] ) {
+		if ( !empty($fields['latitude_field']) ) {
 			$latitude = get_post_meta( $post_id, $fields['latitude_field'], true );
 		}
-		if ( $fields['longitude_field'] ) {
+		if ( !empty($fields['longitude_field']) ) {
 			$longitude = get_post_meta( $post_id, $fields['longitude_field'], true );
 		}
-		if ( $fields['address_field'] ) {
+		if ( !empty($fields['address_field']) ) {
 			/*
 			 * We allow the address-field to contain a list of field names
 			 * @since 2.9.0.5

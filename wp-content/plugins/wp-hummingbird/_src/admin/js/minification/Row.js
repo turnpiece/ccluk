@@ -10,6 +10,7 @@ const Row = ( _element, _filter, _filter_sec ) => {
         $minify = $el.find( '.toggle-minify' ),
         $posFooter = $el.find( '.toggle-position-footer' ),
         $defer = $el.find( '.toggle-defer' ),
+        $inline = $el.find( '.toggle-inline' ),
         $disableIcon = $el.find( '.toggle-cross > i' );
 
     if ( _filter_sec ) {
@@ -91,6 +92,10 @@ const Row = ( _element, _filter, _filter_sec ) => {
                     $defer.prop( 'checked', value );
                     break;
                 }
+				case 'inline': {
+					$inline.prop( 'checked', value );
+					break;
+				}
                 case 'include': {
                     $disableIcon.removeClass();
                     $include.prop( 'checked', value );

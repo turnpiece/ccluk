@@ -279,6 +279,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				// Split the group!
 				$groups_list->split_group( $group->hash, $splitted_group );
 			}
+
+			if ( 'styles' === $type && $group->get_inline_list() ) {
+				$splitted_group = $this->_get_splitted_group_structure_by( 'inline', $group, false );
+				// Split the group!
+				$groups_list->split_group( $group->hash, $splitted_group );
+			}
 		}
 
 		// Set the groups handles, as we need all of them before processing
@@ -635,8 +641,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 
 		if ( defined('DISABLE_WP_CRON' ) && DISABLE_WP_CRON ) {
 			$this->process_queue();
-		}
-		else {
+		} else {
 			self::schedule_process_queue_cron();
 		}
 	}
@@ -793,7 +798,6 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		foreach ( $option_names as $name ) {
 			delete_option( $name );
 		}
-
 
 		WP_Hummingbird_Sources_Collector::clear_collection();
 

@@ -14,22 +14,11 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<?php
 			$module = wphb_get_module( 'uptime' );
-			$is_active = $module->is_active();
-			if ( wphb_is_member() && $is_active ) : ?>
-				<div class="actions status">
-					<div class="toggle-group toggle-group-with-buttons">
-						<div class="tooltip-box">
-							<span class="toggle" tooltip="<?php esc_attr_e( 'Disable Uptime', 'wphb' ); ?>">
-								<input type="checkbox" id="wphb-disable-uptime" class="toggle-checkbox" name="wphb-disable-uptime" <?php checked( wphb_get_setting( 'uptime' ) ); ?>>
-								<label for="wphb-disable-uptime" class="toggle-label"></label>
-							</span>
-						</div>
-					</div>
-					<span class="spinner right"></span>
-				</div>
-				<div class="actions">
+			$is_active = $module->is_active(); ?>
+			<div class="actions">
+				<?php if ( wphb_is_member() && $is_active ) : ?>
 					<span class="spinner left"></span>
-					<label for="wphb-uptime-data-range" class="inline-label"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
+					<label for="wphb-uptime-data-range" class="inline-label header-label"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
 					<select name="wphb-uptime-data-range" id="wphb-uptime-data-range">
 						<?php foreach ( $data_ranges as $range => $label ) : ?>
 							<option
@@ -40,8 +29,11 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 							</option>
 						<?php endforeach; ?>
 					</select>
-				</div>
-			<?php endif; ?>
+				<?php endif; ?>
+				<a href="<?php echo esc_url( wphb_get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+				</a>
+			</div>
 		</section><!-- end header -->
 		<?php
 	}
@@ -187,9 +179,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	private function get_data_ranges() {
 		return array(
-			'day'   => __( 'Last Day', 'wphb' ),
-			'week'  => __( 'Last Week', 'wphb' ),
-			'month' => __( 'Last Month', 'wphb' ),
+			'day'   => __( 'Last 1 day', 'wphb' ),
+			'week'  => __( 'Last 7 days', 'wphb' ),
+			'month' => __( 'Last 30 days', 'wphb' ),
 		);
 	}
 

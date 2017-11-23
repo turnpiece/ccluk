@@ -33,20 +33,20 @@
 				</span>
 			</li>
 
-			<?php if ( ! is_multisite() ): ?>
-				<?php if ( wphb_is_member() ): ?>
+			<?php if ( ! is_multisite() ) : ?>
+				<?php if ( wphb_is_member() ) : ?>
 					<li>
 						<span class="list-label"><?php _e( 'WPMU DEV CDN', 'wphb' ); ?></span>
 						<span class="list-detail">
 					   <div class="toggle-actions">
 							<span class="toggle tooltip-right" tooltip="<?php _e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
 								<input type="checkbox" class="toggle-checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( ! $is_member ); ?>>
-								<label for="use_cdn" class="toggle-label"></label>
+								<label for="use_cdn" class="toggle-label small"></label>
 							</span>
 						</div><!-- end toggle-actions -->
 					</span>
 					</li>
-				<?php else: ?>
+				<?php else : ?>
 					<li>
 						<span class="list-label"><?php _e( 'Host your files on WPMU DEV’s blazing fast CDN', 'wphb' ); ?></span>
 						<span class="list-detail">

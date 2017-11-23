@@ -29,8 +29,6 @@ function wphb_flush_cache( $clear_settings = true ) {
 	delete_site_option( 'wphb-is-cloudflare' );
 }
 
-
-
 /**
  * Clear all data saved in Minification
  *
@@ -42,6 +40,8 @@ function wphb_clear_minification_cache( $clear_settings = true ) {
 		$minify_module = wphb_get_module( 'minify' );
 		$minify_module->clear_cache( $clear_settings );
 	}
+	// Clear page caching.
+	wphb_clear_page_cache();
 }
 
 /**
@@ -70,6 +70,11 @@ function wphb_clear_caching_cache() {
 	$module->clear_analysis_data();
 }
 
+function wphb_clear_page_cache() {
+	/* @var WP_Hummingbird_Module_Page_Caching $module */
+	$module = wphb_get_module( 'page-caching' );
+	$module->purge_cache_dir();
+}
 
 function wphb_performance_clear_cache() {
 	WP_Hummingbird_Module_Performance::clear_cache();

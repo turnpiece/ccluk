@@ -51,7 +51,7 @@
 				esc_html_e( 'Never', 'wphb' );
 			} ?>
 		</span>
-		<p><?php esc_html_e( 'Last test date', 'wphb' ); ?></p>
+		<p><?php esc_html_e( 'Last test', 'wphb' ); ?></p>
 	</div>
 
 	<div class="wphb-block-entry-third">

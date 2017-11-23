@@ -31,6 +31,13 @@ function Fetcher() {
 			dismiss: ( id ) => {
 		        const action = actionPrefix + 'notice_dismiss';
 		        return request( action, { id }, 'POST' );
+            },
+            /**
+             * Dismiss CloudFlare dash notice
+             */
+            dismissCloudflareDash: () => {
+                const action = actionPrefix + 'cf_notice_dismiss';
+                return request( action, {}, 'POST' );
             }
         },
 		/**
@@ -45,19 +52,6 @@ function Fetcher() {
             setServer: ( value ) => {
                 const action = actionPrefix + 'caching_set_server_type';
                 return request( action, { value }, 'POST' );
-            },
-
-            /**
-             * Reload snippet.
-             *
-             * @param type Server type.
-             */
-            reloadSnippets: ( type ) => {
-                const action = actionPrefix + 'caching_reload_snippet';
-                return request( action, { type }, 'POST' )
-                    .then( ( response ) => {
-                        return response;
-                    });
             }
         },
 

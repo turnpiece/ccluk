@@ -344,7 +344,7 @@ class Main extends Controller {
 		if ( $settings->login_protection ) {
 			$this->add_action( 'wp_login_failed', 'recordFailLogin', 9999 );
 			$this->add_filter( 'authenticate', 'showAttemptLeft', 9999, 3 );
-			$this->add_action( 'wp_login', 'clearAttemptStats' );
+			$this->add_action( 'wp_login', 'clearAttemptStats', 10, 2 );
 		}
 
 		if ( $settings->detect_404 ) {
@@ -450,7 +450,6 @@ class Main extends Controller {
 	public function record404() {
 		if ( is_404() ) {
 			$settings = Settings::instance();
-
 			if ( is_user_logged_in() && current_user_can( 'edit_posts' ) ) {
 				//we wont track 404 error if user can login and not subscriber
 				return;
@@ -485,6 +484,35 @@ class Main extends Controller {
 			}
 			$model->save();
 
+			//need to check if this is css,js or images 404 from missig link from a page
+			$ref = isset( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : "";
+			if ( $ref && parse_url( $ref, PHP_URL_SCHEME ) . '://' . parse_url( $ref, PHP_URL_HOST ) == site_url() ) {
+				//the only variable we allow is ver, bydefault of wordpress
+				$args = parse_url( $uri, PHP_URL_QUERY );
+				if ( ! empty( $args ) ) {
+					//validate it
+					if ( isset( $args['ver'] ) && is_numeric( $args['ver'] ) ) {
+						unset( $args['ver'] );
+					}
+				}
+				if ( count( $args ) == 0 ) {
+					//check the extension is js, css, or image type
+					$exts = apply_filters( 'wd_allow_ref_extensions', array(
+						'js',
+						'css',
+						'jpg',
+						'png',
+						'gif'
+					) );
+					$ext  = pathinfo( $uri, PATHINFO_EXTENSION );
+					$ext  = strtolower( $ext );
+					if ( in_array( $ext, $exts ) ) {
+						//log but no lock
+						return;
+					}
+				}
+			}
+
 			do_action( 'wd_lockout_trigger', $model );
 		}
 	}
@@ -517,7 +545,7 @@ class Main extends Controller {
 	/**
 	 * When user get login successfully, we will reset the attempt count
 	 */
-	public function clearAttemptStats() {
+	public function clearAttemptStats( $user_login, $user = '' ) {
 		$ip    = $this->getUserIp();
 		$model = IP_Model::findOne( array(
 			'ip' => $ip

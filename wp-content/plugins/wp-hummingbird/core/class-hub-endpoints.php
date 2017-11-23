@@ -83,11 +83,6 @@ class WP_Hummingbird_Hub_Endpoints {
 		 */
 		$status = wphb_get_gzip_status();
 
-		// Refresh gzip status if no data is present.
-		if ( false === $status ) {
-			$status = wphb_get_gzip_status( true );
-		}
-
 		if ( ! is_array( $status ) ) {
 			$result['gzip'] = new WP_Error( 'gzip-status-not-found', 'There is not Gzip data yet' );
 		} else {
@@ -101,11 +96,6 @@ class WP_Hummingbird_Hub_Endpoints {
 		 * Caching
 		 */
 		$status = wphb_get_caching_status();
-
-		// Refresh caching status if no data is present.
-		if ( false === $status ) {
-			$status = wphb_get_caching_status( true );
-		}
 
 		if ( ! is_array( $status ) ) {
 			$result['browser-caching'] = new WP_Error( 'browser-caching-status-not-found', 'There is not Browser Caching data yet' );
@@ -148,6 +138,13 @@ class WP_Hummingbird_Hub_Endpoints {
 			$result['minify']['status']['saved_css']  = $compressed_size_styles;
 			$result['minify']['status']['cdn']        = wphb_get_cdn_status();
 		} // End if().
+
+		/**
+		 * Page caching
+		 * @var WP_Hummingbird_Module_Page_Caching $module
+		 */
+		$module = wphb_get_module( 'page-caching' );
+		$result['page-caching']['status'] = $module->is_active();
 
 		$result = (object) $result;
 		wp_send_json_success( $result );

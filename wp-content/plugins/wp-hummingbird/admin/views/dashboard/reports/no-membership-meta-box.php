@@ -18,7 +18,7 @@
 
 		<div class="row">
 			<div class="col-half">
-				<a href="<?php echo wphb_get_admin_menu_url( 'performance' ); ?>">
+				<a href="<?php echo wphb_get_admin_menu_url( 'performance' ) . '&view=reports'; ?>">
 					<div class="report-status with-corner">
 						<i class="hb-icon-performancetest"></i>
 						<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
@@ -47,7 +47,7 @@
 			<div class="wphb-block-entry-content wphb-upsell-free-message">
 				<p>
 					<?php printf(
-						__( 'Schedule automated performance tests and receive email reports direct to your inbox. Get reporting as part of a full WPMU DEV membership. &mdash; <a href="%s" rel="dialog">Try Pro for FREE today!</a>', 'wphb' ),
+						__( 'Schedule automated performance tests and receive email reports direct to your inbox. Get reporting as part of a full WPMU DEV membership. <a href="%s" rel="dialog">Try Pro for FREE today!</a>', 'wphb' ),
 						'#wphb-upgrade-membership-modal'
 					); ?>
 				</p>

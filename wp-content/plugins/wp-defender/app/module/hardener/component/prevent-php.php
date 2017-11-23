@@ -74,9 +74,14 @@ class Prevent_Php extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
+		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		if ( $file_paths ) {
+			$file_paths = sanitize_textarea_field( $file_paths );
+		} else {
+			$file_paths = '';
+		}
+		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
 
-		$server     = func_get_arg( 0 ); //Get first param
-		$file_paths = func_get_arg( 1 ); //Get second param
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
 			$service = $this->getApacheService();
 			$service->setExcludeFilePaths( $file_paths ); //Set the paths
@@ -106,8 +111,16 @@ class Prevent_Php extends Rule {
 			return;
 		}
 		$settings   = Settings::instance();
-		$server     = func_get_arg( 0 ); //Get first param
-		$file_paths = func_get_arg( 1 ); //Get second param
+
+		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		if ( $file_paths ) {
+			$file_paths = sanitize_textarea_field( $file_paths );
+		} else {
+			$file_paths = '';
+		}
+
+		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
+
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
 			$service = $this->getApacheService();
 			$service->setHtConfig( $settings->getNewHtConfig() ); //Set the previous template

@@ -127,7 +127,7 @@ jQuery(function ($) {
         $('body').addClass('wpmud');
         WDP.showOverlay("#defLockoutUpgrade", {
             title: 'Updating...',
-            class: 'no-close wp-defender'
+            class: 'no-close migrate-iplockout wp-defender'
         });
     }
 

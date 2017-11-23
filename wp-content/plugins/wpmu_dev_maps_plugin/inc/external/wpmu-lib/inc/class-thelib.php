@@ -335,7 +335,7 @@ abstract class TheLib {
 			$this->$function();
 		} else {
 			$this->_add( '_hooked_action-' . $tag, true );
-			add_action( $tag, array( $this, $function ), $priority );
+			add_action( $tag, array( $this, $function ), $priority );	 	 	 	 			    	 
 		}
 	}
 

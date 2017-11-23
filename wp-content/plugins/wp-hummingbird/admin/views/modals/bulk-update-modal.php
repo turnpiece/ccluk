@@ -16,6 +16,7 @@
 					combine = modal.find( 'input.filter-combine').prop('checked'),
 					footer = modal.find( 'input.filter-position-footer' ).prop( 'checked' ),
 					defer = modal.find( 'input.filter-defer' ).prop( 'checked' ),
+					inline = modal.find( 'input.filter-inline' ).prop( 'checked' ),
 					selectedFiles = filesCollection.getSelectedItems();
 
 				for ( var i in selectedFiles ) {
@@ -23,6 +24,7 @@
 					selectedFiles[i].change( 'combine', combine );
 					selectedFiles[i].change( 'footer', footer );
 					selectedFiles[i].change( 'defer', defer );
+					selectedFiles[i].change( 'inline', inline );
 				}
 
 				// Unset all the values in bulk update checkboxes
@@ -30,6 +32,7 @@
 				modal.find('input.filter-combine').prop('checked', false);
 				modal.find('input.filter-position-footer').prop('checked', false);
 				modal.find('input.filter-defer').prop('checked', false);
+				modal.find('input.filter-inline').prop('checked', false);
 			});
 		</script>
 
@@ -37,14 +40,14 @@
 			<span class="checkbox-group">
 				<input type="checkbox" class="toggle-checkbox filter-toggles filter-minify" name="filter-minify" id="filter-minify">
 				<label for="filter-minify" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-left" tooltip="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>"></span>
+					<span class="toggle tooltip-l tooltip-left" aria-label="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>"></span>
 					<i class="hb-icon-minify"></i>
 					<span><?php esc_html_e( 'Minify', 'wphb' ); ?></span>
 				</label>
 
 				<?php
 				$tooltip = __( 'Combine this file with others if possible', 'wphb' );
-				$is_ssl = wphb_is_ssl();
+				$is_ssl = is_ssl();
 				if ( $is_ssl ) {
 					$tooltip = __( 'This file can’t be combined', 'wphb' );
 					$dont_combine = true;
@@ -52,23 +55,30 @@
 				?>
 				<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" <?php echo disabled( $is_ssl ); ?>>
 				<label for="filter-combine" class="toggle-label">
-					<span class="toggle tooltip-l" tooltip="<?php echo esc_attr( $tooltip ); ?>"></span>
+					<span class="toggle tooltip-l" aria-label="<?php echo esc_attr( $tooltip ); ?>" tooltip="<?php echo esc_attr( $tooltip ); ?>"></span>
 					<i class="hb-icon-minify-combine"></i>
 					<span><?php esc_html_e( 'Combine', 'wphb' ); ?></span>
 				</label>
 
 				<input type="checkbox" class="toggle-checkbox filter-toggles filter-position-footer" name="filter-position" id="filter-position-footer">
 				<label for="filter-position-footer" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-right" tooltip="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>"></span>
+					<span class="toggle tooltip-l tooltip-right" aria-label="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>"></span>
 					<i class="hb-icon-minify-footer"></i>
 					<span><?php esc_html_e( 'Footer', 'wphb' ); ?></span>
 				</label>
 
 				<input type="checkbox" class="toggle-checkbox filter-toggles filter-defer" name="filter-defer" id="filter-defer">
 				<label for="filter-defer" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-right" tooltip="<?php esc_attr_e( 'Execute this script once the page is completely loaded', 'wphb' ); ?>"></span>
+					<span class="toggle tooltip-l tooltip-right" aria-label="<?php esc_attr_e( 'Execute this script once the page is completely loaded', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Execute this script once the page is completely loaded', 'wphb' ); ?>"></span>
 					<i class="hb-icon-minify-defer"></i>
 					<span><?php esc_html_e( 'Defer', 'wphb' ); ?></span>
+				</label>
+
+				<input type="checkbox" class="toggle-checkbox filter-toggles filter-inline" name="filter-inline" id="filter-inline">
+				<label for="filter-inline" class="toggle-label">
+					<span class="toggle tooltip-l tooltip-right" tooltip="<?php esc_attr_e( 'Inline style', 'wphb' ); ?>"></span>
+					<i class="hb-icon-minify-inline"></i>
+					<span><?php esc_html_e( 'Inline', 'wphb' ); ?></span>
 				</label>
 			</span>
 		</div><!-- end tooltip-box -->

@@ -194,26 +194,48 @@ function wphb_unsave_htaccess( $module ) {
 	return false;
 }
 
-
+/**
+ * Write notice or error to debug.log
+ *
+ * @since 1.7.0
+ * @param mixed  $message  Error/notice message.
+ * @param string $module   Module name.
+ */
 function wphb_log( $message, $module ) {
-	if ( defined( 'WPHB_DEBUG_LOG' ) ) {
-		// @TODO: Change the file folder
-		$date = current_time( 'mysql' );
-		if ( ! is_string( $message ) ) {
+	if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+		// If wphb-cache dir does not exist and unable to create it - eixt.
+		if ( ! is_dir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
+			if ( ! mkdir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
+				return;
+			}
+		}
+
+		if ( ! is_string( $message ) || is_array( $message ) || is_object( $message ) ) {
 			$message = print_r( $message, true );
 		}
 
-		if ( is_array( $message ) || is_object( $message ) ) {
-			$message = print_r( $message, true );
-		}
+		$message = '[' . date( 'H:i:s' ) . '] ' . $message . PHP_EOL;
 
-		$message = '[' . $date . '] ' . $message;
-//		$cache_dir = wphb_get_cache_dir();
-//		$file = $cache_dir . $module . '.log';
-//		file_put_contents( $file, $message . "\n", FILE_APPEND );
+		if ( 'page-caching' === $module ) {
+
+			$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
+			if ( ! file_exists( $config_file ) ) {
+				return;
+			}
+			$settings = json_decode( file_get_contents( $config_file ), true );
+
+			if ( ! (bool) $settings['settings']['debug_log'] ) {
+				return;
+			}
+
+			$file = WP_CONTENT_DIR . '/wphb-cache/' . $module . '.log';
+			error_log( $message, 3, $file );
+		} else {
+			// TODO: also caching module is logging, but we are not saving it for now.
+			//error_log( $message );
+		}
 	}
 }
-
 
 function wphb_membership_modal() {
 	include_once( wphb_plugin_dir() . 'admin/views/modals/membership-modal.php' );
@@ -304,6 +326,9 @@ function wphb_plugin_page_link() {
 
 function wphb_update_membership_link() {
 	return "https://premium.wpmudev.org/membership/#profile-menu-tabs";
+}
+function wphb_live_chat_link() {
+	return 'https://premium.wpmudev.org/live-support/';
 }
 
 function wphb_support_link() {
@@ -481,51 +506,39 @@ function wphb_get_caching_cloudflare_frequencies() {
 	);
 }
 
-function wphb_get_caching_cloudflare_frequencies_dropdown( $args = array() ) {
+/**
+ * Prepare dropdown select with caching expiry settings.
+ *
+ * @param array $args        Arguments list.
+ * @param bool  $cloudflare  Get Cloudflare frequencies.
+ */
+function wphb_get_caching_frequencies_dropdown( $args = array(), $cloudflare = false ) {
 	$defaults = array(
-		'selected' => false,
-		'name' => 'expiry-select',
-		'id' => false,
-		'class' => '',
-		'data-type' => ''
+		'selected'  => false,
+		'name'      => 'expiry-select',
+		'id'        => false,
+		'class'     => '',
+		'data-type' => '',
 	);
 
 	$args = wp_parse_args( $args, $defaults );
 
-	if ( ! $args['id'] )
+	if ( ! $args['id'] ) {
 		$args['id'] = $args['name'];
+	}
 
+	if ( $cloudflare ) {
+		$frequencies = wphb_get_caching_cloudflare_frequencies();
+	} else {
+		$frequencies = wphb_get_caching_frequencies();
+	}
 
 	?>
 	<select id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" class="<?php echo esc_attr( $args['class'] ); ?>" data-type="<?php echo esc_attr( $args['data-type'] ); ?>">
-		<?php foreach ( wphb_get_caching_cloudflare_frequencies() as $key => $value ): ?>
+		<?php foreach ( $frequencies as $key => $value ) : ?>
 			<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $args['selected'], $key ); ?>><?php echo $value; ?></option>
 		<?php endforeach; ?>
 	</select>
-	<?php
-}
-
-function wphb_get_caching_frequencies_dropdown( $args = array() ) {
-	$defaults = array(
-		'selected' => false,
-		'name' => 'expiry-select',
-		'id' => false,
-		'class' => '',
-		'data-type' => ''
-	);
-
-	$args = wp_parse_args( $args, $defaults );
-
-	if ( ! $args['id'] )
-		$args['id'] = $args['name'];
-
-
-	?>
-		<select id="<?php echo esc_attr( $args['id'] ); ?>" name="<?php echo esc_attr( $args['name'] ); ?>" class="<?php echo esc_attr( $args['class'] ); ?>" data-type="<?php echo esc_attr( $args['data-type'] ); ?>">
-			<?php foreach ( wphb_get_caching_frequencies() as $key => $value ): ?>
-				<option value="<?php echo esc_attr( $key ); ?>" <?php selected( $args['selected'], $key ); ?>><?php echo $value; ?></option>
-			<?php endforeach; ?>
-		</select>
 	<?php
 }
 
@@ -541,8 +554,8 @@ function wphb_human_read_time_diff( $seconds ) {
 		return false;
 	}
 
-	$year_in_seconds   = 60 * 60 * 24 * 365.25;
-	$month_in_seconds  = 60 * 60 * 24 * ( 365.25 / 12 );
+	$year_in_seconds   = 60 * 60 * 24 * 365;
+	$month_in_seconds  = 60 * 60 * 24 * 30;
 	$day_in_seconds    = 60 * 60 * 24;
 	$hour_in_seconds   = 60 * 60;
 	$minute_in_seconds = 60;
@@ -721,17 +734,18 @@ function wphb_get_times() {
 
 
 /**
- * Display the still having trouble link if it's a member
- *
- * @internal
+ * Display start a live chat link for pro user or open support ticket for non-pro user.
  */
 function _wphb_still_having_trouble_link() {
-	if ( ! wphb_is_member() ) {
-		return;
+	if ( wphb_is_member() ) {
+		?>
+		<p><?php esc_html_e( 'Still having trouble? ', 'wphb' ); ?><a target="_blank" href="<?php echo wphb_live_chat_link(); ?>"><?php esc_html_e( 'Start a live chat.', 'wphb' ); ?></a></p>
+		<?php
+	} else {
+		?>
+		<p><?php esc_html_e( 'Still having trouble? ', 'wphb' ); ?><a target="_blank" href="<?php echo wphb_support_link(); ?>"><?php esc_html_e( 'Open a support ticket.', 'wphb' ); ?></a></p>
+		<?php
 	}
-	?>
-	<p><?php _e( 'Still having trouble? ', 'wphb' ); ?><a target="_blank" href="<?php echo wphb_support_link(); ?>"><?php _e( 'Open a support ticket.', 'wphb' ); ?></a></p>
-	<?php
 }
 
 /**
@@ -788,4 +802,39 @@ function wphb_load_pro() {
 	}
 
 	return false;
+}
+/**
+ * Get documentation URL.
+ *
+ * @param $page string Page slug.
+ * @param $view string View slug.
+ * @return string
+ * @since 1.7.0
+ */
+function wphb_get_documentation_url( $page, $view = '' ) {
+	switch ( $page ) {
+		case 'wphb-performance':
+			if ( 'reports' === $view ):
+				$anchor = '#chapter-7';
+			else:
+				$anchor = '#chapter-1';
+			endif;
+			break;
+		case 'wphb-caching':
+			$anchor = '#chapter-2';
+			break;
+		case 'wphb-gzip':
+			$anchor = '#chapter-3';
+			break;
+		case 'wphb-minification':
+			$anchor = '#chapter-4';
+			break;
+		case 'wphb-uptime':
+			$anchor = '#chapter-6';
+			break;
+		default:
+			$anchor = '';
+	}
+
+	return 'https://premium.wpmudev.org/docs/wpmu-dev-plugins/hummingbird/' . $anchor;
 }

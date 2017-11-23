@@ -8,7 +8,7 @@ import Fetcher from './utils/fetcher';
 
         init: function () {
             this.$spinner = $('.wphb-spinner');
-            this.$cfSelector = $('#wphb-caching-cloudflare-summary-set-expiry');
+            this.$cfSelector = $('#set-expiry-all');
             let self = this;
             if ( wphb.cloudflare.is.connected ) {
                 this.$cfSelector.change( function() {

@@ -70,11 +70,10 @@ class Auth_Settings extends \Hammer\WP\Settings {
 		if ( ( $i = array_search( $plugin, $this->isConflict ) ) !== false ) {
 			unset( $this->isConflict[ $i ] );
 		}
-
 		if ( ! in_array( '!' . $plugin, $this->isConflict ) ) {
 			$this->isConflict [] = '!' . $plugin;
-			$this->save();
 		}
+		$this->save();
 	}
 
 	public function events() {

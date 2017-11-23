@@ -11,12 +11,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	protected $tabs = array();
 
 	/**
-	 * In order to avoid duplicated notices,
-	 * we save notices IDs here
-	 *
-	 * @var array
+	 * @var WP_Hummingbird_Admin_Notices
 	 */
-	protected static $displayed_notices = array();
+	protected $admin_notices;
 
 	/**
 	 * WP_Hummingbird_Admin_Page constructor.
@@ -29,6 +26,8 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function __construct( $slug, $page_title, $menu_title, $parent = false, $render = true ) {
 		$this->slug = $slug;
+
+		$this->admin_notices = WP_Hummingbird_Admin_Notices::get_instance();
 
 		if ( ! $parent ) {
 			$this->page_id = add_menu_page(
@@ -146,6 +145,9 @@ abstract class WP_Hummingbird_Admin_Page {
 
 		// Scripts
 		wphb_enqueue_admin_scripts( WPHB_VERSION );
+
+		// TODO: remove this once it's fixed in Smush
+		wp_dequeue_style( 'wp-smushit-admin-css' );
 	}
 
 	/**
@@ -242,12 +244,16 @@ abstract class WP_Hummingbird_Admin_Page {
 	/**
 	 * Renders the template header that is repeated on every page.
 	 * From WPMU DEV Dashboard
-	 *
 	 */
 	protected function render_header() {
 		?>
 		<section id="header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			<div class="actions">
+				<a href="<?php echo esc_url( wphb_get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
+				</a>
+			</div>
 		</section><!-- end header -->
 
 		<?php
@@ -261,7 +267,7 @@ abstract class WP_Hummingbird_Admin_Page {
 		<div id="container" class="wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . $this->slug; ?>">
 			<?php
 			if ( isset( $_GET['updated'] ) ) :
-				$this->show_notice( 'updated', __( 'Settings Updated', 'wphb' ), 'success' );
+				$this->admin_notices->show( 'updated', __( 'Settings Updated', 'wphb' ), 'success' );
 			endif;
 
 			$this->render_header();
@@ -290,39 +296,6 @@ abstract class WP_Hummingbird_Admin_Page {
 
 	protected function render_inner_content() {
 		$this->view( $this->slug . '-page' );
-	}
-
-	/**
-	 * Show an admin notice
-	 *
-	 * @param string $id           Unique identifier for the notice.
-	 * @param string $message      The notice text.
-	 * @param string $class        Class for the notice wrapper.
-	 * @param bool   $dismissable  If is dissmisable or not
-	 */
-	public function show_notice( $id, $message, $class = 'error', $auto_hide = false, $dismissable = false ) {
-		// Is already dismissed ?
-		if ( $dismissable && 'true' === get_option( 'wphb-notice-' . $id . '-dismissed' ) ) {
-			return;
-		}
-
-		if ( ! current_user_can( wphb_get_admin_capability() ) ) {
-			return;
-		}
-
-		if ( in_array( $id, self::$displayed_notices ) ) {
-			return;
-		}
-
-		$nonce = '';
-		if ( $dismissable ) {
-			$nonce = wp_create_nonce( 'wphb-dismiss' );
-		}
-
-		$args = compact( 'message', 'id', 'class', 'auto_hide', 'dismissable', 'nonce' );
-		$this->view( 'notice', $args );
-
-		self::$displayed_notices[] = $id;
 	}
 
 	/**

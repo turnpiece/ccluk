@@ -34,7 +34,6 @@ import Scanner from './minification/Scanner';
 
             // Check files button
             this.$checkFilesButton = $( '#check-files' );
-            this.$disableMinification = $('#wphb-disable-minification');
             this.$spinner = $('.spinner');
 
             if ( this.$checkFilesButton.length ) {
@@ -88,26 +87,6 @@ import Scanner from './minification/Scanner';
                             notice.slideUp();
                         }, 5000 );
                     });
-            });
-
-            this.$disableMinification.change( function() {
-                const value = $(this).is(':checked');
-
-                self.$spinner.css( 'visibility', 'visible' );
-
-                if ( self.timer && value ) {
-                    clearTimeout( self.timer );
-                    self.$spinner.css( 'visibility', 'hidden' );
-                }
-
-                self.timer = setTimeout( function() {
-                    Fetcher.minification.toggleMinification( value )
-                        .then( () => {
-                            location.reload();
-                        });
-                }, 3000 );
-
-
             });
 
             this.rowsCollection = new WPHB_Admin.minification.RowsCollection();

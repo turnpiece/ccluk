@@ -69,7 +69,7 @@ class Rule_Service extends Component {
 	 */
 	protected function findDefaultHookLine( $config ) {
 		global $wpdb;
-		$pattern = '/^\$table_prefix\s*=\s*[\'|\"]' . $wpdb->prefix . '[\'|\"]/';	   			 	 		  		  	 	
+		$pattern = '/^\$table_prefix\s*=\s*[\'|\"]' . $wpdb->prefix . '[\'|\"]/';
 		foreach ( $config as $k => $line ) {
 			if ( preg_match( $pattern, $line ) ) {
 				return $k;

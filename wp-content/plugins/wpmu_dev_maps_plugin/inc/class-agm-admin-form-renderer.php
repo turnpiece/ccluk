@@ -465,7 +465,7 @@ class Agm_AdminFormRenderer {
 				<?php printf(
 					__(
 						'For more detailed instructions on how to use ' .
-						'refer to <a target="_blank" href="%s">Google Maps ' .
+						'refer to <a target="_blank" href="%s">Google Maps Pro' .
 						'Installation and Use instructions</a>.', AGM_LANG
 					),
 					'http://premium.wpmudev.org/project/wordpress-google-maps-plugin/#usage'

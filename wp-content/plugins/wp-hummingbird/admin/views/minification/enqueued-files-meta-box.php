@@ -30,7 +30,7 @@
 <p><?php esc_html_e( 'Choose what files to minify, combine and where to position them in the page.', 'wphb' ); ?></p>
 
 <?php if ( $is_ssl ) {
-	$this->show_notice( 'http2-info', __( "We've disabled the Combine option because your server has HTTP/2 activated. HTTP/2 automatically optimizes the delivery of assets for you", 'wphb' ), 'blue-info', false, true );
+	$this->admin_notices->show( 'http2-info', __( "We've disabled the Combine option because your server has HTTP/2 activated. HTTP/2 automatically optimizes the delivery of assets for you", 'wphb' ), 'blue-info', false, true );
 } ?>
 
 <div class="alignleft">
@@ -75,7 +75,7 @@
 <div class="wphb-enqueued-files">
 	<div class="wphb-border-row-header">
 		<div class="wphb-minification-file-select">
-			<label for="minification-bulk-file" class="screen-reader-text"><?php esc_html_e( 'Hello', 'wphb' ); ?></label>
+			<label for="minification-bulk-file" class="screen-reader-text"><?php esc_html_e( 'Select all files', 'wphb' ); ?></label>
 			<input type="checkbox" id="minification-bulk-file" name="minification-bulk-files" class="wphb-minification-bulk-file-selector">
 		</div>
 		<div class="wphb-minification-file-details"><?php esc_html_e( 'File Details', 'wphb' ); ?></div>

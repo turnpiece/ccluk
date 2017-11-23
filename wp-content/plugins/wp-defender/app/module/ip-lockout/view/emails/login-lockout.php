@@ -454,10 +454,11 @@
                                                     <h3 style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 32px; font-weight: normal; line-height: 32px; margin: 0; margin-bottom: 0; padding: 0 0 28px; text-align: left; word-wrap: normal;">
 														<?php printf( __( "Hi %s,", wp_defender()->domain ), $admin ) ?></h3>
 													<?php $setting = \WP_Defender\Module\IP_Lockout\Model\Settings::instance() ?>
+													<?php $utils = \WP_Defender\Behavior\Utils::instance() ?>
                                                     <p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
 														<?php
-														$lockout_duration = $setting->login_protection_lockout_ban == true ? __( "They have banned permanently.", wp_defender()->domain ) : sprintf( __( "They have been locked out for <strong>%s seconds.</strong>", wp_defender()->domain ), $setting->login_protection_lockout_duration );
-														printf( __( "We've just locked out the host <strong>%s</strong> from %s due to more than <strong>%s</strong> failed login attempts. %s", wp_defender()->domain ), $ip, network_site_url(), $setting->login_protection_login_attempt, $lockout_duration
+														$lockout_duration = $setting->login_protection_lockout_ban == true ? __( "They have been banned permanently.", wp_defender()->domain ) : sprintf( __( "They have been locked out for <strong>%s seconds.</strong>", wp_defender()->domain ), $setting->login_protection_lockout_duration );
+														printf( __( "We've just locked out the host <strong>%s</strong> from %s due to more than <strong>%s</strong> failed login attempts. %s", wp_defender()->domain ), $ip, $utils->siteURLWithScheme(), $setting->login_protection_login_attempt, $lockout_duration
 														) ?>
                                                     </p>
                                                     <p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">

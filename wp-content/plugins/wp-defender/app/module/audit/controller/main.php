@@ -197,16 +197,16 @@ class Main extends \WP_Defender\Controller {
 		);
 
 		if ( $settings->notification == true ) {
-			$res['notification'] 	= 1;
-			$res['frequency'] 		= ucfirst( \WP_Defender\Behavior\Utils::instance()->frequencyToText( $settings->frequency ) );
+			$res['notification'] = 1;
+			$res['frequency']    = ucfirst( \WP_Defender\Behavior\Utils::instance()->frequencyToText( $settings->frequency ) );
 			if ( $settings->frequency == 1 ) {
-				$res['schedule'] 	= sprintf( __( "at %s", wp_defender()->domain ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
+				$res['schedule'] = sprintf( __( "at %s", wp_defender()->domain ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
 			} else {
-				$res['schedule'] 	= sprintf( __( "%s at %s", wp_defender()->domain ), ucfirst( $settings->day ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
+				$res['schedule'] = sprintf( __( "%s at %s", wp_defender()->domain ), ucfirst( $settings->day ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
 			}
 		} else {
-			$res['notification'] 	= 0;
-			$res['text'] 			= '-';
+			$res['notification'] = 0;
+			$res['text']         = '-';
 		}
 		if ( $settings->enabled == 0 ) {
 			$res['reload'] = 1;
@@ -245,7 +245,7 @@ class Main extends \WP_Defender\Controller {
 
 	public function triggerEventSubmit() {
 		$data = WP_Helper::getArrayCache()->get( 'events_queue', array() );
-		if ( count( $data ) ) {
+		if ( is_array( $data ) && count( $data ) ) {
 			Audit_API::onCloud( $data );
 		}
 	}

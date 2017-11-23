@@ -40,14 +40,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			/** @noinspection PhpIncludeInspection */
 			include_once( wphb_plugin_dir() . 'core/modules/class-module-cloudflare.php' );
 
-			// Check if Uptime is active in the server
-			if ( wphb_is_uptime_remotely_enabled() ) {
-				wphb_uptime_enable_locally();
-			}
-			else {
-				wphb_uptime_disable_locally();
-			}
-
 			update_site_option( 'wphb_version', WPHB_VERSION );
 
 			wphb_has_cloudflare( true );
@@ -84,10 +76,19 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			delete_site_option( 'wphb-is-cloudflare' );
 			wphb_cloudflare_disconnect();
 			delete_site_option( 'wphb-notice-free-deactivated-dismissed' );
+			delete_site_option( 'wphb-gzip-api-checked' );
+			delete_site_option( 'wphb-caching-api-checked' );
+			delete_site_option( 'wphb-cloudflare-dash-notice' );
 
 			if ( wp_next_scheduled( 'wphb_minify_clear_files' ) ) {
 				wp_clear_scheduled_hook( 'wphb_minify_clear_files' );
 			}
+
+			// Remove advanced-cache.php files and clear cache.
+			wphb_update_setting( 'page_cache', false );
+			/* @var WP_Hummingbird_Module_Page_Caching $module */
+			$module = wphb_get_module( 'page-caching' );
+			$module->cleanup();
 
 			do_action( 'wphb_deactivate' );
 		}
@@ -125,7 +126,7 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				}
 			}
 
-			if ( $version != WPHB_VERSION ) {
+			if ( WPHB_VERSION != $version ) {
 
 				if ( ! defined( 'WPHB_UPGRADING' ) ) {
 					define( 'WPHB_UPGRADING', true );
@@ -136,16 +137,15 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				}
 
 				if ( version_compare( $version, '1.1', '<' ) ) {
-					$options = wphb_get_settings();
+					$options  = wphb_get_settings();
 					$defaults = wphb_get_default_settings();
 
-					if ( isset ( $options['caching_expiry_css/javascript'] ) ) {
-						$options['caching_expiry_css'] = $options['caching_expiry_css/javascript'];
+					if ( isset( $options['caching_expiry_css/javascript'] ) ) {
+						$options['caching_expiry_css']        = $options['caching_expiry_css/javascript'];
 						$options['caching_expiry_javascript'] = $options['caching_expiry_css/javascript'];
 						unset( $options['caching_expiry_css/javascript'] );
-					}
-					else {
-						$options['caching_expiry_css'] = $defaults['caching_expiry_css'];
+					} else {
+						$options['caching_expiry_css']        = $defaults['caching_expiry_css'];
 						$options['caching_expiry_javascript'] = $defaults['caching_expiry_javascript'];
 					}
 
@@ -195,6 +195,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 				if ( version_compare( $version, '1.6.2', '<' ) ) {
 					self::upgrade_1_6_2();
+				}
+
+				if ( version_compare( $version, '1.7.0.3', '<' ) ) {
+					self::upgrade_1_7_0_3();
 				}
 
 				update_site_option( 'wphb_version', WPHB_VERSION );
@@ -267,7 +271,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			$collection = wphb_minification_get_resources_collection();
 
-			$options['combine'] = array( 'styles' => array(), 'scripts' => array() );
+			$options['combine'] = array(
+				'styles'  => array(),
+				'scripts' => array(),
+			);
 			foreach ( $dont_combine as $type => $handles ) {
 				$options['combine'][ $type ] = array();
 				$type_collection = wp_list_pluck( $collection[ $type ], 'handle' );
@@ -288,16 +295,15 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				if ( is_array( $recipient ) ) {
 					$new_recipients[] = $recipient;
 					continue;
-				}
-				elseif ( is_int( $recipient ) ) {
+				} elseif ( is_int( $recipient ) ) {
 					$user = get_user_by( 'id', $recipient );
 					if ( ! $user ) {
 						continue;
 					}
 
 					$new_recipients[] = array(
-						'name' => wphb_get_display_name( $user->ID ),
-						'email' => $user->user_email
+						'name'  => wphb_get_display_name( $user->ID ),
+						'email' => $user->user_email,
 					);
 				}
 			}
@@ -370,6 +376,24 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			$email_time[1] = sprintf( '%02d', mt_rand( 0, 59 ) );
 			$options['email-time'] = implode( ':', $email_time );
 			wphb_update_settings( $options );
+		}
+
+		/**
+		 * Add debug_log setting to page caching config file.
+		 */
+		private static function upgrade_1_7_0_3() {
+			$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
+			if ( ! file_exists( $config_file ) ) {
+				return;
+			}
+
+			$settings = json_decode( file_get_contents( $config_file ), true );
+			if ( isset( $settings['settings']['debug_log'] ) ) {
+				return;
+			}
+
+			$settings['settings']['debug_log'] = 0;
+			@file_put_contents( $config_file, json_encode( $settings ) );
 		}
 
 	}

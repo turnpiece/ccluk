@@ -455,8 +455,9 @@
 														<?php printf( __( "Hi %s", wp_defender()->domain ), $admin ) ?>
 														,</h3>
 													<?php $setting = \WP_Defender\Module\IP_Lockout\Model\Settings::instance() ?>
+													<?php $utils = \WP_Defender\Behavior\Utils::instance() ?>
 													<p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
-														<?php printf( __( "We've just locked out the host <strong>%s</strong> from %s due to more than <strong>%s</strong> 404 requests for the file <strong>%s</strong>. They have been locked out for <strong>%s seconds.</strong>", wp_defender()->domain ), $ip, network_site_url(), $setting->detect_404_threshold, $uri, $setting->detect_404_lockout_duration ) ?>
+														<?php printf( __( "We've just locked out the host <strong>%s</strong> from %s due to more than <strong>%s</strong> 404 requests for the file <strong>%s</strong>. They have been locked out for <strong>%s seconds.</strong>", wp_defender()->domain ), $ip, $utils->siteURLWithScheme(), $setting->detect_404_threshold, $uri, $setting->detect_404_lockout_duration ) ?>
 													</p>
 													<p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
 														<?php printf( __( "You can view the full lockout logs <a href=\"%s\">here</a>", wp_defender()->domain ), network_admin_url( "admin.php?page=wdf-ip-lockout&view=logs" ) ) ?>
