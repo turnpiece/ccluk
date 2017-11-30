@@ -160,6 +160,15 @@ class BP_Docs_Theme_Compat {
 			add_action( 'bp_template_include_reset_dummy_post_data', array( $this, 'create_dummy_post' ) );
 			add_filter( 'bp_replace_the_content',                    array( $this, 'create_content'    ) );
 		}
+
+		/**
+		 * Fires after the BuddyPress Docs theme compatibility layer has initialized.
+		 *
+		 * @since 1.9.4
+		 *
+		 * @param BP_Docs_Theme_Compat $theme_compat
+		 */
+		do_action( 'bp_docs_setup_theme_compat', $this );
 	}
 
 	/**
@@ -198,7 +207,7 @@ class BP_Docs_Theme_Compat {
 	public function directory_dummy_post() {
 		bp_theme_compat_reset_post( array(
 			'ID'             => 0,
-			'post_title'     => __( 'Docs Directory', 'bp-docs' ),
+			'post_title'     => bp_docs_get_docs_directory_title(),
 			'post_author'    => 0,
 			'post_date'      => 0,
 			'post_content'   => '',
@@ -256,7 +265,7 @@ class BP_Docs_Theme_Compat {
 	public function create_dummy_post() {
 		bp_theme_compat_reset_post( array(
 			'ID'             => 0,
-			'post_title'     => __( 'Create a Doc', 'bp-docs' ),
+			'post_title'     => __( 'Create a Doc', 'buddypress-docs' ),
 			'post_author'    => get_current_user_id(),
 			'post_date'      => 0,
 			'post_content'   => '',
