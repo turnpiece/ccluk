@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-11 20:27:35+0000\n"
+"PO-Revision-Date: 2017-11-16 13:45:47+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2690,7 +2690,7 @@ msgstr "Alle forums"
 
 #: includes/admin/tools.php:1216
 msgid "The following data will be removed:"
-msgstr "De volgende data zal verweiderd worden:"
+msgstr "De volgende data zal verwijderd worden:"
 
 #: includes/admin/tools.php:1210
 msgid "Backup your database before proceeding."

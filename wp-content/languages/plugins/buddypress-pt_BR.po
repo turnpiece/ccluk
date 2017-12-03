@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-14 21:50:20+0000\n"
+"PO-Revision-Date: 2017-10-21 15:46:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -964,7 +964,7 @@ msgstr "Navegação de lista de grupos"
 #: bp-core/classes/class-bp-core.php:308
 msgctxt "email post type description"
 msgid "BuddyPress emails"
-msgstr "Emails BuddyPress"
+msgstr "E-mails BuddyPress"
 
 #: bp-core/classes/class-bp-admin.php:932
 msgid "Thank you for updating! BuddyPress %s has many new improvements that you will enjoy."
@@ -1022,12 +1022,12 @@ msgstr "&copy; %s %s"
 #: bp-core/bp-core-functions.php:2978
 msgctxt "email type taxonomy label"
 msgid "View Email Situation"
-msgstr "Ver E-mail de situação"
+msgstr "Ver situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2977
 msgctxt "email type taxonomy label"
 msgid "Update Email Situation"
-msgstr "Atualizar E-mail de situação"
+msgstr "Atualizar situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2976
 msgctxt "email type taxonomy singular name"
@@ -1042,22 +1042,22 @@ msgstr "Pesquisar E-mails"
 #: bp-core/bp-core-functions.php:2974
 msgctxt "email type taxonomy label"
 msgid "Popular Email Situation"
-msgstr "Emails de situação populares"
+msgstr "Situações para e-mail populares"
 
 #: bp-core/bp-core-functions.php:2973
 msgctxt "email type taxonomy label"
 msgid "No email situations"
-msgstr "Não há e-mails de situação"
+msgstr "Não há situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2972
 msgctxt "email type taxonomy label"
 msgid "No email situations found."
-msgstr "Nenhum e-mail de situação foi encontrado"
+msgstr "Nenhuma situação para e-mail foi encontrada."
 
 #: bp-core/bp-core-functions.php:2971
 msgctxt "email type taxonomy label"
 msgid "New email situation name"
-msgstr "Nome do novo e-mail de situação"
+msgstr "Nome da nova situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2970
 msgctxt "email type taxonomy name"
@@ -1082,17 +1082,17 @@ msgstr "Lista de e-mail"
 #: bp-core/bp-core-functions.php:2966
 msgctxt "email type taxonomy label"
 msgid "Edit Email Situations"
-msgstr "Editar E-mail de situação"
+msgstr "Editar situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2965
 msgctxt "email type taxonomy label"
 msgid "All Email Situations"
-msgstr "Todos os E-mails de situação"
+msgstr "Todas as situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2964
 msgctxt "email type taxonomy label"
 msgid "New Email Situation"
-msgstr "Novo E-mail de situação"
+msgstr "Nova situação para e-mail"
 
 #: bp-core/bp-core-functions.php:2888
 msgctxt "email post type label"
@@ -1162,7 +1162,7 @@ msgstr "Editar E-mail"
 #: bp-core/bp-core-functions.php:2875
 msgctxt "email post type label"
 msgid "All Emails"
-msgstr "Todos os E-mails"
+msgstr "Todos os e-mails"
 
 #: bp-core/bp-core-functions.php:2874
 msgctxt "email post type label"
@@ -3548,7 +3548,7 @@ msgstr "Escolha uma senha"
 #: bp-templates/bp-legacy/buddypress/members/register.php:95
 #: bp-themes/bp-default/registration/register.php:41
 msgid "Email Address"
-msgstr "Endereço de Email"
+msgstr "Endereço de e-mail"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:84
 #: bp-templates/bp-legacy/buddypress/members/register.php:95
@@ -4419,7 +4419,7 @@ msgstr "Você dispensou com sucesso sua alteração de email."
 
 #: bp-settings/bp-settings-actions.php:467
 msgid "There was a problem verifying your new email address. Please try again."
-msgstr "Ocorreu um problema ao verificar o seu novo endereço de email. Por favor, tente novamente."
+msgstr "Ocorreu um problema ao verificar o seu novo endereço de e-mail. Tente novamente."
 
 #: bp-settings/bp-settings-actions.php:464
 msgid "You have successfully verified your new email address."
@@ -4467,19 +4467,19 @@ msgstr "Sua senha atual é inválida."
 
 #: bp-settings/bp-settings-actions.php:202
 msgid "Email address cannot be empty."
-msgstr "Endereço de email não pode estar vazio."
+msgstr "Endereço de e-mail não pode estar vazio."
 
 #: bp-settings/bp-settings-actions.php:199
 msgid "That email address is already taken."
-msgstr "Este endereço de email já está em uso."
+msgstr "Este endereço de e-mail já está em uso."
 
 #: bp-settings/bp-settings-actions.php:196
 msgid "That email address is currently unavailable for use."
-msgstr "Este endereço de email não está disponível para uso."
+msgstr "Este endereço de e-mail não está disponível para uso."
 
 #: bp-settings/bp-settings-actions.php:193
 msgid "That email address is invalid. Check the formatting and try again."
-msgstr "Este endereço de email não é válido. Verifique o formato e tente novamente."
+msgstr "Este endereço de e-mail não é válido. Verifique o formato e tente novamente."
 
 #: bp-notifications/bp-notifications-template.php:1008
 msgid "Go"
@@ -5155,16 +5155,16 @@ msgstr "Por favor, informe um nome de usuário"
 
 #: bp-members/bp-members-functions.php:1675
 msgid "Sorry, that email address is already used!"
-msgstr "Desculpe, esse endereço de email já está sendo usado!"
+msgstr "Esse endereço de e-mail já está sendo usado!"
 
 #: bp-members/bp-members-functions.php:1667
 #: bp-members/bp-members-functions.php:1671
 msgid "Sorry, that email address is not allowed!"
-msgstr "Desculpe, este endereço de email não é permitido!"
+msgstr "Este endereço de e-mail não é permitido!"
 
 #: bp-members/bp-members-functions.php:1663
 msgid "Please check your email address."
-msgstr "Por favor, verifique seu endereço de email."
+msgstr "Verifique seu endereço de e-mail."
 
 #: bp-members/bp-members-functions.php:1442
 #: bp-members/bp-members-functions.php:2479

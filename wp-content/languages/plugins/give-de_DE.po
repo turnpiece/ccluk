@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Give &#8211; Donation Plugin and Fundraising Platform - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-05 15:22:44+0000\n"
+"PO-Revision-Date: 2017-11-02 12:02:15+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,167 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: de\n"
 "Project-Id-Version: Plugins - Give &#8211; Donation Plugin and Fundraising Platform - Stable (latest release)\n"
+
+#: templates/email-login-form.php:133
+msgid "Verify Email"
+msgstr "E-Mail prüfen"
+
+#: templates/email-login-form.php:105
+msgid "Please enter the email address you used for your donation."
+msgstr "Bitte gib die E-Mail-Adresse ein, die du für deine Spende benutzt hast."
+
+#: templates/email-login-form.php:84
+msgid "It looks like that email address provided and access token of the link does not match."
+msgstr "Es sieht so aus, als stimmten die angegebene E-Mail-Adresse und das Zugriffstoken des Links nicht überein."
+
+#: includes/scripts.php:340
+msgid "Are you sure you want to permanently delete the selected {donor_count} donors and associated records?"
+msgstr "Bist du sicher, dass du diese {donor_count} Spender und dazugehörige Einträge permanent löschen willst?"
+
+#: includes/scripts.php:339
+msgid "Are you sure you want to permanently delete this donor and associated records?"
+msgstr "Bist du sicher, dass du diesen Spender und dazugehörige Einträge permanent löschen willst? "
+
+#: includes/admin/reports/reports.php:143
+msgid "You do not have permission to access this report"
+msgstr "Du hast keine Berechtigung, auf diesen Bericht zuzugreifen"
+
+#: includes/admin/admin-actions.php:404
+msgid "Donor information updated successfully."
+msgstr "Spender-Informationen erfolgreich aktualisiert."
+
+#: includes/admin/admin-actions.php:196
+msgid "Successfully deleted one donor and associated records."
+msgid_plural "Successfully deleted %d donors and associated records."
+msgstr[0] "Ein Spender und zugehörige Einträge wurde erfolgreich gelöscht."
+msgstr[1] "%d Spender und zugehörige Einträge wurden erfolgreich gelöscht."
+
+#: includes/import-functions.php:434
+msgid "Donation Form Title"
+msgstr "Titel des Spendenformulars"
+
+#: includes/import-functions.php:390
+msgid "Postal Code"
+msgstr "Postleitzahl"
+
+#: templates/shortcode-receipt.php:111
+msgid "Your Donation is Almost Complete!"
+msgstr "Deine Spende ist so gut wie abgeschlossen!"
+
+#: templates/shortcode-profile-editor.php:41
+msgid "Profile"
+msgstr "Profil"
+
+#: includes/shortcodes.php:352
+msgid "Your Donor and User profile are no longer connected. Please contact the site administrator."
+msgstr "Dein Spender- und Benutzerprofil sind nicht länger verbunden. Bitte kontaktiere den Website-Administrator."
+
+#: includes/scripts.php:376
+msgid "Changes you made may not be saved."
+msgstr "Es kann sein, dass deine Änderungen nicht gespeichert werden."
+
+#: includes/scripts.php:372
+msgid "Run Updates"
+msgstr "Aktualisierungen starten"
+
+#: includes/process-donation.php:294
+msgid "This donation has been flagged as spam. Please try again."
+msgstr "Diese Spende wurde als Spam markiert. Bitte erneut versuchen."
+
+#: includes/misc-functions.php:760
+msgid "Untitled donation form"
+msgstr "Spendenformular ohne Titel"
+
+#: includes/misc-functions.php:760
+msgid "Donation Form ID: %d"
+msgstr "Spendenformular-ID: %d"
+
+#: includes/emails/functions.php:474
+msgid "User - Donor Profile Disconnection"
+msgstr "Benutzer - Spender Profil nicht verbunden"
+
+#: includes/emails/functions.php:465
+msgid "Reconnect User"
+msgstr "Benutzer neu verbinden"
+
+#: includes/emails/functions.php:461
+msgid "Do you want to reconnect User and Donor profile again?"
+msgstr "Willst du Benutzer- und Spenderprofil wieder verbinden?"
+
+#: includes/emails/functions.php:460
+msgid "This email is to inform you that a user has tried logging in. But, User was unable to login due to User-Donor profile disconnection."
+msgstr "Diese E-Mail soll dich informieren, dass ein Benutzer versucht hat, sich anzumelden, aber wegen einer nicht bestehenden Verbindung von Benutzer- und Spenderprofil nicht dazu in der Lage war."
+
+#: includes/emails/functions.php:459
+msgid "Hi Admin,"
+msgstr "Hallo Admin,"
+
+#: includes/admin/tools/views/html-admin-page-imports.php:53
+msgid "Import CSV"
+msgstr "CVS importieren"
+
+#: includes/admin/tools/views/html-admin-page-imports.php:49
+msgid "Import a CSV of Donations."
+msgstr "Eine CSV-Spendenliste importieren."
+
+#: includes/admin/tools/views/html-admin-page-imports.php:28
+msgid "Import Options"
+msgstr "Import-Optionen"
+
+#: includes/admin/tools/views/html-admin-page-imports.php:27
+msgid "Import Type"
+msgstr "Import-Typ"
+
+#: includes/admin/tools/views/html-admin-page-data.php:71
+msgid "Delete imported WordPress users"
+msgstr "Importierte WordPress-Benutzer löschen"
+
+#: includes/admin/tools/import/class-give-import-donations.php:858
+#: includes/admin/tools/import/class-give-import-donations.php:862
+msgid "Please upload or provide a valid CSV file."
+msgstr "Bitte eine gültige CSV-Datei angeben oder hochladen."
+
+#: includes/admin/tools/import/class-give-import-donations.php:779
+msgid "Your CSV file will be uploaded via the WordPress Media Library. It's a good idea to delete it after the import is finished so that your sensitive data is not accessible on the web. Disable this only if you plan to delete the file manually later."
+msgstr "Deine CSV-Datei wird über die Mediathek von WordPress hochgeladen. Es wird empfohlen, sie nach erfolgreichem Import zu löschen, sodass sensible Daten nicht im Web abrufbar bleiben. Deaktiviere dies nur, falls du die Datei später selbst manuell löschen wirst."
+
+#. translators: %s: payment id
+#: includes/emails/functions.php:439
+msgid "Attention: User tries to login whose Donor profile is disconnected!"
+msgstr "Achtung: Benutzer kann sich wegen nicht bestehender Verbindung zum Spenderprofil nicht anmelden!"
+
+#: includes/admin/tools/import/class-give-import-donations.php:751
+msgid "Tab"
+msgstr "Tab"
+
+#: includes/admin/tools/import/class-give-import-donations.php:750
+msgid "Comma"
+msgstr "Komma"
+
+#: includes/admin/settings/class-settings-advanced.php:99
+msgid "Akismet SPAM Protection"
+msgstr "Akismet Schutz vor Spam"
+
+#: includes/admin/donors/donors.php:296
+msgid "View User Profile"
+msgstr "Benutzerprofil anzeigen"
+
+#: includes/admin/donors/donors.php:295
+msgid "View User Profile of current user ID."
+msgstr "Benutzerprofil der aktuellen Benutzer-ID anzeigen."
+
+#. translators: %s: donor number
+#: includes/admin/donors/donors.php:161
+msgid "Donor %s"
+msgstr "Spender %s"
+
+#: includes/admin/class-admin-settings.php:115
+msgid "Please properly configure Akismet to enable SPAM protection."
+msgstr "Für aktiven Schutz vor Spam bitte Akismet entsprechend konfigurieren."
+
+#: includes/admin/admin-actions.php:395
+msgid "User has been successfully connected with Donor."
+msgstr "Benutzer wurde erfolgreich mit Spender verbunden."
 
 #: includes/scripts.php:374
 msgid "Something went wrong kindly try again!"
@@ -110,6 +271,10 @@ msgstr "Du hast keine Berechtigung zum Löschen von Importtransaktionen."
 #: includes/admin/tools/import/class-give-import-donations.php:778
 msgid "Delete CSV after import:"
 msgstr "CSV nach dem Import löschen:"
+
+#: includes/admin/tools/import/class-give-import-donations.php:767
+msgid "Create WP users for new donors:"
+msgstr "WP-Benutzer für neue Spender erstellen:"
 
 #: includes/admin/tools/import/class-give-import-donations.php:756
 msgid "Test Mode:"
@@ -3086,6 +3251,10 @@ msgstr "Updates Erweiterungen"
 msgid "Update 1 of %s"
 msgstr "Aktualisierung 1 von %s"
 
+#: includes/admin/upgrades/views/upgrades.php:41
+msgid "Give needs to update the database. <a href=\"%s\">Update now</a>"
+msgstr "Give muss die Datenbank aktualisieren. <a href=\"%s\">Jetzt aktualisieren ></a>"
+
 #: includes/admin/upgrades/views/upgrades.php:38
 msgid "Database Updates"
 msgstr "Datenbank Updates"
@@ -3505,6 +3674,10 @@ msgstr "Bist du sicher, dass du die {payment_count} ausgewählten Spenden unwide
 #: includes/scripts.php:346
 msgid "Are you sure you want to permanently delete this donation?"
 msgstr "Bist du sicher, dass du diese Spende unwiderruflich löschen willst?"
+
+#: includes/scripts.php:345
+msgid "You must choose at least one or more donations to delete."
+msgstr "Du musst mindestens eine oder mehrere Spenden zum Löschen wählen."
 
 #: includes/scripts.php:331
 msgid "Dismiss this notice."
@@ -7275,6 +7448,10 @@ msgstr "Der Mindestspendenbetrag für dieses Formular ist"
 msgid "This form has a minimum donation amount of %s."
 msgstr "Dieses Formular hat eine Mindestspenden-Beitrag von %s."
 
+#: includes/misc-functions.php:383
+msgid "Russian Rubles (руб)"
+msgstr "Russische Rubel (руб)"
+
 #: includes/misc-functions.php:373
 msgid "Iranian Rial (﷼)"
 msgstr "Iranischer Rial (﷼)"
@@ -8196,11 +8373,11 @@ msgstr "Spendensumme:"
 
 #: includes/forms/template.php:1553
 msgid "Hide Terms"
-msgstr "Verstecke Benutzungsbedingungen"
+msgstr "Verstecke Nutzungsbedingungen"
 
 #: includes/forms/template.php:1551
 msgid "Show Terms"
-msgstr "Zeige Benutzungsbedingungen"
+msgstr "Zeige Nutzungsbedingungen"
 
 #: includes/forms/template.php:1393
 msgid "Select Payment Method"
@@ -10237,22 +10414,22 @@ msgstr "AGB Text"
 #: includes/forms/template.php:1506 includes/forms/template.php:1511
 #: includes/install.php:321
 msgid "Agree to Terms?"
-msgstr "Benutzungsbedingungen akzeptiert?"
+msgstr "Nutzungsbedingungen akzeptiert?"
 
 #: includes/admin/forms/class-metabox-form-data.php:508
 msgid "The label shown next to the agree to terms check box. Add your own to customize or leave blank to use the default text placeholder."
-msgstr "Die Beschriftung, die neben der Checkbox für die Benutzungsbedingungen angezeigt wird. Gib deinen eigenen Text an oder leer lassen, um den Standard-Plathaltertext zu verwenden."
+msgstr "Die Beschriftung, die neben der Checkbox für die Nutzungsbedingungen angezeigt wird. Gib deinen eigenen Text an oder leer lassen, um den Standard-Plathaltertext zu verwenden."
 
 #: includes/admin/settings/class-settings-display.php:247
 msgid "Agree to Terms Label"
-msgstr "Benutzungsbedingungen akzeptiert Beschriftung"
+msgstr "Nutzungsbedingungen akzeptiert Beschriftung"
 
 #: includes/admin/forms/class-metabox-form-data.php:493
 #: includes/admin/forms/class-metabox-form-data.php:528
 #: includes/admin/settings/class-settings-display.php:236
 #: includes/admin/settings/class-settings-display.php:305
 msgid "Terms and Conditions"
-msgstr "Benutzungs- und Geschäftsbedingungen"
+msgstr "Nutzungs- und Geschäftsbedingungen"
 
 #: includes/admin/forms/class-metabox-form-data.php:166
 #: includes/admin/forms/class-metabox-form-data.php:302

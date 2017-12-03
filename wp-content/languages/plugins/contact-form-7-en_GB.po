@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-08-18 06:28:00+0000\n"
+"PO-Revision-Date: 2017-10-31 09:58:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,23 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: admin/includes/welcome-panel.php:37
+msgid "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
+msgstr "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
+
+#: admin/includes/welcome-panel.php:35
+msgid "making a donation"
+msgstr "making a donation"
+
+#. translators: %s: link labeled 'making a donation'
+#: admin/includes/welcome-panel.php:35
+msgid "If you enjoy using Contact Form 7 and find it useful, please consider %s."
+msgstr "If you enjoy using Contact Form 7 and find it useful, please consider %s."
+
+#: admin/includes/welcome-panel.php:33
+msgid "It is hard to continue development and support for this plugin without contributions from users like you."
+msgstr "It is hard to continue development and support for this plugin without contributions from users like you."
 
 #: includes/contact-form.php:294 includes/contact-form.php:673
 msgid "This contact form is available only for logged in users."
@@ -82,7 +99,8 @@ msgstr "Invalid mailbox syntax is used."
 msgid "There is a possible empty field."
 msgstr "There is a possible empty field."
 
-#: admin/includes/class-contact-forms-list-table.php:130
+#. translators: %s: number of errors detected
+#: admin/includes/class-contact-forms-list-table.php:132
 msgid "%s configuration error detected"
 msgid_plural "%s configuration errors detected"
 msgstr[0] "%s configuration error detected"
@@ -104,7 +122,7 @@ msgstr "%d configuration errors detected"
 msgid "1 configuration error detected"
 msgstr "1 configuration error detected"
 
-#: admin/admin.php:503 includes/rest-api.php:138 includes/rest-api.php:214
+#: admin/admin.php:505 includes/rest-api.php:138 includes/rest-api.php:214
 msgid "There was an error saving the contact form."
 msgstr "There was an error saving the contact form."
 
@@ -112,19 +130,20 @@ msgstr "There was an error saving the contact form."
 msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 
-#: admin/includes/welcome-panel.php:34
+#: admin/includes/welcome-panel.php:45
 msgid "Flamingo"
 msgstr "Flamingo"
 
-#: admin/includes/welcome-panel.php:34
+#. translators: %s: link labeled 'Flamingo'
+#: admin/includes/welcome-panel.php:45
 msgid "Install a message storage plugin before this happens to you. %s saves all messages through contact forms into the database. Flamingo is a free WordPress plugin created by the same author as Contact Form 7."
 msgstr "Install a message storage plugin before this happens to you. %s saves all messages through contact forms into the database. Flamingo is a free WordPress plugin created by the same author as Contact Form 7."
 
-#: admin/includes/welcome-panel.php:32
+#: admin/includes/welcome-panel.php:43
 msgid "Contact Form 7 doesn&#8217;t store submitted messages anywhere. Therefore, you may lose important messages forever if your mail server has issues or you make a mistake in mail configuration."
 msgstr "Contact Form 7 doesn&#8217;t store submitted messages anywhere. Therefore, you may lose important messages forever if your mail server has issues or you make a mistake in mail configuration."
 
-#: admin/includes/welcome-panel.php:30
+#: admin/includes/welcome-panel.php:41
 msgid "Before you cry over spilt mail&#8230;"
 msgstr "Before you cry over spilt mail&#8230;"
 
@@ -136,6 +155,8 @@ msgstr "comment blacklist"
 msgid "https://contactform7.com/comment-blacklist/"
 msgstr "https://contactform7.com/comment-blacklist/"
 
+#. translators: links labeled 1: 'Akismet', 2: 'reCAPTCHA', 3: 'comment
+#. blacklist'
 #: admin/includes/welcome-panel.php:26
 msgid "Contact Form 7 supports spam-filtering with %1$s. Intelligent %2$s blocks annoying spambots. Plus, using %3$s, you can block messages containing specified keywords or those sent from specified IP addresses."
 msgstr "Contact Form 7 supports spam-filtering with %1$s. Intelligent %2$s blocks annoying spambots. Plus, using %3$s, you can block messages containing specified keywords or those sent from specified IP addresses."
@@ -156,11 +177,11 @@ msgstr "Multiple form controls are in a single label element."
 msgid "How to correct this?"
 msgstr "How to correct this?"
 
-#: admin/admin.php:422
+#: admin/admin.php:424
 msgid "FAQ about Configuration Validator"
 msgstr "FAQ about Configuration Validator"
 
-#: admin/admin.php:422
+#: admin/admin.php:424
 msgid "https://contactform7.com/configuration-validator-faq/"
 msgstr "https://contactform7.com/configuration-validator-faq/"
 
@@ -220,45 +241,46 @@ msgstr "The date is before the earliest one allowed."
 msgid "The date format is incorrect."
 msgstr "The date format is incorrect."
 
-#: includes/contact-form-template.php:183
+#: includes/contact-form-template.php:195
 msgid "The field is too short."
 msgstr "The field is too short."
 
-#: includes/contact-form-template.php:176
+#: includes/contact-form-template.php:188
 msgid "The field is too long."
 msgstr "The field is too long."
 
-#: includes/contact-form-template.php:169
+#: includes/contact-form-template.php:181
 msgid "The field is required."
 msgstr "The field is required."
 
-#: includes/contact-form-template.php:162
+#: includes/contact-form-template.php:174
 msgid "You must accept the terms and conditions before sending your message."
 msgstr "You must accept the terms and conditions before sending your message."
 
-#: includes/contact-form-template.php:148
+#: includes/contact-form-template.php:160
 msgid "One or more fields have an error. Please check and try again."
 msgstr "One or more fields have an error. Please check and try again."
 
-#: includes/contact-form-template.php:141
-#: includes/contact-form-template.php:155
+#: includes/contact-form-template.php:153
+#: includes/contact-form-template.php:167
 msgid "There was an error trying to send your message. Please try again later."
 msgstr "There was an error trying to send your message. Please try again later."
 
-#: includes/contact-form-template.php:134
+#: includes/contact-form-template.php:146
 msgid "Thank you for your message. It has been sent."
 msgstr "Thank you for your message. It has been sent."
 
-#: includes/contact-form-template.php:50 includes/contact-form-template.php:77
+#. translators: 1: blog name, 2: [your-subject]
+#: includes/contact-form-template.php:52 includes/contact-form-template.php:86
 msgctxt "mail subject"
 msgid "%1$s \"%2$s\""
 msgstr "%1$s \"%2$s\""
 
-#: admin/admin.php:609
+#: admin/admin.php:619
 msgid "Misconfiguration leads to mail delivery failure or other troubles. Validate your contact forms now."
 msgstr "Misconfiguration leads to mail delivery failure or other problems. Validate your contact forms now."
 
-#: admin/admin.php:607
+#: admin/admin.php:617
 msgid "Validate Contact Form 7 Configuration"
 msgstr "Validate Contact Form 7 Configuration"
 
@@ -266,21 +288,23 @@ msgstr "Validate Contact Form 7 Configuration"
 msgid "https://contactform7.com/configuration-errors/"
 msgstr "https://contactform7.com/configuration-errors/"
 
-#: admin/admin.php:525
+#: admin/admin.php:528
 msgid "Configuration validation completed. No invalid contact form was found."
 msgstr "Configuration validation completed. No invalid contact form was found."
 
-#: admin/admin.php:517
+#. translators: %s: number of contact forms
+#: admin/admin.php:520
 msgid "Configuration validation completed. An invalid contact form was found."
 msgid_plural "Configuration validation completed. %s invalid contact forms were found."
 msgstr[0] "Configuration validation completed. An invalid contact form was found."
 msgstr[1] "Configuration validation completed. %s invalid contact forms were found."
 
-#: admin/admin.php:414
+#: admin/admin.php:416
 msgid "Validate Configuration"
 msgstr "Validate Configuration"
 
-#: admin/admin.php:405
+#. translators: %s: number of contact forms
+#: admin/admin.php:407
 msgid "Validate %s Contact Form Now"
 msgid_plural "Validate %s Contact Forms Now"
 msgstr[0] "Validate %s Contact Form Now"
@@ -397,7 +421,8 @@ msgstr "Just another contact form plugin. Simple but flexible."
 msgid "https://contactform7.com/"
 msgstr "https://contactform7.com/"
 
-#: settings.php:140
+#. translators: title of your first contact form. %d: number fixed to '1'
+#: settings.php:142
 msgid "Contact form %d"
 msgstr "Contact form %d"
 
@@ -849,51 +874,54 @@ msgstr "Untitled"
 msgid "Contact Form"
 msgstr "Contact Form"
 
-#: includes/contact-form-template.php:181
+#: includes/contact-form-template.php:193
 msgid "There is a field with input that is shorter than the minimum allowed length"
 msgstr "There is a field with input that is shorter than the minimum allowed length"
 
-#: includes/contact-form-template.php:174
+#: includes/contact-form-template.php:186
 msgid "There is a field with input that is longer than the maximum allowed length"
 msgstr "There is a field with input that is longer than the maximum allowed length"
 
-#: includes/contact-form-template.php:167
+#: includes/contact-form-template.php:179
 msgid "There is a field that the sender must fill in"
 msgstr "There is a field that the sender must fill in"
 
-#: includes/contact-form-template.php:160
+#: includes/contact-form-template.php:172
 msgid "There are terms that the sender must accept"
 msgstr "There are terms that the sender must accept"
 
-#: includes/contact-form-template.php:153
+#: includes/contact-form-template.php:165
 msgid "Submission was referred to as spam"
 msgstr "Submission was referred to as spam"
 
-#: includes/contact-form-template.php:146
+#: includes/contact-form-template.php:158
 msgid "Validation errors occurred"
 msgstr "Validation errors occurred"
 
-#: includes/contact-form-template.php:139
+#: includes/contact-form-template.php:151
 msgid "Sender's message failed to send"
 msgstr "Sender's message failed to send"
 
-#: includes/contact-form-template.php:132
+#: includes/contact-form-template.php:144
 msgid "Sender's message was sent successfully"
 msgstr "Sender's message was sent successfully"
 
-#: includes/contact-form-template.php:61 includes/contact-form-template.php:85
+#. translators: 1: blog name, 2: blog URL
+#: includes/contact-form-template.php:67 includes/contact-form-template.php:96
 msgid "This e-mail was sent from a contact form on %1$s (%2$s)"
 msgstr "This e-mail was sent from a contact form on %1$s (%2$s)"
 
-#: includes/contact-form-template.php:58 includes/contact-form-template.php:82
+#: includes/contact-form-template.php:62 includes/contact-form-template.php:91
 msgid "Message Body:"
 msgstr "Message Body:"
 
-#: includes/contact-form-template.php:56
+#. translators: %s: [your-subject]
+#: includes/contact-form-template.php:60
 msgid "Subject: %s"
 msgstr "Subject: %s"
 
-#: includes/contact-form-template.php:54
+#. translators: %s: [your-name] <[your-email]>
+#: includes/contact-form-template.php:57
 msgid "From: %s"
 msgstr "From: %s"
 
@@ -917,7 +945,8 @@ msgstr "(required)"
 msgid "Your Name"
 msgstr "Your Name"
 
-#: admin/includes/tag-generator.php:44
+#. translators: %s: title of form-tag like 'email' or 'checkboxes'
+#: admin/includes/tag-generator.php:45
 msgid "Form-tag Generator: %s"
 msgstr "Form-tag Generator: %s"
 
@@ -1074,23 +1103,25 @@ msgstr "Use Mail (2)"
 msgid "Mail (2)"
 msgstr "Mail (2)"
 
-#: admin/includes/class-contact-forms-list-table.php:214
+#: admin/includes/class-contact-forms-list-table.php:217
 msgid "Y/m/d"
 msgstr "y/m/d"
 
-#: admin/includes/class-contact-forms-list-table.php:212
+#. translators: %s: time since the creation of the contact form
+#: admin/includes/class-contact-forms-list-table.php:215
 msgid "%s ago"
 msgstr "%s ago"
 
-#: admin/includes/class-contact-forms-list-table.php:202
+#: admin/includes/class-contact-forms-list-table.php:204
 msgid "Y/m/d g:i:s A"
 msgstr "Y/m/d g:i:s A"
 
-#: admin/includes/class-contact-forms-list-table.php:116
+#. translators: %s: title of contact form
+#: admin/includes/class-contact-forms-list-table.php:117
 msgid "Edit &#8220;%s&#8221;"
 msgstr "Edit &#8220;%s&#8221;"
 
-#: admin/includes/class-contact-forms-list-table.php:144
+#: admin/includes/class-contact-forms-list-table.php:146
 msgid "Edit"
 msgstr "Edit"
 
@@ -1110,28 +1141,30 @@ msgstr "Shortcode"
 msgid "Title"
 msgstr "Title"
 
-#: admin/edit-contact-form.php:212 admin/includes/editor.php:217
+#: admin/edit-contact-form.php:216 admin/includes/editor.php:217
 #: admin/includes/editor.php:222
 msgid "Additional Settings"
 msgstr "Additional Settings"
 
-#: admin/edit-contact-form.php:210
+#. translators: %d: number of additional settings
+#: admin/edit-contact-form.php:214
 msgid "Additional Settings (%d)"
 msgstr "Additional Settings (%d)"
 
-#: admin/edit-contact-form.php:199 admin/includes/editor.php:192
+#: admin/edit-contact-form.php:202 admin/includes/editor.php:192
 msgid "Messages"
 msgstr "Messages"
 
-#: admin/edit-contact-form.php:196 admin/includes/editor.php:83
+#: admin/edit-contact-form.php:199 admin/includes/editor.php:83
 msgid "Mail"
 msgstr "Mail"
 
-#: admin/edit-contact-form.php:193 admin/includes/editor.php:55
+#: admin/edit-contact-form.php:196 admin/includes/editor.php:55
 msgid "Form"
 msgstr "Form"
 
-#: admin/edit-contact-form.php:183
+#. translators: %s: ◀ ▶ dashicon
+#: admin/edit-contact-form.php:185
 msgid "%s keys switch panels"
 msgstr "%s keys switch panels"
 
@@ -1177,7 +1210,7 @@ msgid "Delete"
 msgstr "Delete"
 
 #: admin/edit-contact-form.php:138
-#: admin/includes/class-contact-forms-list-table.php:154
+#: admin/includes/class-contact-forms-list-table.php:156
 msgid "Duplicate"
 msgstr "Duplicate"
 
@@ -1202,11 +1235,11 @@ msgstr "Enter title here"
 msgid "Save"
 msgstr "Save"
 
-#: admin/admin.php:578
+#: admin/admin.php:584
 msgid "You are not allowed to edit this contact form."
 msgstr "You are not allowed to edit this contact form."
 
-#: admin/includes/welcome-panel.php:34
+#: admin/includes/welcome-panel.php:45
 msgid "https://contactform7.com/save-submitted-messages-with-flamingo/"
 msgstr "https://contactform7.com/save-submitted-messages-with-flamingo/"
 
@@ -1214,35 +1247,45 @@ msgstr "https://contactform7.com/save-submitted-messages-with-flamingo/"
 msgid "https://contactform7.com/spam-filtering-with-akismet/"
 msgstr "https://contactform7.com/spam-filtering-with-akismet/"
 
+#: admin/includes/welcome-panel.php:35
+msgid "https://contactform7.com/donate/"
+msgstr "https://contactform7.com/donate/"
+
+#: admin/includes/welcome-panel.php:31
+msgid "Contact Form 7 needs your support."
+msgstr "Contact Form 7 needs your support."
+
 #: admin/includes/welcome-panel.php:16
 msgid "Dismiss"
 msgstr "Dismiss"
 
-#: admin/admin.php:560
+#. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
+#: admin/admin.php:565
 msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
 msgstr "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
 
-#: admin/admin.php:542
+#: admin/admin.php:545
 msgid "Settings"
 msgstr "Settings"
 
-#: admin/admin.php:494
+#: admin/admin.php:496
 msgid "Contact form deleted."
 msgstr "Contact form deleted."
 
-#: admin/admin.php:492
+#: admin/admin.php:494
 msgid "Contact form saved."
 msgstr "Contact form saved."
 
-#: admin/admin.php:490
+#: admin/admin.php:492
 msgid "Contact form created."
 msgstr "Contact form created."
 
-#: admin/admin.php:392
+#: admin/admin.php:393
 msgid "Search Contact Forms"
 msgstr "Search Contact Forms"
 
-#: admin/admin.php:379
+#. translators: %s: search keywords
+#: admin/admin.php:380
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Search results for &#8220;%s&#8221;"
 
@@ -1266,7 +1309,7 @@ msgstr "You are not allowed to edit this item."
 msgid "Integration"
 msgstr "Integration"
 
-#: admin/admin.php:47 admin/admin.php:460
+#: admin/admin.php:47 admin/admin.php:462
 msgid "Integration with Other Services"
 msgstr "Integration with Other Services"
 
@@ -1290,7 +1333,7 @@ msgstr "Edit Contact Form"
 msgid "Contact"
 msgstr "Contact"
 
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 4.9)  #-#-#-#-#
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 4.9.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin/admin.php:21 modules/flamingo.php:150
 msgid "Contact Form 7"

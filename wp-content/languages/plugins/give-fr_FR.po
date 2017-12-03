@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Give &#8211; Donation Plugin and Fundraising Platform - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-15 19:01:38+0000\n"
+"PO-Revision-Date: 2017-11-03 12:21:14+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,40 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - Give &#8211; Donation Plugin and Fundraising Platform - Stable (latest release)\n"
+
+#: templates/email-login-form.php:133
+msgid "Verify Email"
+msgstr "Vérifier l’e-mail"
+
+#: templates/email-login-form.php:105
+msgid "Please enter the email address you used for your donation."
+msgstr "Veuillez saisir l’adress e-mail que vous avez utilisé pour votre don."
+
+#: templates/email-login-form.php:84
+msgid "It looks like that email address provided and access token of the link does not match."
+msgstr "Il semblerait que l’adresse e-mail fournie et le jeton d’accès dans le lien ne correspondent pas."
+
+#: includes/admin/reports/reports.php:143
+msgid "You do not have permission to access this report"
+msgstr "Vous n’avez pas la permission d’accéder à ce rapport."
+
+#: includes/admin/admin-actions.php:404
+msgid "Donor information updated successfully."
+msgstr "Les informations du donateur ont bien été mis à jour."
+
+#: includes/admin/admin-actions.php:196
+msgid "Successfully deleted one donor and associated records."
+msgid_plural "Successfully deleted %d donors and associated records."
+msgstr[0] "Un donateur et ses données associées ont été supprimé avec succès."
+msgstr[1] "%d donateurs et ses données associées ont été supprimé avec succès."
+
+#: includes/import-functions.php:434
+msgid "Donation Form Title"
+msgstr "Titre du formulaire de don"
+
+#: includes/import-functions.php:390
+msgid "Postal Code"
+msgstr "Code Postal"
 
 #: templates/shortcode-receipt.php:111
 msgid "Your Donation is Almost Complete!"
@@ -79,6 +113,15 @@ msgstr "Options d’imports"
 msgid "Import Type"
 msgstr "Import type"
 
+#: includes/admin/tools/views/html-admin-page-data.php:71
+msgid "Delete imported WordPress users"
+msgstr "Supprimer les utilisateurs WordPress importés."
+
+#: includes/admin/tools/import/class-give-import-donations.php:858
+#: includes/admin/tools/import/class-give-import-donations.php:862
+msgid "Please upload or provide a valid CSV file."
+msgstr "Veuillez téléverser ou fournir un fichier CSV valide."
+
 #: includes/admin/tools/import/class-give-import-donations.php:751
 msgid "Tab"
 msgstr "Onglet"
@@ -87,9 +130,17 @@ msgstr "Onglet"
 msgid "Comma"
 msgstr "Virgule"
 
+#: includes/admin/tools/export/pdf-reports.php:39
+msgid "Dependency missing."
+msgstr "Dépendance manquante"
+
 #: includes/admin/tools/class-settings-import.php:96
 msgid "Import Tab"
 msgstr "Onglet Import"
+
+#: includes/admin/settings/class-settings-general.php:247
+msgid "Base State/Province"
+msgstr "État / Province"
 
 #: includes/admin/settings/class-settings-advanced.php:99
 msgid "Akismet SPAM Protection"
@@ -103,6 +154,10 @@ msgstr "Voir le profil utilisateur"
 #: includes/admin/donors/donors.php:161
 msgid "Donor %s"
 msgstr "Donateur %s"
+
+#: includes/admin/admin-actions.php:395
+msgid "User has been successfully connected with Donor."
+msgstr "L’utilisateur a bien été connecté avec le donateur."
 
 #: includes/scripts.php:374
 msgid "Something went wrong kindly try again!"
@@ -234,7 +289,7 @@ msgstr "Correspondance de colonne"
 
 #: includes/admin/tools/import/class-give-import-donations.php:645
 msgid "Upload CSV file"
-msgstr "Mettre en ligne un fichier CSV"
+msgstr "Téléverser un fichier CSV"
 
 #: includes/admin/tools/import/class-give-import-donations.php:430
 msgid "Map to field"
@@ -244,6 +299,10 @@ msgstr "Faire correspondre au champs"
 msgid "Column name"
 msgstr "Nom de la colonne"
 
+#: includes/admin/tools/import/class-give-import-donations.php:424
+msgid "Select fields from your CSV file to map against donations fields or to ignore during import."
+msgstr "Sélectionnez les champs de votre fichier CSV pour les mapper sur les champs de dons ou pour les ignorer durant l’import."
+
 #: includes/admin/tools/import/class-give-import-donations.php:423
 msgid "Map CSV fields to donations"
 msgstr "Faites correspondre un champs de votre CSV à une donation"
@@ -251,6 +310,14 @@ msgstr "Faites correspondre un champs de votre CSV à une donation"
 #: includes/admin/tools/import/class-give-import-donations.php:392
 msgid "Please select Email id or Customer ID options from the dropdown."
 msgstr "Veuillez sélectionner l’e-mail ou l'ID client dans le menu déroulant."
+
+#: includes/admin/tools/import/class-give-import-donations.php:387
+msgid "Please select Amount option from the dropdown."
+msgstr "Veuillez sélectionner l’option montant."
+
+#: includes/admin/tools/import/class-give-import-donations.php:330
+msgid "Your donations are now being imported..."
+msgstr "Vos dons sont en cours d’import…"
 
 #: includes/admin/tools/import/class-give-import-donations.php:329
 msgid "Importing"
@@ -312,6 +379,11 @@ msgstr "donateurs"
 msgid "donor"
 msgstr "donateur"
 
+#: includes/admin/tools/import/class-give-import-donations.php:220
+#: includes/admin/tools/import/class-give-import-donations.php:235
+msgid "%s duplicate %s detected"
+msgstr "%s doublon⋅s %s détécté⋅s"
+
 #: includes/admin/settings/class-settings-advanced.php:68
 msgid "Assign default user roles for donors when donors opt to register as a WP User."
 msgstr "Assigner le rôle utilisateur par défaut lorsqu'un donateur choisi de s'enregistrer en tant qu’utilisateur WP"
@@ -339,10 +411,22 @@ msgstr "Pré-approbation en attente"
 msgid "Need help? Learn more about %sDonors%s."
 msgstr "Besoin d’aide ? Apprenez en plus plus à propos des %sDonateurs%s."
 
+#: includes/admin/class-blank-slate.php:279
+msgid "When your first donation arrives, the donor will appear here."
+msgstr "Quand vous recevrez votre premier don, le donateur apparaîtra ici."
+
+#: includes/admin/class-blank-slate.php:268
+msgid "Need help? Learn more about %sDonations%s."
+msgstr "besoin d’aide ? Apprenez en plus sur les %sDons%s."
+
 #: includes/admin/class-blank-slate.php:265
 #: includes/admin/class-blank-slate.php:280
 msgid "View All Forms"
 msgstr "Voir tous les formulaires"
+
+#: includes/admin/class-blank-slate.php:250
+msgid "Need help? Get started with %sGive 101%s."
+msgstr "Besoin d’aide ? Lancez-vous avec %sGive101%s."
 
 #: includes/admin/class-blank-slate.php:247
 msgid "Create Donation Form"
@@ -354,7 +438,7 @@ msgstr "Icône Give"
 
 #: includes/admin/admin-actions.php:531
 msgid "All donation uploaded successfully!"
-msgstr "Tous les dons ont été mis en ligne avec succès !"
+msgstr "Tous les dons ont été téléversé avec succès !"
 
 #: includes/admin/admin-actions.php:457
 #: includes/admin/tools/views/html-admin-page-import-donations.php:23
@@ -3562,6 +3646,10 @@ msgstr "Confirmez-vous la suppression définitive des {payment_count} dons séle
 msgid "Are you sure you want to permanently delete this donation?"
 msgstr "Confirmez-vous la suppression définitive de ce don ?"
 
+#: includes/scripts.php:345
+msgid "You must choose at least one or more donations to delete."
+msgstr "Vous devez choisir au moins un, ou plusieurs paiements à supprimer."
+
 #: includes/scripts.php:331
 msgid "Dismiss this notice."
 msgstr "Supprimer ce message."
@@ -4056,7 +4144,7 @@ msgstr "Version de cURL"
 
 #: includes/admin/tools/views/html-admin-page-system-info.php:230
 msgid "The largest filesize that can be uploaded to your WordPress installation."
-msgstr "Taille maximum que peut avoir un fichier mis en ligne sur votre installation de WordPress."
+msgstr "Taille maximum que peut avoir un fichier téléversé sur votre installation de WordPress."
 
 #: includes/admin/tools/views/html-admin-page-system-info.php:229
 msgid "PHP Max Upload Size"
@@ -7329,6 +7417,10 @@ msgstr "Le montant du don minimum pour ce formulaire est de"
 msgid "This form has a minimum donation amount of %s."
 msgstr "Ce formulaire a un don minimum de %s."
 
+#: includes/misc-functions.php:383
+msgid "Russian Rubles (руб)"
+msgstr "Rouble russe (руб)"
+
 #: includes/misc-functions.php:373
 msgid "Iranian Rial (﷼)"
 msgstr "Rial iranien (﷼)"
@@ -9728,7 +9820,7 @@ msgstr "Nom de l’expéditeur"
 #: includes/admin/class-give-settings.php:541
 #: includes/admin/settings/class-settings-email.php:65
 msgid "Upload or choose a logo to be displayed at the top of the donation receipt emails. Displayed on HTML emails only."
-msgstr "Mettez en ligne ou choisissez un logo qui sera affiché en haut des e-mails de reçu de don. Affiché seulement sur les e-mails au format HTML"
+msgstr "Téléversez ou choisissez un logo qui sera affiché en haut des e-mails de reçu de don. Affichez seulement sur les e-mails au format HTML."
 
 #: includes/admin/class-give-settings.php:540
 #: includes/admin/settings/class-settings-email.php:64

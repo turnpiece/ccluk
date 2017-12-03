@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailChimp for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-19 16:51:57+0000\n"
+"PO-Revision-Date: 2017-11-04 11:17:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,18 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: es\n"
 "Project-Id-Version: Plugins - MailChimp for WordPress - Stable (latest release)\n"
+
+#: includes/views/parts/admin-sidebar.php:42
+msgid "Super flexible forms using native HTML. Just like with MailChimp for WordPress forms but for other purposes, like a contact form."
+msgstr "Formularios super flexibles que usan HTML nativo. Igual que los formularios de MailChimp for WordPress pero para otros propósitos, como un formulario de contacto."
+
+#: includes/views/parts/admin-sidebar.php:36
+msgid "Pop-ups or boxes that slide-in with a newsletter sign-up form. A sure-fire way to grow your email lists."
+msgstr "Ventajas emergentes o cajas que se deslizan con un formulario de registro en boletines. Un modo a prueba de fuego de hacer crecer tus listas de correo."
+
+#: includes/views/parts/admin-sidebar.php:29
+msgid "Other plugins by ibericode"
+msgstr "Otros plugins de ibericode"
 
 #: integrations/gravity-forms/class-gravity-forms.php:96
 msgid "Select a MailChimp list"
@@ -235,14 +247,6 @@ msgstr "Preselección"
 #: includes/forms/class-admin.php:84
 msgid "Optional"
 msgstr "Opcional"
-
-#: includes/views/parts/admin-sidebar.php:36
-msgid "Our <a href=\"%s\">Boxzilla plugin</a> allows you to create pop-ups or slide-ins with a subscribe form. A sure way to grow your lists faster."
-msgstr "Nuestro <a href=\"%s\">plugin Boxzilla</a> te permite crear ventanas emergentes o deslizadores con un formulario de contacto. Un modo seguro de hacer crecer tus listas más rápidamente."
-
-#: includes/views/parts/admin-sidebar.php:35
-msgid "Looking to improve your sign-up rates?"
-msgstr "¿Quieres mejorar tus ratios de registro?"
 
 #: includes/admin/class-admin.php:495
 msgid "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
