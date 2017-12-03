@@ -217,8 +217,10 @@ h3 {
 .page article > .entry-header {
   margin: 24px 0; }
 
-.archive #content > .entry-header {
+.archive #content > .archive-header {
   margin: 24px 0; }
+  .archive #content > .archive-header h1 {
+    color: #54ae68; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)

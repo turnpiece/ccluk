@@ -79,8 +79,12 @@ h3 {
 
 .archive {
 	#content {
-		> .entry-header {
+		> .archive-header {
 			margin: 24px 0;
+
+			h1 {
+				color: $green;
+			}
 		}
 	}
 }
