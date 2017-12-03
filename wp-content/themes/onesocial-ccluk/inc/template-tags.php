@@ -366,9 +366,9 @@ if ( ! function_exists( 'ccluk_custom_inline_style' ) ) {
              */
             $primary   = get_theme_mod( 'ccluk_primary_color' );
             if ( $primary != '' ) { ?>
-                a, .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus, .header-social a, .ccluk-menu a:hover,
-                .ccluk-menu ul li a:hover, .ccluk-menu li.ccluk-current-item > a, .ccluk-menu ul li.current-menu-item > a, .ccluk-menu > li a.menu-actived,
-                .ccluk-menu.ccluk-menu-mobile li.ccluk-current-item > a, .site-footer a, .site-footer .footer-social a:hover, .site-footer .btt a:hover,
+                a, .screen-reader-text:hover, .screen-reader-text:active, .screen-reader-text:focus, .header-social a, .nav-menu a:hover,
+                .nav-menu ul li a:hover, .nav-menu li.current-menu-item > a, .nav-menu ul li.current-menu-item > a, .nav-menu > li a.menu-actived,
+                .nav-menu.nav-menu-mobile li.current-menu-item > a, .site-footer a, .site-footer .footer-social a:hover, .site-footer .btt a:hover,
                 .highlight, #comments .comment .comment-wrapper .comment-meta .comment-time:hover, #comments .comment .comment-wrapper .comment-meta .comment-reply-link:hover, #comments .comment .comment-wrapper .comment-meta .comment-edit-link:hover,
                 .btn-theme-primary-outline, .sidebar .widget a:hover, .section-services .service-item .service-image i, .counter_item .counter__number,
                 .team-member .member-thumb .member-profile a:hover, .icon-background-default
@@ -406,7 +406,7 @@ if ( ! function_exists( 'ccluk_custom_inline_style' ) ) {
             $menu_color =  get_theme_mod( 'ccluk_menu_color' );
             if ( $menu_color ) {
                 ?>
-                .ccluk-menu > li > a {
+                .nav-menu > li > a {
                     color: #<?php echo $menu_color; ?>;
                 }
                 <?php
@@ -418,8 +418,9 @@ if ( ! function_exists( 'ccluk_custom_inline_style' ) ) {
             $menu_hover_color =  get_theme_mod( 'ccluk_menu_hover_color' );
             if ( $menu_hover_color ) {
                 ?>
-                .ccluk-menu > li > a:hover,
-                .ccluk-menu > li.ccluk-current-item > a{
+                .nav-menu > li > a:hover,
+                .nav-menu > .current-menu-item > a,
+                .nav-menu > .current-menu-ancestor >a {
                     color: #<?php echo $menu_hover_color; ?>;
 					-webkit-transition: all 0.5s ease-in-out;
 					-moz-transition: all 0.5s ease-in-out;
@@ -436,11 +437,11 @@ if ( ! function_exists( 'ccluk_custom_inline_style' ) ) {
             if ( $menu_hover_bg ) {
                 ?>
 				@media screen and (min-width: 1140px) {
-	                .ccluk-menu > li:last-child > a {
+	                .nav-menu > li:last-child > a {
 	                    padding-right: 17px;
 	                }
-	                .ccluk-menu > li > a:hover,
-	                .ccluk-menu > li.ccluk-current-item > a
+	                .nav-menu > li > a:hover,
+	                .nav-menu > li.current-menu-item > a
 	                {
 	                    background: #<?php echo $menu_hover_bg; ?>;
 						-webkit-transition: all 0.5s ease-in-out;

@@ -6,6 +6,7 @@ Custom stylesheet.
 /** Import partials **/
 
 @import "partials/variables";
+@import "partials/mixins";
 @import "partials/home-page";
 @import "partials/single";
 @import "partials/navigation";
@@ -68,6 +69,21 @@ h3 {
 	font-size: 18px;
 }
 
+.page {
+	article {
+		> .entry-header {
+			margin: 24px 0;
+		}
+	}    
+}
+
+.archive {
+	#content {
+		> .entry-header {
+			margin: 24px 0;
+		}
+	}
+}
 
 
 /*--------------------------------------------------------------
