@@ -25,8 +25,6 @@ class MC4WP_Forms_Admin {
 	public function __construct( MC4WP_Admin_Messages $messages, MC4WP_MailChimp $mailchimp ) {
 		$this->messages = $messages;
 		$this->mailchimp = $mailchimp;
-
-		require dirname( __FILE__ ) . '/admin-functions.php';
 	}
 
 	/**
@@ -225,6 +223,9 @@ class MC4WP_Forms_Admin {
 
 		// strip <form> tags from content
 		$data['content'] =  preg_replace( '/<\/?form(.|\s)*?>/i', '', $data['content'] );
+
+		// replace lowercased name="name" to prevent 404
+		$data['content'] = str_ireplace( ' name=\"name\"', ' name=\"NAME\"', $data['content'] );
 
 		// sanitize text fields
 		$data['settings']['redirect'] = sanitize_text_field( $data['settings']['redirect'] );

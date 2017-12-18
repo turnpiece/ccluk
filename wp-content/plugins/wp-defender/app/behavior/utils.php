@@ -559,7 +559,7 @@ class Utils extends Behavior {
 		//url should be end with php
 		global $is_apache, $is_nginx, $is_IIS, $is_iis7;
 
-		$server 	= null;
+		$server     = null;
 		$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
 
 		if ( $is_nginx ) {
@@ -570,7 +570,10 @@ class Utils extends Behavior {
 				$server = 'apache';
 			} else {
 				//so the server software is apache, let see what the header return
-				$request = wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'], 'sslverify' => $ssl_verify ) );
+				$request = wp_remote_head( $url, array(
+					'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+					'sslverify'  => $ssl_verify
+				) );
 				$server  = wp_remote_retrieve_header( $request, 'server' );
 				$server  = explode( '/', $server );
 				if ( strtolower( $server[0] ) == 'nginx' ) {
@@ -586,7 +589,10 @@ class Utils extends Behavior {
 
 		if ( is_null( $server ) ) {
 			//if fall in here, means there is st unknowed.
-			$request = wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'], 'sslverify' => $ssl_verify ) );
+			$request = wp_remote_head( $url, array(
+				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+				'sslverify'  => $ssl_verify
+			) );
 			$server  = wp_remote_retrieve_header( $request, 'server' );
 			$server  = explode( '/', $server );
 			$server  = $server[0];
@@ -663,7 +669,7 @@ class Utils extends Behavior {
 	/**
 	 * Generate Stats
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function generateStats() {
 		$issues   = array();
@@ -760,35 +766,74 @@ class Utils extends Behavior {
 			'warnings'     => $count,
 			'cautions'     => count( $issues ),
 			'data_version' => '20170801',
-			'scan_data'    => json_encode( array(
-				'scan_result'           => $res,
-				'hardener_result'       => array(
-					'issues'   => $issues,
-					'ignored'  => $ignored,
-					'resolved' => $resolved
-				),
-				'scan_schedule'         => array(
-					'is_activated' => $scanSettings->notification,
-					'time'         => $scanSettings->time,
-					'day'          => $scanSettings->day,
-					'frequency'    => $scanSettings->frequency
-				),
-				'audit_enabled'         => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
-				'audit_page_url'        => network_admin_url( 'admin.php?page=wdf-logging' ),
-				'labels'                => $labels,
-				'scan_page_url'         => network_admin_url( 'admin.php?page=wdf-scan' ),
-				'hardener_page_url'     => network_admin_url( 'admin.php?page=wdf-hardener' ),
-				'new_scan_url'          => network_admin_url( 'admin.php?page=wdf-scan&wdf-action=new_scan' ),
-				'schedule_scans_url'    => network_admin_url( 'admin.php?page=wdf-schedule-scan' ),
-				'settings_page_url'     => network_admin_url( 'admin.php?page=wdf-settings' ),
-				'last_lockout'          => $lastLockout,
-				'login_lockout_enabled' => $lockoutSettings->login_protection,
-				'login_lockout'         => Login_Protection_Api::getLoginLockouts( $after_time ),
-				'lockout_404_enabled'   => $lockoutSettings->detect_404,
-				'lockout_404'           => Login_Protection_Api::get404Lockouts( $after_time ),
-				'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
-				'multi_factors_auth'    => Auth_Settings::instance()->enabled
-			) ),
+			'scan_data'    => json_encode(
+				array(
+					'scan_result'           => $res,
+					'hardener_result'       => array(
+						'issues'   => $issues,
+						'ignored'  => $ignored,
+						'resolved' => $resolved
+					),
+					'scan_schedule'         => array(
+						'is_activated' => $scanSettings->notification,
+						'time'         => $scanSettings->time,
+						'day'          => $scanSettings->day,
+						'frequency'    => $scanSettings->frequency
+					),
+					'audit_enabled'         => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+					'audit_page_url'        => network_admin_url( 'admin.php?page=wdf-logging' ),
+					'labels'                => $labels,
+					'scan_page_url'         => network_admin_url( 'admin.php?page=wdf-scan' ),
+					'hardener_page_url'     => network_admin_url( 'admin.php?page=wdf-hardener' ),
+					'new_scan_url'          => network_admin_url( 'admin.php?page=wdf-scan&wdf-action=new_scan' ),
+					'schedule_scans_url'    => network_admin_url( 'admin.php?page=wdf-schedule-scan' ),
+					'settings_page_url'     => network_admin_url( 'admin.php?page=wdf-settings' ),
+					'last_lockout'          => $lastLockout,
+					'login_lockout_enabled' => $lockoutSettings->login_protection,
+					'login_lockout'         => Login_Protection_Api::getLoginLockouts( $after_time ),
+					'lockout_404_enabled'   => $lockoutSettings->detect_404,
+					'lockout_404'           => Login_Protection_Api::get404Lockouts( $after_time ),
+					'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
+					'advanced'              => array(
+						'multi_factors_auth' => array(
+							'active'  => Auth_Settings::instance()->enabled,
+							'enabled' => ! empty( Auth_Settings::instance()->userRoles ),
+						),
+					),
+					'reports'               => array(
+						'file_scanning' => array(
+							'active'    => true,
+							'enabled'   => \WP_Defender\Module\Scan\Model\Settings::instance()->notification,
+							//Report enabled Bool
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\Scan\Model\Settings::instance()->frequency,
+								'day'       => \WP_Defender\Module\Scan\Model\Settings::instance()->day,
+								'time'      => \WP_Defender\Module\Scan\Model\Settings::instance()->time
+							)
+						),
+						'audit_logging' => array(
+							'active'    => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+							'enabled'   => \WP_Defender\Module\Audit\Model\Settings::instance()->notification,
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\Audit\Model\Settings::instance()->frequency,
+								'day'       => \WP_Defender\Module\Audit\Model\Settings::instance()->day,
+								'time'      => \WP_Defender\Module\Audit\Model\Settings::instance()->time
+							)
+						),
+						'ip_lockouts'   => array(
+							//always true as we have blacklist listening
+							'active'    => true,
+							'enabled'   => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report,
+							//Report enabled Bool
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_frequency,
+								'day'       => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_day,
+								'time'      => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_time
+							),
+						),
+					),
+				)
+			),
 		);
 
 		return $data;
@@ -901,6 +946,7 @@ class Utils extends Behavior {
 	 */
 	public function siteURLWithScheme() {
 		$current_scheme = ( is_ssl() ) ? 'https' : 'http';
+
 		return network_site_url( '', $current_scheme );
 	}
 }

@@ -6,7 +6,7 @@
     </div>
     <div class="box-content">
 		<?php
-		$table = new \WP_Defender\Module\IP_Lockout\Component\Logs_Table();
+		$table = new \WP_Defender\Module\IP_Lockout\Component\Logs_Table();	   			 	 		  		  	 	
 		$table->prepare_items();
 		$table->display();
 		?>

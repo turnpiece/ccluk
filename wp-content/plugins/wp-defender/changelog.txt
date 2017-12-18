@@ -4,6 +4,10 @@ Tested up to: 4.7.4
 
 Change Log:
 
+1.7.4.1 - 2017-4-12
+----------------------------------------------------------------------
+- Added: Endpoint API so HUB can work with Defender natively through WPMU DEV Dashboard plugin
+
 1.7.4 - 2017-20-11
 ----------------------------------------------------------------------
 - Fix: Conflict with Jetpack where Defender 2FA module would not detect if Jetpack 2FA was disabled.
@@ -217,4 +221,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1511474743-au
+87274-1513530131-au

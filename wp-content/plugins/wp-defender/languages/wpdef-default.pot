@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License (Version 2 - GPLv2).
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Defender Pro 1.7.4\n"
+"Project-Id-Version: WP Defender Pro 1.7.4.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-11-20 09:56:01+00:00\n"
+"POT-Creation-Date: 2017-12-04 07:26:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -152,17 +152,17 @@ msgid "Lockout reports are active scheduled to send %s"
 msgstr ""
 
 #: app/behavior/report-free.php:129 app/behavior/report.php:224
-#: app/behavior/utils.php:848 free/utils.php:656
+#: app/behavior/utils.php:893 free/utils.php:656
 msgid "daily"
 msgstr ""
 
 #: app/behavior/report-free.php:132 app/behavior/report.php:227
-#: app/behavior/utils.php:851 free/utils.php:659
+#: app/behavior/utils.php:896 free/utils.php:659
 msgid "weekly"
 msgstr ""
 
 #: app/behavior/report-free.php:135 app/behavior/report.php:230
-#: app/behavior/utils.php:854 free/utils.php:662
+#: app/behavior/utils.php:899 free/utils.php:662
 msgid "monthly"
 msgstr ""
 
@@ -216,22 +216,22 @@ msgstr ""
 msgid "Guest"
 msgstr ""
 
-#: app/behavior/utils.php:731
+#: app/behavior/utils.php:737
 msgid "WordPress Core Integrity"
 msgstr ""
 
-#: app/behavior/utils.php:732
+#: app/behavior/utils.php:738
 msgid "Plugins & Themes vulnerability"
 msgstr ""
 
-#: app/behavior/utils.php:733 app/module/scan/behavior/scan.php:145
+#: app/behavior/utils.php:739 app/module/scan/behavior/scan.php:145
 #: app/module/scan/view/layouts/layout.php:70
 #: app/module/scan/view/setting-free.php:50 app/module/scan/view/setting.php:43
 #: app/view/settings.php:98
 msgid "Suspicious Code"
 msgstr ""
 
-#: app/behavior/utils.php:831 free/utils.php:639
+#: app/behavior/utils.php:876 free/utils.php:639
 msgid "Please upgrade to 5.3 or later"
 msgstr ""
 
@@ -239,32 +239,32 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: app/controller/dashboard.php:306 app/controller/dashboard.php:308
+#: app/controller/dashboard.php:324 app/controller/dashboard.php:326
 #: app/controller/requirement.php:69 app/module/ip-lockout/view/locked.php:75
 msgid "Defender"
 msgstr ""
 
-#: app/controller/dashboard.php:340
+#: app/controller/dashboard.php:358
 msgid "QUICK SETUP"
 msgstr ""
 
-#: app/controller/dashboard.php:340
+#: app/controller/dashboard.php:358
 msgid "Skip"
 msgstr ""
 
-#: app/controller/dashboard.php:341
+#: app/controller/dashboard.php:359
 msgid "Activating File Scanning..."
 msgstr ""
 
-#: app/controller/dashboard.php:342
+#: app/controller/dashboard.php:360
 msgid "Activating Audit Module..."
 msgstr ""
 
-#: app/controller/dashboard.php:343
+#: app/controller/dashboard.php:361
 msgid "Activating IP Lockouts Module..."
 msgstr ""
 
-#: app/controller/dashboard.php:344
+#: app/controller/dashboard.php:362
 msgid "Activating Blacklist Monitoring..."
 msgstr ""
 

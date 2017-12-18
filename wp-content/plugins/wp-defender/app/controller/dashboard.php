@@ -86,15 +86,33 @@ class Dashboard extends Controller {
 	 * @return mixed
 	 */
 	public function addMyEndpoint( $actions ) {
-		$actions['defender_new_scan']         = array( &$this, 'new_scan' );
-		$actions['defender_schedule_scan']    = array( &$this, 'schedule_scan' );
-		$actions['defender_manage_audit_log'] = array( &$this, 'manage_audit_log' );
-		$actions['defender_manage_lockout']   = array( &$this, 'manage_lockout' );
-		$actions['defender_whitelist_ip']     = array( &$this, 'whitelist_ip' );
-		$actions['defender_blacklist_ip']     = array( &$this, 'blacklist_ip' );
-		$actions['defender_get_stats']        = array( &$this, 'get_stats' );
+		$actions['defender_new_scan']          = array( &$this, 'new_scan' );
+		$actions['defender_schedule_scan']     = array( &$this, 'schedule_scan' );
+		$actions['defender_manage_audit_log']  = array( &$this, 'manage_audit_log' );
+		$actions['defender_manage_lockout']    = array( &$this, 'manage_lockout' );
+		$actions['defender_whitelist_ip']      = array( &$this, 'whitelist_ip' );
+		$actions['defender_blacklist_ip']      = array( &$this, 'blacklist_ip' );
+		$actions['defender_get_stats']         = array( &$this, 'get_stats' );
+		$actions['defender_get_scan_progress'] = array( &$this, 'get_scan_progress' );
 
 		return $actions;
+	}
+
+	public function get_scan_progress() {
+		$ret = Scan_Api::processActiveScan();
+		if ( is_wp_error( $ret ) ) {
+			wp_send_json_error( array(
+				'message' => $ret->get_error_message()
+			) );
+		} else {
+			$percent = Scan_Api::getScanProgress();
+			if ( $ret == true ) {
+				$percent = 100;
+			}
+			wp_send_json_success( array(
+				'progress' => $percent
+			) );
+		}
 	}
 
 	/**
