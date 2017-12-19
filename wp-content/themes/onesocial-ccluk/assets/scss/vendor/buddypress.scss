@@ -2,8 +2,14 @@
 
 #buddypress {
 
-	#group-settings-form input[type="submit"],
-	#create-group-form input[type="submit"],
+	form#whats-new-form #whats-new-submit
+	#group-settings-form,
+	#create-group-form {
+		input[type="submit"] {
+			@include button();
+		}
+	}
+
 	.standard-form div.submit input,
 	#save_as_draft {
 		@include button();

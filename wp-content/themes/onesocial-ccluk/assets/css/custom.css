@@ -175,8 +175,19 @@ div#register-page .security-question-section {
   background-color: #54ae68; }
 
 /* Buddypress */
-#buddypress #group-settings-form input[type="submit"],
-#buddypress #create-group-form input[type="submit"],
+#buddypress form#whats-new-form #whats-new-submit
+#group-settings-form input[type="submit"],
+#buddypress #create-group-form input[type="submit"] {
+  border-radius: 5px;
+  background-color: #54ae68;
+  border: none;
+  padding: 12px 24px;
+  color: #fff !important; }
+  #buddypress form#whats-new-form #whats-new-submit
+  #group-settings-form input[type="submit"]:hover,
+  #buddypress #create-group-form input[type="submit"]:hover {
+    color: #000;
+    background-color: #54ae68; }
 #buddypress .standard-form div.submit input,
 #buddypress #save_as_draft {
   border-radius: 5px;
@@ -184,8 +195,6 @@ div#register-page .security-question-section {
   border: none;
   padding: 12px 24px;
   color: #fff !important; }
-  #buddypress #group-settings-form input[type="submit"]:hover,
-  #buddypress #create-group-form input[type="submit"]:hover,
   #buddypress .standard-form div.submit input:hover,
   #buddypress #save_as_draft:hover {
     color: #000;
