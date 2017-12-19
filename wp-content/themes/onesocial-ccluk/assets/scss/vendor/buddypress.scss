@@ -1,20 +1,21 @@
 /* Buddypress */
 
-#buddypress #group-settings-form input[type="submit"], 
-#buddypress .standard-form div.submit input {
-	border-radius: 5px;
-	background-color: $green;
-}
+#buddypress {
 
-#buddypress #group-settings-form input[type="submit"], 
-#buddypress .standard-form div.submit input {
-	border: none;
-	padding: 12px 24px;
-	color: #fff !important;
-}
+	#group-settings-form input[type="submit"],
+	#create-group-form input[type="submit"],
+	.standard-form div.submit input,
+	#save_as_draft {
+		@include button();
+	}
 
-#buddypress #group-settings-form input[type="submit"]:hover, 
-#buddypress .standard-form div.submit input[type="submit"]:hover {
-	color: #000;
-	background-color: $green;
+	.standard-form {
+		.datebox, 
+		input[type=text], 
+		input[type=email], 
+		input[type=password],
+		textarea {
+			border: 1px solid $green;
+		}
+	}
 }

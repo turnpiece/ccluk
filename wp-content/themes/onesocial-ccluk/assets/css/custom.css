@@ -174,6 +174,29 @@ div#register-page .security-question-section {
   color: #000;
   background-color: #54ae68; }
 
+/* Buddypress */
+#buddypress #group-settings-form input[type="submit"],
+#buddypress #create-group-form input[type="submit"],
+#buddypress .standard-form div.submit input,
+#buddypress #save_as_draft {
+  border-radius: 5px;
+  background-color: #54ae68;
+  border: none;
+  padding: 12px 24px;
+  color: #fff !important; }
+  #buddypress #group-settings-form input[type="submit"]:hover,
+  #buddypress #create-group-form input[type="submit"]:hover,
+  #buddypress .standard-form div.submit input:hover,
+  #buddypress #save_as_draft:hover {
+    color: #000;
+    background-color: #54ae68; }
+#buddypress .standard-form .datebox,
+#buddypress .standard-form input[type=text],
+#buddypress .standard-form input[type=email],
+#buddypress .standard-form input[type=password],
+#buddypress .standard-form textarea {
+  border: 1px solid #54ae68; }
+
 #logo-area {
   width: 380px; }
 
