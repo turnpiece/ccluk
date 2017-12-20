@@ -86,9 +86,9 @@ get_header();
 </section>
 <?php endif;
 
-	if ( bp_has_groups( array(
-		'max' => 3,
-		'group_type' => 'public'
+	if (function_exists('bp_has_groups') &&
+		bp_has_groups( array(
+		'max' => 3
 	) ) ) : ?>
 <section id="groups" class="section site-content groups">
 	<div class="section-title">

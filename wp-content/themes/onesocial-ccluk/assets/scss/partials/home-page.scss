@@ -19,6 +19,17 @@
 				display: flex;
   				justify-content: center;
   				flex-wrap: wrap;
+
+				.list-item {
+					width: 300px;
+					margin: 20px;
+					display: inline-block;
+					text-align: left;
+
+					.entry-header {
+						display: block;
+					}
+				}
 			}
 
 			.section-title {
@@ -41,17 +52,6 @@
 				.section-content {
 					max-width: 1020px;
 					text-align: center;
-
-					.list-item {
-						width: 300px;
-						margin: 20px;
-						display: inline-block;
-						text-align: left;
-
-						.entry-header {
-							display: block;
-						}
-					}
 				}
 			}
 		}
