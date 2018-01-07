@@ -28,6 +28,20 @@
 
 					.entry-header {
 						display: block;
+						margin: 12px 0;
+
+						> a {
+							display: block;
+							margin: 0;
+						}
+
+						.entry-title {
+							margin-top: 12px;
+						}
+
+						img.wp-post-image {
+							margin: 0;
+						}
 					}
 				}
 			}

@@ -95,18 +95,34 @@ h3 {
 	}
 }
 
+.entry-title {
+	margin-top: 10px;
+	margin-top: 1rem;
+}
+
+.page {
+	.entry-title {
+		color: $blue;
+	}
+}
+
+#save_as_draft, 
+.entry-meta a.read-more, 
+input[type=submit] {
+	border: 1px solid $green;
+	padding: 10px 20px 10px 20px;
+}
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 
 #mobile-right-panel li a {
-	color: #fff;
-}
+	color: $green;
 
-#mobile-right-panel li a:active, 
-#mobile-right-panel li a:hover {
-	color: #000;
+	&:hover {
+		color: $white;
+	}
 }
 
 /*--------------------------------------------------------------

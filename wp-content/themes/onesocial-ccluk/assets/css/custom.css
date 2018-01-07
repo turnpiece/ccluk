@@ -26,7 +26,15 @@ Custom stylesheet.
         display: inline-block;
         text-align: left; }
         .home-page #main .section .section-content .list-item .entry-header {
-          display: block; }
+          display: block;
+          margin: 12px 0; }
+          .home-page #main .section .section-content .list-item .entry-header > a {
+            display: block;
+            margin: 0; }
+          .home-page #main .section .section-content .list-item .entry-header .entry-title {
+            margin-top: 12px; }
+          .home-page #main .section .section-content .list-item .entry-header img.wp-post-image {
+            margin: 0; }
     .home-page #main .section .section-title {
       text-align: center;
       max-width: 300px;
@@ -120,11 +128,11 @@ Custom stylesheet.
   margin: 1rem 0; }
 
 /** Navigation **/
-.main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
-  background-color: #54ae68; }
-  .main-navigation .nav-menu > li:hover > a, .main-navigation .nav-menu > li.current-menu-item > a, .main-navigation .nav-menu > li.current-menu-ancestor > a {
-    color: #fff; }
-
+@media screen and (min-width: 481px) {
+  .main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
+    background-color: #54ae68; }
+    .main-navigation .nav-menu > li:hover > a, .main-navigation .nav-menu > li.current-menu-item > a, .main-navigation .nav-menu > li.current-menu-ancestor > a {
+      color: #fff; } }
 /** Register **/
 fieldset,
 div#register-page .register-section,
@@ -257,15 +265,26 @@ h3 {
   .archive #content > .archive-header h1 {
     color: #54ae68; }
 
+.entry-title {
+  margin-top: 10px;
+  margin-top: 1rem; }
+
+.page .entry-title {
+  color: #22a7f0; }
+
+#save_as_draft,
+.entry-meta a.read-more,
+input[type=submit] {
+  border: 1px solid #54ae68;
+  padding: 10px 20px 10px 20px; }
+
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 #mobile-right-panel li a {
-  color: #fff; }
-
-#mobile-right-panel li a:active,
-#mobile-right-panel li a:hover {
-  color: #000; }
+  color: #54ae68; }
+  #mobile-right-panel li a:hover {
+    color: #fff; }
 
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)

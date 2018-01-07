@@ -1,16 +1,17 @@
 /** Navigation **/
 
-.main-navigation {
-	.nav-menu {
-		> li {
-			&:hover,
-			&.current-menu-item,
-			&.current-menu-ancestor {
+@media screen and (min-width: 481px)  {
+	.main-navigation {
+		.nav-menu {
+			> li {
+				&:hover,
+				&.current-menu-item,
+				&.current-menu-ancestor {
+					background-color: $green;
 
-				background-color: $green;
-
-				> a {
-					color: $white;
+					> a {
+						color: $white;
+					}
 				}
 			}
 		}
