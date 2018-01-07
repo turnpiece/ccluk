@@ -46,7 +46,17 @@
 
 					.entry-content {
 						.item-meta {
-							font-size: 90%;
+							.activity {
+								font-size: 85%;
+								font-style: italic;
+							}
+						}
+					}
+
+					.action {
+						.meta {
+							font-size: 85%;
+							font-style: italic;
 						}
 					}
 				}
