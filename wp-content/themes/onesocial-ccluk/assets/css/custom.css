@@ -59,7 +59,7 @@ Custom stylesheet.
   color: #fff;
   text-transform: uppercase; }
 .home-page .site {
-  padding-top: 70px;
+  padding-top: 0;
   padding-bottom: 70px; }
 .home-page .slide_content > .slide_content_wrap > .inner > .slide_text {
   display: table;
