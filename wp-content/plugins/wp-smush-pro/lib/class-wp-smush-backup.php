@@ -279,7 +279,7 @@ if ( ! class_exists( 'WpSmushBackup' ) ) {
 			//Remove the transient
 			delete_transient( "wp-smush-restore-$attachment_id" );
 			if ( $resp ) {
-				wp_send_json_error( array( 'message' => '<div class="wp-smush-error">' . __( "Unable to restore image", "wp-smushit" ) . '</div>' ) );				 	          			 
+				wp_send_json_error( array( 'message' => '<div class="wp-smush-error">' . __( "Unable to restore image", "wp-smushit" ) . '</div>' ) );
 			}
 
 			return false;

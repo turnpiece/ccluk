@@ -674,7 +674,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 				continue;
 
 			/** @var WP_Hummingbird_Module_Minify_Group $item */
-			if ( $item->should_generate_file() ) {
+ 			if ( $item->should_generate_file() ) {
 				$result = $item->process_group();
 				if ( is_wp_error( $result ) ) {
 					$this->errors_controller->add_server_error( $result );
@@ -775,10 +775,18 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	}
 
 	/**
-	 * Clear the module cache
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * Clear the module cache.
+	 *
+	 * @param bool $reset_settings If set to true will set Minification settings to default (that includes files positions).
 	 */
 	public function clear_cache( $reset_settings = true ) {
 		global $wpdb;
+
+		if ( ! wphb_can_execute_php() ) {
+			return;
+		}
 
 		// Clear all the cached groups data
 		$option_names = $wpdb->get_col(
@@ -799,11 +807,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			delete_option( $name );
 		}
 
-		WP_Hummingbird_Sources_Collector::clear_collection();
-
 		wphb_minification_clear_files();
 
 		if ( $reset_settings ) {
+			// This one when cleared will trigger a new scan.
+			WP_Hummingbird_Sources_Collector::clear_collection();
+
 			// Reset the minification settings
 			$options = wphb_get_settings();
 			$default_options = wphb_get_default_settings();
@@ -813,6 +822,30 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			$options['position'] = $default_options['position'];
 			wphb_update_settings( $options );
 		}
+
+		// Clear the pending process queue
+		self::clear_pending_process_queue();
+
+		$this->scanner->reset_scan();
+
+		WP_Hummingbird_Minification_Errors_Controller::clear_errors();
+	}
+
+	public function reset() {
+		if ( ! wphb_can_execute_php() ) {
+			return;
+		}
+
+		wphb_minification_clear_files();
+
+		// Reset the minification settings
+		$options = wphb_get_settings();
+		$default_options = wphb_get_default_settings();
+		$options['block'] = $default_options['block'];
+		$options['dont_minify'] = $default_options['dont_minify'];
+		$options['combine'] = $default_options['combine'];
+		$options['position'] = $default_options['position'];
+		wphb_update_settings( $options );
 
 		// Clear the pending process queue
 		self::clear_pending_process_queue();

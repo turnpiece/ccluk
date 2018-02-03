@@ -21,6 +21,12 @@ jQuery( function( $ ) {
 	// Set custom validation message.
 	give_change_html5_form_field_validation_message();
 
+	// Disable button if it have give-disabled class init.
+	doc.on( 'click touchend', '.give-disabled', function ( e ) {
+		e.preventDefault();
+		return false;
+	} );
+
 	doc.on( 'give_gateway_loaded', function( ev, response, form_id ) {
 		// Trigger float-labels
 		give_fl_trigger();
@@ -88,7 +94,17 @@ jQuery( function( $ ) {
 
 	doc.on( 'change', '#give_profile_billing_address_wrap #give_address_country', update_profile_state_field );
 
-} );
+	// Reset Form Fields on clicking back button of browser.
+	// @see https://developer.mozilla.org/en-US/Firefox/Releases/1.5/Using_Firefox_1.5_caching
+	// @see https://webkit.org/blog/427/webkit-page-cache-i-the-basics/
+	window.addEventListener( 'pageshow', function( event ) {
+		var historyTraversal = event.persisted || ( typeof 'undefined' !== window.performance && 2 === window.performance.navigation.type );
+
+		if ( historyTraversal ) {
+			$( 'body' ).find( 'form.give-form' )[0].reset();
+		}
+	});
+});
 
 /**
  * Open form modal
@@ -202,6 +218,7 @@ function give_fl_trigger() {
 		give_float_labels = new FloatLabels( '.float-labels-enabled', {
 			exclude: '#give-amount, .give-select-level, [multiple]',
 			prioritize: 'placeholder',
+			prefix: 'give-fl-',
 			style: 'give',
 		} );
 	}

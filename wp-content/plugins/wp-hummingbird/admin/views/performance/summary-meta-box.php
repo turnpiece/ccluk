@@ -41,9 +41,24 @@
 	</script>
 <?php else : ?>
 
-	<div class="box-content no-vertical-padding">
+	<div class="box-content no-vertical-padding no-vertical-margin">
 		<div class="content">
-			<p><?php esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ); ?></p>
+			<?php
+			if ( $report_dismissed ) :
+			?>
+				<div class="wphb-notice wphb-notice-grey">
+					<p><?php esc_html_e( 'You have chosen to ignore this performance test. Run a new test to see new recommendations.', 'wphb' ); ?></p>
+					<?php if ( ! $disabled ) : ?>
+						<div class="buttons">
+							<a href="<?php echo esc_url( $retry_url ); ?>" <?php disabled( $disabled ); ?> class="button"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
+						</div>
+					<?php endif; ?>
+				</div>
+			<?php
+			else :
+				echo '<p>' . esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ) . '</p>';
+			endif;
+			?>
 		</div>
 	</div>
 
@@ -62,22 +77,24 @@
 
 			<tbody>
 				<?php foreach ( $last_test->rule_result as $rule => $rule_result ) :
-					$class = '';
-					switch ( $rule_result->impact_score_class ) {
-						case 'aplus':
-						case 'a':
-						case 'b':
-							$class = 'success';
-							break;
-						case 'c':
-						case 'd':
-							$class = 'warning';
-							break;
-						case 'e':
-						case 'f':
-							$class = 'error';
-							break;
-					}
+					$class = 'dismissed';
+					if ( ! $report_dismissed ) :
+						switch ( $rule_result->impact_score_class ) {
+							case 'aplus':
+							case 'a':
+							case 'b':
+								$class = 'success';
+								break;
+							case 'c':
+							case 'd':
+								$class = 'warning';
+								break;
+							case 'e':
+							case 'f':
+								$class = 'error';
+								break;
+						}
+					endif;
 					$has_url_blocks = ! empty( $rule_result->urlblocks ) && is_array( $rule_result->urlblocks ) && ! empty( $rule_result->urlblocks[0] ); ?>
 					<tr class="wphb-performance-report-item wphb-table-score-<?php echo esc_attr( $class ); ?>" id="rule-<?php echo esc_attr( $rule ); ?>">
 						<td class="wphb-performance-report-item-recommendation">
@@ -86,15 +103,19 @@
 						<td class="wphb-performance-report-item-score">
 							<div class="wphb-score wphb-score-have-label">
 								<div class="tooltip-box">
-									<div class="wphb-score-result wphb-score-result-grade-<?php echo esc_attr( $rule_result->impact_score_class ); ?> tooltip-s" tooltip="<?php echo esc_attr( $rule_result->impact_score ); ?>/100">
-										<div class="wphb-score-type wphb-score-type-circle">
-											<svg class="wphb-score-graph wphb-score-graph-svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
-												<circle class="wphb-score-graph-circle" r="12.5" cx="15" cy="15" fill="transparent" stroke-dasharray="0" stroke-dashoffset="0"></circle>
-												<circle class="wphb-score-graph-circle wphb-score-graph-result" r="12.5" cx="15" cy="15" fill="transparent" stroke-dasharray="80" stroke-dashoffset="0"></circle>
-											</svg>
-										</div><!-- end wphb-score-type -->
-										<div class="wphb-score-result-label"><?php echo esc_html( $rule_result->impact_score ); ?></div>
-									</div><!-- end wphb-score-result -->
+									<?php if ( ! $report_dismissed ) : ?>
+										<div class="wphb-score-result wphb-score-result-grade-<?php echo esc_attr( $rule_result->impact_score_class ); ?> tooltip-s" tooltip="<?php echo esc_attr( $rule_result->impact_score ); ?>/100">
+									<?php else : ?>
+										<div class="wphb-score-result wphb-score-result-grade-dismissed tooltip-s" tooltip="<?php echo esc_attr( $rule_result->impact_score ); ?>/100">
+									<?php endif; ?>
+											<div class="wphb-score-type wphb-score-type-circle">
+												<svg class="wphb-score-graph wphb-score-graph-svg" xmlns="http://www.w3.org/2000/svg" width="30" height="30">
+													<circle class="wphb-score-graph-circle" r="12.5" cx="15" cy="15" fill="transparent" stroke-dasharray="0" stroke-dashoffset="0"></circle>
+													<circle class="wphb-score-graph-circle wphb-score-graph-result" r="12.5" cx="15" cy="15" fill="transparent" stroke-dasharray="80" stroke-dashoffset="0"></circle>
+												</svg>
+											</div><!-- end wphb-score-type -->
+											<div class="wphb-score-result-label"><?php echo esc_html( $rule_result->impact_score ); ?></div>
+										</div><!-- end wphb-score-result -->
 								</div><!-- end tooltip-box -->
 							</div><!-- end wphb-score -->
 						</td><!-- end wphb-performance-report-item-score -->
@@ -155,3 +176,5 @@
 		</table><!-- end list-table-performance-report -->
 	</div>
 <?php endif; ?>
+
+<?php wphb_dismiss_report_modal(); ?>

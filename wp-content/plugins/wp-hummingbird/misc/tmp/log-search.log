@@ -1,0 +1,12 @@
+{
+	"numResults": 1,
+	"creationDate": "2018-01-13 06:26:42",
+	"results": {
+		"wp-hummingbird.php": [
+			{
+				"line": 4,
+				"match": "Version: 1.7.1"
+			}
+		]
+	}
+}

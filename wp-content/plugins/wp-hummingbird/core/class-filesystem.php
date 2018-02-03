@@ -155,7 +155,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				}
 			} else {
 				// Don't have direct write access.
-				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function sucesfully.', 'wphb' ) );
+				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );
 			}
 
 			return true;

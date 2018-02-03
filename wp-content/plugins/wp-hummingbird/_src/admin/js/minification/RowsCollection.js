@@ -37,6 +37,18 @@ const RowsCollection = () => {
             return value;
         },
 
+        getItemsByDataType: function( type ) {
+			let selected = [];
+
+			for ( let i in items ) {
+				if ( items[i].isType( type ) ) {
+					selected.push( items[i] );
+                }
+			}
+
+			return selected;
+        },
+
         getVisibleItems: function() {
             let visible = [];
             for ( let i in items ) {

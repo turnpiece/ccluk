@@ -36,65 +36,58 @@
 			});
 		</script>
 
-		<div class="tooltip-box">
-			<span class="checkbox-group">
-				<input type="checkbox" class="toggle-checkbox filter-toggles filter-minify" name="filter-minify" id="filter-minify">
-				<label for="filter-minify" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-left" aria-label="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>"></span>
-					<i class="hb-icon-minify"></i>
-					<span><?php esc_html_e( 'Minify', 'wphb' ); ?></span>
-				</label>
+		<div class="checkbox-group">
+			<input type="checkbox" class="toggle-checkbox filter-toggles filter-minify" name="filter-minify" id="filter-minify" aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
+			<label for="filter-minify" class="toggle-label">
+				<span class="toggle tooltip-s" tooltip="<?php esc_attr_e( 'Compress', 'wphb' ); ?>" aria-hidden="true"></span>
+				<span class="hb-icon-minify" aria-hidden="true"></span>
+			</label>
 
-				<?php
-				$tooltip = __( 'Combine this file with others if possible', 'wphb' );
-				$is_ssl = is_ssl();
-				if ( $is_ssl ) {
-					$tooltip = __( 'This file can’t be combined', 'wphb' );
-					$dont_combine = true;
-				}
-				?>
-				<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" <?php echo disabled( $is_ssl ); ?>>
-				<label for="filter-combine" class="toggle-label">
-					<span class="toggle tooltip-l" aria-label="<?php echo esc_attr( $tooltip ); ?>" tooltip="<?php echo esc_attr( $tooltip ); ?>"></span>
-					<i class="hb-icon-minify-combine"></i>
-					<span><?php esc_html_e( 'Combine', 'wphb' ); ?></span>
-				</label>
+			<?php
+			$tooltip = __( 'Combine', 'wphb' );
+			$is_http2 = is_ssl() && 'HTTP/2.0' === $_SERVER['SERVER_PROTOCOL'];
+			if ( $is_http2 ) {
+				$tooltip = __( "Files can't be combined", 'wphb' );
+				$dont_combine = true;
+			}
+			?>
+			<input type="checkbox" class="toggle-checkbox filter-toggles filter-combine" name="filter-combine" id="filter-combine" aria-label="<?php esc_attr_e( 'Combine', 'wphb' ); ?>" <?php echo disabled( $is_http2 ); ?>>
+			<label for="filter-combine" class="toggle-label">
+				<span class="toggle tooltip-s" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"></span>
+				<span class="hb-icon-minify-combine" aria-hidden="true"></span>
+			</label>
 
-				<input type="checkbox" class="toggle-checkbox filter-toggles filter-position-footer" name="filter-position" id="filter-position-footer">
-				<label for="filter-position-footer" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-right" aria-label="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Load this file in the footer of the page', 'wphb' ); ?>"></span>
-					<i class="hb-icon-minify-footer"></i>
-					<span><?php esc_html_e( 'Footer', 'wphb' ); ?></span>
-				</label>
+			<input type="checkbox" class="toggle-checkbox filter-toggles filter-position-footer" name="filter-position" id="filter-position-footer" aria-label="<?php esc_attr_e( 'Footer', 'wphb' ); ?>">
+			<label for="filter-position-footer" class="toggle-label">
+				<span class="toggle tooltip-s" tooltip="<?php esc_attr_e( 'Move to Footer', 'wphb' ); ?>" aria-hidden="true"></span>
+				<span class="hb-icon-minify-footer" aria-hidden="true"></span>
+			</label>
 
-				<input type="checkbox" class="toggle-checkbox filter-toggles filter-defer" name="filter-defer" id="filter-defer">
-				<label for="filter-defer" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-right" aria-label="<?php esc_attr_e( 'Execute this script once the page is completely loaded', 'wphb' ); ?>" tooltip="<?php esc_attr_e( 'Execute this script once the page is completely loaded', 'wphb' ); ?>"></span>
-					<i class="hb-icon-minify-defer"></i>
-					<span><?php esc_html_e( 'Defer', 'wphb' ); ?></span>
-				</label>
+			<input type="checkbox" class="toggle-checkbox filter-toggles filter-defer" name="filter-defer" id="filter-defer" aria-label="<?php esc_attr_e( 'Defer', 'wphb' ); ?>">
+			<label for="filter-defer" class="toggle-label">
+				<span class="toggle tooltip-s" tooltip="<?php esc_attr_e( 'Defer JavaScript', 'wphb' ); ?>" aria-hidden="true"></span>
+				<span class="hb-icon-minify-defer" aria-hidden="true"></span>
+			</label>
 
-				<input type="checkbox" class="toggle-checkbox filter-toggles filter-inline" name="filter-inline" id="filter-inline">
-				<label for="filter-inline" class="toggle-label">
-					<span class="toggle tooltip-l tooltip-right" tooltip="<?php esc_attr_e( 'Inline style', 'wphb' ); ?>"></span>
-					<i class="hb-icon-minify-inline"></i>
-					<span><?php esc_html_e( 'Inline', 'wphb' ); ?></span>
-				</label>
-			</span>
-		</div><!-- end tooltip-box -->
+			<input type="checkbox" class="toggle-checkbox filter-toggles filter-inline" name="filter-inline" id="filter-inline" aria-label="<?php esc_attr_e( 'Inline', 'wphb' ); ?>">
+			<label for="filter-inline" class="toggle-label">
+				<span class="toggle tooltip-s" tooltip="<?php esc_attr_e( 'Inline CSS', 'wphb' ); ?>" aria-hidden="true"></span>
+				<span class="hb-icon-minify-inline" aria-hidden="true"></span>
+			</label>
+		</div><!-- end checkbox-group -->
 
 		<div class="wphb-progress-state">
-			<span class="wphb-progress-state-text"><?php esc_html_e( 'Hummingbird will set this configuration for all chosen files. You will still need to set the changes live by clicking Save Changes on the next screen.', 'wphb' ); ?></span>
+			<span class="wphb-progress-state-text"><?php esc_html_e( 'Note: You still need to set the changes live by clicking Save Changes on the next screen.', 'wphb' ); ?></span>
 		</div><!-- end wphb-progress-state -->
 
 	</div><!-- end wphb-dialog-content -->
 
 	<div class="wphb-dialog-footer">
 		<div class="alignleft">
-			<div class="close button button-ghost button-large"><?php esc_html_e( 'Cancel', 'wphb' ); ?></div>
+			<div class="close button button-ghost"><?php esc_html_e( 'Cancel', 'wphb' ); ?></div>
 		</div>
 		<div class="alignright">
-			<div class="close button button-large save-batch"><?php esc_html_e( 'Apply', 'wphb' ); ?></div>
+			<div class="close button save-batch"><?php esc_html_e( 'Apply', 'wphb' ); ?></div>
 		</div>
 	</div>
 </dialog><!-- end check-files-modal -->

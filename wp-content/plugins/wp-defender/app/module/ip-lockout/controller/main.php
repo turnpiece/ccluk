@@ -719,6 +719,7 @@ class Main extends Controller {
 				$this->scheduleReport();
 			}
 			wp_send_json_success( $res );
+			Utils::instance()->submitStatsToDev();
 		} else {
 			wp_send_json_error( array(
 				'message' => implode( '<br/>', $settings->getErrors() )

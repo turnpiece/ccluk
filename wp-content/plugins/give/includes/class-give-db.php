@@ -34,6 +34,16 @@ abstract class Give_DB {
 	public $table_name;
 
 	/**
+	 * Set Minimum Index Length
+	 *
+	 * @since  2.0.1
+	 * @access public
+	 *
+	 * @var int
+	 */
+	public $min_index_length = 191;
+
+	/**
 	 * The version of our database table
 	 *
 	 * @since  1.0
@@ -165,16 +175,16 @@ abstract class Give_DB {
 	 *
 	 * @since  1.0
 	 * @access public
-     *
-     * @param  int    $column       Column ID.
-     * @param  string $column_where Column name.
-     * @param  string $column_value Column value.
-     *
+	 *
+	 * @param  int    $column       Column ID.
+	 * @param  string $column_where Column name.
+	 * @param  string $column_value Column value.
+	 *
 	 * @return string
 	 */
 	public function get_column_by( $column, $column_where, $column_value ) {
-        /* @var WPDB $wpdb */
-        global $wpdb;
+		/* @var WPDB $wpdb */
+		global $wpdb;
 
 		// Bailout.
 		if ( empty( $column ) || empty( $column_where ) || empty( $column_value ) ) {
@@ -183,6 +193,7 @@ abstract class Give_DB {
 
 		$column_where = esc_sql( $column_where );
 		$column       = esc_sql( $column );
+
 		return $wpdb->get_var( $wpdb->prepare( "SELECT $column FROM $this->table_name WHERE $column_where = %s LIMIT 1;", $column_value ) );
 	}
 
@@ -191,15 +202,15 @@ abstract class Give_DB {
 	 *
 	 * @since  1.0
 	 * @access public
-     *
-     * @param  array  $data
-     * @param  string $type
-     *
+	 *
+	 * @param  array  $data
+	 * @param  string $type
+	 *
 	 * @return int
 	 */
 	public function insert( $data, $type = '' ) {
-        /* @var WPDB $wpdb */
-        global $wpdb;
+		/* @var WPDB $wpdb */
+		global $wpdb;
 
 		// Set default values.
 		$data = wp_parse_args( $data, $this->get_column_defaults() );
@@ -217,7 +228,7 @@ abstract class Give_DB {
 		$column_formats = $this->get_columns();
 
 		// Force fields to lower case
-		$data = array_change_key_case( $data );
+		// $data = array_change_key_case( $data );
 
 		// White list columns
 		$data = array_intersect_key( $data, $column_formats );
@@ -246,16 +257,16 @@ abstract class Give_DB {
 	 *
 	 * @since  1.0
 	 * @access public
-     *
-     * @param  int    $row_id Column ID
-     * @param  array  $data
-     * @param  string $where  Column value
-     *
+	 *
+	 * @param  int    $row_id Column ID
+	 * @param  array  $data
+	 * @param  string $where  Column value
+	 *
 	 * @return bool
 	 */
 	public function update( $row_id, $data = array(), $where = '' ) {
-        /* @var WPDB $wpdb */
-        global $wpdb;
+		/* @var WPDB $wpdb */
+		global $wpdb;
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
@@ -293,14 +304,14 @@ abstract class Give_DB {
 	 *
 	 * @since  1.0
 	 * @access public
-     *
-     * @param  int $row_id Column ID.
-     *
+	 *
+	 * @param  int $row_id Column ID.
+	 *
 	 * @return bool
 	 */
 	public function delete( $row_id = 0 ) {
-        /* @var WPDB $wpdb */
-        global $wpdb;
+		/* @var WPDB $wpdb */
+		global $wpdb;
 
 		// Row ID must be positive integer
 		$row_id = absint( $row_id );
@@ -321,13 +332,13 @@ abstract class Give_DB {
 	 *
 	 * @since  1.3.2
 	 * @access public
-     *
+	 *
 	 * @param  string $table The table name.
-     *
+	 *
 	 * @return bool          If the table name exists.
 	 */
 	public function table_exists( $table ) {
-        /* @var WPDB $wpdb */
+		/* @var WPDB $wpdb */
 		global $wpdb;
 
 		$table = sanitize_text_field( $table );
@@ -377,7 +388,7 @@ abstract class Give_DB {
 	/**
 	 * Register tables
 	 *
-	 * @since 1.8.9
+	 * @since  1.8.9
 	 * @access public
 	 */
 	public function register_table() {
@@ -393,5 +404,37 @@ abstract class Give_DB {
 	 * @since  1.8.9
 	 * @access public
 	 */
-	public function create_table(){}
+	public function create_table() {
+	}
+
+
+	/**
+	 * Given a ID, make sure it's a positive number, greater than zero before inserting or adding.
+	 *
+	 * @access private
+	 * @since  2.0
+	 *
+	 * @param  int $id A passed ID.
+	 *
+	 * @return int|bool                The normalized log ID or false if it's found to not be valid.
+	 */
+	public function sanitize_id( $id ) {
+		if ( ! is_numeric( $id ) ) {
+			return false;
+		}
+
+		$id = (int) $id;
+
+		// We were given a non positive number.
+		if ( absint( $id ) !== $id ) {
+			return false;
+		}
+
+		if ( empty( $id ) ) {
+			return false;
+		}
+
+		return absint( $id );
+
+	}
 }

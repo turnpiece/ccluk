@@ -109,7 +109,7 @@ class Comment_Audit extends Event_Abstract {
 		$post            = get_post( $comment_data['comment_post_ID'] );
 		$post_type       = get_post_type_object( $post->post_type );
 		$post_type_label = strtolower( $post_type->labels->singular_name );
-		$text            = sprintf( esc_html__( "User %s submitted a duplicate comment on %s \"%s\"", wp_defender()->domain ), is_user_logged_in() ? Utils::instance()->getDisplayName( get_current_user_id() ) : $comment_data['comment_author'], $post_type_label, $post->post_title );
+		$text            = sprintf( esc_html__( "User %s submitted a duplicate comment on %s \"%s\"", wp_defender()->domain ), is_user_logged_in() ? Utils::instance()->getDisplayName( get_current_user_id() ) : $comment_data['comment_author'], $post_type_label, $post->post_title );	   			 	 		  		  	 	
 
 		return array( $text, $post_type_label );
 	}

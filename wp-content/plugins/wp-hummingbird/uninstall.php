@@ -54,11 +54,16 @@ delete_site_option( 'wphb-caching-data' );
 delete_site_option( 'wphb-gzip-data' );
 delete_site_option( 'wphb-server-type' );
 
+delete_site_option( 'wphb-last-report-dismissed' );
+
 // Clean notices.
 delete_site_option( 'wphb-notice-free-rated-show' );
-delete_site_option( 'wphb-notice-http2-info-dismissed' );
 delete_site_option( 'wphb-notice-cache-cleaned' );
 delete_site_option( 'wphb-cloudflare-dash-notice' );
+// Minification notices
+delete_site_option( 'wphb-notice-http2-info-show' );
+delete_site_option( 'wphb-notice-minification-optimized-show' );
+delete_site_option( 'wphb-minification-view' );
 
 // Clean all cron.
 wp_clear_scheduled_hook( 'wphb_performance_scan' );

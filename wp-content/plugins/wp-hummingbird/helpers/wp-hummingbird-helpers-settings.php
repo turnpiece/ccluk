@@ -45,7 +45,6 @@ function wphb_get_setting( $option_name ) {
 function wphb_get_default_settings() {
 	$defaults = array(
 		'minify'         => false,
-		'caching'        => false,
 		'uptime'         => false,
 		'use_cdn'        => false,
 		'gravatar_cache' => false,
@@ -167,7 +166,6 @@ function wphb_update_setting( $setting, $value ) {
  * @param bool $network Value for network. Default: false.
  */
 function wphb_toggle_minification( $value, $network = false ) {
-
 	$settings = wphb_get_settings();
 	if ( is_multisite() ) {
 		if ( $network ) {

@@ -1,0 +1,31 @@
+/* ****************************************************************************
+ * MODULE: CLASSES
+ */
+
+.hidden {
+	display: none;
+}
+
+// Clearfix
+.cf {
+	&:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+	  }
+}
+.wpmud .wrap-wp-hummingbird .clear {
+	padding: 0;
+}
+
+// Responsive Helpers
+@media screen and (min-width: $desktop--small) {
+	.hide-on-large {
+		display: none;
+	}
+}
+.hide-on-mobile {
+	@include bp(desktop-small) {
+		display: none;
+	}
+}

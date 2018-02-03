@@ -1,0 +1,361 @@
+/* ****************************************************************************
+ * MODULES: CACHING MODULES
+ */
+.wpmud .wphb-caching-error {
+    text-align: left;
+}
+
+.wpmud .wphb-caching-error a {
+    text-decoration: underline;
+}
+
+.wpmud .wrap-wphb-caching .wphb-spinner {
+    float: none;
+    background-size: 15px 15px;
+}
+
+.wpmud .wphb-caching-cloudflare-box > p {
+    margin: 0 0 20px 0;
+}
+
+.wpmud .box-caching-enable .buttons {
+    margin-top: -20px;
+}
+
+.wpmud .caching-table {
+    margin: 30px 0 0;
+}
+
+.wpmud .wphb-caching-summary-heading,
+.wpmud .box-gzip-summary .list-label {
+    text-transform: none !important;
+    color: #333333;
+    font-size: 13px;
+}
+
+.wpmud #cloudflare-how-to-title,
+.wpmud #cloudflare-how-to {
+    text-align: left;
+}
+
+.wpmud #cloudflare-how-to a {
+    font-weight: 500;
+    text-decoration: underline;
+    color: inherit;
+}
+
+.wpmud #cloudflare-info {
+    clear: both;
+}
+
+.wpmud #cloudflare-info.wphb-notice {
+    margin-top: 30px;
+}
+
+.wpmud .cloudflare-submit {
+    margin-bottom: 0;
+}
+
+.wpmud #cloudflare-zone .clear {
+    padding: 0;
+}
+
+.wpmud #cloudflare-zone label {
+    margin-bottom: 13px;
+}
+
+.wpmud #cloudflare-zone .cloudflare-submit {
+    margin-top: 22px;
+}
+
+.wpmud #cloudflare-steps .wphb-notice-success {
+    margin-top: 0;
+}
+
+.wpmud .cloudflare-clear-cache-tooltip[tooltip]:after {
+    margin-left: -137px;
+}
+
+.wpmud .box-caching-summary .box-content > .box-content {
+    background: no-repeat 30px 100%;
+}
+
+.wpmud .box-caching-summary .box-content > .box-content {
+    background-image: url('../image/graphic-hb-cf-sell@2x.png');
+    background-size: 107px 148px;
+}
+
+.wpmud .box-caching-summary .box-content > .box-content.no-background-image {
+    background-image: none;
+}
+
+.wpmud .box-caching-settings .select-container.server-type {
+    max-width: 240px;
+}
+
+.wpmud.wphb-notice {
+    margin-top: 30px;
+}
+
+.wpmud .box-caching-settings .wphb-expiry-select-box label {
+    margin-top: 0;
+}
+
+.wpmud .wphb-expiry-select-box .wphb-expiry-select {
+    max-width: 240px;
+}
+
+@media screen and (max-width: 1200px) and (min-width: 783px) {
+    .wpmud #cloudflare-how-to-title {
+        float: none;
+        display: block;
+        text-align: center;
+        margin-bottom: 0;
+    }
+    .wpmud .cloudflare-step p.cloudflare-submit {
+        float: none;
+        position: relative;
+    }
+    .wpmud .cloudflare-step p.cloudflare-submit .cloudflare-spinner {
+        position: absolute;
+        right: 0;
+        top: 10px;
+    }
+}
+
+.wpmud .wphb-server-instructions .wphb-notice,
+.wpmud .box-caching-summary .wphb-notice,
+.wpmud .box-gzip-summary .wphb-notice {
+    margin-bottom: 30px !important;
+}
+
+.wpmud .wphb-caching-active.wphb-notice.wphb-notice-blue {
+    margin-bottom: 0 !important;
+}
+
+.wpmud .wphb-caching-success.wphb-notice.wphb-notice-success {
+    margin-top: 30px;
+}
+
+.wpmud .wphb-server-instructions .wphb-notice.wphb-notice-blue p {
+    font-size: 13px;
+    line-height: 22px;
+    color: #333;
+}
+
+.wpmud .wphb-server-instructions .wphb-notice.wphb-notice-blue p:before {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning {
+    margin-top: 30px;
+}
+
+.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning p {
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning p:before {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.wpmud .wphb-cf-detected-notice.wphb-notice.wphb-notice-grey p {
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.wpmud .wphb-cf-detected-notice.wphb-notice.wphb-notice-grey p:before {
+    font-size: 16px;
+    line-height: 16px;
+}
+
+.wpmud .wphb-expiry-changes .update-htaccess {
+    margin-top: 10px;
+}
+
+.wpmud .button.notice-button {
+    margin-top: 10px;
+}
+
+.wpmud .wphb-cloudflare.wphb-notice-warning p {
+    color: #333;
+}
+
+/* Expiration table */
+.wpmud input[name='expiry-set-type'] {
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
+    border: 1px solid #E6E6E6;
+    background-color: #F8F8F8;
+}
+
+.wpmud input[name='expiry-set-type']:checked {
+    border: 1px solid #17A8E3;
+    background-color: #17A8E3;
+}
+
+.wpmud input[name='expiry-set-type']:checked + label {
+    color: #333333;
+}
+
+.wpmud input[name='expiry-set-type']:checked:before {
+    width: 8px;
+    height: 8px;
+    margin: 3px;
+    background-color: #ffffff;
+}
+
+.wpmud input[name='expiry-set-type'] + label {
+    display: inline-block;
+    margin-top: 0;
+    font-size: 15px;
+}
+
+.wpmud .wphb-border-frame .table-header .wphb-caching-summary-heading-type {
+    flex-basis: 85px;
+}
+
+.wpmud .wphb-border-frame .table-row .wphb-gzip-summary-item-type,
+.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-type {
+    flex-basis: 100px;
+}
+
+.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-expiry,
+.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-status {
+    flex-basis: 80px;
+}
+
+.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-type {
+    font-size: 13px;
+    font-weight: 500;
+    color: #333333;
+}
+
+.wpmud .box-caching-settings label,
+.wpmud .box-gzip-settings label {
+    margin-top: 15px;
+    margin-bottom: 5px;
+    padding: 0;
+}
+
+.wpmud .box-caching-settings label,
+.wpmud .box-gzip-settings label,
+.wpmud .box-caching-settings .wphb-border-frame > label,
+.wpmud .box-gzip-settings .wphb-border-frame > label {
+    color: #888888;
+    font-size: 13px;
+    font-weight: 500;
+    line-height: 22px;
+}
+
+.wpmud .wphb-caching-cloudflare-settings .wphb-expiry-select {
+    width: 85%;
+}
+
+.wrap-wphb-caching .cloudflare-step label:first-child {
+    margin-top: 0;
+}
+
+/* Server select tabs (automatic/manual) */
+.wpmud .wrap-wphb-gzip .tabs,
+.wpmud .wrap-wphb-caching .tabs,
+.wpmud .wrap-wphb-gzip .tabs .tab label,
+.wpmud .wrap-wphb-caching .tabs .tab label,
+.wpmud .wrap-wphb-gzip .tabs .tab .content,
+.wpmud .wrap-wphb-caching .tabs .tab .content {
+    border: 0;
+}
+
+.wpmud .wrap-wphb-gzip .tabs .tab .content,
+.wpmud .wrap-wphb-caching .tabs .tab .content {
+    border-top: 2px solid #E6E6E6;
+    top: 38px;
+}
+
+.wpmud .wrap-wphb-gzip .tabs .tab label,
+.wpmud .wrap-wphb-caching .tabs .tab label {
+    font-size: 15px;
+    text-transform: capitalize;
+    color: #888888;
+    padding: 0 10px;
+    line-height: 1.5em;
+    height: 40px;
+}
+
+.wpmud .wphb-server-instructions p,
+.wpmud .wphb-server-instructions .wphb-listing li {
+    color: #888888;
+    font-size: 13px;
+    line-height: 22px;
+}
+
+.wpmud .wphb-server-instructions .wphb-listing li {
+    margin-top: 0;
+}
+
+.wpmud .wphb-server-instructions .tabs {
+    margin: 0;
+}
+
+.wpmud .wphb-server-instructions .tabs .tab .content {
+    padding: 20px 0 0;
+}
+
+.wpmud .wphb-server-instructions .tabs .tab > .active {
+    color: #333333;
+    border-bottom: 2px solid #333333;
+    z-index: 10;
+}
+
+/* Page caching */
+.wpmud .box-page-caching .box-footer {
+    border-top: 1px solid #E6E6E6;
+    padding: 50px 30px;
+}
+
+.wpmud .box-page-caching h4 {
+    color: #666666;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: none;
+}
+
+.wpmud .box-page-caching textarea {
+    height: 180px;
+    max-width: 490px;
+    color: #333333;
+    border: 1px solid #E6E6E6;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+    margin-top: 20px;
+}
+
+.wpmud .box-page-caching .col-two-third .with-bottom-border {
+    margin-bottom: 30px;
+}
+
+/* Page caching: page types table */
+.wpmud .box-page-caching .wphb-dash-table .sub {
+    width: 75px;
+}
+
+.wpmud .box-page-caching .wphb-dash-table .wphb-dash-table-row:first-child {
+    border-top: 0;
+}
+
+.wpmud .box-page-caching .wphb-dash-table .wphb-dash-table-row:last-child {
+    border-bottom: 0;
+}
+
+/* Gravatar caching */
+.wpmud .box-page-caching .wphb-notice,
+.wpmud .box-caching-gravatar .wphb-notice {
+    margin-top: 20px;
+}
+
+.wpmud .box-page-caching .settings-form .button-ghost {
+    margin: 10px 0;
+}

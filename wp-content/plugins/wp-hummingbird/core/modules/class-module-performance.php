@@ -7,16 +7,46 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	public function run() {}
 
 	/**
-	 * Initializes the Performance Scan
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * @since 1.7.1
 	 */
-	public static function init_scan() {
+	public function clear_cache() {
+		$last_report = get_site_option( 'wphb-last-report' );
+		if ( $last_report && isset( $last_report->data->score ) ) {
+			// Save latest score.
+			update_site_option( 'wphb-last-report-score', array(
+				'score' => $last_report->data->score,
+			));
+		}
+
+		delete_site_option( 'wphb-last-report' );
+		delete_site_option( 'wphb-doing-report' );
+		delete_site_option( 'wphb-stop-report' );
+	}
+
+	/**
+	 * Initializes the Performance Scan
+	 *
+	 * @since 1.7.1 Removed static property.
+	 */
+	public function init_scan() {
 		// Clear the cache.
-		self::clear_cache();
+		$this->clear_cache();
 
 		// Start the test.
 		self::set_doing_report( true );
 		$api = wphb_get_api();
 		$api->performance->ping();
+
+		// Clear dismissed report.
+		if ( wphb_performance_report_dismissed() ) {
+			wphb_performance_remove_report_dismissed();
+		}
+
+
+		// TODO: this creates a duplicate task from cron.
+		do_action( 'wphb_init_performance_scan' );
 	}
 
 	/**
@@ -142,20 +172,32 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	}
 
 	/**
-	 * Clear Performance Module cache
+	 * Set last report dismissed status to true
 	 */
-	public static function clear_cache() {
-		$last_report = get_site_option( 'wphb-last-report' );
-		if ( $last_report && isset( $last_report->data->score ) ) {
-			// Save latest score.
-			update_site_option( 'wphb-last-report-score', array(
-				'score' => $last_report->data->score,
-			));
+	public static function set_report_dismissed() {
+		update_site_option( 'wphb-last-report-dismissed', true );
+	}
+
+	/**
+	 * Remove last report dismissed status
+	 */
+	public static function remove_report_dismissed() {
+		delete_site_option( 'wphb-last-report-dismissed' );
+	}
+
+	/**
+	 * Return whether the last report was dismissed
+	 *
+	 * @return bool True if user dismissed report or false of there's no site option
+	 */
+	public static function report_dismissed() {
+
+		$report = get_site_option( 'wphb-last-report-dismissed' );
+		if ( $report ) {
+			return true;
 		}
 
-		delete_site_option( 'wphb-last-report' );
-		delete_site_option( 'wphb-doing-report' );
-		delete_site_option( 'wphb-stop-report' );
+		return false;
 	}
 
 }

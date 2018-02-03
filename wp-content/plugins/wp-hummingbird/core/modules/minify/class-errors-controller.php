@@ -160,14 +160,14 @@ class WP_Hummingbird_Minification_Errors_Controller {
 
 		foreach ( $handles as $handle ) {
 			$this->errors[ $type ][ $handle ] = array(
-				'code' => $code,
-				'error' => $message,
-				'disable' => $disable
+				'code'    => $code,
+				'error'   => $message,
+				'disable' => $disable,
 			);
 
 			if ( ! empty( $actions ) && is_array( $actions ) ) {
 
-				if ( in_array( 'minify', $actions ) ) {
+				if ( in_array( 'minify', $actions ) && ! in_array( $handle, $options['dont_minify'][ $type ], true ) ) {
 					$options['dont_minify'][ $type ][] = $handle;
 				}
 
@@ -176,7 +176,6 @@ class WP_Hummingbird_Minification_Errors_Controller {
 					unset( $options['combine'][ $type ][ $key ] );
 					$options['combine'][ $type ] = array_values( $options['combine'][ $type ] );
 				}
-
 			}
 		}
 

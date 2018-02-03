@@ -51,7 +51,7 @@ class Give_Donors_Query {
 	 * @since  1.8.14
 	 * @access public
 	 *
-	 * @var    array
+	 * @var    string
 	 */
 	public $table_name = '';
 
@@ -61,7 +61,7 @@ class Give_Donors_Query {
 	 * @since  1.8.14
 	 * @access public
 	 *
-	 * @var    array
+	 * @var    string
 	 */
 	public $meta_table_name = '';
 
@@ -71,14 +71,15 @@ class Give_Donors_Query {
 	 * @since  1.8.14
 	 * @access public
 	 *
-	 * @var    array
+	 * @var    string
 	 */
 	public $meta_type = '';
 
 	/**
 	 * Default query arguments.
 	 *
-	 * Not all of these are valid arguments that can be passed to WP_Query. The ones that are not, are modified before the query is run to convert them to the proper syntax.
+	 * Not all of these are valid arguments that can be passed to WP_Query. The ones that are not, are modified before
+	 * the query is run to convert them to the proper syntax.
 	 *
 	 * @since  1.8.14
 	 * @access public
@@ -147,11 +148,21 @@ class Give_Donors_Query {
 		 */
 		do_action( 'give_pre_get_donors', $this );
 
-		if ( empty( $this->args['count'] ) ) {
-			$this->donors = $wpdb->get_results( $this->get_sql() );
-		} else {
-			$this->donors = $wpdb->get_var( $this->get_sql() );
+		$cache_key        = Give_Cache::get_key( 'give_donor', $this->get_sql(), false );
+
+		// Get donors from cache.
+		$this->donors = Give_Cache::get_db_query( $cache_key );
+
+		if ( is_null( $this->donors  ) ) {
+			if ( empty( $this->args['count'] ) ) {
+				$this->donors = $wpdb->get_results( $this->get_sql() );
+			} else {
+				$this->donors = $wpdb->get_var( $this->get_sql() );
+			}
+
+			Give_Cache::set_db_query( $cache_key, $this->donors );
 		}
+
 
 		/**
 		 * Fires after retrieving donors.
@@ -178,7 +189,7 @@ class Give_Donors_Query {
 		global $wpdb;
 
 		if ( $this->args['number'] < 1 ) {
-			$this->args['number'] = 999999999999;
+			$this->args['number'] = 99999999999;
 		}
 
 		$where = $this->get_where_query();
@@ -194,7 +205,7 @@ class Give_Donors_Query {
 		if ( ! empty( $this->args['fields'] ) && 'all' !== $this->args['fields'] ) {
 			if ( is_string( $this->args['fields'] ) ) {
 				$fields = "{$this->table_name}.{$this->args['fields']}";
-			} else if ( is_array( $this->args['fields'] ) ) {
+			} elseif ( is_array( $this->args['fields'] ) ) {
 				$fields = "{$this->table_name}." . implode( " , {$this->table_name}.", $this->args['fields'] );
 			}
 		}

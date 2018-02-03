@@ -47,12 +47,15 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	public function run() {}
 
 	/**
+	 * Implement abstract parent method for clearing cache.
+	 *
 	 * Delete cached files.
 	 *
 	 * @return bool
 	 * @since  1.6.0
+	 * @since  1.7.1 name changed from delete_files to clear_cache
 	 */
-	public function delete_files() {
+	public function clear_cache() {
 		/* @var WP_Hummingbird_Filesystem $wphb_fs */
 		global $wphb_fs;
 
@@ -101,7 +104,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			 */
 			$email_hash = $this->get_email_hash( $id_or_email );
 			$file = $email_hash . 'x' . $size . '.jpg';
-			return $wphb_fs->write( $file, $remote_avatar['body'], 'gravatar' );
+			return $wphb_fs->write( $file, $remote_avatar['body'], true );
 		} else {
 			return new WP_Error( 'gravatar-not-found', __( 'Error fetching Gravatar. Gravatar not found.', 'wphb' ) );
 		}
@@ -214,7 +217,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			$file_write = $this->get_remote_avatar( $id_or_email, $img['size'] );
 			// If error creating file - log and return original image.
 			if ( is_wp_error( $file_write ) ) {
-				self::log( $file_write->get_error_message() );
+				self::log( $file_write->get_error_message(), $this->slug );
 				$this->error = $file_write;
 				return $image;
 			}
@@ -277,11 +280,11 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 				$this->error = $remote_avatar;
 				return $args;
 			}
-			$file_write = $wphb_fs->write( $file, $remote_avatar['body'], 'gravatar' );
+			$file_write = $wphb_fs->write( $file, $remote_avatar['body'], true );
 
 			// If error creating file - log and return original image.
 			if ( is_wp_error( $file_write ) ) {
-				self::log( $file_write->get_error_message() );
+				self::log( $file_write->get_error_message(), $this->slug );
 				$this->error = $file_write;
 				return $args;
 			}
@@ -291,22 +294,6 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		$args['url'] = $wphb_fs->baseurl . $gravatar_dir . $file;
 
 		return $args;
-	}
-
-	/**
-	 * Log errors.
-	 *
-	 * @since 1.6.0
-	 * @param string $message  Error message.
-	 */
-	private function log( $message ) {
-		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-			$date = current_time( 'mysql' );
-			if ( ! is_string( $message ) ) {
-				$message = print_r( $message, true );
-			}
-			error_log( '[' . $date . '] - Error in Hummingbird Gravatar module:  ' . $message );
-		}
 	}
 
 }

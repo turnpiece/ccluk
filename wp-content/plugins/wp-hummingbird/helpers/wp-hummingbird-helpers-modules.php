@@ -80,13 +80,14 @@ function wphb_minification_get_resources_collection() {
  * Wrapper function for WP_Hummingbird_Module_Minify::init_scan()
  */
 function wphb_minification_init_scan() {
-	wphb_clear_minification_cache( false );
+	/* @var WP_Hummingbird_Module_Minify $minify_module */
+	$minify_module = wphb_get_module( 'minify' );
+	$minify_module->clear_cache( false );
 
 	// Activate minification if is not.
 	wphb_toggle_minification( true );
 
-	/* @var WP_Hummingbird_Module_Minify $minify_module */
-	$minify_module = wphb_get_module( 'minify' );
+	// Init scan.
 	$minify_module->scanner->init_scan();
 }
 
@@ -208,6 +209,30 @@ function wphb_minification_files_count() {
 	return ( count( $collection['scripts'] ) + count( $collection['styles'] ) );
 }
 
+function wphb_minification_optimizied_count() {
+	// Get files count.
+	$collection = wphb_minification_get_resources_collection();
+	// Remove those assets that we don't want to display and that are not optimized (minified).
+	foreach ( $collection['styles'] as $key => $item ) {
+		if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' ) ) {
+			unset( $collection['styles'][ $key ] );
+		}
+		if ( ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
+			unset( $collection['styles'][ $key ] );
+		}
+	}
+	foreach ( $collection['scripts'] as $key => $item ) {
+		if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'scripts' ) ) {
+			unset( $collection['scripts'][ $key ] );
+		}
+		if ( ! preg_match( '/\.min\.(css|js)/', basename( $item['src'] ) ) ) {
+			unset( $collection['scripts'][ $key ] );
+		}
+	}
+
+	return ( count( $collection['scripts'] ) + count( $collection['styles'] ) );
+}
+
 /**
  * Get the Gzip status data
  *
@@ -318,34 +343,10 @@ function wphb_get_number_of_issues( $module ) {
  * @return bool|WP_Error
  */
 function wphb_uptime_get_last_report( $time = 'week', $force = false ) {
-	return WP_Hummingbird_Module_Uptime::get_last_report( $time, $force );
+	/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+	$uptime_module = wphb_get_module( 'uptime' );
+	return $uptime_module->get_last_report( $time, $force );
 }
-
-/**
- * Check if Uptime is remotely enabled
- *
- * @return bool
- */
-function wphb_is_uptime_remotely_enabled() {
-	return WP_Hummingbird_Module_Uptime::is_remotely_enabled();
-}
-
-/**
- * Enable Uptime remotely
- *
- * @return array|mixed|object|WP_Error
- */
-function wphb_uptime_enable() {
-	return WP_Hummingbird_Module_Uptime::enable();
-}
-
-/**
- * Disable Uptime remotely
- */
-function wphb_uptime_disable() {
-	WP_Hummingbird_Module_Uptime::disable();
-}
-
 
 /**
  * Enable Uptime locally
@@ -367,13 +368,6 @@ function wphb_uptime_disable_locally() {
 	if ( $uptime ) {
 		WP_Hummingbird_Module_Uptime::disable_locally();
 	}
-}
-
-/**
- * Wrapper function for WP_Hummingbird_Module_Uptime::refresh_report()
- */
-function wphb_uptime_refresh_report() {
-	WP_Hummingbird_Module_Uptime::refresh_report();
 }
 
 /**
@@ -507,16 +501,6 @@ function wphb_performance_set_doing_report( $status = true ) {
 }
 
 /**
- * Wrapper function for WP_Hummingbird_Module_Performance::init_scan()
- */
-function wphb_performance_init_scan() {
-	// Init scan.
-	WP_Hummingbird_Module_Performance::init_scan();
-	// TODO: this creates a duplicate task from cron.
-	do_action( 'wphb_init_performance_scan' );
-}
-
-/**
  * Wrapper function for WP_Hummingbird_Module_Performance::cron_scan()
  */
 function wphb_performance_cron_report() {
@@ -561,4 +545,51 @@ function wphb_get_active_cache_modules() {
 		$active_modules[] = $module_name;
 	}
 	return $active_modules;
+}
+
+/**
+ * Wrapper function for WP_Hummingbird_Module_Performance::set_report_dismissed()
+ */
+function wphb_performance_set_report_dismissed() {
+	WP_Hummingbird_Module_Performance::set_report_dismissed();
+}
+
+/**
+ * Wrapper function for WP_Hummingbird_Module_Performance::remove_report_dismissed()
+ */
+function wphb_performance_remove_report_dismissed() {
+	WP_Hummingbird_Module_Performance::remove_report_dismissed();
+}
+
+/**
+ * Wrapper function for WP_Hummingbird_Module_Performance::report_dismissed()
+ *
+ * @return bool
+ */
+function wphb_performance_report_dismissed() {
+	return WP_Hummingbird_Module_Performance::report_dismissed();
+}
+
+/**
+ * Get default caching types for HB or CloudFlare.
+ *
+ * @since 1.7.1
+ * @return array
+ */
+function wphb_get_browser_caching_types() {
+	$caching_types = array();
+	$caching_types['javascript'] = 'txt | xml | js';
+	$caching_types['css']        = 'css';
+	$caching_types['media']      = 'flv | ico | pdf | avi | mov | ppt | doc | mp3 | wmv | wav | mp4 | m4v | ogg | webm | aac | eot | ttf | otf | woff | svg';
+	$caching_types['images']     = 'jpg | jpeg | png | gif | swf | webp';
+	/* @var WP_Hummingbird_Module_Cloudflare $cloudflare */
+	$cloudflare = wphb_get_module( 'cloudflare' );
+	if ( $cloudflare->has_cloudflare() ) {
+		$caching_types['javascript'] = 'js | ejs';
+		$caching_types['css']        = 'css';
+		$caching_types['media']      = 'ico | pdf | ppt | pptx | doc | docx | eot | ttf | otf | woff | woff2 | svg | svgz | xls | xlsx | csv | jar | class | midi | mid | pls | eps';
+		$caching_types['images']     = 'jpg | jpeg | png | gif | swf | webp | tif | tiff | bmp | pict | ps';
+	}
+
+	return $caching_types;
 }

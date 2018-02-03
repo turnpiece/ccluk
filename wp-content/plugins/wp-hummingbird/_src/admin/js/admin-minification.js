@@ -9,12 +9,11 @@ import Scanner from './minification/Scanner';
 
     WPHB_Admin.minification = {
 
+		module: 'minification',
         $checkFilesButton: null,
         $checkFilesResultsContainer : null,
-        module: 'minification',
         checkURLSList: null,
         checkedURLS: 0,
-        $spinner: null,
 
         init: function() {
             const self = this;
@@ -24,17 +23,16 @@ import Scanner from './minification/Scanner';
             this.scanner.onFinishStep = this.updateProgressBar;
             this.scanner.onFinish = ( response ) => {
                 this.updateProgressBar( 100 );
-                if ( wphb.minification.get.showCDNModal && true === response.show_cdn && $('#enable-cdn-modal').length ) {
-                    window.WDP.showOverlay( '#enable-cdn-modal', { class: 'wphb-modal small wphb-progress-modal no-close' } );
-                } else {
-                    window.location.href = getLink( 'minification' );
-                }
-            };
 
+				Fetcher.minification
+                    .toggleCDN( $( 'input#enable_cdn' ).is(':checked') )
+                    .then( () => {
+						window.location.href = getLink( 'minification' );
+                    });
+            };
 
             // Check files button
             this.$checkFilesButton = $( '#check-files' );
-            this.$spinner = $('.spinner');
 
             if ( this.$checkFilesButton.length ) {
                 this.$checkFilesButton.click( function( e ) {
@@ -50,19 +48,68 @@ import Scanner from './minification/Scanner';
             $('body').on( 'click', '#cancel-minification-check', ( e ) => {
                 e.preventDefault();
                 this.updateProgressBar( 0, true );
-                this.scanner.cancel()
+				this.scanner.cancel()
                     .then( () => {
                         window.location.href = getLink( 'minification' );
                     });
 
             });
 
+			// Track changes done to minification files.
+			$(':input.toggle-checkbox').on('change', function() {
+				$(this).toggleClass('changed');
+				let changed = $('.wphb-minification-files').find('input.changed');
+
+				if ( changed.length === 0 ) {
+					$('.wphb-minification-changed-notice').slideUp('slow');
+					$('input[type=submit]').addClass('disabled');
+				} else {
+					$('.wphb-minification-changed-notice').slideDown('slow');
+					$('input[type=submit]').removeClass('disabled');
+				}
+			});
+
+			// Enable/disable bulk update button.
+			$(':input.wphb-minification-file-selector, :input.wphb-minification-bulk-file-selector').on('change', function() {
+				$(this).toggleClass('changed');
+				let changed = $('.wphb-minification-files').find('input.changed');
+				let bulkUpdateButton = $('#bulk-update');
+
+				if ( changed.length === 0 ) {
+					bulkUpdateButton.removeClass('button-grey');
+					bulkUpdateButton.addClass('button-notice disabled');
+				} else {
+					bulkUpdateButton.removeClass('button-notice disabled');
+					bulkUpdateButton.addClass('button-grey');
+				}
+			});
+
+            // Show warning before switching to advanced view
+			let switchButtons = $('.box-title-basic > a.wphb-switch-button, #wphb-dismissable a.wphb-switch-button');
+			switchButtons.on('click', function(e) {
+                e.preventDefault();
+				window.WDP.showOverlay("#wphb-advanced-minification-modal" );
+				Fetcher.minification.toggleView( 'advanced' );
+            });
+
+            // Switch back to basic mode
+			$('.box-title-advanced > a').on('click', function(e) {
+				e.preventDefault();
+				Fetcher.minification
+                    .toggleView( 'basic' )
+                    .then( () => {
+						window.location.href = getLink( 'minification' );
+                    });
+			});
+
             // Filter action button on Minification page
             $('#wphb-minification-filter-button').on('click', function(e) {
                 e.preventDefault();
-                $('#wphb-minification-filter').toggle('slow');
+                $('.wphb-minification-filter').toggle('slow');
+                $('#wphb-minification-filter-button').toggleClass('active');
             });
 
+            // Discard changes button click
             $('.wphb-discard').click( function(e) {
                 e.preventDefault();
 
@@ -70,15 +117,24 @@ import Scanner from './minification/Scanner';
                     location.reload();
                 }
                 return false;
-
             });
 
+            // Enable discard button on any change
             $( '.wphb-enqueued-files input' ).on( 'change', function() {
                 $('.wphb-discard').attr( 'disabled', false );
             });
 
-            $('#use_cdn').change( function() {
+            // CDN checkbox update status
+			const checkboxes = $("input[type=checkbox][name=use_cdn]");
+			checkboxes.change( function() {
                 const cdn_value = $(this).is(':checked');
+
+                // Handle two CDN checkboxes on Minification page
+				checkboxes.each( function() {
+					this.checked = cdn_value;
+				});
+
+				// Update CDN status
                 Fetcher.minification.toggleCDN( cdn_value )
                     .then( () => {
                         const notice = $('#wphb-notice-minification-advanced-settings-updated');
@@ -89,7 +145,11 @@ import Scanner from './minification/Scanner';
                     });
             });
 
-            this.rowsCollection = new WPHB_Admin.minification.RowsCollection();
+			/**
+             * Minification filters
+			 * @type {RowsCollection|*}
+			 */
+			this.rowsCollection = new WPHB_Admin.minification.RowsCollection();
 
             const rows = $('.wphb-border-row');
 
@@ -104,16 +164,19 @@ import Scanner from './minification/Scanner';
                 self.rowsCollection.push( _row );
             });
 
+            // Filter search box
             $('#wphb-s').keyup( function() {
                 self.rowsCollection.addFilter( $(this).val(), 'primary' );
                 self.rowsCollection.applyFilters();
             });
 
+            // Filter dropdown
             $('#wphb-secondary-filter').change( function() {
                 self.rowsCollection.addFilter( $(this).val(), 'secondary' );
                 self.rowsCollection.applyFilters();
             });
 
+            // Refresh rows on any filter change
             $('.filter-toggles').change( function() {
                 const element = $(this);
                 const what = element.data('toggles');
@@ -142,48 +205,28 @@ import Scanner from './minification/Scanner';
                 }
             });
 
-            const selectAll = $('#minification-bulk-file');
-            selectAll.click( function() {
-                const $this = $( this );
-                let items = self.rowsCollection.getItems();
-                for ( let i in items ) {
-                    if ( items.hasOwnProperty( i ) ) {
-                        if ( $this.is( ':checked' ) ) {
-                            items[i].select();
-                        }
-                        else {
-                            items[i].unSelect();
-                        }
-                    }
-                }
-            });
-
-            // Include/exclude file checkbox
-            $('.toggle-cross').on('click', function() {
-                const $this = $(this);
-                const checkbox = $this.find( 'input.toggle-include' );
-                const row = self.rowsCollection.getItemById( $this.data( 'type' ), $this.data( 'handle' ) );
-                // Mark the item as include or not in the rows list
-                if ( row ) {
-                    row.change( 'include', ! checkbox.prop( 'checked' ) );
-                    row.getElement().find( 'input:not(.toggle-include)' ).prop('disabled', ! checkbox.prop( 'checked' ) );
-                }
-            });
-
-            // Handle two CDN checkboxes on Minification page
-            const checkboxes = $("input[type=checkbox][name=use_cdn]");
-            checkboxes.change( function() {
-                const checkedState = $(this).prop('checked');
-
-                checkboxes.each( function() {
-                    this.checked = checkedState;
-                });
-            });
+            // Handle select/deselect of all files of a certain type for use on bulk update
+			const selectAll = $('.wphb-minification-bulk-file-selector');
+			selectAll.click( function() {
+				const $this = $( this );
+				let items = self.rowsCollection.getItemsByDataType( $this.attr( 'data-type' ) );
+				for ( let i in items ) {
+					if ( items.hasOwnProperty( i ) ) {
+						if ( $this.is( ':checked' ) ) {
+							items[i].select();
+						}
+						else {
+							items[i].unSelect();
+						}
+					}
+				}
+			});
 
             /* Show details of minification row on mobile devices */
-            $('body').on('click', '.wphb-minification-file-details', function() {
+            $('body').on('click', '.wphb-border-row', function() {
                 if ( window.innerWidth < 783 ) {
-                    $(this).parent().find('.wphb-minification-row-details').toggle('slow');
+                    $(this).find('.wphb-minification-row-details').toggle();
+					$(this).find('.fileinfo-group').toggleClass('opened');
                 }
             });
 

@@ -30,8 +30,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			/** @noinspection PhpIncludeInspection */
 			include_once( wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-settings.php' );
 			/** @noinspection PhpIncludeInspection */
-			include_once( wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-cache.php' );
-			/** @noinspection PhpIncludeInspection */
 			include_once( wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-modules.php' );
 			/** @noinspection PhpIncludeInspection */
 			include_once( wphb_plugin_dir() . 'core/class-abstract-module.php' );
@@ -53,8 +51,6 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		public static function activate_blog() {
 			/** @noinspection PhpIncludeInspection */
 			include_once( wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-core.php' );
-			/** @noinspection PhpIncludeInspection */
-			include_once( wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-cache.php' );
 
 			update_option( 'wphb_version', WPHB_VERSION );
 
@@ -65,30 +61,26 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 * Plugin deactivation
 		 */
 		public static function deactivate() {
-			wphb_flush_cache( false );
-			delete_site_option( 'wphb_version' );
+			WP_Hummingbird::flush_cache();
+
 			delete_option( 'wphb_cache_folder_error' );
-			delete_site_option( 'wphb-last-report' );
-			delete_site_option( 'wphb-last-report-score' );
+			delete_site_option( 'wphb_version' );
 			delete_site_option( 'wphb-server-type' );
-			delete_site_transient( 'wphb-uptime-last-report' );
-			delete_site_transient( 'wphb-uptime-remotely-enabled' );
-			delete_site_option( 'wphb-is-cloudflare' );
-			wphb_cloudflare_disconnect();
-			delete_site_option( 'wphb-notice-free-deactivated-dismissed' );
+			delete_site_option( 'wphb-last-report-score' );
 			delete_site_option( 'wphb-gzip-api-checked' );
 			delete_site_option( 'wphb-caching-api-checked' );
 			delete_site_option( 'wphb-cloudflare-dash-notice' );
+			delete_site_option( 'wphb-notice-free-deactivated-dismissed' );
+			delete_site_transient( 'wphb-uptime-remotely-enabled' );
+			delete_site_option( 'wphb-last-report-dismissed' );
 
 			if ( wp_next_scheduled( 'wphb_minify_clear_files' ) ) {
 				wp_clear_scheduled_hook( 'wphb_minify_clear_files' );
 			}
 
-			// Remove advanced-cache.php files and clear cache.
-			wphb_update_setting( 'page_cache', false );
 			/* @var WP_Hummingbird_Module_Page_Caching $module */
 			$module = wphb_get_module( 'page-caching' );
-			$module->cleanup();
+			$module->disable();
 
 			do_action( 'wphb_deactivate' );
 		}
@@ -201,6 +193,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 					self::upgrade_1_7_0_3();
 				}
 
+				if ( version_compare( $version, '1.7.1', '<' ) ) {
+					self::upgrade_1_7_1();
+				}
+
 				update_site_option( 'wphb_version', WPHB_VERSION );
 			} // End if().
 		}
@@ -241,11 +237,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			//Drop chart table
 			$chart_table = $wpdb->prefix . 'minification_chart';
 			$wpdb->query( "DROP TABLE $chart_table" );
-			if ( ! function_exists( 'wphb_clear_minification_cache' ) ) {
-				include_once wphb_plugin_dir() . 'helpers/wp-hummingbird-helpers-cache.php';
-			}
 
-			wphb_clear_minification_cache();
+			/* @var WP_Hummingbird_Module_Minify $minify_module */
+			$minify_module = wphb_get_module( 'minify' );
+			$minify_module->clear_cache();
 
 			// Move all those assets in header to default position
 			$options = wphb_get_settings();
@@ -366,7 +361,9 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 
 		private static function upgrade_1_5_4_beta_2() {
-			wphb_clear_minification_cache( false );
+			/* @var WP_Hummingbird_Module_Minify $minify_module */
+			$minify_module = wphb_get_module( 'minify' );
+			$minify_module->clear_cache( false );
 		}
 
 		private static function upgrade_1_6_2() {
@@ -394,6 +391,29 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			$settings['settings']['debug_log'] = 0;
 			@file_put_contents( $config_file, json_encode( $settings ) );
+		}
+
+		/**
+		 * Remove caching option, as browser caching is always enabled by default.
+		 * Enable minification advanced view where there are settings already in use.
+		 */
+		private static function upgrade_1_7_1() {
+			$options = wphb_get_settings();
+
+			if ( isset( $options['caching'] ) ) {
+				unset( $options['caching'] );
+				wphb_update_settings( $options );
+			}
+
+			// Check if there are settings for minification.
+			$minfication = array( 'block', 'combine', 'position', 'defer', 'inline' );
+
+			foreach ( $minfication as $action ) {
+				if ( ! empty( $options[ $action ]['script'] ) || ! empty( $options[ $action ]['styles'] ) ) {
+					add_site_option( 'wphb-minification-view', true );
+					break;
+				}
+			}
 		}
 
 	}

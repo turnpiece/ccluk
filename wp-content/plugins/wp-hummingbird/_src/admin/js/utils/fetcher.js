@@ -45,6 +45,16 @@ function Fetcher() {
          */
         caching: {
             /**
+             * Set expiration for browser caching.
+             *
+             * @param type File type.
+             * @param expiry_times Type expiry times.
+             */
+            setExpiration: ( type, expiry_times ) => {
+                const action = actionPrefix + 'caching_set_expiration';
+                return request( action, { type, expiry_times }, 'POST' );
+            },
+            /**
              * Set server type.
              *
              * @param value Server type.
@@ -52,6 +62,20 @@ function Fetcher() {
             setServer: ( value ) => {
                 const action = actionPrefix + 'caching_set_server_type';
                 return request( action, { value }, 'POST' );
+            },
+
+            /**
+             * Reload snippet.
+             *
+             * @param type Server type.
+             * @param expiry_times Type expiry times.
+             */
+            reloadSnippets: ( type, expiry_times ) => {
+                const action = actionPrefix + 'caching_reload_snippet';
+                return request( action, { type, expiry_times }, 'POST' )
+                    .then( ( response ) => {
+                        return response;
+                    });
             }
         },
 
@@ -139,6 +163,16 @@ function Fetcher() {
                 const action = actionPrefix + 'minification_toggle_minification';
                 return request( action, { value }, 'POST' );
             },
+
+			/**
+			 * Toggle minification advanced mode.
+			 *
+			 * @param value
+			 */
+			toggleView: ( value ) => {
+            	const action = actionPrefix + 'minification_toggle_view';
+            	return request( action, { value }, 'POST' );
+			},
 
             /**
              * Start minification check.

@@ -149,7 +149,7 @@ class Blacklist extends Behavior {
                     <p>
                         <i class="def-icon icon-cross"></i> <?php echo $error->get_error_message() ?>
                     </p>
-                    <a href="<?php echo network_site_url( "admin.php?page=wp-defender" ) ?>"
+                    <a href="<?php echo network_admin_url( "admin.php?page=wp-defender" ) ?>"
                        class="button button-small button-grey"><?php _e( "Try Again", wp_defender()->domain ) ?></a>
                 </div>
             </div>

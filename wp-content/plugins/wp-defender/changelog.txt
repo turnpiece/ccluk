@@ -1,8 +1,13 @@
 Plugin Name: WP Defender
 Author: Hoang Ngo, Aaron Edwards
-Tested up to: 4.7.4
+Tested up to: 4.9.1
 
 Change Log:
+
+1.7.4.2 - 2018-10-01
+----------------------------------------------------------------------
+- Fix: Remove debug data
+- Fix: Issue with Hub
 
 1.7.4.1 - 2017-4-12
 ----------------------------------------------------------------------
@@ -221,4 +226,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1513530131-au
+87274-1517690956-au

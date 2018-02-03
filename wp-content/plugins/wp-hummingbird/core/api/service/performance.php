@@ -76,6 +76,17 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	}
 
 	/**
+	 * Ignore the latest performance test results.
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function ignore() {
+		return $this->request->get( 'site/result/ignore/', array(
+			'domain' => $this->request->get_this_site(),
+		));
+	}
+
+	/**
 	 * Test if GZIP is enabled.
 	 *
 	 * @since 1.6.0
@@ -116,5 +127,28 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 			'domain' => $this->request->get_this_site(),
 			'tests'  => wp_json_encode( $params ),
 		));
+	}
+
+	/**
+	 * Set ignore report on server.
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function ignore_report() {
+		return $this->request->post( 'site/reports/', array(
+			'domain' => $this->request->get_this_site(),
+			'ignore' => 1,
+		) );
+	}
+
+	/**
+	 * Is report ignored.
+	 *
+	 * @return bool
+	 */
+	public function is_report_ignored() {
+		return $this->request->get( 'site/reports/', array(
+			'domain' => $this->request->get_this_site(),
+		) );
 	}
 }

@@ -12,6 +12,7 @@
  * @var bool   $show_cf_notice Show the CloudFlare notice.
  * @var string $cf_notice      CloudFlare copy to show.
  * @var string $cf_connect_url Connect CloudFlare URL.
+ * @var array  $caching_type_tooltips    Caching types array if browser caching is enabled.
  */
 
 ?>
@@ -58,7 +59,7 @@
 		?>
 		<div class="wphb-dash-table-row">
 			<div>
-				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?>">
+				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> tooltip-left" tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
 					<?php
 					switch ( $type ) {
 						case 'javascript':

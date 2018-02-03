@@ -87,6 +87,17 @@ class WP_Hummingbird_Admin_Notices {
 	}
 
 	/**
+	 * Clear the notice blocker on plugin activate/deactivate.
+	 *
+	 * @since 1.7.0
+	 * @used-by activated_plugin action
+	 * @used-by deactivated_plugin action
+	 */
+	public function plugin_changed() {
+		update_site_option( 'wphb-notice-cache-cleaned-show', 'yes' );
+	}
+
+	/**
 	 * Display notice HTML code.
 	 *
 	 * @since  1.7.0
@@ -97,7 +108,6 @@ class WP_Hummingbird_Admin_Notices {
 	 * @param  bool   $only_hb_pages  Show message only on Hummingbird pages.
 	 */
 	private function show_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false ) {
-
 		// Only run on HB pages.
 		$hb_pages = array(
 			'toplevel_page_wphb',
@@ -147,40 +157,12 @@ class WP_Hummingbird_Admin_Notices {
 	}
 
 	/**
-	 * Show info notice (HB style, not WP).
-	 *
-	 * @ince   1.7.0
-	 * @access private
-	 * @param  string $id           Unique identifier for the notice.
-	 * @param  string $message      The notice text.
-	 * @param  string $class        Class for the notice wrapper.
-	 * @param  bool   $auto_hide    Auto hide notice.
-	 * @param  bool   $dismissable  If is dissmisable or not
-	 * @used-by WP_Hummingbird_Admin_Notices::show()
-	 */
-	private function show_info_notice( $id, $message, $class, $dismissable, $auto_hide ) {
-		?>
-		<div class="wphb-notice wphb-notice-<?php echo $class; ?> can-close" <?php if ( $dismissable ) : ?>
-			id="wphb-dismissable"
-			data-id="<?php echo esc_attr( $id ); ?>"<?php endif; ?>>
-			<p><?php echo $message; ?></p>
-			<div class="close"></div>
-		</div>
-
-		<?php if ( $auto_hide ) : ?>
-			<script type="text/javascript">
-				jQuery('.wphb-notice:not(.notice)').delay(3000).slideUp('slow');
-			</script>
-		<?php endif;
-	}
-
-	/**
 	 * Check if a notice has been dismissed by the current user.
 	 *
 	 * @since  1.7.0 changed to private
 	 * @access private
 	 * @param  string $notice  Notice.
-	 * @param  string $mode    Default: user.
+	 * @param  string $mode    Default: 'user'.
 	 * @return mixed
 	 */
 	private function is_dismissed( $notice, $mode = 'user' ) {
@@ -223,7 +205,7 @@ class WP_Hummingbird_Admin_Notices {
 	}
 
 	/**
-	 * Show an admin notice
+	 * Show info notice (HB style, not WP).
 	 *
 	 * @param string $id           Unique identifier for the notice.
 	 * @param string $message      The notice text.
@@ -233,7 +215,7 @@ class WP_Hummingbird_Admin_Notices {
 	 */
 	public function show( $id, $message, $class = 'error', $auto_hide = false, $dismissable = false ) {
 		// Is already dismissed ?
-		if ( $dismissable && 'true' === get_option( 'wphb-notice-' . $id . '-dismissed' ) ) {
+		if ( $dismissable && $this->is_dismissed( $id, 'option' ) ) {
 			return;
 		}
 
@@ -245,10 +227,30 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		$this->show_info_notice( $id, $message, $class, $dismissable, $auto_hide );
-
 		self::$displayed_notices[] = $id;
+
+		?>
+		<div class="wphb-notice wphb-notice-<?php echo $class; ?> can-close" <?php if ( $dismissable ) : ?>
+			id="wphb-dismissable"
+			data-id="<?php echo esc_attr( $id ); ?>"<?php endif; ?>>
+
+			<p><?php echo $message; ?></p>
+
+			<span class="close">
+				<?php esc_html_e( 'Dismiss', 'wphb' ); ?>
+			</span>
+		</div>
+
+		<?php if ( $auto_hide ) : ?>
+			<script type="text/javascript">
+				jQuery('.wphb-notice:not(.notice)').delay(3000).slideUp('slow');
+			</script>
+		<?php endif;
 	}
+
+	/***************************
+	 * NOTICES
+	 ***************************/
 
 	/**
 	 * Available notices.
@@ -370,7 +372,6 @@ class WP_Hummingbird_Admin_Notices {
 			if ( $caching_active ) {
 				$text = __( "We've noticed you've made changes to your website and have Hummingbird's Minification and Page Caching features active. You might want to clear cache to avoid any issues.", 'wphb' );
 			}
-
 		} elseif ( $caching_active ) {
 			// Clear cache button link
 			$clear_cache_url = add_query_arg(
@@ -390,17 +391,6 @@ class WP_Hummingbird_Admin_Notices {
 			$text,
 			'<a href="' . esc_url( $clear_cache_url ) . '" class="button">' . __( 'Clear Cache', 'wphb' ) . '</a>'
 		);
-	}
-
-	/**
-	 * Clear the notice blocker on plugin activate/deactivate.
-	 *
-	 * @since 1.7.0
-	 * @used-by activated_plugin action
-	 * @used-by deactivated_plugin action
-	 */
-	public function plugin_changed() {
-		update_site_option( 'wphb-notice-cache-cleaned-show', 'yes' );
 	}
 
 }

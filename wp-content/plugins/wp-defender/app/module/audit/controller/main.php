@@ -8,6 +8,7 @@ namespace WP_Defender\Module\Audit\Controller;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Behavior\Audit;
 use WP_Defender\Module\Audit\Component\Audit_API;
 use WP_Defender\Module\Audit\Component\Audit_Table;
@@ -211,6 +212,7 @@ class Main extends \WP_Defender\Controller {
 		if ( $settings->enabled == 0 ) {
 			$res['reload'] = 1;
 		}
+		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( $res );
 	}
 
@@ -490,6 +492,7 @@ class Main extends \WP_Defender\Controller {
 			$settings->enabled = true;
 		}
 		$settings->save();
+		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( array(
 			'url' => network_admin_url( 'admin.php?page=wdf-logging' )
 		) );

@@ -38,7 +38,6 @@ abstract class WP_Hummingbird_Module {
 		/**
 		 * Filters the activation of a module
 		 *
-		 * @usedby wphb_caching_module_status()
 		 * @usedby wphb_uptime_module_status()
 		 * @usedby wphb_minify_module_status()
 		 *
@@ -55,7 +54,6 @@ abstract class WP_Hummingbird_Module {
 	public function get_slug() {
 		return $this->slug;
 	}
-
 
 	/**
 	 * Return the module name
@@ -79,12 +77,66 @@ abstract class WP_Hummingbird_Module {
 	public abstract function run();
 
 	/**
+	 * Clear the module cache.
+	 *
+	 * @since 1.7.1
+	 * @return mixed
+	 */
+	public abstract function clear_cache();
+
+	/**
 	 * Return the options array for this module
 	 *
 	 * @return array List of options
 	 */
 	public function options() {
 		return array();
+	}
+
+	/**
+	 * Write notice or error to debug.log
+	 *
+	 * @since 1.7.0
+	 * @param mixed  $message  Error/notice message.
+	 * @param string $module   Module name.
+	 */
+	public static function log( $message, $module ) {
+		// For now only available for page-caching and gravatar modules.
+		$available_modules = array( 'page-caching', 'gravatar' );
+		if ( ! in_array( $module, $available_modules, true ) ) {
+			return;
+		}
+
+		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
+			// If wphb-cache dir does not exist and unable to create it - exit.
+			if ( ! is_dir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
+				if ( ! mkdir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
+					return;
+				}
+			}
+
+			// Check that page caching logging is enabled.
+			if ( 'page-caching' === $module ) {
+				$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
+				if ( ! file_exists( $config_file ) ) {
+					return;
+				}
+				$settings = json_decode( file_get_contents( $config_file ), true );
+
+				if ( ! (bool) $settings['settings']['debug_log'] ) {
+					return;
+				}
+			}
+
+			if ( ! is_string( $message ) || is_array( $message ) || is_object( $message ) ) {
+				$message = print_r( $message, true );
+			}
+
+			$message = '[' . date( 'H:i:s' ) . '] ' . $message . PHP_EOL;
+
+			$file = WP_CONTENT_DIR . '/wphb-cache/' . $module . '.log';
+			error_log( $message, 3, $file );
+		}
 	}
 
 }

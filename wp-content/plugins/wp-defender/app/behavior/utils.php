@@ -760,6 +760,18 @@ class Utils extends Behavior {
 				break;
 		}
 
+		$events_in_month = \WP_Defender\Module\Audit\Component\Audit_API::pullLogs( array(
+			'date_from' => date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) . ' 00:00:00',
+			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59',
+		) );
+
+		$last_event_date   = __( 'Never', wp_defender()->domain );
+
+		if ( ! is_wp_error( $events_in_month ) ) {
+			$last_event_date   = $events_in_month['data'][0]['timestamp'];
+			$events_in_month = count( $events_in_month['data'] );
+		}
+
 		$data = array(
 			'domain'       => network_home_url(),
 			'timestamp'    => $timestamp,
@@ -780,7 +792,11 @@ class Utils extends Behavior {
 						'day'          => $scanSettings->day,
 						'frequency'    => $scanSettings->frequency
 					),
-					'audit_enabled'         => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+					'audit_status'			=> array(
+						'events_in_month'	=> $events_in_month,
+						'audit_enabled'		=> \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+						'last_event_date'	=> $last_event_date,
+					),
 					'audit_page_url'        => network_admin_url( 'admin.php?page=wdf-logging' ),
 					'labels'                => $labels,
 					'scan_page_url'         => network_admin_url( 'admin.php?page=wdf-scan' ),
@@ -788,48 +804,17 @@ class Utils extends Behavior {
 					'new_scan_url'          => network_admin_url( 'admin.php?page=wdf-scan&wdf-action=new_scan' ),
 					'schedule_scans_url'    => network_admin_url( 'admin.php?page=wdf-schedule-scan' ),
 					'settings_page_url'     => network_admin_url( 'admin.php?page=wdf-settings' ),
+					'ip_lockout_page_url'	=> network_admin_url( 'admin.php?page=wdf-ip-lockout' ),
 					'last_lockout'          => $lastLockout,
 					'login_lockout_enabled' => $lockoutSettings->login_protection,
 					'login_lockout'         => Login_Protection_Api::getLoginLockouts( $after_time ),
 					'lockout_404_enabled'   => $lockoutSettings->detect_404,
 					'lockout_404'           => Login_Protection_Api::get404Lockouts( $after_time ),
 					'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
-					'advanced'              => array(
-						'multi_factors_auth' => array(
-							'active'  => Auth_Settings::instance()->enabled,
-							'enabled' => ! empty( Auth_Settings::instance()->userRoles ),
-						),
-					),
-					'reports'               => array(
-						'file_scanning' => array(
-							'active'    => true,
-							'enabled'   => \WP_Defender\Module\Scan\Model\Settings::instance()->notification,
-							//Report enabled Bool
-							'frequency' => array(
-								'frequency' => \WP_Defender\Module\Scan\Model\Settings::instance()->frequency,
-								'day'       => \WP_Defender\Module\Scan\Model\Settings::instance()->day,
-								'time'      => \WP_Defender\Module\Scan\Model\Settings::instance()->time
-							)
-						),
-						'audit_logging' => array(
-							'active'    => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
-							'enabled'   => \WP_Defender\Module\Audit\Model\Settings::instance()->notification,
-							'frequency' => array(
-								'frequency' => \WP_Defender\Module\Audit\Model\Settings::instance()->frequency,
-								'day'       => \WP_Defender\Module\Audit\Model\Settings::instance()->day,
-								'time'      => \WP_Defender\Module\Audit\Model\Settings::instance()->time
-							)
-						),
-						'ip_lockouts'   => array(
-							//always true as we have blacklist listening
-							'active'    => true,
-							'enabled'   => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report,
-							//Report enabled Bool
-							'frequency' => array(
-								'frequency' => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_frequency,
-								'day'       => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_day,
-								'time'      => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_time
-							),
+					'advanced'				=> array(
+						'multi_factors_auth'    => array (
+							'active'   => Auth_Settings::instance()->enabled,
+							'enabled'  => ! empty( Auth_Settings::instance()->userRoles ),
 						),
 					),
 				)
@@ -841,7 +826,6 @@ class Utils extends Behavior {
 
 	public function _submitStatsToDev() {
 		$data = $this->generateStats();
-
 		$end_point = "https://premium.wpmudev.org/api/defender/v1/scan-results";
 		$res       = $this->devCall( $end_point, $data, array(
 			'method' => 'POST'

@@ -67,16 +67,6 @@ function wphb_filter_resource_to_footer( $value, $handle, $type ) {
 	return $value;
 }
 
-add_filter( 'wp_hummingbird_is_active_module_caching', 'wphb_caching_module_status' );
-function wphb_caching_module_status( $current ) {
-	$options = wphb_get_settings();
-	if ( ! $options['caching'] ) {
-		return false;
-	}
-
-	return $current;
-}
-
 add_filter( 'wp_hummingbird_is_active_module_uptime', 'wphb_uptime_module_status' );
 function wphb_uptime_module_status( $current ) {
 	$options = wphb_get_settings();

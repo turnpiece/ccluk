@@ -68,7 +68,12 @@
                 </div>
                 <div class="<?php echo ( $setting->active_server != 'nginx' ) ? 'wd-hide' : ''; ?> hardener-information hardener-information-nginx">
                     <?php
-                    $wp_content = str_replace( ABSPATH, '', WP_CONTENT_DIR );
+					if ( DIRECTORY_SEPARATOR == '\\' ) {
+						//Windows
+						$wp_content     = str_replace( ABSPATH, '', WP_CONTENT_DIR );
+					} else {
+						$wp_content     = str_replace( $_SERVER['DOCUMENT_ROOT'], '', WP_CONTENT_DIR );
+					}
 
                     $rules = "# Turn off directory indexing
 autoindex off;

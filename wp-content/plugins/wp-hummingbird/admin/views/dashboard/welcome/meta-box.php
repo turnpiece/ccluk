@@ -4,13 +4,14 @@
  *
  * @package Hummingbird
  *
- * @var int    $caching_issues  Number of issues.
- * @var bool   $cf_active       Cloudflare status.
- * @var int    $cf_current      Cloudflare expiry settings.
- * @var int    $gzip_issues     Number of gzip issues.
- * @var object $last_report     Last report object.
- * @var bool   $uptime_active   Uptime status.
- * @var object $uptime_report   Uptime report object.
+ * @var int    $caching_issues     Number of issues.
+ * @var bool   $cf_active          CloudFlare status.
+ * @var int    $cf_current         CloudFlare expiry settings.
+ * @var int    $gzip_issues        Number of gzip issues.
+ * @var object $last_report        Last report object.
+ * @var bool   $uptime_active      Uptime status.
+ * @var object $uptime_report      Uptime report object.
+ * @var bool   $report_dismissed   Last report dismissed warning.
  */
 
 ?>
@@ -26,12 +27,17 @@
 	<div class="wphb-block-entry-third">
 		<span class="not-present">
 			<?php
-			if ( $last_report && ! is_wp_error( $last_report ) ) :
+			if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
 				$error_class = ( 'aplus' === $last_report->data->score_class || 'a' === $last_report->data->score_class || 'b' === $last_report->data->score_class ) ? 'tick' : 'warning';
 				echo $last_report->data->score . "<i class='hb-wpmudev-icon-{$error_class}'></i><span class='score-span'>/100</span>";
-			elseif ( wphb_performance_is_doing_report() ) : ?>
+			elseif ( wphb_performance_is_doing_report() ) :
+				?>
 				<span class="wphb-scan-progress-text"></span>
-			<?php else : ?>
+			<?php
+			elseif ( $report_dismissed ) :
+				echo $last_report->data->score . '<span class="tooltip" tooltip="' . esc_attr( __( 'You have ignored your current performance test score', 'wphb' ) ) . '"><i class="hb-wpmudev-icon-info"></i></span><span class="score-span">/100</span>';
+			else :
+				?>
 				&mdash;
 			<?php endif; ?>
 		</span>

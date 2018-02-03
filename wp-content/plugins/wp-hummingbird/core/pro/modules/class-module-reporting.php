@@ -10,6 +10,13 @@ class WP_Hummingbird_Module_Reporting extends WP_Hummingbird_Module {
 	public function run() {}
 
 	/**
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * @since 1.7.1
+	 */
+	public function clear_cache() {}
+
+	/**
 	 * Send out an email report.
 	 *
 	 * @param mixed $last_report  Last report data.

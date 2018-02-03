@@ -45,6 +45,10 @@ class WP_Hummingbird_Pro {
 				'hummingbird_page_wphb-uptime',
 			),
 		);
+
+		if ( ! function_exists( 'is_plugin_active' ) ) {
+			include_once( ABSPATH . 'wp-includes/plugin.php' );
+		}
 		/** @noinspection PhpIncludeInspection */
 		include_once( wphb_plugin_dir() . 'core/pro/externals/dash-notice/wpmudev-dash-notification.php' );
 

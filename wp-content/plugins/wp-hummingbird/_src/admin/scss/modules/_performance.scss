@@ -1,0 +1,242 @@
+/* ****************************************************************************
+ * MODULES: PERFORMANCE
+ */
+
+.wpmud .performance-report-table {
+    text-align: left;
+    margin-top: 30px;
+    overflow: hidden;
+}
+
+.wpmud .performance-report-table .wpdui-btn {
+    display: inline-block;
+    margin: 10px 0 20px;
+    text-transform: uppercase;
+}
+
+.wpmud .performance-report-table .wpdui-btn:hover {
+    color: #ffffff;
+}
+
+.wpmud .performance-report-table a,
+.wpmud .performance-report-table a:hover {
+    color: #17A8E3;
+    overflow-wrap: break-word;
+    word-wrap: break-word;
+    word-break: break-all;
+    -ms-hyphens: auto;
+    -moz-hyphens: auto;
+    -webkit-hyphens: auto;
+    hyphens: auto;
+}
+
+.wpmud .performance-report-table p,
+.wpmud .performance-report-table ol li {
+    font-size: 13px !important;
+    color: #888888;
+    line-height: 22px;
+}
+
+.wpmud .performance-report-table ol > p {
+    margin-left: -30px;
+    margin-bottom: 15px;
+}
+
+.wpmud .performance-report-table > thead > tr > th:first-child {
+    padding-left: 30px;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item:hover td {
+    cursor: pointer;
+    border-bottom: 0 !important;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-score {
+    width: 137px;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-type {
+    color: #888888;
+    font-size: 13px;
+    transition: color .3s;
+    text-transform: capitalize;
+    width: 130px;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item:hover .wphb-performance-report-item-type {
+    color: #333333;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-cta {
+    text-align: right;
+    width: 225px;
+}
+
+.wpmud .wphb-performance-report-item .trigger-additional-content {
+    color: #888888;
+    cursor: pointer;
+    display: inline-block;
+    font-size: 14px;
+    line-height: 1em;
+    height: 14px;
+    margin: 8px 30px 8px 15px;
+    transition: color .3s;
+    vertical-align: middle;
+}
+
+.wpmud .wphb-performance-report-item .trigger-additional-content .dev-icon-caret_down:before {
+    display: inline-block;
+    transition: transform 0.5s;
+    transform: rotate(0);
+}
+
+.wpmud .wphb-performance-report-item-opened .trigger-additional-content .dev-icon-caret_down:before {
+    transform: rotate(-180deg);
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-opened,
+.wpmud .wphb-table.performance-report-table .wphb-performance-report-item-additional-content:hover,
+.wpmud .wphb-table.performance-report-table .wphb-performance-report-item-opened:hover {
+    background: #F8F8F8;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-additional-content {
+    background: #F8F8F8;
+    display: none;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-additional-content-opened {
+    display: table-row;
+}
+
+.wpmud .performance-report-table .wphb-performance-report-item-additional-content-opened > td {
+    border-top: 0 !important;
+}
+
+.wpmud .wphb-performance-report-item-additional-content-inner {
+    padding: 0 !important;
+}
+
+.wpmud .dev-box-performance-report-additional-content {
+    padding: 30px;
+    margin: 0 30px 30px;
+    border-radius: 5px;
+    background-color: #FFFFFF;
+    box-shadow: 0 2px 0 0 #EAEAEA;
+}
+
+.wpmud .dev-box-performance-report-additional-content h4:first-child {
+    margin-top: 0;
+}
+
+.wpmud .wphb-performance-report-item-additional-content h4,
+.wpmud .wphb-performance-report-item-additional-content h5 {
+    color: #333333;
+    font-size: 13px;
+    text-transform: none;
+    line-height: 23px;
+    margin: 20px 0 20px;
+    text-align: left;
+}
+
+/* Reporting */
+.wpmud .wrap-wphb-caching .list-results,
+.wpmud .wrap-wphb-performance .list-results {
+    max-height: 200px;
+    overflow-y: scroll;
+}
+
+.wpmud .wrap-wphb-performance .recipient {
+    margin-bottom: 10px;
+    padding: 5px 10px;
+}
+
+.wpmud .wrap-wphb-performance .recipient:hover {
+    border-radius: 4px;
+    background-color: #F8F8F8;
+}
+
+.wpmud .wrap-wphb-performance .recipient,
+.wpmud .wrap-wphb-performance .recipient .name,
+.wpmud .wrap-wphb-performance .add-recipient {
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: center;
+    align-content: center;
+}
+
+.wpmud .wrap-wphb-performance .recipient img {
+    -webkit-border-radius: 50px;
+    -moz-border-radius: 50px;
+    border-radius: 50px;
+    width: 30px;
+    height: 30px;
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.wpmud .wrap-wphb-performance .recipient .name {
+    color: #333333;
+    font-weight: 500;
+}
+
+.wpmud .wrap-wphb-performance .recipient a > i {
+    color: #888888;
+}
+
+.wpmud .wrap-wphb-performance .recipient:hover a > i {
+    color: #333333;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient {
+    margin-top: 15px;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient > * {
+    margin-bottom: 0;
+    border-radius: 0;
+    border: 1px solid #E6E6E6;
+    font-weight: normal;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient .wdv-icon-plus {
+    color: #FFFFFF;
+    font-size: 20px;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient > input::placeholder {
+    color: #AAAAAA;
+    font-weight: 400;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient #wphb-first-name {
+    border-radius: 4px 0 0 4px;
+    border-right: 0;
+    background-color: #F8F8F8;
+}
+
+.wpmud .wrap-wphb-performance .add-recipient #wphb-username-search {
+    background-color: #F8F8F8;
+}
+
+.wpmud .wrap-wphb-performance .wphb-tag {
+    -webkit-border-radius: 16px;
+    -moz-border-radius: 16px;
+    border-radius: 16px;
+    font-size: 13px;
+    padding: 4px 16px;
+    color: #fff;
+    text-transform: uppercase;
+}
+
+.wpmud .wrap-wphb-performance .wphb-tag.tag-generic {
+    background: #E6E6E6;
+    color: #333;
+}
+
+.wpmud .box-reporting-summary .wphb-block-entry-content,
+.wpmud .box-reporting-summary .content-box-two-cols-image-left .wphb-block-entry-content {
+    margin-top: 0;
+}

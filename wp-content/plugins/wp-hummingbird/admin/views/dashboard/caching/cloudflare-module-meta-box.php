@@ -4,14 +4,15 @@
  *
  * @package Hummingbird
  *
- * @var string $caching_url    Caching URL.
- * @var array  $human_results  Array of results. Readable format.
- * @var array  $recommended    Array of recommended values.
- * @var array  $results        Array of results. Raw.
- * @var int    $issues         Number of issues.
- * @var bool   $show_cf_notice Show the CloudFlare notice.
- * @var string $cf_notice      CloudFlare copy to show.
- * @var string $cf_connect_url Connect CloudFlare URL.
+ * @var string $caching_url              Caching URL.
+ * @var array  $human_results            Array of results. Readable format.
+ * @var array  $recommended              Array of recommended values.
+ * @var array  $results                  Array of results. Raw.
+ * @var int    $issues                   Number of issues.
+ * @var bool   $show_cf_notice           Show the CloudFlare notice.
+ * @var string $cf_notice                CloudFlare copy to show.
+ * @var string $cf_connect_url           Connect CloudFlare URL.
+ * @var array  $caching_type_tooltips    Caching types array if browser caching is enabled.
  */
 
 ?>
@@ -52,7 +53,7 @@
 					$tooltip_text        = __( 'Caching is disabled', 'wphb' );
 				}
 				?>
-				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?>">
+				<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( $type ); ?> tooltip-left" tooltip="<?php echo esc_attr( $caching_type_tooltips[ $type ] ); ?>">
 					<?php
 					switch ( $type ) {
 						case 'javascript':

@@ -39,7 +39,8 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	const IS_SCANNING_SLUG = 'wphb-minification-files-scanning';
 	const IS_SCANNED_SLUG = 'wphb-minification-files-scanned';
 	const CURRENT_STEP = 'wphb-minification-scan-step';
-
+	const MINIFICATION_NOTICE = 'wphb-notice-minification-optimized-show';
+	const HTTP2_NOTICE = 'wphb-notice-http2-info-show';
 
 	/**
 	 * Refresh status variables
@@ -57,6 +58,11 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		set_transient( self::IS_SCANNING_SLUG, true, 60 * 4 ); // 4 minutes max
 		delete_option( self::IS_SCANNED_SLUG );
 		update_option( self::CURRENT_STEP, 0 );
+
+		// Reset notice status
+		update_site_option( self::MINIFICATION_NOTICE, 'yes' );
+		update_site_option( self::HTTP2_NOTICE, 'yes' );
+
 		$this->refresh_status();
 	}
 
@@ -139,7 +145,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 			'orderby'        => 'rand',
 			'posts_per_page' => '1',
 			'ignore_sticky_posts' => true,
-			'post_status' => 'publish'
+			'post_status' => 'publish',
 		);
 
 		$urls = array();

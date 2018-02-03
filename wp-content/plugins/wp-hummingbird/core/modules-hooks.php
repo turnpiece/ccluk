@@ -8,7 +8,7 @@
  * parameter. If we include them there are two notices in the error log.
  * On the Minification dedicated page we include files without sizes.
  */
-add_filter( 'wphb_minification_display_enqueued_file', 'wphb_minification_hooks_hide_jquery_switchers', 10, 3 );
+//add_filter( 'wphb_minification_display_enqueued_file', 'wphb_minification_hooks_hide_jquery_switchers', 10, 3 );
 function wphb_minification_hooks_hide_jquery_switchers( $display, $handle, $type ) {
 	if ( 'toplevel_page_wphb' === get_current_screen()->id ) {
 		if ( ( 'scripts' === $type && in_array( $handle['handle'], array( 'jquery', 'jquery-core', 'jquery-migrate' ) ) ) || ( ! isset( $handle['original_size'] ) ) ) {
@@ -19,7 +19,6 @@ function wphb_minification_hooks_hide_jquery_switchers( $display, $handle, $type
 			return false;
 		}
 	}
-
 
 	return $display;
 }

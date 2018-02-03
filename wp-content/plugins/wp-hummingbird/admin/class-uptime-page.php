@@ -40,7 +40,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	public function register_meta_boxes() {
 		// Check if Uptime is active in the server.
-		if ( wphb_is_uptime_remotely_enabled() ) {
+		if ( WP_Hummingbird_Module_Uptime::is_remotely_enabled() ) {
 			wphb_uptime_enable_locally();
 		} else {
 			wphb_uptime_disable_locally();
@@ -100,7 +100,10 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				return;
 			}
 
-			$result = wphb_uptime_enable();
+			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+			$uptime_module = wphb_get_module( 'uptime' );
+			$result = $uptime_module->enable();
+
 			if ( is_wp_error( $result ) ) {
 				$redirect_to = add_query_arg( 'error', 'true', wphb_get_admin_menu_url( 'uptime' ) );
 				$redirect_to = add_query_arg( array(
@@ -125,7 +128,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				return;
 			}
 
-			wphb_uptime_disable();
+			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+			$uptime_module = wphb_get_module( 'uptime' );
+			$uptime_module->disable();
 
 			wp_redirect( wphb_get_admin_menu_url( 'uptime' ) );
 		}
@@ -138,7 +143,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			}
 
 			// Start the test
-			wphb_uptime_clear_cache();
+			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+			$uptime_module = wphb_get_module( 'uptime' );
+			$uptime_module->clear_cache();
 
 			// Start the test
 			wphb_uptime_get_last_report( 'week', true );
