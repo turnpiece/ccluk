@@ -1,0 +1,36 @@
+/* styles for pages */
+
+body.page {
+	#content {
+		.row {
+			margin-left: 0;
+			margin-right: 0;
+		}
+	}
+	#secondary {
+		.widget_subpages {
+			position: fixed;
+
+			ul > li {
+
+				a {
+					border-left: 10px solid;
+					padding-left: 15px;
+					font-weight: 600;
+
+					&:hover {
+						color: $blue;
+					}
+				}
+
+				&.widget_subpages_current_page {
+					a {
+						color: $blue;
+						pointer-events: none;
+			  			cursor: default;
+					}
+				}
+			}
+		}
+	}
+}
