@@ -32,7 +32,9 @@ Custom stylesheet.
             display: block;
             margin: 0; }
           .home-page #main .section .section-content .list-item .entry-header .entry-title {
-            margin-top: 12px; }
+            margin-top: 12px;
+            line-height: 1.5;
+            font-size: 22px; }
           .home-page #main .section .section-content .list-item .entry-header img.wp-post-image {
             margin: 0; }
         .home-page #main .section .section-content .list-item .entry-content .item-meta .activity {
