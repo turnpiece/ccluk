@@ -147,6 +147,7 @@ body.page #content .row {
 body.page #secondary .widget_subpages {
   position: fixed; }
   body.page #secondary .widget_subpages ul > li a {
+    display: inline-block;
     border-left: 10px solid;
     padding-left: 15px;
     font-weight: 600; }
