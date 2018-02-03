@@ -70,20 +70,6 @@ h3 {
 	font-size: 18px;
 }
 
-.page {
-	article {
-		> .entry-header {
-			margin: 24px 0;
-		}
-	}
-
-	#secondary, 
-	.default-page+#secondary,
-	&.page-template #secondary {
-    	padding-top: 100px;
-   	}
-}
-
 .archive {
 	#content {
 		> .archive-header {
@@ -99,12 +85,6 @@ h3 {
 .entry-title {
 	margin-top: 10px;
 	margin-top: 1rem;
-}
-
-.page {
-	.entry-title {
-		color: $blue;
-	}
 }
 
 #save_as_draft, 

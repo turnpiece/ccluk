@@ -1,12 +1,30 @@
 /* styles for pages */
 
 body.page {
+
+	article {
+		> .entry-header {
+			margin: 24px 0;
+
+			.entry-title {
+				color: $blue;
+			}
+		}
+	}
+
+	#secondary, 
+	.default-page+#secondary,
+	&.page-template #secondary {
+    	padding-top: 50px;
+   	}
+
 	#content {
 		.row {
 			margin-left: 0;
 			margin-right: 0;
 		}
 	}
+
 	#secondary {
 		.widget_subpages {
 			position: fixed;
@@ -20,6 +38,14 @@ body.page {
 
 					&:hover {
 						color: $blue;
+					}
+				}
+
+				&.first-menu-item {
+					a {
+						font-size: 110%;
+						border-left: 0;
+						padding-left: 0;
 					}
 				}
 
