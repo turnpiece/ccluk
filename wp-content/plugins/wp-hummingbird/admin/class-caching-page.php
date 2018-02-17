@@ -167,12 +167,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				$page_types = array_keys( $_POST['page_types'] );
 			}
 
-			$cache_settings = array();
-			$form_data = $_POST['settings'];
-			$cache_settings['logged_in']    = isset( $form_data['logged-in'] ) ? absint( $form_data['logged-in'] ) : 0;
-			$cache_settings['url_queries']  = isset( $form_data['url-queries'] ) ? absint( $form_data['url-queries'] ) : 0;
-			$cache_settings['clear_update'] = isset( $form_data['clear-update'] ) ? absint( $form_data['clear-update'] ) : 0;
-			$cache_settings['debug_log']    = isset( $form_data['debug-log'] ) ? absint( $form_data['debug-log'] ) : 0;
+			$cache_settings = array(
+				'logged_in'    => 0,
+				'url_queries'  => 0,
+				'clear_update' => 0,
+				'debug_log'    => 0,
+			);
+
+			if ( isset( $_POST['settings'] ) ) {
+				$form_data = $_POST['settings'];
+				$cache_settings['logged_in']    = isset( $form_data['logged-in'] ) ? absint( $form_data['logged-in'] ) : 0;
+				$cache_settings['url_queries']  = isset( $form_data['url-queries'] ) ? absint( $form_data['url-queries'] ) : 0;
+				$cache_settings['clear_update'] = isset( $form_data['clear-update'] ) ? absint( $form_data['clear-update'] ) : 0;
+				$cache_settings['debug_log']    = isset( $form_data['debug-log'] ) ? absint( $form_data['debug-log'] ) : 0;
+			}
 
 			$url_strings = '';
 			if ( isset( $_POST['url_strings'] ) ) {
@@ -300,6 +308,23 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				$module = wphb_get_module( 'page-caching' );
 				$module->disable();
 				break;
+			// Download page caching logs.
+			case 'download-logs':
+				$content = file_get_contents( WP_CONTENT_DIR . '/wphb-cache/page-caching-log.php' );
+				/* Remove <?php die(); ?> from file */
+				$content = substr( $content, 15 );
+
+				header( 'Content-Description: Page caching log download' );
+				header( 'Content-Type: text/plain' );
+				header( 'Content-Disposition: attachment; filename=page-caching.log' );
+				header( 'Content-Transfer-Encoding: binary' );
+				header( 'Content-Length: ' . strlen( $content ) );
+				header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+				header( 'Expires: 0' );
+				header( 'Pragma: public' );
+
+				echo $content;
+				exit;
 			// Deactivate Cloudflare.
 			case 'cf-deactivate':
 				wphb_cloudflare_disconnect();
@@ -588,21 +613,24 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		/* @var WP_Hummingbird_Module_Page_Caching $module */
 		$module = wphb_get_module( 'page-caching' );
 
-		$settings = $module->get_settings();
-
 		$deactivate_url = add_query_arg( array(
 			'type' => 'pc-deactivate',
 			'run'  => 'true',
 		));
 		$deactivate_url = wp_nonce_url( $deactivate_url, 'wphb-run-caching' );
 
-		$page_types = $module->get_page_types();
+		$download_url = add_query_arg( array(
+			'type' => 'download-logs',
+			'run'  => 'true',
+		));
+		$download_url = wp_nonce_url( $download_url, 'wphb-run-caching' );
 
 		$this->view( 'caching/page-caching-meta-box', array(
 			'error'          => $module->error,
 			'deactivate_url' => $deactivate_url,
-			'settings'       => $settings,
-			'pages'          => $page_types,
+			'settings'       => $module->get_settings(),
+			'pages'          => WP_Hummingbird_Module_Page_Caching::get_page_types(),
+			'download_url'   => $download_url,
 		) );
 	}
 
@@ -678,12 +706,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = wphb_get_module( 'cloudflare' );
 		$show_cf_notice = false;
-		if ( ! ($cf_module->is_active() && $cf_module->is_connected() && $cf_module->is_zone_selected() ) ) {
-			if ( ! get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' !== get_site_option( 'wphb-cloudflare-dash-notice' ) ) {
-				$show_cf_notice = true;
-			}
+		if ( ! $cf_module->is_connected() && ( ! get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' !== get_site_option( 'wphb-cloudflare-dash-notice' ) ) ) {
+			$show_cf_notice = true;
 		}
-		$cf_notice = $this->cf_server ? __( 'Ahoi, we’ve detected you’re using CloudFlare!', 'wphb' ) : __( 'Using CloudFlare?', 'wphb' );
+		$cf_notice = $cf_module->has_cloudflare( true ) ? __( 'Ahoi, we’ve detected you’re using CloudFlare!', 'wphb' ) : __( 'Using CloudFlare?', 'wphb' );
 
 		$this->view( 'caching/browser-caching-meta-box', array(
 			'htaccess_issue'         => $htaccess_issue,
@@ -694,6 +720,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			'show_cf_notice'         => $show_cf_notice,
 			'cf_notice'              => $cf_notice,
 			'cf_server'              => $this->cf_server,
+			'cf_active'              => $this->cloudflare,
 			'caching_type_tooltips'  => wphb_get_browser_caching_types(),
 		));
 	}
@@ -747,16 +774,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		$server_type = wphb_get_server_type();
 		if ( $this->cloudflare ) {
 			$server_type = 'cloudflare';
-			// If htaccess has been written, remove it.
-			if ( $htaccess_writable && $this->htaccess_written ) {
-				$result = WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
-				if ( $result ) {
-					// Clear cached status.
-					/* @var WP_Hummingbird_Module_Caching $caching_module */
-					$caching_module = wphb_get_module( 'caching' );
-					$caching_module->clear_cache();
-				}
-			}
+			// Clear cached status.
+			/* @var WP_Hummingbird_Module_Caching $caching_module */
+			$caching_module = wphb_get_module( 'caching' );
+			$caching_module->clear_cache();
 		} elseif ( $this->cf_server ) {
 			$server_type = 'cloudflare';
 			/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
@@ -902,11 +923,11 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * Reload snippet after new expiration interval has been selected.
 	 *
 	 * @since 1.6.1
-	 * @return array|void
+	 * @return array|bool
 	 */
 	public function caching_reload_snippet() {
 		if ( ! current_user_can( wphb_get_admin_capability() ) ) {
-			return;
+			return false;
 		}
 
 		if ( ! isset( $_POST['hb_server_type'] ) ) { // Input var okay.
@@ -919,7 +940,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		$updated_file = false;
 		if ( true === $this->htaccess_written && 'apache' === $type ) {
-			$updated_file = WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
+			WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
 			$updated_file = WP_Hummingbird_Module_Server::save_htaccess( 'caching' );
 		}
 		$response = array(

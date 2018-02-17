@@ -47,16 +47,15 @@ class WP_Hummingbird_API_Request_Cloudflare extends WP_Hummingbird_API_Request {
 		$code = wp_remote_retrieve_response_code( $response );
 		$body = wp_remote_retrieve_body( $response );
 		$body = json_decode( $body );
-		if ( $body && $code != 200 ) {
+		if ( $body && 200 != $code ) {
+			/* translators: %s: cloudflare error */
 			throw new WP_Hummingbird_API_Exception( sprintf( __( 'Cloudflare error: %s', 'wphb' ), $body->errors[0]->message ), $code );
-		}
-		elseif ( false === $body ) {
+		} elseif ( false === $body ) {
 			throw new WP_Hummingbird_API_Exception( __( 'Cloudflare unknown error', 'wphb' ), $code );
 		}
 
 		return $body;
 
 	}
-
 
 }

@@ -72,6 +72,9 @@
 					?>
 				</span>
 			<?php endforeach; ?>
+			<span class="wphb-filename-extension wphb-filename-extension-other tooltip-left" tooltip="<?php echo esc_attr( $caching_type_tooltips['cloudflare'] ); ?>">
+				oth
+			</span>
 		</div>
 		<div>
 			<span class="wphb-button-label wphb-button-label-<?php echo esc_attr( $result_status_color ); ?> tooltip-right" tooltip="<?php echo esc_attr( $tooltip_text ); ?>">

@@ -11,7 +11,7 @@ class WP_Hummingbird_Pro_AJAX {
 	 * WP_Hummingbird_Pro_AJAX constructor.
 	 */
 	public function __construct() {
-		// Save settings.
+		// Save performance scan settings.
 		add_action( 'wp_ajax_wphb_pro_performance_save_reports_settings', array( $this, 'performance_save_scan_settings' ) );
 		// Add the selected user.
 		add_action( 'wp_ajax_wphb_pro_performance_add_recipient', array( $this, 'performance_add_recipient' ) );

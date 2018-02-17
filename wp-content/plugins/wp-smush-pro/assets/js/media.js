@@ -6,64 +6,67 @@
 (function( $, _ ) {
 
 	// Local reference to the WordPress media namespace.
-	var media = wp.media;
+	var smush_media = wp.media;
 
-	// Local instance of the Attachment Details TwoColumn used in the edit attachment modal view
-    var smushMediaTwoColumn = media.view.Attachment.Details.TwoColumn;
+	if( 'undefined' != typeof smush_media.view &&
+        'undefined' != typeof smush_media.view.Attachment.Details.TwoColumn ) {
+        // Local instance of the Attachment Details TwoColumn used in the edit attachment modal view
+        var smushMediaTwoColumn = smush_media.view.Attachment.Details.TwoColumn;
 
-	/**
-	 * Add Smush details to attachment.
-	 */
-    media.view.Attachment.Details.TwoColumn = smushMediaTwoColumn.extend( {
+        /**
+         * Add Smush details to attachment.
+         */
+        smush_media.view.Attachment.Details.TwoColumn = smushMediaTwoColumn.extend({
 
-		render: function() {
-			// Get Smush status for the image
-			this.getSmushDetails( this.model.get( 'id' ) );
-		},
+            render: function () {
+                // Get Smush status for the image
+                this.getSmushDetails(this.model.get('id'));
+            },
 
-        getSmushDetails: function( id ) {
-			wp.ajax.send( 'smush_get_attachment_details', {
-				data: {
-					_nonce: smush_vars.nonce.get_smush_status,
-					id: id
-				}
-			} ).done( _.bind( this.renderSmush, this ) );
-		},
+            getSmushDetails: function (id) {
+                wp.ajax.send('smush_get_attachment_details', {
+                    data: {
+                        _nonce: smush_vars.nonce.get_smush_status,
+                        id: id
+                    }
+                }).done(_.bind(this.renderSmush, this));
+            },
 
-		renderSmush: function( response ) {
-			// Render parent media.view.Attachment.Details
-            smushMediaTwoColumn.prototype.render.apply( this );
+            renderSmush: function (response) {
+                // Render parent media.view.Attachment.Details
+                smushMediaTwoColumn.prototype.render.apply(this);
 
-			this.renderSmushStatus( response );
-		},
+                this.renderSmushStatus(response);
+            },
 
-        renderSmushStatus: function( response ) {
-			if ( ! response ) {
-				return;
-			}
-			var $detailsHtml = this.$el.find( '.attachment-compat' );
-			var html = this.generateHTML( response );
-			$detailsHtml.append( html );
-		},
+            renderSmushStatus: function (response) {
+                if (!response) {
+                    return;
+                }
+                var $detailsHtml = this.$el.find('.attachment-compat');
+                var html = this.generateHTML(response);
+                $detailsHtml.append(html);
+            },
 
-        generateHTML: function (response) {
-            var template = _.template('<label class="setting smush-stats" data-setting="description"><span class="name"><%= label %></span><span class="value"><%= value %></span></label>');
-            var html = template({
-                label: smush_vars.strings['stats_label'],
-                value: response
-            });
+            generateHTML: function (response) {
+                var template = _.template('<label class="setting smush-stats" data-setting="description"><span class="name"><%= label %></span><span class="value"><%= value %></span></label>');
+                var html = template({
+                    label: smush_vars.strings['stats_label'],
+                    value: response
+                });
 
-            return html;
-        }
-	} );
+                return html;
+            }
+        });
+    }
 
     // Local instance of the Attachment Details TwoColumn used in the edit attachment modal view
-    var smushAttachmentDetails = media.view.Attachment.Details;
+    var smushAttachmentDetails = smush_media.view.Attachment.Details;
 
     /**
      * Add Smush details to attachment.
      */
-    media.view.Attachment.Details = smushAttachmentDetails.extend( {
+    smush_media.view.Attachment.Details = smushAttachmentDetails.extend( {
 
         render: function() {
             // Get Smush status for the image

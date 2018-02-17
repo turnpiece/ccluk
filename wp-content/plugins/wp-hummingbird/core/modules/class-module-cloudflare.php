@@ -20,7 +20,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	protected $name = 'Cloudflare';
 
 	/**
-	 * Initializes Minify module
+	 * Initializes Cloudflare module
 	 */
 	public function init() {
 		if ( self::has_cloudflare() ) {
@@ -275,6 +275,9 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 
 	/**
 	 * Get a list of Cloudflare zones
+	 *
+	 * @param int $page
+	 * @param array $zones
 	 *
 	 * @return WP_Error|array
 	 */

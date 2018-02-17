@@ -13,8 +13,8 @@ class WP_Hummingbird_Sources_Collector {
 	private $collection_updated = false;
 
 	private $collected = array(
-		'styles' => array(),
-		'scripts' => array()
+		'styles'  => array(),
+		'scripts' => array(),
 	);
 
 
@@ -31,10 +31,11 @@ class WP_Hummingbird_Sources_Collector {
 	}
 
 	public function add_to_collection( $registered, $type ) {
-		$registered = (array)$registered;
+		$registered = (array) $registered;
 
-		if ( isset( $this->collected[ $type ][ $registered['handle'] ] ) && $registered === $this->collected[ $type ][ $registered['handle'] ] )
+		if ( isset( $this->collected[ $type ][ $registered['handle'] ] ) && $registered === $this->collected[ $type ][ $registered['handle'] ] ) {
 			return;
+		}
 
 		$this->collection_updated = true;
 		$this->collected[ $type ][ $registered['handle'] ] = $registered;
@@ -43,8 +44,8 @@ class WP_Hummingbird_Sources_Collector {
 
 	public static function get_collection() {
 		return array(
-			'styles' => get_option( self::$styles_option, array() ),
-			'scripts' => get_option( self::$scripts_option, array() )
+			'styles'  => get_option( self::$styles_option, array() ),
+			'scripts' => get_option( self::$scripts_option, array() ),
 		);
 	}
 
@@ -69,6 +70,7 @@ class WP_Hummingbird_Sources_Collector {
 	 * @TODO Finish
 	 * @param $plugin
 	 */
+	/*
 	public static function remove_sources_from_plugin( $plugin ) {
 		$collection = self::get_collection();
 		$plugin_dir = '/plugins/' . dirname( $plugin );
@@ -76,5 +78,6 @@ class WP_Hummingbird_Sources_Collector {
 
 		}
 	}
+	*/
 
 }

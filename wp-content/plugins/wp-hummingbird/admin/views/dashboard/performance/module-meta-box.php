@@ -9,11 +9,11 @@
  */
 
 ?>
-<div class="content">
+<div class="content with-padding">
 	<p><?php esc_html_e( 'Here are your latest performance test results. A score above 85 is considered a good benchmark.', 'wphb' ); ?></p>
 </div>
 
-<div class="wphb-dash-table three-columns">
+<div class="wphb-dash-table three-columns no-top-padding">
 	<div class="wphb-dash-table-header">
 		<span><?php esc_html_e( 'Recommendation', 'wphb' ); ?></span>
 		<span><?php esc_html_e( 'Score /100', 'wphb' ); ?></span>
@@ -21,7 +21,7 @@
 	</div>
 
 	<?php foreach ( $report->rule_result as $rule => $rule_result ) : ?>
-		<div class="wphb-dash-table-row">
+		<div class="wphb-dash-table-row wphb-row-grade-<?php echo esc_attr( $rule_result->impact_score_class ) ?>">
 			<div>
 				<?php echo esc_html( $rule_result->label ); ?>
 			</div>

@@ -55,6 +55,8 @@ function wphb_get_default_settings() {
 		'minify-blog' => true,
 		// Only for multisite.
 		'minify-cdn'  => false,
+		// Enable logging (per site).
+		'minify_log'  => false,
 
 		'block'       => array(
 			'scripts' => array(),
@@ -108,7 +110,7 @@ function wphb_get_default_settings() {
  * @return array
  */
 function wphb_get_blog_option_names() {
-	return array( 'block', 'minify-blog', 'minify-cdn', 'dont_minify', 'defer', 'inline', 'combine', 'position', 'max_files_in_group', 'last_change' );
+	return array( 'block', 'minify-blog', 'minify-cdn', 'minify_log', 'dont_minify', 'defer', 'inline', 'combine', 'position', 'max_files_in_group', 'last_change' );
 }
 
 /**
@@ -225,4 +227,47 @@ function wphb_get_cdn_status() {
 	}
 
 	return $current;
+}
+
+/**
+ * Get option.
+ *
+ * @param  string $option_name Return a single WP Hummingbird option.
+ * @return mixed
+ */
+function wphb_get_option( $option_name ) {
+	if ( ! is_main_site() ) {
+		$option = get_option( $option_name );
+	} else {
+		$option = get_site_option( $option_name );
+	}
+
+	return $option;
+}
+
+/**
+ * Update option.
+ *
+ * @param  string $option_name  WP Hummingbird option name.
+ * @param  mixed  $option_value WP Hummingbird option value.
+ */
+function wphb_update_option( $option_name, $option_value ) {
+	if ( ! is_main_site() ) {
+		update_option( $option_name, $option_value );
+	} else {
+		update_site_option( $option_name, $option_value );
+	}
+}
+
+/**
+ * Delete option.
+ *
+ * @param  string $option_name Delete a single WP Hummingbird option.
+ */
+function wphb_delete_option( $option_name ) {
+	if ( ! is_main_site() ) {
+		delete_option( $option_name );
+	} else {
+		delete_site_option( $option_name );
+	}
 }

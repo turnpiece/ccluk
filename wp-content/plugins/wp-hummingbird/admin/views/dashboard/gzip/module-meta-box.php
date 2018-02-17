@@ -15,8 +15,8 @@
 		<div class="wphb-notice wphb-notice-warning">
 			<p>
 				<?php
-				printf(
-					/* translators: %s: Number of inactive types */
+					printf(
+						/* translators: %s: Number of inactive types */
 					__( '%s of your compression types are inactive.', 'wphb' ), absint( $inactive_types ) );
 				?>
 			</p>
@@ -59,10 +59,9 @@
 
 			<div>
 				<span class="wphb-button-label wphb-button-label-<?php echo esc_attr( $result_status_color ); ?> tooltip-right"
-					  tooltip="<?php printf(
-						/* translators: %1$s: compressions status; %2$s: compression type */
-						esc_html__( 'Gzip compression is %1$s for %2$s', 'wphb' ),
-						esc_html( strtolower( $result_status ) ), esc_html( $type ) ); ?>">
+					  tooltip="<?php printf( /* translators: %1$s: compressions status; %2$s: compression type */
+							esc_html__( 'Gzip compression is %1$s for %2$s', 'wphb' ),
+							esc_html( strtolower( $result_status ) ), esc_html( $type ) ); ?>">
 					<?php echo esc_html( $result_status ); ?>
 				</span>
 			</div>

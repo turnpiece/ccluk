@@ -134,10 +134,14 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	public function get_group_by_group_id( $group_id ) {
 		/** @var WP_Hummingbird_Module_Minify_Group $group */
 		$groups = $this->get_groups();
-		$result = wp_list_filter( $groups, array( 'group_id' => $group_id ) );
+		$result = wp_list_filter( $groups, array(
+			'group_id' => $group_id,
+		) );
+
 		if ( $result ) {
 			return $result[ key( $result ) ];
 		}
+
 		return false;
 	}
 
@@ -168,6 +172,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 *
 	 * The function will keep the groups order instead of adding them at the end of the list
 	 *
+	 * @param $key_or_hash
 	 * @param $new_handles_order
 	 *
 	 * @return bool
@@ -249,7 +254,6 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 *
 	 */
 	public function preprocess_groups() {
-
 		foreach ( $this->get_groups() as $group ) {
 			/** @var WP_Hummingbird_Module_Minify_Group $group */
 			$group->maybe_load_file();
@@ -258,15 +262,13 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 			if ( $group->should_process_group() && $group->file_id && $group_src && ! $group->is_expired() ) {
 				// The group has its file and is not expired
 				$this->set_group_status( $group->hash, 'ready' );
-			}
-			elseif ( ( $group->should_process_group() && ( empty( $group_src ) ) || $group->is_expired() ) ) {
+			} elseif ( ( $group->should_process_group() && ( empty( $group_src ) ) || $group->is_expired() ) ) {
 				// The group must be processed but it has no file yet
 				$this->set_group_status( $group->hash, 'process' );
 
 				// Delete file in case there's one (but is expired)
 				$group->delete_file();
-			}
-			else {
+			} else {
 				// The group won't be processed
 				// Use the original handles and their URLs instead
 				$this->set_group_status( $group->hash, 'only-handles' );
@@ -314,11 +316,9 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 							}, $intersect )
 						);
 
-					}
-					else {
+					} else {
 						$deps[ $search_group_hash ] = array_merge( $deps[ $search_group_hash ], array( $g->group_id ) );
 					}
-
 				}
 			}
 

@@ -19,8 +19,8 @@
 
 	<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
 		<img class="wphb-image"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-dash-top.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-dash-top@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-dash-top.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-dash-top@2x.png'; ?> 2x"
 			 alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 	</div>
 

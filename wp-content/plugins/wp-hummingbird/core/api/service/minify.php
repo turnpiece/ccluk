@@ -11,6 +11,8 @@ class WP_Hummingbird_API_Service_Minify extends WP_Hummingbird_API_Service {
 	/**
 	 * Check if performance test has finished on server
 	 *
+	 * @param array $files
+	 *
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function process_files( $files = array() ) {
@@ -22,10 +24,9 @@ class WP_Hummingbird_API_Service_Minify extends WP_Hummingbird_API_Service {
 		if ( is_multisite() && ! is_subdomain_install() ) {
 			$blog_details = get_blog_details( get_current_blog_id() );
 			$args['path'] = $blog_details->path;
-		}
-		elseif ( is_multisite() && is_subdomain_install() ) {
+		} elseif ( is_multisite() && is_subdomain_install() ) {
 			global $current_site;
-			$blog_details = get_blog_details( get_current_blog_id() );
+			//$blog_details = get_blog_details( get_current_blog_id() );
 			$pattern = '/(https?\:\/\/)?(.*)\.' . $current_site->domain . '(.*)/';
 			if ( preg_match_all( $pattern, home_url(), $matches ) ) {
 				$args['path'] = $matches[2][0];

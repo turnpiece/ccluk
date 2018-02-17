@@ -56,7 +56,7 @@
                                                 <?php if ( \WP_Defender\Behavior\Utils::instance()->getAPIKey() ): ?>
 	                                                <?php echo $model->getCount( 'vuln' ) == 0 ? ' <i class="def-icon icon-tick"></i>' : '<span class="def-tag tag-error">' . $model->getCount( 'vuln' ) . '</span>' ?>
                                                 <?php else: ?>
-                                                    <a href="#pro-feature" rel="dialog"
+                                                    <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_summary_pro_tag') ?>" target="_blank"
                                                        class="button button-pre button-small"
                                                        tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
                                                         <?php _e( "Pro Feature", wp_defender()->domain ) ?>
@@ -72,7 +72,7 @@
                                                 <?php if ( \WP_Defender\Behavior\Utils::instance()->getAPIKey() ): ?>
 	                                                <?php echo $model->getCount( 'content' ) == 0 ? ' <i class="def-icon icon-tick"></i>' : '<span class="def-tag tag-error">' . $model->getCount( 'content' ) . '</span>' ?>
                                                 <?php else: ?>
-                                                    <a href="#pro-feature" rel="dialog"
+                                                    <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_summary_pro_tag') ?>" target="_blank"
                                                        class="button button-pre button-small"
                                                        tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>" >
                                                         <?php _e( "Pro Feature", wp_defender()->domain ) ?>

@@ -1,13 +1,13 @@
 === Smush Image Compression and Optimization ===
 Plugin Name: Smush Image Compression and Optimization
-Version: 2.7.7
+Version: 2.7.8
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
 Contributors: WPMUDEV, alexdunae
 Tags: image, resize, optimize, compress, performance, lossless, lossy, photo, pictures, optimize JPG, compress PNG, Smush WordPress Compression, Smush.it
 Requires at least: 4.8
-Tested up to: 4.9.2
-Stable tag: 2.7.7
+Tested up to: 4.9.4
+Stable tag: 2.7.8
 Requires PHP: 5.2.4
 License: GPL v2 - http://www.gnu.org/licenses/old-licenses/gpl-2.0.html
 
@@ -647,4 +647,4 @@ Hey, one more thing... we hope you <a href="http://profiles.wordpress.org/WPMUDE
 Originally written by Alex Dunae at Dialect ([dialect.ca](http://dialect.ca/?wp_smush_it), e-mail 'alex' at 'dialect dot ca'), 2008-11.
 
 
-87274-1517694368-au
+87274-1518896138-au

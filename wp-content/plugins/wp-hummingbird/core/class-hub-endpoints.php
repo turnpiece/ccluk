@@ -44,7 +44,8 @@ class WP_Hummingbird_Hub_Endpoints {
 			$filename .= '.php';
 		}
 
-		if ( file_exists( wphb_plugin_dir() . 'core/hub-endpoints/' . $filename ) ) {
+		if ( file_exists( WPHB_DIR_PATH . 'core/hub-endpoints/' . $filename ) ) {
+			/* @noinspection PhpIncludeInspection */
 			include_once 'hub-endpoints/' . $filename;
 		}
 	}

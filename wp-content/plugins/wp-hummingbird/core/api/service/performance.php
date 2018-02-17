@@ -97,8 +97,8 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 
 		$params = array(
 			'html'       => $domain,
-			'javascript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'css'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
 
 		return $this->request->post( 'test/gzip/', array(
@@ -114,13 +114,11 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function check_cache() {
-		$dummy_url = wphb_plugin_url() . 'core/modules/dummy/';
-
 		$params = array(
-			'javascript' => $dummy_url . 'dummy-js.js',
-			'css'        => $dummy_url . 'dummy-style.css',
-			'media'      => $dummy_url . 'dummy-media.mp3',
-			'images'     => $dummy_url . 'dummy-image.png',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
+			'media'      => WPHB_DIR_URL . 'core/modules/dummy/dummy-media.mp3',
+			'images'     => WPHB_DIR_URL . 'core/modules/dummy/dummy-image.png',
 		);
 
 		return $this->request->post( 'test/cache/', array(

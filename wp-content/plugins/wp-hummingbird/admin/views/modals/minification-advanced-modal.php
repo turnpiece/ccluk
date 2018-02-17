@@ -12,10 +12,10 @@
 
 		<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
 			<img class="wphb-image wphb-image-center"
-			     src="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-minify-summary.png'; ?>"
-			     srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-minify-summary@2x.png'; ?> 2x"
-			     alt="<?php esc_attr_e( 'Hummingbird','wphb' ); ?>">
+				 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png'; ?>"
+				 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png'; ?> 2x"
+				 alt="<?php esc_attr_e( 'Hummingbird','wphb' ); ?>">
 		</div>
 
 	</div>
-</dialog><!-- end wphb-upgrade-membership-modal -->
+</dialog><!-- end wphb-advanced-minification-modal -->

@@ -44,8 +44,8 @@
 		<div class="content-box content-box-two-cols-image-left">
 			<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
 				<img class="wphb-image"
-					 src="<?php echo wphb_plugin_url() . 'admin/assets/image/hummingbird-upsell-minify.png'; ?>"
-					 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/hummingbird-upsell-minify@2x.png'; ?> 2x"
+					 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify.png'; ?>"
+					 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify@2x.png'; ?> 2x"
 					 alt="<?php esc_attr_e( 'WP Smush free installed', 'wphb' ); ?>">
 			</div>
 			<div class="wphb-block-entry-content wphb-upsell-free-message">
@@ -60,14 +60,32 @@
 		</div><!-- end content-box -->
 	</div><!-- end settings-form -->
 	<?php wphb_membership_modal(); ?>
-<?php endif; ?>
+<?php endif;
+
+$settings = wphb_get_settings();
+?>
+<div class="row settings-form with-bottom-border with-padding">
+	<div class="col-third">
+		<strong><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></strong>
+		<span class="sub">
+			<?php esc_html_e( 'If you’re having issues with minification, turn on the debug log to get insight into what’s going on.', 'wphb' ); ?>
+		</span>
+	</div>
+	<div class="col-two-third">
+		<span class="toggle tooltip-right" tooltip="<?php esc_attr_e( 'Enable debug log', 'wphb' ); ?>">
+			<input type="checkbox" class="toggle-checkbox" name="debug_log" id="debug_log" <?php checked( $settings['minify_log'] ); ?>>
+			<label for="debug_log" class="toggle-label small"></label>
+		</span>
+		<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
+	</div>
+</div>
 
 <div class="row settings-form with-bottom-border with-padding">
 	<div class="col-third">
 		<strong><?php esc_html_e( 'Reset to defaults', 'wphb' ); ?></strong>
 		<span class="sub">
-				<?php esc_html_e( 'If your frontend has fallen apart or you just want to go back to the default settings you can use this button to do so. It will clear all your settings and run a new file check.', 'wphb' ); ?>
-			</span>
+			<?php esc_html_e( 'If your frontend has fallen apart or you just want to go back to the default settings you can use this button to do so. It will clear all your settings and run a new file check.', 'wphb' ); ?>
+		</span>
 	</div>
 	<div class="col-two-third">
 		<a href="<?php echo esc_url( add_query_arg( 'reset-minification', 'true' ) ); ?>" class="button button-ghost">
@@ -80,8 +98,8 @@
 	<div class="col-third">
 		<strong><?php esc_html_e( 'Deactivate', 'wphb' ); ?></strong>
 		<span class="sub">
-				<?php esc_html_e( 'If you no longer wish to use Hummingbird’s Minification feature you can turn it off completely', 'wphb' ); ?>
-			</span>
+			<?php esc_html_e( 'If you no longer wish to use Hummingbird’s Minification feature you can turn it off completely', 'wphb' ); ?>
+		</span>
 	</div>
 	<div class="col-two-third">
 		<a href="<?php echo esc_url( add_query_arg( 'disable-minification', 'true' ) ); ?>" class="button button-ghost">

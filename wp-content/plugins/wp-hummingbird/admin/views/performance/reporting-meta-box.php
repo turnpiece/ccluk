@@ -18,8 +18,8 @@
 				<div class="clear mline"></div>
 				<div class="wphb-border-frame with-padding schedule-box">
 					<strong><?php esc_html_e( 'Schedule', 'wphb' ) ?></strong>
-					<label><?php esc_html_e( 'Frequency', 'wphb' ) ?></label>
-					<select name="email-frequency" <?php disabled( ! wphb_is_member() ); ?>>
+					<label for="email-frequency"><?php esc_html_e( 'Frequency', 'wphb' ) ?></label>
+					<select name="email-frequency" id="email-frequency" <?php disabled( ! wphb_is_member() ); ?>>
 						<option <?php selected( 1, $frequency ) ?> value="1">
 							<?php esc_html_e( 'Daily', 'wphb' ) ?>
 						</option>
@@ -31,16 +31,16 @@
 						</option>
 					</select>
 					<div class="days-container">
-						<label><?php esc_html_e( 'Day of the week', 'wphb' ) ?></label>
-						<select name="email-day" <?php disabled( ! wphb_is_member() ); ?>>
+						<label for="email-day"><?php esc_html_e( 'Day of the week', 'wphb' ) ?></label>
+						<select name="email-day" id="email-day" <?php disabled( ! wphb_is_member() ); ?>>
 							<?php foreach ( wphb_get_days_of_week() as $day ) : ?>
 								<option <?php selected( $day, $send_day ) ?>
 									value="<?php echo $day ?>"><?php echo ucfirst( $day ) ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
-					<label><?php esc_html_e( 'Time of day', 'wphb' ) ?></label>
-					<select name="email-time" <?php disabled( ! wphb_is_member() ); ?>>
+					<label for="email-time"><?php esc_html_e( 'Time of day', 'wphb' ) ?></label>
+					<select name="email-time" id="email-time" <?php disabled( ! wphb_is_member() ); ?>>
 						<?php foreach ( wphb_get_times() as $time ) : ?>
 							<option <?php selected( $time, $send_time ) ?> value="<?php echo $time ?>">
 								<?php echo strftime( '%I:%M %p', strtotime( $time ) ); ?>

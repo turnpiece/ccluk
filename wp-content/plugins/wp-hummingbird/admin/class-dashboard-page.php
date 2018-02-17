@@ -22,15 +22,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			wphb_minification_maybe_stop_scanning_files();
 		}
 
-		/**
-		 * Get latest uptime report.
-		 * @var WP_Hummingbird_Module_Uptime $uptime_module
-		 */
-		$uptime_module = wphb_get_module( 'uptime' );
-		if ( $uptime_module->is_active() ) {
-			$this->uptime_report = wphb_uptime_get_last_report();
-		}
-
 		if ( isset( $_GET['wphb-clear-files'] ) && current_user_can( wphb_get_admin_capability() ) ) {
 			check_admin_referer( 'wphb-clear-files' );
 
@@ -121,7 +112,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * @param string $type  Action type.
 	 */
 	private function run_actions( $type ) {
-
 		check_admin_referer( 'wphb-run-dashboard' );
 
 		if ( ! current_user_can( wphb_get_admin_capability() ) ) {
@@ -194,7 +184,10 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'dashboard_performance_module_metabox' ),
 				array( $this, 'dashboard_performance_module_metabox_header' ),
 				array( $this, 'dashboard_performance_module_metabox_footer' ),
-				'box-dashboard-left'
+				'box-dashboard-left',
+				array(
+					'box_content_class' => 'box-content no-padding',
+				)
 			);
 		} elseif ( is_wp_error( $last_report ) ) {
 			$this->add_meta_box(
@@ -232,7 +225,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 					'box_class' => 'dev-box content-box content-box-one-col-center',
 				)
 			);
-		}
+		} // End if().
 
 		/* Page caching */
 		/* @var WP_Hummingbird_Module_Page_Caching $module */
@@ -342,16 +335,13 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			'box-dashboard-right'
 		);
 
-		/* Become Pro Member Callout */
-		if ( ! wphb_is_member() ) {
-			$this->add_meta_box( 'dashboard-pro-membership', null, array( $this, 'dashboard_membership_metabox' ), null, null, 'box-dashboard-left', array(
-				'box_class' => 'dev-box callout-box content-box content-box-one-col-center',
-			) );
-		}
-
 		/* Uptime */
+		/* @var WP_Hummingbird_Module_Uptime $uptime_module */
 		$uptime_module = wphb_get_module( 'uptime' );
 		$is_active = $uptime_module->is_active();
+		if ( $is_active ) {
+			$this->uptime_report = wphb_uptime_get_last_report();
+		}
 
 		if ( ! wphb_is_member() ) {
 			$this->add_meta_box(
@@ -462,15 +452,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		/* Translators: %s: username */
 		$title = sprintf( __( 'Welcome %s', 'wphb' ), wphb_get_current_user_info() );
 		$this->view( 'dashboard/welcome/meta-box-header', compact( 'title' ) );
-	}
-
-	/**
-	 * Display pro membership metabox
-	 *
-	 * @since 1.4.5
-	 */
-	public function dashboard_membership_metabox() {
-		$this->view( 'dashboard/welcome/pro-membership-meta-box', array() );
 	}
 
 	/*******************

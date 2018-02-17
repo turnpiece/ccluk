@@ -2822,6 +2822,17 @@ msgstr "Posts Page"
 msgid "Number of items per page:"
 msgstr "Number of items per page:"
 
+#: wp-admin/nav-menus.php:547
+msgid "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
+msgstr "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
+
+#. translators: date and time format for exact current time, mainly about
+#. timezones, see https://secure.php.net/date
+#: wp-admin/options-general.php:21
+msgctxt "timezone date format"
+msgid "Y-m-d H:i:s"
+msgstr "Y-m-d H:i:s"
+
 #. translators: Do not translate USERNAME, URL_DELETE, SITE_NAME: those are
 #. placeholders.
 #: wp-admin/ms-delete-site.php:48
@@ -2859,17 +2870,6 @@ msgstr ""
 "Thanks for using the site,\n"
 "Webmaster\n"
 "###SITE_NAME###"
-
-#: wp-admin/nav-menus.php:547
-msgid "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
-msgstr "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
-
-#. translators: date and time format for exact current time, mainly about
-#. timezones, see https://secure.php.net/date
-#: wp-admin/options-general.php:21
-msgctxt "timezone date format"
-msgid "Y-m-d H:i:s"
-msgstr "Y-m-d H:i:s"
 
 #: wp-admin/update-core.php:431
 msgid "New translations are available."
@@ -2924,6 +2924,14 @@ msgstr ""
 "UPDATE LOG\n"
 "=========="
 
+#: wp-admin/includes/ms.php:359
+msgid "Size in megabytes"
+msgstr "Size in megabytes"
+
+#: wp-admin/includes/ms.php:356
+msgid "Site Upload Space Quota"
+msgstr "Site Upload Space Quota"
+
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
 #: wp-admin/includes/misc.php:1161
@@ -2961,14 +2969,6 @@ msgstr ""
 "Regards,\n"
 "All at ###SITENAME###\n"
 "###SITEURL###"
-
-#: wp-admin/includes/ms.php:359
-msgid "Size in megabytes"
-msgstr "Size in megabytes"
-
-#: wp-admin/includes/ms.php:356
-msgid "Site Upload Space Quota"
-msgstr "Site Upload Space Quota"
 
 #: wp-admin/includes/class-wp-posts-list-table.php:978
 msgid "Y/m/d g:i:s a"
@@ -5804,10 +5804,6 @@ msgstr "Links in the Toolbar at the top of the screen connect your dashboard and
 msgid "Deleting Links"
 msgstr "Deleting Links"
 
-#: wp-admin/upload.php:201
-msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
-msgstr "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
-
 #: wp-admin/edit.php:244
 msgid "You can also perform the same types of actions, including narrowing the list by using the filters, acting on a page using the action links that appear when you hover over a row, or using the Bulk Actions menu to edit the metadata for multiple pages at once."
 msgstr "You can also perform the same types of actions, including narrowing the list by using the filters, acting on a page using the action links that appear when you hover over a row, or using the Bulk Actions menu to edit the metadata for multiple pages at once."
@@ -5815,6 +5811,10 @@ msgstr "You can also perform the same types of actions, including narrowing the 
 #: wp-admin/edit-comments.php:180
 msgid "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
 msgstr "Many people take advantage of keyboard shortcuts to moderate their comments more quickly. Use the link to the side to learn more."
+
+#: wp-admin/upload.php:201
+msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
+msgstr "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
 
 #: wp-admin/upload.php:207
 msgid "If a media file has not been attached to any content, you will see that in the Uploaded To column, and can click on Attach to launch a small popup that will allow you to search for existing content and attach the file."

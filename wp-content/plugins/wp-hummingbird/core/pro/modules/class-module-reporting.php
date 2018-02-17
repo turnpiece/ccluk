@@ -85,13 +85,14 @@ class WP_Hummingbird_Module_Reporting extends WP_Hummingbird_Module {
 		$dirs = apply_filters( 'wphb_reporting_templates_folders', array(
 			'stylesheet' => STYLESHEETPATH . '/wphb/',
 			'template'   => TEMPLATEPATH . '/wphb/',
-			'plugin'     => wphb_plugin_dir() . 'core/pro/modules/reporting/templates/',
+			'plugin'     => WPHB_DIR_PATH . 'core/pro/modules/reporting/templates/',
 		) );
 
 		foreach ( (array) $dirs as $dir ) {
 			$file = trailingslashit( $dir ) . "$template.php";
 			if ( is_readable( $file ) ) {
 				extract( $args );
+				/* @noinspection PhpIncludeInspection */
 				include( $file );
 				break;
 			}

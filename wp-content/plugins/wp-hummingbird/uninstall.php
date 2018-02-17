@@ -23,11 +23,15 @@ $option_names = $wpdb->get_col(
 					WHERE option_name LIKE %s
 					OR option_name LIKE %s
 					OR option_name LIKE %s
+					OR option_name LIKE %s
+					OR option_name LIKE %s
 					OR option_name LIKE %s",
 		'%wphb-min-scripts%',
 		'%wphb-scripts%',
 		'%wphb-min-styles%',
-		'%wphb-styles%'
+		'%wphb-styles%',
+		'%wphb-last-report%',
+		'%wphb-last-report-score%'
 	)
 );
 
@@ -54,6 +58,7 @@ delete_site_option( 'wphb-caching-data' );
 delete_site_option( 'wphb-gzip-data' );
 delete_site_option( 'wphb-server-type' );
 
+delete_site_option( 'wphb-last-report' );
 delete_site_option( 'wphb-last-report-dismissed' );
 
 // Clean notices.
@@ -64,14 +69,23 @@ delete_site_option( 'wphb-cloudflare-dash-notice' );
 delete_site_option( 'wphb-notice-http2-info-show' );
 delete_site_option( 'wphb-notice-minification-optimized-show' );
 delete_site_option( 'wphb-minification-view' );
+// Uptime notices
+delete_site_option( 'wphb-notice-uptime-info-show' );
 
 // Clean all cron.
 wp_clear_scheduled_hook( 'wphb_performance_scan' );
 
 if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
-	include_once( plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php' );
+	/* @noinspection PhpIncludeInspection */
+	include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';
 }
 $fs = WP_Hummingbird_Filesystem::instance();
 if ( ! is_wp_error( $fs->status ) ) {
 	$fs->clean_up();
 }
+
+if ( ! class_exists( 'WP_Hummingbird_Logger' ) ) {
+	/* @noinspection PhpIncludeInspection */
+	include_once plugin_dir_path( __FILE__ ) . '/core/class-logger.php';
+}
+WP_Hummingbird_Logger::cleanup();

@@ -5,6 +5,7 @@
  * @package Hummingbird
  *
  * @var string        $deactivate_url  Deactivate URL.
+ * @var string        $download_url     Download logs URL.
  * @var bool|WP_Error $error           Error if present.
  * @var array         $pages           A list of page types.
  * @var array         $settings        Settings array.
@@ -140,17 +141,16 @@
 			<span class="sub">
 				<?php esc_html_e( 'If you’re having issues with page caching, turn on the debug log to get insight into what’s going on.', 'wphb' );
 				if ( $settings['settings']['debug_log'] ) {
-					if ( file_exists( WP_CONTENT_DIR . '/wphb-cache/page-caching.log' ) ) {
-						$log_url = get_home_url() . '/wp-content/wphb-cache/page-caching.log';
+					if ( file_exists( WP_CONTENT_DIR . '/wphb-cache/page-caching-log.php' ) ) {
 						?>
-						<a href="<?php echo esc_url( $log_url ); ?>" target="_blank" class="button button-ghost"><?php esc_html_e( 'Download Logs', 'wphb' ); ?></a>
+						<a href="<?php echo esc_url( $download_url ); ?>" target="_blank" class="button button-ghost" id="wphb-pc-log-button"><?php esc_html_e( 'Download Logs', 'wphb' ); ?></a>
 						<div class="clear"></div>
 
 						<?php
 						printf(
 							/* translators: %s: File location */
 							esc_html__( 'Location: %s', 'wphb' ),
-							esc_url( $log_url )
+							esc_url( get_home_url() . '/wp-content/wphb-cache/page-caching-log.php' )
 						);
 					}
 				} ?>

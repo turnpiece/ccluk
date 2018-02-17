@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License (Version 2 - GPLv2).
 msgid ""
 msgstr ""
-"Project-Id-Version: Defender Pro 1.7.4.2-beta2\n"
+"Project-Id-Version: Defender Pro 1.7.5\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-01-16 17:22:10+00:00\n"
+"POT-Creation-Date: 2018-02-07 07:25:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "BLACKLIST MONITOR"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:24 app/behavior/blacklist.php:61
+#: app/behavior/blacklist-free.php:25 app/behavior/blacklist.php:61
 #: app/module/audit/behavior/audit-free.php:20
 #: app/module/scan/behavior/scan.php:136 app/module/scan/behavior/scan.php:151
 #: app/module/scan/view/layouts/layout.php:61
@@ -29,12 +29,12 @@ msgstr ""
 msgid "Try Defender Pro free today"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:25 app/behavior/blacklist.php:62
+#: app/behavior/blacklist-free.php:26 app/behavior/blacklist.php:62
 #: app/module/audit/behavior/audit-free.php:20
 msgid "PRO FEATURE"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:29 app/behavior/blacklist.php:34
+#: app/behavior/blacklist-free.php:30 app/behavior/blacklist.php:34
 #: app/behavior/blacklist.php:66
 msgid ""
 "Automatically check if you’re on Google’s blacklist every 6 hours. If "
@@ -42,7 +42,7 @@ msgid ""
 "                    wrong, we’ll let you know via email."
 msgstr ""
 
-#: app/behavior/blacklist-free.php:33 app/behavior/blacklist.php:70
+#: app/behavior/blacklist-free.php:35 app/behavior/blacklist.php:70
 #: app/module/audit/view/free.php:17
 #: app/module/ip-lockout/view/notification/report-free.php:5
 #: app/module/scan/view/automation-free.php:5
@@ -152,17 +152,17 @@ msgid "Lockout reports are active scheduled to send %s"
 msgstr ""
 
 #: app/behavior/report-free.php:129 app/behavior/report.php:224
-#: app/behavior/utils.php:877 free/utils.php:656
+#: app/behavior/utils.php:909 free/utils.php:656
 msgid "daily"
 msgstr ""
 
 #: app/behavior/report-free.php:132 app/behavior/report.php:227
-#: app/behavior/utils.php:880 free/utils.php:659
+#: app/behavior/utils.php:912 free/utils.php:659
 msgid "weekly"
 msgstr ""
 
 #: app/behavior/report-free.php:135 app/behavior/report.php:230
-#: app/behavior/utils.php:883 free/utils.php:662
+#: app/behavior/utils.php:915 free/utils.php:662
 msgid "monthly"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: app/behavior/utils.php:860 free/utils.php:639
+#: app/behavior/utils.php:892 free/utils.php:639
 msgid "Please upgrade to 5.3 or later"
 msgstr ""
 
@@ -244,9 +244,13 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: app/controller/dashboard.php:324 app/controller/dashboard.php:326
-#: app/controller/requirement.php:69 app/module/ip-lockout/view/locked.php:75
+#: app/controller/dashboard.php:324 app/controller/requirement.php:69
+#: app/module/ip-lockout/view/locked.php:75
 msgid "Defender"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Defender Pro"
 msgstr ""
 
 #: app/controller/dashboard.php:358
@@ -488,7 +492,7 @@ msgid "Two factor authentication is active."
 msgstr ""
 
 #: app/module/advanced-tools/view/login/enabled.php:12
-msgid "Disabled"
+msgid "Disable"
 msgstr ""
 
 #: app/module/advanced-tools/view/login/enabled.php:17
@@ -3250,7 +3254,7 @@ msgid ""
 "Schedule automated file scanning and email reporting for all your websites. "
 "This feature is included in a WPMU DEV membership along with 100+ plugins & "
 "themes, 24/7 support and lots of handy site management tools  – <a "
-"href=\"%s\">Try it all FREE today!</a>"
+"target='_blank' href=\"%s\">Try it all FREE today!</a>"
 msgstr ""
 
 #: app/module/ip-lockout/view/settings.php:10
@@ -3325,7 +3329,7 @@ msgid "Defender doesn't have enough permission to remove this file"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:81
-msgid "This file can't not remove"
+msgid "This file can't be removed"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:101
@@ -3365,8 +3369,8 @@ msgstr ""
 
 #: app/module/scan/behavior/core-result.php:199
 msgid ""
-"This will permanent remove the file/folder with all content, do you want to "
-"do this?"
+"This will permanently remove the selected file/folder. Are you sure you "
+"want to continue?"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:202
@@ -3681,7 +3685,7 @@ msgid "The item doesn't exist!"
 msgstr ""
 
 #: app/module/scan/controller/main.php:381
-msgid "This item has been permanent removed."
+msgid "This item has been permanently removed"
 msgstr ""
 
 #: app/module/scan/controller/main.php:520
@@ -3824,7 +3828,7 @@ msgid ""
 "                    Get enhanced security protection as part of a WPMU DEV "
 "membership including 100+ plugins & themes, 24/7\n"
 "                    support and lots of handy site management tools – <a "
-"href=\"%s\">Try Defender Pro today for FREE</a>"
+"target='_blank' href=\"%s\">Try Defender Pro today for FREE</a>"
 msgstr ""
 
 #: app/module/scan/view/setting-free.php:9 app/module/scan/view/setting.php:9
@@ -3859,7 +3863,8 @@ msgid ""
 "Defenders scans through every line of code on your website, searching for "
 "anything suspicious. This feature is included when you join WPMU DEV, along "
 "with 100+ plugins and themes, 24/7 support and lots of handy site "
-"management tools.  – <a href=\"%s\" role='button'>Try it all FREE today!\n"
+"management tools.  – <a href=\"%s\" target='_blank' role='button'>Try it "
+"all FREE today!\n"
 "                        </a>"
 msgstr ""
 
@@ -3974,7 +3979,7 @@ msgstr ""
 msgid "Automatic File Scans & Reporting"
 msgstr ""
 
-#: app/view/activator-free.php:18
+#: app/view/activator-free.php:18 app/view/activator.php:18
 msgid ""
 "Scan your website for file changes, vulnerabilities and injected code and "
 "get notified about anything suspicious."
@@ -4005,12 +4010,6 @@ msgid ""
 "Welcome to Defender Pro! Let's quickly set up the most important security "
 "features, then you can fine tune each setting later. Our recommendations "
 "are turned on by default."
-msgstr ""
-
-#: app/view/activator.php:18
-msgid ""
-"Scan your website for file changes, vulnerabilities and injected code and "
-"get and get notified about anything suspicious."
 msgstr ""
 
 #: app/view/activator.php:68
@@ -4048,7 +4047,7 @@ msgid ""
 "try everything absolutely free."
 msgstr ""
 
-#: app/view/dashboard.php:94
+#: app/view/dashboard.php:95
 msgid "FIND OUT MORE"
 msgstr ""
 
@@ -4274,10 +4273,6 @@ msgstr ""
 
 #: vendor/email-search.php:124 vendor/email-search.php:238
 msgid "Remove"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "Defender Pro"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

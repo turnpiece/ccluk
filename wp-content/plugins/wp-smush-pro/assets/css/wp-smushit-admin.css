@@ -1469,7 +1469,7 @@ div.smush-cancel-button-wrapper {
     padding: 3px 13px;
 }
 
-.wpmud div.smush-page-wrap button.wp-smush-cancel-bulk:not(.wph-button):not(#collapse-button):hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]) {
+.wpmud div.smush-page-wrap button.wp-smush-cancel-bulk:not(.wph-button):not(#collapse-button):hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]) {				 	          			 
     background-color: transparent;
     color: #666;
 }
@@ -3087,4 +3087,4 @@ button.wp-smush-all.wp-smush-button {
 }
 
 
-/* 87274-1517694368-au */
+/* 87274-1518896138-au */

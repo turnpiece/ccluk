@@ -31,9 +31,10 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 			// Would be nice to user get_home_url(), but website is not accessible during plugin activation
 			// and curl times out.
 			//'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
-			'HTML'       => wphb_plugin_url() . 'core/modules/dummy/dummy-html.html',
-			'JavaScript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'CSS'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
+			//'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-html.html',
+			'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-php.php',
+			'JavaScript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'CSS'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
 
 		$results = array();
@@ -44,7 +45,12 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 				require_once( ABSPATH . WPINC . '/class-simplepie.php' );
 			}
 
-			$result = new SimplePie_File( $file, 10, 5, null, 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36' );
+			$headers = array(
+				'Content-Type' => 'text/plain',
+			);
+			$useragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36';
+
+			$result = new SimplePie_File( $file, 10, 5, $headers, $useragent );
 
 			$headers = $result->headers;
 			$results[ $type ] = false;

@@ -63,8 +63,13 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	public function on_load() {
 		$this->tabs = array(
 			'main'    => __( 'Improvements', 'wphb' ),
-			'reports' => __( 'Reporting', 'wphb' ),
 		);
+		if ( is_multisite() && is_network_admin() ) {
+			$this->tabs['reports'] = __( 'Reporting', 'wphb' );
+			$this->tabs['settings'] = __( 'Settings', 'wphb' );
+		} elseif ( ! is_multisite() ) {
+			$this->tabs['reports'] = __( 'Reporting', 'wphb' );
+		}
 
 		// We need to actually tweak these tasks.
 		add_filter( 'wphb_admin_after_tab_' . $this->get_slug(), array( $this, 'after_tab' ) );
@@ -135,19 +140,37 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				)
 			);
 
-			$this->add_meta_box(
-				'reporting-summary',
-				__( 'Reports', 'wphb' ),
-				array( $this, 'reporting_metabox' ),
-				array( $this, 'reporting_metabox_header' ),
-				array( $this, 'reporting_metabox_footer' ),
-				'reports',
-				array(
-					'box_class'         => 'dev-box content-box-one-col-center',
-					'box_content_class' => 'box-content no-padding',
-					'box_footer_class'  => wphb_is_member() ? 'box-footer' : 'box-footer wphb-reporting-no-membership',
-				)
-			);
+			if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
+				$this->add_meta_box(
+					'reporting-summary',
+					__( 'Reports', 'wphb' ),
+					array( $this, 'reporting_metabox' ),
+					array( $this, 'reporting_metabox_header' ),
+					array( $this, 'reporting_metabox_footer' ),
+					'reports',
+					array(
+						'box_class'         => 'dev-box content-box-one-col-center',
+						'box_content_class' => 'box-content no-padding',
+						'box_footer_class'  => wphb_is_member() ? 'box-footer' : 'box-footer wphb-reporting-no-membership',
+					)
+				);
+			}
+
+			if ( is_multisite() && is_network_admin() ) {
+				$this->add_meta_box(
+					'settings-summary',
+					__( 'Settings', 'wphb' ),
+					array( $this, 'settings_metabox' ),
+					null,
+					array( $this, 'settings_metabox_footer' ),
+					'settings',
+					array(
+						'box_class'         => 'dev-box content-box-one-col-center',
+						'box_content_class' => 'box-content no-padding',
+						'box_footer_class'  => 'box-footer',
+					)
+				);
+			}
 		} else {
 			$this->add_meta_box(
 				'performance-summary',
@@ -202,6 +225,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 					'retry_url'        => $retry_url,
 					'report_dismissed' => $report_dismissed,
 					'disabled'         => $disabled,
+					'is_subsite'       => ! is_main_site(),
 				)
 			);
 		} else {
@@ -341,6 +365,27 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function reporting_metabox_footer() {
 		$this->view( 'performance/reporting-meta-box-footer', array() );
+	}
+
+	/**
+	 * Settings meta box.
+	 *
+	 * @since 1.7.1
+	 */
+	public function settings_metabox() {
+		$subsite_tests = wphb_get_setting( 'subsite-tests' );
+
+		$args = compact( 'subsite_tests' );
+		$this->view( 'performance/settings-meta-box', $args );
+	}
+
+	/**
+	 * Reporting meta box footer.
+	 *
+	 * @since 1.7.1
+	 */
+	public function settings_metabox_footer() {
+		$this->view( 'performance/settings-meta-box-footer', array() );
 	}
 
 	/**

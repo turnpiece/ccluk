@@ -8,7 +8,9 @@
  * @return mixed
  */
 function wphb_get_modules() {
-	return wp_hummingbird()->core->modules;
+	/* @var WP_Hummingbird $hummingbird */
+	$hummingbird = WP_Hummingbird::get_instance();
+	return $hummingbird->core->modules;
 }
 
 /**
@@ -19,7 +21,9 @@ function wphb_get_modules() {
  * @return WP_Hummingbird_Module|bool
  */
 function wphb_get_module( $module ) {
-	return isset( wp_hummingbird()->core->modules[ $module ] ) ? wp_hummingbird()->core->modules[ $module ] : false;
+	/* @var WP_Hummingbird $hummingbird */
+	$hummingbird = WP_Hummingbird::get_instance();
+	return isset( $hummingbird->core->modules[ $module ] ) ? $hummingbird->core->modules[ $module ] : false;
 }
 
 /**
@@ -578,18 +582,10 @@ function wphb_performance_report_dismissed() {
  */
 function wphb_get_browser_caching_types() {
 	$caching_types = array();
-	$caching_types['javascript'] = 'txt | xml | js';
-	$caching_types['css']        = 'css';
-	$caching_types['media']      = 'flv | ico | pdf | avi | mov | ppt | doc | mp3 | wmv | wav | mp4 | m4v | ogg | webm | aac | eot | ttf | otf | woff | svg';
-	$caching_types['images']     = 'jpg | jpeg | png | gif | swf | webp';
-	/* @var WP_Hummingbird_Module_Cloudflare $cloudflare */
-	$cloudflare = wphb_get_module( 'cloudflare' );
-	if ( $cloudflare->has_cloudflare() ) {
-		$caching_types['javascript'] = 'js | ejs';
-		$caching_types['css']        = 'css';
-		$caching_types['media']      = 'ico | pdf | ppt | pptx | doc | docx | eot | ttf | otf | woff | woff2 | svg | svgz | xls | xlsx | csv | jar | class | midi | mid | pls | eps';
-		$caching_types['images']     = 'jpg | jpeg | png | gif | swf | webp | tif | tiff | bmp | pict | ps';
-	}
-
+	$caching_types['javascript']     = 'txt | xml | js';
+	$caching_types['css']            = 'css';
+	$caching_types['media']          = 'flv | ico | pdf | avi | mov | ppt | doc | mp3 | wmv | wav | mp4 | m4v | ogg | webm | aac | eot | ttf | otf | woff | svg';
+	$caching_types['images']         = 'jpg | jpeg | png | gif | swf | webp';
+	$caching_types['cloudflare']     = 'bmp | pict | csv | pls | tif | tiff | eps | ejs | midi | mid | woff2 | svgz | docx | xlsx | xls | pptx | ps | class | jar';
 	return $caching_types;
 }

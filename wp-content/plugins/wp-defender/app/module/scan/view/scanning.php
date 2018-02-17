@@ -47,7 +47,7 @@
             <div>
 				<?php printf( __( "Did you know the Pro version of Defender comes with advanced full code scanning and automated reporting?
                     Get enhanced security protection as part of a WPMU DEV membership including 100+ plugins & themes, 24/7
-                    support and lots of handy site management tools – <a href=\"%s\">Try Defender Pro today for FREE</a>", wp_defender()->domain ), "https://premium.wpmudev.org/project/wp-defender/" ) ?>
+                    support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try Defender Pro today for FREE</a>", wp_defender()->domain ), \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_modal_inprogress_upsell_link') ) ?>
             </div>
         </div>
 	<?php endif; ?>

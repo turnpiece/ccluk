@@ -24,7 +24,7 @@
 				<?php
 				printf(
 					/* translators: %s: Number of issues */
-					__( '%s of your cache types don’t meet the recommended expiry period of 8 days.', 'wphb' ), absint( $issues ) );
+				__( '%s of your cache types don’t meet the recommended expiry period of 8 days.', 'wphb' ), absint( $issues ) );
 				?>
 			</p>
 		</div>

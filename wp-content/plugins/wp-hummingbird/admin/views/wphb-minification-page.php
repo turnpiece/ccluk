@@ -46,8 +46,7 @@
 
 	</div><!-- end row -->
 <?php endif;
-
-wphb_minification_advanced_modal();
+wphb_minification_view_modal( $this->mode );
 wphb_membership_modal();
 ?>
 

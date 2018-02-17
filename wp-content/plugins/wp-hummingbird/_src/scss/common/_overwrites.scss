@@ -1,0 +1,230 @@
+/* ****************************************************************************
+ * COMMON: EXTEND/OVERRIDE WPMUDEV DASHBOARD/WP STYLES
+ */
+
+/* Overwrite for the default notifications */
+button.notice-dismiss {
+    position: absolute;
+    top: 0;
+    right: 1px;
+    border: none !important;
+    margin: 0 !important;
+    padding: 9px !important;
+    background: none !important;
+    color: #72777c !important;
+    cursor: pointer !important;
+}
+
+.wpmud #header .actions .button + .button {
+    margin-left: 10px;
+}
+
+.wpmud .wphb-dismiss {
+    float: right;
+}
+
+.wpmud #wpbody-content > .notice {
+    margin: 5px 20px 2px 5px;
+}
+
+/* Fix for tooltip-below */
+.wpmud [tooltip].tooltip-bottom:before {
+    margin-top: 2px;
+}
+
+.wpmud [tooltip].tooltip-bottom:after {
+    margin-top: 12px;
+}
+
+/* Fix for overflowing tooltips */
+.wpmud .list-table > tbody > tr > td {
+    z-index: 0;
+}
+
+.wpmud [tooltip].tooltip-s.tooltip-right:after {
+    margin-left: -150px;
+}
+
+.wpmud .wrap-wp-hummingbird a:not('.wdpun-button') {
+    color: #17A8E3;
+}
+
+.wpmud .wrap-wp-hummingbird strong {
+    color: #333333;
+}
+
+.wpmud .dev-overlay .back {
+    background-color: rgba(51, 51, 51, 0.95);
+}
+
+.wpmud .dev-overlay .box {
+    padding: 40px 30px 30px;
+}
+
+.wpmud .dev-overlay .title .title-action {
+    font-family: 'Roboto', sans-serif;
+    margin-top: 5px;
+    vertical-align: middle;
+    color: #888888;
+    font-size: 13px;
+    line-height: 30px;
+    margin-right: -20px;
+}
+
+.wpmud .wrap-wp-hummingbird i.wdv-icon-chevron-down {
+    color: #8A8A8A;
+}
+
+.wpmud .select-container:not(.mobile-nav) i.wdv-icon-reorder:before {
+    content: "\f078";
+}
+
+.wpmud .select-container:not(.mobile-nav) {
+    border: 1px solid #E6E6E6;
+    background-color: #F8F8F8;
+}
+
+.wpmud .select-container:not(.mobile-nav) .dropdown-handle {
+    background-color: #F8F8F8;
+    color: #898989;
+}
+
+/* Install dashboard message */
+.wpmud #wpmu-install-dashboard {
+    margin-left: 0;
+}
+
+.wpmud #wpcontent #wpmu-install-dashboard * {
+    -webkit-box-sizing: content-box;
+    box-sizing: content-box;
+}
+
+.wpmud #wpmu-install-dashboard .wpmu-message {
+    font-family: inherit;
+    font-weight: inherit;
+    line-height: inherit;
+}
+
+/* Toggles */
+.wpmud .toggle .toggle-checkbox:checked + .toggle-label:before,
+.wpmud .toggle .toggle-checkbox:checked + .toggle-label {
+    background-color: #17A8E3;
+}
+
+.wpmud .toggle .toggle-label:before {
+    background: #AAA;
+}
+
+.wpmud .toggle .toggle-label {
+    width: 44px;
+    text-align: left;
+}
+
+.wpmud .toggle .toggle-checkbox:checked + .toggle-label:after {
+    margin-left: 24px;
+}
+
+.wpmud .toggle .toggle-checkbox:checked:disabled + .toggle-label {
+    background: transparent;
+}
+
+.wpmud .toggle .toggle-checkbox:checked:disabled + .toggle-label:before {
+    bottom: 0;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+
+.wpmud .toggle .toggle-checkbox:checked:disabled + .toggle-label:after {
+    margin-left: 1px;
+}
+
+.wpmud .toggle .toggle-label.small {
+    width: 36px;
+    height: 16px;
+}
+
+.wpmud .toggle .toggle-label.small:after {
+    width: 14px;
+    height: 14px;
+}
+
+.wpmud .toggle .toggle-checkbox:checked + .toggle-label.small:after {
+    margin-left: 21px;
+}
+
+.wpmud .toggle .toggle-cross {
+    color: rgba(221, 221, 221, 1);
+}
+
+.wpmud .toggle-group {
+    display: inline-block;
+}
+
+.wpmud .toggle-item.bordered,
+.wpmud .wphb-block-entry.bordered {
+    border-top: 1px solid #E6E6E6;
+    padding-top: 30px;
+}
+
+.wpmud .toggle-item.space-top-small {
+    margin: 15px 0 0;
+}
+
+.wpmud .toggle-item label {
+    text-align: left;
+}
+
+.wpmud .toggle-item .toggle-item-group {
+    display: table;
+    width: 100%;
+}
+
+.wpmud .toggle-item .toggle-info,
+.wpmud .toggle-item .toggle-actions {
+    display: table-cell;
+}
+
+.wpmud .toggle-item .toggle-item-title {
+    color: #555;
+    font: 400 15px/20px $font;
+    margin: 0;
+}
+
+.wpmud .toggle-item .toggle-actions {
+    padding-left: 30px;
+    vertical-align: middle;
+    text-align: right;
+}
+
+/* Spinners */
+.wpmud .spinner.standalone {
+    float: none;
+    margin: 0;
+}
+
+.wpmud .spinner.left {
+    float: left;
+}
+
+.wpmud .spinner.hide { /* Don't take/render block on layout */
+    display: none;
+}
+
+.wpmud .spinner.visible { /* Re-set visibility to visible */
+    visibility: visible;
+}
+
+@include bp(desktop-small) {
+    .wpmud .dev-overlay {
+        left: 35px;
+        top: 15px;
+    }
+}
+
+@include bp(tablet) {
+    .wpmud .dev-overlay {
+        left: 0;
+        top: 0;
+    }
+}

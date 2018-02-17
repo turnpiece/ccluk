@@ -168,8 +168,10 @@ class WP_Hummingbird_Admin_Notices {
 	private function is_dismissed( $notice, $mode = 'user' ) {
 		if ( 'user' === $mode ) {
 			return get_user_meta( get_current_user_id(), 'wphb-' . $notice . '-dismissed' );
-		} else {
+		} elseif ( 'option' === $mode ) {
 			return 'yes' !== get_site_option( 'wphb-notice-' . $notice . '-show' );
+		} else {
+
 		}
 	}
 
@@ -291,7 +293,7 @@ class WP_Hummingbird_Admin_Notices {
 	 * Notice displayed when the free version is deactivated because the pro one was already active
 	 */
 	public function free_version_deactivated() {
-		if ( ! array_key_exists( 'hummingbird-performance/wp-hummingbird.php', $this->plugins ) ) {
+		if ( ! file_exists( WP_PLUGIN_DIR . '/hummingbird-performance/wp-hummingbird.php' ) ) {
 			return;
 		}
 

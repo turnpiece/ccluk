@@ -9,7 +9,7 @@
 					<?php _e( "Two factor authentication is active.", wp_defender()->domain ) ?>
                 </div>
                 <button type="button" class="button" id="disableOTP">
-					<?php _e( "Disabled", wp_defender()->domain ) ?>
+					<?php _e( "Disable", wp_defender()->domain ) ?>
                 </button>
             </td>
         </tr>

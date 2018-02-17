@@ -21,9 +21,17 @@ abstract class WP_Hummingbird_Module {
 	 */
 	protected $name = '';
 
+	/**
+	 * @var WP_Hummingbird_Logger instance.
+	 *
+	 * @since 1.7.2
+	 */
+	public $logger;
+
 	public function __construct( $slug, $name ) {
 		$this->slug = $slug;
 		$this->name = $name;
+		$this->logger = new WP_Hummingbird_Logger( $this->slug );
 		$this->init();
 	}
 
@@ -91,52 +99,6 @@ abstract class WP_Hummingbird_Module {
 	 */
 	public function options() {
 		return array();
-	}
-
-	/**
-	 * Write notice or error to debug.log
-	 *
-	 * @since 1.7.0
-	 * @param mixed  $message  Error/notice message.
-	 * @param string $module   Module name.
-	 */
-	public static function log( $message, $module ) {
-		// For now only available for page-caching and gravatar modules.
-		$available_modules = array( 'page-caching', 'gravatar' );
-		if ( ! in_array( $module, $available_modules, true ) ) {
-			return;
-		}
-
-		if ( defined( 'WP_DEBUG_LOG' ) && WP_DEBUG_LOG ) {
-			// If wphb-cache dir does not exist and unable to create it - exit.
-			if ( ! is_dir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
-				if ( ! mkdir( WP_CONTENT_DIR . '/wphb-cache/' ) ) {
-					return;
-				}
-			}
-
-			// Check that page caching logging is enabled.
-			if ( 'page-caching' === $module ) {
-				$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
-				if ( ! file_exists( $config_file ) ) {
-					return;
-				}
-				$settings = json_decode( file_get_contents( $config_file ), true );
-
-				if ( ! (bool) $settings['settings']['debug_log'] ) {
-					return;
-				}
-			}
-
-			if ( ! is_string( $message ) || is_array( $message ) || is_object( $message ) ) {
-				$message = print_r( $message, true );
-			}
-
-			$message = '[' . date( 'H:i:s' ) . '] ' . $message . PHP_EOL;
-
-			$file = WP_CONTENT_DIR . '/wphb-cache/' . $module . '.log';
-			error_log( $message, 3, $file );
-		}
 	}
 
 }

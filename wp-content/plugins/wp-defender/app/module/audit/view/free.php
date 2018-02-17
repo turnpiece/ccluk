@@ -13,7 +13,7 @@
                     <div class="line max-600">
 				        <?php _e( "Track and log each and every event when changes are made to your website and get details reports on everything from what your users are doing to hacking attempts. This is a pro feature that requires an active WPMU DEV membership. Try it free today!", wp_defender()->domain ) ?>
                     </div>
-                    <a href="#pro-feature" rel="dialog"
+                    <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_auditlogging_upgrade_button') ?>" target="_blank"
                        class="button button-green"><?php esc_html_e( "Upgrade to Pro", wp_defender()->domain ) ?></a>
                 </div>
             </div>

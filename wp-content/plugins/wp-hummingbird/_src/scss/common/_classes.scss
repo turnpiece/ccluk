@@ -1,0 +1,48 @@
+/* ****************************************************************************
+ * MODULE: CLASSES
+ */
+
+@import "variables";
+@import "mixins";
+
+.hidden {
+	display: none;
+}
+
+// Clearfix
+.cf {
+	&:after {
+	    content: "";
+	    display: table;
+	    clear: both;
+	  }
+}
+
+.wpmud .wrap-wp-hummingbird .clear {
+	padding: 0;
+}
+
+// Responsive Helpers
+@media screen and (min-width: $desktop--small) {
+	.hide-on-large {
+		display: none;
+	}
+}
+
+.hide-to-large {
+	@include bp(desktop-large) {
+		display: none;
+	}
+}
+
+.hide-to-mobile {
+	@include bp(phone-large) {
+		display: none !important;
+	}
+}
+
+.hide-on-mobile {
+	@include bp(desktop-small) {
+		display: none;
+	}
+}

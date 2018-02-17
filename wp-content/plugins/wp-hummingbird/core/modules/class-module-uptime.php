@@ -47,6 +47,8 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	 * Get latest report from server
 	 *
 	 * @since 1.7.1 Removed static property.
+	 *
+	 * @param string $time
 	 */
 	public function refresh_report( $time = 'day' ) {
 		/* @var WP_Hummingbird_API $api */

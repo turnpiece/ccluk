@@ -4,10 +4,31 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	private $current_report;
 
+	/**
+	 * WP_Hummingbird_Uptime_Page constructor.
+	 *
+	 * @param string $slug        The slug name to refer to this menu by (should be unique for this menu).
+	 * @param string $page_title  The text to be displayed in the title tags of the page when the menu is selected.
+	 * @param string $menu_title  The text to be used for the menu.
+	 * @param bool   $parent      Parent or child.
+	 * @param bool   $render      Use a callback function.
+	 */
+	public function __construct( $slug, $page_title, $menu_title, $parent = false, $render = true ) {
+		parent::__construct( $slug, $page_title, $menu_title, $parent, $render );
+
+		$this->tabs = array(
+			'main'     => __( 'Response Time', 'wphb' ),
+			'downtime' => __( 'Downtime', 'wphb' ),
+			'settings' => __( 'Settings', 'wphb' ),
+		);
+
+	}
+
 	public function render_header() {
 
 		$data_ranges = $this->get_data_ranges();
 		$data_range_selected = isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $this->get_data_ranges() ) ? $_GET['data-range'] : 'week';
+		$current_view = isset( $_GET['view'] ) ? $_GET['view'] : 'main';
 		?>
 
 		<section id="header">
@@ -17,14 +38,22 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			$is_active = $module->is_active(); ?>
 			<div class="actions">
 				<?php if ( wphb_is_member() && $is_active ) : ?>
-					<span class="spinner left"></span>
-					<label for="wphb-uptime-data-range" class="inline-label header-label"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
-					<select name="wphb-uptime-data-range" id="wphb-uptime-data-range">
-						<?php foreach ( $data_ranges as $range => $label ) : ?>
+					<label for="wphb-uptime-data-range" class="inline-label header-label hide-to-mobile"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
+					<select name="wphb-uptime-data-range" class="uptime-data-range" id="wphb-uptime-data-range">
+						<?php
+						foreach ( $data_ranges as $range => $label ) :
+							$data_url = add_query_arg(
+								array(
+									'view'       => $current_view,
+									'data-range' => $range,
+								),
+								wphb_get_admin_menu_url( 'uptime' )
+							);
+							?>
 							<option
 									value="<?php echo esc_attr( $range ); ?>"
 								<?php selected( $data_range_selected, $range ); ?>
-									data-url="<?php echo esc_url( add_query_arg( 'data-range', $range, wphb_get_admin_menu_url( 'uptime' ) ) ); ?>">
+									data-url="<?php echo esc_url( $data_url ); ?>">
 								<?php echo esc_html( $label ); ?>
 							</option>
 						<?php endforeach; ?>
@@ -57,13 +86,29 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		if ( ! wphb_is_member() ) {
-			$this->add_meta_box( 'uptime-no-membership', __( 'Uptime', 'wphb' ), array( $this, 'uptime_membership_metabox' ), null, null, 'main', null );
+			$this->add_meta_box(
+				'uptime-no-membership',
+				__( 'Uptime', 'wphb' ),
+				array( $this, 'uptime_membership_metabox' ),
+				null,
+				null,
+				'box-uptime-disabled',
+				null
+			);
 		} elseif ( $is_active && is_wp_error( $uptime_report ) ) {
-			$this->add_meta_box( 'uptime', __( 'Uptime', 'wphb' ), array( $this, 'uptime_metabox' ), null, null, 'main', null );
+			$this->add_meta_box(
+				'uptime',
+				__( 'Uptime', 'wphb' ),
+				array( $this, 'uptime_metabox' ),
+				null,
+				null,
+				'main',
+				null
+			);
 		} elseif ( ! $is_active && wphb_is_member() ) {
 			$this->add_meta_box(
 				'uptime-disabled',
-				__( 'Uptime', 'wphb' ),
+				__( 'Get Started', 'wphb' ),
 				array( $this, 'uptime_disabled_metabox' ),
 				null,
 				null,
@@ -84,8 +129,33 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 					'box_class' => 'dev-box content-box content-box-two-cols-image-left',
 				)
 			);
-			$this->add_meta_box( 'uptime-response-time', __( 'Response Time', 'wphb' ), array( $this, 'uptime_metabox' ), array( $this, 'uptime_metabox_header' ), null, 'main', null );
-			$this->add_meta_box( 'uptime-downtime', __( 'Downtime', 'wphb' ), array( $this, 'uptime_downtime_metabox' ), null, null, 'main', null );
+			$this->add_meta_box(
+				'uptime-response-time',
+				__( 'Response Time', 'wphb' ),
+				array( $this, 'uptime_metabox' ),
+				null,
+				null,
+				'main',
+				null
+			);
+			$this->add_meta_box(
+				'uptime-downtime',
+				__( 'Downtime', 'wphb' ),
+				array( $this, 'uptime_downtime_metabox' ),
+				null,
+				null,
+				'downtime',
+				null
+			);
+			$this->add_meta_box(
+				'uptime-settings',
+				__( 'Settings', 'wphb' ),
+				array( $this, 'uptime_settings_metabox' ),
+				null,
+				null,
+				'settings',
+				null
+			);
 		}
 
 	}
@@ -170,7 +240,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	public function enqueue_scripts( $hook ) {
 		parent::enqueue_scripts( $hook );
-		wp_enqueue_script( 'wphb-google-chart', "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart']}]}", array( 'jquery' ) );
+		wp_enqueue_script( 'wphb-google-chart', "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart','timeline']}]}", array( 'jquery' ) );
 	}
 
 	public function uptime_disabled_metabox() {
@@ -255,6 +325,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				$error_type = 'error';
 			}
 		}
+		if ( empty( $stats->chart_json ) ) {
+			$stats->chart_json = $this->get_chart_data( 'dummy' );
+		}
 
 		$retry_url = add_query_arg( 'run', 'true' );
 		$retry_url = wp_nonce_url( $retry_url, 'wphb-run-uptime' );
@@ -264,6 +337,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			'error' => $error,
 			'retry_url' => $retry_url,
 			'support_url' => wphb_support_link(),
+			'downtime_chart_json' => $this->get_chart_data(),
 		);
 
 		if ( ! empty( $error_type ) ) {
@@ -283,28 +357,25 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			return;
 		}
 
-		$stats = wphb_uptime_get_last_report( $this->get_current_data_range() );
+		$current_data_range = $this->get_current_data_range();
+		$stats = wphb_uptime_get_last_report( $current_data_range );
+
+		$current_range = array(
+			'day'   => __( '1 day', 'wphb' ),
+			'week'  => __( '7 days', 'wphb' ),
+			'month' => __( '30 days', 'wphb' ),
+		);
 
 		$this->view( 'uptime/summary-meta-box', array(
-			'uptime_stats' => $stats,
-		));
-	}
-
-	/**
-	 * Uptime header for meta box.
-	 *
-	 * @since 1.5.0
-	 */
-	public function uptime_metabox_header() {
-		$this->view( 'uptime/meta-box-header', array(
-			'title' => __( 'Response Time', 'wphb' ),
+			'uptime_stats'    => $stats,
+			'data_range_text' => $current_range[ $current_data_range ],
 		));
 	}
 
 	/**
 	 * Uptime downtime meta box.
 	 *
-	 * @since 1.5.0
+	 * @since 1.7.2
 	 */
 	public function uptime_downtime_metabox() {
 		if ( ! wphb_is_member() ) {
@@ -321,12 +392,93 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		$this->view( 'uptime/downtime-meta-box', array(
-			'uptime_stats' => $stats,
+			'uptime_stats'        => $stats,
+			'downtime_chart_json' => $this->get_chart_data(),
 		));
 	}
 
+	/**
+	 * Uptime settings meta box.
+	 *
+	 * @since 1.7.1
+	 */
+	public function uptime_settings_metabox() {
+		if ( ! wphb_is_member() ) {
+			return;
+		}
+
+		$deactivate_url = wphb_uptime_get_last_report( $this->get_current_data_range() );
+		$this->view( 'uptime/settings-meta-box', array(
+			'deactivate_url' => $deactivate_url,
+		));
+	}
+	/**
+	 * Uptime no membership meta box.
+	 */
 	public function uptime_membership_metabox() {
 		$this->view( 'uptime/no-membership-meta-box', array() );
+	}
+	/**
+	 * Get dummy data for uptime charts when the user first enables Uptime and no data has been collected yet.
+	 *
+	 * @since 1.7.1
+	 */
+	public function get_chart_data( $type = 'downtime' ) {
+		$data = array();
+		$count = 0;
+		$time = time();
+		$time_increment = 0;
+		$current_data_range = $this->get_current_data_range();
+		switch ( $current_data_range ) {
+			case 'day':
+				$count = 24;
+				$time_increment = 3600;
+				break;
+			case 'week':
+				$count = 7;
+				$time_increment = 86400;
+				break;
+			case 'month':
+				$count = 28;
+				$time_increment = 86400;
+				break;
+		}
+		if ( 'dummy' === $type ) {
+			$data[] = array( date( 'D M d Y H:i:s O', $time ), 1 );
+			for ( $i = $count; $i > 0; $i-- ) {
+				$time -= $time_increment;
+				array_unshift( $data, array( date( 'D M d Y H:i:s O', $time ), null ) );
+			}
+		} else {
+			// Do the data for the downtime graph until we get the API working.
+			// JSON data looks like [ 'Downtime', Status, Tooltip, Start-period, End-period ].
+			$stats = wphb_uptime_get_last_report( $current_data_range );
+			$time -= $count * $time_increment;
+			$end_time = time();
+			$first = true;
+			$event_arr = array_reverse( $stats->events );
+			foreach ( $event_arr as $event ) {
+				if ( ! empty( $event->down ) && ! empty( $event->up ) ) {
+					if ( ! $first ) {
+						$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', $end_time ), date( 'D M d Y H:i:s O', $event->down ) );
+						$data[] = array( 'Downtime', 'Down', 'Down for ' . $event->downtime, date( 'D M d Y H:i:s O', $event->down ), date( 'D M d Y H:i:s O', $event->up ) );
+						$end_time = $event->up;
+					} else {
+						$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', $time ), date( 'D M d Y H:i:s O', $event->down ) );
+						$data[] = array( 'Downtime', 'Down', 'Down for ' . $event->downtime, date( 'D M d Y H:i:s O', $event->down ), date( 'D M d Y H:i:s O', $event->up ) );
+						$end_time = $event->up;
+						$first = false;
+					}
+				}
+			}
+			if ( $first ) {
+				$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', $time ), date( 'D M d Y H:i:s O', $end_time ) );
+			} else {
+				$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', $end_time ), date( 'D M d Y H:i:s O', time() ) );
+			}
+		}
+
+		return wp_json_encode( $data );
 	}
 
 }

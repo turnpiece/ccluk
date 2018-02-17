@@ -208,7 +208,7 @@
 		table.body td.small-offset-2,
 		table.body th.small-offset-2 {
 			margin-left: 16.66667% !important;
-			Margin-left: 16.66667% !important;
+			Margin-left: 16.66667% !important;	   			 	 		  		  	 	
 		}
 
 		table.body td.small-offset-3,

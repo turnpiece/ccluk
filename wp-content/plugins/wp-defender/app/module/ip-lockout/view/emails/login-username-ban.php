@@ -458,7 +458,7 @@
                                                     <p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
 														<?php
 														$lockout_duration = $setting->login_protection_lockout_ban == true ? __( "They have been banned permanently.", wp_defender()->domain ) : sprintf( __( "They have been locked out for <strong>%s seconds.</strong>", wp_defender()->domain ), $setting->login_protection_lockout_duration );
-														printf( __( "We've just locked out the host <strong>%s</strong> from %s due to attempting to login with a banned username. They have been banned permanently.", wp_defender()->domain ), $ip, $utils->siteURLWithScheme() ) ?>
+														printf( __( "We've just locked out the host <strong>%s</strong> from %s due to attempting to login with a banned username. They have been banned permanently.", wp_defender()->domain ), $ip, network_site_url() ) ?>
                                                     </p>
                                                     <p style="Margin: 0; Margin-bottom: 0; color: #555555; font-family: Helvetica, Arial, sans-serif; font-size: 15px; font-weight: normal; line-height: 26px; margin: 0; margin-bottom: 0; padding: 0 0 24px; text-align: left;">
 														<?php printf( __( "You can view the full lockout logs <a href=\"%s\">here</a>", wp_defender()->domain ), network_admin_url( "admin.php?page=wdf-ip-lockout&view=logs" ) ) ?>

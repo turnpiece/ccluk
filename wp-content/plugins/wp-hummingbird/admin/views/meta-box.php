@@ -6,11 +6,17 @@
 		</div><!-- end box-title -->
 	<?php elseif ( $this->view_exists( $orig_id . '/meta-box-header' ) ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">
-			<?php $this->view( $orig_id . '/meta-box-header', array( 'title' => $title ) ); ?>
+			<?php
+			$this->view( $orig_id . '/meta-box-header', array(
+				'title' => $title,
+			) ); ?>
 		</div><!-- end box-title -->
 	<?php elseif ( $this->view_exists( $orig_id . '-meta-box-header' ) ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">
-			<?php $this->view( $orig_id . '-meta-box-header', array( 'title' => $title ) ); ?>
+			<?php
+			$this->view( $orig_id . '-meta-box-header', array(
+				'title' => $title,
+			) ); ?>
 		</div><!-- end box-title -->
 	<?php elseif ( $title ) : ?>
 		<div class="<?php echo $args['box_header_class']; ?>">

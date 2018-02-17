@@ -5,6 +5,11 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+= 2.7.8 =
+
+* Fixed:
+    * Plugin conflict causing JS error which disables text editor in some cases
+
 = 2.7.7 =
 
 * Updates:
@@ -20,10 +25,6 @@ Change Log:
 = 2.7.6 =
 
 * Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez(@neorichi) for responsible disclosure.
-
-= 2.7.5 =
-
-* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez (@neorichi) for responsible disclosure.
 
 = 2.7.5 =
 
@@ -388,4 +389,4 @@ Change Log:
 - First release
 
 
-87274-1517694368-au
+87274-1518896138-au

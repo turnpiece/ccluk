@@ -2,8 +2,8 @@
 
 	<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
 		<img class="wphb-image"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
 			 alt="<?php _e( 'Hummingbird', 'wphb' ); ?>">
 	</div>
 
@@ -24,7 +24,7 @@
 			<?php
 			if ( $last_report && ! is_wp_error( $last_report ) ) {
 				$data_time = strtotime( get_date_from_gmt( date( 'Y-m-d H:i:s', $last_report->time ) ) );
-				echo date_i18n( get_option( 'date_format' ), $data_time ); ?> <span class="list-detail-stats-heading-extra-info"><?php printf( _x( 'at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) );	   			 	 		  		   		
+				echo date_i18n( get_option( 'date_format' ), $data_time ); ?> <span class="list-detail-stats-heading-extra-info"><?php printf( _x( 'at %s', 'Time of the last performance report', 'wphb' ), date_i18n( get_option( 'time_format' ), $data_time ) );
 			} else {
 				_e( 'Never', 'wphb' );
 			} ?>

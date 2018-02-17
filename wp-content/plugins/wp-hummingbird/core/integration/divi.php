@@ -6,10 +6,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 function wphb_et_divi_theme_active() {
 	$theme = wp_get_theme();
-	return ( 'divi' === strtolower( $theme ) || 'divi' === strtolower( $theme->get_template() ) );
+	return ( 'divi' === strtolower( $theme->get( 'Name' ) ) || 'divi' === strtolower( $theme->get_template() ) );
 }
 
-if ( ! function_exists( 'wphb_divi_after_init' ) ):
+if ( ! function_exists( 'wphb_divi_after_init' ) ) :
 	function wphb_divi_after_init() {
 		if ( wphb_et_divi_theme_active() ) {
 			remove_action( 'wp_head', 'et_add_custom_css', 100 );
@@ -45,6 +45,15 @@ function wphb_et_divi_essential_scripts() {
 function wphb_et_maybe_exclude_divi_essential_scripts( $action, $handle, $type ) {
 	if ( is_array( $handle ) && isset( $handle['handle'] ) ) {
 		$handle = $handle['handle'];
+	}
+
+	/**
+	 * Fixes issue, where background video is not loading with js error.
+	 * @since 1.7.2
+	 */
+	if ( 'wp-mediaelement' === $handle ) {
+		$data = wp_scripts()->get_data( 'mediaelement', 'data' );
+		wp_scripts()->add_inline_script( 'wp-mediaelement', $data, 'before' );
 	}
 
 	if ( 'scripts' === $type && in_array( $handle, wphb_et_divi_essential_scripts() ) ) {

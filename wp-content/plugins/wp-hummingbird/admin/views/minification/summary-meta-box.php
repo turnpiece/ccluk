@@ -1,8 +1,8 @@
 <div class="wphb-block-entry">
 	<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
 		<img class="wphb-image"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
 			 alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 	</div>
 

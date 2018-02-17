@@ -16,7 +16,7 @@
 		<p><?php esc_html_e( 'Minification settings updated', 'wphb' ); ?></p>
 	</div>
 
-	<?php if ( isset( $_GET['minify-instructions'] ) ): ?>
+	<?php if ( isset( $_GET['minify-instructions'] ) ) : ?>
 		<div class="wphb-notice wphb-notice-warning">
 			<p><?php esc_html_e( 'Please, activate minification first. A new menu will appear in every site on your Network.', 'wphb' ); ?></p>
 		</div>

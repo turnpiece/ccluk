@@ -1,0 +1,44 @@
+/* ****************************************************************************
+ * COMMON: VARIABLES
+ */
+
+// Colors
+$color: #4E4B10;
+$color--grey: #777771;
+$color--grey--light: #ddd;
+$color--grey--alt: #ccc;
+$color--light: #f4f4f4;
+$color--light--alt: #f9f9f9;
+$color--dark: #595959;
+$color--dark--alt: #333;
+$color--cta: #4E4B10;
+$color--success: #1ABC9C;
+$color--error: #FF6D6D;
+$color--warning: #FECF2F;
+
+// Typo
+$font: 'Roboto', Arial, sans-serif;
+$font--alt: 'Roboto Condensed', 'Roboto', Arial, sans-serif;
+$font--icons: 'Hummingbird', Arial, sans-serif;
+$font--path: "../fonts" !default;
+$image--path: "../image";
+
+// Space
+$space: 30px;
+$space--xxs: 5px;
+$space--xs: 10px;
+$space--s: 15px;
+$space--m: 20px;
+$space--l: 40px;
+$space--xl: 50px;
+$space--xxl: 60px;
+
+// Responsive Sizes:
+$phone: 480px;
+$phone--large: 600px;
+$tablet: 783px;
+$desktop--small: 960px;
+$desktop: 1100px;
+$desktop--large: 1200px;
+$desktop--wide: 1440px;
+$desktop--very-large: 1600px;

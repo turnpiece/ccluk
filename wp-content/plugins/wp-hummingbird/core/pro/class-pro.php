@@ -12,6 +12,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WP_Hummingbird_Pro {
 
 	/**
+	 * Class instance
+	 *
+	 * @var null
+	 */
+	private static $instance = null;
+
+	/**
 	 * Saves the modules object instances
 	 *
 	 * @var array
@@ -23,6 +30,19 @@ class WP_Hummingbird_Pro {
 	 * @var null|WP_Hummingbird_Pro_Admin
 	 */
 	public $admin;
+
+	/**
+	 * Return the plugin instance
+	 *
+	 * @return WP_Hummingbird_Pro
+	 */
+	public static function get_instance() {
+		if ( ! self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
 
 	/**
 	 * Initialize the class
@@ -46,11 +66,12 @@ class WP_Hummingbird_Pro {
 			),
 		);
 
-		if ( ! function_exists( 'is_plugin_active' ) ) {
+		if ( ! function_exists( 'is_plugin_active' ) || ! function_exists( 'is_plugin_active_for_network' ) ) {
 			include_once( ABSPATH . 'wp-includes/plugin.php' );
 		}
-		/** @noinspection PhpIncludeInspection */
-		include_once( wphb_plugin_dir() . 'core/pro/externals/dash-notice/wpmudev-dash-notification.php' );
+
+		/* @noinspection PhpIncludeInspection */
+		include_once( WPHB_DIR_PATH . 'core/pro/externals/dash-notice/wpmudev-dash-notification.php' );
 
 		if ( is_admin() ) {
 			include_once( 'admin/class-pro-admin.php' );
@@ -86,7 +107,8 @@ class WP_Hummingbird_Pro {
 	 */
 	private function load_ajax() {
 		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
-			include_once( wphb_plugin_dir() . 'core/pro/class-pro-ajax.php' );
+			/* @noinspection PhpIncludeInspection */
+			include_once( WPHB_DIR_PATH . 'core/pro/class-pro-ajax.php' );
 			new WP_Hummingbird_Pro_AJAX();
 		}
 	}
@@ -120,8 +142,9 @@ class WP_Hummingbird_Pro {
 		}
 
 		// Default modules files
-		$filename = wphb_plugin_dir() . 'core/pro/modules/class-module-' . $module . '.php';
+		$filename = WPHB_DIR_PATH . 'core/pro/modules/class-module-' . $module . '.php';
 		if ( file_exists( $filename ) ) {
+			/* @noinspection PhpIncludeInspection */
 			include_once $filename;
 		}
 

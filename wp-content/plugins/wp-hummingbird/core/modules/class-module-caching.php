@@ -28,10 +28,10 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	 */
 	public function analize_data( $check_api = false ) {
 		$files = array(
-			'javascript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'css'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
-			'media'      => wphb_plugin_url() . 'core/modules/dummy/dummy-media.pdf',
-			'images'     => wphb_plugin_url() . 'core/modules/dummy/dummy-image.png',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
+			'media'      => WPHB_DIR_URL . 'core/modules/dummy/dummy-media.pdf',
+			'images'     => WPHB_DIR_URL . 'core/modules/dummy/dummy-image.png',
 		);
 
 		$results = array();
@@ -55,14 +55,14 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 
 			$result = wp_remote_head( $file, $args );
 
-			self::log( '----- analyzing headers for ' . $file, 'caching' );
-			self::log( 'args: ', 'caching' );
+			$this->logger->log( '----- analyzing headers for ' . $file );
+			$this->logger->log( 'args: ' );
 			if ( isset( $args['cookies'] ) ) {
 				unset( $args['cookies'] );
 			}
-			self::log( $args, 'caching' );
-			self::log( 'result: ', 'caching' );
-			self::log( $result, 'caching' );
+			$this->logger->log( $args );
+			$this->logger->log( 'result: ' );
+			$this->logger->log( $result );
 
 			$cache_control = wp_remote_retrieve_header( $result, 'cache-control' );
 			$results[ $type ] = false;
@@ -107,10 +107,10 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	 * @return bool
 	 */
 	public static function apache_modules_loaded() {
-		$sapi_name = '';
+		//$sapi_name = '';
 		$apache_modules = array();
 		if ( function_exists( 'php_sapi_name' ) ) {
-			$sapi_name = php_sapi_name();
+			//$sapi_name = php_sapi_name();
 			$apache_modules = apache_get_modules();
 		}
 

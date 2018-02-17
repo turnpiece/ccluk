@@ -2,8 +2,8 @@
 	<div class="wphb-block-entry-content wphb-block-content-center">
 
 		<img class="wphb-image wphb-image-center wphb-image-icon-content-top"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-reports-disabled@1x.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/hb-graphic-reports-disabled@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@1x.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-reports-disabled@2x.png'; ?> 2x"
 			 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
 
 		<div class="content">

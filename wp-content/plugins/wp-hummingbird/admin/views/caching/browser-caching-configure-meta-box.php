@@ -32,7 +32,7 @@
 		</span>
 	</div><!-- end col-third -->
 	<div class="col-two-third">
-		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type', 'wphb' ); ?></label>
+		<label for="wphb-server-type"><?php esc_html_e( 'Server type', 'wphb' ); ?></label>
 		<?php
 		wphb_get_servers_dropdown( array(
 			'class'    => 'server-type',
@@ -72,11 +72,11 @@
 			<?php if ( ! $cf_active && ! $cf_server ) : ?>
 				<div class="wphb-radio-group">
 					<input type="radio" name="expiry-set-type" id="expiry-all-types" value="all" <?php checked( $all_expiry ); ?>>
-					<label for="expiry-all-types"><?php esc_html_e( 'All filetypes', 'wphb' ); ?></label>
+					<label for="expiry-all-types"><?php esc_html_e( 'All file types', 'wphb' ); ?></label>
 				</div>
 				<div class="wphb-radio-group">
 					<input type="radio" name="expiry-set-type" id="expiry-single-type" value="single" <?php checked( ! $all_expiry ); ?>>
-					<label for="expiry-single-type"><?php esc_html_e( 'Individual filetypes', 'wphb' ); ?></label>
+					<label for="expiry-single-type"><?php esc_html_e( 'Individual file types', 'wphb' ); ?></label>
 				</div>
 			<?php endif; ?>
 			<?php
@@ -132,7 +132,7 @@
 						?>
 					</div>
 				<?php elseif ( $cf_active || $cf_server ) : ?>
-					<label><?php esc_html_e( 'Choose expiry', 'wphb' ); ?></label>
+					<label><?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?></label>
 					<?php
 					wphb_get_caching_frequencies_dropdown( array(
 						'name'      => 'set-expiry-all',

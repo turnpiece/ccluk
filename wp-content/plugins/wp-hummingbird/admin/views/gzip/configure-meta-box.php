@@ -28,7 +28,7 @@
 		</span>
 	</div><!-- end col-third -->
 	<div class="col-two-third">
-		<label for="wphb-server-type" class="inline-label"><?php echo esc_html( 'Server type:', 'wphb' ); ?></label>
+		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type:', 'wphb' ); ?></label>
 		<?php
 		wphb_get_servers_dropdown( array(
 			'selected' => $gzip_server_type,
@@ -216,7 +216,7 @@
 					<?php
 					printf(
 						/* translators: %s: Link to TechNet */
-					__( 'For IIS 7 servers, <a href="%s">visit Microsoft TechNet</a>', 'wphb' ), 'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
+					__( 'For IIS 7 servers, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ), 'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
 					?>
 				</p>
 			</div>

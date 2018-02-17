@@ -81,6 +81,14 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		private $site;
 
 		/**
+		 * Use WP_Filesystem API.
+		 *
+		 * @since 1.7.2
+		 * @var bool $fs_api
+		 */
+		private $fs_api = false;
+
+		/**
 		 * WP_Hummingbird_Filesystem constructor.
 		 *
 		 * Initiate file system for read/write operations.
@@ -130,6 +138,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * Initiate file system for read/write operations
 		 *
 		 * @since  1.6.0
+		 *
 		 * @return bool|WP_Error  Return true if everything is ok.
 		 */
 		private function init_fs() {
@@ -144,6 +153,8 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 			// Check if the user has write permissions.
 			$access_type = get_filesystem_method();
 			if ( 'direct' === $access_type ) {
+				$this->fs_api = true;
+
 				// You can safely run request_filesystem_credentials() without any issues
 				// and don't need to worry about passing in a URL.
 				$credentials = request_filesystem_credentials( site_url() . '/wp-admin/', '', false, false, null );
@@ -155,8 +166,50 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				}
 			} else {
 				// Don't have direct write access.
+				$this->fs_api = false;
+			}
+
+			// Can not write to wp-content directory.
+			if ( defined( WP_CONTENT_DIR ) && ! is_writeable( WP_CONTENT_DIR ) ) {
 				return new WP_Error( 'fs-error', __( 'Error: The wp-content directory is not writable. Ensure the folder has proper read/write permissions for caching to function successfully.', 'wphb' ) );
 			}
+
+			return true;
+		}
+
+		/**
+		 * Native php directory removal (used when WP_Filesystem is not available);
+		 *
+		 * @since  1.7.2
+		 *
+		 * @access private
+		 * @param  string $path
+		 *
+		 * @return bool
+		 */
+		private function native_dir_delete( $path ) {
+			if ( is_wp_error( $this->status ) ) {
+				return false;
+			}
+
+			// Use direct filesystem php functions.
+			$dir = @opendir( $path );
+
+			while ( false !== ( $file = readdir( $dir ) ) ) {
+				if ( ( '.' == $file ) || ( '..' == $file ) ) {
+					return false;
+				}
+
+				$full = $path . '/' . $file;
+				if ( is_dir( $full ) ) {
+					@rmdir( $full );
+				} else {
+					@unlink( $full );
+				}
+			}
+
+			closedir( $dir );
+			@rmdir( $path );
 
 			return true;
 		}
@@ -165,16 +218,16 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * Delete everything in selected folder.
 		 *
 		 * @since  1.6.0
+		 * @since  1.7.2  Added if $this->fs_api check.
+		 *
 		 * @param  string $dir  Directory in wp-content/wphb-cache/ to purge file from.
+		 *
 		 * @return bool
 		 */
 		public function purge( $dir ) {
 			if ( is_wp_error( $this->status ) ) {
 				return false;
 			}
-
-			/* @var WP_Filesystem_Base $wp_filesystem */
-			global $wp_filesystem;
 
 			if ( $dir ) {
 				$dir = trailingslashit( $dir );
@@ -187,16 +240,27 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				return true;
 			}
 
-			// Delete all content inside the directory.
-			foreach ( $wp_filesystem->dirlist( $path ) as $asset ) {
-				if ( ! $wp_filesystem->delete( $path . $asset['name'], true, $asset['type'] ) ) {
+			// Use WP_Filesystem API to delete files.
+			if ( $this->fs_api ) {
+				/* @var WP_Filesystem_Base $wp_filesystem */
+				global $wp_filesystem;
+
+				// Delete all content inside the directory.
+				foreach ( $wp_filesystem->dirlist( $path ) as $asset ) {
+					if ( ! $wp_filesystem->delete( $path . $asset['name'], true, $asset['type'] ) ) {
+						return false;
+					}
+				}
+
+				// Delete the directory itself.
+				if ( ! $wp_filesystem->delete( $path ) ) {
 					return false;
 				}
-			}
-
-			// Delete the directory itself.
-			if ( ! $wp_filesystem->delete( $path ) ) {
-				return false;
+			} else {
+				// Use direct filesystem php functions.
+				if ( ! $this->native_dir_delete( $path ) ) {
+					return false;
+				}
 			}
 
 			return true;
@@ -206,6 +270,8 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * Clean up during uninstall.
 		 *
 		 * @since  1.6.0
+		 * @since  1.7.2  Added if $this->fs_api check.
+		 *
 		 * @return bool
 		 */
 		public function clean_up() {
@@ -213,11 +279,19 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				return false;
 			}
 
-			/* @var WP_Filesystem_Base $wp_filesystem */
-			global $wp_filesystem;
+			// Use WP_Filesystem API.
+			if ( $this->fs_api ) {
+				/* @var WP_Filesystem_Base $wp_filesystem */
+				global $wp_filesystem;
 
-			if ( ! $wp_filesystem->delete( $this->basedir, true ) ) {
-				return false;
+				if ( ! $wp_filesystem->delete( $this->basedir, true ) ) {
+					return false;
+				}
+			} else {
+				// Use direct filesystem php functions.
+				if ( ! $this->native_dir_delete( $this->basedir ) ) {
+					return false;
+				}
 			}
 
 			return true;
@@ -227,17 +301,17 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * Find file in the filesystem.
 		 *
 		 * @since  1.6.0
+		 * @since  1.7.2  Added if $this->fs_api check.
+		 *
 		 * @param  string $file      File to find.
 		 * @param  bool   $gravatar  To search for gravatar or page cache.
+		 *
 		 * @return bool
 		 */
 		public function find( $file, $gravatar = false ) {
 			if ( is_wp_error( $this->status ) ) {
 				return false;
 			}
-
-			/* @var WP_Filesystem_Base $wp_filesystem */
-			global $wp_filesystem;
 
 			$path = $this->cache_dir . $this->site;
 			if ( $gravatar ) {
@@ -246,25 +320,33 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				$path = $this->gravatar_dir . $hash;
 			}
 
-			return $wp_filesystem->exists( $path . $file );
+			// Use WP_Filesystem API.
+			if ( $this->fs_api ) {
+				/* @var WP_Filesystem_Base $wp_filesystem */
+				global $wp_filesystem;
+				return $wp_filesystem->exists( $path . $file );
+			} else {
+				// Use direct filesystem php functions.
+				return file_exists( $path . $file );
+			}
 		}
 
 		/**
 		 * Write file to selected folder.
 		 *
 		 * @since  1.6.0
+		 * @since  1.7.2  Added if $this->fs_api check.
+		 *
 		 * @param  string $file      Name of the file.
 		 * @param  string $content   File contents.
 		 * @param  bool   $gravatar  To search for gravatar or page cache.
+		 *
 		 * @return bool|WP_Error
 		 */
 		public function write( $file, $content = '', $gravatar = false ) {
 			if ( is_wp_error( $this->status ) ) {
 				return false;
 			}
-
-			/* @var WP_Filesystem_Base $wp_filesystem */
-			global $wp_filesystem;
 
 			// Determine path for Gravatar module.
 			if ( $gravatar ) {
@@ -283,25 +365,56 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				$file = basename( $file );
 			}
 
-			// Check if cache folder exists. If not - create it.
-			if ( ! $wp_filesystem->exists( $path ) ) {
-				if ( ! @wp_mkdir_p( $path ) ) {
-					return new WP_Error( 'fs-dir-error', sprintf(
-						/* translators: %s: directory */
-						__( 'Error creating directory %s.', 'wphb' ),
-						esc_html( $path )
-					));
-				}
-			}
+			// Use WP_Filesystem API.
+			if ( $this->fs_api ) {
+				/* @var WP_Filesystem_Base $wp_filesystem */
+				global $wp_filesystem;
 
-			// Create the file.
-			if ( ! $wp_filesystem->put_contents( $path . $file, $content, FS_CHMOD_FILE ) ) {
-				return new WP_Error( 'fs-file-error', sprintf(
-					/* translators: %s: file */
-					__( 'Error uploading file %s.', 'wphb' ),
-					esc_html( $file )
-				));
-			}
+				// Check if cache folder exists. If not - create it.
+				if ( ! $wp_filesystem->exists( $path ) ) {
+					if ( ! @wp_mkdir_p( $path ) ) {
+						return new WP_Error( 'fs-dir-error', sprintf(
+							/* translators: %s: directory */
+							__( 'Error creating directory %s.', 'wphb' ),
+							esc_html( $path )
+						) );
+					}
+				}
+
+				// Create the file.
+				if ( ! $wp_filesystem->put_contents( $path . $file, $content, FS_CHMOD_FILE ) ) {
+					return new WP_Error( 'fs-file-error', sprintf(
+						/* translators: %s: file */
+						__( 'Error uploading file %s.', 'wphb' ),
+						esc_html( $file )
+					) );
+				}
+			} else {
+				// Use direct filesystem php functions.
+
+				// Check if cache folder exists. If not - create it.
+				if ( ! is_dir( $path ) ) {
+					if ( ! @wp_mkdir_p( $path ) ) {
+						return new WP_Error( 'fs-dir-error', sprintf(
+							/* translators: %s: directory */
+							__( 'Error creating directory %s.', 'wphb' ),
+							esc_html( $path )
+						) );
+					}
+				}
+
+				// Create the file.
+				$file = fopen( $path . $file, 'w' );
+				if ( ! fwrite( $file, $content ) ) {
+					return new WP_Error( 'fs-file-error', sprintf(
+						/* translators: %s: file */
+						__( 'Error uploading file %s.', 'wphb' ),
+						esc_html( $file )
+					) );
+				} elseif ( $file ) {
+					fclose( $file );
+				}
+			} // End if().
 
 			return true;
 		}

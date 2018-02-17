@@ -25,7 +25,7 @@
                     <div class="clear mline"></div>
                     <div class="feature-pre-require">
                         <div></div>
-                        <a href="#pro-feature" role="button" rel="dialog" class="button button-small button-pre"
+                        <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_settings_pro_tag') ?>" role="button" target="_blank" class="button button-small button-pre"
 						tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>" >
 						<?php _e( "Pro Feature", wp_defender()->domain ) ?></a>
                         <span class="toggle" aria-hidden="true" role="presentation">
@@ -40,7 +40,7 @@
                     <div class="clear mline"></div>
                     <div class="feature-pre-require">
                         <div></div>
-                        <a href="#pro-feature" role="button" rel="dialog" class="button button-small button-pre"
+                        <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_settings_pro_tag') ?>" role="button" target="_blank" class="button button-small button-pre"
 						tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
 							<?php _e( "Pro Feature", wp_defender()->domain ) ?></a>
                         <span class="toggle" aria-hidden="true" role="presentation">
@@ -56,8 +56,8 @@
                 <div class="clear"></div>
                 <div class="presale-text">
                     <div>
-			            <?php printf( __( "Defenders scans through every line of code on your website, searching for anything suspicious. This feature is included when you join WPMU DEV, along with 100+ plugins and themes, 24/7 support and lots of handy site management tools.  – <a href=\"%s\" role='button'>Try it all FREE today!
-                        </a>", wp_defender()->domain ), "https://premium.wpmudev.org/project/wp-defender/?utm_source=defender&utm_medium=plugin&utm_campaign=defender_modal_upgrade" ) ?>
+			            <?php printf( __( "Defenders scans through every line of code on your website, searching for anything suspicious. This feature is included when you join WPMU DEV, along with 100+ plugins and themes, 24/7 support and lots of handy site management tools.  – <a href=\"%s\" target='_blank' role='button'>Try it all FREE today!
+                        </a>", wp_defender()->domain ), \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_settings_upsell_link') ) ?>
                     </div>
                 </div>
             </div>

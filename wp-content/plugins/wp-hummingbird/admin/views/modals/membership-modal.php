@@ -10,7 +10,7 @@
 			</li>
 			<li>
 				<strong><?php esc_html_e( 'Enhanced Minify Compression', 'wphb' ); ?></strong>
-				<p><?php esc_html_e( 'Compress your minified files up to 2x more than regular optimization and reuce your page load speed even further.', 'wphb' ); ?></p>
+				<p><?php esc_html_e( 'Compress your minified files up to 2x more than regular optimization and reduce your page load speed even further.', 'wphb' ); ?></p>
 			</li>
 			<li>
 				<strong><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></strong>
@@ -30,8 +30,8 @@
 
 		<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
 			<img class="wphb-image wphb-image-center"
-				 src="<?php echo wphb_plugin_url() . 'admin/assets/image/dev-team.png'; ?>"
-				 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/dev-team@2x.png'; ?> 2x"
+				 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team.png'; ?>"
+				 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png'; ?> 2x"
 				 alt="<?php esc_attr_e( 'Hummingbird','wphb' ); ?>">
 		</div>
 

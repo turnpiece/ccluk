@@ -105,7 +105,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 
 			$this->admin_notices->show(
 				'updated',
-				__( '<strong>Your changes are now live.</strong> Note: It can take up to 60 seconds for newly optimized files to be generated and linked up. You’ll need to refresh this page to see updated information.', 'wphb' ),
+				__( '<strong>Your changes have been published.</strong> Note: Files queued for compression will generate once someone visits your homepage.', 'wphb' ),
 				'success'
 			);
 		}
@@ -585,10 +585,14 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			$full_src = $item['src'];
 
 			$info = pathinfo( $full_src );
-			$ext = isset( $info['extension'] ) ? strtoupper( $info['extension'] ) : __( 'OTHER', 'wphb' );
-			if ( ! in_array( $ext, array( __( 'OTHER', 'wphb' ), 'CSS', 'JS' ), true ) ) {
-				$ext = __( 'OTHER', 'wphb' );
+
+			$ext = 'OTHER';
+			if ( isset( $info['extension'] ) && preg_match( '/(css)\??[a-zA-Z=0-9]*/', $info['extension'] ) ) {
+				$ext = 'CSS';
+			} elseif ( isset( $info['extension'] ) && preg_match( '/(js)\??[a-zA-Z=0-9]*/', $info['extension'] ) ) {
+				$ext = 'JS';
 			}
+
 			$row_error = $minification_module->errors_controller->get_handle_error( $item['handle'], $type );
 			$disable_switchers = array();
 			if ( $row_error ) {
