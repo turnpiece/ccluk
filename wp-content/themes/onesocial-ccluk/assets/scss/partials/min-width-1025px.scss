@@ -3,3 +3,25 @@
 		background-attachment: fixed;
 	}
 }
+
+#buddypress {
+    div#register-page {
+
+        .register-section {
+            width: 46% !important;
+            max-width: 46% !important;
+            margin: 30px 0 30px 0 !important;
+            padding: 0;
+
+            &#basic-details-section {
+                float: left !important;
+                clear: left !important;
+            }
+
+            &#profile-details-section {
+                float: right !important;
+                clear: right !important;
+            }
+        }
+    }
+}

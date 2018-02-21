@@ -1,0 +1,71 @@
+#logo-area {
+    width: 380px;
+}
+
+.site-header .site-title {
+    width: 360px;
+}
+
+input[type="text"], 
+input[type="tel"], 
+input[type="email"], 
+input[type="password"], 
+input[type="email"], 
+input[type="number"], 
+textarea {
+    background-color: #fff;
+    border-bottom: none;
+    border: rgba(0, 152, 218, 0.15);
+    padding: 12px;
+}
+
+h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
+    margin-bottom: 16px;
+}
+
+h3 {
+    line-height: 1.35;
+}
+
+.bluebox {
+    width: 100%;
+    color: #fff;
+    background-color: $blue_bg;
+    padding: 20px 50px;
+    margin: 20px 0;
+}
+
+#save_as_draft:hover {
+    color: #000;
+    background-color: $green;
+}
+
+.widget-area .widget p, 
+.widget-area .widget li, 
+.widget-area .widget .textwidget {
+    font-size: 18px;
+}
+
+.archive {
+    #content {
+        > .archive-header {
+            margin: 24px 0;
+
+            h1 {
+                color: $green;
+            }
+        }
+    }
+}
+
+.entry-title {
+    margin-top: 10px;
+    margin-top: 1rem;
+}
+
+#save_as_draft, 
+.entry-meta a.read-more, 
+input[type=submit] {
+    border: 1px solid $green;
+    padding: 10px 20px 10px 20px;
+}
