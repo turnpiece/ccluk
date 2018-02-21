@@ -44,6 +44,15 @@ class Give_Tools_Recount_Single_Customer_Stats extends Give_Batch_Export {
 	public $per_step = 10;
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct( $_step = 1 ) {
+		parent::__construct( $_step );
+
+		$this->is_writable = true;
+	}
+
+	/**
 	 * Get the Export Data
 	 *
 	 * @access public
@@ -249,7 +258,7 @@ class Give_Tools_Recount_Single_Customer_Stats extends Give_Batch_Export {
 				'status'       => $allowed_payment_status,
 				'meta_query'   => array(
 					array(
-						'key'   => '_give_payment_user_email',
+						'key'   => '_give_payment_donor_email',
 						'value' => $donor->email,
 					),
 				),

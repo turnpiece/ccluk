@@ -132,7 +132,7 @@ class Scan extends Behavior {
                             <?php if ( Utils::instance()->getAPIKey() ): ?>
 	                            <?php echo $model->getCount( 'vuln' ) == 0 ? ' <i class="def-icon icon-tick"></i>' : '<span class="def-tag tag-error">' . $model->getCount( 'vuln' ) . '</span>' ?>
                             <?php else: ?>
-                                <a href="#pro-feature" rel="dialog" class="button button-pre button-small"
+                                <a href="<?php echo Utils::instance()->campaignURL('defender_dash_filescan_pro_tag') ?>" target="_blank" class="button button-pre button-small"
 								tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
                                     <?php _e( "Pro Feature", wp_defender()->domain ) ?>
                                 </a>
@@ -147,7 +147,7 @@ class Scan extends Behavior {
 			                <?php if ( Utils::instance()->getAPIKey() ): ?>
 				                <?php echo $model->getCount( 'content' ) == 0 ? ' <i class="def-icon icon-tick"></i>' : '<span class="def-tag tag-error">' . $model->getCount( 'content' ) . '</span>' ?>
 			                <?php else: ?>
-                                <a href="#pro-feature" rel="dialog" class="button button-pre button-small"
+                                <a href="<?php echo Utils::instance()->campaignURL('defender_dash_filescan_pro_tag') ?>" target="_blank" class="button button-pre button-small"
 								tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
                                     <?php _e( "Pro Feature", wp_defender()->domain ) ?>
                                 </a>

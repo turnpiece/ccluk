@@ -378,7 +378,7 @@ class Main extends \WP_Defender\Controller {
 			} else {
 				wp_send_json_success( array(
 					'mid'     => 'mid-' . $model->id,
-					'message' => __( "This item has been permanent removed.", wp_defender()->domain ),
+					'message' => __( "This item has been permanently removed", wp_defender()->domain ),
 					'counts'  => $this->getIssuesAndIgnoredCounts( $model->parentId )
 				) );
 			}

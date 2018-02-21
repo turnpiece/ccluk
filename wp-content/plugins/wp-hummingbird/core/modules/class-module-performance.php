@@ -7,16 +7,44 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	public function run() {}
 
 	/**
-	 * Initializes the Performance Scan
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * @since 1.7.1
 	 */
-	public static function init_scan() {
+	public function clear_cache() {
+		$last_report = wphb_get_option( 'wphb-last-report' );
+		if ( $last_report && isset( $last_report->data->score ) ) {
+			// Save latest score.
+			wphb_update_option( 'wphb-last-report-score', array(
+				'score' => $last_report->data->score,
+			));
+		}
+		wphb_delete_option( 'wphb-last-report' );
+		wphb_delete_option( 'wphb-doing-report' );
+		wphb_delete_option( 'wphb-stop-report' );
+	}
+
+	/**
+	 * Initializes the Performance Scan
+	 *
+	 * @since 1.7.1 Removed static property.
+	 */
+	public function init_scan() {
 		// Clear the cache.
-		self::clear_cache();
+		$this->clear_cache();
 
 		// Start the test.
 		self::set_doing_report( true );
 		$api = wphb_get_api();
 		$api->performance->ping();
+
+		// Clear dismissed report.
+		if ( wphb_performance_report_dismissed() ) {
+			wphb_performance_remove_report_dismissed();
+		}
+
+		// TODO: this creates a duplicate task from cron.
+		do_action( 'wphb_init_performance_scan' );
 	}
 
 	/**
@@ -43,9 +71,11 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function get_last_report() {
 
-		$report = get_site_option( 'wphb-last-report' );
+		$report = wphb_get_option( 'wphb-last-report' );
+
 		if ( $report ) {
-			$last_score = get_site_option( 'wphb-last-report-score' );
+			$last_score = wphb_get_option( 'wphb-last-report-score' );
+
 			if ( $last_score && ! is_wp_error( $report ) ) {
 				$report->data->last_score = $last_score;
 			} elseif ( is_object( $report ) && ! is_wp_error( $report ) ) {
@@ -64,11 +94,10 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @return false|int Timestamp when the report started, false if there's no report being executed
 	 */
 	public static function is_doing_report() {
-		if ( get_site_option( 'wphb-stop-report' ) ) {
+		if ( wphb_get_option( 'wphb-stop-report' ) ) {
 			return false;
 		}
-
-		return get_site_option( 'wphb-doing-report' );
+		return wphb_get_option( 'wphb-doing-report' );
 	}
 
 	/**
@@ -77,7 +106,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @return bool
 	 */
 	public static function stopped_report() {
-		return (bool) get_site_option( 'wphb-stop-report' );
+		return (bool) wphb_get_option( 'wphb-stop-report' );
 	}
 
 	/**
@@ -89,12 +118,12 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function set_doing_report( $status = true ) {
 		if ( ! $status ) {
-			delete_site_option( 'wphb-doing-report' );
-			update_site_option( 'wphb-stop-report', true );
+			wphb_delete_option( 'wphb-doing-report' );
+			wphb_update_option( 'wphb-stop-report', true );
 		} else {
 			// Set time when we started the report.
-			update_site_option( 'wphb-doing-report', current_time( 'timestamp' ) );
-			delete_site_option( 'wphb-stop-report' );
+			wphb_update_option( 'wphb-doing-report', current_time( 'timestamp' ) );
+			wphb_delete_option( 'wphb-stop-report' );
 		}
 	}
 
@@ -116,8 +145,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 				)
 			);
 		}
-
-		update_site_option( 'wphb-last-report', $results );
+		wphb_update_option( 'wphb-last-report', $results );
 	}
 
 	/**
@@ -142,20 +170,31 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	}
 
 	/**
-	 * Clear Performance Module cache
+	 * Set last report dismissed status to true
 	 */
-	public static function clear_cache() {
-		$last_report = get_site_option( 'wphb-last-report' );
-		if ( $last_report && isset( $last_report->data->score ) ) {
-			// Save latest score.
-			update_site_option( 'wphb-last-report-score', array(
-				'score' => $last_report->data->score,
-			));
+	public static function set_report_dismissed() {
+		wphb_update_option( 'wphb-last-report-dismissed', true );
+	}
+
+	/**
+	 * Remove last report dismissed status
+	 */
+	public static function remove_report_dismissed() {
+		wphb_delete_option( 'wphb-last-report-dismissed' );
+	}
+
+	/**
+	 * Return whether the last report was dismissed
+	 *
+	 * @return bool True if user dismissed report or false of there's no site option
+	 */
+	public static function report_dismissed() {
+		$report = wphb_get_option( 'wphb-last-report-dismissed' );
+		if ( $report ) {
+			return true;
 		}
 
-		delete_site_option( 'wphb-last-report' );
-		delete_site_option( 'wphb-doing-report' );
-		delete_site_option( 'wphb-stop-report' );
+		return false;
 	}
 
 }

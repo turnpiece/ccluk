@@ -12,13 +12,15 @@ class WP_Hummingbird_API {
 
 	/**
 	 * Hummingbird API autoloader
+	 *
+	 * @param $classname
 	 */
 	public function autoload( $classname ) {
 		if ( strpos( $classname, 'WP_Hummingbird_API_' ) !== 0 ) {
 			return;
 		}
 
-		$base_dir = wphb_plugin_dir() . 'core/api';
+		$base_dir = WPHB_DIR_PATH . 'core/api';
 
 		$classname = str_replace( 'WP_Hummingbird_API_', '', $classname );
 		$class_parts = explode( '_', $classname );
@@ -30,13 +32,13 @@ class WP_Hummingbird_API {
 		$folder = strtolower( $class_parts[0] );
 		if ( ! isset( $class_parts[1] ) ) {
 			$file = "$base_dir/$folder/$folder.php";
-		}
-		else {
+		} else {
 			$file_slug = strtolower( $class_parts[1] );
 			$file = "$base_dir/$folder/$file_slug.php";
 		}
 
 		if ( is_readable( $file ) ) {
+			/* @noinspection PhpIncludeInspection */
 			include_once( $file );
 		}
 	}

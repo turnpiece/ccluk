@@ -6,15 +6,33 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	public function init() {}
 	public function run() {}
 
-	public static function get_last_report( $time, $force = false ) {
+	/**
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * @since 1.7.1
+	 */
+	public function clear_cache() {
+		delete_site_transient( 'wphb-uptime-last-report' );
+		delete_site_transient( 'wphb-uptime-last-error' );
+	}
 
+	/**
+	 * Get last report.
+	 *
+	 * @since 1.7.1 Removed static property.
+	 * @param $time
+	 * @param bool $force
+	 *
+	 * @return bool|WP_Error
+	 */
+	public function get_last_report( $time, $force = false ) {
 		if ( ! wphb_is_member() ) {
-			return new WP_Error( 'uptime-membership', __( 'You need to be a WPMU DEV Member', 'wphb' ) );	   			 	 		  		   		
+			return new WP_Error( 'uptime-membership', __( 'You need to be a WPMU DEV Member', 'wphb' ) );
 		}
 
 		$current_reports = get_site_transient( 'wphb-uptime-last-report' );
 		if ( ! isset( $current_reports[ $time ] ) || $force ) {
-			self::refresh_report( $time );
+			$this->refresh_report( $time );
 			$current_reports = get_site_transient( 'wphb-uptime-last-report' );
 		}
 
@@ -27,8 +45,12 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 
 	/**
 	 * Get latest report from server
+	 *
+	 * @since 1.7.1 Removed static property.
+	 *
+	 * @param string $time
 	 */
-	public static function refresh_report( $time = 'day' ) {
+	public function refresh_report( $time = 'day' ) {
 		/* @var WP_Hummingbird_API $api */
 		$api = wphb_get_api();
 		$results = $api->uptime->check( $time );
@@ -73,21 +95,24 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 		return $result;
 	}
 
-
 	/**
 	 * Enable Uptime local and remotely
+	 *
+	 * @since 1.7.1 Remove static property
 	 */
-	public static function enable() {
-		self::clear_cache();
+	public function enable() {
+		$this->clear_cache();
 		self::enable_locally();
 		return self::enable_remotely();
 	}
 
 	/**
 	 * Disable Uptime local and remotely
+	 *
+	 * @since 1.7.1 Removed static property
 	 */
-	public static function disable() {
-		self::clear_cache();
+	public function disable() {
+		$this->clear_cache();
 		self::disable_locally();
 		self::disable_remotely();
 	}
@@ -131,12 +156,4 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 		return get_site_transient( 'wphb-uptime-last-error' );
 	}
 
-
-	/**
-	 * Clear Performance Module cache
-	 */
-	public static function clear_cache() {
-		delete_site_transient( 'wphb-uptime-last-report' );
-		delete_site_transient( 'wphb-uptime-last-error' );
-	}
 }

@@ -1,0 +1,25 @@
+@include body-class {
+
+	.sui-header {
+		display: flex;
+		align-items: center;
+		position: relative;
+		line-height: 1;
+		margin-bottom: $sui-gutter;
+		h1 {
+			text-transform: uppercase;
+		}
+	}
+	}
+
+	.sui-header-title {
+		color: $headings-color;
+		margin: 0;
+		text-align: left;
+		text-transform: uppercase;
+		font-weight: bold;
+		max-width: none;
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+}

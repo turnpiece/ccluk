@@ -19,14 +19,11 @@ class WP_Hummingbird_API_Request_Minify extends WP_Hummingbird_API_Request {
 
 		if ( defined( 'WPHB_API_KEY' ) ) {
 			$api_key = WPHB_API_KEY;
-		}
-		elseif ( is_object( $wpmudev_un ) && method_exists( $wpmudev_un, 'get_apikey' ) ) {
+		} elseif ( is_object( $wpmudev_un ) && method_exists( $wpmudev_un, 'get_apikey' ) ) {
 			$api_key = $wpmudev_un->get_apikey();
-		}
-		elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( WPMUDEV_Dashboard::$api ) && method_exists( WPMUDEV_Dashboard::$api, 'get_key' ) ) {
+		} elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( WPMUDEV_Dashboard::$api ) && method_exists( WPMUDEV_Dashboard::$api, 'get_key' ) ) {
 			$api_key = WPMUDEV_Dashboard::$api->get_key();
-		}
-		else {
+		} else {
 			$api_key = '';
 		}
 

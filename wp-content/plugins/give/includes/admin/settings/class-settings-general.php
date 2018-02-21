@@ -88,6 +88,17 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 							),
 						),
 						array(
+							'name'    => __( 'Enable reCAPTCHA', 'give' ),
+							'desc'    => __( 'Would you like to enable the reCAPTCHA feature?', 'give' ),
+							'id'      => 'enable_recaptcha',
+							'type'    => 'radio_inline',
+							'default' => 'disabled',
+							'options' => array(
+								'enabled'  => __( 'Enabled', 'give' ),
+								'disabled' => __( 'Disabled', 'give' ),
+							),
+						),
+						array(
 							'id'      => 'recaptcha_key',
 							'name'    => __( 'reCAPTCHA Site Key', 'give' ),
 							/* translators: %s: https://www.google.com/recaptcha/ */
@@ -117,6 +128,9 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 					break;
 
 				case 'currency-settings' :
+					$currency_position_before = __( 'Before - %s&#x200e;10', 'give' );
+					$currency_position_after  = __( 'After - 10%s&#x200f;', 'give' );
+
 					$settings = array(
 						// Section 2: Currency
 						array(
@@ -139,17 +153,21 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 							'default' => 'USD',
 						),
 						array(
-							'name'    => __( 'Currency Position', 'give' ),
-							'desc'    => __( 'The position of the currency symbol.', 'give' ),
-							'id'      => 'currency_position',
-							'type'    => 'select',
-							'options' => array(
+							'name'       => __( 'Currency Position', 'give' ),
+							'desc'       => __( 'The position of the currency symbol.', 'give' ),
+							'id'         => 'currency_position',
+							'type'       => 'select',
+							'options'    => array(
 								/* translators: %s: currency symbol */
-								'before' => sprintf( __( 'Before - %s&#x200e;10', 'give' ), give_currency_symbol( give_get_currency() ) ),
+								'before' => sprintf( $currency_position_before, give_currency_symbol( give_get_currency() ) ),
 								/* translators: %s: currency symbol */
-								'after'  => sprintf( __( 'After - 10%s&#x200f;', 'give' ), give_currency_symbol( give_get_currency() ) ),
+								'after'  => sprintf( $currency_position_after, give_currency_symbol( give_get_currency() ) ),
 							),
-							'default' => 'before',
+							'default'    => 'before',
+							'attributes' => array(
+								'data-before-template' => sprintf( $currency_position_before, '{currency_pos}' ),
+								'data-after-template' => sprintf( $currency_position_after, '{currency_pos}' ),
+							),
 						),
 						array(
 							'name'    => __( 'Thousands Separator', 'give' ),
@@ -187,6 +205,7 @@ if ( ! class_exists( 'Give_Settings_General' ) ) :
 							'id'   => 'give_title_general_settings_2',
 						),
 					);
+
 					break;
 
 				case 'general-settings':

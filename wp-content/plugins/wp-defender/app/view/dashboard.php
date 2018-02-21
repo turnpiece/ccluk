@@ -90,8 +90,9 @@
                                 <div class="line">
 									<?php _e( "Get all this as part of a WPMU DEV Membership, and the best part is you can try everything absolutely free.", wp_defender()->domain ) ?>
                                 </div>
-                                <a href="https://premium.wpmudev.org/project/wp-defender/" target="_blank"
-                                   class="button button-green"><?php _e( "FIND OUT MORE", wp_defender()->domain ) ?></a>
+                                <a href="#pro-feature" rel="dialog"
+                                   class="button button-green">
+		                            <?php _e( "FIND OUT MORE", wp_defender()->domain ) ?></a>
                             </div>
                         </div>
 					<?php endif; ?>

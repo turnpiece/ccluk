@@ -13,10 +13,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'WP_Hummingbird_Module_Page_Caching' ) ) {
 	if ( is_dir( WP_CONTENT_DIR . '/plugins/wp-hummingbird/' ) ) {
 		$path = WP_CONTENT_DIR . '/plugins/wp-hummingbird/';
-	} elseif ( is_dir( WP_CONTENT_DIR . '/plugins/hummingbird-performance/' ) ) {
-		$path = WP_CONTENT_DIR . '/plugins/hummingbird-performance/';
 	} else {
-		$path = WP_CONTENT_DIR . '/plugins/wp-hummingbird-wporg/';
+		$path = WP_CONTENT_DIR . '/plugins/hummingbird-performance/';
 	}
 
 	include_once( $path . 'helpers/wp-hummingbird-helpers-core.php' );

@@ -30,7 +30,7 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	 * @return array|mixed
 	 */
 	public function get_server_errors() {
-		$errors =  get_transient( 'wphb-minify-server-errors' );
+		$errors = get_transient( 'wphb-minify-server-errors' );
 		if ( ! $errors || ! is_array( $errors ) ) {
 			return array();
 		}
@@ -79,7 +79,10 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	 * @return array|bool False if there are no errors
 	 */
 	private function get_errors() {
-		$default = array( 'scripts' => array(), 'styles' => array() );
+		$default = array(
+			'scripts' => array(),
+			'styles'  => array(),
+		);
 
 		/**
 		 * Filter the minification errors
@@ -99,14 +102,14 @@ class WP_Hummingbird_Minification_Errors_Controller {
 		$error = false;
 		if ( isset( $this->errors[ $type ][ $handle ] ) ) {
 			$defaults = array(
-				'handle' => '',
-				'error' => '',
-				'disable' => array()
+				'handle'  => '',
+				'error'   => '',
+				'disable' => array(),
 			);
 			$error = wp_parse_args( $this->errors[ $type ][ $handle ], $defaults );
 		}
 
-		return apply_filters( "wphb_handle_error_{$handle}_{$type}", $error, $handle, $type );;
+		return apply_filters( "wphb_handle_error_{$handle}_{$type}", $error, $handle, $type );
 	}
 
 	/**
@@ -137,7 +140,6 @@ class WP_Hummingbird_Minification_Errors_Controller {
 			unset( $this->errors[ $type ][ $handle ] );
 		}
 
-
 		update_option( 'wphb-minification-errors', $this->errors );
 	}
 
@@ -160,14 +162,14 @@ class WP_Hummingbird_Minification_Errors_Controller {
 
 		foreach ( $handles as $handle ) {
 			$this->errors[ $type ][ $handle ] = array(
-				'code' => $code,
-				'error' => $message,
-				'disable' => $disable
+				'code'    => $code,
+				'error'   => $message,
+				'disable' => $disable,
 			);
 
 			if ( ! empty( $actions ) && is_array( $actions ) ) {
 
-				if ( in_array( 'minify', $actions ) ) {
+				if ( in_array( 'minify', $actions ) && ! in_array( $handle, $options['dont_minify'][ $type ], true ) ) {
 					$options['dont_minify'][ $type ][] = $handle;
 				}
 
@@ -176,7 +178,6 @@ class WP_Hummingbird_Minification_Errors_Controller {
 					unset( $options['combine'][ $type ][ $key ] );
 					$options['combine'][ $type ] = array_values( $options['combine'][ $type ] );
 				}
-
 			}
 		}
 

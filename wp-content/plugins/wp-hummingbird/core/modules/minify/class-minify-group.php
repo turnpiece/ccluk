@@ -132,8 +132,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			$value = get_post_meta( $post_id, '_' . $_var_name, true );
 			if ( false !== $value ) {
 				$vars[ $_var_name ] = $value;
-			}
-			else {
+			} else {
 				$vars[ $_var_name ] = $_var_default;
 			}
 		}
@@ -169,14 +168,12 @@ class WP_Hummingbird_Module_Minify_Group {
 				$value = get_post_meta( $found->ID, '_' . $_var_name, true );
 				if ( false !== $value ) {
 					$vars[ $_var_name ] = $value;
-				}
-				else {
+				} else {
 					$vars[ $_var_name ] = $_var_default;
 				}
 			}
 			return new self( $vars );
-		}
-		else {
+		} else {
 			return false;
 		}
 	}
@@ -192,9 +189,9 @@ class WP_Hummingbird_Module_Minify_Group {
 		if ( false === $posts ) {
 			$posts = get_posts(
 				array(
-					'post_type' => 'wphb_minify_group',
-					'post_status' => 'publish',
-					'posts_per_page' => -1
+					'post_type'      => 'wphb_minify_group',
+					'post_status'    => 'publish',
+					'posts_per_page' => -1,
 				)
 			);
 			wp_cache_set( 'wphb_minify_groups', $posts );
@@ -222,7 +219,6 @@ class WP_Hummingbird_Module_Minify_Group {
 		}
 		return $groups;
 	}
-
 
 	/**
 	 * Add a single handle to the group
@@ -330,10 +326,10 @@ class WP_Hummingbird_Module_Minify_Group {
 			unset( $this->handle_compressed_sizes[ $handle ] );
 			unset( $this->handle_original_sizes[ $handle ] );
 			$this->remove_handle_dependencies( $handle );
-			$this->should_do_handle( $handle, 'minify', true ); // This will remove the hanlde from $this->dont_minify
-			$this->should_do_handle( $handle, 'combine', true ); // This will remove the hanlde from $this->dont_combine
-			$this->should_do_handle( $handle, 'enqueue', true ); // This will remove the hanlde from $this->dont_enqueue
-			$this->should_do_handle( $handle, 'defer', false ); // This will remove the hanlde from $this->defer.
+			$this->should_do_handle( $handle, 'minify', true );  // This will remove the handle from $this->dont_minify.
+			$this->should_do_handle( $handle, 'combine', true ); // This will remove the handle from $this->dont_combine.
+			$this->should_do_handle( $handle, 'enqueue', true ); // This will remove the handle from $this->dont_enqueue.
+			$this->should_do_handle( $handle, 'defer', false );  // This will remove the handle from $this->defer.
 			$this->should_do_handle( $handle, 'inline', false ); // This will remove the handle from $this->inline.
 			$this->handles = array_values( $this->handles );
 			$this->refresh_hash();
@@ -366,7 +362,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @param array $handles
 	 */
 	public function remove_handles( $handles ) {
-		$handles = (array)$handles;
+		$handles = (array) $handles;
 		array_map( array( $this, 'remove_handle' ), $handles );
 	}
 
@@ -407,7 +403,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @param float $size Size in Kb
 	 */
 	public function set_handle_original_size( $handle, $size ) {
-		$this->handle_original_sizes[ $handle ] = number_format_i18n( str_replace(',', '', $size ) / 1000, 1 );
+		$this->handle_original_sizes[ $handle ] = number_format_i18n( str_replace( ',', '', $size ) / 1000, 1 );
 	}
 
 	/**
@@ -417,7 +413,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	 *
 	 * @return float Original size in Kb
 	 */
-
 	public function get_handle_original_size( $handle ) {
 		return $this->handle_original_sizes[ $handle ];
 	}
@@ -429,7 +424,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @param float $size Size in Kb
 	 */
 	public function set_handle_compressed_size( $handle, $size ) {
-		$this->handle_compressed_sizes[ $handle ] = number_format_i18n( str_replace(',', '', $size ) / 1000, 1 );
+		$this->handle_compressed_sizes[ $handle ] = number_format_i18n( str_replace( ',', '', $size ) / 1000, 1 );
 	}
 
 	/**
@@ -479,7 +474,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	public function get_handle_dependencies( $handle ) {
 		return isset( $this->handle_dependencies[ $handle ] ) ? $this->handle_dependencies[ $handle ] : array();
 	}
-
 
 	/**
 	 * Return the complete list of dependencies of all handles in this group
@@ -587,8 +581,7 @@ class WP_Hummingbird_Module_Minify_Group {
 					unset( $new_should[ $key ] );
 					$this->$should = array_values( $new_should );
 				}
-			}
-			else {
+			} else {
 				// Handle should or shouldn't be done
 				$value = (bool) $value;
 				if ( $value && ! in_array( $handle, $this->$should ) ) {
@@ -603,17 +596,14 @@ class WP_Hummingbird_Module_Minify_Group {
 					$this->$should = array_values( $new_should );
 				}
 			}
-
 		} else {
 			// Return the value
 			if ( 'dont' === $do ) {
 				return in_array( $handle, $this->$should ) ? false : true;
-			}
-			else {
+			} else {
 				return ! in_array( $handle, $this->$should ) ? false : true;
 			}
-		}
-
+		} // End if().
 		return null;
 	}
 
@@ -644,9 +634,11 @@ class WP_Hummingbird_Module_Minify_Group {
 		}
 
 		$handles = $this->get_handles();
+
 		if ( count( $handles ) === 1 && ! $this->should_do_handle( $handles[0], 'minify' ) ) {
 			return false;
 		}
+
 		return true;
 	}
 
@@ -730,7 +722,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	/**
 	 * Add an after attribute. Normally us by add_inline_script/style functions
 	 *
-	 * @param $new_after
+	 * @param $new_data
 	 */
 	public function add_data( $new_data ) {
 		$data = $this->get_data();
@@ -788,7 +780,6 @@ class WP_Hummingbird_Module_Minify_Group {
 		return $this->args;
 	}
 
-
 	/**
 	 * Set the args attribute value
 	 *
@@ -809,7 +800,6 @@ class WP_Hummingbird_Module_Minify_Group {
 		$this->refresh_hash();
 	}
 
-
 	/**
 	 * Checks if the group is expired by comparing expiration time set in the file
 	 * and handles versions hashes
@@ -819,7 +809,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	public function is_expired() {
 		return ( time() > $this->expires_on() ) || ( $this->get_file_version_hash() != $this->get_versions_hash() );
 	}
-
 
 	/**
 	 * Refresh the unique hash for this group
@@ -836,7 +825,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			$handles_versions = array( $handles_versions );
 		}
 
-		$hash    = implode( '-', $handles );
+		$hash  = implode( '-', $handles );
 		$hash .= $this->args;
 		$hash .= $this->type;
 		$hash .= implode( '-', $handles_versions );
@@ -857,7 +846,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	/**
 	 * General purpose function. Returns an array hashed
 	 *
-	 * @param array $list Array of strings
+	 * @param array|string $list Array of strings or single string.
 	 *
 	 * @return string
 	 */
@@ -870,7 +859,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * Process the group. Minifies/combine... everything
 	 */
 	public function process_group() {
-
 		if ( ! $this->should_generate_file() ) {
 			// Nothing to process, we'll use the default handle URL instead
 			return false;
@@ -893,29 +881,28 @@ class WP_Hummingbird_Module_Minify_Group {
 					$this->type,
 					'empty-url',
 					__( 'This file has not a linked URL, it will not be combined/minified', 'wphb' ),
-					array( 'minify', 'combine' ), // Disallow minification/concat
-					array( 'minify', 'combine' ) // Disable minification/concat switchers
+					array( 'minify', 'combine' ), // Disallow minification/concat.
+					array( 'minify', 'combine' )  // Disable minification/concat switchers.
 				);
 				continue;
 			}
 
 			$pathinfo = pathinfo( $src );
-			if ( ! isset( $pathinfo['extension'] ) || ( isset( $pathinfo['extension'] ) && ! in_array( $pathinfo['extension'], array( 'js', 'css' ) ) ) ) {
+			if ( ! isset( $pathinfo['extension'] ) || ( isset( $pathinfo['extension'] ) && ! preg_match( '/(css|js)\??[a-zA-Z=0-9]*/', $pathinfo['extension'] ) ) ) {
 				$minify_module->errors_controller->add_error(
 					$handle,
 					$this->type,
 					'wrong-extension',
-					__( 'This file included in your output can\'t be minified or combined', 'wphb' ),
-					array( 'minify', 'combine' ), // Disallow minification/concat
-					array( 'minify', 'combine' ) // Disable minification/concat switchers
+					__( "This file included in your output can't be minified or combined", 'wphb' ),
+					array( 'minify', 'combine' ), // Disallow minification/concat.
+					array( 'minify', 'combine' )  // Disable minification/concat switchers.
 				);
 				continue;
 			}
 
-			// @TODO Log
-			// WP_Hummingbird_Module_Minify::log( "localProcessing Group : " . $this->get_cache_key() );
+			$minify_module->logger->log( 'localProcessing Group : ' . $this->group_id );
 
-			// Get the full URL
+			// Get the full URL.
 			if ( ! preg_match( '|^(https?:)?//|', $src ) ) {
 				$src = site_url( $src );
 			}
@@ -936,28 +923,30 @@ class WP_Hummingbird_Module_Minify_Group {
 					// Rooted URL
 					$src = 'http:' . $src;
 				}
-				$request = wp_remote_get( $src, array( 'sslverify' => false ) );
+				$request = wp_remote_get( $src, array(
+					'sslverify' => false,
+				) );
 				$content = wp_remote_retrieve_body( $request );
 				if ( is_wp_error( $request ) ) {
-					//WP_Hummingbird_Module_Minify::log( $request->get_error_message() );
+					$minify_module->logger->log( $request->get_error_message() );
 				} elseif ( wp_remote_retrieve_response_code( $request ) !== 200 ) {
-					//WP_Hummingbird_Module_Minify::log( "Code different from 200. Truncated content:" );
-					//WP_Hummingbird_Module_Minify::log( substr( $content, 0, 1000 ) );
+					$minify_module->logger->log( 'Code different from 200. Truncated content:' );
+					$minify_module->logger->log( substr( $content, 0, 1000 ) );
 				}
 			}
 
-			// If nothing worked do not minify and do not combine file
+			// If nothing worked do not minify and do not combine file.
 			if ( empty( $content ) ) {
 				$minify_module->errors_controller->add_error(
 					$handle,
 					$this->type,
 					'empty-content',
 					__( 'It looks like this file is empty', 'wphb' ),
-					array( 'minify', 'combine' ) // Disallow minification/concat
+					array( 'minify', 'combine' ) // Disallow minification/concat.
 				);
 				continue;
-			}
-			else {
+			} else {
+				$minify_module->logger->log( 'Asset (handle: ' . $handle . ') in group ' . $this->type . ' has been successfully processed.' );
 				//$minification_module->errors_controller->clear_handle_error( $handle, $this->type );
 			}
 
@@ -968,13 +957,12 @@ class WP_Hummingbird_Module_Minify_Group {
 
 			// Concatenate and minify scripts/styles!
 			if ( 'scripts' === $this->type ) {
-				//WP_Hummingbird_Module_Minify::log( "Minify script" );
-			}
-			elseif ( 'styles' === $this->type ) {
-				//WP_Hummingbird_Module_Minify::log( "Minify style" );
+				//$minify_module->logger->log( 'Minify script' );
+			} elseif ( 'styles' === $this->type ) {
+				//$minify_module->logger->log( 'Minify style' );
 				if ( $is_local ) {
 					//$content = self::replace_relative_urls( dirname( $path ), $content );
-					$content = WP_Hummingbird_CSS_UriRewriter::prepend( $content, trailingslashit( dirname($src) ) );
+					$content = WP_Hummingbird_CSS_UriRewriter::prepend( $content, trailingslashit( dirname( $src ) ) );
 				}
 
 				if ( preg_match_all( '/(?<fullImport>@import\s?.*?;)/', $content, $matches ) ) {
@@ -992,7 +980,8 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 
 			if ( empty( $content ) ) {
-				//WP_Hummingbird_Module_Minify::log( "Empty content after minification" );
+				$minify_module->logger->log( 'Empty content after minification' );
+
 				// Something happened to compression
 				$minify_module->errors_controller->add_error(
 					$handle,
@@ -1001,16 +990,15 @@ class WP_Hummingbird_Module_Minify_Group {
 					__( 'Hummingbird could not parse the content of this file', 'wphb' ),
 					array( 'minify', 'combine' )
 				);
-			}
-			else {
+			} else {
 				//$minification_module->errors_controller->clear_handle_error( $handle, $this->type );
 				$files_data[] = array(
-					'handle' => $handle,
+					'handle'  => $handle,
 					'content' => $content,
-					'minify' => $this->should_do_handle( $handle, 'minify' )
+					'minify'  => $this->should_do_handle( $handle, 'minify' ),
 				);
 			}
-		}
+		} // End foreach().
 
 		unset( $content );
 
@@ -1037,7 +1025,6 @@ class WP_Hummingbird_Module_Minify_Group {
 			return new WP_Error( 'error', __( 'Minify callback does not exist', 'wphb' ) );
 		}
 
-
 		// Generate the file
 		$result = call_user_func_array( $minify_callback, array( $files_data, $upload_to_cdn, $this ) );
 
@@ -1046,7 +1033,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			return $result;
 		}
 
-		$result = (array)$result;
+		$result = (array) $result;
 		self::insert_group( $this, $result );
 		return true;
 	}
@@ -1060,12 +1047,11 @@ class WP_Hummingbird_Module_Minify_Group {
 	public static function insert_group( $group, $file ) {
 		// Insert the new file in posts table
 		$post_id = wp_insert_post( array(
-			'post_title' => $group->get_sources_hash() . '-' . $group->type,
-			'post_status' => 'publish',
-			'post_type' => 'wphb_minify_group',
-			'post_content' => $file['response']
+			'post_title'   => $group->get_sources_hash() . '-' . $group->type,
+			'post_status'  => 'publish',
+			'post_type'    => 'wphb_minify_group',
+			'post_content' => $file['response'],
 		) );
-
 
 		if ( $post_id ) {
 			wp_cache_delete( 'wphb_minify_groups' );
@@ -1075,7 +1061,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			if ( isset( $file['atts'] ) ) {
 				// save information about each file
 				foreach ( $file['atts'] as $item ) {
-					$item = (array)$item;
+					$item = (array) $item;
 					$group->set_handle_original_size( $item['handle'], $item['original-size'] );
 					$group->set_handle_compressed_size( $item['handle'], $item['compressed-size'] );
 				}
@@ -1113,8 +1099,7 @@ class WP_Hummingbird_Module_Minify_Group {
 
 				update_post_meta( $group->file_id, '_url', $upload['url'] );
 				update_post_meta( $group->file_id, '_path', $upload['file'] );
-			}
-			else {
+			} else {
 				// Just save URL
 				update_post_meta( $group->file_id, '_url', $file['response'] );
 			}
@@ -1122,7 +1107,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			update_post_meta( $group->file_id, '_expires', $expire_on );
 
 			return true;
-		}
+		} // End if().
 
 		return false;
 	}
@@ -1131,7 +1116,10 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @internal
 	 */
 	public static function _upload_mimes() {
-		return array( 'js' => 'application/javascript', 'css' => 'text/css' );
+		return array(
+			'js'  => 'application/javascript',
+			'css' => 'text/css',
+		);
 	}
 
 	/**
@@ -1175,7 +1163,6 @@ class WP_Hummingbird_Module_Minify_Group {
 			wp_cache_delete( 'wphb_minify_groups' );
 		}
 	}
-
 
 	/**
 	 * Return the group content saved in the linked post
@@ -1229,7 +1216,6 @@ class WP_Hummingbird_Module_Minify_Group {
 			}
 		}
 
-
 		return $content;
 	}*/
 
@@ -1279,7 +1265,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	}
 
 	public function get_group_src() {
-		if ( ! $this->should_process_group() ) {
+		if ( ! $this->should_process_group() || 0 === $this->file_id ) {
 			$handles = $this->get_handles();
 			return $this->get_handle_url( $handles[0] );
 		}
@@ -1351,8 +1337,8 @@ class WP_Hummingbird_Module_Minify_Group {
 	/**
 	 * Enqueue the new group (only one file)
 	 *
-	 * @param string $new_handle new dependency slug
-	 * @param bool $in_footer if must be enqueued on footer
+	 * @param bool  $in_footer if must be enqueued on footer
+	 * @param array $dependencies
 	 */
 	public function enqueue( $in_footer, $dependencies ) {
 		// Enqueue the group
@@ -1361,8 +1347,6 @@ class WP_Hummingbird_Module_Minify_Group {
 
 			wp_dequeue_script( $this->group_id );
 			wp_deregister_script( $this->group_id );
-
-
 
 			// If set to inline, try to inline.
 			$inlined = false;
@@ -1379,15 +1363,6 @@ class WP_Hummingbird_Module_Minify_Group {
 					$in_footer
 				);
 			}
-			/*
-			wp_enqueue_script(
-				$this->group_id,
-				set_url_scheme( $this->get_group_src() ),
-				$dependencies,
-				null,
-				$in_footer
-			);
-			*/
 
 			$group_id = $this->group_id;
 
@@ -1499,8 +1474,13 @@ class WP_Hummingbird_Module_Minify_Group {
 	}
 
 	/**
-	 * Enqueue just one handle with its original URL
-	 * but will change the slug
+	 * Enqueue just one handle with its original URL but will change the slug
+	 *
+	 * @param $handle
+	 * @param bool  $in_footer if must be enqueued on footer
+	 * @param array $dependencies
+	 *
+	 * @return string
 	 */
 	public function enqueue_one_handle( $handle, $in_footer, $dependencies = array() ) {
 		if ( count( $this->get_handles() ) === 1 ) {
@@ -1513,9 +1493,11 @@ class WP_Hummingbird_Module_Minify_Group {
 			$wp_sources = wp_scripts();
 
 			// Just in case, we'll dequeue all possibilities
+			/*
 			foreach ( $this->get_handles() as $_handle ) {
 				//$this->simulate_dequeue_asset( $_handle );
 			}
+			*/
 
 			// If set to inline, try to inline.
 			$inlined = false;
@@ -1532,16 +1514,6 @@ class WP_Hummingbird_Module_Minify_Group {
 					$in_footer
 				);
 			}
-
-			/*
-			wp_enqueue_script(
-				$new_id,
-				set_url_scheme( $this->get_handle_url( $handle ) ),
-				$dependencies,
-				null,
-				$in_footer
-			);
-			*/
 
 			if ( $this->is_deferred() ) {
 				add_filter( 'script_loader_tag', function( $tag, $handle ) use ( $new_id ) {
@@ -1588,9 +1560,11 @@ class WP_Hummingbird_Module_Minify_Group {
 			$wp_sources = wp_styles();
 
 			// Just in case, we'll dequeue all possibilities
+			/*
 			foreach ( $this->get_handles() as $_handle ) {
-//				$this->simulate_dequeue_asset( $_handle );
+				//$this->simulate_dequeue_asset( $_handle );
 			}
+			*/
 
 			// If set to inline, try to inline.
 			$inlined = false;
@@ -1639,7 +1613,7 @@ class WP_Hummingbird_Module_Minify_Group {
 					$wp_styles->done[] = $handle;
 				}
 			}, 999 );
-		}
+		} // End if().
 
 		return $new_id;
 	}

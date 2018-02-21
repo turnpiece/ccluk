@@ -321,9 +321,9 @@ class Dashboard extends Controller {
 	 */
 	public function admin_menu() {
 		$cap        = is_multisite() ? 'manage_network_options' : 'manage_options';
-		$menu_title = esc_html__( "Defender", wp_defender()->domain );
+		$menu_title = wp_defender()->isFree ? esc_html__( "Defender", wp_defender()->domain ) : esc_html__( "Defender Pro", wp_defender()->domain );
 		//$menu_title = sprintf( $menu_title, $indicator );
-		add_menu_page( esc_html__( "Defender", wp_defender()->domain ), $menu_title, $cap, 'wp-defender', array(
+		add_menu_page( esc_html__( "Defender Pro", wp_defender()->domain ), $menu_title, $cap, 'wp-defender', array(
 			&$this,
 			'actionIndex'
 		), $this->get_menu_icon() );

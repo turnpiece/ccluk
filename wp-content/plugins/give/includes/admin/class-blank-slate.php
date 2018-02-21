@@ -54,7 +54,7 @@ class Give_Blank_Slate {
 	 * The content of the blank slate panel.
 	 *
 	 * @since  1.8.13
-	 * @var bool
+	 * @var array
 	 * @access private
 	 */
 	private $content = array();
@@ -260,7 +260,7 @@ class Give_Blank_Slate {
 			'cta_text'  => __( 'Create Donation Form', 'give' ),
 			'cta_link'  => admin_url( 'post-new.php?post_type=give_forms' ),
 			'help'      => sprintf(
-				__( 'Need help? Get started with %sGive 101%s.', 'wbpr' ),
+				__( 'Need help? Get started with %sGive 101%s.', 'give' ),
 				'<a href="http://docs.givewp.com/give101/" target="_blank">',
 				'</a>'
 			),
@@ -278,7 +278,7 @@ class Give_Blank_Slate {
 				'cta_text' => __( 'View All Forms', 'give' ),
 				'cta_link' => admin_url( 'edit.php?post_type=give_forms' ),
 				'help'     => sprintf(
-					__( 'Need help? Learn more about %sDonations%s.', 'wbpr' ),
+					__( 'Need help? Learn more about %sDonations%s.', 'give' ),
 					'<a href="http://docs.givewp.com/core-donations/">',
 					'</a>'
 				),
@@ -293,7 +293,7 @@ class Give_Blank_Slate {
 				'cta_text' => __( 'View All Forms', 'give' ),
 				'cta_link' => admin_url( 'edit.php?post_type=give_forms' ),
 				'help'     => sprintf(
-					__( 'Need help? Learn more about %sDonors%s.', 'wbpr' ),
+					__( 'Need help? Learn more about %sDonors%s.', 'give' ),
 					'<a href="http://docs.givewp.com/core-donors/">',
 					'</a>'
 				),

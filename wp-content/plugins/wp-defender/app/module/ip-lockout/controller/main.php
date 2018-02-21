@@ -718,6 +718,7 @@ class Main extends Controller {
 			if ( $this->hasMethod( 'scheduleReport' ) ) {
 				$this->scheduleReport();
 			}
+			Utils::instance()->submitStatsToDev();
 			wp_send_json_success( $res );
 		} else {
 			wp_send_json_error( array(

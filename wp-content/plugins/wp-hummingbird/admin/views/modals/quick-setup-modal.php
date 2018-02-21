@@ -9,8 +9,8 @@
 			<input type="button" class="button button-large" value="<?php esc_attr_e( 'Test my website', 'wphb' ); ?>" onclick="window.WPHB_Admin.dashboard.runPerformanceTest()">
 		</div>
 		<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/hummingbird-modal-quicksetup.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-modal-quicksetup@2x.png'; ?> 2x"
 			 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
 	</div>
 </dialog><!-- end wphb-upgrade-membership-modal -->

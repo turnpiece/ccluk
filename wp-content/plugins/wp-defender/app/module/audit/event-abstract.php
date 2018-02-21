@@ -276,8 +276,6 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			}
 			//finally, default params
 			$params = array_merge( self::get_default_params(), $params );
-			file_put_contents( __DIR__ . '/test', var_export( $hook_name, true ), FILE_APPEND );
-			file_put_contents( __DIR__ . '/test', var_export( $params, true ), FILE_APPEND );
 			//still need to check if this condition okay
 			if ( isset( $hook_data['false_when'] ) && self::check_condition( $hook_data['false_when'], $params ) == false ) {
 				return false;
@@ -288,6 +286,7 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			if ( empty( $text ) ) {
 				return false;
 			}
+
 			foreach ( $params as $key => $val ) {
 				$replacer = $val;
 				if ( is_array( $replacer ) || is_object( $replacer ) ) {

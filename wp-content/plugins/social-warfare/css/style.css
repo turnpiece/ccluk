@@ -88,6 +88,10 @@ div.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer {
 	flex-flow: row wrap;
 }
 
+.nc_socialPanel:not(.nc_floater):not(.nc_socialPanelSide).swp_shift {
+ 	padding:0 10px;
+}
+
 .nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer:nth-child(1) {
 	margin-left: 0;
 }
@@ -1739,10 +1743,6 @@ div.nc_socialPanel .nc_tweetContainer.swp_emphasize {
 	flex: 2;
 }
 
-div.nc_socialPanel .nc_tweetContainer.swp_whatsapp:not(.mobile) {
-	display: none;
-}
-
 .sw-pinit.aligncenter {
 	margin: 0 auto;
 }
@@ -1760,4 +1760,7 @@ div.nc_socialPanel .nc_tweetContainer.swp_whatsapp:not(.mobile) {
 	position: absolute;
 	top: 0;
 	width: 0;
+}
+.fl-module-content .uabb-blog-posts .uabb-post-thumbnail .sw-pinit.lazyloaded {
+	display: block !important;
 }

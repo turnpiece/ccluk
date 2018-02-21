@@ -1,0 +1,642 @@
+/* ****************************************************************************
+ * MODULES: MINIFICATION
+ */
+
+@import "../common/variables";
+@import "../common/mixins";
+
+/* Checkbox groups */
+.wpmud .checkbox-group {
+    border-radius: 41px;
+    display: flex;
+    justify-content: flex-end;
+    height: 40px;
+}
+.wpmud .wphb-modal .checkbox-group {
+    justify-content: flex-start;
+}
+
+/* We do not use display: none, because screen readers don't see the element */
+.wpmud .checkbox-group input[type="checkbox"] {
+    border: 0;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+    display: block;
+}
+
+.wpmud .checkbox-group input[type="checkbox"] + label {
+    background-color: #FAFAFA;
+    border-radius: 4px;
+    display: flex;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    width: 107px;
+    position: relative;
+    transition-property: background, color;
+    transition-duration: 0.3s;
+    color: transparent !important;
+    margin-bottom: 0;
+    margin-left: 5px;
+}
+
+/* Overwrite for advanced view */
+.wpmud .wphb-minification-advanced-group input[type="checkbox"] + label {
+    width: 50px;
+}
+
+/* Modal window */
+.wpmud .wphb-modal .checkbox-group {
+    width: 100%;
+    height: 52px;
+}
+
+.wpmud .wphb-modal .checkbox-group input[type="checkbox"] + label {
+    padding: 10px 10px;
+    width: 70px;
+    height: 50px;
+}
+
+.wpmud .wphb-modal .wphb-progress-state {
+    text-align: left;
+    margin-top: 0;
+}
+
+/* Checkbox group */
+.wpmud .checkbox-group input[type="checkbox"] + label.toggle-label-background, /* modal */
+.wpmud .checkbox-group input[type="checkbox"]:checked + label {
+    box-shadow: none;
+    background-color: #EFFAFF;
+}
+
+.wpmud .checkbox-group input[type="checkbox"] + label > span:not(.toggle),
+.wpmud .checkbox-group input[type="checkbox"] + label > i {
+    color: #888888;
+    padding: 0;
+    font-size: 12px;
+}
+
+.wpmud .checkbox-group > span {
+    color: #AAAAAA;
+    font-size: 12px;
+    line-height: 40px;
+}
+
+.wpmud .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
+    font-size: 14px;
+    vertical-align: -2px;
+    margin-right: 8px;
+}
+
+/* Overwrite for advanced view */
+.wpmud .wphb-minification-advanced-group input[type="checkbox"] + label > [class^="hb-"]:before,
+.wpmud .wphb-modal input[type="checkbox"] + label > [class^="hb-"]:before {
+    margin-right: 0;
+}
+
+.wpmud .checkbox-group input[type="checkbox"] + label.toggle-label-background > span:not(.toggle), /* modal */
+.wpmud .checkbox-group input[type="checkbox"]:checked + label > span:not(.toggle),
+.wpmud .checkbox-group input[type="checkbox"]:checked + label > i {
+    color: #17A8E3;
+}
+
+.wpmud .checkbox-group input[type="checkbox"]:disabled + label > span:not(.toggle),
+.wpmud .checkbox-group input[type="checkbox"]:disabled + label > i {
+    color: #DDD;
+}
+
+.wpmud .checkbox-group input[type="checkbox"]:disabled + label {
+    background-color: #FFF;
+}
+
+.wpmud .checkbox-group input[type="checkbox"] + label > [tooltip] {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    z-index: 9;
+}
+
+.wpmud .checkbox-group label [class^="hb-"] {
+    display: block;
+    padding: 10px 0 4px;
+
+}
+
+/* Notice in header to enable advanced mode */
+.wpmud .wrap-wphb-minification > .row > .wphb-notice {
+    margin-bottom: 30px;
+}
+
+/* Minification meta box */
+.wpmud .wphb-minification-files {
+    background-color: #F8F8F8;
+    padding-bottom: 1px;
+}
+
+.wpmud .box-minification-enqueued-files .box-title .buttons > div {
+    display: inline-block;
+    vertical-align: top;
+}
+
+/* Switch type button */
+.wpmud .box-minification-enqueued-files .box-title .buttons {
+    margin-right: 45px !important;
+}
+
+.wpmud .box-minification-enqueued-files .box-title .wphb-switch-button {
+    border-left: 1px solid #E6E6E6;
+    display: block;
+    height: 60px;
+    left: 100%;
+    margin-left: -30px;
+    position: relative;
+    width: 60px;
+}
+
+.wpmud .box-minification-enqueued-files .box-title .wphb-switch-button > i {
+    color: #AAAAAA;
+    font-size: 20px;
+    left: 50%;
+    margin-left: -10px;
+    margin-top: -10px;
+    position: absolute;
+    top: 50%;
+}
+
+.wpmud .box-minification-enqueued-files .box-title-advanced .wphb-switch-button > i {
+    color: #17A8E3;
+}
+
+.wpmud .wphb-minification-files-header {
+    background-color: #fff;
+    border-bottom: 1px solid #E6E6E6;
+    margin-bottom: 30px;
+    padding: 30px;
+}
+
+.wpmud .wphb-border-row {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+    flex-flow: row wrap;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    align-content: center;
+}
+
+.wpmud .wphb-minification-files-basic .wphb-border-row,
+.wpmud .wphb-minification-files-advanced .wphb-border-row,
+.wpmud .wphb-minification-files-advanced .wphb-minification-row-details {
+    padding: 10px 30px;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+
+.wpmud .wphb-minification-files-advanced .wphb-minification-row-details {
+    padding: 0;
+    display: flex;
+    align-content: center;
+    align-items: center;
+}
+
+.wpmud .wphb-minification-files-basic .wphb-border-row {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.wpmud .wphb-minification-files-advanced .wphb-border-row {
+    padding: 10px 30px 10px 20px;
+    min-height: 70px;
+    background-color: #FFF;
+    border-radius: 4px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.05);
+    margin-bottom: 10px;
+}
+
+.wpmud .wphb-minification-files-basic .wphb-border-row:last-child,
+.wpmud .wphb-minification-files-advanced .wphb-border-row:last-child {
+    border-bottom: 0;
+}
+
+.wpmud .wphb-minification-files-table.wphb-minification-files-basic,
+.wpmud .wphb-minification-files-table.wphb-minification-files-advanced {
+    background-color: #F8F8F8;
+    margin: 0 30px 30px;
+}
+
+.wpmud .wphb-minification-files-table.wphb-minification-files-basic {
+    background-color: #FFFFFF;
+    border-radius: 4px;
+    box-shadow: 0 2px 7px 0 rgba(0, 0, 0, 0.05);
+}
+
+.wpmud .wphb-minification-files > h3,
+.wpmud .wphb-minification-files-select h3 {
+    font-size: 13px;
+    font-weight: bold;
+    line-height: 22px;
+    color: #888888;
+    text-align: left;
+    text-transform: none;
+    margin: 10px 30px;
+}
+
+/* Notices */
+.wpmud .wphb-minification-files .wphb-notice {
+    margin: 0 30px 30px;
+    width: auto;
+}
+
+.wpmud .wphb-minification-changed-notice a.wphb-notice-dismiss {
+    opacity: 0.5;
+    color: #333333;
+    font-size: 12px;
+    font-weight: bold;
+    margin-left: 33px;
+    text-transform: uppercase;
+}
+
+/* Styles, common for basic and advanced views */
+.wpmud .wphb-minification-file-info {
+    float: left;
+    line-height: 18px;
+    overflow: hidden;
+    position: relative;
+    white-space: nowrap;
+    width: 300px;
+}
+
+.wpmud .wphb-border-row:not(.disabled) .wphb-minification-file-info:after {
+    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
+    content: '';
+    height: 100%;
+    pointer-events: none;
+    position: absolute;
+    right: 0;
+    top: 0;
+    width: 40px;
+}
+
+.wpmud .wphb-minification-file-info > * {
+    color: #AAAAAA;
+    font-size: 10px;
+    font-weight: 500;
+    line-height: 10px;
+}
+
+.wpmud .wphb-minification-file-info > span:first-child {
+    color: #666666;
+    display: block;
+    font-size: 13px;
+    line-height: 13px;
+}
+
+.wpmud .wphb-minification-file-info > a {
+    max-width: 400px;
+    overflow: hidden;
+}
+
+.wpmud .wphb-minification-file-info > .original-size.crossed-out {
+    text-decoration: line-through;
+}
+
+.wpmud .wphb-minification-file-info > .dev-icon-caret_down,
+.wpmud .wphb-minification-file-info > .compressed-size {
+    color: #1ABC9C;
+}
+
+.wpmud .wphb-minification-file-info > .dev-icon-caret_down {
+    font-size: 12px;
+    letter-spacing: -3px;
+    margin-left: -3px;
+    position: relative;
+    top: 2px;
+}
+
+/* Advanced minification section */
+.wpmud .wphb-minification-filter-buttons {
+    padding: 0 30px 20px;
+}
+
+.wpmud .wphb-minification-files-select {
+    display: flex;
+    align-items: center;
+    align-content: center;
+    margin: 0 50px;
+}
+
+.wpmud .wphb-minification-files-select h3 {
+    margin: 5px 5px 7px;
+}
+
+.wpmud .wphb-minification-bulk-file-selector {
+    float: left;
+}
+
+.wpmud .wphb-minification-file-select {
+    float: left;
+    line-height: 30px;
+    margin-right: 10px;
+}
+
+.wpmud .wphb-minification-exclude {
+    margin-left: 30px;
+}
+
+/* Filter */
+.wpmud .wphb-minification-filter {
+    background-color: #FFFFFF;
+    padding: 0 30px;
+}
+
+.wpmud .wphb-minification-filter > div {
+    height: 78px;
+    display: flex;
+    align-items: center;
+    align-content: center;
+}
+
+/* Overwrite for wpmudev styles */
+.wpmud .wphb-minification-filter > div > input {
+    margin: 0 10px !important;
+    width: 40% !important;
+    background-color: #F8F8F8 !important;
+}
+
+.wpmud .wphb-minification-filter > div .wphb-block-title {
+    color: #333333;
+    font: 500 13px/30px $font;
+    text-transform: none;
+    margin-right: 21px;
+}
+
+.wpmud .wphb-minification-filter .select-list-container {
+    min-width: 240px !important;
+}
+
+/* Disabled/hidden row start */
+.wpmud .wphb-border-row.out-of-filter,
+.wpmud .wphb-border-row.disabled .checkbox-group {
+    display: none;
+}
+
+.wpmud .box-content.disabled,
+.wpmud .wphb-border-row.disabled {
+    background-color: #F2F2F2;
+}
+
+.wpmud .wphb-minification-files-advanced .wphb-border-row.disabled {
+    box-shadow: none;
+}
+
+.wpmud .wphb-border-row.disabled .wphb-filename-extension-other,
+.wpmud .wphb-border-row.disabled .wphb-filename-extension-css,
+.wpmud .wphb-border-row.disabled .wphb-filename-extension-javascript,
+.wpmud .wphb-border-row.disabled .wphb-filename-extension-js {
+    opacity: 0.4;
+}
+
+.wpmud .wphb-border-row.disabled .wphb-minification-file-info > span {
+    color: #AAA;
+}
+/* Disabled row end */
+
+/* Settings */
+.wpmud .wrap-wphb-minification .settings-form {
+    margin: 0;
+}
+
+/* Overwrite upsell message */
+.wpmud .wrap-wphb-minification .content-box-two-cols-image-left .wphb-block-entry-content {
+    margin-top: 0;
+}
+
+/* Minification switch mode notice */
+.wpmud .wphb-basic-minification-modal .box,
+.wpmud .wphb-advanced-minification-modal .box {
+    width: 400px !important;
+    margin-left: -200px !important;
+    padding: 40px 0 30px !important;
+}
+
+.wpmud .wphb-basic-minification-modal .title,
+.wpmud .wphb-advanced-minification-modal .title {
+    display: none;
+}
+
+.wpmud .wphb-basic-minification-modal h1,
+.wpmud .wphb-advanced-minification-modal h1 {
+    color: #333333;
+    font-size: 22px;
+    font-weight: bold;
+    line-height: 30px;
+    text-transform: none;
+}
+
+.wpmud .wphb-basic-minification-modal p,
+.wpmud .wphb-advanced-minification-modal p {
+    color: #666;
+    font-size: 13px;
+    line-height: 22px;
+    margin: 0 30px;
+    text-align: center;
+}
+
+.wpmud .wphb-basic-minification-modal img,
+.wpmud .wphb-advanced-minification-modal img {
+    margin-left: 0;
+}
+
+// Responsive
+@include bp(desktop-large) {
+    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
+        width: 235px;
+    }
+}
+
+@include bp(desktop) {
+    .wpmud .box-minification-enqueued-files .box-title .buttons {
+        float: left;
+        margin-right: -5px !important;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
+        width: 130px;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-exclude {
+        margin-left: 15px;
+    }
+
+    .wpmud .box-minification-enqueued-files .box-footer .button {
+        margin-top: 15px;
+    }
+}
+
+@media screen and (max-width: 1060px) {
+    .wpmud .wphb-border-row-header,
+    .wpmud .wphb-border-row {
+        padding: 15px 15px;
+    }
+}
+
+@include bp(desktop-small) {
+    .wpmud .box-minification-enqueued-files .box-title .buttons {
+        float: right;
+        margin-right: 45px !important;
+    }
+}
+
+@include bp(tablet) {
+    .wpmud .wphb-minification-files-advanced .fileinfo-group:after {
+        font-family: dashicons, Arial, sans-serif;
+        content: "\F347";
+        position: absolute;
+        left: 100%;
+        margin-left: -70px;
+        margin-top: 5px;
+    }
+
+    .wpmud .wphb-minification-files-advanced .fileinfo-group.opened:after {
+        content: "\f343";
+    }
+
+    .wpmud .wphb-minification-files-advanced .fileinfo-group {
+        padding: 10px 0;
+        overflow: hidden;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
+        width: 55%;
+        min-width: 200px;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info > a {
+        max-width: 200px;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-row-details {
+        display: none;
+        margin: 10px 0;
+        border-top: 1px solid #E6E6E6;
+        padding-top: 15px !important;
+        width: 100%;
+        z-index: 100;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-advanced-group {
+        float: left;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-exclude {
+        float: right;
+        margin-top: 7px;
+    }
+}
+
+@include bp(phone-large) {
+    .wpmud .box-minification-enqueued-files .box-title h3,
+    .wpmud .box-minification-enqueued-files .box-title .buttons {
+        float: none !important;
+    }
+
+    .wpmud .box-minification-enqueued-files .box-title .wphb-switch-button {
+        height: 96px;
+        margin-left: -60px;
+        position: absolute;
+        top: 0;
+    }
+
+    .wpmud .wphb-minification-file-info {
+        width: 185px;
+    }
+
+    .wpmud .box-minification-enqueued-files .box-footer .status-text {
+        display: block;
+        max-width: 100%;
+        text-align: left;
+        padding-left: 0;
+    }
+}
+
+@include bp(phone) {
+    .wpmud .wphb-minification-files-table.wphb-minification-files-basic,
+    .wpmud .wphb-minification-files-table.wphb-minification-files-advanced {
+        margin: 0 10px 30px;
+    }
+
+    .wpmud .wphb-minification-files-header {
+        padding: 15px 30px;
+    }
+
+    .wpmud .box-minification-enqueued-files .buttons .button {
+        padding: 7px !important;
+    }
+
+    .wpmud .wphb-minification-filter-buttons {
+        padding: 0 20px 20px;
+    }
+
+    .wpmud .wphb-minification-files-select {
+        margin: 0 20px;
+    }
+
+    .wpmud .wphb-minification-files > h3 {
+        margin: 10px;
+    }
+
+    .wpmud .wphb-minification-files-basic .wphb-border-row,
+    .wpmud .wphb-minification-files-advanced .wphb-border-row {
+        padding: 10px;
+    }
+
+    .wpmud .wphb-minification-file-info {
+        width: 155px;
+    }
+
+    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
+        min-width: 170px;
+    }
+
+    .wpmud .wphb-border-row .fileinfo-group {
+        /*margin-top: 5px;
+        margin-bottom: -5px;*/
+        margin-top: 0;
+        margin-bottom: 0;
+    }
+
+    .wpmud .checkbox-group > span {
+        line-height: 20px;
+        text-align: right;
+        align-self: center;
+    }
+
+    .wpmud .checkbox-group input[type="checkbox"] + label {
+        width: 60px;
+    }
+
+    .wpmud .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
+        margin-right: 0;
+    }
+
+    .wpmud .checkbox-group input[type="checkbox"] + label > span[class^=hb] > span {
+        display: none;
+    }
+
+    .wpmud .wphb-minification-files-advanced .fileinfo-group:after {
+        margin-left: -40px;
+    }
+}

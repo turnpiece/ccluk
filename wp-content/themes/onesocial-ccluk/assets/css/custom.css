@@ -32,7 +32,9 @@ Custom stylesheet.
             display: block;
             margin: 0; }
           .home-page #main .section .section-content .list-item .entry-header .entry-title {
-            margin-top: 12px; }
+            margin-top: 12px;
+            line-height: 1.5;
+            font-size: 22px; }
           .home-page #main .section .section-content .list-item .entry-header img.wp-post-image {
             margin: 0; }
         .home-page #main .section .section-content .list-item .entry-content .item-meta .activity {
@@ -132,6 +134,35 @@ Custom stylesheet.
     margin-top: -10%; }
 .single.single-ccluk_news .entry-meta.posted-on {
   margin: 1rem 0; }
+
+/* styles for pages */
+body.page article > .entry-header {
+  margin: 24px 0; }
+  body.page article > .entry-header .entry-title {
+    color: #22a7f0; }
+body.page #secondary,
+body.page .default-page + #secondary, body.page.page-template #secondary {
+  padding-top: 50px; }
+body.page #content .row {
+  margin-left: 0;
+  margin-right: 0; }
+body.page #secondary .widget_subpages {
+  position: fixed; }
+  body.page #secondary .widget_subpages ul > li a {
+    display: inline-block;
+    border-left: 10px solid;
+    padding-left: 15px;
+    font-weight: 600; }
+    body.page #secondary .widget_subpages ul > li a:hover {
+      color: #22a7f0; }
+  body.page #secondary .widget_subpages ul > li.first-menu-item a {
+    font-size: 110%;
+    border-left: 0;
+    padding-left: 0; }
+  body.page #secondary .widget_subpages ul > li.widget_subpages_current_page a {
+    color: #22a7f0;
+    pointer-events: none;
+    cursor: default; }
 
 /** Navigation **/
 @media screen and (min-width: 481px) {
@@ -260,12 +291,6 @@ h3 {
 .widget-area .widget .textwidget {
   font-size: 18px; }
 
-.page article > .entry-header {
-  margin: 24px 0; }
-.page #secondary,
-.page .default-page + #secondary, .page.page-template #secondary {
-  padding-top: 100px; }
-
 .archive #content > .archive-header {
   margin: 24px 0; }
   .archive #content > .archive-header h1 {
@@ -274,9 +299,6 @@ h3 {
 .entry-title {
   margin-top: 10px;
   margin-top: 1rem; }
-
-.page .entry-title {
-  color: #22a7f0; }
 
 #save_as_draft,
 .entry-meta a.read-more,

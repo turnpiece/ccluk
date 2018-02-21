@@ -4,11 +4,11 @@ abstract class WP_Hummingbird_Admin_Page {
 
 	protected $slug = '';
 
-	public $page_id = null;
-
 	protected $meta_boxes = array();
 
 	protected $tabs = array();
+
+	public $page_id = null;
 
 	/**
 	 * @var WP_Hummingbird_Admin_Notices
@@ -55,7 +55,6 @@ abstract class WP_Hummingbird_Admin_Page {
 			add_action( 'load-' . $this->page_id, array( $this, 'trigger_load_action' ) );
 			add_filter( 'load-' . $this->page_id, array( $this, 'add_screen_hooks' ) );
 		}
-
 	}
 
 	/**
@@ -84,7 +83,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return string
 	 */
 	public function view( $name, $args = array(), $echo = true ) {
-		$file = wphb_plugin_dir() . "admin/views/$name.php";
+		$file = WPHB_DIR_PATH . "admin/views/{$name}.php";
 		$content = '';
 
 		if ( is_file( $file ) ) {
@@ -101,6 +100,7 @@ abstract class WP_Hummingbird_Admin_Page {
 			}
 			extract( $args );
 
+			/* @noinspection PhpIncludeInspection */
 			include( $file );
 
 			$content = ob_get_clean();
@@ -114,7 +114,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	}
 
 	protected function view_exists( $name ) {
-		$file = wphb_plugin_dir() . "admin/views/$name.php";
+		$file = WPHB_DIR_PATH . "admin/views/{$name}.php";
 		return is_file( $file );
 	}
 
@@ -129,19 +129,17 @@ abstract class WP_Hummingbird_Admin_Page {
 
 	public function notices() {}
 
-
 	/**
-	 * Function triggered when the page is loaded
-	 * before render any content
+	 * Function triggered when the page is loaded before render any content
 	 */
 	public function on_load() {}
 
 	public function enqueue_scripts( $hook ) {
 		/* Enqueue Dashboard UI Shared Lib */
-		WDEV_Plugin_Ui::load( wphb_plugin_url() . 'externals/shared-ui' );
+		WDEV_Plugin_Ui::load( WPHB_DIR_URL . 'externals/shared-ui' );
 
 		// Styles
-		wp_enqueue_style( 'wphb-admin', wphb_plugin_url() . 'admin/assets/css/admin.css', array(), WPHB_VERSION );
+		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.css', array(), WPHB_VERSION );
 
 		// Scripts
 		wphb_enqueue_admin_scripts( WPHB_VERSION );
@@ -236,6 +234,10 @@ abstract class WP_Hummingbird_Admin_Page {
 
 	/**
 	 * Check if there is any meta box for a given context
+	 *
+	 * @param $context
+	 *
+	 * @return bool
 	 */
 	protected function has_meta_boxes( $context ) {
 		return ! empty( $this->meta_boxes[ $this->slug ][ $context ] );
@@ -255,7 +257,6 @@ abstract class WP_Hummingbird_Admin_Page {
 				</a>
 			</div>
 		</section><!-- end header -->
-
 		<?php
 	}
 

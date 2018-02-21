@@ -126,7 +126,9 @@ class Vuln_Scan extends Behavior {
 					);
 				}
 			}
-			$model->save();
+			if ( count( $model->raw['bugs'] ) ) {
+				$model->save();
+			}
 		}
 	}
 

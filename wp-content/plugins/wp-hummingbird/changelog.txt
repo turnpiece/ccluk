@@ -1,8 +1,39 @@
 Plugin Name: Hummingbird Pro
 Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
-Tested up to: 4.8.3
+Tested up to: 4.9.1
 
 Change Log:
+
+= 1.7.2 ( 2018-02-06 ) =
+- New: Minification logging
+- New: Performance reports for subsites
+- Enhance: PHP 7.2 compatibility
+- Enhance: Better support for installs where SSH of FTP filesystem methods are used
+- Enhance: Texts in tooltips and notices in minification module
+- Enhance: Improve dashboard performance module UI
+- Enhance: Page caching will now add die() to the header of cached files and logs to improve security
+- Enhance: Better integration with Divi theme
+- Enhance: Minification UI
+- Enhance: Uptime UI
+- Fix: Page caching will not be halted forever if minification scan fails to finish
+- Fix: Minification not enqueuing some scripts correctly (better support for Google maps, Google reCAPTCHA)
+- Fix: Page cache not updated when comments added on multisite subdirectory installs
+- Fix: Layout issues on IE11
+- Fix: Hummingbird causing Internal server 500 error on some hosts
+- Fix: Typos on browser caching page and membership modal
+
+= 1.7.1 ( 2018-01-15 ) =
+- New: Download log button in page caching module
+- New: Minification screen has been split into beginner and advanced views
+- New: Minification advanced view allows manipulations with jquery, jquery-core and jquery-migrate files
+- Enhance: Page caching module checking for wp-content directory and wp-config.php file
+- Enhance: Hummingbird will convert any path to regex expression in exclusion rules in page caching module
+- Enhance: Compatibility with Bedrock
+- Enhance: Detection and handling of WP_CACHE constant in wp-config.php file
+- Enhance: More informative tooltips for caching modules
+- Fix: Minification not always correctly detecting when HTTP/2 is used
+- Fix: Cloudflare integration shows empty zone when website domain includes www
+- Fix: Notices during page/post edit when page caching is active
 
 = 1.7.0.3 ( 2017-11-14 ) =
 - New: Debugging option for page caching
@@ -274,4 +305,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1511475002-au
+87274-1518896094-au

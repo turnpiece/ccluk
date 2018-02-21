@@ -5,6 +5,7 @@
  * @package Hummingbird
  *
  * @var string        $deactivate_url  Deactivate URL.
+ * @var string        $download_url     Download logs URL.
  * @var bool|WP_Error $error           Error if present.
  * @var array         $pages           A list of page types.
  * @var array         $settings        Settings array.
@@ -138,8 +139,21 @@
 			</span>
 			<label for="clear-update"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
 			<span class="sub">
-				<?php esc_html_e( 'Debug log will be located in ', 'wphb' ); ?>
-				<?php echo WP_CONTENT_DIR . '/wp-content/wphb-cache/page-caching.log'; ?>
+				<?php esc_html_e( 'If you’re having issues with page caching, turn on the debug log to get insight into what’s going on.', 'wphb' );
+				if ( $settings['settings']['debug_log'] ) {
+					if ( file_exists( WP_CONTENT_DIR . '/wphb-cache/page-caching-log.php' ) ) {
+						?>
+						<a href="<?php echo esc_url( $download_url ); ?>" target="_blank" class="button button-ghost" id="wphb-pc-log-button"><?php esc_html_e( 'Download Logs', 'wphb' ); ?></a>
+						<div class="clear"></div>
+
+						<?php
+						printf(
+							/* translators: %s: File location */
+							esc_html__( 'Location: %s', 'wphb' ),
+							esc_url( get_home_url() . '/wp-content/wphb-cache/page-caching-log.php' )
+						);
+					}
+				} ?>
 			</span>
 
 		</div><!-- end col-two-third -->
@@ -159,7 +173,7 @@
 			</span>
 			<textarea name="url_strings"><?php foreach ( $settings['exclude']['url_strings'] as $url_string ) { echo $url_string . PHP_EOL; }?></textarea>
 			<span class="sub with-bottom-border">
-				<?php esc_html_e( 'Accepts regular expression syntax. For example, if you want to not cache any pages that are nested under your Forums area you might add "\/forums\/" as a rule. When Hummingbird goes to cache pages, she will ignore any URL that contains "/forums/". To exclude a specific page you might add "\/forums\/thread-title".', 'wphb' ); ?>
+				<?php echo __( 'For example, if you want to not cache any pages that are nested under your Forums area you might add "/forums/" as a rule. When Hummingbird goes to cache pages, she will ignore any URL that contains "/forums/". To exclude a specific page you might add "/forums/thread-title". Accepts regular expression syntax, for more complex exclusions it can be helpful to test on <a href="https://regex101.com" target="_blank">regex101.com</a>.', 'wphb' ); ?>
 			</span>
 			<h4><?php esc_html_e( 'User agents', 'wphb' ); ?></h4>
 			<span class="sub">

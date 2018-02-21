@@ -27,8 +27,9 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @return string Login form
  */
 function give_login_form( $login_redirect = '', $logout_redirect = '' ) {
+
 	if ( empty( $login_redirect ) ) {
-		$login_redirect = add_query_arg( 'give-login-success', 'true', give_get_current_page_url() );
+		$login_redirect = add_query_arg( 'give-login-success', 'true', give_get_history_page_uri() );
 	}
 
 	if ( empty( $logout_redirect ) ) {
@@ -324,7 +325,8 @@ function give_email_access_login() {
 
 	$recaptcha_key    = give_get_option( 'recaptcha_key' );
 	$recaptcha_secret = give_get_option( 'recaptcha_secret' );
-	$enable_recaptcha = ! empty( $recaptcha_key ) && ! empty( $recaptcha_secret ) ? true : false;
+
+	$enable_recaptcha = ( give_is_setting_enabled( give_get_option( 'enable_recaptcha' ) ) ) && ! empty( $recaptcha_key ) && ! empty( $recaptcha_secret ) ? true : false;
 	$access_token     = ! empty( $_GET['payment_key'] ) ? $_GET['payment_key'] : '';
 
 	// Use reCAPTCHA.
@@ -391,13 +393,11 @@ function give_email_access_login() {
 
 				return true;
 			}
-
 		} else {
 
 			give_set_error( 'give-no-donations', __( 'We were unable to find any donations associated with the email address provided. Please try again using another email.', 'give' ) );
 
-		}  // End if().
-
+		}
 	} // End if().
 
 }

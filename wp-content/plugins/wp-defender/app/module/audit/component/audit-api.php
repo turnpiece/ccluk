@@ -31,7 +31,7 @@ class Audit_API extends Component {
 		$data['order']    = $order;
 		$data['nopaging'] = $nopaging;
 		$data['timezone'] = get_option( 'gmt_offset' );
-		$response         = Utils::instance()->devCall( 'http://' . self::$end_point . '/logs', $data, array(
+		$response         = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
 			'method'  => 'GET',
 			'timeout' => 20,
 			//'sslverify' => false,
@@ -39,6 +39,7 @@ class Audit_API extends Component {
 				'apikey' => Utils::instance()->getAPIKey()
 			)
 		), true );
+		//todo need to remove in some next versions
 
 		if ( is_wp_error( $response ) ) {
 			return $response;

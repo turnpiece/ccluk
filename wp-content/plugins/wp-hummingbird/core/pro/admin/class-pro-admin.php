@@ -79,9 +79,15 @@ class WP_Hummingbird_Pro_Admin {
 
 	/**
 	 * Load an admin PRO view
+	 *
+	 * @param $name
+	 * @param array $args
+	 * @param bool $echo
+	 *
+	 * @return string
 	 */
 	public function pro_view( $name, $args = array(), $echo = true ) {
-		$file = wphb_plugin_dir() . "core/pro/admin/views/$name.php";
+		$file = WPHB_DIR_PATH . "core/pro/admin/views/$name.php";
 		$content = '';
 
 		if ( is_file( $file ) ) {
@@ -98,6 +104,7 @@ class WP_Hummingbird_Pro_Admin {
 			}
 			extract( $args );
 
+			/* @noinspection PhpIncludeInspection */
 			include( $file );
 
 			$content = ob_get_clean();

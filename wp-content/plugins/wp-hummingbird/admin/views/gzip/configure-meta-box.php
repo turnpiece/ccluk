@@ -9,6 +9,8 @@
  * @var bool|WP_Error $error                Error if present.
  * @var bool          $show_enable_button   Show the enable button.
  * @var bool          $htaccess_error       True if there was an error trying to write the .htaccess file.
+ * @var bool          $htaccess_writable    True if .htaccess is writable.
+ * @var bool          $htaccess_written     True if .htaccess has all rules.
  * @var bool          $full_enabled         True if all types are active.
  * @var array         $pages                A list of page types.
  * @var array         $settings             Settings array.
@@ -26,7 +28,7 @@
 		</span>
 	</div><!-- end col-third -->
 	<div class="col-two-third">
-		<label for="wphb-server-type" class="inline-label"><?php echo esc_html( 'Server type:', 'wphb' ); ?></label>
+		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type:', 'wphb' ); ?></label>
 		<?php
 		wphb_get_servers_dropdown( array(
 			'selected' => $gzip_server_type,
@@ -42,7 +44,7 @@
 		</span>
 	</div><!-- end col-third -->
 	<div class="col-two-third">
-		<?php if ( ! ( wphb_is_htaccess_written( 'gzip' ) && $full_enabled ) ) : ?>
+		<?php if ( ! ( $htaccess_written && $full_enabled ) ) : ?>
 			<div id="wphb-server-instructions-apache" class="wphb-server-instructions hidden" data-server="apache">
 				<div class="tabs">
 					<div class="tab">
@@ -52,10 +54,10 @@
 							<span class="sub">
 								<?php esc_html_e( 'Hummingbird can automatically apply GZip compression for Apache servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
-							<?php if ( wphb_is_htaccess_writable() === true ) : ?>
+							<?php if ( true === $htaccess_writable ) : ?>
 								<div id="enable-cache-wrap" class="<?php echo ! in_array( $gzip_server_type, array( 'apache', 'LiteSpeed' ), true ) ? 'hidden' : ''; ?>">
 									<?php if ( $show_enable_button ) : ?>
-										<?php if ( wphb_is_htaccess_written( 'gzip' ) === true ) : ?>
+										<?php if ( true === $htaccess_written ) : ?>
 											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php else : ?>
 											<?php if ( $htaccess_error ) : ?>
@@ -119,10 +121,10 @@
 							<span class="sub">
 								<?php esc_html_e( 'Hummingbird can automatically apply browser caching for LiteSpeed servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
-							<?php if ( wphb_is_htaccess_writable() === true ) : ?>
+							<?php if ( true === $htaccess_writable ) : ?>
 								<div id="enable-cache-wrap" class="<?php echo ! in_array( $gzip_server_type, array( 'apache', 'LiteSpeed' ), true ) ? 'hidden' : ''; ?>">
 									<?php if ( $show_enable_button ) : ?>
-										<?php if ( wphb_is_htaccess_written( 'gzip' ) === true ) : ?>
+										<?php if ( true === $htaccess_written ) : ?>
 											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php else : ?>
 											<?php if ( $htaccess_error ) : ?>
@@ -214,11 +216,11 @@
 					<?php
 					printf(
 						/* translators: %s: Link to TechNet */
-					__( 'For IIS 7 servers, <a href="%s">visit Microsoft TechNet</a>', 'wphb' ), 'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
+					__( 'For IIS 7 servers, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ), 'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
 					?>
 				</p>
 			</div>
-		<?php elseif ( wphb_is_htaccess_written( 'gzip' ) && $full_enabled ) : ?>
+		<?php elseif ( $htaccess_written && $full_enabled ) : ?>
 			<div class="wphb-notice wphb-notice-blue">
 				<p><?php esc_html_e( 'Automatic .htaccess rules have been applied.', 'wphb' ); ?></p>
 			</div>

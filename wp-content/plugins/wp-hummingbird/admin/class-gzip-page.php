@@ -5,6 +5,12 @@
 class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 	/**
+	 * Check if .htaccess is written by the module.
+	 * @var bool
+	 */
+	private $htaccess_written = false;
+
+	/**
 	 * Overwrites parent class render_header method.
 	 *
 	 * Renders the template header that is repeated on every page.
@@ -37,20 +43,23 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			return;
 		}
 
+		$this->htaccess_written = WP_Hummingbird_Module_Server::is_htaccess_written( 'gzip' );
+
 		$redirect = false;
 		$enabled = false;
 		$disabled = false;
 
 		if ( isset( $_GET['enable'] ) ) {
 			// Enable caching in htaccess (only for apache servers).
-			$result = wphb_save_htaccess( 'gzip' );
+			$result = WP_Hummingbird_Module_Server::save_htaccess( 'gzip' );
 			if ( $result ) {
 				$redirect = true;
 				$enabled = true;
+
 				// Clear saved status.
-				wphb_clear_gzip_cache();
-				// Update cache status.
-				wphb_get_gzip_status();
+				/* @var WP_Hummingbird_Module_GZip $gzip_module */
+				$gzip_module = wphb_get_module( 'gzip' );
+				$gzip_module->clear_cache();
 			} else {
 				$redirect_to = remove_query_arg( array( 'run', 'enable', 'disable' ) );
 				$redirect_to = add_query_arg( 'htaccess-error', true, $redirect_to );
@@ -61,14 +70,15 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 		if ( isset( $_GET['disable'] ) ) {
 			// Disable caching in htaccess (only for apache servers).
-			$result = wphb_unsave_htaccess( 'gzip' );
+			$result = WP_Hummingbird_Module_Server::unsave_htaccess( 'gzip' );
 			if ( $result ) {
 				$redirect = true;
 				$disabled = true;
+
 				// Clear saved status.
-				wphb_clear_gzip_cache();
-				// Update cache status.
-				wphb_get_gzip_status();
+				/* @var WP_Hummingbird_Module_GZip $gzip_module */
+				$gzip_module = wphb_get_module( 'gzip' );
+				$gzip_module->clear_cache();
 			} else {
 				$redirect_to = remove_query_arg( array( 'run', 'enable', 'disable' ) );
 				$redirect_to = add_query_arg( 'htaccess-error', true, $redirect_to );
@@ -136,9 +146,8 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	public function gzip_summary_metabox() {
 		$status = wphb_get_gzip_status();
 
-		$htaccess_written = wphb_is_htaccess_written( 'gzip' );
 		$external_problem = false;
-		if ( $htaccess_written ) {
+		if ( $this->htaccess_written ) {
 			if ( ! is_array( $status ) || ( is_array( $status ) && 3 !== count( $status ) ) || in_array( false, $status, true ) ) {
 				// There must be another plugin/server config that is setting its own gzip stuff.
 				$external_problem = true;
@@ -179,11 +188,8 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			$status = array();
 		}
 
-		$all_types_compressed = array_sum( $status ) === 3;
-		$htaccess_written_by_hummingbird = wphb_is_htaccess_written( 'gzip' );
-
 		$result = false;
-		if ( $all_types_compressed && ! $htaccess_written_by_hummingbird ) {
+		if ( 3 === array_sum( $status ) && ! $this->htaccess_written ) {
 			// Server had already gzip activated, Hummingbird did nothing.
 			$result = true;
 		}
@@ -218,6 +224,8 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			$htaccess_error = true;
 		}
 
+		$htaccess_writable = WP_Hummingbird_Module_Server::is_htaccess_writable();
+
 		$recheck_url = add_query_arg( 'run', 'true' );
 		$recheck_url = remove_query_arg( 'htaccess-error', $recheck_url );
 		$this->view( 'gzip/configure-meta-box', array(
@@ -229,6 +237,8 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			'full_enabled'        => $full_enabled,
 			'recheck_url'         => $recheck_url,
 			'htaccess_error'      => $htaccess_error,
+			'htaccess_writable'   => $htaccess_writable,
+			'htaccess_written'    => $this->htaccess_written,
 		));
 	}
 

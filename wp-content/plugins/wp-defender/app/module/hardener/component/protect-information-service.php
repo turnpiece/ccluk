@@ -103,6 +103,9 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 				'<Files robots.txt>' . PHP_EOL .
 				'Require all granted' . PHP_EOL .
 				'</Files>' . PHP_EOL,
+				'<Files ads.txt>' . PHP_EOL .
+				'Require all granted' . PHP_EOL .
+				'</Files>' . PHP_EOL,
 				'## WP Defender - End ##'
 			);
 		} else {
@@ -113,6 +116,9 @@ class Protect_Information_Service extends Rule_Service implements IRule_Service 
 				'Deny from all' . PHP_EOL .
 				'</FilesMatch>' . PHP_EOL,
 				'<Files robots.txt>' . PHP_EOL .
+				'Allow from all' . PHP_EOL .
+				'</Files>' . PHP_EOL,
+				'<Files ads.txt>' . PHP_EOL .
 				'Allow from all' . PHP_EOL .
 				'</Files>' . PHP_EOL,
 				'## WP Defender - End ##'

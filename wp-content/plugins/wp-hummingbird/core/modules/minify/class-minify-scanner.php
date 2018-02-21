@@ -39,7 +39,8 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	const IS_SCANNING_SLUG = 'wphb-minification-files-scanning';
 	const IS_SCANNED_SLUG = 'wphb-minification-files-scanned';
 	const CURRENT_STEP = 'wphb-minification-scan-step';
-
+	const MINIFICATION_NOTICE = 'wphb-notice-minification-optimized-show';
+	const HTTP2_NOTICE = 'wphb-notice-http2-info-show';
 
 	/**
 	 * Refresh status variables
@@ -57,6 +58,11 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		set_transient( self::IS_SCANNING_SLUG, true, 60 * 4 ); // 4 minutes max
 		delete_option( self::IS_SCANNED_SLUG );
 		update_option( self::CURRENT_STEP, 0 );
+
+		// Reset notice status
+		update_site_option( self::MINIFICATION_NOTICE, 'yes' );
+		update_site_option( self::HTTP2_NOTICE, 'yes' );
+
 		$this->refresh_status();
 	}
 
@@ -82,6 +88,8 @@ class WP_Hummingbird_Module_Minify_Scanner {
 
 	/**
 	 * Update the current step being scanned
+	 *
+	 * @param $step
 	 */
 	public function update_current_step( $step ) {
 		$step = absint( $step );
@@ -139,7 +147,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 			'orderby'        => 'rand',
 			'posts_per_page' => '1',
 			'ignore_sticky_posts' => true,
-			'post_status' => 'publish'
+			'post_status' => 'publish',
 		);
 
 		$urls = array();
@@ -157,8 +165,9 @@ class WP_Hummingbird_Module_Minify_Scanner {
 			}
 
 			$post_type_archive_link = get_post_type_archive_link( $post_type );
-			if ( $post_type_archive_link )
+			if ( $post_type_archive_link ) {
 				$urls[] = $post_type_archive_link;
+			}
 		}
 
 		if ( get_option( 'show_on_front' ) && $post = get_post( get_option( 'page_for_posts' ) ) ) {
@@ -189,26 +198,28 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		$cookies = array();
 		foreach ( $_COOKIE as $name => $value ) {
 			if ( strpos( $name, 'wordpress_' ) > -1 ) {
-				$cookies[] = new WP_Http_Cookie( array( 'name' => $name, 'value' => $value ) );
+				$cookies[] = new WP_Http_Cookie( array(
+					'name'  => $name,
+					'value' => $value,
+				) );
 			}
-
 		}
 
 		$result = array();
 
 		$args = array(
-			'timeout' => 0.01,
-			'cookies' => $cookies,
-			'blocking' => false,
-			'sslverify' => false
+			'timeout'   => 0.01,
+			'cookies'   => $cookies,
+			'blocking'  => false,
+			'sslverify' => false,
 		);
 		$result['cookie'] = wp_remote_get( $url, $args );
 
 		// One call logged out
 		$args = array(
-			'timeout' => 0.01,
-			'blocking' => false,
-			'sslverify' => false
+			'timeout'   => 0.01,
+			'blocking ' => false,
+			'sslverify' => false,
 		);
 
 		$result['no-cookie'] = wp_remote_get( $url, $args );

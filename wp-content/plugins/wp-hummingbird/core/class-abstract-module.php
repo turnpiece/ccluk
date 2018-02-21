@@ -21,9 +21,17 @@ abstract class WP_Hummingbird_Module {
 	 */
 	protected $name = '';
 
+	/**
+	 * @var WP_Hummingbird_Logger instance.
+	 *
+	 * @since 1.7.2
+	 */
+	public $logger;
+
 	public function __construct( $slug, $name ) {
 		$this->slug = $slug;
 		$this->name = $name;
+		$this->logger = new WP_Hummingbird_Logger( $this->slug );
 		$this->init();
 	}
 
@@ -38,7 +46,6 @@ abstract class WP_Hummingbird_Module {
 		/**
 		 * Filters the activation of a module
 		 *
-		 * @usedby wphb_caching_module_status()
 		 * @usedby wphb_uptime_module_status()
 		 * @usedby wphb_minify_module_status()
 		 *
@@ -55,7 +62,6 @@ abstract class WP_Hummingbird_Module {
 	public function get_slug() {
 		return $this->slug;
 	}
-
 
 	/**
 	 * Return the module name
@@ -77,6 +83,14 @@ abstract class WP_Hummingbird_Module {
 	 * Execute the module actions. It must be defined in subclasses.
 	 */
 	public abstract function run();
+
+	/**
+	 * Clear the module cache.
+	 *
+	 * @since 1.7.1
+	 * @return mixed
+	 */
+	public abstract function clear_cache();
 
 	/**
 	 * Return the options array for this module

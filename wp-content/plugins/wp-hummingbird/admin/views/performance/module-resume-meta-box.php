@@ -2,17 +2,19 @@
 
 	<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
 		<img class="wphb-image"
-			 src="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
-			 srcset="<?php echo wphb_plugin_url() . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
+			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary.png'; ?>"
+			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-hb-minify-summary@2x.png'; ?> 2x"
 			 alt="<?php _e( 'Hummingbird', 'wphb' ); ?>">
 	</div>
 
 	<div class="wphb-block-entry-third">
 		<span class="not-present">
 			<?php
-			if ( $last_report && ! is_wp_error( $last_report ) ) {
+			if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) {
 				$error_class = ( 'aplus' === $last_report->score_class || 'a' === $last_report->score_class || 'b' === $last_report->score_class ) ? 'tick' : 'warning';
 				echo $last_report->score . "<i class='hb-wpmudev-icon-{$error_class}'></i><span class='score-span'>/100</span>";
+			} elseif ( $report_dismissed ) {
+				echo $last_report->score . '<span class="tooltip" tooltip="' . esc_attr( __( 'You have ignored your current performance test score', 'wphb' ) ) . '"><i class="hb-wpmudev-icon-info"></i><span class="score-span">/100</span></span>';
 			} else {
 				echo '-';
 			} ?>

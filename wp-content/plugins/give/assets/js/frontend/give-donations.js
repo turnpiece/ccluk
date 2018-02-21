@@ -52,7 +52,7 @@ Give = {
 			// Global currency setting.
 			var format_args = {
 				symbol: '',
-				decimal: parseInt(give_global_vars.decimal_separator),
+				decimal: give_global_vars.decimal_separator,
 				thousand: give_global_vars.thousands_separator,
 				precision: give_global_vars.number_decimals,
 				currency: give_global_vars.currency
@@ -78,47 +78,33 @@ Give = {
 			// Make sure precision is integer type
 			args.precision = parseInt(args.precision);
 
-			if ('INR' === args.currency) {
-				var actual_price = accounting.unformat(price, '.').toString();
+			if ( 'INR' === args.currency ) {
+				// Parse a value from any formatted number/currency string.
+				var actual_amount = accounting.unformat(price, '.').toString();
 
-				var decimal_amount = '',
-					result,
-					amount,
-					decimal_index  = actual_price.indexOf('.');
+				// Update amount to precision.
+				price = (Number(actual_amount)).toFixed(args.precision);
 
-				if ((-1 !== decimal_index) && args.precision) {
-					decimal_amount = Number(actual_price.substr(parseInt(decimal_index)))
-						.toFixed(args.precision)
-						.toString()
-						.substr(1);
-					actual_price   = actual_price.substr(0, parseInt(decimal_index));
+				// Split into decimal and fractional part.
+				var decimal_and_fraction      = price.toString().split('.'),
 
-					if (!decimal_amount.length) {
-						decimal_amount = '.0000000000'.substr(0, (parseInt(decimal_index) + 1));
-					} else if ((args.precision + 1) > decimal_amount.length) {
-						decimal_amount = (decimal_amount + '000000000').substr(0, args.precision + 1);
-					}
-				} else {
-					decimal_amount = '.000000000'.substr(0, args.precision + 1);
+					// Extract last 3 digits of the decimal part.
+					last_three_decimal_digits = decimal_and_fraction[0].substring(decimal_and_fraction[0].length - 3),
+
+					// The remaining digits of the decimal part.
+					remaining_decimal_digits  = decimal_and_fraction[0].substring(0, decimal_and_fraction[0].length - 3);
+
+				if ('' !== remaining_decimal_digits) {
+					last_three_decimal_digits = args.thousand + last_three_decimal_digits;
 				}
 
-				// Extract last 3 from amount
-				result = actual_price.substr(-3);
-				amount = actual_price.substr(0, parseInt(actual_price.length) - 3);
+				price = remaining_decimal_digits.replace( /\B(?=(\d{2})+(?!\d))/g, args.thousand ) + last_three_decimal_digits;
 
-				// Apply digits 2 by 2
-				while (amount.length > 0) {
-					result = amount.substr(-2) + args.thousand + result;
-					amount = amount.substr(0, parseInt(amount.length) - 2);
+				if ( decimal_and_fraction.length > 1 ) {
+					price += args.decimal + decimal_and_fraction[1];
 				}
 
-				if (decimal_amount.length) {
-					result = result + decimal_amount;
-				}
-
-				price = result;
-
-				if (undefined !== args.symbol && args.symbol.length) {
+				if ( undefined !== args.symbol && args.symbol.length ) {
 					if ('after' === args.position) {
 						price = price + args.symbol;
 					} else {
@@ -365,13 +351,24 @@ Give.form = {
 		 *
 		 * @return {string|boolean}
 		 */
-		setInfo: function (str, val, $form, type) {
+		setInfo: function (type, val, $form, str ) {
 			// Bailout.
-			if (!str.length || !$form.length) {
+			if ( !$form.length) {
 				return false;
 			}
 
 			type = 'undefined' === typeof type ? 'data' : type;
+
+			switch (type){
+				case 'nonce':
+					$form.find('input[name="_wpnonce"]').val( val );
+					break;
+			}
+
+			// Bailout.
+			if( 'undefined' !== typeof str && ! str.length ) {
+				return false;
+			}
 
 			switch (type) {
 				case 'attr':
@@ -534,6 +531,54 @@ Give.form = {
 			}
 
 			return Give.fn.unFormatCurrency(amount, this.getInfo('decimal_separator', $form));
+		},
+
+		/**
+		 * Get form security nonce
+		 *
+		 * @since 1.8.17
+		 * @param {object} $form
+		 * @return {string}
+		 */
+		getNonce: function ($form) {
+			// Bailout
+			if (!$form.length) {
+				return '';
+			}
+
+			var nonce = $form.find('input[name="_wpnonce"]').val();
+
+			if ('undefined' === typeof nonce || !nonce) {
+				nonce = '';
+			}
+
+			return nonce;
+		},
+
+		/**
+		 * Reset form noce.
+		 *
+		 * @since 2.0
+		 *
+		 * @param {object} $form Donation form object.
+		 * @returns {boolean}
+		 */
+		resetNonce: function ($form) {
+			// Return false, if form is missing.
+			if ( ! $form.length ) {
+				return false;
+			}
+
+			//Post via AJAX to Give
+			jQuery.post(give_scripts.ajaxurl, {
+					action: 'give_donation_form_nonce',
+					give_form_id: Give.form.fn.getInfo('form-id', $form )
+				},
+				function (response) {
+					// Update nonce field.
+					Give.form.fn.setInfo( 'nonce', response.data, $form, '' );
+				}
+			);
 		},
 
 		/**
@@ -1116,7 +1161,7 @@ jQuery(function ($) {
 	});
 });
 
-jQuery(window).load(function () {
+jQuery(window).on('load', function () {
 
 	/**
 	 * Validate cc fields on change
