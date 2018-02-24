@@ -8,7 +8,7 @@
 /**
  * Customizer additions.
  */
-//require get_stylesheet_directory() . '/inc/customizer.php';
+require get_stylesheet_directory() . '/inc/customizer.php';
 
 define( 'CCLUK_DEBUGGING', false );
 
