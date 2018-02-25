@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-07-18 19:28:36+0000\n"
+"PO-Revision-Date: 2018-02-06 14:33:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,34 +12,34 @@ msgstr ""
 "Project-Id-Version: Plugins - bbPress - Stable (latest release)\n"
 
 #. translators: user role
-#: includes/common/locale.php:44
+#: includes/common/locale.php:56
 msgctxt "User role"
-msgid "Keymaster"
-msgstr "Avainmestari (Keymaster)"
-
-#. translators: user role
-#: includes/common/locale.php:47
-msgctxt "User role"
-msgid "Moderator"
-msgstr "Valvoja (Moderator)"
+msgid "Blocked"
+msgstr "Estetty"
 
 #. translators: user role
 #: includes/common/locale.php:50
 msgctxt "User role"
 msgid "Participant"
-msgstr "Osallistuja (Participant)"
+msgstr "Osallistuja"
 
 #. translators: user role
 #: includes/common/locale.php:53
 msgctxt "User role"
 msgid "Spectator"
-msgstr "Katsoja (Spectator)"
+msgstr "Katsoja"
 
 #. translators: user role
-#: includes/common/locale.php:56
+#: includes/common/locale.php:47
 msgctxt "User role"
-msgid "Blocked"
-msgstr "Estetty (Blocked)"
+msgid "Moderator"
+msgstr "Valvoja"
+
+#. translators: user role
+#: includes/common/locale.php:44
+msgctxt "User role"
+msgid "Keymaster"
+msgstr "Ylläpitäjä"
 
 #. Author of the plugin/theme
 msgid "The bbPress Community"
@@ -631,14 +631,6 @@ msgstr "Valmis! %s käyttäjää päivitetty."
 #: includes/admin/tools.php:743
 msgid "Removing trashed forums from user subscriptions&hellip; %s"
 msgstr "Poistetaan roskakorissa olevia foorumeita käyttäjien suosikeista&hellip; %s"
-
-#: templates/default/bbpress/user-details.php:41
-msgid "%s's Replies Created"
-msgstr "%s:n Vastauksia luotu"
-
-#: templates/default/bbpress/user-details.php:35
-msgid "%s's Topics Started"
-msgstr "%s:n Aloittamaa aihetta"
 
 #: templates/default/bbpress/loop-search-topic.php:26
 msgid "Topic: "
@@ -1336,10 +1328,6 @@ msgstr "Pyyntö epäonnistui. Yritä uudestaan."
 msgid "Forum Replies Created"
 msgstr "Kirjoitetut vastaukset"
 
-#: templates/default/bbpress/user-details.php:48
-msgid "%s's Favorites"
-msgstr "%s:n tykkäämät"
-
 #: templates/default/bbpress/form-user-edit.php:143
 #: templates/default/bbpress/form-user-edit.php:146
 msgid "User Role"
@@ -1425,6 +1413,11 @@ msgstr "%1$s kirjoitti %2$s %3$s"
 msgid "Show reply author:"
 msgstr "Näytä vastauksen luoja:"
 
+#: includes/replies/template.php:706 includes/topics/template.php:809
+msgctxt "date at time"
+msgid "%1$s at %2$s"
+msgstr "%1$s, %2$s"
+
 #: includes/extend/buddypress/groups.php:339
 #: includes/extend/buddypress/groups.php:498
 #: includes/extend/buddypress/notifications.php:161
@@ -1439,11 +1432,6 @@ msgstr "Näytä vastauksen luoja:"
 #: includes/users/functions.php:1413
 msgid "<strong>ERROR</strong>: Are you sure you wanted to do that?"
 msgstr "<strong>VIRHE</strong>: Oletko varma että haluat tehdä tämän?"
-
-#: includes/replies/template.php:706 includes/topics/template.php:809
-msgctxt "date at time"
-msgid "%1$s at %2$s"
-msgstr "%1$s, %2$s"
 
 #: templates/default/bbpress/feedback-no-replies.php:13
 msgid "Oh bother! No replies were found here!"
@@ -1690,10 +1678,6 @@ msgstr "<strong>Title</strong> - Syötä aiheelle otsikko. Kun olet syöttänyt 
 msgid "<strong>Topic Editor</strong> - Enter the text for your topic. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your topic text. You can insert media files by clicking the icons above the topic editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular topic editor."
 msgstr "<strong>Aiheen editori</strong> - Lisää teksti aiheellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen aihe-editoriin."
 
-#: includes/admin/topics.php:210
-msgid "<strong>Publish</strong> - You can set the terms of publishing your topic in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a topic or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a topic to be published in the future or backdate a topic."
-msgstr "<strong>Julkaise</strong> - Voit määrittää julkaisemisen ehdot aiheellesi Julkaisulaatikossa. Tilalle, Näkyvyydelle ja Julkaisemiselle (välittömästi), klikkaa Muokkaa linkkiä näyttääksesi enemmän asetuksia. Näkyvyys sisältää aiheen salasana-suojauksen tai voit määrittää sen pysymään päällimäisenä blogissasi aina (liima). Julkaise (välittömästi) antaa sinun määrittää ajan tulevaisuudesta tai menneisyydestä, jolloin voit ajoittaa aiheen julkaisun tulevaisuudessa tai vanhaksi merkityn aiheen."
-
 #: includes/admin/topics.php:213
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your topic without inserting it. This is usually useful only if your theme makes use of the featured image as a topic thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan aiheeseen ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi aiheen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -1705,6 +1689,10 @@ msgstr "Valitse ominaisuudet, jotka aiheella pitäisi olla:"
 #: includes/admin/topics.php:223
 msgid "<strong>Topic Type</strong> dropdown indicates the sticky status of the topic. Selecting the super sticky option would stick the topic to the front of your forums, i.e. the topic index, sticky option would stick the topic to its respective forum. Selecting normal would not stick the topic anywhere."
 msgstr "<strong>Aiheen tyyppi</strong> pudotusvalikko näyttää onko aiheella liimat. Valitsemalla superliima valinnan aihe liimataan keskustelualueelle, esim. aihehakemistoon, liima valinta laittaa aiheen omalle keskustelualueelleen. Valitsemalla normaalin aihetta ei liimata mihinkään."
+
+#: includes/admin/topics.php:210
+msgid "<strong>Publish</strong> - You can set the terms of publishing your topic in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a topic or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a topic to be published in the future or backdate a topic."
+msgstr "<strong>Julkaise</strong> - Voit määrittää julkaisemisen ehdot aiheellesi Julkaisulaatikossa. Tilalle, Näkyvyydelle ja Julkaisemiselle (välittömästi), klikkaa Muokkaa linkkiä näyttääksesi enemmän asetuksia. Näkyvyys sisältää aiheen salasana-suojauksen tai voit määrittää sen pysymään päällimäisenä blogissasi aina (liima). Julkaise (välittömästi) antaa sinun määrittää ajan tulevaisuudesta tai menneisyydestä, jolloin voit ajoittaa aiheen julkaisun tulevaisuudessa tai vanhaksi merkityn aiheen."
 
 #: includes/core/update.php:186
 msgid "General"
@@ -2848,13 +2836,25 @@ msgstr "Rskaposti"
 msgid "Count topics for each user"
 msgstr "Laske aiheet jokaiselta käyttäjältä"
 
+#: includes/admin/users.php:138 includes/admin/users.php:140
+msgid "Change forum role to&hellip;"
+msgstr "Vaihda rooli foorumilla&hellip;"
+
 #: includes/admin/topics.php:194
 msgid "The title field and the big topic editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
 msgstr "Otsikkokenttä ja iso aiheen muokkauslaatikko on lukittu paikalleen,  mutta voit sijoittaa kaikki muut laatikot käyttäen vedä ja pudota -toimintoa sekä pienentää että laajentaa niitä klikkaamalla jokaisen laatikon otsikkopalkkia. Käytä näyttöasetukset -välilehteä nähdäksesi enemmän laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi joko yhden tai kahden sarakkeen asettelun tälle ruudulle."
 
-#: includes/admin/users.php:138 includes/admin/users.php:140
-msgid "Change forum role to&hellip;"
-msgstr "Vaihda rooli foorumilla&hellip;"
+#: templates/default/bbpress/user-details.php:48
+msgid "%s's Favorites"
+msgstr "Käyttäjän %s suosikit"
+
+#: templates/default/bbpress/user-details.php:35
+msgid "%s's Topics Started"
+msgstr "Käyttäjän %s aloittamat aiheet"
+
+#: templates/default/bbpress/user-details.php:41
+msgid "%s's Replies Created"
+msgstr "Käyttäjän %s vastaukset"
 
 #: bbpress.php:595
 msgctxt "post"
@@ -4005,14 +4005,6 @@ msgstr "Kustomoidaan tätä näyttöä"
 msgid "<strong>Title</strong> - Enter a title for your forum. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
 msgstr "<strong>Title</strong> - Syötä otsikko keskustelualueellesi. Otsikon syöttämisen jälkeen näet pysyvän linkin alapuolella, jota voit muuttaa."
 
-#: includes/admin/forums.php:192
-msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
-msgstr "<strong>Keskustelualueen editori</strong> - Lisää teksti keskustelualueellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen keskustelualue-editoriin."
-
-#: includes/admin/forums.php:195
-msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
-msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
-
 #: includes/admin/forums.php:198
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your forum without inserting it. This is usually useful only if your theme makes use of the featured image as a forum thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan keskustelualueelle ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi keskustelualueen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -4032,6 +4024,14 @@ msgstr "<strong>Näkyvyys</strong> antaa sinun valita keskustelualueiden näkyvy
 #: includes/admin/forums.php:211
 msgid "<strong>Order</strong> allows you to order your forums numerically."
 msgstr "<strong>Järjestys</strong> Antaa sinun järjestää keskustelualueet numeerisesti."
+
+#: includes/admin/forums.php:192
+msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
+msgstr "<strong>Keskustelualueen editori</strong> - Lisää teksti keskustelualueellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen keskustelualue-editoriin."
+
+#: includes/admin/forums.php:195
+msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
+msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
 
 #: includes/admin/forums.php:217 includes/admin/replies.php:229
 #: includes/admin/topics.php:229
@@ -4058,14 +4058,6 @@ msgstr "Käytettäessä Massaeditoria, voit muuttaa metadataa (kategoriat, kirjo
 msgid "<strong>Title</strong> - Enter a title for your reply. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
 msgstr "<strong>Otsikko</strong> - Syötä otsikko vastauksellesi. Syötettyäsi vastauksen näet pysyvän linkin, jota voit muokata."
 
-#: includes/admin/replies.php:206
-msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
-msgstr "<strong>Reply Editor</strong> - Syötä vastauksen teksti. Tähän on kaksi eri moodia: Visuaalinen tai HTML. Valitse moodi klikkaamalla sen omaa välilehteä. Visuaalinen moodissa on WYSIWYG editori. Klikkaa viimeistä kuvaketta rivillä saadaksesi esiin toisen rivin kontrolleja. HTML moodi antaa sinun syöttää raakaa HTML koodia vastauksen tekstin kanssa. Voit liittää mediatiedostoja klikkaamalla kuvakkeita vastauseditorin yläpuolella. Voit mennä häiriöttömään kirjoitusruutuun klikkaamalla Täysiruutu nappia Visuaalisessa moodissa (toiseksi viimeinen kuvake ylimällä rivillä) tai Täysiruutu nappia HTML moodissa (viimeinen nappia rivillä). Kun olet täysiruutu tilassa saat napit näkyviin viemällä hiiren ruudun yläosaan. Poistu Täysiruutu tilasta takaisin normaaliin vastauseditoriin."
-
-#: includes/admin/replies.php:209
-msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
-msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
-
 #: includes/admin/replies.php:212
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your reply without inserting it. This is usually useful only if your theme makes use of the featured image as a reply thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan vastaukseen ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi vastauksen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -4089,6 +4081,14 @@ msgstr "Sallii käyttäjien merkitä aihe suosikiksi"
 #: includes/admin/settings.php:698
 msgid "How your forum content is displayed within your existing theme."
 msgstr "Näyttää miltä keskustelualueesi sisältö näyttää olemassa olevassa teemassa."
+
+#: includes/admin/replies.php:206
+msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
+msgstr "<strong>Reply Editor</strong> - Syötä vastauksen teksti. Tähän on kaksi eri moodia: Visuaalinen tai HTML. Valitse moodi klikkaamalla sen omaa välilehteä. Visuaalinen moodissa on WYSIWYG editori. Klikkaa viimeistä kuvaketta rivillä saadaksesi esiin toisen rivin kontrolleja. HTML moodi antaa sinun syöttää raakaa HTML koodia vastauksen tekstin kanssa. Voit liittää mediatiedostoja klikkaamalla kuvakkeita vastauseditorin yläpuolella. Voit mennä häiriöttömään kirjoitusruutuun klikkaamalla Täysiruutu nappia Visuaalisessa moodissa (toiseksi viimeinen kuvake ylimällä rivillä) tai Täysiruutu nappia HTML moodissa (viimeinen nappia rivillä). Kun olet täysiruutu tilassa saat napit näkyviin viemällä hiiren ruudun yläosaan. Poistu Täysiruutu tilasta takaisin normaaliin vastauseditoriin."
+
+#: includes/admin/replies.php:209
+msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
+msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
 
 #: includes/admin/settings.php:728
 msgid "will serve all bbPress templates"
@@ -4547,14 +4547,6 @@ msgstr "Lisäkenttä päivitetty."
 msgid "Custom field deleted."
 msgstr "Lisäkenttä poistettu."
 
-#: includes/admin/replies.php:193
-msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
-msgstr "Otsikkokenttä ja iso vastauseditori on kiinnitetty paikalleen, mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä ruudun valinnat -välilehteä piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi yhden tai kahden palstan asettelun tälle ruudulle."
-
-#: includes/admin/forums.php:179
-msgid "The title field and the big forum editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
-msgstr "Otsikkokenttä ja iso keskustelualueen muokkauseditori on lukittu paikalleen,mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä näyttöasetukset -välilehteä  piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi joko yhden tai kahden sarakkeen asettelun tälle  ruudulle."
-
 #: includes/admin/metaboxes.php:84 includes/admin/settings.php:325
 #: includes/replies/template.php:49 includes/replies/template.php:1621
 #: includes/topics/template.php:2921
@@ -4573,3 +4565,11 @@ msgid "Topic"
 msgid_plural "Topics"
 msgstr[0] "Aihe"
 msgstr[1] ""
+
+#: includes/admin/replies.php:193
+msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "Otsikkokenttä ja iso vastauseditori on kiinnitetty paikalleen, mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä ruudun valinnat -välilehteä piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi yhden tai kahden palstan asettelun tälle ruudulle."
+
+#: includes/admin/forums.php:179
+msgid "The title field and the big forum editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "Otsikkokenttä ja iso keskustelualueen muokkauseditori on lukittu paikalleen,mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä näyttöasetukset -välilehteä  piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi joko yhden tai kahden sarakkeen asettelun tälle  ruudulle."

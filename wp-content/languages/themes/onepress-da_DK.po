@@ -1,0 +1,1770 @@
+# Translation of Themes - OnePress in Danish
+# This file is distributed under the same license as the Themes - OnePress package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-01-10 11:01:01+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: da_DK\n"
+"Project-Id-Version: Themes - OnePress\n"
+
+#. Description of the plugin/theme
+msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress er et fremragende kreativt og fleksibelt WordPress en-side tema som er velegnet til virksomheds websteder, portefølge, digitalt bureau, produktfremvisning, freelancere og alle andre der værdsætter et godt design. Overordnet er temaet af den elegante og klassiske type, et godt eksempel på et Bootstrap 4 WordPress-tema som kan forenes med seneste version af WooCommerce. (Live forhåndsvisning: http://www.famethemes.com/preview/?theme=OnePress)"
+
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.2)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/dashboard.php:327
+msgid "OnePress"
+msgstr "OnePress"
+
+#: inc/metabox.php:162
+msgid "Hide footer."
+msgstr "Skjul sidefod."
+
+#: inc/metabox.php:151
+msgid "Display page excerpt as header cover description."
+msgstr "Viser side uddrag som sidehoved cover beskrivelse."
+
+#: inc/metabox.php:145
+msgid "Display featured image as header cover."
+msgstr "Viser udvalgt billede som sidehoved cover."
+
+#: inc/metabox.php:139
+msgid "Hide page title area."
+msgstr "Skjul side titel område."
+
+#: inc/metabox.php:134
+msgid "Hide header."
+msgstr "Skjul sidehoved."
+
+#: inc/metabox.php:157
+msgid "Hide breadcrumb."
+msgstr "Skjul brødkrumme."
+
+#: inc/customizer.php:391
+msgid "Only set if display site tagline."
+msgstr "Anvend kun hvis websteds taglinje skal vises."
+
+#: inc/customizer.php:389
+msgid "Site Tagline Color"
+msgstr "Websteds taglinje farve"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Contained Content"
+msgstr "Fuld bredde - Indhold anbragt heri"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Stretched Content"
+msgstr "Fuld bredde - Udstrækket indhold"
+
+#: inc/sanitize.php:240
+msgid "Upgrade to %1s to unlock this feature."
+msgstr "Opgrader til %1s for at låse denne funktion op."
+
+#: inc/metabox.php:38
+msgid "Page Settings"
+msgstr "Side indstillinger"
+
+#: inc/dashboard.php:685
+msgid "Get OnePress Plus now!"
+msgstr "Få OnePress Plus nu!"
+
+#: inc/dashboard.php:330
+msgid "Free vs PLUS"
+msgstr "Gratis vs PLUS"
+
+#: inc/dashboard.php:328
+msgid "Recommended Actions"
+msgstr "Anbefalede handlinger"
+
+#: inc/customizer.php:3611
+msgid "OnePress Plus Available! Take a look"
+msgstr "OnePress Plus er tilgængelig!. Tag et kik"
+
+#: inc/customizer.php:3601
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Sortere Træk &amp; Slip sektioner</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> en version med fuld kontrol over sortering af forsidens sektioner!</p><h4 class=\"customizer-group-heading-message\">Advancerede styling af områder.</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> en version med fuld kontrol over sektionens styling som baggrunds farve, billede, video, parallax effekt, tilpasset stile og meget mere ...</p>"
+
+#: inc/customizer.php:3285
+msgid "Ascending"
+msgstr "Stigende"
+
+#: inc/customizer.php:3284
+msgid "Descending"
+msgstr "Faldende"
+
+#: inc/customizer.php:3280
+msgid "Order"
+msgstr "Sortere"
+
+#: inc/customizer.php:3265
+msgid "Random order"
+msgstr "Tilfældig rækkefølge"
+
+#: inc/customizer.php:3264
+msgid "Order by Page Order"
+msgstr "Sortere efter side rækkefølge"
+
+#: inc/customizer.php:3263
+msgid "Comment Count"
+msgstr "Antal kommentarer"
+
+#: inc/customizer.php:3262
+msgid "Date"
+msgstr "Dato"
+
+#: inc/customizer.php:3260
+msgid "Author"
+msgstr "Forfatter"
+
+#: inc/customizer.php:3259
+msgid "ID"
+msgstr "ID"
+
+#: inc/customizer.php:3258
+msgid "Default"
+msgstr "Standard"
+
+#: inc/customizer.php:3254
+msgid "Order By"
+msgstr "Sortere efter"
+
+#: inc/customizer.php:3238
+msgid "Category to show"
+msgstr "Kategori at vise"
+
+#: inc/customizer.php:2770
+msgid "1x"
+msgstr "1x"
+
+#: inc/customizer.php:2769
+msgid "2x"
+msgstr "2x"
+
+#: inc/customizer.php:2768
+msgid "3x"
+msgstr "3x"
+
+#: inc/customizer.php:2767
+msgid "4x"
+msgstr "4x"
+
+#: inc/customizer.php:2766
+msgid "5x"
+msgstr "5x"
+
+#: inc/customizer.php:2761
+msgid "Icon Size"
+msgstr "Ikon størrelse"
+
+#: inc/customizer.php:2259
+msgid "Layout Settings"
+msgstr "Layout indstillinger"
+
+#: inc/customizer.php:1565
+msgid "Rotating Text Background"
+msgstr "Roterende tekst baggrund"
+
+#: inc/customizer.php:1550
+msgid "Rotating Text Color"
+msgstr "Roterende tekst farve"
+
+#: inc/customizer.php:1526
+msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
+msgstr "Vi er <span class=\"js-rotating\">OnePress | Enkeltside | Responsive | Fuldkommenhed</span>"
+
+#: inc/customizer.php:1483
+msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
+msgstr "Vil du tilføje <strong>baggrunds video</strong> til hero området? Opgrader til <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
+
+#: inc/customizer.php:1252
+msgid "Disable Preload Icon"
+msgstr "Deaktiver forudindlæst ikon"
+
+#: inc/customizer.php:1077
+msgid "Footer Copyright"
+msgstr "Copyright i sidefod"
+
+#: inc/customizer.php:1064 inc/customizer.php:1131
+msgid "Link Hover Color"
+msgstr "Link hover farve"
+
+#: inc/customizer.php:1048 inc/customizer.php:1118
+msgid "Link Color"
+msgstr "Link farve"
+
+#: inc/customizer.php:1031
+msgid "Widget Title Color"
+msgstr "Widget titel farve"
+
+#: inc/customizer.php:982
+msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
+msgstr "Indtastet int numre og summen af dem skal være mindre eller lig med 12, adskil med \"+\""
+
+#: inc/customizer.php:980
+msgid "Custom footer %s columns width"
+msgstr "Tilpasset sidefod %s kolonne bredde"
+
+#: inc/customizer.php:980
+msgid "Custom footer 1 column width"
+msgstr "Tilpasset sidefod 1 kolonne bredde"
+
+#: inc/customizer.php:956
+msgid "Disable footer widgets"
+msgstr "Deaktiver sidefod widgets"
+
+#: inc/customizer.php:950
+msgid "Number footer columns to display."
+msgstr "Antal sidefods kolonner som vises."
+
+#: inc/customizer.php:930
+msgid "Footer Widgets"
+msgstr "Widgets i sidefod"
+
+#: inc/customizer.php:915 inc/customizer.php:998 inc/customizer.php:1105
+msgid "Text Color"
+msgstr "Tekst farve"
+
+#: inc/customizer.php:819 inc/customizer.php:2305 inc/customizer.php:2501
+#: inc/customizer.php:2714 inc/customizer.php:2902 inc/customizer.php:3080
+msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
+msgstr "Opgrader til <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> for at kunne tilføje flere enheder og lås op for andre premium muligheder!"
+
+#: inc/customizer.php:747
+msgid "Footer Socials"
+msgstr "Sociale ikoner i sidefod"
+
+#: inc/customizer.php:679
+msgid "Right"
+msgstr "Højre"
+
+#: inc/customizer.php:678
+msgid "Left"
+msgstr "Venstre"
+
+#: inc/customizer.php:677
+msgid "Center"
+msgstr "Center"
+
+#: inc/customizer.php:673
+msgid "Content Align"
+msgstr "Indholds justering"
+
+#: inc/customizer.php:640
+msgid "Color"
+msgstr "Farve"
+
+#: inc/customizer.php:624
+msgid "The page cover padding bottom in percent (%)."
+msgstr "Side coverets afstand til bund i procent (%)."
+
+#: inc/customizer.php:623
+msgid "Padding Bottom"
+msgstr "Afstand, bund"
+
+#: inc/customizer.php:609
+msgid "The page cover padding top in percent (%)."
+msgstr "Side coverets afstand til top i procent (%)."
+
+#: inc/customizer.php:608
+msgid "Padding Top"
+msgstr "Afstand, top"
+
+#: inc/customizer.php:595
+msgid "Check this box to disable the page title bar on all pages."
+msgstr "Marker denne boks for at deaktivere side titel baren på alle sider."
+
+#: inc/customizer.php:593
+msgid "Disable Page Title bar?"
+msgstr "Deaktiver side titel bar?"
+
+#: inc/customizer.php:577
+msgid "Page Title Area"
+msgstr "Side titel område"
+
+#: inc/customizer.php:567
+msgid "Padding left and right for Navigation items (pixels)."
+msgstr "Afstand, venstre og højre for navigation indhold (pixels)."
+
+#: inc/customizer.php:566
+msgid "Menu Item Padding"
+msgstr "Menu, afstand til indhold"
+
+#: inc/customizer.php:552
+msgid "Navigation"
+msgstr "Navigation"
+
+#: inc/customizer.php:540
+msgid "Transparent Site Tagline Color"
+msgstr "Transparent websteds taglinje farve"
+
+#: inc/customizer.php:524
+msgid "Transparent Site Title Color"
+msgstr "Transparent websteds titel farve"
+
+#: inc/customizer.php:508
+msgid "Transparent Retina Logo"
+msgstr "Transparent Retina logo"
+
+#: inc/customizer.php:490 inc/customizer.php:509
+msgid "Only apply when transparent header option is checked."
+msgstr "Anvend kun når transperant sidehoved mulighed er valgt."
+
+#: inc/customizer.php:488
+msgid "Transparent Logo"
+msgstr "Transparent logo"
+
+#: inc/customizer.php:294
+msgid "Below Hero Slider"
+msgstr "Under Hero Slider"
+
+#: inc/customizer.php:293
+msgid "Top"
+msgstr "Top"
+
+#: inc/customizer.php:290
+msgid "Header Position"
+msgstr "Sidehoved position"
+
+#: inc/customizer.php:272
+msgid "Contained"
+msgstr "Indeholdt"
+
+#: inc/customizer.php:268
+msgid "Header Width"
+msgstr "Sidehoved bredde"
+
+#: inc/customizer.php:218
+msgid "Check this if you want to disable default google fonts in theme."
+msgstr "Marker dette hvis du vil deaktiver standard google skrifttyper i tema."
+
+#: inc/customizer.php:216
+msgid "Disable Google Fonts"
+msgstr "Deaktiver google skrifttyper"
+
+#: inc/customizer.php:119
+msgid "Logo Height In Pixel"
+msgstr "Logo, højde i pixel"
+
+#: inc/customizer.php:101
+msgid "Retina Logo"
+msgstr "Retina logo"
+
+#: inc/customizer-controls.php:632
+msgid "All"
+msgstr "Alle"
+
+#: functions.php:165
+msgid "Footer %s"
+msgstr "Sidefod %s"
+
+#: comments.php:32
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgstr "En tanke om &ldquo;%2$s&rdquo;"
+
+#: inc/customizer.php:739
+msgid "Check this box to show featured image on single post."
+msgstr "Marker denne boks for at vise et udvalgt billede i enkelt indlæg."
+
+#: inc/customizer.php:724
+msgid "Check this box to show single post meta such as post date, author, category,..."
+msgstr "Marker denne boks for at vise enkelt indlæggets meta, såsom udgivelsesdato, forfatter, kategori,..."
+
+#: inc/customizer.php:722
+msgid "Show single post meta"
+msgstr "Vis enkeltindlægs meta"
+
+#: inc/customizer.php:709
+msgid "Check this box to show post thumbnail on single post."
+msgstr "Marker denne boks for at vise indlæggets miniature på et enkeltindlæg."
+
+#: inc/customizer.php:707 inc/customizer.php:737
+msgid "Show single post thumbnail"
+msgstr "Vi enkeltindlægs miniature"
+
+#: inc/customizer.php:692
+msgid "Single Post"
+msgstr "Enkelt indlæg"
+
+#: inc/customizer.php:1375
+msgid "The amount of time in between slides, expressed as the number of milliseconds."
+msgstr "Tiden mellem slides i millisekunder."
+
+#: inc/customizer.php:1374
+msgid "Slider duration speed"
+msgstr "Slider varigheds hastighed"
+
+#: inc/customizer.php:1358
+msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
+msgstr "Dette er hastigheden, hvormed billedet vil tone ind. Heltal i millisekunder skal bruges."
+
+#: inc/customizer.php:1357
+msgid "Slider animation speed"
+msgstr "Slider animations hastighed"
+
+#: inc/customizer.php:1339
+msgid "Text animation speed"
+msgstr "Tekst animations hastighed"
+
+#: inc/dashboard.php:382
+msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
+msgstr "Undertema anvender deres egne temanavne. Vil du kopier data indstillingerne fra overtemaet til dette undertema?"
+
+#: inc/customizer.php:3668
+msgid "Font Awesome"
+msgstr "Font Awesome"
+
+#: inc/customizer.php:3664
+msgid "Search"
+msgstr "Søg"
+
+#: inc/dashboard.php:763
+msgid "Are you sure want to copy ?"
+msgstr "Er du sikker på, at du vil kopiere?"
+
+#: inc/dashboard.php:422
+msgid "Recommend Plugins"
+msgstr "Anbefalede plugins"
+
+#: inc/dashboard.php:405
+msgid "Your settings copied."
+msgstr "Dine indstillinger er kopieret."
+
+#: inc/dashboard.php:402
+msgid "Copy now"
+msgstr "Kopier nu"
+
+#: inc/dashboard.php:394
+msgid "To Theme"
+msgstr "Til tema"
+
+#: inc/dashboard.php:388
+msgid "From Theme"
+msgstr "Fra tema"
+
+#: inc/dashboard.php:380
+msgid "You're using %1$s theme, It's a child theme of OnePress"
+msgstr "Du bruger %1$s temaet, det er et undertema til OnePress"
+
+#: inc/dashboard.php:238
+msgid "Details"
+msgstr "Detaljer"
+
+#: inc/dashboard.php:166
+msgid "Import Demo Data"
+msgstr "Importer demo data"
+
+#: inc/dashboard.php:166
+msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
+msgstr "Spar tid ved at importere demo data, så vil dit websted blive sat op og være klar til tilpasning i løbet af få minutter. %s"
+
+#: inc/customizer.php:2141
+msgid "Read More Text"
+msgstr "Læs mere tekst"
+
+#: inc/customizer.php:2136 section-parts/section-gallery.php:38
+msgid "View More"
+msgstr "Vis mere"
+
+#: inc/customizer.php:2126
+msgid "Read More Link"
+msgstr "Læs mere link"
+
+#: inc/customizer.php:166
+msgid "No sidebar"
+msgstr "Ingen sidebar"
+
+#: inc/customizer.php:165
+msgid "Left sidebar"
+msgstr "Venstre sidebar"
+
+#: inc/customizer.php:164
+msgid "Right sidebar"
+msgstr "Højre sidebar"
+
+#: inc/customizer.php:161
+msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
+msgstr "Websteds layout, anvendes på alle sider, undtagen forsiden og egne side skabeloner."
+
+#: inc/customizer.php:160
+msgid "Site Layout"
+msgstr "Websteds layout"
+
+#: functions.php:106
+msgid "Famethemes Demo Importer"
+msgstr "Famethemes demo importeringsværktøj"
+
+#: functions.php:102
+msgid "Contact Form 7"
+msgstr "Kontakt Form 7"
+
+#: functions.php:154
+msgid "WooCommerce Sidebar"
+msgstr "WooCommerce sidebar"
+
+#: inc/customizer.php:2267 inc/customizer.php:2679
+msgid "1 Column"
+msgstr "1 kolonne"
+
+#: inc/customizer.php:2110
+msgid "Enable Lightbox"
+msgstr "Aktiver Lightbox"
+
+#: inc/customizer.php:2096
+msgid "Number items"
+msgstr "Antal elementer"
+
+#: inc/customizer.php:2071
+msgid "Layout columns"
+msgstr "Layout kolonner"
+
+#: inc/customizer.php:2055
+msgid "Row Height"
+msgstr "Række højde"
+
+#: inc/customizer.php:2039
+msgid "Item Spacing"
+msgstr "Element mellemrum"
+
+#: inc/customizer.php:2025
+msgid "Masonry"
+msgstr "Gitterværk"
+
+#: inc/customizer.php:2024
+msgid "Justified"
+msgstr "Lige margener"
+
+#: inc/customizer.php:2023
+msgid "Slider"
+msgstr "Slider"
+
+#: inc/customizer.php:2022
+msgid "Carousel"
+msgstr "Karussel"
+
+#: inc/customizer.php:2021
+msgid "Grid"
+msgstr "Gitter"
+
+#: inc/customizer.php:2016
+msgid "Display"
+msgstr "Visning"
+
+#: inc/customizer.php:2001
+msgid "Default, inside container"
+msgstr "Standard, inde i kasse"
+
+#: inc/customizer.php:947 inc/customizer.php:1996
+msgid "Layout"
+msgstr "Layout"
+
+#: inc/customizer.php:1982
+msgid "Select a page which have content contain [gallery] shortcode."
+msgstr "Vælg en side som har indhold med [gallery] kort-kode."
+
+#: inc/customizer.php:1977
+msgid "Select Gallery Page"
+msgstr "Vælg galleri side"
+
+#: inc/customizer.php:1960
+msgid "Page"
+msgstr "Side"
+
+#: inc/customizer.php:1955
+msgid "Select Gallery Source"
+msgstr "Vælg galleri kilde"
+
+#: inc/customizer.php:1894 section-parts/section-gallery.php:4
+msgid "Gallery"
+msgstr "Galleri"
+
+#: inc/customizer.php:1879 section-parts/section-gallery.php:2
+msgid "gallery"
+msgstr "galleri"
+
+#: inc/customizer.php:1844
+msgid "Section: Gallery"
+msgstr "Sektion: Galleri"
+
+#: inc/customizer.php:345
+msgid "Scroll to top when click to the site logo or site title, only apply on front page."
+msgstr "Rul til toppen, når der klikkes på webstedets logo eller titel, anvendes kun på forsiden."
+
+#: inc/dashboard.php:743
+msgid "FameThemes Demo Importer"
+msgstr "FameThemes demo importeringsværktøj"
+
+#: inc/dashboard.php:742
+msgid "Hey."
+msgstr "Hej."
+
+#: inc/dashboard.php:740
+msgid "%1$s you will need to install and activate the %2$s plugin first."
+msgstr "%1$s du bliver nødt til at installere og aktivere %2$s pluginet først."
+
+#: inc/dashboard.php:218 inc/dashboard.php:724
+msgid "Active Now"
+msgstr "Aktive nu"
+
+#: inc/dashboard.php:196 inc/dashboard.php:702
+msgid "Install Now"
+msgstr "Installer nu"
+
+#: inc/dashboard.php:332
+msgid "One Click Demo Import"
+msgstr "Et-klik demo importering"
+
+#: inc/customizer.php:1678
+msgid "Button #2 style"
+msgstr "Knap #2 stil"
+
+#: inc/customizer.php:3312
+msgid "More News Button Text"
+msgstr "Flere nyheder knap tekst"
+
+#: inc/customizer.php:3301
+msgid "It should be your blog page link."
+msgstr "Det bør være dit blog-side link."
+
+#: inc/customizer.php:1636 inc/customizer.php:1689
+msgid "Danger"
+msgstr "Fare"
+
+#: inc/customizer.php:1635 inc/customizer.php:1688
+msgid "Warning"
+msgstr "Advarsel"
+
+#: inc/customizer.php:1634 inc/customizer.php:1687
+msgid "Info"
+msgstr "Info"
+
+#: inc/customizer.php:1633 inc/customizer.php:1686
+msgid "Success"
+msgstr "Succes"
+
+#: inc/customizer.php:1632 inc/customizer.php:1685
+msgid "Primary"
+msgstr "Primær"
+
+#: inc/customizer.php:1631 inc/customizer.php:1684
+msgid "Button"
+msgstr "Knap"
+
+#: inc/customizer.php:1630 inc/customizer.php:1683
+msgid "Button Secondary"
+msgstr "Sekundær knap"
+
+#: inc/customizer.php:1629 inc/customizer.php:1682
+msgid "Button Primary"
+msgstr "Primær knap"
+
+#: inc/customizer.php:1625
+msgid "Button #1 style"
+msgstr "Knap #1 stil"
+
+#: inc/customizer.php:1284
+msgid "The hero content padding bottom in percent (%)."
+msgstr "Hero indhold afstand til bund i procent (%)."
+
+#: inc/customizer.php:1268
+msgid "The hero content padding top in percent (%)."
+msgstr "Hero indholdets afstand til toppen i procent (%)."
+
+#: inc/customizer.php:1340
+msgid "The delay between the changing of each phrase in milliseconds."
+msgstr "Forsinkelsen mellem hver sætning i millisekunder."
+
+#: inc/customizer.php:888
+msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "Nyhedsbrev formularen bruger MailChimp, følg venligst <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">denne guide</a> for at finde ud af, hvordan du få en MailChimp handlings-url. For eksempel <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+
+#: inc/customizer.php:81
+msgid "Hide site tagline"
+msgstr "Skjul sidens slaglinje"
+
+#: inc/customizer.php:66
+msgid "Hide site title"
+msgstr "Skjul sidens titel"
+
+#: inc/customizer.php:2512 inc/customizer.php:2721
+msgid "image"
+msgstr "billede"
+
+#: inc/customizer.php:1320
+msgid "Text animation"
+msgstr "Tekst animation"
+
+#: inc/dashboard.php:132
+msgid "OnePress Theme %s"
+msgstr "OnePress Tema %s"
+
+#: inc/dashboard.php:130
+msgid "%1$s action required"
+msgid_plural "%1$s actions required"
+msgstr[0] "%1$s handling påkrævet"
+msgstr[1] "%1$s handlinger påkrævet"
+
+#: inc/customizer.php:1145 inc/customizer.php:1163
+msgid "Custom CSS"
+msgstr "Tilpasset CSS"
+
+#: section-parts/section-features.php:5
+msgid "Why choose Us"
+msgstr "Hvorfor vælge os"
+
+#: inc/customizer.php:2671
+msgid "Services Layout Setting"
+msgstr "Tjenester layout indstillinger"
+
+#: inc/customizer.php:2530 inc/customizer.php:3088
+msgid "Custom Link"
+msgstr "Tilpasset link"
+
+#: inc/customizer.php:2526
+msgid "Description"
+msgstr "Forklaring"
+
+#: inc/customizer.php:2495
+msgid "Features content"
+msgstr "Udvalgt indhold"
+
+#: inc/customizer.php:2459
+msgid "Features Layout Setting"
+msgstr "Udvalgt layout indstillinger"
+
+#: inc/customizer.php:2406 section-parts/section-features.php:4
+msgid "Features"
+msgstr "Funktioner"
+
+#: inc/customizer.php:2391 section-parts/section-features.php:2
+msgid "features"
+msgstr "funktioner"
+
+#: inc/customizer.php:2356
+msgid "Section: Features"
+msgstr "Sektion: Udvalgte"
+
+#: inc/customizer.php:1931 inc/customizer.php:2242 inc/customizer.php:2443
+#: inc/customizer.php:2654 inc/customizer.php:2867 inc/customizer.php:3023
+#: inc/customizer.php:3193 inc/customizer.php:3411
+msgid "Section Description"
+msgstr "Sektions beskrivelse"
+
+#: inc/customizer.php:1727 inc/customizer.php:2521 inc/customizer.php:2730
+msgid "Image"
+msgstr "Billede"
+
+#: inc/customizer.php:1709
+msgid "Content Text"
+msgstr "Indhold Tekst"
+
+#: inc/customizer.php:1515
+msgid "Layout 2"
+msgstr "Layout 2"
+
+#: inc/customizer.php:1514
+msgid "Layout 1"
+msgstr "Layout 1"
+
+#: inc/customizer.php:1509
+msgid "Display Layout"
+msgstr "Visnings layout"
+
+#: inc/customizer.php:830
+msgid "URL"
+msgstr "URL"
+
+#: inc/customizer.php:826 inc/customizer.php:2511 inc/customizer.php:2516
+#: inc/customizer.php:2720 inc/customizer.php:2725
+msgid "Icon"
+msgstr "Ikon"
+
+#: inc/customizer.php:822
+msgid "Social network"
+msgstr "Sociale netværk"
+
+#: inc/customizer.php:813
+msgid "Socials"
+msgstr "Sociale"
+
+#: inc/customizer.php:471
+msgid "Apply for front page template only."
+msgstr "Anvend kun på forside skabelon."
+
+#: inc/customizer.php:469
+msgid "Header Transparent"
+msgstr "Sidehoved gennemsigtighed"
+
+#: inc/template-tags.php:1548
+msgid "Subscribe"
+msgstr "Tilmeld"
+
+#: inc/template-tags.php:1547
+msgid "Enter your e-mail address"
+msgstr "Indtast din e-mail adresse"
+
+#: inc/dashboard.php:358
+msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
+msgstr "Support for %s WordPress-temaet sker gennem FameThemes support ticket system."
+
+#: inc/dashboard.php:352
+msgid "OnePress Documentation"
+msgstr "OnePress dokumentation"
+
+#: inc/customizer.php:2266 inc/customizer.php:2466 inc/customizer.php:2678
+#: inc/customizer.php:3046
+msgid "2 Columns"
+msgstr "2 kolonner"
+
+#: inc/customizer.php:2265 inc/customizer.php:2465 inc/customizer.php:2677
+#: inc/customizer.php:3045
+msgid "3 Columns"
+msgstr "3 kolonner"
+
+#: inc/customizer.php:2264 inc/customizer.php:2464 inc/customizer.php:2676
+#: inc/customizer.php:3044
+msgid "4 Columns"
+msgstr "4 kolonner"
+
+#: inc/customizer.php:3039
+msgid "Team Layout Setting"
+msgstr "Team layout indstilling"
+
+#: inc/customizer.php:2342 inc/customizer.php:2555
+msgid "Page Excerpt"
+msgstr "Side uddrag"
+
+#: inc/customizer.php:2341 inc/customizer.php:2554
+msgid "Full Page Content"
+msgstr "Fuld side indhold"
+
+#: inc/customizer.php:2336 inc/customizer.php:2549
+msgid "Item content source"
+msgstr "Element indholdskilde"
+
+#: inc/customizer.php:2299
+msgid "About content page"
+msgstr "Om indholdsside"
+
+#: inc/customizer.php:1465
+msgid "Enable parallax effect (apply for first BG image only)"
+msgstr "Aktiver parallax-effekt (anvendes kun på det første BG billede)"
+
+#: inc/customizer.php:330
+msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
+msgstr "Hvis du bruger logo og dit logo er for højt, så marker denne boks for automatisk at justere menuen vandret."
+
+#: inc/customizer.php:328
+msgid "Center vertical align for menu"
+msgstr "Centrer justering vandret for menu"
+
+#: inc/customizer.php:450
+msgid "Responsive Menu Button Color"
+msgstr "Responsiv menu knapfarve"
+
+#: inc/customizer.php:435
+msgid "Menu Link Hover/Active BG Color"
+msgstr "Menu link Hover/Aktiv BG farve"
+
+#: inc/customizer.php:419
+msgid "Menu Link Hover/Active Color"
+msgstr "Menu link Hover/Aktiv farve"
+
+#: inc/customizer.php:404
+msgid "Menu Link Color"
+msgstr "Menu link farve"
+
+#: inc/customizer.php:377
+msgid "Only set if you don't use an image logo."
+msgstr "Anvend kun hvis du ikke bruger et billed logo."
+
+#: inc/customizer.php:375
+msgid "Site Title Color"
+msgstr "Webstedets titelfarve"
+
+#: inc/customizer.php:359 inc/customizer.php:1014
+msgid "Background Color"
+msgstr "Baggrunds farve"
+
+#: inc/customizer.php:250
+msgid "Header"
+msgstr "Sidehoved"
+
+#: inc/customizer.php:237
+msgid "Primary Color"
+msgstr "Primære farve"
+
+#: inc/customizer.php:228
+msgid "Site Colors"
+msgstr "Websteds farver"
+
+#: inc/customizer.php:3083
+msgid "User media"
+msgstr "Bruger medier"
+
+#: inc/customizer.php:1832
+msgid "Background image"
+msgstr "Baggrunds billede"
+
+#: inc/customizer.php:1817
+msgid "Paste Youtube or Vimeo url here"
+msgstr "Indsæt Youtube eller Vimeo url her"
+
+#: inc/customizer.php:1815
+msgid "Video url"
+msgstr "Video url"
+
+#: inc/customizer.php:1800
+msgid "Section heading"
+msgstr "Sektion overskrift"
+
+#: inc/customizer.php:1222 inc/customizer.php:1784 inc/customizer.php:1886
+#: inc/customizer.php:2197 inc/customizer.php:2398 inc/customizer.php:2822
+#: inc/customizer.php:3148 inc/customizer.php:3366
+msgid "The section id, we will use this for link anchor."
+msgstr "Sektion id'et vi vil bruge for dette link anker."
+
+#: inc/customizer.php:1742
+msgid "Section: Video Lightbox"
+msgstr "Sektion: Video Lightbox"
+
+#: inc/dashboard.php:485
+msgid "Hooray! There are no required actions for you right now."
+msgstr "Hurra! Der kræves ingen handlinger fra din side lige nu."
+
+#: inc/dashboard.php:484
+msgid "Keep update with %s"
+msgstr "Hold dig opdateret med %s"
+
+#: inc/dashboard.php:475
+msgid "Change homepage page template"
+msgstr "Skift forside side skabelon"
+
+#: inc/dashboard.php:461
+msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
+msgstr "For at ændre forside sektionerne, skal du vælge skabelonen \"Forside\" til din forside."
+
+#: inc/dashboard.php:458
+msgid "Set your homepage page template to \"Frontpage\"."
+msgstr "Sæt din forside sideskabelon til \"Forside\"."
+
+#: inc/dashboard.php:444 inc/dashboard.php:468
+msgid "Setup front page displays"
+msgstr "Indstil forside sidevisning"
+
+#: inc/dashboard.php:441
+msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
+msgstr "For at få et ensides udseende til dit websted, så gå venligst til Tilpasser -> Statisk forside og vælg \"Forside viser\" til \"En statisk side\"."
+
+#: inc/dashboard.php:439
+msgid "Switch \"Front page displays\" to \"A static page\""
+msgstr "Sæt \"Forside viser\" til \"En statisk side\""
+
+#: inc/dashboard.php:432 inc/dashboard.php:451
+msgid "Dismiss"
+msgstr "Luk"
+
+#: inc/dashboard.php:323
+msgid "Welcome to OnePress - Version %1s"
+msgstr "Velkommen til OnePress - version %1s"
+
+#: inc/dashboard.php:157
+msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
+msgstr "Velkommen! Tak fordi du valgte %1$s! For at udnytte det som vores tema tilbyder så godt som muligt, så vær sikker på, at du besøger vores <a href=\"%2$s\">Velkomstside</a>"
+
+#: inc/dashboard.php:134
+msgid "OnePress Theme"
+msgstr "OnePress Tema"
+
+#: inc/dashboard.php:137
+msgid "OnePress Dashboard"
+msgstr "OnePress kontrolpanel"
+
+#: inc/customizer.php:658 inc/customizer.php:1446
+msgid "Background Overlay Color"
+msgstr "Overlæggende baggrunds farve"
+
+#: inc/customizer.php:3585
+msgid "Section Order & Styling"
+msgstr "Sektions rækkefølge & design"
+
+#: inc/customizer.php:312
+msgid "Check this box to disable sticky header when scroll."
+msgstr "Marker denne boks for at deaktivere fastgjort sidehoved ved rulning."
+
+#: inc/customizer.php:310
+msgid "Disable Sticky Header?"
+msgstr "Deaktiver fastgjort sidehoved?"
+
+#. Template Name of the plugin/theme
+msgid "Left Sidebar"
+msgstr "Venstre sidebar"
+
+#: inc/customizer.php:271 inc/customizer.php:2002
+msgid "Full Width"
+msgstr "Fuld bredde"
+
+#. Template Name of the plugin/theme
+msgid "Frontpage"
+msgstr "Forside"
+
+#: template-parts/content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Der ser ud til, at vi ikke kan finde det, du søger. Måske vil en søgning hjælpe."
+
+#: template-parts/content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Beklager, men intet matchede din søgning. Prøv igen med nogle andre søgeord."
+
+#: template-parts/content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Klar til at udgive dit første indlæg? <a href=\"%1$s\">Kom i gang her</a>."
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Intet fundet"
+
+#: template-parts/content-list.php:38 template-parts/content-page.php:21
+#: template-parts/content-single.php:35 template-parts/content.php:39
+msgid "Pages:"
+msgstr "Sider:"
+
+#: section-parts/section-hero.php:82
+msgid "#services"
+msgstr "#tjenester"
+
+#: section-parts/section-contact.php:48
+msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
+msgstr "Du kan installere %1$s plugin og gå til Tilpasser &rarr; Sektion: Kontakt &rarr; Sektions indhold for at se en fungerende kontakt formular her."
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Søge resultater for: %s"
+
+#: inc/template-tags.php:458
+msgid "Your comment is awaiting moderation."
+msgstr "Din kommentar afventer godkendelse."
+
+#: inc/template-tags.php:453
+msgid "Edit"
+msgstr "Rediger"
+
+#. translators: 1: date, 2: time
+#: inc/template-tags.php:452
+msgid "Reply"
+msgstr "Svar"
+
+#: inc/template-tags.php:444
+msgid "Post author"
+msgstr "Indlægs forfatter"
+
+#: inc/template-tags.php:425
+msgid "(Edit)"
+msgstr "(Rediger)"
+
+#: inc/template-tags.php:425
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: inc/template-tags.php:355
+msgid "% Comments"
+msgstr "% Kommentarer"
+
+#: inc/template-tags.php:355
+msgid "1 Comment"
+msgstr "1 kommentar"
+
+#: inc/template-tags.php:355
+msgid "Leave a comment"
+msgstr "Skriv en kommentar"
+
+#: inc/template-tags.php:349
+msgid "Tagged %1$s"
+msgstr "Tagget %1$s"
+
+#: inc/template-tags.php:343
+msgid "Posted in %1$s"
+msgstr "Udgivet i %1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:341 inc/template-tags.php:347
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:323
+msgctxt "post author"
+msgid "by %s"
+msgstr "af %s"
+
+#: inc/template-tags.php:318
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Udgivet i %s"
+
+#: inc/dashboard.php:357
+msgid "Having Trouble, Need Support?"
+msgstr "Har du problemer? Brug for support?"
+
+#: inc/dashboard.php:350
+msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
+msgstr "Brug for hjælp til opsætning og konfigurering af %s? Så se vores vejledninger."
+
+#: inc/dashboard.php:349
+msgid "Theme Documentation"
+msgstr "Tema dokumentation"
+
+#: inc/dashboard.php:345
+msgid "Start Customize"
+msgstr "Start tilpasning"
+
+#: inc/dashboard.php:343
+msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
+msgstr "%s understøtter tematilpasseren til alle temaindstillinger. Klik \"Tilpas\" for at starte tilpasningen af dit websted."
+
+#: inc/dashboard.php:342
+msgid "Theme Customizer"
+msgstr "Tema Tilpasser"
+
+#: inc/dashboard.php:324
+msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
+msgstr "OnePress er et kreativt og fleksibelt WordPress ENSIDES tema som er velegnet til forretning, portefølje, digitale bureauer, produktudstilling og freelancer websteder."
+
+#: inc/customizer.php:3566
+msgid "Fax"
+msgstr "Fax"
+
+#: inc/customizer.php:3551
+msgid "Email"
+msgstr "E-mail"
+
+#: inc/customizer.php:3536
+msgid "Phone"
+msgstr "Telefon"
+
+#: inc/customizer.php:3521
+msgid "Address"
+msgstr "Adresse"
+
+#: inc/customizer.php:3506
+msgid "Contact Box Title"
+msgstr "Kontakt boks titel"
+
+#: inc/customizer.php:3482
+msgid "Contact Text"
+msgstr "Kontakt tekst"
+
+#: inc/customizer.php:3467
+msgid "Check this box to hide contact form."
+msgstr "Marker denne boks for at skjule kontakt formularen."
+
+#: inc/customizer.php:3465
+msgid "Hide contact form completely."
+msgstr "Skjul kontakt formularen helt."
+
+#: inc/customizer.php:3449
+msgid "Contact Form 7 Shortcode."
+msgstr "Kontaktt Form 7 kort-kode."
+
+#: inc/customizer.php:3374 section-parts/section-contact.php:4
+msgid "Get in touch"
+msgstr "Hold kontakten vedlige"
+
+#: inc/customizer.php:3359 section-parts/section-contact.php:2
+msgid "contact"
+msgstr "kontakt"
+
+#: inc/customizer.php:3324
+msgid "Section: Contact"
+msgstr "Sektion: Kontakt"
+
+#: inc/customizer.php:3307 section-parts/section-news.php:8
+msgid "Read Our Blog"
+msgstr "Læs vores blog"
+
+#: inc/customizer.php:3299
+msgid "More News button link"
+msgstr "Flere nyheder knap link"
+
+#: inc/customizer.php:3221
+msgid "Number of post to show"
+msgstr "Antallet af indlæg der skal vises"
+
+#: inc/customizer.php:3156 section-parts/section-news.php:4
+msgid "Latest News"
+msgstr "Seneste nyheder"
+
+#: inc/customizer.php:3141 section-parts/section-news.php:2
+msgid "news"
+msgstr "nyheder"
+
+#: inc/customizer.php:3106
+msgid "Section: News"
+msgstr "Sektion: Nyheder"
+
+#: inc/customizer.php:3074
+msgid "Team members"
+msgstr "Team medlemmer"
+
+#: inc/customizer.php:2986 section-parts/section-team.php:4
+msgid "Our Team"
+msgstr "Vores team"
+
+#: inc/customizer.php:2971 section-parts/section-team.php:2
+msgid "team"
+msgstr "team"
+
+#: inc/customizer.php:2937
+msgid "Section: Team"
+msgstr "Sektion: Team"
+
+#: inc/customizer.php:2921
+msgid "After number"
+msgstr "Efter nummer"
+
+#: inc/customizer.php:2916
+msgid "Before number"
+msgstr "Før nummer"
+
+#: inc/customizer.php:2911
+msgid "Number"
+msgstr "Nummer"
+
+#: inc/customizer.php:2908
+msgid "Your counter label"
+msgstr "Din tæller etiket"
+
+#: inc/customizer.php:2504 inc/customizer.php:2905 inc/customizer.php:3261
+msgid "Title"
+msgstr "Titel"
+
+#: inc/customizer.php:2896
+msgid "Counter content"
+msgstr "Tæller indhold"
+
+#: inc/customizer.php:2830 section-parts/section-counter.php:4
+msgid "Our Numbers"
+msgstr "Vores tal"
+
+#: inc/customizer.php:2815 section-parts/section-counter.php:2
+msgid "counter"
+msgstr "tæller"
+
+#: inc/customizer.php:2781
+msgid "Section: Counter"
+msgstr "Sektion: Tæller"
+
+#: inc/customizer.php:2508 inc/customizer.php:2717
+msgid "Custom icon"
+msgstr "Tilpasset ikon"
+
+#: inc/customizer.php:2708
+msgid "Service content"
+msgstr "Tjenester indhold"
+
+#: inc/customizer.php:2617 section-parts/section-hero.php:81
+#: section-parts/section-services.php:4
+msgid "Our Services"
+msgstr "Vores tjenester"
+
+#: inc/customizer.php:2602 section-parts/section-services.php:2
+msgid "services"
+msgstr "tjenester"
+
+#: inc/customizer.php:2567
+msgid "Section: Services"
+msgstr "Sektion: Tjenester"
+
+#: inc/customizer.php:2317 inc/customizer.php:2741
+msgid "Link to single page"
+msgstr "Link til enkeltside"
+
+#: inc/customizer.php:2313
+msgid "Hide item title"
+msgstr "Skjul elementets titel"
+
+#: inc/customizer.php:2308 inc/customizer.php:2736
+msgid "Select a page"
+msgstr "Vælg en side"
+
+#: inc/customizer.php:817 inc/customizer.php:2303 inc/customizer.php:2499
+#: inc/customizer.php:2712 inc/customizer.php:2900 inc/customizer.php:3078
+msgid "[live_title]"
+msgstr "[live_title]"
+
+#: inc/customizer.php:1940 inc/customizer.php:2278 inc/customizer.php:2475
+#: inc/customizer.php:2688 inc/customizer.php:2876 inc/customizer.php:3054
+#: inc/customizer.php:3421
+msgid "Section Content"
+msgstr "Sektions indhold"
+
+#: inc/customizer.php:1914 inc/customizer.php:2225 inc/customizer.php:2426
+#: inc/customizer.php:2637 inc/customizer.php:2850 inc/customizer.php:3006
+#: inc/customizer.php:3176 inc/customizer.php:3394
+msgid "Section Subtitle"
+msgstr "Sektion undertitel"
+
+#: inc/customizer.php:1909 inc/customizer.php:2220 inc/customizer.php:2421
+#: inc/customizer.php:2632 inc/customizer.php:2845 inc/customizer.php:3001
+#: inc/customizer.php:3171 inc/customizer.php:3389
+#: section-parts/section-about.php:5 section-parts/section-contact.php:5
+#: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
+#: section-parts/section-news.php:5 section-parts/section-services.php:5
+#: section-parts/section-team.php:5
+msgid "Section subtitle"
+msgstr "Sektion undertitel"
+
+#: inc/customizer.php:1899 inc/customizer.php:2210 inc/customizer.php:2411
+#: inc/customizer.php:2622 inc/customizer.php:2835 inc/customizer.php:2991
+#: inc/customizer.php:3161 inc/customizer.php:3379
+msgid "Section Title"
+msgstr "Sektions titel"
+
+#: inc/customizer.php:2190 section-parts/section-about.php:2
+msgid "about"
+msgstr "om"
+
+#: inc/customizer.php:1751 inc/customizer.php:1853 inc/customizer.php:2164
+#: inc/customizer.php:2365 inc/customizer.php:2576 inc/customizer.php:2790
+#: inc/customizer.php:2946 inc/customizer.php:3115 inc/customizer.php:3333
+msgid "Section Settings"
+msgstr "Sektions indstillinger"
+
+#: inc/customizer.php:2155
+msgid "Section: About"
+msgstr "Sektion: Om"
+
+#: inc/customizer.php:1664
+msgid "Button #2 Link"
+msgstr "Knap #2 link"
+
+#: inc/customizer.php:1659 section-parts/section-hero.php:84
+msgid "#contact"
+msgstr "#kontakt"
+
+#: inc/customizer.php:1650
+msgid "Button #2 Text"
+msgstr "Knap #2 tekst"
+
+#: inc/customizer.php:1645 section-parts/section-hero.php:83
+msgid "Get Started"
+msgstr "Kom i gang"
+
+#: inc/customizer.php:1612
+msgid "Button #1 Link"
+msgstr "Knap #1 link"
+
+#: inc/customizer.php:1607
+msgid "#about"
+msgstr "#om"
+
+#: inc/customizer.php:1598
+msgid "Button #1 Text"
+msgstr "Knap #1 tekst"
+
+#: inc/customizer.php:1593 inc/customizer.php:2205
+#: section-parts/section-about.php:4
+msgid "About Us"
+msgstr "Om os"
+
+#: inc/customizer.php:1585
+msgid "You can use text rotate slider in this textarea too."
+msgstr "Du kan bruge tekst rotations slider i dette tekst område også."
+
+#: inc/customizer.php:1582
+msgid "Small Text"
+msgstr "Lille tekst"
+
+#: inc/customizer.php:1535
+msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer->Site Option->Animate to control rotate animation."
+msgstr "Skiftende tekst vejledning: Indsæt din skiftende tekst adskilt af \"|\" ind i <span class=\"js-rotating\">...</span>, gå til Tilpasser->Websteds muligheder->Animer for at styre animationsskift."
+
+#: inc/customizer.php:1533
+msgid "Large Text"
+msgstr "Stor tekst"
+
+#: inc/customizer.php:1493
+msgid "Hero Content Layout"
+msgstr "Hero indholds layout"
+
+#: inc/customizer.php:1420
+msgid "Background Image"
+msgstr "Baggrunds billede"
+
+#: inc/customizer.php:901 inc/customizer.php:1091 inc/customizer.php:1415
+msgid "Background"
+msgstr "Baggrund"
+
+#: inc/customizer.php:1411
+msgid "Background Images"
+msgstr "Baggrunds billeder"
+
+#: inc/customizer.php:1385
+msgid "Hero Background Media"
+msgstr "Hero baggrunds medier"
+
+#: inc/customizer.php:1282
+msgid "Padding Bottom:"
+msgstr "Fyld i bunden:"
+
+#: inc/customizer.php:1266
+msgid "Padding Top:"
+msgstr "Fyld i toppen:"
+
+#: inc/customizer.php:1261 inc/customizer.php:1277
+msgid "10"
+msgstr "10"
+
+#: inc/customizer.php:1238
+msgid "Check this box to make hero section full screen."
+msgstr "Marker denne boks for at gøre hero-sektionen til fuldskærm."
+
+#: inc/customizer.php:1236
+msgid "Make hero section full screen"
+msgstr "Gør hero-sektionen til fuldskærm"
+
+#: inc/customizer.php:1220 inc/customizer.php:1782 inc/customizer.php:1884
+#: inc/customizer.php:2195 inc/customizer.php:2396 inc/customizer.php:2607
+#: inc/customizer.php:2820 inc/customizer.php:2976 inc/customizer.php:3146
+#: inc/customizer.php:3364
+msgid "Section ID:"
+msgstr "Sektion ID:"
+
+#: inc/customizer.php:1215 section-parts/section-hero.php:2
+msgid "hero"
+msgstr "hero"
+
+#: inc/customizer.php:1208 inc/customizer.php:1769 inc/customizer.php:1871
+#: inc/customizer.php:2182 inc/customizer.php:2383 inc/customizer.php:2594
+#: inc/customizer.php:2807 inc/customizer.php:2964 inc/customizer.php:3133
+#: inc/customizer.php:3351
+msgid "Check this box to hide this section."
+msgstr "Marker denne boks for at skjule denne sektion."
+
+#: inc/customizer.php:1206 inc/customizer.php:1767 inc/customizer.php:1869
+#: inc/customizer.php:2180 inc/customizer.php:2381 inc/customizer.php:2592
+#: inc/customizer.php:2805 inc/customizer.php:2962 inc/customizer.php:3131
+#: inc/customizer.php:3349
+msgid "Hide this section?"
+msgstr "Skjul denne sektion?"
+
+#: inc/customizer.php:1190
+msgid "Hero Settings"
+msgstr "Hero indstillinger"
+
+#: inc/customizer.php:1180
+msgid "Section: Hero"
+msgstr "Sektion: Hero"
+
+#: inc/customizer.php:886
+msgid "MailChimp Action URL"
+msgstr "MailChimp handlings-url"
+
+#: inc/customizer.php:870
+msgid "Newsletter Form Title"
+msgstr "Nyhedsbrev formular titel"
+
+#: inc/customizer.php:856
+msgid "Check this box to hide footer newsletter form."
+msgstr "Marker denne boks for at skjule nyhedsbrev formular i sidefod."
+
+#: inc/customizer.php:854
+msgid "Hide Footer Newsletter?"
+msgstr "Skjul nyhedsbrev i sidefod?"
+
+#: inc/customizer.php:793
+msgid "Social Footer Title"
+msgstr "Sociale sidefods titel"
+
+#: inc/customizer.php:779
+msgid "These social profiles setting below will display at the footer of your site."
+msgstr "Disse social profilers indstillinger herunder vil vises i sidefoden på dit websted."
+
+#: inc/customizer.php:766
+msgid "Check this box to hide footer social section."
+msgstr "Marker denne boks for at skjule sociale ikoner sektion i sidefod."
+
+#: inc/customizer.php:764
+msgid "Hide Footer Social?"
+msgstr "Skjul social i sidefod?"
+
+#: inc/customizer.php:201
+msgid "Check this box to hide footer back to top button."
+msgstr "Marker denne boks for at skjule tilbage til top knap i sidefod."
+
+#: inc/customizer.php:199
+msgid "Hide footer back to top?"
+msgstr "Skjul tilbage til toppen i sidefoden?"
+
+#: inc/customizer.php:184
+msgid "Check this box to disable all element animation when scroll."
+msgstr "Marker denne boks for at deaktivere al animation for elementer når du ruller."
+
+#: inc/customizer.php:182
+msgid "Disable animation effect?"
+msgstr "Deaktiver animations effekt?"
+
+#: inc/customizer.php:143
+msgid "Global"
+msgstr "Globale"
+
+#: inc/customizer.php:133
+msgid "Theme Options"
+msgstr "Tema muligheder"
+
+#: inc/customizer.php:46
+msgid "Select member"
+msgstr "Vælg medlem"
+
+#: inc/customizer.php:35
+msgid "Select page"
+msgstr "Vælg side"
+
+#: inc/customizer-controls.php:588
+msgid "Close"
+msgstr "Luk"
+
+#: inc/customizer-controls.php:553
+msgid "Change"
+msgstr "Ændre"
+
+#: inc/customizer-controls.php:553
+msgid "Add"
+msgstr "TIlføj"
+
+#: inc/customizer-controls.php:552 inc/customizer-controls.php:574
+#: inc/customizer-controls.php:586
+msgid "Remove"
+msgstr "Fjern"
+
+#: inc/customizer-controls.php:321 inc/customizer-controls.php:436
+msgid "Item"
+msgstr "Element"
+
+#: inc/customizer-controls.php:421
+msgid "Add an item"
+msgstr "Tilføj et element"
+
+#: inc/template-tags.php:231
+msgid "Menu"
+msgstr "Menu"
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "Spring til indhold"
+
+#: functions.php:392
+msgid "Please contact the administrator of this site for help."
+msgstr "Kontakt venligst webstedets administrator for at få hjælp."
+
+#: functions.php:391
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "Alle plugins blev installeret og aktiveret korrekt. %1$s"
+
+#: functions.php:390
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "Plugin ikke aktiveret. En nyere verion af %s er krævet til dette tema. Opdater venligst pluginet."
+
+#: functions.php:389
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "Ingen handling foretaget. Plugin %1$s var allerede aktivt."
+
+#: functions.php:388
+msgid "The following plugin was activated successfully:"
+msgstr "Følgende plugin blev korrekt aktiveret:"
+
+#: functions.php:387
+msgid "Plugin activated successfully."
+msgstr "Plugin korrekt aktiveret."
+
+#: functions.php:386
+msgid "Return to Required Plugins Installer"
+msgstr "Vend tilbage til påkrævet plugins installation"
+
+#: functions.php:385
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "Starter aktivering af plugin"
+msgstr[1] "Starter aktivering af plugins"
+
+#: functions.php:384
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "Begynder opdateringen af plugin"
+msgstr[1] "Begynder opdateringen af plugins"
+
+#: functions.php:383
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "Starter installationen af plugin"
+msgstr[1] "Starter installationen af plugin'er"
+
+#: functions.php:382
+msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
+msgstr[0] "Beklager, men du har ikke rettigheder til at aktivere %1$s pluginet."
+msgstr[1] "Beklager, men du har ikke rettigheder til at aktivere %1$s pluginene."
+
+#: functions.php:381
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "Følgende anbefalet plugin er i øjeblikket inaktiv: %1$s."
+msgstr[1] "Følgende anbefalet plugins er i øjeblikket inaktive: %1$s."
+
+#: functions.php:380
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "Følgende krævede plugin er i øjeblikket inaktiv: %1$s."
+msgstr[1] "Følgende krævede plugins er i øjeblikket inaktive: %1$s."
+
+#: functions.php:379
+msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
+msgstr[0] "Beklager, men du har ikke rettigheder til at opdatere %1$s pluginet."
+msgstr[1] "Beklager, men du har ikke rettigheder til at opdatere %1$s pluginene."
+
+#: functions.php:378
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "Der er en opdatering tilgængelig for: %1$s."
+msgstr[1] "Der er opdateringer tilgængelige for følgende plugins: %1$s."
+
+#: functions.php:377
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] "Følgende plugin skal opdateres for at, sikre fuld kompatibilitet med dette tema: %1$s."
+msgstr[1] "Følgende plugin'er skal opdateres for at, sikre fuld kompatibilitet med dette tema: %1$s."
+
+#: functions.php:376
+msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
+msgstr[0] "Beklager, men du har ikke rettigheder til at installere %1$s pluginet."
+msgstr[1] "Beklager, men du har ikke rettigheder til at aktivere %1$s pluginene."
+
+#: functions.php:375
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "Dette tema anbefaler følgende plugin: %1$s."
+msgstr[1] "Dette tema anbefaler følgende plugin: %1$s."
+
+#: functions.php:374
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "Dette tema kræver følgende plugin: %1$s."
+msgstr[1] "Dette tema kræver følgende plugins: %1$s."
+
+#: functions.php:373
+msgid "Something went wrong with the plugin API."
+msgstr "Noget gik galt med plugin API."
+
+#: functions.php:372
+msgid "Installing Plugin: %s"
+msgstr "Installerer plugin: %s"
+
+#: functions.php:371
+msgid "Install Plugins"
+msgstr "Installer plugins"
+
+#: functions.php:370
+msgid "Install Required Plugins"
+msgstr "Installer de krævede plugins"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Raleway, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:289
+msgctxt "Raleway font: on or off"
+msgid "on"
+msgstr "on"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:283
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:143
+msgid "Sidebar"
+msgstr "Sidebar"
+
+#: functions.php:59
+msgid "Primary Menu"
+msgstr "Primære menu"
+
+#: inc/template-tags.php:1336
+msgid "%1$s theme by %2$s"
+msgstr "%1$s tema af %2$s"
+
+#: inc/template-tags.php:1334
+msgid "Copyright %1$s %2$s %3$s"
+msgstr "Copyright %1$s %2$s %3$s"
+
+#: footer.php:34
+msgid "Back To Top"
+msgstr "Tilbage til top"
+
+#: inc/customizer.php:864 inc/template-tags.php:1538
+msgid "Join our Newsletter"
+msgstr "Tilmeld dig vores nyhedsbrev"
+
+#: inc/customizer.php:787 inc/template-tags.php:1557
+msgid "Keep Updated"
+msgstr "Hold dig opdateret"
+
+#: comments.php:91
+msgid "Comments are closed."
+msgstr "Der er lukket for kommentarer."
+
+#: comments.php:59 comments.php:79
+msgid "Newer Comments"
+msgstr "Nyere kommentarer"
+
+#: comments.php:58 comments.php:78
+msgid "Older Comments"
+msgstr "Ældre kommentarer"
+
+#: comments.php:55 comments.php:75
+msgid "Comment navigation"
+msgstr "Kommentar navigation"
+
+#. translators: 1: number of comments, 2: post title
+#: comments.php:37
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s tanke om &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s tanker om &ldquo;%2$s&rdquo;"
+
+#. translators: %1$s: smiley
+#: 404.php:51
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Prøv at se i måneds arkiverne. %1$s"
+
+#: 404.php:34
+msgid "Most Used Categories"
+msgstr "Mest anvendte kategorier"
+
+#: 404.php:26
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Det ser ud til, at intet blev fundet på denne placering. Prøv evt. et af de links herunder eller en søgning?"
+
+#: 404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Ups! Den side kan ikke findes."
+
+#. Author URI of the plugin/theme
+msgid "http://www.famethemes.com"
+msgstr "http://www.famethemes.com"
+
+#. Author of the plugin/theme
+msgid "FameThemes"
+msgstr "FameThemes"
+
+#. Theme URI of the plugin/theme
+msgid "https://www.famethemes.com/themes/onepress/"
+msgstr "https://www.famethemes.com/themes/onepress/"

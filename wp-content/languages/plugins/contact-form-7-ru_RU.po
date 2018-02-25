@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-26 13:15:51+0000\n"
+"PO-Revision-Date: 2018-01-14 15:36:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,7 +17,12 @@ msgstr "Ваше пожертвование поможет дальше разв
 
 #: admin/includes/welcome-panel.php:35
 msgid "making a donation"
-msgstr "сделайте пожертвование"
+msgstr "сделать пожертвование"
+
+#. translators: %s: link labeled 'making a donation'
+#: admin/includes/welcome-panel.php:35
+msgid "If you enjoy using Contact Form 7 and find it useful, please consider %s."
+msgstr "Если вам нравится использовать Contact Form 7 и вы находите его полезным, пожалуйста, рассмотрите возможность %s."
 
 #: admin/includes/welcome-panel.php:33
 msgid "It is hard to continue development and support for this plugin without contributions from users like you."
@@ -813,7 +818,7 @@ msgstr "Вставить тег"
 #: modules/recaptcha.php:490 modules/select.php:230 modules/submit.php:75
 #: modules/text.php:298 modules/textarea.php:172
 msgid "Class attribute"
-msgstr "атрибут класса"
+msgstr "Атрибут class"
 
 #: modules/acceptance.php:177 modules/checkbox.php:339 modules/date.php:199
 #: modules/file.php:267 modules/number.php:207 modules/quiz.php:212
@@ -821,7 +826,7 @@ msgstr "атрибут класса"
 #: modules/recaptcha.php:485 modules/select.php:225 modules/submit.php:70
 #: modules/text.php:293 modules/textarea.php:167
 msgid "Id attribute"
-msgstr "атрибут Id"
+msgstr "Атрибут Id"
 
 #: modules/acceptance.php:171
 msgid "Make this work inversely"
@@ -1331,7 +1336,7 @@ msgstr "Редактировать контактную форму"
 msgid "Contact"
 msgstr "Contact Form 7"
 
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 4.9.1)  #-#-#-#-#
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 4.9.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin/admin.php:21 modules/flamingo.php:150
 msgid "Contact Form 7"

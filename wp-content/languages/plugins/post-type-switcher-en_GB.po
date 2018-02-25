@@ -1,17 +1,17 @@
-# Translation of Plugins - Post Type Switcher - Development (trunk) in English (UK)
-# This file is distributed under the same license as the Plugins - Post Type Switcher - Development (trunk) package.
+# Translation of Plugins - Post Type Switcher - Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Plugins - Post Type Switcher - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-09 19:55:59+0000\n"
+"PO-Revision-Date: 2018-02-16 19:06:22+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: en_GB\n"
-"Project-Id-Version: Plugins - Post Type Switcher - Development (trunk)\n"
+"Project-Id-Version: Plugins - Post Type Switcher - Stable (latest release)\n"
 
-#: post-type-switcher.php:279
+#: post-type-switcher.php:277
 msgid "&mdash; No Change &mdash;"
 msgstr "&mdash; No Change &mdash;"
 
@@ -35,26 +35,26 @@ msgstr "https://wordpress.org/plugins/post-type-switcher/"
 msgid "Post Type Switcher"
 msgstr "Post Type Switcher"
 
-#: post-type-switcher.php:201 post-type-switcher.php:226
+#: post-type-switcher.php:199 post-type-switcher.php:224
 msgid "Post Type"
 msgstr "Post Type"
 
-#: post-type-switcher.php:167
+#: post-type-switcher.php:165
 msgid "Type"
 msgstr "Type"
 
-#: post-type-switcher.php:149
+#: post-type-switcher.php:147
 msgid "Cancel"
 msgstr "Cancel"
 
-#: post-type-switcher.php:148
+#: post-type-switcher.php:146
 msgid "OK"
 msgstr "OK"
 
-#: post-type-switcher.php:133
+#: post-type-switcher.php:131
 msgid "Edit"
 msgstr "Edit"
 
-#: post-type-switcher.php:128
+#: post-type-switcher.php:126
 msgid "Post Type:"
 msgstr "Post Type:"

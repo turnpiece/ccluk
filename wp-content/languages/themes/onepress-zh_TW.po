@@ -1,0 +1,1756 @@
+# Translation of Themes - OnePress in Chinese (Taiwan)
+# This file is distributed under the same license as the Themes - OnePress package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-01-23 19:46:44+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: zh_TW\n"
+"Project-Id-Version: Themes - OnePress\n"
+
+#. Description of the plugin/theme
+msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。你可以在 https://www.famethemes.com/preview/?theme=OnePress 進行線上預覽。繁體中文本地化由佈景主題開發者委託「<a href=\"https://www.alexclassroom.com/\" target=\"_blank\">阿力獅的教室</a>」站長<a href=\"https://www.facebook.com/captain.alexlion\" target=\"_blank\">阿力獅</a>製作提供。"
+
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.2)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/dashboard.php:327
+msgid "OnePress"
+msgstr "OnePress"
+
+#: inc/metabox.php:162
+msgid "Hide footer."
+msgstr "隱藏頁尾。"
+
+#: inc/metabox.php:151
+msgid "Display page excerpt as header cover description."
+msgstr "將頁面摘要顯示為封面說明。"
+
+#: inc/metabox.php:145
+msgid "Display featured image as header cover."
+msgstr "將特色圖片顯示為頁首封面。"
+
+#: inc/metabox.php:139
+msgid "Hide page title area."
+msgstr "隱藏頁面標題區域。"
+
+#: inc/metabox.php:134
+msgid "Hide header."
+msgstr "隱藏頁首。"
+
+#: inc/metabox.php:157
+msgid "Hide breadcrumb."
+msgstr "隱藏階層連結。"
+
+#: inc/customizer.php:391
+msgid "Only set if display site tagline."
+msgstr "僅適用於網站說明。"
+
+#: inc/customizer.php:389
+msgid "Site Tagline Color"
+msgstr "網站說明色彩"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Contained Content"
+msgstr "全螢幕寬度 - 包覆的內容"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Stretched Content"
+msgstr "全螢幕寬度 - 延伸的內容"
+
+#: inc/sanitize.php:240
+msgid "Upgrade to %1s to unlock this feature."
+msgstr "升級至 %1s 以取得這項功能。"
+
+#: inc/metabox.php:38
+msgid "Page Settings"
+msgstr "頁面設定"
+
+#: inc/dashboard.php:685
+msgid "Get OnePress Plus now!"
+msgstr "立即取得 OnePress Plus！"
+
+#: inc/dashboard.php:330
+msgid "Free vs PLUS"
+msgstr "版本比較"
+
+#: inc/dashboard.php:328
+msgid "Recommended Actions"
+msgstr "建議操作"
+
+#: inc/customizer.php:3611
+msgid "OnePress Plus Available! Take a look"
+msgstr "現已提供 OnePress Plus，點擊瞭解更多！"
+
+#: inc/customizer.php:3601
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">拖放區段順序</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制首頁區段順序！</p><h4 class=\"customizer-group-heading-message\">進階區段樣式</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制區段樣式，包含背景色彩、圖片、影片、視差滾動效果、自訂樣式等等...</p>"
+
+#: inc/customizer.php:3285
+msgid "Ascending"
+msgstr "升冪"
+
+#: inc/customizer.php:3284
+msgid "Descending"
+msgstr "降冪"
+
+#: inc/customizer.php:3280
+msgid "Order"
+msgstr "排序冪次"
+
+#: inc/customizer.php:3265
+msgid "Random order"
+msgstr "隨機排序"
+
+#: inc/customizer.php:3264
+msgid "Order by Page Order"
+msgstr "依頁面順序排序"
+
+#: inc/customizer.php:3263
+msgid "Comment Count"
+msgstr "留言計數"
+
+#: inc/customizer.php:3262
+msgid "Date"
+msgstr "發表日期"
+
+#: inc/customizer.php:3260
+msgid "Author"
+msgstr "作者"
+
+#: inc/customizer.php:3259
+msgid "ID"
+msgstr "ID"
+
+#: inc/customizer.php:3258
+msgid "Default"
+msgstr "預設"
+
+#: inc/customizer.php:3254
+msgid "Order By"
+msgstr "排序方式"
+
+#: inc/customizer.php:3238
+msgid "Category to show"
+msgstr "要顯示的分類"
+
+#: inc/customizer.php:2770
+msgid "1x"
+msgstr "原尺寸"
+
+#: inc/customizer.php:2769
+msgid "2x"
+msgstr "2 倍"
+
+#: inc/customizer.php:2768
+msgid "3x"
+msgstr "3 倍"
+
+#: inc/customizer.php:2767
+msgid "4x"
+msgstr "4 倍"
+
+#: inc/customizer.php:2766
+msgid "5x"
+msgstr "5 倍"
+
+#: inc/customizer.php:2761
+msgid "Icon Size"
+msgstr "圖示尺寸"
+
+#: inc/customizer.php:2259
+msgid "Layout Settings"
+msgstr "版面配置設定"
+
+#: inc/customizer.php:1565
+msgid "Rotating Text Background"
+msgstr "旋轉文字背景色彩"
+
+#: inc/customizer.php:1550
+msgid "Rotating Text Color"
+msgstr "旋轉文字色彩"
+
+#: inc/customizer.php:1526
+msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
+msgstr "這便是 <span class=\"js-rotating\">OnePress | 一頁式 | 回應式 | 盡善盡美</span>"
+
+#: inc/customizer.php:1483
+msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
+msgstr "想為 [宣傳內容] 區段新增<strong>背景影片</strong>嗎？請升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 即可取得這項功能。"
+
+#: inc/customizer.php:1252
+msgid "Disable Preload Icon"
+msgstr "停用預載圖示"
+
+#: inc/customizer.php:1077
+msgid "Footer Copyright"
+msgstr "頁尾版權"
+
+#: inc/customizer.php:1064 inc/customizer.php:1131
+msgid "Link Hover Color"
+msgstr "連結游標停駐色彩"
+
+#: inc/customizer.php:1048 inc/customizer.php:1118
+msgid "Link Color"
+msgstr "連結色彩"
+
+#: inc/customizer.php:1031
+msgid "Widget Title Color"
+msgstr "小工具標題色彩"
+
+#: inc/customizer.php:982
+msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
+msgstr "輸入以 + (半形加號) 分隔的各欄欄寬數字，各欄欄寬數字加總必須小於或等於 12。"
+
+#: inc/customizer.php:980
+msgid "Custom footer %s columns width"
+msgstr "自訂頁尾 %s 欄欄寬"
+
+#: inc/customizer.php:980
+msgid "Custom footer 1 column width"
+msgstr "自訂頁尾 1 欄欄寬"
+
+#: inc/customizer.php:956
+msgid "Disable footer widgets"
+msgstr "停用頁尾小工具"
+
+#: inc/customizer.php:950
+msgid "Number footer columns to display."
+msgstr "頁尾顯示欄數。"
+
+#: inc/customizer.php:930
+msgid "Footer Widgets"
+msgstr "頁尾小工具"
+
+#: inc/customizer.php:915 inc/customizer.php:998 inc/customizer.php:1105
+msgid "Text Color"
+msgstr "文字色彩"
+
+#: inc/customizer.php:819 inc/customizer.php:2305 inc/customizer.php:2501
+#: inc/customizer.php:2714 inc/customizer.php:2902 inc/customizer.php:3080
+msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
+msgstr "升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>，便能新增更多項目並取得其他付費功能！"
+
+#: inc/customizer.php:747
+msgid "Footer Socials"
+msgstr "頁尾社交網路資料"
+
+#: inc/customizer.php:679
+msgid "Right"
+msgstr "靠右"
+
+#: inc/customizer.php:678
+msgid "Left"
+msgstr "靠左"
+
+#: inc/customizer.php:677
+msgid "Center"
+msgstr "置中"
+
+#: inc/customizer.php:673
+msgid "Content Align"
+msgstr "內容對齊方式"
+
+#: inc/customizer.php:640
+msgid "Color"
+msgstr "色彩"
+
+#: inc/customizer.php:624
+msgid "The page cover padding bottom in percent (%)."
+msgstr "宣傳內容的下邊框間距，單位為百分比 (%)。"
+
+#: inc/customizer.php:623
+msgid "Padding Bottom"
+msgstr "下邊框距離"
+
+#: inc/customizer.php:609
+msgid "The page cover padding top in percent (%)."
+msgstr "宣傳內容的上邊框間距，單位為百分比 (%)。"
+
+#: inc/customizer.php:608
+msgid "Padding Top"
+msgstr "上邊框距離"
+
+#: inc/customizer.php:595
+msgid "Check this box to disable the page title bar on all pages."
+msgstr "啟用這項設定後，便可在所有頁面停用頁面標題列。"
+
+#: inc/customizer.php:593
+msgid "Disable Page Title bar?"
+msgstr "停用頁面標題列"
+
+#: inc/customizer.php:577
+msgid "Page Title Area"
+msgstr "頁面標題區域"
+
+#: inc/customizer.php:567
+msgid "Padding left and right for Navigation items (pixels)."
+msgstr "導覽項目的左右邊框間距 (單位為 px)"
+
+#: inc/customizer.php:566
+msgid "Menu Item Padding"
+msgstr "選單項目邊框間距"
+
+#: inc/customizer.php:552
+msgid "Navigation"
+msgstr "導覽"
+
+#: inc/customizer.php:540
+msgid "Transparent Site Tagline Color"
+msgstr "透明網站說明色彩"
+
+#: inc/customizer.php:524
+msgid "Transparent Site Title Color"
+msgstr "透明網站標題色彩"
+
+#: inc/customizer.php:508
+msgid "Transparent Retina Logo"
+msgstr "透明 Retina 標誌"
+
+#: inc/customizer.php:490 inc/customizer.php:509
+msgid "Only apply when transparent header option is checked."
+msgstr "啟用 [透明頁首] 後才會產生效果。"
+
+#: inc/customizer.php:488
+msgid "Transparent Logo"
+msgstr "透明標誌"
+
+#: inc/customizer.php:294
+msgid "Below Hero Slider"
+msgstr "宣傳內容投影片輪播下方"
+
+#: inc/customizer.php:293
+msgid "Top"
+msgstr "頂端"
+
+#: inc/customizer.php:290
+msgid "Header Position"
+msgstr "頁首位置"
+
+#: inc/customizer.php:272
+msgid "Contained"
+msgstr "包覆"
+
+#: inc/customizer.php:268
+msgid "Header Width"
+msgstr "頁首寬度"
+
+#: inc/customizer.php:218
+msgid "Check this if you want to disable default google fonts in theme."
+msgstr "啟用這項設定後，便可停用佈景主題預設的 Google Fonts。"
+
+#: inc/customizer.php:216
+msgid "Disable Google Fonts"
+msgstr "停用 Google Fonts"
+
+#: inc/customizer.php:119
+msgid "Logo Height In Pixel"
+msgstr "標誌高度 (px)"
+
+#: inc/customizer.php:101
+msgid "Retina Logo"
+msgstr "Retina 標誌"
+
+#: inc/customizer-controls.php:632
+msgid "All"
+msgstr "所有分類"
+
+#: functions.php:165
+msgid "Footer %s"
+msgstr "頁尾 %s"
+
+#: comments.php:32
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgstr "在「%2$s」中有 1 則留言"
+
+#: inc/customizer.php:739
+msgid "Check this box to show featured image on single post."
+msgstr "啟用這項設定後，便可在單篇文章中顯示精選圖片。"
+
+#: inc/customizer.php:724
+msgid "Check this box to show single post meta such as post date, author, category,..."
+msgstr "啟用這項設定後，便可顯示單篇文章的發表日期、作者、分類等中繼資料。"
+
+#: inc/customizer.php:722
+msgid "Show single post meta"
+msgstr "顯示單篇文章中繼資料"
+
+#: inc/customizer.php:709
+msgid "Check this box to show post thumbnail on single post."
+msgstr "啟用這項設定後，便可在單篇文章中顯示縮圖。"
+
+#: inc/customizer.php:707 inc/customizer.php:737
+msgid "Show single post thumbnail"
+msgstr "顯示單篇文章的精選圖片"
+
+#: inc/customizer.php:692
+msgid "Single Post"
+msgstr "單篇文章"
+
+#: inc/customizer.php:1375
+msgid "The amount of time in between slides, expressed as the number of milliseconds."
+msgstr "每張投影片的間隔時間，以毫秒為單位。"
+
+#: inc/customizer.php:1374
+msgid "Slider duration speed"
+msgstr "投影片輪播間隔時間"
+
+#: inc/customizer.php:1358
+msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
+msgstr "設定圖片淡入顯示速度。請輸入整數，單位為毫秒。"
+
+#: inc/customizer.php:1357
+msgid "Slider animation speed"
+msgstr "投影片輪播動畫速度"
+
+#: inc/customizer.php:1339
+msgid "Text animation speed"
+msgstr "文字動畫速度"
+
+#: inc/dashboard.php:382
+msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
+msgstr "子佈景主題使用自己的佈景主題設定名稱，你想將設定資料從上層佈景主題複製到這個子佈景主題嗎？"
+
+#: inc/customizer.php:3668
+msgid "Font Awesome"
+msgstr "Font Awesome"
+
+#: inc/customizer.php:3664
+msgid "Search"
+msgstr "搜尋"
+
+#: inc/dashboard.php:763
+msgid "Are you sure want to copy ?"
+msgstr "確定要進行複製嗎？"
+
+#: inc/dashboard.php:422
+msgid "Recommend Plugins"
+msgstr "建議安裝的外掛"
+
+#: inc/dashboard.php:405
+msgid "Your settings copied."
+msgstr "設定已複製。"
+
+#: inc/dashboard.php:402
+msgid "Copy now"
+msgstr "立即複製"
+
+#: inc/dashboard.php:394
+msgid "To Theme"
+msgstr "到佈景主題"
+
+#: inc/dashboard.php:388
+msgid "From Theme"
+msgstr "從佈景主題"
+
+#: inc/dashboard.php:380
+msgid "You're using %1$s theme, It's a child theme of OnePress"
+msgstr "這個網站目前使用的 %1$s 佈景主題，是 OnePress 的子佈景主題。"
+
+#: inc/dashboard.php:238
+msgid "Details"
+msgstr "詳細資料"
+
+#: inc/dashboard.php:166
+msgid "Import Demo Data"
+msgstr "匯入示範資料"
+
+#: inc/dashboard.php:166
+msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
+msgstr "匯入我們提供的示範資料便可大幅節省時間，而網站將會在幾分鐘內設定完畢並可供自訂。%s"
+
+#: inc/customizer.php:2141
+msgid "Read More Text"
+msgstr "[檢閱更多] 連結文字"
+
+#: inc/customizer.php:2136 section-parts/section-gallery.php:38
+msgid "View More"
+msgstr "檢閱更多"
+
+#: inc/customizer.php:2126
+msgid "Read More Link"
+msgstr "[檢閱更多] 連結"
+
+#: inc/customizer.php:166
+msgid "No sidebar"
+msgstr "無側欄"
+
+#: inc/customizer.php:165
+msgid "Left sidebar"
+msgstr "左側欄"
+
+#: inc/customizer.php:164
+msgid "Right sidebar"
+msgstr "右側欄"
+
+#: inc/customizer.php:161
+msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
+msgstr "網站版面配置會套用至所有頁面，但不包含首頁及頁面自訂模板。"
+
+#: inc/customizer.php:160
+msgid "Site Layout"
+msgstr "網站版面配置"
+
+#: functions.php:106
+msgid "Famethemes Demo Importer"
+msgstr "Famethemes Demo Importer"
+
+#: functions.php:102
+msgid "Contact Form 7"
+msgstr "Contact Form 7"
+
+#: functions.php:154
+msgid "WooCommerce Sidebar"
+msgstr "WooCommerce 側欄"
+
+#: inc/customizer.php:2267 inc/customizer.php:2679
+msgid "1 Column"
+msgstr "1 欄"
+
+#: inc/customizer.php:2110
+msgid "Enable Lightbox"
+msgstr "啟用燈箱效果"
+
+#: inc/customizer.php:2096
+msgid "Number items"
+msgstr "項目數量"
+
+#: inc/customizer.php:2071
+msgid "Layout columns"
+msgstr "項目行版面配置"
+
+#: inc/customizer.php:2055
+msgid "Row Height"
+msgstr "項目列高"
+
+#: inc/customizer.php:2039
+msgid "Item Spacing"
+msgstr "項目間距"
+
+#: inc/customizer.php:2025
+msgid "Masonry"
+msgstr "柱狀"
+
+#: inc/customizer.php:2024
+msgid "Justified"
+msgstr "左右對齊"
+
+#: inc/customizer.php:2023
+msgid "Slider"
+msgstr "投影片輪播"
+
+#: inc/customizer.php:2022
+msgid "Carousel"
+msgstr "輪播"
+
+#: inc/customizer.php:2021
+msgid "Grid"
+msgstr "格線"
+
+#: inc/customizer.php:2016
+msgid "Display"
+msgstr "顯示方式"
+
+#: inc/customizer.php:2001
+msgid "Default, inside container"
+msgstr "在容器中顯示 (預設值)"
+
+#: inc/customizer.php:947 inc/customizer.php:1996
+msgid "Layout"
+msgstr "版面配置"
+
+#: inc/customizer.php:1982
+msgid "Select a page which have content contain [gallery] shortcode."
+msgstr "選取內容中包含 [gallery] 短代碼的頁面。"
+
+#: inc/customizer.php:1977
+msgid "Select Gallery Page"
+msgstr "選取藝廊頁面"
+
+#: inc/customizer.php:1960
+msgid "Page"
+msgstr "頁面"
+
+#: inc/customizer.php:1955
+msgid "Select Gallery Source"
+msgstr "選取藝廊來源"
+
+#: inc/customizer.php:1894 section-parts/section-gallery.php:4
+msgid "Gallery"
+msgstr "藝廊"
+
+#: inc/customizer.php:1879 section-parts/section-gallery.php:2
+msgid "gallery"
+msgstr "gallery"
+
+#: inc/customizer.php:1844
+msgid "Section: Gallery"
+msgstr "區段: 藝廊"
+
+#: inc/customizer.php:345
+msgid "Scroll to top when click to the site logo or site title, only apply on front page."
+msgstr "按一下網站標誌或網站標題便能返回頂端，這項效果僅適用於首頁。"
+
+#: inc/dashboard.php:743
+msgid "FameThemes Demo Importer"
+msgstr "FameThemes Demo Importer"
+
+#: inc/dashboard.php:742
+msgid "Hey."
+msgstr "請注意！"
+
+#: inc/dashboard.php:740
+msgid "%1$s you will need to install and activate the %2$s plugin first."
+msgstr "%1$s你必須先安裝 %2$s 外掛並予以啟用。"
+
+#: inc/dashboard.php:218 inc/dashboard.php:724
+msgid "Active Now"
+msgstr "立即啟用"
+
+#: inc/dashboard.php:196 inc/dashboard.php:702
+msgid "Install Now"
+msgstr "立即安裝"
+
+#: inc/dashboard.php:332
+msgid "One Click Demo Import"
+msgstr "一鍵匯入示範資料"
+
+#: inc/customizer.php:1678
+msgid "Button #2 style"
+msgstr "第二顆按鈕的樣式"
+
+#: inc/customizer.php:3312
+msgid "More News Button Text"
+msgstr "[更多消息] 按鈕文字"
+
+#: inc/customizer.php:3301
+msgid "It should be your blog page link."
+msgstr "請在此輸入網站文章頁面連結。"
+
+#: inc/customizer.php:1636 inc/customizer.php:1689
+msgid "Danger"
+msgstr "危險"
+
+#: inc/customizer.php:1635 inc/customizer.php:1688
+msgid "Warning"
+msgstr "警告"
+
+#: inc/customizer.php:1634 inc/customizer.php:1687
+msgid "Info"
+msgstr "資訊"
+
+#: inc/customizer.php:1633 inc/customizer.php:1686
+msgid "Success"
+msgstr "成功"
+
+#: inc/customizer.php:1632 inc/customizer.php:1685
+msgid "Primary"
+msgstr "主要"
+
+#: inc/customizer.php:1631 inc/customizer.php:1684
+msgid "Button"
+msgstr "按鈕"
+
+#: inc/customizer.php:1630 inc/customizer.php:1683
+msgid "Button Secondary"
+msgstr "按鈕次色"
+
+#: inc/customizer.php:1629 inc/customizer.php:1682
+msgid "Button Primary"
+msgstr "按鈕主色"
+
+#: inc/customizer.php:1625
+msgid "Button #1 style"
+msgstr "第一顆按鈕的樣式"
+
+#: inc/customizer.php:1284
+msgid "The hero content padding bottom in percent (%)."
+msgstr "宣傳內容的下邊框間距，單位為百分比 (%)。"
+
+#: inc/customizer.php:1268
+msgid "The hero content padding top in percent (%)."
+msgstr "宣傳內容的上邊框間距，單位為百分比 (%)。"
+
+#: inc/customizer.php:1340
+msgid "The delay between the changing of each phrase in milliseconds."
+msgstr "設定短語變更時的延遲時間，以毫秒為單位。"
+
+#: inc/customizer.php:888
+msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "這份電子報訂閱表單採用了 MailChimp 服務，請參考<a target=\"_blank\" href=\"http://goo.gl/uRVIst\">這份線上說明</a>，進以瞭解如何取得 MailChimp 訂閱網址。此處的範例為 <b>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</b>。"
+
+#: inc/customizer.php:81
+msgid "Hide site tagline"
+msgstr "隱藏網站說明"
+
+#: inc/customizer.php:66
+msgid "Hide site title"
+msgstr "隱藏網站標題"
+
+#: inc/customizer.php:2512 inc/customizer.php:2721
+msgid "image"
+msgstr "圖片"
+
+#: inc/customizer.php:1320
+msgid "Text animation"
+msgstr "文字動畫效果"
+
+#: inc/dashboard.php:132
+msgid "OnePress Theme %s"
+msgstr "OnePress 佈景主題 %s"
+
+#: inc/dashboard.php:130
+msgid "%1$s action required"
+msgid_plural "%1$s actions required"
+msgstr[0] "%1$s 個必要動作"
+
+#: inc/customizer.php:1145 inc/customizer.php:1163
+msgid "Custom CSS"
+msgstr "自訂 CSS"
+
+#: section-parts/section-features.php:5
+msgid "Why choose Us"
+msgstr "為什麼選擇我們"
+
+#: inc/customizer.php:2671
+msgid "Services Layout Setting"
+msgstr "服務項目版面配置設定"
+
+#: inc/customizer.php:2530 inc/customizer.php:3088
+msgid "Custom Link"
+msgstr "自訂連結"
+
+#: inc/customizer.php:2526
+msgid "Description"
+msgstr "內容說明"
+
+#: inc/customizer.php:2495
+msgid "Features content"
+msgstr "精選內容"
+
+#: inc/customizer.php:2459
+msgid "Features Layout Setting"
+msgstr "[精選內容] 版面配置設定"
+
+#: inc/customizer.php:2406 section-parts/section-features.php:4
+msgid "Features"
+msgstr "精選內容"
+
+#: inc/customizer.php:2391 section-parts/section-features.php:2
+msgid "features"
+msgstr "features"
+
+#: inc/customizer.php:2356
+msgid "Section: Features"
+msgstr "區段: 精選內容"
+
+#: inc/customizer.php:1931 inc/customizer.php:2242 inc/customizer.php:2443
+#: inc/customizer.php:2654 inc/customizer.php:2867 inc/customizer.php:3023
+#: inc/customizer.php:3193 inc/customizer.php:3411
+msgid "Section Description"
+msgstr "區段內容說明"
+
+#: inc/customizer.php:1727 inc/customizer.php:2521 inc/customizer.php:2730
+msgid "Image"
+msgstr "圖片"
+
+#: inc/customizer.php:1709
+msgid "Content Text"
+msgstr "內容文字"
+
+#: inc/customizer.php:1515
+msgid "Layout 2"
+msgstr "版面配置 2"
+
+#: inc/customizer.php:1514
+msgid "Layout 1"
+msgstr "版面配置 1"
+
+#: inc/customizer.php:1509
+msgid "Display Layout"
+msgstr "顯示方式版面配置"
+
+#: inc/customizer.php:830
+msgid "URL"
+msgstr "網址"
+
+#: inc/customizer.php:826 inc/customizer.php:2511 inc/customizer.php:2516
+#: inc/customizer.php:2720 inc/customizer.php:2725
+msgid "Icon"
+msgstr "圖示"
+
+#: inc/customizer.php:822
+msgid "Social network"
+msgstr "社交網路"
+
+#: inc/customizer.php:813
+msgid "Socials"
+msgstr "社交網路"
+
+#: inc/customizer.php:471
+msgid "Apply for front page template only."
+msgstr "這項效果僅適用於 [首頁] 模板。"
+
+#: inc/customizer.php:469
+msgid "Header Transparent"
+msgstr "透明頁首"
+
+#: inc/template-tags.php:1548
+msgid "Subscribe"
+msgstr "訂閱"
+
+#: inc/template-tags.php:1547
+msgid "Enter your e-mail address"
+msgstr "輸入你的電子郵件地址"
+
+#: inc/dashboard.php:358
+msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
+msgstr "%s 這款 WordPress 佈景主題的技術支援，是透過 FameThemes 的技術支援需求系統進行。"
+
+#: inc/dashboard.php:352
+msgid "OnePress Documentation"
+msgstr "OnePress 線上文件"
+
+#: inc/customizer.php:2266 inc/customizer.php:2466 inc/customizer.php:2678
+#: inc/customizer.php:3046
+msgid "2 Columns"
+msgstr "2 欄"
+
+#: inc/customizer.php:2265 inc/customizer.php:2465 inc/customizer.php:2677
+#: inc/customizer.php:3045
+msgid "3 Columns"
+msgstr "3 欄"
+
+#: inc/customizer.php:2264 inc/customizer.php:2464 inc/customizer.php:2676
+#: inc/customizer.php:3044
+msgid "4 Columns"
+msgstr "4 欄"
+
+#: inc/customizer.php:3039
+msgid "Team Layout Setting"
+msgstr "[團隊成員] 版面配置設定"
+
+#: inc/customizer.php:2342 inc/customizer.php:2555
+msgid "Page Excerpt"
+msgstr "頁面摘要"
+
+#: inc/customizer.php:2341 inc/customizer.php:2554
+msgid "Full Page Content"
+msgstr "完整頁面內容"
+
+#: inc/customizer.php:2336 inc/customizer.php:2549
+msgid "Item content source"
+msgstr "項目內容來源"
+
+#: inc/customizer.php:2299
+msgid "About content page"
+msgstr "[關於] 內容頁面"
+
+#: inc/customizer.php:1465
+msgid "Enable parallax effect (apply for first BG image only)"
+msgstr "啟用視差滾動效果，但效果僅會套用至第一張背景圖片"
+
+#: inc/customizer.php:330
+msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
+msgstr "如果使用了標誌但標誌高度太高，核取這項設定後便可自動將選單垂直居中對齊。"
+
+#: inc/customizer.php:328
+msgid "Center vertical align for menu"
+msgstr "將選單垂直居中對齊"
+
+#: inc/customizer.php:450
+msgid "Responsive Menu Button Color"
+msgstr "回應式選單按鈕色彩"
+
+#: inc/customizer.php:435
+msgid "Menu Link Hover/Active BG Color"
+msgstr "選單連結游標停駐/點擊背景色彩"
+
+#: inc/customizer.php:419
+msgid "Menu Link Hover/Active Color"
+msgstr "選單連結游標停駐/點擊色彩"
+
+#: inc/customizer.php:404
+msgid "Menu Link Color"
+msgstr "選單連結色彩"
+
+#: inc/customizer.php:377
+msgid "Only set if you don't use an image logo."
+msgstr "僅適用於未使用圖片標誌。"
+
+#: inc/customizer.php:375
+msgid "Site Title Color"
+msgstr "網站標題色彩"
+
+#: inc/customizer.php:359 inc/customizer.php:1014
+msgid "Background Color"
+msgstr "背景色彩"
+
+#: inc/customizer.php:250
+msgid "Header"
+msgstr "頁首"
+
+#: inc/customizer.php:237
+msgid "Primary Color"
+msgstr "主要色彩"
+
+#: inc/customizer.php:228
+msgid "Site Colors"
+msgstr "網站色彩"
+
+#: inc/customizer.php:3083
+msgid "User media"
+msgstr "成員照片"
+
+#: inc/customizer.php:1832
+msgid "Background image"
+msgstr "背景圖片"
+
+#: inc/customizer.php:1817
+msgid "Paste Youtube or Vimeo url here"
+msgstr "在此貼上 YouTube 或 Vimeo 影片網址"
+
+#: inc/customizer.php:1815
+msgid "Video url"
+msgstr "影片網址"
+
+#: inc/customizer.php:1800
+msgid "Section heading"
+msgstr "區段標題"
+
+#: inc/customizer.php:1222 inc/customizer.php:1784 inc/customizer.php:1886
+#: inc/customizer.php:2197 inc/customizer.php:2398 inc/customizer.php:2822
+#: inc/customizer.php:3148 inc/customizer.php:3366
+msgid "The section id, we will use this for link anchor."
+msgstr "下方的區段 ID 會用於連結錨點。如果你不清楚何謂連結錨點，請不要變更預設值。"
+
+#: inc/customizer.php:1742
+msgid "Section: Video Lightbox"
+msgstr "區段: 燈箱效果影片"
+
+#: inc/dashboard.php:485
+msgid "Hooray! There are no required actions for you right now."
+msgstr "太棒了！目前沒有需要執行的必要動作。"
+
+#: inc/dashboard.php:484
+msgid "Keep update with %s"
+msgstr "為 %s 保持更新"
+
+#: inc/dashboard.php:475
+msgid "Change homepage page template"
+msgstr "變更首頁頁面模板"
+
+#: inc/dashboard.php:461
+msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
+msgstr "為了變更首頁區段內容，你必須將網站首頁設定為 [首頁] 模板。"
+
+#: inc/dashboard.php:458
+msgid "Set your homepage page template to \"Frontpage\"."
+msgstr "將首頁模板設定為 [首頁]。"
+
+#: inc/dashboard.php:444 inc/dashboard.php:468
+msgid "Setup front page displays"
+msgstr "設定 [首頁顯示]"
+
+#: inc/dashboard.php:441
+msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
+msgstr "為了讓這個網站有個一頁式外觀，請前往 [外觀自訂器] -&gt; [指定首頁頁面]，並將 [首頁顯示] 設定為 [靜態頁面]。你也可以在 [設定] -&gt; [閱讀] 設定頁中進行相同的變更，效果相同。"
+
+#: inc/dashboard.php:439
+msgid "Switch \"Front page displays\" to \"A static page\""
+msgstr "將 [首頁顯示] 設定切換至 [靜態頁面]"
+
+#: inc/dashboard.php:432 inc/dashboard.php:451
+msgid "Dismiss"
+msgstr "關閉"
+
+#: inc/dashboard.php:323
+msgid "Welcome to OnePress - Version %1s"
+msgstr "歡迎使用 OnePress %1s 版"
+
+#: inc/dashboard.php:157
+msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
+msgstr "你好，感謝採用 %1$s！要充分發揮這個佈景主題所提供的功能，請造訪 [<a href=\"%2$s\">歡迎頁面</a>]。"
+
+#: inc/dashboard.php:134
+msgid "OnePress Theme"
+msgstr "OnePress 佈景主題"
+
+#: inc/dashboard.php:137
+msgid "OnePress Dashboard"
+msgstr "OnePress 控制台"
+
+#: inc/customizer.php:658 inc/customizer.php:1446
+msgid "Background Overlay Color"
+msgstr "背景重疊色彩"
+
+#: inc/customizer.php:3585
+msgid "Section Order & Styling"
+msgstr "區段順序及樣式"
+
+#: inc/customizer.php:312
+msgid "Check this box to disable sticky header when scroll."
+msgstr "啟用這項設定後，便可停用頁面捲動時的固定式頁首。"
+
+#: inc/customizer.php:310
+msgid "Disable Sticky Header?"
+msgstr "停用固定式頁首"
+
+#. Template Name of the plugin/theme
+msgid "Left Sidebar"
+msgstr "左側欄"
+
+#: inc/customizer.php:271 inc/customizer.php:2002
+msgid "Full Width"
+msgstr "全螢幕寬度"
+
+#. Template Name of the plugin/theme
+msgid "Frontpage"
+msgstr "首頁"
+
+#: template-parts/content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "找不到你要的內容，也許搜尋功能能幫到你！"
+
+#: template-parts/content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "很抱歉，找不到你想要的內容，請換一個關鍵詞再次搜尋。"
+
+#: template-parts/content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "準備好發表你的第一篇文章嗎？<a href=\"%1$s\">由此開始</a>。"
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "並未搜尋到符合的結果"
+
+#: template-parts/content-list.php:38 template-parts/content-page.php:21
+#: template-parts/content-single.php:35 template-parts/content.php:39
+msgid "Pages:"
+msgstr "頁次:"
+
+#: section-parts/section-hero.php:82
+msgid "#services"
+msgstr "#services"
+
+#: section-parts/section-contact.php:48
+msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
+msgstr "安裝 %1$s 外掛後，請前往 [外觀自訂器] &rarr; [區段: 聯絡資訊] &rarr; [區段內容] 進行設定，便能在此顯示工作聯絡資訊。"
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "搜尋「%s」的結果"
+
+#: inc/template-tags.php:458
+msgid "Your comment is awaiting moderation."
+msgstr "你的留言正在審核中。"
+
+#: inc/template-tags.php:453
+msgid "Edit"
+msgstr "編輯"
+
+#. translators: 1: date, 2: time
+#: inc/template-tags.php:452
+msgid "Reply"
+msgstr "回覆"
+
+#: inc/template-tags.php:444
+msgid "Post author"
+msgstr "文章作者"
+
+#: inc/template-tags.php:425
+msgid "(Edit)"
+msgstr "(編輯)"
+
+#: inc/template-tags.php:425
+msgid "Pingback:"
+msgstr "通告:"
+
+#: inc/template-tags.php:355
+msgid "% Comments"
+msgstr "% 則留言"
+
+#: inc/template-tags.php:355
+msgid "1 Comment"
+msgstr "1 則留言"
+
+#: inc/template-tags.php:355
+msgid "Leave a comment"
+msgstr "留下留言"
+
+#: inc/template-tags.php:349
+msgid "Tagged %1$s"
+msgstr "標籤為「%1$s」"
+
+#: inc/template-tags.php:343
+msgid "Posted in %1$s"
+msgstr "分類為「%1$s」"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:341 inc/template-tags.php:347
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:323
+msgctxt "post author"
+msgid "by %s"
+msgstr "由 %s 撰寫"
+
+#: inc/template-tags.php:318
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "發表於 %s"
+
+#: inc/dashboard.php:357
+msgid "Having Trouble, Need Support?"
+msgstr "發生問題需要協助嗎？"
+
+#: inc/dashboard.php:350
+msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
+msgstr "在設定與配置 %s 時需要協助嗎？請參考我們的線上文件說明。"
+
+#: inc/dashboard.php:349
+msgid "Theme Documentation"
+msgstr "佈景主題線上文件"
+
+#: inc/dashboard.php:345
+msgid "Start Customize"
+msgstr "立即自訂"
+
+#: inc/dashboard.php:343
+msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
+msgstr "%s 支援佈景主題 [外觀自訂器] 的所有設定，按一下 [立即自訂] 便能為這網站進行外觀設計。"
+
+#: inc/dashboard.php:342
+msgid "Theme Customizer"
+msgstr "佈景主題外觀自訂器"
+
+#: inc/dashboard.php:324
+msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
+msgstr "OnePress 是一款兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示以及自由工作者的網站。"
+
+#: inc/customizer.php:3566
+msgid "Fax"
+msgstr "傳真號碼"
+
+#: inc/customizer.php:3551
+msgid "Email"
+msgstr "電子郵件地址"
+
+#: inc/customizer.php:3536
+msgid "Phone"
+msgstr "電話號碼"
+
+#: inc/customizer.php:3521
+msgid "Address"
+msgstr "地址"
+
+#: inc/customizer.php:3506
+msgid "Contact Box Title"
+msgstr "聯絡資訊區塊標題"
+
+#: inc/customizer.php:3482
+msgid "Contact Text"
+msgstr "聯絡資訊內容"
+
+#: inc/customizer.php:3467
+msgid "Check this box to hide contact form."
+msgstr "啟用這項設定後，便可隱藏聯絡表單。"
+
+#: inc/customizer.php:3465
+msgid "Hide contact form completely."
+msgstr "隱藏聯絡表單"
+
+#: inc/customizer.php:3449
+msgid "Contact Form 7 Shortcode."
+msgstr "Contact Form 7 表單短代碼"
+
+#: inc/customizer.php:3374 section-parts/section-contact.php:4
+msgid "Get in touch"
+msgstr "保持聯絡"
+
+#: inc/customizer.php:3359 section-parts/section-contact.php:2
+msgid "contact"
+msgstr "contact"
+
+#: inc/customizer.php:3324
+msgid "Section: Contact"
+msgstr "區段: 聯絡資訊"
+
+#: inc/customizer.php:3307 section-parts/section-news.php:8
+msgid "Read Our Blog"
+msgstr "閱讀更多消息"
+
+#: inc/customizer.php:3299
+msgid "More News button link"
+msgstr "[更多消息] 按鈕連結"
+
+#: inc/customizer.php:3221
+msgid "Number of post to show"
+msgstr "文章顯示數量"
+
+#: inc/customizer.php:3156 section-parts/section-news.php:4
+msgid "Latest News"
+msgstr "最新消息"
+
+#: inc/customizer.php:3141 section-parts/section-news.php:2
+msgid "news"
+msgstr "news"
+
+#: inc/customizer.php:3106
+msgid "Section: News"
+msgstr "區段: 最新消息"
+
+#: inc/customizer.php:3074
+msgid "Team members"
+msgstr "團隊成員"
+
+#: inc/customizer.php:2986 section-parts/section-team.php:4
+msgid "Our Team"
+msgstr "我們的團隊"
+
+#: inc/customizer.php:2971 section-parts/section-team.php:2
+msgid "team"
+msgstr "team"
+
+#: inc/customizer.php:2937
+msgid "Section: Team"
+msgstr "區段: 團隊成員"
+
+#: inc/customizer.php:2921
+msgid "After number"
+msgstr "數字後的文字"
+
+#: inc/customizer.php:2916
+msgid "Before number"
+msgstr "數字前的文字"
+
+#: inc/customizer.php:2911
+msgid "Number"
+msgstr "數字"
+
+#: inc/customizer.php:2908
+msgid "Your counter label"
+msgstr "統計數字標籤"
+
+#: inc/customizer.php:2504 inc/customizer.php:2905 inc/customizer.php:3261
+msgid "Title"
+msgstr "標題"
+
+#: inc/customizer.php:2896
+msgid "Counter content"
+msgstr "統計數字內容"
+
+#: inc/customizer.php:2830 section-parts/section-counter.php:4
+msgid "Our Numbers"
+msgstr "我們的表現"
+
+#: inc/customizer.php:2815 section-parts/section-counter.php:2
+msgid "counter"
+msgstr "counter"
+
+#: inc/customizer.php:2781
+msgid "Section: Counter"
+msgstr "區段: 統計數字"
+
+#: inc/customizer.php:2508 inc/customizer.php:2717
+msgid "Custom icon"
+msgstr "自訂圖示"
+
+#: inc/customizer.php:2708
+msgid "Service content"
+msgstr "服務項目內容"
+
+#: inc/customizer.php:2617 section-parts/section-hero.php:81
+#: section-parts/section-services.php:4
+msgid "Our Services"
+msgstr "我們的服務項目"
+
+#: inc/customizer.php:2602 section-parts/section-services.php:2
+msgid "services"
+msgstr "services"
+
+#: inc/customizer.php:2567
+msgid "Section: Services"
+msgstr "區段: 服務項目"
+
+#: inc/customizer.php:2317 inc/customizer.php:2741
+msgid "Link to single page"
+msgstr "連結至單篇頁面"
+
+#: inc/customizer.php:2313
+msgid "Hide item title"
+msgstr "隱藏項目標題"
+
+#: inc/customizer.php:2308 inc/customizer.php:2736
+msgid "Select a page"
+msgstr "選取頁面"
+
+#: inc/customizer.php:817 inc/customizer.php:2303 inc/customizer.php:2499
+#: inc/customizer.php:2712 inc/customizer.php:2900 inc/customizer.php:3078
+msgid "[live_title]"
+msgstr "[live_title]"
+
+#: inc/customizer.php:1940 inc/customizer.php:2278 inc/customizer.php:2475
+#: inc/customizer.php:2688 inc/customizer.php:2876 inc/customizer.php:3054
+#: inc/customizer.php:3421
+msgid "Section Content"
+msgstr "區段內容"
+
+#: inc/customizer.php:1914 inc/customizer.php:2225 inc/customizer.php:2426
+#: inc/customizer.php:2637 inc/customizer.php:2850 inc/customizer.php:3006
+#: inc/customizer.php:3176 inc/customizer.php:3394
+msgid "Section Subtitle"
+msgstr "區段副標題"
+
+#: inc/customizer.php:1909 inc/customizer.php:2220 inc/customizer.php:2421
+#: inc/customizer.php:2632 inc/customizer.php:2845 inc/customizer.php:3001
+#: inc/customizer.php:3171 inc/customizer.php:3389
+#: section-parts/section-about.php:5 section-parts/section-contact.php:5
+#: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
+#: section-parts/section-news.php:5 section-parts/section-services.php:5
+#: section-parts/section-team.php:5
+msgid "Section subtitle"
+msgstr "區段副標題"
+
+#: inc/customizer.php:1899 inc/customizer.php:2210 inc/customizer.php:2411
+#: inc/customizer.php:2622 inc/customizer.php:2835 inc/customizer.php:2991
+#: inc/customizer.php:3161 inc/customizer.php:3379
+msgid "Section Title"
+msgstr "區段標題"
+
+#: inc/customizer.php:2190 section-parts/section-about.php:2
+msgid "about"
+msgstr "about"
+
+#: inc/customizer.php:1751 inc/customizer.php:1853 inc/customizer.php:2164
+#: inc/customizer.php:2365 inc/customizer.php:2576 inc/customizer.php:2790
+#: inc/customizer.php:2946 inc/customizer.php:3115 inc/customizer.php:3333
+msgid "Section Settings"
+msgstr "區段設定"
+
+#: inc/customizer.php:2155
+msgid "Section: About"
+msgstr "區段: 關於"
+
+#: inc/customizer.php:1664
+msgid "Button #2 Link"
+msgstr "第二顆按鈕的連結"
+
+#: inc/customizer.php:1659 section-parts/section-hero.php:84
+msgid "#contact"
+msgstr "#contact"
+
+#: inc/customizer.php:1650
+msgid "Button #2 Text"
+msgstr "第二顆按鈕的文字"
+
+#: inc/customizer.php:1645 section-parts/section-hero.php:83
+msgid "Get Started"
+msgstr "開始使用"
+
+#: inc/customizer.php:1612
+msgid "Button #1 Link"
+msgstr "第一顆按鈕的連結"
+
+#: inc/customizer.php:1607
+msgid "#about"
+msgstr "#about"
+
+#: inc/customizer.php:1598
+msgid "Button #1 Text"
+msgstr "第一顆按鈕的文字"
+
+#: inc/customizer.php:1593 inc/customizer.php:2205
+#: section-parts/section-about.php:4
+msgid "About Us"
+msgstr "關於我們"
+
+#: inc/customizer.php:1585
+msgid "You can use text rotate slider in this textarea too."
+msgstr "在這個文字區域也能使用旋轉文字輪播動畫效果。"
+
+#: inc/customizer.php:1582
+msgid "Small Text"
+msgstr "小型文字"
+
+#: inc/customizer.php:1535
+msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer->Site Option->Animate to control rotate animation."
+msgstr "旋轉文字說明: 將需要旋轉的文字包含在 <span class=\"js-rotating\"> 起始標籤及 </span> 結束標籤中，並使用 \"|\" 符號加以區隔；然後請至 [外觀自訂器] -&gt; [網站選項] -&gt; [動畫效果] 中控制旋轉動畫效果。"
+
+#: inc/customizer.php:1533
+msgid "Large Text"
+msgstr "大型文字"
+
+#: inc/customizer.php:1493
+msgid "Hero Content Layout"
+msgstr "[宣傳內容] 版面配置"
+
+#: inc/customizer.php:1420
+msgid "Background Image"
+msgstr "背景圖片"
+
+#: inc/customizer.php:901 inc/customizer.php:1091 inc/customizer.php:1415
+msgid "Background"
+msgstr "背景"
+
+#: inc/customizer.php:1411
+msgid "Background Images"
+msgstr "背景圖片"
+
+#: inc/customizer.php:1385
+msgid "Hero Background Media"
+msgstr "[宣傳內容] 背景媒體"
+
+#: inc/customizer.php:1282
+msgid "Padding Bottom:"
+msgstr "下邊框距離:"
+
+#: inc/customizer.php:1266
+msgid "Padding Top:"
+msgstr "上邊框距離:"
+
+#: inc/customizer.php:1261 inc/customizer.php:1277
+msgid "10"
+msgstr "10"
+
+#: inc/customizer.php:1238
+msgid "Check this box to make hero section full screen."
+msgstr "啟用這項設定後，便可以全螢幕寬度顯示宣傳內容。"
+
+#: inc/customizer.php:1236
+msgid "Make hero section full screen"
+msgstr "以全螢幕寬度顯示宣傳內容"
+
+#: inc/customizer.php:1220 inc/customizer.php:1782 inc/customizer.php:1884
+#: inc/customizer.php:2195 inc/customizer.php:2396 inc/customizer.php:2607
+#: inc/customizer.php:2820 inc/customizer.php:2976 inc/customizer.php:3146
+#: inc/customizer.php:3364
+msgid "Section ID:"
+msgstr "區段 ID:"
+
+#: inc/customizer.php:1215 section-parts/section-hero.php:2
+msgid "hero"
+msgstr "hero"
+
+#: inc/customizer.php:1208 inc/customizer.php:1769 inc/customizer.php:1871
+#: inc/customizer.php:2182 inc/customizer.php:2383 inc/customizer.php:2594
+#: inc/customizer.php:2807 inc/customizer.php:2964 inc/customizer.php:3133
+#: inc/customizer.php:3351
+msgid "Check this box to hide this section."
+msgstr "啟用這項設定後，便可隱藏這個區段。"
+
+#: inc/customizer.php:1206 inc/customizer.php:1767 inc/customizer.php:1869
+#: inc/customizer.php:2180 inc/customizer.php:2381 inc/customizer.php:2592
+#: inc/customizer.php:2805 inc/customizer.php:2962 inc/customizer.php:3131
+#: inc/customizer.php:3349
+msgid "Hide this section?"
+msgstr "隱藏這個區段"
+
+#: inc/customizer.php:1190
+msgid "Hero Settings"
+msgstr "[宣傳內容] 設定"
+
+#: inc/customizer.php:1180
+msgid "Section: Hero"
+msgstr "區段: 宣傳內容"
+
+#: inc/customizer.php:886
+msgid "MailChimp Action URL"
+msgstr "MailChimp 訂閱網址"
+
+#: inc/customizer.php:870
+msgid "Newsletter Form Title"
+msgstr "電子報訂閱表單標題"
+
+#: inc/customizer.php:856
+msgid "Check this box to hide footer newsletter form."
+msgstr "啟用這項設定後，便可隱藏頁尾電子報訂閱表單。"
+
+#: inc/customizer.php:854
+msgid "Hide Footer Newsletter?"
+msgstr "隱藏頁尾訂閱電子報功能"
+
+#: inc/customizer.php:793
+msgid "Social Footer Title"
+msgstr "頁尾社交網路資料標題"
+
+#: inc/customizer.php:779
+msgid "These social profiles setting below will display at the footer of your site."
+msgstr "在下方設定的社交網路資料，會顯示於網站頁尾。"
+
+#: inc/customizer.php:766
+msgid "Check this box to hide footer social section."
+msgstr "啟用這項設定後，便可隱藏頁尾社交網路資料區段。"
+
+#: inc/customizer.php:764
+msgid "Hide Footer Social?"
+msgstr "隱藏頁尾社交網路資料"
+
+#: inc/customizer.php:201
+msgid "Check this box to hide footer back to top button."
+msgstr "啟用這項設定後，便可隱藏頁尾的 [返回頂端] 按鈕。"
+
+#: inc/customizer.php:199
+msgid "Hide footer back to top?"
+msgstr "隱藏頁尾 [返回頂端] 按鈕"
+
+#: inc/customizer.php:184
+msgid "Check this box to disable all element animation when scroll."
+msgstr "啟用這項設定後，便可停用頁面捲動時的所有元素動畫效果。"
+
+#: inc/customizer.php:182
+msgid "Disable animation effect?"
+msgstr "停用動畫效果"
+
+#: inc/customizer.php:143
+msgid "Global"
+msgstr "全域設定"
+
+#: inc/customizer.php:133
+msgid "Theme Options"
+msgstr "佈景主題選項"
+
+#: inc/customizer.php:46
+msgid "Select member"
+msgstr "選取成員"
+
+#: inc/customizer.php:35
+msgid "Select page"
+msgstr "選取頁面"
+
+#: inc/customizer-controls.php:588
+msgid "Close"
+msgstr "關閉"
+
+#: inc/customizer-controls.php:553
+msgid "Change"
+msgstr "變更"
+
+#: inc/customizer-controls.php:553
+msgid "Add"
+msgstr "新增"
+
+#: inc/customizer-controls.php:552 inc/customizer-controls.php:574
+#: inc/customizer-controls.php:586
+msgid "Remove"
+msgstr "移除"
+
+#: inc/customizer-controls.php:321 inc/customizer-controls.php:436
+msgid "Item"
+msgstr "項目"
+
+#: inc/customizer-controls.php:421
+msgid "Add an item"
+msgstr "新增項目"
+
+#: inc/template-tags.php:231
+msgid "Menu"
+msgstr "選單"
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "跳至主內容區"
+
+#: functions.php:392
+msgid "Please contact the administrator of this site for help."
+msgstr "請聯絡這個網站的管理者尋求協助。"
+
+#: functions.php:391
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "所有外掛均已成功安裝並完成啟用。%1$s"
+
+#: functions.php:390
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "外掛尚未啟用。這個佈景主題須要配合較新版本的 %s，請將外掛予以更新。"
+
+#: functions.php:389
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "無須進行任何操作。外掛 %1$s 已完成啟用。"
+
+#: functions.php:388
+msgid "The following plugin was activated successfully:"
+msgstr "下列外掛以成功完成啟用:"
+
+#: functions.php:387
+msgid "Plugin activated successfully."
+msgstr "外掛啟用成功。"
+
+#: functions.php:386
+msgid "Return to Required Plugins Installer"
+msgstr "返回 [安裝必要的外掛]"
+
+#: functions.php:385
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "啟用外掛"
+
+#: functions.php:384
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "更新外掛"
+
+#: functions.php:383
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "安裝外掛"
+
+#: functions.php:382
+msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
+msgstr[0] "很抱歉，你沒有啟用這 %1$s 個外掛的必要權限。"
+
+#: functions.php:381
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "下列建議安裝的外掛目前尚未啟用: %1$s。"
+
+#: functions.php:380
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "下列必要安裝的外掛目前尚未啟用: %1$s。"
+
+#: functions.php:379
+msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
+msgstr[0] "很抱歉，你沒有更新這 %1$s 個外掛的必要權限。"
+
+#: functions.php:378
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "下列外掛有可用的更新: %1$s。"
+
+#: functions.php:377
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] "為確保與這個佈景主題保持最高相容性，下列外掛必須更新至最新版本: %1$s。"
+
+#: functions.php:376
+msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
+msgstr[0] "很抱歉，你沒有安裝這 %1$s 個外掛的必要權限。"
+
+#: functions.php:375
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "這個佈景主題建議安裝以下外掛: %1$s。"
+
+#: functions.php:374
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "這個佈景主題須要安裝以下外掛: %1$s。"
+
+#: functions.php:373
+msgid "Something went wrong with the plugin API."
+msgstr "外掛 API 出了點小問題。"
+
+#: functions.php:372
+msgid "Installing Plugin: %s"
+msgstr "安裝中的外掛: %s"
+
+#: functions.php:371
+msgid "Install Plugins"
+msgstr "安裝外掛"
+
+#: functions.php:370
+msgid "Install Required Plugins"
+msgstr "安裝必要的外掛"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Raleway, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:289
+msgctxt "Raleway font: on or off"
+msgid "on"
+msgstr "on"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:283
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:143
+msgid "Sidebar"
+msgstr "側欄"
+
+#: functions.php:59
+msgid "Primary Menu"
+msgstr "主要選單"
+
+#: inc/template-tags.php:1336
+msgid "%1$s theme by %2$s"
+msgstr "本站採用 %2$s 開發的 %1$s 佈景主題"
+
+#: inc/template-tags.php:1334
+msgid "Copyright %1$s %2$s %3$s"
+msgstr "版權所有 %1$s %2$s %3$s"
+
+#: footer.php:34
+msgid "Back To Top"
+msgstr "返回頂端"
+
+#: inc/customizer.php:864 inc/template-tags.php:1538
+msgid "Join our Newsletter"
+msgstr "訂閱電子報"
+
+#: inc/customizer.php:787 inc/template-tags.php:1557
+msgid "Keep Updated"
+msgstr "關注我們"
+
+#: comments.php:91
+msgid "Comments are closed."
+msgstr "留言功能已關閉。"
+
+#: comments.php:59 comments.php:79
+msgid "Newer Comments"
+msgstr "較新的留言"
+
+#: comments.php:58 comments.php:78
+msgid "Older Comments"
+msgstr "較舊的留言"
+
+#: comments.php:55 comments.php:75
+msgid "Comment navigation"
+msgstr "留言導覽"
+
+#. translators: 1: number of comments, 2: post title
+#: comments.php:37
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "在「%2$s」中有 %1$s 則留言"
+
+#. translators: %1$s: smiley
+#: 404.php:51
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "請至按月彙整的文章中看看。%1$s"
+
+#: 404.php:34
+msgid "Most Used Categories"
+msgstr "常用類別"
+
+#: 404.php:26
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "在這個地方似乎找不到你要找的，要不要試試下方連結或進行搜尋？"
+
+#: 404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "糟糕！找不到這個頁面。"
+
+#. Author URI of the plugin/theme
+msgid "http://www.famethemes.com"
+msgstr "https://www.famethemes.com"
+
+#. Author of the plugin/theme
+msgid "FameThemes"
+msgstr "FameThemes"
+
+#. Theme URI of the plugin/theme
+msgid "https://www.famethemes.com/themes/onepress/"
+msgstr "https://www.famethemes.com/themes/onepress/"

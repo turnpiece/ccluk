@@ -1,0 +1,1441 @@
+# Translation of Themes - OnePress in Korean
+# This file is distributed under the same license as the Themes - OnePress package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-09-24 01:25:28+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ko_KR\n"
+"Project-Id-Version: Themes - OnePress\n"
+
+#. Description of the plugin/theme
+msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress는 독특하고 창의적이며 유연한 워드프레스 원페이지 테마입니다. 비지니스 웹사이트 포트폴리오, 디지털 에이전시, 상품 쇼케이스, 프리랜서 등 좋은 디자인을 원하는 웹사이트에 적합합니다. 테마는 전체적으로 우아하고 클래식하며 부트스트랩 4 워드프레스 테마의 좋은 예입니다. 최신 우커머스 버전와 호환됩니다. (데모 미리보기 : http://www.famethemes.com/preview/?theme=OnePress)"
+
+#. #-#-#-#-#  onepress.pot (OnePress 1.4.3)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/dashboard.php:327
+msgid "OnePress"
+msgstr "OnePress"
+
+#: inc/customizer.php:597
+msgid "Check this box to show featured image on single post."
+msgstr "단일 글에서 특성 이미지를 보이려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:582
+msgid "Check this box to show single post meta such as post date, author, category,..."
+msgstr "발행일자, 글쓴이, 카테고리 등 단일 글 메타를 보이려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:580
+msgid "Show single post meta"
+msgstr "단일 글 메타 보이기"
+
+#: inc/customizer.php:567
+msgid "Check this box to show post thumbnail on single post."
+msgstr "단일 글에서 글 썸네일을 보이려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:565 inc/customizer.php:595
+msgid "Show single post thumbnail"
+msgstr "단일 글 썸네일 보이기"
+
+#: inc/customizer.php:550
+msgid "Single Post"
+msgstr "단일 글"
+
+#: inc/customizer.php:852
+msgid "The amount of time in between slides, expressed as the number of milliseconds."
+msgstr "슬라이드 사이의 시간, 밀리 초의 숫자로 입력."
+
+#: inc/customizer.php:851
+msgid "Slider duration speed"
+msgstr "슬라이더 진행 속도"
+
+#: inc/customizer.php:835
+msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
+msgstr "이것은 이미지가 페이드인되는 속도입니다. 밀리 초로 정수를 입력하세요."
+
+#: inc/customizer.php:834
+msgid "Slider animation speed"
+msgstr "슬라이더 애니메이션 속도"
+
+#: inc/customizer.php:816
+msgid "Text animation speed"
+msgstr "텍스트 애니메이션 속도"
+
+#: inc/dashboard.php:379
+msgid "Child theme uses it’s own theme setting name, would you like to copy setting data from parent theme to this child theme?"
+msgstr "자식 테마는 개별적인 설정 이름을 사용합니다. 부모 테마로부터 설정 데이터를 자식 테마에 복사하시겠습니까?"
+
+#: inc/customizer.php:3025
+msgid "Font Awesome"
+msgstr "폰트 어썸"
+
+#: inc/customizer.php:3021
+msgid "Search"
+msgstr "검색"
+
+#: inc/dashboard.php:558
+msgid "Are you sure want to copy ?"
+msgstr "복사 확인?"
+
+#: inc/dashboard.php:419
+msgid "Recommend Plugins"
+msgstr "추천 플러그인"
+
+#: inc/dashboard.php:402
+msgid "Your settings copied."
+msgstr "설정이 복사됐습니다."
+
+#: inc/dashboard.php:399
+msgid "Copy now"
+msgstr "지금 복사"
+
+#: inc/dashboard.php:391
+msgid "To Theme"
+msgstr "테마로"
+
+#: inc/dashboard.php:385
+msgid "From Theme"
+msgstr "테마로부터"
+
+#: inc/dashboard.php:377
+msgid "You're using %1$s theme, It's a child theme of OnePress"
+msgstr "%1$s 테마를 사용하고 있으며 OnePress의 자식 테마입니다"
+
+#: inc/dashboard.php:238
+msgid "Details"
+msgstr "상세"
+
+#: inc/dashboard.php:166
+msgid "Import Demo Data"
+msgstr "데모 데이터 가져오기"
+
+#: inc/dashboard.php:166
+msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
+msgstr "데모 데이터를 가져오기 하면 시간을 절약할 수 있고 몇 분만에 웹사이트가 설치되고 사용자 정의할 준비가 됩니다. %s"
+
+#: inc/customizer.php:1586
+msgid "Read More Text"
+msgstr "더보기 텍스트"
+
+#: inc/customizer.php:1581 section-parts/section-gallery.php:38
+msgid "View More"
+msgstr "더 보기"
+
+#: inc/customizer.php:1571
+msgid "Read More Link"
+msgstr "더 보기 링크"
+
+#: inc/customizer.php:132
+msgid "No sidebar"
+msgstr "사이드바 없음"
+
+#: inc/customizer.php:131
+msgid "Left sidebar"
+msgstr "좌측 사이드바"
+
+#: inc/customizer.php:130
+msgid "Right sidebar"
+msgstr "우측 사이드바"
+
+#: inc/customizer.php:127
+msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
+msgstr "사이트 레이아웃 홈 페이지와 사용자 정의 페이지 템플릿을 제외한 모든 페이지에 적용."
+
+#: inc/customizer.php:126
+msgid "Site Layout"
+msgstr "사이트 레이아웃"
+
+#: functions.php:105
+msgid "Famethemes Demo Importer"
+msgstr "FameThemes 데모 가져오기"
+
+#: functions.php:101
+msgid "Contact Form 7"
+msgstr "Contact Form 7"
+
+#: functions.php:153
+msgid "WooCommerce Sidebar"
+msgstr "우커머스 사이드바"
+
+#: inc/customizer.php:2983
+msgid "Upgrade to OnePress Plus to unlock this feature."
+msgstr "이 기능의 잠금을 풀려면 OnePress Plus로 업그레이드 하세요."
+
+#: inc/customizer.php:2098
+msgid "1 Column"
+msgstr "1 컬럼"
+
+#: inc/customizer.php:1555
+msgid "Enable Lightbox"
+msgstr "라이트박스 활성화"
+
+#: inc/customizer.php:1541
+msgid "Number items"
+msgstr "아이템 수"
+
+#: inc/customizer.php:1516
+msgid "Layout columns"
+msgstr "레이아웃 컬럼"
+
+#: inc/customizer.php:1500
+msgid "Row Height"
+msgstr "행 높이"
+
+#: inc/customizer.php:1484
+msgid "Item Spacing"
+msgstr "아이템 간격"
+
+#: inc/customizer.php:1470
+msgid "Masonry"
+msgstr "메이슨리"
+
+#: inc/customizer.php:1469
+msgid "Justified"
+msgstr "전체 정렬"
+
+#: inc/customizer.php:1468
+msgid "Slider"
+msgstr "슬라이더"
+
+#: inc/customizer.php:1467
+msgid "Carousel"
+msgstr "캐러젤"
+
+#: inc/customizer.php:1466
+msgid "Grid"
+msgstr "그리드"
+
+#: inc/customizer.php:1461
+msgid "Display"
+msgstr "표시하기"
+
+#: inc/customizer.php:1446
+msgid "Default, inside container"
+msgstr "기본, 콘테이너 내부"
+
+#: inc/customizer.php:1441
+msgid "Layout"
+msgstr "레이아웃"
+
+#: inc/customizer.php:1427
+msgid "Select a page which have content contain [gallery] shortcode."
+msgstr "[gallery] 단축코드가 포함된 콘텐츠가 있는 페이지를 선택."
+
+#: inc/customizer.php:1422
+msgid "Select Gallery Page"
+msgstr "갤러리 페이지 선택"
+
+#: inc/customizer.php:1405
+msgid "Page"
+msgstr "페이지"
+
+#: inc/customizer.php:1400
+msgid "Select Gallery Source"
+msgstr "갤러리 소스 선택"
+
+#: inc/customizer.php:1339 section-parts/section-gallery.php:4
+msgid "Gallery"
+msgstr "갤러리"
+
+#: inc/customizer.php:1324 section-parts/section-gallery.php:2
+msgid "gallery"
+msgstr "갤러리"
+
+#: inc/customizer.php:1289
+msgid "Section: Gallery"
+msgstr "영역: 갤러리"
+
+#: inc/customizer.php:385
+msgid "Scroll to top when click to the site logo or site title, only apply on front page."
+msgstr "사이트 로그 또는 사이트 제목을 클릭하면 상단으로 스크롤 이동. 전면 페이지만 적용."
+
+#: inc/dashboard.php:538
+msgid "FameThemes Demo Importer"
+msgstr "FameThemes 데모 가져오기"
+
+#: inc/dashboard.php:537
+msgid "Hey."
+msgstr "안녕하세요."
+
+#: inc/dashboard.php:535
+msgid "%1$s you will need to install and activate the %2$s plugin first."
+msgstr "%1$s 우선 %2$s의 플러그인을 설치하고 활성화 해야 합니다."
+
+#: inc/dashboard.php:218 inc/dashboard.php:519
+msgid "Active Now"
+msgstr "지금 활성화"
+
+#: inc/dashboard.php:196 inc/dashboard.php:497
+msgid "Install Now"
+msgstr "지금 설치하기"
+
+#: inc/dashboard.php:329
+msgid "One Click Demo Import"
+msgstr "원클릭 데모 가져오기"
+
+#: inc/customizer.php:1123
+msgid "Button #2 style"
+msgstr "버튼 #2 스타일"
+
+#: inc/customizer.php:2644
+msgid "More News Button Text"
+msgstr "더 많은 뉴스 버튼 텍스트"
+
+#: inc/customizer.php:2633
+msgid "It should be your blog page link."
+msgstr "블로그 페이지 링크여야 합니다."
+
+#: inc/customizer.php:1081 inc/customizer.php:1134
+msgid "Danger"
+msgstr "위험"
+
+#: inc/customizer.php:1080 inc/customizer.php:1133
+msgid "Warning"
+msgstr "경고"
+
+#: inc/customizer.php:1079 inc/customizer.php:1132
+msgid "Info"
+msgstr "정보"
+
+#: inc/customizer.php:1078 inc/customizer.php:1131
+msgid "Success"
+msgstr "성공"
+
+#: inc/customizer.php:1077 inc/customizer.php:1130
+msgid "Primary"
+msgstr "프라이머리"
+
+#: inc/customizer.php:1076 inc/customizer.php:1129
+msgid "Button"
+msgstr "버튼"
+
+#: inc/customizer.php:1075 inc/customizer.php:1128
+msgid "Button Secondary"
+msgstr "보조 버튼"
+
+#: inc/customizer.php:1074 inc/customizer.php:1127
+msgid "Button Primary"
+msgstr "주 버튼"
+
+#: inc/customizer.php:1070
+msgid "Button #1 style"
+msgstr "버튼 #1 스타일"
+
+#: inc/customizer.php:761
+msgid "The hero content padding bottom in percent (%)."
+msgstr "히어로 콘텐츠 하단 패딩 (%)."
+
+#: inc/customizer.php:745
+msgid "The hero content padding top in percent (%)."
+msgstr "히어로 콘텐츠 상단 패딩 (%)."
+
+#: inc/customizer.php:817
+msgid "The delay between the changing of each phrase in milliseconds."
+msgstr "각 단계의 변경 사이의 지연 시간. 밀리 초."
+
+#: inc/customizer.php:540
+msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "뉴스레터 폼은 MailChimp를 사용합니다. MailChimp 액션 URL을 받으려면 <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">이 안내</a>로 이동하세요. 예 <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+
+#: inc/customizer.php:232
+msgid "Footer Info Background"
+msgstr "푸터 정보 배경"
+
+#: inc/customizer.php:217
+msgid "Footer Background"
+msgstr "푸터 배경"
+
+#: inc/customizer.php:84
+msgid "Hide site tagline"
+msgstr "사이트 태그라인 감추기"
+
+#: inc/customizer.php:69
+msgid "Hide site title"
+msgstr "사이트 제목 감추기"
+
+#: inc/customizer.php:1931 inc/customizer.php:2141
+msgid "image"
+msgstr "이미지"
+
+#: inc/customizer.php:797
+msgid "Text animation"
+msgstr "텍스트 애니메이션"
+
+#: inc/dashboard.php:132
+msgid "OnePress Theme %s"
+msgstr "OnePress 테마 %s"
+
+#: inc/dashboard.php:130
+msgid "%1$s action required"
+msgid_plural "%1$s actions required"
+msgstr[0] "%1$s 작업은 필수입니다"
+
+#: inc/customizer.php:611 inc/customizer.php:629
+msgid "Custom CSS"
+msgstr "커스텀 CSS"
+
+#: section-parts/section-features.php:5
+msgid "Why choose Us"
+msgstr "우리를 선택하는 이유"
+
+#: inc/customizer.php:2090
+msgid "Services Layout Setting"
+msgstr "서비스 레이아웃 설정"
+
+#: inc/customizer.php:1949 inc/customizer.php:2483
+msgid "Custom Link"
+msgstr "사용자 정의 링크"
+
+#: inc/customizer.php:1945
+msgid "Description"
+msgstr "설명"
+
+#: inc/customizer.php:1914
+msgid "Features content"
+msgstr "콘텐츠에 특화"
+
+#: inc/customizer.php:1878
+msgid "Features Layout Setting"
+msgstr "레이아웃 설정에 특화"
+
+#: inc/customizer.php:1825 section-parts/section-features.php:4
+msgid "Features"
+msgstr "기능"
+
+#: inc/customizer.php:1810 section-parts/section-features.php:2
+msgid "features"
+msgstr "기능"
+
+#: inc/customizer.php:1775
+msgid "Section: Features"
+msgstr "영역: 특성"
+
+#: inc/customizer.php:1376 inc/customizer.php:1687 inc/customizer.php:1862
+#: inc/customizer.php:2073 inc/customizer.php:2262 inc/customizer.php:2418
+#: inc/customizer.php:2588 inc/customizer.php:2743
+msgid "Section Description"
+msgstr "영역 설명"
+
+#: inc/customizer.php:1172 inc/customizer.php:1940 inc/customizer.php:2150
+msgid "Image"
+msgstr "이미지"
+
+#: inc/customizer.php:1154
+msgid "Content Text"
+msgstr "콘텐츠 텍스트"
+
+#: inc/customizer.php:992
+msgid "Layout 2"
+msgstr "레이아웃 2"
+
+#: inc/customizer.php:991
+msgid "Layout 1"
+msgstr "레이아웃 1"
+
+#: inc/customizer.php:986
+msgid "Display Layout"
+msgstr "레이아웃 표시"
+
+#: inc/customizer.php:473 inc/customizer.php:1930 inc/customizer.php:1935
+#: inc/customizer.php:2140 inc/customizer.php:2145
+msgid "Icon"
+msgstr "아이콘"
+
+#: inc/customizer.php:477
+msgid "URL"
+msgstr "URL"
+
+#: inc/customizer.php:469
+msgid "Social network"
+msgstr "소셜 네트워크"
+
+#: footer.php:34
+msgid "Subscribe"
+msgstr "구독"
+
+#: inc/customizer.php:460
+msgid "Socials"
+msgstr "소셜"
+
+#: inc/customizer.php:371
+msgid "Apply for front page template only."
+msgstr "전면 페이지 템플릿만 적용."
+
+#: inc/customizer.php:369
+msgid "Header Transparent"
+msgstr "투명 헤더"
+
+#: footer.php:33
+msgid "Enter your e-mail address"
+msgstr "이메일 주소를 입력하세요"
+
+#: inc/dashboard.php:355
+msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
+msgstr "%s 워드프레스 테마의 지원은 FameThemes 지원 티켓 시스템을 통해 실행됩니다."
+
+#: inc/dashboard.php:349
+msgid "OnePress Documentation"
+msgstr "OnePress 문서"
+
+#: inc/customizer.php:1885 inc/customizer.php:2097 inc/customizer.php:2441
+msgid "2 Columns"
+msgstr "2 컬럼"
+
+#: inc/customizer.php:1884 inc/customizer.php:2096 inc/customizer.php:2440
+msgid "3 Columns"
+msgstr "3 컬럼"
+
+#: inc/customizer.php:1883 inc/customizer.php:2095 inc/customizer.php:2439
+msgid "4 Columns"
+msgstr "4 컬럼"
+
+#: inc/customizer.php:2434
+msgid "Team Layout Setting"
+msgstr "팀 레이아웃 설정"
+
+#: inc/customizer.php:1763 inc/customizer.php:1974
+msgid "Page Excerpt"
+msgstr "페이지 요약"
+
+#: inc/customizer.php:1762 inc/customizer.php:1973
+msgid "Full Page Content"
+msgstr "전체 페이지 콘텐츠"
+
+#: inc/customizer.php:1757 inc/customizer.php:1968
+msgid "Item content source"
+msgstr "아이템 콘텐츠 소스"
+
+#: inc/customizer.php:1718
+msgid "About content page"
+msgstr "콘텐츠 페이지 소개"
+
+#: inc/customizer.php:942
+msgid "Enable parallax effect (apply for first BG image only)"
+msgstr "패럴랙스 효과 활성화 (첫 번째 배경 이미지만 적용)"
+
+#: inc/customizer.php:354
+msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
+msgstr "로고를 사용하면서 해당 로고기 세로로 너무 긴 경우 이 박스에 체크하면 세로로 자동으로 정렬됩니다."
+
+#: inc/customizer.php:352
+msgid "Center vertical align for menu"
+msgstr "메뉴에 대해 세로로 중앙 정렬"
+
+#: inc/customizer.php:336
+msgid "Responsive Menu Button Color"
+msgstr "반응형 메뉴 버튼 색상"
+
+#: inc/customizer.php:321
+msgid "Menu Link Hover/Active BG Color"
+msgstr "메뉴 링크 호버/활성 배경 색상"
+
+#: inc/customizer.php:305
+msgid "Menu Link Hover/Active Color"
+msgstr "메뉴 링크 호버/활성 색상"
+
+#: inc/customizer.php:290
+msgid "Menu Link Color"
+msgstr "메뉴 링크 색상"
+
+#: inc/customizer.php:277
+msgid "Only set if you don't use an image logo."
+msgstr "이미지 로고를 사용하지 않을 경우만 설정."
+
+#: inc/customizer.php:275
+msgid "Site Title Color"
+msgstr "사이트 제목 색상"
+
+#: inc/customizer.php:259
+msgid "Background Color"
+msgstr "배경 색상"
+
+#: inc/customizer.php:201
+msgid "Primary Color"
+msgstr "전경 색상"
+
+#: inc/customizer.php:244
+msgid "Header"
+msgstr "헤더"
+
+#: inc/customizer.php:192
+msgid "Site Colors"
+msgstr "사이트 색상"
+
+#: inc/customizer.php:2478
+msgid "User media"
+msgstr "사용자 미디어"
+
+#: inc/customizer.php:1277
+msgid "Background image"
+msgstr "배경 이미지"
+
+#: inc/customizer.php:1262
+msgid "Paste Youtube or Vimeo url here"
+msgstr "여기에 유투브 또는 비미오 url을 붙여넣으세요"
+
+#: inc/customizer.php:1260
+msgid "Video url"
+msgstr "비디오 url"
+
+#: inc/customizer.php:1245
+msgid "Section heading"
+msgstr "영역 헤딩"
+
+#: inc/customizer.php:714 inc/customizer.php:1229 inc/customizer.php:1331
+#: inc/customizer.php:1642 inc/customizer.php:1817 inc/customizer.php:2217
+#: inc/customizer.php:2543 inc/customizer.php:2698
+msgid "The section id, we will use this for link anchor."
+msgstr "영역 ID 링크 앵커에 사용됩니다."
+
+#: inc/customizer.php:1187
+msgid "Section: Video Lightbox"
+msgstr "영역: 비디오 라이트박스"
+
+#: inc/dashboard.php:482
+msgid "Hooray! There are no required actions for you right now."
+msgstr "현재는 필요한 작업은 없습니다."
+
+#: inc/dashboard.php:481
+msgid "Keep update with %s"
+msgstr "%s의 업데이트 유지"
+
+#: inc/dashboard.php:472
+msgid "Change homepage page template"
+msgstr "홈페이지 페이지 템플릿 변경"
+
+#: inc/dashboard.php:458
+msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
+msgstr "홈페이지 영역 콘텐츠를 변경하려면 홈페이지에 대해 \"전면 페이지\" 템플릿으로 설정해야 합니다."
+
+#: inc/dashboard.php:455
+msgid "Set your homepage page template to \"Frontpage\"."
+msgstr "홈페이지 페이지 템플릿을 \"전면 페이지\"로 설정."
+
+#: inc/dashboard.php:441 inc/dashboard.php:465
+msgid "Setup front page displays"
+msgstr "전면 페이지 표시 설정"
+
+#: inc/dashboard.php:438
+msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
+msgstr "웹사이트를 원페이지로 만들려면 사용자 정의하기 -> 정적인 전면 페이지로 가서 \"전면 페이지 표시\"를 \"정적인 페이지\"로 변경하세요."
+
+#: inc/dashboard.php:436
+msgid "Switch \"Front page displays\" to \"A static page\""
+msgstr "\"전면 페이지 표시\"를 \"정적인 페이지\"로 변경"
+
+#: inc/dashboard.php:429 inc/dashboard.php:448
+msgid "Dismiss"
+msgstr "무시하기"
+
+#: inc/dashboard.php:328
+msgid "Actions Required"
+msgstr "필요한 작업"
+
+#: inc/dashboard.php:323
+msgid "Welcome to OnePress - Version %1s"
+msgstr "OnePress에 오신것을 환영합니다 - 버전 %1s"
+
+#: inc/dashboard.php:157
+msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
+msgstr "환영합니다! %1$s을(를) 선택해주셔서 감사합니다. 테마를 최대한 활용하려면 <a href=\"%2$s\">환영 페이지</a>를 방문하세요"
+
+#: inc/dashboard.php:134
+msgid "OnePress Theme"
+msgstr "OnePress 테마"
+
+#: inc/dashboard.php:137
+msgid "OnePress Dashboard"
+msgstr "OnePress 알림판"
+
+#: inc/customizer.php:923
+msgid "Background Overlay Color"
+msgstr "배경 오버레이 색상"
+
+#: inc/customizer.php:644
+msgid "Section Order & Styling"
+msgstr "영역 순서 & 스타일"
+
+#: inc/customizer.php:149
+msgid "Check this box to disable sticky header when scroll."
+msgstr "스크롤 시 헤더 고정을 해제하려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:147
+msgid "Disable Sticky Header?"
+msgstr "고정 헤더 비활성화?"
+
+#. Template Name of the plugin/theme
+msgid "Left Sidebar"
+msgstr "좌측 사이드바"
+
+#. #-#-#-#-#  onepress.pot (OnePress 1.4.3)  #-#-#-#-#
+#. Template Name of the plugin/theme
+#: inc/customizer.php:1447
+msgid "Full Width"
+msgstr "전체폭"
+
+#. Template Name of the plugin/theme
+msgid "Frontpage"
+msgstr "전면 페이지"
+
+#: template-parts/content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "찾고 있는 것을 찾을 수 없는 것 같습니다. 검색이 도움이 될 수도 있습니다."
+
+#: template-parts/content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "죄송하지만 검색어와 일치하는 것이 없습니다. 다른 검색어로 다시 시도해보세요."
+
+#: template-parts/content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "첫 번째 글을 발행할 준비가 됐나요? <a href=\"%1$s\">여기서 시작하세요</a>."
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "찾을 수 없습니다"
+
+#: template-parts/content-list.php:38 template-parts/content-page.php:21
+#: template-parts/content-single.php:35 template-parts/content.php:39
+msgid "Pages:"
+msgstr "페이지 :"
+
+#: section-parts/section-hero.php:80
+msgid "#services"
+msgstr "#services"
+
+#: section-parts/section-contact.php:48
+msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
+msgstr "여기에 작동하는 콘택트 폼을 보이려면 %1$s 플러그인을 설치하고 사용자 정의하기 &rarr; 영역: 콘택트 &rarr; 영역 콘텐츠로 가세요."
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "결색 결과: %s"
+
+#: inc/template-tags.php:248
+msgid "Your comment is awaiting moderation."
+msgstr "입력한 댓글이 검토를 기다리고 있습니다."
+
+#: inc/template-tags.php:243
+msgid "Edit"
+msgstr "수정"
+
+#: inc/template-tags.php:242
+msgid "Reply"
+msgstr "답글"
+
+#. translators: 1: date, 2: time
+#: inc/template-tags.php:240
+msgid "%1$s"
+msgstr "%1$s"
+
+#: inc/template-tags.php:234
+msgid "Post author"
+msgstr "글쓴이"
+
+#: inc/template-tags.php:215
+msgid "(Edit)"
+msgstr "(수정)"
+
+#: inc/template-tags.php:215
+msgid "Pingback:"
+msgstr "핑백:"
+
+#: inc/template-tags.php:144
+msgid "% Comments"
+msgstr "% 댓글"
+
+#: inc/template-tags.php:144
+msgid "1 Comment"
+msgstr "1 댓글"
+
+#: inc/template-tags.php:144
+msgid "Leave a comment"
+msgstr "댓글 달기"
+
+#: inc/template-tags.php:138
+msgid "Tagged %1$s"
+msgstr "태그 %1$s"
+
+#: inc/template-tags.php:132
+msgid "Posted in %1$s"
+msgstr "에 배치하는 %1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:130 inc/template-tags.php:136
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:112
+msgctxt "post author"
+msgid "by %s"
+msgstr "글쓴이 %s"
+
+#: inc/template-tags.php:107
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "작성일자 %s"
+
+#: inc/dashboard.php:354
+msgid "Having Trouble, Need Support?"
+msgstr "문제가 있거나 지원이 필요하신가요?"
+
+#: inc/dashboard.php:347
+msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
+msgstr "%s를 설정하는데 도움이 필요하신가요? 저희 문서의 지침을 봐주세요."
+
+#: inc/dashboard.php:346
+msgid "Theme Documentation"
+msgstr "테마 문서"
+
+#: inc/dashboard.php:342
+msgid "Start Customize"
+msgstr "사용자 정의하기 시작하기"
+
+#: inc/dashboard.php:340
+msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
+msgstr "%s은(는) 모든 테마 설정에 테마 사용자 정의를 지원합니다. 사이트 사용자 정의를 시작하려면 \"사용자 정의하기\"를 클릭하세요."
+
+#: inc/dashboard.php:339
+msgid "Theme Customizer"
+msgstr "테마 사용자 정의하기"
+
+#: inc/dashboard.php:324
+msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
+msgstr "OnePress는 창의적이고 유연한 원페이지 워드프레스 테마입니다. 비지니스, 포트폴리오, 디지털 에이전시, 상품 쇼케이스, 프리랜서 웹사이트에 적합합니다."
+
+#: inc/customizer.php:2898
+msgid "Fax"
+msgstr "팩스"
+
+#: inc/customizer.php:2883
+msgid "Email"
+msgstr "이메일"
+
+#: inc/customizer.php:2868
+msgid "Phone"
+msgstr "전화"
+
+#: inc/customizer.php:2853
+msgid "Address"
+msgstr "주소"
+
+#: inc/customizer.php:2838
+msgid "Contact Box Title"
+msgstr "컨택트 박스 타이틀"
+
+#: inc/customizer.php:2814
+msgid "Contact Text"
+msgstr "컨택트 텍스트"
+
+#: inc/customizer.php:2799
+msgid "Check this box to hide contact form."
+msgstr "콘택트 폼을 감추려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:2797
+msgid "Hide contact form completely."
+msgstr "콘택트 폼을 완전히 감추기."
+
+#: inc/customizer.php:2781
+msgid "Contact Form 7 Shortcode."
+msgstr "Contact Form 7 단축코드."
+
+#: inc/customizer.php:2706 section-parts/section-contact.php:4
+msgid "Get in touch"
+msgstr "연락주세요"
+
+#: inc/customizer.php:2691 section-parts/section-contact.php:2
+msgid "contact"
+msgstr "연락처"
+
+#: inc/customizer.php:2656
+msgid "Section: Contact"
+msgstr "영역: 콘택트"
+
+#: inc/customizer.php:2639 section-parts/section-news.php:8
+msgid "Read Our Blog"
+msgstr "우리 블로그을 봐주세요"
+
+#: inc/customizer.php:2631
+msgid "More News button link"
+msgstr "더 많은 뉴스 버튼 링크"
+
+#: inc/customizer.php:2616
+msgid "Number of post to show"
+msgstr "보여줄 글 수"
+
+#: inc/customizer.php:2551 section-parts/section-news.php:4
+msgid "Latest News"
+msgstr "최근 뉴스"
+
+#: inc/customizer.php:2536 section-parts/section-news.php:2
+msgid "news"
+msgstr "뉴스"
+
+#: inc/customizer.php:2501
+msgid "Section: News"
+msgstr "영역: 뉴스"
+
+#: inc/customizer.php:2469
+msgid "Team members"
+msgstr "팀원"
+
+#: inc/customizer.php:2381 section-parts/section-team.php:4
+msgid "Our Team"
+msgstr "우리 팀"
+
+#: inc/customizer.php:2366 section-parts/section-team.php:2
+msgid "team"
+msgstr "팀"
+
+#: inc/customizer.php:2332
+msgid "Section: Team"
+msgstr "영역: 팀"
+
+#: inc/customizer.php:2316
+msgid "After number"
+msgstr "숫자 다음"
+
+#: inc/customizer.php:2311
+msgid "Before number"
+msgstr "숫자 이전"
+
+#: inc/customizer.php:2306
+msgid "Number"
+msgstr "수"
+
+#: inc/customizer.php:2303
+msgid "Your counter label"
+msgstr "카운터 레이블"
+
+#: inc/customizer.php:1923 inc/customizer.php:2300
+msgid "Title"
+msgstr "Title"
+
+#: inc/customizer.php:2291
+msgid "Counter content"
+msgstr "카운터 콘텐츠"
+
+#: inc/customizer.php:1729 inc/customizer.php:2156
+msgid "Select a page"
+msgstr "페이지 선택"
+
+#: inc/customizer.php:2225 section-parts/section-counter.php:4
+msgid "Our Numbers"
+msgstr "숫자"
+
+#: inc/customizer.php:2210 section-parts/section-counter.php:2
+msgid "counter"
+msgstr "카운터"
+
+#: inc/customizer.php:2176
+msgid "Section: Counter"
+msgstr "영역: 카운터"
+
+#: inc/customizer.php:1927 inc/customizer.php:2137
+msgid "Custom icon"
+msgstr "사용자 정의 아이콘"
+
+#: inc/customizer.php:2127
+msgid "Service content"
+msgstr "서비스 콘텐츠"
+
+#: inc/customizer.php:2036 section-parts/section-hero.php:79
+#: section-parts/section-services.php:4
+msgid "Our Services"
+msgstr "우리의 서비스"
+
+#: inc/customizer.php:2021 section-parts/section-services.php:2
+msgid "services"
+msgstr "서비스"
+
+#: inc/customizer.php:1986
+msgid "Section: Services"
+msgstr "영역: 서비스"
+
+#: inc/customizer.php:1738 inc/customizer.php:2161
+msgid "Link to single page"
+msgstr "단일 페이지로 링크"
+
+#: inc/customizer.php:1734
+msgid "Hide item title"
+msgstr "아이템 제목 감추기"
+
+#: inc/customizer.php:464 inc/customizer.php:1722 inc/customizer.php:1918
+#: inc/customizer.php:2131 inc/customizer.php:2295 inc/customizer.php:2473
+msgid "[live_title]"
+msgstr "[live_title]"
+
+#: inc/customizer.php:1385 inc/customizer.php:1697 inc/customizer.php:1894
+#: inc/customizer.php:2107 inc/customizer.php:2271 inc/customizer.php:2449
+#: inc/customizer.php:2753
+msgid "Section Content"
+msgstr "영역 콘텐츠"
+
+#: inc/customizer.php:1359 inc/customizer.php:1670 inc/customizer.php:1845
+#: inc/customizer.php:2056 inc/customizer.php:2245 inc/customizer.php:2401
+#: inc/customizer.php:2571 inc/customizer.php:2726
+msgid "Section Subtitle"
+msgstr "영역 부제목"
+
+#: inc/customizer.php:1354 inc/customizer.php:1665 inc/customizer.php:1840
+#: inc/customizer.php:2051 inc/customizer.php:2240 inc/customizer.php:2396
+#: inc/customizer.php:2566 inc/customizer.php:2721
+#: section-parts/section-about.php:5 section-parts/section-contact.php:5
+#: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
+#: section-parts/section-news.php:5 section-parts/section-services.php:5
+#: section-parts/section-team.php:5
+msgid "Section subtitle"
+msgstr "영역 부제목"
+
+#: inc/customizer.php:1344 inc/customizer.php:1655 inc/customizer.php:1830
+#: inc/customizer.php:2041 inc/customizer.php:2230 inc/customizer.php:2386
+#: inc/customizer.php:2556 inc/customizer.php:2711
+msgid "Section Title"
+msgstr "영역 제목"
+
+#: inc/customizer.php:1635 section-parts/section-about.php:2
+msgid "about"
+msgstr "소개"
+
+#: inc/customizer.php:1196 inc/customizer.php:1298 inc/customizer.php:1609
+#: inc/customizer.php:1784 inc/customizer.php:1995 inc/customizer.php:2185
+#: inc/customizer.php:2341 inc/customizer.php:2510 inc/customizer.php:2665
+msgid "Section Settings"
+msgstr "영역 설정"
+
+#: inc/customizer.php:1600
+msgid "Section: About"
+msgstr "영역: 소개"
+
+#: inc/customizer.php:1109
+msgid "Button #2 Link"
+msgstr "버튼 #2 링크"
+
+#: inc/customizer.php:1104 section-parts/section-hero.php:82
+msgid "#contact"
+msgstr "#contact"
+
+#: inc/customizer.php:1095
+msgid "Button #2 Text"
+msgstr "버튼 #2 텍스트"
+
+#: inc/customizer.php:1090 section-parts/section-hero.php:81
+msgid "Get Started"
+msgstr "시작"
+
+#: inc/customizer.php:1057
+msgid "Button #1 Link"
+msgstr "버튼 #1 링크"
+
+#: inc/customizer.php:1052
+msgid "#about"
+msgstr "#about"
+
+#: inc/customizer.php:1043
+msgid "Button #1 Text"
+msgstr "버튼 #1 텍스트"
+
+#: inc/customizer.php:1038 inc/customizer.php:1650
+#: section-parts/section-about.php:4
+msgid "About Us"
+msgstr "회사 소개"
+
+#: inc/customizer.php:1030
+msgid "You can use text rotate slider in this textarea too."
+msgstr "이 textarea에서도 텍스트 회전 슬라이더를 사용할 수 있습니다."
+
+#: inc/customizer.php:1027
+msgid "Small Text"
+msgstr "작은 텍스트"
+
+#: inc/customizer.php:1012
+msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer->Site Option->Animate to control rotate animation."
+msgstr "텍스트 회전 안내: 회전 텍스트를 \"|\"로 분리해서 <span class=\"js-rotating\">...</span>에 입력하고, 사용자 정의하기 -> 사이트 옵션 ->회전 애니메이션 제어로 가세요."
+
+#: inc/customizer.php:1010
+msgid "Large Text"
+msgstr "큰 텍스트"
+
+#: inc/customizer.php:970
+msgid "Hero Content Layout"
+msgstr "히어로 콘텐츠 레이아웃"
+
+#: inc/customizer.php:897
+msgid "Background Image"
+msgstr "배경 이미지"
+
+#: inc/customizer.php:892
+msgid "Background"
+msgstr "Background"
+
+#: inc/customizer.php:888
+msgid "Background Images"
+msgstr "배경 이미지"
+
+#: inc/customizer.php:862
+msgid "Hero Background Media"
+msgstr "히어로 배경 미디어"
+
+#: inc/customizer.php:759
+msgid "Padding Bottom:"
+msgstr "패딩 하단:"
+
+#: inc/customizer.php:743
+msgid "Padding Top:"
+msgstr "패딘 상단:"
+
+#: inc/customizer.php:738 inc/customizer.php:754
+msgid "10"
+msgstr "10"
+
+#: inc/customizer.php:730
+msgid "Check this box to make hero section full screen."
+msgstr "히어로 영역을 전체 화면으로 만들려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:728
+msgid "Make hero section full screen"
+msgstr "히어로 영역을 전페 화면으로 만들기"
+
+#: inc/customizer.php:712 inc/customizer.php:1227 inc/customizer.php:1329
+#: inc/customizer.php:1640 inc/customizer.php:1815 inc/customizer.php:2026
+#: inc/customizer.php:2215 inc/customizer.php:2371 inc/customizer.php:2541
+#: inc/customizer.php:2696
+msgid "Section ID:"
+msgstr "영역 ID:"
+
+#: inc/customizer.php:707 section-parts/section-hero.php:2
+msgid "hero"
+msgstr "히어로"
+
+#: inc/customizer.php:700 inc/customizer.php:1214 inc/customizer.php:1316
+#: inc/customizer.php:1627 inc/customizer.php:1802 inc/customizer.php:2013
+#: inc/customizer.php:2202 inc/customizer.php:2359 inc/customizer.php:2528
+#: inc/customizer.php:2683
+msgid "Check this box to hide this section."
+msgstr "이 영역을 감추려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:698 inc/customizer.php:1212 inc/customizer.php:1314
+#: inc/customizer.php:1625 inc/customizer.php:1800 inc/customizer.php:2011
+#: inc/customizer.php:2200 inc/customizer.php:2357 inc/customizer.php:2526
+#: inc/customizer.php:2681
+msgid "Hide this section?"
+msgstr "이 영역 감추기?"
+
+#: inc/customizer.php:682
+msgid "Hero Settings"
+msgstr "히어로 설정"
+
+#: inc/customizer.php:672
+msgid "Section: Hero"
+msgstr "영역: 히어로"
+
+#: inc/customizer.php:538
+msgid "MailChimp Action URL"
+msgstr "MailChimp Action URL"
+
+#: inc/customizer.php:522
+msgid "Newsletter Form Title"
+msgstr "뉴스레터 폼 제목"
+
+#: inc/customizer.php:508
+msgid "Check this box to hide footer newsletter form."
+msgstr "푸터 뉴스레터 폼을 감추려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:506
+msgid "Hide Footer Newsletter?"
+msgstr "푸터 뉴스레터 감추기?"
+
+#: inc/customizer.php:491
+msgid "Newsletter"
+msgstr "뉴스레터"
+
+#: inc/customizer.php:109
+msgid "Global"
+msgstr "글로벌"
+
+#: inc/customizer.php:440
+msgid "Social Footer Title"
+msgstr "소셜 푸터 제목"
+
+#: inc/customizer.php:426
+msgid "These social profiles setting below will display at the footer of your site."
+msgstr "이 소셜 프로필 설정은 사이트 푸터에 나타납니다."
+
+#: inc/customizer.php:413
+msgid "Check this box to hide footer social section."
+msgstr "푸터 소셜 영역 감추려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:411
+msgid "Hide Footer Social?"
+msgstr "푸터 소셜 감추기?"
+
+#: inc/customizer.php:395
+msgid "Social Profiles"
+msgstr "소셜 프로필"
+
+#: inc/customizer.php:182
+msgid "Check this box to hide footer back to top button."
+msgstr "푸터 상단으로 가기 버튼을 감추려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:180
+msgid "Hide footer back to top?"
+msgstr "푸터 상단으로 가기 감추기?"
+
+#: inc/customizer.php:165
+msgid "Check this box to disable all element animation when scroll."
+msgstr "스크롤 시 모든 요소의 애니메이션을 비활성화 하려면 이 박스에 체크하세요."
+
+#: inc/customizer.php:163
+msgid "Disable animation effect?"
+msgstr "애니메이션 효과 비활성화?"
+
+#: inc/customizer.php:99
+msgid "Theme Options"
+msgstr "테마 옵션"
+
+#: inc/customizer.php:49
+msgid "Select member"
+msgstr "멤버 선택"
+
+#: inc/customizer.php:38
+msgid "Select page"
+msgstr "페이지 선택"
+
+#: inc/customizer.php:25
+msgid "Site Title, Tagline & Logo"
+msgstr "사이트 제목, 태그라인 & 로고"
+
+#: inc/customizer-controls.php:675
+msgid "Close"
+msgstr "적용"
+
+#: inc/customizer-controls.php:640
+msgid "Change"
+msgstr "사용자 이름 변경"
+
+#: inc/customizer-controls.php:640
+msgid "Add"
+msgstr "추가하기"
+
+#: inc/customizer-controls.php:639 inc/customizer-controls.php:661
+#: inc/customizer-controls.php:673
+msgid "Remove"
+msgstr "제거"
+
+#: inc/customizer-controls.php:408 inc/customizer-controls.php:523
+msgid "Item"
+msgstr "아이템"
+
+#: inc/customizer-controls.php:508
+msgid "Add an item"
+msgstr "아이템 추가"
+
+#: inc/template-tags.php:73
+msgid "Menu"
+msgstr "메뉴"
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "내용으로 바로가기"
+
+#: functions.php:371
+msgid "Please contact the administrator of this site for help."
+msgstr "도움이 필요하면 이 사이트의 관리자에게 연락하세요."
+
+#: functions.php:370
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "모든 플러그인이 성공적으로 설치되고 활성화되었습니다. %1$s"
+
+#: functions.php:369
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "플러그인이 활성화 되지 않았습니다. %s의 더 높은 버전이 이 테마에 필요합니다. 플러그인을 업데이트 하세요."
+
+#: functions.php:368
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "작업이 없습니다. %1$s 플러그인이 이미 활성화 돼있습니다."
+
+#: functions.php:366
+msgid "Plugin activated successfully."
+msgstr "플러그인이 성공적으로 활성화되었습니다."
+
+#: functions.php:367
+msgid "The following plugin was activated successfully:"
+msgstr "다음 플러그인 활성화 성공:"
+
+#: functions.php:365
+msgid "Return to Required Plugins Installer"
+msgstr "필수 플러그인 설치로 복귀"
+
+#: functions.php:364
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "플러그인 활성화 시작"
+
+#: functions.php:363
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "플러그인 업데이트 시작"
+
+#: functions.php:362
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "플러그인 설치 시작"
+
+#: functions.php:361
+msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
+msgstr[0] "죄송합니다. %1$s 플러그인을 활성화 할 권한이 없습니다."
+
+#: functions.php:360
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "다음 권장 플러그인이 현재 비활성 상태입니다: %1$s."
+
+#: functions.php:359
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "다음 필수 플러그인이 현재 비활성 상태입니다: %1$s."
+
+#: functions.php:358
+msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
+msgstr[0] "죄송합니다. %1$s 플러그인을 업데이트 할 권한이 없습니다."
+
+#: functions.php:357
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "가능한 업데이트가 있습니다: %1$s."
+
+#: functions.php:356
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] "다음 플러그인은 테마와 최대의 호환성을 위해 최신 버전으로 업데이트 해야 합니다: %1$s."
+
+#: functions.php:355
+msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
+msgstr[0] "죄송합니다. %1$s 플러그인을 설치할 권한이 없습니다."
+
+#: functions.php:354
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "이 테마는 다음 플러그인을 권장 합니다: %1$s."
+
+#: functions.php:353
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "이 테마는 다음 플러그인을 필요로 합니다: %1$s."
+
+#: functions.php:352
+msgid "Something went wrong with the plugin API."
+msgstr "플러그인 API에 뭔가 잘못 됐습니다."
+
+#: functions.php:351
+msgid "Installing Plugin: %s"
+msgstr "플러그인 설치중: %s"
+
+#: functions.php:350
+msgid "Install Plugins"
+msgstr "플러그인 설치"
+
+#: functions.php:349
+msgid "Install Required Plugins"
+msgstr "필요한 플러그인들을 설치해주세요"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Raleway, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:268
+msgctxt "Raleway font: on or off"
+msgid "on"
+msgstr "off"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:262
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "끄기"
+
+#: functions.php:142
+msgid "Sidebar"
+msgstr "사이드바"
+
+#: functions.php:59
+msgid "Primary Menu"
+msgstr "기본 메뉴"
+
+#: inc/template-tags.php:973
+msgid "%1$s theme by %2$s"
+msgstr "%1$s 테마 제작자  %2$s"
+
+#: inc/template-tags.php:971
+msgid "Copyright %1$s %2$s %3$s"
+msgstr "Copyright %1$s %2$s %3$s"
+
+#: footer.php:94
+msgid "Back To Top"
+msgstr "상단으로 가기"
+
+#: footer.php:19 inc/customizer.php:516
+msgid "Join our Newsletter"
+msgstr "뉴스레터 구독하기"
+
+#: footer.php:15 inc/customizer.php:434
+msgid "Keep Updated"
+msgstr "업데이트 유지"
+
+#: comments.php:76
+msgid "Comments are closed."
+msgstr "댓글이 닫혀있습니다."
+
+#: comments.php:44 comments.php:64
+msgid "Newer Comments"
+msgstr "다음 댓글"
+
+#: comments.php:43 comments.php:63
+msgid "Older Comments"
+msgstr "이전 댓글"
+
+#: comments.php:40 comments.php:60
+msgid "Comment navigation"
+msgstr "댓글 내비게이션"
+
+#: comments.php:31
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "&ldquo;%2$s&rdquo;의 %1$s개의 생각"
+
+#. translators: %1$s: smiley
+#: 404.php:51
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "월별 아카이브에 보고 하십시오. %1$s"
+
+#: 404.php:34
+msgid "Most Used Categories"
+msgstr "가장 많이 사용한 카테고리"
+
+#: 404.php:26
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "이 위치에서 아무 것도 찾을 수 없을 것 같습니다. 아래의 링크 또는 검색 중 하나를 하세요."
+
+#: 404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "이런! 해당 페이지를 찾을 수 없습니다."
+
+#. Author URI of the plugin/theme
+msgid "http://www.famethemes.com"
+msgstr "http://www.famethemes.com"
+
+#. Author of the plugin/theme
+msgid "FameThemes"
+msgstr "FameThemes"
+
+#. Theme URI of the plugin/theme
+msgid "https://www.famethemes.com/themes/onepress/"
+msgstr "https://www.famethemes.com/themes/onepress/"

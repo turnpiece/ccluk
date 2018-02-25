@@ -24,7 +24,7 @@ msgstr "Du er ved at slette følgende websteder:"
 msgid "User could not be added to this site."
 msgstr "Bruger kunne ikke tilføjes til dette websted."
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "The username and a link to set the password will be mailed to this email address."
 msgstr "Brugernavn og et link til at angive en adgangskode vil blive sendt til denne e-mailadresse."
 
@@ -555,7 +555,7 @@ msgstr "Tilladte filtyper. Separer typer med mellemrum."
 msgid "New registrations settings"
 msgstr "Indstillinger for nye registreringer"
 
-#: wp-admin/network/settings.php:418
+#: wp-admin/network/settings.php:420
 msgid "Enable menus"
 msgstr "Aktiver menuer"
 
@@ -1231,7 +1231,7 @@ msgstr "Indstillinger for oprettelser"
 msgid "New Site Settings"
 msgstr "Indstillinger for nye websteder"
 
-#: wp-admin/network/settings.php:396
+#: wp-admin/network/settings.php:398
 msgid "Enable administration menus"
 msgstr "Aktiver administrationsmenuer"
 
@@ -1308,11 +1308,11 @@ msgstr "Blokerede navne"
 msgid "First Page"
 msgstr "Første side"
 
-#: wp-admin/network/site-new.php:262
+#: wp-admin/network/site-new.php:264
 msgid "Add Site"
 msgstr "Tilføj websted"
 
-#: wp-admin/network/site-new.php:246
+#: wp-admin/network/site-new.php:248
 msgid "Admin Email"
 msgstr "Administrator e-mail"
 
@@ -1344,7 +1344,7 @@ msgstr "Maksimal størrelse på filer der uploades"
 msgid "Banned Email Domains"
 msgstr "Blokerede e-maildomæner"
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "A new user will be created if the above email address is not in the database."
 msgstr "En ny bruger vil blive oprettet hvis ovennævnte e-mailadresse ikke findes i databasen."
 

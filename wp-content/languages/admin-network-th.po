@@ -1,90 +1,122 @@
-# Translation of WordPress - 4.8.x - Administration - Network Admin in Thai
-# This file is distributed under the same license as the WordPress - 4.8.x - Administration - Network Admin package.
+# Translation of WordPress - 4.9.x - Development - Administration - Network Admin in Thai
+# This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2016-11-09 03:32:09+0000\n"
+"PO-Revision-Date: 2017-10-24 01:07:58+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: th\n"
-"Project-Id-Version: WordPress - 4.8.x - Administration - Network Admin\n"
+"Project-Id-Version: WordPress - 4.9.x - Development - Administration - Network Admin\n"
 
-#: wp-admin/network/index.php:51 wp-admin/network/site-info.php:31
-#: wp-admin/network/site-new.php:31 wp-admin/network/site-settings.php:30
-#: wp-admin/network/site-themes.php:30 wp-admin/network/site-users.php:33
-#: wp-admin/network/sites.php:43 wp-admin/network/user-new.php:27
-#: wp-admin/network/users.php:180
-msgid "<a href=\"https://wordpress.org/support/forum/multisite/\">Support Forums</a>"
-msgstr "<a href=\"https://wordpress.org/support/forum/multisite/\">ฟอรั่มช่วยเหลือ</a>"
+#. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
+#: wp-admin/includes/network.php:107
+msgid "The constant %s cannot be defined when creating a network."
+msgstr "ค่าคงที่ %s ไม่สามารถกำหนดได้ เมื่อสร้างเครือข่าย"
 
-#: wp-admin/network/site-info.php:194
+#: wp-admin/network/sites.php:173
+msgid "You are about to delete the following sites:"
+msgstr "คุณกำลังจะลบเว็บดังต่อไปนี้:"
+
+#: wp-admin/network/site-users.php:237
+msgid "User could not be added to this site."
+msgstr "ไม่สามารถเพิ่มผู้ใช้บนเว็บนี้ได้"
+
+#: wp-admin/network/site-new.php:252
+msgid "The username and a link to set the password will be mailed to this email address."
+msgstr ""
+"ชื่อผู้ใช้และลิงก์การตั้งรหัสผ่าน จะถูกส่งไปที่ที่อยู่\n"
+"อีเมล"
+
+#. translators: %s: new network admin email
+#: wp-admin/network/settings.php:145
+msgid "There is a pending change of the network admin email to %s."
+msgstr "การเปลี่ยนแปลงอีเมลของผู้ควบคุมเครือข่ายเป็น %s อยู่ระหว่างการรอตรวจสอบ"
+
+#: wp-admin/includes/network.php:294
+msgid "Sub-domain Installation"
+msgstr "การติดตั้งโดเมนย่อย"
+
+#: wp-admin/includes/network.php:269 wp-admin/includes/network.php:284
+msgid "Sub-directory Installation"
+msgstr "การติดตั้งไดเรกทอรีย่อย"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:631
+msgid "Active Theme"
+msgstr "ธีมที่เปิดใช้งาน"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:636
+msgid "Active Child Theme"
+msgstr "ธีมลูกที่เปิดใช้งาน"
+
+#: wp-admin/network/site-info.php:180
 msgid "Attributes"
 msgstr "Attributes"
 
 #. translators: %s: File size in kilobytes
-#: wp-admin/network/settings.php:312
+#: wp-admin/network/settings.php:350
 msgid "%s KB"
 msgstr "%s KB"
 
 #. translators: %s: Default network name
-#: wp-admin/includes/network.php:151
+#: wp-admin/includes/network.php:160
 msgid "%s Sites"
 msgstr "%s Sites"
 
 #. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:476
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:454
 msgctxt "theme"
 msgid "Delete %s"
 msgstr "ลบธีม %s"
 
-#: wp-admin/network/themes.php:90
-msgid "Sorry, you are not allowed to delete themes for this site."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบธีมสำหรับเว็บนี้"
+#: wp-admin/network/sites.php:288
+msgid "Sorry, you are not allowed to delete that site."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบเว็บนั้น"
 
 #: wp-admin/network/themes.php:14
 msgid "Sorry, you are not allowed to manage network themes."
 msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้จัดการธีมของเครือข่าย"
 
-#: wp-admin/network/sites.php:245
-msgid "Sorry, you are not allowed to delete that site."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบเว็บนั้น"
-
-#: wp-admin/network/site-themes.php:14
-msgid "Sorry, you are not allowed to manage themes for this site."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้จัดการธีมสำหรับเว็บนี้"
-
-#: wp-admin/network/site-new.php:17
-msgid "Sorry, you are not allowed to add sites to this network."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้เพิ่มเว็บเข้ามาที่เครือข่ายนี้"
+#: wp-admin/network/themes.php:90
+msgid "Sorry, you are not allowed to delete themes for this site."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบธีมสำหรับเว็บนี้"
 
 #: wp-admin/network/site-info.php:14 wp-admin/network/site-settings.php:14
 #: wp-admin/network/site-users.php:14
 msgid "Sorry, you are not allowed to edit this site."
 msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้แก้ไขเว็บนี้"
 
-#: wp-admin/network/settings.php:270
-msgid "The email address of the first comment author on a new site."
-msgstr "ที่อยู่อีเมลของผู้เขียนความเห็นแรกบนเว็บใหม่"
+#: wp-admin/network/site-new.php:17
+msgid "Sorry, you are not allowed to add sites to this network."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้เพิ่มเว็บเข้ามาที่เครือข่ายนี้"
 
-#: wp-admin/network/settings.php:266
-msgid "First Comment Email"
-msgstr "อีเมลความเห็นแรก"
+#: wp-admin/network/site-themes.php:14
+msgid "Sorry, you are not allowed to manage themes for this site."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้จัดการธีมสำหรับเว็บนี้"
+
+#. translators: 1: wp-config.php 2: location of wp-config file, 3: translated
+#. version of "That's all, stop editing! Happy blogging."
+#: wp-admin/includes/network.php:428
+msgid "Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:"
+msgstr "เพิ่มสิ่งต่อไปนี้ไปที่ไฟล์ %1$s ของคุณใน %2$s <strong>เหนือ</strong> บรรทัดที่เขียนว่า %3$s:"
 
 #. translators: This string should only be translated if wp-config-sample.php
 #. is localized. You can check the localized release package or
 #. https://i18n.svn.wordpress.org/<locale code>/branches/<wp
 #. version>/dist/wp-config-sample.php
-#: wp-admin/includes/network.php:427
+#: wp-admin/includes/network.php:436
 msgid "That&#8217;s all, stop editing! Happy blogging."
 msgstr "นี่คือทั้งหมดแล้ว  หยุดการแก้ไข และมีความสุขกับการเขียนบล็อก"
 
-#. translators: 1: wp-config.php 2: location of wp-config file, 3: translated
-#. version of "That's all, stop editing! Happy blogging."
-#: wp-admin/includes/network.php:419
-msgid "Add the following to your %1$s file in %2$s <strong>above</strong> the line reading %3$s:"
-msgstr "เพิ่มสิ่งต่อไปนี้ไปที่ไฟล์ %1$s ของคุณใน %2$s <strong>เหนือ</strong> บรรทัดที่เขียนว่า %3$s:"
+#: wp-admin/network/settings.php:304
+msgid "First Comment Email"
+msgstr "อีเมลความเห็นแรก"
+
+#: wp-admin/network/settings.php:308
+msgid "The email address of the first comment author on a new site."
+msgstr "ที่อยู่อีเมลของผู้เขียนความเห็นแรกบนเว็บใหม่"
 
 #. translators: 1: theme name, 2: theme author
 #: wp-admin/network/themes.php:138
@@ -97,305 +129,300 @@ msgstr "%1$s โดย %2$s"
 msgid "User added. <a href=\"%s\">Edit user</a>"
 msgstr "เพิ่มผู้ใช้แล้ว <a href=\"%s\">แก้ไขผู้ใช้</a>"
 
-#: wp-admin/network/site-new.php:206
-msgid "Only lowercase letters (a-z), numbers, and hyphens are allowed."
-msgstr "อนุญาตเฉพาะตัวอักษรเล็ก (a-z), ตัวเลขและสัญลักษณ์ hyphens (-) เท่านั้น"
-
-#: wp-admin/network/site-new.php:156
-msgctxt "email \"From\" field"
-msgid "Site Admin"
-msgstr "ผู้ควบคุมเว็บ"
-
 #. translators: 1: wp-config.php
-#: wp-admin/includes/network.php:470
-msgid "These unique authentication keys are also missing from your %s file."
-msgstr "คีย์รับรอง (authentication key) เหล่านี้หายไปจากไฟล์ %s ของคุณ"
-
-#. translators: 1: wp-config.php
-#: wp-admin/includes/network.php:464
+#: wp-admin/includes/network.php:473
 msgid "This unique authentication key is also missing from your %s file."
 msgstr "คีย์รับรอง (authentication key) นี้หายไปจากไฟล์ %s ของคุณ"
 
 #. translators: 1: wp-config.php
-#: wp-admin/includes/network.php:408
-msgid "We recommend you back up your existing %s file."
-msgstr "เราแนะนำให้คุณสำรองข้อมูลไฟล์ %s ที่มีอยู่ของคุณ"
+#: wp-admin/includes/network.php:479
+msgid "These unique authentication keys are also missing from your %s file."
+msgstr "คีย์รับรอง (authentication key) เหล่านี้หายไปจากไฟล์ %s ของคุณ"
 
-#. translators: 1: wp-config.php 2: .htaccess
-#. translators: 1: wp-config.php 2: web.config
-#: wp-admin/includes/network.php:392 wp-admin/includes/network.php:400
-msgid "We recommend you back up your existing %1$s and %2$s files."
-msgstr "เราแนะนำให้คุณสำรองข้อมูลไฟล์ %1$s และ %2$s ที่มีอยู่ของคุณ"
+#: wp-admin/network/site-new.php:158
+msgctxt "email \"From\" field"
+msgid "Site Admin"
+msgstr "ผู้ควบคุมเว็บ"
 
-#. translators: 1: localhost 2: localhost.localdomain
-#: wp-admin/includes/network.php:264
-msgid "Because you are using %1$s, the sites in your WordPress network must use sub-directories. Consider using %2$s if you wish to use sub-domains."
-msgstr "เพราะว่าคุณกำลังใช้งาน %1$s  เว็บในเครือข่ายเวิร์ดเพรสของคุณต้องใช้งานแบบซับไดเรกทอรี  โปรดพิจารณาการใช้งานแบบ %2$s ถ้าคุณต้องการใช้งานแบบซับโดเมน"
+#: wp-admin/network/site-new.php:208
+msgid "Only lowercase letters (a-z), numbers, and hyphens are allowed."
+msgstr "อนุญาตเฉพาะตัวอักษรเล็ก (a-z), ตัวเลขและสัญลักษณ์ hyphens (-) เท่านั้น"
 
 #. translators: %s: host name
-#: wp-admin/includes/network.php:248 wp-admin/includes/network.php:297
+#: wp-admin/includes/network.php:257 wp-admin/includes/network.php:306
 msgid "The internet address of your network will be %s."
 msgstr "ที่อยู่อินเตอร์เนตของเครือข่ายของคุณจะเป็น %s"
 
 #. translators: 1: site url 2: host name 3. www
-#: wp-admin/includes/network.php:237
+#: wp-admin/includes/network.php:246
 msgid "We recommend you change your siteurl to %1$s before enabling the network feature. It will still be possible to visit your site using the %3$s prefix with an address like %2$s but any links will not have the %3$s prefix."
 msgstr "เราแนะนำให้คุณเปลี่ยน siteurl ของคุณเป็น %1$s ก่อนจะเปิดใช้คำสั่งเครือข่าย  คุณยังสามารถเข้าเยี่ยมเว็บของคุณโดยใช้คำนำหน้า %3$s และที่อยู่เว็บเช่น %2$s แต่ลิงก์อื่น ๆ จะไม่มีคำนำหน้า %3$s "
 
-#: wp-admin/includes/network.php:203
+#. translators: 1: wp-config.php 2: .htaccess
+#. translators: 1: wp-config.php 2: web.config
+#: wp-admin/includes/network.php:401 wp-admin/includes/network.php:409
+msgid "We recommend you back up your existing %1$s and %2$s files."
+msgstr "เราแนะนำให้คุณสำรองข้อมูลไฟล์ %1$s และ %2$s ที่มีอยู่ของคุณ"
+
+#. translators: 1: wp-config.php
+#: wp-admin/includes/network.php:417
+msgid "We recommend you back up your existing %s file."
+msgstr "เราแนะนำให้คุณสำรองข้อมูลไฟล์ %s ที่มีอยู่ของคุณ"
+
+#. translators: 1: localhost 2: localhost.localdomain
+#: wp-admin/includes/network.php:273
+msgid "Because you are using %1$s, the sites in your WordPress network must use sub-directories. Consider using %2$s if you wish to use sub-domains."
+msgstr "เว็บในเครือข่าย WordPress ของคุณต้องใช้งานแบบไดเรกทอรีย่อย เนื่องจากคุณกำลังใช้งาน %1$s ถ้าคุณต้องการใช้งานแบบโดเมนย่อย กรุณาใช้งาน %2$s แทน"
+
+#: wp-admin/includes/network.php:212
 msgid "You cannot change this later."
 msgstr "คุณไม่สามารถเปลี่ยนสิ่งนี้ภายหลังได้"
 
-#: wp-admin/includes/network.php:202
-msgid "Please choose whether you would like sites in your WordPress network to use sub-domains or sub-directories."
-msgstr "โปรดเลือกว่าคุณอยากให้เครือข่ายเว็บเวิร์ดเพรสของคุณใช้งานแบบซับโดเมนหรือซับไดเรกทอรี"
-
 #. translators: 1: mod_rewrite, 2: mod_rewrite documentation URL, 3: Google
 #. search for mod_rewrite
-#: wp-admin/includes/network.php:191
+#: wp-admin/includes/network.php:200
 msgid "If %1$s is disabled, ask your administrator to enable that module, or look at the <a href=\"%2$s\">Apache documentation</a> or <a href=\"%3$s\">elsewhere</a> for help setting it up."
 msgstr "ถ้า %1$s ถูกปิดการใช้งาน  ให้ถามผู้ควบคุมของคุณให้เปิดโมดุลนั้น  หรือดูที่ <a href=\"%2$s\">คู่มื่อ Apache</a> หรือ <a href=\"%3$s\">ที่อื่น ๆ</a> สำหรับความช่วยเหลือในการตั้งค่ามัน"
 
+#: wp-admin/includes/network.php:211
+msgid "Please choose whether you would like sites in your WordPress network to use sub-domains or sub-directories."
+msgstr "โปรดเลือกว่าคุณอยากให้เครือข่ายเว็บ WordPress ของคุณใช้งานแบบโดเมนย่อย หรือไดเรกทอรีย่อย"
+
 #. translators: %s: mod_rewrite
-#: wp-admin/includes/network.php:182
+#: wp-admin/includes/network.php:191
 msgid "It looks like the Apache %s module is not installed."
 msgstr "ดูเหมือนว่ายังไม่มีการติดตั้ง Apache %s module "
 
-#. translators: %s: mod_rewrite
-#: wp-admin/includes/network.php:175
-msgid "Please make sure the Apache %s module is installed as it will be used at the end of this installation."
-msgstr "โปรดแน่ใจว่า Apache โมดูล %s ติดตั้งแล้วเพราะว่าระบบต้องใช้มันในตอนจบของการติดตั้ง"
-
 #. translators: %s: port number
-#: wp-admin/includes/network.php:125
+#: wp-admin/includes/network.php:134
 msgid "You cannot use port numbers such as %s."
 msgstr "คุณไม่สามารถใช้ port numbers เช่น %s"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:172
+#. translators: %s: mod_rewrite
+#: wp-admin/includes/network.php:184
+msgid "Please make sure the Apache %s module is installed as it will be used at the end of this installation."
+msgstr "โปรดแน่ใจว่า Apache โมดูล %s ติดตั้งแล้วเพราะว่าระบบต้องใช้มันในตอนจบของการติดตั้ง"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:41
+#: wp-admin/network/site-info.php:175
+msgid "Deleted"
+msgstr "ลบ"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:200
+msgctxt "site"
+msgid "Mark as Spam"
+msgstr "บันทึกเป็นสแปม"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:330
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:418
+msgid "Enable"
+msgstr "ใช้งาน"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:228
+#: wp-admin/network/site-info.php:163
+msgctxt "site"
+msgid "Registered"
+msgstr "ลงทะเบียนแล้ว"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:201
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:529
+msgctxt "site"
+msgid "Not Spam"
+msgstr "ไม่ใช่สแปม"
+
+#: wp-admin/includes/class-wp-ms-users-list-table.php:171
 msgctxt "user"
 msgid "Registered"
 msgstr "ลงทะเบียนแล้ว"
 
-#: wp-admin/includes/class-wp-ms-users-list-table.php:142
-msgid "Super Admin <span class=\"count\">(%s)</span>"
-msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
-msgstr[0] "ผู้ควบคุมขั้นสูง <span class=\"count\">(%s)</span>"
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:525
+msgctxt "verb; site"
+msgid "Archive"
+msgstr "คลังเก็บ"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:40
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:531
+#: wp-admin/network/site-info.php:174
+msgctxt "site"
+msgid "Spam"
+msgstr "สแปม"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:189
+msgid "No sites found."
+msgstr "ไม่พบเว็บ"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:227
+#: wp-admin/network/site-info.php:167
+msgid "Last Updated"
+msgstr "อัปเดตครั้งสุดท้าย"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:39
+#: wp-admin/network/site-info.php:173
+msgid "Archived"
+msgstr "คลังเก็บ"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:42
+#: wp-admin/network/site-info.php:177
+msgid "Mature"
+msgstr "เป็นผู้ใหญ่"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:523
+msgid "Unarchive"
+msgstr "ออกจากคลังเก็บ"
+
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:358
+msgid "Never"
+msgstr "ไม่เคย"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:287
+msgctxt "themes"
+msgid "All <span class=\"count\">(%s)</span>"
+msgid_plural "All <span class=\"count\">(%s)</span>"
+msgstr[0] "<span class=\"count\">(%s)</span>ทั้งหมด"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:332
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:440
+msgid "Disable"
+msgstr "ปิดการใช้งาน"
 
 #: wp-admin/includes/class-wp-ms-users-list-table.php:114
 msgctxt "user"
 msgid "Not Spam"
 msgstr "ผู้ใช้นี้ไม่ใช่สแปม"
 
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:293
+msgid "Disabled <span class=\"count\">(%s)</span>"
+msgid_plural "Disabled <span class=\"count\">(%s)</span>"
+msgstr[0] "ปิดการใช้งาน <span class=\"count\">(%s)</span>"
+
 #: wp-admin/includes/class-wp-ms-users-list-table.php:113
 msgctxt "user"
 msgid "Mark as Spam"
 msgstr "บันทึกผู้ใช้นี้เป็นสแปม"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:573
-msgid "Visit Theme Site"
-msgstr "เยี่ยมชมเว็บไซต์ของธีม"
+#: wp-admin/includes/class-wp-ms-users-list-table.php:141
+msgid "Super Admin <span class=\"count\">(%s)</span>"
+msgid_plural "Super Admins <span class=\"count\">(%s)</span>"
+msgstr[0] "ผู้ควบคุมขั้นสูง <span class=\"count\">(%s)</span>"
 
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:568
-msgid "Visit %s homepage"
-msgstr "เยี่ยมชมหน้าแรก %s"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:541
-msgid "Broken Theme:"
-msgstr "ธีมที่เสียหาย"
-
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:457
-msgid "Open %s in the Theme Editor"
-msgstr "เปิด %s ในตัวแก้ไขธีม"
-
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:441
-msgid "Network Disable %s"
-msgstr "ปิดใช้งานเครือข่าย %s"
-
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:438
-msgid "Disable %s"
-msgstr "ปิดการใช้งาน %s"
-
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:419
-msgid "Network Enable %s"
-msgstr "ใช้งานเครือข่าย %s"
-
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:416
-msgid "Enable %s"
-msgstr "เปิดใช้งาน %s"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:335
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:447
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:332
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:440
 msgid "Network Disable"
 msgstr "ปิดการใช้งานเครือข่าย"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:335
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:447
-msgid "Disable"
-msgstr "ปิดการใช้งาน"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:333
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:425
-msgid "Enable"
-msgstr "ใช้งาน"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:302
-msgid "Broken <span class=\"count\">(%s)</span>"
-msgid_plural "Broken <span class=\"count\">(%s)</span>"
-msgstr[0] "<span class=\"count\">(%s)</span> เสียหาย"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:296
-msgid "Disabled <span class=\"count\">(%s)</span>"
-msgid_plural "Disabled <span class=\"count\">(%s)</span>"
-msgstr[0] "ปิดการใช้งาน <span class=\"count\">(%s)</span>"
-
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:293
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:290
 msgid "Enabled <span class=\"count\">(%s)</span>"
 msgid_plural "Enabled <span class=\"count\">(%s)</span>"
 msgstr[0] "เปิดการใช้งาน <span class=\"count\">(%s)</span>"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:290
-msgctxt "themes"
-msgid "All <span class=\"count\">(%s)</span>"
-msgid_plural "All <span class=\"count\">(%s)</span>"
-msgstr[0] "<span class=\"count\">(%s)</span>ทั้งหมด"
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:299
+msgid "Broken <span class=\"count\">(%s)</span>"
+msgid_plural "Broken <span class=\"count\">(%s)</span>"
+msgstr[0] "<span class=\"count\">(%s)</span> เสียหาย"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:247
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:518
+msgid "Broken Theme:"
+msgstr "ธีมที่เสียหาย"
+
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:245
 msgid "Theme"
 msgstr "ธีม"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:236
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:234
 msgid "You do not appear to have any themes available at this time."
 msgstr "ดูเหมือนว่าคุณไม่มีธีมใด ๆ ที่ใช้ได้ในตอนนี้"
 
-#: wp-admin/includes/class-wp-ms-themes-list-table.php:234
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:232
 msgid "No themes found."
 msgstr "ไม่พบธีม"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:538
-msgctxt "verb; site"
-msgid "Archive"
-msgstr "คลังเก็บ"
-
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:536
-msgid "Unarchive"
-msgstr "ออกจากคลังเก็บ"
-
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:365
-msgid "Never"
-msgstr "ไม่เคย"
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:550
+msgid "Visit Theme Site"
+msgstr "เยี่ยมชมเว็บไซต์ของธีม"
 
 #. translators: 1: site name, 2: site tagline.
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:337
+#: wp-admin/includes/class-wp-ms-sites-list-table.php:331
 msgid "%1$s &#8211; %2$s"
 msgstr "%1$s &#8211; %2$s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:231
-#: wp-admin/network/site-info.php:177
-msgctxt "site"
-msgid "Registered"
-msgstr "ลงทะเบียนแล้ว"
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:409
+msgid "Enable %s"
+msgstr "เปิดใช้งาน %s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:230
-#: wp-admin/network/site-info.php:181
-msgid "Last Updated"
-msgstr "อัปเดตครั้งสุดท้าย"
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:412
+msgid "Network Enable %s"
+msgstr "ใช้งานเครือข่าย %s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:204
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:542
-msgctxt "site"
-msgid "Not Spam"
-msgstr "ไม่ใช่สแปม"
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:431
+msgid "Disable %s"
+msgstr "ปิดการใช้งาน %s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:203
-msgctxt "site"
-msgid "Mark as Spam"
-msgstr "บันทึกเป็นสแปม"
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:434
+msgid "Network Disable %s"
+msgstr "ปิดใช้งานเครือข่าย %s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:192
-msgid "No sites found."
-msgstr "ไม่พบเว็บ"
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-ms-themes-list-table.php:545
+msgid "Visit %s homepage"
+msgstr "เยี่ยมชมหน้าแรก %s"
 
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:44
-#: wp-admin/network/site-info.php:191
-msgid "Mature"
-msgstr "เป็นผู้ใหญ่"
-
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:43
-#: wp-admin/network/site-info.php:189
-msgid "Deleted"
-msgstr "ลบ"
-
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:42
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:544
-#: wp-admin/network/site-info.php:188
-msgctxt "site"
-msgid "Spam"
-msgstr "สแปม"
-
-#: wp-admin/includes/class-wp-ms-sites-list-table.php:41
-#: wp-admin/network/site-info.php:187
-msgid "Archived"
-msgstr "คลังเก็บ"
-
-#: wp-admin/network/site-users.php:339 wp-admin/network/user-new.php:117
+#: wp-admin/network/site-users.php:346 wp-admin/network/user-new.php:117
 msgid "A password reset link will be sent to the user via email."
 msgstr "ลิงก์ล้างค่ารหัสผ่านจะถูกส่งให้ผู้ใช้ผ่านทางอีเมล"
 
 #. translators: 1: NOBLOGREDIRECT 2: wp-config.php
-#: wp-admin/network/settings.php:140
+#: wp-admin/network/settings.php:178
 msgid "If registration is disabled, please set %1$s in %2$s to a URL you will redirect visitors to if they visit a non-existent site."
-msgstr "ถ้าการลงทะเบียนถูกปิด โปรดตั้งต่า %1$s ใน %2$s ไปยัง URL ที่คุณต้องการส่งต่อผู้เยี่ยมชมไป  ถ้าพวกเขาเข้าเยี่ยมชมเว็บที่ไม่มีอยู่จริง"
+msgstr "ถ้าการลงทะเบียนถูกปิด โปรดตั้งค่า %1$s ใน %2$s ไปยัง URL ที่คุณต้องการส่งต่อผู้เยี่ยมชมไป  ถ้าพวกเขาเข้าเยี่ยมชมเว็บที่ไม่มีอยู่จริง"
+
+#: wp-admin/network/site-users.php:24
+msgid "Site users list navigation"
+msgstr "รายชื่อนำทางผู้ใช้เว็บ"
+
+#: wp-admin/network/site-users.php:25
+msgid "Site users list"
+msgstr "รายชื่อผู้ใช้เว็บ"
+
+#: wp-admin/network/sites.php:47
+msgid "Sites list navigation"
+msgstr "รายชื่อนำทางเว็บ"
+
+#: wp-admin/network/sites.php:48
+msgid "Sites list"
+msgstr "รายชื่อเว็บ"
+
+#: wp-admin/network/themes.php:235
+msgid "Themes list navigation"
+msgstr "รายชื่อนำทางธีม"
 
 #. translators: 1: WP_ALLOW_MULTISITE 2: wp-config.php
 #: wp-admin/network.php:44
 msgid "You must define the %1$s constant as true in your %2$s file to allow creation of a Network."
 msgstr "คุณต้องระบุค่าตัวแปร %1$s เป็น true ในไฟล์ %2$s ของคุณเพื่ออนุญาตการสร้างเครือข่าย"
 
-#: wp-admin/network/themes.php:235
-msgid "Themes list navigation"
-msgstr "รายชื่อนำทางธีม"
-
-#: wp-admin/network/sites.php:48
-msgid "Sites list"
-msgstr "รายชื่อเว็บ"
-
-#: wp-admin/network/sites.php:47
-msgid "Sites list navigation"
-msgstr "รายชื่อนำทางเว็บ"
-
-#: wp-admin/network/site-users.php:39
-msgid "Site users list"
-msgstr "รายชื่อผู้ใช้เว็บ"
-
-#: wp-admin/network/site-users.php:38
-msgid "Site users list navigation"
-msgstr "รายชื่อนำทางผู้ใช้เว็บ"
-
-#: wp-admin/network/site-users.php:37
+#: wp-admin/network/site-users.php:23
 msgid "Filter site users list"
 msgstr "กรองรายชื่อผู้ใช้เว็บ"
 
-#: wp-admin/network/site-themes.php:36
-msgid "Site themes list"
-msgstr "รายชื่อธีมของเว็บ"
-
-#: wp-admin/network/site-themes.php:35
-msgid "Site themes list navigation"
-msgstr "รายชื่อนำทางธีมของเว็บ"
-
-#: wp-admin/network/site-themes.php:34
+#: wp-admin/network/site-themes.php:20
 msgid "Filter site themes list"
 msgstr "กรองรายชื่อธีมของเว็บ"
 
-#: wp-admin/network/site-new.php:111
+#: wp-admin/network/site-themes.php:21
+msgid "Site themes list navigation"
+msgstr "รายชื่อนำทางธีมของเว็บ"
+
+#: wp-admin/network/site-new.php:113
 msgid "The domain or path entered conflicts with an existing username."
 msgstr "โดเมนหรือเส้นทางที่ใส่มาขัดแย้งกับชื่อผู้ใช้ที่มีอยู่"
+
+#: wp-admin/network/site-themes.php:22
+msgid "Site themes list"
+msgstr "รายชื่อธีมของเว็บ"
 
 #: wp-admin/network/sites.php:75
 msgid "The requested action is not valid."
@@ -437,8 +464,8 @@ msgstr "คุณกำลังปิดใช้งานเว็บ %s"
 msgid "You are about to activate the site %s."
 msgstr "คุณกำลังเปิดใช้เว็บ %s"
 
-#: wp-admin/network/site-info.php:42 wp-admin/network/site-settings.php:40
-#: wp-admin/network/site-themes.php:63 wp-admin/network/site-users.php:56
+#: wp-admin/network/site-info.php:28 wp-admin/network/site-settings.php:26
+#: wp-admin/network/site-themes.php:49 wp-admin/network/site-users.php:42
 msgid "The requested site does not exist."
 msgstr "เว็บที่ร้องขอนั้นไม่มีอยู่จริง"
 
@@ -458,12 +485,6 @@ msgstr "<a href=\"https://codex.wordpress.org/Tools_Network_Screen\">คู่�
 msgid "<a href=\"https://codex.wordpress.org/Network_Admin\">Documentation on the Network Admin</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin\">คู่มือผู้ควบคุมเครือข่าย</a>"
 
-#: wp-admin/network/site-info.php:30 wp-admin/network/site-new.php:30
-#: wp-admin/network/site-settings.php:29 wp-admin/network/site-themes.php:29
-#: wp-admin/network/site-users.php:32 wp-admin/network/sites.php:42
-msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Sites_Screen\">Documentation on Site Management</a>"
-msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Sites_Screen\">คู่มือการจัดการเว็บไซต์</a>"
-
 #: wp-admin/network.php:66 wp-admin/network.php:77
 msgid "<a href=\"https://codex.wordpress.org/Create_A_Network\">Documentation on Creating a Network</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Create_A_Network\">คู่มือสำหรับการสร้างเครือข่าย</a>"
@@ -472,7 +493,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Create_A_Network\">คู่มื
 msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Themes_Screen\">Documentation on Network Themes</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Themes_Screen\">คู่มือธีมของเครือข่าย</a>"
 
-#: wp-admin/network/settings.php:40
+#: wp-admin/network/settings.php:60
 msgid "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">Documentation on Network Settings</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">คู่มือการตั้งค่าเครือข่าย</a>"
 
@@ -481,24 +502,28 @@ msgstr "<a href=\"https://codex.wordpress.org/Network_Admin_Settings_Screen\">�
 msgid "Warning! Problem updating %1$s. Your server may not be able to connect to sites running on it. Error message: %2$s"
 msgstr "คำเตือน ปัญหารการอัปเดต %1$s เซิร์ฟเวอร์ของคุณอาจจะไม่ได้เชื่อมต่อกับเว็บที่กำลังทำงานอยู่  ข้อความผิดพลาด: %2$s"
 
+#: wp-admin/network/themes.php:163
+msgid "Yes, delete these themes"
+msgstr "ใช่ ลบธีมเหล่านี้"
+
 #: wp-admin/network/themes.php:131
 msgid "You are about to remove the following themes:"
 msgstr "คุณกำลังจะลบธีมต่อไปนี้:"
 
-#: wp-admin/network/themes.php:130
-msgid "These themes may be active on other sites in the network."
-msgstr "ธีมเหล่านี้อาจจะใช้งานอยู่บนเว็บไซต์อื่นในเครือข่าย"
+#: wp-admin/network/site-themes.php:183 wp-admin/network/themes.php:279
+msgid "%s theme disabled."
+msgid_plural "%s themes disabled."
+msgstr[0] "เลิกใช้ %s ธีมแล้ว"
 
 #: wp-admin/network/themes.php:146
 msgid "Are you sure you wish to delete this theme?"
 msgstr "คุณแน่ใจว่าต้องการลบธีมนี้"
 
-#: wp-admin/network/site-themes.php:197 wp-admin/network/themes.php:279
-msgid "%s theme disabled."
-msgid_plural "%s themes disabled."
-msgstr[0] "เลิกใช้ %s ธีมแล้ว"
+#: wp-admin/network/themes.php:130
+msgid "These themes may be active on other sites in the network."
+msgstr "ธีมเหล่านี้อาจจะใช้งานอยู่บนเว็บไซต์อื่นในเครือข่าย"
 
-#: wp-admin/network/site-themes.php:189 wp-admin/network/themes.php:271
+#: wp-admin/network/site-themes.php:175 wp-admin/network/themes.php:271
 msgid "%s theme enabled."
 msgid_plural "%s themes enabled."
 msgstr[0] "เปิดใช้ %s ธีมแล้ว"
@@ -508,50 +533,50 @@ msgid "%s theme deleted."
 msgid_plural "%s themes deleted."
 msgstr[0] "ลบ %s ธีมแล้ว"
 
-#: wp-admin/network/themes.php:163
-msgid "Yes, delete these themes"
-msgstr "ใช่ ลบธีมเหล่านี้"
-
 #: wp-admin/network/themes.php:129
 msgid "Delete Themes"
 msgstr "ลบธีม"
 
-#: wp-admin/network/settings.php:132
-msgid "New registrations settings"
-msgstr "การตั้งค่าการลงทะเบียนใหม่"
-
-#: wp-admin/network/settings.php:317
-msgid "Size in kilobytes"
-msgstr "ขนาดในกิโลไบต์"
-
-#: wp-admin/network/settings.php:301
-msgid "Allowed file types. Separate types by spaces."
-msgstr "ประเภทไฟล์ที่อนุญาตแล้ว  แบ่งแต่ละประเภทด้วยช่องว่าง"
-
-#: wp-admin/network/site-info.php:197
+#: wp-admin/network/site-info.php:183
 msgid "Set site attributes"
 msgstr "ตั้งค่าคุณสมบัติเว็บไซต์ (site attributes)"
 
-#: wp-admin/network/settings.php:380
+#: wp-admin/network/settings.php:170
+msgid "New registrations settings"
+msgstr "การตั้งค่าการลงทะเบียนใหม่"
+
+#: wp-admin/network/settings.php:339
+msgid "Allowed file types. Separate types by spaces."
+msgstr "ประเภทไฟล์ที่อนุญาตแล้ว  แบ่งแต่ละประเภทด้วยช่องว่าง"
+
+#: wp-admin/network/settings.php:355
+msgid "Size in kilobytes"
+msgstr "ขนาดในกิโลไบต์"
+
+#: wp-admin/network/settings.php:420
 msgid "Enable menus"
 msgstr "เปิดใช้เมนู"
 
 #. translators: 1: a filename like .htaccess. 2: a file path.
-#: wp-admin/includes/network.php:539 wp-admin/includes/network.php:579
+#: wp-admin/includes/network.php:548 wp-admin/includes/network.php:588
 msgid "Add the following to your %1$s file in %2$s, <strong>replacing</strong> other WordPress rules:"
 msgstr "เพิ่มข้อความเหล่านี้ไปที่ไฟล์ %1$s ใน %2$s, <strong>แทนที่</strong> กฎเวิร์ดเพรสอื่น ๆ:"
 
-#: wp-admin/network/sites.php:100
+#: wp-admin/network/sites.php:100 wp-admin/network/sites.php:168
 msgid "Confirm your action"
 msgstr "ยืนยันการกระทำของคุณ"
-
-#: wp-admin/network/settings.php:116
-msgid "This email address will receive notifications. Registration and support emails will also come from this address."
-msgstr "อีเมลนี้จะได้รับการเตือน  อีเมลลงทะเบียนและอีเมลสนับสนุนจะมาจากที่อยู่อีเมลนี้"
 
 #: wp-admin/network/users.php:170
 msgid "Hover over any user on the list to make the edit links appear. The Edit link on the left will take you to their Edit User profile page; the Edit link on the right by any site name goes to an Edit Site screen for that site."
 msgstr "ลากเม้าส์ผ่านไปบนรายชื่อผู้ใช้ใด ๆ จะทำให้ลิงก์แก้ไขนั้นปรากฎขึ้น  ลิงก์แก้ไขด้านซ้ายจะพาคุณไปยังหน้าแก้ไขหน้าประวัติส่วนตัวของพวกเขา  ลิงก์แก้ไขด้านขวาของชื่อเว็บไซต์ใด ๆ จะพาไปยังหน้าจอแก้ไขเว็บไซต์สำหรับเว็บไซต์นั้น ๆ "
+
+#: wp-admin/network/index.php:36
+msgid "To add a new user, <strong>click Create a New User</strong>."
+msgstr "เพื่อเพิ่มผู้ใช้ใหม่ <strong>กดสร้างผู้ใช้ใหม่</strong>"
+
+#: wp-admin/network/index.php:37
+msgid "To add a new site, <strong>click Create a New Site</strong>."
+msgstr "เพื่อเพิ่มเว็บไซต์ใหม่ <strong>กดสร้างเว็บไซต์ใหม่</strong>"
 
 #: wp-admin/network/index.php:40
 msgid "To search for a site, <strong>enter the path or domain</strong>."
@@ -561,65 +586,57 @@ msgstr "เพื่อค้นหาเว็บไซต์ <strong>ใส่
 msgid "To search for a user, <strong>enter an email address or username</strong>. Use a wildcard to search for a partial username, such as user&#42;."
 msgstr "เพื่อค้นหาผู้ใช้ <strong>ใส่ที่อยู่อีเมลหรือชื่อผู้ใช้</strong>  ใช้ wildcard (*) เพื่อค้นหาบางส่วนของชื่อผู้ใช้ อย่างเช่นผู้ใช้&#42;"
 
-#: wp-admin/network/index.php:37
-msgid "To add a new site, <strong>click Create a New Site</strong>."
-msgstr "เพื่อเพิ่มเว็บไซต์ใหม่ <strong>กดสร้างเว็บไซต์ใหม่</strong>"
-
-#: wp-admin/network/index.php:36
-msgid "To add a new user, <strong>click Create a New User</strong>."
-msgstr "เพื่อเพิ่มผู้ใช้ใหม่ <strong>กดสร้างผู้ใช้ใหม่</strong>"
-
-#: wp-admin/network/index.php:44
-msgid "Quick Tasks"
-msgstr "งานด่วน"
-
-#: wp-admin/network/index.php:38
-msgid "To search for a user or site, use the search boxes."
-msgstr "เพื่อค้นหาสำหรับผู้ใช้หรือเว็บไซต์  ใช้กล่องค้นหา"
-
-#: wp-admin/network/index.php:35
-msgid "The Right Now widget on this screen provides current user and site counts on your network."
-msgstr "วิดเจ็ต Right now บนหน้าจอนี้จะทำการนับผู้ใช้และจำนวนเว็บไซต์บนเครือข่ายของคุณ"
-
-#: wp-admin/network/index.php:27
-msgid "Modify global network settings"
-msgstr "การตั้งค่าแก้ไขเครือข่ายทั้งหมด"
-
-#: wp-admin/network/index.php:26
-msgid "Update your network"
-msgstr "อัปเดตเครือข่ายของคุณ"
-
-#: wp-admin/network/index.php:25
-msgid "Install and activate themes or plugins"
-msgstr "ติดตั้งและเปิดใช้งานธีมหรือปลั๊กอิน"
-
-#: wp-admin/network/index.php:24
-msgid "Add and manage sites or users"
-msgstr "เพิ่มและจัดการเว็บไซต์หรือผู้ใช้"
+#: wp-admin/network/index.php:22
+msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
+msgstr "ยินดีต้อนรับสู่หน้าควบคุมเครือข่ายของคุณ  พื้นที่นี้ของหน้าจอควบคุมถูกใช้สำหรับการจัดการรูปแบบต่าง ๆ ของเครือข่ายหลายเว็บไซต์ของคุณ"
 
 #: wp-admin/network/index.php:23
 msgid "From here you can:"
 msgstr "จากที่นี่คุณสามารถ:"
 
-#: wp-admin/network/index.php:22
-msgid "Welcome to your Network Admin. This area of the Administration Screens is used for managing all aspects of your Multisite Network."
-msgstr "ยินดีต้อนรับสู่หน้าควบคุมเครือข่ายของคุณ  พื้นที่นี้ของหน้าจอควบคุมถูกใช้สำหรับการจัดการรูปแบบต่าง ๆ ของเครือข่ายหลายเว็บไซต์ของคุณ"
+#: wp-admin/network/index.php:24
+msgid "Add and manage sites or users"
+msgstr "เพิ่มและจัดการเว็บไซต์หรือผู้ใช้"
 
-#: wp-admin/network/upgrade.php:127
-msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
-msgstr "อัปเดตเวิร์ดเพรสแล้ว  ก่อนที่คุณจะทำสิ่งอื่น  เราต้องการการอัปเกรดทีละเว็บไซต์ในเครือข่ายของคุณ"
+#: wp-admin/network/index.php:26
+msgid "Update your network"
+msgstr "อัปเดตเครือข่ายของคุณ"
+
+#: wp-admin/network/index.php:44
+msgid "Quick Tasks"
+msgstr "งานด่วน"
+
+#: wp-admin/network/index.php:27
+msgid "Modify global network settings"
+msgstr "การตั้งค่าแก้ไขเครือข่ายทั้งหมด"
+
+#: wp-admin/network/index.php:38
+msgid "To search for a user or site, use the search boxes."
+msgstr "เพื่อค้นหาสำหรับผู้ใช้หรือเว็บไซต์  ใช้กล่องค้นหา"
+
+#: wp-admin/network/index.php:25
+msgid "Install and activate themes or plugins"
+msgstr "ติดตั้งและเปิดใช้งานธีมหรือปลั๊กอิน"
+
+#: wp-admin/network/index.php:35
+msgid "The Right Now widget on this screen provides current user and site counts on your network."
+msgstr "วิดเจ็ต Right now บนหน้าจอนี้จะทำการนับผู้ใช้และจำนวนเว็บไซต์บนเครือข่ายของคุณ"
+
+#: wp-admin/network/menu.php:34 wp-admin/network/upgrade.php:15
+#: wp-admin/network/upgrade.php:40 wp-admin/network/upgrade.php:131
+msgid "Upgrade Network"
+msgstr "อัปเกรดเครือข่าย"
 
 #: wp-admin/network/upgrade.php:22
 msgid "Only use this screen once you have updated to a new version of WordPress through Updates/Available Updates (via the Network Administration navigation menu or the Toolbar). Clicking the Upgrade Network button will step through each site in the network, five at a time, and make sure any database updates are applied."
 msgstr "เฉพาะการใช้หน้าจอนี้  คุณจะอัปเดตไปยังรุ่นใหม่ล่าสุดของเวิร์ดเพรสผ่านทาง อัปเดต/การอัปเดตที่ใช้ได้ (ผ่านเมนูควบคุมเครือข่าย หรือ แถบเครื่องมือ)  การกดที่ปุ่มอัปเกรดเครือข่ายจะทำการอัปเดตทีละเว็บในเครือข่าย  ครั้งละห้าเว็บไซต์  และทำให้แน่ใจว่าการอัปเดตฐานข้อมูลใด ๆ นั้นได้อัปเดตด้วย"
 
-#: wp-admin/network/menu.php:22 wp-admin/network/upgrade.php:15
-#: wp-admin/network/upgrade.php:40 wp-admin/network/upgrade.php:131
-msgid "Upgrade Network"
-msgstr "อัปเกรดเครือข่าย"
+#: wp-admin/network/upgrade.php:127
+msgid "WordPress has been updated! Before we send you on your way, we need to individually upgrade the sites in your network."
+msgstr "อัปเดตเวิร์ดเพรสแล้ว  ก่อนที่คุณจะทำสิ่งอื่น  เราต้องการการอัปเกรดทีละเว็บไซต์ในเครือข่ายของคุณ"
 
 #. translators: 1: user login, 2: site url, 3: site name/title
-#: wp-admin/network/site-new.php:146
+#: wp-admin/network/site-new.php:148
 msgid ""
 "New site created by %1$s\n"
 "\n"
@@ -631,400 +648,361 @@ msgstr ""
 "ที่อยู่: %2$s\n"
 "ชื่อ: %3$s"
 
-#: wp-admin/includes/network.php:229 wp-admin/includes/network.php:545
-#: wp-admin/includes/network.php:585
-msgid "Subdirectory networks may not be fully compatible with custom wp-content directories."
-msgstr "เครือข่ายซับไดเรกทอรีอาจจะเข้ากับไดเรกทอรีปรับแต่ง wp-content ได้ไม่เต็มที่"
-
 #: wp-admin/network.php:62
 msgid "Add the designated lines of code to wp-config.php (just before <code>/*...stop editing...*/</code>) and <code>.htaccess</code> (replacing the existing WordPress rules)."
 msgstr "เพิ่มโค้ดบรรทัดที่เพิ่มให้ไปยัง ไฟล์ wp-config.php (ใส่ก่อน <code>/*...stop editing...*/</code>) และไฟล์ <code>.htaccess</code> (แทนที่กฎเวิร์ดเพรสที่มีอยู่)"
 
-#: wp-admin/network/settings.php:35
-msgid "Super admins can no longer be added on the Options screen. You must now go to the list of existing users on Network Admin > Users and click on Username or the Edit action link below that name. This goes to an Edit User page where you can check a box to grant super admin privileges."
-msgstr "ผู้ควบคุมขั้นสูงไม่สามารถเพิ่มบนหน้าจอตัวเลือกได้อีกต่อไป  คุณต้องไปที่รายชื่อผู้ใช้ที่อยู่ในระบบบน ผู้ควบคุมเครือข่าย>ผู้ใช้ แล้วกดที่ชื่อผู้ใช้หรือลิงก์การแก้ไขด้านล่างชื่อนั้น  ซึ่งจะนำคุณไปยังหน้าแก้ไขผู้ไขที่คุณสามารถกดเลือกเพื่อให้สิทธิผู้ควบคุมขั้นสูง"
+#: wp-admin/includes/network.php:238 wp-admin/includes/network.php:554
+#: wp-admin/includes/network.php:594
+msgid "Subdirectory networks may not be fully compatible with custom wp-content directories."
+msgstr "เครือข่ายซับไดเรกทอรีอาจจะเข้ากับไดเรกทอรีปรับแต่ง wp-content ได้ไม่เต็มที่"
 
-#: wp-admin/network/menu.php:19
+#: wp-admin/network/menu.php:29
 msgid "Updates"
 msgstr "อัปเดต"
 
-#: wp-admin/network/site-new.php:24
-msgid "This screen is for Super Admins to add new sites to the network. This is not affected by the registration settings."
-msgstr "หน้าจอนี้สำหรับผู้ควบคุมขั้นสูงเพื่อเพิ่มเว็บไซต์ใหม่ของเครือข่าย  นี่จะไม่มีผลกระทบจากการตั้งค่าการลงทะเบียน"
-
-#: wp-admin/network/sites.php:31
-msgid "An Edit link to a separate Edit Site screen."
-msgstr "ลิงก์แก้ไขเพื่อไปยังหน้าจอแก้ไขแต่ละเว็บ"
-
-#: wp-admin/network/themes.php:224
-msgid "Themes can be enabled on a site by site basis by the network admin on the Edit Site screen (which has a Themes tab); get there via the Edit action link on the All Sites screen. Only network admins are able to install or edit themes."
-msgstr "ธีมสามารถเปิดใช้บนเว็บแตกต่างกันไปโดยผู้ควบคุมเครือข่ายบนหน้าจอแก้ไขเว็บไซต์ (ซึ่งมีแถบธีม) นำธีมมาใช้ผ่านทางลิงก์แก้ไขการกระทำบนหน้าจอเว็บไซต์ทั้งหมด  เฉพาะผู้ควบคุมเครือข่ายเท่านั้นที่สามารถติดตั้งและแก้ไขธีมได้"
-
-#: wp-admin/network/sites.php:34
-msgid "Delete which is a permanent action after the confirmation screens."
-msgstr "การลบจะเป็นการลบอย่างถาวรหลังหน้าจอการยืนยัน"
+#. translators: 1: dashboard url, 2: network admin edit url
+#: wp-admin/network/site-new.php:175
+msgid "Site added. <a href=\"%1$s\">Visit Dashboard</a> or <a href=\"%2$s\">Edit Site</a>"
+msgstr "เพิ่มเว็บไซต์แล้ว <a href=\"%1$s\">เยี่ยมชมหน้าควบคุม</a> หรือ <a href=\"%2$s\">แก้ไขเว็บไซต์</a>"
 
 #: wp-admin/network/sites.php:37
 msgid "Clicking on bold headings can re-sort this table."
 msgstr "กดที่ตัวหนาส่วนหัวจะสามารถเรียงตารางนี้ใหม่ได้"
 
-#: wp-admin/network/menu.php:41 wp-admin/network/themes.php:253
-msgctxt "theme"
-msgid "Add New"
-msgstr "เพิ่มธีมใหม่"
+#: wp-admin/network/sites.php:34
+msgid "Delete which is a permanent action after the confirmation screens."
+msgstr "การลบจะเป็นการลบอย่างถาวรหลังหน้าจอการยืนยัน"
+
+#: wp-admin/network/sites.php:31
+msgid "An Edit link to a separate Edit Site screen."
+msgstr "ลิงก์แก้ไขเพื่อไปยังหน้าจอแก้ไขแต่ละเว็บ"
+
+#: wp-admin/network/site-new.php:24
+msgid "This screen is for Super Admins to add new sites to the network. This is not affected by the registration settings."
+msgstr "หน้าจอนี้สำหรับผู้ควบคุมขั้นสูงเพื่อเพิ่มเว็บไซต์ใหม่ของเครือข่าย  นี่จะไม่มีผลกระทบจากการตั้งค่าการลงทะเบียน"
+
+#: wp-admin/network/settings.php:55
+msgid "Super admins can no longer be added on the Options screen. You must now go to the list of existing users on Network Admin > Users and click on Username or the Edit action link below that name. This goes to an Edit User page where you can check a box to grant super admin privileges."
+msgstr "ผู้ควบคุมขั้นสูงไม่สามารถเพิ่มบนหน้าจอตัวเลือกได้อีกต่อไป  คุณต้องไปที่รายชื่อผู้ใช้ที่อยู่ในระบบบน ผู้ควบคุมเครือข่าย>ผู้ใช้ แล้วกดที่ชื่อผู้ใช้หรือลิงก์การแก้ไขด้านล่างชื่อนั้น  ซึ่งจะนำคุณไปยังหน้าแก้ไขผู้ไขที่คุณสามารถกดเลือกเพื่อให้สิทธิผู้ควบคุมขั้นสูง"
 
 #: wp-admin/network/sites.php:28
 msgid "Add New takes you to the Add New Site screen. You can search for a site by Name, ID number, or IP address. Screen Options allows you to choose how many sites to display on one page."
 msgstr "เมนูเพิ่มเว็บใหม่จะนำคุณไปยังหน้าจอเพิ่มเว็บไซต์ใหม่  คุณสามารถค้นหาเว็บไซต์โดยชื่อ  เลขที่เว็บ หรือ IP address หน้าจอตัวเลือกอนุญาตให้คุณเลือกว่าในหนึ่งหน้าจะมีจำนวนเว็บกี่เว็บที่นำมาแสดง"
 
-#. translators: 1: dashboard url, 2: network admin edit url
-#: wp-admin/network/site-new.php:173
-msgid "Site added. <a href=\"%1$s\">Visit Dashboard</a> or <a href=\"%2$s\">Edit Site</a>"
-msgstr "เพิ่มเว็บไซต์แล้ว <a href=\"%1$s\">เยี่ยมชมหน้าควบคุม</a> หรือ <a href=\"%2$s\">แก้ไขเว็บไซต์</a>"
-
-#: wp-admin/network/menu.php:28
-msgid "All Sites"
-msgstr "เว็บไซต์ทั้งหมด"
-
-#: wp-admin/network/menu.php:36
-msgid "Themes %s"
-msgstr "ธีม %s"
-
-#: wp-admin/network/menu.php:40
-msgid "Installed Themes"
-msgstr "ธีมที่ติดตั้งแล้ว"
-
-#: wp-admin/network/site-settings.php:80
-msgid "Site options updated."
-msgstr "อัปเดตตัวเลือกเว็บไซต์แล้ว"
-
-#: wp-admin/network/settings.php:328
-msgid "Language Settings"
-msgstr "การตั้งค่าภาษา"
-
-#: wp-admin/network/settings.php:164
-msgid "Allow site administrators to add new users to their site via the \"Users &rarr; Add New\" page."
-msgstr "อนุญาตผู้ควบคุมเว็บในการเพิ่มผู้ใช้ใหม่ไปยังเว็บไซต์ของพวกเขาผ่านหน้า \"ผู้ใช้ &rarr; เพิ่มผู้ใช้ใหม่\""
-
 #: wp-admin/network/sites.php:32
 msgid "Dashboard leads to the Dashboard for that site."
 msgstr "หน้าควบคุมนำไปสู่หน้าควบคุมสำหรับเว็บนั้น"
 
-#: wp-admin/network/site-info.php:21 wp-admin/network/site-settings.php:20
-#: wp-admin/network/site-themes.php:20 wp-admin/network/site-users.php:23
-msgid "The menu is for editing information specific to individual sites, particularly if the admin area of a site is unavailable."
-msgstr "เมนูใช้สำหรับการแก้ไขข้อมูลเฉพาะไปยังแต่ละเว็บไซต์  โดยเฉพาะถ้าพื้นที่ผู้ควบคุณของเว็บไซต์นั้นใช้งานไม่ได้"
+#: wp-admin/network/settings.php:202
+msgid "Allow site administrators to add new users to their site via the \"Users &rarr; Add New\" page"
+msgstr "อนุญาตผู้ควบคุมเว็บในการเพิ่มผู้ใช้ใหม่ไปยังเว็บไซต์ของพวกเขาผ่านหน้า \"ผู้ใช้ &rarr; เพิ่มผู้ใช้ใหม่\""
+
+#: wp-admin/network/settings.php:366
+msgid "Language Settings"
+msgstr "การตั้งค่าภาษา"
+
+#: wp-admin/network/site-settings.php:66
+msgid "Site options updated."
+msgstr "อัปเดตตัวเลือกเว็บไซต์แล้ว"
+
+#: wp-admin/network/menu.php:40
+msgid "All Sites"
+msgstr "เว็บไซต์ทั้งหมด"
 
 #: wp-admin/network/site-info.php:23 wp-admin/network/site-settings.php:22
-#: wp-admin/network/site-themes.php:22 wp-admin/network/site-users.php:25
-msgid "<strong>Users</strong> &mdash; This displays the users associated with this site. You can also change their role, reset their password, or remove them from the site. Removing the user from the site does not remove the user from the network."
-msgstr "<strong>ผู้ใช้</strong> &mdash; นี่จะแสดงผู้ใช้ที่มีส่วนร่วมกับเว็บไซต์นี้  คุณยังสามารถเปลี่ยนบทบาทของพวกเขา  ล้างค่ารหัสผ่านของพวกเขา  หรือลบพวกเขาออกจากเว็บไซต์  การลบผู้ใช้ออกจากเว็บไซต์จะไม่ลบผู้ใช้ออกจากเครือข่าย"
-
-#: wp-admin/network/site-info.php:22 wp-admin/network/site-settings.php:21
-#: wp-admin/network/site-themes.php:21 wp-admin/network/site-users.php:24
-msgid "<strong>Info</strong> &mdash; The site URL is rarely edited as this can cause the site to not work properly. The Registered date and Last Updated date are displayed. Network admins can mark a site as archived, spam, deleted and mature, to remove from public listings or disable."
-msgstr "<strong>หมายเหตุ</strong> &mdash; URL เว็บไซต์ไม่ค่อยถูกแก้ไขเพราะจะทำให้เว็บทำงานไม่ถูกต้อง  วันที่ลงทะเบียนและวันที่อัปเดตล่าสุดถูกแสดง  ผู้ควบคุมเครือข่ายสามารถบันทึกเว็บเข้าคลังเก็บ เป็นสแปม  ลบทิ้งและเว็บสำหรับผู้ใหญ่  เพื่อลบออกจากรายชื่อที่แสดงให้คนทั่วไปเห็นหรือปิดการใช้งาน"
-
-#: wp-admin/network/site-info.php:25 wp-admin/network/site-settings.php:24
-#: wp-admin/network/site-themes.php:24 wp-admin/network/site-users.php:27
-msgid "<strong>Settings</strong> &mdash; This page shows a list of all settings associated with this site. Some are created by WordPress and others are created by plugins you activate. Note that some fields are grayed out and say Serialized Data. You cannot modify these values due to the way the setting is stored in the database."
-msgstr "<strong>การตั้งค่า</strong> &mdash; หน้านี้จะแสดงรายชื่อการตั้งค่าทั้งหมดที่ทำงานได้กับเว็บไซต์นี้  บางอย่างถูกสร้างขึ้นโดยเวิร์ดเพรส  และบางอย่างถูกสร้างขึ้นจากปลั๊กอินที่คุณเปิดใช้อยู่  หมายเหตุมีบางช่องที่เป็นสีเทาและบอกว่าเป็นข้อมูลลำดับขั้น  คุณไม่สามารถปรับแต่งค่าเหล่านี้เพราะว่าวิธีตั้งค่านั้นเก็บอยู่ในฐานข้อมูล"
-
-#: wp-admin/network/themes.php:171
-msgid "No, return me to the theme list"
-msgstr "ไม่ต้อง พาฉันกลับไปที่รายชื่อธีม"
-
-#. translators: %s: site name
-#: wp-admin/network/site-info.php:131 wp-admin/network/site-settings.php:84
-#: wp-admin/network/site-themes.php:167 wp-admin/network/site-users.php:200
-msgid "Edit Site: %s"
-msgstr "แก้ไขเว็บไซต์: %s"
-
-#: wp-admin/network/site-info.php:24 wp-admin/network/site-settings.php:23
-#: wp-admin/network/site-themes.php:23 wp-admin/network/site-users.php:26
-msgid "<strong>Themes</strong> &mdash; This area shows themes that are not already enabled across the network. Enabling a theme in this menu makes it accessible to this site. It does not activate the theme, but allows it to show in the site&#8217;s Appearance menu. To enable a theme for the entire network, see the <a href=\"%s\">Network Themes</a> screen."
-msgstr "<strong>ธีม</strong> &mdash; พื้นที่นี้จะแสดงธีมที่ยังไม่ได้เปิดใช้งานบนเครือข่าย  การเปิดใช้งานธีมในเมนูนี้จะทำให้มันทำงานเพื่อเว็บนี้  มันไม่ใช่การเปิดใช้งานธีม  เพียงแต่อนุญาตให้มันแสดงในเมนูรูปแบบเว็บไซต์  เพื่อเปิดใช้ธีมสำหรับเครือข่ายทั้งหมด  โปรดดูที่หน้าจอ <a href=\"%s\"> ธีมของเครือข่าย</a>"
-
-#: wp-admin/network/site-themes.php:201 wp-admin/network/themes.php:291
-msgid "No theme selected."
-msgstr "ไม่มีธีมที่ถูกเลือก"
-
-#: wp-admin/network/site-themes.php:187 wp-admin/network/themes.php:269
-msgid "Theme enabled."
-msgstr "เปิดใช้งาน %s ธีมแล้ว"
-
-#: wp-admin/network/site-info.php:37 wp-admin/network/site-settings.php:36
-#: wp-admin/network/site-themes.php:57 wp-admin/network/site-users.php:52
+#: wp-admin/network/site-themes.php:43 wp-admin/network/site-users.php:38
 msgid "Invalid site ID."
 msgstr "เลขที่เว็บไซต์ไม่ถูกต้อง"
 
-#: wp-admin/network/site-themes.php:195 wp-admin/network/themes.php:277
-msgid "Theme disabled."
-msgstr "ปิดการใช้งาน %s ธีมแล้ว"
+#. translators: %s: site name
+#: wp-admin/network/site-info.php:117 wp-admin/network/site-settings.php:70
+#: wp-admin/network/site-themes.php:153 wp-admin/network/site-users.php:196
+msgid "Edit Site: %s"
+msgstr "แก้ไขเว็บไซต์: %s"
 
-#: wp-admin/network/user-new.php:20
-msgid "Add User will set up a new user account on the network and send that person an email with username and password."
-msgstr "เพิ่มผู้ใช้จะตั้งค่าบัญชีผู้ใช้ใหม่บนเครือข่ายและส่งอีเมลให้บุคคลนั้นบอกรายละเอียดชื่อผู้ใช้และรหัสผ่าน"
-
-#: wp-admin/network/site-themes.php:204
-msgid "Network enabled themes are not shown on this screen."
-msgstr "เครือข่ายเปิดใช้ธีมที่ไม่ได้แสดงบนหน้าจอนี้"
-
-#: wp-admin/network/menu.php:55 wp-admin/network/settings.php:19
-msgid "Network Settings"
-msgstr "การตั้งค่าเครือข่าย"
-
-#: wp-admin/network/themes.php:125
-msgid "Delete Theme"
-msgstr "ลบธีม"
-
-#: wp-admin/network/themes.php:126
-msgid "This theme may be active on other sites in the network."
-msgstr "ธีมเหล่านี้อาจจะใช้งานอยู่บนเว็บอื่น ๆ ในเครือข่าย"
-
-#: wp-admin/network/themes.php:127
-msgid "You are about to remove the following theme:"
-msgstr "คุณกำลังจะลบธีมต่อไปนี้:"
-
-#: wp-admin/network/themes.php:161
-msgid "Yes, delete this theme"
-msgstr "ใช่ ลบธีมนี้"
-
-#: wp-admin/network/themes.php:148
-msgid "Are you sure you wish to delete these themes?"
-msgstr "คุณแน่ใจหรือว่าต้องการลบธีมเหล่านี้"
-
-#: wp-admin/network/site-new.php:179 wp-admin/network/site-new.php:189
-msgid "Add New Site"
-msgstr "เพิ่มเว็บไซต์ใหม่"
-
-#: wp-admin/network/themes.php:293
-msgid "You cannot delete a theme while it is active on the main site."
-msgstr "คุณไม่สามารถลบธีมในระหว่างที่มันเปิดใช้งานบนเว็บหลัก"
-
-#: wp-admin/network/site-users.php:241
-msgid "Enter the username of an existing user."
-msgstr "ใส่ชื่อผู้ใช้ของผู้ใช้ในระบบ"
-
-#: wp-admin/network/site-info.php:126
-msgid "Site info updated."
-msgstr "อัปเดตข้อมูลเว็บแล้ว"
-
-#: wp-admin/network/site-users.php:238
+#: wp-admin/network/site-users.php:234
 msgid "User is already a member of this site."
 msgstr "ผู้ใช้เป็นสมาชิกของเว็บไซต์นี้อยู่แล้ว"
 
-#: wp-admin/network/sites.php:144
-msgid "Sorry, you are not allowed to delete the site."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบเว็บนี้"
+#: wp-admin/network/site-info.php:112
+msgid "Site info updated."
+msgstr "อัปเดตข้อมูลเว็บแล้ว"
+
+#: wp-admin/network/site-users.php:240
+msgid "Enter the username of an existing user."
+msgstr "ใส่ชื่อผู้ใช้ของผู้ใช้ในระบบ"
+
+#: wp-admin/network/site-new.php:181 wp-admin/network/site-new.php:191
+msgid "Add New Site"
+msgstr "เพิ่มเว็บไซต์ใหม่"
+
+#: wp-admin/network/menu.php:67 wp-admin/network/settings.php:19
+msgid "Network Settings"
+msgstr "การตั้งค่าเครือข่าย"
+
+#: wp-admin/network/site-users.php:246
+msgid "Select a user to change role."
+msgstr "เลือกผู้ใช้ที่จะเปลี่ยนบทบาท"
+
+#: wp-admin/network/site-users.php:252
+msgid "Select a user to remove."
+msgstr "เลือกผู้ใช้ที่จะลบ"
+
+#: wp-admin/network/site-users.php:255
+msgid "User created."
+msgstr "สร้างผู้ใช้แล้ว"
+
+#: wp-admin/network/site-users.php:310 wp-admin/network/user-new.php:129
+msgid "Add User"
+msgstr "เพิ่มผู้ใช้"
 
 #: wp-admin/network/user-new.php:49
 msgid "Cannot add user."
 msgstr "ไม่สามารถเพิ่มผู้ใช้"
 
-#: wp-admin/network/site-users.php:307 wp-admin/network/user-new.php:129
-msgid "Add User"
-msgstr "เพิ่มผู้ใช้"
+#: wp-admin/network/themes.php:171
+msgid "No, return me to the theme list"
+msgstr "ไม่ต้อง พาฉันกลับไปที่รายชื่อธีม"
 
-#: wp-admin/network/site-users.php:256
-msgid "User created."
-msgstr "สร้างผู้ใช้แล้ว"
+#: wp-admin/network/themes.php:161
+msgid "Yes, delete this theme"
+msgstr "ใช่ ลบธีมนี้"
 
-#: wp-admin/network/site-users.php:253
-msgid "Select a user to remove."
-msgstr "เลือกผู้ใช้ที่จะลบ"
-
-#: wp-admin/network/site-users.php:247
-msgid "Select a user to change role."
-msgstr "เลือกผู้ใช้ที่จะเปลี่ยนบทบาท"
-
-#: wp-admin/network/site-users.php:259
+#: wp-admin/network/site-users.php:258
 msgid "Enter the username and email."
 msgstr "ใส่ชื่อผู้ใช้และอีเมล"
 
-#: wp-admin/network.php:63
-msgid "Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar."
-msgstr "เมื่อคุณเพิ่มโค้ดนี้และโหลดเบราว์เซอร์ของคุณใหม่  การทำงานหลายเว็บไซต์ควรจะเปิดใช้งานแล้ว  หน้าจอนี้ ซึ่งเวลานี้ในเมนูนำทางผู้ควบคุมเครือข่าย  จะเก็บโค้ดเพิ่มเติมเข้าคลัง  คุณสามารถสลับไปมาระหว่างผู้ควบคุมเครือข่ายและผู้ควบคุมเว็บโดยกดบนผู้ควบคุมเครือข่ายหรือชื่อแต่ละเว็บภายใต้เมนูเลื่อนลงเว็บไซต์ของฉันในแถบเครื่องมือ"
+#: wp-admin/network/user-new.php:20
+msgid "Add User will set up a new user account on the network and send that person an email with username and password."
+msgstr "เพิ่มผู้ใช้จะตั้งค่าบัญชีผู้ใช้ใหม่บนเครือข่ายและส่งอีเมลให้บุคคลนั้นบอกรายละเอียดชื่อผู้ใช้และรหัสผ่าน"
 
-#: wp-admin/includes/network.php:140
+#: wp-admin/network/themes.php:293
+msgid "You cannot delete a theme while it is active on the main site."
+msgstr "คุณไม่สามารถลบธีมในระหว่างที่มันเปิดใช้งานบนเว็บหลัก"
+
+#: wp-admin/network/themes.php:148
+msgid "Are you sure you wish to delete these themes?"
+msgstr "คุณแน่ใจหรือว่าต้องการลบธีมเหล่านี้"
+
+#: wp-admin/network/themes.php:127
+msgid "You are about to remove the following theme:"
+msgstr "คุณกำลังจะลบธีมต่อไปนี้:"
+
+#: wp-admin/network/themes.php:126
+msgid "This theme may be active on other sites in the network."
+msgstr "ธีมเหล่านี้อาจจะใช้งานอยู่บนเว็บอื่น ๆ ในเครือข่าย"
+
+#: wp-admin/network/themes.php:125
+msgid "Delete Theme"
+msgstr "ลบธีม"
+
+#: wp-admin/network/site-themes.php:190
+msgid "Network enabled themes are not shown on this screen."
+msgstr "เครือข่ายเปิดใช้ธีมที่ไม่ได้แสดงบนหน้าจอนี้"
+
+#: wp-admin/network/site-themes.php:181 wp-admin/network/themes.php:277
+msgid "Theme disabled."
+msgstr "ปิดการใช้งาน %s ธีมแล้ว"
+
+#: wp-admin/network/site-themes.php:173 wp-admin/network/themes.php:269
+msgid "Theme enabled."
+msgstr "เปิดใช้งาน %s ธีมแล้ว"
+
+#: wp-admin/network/site-themes.php:187 wp-admin/network/themes.php:291
+msgid "No theme selected."
+msgstr "ไม่มีธีมที่ถูกเลือก"
+
+#: wp-admin/network/menu.php:52
+msgid "Installed Themes"
+msgstr "ธีมที่ติดตั้งแล้ว"
+
+#: wp-admin/network/menu.php:48
+msgid "Themes %s"
+msgstr "ธีม %s"
+
+#: wp-admin/network/menu.php:53 wp-admin/network/themes.php:253
+msgctxt "theme"
+msgid "Add New"
+msgstr "เพิ่มธีมใหม่"
+
+#: wp-admin/network/themes.php:224
+msgid "Themes can be enabled on a site by site basis by the network admin on the Edit Site screen (which has a Themes tab); get there via the Edit action link on the All Sites screen. Only network admins are able to install or edit themes."
+msgstr "ธีมสามารถเปิดใช้บนเว็บแตกต่างกันไปโดยผู้ควบคุมเครือข่ายบนหน้าจอแก้ไขเว็บไซต์ (ซึ่งมีแถบธีม) นำธีมมาใช้ผ่านทางลิงก์แก้ไขการกระทำบนหน้าจอเว็บไซต์ทั้งหมด  เฉพาะผู้ควบคุมเครือข่ายเท่านั้นที่สามารถติดตั้งและแก้ไขธีมได้"
+
+#: wp-admin/network/sites.php:149
+msgid "Sorry, you are not allowed to delete the site %s."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้ลบเว็บ %s"
+
+#: wp-admin/includes/network.php:149
 msgid "ERROR: The network could not be created."
 msgstr "ผิดพลาด: ไม่สามารถสร้างเครือข่ายได้"
-
-#: wp-admin/includes/network.php:216
-msgid "Sub-directories"
-msgstr "ซับไดเรกทอรี"
-
-#: wp-admin/network.php:71
-msgid "Network"
-msgstr "เครือข่าย"
-
-#. translators: 1: hostname
-#: wp-admin/includes/network.php:211
-msgctxt "subdomain examples"
-msgid "like <code>site1.%1$s</code> and <code>site2.%1$s</code>"
-msgstr "เช่น <code>เว็บ1.%1$s</code> และ <code>เว็บ2.%1$s</code>"
-
-#: wp-admin/includes/network.php:201
-msgid "Addresses of Sites in your Network"
-msgstr "ที่อยู่เว็บในเครือข่ายของคุณ"
-
-#: wp-admin/includes/network.php:113 wp-admin/includes/network.php:373
-#: wp-admin/includes/network.php:545 wp-admin/includes/network.php:585
-msgid "Warning:"
-msgstr "คำเตือน:"
-
-#: wp-admin/network.php:29
-msgid "The Network creation panel is not for WordPress MU networks."
-msgstr "แถบเครื่องมือสร้างเครือข่ายไม่ได้มีสำหรับเครือข่ายเวิร์ดเพรสมิว"
-
-#: wp-admin/includes/network.php:128
-msgid "Return to Dashboard"
-msgstr "กลับไปหน้าควบคุม"
 
 #: wp-admin/network.php:55
 msgid "Create a Network of WordPress Sites"
 msgstr "สร้างเครือข่ายของเว็บเวิร์ดเพรส"
 
-#: wp-admin/network.php:59
-msgid "This screen allows you to configure a network as having subdomains (<code>site1.example.com</code>) or subdirectories (<code>example.com/site1</code>). Subdomains require wildcard subdomains to be enabled in Apache and DNS records, if your host allows it."
-msgstr "หน้าจอนี้อนุญาตให้คุณปรับแต่งเครือข่ายเป็น subdomains (<code>site1.example.com</code>) หรือ subdirectories (<code>example.com/site1</code>). การตั้งค่า Subdomains นั้นต้องการการเปิดใช้ wildcard subdomains ใน Apache และ DNS records ถ้าโฮสท์ของคุณอนุญาตการติดตั้งแบบนี้"
+#: wp-admin/includes/network.php:117 wp-admin/includes/network.php:189
+#: wp-admin/includes/network.php:238 wp-admin/includes/network.php:279
+#: wp-admin/includes/network.php:289 wp-admin/includes/network.php:382
+#: wp-admin/includes/network.php:554 wp-admin/includes/network.php:594
+msgid "Warning:"
+msgstr "คำเตือน:"
 
-#: wp-admin/includes/network.php:260 wp-admin/includes/network.php:275
-msgid "Sub-directory Install"
-msgstr "การติดตั้งซับไดเรกทอรี"
+#: wp-admin/network.php:71
+msgid "Network"
+msgstr "เครือข่าย"
 
-#: wp-admin/includes/network.php:113
-msgid "Please <a href=\"%s\">deactivate your plugins</a> before enabling the Network feature."
-msgstr "โปรด <a href=\"%s\">ปิดการใช้งานปลั๊กอินของคุณ</a> ก่อนเปิดใช้งานเครือข่าย"
+#: wp-admin/includes/network.php:484
+msgid "To make your installation more secure, you should also add:"
+msgstr "เพื่อให้การติดตั้งของคุณปลอดภัยมากขึ้น  คุณควรจะเพิ่ม:"
 
-#: wp-admin/includes/network.php:113
-msgid "Once the network is created, you may reactivate your plugins."
-msgstr "เมื่อสร้างเครือข่ายแล้ว คุณอาจจะเปิดใช้งานปลั๊กอินของคุณอีกครั้ง"
+#: wp-admin/includes/network.php:265
+msgid "Network Details"
+msgstr "รายละเอียดเครือข่าย"
+
+#: wp-admin/includes/network.php:169
+msgid "Welcome to the Network installation process!"
+msgstr "ยินดีต้อนรับสู่ขั้นตอนการติดตั้งเครือข่าย"
+
+#: wp-admin/includes/network.php:382
+msgid "An existing WordPress network was detected."
+msgstr "ตรวจพบว่ามีเครือข่ายเวิร์ดเพรสอยู่แล้ว"
+
+#: wp-admin/includes/network.php:394
+msgid "Enabling the Network"
+msgstr "เปิดใช้งานเครือข่าย"
+
+#: wp-admin/network.php:29
+msgid "The Network creation panel is not for WordPress MU networks."
+msgstr "แถบเครื่องมือสร้างเครือข่ายไม่ได้มีสำหรับเครือข่ายเวิร์ดเพรสมิว"
 
 #: wp-admin/network.php:64
 msgid "The choice of subdirectory sites is disabled if this setup is more than a month old because of permalink problems with &#8220;/blog/&#8221; from the main site. This disabling will be addressed in a future version."
 msgstr "ตัวเลือกการสร้างเว็บไซต์แบบ subdirectory ถูกปิดการใช้งาน  ถ้าการติดตั้งนี้นานเกินหนึ่งเดือน  เพราะปัญหาลิงก์ถาวรกับ &#8220;/บล็อก/&#8221; จากเว็บไซต์หลัก  การปิดการใช้งานจะระบุในรุ่นต่อ ๆ ไป"
 
-#: wp-admin/includes/network.php:160
-msgid "Welcome to the Network installation process!"
-msgstr "ยินดีต้อนรับสู่ขั้นตอนการติดตั้งเครือข่าย"
+#: wp-admin/network.php:59
+msgid "This screen allows you to configure a network as having subdomains (<code>site1.example.com</code>) or subdirectories (<code>example.com/site1</code>). Subdomains require wildcard subdomains to be enabled in Apache and DNS records, if your host allows it."
+msgstr "หน้าจอนี้อนุญาตให้คุณปรับแต่งเครือข่ายเป็น subdomains (<code>site1.example.com</code>) หรือ subdirectories (<code>example.com/site1</code>). การตั้งค่า Subdomains นั้นต้องการการเปิดใช้ wildcard subdomains ใน Apache และ DNS records ถ้าโฮสท์ของคุณอนุญาตการติดตั้งแบบนี้"
 
-#: wp-admin/includes/network.php:256
-msgid "Network Details"
-msgstr "รายละเอียดเครือข่าย"
+#: wp-admin/network.php:63
+msgid "Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar."
+msgstr "เมื่อคุณเพิ่มโค้ดนี้และโหลดเบราว์เซอร์ของคุณใหม่  การทำงานหลายเว็บไซต์ควรจะเปิดใช้งานแล้ว  หน้าจอนี้ ซึ่งเวลานี้ในเมนูนำทางผู้ควบคุมเครือข่าย  จะเก็บโค้ดเพิ่มเติมเข้าคลัง  คุณสามารถสลับไปมาระหว่างผู้ควบคุมเครือข่ายและผู้ควบคุมเว็บโดยกดบนผู้ควบคุมเครือข่ายหรือชื่อแต่ละเว็บภายใต้เมนูเลื่อนลงเว็บไซต์ของฉันในแถบเครื่องมือ"
 
-#: wp-admin/includes/network.php:105
-msgid "The constant DO_NOT_UPGRADE_GLOBAL_TABLES cannot be defined when creating a network."
-msgstr "ค่าตัวแปร DO_NOT_UPGRADE_GLOBAL_TABLES ไม่สามารถกำหนดได้เมื่อกำลังสร้างเครือข่าย"
+#: wp-admin/includes/network.php:243 wp-admin/includes/network.php:253
+#: wp-admin/includes/network.php:302
+msgid "Server Address"
+msgstr "ที่อยู่เซิร์ฟเวอร์"
 
-#: wp-admin/includes/network.php:594
-msgid "Once you complete these steps, your network is enabled and configured. You will have to log in again."
-msgstr "เมื่อคุณทำขั้นตอนเหล่านี้สำเร็จ  เครือข่ายของคุณจะเปิดใช้งานและตั้งค่าเรียบร้อยแล้ว  คุณจะต้องเข้าสู่ระบบอีกครั้ง"
+#: wp-admin/includes/network.php:313 wp-admin/network/settings.php:125
+msgid "Network Title"
+msgstr "หัวข้อเครือข่าย"
 
 #: wp-admin/network.php:61
 msgid "The next screen for Network Setup will give you individually-generated lines of code to add to your wp-config.php and .htaccess files. Make sure the settings of your FTP client make files starting with a dot visible, so that you can find .htaccess; you may have to create this file if it really is not there. Make backup copies of those two files."
 msgstr "หน้าจอต่ไปสำหรับตั้งค่าเครือข่ายจะให้โค้ดเฉพาะที่สร้างขึ้นแต่ละบรรทัด เพื่อนำไปเพิ่มในไฟล์ wp-config.php และ .htaccess ของคุณ  โปรดมั่นใจว่าการตั้งค่า FTP client ของคุณจะมองเห็นไฟล์ที่เริ่มต้นด้วย \".\"  เพื่อที่คุณจะค้นหาไฟล์ .htaccess ได้; คุณอาจต้องสร้างไฟล์นี้ถ้ามันไม่มีอยู่  ทำไฟล์สำรองสำหรับทั้งสองไฟล์ด้วย"
 
-#: wp-admin/network.php:60
-msgid "Choose subdomains or subdirectories; this can only be switched afterwards by reconfiguring your install. Fill out the network details, and click install. If this does not work, you may have to add a wildcard DNS record (for subdomains) or change to another setting in Permalinks (for subdirectories)."
-msgstr "เลือก subdomains หรือ subdirectories; นี่สามารถเปลี่ยนภายหลังโดยปรับแต่งการติดตั้งของคุณอีกครั้งเท่านั้น  ใส่ข้อมูลเครือข่าย  แล้วกดติดตั้ง  ถ้าสิ่งนี้ไม่ทำงาน  คุณอาจจะต้องเพิ่ม wildcard DNS record (สำหรับ subdomains) หรือเปลี่ยนไปการตั้งค่าอื่นในลิงก์ถาวร (สำหรับ subdirectories)"
-
-#: wp-admin/includes/network.php:475
-msgid "To make your installation more secure, you should also add:"
-msgstr "เพื่อให้การติดตั้งของคุณปลอดภัยมากขึ้น  คุณควรจะเพิ่ม:"
-
-#: wp-admin/includes/network.php:208
-msgid "Sub-domains"
-msgstr "ซับโดเมน"
-
-#: wp-admin/includes/network.php:180 wp-admin/includes/network.php:229
-#: wp-admin/includes/network.php:270 wp-admin/includes/network.php:280
-msgid "Warning!"
-msgstr "คำเตือน"
-
-#: wp-admin/includes/network.php:204
-msgid "You will need a wildcard DNS record if you are going to use the virtual host (sub-domain) functionality."
-msgstr "คุณจะต้องการ wildcard DNS record ถ้าคุณกำลังจะใช้คำสั่งโฮสท์เสมือน (ซับโดเมน)"
-
-#: wp-admin/includes/network.php:122
-msgid "You cannot install a network of sites with your server address."
-msgstr "คุณไม่สามารถติดตั้งเครือข่ายของเว็บด้วยที่อยู่เซิร์ฟเวอร์ของคุณ"
-
-#: wp-admin/includes/network.php:161
-msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
-msgstr "กรอกข้อมูลด้านล่างแล้วคุณจะเข้าสู่การสร้างเครือข่ายของเว็บเวิร์ดเพรส  เราจะสร้างไฟล์ปรับแต่งในขั้นตอนต่อไป"
-
-#: wp-admin/includes/network.php:386
-msgid "Complete the following steps to enable the features for creating a network of sites."
-msgstr "ทำตามขั้นตอนให้เสร็จสิ้นเพื่อเปิดใช้งานคำสั่งสร้างเครือข่ายของเว็บ"
-
-#: wp-admin/includes/network.php:385
-msgid "Enabling the Network"
-msgstr "เปิดใช้งานเครือข่าย"
-
-#: wp-admin/includes/network.php:374
-msgid "Please complete the configuration steps. To create a new network, you will need to empty or remove the network database tables."
-msgstr "โปรดทำขั้นตอนการปรับแต่งให้จบ  เพื่อสร้างเครือข่ายใหม่ คุณจะต้องล้างค่าหรือลบตารางฐานข้อมูลเครือข่าย"
-
-#: wp-admin/includes/network.php:373
-msgid "An existing WordPress network was detected."
-msgstr "ตรวจพบว่ามีเครือข่ายเวิร์ดเพรสอยู่แล้ว"
-
-#: wp-admin/includes/network.php:368
-msgid "The original configuration steps are shown here for reference."
-msgstr "ขั้นตอนการปรับแต่งเริ่มต้นถูกแสดงที่นี่เพื่อการอ้างอิง"
-
-#: wp-admin/includes/network.php:317
+#: wp-admin/includes/network.php:326
 msgid "Your email address."
 msgstr "ที่อยู่อีเมลของคุณ"
 
-#: wp-admin/includes/network.php:308
+#: wp-admin/includes/network.php:603
+msgid "Once you complete these steps, your network is enabled and configured. You will have to log in again."
+msgstr "เมื่อคุณทำขั้นตอนเหล่านี้สำเร็จ  เครือข่ายของคุณจะเปิดใช้งานและตั้งค่าเรียบร้อยแล้ว  คุณจะต้องเข้าสู่ระบบอีกครั้ง"
+
+#: wp-admin/includes/network.php:395
+msgid "Complete the following steps to enable the features for creating a network of sites."
+msgstr "ทำตามขั้นตอนให้เสร็จสิ้นเพื่อเปิดใช้งานคำสั่งสร้างเครือข่ายของเว็บ"
+
+#: wp-admin/includes/network.php:317
 msgid "What would you like to call your network?"
 msgstr "คุณอยากเรียกเครือข่ายนี้ว่าอะไร?"
 
-#: wp-admin/includes/network.php:304 wp-admin/network/settings.php:105
-msgid "Network Title"
-msgstr "หัวข้อเครือข่าย"
+#. translators: 1: hostname
+#: wp-admin/includes/network.php:220
+msgctxt "subdomain examples"
+msgid "like <code>site1.%1$s</code> and <code>site2.%1$s</code>"
+msgstr "เช่น <code>เว็บ1.%1$s</code> และ <code>เว็บ2.%1$s</code>"
 
-#: wp-admin/includes/network.php:286
-msgid "Because your install is not new, the sites in your WordPress network must use sub-domains."
-msgstr "เพราะว่าการติดตั้งของคุณไม่ใช่การติดตั้งใหม่ เว็บในเครือข่ายเวิร์ดเพรสของคุณต้องใช้งานแบบซับโดเมน"
-
-#: wp-admin/includes/network.php:285
-msgid "Sub-domain Install"
-msgstr "การติดตั้งซับโดเมน"
-
-#: wp-admin/includes/network.php:277
-msgid "Because your install is in a directory, the sites in your WordPress network must use sub-directories."
-msgstr "เพราะว่าการติดตั้งของคุณอยู่ในไดเรกทอรี เว็บในเครือข่ายเวิร์ดเพรสของคุณต้องใช้งานแบบซับไดเรกทอรี"
-
-#: wp-admin/includes/network.php:270 wp-admin/includes/network.php:280
-#: wp-admin/includes/network.php:287
-msgid "The main site in a sub-directory install will need to use a modified permalink structure, potentially breaking existing links."
-msgstr "เว็บหลักในการติดตั้งแบบซับไดเรกทอรีจะต้องใช้การปรับแต่งโครงสร้างลิงก์ถาวร  ซึ่งมีความเป็นไปได้ที่จะทำให้ลิงก์ที่มีอยู่ทั้งหมดเสียหาย"
-
-#: wp-admin/includes/network.php:234 wp-admin/includes/network.php:244
-#: wp-admin/includes/network.php:293
-msgid "Server Address"
-msgstr "ที่อยู่เซิร์ฟเวอร์"
+#: wp-admin/includes/network.php:225
+msgid "Sub-directories"
+msgstr "ซับไดเรกทอรี"
 
 #. translators: 1: hostname
-#: wp-admin/includes/network.php:219
+#: wp-admin/includes/network.php:228
 msgctxt "subdirectory examples"
 msgid "like <code>%1$s/site1</code> and <code>%1$s/site2</code>"
 msgstr "เช่น <code>%1$s/เว็บ1</code> และ <code>%1$s/เว็บ2</code>"
+
+#: wp-admin/includes/network.php:210
+msgid "Addresses of Sites in your Network"
+msgstr "ที่อยู่เว็บในเครือข่ายของคุณ"
+
+#: wp-admin/includes/network.php:137
+msgid "Return to Dashboard"
+msgstr "กลับไปหน้าควบคุม"
+
+#. translators: %s: Plugins screen URL
+#: wp-admin/includes/network.php:119
+msgid "Please <a href=\"%s\">deactivate your plugins</a> before enabling the Network feature."
+msgstr "โปรด <a href=\"%s\">ปิดการใช้งานปลั๊กอินของคุณ</a> ก่อนเปิดใช้งานเครือข่าย"
+
+#: wp-admin/includes/network.php:131
+msgid "You cannot install a network of sites with your server address."
+msgstr "คุณไม่สามารถติดตั้งเครือข่ายของเว็บด้วยที่อยู่เซิร์ฟเวอร์ของคุณ"
+
+#: wp-admin/includes/network.php:377
+msgid "The original configuration steps are shown here for reference."
+msgstr "ขั้นตอนการปรับแต่งเริ่มต้นถูกแสดงที่นี่เพื่อการอ้างอิง"
+
+#: wp-admin/includes/network.php:383
+msgid "Please complete the configuration steps. To create a new network, you will need to empty or remove the network database tables."
+msgstr "โปรดทำขั้นตอนการปรับแต่งให้จบ  เพื่อสร้างเครือข่ายใหม่ คุณจะต้องล้างค่าหรือลบตารางฐานข้อมูลเครือข่าย"
+
+#: wp-admin/includes/network.php:122
+msgid "Once the network is created, you may reactivate your plugins."
+msgstr "เมื่อสร้างเครือข่ายแล้ว คุณอาจจะเปิดใช้งานปลั๊กอินของคุณอีกครั้ง"
+
+#: wp-admin/includes/network.php:170
+msgid "Fill in the information below and you&#8217;ll be on your way to creating a network of WordPress sites. We will create configuration files in the next step."
+msgstr "กรอกข้อมูลด้านล่างแล้วคุณจะเข้าสู่การสร้างเครือข่ายของเว็บเวิร์ดเพรส  เราจะสร้างไฟล์ปรับแต่งในขั้นตอนต่อไป"
+
+#: wp-admin/includes/network.php:217
+msgid "Sub-domains"
+msgstr "โดเมนย่อย"
+
+#: wp-admin/includes/network.php:213
+msgid "You will need a wildcard DNS record if you are going to use the virtual host (sub-domain) functionality."
+msgstr "คุณต้องใช้ค่า wildcard DNS ถ้าคุณกำลังจะใช้คำสั่งโฮสท์เสมือน (โดเมนย่อย)"
+
+#: wp-admin/network.php:60
+msgid "Choose subdomains or subdirectories; this can only be switched afterwards by reconfiguring your installation. Fill out the network details, and click Install. If this does not work, you may have to add a wildcard DNS record (for subdomains) or change to another setting in Permalinks (for subdirectories)."
+msgstr "เลือกโดเมนย่อย หรือไดเรกทอรี่ย่อย; สามารถเปลี่ยนภายหลังได้ โดยการตั้งค่าข้อมูลการติดตั้งของคุณใหม่ กรอกข้อมูลเครือข่าย แล้วกดติดตั้ง  หากสามารถใช้งานได้  คุณอาจจะต้องเพิ่มค่า wildcard DNS (สำหรับการใช้งานแบบโดเมนย่อย) หรือเปลี่ยนเป็นการตั้งค่าอื่นในลิงก์ถาวร (สำหรับการใช้งานแบบไดเรกทอรี่ย่อย)"
+
+#: wp-admin/includes/network.php:295
+msgid "Because your installation is not new, the sites in your WordPress network must use sub-domains."
+msgstr "เนื่องจากไม่ใช่การติดตั้งใหม่ เว็บในเครือข่าย WordPress ของคุณต้องใช้งานแบบโดเมนย่อย "
+
+#: wp-admin/includes/network.php:279 wp-admin/includes/network.php:289
+#: wp-admin/includes/network.php:296
+msgid "The main site in a sub-directory installation will need to use a modified permalink structure, potentially breaking existing links."
+msgstr "การติดตั้งของเว็บหลักในไดเรกทอรีย่อย จะมีการปรับแต่งโครงสร้างลิงก์ถาวร ซึ่งอาจจะทำให้เกิดความเสียหายกับลิงก์ที่มีอยู่"
+
+#: wp-admin/includes/network.php:286
+msgid "Because your installation is in a directory, the sites in your WordPress network must use sub-directories."
+msgstr "เนื่องจากเป็นการติดตั้งในไดเรกทอรี เว็บในเครือข่าย WordPress ของคุณต้องใช้งานแบบไดเรกทอรีย่อย"
 
 #: wp-admin/network/users.php:70
 msgid "Warning! User cannot be modified. The user %s is a network administrator."
 msgstr "คำเตือน ไม่สามารถแก้ไขผู้ใช้ได้  เพราะผู้ใช้ %s เป็นผู้ควบคุมเครือข่าย"
 
-#: wp-admin/network/sites.php:30
-msgid "Hovering over each site reveals seven options (three for the primary site):"
-msgstr "ลากเม้าส์เหนือแต่ละเว็บเพื่อแสดงตัวเลือกเจ็ดคำสั่ง (สามอย่างสำหรับเว็บหลัก):"
-
 #: wp-admin/network/sites.php:36
 msgid "The site ID is used internally, and is not shown on the front end of the site or to users/viewers."
 msgstr "เลขที่เว็บไซต์นั้นใช้ภายในเท่านั้น และจะไม่แสดงที่หน้าแรกของเว็บไซต์ ผู้ใช้และผู้เยี่ยมชมก็จะไม่เห็นเช่นกัน"
+
+#: wp-admin/network/sites.php:30
+msgid "Hovering over each site reveals seven options (three for the primary site):"
+msgstr "ลากเม้าส์เหนือแต่ละเว็บเพื่อแสดงตัวเลือกเจ็ดคำสั่ง (สามอย่างสำหรับเว็บหลัก):"
 
 #: wp-admin/network/sites.php:33
 msgid "Deactivate, Archive, and Spam which lead to confirmation screens. These actions can be reversed later."
@@ -1034,11 +1012,15 @@ msgstr "ปิดการใช้งาน  คลังเก็บ  แล�
 msgid "If the admin email for the new site does not exist in the database, a new user will also be created."
 msgstr "ถ้าอีเมลผู้ควบคุมสำหรับเว็บไซต์ใหม่ไม่ปรากฎอยู่ในฐานข้อมูล  ผู้ใช้ใหม่จะถูกสร้างขึ้นมา"
 
-#: wp-admin/network/settings.php:29
+#: wp-admin/network/settings.php:49
 msgid "Operational settings has fields for the network&#8217;s name and admin email."
 msgstr "การตั้งค่าการดำเนินงานมีช่องสำหรับใส่ชื่อเครือข่ายและอีเมลผู้ควบคุม"
 
-#: wp-admin/network/settings.php:32
+#: wp-admin/network/users.php:171
+msgid "You can also go to the user&#8217;s profile page by clicking on the individual username."
+msgstr "คุณยังสามารถไปที่หน้าประวัติผู้ใช้โดยกดที่ชื่อผู้ใช้แต่ละคน"
+
+#: wp-admin/network/settings.php:52
 msgid "Upload settings control the size of the uploaded files and the amount of available upload space for each site. You can change the default value for specific sites when you edit a particular site. Allowed file types are also listed (space separated only)."
 msgstr "การตั้งค่าอัปโหลดควบคุมขนาดของไฟล์อัปโหลดและจำนวนพื้นที่จัดเก็บสำหรับแต่ละเว็บไซต์ คุณสามารถเปลี่ยนแปลงค่าเริ่มต้นเฉพาะเว็บไซต์ได้เมื่อคุณแก้ไขแต่ละเว็บไซต์  รวมทั้งรายชื่อชนิดไฟล์ที่อนุญาติ (ใช้ช่องว่างเพื่อแบ่งประเภทเท่านั้น)"
 
@@ -1046,336 +1028,328 @@ msgstr "การตั้งค่าอัปโหลดควบคุมข
 msgid "The bulk action will permanently delete selected users, or mark/unmark those selected as spam. Spam users will have posts removed and will be unable to sign up again with the same email addresses."
 msgstr "การกระทำแบบกลุ่มจะลบผู้ใช้ที่เลือกอย่างถาวร  หรือบันทึกสิ่งที่เลือกเป็นสแปมหรือยกเลิก  ผู้ใช้สแปมจะถูกลบเรื่องและไม่สามารถลงทะเบียนด้วยอีเมลเดิมได้อีก"
 
-#: wp-admin/network/users.php:171
-msgid "You can also go to the user&#8217;s profile page by clicking on the individual username."
-msgstr "คุณยังสามารถไปที่หน้าประวัติผู้ใช้โดยกดที่ชื่อผู้ใช้แต่ละคน"
-
 #: wp-admin/network/sites.php:35
 msgid "Visit to go to the front-end site live."
 msgstr "เยี่ยมชมหน้าเว็บในตอนนี้"
-
-#: wp-admin/network/users.php:174
-msgid "You can make an existing user an additional super admin by going to the Edit User profile page and checking the box to grant that privilege."
-msgstr "คุณสามารถเปลี่ยนตำแหน่งผู้ใช้งานเป็นผู้ควบคุมขั้นสูงโดยไปที่หน้าแก้ไขข้อมูลส่วนตัวผู้ใช้ และกดเลือกกล่องเพื่อให้สิทธิ์นั้น"
-
-#: wp-admin/network/users.php:169
-msgid "This table shows all users across the network and the sites to which they are assigned."
-msgstr "ตารางนี้แสดงผู้ใช้ทั้งหมดผ่านเครือข่ายและเว็บไซต์ที่พวกเขาใช้อยู่"
-
-#: wp-admin/network/upgrade.php:23
-msgid "If a version update to core has not happened, clicking this button won&#8217;t affect anything."
-msgstr "ถ้ารุ่นที่อัปเดตไปยังโปรแกรมหลักไม่เกิดขึ้น  กดที่ปุ่มจะไม่กระทบกับสิ่งใด ๆ"
 
 #: wp-admin/network/upgrade.php:24
 msgid "If this process fails for any reason, users logging in to their sites will force the same update."
 msgstr "ถ้าการทำงานนี้ล้มเหลวเนื่องจากสาเหตุใด ๆ ผู้ใช้ที่เข้าสู่ระบบเว็บของพวกเขาจะถูกบังคับด้วยการอัปเดตเดิม"
 
-#: wp-admin/network/users.php:172
-msgid "You can sort the table by clicking on any of the table headings and switch between list and excerpt views by using the icons above the users list."
-msgstr "คุณสามารถเรียงตารางโดยกดที่ใดก็ได้ของหัวข้อตารางและเปลี่ยนระหว่างแบบรายชื่อหรือการเห็นเรื่องย่อโดยใช้ไอคอนที่อยู่เหนือรายชื่อผู้ใช้"
+#: wp-admin/network/upgrade.php:23
+msgid "If a version update to core has not happened, clicking this button won&#8217;t affect anything."
+msgstr "ถ้ารุ่นที่อัปเดตไปยังโปรแกรมหลักไม่เกิดขึ้น  กดที่ปุ่มจะไม่กระทบกับสิ่งใด ๆ"
+
+#: wp-admin/network/users.php:169
+msgid "This table shows all users across the network and the sites to which they are assigned."
+msgstr "ตารางนี้แสดงผู้ใช้ทั้งหมดผ่านเครือข่ายและเว็บไซต์ที่พวกเขาใช้อยู่"
+
+#: wp-admin/network/users.php:174
+msgid "You can make an existing user an additional super admin by going to the Edit User profile page and checking the box to grant that privilege."
+msgstr "คุณสามารถเปลี่ยนตำแหน่งผู้ใช้งานเป็นผู้ควบคุมขั้นสูงโดยไปที่หน้าแก้ไขข้อมูลส่วนตัวผู้ใช้ และกดเลือกกล่องเพื่อให้สิทธิ์นั้น"
 
 #: wp-admin/network/user-new.php:21
 msgid "Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them."
 msgstr "ผู้ใช้ที่ลงทะเบียนเครือข่ายแบบไม่มีเว็บจะมีบทบาทเป็นผู้รับข่าวสำหรับเว็บหลักหรือเว็บหน้าควบคุมแรก  ที่ซึ่งมีหน้าข้อมูลส่วนตัวให้พวกเขาจัดการบัญชีของเขา  ผู้ใช้เหล่านี้จะเห็นหน้าควบคุมและเว็บของฉันในเมนูนำทางหลักจนกว่าพวกเขาจะมีเว็บของตัวเอง"
 
+#: wp-admin/network/settings.php:48
+msgid "This screen sets and changes options for the network as a whole. The first site is the main site in the network and network options are pulled from that original site&#8217;s options."
+msgstr "หน้าจอนี้ตั้งค่าและเปลี่ยนตัวเลือกสำหรับเว็บในเครือข่ายทั้งหมด  เว็บไซต์แรกคือเว็บหลักในเครือข่ายและตัวเลือกเครือข่ายถูกนำมาจากตัวเลือกเว็บดั้งเดิม"
+
 #: wp-admin/network/sites.php:29
 msgid "This is the main table of all sites on this network. Switch between list and excerpt views by using the icons above the right side of the table."
 msgstr "นี่คือตารางหลักสำหรับเว็บทั้งหมดบนเครือข่ายนี้  เปลี่ยนระหว่างการดูรายชื่อและเรื่องย่อโดยใช้ไอคอนด้านขวาของตารางนี้"
 
-#: wp-admin/network/settings.php:34
+#: wp-admin/network/settings.php:54
 msgid "Menu setting enables/disables the plugin menus from appearing for non super admins, so that only super admins, not site admins, have access to activate plugins."
 msgstr "การตั้งค่าเมนูปิดหรือเปิดการใช้งานเมนูปลั๊กอินจากการแสดงให้ผู้ใช้ที่ไม่ใช่ผู้ควบคุมขั้นสูงดูได้  ดังนั้น จะมีเฉพาะ ผู้ควบคุมขั้นสูง  ไม่ใช่ผู้ควบคุมเว็บที่จะสามารถเข้าไปเปิดใช้ปลั๊กอิน"
 
-#: wp-admin/network/settings.php:30
-msgid "Registration settings can disable/enable public signups. If you let others sign up for a site, install spam plugins. Spaces, not commas, should separate names banned as sites for this network."
-msgstr "การตั้งค่าการลงทะเบียนสามารถปิดหรือเปิดการใช้งานการลงทะเีบียนทั่วไป  ถ้าคุณอนุญาตให้คนอื่นลงทะเบียนสำหรับเว็บไซต์ได้  ติดตั้งปลั๊กอินป้องกันสแปม  ใช้ช่องว่างไม่ใช่คอมม่าเพื่อแบนชื่อเว็บที่ห้ามใช้สำหรับเครือข่ายนี้"
-
-#: wp-admin/network/settings.php:28
-msgid "This screen sets and changes options for the network as a whole. The first site is the main site in the network and network options are pulled from that original site&#8217;s options."
-msgstr "หน้าจอนี้ตั้งค่าและเปลี่ยนตัวเลือกสำหรับเว็บในเครือข่ายทั้งหมด  เว็บไซต์แรกคือเว็บหลักในเครือข่ายและตัวเลือกเครือข่ายถูกนำมาจากตัวเลือกเว็บดั้งเดิม"
-
-#: wp-admin/network/themes.php:223
-msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
-msgstr "ถ้าผู้ควบคุมเครือข่ายปิดการใช้ธีมที่ใช้อยู่  มันยังสามารถแสดงอยู่สำหรับเว็บไซต์นั้นได้  แต่ถ้ามีการเลือกธีมอื่นเกิดขึ้น  ธีมที่ปิดการใช้งานแล้วนั้นจะไม่ปรากฎในหน้าจอ รูปแบบ>ธีม อีก"
+#: wp-admin/network/settings.php:51
+msgid "New site settings are defaults applied when a new site is created in the network. These include welcome email for when a new site or user account is registered, and what&#8127;s put in the first post, page, comment, comment author, and comment URL."
+msgstr "การตั้งค่าเว็บใหม่นั้นเป็นค่าเริ่มต้นที่จะใช้กับเว็บใหม่ทุกเว็บที่สร้างขึ้นในเครือข่าย  ค่าเหล่านี้รวมถึงอีเมลต้อนรับสำหรับเว็บไซต์ใหม่หรือบัญชีผู้ใช้ที่ลงทะเบียน และข้อความต่าง ๆ ในเรื่องแรก หน้าแรก ความเห็นแรก ผู้เขียนความเห็น และ URL ความเห็น"
 
 #: wp-admin/network/themes.php:222
 msgid "This screen enables and disables the inclusion of themes available to choose in the Appearance menu for each site. It does not activate or deactivate which theme a site is currently using."
 msgstr "หน้าจอนี้เปิดใช้งานและปิดใช้งานรายชื่อธีมที่ใช้งานได้เพื่อเลือกในเมนูรูปแบบสำหรับแต่ละเว็บไซต์  มันจะไม่เปิดหรือปิดใช้งานธีมที่เว็บไซต์กำลังใช้งานอยู่"
 
-#: wp-admin/network/settings.php:31
-msgid "New site settings are defaults applied when a new site is created in the network. These include welcome email for when a new site or user account is registered, and what&#8127;s put in the first post, page, comment, comment author, and comment URL."
-msgstr "การตั้งค่าเว็บใหม่นั้นเป็นค่าเริ่มต้นที่จะใช้กับเว็บใหม่ทุกเว็บที่สร้างขึ้นในเครือข่าย  ค่าเหล่านี้รวมถึงอีเมลต้อนรับสำหรับเว็บไซต์ใหม่หรือบัญชีผู้ใช้ที่ลงทะเบียน และข้อความต่าง ๆ ในเรื่องแรก หน้าแรก ความเห็นแรก ผู้เขียนความเห็น และ URL ความเห็น"
+#: wp-admin/network/themes.php:223
+msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
+msgstr "ถ้าผู้ควบคุมเครือข่ายปิดการใช้ธีมที่ใช้อยู่  มันยังสามารถแสดงอยู่สำหรับเว็บไซต์นั้นได้  แต่ถ้ามีการเลือกธีมอื่นเกิดขึ้น  ธีมที่ปิดการใช้งานแล้วนั้นจะไม่ปรากฎในหน้าจอ รูปแบบ>ธีม อีก"
+
+#: wp-admin/network/users.php:172
+msgid "You can sort the table by clicking on any of the table headings and switch between list and excerpt views by using the icons above the users list."
+msgstr "คุณสามารถเรียงตารางโดยกดที่ใดก็ได้ของหัวข้อตารางและเปลี่ยนระหว่างแบบรายชื่อหรือการเห็นเรื่องย่อโดยใช้ไอคอนที่อยู่เหนือรายชื่อผู้ใช้"
+
+#: wp-admin/network/settings.php:50
+msgid "Registration settings can disable/enable public signups. If you let others sign up for a site, install spam plugins. Spaces, not commas, should separate names banned as sites for this network."
+msgstr "การตั้งค่าการลงทะเบียนสามารถปิดหรือเปิดการใช้งานการลงทะเบียนทั่วไป  ถ้าคุณอนุญาตให้คนอื่นลงทะเบียนสำหรับเว็บไซต์ได้  ติดตั้งปลั๊กอินป้องกันสแปม ใช้ช่องว่างไม่ใช่คอมม่าเพื่อแบนชื่อเว็บที่ห้ามใช้สำหรับเครือข่ายนี้"
 
 #. translators: %s: reserved names list
 #: wp-admin/network/site-new.php:52
 msgid "The following words are reserved for use by WordPress functions and cannot be used as blog names: %s"
 msgstr "คำต่อไปนี้สงวนการใช้โดยคำสั่งของเวิร์ดเพรสและไม่สามารถใช้เป็นชื่อบล็อกได้: %s"
 
-#: wp-admin/network/upgrade.php:112
-msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
-msgstr "ถ้าเบราว์เซอร์ของคุณไม่โหลดหน้าต่อไปโดยอัตโนมัติ  โปรดกดที่ลิงก์นี้:"
-
 #: wp-admin/network/site-new.php:38
 msgid "Can&#8217;t create an empty site."
 msgstr "ไม่สามารถสร้างเว็บเปล่า"
 
-#: wp-admin/network/settings.php:197
-msgid "If you want to ban domains from site registrations. One domain per line."
-msgstr "ถ้าคุณต้องการแบนชื่อโดเมนจากการลงทะเบียนเว็บ   ใส่ชื่อนั้นหนึ่งชื่อต่อหนึ่งบรรทัด "
-
-#: wp-admin/network/settings.php:186
+#: wp-admin/network/settings.php:224
 msgid "If you want to limit site registrations to certain domains. One domain per line."
 msgstr "ถ้าคุณต้องการจำกัดการลงทะเบียนเว็บสำหรับชื่อเฉพาะ  ใส่ชื่อเฉพาะนั้นหนึ่งชื่อต่อหนึ่งบรรทัด"
 
-#: wp-admin/network/sites.php:260
-msgid "Site removed from spam."
+#: wp-admin/network/settings.php:235
+msgid "If you want to ban domains from site registrations. One domain per line."
+msgstr "ถ้าคุณต้องการแบนชื่อโดเมนจากการลงทะเบียนเว็บ   ใส่ชื่อนั้นหนึ่งชื่อต่อหนึ่งบรรทัด "
+
+#: wp-admin/network/upgrade.php:112
+msgid "If your browser doesn&#8217;t start loading the next page automatically, click this link:"
+msgstr "ถ้าเบราว์เซอร์ของคุณไม่โหลดหน้าต่อไปโดยอัตโนมัติ  โปรดกดที่ลิงก์นี้:"
+
+#: wp-admin/network/sites.php:306
+msgid "Site marked as spam."
+msgstr "เว็บถูกบันทึกเป็นสแปม"
+
+#: wp-admin/network/sites.php:279
+msgid "Sites marked as spam."
+msgstr "เว็บถูกบันทึกเป็นสแปม"
+
+#: wp-admin/network/sites.php:276
+msgid "Sites removed from spam."
 msgstr "เว็บถูกลบออกจากสแปม"
 
 #: wp-admin/network/users.php:203
 msgid "Users removed from spam."
 msgstr "ลบผู้ใช้ออกจากสแปม"
 
-#: wp-admin/network/sites.php:233
-msgid "Sites removed from spam."
+#: wp-admin/network/sites.php:303
+msgid "Site removed from spam."
 msgstr "เว็บถูกลบออกจากสแปม"
 
-#: wp-admin/network/sites.php:236
-msgid "Sites marked as spam."
-msgstr "เว็บถูกบันทึกเป็นสแปม"
+#: wp-admin/network/sites.php:282
+msgid "Sites deleted."
+msgstr "ลบเว็บแล้ว"
 
-#: wp-admin/network/sites.php:263
-msgid "Site marked as spam."
-msgstr "เว็บถูกบันทึกเป็นสแปม"
-
-#: wp-admin/network/sites.php:248
-msgid "Site archived."
-msgstr "เก็บเว็บเข้าคลังแล้ว"
-
-#: wp-admin/network/users.php:206
-msgid "Users deleted."
-msgstr "ลบผู้ใช้แล้ว"
-
-#: wp-admin/network/sites.php:251
-msgid "Site unarchived."
-msgstr "นำเว็บออกจากคลังเก็บ"
-
-#: wp-admin/network/sites.php:254
-msgid "Site activated."
-msgstr "เปิดใช้งานเว็บ"
-
-#: wp-admin/network/sites.php:257
-msgid "Site deactivated."
-msgstr "เลิกใช้งานเว็บ"
+#: wp-admin/network/sites.php:285
+msgid "Site deleted."
+msgstr "ลบเว็บแล้ว"
 
 #: wp-admin/network/users.php:200
 msgid "Users marked as spam."
 msgstr "ผู้ใช้ถูกบันทึกเป็นสแปม"
 
-#: wp-admin/network/sites.php:242
-msgid "Site deleted."
-msgstr "ลบเว็บแล้ว"
+#: wp-admin/network/sites.php:300
+msgid "Site deactivated."
+msgstr "เลิกใช้งานเว็บ"
 
-#: wp-admin/network/sites.php:239
-msgid "Sites deleted."
-msgstr "ลบเว็บแล้ว"
+#: wp-admin/network/sites.php:297
+msgid "Site activated."
+msgstr "เปิดใช้งานเว็บ"
 
-#: wp-admin/network/sites.php:91 wp-admin/network/sites.php:157
-msgid "Sorry, you are not allowed to change the current site."
-msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้เปลี่ยนเว็บปัจจุบัน"
+#: wp-admin/network/sites.php:294
+msgid "Site unarchived."
+msgstr "นำเว็บออกจากคลังเก็บ"
 
-#: wp-admin/network/site-new.php:116
+#: wp-admin/network/users.php:206
+msgid "Users deleted."
+msgstr "ลบผู้ใช้แล้ว"
+
+#: wp-admin/network/sites.php:291
+msgid "Site archived."
+msgstr "เก็บเว็บเข้าคลังแล้ว"
+
+#: wp-admin/network/site-new.php:118
 msgid "There was an error creating the user."
 msgstr "มีข้อผิดพลาดในการสร้างผู้ใช้"
 
-#: wp-admin/network/settings.php:297
+#: wp-admin/network/sites.php:91 wp-admin/network/sites.php:200
+msgid "Sorry, you are not allowed to change the current site."
+msgstr "ขอโทษครับ คุณไม่ได้รับอนุญาตให้เปลี่ยนเว็บปัจจุบัน"
+
+#: wp-admin/network/settings.php:335
 msgid "Upload file types"
 msgstr "ชนิดไฟล์อัปโหลด"
 
-#: wp-admin/network/settings.php:289
+#: wp-admin/network/settings.php:327
 msgid "Limit total size of files uploaded to %s MB"
 msgstr "ขนาดจำกัดของไฟล์อัปโหลดทั้งหมดที่ %s MB"
 
-#: wp-admin/network/settings.php:279
-msgid "The URL for the first comment on a new site."
-msgstr "URL ของความเห็นแรกบนเว็บไซต์ใหม่"
-
-#: wp-admin/network/settings.php:252
-msgid "The first comment on a new site."
-msgstr "ความเห็นแรกบนเว็บใหม่"
-
-#: wp-admin/network/settings.php:242
-msgid "The first page on a new site."
-msgstr "หน้าแรกบนเว็บใหม่"
-
-#: wp-admin/network/settings.php:232
+#: wp-admin/network/settings.php:270
 msgid "The first post on a new site."
 msgstr "เรื่องแรกบนเว็บใหม่"
 
-#: wp-admin/network/settings.php:261
+#: wp-admin/network/settings.php:280
+msgid "The first page on a new site."
+msgstr "หน้าแรกบนเว็บใหม่"
+
+#: wp-admin/network/settings.php:290
+msgid "The first comment on a new site."
+msgstr "ความเห็นแรกบนเว็บใหม่"
+
+#: wp-admin/network/settings.php:299
 msgid "The author of the first comment on a new site."
 msgstr "ผู้เขียนความเห็นแรกบนเว็บไซต์ใหม่"
+
+#: wp-admin/network/settings.php:317
+msgid "The URL for the first comment on a new site."
+msgstr "URL ของความเห็นแรกบนเว็บไซต์ใหม่"
 
 #: wp-admin/network/upgrade.php:68
 msgid "All done!"
 msgstr "ทุกอย่างเสร็จแล้ว"
 
-#: wp-admin/network/settings.php:133
-msgid "Registration is disabled."
-msgstr "การลงทะเบียนถูกปิด"
+#: wp-admin/network/settings.php:171
+msgid "Registration is disabled"
+msgstr "ปิดการลงทะเบียน"
 
-#: wp-admin/network/settings.php:134
-msgid "User accounts may be registered."
-msgstr "บัญชีผู้ใช้อาจจะลงทะเบียนแล้ว"
+#: wp-admin/network/settings.php:172
+msgid "User accounts may be registered"
+msgstr "ลงทะเบียนบัญชีผู้ใช้ได้"
 
-#: wp-admin/network/settings.php:136
-msgid "Both sites and user accounts can be registered."
-msgstr "ทั้งเว็บและบัญชีผู้ใช้สามารถลงทะเบียนได้"
+#: wp-admin/network/settings.php:174
+msgid "Both sites and user accounts can be registered"
+msgstr "ลงทะเบียนเว็บและบัญชีผู้ใช้ได้"
 
-#: wp-admin/network/settings.php:135
-msgid "Logged in users may register new sites."
-msgstr "ผู้ใช้ที่เข้าสู่ระบบอาจจะลงทะเบียนขอเว็บไซต์ใหม่"
+#: wp-admin/network/settings.php:173
+msgid "Logged in users may register new sites"
+msgstr "ผู้ใช้ที่เข้าสู่ระบบ สามารถลงทะเบียนเว็บได้"
 
-#: wp-admin/network/settings.php:121
-msgid "Registration Settings"
-msgstr "การตั้งค่าการลงทะเบียน"
-
-#: wp-admin/network/settings.php:203
-msgid "New Site Settings"
-msgstr "การตั้งค่าเว็บใหม่"
-
-#: wp-admin/network/settings.php:284
-msgid "Upload Settings"
-msgstr "การตั้งค่าอัปโหลด"
-
-#: wp-admin/network/settings.php:102
-msgid "Operational Settings"
-msgstr "การตั้งค่าตัวเลือก"
-
-#: wp-admin/network/settings.php:358
+#: wp-admin/network/settings.php:398
 msgid "Enable administration menus"
 msgstr "เปิดใช้เมนูผู้ควบคุม"
 
-#: wp-admin/network/site-new.php:81
+#: wp-admin/network/settings.php:122
+msgid "Operational Settings"
+msgstr "การตั้งค่าตัวเลือก"
+
+#: wp-admin/network/settings.php:322
+msgid "Upload Settings"
+msgstr "การตั้งค่าอัปโหลด"
+
+#: wp-admin/network/settings.php:241
+msgid "New Site Settings"
+msgstr "การตั้งค่าเว็บใหม่"
+
+#: wp-admin/network/settings.php:159
+msgid "Registration Settings"
+msgstr "การตั้งค่าการลงทะเบียน"
+
+#: wp-admin/network/site-new.php:80
+msgid "Missing or invalid site address."
+msgstr "ที่อยู่เว็บหายไปหรือใช้งานไม่ได้"
+
+#: wp-admin/network/site-new.php:83
 msgid "Missing email address."
 msgstr "ที่อยู่อีเมลหายไป"
 
-#: wp-admin/network/site-new.php:78
-msgid "Missing or invalid site address."
-msgstr "ที่อยู่เว็บหายไปหรือใช้งานไม่ได้"
+#. translators: %s: network name
+#: wp-admin/network/site-new.php:143
+msgid "[%s] New Site Created"
+msgstr "[%s] เว็บใหม่ถูกสร้าง"
+
+#: wp-admin/network/settings.php:325
+msgid "Site upload space"
+msgstr "พื้นที่อัปโหลดเว็บ"
+
+#: wp-admin/network/settings.php:211
+msgid "Users are not allowed to register these sites. Separate names by spaces."
+msgstr "ชื่อผู้ใช้ไม่ได้รับอนุญาตให้ลงทะเบียนเว็บเหล่านี้   แต่ละชื่อจะคั่นด้วยช่องว่าง"
 
 #: wp-admin/network/upgrade.php:112
 msgid "Next Sites"
 msgstr "เว็บต่อไป"
 
-#: wp-admin/network/settings.php:173
-msgid "Users are not allowed to register these sites. Separate names by spaces."
-msgstr "ชื่อผู้ใช้ไม่ได้รับอนุญาตให้ลงทะเบียนเว็บเหล่านี้   แต่ละชื่อจะคั่นด้วยช่องว่าง"
-
-#: wp-admin/network/settings.php:157
-msgid "Send the network admin an email notification every time someone registers a site or user account."
-msgstr "ส่งอีเมลเตือนไปยังผู้ควบคุมเครือข่ายทุกครั้งที่มีคนลงทะเบียนเว็บหรือบัญชีผู้ใช้"
-
-#: wp-admin/network/settings.php:287
-msgid "Site upload space"
-msgstr "พื้นที่อัปโหลดเว็บ"
-
-#: wp-admin/network/settings.php:212
-msgid "The welcome email sent to new site owners."
-msgstr "อีเมลต้อนรับส่งให้กับเจ้าของเว็บใหม่"
-
-#. translators: %s: network name
-#: wp-admin/network/site-new.php:141
-msgid "[%s] New Site Created"
-msgstr "[%s] เว็บใหม่ถูกสร้าง"
-
-#: wp-admin/includes/network.php:313 wp-admin/network/settings.php:112
+#: wp-admin/includes/network.php:322 wp-admin/network/settings.php:132
 msgid "Network Admin Email"
 msgstr "อีเมลผู้ควบคุมเครือข่าย"
 
-#: wp-admin/network/site-new.php:248
-msgid "The username and password will be mailed to this email address."
-msgstr "ชื่อผู้ใช้และรหัสผ่านจะถูกส่งอีเมลไปยังอีเมลนี้"
+#: wp-admin/network/settings.php:250
+msgid "The welcome email sent to new site owners."
+msgstr "อีเมลต้อนรับส่งให้กับเจ้าของเว็บใหม่"
 
-#: wp-admin/network/site-new.php:248
-msgid "A new user will be created if the above email address is not in the database."
-msgstr "ผู้ใช้ใหม่จะถูกสร้าง  ถ้าอีเมลด้านบนไม่อยู่ในฐานข้อมูล"
+#: wp-admin/network/settings.php:195
+msgid "Send the network admin an email notification every time someone registers a site or user account"
+msgstr "ส่งอีเมลแจ้งผู้ควบคุมเครือข่ายทุกครั้งที่มีคนลงทะเบียนเว็บหรือบัญชีผู้ใช้"
 
-#: wp-admin/network/site-new.php:244
-msgid "Admin Email"
-msgstr "อีเมลผู้ควบคุม"
-
-#: wp-admin/network/site-new.php:260
-msgid "Add Site"
-msgstr "เพิ่มเว็บ"
-
-#: wp-admin/network/settings.php:331
-msgid "Default Language"
-msgstr "ภาษาหลัก"
-
-#: wp-admin/network/settings.php:307
-msgid "Max upload file size"
-msgstr "ขนาดไฟล์อัปโหลดสูงสุด"
-
-#: wp-admin/network/settings.php:275
-msgid "First Comment URL"
-msgstr "URL ความเห็นแรก"
-
-#: wp-admin/network/settings.php:257
-msgid "First Comment Author"
-msgstr "ผู้เขียนความเห็นแรก"
-
-#: wp-admin/network/settings.php:247
-msgid "First Comment"
-msgstr "ความเห็นแรก"
-
-#: wp-admin/network/settings.php:237
-msgid "First Page"
-msgstr "หน้าแรก"
-
-#: wp-admin/network/settings.php:222
-msgid "The welcome email sent to new users."
-msgstr "อีเมลต้อนรับส่งให้กับผู้ใช้ใหม่"
-
-#: wp-admin/network/settings.php:217
-msgid "Welcome User Email"
-msgstr "อีเมลต้อนรับผู้ใช้"
-
-#: wp-admin/network/settings.php:207
-msgid "Welcome Email"
-msgstr "อีเมลต้อนรับ"
-
-#: wp-admin/network/settings.php:192
-msgid "Banned Email Domains"
-msgstr "แบนอีเมลจากโดเมน"
-
-#: wp-admin/network/settings.php:179
-msgid "Limited Email Registrations"
-msgstr "การจำกัดอีเมลที่ใช้ลงทะเบียน"
-
-#: wp-admin/network/settings.php:169
-msgid "Banned Names"
-msgstr "ชื่อที่ถูกแบน"
-
-#: wp-admin/network/settings.php:162
-msgid "Add New Users"
-msgstr "เพิ่มผู้ใช้ใหม่"
-
-#: wp-admin/network/settings.php:151
-msgid "Registration notification"
-msgstr "การเตือนการลงทะเบียน"
-
-#: wp-admin/network/settings.php:124
-msgid "Allow new registrations"
-msgstr "อนุญาตผู้ใช้ใหม่ลงทะเบียนได้"
-
-#: wp-admin/network/site-users.php:262
-msgid "Duplicated username or email address."
-msgstr "ชื่อผู้ใช้หรืออีเมลซ้ำ"
+#: wp-admin/network/sites.php:107 wp-admin/network/sites.php:185
+msgid "Confirm"
+msgstr "ยืนยัน"
 
 #: wp-admin/network/user-new.php:37
 msgid "Cannot create an empty user."
 msgstr "ไม่สามารถสร้างผู้ใช้เปล่า"
 
-#: wp-admin/network/sites.php:107
-msgid "Confirm"
-msgstr "ยืนยัน"
+#: wp-admin/network/settings.php:162
+msgid "Allow new registrations"
+msgstr "อนุญาตผู้ใช้ใหม่ลงทะเบียนได้"
+
+#: wp-admin/network/settings.php:189
+msgid "Registration notification"
+msgstr "การเตือนการลงทะเบียน"
+
+#: wp-admin/network/settings.php:200
+msgid "Add New Users"
+msgstr "เพิ่มผู้ใช้ใหม่"
+
+#: wp-admin/network/settings.php:275
+msgid "First Page"
+msgstr "หน้าแรก"
+
+#: wp-admin/network/settings.php:285
+msgid "First Comment"
+msgstr "ความเห็นแรก"
+
+#: wp-admin/network/settings.php:295
+msgid "First Comment Author"
+msgstr "ผู้เขียนความเห็นแรก"
+
+#: wp-admin/network/settings.php:313
+msgid "First Comment URL"
+msgstr "URL ความเห็นแรก"
+
+#: wp-admin/network/settings.php:345
+msgid "Max upload file size"
+msgstr "ขนาดไฟล์อัปโหลดสูงสุด"
+
+#: wp-admin/network/settings.php:369
+msgid "Default Language"
+msgstr "ภาษาหลัก"
+
+#: wp-admin/network/site-new.php:264
+msgid "Add Site"
+msgstr "เพิ่มเว็บ"
+
+#: wp-admin/network/settings.php:207
+msgid "Banned Names"
+msgstr "ชื่อที่ถูกแบน"
+
+#: wp-admin/network/settings.php:217
+msgid "Limited Email Registrations"
+msgstr "การจำกัดอีเมลที่ใช้ลงทะเบียน"
+
+#: wp-admin/network/settings.php:230
+msgid "Banned Email Domains"
+msgstr "แบนอีเมลจากโดเมน"
+
+#: wp-admin/network/settings.php:245
+msgid "Welcome Email"
+msgstr "อีเมลต้อนรับ"
+
+#: wp-admin/network/settings.php:255
+msgid "Welcome User Email"
+msgstr "อีเมลต้อนรับผู้ใช้"
+
+#: wp-admin/network/settings.php:260
+msgid "The welcome email sent to new users."
+msgstr "อีเมลต้อนรับส่งให้กับผู้ใช้ใหม่"
+
+#: wp-admin/network/site-new.php:248
+msgid "Admin Email"
+msgstr "อีเมลผู้ควบคุม"
+
+#: wp-admin/network/site-new.php:252
+msgid "A new user will be created if the above email address is not in the database."
+msgstr "ผู้ใช้ใหม่จะถูกสร้าง  ถ้าอีเมลด้านบนไม่อยู่ในฐานข้อมูล"
+
+#: wp-admin/network/site-users.php:261
+msgid "Duplicated username or email address."
+msgstr "ชื่อผู้ใช้หรืออีเมลซ้ำ"

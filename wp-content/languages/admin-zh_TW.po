@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-12-02 09:46:12+0000\n"
+"PO-Revision-Date: 2018-02-13 02:41:15+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,37 +26,41 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Asia/Taipei"
 
-#: wp-admin/about.php:244
+#: wp-admin/customize.php:80
+msgid "This changeset cannot be further modified."
+msgstr "無法進一步修改此變更集。"
+
+#: wp-admin/about.php:298
 msgid "Improvements to Roles and Capabilities"
 msgstr "角色及權限的改進"
 
-#: wp-admin/about.php:245
+#: wp-admin/about.php:299
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "在外掛管理以及檔案翻譯上已經引進了新的角色權限，除此之外，多站點之間的角色權限轉換也變得更穩定以及更有條理。"
 
-#: wp-admin/about.php:241
+#: wp-admin/about.php:295
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "WordPress 4.9 包含了 MediaElement.js 的更新版，移除了對 jQuery 的依賴，以及改善了使用性、客製 UI 和修復了許多臭蟲。"
 
-#: wp-admin/about.php:240
+#: wp-admin/about.php:294
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js 已經升級至4.2.6"
 
-#: wp-admin/about.php:237
+#: wp-admin/about.php:291
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "我們引進了新的程式編輯資源庫「CodeMirror」，使用它來改善在撰寫你的外掛程式時的體驗，像是 CSS 或 JavaScript 欄位。"
 
-#: wp-admin/about.php:236
+#: wp-admin/about.php:290
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror 可使用在你的佈景主題或是外掛之中"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:230
+#: wp-admin/about.php:284
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "我們針對 WordPress 4.9 外觀 > 自訂 功能的 JS API 做出了許多的改善，消除了許多障礙並能輕易協同 PHP API 進行作業。其中也包含許多新的控制樣版，像是日期/時間控制以及區域/面版/全域通知等等，<a href=\"%s\">了解更多</a>。"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:280
 msgid "Customizer JS API Improvements"
 msgstr "外觀 > 自訂 功能的 JS API 改良處"
 
@@ -64,7 +68,7 @@ msgstr "外觀 > 自訂 功能的 JS API 改良處"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "這份資料是用來提供WordPress一般強化功能，其中包含了尋找及自動化安裝新的更新來保護您的網站。它也被用來統計數據分析，像是被顯示在<a href=\"%s\">WordPress.org 狀態頁</a>。"
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:193
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "當你直接在後台編輯佈景主題與外掛時，WordPress 4.9 將會提醒你這是不建議的修改方式。它會建議你在儲存之前先備份，所以它不會在下次更新時直接把檔案覆蓋。使用最安全的方式更新檔案，你未來的自己會感謝你，你的夥伴或是客戶也會感謝你。"
 
@@ -140,53 +144,53 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "如果你<a href=\"%s\">希望網站首頁與 WordPress 安裝目錄不同</a>，請在此輸入位址。"
 
-#: wp-admin/about.php:209
+#: wp-admin/about.php:263
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://wordpress.org/plugins/gutenberg/"
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:219
+#: wp-admin/about.php:273
 msgid "Developer Happiness %s"
 msgstr "開發者的喜悅 %s"
 
-#: wp-admin/about.php:208
+#: wp-admin/about.php:262
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "WordPress 正在開發一種新的方式來建立和控制您的內容，我們很樂意為您提供幫助。 有興趣成為一名<a href=\"%s\">早期測試人員</a>或參與 Gutenberg 專案？ <a href=\"%s\">在GitHub上參與</a>。"
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:202
+#: wp-admin/about.php:256
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "幫助 Gutenberg %s"
 
-#: wp-admin/about.php:177
+#: wp-admin/about.php:231
 msgid "More Reliable Theme Switching"
 msgstr "更可靠地切換佈景主題"
 
-#: wp-admin/about.php:169
+#: wp-admin/about.php:223
 msgid "Site Building Improvements"
 msgstr "網站建構上的改善"
 
-#: wp-admin/about.php:146
+#: wp-admin/about.php:200
 msgid "Even More Widget Updates"
 msgstr "更多小工具更新"
 
-#: wp-admin/about.php:154
+#: wp-admin/about.php:208
 msgid "The New Gallery Widget"
 msgstr "新的相簿小工具"
 
-#: wp-admin/about.php:109
+#: wp-admin/about.php:163
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "你是否會擔心尚未儲存的進度消失？別擔心，在 WordPress 4.9 中會自動詢問你是否要儲存尚未儲存的進度。"
 
-#: wp-admin/about.php:116
+#: wp-admin/about.php:170
 msgid "Coding Enhancements"
 msgstr "強化編程"
 
-#: wp-admin/about.php:108
+#: wp-admin/about.php:162
 msgid "A Prompt to Protect Your Work"
 msgstr "保護提示"
 
-#: wp-admin/about.php:101
+#: wp-admin/about.php:155
 msgid "Design Locking To Guard Your Changes"
 msgstr "鎖定模式來保護你的變更"
 
@@ -198,80 +202,80 @@ msgstr "我們非常注重隱私以及透明化。想了解更多我們蒐集了
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "有時候你的 WordPress 網站可能會傳送資料到 WordPress.org，但不會傳送敏感資料像是使用版本以及已安裝的佈景主題或外掛清單。"
 
-#: wp-admin/about.php:185
+#: wp-admin/about.php:239
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "對於新增選單的步驟感到困惑嗎？也許再也不會了！我們讓選單建立流程更順暢，新版本會有引導來協助你。"
 
-#: wp-admin/about.php:184
+#: wp-admin/about.php:238
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "更好的選單操作 = 更少的困惑"
 
-#: wp-admin/about.php:178
+#: wp-admin/about.php:232
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "當你切換佈景主題後，小工具會判斷往上調整並移動位置。在 WordPress 4.9 的改良中，當你決定使用新的佈景主題時會提供更多選單以及小工具的容器。除此之外，你可以預覽已經安裝或是下載好的佈景主題，在正式發佈前可以先看看效果如何。"
 
-#: wp-admin/about.php:162
+#: wp-admin/about.php:216
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "想要在文字小工具中新增媒體嗎？使用好用的「新增媒體」按鈕輕鬆嵌入圖片、影片以及聲音吧！"
 
-#: wp-admin/about.php:161
+#: wp-admin/about.php:215
 msgid "Press a Button, Add Media"
 msgstr "點擊按鈕新增媒體"
 
-#: wp-admin/about.php:155
+#: wp-admin/about.php:209
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "從 WordPress 4.8 我們就持續在改善媒體的功能，沒錯！現在你可以直接透過小工具來新增藝廊！"
 
-#: wp-admin/about.php:138
+#: wp-admin/about.php:192
 msgid "Warning: Potential Danger Ahead!"
 msgstr "警告：有潛在的危險！"
 
-#: wp-admin/about.php:132
+#: wp-admin/about.php:186
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "遇過網站發生一片空白的狀況嗎？在修改佈景主題跟外掛的程式碼時可以避免這種狀況再度發生了，因為 WordPress 4.9 會在檔案儲存的當下先幫你進行除錯，避免把錯誤的程式碼發佈到網站中。"
 
-#: wp-admin/about.php:131
+#: wp-admin/about.php:185
 msgid "Sandbox for Safety"
 msgstr "安全沙盒模式"
 
-#: wp-admin/about.php:125
+#: wp-admin/about.php:179
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "你遇到了顯示問題但又無法找出是 CSS 那邊有錯誤，有了程式提示以及錯誤檢查功能，你可以快速發現是哪裡出錯。保證能幫助你查看程式更輕鬆，還能更快速的修補錯誤。"
 
-#: wp-admin/about.php:124
+#: wp-admin/about.php:178
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "語法高亮度顯示及錯誤檢查？是的，請進行！"
 
-#: wp-admin/about.php:102
+#: wp-admin/about.php:156
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "曾經遇過兩位登入使用者同時在進行設計修改，結果覆蓋掉彼此設計的內容過嗎？WordPress 4.9 的設計鎖定功能（類似文章鎖定功能）確保你的設計草稿沒有其它人可以清除或覆蓋。"
 
-#: wp-admin/about.php:95
+#: wp-admin/about.php:149
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "需要得到網站設計修改後的回饋嗎？WordPress 4.9 提供預覽連結的功能讓你可以把草稿傳給你的團隊成員或是客戶預覽，讓你可以在正式發佈前收集用戶意見以進行調整，這就是傳說中的協作&#43;&#43;嗎？"
 
-#: wp-admin/about.php:94
+#: wp-admin/about.php:148
 msgid "Collaborate with Design Preview Links"
 msgstr "使用設計預覽連結來進行合作"
 
-#: wp-admin/about.php:88
+#: wp-admin/about.php:142
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "是的，你沒看錯，你可以像使用文章草稿或是排程發佈一樣來預先排訂網站的設計風格變更，等到預定時程到後再生效。"
 
-#: wp-admin/about.php:87
+#: wp-admin/about.php:141
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "草稿以及自訂排程更新網站設計"
 
-#: wp-admin/about.php:66
+#: wp-admin/about.php:120
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "歡迎來到全新的自訂功能，包含設計草稿、鎖定、排程以及預覽連結等新模式，此外還有程式碼提示以及偵錯功能，讓你擁有更佳的架站體驗，如果這些還不能滿足你，我們還新增了全新的藝廊小工具，以及改善了佈景主題瀏覽與切換介面。"
 
-#: wp-admin/about.php:79
+#: wp-admin/about.php:133
 msgid "Customizer Workflow Improved"
 msgstr "自訂器的工作流程改善"
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:61
+#: wp-admin/about.php:115
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "自訂功能主要更新：程式偵錯功能，以及更多 %s"
 
@@ -766,10 +770,6 @@ msgstr "https://tw.wordpress.org/plugins/"
 #: wp-admin/customize.php:72 wp-admin/customize.php:81
 msgid "Customize New Changes"
 msgstr "自訂功能全新變化"
-
-#: wp-admin/customize.php:80
-msgid "This changeset has already been published and cannot be further modified."
-msgstr "此變更集已經發佈且無法進一步修改。"
 
 #: wp-admin/custom-background.php:407 wp-admin/custom-background.php:408
 msgctxt "Background Scroll"
@@ -1697,7 +1697,7 @@ msgid "Welcome to %s. This is your first post. Edit or delete it, then start blo
 msgstr "歡迎來到 %s。這是你的第一篇文章。編輯或刪除它，然後開始寫網誌吧！"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:372
+#: wp-admin/about.php:426
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>版本 %s</strong> 解決一個安全性問題。"
 
@@ -1714,15 +1714,15 @@ msgstr "https://zh-tw.gravatar.com/"
 msgid "Profile Picture"
 msgstr "個人檔案圖像"
 
-#: wp-admin/about.php:34 wp-admin/about.php:369
+#: wp-admin/about.php:34 wp-admin/about.php:423
 msgid "Maintenance and Security Releases"
 msgstr "維護及安全性更新"
 
-#: wp-admin/about.php:366
+#: wp-admin/about.php:420
 msgid "Security Releases"
 msgstr "安全性更新"
 
-#: wp-admin/about.php:363
+#: wp-admin/about.php:417
 msgid "Maintenance Releases"
 msgstr "維護更新"
 
@@ -2628,7 +2628,7 @@ msgid "<a href=\"https://codex.wordpress.org/Managing_Plugins#Plugin_Management\
 msgstr "<a href=\"https://codex.wordpress.org/Managing_Plugins#Plugin_Management\">管理外掛說明文件</a>"
 
 #. translators: %s: the option/setting
-#: wp-admin/options.php:198
+#: wp-admin/options.php:200
 msgid "The %s setting is unregistered. Unregistered settings are deprecated. See https://codex.wordpress.org/Settings_API"
 msgstr "設定 %s 已被取消註冊。取消註冊設定功能已被捨棄。請參考 https://codex.wordpress.org/Settings_API"
 
@@ -3768,8 +3768,8 @@ msgstr "你的網站 %1$s 在嘗試更新至 WordPress %2$s 版本時遭遇嚴�
 
 #: wp-admin/includes/class-core-upgrader.php:137
 #: wp-admin/includes/class-wp-upgrader.php:164
-#: wp-admin/includes/update-core.php:885 wp-admin/includes/update-core.php:962
-#: wp-admin/includes/update-core.php:985
+#: wp-admin/includes/update-core.php:921 wp-admin/includes/update-core.php:998
+#: wp-admin/includes/update-core.php:1021
 msgid "The update cannot be installed because we will be unable to copy some files. This is usually due to inconsistent file permissions."
 msgstr "由於複製檔案失敗，所以無法安裝更新。這通常是由無效的檔案權限所致。"
 
@@ -3888,7 +3888,7 @@ msgstr "更新佈景主題：%s"
 msgid "Updating plugin: %s"
 msgstr "更新外掛：%s"
 
-#: wp-admin/includes/update-core.php:1022
+#: wp-admin/includes/update-core.php:1058
 msgid "There is not enough free disk space to complete the update."
 msgstr "沒有足夠的磁碟空間來完成更新。"
 
@@ -3929,11 +3929,11 @@ msgstr "對佈景主題進行升級將會覆蓋原有的修改變更。要避免
 msgid "This password will not be stored on the server."
 msgstr "密碼將不會被儲存在伺服器上。"
 
-#: wp-admin/includes/update-core.php:913
+#: wp-admin/includes/update-core.php:949
 msgid "Preparing to install the latest version&#8230;"
 msgstr "正在準備安裝最新版本&#8230;"
 
-#: wp-admin/includes/update-core.php:975
+#: wp-admin/includes/update-core.php:1011
 msgid "Copying the required files&#8230;"
 msgstr "正在複製必要的檔案&#8230;"
 
@@ -4697,7 +4697,7 @@ msgstr "已阻擋搜尋引擎"
 msgid "Search Engine Visibility"
 msgstr "搜尋引擎可見度"
 
-#: wp-admin/includes/update-core.php:1261 wp-admin/update-core.php:511
+#: wp-admin/includes/update-core.php:1301 wp-admin/update-core.php:511
 msgid "Welcome to WordPress %1$s. You will be redirected to the About WordPress screen. If not, click <a href=\"%2$s\">here</a>."
 msgstr "歡迎使用 WordPress %1$s。你將被導向「關於 WordPress」畫面。若沒有，點擊<a href=\"%2$s\">這裡</a>。"
 
@@ -5500,14 +5500,14 @@ msgid "Show Toolbar when viewing site"
 msgstr "觀看網站時顯示工具列"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:377
+#: wp-admin/about.php:39 wp-admin/about.php:57 wp-admin/about.php:431
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>版本 %1$s</strong> 更正了 %2$s 個臭蟲。"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:381
+#: wp-admin/about.php:435
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>%1$s 版</strong> 解決了一個安全性議題，並且修正 %2$s 個臭蟲。"
@@ -5515,13 +5515,14 @@ msgstr[0] "<strong>%1$s 版</strong> 解決了一個安全性議題，並且修�
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:385
+#: wp-admin/about.php:75 wp-admin/about.php:93 wp-admin/about.php:439
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>版本 %1$s</strong> 更正了一些安全問題及 %2$s 個臭蟲。"
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:50 wp-admin/about.php:389
+#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
+#: wp-admin/about.php:104 wp-admin/about.php:443
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "要知道更多資訊，參考 <a href=\"%s\">發行備註</a>。"
 
@@ -5534,20 +5535,20 @@ msgstr "歡迎來到你的 WordPress 控制台！登入你的網站後，你就�
 msgid "What&#8217;s New"
 msgstr "新鮮事"
 
-#: wp-admin/about.php:362
+#: wp-admin/about.php:416
 msgid "Maintenance Release"
 msgstr "維護更新版本"
 
-#: wp-admin/about.php:365
+#: wp-admin/about.php:419
 msgid "Security Release"
 msgstr "安全性更新版本"
 
-#: wp-admin/about.php:368
+#: wp-admin/about.php:422
 msgid "Maintenance and Security Release"
 msgstr "維護與安全性更新版本"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:374
+#: wp-admin/about.php:428
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>版本 %s</strong> 修正了一些安全性問題。"
 
@@ -5555,11 +5556,11 @@ msgstr "<strong>版本 %s</strong> 修正了一些安全性問題。"
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "這個畫面可讓你選擇你的的固定網址結構。你可以選擇常見的設定或建立自訂網址結構。"
 
-#: wp-admin/includes/update-core.php:1262 wp-admin/update-core.php:512
+#: wp-admin/includes/update-core.php:1302 wp-admin/update-core.php:512
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "歡迎來到 WordPress %1$s。<a href=\"%2$s\">點這裡以觀看更多資訊</a>。"
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:309
 msgid "Return to Updates"
 msgstr "返回更新"
 
@@ -5831,11 +5832,11 @@ msgstr "因為這是一個多站台的安裝，你可以透過指定使用者帳
 msgid "Welcome to WordPress %s"
 msgstr "歡迎來到 WordPress %s"
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:309
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "返回控制台 &rarr; 更新"
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:312
 msgid "Go to Dashboard &rarr; Home"
 msgstr "前往控制台 &rarr; 首頁"
 
@@ -6098,7 +6099,7 @@ msgid "Caution:"
 msgstr "警告："
 
 #: wp-admin/my-sites.php:54 wp-admin/options-head.php:15
-#: wp-admin/options.php:233
+#: wp-admin/options.php:235
 msgid "Settings saved."
 msgstr "設定已儲存。"
 
@@ -7116,13 +7117,13 @@ msgstr "全部升級動作已完成。"
 msgid "When adding a new tag on this screen, you&#8217;ll fill in the following fields:"
 msgstr "當在此畫面新增一個標籤，你將填入以下欄位："
 
-#: wp-admin/edit-tags.php:229
-msgid "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
-msgstr "分類與標籤有何不同？一般來說，標籤在你的文章中扮演著標記重要資訊的角色（姓名、主題等等），可能或可能不會再次出現於其他文章，而分類則是預先確定的部分。如果你將你的網誌想像成一本書，分類就像是內容目錄，而標籤則如同索引。"
-
 #: wp-admin/edit-tags.php:239
 msgid "When adding a new category on this screen, you&#8217;ll fill in the following fields:"
 msgstr "當在此畫面新增一個分類，你將填入以下欄位："
+
+#: wp-admin/edit-tags.php:229
+msgid "What&#8217;s the difference between categories and tags? Normally, tags are ad-hoc keywords that identify important information in your post (names, subjects, etc) that may or may not recur in other posts, while categories are pre-determined sections. If you think of your site like a book, the categories are like the Table of Contents and the tags are like the terms in the index."
+msgstr "分類與標籤有何不同？一般來說，標籤在你的文章中扮演著標記重要資訊的角色（姓名、主題等等），可能或可能不會再次出現於其他文章，而分類則是預先確定的部分。如果你將你的網誌想像成一本書，分類就像是內容目錄，而標籤則如同索引。"
 
 #: wp-admin/edit-tags.php:254
 msgid "You can change the display of this screen using the Screen Options tab to set how many items are displayed per screen and to display/hide columns in the table."
@@ -7628,7 +7629,7 @@ msgid "Update WordPress"
 msgstr "升級 WordPress"
 
 #: wp-admin/includes/class-wp-automatic-updater.php:349
-#: wp-admin/includes/update-core.php:1258 wp-admin/update-core.php:510
+#: wp-admin/includes/update-core.php:1298 wp-admin/update-core.php:510
 msgid "WordPress updated successfully"
 msgstr "WordPress 升級成功"
 
@@ -7652,7 +7653,7 @@ msgstr "時區正在日光節約時間。"
 msgid "Yes, delete these files and data"
 msgstr "確認，刪除這些檔案與資料"
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:312
 msgid "Go to Dashboard"
 msgstr "前往控制台"
 
@@ -8149,7 +8150,7 @@ msgstr "預設郵件發表文章分類"
 msgid "Update Services"
 msgstr "更新服務"
 
-#: wp-admin/options.php:247
+#: wp-admin/options.php:249
 msgid "All Settings"
 msgstr "全部設定"
 
@@ -8478,7 +8479,7 @@ msgstr "版本： %s"
 msgid "Unable to locate WordPress theme directory."
 msgstr "無法找到 WordPress 佈景主題目錄。"
 
-#: wp-admin/includes/update-core.php:872
+#: wp-admin/includes/update-core.php:908
 msgid "The update could not be unpacked"
 msgstr "更新檔案無法解壓縮。"
 
@@ -8599,11 +8600,11 @@ msgstr "佈景主題選項"
 msgid "Could not fully remove the theme %s."
 msgstr "無法完全移除佈景主題 %s。"
 
-#: wp-admin/includes/update-core.php:859
+#: wp-admin/includes/update-core.php:895
 msgid "Verifying the unpacked files&#8230;"
 msgstr "檢查解壓縮的檔案中&#8230;"
 
-#: wp-admin/includes/update-core.php:1132
+#: wp-admin/includes/update-core.php:1172
 msgid "Upgrading database&#8230;"
 msgstr "升級資料庫中&#8230;"
 
@@ -8684,15 +8685,15 @@ msgstr "<a href=\"%s\">靜態頁面</a>（選擇如下）"
 msgid "If you have a theme in a .zip format, you may install it by uploading it here."
 msgstr "若是你有個 .zip 格式的佈景主題，你可在這裡將它上傳安裝。"
 
-#: wp-admin/includes/update-core.php:906
+#: wp-admin/includes/update-core.php:942
 msgid "The update cannot be installed because WordPress %1$s requires PHP version %2$s or higher and MySQL version %3$s or higher. You are running PHP version %4$s and MySQL version %5$s."
 msgstr "這個升級無法安裝因為 WordPress %1$s 需要 PHP %2$s 以上的版本與 MySQL %3$s 以上的版本。你正在使用 PHP %4$s 版本與 MySQL %5$s 版本。"
 
-#: wp-admin/includes/update-core.php:908
+#: wp-admin/includes/update-core.php:944
 msgid "The update cannot be installed because WordPress %1$s requires PHP version %2$s or higher. You are running version %3$s."
 msgstr "這個升級無法安裝因為 WordPress %1$s 需要 PHP %2$s 以上的版本。你正在使用 %3$s 版本。"
 
-#: wp-admin/includes/update-core.php:910
+#: wp-admin/includes/update-core.php:946
 msgid "The update cannot be installed because WordPress %1$s requires MySQL version %2$s or higher. You are running version %3$s."
 msgstr "這個升級無法安裝因為 WordPress %1$s 需要 MySQL %2$s 以上的版本。你正在使用 %3$s 版本。"
 
@@ -9027,7 +9028,7 @@ msgid "Custom Header"
 msgstr "自定頁首"
 
 #: wp-admin/includes/template.php:1994 wp-admin/nav-menus.php:659
-#: wp-admin/options.php:294
+#: wp-admin/options.php:296
 msgid "Save Changes"
 msgstr "儲存變更"
 
@@ -9316,7 +9317,7 @@ msgstr "目錄已經存在。"
 
 #: wp-admin/includes/class-wp-upgrader.php:162 wp-admin/includes/file.php:1170
 #: wp-admin/includes/file.php:1281 wp-admin/includes/file.php:1339
-#: wp-admin/includes/update-core.php:1207
+#: wp-admin/includes/update-core.php:1247
 msgid "Could not create directory."
 msgstr "無法新建目錄。"
 
@@ -10311,8 +10312,8 @@ msgid "Could not extract file from archive."
 msgstr "無法自壓縮檔中解壓縮檔案。"
 
 #: wp-admin/includes/file.php:1195 wp-admin/includes/file.php:1299
-#: wp-admin/includes/file.php:1334 wp-admin/includes/update-core.php:1091
-#: wp-admin/includes/update-core.php:1202
+#: wp-admin/includes/file.php:1334 wp-admin/includes/update-core.php:1127
+#: wp-admin/includes/update-core.php:1242
 msgid "Could not copy file."
 msgstr "無法複製檔案。"
 
@@ -10393,12 +10394,12 @@ msgid "Comment by %s marked as spam."
 msgstr "%s 發表的迴響被標記為垃圾。"
 
 #: wp-admin/includes/class-wp-upgrader.php:166
-#: wp-admin/includes/update-core.php:967
+#: wp-admin/includes/update-core.php:1003
 msgid "Enabling Maintenance mode&#8230;"
 msgstr "啟用維護模式&#8230;"
 
 #: wp-admin/includes/class-wp-upgrader.php:167
-#: wp-admin/includes/update-core.php:1054
+#: wp-admin/includes/update-core.php:1090
 msgid "Disabling Maintenance mode&#8230;"
 msgstr "停用維護模式中&#8230;"
 

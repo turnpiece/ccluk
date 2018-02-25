@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-17 19:14:57+0000\n"
+"PO-Revision-Date: 2018-02-06 10:00:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,11 +36,21 @@ msgstr ","
 msgid "number_format_thousands_sep"
 msgstr "&nbsp;"
 
-#: wp-includes/class-wp-customize-manager.php:4135
+#. translators: %s: User who is customizing the changeset in customizer.
+#: wp-includes/class-wp-customize-manager.php:3970
+msgid "%s is already customizing this changeset. Do you want to take over?"
+msgstr "%s tilpasser allerede dette endringssettet. Vil du overta?"
+
+#. translators: %s: User who is customizing the changeset in customizer.
+#: wp-includes/class-wp-customize-manager.php:3968
+msgid "%s is already customizing this changeset. Please wait until they are done to try customizing. Your latest changes have been autosaved."
+msgstr "%s tilpasser allerede dette endringssettet. Vennligst vent til personen er ferdig for å forsøke å tilpasse. Dine siste endringer har blitt autolagret."
+
+#: wp-includes/class-wp-customize-manager.php:4172
 msgid "Update anyway, even though it might break your site?"
 msgstr "Oppdater likevel, selv om det kan føre til at nettstedet ditt slutter å fungere som det skal?"
 
-#: wp-includes/wp-db.php:1290
+#: wp-includes/wp-db.php:1283
 msgid "The query only expected one placeholder, but an array of multiple placeholders was sent."
 msgstr "Spørringen forventet bare en plassholder, men en array med flere plassholdere ble sendt."
 
@@ -57,7 +67,7 @@ msgstr "Installert"
 
 #: wp-includes/rest-api.php:1115
 msgid "%1$s is not a valid property of Object."
-msgstr "%1$s er ikke en gyldig egenskap for Object."
+msgstr "%1$s er ikke en gyldig egenskap for Objekt."
 
 #. translators: %s: URL to Add Themes admin screen
 #: wp-includes/script-loader.php:601
@@ -75,7 +85,7 @@ msgctxt "tags"
 msgid "Most Used"
 msgstr "Mest brukte"
 
-#: wp-includes/class-wp-customize-nav-menus.php:950
+#: wp-includes/class-wp-customize-nav-menus.php:966
 msgid "Click &#8220;Next&#8221; to start adding links to your new menu."
 msgstr "Klikk &#8220;Neste&#8221; for å begynne å legge til lenker i den nye menyen din."
 
@@ -84,7 +94,7 @@ msgstr "Klikk &#8220;Neste&#8221; for å begynne å legge til lenker i den nye m
 msgid "Sorry, we can&#8217;t load the video at the supplied URL. Please check that the URL is for a supported video file (%s) or stream (e.g. YouTube and Vimeo)."
 msgstr "Beklager, vi kan ikke laste inn videoen på denne URLen. Vennligst sjekk at URL er til en støttet videofil (%s) eller strøm (f.eks. YouTube og Vimeo)."
 
-#: wp-includes/class-wp-customize-manager.php:4588
+#: wp-includes/class-wp-customize-manager.php:4627
 #: wp-includes/script-loader.php:554
 msgctxt "customizer changeset action/button label"
 msgid "Schedule"
@@ -119,37 +129,37 @@ msgstr "Legg til en navigasjonsmeny i kolonnen."
 msgid "%s has taken over and is currently customizing."
 msgstr "%s har tatt over og holder på å tilpasse."
 
-#: wp-includes/class-wp-customize-manager.php:4121
+#: wp-includes/class-wp-customize-manager.php:4158
 msgid "Take over"
 msgstr "Ta over"
 
-#: wp-includes/class-wp-customize-manager.php:3194
+#: wp-includes/class-wp-customize-manager.php:3212
 msgid "Security check failed."
 msgstr "Sikkerhetssjekk feilet"
 
-#: wp-includes/class-wp-customize-manager.php:4117
+#: wp-includes/class-wp-customize-manager.php:4154
 msgid "Go back"
 msgstr "Gå tilbake"
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:4105
+#: wp-includes/class-wp-customize-manager.php:3977
 msgid "%s is already customizing this site. Do you want to take over?"
 msgstr "%s tilpasser allerede denne siden. Vil du ta over?"
 
-#: wp-includes/class-wp-customize-manager.php:3210
+#: wp-includes/class-wp-customize-manager.php:3228
 msgid "Sorry, you are not allowed to take over."
 msgstr "Beklager, du har ikke tillatelse til å ta over."
 
-#: wp-includes/class-wp-customize-manager.php:2451
+#: wp-includes/class-wp-customize-manager.php:2456
 msgid "Changeset is being edited by other user."
 msgstr "Endringssettet redigeres av en annen bruker."
 
-#: wp-includes/class-wp-customize-manager.php:3203
+#: wp-includes/class-wp-customize-manager.php:3221
 msgid "No changeset found to take over"
 msgstr "Fant ingen endringssett å ta over"
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:4110
+#: wp-includes/class-wp-customize-manager.php:3975
 msgid "%s is already customizing this site. Please wait until they are done to try customizing. Your latest changes have been autosaved."
 msgstr "%s tilpasser allerede dette nettstedet. Vennligst vent til personen er ferdig. Dine siste endringer har blitt autolagret."
 
@@ -178,24 +188,24 @@ msgctxt "menu locations"
 msgid "Where do you want this menu to appear?"
 msgstr "Hvor vil du at menyen skal vises?"
 
-#: wp-includes/class-wp-customize-nav-menus.php:964
+#: wp-includes/class-wp-customize-nav-menus.php:980
 msgid "You&#8217;ll create a menu, assign it a location, and add menu items like links to pages and categories. If your theme has multiple menu areas, you might need to create more than one."
 msgstr "Du vil lage en meny, tildele den en lokasjon og legge til menyelementer, som lenker til sider og kategorier. Hvis temaet ditt har flere menylokasjoner må du kanskje lage mer enn en."
 
-#: wp-includes/class-wp-customize-nav-menus.php:961
+#: wp-includes/class-wp-customize-nav-menus.php:977
 msgid "It doesn&#8217;t look like your site has any menus yet. Want to build one? Click the button to start."
 msgstr "Det ser ikke ut som om siden din har noen menyer ennå. Vil du lage en? Klikk knappen for å begynne."
 
-#: wp-includes/class-wp-customize-nav-menus.php:588
+#: wp-includes/class-wp-customize-nav-menus.php:604
 msgctxt "menu locations"
 msgid "View All Locations"
 msgstr "Vis alle lokasjoner"
 
-#: wp-includes/class-wp-customize-manager.php:4788
+#: wp-includes/class-wp-customize-manager.php:4828
 msgid "While previewing a new theme, you can continue to tailor things like widgets and menus, and explore theme-specific options."
 msgstr "Når du forhåndsviser et tema kan du fortsette å tilpasse ting som widgeter og menyer, og utforske innstillinger spesifikt for temaet."
 
-#: wp-includes/class-wp-customize-manager.php:4787
+#: wp-includes/class-wp-customize-manager.php:4827
 msgid "Looking for a theme? You can search or browse the WordPress.org theme directory, install and preview themes, then activate them right here."
 msgstr "Ser du etter et tema? Du kan søke etter og bla gjennom temakatalogen på WordPress.org, installere og forhåndsvise temaer, og så aktivere dem her."
 
@@ -203,11 +213,11 @@ msgstr "Ser du etter et tema? Du kan søke etter og bla gjennom temakatalogen p�
 msgid "Something went wrong. Your change may not have been saved. Please try again. There is also a chance that you may need to manually fix and upload the file over FTP."
 msgstr "Noe gikk galt. Endringene ble kanskje ikke lagret. Vennligst prøv igjen. Det kan hende du må fikse filen manuelt og laste den opp over FTP."
 
-#: wp-includes/class-wp-customize-manager.php:5242
+#: wp-includes/class-wp-customize-manager.php:5282
 msgid "Screen reader users: when in forms mode, you may need to press the escape key twice."
 msgstr "Brukere av skjermleser: når du er i skjemamodus, må du kanskje trykke på escape-knappen to ganger."
 
-#: wp-includes/class-wp-customize-nav-menus.php:588
+#: wp-includes/class-wp-customize-nav-menus.php:604
 msgctxt "menu locations"
 msgid "View Location"
 msgstr "Vis lokasjon"
@@ -216,7 +226,7 @@ msgstr "Vis lokasjon"
 msgid "No themes found. Try a different search."
 msgstr "Ingen temaer funnet. Prøv et annet søk."
 
-#: wp-includes/class-wp-customize-nav-menus.php:576
+#: wp-includes/class-wp-customize-nav-menus.php:592
 msgid "Your theme can display menus in one location. Select which menu you would like to use."
 msgstr "Temaet ditt kan vise menyer på en lokasjon. Velg hvilken meny du vil bruke."
 
@@ -230,7 +240,7 @@ msgstr "hopp fremover %1 sekunder"
 msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr "%1$s &lsaquo; %2$s &#8212; WordPress"
 
-#: wp-includes/wp-db.php:1253
+#: wp-includes/wp-db.php:1246
 msgid "Unsupported value type (%s)."
 msgstr "Verditype ikke støttet (%s)."
 
@@ -245,7 +255,7 @@ msgid "Site Name: %s"
 msgstr "Navn på nettside: %s"
 
 #. translators: 1: number of placeholders, 2: number of arguments passed
-#: wp-includes/wp-db.php:1301
+#: wp-includes/wp-db.php:1294
 msgid "The query does not contain the correct number of placeholders (%1$d) for the number of arguments passed (%2$d)."
 msgstr "Spørringen har ikke korrekt antall plassholdere (%1$d) for antall argumenter sendt (%2$d)."
 
@@ -706,13 +716,13 @@ msgstr "Metoden «%s» må overstyres."
 
 #. translators: Network admin email change notification email subject. %s:
 #. Network title
-#: wp-includes/ms-functions.php:2697
+#: wp-includes/ms-functions.php:2704
 msgid "[%s] Notice of Network Admin Email Change"
 msgstr "[%s] Varsel om endring av e-post for nettverksadministrator"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/ms-functions.php:2682
+#: wp-includes/ms-functions.php:2689
 msgid ""
 "Hi,\n"
 "\n"
@@ -785,13 +795,13 @@ msgstr "Brukeren kan ikke legges til denne siden."
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5771
+#: wp-includes/functions.php:5779
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Varsel om endring av e-post for administrator"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5756
+#: wp-includes/functions.php:5764
 msgid ""
 "Hi,\n"
 "\n"
@@ -838,7 +848,7 @@ msgstr "Søk i WordPress.org-temaer"
 msgid "Install &amp; Preview"
 msgstr "Installer og forhåndsvis"
 
-#: wp-includes/functions.php:5699
+#: wp-includes/functions.php:5700
 msgid "Only UUID V4 is supported at this time."
 msgstr "Bare UUID V4 er støttet på dette tidspunktet."
 
@@ -855,9 +865,10 @@ msgstr "%s temaer"
 msgid "Invalid URL."
 msgstr "Ugyldig URL."
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:39
-msgid "Time to add some links! Click &#8220;Add menu items&#8221; to start putting pages, categories, and custom links in your menu. Add as many things as you&#8217;d like."
-msgstr "På tide å legge til noen lenker! Klikk &#8220;Legg til menyelement&#8221; for å begynne å legge til sider, kategorier, og egendefinerte lenker i menyen. Legg til som mange som du vil."
+#. translators: %s: "Add Items" button text
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:44
+msgid "Time to add some links! Click &#8220;%s&#8221; to start putting pages, categories, and custom links in your menu. Add as many things as you&#8217;d like."
+msgstr "På tide å legge til noen lenker! Klikk &laquo;%s&raquo; for å begynne å legge til sider, kategorier, og egendefinerte lenker i menyen. Legg til så mange ting du vil."
 
 #: wp-includes/customize/class-wp-customize-media-control.php:249
 msgid "Choose image"
@@ -942,16 +953,16 @@ msgctxt "Name for the Visual editor tab"
 msgid "Visual"
 msgstr "Visuell"
 
-#: wp-includes/class-wp-customize-nav-menus.php:968
+#: wp-includes/class-wp-customize-nav-menus.php:984
 msgid "Create New Menu"
 msgstr "Lag ny meny"
 
-#: wp-includes/class-wp-customize-nav-menus.php:693
+#: wp-includes/class-wp-customize-nav-menus.php:709
 msgid "New Menu"
 msgstr "Ny meny"
 
 #. translators: URL to the widgets panel of the customizer
-#: wp-includes/class-wp-customize-nav-menus.php:584
+#: wp-includes/class-wp-customize-nav-menus.php:600
 msgid "If your theme has widget areas, you can also add menus there. Visit the <a href=\"%s\">Widgets panel</a> and add a &#8220;Navigation Menu widget&#8221; to display a menu in a sidebar or footer."
 msgstr "Hvis temaet ditt har widgetområder kan du også legge til menyer der. Gå til <a href=\"%s\">Widget-panelet</a> og legg til en &#8220;Navigasjonsmeny-widget&#8221; for å vise en meny i en sidelinje eller bunntekst."
 
@@ -969,21 +980,21 @@ msgstr "%1$s-%2$s"
 msgid "Meridian"
 msgstr "meridian"
 
-#: wp-includes/class-wp-customize-nav-menus.php:420
+#: wp-includes/class-wp-customize-nav-menus.php:436
 msgid "If your theme has multiple menus, giving them clear names will help you manage them."
 msgstr "Hvis temaet ditt har flere menyer vil det hjelpe deg å holde styr på dem hvis du gir de  tydelige navn."
 
-#: wp-includes/class-wp-customize-nav-menus.php:400
+#: wp-includes/class-wp-customize-nav-menus.php:416
 msgid "Your theme can display menus in one location."
 msgstr "Temaet ditt kan vise menyer på ett sted."
 
-#: wp-includes/class-wp-customize-manager.php:5278
+#: wp-includes/class-wp-customize-manager.php:5318
 msgid "CSS code"
 msgstr "CSS-kode"
 
 #. translators: 1: link to user profile, 2: additional link attributes, 3:
 #. accessibility text
-#: wp-includes/class-wp-customize-manager.php:5249
+#: wp-includes/class-wp-customize-manager.php:5289
 #: wp-includes/widgets/class-wp-widget-custom-html.php:299
 msgid "The edit field automatically highlights code syntax. You can disable this in your <a href=\"%1$s\" %2$s>user profile%3$s</a> to work in plain text mode."
 msgstr "Redigeringsfeltet vil automatisk fremheve kodesyntaks. Du kan deaktivere dette i dine <a href=\"%1$s\" %2$s>brukerinnstillinger%3$s</a> for å arbeide med ren tekst."
@@ -992,58 +1003,58 @@ msgstr "Redigeringsfeltet vil automatisk fremheve kodesyntaks. Du kan deaktivere
 msgid "Screen reader users: when in forms mode, you may need to press the Esc key twice."
 msgstr "Skjermleserbrukere: når du er i skjemamodus må du kanskje trykke Esc-knappen to ganger."
 
-#: wp-includes/class-wp-customize-manager.php:5241
+#: wp-includes/class-wp-customize-manager.php:5281
 #: wp-includes/widgets/class-wp-widget-custom-html.php:312
 msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr "For å flytte vekk fra dette området, trykk Esc-knappen fulgt av Tab."
 
-#: wp-includes/class-wp-customize-manager.php:5240
+#: wp-includes/class-wp-customize-manager.php:5280
 #: wp-includes/widgets/class-wp-widget-custom-html.php:311
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr "I redigeringsområdet vil Tab-knappen sette inn et tab-tegn."
 
-#: wp-includes/class-wp-customize-manager.php:5238
+#: wp-includes/class-wp-customize-manager.php:5278
 #: wp-includes/widgets/class-wp-widget-custom-html.php:309
 msgid "When using a keyboard to navigate:"
 msgstr "Når du bruker et tastatur for å navigere:"
 
-#: wp-includes/class-wp-customize-manager.php:5228
+#: wp-includes/class-wp-customize-manager.php:5268
 msgid "Add your own CSS code here to customize the appearance and layout of your site."
 msgstr "Legg til din egen CSS-kode her for å tilpasse utseendet og layouten til siden din."
 
-#: wp-includes/class-wp-customize-manager.php:5193
+#: wp-includes/class-wp-customize-manager.php:5233
 msgid "Your homepage displays"
 msgstr "Forsiden din viser"
 
 #. translators: %s: number of menu locations
-#: wp-includes/class-wp-customize-nav-menus.php:403
+#: wp-includes/class-wp-customize-nav-menus.php:419
 msgid "Your theme can display menus in %s location."
 msgid_plural "Your theme can display menus in %s locations."
 msgstr[0] "Temaet ditt kan vise menyer på %s lokasjon."
 msgstr[1] "Temaet ditt kan vise menyer på %s lokasjoner."
 
-#: wp-includes/class-wp-customize-manager.php:5182
+#: wp-includes/class-wp-customize-manager.php:5222
 msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
 msgstr "Du kan velge hva som skal vises på forsiden på siden din. Det kan være innlegg i omvendt kronologisk rekkefølge (klassisk blogg) eller en fastsatt/statisk side. For å sette en statisk forside må du først lage to sider. En vil bli forsiden, og den andre vil være der innleggene dine vises."
 
-#: wp-includes/class-wp-customize-manager.php:5180
+#: wp-includes/class-wp-customize-manager.php:5220
 msgid "Homepage Settings"
 msgstr "Forsideinnstillinger"
 
 #. translators: %s: site icon size in pixels
-#: wp-includes/class-wp-customize-manager.php:4874
+#: wp-includes/class-wp-customize-manager.php:4914
 msgid "Site Icons should be square and at least %s pixels."
 msgstr "Sideikoner bør være kvadratiske og minst %s piksler."
 
-#: wp-includes/class-wp-customize-manager.php:4872
+#: wp-includes/class-wp-customize-manager.php:4912
 msgid "Site Icons are what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. Upload one here!"
 msgstr "Sideikoner er det du ser i nettleserfaner, bokmerkelinjer og i WordPress-mobilappene. Last opp et her!"
 
-#: wp-includes/class-wp-customize-manager.php:4804
+#: wp-includes/class-wp-customize-manager.php:4844
 msgid "WordPress.org themes"
 msgstr "WordPress.org-temaer"
 
-#: wp-includes/class-wp-customize-manager.php:4795
+#: wp-includes/class-wp-customize-manager.php:4835
 msgid "Installed themes"
 msgstr "Installerte temaer"
 
@@ -1051,58 +1062,58 @@ msgstr "Installerte temaer"
 msgid "Publish Settings"
 msgstr "Publiseringsinnstillinger"
 
-#: wp-includes/class-wp-customize-manager.php:4165
+#: wp-includes/class-wp-customize-manager.php:4202
 msgid "Copied"
 msgstr "Kopiert"
 
-#: wp-includes/class-wp-customize-manager.php:4159
+#: wp-includes/class-wp-customize-manager.php:4196
 msgid "Preview Link"
 msgstr "Forhåndsvis lenke"
 
-#: wp-includes/class-wp-customize-manager.php:4156
+#: wp-includes/class-wp-customize-manager.php:4193
 msgid "See how changes would look live on your website, and share the preview with people who can't access the Customizer."
 msgstr "Se hvordan endringene vil se ut på siden din, og del forhåndsvisningen med personer som ikke har tilgang til Tilpasseren."
 
-#: wp-includes/class-wp-customize-manager.php:4154
+#: wp-includes/class-wp-customize-manager.php:4191
 msgid "Share Preview Link"
 msgstr "Del forhåndsvisningslenke"
 
-#: wp-includes/class-wp-customize-manager.php:3035
+#: wp-includes/class-wp-customize-manager.php:3042
 msgid "Changes trashed successfully."
 msgstr "Endringene ble kastet med suksess."
 
-#: wp-includes/class-wp-customize-manager.php:3020
+#: wp-includes/class-wp-customize-manager.php:3027
 msgid "Changes have already been trashed."
 msgstr "Endringene har allerede blitt kastet."
 
-#: wp-includes/class-wp-customize-manager.php:3014
-#: wp-includes/class-wp-customize-manager.php:3030
+#: wp-includes/class-wp-customize-manager.php:3021
+#: wp-includes/class-wp-customize-manager.php:3037
 msgid "Unable to trash changes."
 msgstr "Kunne ikke kaste endringer."
 
-#: wp-includes/class-wp-customize-manager.php:3005
+#: wp-includes/class-wp-customize-manager.php:3012
 msgid "No changes saved yet, so there is nothing to trash."
 msgstr "Ingen endringer ennå, så det er ikke noe å kaste."
 
-#: wp-includes/class-wp-customize-manager.php:2997
+#: wp-includes/class-wp-customize-manager.php:3004
 msgid "There was an authentication problem. Please reload and try again."
 msgstr "Det oppstod et autentiseringsproblem. Last inn på nytt og prøv igjen."
 
 #. translators: %s: number of invalid settings
-#: wp-includes/class-wp-customize-manager.php:2702
+#: wp-includes/class-wp-customize-manager.php:2707
 #: wp-includes/script-loader.php:593 wp-includes/script-loader.php:595
 msgid "Unable to save due to %s invalid setting."
 msgid_plural "Unable to save due to %s invalid settings."
 msgstr[0] "Kunne ikke lagre grunnet %s ugyldig innstilling."
 msgstr[1] "Kunne ikke lagre grunnet %s ugyldige innstillinger."
 
-#: wp-includes/class-wp-customize-manager.php:2588
-#: wp-includes/class-wp-customize-manager.php:2603
+#: wp-includes/class-wp-customize-manager.php:2593
+#: wp-includes/class-wp-customize-manager.php:2608
 #: wp-includes/script-loader.php:558
 msgid "You must supply a future date to schedule."
 msgstr "Du må gi en dato i fremtiden for å planlegge."
 
-#: wp-includes/class-wp-customize-manager.php:2565
+#: wp-includes/class-wp-customize-manager.php:2570
 msgid "The previous set of changes has already been published. Please try saving your current set of changes again."
 msgstr "Det forrige settet med endringer har allerede blitt publisert. Vennligst prøv å lagre de gjeldende endringene igjen."
 
@@ -1114,27 +1125,27 @@ msgstr "Rediger bruker"
 msgid "View User"
 msgstr "Vis bruker"
 
-#: wp-includes/widgets/class-wp-widget-text.php:460
+#: wp-includes/widgets/class-wp-widget-text.php:481
 msgid "This widget may have contained code that may work better in the &#8220;Custom HTML&#8221; widget. If you haven&#8217;t yet, how about trying that widget instead?"
 msgstr "Denne widgeten har muligens inneholdt kode som kan fungere bedre i den nye &#8220;Egendefinert HTML&#8221;-widgeten. Hvis du ikke har prøvd den ennå, hvorfor ikke prøve den istedet?"
 
-#: wp-includes/widgets/class-wp-widget-text.php:513
+#: wp-includes/widgets/class-wp-widget-text.php:534
 msgid "Hey there, looks like you just pasted HTML into the &#8220;Visual&#8221; tab of the Text widget. You may want to paste your code into the &#8220;Text&#8221; tab instead. Alternately, try out the new &#8220;Custom HTML&#8221; widget!"
 msgstr "Hei der! Det ser ut som du akkurat limte inn HTML i fanen «Visuell» i tekst-widgeten. Det kan hende du heller vil lime inn koden i fanen «Tekst» istedet. Alternativt kan du prøve den nye widgetet «Egendefinert HTML»!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:512
+#: wp-includes/widgets/class-wp-widget-text.php:533
 msgid "Did you just paste HTML?"
 msgstr "Limte du akkurat inn HTML-kode?"
 
-#: wp-includes/widgets/class-wp-widget-text.php:497
+#: wp-includes/widgets/class-wp-widget-text.php:518
 msgid "Did you know there is a &#8220;Custom HTML&#8221; widget now? You can find it by scanning the list of available widgets on this screen. Check it out to add some custom code to your site!"
 msgstr "Hei, har du hørt at vi har en widget for &#8220;Egendefinert HTML&#8221; nå? Du finner den ved å se på listen over tilgjengelige widgeter på denne skjermen. Prøv den for å legge til egendefinert på nettstedet ditt!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:495
+#: wp-includes/widgets/class-wp-widget-text.php:516
 msgid "Did you know there is a &#8220;Custom HTML&#8221; widget now? You can find it by pressing the &#8220;<a class=\"add-widget\" href=\"#\">Add a Widget</a>&#8221; button and searching for &#8220;HTML&#8221;. Check it out to add some custom code to your site!"
 msgstr "Hei, har du hørt at vi har en widget for «Egendefinert HTML» nå? Du finner den ved å trykke på knappen «<a class=\"add-widget\" href=\"#\">Legg til en widget</a>» og søke etter «HTML». Prøv den for å legge til egendefinert kode på nettstedet ditt!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:493
+#: wp-includes/widgets/class-wp-widget-text.php:514
 msgid "New Custom HTML Widget"
 msgstr "Ny widget for egendefinert HTML"
 
@@ -1142,7 +1153,7 @@ msgstr "Ny widget for egendefinert HTML"
 msgid "Arbitrary text."
 msgstr "Vilkårlig tekst."
 
-#: wp-includes/widgets/class-wp-widget-text.php:458
+#: wp-includes/widgets/class-wp-widget-text.php:479
 msgid "This widget may contain code that may work better in the &#8220;Custom HTML&#8221; widget. How about trying that widget instead?"
 msgstr "Denne widgeten kan inneholde kode som fungerer bedre i den nye widgeten «Egendefinert HTML». Hva med å prøve den isteden?"
 
@@ -1920,7 +1931,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] Aktiver %2$s"
 
-#: wp-includes/widgets.php:1395 wp-includes/widgets.php:1504
+#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
 msgid "RSS Error:"
 msgstr "RSS-feil:"
 
@@ -2280,7 +2291,7 @@ msgstr "Skjul kontroller"
 msgid "Document Preview"
 msgstr "Dokumentforhåndsvisning"
 
-#: wp-includes/class-wp-customize-manager.php:4963
+#: wp-includes/class-wp-customize-manager.php:5003
 msgid "Header Media"
 msgstr "Toppmedia"
 
@@ -2314,11 +2325,11 @@ msgstr "HTML-beskrivelse for vedlegget, omgjort for visning."
 msgid "Caption for the attachment, as it exists in the database."
 msgstr "Beskrivelse for vedlegget, slik det eksisterer i databasen."
 
-#: wp-includes/class-wp-customize-manager.php:5625
+#: wp-includes/class-wp-customize-manager.php:5665
 msgid "Please enter a valid YouTube URL."
 msgstr "Vennligst legg inn en gyldig YouTube-URL."
 
-#: wp-includes/class-wp-customize-manager.php:5048
+#: wp-includes/class-wp-customize-manager.php:5088
 msgid "Or, enter a YouTube URL:"
 msgstr "Eller, legg inn en YouTube-URL:"
 
@@ -2385,11 +2396,11 @@ msgstr "Begrens resultatsett til innlegg med en eller flere spesifikke slugs."
 msgid "Comment is required."
 msgstr "Kommentar er påkrevd."
 
-#: wp-includes/class-wp-customize-nav-menus.php:795
+#: wp-includes/class-wp-customize-nav-menus.php:811
 msgid "Status is forbidden"
 msgstr "Status er ikke tillatt"
 
-#: wp-includes/class-wp-customize-nav-menus.php:792
+#: wp-includes/class-wp-customize-nav-menus.php:808
 msgid "Empty title"
 msgstr "Tom tittel"
 
@@ -2401,7 +2412,7 @@ msgstr "Vi har allerede et ping fra denne URLen for dette innlegget."
 msgid "I really need an ID for this to work."
 msgstr "Jeg behøver virkelig en ID for at dette skal fungere."
 
-#: wp-includes/class-wp-customize-manager.php:5208
+#: wp-includes/class-wp-customize-manager.php:5248
 msgid "Homepage"
 msgstr "Hjemmeside"
 
@@ -2858,6 +2869,10 @@ msgstr "Begrens resultater til de som samsvarer med en streng."
 msgid "Whether posts with this status should be private."
 msgstr "Hvorvidt innlegg med denne statusen skal være private."
 
+#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:347
+msgid "Scope under which the request is made; determines fields present in response."
+msgstr "Virkeområdet hvor forespørselen gjøres. Avgjør felt i reponsen."
+
 #. translators: %s: method name
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:53
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:66
@@ -2873,10 +2888,6 @@ msgstr "Hvorvidt innlegg med denne statusen skal være private."
 #: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:197
 msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr "Metoden «%s» er ikke implementert. Den må overstyres i en subklasse."
-
-#: wp-includes/rest-api/endpoints/class-wp-rest-controller.php:347
-msgid "Scope under which the request is made; determines fields present in response."
-msgstr "Virkeområdet hvor forespørselen gjøres. Avgjør felt i reponsen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1427
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
@@ -3405,7 +3416,7 @@ msgstr "Beklager, oppføringen din kunne ikke publiseres."
 msgid "Number of widgets found: %d"
 msgstr "Antall widgeter funnet: %d"
 
-#: wp-includes/class-wp-customize-nav-menus.php:881
+#: wp-includes/class-wp-customize-nav-menus.php:897
 msgid "Post"
 msgstr "Innlegg"
 
@@ -3415,127 +3426,127 @@ msgid "No widgets found."
 msgstr "Ingen widgeter funnet."
 
 #. translators: %1$s is the post type name and %2$s is the error message.
-#: wp-includes/class-wp-customize-nav-menus.php:886
+#: wp-includes/class-wp-customize-nav-menus.php:902
 msgid "%1$s could not be created: %2$s"
 msgstr "%1$s kunne ikke opprettes: %2$s"
 
 #. translators: 1: .mp4, 2: .mov
-#: wp-includes/class-wp-customize-manager.php:5601
+#: wp-includes/class-wp-customize-manager.php:5641
 msgid "Only %1$s or %2$s files may be used for header video. Please convert your video file and try again, or, upload your video to YouTube and link it with the option below."
 msgstr "Kun %1$s- eller %2$s-filer kan brukes for toppvideo. Vennligst konverter videofilen og prøv igjen, eller last opp videoen til YouTube og lenk til den med valget nedenfor."
 
-#: wp-includes/class-wp-customize-manager.php:5595
+#: wp-includes/class-wp-customize-manager.php:5635
 msgid "This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below."
 msgstr "Denne videoen er for stor for å brukes som header-video. Prøv en kortere video eller optimaliser komprimeringen og last opp en fil igjen som er mindre enn 8MB. Eller, last opp din video til YouTube og lenk til den med valgene nedenfor."
 
-#: wp-includes/class-wp-customize-manager.php:5555
+#: wp-includes/class-wp-customize-manager.php:5595
 msgid "Unrecognized background setting."
 msgstr "Ugjenkjent bakgrunnsinnstilling."
 
-#: wp-includes/class-wp-customize-manager.php:5546
-#: wp-includes/class-wp-customize-manager.php:5550
+#: wp-includes/class-wp-customize-manager.php:5586
+#: wp-includes/class-wp-customize-manager.php:5590
 msgid "Invalid value for background size."
 msgstr "Ugyldig verdi for bakgrunnsstørrelse."
 
-#: wp-includes/class-wp-customize-manager.php:5232
+#: wp-includes/class-wp-customize-manager.php:5272
 msgid "Learn more about CSS"
 msgstr "Lær mer om CSS"
 
-#: wp-includes/class-wp-customize-manager.php:5542
+#: wp-includes/class-wp-customize-manager.php:5582
 msgid "Invalid value for background position Y."
 msgstr "Ugyldig verdi for bakgrunnsposisjon Y."
 
-#: wp-includes/class-wp-customize-manager.php:5538
+#: wp-includes/class-wp-customize-manager.php:5578
 msgid "Invalid value for background position X."
 msgstr "Ugyldig verdi for bakgrunnsposisjon X."
 
-#: wp-includes/class-wp-customize-manager.php:5534
+#: wp-includes/class-wp-customize-manager.php:5574
 msgid "Invalid value for background attachment."
 msgstr "Ugyldig verdi for festing av bakgrunnsbilde."
 
-#: wp-includes/class-wp-customize-manager.php:5530
+#: wp-includes/class-wp-customize-manager.php:5570
 msgid "Invalid value for background repeat."
 msgstr "Ugyldig verdi for repetisjon av bakgrunnsbilde."
 
-#: wp-includes/class-wp-customize-manager.php:5265
+#: wp-includes/class-wp-customize-manager.php:5305
 msgid "Additional CSS"
 msgstr "Ekstra CSS"
 
 #. translators: accessibility text
-#: wp-includes/class-wp-customize-manager.php:4162
-#: wp-includes/class-wp-customize-manager.php:5234
-#: wp-includes/class-wp-customize-manager.php:5254
+#: wp-includes/class-wp-customize-manager.php:4199
+#: wp-includes/class-wp-customize-manager.php:5274
+#: wp-includes/class-wp-customize-manager.php:5294
 #: wp-includes/customize/class-wp-customize-nav-menu-locations-control.php:56
 #: wp-includes/widgets/class-wp-widget-custom-html.php:304
 msgid "(opens in a new window)"
 msgstr "(åpnes i et nytt vindu)"
 
-#: wp-includes/class-wp-customize-manager.php:5134
+#: wp-includes/class-wp-customize-manager.php:5174
 msgid "Original"
 msgstr "Original"
 
-#: wp-includes/class-wp-customize-manager.php:5147
+#: wp-includes/class-wp-customize-manager.php:5187
 msgid "Repeat Background Image"
 msgstr "Gjenta bakgrunnsbilde"
 
-#: wp-includes/class-wp-customize-manager.php:5115
+#: wp-includes/class-wp-customize-manager.php:5155
 #: wp-includes/customize/class-wp-customize-background-position-control.php:66
 msgid "Image Position"
 msgstr "Bildeposisjon"
 
-#: wp-includes/class-wp-customize-manager.php:5096
-#: wp-includes/class-wp-customize-manager.php:5135
+#: wp-includes/class-wp-customize-manager.php:5136
+#: wp-includes/class-wp-customize-manager.php:5175
 msgid "Fit to Screen"
 msgstr "Tilpass til skjermen"
 
-#: wp-includes/class-wp-customize-manager.php:5130
+#: wp-includes/class-wp-customize-manager.php:5170
 msgid "Image Size"
 msgstr "Bildestørrelse"
 
-#: wp-includes/class-wp-customize-manager.php:5097
+#: wp-includes/class-wp-customize-manager.php:5137
 msgctxt "Repeat Image"
 msgid "Repeat"
 msgstr "Gjenta"
 
-#: wp-includes/class-wp-customize-manager.php:5159
+#: wp-includes/class-wp-customize-manager.php:5199
 msgid "Scroll with Page"
 msgstr "Rull med side"
 
-#: wp-includes/class-wp-customize-manager.php:5098
+#: wp-includes/class-wp-customize-manager.php:5138
 msgctxt "Custom Preset"
 msgid "Custom"
 msgstr "Tilpasset"
 
-#: wp-includes/class-wp-customize-manager.php:5094
+#: wp-includes/class-wp-customize-manager.php:5134
 msgctxt "Default Preset"
 msgid "Default"
 msgstr "Standard"
 
-#: wp-includes/class-wp-customize-manager.php:5090
+#: wp-includes/class-wp-customize-manager.php:5130
 msgctxt "Background Preset"
 msgid "Preset"
 msgstr "Mal"
 
 #. translators: 1: .mp4, 2: header height in pixels
-#: wp-includes/class-wp-customize-manager.php:4985
+#: wp-includes/class-wp-customize-manager.php:5025
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a height of %2$s pixels."
 msgstr "Last opp din video i %1$s-format og minimer filens størrelse for best resultat. Temaet ditt anbefaler en høyde på %2$s piksler."
 
 #. translators: 1: .mp4, 2: header width in pixels
-#: wp-includes/class-wp-customize-manager.php:4978
+#: wp-includes/class-wp-customize-manager.php:5018
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a width of %2$s pixels."
 msgstr "Last opp din video i %1$s-format og minimer filens størrelse for best resultat. Temaet ditt anbefaler en bredde på %2$s piksler."
 
-#: wp-includes/class-wp-customize-manager.php:5038
+#: wp-includes/class-wp-customize-manager.php:5078
 msgid "Header Video"
 msgstr "Toppvideo"
 
 #. translators: 1: .mp4, 2: header size in pixels
-#: wp-includes/class-wp-customize-manager.php:4971
+#: wp-includes/class-wp-customize-manager.php:5011
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends dimensions of %2$s pixels."
 msgstr "Last opp din video i %1$s-format og minimer filens størrelse for beste resultat. Temaet ditt anbefaler at den er %2$s piksler."
 
-#: wp-includes/class-wp-customize-manager.php:4964
+#: wp-includes/class-wp-customize-manager.php:5004
 msgid "If you add a video, the image will be used as a fallback while the video loads."
 msgstr "Hvis du legger til en video, vil bildet brukes som en erstatning mens videoen lastes."
 
@@ -3546,32 +3557,32 @@ msgstr "Hvis du legger til en video, vil bildet brukes som en erstatning mens vi
 msgid "Search themes&hellip;"
 msgstr "Søk temaer&hellip;"
 
-#: wp-includes/class-wp-customize-manager.php:2267
+#: wp-includes/class-wp-customize-manager.php:2272
 msgid "Setting does not exist or is unrecognized."
 msgstr "Innstillingen eksisterer ikke eller kjennes ikke igjen."
 
-#: wp-includes/class-wp-customize-manager.php:2272
+#: wp-includes/class-wp-customize-manager.php:2277
 msgid "Unauthorized to modify setting due to capability."
 msgstr "Ikke autorisert til å endre på grunn av rettigheter."
 
 #. translators: %d: number of themes being displayed, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4668
+#: wp-includes/class-wp-customize-manager.php:4708
 msgid "Displaying %d themes"
 msgstr "Viser %d temaer"
 
 #. translators: %d: number of theme search results, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4666
+#: wp-includes/class-wp-customize-manager.php:4706
 msgid "%d themes found"
 msgstr "%d temaer funnet"
 
-#: wp-includes/class-wp-customize-manager.php:4664
+#: wp-includes/class-wp-customize-manager.php:4704
 msgid "Are you sure you want to delete this theme?"
 msgstr "Er du sikker på at du vil slette dette temaet?"
 
 #. translators: %s: theme name
-#: wp-includes/class-wp-customize-manager.php:4670
+#: wp-includes/class-wp-customize-manager.php:4710
 msgid "Showing details for theme: %s"
 msgstr "Viser detaljer for tema: %s"
 
@@ -3591,7 +3602,7 @@ msgstr "Ny sidetittel&hellip;"
 msgid "New page title"
 msgstr "Ny sidetittel"
 
-#: wp-includes/class-wp-customize-manager.php:1844
+#: wp-includes/class-wp-customize-manager.php:1849
 msgid "Unauthorized. You may remove the customize_messenger_channel param to preview as frontend."
 msgstr "Uautorisert. Du kan fjerne customize_messenger_channel-parameteret for å forhåndsvise som frontend."
 
@@ -3600,11 +3611,11 @@ msgstr "Uautorisert. Du kan fjerne customize_messenger_channel-parameteret for �
 msgid "PHP's XML extension is not available. Please contact your hosting provider to enable PHP's XML extension."
 msgstr "PHPs XML-utvidelse er ikke tilgjengelig. Vennligst kontakt din webhotell-leverandør for å aktivere PHPs XML-utvidelse."
 
-#: wp-includes/class-wp-customize-manager.php:2060
+#: wp-includes/class-wp-customize-manager.php:2065
 msgid "This form is not live-previewable."
 msgstr "Dette skjemaet kan ikke forhåndsvises live."
 
-#: wp-includes/class-wp-customize-manager.php:2059
+#: wp-includes/class-wp-customize-manager.php:2064
 msgid "This link is not live-previewable."
 msgstr "Denne lenken kan ikke forhåndsvises live."
 
@@ -3851,7 +3862,7 @@ msgstr "I dag"
 msgid "Edit Menu"
 msgstr "Rediger meny"
 
-#: wp-includes/wp-db.php:1856 wp-includes/wp-db.php:1862
+#: wp-includes/wp-db.php:1849 wp-includes/wp-db.php:1855
 msgid "Unable to retrieve the error message from MySQL"
 msgstr "Greier ikke å hente feilmeldingen fra MySQL"
 
@@ -3961,7 +3972,7 @@ msgstr "Beklager, du har ikke lov til å legge til kategorier."
 msgid "Sorry, you are not allowed to list users."
 msgstr "Beklager, du har ikke lov til å liste ut brukere."
 
-#: wp-includes/class-wp-customize-manager.php:2295
+#: wp-includes/class-wp-customize-manager.php:2300
 #: wp-includes/class-wp-customize-setting.php:579
 #: wp-includes/script-loader.php:606
 msgid "Invalid value."
@@ -4039,7 +4050,7 @@ msgstr "Konstanten %1$s <strong>er utgått</strong>. Bruk boolean-konstanten %2$
 
 #. translators: 1: panel id, 2: link to 'customize_loaded_components' filter
 #. reference
-#: wp-includes/class-wp-customize-manager.php:3737
+#: wp-includes/class-wp-customize-manager.php:3760
 msgid "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr "Manuell fjerning av %1$s vil føre til PHP-advarsler. Bruk filteret %2$s isteden."
 
@@ -4139,21 +4150,21 @@ msgstr "Send"
 msgid "<strong>ERROR</strong>: Invalid username, email address or incorrect password."
 msgstr "<strong>FEIL</strong>: Ugyldig brukernavn, e-post eller feil passord."
 
-#: wp-includes/class-wp-customize-manager.php:4904
+#: wp-includes/class-wp-customize-manager.php:4944
 msgid "Choose logo"
 msgstr "Velg logo"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3900
+#: wp-includes/functions.php:3901
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Den oppkalte constructor-metoden for %1$s i %2$s er <strong>utgått</strong> siden versjon %3$s! Bruk %4$s isteden."
 
-#: wp-includes/functions.php:5312
+#: wp-includes/functions.php:5313
 msgid "Close dialog"
 msgstr "Lukk dialog"
 
-#: wp-includes/class-wp-customize-manager.php:4902
+#: wp-includes/class-wp-customize-manager.php:4942
 msgid "No logo selected"
 msgstr "Ingen logo valgt"
 
@@ -4166,12 +4177,12 @@ msgstr "Delvis rendring krever at man enten bruker echo eller return på content
 msgid "%s is forbidden"
 msgstr "%s er forbudt"
 
-#: wp-includes/class-wp-customize-manager.php:4898
-#: wp-includes/class-wp-customize-manager.php:4903
+#: wp-includes/class-wp-customize-manager.php:4938
+#: wp-includes/class-wp-customize-manager.php:4943
 msgid "Select logo"
 msgstr "Velg logo"
 
-#: wp-includes/class-wp-customize-manager.php:4899
+#: wp-includes/class-wp-customize-manager.php:4939
 msgid "Change logo"
 msgstr "Endre logo"
 
@@ -4206,7 +4217,7 @@ msgctxt "comment status"
 msgid "Spam"
 msgstr "Spam"
 
-#: wp-includes/class-wp-customize-manager.php:4890
+#: wp-includes/class-wp-customize-manager.php:4930
 msgid "Logo"
 msgstr "Logo"
 
@@ -4228,8 +4239,8 @@ msgstr "Ugyldig objektstype"
 msgid "Template is missing. Standalone themes need to have a %1$s template file. <a href=\"%2$s\">Child themes</a> need to have a Template header in the %3$s stylesheet."
 msgstr "Malen mangler. Selvstendige temaer må ha en %1$s-fil. <a href=\"%2$s\">Dattertemaer</a> trenger en «Template header» i %3$s."
 
-#: wp-includes/class-wp-customize-manager.php:4856
-#: wp-includes/class-wp-customize-manager.php:4934
+#: wp-includes/class-wp-customize-manager.php:4896
+#: wp-includes/class-wp-customize-manager.php:4974
 msgid "Display Site Title and Tagline"
 msgstr "Vis nettstedstittel og slagord"
 
@@ -4237,20 +4248,20 @@ msgstr "Vis nettstedstittel og slagord"
 msgid "Comment Submission Failure"
 msgstr "Kommentaren ble ikke sendt"
 
-#: wp-includes/class-wp-customize-manager.php:2058
+#: wp-includes/class-wp-customize-manager.php:2063
 #: wp-includes/customize/class-wp-customize-selective-refresh.php:192
 msgid "Shift-click to edit this element."
 msgstr "Shift-klikk for å redigere dette elementet."
 
-#: wp-includes/class-wp-customize-manager.php:4750
+#: wp-includes/class-wp-customize-manager.php:4790
 msgid "Enter desktop preview mode"
 msgstr "Gå til desktop-forhåndsvisning"
 
-#: wp-includes/class-wp-customize-manager.php:4754
+#: wp-includes/class-wp-customize-manager.php:4794
 msgid "Enter tablet preview mode"
 msgstr "Gå til nettbrett-forhåndsvisning"
 
-#: wp-includes/class-wp-customize-manager.php:4757
+#: wp-includes/class-wp-customize-manager.php:4797
 msgid "Enter mobile preview mode"
 msgstr "Gå til mobil-forhåndsvisning"
 
@@ -4269,7 +4280,7 @@ msgid "(Current: %s)"
 msgstr "(Gjeldende: %s)"
 
 #. translators: %s:      menu location
-#: wp-includes/class-wp-customize-nav-menus.php:416
+#: wp-includes/class-wp-customize-nav-menus.php:432
 msgctxt "menu"
 msgid "(Currently set to: %s)"
 msgstr "(Gjeldende satt til: %s)"
@@ -4284,11 +4295,11 @@ msgid "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4142
+#: wp-includes/functions.php:4143
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Vennligst se <a href=\"%s\">Feilsøking i WordPress</a> for mer informasjon."
 
-#: wp-includes/functions.php:4143
+#: wp-includes/functions.php:4144
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
@@ -4497,66 +4508,66 @@ msgstr "Publisert tittel:"
 msgid "Author:"
 msgstr "Forfatter:"
 
-#: wp-includes/wp-db.php:1595
+#: wp-includes/wp-db.php:1588
 msgid "Are you sure that you have typed the correct hostname?"
 msgstr "Er du sikker på at du har skrevet inn det korrekte vertsnavnet?"
 
-#: wp-includes/wp-db.php:1596 wp-includes/wp-db.php:1753
+#: wp-includes/wp-db.php:1589 wp-includes/wp-db.php:1746
 msgid "Are you sure that the database server is running?"
 msgstr "Er du sikker på at databasetjeneren kjører?"
 
-#: wp-includes/wp-db.php:1744
+#: wp-includes/wp-db.php:1737
 msgid "Error reconnecting to the database"
 msgstr "En feil oppsto under gjenoppkobling mot databasen"
 
 #. translators: %s: database host
-#: wp-includes/wp-db.php:1748
+#: wp-includes/wp-db.php:1741
 msgid "This means that we lost contact with the database server at %s. This could mean your host&#8217;s database server is down."
 msgstr "Dette betyr at vi mistet kontakt med databasetjeneren på %s. Det kan bety at databasetjeneren er nede."
 
-#: wp-includes/wp-db.php:1754
+#: wp-includes/wp-db.php:1747
 msgid "Are you sure that the database server is not under particularly heavy load?"
 msgstr "Er du sikker på at databasetjeneren ikke er under spesielt høy belastning?"
 
 #. translators: %s: support forums URL
-#: wp-includes/wp-db.php:1601 wp-includes/wp-db.php:1759
+#: wp-includes/wp-db.php:1594 wp-includes/wp-db.php:1752
 msgid "If you&#8217;re unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href=\"%s\">WordPress Support Forums</a>."
 msgstr "Hvis du ikke er sikker på hva dette betyr, bør du kontakte din serveradmin. Hvis du fortsatt trenger hjelp, kan du alltid besøke <a href=\"%s\">WordPress Support Forums</a>."
 
-#: wp-includes/wp-db.php:1594
+#: wp-includes/wp-db.php:1587
 msgid "Are you sure you have the correct username and password?"
 msgstr "Er du sikker på at du har korrekt brukernavn og passord?"
 
 #. translators: 1: wp-config.php. 2: database host
-#: wp-includes/wp-db.php:1588
+#: wp-includes/wp-db.php:1581
 msgid "This either means that the username and password information in your %1$s file is incorrect or we can&#8217;t contact the database server at %2$s. This could mean your host&#8217;s database server is down."
 msgstr "Dette betyr enten at brukernavnet eller passordet er feil i din %1$s-fil, eller vi kan ikke kontakte databaseserveren på %2$s. Dette kan bety at din databaseserver er nede."
 
 #. translators: %s: support forums URL
-#: wp-includes/wp-db.php:1068
+#: wp-includes/wp-db.php:1061
 msgid "If you don&#8217;t know how to set up a database you should <strong>contact your host</strong>. If all else fails you may find help at the <a href=\"%s\">WordPress Support Forums</a>."
 msgstr "Hvis du ikke vet hvordan du setter opp en database bør du <strong>kontakte din serveradmin</strong>. Hvis alt feiler kan du finne hjelp i <a href=\"%s\">WordPress Support Forums</a>."
 
-#: wp-includes/wp-db.php:1040
+#: wp-includes/wp-db.php:1033
 msgid "Can&#8217;t select database"
 msgstr "Kan ikke velge database"
 
-#: wp-includes/wp-db.php:1049
+#: wp-includes/wp-db.php:1042
 msgid "Are you sure it exists?"
 msgstr "Er du sikker på at den eksisterer?"
 
 #. translators: %s: database name
-#: wp-includes/wp-db.php:1044
+#: wp-includes/wp-db.php:1037
 msgid "We were able to connect to the database server (which means your username and password is okay) but not able to select the %s database."
 msgstr "Vi klarte å koble til databasetjeneren (noe som betyr at brukernavnet og passordet stemmer), men kunne ikke velge databasen %s."
 
 #. translators: 1: database user, 2: database name
-#: wp-includes/wp-db.php:1053
+#: wp-includes/wp-db.php:1046
 msgid "Does the user %1$s have permission to use the %2$s database?"
 msgstr "Har brukeren %1$s tilgang til å bruke databasen %2$s?"
 
 #. translators: %s: database name
-#: wp-includes/wp-db.php:1060
+#: wp-includes/wp-db.php:1053
 msgid "On some systems the name of your database is prefixed with your username, so it would be like <code>username_%1$s</code>. Could that be the problem?"
 msgstr "På noen systemer legges ditt brukernavn foran navnet på databasen, så det ville bli som <code>username_%1$s</code>. Kan det være problemet?"
 
@@ -4905,7 +4916,7 @@ msgid "Press return or enter to open this section"
 msgstr "Trykk linjeskift eller «enter» for å åpne denne seksjonen"
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4335
+#: wp-includes/class-wp-customize-manager.php:4372
 msgid "Live Preview: %s"
 msgstr "Live forhåndsvisning: %s"
 
@@ -4930,7 +4941,7 @@ msgstr "%1$s er foreldet. Bruk %2$s isteden."
 msgid "Sorry, you are not allowed to edit theme options on this site."
 msgstr "Beklager, du har ikke lov til å redigere temavalgene for dette nettstedet."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1005
+#: wp-includes/class-wp-customize-nav-menus.php:1021
 #: wp-includes/class-wp-customize-widgets.php:811
 msgid "Clear Results"
 msgstr "Tøm resultater"
@@ -4940,7 +4951,7 @@ msgid "The following formatting shortcuts are replaced when pressing Enter. Pres
 msgstr "De følgende formateringssnarveiene erstattes når du trykker Enter-tasten. Trykk Escape eller angre-knappen for å angre."
 
 #. translators: %s: Title of a section with menu items
-#: wp-includes/class-wp-customize-nav-menus.php:1054
+#: wp-includes/class-wp-customize-nav-menus.php:1070
 msgid "Toggle section: %s"
 msgstr "Veksle valg: %s"
 
@@ -4957,7 +4968,7 @@ msgstr "words"
 msgid "Your new password has not been saved."
 msgstr "Ditt nye passord har ikke blitt lagret."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1088
+#: wp-includes/class-wp-customize-nav-menus.php:1104
 msgid "Toggle section: Custom Links"
 msgstr "Veksle valg: Tilpassede lenker"
 
@@ -4979,7 +4990,7 @@ msgstr "Skjul passord"
 msgid "Show password"
 msgstr "Vis passord"
 
-#: wp-includes/class-wp-customize-nav-menus.php:419
+#: wp-includes/class-wp-customize-nav-menus.php:435
 msgid "Menu Name"
 msgstr "Menynavn"
 
@@ -5001,7 +5012,7 @@ msgstr "Forhåndsvis som nettleserikon"
 msgid "As a browser icon"
 msgstr "Som et nettleserikon"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1050
+#: wp-includes/class-wp-customize-nav-menus.php:1066
 msgid "No items"
 msgstr "Ingen elementer"
 
@@ -5053,16 +5064,16 @@ msgstr "Legg til nytt toppbilde"
 msgid "Hide header image"
 msgstr "Skjul toppbilde"
 
-#: wp-includes/class-wp-customize-manager.php:4870
+#: wp-includes/class-wp-customize-manager.php:4910
 msgid "Site Icon"
 msgstr "Nettstedsikon"
 
-#: wp-includes/class-wp-customize-manager.php:4821
+#: wp-includes/class-wp-customize-manager.php:4861
 msgid "Site Identity"
 msgstr "Nettstedsidentitet"
 
 #. translators: 1: Title of a menu item, 2: Type of a menu item
-#: wp-includes/class-wp-customize-nav-menus.php:919
+#: wp-includes/class-wp-customize-nav-menus.php:935
 msgid "Add to menu: %1$s (%2$s)"
 msgstr "Legg til i meny: %1$s (%2$s)"
 
@@ -5070,7 +5081,7 @@ msgstr "Legg til i meny: %1$s (%2$s)"
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "Når du starter et nytt avsnitt med en av disse formateringssnarveiene etterfulgt av et mellomrom, vil formateringen bli lagt inn automatisk. Trykk Backspace eller Escape for å angre."
 
-#: wp-includes/wp-db.php:1386 wp-includes/wp-db.php:1403
+#: wp-includes/wp-db.php:1379 wp-includes/wp-db.php:1396
 msgid "WordPress database error:"
 msgstr "WordPress database error:"
 
@@ -5091,7 +5102,7 @@ msgid "To set your password, visit the following address:"
 msgstr "For å sette et passord, besøk følgende adresse:"
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3904
+#: wp-includes/functions.php:3905
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Den kalte constructor-metoden for %1$s er <strong>foreldet</strong> siden versjon %2$s! Bruk %3$s isteden."
 
@@ -5118,45 +5129,45 @@ msgstr "Forhåndsviser tema"
 msgid "Active theme"
 msgstr "Aktivt tema"
 
-#: wp-includes/class-wp-customize-nav-menus.php:562
+#: wp-includes/class-wp-customize-nav-menus.php:578
 msgid "Menus can be displayed in locations defined by your theme."
 msgstr "Menyer kan vises i lokasjoner som er definert av ditt tema."
 
-#: wp-includes/class-wp-customize-nav-menus.php:439
+#: wp-includes/class-wp-customize-nav-menus.php:455
 #: wp-includes/class-wp-customize-widgets.php:762
 msgid "Reorder mode closed"
 msgstr "Modus for endring av rekkefølge deaktivert"
 
-#: wp-includes/class-wp-customize-nav-menus.php:412
+#: wp-includes/class-wp-customize-nav-menus.php:428
 #: wp-includes/customize/class-wp-customize-nav-menu-setting.php:430
 msgctxt "Missing menu name."
 msgid "(unnamed)"
 msgstr "(ikke navngitt)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:438
+#: wp-includes/class-wp-customize-nav-menus.php:454
 #: wp-includes/class-wp-customize-widgets.php:761
 msgid "Reorder mode enabled"
 msgstr "Modus for endring av rekkefølge aktivert"
 
-#: wp-includes/class-wp-customize-nav-menus.php:441
+#: wp-includes/class-wp-customize-nav-menus.php:457
 msgid "Close reorder mode"
 msgstr "Ferdig med endring av rekkefølge"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:41
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:50
 msgid "Add or remove menu items"
 msgstr "Legg til eller slett menyvalg"
 
-#: wp-includes/class-wp-customize-nav-menus.php:440
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:44
+#: wp-includes/class-wp-customize-nav-menus.php:456
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:53
 msgid "Reorder menu items"
 msgstr "Endre rekkefølge på menyvalg"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:49
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:58
 msgid "When in reorder mode, additional controls to reorder menu items will be available in the items list above."
 msgstr "Når du endrer rekkefølge vil du få flere kontroller for å flytte på menyvalg i listen over."
 
 #. translators: URL to the widgets panel of the customizer
-#: wp-includes/class-wp-customize-nav-menus.php:560
+#: wp-includes/class-wp-customize-nav-menus.php:576
 msgid "Menus can be displayed in locations defined by your theme or in <a href=\"%s\">widget areas</a> by adding a &#8220;Navigation Menu&#8221; widget."
 msgstr "Menyer kan vises i lokasjoner som er definert av ditt tema eller i <a href=\"%s\">widget-områder</a> ved å legge til en «Egendefinert meny»-widget."
 
@@ -5364,8 +5375,8 @@ msgid "Cmd + letter:"
 msgstr "Cmd + bokstav:"
 
 #: wp-includes/widgets/class-wp-widget-custom-html.php:258
-#: wp-includes/widgets/class-wp-widget-text.php:464
-#: wp-includes/widgets/class-wp-widget-text.php:525
+#: wp-includes/widgets/class-wp-widget-text.php:485
+#: wp-includes/widgets/class-wp-widget-text.php:546
 msgid "Content:"
 msgstr "Innhold:"
 
@@ -5378,162 +5389,163 @@ msgstr "Tilpasser"
 msgid "Menu Options"
 msgstr "Alternativer for Meny"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1104
+#: wp-includes/class-wp-customize-nav-menus.php:1120
 msgid "Add to Menu"
 msgstr "Legg til i meny"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1086
+#: wp-includes/class-wp-customize-nav-menus.php:1102
 msgid "Custom Links"
 msgstr "Egendefinerte lenker"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1001
+#: wp-includes/class-wp-customize-nav-menus.php:1017
 #: wp-includes/class-wp-customize-widgets.php:812
 #: wp-includes/customize/class-wp-customize-themes-section.php:119
 #: wp-includes/customize/class-wp-customize-themes-section.php:134
 msgid "The search results will be updated as you type."
 msgstr "Søkeresultatene oppdateres mens du skriver."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1000
+#: wp-includes/class-wp-customize-nav-menus.php:1016
 msgid "Search menu items&hellip;"
 msgstr "Søk i menyvalg&hellip;"
 
 #. translators: &#9656; is the unicode right-pointing triangle, and %s is the
 #. section title in the Customizer
-#: wp-includes/class-wp-customize-nav-menus.php:430
-#: wp-includes/class-wp-customize-nav-menus.php:991
+#: wp-includes/class-wp-customize-nav-menus.php:446
+#: wp-includes/class-wp-customize-nav-menus.php:1007
 #: wp-includes/class-wp-customize-section.php:230
 #: wp-includes/class-wp-customize-widgets.php:802
 msgid "Customizing &#9656; %s"
 msgstr "Tilpasser &#9656; %s"
 
-#: wp-includes/class-wp-customize-nav-menus.php:934
+#: wp-includes/class-wp-customize-nav-menus.php:950
 msgid "Move one level up"
 msgstr "Flytt ett nivå opp"
 
-#: wp-includes/class-wp-customize-nav-menus.php:935
+#: wp-includes/class-wp-customize-nav-menus.php:951
 msgid "Move one level down"
 msgstr "Flytt ett nivå ned"
 
-#: wp-includes/class-wp-customize-nav-menus.php:417
+#: wp-includes/class-wp-customize-nav-menus.php:433
 msgid "Menu Locations"
 msgstr "Menylokasjoner"
 
-#: wp-includes/class-wp-customize-nav-menus.php:557
+#: wp-includes/class-wp-customize-nav-menus.php:573
 msgid "This panel is used for managing navigation menus for content you have already published on your site. You can create menus and add items for existing content such as pages, posts, categories, tags, formats, or custom links."
 msgstr "Dette panelet brukes for å håndtere navigasjonsmenyer for innhold som du allerede har publisert på ditt nettsted. Du kan lage menyer og legge til elementer for eksisterende innhold, som sider, innlegg, kategorier, stikkord, formater eller tilpassede lenker."
 
-#: wp-includes/class-wp-customize-nav-menus.php:994
+#: wp-includes/class-wp-customize-nav-menus.php:1010
 msgid "Add Menu Items"
 msgstr "Legg til menyvalg"
 
-#: wp-includes/class-wp-customize-nav-menus.php:999
+#: wp-includes/class-wp-customize-nav-menus.php:1015
 msgid "Search Menu Items"
 msgstr "Søk i menyvalg"
 
 #. translators: %s: number of menu locations
-#: wp-includes/class-wp-customize-nav-menus.php:579
+#: wp-includes/class-wp-customize-nav-menus.php:595
 msgid "Your theme can display menus in %s location. Select which menu you would like to use."
 msgid_plural "Your theme can display menus in %s locations. Select which menu appears in each location."
 msgstr[0] "Ditt tema kan vise menyer i %s lokasjon. Velg hvilken meny du vil bruke."
 msgstr[1] "Ditt tema kan vise menyer i %s lokasjoner. Velg hvilken meny du vil bruke i de ulike lokasjonene."
 
 #. translators: 1: item name, 2: item position, 3: parent item name
-#: wp-includes/class-wp-customize-nav-menus.php:472
+#: wp-includes/class-wp-customize-nav-menus.php:488
 msgid "%1$s. Sub item number %2$d under %3$s."
 msgstr "%1$s. Sub-element nummer %2$d under %3$s."
 
 #. translators: 1: item name, 2: item position, 3: total number of items
-#: wp-includes/class-wp-customize-nav-menus.php:470
+#: wp-includes/class-wp-customize-nav-menus.php:486
 msgid "%1$s. Menu item %2$d of %3$d."
 msgstr "%1$s. Menyvalg %2$d av %3$d."
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:468
+#: wp-includes/class-wp-customize-nav-menus.php:484
 msgid "Out from under %s"
 msgstr "Ut fra %s"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:466
+#: wp-includes/class-wp-customize-nav-menus.php:482
 msgid "Under %s"
 msgstr "Under %s"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:464
+#: wp-includes/class-wp-customize-nav-menus.php:480
 msgid "Move out from under %s"
 msgstr "Flytt ut fra %s"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:462
+#: wp-includes/class-wp-customize-nav-menus.php:478
 msgid "Move under %s"
 msgstr "Flytt inn under %s"
 
-#: wp-includes/class-wp-customize-nav-menus.php:460
+#: wp-includes/class-wp-customize-nav-menus.php:476
 msgid "Move to the top"
 msgstr "Flytt til toppen"
 
-#: wp-includes/class-wp-customize-nav-menus.php:459
+#: wp-includes/class-wp-customize-nav-menus.php:475
 msgid "Move down one"
 msgstr "Flytt én ned"
 
-#: wp-includes/class-wp-customize-nav-menus.php:437
+#: wp-includes/class-wp-customize-nav-menus.php:453
 msgid "Loading more results... please wait."
 msgstr "Laster flere resultater... vennligst vent."
 
-#: wp-includes/class-wp-customize-nav-menus.php:458
+#: wp-includes/class-wp-customize-nav-menus.php:474
 msgid "Move up one"
 msgstr "Flytt opp én"
 
-#: wp-includes/class-wp-customize-nav-menus.php:436
+#: wp-includes/class-wp-customize-nav-menus.php:452
 msgid "Additional items found: %d"
 msgstr "Tilleggselementer funnet: %d"
 
-#: wp-includes/class-wp-customize-nav-menus.php:435
+#: wp-includes/class-wp-customize-nav-menus.php:451
 msgid "Number of items found: %d"
 msgstr "Antall elementer funnet: %d"
 
 #. translators: %s: title of menu item in draft status
-#: wp-includes/class-wp-customize-nav-menus.php:434
+#: wp-includes/class-wp-customize-nav-menus.php:450
 msgid "%s (Pending)"
 msgstr "%s (venter)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:424
+#: wp-includes/class-wp-customize-nav-menus.php:440
 msgid "Menu deleted"
 msgstr "Meny slettet"
 
-#: wp-includes/class-wp-customize-nav-menus.php:423
+#: wp-includes/class-wp-customize-nav-menus.php:439
 msgid "Menu created"
 msgstr "Meny laget"
 
-#: wp-includes/class-wp-customize-nav-menus.php:421
+#: wp-includes/class-wp-customize-nav-menus.php:437
 msgid "Menu item added"
 msgstr "Menyvalg lagt til"
 
 #. translators: %s: title of menu item which is invalid
-#: wp-includes/class-wp-customize-nav-menus.php:432
+#: wp-includes/class-wp-customize-nav-menus.php:448
 msgid "%s (Invalid)"
 msgstr "%s (Ugyldig)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:428
+#: wp-includes/class-wp-customize-nav-menus.php:444
 msgid "Menu item is now a sub-item"
 msgstr "Menyvalg er nå et undervalg"
 
-#: wp-includes/class-wp-customize-nav-menus.php:422
+#: wp-includes/class-wp-customize-nav-menus.php:438
 msgid "Menu item deleted"
 msgstr "Menyvalg slettet"
 
-#: wp-includes/class-wp-customize-nav-menus.php:425
+#: wp-includes/class-wp-customize-nav-menus.php:441
 msgid "Menu item moved up"
 msgstr "Menyvalg flyttet opp"
 
-#: wp-includes/class-wp-customize-nav-menus.php:426
+#: wp-includes/class-wp-customize-nav-menus.php:442
 msgid "Menu item moved down"
 msgstr "Menyvalg flyttet ned"
 
-#: wp-includes/class-wp-customize-nav-menus.php:427
+#: wp-includes/class-wp-customize-nav-menus.php:443
 msgid "Menu item moved out of submenu"
 msgstr "Menyvalg flyttet ut av undermeny"
 
 #: wp-includes/class-wp-customize-nav-menus.php:153
+#: wp-includes/class-wp-customize-nav-menus.php:375
 msgctxt "nav menu home label"
 msgid "Home"
 msgstr "Hjem"
@@ -5574,7 +5586,7 @@ msgstr "Tittelattributt"
 msgid "Navigation Label"
 msgstr "Navigasjonsmerke"
 
-#: wp-includes/class-wp-customize-nav-menus.php:417
+#: wp-includes/class-wp-customize-nav-menus.php:433
 msgid "Menu Location"
 msgstr "Menylokasjoner"
 
@@ -5582,11 +5594,11 @@ msgstr "Menylokasjoner"
 msgid "Automatically add new top-level pages to this menu"
 msgstr "Legg automatisk til nye toppnivåsider i denne menyen"
 
-#: wp-includes/class-wp-customize-nav-menus.php:944
+#: wp-includes/class-wp-customize-nav-menus.php:960
 msgid "Delete Menu"
 msgstr "Slett meny"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:42
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:38
 msgid "Add Items"
 msgstr "Legg til elementer"
 
@@ -5702,7 +5714,8 @@ msgid "Could not split shared term."
 msgstr "Kunne ikke splitte delt begrep."
 
 #: wp-includes/class-wp-customize-nav-menus.php:155
-#: wp-includes/class-wp-customize-nav-menus.php:413
+#: wp-includes/class-wp-customize-nav-menus.php:382
+#: wp-includes/class-wp-customize-nav-menus.php:429
 #: wp-includes/customize/class-wp-customize-nav-menu-item-setting.php:322
 #: wp-includes/nav-menu.php:821
 msgid "Custom Link"
@@ -5738,6 +5751,21 @@ msgstr ""
 "\n"
 "-- SITE_NAME"
 
+#. translators: 1: site url, 2: table name, 3: database name
+#: wp-includes/ms-load.php:470
+msgid "<strong>Could not find site %1$s.</strong> Searched for table %2$s in database %3$s. Is that right?"
+msgstr "<strong>Kunne ikke finne nettstedet %1$s.</strong> Søkte etter tabellen %2$s i databasen %3$s. Er det riktig?"
+
+#. translators: revision date format, see https://secure.php.net/date
+#: wp-includes/post-template.php:1709 wp-includes/post-template.php:1745
+msgctxt "revision date format"
+msgid "F j, Y @ H:i:s"
+msgstr "j. F Y @ H:i:s"
+
+#: wp-includes/post.php:1131 wp-includes/post.php:1132
+msgid "Post type names must be between 1 and 20 characters in length."
+msgstr "Navn på innleggstyper må være mellom 1 og 20 tegn."
+
 #. translators: Do not translate USERNAME, SITE_NAME, BLOG_URL, PASSWORD: those
 #. are placeholders.
 #: wp-includes/ms-functions.php:1556
@@ -5772,21 +5800,6 @@ msgstr ""
 "\n"
 "-- SITE_NAME"
 
-#. translators: 1: site url, 2: table name, 3: database name
-#: wp-includes/ms-load.php:470
-msgid "<strong>Could not find site %1$s.</strong> Searched for table %2$s in database %3$s. Is that right?"
-msgstr "<strong>Kunne ikke finne nettstedet %1$s.</strong> Søkte etter tabellen %2$s i databasen %3$s. Er det riktig?"
-
-#. translators: revision date format, see https://secure.php.net/date
-#: wp-includes/post-template.php:1709 wp-includes/post-template.php:1745
-msgctxt "revision date format"
-msgid "F j, Y @ H:i:s"
-msgstr "j. F Y @ H:i:s"
-
-#: wp-includes/post.php:1131 wp-includes/post.php:1132
-msgid "Post type names must be between 1 and 20 characters in length."
-msgstr "Navn på innleggstyper må være mellom 1 og 20 tegn."
-
 #: wp-includes/media.php:3508
 msgid "Drag and drop to reorder media files."
 msgstr "Dra og slipp for å endre rekkefølge på mediefiler."
@@ -5807,7 +5820,7 @@ msgstr "Kommentarer er skrudd av<span class=\"screen-reader-text\"> for %s</span
 msgid "The %1$s option is deprecated for the family of %2$s functions. Use the %3$s function instead."
 msgstr "Valget %1$s er foreldet for familien av %2$s-funksjoner. Bruk funksjonen %3$s istedet."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1099
+#: wp-includes/class-wp-customize-nav-menus.php:1115
 #: wp-includes/class-wp-editor.php:1704 wp-includes/media-template.php:820
 msgid "Link Text"
 msgstr "Lenketekst"
@@ -5913,7 +5926,7 @@ msgstr "Følgende verdier beskriver ikke en gyldig dato: måned %1$s, dag %2$s."
 
 #. translators: %s: database access abstraction class, usually wpdb or a class
 #. extending wpdb
-#: wp-includes/wp-db.php:1117
+#: wp-includes/wp-db.php:1110
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s må sette en databasetilkobling til bruk for filtrering."
 
@@ -6145,11 +6158,6 @@ msgstr "Velg fil"
 msgid "No file selected"
 msgstr "Ingen fil er valgt"
 
-#: wp-includes/customize/class-wp-customize-media-control.php:247
-#: wp-includes/widgets/class-wp-widget-media-image.php:31
-msgid "No image selected"
-msgstr "Intet bilde er valgt"
-
 #: wp-includes/customize/class-wp-customize-media-control.php:254
 msgid "Change file"
 msgstr "Endre fil"
@@ -6158,6 +6166,11 @@ msgstr "Endre fil"
 msgctxt "label for custom color"
 msgid "Custom..."
 msgstr "Tilpasset…"
+
+#: wp-includes/customize/class-wp-customize-media-control.php:247
+#: wp-includes/widgets/class-wp-widget-media-image.php:31
+msgid "No image selected"
+msgstr "Inget bilde er valgt"
 
 #: wp-includes/post.php:66
 msgctxt "add new media"
@@ -6234,7 +6247,7 @@ msgstr "Avbryt utvelging"
 msgid "Delete Selected"
 msgstr "Slett utvalgte"
 
-#: wp-includes/class-wp-customize-nav-menus.php:411
+#: wp-includes/class-wp-customize-nav-menus.php:427
 #: wp-includes/script-loader.php:888
 msgctxt "missing menu item navigation label"
 msgid "(no label)"
@@ -6376,8 +6389,8 @@ msgstr "Widgeter er uavhengige seksjoner med innhold som kan plasseres i widget-
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>FEIL</strong>: Denne kommentaren kunne ikke lagres. Vennligst prøv igjen senere."
 
-#: wp-includes/update.php:154 wp-includes/update.php:346
-#: wp-includes/update.php:524
+#: wp-includes/update.php:154 wp-includes/update.php:356
+#: wp-includes/update.php:538
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
 msgstr "(WordPress kunne ikke etablere en sikker forbindelse til WordPress.org. Vennligst kontakt administratoren for din webtjener.)"
 
@@ -6795,7 +6808,7 @@ msgstr "Punktliste"
 msgid "Add alternate sources for maximum HTML5 playback:"
 msgstr "Legg til flere kilder for maksimal HTML5-avspilling:"
 
-#: wp-includes/class-wp-customize-nav-menus.php:985
+#: wp-includes/class-wp-customize-nav-menus.php:1001
 #: wp-includes/class-wp-customize-panel.php:359
 #: wp-includes/class-wp-customize-section.php:350
 #: wp-includes/class-wp-customize-widgets.php:797
@@ -6926,7 +6939,7 @@ msgstr "Beskjær bildet ditt"
 msgid "Drag and drop to reorder videos."
 msgstr "Dra og slipp for å omorganisere videoer."
 
-#: wp-includes/wp-db.php:1237
+#: wp-includes/wp-db.php:1230
 msgid "The query argument of %s must have a placeholder."
 msgstr "Søkeargumentet %s må ha en plassholder."
 
@@ -6994,17 +7007,17 @@ msgstr "Sett inn bilde"
 msgid "Style"
 msgstr "Stil"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:45
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:54
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:60
 msgid "Reorder"
 msgstr "Omarranger"
 
-#: wp-includes/class-wp-customize-nav-menus.php:933
+#: wp-includes/class-wp-customize-nav-menus.php:949
 #: wp-includes/class-wp-customize-widgets.php:684
 msgid "Move down"
 msgstr "Flytt ned"
 
-#: wp-includes/class-wp-customize-nav-menus.php:932
+#: wp-includes/class-wp-customize-nav-menus.php:948
 #: wp-includes/class-wp-customize-widgets.php:685
 msgid "Move up"
 msgstr "Flytt opp"
@@ -7120,9 +7133,9 @@ msgid "Paste as text"
 msgstr "Lim inn som tekst"
 
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
-#: wp-includes/update.php:345 wp-includes/update.php:523
-#: wp-includes/wp-db.php:1069 wp-includes/wp-db.php:1602
-#: wp-includes/wp-db.php:1760 wp-login.php:882
+#: wp-includes/update.php:355 wp-includes/update.php:537
+#: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
+#: wp-includes/wp-db.php:1753 wp-login.php:882
 msgid "https://wordpress.org/support/"
 msgstr "https://wordpress.org/support/"
 
@@ -7265,22 +7278,22 @@ msgstr "Visningstekst"
 msgid "Finnish"
 msgstr "finsk"
 
-#: wp-includes/general-template.php:3910
+#: wp-includes/general-template.php:3912
 msgctxt "admin color scheme"
 msgid "Sunrise"
 msgstr "Soloppgang"
 
-#: wp-includes/general-template.php:3916
+#: wp-includes/general-template.php:3918
 msgctxt "admin color scheme"
 msgid "Ectoplasm"
 msgstr "Ektoplasma"
 
-#: wp-includes/general-template.php:3928
+#: wp-includes/general-template.php:3930
 msgctxt "admin color scheme"
 msgid "Coffee"
 msgstr "Kaffe"
 
-#: wp-includes/general-template.php:3922
+#: wp-includes/general-template.php:3924
 msgctxt "admin color scheme"
 msgid "Ocean"
 msgstr "Hav"
@@ -7337,12 +7350,12 @@ msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
 
-#: wp-includes/general-template.php:3892
+#: wp-includes/general-template.php:3894
 msgctxt "admin color scheme"
 msgid "Light"
 msgstr "Lys"
 
-#: wp-includes/general-template.php:3904
+#: wp-includes/general-template.php:3906
 msgctxt "admin color scheme"
 msgid "Midnight"
 msgstr "Mørk"
@@ -7355,7 +7368,7 @@ msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
 msgid "no-subset"
 msgstr "no-subset"
 
-#: wp-includes/general-template.php:3881
+#: wp-includes/general-template.php:3883
 msgctxt "admin color scheme"
 msgid "Default"
 msgstr "Standard"
@@ -7365,8 +7378,8 @@ msgid "Use commas instead of %s to separate excluded terms."
 msgstr "Bruk kommaer istedenfor %s for å skille utelatte oppføringer."
 
 #. translators: %s: support forums URL
-#: wp-includes/update.php:152 wp-includes/update.php:344
-#: wp-includes/update.php:522
+#: wp-includes/update.php:152 wp-includes/update.php:354
+#: wp-includes/update.php:536
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"%s\">support forums</a>."
 msgstr "En uventet feil skjedde. Noe er kanskje galt med WordPress.org eller denne tjenerens konfigurasjon. Hvis problemene fortsetter, vennlist prøv <a href=\"%s\">brukerstøtteforaene</a>."
 
@@ -7374,7 +7387,7 @@ msgstr "En uventet feil skjedde. Noe er kanskje galt med WordPress.org eller den
 msgid "Menu"
 msgstr "Meny"
 
-#: wp-includes/update.php:629
+#: wp-includes/update.php:643
 msgid "Translation Updates"
 msgstr "Oppdateringer for oversettelser"
 
@@ -7552,7 +7565,7 @@ msgstr "%2$s. %1$s %3$s kl. %4$s:%5$s"
 msgid "The site you were looking for, %s, does not exist, but you can create it now!"
 msgstr "Nettstedet du ser etter, %s, finnes ikke. Men, du kan opprette det nå!"
 
-#: wp-includes/functions.php:5329
+#: wp-includes/functions.php:5330
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Innloggingssiden vil åpnes i et nytt vindu. Etter at du har logget inn kan du lukke det vinduet og gå tilbake til denne siden."
 
@@ -7577,7 +7590,7 @@ msgctxt "submit button"
 msgid "Search"
 msgstr "Søk"
 
-#: wp-includes/functions.php:5327 wp-includes/script-loader.php:568
+#: wp-includes/functions.php:5328 wp-includes/script-loader.php:568
 msgid "Session expired"
 msgstr "Sesjon utløpt"
 
@@ -8038,11 +8051,11 @@ msgstr "Tekst"
 msgid "Skip to toolbar"
 msgstr "Hopp til verktøylinje"
 
-#: wp-includes/class-wp-customize-manager.php:4941
+#: wp-includes/class-wp-customize-manager.php:4981
 msgid "Header Text Color"
 msgstr "Farge på topptekst"
 
-#: wp-includes/class-wp-customize-manager.php:4918
+#: wp-includes/class-wp-customize-manager.php:4958
 msgid "Colors"
 msgstr "Farger"
 
@@ -8076,7 +8089,7 @@ msgstr "Beklager, du kan ikke feste et privat innlegg på forsiden."
 msgid "Sorry, you are not allowed to publish this page."
 msgstr "Beklager, du har ikke lov til å publisere dette innlegget."
 
-#: wp-includes/class-wp-customize-manager.php:4991
+#: wp-includes/class-wp-customize-manager.php:5031
 #: wp-includes/customize/class-wp-customize-header-image-control.php:31
 msgid "Header Image"
 msgstr "Toppbilde"
@@ -8120,15 +8133,15 @@ msgid_plural "Site name must be at least %s characters."
 msgstr[0] "Nettstedsnavnet må ha minst %s tegn."
 msgstr[1] "Nettstedsnavnet må ha minst %s tegn."
 
-#: wp-includes/class-wp-customize-manager.php:5198
+#: wp-includes/class-wp-customize-manager.php:5238
 msgid "A static page"
 msgstr "En statisk side"
 
-#: wp-includes/class-wp-customize-manager.php:4956
+#: wp-includes/class-wp-customize-manager.php:4996
 msgid "Background Color"
 msgstr "Bakgrunnsfarge"
 
-#: wp-includes/class-wp-customize-manager.php:5065
+#: wp-includes/class-wp-customize-manager.php:5105
 #: wp-includes/customize/class-wp-customize-background-image-control.php:30
 msgid "Background Image"
 msgstr "Bakgrunnsbilde"
@@ -8145,11 +8158,11 @@ msgstr "Fjern bilde"
 msgid "Sorry, you are not allowed to edit this comment."
 msgstr "Beklager, du har ikke lov til å redigere denne kommentaren."
 
-#: wp-includes/class-wp-customize-manager.php:5220
+#: wp-includes/class-wp-customize-manager.php:5260
 msgid "Posts page"
 msgstr "Side med innlegg"
 
-#: wp-includes/class-wp-customize-manager.php:4900
+#: wp-includes/class-wp-customize-manager.php:4940
 #: wp-includes/class-wp-customize-widgets.php:753
 #: wp-includes/class-wp-editor.php:1258
 #: wp-includes/customize/class-wp-customize-media-control.php:226
@@ -8272,22 +8285,22 @@ msgstr "Temaet \"%s\" er ikke et gyldig foreldretema."
 msgid "Stylesheet is not readable."
 msgstr "Stilarket er ikke lesbart."
 
-#: wp-includes/class-wp-customize-manager.php:5197
+#: wp-includes/class-wp-customize-manager.php:5237
 msgid "Your latest posts"
 msgstr "Dine siste innlegg"
 
-#: wp-includes/class-wp-customize-manager.php:4843
+#: wp-includes/class-wp-customize-manager.php:4883
 msgid "Tagline"
 msgstr "Slagord"
 
 #: wp-includes/class-wp-customize-control.php:586
-#: wp-includes/class-wp-customize-nav-menus.php:594
+#: wp-includes/class-wp-customize-nav-menus.php:610
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:143
 msgid "&mdash; Select &mdash;"
 msgstr "&mdash; Velg &mdash;"
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4332
+#: wp-includes/class-wp-customize-manager.php:4369
 msgid "Customize: %s"
 msgstr "Tilpass: %s"
 
@@ -8458,7 +8471,7 @@ msgstr "Opprett en konfigurasjonsfil"
 msgid "You can create a %s file through a web interface, but this doesn't work for all server setups. The safest way is to manually create the file."
 msgstr "Du kan opprette %s automatisk via nettleseren, men dette virker ikke for alle serverkonfigurasjoner. Hvis det ikke fungerer, kan du lage den manuelt."
 
-#: wp-includes/class-wp-customize-manager.php:5231
+#: wp-includes/class-wp-customize-manager.php:5271
 msgid "https://codex.wordpress.org/CSS"
 msgstr "https://codex.wordpress.org/CSS"
 
@@ -8576,16 +8589,16 @@ msgstr "Dokumentasjon"
 msgid "Support Forums"
 msgstr "Supportforum"
 
-#: wp-includes/formatting.php:3361 wp-includes/general-template.php:3800
+#: wp-includes/formatting.php:3361 wp-includes/general-template.php:3802
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3777 wp-includes/ms-load.php:455
-#: wp-includes/wp-db.php:1584
+#: wp-includes/functions.php:3778 wp-includes/ms-load.php:455
+#: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Feil: klarte ikke å etablere databasetilkobling"
 
-#: wp-includes/functions.php:3773
+#: wp-includes/functions.php:3774
 msgid "Database Error"
 msgstr "Database Error"
 
@@ -8637,7 +8650,7 @@ msgstr "Denne filen er ikke et bilde. Vennligst prøv med en annen."
 msgid "This is larger than the maximum size. Please try another."
 msgstr "Dette er mer enn maksimal størrelse. Vennligst prøv med en annen."
 
-#: wp-includes/general-template.php:3898
+#: wp-includes/general-template.php:3900
 msgctxt "admin color scheme"
 msgid "Blue"
 msgstr "Blå"
@@ -8763,12 +8776,12 @@ msgstr "Brukeren er allerede aktiv."
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4146
+#: wp-includes/functions.php:4147
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s ble kalt <strong>feil</strong>. %2$s %3$s"
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4139
+#: wp-includes/functions.php:4140
 msgid "(This message was added in version %s.)"
 msgstr "(Denne meldingen ble lagt i versjon %s.)"
 
@@ -9423,19 +9436,19 @@ msgid "This is the short link."
 msgstr "Dette er den korte lenken."
 
 #. translators: 1: Number of updates available to WordPress
-#: wp-includes/update.php:618
+#: wp-includes/update.php:632
 msgid "%d WordPress Update"
 msgstr "%d WordPress-oppdatering"
 
 #. translators: 1: Number of updates available to themes
-#: wp-includes/update.php:626
+#: wp-includes/update.php:640
 msgid "%d Theme Update"
 msgid_plural "%d Theme Updates"
 msgstr[0] "%d Temaoppdatering"
 msgstr[1] "%d Temaoppdateringer"
 
 #. translators: 1: Number of updates available to plugins
-#: wp-includes/update.php:622
+#: wp-includes/update.php:636
 msgid "%d Plugin Update"
 msgid_plural "%d Plugin Updates"
 msgstr[0] "%d Utvidelsesoppdatering"
@@ -9559,7 +9572,7 @@ msgid "Taxonomy:"
 msgstr "Klassifisering:"
 
 #: wp-includes/admin-bar.php:836
-#: wp-includes/class-wp-customize-nav-menus.php:565
+#: wp-includes/class-wp-customize-nav-menus.php:581
 #: wp-includes/customize/class-wp-customize-nav-menus-panel.php:98
 msgid "Menus"
 msgstr "Menyer"
@@ -9638,7 +9651,7 @@ msgstr "Ugyldig innlegg-ID."
 msgid "Either there are no posts, or something went wrong."
 msgstr "Enten er det ingen innlegg, eller så oppstod en feil."
 
-#: wp-includes/class-wp-customize-nav-menus.php:789
+#: wp-includes/class-wp-customize-nav-menus.php:805
 #: wp-includes/class-wp-xmlrpc-server.php:1377
 #: wp-includes/class-wp-xmlrpc-server.php:1861
 #: wp-includes/class-wp-xmlrpc-server.php:3381
@@ -9726,12 +9739,12 @@ msgstr "Beklager, du har ikke lov til å endre forfatter på siden som denne bru
 
 #. translators: 1: Database error message, 2: SQL query, 3: Name of the calling
 #. function
-#: wp-includes/wp-db.php:1370
+#: wp-includes/wp-db.php:1363
 msgid "WordPress database error %1$s for query %2$s made by %3$s"
 msgstr "WordPress database error %1$s for query %2$s made by %3$s"
 
 #. translators: 1: Database error message, 2: SQL query
-#: wp-includes/wp-db.php:1373
+#: wp-includes/wp-db.php:1366
 msgid "WordPress database error %1$s for query %2$s"
 msgstr "WordPress database error %1$s for query %2$s"
 
@@ -9873,7 +9886,7 @@ msgstr "Kalender"
 msgid "Text"
 msgstr "Tekst"
 
-#: wp-includes/widgets/class-wp-widget-text.php:468
+#: wp-includes/widgets/class-wp-widget-text.php:489
 msgid "Automatically add paragraphs"
 msgstr "Legg til avsnitt automatisk"
 
@@ -9895,31 +9908,31 @@ msgctxt "widgets"
 msgid "%1$s on %2$s"
 msgstr "%1$s til %2$s"
 
-#: wp-includes/widgets.php:1426
+#: wp-includes/widgets.php:1429
 msgid "Untitled"
 msgstr "Uten tittel"
 
-#: wp-includes/widgets.php:1510
+#: wp-includes/widgets.php:1513
 msgid "Enter the RSS feed URL here:"
 msgstr "Skriv inn RSS-strøm-URL her:"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1516
 msgid "Give the feed a title (optional):"
 msgstr "Gi strømmen en tittel (valgfritt):"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1519
 msgid "How many items would you like to display?"
 msgstr "Hvor mange elementer vil du vise?"
 
-#: wp-includes/widgets.php:1526
+#: wp-includes/widgets.php:1529
 msgid "Display item content?"
 msgstr "Vis elementets innhold?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1532
 msgid "Display item author if available?"
 msgstr "Vis elementets forfatter hvis tilgjengelig?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1535
 msgid "Display item date?"
 msgstr "Vis elementets dato?"
 
@@ -10013,35 +10026,35 @@ msgid "Could not write file %s"
 msgstr "Kunne ikke lagre filen %s"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2595
+#: wp-includes/functions.php:2596
 msgid "You are attempting to log out of %s"
 msgstr "Du forsøker å logge ut av %s"
 
-#: wp-includes/functions.php:2616
+#: wp-includes/functions.php:2617
 msgid "WordPress Failure Notice"
 msgstr "WordPress feilnote"
 
-#: wp-includes/functions.php:2611 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2612 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Vennligst prøv igjen."
 
-#: wp-includes/functions.php:2736
+#: wp-includes/functions.php:2737
 msgid "&laquo; Back"
 msgstr "&laquo; Tilbake"
 
-#: wp-includes/functions.php:2748 wp-load.php:92
+#: wp-includes/functions.php:2749 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Feil"
 
-#: wp-includes/functions.php:4669
+#: wp-includes/functions.php:4670
 msgid "Select a city"
 msgstr "Velg en by"
 
-#: wp-includes/functions.php:4714 wp-includes/functions.php:4718
+#: wp-includes/functions.php:4715 wp-includes/functions.php:4719
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4722
+#: wp-includes/functions.php:4723
 msgid "Manual Offsets"
 msgstr "Manuelle offset"
 
@@ -10119,11 +10132,11 @@ msgstr "%1$s %2$s %3$s stikkord-strøm"
 msgid "%1$s %2$s Posts by %3$s Feed"
 msgstr "%1$s %2$s innlegg etter %3$s-strøm"
 
-#: wp-includes/general-template.php:3714
+#: wp-includes/general-template.php:3716
 msgid "&laquo; Previous"
 msgstr "&laquo; Forrige"
 
-#: wp-includes/general-template.php:3715
+#: wp-includes/general-template.php:3717
 msgid "Next &raquo;"
 msgstr "Neste &raquo;"
 
@@ -10420,7 +10433,7 @@ msgstr "Hevet skrift"
 msgid "Cut"
 msgstr "Klipp"
 
-#: wp-includes/class-wp-customize-manager.php:4165
+#: wp-includes/class-wp-customize-manager.php:4202
 #: wp-includes/class-wp-editor.php:1045
 msgid "Copy"
 msgstr "Kopier"
@@ -10730,7 +10743,7 @@ msgstr "Yahoo IM"
 msgid "Jabber / Google Talk"
 msgstr "Jabber / Google Talk"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1410
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "En feil oppstod, som antagelig betyr at strømmen er nede. Prøv igjen senere."
 
@@ -10878,7 +10891,7 @@ msgstr "<strong>Feil</strong>: Brukernavnfeltet er tomt."
 msgid "<strong>ERROR</strong>: The password field is empty."
 msgstr "<strong>Feil</strong>: Passordfeltet er tomt."
 
-#: wp-includes/functions.php:5328 wp-includes/user.php:285
+#: wp-includes/functions.php:5329 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Vennligst logg inn igjen."
 
@@ -10888,7 +10901,7 @@ msgstr "Sidekolonne %d"
 
 #. translators: 1: WordPress version number, 2: Minimum required MySQL version
 #. number
-#: wp-includes/wp-db.php:3318
+#: wp-includes/wp-db.php:3311
 msgid "<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher"
 msgstr "<strong>FEIL</strong>: WordPress %1$s krever MySQL %2$s eller høyere"
 
@@ -11041,7 +11054,7 @@ msgstr "Få din egen %s-konto på få sekunder"
 msgid "Just a username, please."
 msgstr "Kun et brukernavn, takk."
 
-#: wp-includes/class-wp-customize-nav-menus.php:951
+#: wp-includes/class-wp-customize-nav-menus.php:967
 #: wp-includes/script-loader.php:1129 wp-signup.php:562
 msgid "Next"
 msgstr "Neste"
@@ -11127,21 +11140,21 @@ msgid "[%s] Your username and password info"
 msgstr "[%s] Info om ditt nye brukernavn og passord"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4033
+#: wp-includes/functions.php:4034
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s ble forespurt med et argument som er <strong>foreldet</strong> siden versjon %2$s med ingen alternativer tilgjengelige."
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4030
+#: wp-includes/functions.php:4031
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%1$s ble forespurt med et argument som er <strong>foreldet</strong> siden versjon %2$s! %3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3841 wp-includes/functions.php:3969
-#: wp-includes/functions.php:4092
+#: wp-includes/functions.php:3842 wp-includes/functions.php:3970
+#: wp-includes/functions.php:4093
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s er <strong>foreldet</strong> siden versjon %2$s med ingen alternativer tilgjengelig."
 
@@ -11150,8 +11163,8 @@ msgstr "%1$s er <strong>foreldet</strong> siden versjon %2$s med ingen alternati
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3838 wp-includes/functions.php:3966
-#: wp-includes/functions.php:4089
+#: wp-includes/functions.php:3839 wp-includes/functions.php:3967
+#: wp-includes/functions.php:4090
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s er <strong>foreldet</strong> siden versjon %2$s! Bruk %3$s isteden."
 
@@ -11209,12 +11222,12 @@ msgid "<strong>ERROR</strong>: Your account has been marked as a spammer."
 msgstr "<strong>FEIL</strong>: Din konto har blitt merket som spam."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2602
+#: wp-includes/functions.php:2603
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Vil du virkelig <a href=\"%s\">logge ut</a>?"
 
-#: wp-includes/class-wp-customize-manager.php:5095
-#: wp-includes/class-wp-customize-manager.php:5136
+#: wp-includes/class-wp-customize-manager.php:5135
+#: wp-includes/class-wp-customize-manager.php:5176
 msgid "Fill Screen"
 msgstr "Fyll skjermen"
 
@@ -11361,7 +11374,7 @@ msgstr "Det er ingen innstillinger for denne widget."
 msgid "Dashboard"
 msgstr "Kontrollpanel"
 
-#: wp-includes/class-wp-customize-manager.php:4832
+#: wp-includes/class-wp-customize-manager.php:4872
 #: wp-includes/class-wp-xmlrpc-server.php:540
 msgid "Site Title"
 msgstr "Nettstedstittel"
@@ -11413,7 +11426,7 @@ msgstr "Tidsformat"
 msgid "Height"
 msgstr "Høyde"
 
-#: wp-includes/class-wp-customize-manager.php:4901
+#: wp-includes/class-wp-customize-manager.php:4941
 #: wp-includes/customize/class-wp-customize-color-control.php:51
 #: wp-includes/customize/class-wp-customize-media-control.php:225
 #: wp-includes/customize/class-wp-customize-media-control.php:235
@@ -11422,6 +11435,23 @@ msgstr "Høyde"
 #: wp-includes/script-loader.php:853
 msgid "Default"
 msgstr "Standard"
+
+#: wp-includes/taxonomy.php:517
+msgid "Separate tags with commas"
+msgstr "Skill stikkord med komma"
+
+#: wp-includes/comment-template.php:2203
+msgid "Website"
+msgstr "Nettsted"
+
+#: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
+#: wp-includes/functions.php:3715
+msgid "Widgets"
+msgstr "Widgeter"
+
+#: wp-includes/class-wp-xmlrpc-server.php:4805
+msgid "For some strange yet very annoying reason, this post could not be edited."
+msgstr "Av en merkelig og plagsom grunn kunne ikke innlegget redigeres."
 
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:137
 #: wp-includes/widgets/class-wp-widget-archives.php:160
@@ -11435,27 +11465,10 @@ msgstr "Standard"
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:135
 #: wp-includes/widgets/class-wp-widget-search.php:70
 #: wp-includes/widgets/class-wp-widget-tag-cloud.php:126
-#: wp-includes/widgets/class-wp-widget-text.php:453
-#: wp-includes/widgets/class-wp-widget-text.php:486
+#: wp-includes/widgets/class-wp-widget-text.php:474
+#: wp-includes/widgets/class-wp-widget-text.php:507
 msgid "Title:"
 msgstr "Tittel:"
-
-#: wp-includes/taxonomy.php:517
-msgid "Separate tags with commas"
-msgstr "Skill stikkord med komma"
-
-#: wp-includes/comment-template.php:2203
-msgid "Website"
-msgstr "Nettsted"
-
-#: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3714
-msgid "Widgets"
-msgstr "Widgeter"
-
-#: wp-includes/class-wp-xmlrpc-server.php:4805
-msgid "For some strange yet very annoying reason, this post could not be edited."
-msgstr "Av en merkelig og plagsom grunn kunne ikke innlegget redigeres."
 
 #: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3025
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:465
@@ -11564,7 +11577,7 @@ msgstr "Første innlegg"
 msgid "Pages:"
 msgstr "Sider:"
 
-#: wp-includes/category-template.php:1139
+#: wp-includes/category-template.php:1131
 msgid "Tags: "
 msgstr "Stikkord: "
 
@@ -11609,10 +11622,10 @@ msgstr "Utvidelse:"
 msgid "Select default color"
 msgstr "Velg standardfarge"
 
-#: wp-includes/class-wp-customize-manager.php:4090
+#: wp-includes/class-wp-customize-manager.php:4129
 #: wp-includes/script-loader.php:146 wp-includes/script-loader.php:307
-#: wp-includes/widgets/class-wp-widget-text.php:500
-#: wp-includes/widgets/class-wp-widget-text.php:515
+#: wp-includes/widgets/class-wp-widget-text.php:521
+#: wp-includes/widgets/class-wp-widget-text.php:536
 msgid "Dismiss"
 msgstr "Lukk"
 
@@ -11620,7 +11633,7 @@ msgstr "Lukk"
 msgid "Author"
 msgstr "Forfatter"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1095
+#: wp-includes/class-wp-customize-nav-menus.php:1111
 #: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1700
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
 #: wp-includes/media-template.php:376 wp-includes/media-template.php:557
@@ -11634,7 +11647,7 @@ msgctxt "noun"
 msgid "Comment"
 msgstr "Kommentar"
 
-#: wp-includes/deprecated.php:3130 wp-includes/functions.php:2606
+#: wp-includes/deprecated.php:3130 wp-includes/functions.php:2607
 msgid "Are you sure you want to do this?"
 msgstr "Sikker på at det er dette du vil?"
 
@@ -11642,7 +11655,7 @@ msgstr "Sikker på at det er dette du vil?"
 msgid "No"
 msgstr "Nei"
 
-#: wp-includes/class-wp-customize-manager.php:4119
+#: wp-includes/class-wp-customize-manager.php:4156
 #: wp-includes/class-wp-editor.php:1119 wp-includes/media-template.php:1247
 msgid "Preview"
 msgstr "Forhåndsvis"
@@ -11687,7 +11700,7 @@ msgstr "Angre"
 msgid "Apply"
 msgstr "Bruk"
 
-#: wp-includes/class-wp-customize-manager.php:4578
+#: wp-includes/class-wp-customize-manager.php:4617
 #: wp-includes/script-loader.php:549 wp-includes/script-loader.php:689
 msgid "Publish"
 msgstr "Publiser"
@@ -11794,7 +11807,7 @@ msgstr "Innhold"
 msgid "Tags"
 msgstr "Stikkord"
 
-#: wp-includes/class-wp-customize-manager.php:4583
+#: wp-includes/class-wp-customize-manager.php:4622
 #: wp-includes/script-loader.php:551 wp-includes/script-loader.php:693
 msgid "Save Draft"
 msgstr "Lagre kladd"
@@ -11925,7 +11938,7 @@ msgid "Add or remove tags"
 msgstr "Legg til eller fjern stikkord"
 
 #: wp-includes/class-wp-customize-control.php:634
-#: wp-includes/class-wp-customize-nav-menus.php:1065
+#: wp-includes/class-wp-customize-nav-menus.php:1081
 msgid "Add"
 msgstr "Legg til"
 
@@ -11954,7 +11967,7 @@ msgstr "Lenker"
 msgid "Uncategorized"
 msgstr "Ukategorisert"
 
-#: wp-includes/class-wp-customize-manager.php:5261
+#: wp-includes/class-wp-customize-manager.php:5301
 #: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1695
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
 #: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1125
@@ -12010,7 +12023,7 @@ msgstr "Bildebilioteket GD er ikke installert."
 msgid "View Page"
 msgstr "Vis side"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:46
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:55
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:61
 #: wp-includes/script-loader.php:879
 msgid "Done"

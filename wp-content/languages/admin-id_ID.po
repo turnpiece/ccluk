@@ -26,37 +26,37 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "7"
 
-#: wp-admin/about.php:244
+#: wp-admin/about.php:262
 msgid "Improvements to Roles and Capabilities"
 msgstr "Perbaikan pada Peran dan Kapabilitas"
 
-#: wp-admin/about.php:245
+#: wp-admin/about.php:263
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Kemampuan baru telah dikenalkan untuk mengijinkan penataan berjenjang pada plugin dan berkas terjemahan. Tambahannya, proses penggantian situs pada multi situs telah diperbaiki untuk memperbarui peran dan kemampuan yang tersedia agar lebih bisa nyata dan tersebar."
 
-#: wp-admin/about.php:241
+#: wp-admin/about.php:259
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "WordPress 4.9 memuat versi terbaru MediaElement.js, yang melepas ketergantungan pada jQuery, meningkatkan aksesibilitas, memodernisasi UI, dan memperbaiki banyak bug."
 
-#: wp-admin/about.php:240
+#: wp-admin/about.php:258
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js diperbarui ke versi 4.2.6"
 
-#: wp-admin/about.php:237
+#: wp-admin/about.php:255
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "Kami mengenalkan pustaka kode penyuntingan baru, CodeMirror, yang digunakan bersama inti. Gunakan ini untuk memperbaiki penulisan kode atau meyunting dengan berpengalaman bersama plugin Anda, seperti CSS atau termasuk bidang JavaScript."
 
-#: wp-admin/about.php:236
+#: wp-admin/about.php:254
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror tersedia untuk digunakan pada Tema dan Plugin Anda"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:230
+#: wp-admin/about.php:248
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "Kita telah membuat sejumlah penyempurnaan pada Customizer JS API di WordPress 4.9, mengeliminir beberapa titik masalah dan membuatnya semudah bekerja dengan PHP API. Ada juga beberapa rangka dasar kontrol baru seperti kontrol tanggal / waktu, dan notifikasi bagian / panel / global. <a href=\"%s\">Lihat daftar lengkap.</a>"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:244
 msgid "Customizer JS API Improvements"
 msgstr "Penyempurnaan Customizer JS API"
 
@@ -64,7 +64,7 @@ msgstr "Penyempurnaan Customizer JS API"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Data ini digunakan untuk menyediakan peningkatan umum untuk WordPress, yang meliputi bantuan untuk memproteksi website Anda dengan menemukan dan memasang pembaruan secara otomatis. Juga digunakan untuk menghitung statistik, seperti yang ditampilan di <a href=\"%s\">laman statistik WordPress.org</a>."
 
-#: wp-admin/about.php:139
+#: wp-admin/about.php:157
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "Ketika Anda mengedit tema dan plugin secara langsung, WordPress 4.9 dengan sopan akan memperingatkan Anda bahwa ini adalah praktik yang berbahaya. WordPress 4.9 akan merekomendasikan Anda untuk membuat cadangan file Anda sebelum disimpan, jadi tidak akan ditimpa oleh pembaruan berikutnya. Ambil rute yang aman: masa depan Anda akan berterima kasih. Tim dan pelanggan Anda akan berterima kasih."
 
@@ -141,52 +141,52 @@ msgid "Enter the address here if you <a href=\"%s\">want your site home page to 
 msgstr "Masukkan alamat di sini jika Anda <a href=\"%s\">menginginkan beranda situs Anda berbeda dengan direktori instalasi WordPress</a>."
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:219
+#: wp-admin/about.php:237
 msgid "Developer Happiness %s"
 msgstr "Kegembiraan Pengembang %s"
 
-#: wp-admin/about.php:209
+#: wp-admin/about.php:227
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://wordpress.org/plugins/gutenberg/"
 
-#: wp-admin/about.php:208
+#: wp-admin/about.php:226
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "WordPress sedang mengupayakan cara baru untuk membuat dan mengatur konten, dan kami butuh bantuan Anda. Tertarik untuk menjadi <a href=\"%s\">penguji dini</a> atau terlibat dengan proyek Gutenberg? <a href=\"%s\">Beri kontribusi di GitHub</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:202
+#: wp-admin/about.php:220
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Ikut Bantu Gutenberg %s"
 
-#: wp-admin/about.php:169
+#: wp-admin/about.php:187
 msgid "Site Building Improvements"
 msgstr "Pengembangan Pembangunan Situs  %s"
 
-#: wp-admin/about.php:177
+#: wp-admin/about.php:195
 msgid "More Reliable Theme Switching"
 msgstr "Pengubahan Tema yang Lebih Bisa Diandalkan"
 
-#: wp-admin/about.php:154
+#: wp-admin/about.php:172
 msgid "The New Gallery Widget"
 msgstr "Widget Galeri Baru"
 
-#: wp-admin/about.php:146
+#: wp-admin/about.php:164
 msgid "Even More Widget Updates"
 msgstr "Lebih Banyak Pembaruan Widget"
 
-#: wp-admin/about.php:116
+#: wp-admin/about.php:134
 msgid "Coding Enhancements"
 msgstr "Pengembangan Penulisan Kode"
 
-#: wp-admin/about.php:109
+#: wp-admin/about.php:127
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Apakah Anda teralihkan dari meja Anda sebelum menyimpan draf desain baru Anda? Jangan takut, saat Anda kembali, WordPress 4.9 akan menanyakan apakah Anda ingin menyimpan perubahan yang belum tersimpan atau tidak."
 
-#: wp-admin/about.php:108
+#: wp-admin/about.php:126
 msgid "A Prompt to Protect Your Work"
 msgstr "Peringatan untuk Melindungi Kerja Anda"
 
-#: wp-admin/about.php:101
+#: wp-admin/about.php:119
 msgid "Design Locking To Guard Your Changes"
 msgstr "Penguncian Desain untuk Melindungi Perubahan yang Anda Terapkan"
 
@@ -198,75 +198,75 @@ msgstr "Kami menanggapi masalah privasi dan transparansi dengan sangat serius. U
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "Secara berkala, WordPress Anda mengirimkan data ke WordPress.org, seperti, namun tidak terbatas untuk versi WordPress yang Anda gunakan, dan daftar Plugin dan Tema yang terpasang."
 
-#: wp-admin/about.php:185
+#: wp-admin/about.php:203
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Apakah Anda bingung dengan langkah-langkah membuat menu baru? Mungkin tidak lagi! Kami telah meresolusi UX untuk proses pembuatan menu yang lebih mudah. Salinan yang baru diperbarui akan memandu Anda."
 
-#: wp-admin/about.php:184
+#: wp-admin/about.php:202
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Instruksi Menu yang Lebih Baik = Tak Lagi Membingungkan"
 
-#: wp-admin/about.php:178
+#: wp-admin/about.php:196
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "Ketika Anda mengganti tema, terkadang widget mengira mereka dapat langsung aktif dan berpindah lokasi. Penyempurnaan di WordPress 4.9 menawarkan menu dan penempatan widget yang lebih tepat saat Anda memutuskan untuk menggunakan tema baru. Selain itu, Anda dapat melihat pratinjau tema yang terinstal atau mendownload, menginstal, dan melihat pratinjau tema baru segera. Tidak ada yang lebih berguna seperti dapat melihat pratinjau sebelum Anda menerapkannya."
 
-#: wp-admin/about.php:162
+#: wp-admin/about.php:180
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Ingin menambahkan media ke text widget? Gambar, video dan musik dapat langsung ditanamkan kedalam Widget bersaamaan dengan teks Anda, caranya mudah namun berguna dengan tombol menambahkan media. Woo!"
 
-#: wp-admin/about.php:161
+#: wp-admin/about.php:179
 msgid "Press a Button, Add Media"
 msgstr "Klik Tombol, Tambahkan Media"
 
-#: wp-admin/about.php:155
+#: wp-admin/about.php:173
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "Penyempurnaan bertahap terhadap perubahan media lahir di WordPress 4.8, Anda sekarang bisa menambahkan galeri melalu widget. Yay!"
 
-#: wp-admin/about.php:138
+#: wp-admin/about.php:156
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Peringatan: Bahaya di Depan Mata!"
 
-#: wp-admin/about.php:132
+#: wp-admin/about.php:150
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Anda akan terhindar dari White Screen ketika mengerjakan tema dan kode plugin karena WordPress 4.9 akan memperingatkan Anda saat akan menyimpan sebuah kesalahan. Anda akan tidur lebih nyenyak malam ini."
 
-#: wp-admin/about.php:131
+#: wp-admin/about.php:149
 msgid "Sandbox for Safety"
 msgstr "Bak Pasir untuk Keamanan"
 
-#: wp-admin/about.php:125
+#: wp-admin/about.php:143
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Anda punya masalah tampilan tapi tidak bisa mengetahui secara pasti apa yang salah pada CSS yang telah Anda tulis. Dengan Syntax Highlighting dan pengecekan kesalahan untuk pengeditan CSS dan widget Custom HTML yang diperkenalkan di WordPress 4.8.1, Anda akan segera menemukan kesalahan pengkodean dengan cepat. Praktis dijamin untuk membantu Anda memindai kode dengan lebih mudah dan suss out dan memperbaiki kesalahan kode dengan cepat."
 
-#: wp-admin/about.php:124
+#: wp-admin/about.php:142
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Penyorot Sintaks dan Pemeriksa Galat? Tentu saja!"
 
-#: wp-admin/about.php:102
+#: wp-admin/about.php:120
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Pernah menemukan skenario dimana dua disainer menangani sebuah proyek dan disainer A menimpa hasil dari kerja disainer B yang indah? Fitur mengunci disain pada WordPress 4.9 (mirip pengunci pos) mengamankan konsep disain Anda, karena itu tidak ada orang yang bisa membuat perubahan untuknya atau menghapus semua kerja keras Anda."
 
-#: wp-admin/about.php:95
+#: wp-admin/about.php:113
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Memerlukan suatu umpan balik pada perubahan disain situs yang diajukan? WordPress 4.9 memberikan Anda sebuah tautan pratinjau yang bisa Anda kirimkan ke tim dan pelanggan Anda oleh karena itu Anda bisa mengumpulkan dan mendapatkan umpan balik sebelum Anda menjadwalkan perubahannya untuk ditampilkan secara resmi. Dapatkah kita berkolaborasi&#43;&#43;?"
 
-#: wp-admin/about.php:94
+#: wp-admin/about.php:112
 msgid "Collaborate with Design Preview Links"
 msgstr "Berkolaborasi dengan Tautan Pratinjau Desain"
 
-#: wp-admin/about.php:88
+#: wp-admin/about.php:106
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "Ya, Anda membacanya dengan benar. Sama seperti Anda dapat membuat draf, merevisi pos, dan menjadwalkannya untuk ditayangkan pada tanggal dan waktu yang Anda pilih, sekarang Anda dapat bermain-main dengan desain situs Anda dan menjadwalkan perubahan desain agar bisa berjalan secara langsung sesuai keinginan Anda."
 
-#: wp-admin/about.php:87
+#: wp-admin/about.php:105
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Drafkan dan Jadwalkan Kustomisasi Desain Situs"
 
-#: wp-admin/about.php:79
+#: wp-admin/about.php:97
 msgid "Customizer Workflow Improved"
 msgstr "Perbaikan Alur Kerja Customizer"
 
-#: wp-admin/about.php:66
+#: wp-admin/about.php:84
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Selamat datang di alur kerja Customizer yang telah disempurnakan dengan draf desain, penguncian, penjadwalan, dan tautan pratinjau. Terlebih lagi, Syntax Highlighting Code dan pengecekan kesalahan akan menjadikan pengembangan website lancar dan bersih. Akhirnya, jika semua itu tidak cukup bagus, kami memiliki widget Galeri baru yang cukup bagus dan perbaikan pada penjelajahan dan peralihan tema."
 
@@ -276,7 +276,7 @@ msgid "Thank you for updating to the latest version! WordPress %s will smooth yo
 msgstr "Terima kasih telah memperbarui ke versi termutakhir! WordPress %s akan memperlancar alur kerja desain dan menjaga Anda dari kekeliruan pengkodean."
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:61
+#: wp-admin/about.php:79
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Penyempurnaan Customizer, Pemeriksaan Kesalahan Kode, dan banyak lagi! %s"
 
@@ -1697,7 +1697,7 @@ msgid "(Currently set to: %s)"
 msgstr "(Saat ini diletakkan di: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:372
+#: wp-admin/about.php:390
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>Versi %s</strong> mengatasi sebuah masalah keamanan."
 
@@ -1719,15 +1719,15 @@ msgstr "Anda dapat mengubah foto profil Anda di <a href=\"%s\">Gravatar</a>."
 msgid "Profile Picture"
 msgstr "Foto Profil"
 
-#: wp-admin/about.php:366
+#: wp-admin/about.php:384
 msgid "Security Releases"
 msgstr "Rilis Keamanan"
 
-#: wp-admin/about.php:363
+#: wp-admin/about.php:381
 msgid "Maintenance Releases"
 msgstr "Rilis Pemeliharaan"
 
-#: wp-admin/about.php:34 wp-admin/about.php:369
+#: wp-admin/about.php:34 wp-admin/about.php:387
 msgid "Maintenance and Security Releases"
 msgstr "Rilis Pemeliharaan dan Keamanan"
 
@@ -3793,8 +3793,8 @@ msgstr "Situs Anda menjalankan versi %s."
 
 #: wp-admin/includes/class-core-upgrader.php:137
 #: wp-admin/includes/class-wp-upgrader.php:164
-#: wp-admin/includes/update-core.php:885 wp-admin/includes/update-core.php:962
-#: wp-admin/includes/update-core.php:985
+#: wp-admin/includes/update-core.php:921 wp-admin/includes/update-core.php:998
+#: wp-admin/includes/update-core.php:1021
 msgid "The update cannot be installed because we will be unable to copy some files. This is usually due to inconsistent file permissions."
 msgstr "Pembaruan gagal diinstal sebab kami tidak akan bisa menyalin beberapa berkas. Ini biasanya dikarenakan perizinan berkas tidak konsisten."
 
@@ -3933,7 +3933,7 @@ msgstr "Memperbarui tema: %s"
 msgid "Updating plugin: %s"
 msgstr "Memperbarui plugin: %s"
 
-#: wp-admin/includes/update-core.php:1022
+#: wp-admin/includes/update-core.php:1058
 msgid "There is not enough free disk space to complete the update."
 msgstr "Ruang yang tersedia di server Anda tidak cukup untuk merampungkan pembaruan."
 
@@ -3967,7 +3967,7 @@ msgstr "Mencoba untuk mengembalikan ke versi sebelumnya."
 msgid "WordPress %s"
 msgstr "WordPress %s"
 
-#: wp-admin/includes/update-core.php:975
+#: wp-admin/includes/update-core.php:1011
 msgid "Copying the required files&#8230;"
 msgstr "Menyalin berkas-berkas yang diperlukan&#8230;"
 
@@ -4007,7 +4007,7 @@ msgstr "Karena terjadi galat saat pembaruan, WordPress telah mengembalikan situs
 msgid "Updating to WordPress %s"
 msgstr "Memperbarui ke WordPress %s"
 
-#: wp-admin/includes/update-core.php:913
+#: wp-admin/includes/update-core.php:949
 msgid "Preparing to install the latest version&#8230;"
 msgstr "Menyiapkan pemasangan versi terbaru&#8230;"
 
@@ -4736,7 +4736,7 @@ msgstr "Ambil Kesukaan"
 msgid "Search Engines Discouraged"
 msgstr "Tidak Menganjurkan Mesin Pencari"
 
-#: wp-admin/includes/update-core.php:1261 wp-admin/update-core.php:511
+#: wp-admin/includes/update-core.php:1301 wp-admin/update-core.php:511
 msgid "Welcome to WordPress %1$s. You will be redirected to the About WordPress screen. If not, click <a href=\"%2$s\">here</a>."
 msgstr "Selamat datang di WordPress %1$s. Anda akan dialihkan ke layar Tentang WordPress. Jika tidak, klik <a href=\"%2$s\">di sini</a>."
 
@@ -5539,28 +5539,28 @@ msgstr "Tampilkan Baris Perkakas ketika mengunjungi situs"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:381
+#: wp-admin/about.php:399
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>Versi %1$s</strong> telah memperbaiki masalah keamanan dan memperbaiki %2$s bug."
 msgstr[1] "<strong>Versi %1$s</strong> telah memperbaiki masalah keamanan dan memperbaiki %2$s bug."
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:50 wp-admin/about.php:389
+#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:407
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Untuk informasi lebih lanjut, lihatlah <a href=\"%s\">catatan rilis</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:385
+#: wp-admin/about.php:39 wp-admin/about.php:57 wp-admin/about.php:403
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>Versi %1$s</strong> memperbaiki beberapa masalah keamanan dan %2$s bug."
 msgstr[1] "<strong>Versi %1$s</strong> memperbaiki beberapa masalah keamanan dan %2$s bug."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:377
+#: wp-admin/about.php:395
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Versi %1$s</strong> mengatasi %2$s bug."
@@ -5576,19 +5576,19 @@ msgid "What&#8217;s New"
 msgstr "Apa yang Baru"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:374
+#: wp-admin/about.php:392
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>Versi %s</strong> mengatasi sejumlah isu keamanan."
 
-#: wp-admin/about.php:362
+#: wp-admin/about.php:380
 msgid "Maintenance Release"
 msgstr "Rilis Perawatan"
 
-#: wp-admin/about.php:365
+#: wp-admin/about.php:383
 msgid "Security Release"
 msgstr "Rilis Perbaikan Keamanan"
 
-#: wp-admin/about.php:368
+#: wp-admin/about.php:386
 msgid "Maintenance and Security Release"
 msgstr "Rilis Perawatan dan Perbaikan Keamanan"
 
@@ -5596,11 +5596,11 @@ msgstr "Rilis Perawatan dan Perbaikan Keamanan"
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "Layar ini memampukan Anda memilih struktur permalink pos dan laman. Anda dapat memilih dari pengaturan umum atau membuat struktur URL kustom."
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:273
 msgid "Return to Updates"
 msgstr "Kembali ke Pembaruan"
 
-#: wp-admin/includes/update-core.php:1262 wp-admin/update-core.php:512
+#: wp-admin/includes/update-core.php:1302 wp-admin/update-core.php:512
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "Selamat datang di WordPress %1$s. <a href=\"%2$s\">Pelajari lebih lanjut</a>."
 
@@ -5872,11 +5872,11 @@ msgstr "Karena ini adalah instalasi multi-situs, Anda dapat menambahkan akun-aku
 msgid "Welcome to WordPress %s"
 msgstr "Selamat Datang di WordPress %s"
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:276
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Pergi ke Dasbor &rarr; Beranda"
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:273
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Kembali ke Dasbor &rarr; Pembaruan"
 
@@ -7666,7 +7666,7 @@ msgid "The password you chose during installation."
 msgstr "Sandi yang Anda pilih pada saat proses instalasi."
 
 #: wp-admin/includes/class-wp-automatic-updater.php:349
-#: wp-admin/includes/update-core.php:1258 wp-admin/update-core.php:510
+#: wp-admin/includes/update-core.php:1298 wp-admin/update-core.php:510
 msgid "WordPress updated successfully"
 msgstr "WordPress telah berhasil diperbarui"
 
@@ -7696,7 +7696,7 @@ msgstr "Apakah Anda yakin ingin menghapus berkas-berkas dan data?"
 msgid "Inactive:"
 msgstr "Tidak Aktif:"
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:276
 msgid "Go to Dashboard"
 msgstr "Kunjungi Dasbor"
 
@@ -8758,23 +8758,23 @@ msgctxt "plugin"
 msgid "Add New"
 msgstr "Tambah Baru"
 
-#: wp-admin/includes/update-core.php:906
+#: wp-admin/includes/update-core.php:942
 msgid "The update cannot be installed because WordPress %1$s requires PHP version %2$s or higher and MySQL version %3$s or higher. You are running PHP version %4$s and MySQL version %5$s."
 msgstr "Pembaruan tidak dapat dipasang karena WordPress %1$s membutuhkan PHP versi %2$s atau lebih tinggi dan MySQL versi %3$s atau lebih tinggi. Anda menjalankan PHP versi %4$s dan MySQL versi %5$s."
 
-#: wp-admin/includes/update-core.php:908
+#: wp-admin/includes/update-core.php:944
 msgid "The update cannot be installed because WordPress %1$s requires PHP version %2$s or higher. You are running version %3$s."
 msgstr "Pembaruan tidak dapat dipasang karena WordPress %1$s membutuhkan PHP versi %2$s atau lebih tinggi. Anda menjalankan versi %3$s."
 
-#: wp-admin/includes/update-core.php:910
+#: wp-admin/includes/update-core.php:946
 msgid "The update cannot be installed because WordPress %1$s requires MySQL version %2$s or higher. You are running version %3$s."
 msgstr "Pembaruan tidak dapat dipasang karena WordPress %1$s membutuhkan MySQL versi %2$s atau lebih tinggi. Anda sedang menjalankan versi %3$s."
 
-#: wp-admin/includes/update-core.php:859
+#: wp-admin/includes/update-core.php:895
 msgid "Verifying the unpacked files&#8230;"
 msgstr "Memeriksa berkas-berkas yang dibongkar&#8230;"
 
-#: wp-admin/includes/update-core.php:872
+#: wp-admin/includes/update-core.php:908
 msgid "The update could not be unpacked"
 msgstr "Paket pembaruan tidak dapat dibongkar"
 
@@ -8830,7 +8830,7 @@ msgstr "Memasang Tema dari berkas yang diunggah: %s"
 msgid "WordPress should correct invalidly nested XHTML automatically"
 msgstr "WordPress seharusnya membetulkan XHTML yang peletakannya tidak sah secara otomatis"
 
-#: wp-admin/includes/update-core.php:1132
+#: wp-admin/includes/update-core.php:1172
 msgid "Upgrading database&#8230;"
 msgstr "Memperbarui basis data&#8230;"
 
@@ -10438,8 +10438,8 @@ msgid "Could not extract file from archive."
 msgstr "Tidak dapat mengekstrak berkas dari arsip."
 
 #: wp-admin/includes/file.php:1195 wp-admin/includes/file.php:1299
-#: wp-admin/includes/file.php:1334 wp-admin/includes/update-core.php:1091
-#: wp-admin/includes/update-core.php:1202
+#: wp-admin/includes/file.php:1334 wp-admin/includes/update-core.php:1127
+#: wp-admin/includes/update-core.php:1242
 msgid "Could not copy file."
 msgstr "Tidak dapat menyalin berkas."
 
@@ -10546,7 +10546,7 @@ msgid "Filesystem error."
 msgstr "Galat sistem berkas."
 
 #: wp-admin/includes/class-wp-upgrader.php:166
-#: wp-admin/includes/update-core.php:967
+#: wp-admin/includes/update-core.php:1003
 msgid "Enabling Maintenance mode&#8230;"
 msgstr "Mengaktifkan moda perawatan&#8230;"
 
@@ -10759,7 +10759,7 @@ msgstr "Laman"
 
 #: wp-admin/includes/class-wp-upgrader.php:162 wp-admin/includes/file.php:1170
 #: wp-admin/includes/file.php:1281 wp-admin/includes/file.php:1339
-#: wp-admin/includes/update-core.php:1207
+#: wp-admin/includes/update-core.php:1247
 msgid "Could not create directory."
 msgstr "Tidak dapat menciptakan direktori."
 
@@ -10860,7 +10860,7 @@ msgid "Return to Theme Installer"
 msgstr "Kembali ke Pemasang Tema"
 
 #: wp-admin/includes/class-wp-upgrader.php:167
-#: wp-admin/includes/update-core.php:1054
+#: wp-admin/includes/update-core.php:1090
 msgid "Disabling Maintenance mode&#8230;"
 msgstr "Menonaktifkan moda perawatan&#8230;"
 

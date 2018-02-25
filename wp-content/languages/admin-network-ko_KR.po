@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration - Network Admin package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-20 05:40:25+0000\n"
+"PO-Revision-Date: 2017-12-04 01:44:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -24,7 +24,7 @@ msgstr "다음 사이트를 삭제하려고 합니다:"
 msgid "User could not be added to this site."
 msgstr "사용자는 이 사이트에 추가할 수 없습니다."
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "The username and a link to set the password will be mailed to this email address."
 msgstr "사용자명과 비밀번호 설정 링크가 이 이메일 주소로 발송됩니다."
 
@@ -69,17 +69,17 @@ msgctxt "theme"
 msgid "Delete %s"
 msgstr "%s 테마 삭제"
 
-#: wp-admin/network/sites.php:288
-msgid "Sorry, you are not allowed to delete that site."
-msgstr "죄송합니다. 해당 사이트를 삭제할 권한이 업습니다."
-
 #: wp-admin/network/themes.php:14
 msgid "Sorry, you are not allowed to manage network themes."
-msgstr "죄송합니다. 네트워크 테마를 관리할 권한이 업습니다."
+msgstr "죄송합니다. 네트워크 테마를 관리할 권한이 없습니다."
 
 #: wp-admin/network/themes.php:90
 msgid "Sorry, you are not allowed to delete themes for this site."
-msgstr "죄송합니다. 이 사이트의 테마를 삭제할 권한이 업습니다."
+msgstr "죄송합니다. 이 사이트의 테마를 삭제할 권한이 없습니다."
+
+#: wp-admin/network/sites.php:288
+msgid "Sorry, you are not allowed to delete that site."
+msgstr "죄송합니다. 해당 사이트를 삭제할 권한이 없습니다."
 
 #. translators: 1: wp-config.php 2: location of wp-config file, 3: translated
 #. version of "That's all, stop editing! Happy blogging."
@@ -547,7 +547,7 @@ msgstr "허용된 확장자들. 공백으로 분리해서 입력."
 msgid "Set site attributes"
 msgstr "사이트 속성 설정"
 
-#: wp-admin/network/settings.php:418
+#: wp-admin/network/settings.php:420
 msgid "Enable menus"
 msgstr "메뉴 활성화"
 
@@ -816,10 +816,6 @@ msgstr "아니오, 테마 목록으로 돌아가주세요"
 msgid "Cannot add user."
 msgstr "사용자를 추가할 수 없음."
 
-#: wp-admin/network/settings.php:55
-msgid "Super admins can no longer be added on the Options screen. You must now go to the list of existing users on Network Admin > Users and click on Username or the Edit action link below that name. This goes to an Edit User page where you can check a box to grant super admin privileges."
-msgstr "최고 관리자는 옵션 화면에서 추가될 수 없습니다. 네트워크 관리화면 > 모든 사용자 화면에서 기존 사용자 목록에서 사용자명을 클릭하거나 이름 아래의 편집 링크를 클릭합니다. 사용자 편집화면으로 이동하며 최고 관리자 권한을 부여하는 체크박스가 있으니 이곳에 체크하면 됩니다."
-
 #: wp-admin/network/sites.php:28
 msgid "Add New takes you to the Add New Site screen. You can search for a site by Name, ID number, or IP address. Screen Options allows you to choose how many sites to display on one page."
 msgstr "새로 추가하기를 클릭하면 새로운 사이트 추가하기 화면으로 이동합니다. 이름, 아이디 숫자, 또는 IP 주소로 사이트를 검색할 수 있습니다. 화면 옵션을 클릭하면 한 페이지에 보여줄 사이트의 숫자를 설정할 수 있습니다."
@@ -831,6 +827,10 @@ msgstr "사이트 관리자에게 자신의 사이트에 \"사용자 &rarr; 새�
 #: wp-admin/network/sites.php:149
 msgid "Sorry, you are not allowed to delete the site %s."
 msgstr "죄송합니다. 사이트 %s을(를) 삭제할 권한이 없습니다."
+
+#: wp-admin/network/settings.php:55
+msgid "Super admins can no longer be added on the Options screen. You must now go to the list of existing users on Network Admin > Users and click on Username or the Edit action link below that name. This goes to an Edit User page where you can check a box to grant super admin privileges."
+msgstr "최고 관리자는 옵션 화면에서 추가될 수 없습니다. 네트워크 관리화면 > 모든 사용자 화면에서 기존 사용자 목록에서 사용자명을 클릭하거나 이름 아래의 편집 링크를 클릭합니다. 사용자 편집화면으로 이동하며 최고 관리자 권한을 부여하는 체크박스가 있으니 이곳에 체크하면 됩니다."
 
 #: wp-admin/network.php:55
 msgid "Create a Network of WordPress Sites"
@@ -1211,7 +1211,7 @@ msgstr "사이트와 사용자 계정이 모두 등록 할 수 있습니다"
 msgid "Logged in users may register new sites"
 msgstr "로그인 사용자는 새 사이트를 등록할 수 있습니다"
 
-#: wp-admin/network/settings.php:396
+#: wp-admin/network/settings.php:398
 msgid "Enable administration menus"
 msgstr "관리자 메뉴 활성"
 
@@ -1272,11 +1272,11 @@ msgstr "누군가 사이트를 등록하거나 사용자 계정을 만들면 네
 msgid "Add New Users"
 msgstr "새로운 사용자 추가"
 
-#: wp-admin/network/site-new.php:262
+#: wp-admin/network/site-new.php:264
 msgid "Add Site"
 msgstr "사이트 추가"
 
-#: wp-admin/network/site-new.php:246
+#: wp-admin/network/site-new.php:248
 msgid "Admin Email"
 msgstr "관리자 이메일"
 
@@ -1344,7 +1344,7 @@ msgstr "환영 이메일"
 msgid "Welcome User Email"
 msgstr "환영 사용자 이메일"
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "A new user will be created if the above email address is not in the database."
 msgstr "위의 이메일 주소가 데이터베이스에 없으면 새로운 사용자를 만들수 있습니다."
 

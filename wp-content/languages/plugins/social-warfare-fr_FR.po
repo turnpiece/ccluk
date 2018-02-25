@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Social Warfare - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-27 18:48:02+0000\n"
+"PO-Revision-Date: 2018-01-12 20:20:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - Social Warfare - Stable (latest release)\n"
+
+#: functions/admin/options-array.php:400
+msgid "Registration"
+msgstr "Licence"
 
 #: functions/utilities/update-checker.php:399
 msgid "Error"
@@ -63,19 +67,19 @@ msgstr "Pour dissocier votre licence (pour en libérer une ou l’utiliser sur u
 msgid "Register Plugin"
 msgstr "Enregistrez votre licence"
 
-#: functions/admin/options-page.php:687
+#: functions/admin/options-page.php:707
 msgid "Step 3: Flip the switch below to \"ON\", select which tracking service the plugin should use, then save your changes."
 msgstr "Étape 3 : Activez l’option ci-dessous, choisissez le service de suivi que l’extension doit utiliser et enregistrez vos changements."
 
-#: functions/admin/options-page.php:687
+#: functions/admin/options-page.php:707
 msgid "Step 2: Follow the prompts on their website to create an account and add your domain to be tracked for share counts."
 msgstr "Étape 2 : Suivez les consignes sur leur site internet pour créer un compte et ajouter votre domaine pour que les partages associés sont comptés."
 
-#: functions/admin/options-page.php:687
+#: functions/admin/options-page.php:707
 msgid "Click here to visit OpenShareCount.com (Recommended)"
 msgstr "Cliquez ici pour visiter OpenShareCount.com (recommandé)."
 
-#: functions/admin/options-page.php:686
+#: functions/admin/options-page.php:706
 msgid "In order to allow Social Warfare to track tweet counts, we've partnered with a couple of third-party share counting tools. Follow the steps below to register with one of these platforms and allow us to track your Twitter shares."
 msgstr "Afin que Social Warfare puisse suivre les compteurs de tweet, nous avons tissé des partenariats avec des outils de partage tiers. Suivez les étapes ci-dessous pour vous enregistrer sur une plateforme et nous permettre de suivre vos partages Twitter."
 
@@ -87,9 +91,9 @@ msgstr "Warfare Plugins"
 msgid "A plugin to maximize social shares and drive more traffic using the fastest and most intelligent share buttons on the market, calls to action via in-post click-to-tweets, popular posts widgets based on share popularity, link-shortening, Google Analytics and much, much more!"
 msgstr "Une extension pour maximiser les partages sociaux et générer plus de trafic en utilisant les boutons de partage les plus rapides et les plus intelligents du marché. Mais aussi des appels à l’action via des click-to-tweet, des widgets d’articles populaires utilisant le nombre de partages, un raccourcisseur de liens, Google Analytics et bien, bien plus !"
 
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.3.3)  #-#-#-#-#
+#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.3.5)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.3.3)  #-#-#-#-#
+#. #-#-#-#-#  social-warfare-code.pot (Social Warfare 2.3.5)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://warfareplugins.com"
 msgstr "http://warfareplugins.com"
@@ -152,63 +156,63 @@ msgstr "URL Facebook"
 msgid "Please enter your Twitter username."
 msgstr "Veuillez saisir votre identifiant Twitter."
 
-#: functions/admin/options-page.php:825
+#: functions/admin/options-page.php:845
 msgid "No settings to save."
 msgstr "Pas de changement à enregistrer."
 
-#: functions/admin/options-page.php:818 functions/admin/registration.php:305
+#: functions/admin/options-page.php:838 functions/admin/registration.php:305
 msgid "Security failed."
 msgstr "Échec de sécurité"
 
-#: functions/admin/options-page.php:796
+#: functions/admin/options-page.php:816
 msgid "Press Ctrl+C to Copy this information."
 msgstr "Appuyez sur Ctrl+C pour copier cette information."
 
-#: functions/admin/options-page.php:791
+#: functions/admin/options-page.php:811
 msgid "Get System Status"
 msgstr "Obtenir le statut système"
 
-#: functions/admin/options-page.php:790
+#: functions/admin/options-page.php:810
 msgid "Opening a support ticket? Copy your System Status by clicking the button below."
 msgstr "Vous souhaitez contacter le support ? Copiez d’abord votre statut système en cliquant sur le bouton ci-dessous."
 
-#: functions/admin/options-page.php:789
+#: functions/admin/options-page.php:809
 msgid "Need help? Check out our <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">Knowledgebase."
 msgstr "Besoin d’aide ? Jetez d’abord un oeil à notre <a href=\"https://warfareplugins.com/support/\" target=\"_blank\">base de connaissances."
 
-#: functions/admin/options-page.php:687
+#: functions/admin/options-page.php:707
 msgid "Click here to visit NewShareCounts.com"
 msgstr "Cliquez ici pour être redirigé sur NewShareCounts.com"
 
-#: functions/admin/options-page.php:680
+#: functions/admin/options-page.php:700
 msgid "Tweet Count Registration"
 msgstr "Récupération des compteurs Twitter"
 
-#: functions/admin/options-page.php:641
+#: functions/admin/options-page.php:661
 msgid "Authenticated"
 msgstr "S’identifier"
 
-#: functions/admin/options-page.php:639
+#: functions/admin/options-page.php:659
 msgid "Connected"
 msgstr "Connected"
 
-#: functions/admin/options-page.php:351 functions/admin/options-page.php:363
-#: functions/admin/options-page.php:391 functions/admin/options-page.php:409
-#: functions/admin/options-page.php:695
+#: functions/admin/options-page.php:371 functions/admin/options-page.php:383
+#: functions/admin/options-page.php:411 functions/admin/options-page.php:429
+#: functions/admin/options-page.php:715
 msgid "OFF"
 msgstr "DÉSACTIVÉ"
 
-#: functions/admin/options-page.php:351 functions/admin/options-page.php:363
-#: functions/admin/options-page.php:391 functions/admin/options-page.php:409
-#: functions/admin/options-page.php:695
+#: functions/admin/options-page.php:371 functions/admin/options-page.php:383
+#: functions/admin/options-page.php:411 functions/admin/options-page.php:429
+#: functions/admin/options-page.php:715
 msgid "ON"
 msgstr "ACTIVÉ"
 
-#: functions/admin/options-page.php:289
+#: functions/admin/options-page.php:309
 msgid "Inactive"
 msgstr "Inactifs"
 
-#: functions/admin/options-page.php:256
+#: functions/admin/options-page.php:276
 msgid "Active"
 msgstr "Actifs"
 

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-15 10:43:28+0000\n"
+"PO-Revision-Date: 2018-02-01 04:47:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,11 +36,21 @@ msgstr "."
 msgid "number_format_decimal_point"
 msgstr ","
 
-#: wp-includes/class-wp-customize-manager.php:4135
+#. translators: %s: User who is customizing the changeset in customizer.
+#: wp-includes/class-wp-customize-manager.php:3970
+msgid "%s is already customizing this changeset. Do you want to take over?"
+msgstr "%s đang tuỳ chỉnh. Bạn có muốn thay thế?"
+
+#. translators: %s: User who is customizing the changeset in customizer.
+#: wp-includes/class-wp-customize-manager.php:3968
+msgid "%s is already customizing this changeset. Please wait until they are done to try customizing. Your latest changes have been autosaved."
+msgstr "%s đang tuỳ chỉnh. Vui lòng chờ tới khi hoàn tất để thử lại. Lần thay đổi gần nhất của bạn đã tự động lưu."
+
+#: wp-includes/class-wp-customize-manager.php:4172
 msgid "Update anyway, even though it might break your site?"
 msgstr "Cập nhật bất kể có thể gây lỗi và làm hỏng website của bạn?"
 
-#: wp-includes/wp-db.php:1290
+#: wp-includes/wp-db.php:1283
 msgid "The query only expected one placeholder, but an array of multiple placeholders was sent."
 msgstr "The query only expected one placeholder, but an array of multiple placeholders was sent."
 
@@ -75,7 +85,7 @@ msgctxt "tags"
 msgid "Most Used"
 msgstr "Dùng nhiều nhất"
 
-#: wp-includes/class-wp-customize-nav-menus.php:950
+#: wp-includes/class-wp-customize-nav-menus.php:966
 msgid "Click &#8220;Next&#8221; to start adding links to your new menu."
 msgstr "Click &#8220;Tiếp theo&#8221; để bắt đầu thêm liên kết vào menu mới tạo."
 
@@ -89,7 +99,7 @@ msgctxt "post action/button label"
 msgid "Schedule"
 msgstr "Lên lịch"
 
-#: wp-includes/class-wp-customize-manager.php:4588
+#: wp-includes/class-wp-customize-manager.php:4627
 #: wp-includes/script-loader.php:554
 msgctxt "customizer changeset action/button label"
 msgid "Schedule"
@@ -119,15 +129,15 @@ msgstr "Thêm trình đơn vào sidebar của bạn."
 msgid "%s has taken over and is currently customizing."
 msgstr "%s đã được tiếp nhận và đang được chỉnh sửa."
 
-#: wp-includes/class-wp-customize-manager.php:4121
+#: wp-includes/class-wp-customize-manager.php:4158
 msgid "Take over"
 msgstr "Tiếp nhận"
 
-#: wp-includes/class-wp-customize-manager.php:4117
+#: wp-includes/class-wp-customize-manager.php:4154
 msgid "Go back"
 msgstr "Quay lại"
 
-#: wp-includes/class-wp-customize-manager.php:3194
+#: wp-includes/class-wp-customize-manager.php:3212
 msgid "Security check failed."
 msgstr "Kiểm tra bảo mật thất bại."
 
@@ -136,26 +146,26 @@ msgid "Looks like something&#8217;s gone wrong. Wait a couple seconds, and then 
 msgstr "Có lỗi đã xảy ra. Hãy chờ vài giây, sau đó thử lại."
 
 #. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:4110
+#: wp-includes/class-wp-customize-manager.php:3975
 msgid "%s is already customizing this site. Please wait until they are done to try customizing. Your latest changes have been autosaved."
 msgstr "%s đang tuỳ chỉnh Giao diện. Vui lòng đợi tới khi người này chỉnh sửa xong. Các thay đổi mới nhất của bạn đã được tự động lưu lại."
 
-#: wp-includes/class-wp-customize-manager.php:2451
+#: wp-includes/class-wp-customize-manager.php:2456
 msgid "Changeset is being edited by other user."
 msgstr "Các thay đổi đang được sửa bởi người dùng khác."
 
-#: wp-includes/class-wp-customize-manager.php:3203
+#: wp-includes/class-wp-customize-manager.php:3221
 msgid "No changeset found to take over"
 msgstr "Không có thay đổi nào để tiếp nhận"
 
-#. translators: %s: User who is customizing the changeset in customizer.
-#: wp-includes/class-wp-customize-manager.php:4105
-msgid "%s is already customizing this site. Do you want to take over?"
-msgstr "%s đang trong mục Tuỳ chỉnh của site. Bạn có muốn thay thế?"
-
-#: wp-includes/class-wp-customize-manager.php:3210
+#: wp-includes/class-wp-customize-manager.php:3228
 msgid "Sorry, you are not allowed to take over."
 msgstr "Xin lỗi, bạn không có quyền tiếp nhận."
+
+#. translators: %s: User who is customizing the changeset in customizer.
+#: wp-includes/class-wp-customize-manager.php:3977
+msgid "%s is already customizing this site. Do you want to take over?"
+msgstr "%s đang thao tác trong mục Tuỳ biến. Bạn có muốn tiếp tục?"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-locations-control.php:52
 msgid "https://codex.wordpress.org/WordPress_Widgets"
@@ -176,26 +186,26 @@ msgstr "(Nếu bạn định sử dụng menu <a href=\"%1$s\" %2$s>widget%3$s</
 #: wp-includes/customize/class-wp-customize-nav-menu-locations-control.php:63
 msgctxt "menu locations"
 msgid "Here&#8217;s where this menu appears. If you&#8217;d like to change that, pick another location."
-msgstr "Đây là nơi menu xuất hiện. Nếu bạn muốn thay đổi, lựa chọn vị trí khác."
+msgstr "Đây là nơi menu xuất hiện. Nếu bạn muốn thay đổi, hãy lựa chọn vị trí khác."
 
-#: wp-includes/class-wp-customize-nav-menus.php:964
+#: wp-includes/class-wp-customize-nav-menus.php:980
 msgid "You&#8217;ll create a menu, assign it a location, and add menu items like links to pages and categories. If your theme has multiple menu areas, you might need to create more than one."
 msgstr "Bạn sẽ tạo menu, đặt vị trí, và thêm các mục như liên kết tới trang, chuyên mục. Nếu giao diện có nhiều khu vực hiển thị menu, bạn có thể tạo thêm các menu khác."
 
-#: wp-includes/class-wp-customize-nav-menus.php:961
+#: wp-includes/class-wp-customize-nav-menus.php:977
 msgid "It doesn&#8217;t look like your site has any menus yet. Want to build one? Click the button to start."
 msgstr "Website của bạn chưa có menu nào. Hãy thử nhấp vào nút để tạo menu đầu tiên."
 
-#: wp-includes/class-wp-customize-nav-menus.php:588
+#: wp-includes/class-wp-customize-nav-menus.php:604
 msgctxt "menu locations"
 msgid "View All Locations"
 msgstr "Xem tất cả vị trí"
 
-#: wp-includes/class-wp-customize-manager.php:4787
+#: wp-includes/class-wp-customize-manager.php:4827
 msgid "Looking for a theme? You can search or browse the WordPress.org theme directory, install and preview themes, then activate them right here."
 msgstr "Tìm kiếm giao diện? Bạn có thể tìm và duyệt Thư viện giao diện WordPress.org, cài đặt và xem thử chúng, sau đó kích hoạt ngay tại đây."
 
-#: wp-includes/class-wp-customize-manager.php:4788
+#: wp-includes/class-wp-customize-manager.php:4828
 msgid "While previewing a new theme, you can continue to tailor things like widgets and menus, and explore theme-specific options."
 msgstr "Trong khi đang xem giao diện mới, bạn có thể chỉnh sửa vài thứ như widget hay menu, hoặc khám phá các tuỳ chọn của riêng giao diện này."
 
@@ -203,11 +213,11 @@ msgstr "Trong khi đang xem giao diện mới, bạn có thể chỉnh sửa và
 msgid "Something went wrong. Your change may not have been saved. Please try again. There is also a chance that you may need to manually fix and upload the file over FTP."
 msgstr "Có lỗi xảy ra. Các thay đổi của bạn chưa được lưu. Hãy thử lại. Hoặc có thể bạn cần sửa bằng tay và tải file lên qua FTP."
 
-#: wp-includes/class-wp-customize-manager.php:5242
+#: wp-includes/class-wp-customize-manager.php:5282
 msgid "Screen reader users: when in forms mode, you may need to press the escape key twice."
 msgstr "Người dùng giao diện đọc: khi trong chế độ form, bạn có thể cần nhấn nút thoát hai lần."
 
-#: wp-includes/class-wp-customize-nav-menus.php:588
+#: wp-includes/class-wp-customize-nav-menus.php:604
 msgctxt "menu locations"
 msgid "View Location"
 msgstr "Xem vị trí"
@@ -216,7 +226,7 @@ msgstr "Xem vị trí"
 msgid "No themes found. Try a different search."
 msgstr "Không tìm thấy giao diện. Hãy thử tìm từ khác."
 
-#: wp-includes/class-wp-customize-nav-menus.php:576
+#: wp-includes/class-wp-customize-nav-menus.php:592
 msgid "Your theme can display menus in one location. Select which menu you would like to use."
 msgstr "Giao diện của bạn có thể hiển thị menu ở một vị trí. Chọn menu bạn muốn sử dụng."
 
@@ -229,7 +239,7 @@ msgstr "Chuyển về phía trước %1 giây"
 msgid "Site Name: %s"
 msgstr "Tên trang: %s"
 
-#: wp-includes/wp-db.php:1253
+#: wp-includes/wp-db.php:1246
 msgid "Unsupported value type (%s)."
 msgstr "Không hỗ trợ kiểu giá trị (%s)."
 
@@ -245,7 +255,7 @@ msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr "%1$s &lsaquo; %2$s &#8212; WordPress"
 
 #. translators: 1: number of placeholders, 2: number of arguments passed
-#: wp-includes/wp-db.php:1301
+#: wp-includes/wp-db.php:1294
 msgid "The query does not contain the correct number of placeholders (%1$d) for the number of arguments passed (%2$d)."
 msgstr "Truy vấn không chứa đúng số của mục (%1$d) cho số lượng các đối số pass qua (%2$d)."
 
@@ -705,13 +715,13 @@ msgstr "%s:"
 
 #. translators: Network admin email change notification email subject. %s:
 #. Network title
-#: wp-includes/ms-functions.php:2697
+#: wp-includes/ms-functions.php:2704
 msgid "[%s] Notice of Network Admin Email Change"
 msgstr "[%s] Thông báo thay đổi email Quản trị Mạng lưới"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/ms-functions.php:2682
+#: wp-includes/ms-functions.php:2689
 msgid ""
 "Hi,\n"
 "\n"
@@ -777,7 +787,7 @@ msgstr ""
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5771
+#: wp-includes/functions.php:5779
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Thông báo về thay đổi email quản trị"
 
@@ -787,7 +797,7 @@ msgstr "Không thể thêm người dùng này vào website."
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5756
+#: wp-includes/functions.php:5764
 msgid ""
 "Hi,\n"
 "\n"
@@ -842,7 +852,7 @@ msgstr "Plugin The Press là bắt buộc."
 msgid "Back to theme sources"
 msgstr "Quay lại giao diện"
 
-#: wp-includes/functions.php:5699
+#: wp-includes/functions.php:5700
 msgid "Only UUID V4 is supported at this time."
 msgstr "Chỉ UUID V4 được hỗ trợ ở thời điểm này."
 
@@ -850,9 +860,10 @@ msgstr "Chỉ UUID V4 được hỗ trợ ở thời điểm này."
 msgid "Invalid URL."
 msgstr "URL không hợp lệ"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:39
-msgid "Time to add some links! Click &#8220;Add menu items&#8221; to start putting pages, categories, and custom links in your menu. Add as many things as you&#8217;d like."
-msgstr "Đã tới lúc thêm một vài liên kết. Nhấp chuột vào &#8220;Thêm mục mới&#8221; để thêm trang, danh mục hoặc liên kết của riêng bạn vào menu. Bạn có thể thêm bao nhiêu tuỳ ý."
+#. translators: %s: "Add Items" button text
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:44
+msgid "Time to add some links! Click &#8220;%s&#8221; to start putting pages, categories, and custom links in your menu. Add as many things as you&#8217;d like."
+msgstr "Bạn có thể bắt đầu thêm liên kết! Nhấp chuột vào &#8220;%s&#8221; để bắt đầu thêm trang, danh mục hay liên kết riêng vào menu."
 
 #: wp-includes/customize/class-wp-customize-media-control.php:249
 msgid "Choose image"
@@ -942,11 +953,11 @@ msgctxt "Name for the Visual editor tab"
 msgid "Visual"
 msgstr "Trực quan"
 
-#: wp-includes/class-wp-customize-nav-menus.php:968
+#: wp-includes/class-wp-customize-nav-menus.php:984
 msgid "Create New Menu"
 msgstr "Tạo Menu mới"
 
-#: wp-includes/class-wp-customize-nav-menus.php:693
+#: wp-includes/class-wp-customize-nav-menus.php:709
 msgid "New Menu"
 msgstr "Menu mới"
 
@@ -960,50 +971,50 @@ msgid "The theme defines itself as its parent theme. Please check the %s header.
 msgstr "Giao diện tự xác định là giao diện cha. Hãy kiểm tra thông tin %s."
 
 #. translators: URL to the widgets panel of the customizer
-#: wp-includes/class-wp-customize-nav-menus.php:584
+#: wp-includes/class-wp-customize-nav-menus.php:600
 msgid "If your theme has widget areas, you can also add menus there. Visit the <a href=\"%s\">Widgets panel</a> and add a &#8220;Navigation Menu widget&#8221; to display a menu in a sidebar or footer."
 msgstr "Nếu giao diện hỗ trợ widget, bạn có thể thêm menu ở sidebar. Truy cập mục <a href=\"%s\">Widget</a> và thêm &#8220;Widget menu&#8221; để hiển thị menu ở trên sidebar hoặc chân trang."
 
-#: wp-includes/class-wp-customize-manager.php:5228
+#: wp-includes/class-wp-customize-manager.php:5268
 msgid "Add your own CSS code here to customize the appearance and layout of your site."
 msgstr "Thêm mã CSS của bạn ở đây để tuỳ biến giao diện và bố cục của website."
 
-#: wp-includes/class-wp-customize-manager.php:5278
+#: wp-includes/class-wp-customize-manager.php:5318
 msgid "CSS code"
 msgstr "Mã CSS"
 
-#: wp-includes/class-wp-customize-nav-menus.php:400
+#: wp-includes/class-wp-customize-nav-menus.php:416
 msgid "Your theme can display menus in one location."
 msgstr "Giao diện này có thể hiển thị menu ở duy nhất một vị trí."
 
 #. translators: %s: number of menu locations
-#: wp-includes/class-wp-customize-nav-menus.php:403
+#: wp-includes/class-wp-customize-nav-menus.php:419
 msgid "Your theme can display menus in %s location."
 msgid_plural "Your theme can display menus in %s locations."
 msgstr[0] "Giao diện này có thể hiển thị menu ở %s vị trí."
 
-#: wp-includes/class-wp-customize-nav-menus.php:420
+#: wp-includes/class-wp-customize-nav-menus.php:436
 msgid "If your theme has multiple menus, giving them clear names will help you manage them."
 msgstr "Nếu giao diện có nhiều vị trí menu, hãy đặt tên sao cho dễ phân biệt chúng."
 
-#: wp-includes/class-wp-customize-manager.php:5238
+#: wp-includes/class-wp-customize-manager.php:5278
 #: wp-includes/widgets/class-wp-widget-custom-html.php:309
 msgid "When using a keyboard to navigate:"
 msgstr "Khi sử dụng bàn phím để di chuyển:"
 
-#: wp-includes/class-wp-customize-manager.php:5240
+#: wp-includes/class-wp-customize-manager.php:5280
 #: wp-includes/widgets/class-wp-widget-custom-html.php:311
 msgid "In the editing area, the Tab key enters a tab character."
 msgstr "Trong chế độ soạn thảo, phím Tab sẽ tạo ra ký tự tab."
 
-#: wp-includes/class-wp-customize-manager.php:5241
+#: wp-includes/class-wp-customize-manager.php:5281
 #: wp-includes/widgets/class-wp-widget-custom-html.php:312
 msgid "To move away from this area, press the Esc key followed by the Tab key."
 msgstr "Để thoát khỏi khu vựuc này, nhấn phím Esc sau khi ấn phím Tab."
 
 #. translators: 1: link to user profile, 2: additional link attributes, 3:
 #. accessibility text
-#: wp-includes/class-wp-customize-manager.php:5249
+#: wp-includes/class-wp-customize-manager.php:5289
 #: wp-includes/widgets/class-wp-widget-custom-html.php:299
 msgid "The edit field automatically highlights code syntax. You can disable this in your <a href=\"%1$s\" %2$s>user profile%3$s</a> to work in plain text mode."
 msgstr "Vùng soạn thảo tự động làm nổi bật đoạn code. Bạn có thể tắt nó trong <a href=\"%1$s\" %2$s>hồ sơ của bạn%3$s</a> để soạn thảo ở chế độ văn bản."
@@ -1012,19 +1023,19 @@ msgstr "Vùng soạn thảo tự động làm nổi bật đoạn code. Bạn c�
 msgid "Screen reader users: when in forms mode, you may need to press the Esc key twice."
 msgstr "Người dùng trình đọc: khi ở chế độ nhập, bạn có thể cần nhấn phím Esc hai lần."
 
-#: wp-includes/class-wp-customize-manager.php:5193
+#: wp-includes/class-wp-customize-manager.php:5233
 msgid "Your homepage displays"
 msgstr "Bố cục trang chủ"
 
-#: wp-includes/class-wp-customize-manager.php:5182
+#: wp-includes/class-wp-customize-manager.php:5222
 msgid "You can choose what&#8217;s displayed on the homepage of your site. It can be posts in reverse chronological order (classic blog), or a fixed/static page. To set a static homepage, you first need to create two Pages. One will become the homepage, and the other will be where your posts are displayed."
 msgstr "Bạn có thể chọn những gì hiển thị trên trang chủ của wbesite. Nó có thể là danh sách bài viết (dạng blog), hoặc một trang tĩnh. Để thiết lập trang tĩnh làm trang chủ, bạn cần tạo hai trang. Một sẽ trở thành trang chủ, và một là nơi các bài viết sẽ hiển thị."
 
-#: wp-includes/class-wp-customize-manager.php:5180
+#: wp-includes/class-wp-customize-manager.php:5220
 msgid "Homepage Settings"
 msgstr "Cài đặt Trang chủ"
 
-#: wp-includes/class-wp-customize-manager.php:4795
+#: wp-includes/class-wp-customize-manager.php:4835
 msgid "Installed themes"
 msgstr "Giao diện đã cài đặt"
 
@@ -1032,66 +1043,66 @@ msgstr "Giao diện đã cài đặt"
 msgid "Publish Settings"
 msgstr "Lưu và công bố tuỳ chọn"
 
-#: wp-includes/class-wp-customize-manager.php:4165
+#: wp-includes/class-wp-customize-manager.php:4202
 msgid "Copied"
 msgstr "Đã sao chép"
 
-#: wp-includes/class-wp-customize-manager.php:2588
-#: wp-includes/class-wp-customize-manager.php:2603
+#: wp-includes/class-wp-customize-manager.php:2593
+#: wp-includes/class-wp-customize-manager.php:2608
 #: wp-includes/script-loader.php:558
 msgid "You must supply a future date to schedule."
 msgstr "Bạn phải cung cấp một ngày trong tương lai để lên lịch."
 
-#: wp-includes/class-wp-customize-manager.php:3020
+#: wp-includes/class-wp-customize-manager.php:3027
 msgid "Changes have already been trashed."
 msgstr "Các thay đổi đã bị xóa."
 
-#: wp-includes/class-wp-customize-manager.php:4804
+#: wp-includes/class-wp-customize-manager.php:4844
 msgid "WordPress.org themes"
 msgstr "Thư viện giao diện WordPress.org"
 
 #. translators: %s: number of invalid settings
-#: wp-includes/class-wp-customize-manager.php:2702
+#: wp-includes/class-wp-customize-manager.php:2707
 #: wp-includes/script-loader.php:593 wp-includes/script-loader.php:595
 msgid "Unable to save due to %s invalid setting."
 msgid_plural "Unable to save due to %s invalid settings."
 msgstr[0] "Không thể lưu do cài đặt không hợp lệ %s."
 
 #. translators: %s: site icon size in pixels
-#: wp-includes/class-wp-customize-manager.php:4874
+#: wp-includes/class-wp-customize-manager.php:4914
 msgid "Site Icons should be square and at least %s pixels."
 msgstr "Icon cho trang web phải là hình vuông và ít nhất là %s pixel."
 
-#: wp-includes/class-wp-customize-manager.php:2997
+#: wp-includes/class-wp-customize-manager.php:3004
 msgid "There was an authentication problem. Please reload and try again."
 msgstr "Đã xảy ra sự cố xác thực. Vui lòng tải lại và thử một lần nữa."
 
-#: wp-includes/class-wp-customize-manager.php:3035
+#: wp-includes/class-wp-customize-manager.php:3042
 msgid "Changes trashed successfully."
 msgstr "Các thay đổi đã được bỏ vào thùng rác."
 
-#: wp-includes/class-wp-customize-manager.php:4872
+#: wp-includes/class-wp-customize-manager.php:4912
 msgid "Site Icons are what you see in browser tabs, bookmark bars, and within the WordPress mobile apps. Upload one here!"
 msgstr "Biểu tượng Site là những gì bạn nhìn thấy ở bên trái tên website ở đầu mỗi tab trên cửa sổ trình duyệt, mục đánh dấu trang và trong ứng dụng của WordPress. Tải lên tại đây!"
 
-#: wp-includes/class-wp-customize-manager.php:3005
+#: wp-includes/class-wp-customize-manager.php:3012
 msgid "No changes saved yet, so there is nothing to trash."
 msgstr "Chưa có thay đổi nào được lưu, vì vậy không thể cho vào Thùng rác."
 
-#: wp-includes/class-wp-customize-manager.php:3014
-#: wp-includes/class-wp-customize-manager.php:3030
+#: wp-includes/class-wp-customize-manager.php:3021
+#: wp-includes/class-wp-customize-manager.php:3037
 msgid "Unable to trash changes."
 msgstr "Không thể cập nhật thùng rác."
 
-#: wp-includes/class-wp-customize-manager.php:4159
+#: wp-includes/class-wp-customize-manager.php:4196
 msgid "Preview Link"
 msgstr "Link xem thử"
 
-#: wp-includes/class-wp-customize-manager.php:4156
+#: wp-includes/class-wp-customize-manager.php:4193
 msgid "See how changes would look live on your website, and share the preview with people who can't access the Customizer."
 msgstr "Xem các thay đổi nào trực tiếp trên website của bạn, và chia sẻ với những ai không thể truy cập mục Tuỳ chỉnh này."
 
-#: wp-includes/class-wp-customize-manager.php:4154
+#: wp-includes/class-wp-customize-manager.php:4191
 msgid "Share Preview Link"
 msgstr "Liên kết chia sẻ xem thử"
 
@@ -1103,31 +1114,31 @@ msgstr "Sửa tài khoản"
 msgid "View User"
 msgstr "Xem tài khoản"
 
-#: wp-includes/class-wp-customize-manager.php:2565
+#: wp-includes/class-wp-customize-manager.php:2570
 msgid "The previous set of changes has already been published. Please try saving your current set of changes again."
 msgstr "Các thiết lập trước đây đã được công bố. Vui lòng thử lưu lại thiết lập hiện tại một lần nữa."
 
-#: wp-includes/widgets/class-wp-widget-text.php:460
+#: wp-includes/widgets/class-wp-widget-text.php:481
 msgid "This widget may have contained code that may work better in the &#8220;Custom HTML&#8221; widget. If you haven&#8217;t yet, how about trying that widget instead?"
 msgstr "Widget này có thể chứa các đoạn mã, bạn nên sử dụng widget &#8220;HTML Tùy chỉnh&#8221; mới để được hỗ trợ tốt hơn."
 
-#: wp-includes/widgets/class-wp-widget-text.php:513
+#: wp-includes/widgets/class-wp-widget-text.php:534
 msgid "Hey there, looks like you just pasted HTML into the &#8220;Visual&#8221; tab of the Text widget. You may want to paste your code into the &#8220;Text&#8221; tab instead. Alternately, try out the new &#8220;Custom HTML&#8221; widget!"
 msgstr "Xin chào, có vẻ như bạn vừa dán mã HTML vào tab &#8220;Trực quan&#8221 của widget Văn bản. Bạn hãy dán mã vào tab &#8220;Văn bản&#8221. Hoặc bạn có thể sử dụng widget &#8220;HTML&#8221 sẽ hợp lý hơn!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:512
+#: wp-includes/widgets/class-wp-widget-text.php:533
 msgid "Did you just paste HTML?"
 msgstr "Bạn vừa dán mã HTML?"
 
-#: wp-includes/widgets/class-wp-widget-text.php:497
+#: wp-includes/widgets/class-wp-widget-text.php:518
 msgid "Did you know there is a &#8220;Custom HTML&#8221; widget now? You can find it by scanning the list of available widgets on this screen. Check it out to add some custom code to your site!"
 msgstr "Chúng ta có một widget mới tên là &#8220;HTML Tùy chỉnh&#8221. Bạn có thể tìm tới nó bằng cách lướt qua các widget sẵn có ở trang này. Hãy dùng widget đó để thêm các đoạn mã tùy chỉnh vào trang web của bạn!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:495
+#: wp-includes/widgets/class-wp-widget-text.php:516
 msgid "Did you know there is a &#8220;Custom HTML&#8221; widget now? You can find it by pressing the &#8220;<a class=\"add-widget\" href=\"#\">Add a Widget</a>&#8221; button and searching for &#8220;HTML&#8221;. Check it out to add some custom code to your site!"
 msgstr "Chúng ta có một widget mới tên là &#8220;HTML Tùy chỉnh&#8221. Bạn có thể tìm tới nó bằng cách nhấn vào nút &#8220;<a class=\"add-widget\" href=\"#\">Thêm Widget</a>&#8221; và tìm kiếm  &#8220;HTML&#8221;. Hãy dùng widget đó để thêm các đoạn mã tùy chỉnh vào trang web của bạn!"
 
-#: wp-includes/widgets/class-wp-widget-text.php:458
+#: wp-includes/widgets/class-wp-widget-text.php:479
 msgid "This widget may contain code that may work better in the &#8220;Custom HTML&#8221; widget. How about trying that widget instead?"
 msgstr "Widget này có thể chứa các đoạn mã. Bạn nên thử widget &#8220;HTML Tùy chỉnh&#8221; để làm việc với các đoạn mã tốt hơn."
 
@@ -1135,7 +1146,7 @@ msgstr "Widget này có thể chứa các đoạn mã. Bạn nên thử widget &
 msgid "Arbitrary text."
 msgstr "Văn bản ngẫu nhiên."
 
-#: wp-includes/widgets/class-wp-widget-text.php:493
+#: wp-includes/widgets/class-wp-widget-text.php:514
 msgid "New Custom HTML Widget"
 msgstr "Widget HTML mới"
 
@@ -1906,7 +1917,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] Kích hoạt %2$s"
 
-#: wp-includes/widgets.php:1395 wp-includes/widgets.php:1504
+#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
 msgid "RSS Error:"
 msgstr "Lỗi RSS:"
 
@@ -2266,7 +2277,7 @@ msgstr "Ẩn điều khiển"
 msgid "Document Preview"
 msgstr "Xem trước tài liệu"
 
-#: wp-includes/class-wp-customize-manager.php:4963
+#: wp-includes/class-wp-customize-manager.php:5003
 msgid "Header Media"
 msgstr "Header Media"
 
@@ -2300,7 +2311,7 @@ msgstr "Tiêu đề HTML cho tập tin đính kèm, được chuyển đổi đ�
 msgid "Caption for the attachment, as it exists in the database."
 msgstr "Tiêu đề cho tập tin đính kèm, vì nó tồn tại trong database."
 
-#: wp-includes/class-wp-customize-manager.php:5625
+#: wp-includes/class-wp-customize-manager.php:5665
 msgid "Please enter a valid YouTube URL."
 msgstr "Vui lòng nhập đường dẫn Youtube hợp lệ."
 
@@ -2312,7 +2323,7 @@ msgstr "Mở rộng menu chính"
 msgid "Collapse Main menu"
 msgstr "Thu nhỏ menu chính"
 
-#: wp-includes/class-wp-customize-manager.php:5048
+#: wp-includes/class-wp-customize-manager.php:5088
 msgid "Or, enter a YouTube URL:"
 msgstr "Hoặc, nhập một đường dẫn YouTube:"
 
@@ -2371,11 +2382,11 @@ msgstr "Giới hạn kết quả thiết lập cho bài viết với một hoặ
 msgid "Comment is required."
 msgstr "Bình luận là bắt buộc"
 
-#: wp-includes/class-wp-customize-nav-menus.php:792
+#: wp-includes/class-wp-customize-nav-menus.php:808
 msgid "Empty title"
 msgstr "Tiêu đề trống"
 
-#: wp-includes/class-wp-customize-nav-menus.php:795
+#: wp-includes/class-wp-customize-nav-menus.php:811
 msgid "Status is forbidden"
 msgstr "Trạng thái bị ngăn chặn"
 
@@ -2383,7 +2394,7 @@ msgstr "Trạng thái bị ngăn chặn"
 msgid "We already have a ping from that URL for this post."
 msgstr "Chúng tôi đã có một ping từ URL đó cho bài viết này."
 
-#: wp-includes/class-wp-customize-manager.php:5208
+#: wp-includes/class-wp-customize-manager.php:5248
 msgid "Homepage"
 msgstr "Trang chủ"
 
@@ -3386,12 +3397,12 @@ msgstr "Xin lỗi. Bạn không đuợc thép sửa đổi term này."
 msgid "Sorry, the comment could not be edited."
 msgstr "Xin lỗi, bình luận không thể sửa được."
 
-#: wp-includes/class-wp-customize-nav-menus.php:881
+#: wp-includes/class-wp-customize-nav-menus.php:897
 msgid "Post"
 msgstr "Bài viết"
 
 #. translators: %1$s is the post type name and %2$s is the error message.
-#: wp-includes/class-wp-customize-nav-menus.php:886
+#: wp-includes/class-wp-customize-nav-menus.php:902
 msgid "%1$s could not be created: %2$s"
 msgstr "%1$s không thể được tạo ra: %2$s"
 
@@ -3406,122 +3417,122 @@ msgid "Number of widgets found: %d"
 msgstr "Số lượng các widget được tìm thấy: %d"
 
 #. translators: 1: .mp4, 2: .mov
-#: wp-includes/class-wp-customize-manager.php:5601
+#: wp-includes/class-wp-customize-manager.php:5641
 msgid "Only %1$s or %2$s files may be used for header video. Please convert your video file and try again, or, upload your video to YouTube and link it with the option below."
 msgstr "Chỉ có các file định dạng %1$s hoặc %2$s có thể được dùng để làm header video. Vui lòng chuyển đổi video của bạn sang các định dạng này và thử upload lại, hoặc upload video của bạn lên YouTube và điền link vào tùy chọn ở dưới."
 
-#: wp-includes/class-wp-customize-manager.php:5595
+#: wp-includes/class-wp-customize-manager.php:5635
 msgid "This video file is too large to use as a header video. Try a shorter video or optimize the compression settings and re-upload a file that is less than 8MB. Or, upload your video to YouTube and link it with the option below."
 msgstr "Video này quá lớn để trở thành video tiêu đề. Thử một video ngắn hơn hay tối ưu hóa thiết lập nén và tải lên một tệp ít hơn 8MB. Hoặc, tải video của bạn lên Youtube và chèn link vào lực chọn phía dưới."
 
-#: wp-includes/class-wp-customize-manager.php:5555
+#: wp-includes/class-wp-customize-manager.php:5595
 msgid "Unrecognized background setting."
 msgstr "Cài đặt nền không được nhận dạng."
 
-#: wp-includes/class-wp-customize-manager.php:5265
+#: wp-includes/class-wp-customize-manager.php:5305
 msgid "Additional CSS"
 msgstr "CSS bổ sung"
 
-#: wp-includes/class-wp-customize-manager.php:5232
+#: wp-includes/class-wp-customize-manager.php:5272
 msgid "Learn more about CSS"
 msgstr "Tìm hiểu thêm về CSS"
 
-#: wp-includes/class-wp-customize-manager.php:5546
-#: wp-includes/class-wp-customize-manager.php:5550
+#: wp-includes/class-wp-customize-manager.php:5586
+#: wp-includes/class-wp-customize-manager.php:5590
 msgid "Invalid value for background size."
 msgstr "Giá trị kích thước hình nền không hợp lệ."
 
-#: wp-includes/class-wp-customize-manager.php:5534
+#: wp-includes/class-wp-customize-manager.php:5574
 msgid "Invalid value for background attachment."
 msgstr "Giá trị không hợp lệ cho tệp đính kèm nền."
 
-#: wp-includes/class-wp-customize-manager.php:5530
+#: wp-includes/class-wp-customize-manager.php:5570
 msgid "Invalid value for background repeat."
 msgstr "Giá trị không hợp lệ cho lặp lại nền."
 
-#: wp-includes/class-wp-customize-manager.php:5542
+#: wp-includes/class-wp-customize-manager.php:5582
 msgid "Invalid value for background position Y."
 msgstr "Giá trị không hợp lệ cho vị trí nền Y."
 
-#: wp-includes/class-wp-customize-manager.php:5538
+#: wp-includes/class-wp-customize-manager.php:5578
 msgid "Invalid value for background position X."
 msgstr "Giá trị không hợp lệ cho vị trí nền X."
 
 #. translators: accessibility text
-#: wp-includes/class-wp-customize-manager.php:4162
-#: wp-includes/class-wp-customize-manager.php:5234
-#: wp-includes/class-wp-customize-manager.php:5254
+#: wp-includes/class-wp-customize-manager.php:4199
+#: wp-includes/class-wp-customize-manager.php:5274
+#: wp-includes/class-wp-customize-manager.php:5294
 #: wp-includes/customize/class-wp-customize-nav-menu-locations-control.php:56
 #: wp-includes/widgets/class-wp-widget-custom-html.php:304
 msgid "(opens in a new window)"
 msgstr "(mở trong cửa sổ mới)"
 
-#: wp-includes/class-wp-customize-manager.php:5096
-#: wp-includes/class-wp-customize-manager.php:5135
+#: wp-includes/class-wp-customize-manager.php:5136
+#: wp-includes/class-wp-customize-manager.php:5175
 msgid "Fit to Screen"
 msgstr "Vừa màn hình"
 
-#: wp-includes/class-wp-customize-manager.php:5130
+#: wp-includes/class-wp-customize-manager.php:5170
 msgid "Image Size"
 msgstr "Kích thước hình ảnh"
 
-#: wp-includes/class-wp-customize-manager.php:5134
+#: wp-includes/class-wp-customize-manager.php:5174
 msgid "Original"
 msgstr "Nguyên bản"
 
-#: wp-includes/class-wp-customize-manager.php:5115
+#: wp-includes/class-wp-customize-manager.php:5155
 #: wp-includes/customize/class-wp-customize-background-position-control.php:66
 msgid "Image Position"
 msgstr "Vị trí hình ảnh"
 
-#: wp-includes/class-wp-customize-manager.php:5098
+#: wp-includes/class-wp-customize-manager.php:5138
 msgctxt "Custom Preset"
 msgid "Custom"
 msgstr "Tùy chỉnh"
 
-#: wp-includes/class-wp-customize-manager.php:5097
+#: wp-includes/class-wp-customize-manager.php:5137
 msgctxt "Repeat Image"
 msgid "Repeat"
 msgstr "Lặp lại"
 
-#: wp-includes/class-wp-customize-manager.php:5147
+#: wp-includes/class-wp-customize-manager.php:5187
 msgid "Repeat Background Image"
 msgstr "Lặp lại ảnh nền"
 
-#: wp-includes/class-wp-customize-manager.php:5159
+#: wp-includes/class-wp-customize-manager.php:5199
 msgid "Scroll with Page"
 msgstr "Cuộn trang"
 
-#: wp-includes/class-wp-customize-manager.php:5038
+#: wp-includes/class-wp-customize-manager.php:5078
 msgid "Header Video"
 msgstr "Tiêu đề video"
 
-#: wp-includes/class-wp-customize-manager.php:5094
+#: wp-includes/class-wp-customize-manager.php:5134
 msgctxt "Default Preset"
 msgid "Default"
 msgstr "Mặc định"
 
-#: wp-includes/class-wp-customize-manager.php:5090
+#: wp-includes/class-wp-customize-manager.php:5130
 msgctxt "Background Preset"
 msgid "Preset"
 msgstr "Sẵn có"
 
 #. translators: 1: .mp4, 2: header width in pixels
-#: wp-includes/class-wp-customize-manager.php:4978
+#: wp-includes/class-wp-customize-manager.php:5018
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a width of %2$s pixels."
 msgstr "Để hiển thị tốt nhất, hãy upload video có định dạng %1$s với kích thước nhỏ nhất có thể. Theme của bạn khuyến khích sử dụng video có chiều rộng %2$s pixel."
 
 #. translators: 1: .mp4, 2: header height in pixels
-#: wp-includes/class-wp-customize-manager.php:4985
+#: wp-includes/class-wp-customize-manager.php:5025
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends a height of %2$s pixels."
 msgstr "Để hiển thị tốt nhất, hãy tải lên video có định dạng %1$s với kích thước nhỏ nhất có thể. Giao diện của bạn khuyến khích sử dụng video có chiều cao  %2$s px."
 
 #. translators: 1: .mp4, 2: header size in pixels
-#: wp-includes/class-wp-customize-manager.php:4971
+#: wp-includes/class-wp-customize-manager.php:5011
 msgid "Upload your video in %1$s format and minimize its file size for best results. Your theme recommends dimensions of %2$s pixels."
 msgstr "Để hiển thị tốt nhất, hãy upload video có định dạng %1$s với kích thước nhỏ nhất có thể. Theme của bạn khuyến khích sử dụng video có độ phân giải %2$s pixel."
 
-#: wp-includes/class-wp-customize-manager.php:4964
+#: wp-includes/class-wp-customize-manager.php:5004
 msgid "If you add a video, the image will be used as a fallback while the video loads."
 msgstr "Nếu bạn thêm một video, hình ảnh này sẽ được hiển thị khi video đang tải."
 
@@ -3532,32 +3543,32 @@ msgstr "Nếu bạn thêm một video, hình ảnh này sẽ được hiển th�
 msgid "Search themes&hellip;"
 msgstr "Tìm giao diện&hellip;"
 
-#: wp-includes/class-wp-customize-manager.php:2267
+#: wp-includes/class-wp-customize-manager.php:2272
 msgid "Setting does not exist or is unrecognized."
 msgstr "Thiêt lập không tồn tại hoặc không được nhận ra."
 
-#: wp-includes/class-wp-customize-manager.php:2272
+#: wp-includes/class-wp-customize-manager.php:2277
 msgid "Unauthorized to modify setting due to capability."
 msgstr "Không có quyền để thay đổi thiết lập dựa theo quyền hạn."
 
 #. translators: %d: number of themes being displayed, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4668
+#: wp-includes/class-wp-customize-manager.php:4708
 msgid "Displaying %d themes"
 msgstr "Đang hiển thị giao diện %d"
 
 #. translators: %d: number of theme search results, which cannot currently
 #. consider singular vs. plural forms
-#: wp-includes/class-wp-customize-manager.php:4666
+#: wp-includes/class-wp-customize-manager.php:4706
 msgid "%d themes found"
 msgstr "%d giao diện được tìm thấy"
 
 #. translators: %s: theme name
-#: wp-includes/class-wp-customize-manager.php:4670
+#: wp-includes/class-wp-customize-manager.php:4710
 msgid "Showing details for theme: %s"
 msgstr "Hiển thị chi tiết cho giao diện: %s"
 
-#: wp-includes/class-wp-customize-manager.php:4664
+#: wp-includes/class-wp-customize-manager.php:4704
 msgid "Are you sure you want to delete this theme?"
 msgstr "Bạn chắc chắn muốn xóa giao diện này ?"
 
@@ -3582,11 +3593,11 @@ msgstr "Không tồn tại changeset UUID."
 msgid "Invalid changeset UUID"
 msgstr "Changeset UUID không hợp lệ."
 
-#: wp-includes/class-wp-customize-manager.php:2060
+#: wp-includes/class-wp-customize-manager.php:2065
 msgid "This form is not live-previewable."
 msgstr "Mẫu này không thể xem trực tuyến."
 
-#: wp-includes/class-wp-customize-manager.php:2059
+#: wp-includes/class-wp-customize-manager.php:2064
 msgid "This link is not live-previewable."
 msgstr "Đường dẫn này không thể được xem trước một cách trực tiếp."
 
@@ -3595,7 +3606,7 @@ msgstr "Đường dẫn này không thể được xem trước một cách tr�
 msgid "PHP's XML extension is not available. Please contact your hosting provider to enable PHP's XML extension."
 msgstr "Extension XML trong PHP không khả dụng. Vui lòng liên hệ với nhà cung cấp hosting của bạn để kích hoạt extension XML cho PHP."
 
-#: wp-includes/class-wp-customize-manager.php:1844
+#: wp-includes/class-wp-customize-manager.php:1849
 msgid "Unauthorized. You may remove the customize_messenger_channel param to preview as frontend."
 msgstr "Không được phép. Bạn có thể loại bỏ tham số customize_messenger_channel để xem trước như ở front-end."
 
@@ -3836,7 +3847,7 @@ msgstr "Đang xóa..."
 msgid "Deletion failed: %s"
 msgstr "Xóa không thành công: %s"
 
-#: wp-includes/wp-db.php:1856 wp-includes/wp-db.php:1862
+#: wp-includes/wp-db.php:1849 wp-includes/wp-db.php:1855
 msgid "Unable to retrieve the error message from MySQL"
 msgstr "Không thể truy xuất thông báo lỗi từ MySQL"
 
@@ -3947,7 +3958,7 @@ msgstr "Xin lỗi, bạn không được phép thêm mục mới."
 msgid "Sorry, you are not allowed to list users."
 msgstr "Xin lỗi, bạn không được phép phê duyệt người dùng."
 
-#: wp-includes/class-wp-customize-manager.php:2295
+#: wp-includes/class-wp-customize-manager.php:2300
 #: wp-includes/class-wp-customize-setting.php:579
 #: wp-includes/script-loader.php:606
 msgid "Invalid value."
@@ -4025,7 +4036,7 @@ msgstr "Hằng số %1$s <strong>bị từ chối</strong>. Sử dụng hằng s
 
 #. translators: 1: panel id, 2: link to 'customize_loaded_components' filter
 #. reference
-#: wp-includes/class-wp-customize-manager.php:3737
+#: wp-includes/class-wp-customize-manager.php:3760
 msgid "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr "Loại bỏ %1$s một cách thủ công sẽ dẫn đến các cảnh báo PHP. Dùng %2$s để thay thế bộ lọc."
 
@@ -4125,25 +4136,25 @@ msgstr "Riêng tư"
 msgid "<strong>ERROR</strong>: Invalid username, email address or incorrect password."
 msgstr "<strong>LỖI</strong>: Tên người dùng, đia chị email không hợp lệ hoặc sai mật khẩu."
 
-#: wp-includes/functions.php:5312
+#: wp-includes/functions.php:5313
 msgid "Close dialog"
 msgstr "Đóng hộp thoại"
 
-#: wp-includes/class-wp-customize-manager.php:4902
+#: wp-includes/class-wp-customize-manager.php:4942
 msgid "No logo selected"
 msgstr "Chưa chọn logo"
 
-#: wp-includes/class-wp-customize-manager.php:4904
+#: wp-includes/class-wp-customize-manager.php:4944
 msgid "Choose logo"
 msgstr "Chọn logo"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3900
+#: wp-includes/functions.php:3901
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Việc gọi phương thức khởi tạo cho %1$s in %2$s là <strong>không được phép</strong> từ phiên bản %3$s! đã được thay thế bằng %4$s"
 
-#: wp-includes/class-wp-customize-manager.php:4899
+#: wp-includes/class-wp-customize-manager.php:4939
 msgid "Change logo"
 msgstr "Thay đổi logo"
 
@@ -4156,8 +4167,8 @@ msgstr "%s bị cấm"
 msgid "Partial render must echo the content or return the content string (or array), but not both."
 msgstr "Hiển thị từng phần phải in ra nội dung hoặc trả về ký tự nội dung (hoặc mảng), chứ không phải cả hai."
 
-#: wp-includes/class-wp-customize-manager.php:4898
-#: wp-includes/class-wp-customize-manager.php:4903
+#: wp-includes/class-wp-customize-manager.php:4938
+#: wp-includes/class-wp-customize-manager.php:4943
 msgid "Select logo"
 msgstr "Chọn logo"
 
@@ -4196,7 +4207,7 @@ msgstr "Spam"
 msgid "Paste URL or type to search"
 msgstr "Dán URL hoặc gõ để tìm kiếm"
 
-#: wp-includes/class-wp-customize-manager.php:4890
+#: wp-includes/class-wp-customize-manager.php:4930
 msgid "Logo"
 msgstr "Logo"
 
@@ -4214,16 +4225,16 @@ msgstr "Kiểu đối tượng không hợp lệ"
 msgid "Template is missing. Standalone themes need to have a %1$s template file. <a href=\"%2$s\">Child themes</a> need to have a Template header in the %3$s stylesheet."
 msgstr "Template bị thiếu. Giao diện độc lập cần có một tệp template %1$s. <a href=\"%2$s\">Giao diện con</a> cần có một Template header trong tệp %3$s."
 
-#: wp-includes/class-wp-customize-manager.php:4856
-#: wp-includes/class-wp-customize-manager.php:4934
+#: wp-includes/class-wp-customize-manager.php:4896
+#: wp-includes/class-wp-customize-manager.php:4974
 msgid "Display Site Title and Tagline"
 msgstr "Hiển thị Tên website và Khẩu hiệu"
 
-#: wp-includes/class-wp-customize-manager.php:4750
+#: wp-includes/class-wp-customize-manager.php:4790
 msgid "Enter desktop preview mode"
 msgstr "Xem thử theo chế độ máy tính bàn"
 
-#: wp-includes/class-wp-customize-manager.php:4754
+#: wp-includes/class-wp-customize-manager.php:4794
 msgid "Enter tablet preview mode"
 msgstr "Xem thử theo chế độ máy tính bản"
 
@@ -4231,12 +4242,12 @@ msgstr "Xem thử theo chế độ máy tính bản"
 msgid "Comment Submission Failure"
 msgstr "Gửi nhận xét thất bại"
 
-#: wp-includes/class-wp-customize-manager.php:2058
+#: wp-includes/class-wp-customize-manager.php:2063
 #: wp-includes/customize/class-wp-customize-selective-refresh.php:192
 msgid "Shift-click to edit this element."
 msgstr "Giữ phím Shift và nhấp chuột vào để chỉnh sửa thành phần này."
 
-#: wp-includes/class-wp-customize-manager.php:4757
+#: wp-includes/class-wp-customize-manager.php:4797
 msgid "Enter mobile preview mode"
 msgstr "Xem thử ở chế độ điện thoại"
 
@@ -4255,7 +4266,7 @@ msgid "(Current: %s)"
 msgstr "(Hiện tại: %s)"
 
 #. translators: %s:      menu location
-#: wp-includes/class-wp-customize-nav-menus.php:416
+#: wp-includes/class-wp-customize-nav-menus.php:432
 msgctxt "menu"
 msgid "(Currently set to: %s)"
 msgstr "(Hiện tại đang đặt cho: %s)"
@@ -4269,12 +4280,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "Hãy xem qua <a href=\"%s\" target=\"_blank\">trang báo cáo lỗi</a>. Các hướng dẫn trong có đó thể giúp bạn tìm ra cách giải quyết cho những vấn đề hiện tại. "
 
-#: wp-includes/functions.php:4143
+#: wp-includes/functions.php:4144
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4142
+#: wp-includes/functions.php:4143
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Vui lòng xem <a href=\"%s\">Hướng dẫn Debug trong WordPress</a> để biết thêm thông tin."
 
@@ -4483,66 +4494,66 @@ msgstr "Tiêu đề được đăng:"
 msgid "Author:"
 msgstr "Tác giả:"
 
-#: wp-includes/wp-db.php:1744
+#: wp-includes/wp-db.php:1737
 msgid "Error reconnecting to the database"
 msgstr "Lỗi kết nối với cơ sở dữ liệu"
 
-#: wp-includes/wp-db.php:1595
+#: wp-includes/wp-db.php:1588
 msgid "Are you sure that you have typed the correct hostname?"
 msgstr "Bạn chắc chắn đã nhập đúng hostname?"
 
-#: wp-includes/wp-db.php:1596 wp-includes/wp-db.php:1753
+#: wp-includes/wp-db.php:1589 wp-includes/wp-db.php:1746
 msgid "Are you sure that the database server is running?"
 msgstr "Bạn chắc chắn máy chủ CSDL đang hoạt động?"
 
 #. translators: %s: support forums URL
-#: wp-includes/wp-db.php:1601 wp-includes/wp-db.php:1759
+#: wp-includes/wp-db.php:1594 wp-includes/wp-db.php:1752
 msgid "If you&#8217;re unsure what these terms mean you should probably contact your host. If you still need help you can always visit the <a href=\"%s\">WordPress Support Forums</a>."
 msgstr "Nếu bạn không chắc chắn những điều này, bạn nên liên hệ với nhà cung cấp host. Nếu bạn vẫn cần sự trợ giúp, bạn có thể truy cập <a href=\"%s\">Diễn đàn hỗ trợ WordPress</a>."
 
 #. translators: %s: database host
-#: wp-includes/wp-db.php:1748
+#: wp-includes/wp-db.php:1741
 msgid "This means that we lost contact with the database server at %s. This could mean your host&#8217;s database server is down."
 msgstr "Điều này có nghĩa là chúng tôi không thể kết nối được với máy chủ CSDL tại %s. Có thể máy chủ CSDL của bạn đang không hoạt động."
 
-#: wp-includes/wp-db.php:1754
+#: wp-includes/wp-db.php:1747
 msgid "Are you sure that the database server is not under particularly heavy load?"
 msgstr "Bạn có chắc là máy chủ cơ sở dữ liệu đang không bị quá tải không?"
 
 #. translators: 1: wp-config.php. 2: database host
-#: wp-includes/wp-db.php:1588
+#: wp-includes/wp-db.php:1581
 msgid "This either means that the username and password information in your %1$s file is incorrect or we can&#8217;t contact the database server at %2$s. This could mean your host&#8217;s database server is down."
 msgstr "Điều này có nghĩa là thông tin tên người dùng và mật khẩu trong file %1$s không đúng hoặc chúng tôi không thể kết nối được với máy chủ dữ liệu ở %2$s. Việc này có nghĩa là máy chủ cơ sở dữ liệu của bạn có thể đang gặp sự cố. "
 
-#: wp-includes/wp-db.php:1594
+#: wp-includes/wp-db.php:1587
 msgid "Are you sure you have the correct username and password?"
 msgstr "Bạn có chắc là đã nhập đúng tên người dùng và mât khẩu?"
 
 #. translators: %s: support forums URL
-#: wp-includes/wp-db.php:1068
+#: wp-includes/wp-db.php:1061
 msgid "If you don&#8217;t know how to set up a database you should <strong>contact your host</strong>. If all else fails you may find help at the <a href=\"%s\">WordPress Support Forums</a>."
 msgstr "Nếu bạn không biết cách cài đặt cơ sở dữ liệu, bạn nên <strong>liên hệ nhà cung cấp hosting</strong>. Nếu không, bạn có thể tìm sự giúp đỡ tại <a href=\"%s\">diễn đàn hỗ trợ WordPress</a>."
 
-#: wp-includes/wp-db.php:1040
+#: wp-includes/wp-db.php:1033
 msgid "Can&#8217;t select database"
 msgstr "Không thể chọn cơ sở dữ liệu"
 
 #. translators: %s: database name
-#: wp-includes/wp-db.php:1044
+#: wp-includes/wp-db.php:1037
 msgid "We were able to connect to the database server (which means your username and password is okay) but not able to select the %s database."
 msgstr "Chúng tôi có thể kết nối được với máy chủ CSDL (có nghĩa là tên tài khoản và mật khẩu của bạn đúng) nhưng không thể chọn được CSDL %s."
 
-#: wp-includes/wp-db.php:1049
+#: wp-includes/wp-db.php:1042
 msgid "Are you sure it exists?"
 msgstr "Bạn chắc chắn nó tồn tại?"
 
 #. translators: 1: database user, 2: database name
-#: wp-includes/wp-db.php:1053
+#: wp-includes/wp-db.php:1046
 msgid "Does the user %1$s have permission to use the %2$s database?"
 msgstr "Tài khoản %1$s có quyền sử dụng CSDL %2$s?"
 
 #. translators: %s: database name
-#: wp-includes/wp-db.php:1060
+#: wp-includes/wp-db.php:1053
 msgid "On some systems the name of your database is prefixed with your username, so it would be like <code>username_%1$s</code>. Could that be the problem?"
 msgstr "Trong một số hệ thống, tên của cơ sở dữ liệu sẽ có tiền tố là tên đăng nhập của bạn, có thể là <code>username_%1$s</code>. Đó có phải là vấn đề không?"
 
@@ -4890,7 +4901,7 @@ msgid "Press return or enter to open this section"
 msgstr "Nhấn quay lại hoặc enter để mở mục này"
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4335
+#: wp-includes/class-wp-customize-manager.php:4372
 msgid "Live Preview: %s"
 msgstr "Xem thử trước: %s"
 
@@ -4915,7 +4926,7 @@ msgstr "Hãy sử dụng %2$s thay cho %1$s (sẽ sớm bị loại bỏ)"
 msgid "Sorry, you are not allowed to edit theme options on this site."
 msgstr "Xin lỗi, bạn không được phép chỉnh sửa các tùy chọn giao diện trong website này."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1005
+#: wp-includes/class-wp-customize-nav-menus.php:1021
 #: wp-includes/class-wp-customize-widgets.php:811
 msgid "Clear Results"
 msgstr "Xoá các Kết quả"
@@ -4925,7 +4936,7 @@ msgid "The following formatting shortcuts are replaced when pressing Enter. Pres
 msgstr "Các phím tắt định dạng sau đây được thay thế khi nhấn Enter. Nhấn Escape hoặc nút Undo để trở lại."
 
 #. translators: %s: Title of a section with menu items
-#: wp-includes/class-wp-customize-nav-menus.php:1054
+#: wp-includes/class-wp-customize-nav-menus.php:1070
 msgid "Toggle section: %s"
 msgstr "Bật/tắt phần: %s"
 
@@ -4938,7 +4949,7 @@ msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1088
+#: wp-includes/class-wp-customize-nav-menus.php:1104
 msgid "Toggle section: Custom Links"
 msgstr "Phần bật/tắt: Liên kết tùy chỉnh"
 
@@ -4964,7 +4975,7 @@ msgstr "Ẩn mật khẩu"
 msgid "Show password"
 msgstr "Hiện mật khẩu"
 
-#: wp-includes/class-wp-customize-nav-menus.php:419
+#: wp-includes/class-wp-customize-nav-menus.php:435
 msgid "Menu Name"
 msgstr "Tên menu"
 
@@ -4986,7 +4997,7 @@ msgstr "Xem trước biểu tượng trình duyệt"
 msgid "Preview as an app icon"
 msgstr "Xem trước biểu tượng ứng dụng"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1050
+#: wp-includes/class-wp-customize-nav-menus.php:1066
 msgid "No items"
 msgstr "Không có mục nào"
 
@@ -5038,16 +5049,16 @@ msgstr "Ẩn ảnh"
 msgid "Hide header image"
 msgstr "Ẩn ảnh đầu trang"
 
-#: wp-includes/class-wp-customize-manager.php:4870
+#: wp-includes/class-wp-customize-manager.php:4910
 msgid "Site Icon"
 msgstr "Biểu tượng site"
 
-#: wp-includes/class-wp-customize-manager.php:4821
+#: wp-includes/class-wp-customize-manager.php:4861
 msgid "Site Identity"
 msgstr "Nhận dạng Site"
 
 #. translators: 1: Title of a menu item, 2: Type of a menu item
-#: wp-includes/class-wp-customize-nav-menus.php:919
+#: wp-includes/class-wp-customize-nav-menus.php:935
 msgid "Add to menu: %1$s (%2$s)"
 msgstr "Thêm vào menu: %1$s (%2$s)"
 
@@ -5063,7 +5074,7 @@ msgstr "Liên kết đặt lại mật khẩu của bạn đã hết hạn. Hãy
 msgid "Your password reset link appears to be invalid. Please request a new link below."
 msgstr "Liên kết đặt lại mật khẩu của bạn không hợp lệ. Hãy yêu cầu 1 liên kết mới bên dưới."
 
-#: wp-includes/wp-db.php:1386 wp-includes/wp-db.php:1403
+#: wp-includes/wp-db.php:1379 wp-includes/wp-db.php:1396
 msgid "WordPress database error:"
 msgstr "Lỗi cơ sở dữ liệu WordPress:"
 
@@ -5081,7 +5092,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "Thư mục %s của các kho lưu trữ phát triển phải được sử dụng cho RTL."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3904
+#: wp-includes/functions.php:3905
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Phương thức khởi tạo được gọi cho %1$s bị <strong>phản đối</strong> kể từ phiên bản %2$s! Sử dụng %3$s thay thế."
 
@@ -5095,32 +5106,32 @@ msgstr "Được định dạng trước"
 msgid "%1$s (%2$d)"
 msgstr "%1$s (%2$d)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:439
+#: wp-includes/class-wp-customize-nav-menus.php:455
 #: wp-includes/class-wp-customize-widgets.php:762
 msgid "Reorder mode closed"
 msgstr "Chế độ sắp xếp lại đã đóng"
 
-#: wp-includes/class-wp-customize-nav-menus.php:438
+#: wp-includes/class-wp-customize-nav-menus.php:454
 #: wp-includes/class-wp-customize-widgets.php:761
 msgid "Reorder mode enabled"
 msgstr "Chế độ sắp xếp lại đã bật"
 
-#: wp-includes/class-wp-customize-nav-menus.php:412
+#: wp-includes/class-wp-customize-nav-menus.php:428
 #: wp-includes/customize/class-wp-customize-nav-menu-setting.php:430
 msgctxt "Missing menu name."
 msgid "(unnamed)"
 msgstr "(Chưa có tên)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:441
+#: wp-includes/class-wp-customize-nav-menus.php:457
 msgid "Close reorder mode"
 msgstr "Đóng chế độ sắp xếp lại"
 
-#: wp-includes/class-wp-customize-nav-menus.php:440
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:44
+#: wp-includes/class-wp-customize-nav-menus.php:456
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:53
 msgid "Reorder menu items"
 msgstr "Sắp xếp lại các mục menu"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:41
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:50
 msgid "Add or remove menu items"
 msgstr "Thêm hoặc loại bỏ các mục menu"
 
@@ -5128,7 +5139,7 @@ msgstr "Thêm hoặc loại bỏ các mục menu"
 msgid "Active theme"
 msgstr "Giao diện đang sử dụng"
 
-#: wp-includes/class-wp-customize-nav-menus.php:562
+#: wp-includes/class-wp-customize-nav-menus.php:578
 msgid "Menus can be displayed in locations defined by your theme."
 msgstr "Menu có thể được hiển thị trong các vị trí được xác định bởi giao diện của bạn."
 
@@ -5136,12 +5147,12 @@ msgstr "Menu có thể được hiển thị trong các vị trí được xác 
 msgid "Previewing theme"
 msgstr "Đang xem trước giao diện"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:49
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:58
 msgid "When in reorder mode, additional controls to reorder menu items will be available in the items list above."
 msgstr "Khi trong chế độ sắp xếp, các công cụ bổ sung để thay đổi thứ tự các mục trong menu sẽ xuất hiện trong danh sách bên dưới."
 
 #. translators: URL to the widgets panel of the customizer
-#: wp-includes/class-wp-customize-nav-menus.php:560
+#: wp-includes/class-wp-customize-nav-menus.php:576
 msgid "Menus can be displayed in locations defined by your theme or in <a href=\"%s\">widget areas</a> by adding a &#8220;Navigation Menu&#8221; widget."
 msgstr "Menu có thể được hiển thị trong các vị trí được xác định bởi giao diện của bạn hoặc trong <a href=\"%s\">Widget</a> bằng cách thêm widget &#8220;Menu tuỳ chọn&#8221;."
 
@@ -5341,8 +5352,8 @@ msgid "Inline toolbar (when an image, link or preview is selected)"
 msgstr "Thanh công cụ Inline (khi một hình ảnh, liên kết hoặc xem trước được chọn)"
 
 #: wp-includes/widgets/class-wp-widget-custom-html.php:258
-#: wp-includes/widgets/class-wp-widget-text.php:464
-#: wp-includes/widgets/class-wp-widget-text.php:525
+#: wp-includes/widgets/class-wp-widget-text.php:485
+#: wp-includes/widgets/class-wp-widget-text.php:546
 msgid "Content:"
 msgstr "Nội dung:"
 
@@ -5363,161 +5374,162 @@ msgstr "Tùy chỉnh"
 msgid "Menu Options"
 msgstr "Tùy chọn Menu"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1104
+#: wp-includes/class-wp-customize-nav-menus.php:1120
 msgid "Add to Menu"
 msgstr "Thêm vào menu"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1086
+#: wp-includes/class-wp-customize-nav-menus.php:1102
 msgid "Custom Links"
 msgstr "Liên kết tùy chính"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1001
+#: wp-includes/class-wp-customize-nav-menus.php:1017
 #: wp-includes/class-wp-customize-widgets.php:812
 #: wp-includes/customize/class-wp-customize-themes-section.php:119
 #: wp-includes/customize/class-wp-customize-themes-section.php:134
 msgid "The search results will be updated as you type."
 msgstr "Kết quả tìm kiếm sẽ cập nhật ngay khi bạn đang gõ."
 
-#: wp-includes/class-wp-customize-nav-menus.php:1000
+#: wp-includes/class-wp-customize-nav-menus.php:1016
 msgid "Search menu items&hellip;"
 msgstr "Tìm kiếm mục menu&hellip;"
 
-#: wp-includes/class-wp-customize-nav-menus.php:935
+#: wp-includes/class-wp-customize-nav-menus.php:951
 msgid "Move one level down"
 msgstr "Chuyển xuống dưới"
 
-#: wp-includes/class-wp-customize-nav-menus.php:934
+#: wp-includes/class-wp-customize-nav-menus.php:950
 msgid "Move one level up"
 msgstr "Chuyển lên trên"
 
 #. translators: &#9656; is the unicode right-pointing triangle, and %s is the
 #. section title in the Customizer
-#: wp-includes/class-wp-customize-nav-menus.php:430
-#: wp-includes/class-wp-customize-nav-menus.php:991
+#: wp-includes/class-wp-customize-nav-menus.php:446
+#: wp-includes/class-wp-customize-nav-menus.php:1007
 #: wp-includes/class-wp-customize-section.php:230
 #: wp-includes/class-wp-customize-widgets.php:802
 msgid "Customizing &#9656; %s"
 msgstr "Tùy biến &#9656; %s"
 
-#: wp-includes/class-wp-customize-nav-menus.php:994
+#: wp-includes/class-wp-customize-nav-menus.php:1010
 msgid "Add Menu Items"
 msgstr "Thêm mục menu"
 
-#: wp-includes/class-wp-customize-nav-menus.php:417
+#: wp-includes/class-wp-customize-nav-menus.php:433
 msgid "Menu Locations"
 msgstr "Vị trí Menu"
 
-#: wp-includes/class-wp-customize-nav-menus.php:557
+#: wp-includes/class-wp-customize-nav-menus.php:573
 msgid "This panel is used for managing navigation menus for content you have already published on your site. You can create menus and add items for existing content such as pages, posts, categories, tags, formats, or custom links."
 msgstr "Bảng điều khiển này được sử dụng để quản lý các Menu cho nội dung mà bạn đã xuất bản trên website. Bạn có thể tạo các Menu và thêm các mục cho nội dung hiện có như các trang, bài viết, danh mục, tag, định dạng, hoặc liên kết riêng."
 
-#: wp-includes/class-wp-customize-nav-menus.php:999
+#: wp-includes/class-wp-customize-nav-menus.php:1015
 msgid "Search Menu Items"
 msgstr "Tìm kiếm mục Menu"
 
 #. translators: %s: number of menu locations
-#: wp-includes/class-wp-customize-nav-menus.php:579
+#: wp-includes/class-wp-customize-nav-menus.php:595
 msgid "Your theme can display menus in %s location. Select which menu you would like to use."
 msgid_plural "Your theme can display menus in %s locations. Select which menu appears in each location."
 msgstr[0] "Chủ đề của bạn có %s vị trí trình đơn. Chọn trình đơn mà bạn muốn sử dụng."
 
 #. translators: 1: item name, 2: item position, 3: parent item name
-#: wp-includes/class-wp-customize-nav-menus.php:472
+#: wp-includes/class-wp-customize-nav-menus.php:488
 msgid "%1$s. Sub item number %2$d under %3$s."
 msgstr "%1$s. Chỉ mục con số %2$d dưới %3$s."
 
 #. translators: 1: item name, 2: item position, 3: total number of items
-#: wp-includes/class-wp-customize-nav-menus.php:470
+#: wp-includes/class-wp-customize-nav-menus.php:486
 msgid "%1$s. Menu item %2$d of %3$d."
 msgstr "%1$s. Chỉ mục thứ %2$d trong %3$d."
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:468
+#: wp-includes/class-wp-customize-nav-menus.php:484
 msgid "Out from under %s"
 msgstr "Ở ngoài từ dưới %s"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:466
+#: wp-includes/class-wp-customize-nav-menus.php:482
 msgid "Under %s"
 msgstr "Dưới %s"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:464
+#: wp-includes/class-wp-customize-nav-menus.php:480
 msgid "Move out from under %s"
 msgstr "Chuyển chỉ mục dưới %s ra ngoài"
 
 #. translators: %s: previous item name
-#: wp-includes/class-wp-customize-nav-menus.php:462
+#: wp-includes/class-wp-customize-nav-menus.php:478
 msgid "Move under %s"
 msgstr "Chuyển xuống dưới %s"
 
-#: wp-includes/class-wp-customize-nav-menus.php:460
+#: wp-includes/class-wp-customize-nav-menus.php:476
 msgid "Move to the top"
 msgstr "Đưa lên đầu tiên"
 
-#: wp-includes/class-wp-customize-nav-menus.php:459
+#: wp-includes/class-wp-customize-nav-menus.php:475
 msgid "Move down one"
 msgstr "Đẩy xuống một nấc"
 
-#: wp-includes/class-wp-customize-nav-menus.php:437
+#: wp-includes/class-wp-customize-nav-menus.php:453
 msgid "Loading more results... please wait."
 msgstr "Đang tải thêm kết quả... vui lòng đợi."
 
-#: wp-includes/class-wp-customize-nav-menus.php:458
+#: wp-includes/class-wp-customize-nav-menus.php:474
 msgid "Move up one"
 msgstr "Đẩy lên một nấc"
 
-#: wp-includes/class-wp-customize-nav-menus.php:436
+#: wp-includes/class-wp-customize-nav-menus.php:452
 msgid "Additional items found: %d"
 msgstr "Các mục bổ sung tìm thấy: %d"
 
-#: wp-includes/class-wp-customize-nav-menus.php:435
+#: wp-includes/class-wp-customize-nav-menus.php:451
 msgid "Number of items found: %d"
 msgstr "Số mục tìm thấy: %d"
 
 #. translators: %s: title of menu item in draft status
-#: wp-includes/class-wp-customize-nav-menus.php:434
+#: wp-includes/class-wp-customize-nav-menus.php:450
 msgid "%s (Pending)"
 msgstr "%s (Chờ xét duyệt)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:427
+#: wp-includes/class-wp-customize-nav-menus.php:443
 msgid "Menu item moved out of submenu"
 msgstr "Mục trình đơn đã chuyển khỏi trình đơn phụ"
 
 #. translators: %s: title of menu item which is invalid
-#: wp-includes/class-wp-customize-nav-menus.php:432
+#: wp-includes/class-wp-customize-nav-menus.php:448
 msgid "%s (Invalid)"
 msgstr "%s (Không hợp lệ)"
 
-#: wp-includes/class-wp-customize-nav-menus.php:426
+#: wp-includes/class-wp-customize-nav-menus.php:442
 msgid "Menu item moved down"
 msgstr "Mục đã chuyển xuống dưới"
 
-#: wp-includes/class-wp-customize-nav-menus.php:424
+#: wp-includes/class-wp-customize-nav-menus.php:440
 msgid "Menu deleted"
 msgstr "Menu đã được xoá"
 
-#: wp-includes/class-wp-customize-nav-menus.php:425
+#: wp-includes/class-wp-customize-nav-menus.php:441
 msgid "Menu item moved up"
 msgstr "Mục đã chuyển lên trên"
 
-#: wp-includes/class-wp-customize-nav-menus.php:423
+#: wp-includes/class-wp-customize-nav-menus.php:439
 msgid "Menu created"
 msgstr "Menu đã được tạo"
 
-#: wp-includes/class-wp-customize-nav-menus.php:422
+#: wp-includes/class-wp-customize-nav-menus.php:438
 msgid "Menu item deleted"
 msgstr "Mục trong menu đã được xoá"
 
-#: wp-includes/class-wp-customize-nav-menus.php:421
+#: wp-includes/class-wp-customize-nav-menus.php:437
 msgid "Menu item added"
 msgstr "Mục trong menu đã được thêm"
 
-#: wp-includes/class-wp-customize-nav-menus.php:428
+#: wp-includes/class-wp-customize-nav-menus.php:444
 msgid "Menu item is now a sub-item"
 msgstr "Mục này đã được chuyển thành mục con"
 
 #: wp-includes/class-wp-customize-nav-menus.php:153
+#: wp-includes/class-wp-customize-nav-menus.php:375
 msgctxt "nav menu home label"
 msgid "Home"
 msgstr "Trang chủ"
@@ -5562,15 +5574,15 @@ msgstr "Nhãn Điều Hướng"
 msgid "Automatically add new top-level pages to this menu"
 msgstr "Tự động thêm các trang cấp cao nhất mới vào trình đơn này"
 
-#: wp-includes/class-wp-customize-nav-menus.php:417
+#: wp-includes/class-wp-customize-nav-menus.php:433
 msgid "Menu Location"
 msgstr "Vị trí trình đơn"
 
-#: wp-includes/class-wp-customize-nav-menus.php:944
+#: wp-includes/class-wp-customize-nav-menus.php:960
 msgid "Delete Menu"
 msgstr "Xóa menu"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:42
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:38
 msgid "Add Items"
 msgstr "Thêm mục"
 
@@ -5694,7 +5706,8 @@ msgid "<strong>Database tables are missing.</strong> This means that MySQL is no
 msgstr "<strong>Các bảng của cơ sở dữ liệu đang bị thiếu.</strong> Nghĩa là MySQL đang không hoạt động, WordPress đã không được cài đặt chính xác, hoặc ai đó đã xóa bảng %s. Bạn nên kiểm tra lại database ngay bây giờ. "
 
 #: wp-includes/class-wp-customize-nav-menus.php:155
-#: wp-includes/class-wp-customize-nav-menus.php:413
+#: wp-includes/class-wp-customize-nav-menus.php:382
+#: wp-includes/class-wp-customize-nav-menus.php:429
 #: wp-includes/customize/class-wp-customize-nav-menu-item-setting.php:322
 #: wp-includes/nav-menu.php:821
 msgid "Custom Link"
@@ -5796,7 +5809,7 @@ msgstr "Tùy chọn %1$s không được khuyến khích dùng trong các hàm %
 msgid "No Comments<span class=\"screen-reader-text\"> on %s</span>"
 msgstr "Không có bình luận<span class=\"screen-reader-text\"> ở %s</span>"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1099
+#: wp-includes/class-wp-customize-nav-menus.php:1115
 #: wp-includes/class-wp-editor.php:1704 wp-includes/media-template.php:820
 msgid "Link Text"
 msgstr "Đường dẫn bằng chữ"
@@ -5895,7 +5908,7 @@ msgstr "Các giá trị sau không có ngày hợp lệ: tháng %1$s, ngày %2$s
 
 #. translators: %s: database access abstraction class, usually wpdb or a class
 #. extending wpdb
-#: wp-includes/wp-db.php:1117
+#: wp-includes/wp-db.php:1110
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s phải thiết lập một kết nối cơ sở dữ liệu để sử dụng với thoát ra."
 
@@ -6216,7 +6229,7 @@ msgstr "Xóa lựa chọn"
 msgid "Cancel Selection"
 msgstr "Hủy lựa chọn"
 
-#: wp-includes/class-wp-customize-nav-menus.php:411
+#: wp-includes/class-wp-customize-nav-menus.php:427
 #: wp-includes/script-loader.php:888
 msgctxt "missing menu item navigation label"
 msgid "(no label)"
@@ -6358,8 +6371,8 @@ msgstr "Bạn đang tùy chỉnh %s"
 msgid "Widgets are independent sections of content that can be placed into widgetized areas provided by your theme (commonly called sidebars)."
 msgstr "Widget là phần nội dung độc lập có thể được đặt vào khu vực được thiết lập trong giao diện (thường được gọi là sidebar)."
 
-#: wp-includes/update.php:154 wp-includes/update.php:346
-#: wp-includes/update.php:524
+#: wp-includes/update.php:154 wp-includes/update.php:356
+#: wp-includes/update.php:538
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
 msgstr "(WordPress không thể thiết lập kết nối an toàn tới WordPress.org. Vui lòng liên hệ quản trị máy chủ của bạn.)"
 
@@ -6777,7 +6790,7 @@ msgstr "Anchor"
 msgid "Add alternate sources for maximum HTML5 playback:"
 msgstr "Thêm các nguồn thay thế để phát lại tối đa bằng HTML5:"
 
-#: wp-includes/class-wp-customize-nav-menus.php:985
+#: wp-includes/class-wp-customize-nav-menus.php:1001
 #: wp-includes/class-wp-customize-panel.php:359
 #: wp-includes/class-wp-customize-section.php:350
 #: wp-includes/class-wp-customize-widgets.php:797
@@ -6956,7 +6969,7 @@ msgstr "Đã xảy ra lỗi xảy ra, có thể là do WordPress.org hoặc do c
 msgid "Hint: The password should be at least twelve characters long. To make it stronger, use upper and lower case letters, numbers, and symbols like ! \" ? $ % ^ &amp; )."
 msgstr "Gợi ý: Mật khẩu phải có ít nhất 12 ký tự. Để nâng cao độ bảo mật, sử dụng chữ in hoa, in thường, chữ số và các ký tự đặc biệt như ! \" ? $ % ^ &amp; )."
 
-#: wp-includes/wp-db.php:1237
+#: wp-includes/wp-db.php:1230
 msgid "The query argument of %s must have a placeholder."
 msgstr "Truy vấn của %s phải có placehoder."
 
@@ -7002,9 +7015,9 @@ msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
-#: wp-includes/update.php:345 wp-includes/update.php:523
-#: wp-includes/wp-db.php:1069 wp-includes/wp-db.php:1602
-#: wp-includes/wp-db.php:1760 wp-login.php:882
+#: wp-includes/update.php:355 wp-includes/update.php:537
+#: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
+#: wp-includes/wp-db.php:1753 wp-login.php:882
 msgid "https://wordpress.org/support/"
 msgstr "https://wordpress.org/support/"
 
@@ -7060,12 +7073,12 @@ msgstr "Kiểu ô"
 msgid "Row group"
 msgstr "Nhóm dòng"
 
-#: wp-includes/class-wp-customize-nav-menus.php:933
+#: wp-includes/class-wp-customize-nav-menus.php:949
 #: wp-includes/class-wp-customize-widgets.php:684
 msgid "Move down"
 msgstr "Di chuyển xuống"
 
-#: wp-includes/class-wp-customize-nav-menus.php:932
+#: wp-includes/class-wp-customize-nav-menus.php:948
 #: wp-includes/class-wp-customize-widgets.php:685
 msgid "Move up"
 msgstr "Di chuyển lên"
@@ -7230,7 +7243,7 @@ msgstr "Khoảng cách trong ô"
 msgid "Cell spacing"
 msgstr "Khoảng cách viền ô"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:45
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:54
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:60
 msgid "Reorder"
 msgstr "Sắp xếp lại"
@@ -7247,22 +7260,22 @@ msgstr "Chữ để hiển thị"
 msgid "Finnish"
 msgstr "Tiếng Phần Lan"
 
-#: wp-includes/general-template.php:3910
+#: wp-includes/general-template.php:3912
 msgctxt "admin color scheme"
 msgid "Sunrise"
 msgstr "Bình minh"
 
-#: wp-includes/general-template.php:3916
+#: wp-includes/general-template.php:3918
 msgctxt "admin color scheme"
 msgid "Ectoplasm"
 msgstr "Kinh dị"
 
-#: wp-includes/general-template.php:3922
+#: wp-includes/general-template.php:3924
 msgctxt "admin color scheme"
 msgid "Ocean"
 msgstr "Đại dương"
 
-#: wp-includes/general-template.php:3928
+#: wp-includes/general-template.php:3930
 msgctxt "admin color scheme"
 msgid "Coffee"
 msgstr "Cà phê"
@@ -7319,12 +7332,12 @@ msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "bật"
 
-#: wp-includes/general-template.php:3892
+#: wp-includes/general-template.php:3894
 msgctxt "admin color scheme"
 msgid "Light"
 msgstr "Sáng"
 
-#: wp-includes/general-template.php:3881
+#: wp-includes/general-template.php:3883
 msgctxt "admin color scheme"
 msgid "Default"
 msgstr "Mặc định"
@@ -7334,12 +7347,12 @@ msgid "Use commas instead of %s to separate excluded terms."
 msgstr "Dùng dấu phẩy thay vì %s để phân cách các thuật ngữ bị loại bỏ."
 
 #. translators: %s: support forums URL
-#: wp-includes/update.php:152 wp-includes/update.php:344
-#: wp-includes/update.php:522
+#: wp-includes/update.php:152 wp-includes/update.php:354
+#: wp-includes/update.php:536
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"%s\">support forums</a>."
 msgstr "Đã sẩy ra một lỗi bất ngờ. Có vấn đề với WordPress.org hoặc cấu hình máy chủ này. Nếu bạn tiếp tục gặp lỗi, hãy vào <a href=\"http://wordpress.org/support/\">diễn đàn hỗ trợ</a>."
 
-#: wp-includes/general-template.php:3904
+#: wp-includes/general-template.php:3906
 msgctxt "admin color scheme"
 msgid "Midnight"
 msgstr "Đêm khuya"
@@ -7356,7 +7369,7 @@ msgstr "vietnamese"
 msgid "Menu"
 msgstr "Menu"
 
-#: wp-includes/update.php:629
+#: wp-includes/update.php:643
 msgid "Translation Updates"
 msgstr "Cập nhật bản dịch"
 
@@ -7531,7 +7544,7 @@ msgstr "Trang bạn muốn xem, %s, không tồn tại. Bạn có thể tạo tr
 msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s incorrect, you will not receive your email."
 msgstr "Bạn đã nhập chính xác email? Bạn đã nhập là %s, nếu email này không đúng, bạn sẽ không nhận được email gửi tới."
 
-#: wp-includes/functions.php:5329
+#: wp-includes/functions.php:5330
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Trang đăng nhập sẽ được mở trong một cửa sổ mới. Sau khi đăng nhập, bạn có thể đóng cửa sổ và quay lại trang hiện tại."
 
@@ -7556,7 +7569,7 @@ msgctxt "submit button"
 msgid "Search"
 msgstr "Tìm kiếm"
 
-#: wp-includes/functions.php:5327 wp-includes/script-loader.php:568
+#: wp-includes/functions.php:5328 wp-includes/script-loader.php:568
 msgid "Session expired"
 msgstr "Phiên làm việc đã hết hạn"
 
@@ -8014,11 +8027,11 @@ msgstr "Văn bản"
 msgid "Skip to toolbar"
 msgstr "Chuyển đến thanh công cụ"
 
-#: wp-includes/class-wp-customize-manager.php:4941
+#: wp-includes/class-wp-customize-manager.php:4981
 msgid "Header Text Color"
 msgstr "Màu chữ đầu trang"
 
-#: wp-includes/class-wp-customize-manager.php:4918
+#: wp-includes/class-wp-customize-manager.php:4958
 msgid "Colors"
 msgstr "Các màu"
 
@@ -8052,7 +8065,7 @@ msgstr "Xin lỗi, bạn không thể ghim một bài viết riêng tư."
 msgid "Sorry, you are not allowed to publish this page."
 msgstr "Xin lỗi, bạn không có quyền công bố trang này."
 
-#: wp-includes/class-wp-customize-manager.php:4991
+#: wp-includes/class-wp-customize-manager.php:5031
 #: wp-includes/customize/class-wp-customize-header-image-control.php:31
 msgid "Header Image"
 msgstr "Ảnh phần đầu trang"
@@ -8095,15 +8108,15 @@ msgid "Site name must be at least %s character."
 msgid_plural "Site name must be at least %s characters."
 msgstr[0] "Tên trang web phải trên %s ký tự."
 
-#: wp-includes/class-wp-customize-manager.php:5198
+#: wp-includes/class-wp-customize-manager.php:5238
 msgid "A static page"
 msgstr "Trang tĩnh"
 
-#: wp-includes/class-wp-customize-manager.php:4956
+#: wp-includes/class-wp-customize-manager.php:4996
 msgid "Background Color"
 msgstr "Màu nền"
 
-#: wp-includes/class-wp-customize-manager.php:5065
+#: wp-includes/class-wp-customize-manager.php:5105
 #: wp-includes/customize/class-wp-customize-background-image-control.php:30
 msgid "Background Image"
 msgstr "Ảnh nền"
@@ -8120,7 +8133,7 @@ msgstr "Xóa ảnh"
 msgid "Sorry, you are not allowed to edit this comment."
 msgstr "Xin lỗi, bạn không được phép chỉnh sửa loại post này"
 
-#: wp-includes/class-wp-customize-manager.php:5220
+#: wp-includes/class-wp-customize-manager.php:5260
 msgid "Posts page"
 msgstr "Trang tập hợp bài viết"
 
@@ -8128,7 +8141,7 @@ msgstr "Trang tập hợp bài viết"
 msgid "Allowed Files"
 msgstr "Tệp tin cho phép"
 
-#: wp-includes/class-wp-customize-manager.php:4900
+#: wp-includes/class-wp-customize-manager.php:4940
 #: wp-includes/class-wp-customize-widgets.php:753
 #: wp-includes/class-wp-editor.php:1258
 #: wp-includes/customize/class-wp-customize-media-control.php:226
@@ -8247,22 +8260,22 @@ msgstr "Không thể đọc tập tin style của giao diện."
 msgid "The \"%s\" theme is not a valid parent theme."
 msgstr "Giao diện \"%s\" không phải là giao diện cha hợp lệ."
 
-#: wp-includes/class-wp-customize-manager.php:5197
+#: wp-includes/class-wp-customize-manager.php:5237
 msgid "Your latest posts"
 msgstr "Bài viết mới nhất"
 
 #: wp-includes/class-wp-customize-control.php:586
-#: wp-includes/class-wp-customize-nav-menus.php:594
+#: wp-includes/class-wp-customize-nav-menus.php:610
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:143
 msgid "&mdash; Select &mdash;"
 msgstr "&mdash; Chọn &mdash;"
 
-#: wp-includes/class-wp-customize-manager.php:4843
+#: wp-includes/class-wp-customize-manager.php:4883
 msgid "Tagline"
 msgstr "Khẩu hiệu"
 
 #. translators: %s: document title from the preview
-#: wp-includes/class-wp-customize-manager.php:4332
+#: wp-includes/class-wp-customize-manager.php:4369
 msgid "Customize: %s"
 msgstr "Tùy biến: %s"
 
@@ -8433,7 +8446,7 @@ msgstr "Tạo một tập tin Cấu hình"
 msgid "You can create a %s file through a web interface, but this doesn't work for all server setups. The safest way is to manually create the file."
 msgstr "Bạn có thể tạo ra một file %s thông qua giao diện web, nhưng nó có thể không làm việc cho tất cả các server. Cách an toàn nhất là tạo file này một cách thủ công."
 
-#: wp-includes/class-wp-customize-manager.php:5231
+#: wp-includes/class-wp-customize-manager.php:5271
 msgid "https://codex.wordpress.org/CSS"
 msgstr "http://codex.wordpress.org/"
 
@@ -8550,16 +8563,16 @@ msgstr "Tài liệu"
 msgid "Support Forums"
 msgstr "Diễn đàn hỗ trợ"
 
-#: wp-includes/formatting.php:3361 wp-includes/general-template.php:3800
+#: wp-includes/formatting.php:3361 wp-includes/general-template.php:3802
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3773
+#: wp-includes/functions.php:3774
 msgid "Database Error"
 msgstr "Lỗi cơ sở dữ liệu"
 
-#: wp-includes/functions.php:3777 wp-includes/ms-load.php:455
-#: wp-includes/wp-db.php:1584
+#: wp-includes/functions.php:3778 wp-includes/ms-load.php:455
+#: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Lỗi kết nối tới cơ sở dữ liệu"
 
@@ -8610,7 +8623,7 @@ msgstr "Tập tin này lớn hơn dung lượng tối đa cho phép. Hãy thử 
 msgid "This file is not an image. Please try another."
 msgstr "Tập tin này không phải là hình ảnh. Hãy thử tập tin khác."
 
-#: wp-includes/general-template.php:3898
+#: wp-includes/general-template.php:3900
 msgctxt "admin color scheme"
 msgid "Blue"
 msgstr "Xanh"
@@ -8736,12 +8749,12 @@ msgstr "Tài khoản người dùng đã được kích hoạt."
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4146
+#: wp-includes/functions.php:4147
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s được gọi là <strong>không chính xác</strong>. %2$s %3$s"
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4139
+#: wp-includes/functions.php:4140
 msgid "(This message was added in version %s.)"
 msgstr "(Thông điệp này đã được thêm vào trong phiên bản %s.)"
 
@@ -9396,18 +9409,18 @@ msgid "This is the short link."
 msgstr "Đây là liên kết ngắn."
 
 #. translators: 1: Number of updates available to WordPress
-#: wp-includes/update.php:618
+#: wp-includes/update.php:632
 msgid "%d WordPress Update"
 msgstr "%d cập nhât"
 
 #. translators: 1: Number of updates available to themes
-#: wp-includes/update.php:626
+#: wp-includes/update.php:640
 msgid "%d Theme Update"
 msgid_plural "%d Theme Updates"
 msgstr[0] "%d cập nhật cho giao diện"
 
 #. translators: 1: Number of updates available to plugins
-#: wp-includes/update.php:622
+#: wp-includes/update.php:636
 msgid "%d Plugin Update"
 msgid_plural "%d Plugin Updates"
 msgstr[0] "%d cập nhật cho plugin"
@@ -9530,7 +9543,7 @@ msgid "One response to %s"
 msgstr "Một bình luận cho %s"
 
 #: wp-includes/admin-bar.php:836
-#: wp-includes/class-wp-customize-nav-menus.php:565
+#: wp-includes/class-wp-customize-nav-menus.php:581
 #: wp-includes/customize/class-wp-customize-nav-menus-panel.php:98
 msgid "Menus"
 msgstr "Menu"
@@ -9578,6 +9591,28 @@ msgstr "Tình trạng của phản hồi không hợp lệ."
 msgid "You must be registered to comment."
 msgstr "Bạn phải đăng ký để gửi phản hồi"
 
+#: wp-includes/class-wp-xmlrpc-server.php:3969
+msgid "Sorry, you are not allowed to update options."
+msgstr "Bạn không có quyền chỉnh sửa tùy chọn."
+
+#: wp-includes/class-wp-xmlrpc-server.php:4621
+#: wp-includes/class-wp-xmlrpc-server.php:6003
+msgid "Either there are no posts, or something went wrong."
+msgstr "Hoặc không có bài viết mới, hoặc là có trục trặc gì đó."
+
+#: wp-includes/class-wp-xmlrpc-server.php:4790
+#: wp-includes/class-wp-xmlrpc-server.php:5464
+#: wp-includes/class-wp-xmlrpc-server.php:6274
+msgid "Sorry, you are not allowed to publish this post."
+msgstr "Xin lỗi, bạn không có quyền đăng bài viết."
+
+#: wp-includes/class-wp-xmlrpc-server.php:4781
+#: wp-includes/class-wp-xmlrpc-server.php:4853
+#: wp-includes/class-wp-xmlrpc-server.php:5685
+#: wp-includes/class-wp-xmlrpc-server.php:6219
+msgid "Sorry, no such post."
+msgstr "Xin lỗi, bài viết này không tồn tại."
+
 #: wp-includes/class-wp-xmlrpc-server.php:1383
 #: wp-includes/class-wp-xmlrpc-server.php:1639
 #: wp-includes/class-wp-xmlrpc-server.php:1705
@@ -9604,34 +9639,12 @@ msgstr "Bạn phải đăng ký để gửi phản hồi"
 msgid "Invalid post ID."
 msgstr "ID bài viết không hợp lệ."
 
-#: wp-includes/class-wp-xmlrpc-server.php:3969
-msgid "Sorry, you are not allowed to update options."
-msgstr "Bạn không có quyền chỉnh sửa tùy chọn."
-
-#: wp-includes/class-wp-xmlrpc-server.php:4621
-#: wp-includes/class-wp-xmlrpc-server.php:6003
-msgid "Either there are no posts, or something went wrong."
-msgstr "Hoặc không có bài viết mới, hoặc là có trục trặc gì đó."
-
-#: wp-includes/class-wp-xmlrpc-server.php:4790
-#: wp-includes/class-wp-xmlrpc-server.php:5464
-#: wp-includes/class-wp-xmlrpc-server.php:6274
-msgid "Sorry, you are not allowed to publish this post."
-msgstr "Xin lỗi, bạn không có quyền đăng bài viết."
-
-#: wp-includes/class-wp-xmlrpc-server.php:4781
-#: wp-includes/class-wp-xmlrpc-server.php:4853
-#: wp-includes/class-wp-xmlrpc-server.php:5685
-#: wp-includes/class-wp-xmlrpc-server.php:6219
-msgid "Sorry, no such post."
-msgstr "Xin lỗi, bài viết này không tồn tại."
-
 #: wp-includes/class-wp-xmlrpc-server.php:1404
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1117
 msgid "Sorry, you are not allowed to publish posts in this post type."
 msgstr "Xin lỗi, bạn không có quyền đăng bài viết."
 
-#: wp-includes/class-wp-customize-nav-menus.php:789
+#: wp-includes/class-wp-customize-nav-menus.php:805
 #: wp-includes/class-wp-xmlrpc-server.php:1377
 #: wp-includes/class-wp-xmlrpc-server.php:1861
 #: wp-includes/class-wp-xmlrpc-server.php:3381
@@ -9703,12 +9716,12 @@ msgstr "Đường dẫn yêu cầu không tồn tại."
 
 #. translators: 1: Database error message, 2: SQL query, 3: Name of the calling
 #. function
-#: wp-includes/wp-db.php:1370
+#: wp-includes/wp-db.php:1363
 msgid "WordPress database error %1$s for query %2$s made by %3$s"
 msgstr "Cơ sở dữ liệu của WordPress gặp lỗi %1$s với truy vấn %2$s yêu cầu bởi %3$s"
 
 #. translators: 1: Database error message, 2: SQL query
-#: wp-includes/wp-db.php:1373
+#: wp-includes/wp-db.php:1366
 msgid "WordPress database error %1$s for query %2$s"
 msgstr "Cơ sở dữ liệu của WordPress gặp lỗi %1$s với truy vấn %2$s"
 
@@ -9862,23 +9875,23 @@ msgctxt "widgets"
 msgid "%1$s on %2$s"
 msgstr "%1$s trong %2$s"
 
-#: wp-includes/widgets.php:1426
+#: wp-includes/widgets.php:1429
 msgid "Untitled"
 msgstr "Không có tiêu đề"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1519
 msgid "How many items would you like to display?"
 msgstr "Bạn muốn hiển thị bao nhiêu tin?"
 
-#: wp-includes/widgets.php:1526
+#: wp-includes/widgets.php:1529
 msgid "Display item content?"
 msgstr "Hiển thị nội dung của tin?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1532
 msgid "Display item author if available?"
 msgstr "Hiển thị tác giả của tin nếu có?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1535
 msgid "Display item date?"
 msgstr "Hiển thị ngày?"
 
@@ -9961,28 +9974,28 @@ msgid "Could not write file %s"
 msgstr "Không thể ghi tập tin %s"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2595
+#: wp-includes/functions.php:2596
 msgid "You are attempting to log out of %s"
 msgstr "Bạn đang đăng xuất khỏi %s"
 
-#: wp-includes/functions.php:2616
+#: wp-includes/functions.php:2617
 msgid "WordPress Failure Notice"
 msgstr "Thông báo lỗi WordPress"
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2602
+#: wp-includes/functions.php:2603
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Bạn có thực sự muốn <a href='%s'>đăng xuất</a> không?"
 
-#: wp-includes/functions.php:2611 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2612 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Xin vui lòng thử lại."
 
-#: wp-includes/functions.php:2736
+#: wp-includes/functions.php:2737
 msgid "&laquo; Back"
 msgstr "&laquo; Quay lại"
 
-#: wp-includes/functions.php:2748 wp-load.php:92
+#: wp-includes/functions.php:2749 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Lỗi"
 
@@ -9991,20 +10004,20 @@ msgstr "WordPress &rsaquo; Lỗi"
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3838 wp-includes/functions.php:3966
-#: wp-includes/functions.php:4089
+#: wp-includes/functions.php:3839 wp-includes/functions.php:3967
+#: wp-includes/functions.php:4090
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s đã bị <strong>loại bỏ</strong> từ phiên bản %2$s! Hãy sử dụng %3$s."
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3841 wp-includes/functions.php:3969
-#: wp-includes/functions.php:4092
+#: wp-includes/functions.php:3842 wp-includes/functions.php:3970
+#: wp-includes/functions.php:4093
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s is <strong>deprecated</strong> since version %2$s! Hiện không có giải pháp thay thế."
 
-#: wp-includes/functions.php:4669
+#: wp-includes/functions.php:4670
 msgid "Select a city"
 msgstr "Chọn thành phố"
 
@@ -10077,11 +10090,11 @@ msgstr "Dòng thông tin: %1$s %2$s bài viết bởi %3$s"
 msgid "%1$s %2$s Search Results for &#8220;%3$s&#8221; Feed"
 msgstr "Dòng thông tin cho %1$s %2$s kết quả tìm kiếm &#8220;%3$s&#8221;"
 
-#: wp-includes/general-template.php:3714
+#: wp-includes/general-template.php:3716
 msgid "&laquo; Previous"
 msgstr "&laquo; Trang trước"
 
-#: wp-includes/general-template.php:3715
+#: wp-includes/general-template.php:3717
 msgid "Next &raquo;"
 msgstr "Trang sau &raquo;"
 
@@ -10351,7 +10364,7 @@ msgstr "Chữ nhỏ ở trên"
 msgid "Cut"
 msgstr "Cắt"
 
-#: wp-includes/class-wp-customize-manager.php:4165
+#: wp-includes/class-wp-customize-manager.php:4202
 #: wp-includes/class-wp-editor.php:1045
 msgid "Copy"
 msgstr "Sao chép"
@@ -10477,8 +10490,8 @@ msgstr "Thêm đường dẫn"
 msgid "Remove link"
 msgstr "Xóa đường dẫn"
 
-#: wp-includes/class-wp-customize-manager.php:5095
-#: wp-includes/class-wp-customize-manager.php:5136
+#: wp-includes/class-wp-customize-manager.php:5135
+#: wp-includes/class-wp-customize-manager.php:5176
 msgid "Fill Screen"
 msgstr "Cả màn hình"
 
@@ -10634,7 +10647,7 @@ msgstr "AIM"
 msgid "Jabber / Google Talk"
 msgstr "Jabber / Google Talk"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1410
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "Có lỗi, có thể là dòng thông tin hiện không hoạt động. Hãy thử lại sau."
 
@@ -10786,7 +10799,7 @@ msgstr "ID của đối tượng không hợp lệ."
 msgid "<strong>ERROR</strong>: The password field is empty."
 msgstr "<strong>Lỗi</strong>: Xin điền mật khẩu."
 
-#: wp-includes/functions.php:5328 wp-includes/user.php:285
+#: wp-includes/functions.php:5329 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Hãy đăng nhập lại."
 
@@ -10902,7 +10915,7 @@ msgstr "Đăng kí thành viên mới đã bị khóa."
 msgid "Post Comment"
 msgstr "Phản hồi"
 
-#: wp-includes/functions.php:4714 wp-includes/functions.php:4718
+#: wp-includes/functions.php:4715 wp-includes/functions.php:4719
 msgid "UTC"
 msgstr "UTC"
 
@@ -10934,7 +10947,7 @@ msgstr "<strong>LỖI</strong>: Tài khoản của bạn đã bị đánh dấu 
 
 #. translators: 1: WordPress version number, 2: Minimum required MySQL version
 #. number
-#: wp-includes/wp-db.php:3318
+#: wp-includes/wp-db.php:3311
 msgid "<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher"
 msgstr "<strong>LỖI</strong>: WordPress %1$s yêu cầu MySQL %2$s hoặc là cao hơn."
 
@@ -10955,7 +10968,7 @@ msgid "If you do not activate your username within two days, you will have to si
 msgstr "Nếu bạn không kích hoạt tài khoản của bạn trong 2 ngày, bạn sẽ phải đăng ký lại."
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4033
+#: wp-includes/functions.php:4034
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s đã gọi đến một tham số đã được <strong>loại bỏ</strong> kể từ phiên bản %2$s mà không có lựa chọn phụ nào cả."
 
@@ -10963,13 +10976,13 @@ msgstr "%1$s đã gọi đến một tham số đã được <strong>loại bỏ
 msgid "This argument has changed to an array to match the behavior of the other cron functions."
 msgstr "Tham số này đã thay đổi thành dãy số phù hợp với cách xử lý của các tính năng cron khác"
 
-#: wp-includes/functions.php:4722
+#: wp-includes/functions.php:4723
 msgid "Manual Offsets"
 msgstr "Chỉnh vị trí bằng tay"
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4030
+#: wp-includes/functions.php:4031
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%1$s được gọi với một tham số đã bị <strong>loại bỏ</strong> kể từ phiên bản %2$s! %3$s"
 
@@ -10989,7 +11002,7 @@ msgstr "Không thể tạo tài khoản với tên đăng nhập bỏ trống."
 msgid "You cannot use that email address to signup. We are having problems with them blocking some of our email. Please use another email provider."
 msgstr "Bạn không thể dùng địa chỉ thư điện tử này để đăng ký. Chúng tôi đang có một vài vấn đề với nhà cung cấp dịch vụ thư điện tử này. Vui lòng sử nhà cung cấp dịch vụ thư điện tử khác."
 
-#: wp-includes/class-wp-customize-nav-menus.php:951
+#: wp-includes/class-wp-customize-nav-menus.php:967
 #: wp-includes/script-loader.php:1129 wp-signup.php:562
 msgid "Next"
 msgstr "Tiếp theo"
@@ -11024,11 +11037,11 @@ msgstr "Mỗi giờ"
 msgid "Entries <abbr title=\"Really Simple Syndication\">RSS</abbr>"
 msgstr "<abbr title=\"Dòng thông tin\">RSS</abbr> cho bài viết"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1516
 msgid "Give the feed a title (optional):"
 msgstr "Tiêu đề của RSS (không bắt buộc):"
 
-#: wp-includes/widgets.php:1510
+#: wp-includes/widgets.php:1513
 msgid "Enter the RSS feed URL here:"
 msgstr "Nhập đường dẫn của RSS:"
 
@@ -11045,7 +11058,7 @@ msgstr[0] "Đã lên lịch <span class=\"count\">(%s)</span>"
 msgid "Registration Form"
 msgstr "Form đăng kí"
 
-#: wp-includes/widgets/class-wp-widget-text.php:468
+#: wp-includes/widgets/class-wp-widget-text.php:489
 msgid "Automatically add paragraphs"
 msgstr "Tự định dạng đoạn"
 
@@ -11334,7 +11347,7 @@ msgstr "Cho phép mọi người gửi phản hồi cho bài viết mới"
 msgid "Height"
 msgstr "Cao"
 
-#: wp-includes/class-wp-customize-manager.php:4901
+#: wp-includes/class-wp-customize-manager.php:4941
 #: wp-includes/customize/class-wp-customize-color-control.php:51
 #: wp-includes/customize/class-wp-customize-media-control.php:225
 #: wp-includes/customize/class-wp-customize-media-control.php:235
@@ -11356,8 +11369,8 @@ msgstr "Mặc định"
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:135
 #: wp-includes/widgets/class-wp-widget-search.php:70
 #: wp-includes/widgets/class-wp-widget-tag-cloud.php:126
-#: wp-includes/widgets/class-wp-widget-text.php:453
-#: wp-includes/widgets/class-wp-widget-text.php:486
+#: wp-includes/widgets/class-wp-widget-text.php:474
+#: wp-includes/widgets/class-wp-widget-text.php:507
 msgid "Title:"
 msgstr "Tiêu đề:"
 
@@ -11374,7 +11387,7 @@ msgid "Strength indicator"
 msgstr "Độ bảo mật"
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3714
+#: wp-includes/functions.php:3715
 msgid "Widgets"
 msgstr "Widget"
 
@@ -11418,7 +11431,7 @@ msgstr "Sửa"
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Bạn phải <a href=\"%s\">đăng nhập</a> để gửi phản hồi."
 
-#: wp-includes/category-template.php:1139
+#: wp-includes/category-template.php:1131
 msgid "Tags: "
 msgstr "Thẻ:"
 
@@ -11561,7 +11574,7 @@ msgstr "<strong>LỖI</strong>: Xin điền tên người dùng."
 msgid "Email"
 msgstr "Email"
 
-#: wp-includes/class-wp-customize-manager.php:4832
+#: wp-includes/class-wp-customize-manager.php:4872
 #: wp-includes/class-wp-xmlrpc-server.php:540
 msgid "Site Title"
 msgstr "Tên website"
@@ -11599,7 +11612,7 @@ msgstr "Không"
 msgid "Update Category"
 msgstr "Lưu các thay đổi"
 
-#: wp-includes/class-wp-customize-manager.php:4578
+#: wp-includes/class-wp-customize-manager.php:4617
 #: wp-includes/script-loader.php:549 wp-includes/script-loader.php:689
 msgid "Publish"
 msgstr "Đăng bài viết"
@@ -11649,7 +11662,7 @@ msgstr "Viết bài mới"
 msgid "Users"
 msgstr "Thành viên"
 
-#: wp-includes/customize/class-wp-customize-nav-menu-control.php:46
+#: wp-includes/customize/class-wp-customize-nav-menu-control.php:55
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:61
 #: wp-includes/script-loader.php:879
 msgid "Done"
@@ -11659,7 +11672,7 @@ msgstr "Hoàn thành"
 msgid "Anonymous"
 msgstr "Khách"
 
-#: wp-includes/class-wp-customize-manager.php:4119
+#: wp-includes/class-wp-customize-manager.php:4156
 #: wp-includes/class-wp-editor.php:1119 wp-includes/media-template.php:1247
 msgid "Preview"
 msgstr "Xem thử"
@@ -11775,7 +11788,7 @@ msgid "Update"
 msgstr "Cập nhật"
 
 #: wp-includes/class-wp-customize-control.php:634
-#: wp-includes/class-wp-customize-nav-menus.php:1065
+#: wp-includes/class-wp-customize-nav-menus.php:1081
 msgid "Add"
 msgstr "Thêm"
 
@@ -11787,7 +11800,7 @@ msgstr "Xem bài viết"
 msgid "Edit Post"
 msgstr "Chỉnh sửa bài viết"
 
-#: wp-includes/deprecated.php:3130 wp-includes/functions.php:2606
+#: wp-includes/deprecated.php:3130 wp-includes/functions.php:2607
 msgid "Are you sure you want to do this?"
 msgstr "Bạn chắc chắn muốn làm việc này không?"
 
@@ -11841,10 +11854,10 @@ msgstr "Lùi lại"
 msgid "Plugins"
 msgstr "Các gói mở rộng"
 
-#: wp-includes/class-wp-customize-manager.php:4090
+#: wp-includes/class-wp-customize-manager.php:4129
 #: wp-includes/script-loader.php:146 wp-includes/script-loader.php:307
-#: wp-includes/widgets/class-wp-widget-text.php:500
-#: wp-includes/widgets/class-wp-widget-text.php:515
+#: wp-includes/widgets/class-wp-widget-text.php:521
+#: wp-includes/widgets/class-wp-widget-text.php:536
 msgid "Dismiss"
 msgstr "Hủy"
 
@@ -11902,7 +11915,7 @@ msgctxt "noun"
 msgid "Comment"
 msgstr "Bình luận"
 
-#: wp-includes/class-wp-customize-manager.php:5261
+#: wp-includes/class-wp-customize-manager.php:5301
 #: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1695
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
 #: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1125
@@ -11940,7 +11953,7 @@ msgstr "Thêm/Xóa thẻ"
 msgid "All Categories"
 msgstr "Tất cả chuyên mục"
 
-#: wp-includes/class-wp-customize-nav-menus.php:1095
+#: wp-includes/class-wp-customize-nav-menus.php:1111
 #: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1700
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
 #: wp-includes/media-template.php:376 wp-includes/media-template.php:557
@@ -11966,7 +11979,7 @@ msgstr "Thêm bài viết"
 msgid "Alignment"
 msgstr "Căn chỉnh"
 
-#: wp-includes/class-wp-customize-manager.php:4583
+#: wp-includes/class-wp-customize-manager.php:4622
 #: wp-includes/script-loader.php:551 wp-includes/script-loader.php:693
 msgid "Save Draft"
 msgstr "Lưu nháp"

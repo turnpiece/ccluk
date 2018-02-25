@@ -24,7 +24,7 @@ msgstr "以下のサイトを削除しようとしています:"
 msgid "User could not be added to this site."
 msgstr "このサイトにユーザーを追加できません。"
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "The username and a link to set the password will be mailed to this email address."
 msgstr "ユーザー名、パスワード設定用のリンクをこのメールアドレス宛てに送信します。"
 
@@ -551,7 +551,7 @@ msgstr "サイトの属性を設定"
 msgid "New registrations settings"
 msgstr "新しい登録設定"
 
-#: wp-admin/network/settings.php:418
+#: wp-admin/network/settings.php:420
 msgid "Enable menus"
 msgstr "メニューを有効化"
 
@@ -954,13 +954,13 @@ msgstr "参考のため、元の設定手順をここに表示します。"
 msgid "Because your installation is in a directory, the sites in your WordPress network must use sub-directories."
 msgstr "この WordPress はディレクトリにインストールされているため、サイトネットワーク内のサイトはサブディレクトリを使う必要があります。"
 
-#: wp-admin/network.php:63
-msgid "Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar."
-msgstr "このコードを追加してブラウザーで再読み込みを行うと、マルチサイトが有効化されます。追加コードのアーカイブは「サイトネットワーク管理」」ナビゲーションメニューからアクセスできるこの画面に保存されます。同メニューをクリックするか、ツールバードロップダウンにある「参加サイト」から各サイト名をクリックすることで、サイトネットワーク管理画面とサイト管理画面を切り替えられます。"
-
 #: wp-admin/network.php:71
 msgid "Network"
 msgstr "サイトネットワーク"
+
+#: wp-admin/network.php:63
+msgid "Once you add this code and refresh your browser, multisite should be enabled. This screen, now in the Network Admin navigation menu, will keep an archive of the added code. You can toggle between Network Admin and Site Admin by clicking on the Network Admin or an individual site name under the My Sites dropdown in the Toolbar."
+msgstr "このコードを追加してブラウザーで再読み込みを行うと、マルチサイトが有効化されます。追加コードのアーカイブは「サイトネットワーク管理」」ナビゲーションメニューからアクセスできるこの画面に保存されます。同メニューをクリックするか、ツールバードロップダウンにある「参加サイト」から各サイト名をクリックすることで、サイトネットワーク管理画面とサイト管理画面を切り替えられます。"
 
 #: wp-admin/network.php:29
 msgid "The Network creation panel is not for WordPress MU networks."
@@ -1062,10 +1062,6 @@ msgstr "これはサイトネットワーク上の全サイトのメインテー
 msgid "This table shows all users across the network and the sites to which they are assigned."
 msgstr "このテーブルでは、サイトネットワーク上のすべてのユーザーと所属するサイトを表示しています。"
 
-#: wp-admin/network/user-new.php:21
-msgid "Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them."
-msgstr "サイトを作成せずサイトネットワークに登録したユーザーは、メインダッシュボードサイトの購読者として追加され、同サイト上でアカウント管理用のプロフィールページが与えられます。サイトを作成するまでは、これらのユーザーにはメインナビゲーションでダッシュボードと参加サイトのみが表示されます。"
-
 #: wp-admin/network/settings.php:50
 msgid "Registration settings can disable/enable public signups. If you let others sign up for a site, install spam plugins. Spaces, not commas, should separate names banned as sites for this network."
 msgstr "登録の設定で、公開登録の有効化、無効化を行えます。サイトへの登録を自由に行えるようにしたい場合は、スパム対策プラグインをインストールしましょう。このサイトネットワーク上で禁止したいサイト名を半角スペース (カンマではありません) 区切りで入力してください。"
@@ -1077,6 +1073,10 @@ msgstr "この画面でサイトネットワーク全体の設定を指定、変
 #: wp-admin/network/themes.php:223
 msgid "If the network admin disables a theme that is in use, it can still remain selected on that site. If another theme is chosen, the disabled theme will not appear in the site&#8217;s Appearance > Themes screen."
 msgstr "サイトネットワーク管理者が利用中のテーマを停止した場合、そのテーマをサイト上で使い続けることはできます。その後に他のテーマを選ぶと、停止されたテーマはサイトの「外観 > テーマ」画面に表示されなくなります。"
+
+#: wp-admin/network/user-new.php:21
+msgid "Users who are signed up to the network without a site are added as subscribers to the main or primary dashboard site, giving them profile pages to manage their accounts. These users will only see Dashboard and My Sites in the main navigation until a site is created for them."
+msgstr "サイトを作成せずサイトネットワークに登録したユーザーは、メインダッシュボードサイトの購読者として追加され、同サイト上でアカウント管理用のプロフィールページが与えられます。サイトを作成するまでは、これらのユーザーにはメインナビゲーションでダッシュボードと参加サイトのみが表示されます。"
 
 #: wp-admin/network/settings.php:51
 msgid "New site settings are defaults applied when a new site is created in the network. These include welcome email for when a new site or user account is registered, and what&#8127;s put in the first post, page, comment, comment author, and comment URL."
@@ -1223,7 +1223,7 @@ msgstr "登録の設定"
 msgid "New Site Settings"
 msgstr "新規サイト設定"
 
-#: wp-admin/network/settings.php:396
+#: wp-admin/network/settings.php:398
 msgid "Enable administration menus"
 msgstr "管理メニューを有効化"
 
@@ -1328,11 +1328,11 @@ msgstr "アップロードファイルの最大サイズ"
 msgid "Default Language"
 msgstr "初期設定言語:"
 
-#: wp-admin/network/site-new.php:246
+#: wp-admin/network/site-new.php:248
 msgid "Admin Email"
 msgstr "管理者メールアドレス"
 
-#: wp-admin/network/site-new.php:250
+#: wp-admin/network/site-new.php:252
 msgid "A new user will be created if the above email address is not in the database."
 msgstr "上記メールアドレスがデータベースになければ新規ユーザーが作成されます。"
 
@@ -1340,7 +1340,7 @@ msgstr "上記メールアドレスがデータベースになければ新規ユ
 msgid "Cannot create an empty user."
 msgstr "空のユーザーは作成できません。"
 
-#: wp-admin/network/site-new.php:262
+#: wp-admin/network/site-new.php:264
 msgid "Add Site"
 msgstr "サイトを追加"
 

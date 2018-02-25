@@ -1,0 +1,1458 @@
+# Translation of Themes - OnePress in Dutch
+# This file is distributed under the same license as the Themes - OnePress package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-09-23 12:21:51+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: nl\n"
+"Project-Id-Version: Themes - OnePress\n"
+
+#. Description of the plugin/theme
+msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress is een creatief en flexibel WordPress één-pagina thema dat goed past in een zakelijke website, portfolio, internetbureau, product showcase, freelancers en iedereen die goed design waardeert. Het thema is elegant en klassiek, een prima voorbeeld van een Bootstrap 4 WordPress thema met compatibiliteit voor de laatste versie van WooCommerce. (Live voorbeeld: http://www.famethemes.com/preview/?theme=OnePress)"
+
+#. #-#-#-#-#  onepress.pot (OnePress 1.4.3)  #-#-#-#-#
+#. Theme Name of the plugin/theme
+#: inc/dashboard.php:327
+msgid "OnePress"
+msgstr "OnePress"
+
+#: inc/customizer.php:597
+msgid "Check this box to show featured image on single post."
+msgstr "Vink dit aan om de uitgelichte afbeelding te tonen op een enkel bericht."
+
+#: inc/customizer.php:582
+msgid "Check this box to show single post meta such as post date, author, category,..."
+msgstr "Vink dit aan om de berichtmeta te tonen zoals datum, auteur, categorie"
+
+#: inc/customizer.php:580
+msgid "Show single post meta"
+msgstr "Toon berichtmeta op enkel bericht"
+
+#: inc/customizer.php:567
+msgid "Check this box to show post thumbnail on single post."
+msgstr "Vink dit aan om de thumbnail van de uitgelichte afbeelding te tonen op een enkel bericht."
+
+#: inc/customizer.php:565 inc/customizer.php:595
+msgid "Show single post thumbnail"
+msgstr "Toon bericht-thumbnail op enkel bericht"
+
+#: inc/customizer.php:550
+msgid "Single Post"
+msgstr "Enkel bericht"
+
+#: inc/customizer.php:851
+msgid "Slider duration speed"
+msgstr "Snelheid van de slider"
+
+#: inc/customizer.php:852
+msgid "The amount of time in between slides, expressed as the number of milliseconds."
+msgstr "De tijd tussen slides, uitgedrukt in het aantal millisecondes."
+
+#: inc/customizer.php:835
+msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
+msgstr "De snelheid van het invallen van de afbeelding. Hele getallen in millisecondes worden geaccepteerd."
+
+#: inc/customizer.php:834
+msgid "Slider animation speed"
+msgstr "Animatiesnelheid van de slider"
+
+#: inc/customizer.php:816
+msgid "Text animation speed"
+msgstr "Animatiesnelheid van de tekst"
+
+#: inc/customizer.php:3021
+msgid "Search"
+msgstr "Zoeken"
+
+#: inc/customizer.php:3025
+msgid "Font Awesome"
+msgstr "Font Awesome"
+
+#: inc/dashboard.php:379
+msgid "Child theme uses it’s own theme setting name, would you like to copy setting data from parent theme to this child theme?"
+msgstr "Een child-thema gebruikt zijn eigen naam voor thema-instellingen. Wil je de instellingen van het hoofdthema kopiëren naar het child-thema?"
+
+#: functions.php:101
+msgid "Contact Form 7"
+msgstr "Contact Form 7"
+
+#: inc/customizer.php:126
+msgid "Site Layout"
+msgstr "Site-layout"
+
+#: inc/dashboard.php:238
+msgid "Details"
+msgstr "Details"
+
+#: inc/dashboard.php:558
+msgid "Are you sure want to copy ?"
+msgstr "Weet je zeker dat je wilt kopiëren?"
+
+#: inc/dashboard.php:399
+msgid "Copy now"
+msgstr "Nu kopiëren"
+
+#: inc/dashboard.php:391
+msgid "To Theme"
+msgstr "Naar thema"
+
+#: inc/dashboard.php:385
+msgid "From Theme"
+msgstr "Van thema"
+
+#: inc/dashboard.php:377
+msgid "You're using %1$s theme, It's a child theme of OnePress"
+msgstr "Je gebruikt het %1$s thema, dat is een child-thema van OnePress"
+
+#: inc/dashboard.php:166
+msgid "Import Demo Data"
+msgstr "Demodata importeren"
+
+#: inc/dashboard.php:419
+msgid "Recommend Plugins"
+msgstr "Beveel plugins aan"
+
+#: inc/dashboard.php:402
+msgid "Your settings copied."
+msgstr "Je instellingen zijn gekopieerd."
+
+#: inc/customizer.php:1586
+msgid "Read More Text"
+msgstr "\"Lees meer\"-tekst"
+
+#: inc/customizer.php:1581 section-parts/section-gallery.php:38
+msgid "View More"
+msgstr "Lees meer"
+
+#: inc/customizer.php:1571
+msgid "Read More Link"
+msgstr "\"Lees meer\"-link"
+
+#: inc/customizer.php:132
+msgid "No sidebar"
+msgstr "Geen sidebar"
+
+#: inc/customizer.php:131
+msgid "Left sidebar"
+msgstr "Linker sidebar"
+
+#: inc/customizer.php:130
+msgid "Right sidebar"
+msgstr "Rechter sidebar"
+
+#: functions.php:105
+msgid "Famethemes Demo Importer"
+msgstr "Famethemes Demo-importer"
+
+#: inc/dashboard.php:166
+msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
+msgstr "Bespaar tijd door onze demo-data te importeren. Je website is binnen een paar minuten ingesteld. %s"
+
+#: inc/customizer.php:127
+msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
+msgstr "Site layout, toegepast op alle pagina's, met uitzondering van voorpagina en eigen templates."
+
+#: functions.php:153
+msgid "WooCommerce Sidebar"
+msgstr "WooCommerce Sidebar"
+
+#: inc/customizer.php:1468
+msgid "Slider"
+msgstr "Slider"
+
+#: inc/customizer.php:1405
+msgid "Page"
+msgstr "Pagina"
+
+#: inc/customizer.php:1461
+msgid "Display"
+msgstr "Weergave"
+
+#: inc/customizer.php:1441
+msgid "Layout"
+msgstr "Layout"
+
+#: inc/customizer.php:1339 section-parts/section-gallery.php:4
+msgid "Gallery"
+msgstr "Galerij"
+
+#: inc/customizer.php:2983
+msgid "Upgrade to OnePress Plus to unlock this feature."
+msgstr "Upgraden naar OnePress Plus om deze functie in te schakelen."
+
+#: inc/customizer.php:2098
+msgid "1 Column"
+msgstr "1 kolom"
+
+#: inc/customizer.php:1555
+msgid "Enable Lightbox"
+msgstr "Lightbox inschakelen"
+
+#: inc/customizer.php:1484
+msgid "Item Spacing"
+msgstr "Ruimte tussen items"
+
+#: inc/customizer.php:1469
+msgid "Justified"
+msgstr "Uitgevuld"
+
+#: inc/customizer.php:1500
+msgid "Row Height"
+msgstr "Hoogte van de rij"
+
+#: inc/customizer.php:1516
+msgid "Layout columns"
+msgstr "Layout van kolommen"
+
+#: inc/customizer.php:1470
+msgid "Masonry"
+msgstr "Masonry"
+
+#: inc/customizer.php:1467
+msgid "Carousel"
+msgstr "Carousel"
+
+#: inc/customizer.php:1466
+msgid "Grid"
+msgstr "Raster"
+
+#: inc/customizer.php:1446
+msgid "Default, inside container"
+msgstr "Standaard, binnen container"
+
+#: inc/customizer.php:1324 section-parts/section-gallery.php:2
+msgid "gallery"
+msgstr "galerij"
+
+#: inc/customizer.php:1289
+msgid "Section: Gallery"
+msgstr "Sectie: Galerij"
+
+#: inc/customizer.php:1541
+msgid "Number items"
+msgstr "Geef items een nummer"
+
+#: inc/customizer.php:1422
+msgid "Select Gallery Page"
+msgstr "Selecteer galerijpagina"
+
+#: inc/customizer.php:1400
+msgid "Select Gallery Source"
+msgstr "Selecteer galerijbron"
+
+#: inc/customizer.php:1427
+msgid "Select a page which have content contain [gallery] shortcode."
+msgstr "Selecteer een pagina met de [gallery] shortcode in de inhoud."
+
+#: inc/customizer.php:385
+msgid "Scroll to top when click to the site logo or site title, only apply on front page."
+msgstr "Scroll naar boven wanneer je op het het site-logo of site-titel klikt. Alleen toepassen op voorpagina."
+
+#: inc/dashboard.php:196 inc/dashboard.php:497
+msgid "Install Now"
+msgstr "Nu installeren"
+
+#: inc/dashboard.php:537
+msgid "Hey."
+msgstr "Hallo."
+
+#: inc/dashboard.php:538
+msgid "FameThemes Demo Importer"
+msgstr "FameThemes Demo-importer"
+
+#: inc/customizer.php:1123
+msgid "Button #2 style"
+msgstr "Knop #2 stijl"
+
+#: inc/dashboard.php:329
+msgid "One Click Demo Import"
+msgstr "Een-klik demo-importer"
+
+#: inc/dashboard.php:218 inc/dashboard.php:519
+msgid "Active Now"
+msgstr "Nu actief"
+
+#: inc/dashboard.php:535
+msgid "%1$s you will need to install and activate the %2$s plugin first."
+msgstr "%1$s je dient eerst de %2$s plugin te installeren en activeren."
+
+#: inc/customizer.php:1077 inc/customizer.php:1130
+msgid "Primary"
+msgstr "Primair"
+
+#: inc/customizer.php:1080 inc/customizer.php:1133
+msgid "Warning"
+msgstr "Waarschuwing"
+
+#: inc/customizer.php:1079 inc/customizer.php:1132
+msgid "Info"
+msgstr "Informatie"
+
+#: inc/customizer.php:1076 inc/customizer.php:1129
+msgid "Button"
+msgstr "Knop"
+
+#: inc/customizer.php:1078 inc/customizer.php:1131
+msgid "Success"
+msgstr "Gelukt"
+
+#: inc/customizer.php:2644
+msgid "More News Button Text"
+msgstr "Knoptekst voor meer nieuws"
+
+#: inc/customizer.php:2633
+msgid "It should be your blog page link."
+msgstr "Het zou de link naar je blogpagina moeten zijn."
+
+#: inc/customizer.php:1081 inc/customizer.php:1134
+msgid "Danger"
+msgstr "Gevaar"
+
+#: inc/customizer.php:1070
+msgid "Button #1 style"
+msgstr "Knop #1 stijl"
+
+#: inc/customizer.php:1074 inc/customizer.php:1127
+msgid "Button Primary"
+msgstr "Primaire knop"
+
+#: inc/customizer.php:1075 inc/customizer.php:1128
+msgid "Button Secondary"
+msgstr "Secondaire knop"
+
+#: inc/customizer.php:540
+msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "Het nieuwsbriefformulier gebruikt MailChimp, volg deze <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">handleiding</a> om te zien hoe je de MailChimp Action-URL verkrijgt. Voorbeeld: <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+
+#: inc/customizer.php:761
+msgid "The hero content padding bottom in percent (%)."
+msgstr "De hero-inhoud padding-bottom in percentages (%)."
+
+#: inc/customizer.php:745
+msgid "The hero content padding top in percent (%)."
+msgstr "De hero-inhoud padding-top in percentages (%)."
+
+#: inc/customizer.php:817
+msgid "The delay between the changing of each phrase in milliseconds."
+msgstr "De vertraging van het wisselen van tekst in millisecondes."
+
+#: inc/customizer.php:232
+msgid "Footer Info Background"
+msgstr "Achtergrond van footer-info"
+
+#: inc/customizer.php:217
+msgid "Footer Background"
+msgstr "Achtergrond van footer"
+
+#: inc/customizer.php:84
+msgid "Hide site tagline"
+msgstr "Verberg site-ondertitel"
+
+#: inc/customizer.php:69
+msgid "Hide site title"
+msgstr "Verberg site-titel"
+
+#: inc/customizer.php:1931 inc/customizer.php:2141
+msgid "image"
+msgstr "Afbeelding"
+
+#: inc/customizer.php:797
+msgid "Text animation"
+msgstr "Tekst-animatie"
+
+#: inc/dashboard.php:130
+msgid "%1$s action required"
+msgid_plural "%1$s actions required"
+msgstr[0] "%1$s actie vereist"
+msgstr[1] "%1$s acties vereist"
+
+#: inc/dashboard.php:132
+msgid "OnePress Theme %s"
+msgstr "OnePress Thema %s"
+
+#: inc/customizer.php:611 inc/customizer.php:629
+msgid "Custom CSS"
+msgstr "Aangepaste CSS"
+
+#: section-parts/section-features.php:5
+msgid "Why choose Us"
+msgstr "Waarom voor ons kiezen"
+
+#: inc/customizer.php:2090
+msgid "Services Layout Setting"
+msgstr "Dienstenlayout instelling"
+
+#: inc/customizer.php:1949 inc/customizer.php:2483
+msgid "Custom Link"
+msgstr "Aangepaste link"
+
+#: inc/customizer.php:1945
+msgid "Description"
+msgstr "Omschrijving"
+
+#: inc/customizer.php:1914
+msgid "Features content"
+msgstr "Inhoud van de features"
+
+#: inc/customizer.php:1878
+msgid "Features Layout Setting"
+msgstr "Features layout instelling"
+
+#: inc/customizer.php:1825 section-parts/section-features.php:4
+msgid "Features"
+msgstr "Eigenschappen"
+
+#: inc/customizer.php:1376 inc/customizer.php:1687 inc/customizer.php:1862
+#: inc/customizer.php:2073 inc/customizer.php:2262 inc/customizer.php:2418
+#: inc/customizer.php:2588 inc/customizer.php:2743
+msgid "Section Description"
+msgstr "Beschrijving van sectie"
+
+#: inc/customizer.php:1810 section-parts/section-features.php:2
+msgid "features"
+msgstr "features"
+
+#: inc/customizer.php:1775
+msgid "Section: Features"
+msgstr "Sectie: Features"
+
+#: inc/customizer.php:1154
+msgid "Content Text"
+msgstr "Inhoud tekst"
+
+#: inc/customizer.php:1172 inc/customizer.php:1940 inc/customizer.php:2150
+msgid "Image"
+msgstr "Afbeelding"
+
+#: inc/customizer.php:992
+msgid "Layout 2"
+msgstr "Layout 2"
+
+#: inc/customizer.php:991
+msgid "Layout 1"
+msgstr "Layout 1"
+
+#: inc/customizer.php:986
+msgid "Display Layout"
+msgstr "Weergave-layout"
+
+#: inc/customizer.php:473 inc/customizer.php:1930 inc/customizer.php:1935
+#: inc/customizer.php:2140 inc/customizer.php:2145
+msgid "Icon"
+msgstr "Symbool"
+
+#: inc/customizer.php:477
+msgid "URL"
+msgstr "URL"
+
+#: inc/customizer.php:469
+msgid "Social network"
+msgstr "Sociaal netwerk"
+
+#: footer.php:34
+msgid "Subscribe"
+msgstr "Aanmelden"
+
+#: inc/customizer.php:460
+msgid "Socials"
+msgstr "Social media"
+
+#: inc/customizer.php:371
+msgid "Apply for front page template only."
+msgstr "Toepassen enkel op voorpagina."
+
+#: inc/customizer.php:369
+msgid "Header Transparent"
+msgstr "Transparante header"
+
+#: footer.php:33
+msgid "Enter your e-mail address"
+msgstr "Voer je e-mailadres in"
+
+#: inc/customizer.php:1885 inc/customizer.php:2097 inc/customizer.php:2441
+msgid "2 Columns"
+msgstr "2 Kolommen"
+
+#: inc/dashboard.php:355
+msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
+msgstr "Support voor %s WordPress thema wordt alleen gegeven via het FameThemes support ticketsysteem."
+
+#: inc/dashboard.php:349
+msgid "OnePress Documentation"
+msgstr "OnePress documentatie"
+
+#: inc/customizer.php:1883 inc/customizer.php:2095 inc/customizer.php:2439
+msgid "4 Columns"
+msgstr "4 kolommen"
+
+#: inc/customizer.php:1884 inc/customizer.php:2096 inc/customizer.php:2440
+msgid "3 Columns"
+msgstr "3 kolommen"
+
+#: inc/customizer.php:1763 inc/customizer.php:1974
+msgid "Page Excerpt"
+msgstr "Paginasamenvatting"
+
+#: inc/customizer.php:1762 inc/customizer.php:1973
+msgid "Full Page Content"
+msgstr "Volledige inhoud van pagina"
+
+#: inc/customizer.php:2434
+msgid "Team Layout Setting"
+msgstr "Team layout instelling"
+
+#: inc/customizer.php:942
+msgid "Enable parallax effect (apply for first BG image only)"
+msgstr "Parallax-effect inschakelen (toepassen enkel voor eerste BG-afbeelding)"
+
+#: inc/customizer.php:277
+msgid "Only set if you don't use an image logo."
+msgstr "Alleen instellen als je geen afbeeldingslogo gebruikt."
+
+#: inc/customizer.php:1757 inc/customizer.php:1968
+msgid "Item content source"
+msgstr "inhoudsbron van item"
+
+#: inc/customizer.php:1718
+msgid "About content page"
+msgstr "Inhoud van \"Over\"-pagina"
+
+#: inc/customizer.php:290
+msgid "Menu Link Color"
+msgstr "Menu linkkleur"
+
+#: inc/customizer.php:305
+msgid "Menu Link Hover/Active Color"
+msgstr "Menu linkkleur bij hover/active"
+
+#: inc/customizer.php:321
+msgid "Menu Link Hover/Active BG Color"
+msgstr "Menu achtergrond linkkleur bij hover/active"
+
+#: inc/customizer.php:336
+msgid "Responsive Menu Button Color"
+msgstr "Responsive menu knopkleur"
+
+#: inc/customizer.php:352
+msgid "Center vertical align for menu"
+msgstr "Midden-verticaal uitlijnen voor menu"
+
+#: inc/customizer.php:354
+msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
+msgstr "Als je een logo gebruikt en het logo is te hoog, vink dit dan aan om het menu automatisch verticaal uit te lijnen."
+
+#: inc/customizer.php:275
+msgid "Site Title Color"
+msgstr "Site titelkleur"
+
+#: inc/customizer.php:259
+msgid "Background Color"
+msgstr "Achtergrondkleur"
+
+#: inc/customizer.php:201
+msgid "Primary Color"
+msgstr "Hoofdkleur"
+
+#: inc/customizer.php:244
+msgid "Header"
+msgstr "Header"
+
+#: inc/customizer.php:192
+msgid "Site Colors"
+msgstr "Sitekleuren"
+
+#: inc/customizer.php:2478
+msgid "User media"
+msgstr "Media van gebruiker"
+
+#: inc/customizer.php:1277
+msgid "Background image"
+msgstr "Achtergrond afbeelding"
+
+#: inc/customizer.php:1262
+msgid "Paste Youtube or Vimeo url here"
+msgstr "Plak een Youtube of Vimeo-URL hier"
+
+#: inc/customizer.php:1260
+msgid "Video url"
+msgstr "Video-URL"
+
+#: inc/customizer.php:1245
+msgid "Section heading"
+msgstr "Kop van de sectie"
+
+#: inc/customizer.php:714 inc/customizer.php:1229 inc/customizer.php:1331
+#: inc/customizer.php:1642 inc/customizer.php:1817 inc/customizer.php:2217
+#: inc/customizer.php:2543 inc/customizer.php:2698
+msgid "The section id, we will use this for link anchor."
+msgstr "De sectie-id, te gebruiken voor het link-anker."
+
+#: inc/customizer.php:1187
+msgid "Section: Video Lightbox"
+msgstr "Sectie: Video-lightbox"
+
+#: inc/dashboard.php:482
+msgid "Hooray! There are no required actions for you right now."
+msgstr "Hoera, er zijn op dit moment geen acties vereist van je."
+
+#: inc/dashboard.php:472
+msgid "Change homepage page template"
+msgstr "Wijzig template van homepagina"
+
+#: inc/dashboard.php:481
+msgid "Keep update with %s"
+msgstr "Blijf op de hoogte met %s"
+
+#: inc/dashboard.php:458
+msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
+msgstr "Om de inhoud van de homepagina-sectie aan te passen, moet je het template \"Frontpage\" selecteren voor de voorpagina."
+
+#: inc/dashboard.php:455
+msgid "Set your homepage page template to \"Frontpage\"."
+msgstr "Stel het paginatemplate in op \"Frontpage\" voor de voorpagina."
+
+#: inc/dashboard.php:441 inc/dashboard.php:465
+msgid "Setup front page displays"
+msgstr "Instellen van weergave van voorpagina"
+
+#: inc/dashboard.php:438
+msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
+msgstr "Om een één-pagina weergave voor je website te krijgen, ga naar Customize -&gt; Statische voorpagina en schakel \"Voorpagina weergave\" naar \"Een statische pagina\"."
+
+#: inc/dashboard.php:436
+msgid "Switch \"Front page displays\" to \"A static page\""
+msgstr "Wissel \"Voorpagina toont\" naar een statische pagina"
+
+#: inc/dashboard.php:429 inc/dashboard.php:448
+msgid "Dismiss"
+msgstr "Negeren"
+
+#: inc/dashboard.php:328
+msgid "Actions Required"
+msgstr "Vereiste acties"
+
+#: inc/dashboard.php:323
+msgid "Welcome to OnePress - Version %1s"
+msgstr "Welkom bij OnePress - Versie %1s"
+
+#: inc/dashboard.php:134
+msgid "OnePress Theme"
+msgstr "OnePress Thema"
+
+#: inc/dashboard.php:137
+msgid "OnePress Dashboard"
+msgstr "OnePress Dashboard"
+
+#: inc/customizer.php:644
+msgid "Section Order & Styling"
+msgstr "Sectievolgorde en opmaak"
+
+#: inc/customizer.php:149
+msgid "Check this box to disable sticky header when scroll."
+msgstr "Aanvinken om de sticky header uit te schakelen voor het scrollen."
+
+#: inc/customizer.php:147
+msgid "Disable Sticky Header?"
+msgstr "Sticky header uitschakelen"
+
+#: inc/dashboard.php:157
+msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
+msgstr "Welkom. Bedankt voor het kiezen van %1$s. Om het beste gebruik te maken van wat ons thema te bieden heeft, bezoek onze <a href=\"%2$s\">welkomstpagina</a>."
+
+#: inc/customizer.php:923
+msgid "Background Overlay Color"
+msgstr "Overlay-kleur van de achtergrond"
+
+#. Template Name of the plugin/theme
+msgid "Left Sidebar"
+msgstr "Sidebar links"
+
+#. #-#-#-#-#  onepress.pot (OnePress 1.4.3)  #-#-#-#-#
+#. Template Name of the plugin/theme
+#: inc/customizer.php:1447
+msgid "Full Width"
+msgstr "Volledige breedte"
+
+#. Template Name of the plugin/theme
+msgid "Frontpage"
+msgstr "Frontpage"
+
+#: template-parts/content-none.php:27
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "Het lijkt erop dat we niet kunnen vinden wat je zoekt. Misschien helpt zoeken."
+
+#: template-parts/content-none.php:22
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "Helaas, er waren geen overeenkomsten met je zoekterm. Probeer het opnieuw met enkele andere zoekwoorden."
+
+#: template-parts/content-none.php:18
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "Klaar om je eerste bericht te publiceren? <a href=\"%1$s\">Start hier</a>."
+
+#: template-parts/content-none.php:14
+msgid "Nothing Found"
+msgstr "Niets gevonden"
+
+#: template-parts/content-list.php:38 template-parts/content-page.php:21
+#: template-parts/content-single.php:35 template-parts/content.php:39
+msgid "Pages:"
+msgstr "Pagina&#39;s:"
+
+#: section-parts/section-hero.php:80
+msgid "#services"
+msgstr "#services"
+
+#: section-parts/section-contact.php:48
+msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
+msgstr "Je kunt de %1$s plugin installeren en naar Customizer &rarr; Sectie: Contact &rarr; Sectie: Inhoud gaan om een werkend contactformulier te zien."
+
+#: search.php:16
+msgid "Search Results for: %s"
+msgstr "Zoekresultaten voor: %s"
+
+#: inc/template-tags.php:248
+msgid "Your comment is awaiting moderation."
+msgstr "Je reactie is in afwachting van moderatie."
+
+#: inc/template-tags.php:243
+msgid "Edit"
+msgstr "Bewerken"
+
+#. translators: 1: date, 2: time
+#: inc/template-tags.php:240
+msgid "%1$s"
+msgstr "%1$s "
+
+#: inc/template-tags.php:242
+msgid "Reply"
+msgstr "Beantwoorden"
+
+#: inc/template-tags.php:234
+msgid "Post author"
+msgstr "Bericht auteur"
+
+#: inc/template-tags.php:215
+msgid "(Edit)"
+msgstr "(Bewerken)"
+
+#: inc/template-tags.php:215
+msgid "Pingback:"
+msgstr "Pingback:"
+
+#: inc/template-tags.php:144
+msgid "% Comments"
+msgstr "% reacties"
+
+#: inc/template-tags.php:144
+msgid "1 Comment"
+msgstr "1 reactie"
+
+#: inc/template-tags.php:144
+msgid "Leave a comment"
+msgstr "Een reactie plaatsen"
+
+#: inc/template-tags.php:138
+msgid "Tagged %1$s"
+msgstr "Getagd %1$s"
+
+#: inc/template-tags.php:132
+msgid "Posted in %1$s"
+msgstr "Geplaatst in %1$s"
+
+#. translators: used between list items, there is a space after the comma
+#: inc/template-tags.php:130 inc/template-tags.php:136
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:112
+msgctxt "post author"
+msgid "by %s"
+msgstr "door %s"
+
+#: inc/template-tags.php:107
+msgctxt "post date"
+msgid "Posted on %s"
+msgstr "Gepost op %s"
+
+#: inc/dashboard.php:347
+msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
+msgstr "Hulp nodig bij het instellen van %s? Kijk bij onze documentatie."
+
+#: inc/dashboard.php:354
+msgid "Having Trouble, Need Support?"
+msgstr "Heb je problemen, heb je hulp nodig?"
+
+#: inc/customizer.php:2898
+msgid "Fax"
+msgstr "Faxnummer"
+
+#: inc/dashboard.php:346
+msgid "Theme Documentation"
+msgstr "Thema documentatie"
+
+#: inc/dashboard.php:339
+msgid "Theme Customizer"
+msgstr "Thema Customizer"
+
+#: inc/dashboard.php:342
+msgid "Start Customize"
+msgstr "Start de Customizer"
+
+#: inc/dashboard.php:340
+msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
+msgstr "%s ondersteunt de Thema Customizer voor alle thema-instellingen. Klik op \"Customize\" om je site aan te passen."
+
+#: inc/dashboard.php:324
+msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
+msgstr "OnePress is een creatief en flexibel WordPress één-pagina thema dat goed past in business, portfolio, internetbureau, product showcase en freelancers websites."
+
+#: inc/customizer.php:2883
+msgid "Email"
+msgstr "E-mail"
+
+#: inc/customizer.php:2868
+msgid "Phone"
+msgstr "Telefoon"
+
+#: inc/customizer.php:2853
+msgid "Address"
+msgstr "Address"
+
+#: inc/customizer.php:2706 section-parts/section-contact.php:4
+msgid "Get in touch"
+msgstr "Contact opnemen"
+
+#: inc/customizer.php:2781
+msgid "Contact Form 7 Shortcode."
+msgstr "Contact Form 7 Shortcode."
+
+#: inc/customizer.php:2797
+msgid "Hide contact form completely."
+msgstr "Verberg contactformulier."
+
+#: inc/customizer.php:2838
+msgid "Contact Box Title"
+msgstr "Contact-box titel"
+
+#: inc/customizer.php:2814
+msgid "Contact Text"
+msgstr "Contact tekst"
+
+#: inc/customizer.php:2799
+msgid "Check this box to hide contact form."
+msgstr "Aanvinken om contactformulier te verbergen."
+
+#: inc/customizer.php:2551 section-parts/section-news.php:4
+msgid "Latest News"
+msgstr "Laatste nieuws"
+
+#: inc/customizer.php:2691 section-parts/section-contact.php:2
+msgid "contact"
+msgstr "contact"
+
+#: inc/customizer.php:2656
+msgid "Section: Contact"
+msgstr "Sectie: Contact"
+
+#: inc/customizer.php:2639 section-parts/section-news.php:8
+msgid "Read Our Blog"
+msgstr "Lees ons blog"
+
+#: inc/customizer.php:2631
+msgid "More News button link"
+msgstr "knop-link van Lees meer"
+
+#: inc/customizer.php:2616
+msgid "Number of post to show"
+msgstr "Aantal berichten om te tonen"
+
+#: inc/customizer.php:2536 section-parts/section-news.php:2
+msgid "news"
+msgstr "news"
+
+#: inc/customizer.php:2501
+msgid "Section: News"
+msgstr "Section: Nieuws"
+
+#: inc/customizer.php:2311
+msgid "Before number"
+msgstr "Voor het nummer"
+
+#: inc/customizer.php:2316
+msgid "After number"
+msgstr "Na het nummer"
+
+#: inc/customizer.php:2469
+msgid "Team members"
+msgstr "Teamleden"
+
+#: inc/customizer.php:2381 section-parts/section-team.php:4
+msgid "Our Team"
+msgstr "Ons team"
+
+#: inc/customizer.php:2366 section-parts/section-team.php:2
+msgid "team"
+msgstr "team"
+
+#: inc/customizer.php:2332
+msgid "Section: Team"
+msgstr "Sectie: Team"
+
+#: inc/customizer.php:2306
+msgid "Number"
+msgstr "Nummer"
+
+#: inc/customizer.php:2303
+msgid "Your counter label"
+msgstr "Label van de teller"
+
+#: inc/customizer.php:1923 inc/customizer.php:2300
+msgid "Title"
+msgstr "Titel"
+
+#: inc/customizer.php:2291
+msgid "Counter content"
+msgstr "inhoud van de teller"
+
+#: inc/customizer.php:1344 inc/customizer.php:1655 inc/customizer.php:1830
+#: inc/customizer.php:2041 inc/customizer.php:2230 inc/customizer.php:2386
+#: inc/customizer.php:2556 inc/customizer.php:2711
+msgid "Section Title"
+msgstr "Sectietitel"
+
+#: inc/customizer.php:1385 inc/customizer.php:1697 inc/customizer.php:1894
+#: inc/customizer.php:2107 inc/customizer.php:2271 inc/customizer.php:2449
+#: inc/customizer.php:2753
+msgid "Section Content"
+msgstr ""
+"Sectie\n"
+"-\n"
+"inhoud"
+
+#: inc/customizer.php:1729 inc/customizer.php:2156
+msgid "Select a page"
+msgstr "Selecteer een pagina"
+
+#: inc/customizer.php:2225 section-parts/section-counter.php:4
+msgid "Our Numbers"
+msgstr "Onze getallen"
+
+#: inc/customizer.php:2210 section-parts/section-counter.php:2
+msgid "counter"
+msgstr "counter"
+
+#: inc/customizer.php:2176
+msgid "Section: Counter"
+msgstr "Sectie: Teller"
+
+#: inc/customizer.php:1927 inc/customizer.php:2137
+msgid "Custom icon"
+msgstr "Eigen icoon"
+
+#: inc/customizer.php:2127
+msgid "Service content"
+msgstr "Diensten-inhoud"
+
+#: inc/customizer.php:2036 section-parts/section-hero.php:79
+#: section-parts/section-services.php:4
+msgid "Our Services"
+msgstr "Onze diensten"
+
+#: inc/customizer.php:2021 section-parts/section-services.php:2
+msgid "services"
+msgstr "diensten"
+
+#: inc/customizer.php:1986
+msgid "Section: Services"
+msgstr "Sectie: Diensten"
+
+#: inc/customizer.php:1738 inc/customizer.php:2161
+msgid "Link to single page"
+msgstr "Link naar enkele pagina"
+
+#: inc/customizer.php:1734
+msgid "Hide item title"
+msgstr "Verberg item-titel"
+
+#: inc/customizer.php:464 inc/customizer.php:1722 inc/customizer.php:1918
+#: inc/customizer.php:2131 inc/customizer.php:2295 inc/customizer.php:2473
+msgid "[live_title]"
+msgstr "[live_title]"
+
+#: inc/customizer.php:1359 inc/customizer.php:1670 inc/customizer.php:1845
+#: inc/customizer.php:2056 inc/customizer.php:2245 inc/customizer.php:2401
+#: inc/customizer.php:2571 inc/customizer.php:2726
+msgid "Section Subtitle"
+msgstr "Sectie ondertitel"
+
+#: inc/customizer.php:1354 inc/customizer.php:1665 inc/customizer.php:1840
+#: inc/customizer.php:2051 inc/customizer.php:2240 inc/customizer.php:2396
+#: inc/customizer.php:2566 inc/customizer.php:2721
+#: section-parts/section-about.php:5 section-parts/section-contact.php:5
+#: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
+#: section-parts/section-news.php:5 section-parts/section-services.php:5
+#: section-parts/section-team.php:5
+msgid "Section subtitle"
+msgstr "Sectie ondertitel"
+
+#: inc/customizer.php:1635 section-parts/section-about.php:2
+msgid "about"
+msgstr "Over"
+
+#: inc/customizer.php:1196 inc/customizer.php:1298 inc/customizer.php:1609
+#: inc/customizer.php:1784 inc/customizer.php:1995 inc/customizer.php:2185
+#: inc/customizer.php:2341 inc/customizer.php:2510 inc/customizer.php:2665
+msgid "Section Settings"
+msgstr "Sectie instellingen"
+
+#: inc/customizer.php:1600
+msgid "Section: About"
+msgstr "Sectie: Over"
+
+#: inc/customizer.php:1109
+msgid "Button #2 Link"
+msgstr "Knop #2 Link"
+
+#: inc/customizer.php:1104 section-parts/section-hero.php:82
+msgid "#contact"
+msgstr "#contact"
+
+#: inc/customizer.php:1095
+msgid "Button #2 Text"
+msgstr "Knop #2 Tekst"
+
+#: inc/customizer.php:1090 section-parts/section-hero.php:81
+msgid "Get Started"
+msgstr "Aan de slag"
+
+#: inc/customizer.php:1057
+msgid "Button #1 Link"
+msgstr "Knop #1 Link"
+
+#: inc/customizer.php:1052
+msgid "#about"
+msgstr "#over"
+
+#: inc/customizer.php:1043
+msgid "Button #1 Text"
+msgstr "Knop #1 Tekst"
+
+#: inc/customizer.php:1038 inc/customizer.php:1650
+#: section-parts/section-about.php:4
+msgid "About Us"
+msgstr "Over ons"
+
+#: inc/customizer.php:1027
+msgid "Small Text"
+msgstr "Kleine tekst"
+
+#: inc/customizer.php:1010
+msgid "Large Text"
+msgstr "Grote tekst"
+
+#: inc/customizer.php:970
+msgid "Hero Content Layout"
+msgstr "Hero layout van inhoud"
+
+#: inc/customizer.php:1030
+msgid "You can use text rotate slider in this textarea too."
+msgstr "Je kunt een tekstroteer-slider in dit tekstvak gebruiken."
+
+#: inc/customizer.php:1012
+msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer->Site Option->Animate to control rotate animation."
+msgstr "Tekstroteer handleiding: Plaats je roteertekst met een \"|\" scheidingsteken in <span class=\"js-rotating\">...</span>, ga naar Customizer->Site Optie->Animeren om de roteeranimatie in te stellen."
+
+#: inc/customizer.php:897
+msgid "Background Image"
+msgstr "Achtergrondafbeelding"
+
+#: inc/customizer.php:738 inc/customizer.php:754
+msgid "10"
+msgstr "10"
+
+#: inc/customizer.php:888
+msgid "Background Images"
+msgstr "Achtergrondafbeeldingen"
+
+#: inc/customizer.php:892
+msgid "Background"
+msgstr "Achtergrond"
+
+#: inc/customizer.php:759
+msgid "Padding Bottom:"
+msgstr "Padding-bottom:"
+
+#: inc/customizer.php:743
+msgid "Padding Top:"
+msgstr "Padding-top:"
+
+#: inc/customizer.php:712 inc/customizer.php:1227 inc/customizer.php:1329
+#: inc/customizer.php:1640 inc/customizer.php:1815 inc/customizer.php:2026
+#: inc/customizer.php:2215 inc/customizer.php:2371 inc/customizer.php:2541
+#: inc/customizer.php:2696
+msgid "Section ID:"
+msgstr "Sectie-ID:"
+
+#: inc/customizer.php:707 section-parts/section-hero.php:2
+msgid "hero"
+msgstr "hero"
+
+#: inc/customizer.php:700 inc/customizer.php:1214 inc/customizer.php:1316
+#: inc/customizer.php:1627 inc/customizer.php:1802 inc/customizer.php:2013
+#: inc/customizer.php:2202 inc/customizer.php:2359 inc/customizer.php:2528
+#: inc/customizer.php:2683
+msgid "Check this box to hide this section."
+msgstr "Aanvinken om deze sectie te verbergen."
+
+#: inc/customizer.php:728
+msgid "Make hero section full screen"
+msgstr "Toon hero-sectie op volledig scherm."
+
+#: inc/customizer.php:730
+msgid "Check this box to make hero section full screen."
+msgstr "Aanvinken om hero-sectie op volledig scherm te tonen."
+
+#: inc/customizer.php:862
+msgid "Hero Background Media"
+msgstr "Hero achtergrondmedia"
+
+#: inc/customizer.php:491
+msgid "Newsletter"
+msgstr "Nieuwsbrief"
+
+#: inc/customizer.php:698 inc/customizer.php:1212 inc/customizer.php:1314
+#: inc/customizer.php:1625 inc/customizer.php:1800 inc/customizer.php:2011
+#: inc/customizer.php:2200 inc/customizer.php:2357 inc/customizer.php:2526
+#: inc/customizer.php:2681
+msgid "Hide this section?"
+msgstr "Verberg deze sectie"
+
+#: inc/customizer.php:672
+msgid "Section: Hero"
+msgstr "Sectie: Hero"
+
+#: inc/customizer.php:538
+msgid "MailChimp Action URL"
+msgstr "MailChimp Action-URL"
+
+#: inc/customizer.php:522
+msgid "Newsletter Form Title"
+msgstr "Titel van nieuwsbriefformulier"
+
+#: inc/customizer.php:682
+msgid "Hero Settings"
+msgstr "Hero instellingen"
+
+#: inc/customizer.php:508
+msgid "Check this box to hide footer newsletter form."
+msgstr "Vink dit aan om het nieuwsbriefformulier in de footer te verbergen."
+
+#: inc/customizer.php:506
+msgid "Hide Footer Newsletter?"
+msgstr "Verberg nieuwsbrief in footer"
+
+#: inc/customizer.php:109
+msgid "Global"
+msgstr "Globaal"
+
+#: inc/customizer.php:395
+msgid "Social Profiles"
+msgstr "Sociale profielen"
+
+#: inc/customizer.php:413
+msgid "Check this box to hide footer social section."
+msgstr "Vink dit aan om de sectie voor sociale media in de footer te verbergen."
+
+#: inc/customizer.php:411
+msgid "Hide Footer Social?"
+msgstr "Verberg social media in footer"
+
+#: inc/customizer.php:440
+msgid "Social Footer Title"
+msgstr "Titel van social footer"
+
+#: inc/customizer.php:426
+msgid "These social profiles setting below will display at the footer of your site."
+msgstr "De instelling voor sociale profielen hieronder worden in de footer getoond."
+
+#: inc/customizer.php:182
+msgid "Check this box to hide footer back to top button."
+msgstr "Vink dit aan om de \"terug naar boven\"-knop in de footer te verbergen."
+
+#: inc/customizer.php:180
+msgid "Hide footer back to top?"
+msgstr "Verberg \"terug naar boven\"-knop"
+
+#: inc/customizer.php:165
+msgid "Check this box to disable all element animation when scroll."
+msgstr "Vink dit aan om elementanimatie uit te schakelen bij het scrollen."
+
+#: inc/customizer.php:163
+msgid "Disable animation effect?"
+msgstr "Elementanimatie uitschakelen"
+
+#: inc/customizer.php:38
+msgid "Select page"
+msgstr "Selecteer pagina"
+
+#: inc/customizer.php:99
+msgid "Theme Options"
+msgstr "Thema opties"
+
+#: inc/customizer.php:49
+msgid "Select member"
+msgstr "Selecteer lid"
+
+#: inc/customizer.php:25
+msgid "Site Title, Tagline & Logo"
+msgstr "Site-titel, ondertitel & logo"
+
+#: inc/customizer-controls.php:675
+msgid "Close"
+msgstr "Sluiten"
+
+#: inc/customizer-controls.php:640
+msgid "Change"
+msgstr "Bijwerken"
+
+#: inc/customizer-controls.php:640
+msgid "Add"
+msgstr "Toevoegen"
+
+#: inc/customizer-controls.php:639 inc/customizer-controls.php:661
+#: inc/customizer-controls.php:673
+msgid "Remove"
+msgstr "Verwijderen"
+
+#: inc/customizer-controls.php:408 inc/customizer-controls.php:523
+msgid "Item"
+msgstr "Artikel"
+
+#: inc/customizer-controls.php:508
+msgid "Add an item"
+msgstr "Item toevoegen"
+
+#: inc/template-tags.php:73
+msgid "Menu"
+msgstr "Menu"
+
+#: functions.php:371
+msgid "Please contact the administrator of this site for help."
+msgstr "Neem voor hulp contact op met de beheerder van deze website."
+
+#: header.php:25
+msgid "Skip to content"
+msgstr "Naar de inhoud springen"
+
+#: functions.php:368
+msgid "No action taken. Plugin %1$s was already active."
+msgstr "Geen actie ondernomen. Plugin %1$s was al actief."
+
+#: functions.php:369
+msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
+msgstr "Plugin niet geactiveerd. Een hogere versie van %s is nodig voor dit thema. Update de plugin."
+
+#: functions.php:370
+msgid "All plugins installed and activated successfully. %1$s"
+msgstr "Alle plugins zijn succesvol geïnstalleerd en geactiveerd. %1$s"
+
+#: functions.php:367
+msgid "The following plugin was activated successfully:"
+msgstr "De volgende plugin is succesvol geactiveerd:"
+
+#: functions.php:366
+msgid "Plugin activated successfully."
+msgstr "Plugin succesvol geactiveerd."
+
+#: functions.php:364
+msgid "Begin activating plugin"
+msgid_plural "Begin activating plugins"
+msgstr[0] "Start activering plugin"
+msgstr[1] "Start activering plugins"
+
+#: functions.php:365
+msgid "Return to Required Plugins Installer"
+msgstr "Terug naar het installatiescherm voor verplichte plugins"
+
+#: functions.php:362
+msgid "Begin installing plugin"
+msgid_plural "Begin installing plugins"
+msgstr[0] "Start installatie plugin"
+msgstr[1] "Start installatie plugins"
+
+#: functions.php:363
+msgid "Begin updating plugin"
+msgid_plural "Begin updating plugins"
+msgstr[0] "Start bijwerken plugin"
+msgstr[1] "Start bijwerken plugins"
+
+#: functions.php:360
+msgid "The following recommended plugin is currently inactive: %1$s."
+msgid_plural "The following recommended plugins are currently inactive: %1$s."
+msgstr[0] "De volgende aanbevolen plugin is op het moment niet actief: %1$s."
+msgstr[1] "De volgende aanbevolen plugins zijn op het moment niet actief: %1$s."
+
+#: functions.php:361
+msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
+msgstr[0] "Sorry, maar je hebt niet de juiste rechten om plugin %1$s plugin te activeren."
+msgstr[1] "Sorry, maar je hebt niet de juiste rechten om de %1$s plugins te activeren."
+
+#: functions.php:357
+msgid "There is an update available for: %1$s."
+msgid_plural "There are updates available for the following plugins: %1$s."
+msgstr[0] "Er is een update beschikbaar voor: %1$s."
+msgstr[1] "Er zijn updates beschikbaar voor de volgende plugins: %1$s."
+
+#: functions.php:358
+msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
+msgstr[0] "Sorry, maar je hebt niet de juiste rechten om de %1$s plugin bij te werken."
+msgstr[1] "Sorry, maar je hebt niet de juiste rechten om de %1$s plugins bij te werken."
+
+#: functions.php:359
+msgid "The following required plugin is currently inactive: %1$s."
+msgid_plural "The following required plugins are currently inactive: %1$s."
+msgstr[0] "De volgende vereiste plugin is op het moment niet actief: %1$s."
+msgstr[1] "De volgende vereiste plugins zijn op het moment niet actief: %1$s."
+
+#: functions.php:355
+msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
+msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
+msgstr[0] "Sorry, maar je hebt niet de juiste rechten om de %1$s plugin te installeren."
+msgstr[1] "Sorry, maar je hebt niet de juiste rechten om de %1$s plugins te installeren."
+
+#: functions.php:356
+msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
+msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
+msgstr[0] "De volgende plugin dient te worden bijgewerkt tot de nieuwste versie om maximale compatibiliteit met de SO Related Posts plugin te garanderen: %1$s."
+msgstr[1] "De volgende plugins dienen te worden bijgewerkt tot hun nieuwste versie om maximale compatibiliteit met de SO Related Posts plugin te garanderen: %1$s."
+
+#: functions.php:353
+msgid "This theme requires the following plugin: %1$s."
+msgid_plural "This theme requires the following plugins: %1$s."
+msgstr[0] "De SO Related Posts plugin vereist de volgende plugin: %1$s."
+msgstr[1] "De SO Related Posts plugin vereist de volgende plugins: %1$s."
+
+#: functions.php:354
+msgid "This theme recommends the following plugin: %1$s."
+msgid_plural "This theme recommends the following plugins: %1$s."
+msgstr[0] "De SO Related Posts plugin vereist de volgende plugin: %1$s."
+msgstr[1] "De SO Related Posts plugin vereist de volgende plugins: %1$s."
+
+#: functions.php:352
+msgid "Something went wrong with the plugin API."
+msgstr "Er ging iets mis met de plugin API."
+
+#: functions.php:351
+msgid "Installing Plugin: %s"
+msgstr "Plugin %s wordt ge&#239;nstalleerd."
+
+#: functions.php:350
+msgid "Install Plugins"
+msgstr "Installeer plugins"
+
+#: functions.php:349
+msgid "Install Required Plugins"
+msgstr "Installeer verplichte plugins"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Raleway, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:268
+msgctxt "Raleway font: on or off"
+msgid "on"
+msgstr "on"
+
+#. Translators: If there are characters in your language that are not supported
+#. by Open Sans, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:262
+msgctxt "Open Sans font: on or off"
+msgid "on"
+msgstr "on"
+
+#: functions.php:142
+msgid "Sidebar"
+msgstr "Sidebar"
+
+#: functions.php:59
+msgid "Primary Menu"
+msgstr "Primair menu"
+
+#: inc/template-tags.php:973
+msgid "%1$s theme by %2$s"
+msgstr "%1$s thema door %2$s"
+
+#: inc/template-tags.php:971
+msgid "Copyright %1$s %2$s %3$s"
+msgstr "Auteursrecht %1$s %2$s %3$s"
+
+#: footer.php:94
+msgid "Back To Top"
+msgstr "Scroll naar boven"
+
+#: footer.php:19 inc/customizer.php:516
+msgid "Join our Newsletter"
+msgstr "Inschrijven op onze nieuwsbrief"
+
+#: footer.php:15 inc/customizer.php:434
+msgid "Keep Updated"
+msgstr "Blijf op de hoogte"
+
+#: comments.php:76
+msgid "Comments are closed."
+msgstr "Reacties zijn gesloten."
+
+#: comments.php:44 comments.php:64
+msgid "Newer Comments"
+msgstr "Nieuwere reacties"
+
+#: comments.php:43 comments.php:63
+msgid "Older Comments"
+msgstr "Oudere reacties"
+
+#: comments.php:40 comments.php:60
+msgid "Comment navigation"
+msgstr "Reactienavigatie"
+
+#: comments.php:31
+msgctxt "comments title"
+msgid "One thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "Eén gedachte over &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s gedachten over &ldquo;%2$s&rdquo;"
+
+#. translators: %1$s: smiley
+#: 404.php:51
+msgid "Try looking in the monthly archives. %1$s"
+msgstr "Probeer te zoeken in de maandelijkse archieven: %1$s"
+
+#: 404.php:34
+msgid "Most Used Categories"
+msgstr "Meest gebruikte categorieën"
+
+#: 404.php:26
+msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
+msgstr "Het lijkt erop dat er niets is gevonden op deze locatie. Probeer het eens met de links hieronder of door te zoeken."
+
+#: 404.php:15
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "Oeps. Deze pagina kon niet worden gevonden."
+
+#. Author URI of the plugin/theme
+msgid "http://www.famethemes.com"
+msgstr "http://www.famethemes.com"
+
+#. Author of the plugin/theme
+msgid "FameThemes"
+msgstr "FameThemes"
+
+#. Theme URI of the plugin/theme
+msgid "https://www.famethemes.com/themes/onepress/"
+msgstr "https://www.famethemes.com/themes/onepress/"
