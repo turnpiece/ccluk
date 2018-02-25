@@ -13,7 +13,7 @@ if ( ccluk_is_selective_refresh() ) {
 // Get data
 
 ?>
-<?php if (!$disable) { ?>
+<?php if (!$disable && $title !== '' && ( $box_1 !== '' || $box_2 !== '' ) ) { ?>
     <?php if ( ! ccluk_is_selective_refresh() ){ ?>
     <section id="<?php if ($id != '') {
         echo esc_attr( $id );
@@ -33,12 +33,17 @@ if ( ccluk_is_selective_refresh() ) {
         <?php endif; ?>
 
         <div class="section-content">
+            <?php if ($box_1 !== '') : ?>
             <div class="box-1 list-item">
                 <?php echo $box_1 ?>
             </div>
+            <?php endif; ?>
+
+            <?php if ($box_2 !== '') : ?>
             <div class="box-2 list-item">
                 <?php echo $box_2 ?>
             </div>
+            <?php endif; ?>
         </div>
 
         <?php do_action('ccluk_section_after_inner', 'about'); ?>
