@@ -64,7 +64,7 @@
 
 			</div>
 
-			<p><?php _e( 'Joining Citizens\' Climate Lobby is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'buddypress' ); ?></p>
+			<p><?php echo get_theme_mod( 'ccluk_register_intro', sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') ) ) ?></p>
 
 			<?php
 

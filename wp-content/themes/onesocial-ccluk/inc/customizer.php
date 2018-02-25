@@ -435,6 +435,38 @@ function ccluk_customize_register( $wp_customize ) {
 
     endif;
 
+	/*------------------------------------------------------------------------*/
+    /*  Registration
+    /*------------------------------------------------------------------------*/
+
+		$wp_customize->add_section( 'ccluk_register' ,
+			array(
+				'priority'    => 3,
+				'title'       => esc_html__( 'Registration', 'onesocial' ),
+				'description' => '',
+			)
+		);
+
+		$wp_customize->add_setting( 'ccluk_register_intro',
+			array(
+				'sanitize_callback' => 'ccluk_sanitize_text',
+				'default'           => sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') )
+			)
+		);
+
+		$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
+			$wp_customize,
+			'ccluk_register_intro',
+			array(
+				'label'     	=> esc_html__('Introduction', 'onesocial'),
+				'section' 		=> 'ccluk_register',
+				'description'   => '',
+			)
+		));
+
+
+
+
 		/**
 		 * Hook to add other customize
 		 */
