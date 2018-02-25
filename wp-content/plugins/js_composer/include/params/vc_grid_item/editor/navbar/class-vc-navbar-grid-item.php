@@ -22,7 +22,7 @@ class Vc_Navbar_Grid_Item extends Vc_Navbar {
 	 * @return string
 	 */
 	public function getControlTemplates() {
-		return '<li><a href="javascript:;" class="vc_icon-btn vc_templates-button vc_navbar-border-right"  id="vc_templates-editor-button" title="'
+		return '<li><a href="javascript:;" class="vc_icon-btn vc_templates-button"  id="vc_templates-editor-button" title="'
 		. __( 'Templates', 'js_composer' ) . '"><i class="vc-composer-icon vc-c-icon-add_template"></i></a></li>';
 	}
 

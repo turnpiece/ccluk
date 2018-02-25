@@ -17,5 +17,5 @@ vc_include_template( 'pages/partials/vc-roles-parts/_part.tpl.php', array(
 	),
 	'main_label' => __( 'Post types', 'js_composer' ),
 	'custom_label' => __( 'Post types', 'js_composer' ),
-	'description' => __( 'Enable Visual Composer for pages, posts and custom post types. Note: By default Visual Composer is available for pages only.', 'js_composer' ),
+	'description' => __( 'Enable WPBakery Page Builder for pages, posts and custom post types. Note: By default WPBakery Page Builder is available for pages only.', 'js_composer' ),
 ) );

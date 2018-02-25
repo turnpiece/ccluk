@@ -13,17 +13,25 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	protected $transient_slug = 'caching';
 
 	/**
+	 * Module status.
+	 *
+	 * @var array $status
+	 */
+	public $status;
+
+	/**
 	 * Analyze data. Overwrites parent method.
+	 *
+	 * @param bool $check_api If set to true, the api can be checked.
 	 *
 	 * @return array
 	 */
-	public function analize_data() {
-
+	public function analize_data( $check_api = false ) {
 		$files = array(
-			'javascript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'css'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
-			'media'      => wphb_plugin_url() . 'core/modules/dummy/dummy-media.mp3',
-			'images'     => wphb_plugin_url() . 'core/modules/dummy/dummy-image.png',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
+			'media'      => WPHB_DIR_URL . 'core/modules/dummy/dummy-media.pdf',
+			'images'     => WPHB_DIR_URL . 'core/modules/dummy/dummy-image.png',
 		);
 
 		$results = array();
@@ -47,14 +55,14 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 
 			$result = wp_remote_head( $file, $args );
 
-			wphb_log( '----- analyzing headers for ' . $file, 'caching' );
-			wphb_log( 'args: ', 'caching' );
+			$this->logger->log( '----- analyzing headers for ' . $file );
+			$this->logger->log( 'args: ' );
 			if ( isset( $args['cookies'] ) ) {
 				unset( $args['cookies'] );
 			}
-			wphb_log( $args, 'caching' );
-			wphb_log( 'result: ', 'caching' );
-			wphb_log( $result, 'caching' );
+			$this->logger->log( $args );
+			$this->logger->log( 'result: ' );
+			$this->logger->log( $result );
 
 			$cache_control = wp_remote_retrieve_header( $result, 'cache-control' );
 			$results[ $type ] = false;
@@ -75,14 +83,14 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 		} // End foreach().
 
 		// If tests fail for some reason, we fallback to an API check.
-		if ( $try_api ) {
+		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = wphb_get_api();
 			$api_results = $api->performance->check_cache();
 			$api_results = get_object_vars( $api_results );
 
 			foreach ( $files as $type  => $file ) {
-				if ( ! isset( $api_results[ $type ]->response_error ) && absint( $api_results[ $type ] ) > 0 ) {
+				if ( ! isset( $api_results[ $type ]->response_error ) && ! isset( $api_results[ $type ]->http_request_failed ) && absint( $api_results[ $type ] ) > 0 ) {
 					$results[ $type ] = absint( $api_results[ $type ] );
 				}
 			}
@@ -99,10 +107,10 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	 * @return bool
 	 */
 	public static function apache_modules_loaded() {
-		$sapi_name = '';
+		//$sapi_name = '';
 		$apache_modules = array();
 		if ( function_exists( 'php_sapi_name' ) ) {
-			$sapi_name = php_sapi_name();
+			//$sapi_name = php_sapi_name();
 			$apache_modules = apache_get_modules();
 		}
 
@@ -113,10 +121,16 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	/**
 	 * Get code for Nginx
 	 *
+	 * @param array $expiry_times Type expiry times (javascript, css...). Used with AJAX call caching_reload_snippet.
+	 *
 	 * @return string
 	 */
-	public function get_nginx_code() {
-		$options = wphb_get_settings();
+	public function get_nginx_code( $expiry_times = array() ) {
+		if ( empty( $expiry_times ) ) {
+			$options = wphb_get_settings();
+		} else {
+			$options = $expiry_times;
+		}
 
 		$assets_expiration = explode( '/', $options['caching_expiry_javascript'] );
 		$assets_expiration = $assets_expiration[0];
@@ -155,11 +169,17 @@ location ~* \.(jpg|jpeg|png|gif|swf|webp)$ {
 	/**
 	 * Get code for Apache
 	 *
+	 * @param array $expiry_times Type expiry times (javascript, css...). Used with AJAX call caching_reload_snippet.
+	 *
 	 * @return string
 	 */
-	public function get_apache_code() {
+	public function get_apache_code( $expiry_times = array() ) {
 
-		$options = wphb_get_settings();
+		if ( empty( $expiry_times ) ) {
+			$options = wphb_get_settings();
+		} else {
+			$options = $expiry_times;
+		}
 
 		$assets_expiration = explode( '/', $options['caching_expiry_javascript'] );
 		$assets_expiration = $assets_expiration[1];
@@ -226,10 +246,12 @@ ExpiresDefault %%IMAGES%%
 	/**
 	 * Get code for LightSpeed
 	 *
+	 * @param array $expiry_times Type expiry times (javascript, css...). Used with AJAX call caching_reload_snippet.
+	 *
 	 * @return string
 	 */
-	public function get_litespeed_code() {
-		return $this->get_apache_code();
+	public function get_litespeed_code( $expiry_times = array() ) {
+		return $this->get_apache_code( $expiry_times );
 	}
 
 	/**

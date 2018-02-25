@@ -15,7 +15,7 @@ class Vc_Vendor_Revslider implements Vc_Vendor_Interface {
 	protected static $instanceIndex = 1;
 
 	/**
-	 * Add shortcode to visual composer also add fix for frontend to regenerate id of revslider.
+	 * Add shortcode to WPBakery Page Builder also add fix for frontend to regenerate id of revslider.
 	 * @since 4.3
 	 */
 	public function load() {

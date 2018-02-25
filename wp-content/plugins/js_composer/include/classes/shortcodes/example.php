@@ -4,13 +4,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * An example of how to write WPBakery Visual Composer custom shortcode
+ * An example of how to write WPBakery WPBakery Page Builder custom shortcode
  *
- * To create shortcodes for visual composer you need to complete 2 steps.
+ * To create shortcodes for WPBakery Page Builder you need to complete 2 steps.
  *
  * 1. Create new class which extends WPBakeryShortCode.
  * If you are not familiar with OOP in php, don't worry follow this instruction and we will guide you how to
- * create valid shortcode for visual composer without learning OOP.
+ * create valid shortcode for WPBakery Page Builder without learning OOP.
  *
  * 2. Need to create configurations by using wpb_map function.
  *
@@ -68,10 +68,10 @@ class WPBakeryShortCode_my_hello_world extends WPBakeryShortCode {
  *
  * name - used in content elements menu and shortcode edit screen.
  * base - shortcode base. Example my_hello_world
- * class - helper class to target your shortcode in css in visual composer edit mode
+ * class - helper class to target your shortcode in css in WPBakery Page Builder edit mode
  * icon - in order to add icon for your shortcode in dropdown menu, add class name here and style it in
  *          your own css file. Note: bootstrap icons supported.
- * controls - in visual composer mode shortcodes can have different controls (popup_delete, edit_popup_delete, size_delete, popup_delete, full).
+ * controls - in WPBakery Page Builder mode shortcodes can have different controls (popup_delete, edit_popup_delete, size_delete, popup_delete, full).
  				Default is full.
  * params - array which holds your shortcode params. This params will be editable in shortcode settings page.
  *

@@ -13,15 +13,28 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 	protected $transient_slug = 'gzip';
 
 	/**
+	 * Module status.
+	 *
+	 * @var array $status
+	 */
+	public $status;
+
+	/**
 	 * Analyze data. Overwrites parent method.
+	 *
+	 * @param bool $check_api If set to true, the api can be checked.
 	 *
 	 * @return array
 	 */
-	public function analize_data() {
+	public function analize_data( $check_api = false ) {
 		$files = array(
-			'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
-			'JavaScript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'CSS'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
+			// Would be nice to user get_home_url(), but website is not accessible during plugin activation
+			// and curl times out.
+			//'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
+			//'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-html.html',
+			'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-php.php',
+			'JavaScript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'CSS'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
 
 		$results = array();
@@ -32,7 +45,12 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 				require_once( ABSPATH . WPINC . '/class-simplepie.php' );
 			}
 
-			$result = new SimplePie_File( $file, 10, 5, null, $_SERVER['HTTP_USER_AGENT'] );
+			$headers = array(
+				'Content-Type' => 'text/plain',
+			);
+			$useragent = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_12_5) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/59.0.3071.115 Safari/537.36';
+
+			$result = new SimplePie_File( $file, 10, 5, $headers, $useragent );
 
 			$headers = $result->headers;
 			$results[ $type ] = false;
@@ -43,18 +61,21 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 			}
 		}
 
-		if ( $try_api ) {
+		// Will only trigger on 're-check status' button click.
+		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = wphb_get_api();
 			$api_results = $api->performance->check_gzip();
 			$api_results = get_object_vars( $api_results );
 			foreach ( $files as $type  => $file ) {
 				$index = strtolower( $type );
-				if ( ! isset( $api_results[ $index ]->response_error ) && true === $api_results[ $index ] ) {
+				if ( ! isset( $api_results[ $index ]->response_error )
+					&& ( isset( $api_results[ $index ] ) && true === $api_results[ $index ] )
+				) {
 					$results[ $type ] = true;
 				}
 			}
-		}
+		} // End if().
 
 		return $results;
 	}

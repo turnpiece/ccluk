@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Fix and Repair
-Description: Tools for repairing your Google Maps installation.
+Description: Tools for repairing your Google Maps Pro installation.
 Plugin URI:  http://premium.wpmudev.org/project/wordpress-google-maps-plugin
 Version:     1.0
 Author:      Ve Bailovity (Incsub)
@@ -9,7 +9,7 @@ Author:      Ve Bailovity (Incsub)
 
 class Agm_Far_FormRenderer {
 	public function create_fixes_section() {
-		_e( 'Use options in this section to repair your Google Maps installation. <em>You may want to back up your WordPress database first.</em>', AGM_LANG );
+		_e( 'Use options in this section to repair your Google Maps Pro installation. <em>You may want to back up your WordPress database first.</em>', AGM_LANG );
 	}
 
 	public function create_reset_options_box() {

@@ -105,6 +105,17 @@ function bp_docs_edit_doc_content() {
 function bp_docs_edit_parent_dropdown() {
 	$bp = buddypress();
 
+	$current_doc = get_queried_object();
+	$exclude = $parent = false;
+
+	// If this is a failed submission, use the value from the POST cookie
+	if ( ! empty( $bp->bp_docs->submitted_data->parent_id ) ) {
+		$parent = intval( $bp->bp_docs->submitted_data->parent_id );
+	} else if ( isset( $current_doc->post_type ) && $bp->bp_docs->post_type_name === $current_doc->post_type ) {
+		$exclude = $current_doc->ID;
+		$parent = $current_doc->post_parent;
+	}
+
 	$include = array( 0 );
 
 	$query_args = apply_filters( 'bp_docs_parent_dropdown_query_args', array(
@@ -116,29 +127,21 @@ function bp_docs_edit_parent_dropdown() {
 
 	if ( $doc_query->have_posts() ) {
 		while ( $doc_query->have_posts() ) {
-			$doc_query->the_post();;
-			$include[] = get_the_ID();
+			$doc_query->the_post();
+			if ( ! $exclude || $exclude !== get_the_ID() ) {
+				$include[] = get_the_ID();
+			}
 		}
 	}
 
-	$current_doc = get_queried_object();
-	$exclude = $parent = false;
-
-	// If this is a failed submission, use the value from the POST cookie
-	if ( ! empty( $bp->bp_docs->submitted_data->parent_id ) ) {
-		$parent = intval( $bp->bp_docs->submitted_data->parent_id );
-	} else if ( isset( $current_doc->post_type ) && $bp->bp_docs->post_type_name === $current_doc->post_type ) {
-		$exclude = array( $current_doc->ID );
-		$parent = $current_doc->post_parent;
-	}
+	$doc_query->reset_postdata();
 
 	$pages = wp_dropdown_pages( array(
 		'post_type'        => $bp->bp_docs->post_type_name,
-		'exclude'          => $exclude,
 		'include'          => $include,
 		'selected'         => $parent,
 		'name'             => 'parent_id',
-		'show_option_none' => __( '(no parent)', 'bp-docs' ),
+		'show_option_none' => __( '(no parent)', 'buddypress-docs' ),
 		'sort_column'      => 'menu_order, post_title',
 		'echo'             => 0 )
 	);
@@ -172,46 +175,15 @@ add_filter( 'mce_buttons', 'bp_docs_remove_tinymce_more_button' );
  *
  * @since 1.1.20
  */
-function bp_docs_add_idle_function_to_tinymce( $initArray ) {
-	if ( bp_docs_is_bp_docs_page() ) {
-
-		//$initArray['setup'] = 'alert(\'hi\');';
-		$initArray['setup'] = 'function(ed) {
-			ed.onInit.add(
-				function(ed) {
-					_initJQuery();
-
-					// Set up listeners
-					jQuery(\'#\' + ed.id + \'_parent\').bind(\'mousemove\',function (evt){
-						_active(evt);
-					});
-
-					bp_docs_load_idle();
-
-					/* Hide rows 3+ */
-					var rows = jQuery(ed.editorContainer).find(\'table.mceToolbar\');
-					jQuery(rows).each(function(k,row){
-						if ( !jQuery(row).hasClass(\'mceToolbarRow2\') && !jQuery(row).hasClass(\'mceToolbarRow1\' ) ) {
-							jQuery(row).toggle();
-						}
-					});
-
-					bp_docs_kitchen_sink(ed);
-
-				}
-			);
-
-			ed.onKeyDown.add(
-				function(ed) {
-					_active();
-				}
-			);
-		}';
+function bp_docs_add_idle_function_to_tinymce( $initArray, $editor_id ) {
+	// We only apply the init to the visual post editor for BP Docs.
+	if ( 'doc_content' === $editor_id ) {
+		$initArray['init_instance_callback'] = 'bp_docs_tiny_mce_init';
 	}
 
 	return $initArray;
 }
-add_filter( 'tiny_mce_before_init', 'bp_docs_add_idle_function_to_tinymce' );
+add_filter( 'tiny_mce_before_init', 'bp_docs_add_idle_function_to_tinymce', 10, 2 );
 
 /**
  * Adds BuddyPress Docs-specific TinyMCE plugins
@@ -227,9 +199,9 @@ add_filter( 'tiny_mce_before_init', 'bp_docs_add_idle_function_to_tinymce' );
  */
 function bp_docs_add_external_tinymce_plugins( $plugins ) {
 	if ( bp_docs_is_bp_docs_page() ) {
-		$plugins['table']     = WP_PLUGIN_URL . '/'. BP_DOCS_PLUGIN_SLUG . '/lib/js/tinymce/plugins/table/editor_plugin.js';
+		$plugins['table']     = WP_PLUGIN_URL . '/'. BP_DOCS_PLUGIN_SLUG . '/lib/js/tinymce/plugins/table/plugin.min.js';
 		$plugins['tabindent'] = WP_PLUGIN_URL . '/'. BP_DOCS_PLUGIN_SLUG . '/lib/js/tinymce/plugins/tabindent/editor_plugin.js';
-		$plugins['print']     = WP_PLUGIN_URL . '/'. BP_DOCS_PLUGIN_SLUG . '/lib/js/tinymce/plugins/print/editor_plugin.js';
+		$plugins['print']     = WP_PLUGIN_URL . '/'. BP_DOCS_PLUGIN_SLUG . '/lib/js/tinymce/plugins/print/plugin.min.js';
 	}
 
 	return $plugins;
@@ -301,7 +273,7 @@ add_filter( 'mce_buttons', 'bp_docs_add_external_tinymce_buttons_row1' );
  * @return array $buttons Button list, with BP Docs buttons added
  */
 function bp_docs_add_external_tinymce_buttons_row3( $buttons ) {
-	$buttons[] = 'tablecontrols';
+	$buttons[] = 'table';
 
 	return $buttons;
 }

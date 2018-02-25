@@ -1,9 +1,9 @@
 <?php
  /**
  * Plugin Name: Rescue Shortcodes
- * Plugin URI:  https://rescuethemes.com/plugins/rescue-shortcodes-plugin/
+ * Plugin URI:  https://rescuethemes.com/wordpress-plugins/rescue-shortcodes-plugin/
  * Description: A lightweight shortcodes plugin.
- * Version:     2.3
+ * Version:     2.4
  * Author:      Rescue Themes
  * Author URI:  https://rescuethemes.com
  * Text Domain: rescue-shortcodes

@@ -15,6 +15,7 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 		add_action( 'jetpack_deleted_theme', $callable, 10, 2 );
 		add_filter( 'wp_redirect', array( $this, 'detect_theme_edit' ) );
 		add_action( 'jetpack_edited_theme', $callable, 10, 2 );
+		add_action( 'wp_ajax_edit-theme-plugin-file', array( $this, 'theme_edit_ajax' ), 0 );
 		add_action( 'update_site_option_allowedthemes', array( $this, 'sync_network_allowed_themes_change' ), 10, 4 );
 		add_action( 'jetpack_network_disabled_themes', $callable, 10, 2 );
 		add_action( 'jetpack_network_enabled_themes', $callable, 10, 2 );
@@ -142,6 +143,111 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 		return $redirect_url;
 	}
 
+	public function theme_edit_ajax() {
+		$args = wp_unslash( $_POST );
+
+		if ( empty( $args['theme'] ) ) {
+			return;
+		}
+
+		if ( empty( $args['file'] ) ) {
+			return;
+		}
+		$file = $args['file'];
+		if ( 0 !== validate_file( $file ) ) {
+			return;
+		}
+
+		if ( ! isset( $args['newcontent'] ) ) {
+			return;
+		}
+
+		if ( ! isset( $args['nonce'] ) ) {
+			return;
+		}
+
+		$stylesheet = $args['theme'];
+		if ( 0 !== validate_file( $stylesheet ) ) {
+			return;
+		}
+
+		if ( ! current_user_can( 'edit_themes' ) ) {
+			return;
+		}
+
+		$theme = wp_get_theme( $stylesheet );
+		if ( ! $theme->exists() ) {
+			return;
+		}
+
+		$real_file = $theme->get_stylesheet_directory() . '/' . $file;
+		if ( ! wp_verify_nonce( $args['nonce'], 'edit-theme_' . $real_file . $stylesheet ) ) {
+			return;
+		}
+
+		if ( $theme->errors() && 'theme_no_stylesheet' === $theme->errors()->get_error_code() ) {
+			return;
+		}
+
+		$editable_extensions = wp_get_theme_file_editable_extensions( $theme );
+
+		$allowed_files = array();
+		foreach ( $editable_extensions as $type ) {
+			switch ( $type ) {
+				case 'php':
+					$allowed_files = array_merge( $allowed_files, $theme->get_files( 'php', -1 ) );
+					break;
+				case 'css':
+					$style_files = $theme->get_files( 'css', -1 );
+					$allowed_files['style.css'] = $style_files['style.css'];
+					$allowed_files = array_merge( $allowed_files, $style_files );
+					break;
+				default:
+					$allowed_files = array_merge( $allowed_files, $theme->get_files( $type, -1 ) );
+					break;
+			}
+		}
+
+		if ( 0 !== validate_file( $real_file, $allowed_files ) ) {
+			return;
+		}
+
+		// Ensure file is real.
+		if ( ! is_file( $real_file ) ) {
+			return;
+		}
+
+		// Ensure file extension is allowed.
+		$extension = null;
+		if ( preg_match( '/\.([^.]+)$/', $real_file, $matches ) ) {
+			$extension = strtolower( $matches[1] );
+			if ( ! in_array( $extension, $editable_extensions, true ) ) {
+				return;
+			}
+		}
+
+		if ( ! is_writeable( $real_file ) ) {
+			return;
+		}
+
+		$file_pointer = fopen( $real_file, 'w+' );
+		if ( false === $file_pointer ) {
+			return;
+		}
+
+		$theme_data = array(
+			'name' => $theme->get('Name'),
+			'version' => $theme->get('Version'),
+			'uri' => $theme->get( 'ThemeURI' ),
+		);
+
+		/**
+		 * This action is documented already in this file
+		 */
+		do_action( 'jetpack_edited_theme', $stylesheet, $theme_data );
+
+	}
+
 	public function detect_theme_deletion() {
 		$delete_theme_call = $this->get_delete_theme_call();
 		if ( empty( $delete_theme_call ) ) {
@@ -171,9 +277,9 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 
 	public function check_upgrader( $upgrader, $details) {
 		if ( ! isset( $details['type'] ) ||
-			'theme' !== $details['type'] ||
-			is_wp_error( $upgrader->skin->result ) ||
-			! method_exists( $upgrader, 'theme_info' )
+		     'theme' !== $details['type'] ||
+		     is_wp_error( $upgrader->skin->result ) ||
+		     ! method_exists( $upgrader, 'theme_info' )
 		) {
 			return;
 		}
@@ -248,7 +354,7 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 	public function estimate_full_sync_actions( $config ) {
 		return 1;
 	}
-	
+
 	public function init_before_send() {
 		add_filter( 'jetpack_sync_before_send_jetpack_full_sync_theme_data', array( $this, 'expand_theme_data' ) );
 	}
@@ -366,7 +472,7 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 		if (
 			( isset( $old_value['array_version'] ) && $old_value['array_version'] !== 3 ) ||
 			( isset( $new_value['array_version'] ) && $new_value['array_version'] !== 3 )
-			) {
+		) {
 			return;
 		}
 
@@ -421,7 +527,7 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 			 * @since 4.9.0
 			 */
 			do_action( 'jetpack_cleared_inactive_widgets' );
-		} 
+		}
 	}
 
 	private function get_theme_support_info() {
@@ -459,12 +565,6 @@ class Jetpack_Sync_Module_Themes extends Jetpack_Sync_Module {
 	}
 
 	private function is_theme_switch() {
-		$backtrace = debug_backtrace();
-		foreach ( $backtrace as $call ) {
-			if ( isset( $call['args'][0] ) && 'after_switch_theme' === $call['args'][0] ) {
-				return true;
-			}
-		}
-		return false;
+		return did_action( 'after_switch_theme' );
 	}
 }

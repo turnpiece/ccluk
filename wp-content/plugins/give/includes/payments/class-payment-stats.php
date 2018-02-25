@@ -131,7 +131,7 @@ class Give_Payment_Stats extends Give_Stats {
 		$args = apply_filters( 'give_stats_earnings_args', $args );
 		$key  = Give_Cache::get_key( 'give_stats', $args );
 
-		//Set transient for faster stats
+		// Set transient for faster stats.
 		$earnings = Give_Cache::get( $key );
 
 		if ( false === $earnings ) {
@@ -143,17 +143,30 @@ class Give_Payment_Stats extends Give_Stats {
 
 			if ( ! empty( $payments ) ) {
 				foreach ( $payments as $payment ) {
-					$earnings += give_get_payment_amount( $payment->ID );
+					$earnings += (float) give_donation_amount( $payment->ID, array( 'type' => 'stats' ) );
 				}
 
 			}
 
-			// Cache the results for one hour
+			// Cache the results for one hour.
 			Give_Cache::set( $key, give_sanitize_amount_for_db( $earnings ), 60 * 60 );
 		}
 
+		/**
+		 * Filter the earnings.
+		 *
+		 * @since 1.8.17
+		 *
+		 * @param  float       $earnings   Earning amount.
+		 * @param  int         $form_id    Donation Form ID.
+		 * @param  string|bool $start_date Earning start date.
+		 * @param  string|bool $end_date   Earning end date.
+		 * @param  string|bool $gateway_id Payment gateway id.
+		 */
+		$earnings = apply_filters( 'give_get_earnings', $earnings, $form_id, $start_date, $end_date, $gateway_id );
+
 		//return earnings
-		return round( $earnings, give_currency_decimal_filter() );
+		return round( $earnings, give_get_price_decimals( $form_id ) );
 
 	}
 
@@ -227,18 +240,20 @@ class Give_Payment_Stats extends Give_Stats {
 	 *
 	 * @since  1.0
 	 * @access public
+	 * @global wpdb $wpdb
 	 *
-	 * @param  $number int The number of results to retrieve with the default set to 10.
+	 * @param       $number int The number of results to retrieve with the default set to 10.
 	 *
 	 * @return array       Best selling forms
 	 */
 	public function get_best_selling( $number = 10 ) {
-
 		global $wpdb;
 
+		$meta_table = __give_v20_bc_table_details( 'form' );
+
 		$give_forms = $wpdb->get_results( $wpdb->prepare(
-			"SELECT post_id as form_id, max(meta_value) as sales
-				FROM $wpdb->postmeta WHERE meta_key='_give_form_sales' AND meta_value > 0
+			"SELECT {$meta_table['column']['id']} as form_id, max(meta_value) as sales
+				FROM {$meta_table['name']} WHERE meta_key='_give_form_sales' AND meta_value > 0
 				GROUP BY meta_value+0
 				DESC LIMIT %d;", $number
 		) );

@@ -16,5 +16,6 @@ class Reporting extends Behavior {
 		} else {
 			wp_clear_scheduled_hook( 'processScanCron' );
 		}
+
 	}
 }

@@ -33,10 +33,24 @@ function give_add_options_links() {
 
 	//Payments
 	$give_payment       = get_post_type_object( 'give_payment' );
-	$give_payments_page = add_submenu_page( 'edit.php?post_type=give_forms', $give_payment->labels->name, $give_payment->labels->menu_name, 'edit_give_payments', 'give-payment-history', 'give_payment_history_page' );
+	$give_payments_page = add_submenu_page(
+		'edit.php?post_type=give_forms',
+		$give_payment->labels->name,
+		$give_payment->labels->menu_name,
+		'edit_give_payments',
+		'give-payment-history',
+		'give_payment_history_page'
+	);
 
 	//Donors
-	$give_donors_page = add_submenu_page( 'edit.php?post_type=give_forms', esc_html__( 'Donors', 'give' ), esc_html__( 'Donors', 'give' ), 'view_give_reports', 'give-donors', 'give_donors_page' );
+	$give_donors_page = add_submenu_page(
+		'edit.php?post_type=give_forms',
+		esc_html__( 'Donors', 'give' ),
+		esc_html__( 'Donors', 'give' ),
+		'view_give_reports',
+		'give-donors',
+		'give_donors_page'
+	);
 
 	//Reports`
 	$give_reports_page = add_submenu_page(
@@ -65,13 +79,27 @@ function give_add_options_links() {
 	);
 
 	//Tools.
-	$give_tools_page = add_submenu_page( 'edit.php?post_type=give_forms', esc_html__( 'Give Tools', 'give' ), esc_html__( 'Tools', 'give' ), 'manage_give_settings', 'give-tools', array(
-		Give()->give_settings,
-		'output'
-	) );
+	$give_tools_page = add_submenu_page(
+		'edit.php?post_type=give_forms',
+		esc_html__( 'Give Tools', 'give' ),
+		esc_html__( 'Tools', 'give' ),
+		'manage_give_settings',
+		'give-tools',
+		array(
+			Give()->give_settings,
+			'output',
+		)
+	);
 
 	//Add-ons
-	$give_add_ons_page = add_submenu_page( 'edit.php?post_type=give_forms', esc_html__( 'Give Add-ons', 'give' ), esc_html__( 'Add-ons', 'give' ), 'install_plugins', 'give-addons', 'give_add_ons_page' );
+	$give_add_ons_page = add_submenu_page(
+		'edit.php?post_type=give_forms',
+		esc_html__( 'Give Add-ons', 'give' ),
+		esc_html__( 'Add-ons', 'give' ),
+		'install_plugins',
+		'give-addons',
+		'give_add_ons_page'
+	);
 }
 
 add_action( 'admin_menu', 'give_add_options_links', 10 );
@@ -343,25 +371,25 @@ function give_settings_page_pages( $settings ) {
 
 	$settings = array(
 		// General settings.
-		include( 'settings/class-settings-general.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-general.php' ),
 
 		// Payment Gateways Settings.
-		include( 'settings/class-settings-gateways.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-gateways.php' ),
 
 		// Display settings.
-		include( 'settings/class-settings-display.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-display.php' ),
 
 		// Emails settings.
-		include( 'settings/class-settings-email.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-email.php' ),
 
 		// Addons settings.
-		include( 'settings/class-settings-addon.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-addon.php' ),
 
 		// License settings.
-		include( 'settings/class-settings-license.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-license.php' ),
 
 		// Advanced settings.
-		include( 'settings/class-settings-advanced.php' )
+		include( GIVE_PLUGIN_DIR . 'includes/admin/settings/class-settings-advanced.php' )
 	);
 
 	// Output.
@@ -387,9 +415,6 @@ function give_reports_page_pages( $settings ) {
 		// Forms.
 		include( 'reports/class-forms-report.php' ),
 
-		// Donors.
-		include( 'reports/class-donors-report.php' ),
-
 		// Gateways.
 		include( 'reports/class-gateways-report.php' ),
 
@@ -412,23 +437,22 @@ function give_tools_page_pages( $settings ) {
 
 	$settings = array(
 		// System Info.
-		include( 'tools/class-settings-system-info.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-system-info.php' ),
 
 		// Logs.
-		include( 'tools/class-settings-logs.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-logs.php' ),
 
 		// API.
-		include( 'tools/class-settings-api.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-api.php' ),
 
 		// Data.
-		include( 'tools/class-settings-data.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-data.php' ),
 
 		// Export.
-		include( 'tools/class-settings-export.php' ),
+		include( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-export.php' ),
 
 		// Import
-		include_once( 'tools/class-settings-import.php' ),
-
+		include_once( GIVE_PLUGIN_DIR . 'includes/admin/tools/class-settings-import.php' ),
 	);
 
 	// Output.
@@ -460,3 +484,36 @@ function give_set_default_tab_form_reports_page( $default_tab ) {
 	return 'earnings';
 }
 add_filter( 'give_default_setting_tab_give-reports', 'give_set_default_tab_form_reports_page', 10, 1 );
+
+
+/**
+ * Add a page display state for special Give pages in the page list table.
+ *
+ * @since 1.8.18
+ *
+ * @param array $post_states An array of post display states.
+ * @param WP_Post $post The current post object.
+ *
+ * @return array
+ */
+function give_add_display_page_states( $post_states, $post ) {
+
+	switch( $post->ID ) {
+		case give_get_option( 'success_page' ):
+			$post_states['give_successfully_page'] = __( 'Donation Success Page', 'give' );
+			break;
+
+		case give_get_option( 'failure_page' ):
+			$post_states['give_failure_page'] = __( 'Donation Failed Page', 'give' );
+			break;
+
+		case give_get_option( 'history_page' ):
+			$post_states['give_history_page'] = __( 'Donation History Page', 'give' );
+			break;
+	}
+
+	return $post_states;
+}
+
+// Add a post display state for special Give pages.
+add_filter( 'display_post_states', 'give_add_display_page_states', 10, 2 );

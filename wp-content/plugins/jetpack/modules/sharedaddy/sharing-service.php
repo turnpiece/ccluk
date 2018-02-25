@@ -40,6 +40,7 @@ class Sharing_Service {
 	 * Gets a list of all available service names and classes
 	 */
 	public function get_all_services( $include_custom = true ) {
+		global $wp_version;
 		// Default services
 		// if you update this list, please update the REST API tests
 		// in bin/tests/api/suites/SharingTest.php
@@ -49,7 +50,6 @@ class Sharing_Service {
 			'linkedin'          => 'Share_LinkedIn',
 			'reddit'            => 'Share_Reddit',
 			'twitter'           => 'Share_Twitter',
-			'press-this'        => 'Share_PressThis',
 			'google-plus-1'     => 'Share_GooglePlus1',
 			'tumblr'            => 'Share_Tumblr',
 			'pinterest'         => 'Share_Pinterest',
@@ -71,6 +71,10 @@ class Sharing_Service {
 		 */
 		if ( apply_filters( 'sharing_services_email', Jetpack::is_akismet_active() ) ) {
 			$services['email'] = 'Share_Email';
+		}
+
+		if ( is_multisite() && ( version_compare( $wp_version, '4.9-RC1-42107', '<' ) || is_plugin_active( 'press-this/press-this-plugin.php' ) ) ) {
+			$services['press-this'] = 'Share_PressThis';
 		}
 
 		if ( $include_custom ) {
@@ -787,7 +791,15 @@ function sharing_display( $text = '', $echo = false ) {
 			} else {
 				$ver = '20141212';
 			}
-			wp_register_script( 'sharing-js', plugin_dir_url( __FILE__ ).'sharing.js', array( 'jquery' ), $ver );
+			wp_register_script(
+				'sharing-js',
+				Jetpack::get_file_url_for_environment(
+					'_inc/build/sharedaddy/sharing.min.js',
+					'modules/sharedaddy/sharing.js'
+				),
+				array( 'jquery' ),
+				$ver
+			);
 
 			// Enqueue scripts for the footer
 			add_action( 'wp_footer', 'sharing_add_footer' );

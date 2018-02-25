@@ -4,6 +4,35 @@ Tested up to: 4.7.4
 
 Change Log:
 
+1.7.5 - 2012-07-02
+----------------------------------------------------------------------
+- Fix: Report status missing in Hub Security tab
+- Fix: Some themes/plugins shown as a vulnerability but no info available
+- Other minor enhancements and fixes
+
+1.7.4.1 - 2017-4-12
+----------------------------------------------------------------------
+- Added: Endpoint API so HUB can work with Defender natively through WPMU DEV Dashboard plugin
+
+1.7.4 - 2017-20-11
+----------------------------------------------------------------------
+- Fix: Conflict with Jetpack where Defender 2FA module would not detect if Jetpack 2FA was disabled.
+- Fix: Visitor would get a 404 lockout if landing on a page with many dead links.
+- Improvement: When an user is deleted, audit logging now display the user's login instead of only UID.
+- Other minor enhancements/fixes
+
+1.7.3 - 2017-14-10
+----------------------------------------------------------------------
+- Fix: Two-factor authentication can be bypassed by user with no role.
+- Improvement:  Enhanced two-factor authentication protection across multisites.
+
+1.7.2 - 2017-09-10
+----------------------------------------------------------------------
+- Improvement: Improvement: IPv6 support for both whitelisting and blacklisting, requires IPv6 support on the server.
+- Improvement: Better UI/UX for Two-factor authentication.
+- Fix: Security tweak "Prevent PHP Execution" and "Protect Information" now support Apache 2.4 htaccess rules.
+- Other minor enhancements/fixes
+
 1.7.1 - 2017-25-09
 ----------------------------------------------------------------------
 - Improvement: Audit logging logs will be stored up to 1 year, query range can be set up to 3 months
@@ -198,4 +227,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1507401865-ai
+87274-1518896069-au

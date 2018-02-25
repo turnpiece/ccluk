@@ -229,7 +229,7 @@ class Vc_Hooks_Vc_Grid implements Vc_Vendor_Interface {
  */
 $hook = new Vc_Hooks_Vc_Grid();
 
-// when visual composer initialized let's trigger Vc_Grid hooks.
+// when WPBakery Page Builder initialized let's trigger Vc_Grid hooks.
 add_action( 'vc_after_init', array(
 	$hook,
 	'load',

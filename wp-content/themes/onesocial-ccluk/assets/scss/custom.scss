@@ -1,0 +1,88 @@
+/*--------------------------------------------------------------
+Custom stylesheet.
+
+*/
+
+/** Import partials **/
+
+@import "partials/variables";
+@import "partials/mixins";
+@import "partials/general";
+@import "partials/home-page";
+@import "partials/single";
+@import "partials/page";
+@import "partials/navigation";
+@import "partials/register";
+@import "partials/find-your-mp";
+
+
+
+/** Styles for plugins etc. **/
+
+@import "vendor/visual-composer";
+@import "vendor/buddypress";
+
+
+/*--------------------------------------------------------------
+Responsive media queries (mobile styles)
+--------------------------------------------------------------*/
+
+#mobile-right-panel li a {
+	color: $green;
+
+	&:hover {
+		color: $white;
+	}
+}
+
+/*--------------------------------------------------------------
+MAXIMUM width of 520 pixels (large phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 520px) {
+
+	@import "partials/max-width-520px";
+
+}
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 480 pixels (phones and smaller)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+
+	@import "partials/max-width-480px";
+
+}
+
+
+/*--------------------------------------------------------------
+MINIMUM width of 481 pixels (phones and larger)
+--------------------------------------------------------------*/
+@media screen and (min-width: 481px)  {
+
+	.site {
+		padding-top: 0;
+	}
+
+
+}
+
+
+/*--------------------------------------------------------------
+MINIMUM width of 721 pixels (tablets and larger)
+--------------------------------------------------------------*/
+@media screen and (min-width: 721px)  {
+/*
+	@import "partials/min-width-721px";
+*/
+}
+
+
+/*--------------------------------------------------------------
+MINIMUM width of 1025 pixels (desktops)
+--------------------------------------------------------------*/
+@media screen and (min-width: 1025px)  {
+
+	@import "partials/min-width-1025px";
+
+}

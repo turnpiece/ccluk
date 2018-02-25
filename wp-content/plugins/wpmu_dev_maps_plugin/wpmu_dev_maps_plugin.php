@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: Google Maps
+ * Plugin Name: Google Maps Pro
  * Plugin URI:  http://premium.wpmudev.org/project/wordpress-google-maps-plugin
  * Description: Easily embed, customize, and use Google maps on your WordPress site - in posts, pages or as an easy to use widget, display local images and let your site visitors get directions in seconds.
- * Version:     2.9.3
+ * Version:     2.9.4
  * Text Domain: agm_google_maps
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org
@@ -90,7 +90,7 @@ if ( is_admin() ) {
 		global $wpmudev_notices;
 		$wpmudev_notices[] = array(
 			'id' => 216,
-			'name' => 'Google Maps',
+			'name' => 'Google Maps Pro',
 			'screens' => array(
 				'settings_page_agm_google_maps',
 			),

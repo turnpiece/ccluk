@@ -1,13 +1,13 @@
 === Rescue Shortcodes ===
 Author URI: https://rescuethemes.com
 Plugin URI: https://rescuethemes.com/rescue-shortcodes-plugin/
-Contributors: rescuethemes, jami0821
+Contributors: rescuethemes
 Donate link: https://rescuethemes.com
 Tags: shortcodes, buttons, columns, tabs, animations, spacing, highlight
 Requires at least: 4.0
-Tested up to: 4.7
+Tested up to: 4.8.2
 
-Stable tag: 2.3
+Stable tag: 2.4
 
 A lightweight WordPress shortcodes plugin.
 
@@ -17,7 +17,7 @@ When activated, this plugin will add a button to the WordPress text editor to ea
 
 **Included shortcodes:**
 
-* Button - With many options including unlimited colors.
+* Button - With many options including unlimited colors and Icons.
 * Content Toggle - Maybe for an awesome FAQ page.
 * Tabbed Content - Create tabbed sections for your content.
 * [Font Awesome](http://fortawesome.github.io/Font-Awesome/) Icons - 500+ icons and counting.
@@ -70,9 +70,11 @@ MIT License - https://github.com/imakewebthings/waypoints/blob/master/licenses.t
 Copyright: @foodgoesinmouth
 
 == Changelog ==
+= 2.4, October 9, 2017 =
+* Enabled Icons to be displayed on buttons
+
 = 2.3, March 20, 2017 =
 * Updated Font Awesome to version 4.7
-
 
 = 2.2.1, July 8, 2016 =
 * Added API key support for Google Maps

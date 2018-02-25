@@ -87,6 +87,7 @@ jQuery(function ($) {
                     $('.skip-activator').hide();
                     var i = 0;
                     progress();
+
                     function progress() {
                         if (i < data.data.activated.length) {
                             var text = dashboard[data.data.activated[i]];
@@ -123,7 +124,7 @@ jQuery(function ($) {
         return false;
     });
     $('body').on('click', '.dev-overlay', function (e) {
-        if ($(this).hasClass('scanning') || $(this).hasClass('wd-requirement')) {
+        if ($(this).hasClass('scanning') || $(this).hasClass('migrate-iplockout') || $(this).hasClass('wd-requirement')) {
             return;
         }
         var target = $(e.target);

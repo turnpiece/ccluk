@@ -116,9 +116,9 @@ class Login_Duration extends Rule {
 	function check_login() {
 		$defender_logout = HTTP_Helper::retrieve_get( 'defender_logout', false );
 		if( is_user_logged_in() ) {
+			$current_user 	= wp_get_current_user();
+			$user_id 		= $current_user->ID;
 			if ( !$defender_logout ) {
-				$current_user 		= wp_get_current_user();
-				$user_id 			= $current_user->ID;
 				$current_time 		= current_time( 'mysql' );
 				$last_login_time 	= get_user_meta( $user_id, 'last_login_time', true );
 				$login_period 		= $this->getService()->getDuration( true );
@@ -145,6 +145,7 @@ class Login_Duration extends Rule {
 					update_user_meta( $user_id, 'last_login_time', $last_login_time );
 				}
 			} else{
+				delete_user_meta( $user_id, 'last_login_time' );
 				wp_logout();
 				$after_logout = HTTP_Helper::retrieve_get( 'after_logout', false );
 				if ( $after_logout ) {

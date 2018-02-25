@@ -8,6 +8,7 @@ namespace WP_Defender\Module\IP_Lockout\Model;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\IP_Lockout\Component\IP_API;
 
 class Settings extends \Hammer\WP\Settings {
 	private static $_instance;
@@ -140,20 +141,18 @@ class Settings extends \Hammer\WP\Settings {
 	 * @return bool
 	 */
 	public function isWhitelist( $ip ) {
-		$whitelist = $this->getIpWhitelist();
+		$whitelist        = $this->getIpWhitelist();
+		$defaultWhitelist = apply_filters( 'ip_lockout_default_whitelist_ip', array() );
+		$whitelist        = array_merge( $whitelist, $defaultWhitelist );
 		foreach ( $whitelist as $wip ) {
-			$ips = explode( '-', $wip );
-			if ( count( $ips ) == 1 && trim( $wip ) == $ip ) {
+			if ( ! stristr( $wip, '-' ) && ! stristr( $wip, '/' ) && trim( $wip ) == $ip ) {
 				return true;
-			} elseif ( count( $ips ) == 2 ) {
-				$high = sprintf( "%u", ip2long( $ips[1] ) );
-				$low  = sprintf( "%u", ip2long( $ips[0] ) );
-
-				$cip = sprintf( "%u", ip2long( $ip ) );
-				if ( $high >= $cip && $cip >= $low ) {
+			} elseif ( stristr( $wip, '-' ) ) {
+				$ips = explode( '-', $wip );
+				if ( IP_API::compareInRange( $ip, $ips[0], $ips[1] ) ) {
 					return true;
 				}
-			} elseif ( stristr( $wip, '/' ) && $this->cidrMatch( $ip, $wip ) ) {
+			} elseif ( stristr( $wip, '/' ) && IP_API::compareCIDR( $ip, $wip ) ) {
 				return true;
 			}
 		}
@@ -169,17 +168,14 @@ class Settings extends \Hammer\WP\Settings {
 	public function isBlacklist( $ip ) {
 		$blacklist = $this->getIpBlacklist();
 		foreach ( $blacklist as $wip ) {
-			$ips = explode( '-', $wip );
-			if ( count( $ips ) == 1 && trim( $wip ) == $ip ) {
+			if ( ! stristr( $wip, '-' ) && ! stristr( $wip, '/' ) && trim( $wip ) == $ip ) {
 				return true;
-			} elseif ( count( $ips ) == 2 ) {
-				$high = sprintf( "%u", ip2long( $ips[1] ) );
-				$low  = sprintf( "%u", ip2long( $ips[0] ) );
-				$cip  = sprintf( "%u", ip2long( $ip ) );
-				if ( $high >= $cip && $cip >= $low ) {
+			} elseif ( stristr( $wip, '-' ) ) {
+				$ips = explode( '-', $wip );
+				if ( IP_API::compareInRange( $ip, $ips[0], $ips[1] ) ) {
 					return true;
 				}
-			} elseif ( stristr( $wip, '/' ) && $this->cidrMatch( $ip, $wip ) ) {
+			} elseif ( stristr( $wip, '/' ) && IP_API::compareCIDR( $ip, $wip ) ) {
 				return true;
 			}
 		}
@@ -302,27 +298,52 @@ class Settings extends \Hammer\WP\Settings {
 	 * @return bool
 	 */
 	public function validateIp( $ip ) {
-		if ( ( ! stristr( $ip, '-' ) || ! stristr( $ip, '/' ) ) && ( filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) || filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) ) ) {
-
+		if (
+			! stristr( $ip, '-' )
+			&& ! stristr( $ip, '/' )
+			&& filter_var( $ip, FILTER_VALIDATE_IP ) ) {
+			//only ip, no -, no /
 			return true;
 		} elseif ( stristr( $ip, '-' ) ) {
 			$ips = explode( '-', $ip );
 			foreach ( $ips as $ip ) {
-				if ( ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 ) && ! filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 ) ) {
+				if ( ! filter_var( $ip, FILTER_VALIDATE_IP ) ) {
 					return false;
 				}
 			}
-			if ( sprintf( "%u", ip2long( $ips[1] ) ) - sprintf( "%u", ip2long( $ips[0] ) ) > 0 ) {
+			if ( IP_API::compareIP( $ips[0], $ips[1] ) ) {
 				return true;
 			}
 		} elseif ( stristr( $ip, '/' ) ) {
 			list( $ip, $bits ) = explode( '/', $ip );
-			if ( filter_var( $ip, FILTER_VALIDATE_IP ) && filter_var( $bits, FILTER_VALIDATE_INT ) && 0 <= $bits && $bits <= 32 ) {
-				return true;
+			if ( filter_var( $ip, FILTER_VALIDATE_IP ) && filter_var( $bits, FILTER_VALIDATE_INT ) ) {
+				if ( $this->isIPV4( $ip ) && 0 <= $bits && $bits <= 32 ) {
+					return true;
+				} elseif ( $this->isIPV6( $ip ) && 0 <= $bits && $bits <= 128 && IP_API::isV6Support() ) {
+					return true;
+				}
 			}
 		}
 
 		return false;
+	}
+
+	/**
+	 * @param $ip
+	 *
+	 * @return mixed
+	 */
+	private function isIPV4( $ip ) {
+		return filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV4 );
+	}
+
+	/**
+	 * @param $ip
+	 *
+	 * @return mixed
+	 */
+	private function isIPV6( $ip ) {
+		return filter_var( $ip, FILTER_VALIDATE_IP, FILTER_FLAG_IPV6 );
 	}
 
 	/**

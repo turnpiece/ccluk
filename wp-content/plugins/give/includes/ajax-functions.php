@@ -18,12 +18,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * Check if AJAX works as expected
+ * Note: Do not use this function before init hook.
  *
  * @since  1.0
  *
  * @return bool True if AJAX works, false otherwise
  */
 function give_test_ajax_works() {
+	// Handle ajax.
+	if ( doing_action( 'wp_ajax_nopriv_give_test_ajax' ) ) {
+		wp_die( 0, 200 );
+	}
 
 	// Check if the Airplane Mode plugin is installed.
 	if ( class_exists( 'Airplane_Mode_Core' ) ) {
@@ -37,7 +42,7 @@ function give_test_ajax_works() {
 			}
 		} else {
 
-			if ( 'on' === $airplane->check_status()  ) {
+			if ( 'on' === $airplane->check_status() ) {
 				return true;
 			}
 		}
@@ -88,18 +93,21 @@ function give_test_ajax_works() {
 		Give_Cache::set( '_give_ajax_works', '1', DAY_IN_SECONDS, true );
 	}
 
-	return $works;
+	return apply_filters( 'give_test_ajax_works', $works );
 }
 
+add_action( 'wp_ajax_nopriv_give_test_ajax', 'give_test_ajax_works' );
 
 /**
  * Get AJAX URL
  *
  * @since  1.0
  *
+ * @param array $query
+ *
  * @return string
  */
-function give_get_ajax_url() {
+function give_get_ajax_url( $query = array() ) {
 	$scheme = defined( 'FORCE_SSL_ADMIN' ) && FORCE_SSL_ADMIN ? 'https' : 'admin';
 
 	$current_url = give_get_current_page_url();
@@ -107,6 +115,10 @@ function give_get_ajax_url() {
 
 	if ( preg_match( '/^https/', $current_url ) && ! preg_match( '/^https/', $ajax_url ) ) {
 		$ajax_url = preg_replace( '/^http/', 'https', $ajax_url );
+	}
+
+	if ( ! empty( $query ) ) {
+		$ajax_url = add_query_arg( $query, $ajax_url );
 	}
 
 	return apply_filters( 'give_ajax_url', $ajax_url );
@@ -192,8 +204,8 @@ add_action( 'wp_ajax_nopriv_give_get_form_title', 'give_ajax_get_form_title' );
  * @return void
  */
 function give_ajax_get_states_field() {
-	$states_found = false;
-	$show_field = true;
+	$states_found   = false;
+	$show_field     = true;
 	$states_require = true;
 	// Get the Country code from the $_POST.
 	$country = sanitize_text_field( $_POST['country'] );
@@ -201,8 +213,13 @@ function give_ajax_get_states_field() {
 	// Get the field name from the $_POST.
 	$field_name = sanitize_text_field( $_POST['field_name'] );
 
-	$label = __( 'State', 'give' );
+	$label        = __( 'State', 'give' );
 	$states_label = give_get_states_label();
+
+	$default_state = '';
+	if ( $country === give_get_country() ) {
+		$default_state = give_get_state();
+	}
 
 	// Check if $country code exists in the array key for states label.
 	if ( array_key_exists( $country, $states_label ) ) {
@@ -215,16 +232,17 @@ function give_ajax_get_states_field() {
 
 	$states = give_get_states( $country );
 	if ( ! empty( $states ) ) {
-		$args = array(
+		$args         = array(
 			'name'             => $field_name,
 			'id'               => $field_name,
 			'class'            => $field_name . '  give-select',
 			'options'          => $states,
 			'show_option_all'  => false,
 			'show_option_none' => false,
-			'placeholder' => $label,
+			'placeholder'      => $label,
+			'selected'         => $default_state,
 		);
-		$data = Give()->html->select( $args );
+		$data         = Give()->html->select( $args );
 		$states_found = true;
 	} else {
 		$data = 'nostates';
@@ -246,15 +264,17 @@ function give_ajax_get_states_field() {
 		}
 	}
 	$response = array(
-		'success' => true,
-		'states_found' => $states_found,
-		'show_field' => $show_field,
-		'states_label' => $label,
+		'success'        => true,
+		'states_found'   => $states_found,
+		'states_label'   => $label,
+		'show_field'     => $show_field,
 		'states_require' => $states_require,
-		'data' => $data,
+		'data'           => $data,
+		'default_state'  => $default_state,
 	);
 	wp_send_json( $response );
 }
+
 add_action( 'wp_ajax_give_get_states', 'give_ajax_get_states_field' );
 add_action( 'wp_ajax_nopriv_give_get_states', 'give_ajax_get_states_field' );
 
@@ -319,7 +339,7 @@ function give_ajax_donor_search() {
 	if ( ! current_user_can( 'view_give_reports' ) ) {
 		$donors = array();
 	} else {
-		$donors = $wpdb->get_results( "SELECT id,name,email FROM {$wpdb->prefix}give_customers WHERE `name` LIKE '%$search%' OR `email` LIKE '%$search%' LIMIT 50" );
+		$donors = $wpdb->get_results( "SELECT id,name,email FROM $wpdb->donors WHERE `name` LIKE '%$search%' OR `email` LIKE '%$search%' LIMIT 50" );
 	}
 
 	if ( $donors ) {
@@ -359,7 +379,7 @@ function give_ajax_search_users() {
 
 	if ( current_user_can( 'manage_give_settings' ) ) {
 
-		$search   = esc_sql( sanitize_text_field( $_GET['s'] ) );
+		$search = esc_sql( sanitize_text_field( $_GET['s'] ) );
 
 		$get_users_args = array(
 			'number' => 9999,
@@ -416,7 +436,7 @@ function give_check_for_form_price_variations() {
 	$form_id = intval( $_POST['form_id'] );
 	$form    = get_post( $form_id );
 
-	if ( 'give_forms' != $form->post_type ) {
+	if ( 'give_forms' !== $form->post_type ) {
 		die( '-2' );
 	}
 
@@ -459,18 +479,21 @@ function give_check_for_form_price_variations_html() {
 		wp_die();
 	}
 
-	$form_id    = ! empty( $_POST['form_id'] ) ? intval( $_POST['form_id'] ) : 0;
-	$payment_id = ! empty( $_POST['payment_id'] ) ? intval( $_POST['payment_id'] ) : 0;
-	$form       = get_post( $form_id );
+	$form_id    = ! empty( $_POST['form_id'] ) ? intval( $_POST['form_id'] ) : false;
+	$payment_id = ! empty( $_POST['payment_id'] ) ? intval( $_POST['payment_id'] ) : false;
+	if ( empty( $form_id ) || empty( $payment_id ) ) {
+		wp_die();
+	}
 
-	if ( 'give_forms' != $form->post_type ) {
+	$form = get_post( $form_id );
+	if ( ! empty( $form->post_type ) && 'give_forms' !== $form->post_type ) {
 		wp_die();
 	}
 
 	if ( ! give_has_variable_prices( $form_id ) || ! $form_id ) {
 		esc_html_e( 'n/a', 'give' );
 	} else {
-		$prices_atts = '';
+		$prices_atts = array();
 		if ( $variable_prices = give_get_variable_prices( $form_id ) ) {
 			foreach ( $variable_prices as $variable_price ) {
 				$prices_atts[ $variable_price['_give_id']['level_id'] ] = give_format_amount( $variable_price['_give_amount'], array( 'sanitize' => false ) );
@@ -504,3 +527,63 @@ function give_check_for_form_price_variations_html() {
 }
 
 add_action( 'wp_ajax_give_check_for_form_price_variations_html', 'give_check_for_form_price_variations_html' );
+
+/**
+ * Send Confirmation Email For Complete Donation History Access.
+ *
+ * @since 1.8.17
+ *
+ * @return bool
+ */
+function give_confirm_email_for_donation_access() {
+
+	// Verify Security using Nonce.
+	if ( ! check_ajax_referer( 'give_ajax_nonce', 'nonce' ) ) {
+		return false;
+	}
+
+	// Bail Out, if email is empty.
+	if ( empty( $_POST['email'] ) ) {
+		return false;
+	}
+
+	$donor = Give()->donors->get_donor_by( 'email', give_clean( $_POST['email'] ) );
+	if ( Give()->email_access->can_send_email( $donor->id ) ) {
+		$return     = array();
+		$email_sent = Give()->email_access->send_email( $donor->id, $donor->email );
+
+		if ( ! $email_sent ) {
+			$return['status']  = 'error';
+			$return['message'] = Give()->notices->print_frontend_notice(
+				__( 'Unable to send email. Please try again.', 'give' ),
+				false,
+				'error'
+			);
+		}
+
+		$return['status']  = 'success';
+		$return['message'] = Give()->notices->print_frontend_notice(
+			__( 'Please check your email and click on the link to access your complete donation history.', 'give' ),
+			false,
+			'success'
+		);
+
+
+	} else {
+		$value             = Give()->email_access->verify_throttle / 60;
+		$return['status']  = 'error';
+		$return['message'] = Give()->notices->print_frontend_notice(
+			sprintf(
+				__( 'Too many access email requests detected. Please wait %s before requesting a new donation history access link.', 'give' ),
+				sprintf( _n( '%s minute', '%s minutes', $value, 'give' ), $value )
+			),
+			false,
+			'error'
+		);
+	}
+
+	echo json_encode( $return );
+	give_die();
+}
+
+add_action( 'wp_ajax_nopriv_give_confirm_email_for_donations_access', 'give_confirm_email_for_donation_access' );

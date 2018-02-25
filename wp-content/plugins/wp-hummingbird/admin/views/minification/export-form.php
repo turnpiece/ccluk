@@ -9,7 +9,7 @@ $minification_options = array(
 	'position' => $settings['position'],
 	'plugins' => get_option( 'active_plugins' ),
 	'network_plugins' => get_site_option( 'active_sitewide_plugins' ),
-	'theme' => get_stylesheet()
+	'theme' => get_stylesheet(),
 );
 ?>
 
@@ -18,14 +18,11 @@ $minification_options = array(
 	<?php echo wp_json_encode( $minification_options ); ?>
 </pre>
 
-<?php if ( defined( 'WPHB_IMPORT_MINIFICATION' ) && WPHB_IMPORT_MINIFICATION ): ?>
+<?php if ( defined( 'WPHB_IMPORT_MINIFICATION' ) && WPHB_IMPORT_MINIFICATION ) : ?>
 	<?php
-	if ( isset( $_POST['action'] ) && $_POST['action'] === 'import-minification' ) {
+	if ( isset( $_POST['action'] ) && 'import-minification' === $_POST['action'] ) {
 		check_admin_referer( 'import-minification' );
 		$json = json_decode( $_POST['json'] );
-		if ( is_array( $json ) ) {
-
-		}
 	}
 	?>
 	<form action="" method="post">
@@ -37,6 +34,6 @@ $minification_options = array(
 		</textarea>
 		<?php submit_button( 'Submit', 'primary', 'submit-minification-import' ); ?>
 	</form>
-<?php else: ?>
+<?php else : ?>
 	<p>Want to import settings? Use <code>define( 'WPHB_IMPORT_MINIFICATION', true );</code> in your wp-config.php file</p>
 <?php endif; ?>

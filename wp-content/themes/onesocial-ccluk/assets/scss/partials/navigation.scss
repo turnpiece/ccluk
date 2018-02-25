@@ -1,0 +1,19 @@
+/** Navigation **/
+
+@media screen and (min-width: 481px)  {
+	.main-navigation {
+		.nav-menu {
+			> li {
+				&:hover,
+				&.current-menu-item,
+				&.current-menu-ancestor {
+					background-color: $green;
+
+					> a {
+						color: $white;
+					}
+				}
+			}
+		}
+	}
+}

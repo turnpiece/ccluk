@@ -3,7 +3,7 @@
  * =========================================================
  * Copyright 2015 WPBakery
  *
- * Visual composer template preview
+ * WPBakery Page Builder template preview
  * ========================================================= */
 /* global vc */
 (function ( $ ) {

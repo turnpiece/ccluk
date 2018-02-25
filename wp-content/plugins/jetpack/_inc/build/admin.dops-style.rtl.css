@@ -27,8 +27,6 @@
     color: #2e4453; }
   .dops-button:active {
     border-width: 2px 1px 1px; }
-  .dops-button:visited {
-    color: #2e4453; }
   .dops-button[disabled], .dops-button:disabled {
     color: #e9eff3;
     background: white;
@@ -931,8 +929,6 @@
   background-color: white;
   transition: all .15s ease-in-out;
   box-shadow: none; }
-  .dops-text-input.dops-text-input::-webkit-input-placeholder {
-    color: #87a6bc; }
   .dops-text-input.dops-text-input:-ms-input-placeholder {
     color: #87a6bc; }
   .dops-text-input.dops-text-input::placeholder {
@@ -952,8 +948,6 @@
     -webkit-text-fill-color: #a8bece; }
     .dops-text-input.dops-text-input:disabled:hover {
       cursor: default; }
-    .dops-text-input.dops-text-input:disabled::-webkit-input-placeholder {
-      color: #a8bece; }
     .dops-text-input.dops-text-input:disabled:-ms-input-placeholder {
       color: #a8bece; }
     .dops-text-input.dops-text-input:disabled::placeholder {
@@ -1030,7 +1024,7 @@
 .form-toggle + .form-toggle__label .form-toggle__switch {
   background: #a8bece; }
 
-.form-toggle:not(:disabled) + .form-toggle__label .form-toggle__switch:hover {
+.form-toggle:not(:disabled) + .form-toggle__label:hover .form-toggle__switch {
   background: #c8d7e1; }
 
 .form-toggle:checked + .form-toggle__label .form-toggle__switch {
@@ -1038,7 +1032,7 @@
   .form-toggle:checked + .form-toggle__label .form-toggle__switch:after {
     right: 16px; }
 
-.form-toggle:checked:not(:disabled) + .form-toggle__label .form-toggle__switch:hover {
+.form-toggle:checked:not(:disabled) + .form-toggle__label:hover .form-toggle__switch {
   background: #78dcfa; }
 
 .form-toggle:disabled + label.form-toggle__label span.form-toggle__switch {
@@ -1256,9 +1250,10 @@ a.dops-card:focus {
     text-decoration: underline; }
   .dops-notice__text ul {
     margin-bottom: 0;
-    margin-right: 0; }
+    margin-right: 0;
+    list-style: disc; }
   .dops-notice__text li {
-    margin-right: 2em;
+    margin-right: 1.2em;
     margin-top: 0.5em; }
   .dops-notice__text p {
     margin-bottom: 0;
@@ -2077,8 +2072,6 @@ button.dops-foldable-card__action {
   background-color: white;
   transition: all .15s ease-in-out;
   box-shadow: none; }
-  .dops-textarea::-webkit-input-placeholder {
-    color: #87a6bc; }
   .dops-textarea:-ms-input-placeholder {
     color: #87a6bc; }
   .dops-textarea::placeholder {
@@ -2098,8 +2091,6 @@ button.dops-foldable-card__action {
     -webkit-text-fill-color: #a8bece; }
     .dops-textarea:disabled:hover {
       cursor: default; }
-    .dops-textarea:disabled::-webkit-input-placeholder {
-      color: #a8bece; }
     .dops-textarea:disabled:-ms-input-placeholder {
       color: #a8bece; }
     .dops-textarea:disabled::placeholder {
@@ -2177,6 +2168,35 @@ body.dops-modal-showing {
         height: auto;
         border-radius: 5px;
         box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2); } }
+@charset "UTF-8";
+/*
+The MIT License (MIT)
+
+Copyright © 2011–2015 thoughtbot, inc.
+
+Permission is hereby granted, free of charge, to any person obtaining a copy of this software and associated
+documentation files (the “Software”), to deal in the Software without restriction, including without limitation the
+rights to use, copy, modify, merge, publish, distribute, sublicense, and/or sell copies of the Software, and to permit
+persons to whom the Software is furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all copies or substantial
+portions of the Software.
+
+THE SOFTWARE IS PROVIDED “AS IS”, WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE
+WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR
+COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR
+OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
+
+https://github.com/thoughtbot/bourbon
+*/
+.jp-jetpack-connect__button {
+  background: #00BE30;
+  border-color: #00a523;
+  color: white; }
+  .jp-jetpack-connect__button:hover, .jp-jetpack-connect__button:focus {
+    background: #00a523;
+    border-color: #008b1d;
+    color: white; }
 .dops-tooltip.dops-popover .dops-popover__arrow {
   border-width: 6px; }
 

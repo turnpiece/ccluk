@@ -78,7 +78,7 @@ class Core_Result extends Behavior {
 
 			return true;
 		} elseif ( $raw['type'] == 'modified' ) {
-			return new \WP_Error( Error_Code::INVALID, __( "This file can't not remove", wp_defender()->domain ) );
+			return new \WP_Error( Error_Code::INVALID, __( "This file can't be removed", wp_defender()->domain ) );
 		} elseif ( $raw['type'] == 'dir' ) {
 			$res = $this->deleteFolder( $raw['file'] );
 			if ( is_wp_error( $res ) ) {
@@ -196,7 +196,7 @@ class Core_Result extends Behavior {
                                     <button type="button" class="button button-small delete-mitem button-grey">
 										<?php _e( "Delete", wp_defender()->domain ) ?></button>
                                     <div class="confirm-box wd-hide">
-										<?php _e( "This will permanent remove the file/folder with all content, do you want to do this?", wp_defender()->domain ) ?>
+										<?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?>
                                         &nbsp;
                                         <button type="submit" class="button button-small button-grey">
 											<?php _e( "Yes", wp_defender()->domain ) ?>

@@ -1,0 +1,60 @@
+/* ****************************************************************************
+ * COMPONENTS: BORDER FRAME
+ */
+
+@import "../common/mixins";
+
+.wpmud .wphb-border-frame {
+    border: 1px solid #E6E6E6;
+    border-radius: 5px;
+    margin: 10px 0 0 !important;
+}
+
+.wpmud .wphb-border-frame .table-header,
+.wpmud .wphb-border-frame .table-row {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 80px 15px 30px;
+}
+
+.wpmud .wphb-border-frame .table-header {
+    color: #333333;
+    font-size: 13px;
+    font-weight: bold;
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.wpmud .wphb-border-frame .table-row {
+    border-bottom: 1px solid #E6E6E6;
+}
+
+.wpmud .wphb-border-frame .table-row:last-child {
+    border-bottom: 0;
+}
+
+.wpmud .wphb-border-frame .list-table > thead > tr > th {
+    color: #333333;
+    font-size: 13px;
+    padding: 8px 0;
+}
+
+.wpmud .wphb-border-frame .list-table > thead > tr > th:first-child {
+    padding: 27px 30px;
+}
+
+.wpmud .wphb-border-frame .list-table > tbody > tr > td:first-child {
+    padding-left: 30px;
+}
+
+@include bp(tablet) {
+    .wpmud .wphb-border-frame {
+        border: 0
+    }
+}
+
+@include bp(phone) {
+    .wpmud .wphb-border-frame .table-header,
+    .wpmud .wphb-border-frame .table-row {
+        padding: 15px 0;
+    }
+}

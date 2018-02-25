@@ -28,7 +28,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 function give_update_payment_details( $data ) {
 
 	if ( ! current_user_can( 'edit_give_payments', $data['give_payment_id'] ) ) {
-		wp_die( esc_html__( 'You do not have permission to edit payments.', 'give' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
+		wp_die( __( 'You do not have permission to edit payments.', 'give' ), __( 'Error', 'give' ), array( 'response' => 403 ) );
 	}
 
 	check_admin_referer( 'give_update_payment_details_nonce' );
@@ -38,10 +38,6 @@ function give_update_payment_details( $data ) {
 
 	/* @var Give_Payment $payment */
 	$payment = new Give_Payment( $payment_id );
-
-	// Retrieve existing payment meta.
-	$meta      = $payment->get_meta();
-	$user_info = $payment->user_info;
 
 	$status = $data['give-payment-status'];
 	$date   = sanitize_text_field( $data['give-payment-date'] );
@@ -63,10 +59,10 @@ function give_update_payment_details( $data ) {
 		$minute = 00;
 	}
 
-	$address = array_map( 'trim', $data['give-payment-address'][0] );
+	$address = give_clean( $data['give-payment-address'][0] );
 
 	$curr_total = $payment->total;
-	$new_total  = give_maybe_sanitize_amount( $data['give-payment-total'] );
+	$new_total  = give_maybe_sanitize_amount( ( ! empty( $data['give-payment-total'] ) ? $data['give-payment-total'] : 0 ) );
 	$date       = date( 'Y-m-d', strtotime( $date ) ) . ' ' . $hour . ':' . $minute . ':00';
 
 	$curr_donor_id = sanitize_text_field( $data['give-current-donor'] );
@@ -86,18 +82,20 @@ function give_update_payment_details( $data ) {
 	$updated       = $payment->save();
 
 	if ( 0 === $updated ) {
-		wp_die( esc_html__( 'Error Updating Donation.', 'give' ), esc_html__( 'Error', 'give' ), array( 'response' => 400 ) );
+		wp_die( __( 'Error Updating Donation.', 'give' ), __( 'Error', 'give' ), array( 'response' => 400 ) );
 	}
 
 	$donor_changed = false;
 
 	if ( isset( $data['give-new-donor'] ) && $data['give-new-donor'] == '1' ) {
 
-		$email = isset( $data['give-new-donor-email'] ) ? sanitize_text_field( $data['give-new-donor-email'] ) : '';
-		$names = isset( $data['give-new-donor-name'] ) ? sanitize_text_field( $data['give-new-donor-name'] ) : '';
+		$email      = ! empty( $data['give-new-donor-email'] ) ? sanitize_text_field( $data['give-new-donor-email'] ) : '';
+		$first_name = ! empty( $data['give-new-donor-first-name'] ) ? sanitize_text_field( $data['give-new-donor-first-name'] ) : '';
+		$last_name  = ! empty( $data['give-new-donor-last-name'] ) ? sanitize_text_field( $data['give-new-donor-last-name'] ) : '';
+		$names      = strip_tags( wp_unslash( trim( "{$first_name} {$last_name}" ) ) );
 
-		if ( empty( $email ) || empty( $names ) ) {
-			wp_die( esc_html__( 'New donors require a name and email address.', 'give' ), esc_html__( 'Error', 'give' ), array( 'response' => 400 ) );
+		if ( empty( $email ) || empty( $first_name ) ) {
+			wp_die( __( 'New Donor requires first name and email address.', 'give' ), __( 'Error', 'give' ), array( 'response' => 400 ) );
 		}
 
 		$donor = new Give_Donor( $email );
@@ -109,12 +107,16 @@ function give_update_payment_details( $data ) {
 			}
 
 			if ( ! $donor->create( $donor_data ) ) {
-				// Failed to crete the new donor, assume the previous donor.
+				// Failed to create the new donor, assume the previous donor.
 				$donor_changed = false;
 				$donor         = new Give_Donor( $curr_donor_id );
 				give_set_error( 'give-payment-new-donor-fail', __( 'Error creating new donor.', 'give' ) );
 			}
 		}
+
+		// Create and Update Donor First Name and Last Name in Meta Fields.
+		$donor->update_meta( '_give_donor_first_name', $first_name );
+		$donor->update_meta( '_give_donor_last_name', $last_name );
 
 		$new_donor_id = $donor->id;
 
@@ -133,23 +135,19 @@ function give_update_payment_details( $data ) {
 		$donor_changed = true;
 
 	} else {
-
 		$donor = new Give_Donor( $curr_donor_id );
 		$email    = $donor->email;
 		$names    = $donor->name;
-
-	}
-
-	// Setup first and last name from input values.
-	$names      = explode( ' ', $names );
-	$first_name = ! empty( $names[0] ) ? $names[0] : '';
-	$last_name  = '';
-	if ( ! empty( $names[1] ) ) {
-		unset( $names[0] );
-		$last_name = implode( ' ', $names );
 	}
 
 	if ( $donor_changed ) {
+
+		// Setup first and last name from input values.
+		$first_name = $donor->get_first_name();
+		$last_name  = $donor->get_last_name();
+
+		$payment->first_name = $first_name;
+		$payment->last_name  = $last_name;
 
 		// Remove the stats and payment from the previous donor and attach it to the new donor.
 		$previous_donor->remove_payment( $payment_id, false );
@@ -178,8 +176,6 @@ function give_update_payment_details( $data ) {
 	// Set new meta values.
 	$payment->user_id    = $donor->user_id;
 	$payment->email      = $donor->email;
-	$payment->first_name = $first_name;
-	$payment->last_name  = $last_name;
 	$payment->address    = $address;
 	$payment->total      = $new_total;
 
@@ -219,25 +215,14 @@ function give_update_payment_details( $data ) {
 	// We are adding payment transfer code in last to remove any conflict with above functionality.
 	// For example: above code will automatically handle form stat (increase/decrease) when payment status changes.
 	// Check if user want to transfer current payment to new give form id.
-	if ( $new_form_id != $current_form_id ) {
+	if ( $new_form_id && $new_form_id != $current_form_id ) {
 
 		// Get new give form title.
 		$new_form_title = get_the_title( $new_form_id );
 
-		// Update new give form data in payment data.
-		$payment_meta               = $payment->get_meta();
-		$payment_meta['form_title'] = $new_form_title;
-		$payment_meta['form_id']    = $new_form_id;
-
-		// Update price id post meta data for set donation form.
-		if ( ! give_has_variable_prices( $new_form_id ) ) {
-			$payment_meta['price_id'] = '';
-		}
-
 		// Update payment give form meta data.
 		$payment->update_meta( '_give_payment_form_id', $new_form_id );
 		$payment->update_meta( '_give_payment_form_title', $new_form_title );
-		$payment->update_meta( '_give_payment_meta', $payment_meta );
 
 		// Update price id payment metadata.
 		if ( ! give_has_variable_prices( $new_form_id ) ) {
@@ -260,6 +245,12 @@ function give_update_payment_details( $data ) {
 
 		// Re setup payment to update new meta value in object.
 		$payment->update_payment_setup( $payment->ID );
+
+		// Update form id in payment logs.
+		Give()->async_process->data( array(
+			'data' => array( $new_form_id, $payment_id ),
+			'hook' => 'give_update_log_form_id',
+		) )->dispatch();
 	}
 
 	// Update price id if current form is variable form.
@@ -392,7 +383,7 @@ function give_trigger_payment_note_deletion( $data ) {
 	}
 
 	if ( ! current_user_can( 'edit_give_payments', $data['payment_id'] ) ) {
-		wp_die( esc_html__( 'You do not have permission to edit payments.', 'give' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
+		wp_die( __( 'You do not have permission to edit payments.', 'give' ), __( 'Error', 'give' ), array( 'response' => 403 ) );
 	}
 
 	$edit_order_url = admin_url( 'edit.php?post_type=give_forms&page=give-payment-history&view=view-payment-details&give-message=donation-note-deleted&id=' . absint( $data['payment_id'] ) );
@@ -414,7 +405,7 @@ add_action( 'give_delete_payment_note', 'give_trigger_payment_note_deletion' );
 function give_ajax_delete_payment_note() {
 
 	if ( ! current_user_can( 'edit_give_payments', $_POST['payment_id'] ) ) {
-		wp_die( esc_html__( 'You do not have permission to edit payments.', 'give' ), esc_html__( 'Error', 'give' ), array( 'response' => 403 ) );
+		wp_die( __( 'You do not have permission to edit payments.', 'give' ), __( 'Error', 'give' ), array( 'response' => 403 ) );
 	}
 
 	if ( give_delete_payment_note( $_POST['note_id'], $_POST['payment_id'] ) ) {

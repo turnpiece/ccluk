@@ -8,8 +8,9 @@
 /**
  * Customizer additions.
  */
-//require get_stylesheet_directory() . '/inc/customizer.php';
+require get_stylesheet_directory() . '/inc/customizer.php';
 
+define( 'CCLUK_DEBUGGING', false );
 
 /**
  * Sets up theme defaults
@@ -53,7 +54,8 @@ function ccluk_theme_scripts_styles()
   /*
    * Styles
    */
-  wp_enqueue_style( 'onesocial-ccluk-custom', get_stylesheet_directory_uri().'/css/custom.css' );
+  wp_enqueue_style( 'onesocial-ccluk-custom', get_stylesheet_directory_uri().'/assets/css/custom.'.(CCLUK_DEBUGGING ? '' : 'min.').'css' );
+
 }
 add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 
@@ -217,8 +219,7 @@ function boss_generate_option_css() {
     .breadcrumb-wrapper a:hover,
     .sap-container-wrapper .sap-author-name.sap-author-name,
     .sap-publish-popup.sap-publish-popup .sap-action-button,
-    #send-private-message.generic-button a:before,
-    input[type="submit"] {
+    #send-private-message.generic-button a:before {
       color: <?php echo $accent_color; ?>;
     }
 
@@ -511,6 +512,7 @@ function ccluk_create_news_post_type() {
       'public' => true,
       'has_archive' => true,
       'rewrite' => array('slug' => 'news'),
+      'supports' => array( 'title', 'editor', 'thumbnail' ),
     )
   );
 }

@@ -7,11 +7,10 @@
  * @copyright:   Copyright (c) 2016, WordImpress
  * @license:     http://opensource.org/licenses/gpl-2.0.php GNU Public License
  */
+
+/* global jQuery, Give */
 var give_scripts, give_global_vars;
 jQuery(document).ready(function ($) {
-
-	//Run tooltips setup
-	setup_give_tooltips();
 
 	//Hide loading elements
 	$('.give-loading-text').hide();
@@ -22,7 +21,7 @@ jQuery(document).ready(function ($) {
 		var this_form         = $(this).parents('form');
 		var loading_animation = $(this_form).find('[id^="give-checkout-login-register"] .give-loading-text');
 		var data              = {
-			action : $this.data('action'),
+			action: $this.data('action'),
 			form_id: $(this_form).find('[name="give-form-id"]').val()
 		};
 
@@ -40,8 +39,6 @@ jQuery(document).ready(function ($) {
 			loading_animation.hide();
 			// Trigger float-labels
 			give_fl_trigger();
-			//Setup tooltips again
-			setup_give_tooltips();
 		});
 		return false;
 	});
@@ -53,7 +50,7 @@ jQuery(document).ready(function ($) {
 		var $this     = $(this);
 		var this_form = $(this).parents('form');
 		var data      = {
-			action : $this.data('action'),
+			action: $this.data('action'),
 			form_id: $(this_form).find('[name="give-form-id"]').val()
 		};
 		// AJAX get the payment fields.
@@ -64,8 +61,6 @@ jQuery(document).ready(function ($) {
 		}).done(function () {
 			// Trigger float-labels
 			give_fl_trigger();
-			//Setup tooltips again
-			setup_give_tooltips();
 		});
 	});
 
@@ -81,32 +76,36 @@ jQuery(document).ready(function ($) {
 
 		this_form.find('[id^=give-login-fields] .give-loading-animation').fadeIn();
 
-        var data = {
-            action: 'give_process_donation_login',
-            give_ajax: 1,
-            give_user_login: this_form.find('[name=give_user_login]').val(),
-            give_user_pass: this_form.find('[name=give_user_pass]').val()
-        };
+		var data = {
+			action: 'give_process_donation_login',
+			give_ajax: 1,
+			give_user_login: this_form.find('[name=give_user_login]').val(),
+			give_user_pass: this_form.find('[name=give_user_pass]').val(),
+			give_form_id: this_form.find('[name=give-form-id]').val()
+		};
 
 		$.post(give_global_vars.ajaxurl, data, function (response) {
 			//user is logged in
-			if ( $.trim( typeof ( response.success ) ) != undefined && response.success == true && typeof ( response.data ) != undefined ) {
+			if ($.trim(typeof ( response.success )) != undefined && response.success == true && typeof ( response.data ) != undefined) {
 
 				//remove errors
 				this_form.find('.give_errors').remove();
 
-                // Login successfully message.
-                this_form.find( '#give-payment-mode-select' ).after( response.data );
-                this_form.find( '.give_notices.give_errors' ).delay(5000).slideUp();
+				// Login successfully message.
+				this_form.find('#give-payment-mode-select').after(response.data);
+				this_form.find('.give_notices.give_errors').delay(5000).slideUp();
 
-                //reload the selected gateway so it contains their logged in information
+				// Create and update nonce.
+				Give.form.fn.resetNonce( this_form );
+
+				//reload the selected gateway so it contains their logged in information
 				give_load_gateway(this_form, this_form.find('.give-gateway-option-selected input').val());
 			} else {
 				//Login failed, show errors
 				this_form.find('[id^=give-login-fields] input[type=submit]').val(complete_purchase_val);
 				this_form.find('.give-loading-animation').fadeOut();
 				this_form.find('.give_errors').remove();
-				this_form.find('[id^=give-user-login-submit]').before( response.data );
+				this_form.find('[id^=give-user-login-submit]').before(response.data);
 			}
 		});
 
@@ -130,6 +129,38 @@ jQuery(document).ready(function ($) {
 
 		return false;
 
+	});
+
+	/**
+	 * Donation history non login user want to see email list after making a donation
+	 *
+	 * @since 1.8.17
+	 */
+	$( 'body' ).on( 'click', '#give-confirm-email-btn', function( e ) {
+
+		var $this = $( this );
+		var data = {
+			action: 'give_confirm_email_for_donations_access',
+			email: $this.data( 'email' ),
+			nonce: give_scripts.ajaxNonce
+		};
+
+		$this.text( give_global_vars.loading );
+		$this.attr( 'disabled', 'disabled' );
+
+		$.post( give_global_vars.ajaxurl, data, function( response ) {
+			response = JSON.parse( response );
+			if ( 'error' === response.status ) {
+				$this.closest( '#give_user_history tfoot' ).hide();
+				$this.closest( '.give_user_history_main' ).find( '.give_user_history_notice' ).html( response.message );
+			} else if ( 'success' === response.status ) {
+				$this.closest( '.give_user_history_main' ).find( '.give_user_history_notice' ).html( response.message );
+				$this.hide();
+				$this.closest( '.give-security-button-wrap' ).find( 'span' ).show();
+			}
+		});
+
+		return false;
 	});
 
 	/**
@@ -172,8 +203,11 @@ jQuery(document).ready(function ($) {
 		//Update submit button text
 		$(this).val(give_global_vars.purchase_loading);
 
-        //Submit form via AJAX
-        $.post(give_global_vars.ajaxurl, this_form.serialize() + '&action=give_process_donation&give_ajax=true', function (data) {
+		// Disable the form donation button.
+		Give.form.fn.disable(this_form, true);
+
+		//Submit form via AJAX
+		$.post(give_global_vars.ajaxurl, this_form.serialize() + '&action=give_process_donation&give_ajax=true', function (data) {
 
 			if ($.trim(data) == 'success') {
 				//Remove any errors
@@ -181,15 +215,17 @@ jQuery(document).ready(function ($) {
 				//Submit form for normal processing
 				$(give_purchase_form).submit();
 
-				this_form.trigger( 'give_form_validation_passed' );
+				this_form.trigger('give_form_validation_passed');
 			} else {
 				//There was an error / remove old errors and prepend new ones
 				this_form.find('input[type="submit"].give-submit').val(complete_purchase_val);
 				loading_animation.fadeOut();
 				this_form.find('.give_errors').remove();
-				this_form.find('input[type="submit"].give-submit').before(data);
-			}
+				this_form.find('#give_purchase_submit input[type="submit"].give-submit').before(data);
 
+				// Enable the form donation button.
+				Give.form.fn.disable(this_form, false);
+			}
 		});
 
 	});
@@ -216,19 +252,19 @@ function give_load_gateway(form_object, payment_mode) {
 
 	if (form_data["blockUI.isBlocked"] != 1) {
 		jQuery(form_object).find('#give_purchase_form_wrap').block({
-			message   : null,
+			message: null,
 			overlayCSS: {
 				background: '#fff',
-				opacity   : 0.6
+				opacity: 0.6
 			}
 		});
 	}
 
 	//Post via AJAX to Give
 	jQuery.post(give_scripts.ajaxurl + '?payment-mode=' + payment_mode, {
-			action           : 'give_load_gateway',
-			give_total       : give_total,
-			give_form_id     : give_form_id,
+			action: 'give_load_gateway',
+			give_total: give_total,
+			give_form_id: give_form_id,
 			give_payment_mode: payment_mode
 		},
 		function (response) {
@@ -237,32 +273,9 @@ function give_load_gateway(form_object, payment_mode) {
 			jQuery(form_object).find('#give_purchase_form_wrap').html(response);
 			jQuery('.give-no-js').hide();
 			jQuery(form_object).find('#give-payment-mode-select .give-loading-text').fadeOut();
-			setup_give_tooltips();
 
 			// trigger an event on success for hooks
 			jQuery(document).trigger('give_gateway_loaded', [response, jQuery(form_object).attr('id')]);
 		}
 	);
-
-}
-
-/**
- * Load Tooltips
- *
- * @description Give tooltips use qTip2
- * @since 1.0
- */
-function setup_give_tooltips() {
-	jQuery('[data-tooltip!=""]').qtip({ // Grab all elements with a non-blank data-tooltip attr.
-		content : {
-			attr: 'data-tooltip' // Tell qTip2 to look inside this attr for its content
-		},
-		style   : {classes: 'qtip-rounded qtip-tipsy'},
-		position: {
-			my: 'bottom center',  // Position my top left...
-			at: 'top center' // at the bottom right of...
-		}
-	});
-	jQuery.fn.qtip.zindex = 2147483641; // Higher z-index than Give's magnific modal
-
 }

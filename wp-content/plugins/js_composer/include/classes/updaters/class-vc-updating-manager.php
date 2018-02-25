@@ -171,7 +171,7 @@ class Vc_Updating_Manager {
 			$url = esc_url( vc_updater()->getUpdaterUrl() );
 			$redirect = sprintf( '<a href="%s" target="_blank">%s</a>', $url, __( 'settings', 'js_composer' ) );
 
-			echo sprintf( ' ' . __( 'To receive automatic updates license activation is required. Please visit %s to activate your Visual Composer.', 'js_composer' ), $redirect ) . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', __( 'Got Visual Composer in theme?', 'js_composer' ) );
+			echo sprintf( ' ' . __( 'To receive automatic updates license activation is required. Please visit %s to activate your WPBakery Page Builder.', 'js_composer' ), $redirect ) . sprintf( ' <a href="http://go.wpbakery.com/faq-update-in-theme" target="_blank">%s</a>', __( 'Got WPBakery Page Builder in theme?', 'js_composer' ) );
 		}
 	}
 }

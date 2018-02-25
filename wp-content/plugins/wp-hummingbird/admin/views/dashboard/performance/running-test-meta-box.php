@@ -18,7 +18,7 @@
 					<span>0%</span>
 				</div><!-- end wphb-scan-progress-text -->
 				<div class="wphb-scan-progress-bar">
-					<span style="width: 0%"></span>
+					<span style="width: 0"></span>
 				</div><!-- end wphb-scan-progress-bar -->
 			</div><!-- end wphb-scan-progress -->
 		</div><!-- end wphb-block-test -->

@@ -17,18 +17,18 @@ class WP_Hummingbird_Admin {
 	public function __construct() {
 		$this->includes();
 
-		$this->admin_notices = new WP_Hummingbird_Admin_Notices();
-		$this->admin_notices->init();
+		$this->admin_notices = WP_Hummingbird_Admin_Notices::get_instance();
 
 		add_action( 'admin_menu', array( $this, 'add_menu_pages' ) );
 		add_action( 'network_admin_menu', array( $this, 'add_network_menu_pages' ) );
 
-		if ( defined( 'DOING_AJAX' ) && DOING_AJAX )
+		if ( defined( 'DOING_AJAX' ) && DOING_AJAX ) {
 			new WP_Hummingbird_Admin_AJAX();
+		}
 
 		add_action( 'admin_footer', array( $this, 'maybe_check_files' ) );
 		add_action( 'admin_footer', array( $this, 'maybe_check_report' ) );
-		add_action( 'admin_footer', array( $this, 'maybe_show_quick_setup') );
+		add_action( 'admin_footer', array( $this, 'maybe_show_quick_setup' ) );
 
 		add_filter( 'network_admin_plugin_action_links_wp-hummingbird/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'plugin_action_links_wp-hummingbird/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
@@ -42,15 +42,14 @@ class WP_Hummingbird_Admin {
 	}
 
 	public function enqueue_icon_styles() {
-		wp_enqueue_style( 'wphb-fonts', wphb_plugin_url() . 'admin/assets/css/wphb-font.css', array() );
+		wp_enqueue_style( 'wphb-fonts', WPHB_DIR_URL . 'admin/assets/css/wphb-font.css', array() );
 	}
 
 	public function add_plugin_action_links( $actions ) {
 		if ( current_user_can( wphb_get_admin_capability() ) ) {
 			if ( is_multisite() && ! is_network_admin() ) {
 				$url = network_admin_url( 'admin.php?page=wphb' );
-			}
-			else {
+			} else {
 				$url = wphb_get_admin_menu_url( '' );
 			}
 			$actions['dashboard'] = '<a href="' . $url . '" aria-label="' . esc_attr( __( 'Go to Hummingbird Dashboard', 'wphb' ) ) . '">' . esc_html__( 'Settings', 'wphb' ) . '</a>';
@@ -74,13 +73,18 @@ class WP_Hummingbird_Admin {
 		}
 	}
 
-
 	/**
 	 * Add all the menu pages in admin for the plugin
 	 */
 	public function add_menu_pages() {
+		if ( wphb_is_member() && get_site_option( 'wphb-pro' ) ) {
+			$hb_title = __( 'Hummingbird Pro', 'wphb' );
+		} else {
+			$hb_title = __( 'Hummingbird', 'wphb' );
+		}
+
 		if ( ! is_multisite() ) {
-			$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Hummingbird', 'wphb' ), __( 'Hummingbird', 'wphb' ), false, false );
+			$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb', $hb_title, $hb_title, false, false );
 			$this->pages['wphb-dashboard'] = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
 			$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 			$this->pages['wphb-caching'] = new WP_Hummingbird_Caching_Page( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
@@ -92,26 +96,53 @@ class WP_Hummingbird_Admin {
 			$this->pages['wphb-uptime'] = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 		} else {
 			$minify = wphb_get_setting( 'minify' );
-
-			if ( wphb_can_execute_php() ) {
-				if (
-					( 'super-admins' === $minify && is_super_admin() )
-					|| ( true === $minify )
-				) {
-					$this->pages['wphb-minification'] = new WP_Hummingbird_Minification_Page( 'wphb-minification', __( 'Minification', 'wphb' ), __( 'Hummingbird', 'wphb' ), false );
-				} elseif ( isset( $_GET['page'] ) && 'wphb-minification' === $_GET['page'] ) {
-					// Minification is off, and is a network, let's redirect to network admin
-					$url = network_admin_url( 'admin.php?page=wphb#wphb-box-dashboard-minification-network-module' );
-					$url = add_query_arg( 'minify-instructions', 'true', $url );
-					wp_redirect( $url );
-					exit;
-				}
+			$subsite_tests = false;
+			if ( is_super_admin() || wphb_get_setting( 'subsite-tests' ) ) {
+				$subsite_tests = true;
 			}
+
+			if ( $minify && $subsite_tests ) {
+				$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb-performance', $hb_title, $hb_title, false, false );
+				$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb-performance' );
+				$this->pages['wphb-minification'] = new WP_Hummingbird_Minification_Page( 'wphb-minification', __( 'Minification', 'wphb' ), __( 'Minification', 'wphb' ), 'wphb-performance' );
+
+			} elseif ( $minify ) {
+				if ( wphb_can_execute_php() ) {
+					if (
+						( 'super-admins' === $minify && is_super_admin() )
+						|| ( true === $minify )
+					) {
+						$this->pages['wphb-minification'] = new WP_Hummingbird_Minification_Page( 'wphb-minification', __( 'Minification', 'wphb' ), $hb_title, false );
+					}
+				}
+			} elseif ( $subsite_tests ) {
+				$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), $hb_title, false );
+			} elseif ( isset( $_GET['page'] ) && 'wphb-minification' === $_GET['page'] ) {
+				// Minification is off, and is a network, let's redirect to network admin
+				$url = network_admin_url( 'admin.php?page=wphb#wphb-box-dashboard-minification-network-module' );
+				$url = add_query_arg( 'minify-instructions', 'true', $url );
+				wp_redirect( $url );
+				exit;
+			} elseif ( isset( $_GET['page'] ) && 'wphb-performance' === $_GET['page'] ) {
+				// Subsite performance reporting is off, and is a network, let's redirect to network admin
+				$url = network_admin_url( 'admin.php?page=wphb-performance' );
+				$url = add_query_arg( 'view', 'settings', $url );
+				wp_redirect( $url );
+				exit;
+			}
+
+
 		}
 	}
 
 	public function add_network_menu_pages() {
-		$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Hummingbird', 'wphb' ), __( 'Hummingbird', 'wphb' ), false, false );
+		if ( wphb_is_member() && get_site_option( 'wphb-pro' ) ) {
+			$hb_title = __( 'Hummingbird Pro', 'wphb' );
+		} else {
+			$hb_title = __( 'Hummingbird', 'wphb' );
+		}
+
+		$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( 'wphb', $hb_title, $hb_title, false, false );
 		$this->pages['wphb-dashboard'] = new WP_Hummingbird_Dashboard_Page( 'wphb', __( 'Dashboard', 'wphb' ), __( 'Dashboard', 'wphb' ), 'wphb' );
 		$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 		$this->pages['wphb-caching'] = new WP_Hummingbird_Caching_Page( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
@@ -135,26 +166,29 @@ class WP_Hummingbird_Admin {
 	}
 
 	public function maybe_check_files() {
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() ) {
 			return;
+		}
 
 		$checking_files = wphb_minification_is_scanning_files();
 
 		// If we are checking files, continue with it
-		if ( ! $checking_files )
+		if ( ! $checking_files ) {
 			return;
+		}
 
 		$enqueued = wp_script_is( 'wphb-admin', 'enqueued' );
 
-		if ( ! $enqueued )
+		if ( ! $enqueued ) {
 			wphb_enqueue_admin_scripts( WPHB_VERSION );
+		}
 
-		// If we are in minification page, we should redirect when checking files is finished
+		// If we are in minification page, we should redirect when checking files is finished.
 		$screen = get_current_screen();
 		$minification_screen_id = isset( $this->pages['wphb-minification']->page_id ) ? $this->pages['wphb-minification']->page_id : false;
 
+		// The minification screen will do it for us.
 		if ( $screen->id === $minification_screen_id ) {
-			// The minification screen will do it for us
 			return;
 		}
 
@@ -162,7 +196,7 @@ class WP_Hummingbird_Admin {
 		<script>
 			jQuery( document ).ready( function() {
 				var module = window.WPHB_Admin.getModule( 'minification' );
-                module.scanner.scan();
+				module.scanner.scan();
 				module.minificationStarted = true;
 			});
 		</script>
@@ -170,14 +204,16 @@ class WP_Hummingbird_Admin {
 	}
 
 	public function maybe_check_report() {
-		if ( ! is_user_logged_in() )
+		if ( ! is_user_logged_in() ) {
 			return;
+		}
 
 		$doing_report = wphb_performance_is_doing_report();
 
 		// If we are checking files, continue with it.
-		if ( ! $doing_report )
+		if ( ! $doing_report ) {
 			return;
+		}
 
 		if ( wphb_performance_stopped_report() ) {
 			return;
@@ -185,14 +221,14 @@ class WP_Hummingbird_Admin {
 
 		$enqueued = wp_script_is( 'wphb-admin', 'enqueued' );
 
-		if ( ! $enqueued )
+		if ( ! $enqueued ) {
 			wphb_enqueue_admin_scripts( WPHB_VERSION );
+		}
 
 		// If we are in performance page, we should redirect when checking files is finished.
 		$screen = get_current_screen();
 		$performance_screen_id = isset( $this->pages['wphb-performance'] ) && isset( $this->pages['wphb-performance']->page_id ) ? $this->pages['wphb-performance']->page_id : false;
 		$dashboard_screen_id = isset( $this->pages['wphb'] ) && isset( $this->pages['wphb']->page_id ) ? $this->pages['wphb']->page_id : false;
-
 
 		$redirect = '';
 		if ( $screen->id === $performance_screen_id || $screen->id === $performance_screen_id . '-network' ) {
@@ -219,7 +255,6 @@ class WP_Hummingbird_Admin {
 	 * @since 1.5.0
 	 */
 	public function maybe_show_quick_setup() {
-
 		// Only run on HB pages.
 		$hb_pages = array(
 			'toplevel_page_wphb',
@@ -235,6 +270,7 @@ class WP_Hummingbird_Admin {
 			'hummingbird_page_wphb-gzip-network',
 			'hummingbird_page_wphb-uptime-network',
 		);
+
 		if ( ! in_array( get_current_screen()->id, $hb_pages, true ) ) {
 			return;
 		}
@@ -255,14 +291,6 @@ class WP_Hummingbird_Admin {
 			wphb_enqueue_admin_scripts( WPHB_VERSION );
 		}
 
-		// Enable automatic scans by default.
-		if ( wphb_is_member() ) {
-			$settings = wphb_get_settings();
-			$settings['email-notifications'] = true;
-			// Enable automatic reports for members.
-			wphb_update_settings( $settings );
-		}
-
 		wphb_quick_setup_modal();
 		wphb_check_performance_modal();
 		?>
@@ -278,5 +306,3 @@ class WP_Hummingbird_Admin {
 	}
 
 }
-
-

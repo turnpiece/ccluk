@@ -86,13 +86,13 @@ class Vc_Navbar implements Vc_Render {
 	}
 
 	/**
-	 * vc_filter: vc_nav_front_logo - hook to override visual composer logo
+	 * vc_filter: vc_nav_front_logo - hook to override WPBakery Page Builder logo
 	 * @return mixed|void
 	 */
 	public function getLogo() {
-		$output = '<a id="vc_logo" class="vc_navbar-brand" title="' . __( 'Visual Composer', 'js_composer' )
+		$output = '<a id="vc_logo" class="vc_navbar-brand" title="' . __( 'WPBakery Page Builder', 'js_composer' )
 		          . '" href="' . esc_attr( $this->brand_url ) . '" target="_blank">'
-		          . __( 'Visual Composer', 'js_composer' ) . '</a>';
+		          . __( 'WPBakery Page Builder', 'js_composer' ) . '</a>';
 
 		return apply_filters( 'vc_nav_front_logo', $output );
 	}
@@ -159,7 +159,7 @@ class Vc_Navbar implements Vc_Render {
 			return '';
 		}
 
-		return '<li><a href="javascript:;" class="vc_icon-btn vc_templates-button vc_navbar-border-right"  id="vc_templates-editor-button" title="'
+		return '<li><a href="javascript:;" class="vc_icon-btn vc_templates-button"  id="vc_templates-editor-button" title="'
 		       . __( 'Templates', 'js_composer' ) . '"><i class="vc-composer-icon vc-c-icon-add_template"></i></a></li>';
 	}
 
@@ -171,7 +171,7 @@ class Vc_Navbar implements Vc_Render {
 			return '';
 		}
 
-		return '<li class="vc_pull-right">'
+		return '<li class="vc_pull-right" style="display: none;">'
 		       . '<a href="' . vc_frontend_editor()->getInlineUrl() . '" class="vc_btn vc_btn-primary vc_btn-sm vc_navbar-btn" id="wpb-edit-inline">' . __( 'Frontend', 'js_composer' ) . '</a>'
 		       . '</li>';
 	}

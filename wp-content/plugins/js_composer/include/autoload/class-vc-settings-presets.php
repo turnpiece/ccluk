@@ -416,7 +416,7 @@ class Vc_Settings_Preset {
 	 */
 	public static function addPresetCategory( $category ) {
 		$presetCategory = (array) '_my_elements_';
-		$category = $presetCategory + $category;
+		$category = array_merge( $presetCategory, $category );
 
 		return $category;
 	}

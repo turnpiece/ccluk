@@ -11,5 +11,5 @@
 ?>
 <h3><?php echo esc_html( $title ); ?></h3>
 <div class="buttons">
-	<a href="<?php echo esc_url( $purge_url ); ?>" class="button button-ghost"><?php esc_html_e( 'Clear cache', 'wphb' ); ?></a>
+	<a href="<?php echo esc_url( $purge_url ); ?>" class="button button-ghost tooltip tooltip-right" tooltip="<?php esc_attr_e( 'Clear all locally cached Gravatars', 'wphb' ); ?>"><?php esc_html_e( 'Clear cache', 'wphb' ); ?></a>
 </div>

@@ -1,14 +1,14 @@
-# Copyright (C) 2017 WPMU DEV
+# Copyright (C) 2018 WPMU DEV
 # This file is distributed under the GNU General Public License (Version 2 - GPLv2).
 msgid ""
 msgstr ""
-"Project-Id-Version: WP Defender Pro 1.7.1\n"
+"Project-Id-Version: Defender Pro 1.7.5\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2017-09-25 04:18:30+00:00\n"
+"POT-Creation-Date: 2018-02-07 07:25:52+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2017-MO-DA HO:MI+ZONE\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n1.0.0\n"
@@ -19,7 +19,7 @@ msgstr ""
 msgid "BLACKLIST MONITOR"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:24 app/behavior/blacklist.php:61
+#: app/behavior/blacklist-free.php:25 app/behavior/blacklist.php:61
 #: app/module/audit/behavior/audit-free.php:20
 #: app/module/scan/behavior/scan.php:136 app/module/scan/behavior/scan.php:151
 #: app/module/scan/view/layouts/layout.php:61
@@ -29,12 +29,12 @@ msgstr ""
 msgid "Try Defender Pro free today"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:25 app/behavior/blacklist.php:62
+#: app/behavior/blacklist-free.php:26 app/behavior/blacklist.php:62
 #: app/module/audit/behavior/audit-free.php:20
 msgid "PRO FEATURE"
 msgstr ""
 
-#: app/behavior/blacklist-free.php:29 app/behavior/blacklist.php:34
+#: app/behavior/blacklist-free.php:30 app/behavior/blacklist.php:34
 #: app/behavior/blacklist.php:66
 msgid ""
 "Automatically check if you’re on Google’s blacklist every 6 hours. If "
@@ -42,7 +42,7 @@ msgid ""
 "                    wrong, we’ll let you know via email."
 msgstr ""
 
-#: app/behavior/blacklist-free.php:33 app/behavior/blacklist.php:70
+#: app/behavior/blacklist-free.php:35 app/behavior/blacklist.php:70
 #: app/module/audit/view/free.php:17
 #: app/module/ip-lockout/view/notification/report-free.php:5
 #: app/module/scan/view/automation-free.php:5
@@ -152,17 +152,17 @@ msgid "Lockout reports are active scheduled to send %s"
 msgstr ""
 
 #: app/behavior/report-free.php:129 app/behavior/report.php:224
-#: app/behavior/utils.php:804 free/utils.php:516
+#: app/behavior/utils.php:909 free/utils.php:656
 msgid "daily"
 msgstr ""
 
 #: app/behavior/report-free.php:132 app/behavior/report.php:227
-#: app/behavior/utils.php:807 free/utils.php:519
+#: app/behavior/utils.php:912 free/utils.php:659
 msgid "weekly"
 msgstr ""
 
 #: app/behavior/report-free.php:135 app/behavior/report.php:230
-#: app/behavior/utils.php:810 free/utils.php:522
+#: app/behavior/utils.php:915 free/utils.php:662
 msgid "monthly"
 msgstr ""
 
@@ -204,7 +204,7 @@ msgstr ""
 msgid "To activate this report you must first enable the Audit Logging module."
 msgstr ""
 
-#: app/behavior/utils.php:77 free/utils.php:77
+#: app/behavior/utils.php:77 free/utils.php:78
 msgid ""
 "WPMU DEV Dashboard will be required for this action. Please visit <a "
 "href=\"%s\">here</a> and install the WPMU DEV Dashboard"
@@ -212,31 +212,31 @@ msgstr ""
 
 #: app/behavior/utils.php:178 app/behavior/utils.php:187
 #: app/module/audit/view/table.php:86 app/module/audit/view/table.php:144
-#: free/utils.php:174 free/utils.php:183
+#: free/utils.php:179 free/utils.php:188
 msgid "Guest"
 msgstr ""
 
-#: app/behavior/utils.php:687
+#: app/behavior/utils.php:737
 msgid "WordPress Core Integrity"
 msgstr ""
 
-#: app/behavior/utils.php:688
+#: app/behavior/utils.php:738
 msgid "Plugins & Themes vulnerability"
 msgstr ""
 
-#: app/behavior/utils.php:689 app/module/scan/behavior/scan.php:145
+#: app/behavior/utils.php:739 app/module/scan/behavior/scan.php:145
 #: app/module/scan/view/layouts/layout.php:70
 #: app/module/scan/view/setting-free.php:50 app/module/scan/view/setting.php:43
 #: app/view/settings.php:98
 msgid "Suspicious Code"
 msgstr ""
 
-#: app/behavior/utils.php:694 app/module/audit/controller/main.php:143
+#: app/behavior/utils.php:768 app/module/audit/controller/main.php:144
 #: app/module/ip-lockout/controller/main.php:92
 msgid "Never"
 msgstr ""
 
-#: app/behavior/utils.php:787 free/utils.php:499
+#: app/behavior/utils.php:892 free/utils.php:639
 msgid "Please upgrade to 5.3 or later"
 msgstr ""
 
@@ -244,32 +244,36 @@ msgstr ""
 msgid "Dashboard"
 msgstr ""
 
-#: app/controller/dashboard.php:306 app/controller/dashboard.php:308
-#: app/controller/requirement.php:69 app/module/ip-lockout/view/locked.php:75
+#: app/controller/dashboard.php:324 app/controller/requirement.php:69
+#: app/module/ip-lockout/view/locked.php:75
 msgid "Defender"
 msgstr ""
 
-#: app/controller/dashboard.php:340
+#. Plugin Name of the plugin/theme
+msgid "Defender Pro"
+msgstr ""
+
+#: app/controller/dashboard.php:358
 msgid "QUICK SETUP"
 msgstr ""
 
-#: app/controller/dashboard.php:340
+#: app/controller/dashboard.php:358
 msgid "Skip"
 msgstr ""
 
-#: app/controller/dashboard.php:341
+#: app/controller/dashboard.php:359
 msgid "Activating File Scanning..."
 msgstr ""
 
-#: app/controller/dashboard.php:342
+#: app/controller/dashboard.php:360
 msgid "Activating Audit Module..."
 msgstr ""
 
-#: app/controller/dashboard.php:343
+#: app/controller/dashboard.php:361
 msgid "Activating IP Lockouts Module..."
 msgstr ""
 
-#: app/controller/dashboard.php:344
+#: app/controller/dashboard.php:362
 msgid "Activating Blacklist Monitoring..."
 msgstr ""
 
@@ -322,27 +326,43 @@ msgid ""
 msgstr ""
 
 #: app/module/advanced-tools/behavior/at-widget.php:27
-#: app/module/advanced-tools/view/disabled.php:4
 #: app/module/advanced-tools/view/layouts/layout.php:13
-#: app/module/advanced-tools/view/layouts/layout.php:20
-#: app/module/advanced-tools/view/login/disabled.php:6
-#: app/module/advanced-tools/view/login/enabled.php:6
 #: app/module/advanced-tools/view/main.php:4
-msgid "2 Factor Authentication"
+msgid "Two-Factor Authentication"
 msgstr ""
 
 #: app/module/advanced-tools/behavior/at-widget.php:31
 msgid ""
-"Protect your user accounts by requiring a second passcode sent to users "
-"phones in order to get past your login screen"
+"Add an extra layer of security to your WordPress account to ensure that "
+"you’re the only person who can log in, even if someone else knows your "
+"password"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:40
-#: app/module/advanced-tools/view/login/enabled.php:9
-msgid "2 factor authentication is active."
+#: app/module/advanced-tools/behavior/at-widget.php:43
+msgid ""
+"<strong>Two-factor authentication is now active.</strong> To turn on this "
+"feature for your account, go to <a href='%s'>Your Profile</a> to complete "
+"setup and sync your account with the Authenticator app."
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:48
+#: app/module/advanced-tools/behavior/at-widget.php:51
+msgid ""
+"Two-factor authentication is currently inactive. Configure and save your "
+"settings to finish setup. "
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:53
+msgid "Finish Setup"
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:58
+msgid ""
+"Note: Each user on your website must individually enable two-factor "
+"authentication via their user profile in order to enable and use this "
+"security feature."
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:67
 #: app/module/advanced-tools/view/disabled.php:19
 #: app/module/audit/behavior/audit.php:43 app/module/audit/view/new.php:15
 #: app/module/ip-lockout/behavior/widget.php:37
@@ -351,18 +371,18 @@ msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:58
 msgid ""
-"You enabled Jetpack WordPress.com login, so Defender will disable the 2 "
+"You enabled Jetpack WordPress.com login, so Defender will disable the two "
 "factors login for avoiding conflict"
 msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:61
 msgid ""
-"You enabled the plugin Theme My Login, so Defender will disable the 2 "
+"You enabled the plugin Theme My Login, so Defender will disable the two "
 "factors login for avoiding conflict"
 msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:135
-msgid "2 Factor"
+msgid "Two Factor"
 msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:158
@@ -389,19 +409,26 @@ msgstr ""
 msgid "Whoops, the passcode you entered was incorrect or expired."
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:455
-#: app/module/audit/controller/main.php:196
-#: app/module/ip-lockout/controller/main.php:664
-#: app/module/scan/controller/main.php:305
+#: app/module/advanced-tools/controller/main.php:457
+#: app/module/audit/controller/main.php:197
+#: app/module/ip-lockout/controller/main.php:693
+#: app/module/scan/controller/main.php:306
 msgid "Your settings have been updated."
+msgstr ""
+
+#: app/module/advanced-tools/view/disabled.php:4
+#: app/module/advanced-tools/view/layouts/layout.php:20
+#: app/module/advanced-tools/view/login/disabled.php:6
+#: app/module/advanced-tools/view/login/enabled.php:6
+msgid "Two Factor Authentication"
 msgstr ""
 
 #: app/module/advanced-tools/view/disabled.php:10
 msgid ""
-"Beef up your website’s security with 2-Step verification. Protect your user "
-"accounts by requiring a second passcode sent to users phones in order to "
-"get past your login screen - the best protection against brute force "
-"attacks."
+"Beef up your website’s security with two-factor authentication. Add an "
+"extra step in the login process so that users are required to enter a "
+"password and an app-generated passcode using their phone – the best "
+"protection against brute force attacks."
 msgstr ""
 
 #: app/module/advanced-tools/view/login/disabled.php:2
@@ -421,8 +448,8 @@ msgid "Use the Google Authenticator app to sign in with a separate passcode."
 msgstr ""
 
 #: app/module/advanced-tools/view/login/disabled.php:20
-#: app/module/audit/view/report.php:68 app/module/scan/controller/main.php:530
-#: app/module/scan/view/setting.php:138 app/module/scan/view/setting.php:158
+#: app/module/scan/controller/main.php:531 app/module/scan/view/setting.php:138
+#: app/module/scan/view/setting.php:158
 msgid "Cancel"
 msgstr ""
 
@@ -460,8 +487,12 @@ msgstr ""
 msgid "Verify"
 msgstr ""
 
+#: app/module/advanced-tools/view/login/enabled.php:9
+msgid "Two factor authentication is active."
+msgstr ""
+
 #: app/module/advanced-tools/view/login/enabled.php:12
-msgid "Disabled"
+msgid "Disable"
 msgstr ""
 
 #: app/module/advanced-tools/view/login/enabled.php:17
@@ -494,73 +525,87 @@ msgstr ""
 msgid "Lost your device?"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:9
+#: app/module/advanced-tools/view/main.php:14
 msgid ""
-"Configure your 2 factor authentication settings, our recommendations are on "
-"by default."
-msgstr ""
-
-#: app/module/advanced-tools/view/main.php:18
-msgid "User Roles"
-msgstr ""
-
-#: app/module/advanced-tools/view/main.php:20
-msgid ""
-"Choose what user roles you want to enable 2 factor authentication for. They "
-"must then use the Google Authenticator app to login."
+"Configure your two-factor authentication settings. Our recommendations are "
+"enabled by default."
 msgstr ""
 
 #: app/module/advanced-tools/view/main.php:27
+msgid ""
+"<strong>Two-factor authentication is now active.</strong> User roles with "
+"this feature enabled must visit their <a href='%s'>Profile page</a> to "
+"complete setup and sync their account with the Authenticator app."
+msgstr ""
+
+#: app/module/advanced-tools/view/main.php:35
+msgid ""
+"<strong>Two-factor authentication is currently inactive.</strong> Configure "
+"and save your settings to complete setup."
+msgstr ""
+
+#: app/module/advanced-tools/view/main.php:41
+msgid "User Roles"
+msgstr ""
+
+#: app/module/advanced-tools/view/main.php:43
+msgid ""
+"Choose the user roles you want to enable two-factor authentication for. "
+"Users with those roles will then be required to use the Google "
+"Authenticator app to login."
+msgstr ""
+
+#: app/module/advanced-tools/view/main.php:50
 msgid "User role"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:59
+#: app/module/advanced-tools/view/main.php:82
 msgid "Lost Phone"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:61
+#: app/module/advanced-tools/view/main.php:84
 msgid ""
 "If a user is unable to access their phone, you can allow an option to send "
 "the one time password to their registered email."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:71
+#: app/module/advanced-tools/view/main.php:94
 msgid "Enable lost phone option"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:76
+#: app/module/advanced-tools/view/main.php:99
 msgid "App Download"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:78
+#: app/module/advanced-tools/view/main.php:101
 msgid "Need the app? Here’s links to the official Google Authenticator apps."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:92
+#: app/module/advanced-tools/view/main.php:115
 msgid "Active Users"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:94
+#: app/module/advanced-tools/view/main.php:117
 msgid ""
-"Here’s a quick link to see which of your users have enabled 2 step "
+"Here’s a quick link to see which of your users have enabled two-factor "
 "verification."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:98
+#: app/module/advanced-tools/view/main.php:121
 msgid "<a href=\"%s\">View users</a> who have enabled this feature."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:103
-#: app/module/advanced-tools/view/main.php:110
+#: app/module/advanced-tools/view/main.php:126
+#: app/module/advanced-tools/view/main.php:133
 #: app/module/audit/view/settings.php:10
 msgid "Deactivate"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:105
-msgid "Turn off the 2 factor authentication feature completely."
+#: app/module/advanced-tools/view/main.php:128
+msgid "Disable two-factor authentication on your website."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:118
+#: app/module/advanced-tools/view/main.php:141
 msgid "SAVE SETTINGS"
 msgstr ""
 
@@ -584,59 +629,59 @@ msgstr ""
 msgid "Please hold on, Defender will update Audit information soon..."
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:57
-#: app/module/audit/component/audit-api.php:89
+#: app/module/audit/component/audit-api.php:58
+#: app/module/audit/component/audit-api.php:90
 msgid ""
 "Whoops, Defender had trouble loading up your event log. You can try a <a "
 "href='%s'class=''>​quick refresh</a>​ of this page or check back again "
 "later."
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:114
+#: app/module/audit/component/audit-api.php:115
 msgid "trashed"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:115
+#: app/module/audit/component/audit-api.php:116
 msgid "updated"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:116
+#: app/module/audit/component/audit-api.php:117
 msgid "deleted"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:117
+#: app/module/audit/component/audit-api.php:118
 msgid "created"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:118
+#: app/module/audit/component/audit-api.php:119
 msgid "restored"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:161
+#: app/module/audit/component/audit-api.php:162
 msgid "year"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:162
+#: app/module/audit/component/audit-api.php:163
 msgid "month"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:163
+#: app/module/audit/component/audit-api.php:164
 msgid "week"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:164
+#: app/module/audit/component/audit-api.php:165
 msgid "day"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:165
+#: app/module/audit/component/audit-api.php:166
 msgid "hour"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:166
+#: app/module/audit/component/audit-api.php:167
 msgid "minute"
 msgstr ""
 
-#: app/module/audit/component/audit-api.php:167
+#: app/module/audit/component/audit-api.php:168
 msgid "second"
 msgstr ""
 
@@ -1128,7 +1173,7 @@ msgstr ""
 #: app/module/scan/view/layouts/layout.php:132
 #: app/module/scan/view/layouts/layout.php:149
 #: app/module/scan/view/setting-free.php:3 app/module/scan/view/setting.php:3
-#: app/view/settings.php:6 free/main-activator.php:152 main-activator.php:96
+#: app/view/settings.php:6 free/main-activator.php:158 main-activator.php:96
 msgid "Settings"
 msgstr ""
 
@@ -1189,51 +1234,56 @@ msgid "A new user registered: Username: %s, Role: %s"
 msgstr ""
 
 #: app/module/audit/component/users-audit.php:75
-msgid "%s deleted an user: ID: %s"
+#: app/module/audit/component/users-audit.php:111
+msgid "%s deleted a user: ID: %s, username: %s"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:91
+#: app/module/audit/component/users-audit.php:93
+msgid "%s removed a user: ID: %s, username: %s from blog %s"
+msgstr ""
+
+#: app/module/audit/component/users-audit.php:137
 msgid "Password requested to reset for user: %s"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:99
+#: app/module/audit/component/users-audit.php:145
 msgid "Password reset for user: %s"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:110
+#: app/module/audit/component/users-audit.php:156
 msgid "%s changed user %s's role from %s to %s"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:164
+#: app/module/audit/component/users-audit.php:210
 msgid "User %s updated his/her profile"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:169
+#: app/module/audit/component/users-audit.php:215
 msgid "%s updated user %s's profile information"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:177
+#: app/module/audit/component/users-audit.php:223
 msgid "lost password"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:178
+#: app/module/audit/component/users-audit.php:224
 msgid "registered"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:179
+#: app/module/audit/component/users-audit.php:225
 msgid "login"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:180
+#: app/module/audit/component/users-audit.php:226
 msgid "logout"
 msgstr ""
 
-#: app/module/audit/component/users-audit.php:181
+#: app/module/audit/component/users-audit.php:227
 msgid "password reset"
 msgstr ""
 
 #: app/module/audit/controller/main-free.php:36
-#: app/module/audit/controller/main.php:502
+#: app/module/audit/controller/main.php:506
 #: app/module/audit/view/pro-feature.php:22
 #: app/module/ip-lockout/view/pro-feature.php:22
 #: app/module/scan/view/pro-feature.php:22 app/view/activator.php:33
@@ -1241,81 +1291,81 @@ msgstr ""
 msgid "Audit Logging"
 msgstr ""
 
-#: app/module/audit/controller/main.php:83 app/module/audit/view/table.php:20
+#: app/module/audit/controller/main.php:84 app/module/audit/view/table.php:20
 msgid "Summary"
 msgstr ""
 
-#: app/module/audit/controller/main.php:84 app/module/audit/view/table.php:58
+#: app/module/audit/controller/main.php:85 app/module/audit/view/table.php:58
 #: app/module/audit/view/table.php:154
 msgid "Date / Time"
 msgstr ""
 
-#: app/module/audit/controller/main.php:85 app/module/audit/view/table.php:54
+#: app/module/audit/controller/main.php:86 app/module/audit/view/table.php:54
 #: app/module/audit/view/table.php:104
 msgid "Context"
 msgstr ""
 
-#: app/module/audit/controller/main.php:86 app/module/audit/view/table.php:55
+#: app/module/audit/controller/main.php:87 app/module/audit/view/table.php:55
 #: app/module/audit/view/table.php:115
 msgid "Type"
 msgstr ""
 
-#: app/module/audit/controller/main.php:87 app/module/audit/view/table.php:56
+#: app/module/audit/controller/main.php:88 app/module/audit/view/table.php:56
 #: app/module/audit/view/table.php:126
 msgid "IP address"
 msgstr ""
 
-#: app/module/audit/controller/main.php:88 app/module/audit/view/table.php:57
+#: app/module/audit/controller/main.php:89 app/module/audit/view/table.php:57
 #: app/module/audit/view/table.php:137
 msgid "User"
 msgstr ""
 
-#: app/module/audit/controller/main.php:203
+#: app/module/audit/controller/main.php:204
 #: app/module/audit/view/layouts/layout.php:39
 msgid "at %s"
 msgstr ""
 
-#: app/module/audit/controller/main.php:205
+#: app/module/audit/controller/main.php:206
 #: app/module/audit/view/layouts/layout.php:42
 msgid "%s at %s"
 msgstr ""
 
-#: app/module/audit/controller/main.php:344
+#: app/module/audit/controller/main.php:346
 msgid "Hi {USER_NAME},"
 msgstr ""
 
-#: app/module/audit/controller/main.php:346
+#: app/module/audit/controller/main.php:348
 msgid ""
 "It’s WP Defender here, reporting from the frontline with a quick update on "
 "what’s been happening at <a href=\"%s\">%s</a>."
 msgstr ""
 
-#: app/module/audit/controller/main.php:358
+#: app/module/audit/controller/main.php:360
 msgid "Event Type"
 msgstr ""
 
-#: app/module/audit/controller/main.php:362
+#: app/module/audit/controller/main.php:364
 msgid "Action Summaries"
 msgstr ""
 
-#: app/module/audit/controller/main.php:403
+#: app/module/audit/controller/main.php:405
 msgid "You can view the full audit report for your site here."
 msgstr ""
 
-#: app/module/audit/controller/main.php:436
+#: app/module/audit/controller/main.php:438
 msgid "There were no events logged for %s"
 msgstr ""
 
-#: app/module/audit/controller/main.php:441
-#: app/module/audit/controller/main.php:466
+#: app/module/audit/controller/main.php:443
+#: app/module/audit/controller/main.php:469
 msgid "Here’s what’s been happening at %s"
 msgstr ""
 
-#: app/module/audit/controller/main.php:558 app/view/settings.php:209
+#: app/module/audit/controller/main.php:562 app/view/settings.php:209
 msgid "Type a user’s name"
 msgstr ""
 
-#: app/module/audit/controller/main.php:559
+#: app/module/audit/controller/main.php:563
 msgid "We did not find an user with this name..."
 msgstr ""
 
@@ -1333,60 +1383,60 @@ msgid "Defender!"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:454
-#: app/module/ip-lockout/view/emails/404-lockout.php:510
-#: app/module/ip-lockout/view/emails/login-lockout.php:512
-#: app/module/ip-lockout/view/emails/login-username-ban.php:511
+#: app/module/ip-lockout/view/emails/404-lockout.php:511
+#: app/module/ip-lockout/view/emails/login-lockout.php:513
+#: app/module/ip-lockout/view/emails/login-username-ban.php:512
 #: app/module/ip-lockout/view/emails/report.php:545
 #: app/module/scan/view/email-template.php:477
 msgid "Related plugins worth giving a try"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:475
-#: app/module/ip-lockout/view/emails/404-lockout.php:531
-#: app/module/ip-lockout/view/emails/login-lockout.php:533
-#: app/module/ip-lockout/view/emails/login-username-ban.php:532
+#: app/module/ip-lockout/view/emails/404-lockout.php:532
+#: app/module/ip-lockout/view/emails/login-lockout.php:534
+#: app/module/ip-lockout/view/emails/login-username-ban.php:533
 #: app/module/ip-lockout/view/emails/report.php:566
 #: app/module/scan/view/email-template.php:498
 msgid "Optimize your site with"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:477
-#: app/module/ip-lockout/view/emails/404-lockout.php:533
-#: app/module/ip-lockout/view/emails/login-lockout.php:535
-#: app/module/ip-lockout/view/emails/login-username-ban.php:534
+#: app/module/ip-lockout/view/emails/404-lockout.php:534
+#: app/module/ip-lockout/view/emails/login-lockout.php:536
+#: app/module/ip-lockout/view/emails/login-username-ban.php:535
 #: app/module/ip-lockout/view/emails/report.php:568
 #: app/module/scan/view/email-template.php:500
 msgid "Hummingbird"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:494
-#: app/module/ip-lockout/view/emails/404-lockout.php:550
-#: app/module/ip-lockout/view/emails/login-lockout.php:552
-#: app/module/ip-lockout/view/emails/login-username-ban.php:551
+#: app/module/ip-lockout/view/emails/404-lockout.php:551
+#: app/module/ip-lockout/view/emails/login-lockout.php:553
+#: app/module/ip-lockout/view/emails/login-username-ban.php:552
 #: app/module/ip-lockout/view/emails/report.php:585
 #: app/module/scan/view/email-template.php:517
 msgid "Back up your hard work with"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:496
-#: app/module/ip-lockout/view/emails/404-lockout.php:552
-#: app/module/ip-lockout/view/emails/login-lockout.php:554
-#: app/module/ip-lockout/view/emails/login-username-ban.php:553
+#: app/module/ip-lockout/view/emails/404-lockout.php:553
+#: app/module/ip-lockout/view/emails/login-lockout.php:555
+#: app/module/ip-lockout/view/emails/login-username-ban.php:554
 #: app/module/ip-lockout/view/emails/report.php:587
 #: app/module/scan/view/email-template.php:519
 msgid "Snapshot"
 msgstr ""
 
 #: app/module/audit/view/email_template.php:530
-#: app/module/ip-lockout/view/emails/404-lockout.php:586
-#: app/module/ip-lockout/view/emails/login-lockout.php:588
-#: app/module/ip-lockout/view/emails/login-username-ban.php:587
+#: app/module/ip-lockout/view/emails/404-lockout.php:587
+#: app/module/ip-lockout/view/emails/login-lockout.php:589
+#: app/module/ip-lockout/view/emails/login-username-ban.php:588
 #: app/module/ip-lockout/view/emails/report.php:621
 #: app/module/scan/view/email-template.php:553
 msgid "<a href=\"%s\">Configure reporting preferences</a>"
 msgstr ""
 
-#: app/module/audit/view/free.php:9 free/main-activator.php:112
+#: app/module/audit/view/free.php:9 free/main-activator.php:118
 msgid "Upgrade"
 msgstr ""
 
@@ -1669,7 +1719,7 @@ msgid "Audit log reports are disabled"
 msgstr ""
 
 #: app/module/hardener/behavior/widget.php:19
-#: app/module/hardener/controller/main.php:159
+#: app/module/hardener/controller/main.php:146
 #: app/module/hardener/view/layouts/layout.php:3
 msgid "Security Tweaks"
 msgstr ""
@@ -1715,15 +1765,18 @@ msgstr ""
 #: app/module/hardener/component/disable-file-editor-service.php:32
 #: app/module/hardener/component/disable-file-editor-service.php:66
 #: app/module/hardener/component/hide-error-service.php:61
-#: app/module/hardener/component/protect-information-service.php:44
-#: app/module/hardener/component/protect-information-service.php:77
+#: app/module/hardener/component/protect-information-service.php:46
+#: app/module/hardener/component/protect-information-service.php:69
 #: app/module/hardener/component/security-key-service.php:48
-#: app/module/hardener/component/servers/apache-service.php:61
-#: app/module/hardener/component/servers/apache-service.php:65
-#: app/module/hardener/component/servers/apache-service.php:104
-#: app/module/hardener/component/servers/apache-service.php:108
-#: app/module/hardener/component/servers/apache-service.php:158
-#: app/module/hardener/component/servers/apache-service.php:189
+#: app/module/hardener/component/servers/apache-service.php:67
+#: app/module/hardener/component/servers/apache-service.php:71
+#: app/module/hardener/component/servers/apache-service.php:111
+#: app/module/hardener/component/servers/apache-service.php:115
+#: app/module/hardener/component/servers/apache-service.php:169
+#: app/module/hardener/component/servers/apache-service.php:173
+#: app/module/hardener/component/servers/apache-service.php:219
+#: app/module/hardener/component/servers/apache-service.php:250
+#: app/module/hardener/component/servers/apache-service.php:284
 msgid "The file %s is not writeable"
 msgstr ""
 
@@ -1806,7 +1859,7 @@ msgstr ""
 msgid "Duration can only be a number and greater than 0"
 msgstr ""
 
-#: app/module/hardener/component/login-duration.php:194
+#: app/module/hardener/component/login-duration.php:195
 msgid ""
 "Your session has expired because it has been over %d days since your last "
 "login. Please log back in to continue."
@@ -1822,7 +1875,7 @@ msgid "Process is not possible on your current server"
 msgstr ""
 
 #: app/module/hardener/component/prevent-php-service.php:58
-#: app/module/hardener/component/protect-information-service.php:99
+#: app/module/hardener/component/protect-information-service.php:86
 msgid "Revert is not possible on your current server"
 msgstr ""
 
@@ -1869,11 +1922,11 @@ msgstr ""
 msgid "Security tweak successfully reverted."
 msgstr ""
 
-#: app/module/hardener/controller/main.php:118
+#: app/module/hardener/controller/main.php:112
 msgid "Security tweak successfully resolved."
 msgstr ""
 
-#: app/module/hardener/controller/main.php:146
+#: app/module/hardener/controller/main.php:133
 msgid "Security tweak successfully updated."
 msgstr ""
 
@@ -2369,7 +2422,7 @@ msgstr ""
 msgid "In the month"
 msgstr ""
 
-#: app/module/ip-lockout/behavior/pro/reporting.php:72
+#: app/module/ip-lockout/behavior/pro/reporting.php:73
 msgid "Defender Lockouts Report for %s"
 msgstr ""
 
@@ -2405,8 +2458,8 @@ msgid "Lockout notifications are disabled"
 msgstr ""
 
 #: app/module/ip-lockout/component/login-protection-api.php:61
-#: app/module/ip-lockout/controller/main.php:559
-#: app/module/ip-lockout/controller/main.php:568
+#: app/module/ip-lockout/controller/main.php:588
+#: app/module/ip-lockout/controller/main.php:597
 msgid ""
 "You have been locked out by the administrator for attempting to login with "
 "a banned username"
@@ -2549,61 +2602,61 @@ msgstr ""
 msgid "404 lockout alert for %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:428
+#: app/module/ip-lockout/controller/main.php:429
 msgid "Login lockout alert for %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:498
+#: app/module/ip-lockout/controller/main.php:527
 msgid "Failed login attempt with username %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:561
-#: app/module/ip-lockout/controller/main.php:571
+#: app/module/ip-lockout/controller/main.php:590
+#: app/module/ip-lockout/controller/main.php:600
 msgid "%d login attempts remaining"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:660
+#: app/module/ip-lockout/controller/main.php:689
 msgid ""
 "Your settings have been updated, however some IPs were removed because "
 "invalid format, or you blacklist yourself"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:671
+#: app/module/ip-lockout/controller/main.php:700
 msgid "Login Protection has been activated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:673
+#: app/module/ip-lockout/controller/main.php:702
 msgid "Login Protection has been deactivated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:678
+#: app/module/ip-lockout/controller/main.php:707
 msgid "404 Detection has been activated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:680
+#: app/module/ip-lockout/controller/main.php:709
 msgid "404 Detection has been deactivated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:709 app/module/ip-lockout.php:35
+#: app/module/ip-lockout/controller/main.php:739 app/module/ip-lockout.php:35
 #: app/view/activator-free.php:33 app/view/activator.php:49
 msgid "IP Lockouts"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:726
-#: app/module/ip-lockout/controller/main.php:732
+#: app/module/ip-lockout/controller/main.php:756
+#: app/module/ip-lockout/controller/main.php:762
 msgid "Your file is invalid!"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:738
+#: app/module/ip-lockout/controller/main.php:768
 msgid "Your file content is invalid!"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:747
+#: app/module/ip-lockout/controller/main.php:777
 msgid "Your whitelist/blacklist has been successfully imported."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:917
-msgid "Thanks for your patience. All sets!"
+#: app/module/ip-lockout/controller/main.php:962
+msgid "Thanks for your patience. All set."
 msgstr ""
 
 #: app/module/ip-lockout/model/log-model-legacy.php:79
@@ -2821,38 +2874,38 @@ msgstr ""
 msgid "Hi %s"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/404-lockout.php:459
+#: app/module/ip-lockout/view/emails/404-lockout.php:460
 msgid ""
 "We've just locked out the host <strong>%s</strong> from %s due to more than "
 "<strong>%s</strong> 404 requests for the file <strong>%s</strong>. They "
 "have been locked out for <strong>%s seconds.</strong>"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/404-lockout.php:462
-#: app/module/ip-lockout/view/emails/login-lockout.php:464
-#: app/module/ip-lockout/view/emails/login-username-ban.php:463
+#: app/module/ip-lockout/view/emails/404-lockout.php:463
+#: app/module/ip-lockout/view/emails/login-lockout.php:465
+#: app/module/ip-lockout/view/emails/login-username-ban.php:464
 #: app/module/ip-lockout/view/emails/report.php:497
 msgid "You can view the full lockout logs <a href=\"%s\">here</a>"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/404-lockout.php:477
-#: app/module/ip-lockout/view/emails/login-lockout.php:479
-#: app/module/ip-lockout/view/emails/login-username-ban.php:478
+#: app/module/ip-lockout/view/emails/404-lockout.php:478
+#: app/module/ip-lockout/view/emails/login-lockout.php:480
+#: app/module/ip-lockout/view/emails/login-username-ban.php:479
 #: app/module/ip-lockout/view/emails/report.php:512
 msgid "Stay vigilant."
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/404-lockout.php:480
-#: app/module/ip-lockout/view/emails/login-lockout.php:482
-#: app/module/ip-lockout/view/emails/login-username-ban.php:481
+#: app/module/ip-lockout/view/emails/404-lockout.php:481
+#: app/module/ip-lockout/view/emails/login-lockout.php:483
+#: app/module/ip-lockout/view/emails/login-username-ban.php:482
 #: app/module/ip-lockout/view/emails/report.php:515
 #: app/module/ip-lockout/view/locked.php:7
 msgid "WP Defender"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/404-lockout.php:482
-#: app/module/ip-lockout/view/emails/login-lockout.php:484
-#: app/module/ip-lockout/view/emails/login-username-ban.php:483
+#: app/module/ip-lockout/view/emails/404-lockout.php:483
+#: app/module/ip-lockout/view/emails/login-lockout.php:485
+#: app/module/ip-lockout/view/emails/login-username-ban.php:484
 #: app/module/ip-lockout/view/emails/report.php:517
 msgid "Security Hero"
 msgstr ""
@@ -2872,26 +2925,27 @@ msgstr ""
 msgid "Hi %s,"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/login-lockout.php:459
-#: app/module/ip-lockout/view/emails/login-username-ban.php:459
-msgid "They have banned permanently."
-msgstr ""
-
-#: app/module/ip-lockout/view/emails/login-lockout.php:459
-#: app/module/ip-lockout/view/emails/login-username-ban.php:459
-msgid "They have been locked out for <strong>%s seconds.</strong>"
+#: app/module/ip-lockout/view/emails/login-lockout.php:460
+#: app/module/ip-lockout/view/emails/login-username-ban.php:460
+msgid "They have been banned permanently."
 msgstr ""
 
 #: app/module/ip-lockout/view/emails/login-lockout.php:460
+#: app/module/ip-lockout/view/emails/login-username-ban.php:460
+msgid "They have been locked out for <strong>%s seconds.</strong>"
+msgstr ""
+
+#: app/module/ip-lockout/view/emails/login-lockout.php:461
 msgid ""
 "We've just locked out the host <strong>%s</strong> from %s due to more than "
 "<strong>%s</strong> failed login attempts. %s"
 msgstr ""
 
-#: app/module/ip-lockout/view/emails/login-username-ban.php:460
+#: app/module/ip-lockout/view/emails/login-username-ban.php:461
 msgid ""
 "We've just locked out the host <strong>%s</strong> from %s due to "
-"attempting to login with a banned username.They have banned permanently."
+"attempting to login with a banned username. They have been banned "
+"permanently."
 msgstr ""
 
 #: app/module/ip-lockout/view/emails/report.php:7
@@ -3200,7 +3254,7 @@ msgid ""
 "Schedule automated file scanning and email reporting for all your websites. "
 "This feature is included in a WPMU DEV membership along with 100+ plugins & "
 "themes, 24/7 support and lots of handy site management tools  – <a "
-"href=\"%s\">Try it all FREE today!</a>"
+"target='_blank' href=\"%s\">Try it all FREE today!</a>"
 msgstr ""
 
 #: app/module/ip-lockout/view/settings.php:10
@@ -3275,7 +3329,7 @@ msgid "Defender doesn't have enough permission to remove this file"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:81
-msgid "This file can't not remove"
+msgid "This file can't be removed"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:101
@@ -3315,8 +3369,8 @@ msgstr ""
 
 #: app/module/scan/behavior/core-result.php:199
 msgid ""
-"This will permanent remove the file/folder with all content, do you want to "
-"do this?"
+"This will permanently remove the selected file/folder. Are you sure you "
+"want to continue?"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:202
@@ -3520,7 +3574,7 @@ msgid "Suspicious File"
 msgstr ""
 
 #: app/module/scan/component/result-table.php:35
-#: app/module/scan/controller/main.php:807
+#: app/module/scan/controller/main.php:809
 msgid "Issue"
 msgstr ""
 
@@ -3582,14 +3636,14 @@ msgid "Update Theme"
 msgstr ""
 
 #: app/module/scan/controller/main.php:178
-#: app/module/scan/controller/main.php:439
+#: app/module/scan/controller/main.php:440
 msgid "The suspicious file has been successfully ignored."
 msgid_plural "The suspicious files have been successfully ignored."
 msgstr[0] ""
 msgstr[1] ""
 
 #: app/module/scan/controller/main.php:193
-#: app/module/scan/controller/main.php:410
+#: app/module/scan/controller/main.php:411
 msgid "The suspicious file has been successfully restored."
 msgid_plural "The suspicious files have been successfully restored."
 msgstr[0] ""
@@ -3615,47 +3669,47 @@ msgstr[1] ""
 msgid "No item has been resolved"
 msgstr ""
 
-#: app/module/scan/controller/main.php:335
+#: app/module/scan/controller/main.php:336
 msgid "This item has been resolved."
 msgstr ""
 
-#: app/module/scan/controller/main.php:339
+#: app/module/scan/controller/main.php:340
 msgid "Please try again!"
 msgstr ""
 
-#: app/module/scan/controller/main.php:350
-#: app/module/scan/controller/main.php:386
-#: app/module/scan/controller/main.php:415
-#: app/module/scan/controller/main.php:444
+#: app/module/scan/controller/main.php:351
+#: app/module/scan/controller/main.php:387
+#: app/module/scan/controller/main.php:416
+#: app/module/scan/controller/main.php:445
 msgid "The item doesn't exist!"
 msgstr ""
 
-#: app/module/scan/controller/main.php:380
-msgid "This item has been permanent removed."
+#: app/module/scan/controller/main.php:381
+msgid "This item has been permanently removed"
 msgstr ""
 
-#: app/module/scan/controller/main.php:519
+#: app/module/scan/controller/main.php:520
 #: app/module/scan/view/layouts/layout.php:5
 #: app/module/scan/view/scanning.php:6 app/view/activator-free.php:13
 #: app/view/activator.php:13
 msgid "File Scanning"
 msgstr ""
 
-#: app/module/scan/controller/main.php:530
+#: app/module/scan/controller/main.php:531
 msgid "Scan In Progress"
 msgstr ""
 
-#: app/module/scan/controller/main.php:531 app/module/scan/view/issues.php:37
+#: app/module/scan/controller/main.php:532 app/module/scan/view/issues.php:37
 msgid ""
 "Your code is currently clean! There were no issues found during the last "
 "scan, though you can always perform a new scan anytime."
 msgstr ""
 
-#: app/module/scan/controller/main.php:805
+#: app/module/scan/controller/main.php:807
 msgid "File"
 msgstr ""
 
-#: app/module/scan/controller/main.php:841
+#: app/module/scan/controller/main.php:843
 msgid "Let’s get your site patched up."
 msgstr ""
 
@@ -3774,7 +3828,7 @@ msgid ""
 "                    Get enhanced security protection as part of a WPMU DEV "
 "membership including 100+ plugins & themes, 24/7\n"
 "                    support and lots of handy site management tools – <a "
-"href=\"%s\">Try Defender Pro today for FREE</a>"
+"target='_blank' href=\"%s\">Try Defender Pro today for FREE</a>"
 msgstr ""
 
 #: app/module/scan/view/setting-free.php:9 app/module/scan/view/setting.php:9
@@ -3809,7 +3863,8 @@ msgid ""
 "Defenders scans through every line of code on your website, searching for "
 "anything suspicious. This feature is included when you join WPMU DEV, along "
 "with 100+ plugins and themes, 24/7 support and lots of handy site "
-"management tools.  – <a href=\"%s\" role='button'>Try it all FREE today!\n"
+"management tools.  – <a href=\"%s\" target='_blank' role='button'>Try it "
+"all FREE today!\n"
 "                        </a>"
 msgstr ""
 
@@ -3924,7 +3979,7 @@ msgstr ""
 msgid "Automatic File Scans & Reporting"
 msgstr ""
 
-#: app/view/activator-free.php:18
+#: app/view/activator-free.php:18 app/view/activator.php:18
 msgid ""
 "Scan your website for file changes, vulnerabilities and injected code and "
 "get notified about anything suspicious."
@@ -3955,12 +4010,6 @@ msgid ""
 "Welcome to Defender Pro! Let's quickly set up the most important security "
 "features, then you can fine tune each setting later. Our recommendations "
 "are turned on by default."
-msgstr ""
-
-#: app/view/activator.php:18
-msgid ""
-"Scan your website for file changes, vulnerabilities and injected code and "
-"get and get notified about anything suspicious."
 msgstr ""
 
 #: app/view/activator.php:68
@@ -3998,7 +4047,7 @@ msgid ""
 "try everything absolutely free."
 msgstr ""
 
-#: app/view/dashboard.php:94
+#: app/view/dashboard.php:95
 msgid "FIND OUT MORE"
 msgstr ""
 
@@ -4153,11 +4202,11 @@ msgid ""
 "this email."
 msgstr ""
 
-#: free/main-activator.php:60
+#: free/main-activator.php:66
 msgid "Get Members!"
 msgstr ""
 
-#: free/main-activator.php:68
+#: free/main-activator.php:74
 msgid ""
 "We're happy that you've chosen to install Defender! Are you interested in "
 "how to make the most of this plugin? How would you like a quick 5 day email "
@@ -4165,14 +4214,14 @@ msgid ""
 "bulletproof? Only the info you want, no subscription!"
 msgstr ""
 
-#: free/main-activator.php:110
+#: free/main-activator.php:116
 msgid ""
 "%s, you now have access to Defender's pro features but you still have the "
 "free version installed. Let's upgrade Defender and unlock all those juicy "
 "features! &nbsp; %s"
 msgstr ""
 
-#: free/main-activator.php:140
+#: free/main-activator.php:146
 msgid "<br/>Something went wrong. Please try again later!"
 msgstr ""
 
@@ -4224,10 +4273,6 @@ msgstr ""
 
 #: vendor/email-search.php:124 vendor/email-search.php:238
 msgid "Remove"
-msgstr ""
-
-#. Plugin Name of the plugin/theme
-msgid "WP Defender Pro"
 msgstr ""
 
 #. Plugin URI of the plugin/theme

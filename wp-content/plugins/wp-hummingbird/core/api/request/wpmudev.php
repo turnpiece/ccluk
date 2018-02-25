@@ -11,14 +11,11 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 
 		if ( defined( 'WPHB_API_KEY' ) ) {
 			$api_key = WPHB_API_KEY;
-		}
-		elseif ( is_object( $wpmudev_un ) && method_exists( $wpmudev_un, 'get_apikey' ) ) {
+		} elseif ( is_object( $wpmudev_un ) && method_exists( $wpmudev_un, 'get_apikey' ) ) {
 			$api_key = $wpmudev_un->get_apikey();
-		}
-		elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( WPMUDEV_Dashboard::$api ) && method_exists( WPMUDEV_Dashboard::$api, 'get_key' ) ) {
+		} elseif ( class_exists( 'WPMUDEV_Dashboard' ) && is_object( WPMUDEV_Dashboard::$api ) && method_exists( WPMUDEV_Dashboard::$api, 'get_key' ) ) {
 			$api_key = WPMUDEV_Dashboard::$api->get_key();
-		}
-		else {
+		} else {
 			$api_key = '';
 		}
 
@@ -48,14 +45,22 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 	 * @return string
 	 */
 	public function get_this_site() {
-		if ( defined( 'WPHB_API_DOMAIN' ) ) {
-			$domain = WPHB_API_DOMAIN;
-		} else {
-			$key = $this->get_api_key();
-			if ( ! empty( $key ) ) {
-				$domain = network_site_url();
+		if ( ! is_multisite() || is_main_site() ) {
+			if ( defined( 'WPHB_API_DOMAIN' ) ) {
+				$domain = WPHB_API_DOMAIN;
 			} else {
-				$domain = network_home_url();
+				$key = $this->get_api_key();
+				if ( ! empty( $key ) ) {
+					$domain = network_site_url();
+				} else {
+					$domain = network_home_url();
+				}
+			}
+		} else {
+			if ( defined( 'WPHB_API_SUBDOMAIN' ) ) {
+				$domain = WPHB_API_SUBDOMAIN;
+			} else {
+				$domain = get_site_url();
 			}
 		}
 
@@ -82,12 +87,12 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 
 		$code = wp_remote_retrieve_response_code( $response );
 		$body = json_decode( wp_remote_retrieve_body( $response ) );
+		/* translators: %s: error code */
 		$message = isset( $body->message ) ? $body->message : sprintf( __( 'Unknown Error. Code: %s', 'wphb' ), $code );
 
 		if ( 200 != $code ) {
 			throw new WP_Hummingbird_API_Exception( $message, $code );
-		}
-		else {
+		} else {
 			if ( is_object( $body ) && isset( $body->error ) && $body->error ) {
 				throw new WP_Hummingbird_API_Exception( $message, $code );
 			}
@@ -95,6 +100,5 @@ class WP_Hummingbird_API_Request_WPMUDEV extends WP_Hummingbird_API_Request {
 		}
 
 	}
-
 
 }

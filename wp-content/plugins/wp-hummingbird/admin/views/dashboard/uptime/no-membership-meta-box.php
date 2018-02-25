@@ -18,7 +18,7 @@
 			<div class="wphb-block-entry-content wphb-upsell-free-message">
 				<p>
 					<?php printf(
-						__( 'Performance improvements hardly matter if your website isn’t accessible. Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website management tool. &mdash; <a href="%s" rel="dialog">Try Pro for FREE today!</a>', 'wphb' ),
+						__( 'Performance improvements hardly matter if your website isn’t accessible. Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website management tool. <a href="%s" rel="dialog">Try Pro for FREE today!</a>', 'wphb' ),
 						'#wphb-upgrade-membership-modal'
 					); ?>
 				</p>

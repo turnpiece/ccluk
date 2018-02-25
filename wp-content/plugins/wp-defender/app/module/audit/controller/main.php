@@ -8,6 +8,7 @@ namespace WP_Defender\Module\Audit\Controller;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Behavior\Utils;
 use WP_Defender\Module\Audit\Behavior\Audit;
 use WP_Defender\Module\Audit\Component\Audit_API;
 use WP_Defender\Module\Audit\Component\Audit_Table;
@@ -197,20 +198,21 @@ class Main extends \WP_Defender\Controller {
 		);
 
 		if ( $settings->notification == true ) {
-			$res['notification'] 	= 1;
-			$res['frequency'] 		= ucfirst( \WP_Defender\Behavior\Utils::instance()->frequencyToText( $settings->frequency ) );
+			$res['notification'] = 1;
+			$res['frequency']    = ucfirst( \WP_Defender\Behavior\Utils::instance()->frequencyToText( $settings->frequency ) );
 			if ( $settings->frequency == 1 ) {
-				$res['schedule'] 	= sprintf( __( "at %s", wp_defender()->domain ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
+				$res['schedule'] = sprintf( __( "at %s", wp_defender()->domain ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
 			} else {
-				$res['schedule'] 	= sprintf( __( "%s at %s", wp_defender()->domain ), ucfirst( $settings->day ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
+				$res['schedule'] = sprintf( __( "%s at %s", wp_defender()->domain ), ucfirst( $settings->day ), strftime( '%I:%M %p', strtotime( $settings->time ) ) );
 			}
 		} else {
-			$res['notification'] 	= 0;
-			$res['text'] 			= '-';
+			$res['notification'] = 0;
+			$res['text']         = '-';
 		}
 		if ( $settings->enabled == 0 ) {
 			$res['reload'] = 1;
 		}
+		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( $res );
 	}
 
@@ -245,7 +247,7 @@ class Main extends \WP_Defender\Controller {
 
 	public function triggerEventSubmit() {
 		$data = WP_Helper::getArrayCache()->get( 'events_queue', array() );
-		if ( count( $data ) ) {
+		if ( is_array( $data ) && count( $data ) ) {
 			Audit_API::onCloud( $data );
 		}
 	}
@@ -451,6 +453,7 @@ class Main extends \WP_Defender\Controller {
 			$email = $user->user_email;
 
 			$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
+			$no_reply_email = apply_filters( 'wd_audit_noreply_email', $no_reply_email );
 			$headers        = array(
 				'From: Defender <' . $no_reply_email . '>',
 				'Content-Type: text/html; charset=UTF-8'
@@ -489,6 +492,7 @@ class Main extends \WP_Defender\Controller {
 			$settings->enabled = true;
 		}
 		$settings->save();
+		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( array(
 			'url' => network_admin_url( 'admin.php?page=wdf-logging' )
 		) );

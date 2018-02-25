@@ -5,7 +5,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * LayerSlider loader.
- * Adds layerSlider shortcode to visual composer and fixes issue in frontend editor
+ * Adds layerSlider shortcode to WPBakery Page Builder and fixes issue in frontend editor
  *
  * @since 4.3
  */
@@ -17,7 +17,7 @@ class Vc_Vendor_Layerslider implements Vc_Vendor_Interface {
 	protected static $instanceIndex = 1;
 
 	/**
-	 * Add layerslayer shortcode to visual composer, and add fix for ID in frontend editor
+	 * Add layerslayer shortcode to WPBakery Page Builder, and add fix for ID in frontend editor
 	 * @since 4.3
 	 */
 	public function load() {

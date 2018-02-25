@@ -214,7 +214,7 @@ if ( ! class_exists( 'Vc_Automapper' ) ) {
 			}
 			?>
 			<div class="tab_intro">
-				<p><?php _e( 'Visual Composer Shortcode Mapper adds custom 3rd party vendors shortcodes to the list of Visual Composer content elements menu (Note: to map shortcode it needs to be installed on site).', 'js_composer' ) ?></p>
+				<p><?php _e( 'WPBakery Page Builder Shortcode Mapper adds custom 3rd party vendors shortcodes to the list of WPBakery Page Builder content elements menu (Note: to map shortcode it needs to be installed on site).', 'js_composer' ) ?></p>
 			</div>
 			<div class="vc_automapper-toolbar">
 				<a href="#" class="button button-primary"

@@ -51,15 +51,28 @@ do_action( 'give_tools_recount_stats_before' );
 						?>
 					</select>
 
-					<span id="tools-form-dropdown" style="display: none">
+					<span class="tools-form-dropdown tools-form-dropdown-recount-form" style="display: none">
 						<?php
 						$args = array(
-							'name'   => 'form_id',
-							'number' => - 1,
-							'chosen' => true,
+							'class'       => 'tools-form-dropdown-recount-form-select',
+							'name'        => 'form_id',
+							'number'      => - 1,
+							'chosen'      => true,
+							'placeholder' => __( 'Select Form', 'give' ),
 						);
 						echo Give()->html->forms_dropdown( $args );
 						?>
+					</span>
+
+					<span class="tools-form-dropdown tools-form-dropdown-delete-import-donors" style="display: none">
+						<label for="delete-import-donors">
+							<?php
+							echo Give()->html->checkbox( array(
+								'name'    => 'delete-import-donors'
+							) );
+							_e( 'Delete imported WordPress users', 'give' );
+							?>
+						</label>
 					</span>
 
 					<input type="submit" id="recount-stats-submit" value="<?php esc_attr_e( 'Submit', 'give' ); ?>" class="button-secondary"/>

@@ -478,12 +478,18 @@ CREATE TABLE `{$tableName2}` (
 		global $wpdb;
 		$tableName1 = $wpdb->base_prefix . 'defender_lockout_log';
 		$tableName2 = $wpdb->base_prefix . 'defender_lockout';
-		$sql        = "ALTER TABLE " . $tableName1 . " ADD COLUMN `tried` VARCHAR(255);";
-		global $wpdb;
-		$wpdb->query( $sql );
-		$sql = "ALTER TABLE " . $tableName2 . " ADD COLUMN `meta` text;";
-		global $wpdb;
-		$wpdb->query( $sql );
+		$check      = "SHOW COLUMNS FROM {$tableName1} LIKE 'tried';";
+		$check      = $wpdb->get_col( $check );
+		if ( count( $check ) == 0 ) {
+			$sql = "ALTER TABLE " . $tableName1 . " ADD COLUMN `tried` VARCHAR(255);";
+			$wpdb->query( $sql );
+		}
+		$check = "SHOW COLUMNS FROM {$tableName2} LIKE 'meta';";
+		$check = $wpdb->get_col( $check );
+		if ( count( $check ) == 0 ) {
+			$sql = "ALTER TABLE " . $tableName2 . " ADD COLUMN `meta` text;";
+			$wpdb->query( $sql );
+		}
 	}
 
 	/**

@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 ?>
 <div class="vc_faq-tab changelog">
-	<h3><?php _e( 'New to Visual Composer or Looking for More Information?', 'js_composer' ); ?></h3>
+	<h3><?php _e( 'New to WPBakery Page Builder or Looking for More Information?', 'js_composer' ); ?></h3>
 
-	<p><?php printf( __( 'WPBakery has complete documentation available at our knowledge base: <a target="_blank" href="%s">kb.wpbakery.com</a> which covers everything related to Visual Composer starting from Installation and up to more advanced features based on our Inner API.', 'js_composer' ), 'http://kb.wpbakery.com' ); ?></p>
+	<p><?php printf( __( 'WPBakery has complete documentation available at our knowledge base: <a target="_blank" href="%s">kb.wpbakery.com</a> which covers everything related to WPBakery Page Builder starting from Installation and up to more advanced features based on our Inner API.', 'js_composer' ), 'http://kb.wpbakery.com' ); ?></p>
 
 	<div class="feature-section vc_row">
 		<div class="vc_col-xs-4">
@@ -60,15 +60,15 @@ if ( ! defined( 'ABSPATH' ) ) {
 		</div>
 
 		<div class="vc_col-xs-4">
-			<h4><a target="_blank" href="http://go.wpbakery.com/vc-how-tos">Visual Composer "How To's"</a></h4>
+			<h4><a target="_blank" href="http://go.wpbakery.com/vc-how-tos">WPBakery Page Builder "How To's"</a></h4>
 
-			<p>In this section, you will find quick tips in form of video tutorials on how to operate with Visual Composer.</p>
+			<p>In this section, you will find quick tips in form of video tutorials on how to operate with WPBakery Page Builder.</p>
 		</div>
 
 		<div class="vc_col-xs-4">
 			<h4><a target="_blank" href="http://go.wpbakery.com/faq">FAQ</a></h4>
 
-			<p>Here you can find answers to the Frequently Asked Question about Visual Composer.</p>
+			<p>Here you can find answers to the Frequently Asked Question about WPBakery Page Builder.</p>
 		</div>
 	</div>
 
@@ -85,13 +85,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 		<div class="vc_col-xs-4">
 			<h4><a target="_blank" href="http://go.wpbakery.com/theme-integration">Theme Integration</a></h4>
 
-			<p>See how you can integrate Visual Composer within your WordPress theme.</p>
+			<p>See how you can integrate WPBakery Page Builder within your WordPress theme.</p>
 		</div>
 
 		<div class="vc_col-xs-4">
 			<h4><a target="_blank" href="http://go.wpbakery.com/inner-api">Inner API</a></h4>
 
-			<p>Inner API section describes capabilities of interaction with Visual Composer.</p>
+			<p>Inner API section describes capabilities of interaction with WPBakery Page Builder.</p>
 		</div>
 	</div>
 </div>

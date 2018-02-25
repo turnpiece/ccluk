@@ -158,10 +158,14 @@ class Agm_GwpAdminPages {
 		}
 
 		$result = $this->_data->geocode_address( $address );
+		$loc = is_object($result) && is_object($result->geometry) && is_object($result->geometry->location)
+			? $result->geometry->location
+			: false
+		;
 		return $this->_update_post_geotag(
 			$post_id,
-			$result->geometry->location->lat,
-			$result->geometry->location->lng
+			(!empty($loc) && !empty($loc->lat) ? $loc->lat : false),
+			(!empty($loc) && !empty($loc->lng) ? $loc->lng : false)
 		);
 	}
 
@@ -399,7 +403,7 @@ class Agm_GwpUserPages {
 		$map['defaults'] = $this->_model->get_map_defaults();
 		$map['id'] = 'geocoded_posts-' . md5( microtime() );
 		$map['show_map'] = 1;
-		$map['markers'] = $this->_data->get_all_geolocated_posts_as_markers( 6 );
+		$map['markers'] = $this->_data->get_all_geolocated_posts_as_markers();
 
 		foreach ( $args as $key => $arg ) {
 			if ( in_array( $arg, $_yes ) ) {

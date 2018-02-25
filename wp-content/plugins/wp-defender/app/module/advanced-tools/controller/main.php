@@ -39,7 +39,7 @@ class Main extends Controller {
 		$this->add_ajax_action( 'saveAdvancedSettings', 'saveSettings' );
 		$setting = Auth_Settings::instance();
 		if ( $setting->enabled ) {
-			$this->add_action( 'update_option_jetpack_available_modules', 'listenForJetpackOption', 10, 3 );
+			$this->add_action( 'update_option_jetpack_active_modules', 'listenForJetpackOption', 10, 3 );
 			//prepare for the login part
 			$isJetpackSSO = Auth_API::isJetPackSSO();
 			$isTML        = Auth_API::isTML();
@@ -55,10 +55,10 @@ class Main extends Controller {
 				 */
 			} else {
 				if ( $isJetpackSSO ) {
-					wp_defender()->global['compatibility'][] = __( "You enabled Jetpack WordPress.com login, so Defender will disable the 2 factors login for avoiding conflict", wp_defender()->domain );
+					wp_defender()->global['compatibility'][] = __( "You enabled Jetpack WordPress.com login, so Defender will disable the two factors login for avoiding conflict", wp_defender()->domain );
 				}
 				if ( $isTML ) {
-					wp_defender()->global['compatibility'][] = __( "You enabled the plugin Theme My Login, so Defender will disable the 2 factors login for avoiding conflict", wp_defender()->domain );
+					wp_defender()->global['compatibility'][] = __( "You enabled the plugin Theme My Login, so Defender will disable the two factors login for avoiding conflict", wp_defender()->domain );
 				}
 			}
 			$this->add_filter( 'ms_shortcode_ajax_login', 'm2NoAjax' );
@@ -86,7 +86,7 @@ class Main extends Controller {
 	 */
 	public function listenForJetpackOption( $old_value, $value, $option ) {
 		$settings = Auth_Settings::instance();
-		if ( array_search( 'sso', $value ) ) {
+		if ( array_search( 'sso', $value ) !== false ) {
 			$settings->markAsConflict( 'jetpack/jetpack.php' );
 		} else {
 			$settings->markAsUnConflict( 'jetpack/jetpack.php' );
@@ -132,7 +132,7 @@ class Main extends Controller {
 	 */
 	public function alterUsersTable( $columns ) {
 		$columns = array_slice( $columns, 0, count( $columns ) - 1 ) + array(
-				'defAuth' => __( "2 Factor", wp_defender()->domain )
+				'defAuth' => __( "Two Factor", wp_defender()->domain )
 			) + array_slice( $columns, count( $columns ) - 1 );
 
 		return $columns;
@@ -292,7 +292,8 @@ class Main extends Controller {
 			$login_token = HTTP_Helper::retrieve_post( 'login_token' );
 			$query       = new \WP_User_Query( array(
 				'meta_key'   => 'defOTPLoginToken',
-				'meta_value' => $login_token
+				'meta_value' => $login_token,
+				'blog_id'    => 0
 			) );
 			$res         = $query->get_results();
 			if ( empty( $res ) ) {
@@ -303,14 +304,12 @@ class Main extends Controller {
 				$user     = $res[0];
 				$secret   = Auth_API::getUserSecret( $user->ID );
 				$redirect = HTTP_Helper::retrieve_post( 'redirect_to', admin_url() );
-				if ( empty( $redirect ) ) {
-					$redirect = admin_url();
-				}
 				if ( Auth_API::compare( $secret, $otp ) ) {
 					//sign in
 					delete_user_meta( $user->ID, 'defOTPLoginToken' );
 					wp_set_current_user( $user->ID, $user->user_login );
 					wp_set_auth_cookie( $user->ID, true );
+					$redirect = apply_filters( 'login_redirect', $redirect, isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '', $user );
 					wp_redirect( $redirect );
 					exit;
 				} else {
@@ -320,6 +319,7 @@ class Main extends Controller {
 						delete_user_meta( $user->ID, 'defenderBackupCode' );
 						wp_set_current_user( $user->ID, $user->user_login );
 						wp_set_auth_cookie( $user->ID, true );
+						$redirect = apply_filters( 'login_redirect', $redirect, isset( $_REQUEST['redirect_to'] ) ? $_REQUEST['redirect_to'] : '', $user );
 						wp_redirect( $redirect );
 						exit;
 					} else {
@@ -445,18 +445,18 @@ class Main extends Controller {
 			return;
 		}
 
-		$data    = $_POST;
+		$data = $_POST;
+		if ( ! isset( $data['userRoles'] ) ) {
+			$data['userRoles'] = array();
+		}
 		$setting = Auth_Settings::instance();
-		$tmp     = $setting->enabled;
 		$setting->import( $data );
 		$setting->save();
 
-		$res = array(
+		$res           = array(
 			'message' => __( "Your settings have been updated.", wp_defender()->domain )
 		);
-		if ( $tmp != $setting->enabled ) {
-			$res['reload'] = 1;
-		}
+		$res['reload'] = 1;
 
 		wp_send_json_success( $res );
 	}

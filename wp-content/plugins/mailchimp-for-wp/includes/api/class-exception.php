@@ -49,6 +49,11 @@ class MC4WP_API_Exception extends Exception {
     public function __toString() {
         $string = $this->message . '.';
 
+        // add title
+        if( ! empty( $this->title ) ) {
+            $string .= ' ' . $this->title . '.';
+        }
+
         // add detail message
         if( ! empty( $this->detail ) ) {
             $string .= ' ' . $this->detail;

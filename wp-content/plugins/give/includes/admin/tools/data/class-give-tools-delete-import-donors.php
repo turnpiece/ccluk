@@ -103,6 +103,15 @@ class Give_Tools_Import_Donors extends Give_Batch_Export {
 	public $donor_ids = array();
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct( $_step = 1 ) {
+		parent::__construct( $_step );
+
+		$this->is_writable = true;
+	}
+
+	/**
 	 * Get the Export Data
 	 *
 	 * @access public
@@ -188,7 +197,7 @@ class Give_Tools_Import_Donors extends Give_Batch_Export {
 				// Add the donation id in side the array.
 				$donation_ids[] = $post->ID;
 
-				$donor_id = (int) get_post_meta( $post->ID, '_give_payment_customer_id', true );
+				$donor_id = (int) give_get_meta( $post->ID, '_give_payment_customer_id', true );
 				if ( ! empty( $donor_id ) ) {
 					$donor = new Give_Donor( $donor_id );
 					if ( ! empty( $donor->id ) ) {
@@ -344,8 +353,10 @@ class Give_Tools_Import_Donors extends Give_Batch_Export {
 			$form_ids = (array) $this->get_option( $this->form_key );
 
 			foreach ( $donation_ids as $item ) {
-				$form_ids[] = get_post_meta( $item, '_give_payment_form_id', true );
-				wp_delete_post( $item, true );
+				$form_ids[] = give_get_meta( $item, '_give_payment_form_id', true );
+
+				// Delete the main payment.
+				give_delete_donation( absint( $item ) );
 			}
 
 			// update the new form list.
@@ -373,28 +384,39 @@ class Give_Tools_Import_Donors extends Give_Batch_Export {
 			$this->total_step     = ( ( count( $donation_ids ) / $this->per_step ) * 2 ) + count( $donor_ids );
 			$this->step_completed = $page + ( count( $donation_ids ) / $this->per_step );
 
-			$args = apply_filters( 'give_tools_reset_stats_total_args', array(
-				'post_status'    => 'any',
-				'posts_per_page' => 1,
-				'author'         => $donor_ids[ $page ]
-			) );
+			if ( ! empty( $donor_ids[ $page ] ) ) {
+				$args = apply_filters( 'give_tools_reset_stats_total_args', array(
+					'post_status'    => 'any',
+					'posts_per_page' => 1,
+					'author'         => $donor_ids[ $page ]
+				) );
 
-			$donations = array();
-			$payments = new Give_Payments_Query( $args );
-			$payments = $payments->get_payments();
-			if ( empty( $payments ) ) {
-				Give()->donors->delete_by_user_id( $donor_ids[ $page ] );
-			} else {
-				foreach ( $payments as $payment ) {
-					$donations[] = $payment->ID;
+				$donations = array();
+				$payments  = new Give_Payments_Query( $args );
+				$payments  = $payments->get_payments();
+				if ( empty( $payments ) ) {
+					Give()->donors->delete_by_user_id( $donor_ids[ $page ] );
+
+					/**
+					 * If Checked then delete WP user.
+					 *
+					 * @since 1.8.14
+					 */
+					if ( 'on' === (string) $_REQUEST['delete-import-donors'] ) {
+						wp_delete_user( $donor_ids[ $page ] );
+					}
+				} else {
+					foreach ( $payments as $payment ) {
+						$donations[] = $payment->ID;
+					}
+
+					$donor          = new Give_Donor( $donor_ids[ $page ], true );
+					$data_to_update = array(
+						'purchase_count' => count( $donations ),
+						'payment_ids'    => implode( ',', $donations ),
+					);
+					$donor->update( $data_to_update );
 				}
-
-				$donor          = new Give_Donor( $donor_ids[ $page ], true );
-				$data_to_update = array(
-					'purchase_count' => count( $donations ),
-					'payment_ids'    => implode( ',', $donations ),
-				);
-				$donor->update( $data_to_update );
 			}
 
 			$page ++;

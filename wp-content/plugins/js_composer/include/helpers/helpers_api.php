@@ -194,7 +194,7 @@ if ( ! function_exists( 'vc_mode' ) ) {
 }
 if ( ! function_exists( 'vc_set_shortcodes_templates_dir' ) ) {
 	/**
-	 * Sets directory where Visual Composer should look for template files for content elements.
+	 * Sets directory where WPBakery Page Builder should look for template files for content elements.
 	 * @since 4.2
 	 *
 	 * @param string - full directory path to new template directory with trailing slash

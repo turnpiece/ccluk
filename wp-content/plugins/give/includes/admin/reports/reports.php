@@ -102,7 +102,6 @@ function give_reports_default_views() {
 	$views = array(
 		'earnings' => esc_html__( 'Income', 'give' ),
 		'forms'    => esc_html__( 'Forms', 'give' ),
-		'donors'   => esc_html__( 'Donors', 'give' ),
 		'gateways' => esc_html__( 'Donation Methods', 'give' ),
 	);
 
@@ -139,6 +138,11 @@ function give_get_reporting_view( $default = 'earnings' ) {
  * @return void
  */
 function give_reports_tab_reports() {
+
+	if( ! current_user_can( 'view_give_reports' ) ) {
+		wp_die( __( 'You do not have permission to access this report', 'give' ), __( 'Error', 'give' ), array( 'response' => 403 ) );
+	}
+
 	$current_view = 'earnings';
 	$views        = give_reports_default_views();
 
@@ -218,7 +222,7 @@ function give_reports_forms_table() {
 		return;
 	}
 
-	include( dirname( __FILE__ ) . '/class-form-reports-table.php' );
+	include GIVE_PLUGIN_DIR . 'includes/admin/reports/class-form-reports-table.php';
 
 	$give_table = new Give_Form_Reports_Table();
 	$give_table->prepare_items();
@@ -255,50 +259,6 @@ function give_reports_form_details() {
 add_action( 'give_reports_view_forms', 'give_reports_form_details' );
 
 /**
- * Renders the Reports Donors Table
- *
- * @since 1.0
- * @uses  Give_Donor_Reports_Table::prepare_items()
- * @uses  Give_Donor_Reports_Table::display()
- * @return void
- */
-function give_reports_donors_table() {
-	include( dirname( __FILE__ ) . '/class-donor-reports-table.php' );
-
-	$give_table = new Give_Donor_Reports_Table();
-	$give_table->prepare_items();
-	?>
-	<div class="wrap give-reports-donors-wrap">
-		<?php
-		/**
-		 * Fires before the donors log actions form.
-		 *
-		 * @since 1.0
-		 */
-		do_action( 'give_logs_donors_table_top' );
-
-		$give_table->search_box( esc_html__( 'Search', 'give' ), 'give-donors' );
-		$give_table->display();
-		?>
-		<input type="hidden" name="post_type" value="give_forms"/>
-		<input type="hidden" name="page" value="give-reports"/>
-		<input type="hidden" name="tab" value="donors"/>
-
-		<?php
-		/**
-		 * Fires after the donors log actions form.
-		 *
-		 * @since 1.0
-		 */
-		do_action( 'give_logs_donors_table_bottom' );
-		?>
-	</div>
-	<?php
-}
-
-add_action( 'give_reports_view_donors', 'give_reports_donors_table' );
-
-/**
  * Renders the Gateways Table
  *
  * @since 1.3
@@ -307,7 +267,7 @@ add_action( 'give_reports_view_donors', 'give_reports_donors_table' );
  * @return void
  */
 function give_reports_gateways_table() {
-	include( dirname( __FILE__ ) . '/class-gateways-reports-table.php' );
+	include GIVE_PLUGIN_DIR . 'includes/admin/reports/class-gateways-reports-table.php';
 
 	$give_table = new Give_Gateway_Reports_Table();
 	$give_table->prepare_items();
@@ -325,7 +285,7 @@ add_action( 'give_reports_view_gateways', 'give_reports_gateways_table' );
 function give_reports_earnings() {
 	?>
 	<div class="tablenav top reports-table-nav">
-		<h3 class="alignleft reports-earnings-title"><span><?php esc_html_e( 'Income Report', 'give' ); ?></span></h3>
+		<h2 class="reports-earnings-title screen-reader-text"><?php _e( 'Income Report', 'give' ); ?></h2>
 	</div>
 	<?php
 	give_reports_graph();

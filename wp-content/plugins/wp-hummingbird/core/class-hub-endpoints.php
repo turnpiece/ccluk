@@ -44,7 +44,8 @@ class WP_Hummingbird_Hub_Endpoints {
 			$filename .= '.php';
 		}
 
-		if ( file_exists( wphb_plugin_dir() . 'core/hub-endpoints/' . $filename ) ) {
+		if ( file_exists( WPHB_DIR_PATH . 'core/hub-endpoints/' . $filename ) ) {
+			/* @noinspection PhpIncludeInspection */
 			include_once 'hub-endpoints/' . $filename;
 		}
 	}
@@ -83,11 +84,6 @@ class WP_Hummingbird_Hub_Endpoints {
 		 */
 		$status = wphb_get_gzip_status();
 
-		// Refresh gzip status if no data is present.
-		if ( false === $status ) {
-			$status = wphb_get_gzip_status( true );
-		}
-
 		if ( ! is_array( $status ) ) {
 			$result['gzip'] = new WP_Error( 'gzip-status-not-found', 'There is not Gzip data yet' );
 		} else {
@@ -102,11 +98,6 @@ class WP_Hummingbird_Hub_Endpoints {
 		 */
 		$status = wphb_get_caching_status();
 
-		// Refresh caching status if no data is present.
-		if ( false === $status ) {
-			$status = wphb_get_caching_status( true );
-		}
-
 		if ( ! is_array( $status ) ) {
 			$result['browser-caching'] = new WP_Error( 'browser-caching-status-not-found', 'There is not Browser Caching data yet' );
 		} else {
@@ -117,11 +108,24 @@ class WP_Hummingbird_Hub_Endpoints {
 		}
 
 		/**
+		 * Gravatar
+		 * @var WP_Hummingbird_Module_Gravatar $module
+		 */
+		$module = wphb_get_module( 'gravatar' );
+		$result['gravatar']['is_active'] = $module->is_active();
+		$result['gravatar']['error'] = is_wp_error( $module->error );
+
+		/**
 		 * Minification
+		 *
+		 * @var WP_Hummingbird_Module_Minify $module
 		 */
 		$collection = wphb_minification_get_resources_collection();
+		$module = wphb_get_module( 'minify' );
 		if ( empty( $collection ) ) {
 			$result['minify'] = new WP_Error( 'minify-status-not-found', 'There is not Minification data yet' );
+		} elseif ( ! $module->is_active() ) {
+			$result['minify'] = new WP_Error( 'minify-disabled', 'Minification module not activated' );
 		} else {
 			$original_size_styles  = array_sum( wp_list_pluck( $collection['styles'], 'original_size' ) );
 			$original_size_scripts = array_sum( wp_list_pluck( $collection['scripts'], 'original_size' ) );
@@ -148,6 +152,45 @@ class WP_Hummingbird_Hub_Endpoints {
 			$result['minify']['status']['saved_css']  = $compressed_size_styles;
 			$result['minify']['status']['cdn']        = wphb_get_cdn_status();
 		} // End if().
+
+		/**
+		 * Page caching
+		 * @var WP_Hummingbird_Module_Page_Caching $module
+		 */
+		$module = wphb_get_module( 'page-caching' );
+		$result['page-caching']['status'] = $module->is_active();
+
+		/**
+		 * Reports
+		 * @var WP_Hummingbird_Module_Performance $performance_module
+		 */
+		$performance_module = wphb_get_module( 'performance' );
+		$performance_is_active = $performance_module->is_active();
+
+		/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+		$uptime_module = wphb_get_module( 'uptime' );
+		$uptime_is_active = $uptime_module->is_active();
+
+		$frequency = '';
+		if ( $performance_is_active ) {
+			$settings = wphb_get_settings();
+			$frequency = $settings['email-frequency'];
+			switch ( $frequency ) {
+				case 1:
+					$frequency = __( 'Daily', 'wphb' );
+					break;
+				case 7:
+					$frequency = __( 'Weekly', 'wphb' );
+					break;
+				case 30:
+					$frequency = __( 'Monthly', 'wphb' );
+					break;
+			}
+		}
+
+		$result['reports']['uptime']['performance_is_active'] = $performance_is_active;
+		$result['reports']['uptime']['uptime_is_active'] = $uptime_is_active;
+		$result['reports']['uptime']['frequency'] = $frequency;
 
 		$result = (object) $result;
 		wp_send_json_success( $result );

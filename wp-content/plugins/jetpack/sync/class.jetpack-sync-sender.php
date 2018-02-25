@@ -25,6 +25,7 @@ class Jetpack_Sync_Sender {
 	private $sync_queue;
 	private $full_sync_queue;
 	private $codec;
+	private $old_user;
 
 	// singleton functions
 	private static $instance;
@@ -44,8 +45,29 @@ class Jetpack_Sync_Sender {
 	}
 
 	private function init() {
+		add_action( 'jetpack_sync_before_send_queue_sync', array( $this, 'maybe_set_user_from_token' ), 1 );
+		add_action( 'jetpack_sync_before_send_queue_sync', array( $this, 'maybe_clear_user_from_token' ), 20 );
 		foreach ( Jetpack_Sync_Modules::get_modules() as $module ) {
 			$module->init_before_send();
+		}
+	}
+
+	public function maybe_set_user_from_token( ) {
+		$jetpack = Jetpack::init();
+		$verified_user = $jetpack->verify_xml_rpc_signature();
+		if ( Jetpack_Constants::is_true( 'XMLRPC_REQUEST' ) &&
+			! is_wp_error( $verified_user )
+			&& $verified_user
+		) {
+			$old_user = wp_get_current_user();
+			$this->old_user = isset( $old_user->ID ) ? $old_user->ID : 0;
+			wp_set_current_user( $verified_user['user_id'] );
+		}
+	}
+
+	public function maybe_clear_user_from_token() {
+		if ( isset( $this->old_user ) ) {
+			wp_set_current_user( $this->old_user );
 		}
 	}
 
@@ -103,7 +125,7 @@ class Jetpack_Sync_Sender {
 		Jetpack_Sync_Settings::set_is_syncing( false );
 
 		$exceeded_sync_wait_threshold = ( microtime( true ) - $start_time ) > (double) $this->get_sync_wait_threshold();
-		
+
 		if ( is_wp_error( $sync_result ) ) {
 			if ( 'unclosed_buffer' === $sync_result->get_error_code() ) {
 				$this->set_next_sync_time( time() + self::QUEUE_LOCKED_SYNC_DELAY, $queue->id );
@@ -210,7 +232,7 @@ class Jetpack_Sync_Sender {
 		Jetpack_Sync_Settings::set_is_sending( true );
 		$processed_item_ids = apply_filters( 'jetpack_sync_send_data', $items_to_send, $this->codec->name(), microtime( true ), $queue->id, $checkout_duration, $preprocess_duration );
 		Jetpack_Sync_Settings::set_is_sending( false );
-		
+
 		if ( ! $processed_item_ids || is_wp_error( $processed_item_ids ) ) {
 			$checked_in_item_ids = $queue->checkin( $buffer );
 			if ( is_wp_error( $checked_in_item_ids ) ) {
@@ -348,8 +370,8 @@ class Jetpack_Sync_Sender {
 		foreach ( Jetpack_Sync_Modules::get_modules() as $module ) {
 			$module->reset_data();
 		}
-		
-		foreach ( array( 'sync', 'full_sync' ) as $queue_name ) {
+
+		foreach ( array( 'sync', 'full_sync', 'full-sync-enqueue' ) as $queue_name ) {
 			delete_option( self::NEXT_SYNC_TIME_OPTION_NAME . '_' . $queue_name );
 		}
 

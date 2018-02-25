@@ -30,7 +30,7 @@ class Grunion_Editor_View {
 		$title = __( 'Add Contact Form', 'jetpack' );
 		?>
 
-		<button id="insert-jetpack-contact-form" class="button" title="<?php echo esc_attr( $title ); ?>" href="javascript:;">
+		<button type="button" id="insert-jetpack-contact-form" class="button" title="<?php echo esc_attr( $title ); ?>" href="javascript:;">
 			<span class="jetpack-contact-form-icon"></span>
 			<?php echo esc_html( $title ); ?>
 		</button>
@@ -39,7 +39,10 @@ class Grunion_Editor_View {
 	}
 
 	public static function mce_external_plugins( $plugin_array ) {
-		$plugin_array['grunion_form'] =  plugins_url( 'js/tinymce-plugin-form-button.js', __FILE__ );
+		$plugin_array['grunion_form'] = Jetpack::get_file_url_for_environment(
+			'_inc/build/contact-form/js/tinymce-plugin-form-button.min.js',
+			'modules/contact-form/js/tinymce-plugin-form-button.js'
+		);
 		return $plugin_array;
 	}
 
@@ -64,7 +67,16 @@ class Grunion_Editor_View {
 
 		wp_enqueue_style( 'grunion-editor-ui', plugins_url( 'css/editor-ui.css', __FILE__ ) );
 		wp_style_add_data( 'grunion-editor-ui', 'rtl', 'replace' );
-		wp_enqueue_script( 'grunion-editor-view', plugins_url( 'js/editor-view.js', __FILE__ ), array( 'wp-util', 'jquery', 'quicktags' ), false, true );
+		wp_enqueue_script(
+			'grunion-editor-view',
+			Jetpack::get_file_url_for_environment(
+				'_inc/build/contact-form/js/editor-view.min.js',
+				'modules/contact-form/js/editor-view.js'
+			),
+			array( 'wp-util', 'jquery', 'quicktags' ),
+			false,
+			true
+		);
 		wp_localize_script( 'grunion-editor-view', 'grunionEditorView', array(
 			'inline_editing_style' => plugins_url( 'css/editor-inline-editing-style.css', __FILE__ ),
 			'inline_editing_style_rtl' => plugins_url( 'css/editor-inline-editing-style-rtl.css', __FILE__ ),
@@ -83,7 +95,7 @@ class Grunion_Editor_View {
 			)
 		) );
 
-		add_editor_style( plugin_dir_url( __FILE__ ) . '/css/editor-style.css' );
+		add_editor_style( plugin_dir_url( __FILE__ ) . 'css/editor-style.css' );
 	}
 
 	/**
@@ -179,6 +191,13 @@ class Grunion_Editor_View {
 	<div>
 		<label for='{{ data.id }}' class='grunion-field-label {{ data.type }}'>{{ data.label }}<# if ( data.required ) print( " <span>" + data.required + "</span>" ) #></label>
 		<input type='text' name='{{ data.id }}' id='{{ data.id }}' value='{{ data.value }}' class='{{ data.class }}' placeholder='{{ data.placeholder }}' />
+	</div>
+</script>
+
+<script type="text/html" id="tmpl-grunion-field-url">
+	<div>
+		<label for='{{ data.id }}' class='grunion-field-label {{ data.type }}'>{{ data.label }}<# if ( data.required ) print( " <span>" + data.required + "</span>" ) #></label>
+		<input type='url' name='{{ data.id }}' id='{{ data.id }}' value='{{ data.value }}' class='{{ data.class }}' placeholder='{{ data.placeholder }}' />
 	</div>
 </script>
 

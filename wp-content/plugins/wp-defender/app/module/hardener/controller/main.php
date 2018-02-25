@@ -105,14 +105,8 @@ class Main extends Controller {
 		}
 
 		$slug 		= HTTP_Helper::retrieve_post( 'slug' );
-		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
-		if ( $file_paths ) {
-			$file_paths = sanitize_textarea_field( $file_paths );
-		} else {
-			$file_paths = '';
-		}
-		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
-		do_action( "processingHardener" . $slug , $server, $file_paths );
+
+		do_action( "processingHardener" . $slug );
 		//fall back
 		wp_send_json_success( array(
 			'message' => __( "Security tweak successfully resolved.", wp_defender()->domain ),
@@ -131,16 +125,9 @@ class Main extends Controller {
 			return;
 		}
 
-		$slug 		= HTTP_Helper::retrieve_post( 'slug' );
-		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
-		if ( $file_paths ) {
-			$file_paths = sanitize_textarea_field( $file_paths );
-		} else {
-			$file_paths = '';
-		}
+		$slug = HTTP_Helper::retrieve_post( 'slug' );
 
-		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
-		do_action( "processUpdate" . $slug , $server, $file_paths );
+		do_action( "processUpdate" . $slug );
 		//fall back
 		wp_send_json_success( array(
 			'message' => __( "Security tweak successfully updated.", wp_defender()->domain ),

@@ -4,17 +4,16 @@
  *
  * @package Hummingbird
  *
- * @var bool   $notifications    Performance cron reports status.
  * @var object $report           Last report.
- * @var string $viewreport_link  Link to performance page.
+ * @var string $viewreport_link  Url to performance module.
  */
 
 ?>
-<div class="content">
+<div class="content with-padding">
 	<p><?php esc_html_e( 'Here are your latest performance test results. A score above 85 is considered a good benchmark.', 'wphb' ); ?></p>
 </div>
 
-<div class="wphb-dash-table three-columns">
+<div class="wphb-dash-table three-columns no-top-padding">
 	<div class="wphb-dash-table-header">
 		<span><?php esc_html_e( 'Recommendation', 'wphb' ); ?></span>
 		<span><?php esc_html_e( 'Score /100', 'wphb' ); ?></span>
@@ -22,7 +21,7 @@
 	</div>
 
 	<?php foreach ( $report->rule_result as $rule => $rule_result ) : ?>
-		<div class="wphb-dash-table-row">
+		<div class="wphb-dash-table-row wphb-row-grade-<?php echo esc_attr( $rule_result->impact_score_class ) ?>">
 			<div>
 				<?php echo esc_html( $rule_result->label ); ?>
 			</div>
@@ -48,13 +47,3 @@
 		</div>
 	<?php endforeach; ?>
 </div>
-
-<div class="buttons">
-	<a href="<?php echo esc_url( $viewreport_link ); ?>" class="button button-ghost alignleft">
-		<?php esc_html_e( 'View Full Report', 'wphb' ); ?>
-	</a>
-	<span class="status-text alignright">
-		<?php $notifications ? esc_html_e( 'Automated performance tests are enabled', 'wphb' ) : esc_html_e( 'Automated performance tests are disabled', 'wphb' ); ?>
-	</span>
-</div>
-<div class="clear"></div>

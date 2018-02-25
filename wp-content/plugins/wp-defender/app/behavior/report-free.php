@@ -60,7 +60,7 @@ class Report_Free extends Behavior {
                     <div>
 						<?php printf( __( " Automated reports are included in a WPMU DEV membership along with 100+ plugins
                         & themes, 24/7 support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try
-                            it all absolutely FREE</a>", wp_defender()->domain ), 'https://premium.wpmudev.org/project/wp-defender/' ) ?>
+                            it all absolutely FREE</a>", wp_defender()->domain ), Utils::instance()->campaignURL( 'defender_dash_reports_upsell_link' ) ) ?>
                     </div>
                 </div>
                 <div class="clear"></div>

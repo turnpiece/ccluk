@@ -176,10 +176,6 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			if ( $map[ $comparison ] ) {
 				$matched[] = $t;
 			}
-			/*var_dump( $compare );
-			var_dump( $value );
-
-			var_dump( $params );*/
 		}
 
 		return array_shift( $matched );
@@ -241,7 +237,11 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			//return false for now
 			return false;
 		} else {
-			$params = array_combine( $hook_data['args'], $params );
+			if ( empty( $hook_data['args'] ) && empty( $params ) ) {
+				$params = array();
+			} else {
+				$params = array_combine( $hook_data['args'], $params );
+			}
 		}
 
 		if ( isset( $hook_data['callback'] ) && ! empty( $hook_data['callback'] ) ) {
@@ -286,6 +286,7 @@ abstract class Event_Abstract extends \Hammer\WP\Component {
 			if ( empty( $text ) ) {
 				return false;
 			}
+
 			foreach ( $params as $key => $val ) {
 				$replacer = $val;
 				if ( is_array( $replacer ) || is_object( $replacer ) ) {

@@ -41,9 +41,9 @@ class Prevent_Php extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$settings 	= Settings::instance();
-		if ( in_array( $settings->active_server , array( 'apache', 'litespeed' ) ) ) {
-			$service 	= $this->getApacheService();
+		$settings = Settings::instance();
+		if ( in_array( $settings->active_server, array( 'apache', 'litespeed' ) ) ) {
+			$service = $this->getApacheService();
 			$service->setHtConfig( $settings->getNewHtConfig() );
 		} else if ( $server == 'iis-7' ) {
 			$service = $this->getIisService();
@@ -52,7 +52,7 @@ class Prevent_Php extends Rule {
 		}
 		$ret = $service->revert();
 		if ( ! is_wp_error( $ret ) ) {
-			if ( in_array( $settings->active_server , array( 'apache', 'litespeed' ) ) ) {
+			if ( in_array( $settings->active_server, array( 'apache', 'litespeed' ) ) ) {
 				$settings->saveExcludedFilePaths( array() );
 				$settings->saveNewHtConfig( array() );
 			}
@@ -74,11 +74,16 @@ class Prevent_Php extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
+		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		if ( $file_paths ) {
+			$file_paths = sanitize_textarea_field( $file_paths );
+		} else {
+			$file_paths = '';
+		}
+		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
 
-		$server 	= func_get_arg(0); //Get first param
-		$file_paths = func_get_arg(1); //Get second param
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
-			$service 	= $this->getApacheService();
+			$service = $this->getApacheService();
 			$service->setExcludeFilePaths( $file_paths ); //Set the paths
 		} else if ( $server == 'iis-7' ) {
 			$service = $this->getIisService();
@@ -105,11 +110,19 @@ class Prevent_Php extends Rule {
 		if ( ! $this->verifyNonce() ) {
 			return;
 		}
-		$settings 	= Settings::instance();
-		$server 	= func_get_arg(0); //Get first param
-		$file_paths = func_get_arg(1); //Get second param
+		$settings   = Settings::instance();
+
+		$file_paths = HTTP_Helper::retrieve_post( 'file_paths' ); //File paths to ignore. Apache and litespeed mainly
+		if ( $file_paths ) {
+			$file_paths = sanitize_textarea_field( $file_paths );
+		} else {
+			$file_paths = '';
+		}
+
+		$server = HTTP_Helper::retrieve_post( 'current_server' ); //Current server
+
 		if ( in_array( $server, array( 'apache', 'litespeed' ) ) ) {
-			$service 	= $this->getApacheService();
+			$service = $this->getApacheService();
 			$service->setHtConfig( $settings->getNewHtConfig() ); //Set the previous template
 			$service->unProtectContentDir(); //revert first
 			$service->setExcludeFilePaths( $file_paths ); //Set the paths
@@ -138,6 +151,7 @@ class Prevent_Php extends Rule {
 		if ( self::$service == null ) {
 			self::$service = new Prevent_PHP_Service();
 		}
+
 		return self::$service;
 	}
 
@@ -148,6 +162,7 @@ class Prevent_Php extends Rule {
 		if ( self::$apache_service == null ) {
 			self::$apache_service = new Apache_Service();
 		}
+
 		return self::$apache_service;
 	}
 
@@ -158,6 +173,7 @@ class Prevent_Php extends Rule {
 		if ( self::$iis_service == null ) {
 			self::$iis_service = new Iis_Service();
 		}
+
 		return self::$iis_service;
 	}
 }

@@ -82,6 +82,49 @@ function give_logs_view_sales() {
 
 add_action( 'give_logs_view_sales', 'give_logs_view_sales' );
 
+/**
+ * Update Logs
+ *
+ * @since 2.0.1
+ *
+ * @return void
+ */
+function give_logs_view_updates() {
+	include( GIVE_PLUGIN_DIR . 'includes/admin/tools/logs/class-update-logs-list-table.php' );
+
+	$logs_table = new Give_Update_Log_Table();
+	$logs_table->prepare_items();
+	?>
+	<div class="wrap">
+
+		<?php
+		/**
+		 * Fires before displaying Payment Error logs.
+		 *
+		 * @since 2.0.1
+		 */
+		do_action( 'give_logs_update_top' );
+
+		$logs_table->display(); ?>
+		<input type="hidden" name="post_type" value="give_forms"/>
+		<input type="hidden" name="page" value="give-tools"/>
+		<input type="hidden" name="tab" value="logs"/>
+		<input type="hidden" name="section" value="update"/>
+
+		<?php
+		/**
+		 * Fires after displaying update logs.
+		 *
+		 * @since 2.0.1
+		 */
+		do_action( 'give_logs_update_bottom' );
+		?>
+
+	</div>
+	<?php
+}
+
+add_action( 'give_logs_view_updates', 'give_logs_view_updates' );
 
 /**
  * Gateway Error Logs
@@ -133,7 +176,6 @@ add_action( 'give_logs_view_gateway_errors', 'give_logs_view_gateway_errors' );
  *
  * @since 1.0
  * @uses  Give_API_Request_Log_Table::prepare_items()
- * @uses  Give_API_Request_Log_Table::search_box()
  * @uses  Give_API_Request_Log_Table::display()
  * @return void
  */
@@ -142,38 +184,30 @@ function give_logs_view_api_requests() {
 
 	$logs_table = new Give_API_Request_Log_Table();
 	$logs_table->prepare_items();
+
+	/**
+	 * Fires before displaying API requests logs.
+	 *
+	 * @since 1.0
+	 */
+	do_action( 'give_logs_api_requests_top' );
+
+	$logs_table->search_box( esc_html__( 'Search', 'give' ), 'give-api-requests' );
+	$logs_table->display();
 	?>
-	<div class="wrap">
+	<input type="hidden" name="post_type" value="give_forms"/>
+	<input type="hidden" name="page" value="give-tools"/>
+	<input type="hidden" name="tab" value="logs"/>
+	<input type="hidden" name="section" value="api_requests"/>
 
-		<?php
-		/**
-		 * Fires before displaying API requests logs.
-		 *
-		 * @since 1.0
-		 */
-		do_action( 'give_logs_api_requests_top' );
-
-		$logs_table->search_box( esc_html__( 'Search', 'give' ), 'give-api-requests' );
-		$logs_table->display();
-		?>
-		<input type="hidden" name="post_type" value="give_forms"/>
-		<input type="hidden" name="page" value="give-tools"/>
-		<input type="hidden" name="tab" value="logs"/>
-		<input type="hidden" name="section" value="api_requests"/>
-
-		<?php
-		/**
-		 * Fires after displaying API requests logs.
-		 *
-		 * @since 1.0
-		 */
-		do_action( 'give_logs_api_requests_bottom' );
-		?>
-
-	</div>
 	<?php
+	/**
+	 * Fires after displaying API requests logs.
+	 *
+	 * @since 1.0
+	 */
+	do_action( 'give_logs_api_requests_bottom' );
 }
-
 add_action( 'give_logs_view_api_requests', 'give_logs_view_api_requests' );
 
 /**

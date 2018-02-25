@@ -11,7 +11,7 @@ new WPCOM_JSON_API_Site_Settings_V1_3_Endpoint( array(
 	'description' => 'Get detailed settings information about a site.',
 	'group'       => '__do_not_document',
 	'stat'        => 'sites:X',
-	'min_version'   => '1.3',
+	'min_version' => '1.3',
 	'method'      => 'GET',
 	'path'        => '/sites/%s/settings',
 	'path_labels' => array(
@@ -31,7 +31,7 @@ new WPCOM_JSON_API_Site_Settings_V1_3_Endpoint( array(
 	'description' => 'Update settings for a site.',
 	'group'       => '__do_not_document',
 	'stat'        => 'sites:X',
-	'min_version'   => '1.3',
+	'min_version' => '1.3',
 	'method'      => 'POST',
 	'path'        => '/sites/%s/settings',
 	'path_labels' => array(
@@ -104,6 +104,8 @@ new WPCOM_JSON_API_Site_Settings_V1_3_Endpoint( array(
 		'site_icon'                            => '(int) Media attachment ID to use as site icon. Set to zero or an otherwise empty value to clear',
 		'api_cache'                            => '(bool) Turn on/off the Jetpack JSON API cache',
 		'posts_per_page'                       => '(int) Number of posts to show on blog pages',
+		'posts_per_rss'                        => '(int) Number of posts to show in the RSS feed',
+		'rss_use_excerpt'                      => '(bool) Whether the RSS feed will use post excerpts',
 	),
 
 	'response_format' => array(
@@ -134,7 +136,7 @@ class WPCOM_JSON_API_Site_Settings_V1_3_Endpoint extends WPCOM_JSON_API_Site_Set
 	public function filter_site_settings_endpoint_get( $settings ) {
 		$option_name = defined( 'IS_WPCOM' ) && IS_WPCOM ? 'wga' : 'jetpack_wga';
 		$option = get_option( $option_name, array() );
-		$settings[ 'wga' ] = wp_parse_args( $option, self::$wga_defaults );
+		$settings[ 'wga' ] = wp_parse_args( $option, $this->get_defaults() );
 		return $settings;
 	}
 
@@ -142,7 +144,7 @@ class WPCOM_JSON_API_Site_Settings_V1_3_Endpoint extends WPCOM_JSON_API_Site_Set
 	 * Filter the parent's response to consume our new fields
 	 */
 	public function filter_update_google_analytics( $wga, $new_values ) {
-		$wga_keys = array_keys( self::$wga_defaults );
+		$wga_keys = array_keys( $this->get_defaults() );
 		foreach ( $wga_keys as $wga_key ) {
 			// Skip code since the parent class has handled it
 			if ( 'code' === $wga_key ) {

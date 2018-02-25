@@ -12,18 +12,15 @@
 					<div class="report-status">
 						<i class="hb-icon-performancetest"></i>
 						<strong><?php _e( 'Performance Test', 'wphb' ); ?></strong>
-						<?php if ( ! $performance_is_active ): ?>
+						<?php if ( ! $performance_is_active ) : ?>
 							<button class="inactive" disabled><?php _e( 'Inactive', 'wphb' ); ?></button>
-						<?php else: ?>
+						<?php else : ?>
 							<button><i class="hb-wpmudev-icon-tick"></i> <?php echo $frequency; ?></button>
 						<?php endif; ?>
 					</div>
 				</a>
 			</div>
-			<?php
-			/**
-			?>
-            <!--
+			<!--
 			<div class="col-half">
 				<a href="<?php echo wphb_get_admin_menu_url( 'uptime' ); ?>">
 					<div class="report-status <?php echo ( ! $uptime_is_active ) ? 'with-corner grey' : ''; ?>">
@@ -37,12 +34,11 @@
 							</div>
 						<?php else : ?>
 							<button><i class="hb-wpmudev-icon-tick"></i> <?php _e( 'Weekly', 'wphb' ); ?></button>
-						<? endif; ?>
+						<?php endif; ?>
 					</div>
 				</a>
 			</div>
-			**/
-			?>
+			-->
 		</div>
 
 	</div><!-- end wphb-block-entry-content -->

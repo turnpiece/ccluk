@@ -1,4 +1,4 @@
-/*! Google Maps - v2.9.3
+/*! Google Maps Pro - v2.9.4
  * http://premium.wpmudev.org/project/wordpress-google-maps-plugin
  * Copyright (c) 2017; * Licensed GPLv2+ */
 /*global window:false */
@@ -13,7 +13,8 @@ jQuery(document).bind("agm_google_maps-user-map_initialized", function (e, map, 
 	var markerCluster = new window.MarkerClusterer(
 		map,
 		markers, {
-			"zoomOnClick": false, "gridSize": 30
+			"zoomOnClick": false, "gridSize": 30,
+            imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'
 		}
 	);
 

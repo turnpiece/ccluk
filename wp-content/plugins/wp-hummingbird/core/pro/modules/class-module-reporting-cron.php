@@ -31,6 +31,13 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 	public function run() {}
 
 	/**
+	 * Implement abstract parent method for clearing cache.
+	 *
+	 * @since 1.7.1
+	 */
+	public function clear_cache() {}
+
+	/**
 	 * Triggered during plugin activation
 	 */
 	public function on_activate() {
@@ -119,7 +126,9 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 		if ( ( ! $last_report || $time_difference > 300 ) && $limit < 3 ) {
 			// First run. Init new report scan.
 			if ( 0 === $limit ) {
-				wphb_performance_init_scan();
+				/* @var WP_Hummingbird_Module_Performance $perf_module */
+				$perf_module = wphb_get_module( 'performance' );
+				$perf_module->init_scan();
 			}
 
 			// Update cron limit.

@@ -1,0 +1,45 @@
+/* ****************************************************************************
+ * COMPONENTS: SETTINGS FORM
+ */
+
+.wpmud .settings-form span.sub {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    line-height: 22px;
+    margin: 10px 0 0;
+}
+
+.wpmud .wphb-dash-table-row span.sub {
+    margin: 0;
+}
+
+.wpmud .settings-form .col-two-third > label {
+    display: inline-block;
+    padding: 2px 10px 0;
+    color: #333;
+    line-height: 30px;
+    margin: 0;
+}
+
+.wpmud .settings-form .wphb-border-frame label {
+    margin-top: 25px;
+    padding: 0;
+    color: #888888;
+    font-size: 13px;
+}
+
+.wpmud .settings-form .wphb-border-frame small {
+    display: block;
+    font-size: 13px;
+    color: #888;
+    line-height: 22px;
+}
+
+.wpmud .settings-form.disabled {
+    background-color: rgba(242, 242, 242, 0.5) !important;
+}
+
+.wpmud .settings-form.disabled > * {
+    opacity: 0.5;
+}

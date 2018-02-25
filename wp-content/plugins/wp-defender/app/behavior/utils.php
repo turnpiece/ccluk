@@ -559,7 +559,8 @@ class Utils extends Behavior {
 		//url should be end with php
 		global $is_apache, $is_nginx, $is_IIS, $is_iis7;
 
-		$server = null;
+		$server     = null;
+		$ssl_verify = apply_filters( 'defender_ssl_verify', true ); //most hosts dont really have valid ssl or ssl still pending
 
 		if ( $is_nginx ) {
 			$server = 'nginx';
@@ -569,7 +570,10 @@ class Utils extends Behavior {
 				$server = 'apache';
 			} else {
 				//so the server software is apache, let see what the header return
-				$request = wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'] ) );
+				$request = wp_remote_head( $url, array(
+					'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+					'sslverify'  => $ssl_verify
+				) );
 				$server  = wp_remote_retrieve_header( $request, 'server' );
 				$server  = explode( '/', $server );
 				if ( strtolower( $server[0] ) == 'nginx' ) {
@@ -585,7 +589,10 @@ class Utils extends Behavior {
 
 		if ( is_null( $server ) ) {
 			//if fall in here, means there is st unknowed.
-			$request = wp_remote_head( $url, array( 'user-agent' => $_SERVER['HTTP_USER_AGENT'] ) );
+			$request = wp_remote_head( $url, array(
+				'user-agent' => $_SERVER['HTTP_USER_AGENT'],
+				'sslverify'  => $ssl_verify
+			) );
 			$server  = wp_remote_retrieve_header( $request, 'server' );
 			$server  = explode( '/', $server );
 			$server  = $server[0];
@@ -596,6 +603,49 @@ class Utils extends Behavior {
 		set_site_transient( 'wd_util_server', $server_type, 3600 );
 
 		return $server;
+	}
+
+	/**
+	 * Determine the Apache version
+	 * Most web servers have apache_get_version disabled, so we just get a simple curl of the headers
+	 *
+	 * @return String
+	 */
+	public function determineApacheVersion() {
+		if ( ! function_exists( 'apache_get_version' ) ) {
+			$version        = '2.2'; //default supported is 2.2
+			$url            = home_url();
+			$apache_version = get_site_transient( 'wd_util_apache_version' );
+			if ( ! is_array( $apache_version ) ) {
+				$apache_version = array();
+			}
+
+			if ( isset( $apache_version[ $url ] ) && ! empty( $apache_version[ $url ] ) ) {
+				return strtolower( $apache_version[ $url ] );
+			}
+
+			$apache_version[ $url ] = $version; //default is 2.2
+
+			if ( isset( $_SERVER['SERVER_SOFTWARE'] ) ) {
+				$server = explode( " ", $_SERVER['SERVER_SOFTWARE'] );
+				if ( is_array( $server ) && count( $server ) > 1 ) {
+					$server = $server[0];
+					$server = explode( "/", $server );
+					if ( is_array( $server ) && count( $server ) > 1 ) {
+						$version                = $server[1];
+						$apache_version[ $url ] = $version;
+					}
+				}
+			}
+
+			set_site_transient( 'wd_util_apache_version', $apache_version, 3600 );
+		} else {
+			$version = apache_get_version();
+			$version = explode( '/', $version );
+			$version = $version[1];
+		}
+
+		return $version;
 	}
 
 	/**
@@ -619,7 +669,7 @@ class Utils extends Behavior {
 	/**
 	 * Generate Stats
 	 *
-	 * @return Array
+	 * @return array
 	 */
 	public function generateStats() {
 		$issues   = array();
@@ -679,7 +729,7 @@ class Utils extends Behavior {
 				'vulnerability_db' => 0,
 				'file_suspicious'  => 0
 			);
-			$res['last_completed'] = null;
+			$res['last_completed'] = false;
 		}
 
 		$res['scan_items'] = $scanItems;
@@ -691,7 +741,7 @@ class Utils extends Behavior {
 
 		$lastLockout = Login_Protection_Api::getLastLockout();
 		if ( is_null( $lastLockout ) ) {
-			$lastLockout = __( "Never", wp_defender()->domain );
+			$lastLockout = false;
 		} else {
 			$lastLockout = $lastLockout->date;
 		}
@@ -710,49 +760,104 @@ class Utils extends Behavior {
 				break;
 		}
 
+		$events_in_month = \WP_Defender\Module\Audit\Component\Audit_API::pullLogs( array(
+			'date_from' => date( 'Y-m-d', strtotime( 'first day of this month', current_time( 'timestamp' ) ) ) . ' 00:00:00',
+			'date_to'   => date( 'Y-m-d' ) . ' 23:59:59',
+		) );
+
+		$last_event_date = __( 'Never', wp_defender()->domain );
+
+		if ( ! is_wp_error( $events_in_month ) ) {
+			$last_event_date = $events_in_month['data'][0]['timestamp'];
+			$events_in_month = count( $events_in_month['data'] );
+		}
+
 		$data = array(
 			'domain'       => network_home_url(),
 			'timestamp'    => $timestamp,
 			'warnings'     => $count,
 			'cautions'     => count( $issues ),
 			'data_version' => '20170801',
-			'scan_data'    => json_encode( array(
-				'scan_result'           => $res,
-				'hardener_result'       => array(
-					'issues'   => $issues,
-					'ignored'  => $ignored,
-					'resolved' => $resolved
-				),
-				'scan_schedule'         => array(
-					'is_activated' => $scanSettings->notification,
-					'time'         => $scanSettings->time,
-					'day'          => $scanSettings->day,
-					'frequency'    => $scanSettings->frequency
-				),
-				'audit_enabled'         => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
-				'audit_page_url'        => network_admin_url( 'admin.php?page=wdf-logging' ),
-				'labels'                => $labels,
-				'scan_page_url'         => network_admin_url( 'admin.php?page=wdf-scan' ),
-				'hardener_page_url'     => network_admin_url( 'admin.php?page=wdf-hardener' ),
-				'new_scan_url'          => network_admin_url( 'admin.php?page=wdf-scan&wdf-action=new_scan' ),
-				'schedule_scans_url'    => network_admin_url( 'admin.php?page=wdf-schedule-scan' ),
-				'settings_page_url'     => network_admin_url( 'admin.php?page=wdf-settings' ),
-				'last_lockout'          => $lastLockout,
-				'login_lockout_enabled' => $lockoutSettings->login_protection,
-				'login_lockout'         => Login_Protection_Api::getLoginLockouts( $after_time ),
-				'lockout_404_enabled'   => $lockoutSettings->detect_404,
-				'lockout_404'           => Login_Protection_Api::get404Lockouts( $after_time ),
-				'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
-				'multi_factors_auth'    => Auth_Settings::instance()->enabled
-			) ),
+			'scan_data'    => json_encode(
+				array(
+					'scan_result'           => $res,
+					'hardener_result'       => array(
+						'issues'   => $issues,
+						'ignored'  => $ignored,
+						'resolved' => $resolved
+					),
+					'scan_schedule'         => array(
+						'is_activated' => $scanSettings->notification,
+						'time'         => $scanSettings->time,
+						'day'          => $scanSettings->day,
+						'frequency'    => $scanSettings->frequency
+					),
+					'audit_status'          => array(
+						'events_in_month' => $events_in_month,
+						'audit_enabled'   => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+						'last_event_date' => $last_event_date,
+					),
+					'audit_page_url'        => network_admin_url( 'admin.php?page=wdf-logging' ),
+					'labels'                => $labels,
+					'scan_page_url'         => network_admin_url( 'admin.php?page=wdf-scan' ),
+					'hardener_page_url'     => network_admin_url( 'admin.php?page=wdf-hardener' ),
+					'new_scan_url'          => network_admin_url( 'admin.php?page=wdf-scan&wdf-action=new_scan' ),
+					'schedule_scans_url'    => network_admin_url( 'admin.php?page=wdf-schedule-scan' ),
+					'settings_page_url'     => network_admin_url( 'admin.php?page=wdf-settings' ),
+					'ip_lockout_page_url'   => network_admin_url( 'admin.php?page=wdf-ip-lockout' ),
+					'last_lockout'          => $lastLockout,
+					'login_lockout_enabled' => $lockoutSettings->login_protection,
+					'login_lockout'         => Login_Protection_Api::getLoginLockouts( $after_time ),
+					'lockout_404_enabled'   => $lockoutSettings->detect_404,
+					'lockout_404'           => Login_Protection_Api::get404Lockouts( $after_time ),
+					'total_lockout'         => Login_Protection_Api::getAllLockouts( $after_time ),
+					'advanced'              => array(
+						'multi_factors_auth' => array(
+							'active'  => Auth_Settings::instance()->enabled,
+							'enabled' => ! empty( Auth_Settings::instance()->userRoles ),
+						),
+					),
+					'reports'               => array(
+						'file_scanning' => array(
+							'active'    => true,
+							'enabled'   => \WP_Defender\Module\Scan\Model\Settings::instance()->notification,
+							//Report enabled Bool
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\Scan\Model\Settings::instance()->frequency,
+								'day'       => \WP_Defender\Module\Scan\Model\Settings::instance()->day,
+								'time'      => \WP_Defender\Module\Scan\Model\Settings::instance()->time
+							)
+						),
+						'audit_logging' => array(
+							'active'    => \WP_Defender\Module\Audit\Model\Settings::instance()->enabled,
+							'enabled'   => \WP_Defender\Module\Audit\Model\Settings::instance()->notification,
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\Audit\Model\Settings::instance()->frequency,
+								'day'       => \WP_Defender\Module\Audit\Model\Settings::instance()->day,
+								'time'      => \WP_Defender\Module\Audit\Model\Settings::instance()->time
+							)
+						),
+						'ip_lockouts'   => array(
+							//always true as we have blacklist listening
+							'active'    => true,
+							'enabled'   => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report,
+							//Report enabled Bool
+							'frequency' => array(
+								'frequency' => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_frequency,
+								'day'       => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_day,
+								'time'      => \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->report_time
+							),
+						)
+					),
+				)
+			)
 		);
 
 		return $data;
 	}
 
 	public function _submitStatsToDev() {
-		$data = $this->generateStats();
-
+		$data      = $this->generateStats();
 		$end_point = "https://premium.wpmudev.org/api/defender/v1/scan-results";
 		$res       = $this->devCall( $end_point, $data, array(
 			'method' => 'POST'
@@ -848,5 +953,27 @@ class Utils extends Behavior {
 		}
 
 		return apply_filters( 'defender_current_page_url', $url );
+	}
+
+	/**
+	 * site url with correct sheme
+	 *
+	 * @return string
+	 */
+	public function siteURLWithScheme() {
+		$current_scheme = ( is_ssl() ) ? 'https' : 'http';
+
+		return network_site_url( '', $current_scheme );
+	}
+
+	/**
+	 * @param $campaign
+	 *
+	 * @return string
+	 */
+	public function campaignURL( $campaign ) {
+		$url = "https://premium.wpmudev.org/project/wp-defender/?utm_source=defender&utm_medium=plugin&utm_campaign=" . $campaign;
+
+		return $url;
 	}
 }

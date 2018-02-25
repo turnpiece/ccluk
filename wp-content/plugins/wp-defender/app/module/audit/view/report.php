@@ -65,7 +65,6 @@
             <input type="hidden" name="action" value="saveAuditSettings"/>
 			<?php wp_nonce_field( 'saveAuditSettings' ) ?>
             <button class="button float-r"><?php _e( "Update Settings", wp_defender()->domain ) ?></button>
-            <button type="reset" class="button button-secondary float-r"><?php _e( "Cancel", wp_defender()->domain ) ?></button>
             <div class="clear"></div>
         </form>
     </div>

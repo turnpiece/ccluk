@@ -46,12 +46,21 @@ class Give_Tools_Recount_Donor_Stats extends Give_Batch_Export {
 	public $per_step = 5;
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct( $_step = 1 ) {
+		parent::__construct( $_step );
+
+		$this->is_writable = true;
+	}
+
+	/**
 	 * Get the Export Data
 	 *
 	 * @access public
 	 * @since 1.5
 	 *
-	 * @return array $data The data for the CSV file
+	 * @return array|bool $data The data for the CSV file
 	 */
 	public function get_data() {
 
@@ -86,7 +95,7 @@ class Give_Tools_Recount_Donor_Stats extends Give_Batch_Export {
 					'status'       => $allowed_payment_status,
 					'meta_query'   => array(
 						array(
-							'key'     => '_give_payment_user_email',
+							'key'     => '_give_payment_donor_email',
 							'value'   => $donor->email,
 							'compare' => '=',
 						),
@@ -111,7 +120,7 @@ class Give_Tools_Recount_Donor_Stats extends Give_Batch_Export {
 						if ( true === $should_process_payment ) {
 
 							if ( apply_filters( 'give_donor_recount_should_increase_value', true, $payment ) ) {
-								$purchase_value += give_get_payment_amount( $payment->ID );
+								$purchase_value += (float) give_donation_amount( $payment->ID, array( 'type' => 'stats' ) );
 							}
 
 							if ( apply_filters( 'give_donor_recount_should_increase_count', true, $payment ) ) {
@@ -215,11 +224,7 @@ class Give_Tools_Recount_Donor_Stats extends Give_Batch_Export {
 	 * Headers
 	 */
 	public function headers() {
-		ignore_user_abort( true );
-
-		if ( ! give_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
-			set_time_limit( 0 );
-		}
+		give_ignore_user_abort();
 	}
 
 	/**

@@ -73,7 +73,7 @@ class Eab_Rsvps_RsvpAutoReset {
 
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
-		$tips->set_icon_url(plugins_url('events-and-bookings/img/information.png'));
+		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
 		$runs = array(
 			'3600' => __('Hour', Eab_EventsHub::TEXT_DOMAIN),
 			'7200' => __('Two hours', Eab_EventsHub::TEXT_DOMAIN),
@@ -126,9 +126,9 @@ class Eab_Rsvps_RsvpAutoReset {
 	}
 
 	function save_settings ($options) {
-		$options['rsvp_auto_reset-run_each'] = $_POST['eab_rsvps']['rsvp_auto_reset-run_each'];
-		$options['rsvp_auto_reset-cutoff'] = $_POST['eab_rsvps']['rsvp_auto_reset-cutoff'];
-		$options['rsvp_auto_reset-remove_attendance'] = $_POST['eab_rsvps']['rsvp_auto_reset-remove_attendance'];
+		$options['rsvp_auto_reset-run_each'] 			= isset( $_POST['eab_rsvps']['rsvp_auto_reset-run_each'] ) ? $_POST['eab_rsvps']['rsvp_auto_reset-run_each'] : false;
+		$options['rsvp_auto_reset-cutoff'] 				= isset( $_POST['eab_rsvps']['rsvp_auto_reset-cutoff'] ) ? $_POST['eab_rsvps']['rsvp_auto_reset-cutoff'] : '';
+		$options['rsvp_auto_reset-remove_attendance'] 	= isset( $_POST['eab_rsvps']['rsvp_auto_reset-remove_attendance'] ) ? $_POST['eab_rsvps']['rsvp_auto_reset-remove_attendance'] : '';
 		return $options;
 	}
 

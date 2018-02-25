@@ -114,7 +114,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 
 	function show_settings () {
 		$tips = new WpmuDev_HelpTooltips();
-		$tips->set_icon_url(plugins_url('events-and-bookings/img/information.png'));
+		$tips->set_icon_url(EAB_PLUGIN_URL . 'img/information.png' );
 
 		$no_avatar = !$this->_data->get_option('guest_lists-sai-avatar_size') ? 'checked="checked"' : '';
 		$avatar_small = ('small' == $this->_data->get_option('guest_lists-sai-avatar_size')) ? 'checked="checked"' : '';
@@ -126,7 +126,7 @@ class Eab_GuestList_ShowAdditionalInfo {
 		$display_name = ('display_name' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 		$firstname = ('firstname' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 		$lastname = ('lastname' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
-		$fullname_first = ('fullname_first' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
+		$fullname_first = ('fullname_first' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';	 	 	 	 				   		
 		$fullname_last = ('fullname_last' == $this->_data->get_option('guest_lists-sai-show_name')) ? 'checked="checked"' : '';
 
 		$show_in_admin = $this->_data->get_option('guest_lists-sai-show_in_admin') ? 'checked="checked"' : '';

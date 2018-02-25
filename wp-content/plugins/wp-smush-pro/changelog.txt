@@ -5,9 +5,26 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
-= 2.7.5 =
+= 2.7.8 =
 
-* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez (@neorichi) for responsible disclosure.
+* Fixed:
+    * Plugin conflict causing JS error which disables text editor in some cases
+
+= 2.7.7 =
+
+* Updates:
+    * Minor UI Changes ( Accessibility Fixes )
+    * PNG to JPG: Iterate over rows while URL replacement to make sure all the occurrences are updated
+
+* Fixed:
+    * Skip button doesn't skips images
+    * Show updated smush status in Media Grid attachment modal
+    * Font issue in WordPress backend for Ubuntu systems
+    * Fatal Error: get_current_network() function undefined
+
+= 2.7.6 =
+
+* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez(@neorichi) for responsible disclosure.
 
 = 2.7.5 =
 
@@ -372,4 +389,4 @@ Change Log:
 - First release
 
 
-87274-1507401827-ai
+87274-1518896138-au

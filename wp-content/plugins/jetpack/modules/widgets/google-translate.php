@@ -44,7 +44,13 @@ class Jetpack_Google_Translate_Widget extends WP_Widget {
 	 * Enqueue frontend JS scripts.
 	 */
 	public function enqueue_scripts() {
-		wp_register_script( 'google-translate-init', plugins_url( 'google-translate/google-translate.js', __FILE__ ) );
+		wp_register_script(
+			'google-translate-init',
+			Jetpack::get_file_url_for_environment(
+				'_inc/build/widgets/google-translate/google-translate.min.js',
+				'modules/widgets/google-translate/google-translate.js'
+			)
+		);
 		wp_register_script( 'google-translate', '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit', array( 'google-translate-init' ) );
 		// Admin bar is also displayed on top of the site which causes google translate bar to hide beneath.
 		// This is a hack to show google translate bar a bit lower.
@@ -66,7 +72,40 @@ class Jetpack_Google_Translate_Widget extends WP_Widget {
 				'title' => $this->default_title,
 			) );
 
-			wp_localize_script( 'google-translate-init', '_wp_google_translate_widget', array( 'lang' => get_locale() ) );
+			/**
+			 * Filter the layout of the Google Translate Widget.
+			 *
+			 * 3 different integers are accepted.
+			 * 	0 for the vertical layout.
+			 * 	1 for the horizontal layout.
+			 * 	2 for the dropdown only.
+			 *
+			 * @see https://translate.google.com/manager/website/
+			 *
+			 * @module widgets
+			 *
+			 * @since 5.5.0
+			 *
+			 * @param string $layout layout of the Google Translate Widget.
+			 */
+			$button_layout = apply_filters( 'jetpack_google_translate_widget_layout', 2 );
+
+			if (
+				! is_int( $button_layout )
+				|| 0 > $button_layout
+				|| 2 < $button_layout
+			) {
+				$button_layout = 2;
+			}
+
+			wp_localize_script(
+				'google-translate-init',
+				'_wp_google_translate_widget',
+				array(
+					'lang'   => get_locale(),
+					'layout' => intval( $button_layout ),
+				)
+			);
 			wp_enqueue_script( 'google-translate-init' );
 			wp_enqueue_script( 'google-translate' );
 

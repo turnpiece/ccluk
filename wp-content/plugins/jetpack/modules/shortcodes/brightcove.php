@@ -56,7 +56,7 @@ class Jetpack_Brightcove_Shortcode {
 	 * @return array
 	 */
 	static public function normalize_attributes( $atts ) {
-		if ( 1 == count( $atts ) ) { // this is the case we need to take care of.
+		if ( is_array( $atts ) && 1 == count( $atts ) ) { // this is the case we need to take care of.
 			$parsed_atts = array();
 			$params = shortcode_new_to_old_params( $atts );
 			$params = apply_filters( 'brightcove_dimensions', $params );
@@ -229,7 +229,13 @@ class Jetpack_Brightcove_Shortcode {
 		}
 
 		if ( $html5 ) {
-			wp_enqueue_script( 'brightcove-loader', plugins_url( 'js/brightcove.js', __FILE__ ), array( 'jquery' ), 20121127, false );
+			wp_enqueue_script(
+				'brightcove-loader',
+				Jetpack::get_file_url_for_environment( '_inc/build/shortcodes/js/brightcove.min.js', 'modules/shortcodes/js/brightcove.js' ),
+				array( 'jquery' ),
+				20121127,
+				false
+			);
 			wp_localize_script( 'brightcove-loader', 'brightcoveData', array(
 				'tld' => esc_js( $js_tld )
 			) );

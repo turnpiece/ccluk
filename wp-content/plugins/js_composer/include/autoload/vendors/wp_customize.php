@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * @since 4.4 vendors initialization moved to hooks in autoload/vendors.
  */
-// Remove scripts from the Visual Composer while in the Customizer = Temp Fix
+// Remove scripts from the WPBakery Page Builder while in the Customizer = Temp Fix
 // Actually we need to check if this is really needed in 4.4 uncomment if you have customizer issues
 // But this actually will break any VC js in Customizer preview.
 // removed by fixing vcTabsBevahiour in js_composer_front.js

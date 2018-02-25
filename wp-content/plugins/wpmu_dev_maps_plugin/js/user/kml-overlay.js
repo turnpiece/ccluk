@@ -1,4 +1,4 @@
-/*! Google Maps - v2.9.3
+/*! Google Maps Pro - v2.9.4
  * http://premium.wpmudev.org/project/wordpress-google-maps-plugin
  * Copyright (c) 2017; * Licensed GPLv2+ */
 /*global window:false */

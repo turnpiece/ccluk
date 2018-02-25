@@ -16,6 +16,8 @@ class Jetpack_Tiled_Gallery {
 		add_action( 'admin_init', array( $this, 'settings_api_init' ) );
 		add_filter( 'jetpack_gallery_types', array( $this, 'jetpack_gallery_types' ), 9 );
 		add_filter( 'jetpack_default_gallery_type', array( $this, 'jetpack_default_gallery_type' ) );
+
+
 	}
 
 	public function tiles_enabled() {
@@ -89,7 +91,14 @@ class Jetpack_Tiled_Gallery {
 	}
 
 	public static function default_scripts_and_styles() {
-		wp_enqueue_script( 'tiled-gallery', plugins_url( 'tiled-gallery/tiled-gallery.js', __FILE__ ), array( 'jquery' ) );
+		wp_enqueue_script(
+			'tiled-gallery',
+			Jetpack::get_file_url_for_environment(
+				'_inc/build/tiled-gallery/tiled-gallery/tiled-gallery.min.js',
+				'modules/tiled-gallery/tiled-gallery/tiled-gallery.js'
+			),
+			array( 'jquery' )
+		);
 		wp_enqueue_style( 'tiled-gallery', plugins_url( 'tiled-gallery/tiled-gallery.css', __FILE__ ), array(), '2012-09-21' );
 		wp_style_add_data( 'tiled-gallery', 'rtl', 'replace' );
 	}

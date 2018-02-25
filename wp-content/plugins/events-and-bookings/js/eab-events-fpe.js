@@ -93,33 +93,73 @@ function _time_string_to_array (time_string) {
 }
 
 /**
+* Manage no start and end time checkboxes
+*/
+jQuery(document).ready(function(e) {
+   	jQuery(document).on('change', '#incsub_event_no_start_time_0',function(){
+		if ( document.getElementById("incsub_event_no_start_time_0").checked == true ){
+	   		jQuery('#eab-events-fpe-start_time').hide();
+		}else{
+			jQuery('#eab-events-fpe-start_time').show();
+		}
+    });
+	jQuery(document).on('change', '#incsub_event_no_end_time_0',function(){
+		if ( document.getElementById("incsub_event_no_end_time_0").checked == true ){
+	   		jQuery('#eab-events-fpe-end_time').hide();
+		}else{
+			jQuery('#eab-events-fpe-end_time').show();
+		}
+    });
+	
+	if ( jQuery('#eab-events-fpe-start_time').val() == "00:00"){
+		jQuery('#eab-events-fpe-start_time').hide();
+		jQuery('#incsub_event_no_start_time_0').attr('checked',true);
+	}
+	if ( jQuery('#eab-events-fpe-end_time').val() == "00:00"){
+		jQuery('#eab-events-fpe-end_time').hide();
+		jQuery('#incsub_event_no_end_time_0').attr('checked',true);
+	}
+});
+/**
  * Sends save request and shows general message
  */
 function send_save_request () {
 	if ($("#eab-events-fpe-date_time-error").length) $("#eab-events-fpe-date_time-error").remove();
+	var has_start = false,
+		has_end = false,
+		$start_date = $("#eab-events-fpe-start_date");
 
-	var $start_date = $("#eab-events-fpe-start_date");
 	if (!$start_date.val()) return missing_datetime_error($start_date);
-	
-	var $start_time = $("#eab-events-fpe-start_time");
-	if (!$start_time.val()) return missing_datetime_error($start_time);
-	
 	var start = new Date($start_date.val());
-	var start_time_parts = _time_string_to_array($start_time.val());
 
-	start.setHours(start_time_parts[0]);
-	start.setMinutes(start_time_parts[1]);
+	var start_time_parts = [];
+	var end_time_parts = [];
+	
+	if ( $( '#eab-events-fpe-toggle_time__start' ).is( ':checked' ) ){
+		var $start_time = $("#eab-events-fpe-start_time");
+		if (!$start_time.val()) return missing_datetime_error($start_time);
+	
+		start_time_parts = _time_string_to_array($start_time.val());
+
+		start.setHours(start_time_parts[0]);
+		start.setMinutes(start_time_parts[1]);
+		has_start = true;
+	}
 	
 	var $end_date = $("#eab-events-fpe-end_date");
 	if (!$end_date.val()) return missing_datetime_error($end_date);
-	
-	var $end_time = $("#eab-events-fpe-end_time");
-	if (!$end_time.val()) return missing_datetime_error($end_time);
-	
 	var end = new Date($end_date.val());
-	var end_time_parts = _time_string_to_array($end_time.val());
-	end.setHours(end_time_parts[0]);
-	end.setMinutes(end_time_parts[1]);
+	
+	
+	if ( $( '#eab-events-fpe-toggle_time__end' ).is( ':checked' ) ){
+		var $end_time = $("#eab-events-fpe-end_time");
+		if (!$end_time.val()) return missing_datetime_error($end_time);
+		
+		end_time_parts = _time_string_to_array($end_time.val());
+		end.setHours(end_time_parts[0]);
+		end.setMinutes(end_time_parts[1]);
+		has_end = true;
+	}
 	
 	if (start >= end) return invalid_datetime_error();
 	
@@ -128,11 +168,11 @@ function send_save_request () {
 	);
 	var content = $("#eab-events-fpe-content").is(":visible") ? $("#eab-events-fpe-content").val() : tinyMCE.activeEditor.getContent();
         
-        var modified_start_time = start_time_parts.join(':');
-        var modified_end_time = end_time_parts.join(':');
-        
-        modified_start_time = modified_start_time.replace(/ /g, '');
-        modified_end_time = modified_end_time.replace(/ /g, '');
+	var modified_start_time = start_time_parts.join(':');
+	var modified_end_time = end_time_parts.join(':');
+	
+	modified_start_time = modified_start_time.replace(/ /g, '');
+	modified_end_time = modified_end_time.replace(/ /g, '');
         
 	var data = {
 		"id": $("#eab-events-fpe-event_id").val(),
@@ -140,13 +180,19 @@ function send_save_request () {
 		"content": content,
 		"start": $start_date.val() + ' ' + modified_start_time,
 		"end": $end_date.val() + ' ' + modified_end_time,
+		"no_start_time": $( '#eab-events-fpe-toggle_time__start' ).is( ':checked' ),
+		"no_end_time": $( '#eab-events-fpe-toggle_time__end' ).is( ':checked' ),
 		"venue": $("#eab-events-fpe-venue").val(),
 		"status": $("#eab-events-fpe-status").val(),
 		"is_premium": ($("#eab-events-fpe-is_premium").length ? $("#eab-events-fpe-is_premium").val() : 0),
 		"category": $("#eab-events-fpe-categories").val(),
 		/* Added by Ashok */
-		"featured" : $('#eab-fpe-attach_id').val()
+		"featured" : $('#eab-fpe-attach_id').val(),
 		/* End of adding by Ashok */
+		/* Added by Lindeni */
+		"has_start" : has_start,
+		"has_end" : has_end
+		/* End of adding by Lindeni */
 	};
 	if ($("#eab-events-fpe-event_fee").length) {
 		data["fee"] = $("#eab-events-fpe-event_fee").val();
@@ -179,7 +225,7 @@ function send_save_request () {
 		}
 		
 		$("#eab-events-fpe-event_id").val(post_id);
-                $(".eab-attendance-event_id").val(post_id);
+        $(".eab-attendance-event_id").val(post_id);
 		return show_message((message ? message : l10nFpe.all_good), false);
 	});
 	return false;
@@ -285,6 +331,27 @@ $(function () {
         return false;
     });
 	/* End of adding by Ashok */
+
+	/* Toggle time options */
+	$( document ).on( 'click', '#eab-events-fpe-date_time .eab_time_toggle', function(){
+		
+		var affect = $( this ).data( 'time-affect' ),
+			source = ( $( this ).attr( 'type' ) == 'checkbox' ) ? 'checkbox' : 'other_trigger',
+			target = $( '.eab-events-fpe_wrap_time_' + affect ),
+			checkbox = $( '#eab-events-fpe-toggle_time__' + affect );
+		
+		if( source == 'other_trigger' ){
+			checkbox.prop("checked", !checkbox.prop("checked"));
+		}
+		
+		if( checkbox.is( ':checked' ) ){
+			target.fadeOut( 300 );
+		}
+		else{
+			target.show( 300 );	
+		}
+
+	});
 });
 
 	

@@ -44,6 +44,14 @@ class Give_Tools_Recount_Income extends Give_Batch_Export {
 	public $per_step = 100;
 
 	/**
+	 * Constructor.
+	 */
+	public function __construct( $_step = 1 ) {
+		parent::__construct( $_step );
+
+		$this->is_writable = true;
+	}
+	/**
 	 * Get the Export Data
 	 *
 	 * @access public
@@ -79,7 +87,7 @@ class Give_Tools_Recount_Income extends Give_Batch_Export {
 
 			foreach ( $payments as $payment ) {
 
-				$total += give_get_payment_amount( $payment );
+				$total += (float) give_donation_amount( $payment, array( 'type' => 'stats' ) );
 
 			}
 
@@ -87,7 +95,7 @@ class Give_Tools_Recount_Income extends Give_Batch_Export {
 				$totals = 0;
 			}
 
-			$total = round( $total, give_currency_decimal_filter() );
+			$total = round( $total, give_get_price_decimals() );
 
 			$this->store_data( 'give_temp_recount_earnings', $total );
 
@@ -176,11 +184,7 @@ class Give_Tools_Recount_Income extends Give_Batch_Export {
 	 * Headers.
 	 */
 	public function headers() {
-		ignore_user_abort( true );
-
-		if ( ! give_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
-			set_time_limit( 0 );
-		}
+		give_ignore_user_abort();
 	}
 
 	/**

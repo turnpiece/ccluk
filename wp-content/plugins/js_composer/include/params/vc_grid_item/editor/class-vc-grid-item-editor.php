@@ -6,7 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Manger for new post type for single grid item design with constructor
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  * @since 4.4
  */
 require_once vc_path_dir( 'EDITORS_DIR', 'class-vc-backend-editor.php' );

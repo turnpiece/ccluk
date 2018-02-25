@@ -47,8 +47,8 @@
 		</span>
 	</div><!-- end col-third -->
 	<div class="col-two-third">
-		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="button button-ghost button-large">
-			<?php esc_attr_e( 'Deactivate', 'wphb' ); ?>
+		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="button button-ghost">
+			<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 		</a>
 	</div><!-- end col-two-third -->
 </div><!-- end row -->

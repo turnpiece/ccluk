@@ -15,7 +15,7 @@
 							_e( "Automatic File Scans & Reporting", wp_defender()->domain );
 						} ?></strong>
                     <p class="sub">
-						<?php _e( "Scan your website for file changes, vulnerabilities and injected code and get and get notified about anything suspicious.", wp_defender()->domain ) ?>
+						<?php _e( "Scan your website for file changes, vulnerabilities and injected code and get notified about anything suspicious.", wp_defender()->domain ) ?>
                     </p>
                 </div>
                 <div class="column is-2">

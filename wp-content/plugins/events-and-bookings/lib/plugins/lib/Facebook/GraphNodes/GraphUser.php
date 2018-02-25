@@ -157,7 +157,7 @@ class GraphUser extends GraphNode
      */
     public function getSignificantOther()
     {
-        return $this->getField('significant_other');	 	 	 	 				   		
+        return $this->getField('significant_other');
     }
 
     /**

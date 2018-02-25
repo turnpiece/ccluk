@@ -76,6 +76,17 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	}
 
 	/**
+	 * Ignore the latest performance test results.
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function ignore() {
+		return $this->request->get( 'site/result/ignore/', array(
+			'domain' => $this->request->get_this_site(),
+		));
+	}
+
+	/**
 	 * Test if GZIP is enabled.
 	 *
 	 * @since 1.6.0
@@ -86,8 +97,8 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 
 		$params = array(
 			'html'       => $domain,
-			'javascript' => wphb_plugin_url() . 'core/modules/dummy/dummy-js.js',
-			'css'        => wphb_plugin_url() . 'core/modules/dummy/dummy-style.css',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
 
 		return $this->request->post( 'test/gzip/', array(
@@ -103,18 +114,39 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function check_cache() {
-		$dummy_url = wphb_plugin_url() . 'core/modules/dummy/';
-
 		$params = array(
-			'javascript' => $dummy_url . 'dummy-js.js',
-			'css'        => $dummy_url . 'dummy-style.css',
-			'media'      => $dummy_url . 'dummy-media.mp3',
-			'images'     => $dummy_url . 'dummy-image.png',
+			'javascript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
+			'css'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
+			'media'      => WPHB_DIR_URL . 'core/modules/dummy/dummy-media.mp3',
+			'images'     => WPHB_DIR_URL . 'core/modules/dummy/dummy-image.png',
 		);
 
 		return $this->request->post( 'test/cache/', array(
 			'domain' => $this->request->get_this_site(),
 			'tests'  => wp_json_encode( $params ),
 		));
+	}
+
+	/**
+	 * Set ignore report on server.
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
+	public function ignore_report() {
+		return $this->request->post( 'site/reports/', array(
+			'domain' => $this->request->get_this_site(),
+			'ignore' => 1,
+		) );
+	}
+
+	/**
+	 * Is report ignored.
+	 *
+	 * @return bool
+	 */
+	public function is_report_ignored() {
+		return $this->request->get( 'site/reports/', array(
+			'domain' => $this->request->get_this_site(),
+		) );
 	}
 }

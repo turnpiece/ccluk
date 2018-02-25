@@ -29,8 +29,8 @@ if ( ! defined( 'ABSPATH' ) ) {
 		if ( ! vc_license()->isActivated() ) :
 			?>
 			<div class="vc_ui-panel-message">
-				<h3 class="vc_ui-panel-title"><?php _e( 'Activate Visual Composer', 'js_composer' ); ?></h3>
-				<p class="vc_description"><?php _e( 'Visual Composer Template Library downloads are available for activated	versions only. Activate Visual Composer direct license to access Template Library and receive other benefits.', 'js_composer' ); ?></p>
+				<h3 class="vc_ui-panel-title"><?php _e( 'Activate WPBakery Page Builder', 'js_composer' ); ?></h3>
+				<p class="vc_description"><?php _e( 'WPBakery Page Builder Template Library downloads are available for activated	versions only. Activate WPBakery Page Builder direct license to access Template Library and receive other benefits.', 'js_composer' ); ?></p>
 				<a href="<?php echo admin_url( 'admin.php?page=vc-updater' ); ?>" target="_blank" class="vc_general vc_ui-button vc_ui-button-size-sm vc_ui-button-shape-rounded vc_ui-button-action">
 					<?php _e( 'Activate License', 'js_composer' ); ?>
 				</a>
@@ -106,9 +106,9 @@ if ( vc_user_access()->part( 'templates' )->checkStateAny( true, null )->get() )
 	?>
 	<div class="vc_column vc_col-sm-12 vc_access-library-col">
 		<h3 class="vc_ui-panel-title"><?php _e( 'Download Templates', 'js_composer' ); ?></h3>
-		<p class="vc_description"><?php _e( 'Access Visual Composer Template Library for unique layout
+		<p class="vc_description"><?php _e( 'Access WPBakery Page Builder Template Library for unique layout
 		templates. Download chosen templates and discover new layouts with regular template
-		updates from Visual Composer team.', 'js_composer' ); ?></p>
+		updates from WPBakery Page Builder team.', 'js_composer' ); ?></p>
 		<button class="vc_general vc_ui-button vc_ui-button-size-sm vc_ui-button-shape-rounded vc_ui-button-action vc_ui-access-library-btn">
 			<?php _e( 'Access Library', 'js_composer' ); ?>
 		</button>

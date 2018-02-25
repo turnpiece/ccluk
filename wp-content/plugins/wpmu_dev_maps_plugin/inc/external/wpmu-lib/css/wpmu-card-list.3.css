@@ -141,7 +141,7 @@
   z-index: 5;
   background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 90%);
   /* FF3.6+ */
-  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(90%, white));	 	 	 	 			    	 
+  background: -webkit-gradient(linear, left top, left bottom, color-stop(0%, rgba(255, 255, 255, 0)), color-stop(90%, white));
   /* Chrome,Safari4+ */
   background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 0%, white 90%);
   /* Chrome10+,Safari5.1+ */
@@ -345,4 +345,4 @@
 }
 
 
-/* 87274-1507402031-ai */
+/* 87274-1511475604-au */

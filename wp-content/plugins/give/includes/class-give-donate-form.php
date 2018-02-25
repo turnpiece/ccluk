@@ -334,8 +334,8 @@ class Give_Donate_Form {
 	 * @since  1.0
 	 * @access public
 	 *
-	 * @param  bool  $_id   Post id. Default is false.
-	 * @param  array $_args Arguments passed.
+	 * @param  int|bool $_id   Post id. Default is false.
+	 * @param  array    $_args Arguments passed.
 	 */
 	public function __construct( $_id = false, $_args = array() ) {
 
@@ -529,10 +529,9 @@ class Give_Donate_Form {
 
 		if ( ! isset( $this->minimum_price ) ) {
 
-			$allow_custom_amount = give_get_meta( $this->ID, '_give_custom_amount', true );
 			$this->minimum_price = give_get_meta( $this->ID, '_give_custom_amount_minimum', true );
 
-			if ( ! give_is_setting_enabled( $allow_custom_amount ) ) {
+			if ( ! $this->is_custom_price_mode() ) {
 				$this->minimum_price = 0;
 			}
 
@@ -581,7 +580,11 @@ class Give_Donate_Form {
 
 		if ( ! isset( $this->goal ) ) {
 
-			$this->goal = give_get_meta( $this->ID, '_give_set_goal', true );
+			if ( 'donation' === give_get_form_goal_format( $this->ID ) ) {
+				$this->goal = give_get_meta( $this->ID, '_give_number_of_donation_goal', true );
+			} else {
+				$this->goal = give_get_meta( $this->ID, '_give_set_goal', true );
+			}
 
 			if ( ! $this->goal ) {
 				$this->goal = 0;
@@ -649,6 +652,45 @@ class Give_Donate_Form {
 		 */
 		return (bool) apply_filters( 'give_custom_price_option_mode', $ret, $this->ID );
 
+	}
+
+	/**
+	 * Determine if custom price mode is enabled or disabled
+	 *
+	 * @since  1.8.18
+	 * @access public
+	 *
+	 * @param string|float $amount Donation Amount.
+	 *
+	 * @return bool
+	 */
+	public function is_custom_price( $amount ) {
+		$result = false;
+		$amount = give_maybe_sanitize_amount( $amount );
+
+		if ( $this->is_custom_price_mode() ) {
+
+			if ( 'set' === $this->get_type() ) {
+				if ( $amount !== $this->get_price() ) {
+					$result = true;
+				}
+
+			} elseif ( 'multi' === $this->get_type() ) {
+				$level_amounts = array_map( 'give_maybe_sanitize_amount', wp_list_pluck( $this->get_prices(), '_give_amount' ) );
+				$result        = ! in_array( $amount, $level_amounts );
+			}
+		}
+
+		/**
+		 * Filter to reset whether it is custom price or not.
+		 *
+		 * @param bool         $result True/False.
+		 * @param string|float $amount Donation Amount.
+		 * @param int          $this->ID Form ID.
+		 *
+		 * @since 1.8.18
+		 */
+		return (bool) apply_filters( 'give_is_custom_price', $result, $amount, $this->ID );
 	}
 
 	/**
@@ -748,20 +790,32 @@ class Give_Donate_Form {
 	 * @return string
 	 */
 	public function get_form_wrap_classes( $args ) {
+		$custom_class = array(
+			'give-form-wrap',
+		);
 
-		$display_option = ( isset( $args['display_style'] ) && ! empty( $args['display_style'] ) )
-			? $args['display_style']
-			: give_get_meta( $this->ID, '_give_payment_display', true );
+		if ( $this->is_close_donation_form() ) {
+			$custom_class[] = 'give-form-closed';
+		} else{
+			$display_option = ( isset( $args['display_style'] ) && ! empty( $args['display_style'] ) )
+				? $args['display_style']
+				: give_get_meta( $this->ID, '_give_payment_display', true );
 
-		// If admin want to show only button for form then user inbuilt modal functionality.
-		if( 'button' === $display_option ) {
-			$display_option = 'modal give-display-button-only';
+			$custom_class[] = "give-display-{$display_option}";
+
+			// If admin want to show only button for form then user inbuilt modal functionality.
+			if ( 'button' === $display_option ) {
+				$custom_class[] = 'give-display-button-only';
+			}
 		}
 
-		$form_wrap_classes_array = apply_filters( 'give_form_wrap_classes', array(
-			'give-form-wrap',
-			'give-display-' . $display_option,
-		), $this->ID, $args );
+
+		/**
+		 * Filter the donation form classes.
+		 *
+		 * @since 1.0
+		 */
+		$form_wrap_classes_array = (array) apply_filters( 'give_form_wrap_classes', $custom_class, $this->ID, $args );
 
 
 		return implode( ' ', $form_wrap_classes_array );
@@ -816,7 +870,7 @@ class Give_Donate_Form {
 			$this->sales = give_get_meta( $this->ID, '_give_form_sales', true );
 
 			if ( $this->sales < 0 ) {
-				// Never let sales be less than zero
+				// Never let sales be less than zero.
 				$this->sales = 0;
 			}
 
@@ -1020,6 +1074,8 @@ class Give_Donate_Form {
 	 */
 	public function is_close_donation_form() {
 
+		$goal_format = give_get_form_goal_format( $this->ID );
+
 		/**
 		 * Filter the close form result.
 		 *
@@ -1028,9 +1084,9 @@ class Give_Donate_Form {
 		$is_close_form = apply_filters(
 			'give_is_close_donation_form',
 			(
-			give_is_setting_enabled( give_get_meta( $this->ID, '_give_goal_option', true ) ) )
-			&& give_is_setting_enabled( give_get_meta( $this->ID, '_give_close_form_when_goal_achieved', true ) )
-			&& ( $this->get_goal() <= $this->get_earnings()
+				give_is_setting_enabled( give_get_meta( $this->ID, '_give_goal_option', true ) ) &&
+				give_is_setting_enabled( give_get_meta( $this->ID, '_give_close_form_when_goal_achieved', true ) ) &&
+				( 'donation' === $goal_format ? $this->get_goal() <= $this->get_sales() : $this->get_goal() <= $this->get_earnings() )
 			),
 			$this->ID
 		);
@@ -1054,27 +1110,13 @@ class Give_Donate_Form {
 		/* @var WPDB $wpdb */
 		global $wpdb;
 
+		// Bailout.
 		if ( empty( $meta_key ) ) {
 			return false;
 		}
 
-		// Make sure if it needs to be serialized, we do
-		$meta_value = maybe_serialize( $meta_value );
-
-		if ( is_numeric( $meta_value ) ) {
-			$value_type = is_float( $meta_value ) ? '%f' : '%d';
-		} else {
-			$value_type = "'%s'";
-		}
-
-		$sql = $wpdb->prepare( "UPDATE $wpdb->postmeta SET meta_value = $value_type WHERE post_id = $this->ID AND meta_key = '%s'", $meta_value, $meta_key );
-
-		if ( $wpdb->query( $sql ) ) {
-
-			clean_post_cache( $this->ID );
-
+		if ( give_update_meta( $this->ID, $meta_key, $meta_value  ) ) {
 			return true;
-
 		}
 
 		return false;

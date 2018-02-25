@@ -1,4 +1,9 @@
 <?php
+/**
+ * Settings helper file. Init defaults, get and update values.
+ *
+ * @package Hummingbird
+ */
 
 /**
  * Return the plugin settings.
@@ -40,18 +45,20 @@ function wphb_get_setting( $option_name ) {
 function wphb_get_default_settings() {
 	$defaults = array(
 		'minify'         => false,
-		'caching'        => false,
 		'uptime'         => false,
 		'use_cdn'        => false,
 		'gravatar_cache' => false,
+		'page_cache'     => false,
 
 		// Only for multisites. Toggles minification in a subsite
 		// By default is true as if 'minify' is set to false, this option has no meaning.
 		'minify-blog' => true,
 		// Only for multisite.
-		'minify-cdn' => false,
+		'minify-cdn'  => false,
+		// Enable logging (per site).
+		'minify_log'  => false,
 
-		'block' => array(
+		'block'       => array(
 			'scripts' => array(),
 			'styles'  => array(),
 		),
@@ -59,15 +66,19 @@ function wphb_get_default_settings() {
 			'scripts' => array(),
 			'styles'  => array(),
 		),
-		'combine' => array(
+		'combine'     => array(
 			'scripts' => array(),
 			'styles'  => array(),
 		),
-		'position' => array(
+		'position'    => array(
 			'scripts' => array(),
 			'styles'  => array(),
 		),
-		'defer' => array(
+		'defer'       => array(
+			'scripts' => array(),
+			'styles'  => array(),
+		),
+		'inline'      => array(
 			'scripts' => array(),
 			'styles'  => array(),
 		),
@@ -93,16 +104,28 @@ function wphb_get_default_settings() {
 	return apply_filters( 'wp_hummingbird_default_options', $defaults );
 }
 
+/**
+ * Array of settings per site.
+ *
+ * @return array
+ */
 function wphb_get_blog_option_names() {
-	return array( 'block', 'minify-blog', 'minify-cdn', 'dont_minify', 'defer', 'combine', 'position', 'max_files_in_group', 'last_change' );
+	return array( 'block', 'minify-blog', 'minify-cdn', 'minify_log', 'dont_minify', 'defer', 'inline', 'combine', 'position', 'max_files_in_group', 'last_change' );
 }
 
+/**
+ * Get setting type. Either blog or network.
+ *
+ * @param string $option_name  Option.
+ *
+ * @return string
+ */
 function wphb_get_setting_type( $option_name ) {
 	// Settings per site.
 	$blog_options = wphb_get_blog_option_names();
 
 	// Rest of the options are network options.
-	if ( in_array( $option_name, $blog_options ) ) {
+	if ( in_array( $option_name, $blog_options, true ) ) {
 		return 'blog';
 	}
 
@@ -145,7 +168,6 @@ function wphb_update_setting( $setting, $value ) {
  * @param bool $network Value for network. Default: false.
  */
 function wphb_toggle_minification( $value, $network = false ) {
-
 	$settings = wphb_get_settings();
 	if ( is_multisite() ) {
 		if ( $network ) {
@@ -174,8 +196,7 @@ function wphb_toggle_minification( $value, $network = false ) {
 /**
  * Toggle CDN helper function.
  *
- * @param bool $value CDN status to set.
- * @param bool $network Value for network. Default: false.
+ * @param bool $value    CDN status to set.
  */
 function wphb_toggle_cdn( $value ) {
 	$settings = wphb_get_settings();
@@ -206,4 +227,47 @@ function wphb_get_cdn_status() {
 	}
 
 	return $current;
+}
+
+/**
+ * Get option.
+ *
+ * @param  string $option_name Return a single WP Hummingbird option.
+ * @return mixed
+ */
+function wphb_get_option( $option_name ) {
+	if ( ! is_main_site() ) {
+		$option = get_option( $option_name );
+	} else {
+		$option = get_site_option( $option_name );
+	}
+
+	return $option;
+}
+
+/**
+ * Update option.
+ *
+ * @param  string $option_name  WP Hummingbird option name.
+ * @param  mixed  $option_value WP Hummingbird option value.
+ */
+function wphb_update_option( $option_name, $option_value ) {
+	if ( ! is_main_site() ) {
+		update_option( $option_name, $option_value );
+	} else {
+		update_site_option( $option_name, $option_value );
+	}
+}
+
+/**
+ * Delete option.
+ *
+ * @param  string $option_name Delete a single WP Hummingbird option.
+ */
+function wphb_delete_option( $option_name ) {
+	if ( ! is_main_site() ) {
+		delete_option( $option_name );
+	} else {
+		delete_site_option( $option_name );
+	}
 }

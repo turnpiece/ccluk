@@ -65,10 +65,62 @@ class Give_Gateway_Reports_Table extends WP_List_Table {
 	 * @return string Column Name
 	 */
 	public function column_default( $item, $column_name ) {
+		$donation_list_page_url = admin_url( 'edit.php?post_type=give_forms&page=give-payment-history' );
+
 		switch ( $column_name ) {
+			case 'complete_sales':
+				$value = $item[ $column_name ] ?
+					sprintf(
+						'<a href="%s">%s</a>',
+						add_query_arg(
+							array(
+								'status'  => 'publish',
+								'gateway' => $item['ID']
+							),
+							$donation_list_page_url
+						),
+						$item[ $column_name ]
+					) :
+					$item[ $column_name ];
+				break;
+
+			case 'pending_sales':
+				$value = $item[ $column_name ] ?
+					sprintf(
+						'<a href="%s">%s</a>',
+						add_query_arg(
+							array(
+								'status'  => 'pending',
+								'gateway' => $item['ID']
+							),
+							$donation_list_page_url
+						),
+						$item[ $column_name ]
+					) :
+					$item[ $column_name ];
+				break;
+
+			case 'total_sales':
+				$value = $item[ $column_name ] ?
+					sprintf(
+						'<a href="%s">%s</a>',
+						add_query_arg(
+							array(
+								'gateway' => $item['ID']
+							),
+							$donation_list_page_url
+						),
+						$item[ $column_name ]
+					) :
+					$item[ $column_name ];
+
+				break;
+
 			default:
-				return $item[ $column_name ];
+				$value = $item[ $column_name ];
 		}
+
+		return $value;
 	}
 
 	/**
@@ -144,9 +196,9 @@ class Give_Gateway_Reports_Table extends WP_List_Table {
 		<div class="tablenav gateways-report-tablenav give-clearfix <?php echo esc_attr( $which ); ?>">
 
 			<?php if ( 'top' === $which ) { ?>
-				<h3 class="alignleft reports-earnings-title">
-					<span><?php esc_html_e( 'Donation Methods Report', 'give' ); ?></span>
-				</h3>
+				<h2 class="alignleft reports-earnings-title screen-reader-text">
+					<?php _e( 'Donation Methods Report', 'give' ); ?>
+				</h2>
 			<?php } ?>
 
 			<div class="alignright tablenav-right">

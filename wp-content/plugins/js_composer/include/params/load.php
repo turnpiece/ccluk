@@ -4,9 +4,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WPBakery Visual Composer shortcode attributes fields loader
+ * WPBakery WPBakery Page Builder shortcode attributes fields loader
  *
- * @package WPBakeryVisualComposer
+ * @package WPBakeryPageBuilder
  *
  */
 require_once vc_path_dir( 'PARAMS_DIR', '/default_params.php' );

@@ -6,25 +6,29 @@
 class WP_Hummingbird_Core {
 
 	/**
+	 * @var WP_Hummingbird_API
+	 */
+	public $api;
+
+	/**
+	 * @var WP_Hummingbird_Hub_Endpoints
+	 */
+	public $hub_endpoints;
+
+	/**
 	 * Saves the modules object instances
 	 *
 	 * @var array
 	 */
 	public $modules = array();
 
+	/**
+	 * WP_Hummingbird_Core constructor.
+	 */
 	public function __construct() {
 		$this->includes();
 
-		// Init the API.
-		/* @noinspection PhpIncludeInspection */
-		include_once( wphb_plugin_dir() . 'core/api/class-api.php' );
-		$this->api = new WP_Hummingbird_API();
-
-		// Init Hub endpoints.
-		/* @noinspection PhpIncludeInspection */
-		include_once( wphb_plugin_dir() . 'core/class-hub-endpoints.php' );
-		$this->hub_endpoints = new WP_Hummingbird_Hub_Endpoints();
-		$this->hub_endpoints->init();
+		$this->init();
 
 		$this->load_modules();
 
@@ -35,14 +39,31 @@ class WP_Hummingbird_Core {
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
 			}
 		}
-
 	}
 
 	private function includes() {
-		/** @noinspection PhpIncludeInspection */
-		include_once( wphb_plugin_dir() . 'core/settings-hooks.php' );
-		/** @noinspection PhpIncludeInspection */
-		include_once( wphb_plugin_dir() . 'core/modules-hooks.php' );
+		/* @noinspection PhpIncludeInspection */
+		include_once( WPHB_DIR_PATH . 'core/settings-hooks.php' );
+		/* @noinspection PhpIncludeInspection */
+		include_once( WPHB_DIR_PATH . 'core/api/class-api.php' );
+		/* @noinspection PhpIncludeInspection */
+		include_once( WPHB_DIR_PATH . 'core/class-hub-endpoints.php' );
+		/* @noinspection PhpIncludeInspection */
+		include_once( WPHB_DIR_PATH . 'core/class-logger.php' );
+	}
+
+	/**
+	 * Initialize core modules.
+	 *
+	 * @since 1.7.2
+	 */
+	private function init() {
+		// Init the API.
+		$this->api = new WP_Hummingbird_API();
+
+		// Init Hub endpoints.
+		$this->hub_endpoints = new WP_Hummingbird_Hub_Endpoints();
+		$this->hub_endpoints->init();
 	}
 
 	/**
@@ -70,8 +91,9 @@ class WP_Hummingbird_Core {
 		}
 
 		/* @noinspection PhpIncludeInspection */
-		include_once wphb_plugin_dir() . 'core/class-abstract-module.php';
-		include_once wphb_plugin_dir() . 'core/class-abstract-module-server.php';
+		include_once WPHB_DIR_PATH . 'core/class-abstract-module.php';
+		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/class-abstract-module-server.php';
 
 		array_walk( $modules, array( $this, 'load_module' ) );
 	}
@@ -89,8 +111,9 @@ class WP_Hummingbird_Core {
 		$class_name = 'WP_Hummingbird_Module_' . $module_slug;
 
 		// Default modules files.
-		$filename = wphb_plugin_dir() . 'core/modules/class-module-' . $module . '.php';;
+		$filename = WPHB_DIR_PATH . 'core/modules/class-module-' . $module . '.php';
 		if ( file_exists( $filename ) ) {
+			/* @noinspection PhpIncludeInspection */
 			include_once $filename;
 		}
 
@@ -106,8 +129,6 @@ class WP_Hummingbird_Core {
 		}
 	}
 
-
-
 	/**
 	 * Add a HB menu to the admin bar
 	 *
@@ -118,35 +139,32 @@ class WP_Hummingbird_Core {
 		$minification_module = wphb_get_module( 'minify' );
 
 		$menu_args = array(
-			'id' => 'wphb',
+			'id'    => 'wphb',
 			'title' => 'Hummingbird',
-			'href' => admin_url( 'admin.php?page=wphb-minification' )
+			'href'  => admin_url( 'admin.php?page=wphb-minification' ),
 		);
 
 		if ( $minification_module->is_active() ) {
 			if ( ! is_admin() && ! isset( $_GET['avoid-minify'] ) ) {
 				$admin_bar->add_menu( $menu_args );
 				$admin_bar->add_menu( array(
-					'id' => 'wphb-page-minify',
-					'title' => __( 'See this page unminified', 'wphb' ),
-					'href' => add_query_arg( 'avoid-minify', 'true' ),
-					'parent' => 'wphb'
+					'id'     => 'wphb-page-minify',
+					'title'  => __( 'See this page unminified', 'wphb' ),
+					'href'   => add_query_arg( 'avoid-minify', 'true' ),
+					'parent' => 'wphb',
 				));
 			}
-		}
-		else {
+		} else {
 			if ( ! is_admin() && isset( $_GET['avoid-minify'] ) ) {
 				$admin_bar->add_menu( $menu_args );
 				$admin_bar->add_menu( array(
-					'id' => 'wphb-page-minify',
-					'title' => __( 'See this page minified', 'wphb' ),
-					'href' => remove_query_arg( 'avoid-minify' ),
-					'parent' => 'wphb'
+					'id'     => 'wphb-page-minify',
+					'title'  => __( 'See this page minified', 'wphb' ),
+					'href'   => remove_query_arg( 'avoid-minify' ),
+					'parent' => 'wphb',
 				));
 			}
 		}
 	}
-
-
 
 }

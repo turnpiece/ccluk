@@ -17,6 +17,6 @@
 <div class="buttons">
 	<p class="wphb-label-notice-inline hide-to-mobile"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></p>
 	<a href="<?php echo esc_url( $url ); ?>" class="button button-ghost" id="recheck-expiry" name="submit">
-		<?php esc_attr_e( 'Re-Check Expiry', 'wphb' ); ?>
+		<?php esc_html_e( 'Re-Check Expiry', 'wphb' ); ?>
 	</a>
 </div>
