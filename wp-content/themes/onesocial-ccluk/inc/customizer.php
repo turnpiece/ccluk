@@ -114,39 +114,23 @@ function ccluk_customize_register( $wp_customize ) {
 			)
 		);
 
-		// Sub Title
-		$wp_customize->add_setting( 'ccluk_about_subtitle',
+		// Source page settings
+		$wp_customize->add_setting( 'ccluk_about_source_page',
 			array(
-				'sanitize_callback' => 'sanitize_text_field',
-				'default'           => esc_html__('Section subtitle', 'onesocial'),
-			)
-		);
-
-		$wp_customize->add_control( 'ccluk_about_subtitle',
-			array(
-				'label' 		=> esc_html__('Section Subtitle', 'onesocial'),
-				'section' 		=> 'ccluk_about_settings',
-				'description'   => '',
-			)
-		);
-
-		// Description
-		$wp_customize->add_setting( 'ccluk_about_desc',
-			array(
-				'sanitize_callback' => 'ccluk_sanitize_text',
+				'sanitize_callback' => 'ccluk_sanitize_number',
 				'default'           => '',
 			)
 		);
-
-		$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-			$wp_customize,
-			'ccluk_about_desc',
+		$wp_customize->add_control( 'ccluk_about_source_page',
 			array(
-				'label' 		=> esc_html__('Section Description', 'onesocial'),
+				'label'     	=> esc_html__('Title Link', 'onesocial'),
 				'section' 		=> 'ccluk_about_settings',
-				'description'   => '',
+				'type'          => 'select',
+				'priority'      => 10,
+				'choices'       => $option_pages,
+				'description'   => esc_html__('Select a page the title will link to.', 'onesocial'),
 			)
-		));
+		);
 
 		$wp_customize->add_section( 'ccluk_about_content' ,
 			array(
@@ -157,68 +141,27 @@ function ccluk_customize_register( $wp_customize ) {
 			)
 		);
 
-		// Order & Stlying
-		$wp_customize->add_setting(
-			'ccluk_about_boxes',
+		// Boxes
+		for ( $box = 1; $box <= 2; $box++ ) :
+
+		$wp_customize->add_setting( 'ccluk_about_box_'.$box,
 			array(
-				//'default' => '',
-				'sanitize_callback' => 'ccluk_sanitize_repeatable_data_field',
-				'transport' => 'refresh', // refresh or postMessage
-			) );
-
-		$wp_customize->add_control(
-			new Onepress_Customize_Repeatable_Control(
-				$wp_customize,
-				'ccluk_about_boxes',
-				array(
-					'label' 		=> esc_html__('About content page', 'onesocial'),
-					'description'   => '',
-					'section'       => 'ccluk_about_content',
-					'live_title_id' => 'content_page', // apply for unput text and textarea only
-					'title_format'  => esc_html__('[live_title]', 'onesocial'), // [live_title]
-					'max_item'      => 3, // Maximum item can add
-					'allow_unlimited' => false, // Maximum item can add
-
-					'fields'    => array(
-						'content_page'  => array(
-							'title' => esc_html__('Select a page', 'onesocial'),
-							'type'  =>'select',
-							'options' => $option_pages
-						),
-						'hide_title'  => array(
-							'title' => esc_html__('Hide item title', 'onesocial'),
-							'type'  =>'checkbox',
-						),
-						'enable_link'  => array(
-							'title' => esc_html__('Link to single page', 'onesocial'),
-							'type'  =>'checkbox',
-						),
-					),
-
-				)
+				'sanitize_callback' => 'ccluk_sanitize_text',
+				'default'           => '',
 			)
 		);
 
-        // About content source
-        $wp_customize->add_setting( 'ccluk_about_content_source',
-            array(
-                'sanitize_callback' => 'sanitize_text_field',
-                'default'           => 'content',
-            )
-        );
+		$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
+			$wp_customize,
+			'ccluk_about_box_'.$box,
+			array(
+				'label' 		=> sprintf( esc_html__('Box %d content', 'onesocial'), $box ),
+				'section' 		=> 'ccluk_about_content',
+				'description'   => '',
+			)
+		));
 
-        $wp_customize->add_control( 'ccluk_about_content_source',
-            array(
-                'label' 		=> esc_html__('Item content source', 'onesocial'),
-                'section' 		=> 'ccluk_about_content',
-                'description'   => '',
-                'type'          => 'select',
-                'choices'       => array(
-                    'content' => esc_html__( 'Full Page Content', 'onesocial' ),
-                    'excerpt' => esc_html__( 'Page Excerpt', 'onesocial' ),
-                ),
-            )
-        );
+		endfor;
 
 
 	/*------------------------------------------------------------------------*/

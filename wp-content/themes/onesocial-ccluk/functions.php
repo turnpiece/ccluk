@@ -10,7 +10,7 @@
  */
 require get_stylesheet_directory() . '/inc/customizer.php';
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Sets up theme defaults
@@ -517,3 +517,64 @@ function ccluk_create_news_post_type() {
   );
 }
 add_action( 'init', 'ccluk_create_news_post_type' );
+
+// from OnePress
+// load section into home page
+if ( ! function_exists( 'ccluk_load_section' ) ) {
+    /**
+     * Load section
+     * @since 2.0.0
+     * @param $section_id
+     */
+    function ccluk_load_section( $section_id )
+    {
+        /**
+         * Hook before section
+         */
+        do_action('ccluk_before_section_' . $section_id);
+        do_action('ccluk_before_section_part', $section_id);
+
+        get_template_part('section-parts/section', $section_id );
+
+        /**
+         * Hook after section
+         */
+        do_action('ccluk_after_section_part', $section_id);
+        do_action('ccluk_after_section_' . $section_id);
+    }
+}
+
+if ( ! function_exists( 'ccluk_is_selective_refresh' ) ) {
+    function ccluk_is_selective_refresh()
+    {
+        return isset($GLOBALS['ccluk_is_selective_refresh']) && $GLOBALS['ccluk_is_selective_refresh'] ? true : false;
+    }
+}
+
+if ( ! function_exists( 'ccluk_get_section_about_data' ) ) {
+    /**
+     * Get About data
+     *
+     * @return array
+     */
+    function ccluk_get_section_about_data()
+    {
+        $boxes = get_theme_mod('ccluk_about_boxes');
+        if (is_string($boxes)) {
+            $boxes = json_decode($boxes, true);
+        }
+        $page_ids = array();
+        if (!empty($boxes) && is_array($boxes)) {
+            foreach ($boxes as $k => $v) {
+                if (isset ($v['content_page'])) {
+                    $v['content_page'] = absint($v['content_page']);
+                    if ($v['content_page'] > 0) {
+                        $page_ids[] = wp_parse_args($v, array('enable_link' => 0, 'hide_title' => 0));
+                    }
+                }
+            }
+        }
+
+        return $page_ids;
+    }
+}

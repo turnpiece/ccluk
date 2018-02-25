@@ -16,90 +16,32 @@ get_header();
 		<?php while ( have_posts() ) : the_post(); ?>
 			<?php get_template_part( 'template-parts/content', 'page' ); ?>
 		<?php endwhile; // end of the loop.  ?>
-
 	</main>
 
 </section>
 
-<!-- get latest three posts -->
 <?php
-	$q = new WP_Query(
-		array(
-			'posts_per_page' => 3
-		)
-	);
 
-	if ( $q->have_posts() ) : ?>
-<section id="posts" class="section site-content posts">
-	<div class="section-title">
-		<h4><?php _e( "Views", '' ) ?></h4>
-	</div>
-	<div class="section-content">
-		<?php while( $q->have_posts() ) : $q->the_post(); ?>
-		<?php get_template_part( 'template-parts/content', 'list' ); ?>
-		<?php endwhile; wp_reset_postdata(); ?>
-	</div>
-</section>
-<?php endif; ?>
+do_action( 'ccluk_frontpage_before_section_parts' );
 
-<!-- get latest three news articles -->
-<?php
-	$q = new WP_Query(
-		array(
-			'posts_per_page' => 3,
-			'post_type' => 'ccluk_news'
-		)
-	);
+if ( ! has_action( 'ccluk_frontpage_section_parts' ) ) {
 
-	if ( $q->have_posts() ) : ?>
-<section id="news" class="section site-content posts">
-	<div class="section-title">
-		<h4><?php _e( "News", '' ) ?></h4>
-	</div>
-	<div class="section-content">
-		<?php while( $q->have_posts() ) : $q->the_post(); ?>
-		<?php get_template_part( 'template-parts/content', 'list' ); ?>
-		<?php endwhile; wp_reset_postdata(); ?>
-	</div>
-</section>
-<?php endif; ?>
+	$sections = apply_filters( 'ccluk_frontpage_sections_order', array(
+        'about',
+        'news',
+        'posts',
+        'events',
+        'groups'
+    ) );
 
-<!-- get latest three events -->
-<?php
-	$q = new WP_Query(
-		array(
-			'posts_per_page' => 3,
-			'post_type' => 'incsub_event'
-		)
-	);
+	foreach ( $sections as $section ){
+        ccluk_load_section( $section );
+	}
 
-	if ( $q->have_posts() ) : ?>
-<section id="events" class="section site-content posts">
-	<div class="section-title">
-		<h4><?php _e( "Events", '' ) ?></h4>
-	</div>
-	<div class="section-content">
-		<?php while( $q->have_posts() ) : $q->the_post(); ?>
-		<?php get_template_part( 'template-parts/content', 'list' ); ?>
-		<?php endwhile; wp_reset_postdata(); ?>
-	</div>
-</section>
-<?php endif;
+} else {
+	do_action( 'ccluk_frontpage_section_parts' );
+}
 
-	if (function_exists('bp_has_groups') &&
-		bp_has_groups( array(
-		'max' => 3
-	) ) ) : ?>
-<section id="groups" class="section site-content groups">
-	<div class="section-title">
-		<h4><?php _e( "Groups", '' ) ?></h4>
-	</div>
-	<div class="section-content">
-	<?php while ( bp_groups() ) : bp_the_group(); ?>
-	<?php get_template_part( 'template-parts/content', 'group' ); ?>
-	<?php endwhile; ?>
-	</div>
-</section>
-<?php endif;
+do_action( 'ccluk_frontpage_after_section_parts' );
 
 get_footer();
