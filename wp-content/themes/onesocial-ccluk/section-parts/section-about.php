@@ -34,13 +34,13 @@ if ( ccluk_is_selective_refresh() ) {
         </div>
         <?php endif; ?>
 
-        <div class="section-content">
+        <?php if ($intro !== '') : ?>
+        <div class="section-intro">
+            <?php echo $intro ?>
+        </div>
+        <?php endif; ?>
 
-            <?php if ($intro !== '') : ?>
-            <div class="intro">
-                <?php echo $intro ?>
-            </div>
-            <?php endif; ?>
+        <div class="section-content">
 
             <?php if ($box_1 !== '' || $box_2 !== '') : ?>
             <div class="items">
@@ -59,13 +59,13 @@ if ( ccluk_is_selective_refresh() ) {
 
             </div>
             <?php endif; ?>
-
-            <?php if ($footer !== '') : ?>
-            <div class="footer">
-                <?php echo $footer ?>
-            </div>
-            <?php endif; ?>
         </div>
+
+        <?php if ($footer !== '') : ?>
+        <div class="section-footer">
+            <?php echo $footer ?>
+        </div>
+        <?php endif; ?>
 
         <?php do_action('ccluk_section_after_inner', 'about'); ?>
     <?php if ( ! ccluk_is_selective_refresh() ){ ?>

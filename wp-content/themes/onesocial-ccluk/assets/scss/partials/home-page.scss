@@ -86,26 +86,21 @@
 
 			&.about {
 				.section-content {
-					.items {
-						display: flex;
-						padding: 10px;
-
-						.list-item {
-							padding: 30px;
-							@include border-radius(10px);
-							background-color: $green;
-							color: $white;
-							font-size: 130%;
-							text-align: center;
-						}
-					}
-					.intro,
-					.footer {
-						padding: 10px;
-						max-width: 400px;
+					.list-item {
+						padding: 30px;
+						@include border-radius(10px);
+						background-color: $green;
+						color: $white;
+						font-size: 130%;
 						text-align: center;
-						margin: 0 auto;
 					}
+				}
+				.section-intro,
+				.section-footer {
+					padding: 10px;
+					max-width: 400px;
+					text-align: center;
+					margin: 0 auto;
 				}
 			}
 
