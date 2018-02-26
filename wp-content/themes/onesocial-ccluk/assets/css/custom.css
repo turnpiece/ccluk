@@ -122,10 +122,8 @@ input[type=submit] {
         color: #fff;
         text-transform: uppercase; }
     .home-page #main .section.about .section-content .items {
-      display: block;
-      padding: 10px;
-      width: 100%;
-      text-align: center; }
+      display: flex;
+      padding: 10px; }
       .home-page #main .section.about .section-content .items .list-item {
         padding: 30px;
         -webkit-border-radius: 10px;
