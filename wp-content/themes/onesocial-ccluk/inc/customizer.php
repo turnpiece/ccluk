@@ -141,6 +141,23 @@ function ccluk_customize_register( $wp_customize ) {
 			)
 		);
 
+		$wp_customize->add_setting( 'ccluk_about_intro',
+			array(
+				'sanitize_callback' => 'ccluk_sanitize_text',
+				'default'           => '',
+			)
+		);
+
+		$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
+			$wp_customize,
+			'ccluk_about_intro',
+			array(
+				'label' 		=> sprintf( esc_html__('Introduction', 'onesocial'), $box ),
+				'section' 		=> 'ccluk_about_content',
+				'description'   => '',
+			)
+		));
+
 		// Boxes
 		for ( $box = 1; $box <= 2; $box++ ) :
 
@@ -162,6 +179,23 @@ function ccluk_customize_register( $wp_customize ) {
 		));
 
 		endfor;
+
+		$wp_customize->add_setting( 'ccluk_about_footer',
+			array(
+				'sanitize_callback' => 'ccluk_sanitize_text',
+				'default'           => '',
+			)
+		);
+
+		$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
+			$wp_customize,
+			'ccluk_about_footer',
+			array(
+				'label' 		=> sprintf( esc_html__('Footer', 'onesocial'), $box ),
+				'section' 		=> 'ccluk_about_content',
+				'description'   => __( 'Appears below the two boxes', 'onesocial' )
+			)
+		));
 
 
 	/*------------------------------------------------------------------------*/
