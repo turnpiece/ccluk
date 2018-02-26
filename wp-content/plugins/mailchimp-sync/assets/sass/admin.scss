@@ -1,0 +1,58 @@
+#mc4wp-admin {
+
+	/* style the progress bar */
+	.progress-bar {
+		width: 100%;
+		height: 20px;
+		background: #ccc;
+		position: relative;
+		margin: 20px 0;
+
+		.value,
+		.text {
+			position: absolute;
+			left: 0;
+			top: 0;
+			height: 20px;
+			display: inline-block;
+			font-weight: bold;
+		}
+
+		.value {
+			z-index: 1;
+			background: #2ea2cc;
+		}
+
+		.text {
+			color: #ffffff;
+			text-align: center;
+			z-index: 2;
+			width: 100%;
+		}
+
+	}
+
+	.log {
+		font-family: monaco, monospace, courier, 'courier new', 'Bitstream Vera Sans Mono';
+		background: #262626;
+		color: white;
+		margin: 20px 0;
+		height: 350px;
+		overflow-y: scroll;
+		border: 1px solid #ccc;
+		padding: 5px 20px;
+		font-size: 13px;
+		line-height: 140%;
+
+		.time {
+			color: #999;
+			display: inline-block;
+			margin-right: 5px;
+		}
+
+		strong {
+			color: #2ea2cc;
+		}
+	}
+
+}
