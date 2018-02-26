@@ -6,3 +6,9 @@
 	-o-transition: all 0.5s ease-in-out;
 	transition: all 0.5s ease-in-out;
 }
+
+@mixin border-radius($x) {
+	-webkit-border-radius: $x;
+	-moz-border-radius: $x;
+	border-radius: $x;
+}

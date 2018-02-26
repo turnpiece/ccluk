@@ -11,6 +11,11 @@
 		.section {
 			display: block;
 			width: 100%;
+			padding: 20px 0 40px;
+
+			&#primary {
+				padding: 0;
+			}
 
 			.section-content {
 				max-width: 1170px;
@@ -74,7 +79,7 @@
 					padding: 15px 30px;
 					margin: 10px 30px;
 					font-size: 24px;
-					color: #fff;
+					color: $white;
 					text-transform: uppercase;
 				}
 			}
@@ -83,7 +88,7 @@
 				.section-content {
 					.list-item {
 						padding: 30px;
-						border-radius: 10px;
+						@include border-radius(10px);
 						background-color: $green;
 						color: $white;
 						font-size: 130%;

@@ -16,10 +16,13 @@ input[type="email"],
 input[type="password"],
 input[type="email"],
 input[type="number"],
-textarea {
+textarea,
+.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]),
+.popup-content input:not([type=checkbox]):not([type=radio]):not([type=button]) {
   background-color: #fff;
-  border-bottom: none;
-  border: rgba(0, 152, 218, 0.15);
+  border-width: 1px 1px 1px 1px;
+  border-color: #54ae68;
+  border-style: solid solid solid solid;
   padding: 12px; }
 
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
@@ -55,9 +58,15 @@ h3 {
 
 #save_as_draft,
 .entry-meta a.read-more,
+.popup-content .button:not(.ed_button),
 input[type=submit] {
-  border: 1px solid #54ae68;
-  padding: 10px 20px 10px 20px; }
+  border: none;
+  padding: 10px 20px 10px 20px;
+  background-color: #54ae68;
+  color: #fff;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px; }
 
 /* Home page */
 .home-page #main {
@@ -67,7 +76,10 @@ input[type=submit] {
   margin: 0; }
   .home-page #main .section {
     display: block;
-    width: 100%; }
+    width: 100%;
+    padding: 20px 0 40px; }
+    .home-page #main .section#primary {
+      padding: 0; }
     .home-page #main .section .section-content {
       max-width: 1170px;
       margin: 0 auto;
@@ -111,6 +123,8 @@ input[type=submit] {
         text-transform: uppercase; }
     .home-page #main .section.about .section-content .list-item {
       padding: 30px;
+      -webkit-border-radius: 10px;
+      -moz-border-radius: 10px;
       border-radius: 10px;
       background-color: #54ae68;
       color: #fff;
@@ -196,6 +210,16 @@ input[type=submit] {
     margin-top: -10%; }
 .single.single-ccluk_news .entry-meta.posted-on {
   margin: 1rem 0; }
+.single #respond form input[type=text],
+.single #respond form input[type=email],
+.single #respond form textarea {
+  border: 1px solid #54ae68;
+  padding: 12px; }
+.single #respond form p {
+  text-align: right; }
+  .single #respond form p input[type=submit] {
+    margin-top: 5px;
+    float: right; }
 
 /* styles for pages */
 body.page article > .entry-header {
@@ -238,11 +262,9 @@ body.page #secondary .widget_subpages {
 .register div#register-page .security-question-section {
   border: none; }
 .register .popup-content {
-  background: rgba(255, 255, 255, 0.6); }
+  background: rgba(255, 255, 255, 0.8); }
 .register .popup-content input:not([type="checkbox"]):not([type="radio"]):not([type="button"]),
 .register .popup-content .input:not([type="checkbox"]):not([type="radio"]):not([type="button"]) {
-  padding: 10px 20px 15px;
-  background: #fff;
   font-size: 18px; }
 .register .entry-header h1.entry-title {
   color: #22a7f0; }
@@ -251,6 +273,8 @@ body.page #secondary .widget_subpages {
   /* newsletter sighup checkbox */ }
   .register div#register-page p {
     font-size: 20px; }
+  .register div#register-page .wp-social-login-widget {
+    text-align: center; }
   .register div#register-page .register-section {
     box-shadow: none; }
     .register div#register-page .register-section label, .register div#register-page .register-section legend {
@@ -380,10 +404,7 @@ MAXIMUM width of 520 pixels (large phones and smaller)
     font-size: 30px;
     max-height: 200px;
     overflow: auto;
-    padding: 0; }
-
-  .home-page #main .section {
-    padding: 20px 0 40px; } }
+    padding: 0; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 480 pixels (phones and smaller)
 --------------------------------------------------------------*/

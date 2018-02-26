@@ -12,10 +12,13 @@ input[type="email"],
 input[type="password"], 
 input[type="email"], 
 input[type="number"], 
-textarea {
-    background-color: #fff;
-    border-bottom: none;
-    border: rgba(0, 152, 218, 0.15);
+textarea,
+.popup-content .input:not([type=checkbox]):not([type=radio]):not([type=button]), 
+.popup-content input:not([type=checkbox]):not([type=radio]):not([type=button]) {
+    background-color: $white;
+    border-width: 1px 1px 1px 1px;
+    border-color: $green;
+    border-style: solid solid solid solid;
     padding: 12px;
 }
 
@@ -65,7 +68,11 @@ h3 {
 
 #save_as_draft, 
 .entry-meta a.read-more, 
+.popup-content .button:not(.ed_button), 
 input[type=submit] {
-    border: 1px solid $green;
+    border: none;
     padding: 10px 20px 10px 20px;
+    background-color: $green;
+    color: $white;
+    @include border-radius(3px);
 }
