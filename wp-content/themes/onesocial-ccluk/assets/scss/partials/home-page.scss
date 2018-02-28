@@ -86,6 +86,9 @@
 
 			&.about {
 				.section-content {
+					text-align: center;
+					align-content: center;
+					
 					.list-item {
 						padding: 30px;
 						@include border-radius(10px);
@@ -109,6 +112,43 @@
 				.section-content {
 					max-width: 1020px;
 					text-align: center;
+				}
+			}
+
+			&.twitter {
+				#ctf {
+					.ctf-header {
+						float: none;
+						display: block;
+						text-align: center;
+						width: 100%;	
+						border-bottom: 0;
+
+						a {
+							float: none;
+							margin: 0 auto;
+							width: 320px;
+						}		
+					}
+
+					.ctf-tweets {
+						display: flex;
+						flex-direction: row column;
+						flex-wrap: wrap;
+						justify-content: center;
+						width: 100%;
+						padding: 30px 5%;
+
+						.ctf-item {
+							max-width: 20%;
+							align-self: flex-start;
+							border-top: 0;
+						}
+					}
+
+					.ctf-more {
+						display: none;
+					}
 				}
 			}
 		}

@@ -54,7 +54,8 @@ h3 {
 
 .entry-title {
   margin-top: 10px;
-  margin-top: 1rem; }
+  margin-top: 1rem;
+  font-weight: 600; }
 
 #save_as_draft,
 .entry-meta a.read-more,
@@ -121,15 +122,18 @@ input[type=submit] {
         font-size: 24px;
         color: #fff;
         text-transform: uppercase; }
-    .home-page #main .section.about .section-content .list-item {
-      padding: 30px;
-      -webkit-border-radius: 10px;
-      -moz-border-radius: 10px;
-      border-radius: 10px;
-      background-color: #54ae68;
-      color: #fff;
-      font-size: 130%;
-      text-align: center; }
+    .home-page #main .section.about .section-content {
+      text-align: center;
+      align-content: center; }
+      .home-page #main .section.about .section-content .list-item {
+        padding: 30px;
+        -webkit-border-radius: 10px;
+        -moz-border-radius: 10px;
+        border-radius: 10px;
+        background-color: #54ae68;
+        color: #fff;
+        font-size: 130%;
+        text-align: center; }
     .home-page #main .section.about .section-intro,
     .home-page #main .section.about .section-footer {
       padding: 10px;
@@ -139,6 +143,29 @@ input[type=submit] {
     .home-page #main .section.posts .section-content {
       max-width: 1020px;
       text-align: center; }
+    .home-page #main .section.twitter #ctf .ctf-header {
+      float: none;
+      display: block;
+      text-align: center;
+      width: 100%;
+      border-bottom: 0; }
+      .home-page #main .section.twitter #ctf .ctf-header a {
+        float: none;
+        margin: 0 auto;
+        width: 320px; }
+    .home-page #main .section.twitter #ctf .ctf-tweets {
+      display: flex;
+      flex-direction: row column;
+      flex-wrap: wrap;
+      justify-content: center;
+      width: 100%;
+      padding: 30px 5%; }
+      .home-page #main .section.twitter #ctf .ctf-tweets .ctf-item {
+        max-width: 20%;
+        align-self: flex-start;
+        border-top: 0; }
+    .home-page #main .section.twitter #ctf .ctf-more {
+      display: none; }
 .home-page .homepage-section-title > h4 {
   background-color: #22a7f0;
   padding: 15px 30px;

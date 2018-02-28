@@ -40,26 +40,23 @@ if ( ccluk_is_selective_refresh() ) {
         </div>
         <?php endif; ?>
 
+        <?php if ($box_1 !== '' || $box_2 !== '') : ?>
         <div class="section-content">
 
-            <?php if ($box_1 !== '' || $box_2 !== '') : ?>
-            <div class="items">
-
-                <?php if ($box_1 !== '') : ?>
-                <div class="box-1 list-item">
-                    <?php echo $box_1 ?>
-                </div>
-                <?php endif; ?>
-
-                <?php if ($box_2 !== '') : ?>
-                <div class="box-2 list-item">
-                    <?php echo $box_2 ?>
-                </div>
-                <?php endif; ?>
-
+            <?php if ($box_1 !== '') : ?>
+            <div class="box-1 list-item">
+                <?php echo $box_1 ?>
             </div>
             <?php endif; ?>
+
+            <?php if ($box_2 !== '') : ?>
+            <div class="box-2 list-item">
+                <?php echo $box_2 ?>
+            </div>
+            <?php endif; ?>
+
         </div>
+        <?php endif; ?>
 
         <?php if ($footer !== '') : ?>
         <div class="section-footer">
