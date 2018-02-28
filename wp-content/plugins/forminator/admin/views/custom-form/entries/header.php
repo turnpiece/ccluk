@@ -1,0 +1,1 @@
+<h1><?php echo sprintf( __( "Entries: %s", Forminator::DOMAIN ), '<span>' . $this->get_model_name() . '</span>' ); ?></h1>

@@ -1,0 +1,64 @@
+.forminator-custom-form {
+
+    .forminator-upload {
+		display: flex;
+		flex-wrap: wrap;
+        justify-content: center;
+
+        .forminator-button {
+            flex: 0 0 auto;
+            margin: 0 0 5px;
+
+            + .forminator-label {
+                align-self: center;
+            }
+
+            @include screen("small") {
+                margin: 0 8px 0 0;
+            }
+        }
+
+        .forminator-label {
+            display: block;
+			flex: 0 1 auto;
+
+            + .forminator-upload--remove {
+                margin-left: 5px;
+                align-self: center;
+			}
+			
+			@include screen("small") {
+				overflow: hidden;
+				text-overflow: ellipsis;
+				white-space: nowrap;
+			}
+        }
+
+        .forminator-upload--remove {
+            width: 20px;
+            height: 20px;
+            flex: 0 0 20px;
+            margin: 0;
+            padding: 0;
+            border: 0;
+            border-radius: 100%;
+            background-color: $color-red;
+            background-image: none;
+            color: $color-white;
+            font-size: 12px;
+
+            .wpdui-icon {
+                display: block;
+
+                &:before {
+                    display: block;
+                }
+            }
+        }
+
+        @include screen("small") {
+			flex-wrap: nowrap;
+            justify-content: unset;
+        }
+    }
+}

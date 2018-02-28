@@ -1,0 +1,91 @@
+<div>
+	
+	<script type="text/template" id="builder-layout-tpl">
+		
+		<div id="wpmudev-form-builder" class="wpmudev-form-builder"></div>
+
+		<aside id="wpmudev-sidebar" class="wpmudev-sidebar wpmudev-is_active" role="complementary">
+
+			<div class="wpmudev-sidebar--wrap wpmudev-show"></div>
+
+		</aside>
+
+	</script>
+
+	<script type="text/template" id="builder-main-tpl">
+
+		<div id="forminator-wizard-name" class="wpmudev-box">
+
+			<div class="wpmudev-box-section">
+
+				<div class="wpmudev-section--text">
+
+					<label class="wpmudev-label--bold">{{ Forminator.l10n.appearance.form_name }}</label>
+
+					<div  class="wpmudev-builder--form-name"></div>
+
+					<label id="forminator-validate-name" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.appearance.form_name_validation }}</span></label>
+
+				</div>
+
+			</div>
+
+		</div>
+
+		<div class="wpmudev-builder">
+			 
+			<div class="wpmudev-builder--section">
+				 
+				<div class="wpmudev-builder--form">
+				</div>
+
+				<div class="wpmudev-builder--shadow">
+				</div>
+
+			</div>
+
+		</div>
+
+	</script>
+
+	<script type="text/template" id="builder-buttons-tpl">
+		
+		<div class="wpmudev-builder--footer builder-buttons">
+
+			<button class="wpmudev-button wpmudev-button-circle forminator-add-new-field">
+				<span class="wpmudev-icon--plus"></span>
+				<span class="wpmudev-sr-only">{{ Forminator.l10n.builder.new_field }}</span>
+			</button>
+
+			<div class="wpmudev-footer--left">
+
+				<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-cancel">{{Forminator.l10n.builder.cancel}}</button>
+
+			</div>
+
+			<div class="wpmudev-footer--right">
+
+				<button class="wpmudev-button forminator-save forminator-save-changes">
+					<span class="wpmudev-loading-text">{{ Forminator.l10n.builder.save }}</span>
+					<span class="wpmudev-loading"></span>
+				</button>
+
+				<button class="wpmudev-button wpmudev-button-blue forminator-save forminator-save-layout">
+					<span class="wpmudev-loading-text">{{ Forminator.l10n.builder.form_settings }}</span>
+					<span class="wpmudev-loading"></span>
+				</button>
+
+			</div>
+			
+		</div>
+
+	</script>
+
+	<script type="text/template" id="builder-main-no-fields-tpl">
+		<div class="wpmudev-form--placeholder">
+			<div class="wpmudev-form--empty">
+				<p>{{Forminator.l10n.builder.no_fields}}</p>
+			</div>
+		</div>
+	</script>
+</div>

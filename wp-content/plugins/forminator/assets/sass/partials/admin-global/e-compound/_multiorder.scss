@@ -1,0 +1,80 @@
+.wpmudev-ui .wpmudev-multiorder {
+    min-height: 200px;
+    margin: 0;
+    padding: 10px;
+    border: 1px solid $color-silver--alt;
+    border-radius: 5px;
+    background: #F7F7F7;
+
+    .wpmudev-multiorder--item {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        margin: 5px 0;
+        padding: 9px 20px;
+        border: 1px solid $color-silver--alt;
+        border-radius: 5px;
+        background: $color-white;
+
+        .wpmudev-item--move {
+
+            .wpmudev-icon-drag {
+                display: block;
+                cursor: move;
+
+                .wpmudev-drag-row {
+                    width: 12px;
+                    height: 2px;
+                    display: block;
+                    position: relative;
+                    margin: 5px 0;
+
+                    &:first-child {
+                        margin-top: 0;
+                    }
+
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+
+                i {
+                    display: block;
+                    margin: 0 auto;
+                    
+                    &, &:before, &:after {
+                        width: 2px;
+                        height: 2px;
+                        border-radius: 4px;
+                        background: rgba(59,59,59,0.3);
+                    }
+
+                    &:before, &:after {
+                        content: " ";
+                        top: 0;
+                        position: absolute;
+                    }
+
+                    &:before {
+                        left: 0;
+                    }
+
+                    &:after {
+                        right: 0;
+                    }
+                }
+            }
+
+            + .wpmudev-item--name {
+                margin-left: 15px;
+            }
+        }
+
+        .wpmudev-item--name {
+            display: block;
+            color: $color-gray--dark;
+            font: 400 15px/20px $font;
+            letter-spacing: -0.25px;
+        }
+    }
+}

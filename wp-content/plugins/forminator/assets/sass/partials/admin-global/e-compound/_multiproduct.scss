@@ -1,0 +1,140 @@
+.wpmudev-ui .wpmudev-multiproduct {
+
+    .wpmudev-multiproduct--empty {
+        margin: 20px 0;
+        text-align: center;
+
+        p {
+            font-size: 13px;
+        }
+    }
+
+    .wpmudev-multiproduct--list {
+        display: none;
+        margin: 0;
+        padding: 10px 0 20px;
+        border: 0;
+
+        .wpmudev-list--item {
+            display: flex;
+            margin: 10px 0;
+
+            &:before {
+                display: none;
+            }
+
+            .wpmudev-product {
+                flex: 1;
+            }
+
+            .wpmudev-item--kill {
+                flex: 0 0 auto;
+                align-self: flex-end;
+                margin-left: 10px;
+
+                .wpmudev-action--kill {
+                    height: 40px;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    margin: 0;
+                    padding: 0;
+                    border: 0;
+                    background: transparent;
+                    box-shadow: none;
+                    color: rgba(136,136,136,0.2);
+                    font-size: 14px;
+                    transition: 0.3s ease;
+
+                    &:hover {
+                        color: rgba(136,136,136,0.5);
+                    }
+
+                    &:active, &:focus {
+                        color: rgba(136,136,136,0.8);
+                    }
+
+                    .wpdui-icon {
+                        height: 14px;
+                        line-height: 14px;
+
+                        &:before {
+                            display: block;
+                        }
+                    }
+
+                    .wpmudev-text {
+                        width: 0;
+                        height: 0;
+                        opacity: 0;
+                        overflow: hidden;
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                    }
+                }
+            }
+
+            &:first-child {
+                margin-top: 0;
+            }
+
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+
+    .wpmudev-multiproduct--actions {
+        display: flex;
+        flex-direction: column-reverse;
+        padding-top: 20px;
+
+        .wpmudev-toggle {
+            display: none;
+            flex: 0 0 auto;
+
+            @include screen("small") {
+                max-width: calc(100% - 130px);
+                flex: 0 1 auto;
+                align-self: center;
+                margin-right: 10px;
+            }
+        }
+
+        .wpmudev-button {
+            flex: 0 0 auto;
+
+            @include screen("small") {
+                max-width: 120px;
+            }
+        }
+
+        @include screen("small") {
+            flex-wrap: wrap;
+            flex-direction: row;
+            justify-content: center;
+        }
+    }
+
+    &.wpmudev-has_products {
+
+        .wpmudev-multiproduct--empty {
+            display: none;
+        }
+
+        .wpmudev-multiproduct--list {
+            display: block;
+        }
+
+        .wpmudev-multiproduct--actions {
+            padding-top: 0;
+
+            .wpmudev-toggle {
+                display: flex;
+            }
+        }
+    }
+}

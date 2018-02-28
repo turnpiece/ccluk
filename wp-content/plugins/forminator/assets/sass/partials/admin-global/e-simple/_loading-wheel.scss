@@ -1,0 +1,13 @@
+.wpmudev-ui {
+    
+    .wpmudev-loading {
+		width: $base-line-height;
+		height: $base-line-height;
+		display: block;
+		margin: 0 auto;
+		border: 2px solid $off-darkgray;
+		border-top-color: $color-gray--light;
+		border-radius: 50%;
+		animation: spin $spin-duration infinite linear;
+	}
+}

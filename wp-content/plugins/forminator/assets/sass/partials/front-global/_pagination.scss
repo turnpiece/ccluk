@@ -1,0 +1,365 @@
+.forminator-custom-form {
+
+    .forminator-pagination {
+
+        &--nav {
+            display: block;
+            position: relative;
+            margin: 14px 0 15px;
+            padding: 0;
+            border: 0;
+            list-style: none;
+
+            &:before {
+                content: " ";
+                width: 1px;
+                height: auto;
+                position: absolute;
+                top: 4px;
+                bottom: 4px;
+                left: 6px;
+                background: $color-gray--other;
+
+                @include screen("small") {
+                    content: none;
+                }
+            }
+
+            li {
+                display: block;
+                position: relative;
+                margin: 10px 0;
+                padding: 0;
+                border: 0;
+                color: $color-black;
+                font: 400 12px/15px $font;
+                letter-spacing: -0.25px;
+                list-style: none;
+
+                &:before, &:after {
+                    content: none;
+                }
+
+                .forminator-step-text {
+                    display: block;
+                    padding: 0 0 0 18px;
+                    
+                    @include screen("small") {
+                        padding: 0;
+                    }
+                }
+
+                .forminator-step-dot {
+                    width: 13px;
+                    height: 13px;
+                    display: block;
+                    position: absolute;
+                    top: 1px;
+                    left: 0;
+                    margin: 0;
+                    padding: 0;
+                    border: 2px solid $color-gray--other;
+                    border-radius: 100%;
+                    background: #EEE;
+                    transition: 0.3s ease;
+
+                    @include screen("small") {
+                        position: relative;
+                        z-index: 1;
+                        top: auto;
+                        left: auto;
+                        margin: 5px auto 0;
+                    }
+                }
+
+                &:not(:last-child) {
+
+                    &:after {
+
+                        @include screen("small") {
+                            content: " ";
+                            width: auto;
+                            height: 1px;
+                            display: block;
+                            position: absolute;
+                            right: 0;
+                            bottom: 6px;
+                            left: 50%;
+                            background: $color-gray--other;
+                        }
+                    }
+                }
+
+                &:not(:first-child) {
+
+                    &:before {
+
+                        @include screen("small") {
+                            content: " ";
+                            width: auto;
+                            height: 1px;
+                            display: block;
+                            position: absolute;
+                            right: 50%;
+                            bottom: 6px;
+                            left: 0;
+                            background: $color-gray--other;
+                        }
+                    }
+                }
+
+                &.forminator-step-current {
+
+                    .forminator-step-dot {
+                        background: $color-gray--other;
+                    }
+				}
+				
+				// FIX
+				// Prevent wpmudev-ui styles to overwrite
+				// pagination items
+				&:last-child {
+					margin: 10px 0;
+				}
+
+                @include screen("small") {
+                    min-width: 33.33%;
+                    flex: 1 0 33.33%;
+                    text-align: center;
+                }
+            }
+
+            @include screen("small") {
+                display: flex;
+                flex-wrap: wrap;
+                align-items: flex-end;
+                margin: 4px 0 5px;
+            }
+        }
+
+        &--footer {
+            display: block;
+            margin: 15px 0;
+            padding: 30px 0 0;
+            border-top: 1px solid $color-gray--other;
+
+            .forminator-button {
+                width: 100%;
+
+                &:first-child {
+
+                    @include screen("xs") {
+                        margin-left: 0;
+                    }
+                }
+
+                &:last-child {
+
+                    @include screen("xs") {
+                        margin-right: 0;
+                    }
+                }
+
+                @include screen("xs") {
+                    width: auto;
+                    min-width: 100px;
+                    margin: 0 8px;
+                }
+            }
+
+            @include screen("xs") {
+                display: flex;
+                justify-content: space-between;
+            }
+        }
+    }
+
+    &.forminator-enclosed {
+
+        .forminator-pagination {
+            
+            &--nav {
+                margin: 5px 0;
+            }
+
+            &--footer {
+                padding: 10px 0 0;
+            }
+        }
+    }
+
+    &.forminator-design--flat {
+
+        .forminator-pagination {
+
+            &--nav {
+
+                li {
+
+                    .forminator-step-dot {
+                        border: 0;
+                        background: $color-gray--other;
+                        transform: scale(0.7);
+                    }
+
+                    &.forminator-step-current {
+                        color: $color-blue;
+                        font-weight: 600;
+
+                        .forminator-step-dot {
+                            background: $color-blue;
+                            transform: scale(1);
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+    &.forminator-design--bold {
+
+        .forminator-pagination {
+
+            &--nav {
+
+                li {
+                    
+                    .forminator-step-dot {
+                        border-width: 3px;
+                    }
+
+                    &:not(:last-child) {
+                        
+                        &:after {
+                            
+                            @include screen("small") {
+                                height: 3px;
+                                bottom: 5px;
+                            }
+                        }
+                    }
+
+                    &:not(:first-child) {
+                        
+                        &:before {
+                            
+                            @include screen("small") {
+                                height: 3px;
+                                bottom: 5px;
+                            }
+                        }
+                    }
+                }
+            }
+
+            &--footer {
+                border-top-width: 3px;
+            }
+        }
+    }
+
+    &.forminator-design--material {
+
+        .forminator-pagination {
+
+            &--nav {
+                display: block;
+                counter-reset: material-steps;
+
+                &:before {
+                    content: none;
+                }
+
+                li {
+                    min-width: auto;
+                    display: flex;
+                    flex: 0 0 auto;
+                    margin: 5px 0;
+                    font: 400 15px/22px $font;
+                    letter-spacing: 0px;
+
+                    &:before {
+                        content: "\28";
+                        counter-increment: material-steps;
+                        width: 22px;
+                        height: 22px;
+                        display: block;
+                        position: relative;
+                        right: auto;
+                        bottom: auto;
+                        left: auto;
+                        margin-right: 8px;
+                        border-radius: 100%;
+                        background: $color-blue;
+                        color: $color-white;
+                        font-size: 12px;
+                        font-family: $font--icon;
+                        letter-spacing: -0.5px;
+                        text-align: center;
+                    }
+
+                    &:after {
+                        content: none;
+                    }
+
+                    .forminator-step-dot {
+                        display: none;
+                    }
+
+                    &.forminator-step-current {
+                        font-weight: 500;
+
+                        &:before {
+                            content: counter(material-steps);
+                            background: $color-blue;
+                            font-family: $font;
+                        }
+
+                        ~ li:before {
+                            content: counter(material-steps);
+                            background: $color-gray--other;
+                            font-family: $font;
+                        }
+                    }
+
+                    @include screen("small") {
+                        margin: 5px 5px;
+                        text-align: left;
+                    }
+                }
+
+                .forminator-nav-border {
+                    width: 1px;
+                    height: 20px;
+                    display: block;
+                    flex: 1;
+                    margin-top: 8px;
+                    margin-left: 10.5px;
+                    background: $color-gray--soft;
+
+                    &:last-child {
+                        display: none;
+                    }
+
+                    @include screen("small") {
+                        width: auto;
+                        height: 1px;
+                        margin: 0 5px;
+                    }
+                }
+
+                @include screen("small") {
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    margin: 14px -5px 15px;
+                }
+            }
+
+            &--footer {
+                padding: 0;
+                border-top: 0;
+            }
+        }
+    }
+}

@@ -1,0 +1,187 @@
+// PAGE dashboard
+.wpmudev-forminator-forminator-quiz {
+
+    // MODALS
+    .wpmudev-modal .wpmudev-box {
+
+        .wpmudev-box-section {
+
+            // MODAL
+            // "Choose Quiz Type"
+            .wpmudev-popup--quiz {
+                padding: 30px;
+    
+                .wpmudev-quiz--type {
+                    cursor: pointer;
+                    display: block;
+                    margin: 0;
+                    padding: 0;
+                    border: 1px solid $color-gray--soft;
+                    border-radius: 3px;
+                    transition: 0.2s ease;
+    
+                    * {
+                        transition: 0.2s ease;
+                    }
+    
+                    .wpmudev-quiztype--header {
+                        display: flex;
+                        align-items: center;
+                        margin: 0;
+                        padding: 9px 20px;
+                        border-bottom: 1px solid #D9D9D9;
+                        
+                        .wpmudev-quiztype--icon {
+                            flex: 0 0 auto;
+                            margin: 0;
+                            padding: 0;
+                            border: 0;
+    
+                            .wpdui-icon {
+                                display: block;
+                                color: $color-gray--soft;
+                                font-size: 16px;
+    
+                                &:before {
+                                    display: block;
+                                }
+                            }
+    
+                            + .wpmudev-quiztype--title {
+                                margin-left: 9px;
+                            }
+                        }
+    
+                        .wpmudev-quiztype--title {
+                            flex: 0 1 auto;
+                            margin: 0;
+                            padding: 0;
+                            border: 0;
+                            color: #434343;
+                            font: 500 15px/30px $font;
+                            letter-spacing: -0.1px;
+                            text-transform: none;
+                        }
+                    }
+    
+                    .wpmudev-quiztype--section {
+                        overflow: hidden;
+                        display: block;
+                        margin: 0;
+                        padding: 0;
+    
+                        .wpmudev-quiztype--text {
+                            margin: 0;
+                            padding: 20px;
+                            border: 0;
+                            color: $color-gray--other;
+                            font: 400 13px/22px $font;
+                            letter-spacing: 0;
+                        }
+                    }
+    
+                    &:hover, &:active, &:focus {
+                        outline: none;
+                        box-shadow: 0 1px 5px 0 rgba(0,0,0,0.15);
+                        
+                        .wpmudev-quiztype--header {
+    
+                            .wpmudev-quiztype--icon {
+                                
+                                .wpdui-icon {
+                                    color: $color-blue--light;
+                                }
+                            }
+    
+                            .wpmudev-quiztype--title {
+                                color: $color-black;
+                            }
+                        }
+    
+                        .wpmudev-quiztype--section {
+    
+                            .wpmudev-quiztype--text {
+                                color: #4D4D49;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+// PAGE wizard
+.wpmudev-quiz-wizard {
+
+    .wpmudev-nav--tabs {
+
+        li:not(.wpmudev-is--active) {
+            pointer-events: none;
+        }
+    }
+
+    #wpmudev-quizwiz-wrap--social {
+        display: flex;
+
+        .wpmudev-social--item {
+            flex: 0 0 auto;
+            margin: 0 10px;
+
+            .wpmudev-item--icon {
+                width: 30px;
+                height: 30px;
+                padding: 5px;
+                border-radius: 50px;
+
+                svg {
+                    width: 20px;
+                    height: 20px;
+                    display: block;
+
+                    .wpmudev-icon-path {
+                        fill: $color-white;
+                    }
+                }
+
+                &.wpmudev-facebook {
+                    background: $color-facebook;
+                }
+
+                &.wpmudev-twitter {
+                    background: $color-twitter;
+                }
+
+                &.wpmudev-google {
+                    background: $color-google;
+                }
+
+                &.wpmudev-linkedin {
+                    padding: 8px;
+                    background: $color-linkedin;
+
+                    svg {
+                        width: 14px;
+                        height: 14px;
+                    }
+                }
+            }
+
+            &:first-child {
+                margin-left: 0;
+            }
+
+            &:last-child {
+                margin-right: 0;
+            }
+
+            @include screen("small") {
+                flex: 1;
+            }
+        }
+
+        @include screen("small") {
+            flex-wrap: wrap;
+        }
+    }
+}

@@ -1,0 +1,95 @@
+.wpmudev-ui .wpmudev-vars {
+    position: relative;
+
+    .wpmudev-vars--mask {
+        position: absolute;
+        z-index: 9;
+        top: 40px;
+        right: 5px;
+
+        .wpmudev-vars--innermask {
+            position: relative;
+        }
+
+        .wpmudev-vars--button {
+            margin: 0;
+            font-size: 14px;
+				height: 29px;
+				line-height: 25px;
+            font-weight: 400;
+            text-transform: none;
+
+            &, &:visited {
+                background-color: $color-black;
+                color: $color-white;
+            }
+            
+            position: relative;
+            top: -4px;
+        }
+
+        .wpmudev-vars--dropdown {
+            width: 180px;
+            max-height: 220px;
+            overflow-y: auto;
+            display: none;
+            position: absolute;
+            top: 100%;
+            right: 0;
+            margin: 10px 0 0;
+            padding: 9px;
+            border: 1px solid $color-gray--soft;
+            border-radius: 3px;
+            background: $color-white;
+
+            .wpmudev-dropdown--option {
+                padding: 0;
+                border: 0;
+
+                &:before, &:after {
+                    display: none;
+                }
+
+                a {
+                    cursor: pointer;
+                    display: block;
+                    padding: 1px 10px;
+                    border: 0;
+                    border-radius: 2px;
+                    font: 400 11px/28px $font;
+
+                    &, &:visited {
+                        background: $color-white;
+                        color: $color-gray--dark;
+                    }
+
+                    &:hover, &:active, &:focus,
+                    &.wpmudev-is_active {
+                        background: $color-blue;
+                        color: rgba(255, 255, 255, 0.8);
+                    }
+
+                    &.wpmudev-is_active {
+
+                        &, &:visited {
+                            font-size: 13px;
+                            font-weight: 500;
+                        }
+
+                        &:hover, &:active, &:focus {
+                            background: $color-gray;
+                        }
+                    }
+                }
+            }
+
+            &.wpmudev-is_active {
+                display: block;
+            }
+        }
+    }
+    
+    .wp-switch-editor {
+        height: 26px;
+    }
+}

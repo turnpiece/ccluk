@@ -1,0 +1,274 @@
+// TABS default
+.wpmudev-ui .wpmudev-tabs {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 1px 0;
+
+    .wpmudev-tab {
+        flex: 0 0 auto;
+        position: relative;
+
+        input {
+            width: 1px !important;
+            min-width: auto !important;
+            height: 1px !important;
+            min-height: auto !important;
+            overflow: hidden !important;
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            margin: -1px !important;
+            padding: 0 !important;
+            border: 0 !important;
+            background: transparent !important;
+            clip: rect(0 0 0 0) !important;
+            word-wrap: normal !important;
+        }
+
+        label {
+            cursor: pointer;
+            display: block;
+            margin: -1px 0;
+            padding: 9px 10px;
+            border: 1px solid $color-silver--alt;
+            background: $color-silver--soft;
+            color: #7F7F7F;
+            font: 400 13px/20px $font;
+            letter-spacing: -0.22px;
+            text-align: center;
+            transition: 0.2s ease;
+
+            span, &:before, &:after {
+                color: #7F7F7F;
+            }
+
+            @include screen("small") {
+                margin: 0 -1px;
+            }
+        }
+
+        &:hover label,
+        label:hover {
+            background: $color-silver--other;
+        }
+
+        &.wpmudev-is_active {
+            
+            label {
+                background: $color-silver--other;
+                color: $color-gray--dark;
+                font-weight: 500;
+
+                span, &:before, &:after {
+                    color: $color-gray--dark;
+                }
+
+                &:before, &:after {
+                    font-weight: 400;
+                }
+            }
+        }
+
+        &:first-child {
+            
+            label {
+                border-radius: 10px 10px 0 0;
+
+                @include screen("small") {
+                    border-radius: 10px 0 0 10px;
+                }
+            }
+        }
+
+        &:last-child {
+            
+            label {
+                border-radius: 0 0 10px 10px;
+
+                @include screen("small") {
+                    border-radius: 0 10px 10px 0;
+                }
+            }
+        }
+
+        @include screen("small") {
+            flex: 1;
+        }
+    }
+
+    @include screen("small") {
+        flex-wrap: wrap;
+        flex-direction: row;
+        padding: 0 1px;
+    }
+}
+
+// TABS have icons
+.wpmudev-ui .wpmudev-tabs {
+
+    .wpmudev-tab.wpmudev-has_icon {
+
+        label {
+            display: flex;
+
+            span {
+                display: block;
+            }
+
+            &:before {
+                width: auto;
+                height: 18px;
+                font-size: 18px;
+            }
+        }
+
+        &:not(.wpmudev-icon_top) {
+
+            label {
+                align-content: center;
+                justify-content: center;
+
+                &:before {
+                    margin-right: 9px;
+                }
+            }
+        }
+
+        &.wpmudev-icon_top {
+
+            label {
+                flex-direction: column;
+
+                &:before {
+                    margin-bottom: 8px;
+                }
+            }
+        }
+    }
+}
+
+// TABS size variations
+.wpmudev-ui .wpmudev-tabs {
+
+    &.wpmudev-tabs--sm .wpmudev-tab {
+
+        label {
+            padding: 4px 5px;
+            font-size: 10px;
+            font-weight: 500;
+        }
+
+        &:first-child {
+
+            label {
+                border-radius: 5px 5px 0 0;
+
+                @include screen("small") {
+                    border-radius: 5px 0 0 5px;
+                }
+            }
+        }
+
+        &:last-child {
+
+            label {
+                border-radius: 0 0 5px 5px;
+
+                @include screen("small") {
+                    border-radius: 0 5px 5px 0;
+                }
+            }
+        }
+    }
+
+    &.wpmudev-tabs--lg .wpmudev-tab {
+
+        label {
+            padding: 16px 10px;
+        }
+    }
+}
+
+// TABS color variations
+.wpmudev-ui .wpmudev-tabs {
+
+    &.wpmudev-tabs--blue .wpmudev-tab {
+        
+        label {
+            background: $color-white;
+
+            &:hover {
+                background: $color-silver--soft;
+            }
+        }
+
+        &:hover {
+
+            label {
+                background: $color-silver--soft;
+            }
+        }
+
+        &.wpmudev-is_active {
+            z-index: 1;
+            
+            label {
+                border-color: #23ADE3;
+                background: #E1F6FF;
+                color: $color-blue;
+
+                span, &:before, &:after {
+                    color: $color-blue;
+                }
+            }
+        }
+    }
+}
+
+// TABS container variations
+.wpmudev-ui .wpmudev-tabs {
+
+    &.wpmudev-tabs--500 {
+        
+        @include screen("small") {
+            max-width: 500px;
+        }
+    }
+
+    &.wpmudev-tabs--400 {
+        
+        @include screen("small") {
+            max-width: 400px;
+        }
+    }
+
+    &.wpmudev-tabs--300 {
+
+        @include screen("small") {
+            max-width: 300px;
+        }
+    }
+
+    &.wpmudev-tabs--200 {
+
+        @include screen("small") {
+            max-width: 200px;
+        }
+    }
+
+    &.wpmudev-tabs--auto {
+
+        .wpmudev-tab {
+            
+            @include screen("small") {
+                flex: 0 0 auto;
+            }
+        }
+
+        @include screen("small") {
+            width: auto;
+            max-width: 100%;
+        }
+    }
+}

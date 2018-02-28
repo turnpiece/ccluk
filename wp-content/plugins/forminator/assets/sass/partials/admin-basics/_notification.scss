@@ -1,0 +1,99 @@
+.wpmudev-ui {
+
+    .wpmudev-notification {
+        pointer-events: none;
+        position: fixed;
+        z-index: 9999;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        padding: 0 12px 0 10px;
+
+        .wpmudev-label {
+
+            &--info,
+            &--error,
+            &--notice,
+            &--success,
+            &--loading {
+                max-width: 981px;
+                cursor: auto;
+                pointer-events: initial;
+                opacity: 0;
+                border-radius: 3px 3px 0 0;
+                box-shadow: 0 4px 2px rgba(0,0,0,0.1);
+                transform-origin: center;
+                transform-style: preserve-3d;
+                animation-duration: 1s;
+                animation-fill-mode: both;
+
+                @include screen("small") {
+                    border-radius: 0 0 3px 3px;
+                }
+            }
+        }
+
+        &.wpmudev-show {
+
+            .wpmudev-label {
+
+                &--info,
+                &--error,
+                &--notice,
+                &--success,
+                &--loading {
+                    opacity: 1;
+                    animation-name: slideInUp;
+
+                    @include screen("small") {
+                        animation-name: slideInDown;
+                    }
+                }
+            }
+        }
+
+        &.wpmudev-hide {
+
+            .wpmudev-label {
+
+                &--info,
+                &--error,
+                &--notice,
+                &--success,
+                &--loading {
+                    opacity: 0;
+                    animation-name: slideOutDown;
+
+                    @include screen("small") {
+                        animation-name: slideOutUp;
+                    }
+                }
+            }
+        }
+        
+        @include screen("small") {
+            z-index: 99;
+            top: 32px;
+            bottom: auto;
+            left: 160px;
+            padding-left: 20px;
+        }
+
+        @include screen("medium") {
+            padding-left: 30px;
+        }
+    }
+}
+
+body.wp-admin {
+
+    &.sticky-menu.folded {
+
+        .wpmudev-ui .wpmudev-notification {
+
+            @include screen("small") {
+                left: 36px;
+            }
+        }
+    }
+}

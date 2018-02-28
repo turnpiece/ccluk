@@ -1,0 +1,1 @@
+!function(e){formintorjs.define(["admin/models/question-model"],function(e){return Backbone.Collection.extend({model:e,get_by_name:function(e){e=e.toLowerCase();var n=!1;return this.each(function(t){t.get("name").toLowerCase()==e&&(n=t)}),n},model_index:function(e){return this.indexOf(e)},get_by_index:function(e){return this.at(e)}})})}(jQuery);

@@ -1,0 +1,202 @@
+.wpmudev-ui .wpmudev-button {
+	min-width: 80px;
+	height: 40px;
+	cursor: pointer;
+	display: inline-block;
+	position: relative;
+	margin: 0 20px 0 0;
+	padding: 0 20px;
+	border: 2px solid transparent;
+	border-radius: 5px;
+	transform-style: preserve-3d;
+	font: 400 15px/36px $font;
+	letter-spacing: -0.2px;
+	text-transform: uppercase;
+	text-align: center;
+	text-decoration: none;
+	transition: $transition;
+
+	.wpmudev-loading {
+		display: none;
+		position: absolute;
+		top: 50%;
+		left: 50%;
+		margin: -8px;
+	}
+
+	.wpmudev-loading-text {
+		pointer-events: none;
+	}
+
+	&, &:visited {
+		background: $color-gray;
+		color: $color-white;
+	}
+
+	&:hover, &:focus, &:active {
+		background: $color-gray--light;
+		outline: none;
+		box-shadow: none;
+		color: $color-white;
+	}
+
+	&:disabled,
+	&[disabled] {
+		cursor: default;
+		pointer-events: none;
+		background: $color-silver--soft;
+		color: #AAA;
+	}
+
+	&.wpmudev-button-black {
+		
+		&, &:visited {
+			background: $color-gray--dark;
+		}
+
+		&:hover, &:focus, &:active {
+			background: $color-black;
+		}
+	}
+
+	&.wpmudev-button-blue {
+
+		&, &:visited {
+			background: $color-blue;
+		}
+
+		&:hover, &:focus, &:active {
+			color: $color-white;
+			background: $color-blue--dark;
+		}
+
+		&:disabled, &[disabled] {
+			opacity: 0.4;
+			color: $color-white;
+			background: $color-blue;
+		}
+	}
+
+	&.wpmudev-button-red {
+		background: $color-red--light;
+
+		&:hover,
+        &:focus {
+			background: $color-red;
+		}
+
+		&:disabled {
+			opacity: 0.4;
+			color: $color-white;
+			background: $color-red--light;
+		}
+	}
+
+	&.wpmudev-button-circle {
+		width: 40px;
+		min-width: 1px;
+		height: 40px;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		justify-content: center;
+		position: fixed;
+		z-index: 1;
+		right: 20px;
+		bottom: 20px;
+		margin: 0;
+		padding: 0;
+		border-radius: 80px;
+		background: $color-green;
+		box-shadow: 0 2px 4px rgba(0,0,0,0.5);
+
+		.wpmudev-icon--plus {
+			
+			&:before, &:after {
+				background: $color-white;
+			}
+		}
+	}
+    
+	&.wpmudev-button-ghost {
+		padding: 0 18px;
+		padding-bottom: 2px;
+		border-color: $color-gray;
+		background: transparent;
+		color: $color-gray;
+
+		&:hover,
+        &:focus {
+			border-color: $color-gray;
+			background: $color-gray;
+			color: $color-white;
+		}
+
+		&.wpmudev-button-blue {
+			border-color: $color-blue;
+			color: $color-blue;
+            
+			&:hover,
+            &:focus {
+				border-color: $color-blue;
+				background: $color-blue;
+				color: $color-white;
+			}
+		}
+
+		&.wpmudev-button-red {
+			border-color: $color-red--light;
+			color: $color-red--light;
+
+			&:hover,
+            &:focus {
+				border-color: $color-red;
+				background: $color-red;
+				color: $color-white;
+			}
+		}
+	}
+
+	&.wpmudev-button-sm {
+		min-width: 84px;
+		height: 30px;
+		padding: 0 16px;
+		border-radius: 4px;
+		font: 500 12px/26px $font;
+
+		&.wpmudev-button-ghost {
+			padding: 0 15px;
+			letter-spacing: -0.15px;
+		}
+	}
+
+	&.wpmudev-button-onload {
+		pointer-events: none;
+
+		.wpmudev-loading {
+			display: block;
+		}
+        
+		&,
+        &.wpmudev-button-blue,
+        &.wpmudev-button-red {
+			background: $color-silver--soft;
+
+			.wpmudev-loading-text {
+				color: $color-silver--soft;
+			}
+		}
+		&.wpmudev-button-ghost {
+			border-color: $color-silver--soft;
+			background: transparent;
+
+			.wpmudev-loading-text {
+				color: transparent;
+			}
+		}
+	}
+
+	&:last-child {
+		margin: 0;
+	}
+}

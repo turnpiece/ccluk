@@ -1,0 +1,277 @@
+.forminator-custom-form {
+
+    .forminator-field {
+        display: block;
+        margin: 14px 0 15px;
+
+        .forminator-row {
+
+            .forminator-col {
+                margin-top: 15px;
+                margin-bottom: 15px;
+    
+                &:first-child {
+                    margin-top: 0;
+                }
+    
+                &:last-child {
+                    margin-bottom: 0;
+                }
+    
+                @include screen("small") {
+                    margin-top: 0;
+                    margin-bottom: 0;
+                }
+            }
+
+            .forminator-field--inner {
+                margin: 0;
+            }
+        }
+
+        .forminator-field--label {
+            display: flex;
+            margin: 0;
+            padding: 0;
+            border: 0;
+
+            .forminator-label,
+            .forminator-icon {
+                transition: 0.3s ease;
+            }
+
+            .forminator-label {
+
+				.wpdui-icon {
+					display: inline-block;
+					vertical-align: super;
+					font-size: 6px;
+					transition: 0.3s ease;
+
+					&:before {
+						display: block;
+					}
+				}
+
+                + .forminator-icon {
+                    margin-left: 6px;
+                    padding-top: 4px;
+                }
+            }
+
+            .forminator-icon {
+                color: $color-gray--other;
+                font-size: 6px;
+
+                .wpdui-icon {
+                    display: block;
+                    
+                    &:before {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .forminator-field--helper {
+            display: flex;
+            margin: 5px 0 0;
+            padding: 0;
+            border: 0;
+
+            .forminator-label--helper {
+                flex: 1;
+
+                + .forminator-label--limit {
+                    margin-left: 10px;
+                }
+            }
+
+            .forminator-label--limit {
+                flex: 0 0 auto;
+                text-align: right;
+
+                &:only-child {
+                    flex: 1;
+                }
+            }
+        }
+    }
+
+    // DESIGN enclosed
+    &.forminator-enclosed {
+
+        .forminator-field {
+            margin: 5px 0;
+
+            .forminator-row {
+
+                .forminator-col {
+                    margin-top: 5px;
+                    margin-bottom: 5px;
+        
+                    &:first-child {
+                        margin-top: 0;
+                    }
+        
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+        
+                    @include screen("small") {
+                        margin-top: 0;
+                        margin-bottom: 0;
+                    }
+                }
+            }
+        }
+    }
+
+    // DESIGN material
+    &.forminator-design--material {
+
+        .forminator-field {
+
+            .forminator-field--label {
+                margin: 0;
+
+                &.forminator-floating--input,
+                &.forminator-floating--textarea,
+                &.forminator-floating--date {
+
+                    .forminator-label,
+                    .forminator-icon {
+                        pointer-events: none;
+                        transition: transform 0.3s linear, 0.35s ease;
+                    }
+
+                    .forminator-label {
+                        font-size: 16px;
+                        font-weight: normal;
+                    }
+                }
+
+                &.forminator-floating--input {
+    
+                    .forminator-label,
+                    .forminator-icon {
+                        transform: translateY(22px);
+                    }
+                }
+
+                &.forminator-floating--textarea {
+                    height: 0;
+
+                    .forminator-label,
+                    .forminator-icon {
+                        transform: translate(15px, 17px);
+                    }
+                }
+
+                &.forminator-floating--date {
+
+                    .forminator-label,
+                    .forminator-icon {
+                        transform: translate(38px, 22px);
+                    }
+                }
+            }
+
+			&.forminator-is_active {
+
+                .forminator-field--label {
+
+                    .forminator-label,
+                    .forminator-icon {
+                        color: $color-blue;
+                    }
+				}
+				
+				&.forminator-has_error {
+
+					.forminator-field--label {
+
+						.forminator-label {
+							color: $color-red--dark;
+						}
+					}
+				}
+            }
+
+            &.forminator-is_active,
+            &.forminator-is_filled {
+
+                .forminator-field--label {
+
+                    &.forminator-floating--input,
+                    &.forminator-floating--textarea,
+                    &.forminator-floating--date {
+
+                        .forminator-label {
+                            font-size: 12px;
+                            font-weight: 500;
+                        }
+                    }
+
+                    &.forminator-floating--input {
+    
+                        .forminator-label,
+                        .forminator-icon {
+                            transform: translateY(0);
+                        }
+                    }
+
+                    &.forminator-floating--textarea {
+    
+                        .forminator-label,
+                        .forminator-icon {
+                            transform: translate(15px, 5px);
+                        }
+                    }
+
+                    &.forminator-floating--date {
+
+                        .forminator-label,
+                        .forminator-icon {
+                            transform: translate(38px, 0);
+                        }
+                    }
+                }
+			}
+			
+			&.forminator-is_filled {
+
+				&.forminator-is_hover {
+					
+					.forminator-field--label {
+
+						.forminator-label,
+						.forminator-icon {
+							color: $color-blue;
+						}
+					}
+
+					&.forminator-has_error {
+
+						.forminator-field--label {
+	
+							.forminator-label {
+								color: $color-red--dark;
+							}
+						}
+					}
+				}
+
+				&.forminator-has_error {
+
+					.forminator-field--label {
+
+						.forminator-label {
+							color: $color-red--dark;
+						}
+					}
+				}
+			}
+        }
+    }
+}

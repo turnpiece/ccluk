@@ -1,0 +1,279 @@
+<div>
+
+	<script type="text/template" id="polls-layout-tpl">
+
+		<div id="wpmudev-forminator-content" class="wpmudev-page-wizard forminator-polls-content"></div>
+
+	</script>
+
+	<script type="text/template" id="polls-main-tpl">
+
+		<div class="wpmudev-wizard--content">
+
+			<nav class="wpmudev-content--nav">
+
+				<ul class="wpmudev-nav--tabs">
+
+					<li class="wpmudev-tab--item" data-tab-id="0"><a href="#forminator-poll-details">
+						<span class="wpmudev-text">{{ Forminator.l10n.polls.details }}</span>
+						<span class="wpmudev-icon-loading"></span>
+						<span class="wpdui-icon wpdui-icon-check"></span>
+					</a></li>
+
+					<li class="wpmudev-tab--item" data-tab-id="1"><a href="#forminator-poll-appearance">
+						<span class="wpmudev-text">{{ Forminator.l10n.polls.appearance }}</span>
+						<span class="wpmudev-icon-loading"></span>
+						<span class="wpdui-icon wpdui-icon-check"></span>
+					</a></li>
+
+				</ul>
+
+				<div class="wpmudev-preview-anchor" aria-hidden="true"></div>
+
+				<div class="wpmudev-preview" aria-hidden="true" data-modal="preview_polls" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.polls.preview_nonce }}">
+
+					<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100" preserveAspectRatio="none" class="wpmudev-icon wpmudev-i_preview"><path fill-rule="evenodd" d="M75 100C25 100 0 50 0 50S25 0 75 0s75 50 75 50-25 50-75 50zm0-25c13.807 0 25-11.193 25-25S88.807 25 75 25 50 36.193 50 50s11.193 25 25 25z"/></svg>
+
+					<span class="wpmudev-preview--text">{{ Forminator.l10n.polls.preview }}</span>
+
+				</div>
+
+			</nav>
+
+			<div class="wpmudev-content--settings">
+				<div id="forminator-poll-details" class="wpmudev-settings--box wpmudev-tab-content-0" style="display: block;"></div>
+				<div id="forminator-poll-appearance" class="wpmudev-settings--box wpmudev-tab-content-1" style="display: none;"></div>
+			</div>
+
+		</div>
+
+	</script>
+
+	<script type="text/template" id="polls-buttons-tpl">
+
+		<div class="wpmudev-wizard--footer">
+
+			<div class="wpmudev-footer--clear"></div>
+
+			<nav class="wpmudev-footer--nav">
+
+				<div class="wpmudev-nav--left">
+					<button id="forminator-polls-cancel" class="wpmudev-button wpmudev-button-ghost">{{Forminator.l10n.polls.cancel}}</button>
+					<button id="forminator-polls-back" class="wpmudev-button wpmudev-button-ghost" style="display: none;">{{Forminator.l10n.polls.back}}</button>
+				</div>
+
+				<div class="wpmudev-nav--right">
+					<button class="wpmudev-button wpmudev-button-blue forminator-loading forminator-save" data-nonce="" data-id="">
+						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.save}}</span>
+						<span class="wpmudev-loading"></span>
+					</button>
+					<button id="forminator-polls-next" class="wpmudev-button forminator-loading">
+						<span class="wpmudev-loading-text">{{Forminator.l10n.polls.continue}}</span>
+						<span class="wpmudev-loading"></span>
+					</button>
+					<button id="forminator-polls-finish" class="wpmudev-button forminator-loading" style="display: none;">
+						<span class="wpmudev-loading-text">{{Forminator.l10n.polls.finish}}</span>
+						<span class="wpmudev-loading"></span>
+					</button>
+				</div>
+
+			</nav>
+
+		</div>
+
+	</script>
+
+	<script type="text/template" id="polls-section-details-tpl">
+
+		<div class="wpmudev-heading wpmudev-option-wrap-form-heading">
+			<label class="wpmudev-heading--title">{{Forminator.l10n.polls.details_title}}</label>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main wpmudev-has_icon">{{Forminator.l10n.polls.poll_title}} <span class="wpdui-icon wpdui-icon-asterisk"></span></label>
+			</div>
+			<div class="wpmudev-option wpmudev-option-wrap-title">
+				<div class="details-section-title"></div>
+				<label id="forminator-validate-name" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.polls.validate_form_name }}</span></label>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main wpmudev-has_icon">{{Forminator.l10n.polls.poll_question}} <span class="wpdui-icon wpdui-icon-asterisk"></span></label>
+			</div>
+			<div class="wpmudev-option wpmudev-option-wrap-question">
+				<div class="details-section-question"></div>
+				<label id="forminator-validate-question" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.polls.validate_form_question }}</span></label>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.poll_desc}}</label>
+			</div>
+			<div class="wpmudev-option wpmudev-option-wrap-description">
+				<div class="details-section-description"></div>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main wpmudev-has_icon">{{Forminator.l10n.polls.poll_answers}} <span class="wpdui-icon wpdui-icon-asterisk"></span></label>
+			</div>
+			<div class="wpmudev-option wpmudev-option-wrap-answers">
+				<div class="details-section-answers"></div>
+				<label id="forminator-validate-answers" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.polls.validate_form_answers }}</span></label>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.poll_button}}</label>
+			</div>
+			<div class="wpmudev-option wpmudev-option-wrap-button-label">
+				<div class="details-section-button-label"></div>
+			</div>
+		</div>
+
+	</script>
+
+	<script type="text/template" id="polls-section-appearance-tpl">
+
+		<div class="wpmudev-heading">
+			<label class="wpmudev-heading--title">{{Forminator.l10n.polls.appearance_title}}</label>
+		</div>
+
+		<div class="wpmudev-option--divided wpmudev-has_border">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.results_behav}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--results-behav" class="wpmudev-option--container"></div>
+		</div>
+
+		<div class="wpmudev-option--divided wpmudev-has_border">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.results_style}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--results-style" class="wpmudev-option--container"></div>
+		</div>
+
+		<div class="wpmudev-option--divided wpmudev-has_border">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.submission}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--submission" class="wpmudev-option--container">
+				<label class="wpmudev-label--info"><span>{{Forminator.l10n.polls.submission_explain}}</span></label>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided wpmudev-has_border">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.votes_count}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--votes-count" class="wpmudev-option--container">
+				<label class="wpmudev-label--info"><span>{{Forminator.l10n.polls.votes_explain}}</span></label>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided wpmudev-has_border">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.poll_colors}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--colors" class="wpmudev-option--container">
+				<div class="wpmudev-box-gray"></div>
+			</div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.polls.votes_limit}}</label>
+			</div>
+			<div id="forminator-pollwiz-wrap--votes-limit" class="wpmudev-option--container"></div>
+		</div>
+
+	</script>
+
+	<script type="text/template" id="appearance-vote-limit-tpl">
+
+		<label class="wpmudev-label">{{Forminator.l10n.polls.how_long}}</label>
+
+		<div class="wpmudev-has_cols"></div>
+
+	</script>
+
+	<script type="text/template" id="appearance-color-grid-tpl">
+
+		<div class="wpmudev-row wpmudev-palettes">
+
+			<div id="forminator-pollwiz-wrap--boxbg" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.box_background }}</label>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--boxbo" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.box_border }}</label>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--descriptionco" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.polls.poll_description }}</label>
+			</div>
+
+		</div>
+
+		<div class="wpmudev-row wpmudev-palettes">
+
+			<div id="forminator-pollwiz-wrap--questionco" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.question }}</label>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--answersco" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.answer }}</label>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--inputbg" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.input_background }}</label>
+				<div class="wpmudev-pickers"></div>
+			</div>
+
+		</div>
+
+		<div class="wpmudev-row wpmudev-palettes">
+
+			<div id="forminator-pollwiz-wrap--inputbo" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.input_border }}</label>
+				<div class="wpmudev-pickers"></div>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--inputph" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.input_placeholder }}</label>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--inputtxt" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.input_text }}</label>
+			</div>
+
+		</div>
+
+		<div class="wpmudev-row wpmudev-palettes">
+
+			<div id="forminator-pollwiz-wrap--buttonbg" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.btn_background }}</label>
+				<div class="wpmudev-pickers"></div>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--buttontxt" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.btn_text }}</label>
+				<div class="wpmudev-pickers"></div>
+			</div>
+
+			<div id="forminator-pollwiz-wrap--link" class="wpmudev-col col-12 col-xs-4 col-sm-12 col-lg-4">
+				<label class="wpmudev-label">{{ Forminator.l10n.colors.link_res }}</label>
+				<div class="wpmudev-pickers"></div>
+			</div>
+
+		</div>
+
+	</script>
+
+</div>

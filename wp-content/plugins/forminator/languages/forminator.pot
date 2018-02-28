@@ -1,0 +1,4284 @@
+# Copyright (C) 2018 WPMU DEV
+# This file is distributed under the same license as the Forminator Pro package.
+msgid ""
+msgstr ""
+"Project-Id-Version: Forminator Pro 1.0.1\n"
+"Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/forminator\n"
+"POT-Creation-Date: 2018-02-21 00:41:46+00:00\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2018-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"X-Generator: grunt-wp-i18n1.0.1\n"
+
+#: admin/abstracts/class-admin-page.php:220
+msgid "Made with %s by WPMU DEV"
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:73
+msgid "Quiz model doesn't exist"
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:116
+msgid "Poll model doesn't exist"
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:152
+msgid "Form model doesn't exist"
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:468
+msgid "Not valid module ID provided."
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:483
+msgid "No ID was provided."
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:489
+msgid "Exports cleared."
+msgstr ""
+
+#: admin/classes/class-admin-ajax.php:491
+msgid "Exports couldn't be cleared."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:32
+#: library/modules/custom-forms/admin/admin-loader.php:274
+msgid "Name your form"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:33
+msgid "E.g. Contact Form"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:34
+#: admin/views/dashboard/widgets/widget-cform.php:49
+#: admin/views/dashboard/widgets/widget-poll.php:49
+#: admin/views/dashboard/widgets/widget-quiz.php:49 library/fields/name.php:50
+#: library/fields/name.php:298
+#: library/modules/custom-forms/admin/admin-loader.php:189
+msgid "Name"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:35
+msgid "Fields"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:36
+#: admin/views/custom-form/entries/content.php:226
+#: admin/views/custom-form/entries/content.php:404
+#: admin/views/quiz/entries/content.php:261
+#: admin/views/quiz/entries/content.php:431
+#: admin/views/settings/popup/exports-content.php:12 library/fields/date.php:51
+#: library/fields/date.php:392
+msgid "Date"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:37
+#: admin/views/settings/popup/exports-content.php:39
+msgid "Clear All"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:38
+msgid "Your exports"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:39
+#: library/modules/quizzes/admin/admin-loader.php:180
+msgid "Choose Quiz Type"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:40
+msgid "Edit Login or Register form"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:41
+msgid "Edit Scheduled Export"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:42
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:7
+msgid "Frequency"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:43
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:11
+msgid "Daily"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:44
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:12
+msgid "Weekly"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:45
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:13
+msgid "Monthly"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:46
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:21
+msgid "Day of the week"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:47
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:25
+#: library/fields/date.php:106 library/helpers/helper-core.php:465
+#: library/helpers/helper-fields.php:209
+msgid "Monday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:48
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:26
+#: library/fields/date.php:120 library/helpers/helper-core.php:466
+#: library/helpers/helper-fields.php:210
+msgid "Tuesday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:49
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:27
+#: library/fields/date.php:134 library/helpers/helper-core.php:467
+#: library/helpers/helper-fields.php:211
+msgid "Wednesday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:50
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:28
+#: library/fields/date.php:148 library/helpers/helper-core.php:468
+#: library/helpers/helper-fields.php:212
+msgid "Thursday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:51
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:29
+#: library/fields/date.php:162 library/helpers/helper-core.php:469
+#: library/helpers/helper-fields.php:213
+msgid "Friday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:52
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:30
+#: library/fields/date.php:176 library/helpers/helper-core.php:470
+#: library/helpers/helper-fields.php:214
+msgid "Saturday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:53
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:31
+#: library/fields/date.php:190 library/helpers/helper-core.php:471
+#: library/helpers/helper-fields.php:208
+msgid "Sunday"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:54
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:39
+msgid "Time of the day"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:55
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:78
+msgid "Email export data to"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:56 library/fields/email.php:164
+msgid "E.g. john@doe.com"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:57
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:83
+msgid "Leave blank if you don't want to receive exports via email."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:58
+msgid "Congratulations!"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:59
+msgid "is ready!"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:60
+msgid ""
+"Add it to any post / page by clicking Forminator button, or set it up as a "
+"Widget."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:61
+msgid "Edit PayPal credentials"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:62
+msgid "Preview Custom Form"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:63
+msgid "Preview Poll"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:64
+#: library/modules/quizzes/admin/admin-loader.php:190
+msgid "Preview Quiz"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:65
+msgid "Edit reCaptcha credentials"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:66
+msgid "Edit default currency"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:67
+#: library/modules/custom-forms/admin/admin-loader.php:275
+msgid "Form name cannot be empty! Please pick a name for your form."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:68
+msgid "Close"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:69
+#: admin/views/settings/popup/exports-content.php:14
+msgid "Records"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:70 admin/classes/class-admin-l10n.php:81
+#: admin/classes/class-admin-l10n.php:123
+msgid "Delete"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:71
+msgid "Are you sure?"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:72
+msgid "Have in mind this action cannot be reverted."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:73
+#: library/modules/custom-forms/admin/admin-loader.php:134
+#: library/modules/polls/admin/admin-loader.php:161
+#: library/modules/quizzes/admin/admin-loader.php:220
+msgid "Cancel"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:74
+msgid "The changes you made may be lost if you navigate away from this page."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:75
+msgid "Save Changes"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:78 library/fields/address.php:97
+#: library/fields/address.php:124 library/fields/address.php:151
+#: library/fields/address.php:179 library/fields/address.php:207
+#: library/fields/address.php:234 library/fields/name.php:120
+#: library/fields/name.php:151 library/fields/name.php:189
+#: library/fields/name.php:227 library/fields/postdata.php:152
+#: library/fields/postdata.php:189 library/fields/postdata.php:226
+#: library/fields/postdata.php:263 library/fields/postdata.php:293
+#: library/fields/postdata.php:324 library/fields/time.php:125
+#: library/fields/time.php:149
+#: library/modules/custom-forms/admin/admin-loader.php:250
+msgid "Label"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:79
+#: library/modules/custom-forms/admin/admin-loader.php:253
+msgid "Value"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:80
+msgid "Add Option"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:82
+msgid "Pick a field"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:83
+msgid "This field will be"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:84
+msgid "if"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:85
+msgid "Shown"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:86 library/fields/custom.php:124
+msgid "Hidden"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:89
+msgid "Box background"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:90
+msgid "Box border"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:91
+msgid "Title text"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:92
+msgid "Question text"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:93
+msgid "Answer text"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:94
+msgid "Input field bg"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:95
+msgid "Input field border"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:96
+msgid "Input field placeholder"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:97
+msgid "Input field text"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:98
+#: library/modules/custom-forms/admin/admin-loader.php:265
+msgid "Button background"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:99
+#: library/modules/custom-forms/admin/admin-loader.php:266
+msgid "Button text"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:100
+#: library/modules/custom-forms/admin/admin-loader.php:267
+msgid "Results link"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:103
+#: library/modules/quizzes/admin/admin-loader.php:197
+msgid "Browse"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:104
+#: library/modules/quizzes/admin/admin-loader.php:198
+msgid "Clear"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:105
+msgid "You don't have any results yet."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:106
+msgid "Select result"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:107
+msgid "You don't have any answer yet."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:108
+msgid "Click browse to add image..."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:109
+msgid "Click on image container (at left) to add one..."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:110
+msgid "You don't have any questions yet."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:111
+msgid "Add Question"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:112
+msgid "Question title"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:113
+msgid "Answers"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:114
+#: library/modules/polls/admin/admin-loader.php:134
+msgid "Add Answer"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:115
+msgid "Add Result"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:116
+msgid "Delete Result"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:117
+#: admin/views/custom-form/entries/content.php:224
+#: admin/views/custom-form/entries/content.php:402
+#: admin/views/quiz/entries/content.php:259
+#: admin/views/quiz/entries/content.php:429
+#: library/modules/polls/admin/admin-loader.php:130
+msgid "Title"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:118
+msgid "Image (optional)"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:119 library/fields/date.php:305
+#: library/fields/email.php:114 library/fields/multivalue.php:103
+#: library/fields/number.php:113 library/fields/phone.php:120
+#: library/fields/singlevalue.php:104 library/fields/text.php:138
+#: library/fields/website.php:114
+#: library/modules/custom-forms/admin/admin-loader.php:254
+msgid "Description"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:120
+msgid "Delete Answer"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:121
+msgid "Correct answer"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:122
+msgid "You don't have any options yet."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:124
+msgid "Restricted dates:"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:125
+msgid "Add"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:126
+msgid "Pick custom date(s) to restrict:"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:127
+msgid "Form Data"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:128
+msgid "Misc Data"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:129
+msgid "Add form data"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:130
+msgid "has been saved."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:131
+msgid "has been published."
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:132
+msgid "Error! Form cannot be saved."
+msgstr ""
+
+#: admin/classes/class-admin.php:62 library/class-shortcode-generator.php:39
+msgid "Forminator"
+msgstr ""
+
+#: admin/classes/class-admin.php:63
+msgid "Forminator Dashboard"
+msgstr ""
+
+#: admin/classes/class-admin.php:63
+msgid "Dashboard"
+msgstr ""
+
+#: admin/classes/class-admin.php:81
+msgid "Global Settings"
+msgstr ""
+
+#: admin/classes/class-admin.php:81
+msgid "Settings"
+msgstr ""
+
+#: admin/pages/dashboard-page.php:22
+msgid "Create modules"
+msgstr ""
+
+#: admin/views/boxes/popup-box.php:21
+msgid "Close modal"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:13
+msgid "Entries Display Settings"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:23
+#: admin/views/quiz/entries/content.php:30
+msgid "Open Entries Display Settings"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:41
+#: admin/views/quiz/entries/content.php:50
+msgid ""
+"Select <a class='wpmudev-check-all' href='%s'>All</a> | <a "
+"class='wpmudev-uncheck-all' href='%s'>None</a>"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:52
+#: admin/views/quiz/entries/content.php:67
+#: library/model/class-form-entries-list-table.php:74
+msgid "Date added"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:85
+#: admin/views/quiz/entries/content.php:99
+msgid "Update Table"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:105
+#: admin/views/custom-form/entries/content.php:132
+#: admin/views/quiz/entries/content.php:119
+#: admin/views/quiz/entries/content.php:148
+msgid "Export Entries"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:115
+#: admin/views/quiz/entries/content.php:129
+msgid "Open Export Entries"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:140
+#: admin/views/quiz/entries/content.php:158
+msgid "Previous Exports"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:147
+#: admin/views/poll/entries/content.php:110
+#: admin/views/quiz/entries/content.php:165
+msgid "Scheduled exports"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:158
+#: admin/views/poll/entries/content.php:121
+#: admin/views/quiz/entries/content.php:176
+msgid "Scheduled export is not enabled"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:161
+#: admin/views/poll/entries/content.php:123
+#: admin/views/quiz/entries/content.php:178
+msgid ""
+"Export schedule: <strong>%s</strong> on <strong>%s</strong> at "
+"<strong>%s</strong>"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:163
+msgid "Export schedule: <strong>%s</strong> at <strong>%s</strong>"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:165
+#: admin/views/poll/entries/content.php:124
+#: admin/views/quiz/entries/content.php:179
+msgid "To be sent by email."
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:169
+#: admin/views/dashboard/widgets/widget-cform.php:100
+#: admin/views/dashboard/widgets/widget-poll.php:101
+#: admin/views/dashboard/widgets/widget-quiz.php:101
+#: admin/views/poll/entries/content.php:128
+#: admin/views/quiz/entries/content.php:183
+msgid "Edit"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:201
+#: admin/views/custom-form/entries/content.php:418
+#: admin/views/custom-form/list/content.php:44
+#: admin/views/custom-form/list/content.php:220
+#: admin/views/poll/list/content.php:44 admin/views/poll/list/content.php:219
+#: admin/views/quiz/entries/content.php:213
+#: admin/views/quiz/entries/content.php:448
+#: admin/views/quiz/list/content.php:44 admin/views/quiz/list/content.php:218
+msgid "%s result"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:201
+#: admin/views/custom-form/entries/content.php:418
+#: admin/views/custom-form/list/content.php:44
+#: admin/views/custom-form/list/content.php:220
+#: admin/views/poll/list/content.php:44 admin/views/poll/list/content.php:219
+#: admin/views/quiz/entries/content.php:215
+#: admin/views/quiz/entries/content.php:450
+#: admin/views/quiz/list/content.php:44 admin/views/quiz/list/content.php:218
+msgid "%s results"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:243
+#: admin/views/quiz/entries/content.php:275
+msgid "No results were found."
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:279
+msgid "Entry #%s"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:291
+#: admin/views/quiz/entries/content.php:323
+msgid "Open result details"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:359
+#: library/modules/custom-forms/admin/admin-page-entries.php:388
+msgid "<strong>Total</strong> %s"
+msgstr ""
+
+#: admin/views/custom-form/entries/header.php:1
+msgid "Entries: %s"
+msgstr ""
+
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:81
+msgid "admin@website.com"
+msgstr ""
+
+#: admin/views/custom-form/entries/popup/schedule-export-content.php:89
+msgid "Save changes"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:27
+#: admin/views/custom-form/list/content.php:203
+#: admin/views/poll/list/content.php:27 admin/views/poll/list/content.php:202
+#: admin/views/quiz/list/content.php:27 admin/views/quiz/list/content.php:201
+#: library/modules/custom-forms/admin/admin-page-entries.php:487
+#: library/modules/quizzes/admin/admin-page-entries.php:266
+msgid "Bulk Actions"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:38
+#: admin/views/custom-form/list/content.php:214
+#: admin/views/poll/list/content.php:38 admin/views/poll/list/content.php:213
+#: admin/views/quiz/list/content.php:38 admin/views/quiz/list/content.php:212
+#: library/modules/custom-forms/admin/admin-page-entries.php:492
+#: library/modules/quizzes/admin/admin-page-entries.php:271
+msgid "Apply"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:69
+msgid "Form title"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:71
+#: admin/views/poll/list/content.php:71 admin/views/quiz/list/content.php:71
+msgid "Shortcode"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:75
+#: admin/views/dashboard/widgets/widget-cform.php:51
+#: admin/views/dashboard/widgets/widget-poll.php:51
+#: admin/views/dashboard/widgets/widget-quiz.php:51
+#: admin/views/poll/list/content.php:75 admin/views/quiz/list/content.php:75
+msgid "Views"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:77
+#: admin/views/dashboard/widgets/widget-quiz.php:53
+#: admin/views/quiz/list/content.php:77
+msgid "Entries"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:79
+#: admin/views/poll/list/content.php:79 admin/views/quiz/list/content.php:79
+msgid "Conversion rate"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:116
+#: admin/views/custom-form/list/content.php:120
+msgid "Form shortcode"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:142
+#: admin/views/poll/list/content.php:142 admin/views/quiz/list/content.php:142
+msgid "Open menu"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:149
+msgid "Form fields"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:152
+msgid "Form settings"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:159
+msgid "Clone form"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:163
+#: admin/views/quiz/list/content.php:161
+msgid "View entries"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:167
+msgid "Preview form"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:172
+msgid "Delete form"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:244
+#: admin/views/poll/list/content.php:243 admin/views/quiz/list/content.php:242
+msgid "Hello there, %s"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:261
+msgid "Take your forms to the next level"
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:263
+msgid ""
+"You currently don't have any custom forms. Create a new form with any kind "
+"of content e.g. Contact form or conditional form. You can also create a "
+"payment form to sell your products."
+msgstr ""
+
+#: admin/views/custom-form/list/content.php:265
+#: admin/views/poll/list/content.php:264 admin/views/quiz/list/content.php:263
+msgid "Create"
+msgstr ""
+
+#: admin/views/custom-form/list/header.php:1
+#: admin/views/dashboard/widgets/widget-cform.php:19
+#: library/modules/custom-forms/admin/admin-loader.php:42
+msgid "Forms"
+msgstr ""
+
+#: admin/views/custom-form/list/header.php:3
+#: admin/views/dashboard/widgets/widget-cform.php:114
+#: admin/views/dashboard/widgets/widget-cform.php:129
+#: library/modules/custom-forms/admin/admin-loader.php:133
+#: library/modules/custom-forms/admin/admin-page-new.php:23
+msgid "New Form"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:29
+#: admin/views/dashboard/widgets/widget-create.php:24
+#: admin/views/dashboard/widgets/widget-poll.php:29
+#: admin/views/dashboard/widgets/widget-quiz.php:29
+#: admin/views/settings/widget-captcha.php:27
+#: admin/views/settings/widget-currency.php:21
+#: admin/views/settings/widget-paypal.php:24
+#: admin/views/settings/widget-providers.php:23
+msgid "Hide box"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:53
+msgid "Submissions"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:55
+#: admin/views/dashboard/widgets/widget-poll.php:55
+#: admin/views/dashboard/widgets/widget-quiz.php:55
+msgid "Rate"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:76
+#: admin/views/dashboard/widgets/widget-poll.php:77
+#: admin/views/dashboard/widgets/widget-quiz.php:77
+msgid "Views:"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:84
+#: admin/views/dashboard/widgets/widget-quiz.php:85
+msgid "Submissions:"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:92
+#: admin/views/dashboard/widgets/widget-poll.php:93
+#: admin/views/dashboard/widgets/widget-quiz.php:93
+msgid "Conv. Rate:"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:115
+#: admin/views/dashboard/widgets/widget-poll.php:116
+#: admin/views/dashboard/widgets/widget-quiz.php:116
+msgid "View All"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-cform.php:127
+#: library/modules/custom-forms/loader.php:117
+msgid ""
+"Custom forms, conditional forms, etc. Choose from our library of forms or "
+"create a new one from scratch."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-create.php:16
+msgid "Create Modules"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:19
+#: admin/views/poll/list/header.php:1 library/class-modules.php:61
+#: library/class-shortcode-generator.php:118
+#: library/modules/polls/admin/admin-loader.php:42
+#: library/modules/polls/loader.php:101
+msgid "Polls"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:53
+#: admin/views/poll/list/content.php:77
+msgid "Votes"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:85
+msgid "Votes:"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:115
+#: admin/views/poll/list/header.php:3
+#: library/modules/polls/admin/admin-loader.php:43
+#: library/modules/polls/admin/admin-page-new.php:23
+#: library/modules/polls/loader.php:104
+msgid "New Poll"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:128
+#: library/modules/polls/loader.php:103
+msgid ""
+"Create polls, and collect user data. Choose a visualization style that best "
+"suits your needs."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-poll.php:130
+msgid "Create Poll"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-quiz.php:19
+#: admin/views/quiz/list/header.php:1 library/class-modules.php:66
+#: library/class-shortcode-generator.php:120
+#: library/modules/quizzes/admin/admin-loader.php:44
+#: library/modules/quizzes/admin/admin-loader.php:179
+#: library/modules/quizzes/loader.php:100
+msgid "Quizzes"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-quiz.php:115
+#: admin/views/quiz/list/header.php:3
+#: library/modules/quizzes/admin/admin-loader.php:45
+#: library/modules/quizzes/admin/admin-loader.php:46
+#: library/modules/quizzes/admin/admin-page-new-knowledge.php:23
+#: library/modules/quizzes/admin/admin-page-new-nowrong.php:22
+#: library/modules/quizzes/loader.php:103
+msgid "New Quiz"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-quiz.php:128
+#: admin/views/quiz/list/content.php:261 library/modules/quizzes/loader.php:102
+msgid ""
+"Create fun quizzes for your users to take and share on social media. A "
+"great way to drive more traffic to your site."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-quiz.php:130
+msgid "Create Quiz"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:32
+#: admin/views/dashboard/widgets/widget-resume.php:104
+msgid "Welcome back."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:34
+msgid ""
+"Here’s some data about your Forms, Quizzes & Polls, that you might find "
+"useful."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:48
+msgid "Top Converting Form"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:64
+msgid "Most Shared Quiz"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:80
+msgid "Most Popular Poll"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:106
+msgid "You don't have enough information to show modules data resume."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-resume.php:108
+msgid "Come back later. Don't forget to track your modules."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:19
+msgid "Welcome to Forminator"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:27
+msgid "Close box"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:44
+msgid "Are you ready to take your forms to the next level?"
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:46
+msgid ""
+"With Forminator you can create forms, quizzes and polls to use anywhere on "
+"your website."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:48
+msgid "Pick what kind of form type you want to create below to get started."
+msgstr ""
+
+#: admin/views/dashboard/widgets/widget-welcome.php:50
+msgid "Create New Form"
+msgstr ""
+
+#: admin/views/poll/entries/content.php:13
+msgid "List of custom votes"
+msgstr ""
+
+#: admin/views/poll/entries/content.php:23
+msgid "Open list of custom votes"
+msgstr ""
+
+#: admin/views/poll/entries/content.php:39
+msgid "No one has added custom votes just yet."
+msgstr ""
+
+#: admin/views/poll/entries/content.php:67
+#: admin/views/poll/entries/content.php:94
+msgid "Export Votes"
+msgstr ""
+
+#: admin/views/poll/entries/content.php:77
+msgid "Open Export Votes"
+msgstr ""
+
+#: admin/views/poll/entries/content.php:103
+msgid "Previous Votes"
+msgstr ""
+
+#: admin/views/poll/entries/header.php:1
+msgid "Votes: %s"
+msgstr ""
+
+#: admin/views/poll/list/content.php:69
+msgid "Poll title"
+msgstr ""
+
+#: admin/views/poll/list/content.php:116 admin/views/poll/list/content.php:120
+msgid "Poll shortcode"
+msgstr ""
+
+#: admin/views/poll/list/content.php:150 admin/views/quiz/list/content.php:149
+msgid "Edit settings"
+msgstr ""
+
+#: admin/views/poll/list/content.php:158
+msgid "Clone poll"
+msgstr ""
+
+#: admin/views/poll/list/content.php:162
+msgid "View votes"
+msgstr ""
+
+#: admin/views/poll/list/content.php:166
+msgid "Preview poll"
+msgstr ""
+
+#: admin/views/poll/list/content.php:171
+msgid "Delete poll"
+msgstr ""
+
+#: admin/views/poll/list/content.php:260
+msgid "Collect user data with polls!"
+msgstr ""
+
+#: admin/views/poll/list/content.php:262
+msgid ""
+"You currently don't have any polls. Create a new poll and start collecting "
+"user data. You can also choose a visualization style that best suits your "
+"needs."
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:20
+msgid "Results Display Settings"
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:143
+msgid "Manual exports"
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:223
+#: admin/views/quiz/entries/content.php:458
+#: library/helpers/helper-forms.php:684
+msgid "Previous page"
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:234
+#: admin/views/quiz/entries/content.php:469
+#: library/helpers/helper-forms.php:713
+msgid "Next page"
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:311
+msgid "Result #%s"
+msgstr ""
+
+#: admin/views/quiz/entries/content.php:375
+msgid "You got %s/%s correct"
+msgstr ""
+
+#: admin/views/quiz/entries/header.php:1
+msgid "Results: %s"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:69
+msgid "Quiz title"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:116 admin/views/quiz/list/content.php:120
+msgid "Quiz shortcode"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:157
+msgid "Clone quiz"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:165
+msgid "Preview quiz"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:170
+msgid "Delete quiz"
+msgstr ""
+
+#: admin/views/quiz/list/content.php:259
+msgid "Start challenging your users!"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:13
+msgid "Site Key"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:17
+msgid "Get reCaptcha API credentials by registering"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:17
+#: admin/views/settings/popup/edit-captcha-content.php:43
+msgid "here."
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:27
+msgid "Secret Key"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:39
+msgid "Language"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:43
+msgid "Find your language code"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:53
+msgid "Theme"
+msgstr ""
+
+#: admin/views/settings/popup/edit-captcha-content.php:67
+#: admin/views/settings/popup/edit-currency-content.php:33
+#: admin/views/settings/popup/edit-paypal-content.php:48
+#: library/modules/custom-forms/admin/admin-loader.php:177
+msgid "Done"
+msgstr ""
+
+#: admin/views/settings/popup/edit-currency-content.php:13
+#: admin/views/settings/widget-currency.php:11
+msgid "Currency"
+msgstr ""
+
+#: admin/views/settings/popup/edit-paypal-content.php:9
+msgid "Paypal Mode"
+msgstr ""
+
+#: admin/views/settings/popup/edit-paypal-content.php:12
+msgid "Test Mode (Sandbox)"
+msgstr ""
+
+#: admin/views/settings/popup/edit-paypal-content.php:13
+msgid "Live Mode"
+msgstr ""
+
+#: admin/views/settings/popup/edit-paypal-content.php:24
+msgid "Client ID"
+msgstr ""
+
+#: admin/views/settings/popup/edit-paypal-content.php:36
+msgid "Secret"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:17
+msgid "Google reCaptcha"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:39
+msgid "Add Google Captcha settings to enable Captcha field."
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:41
+msgid "reCAPTCHA is a free service that protects your site from spam and abuse"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:43
+#: admin/views/settings/widget-paypal.php:42
+msgid "Add Credentials"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:49
+msgid ""
+"Please note, these settings are required only if you decide to use the "
+"reCAPTCHA field."
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:55
+msgid "reCAPTCHA Credentials"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:65
+msgid "Site Key:"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:81
+msgid "Secret Key:"
+msgstr ""
+
+#: admin/views/settings/widget-captcha.php:101
+#: admin/views/settings/widget-paypal.php:102
+msgid "Edit Credentials"
+msgstr ""
+
+#: admin/views/settings/widget-currency.php:32
+msgid ""
+"Please note this is the currency that will be used for all your product "
+"fields."
+msgstr ""
+
+#: admin/views/settings/widget-currency.php:37
+msgid "Product Currency"
+msgstr ""
+
+#: admin/views/settings/widget-currency.php:44
+msgid "Currency:"
+msgstr ""
+
+#: admin/views/settings/widget-currency.php:57
+msgid "Change currency"
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:14
+msgid "Paypal Express"
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:38
+msgid "Add Paypal credentials to create checkout forms."
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:40
+msgid ""
+"Express Checkout is PayPal's premier checkout solution, which streamlines "
+"the checkout process for buyers and keeps them on your site after making a "
+"purchase."
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:50
+msgid ""
+"You may need to do a free upgrade to a business account in order to "
+"properly make use of Paypal Express."
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:56
+msgid "Paypal Credentials"
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:66
+msgid "Client ID:"
+msgstr ""
+
+#: admin/views/settings/widget-paypal.php:82
+msgid "Secret:"
+msgstr ""
+
+#: admin/views/settings/widget-providers.php:13
+msgid "Email Providers"
+msgstr ""
+
+#: admin/views/settings/widget-providers.php:35
+msgid ""
+"Configure if you want to collect emails from modules and how you want those "
+"emails to be stored."
+msgstr ""
+
+#: admin/views/settings/widget-providers.php:41
+msgid "Email Collection Service"
+msgstr ""
+
+#: admin/views/settings/widget-providers.php:74
+#: admin/views/settings/widget-providers.php:117
+msgid "Connect to start growing your lists."
+msgstr ""
+
+#: admin/views/settings/widget-providers.php:139
+msgid "Add Another Service"
+msgstr ""
+
+#: library/abstracts/abstract-class-field.php:371
+msgid "Choose File"
+msgstr ""
+
+#: library/abstracts/abstract-class-field.php:372
+msgid "No file chosen"
+msgstr ""
+
+#: library/class-core.php:224
+msgid "Post Custom Data"
+msgstr ""
+
+#: library/class-export.php:187
+msgid "Forminator entires data for form %s"
+msgstr ""
+
+#: library/class-modules.php:51 library/class-shortcode-generator.php:116
+#: library/modules/custom-forms/loader.php:115
+msgid "Custom Forms"
+msgstr ""
+
+#: library/class-modules.php:56
+msgid "Login / Registration Forms"
+msgstr ""
+
+#: library/class-shortcode-generator.php:96
+msgid "Generate form shortcode"
+msgstr ""
+
+#: library/class-shortcode-generator.php:130
+#: library/class-shortcode-generator.php:142
+#: library/class-shortcode-generator.php:154
+msgid "Insert Form"
+msgstr ""
+
+#: library/class-shortcode-generator.php:180
+msgid "Select a form"
+msgstr ""
+
+#: library/class-shortcode-generator.php:202
+msgid "Select poll"
+msgstr ""
+
+#: library/class-shortcode-generator.php:224
+msgid "Select quiz"
+msgstr ""
+
+#: library/fields/address.php:50
+msgid "Address"
+msgstr ""
+
+#: library/fields/address.php:69 library/fields/custom.php:65
+#: library/fields/date.php:259 library/fields/email.php:76
+#: library/fields/multivalue.php:73 library/fields/name.php:71
+#: library/fields/number.php:75 library/fields/phone.php:80
+#: library/fields/postdata.php:66 library/fields/singlevalue.php:74
+#: library/fields/text.php:82 library/fields/time.php:72
+#: library/fields/upload.php:72 library/fields/website.php:77
+msgid "Required"
+msgstr ""
+
+#: library/fields/address.php:89 library/fields/address.php:255
+msgid "Street address"
+msgstr ""
+
+#: library/fields/address.php:103 library/fields/address.php:130
+#: library/fields/address.php:157 library/fields/address.php:186
+#: library/fields/address.php:213 library/fields/date.php:287
+#: library/fields/email.php:104 library/fields/name.php:158
+#: library/fields/name.php:196 library/fields/name.php:234
+#: library/fields/number.php:104 library/fields/phone.php:110
+#: library/fields/postdata.php:159 library/fields/postdata.php:196
+#: library/fields/postdata.php:233 library/fields/text.php:129
+#: library/fields/time.php:132 library/fields/time.php:156
+#: library/fields/website.php:104
+msgid "Placeholder"
+msgstr ""
+
+#: library/fields/address.php:116
+msgid "Address Line 2"
+msgstr ""
+
+#: library/fields/address.php:143 library/fields/address.php:257
+msgid "City"
+msgstr ""
+
+#: library/fields/address.php:170
+msgid "State / Province"
+msgstr ""
+
+#: library/fields/address.php:199 library/fields/address.php:261
+msgid "ZIP / Postal Code"
+msgstr ""
+
+#: library/fields/address.php:226 library/fields/address.php:263
+msgid "Country"
+msgstr ""
+
+#: library/fields/address.php:256
+msgid "E.g. 42 Wallaby Way"
+msgstr ""
+
+#: library/fields/address.php:258
+msgid "E.g. Sydney"
+msgstr ""
+
+#: library/fields/address.php:259
+msgid "State/Province"
+msgstr ""
+
+#: library/fields/address.php:260
+msgid "E.g. New South Wales"
+msgstr ""
+
+#: library/fields/address.php:262
+msgid "E.g. 2000"
+msgstr ""
+
+#: library/fields/address.php:655 library/fields/address.php:656
+#: library/fields/address.php:657 library/fields/address.php:658
+#: library/fields/date.php:835 library/fields/date.php:836
+#: library/fields/date.php:837 library/fields/name.php:691
+#: library/fields/name.php:693 library/fields/name.php:694
+#: library/fields/name.php:695
+msgid "This field is required. Please input a value"
+msgstr ""
+
+#: library/fields/address.php:675
+msgid "This field is required. Please enter the address"
+msgstr ""
+
+#: library/fields/address.php:690
+msgid "This field is required. Please enter the street address"
+msgstr ""
+
+#: library/fields/address.php:693
+msgid "This field is required. Please enter the zip code"
+msgstr ""
+
+#: library/fields/address.php:696
+msgid "This field is required. Please select the country"
+msgstr ""
+
+#: library/fields/address.php:699
+msgid "This field is required. Please enter the city"
+msgstr ""
+
+#: library/fields/address.php:702
+msgid "This field is required. Please enter the state"
+msgstr ""
+
+#: library/fields/captcha.php:51
+msgid "Captcha"
+msgstr ""
+
+#: library/fields/captcha.php:67 library/fields/custom.php:82
+#: library/fields/date.php:278 library/fields/email.php:94
+#: library/fields/hidden.php:67 library/fields/html.php:67
+#: library/fields/multivalue.php:93 library/fields/name.php:262
+#: library/fields/number.php:95 library/fields/phone.php:100
+#: library/fields/singlevalue.php:94 library/fields/text.php:120
+#: library/fields/time.php:91 library/fields/upload.php:91
+#: library/fields/website.php:94
+msgid "Field label"
+msgstr ""
+
+#: library/fields/custom.php:46
+msgid "Custom field"
+msgstr ""
+
+#: library/fields/custom.php:92 library/fields/date.php:345
+msgid "Field type"
+msgstr ""
+
+#: library/fields/custom.php:96 library/fields/text.php:106
+msgid "Single line text"
+msgstr ""
+
+#: library/fields/custom.php:100
+msgid "Multi line text"
+msgstr ""
+
+#: library/fields/custom.php:104
+msgid "Dropdown"
+msgstr ""
+
+#: library/fields/custom.php:108
+msgid "Multi select"
+msgstr ""
+
+#: library/fields/custom.php:112 library/fields/number.php:56
+#: library/fields/number.php:165
+msgid "Number"
+msgstr ""
+
+#: library/fields/custom.php:116 library/fields/multivalue.php:132
+msgid "Checkboxes"
+msgstr ""
+
+#: library/fields/custom.php:120 library/fields/singlevalue.php:133
+msgid "Radio buttons"
+msgstr ""
+
+#: library/fields/custom.php:135
+msgid "Custom field name"
+msgstr ""
+
+#: library/fields/custom.php:139
+msgid "Existing field"
+msgstr ""
+
+#: library/fields/custom.php:143
+msgid "New field"
+msgstr ""
+
+#: library/fields/custom.php:152
+msgid "Pick existing field"
+msgstr ""
+
+#: library/fields/custom.php:263
+msgid "field name"
+msgstr ""
+
+#: library/fields/custom.php:265
+msgid "This field is required. Please enter the %s"
+msgstr ""
+
+#: library/fields/date.php:73
+msgid "Restrict date choices"
+msgstr ""
+
+#: library/fields/date.php:84
+msgid "How to restrict"
+msgstr ""
+
+#: library/fields/date.php:88
+msgid "Days of week"
+msgstr ""
+
+#: library/fields/date.php:92
+msgid "Custom dates"
+msgstr ""
+
+#: library/fields/date.php:101
+msgid "Don't allow user to select following days:"
+msgstr ""
+
+#: library/fields/date.php:218
+msgid "Restrict Year Range"
+msgstr ""
+
+#: library/fields/date.php:227
+msgid "Minimum Year"
+msgstr ""
+
+#: library/fields/date.php:234
+msgid "Maximum year"
+msgstr ""
+
+#: library/fields/date.php:324
+msgid "Date format"
+msgstr ""
+
+#: library/fields/date.php:328
+msgid "Y-m-d"
+msgstr ""
+
+#: library/fields/date.php:332
+msgid "m/d/Y"
+msgstr ""
+
+#: library/fields/date.php:336
+msgid "d/m/Y"
+msgstr ""
+
+#: library/fields/date.php:351
+msgid "Date picker"
+msgstr ""
+
+#: library/fields/date.php:355
+msgid "Drop downs"
+msgstr ""
+
+#: library/fields/date.php:359
+msgid "Txt inputs"
+msgstr ""
+
+#: library/fields/date.php:375
+msgid "Use calendar icon"
+msgstr ""
+
+#: library/fields/date.php:393
+msgid "Choose Date"
+msgstr ""
+
+#: library/fields/date.php:531 library/fields/date.php:593
+msgid "Year"
+msgstr ""
+
+#: library/fields/date.php:547 library/fields/date.php:609
+msgid "Month"
+msgstr ""
+
+#: library/fields/date.php:563 library/fields/date.php:625
+msgid "Day"
+msgstr ""
+
+#: library/fields/date.php:826
+msgid "This field is required. Please enter a valid date"
+msgstr ""
+
+#: library/fields/date.php:829 library/fields/date.php:831
+msgid "This is not valid date"
+msgstr ""
+
+#: library/fields/date.php:855
+msgid "This field is required. Please enter the date"
+msgstr ""
+
+#: library/fields/date.php:859
+msgid "Please enter a valid date"
+msgstr ""
+
+#: library/fields/date.php:868 library/fields/date.php:873
+#: library/fields/date.php:878
+msgid "Please enter a valid year"
+msgstr ""
+
+#: library/fields/email.php:55
+msgid "Email"
+msgstr ""
+
+#: library/fields/email.php:137 library/fields/website.php:137
+msgid "Enable validation"
+msgstr ""
+
+#: library/fields/email.php:148 library/fields/website.php:148
+msgid "Custom validation error message"
+msgstr ""
+
+#: library/fields/email.php:165
+msgid "Email Address"
+msgstr ""
+
+#: library/fields/email.php:254
+msgid "This field is required. Please input a valid email"
+msgstr ""
+
+#: library/fields/email.php:257
+msgid "This is not a valid email"
+msgstr ""
+
+#: library/fields/email.php:288
+msgid "This field is required. Please enter the email"
+msgstr ""
+
+#: library/fields/email.php:295
+msgid "Please enter a valid email address"
+msgstr ""
+
+#: library/fields/hidden.php:51
+msgid "Hidden field"
+msgstr ""
+
+#: library/fields/hidden.php:82 library/fields/html.php:74
+msgid "Default value"
+msgstr ""
+
+#: library/fields/html.php:51 library/fields/html.php:88
+msgid "HTML"
+msgstr ""
+
+#: library/fields/multivalue.php:51 library/fields/multivalue.php:157
+msgid "Multiple Choices"
+msgstr ""
+
+#: library/fields/multivalue.php:121 library/fields/singlevalue.php:122
+msgid "Choice input type"
+msgstr ""
+
+#: library/fields/multivalue.php:128
+msgid "Multi Select Field"
+msgstr ""
+
+#: library/fields/multivalue.php:141 library/fields/singlevalue.php:142
+msgid "Choices"
+msgstr ""
+
+#: library/fields/multivalue.php:160 library/fields/singlevalue.php:161
+msgid "Option 1"
+msgstr ""
+
+#: library/fields/multivalue.php:164 library/fields/singlevalue.php:165
+msgid "Option 2"
+msgstr ""
+
+#: library/fields/multivalue.php:290 library/fields/singlevalue.php:285
+msgid "This field is required. Please select a value"
+msgstr ""
+
+#: library/fields/multivalue.php:310 library/fields/singlevalue.php:305
+msgid "This field is required. Please select a %s value"
+msgstr ""
+
+#: library/fields/name.php:96
+msgid "Use multiple name fields"
+msgstr ""
+
+#: library/fields/name.php:111 library/fields/name.php:300
+#: library/modules/custom-forms/admin/admin-loader.php:194
+msgid "Prefix"
+msgstr ""
+
+#: library/fields/name.php:127 library/fields/name.php:165
+#: library/fields/name.php:203 library/fields/name.php:241
+#: library/fields/name.php:282 library/fields/postdata.php:166
+#: library/fields/postdata.php:203 library/fields/postdata.php:240
+#: library/fields/postdata.php:270 library/fields/postdata.php:300
+#: library/fields/postdata.php:331
+msgid "Description (below field)"
+msgstr ""
+
+#: library/fields/name.php:142 library/fields/name.php:301
+#: library/modules/custom-forms/admin/admin-loader.php:195
+msgid "First Name"
+msgstr ""
+
+#: library/fields/name.php:180 library/fields/name.php:303
+#: library/modules/custom-forms/admin/admin-loader.php:196
+msgid "Middle Name"
+msgstr ""
+
+#: library/fields/name.php:218 library/fields/name.php:305
+#: library/modules/custom-forms/admin/admin-loader.php:197
+msgid "Last Name"
+msgstr ""
+
+#: library/fields/name.php:272
+msgid "Field placeholder (optional)"
+msgstr ""
+
+#: library/fields/name.php:299
+msgid "E.g. John Doe"
+msgstr ""
+
+#: library/fields/name.php:302
+msgid "E.g. John"
+msgstr ""
+
+#: library/fields/name.php:304
+msgid "E.g. Smith"
+msgstr ""
+
+#: library/fields/name.php:306
+msgid "E.g. Doe"
+msgstr ""
+
+#: library/fields/name.php:714
+msgid "This field is required. Please input your name"
+msgstr ""
+
+#: library/fields/name.php:725
+msgid "This field is required. Please input your first name"
+msgstr ""
+
+#: library/fields/name.php:728
+msgid "This field is required. Please input your middle name"
+msgstr ""
+
+#: library/fields/name.php:731
+msgid "This field is required. Please input your last name"
+msgstr ""
+
+#: library/fields/number.php:127
+msgid "Limit input"
+msgstr ""
+
+#: library/fields/number.php:138
+msgid "Min"
+msgstr ""
+
+#: library/fields/number.php:147
+msgid "Max"
+msgstr ""
+
+#: library/fields/number.php:166
+msgid "E.g. 10"
+msgstr ""
+
+#: library/fields/number.php:266
+msgid "This field is required. Please enter digits"
+msgstr ""
+
+#: library/fields/number.php:269
+msgid "This is not valid number"
+msgstr ""
+
+#: library/fields/number.php:289
+msgid "This field is required. Please input a number"
+msgstr ""
+
+#: library/fields/number.php:292
+msgid "Only numbers allowed"
+msgstr ""
+
+#: library/fields/number.php:298
+msgid "The number shoud be less than %d and greater than %d"
+msgstr ""
+
+#: library/fields/pagination.php:57
+#: library/modules/custom-forms/admin/admin-loader.php:206
+msgid "Pagination"
+msgstr ""
+
+#: library/fields/pagination.php:74
+msgid "Step label"
+msgstr ""
+
+#: library/fields/pagination.php:105
+msgid "« Previous Step"
+msgstr ""
+
+#: library/fields/pagination.php:106
+msgid "Next Step »"
+msgstr ""
+
+#: library/fields/phone.php:61 library/fields/phone.php:212
+msgid "Phone"
+msgstr ""
+
+#: library/fields/phone.php:134
+msgid "Use character limit"
+msgstr ""
+
+#: library/fields/phone.php:144 library/fields/text.php:172
+msgid "Limit field to:"
+msgstr ""
+
+#: library/fields/phone.php:156 library/fields/text.php:185
+msgid "Characters"
+msgstr ""
+
+#: library/fields/phone.php:173
+msgid "Enable Validation"
+msgstr ""
+
+#: library/fields/phone.php:187
+msgid "Standard %s"
+msgstr ""
+
+#: library/fields/phone.php:191 library/fields/phone.php:256
+msgid "International"
+msgstr ""
+
+#: library/fields/phone.php:213
+msgid "E.g. +1 300 400 5000"
+msgstr ""
+
+#: library/fields/phone.php:339 library/fields/phone.php:362
+msgid "This field is required. Please input a phone number"
+msgstr ""
+
+#: library/fields/phone.php:340
+msgid "Please input a valid phone number"
+msgstr ""
+
+#: library/fields/phone.php:381
+msgid "Invalid phone number. Please make sure the format is %s"
+msgstr ""
+
+#: library/fields/postdata.php:46
+msgid "Post data"
+msgstr ""
+
+#: library/fields/postdata.php:83
+msgid "Submitted data status"
+msgstr ""
+
+#: library/fields/postdata.php:88
+msgid "Draft"
+msgstr ""
+
+#: library/fields/postdata.php:92
+msgid "Pending Review"
+msgstr ""
+
+#: library/fields/postdata.php:96
+msgid "Published"
+msgstr ""
+
+#: library/fields/postdata.php:111
+msgid "Set default author"
+msgstr ""
+
+#: library/fields/postdata.php:122
+msgid "Pick user to be default author"
+msgstr ""
+
+#: library/fields/postdata.php:143
+msgid "Post title"
+msgstr ""
+
+#: library/fields/postdata.php:180
+msgid "Post content"
+msgstr ""
+
+#: library/fields/postdata.php:217
+msgid "Post excerpt"
+msgstr ""
+
+#: library/fields/postdata.php:254
+msgid "Featured image"
+msgstr ""
+
+#: library/fields/postdata.php:284
+msgid "Category"
+msgstr ""
+
+#: library/fields/postdata.php:314
+msgid "Tags"
+msgstr ""
+
+#: library/fields/postdata.php:348
+msgid "This post has custom fields"
+msgstr ""
+
+#: library/fields/postdata.php:757
+msgid "This field is required. Please fill in post data"
+msgstr ""
+
+#: library/fields/postdata.php:773
+msgid "This field is required. Please enter the post title"
+msgstr ""
+
+#: library/fields/postdata.php:776
+msgid "This field is required. Please enter the post content"
+msgstr ""
+
+#: library/fields/postdata.php:779
+msgid "This field is required. Please enter the post excerpt"
+msgstr ""
+
+#: library/fields/postdata.php:782
+msgid "This field is required. Please upload a post image"
+msgstr ""
+
+#: library/fields/postdata.php:785
+msgid "This field is required. Please select a post category"
+msgstr ""
+
+#: library/fields/postdata.php:788
+msgid "This field is required. Please select a post tag"
+msgstr ""
+
+#: library/fields/section.php:51
+msgid "Section"
+msgstr ""
+
+#: library/fields/section.php:67
+msgid "Section title"
+msgstr ""
+
+#: library/fields/section.php:75
+msgid "Section subtitle"
+msgstr ""
+
+#: library/fields/section.php:87
+msgid "Section with border"
+msgstr ""
+
+#: library/fields/section.php:103
+msgid "Form Section"
+msgstr ""
+
+#: library/fields/singlevalue.php:52 library/fields/singlevalue.php:158
+msgid "Single Choice"
+msgstr ""
+
+#: library/fields/singlevalue.php:129
+msgid "Select dropdown"
+msgstr ""
+
+#: library/fields/text.php:61 library/fields/text.php:210
+msgid "Text"
+msgstr ""
+
+#: library/fields/text.php:100
+msgid "Text input type"
+msgstr ""
+
+#: library/fields/text.php:110
+msgid "Paragraph text"
+msgstr ""
+
+#: library/fields/text.php:160
+msgid "Use input limit"
+msgstr ""
+
+#: library/fields/text.php:189
+msgid "Words"
+msgstr ""
+
+#: library/fields/text.php:314
+msgid "This field is required. Please enter text"
+msgstr ""
+
+#: library/fields/text.php:318 library/fields/text.php:347
+msgid "You exceeded the allowed amount of characters. Please check again"
+msgstr ""
+
+#: library/fields/text.php:320 library/fields/text.php:350
+msgid "You exceeded the allowed amount of words. Please check again"
+msgstr ""
+
+#: library/fields/text.php:342
+msgid "This field is required. Please enter some text"
+msgstr ""
+
+#: library/fields/time.php:51
+msgid "Time"
+msgstr ""
+
+#: library/fields/time.php:99
+msgid "Time format"
+msgstr ""
+
+#: library/fields/time.php:105
+msgid "12 hour"
+msgstr ""
+
+#: library/fields/time.php:109
+msgid "24 hour"
+msgstr ""
+
+#: library/fields/time.php:118
+msgid "Hours field"
+msgstr ""
+
+#: library/fields/time.php:142
+msgid "Minutes field"
+msgstr ""
+
+#: library/fields/time.php:175
+msgid "Hours"
+msgstr ""
+
+#: library/fields/time.php:176
+msgid "E.g. 08"
+msgstr ""
+
+#: library/fields/time.php:177
+msgid "Minutes"
+msgstr ""
+
+#: library/fields/time.php:178
+msgid "E.g. 00"
+msgstr ""
+
+#: library/fields/time.php:326
+msgid "AM"
+msgstr ""
+
+#: library/fields/time.php:330
+msgid "PM"
+msgstr ""
+
+#: library/fields/time.php:376
+msgid "This field is required. Please input a valid hour"
+msgstr ""
+
+#: library/fields/time.php:377
+msgid "This field is required. Please input a valid minute"
+msgstr ""
+
+#: library/fields/time.php:396
+msgid "This field is required. Please enter a valid hour"
+msgstr ""
+
+#: library/fields/time.php:397
+msgid "This field is required. Please enter a valid minute"
+msgstr ""
+
+#: library/fields/time.php:405
+msgid "Please enter the hour"
+msgstr ""
+
+#: library/fields/time.php:408
+msgid "Please enter the minute"
+msgstr ""
+
+#: library/fields/time.php:419
+msgid "Please enter a valid hour"
+msgstr ""
+
+#: library/fields/time.php:422
+msgid "Please enter a valid minute"
+msgstr ""
+
+#: library/fields/upload.php:51
+msgid "File Upload"
+msgstr ""
+
+#: library/fields/upload.php:115
+msgid "Show description"
+msgstr ""
+
+#: library/fields/upload.php:126
+msgid "Description text"
+msgstr ""
+
+#: library/fields/upload.php:151
+msgid "Upload file"
+msgstr ""
+
+#: library/fields/upload.php:202
+msgid "This field is required. Please upload a file"
+msgstr ""
+
+#: library/fields/website.php:56 library/fields/website.php:163
+msgid "Website"
+msgstr ""
+
+#: library/fields/website.php:164
+msgid "E.g. http://www.example.com"
+msgstr ""
+
+#: library/fields/website.php:249
+msgid "This field is required. Please input a valid URL"
+msgstr ""
+
+#: library/fields/website.php:260
+msgid "This is not valid URL"
+msgstr ""
+
+#: library/fields/website.php:290
+msgid "This field is required. Please input a url"
+msgstr ""
+
+#: library/fields/website.php:297
+msgid "Please enter a valid Website URL (e.g. https://premium.wpmudev.org/)."
+msgstr ""
+
+#: library/helpers/helper-core.php:84
+msgid "Invalid request, you are not allowed to do that action."
+msgstr ""
+
+#: library/helpers/helper-core.php:220
+msgid "Submitting form, please wait"
+msgstr ""
+
+#: library/helpers/helper-core.php:221
+msgid "An error occured processing the form. Please try again"
+msgstr ""
+
+#: library/helpers/helper-core.php:222
+#: library/modules/custom-forms/admin/admin-loader.php:143
+#: library/modules/custom-forms/admin/admin-loader.php:288
+#: library/modules/polls/admin/admin-loader.php:160
+#: library/modules/quizzes/admin/admin-loader.php:219
+msgid "Back"
+msgstr ""
+
+#: library/helpers/helper-core.php:223
+#: library/modules/custom-forms/admin/admin-loader.php:142
+#: library/modules/custom-forms/admin/admin-loader.php:289
+msgid "Next"
+msgstr ""
+
+#: library/helpers/helper-core.php:224
+#: library/modules/custom-forms/front/front-render.php:1309
+#: library/modules/polls/front/front-render.php:219
+#: library/render/class-render-form.php:249
+msgid "Submit"
+msgstr ""
+
+#: library/helpers/helper-core.php:226
+msgid "Processing payment, please wait"
+msgstr ""
+
+#: library/helpers/helper-core.php:227
+msgid "Success! Payment confirmed. Submitting form, please wait"
+msgstr ""
+
+#: library/helpers/helper-core.php:228
+msgid "Error! Something went wrong when verifying the payment"
+msgstr ""
+
+#: library/helpers/helper-core.php:230
+msgid "Invalid Captcha"
+msgstr ""
+
+#: library/helpers/helper-core.php:233
+msgid "Submitting vote, please wait"
+msgstr ""
+
+#: library/helpers/helper-core.php:234
+msgid "An error occured saving the vote. Please try again"
+msgstr ""
+
+#: library/helpers/helper-fields.php:175
+msgid "User IP Address"
+msgstr ""
+
+#: library/helpers/helper-fields.php:176
+msgid "Date (mm/dd/yyyy)"
+msgstr ""
+
+#: library/helpers/helper-fields.php:177
+msgid "Date (dd/mm/yyyy)"
+msgstr ""
+
+#: library/helpers/helper-fields.php:178
+msgid "Embed Post/Page ID"
+msgstr ""
+
+#: library/helpers/helper-fields.php:179
+msgid "Embed Post/Page Title"
+msgstr ""
+
+#: library/helpers/helper-fields.php:180
+msgid "Embed URL"
+msgstr ""
+
+#: library/helpers/helper-fields.php:181
+msgid "HTTP User Agent"
+msgstr ""
+
+#: library/helpers/helper-fields.php:182
+msgid "HTTP Refer URL"
+msgstr ""
+
+#: library/helpers/helper-fields.php:183
+msgid "User Display Name"
+msgstr ""
+
+#: library/helpers/helper-fields.php:184
+msgid "User Email"
+msgstr ""
+
+#: library/helpers/helper-fields.php:185
+msgid "User Login"
+msgstr ""
+
+#: library/helpers/helper-fields.php:227
+msgid "Mr."
+msgstr ""
+
+#: library/helpers/helper-fields.php:228
+msgid "Mrs."
+msgstr ""
+
+#: library/helpers/helper-fields.php:229
+msgid "Ms."
+msgstr ""
+
+#: library/helpers/helper-fields.php:230
+msgid "Miss"
+msgstr ""
+
+#: library/helpers/helper-fields.php:231
+msgid "Dr."
+msgstr ""
+
+#: library/helpers/helper-fields.php:232
+msgid "Prof."
+msgstr ""
+
+#: library/helpers/helper-fields.php:348
+msgid "Afghanistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:349
+msgid "Albania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:350
+msgid "Algeria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:351
+msgid "American Samoa"
+msgstr ""
+
+#: library/helpers/helper-fields.php:352
+msgid "Andorra"
+msgstr ""
+
+#: library/helpers/helper-fields.php:353
+msgid "Angola"
+msgstr ""
+
+#: library/helpers/helper-fields.php:354
+msgid "Antigua and Barbuda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:355
+msgid "Argentina"
+msgstr ""
+
+#: library/helpers/helper-fields.php:356
+msgid "Armenia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:357
+msgid "Australia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:358
+msgid "Austria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:359
+msgid "Azerbaijan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:360
+msgid "Bahamas"
+msgstr ""
+
+#: library/helpers/helper-fields.php:361
+msgid "Bahrain"
+msgstr ""
+
+#: library/helpers/helper-fields.php:362
+msgid "Bangladesh"
+msgstr ""
+
+#: library/helpers/helper-fields.php:363
+msgid "Barbados"
+msgstr ""
+
+#: library/helpers/helper-fields.php:364
+msgid "Belarus"
+msgstr ""
+
+#: library/helpers/helper-fields.php:365
+msgid "Belgium"
+msgstr ""
+
+#: library/helpers/helper-fields.php:366
+msgid "Belize"
+msgstr ""
+
+#: library/helpers/helper-fields.php:367
+msgid "Benin"
+msgstr ""
+
+#: library/helpers/helper-fields.php:368
+msgid "Bermuda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:369
+msgid "Bhutan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:370
+msgid "Bolivia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:371
+msgid "Bosnia and Herzegovina"
+msgstr ""
+
+#: library/helpers/helper-fields.php:372
+msgid "Botswana"
+msgstr ""
+
+#: library/helpers/helper-fields.php:373
+msgid "Brazil"
+msgstr ""
+
+#: library/helpers/helper-fields.php:374
+msgid "Brunei"
+msgstr ""
+
+#: library/helpers/helper-fields.php:375
+msgid "Bulgaria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:376
+msgid "Burkina Faso"
+msgstr ""
+
+#: library/helpers/helper-fields.php:377
+msgid "Burundi"
+msgstr ""
+
+#: library/helpers/helper-fields.php:378
+msgid "Cambodia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:379
+msgid "Cameroon"
+msgstr ""
+
+#: library/helpers/helper-fields.php:380
+msgid "Canada"
+msgstr ""
+
+#: library/helpers/helper-fields.php:381
+msgid "Cape Verde"
+msgstr ""
+
+#: library/helpers/helper-fields.php:382
+msgid "Cayman Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:383
+msgid "Central African Republic"
+msgstr ""
+
+#: library/helpers/helper-fields.php:384
+msgid "Chad"
+msgstr ""
+
+#: library/helpers/helper-fields.php:385
+msgid "Chile"
+msgstr ""
+
+#: library/helpers/helper-fields.php:386
+msgid "China"
+msgstr ""
+
+#: library/helpers/helper-fields.php:387
+msgid "Colombia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:388
+msgid "Comoros"
+msgstr ""
+
+#: library/helpers/helper-fields.php:389
+msgid "Congo, Democratic Republic of the"
+msgstr ""
+
+#: library/helpers/helper-fields.php:390
+msgid "Congo, Republic of the"
+msgstr ""
+
+#: library/helpers/helper-fields.php:391
+msgid "Costa Rica"
+msgstr ""
+
+#: library/helpers/helper-fields.php:392
+msgid "Côte d'Ivoire"
+msgstr ""
+
+#: library/helpers/helper-fields.php:393
+msgid "Croatia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:394
+msgid "Cuba"
+msgstr ""
+
+#: library/helpers/helper-fields.php:395
+msgid "Curaçao"
+msgstr ""
+
+#: library/helpers/helper-fields.php:396
+msgid "Cyprus"
+msgstr ""
+
+#: library/helpers/helper-fields.php:397
+msgid "Czech Republic"
+msgstr ""
+
+#: library/helpers/helper-fields.php:398
+msgid "Denmark"
+msgstr ""
+
+#: library/helpers/helper-fields.php:399
+msgid "Djibouti"
+msgstr ""
+
+#: library/helpers/helper-fields.php:400
+msgid "Dominica"
+msgstr ""
+
+#: library/helpers/helper-fields.php:401
+msgid "Dominican Republic"
+msgstr ""
+
+#: library/helpers/helper-fields.php:402
+msgid "East Timor"
+msgstr ""
+
+#: library/helpers/helper-fields.php:403
+msgid "Ecuador"
+msgstr ""
+
+#: library/helpers/helper-fields.php:404
+msgid "Egypt"
+msgstr ""
+
+#: library/helpers/helper-fields.php:405
+msgid "El Salvador"
+msgstr ""
+
+#: library/helpers/helper-fields.php:406
+msgid "Equatorial Guinea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:407
+msgid "Eritrea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:408
+msgid "Estonia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:409
+msgid "Ethiopia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:410
+msgid "Faroe Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:411
+msgid "Fiji"
+msgstr ""
+
+#: library/helpers/helper-fields.php:412
+msgid "Finland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:413
+msgid "France"
+msgstr ""
+
+#: library/helpers/helper-fields.php:414
+msgid "French Polynesia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:415
+msgid "Gabon"
+msgstr ""
+
+#: library/helpers/helper-fields.php:416
+msgid "Gambia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:417
+msgid "Georgia, Country"
+msgstr ""
+
+#: library/helpers/helper-fields.php:418
+msgid "Germany"
+msgstr ""
+
+#: library/helpers/helper-fields.php:419
+msgid "Ghana"
+msgstr ""
+
+#: library/helpers/helper-fields.php:420
+msgid "Greece"
+msgstr ""
+
+#: library/helpers/helper-fields.php:421
+msgid "Greenland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:422
+msgid "Grenada"
+msgstr ""
+
+#: library/helpers/helper-fields.php:423
+msgid "Guam"
+msgstr ""
+
+#: library/helpers/helper-fields.php:424
+msgid "Guatemala"
+msgstr ""
+
+#: library/helpers/helper-fields.php:425
+msgid "Guinea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:426
+msgid "Guinea-Bissau"
+msgstr ""
+
+#: library/helpers/helper-fields.php:427
+msgid "Guyana"
+msgstr ""
+
+#: library/helpers/helper-fields.php:428
+msgid "Haiti"
+msgstr ""
+
+#: library/helpers/helper-fields.php:429
+msgid "Honduras"
+msgstr ""
+
+#: library/helpers/helper-fields.php:430
+msgid "Hong Kong"
+msgstr ""
+
+#: library/helpers/helper-fields.php:431
+msgid "Hungary"
+msgstr ""
+
+#: library/helpers/helper-fields.php:432
+msgid "Iceland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:433
+msgid "India"
+msgstr ""
+
+#: library/helpers/helper-fields.php:434
+msgid "Indonesia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:435
+msgid "Iran"
+msgstr ""
+
+#: library/helpers/helper-fields.php:436
+msgid "Iraq"
+msgstr ""
+
+#: library/helpers/helper-fields.php:437
+msgid "Ireland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:438
+msgid "Israel"
+msgstr ""
+
+#: library/helpers/helper-fields.php:439
+msgid "Italy"
+msgstr ""
+
+#: library/helpers/helper-fields.php:440
+msgid "Jamaica"
+msgstr ""
+
+#: library/helpers/helper-fields.php:441
+msgid "Japan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:442
+msgid "Jordan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:443
+msgid "Kazakhstan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:444 library/helpers/helper-fields.php:448
+msgid "Kenya"
+msgstr ""
+
+#: library/helpers/helper-fields.php:445
+msgid "Kiribati"
+msgstr ""
+
+#: library/helpers/helper-fields.php:446
+msgid "North Korea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:447
+msgid "South Korea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:449
+msgid "Kosovo"
+msgstr ""
+
+#: library/helpers/helper-fields.php:450
+msgid "Kuwait"
+msgstr ""
+
+#: library/helpers/helper-fields.php:451
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:452
+msgid "Laos"
+msgstr ""
+
+#: library/helpers/helper-fields.php:453
+msgid "Latvia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:454
+msgid "Lebanon"
+msgstr ""
+
+#: library/helpers/helper-fields.php:455
+msgid "Lesotho"
+msgstr ""
+
+#: library/helpers/helper-fields.php:456
+msgid "Liberia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:457
+msgid "Libya"
+msgstr ""
+
+#: library/helpers/helper-fields.php:458
+msgid "Liechtenstein"
+msgstr ""
+
+#: library/helpers/helper-fields.php:459
+msgid "Lithuania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:460
+msgid "Luxembourg"
+msgstr ""
+
+#: library/helpers/helper-fields.php:461
+msgid "Macedonia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:462
+msgid "Madagascar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:463
+msgid "Malawi"
+msgstr ""
+
+#: library/helpers/helper-fields.php:464
+msgid "Malaysia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:465
+msgid "Maldives"
+msgstr ""
+
+#: library/helpers/helper-fields.php:466
+msgid "Mali"
+msgstr ""
+
+#: library/helpers/helper-fields.php:467
+msgid "Malta"
+msgstr ""
+
+#: library/helpers/helper-fields.php:468
+msgid "Marshall Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:469
+msgid "Mauritania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:470
+msgid "Mauritius"
+msgstr ""
+
+#: library/helpers/helper-fields.php:471
+msgid "Mexico"
+msgstr ""
+
+#: library/helpers/helper-fields.php:472
+msgid "Micronesia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:473
+msgid "Moldova"
+msgstr ""
+
+#: library/helpers/helper-fields.php:474
+msgid "Monaco"
+msgstr ""
+
+#: library/helpers/helper-fields.php:475
+msgid "Mongolia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:476
+msgid "Montenegro"
+msgstr ""
+
+#: library/helpers/helper-fields.php:477
+msgid "Morocco"
+msgstr ""
+
+#: library/helpers/helper-fields.php:478
+msgid "Mozambique"
+msgstr ""
+
+#: library/helpers/helper-fields.php:479
+msgid "Myanmar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:480
+msgid "Namibia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:481
+msgid "Nauru"
+msgstr ""
+
+#: library/helpers/helper-fields.php:482
+msgid "Nepal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:483
+msgid "Netherlands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:484
+msgid "New Zealand"
+msgstr ""
+
+#: library/helpers/helper-fields.php:485
+msgid "Nicaragua"
+msgstr ""
+
+#: library/helpers/helper-fields.php:486
+msgid "Niger"
+msgstr ""
+
+#: library/helpers/helper-fields.php:487
+msgid "Nigeria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:488
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:489
+msgid "Norway"
+msgstr ""
+
+#: library/helpers/helper-fields.php:490
+msgid "Oman"
+msgstr ""
+
+#: library/helpers/helper-fields.php:491
+msgid "Pakistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:492
+msgid "Palau"
+msgstr ""
+
+#: library/helpers/helper-fields.php:493
+msgid "Palestine, State of"
+msgstr ""
+
+#: library/helpers/helper-fields.php:494
+msgid "Panama"
+msgstr ""
+
+#: library/helpers/helper-fields.php:495
+msgid "Papua New Guinea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:496
+msgid "Paraguay"
+msgstr ""
+
+#: library/helpers/helper-fields.php:497
+msgid "Peru"
+msgstr ""
+
+#: library/helpers/helper-fields.php:498
+msgid "Philippines"
+msgstr ""
+
+#: library/helpers/helper-fields.php:499
+msgid "Poland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:500
+msgid "Portugal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:501
+msgid "Puerto Rico"
+msgstr ""
+
+#: library/helpers/helper-fields.php:502
+msgid "Qatar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:503
+msgid "Romania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:504
+msgid "Russia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:505
+msgid "Rwanda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:506
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: library/helpers/helper-fields.php:507
+msgid "Saint Lucia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:508
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+#: library/helpers/helper-fields.php:509
+msgid "Samoa"
+msgstr ""
+
+#: library/helpers/helper-fields.php:510
+msgid "San Marino"
+msgstr ""
+
+#: library/helpers/helper-fields.php:511
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: library/helpers/helper-fields.php:512
+msgid "Saudi Arabia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:513
+msgid "Senegal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:514
+msgid "Serbia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:515
+msgid "Seychelles"
+msgstr ""
+
+#: library/helpers/helper-fields.php:516
+msgid "Sierra Leone"
+msgstr ""
+
+#: library/helpers/helper-fields.php:517
+msgid "Singapore"
+msgstr ""
+
+#: library/helpers/helper-fields.php:518
+msgid "Sint Maarten"
+msgstr ""
+
+#: library/helpers/helper-fields.php:519
+msgid "Slovakia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:520
+msgid "Slovenia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:521
+msgid "Solomon Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:522
+msgid "Somalia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:523
+msgid "South Africa"
+msgstr ""
+
+#: library/helpers/helper-fields.php:524
+msgid "Spain"
+msgstr ""
+
+#: library/helpers/helper-fields.php:525
+msgid "Sri Lanka"
+msgstr ""
+
+#: library/helpers/helper-fields.php:526
+msgid "Sudan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:527
+msgid "Sudan, South"
+msgstr ""
+
+#: library/helpers/helper-fields.php:528
+msgid "Suriname"
+msgstr ""
+
+#: library/helpers/helper-fields.php:529
+msgid "Swaziland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:530
+msgid "Sweden"
+msgstr ""
+
+#: library/helpers/helper-fields.php:531
+msgid "Switzerland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:532
+msgid "Syria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:533
+msgid "Taiwan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:534
+msgid "Tajikistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:535
+msgid "Tanzania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:536
+msgid "Thailand"
+msgstr ""
+
+#: library/helpers/helper-fields.php:537
+msgid "Togo"
+msgstr ""
+
+#: library/helpers/helper-fields.php:538
+msgid "Tonga"
+msgstr ""
+
+#: library/helpers/helper-fields.php:539
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: library/helpers/helper-fields.php:540
+msgid "Tunisia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:541
+msgid "Turkey"
+msgstr ""
+
+#: library/helpers/helper-fields.php:542
+msgid "Turkmenistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:543
+msgid "Tuvalu"
+msgstr ""
+
+#: library/helpers/helper-fields.php:544
+msgid "Uganda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:545
+msgid "Ukraine"
+msgstr ""
+
+#: library/helpers/helper-fields.php:546
+msgid "United Arab Emirates"
+msgstr ""
+
+#: library/helpers/helper-fields.php:547
+msgid "United Kingdom"
+msgstr ""
+
+#: library/helpers/helper-fields.php:548
+msgid "United States of America (USA)"
+msgstr ""
+
+#: library/helpers/helper-fields.php:549
+msgid "Uruguay"
+msgstr ""
+
+#: library/helpers/helper-fields.php:550
+msgid "Uzbekistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:551
+msgid "Vanuatu"
+msgstr ""
+
+#: library/helpers/helper-fields.php:552
+msgid "Vatican City"
+msgstr ""
+
+#: library/helpers/helper-fields.php:553
+msgid "Venezuela"
+msgstr ""
+
+#: library/helpers/helper-fields.php:554
+msgid "Vietnam"
+msgstr ""
+
+#: library/helpers/helper-fields.php:555
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: library/helpers/helper-fields.php:556
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: library/helpers/helper-fields.php:557
+msgid "Yemen"
+msgstr ""
+
+#: library/helpers/helper-fields.php:558
+msgid "Zambia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:559
+msgid "Zimbabwe"
+msgstr ""
+
+#: library/helpers/helper-forms.php:699
+msgid "&hellip;"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:223
+msgid "install"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:230
+msgid ""
+"Important updates are available for <strong>%s</strong>. Install the free "
+"WPMU DEV Dashboard plugin now for updates and support!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:232
+msgid ""
+"<strong>%s</strong> is almost ready - install the free WPMU DEV Dashboard "
+"plugin for updates and support!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:236
+msgid ""
+"Important updates are available for your WPMU DEV plugins/themes. Install "
+"the free WPMU DEV Dashboard plugin now for updates and support!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:238
+msgid ""
+"Almost ready - install the free WPMU DEV Dashboard plugin for updates and "
+"support!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:244
+msgid "Install Plugin"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:247
+#: library/lib/dash-notice/wpmudev-dash-notification.php:288
+msgid "Saving..."
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:248
+#: library/lib/dash-notice/wpmudev-dash-notification.php:289
+msgid "Dismiss"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:264
+msgid "activate"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:271
+msgid ""
+"Important updates are available for <strong>%s</strong>. Activate the WPMU "
+"DEV Dashboard to update now!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:273
+msgid "Just one more step to enable updates and support for <strong>%s</strong>!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:277
+msgid ""
+"Important updates are available for your WPMU DEV plugins/themes. Activate "
+"the WPMU DEV Dashboard to update now!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:279
+msgid ""
+"Just one more step - activate the WPMU DEV Dashboard plugin and you're all "
+"done!"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:285
+msgid "Activate WPMU DEV Dashboard"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:952
+msgid "We did not find any data for this plugin or theme..."
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1131
+msgid "%s changelog"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1161
+msgid "Current"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1167
+msgid "New"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1184
+msgid "Version %s"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1202
+msgid "Show all changes"
+msgstr ""
+
+#: library/lib/dash-notice/wpmudev-dash-notification.php:1203
+msgid "Hide details"
+msgstr ""
+
+#: library/model/class-form-entries-list-table.php:62
+msgid "No entries found."
+msgstr ""
+
+#: library/model/class-form-entries-list-table.php:157
+msgid "Select All"
+msgstr ""
+
+#: library/model/class-form-entries-list-table.php:282
+#: library/modules/custom-forms/admin/admin-page-entries.php:349
+msgid "View File"
+msgstr ""
+
+#: library/model/class-form-entries-list-table.php:290
+#: library/modules/custom-forms/admin/admin-page-entries.php:358
+msgid "Edit Post"
+msgstr ""
+
+#: library/model/class-form-entries-list-table.php:309
+msgid "Total %d"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:43
+#: library/modules/custom-forms/admin/admin-loader.php:132
+#: library/modules/custom-forms/admin/admin-page-new.php:21
+msgid "Edit Form"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:43
+#: library/modules/custom-forms/loader.php:118
+msgid "New Custom Form"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:44
+#: library/modules/polls/admin/admin-loader.php:44
+#: library/modules/quizzes/admin/admin-loader.php:47
+msgid "Entries:"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:44
+msgid "View Custom Form"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:128
+msgid "Choose Form Type"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:135
+msgid "Add New Field"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:136
+msgid "Save"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:137
+#: library/modules/polls/admin/admin-loader.php:162
+#: library/modules/quizzes/admin/admin-loader.php:221
+msgid "Continue"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:138
+#: library/modules/custom-forms/admin/admin-loader.php:282
+#: library/modules/custom-forms/front/front-render.php:451
+#: library/modules/polls/admin/admin-loader.php:163
+#: library/modules/quizzes/admin/admin-loader.php:222
+msgid "Finish"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:139
+msgid "Publish"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:140
+msgid "Form Settings"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:141
+msgid "Enter form name"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:144
+msgid "Click & Drag fields"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:145
+msgid "Standard"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:146
+msgid "Posts"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:147
+msgid "Pricing"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:148
+msgid "Back to Fields"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:149
+#: library/modules/custom-forms/admin/admin-page-view.php:70
+#: library/modules/polls/admin/admin-page-view.php:138
+#: library/modules/quizzes/admin/admin-page-view.php:111
+msgid "Clone"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:150
+msgid "General"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:151
+#: library/modules/custom-forms/admin/admin-loader.php:207
+msgid "Advanced"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:152
+msgid "Required field: %s"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:153
+msgid "You have not yet created any conditions."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:154
+msgid "Drag and drop fields from the sidebar to add them to your form."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:155
+#: library/modules/custom-forms/admin/admin-loader.php:156
+msgid "Custom class"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:157
+msgid "Delete field"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:161
+msgid "Conditional logic"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:162
+msgid "Set Up Conditions"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:163
+msgid "Edit Conditions"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:164
+msgid "Show"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:165
+msgid "Hide"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:166
+msgid "this field if"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:167
+msgid "Any"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:168
+msgid "is"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:169
+msgid "is not"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:170
+msgid "is greater than"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:171
+msgid "is less than"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:172
+msgid "contains"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:173
+msgid "starts with"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:174
+msgid "ends with"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:175
+msgid "of the following match"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:176
+msgid "Add a condition"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:178
+msgid "All"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:179
+msgid "Select option..."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:180
+msgid "more condition"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:181
+msgid "more conditions"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:185
+msgid "Add some variations of your product."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:186
+msgid "Display in list?"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:187
+msgid "Add Variation"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:188
+msgid "Image"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:190
+msgid "Price"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:201
+msgid "SETTINGS & BEHAVIOURS"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:202
+msgid "Preview Form"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:203
+#: library/modules/polls/admin/admin-loader.php:127
+msgid "Appearance"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:204
+msgid "Form behaviour"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:205
+msgid "Form emails"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:208
+msgid "Form style"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:209
+msgid "Fields style"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:210
+msgid "Default design"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:211
+msgid "Flat design"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:212
+msgid "Bold design"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:213
+msgid "Material design"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:214
+msgid "Custom design"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:215
+msgid "Open fields"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:216
+msgid "Enclosed fields"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:217
+msgid "Customize typography"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:218
+msgid "Enter custom font family name"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:219
+msgid "E.g. 'Arial', sans-serif"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:220
+msgid "Type the font family name, as you would in CSS"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:221
+msgid "Customize colors"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:222
+msgid "Font family"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:223
+msgid "Font size"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:224
+msgid "Font weight"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:225
+msgid "Custom text"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:226
+msgid "Enter your submit button text"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:227
+msgid "Use custom submit button text"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:228
+msgid "Use custom invalid form message"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:229
+msgid "Enter your invalid form message"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:230
+msgid "Use custom CSS for this module"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:231
+msgid "Available CSS Selectors (click to add)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:232
+msgid "Form lifespan"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:233
+msgid "After form submit"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:234
+#: library/modules/polls/admin/admin-loader.php:155
+msgid "Submission"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:235
+#: library/modules/polls/admin/admin-loader.php:156
+msgid "Enable AJAX"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:236
+msgid "Validation"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:237
+msgid "Security"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:238
+msgid "Form does not expire"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:239
+msgid "Expires on certain date"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:240
+msgid "Expires after x-submits"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:241
+msgid "Show a Thank you message"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:242
+msgid "Re-direct user to URL"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:243
+msgid "Server only"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:244
+msgid "On form submit"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:245
+msgid "Enable inline validation (as user types)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:246
+msgid "Enable honeypot protection"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:247
+msgid "Only logged-in users can submit"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:248
+msgid "Select font"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:249
+msgid "Custom user font"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:251
+msgid "Labels"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:252
+msgid "Border line"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:255
+msgid "Send user email"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:256
+msgid "Send me (admin) email"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:257
+msgid "Add form based data"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:258
+msgid "Subject"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:259
+msgid "Body"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:260
+msgid "Generate PDF using data"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:261
+msgid "Various service integrations (send to Mailchimp etc)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:262
+msgid "Static"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:263
+msgid "Hover"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:264
+msgid "Active"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:268
+msgid "minute(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:269
+msgid "hour(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:270
+msgid "day(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:271
+msgid "week(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:272
+msgid "month(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:273
+msgid "year(s)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:276
+msgid "None"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:277
+msgid "Progress bar"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:278
+msgid "Navigation Steps"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:279
+msgid ""
+"When this option is selected no header with pagination will show up on your "
+"form."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:280
+msgid ""
+"When this option is selected you will see a progress bar going from 0% on "
+"first page to 100% on last page."
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:281
+msgid "Last step label"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:283
+msgid "Edit last page 'back' button text"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:284
+msgid "« Previous"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:285
+msgid "Submit Button"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:286
+msgid "Background"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:287
+msgid "Upload Button"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:290
+msgid "Inputs"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:291
+msgid "Border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:160
+#: library/modules/polls/admin/admin-page-entries.php:108
+#: library/modules/quizzes/admin/admin-page-entries.php:129
+msgid "Your Exports"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:169
+#: library/modules/polls/admin/admin-page-entries.php:117
+#: library/modules/quizzes/admin/admin-page-entries.php:138
+msgid "Edit Schedule Export"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:268
+#: library/modules/polls/admin/admin-page-entries.php:228
+#: library/modules/quizzes/admin/admin-page-entries.php:207
+msgid "Showing %s of %s fields"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:372
+msgid "<strong>Country : </strong> %s"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:377
+msgid "<strong>%s : </strong> %s"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-entries.php:488
+#: library/modules/quizzes/admin/admin-page-entries.php:267
+msgid "Delete Entries"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-view.php:141
+#: library/modules/polls/admin/admin-page-view.php:208
+#: library/modules/quizzes/admin/admin-page-view.php:226
+msgid "Reset Views"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-view.php:142
+#: library/modules/quizzes/admin/admin-page-view.php:227
+msgid "Permanently Delete Entries"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-page-view.php:143
+msgid "Delete Forms"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:22
+msgid "Contact Forms"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:23
+msgid "A simple contact form for your users to contact you"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-action.php:162
+msgid "Error saving form"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-action.php:244
+msgid "There was an error saving the post data. Please try again"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-action.php:288
+#: library/modules/custom-forms/front/front-action.php:300
+msgid "Form entry saved"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-action.php:366
+msgid "Only logged in users can submit this form"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-action.php:409
+msgid "Error: Your form is not valid, please fix the errors!"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:210
+#: library/modules/quizzes/front/front-render.php:273
+msgid "Form ID attribute is required!"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:220
+#: library/modules/quizzes/front/front-render.php:283
+msgid "Form ID not found!"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:525
+msgid "Step"
+msgstr ""
+
+#: library/modules/custom-forms/loader.php:116
+msgid "Custom Form"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:44
+msgid "View Poll"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:118
+#: library/modules/polls/loader.php:102 library/render/class-widget.php:94
+msgid "Poll"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:119
+msgid "Add Answers"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:120
+msgid "Enter poll answer"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:121
+msgid "Custom input placeholder"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:122
+msgid "Type placeholder here..."
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:123
+msgid "Add custom input field"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:124
+msgid "Remove custom input field"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:125
+msgid "Delete answer"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:126
+msgid "Details"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:128
+#: library/modules/quizzes/admin/admin-loader.php:189
+msgid "Preview"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:129
+msgid "Poll Details"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:131
+msgid "Description (optional)"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:132
+msgid "Poll question"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:133
+msgid "Poll answers"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:135
+msgid "Button label"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:136
+msgid "Enter title"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:137
+msgid "Enter description"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:138
+msgid "Enter question title"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:139
+msgid "E.g. Vote"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:140
+msgid "Poll Appearance"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:141
+msgid "Poll results behaviour"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:142
+msgid "Poll results style"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:143
+msgid "Poll votes count"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:144
+msgid "Colors"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:145
+msgid "Vote number limit"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:146
+msgid "Link on poll"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:147
+msgid "Show after voted"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:148
+msgid "Do not show"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:149
+msgid "Bar chart"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:150
+msgid "Pie chart"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:151
+msgid "Show number of votes"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:152
+msgid "Allow same visitor to vote more than once"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:153
+msgid "How long before user can vote again"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:154
+msgid "Poll description"
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:157
+msgid "Form name cannot be empty! Please pick a name for your poll."
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:158
+msgid "Poll question cannot be empty! Please add questions for your poll."
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:159
+msgid "Poll answers cannot be empty! Please add answers to your poll."
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:164
+msgid "Enable AJAX to prevent refresh while submitting poll data."
+msgstr ""
+
+#: library/modules/polls/admin/admin-loader.php:165
+msgid "Enable this option to display number of votes on Bar Chart results."
+msgstr ""
+
+#: library/modules/polls/admin/admin-page-entries.php:284
+#: library/modules/polls/front/front-render.php:722
+msgid "Question"
+msgstr ""
+
+#: library/modules/polls/admin/admin-page-entries.php:284
+#: library/modules/polls/front/front-render.php:722
+msgid "Results"
+msgstr ""
+
+#: library/modules/polls/admin/admin-page-new.php:21
+msgid "Edit Poll"
+msgstr ""
+
+#: library/modules/polls/admin/admin-page-view.php:209
+msgid "Permanently Delete Votes"
+msgstr ""
+
+#: library/modules/polls/admin/admin-page-view.php:210
+msgid "Delete Polls"
+msgstr ""
+
+#: library/modules/polls/front/front-action.php:121
+#: library/modules/polls/front/front-action.php:128
+#: library/modules/polls/front/front-render.php:183
+msgid "Your vote has been saved"
+msgstr ""
+
+#: library/modules/polls/front/front-action.php:135
+msgid "You need to select a poll option"
+msgstr ""
+
+#: library/modules/polls/front/front-action.php:142
+msgid "You have already submitted a vote to this poll"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:190
+msgid "You have already voted for this poll"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:247
+#: library/modules/polls/front/front-render.php:266
+msgid "View results"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:281
+msgid "Poll ID attribute is required!"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:291
+msgid "Poll not found!"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:672
+msgid "Back To poll"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:750
+msgid " vote(s)"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:47
+msgid "View Quizzes"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:181
+msgid "No Wrong Answer"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:182
+msgid ""
+"Similar to quizzes you see on Facebook. e.g. Answer these questions, and we "
+"will tell you what breed of dog you are at heart."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:183
+msgid "Knowledge"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:184
+msgid ""
+"Quizzes that test your knowledge af things. e.g. Just how well exactly do "
+"you know your Seinfeld quotes."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:185
+msgid "Quiz results"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:186
+msgid "Quiz questions"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:187
+msgid "Quiz details"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:188
+msgid "Quiz settings"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:191
+msgid "List"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:192
+msgid "Grid"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:193
+msgid "Visual style"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:194
+msgid "Quiz Title"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:195
+msgid "Description / Intro"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:196
+msgid "Feature image"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:199
+msgid "Results behaviour"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:200
+msgid ""
+"Pick if you want to reveal the correct answer as user finishes question, or "
+"only after the whole quiz is completed."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:201
+msgid "When to reveal correct answer"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:202
+msgid "After user picks answer"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:203
+msgid "At the end of whole quiz"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:204
+msgid "Answer phrasing"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:205
+msgid ""
+"Pick how you want the correct & incorrect answers to read. Use "
+"<strong><%UserAnswer%></strong> to pull in the value user selected & "
+"<strong><%CorrectAnswer%></strong> to pull in the correct value."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:206
+msgid "Correct answer message"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:207
+msgid "Incorrect answer message"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:208
+msgid "Final count message"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:209
+msgid ""
+"Edit the copy of the final result count message that will appear after the "
+"quiz is complete. Use <strong><%YourNum%></strong> to display number of "
+"correct answers & <strong><%Total%></strong> for total number of questions."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:210
+msgid "Share on social media"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:211
+msgid "Results priority order"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:212
+msgid "Pick priority for results"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:213
+msgid ""
+"Quizzes can have even number of scores for 2 or more results, in those "
+"scenarious, this order will help determine the result."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:214
+msgid "Questions"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:215
+msgid "Form name cannot be empty! Please pick a name for your quiz."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:216
+msgid "Quiz question cannot be empty! Please add questions for your quiz."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:217
+msgid "Quiz answers cannot be empty! Please add some questions."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:218
+msgid "Result answer cannot be empty! Please select a result."
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-page-new-knowledge.php:21
+#: library/modules/quizzes/admin/admin-page-new-nowrong.php:20
+msgid "Edit Quiz"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-page-view.php:228
+msgid "Delete Quizzes"
+msgstr ""
+
+#: library/modules/quizzes/front/front-action.php:35
+msgid "Form not found"
+msgstr ""
+
+#: library/modules/quizzes/front/front-action.php:128
+msgid "Retake Quiz"
+msgstr ""
+
+#: library/modules/quizzes/front/front-action.php:169
+msgid "You has not answer any questions"
+msgstr ""
+
+#: library/modules/quizzes/front/front-action.php:180
+msgid "Please answer all the questions"
+msgstr ""
+
+#: library/modules/quizzes/front/front-action.php:253
+msgid "Share your results"
+msgstr ""
+
+#: library/modules/quizzes/front/front-render.php:362
+msgid "Ready to send"
+msgstr ""
+
+#: library/modules/quizzes/loader.php:101
+msgid "Quizz"
+msgstr ""
+
+#: library/render/class-widget.php:21 library/render/class-widget.php:22
+msgid "Forminator Widget"
+msgstr ""
+
+#: library/render/class-widget.php:90
+msgid "Form Type"
+msgstr ""
+
+#: library/render/class-widget.php:93
+msgid "Form"
+msgstr ""
+
+#: library/render/class-widget.php:95
+msgid "Quiz"
+msgstr ""
+
+#: library/render/class-widget.php:101
+msgid "Select Form"
+msgstr ""
+
+#: library/render/class-widget.php:119
+msgid "Select Poll"
+msgstr ""
+
+#: library/render/class-widget.php:137
+msgid "Select Quiz"
+msgstr ""
+
+#. Plugin Name of the plugin/theme
+msgid "Forminator Pro"
+msgstr ""
+
+#. Plugin URI of the plugin/theme
+msgid "https://premium.wpmudev.org/project/forminator/"
+msgstr ""
+
+#. Description of the plugin/theme
+msgid ""
+"Capture user information (as detailed as you like), engage users with "
+"interactive polls that show real-time results and graphs, “no wrong answer” "
+"Facebook-style quizzes and knowledge tests."
+msgstr ""
+
+#. Author of the plugin/theme
+msgid "WPMU DEV"
+msgstr ""
+
+#. Author URI of the plugin/theme
+msgid "http://premium.wpmudev.org"
+msgstr ""

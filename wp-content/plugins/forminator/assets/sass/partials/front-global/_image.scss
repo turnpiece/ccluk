@@ -1,0 +1,65 @@
+.forminator-custom-form {
+
+    .forminator-image {
+        width: 40px;
+        height: 40px;
+        overflow: hidden;
+        display: block;
+        position: relative;
+        margin: 0;
+        border-style: solid;
+        //border-color: #E6E6E6;
+        border-color: $color-gray--other;
+        border-radius: 2px;
+        background-image: linear-gradient(45deg,#FAFAFA 25%,transparent 25%,transparent 75%,#FAFAFA 75%,#FAFAFA),linear-gradient(45deg,#FAFAFA 25%,transparent 25%,transparent 75%,#FAFAFA 75%,#FAFAFA);
+        background-size: 20px 20px;
+        background-position: 0 0, 10px 10px;
+
+        .forminator-image--holder {
+            background-size: contain;
+            background-repeat: no-repeat;
+            background-position: center;
+        }
+    }
+
+    // DESIGN flat
+    &.forminator-design--flat {
+        
+        .forminator-image {
+            border-width: 1px;
+
+            .forminator-image--holder {
+                width: 38px;
+                height: 38px;
+            }
+        }
+    }
+
+    // DESIGN bold
+    &.forminator-design--bold {
+        
+        .forminator-image {
+            border-width: 3px;
+            
+            .forminator-image--holder {
+                width: 34px;
+                height: 34px;
+            }
+        }
+    }
+
+    // DESIGN material
+    &.forminator-design--material {
+        
+        .forminator-image {
+            border-width: 1px;
+            border-radius: 2px;
+
+            .forminator-image--holder {
+                width: 38px;
+                height: 38px;
+                border-radius: 3px;
+            }
+        }
+    }
+}

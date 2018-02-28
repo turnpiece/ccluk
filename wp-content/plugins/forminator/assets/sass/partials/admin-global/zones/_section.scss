@@ -1,0 +1,8 @@
+.wpmudev-ui #wpmudev-section {
+    width: 100% !important;
+    max-width: 100%;
+
+    @include screen("medium") {
+        margin-top: 14px;
+    }
+}

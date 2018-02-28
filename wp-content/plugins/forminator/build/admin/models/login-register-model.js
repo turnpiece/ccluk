@@ -1,0 +1,1 @@
+!function(e){formintorjs.define(["admin/models/base-model"],function(e){return e.extend({defaults:{}})})}(jQuery);

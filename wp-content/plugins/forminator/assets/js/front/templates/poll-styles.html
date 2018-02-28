@@ -1,0 +1,177 @@
+<?php if ( forminator_array_value_exists( $properties, 'box_background' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> {
+    background-color: <?php echo $properties['box_background'] ?>;
+}
+<?php } ?>
+<?php if ( forminator_array_value_exists( $properties, 'box_border' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> {
+    border-color: <?php echo $properties['box_border'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'poll_question' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--question {
+    color: <?php echo $properties['poll_question'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'poll_description' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--description {
+    color: <?php echo $properties['poll_description'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'poll_answers' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer label {
+    color: <?php echo $properties['poll_answers'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbg' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer label:before {
+    background-color: <?php echo $properties['inputbg'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input {
+    background-color: <?php echo $properties['inputbg'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbo' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer label:before {
+    border-color: <?php echo $properties['inputbo'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input {
+    border-color: <?php echo $properties['inputbo'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'input_text' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input {
+    color: <?php echo $properties['input_text'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbg_hover' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:hover {
+    background-color: <?php echo $properties['inputbg_hover'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbo_hover' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:hover {
+    border-color: <?php echo $properties['inputbo_hover'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbg_active' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer input:checked + label:before {
+    background-color: <?php echo $properties['inputbg_active'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:active {
+    background-color: <?php echo $properties['inputbg_active'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'inputbo_active' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer input:checked + label:before {
+    border-color: <?php echo $properties['inputbo_active'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:active {
+    border-color: <?php echo $properties['inputbo_active'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-poll--answers .forminator-answer label:after {
+    background-color: <?php echo $properties['inputbo_active'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'input_placeholder' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:-ms-input-placeholder {
+    color: <?php echo $properties['input_placeholder'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input:-moz-input-placeholder {
+    color: <?php echo $properties['input_placeholder'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input::-moz-input-placeholder {
+    color: <?php echo $properties['input_placeholder'] ?>;
+}
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-input::-webkit-input-placeholder {
+    color: <?php echo $properties['input_placeholder'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttonbg' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:visited,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:visited {
+    background-color: <?php echo $properties['buttonbg'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttontxt' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:visited,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:visited {
+    color: <?php echo $properties['buttontxt'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttonbg_hover' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:hover,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:hover {
+    background-color: <?php echo $properties['buttonbg_hover'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttontxt_hover' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:hover,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:hover {
+    color: <?php echo $properties['buttontxt_hover'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttonbg_active' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:active,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:active {
+    background-color: <?php echo $properties['buttonbg_active'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'buttontxt_active' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button:active,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button:active {
+    color: <?php echo $properties['buttontxt_active'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'color_link' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button.forminator-button-ghost,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button.forminator-button-ghost:visited,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button.forminator-button-ghost,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button.forminator-button-ghost:visited {
+    color: <?php echo $properties['color_link'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'color_link_hover' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button.forminator-button-ghost:hover,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button.forminator-button-ghost:hover {
+    color: <?php echo $properties['color_link_hover'] ?>;
+}
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'color_link_active' ) ) { ?>
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button.forminator-button-ghost:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> .forminator-button.forminator-button-ghost:active,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button.forminator-button-ghost:focus,
+.forminator-poll-<?php echo $properties['formID'] ?> a.forminator-button.forminator-button-ghost:active {
+    color: <?php echo $properties['color_link_active'] ?>;
+}
+<?php } ?>

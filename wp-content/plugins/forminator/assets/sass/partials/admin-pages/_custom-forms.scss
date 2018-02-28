@@ -1,0 +1,383 @@
+// PAGE custom forms (builder – settings sidebar)
+body.forminator_page_forminator-cform-wizard #wpmudev-sidebar-settings .wpmudev-sidebar {
+
+    .wpmudev-sidebar--section {
+
+        .wpmudev-sidebar--content {
+
+            .wpmudev-option .wpmudev-vars {
+
+                .wpmudev-vars--mask {
+                    top: 5px;
+                    right: auto;
+                    left: 0;
+
+                    .wpmudev-vars--button {
+                        min-width: auto;
+                        height: 26px;
+                        display: block;
+                        top: 0;
+                        padding: 3px 8px 4px;
+                        border: 1px solid #E5E5E5;
+                        border-bottom: 0;
+                        border-radius: 0;
+                        background: #EBEBEB;
+                        color: #787878;
+                        font-size: 13px;
+                        line-height: 19px;
+                        font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+                    }
+
+                    .wpmudev-vars--dropdown {
+                        top: 26px;
+                        right: auto;
+                        left: 4px;
+                        margin-top: 4px;
+                        border-radius: 0;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// PAGE custom forms (wizard)
+.wpmudev-forminator-forminator-cform-wizard {
+
+    #forminator-wizard-name {
+        width: 100% !important;
+        max-width: 660px;
+    }
+
+    #forminator-wizard-appearance {
+
+        .appearance-section-customize-colors {
+
+            .wpmudev-toggle--box {
+
+                .wpmudev-row {
+
+                    &:not(:first-child) {
+                        margin-top: 10px;
+                    }
+
+                    &:not(:last-child) {
+                        margin-bottom: 10px;
+                    }
+                }
+
+                .wpmudev-row--border {
+
+                    &:not(:first-child) {
+                        margin-top: 20px;
+                    }
+
+                    &:not(:last-child) {
+                        margin-bottom: 20px;
+                    }
+                }
+
+                .wpmudev-label--section {
+                    margin: 0;
+                }
+
+                .wpmudev-pickers > .wpmudev-option {
+                    padding: 5px 0;
+                }
+            }
+        }
+
+        .appearance-section-customize-fonts {
+
+			#appearance-cform-title-font-settings {
+
+				input[value="25"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="35"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="45"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+			#appearance-cform-subtitle-font-settings {
+
+				input[value="14"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="18"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="22"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+			#appearance-cform-label-font-settings {
+
+				input[value="12"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="16"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="18"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+			#appearance-cform-input-font-settings {
+
+				input[value="12"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="16"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="18"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+			#appearance-cform-button-font-settings {
+
+				input[value="12"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="14"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="16"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+			#appearance-cform-notice-font-settings {
+
+				input[value="13"] + label {
+					font-size: 11px;
+					font-weight: 400;
+				}
+
+				input[value="15"] + label {
+					font-size: 15px;
+					font-weight: 400;
+				}
+
+				input[value="17"] + label {
+					font-size: 20px;
+					font-weight: 400;
+				}
+			}
+
+            input[value=lighter] + label {
+                font-size: 15px;
+                font-weight: 300;
+            }
+
+            input[value=normal] + label {
+                font-size: 15px;
+                font-weight: 400;
+            }
+
+            input[value=bold] + label {
+                font-size: 15px;
+                font-weight: 700;
+            }
+
+            .wpmudev-option--half {
+                margin: 20px 0;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+
+    #forminator-wizard-behaviour {
+
+        .appearance-section-form-validation {
+
+            #behaviours-form-validation-inline {
+                margin-top: 15px;
+            }
+        }
+
+        .appearance-section-form-security {
+
+            > .wpmudev-option {
+                margin: 10px 0;
+
+                &:first-child {
+                    margin-top: 0;
+                }
+
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}
+
+// PAGE custom forms (listings)
+.wpmudev-forminator-forminator-cform {
+
+    // MODALS
+    .wpmudev-modal .wpmudev-box {
+
+        .wpmudev-box-section {
+            
+            // MODAL
+            // "Choose Form Type"
+            .wpmudev-cform--name {
+                padding: 20px;
+    
+                @include screen("small") {
+                    padding: 30px;
+                }
+            }
+            
+            // MODAL
+            // "Choose Form Type"
+            .wpmudev-cform--templates {
+                padding: 20px;
+                background: $color-silver;
+    
+                .wpmudev-templates--wrapper {
+                    display: flex;
+                    flex-direction: column;
+    
+                    @include screen("small") {
+                        flex-wrap: wrap;
+                        flex-direction: row;
+                        margin: -10px;
+                    }
+                }
+    
+                .wpmudev-template--type {
+                    max-width: 100%;
+                    cursor: pointer;
+                    display: flex;
+                    flex-direction: column;
+                    flex: 0 0 100%;
+                    margin: 0 0 10px;
+                    border: 1px solid #D9D9D9;
+                    border-radius: 3px;
+                    background: $color-white;
+                    transition: 0.2s ease;
+    
+                    .wpmudev-type--header {
+                        display: flex;
+                        flex: 0 0 auto;
+                        align-items: center;
+                        padding: 10px 15px;
+                        border-bottom: 1px solid #E9E9E9;
+    
+                        .wpmudev-header--icon {
+                            display: flex;
+                            flex: 0 0 auto;
+                            align-items: center;
+                            justify-content: center;
+                            margin-right: 6px;
+    
+                            svg {
+                                display: block;
+    
+                                path {
+                                    fill: $color-gray--soft;
+                                    transition: 0.2s ease;
+                                }
+                            }
+                        }
+    
+                        .wpmudev-header--text {
+                            flex: 1;
+    
+                            .wpmudev-title {
+                                overflow: hidden;
+                                display: block;
+                                color: $color-black;
+                                font: 500 15px/30px $font;
+                                letter-spacing: -0.1px;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+    
+                    .wpmudev-type--section {
+                        flex: 1 1 auto;
+                        padding: 20px;
+    
+                        p {
+                            color: $color-gray--other;
+                            font: 400 13px/22px $font;
+                            letter-spacing: 0px;
+                        }
+                    }
+    
+                    &:hover {
+                        border-color: $color-gray--soft;
+                        box-shadow: 0 1px 5px 0 rgba(0,0,0,0.15);
+    
+                        .wpmudev-type--header {
+    
+                            .wpmudev-header--icon {
+    
+                                svg path {
+                                    fill: $color-blue--light;
+                                }
+                            }
+                        }
+                    }
+    
+                    @include screen("small") {
+                        flex: 0 0 46.97%;
+                        margin: 10px;
+                    }
+    
+                    @include screen("medium") {
+                        flex: 0 0 30.3%;
+                    }
+                }
+    
+                @include screen("small") {
+                    padding: 30px;
+                }
+            }
+        }
+    }
+}

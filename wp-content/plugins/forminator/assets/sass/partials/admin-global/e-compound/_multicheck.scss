@@ -1,0 +1,42 @@
+.wpmudev-ui .wpmudev-multicheck {
+    max-height: 180px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    display: block;
+    margin: 5px 0 30px;
+    padding: 20px 25px;
+    border: 1px solid #F0F0F0;
+    border-radius: 5px;
+    background: #F8F8F8;
+
+    .wpmudev-multicheck--item {
+        display: flex;
+        margin: 10px 0;
+
+        &:before {
+            display: none;
+        }
+
+        .wpmudev-checkbox {
+            min-width: 20px;
+            flex: 0 0 20px;
+            margin-right: 5px;
+        }
+
+        .wpmudev-item--label {
+            flex: 0 1 auto;
+            cursor: pointer;
+            color: $color-gray--light;
+            font: 400 15px/20px $font;
+            letter-spacing: 0px;
+        }
+
+        &:first-child {
+            margin-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+    }
+}

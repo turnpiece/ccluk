@@ -1,0 +1,300 @@
+// BOX export
+.wpmudev-ui #forminator-entries--export {
+
+    #forminator-export--buttons {
+        display: flex;
+        flex-direction: column;
+        margin-bottom: 30px;
+        padding-bottom: 30px;
+        border-bottom: 1px solid #E9E9E9;
+
+        .wpmudev-export--form,
+        .wpmudev-export--prev {
+            max-width: 50%;
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 auto;
+
+            .wpmudev-button {
+                margin: 0;
+            }
+
+            @include screen("small") {
+                flex: 1
+            }
+        }
+
+        .wpmudev-export--form {
+
+            &:not(:only-child) {
+                margin-bottom: 10px;
+                
+                @include screen("small") {
+                    margin-right: 20px;
+                    margin-bottom: 0;
+                }
+            }
+        }
+
+        @include screen("small") {
+            flex-wrap: wrap;
+            flex-direction: row;
+        }
+    }
+
+    #forminator-export--schedule {
+
+        .wpmudev-label--info {
+            display: flex;
+            align-items: center;
+            margin-top: 10px;
+
+            span {
+                flex: 1;
+                margin-right: 10px;
+            }
+
+            .wpmudev-button.wpmudev-button-sm {
+                min-width: 55px;
+                flex: 0 0 55px;
+
+                &.wpmudev-button-ghost {
+                    padding: 0 5px;
+                }
+            }
+        }
+    }
+}
+
+// LIST entries
+.wpmudev-ui #forminator-cform-table {
+
+	.wpmudev-entries--section {
+
+		.wpmudev-entries--result {
+
+			.wpmudev-result--header {
+				cursor: pointer;
+			}
+		}
+	}
+}
+
+// POPUP exports list
+.wpmudev-ui .entries-popup-exports-list {
+
+    .wpmudev-box-modal {
+        max-width: 600px;
+
+        .wpmudev-box-body {
+
+            @include screen("small") {
+                padding-right: 29px;
+                padding-left: 29px;
+            }
+        }
+    }
+
+    .wpmudev-table {
+
+        .wpmudev-table-head tr,
+        .wpmudev-table-body tr {
+
+            th, td {
+
+                &.forminator-export--name {
+
+                    @include screen("small") {
+                        width: auto;
+                    }
+                }
+
+                &.forminator-export--fields {
+
+                    @include screen("small") {
+                        width: 134px;
+                    }
+                }
+
+                &.forminator-export--date {
+
+                    @include screen("small") {
+                        width: 130px;
+                    }
+                }
+
+                &.forminator-export--file {
+
+                    @include screen("small") {
+                        width: 38px;
+                    }
+                }
+
+                &.forminator-export--trash {
+
+                    @include screen("small") {
+                        width: 31px;
+                    }
+                }
+            }
+        }
+
+        .wpmudev-table-head {
+            background: $color-white;
+
+            tr {
+
+                th {
+                    padding: 0 5px;
+                    border-bottom: 1px solid $color-silver--soft;
+                    font-size: 12px;
+                    line-height: 36px;
+                    font-weight: bold;
+
+                    &:first-child {
+                        padding-left: 0;
+                        border-top-left-radius: 0;
+                        border-bottom-left-radius: 0;
+                    }
+
+                    &:last-child {
+                        padding-right: 0;
+                        border-top-right-radius: 0;
+                        border-bottom-right-radius: 0;
+                    }
+                }
+            }
+        }
+
+        .wpmudev-table-body {
+
+            tr {
+
+                td {
+
+                    .wpmudev-cell-title {
+                        display: block;
+                        margin: 0;
+                        
+                        @include screen("small") {
+                            display: none;
+                        }
+                    }
+
+                    .wpmudev-cell-content {
+                        margin: 0;
+                        color: #A0A0A0;
+                        font: 400 13px/30px $font;
+                        letter-spacing: -0.2px;
+
+                        a {
+                            cursor: pointer;
+                            display: block;
+                            padding-bottom: 0;
+                            border-bottom: 0;
+
+                            .wpmudev-icon {
+                                display: block;
+                                margin: 0 auto;
+
+                                path {
+                                    fill: $color-gray--light;
+                                }
+                            }
+                        }
+
+                        .wpmudev-exported-field {
+
+                            &:not(:last-child):after {
+                                content: ",";
+                                margin-right: 6px;
+                            }
+                        }
+                    }
+
+                    &:first-child {
+
+                        @include screen("small") {
+                            padding-left: 0;
+                        }
+                    }
+
+                    &.forminator-export--name {
+
+                        .wpmudev-cell-content {
+                            color: #777;
+                            font: 400 15px/30px $font;
+                            letter-spacing: -0.13px;
+                        }
+                    }
+
+                    &.forminator-export--fields {
+
+                        .wpmudev-cell-content {
+
+                            @include screen("small") {
+                                overflow: hidden;
+                                text-overflow: ellipsis;
+                                white-space: nowrap;
+                            }
+                        }
+                    }
+
+                    &:last-child {
+
+                        @include screen("small") {
+                            padding-right: 0;
+                        }
+                    }
+
+                    @include screen("small") {
+                        padding: 10px 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+// POPUP schedule
+.wpmudev-ui .wpmudev-modal {
+
+    .wpmudev-box {
+
+        .wpmudev-box-section {
+
+            #forminator-export-schedule-timeframe {
+                margin-bottom: 20px;
+
+                label {
+                    display: inline-block;
+                    margin: 0 0 5px;
+                }
+                
+                @include screen("small") {
+                    margin-bottom: 30px;
+                }
+            }
+
+            #forminator-export-schedule-email {
+
+                label {
+                    display: inline-block;
+                    margin: 0 0 5px;
+
+                    &.wpmudev-helper {
+                        display: block;
+                        margin: 5px 0 30px;
+                        font-size: 12px;
+                        line-height: 22px;
+                        letter-spacing: -0.25px;
+                    }
+                }
+
+                .wpmudev-input_email {
+                    margin: 0;
+                }
+            }
+        }
+    }
+}

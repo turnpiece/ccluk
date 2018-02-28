@@ -1,0 +1,80 @@
+.wpmudev-ui .wpmudev-actions {
+    display: flex;
+    flex-direction: column;
+    margin: 30px 0;
+
+    .wpmudev-action--bulk {
+        display: flex;
+
+        .wpmudev-select + .select2 {
+            flex: 1;
+            margin-right: 5px;
+
+            @include screen("small") {
+                max-width: 160px;
+            }
+        }
+
+        .wpmudev-button {
+            flex: 0 0 auto;
+        }
+
+        @include screen("small") {
+            flex: 1;
+            margin: 0 20px 0 0;
+        }
+    }
+
+    .wpmudev-action--page {
+        display: flex;
+        flex-direction: column;
+        margin: 30px 0 0;
+
+        .wpmudev-page--resume {
+            display: none;
+            margin-right: 20px;
+
+            p {
+                margin: 0;
+                padding: 0;
+                border: 0;
+                color: $color-gray--light;
+                font: 500 14px/20px $font;
+                letter-spacing: 0px;
+            }
+
+            @include screen("small") {
+                display: block;
+            }
+        }
+
+        .wpmudev-pagination {}
+
+        @include screen("small") {
+            flex: 0 0 auto;
+            flex-direction: row;
+            align-items: center;
+            margin: 0;
+        }
+    }
+
+    &:first-child {
+        margin-top: 0;
+        
+        .wpmudev-action--page {
+            display: none;
+
+            @include screen("small") {
+                display: flex;
+            }
+        }
+    }
+
+    &:last-child {
+        margin-bottom: 0;
+    }
+
+    @include screen("small") {
+        flex-direction: row;
+    }
+}

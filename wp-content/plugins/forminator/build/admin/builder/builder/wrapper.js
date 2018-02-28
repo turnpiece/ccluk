@@ -1,0 +1,1 @@
+!function(e){formintorjs.define(["text!admin/templates/fields.html"],function(){return Backbone.View.extend({className:"wpmudev-form-row",initialize:function(e){return this.render()},render:function(){}})})}(jQuery);

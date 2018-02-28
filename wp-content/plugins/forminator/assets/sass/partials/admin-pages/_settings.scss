@@ -1,0 +1,26 @@
+.wpmudev-forminator-forminator-settings {
+
+    .wpmudev-section--popup {
+
+        div + .wpmudev-box-gray {
+            margin-top: 20px;
+
+            @include screen("small") {
+                margin-top: 30px;
+            }
+        }
+
+        input[name=secret],
+        input[name=client_id],
+        input[name=api_username],
+        input[name=api_password],
+        input[name=api_signature],
+        input[name=captcha_key],
+        input[name=captcha_secret],
+        input[name=captcha_language],
+        select[name=captcha_theme] + .select2,
+        select[name=currency] + .select2 {
+            margin-bottom: 20px;
+        }
+    }
+}

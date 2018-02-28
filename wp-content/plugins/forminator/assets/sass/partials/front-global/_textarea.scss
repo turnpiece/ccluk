@@ -1,0 +1,227 @@
+.forminator-custom-form {
+
+    .forminator-textarea {
+        width: 100%;
+        height: 110px;
+        resize: none;
+        display: block;
+        margin: 0;
+        padding: 9px;
+        border-width: 1px;
+        border-style: solid;
+        border-color: $color-gray--other;
+        border-radius: 2px;
+        background-color: $color-white;
+        background-image: none;
+        color: $color-gray--dark;
+        font: 400 16px/20px $font;
+        transition: 0.3s ease;
+
+        &:-moz-placeholder {
+            color: $color-gray--light;
+        }
+    
+        &::-moz-placeholder {
+            color: $color-gray--light;
+        }
+
+        &:-ms-input-placeholder {
+            color: $color-gray--light;
+        }
+
+        &::-webkit-input-placeholder {
+            color: $color-gray--light;
+        }
+
+        &, &:hover, &:active, &:focus, &:disabled {
+            outline: none;
+            box-shadow: none;
+        }
+
+        &:hover {
+            border-color: $color-blue;
+            background-color: $color-white;
+        }
+
+        &:active, &:focus {
+            border-color: $color-blue--dark;
+            background-color: $color-white;
+        }
+
+        &:disabled {
+            pointer-events: none;
+            border-style: dotted;
+
+            &:-moz-placeholder {
+                opacity: 0.4;
+            }
+        
+            &::-moz-placeholder {
+                opacity: 0.4;
+            }
+
+            &:-ms-input-placeholder {
+                opacity: 0.4;
+            }
+
+            &::-webkit-input-placeholder {
+                opacity: 0.4;
+            }
+        }
+    }
+
+    .forminator-field {
+
+        // STATE hover
+        &.forminator-is_hover {
+
+            .forminator-textarea {
+                border-color: $color-blue;
+                background-color: $color-white;
+            }
+        }
+
+        // STATE active/focus
+        &.forminator-is_active {
+
+            .forminator-textarea {
+                border-color: $color-blue;
+                background-color: $color-white;
+            }
+        }
+
+        // STATE error
+        &.forminator-has_error {
+
+            .forminator-textarea {
+                
+                &, &:hover, &:active, &:focus {
+                    border-color: $color-red--dark;
+                }
+            }
+        }
+    }
+
+    // DESIGN flat
+    &.forminator-design--flat {
+
+        .forminator-textarea {
+            border-color: transparent;
+            border-radius: 0;
+		}
+		
+		.forminator-field {
+
+			&.forminator-is_hover,
+			&.forminator-is_active {
+				
+				.forminator-textarea {
+					border-color: transparent;
+				}
+			}
+			
+			&.forminator-has_error {
+
+				.forminator-textarea {
+					
+					&, &:hover, &:active, &:focus {
+						border-color: transparent;
+					}
+				}
+			}
+		}
+    }
+
+    // DESIGN bold
+    &.forminator-design--bold {
+
+        .forminator-textarea {
+            padding: 7px;
+            border-width: 3px;
+            border-radius: 0;
+        }
+    }
+
+    // DESIGN material
+    &.forminator-design--material {
+
+        .forminator-field {
+
+            .forminator-textarea {
+                padding: 16px 14px;
+                border-radius: 4px;
+                background: transparent !important;
+                transition: border-width 0.2s linear, 0.3s ease;
+            }
+
+            .forminator-floating--textarea {
+
+				~ .forminator-textarea {
+                    padding: 27px 13px 13px;
+
+                    &:-moz-placeholder {
+                        opacity: 0;
+                        transition: 0.3s ease;
+                    }
+                
+                    &::-moz-placeholder {
+                        opacity: 0;
+                        transition: 0.3s ease;
+                    }
+            
+                    &:-ms-input-placeholder {
+                        opacity: 0;
+                        transition: 0.3s ease;
+                    }
+            
+                    &::-webkit-input-placeholder {
+                        opacity: 0;
+                        transition: 0.3s ease;
+                    }
+                }
+            }
+            
+            &.forminator-is_hover,
+            &.forminator-is_active {
+
+                .forminator-textarea {
+                    padding: 14px 12px;
+                    border-width: 2px;
+                }
+
+                .forminator-floating--textarea {
+
+                    ~ .forminator-textarea {
+                        padding: 26px 12px 12px;
+                    }
+                }
+            }
+
+            &.forminator-is_active,
+            &.forminator-is_filled {
+
+                .forminator-floating--textarea {
+
+                    ~ .forminator-textarea {
+                        
+                        &:-moz-placeholder {
+                            opacity: 1;
+                        }
+                    
+                        &::-moz-placeholder {
+                            opacity: 1;
+                        }
+                
+                        &:-ms-input-placeholder {
+                            opacity: 1;
+                        }
+                
+                        &::-webkit-input-placeholder {
+                            opacity: 1;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
