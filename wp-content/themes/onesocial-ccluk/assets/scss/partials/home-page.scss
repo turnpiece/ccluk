@@ -88,7 +88,7 @@
 				.section-content {
 					text-align: center;
 					align-content: center;
-					
+
 					.list-item {
 						padding: 30px;
 						@include border-radius(10px);
@@ -135,12 +135,12 @@
 						display: flex;
 						flex-direction: row column;
 						flex-wrap: wrap;
-						justify-content: center;
+						justify-content: space-evenly;
 						width: 100%;
-						padding: 30px 5%;
+						padding: 30px 2%;
 
 						.ctf-item {
-							max-width: 20%;
+							width: 320px;
 							align-self: flex-start;
 							border-top: 0;
 						}
