@@ -6,7 +6,7 @@ if ( !is_user_logged_in() ) {
 		if ( buddyboss_is_bp_active() && bp_get_signup_allowed() ) {
 			?>
 
-			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button animatedClick boss-tooltip" data-target="RegisterBox" data-tooltip="<?php _e( 'Register', 'onesocial' ); ?>"><i class="bb-icon-pencil-square-o"></i></a><?php
+			<a href="<?php echo bp_get_signup_page(); ?>" class="header-button animatedClick boss-tooltip" data-target="RegisterBox" data-tooltip="<?php _e( 'Join', 'onesocial' ); ?>"><i class="bb-icon-pencil-square-o"></i></a><?php
 			//get_template_part( 'template-parts/site-register' );
 		}
 
