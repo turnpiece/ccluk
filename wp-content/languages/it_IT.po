@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-23 12:24:32+0000\n"
+"PO-Revision-Date: 2018-02-26 12:51:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -63,7 +63,7 @@ msgstr "Pianificati"
 #: wp-includes/customize/class-wp-customize-theme-control.php:121
 msgctxt "theme"
 msgid "Installed"
-msgstr "Installati"
+msgstr "Installato"
 
 #: wp-includes/rest-api.php:1115
 msgid "%1$s is not a valid property of Object."

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-31 04:45:34+0000\n"
+"PO-Revision-Date: 2018-02-09 10:29:50+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,31 +11,51 @@ msgstr ""
 "Language: nl\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
 
-#: modules/acceptance.php:238
+#: modules/acceptance.php:243
 msgid "Condition"
 msgstr "Conditie"
 
 #. translators: 1: 'Consented' or 'Not consented', 2: conditions
-#: modules/acceptance.php:197
+#: modules/acceptance.php:202
 msgctxt "mail output for acceptance checkboxes"
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
+
+#: modules/acceptance.php:186
+msgid "Not consented"
+msgstr "Niet toegestemd"
+
+#: modules/acceptance.php:184
+msgid "Consented"
+msgstr "Toegestemd"
 
 #: includes/submission.php:196
 msgid "Sending mail has been aborted."
 msgstr "Versturen e-mail is afgebroken."
 
+#: admin/includes/editor.php:211
+msgid "You can edit messages used in various situations here. For details, see %s."
+msgstr "Je kan berichten die in diverse situaties worden gebruikt hier bewerken. Voor details, bekijk %s."
+
+#: admin/includes/editor.php:210
+msgid "Editing Messages"
+msgstr "Berichten bewerken"
+
 #: admin/includes/editor.php:209
 msgid "https://contactform7.com/editing-messages/"
 msgstr "https://contactform7.com/editing-messages/"
 
+#: admin/includes/editor.php:130
+msgid "You can edit the mail template here. For details, see %s."
+msgstr "Je kan hier het e-mailsjabloon bewerken. Voor details, bekijk %s."
+
 #: admin/includes/editor.php:57
 msgid "You can edit the form template here. For details, see %s."
-msgstr "Je kan het formulier sjabloon hier bewerken. Bekijk details %s."
+msgstr "Je kan hier het formuliersjabloon bewerken. Voor details, bekijk %s."
 
 #: admin/includes/editor.php:56
 msgid "Editing Form Template"
-msgstr "Formulier sjabloon bewerken"
+msgstr "Formuliersjabloon bewerken"
 
 #: admin/includes/editor.php:55
 msgid "https://contactform7.com/editing-form-template/"
@@ -45,6 +65,11 @@ msgstr "https://contactform7.com/editing-form-template/"
 #: admin/edit-contact-form.php:192
 msgid "(left and right arrow)"
 msgstr "(pijltje naar links en rechts)"
+
+#. translators: 1: ◀ ▶ dashicon, 2: screen reader text for the dashicon
+#: admin/edit-contact-form.php:187
+msgid "%1$s %2$s keys switch panels"
+msgstr "%1$s %2$s sleutels schakelpanelen"
 
 #. translators: screen reader text
 #: admin/admin.php:326
@@ -112,11 +137,11 @@ msgstr "Bestaand contactformulier kan niet aangemaakt worden."
 msgid "You are not allowed to access contact forms."
 msgstr "Je hebt geen toegang tot contactformulieren."
 
-#: includes/config-validator.php:549
+#: includes/config-validator.php:552
 msgid "Attachment file does not exist at %path%."
 msgstr "Het bijlagebestand is niet aanwezig in %path%."
 
-#: includes/config-validator.php:480
+#: includes/config-validator.php:481
 msgid "Invalid mailbox syntax is used in the %name% field."
 msgstr "Ongeldige mailboxsyntax is gebruikt in het veld %name%."
 
@@ -167,7 +192,7 @@ msgstr "1 configuratiefout gevonden"
 msgid "There was an error saving the contact form."
 msgstr "Er deed zich een fout voor bij het opslaan van het formulier."
 
-#: includes/functions.php:360
+#: includes/functions.php:365
 msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "%1$s is <strong>verouderd</strong> sinds Contact Form 7 versie %2$s! Gebruik in plaats daarvan %3$s."
 
@@ -328,13 +353,6 @@ msgstr "https://contactform7.com/configuration-errors/"
 #: admin/admin.php:532
 msgid "Configuration validation completed. No invalid contact form was found."
 msgstr "Configuratie validatie afgerond. Geen ongeldig contactformulier gevonden."
-
-#. translators: %s: number of contact forms
-#: admin/admin.php:524
-msgid "Configuration validation completed. An invalid contact form was found."
-msgid_plural "Configuration validation completed. %s invalid contact forms were found."
-msgstr[0] "Configuratie validatie afgerond. Een ongeldig contactformulier was gevonden."
-msgstr[1] "Configuratie validatie afgerond. %s ongeldige contactformulier zijn gevonden."
 
 #: admin/admin.php:420
 msgid "Validate Configuration"
@@ -839,7 +857,7 @@ msgstr "De ingevulde code is onjuist."
 msgid "The code that sender entered does not match the CAPTCHA"
 msgstr "De ingevulde verificatiecode komt niet overeen met de CAPTCHA"
 
-#: modules/acceptance.php:272 modules/checkbox.php:357 modules/date.php:216
+#: modules/acceptance.php:277 modules/checkbox.php:357 modules/date.php:216
 #: modules/file.php:270 modules/number.php:224 modules/quiz.php:231
 #: modules/really-simple-captcha.php:322 modules/recaptcha.php:503
 #: modules/select.php:243 modules/submit.php:88 modules/text.php:311
@@ -847,7 +865,7 @@ msgstr "De ingevulde verificatiecode komt niet overeen met de CAPTCHA"
 msgid "Insert Tag"
 msgstr "Tag invoegen"
 
-#: modules/acceptance.php:259 modules/checkbox.php:344 modules/date.php:204
+#: modules/acceptance.php:264 modules/checkbox.php:344 modules/date.php:204
 #: modules/file.php:257 modules/number.php:212 modules/quiz.php:218
 #: modules/really-simple-captcha.php:295 modules/really-simple-captcha.php:310
 #: modules/recaptcha.php:490 modules/select.php:230 modules/submit.php:75
@@ -855,7 +873,7 @@ msgstr "Tag invoegen"
 msgid "Class attribute"
 msgstr "Class attribuut"
 
-#: modules/acceptance.php:254 modules/checkbox.php:339 modules/date.php:199
+#: modules/acceptance.php:259 modules/checkbox.php:339 modules/date.php:199
 #: modules/file.php:252 modules/number.php:207 modules/quiz.php:213
 #: modules/really-simple-captcha.php:290 modules/really-simple-captcha.php:305
 #: modules/recaptcha.php:485 modules/select.php:225 modules/submit.php:70
@@ -863,40 +881,40 @@ msgstr "Class attribuut"
 msgid "Id attribute"
 msgstr "Id attribuut"
 
-#: modules/acceptance.php:248
+#: modules/acceptance.php:253
 msgid "Make this work inversely"
 msgstr "Laat dit omgekeerd werken"
 
-#: modules/acceptance.php:247
+#: modules/acceptance.php:252
 msgid "Make this checkbox checked by default"
 msgstr "Maak dit selectievakje standaard aangevinkt"
 
-#: modules/acceptance.php:243 modules/acceptance.php:246
+#: modules/acceptance.php:248 modules/acceptance.php:251
 #: modules/checkbox.php:323 modules/checkbox.php:326 modules/select.php:212
 #: modules/select.php:215
 msgid "Options"
 msgstr "Opties"
 
-#: modules/acceptance.php:233 modules/checkbox.php:318 modules/date.php:170
+#: modules/acceptance.php:238 modules/checkbox.php:318 modules/date.php:170
 #: modules/file.php:237 modules/number.php:178 modules/quiz.php:197
 #: modules/really-simple-captcha.php:280 modules/select.php:207
 #: modules/text.php:253 modules/textarea.php:156
 msgid "Name"
 msgstr "Naam"
 
-#: modules/acceptance.php:223
+#: modules/acceptance.php:228
 msgid "Acceptance Checkbox"
 msgstr "Acceptatie-selectievakje"
 
-#: modules/acceptance.php:223
+#: modules/acceptance.php:228
 msgid "https://contactform7.com/acceptance-checkbox/"
 msgstr "https://contactform7.com/acceptance-checkbox/"
 
-#: modules/acceptance.php:221
+#: modules/acceptance.php:226
 msgid "Generate a form-tag for an acceptance checkbox. For more details, see %s."
 msgstr "Een form-tag genereren voor het acceptatie-selectievakje. Voor meer details, zie %s."
 
-#: modules/acceptance.php:213
+#: modules/acceptance.php:218
 msgid "acceptance"
 msgstr "acceptatie"
 
@@ -1370,7 +1388,7 @@ msgstr "Contactformulier bewerken"
 msgid "Contact"
 msgstr "Contact"
 
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0)  #-#-#-#-#
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin/admin.php:21 modules/flamingo.php:167
 msgid "Contact Form 7"

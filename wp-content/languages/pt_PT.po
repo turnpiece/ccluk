@@ -6389,8 +6389,8 @@ msgstr "Está a personalizar %s"
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>ERRO</strong>: Este comentário não pode ser guardado. Tente mais tarde, por favor."
 
-#: wp-includes/update.php:154 wp-includes/update.php:356
-#: wp-includes/update.php:538
+#: wp-includes/update.php:154 wp-includes/update.php:346
+#: wp-includes/update.php:528
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
 msgstr "(Não foi possível estabelecer uma ligação segura com WordPress.org. Por favor entre em contacto com o administrador do seu servidor.)"
 
@@ -7239,7 +7239,7 @@ msgid "https://wordpress.org/support/forum/requests-and-feedback"
 msgstr "https://wordpress.org/support/forum/requests-and-feedback"
 
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
-#: wp-includes/update.php:355 wp-includes/update.php:537
+#: wp-includes/update.php:345 wp-includes/update.php:527
 #: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
 #: wp-includes/wp-db.php:1753 wp-login.php:882
 msgid "https://wordpress.org/support/"
@@ -7351,8 +7351,8 @@ msgid "on"
 msgstr "on"
 
 #. translators: %s: support forums URL
-#: wp-includes/update.php:152 wp-includes/update.php:354
-#: wp-includes/update.php:536
+#: wp-includes/update.php:152 wp-includes/update.php:344
+#: wp-includes/update.php:526
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"%s\">support forums</a>."
 msgstr "Ocorreu um erro inesperado. Pode estar algo errado com o WordPress.org ou com a configuração deste servidor. Se continuar com problemas, por favor tente pedir ajuda no <a href=\"%s\">fórum de suporte</a>."
 
@@ -7387,7 +7387,7 @@ msgstr "Por omissão"
 msgid "Menu"
 msgstr "Menu"
 
-#: wp-includes/update.php:643
+#: wp-includes/update.php:633
 msgid "Translation Updates"
 msgstr "Actualização de traduções"
 
@@ -9436,21 +9436,21 @@ msgid "This is the short link."
 msgstr "Esta é a ligação curta."
 
 #. translators: 1: Number of updates available to plugins
-#: wp-includes/update.php:636
+#: wp-includes/update.php:626
 msgid "%d Plugin Update"
 msgid_plural "%d Plugin Updates"
 msgstr[0] "%d actualização de plugin"
 msgstr[1] "%d actualizações de plugins"
 
 #. translators: 1: Number of updates available to themes
-#: wp-includes/update.php:640
+#: wp-includes/update.php:630
 msgid "%d Theme Update"
 msgid_plural "%d Theme Updates"
 msgstr[0] "%d actualização de tema"
 msgstr[1] "%d actualizações de temas"
 
 #. translators: 1: Number of updates available to WordPress
-#: wp-includes/update.php:632
+#: wp-includes/update.php:622
 msgid "%d WordPress Update"
 msgstr "%d actualização de WordPress"
 

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Yoast SEO - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-04 15:18:19+0000\n"
+"PO-Revision-Date: 2018-02-27 21:20:10+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,28 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ru\n"
 "Project-Id-Version: Plugins - Yoast SEO - Stable (latest release)\n"
+
+#: admin/views/tabs/tool/import-seo.php:35
+msgid "Import from SEOpressor"
+msgstr "Импорт из SEOpressor"
+
+#: admin/views/tabs/tool/import-seo.php:34
+msgid "Import from Ultimate SEO"
+msgstr "Импорт из Ultimate SEO"
+
+#: admin/views/tabs/dashboard/features.php:14
+msgid "SEO analysis"
+msgstr "SEO анализ"
+
+#. translators: %s expands to Ryte.
+#: admin/views/tabs/dashboard/features.php:55
+msgid "%s integration"
+msgstr "%s интеграция"
+
+#. translators: %s expands to Ryte.
+#: admin/views/tabs/dashboard/features.php:60
+msgid "Read more about how %s works."
+msgstr "Узнайте больше о том, как работает %s."
 
 #. translators: %s expands to Yoast SEO Premium.
 #: admin/class-social-admin.php:184
@@ -164,16 +186,16 @@ msgstr "У нас есть другие интеграции, о которых 
 msgid "%1$s%3$s ACF Integration%2$s - an integration built by %4$s and Team %3$s"
 msgstr "%1$s%3$s Интеграция с ACF%2$s - интеграция сделана %4$s и Командой %3$s"
 
+#. translators: 1,2: link open tag; 3: link close tag; 4: Yoast SEO.
+#: admin/views/about.php:269
+msgid "%1$sGlue for %4$s &amp; AMP%3$s - an integration between %2$sthe WordPress AMP plugin%3$s and %4$s."
+msgstr "%1$sGlue for %4$s &amp; AMP%3$s - интеграция между %2$sплагином AMP для WordPress%3$s и %4$s."
+
 #. translators: 1: expands to "Yoast SEO"; 2: emphasis open tag; 3: emphasis
 #. close tag.
 #: admin/views/about.php:232
 msgid "%1$s 3.0 brought a way for theme builders and custom field plugins to integrate with %1$s. These integrations make sure that %2$sall%3$s the data on your page is used for the content analysis. On this page, we highlight the frameworks that have nicely working integrations."
 msgstr "%1$s 3.0 добавила возможность для разработчкиков шаблонов и плагинов интегрироваться с %1$s. Эти операции позволяют убедиться, что данные %2$sall%3$s на вашей странице используются для анализа контента. На этой страницу мы освещаем фреймворки которые отлично работаю с интеграцией."
-
-#. translators: 1,2: link open tag; 3: link close tag; 4: Yoast SEO.
-#: admin/views/about.php:269
-msgid "%1$sGlue for %4$s &amp; AMP%3$s - an integration between %2$sthe WordPress AMP plugin%3$s and %4$s."
-msgstr "%1$sGlue for %4$s &amp; AMP%3$s - интеграция между %2$sплагином AMP для WordPress%3$s и %4$s."
 
 #: admin/class-suggested-plugins.php:133
 msgid "More information"
@@ -346,6 +368,11 @@ msgstr "Портфолио"
 msgid "Something else"
 msgstr "Что-то иное"
 
+#. translators: %1$s resolves to the home_url of the blog.
+#: admin/config-ui/fields/class-field-site-type.php:18
+msgid "What does the site %1$s represent?"
+msgstr "Что представляет собой сайт %1$s?"
+
 #. translators: %1$s is the plugin name, %2$s is a link opening tag, %3$s is a
 #. link closing tag.
 #: admin/config-ui/fields/class-field-social-profiles-intro.php:19
@@ -354,11 +381,6 @@ msgid ""
 " These will be used in Google's Knowledge Graph. There are additional\n"
 " sharing options in the advanced settings. More %2$sinfo%3$s."
 msgstr "%1$s может рассказать поисковым сервисам о ваших социальных профилях. Они будут использованы в Google's Knowledge Graph. Дополнительные параметры совместного доступа в расширенных настройках. Больше %2$sинформации%3$s."
-
-#. translators: %1$s resolves to the home_url of the blog.
-#: admin/config-ui/fields/class-field-site-type.php:18
-msgid "What does the site %1$s represent?"
-msgstr "Что представляет собой сайт %1$s?"
 
 #: admin/config-ui/fields/class-field-google-search-console-intro.php:28
 msgid ""
@@ -677,16 +699,16 @@ msgstr "Хотите ли вы иметь более высокий ранг п�
 msgid "Configuration service"
 msgstr "Сервис настройки"
 
+#. translators: %s resolves to Yoast SEO Premium
+#: admin/config-ui/components/class-component-suggestions.php:32
+msgid "Outrank the competition with %s"
+msgstr "Превзойти конкурентов с %s"
+
 #. translators: %1$s expands to 'Yoast SEO', %2$s expands to 'Yoast SEO
 #. Premium'.
 #: admin/config-ui/components/class-component-configuration-choices.php:61
 msgid "While we strive to make setting up %1$s as easy as possible, we understand it can still be daunting. If you would rather have us set up %1$s for you (and get a copy of %2$s in the process), order a %1$s configuration service and sit back while we configure your site."
 msgstr "В то время как мы стараемся сделать настройку %1$s максимально легкой, мы понимаем, что она может отпугивать. Если вы хотите переложить возможность настройки %1$s на нас ( и получить копию %2$s), закажите сервис настройки %1$s у нас и расслабьтесь пока мы настроим ваш сайт."
-
-#. translators: %s resolves to Yoast SEO Premium
-#: admin/config-ui/components/class-component-suggestions.php:32
-msgid "Outrank the competition with %s"
-msgstr "Превзойти конкурентов с %s"
 
 #. translators: %s expands to 'Yoast SEO'.
 #: admin/config-ui/components/class-component-configuration-choices.php:48
@@ -801,6 +823,13 @@ msgstr "Другие преимущества %1$s:"
 msgid "Superfast internal links suggestions"
 msgstr "Быстрые предложения внутренних ссылок"
 
+#. translators: %2$s expands to 'RS Head Cleaner' plugin name of possibly
+#. conflicting plugin with regard to differentiating output between search
+#. engines and normal users.
+#: admin/class-plugin-conflict.php:160
+msgid "The plugin %2$s changes your site's output and in doing that differentiates between search engines and normal users, a process that's called cloaking. We highly recommend that you disable it."
+msgstr "Плагин %2$s изменяет вывод вашего сайта и делает различным то, что видят поисковые системы и обычные пользователи, это называется cloaking, мы рекомендуем чтобы вы отключили это."
+
 #: admin/class-help-center.php:177
 msgid "Go Premium and our experts will be there for you to answer any questions you might have about the set-up and use of the plug-in!"
 msgstr "Перейдите на премиум и наши эксперты помогут вам со всеми вопросами, которые у вас могут быть по настройке и использованию плагина!"
@@ -811,13 +840,6 @@ msgstr "Перейдите на премиум и наши эксперты по
 #: admin/metabox/class-metabox-add-keyword-tab.php:43
 msgid "%1$sNo more dead links%2$s: easy redirect manager"
 msgstr "%1$sНет больше мертвых ссылок%2$s: простое управление перенаправлением"
-
-#. translators: %2$s expands to 'RS Head Cleaner' plugin name of possibly
-#. conflicting plugin with regard to differentiating output between search
-#. engines and normal users.
-#: admin/class-plugin-conflict.php:160
-msgid "The plugin %2$s changes your site's output and in doing that differentiates between search engines and normal users, a process that's called cloaking. We highly recommend that you disable it."
-msgstr "Плагин %2$s изменяет вывод вашего сайта и делает различным то, что видят поисковые системы и обычные пользователи, это называется cloaking, мы рекомендуем чтобы вы отключили это."
 
 #: admin/class-premium-upsell-admin-block.php:47
 msgid "Superfast internal linking suggestions"
@@ -1613,6 +1635,11 @@ msgstr "Расширенные настройки включают настро�
 msgid "%s installation wizard"
 msgstr "%s мастер установки"
 
+#. translators: %1$s expands to Ryte.
+#: admin/views/tabs/dashboard/features.php:58
+msgid "%1$s can check daily if your site is still indexable by search engines and will notify you when this is not the case."
+msgstr "%1$s проверяет ежедневно, если ваш сайт индексируется поисковыми системами и уведомляет вас, если это не так."
+
 #: admin/metabox/class-metabox.php:87
 #: admin/taxonomy/class-taxonomy-settings-fields.php:37
 msgid "Meta robots index"
@@ -2088,15 +2115,15 @@ msgstr ""
 msgid "Taxonomies sitemap settings"
 msgstr "Настройки таксономий карты сайта "
 
+#: admin/views/tabs/sitemaps/general.php:12
+msgid "Your XML Sitemap"
+msgstr "Ваши XML Sitemap"
+
 #. translators: %1$s and %2$s expand to a link to the SEO Permalinks settings
 #. page.
 #: admin/views/tabs/metas/post-types.php:33
 msgid "As you are redirecting attachment URLs to parent post URLs, these settings will currently only have an effect on unattached media items! So remember: If you change the %1$sattachment redirection setting%2$s in the future, the below settings will take effect for *all* media items."
 msgstr "Так как вы перенаправляете вложения URL-адресов для родительских сообщений URL-адресов, то эти параметры будут в настоящее время оказывать влияние только на прилагаемые медиа элементы! Помните: если вы измените %1$s настройки перенаправления вложений %2$s в будущем, то настройки, сделанные ниже, будут применены для *всех* медиа элементов."
-
-#: admin/views/tabs/sitemaps/general.php:12
-msgid "Your XML Sitemap"
-msgstr "Ваши XML Sitemap"
 
 #: admin/views/tabs/sitemaps/exclude-post.php:12
 msgid "Excluded posts settings"
@@ -2171,6 +2198,11 @@ msgstr "Параметр безопасности"
 #: languages/yoast-components.php:87
 msgid "Enter your Google Authorization Code and press the Authenticate button."
 msgstr "Введите ваш код авторизации Google и, нажмите кнопку Аутентификация"
+
+#. translators: %1$s resolves to https://github.com/Yoast/wordpress-seo
+#: admin/class-admin-asset-seo-location.php:48
+msgid "You are trying to load non-minified files. These are only available in our development package. Check out %1$s to see all the source files."
+msgstr "Вы пытаетесь загрузить не уменьшенные файлы, они доступны только в нашем пакете разработки. Проверьте %1$s чтобы увидеть исходные файлы."
 
 #: admin/views/user-profile.php:44
 msgid "Removes the readability tab from the metabox and disables all readability-related suggestions."
@@ -3035,10 +3067,6 @@ msgstr "Сменить статус лицензии"
 msgid "License status"
 msgstr "Статус лицензии"
 
-#: vendor/yoast/i18n-module/src/i18n-module.php:226
-msgid "As you can see, there is a translation of this plugin in %1$s. This translation is currently %3$d%% complete. We need your help to make it complete and to fix any errors. Please register at %4$s to help complete the translation to %1$s!"
-msgstr "Как видите, этот плагин доступен на вашем языке (%1$s). Перевод на данный момент готов на %3$d%%. Нам нужна ваша помощь для завершения перевода и исправления ошибок. Пожалуйста, зарегистрируйтесь на %4$s, чтобы помочь нам с переводом!"
-
 #: vendor/yoast/license-manager/views/form.php:15
 msgid "We couldn't create a connection to our API to verify your license key(s). Please ask your hosting company to allow outgoing connections from your server to %s."
 msgstr "Мы не смогли подключиться к нашему API для проверки Вашей лицензии. Пожалуйста, попросите Вашего хостинг-провайдера разрешить исходящие подключения от Вашего сервера к %s."
@@ -3081,6 +3109,10 @@ msgstr[2] ""
 #: vendor/yoast/license-manager/class-license-manager.php:674
 msgid "<a href=\"%s\">Did you know you can upgrade your license?</a> "
 msgstr "<a href=\"%s\">Знаете ли вы, что можете расширить свою лицензию?</a>"
+
+#: vendor/yoast/i18n-module/src/i18n-module.php:226
+msgid "As you can see, there is a translation of this plugin in %1$s. This translation is currently %3$d%% complete. We need your help to make it complete and to fix any errors. Please register at %4$s to help complete the translation to %1$s!"
+msgstr "Как видите, этот плагин доступен на вашем языке (%1$s). Перевод на данный момент готов на %3$d%%. Нам нужна ваша помощь для завершения перевода и исправления ошибок. Пожалуйста, зарегистрируйтесь на %4$s, чтобы помочь нам с переводом на %1$s!"
 
 #: admin/views/tabs/social/facebook.php:26
 msgid "These are the title, description and image used in the Open Graph meta tags on the front page of your site."
@@ -3531,13 +3563,13 @@ msgstr "Имя сайта"
 msgid "The site's tag line / description"
 msgstr "Слоган или описание сайта"
 
-#: admin/views/tabs/advanced/permalinks.php:32
-msgid "This helps you to create cleaner URLs by automatically removing the stopwords from them."
-msgstr "Это поможет вам создавать более чистые URL-адреса, автоматически удаляя из них стоп-слова."
-
 #: admin/views/tabs/advanced/rss.php:17
 msgid "This feature is used to automatically add content to your RSS, more specifically, it's meant to add links back to your blog and your blog posts, so dumb scrapers will automatically add these links too, helping search engines identify you as the original source of the content."
 msgstr "Эта функция автоматически добавит содержимое в RSS-поток, Вы можете добавить ссылки на Ваш сайт в каждую запись, защитив содержимое от автоматических агрегаторов, и указав поисковым системам адрес первоисточника."
+
+#: admin/views/tabs/advanced/permalinks.php:32
+msgid "This helps you to create cleaner URLs by automatically removing the stopwords from them."
+msgstr "Это поможет вам создавать более чистые URL-адреса, автоматически удаляя из них стоп-слова."
 
 #: admin/views/tabs/social/facebook.php:45
 msgid "This image is used if the post/page being shared does not contain any images."
@@ -3637,14 +3669,6 @@ msgstr "Перенаправлять URL вложений на URL родите�
 msgid "Taxonomy to show in breadcrumbs for post types"
 msgstr "Таксономия, которая будет показана в «хлебных крошках» для типов записей"
 
-#: admin/views/tabs/advanced/permalinks.php:60
-msgid "People make mistakes in their links towards you sometimes, or unwanted parameters are added to the end of your URLs, this allows you to redirect them all away. Please note that while this is a feature that is actively maintained, it is known to break several plugins, and should for that reason be the first feature you disable when you encounter issues after installing this plugin."
-msgstr "Иногда в ссылках на Ваш сайт делают ошибки, бывает, что в конце ссылки добавляются какие-то дополнительные параметры. Эта настройка позволит перенаправить такие ссылки наружу, то есть исключит их из обхода роботами. Хоть эта функция и активно используется, известно, она бывает не совместима со многими плагинами, и, чаще всего, при возникновении проблем в их работе, её нужно отключить."
-
-#: admin/views/tabs/advanced/permalinks.php:28
-msgid "Attachments to posts are stored in the database as posts, this means they're accessible under their own URLs if you do not redirect them, enabling this will redirect them to the post they were attached to."
-msgstr "Файлы, прикреплённые к записям, хранятся в базе данных, как отдельные записи. Это значит, что они доступны под своими собственными URL, если вы не настроили перенаправление для них, включение этого пункта перенаправит их адрес на запись, к которой они прикреплены."
-
 #. translators: 1: link open tag; 2: link close tag.
 #: admin/views/about.php:48
 msgid "Want to help us develop? Read our %1$scontribution guidelines%2$s!"
@@ -3654,6 +3678,14 @@ msgstr "Хотите помочь в разработке? Ознакомьте�
 #: admin/views/about.php:40
 msgid "While most of the development team is at %1$sYoast%2$s in the Netherlands, %3$s is created by a worldwide team."
 msgstr "Несмотря на то, что большая часть разработчиков %1$sYoast%2$s находится в Голландии, над %3$s работает международная команда."
+
+#: admin/views/tabs/advanced/permalinks.php:60
+msgid "People make mistakes in their links towards you sometimes, or unwanted parameters are added to the end of your URLs, this allows you to redirect them all away. Please note that while this is a feature that is actively maintained, it is known to break several plugins, and should for that reason be the first feature you disable when you encounter issues after installing this plugin."
+msgstr "Иногда в ссылках на Ваш сайт делают ошибки, бывает, что в конце ссылки добавляются какие-то дополнительные параметры. Эта настройка позволит перенаправить такие ссылки наружу, то есть исключит их из обхода роботами. Хоть эта функция и активно используется, известно, она бывает не совместима со многими плагинами, и, чаще всего, при возникновении проблем в их работе, её нужно отключить."
+
+#: admin/views/tabs/advanced/permalinks.php:28
+msgid "Attachments to posts are stored in the database as posts, this means they're accessible under their own URLs if you do not redirect them, enabling this will redirect them to the post they were attached to."
+msgstr "Файлы, прикреплённые к записям, хранятся в базе данных, как отдельные записи. Это значит, что они доступны под своими собственными URL, если вы не настроили перенаправление для них, включение этого пункта перенаправит их адрес на запись, к которой они прикреплены."
 
 #: admin/views/tabs/sitemaps/exclude-post.php:22
 msgid "Posts to exclude"
@@ -4227,10 +4259,6 @@ msgstr "Страницы поиска"
 msgid "Company or person"
 msgstr "Компания или частное лицо"
 
-#: admin/google_search_console/class-gsc-service.php:138
-msgid "Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We've detected this isn't the case, so please update the Yoast plugins that aren't up to date yet."
-msgstr "Yoast плагины разделяют код между собой, чтобы сделать ваш сайт быстрее. Как следствие, все Yoast плагины должны быть обновлены до последней версии. Мы обнаружили, что в вашем случае это не так. Пожалуйста, обновите Yoast плагины, использующие старые версии."
-
 #: admin/views/tabs/dashboard/knowledge-graph.php:37
 msgid "Choose whether you're a company or person"
 msgstr "Выберите, представляете ли вы компанию или являетесь частным лицом"
@@ -4238,6 +4266,10 @@ msgstr "Выберите, представляете ли вы компанию 
 #: admin/google_search_console/class-gsc-table.php:105
 msgid "First detected"
 msgstr "Первый обнаружен"
+
+#: admin/google_search_console/class-gsc-service.php:138
+msgid "Yoast plugins share some code between them to make your site faster. As a result of that, we need all Yoast plugins to be up to date. We've detected this isn't the case, so please update the Yoast plugins that aren't up to date yet."
+msgstr "Yoast плагины разделяют код между собой, чтобы сделать ваш сайт быстрее. Как следствие, все Yoast плагины должны быть обновлены до последней версии. Мы обнаружили, что в вашем случае это не так. Пожалуйста, обновите Yoast плагины, использующие старые версии."
 
 #: admin/views/tabs/metas/archives.php:40
 #: admin/views/tabs/metas/archives.php:56 admin/views/tabs/metas/home.php:16
