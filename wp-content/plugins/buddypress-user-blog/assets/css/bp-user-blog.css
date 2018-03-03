@@ -101,6 +101,14 @@ This is the BuddyPress User Blog stylesheet.
     opacity: 0.8;
 }
 
+.sap-words-counter {
+    padding: 0 10px;
+    float: left;
+    line-height: 2.5;
+    font-weight: 600;
+    color: rgba(0,0,0,.4);
+}
+
 .sap-save {
     color: #54ae68;
     display: block;
@@ -698,6 +706,10 @@ body .medium-editor-toolbar li button:hover {
     background: #57ac68;
 }
 
+body .medium-editor-toolbar .medium-editor-toolbar-input {
+    color: #ffffff;
+}
+
 /* BuddyBoss Theme */
 .sap-category-widget .buddyboss-select {
     width: 100%;
@@ -970,7 +982,7 @@ form#sort-posts-form {
     font-size: inherit;
     margin: 0 20px 0 0;
 }
-.medium-insert-images i.fa.fa-spinner.fa-spin {
+.sap-editable-area .medium-insert-images i.fa.fa-spinner.fa-spin {
     position: absolute;
     background: rgba(255, 255, 255, 0.5);
     color: rgba(0,0,0,0.9);
@@ -1083,7 +1095,8 @@ form#sort-posts-form {
     }
 }
 
-.medium-insert-embeds:not(.medium-insert-embeds-wpoembeds) + p:before {
+/*
+.sap-editable-area .medium-insert-embeds-selected.medium-insert-embeds:not(.medium-insert-embeds-wpoembeds) + p:before {
     content: '+';
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -1112,6 +1125,7 @@ form#sort-posts-form {
     cursor: pointer;
     z-index: 999;
 }
+*/
 
 /* Categories */
 #sap-widget-container .category_hierarchy_ul {

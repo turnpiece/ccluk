@@ -15,6 +15,11 @@
             allbuttons = jq( '.sl-button-' + post_id );
         }
 
+        // When the overlay login is disabele, redirect user to the login page
+        if ( !recommendPost.is_user_logged_in ) {
+            window.location.href = button.attr('href');
+        }
+
         if ( post_id !== '' ) {
 
             jq.ajax( {

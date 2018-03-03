@@ -17,9 +17,10 @@ if ( !function_exists( 'sl_enqueue_scripts' ) ) {
 	function sl_enqueue_scripts() {
 		wp_enqueue_script( 'sap-recommend-it', buddyboss_sap()->assets_url . '/js/recommend-it.js', array( 'jquery' ), '0.5', true );
 		wp_localize_script( 'sap-recommend-it', 'recommendPost', array(
-			'ajaxurl'	 => admin_url( 'admin-ajax.php' ),
-			'like'		 => __( 'Recommend this article', 'bp-user-blog' ),
-			'unlike'	 => __( 'Discourage recommendation', 'bp-user-blog' )
+            'is_user_logged_in' => is_user_logged_in(),
+			'ajaxurl'	        => admin_url( 'admin-ajax.php' ),
+			'like'		        => __( 'Recommend this article', 'bp-user-blog' ),
+			'unlike'	        => __( 'Discourage recommendation', 'bp-user-blog' )
 		) );
 	}
 
@@ -31,19 +32,14 @@ if ( !function_exists( 'sl_enqueue_scripts' ) ) {
  */
 if ( !function_exists( 'process_simple_like' ) ) {
 
-	function process_simple_like() {
-		// Security
-		$nonce = isset( $_REQUEST[ 'nonce' ] ) ? sanitize_text_field( $_REQUEST[ 'nonce' ] ) : 0;
-		if ( !wp_verify_nonce( $nonce, 'simple-likes-nonce' ) ) {
-			exit( __( 'Not permitted', 'bp-user-blog' ) );
-		}
-		// Test if javascript is disabled
-		$disabled	 = ( isset( $_REQUEST[ 'disabled' ] ) && $_REQUEST[ 'disabled' ] == true ) ? true : false;
+	function process_simple_like( $args='' ) {
+        // Test if javascript is disabled
+		$disabled	 = ( isset( $args[ 'disabled' ] ) && $args[ 'disabled' ] == true ) ? true : false;
 		// Test if this is a comment
-		$is_comment	 = ( isset( $_REQUEST[ 'is_comment' ] ) && $_REQUEST[ 'is_comment' ] == 1 ) ? 1 : 0;
+		$is_comment	 = ( isset( $args[ 'is_comment' ] ) && $args[ 'is_comment' ] == 1 ) ? 1 : 0;
 		// Base variables
-		$post_id	 = ( isset( $_REQUEST[ 'post_id' ] ) && is_numeric( $_REQUEST[ 'post_id' ] ) ) ? $_REQUEST[ 'post_id' ] : '';
-		$result		 = array();
+		$post_id	 = ( isset( $args[ 'post_id' ] ) && is_numeric( $args[ 'post_id' ] ) ) ? $args[ 'post_id' ] : '';
+		$response	 = array();
 		$post_users	 = NULL;
 		$like_count	 = 0;
 		// Get plugin options
@@ -89,6 +85,8 @@ if ( !function_exists( 'process_simple_like' ) ) {
 
 				// add activity
 				add_recommended_activity( $user_id, $post_id );
+
+				do_action( 'post_recommended', $post_id );
 
 			} else { // Unlike the post
 				if ( is_user_logged_in() ) { // user is logged in
@@ -146,12 +144,41 @@ if ( !function_exists( 'process_simple_like' ) ) {
 
 			$response[ 'count' ]	 = get_like_count( $like_count, $post_id );
 			$response[ 'testing' ]	 = $is_comment;
-			if ( $disabled == true ) {
-				if ( $is_comment == 1 ) {
+		}
+        
+        return $response;
+	}
+    
+	/**
+     * Ajax wrapper for process_simple_like function 
+     * for separating logic and making process_simple_like testable.
+     */
+    function ajax_process_simple_like() {
+		// Security
+		$nonce = isset( $_REQUEST[ 'nonce' ] ) ? sanitize_text_field( $_REQUEST[ 'nonce' ] ) : 0;
+		if ( !wp_verify_nonce( $nonce, 'simple-likes-nonce' ) ) {
+			exit( __( 'Not permitted', 'bp-user-blog' ) );
+		}
+        
+        $args = array();
+        
+		// Test if javascript is disabled
+		$args['disabled']	 = ( isset( $_REQUEST[ 'disabled' ] ) && $_REQUEST[ 'disabled' ] == true ) ? true : false;
+		// Test if this is a comment
+		$args['is_comment']	 = ( isset( $_REQUEST[ 'is_comment' ] ) && $_REQUEST[ 'is_comment' ] == 1 ) ? 1 : 0;
+		// Base variables
+		$args['post_id']	 = ( isset( $_REQUEST[ 'post_id' ] ) && is_numeric( $_REQUEST[ 'post_id' ] ) ) ? $_REQUEST[ 'post_id' ] : '';
+		
+        $response = process_simple_like( $args );
+        
+		if ( $args['post_id'] != '' ) {
+			
+			if ( $args['disabled'] == true ) {
+				if ( $args['is_comment'] == 1 ) {
 					wp_redirect( get_permalink( get_the_ID() ) );
 					exit();
 				} else {
-					wp_redirect( get_permalink( $post_id ) );
+					wp_redirect( get_permalink( $args['post_id'] ) );
 					exit();
 				}
 			} else {
@@ -160,8 +187,8 @@ if ( !function_exists( 'process_simple_like' ) ) {
 		}
 	}
 
-	add_action( 'wp_ajax_nopriv_process_simple_like', 'process_simple_like' );
-	add_action( 'wp_ajax_process_simple_like', 'process_simple_like' );
+	add_action( 'wp_ajax_nopriv_process_simple_like', 'ajax_process_simple_like' );
+	add_action( 'wp_ajax_process_simple_like', 'ajax_process_simple_like' );
 }
 
 /**
@@ -307,7 +334,8 @@ if ( !function_exists( 'get_simple_likes_button' ) ) {
 		if ( is_user_logged_in() ) {
 			$output = '<span class="sl-wrapper"><a href="' . admin_url( 'admin-ajax.php?action=process_simple_like' . '&nonce=' . $nonce . '&post_id=' . $post_id . '&disabled=true&is_comment=' . $is_comment ) . '" class="sl-button' . $post_id_class . $class . $comment_class . '" data-nonce="' . $nonce . '" data-post-id="' . $post_id . '" data-iscomment="' . $is_comment . '" title="' . $title . '">' . $icon . $count . '</a></span>';
 		} else {
-			//$output = '<span class="sl-wrapper"><a href="#siteLoginBox" class="sl-button onesocial-login-popup-link" title="' . $title . '">' . $icon . $count . '</a></span>';
+            $url            = wp_login_url( get_the_permalink() );
+            $output         = '<span class="sl-wrapper"><a href="'. $url .'" class="sl-button" title="' . $title . '">' . $icon . $count . '</a></span>';
 		}
 
 		return $output;
@@ -504,7 +532,7 @@ if ( !function_exists( 'get_like_count' ) ) {
 				}
 			}
 
-			$output .= ' recommended';
+			$output .= __( ' recommended', 'bp-user-blog' );
 		} else {
 			if ( is_numeric( $like_count ) && $like_count > 0 ) {
 				$number = sl_format_count( $like_count );
@@ -593,4 +621,54 @@ if ( !function_exists( 'sap_add_recommend_button_after_post' ) ) {
 	}
 
 	add_filter( 'the_content', 'sap_add_recommend_button_after_post' );
+}
+
+/**
+ * Send notifications to post author.
+ *
+ */
+function sap_post_recommended_add_notification( $post_id ) {
+
+    $post = get_post( $post_id );
+
+    $notification = bp_notifications_add_notification( array(
+        'user_id'           => $post->post_author,
+        'item_id'           => $post_id,
+        'secondary_item_id' => get_current_user_id(),
+        'component_name'    => 'sap',
+        'component_action'  => 'post_recommended',
+        'date_notified'     => bp_core_current_time(),
+        'is_new'            => 1,
+    ) );
+
+    if ( is_multisite() && $notification ) {
+        // Store current blog_id in meta value
+        bp_notifications_add_meta( $notification, 'sap_post_blog_id', get_current_blog_id() );
+    }
+
+}
+
+/**
+ * Clear post recommended related notifications when on the single post
+ *
+ */
+function sap_mark_post_recommended_notifications_by_item() {
+
+    global $post;
+
+    if ( !is_user_logged_in() )
+        return;
+
+    if ( !is_singular('post') )
+        return;
+
+    $user_id = $post->post_author;
+
+    // Only mark read if the current user is looking at his own post.
+    if ( (int) $user_id !== (int) bp_loggedin_user_id() ) {
+        return;
+    }
+
+    //mark notification read
+    bp_notifications_mark_notifications_by_item_id( get_the_author(), get_the_ID(), 'sap', 'post_recommended' );
 }

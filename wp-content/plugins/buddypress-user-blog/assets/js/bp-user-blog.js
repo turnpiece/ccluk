@@ -30,15 +30,29 @@ var title = new MediumEditor( '.sap-editable-title', {
 } );
 
 var editor = new MediumEditor( '.sap-editable-area', {
+    buttonLabels: 'fontawesome',
     placeholder: {
         text: sap_loading_string.content_placeholder
     },
     toolbar: {
-        buttons: ['bold', 'italic', 'underline', 'anchor', 'h2', 'h3','orderedlist','unorderedlist' ,'quote']
+        buttons: [{ name: 'bold', aria: sap_loading_string.bold }, { name: 'italic', aria: sap_loading_string.italic }, { name: 'underline', aria: sap_loading_string.underline }, { name: 'anchor', aria: sap_loading_string.anchor }, { name: 'h2', aria: sap_loading_string.h2 }, { name: 'h3', aria: sap_loading_string.h3 },{ name: 'orderedlist', aria: sap_loading_string.orderedlist },{ name: 'unorderedlist', aria: sap_loading_string.unorderedlist } ,{ name: 'quote', aria: sap_loading_string.quote }, { name: 'table' } ]
+    },
+    extensions: {
+         autolist: new AutoList(),
+         table: new MediumEditorTable()
     },
     autoLink: true,
     targetBlank: true
 } );
+
+const $sap_words_counter = jq('.sap-words-counter span');
+
+/**
+ * Set words count upon post content change
+ */
+editor.subscribe('editableInput', function (event, editable) {
+    sap_set_words_counter();
+});
 
 jq( function () {
     jq( '.sap-editable-area' ).mediumInsert( {
@@ -53,7 +67,7 @@ jq( function () {
                     captionPlaceholder: 'Type caption for image (optional)', // (string) Caption placeholder
                     autoGrid: 3, // (integer) Min number of images that automatically form a grid
                     fileUploadOptions: { // (object) File upload configuration. See https://github.com/blueimp/jQuery-File-Upload/wiki/Options
-                        url: ajaxurl+"?action=buddyboss_sap_post_photo", // (string) A relative path to an upload script
+                        url: ajaxurl+"?action=buddyboss_sap_post_photo&post_id="+jq( '#sap-draft-pid' ).val(), // (string) A relative path to an upload script
                         acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i, // (regexp) Regexp of accepted file types
                         formData: [
                         {name:'sap-editor-nonce',value: jq( "input[name='sap_editor_nonce']" ).val()}
@@ -68,7 +82,19 @@ jq( function () {
                         fail: function(e,data) {
 
                            window.sap_last_uploaded_image = data;
-                        }
+                        },
+                        change : function (e, data) {
+                            if(data.files.length > parseInt( sap_loading_string.config.max_files_per_batch ) ){
+                                alert(sap_loading_string.exceed_max_files_per_batch);
+                                return false;
+                            }
+                        },
+                        start: function (e) {
+                            jq( '.sap-story-publish,.sap-story-update,.sap-story-draft,.sap-story-preview' ).toggleClass('sap-disabled');
+                        },
+                        stop:  function (e) {
+                            jq( '.sap-story-publish,.sap-story-update,.sap-story-draft,.sap-story-preview' ).toggleClass('sap-disabled');
+                        },
                     },
 
                     uploadCompleted : function ($el, data) {
@@ -87,11 +113,18 @@ jq( function () {
                             return;
                         }
 
-                        setTimeout(function(){
-                            sap_post_add_screen( 'draft', 'true' );
-                        },500);
+                        if ( sap_loading_string.config.post_autosave == 'on' ) {
+                            setTimeout(function() {
+                                sap_post_add_screen( 'draft', 'true', data.result.files[0].id );
+                            },500);
+
+                        }
 
                     }
+                },
+                embeds: {
+                     placeholder: sap_loading_string.video_placeholder,
+                     oembedProxy: sap_loading_string.config.home_url + '?sap_oembedfetch=1',
                 }
          }
     } );
@@ -117,6 +150,10 @@ jq( '.sap-story-publish' ).on( 'click', function ( e ) {
 
     if ( 'empty' == sap_check_empty_title() ) {
         alert(sap_loading_string.empty_title);
+        return;
+    }
+
+    if ( !sap_check_words_limit() ) {
         return;
     }
 
@@ -154,6 +191,10 @@ jq( '.sap-story-draft' ).on( 'click', function ( e ) {
 //update
 jq( '.sap-story-update' ).on( 'click', function ( e ) {
     e.preventDefault();
+
+    if ( !sap_check_words_limit() ) {
+        return;
+    }
 
     jq('#sap-edit-status').val('');
     sap_post_add_screen( 'publish', 'false' );
@@ -194,6 +235,10 @@ jq( '.sap-story-delete' ).on( 'click', function ( e ) {
 // draft idle handle for add new post
 function sap_draft_screen_auto_save() {
 
+    if ( sap_loading_string.config.post_autosave != 'on' ) {
+        return;
+    }
+
     leavetype = function () {
         if(jq(this).find('.medium-insert-images').length > 0 || jq(this).find('medium-insert-embeds').length > 0 || jq(this).find('p').html() !== '<br>') {
             clearTimeout( window.sap_autosave_secout );
@@ -225,10 +270,11 @@ function sap_draft_screen_auto_save() {
 
 }
 
-function sap_post_add_screen( visibility, draft ) {
+function sap_post_add_screen( visibility, draft, attachment_id ) {
     var thisbutton = jq( '.sap-story-publish' );
     var draftbutton = jq( '.sap-story-draft' );
     var reviewbutton = jq( '.sap-story-review' );
+    attachment_id = attachment_id || 0;
 
     //disable button
     thisbutton.addClass( 'sap-disabled' );
@@ -243,10 +289,8 @@ function sap_post_add_screen( visibility, draft ) {
     var post_visibility = jq( '#sap-draft-status' ).val();
     var edit_status = jq('#sap-edit-status').val();
     var is_index_page = jq('#sap_is_index_page').val();
-    
-    if( is_index_page == 'yes' ){
-        visibility = 'draft';
-    }
+
+    //visibility = 'draft';
 
     var post_cat_arr = new Array();
     jq('.category_hierarchy_ul .single_cat .blogpost_cat').each(function(){
@@ -286,7 +330,7 @@ function sap_post_add_screen( visibility, draft ) {
                 alert( sap_loading_string.failed_string );
             }
             else if ( response[0] == 'Empty' ) {
-                alert( sap_loading_string.empty_content );
+               // alert( sap_loading_string.empty_content );
             }
             else {
                 if ( visibility == 'pending' ) {
@@ -324,6 +368,10 @@ function sap_post_add_screen( visibility, draft ) {
                 jq( '.sap-story-delete' ).show();
             }
 
+            if ( attachment_id != 0 ) {
+                jq.post( ajaxurl, { action: 'sap_attach_post_media', post_id: jq( '#sap-draft-pid' ).val(), media_id: attachment_id });
+            }
+
         }
     } );
 }
@@ -343,12 +391,42 @@ function sap_check_empty_title() {
     }
 }
 
+function sap_check_words_limit() {
+
+    var min_words = +sap_loading_string.config.min_words;
+    var max_words = +sap_loading_string.config.max_words;
+    var words     = sap_get_editor_words_count() || 0;
+
+    if ( 0 < min_words && words < min_words && !window.confirm(sap_loading_string.min_words_alert) ) {
+        return false;
+    }
+
+    if ( 0 < max_words && words > max_words && !window.confirm(sap_loading_string.max_words_alert)) {
+        return false;
+    }
+
+    return true;
+}
+
 function sap_empty_editor() {
     jq('.sap-editable-title').html('');
     jq('.sap-editable-area').html('');
     jq('#sap-cat').val('1');
     jq('#sap-cat').change();
     jq('.selectize-input').find('div').remove();
+}
+
+function sap_get_editor_words_count() {
+
+    var regex = /\s+/gi;
+    var postText = editor.elements[0].innerText.trim().replace(regex, ' ');
+    var wordCount = '' === postText ? 0 : postText.split(' ').length;
+
+    return wordCount;
+}
+
+function sap_set_words_counter() {
+    $sap_words_counter.text(sap_get_editor_words_count());
 }
 
 //for tweeter preview
@@ -412,7 +490,7 @@ BBOSS_SAP.editor = { };
 
         //for adding new tags
         jq( '#input-tags-select' ).selectize( {
-            plugins: [ 'remove_button' ],
+            plugins: { 'remove_button': { title: sap_loading_string.remove } },
             delimiter: ',',
             persist: false,
             create: function ( input ) {
@@ -420,7 +498,12 @@ BBOSS_SAP.editor = { };
                     value: input,
                     text: input
                 };
-            }
+            },
+            render: {
+                option_create: function (data, escape) {
+                    return '<div class="create">'+ sap_loading_string.add +' <strong>' + escape(data.input) + '</strong>&hellip;</div>';
+                }
+            },
         } );
     };
 
@@ -455,6 +538,7 @@ BBOSS_SAP.editor = { };
             multipart: true,
             multipart_params: {
                 action: 'buddyboss_sap_post_photo',
+                post_id: jq( '#sap-draft-pid' ).val(),
                 'cookie': encodeURIComponent( document.cookie ),
                 'sap-editor-nonce': jq( "input[name='sap_editor_nonce']" ).val()//CHANGE THIS
             },
@@ -503,6 +587,18 @@ BBOSS_SAP.editor = { };
     }, // start_uploader();
 
     context.clear_upload = function () {
+
+        // Delete post thumbnail
+        jq.ajax({
+            url: ajaxurl,
+            type: 'POST',
+            data: {
+                sap_nonce: jq( "input[name='sap_editor_nonce']" ).val(),
+                action: 'buddyboss_sap_remove_featured_image',
+                post_id: jq( '#sap-draft-pid' ).val()
+            }
+        });
+
         _l.$hidden_field.val( '' );
         _l.$image.attr( 'src', sap_loading_string.config.loading_image ).hide();
         _l.$close_button.hide();
@@ -555,6 +651,11 @@ jQuery( document ).ready( function ( jq ) {
         sap_draft_screen_auto_save();
     }
 
+    // Set words count upon page load
+    if ( sap_loading_string.add_new_post ) {
+        sap_set_words_counter();
+    }
+
 } );
 
 
@@ -570,7 +671,9 @@ jq( document ).on( 'ready', function () {
         var self = jq( this ),
             sort = self.attr( 'data-sort' ),
             max = self.attr( 'data-max' ),
-            paged = self.attr( 'data-paged' );
+            paged = self.attr( 'data-paged' ),
+            bp_action = self.attr('data-bp-action');
+
 
         jq.ajax( {
             type: 'POST',
@@ -579,6 +682,7 @@ jq( document ).on( 'ready', function () {
                 action: 'sap_posts_pagination',
                 sort: sort,
                 paged: paged,
+                bp_action: bp_action
             },
             beforeSend: function () {
                 self.addClass( 'loading' );

@@ -127,6 +127,7 @@ if ( $old_post == 'true' ) {
                     <div class="sap-editor-publish-wrapper clearfix">
 
                         <div class="sap-publish-popup">
+                          <span class="sap-words-counter"><span>0</span> <?php _e('words', 'bp-user-blog' ) ?></span>
                             <?php
                             if ( $publish_post ) {
                                    if ( $old_post == 'true' && $post_status != 'draft' ) { ?>

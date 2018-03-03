@@ -20,12 +20,83 @@ function sap_user_blog_page() {
 	bp_core_load_template( apply_filters( 'sap_user_blog_page', 'members/single/plugins' ) );
 }
 
+/**
+ *
+ */
 function sap_template_blog() {
-	sap_load_template( 'sap-blog-page' );
+    global $paged, $wp_query;
+
+    $paged	    = bp_action_variable( 1 );
+    $paged	    = $paged ? $paged : 1;
+    $query_args = array();
+
+    $sort = (isset( $_GET[ 'sort' ] )) ? $_GET[ 'sort' ] : 'latest';
+
+    if ( 'drafts' == bp_current_action() ) {
+        $post_status = 'draft';
+    }
+    elseif ( 'pending' == bp_current_action() ) {
+        $post_status = 'pending';
+    } else {
+        $post_status = 'publish';
+    }
+
+    $args = array(
+        'author'            => bp_displayed_user_id(),
+        'post_type'         => 'post',
+        'post_status'       => $post_status,
+        'paged'             => $paged,
+        'posts_per_page'    => get_option('posts_per_page')
+    );
+
+    if ( $sort === 'recommended' ) {
+        $query_args = array(
+            'meta_key'      => '_post_like_count',
+            'orderby'       => 'meta_value_num',
+            'order'         => 'DESC',
+        );
+    }
+
+    // Bookmarks tab
+    if ( bp_is_current_action('bookmarks') ) {
+
+        /** Calculate total pages */
+        $bookmarked_all = sap_get_bookmarked_posts( array( 'number' => -1 ) );
+        if ( count( $bookmarked_all ) > 0 ) {
+           $max_num_pages = ceil( count( $bookmarked_all ) / (int) get_option('posts_per_page') );
+        }
+
+        $bookmarked_paged  = sap_get_bookmarked_posts( array( 'offset' => 0, 'number' => get_option('posts_per_page') ) );
+
+        $query_args = array(
+            'author'    => false,
+            'paged'     => false,
+            'post__in'  =>  0 < count( $bookmarked_paged ) ? $bookmarked_paged : array(0)
+        );
+    }
+
+    query_posts( wp_parse_args( $query_args, $args ) );
+
+    $create_new_post_page = buddyboss_sap()->option( 'create-new-post' );
+
+    sap_load_template( 'sap-blog-page', array(
+            'create_new_post_page' => $create_new_post_page,
+            'max_num_pages' => $max_num_pages ? $max_num_pages : $wp_query->max_num_pages,
+            'paged' => $paged,
+            'sort' => $sort,
+    ) );
+
+    wp_reset_postdata();
+    wp_reset_query();
 }
 
-function sap_load_template( $template ) {
+function sap_load_template( $template, $args = array() ) {
 	$template .= '.php';
+
+    if ( $args && is_array( $args ) ) {
+        extract( $args );
+    }
+
 	if ( file_exists( STYLESHEETPATH . '/bp-user-blog/' . $template ) )
 		include_once(STYLESHEETPATH . '/bp-user-blog/' . $template);
 	else if ( file_exists( TEMPLATEPATH . '/bp-user-blog/' . $template ) )
@@ -73,23 +144,61 @@ function sap_get_page_template_permalink( $template ) {
 	}
 }
 
+/**
+ * Get bookmarked posts
+ *
+ * @param array $args
+ * @return array|mixed
+ */
+function sap_get_bookmarked_posts( $args = array() ) {
+
+    $bookmarks_qv = wp_parse_args( $args, array(
+            'user_id'   => get_current_user_id(),
+            'number'    => -1,
+            'offset'    => 0,
+    ));
+
+    $bookmarked_posts = get_user_option( 'sap_user_bookmarks', $bookmarks_qv['user_id'] );
+
+    if ( count( $bookmarked_posts ) > 0 && $bookmarks_qv['number'] > 0 ) {
+        return array_slice( $bookmarked_posts, $bookmarks_qv['offset'], $bookmarks_qv['number'] );
+    }
+
+    return $bookmarked_posts;
+}
+
 function sap_save_post() {
 
 	check_ajax_referer( 'sap-editor-nonce', 'sap_nonce' );
 
 	$post_title             = $_POST[ 'post_title' ];
-	$post_content		= $_POST[ 'post_content' ];
-	$post_status		= $_POST[ 'post_status' ];
+	$post_content		    = $_POST[ 'post_content' ];
+	$post_status		    = $_POST[ 'post_status' ];
 	$post_content_status    = strip_tags( $post_content[ 'value' ] );
-	$post_category		= isset( $_POST[ 'post_cat' ] ) ? $_POST[ 'post_cat' ] : array();
-        $post_tags              = $_POST[ 'post_tags' ];
-        $post_img               = $_POST[ 'post_img' ];
-        $draft_id		= $_POST[ 'draft_pid' ];
-        $res			= array();
+	$post_category		    = isset( $_POST[ 'post_cat' ] ) ? $_POST[ 'post_cat' ] : array();
+    $post_tags              = $_POST[ 'post_tags' ];
+    $post_img               = $_POST[ 'post_img' ];
+    $draft_id		        = $_POST[ 'draft_pid' ];
+    $res			        = array();
 
 	if ( 'public' == $post_status ) {
 		$post_status = 'publish';
 	}
+
+	if( 'publish' == $post_status ) {
+        $text               = trim( strip_tags( $post_content['value'] ) );
+        $word_number        = preg_match_all( "~\s+~", "$text ", $m );
+        $min_words_limit    = (int) buddyboss_sap()->option('min_words_limit');
+        $max_words_limit    = (int) buddyboss_sap()->option('max_words_limit');
+
+        if ( !empty( $min_words_limit ) && $word_number < $min_words_limit) {
+            $post_status = 'draft';
+        }
+
+        if ( !empty( $max_words_limit ) && $word_number > $max_words_limit ) {
+            $post_status = 'draft';
+        }
+    }
 
 	if ( empty( $post_content_status ) ) {
 		$res[ '0' ] = 'Empty';
@@ -98,16 +207,16 @@ function sap_save_post() {
 		die();
 	}
         
-        global $wp_version;
+    global $wp_version;
 
 	$post_data = array( 'post_title' => strip_tags( $post_title[ 'value' ] ), 'post_content' => $post_content[ 'value' ], 'post_status' => $post_status, 'post_author' => get_current_user_id() );
         
-        //For wp backward compatibility
-        if ( version_compare( $wp_version, '4.3', '>=' ) ) {
-            $post_data['comment_status'] = get_default_comment_status( 'post' );
-        } else {
-            $post_data['comment_status'] = sap_get_default_comment_status( 'post' );
-        }
+    //For wp backward compatibility
+    if ( version_compare( $wp_version, '4.3', '>=' ) ) {
+        $post_data['comment_status'] = get_default_comment_status( 'post' );
+    } else {
+        $post_data['comment_status'] = sap_get_default_comment_status( 'post' );
+    }
 
 	if ( isset( $draft_id ) && !empty( $draft_id ) ) {
 		$post_data[ 'ID' ] = $draft_id;
@@ -127,11 +236,12 @@ function sap_save_post() {
 
 	if ( isset( $post_img ) && !empty( $post_img ) ) {
 		set_post_thumbnail( $pid, $post_img );
-                $pid = wp_insert_post( $post_data );//so that thumbnail is updated in bp activity
+        $post_data[ 'ID' ] = $pid;
+        $pid = wp_insert_post( $post_data );//so that thumbnail is updated in bp activity
 	}
         
-        wp_set_post_categories( $pid, $post_category );
-        wp_set_post_tags( $pid, $post_tags );
+    wp_set_post_categories( $pid, $post_category );
+    wp_set_post_tags( $pid, $post_tags );
         
 	$res[ '0' ]	 = $pid;
 	$res[ '1' ]	 = get_the_permalink( $pid );
@@ -143,6 +253,54 @@ function sap_save_post() {
 add_action( 'wp_ajax_sap_save_post', 'sap_save_post' );
 add_action( 'wp_ajax_nopriv_sap_save_post', 'sap_save_post' );
 
+/**
+ * Attach media with the blog post
+ */
+function sap_attach_post_media() {
+
+    $post_id    = $_POST['post_id'];
+    $media_id   = $_POST['media_id'];
+
+    wp_update_post(
+        array(
+            'ID' => $media_id,
+            'post_parent' => $post_id
+        )
+    );
+}
+
+add_action( 'wp_ajax_sap_attach_post_media', 'sap_attach_post_media' );
+
+/**
+ * Delete post media permanently
+ *
+ * @param $id
+ */
+function sap_delete_post_media( $id ) {
+
+    if ( buddyboss_sap()->option('delete_media_permanently') == 'on' ) {
+
+        // Delete attachments
+        $attachments = get_children( array(
+            'post_parent' => $id,
+            'post_status' => 'any',
+            'post_type'   => 'attachment',
+        ) );
+
+        foreach ( (array) $attachments as $attachment ) {
+            wp_delete_attachment( $attachment->ID, true );
+        }
+
+        // If post has a featured media, delete that too
+        if ( $featured_media = get_post_thumbnail_id( $id ) ) {
+            wp_delete_attachment( $featured_media, true );
+        }
+    }
+}
+
+/**
+ * Delete post from front-end edit
+ */
 function sap_delete_post() {
 
 	check_ajax_referer( 'sap-editor-nonce', 'sap_nonce' );
@@ -151,6 +309,7 @@ function sap_delete_post() {
 
 	if ( isset( $draft_id ) && !empty( $draft_id ) ) {
 		wp_delete_post( $draft_id );
+        sap_delete_post_media( $draft_id );
 	}
 
 	die();
@@ -158,6 +317,19 @@ function sap_delete_post() {
 
 add_action( 'wp_ajax_sap_delete_post', 'sap_delete_post' );
 add_action( 'wp_ajax_nopriv_sap_delete_post', 'sap_delete_post' );
+
+/**
+ * Delete post.
+ *
+ * @param int|WP_Post $id Post ID or WP_Post instance.
+ */
+function sap_clear_blog_post_attachments( $id ) {
+    if ( get_post_type( $id ) == 'post' ) {
+        sap_delete_post_media( $id );
+    }
+}
+
+add_action( 'before_delete_post', 'sap_clear_blog_post_attachments', 10, 1 );
 
 if ( !function_exists( 'sap_post_create_template' ) ) {
     function sap_post_create_template( $content ){
@@ -322,10 +494,14 @@ if ( !function_exists( 'sap_show_content_if_no_bookmarks' ) ) {
  * Function render category hierarchy
  */
 function sap_post_category_html( $post_category ){
-    
+
+    $excluded_categories = buddyboss_sap()->option( 'excluded_categories' );
+
     $cat_args = apply_filters( 'sap_post_category_args', array(
         'hide_empty' => false,
+        'exclude'    => $excluded_categories
     ));
+
     $blog_post_categories = get_terms( 'category', $cat_args );
     
     echo "<div class='post_categories_cont' >";
@@ -450,7 +626,8 @@ function buddyboss_sap_post_photo() {
 		$filename = "file";
 	}
 
-	$aid		 = media_handle_upload( $filename, 0 );
+	$post_id     = isset( $_GET['post_id'] )? $_GET['post_id'] : 0;
+	$aid		 = media_handle_upload( $filename, $post_id );
 	$attachment	 = get_post( $aid );
 	
 	if ( ! empty($attachment->ID) ) {
@@ -475,7 +652,7 @@ function buddyboss_sap_post_photo() {
 	if($filename != "files") {
 	echo htmlspecialchars( json_encode( $result ), ENT_NOQUOTES );
 	} else {
-		$result = array("files"=>array(array("url"=>$full[0])));
+		$result = array("files"=>array(array("url"=>$full[0],'id'=>$aid)));
 		echo json_encode($result);
 	}
 	exit( 0 );
@@ -502,7 +679,7 @@ function buddyboss_sap_delete_photo() {
 	
 	global $wpdb;
 	
-	$attachment = $wpdb->get_row($wpdb->prepare("SELECT * FROM $wpdb->posts WHERE guid='%s';", $file )); 
+	$attachment = $wpdb->get_row($wpdb->prepare("SELECT ID, post_author FROM $wpdb->posts WHERE guid='%s';", $file ));
 
 	if(!empty($attachment)){
 		
@@ -519,6 +696,27 @@ function buddyboss_sap_delete_photo() {
 	
 }
 
+add_action( 'wp_ajax_buddyboss_sap_remove_featured_image', 'buddyboss_sap_remove_featured_image' );
+
+/**
+ * Proceed post featured image delete
+ *
+ */
+function buddyboss_sap_remove_featured_image() {
+
+    check_ajax_referer( 'sap-editor-nonce', 'sap_nonce' );
+
+    $post_id        = $_POST['post_id'];
+    $thumbnail_id   = get_post_thumbnail_id( $post_id );
+
+    if ( 'on' === buddyboss_sap()->option('delete_media_permanently') ) {
+        wp_delete_attachment( $thumbnail_id );
+    }
+
+    delete_post_meta( $post_id, '_thumbnail_id' );
+
+    die();
+}
 
 add_action( 'template_redirect', 'sap_fetch_editor_oembed_data', 9 );
 
@@ -550,32 +748,40 @@ if ( !function_exists( 'sap_posts_ajax_pagination' ) ) {
 
 	function sap_posts_ajax_pagination() {
 
-		$paged	 = $_POST[ 'paged' ];
-		$sort	 = (isset( $_POST[ 'sort' ] )) ? $_POST[ 'sort' ] : 'latest';
-                $posts_per_page = 20;
+        $query_args     = array();
+		$paged	        = $_POST[ 'paged' ];
+		$sort	        = (isset( $_POST[ 'sort' ] )) ? $_POST[ 'sort' ] : 'latest';
+        $posts_per_page = get_option('posts_per_page');
+
+        $args = array(
+            'author'            => bp_displayed_user_id(),
+            'post_type'         => 'post',
+            'post_status'       => 'publish',
+            'posts_per_page'    => (int) $posts_per_page,
+            'paged'             => $paged,
+        );
 
 		if ( $sort === 'recommended' ) {
 			$query_args = array(
-                            'author'		=> bp_displayed_user_id(),
-                            'post_type'		=> 'post',
-                            'post_status'	=> 'publish',
-                            'meta_key'          => '_post_like_count',
-                            'orderby'		=> 'meta_value_num',
-                            'order'		=> 'DESC',
-                            'posts_per_page'    => $posts_per_page,
-                            'paged'		=> $paged,
-			);
-		} else {
-			$query_args = array(
-                            'author'            => bp_displayed_user_id(),
-                            'post_type'         => 'post',
-                            'post_status'       => 'publish',
-                            'posts_per_page'    => $posts_per_page,
-                            'paged'             => $paged,
-			);
+                'meta_key'  => '_post_like_count',
+                'orderby'	=> 'meta_value_num',
+                'order'		=> 'DESC' );
+
 		}
 
-		$posts = new WP_Query( $query_args );
+        // Bookmarks tab
+        if ( 'bookmarks' == $_POST['bp_action'] ) {
+
+            $query_args = array(
+                'author' => false,
+                'paged'  => false
+            );
+
+            $bookmarked_paged       = sap_get_bookmarked_posts( array( 'offset' => ( $paged - 1 ) * $args['posts_per_page'], 'number' => $args['posts_per_page'] ) );
+            $query_args['post__in'] = 0 < count( $bookmarked_paged ) ? $bookmarked_paged : array(0);
+        }
+
+        $posts = new WP_Query( wp_parse_args( $query_args, $args ) );
 
 		if ( $posts->have_posts() ) {
 			while ( $posts->have_posts() ) {

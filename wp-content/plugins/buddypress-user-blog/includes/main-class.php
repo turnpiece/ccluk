@@ -54,8 +54,13 @@ if ( !class_exists( 'BuddyBoss_SAP_Plugin' ) ):
 		 *
 		 * @var array
 		 */
-		private $default_options = array(
-			'enabled' => true,
+		public $default_options = array(
+			'enabled'                   => true,
+            'bookmark_post'             => 'on',
+            'recommend_post'            => 'on',
+            'post_autosave'             => 'on',
+            'files_per_batch'           => 20,
+            'delete_media_permanently'  => 'on',
 		);
 
 		/**
@@ -275,9 +280,8 @@ if ( !class_exists( 'BuddyBoss_SAP_Plugin' ) ):
 			$saved_options	 = $this->network_activated ? get_site_option( 'buddyboss_sap_plugin_options' ) : get_option( 'buddyboss_sap_plugin_options' );
 			$saved_options	 = maybe_unserialize( $saved_options );
 
-			if ( !empty( $saved_options ) ) {
-				$this->options = wp_parse_args( $saved_options, $this->default_options );
-			}
+            $this->options = wp_parse_args( $saved_options, $this->default_options );
+
 
 			// Normalize legacy uppercase keys
 			foreach ( $this->options as $key => $option ) {

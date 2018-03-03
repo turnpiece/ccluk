@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: BuddyPress User Blog\n"
 "Report-Msgid-Bugs-To: https://www.buddyboss.com/contact/\n"
-"POT-Creation-Date: 2017-06-03 07:36:16+00:00\n"
+"POT-Creation-Date: 2017-10-12 06:06:49+00:00\n"
 "PO-Revision-Date: 2016-05-01 17:45-0400\n"
 "Last-Translator: jean-pierre michaud <nexialys@yahoo.com>\n"
 "Language-Team: jean-pierre michaud <nexialys@yahoo.com>\n"
@@ -21,7 +21,7 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 
-#: includes/recommend-posts.php:475
+#: includes/recommend-posts.php:503
 msgid "0"
 msgstr "0"
 
@@ -37,35 +37,60 @@ msgstr "<h1>Erreur fatale:</h1><hr/><pre>%s</pre>"
 msgid "Couldn't load SAP_Plugin_Check class at:<br/>%s"
 msgstr "N'a pas pu charger la classe BPCP_Plugin_Check à :<br>%s"
 
-#: includes/admin.php:178
+#: includes/admin.php:179
 msgid "General Settings"
 msgstr "Réglages généraux"
 
-#: includes/admin.php:181
+#: includes/admin.php:182
 msgid "Enable User Publishing"
 msgstr "Activer les Publications par Usagers"
 
-#: includes/admin.php:182
+#: includes/admin.php:183
+msgid "Min. Words"
+msgstr ""
+
+#: includes/admin.php:184
+msgid "Max. Words"
+msgstr ""
+
+#: includes/admin.php:185
 msgid "Create New Post Page"
 msgstr "Créer une nouvelle page d'articles"
 
-#: includes/admin.php:183
+#: includes/admin.php:186
 msgid "Enable Bookmarks"
 msgstr "Activer les favoris"
 
-#: includes/admin.php:184
+#: includes/admin.php:187
 msgid "Bookmarks Page"
 msgstr "Page des favoris"
 
-#: includes/admin.php:185
+#: includes/admin.php:188
 msgid "Enable Recommend Posts"
 msgstr "Activier la recommandation d'articles"
 
 #: includes/admin.php:189
+msgid "Enable Post Autosave"
+msgstr ""
+
+#: includes/admin.php:190
+msgid "Max. Files per Batch"
+msgstr ""
+
+#: includes/admin.php:191
+msgid "Media Management"
+msgstr ""
+
+#: includes/admin.php:192
+#, fuzzy
+msgid "Exclude Categories"
+msgstr "Catégories"
+
+#: includes/admin.php:196
 msgid "Support"
 msgstr "Support"
 
-#: includes/admin.php:212
+#: includes/admin.php:219
 msgid ""
 "Allow users to publish posts. If unchecked, they can only submit drafts for "
 "review."
@@ -73,28 +98,32 @@ msgstr ""
 "Autoriser les membres à publier leurs articles. Si la case n'est pas cochée, "
 "ils ne pourront que soumettre leurs brouillons pour un examen."
 
-#: includes/admin.php:227
+#: includes/admin.php:234
 msgid "Allow users to bookmark posts."
 msgstr "Autoriser les membres à marquer des articles en favoris."
 
-#: includes/admin.php:242
+#: includes/admin.php:249
 msgid "Allow users to recommend posts."
 msgstr "Autoriser les membres à recommander des articles."
 
-#: includes/admin.php:252 includes/admin.php:268
+#: includes/admin.php:264
+msgid "Enable post auto saving while editing."
+msgstr ""
+
+#: includes/admin.php:274 includes/admin.php:290
 msgid "- None -"
 msgstr "- Aucun -"
 
-#: includes/admin.php:255 includes/admin.php:271
+#: includes/admin.php:277 includes/admin.php:293
 msgid "New Page"
 msgstr "Nouvelle Page"
 
-#: includes/admin.php:257 includes/admin.php:273
+#: includes/admin.php:279 includes/admin.php:295
 #: templates/sap-post-create.php:53
 msgid "View"
 msgstr "Afficher"
 
-#: includes/admin.php:259 includes/admin.php:275
+#: includes/admin.php:281 includes/admin.php:297
 msgid ""
 "You may need to reset your permalinks after changing this setting. Go to "
 "Settings > Permalinks."
@@ -102,19 +131,40 @@ msgstr ""
 "Vous devrez peut-être réinitialiser vos permaliens après avoir modifié ce "
 "paramètre. Allez dans Réglages > Permaliens."
 
-#: includes/admin.php:327 includes/buddyboss-plugin-updater.php:10
+#: includes/admin.php:308
+msgid "Maximum number of images that can be uploaded in one batch."
+msgstr ""
+
+#: includes/admin.php:328
+msgid ""
+"When a blog post is removed, permanently delete the associated media file."
+msgstr ""
+
+#: includes/admin.php:339
+msgid ""
+"Minimum words to publish the post. If you do not want to enforce words "
+"limit, just leave this field blank."
+msgstr ""
+
+#: includes/admin.php:349
+msgid ""
+"Maximum words to publish the post. If you do not want to enforce words "
+"limit, just leave this field blank."
+msgstr ""
+
+#: includes/admin.php:428 includes/buddyboss-plugin-updater.php:10
 msgid "BuddyPress User Blog"
 msgstr "Blogue des Membres BuddyPress"
 
-#: includes/admin.php:332
+#: includes/admin.php:433
 msgid "Settings updated."
 msgstr "Réglages mis à jour."
 
-#: includes/admin.php:341
+#: includes/admin.php:442
 msgid "Save Changes"
 msgstr "Enregistrer les modifications"
 
-#: includes/admin.php:372
+#: includes/admin.php:473
 msgid "Settings"
 msgstr "Réglages"
 
@@ -152,63 +202,68 @@ msgstr "Foire aux questions"
 msgid "How to Update"
 msgstr "Comment mettre à jour"
 
-#: includes/main-class.php:197 includes/main-class.php:206
+#: includes/main-class.php:202 includes/main-class.php:211
 msgid "Cheatin&#8217; huh?"
 msgstr "On triche, hum?"
 
-#: includes/recommend-posts.php:21 includes/recommend-posts.php:303
+#: includes/recommend-posts.php:22 includes/recommend-posts.php:330
 msgid "Recommend this article"
 msgstr "Recommander cet article"
 
-#: includes/recommend-posts.php:22 includes/recommend-posts.php:299
+#: includes/recommend-posts.php:23 includes/recommend-posts.php:326
 msgid "Discourage recommendation"
 msgstr "Décourager la recommandation"
 
-#: includes/recommend-posts.php:38
+#: includes/recommend-posts.php:160
 msgid "Not permitted"
 msgstr "Non autorisé"
 
-#: includes/recommend-posts.php:182
+#: includes/recommend-posts.php:209
 msgid "%1$s recommended the post %2$s"
 msgstr "%1$s a recommandé l'article %2$s"
 
-#: includes/recommend-posts.php:487
+#: includes/recommend-posts.php:515
 msgid "You"
 msgstr "Vous"
 
-#: includes/recommend-posts.php:490
+#: includes/recommend-posts.php:518
 msgid "You "
 msgstr "Vous "
 
-#: includes/recommend-posts.php:490
+#: includes/recommend-posts.php:518
 msgid "and "
 msgstr "et"
 
-#: includes/recommend-posts.php:503
+#: includes/recommend-posts.php:531
 msgid " other"
 msgid_plural " others"
 msgstr[0] " autre"
 msgstr[1] " autres"
 
-#: includes/recommend-posts.php:515
+#: includes/recommend-posts.php:535
+#, fuzzy
+msgid " recommended"
+msgstr "Recommandé"
+
+#: includes/recommend-posts.php:543
 msgid " recommendation"
 msgid_plural " recommendations"
 msgstr[0] " recommendation"
 msgstr[1] " recommendations"
 
-#: includes/recommend-posts.php:518
+#: includes/recommend-posts.php:546
 msgid "Recommended"
 msgstr "Recommandé"
 
-#: includes/recommend-posts.php:521
+#: includes/recommend-posts.php:549
 msgid "Recommend"
 msgstr "Recommander"
 
-#: includes/recommend-posts.php:539
+#: includes/recommend-posts.php:567
 msgid "You Like:"
 msgstr "Vous aimez :"
 
-#: includes/recommend-posts.php:568
+#: includes/recommend-posts.php:596
 msgid "You do not like anything yet."
 msgstr "Vous n'avez aucune appréciation."
 
@@ -233,47 +288,47 @@ msgstr "Histoires les Plus Recommandées"
 msgid "Blog <span class=\"count\">%s</span>"
 msgstr "Blogue <span class=\"count\">"
 
-#: includes/sap-blog.php:119 includes/sap-blog.php:148
-#: includes/sap-blog.php:158 templates/sap-post-create.php:95
-msgid "blog"
-msgstr "blog"
-
 #: includes/sap-blog.php:124
 msgid "Articles"
 msgstr "Articles"
 
-#: includes/sap-blog.php:126 includes/sap-blog.php:204
+#: includes/sap-blog.php:126 includes/sap-blog.php:216
 #: templates/sap-post-create.php:52
 msgid "Published"
 msgstr "Publié"
 
-#: includes/sap-blog.php:145 includes/sap-blog.php:212
-#: includes/sap-class.php:149 templates/sap-post-create.php:140
-#: templates/sap-post-create.php:143
+#: includes/sap-blog.php:145 includes/sap-blog.php:231
+#: includes/sap-class.php:154 templates/sap-post-create.php:141
+#: templates/sap-post-create.php:144
 msgid "In Review"
 msgstr "En revue"
 
-#: includes/sap-blog.php:146 includes/sap-blog.php:211
-msgid "pending"
-msgstr "pending"
+#: includes/sap-blog.php:155 includes/sap-blog.php:223
+#, fuzzy
+msgid "Bookmarks"
+msgstr "Marque-pages"
 
-#: includes/sap-blog.php:155 includes/sap-blog.php:219
+#: includes/sap-blog.php:164 includes/sap-blog.php:238
 msgid "Drafts"
 msgstr "Brouillons"
 
-#: includes/sap-blog.php:184
+#: includes/sap-blog.php:196
 msgid "Blog"
 msgstr "Blogue"
 
-#: includes/sap-blog.php:218
+#: includes/sap-blog.php:230
+msgid "pending"
+msgstr "pending"
+
+#: includes/sap-blog.php:237
 msgid "drafts"
 msgstr "drafts"
 
-#: includes/sap-blog.php:226
+#: includes/sap-blog.php:245
 msgid "add-new"
 msgstr "add-new"
 
-#: includes/sap-blog.php:227
+#: includes/sap-blog.php:246
 msgid "Add New"
 msgstr "Ajouter une Recette"
 
@@ -281,61 +336,131 @@ msgstr "Ajouter une Recette"
 msgid "SAP"
 msgstr "SAP"
 
-#: includes/sap-class.php:147
+#: includes/sap-class.php:152
 msgid "Saving..."
 msgstr "Sauvegarde..."
 
-#: includes/sap-class.php:148 templates/sap-post-create.php:58
+#: includes/sap-class.php:153 templates/sap-post-create.php:58
 #: templates/sap-post-create.php:73
 msgid "Save"
 msgstr "Sauver"
 
-#: includes/sap-class.php:150 templates/sap-post-create.php:71
+#: includes/sap-class.php:155 templates/sap-post-create.php:71
 msgid "Draft"
 msgstr "Brouillon"
 
-#: includes/sap-class.php:151
+#: includes/sap-class.php:156
 msgid "Your post has been submitted for review."
 msgstr "Votre article a été soumis pour examen."
 
-#: includes/sap-class.php:152
+#: includes/sap-class.php:157
 msgid "Failed"
 msgstr "Échec"
 
-#: includes/sap-class.php:153
+#: includes/sap-class.php:158
 msgid "Post title cannot be empty"
 msgstr "Le champ Titre ne doit être pas être vide"
 
-#: includes/sap-class.php:154
+#: includes/sap-class.php:159
 msgid "Title"
 msgstr "Titre"
 
-#: includes/sap-class.php:155
+#: includes/sap-class.php:160
 msgid "Post content cannot be empty"
 msgstr "Le contenu ne peut pas être vide"
 
-#: includes/sap-class.php:156
+#: includes/sap-class.php:161
 msgid "Tell your story"
 msgstr "Proposer votre histoire"
 
-#: includes/sap-class.php:157
+#: includes/sap-class.php:162
 msgid ""
 "Paste a YouTube, Vimeo, Facebook, Twitter or Instagram link and press Enter"
 msgstr ""
 
-#: includes/sap-class.php:158
+#: includes/sap-class.php:163
 msgid "Incorrect URL format specified"
 msgstr ""
 
+#: includes/sap-class.php:164
+msgid "bold"
+msgstr ""
+
+#: includes/sap-class.php:165
+msgid "italic"
+msgstr ""
+
+#: includes/sap-class.php:166
+msgid "underline"
+msgstr ""
+
+#: includes/sap-class.php:167
+msgid "anchor"
+msgstr ""
+
+#: includes/sap-class.php:168
+msgid "h2"
+msgstr ""
+
+#: includes/sap-class.php:169
+msgid "h3"
+msgstr ""
+
+#: includes/sap-class.php:170
+msgid "orderedlist"
+msgstr ""
+
+#: includes/sap-class.php:171
+msgid "unorderedlist"
+msgstr ""
+
 #: includes/sap-class.php:172
+msgid "create table"
+msgstr ""
+
+#: includes/sap-class.php:173
+msgid "quote"
+msgstr ""
+
+#: includes/sap-class.php:174
+#, fuzzy
+msgid "Add"
+msgstr "Ajouter une Recette"
+
+#: includes/sap-class.php:175
+msgid "Remove"
+msgstr ""
+
+#: includes/sap-class.php:176
+msgid ""
+"The story should be of at least %d words to get it Published otherwise it "
+"will be saved as Draft"
+msgstr ""
+
+#: includes/sap-class.php:177
+msgid ""
+"The story should not be longer than %d words to get it Published otherwise "
+"it will be save as Draft"
+msgstr ""
+
+#: includes/sap-class.php:178
+msgid "You can upload a maximum of %s photos in one"
+msgstr ""
+
+#: includes/sap-class.php:192
 msgid "true"
 msgstr "vrai"
 
-#: includes/sap-class.php:258
+#: includes/sap-class.php:296
 msgid "Your story was approved and published"
 msgstr "Votre article a été approuvé et publiée"
 
-#: includes/sap-functions.php:312
+#: includes/sap-class.php:326
+#, fuzzy
+msgid "%s liked your story %s"
+msgstr "Proposer votre histoire"
+
+#: includes/sap-functions.php:484
 #, fuzzy
 msgid ""
 "<div class=\"sap-no-bookmarks-content\"><p>You haven&apos;t bookmarked any "
@@ -349,32 +474,32 @@ msgstr ""
 "p>\n"
 "\t\t\t\t</div>"
 
-#: includes/sap-functions.php:385
+#: includes/sap-functions.php:561
 msgid "Categories"
 msgstr "Catégories"
 
-#: includes/sap-functions.php:390
+#: includes/sap-functions.php:566
 msgid "Tags"
 msgstr "Mots-clés"
 
-#: includes/sap-functions.php:400
+#: includes/sap-functions.php:576
 msgid "Featured Image"
 msgstr "Image Vedette"
 
-#: includes/sap-functions.php:409
+#: includes/sap-functions.php:585
 msgid "Set Featured Image"
 msgstr "Choisir l'image à la une"
 
-#: includes/sap-functions.php:626
+#: includes/sap-functions.php:832
 msgid "Edit"
 msgstr "Modifier"
 
 #. translators: used between list items, there is a space after the comma
-#: includes/sap-functions.php:721
+#: includes/sap-functions.php:927
 msgid ", "
 msgstr ","
 
-#: includes/sap-functions.php:737
+#: includes/sap-functions.php:943
 msgid "Published in "
 msgstr "Publié dans "
 
@@ -386,23 +511,23 @@ msgstr "Lien permanent vers"
 msgid "%1$s"
 msgstr "%1$s"
 
-#: templates/sap-blog-page.php:71
+#: templates/sap-blog-page.php:34
 msgid "Load More"
 msgstr "Lire la Suite"
 
-#: templates/sap-blog-page.php:88
+#: templates/sap-blog-page.php:51
 msgid "Add your first."
 msgstr "Ajouter votre premier."
 
-#: templates/sap-blog-page.php:91
+#: templates/sap-blog-page.php:54
 msgid "You have no drafts."
 msgstr "Vous n'avez pas de brouillon."
 
-#: templates/sap-blog-page.php:93
+#: templates/sap-blog-page.php:56
 msgid "You have no posts in review."
 msgstr "Vous n'avez aucuns postes dans l'examen."
 
-#: templates/sap-blog-page.php:95
+#: templates/sap-blog-page.php:58
 #, fuzzy
 msgid ""
 "There are no recommended posts for you at the moment. Please check back "
@@ -411,11 +536,25 @@ msgstr ""
 "À l'heure actuelle, il n'y a aucun messages de cet utilisateur. S'il vous "
 "plaît revenez plus tard !"
 
-#: templates/sap-blog-page.php:97
+#: templates/sap-blog-page.php:60
+#, fuzzy
+msgid ""
+"You haven&apos;t bookmarked any stories yet. Save stories to read later by "
+"using the <span class=\"fa bb-helper-icon fa-bookmark\"></span> bookmark "
+"button."
+msgstr ""
+"<div class=\"sap-no-bookmarks-content\">\n"
+"\t\t\t\t\t<p>Vous n'avez marqué aucune histoire pour le moment.</p>\n"
+"\t\t\t\t\t<p>Sauvegardez des histoires pour lire plus tard en utilisant le "
+"bouton <span class=\"fa bb-helper-icon fa-bookmark\"></span> marque-page.</"
+"p>\n"
+"\t\t\t\t</div>"
+
+#: templates/sap-blog-page.php:63
 msgid "You have not created any posts yet. %s"
 msgstr "Vous n'avez créé aucun article. %s"
 
-#: templates/sap-blog-page.php:101
+#: templates/sap-blog-page.php:67
 msgid "There are no posts by this user at the moment. Please check back later!"
 msgstr ""
 "À l'heure actuelle, il n'y a aucun messages de cet utilisateur. S'il vous "
@@ -442,6 +581,10 @@ msgstr "Enregistrer en brouillon..."
 msgid "Preview"
 msgstr "Aperçu"
 
+#: templates/sap-post-create.php:95
+msgid "blog"
+msgstr "blog"
+
 #: templates/sap-post-create.php:98
 msgid "Publish"
 msgstr "Publier"
@@ -454,23 +597,27 @@ msgstr "Proposer pour approbation"
 msgid "More Actions"
 msgstr "Plus d'actions"
 
-#: templates/sap-post-create.php:133
+#: templates/sap-post-create.php:130
+msgid "words"
+msgstr ""
+
+#: templates/sap-post-create.php:134
 msgid "Update"
 msgstr "Mettre à jour"
 
-#: templates/sap-post-create.php:135
+#: templates/sap-post-create.php:136
 msgid "Publish post"
 msgstr "Publier"
 
-#: templates/sap-post-create.php:139 templates/sap-post-create.php:142
+#: templates/sap-post-create.php:140 templates/sap-post-create.php:143
 msgid "Submit post for review"
 msgstr "Soumettre pour évaluation"
 
-#: templates/sap-post-create.php:148
+#: templates/sap-post-create.php:149
 msgid "Show preview in new window"
 msgstr "Afficher un aperçu dans une nouvelle fenêtre"
 
-#: templates/sap-post-create.php:160 templates/sap-post-create.php:162
+#: templates/sap-post-create.php:161 templates/sap-post-create.php:163
 msgid "Delete"
 msgstr "Supprimer"
 

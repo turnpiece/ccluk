@@ -66,7 +66,7 @@ if ( ! class_exists( 'BuddyBoss_SAP_Blog' ) ):
             $recommend_post = buddyboss_sap()->option( 'recommend_post' );
             $create_new_post_page = buddyboss_sap()->option( 'create-new-post' );
 
-            if ( ($bp->current_action == 'blog' || $bp->current_action == 'drafts' || $bp->current_action == 'pending' ) && (bp_displayed_user_id() == bp_loggedin_user_id() ) && $create_new_post_page ) {
+            if ( bp_is_current_component('blog' ) && ( bp_displayed_user_id() == bp_loggedin_user_id() ) && $create_new_post_page ) {
             ?>
             <li id="add_new_post">
                 <a class="sap-new-post-btn" href="<?php echo trailingslashit( get_permalink( $create_new_post_page ) ); ?>"><?php _e( 'Add New Post', 'bp-user-blog' ); ?></a>
@@ -116,7 +116,7 @@ if ( ! class_exists( 'BuddyBoss_SAP_Blog' ) ):
                         $displayed_user_id = bp_displayed_user_id();
                         $user_domain = ( ! empty( $displayed_user_id ) ) ? bp_displayed_user_domain() : bp_loggedin_user_domain();
 
-                        $blog_link = trailingslashit( $user_domain . __( 'blog', 'bp-user-blog' ) );
+                        $blog_link = trailingslashit( $user_domain . 'blog' );
                         
                         // Add subnav items
                         
@@ -143,22 +143,33 @@ if ( ! class_exists( 'BuddyBoss_SAP_Blog' ) ):
                             if ( !$publish_post ) {
                                bp_core_new_subnav_item( array(
                                     'name' => __( 'In Review', 'bp-user-blog' ),
-                                    'slug' => __( 'pending', 'bp-user-blog' ),
+                                    'slug' => 'pending',
                                     'parent_url' => $blog_link,
-                                    'parent_slug' => __( 'blog', 'bp-user-blog' ),
+                                    'parent_slug' => 'blog',
                                     'screen_function' => 'sap_user_blog_page',
                                     'position' => 20,
                                 ) ); 
                             }
-                            
+
+                            bp_core_new_subnav_item( array(
+                                'name' => __( 'Bookmarks', 'bp-user-blog' ),
+                                'slug' => 'bookmarks',
+                                'parent_url' => $blog_link,
+                                'parent_slug' => 'blog',
+                                'screen_function' => 'sap_user_blog_page',
+                                'position' => 30,
+                            ) );
+
                             bp_core_new_subnav_item( array(
                                 'name' => __( 'Drafts', 'bp-user-blog' ),
                                 'slug' => 'drafts',
                                 'parent_url' => $blog_link,
-                                'parent_slug' => __( 'blog', 'bp-user-blog' ),
+                                'parent_slug' => 'blog',
                                 'screen_function' => 'sap_user_blog_page',
-                                'position' => 30,
+                                'position' => 40,
                             ) );
+
+
                             
                         }
 		}
@@ -171,6 +182,7 @@ if ( ! class_exists( 'BuddyBoss_SAP_Blog' ) ):
 			
 			$blog_slug = bp_loggedin_user_domain().'blog';
 			$in_review_slug = bp_loggedin_user_domain().'blog/pending';
+			$bookmarks_slug = bp_loggedin_user_domain().'blog/bookmarks';
 			$drafts_slug = bp_loggedin_user_domain().'blog/drafts';
                         
                         $publish_post = buddyboss_sap()->option( 'publish_post' );
@@ -178,56 +190,63 @@ if ( ! class_exists( 'BuddyBoss_SAP_Blog' ) ):
 			// Menus for logged in user
 			if ( is_user_logged_in() ) {
 
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-buddypress',
-					'id' => 'my-account-blog',
-					'title' => __( 'Blog', 'bp-user-blog' ),
-					'href' => trailingslashit( $blog_slug )
-				) );
-                                
-				$create_new_post_page = buddyboss_sap()->option('create-new-post');
-                                $href = trailingslashit(get_permalink( $create_new_post_page ));
-                                
-                                //Keeping addnew post same if network activated
-                                if (is_multisite()) {
-                                    if (!function_exists('is_plugin_active_for_network'))
-                                        require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
-                                    if (is_plugin_active_for_network(basename(constant('BP_PLUGIN_DIR')) . '/bp-loader.php') && is_plugin_active_for_network(basename(constant('BUDDYBOSS_SAP_PLUGIN_DIR')) . '/bp-user-blog.php') ) {
-                                        $href = trailingslashit(get_blog_permalink( 1,$create_new_post_page ));
-                                    }
-                                }
-                                
-				// Add add-new submenu
-				$wp_admin_bar->add_menu( array(
-					'parent' => 'my-account-blog',
-                                        'id'     => 'my-account-blog-'.'posts',
-					'title'  => __( 'Published', 'bp-user-blog' ),
-					'href'   => trailingslashit( $blog_slug )
-				) );
-                                
-                                if ( !$publish_post ) {
-                                    $wp_admin_bar->add_menu( array(
-                                        'parent' => 'my-account-blog',
-                                        'id'     => 'my-account-blog'.'-'. __( 'pending', 'bp-user-blog' ),
-                                        'title'  => __( 'In Review', 'bp-user-blog' ),
-                                        'href'   => $in_review_slug
-                                    ) );
-                                }
-				$wp_admin_bar->add_menu( array(
-                                    'parent' => 'my-account-blog',
-                                    'id'     => 'my-account-blog'.'-'. __( 'drafts', 'bp-user-blog' ),
-                                    'title'  => __( 'Drafts', 'bp-user-blog' ),
-                                    'href'   => $drafts_slug
-                                ) );
-                                
-                                if ( $create_new_post_page ) {
-                                    $wp_admin_bar->add_menu( array(
-                                            'parent' => 'my-account-blog',
-                                            'id'     => 'my-account-blog'.'-'. __( 'add-new', 'bp-user-blog' ),
-                                            'title'  => __( 'Add New', 'bp-user-blog' ),
-                                            'href'   => $href
-                                    ) );
-                                }
+                $wp_admin_bar->add_menu( array(
+                    'parent' => 'my-account-buddypress',
+                    'id' => 'my-account-blog',
+                    'title' => __( 'Blog', 'bp-user-blog' ),
+                    'href' => trailingslashit( $blog_slug )
+                ) );
+
+                $create_new_post_page = buddyboss_sap()->option('create-new-post');
+                $href = trailingslashit(get_permalink( $create_new_post_page ));
+
+                //Keeping addnew post same if network activated
+                if (is_multisite()) {
+                    if (!function_exists('is_plugin_active_for_network'))
+                        require_once( ABSPATH . '/wp-admin/includes/plugin.php' );
+                    if (is_plugin_active_for_network(basename(constant('BP_PLUGIN_DIR')) . '/bp-loader.php') && is_plugin_active_for_network(basename(constant('BUDDYBOSS_SAP_PLUGIN_DIR')) . '/bp-user-blog.php') ) {
+                        $href = trailingslashit(get_blog_permalink( 1,$create_new_post_page ));
+                    }
+                }
+
+                // Add add-new submenu
+                $wp_admin_bar->add_menu( array(
+                    'parent' => 'my-account-blog',
+                    'id'     => 'my-account-blog-'.'posts',
+                    'title'  => __( 'Published', 'bp-user-blog' ),
+                    'href'   => trailingslashit( $blog_slug )
+                ) );
+
+                $wp_admin_bar->add_menu( array(
+                    'parent' => 'my-account-blog',
+                    'id'     => 'my-account-blog-bookmarks',
+                    'title'  => __( 'Bookmarks', 'bp-user-blog' ),
+                    'href'   => $bookmarks_slug
+                ) );
+
+                if ( !$publish_post ) {
+                    $wp_admin_bar->add_menu( array(
+                        'parent' => 'my-account-blog',
+                        'id'     => 'my-account-blog'.'-'. __( 'pending', 'bp-user-blog' ),
+                        'title'  => __( 'In Review', 'bp-user-blog' ),
+                        'href'   => $in_review_slug
+                    ) );
+                }
+                $wp_admin_bar->add_menu( array(
+                    'parent' => 'my-account-blog',
+                    'id'     => 'my-account-blog'.'-'. __( 'drafts', 'bp-user-blog' ),
+                    'title'  => __( 'Drafts', 'bp-user-blog' ),
+                    'href'   => $drafts_slug
+                ) );
+
+                if ( $create_new_post_page ) {
+                    $wp_admin_bar->add_menu( array(
+                            'parent' => 'my-account-blog',
+                            'id'     => 'my-account-blog'.'-'. __( 'add-new', 'bp-user-blog' ),
+                            'title'  => __( 'Add New', 'bp-user-blog' ),
+                            'href'   => $href
+                    ) );
+                }
 				
 			}
 		}

@@ -210,6 +210,9 @@ class FrmFieldsController {
 	 * @param int $form_id
 	 */
 	public static function load_single_field( $field_object, $values, $form_id = 0 ) {
+		global $frm_vars;
+		$frm_vars['is_admin'] = true;
+
 		if ( is_numeric( $field_object ) ) {
 			$field_object = FrmField::getOne( $field_object );
 		} elseif ( is_array( $field_object ) ) {
@@ -234,6 +237,7 @@ class FrmFieldsController {
 			$disabled_fields = FrmAppHelper::pro_is_installed() ? array() : $pro_field_selection;
 
 			if ( ! isset( $field ) && is_object( $field_object ) ) {
+				$field_object->parent_form_id = isset( $values['id'] ) ? $values['id'] : $field_object->form_id;
 				$field = FrmFieldsHelper::setup_edit_vars( $field_object );
 			}
 

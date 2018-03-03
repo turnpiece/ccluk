@@ -1,4 +1,4 @@
-<article class="post sap-post sap-member-post">
+<article id="<?php echo 'post-'.get_the_ID() ?>" class="post sap-post sap-member-post">
 
 	<div class="post-featured-image">
 		<a href="<?php the_permalink(); ?>" rel="bookmark" title="<?php _e( 'Permanent Link to', 'bp-user-blog' ); ?> <?php the_title_attribute(); ?>">

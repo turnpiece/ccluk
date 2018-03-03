@@ -5,7 +5,7 @@
  * Description: Let your BuddyPress users create blog posts from the frontend.
  * Author:      BuddyBoss
  * Author URI:  http://buddyboss.com
- * Version:     1.2.1
+ * Version:     1.3.1
  */
 // Exit if accessed directly
 if ( ! defined( 'ABSPATH' ) )
@@ -18,7 +18,7 @@ if ( ! defined( 'ABSPATH' ) )
  */
 // Codebase version
 if ( ! defined( 'BUDDYBOSS_SAP_PLUGIN_VERSION' ) ) {
-	define( 'BUDDYBOSS_SAP_PLUGIN_VERSION', '1.2.1' );
+	define( 'BUDDYBOSS_SAP_PLUGIN_VERSION', '1.3.1' );
 }
 
 // Database version

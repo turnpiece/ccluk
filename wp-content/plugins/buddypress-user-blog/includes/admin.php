@@ -135,9 +135,10 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 				add_action( 'network_admin_edit_' . $this->plugin_slug, array( $this, 'save_network_settings_page' ) );
 			}
 
-			add_action( 'admin_init', array( $this, 'admin_init' ) );
-			add_action( 'admin_init', array( $this, 'register_support_settings' ) );
-			add_action( $this->menu_hook, array( $this, 'admin_menu' ) );
+			add_action( 'admin_init',                   array( $this, 'admin_init' ) );
+			add_action( 'admin_init',                   array( $this, 'register_support_settings' ) );
+			add_action( $this->menu_hook,               array( $this, 'admin_menu' ) );
+			add_action( 'admin_footer',                 array( $this, 'print_scripts') );
 
 			add_filter( 'plugin_action_links', array( $this, 'add_action_links' ), 10, 2 );
 			add_filter( 'network_admin_plugin_action_links', array( $this, 'add_action_links' ), 10, 2 );
@@ -179,10 +180,16 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 
 			//general options
 			add_settings_field( 'enabled-publish-post', __( 'Enable User Publishing', 'bp-user-blog' ), array( $this, 'enabled_publish_post' ), __FILE__, 'general_section' );
+            add_settings_field( 'min-words-limit', __( 'Min. Words', 'bp-user-blog' ), array( $this, 'min_words_limit' ), __FILE__, 'general_section' );
+            add_settings_field( 'max-words-limit', __( 'Max. Words', 'bp-user-blog' ), array( $this, 'max_words_limit' ), __FILE__, 'general_section' );
 			add_settings_field( 'post-create-page', __( 'Create New Post Page', 'bp-user-blog' ), array( $this, 'create_new_post_page' ), __FILE__, 'general_section' );
 			add_settings_field( 'enabled-bookmark-post', __( 'Enable Bookmarks', 'bp-user-blog' ), array( $this, 'enabled_bookmark_post' ), __FILE__, 'general_section' );
 			add_settings_field( 'bookmarks-page', __( 'Bookmarks Page', 'bp-user-blog' ), array( $this, 'bookmarks_page' ), __FILE__, 'general_section' );
 			add_settings_field( 'enabled-recommend-post', __( 'Enable Recommend Posts', 'bp-user-blog' ), array( $this, 'enabled_recommend_post' ), __FILE__, 'general_section' );
+			add_settings_field( 'enabled-post-autosave', __( 'Enable Post Autosave', 'bp-user-blog' ), array( $this, 'enabled_post_autosave' ), __FILE__, 'general_section' );
+            add_settings_field( 'files-per-batch', __( 'Max. Files per Batch', 'bp-user-blog' ), array( $this, 'files_per_batch' ), __FILE__, 'general_section');
+            add_settings_field( 'delete-media-permanently', __( 'Media Management', 'bp-user-blog' ), array( $this, 'delete_media_permanently' ), __FILE__, 'general_section' );
+            add_settings_field( 'exclude-categories', __( 'Exclude Categories', 'bp-user-blog' ), array( $this, 'exclude_categories' ), __FILE__, 'general_section' );
 		}
 
 		function register_support_settings() {
@@ -243,6 +250,21 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 			echo '</label>';
 		}
 
+		public function enabled_post_autosave() {
+            $value = $this->option( 'post_autosave' );
+
+            $checked = '';
+
+            if ( $value ) {
+                $checked = ' checked="checked" ';
+            }
+
+            echo '<label for="post_autosave">';
+            echo "<input " . $checked . " id='post_autosave' name='buddyboss_sap_plugin_options[post_autosave]' type='checkbox' />  ";
+            _e( 'Enable post auto saving while editing.', 'bp-user-blog' );
+            echo '</label>';
+        }
+
 		public function create_new_post_page() {
 			$create_new_post_page = $this->option( 'create-new-post' );
 
@@ -274,6 +296,85 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 			}
 			echo '<p class="description">' . __( 'You may need to reset your permalinks after changing this setting. Go to Settings > Permalinks.', 'bp-user-blog' ) . '</p>';
 		}
+
+        /**
+         * Setting > Files Per Batch
+         */
+        public function files_per_batch()
+        {
+            $files_per_batch = $this->option( 'files_per_batch' );
+
+            echo "<input id='files-per-batch' name='buddyboss_sap_plugin_options[files_per_batch]' min='1' type='number' value='" . esc_attr( $files_per_batch ) . "' />";
+            echo '<p class="description">' . __( 'Maximum number of images that can be uploaded in one batch.', 'bp-user-blog' ) . '</p>';
+        }
+
+        /**
+         * Setting > Delete Media Permanently
+         *
+         */
+        public function delete_media_permanently()
+        {
+            $value = $this->option( 'delete_media_permanently' );
+
+            $checked = '';
+
+            if ( $value )
+            {
+                $checked = ' checked="checked" ';
+            }
+
+            echo '<label for="delete_media_permanently">';
+            echo "<input " . $checked . " id='delete_media_permanently' name='buddyboss_sap_plugin_options[delete_media_permanently]' type='checkbox' />  ";
+            _e( 'When a blog post is removed, permanently delete the associated media file.', 'bp-user-blog' );
+            echo '</label>';
+        }
+
+        /**
+         *
+         */
+        public function min_words_limit() {
+            $min_words_limit = $this->option( 'min_words_limit' );
+
+            echo "<input id='min-words-limit' name='buddyboss_sap_plugin_options[min_words_limit]' type='number' value='" . esc_attr( $min_words_limit ) . "' min='0' />";
+            echo '<p class="description">' . __( 'Minimum words to publish the post. If you do not want to enforce words limit, just leave this field blank.', 'bp-user-blog' ) . '</p>';
+        }
+
+        /**
+         *
+         */
+        public function max_words_limit() {
+            $max_words_limit = $this->option( 'max_words_limit' );
+
+            echo "<input id='max-words-limit' name='buddyboss_sap_plugin_options[max_words_limit]' type='number' value='" . esc_attr( $max_words_limit ) . "' min='0' />";
+            echo '<p class="description">' . __( 'Maximum words to publish the post. If you do not want to enforce words limit, just leave this field blank.', 'bp-user-blog' ) . '</p>';
+        }
+
+        /**
+         * Exclude categories from the frontend
+         *
+         */
+        public function exclude_categories() {
+
+            $excluded_categories = $this->option( 'excluded_categories' );
+
+            $cat_args = apply_filters( 'sap_post_category_args', array(
+                'hide_empty'    => false,
+                'taxonomy'      => 'category',
+            ));
+
+            $categories = get_terms( $cat_args );
+
+            $output = "<select multiple name='buddyboss_sap_plugin_options[excluded_categories][]' id='excluded-categories' >\n";
+
+            foreach ( $categories as $cat ) {
+                $selected =  in_array( $cat->term_id, $excluded_categories ) ? "selected='selected'": '';
+                $output .= "\t<option value='" . esc_attr( $cat->term_id ) . "' $selected>$cat->name</option>\n";
+            }
+
+            $output .= "</select>\n";
+
+            echo $output;
+        }
 
 		/**
 		 * Add plugin settings page
@@ -397,6 +498,42 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 			die();
 		}
 
+        public function print_scripts() {
+		    global $current_screen;
+
+		    if ( 'buddyboss_page_bb-bp-user-blog' == $current_screen->id ) {
+                ?>
+                <script type="text/javascript">
+
+                    jQuery(document).ready(function ($) {
+                        $sap_min_words_limit = jQuery('input[name="buddyboss_sap_plugin_options[min_words_limit]"]');
+                        $sap_max_words_limit = jQuery('input[name="buddyboss_sap_plugin_options[max_words_limit]"]');
+
+                        jQuery('input[name="buddyboss_sap_plugin_options[publish_post]"]').change(function(){
+                            if ( jQuery( this ).is(':checked') ) {
+                                $sap_min_words_limit.closest('tr').show();
+                                $sap_max_words_limit.closest('tr').show();
+                            } else {
+                                $sap_min_words_limit.closest('tr').hide();
+                                $sap_max_words_limit.closest('tr').hide();
+                            }
+                        }).change();
+
+                        if ( $().select2 ) {
+                            $('#excluded-categories').select2();
+                        }
+                    });
+
+                </script>
+                <style>
+                    .select2-container {
+                        min-width: 50%;
+                    }
+                </style>
+                <?php
+            }
+		}
+
 		/**
 		 * Validate plugin option
 		 *
@@ -404,9 +541,15 @@ if ( !class_exists( 'BuddyBoss_SAP_Admin' ) ) {
 		 */
 		public function plugin_options_validate( $input ) {
 
-			$input[ 'publish_post' ]	 = isset( $input[ 'publish_post' ] ) ? sanitize_text_field( $input[ 'publish_post' ] ) : null;
-			$input[ 'bookmark_post' ]	 = isset( $input[ 'bookmark_post' ] ) ? sanitize_text_field( $input[ 'bookmark_post' ] ) : null;
-			$input[ 'recommend_post' ]	 = isset( $input[ 'recommend_post' ] ) ? sanitize_text_field( $input[ 'recommend_post' ] ) : null;
+			$input[ 'publish_post' ]	            = isset( $input[ 'publish_post' ] ) ? sanitize_text_field( $input[ 'publish_post' ] ) : null;
+			$input[ 'min_words_limit' ]	            = isset( $input[ 'min_words_limit' ] ) ? sanitize_text_field( $input[ 'min_words_limit' ] ) : null;
+			$input[ 'max_words_limit' ]	            = isset( $input[ 'max_words_limit' ] ) ? sanitize_text_field( $input[ 'max_words_limit' ] ) : null;
+			$input[ 'bookmark_post' ]	            = isset( $input[ 'bookmark_post' ] ) ? sanitize_text_field( $input[ 'bookmark_post' ] ) : null;
+			$input[ 'recommend_post' ]	            = isset( $input[ 'recommend_post' ] ) ? sanitize_text_field( $input[ 'recommend_post' ] ) : null;
+			$input[ 'post_autosave' ]	            = isset( $input[ 'post_autosave' ] ) ? sanitize_text_field( $input[ 'post_autosave' ] ) : null;
+			$input[ 'files_per_batch' ]	            = isset( $input[ 'files_per_batch' ] ) ? sanitize_text_field( $input[ 'files_per_batch' ] ) : null;
+			$input[ 'delete_media_permanently' ]	= isset( $input[ 'delete_media_permanently' ] ) ? sanitize_text_field( $input[ 'delete_media_permanently' ] ) : null;
+			$input[ 'excluded_categories' ]	        = isset( $input[ 'excluded_categories' ] ) ? $input[ 'excluded_categories' ] : null;
 
 			return $input; // return validated input
 		}

@@ -1,8 +1,8 @@
 === BuddyPress User Blog ===
 Contributors: buddyboss
 Requires at least: 3.8
-Tested up to: 4.7.2
-Stable tag: 1.2.1
+Tested up to: 4.8.2
+Stable tag: 1.3.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -25,6 +25,29 @@ Whether you have a community site and would like to give your users the ability 
 1. Visit 'BuddyBoss > User Blog' and select your desired options.
 
 == Changelog ==
+
+= 1.3.1 =
+* Fix - Restrain bp sub nav slug translation
+* Fix - Link font color are black in black background while editing link in the post make link completely invisible
+* Fix - Add New Posts tab disappear when the Bookmarks or In Review tabs are selected
+* Fix - Post saving twice as a draft
+* Fix - Draft and In Pending tabs disappear if site language is not english
+
+= 1.3.0 =
+* Fix - Image upload spinning icon showing even after publish post
+* Fix - Recommendation button not appearing for the logged out users
+* Fix - Unable to remove a featured image from the published post
+* Fix - Translation strings
+* Fix - Post always save as a draft when published from the home or blog index page
+* New - Notify author when user recommends the post
+* New - Added bookmarks tab under users profile
+* New - Added an extension for medium editor for auto creates list
+* New - Added an table extension for medium editor
+* New - Added setting to limit minimum and maximum number of words to publish the post
+* New - Added setting to restrict the number of images the user can upload at once
+* New - Added setting to exclude categories from the frontend post add page
+* New - Added setting to permanently delete the post media upon post deletion
+* New - Added setting to disable post auto save as a draft
 
 = 1.2.1 =
 * Enhancement – License Module
