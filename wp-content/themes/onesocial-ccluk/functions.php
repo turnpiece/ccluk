@@ -12,6 +12,8 @@ require get_stylesheet_directory() . '/inc/customizer.php';
 
 define( 'CCLUK_DEBUGGING', true );
 
+add_filter( 'wp_title', 'buddyboss_wp_title', 10, 2 );
+
 /**
  * Sets up theme defaults
  *
@@ -19,18 +21,18 @@ define( 'CCLUK_DEBUGGING', true );
  */
 function ccluk_theme_setup()
 {
-  /**
-   * Makes child theme available for translation.
-   * Translations can be added into the /languages/ directory.
-   * Read more at: http://www.buddyboss.com/tutorials/language-translations/
-   */
+    /**
+     * Makes child theme available for translation.
+     * Translations can be added into the /languages/ directory.
+     * Read more at: http://www.buddyboss.com/tutorials/language-translations/
+     */
 
-  // Translate text from the PARENT theme.
-  load_theme_textdomain( 'onesocial', get_stylesheet_directory() . '/languages' );
+    // Translate text from the PARENT theme.
+    load_theme_textdomain( 'onesocial', get_stylesheet_directory() . '/languages' );
 
-  // Translate text from the CHILD theme only.
-  // Change 'onesocial' instances in all child theme files to 'ccluk_theme'.
-  // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
+    // Translate text from the CHILD theme only.
+    // Change 'onesocial' instances in all child theme files to 'ccluk_theme'.
+    // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
 
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );
