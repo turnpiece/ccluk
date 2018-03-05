@@ -391,8 +391,13 @@ function forminator_most_popular_poll() {
  * @since 1.0
  * @return int
  */
-function forminator_form_view_per_page() {
-	return apply_filters( 'forminator_form_per_page', 10 );
+function forminator_form_view_per_page( $type = 'listings' ) {
+	if ( $type == 'entries' ) {
+		$per_page = get_option( "forminator_pagination_entries", 10 );
+	} else {
+		$per_page = get_option( "forminator_pagination_listings", 10 );
+	}
+	return apply_filters( 'forminator_form_per_page', $per_page, $type );
 }
 
 /**
@@ -636,13 +641,14 @@ function forminator_prepare_css( $cssString, $prefix, $as_array = false, $separa
  * @since 1.0
  *
  * @param int $total - the total records
+ * @param string $type - The type of page (listings or entries)
  *
  * @return string
  */
-function forminator_list_pagination( $total ) {
+function forminator_list_pagination( $total, $type = 'listings' ) {
 	$pagenum     = isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0;
 	$page_number = max( 1, $pagenum );
-	$per_page    = forminator_form_view_per_page();
+	$per_page    = forminator_form_view_per_page( $type );
 	if ( $total > $per_page ) {
 		$removable_query_args = wp_removable_query_args();
 
@@ -676,13 +682,22 @@ function forminator_list_pagination( $total ) {
 
 			<?php if ( ! $disable_first ):
 
-				$url = esc_url( add_query_arg( 'paged', min( 1, $total_pages ), $current_url ) );
+				$prev_url = esc_url( add_query_arg( 'paged', min( $total_pages, $page_number - 1 ), $current_url ) );
+				$first_url = esc_url( add_query_arg( 'paged', min( 1, $total_pages ), $current_url ) );
 				?>
 
-                <li class="wpmudev-pagination--item wpmudev-pagination--prev <?php echo $class; ?>"><a href="<?php echo $url ?>">
+				<li class="wpmudev-pagination--item wpmudev-pagination--prev">
+					<a href="<?php echo $first_url ?>">
+                        <span class="wpdui-icon wpdui-icon-arrow-skip-start"></span>
+                        <span class="wpmudev-sr-only"><?php _e( 'First page', Forminator::DOMAIN ); ?></span>
+                    </a>
+				</li>
+                <li class="wpmudev-pagination--item wpmudev-pagination--prev">
+					<a href="<?php echo $prev_url ?>">
                         <span class="wpdui-icon wpdui-icon-arrow-left-carats"></span>
                         <span class="wpmudev-sr-only"><?php _e( 'Previous page', Forminator::DOMAIN ); ?></span>
-                    </a></li>
+                    </a>
+				</li>
 			<?php endif;
 
 			$dots    = false;
@@ -707,11 +722,21 @@ function forminator_list_pagination( $total ) {
 
 			<?php if ( ! $disable_last ):
 
-				$url = esc_url( add_query_arg( 'paged', max( $total_pages, $page_number - 1 ), $current_url ) ); ?>
-                <li class="wpmudev-pagination--item wpmudev-pagination--next <?php echo $class; ?>"><a href="<?php echo $url; ?>">
+				$next_url = esc_url( add_query_arg( 'paged', min( $total_pages, $page_number + 1 ), $current_url ) );
+				$last_url = esc_url( add_query_arg( 'paged', max( $total_pages, $page_number - 1 ), $current_url ) ); ?>
+
+                <li class="wpmudev-pagination--item wpmudev-pagination--next">
+					<a href="<?php echo $next_url; ?>">
                         <span class="wpdui-icon wpdui-icon-arrow-right-carats"></span>
                         <span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
-                    </a></li>
+                    </a>
+				</li>
+				<li class="wpmudev-pagination--item wpmudev-pagination--next">
+					<a href="<?php echo $last_url; ?>">
+                        <span class="wpdui-icon wpdui-icon-arrow-skip-end"></span>
+                        <span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
+                    </a>
+				</li>
 			<?php endif; ?>
         </ul>
 		<?php

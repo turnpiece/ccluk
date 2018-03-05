@@ -41,6 +41,11 @@ class Forminator_Captcha extends Forminator_Field {
 	public $category = 'standard';
 
 	/**
+	 * @var string
+	 */
+	public $hide_advanced = "true";
+
+	/**
 	 * Forminator_Captcha constructor.
 	 *
 	 * @since 1.0
@@ -65,6 +70,19 @@ class Forminator_Captcha extends Forminator_Field {
 				'name' => 'field_label',
 				'hide_label' => false,
 				'label'	=> __( 'Field label', Forminator::DOMAIN )
+			),
+			array(
+				'id' => 'invisible-captcha',
+				'type' => 'Toggle',
+				'name' => 'invisible_captcha',
+				'hide_label' => true,
+				'values' => array(
+					array(
+						'value' => "true",
+						'label' => __( 'Invisible reCAPTCHA', Forminator::DOMAIN ),
+						'labelSmall' => "true"
+					)
+				)
 			),
 		);
 	}
@@ -99,6 +117,12 @@ class Forminator_Captcha extends Forminator_Field {
 		</div>';
 	}
 
+	public function is_invisible_recaptcha( $field ) {
+		$is_invisible = self::get_property( 'invisible_captcha', $field );
+		$is_invisible = filter_var( $is_invisible, FILTER_VALIDATE_BOOLEAN );
+
+		return $is_invisible;
+	}
 	/**
 	 * Field front-end markup
 	 *
@@ -108,9 +132,17 @@ class Forminator_Captcha extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field ) {
-		$key 	= get_option( "forminator_captcha_key", false );
-		$theme  = get_option( "forminator_captcha_theme", false );
+		$key   = get_option( "forminator_captcha_key", false );
+		$theme = get_option( "forminator_captcha_theme", false );
 
-		return sprintf( '<div class="g-recaptcha forminator-g-recaptcha" data-theme="%s" data-sitekey="%s"></div>', $theme, $key );
+		$captcha_size = 'normal';
+		$captcha_class = 'forminator-g-recaptcha';
+		if ( $this->is_invisible_recaptcha( $field ) ) {
+			$captcha_size = 'invisible';
+			$captcha_class .= ' recaptcha-invisible';
+		}
+
+		// dont use .g-recaptcha class as it will rendered automatically when other plugin load recaptcha with default render
+		return sprintf( '<div class="%s" data-theme="%s" data-sitekey="%s" data-size="%s"></div>', $captcha_class, $theme, $key, $captcha_size );
 	}
 }

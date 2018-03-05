@@ -2,7 +2,7 @@
 $entries    = $this->get_table();
 $form_type  = $this->get_form_type();
 $count      = $this->get_total_entries();
-$per_page   = 10;
+$per_page   = $this->get_per_page();
 $total_page = ceil( $count / $per_page );
 ?>
 <section id="wpmudev-section">

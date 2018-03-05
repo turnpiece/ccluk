@@ -47,6 +47,7 @@ function forminator_quiz( $id, $ajax = false ) {
  */
 function forminator_form_preview( $id, $ajax = false, $data = false ) {
 	$view = Forminator_CForm_Front::get_instance();
+	$data = forminator_stripslashes_deep($data);
 
 	return $view->display( $id, $ajax, $data );
 }
@@ -59,6 +60,7 @@ function forminator_form_preview( $id, $ajax = false, $data = false ) {
  */
 function forminator_poll_preview( $id, $ajax = false, $data = false ) {
 	$view = Forminator_Poll_Front::get_instance();
+	$data = forminator_stripslashes_deep($data);
 
 	return $view->display( $id, $ajax, $data );
 }
@@ -71,8 +73,38 @@ function forminator_poll_preview( $id, $ajax = false, $data = false ) {
  */
 function forminator_quiz_preview( $id, $ajax = false, $data = false ) {
 	$view = Forminator_QForm_Front::get_instance();
+	$data = forminator_stripslashes_deep($data);
 
 	return $view->display( $id, $ajax, $data );
+}
+
+/**
+ * Return stripslashed string or array
+ *
+ * @since 1.0
+ * @return mixed
+ */
+function forminator_stripslashes_deep($val){
+    $val = is_array($val) ? array_map('stripslashes_deep', $val) : stripslashes($val);
+
+    return $val;
+}
+
+/**
+ * Sanitize field
+ *
+ * @since 1.0.2
+ * @param $field
+ *
+ * @return array
+ */
+function forminator_sanitize_field( $field ) {
+	// If array map all fields
+	if( is_array( $field ) ) {
+		return array_map( 'forminator_sanitize_field', $field );
+	}
+
+	return sanitize_text_field( $field );
 }
 
 /**
@@ -147,17 +179,28 @@ function forminator_get_existing_cfields() {
  * Convert array to array compatible with field values
  *
  * @since 1.0
- * @return mixed
+ * @param $array
+ * @param bool $replace_value
+ *
+ * @return array
  */
-function forminator_to_field_array( $array ) {
+function forminator_to_field_array( $array, $replace_value = false ) {
 	$field_array = array();
 
 	if( !empty( $array ) ) {
 		foreach ( $array as $key => $value ) {
-			$field_array[] = array(
-				'value' => $key,
-				'label' => $value
-			);
+			// Use value instead of key
+			if( $replace_value ) {
+				$field_array[] = array(
+					'value' => $value,
+					'label' => $value
+				);
+			} else {
+				$field_array[] = array(
+					'value' => $key,
+					'label' => $value
+				);
+			}
 		}
 	}
 
@@ -273,6 +316,11 @@ function forminator_replace_form_data( $content, $data ) {
 				$value = '';
 			}
 
+			// If array, convert it to string
+			if( is_array( $value ) ) {
+				$value = implode( ", ",$value );
+			}
+
 			$content = str_replace( $match, $value, $content );
 		}
 	}
@@ -291,7 +339,7 @@ function forminator_replace_variables( $content ) {
 	if ( strpos( $content, '{' ) !== false ) {
 		// Handle User IP Address variable
 		$user_ip = forminator_user_ip();
-		$content = str_replace( '{user_up}', $user_ip, $content );
+		$content = str_replace( '{user_ip}', $user_ip, $content );
 
 		// Handle Date (mm/dd/yyyy) variable
 		$date_mdy = date_i18n( 'm/d/Y', forminator_local_timestamp(), true );
@@ -320,9 +368,10 @@ function forminator_replace_variables( $content ) {
 		// Handle HTTP Refer URL variable
 		$refer_url = isset ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $embed_url;
 		$content = str_replace( '{refer_url}', $refer_url, $content );
+		$content = str_replace( '{http_refer}', $refer_url, $content);
 
 		// Handle User Display Name variable
-		$user_name = forminator_get_user_data( 'user_nicename' );
+		$user_name = forminator_get_user_data( 'display_name' );
 		$content = str_replace( '{user_name}', $user_name, $content );
 
 		// Handle User Email variable

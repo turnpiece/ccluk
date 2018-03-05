@@ -60,7 +60,7 @@ class Forminator_Shortcode_Generator {
 		wp_enqueue_script( 'jquery-ui-widget' );
 		wp_enqueue_script( 'jquery-ui-mouse' );
 		wp_enqueue_script( 'jquery-ui-tabs' );
-		wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'build/library/select2.full.min.js', array( 'jquery' ), FORMINATOR_VERSION );
+		wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'assets/js/library/select2.full.min.js', array( 'jquery' ), FORMINATOR_VERSION );
 		wp_enqueue_style( 'select2-forminator-css', forminator_plugin_url() . 'assets/css/select2.min.css', array(), "4.0.3" ); // Select2
 		wp_enqueue_style( 'forminator-shortcode-generator-styles', forminator_plugin_url() . 'assets/css/scgen.css', array(), FORMINATOR_VERSION );
 		wp_enqueue_script( 'forminator-shortcode-generator', forminator_plugin_url() . 'build/admin/scgen.min.js', array( 'jquery' ), FORMINATOR_VERSION );

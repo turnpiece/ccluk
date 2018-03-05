@@ -280,6 +280,68 @@ abstract class Forminator_Field {
 	}
 
 	/**
+	 * Return wp_editor_field
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $attr
+	 *
+	 * @return mixed
+	 */
+	public static function create_wp_editor( $attr = array(), $label = '', $description = '', $required = false ) {
+		$html = '';
+
+		if ( $label ) {
+			if ( $required ) {
+				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label>', $label );
+				$html .= sprintf( '<div class="forminator-icon" aria-hidden="true">%s</div>', forminator_get_required_icon() );
+				$html .= '</div>';
+			} else {
+				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
+			}
+		}
+
+		$wp_editor_class = isset( $attr['class'] ) ? $attr['class'] : '';
+		if ( $required ) {
+			add_action( 'the_editor', array( __CLASS__, 'add_required_wp_editor' ) );
+			$wp_editor_class .= ' forminator-wp-editor-required';
+		}
+		ob_start();
+		wp_editor( '',
+		           isset( $attr['id'] ) ? $attr['id'] : '',
+		           array(
+			           'textarea_name' => isset( $attr['name'] ) ? $attr['name'] : '',
+			           'media_buttons' => false,
+			           'editor_class'  => $wp_editor_class,
+		           ) );
+		$html .= ob_get_clean();
+
+		if ( ! empty( $description ) ) {
+			$html .= self::get_description( $description );
+		}
+
+		return apply_filters( 'forminator_field_create_wp_editor', $html, $attr, $label, $description );
+	}
+
+	/**
+	 * Add Required attribute to wp_editor
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param $editor_markup
+	 *
+	 * @return mixed
+	 */
+	public static function add_required_wp_editor( $editor_markup ) {
+		if ( stripos( $editor_markup, 'forminator-wp-editor-required' ) !== false ) {
+			// mark required
+			$editor_markup = str_replace( '<textarea', '<textarea required="true"', $editor_markup );
+		}
+
+		return $editor_markup;
+	}
+
+	/**
 	 * Return new select field
 	 *
 	 * @since 1.0
@@ -361,19 +423,30 @@ abstract class Forminator_Field {
 	 * Create file upload
 	 *
 	 * @since 1.0
+	 *
 	 * @param string $id
 	 * @param string $name
+	 * @param bool   $required
 	 *
 	 * @return string $html
 	 */
-	public static function create_file_upload( $id, $name ) {
+	public static function create_file_upload( $id, $name, $required = false ) {
+		$id    = $id . '-field';
+		$class = 'forminator-input-file';
+		if ( $required ) {
+			$class .= '-required';
+		}
 		$html = '<div class="forminator-upload">';
-		$html .= sprintf( '<button type="button" class="forminator-button forminator-upload-button" data-id="%s" id="%s"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>', $id, $id, __( 'Choose File', Forminator::DOMAIN ) );
+		$html .= sprintf( '<button type="button" class="forminator-button forminator-upload-button" data-id="%s" id="%s"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
+		                  $id,
+		                  $id,
+		                  __( 'Choose File', Forminator::DOMAIN ) );
 		$html .= sprintf( '<label class="forminator-label" id="%s">%s</label>', $id, __( 'No file chosen', Forminator::DOMAIN ) );
 		$html .= '<button class="forminator-upload--remove" style="display: none;"><span class="wpdui-icon wpdui-icon-close"></span></button>';
-		$html .= sprintf( '<input class="forminator-input" type="file" name="%s" id="%s" style="display:none" />', $name, $id );
+		$html .= sprintf( '<input class="forminator-input %s" type="file" name="%s" id="%s" style="display:none" %s/>', $class, $name, $id, ( $required ? 'required="true"' : '' ) );
 		$html .= '</div>';
-		return apply_filters( 'forminator_field_create_file_upload', $html, $id, $name );
+
+		return apply_filters( 'forminator_field_create_file_upload', $html, $id, $name, $required );
 	}
 
 	/**
@@ -425,7 +498,7 @@ abstract class Forminator_Field {
 	 */
 	public function has_limit( $field ) {
 		$limit = self::get_property( 'text_limit', $field, false );
-		$limit 	= filter_var( $limit , FILTER_VALIDATE_BOOLEAN );
+		$limit = filter_var( $limit , FILTER_VALIDATE_BOOLEAN );
 
 		return $limit;
 	}
@@ -438,7 +511,7 @@ abstract class Forminator_Field {
 	 */
 	public function is_required( $field ) {
 		$required = self::get_property( 'required', $field, false );
-		$required 	= filter_var( $required , FILTER_VALIDATE_BOOLEAN );
+		$required = filter_var( $required , FILTER_VALIDATE_BOOLEAN );
 
 		return $required;
 	}
@@ -583,5 +656,24 @@ abstract class Forminator_Field {
 	 */
 	public function get_validation_messages() {
 		return '';
+	}
+
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		return $data;
+	}
+
+	public function sanitize_value( $value ){
+		return htmlspecialchars($value, ENT_COMPAT);
 	}
 }

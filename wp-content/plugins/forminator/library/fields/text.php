@@ -253,7 +253,7 @@ class Forminator_Text extends Forminator_Field {
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
 		$required    = self::get_property( 'required', $field, false );
-		$placeholder = self::get_property( 'placeholder', $field );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ));
 		$field_type  = self::get_property( 'input_type', $field );
 
 		if( $field_type == "paragraph" ) {
@@ -350,5 +350,22 @@ class Forminator_Text extends Forminator_Field {
 				$this->validation_message[ $id ] = __( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN );
 			}
 		}
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_text_sanitize', $data, $field );
 	}
 }

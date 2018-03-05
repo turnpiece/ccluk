@@ -184,7 +184,7 @@ class Forminator_Export {
 				$files[]  = $row[0];
 				$titles[] = $row[1]->name;
 			}
-			$subject = sprintf( __( "Forminator entires data for form %s", Forminator::DOMAIN ), implode( ',', $titles ) );
+			$subject = sprintf( __( "Entires data for %s", Forminator::DOMAIN ), implode( ',', $titles ) );
 			wp_mail( $email, $subject, 'Your scheduled results have arrived! Forminator has tabulated the responses and packaged the results.', array(), $files );
 			foreach ( $files as $file ) {
 				@unlink( $file );

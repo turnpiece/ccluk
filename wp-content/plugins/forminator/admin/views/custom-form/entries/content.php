@@ -44,14 +44,6 @@
 
 							<ul class="wpmudev-multicheck">
 
-								<li class="wpmudev-multicheck--item">
-									<div class="wpmudev-checkbox">
-										<input type="checkbox" name="field[]" id="date-enable" <?php $this->checked_field( 'date' ); ?> value="date">
-										<label for="date-enable" class="wpdui-icon wpdui-icon-check"></label>
-									</div>
-									<label for="date-enable" class="wpmudev-item--label"><?php _e( "Date added", Forminator::DOMAIN ); ?></label>
-								</li>
-
 								<?php
 								$ignored_field_types 	= Forminator_Form_Entry_Model::ignored_fields();
 								foreach ( $this->get_fields() as $field ) {
@@ -82,7 +74,7 @@
 
 							</ul>
 
-							<button class="wpmudev-button"><?php _e( "Update Table", Forminator::DOMAIN ); ?></button>
+							<button class="wpmudev-button"><?php _e( "Filter Entries", Forminator::DOMAIN ); ?></button>
 
                         </div>
 
@@ -222,9 +214,8 @@
 						<div class="wpmudev-entries--text">
 
 							<p class="wpmudev-entries--title"><?php _e( 'Title', Forminator::DOMAIN ); ?></p>
-							<?php if ( $this->is_selected_field( 'date' ) ): ?>
 							<p class="wpmudev-entries--subtitle"><?php _e( 'Date', Forminator::DOMAIN ); ?></p>
-							<?php endif; ?>
+
 						</div>
 
 						<div class="wpmudev-entries--action" aria-hidden="true"></div>
@@ -277,9 +268,8 @@
 										<div class="wpmudev-result--text">
 
 											<p class="wpmudev-result--title"><?php printf( __( 'Entry #%s', Forminator::DOMAIN ), $first_item ); ?></p>
-											<?php if ( $this->is_selected_field( 'date' ) ): ?>
 											<p class="wpmudev-result--subtitle"><?php  echo date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $entry->date_created_sql ) ); ?></p>
-											<?php endif; ?>
+
 										</div>
 
 										<div class="wpmudev-result--action">

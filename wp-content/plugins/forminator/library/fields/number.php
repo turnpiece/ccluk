@@ -202,7 +202,7 @@ class Forminator_Number extends Forminator_Field {
 		$id = $name  	= self::get_property( 'element_id', $field );
 		$id          	= $id . '-field';
 		$required 		= self::get_property( 'required', $field, false );
-		$placeholder 	= self::get_property( 'placeholder', $field );
+		$placeholder 	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 		$value 			= self::get_property( 'value', $field );
 		$limit 	        = self::get_property( 'number_limit', $field, false );
 
@@ -282,7 +282,7 @@ class Forminator_Number extends Forminator_Field {
 	public function validate( $field, $data ) {
 		if ( $this->is_required( $field ) ) {
 			$id 	= self::get_property( 'element_id', $field );
-			$max 	= self::get_property( 'number_limit', $field, $data );
+			$max 	= self::get_property( 'limit_max', $field, $data );
 			$min 	= self::get_property( 'limit_min', $field, $data );
 
 			if ( empty( $data ) ) {
@@ -300,5 +300,22 @@ class Forminator_Number extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_number_sanitize', $data, $field );
 	}
 }

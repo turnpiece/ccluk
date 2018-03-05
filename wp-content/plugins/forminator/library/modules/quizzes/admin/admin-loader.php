@@ -181,7 +181,7 @@ class Forminator_Quizz_Admin extends Forminator_Admin_Module {
 			"nowrong_label"                => __( "No Wrong Answer", Forminator::DOMAIN ),
 			"nowrong_description"          => __( "Similar to quizzes you see on Facebook. e.g. Answer these questions, and we will tell you what breed of dog you are at heart.", Forminator::DOMAIN ),
 			"knowledge_label"              => __( "Knowledge", Forminator::DOMAIN ),
-			"knowledge_description"        => __( "Quizzes that test your knowledge af things. e.g. Just how well exactly do you know your Seinfeld quotes.", Forminator::DOMAIN ),
+			"knowledge_description"        => __( "Quizzes that test your knowledge of things. e.g. Just how well exactly do you know your Seinfeld quotes.", Forminator::DOMAIN ),
 			"results"                      => __( "Quiz results", Forminator::DOMAIN ),
 			"questions"                    => __( "Quiz questions", Forminator::DOMAIN ),
 			"details"                      => __( "Quiz details", Forminator::DOMAIN ),
@@ -202,11 +202,12 @@ class Forminator_Quizz_Admin extends Forminator_Admin_Module {
 			"after"                        => __( "After user picks answer", Forminator::DOMAIN ),
 			"before"                       => __( "At the end of whole quiz", Forminator::DOMAIN ),
 			"phrasing"                     => __( "Answer phrasing", Forminator::DOMAIN ),
-			"phrasing_desc"                => __( "Pick how you want the correct & incorrect answers to read. Use <strong><%UserAnswer%></strong> to pull in the value user selected & <strong><%CorrectAnswer%></strong> to pull in the correct value.", Forminator::DOMAIN ),
+			"phrasing_desc"                => __( "Pick how you want the correct & incorrect answers to read. Use <strong>%UserAnswer%</strong> to pull in the value user selected & <strong>%CorrectAnswer%</strong> to pull in the correct value.", Forminator::DOMAIN ),
 			"msg_correct"                  => __( "Correct answer message", Forminator::DOMAIN ),
 			"msg_incorrect"                => __( "Incorrect answer message", Forminator::DOMAIN ),
 			"msg_count"                    => __( "Final count message", Forminator::DOMAIN ),
-			"msg_count_desc"               => __( "Edit the copy of the final result count message that will appear after the quiz is complete. Use <strong><%YourNum%></strong> to display number of correct answers & <strong><%Total%></strong> for total number of questions.", Forminator::DOMAIN ),
+			"msg_count_desc"               => __( "Edit the copy of the final result count message that will appear after the quiz is complete. Use <strong>%YourNum%</strong> to display number of correct answers & <strong>%Total%</strong> for total number of questions.", Forminator::DOMAIN ),
+			"msg_count_info"			   => __( "You can now add some html content here to personalize even more text displayed as Final Count Message. Try it now!", Forminator::DOMAIN ),
 			"share"                        => __( "Share on social media", Forminator::DOMAIN ),
 			"order"                        => __( "Results priority order", Forminator::DOMAIN ),
 			"order_label"                  => __( "Pick priority for results", Forminator::DOMAIN ),
@@ -220,6 +221,7 @@ class Forminator_Quizz_Admin extends Forminator_Admin_Module {
 			"cancel"                       => __( "Cancel", Forminator::DOMAIN ),
 			"continue"                     => __( "Continue", Forminator::DOMAIN ),
 			"finish"                       => __( "Finish", Forminator::DOMAIN ),
+			"smartcrawl"				   => __( "<strong>Want more control?</strong> <strong><a href='https://premium.wpmudev.org/project/smartcrawl-wordpress-seo/' target='_blank'>SmartCrawl</a></strong> OpenGraph and Twitter Card support lets you choose how your content looks when it’s shared on social media.", Forminator::DOMAIN )
 		);
 
 		return $data;

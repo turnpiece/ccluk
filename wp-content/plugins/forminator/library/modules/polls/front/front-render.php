@@ -172,6 +172,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function render_form_header() {
+		$html = '<div class="forminator-poll-response-message">';
 		ob_start();
 		do_action( 'forminator_poll_post_message' ); //prints html, so we need to capture this
 		if ( isset( $_REQUEST['saved'] ) && ! isset( $_REQUEST['results'] ) ) {
@@ -191,7 +192,8 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				<?php
 			}
 		}
-		$html = ob_get_clean();
+		$html .= ob_get_clean();
+		$html .= '</div>';
 
 		$question    = $this->get_poll_question();
 		$description = $this->get_poll_description();
@@ -201,7 +203,6 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		if ( ! empty( $description ) ) {
 			$html .= sprintf( '<p class="forminator-poll--description">%s</p>', $description );
 		}
-		$html .= '<div class="forminator-poll-response-message"></div>';
 
 		return apply_filters( 'forminator_poll_header', $html, $this );
 	}
@@ -432,7 +433,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 
 		// Print field markup
 		$html = $this->radio_field_markup( $field, $input_id, $name );
-		$html .= sprintf( '<label aria-hidden="true" for="%s">%s</label>', $input_id, $label );
+		$html .= sprintf( '<label class="forminator-radio--design" aria-hidden="true" for="%s"></label><label class="forminator-radio--label" for="%s">%s</label>', $input_id, $input_id, $label );
 
 		return apply_filters( 'forminator_field_markup', $html, $field, $this );
 	}
@@ -457,7 +458,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$disabled = 'disabled="disabled"';
 		}
 
-		$html = sprintf( '<input class="forminator-radio--field" id="%s" type="radio" data-required="%s" name="%s" value="%s" %s/>', $id, $required, $name, $value, $disabled );
+		$html = sprintf( '<input class="forminator-radio--field forminator-radio--input" id="%s" type="radio" data-required="%s" name="%s" value="%s" %s/>', $id, $required, $name, $value, $disabled );
 
 		return apply_filters( 'forminator_field_radio_markup', $html, $id, $name, $required, $value );
 	}
@@ -518,7 +519,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function render_field_before( $field ) {
-		$html = sprintf( '<li class="forminator-answer">' );
+		$html = sprintf( '<li class="forminator-answer forminator-radio">' );
 
 		return apply_filters( 'forminator_before_field_markup', $html );
 	}

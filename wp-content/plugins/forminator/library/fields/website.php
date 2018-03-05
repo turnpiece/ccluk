@@ -203,7 +203,7 @@ class Forminator_Website extends Forminator_Field {
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
 		$required    = $this->get_property( 'required', $field, false );
-		$placeholder = $this->get_property( 'placeholder', $field );
+		$placeholder = $this->sanitize_value( $this->get_property( 'placeholder', $field ) );
 		$value       = $this->get_property( 'value', $field );
 
 		$html = sprintf( '<input class="forminator-website--field forminator-input" type="url" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s"/>', $required, $name, $placeholder, $value, $id );
@@ -299,5 +299,23 @@ class Forminator_Website extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_website_sanitize', $data, $field );
 	}
 }

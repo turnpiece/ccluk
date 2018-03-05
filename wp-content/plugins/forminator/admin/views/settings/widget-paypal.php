@@ -11,7 +11,7 @@ $secret 		= get_option( "forminator_paypal_secret", "" );
 
         <div class="wpmudev-header--text">
 
-            <h2 class="wpmudev-subtitle"><?php _e( "Paypal Express", Forminator::DOMAIN ); ?></h2>
+            <h2 class="wpmudev-subtitle"><?php _e( "PayPal Express", Forminator::DOMAIN ); ?></h2>
 
         </div>
 
@@ -35,7 +35,7 @@ $secret 		= get_option( "forminator_paypal_secret", "" );
 
             <div class="wpmudev-section--text">
 
-                <label class="wpmudev-label--notice"><span><?php _e( "Add Paypal credentials to create checkout forms.", Forminator::DOMAIN ); ?></label>
+                <label class="wpmudev-label--notice"><span><?php _e( "Add PayPal credentials to create checkout forms.", Forminator::DOMAIN ); ?></label>
 
                 <p><?php _e( "Express Checkout is PayPal's premier checkout solution, which streamlines the checkout process for buyers and keeps them on your site after making a purchase.", Forminator::DOMAIN ); ?></p>
 
@@ -47,13 +47,13 @@ $secret 		= get_option( "forminator_paypal_secret", "" );
 
             <div class="wpmudev-section--table">
 
-                <label class="wpmudev-label--info"><span><?php _e( "You may need to do a free upgrade to a business account in order to properly make use of Paypal Express.", Forminator::DOMAIN ); ?></label>
+                <label class="wpmudev-label--info"><span><?php _e( "You may need to do a free upgrade to a business account in order to properly make use of PayPal Express.", Forminator::DOMAIN ); ?></label>
 
                 <table class="wpmudev-table">
 
                     <thead>
 
-                        <tr><th colspan="2"><?php _e( "Paypal Credentials", Forminator::DOMAIN ); ?></th></tr>
+                        <tr><th colspan="2"><?php _e( "PayPal Credentials", Forminator::DOMAIN ); ?></th></tr>
 
                     </thead>
 

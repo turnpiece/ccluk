@@ -4,16 +4,36 @@ Author: Cvetan Cvetanov (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
-1.0 - 2017-02-20
+1.0.3.1 - 2018-03-05
+----------------------------------------------------------------------
+- Fix: project meta information update
+
+1.0.3 - 2018-03-05
+----------------------------------------------------------------------
+- Add: Hooks in form submission process
+- Add: WP Editor in Posts Data field for content input
+- Add: Invisible reCaptcha
+- Add: Links to docs on admin pages
+- Improvement: Better form data sanitize
+- Improvement: Images use thumbnails instead of full images
+- Improvement: Submit confirmation message removed after submit
+- Improvement: Inline validation
+- Improvement: Language strings
+- Fix: Limit time fields characters
+- Fix: reCaptcha cannot be set as conditional field
+- Fix: Cloned fields keep same ID
+- Fix: Retake quiz button styling
+- Fix: Country field displayed as number on export
+- Other minor enhancements/fixes
+
+1.0.1 - 2018-02-21
+----------------------------------------------------------------------
+- Add: better file upload handling
+- Fix: Limit DB setup only on updated schema
+
+1.0 - 2018-02-20
 ----------------------------------------------------------------------
 - First public release
 
 
-1.0.1 - 2017-02-21
-----------------------------------------------------------------------
-
-- Impovement: better file upload handling
-- Fix: Limit DB setup only on updated schema
-
-
-87274-1519844388-ai
+87274-1520263722-au

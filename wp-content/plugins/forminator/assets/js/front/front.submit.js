@@ -17,7 +17,9 @@
 	// Create the defaults once
 	var pluginName = "forminatorFrontSubmit",
 		defaults = {
-			form_type: 'custom-form'
+			form_type: 'custom-form',
+			forminatorFront: false,
+			forminator_selector: ''
 		};
 
 	// The actual plugin constructor
@@ -40,15 +42,23 @@
 	// Avoid Plugin.prototype conflicts
 	$.extend(ForminatorFrontSubmit.prototype, {
 		init: function () {
-			this.forminatorFront = this.$el.data('forminatorFront');
 			switch (this.settings.form_type) {
 				case 'custom-form':
+					if (!this.settings.forminator_selector || !$(this.settings.forminator_selector).length) {
+						this.settings.forminator_selector = '.forminator-custom-form';
+					}
 					this.handle_submit_custom_form();
 					break;
 				case 'quiz':
+					if (!this.settings.forminator_selector || !$(this.settings.forminator_selector).length) {
+						this.settings.forminator_selector = '.forminator-quiz';
+					}
 					this.handle_submit_quiz();
 					break;
 				case 'poll':
+					if (!this.settings.forminator_selector || !$(this.settings.forminator_selector).length) {
+						this.settings.forminator_selector = '.forminator-poll';
+					}
 					this.handle_submit_poll();
 					break;
 
@@ -58,13 +68,33 @@
 			var self = this,
 				form = $(this.element);
 
-			form.on('submit', function (e) {
+			var success_available = self.$el.find('.forminator-cform-response-message').find('.forminator-label--success').not(':hidden');
+			if (success_available.length) {
+				self.focus_to_element(self.$el.find('.forminator-cform-response-message'), true);
+			}
+
+			$('body').on('submit.frontSubmit', this.settings.forminator_selector, function (e) {
 				var $this = $(this),
 					formData = new FormData(this),
 					$target_message = $this.find('.forminator-cform-response-message'),
 					$captcha_field = $this.find('.forminator-g-recaptcha');
 				if ($captcha_field.length) {
-					var $captcha_response = grecaptcha.getResponse();
+					//validate only first
+					$captcha_field = $($captcha_field.get(0));
+
+					// get the recatpcha widget
+					var recaptcha_widget = $captcha_field.data('forminator-recapchta-widget'),
+						recaptcha_size = $captcha_field.data('size'),
+						$captcha_response = window.grecaptcha.getResponse(recaptcha_widget);
+
+					if(recaptcha_size === 'invisible') {
+						if ($captcha_response.length === 0) {
+							window.grecaptcha.execute(recaptcha_widget);
+							return false;
+						}
+					}
+					// reset after getResponse
+					window.grecaptcha.reset(recaptcha_widget);
 					$target_message.html('');
 					if ($captcha_field.hasClass("error")) {
 						$captcha_field.removeClass("error");
@@ -74,9 +104,7 @@
 							$captcha_field.addClass("error");
 						}
 						$target_message.html('<label class="forminator-label--error"><span>' + window.ForminatorFront.cform.captcha_error + '</span></label>');
-						if(typeof self.forminatorFront !== 'undefined') {
-							self.forminatorFront.focus_to_element($target_message);
-						}
+						self.focus_to_element($target_message);
 
 						return false;
 					}
@@ -84,9 +112,7 @@
 				if (self.$el.hasClass('forminator_ajax')) {
 					$target_message.html('');
 					$target_message.html('<label class="forminator-label--info"><span>' + window.ForminatorFront.cform.processing + '</span></label>');
-					if(typeof self.forminatorFront !== 'undefined') {
-						self.forminatorFront.focus_to_element($target_message);
-					}
+					self.focus_to_element($target_message);
 
 					e.preventDefault();
 					$.ajax({
@@ -110,26 +136,18 @@
 							var $label_class = data.success ? 'success' : 'error';
 							if (typeof data.message !== "undefined") {
 								$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.message + '</span></label>');
-								if (typeof self.forminatorFront !== 'undefined') {
-									self.forminatorFront.focus_to_element($target_message);
-								}
+								self.focus_to_element($target_message, $label_class === 'success');
 
 							} else {
 								if (typeof data.data !== "undefined") {
 									$label_class = data.data.success ? 'success' : 'error';
 									$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.data.message + '</span></label>');
-									if (typeof self.forminatorFront !== 'undefined') {
-										self.forminatorFront.focus_to_element($target_message);
-									}
-
+									self.focus_to_element($target_message, $label_class === 'success');
 								}
 							}
 
 							if (!data.data.success && data.data.errors.length) {
-								if (typeof self.forminatorFront !== 'undefined') {
-									self.forminatorFront.show_messages(data.data.errors);
-								}
-
+								self.show_messages(data.data.errors);
 							}
 
 							if (data.success === true) {
@@ -141,6 +159,11 @@
 									$this.find(".forminator-upload--remove").hide();
 									$this.find('.forminator-upload .forminator-input').val("");
 									$this.find('.forminator-upload .forminator-label').html("No file chosen");
+									
+									// Reset selects
+									$this.find('.forminator-select').each(function(){
+										$(this).val(null).trigger("change");
+									});
 								}
 
 								if (typeof data.data.url !== "undefined") {
@@ -152,9 +175,7 @@
 							$this.find('button').removeAttr('disabled');
 							$target_message.html('');
 							$target_message.html('<label class="forminator-label--notice"><span>' + window.ForminatorFront.cform.error + '</span></label>');
-							if (typeof self.forminatorFront !== 'undefined') {
-								self.forminatorFront.focus_to_element($target_message);
-							}
+							self.focus_to_element($target_message);
 						}
 					});
 					return false;
@@ -164,8 +185,8 @@
 		},
 		handle_submit_quiz: function () {
 			var self = this;
-
-			this.$el.on('submit', function (e) {
+			
+			$('body').on('submit.frontSubmit', this.settings.forminator_selector, function (e) {
 				var form = $(this),
 					ajaxData = []
 				;
@@ -229,15 +250,19 @@
 		handle_submit_poll: function () {
 			var self = this;
 
-			this.$el.on('submit', function (e) {
+			// fadeout forminator-poll-response-message success
+			var success_available = self.$el.find('.forminator-poll-response-message').find('.forminator-label--success').not(':hidden');
+			if (success_available.length) {
+				self.focus_to_element(self.$el.find('.forminator-poll-response-message'), true);
+			}
+
+			$('body').on('submit.frontSubmit', this.settings.forminator_selector, function (e) {
 				var $this = $(this);
 				var $target_message = self.$el.find('.forminator-poll-response-message');
 				if (self.$el.hasClass('forminator_ajax')) {
 					$target_message.html('');
 					$target_message.html('<label class="forminator-label--info"><span>' + window.ForminatorFront.poll.processing + '</span></label>');
-					if (typeof self.forminatorFront !== 'undefined') {
-						self.forminatorFront.focus_to_element($target_message);
-					}
+					self.focus_to_element($target_message);
 
 					e.preventDefault();
 					$.ajax({
@@ -252,18 +277,13 @@
 							$target_message.html('');
 							var $label_class = data.success ? 'success' : 'error';
 							if (data.success === false) {
-								$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.data + '</span></label>');
-								if (typeof self.forminatorFront !== 'undefined') {
-									self.forminatorFront.focus_to_element($target_message);
-								}
-
+								$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.data.message + '</span></label>');
+								self.focus_to_element($target_message);
 							} else {
 								if (typeof data.data !== "undefined") {
 									$label_class = data.data.success ? 'success' : 'error';
 									$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.data.message + '</span></label>');
-									if(typeof self.forminatorFront !== 'undefined') {
-										self.forminatorFront.focus_to_element($target_message);
-									}
+									self.focus_to_element($target_message, $label_class === 'success');
 
 								}
 							}
@@ -278,9 +298,7 @@
 							self.$el.find('button').removeAttr('disabled');
 							$target_message.html('');
 							$target_message.html('<label class="forminator-label--notice"><span>' + window.ForminatorFront.poll.error + '</span></label>');
-							if(typeof self.forminatorFront !== 'undefined') {
-								self.forminatorFront.focus_to_element($target_message);
-							}
+							self.focus_to_element($target_message);
 
 						}
 					});
@@ -290,13 +308,66 @@
 			});
 		},
 
-		focus_to_element: function ($element) {
+		focus_to_element: function ($element, fadeout) {
+			fadeout = fadeout || false;
+
+			// force show in case its hidden of fadeOut
+			$element.show();
 			$('html,body').animate({scrollTop: ($element.offset().top - ($(window).height() - $element.outerHeight(true)) / 2)}, 500, function () {
 				if (!$element.attr("tabindex")) {
-					$element.attr("tabindex", -1).focus();
+					$element.attr("tabindex", -1);
 				}
+				$element.focus();
+				if (fadeout) {
+					// fadeout after 5 second delay
+					$element.show().delay(5000).fadeOut('slow');
+				}
+
 			});
 		},
+
+		show_messages: function (errors) {
+			var self = this;
+
+			var forminatorFrontCondition = self.$el.data('forminatorFrontCondition');
+			if (typeof forminatorFrontCondition !== 'undefined') {
+				// clear all validation message before show new one
+				this.$el.find('.forminator-label--validation').remove();
+				errors.forEach(function (value) {
+					var element_id = Object.keys(value),
+						message = Object.values(value);
+
+					var element = forminatorFrontCondition.get_form_field(element_id);
+					if (element.length) {
+						var $field_holder = $(element).closest('.forminator-field--inner');
+
+						if ($field_holder.length === 0) {
+							$field_holder = $(element).closest('.forminator-field');
+							if ($field_holder.length === 0) {
+								// handling postdata field
+								$field_holder = $(element).find('.forminator-field');
+								if ($field_holder.length > 1) {
+									$field_holder = $field_holder.first();
+								}
+							}
+						}
+
+						var $error_holder = $field_holder.find('.forminator-label--validation');
+
+						if ($error_holder.length === 0) {
+							$field_holder.append('<label class="forminator-label--validation"></label>');
+							$error_holder = $field_holder.find('.forminator-label--validation');
+						}
+						$(element).attr('aria-invalid', 'true');
+						$error_holder.text(message);
+						$field_holder.addClass('forminator-has_error');
+					}
+				});
+			}
+
+			return this;
+		}
+
 	});
 
 	// A really lightweight plugin wrapper around the constructor,

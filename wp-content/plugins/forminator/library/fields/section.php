@@ -140,7 +140,7 @@ class Forminator_Section extends Forminator_Field {
         $subtitle    = self::get_property( 'section_subtitle', $field );
         $type        = self::get_property( 'section_type', $field );
         $border	     = self::get_property( 'section_border', $field, false );
-		$border 	 = filter_var( $border , FILTER_VALIDATE_BOOLEAN );
+		$border 	 = filter_var( $border, FILTER_VALIDATE_BOOLEAN );
 
         $html = '<div class="forminator-break">';
 

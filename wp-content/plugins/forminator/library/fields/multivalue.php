@@ -311,4 +311,21 @@ class Forminator_MultiValue extends Forminator_Field {
 			}
 		}
 	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_multi_sanitize', $data, $field );
+	}
 }

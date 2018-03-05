@@ -178,13 +178,17 @@ class Forminator_Upload extends Forminator_Field {
 	 * Field front-end markup
 	 *
 	 * @since 1.0
+	 *
 	 * @param $field
 	 *
 	 * @return mixed
 	 */
 	public function markup( $field ) {
-		$id = $name = self::get_property( 'element_id', $field );
-		$html = self::create_file_upload( $id, $name );
+		$id       = $name = self::get_property( 'element_id', $field );
+		$required = self::get_property( 'required', $field, false );
+
+		$html = self::create_file_upload( $id, $name, $required );
+
 		return apply_filters( 'forminator_field_file_markup', $html, $field );
 	}
 

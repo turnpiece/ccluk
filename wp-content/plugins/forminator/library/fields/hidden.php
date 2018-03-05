@@ -128,7 +128,7 @@ class Forminator_Hidden extends Forminator_Field {
 		$placeholder = self::get_property( 'placeholder', $field );
 		$value 		 = $this->get_value( $field );
 
-		return sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );
+		return sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );	    	 	 	 	 	 				 	 
 	}
 
 	/**
@@ -140,8 +140,9 @@ class Forminator_Hidden extends Forminator_Field {
 	 * @return mixed|string
 	 */
 	public function get_value( $field ) {
-		$value = '';
+		$value       = '';
 		$saved_value = self::get_property( 'default_value', $field );
+		$embed_url   = forminator_get_post_data( 'guid' );
 
 		switch( $saved_value ) {
 			case "user_ip":
@@ -160,16 +161,16 @@ class Forminator_Hidden extends Forminator_Field {
 				$value = forminator_get_post_data( 'post_title' );
 				break;
 			case "embed_url":
-				$value = forminator_get_post_data( 'guid' );
+				$value = $embed_url;
 				break;
 			case "user_agent":
 				$value = $_SERVER[ 'HTTP_USER_AGENT' ];
 				break;
 			case "refer_url":
-				$value = $_SERVER[ 'HTTP_REFERER' ];
+				$value = isset ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $embed_url;
 				break;
 			case "user_name":
-				$value = forminator_get_user_data( 'user_nicename' );
+				$value = forminator_get_user_data( 'display_name' );
 				break;
 			case "user_email":
 				$value = forminator_get_user_data( 'user_email' );
@@ -180,5 +181,22 @@ class Forminator_Hidden extends Forminator_Field {
 		}
 
 		return $value;
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_hidden_sanitize', $data, $field );
 	}
 }

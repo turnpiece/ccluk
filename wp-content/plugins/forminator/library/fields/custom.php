@@ -266,4 +266,19 @@ class Forminator_Custom extends Forminator_Field {
 			}
 		}
 	}
+
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		return $data;
+	}
 }

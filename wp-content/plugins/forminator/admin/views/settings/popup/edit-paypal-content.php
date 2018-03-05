@@ -6,11 +6,11 @@ $secret 		= get_option( "forminator_paypal_secret", "" );
 <div class="wpmudev-hidden-popup wpmudev-popup-form" style="display: none">
 	<div>
 
-	    <label><?php _e( "Paypal Mode", Forminator::DOMAIN ); ?></label>
+	    <label><?php _e( "PayPal Mode", Forminator::DOMAIN ); ?></label>
 
 	    <select class="wpmudev-select" name="api_mode">
-	        <option value="test" <?php if( $api_mode == "test" ) { echo "selected"; } ?>><?php _e( "Test Mode (Sandbox)", Forminator::DOMAIN ); ?></option>
-	        <option value="live" <?php if( $api_mode == "live" ) { echo "selected"; } ?>><?php _e( "Live Mode", Forminator::DOMAIN ); ?></option>
+	        <option value="test" <?php selected( $api_mode, "test" ); ?> ><?php _e( "Test Mode (Sandbox)", Forminator::DOMAIN ); ?></option>
+	        <option value="live" <?php selected( $api_mode, "live" ); ?>><?php _e( "Live Mode", Forminator::DOMAIN ); ?></option>
 	    </select>
 
 	</div>

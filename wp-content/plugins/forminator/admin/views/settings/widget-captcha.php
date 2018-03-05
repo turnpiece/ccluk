@@ -46,7 +46,11 @@ $new = true;
 		  <?php } else { ?>
         <div class="wpmudev-section--table">
 
-            <label class="wpmudev-label--notice"><span><?php _e( "Please note, these settings are required only if you decide to use the reCAPTCHA field.", Forminator::DOMAIN ); ?></label>
+            <label class="wpmudev-label--notice">
+                <span><?php _e( "Please note, these settings are required only if you decide to use the reCAPTCHA field.", Forminator::DOMAIN ); ?></span>
+                <br>
+                <span><?php _e('Make sure you register your reCAPTCHA site type as invisible reCAPTCHA to support both reCAPTCHA v2 and invisible  reCAPTCHA', Forminator::DOMAIN)?></span>
+            </label>
 
             <table class="wpmudev-table">
 

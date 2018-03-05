@@ -389,7 +389,7 @@ class Forminator_Address extends Forminator_Field {
 			 'class' 		=> 'forminator-input',
 			 'name' 		=> $name . '-' . $slug,
 			 'id'			=> $name  . '-' . $slug,
-			 'placeholder' 	=> self::get_property( $slug . '_placeholder', $field ),
+			 'placeholder' 	=> $this->sanitize_value( self::get_property( $slug . '_placeholder', $field ) ),
 		);
 
 		// Address field markup
@@ -450,7 +450,7 @@ class Forminator_Address extends Forminator_Field {
 				'class' 		=> 'forminator-input',
 				'name' 			=> $id . '-city',
 				'id' 			=> $id . '-city',
-				'placeholder' 	=> self::get_property( 'address_city_placeholder', $field ),
+				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_city_placeholder', $field ) ),
 			);
 
 			// City markup
@@ -488,7 +488,7 @@ class Forminator_Address extends Forminator_Field {
 				'class' 		=> 'forminator-input',
 				'name' 			=> $id . '-state',
 				'id' 			=> $id . '-state',
-				'placeholder' 	=> self::get_property( 'address_state_placeholder', $field ),
+				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_state_placeholder', $field ) ),
 			);
 
 			if ( ! $city ) {
@@ -553,7 +553,7 @@ class Forminator_Address extends Forminator_Field {
 				'class' 		=> 'forminator-input',
 				'name' 			=> $id . '-zip',
 				'id' 			=> $id . '-zip',
-				'placeholder' 	=> self::get_property( 'address_zip_placeholder', $field ),
+				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_zip_placeholder', $field ) ),
 			);
 
 			$html .= '<div class="forminator-row forminator-row--inner">';
@@ -595,7 +595,7 @@ class Forminator_Address extends Forminator_Field {
 				$html .= '<div class="forminator-row">';
 			}
 
-			$options = forminator_to_field_array( forminator_get_countries_list() );
+			$options = forminator_to_field_array( forminator_get_countries_list(), true );
 			$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
@@ -704,5 +704,22 @@ class Forminator_Address extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_address_sanitize', $data, $field );
 	}
 }

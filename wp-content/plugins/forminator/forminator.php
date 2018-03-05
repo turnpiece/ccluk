@@ -1,16 +1,15 @@
 <?php
 /**
-Plugin Name: Forminator Pro
-Version: 1.0.1
-Plugin URI:  https://premium.wpmudev.org/project/forminator/
-Description: Capture user information (as detailed as you like), engage users with interactive polls that show real-time results and graphs, “no wrong answer” Facebook-style quizzes and knowledge tests.
-Author: WPMU DEV
-Author URI: http://premium.wpmudev.org
-Text Domain: forminator
-Domain Path: /languages/
-WDP ID: 2097296
- */
-
+ * Plugin Name: Forminator Pro
+ * Version: 1.0.3.1
+ * Plugin URI:  https://premium.wpmudev.org/project/forminator/
+ * Description: Capture user information (as detailed as you like), engage users with interactive polls that show real-time results and graphs, “no wrong answer” Facebook-style quizzes and knowledge tests.
+ * Author: WPMU DEV
+ * Author URI: http://premium.wpmudev.org
+ * Text Domain: forminator
+ * Domain Path: /languages/
+ * WDP ID: 2097296
+*/
 /*
 Copyright 2009-2018 Incsub (http://incsub.com)
 Author – Cvetan Cvetanov (cvetanov)
@@ -35,7 +34,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'FORMINATOR_VERSION' ) ) {
-	define( 'FORMINATOR_VERSION', '1.0.1' );
+	define( 'FORMINATOR_VERSION', '1.0.3.1' );
 }
 
 /**

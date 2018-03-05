@@ -230,7 +230,7 @@ class Forminator_Time extends Forminator_Field {
 		$html        = '<div class="forminator-row forminator-row--inner forminator-align_btm">';
 		$id          = $name = self::get_property( 'element_id', $field );
 		$required    = self::get_property( 'required', $field, false );
-		$placeholder = self::get_property( 'placeholder', $field );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 		$type        = self::get_property( 'time_type', $field );
 		$field_label = self::get_property( 'field_label', $field );
 
@@ -247,10 +247,10 @@ class Forminator_Time extends Forminator_Field {
 		 */
 		$hours = array(
 			'type'        => 'number',
-			'class'       => 'forminator-input',
+			'class'       => 'forminator-input forminator-input-time',
 			'name'        => $id . '-hours',
 			'id'          => $id . '-hours',
-			'placeholder' => self::get_property( 'hh_placeholder', $field ),
+			'placeholder' => $this->sanitize_value( self::get_property( 'hh_placeholder', $field ) ),
 			'min'         => ( $type == "twelve" ) ? '1' : '0',
 			'max'         => ( $type == "twelve" ) ? '12' : '23',
 		);
@@ -262,10 +262,7 @@ class Forminator_Time extends Forminator_Field {
 			$label = self::get_property( 'hh_label', $field );
 			if ( ! empty( $label ) ) {
 				$html .= '<div class="forminator-field--label">';
-				$html .= '<label class="forminator-label">' . $label . '</label>';
-				$html .= '<div class="forminator-icon" aria-hidden="true">';
-				$html .= '<span class="wpdui-icon wpdui-icon-asterisk"></span>';
-				$html .= '</div>';
+				$html .= '<label class="forminator-label">' . $label . ' <span class="wpdui-icon wpdui-icon-asterisk"></span></label>';
 				$html .= '</div>';
 			}
 			$html .= self::create_simple_input( $hours, false, $field );
@@ -281,10 +278,10 @@ class Forminator_Time extends Forminator_Field {
 		 */
 		$minutes = array(
 			'type'        => 'number',
-			'class'       => 'forminator-input',
+			'class'       => 'forminator-input forminator-input-time',
 			'name'        => $id . '-minutes',
 			'id'          => $id . '-minutes',
-			'placeholder' => self::get_property( 'mm_placeholder', $field ),
+			'placeholder' => $this->sanitize_value( self::get_property( 'mm_placeholder', $field ) ),
 			'min'         => 0,
 			'max'         => 59,
 		);
@@ -296,10 +293,7 @@ class Forminator_Time extends Forminator_Field {
 			$label = self::get_property( 'mm_label', $field );
 			if ( ! empty( $label ) ) {
 				$html .= '<div class="forminator-field--label">';
-				$html .= '<label class="forminator-label">' . $label . '</label>';
-				$html .= '<div class="forminator-icon" aria-hidden="true">';
-				$html .= '<span class="wpdui-icon wpdui-icon-asterisk"></span>';
-				$html .= '</div>';
+				$html .= '<label class="forminator-label">' . $label . ' <span class="wpdui-icon wpdui-icon-asterisk"></span></label>';
 				$html .= '</div>';
 			}
 			$html .= self::create_simple_input( $minutes, false, $field );
@@ -424,5 +418,22 @@ class Forminator_Time extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_time_sanitize', $data, $field );
 	}
 }

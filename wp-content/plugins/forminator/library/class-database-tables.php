@@ -78,7 +78,7 @@ class Forminator_Database_Tables {
 		if ( $table_name ) {
 			$sql = "CREATE TABLE {$table_name} (
 				`entry_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
-				`entry_type` VARCHAR(200) NOT NULL,
+				`entry_type` VARCHAR(191) NOT NULL,
 				`form_id` bigint(20) unsigned NOT NULL,
 				`is_spam` TINYINT(1) NOT NULL DEFAULT 0,
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -97,7 +97,7 @@ class Forminator_Database_Tables {
 			$sql = "CREATE TABLE {$table_name} (
 				`meta_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				`entry_id` bigint(20) unsigned NOT NULL,
-				`meta_key` VARCHAR(200) default NULL,
+				`meta_key` VARCHAR(191) default NULL,
 				`meta_value` LONGTEXT NULL,
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
 				`date_updated` datetime NOT NULL default '0000-00-00 00:00:00',
@@ -116,7 +116,7 @@ class Forminator_Database_Tables {
 				`view_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
 				`form_id` bigint(20) unsigned NOT NULL,
 				`page_id` bigint(20) unsigned NOT NULL,
-				`ip` VARCHAR(200) default NULL,
+				`ip` VARCHAR(191) default NULL,
 				`count` mediumint(8) unsigned not null default 1,
 				`date_created` datetime NOT NULL default '0000-00-00 00:00:00',
 				`date_updated` datetime NOT NULL default '0000-00-00 00:00:00',

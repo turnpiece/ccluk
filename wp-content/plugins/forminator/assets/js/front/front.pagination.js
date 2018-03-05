@@ -149,12 +149,16 @@
 			}
 
 			//get fields on current page
-			page.find("input, select, textarea, [contenteditable]").not(":submit, :reset, :image, :disabled").not(':hidden').each(function (key, element) {
-				valid = validator.element(element);
-				if (!valid) {
-					errors++;
-				}
-			});
+			page.find("input, select, textarea, [contenteditable]")
+				.not(":submit, :reset, :image, :disabled")
+				.not(':hidden:not(.forminator-wp-editor-required, .forminator-input-file-required)')
+				.not('[gramm="true"]')
+				.each(function (key, element) {
+					valid = validator.element(element);
+					if (!valid) {
+						errors++;
+					}
+				});
 
 			return errors === 0;
 		},

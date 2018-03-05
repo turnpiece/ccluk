@@ -93,7 +93,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 				self::$forms_properties[] = array(
 					'id'                  => $id,
 					'render_id'           => self::$render_ids[ $id ],
-					'inline_validation'   => $this->has_inline_validation(),
+					'inline_validation'   => $this->has_inline_validation() ? 'true' : 'false',
 					'conditions'          => $this->get_conditions(),
 					'validation_rules'    => $this->inline_rules,
 					'validation_messages' => $this->inline_messages,
@@ -121,14 +121,15 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	 * @since 1.0
 	 */
 	public function render_form_header() {
-		ob_start();
 		//if rendered on Preview, the array is empty and sometimes PHP notices show up
-		if( $this->is_admin && empty( self::$render_ids ) ){
-			self::$render_ids[$this->model->id] = 0;
+		if ( $this->is_admin && empty( self::$render_ids ) ) {
+			self::$render_ids[ $this->model->id ] = 0;
 		}
+		$content = '<div class="forminator-cform-response-message">';
+		ob_start();
 		do_action( 'forminator_cform_post_message', $this->model->id, self::$render_ids[ $this->model->id ] ); //prints html, so we need to capture this
-		$content = ob_get_clean();
-		$content .= '<div class="forminator-cform-response-message"></div>';
+		$content .= ob_get_clean();
+		$content .= '</div>';
 
 		return $content;
 	}
@@ -1550,9 +1551,9 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 				if (typeof ForminatorValidationErrors !== "undefined") {
 					var selector = ForminatorValidationErrors.selector,
 						errors = ForminatorValidationErrors.errors,
-						forminatorFront = jQuery(selector).data('forminatorFront');
-					if (typeof forminatorFront !== 'undefined') {
-						forminatorFront.show_messages(errors);
+						forminatorFrontSubmit = jQuery(selector).data('forminatorFrontSubmit');
+					if (typeof forminatorFrontSubmit !== 'undefined') {
+						forminatorFrontSubmit.show_messages(errors);
 					}
 				}
 			});

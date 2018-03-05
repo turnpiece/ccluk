@@ -100,9 +100,9 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 			}
 
 			$pagenum				= isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0;
-			$this->per_page			= forminator_form_view_per_page();
+			$this->per_page			= forminator_form_view_per_page( 'entries' );
 			$this->page_number 		= max( 1, $pagenum );
-			$this->total_fields 	= count( $this->fields ) + 1;
+			$this->total_fields 	= count( $this->fields );
 			$this->checked_fields 	= $this->total_fields;
 			$this->process_request();
 			$this->prepare_results();
@@ -129,7 +129,7 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 		}
 
 		if ( isset( $_POST['entries-action'] ) || isset( $_POST['entries-action-bottom'] ) ) {
-			if ( isset( $_POST['entries-action'] ) ) {
+			if ( isset( $_POST['entries-action'] ) && ! empty( $_POST['entries-action'] ) ) {
 				$action = $_POST['entries-action'];
 			} else if ( isset( $_POST['entries-action-bottom'] ) ) {
 				$action = $_POST['entries-action-bottom'];
@@ -370,6 +370,8 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 										if ( $key  == 'country' ) {
 											if ( isset( $countries[$value] ) ) {
 												$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $countries[$value] ) . "<br/> ";
+											} else {
+												$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $value ) . "<br/> ";
 											}
 										} else {
 											$key = strtolower( $key );
@@ -502,6 +504,6 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 	 */
 	public function paginate() {
 		$count = $this->total_entries();
-		forminator_list_pagination( $count );
+		forminator_list_pagination( $count, 'entries' );
 	}
 }

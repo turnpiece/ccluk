@@ -10,7 +10,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 class Forminator_Postdata extends Forminator_Field {
 
-    /**
+	/**
 	 * @var string
 	 */
 	public $name = '';
@@ -46,320 +46,321 @@ class Forminator_Postdata extends Forminator_Field {
 		$this->name = __( 'Post data', Forminator::DOMAIN );
 	}
 
-    /**
-     * @since 1.0
+	/**
+	 * @since 1.0
+	 *
 	 * @param array $settings
 	 *
 	 * @return array
 	 */
 	public function load_settings( $settings = array() ) {
-        return array(
-            array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
-				'className' => 'required-field',
+		return array(
+			array(
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
+				'className'  => 'required-field',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
 			),
 
 			array(
-				'id' => 'separator-1',
-				'type' => 'Separator',
+				'id'         => 'separator-1',
+				'type'       => 'Separator',
 				'hide_label' => true,
-            ),
+			),
 
 			array(
-				'id' => 'data-status',
-				'type' => 'Select',
-				'name' => 'data_status',
-				'className' => 'select-field',
-				'label'	=> __( 'Submitted data status', Forminator::DOMAIN ),
+				'id'           => 'data-status',
+				'type'         => 'Select',
+				'name'         => 'data_status',
+				'className'    => 'select-field',
+				'label'        => __( 'Submitted data status', Forminator::DOMAIN ),
 				'label_hidden' => false,
-				'values' => array(
+				'values'       => array(
 					array(
 						'value' => "draft",
-						'label' => __( 'Draft', Forminator::DOMAIN )
+						'label' => __( 'Draft', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "pending",
-						'label' => __( 'Pending Review', Forminator::DOMAIN )
+						'label' => __( 'Pending Review', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "publish",
-						'label' => __( 'Published', Forminator::DOMAIN )
-					)
-				)
-			),
-
-			array(
-				'id' => 'default-author',
-				'type' => 'ToggleContainer',
-				'name' => 'default_author',
-				'className' => 'toggle-container',
-				'hide_label' => true,
-				'has_content' => true,
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Set default author', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				),
-				'fields' => array(
-					array(
-						'id' => 'select-author',
-						'type' => 'Select',
-						'name' => 'select_author',
-						'className' => 'number-field',
-						'label_hidden' => false,
-						'label' => __( 'Pick user to be default author', Forminator::DOMAIN ),
-						'values' => $this->list_users()
+						'label' => __( 'Published', Forminator::DOMAIN ),
 					),
-				)
+				),
 			),
 
 			array(
-				'id' => 'separator-2',
-				'type' => 'Separator',
+				'id'          => 'default-author',
+				'type'        => 'ToggleContainer',
+				'name'        => 'default_author',
+				'className'   => 'toggle-container',
+				'hide_label'  => true,
+				'has_content' => true,
+				'values'      => array(
+					array(
+						'value'      => "true",
+						'label'      => __( 'Set default author', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+				'fields'      => array(
+					array(
+						'id'           => 'select-author',
+						'type'         => 'Select',
+						'name'         => 'select_author',
+						'className'    => 'number-field',
+						'label_hidden' => false,
+						'label'        => __( 'Pick user to be default author', Forminator::DOMAIN ),
+						'values'       => $this->list_users(),
+					),
+				),
+			),
+
+			array(
+				'id'         => 'separator-2',
+				'type'       => 'Separator',
 				'hide_label' => true,
 			),
 
 			array(
-				'id' => 'post-title',
-				'type' => 'MultiName',
-				'name' => 'post_title',
-				'className' => 'multiname',
+				'id'         => 'post-title',
+				'type'       => 'MultiName',
+				'name'       => 'post_title',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "false",
-						'label' => __( 'Post title', Forminator::DOMAIN )
-					)
+						'label' => __( 'Post title', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-title-label',
-						'type' => 'Text',
-						'name' => 'post_title_label',
+						'id'        => 'post-title-label',
+						'type'      => 'Text',
+						'name'      => 'post_title_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-title-placeholder',
-						'type' => 'Text',
-						'name' => 'post_title_placeholder',
+						'id'        => 'post-title-placeholder',
+						'type'      => 'Text',
+						'name'      => 'post_title_placeholder',
 						'className' => 'text-field',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'label'     => __( 'Placeholder', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-title-description',
-						'type' => 'Text',
-						'name' => 'post_title_description',
+						'id'        => 'post-title-description',
+						'type'      => 'Text',
+						'name'      => 'post_title_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST title
 
 			array(
-				'id' => 'post-content',
-				'type' => 'MultiName',
-				'name' => 'post_content',
-				'className' => 'multiname',
+				'id'         => 'post-content',
+				'type'       => 'MultiName',
+				'name'       => 'post_content',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "false",
-						'label' => __( 'Post content', Forminator::DOMAIN )
-					)
+						'label' => __( 'Post content', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-content-label',
-						'type' => 'Text',
-						'name' => 'post_content_label',
+						'id'        => 'post-content-label',
+						'type'      => 'Text',
+						'name'      => 'post_content_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-content-placeholder',
-						'type' => 'Text',
-						'name' => 'post_content_placeholder',
+						'id'        => 'post-content-placeholder',
+						'type'      => 'Text',
+						'name'      => 'post_content_placeholder',
 						'className' => 'text-field',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'label'     => __( 'Placeholder', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-content-description',
-						'type' => 'Text',
-						'name' => 'post_content_description',
+						'id'        => 'post-content-description',
+						'type'      => 'Text',
+						'name'      => 'post_content_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST content
 
 			array(
-				'id' => 'post-excerpt',
-				'type' => 'MultiName',
-				'name' => 'post_excerpt',
-				'className' => 'multiname',
+				'id'         => 'post-excerpt',
+				'type'       => 'MultiName',
+				'name'       => 'post_excerpt',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "false",
-						'label' => __( 'Post excerpt', Forminator::DOMAIN )
-					)
+						'label' => __( 'Post excerpt', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-excerpt-label',
-						'type' => 'Text',
-						'name' => 'post_excerpt_label',
+						'id'        => 'post-excerpt-label',
+						'type'      => 'Text',
+						'name'      => 'post_excerpt_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-excerpt-placeholder',
-						'type' => 'Text',
-						'name' => 'post_excerpt_placeholder',
+						'id'        => 'post-excerpt-placeholder',
+						'type'      => 'Text',
+						'name'      => 'post_excerpt_placeholder',
 						'className' => 'text-field',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'label'     => __( 'Placeholder', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-excerpt-description',
-						'type' => 'Text',
-						'name' => 'post_excerpt_description',
+						'id'        => 'post-excerpt-description',
+						'type'      => 'Text',
+						'name'      => 'post_excerpt_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST excerpt
 
 			array(
-				'id' => 'post-image',
-				'type' => 'MultiName',
-				'name' => 'post_image',
-				'className' => 'multiname',
+				'id'         => 'post-image',
+				'type'       => 'MultiName',
+				'name'       => 'post_image',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "false",
-						'label' => __( 'Featured image', Forminator::DOMAIN )
-					)
+						'label' => __( 'Featured image', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-image-label',
-						'type' => 'Text',
-						'name' => 'post_image_label',
+						'id'        => 'post-image-label',
+						'type'      => 'Text',
+						'name'      => 'post_image_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-image-description',
-						'type' => 'Text',
-						'name' => 'post_image_description',
+						'id'        => 'post-image-description',
+						'type'      => 'Text',
+						'name'      => 'post_image_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST feat image
 
 			array(
-				'id' => 'post-category',
-				'type' => 'MultiName',
-				'name' => 'post_category',
-				'className' => 'multiname',
+				'id'         => 'post-category',
+				'type'       => 'MultiName',
+				'name'       => 'post_category',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "false",
-						'label' => __( 'Category', Forminator::DOMAIN )
-					)
+						'label' => __( 'Category', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-category-label',
-						'type' => 'Text',
-						'name' => 'post_category_label',
+						'id'        => 'post-category-label',
+						'type'      => 'Text',
+						'name'      => 'post_category_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-category-description',
-						'type' => 'Text',
-						'name' => 'post_category_description',
+						'id'        => 'post-category-description',
+						'type'      => 'Text',
+						'name'      => 'post_category_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST category
 
 			array(
-				'id' => 'post-tags',
-				'type' => 'MultiName',
-				'name' => 'post_tags',
-				'className' => 'multiname',
+				'id'         => 'post-tags',
+				'type'       => 'MultiName',
+				'name'       => 'post_tags',
+				'className'  => 'multiname',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "false",
-						'label' => __( 'Tags', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
+						'value'      => "false",
+						'label'      => __( 'Tags', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'post-tags-label',
-						'type' => 'Text',
-						'name' => 'post_tags_label',
+						'id'        => 'post-tags-label',
+						'type'      => 'Text',
+						'name'      => 'post_tags_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'post-tags-description',
-						'type' => 'Text',
-						'name' => 'post_tags_description',
+						'id'        => 'post-tags-description',
+						'type'      => 'Text',
+						'name'      => 'post_tags_description',
 						'className' => 'text-field',
-						'label' => __( 'Description (below field)', Forminator::DOMAIN )
+						'label'     => __( 'Description (below field)', Forminator::DOMAIN ),
 					),
-				)
+				),
 			), // POST tags
 
 			//custom fields
 			array(
-				'id' => 'post-custom',
-				'type' => 'ToggleContainer',
-				'name' => 'post_custom',
-				'className' => 'toggle-container',
-				'hide_label' => true,
+				'id'          => 'post-custom',
+				'type'        => 'ToggleContainer',
+				'name'        => 'post_custom',
+				'className'   => 'toggle-container',
+				'hide_label'  => true,
 				'has_content' => true,
-				'hide_label' => true,
-				'values' => array(
+				'hide_label'  => true,
+				'values'      => array(
 					array(
-						'value' => 'true',
-						'label' => __( 'This post has custom fields', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
+						'value'      => 'true',
+						'label'      => __( 'This post has custom fields', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
 				),
-				'fields' => array(
+				'fields'      => array(
 					array(
-						'id' => 'post-vars',
-						'type' => 'MultiValue',
-						'name' => 'custom_vars',
-						'className' => 'post-var-field',
+						'id'         => 'post-vars',
+						'type'       => 'MultiValue',
+						'name'       => 'custom_vars',
+						'className'  => 'post-var-field',
 						'hide_label' => true,
 					),
 				),
 			),
-        );
+		);
 	}
 
 	/**
@@ -370,13 +371,13 @@ class Forminator_Postdata extends Forminator_Field {
 	 */
 	public function defaults() {
 		return array(
-			'data_status'			=> 'pending',
-			'post_title_label'		=> 'Post Title',
-			'post_content_label'	=> 'Post Content',
-			'post_excerpt_label'	=> 'Post Excerpt',
-			'post_image_label'		=> 'Featured Image',
-			'post_category_label'	=> 'Category',
-			'post_tags_label'		=> 'Tags'
+			'data_status'         => 'pending',
+			'post_title_label'    => 'Post Title',
+			'post_content_label'  => 'Post Content',
+			'post_excerpt_label'  => 'Post Excerpt',
+			'post_image_label'    => 'Featured Image',
+			'post_category_label' => 'Category',
+			'post_tags_label'     => 'Tags',
 		);
 	}
 
@@ -388,13 +389,14 @@ class Forminator_Postdata extends Forminator_Field {
 	 */
 	public function list_users() {
 		$users_list = array();
-		$users 		= get_users( array( 'role__in' => array( 'administrator', 'editor', 'author' ) , 'fields' => array( 'ID', 'display_name' ) ) );
+		$users      = get_users( array( 'role__in' => array( 'administrator', 'editor', 'author' ), 'fields' => array( 'ID', 'display_name' ) ) );
 		foreach ( $users as $user ) {
 			$users_list[] = array(
 				'value' => $user->ID,
-				'label' => ucfirst( $user->display_name )
+				'label' => ucfirst( $user->display_name ),
 			);
 		}
+
 		return $users_list;
 	}
 
@@ -404,7 +406,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @since 1.0
 	 * @return string
 	 */
-    public function admin_html() {
+	public function admin_html() {
 		return '{[ if( field.post_title ) { ]}
 		<div class="wpmudev-form-field--group">
 			{[ if( field.post_title_label !== "" ) { ]}
@@ -494,15 +496,16 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Field front-end markup
 	 *
 	 * @since 1.0
+	 *
 	 * @param $field
 	 *
 	 * @return mixed
 	 */
 	public function markup( $field ) {
 		$required    = self::get_property( 'required', $field, false );
-		$id = $name  = self::get_property( 'element_id', $field );
+		$id          = $name = self::get_property( 'element_id', $field );
 
-		$html  = $this->get_post_title( $id, $name, $field, $required );
+		$html = $this->get_post_title( $id, $name, $field, $required );
 		$html .= $this->get_post_content( $id, $name, $field, $required );
 		$html .= $this->get_post_excerpt( $id, $name, $field, $required );
 		$html .= $this->get_post_image( $id, $name, $field, $required );
@@ -517,6 +520,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return post title
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -532,6 +536,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return post content
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -540,13 +545,14 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_content( $id, $name, $field, $required ) {
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_content', 'textarea', 'forminator-textarea', 'post-content' );
+		return $this->_get_post_field( $id, $name, $field, $required, 'post_content', 'wp_editor', 'forminator-textarea', 'post-content' );
 	}
 
 	/**
 	 * Return post excerpt
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -562,6 +568,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return post featured image
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -577,6 +584,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return categories
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -585,17 +593,17 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_category( $id, $name, $field, $required ) {
-		$options = array();
+		$options    = array();
 		$categories = get_categories( array(
-			'orderby'    => 'name',
-			'order'      => 'ASC',
-			'hide_empty' => false
-		) );
+			                              'orderby'    => 'name',
+			                              'order'      => 'ASC',
+			                              'hide_empty' => false,
+		                              ) );
 
-		foreach( $categories as $category ) {
+		foreach ( $categories as $category ) {
 			$options[] = array(
 				'value' => $category->term_id,
-				'label' => $category->name
+				'label' => $category->name,
 			);
 		}
 
@@ -606,6 +614,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return tags
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -615,14 +624,14 @@ class Forminator_Postdata extends Forminator_Field {
 	 */
 	public function get_post_tag( $id, $name, $field, $required ) {
 		$options = array();
-		$tags = get_tags( array(
-			'hide_empty' => false
-		) );
+		$tags    = get_tags( array(
+			                     'hide_empty' => false,
+		                     ) );
 
-		foreach( $tags as $tag ) {
+		foreach ( $tags as $tag ) {
 			$options[] = array(
 				'value' => $tag->term_id,
-				'label' => $tag->name
+				'label' => $tag->name,
 			);
 		}
 
@@ -633,28 +642,29 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Return post field
 	 *
 	 * @since 1.0
-	 * @param $id
-	 * @param $name
-	 * @param $field
-	 * @param $required
-	 * @param $field_name
-	 * @param $type
-	 * @param $class
-	 * @param $input_suffix
-	 * @param array $options
+	 *
+	 * @param        $id
+	 * @param        $name
+	 * @param        $field
+	 * @param        $required
+	 * @param        $field_name
+	 * @param        $type
+	 * @param        $class
+	 * @param        $input_suffix
+	 * @param array  $options
 	 * @param string $value
 	 *
 	 * @return string
 	 */
-	private function _get_post_field( $id, $name, $field, $required, $field_name, $type, $class, $input_suffix, $options = array(), $value= '' ) {
-		$html = '';
-		$field_enabled  = self::get_property( $field_name, $field, '' );
+	private function _get_post_field( $id, $name, $field, $required, $field_name, $type, $class, $input_suffix, $options = array(), $value = '' ) {
+		$html          = '';
+		$field_enabled = self::get_property( $field_name, $field, '' );
 
-		if ( !empty( $field_enabled ) ) {
-			$cols        	= 12;
-			$placeholder 	= self::get_property( $field_name . '_placeholder', $field );
-			$label 		 	= self::get_property( $field_name . '_label', $field );
-			$description 	= self::get_property( $field_name . '_description', $field );
+		if ( ! empty( $field_enabled ) ) {
+			$cols         = 12;
+			$placeholder  = self::get_property( $field_name . '_placeholder', $field );
+			$label        = self::get_property( $field_name . '_label', $field );
+			$description  = self::get_property( $field_name . '_description', $field );
 			$field_markup = array(
 				'type'        => $type,
 				'class'       => $class,
@@ -670,14 +680,18 @@ class Forminator_Postdata extends Forminator_Field {
 			$html .= sprintf( '<div class="forminator-row forminator-row--inner"><div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
-			if ( $type == 'textarea' ) {
+			if ( $type == 'wp_editor' ) {
+				// multiple wp_editor support
+				$field_markup['id'] = $field_markup['id'] . '-' . uniqid();
+				$html               .= self::create_wp_editor( $field_markup, $label, $description, $required );
+			} elseif ( $type == 'textarea' ) {
 				$html .= self::create_textarea( $field_markup, $label, $description, $required );
-			} else if ( $type == 'select' ) {
+			} elseif ( $type == 'select' ) {
 				if ( empty( $options ) ) {
 					unset( $field_markup['required'] );
 				}
 				$html .= self::create_select( $field_markup, $label, $options, $value, $description, $required );
-			} else if ( $type == 'file' ){
+			} elseif ( $type == 'file' ) {
 				if ( $required ) {
 					$html .= '<div class="forminator-field--label">';
 					$html .= sprintf( '<label class="forminator-label">%s%s</label>', $label, forminator_get_required_icon() );
@@ -685,7 +699,7 @@ class Forminator_Postdata extends Forminator_Field {
 				} else {
 					$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
 				}
-				$html .= self::create_file_upload( $id . '-' . $input_suffix, $name . '-' . $input_suffix );
+				$html .= self::create_file_upload( $id . '-' . $input_suffix, $name . '-' . $input_suffix, $required );
 			} else {
 				$html .= self::create_input( $field_markup, $label, $description, $required );
 			}
@@ -701,6 +715,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Render custom fields
 	 *
 	 * @since 1.0
+	 *
 	 * @param $id
 	 * @param $name
 	 * @param $field
@@ -709,30 +724,30 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	private function _render_custom_fields( $id, $name, $field, $required ) {
-		$html = '';
-		$cols = 12;
-		$has_custom_fields 	= self::get_property( 'post_custom', $field, false );
+		$html              = '';
+		$cols              = 12;
+		$has_custom_fields = self::get_property( 'post_custom', $field, false );
 
 		if ( $has_custom_fields ) {
 			$custom_vars = self::get_property( 'custom_vars', $field );
 
-			if ( !empty( $custom_vars ) ) {
+			if ( ! empty( $custom_vars ) ) {
 				$html .= '<div class="forminator-row forminator-row--inner">';
 
 				foreach ( $custom_vars as $variable ) {
-					$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
-					$value 			= !empty( $variable['value'] ) ? $variable['value'] : sanitize_title( $variable['label'] );
-					$input_id 		= $id . '-post_meta-' . $value;
-					$label 			= $variable['label'];
-					$field_markup 	= array(
-						'type' 			=> 'text',
-						'class' 		=> 'forminator-input',
-						'name' 			=> $input_id,
-						'id' 			=> $input_id,
-						'placeholder' 	=> $label
+					$html         .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
+					$value        = ! empty( $variable['value'] ) ? $variable['value'] : sanitize_title( $variable['label'] );
+					$input_id     = $id . '-post_meta-' . $value;
+					$label        = $variable['label'];
+					$field_markup = array(
+						'type'        => 'text',
+						'class'       => 'forminator-input',
+						'name'        => $input_id,
+						'id'          => $input_id,
+						'placeholder' => $label,
 					);
-					$html .= self::create_input( $field_markup, $label, '' );
-					$html .= '</div>';
+					$html         .= self::create_input( $field_markup, $label, '' );
+					$html         .= '</div>';
 				}
 			}
 
@@ -746,48 +761,92 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Field back-end validation
 	 *
 	 * @since 1.0
-	 * @param array $field
+	 *
+	 * @param array        $field
 	 * @param array|string $data
 	 */
 	public function validate( $field, $data ) {
-		if ( $this->is_required( $field ) ) {
-			$id = self::get_property( 'element_id', $field );
+		$id = self::get_property( 'element_id', $field );
 
+		$post_title   = self::get_property( 'post_title', $field, '' );
+		$post_content = self::get_property( 'post_content', $field, '' );
+		$post_excerpt = self::get_property( 'post_excerpt', $field, '' );
+
+		$title    = isset( $data['post-title'] ) ? $data['post-title'] : '';
+		$content  = isset( $data['post-content'] ) ? $data['post-content'] : '';
+		$excerpt  = isset( $data['post-excerpt'] ) ? $data['post-excerpt'] : '';
+		$image    = isset( $data['post-image'] ) ? $data['post-image'] : '';
+		$category = isset( $data['post-category'] ) ? $data['post-category'] : '';
+		$tags     = isset( $data['post-tags'] ) ? $data['post-tags'] : '';
+
+		if ( $this->is_required( $field ) ) {
 			if ( empty( $data ) ) {
 				$this->validation_message[ $id ] = __( 'This field is required. Please fill in post data', Forminator::DOMAIN );
-			} else  if ( is_array( $data ) ) {
-				$post_title		= self::get_property( 'post_title', $field, '' );
-				$post_content 	= self::get_property( 'post_content', $field, '' );
-				$post_excerpt 	= self::get_property( 'post_excerpt', $field, '' );
-				$post_image 	= self::get_property( 'post_image', $field, '' );
-				$post_category 	= self::get_property( 'post_category', $field, '' );
-				$post_tags 		= self::get_property( 'post_tags', $field, '' );
+			} elseif ( is_array( $data ) ) {
+				$post_image    = self::get_property( 'post_image', $field, '' );
+				$post_category = self::get_property( 'post_category', $field, '' );
+				$post_tags     = self::get_property( 'post_tags', $field, '' );
 
-				$title 			= isset( $data['post-title'] ) ? $data['post-title'] : '';
-				$content 		= isset( $data['post-content'] ) ? $data['post-content'] : '';
-				$excerpt 		= isset( $data['post-excerpt'] ) ? $data['post-excerpt'] : '';
-				$image 			= isset( $data['post-image'] ) ? $data['post-image'] : '';
-				$category 		= isset( $data['post-category'] ) ? $data['post-category'] : '';
-				$tags 			= isset( $data['post-tags'] ) ? $data['post-tags'] : '';
-				if ( !empty( $post_title ) && empty( $title ) ) {
-					$this->validation_message[ $id . '-post-title' ] = __( 'This field is required. Please enter the post title',  Forminator::DOMAIN );
+				if ( ! empty( $post_title ) && empty( $title ) ) {
+					$this->validation_message[ $id . '-post-title' ] = __( 'This field is required. Please enter the post title', Forminator::DOMAIN );
 				}
-				if ( !empty( $post_content ) && empty( $content ) ) {
-					$this->validation_message[ $id . '-post-content' ] = __( 'This field is required. Please enter the post content',  Forminator::DOMAIN );
+				if ( ! empty( $post_content ) && empty( $content ) ) {
+					$this->validation_message[ $id . '-post-content' ] = __( 'This field is required. Please enter the post content', Forminator::DOMAIN );
 				}
-				if ( !empty( $post_excerpt ) && empty( $excerpt ) ) {
-					$this->validation_message[ $id . '-post-excerpt' ] = __( 'This field is required. Please enter the post excerpt',  Forminator::DOMAIN );
+				if ( ! empty( $post_excerpt ) && empty( $excerpt ) ) {
+					$this->validation_message[ $id . '-post-excerpt' ] = __( 'This field is required. Please enter the post excerpt', Forminator::DOMAIN );
 				}
-				if ( !empty( $post_image ) && empty( $image ) ) {
-					$this->validation_message[ $id . '-post-image' ] = __( 'This field is required. Please upload a post image',  Forminator::DOMAIN );
+				if ( ! empty( $post_image ) && empty( $image ) ) {
+					$this->validation_message[ $id . '-post-image' ] = __( 'This field is required. Please upload a post image', Forminator::DOMAIN );
 				}
-				if ( !empty( $post_category ) && empty( $category ) ) {
-					$this->validation_message[ $id . '-post-category' ] = __( 'This field is required. Please select a post category',  Forminator::DOMAIN );
+				if ( ! empty( $post_category ) && empty( $category ) ) {
+					$this->validation_message[ $id . '-post-category' ] = __( 'This field is required. Please select a post category', Forminator::DOMAIN );
 				}
-				if ( !empty( $post_tags ) && empty( $tags ) ) {
-					$this->validation_message[ $id . '-post-tags' ] = __( 'This field is required. Please select a post tag',  Forminator::DOMAIN );
+				if ( ! empty( $post_tags ) && empty( $tags ) ) {
+					$this->validation_message[ $id . '-post-tags' ] = __( 'This field is required. Please select a post tag', Forminator::DOMAIN );
 				}
 			}
+		} else {
+			// validation for postdata when its not required.
+			// `wp_insert_post` required at least ONE OF THESE to be available title / content / excerpt.
+			// check only when user send some data
+			if ( ! empty( $data ) && is_array( $data ) ) {
+				if ( ! $title && ! $content && ! $excerpt ) {
+					// check if there is any field with content
+					$is_content_available = false;
+					foreach ( $data as $datum ) {
+						if ( ! empty( $datum ) ) {
+							$is_content_available = true;
+							break;
+						}
+					}
+
+					// when $is_content_available false means, field not required, and user didnt put any content on form
+					if ( $is_content_available ) {
+						//check if on postdata these sub field is avail available
+						if ( ! empty( $post_title ) ) {
+							$this->validation_message[ $id . '-post-title' ] = __( 'This field is required. Please enter the post title', Forminator::DOMAIN );
+						} elseif ( ! empty( $post_content ) ) {
+							$this->validation_message[ $id . '-post-content' ] = __( 'This field is required. Please enter the post content', Forminator::DOMAIN );
+						} elseif ( ! empty( $post_excerpt ) ) {
+							$this->validation_message[ $id . '-post-excerpt' ] = __( 'This field is required. Please enter the post excerpt', Forminator::DOMAIN );
+						}
+					}
+
+				}
+				if ( empty( $title ) && empty( $content ) && empty( $excerpt ) ) {
+					if ( ! empty( $post_title ) ) {
+						$this->validation_message[ $id . '-post-title' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
+					}
+					if ( ! empty( $post_content ) ) {
+						$this->validation_message[ $id . '-post-content' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
+					}
+					if ( ! empty( $post_excerpt ) ) {
+						$this->validation_message[ $id . '-post-excerpt' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
+					}
+				}
+			}
+
 		}
 	}
 
@@ -795,42 +854,43 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Upload post image
 	 *
 	 * @since 1.0
-	 * @param array $field - the field
+	 *
+	 * @param array  $field      - the field
 	 * @param string $field_name - the field name
 	 *
 	 * @return array|bool - if success, return an array
 	 */
 	public function upload_post_image( $field, $field_name ) {
-		$post_image 	= self::get_property( 'post_image', $field, '' );
+		$post_image = self::get_property( 'post_image', $field, '' );
 
-		if ( !empty( $post_image ) ) {
-			if ( isset( $_FILES[$field_name] ) ) {
-				if ( isset( $_FILES[$field_name]['name'] ) && !empty( $_FILES[$field_name]['name'] ) ) {
-					$file_name 			= $_FILES[$field_name]['name'];
-					$file_data 			= file_get_contents( $_FILES[$field_name]['tmp_name'] );
-					$upload_dir       	= wp_upload_dir(); // Set upload folder
-					$unique_file_name 	= wp_unique_filename( $upload_dir['path'], $file_name );
-					$filename         	= basename( $unique_file_name ); // Create base file name
+		if ( ! empty( $post_image ) ) {
+			if ( isset( $_FILES[ $field_name ] ) ) {
+				if ( isset( $_FILES[ $field_name ]['name'] ) && ! empty( $_FILES[ $field_name ]['name'] ) ) {
+					$file_name        = $_FILES[ $field_name ]['name'];
+					$file_data        = file_get_contents( $_FILES[ $field_name ]['tmp_name'] );
+					$upload_dir       = wp_upload_dir(); // Set upload folder
+					$unique_file_name = wp_unique_filename( $upload_dir['path'], $file_name );
+					$filename         = basename( $unique_file_name ); // Create base file name
 
 					if ( wp_mkdir_p( $upload_dir['path'] ) ) {
-						$file 	= $upload_dir['path'] . '/' . $filename;
+						$file = $upload_dir['path'] . '/' . $filename;
 					} else {
-						$file 	= $upload_dir['basedir'] . '/' . $filename;
+						$file = $upload_dir['basedir'] . '/' . $filename;
 					}
 
 					// Create the  file on the server
 					file_put_contents( $file, $file_data );
 
 					// Check image file type
-					$wp_filetype 	= wp_check_filetype( $filename, null );
-					$image_exts 	= array( 'jpg', 'jpeg', 'jpe', 'gif', 'png' );
+					$wp_filetype = wp_check_filetype( $filename, null );
+					$image_exts  = apply_filters( 'forminator_field_postdata_image_file_types', array( 'jpg', 'jpeg', 'jpe', 'gif', 'png' ) );
 					if ( in_array( $wp_filetype['ext'], $image_exts ) ) {
 						// Set attachment data
 						$attachment = array(
 							'post_mime_type' => $wp_filetype['type'],
 							'post_title'     => sanitize_file_name( $filename ),
 							'post_content'   => '',
-							'post_status'    => 'inherit'
+							'post_status'    => 'inherit',
 						);
 
 						// Create the attachment
@@ -848,15 +908,16 @@ class Forminator_Postdata extends Forminator_Field {
 						if ( $uploaded_file && is_array( $uploaded_file ) ) {
 							return array(
 								'attachment_id' => $attachment_id,
-								'uploaded_file' => $uploaded_file
+								'uploaded_file' => $uploaded_file,
 							);
 						}
 					}
 				}
 			}
+
 			return array(
 				'attachment_id' => 0,
-				'uploaded_file' => 0
+				'uploaded_file' => 0,
 			);
 		}
 
@@ -867,48 +928,49 @@ class Forminator_Postdata extends Forminator_Field {
 	 * Save post
 	 *
 	 * @since 1.0
+	 *
 	 * @param array $field - field array
-	 * @param array $data - post data
+	 * @param array $data  - post data
 	 *
 	 * @return bool|int - success is post id
 	 */
 	public function save_post( $field, $data ) {
-		$post_author	= self::get_property( 'select_author', $field, 1 );
-		$post_status	= self::get_property( 'data_status', $field, 'draft' );
-		$title 			= isset( $data['post-title'] ) ? $data['post-title'] : '';
-		$content 		= isset( $data['post-content'] ) ? $data['post-content'] : '';
-		$excerpt 		= isset( $data['post-excerpt'] ) ? $data['post-excerpt'] : '';
-		$image 			= isset( $data['post-image'] ) ? $data['post-image'] : '';
-		$category 		= isset( $data['post-category'] ) ? $data['post-category'] : '';
-		$tags 			= isset( $data['post-tags'] ) ? $data['post-tags'] : '';
-		$post_meta 		= isset( $data['post-custom'] ) ? $data['post-custom'] : '';
+		$post_author = self::get_property( 'select_author', $field, 1 );
+		$post_status = self::get_property( 'data_status', $field, 'draft' );
+		$title       = isset( $data['post-title'] ) ? $data['post-title'] : '';
+		$content     = isset( $data['post-content'] ) ? $data['post-content'] : '';
+		$excerpt     = isset( $data['post-excerpt'] ) ? $data['post-excerpt'] : '';
+		$image       = isset( $data['post-image'] ) ? $data['post-image'] : '';
+		$category    = isset( $data['post-category'] ) ? $data['post-category'] : '';
+		$tags        = isset( $data['post-tags'] ) ? $data['post-tags'] : '';
+		$post_meta   = isset( $data['post-custom'] ) ? $data['post-custom'] : '';
 
-		$post 			= array(
-			'post_author' 		=> $post_author,
-			'post_content' 		=> $content,
-			'post_excerpt' 		=> $excerpt,
-			'post_name' 		=> sanitize_text_field( $title ),
-			'post_status' 		=> $post_status,
-			'post_title' 		=> $title,
+		$post = array(
+			'post_author'  => $post_author,
+			'post_content' => wp_kses_post( $content ),
+			'post_excerpt' => $excerpt,
+			'post_name'    => sanitize_text_field( $title ),
+			'post_status'  => $post_status,
+			'post_title'   => $title,
 		);
 
-		if ( !empty( $category ) ) {
+		if ( ! empty( $category ) ) {
 			$post['post_category'] = array( intval( $category ) );
 		}
 
-		if ( !empty( $tags ) ) {
+		if ( ! empty( $tags ) ) {
 			$post['tags_input'] = array( intval( $tags ) );
 		}
 
 		//trigger wp_error for is_wp_error to be correctly identified
 		$post_id = wp_insert_post( $post, true );
-		if ( !is_wp_error( $post_id ) ) {
-			$post_image 	= self::get_property( 'post_image', $field, '' );
-			if ( !empty( $post_image ) && !empty( $image ) && is_array( $image ) ) {
+		if ( ! is_wp_error( $post_id ) ) {
+			$post_image = self::get_property( 'post_image', $field, '' );
+			if ( ! empty( $post_image ) && ! empty( $image ) && is_array( $image ) ) {
 				set_post_thumbnail( $post_id, $image['attachment_id'] );
 			}
 
-			if ( !empty( $post_meta ) ) {
+			if ( ! empty( $post_meta ) ) {
 				foreach ( $post_meta as $meta ) {
 					add_post_meta( $post_id, $meta['key'], $meta );
 				}
@@ -919,5 +981,44 @@ class Forminator_Postdata extends Forminator_Field {
 		}
 
 		return false;
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		$image = $content = '';
+
+		// Do not sanitize image URL
+		if( isset( $data['post-image'] ) ) {
+			$image = $data['post-image'];
+		}
+
+		// Do not sanitize post content
+		if( isset( $data['post-content'] ) ) {
+			$content = $data['post-content'];
+		}
+
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		// Return image url original value
+		if( isset( $data['post-image'] ) ) {
+			$data['post-image'] = $image;
+		}
+
+		// Return post content original value
+		if( isset( $data['post-content'] ) ) {
+			$data['post-content'] = $content;
+		}
+
+		return apply_filters( 'forminator_field_postdata_sanitize', $data, $field );
 	}
 }

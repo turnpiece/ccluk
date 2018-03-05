@@ -105,11 +105,10 @@ abstract class Forminator_Front_Action {
 	public function handle_file_upload( $field_name ) {
 		if ( isset( $_FILES[$field_name] ) ) {
 			if ( isset( $_FILES[$field_name]['name'] ) && !empty( $_FILES[$field_name]['name'] ) ) {
-				$file_name 			= $_FILES[$field_name]['name'];
+				$file_name 		= $_FILES[$field_name]['name'];
+				$valid 			= wp_check_filetype( $file_name );
 
-				$valid = wp_check_filetype($file_name);
-
-				if (false === $valid["ext"]) {
+				if ( false === $valid["ext"] ) {
 					return false;
 				}
 

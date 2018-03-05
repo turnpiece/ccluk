@@ -276,7 +276,7 @@ class Forminator_Phone extends Forminator_Field {
 		$id = $name  	= self::get_property( 'element_id', $field );
 		$id          	= $id . '-field';
 		$required 		= self::get_property( 'required', $field, false );
-		$placeholder 	= self::get_property( 'placeholder', $field );
+		$placeholder 	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 		$value 			= self::get_property( 'value', $field );
 		$format_check 	= self::get_property( 'phone_validation', $field, false );
 		$phone_format 	= self::get_property( 'phone_validation_type', $field );
@@ -386,5 +386,22 @@ class Forminator_Phone extends Forminator_Field {
 		}
 
 		return true;
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_phone_sanitize', $data, $field );
 	}
 }

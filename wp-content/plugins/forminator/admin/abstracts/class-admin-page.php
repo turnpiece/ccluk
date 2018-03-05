@@ -372,7 +372,7 @@ abstract class Forminator_Admin_Page {
 		if ( ! isset( $this->content_boxes[ $this->page_slug ][ $box_id ] ) )
 			return;
 
-		do_action_ref_array( 'forminator_admin_print_content_box' . $this->page_slug, array( &$this ) );	    	 	 	 	 	 				 	 
+		do_action_ref_array( 'forminator_admin_print_content_box' . $this->page_slug, array( &$this ) );
 
 		$box_data = $this->content_boxes[ $this->page_slug ][ $box_id ];
 		$args = array(

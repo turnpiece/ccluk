@@ -178,7 +178,9 @@ abstract class Forminator_Render_Form {
 		if ( $track_views ) {
 			$form_view = Forminator_Form_Views_Model::get_instance();
 			$post_id   = $this->get_post_id();
-			$form_view->save_view( $id, $post_id, Forminator_Geo::get_user_ip() );
+			if ( ! $this->is_admin ) {
+				$form_view->save_view( $id, $post_id, Forminator_Geo::get_user_ip() );
+			}
 		}
 
 		if ( $render ) {

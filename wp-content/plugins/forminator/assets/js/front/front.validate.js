@@ -42,8 +42,10 @@
 			var self = this;
 
 			$(this.element).validate({
+				// add support for wp_editor when its required
+				ignore: ":hidden:not(.forminator-wp-editor-required, .forminator-input-file-required)",
 				errorPlacement: function (error, element) {
-				},
+				},		
 				onfocusout: function (element) {
 					//datepicker will be validated when its closed
 					if ($(element).hasClass('hasDatepicker') === false) {
@@ -98,7 +100,7 @@
 			}
 		});
 	};
-
+	
 	$.validator.addMethod("maxwords", function (value, element, param) {
 		return this.optional(element) || jQuery.trim(value).split(/\s+/).length <= param;
 	});

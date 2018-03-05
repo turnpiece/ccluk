@@ -53,6 +53,13 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	protected $total_fields = 0;
 
 	/**
+	 * Per page
+	 *
+	 * @var int
+	 */
+	protected $per_page = 10;
+
+	/**
 	 * Initialise variables
 	 *
 	 * @since 1.0
@@ -69,6 +76,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 			} else {
 				$this->model = false;
 			}
+			$this->per_page 	  = forminator_form_view_per_page( 'entries' );
 			$this->total_fields   = count( $this->fields ) + 1;
 			$this->checked_fields = $this->total_fields;
 			$this->process_request();
@@ -97,7 +105,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 
 		if ( wp_verify_nonce( $nonce, 'forminator_quiz_bulk_action' ) ) {
 			if ( isset( $_POST['entries-action'] ) || isset( $_POST['entries-action-bottom'] ) ) {
-				if ( isset( $_POST['entries-action'] ) ) {
+				if ( isset( $_POST['entries-action'] ) && ! empty( $_POST['entries-action'] ) ) {
 					$action = $_POST['entries-action'];
 				} else if ( isset( $_POST['entries-action-bottom'] ) ) {
 					$action = $_POST['entries-action-bottom'];
@@ -214,7 +222,8 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 * @return array
 	 */
 	public function get_table() {
-		$entries = Forminator_Form_Entry_Model::list_entries( $this->form_id, 10, ( $this->get_paged() - 1 ) * 10 );
+		$per_page 	= $this->get_per_page();
+		$entries 	= Forminator_Form_Entry_Model::list_entries( $this->form_id, $per_page, ( $this->get_paged() - 1 ) * $per_page );
 
 		return $entries;
 	}
@@ -229,6 +238,17 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 		$paged = isset( $_GET['paged'] ) ? $_GET['paged'] : 1;
 
 		return intval( $paged );
+	}
+
+	/**
+	 * Get the results per page
+	 *
+	 * @since 1.0.3
+	 *
+	 * @return int
+	 */
+	public function get_per_page() {
+		return $this->per_page;
 	}
 
 	/**

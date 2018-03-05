@@ -53,8 +53,8 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 		// Set fields
 		foreach ( $fields as $f ) {
 			$field         = new Forminator_Form_Field_Model();
-			$field->formID = $row['wrapper_id'];
-			$field->slug   = $f['element_id'];
+			$field->formID = isset($f['wrapper_id']) ? $f['wrapper_id'] : $f['title'];
+			$field->slug   = isset($f['element_id']) ? $f['element_id'] : $f['title'];
 			unset( $f['element_id'] );
 			$field->import( $f );
 			$formModel->addField( $field );

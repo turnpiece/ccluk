@@ -356,7 +356,7 @@ class Forminator_Date extends Forminator_Field {
 					),
 					array(
 						'value' => "input",
-						'label' => __( 'Txt inputs', Forminator::DOMAIN )
+						'label' => __( 'Text inputs', Forminator::DOMAIN )
 					),
 				)
 			),
@@ -469,7 +469,7 @@ class Forminator_Date extends Forminator_Field {
 		$html = $icon 	= '';
 		$id = $name   	= self::get_property( 'element_id', $field );
 		$required	  	= self::get_property( 'required', $field, false );
-		$placeholder  	= self::get_property( 'placeholder', $field );
+		$placeholder  	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 		$type 	     	= self::get_property( 'field_type', $field );
 		$has_icon     	= self::get_property( 'icon', $field );
 		$date_format  	= self::get_property( 'date_format', $field );
@@ -786,9 +786,10 @@ class Forminator_Date extends Forminator_Field {
 		$field = $this->field;
 		$type  = self::get_property( 'field_type', $field );
 		$date_format = self::get_property( 'date_format', $field );
+		$rules = '';
 
 		if( $type == "picker" ) {
-			$rules = '"' . $this->get_id( $field ) . '": {' . "\n";
+			$rules .= '"' . $this->get_id( $field ) . '": {' . "\n";
 			if ( $this->is_required( $field ) ) {
 				$rules .= '"required": true,';
 			}
@@ -800,7 +801,7 @@ class Forminator_Date extends Forminator_Field {
 			$rules .= '},' . "\n";
 		} else {
 			if ( $this->is_required( $field ) ) {
-				$rules = '"' . $this->get_id( $field ) . '-day": "required",';
+				$rules .= '"' . $this->get_id( $field ) . '-day": "required",';
 				$rules .= '"' . $this->get_id( $field ) . '-month": "required",';
 				$rules .= '"' . $this->get_id( $field ) . '-year": "required",';
 			}
@@ -826,9 +827,9 @@ class Forminator_Date extends Forminator_Field {
 				$messages .= 'required: "' . __( 'This field is required. Please enter a valid date', Forminator::DOMAIN ) . '",' . "\n";
 			}
 			if ( $date_format === 'dd/mm/yy' ) {
-				$messages .= 'datedmy: "' . __( 'This is not valid date', Forminator::DOMAIN ) . '",' . "\n";
+				$messages .= 'datedmy: "' . __( 'Not valid date', Forminator::DOMAIN ) . '",' . "\n";
 			} else {
-				$messages .= 'date: "' . __( 'This is not valid date', Forminator::DOMAIN ) . '",' . "\n";
+				$messages .= 'date: "' . __( 'Not valid date', Forminator::DOMAIN ) . '",' . "\n";
 			}
 			$messages .= '},' . "\n";
 		} else {
@@ -884,5 +885,23 @@ class Forminator_Date extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_date_sanitize', $data, $field );
 	}
 }

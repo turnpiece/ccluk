@@ -117,8 +117,6 @@ class Forminator_Html extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field ) {
-
 		return forminator_replace_variables( self::get_property( 'variations', $field ) );
-
 	}
 }

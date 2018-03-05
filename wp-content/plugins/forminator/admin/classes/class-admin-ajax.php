@@ -43,6 +43,15 @@ class Forminator_Admin_AJAX {
 		add_action( "wp_ajax_forminator_load_currency_popup", array( $this, "load_currency" ) );
 		add_action( "wp_ajax_forminator_save_currency_popup", array( $this, "save_currency" ) );
 
+		add_action( "wp_ajax_forminator_load_pagination_entries_popup", array( $this, "load_pagination_entries" ) );
+		add_action( "wp_ajax_forminator_save_pagination_entries_popup", array( $this, "save_pagination_entries" ) );
+
+		add_action( "wp_ajax_forminator_load_pagination_listings_popup", array( $this, "load_pagination_listings" ) );
+		add_action( "wp_ajax_forminator_save_pagination_listings_popup", array( $this, "save_pagination_listings" ) );
+
+		add_action( "wp_ajax_forminator_load_uninstall_settings_popup", array( $this, "load_uninstall_form" ) );
+		add_action( "wp_ajax_forminator_save_uninstall_settings_popup", array( $this, "save_uninstall_form" ) );
+
 		add_action( "wp_ajax_forminator_load_preview_cforms_popup", array( $this, "preview_custom_forms" ) );
 		add_action( "wp_ajax_forminator_load_preview_polls_popup", array( $this, "preview_polls" ) );
 		add_action( "wp_ajax_forminator_load_preview_quizzes_popup", array( $this, "preview_quizzes" ) );
@@ -63,8 +72,10 @@ class Forminator_Admin_AJAX {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$id = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
-		$id = intval( $id );
+		$id    = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
+		$id    = intval( $id );
+		$title = isset($_POST['quiz_title']) ? sanitize_text_field( $_POST['quiz_title'] ) : sanitize_text_field( $_POST['formName'] );
+
 		if ( $id == null || $id <= 0 ) {
 			$formModel = new Forminator_Quiz_Form_Model();
 		} else {
@@ -75,24 +86,43 @@ class Forminator_Admin_AJAX {
 			//we need to empty fields cause we will send new data
 			$formModel->clearFields();
 		}
+
+		// Sanitize post data
+		$data = forminator_sanitize_field( $_POST['data'] );
+
+		// Detect action
 		$formModel->quiz_type = ( $_POST['action'] == 'forminator_save_quiz_nowrong' ) ? 'nowrong' : 'knowledge';
-		$data                 = $_POST['data'];
+
+		// Check if results exist
 		if ( isset( $data['results'] ) && is_array( $data['results'] ) ) {
 			$formModel->results = $data['results'];
 		}
+
+		// Check if questions exist
 		if ( isset( $data['questions'] ) ) {
 			foreach ( $data['questions'] as &$question ) {
 				$question['type'] = $formModel->quiz_type;
 				$question['slug'] = uniqid();
 			}
 		}
+
 		$formModel->setVarInArray( 'name', 'formName', $_POST );
-		$formModel->questions = $data['questions'];
+
+		// Handle quiz questions
+		$formModel->questions = array();
+		if( isset( $data['questions'] ) ) {
+			$formModel->questions = $data['questions'];
+		}
+
+		// Unset data
 		unset( $data['results'] );
 		unset( $data['questions'] );
-		$data['formName']    = $data['quiz_title'];
+		$data['formName']    = $title;
 		$formModel->settings = $data;
-		$id                  = $formModel->save();
+
+		// Save data
+		$id = $formModel->save();
+
 		wp_send_json_success( $id );
 	}
 
@@ -106,8 +136,10 @@ class Forminator_Admin_AJAX {
 			return;
 		}
 
-		$id = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
-		$id = intval( $id );
+		$answers = array();
+		$id      = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
+		$id      = intval( $id );
+
 		if ( $id == null || $id <= 0 ) {
 			$formModel = new Forminator_Poll_Form_Model();
 		} else {
@@ -118,17 +150,28 @@ class Forminator_Admin_AJAX {
 			//we need to empty fields cause we will send new data
 			$formModel->clearFields();
 		}
+
 		$formModel->setVarInArray( 'name', 'formName', $_POST );
-		$answers  = $_POST['data']['answers'];
-		$settings = $_POST['data'];
+
+		// Check if answers exist
+		if( isset( $_POST['data']['answers'] ) ) {
+			$answers = forminator_sanitize_field( $_POST['data']['answers'] );
+		}
+
+		// Sanitize settings
+		$settings = forminator_sanitize_field( $_POST['data'] );
 		unset( $settings['answers'] );
 		$formModel->settings = $settings;
+
 		foreach ( $answers as $answer ) {
 			$fieldModel = new Forminator_Form_Field_Model();
 			$fieldModel->import( $answer );
 			$formModel->addField( $fieldModel );
 		}
+
+		// Save data
 		$id = $formModel->save();
+
 		wp_send_json_success( $id );
 	}
 
@@ -142,8 +185,10 @@ class Forminator_Admin_AJAX {
 			return;
 		}
 
-		$id = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
-		$id = intval( $id );
+		$fields = array();
+		$id     = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
+		$id     = intval( $id );
+
 		if ( $id == null || $id <= 0 ) {
 			$formModel = new Forminator_Custom_Form_Model();
 		} else {
@@ -155,12 +200,40 @@ class Forminator_Admin_AJAX {
 			$formModel->clearFields();
 		}
 		$formModel->setVarInArray( 'name', 'formName', $_POST );
-		//build the field
-		//build the settings
-		$fields = $_POST['data']['wrappers'];
-		unset( $_POST['data']['wrappers'] );
-		$settings            = $_POST['data'];
+
+		// Build the fields
+		if( isset( $_POST['data']['wrappers'] ) ) {
+			$fields = forminator_sanitize_field( $_POST['data']['wrappers'] );
+			unset( $_POST['data']['wrappers'] );
+		}
+
+		// Sanitize settings
+		$settings = forminator_sanitize_field( $_POST['data'] );
+
+		// Sanitize textarea fields
+
+		// Sanitize custom css
+		if( isset( $_POST['data']['custom_css'] ) ) {
+			$settings['custom_css'] = sanitize_textarea_field( $_POST['data']['custom_css'] );
+		}
+
+		// Sanitize thank you message
+		if( isset( $_POST['data']['thankyou-message'] ) ) {
+			$settings['thankyou-message'] = $_POST['data']['thankyou-message'];
+		}
+
+		// Sanitize user email message
+		if( isset( $_POST['data']['user-email-editor'] ) ) {
+			$settings['user-email-editor'] = $_POST['data']['user-email-editor'];
+		}
+
+		// Sanitize admin email message
+		if( isset( $_POST['data']['admin-email-editor'] ) ) {
+			$settings['admin-email-editor'] = $_POST['data']['admin-email-editor'];
+		}
+
 		$formModel->settings = $settings;
+
 		foreach ( $fields as $row ) {
 			foreach ( $row['fields'] as $f ) {
 				$field         = new Forminator_Form_Field_Model();
@@ -171,50 +244,11 @@ class Forminator_Admin_AJAX {
 				$formModel->addField( $field );
 			}
 		}
+
+		// Save data
 		$id = $formModel->save();
+
 		wp_send_json_success( $id );
-	}
-
-	/**
-	 * Save Login styles
-	 *
-	 * @since 1.0
-	 */
-	public function save_login() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		$option = "forminator_login_styles";
-		$data   = $_POST['data'];
-
-		if ( get_option( $option ) ) {
-			update_option( $option, $data );
-		} else {
-			add_option( $option, $data );
-		}
-
-		wp_send_json_success();
-	}
-
-	/**
-	 * Save Register styles
-	 *
-	 * @since 1.0
-	 */
-	public function save_register() {
-		if ( ! current_user_can( 'manage_options' ) ) {
-			return;
-		}
-		$option = "forminator_register_styles";
-		$data   = $_POST['data'];
-
-		if ( get_option( $option ) ) {
-			update_option( $option, $data );
-		} else {
-			add_option( $option, $data );
-		}
-
-		wp_send_json_success();
 	}
 
 	/**
@@ -351,6 +385,92 @@ class Forminator_Admin_AJAX {
 		forminator_validate_ajax( "forminator_save_popup_currency" );
 
 		update_option( "forminator_currency", sanitize_text_field( $_POST['currency'] ) );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Load entries pagination modal
+	 *
+	 * @since 1.0.2
+	 */
+	function load_pagination_entries() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_popup_pagination_entries" );
+
+		$html = forminator_template( 'settings/popup/edit-pagination-entries-content' );
+
+		wp_send_json_success( $html );
+	}
+
+	/**
+	 * Save entries pagination popup data
+	 *
+	 * @since 1.0.2
+	 */
+	function save_pagination_entries() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_save_popup_pagination_entries" );
+
+		update_option( "forminator_pagination_entries", intval( sanitize_text_field( $_POST['pagination_entries'] ) ) );
+		wp_send_json_success();
+	}
+
+
+	/**
+	 * Load listings pagination modal
+	 *
+	 * @since 1.0.2
+	 */
+	function load_pagination_listings() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_popup_pagination_listings" );
+
+		$html = forminator_template( 'settings/popup/edit-pagination-listings-content' );
+
+		wp_send_json_success( $html );
+	}
+
+	/**
+	 * Save listings pagination popup data
+	 *
+	 * @since 1.0.2
+	 */
+	function save_pagination_listings() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_save_popup_pagination_listings" );
+
+		update_option( "forminator_pagination_listings", intval( sanitize_text_field( $_POST['pagination_listings'] ) ) );
+		wp_send_json_success();
+	}
+
+	/**
+	 * Load the uninstall form
+	 *
+	 * @since 1.0.2
+	 */
+	function load_uninstall_form() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_popup_uninstall_form" );
+
+		$html = forminator_template( 'settings/popup/edit-uninstall-content' );
+
+		wp_send_json_success( $html );
+	}
+
+
+	/**
+	 * Save listings pagination popup data
+	 *
+	 * @since 1.0.2
+	 */
+	function save_uninstall_form() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_save_popup_uninstall_settings" );
+
+		$delete_uninstall = $_POST['delete_uninstall'];
+		$delete_uninstall = filter_var( $delete_uninstall, FILTER_VALIDATE_BOOLEAN );
+
+		update_option( "forminator_uninstall_clear_data", $delete_uninstall );
 		wp_send_json_success();
 	}
 

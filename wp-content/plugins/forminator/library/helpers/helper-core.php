@@ -146,8 +146,8 @@ function forminator_admin_jquery_ui_init() {
  * @param $version
  */
 function forminator_admin_enqueue_scripts( $version, $data = array(), $l10n = array() ) {
-	wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'build/library/select2.full.min.js', array( 'jquery' ), $version );
-	wp_enqueue_script( 'ace-editor', forminator_plugin_url() . 'build/library/ace/ace.js', array( 'jquery' ), $version );
+	wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'assets/js/library/select2.full.min.js', array( 'jquery' ), $version );
+	wp_enqueue_script( 'ace-editor', forminator_plugin_url() . 'assets/js/library/ace/ace.js', array( 'jquery' ), $version );
 	wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array( 'jquery' ), $version );
 
 	if ( function_exists( 'wp_enqueue_editor' ) ) {
@@ -193,9 +193,9 @@ function forminator_print_front_styles( $version = '1.0' ) {
  */
 function forminator_print_front_scripts( $version = '1.0' ) {
 	if ( ! is_admin() ) {
-		wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'build/library/select2.full.min.js', array( 'jquery' ), $version );
+		wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'assets/js/library/select2.full.min.js', array( 'jquery' ), $version );
 		wp_enqueue_script( 'google-charts', 'https://www.gstatic.com/charts/loader.js', array( 'jquery' ), $version );
-		wp_enqueue_script( 'forminator-jquery-validate', forminator_plugin_url() . 'build/library/jquery.validate.min.js', array( 'jquery' ), FORMINATOR_VERSION );
+		wp_enqueue_script( 'forminator-jquery-validate', forminator_plugin_url() . 'assets/js/library/jquery.validate.min.js', array( 'jquery' ), FORMINATOR_VERSION );
 		wp_enqueue_script( 'forminator-front-scripts', forminator_plugin_url() . 'build/front/front.multi.min.js', array( 'jquery', 'select2-forminator', 'forminator-jquery-validate' ), $version );
 
 		wp_localize_script( 'forminator-front-scripts', 'ForminatorFront', forminator_localize_data() );

@@ -410,7 +410,7 @@ class Forminator_Name extends Forminator_Field {
 	public function get_simple( $field ) {
 		$id = $name = self::get_property( 'element_id', $field );
 		$required = self::get_property( 'required', $field, false );
-		$placeholder = self::get_property( 'placeholder', $field );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 
 		return sprintf( '<input class="forminator-name--field forminator-input" type="text" data-required="%s" name="%s" placeholder="%s" />', $required, $name, $placeholder );
 	}
@@ -493,7 +493,7 @@ class Forminator_Name extends Forminator_Field {
 				'class' => 'forminator-input',
 				'name' => $id . '-first-name',
 				'id' => $id . '-first-name',
-				'placeholder' => self::get_property( 'fname_placeholder', $field ),
+				'placeholder' => $this->sanitize_value( self::get_property( 'fname_placeholder', $field ) ),
 			);
 
 			if ( ! $prefix ) {
@@ -557,7 +557,7 @@ class Forminator_Name extends Forminator_Field {
 				'class' => 'forminator-input',
 				'name' => $id . '-middle-name',
 				'id' => $id . '-middle-name',
-				'placeholder' => self::get_property( 'mname_placeholder', $field ),
+				'placeholder' => $this->sanitize_value( self::get_property( 'mname_placeholder', $field ) ),
 			);
 
 			$html .= '<div class="forminator-row forminator-row--inner">';
@@ -594,7 +594,7 @@ class Forminator_Name extends Forminator_Field {
 				'class' => 'forminator-input',
 				'name' => $id . '-last-name',
 				'id' => $id . '-last-name',
-				'placeholder' => self::get_property( 'lname_placeholder', $field ),
+				'placeholder' => $this->sanitize_value( self::get_property( 'lname_placeholder', $field ) ),
 			);
 
 			if ( ! $mname ) {
@@ -733,5 +733,23 @@ class Forminator_Name extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize
+		$data = forminator_sanitize_field( $data );
+
+		return apply_filters( 'forminator_field_name_sanitize', $data, $field );
 	}
 }

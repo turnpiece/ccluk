@@ -28,6 +28,7 @@
 	function ForminatorFront(element, options) {
 		this.element = element;
 		this.$el = $(this.element);
+		this.forminator_selector = '#' + $(this.element).attr('id') + '[data-forminator-render="' + $(this.element).data('forminator-render') + '"]';
 
 		// jQuery has an extend method which merges the contents of two or
 		// more objects, storing the result in the first object. The first object
@@ -44,9 +45,6 @@
 		init: function () {
 			var self = this;
 
-			//init submit
-			$(this.element).forminatorFrontSubmit({form_type: self.settings.form_type});
-
 			//selective activation based on type of form
 			switch (this.settings.form_type) {
 				case  'custom-form':
@@ -61,6 +59,8 @@
 
 			}
 
+			//init submit
+			$(this.element).forminatorFrontSubmit({form_type: self.settings.form_type, forminator_selector: self.forminator_selector});
 
 			// TODO: confirm usage on form type
 			// Handle field activation classes
@@ -68,9 +68,14 @@
 			// Handle special classes for material design
 			this.material_field();
 
+			// Init small form for all type of form
+			this.small_form();
+
 		},
 		init_custom_form: function () {
+
 			var self = this;
+
 			//initiate validator
 			if (this.settings.inline_validation) {
 				$(this.element).forminatorFrontValidate({
@@ -91,7 +96,7 @@
 			//initiate select2
 			this.init_select2();
 
-			//responsive captcha
+			// Handle responsive captcha
 			this.responsive_captcha();
 
 			// Handle field counter
@@ -99,14 +104,22 @@
 
 			// Handle number input
 			this.field_number();
-			$(window).on('resize', function () {
-				self.responsive_captcha();
-			});
+
+			// Handle time fields
+			this.field_time();
 
 			// Handle upload field change
 			this.upload_field();
 
+			// Handle function on resize
+			$(window).on('resize', function () {
+
+				self.responsive_captcha();
+
+			});
+
 		},
+
 		init_poll_form: function () {
 			var self = this,
 				$selection = this.$el.find('.forminator-radio--field'),
@@ -137,6 +150,7 @@
 			});
 
 		},
+
 		init_quiz_form: function () {
 			var self = this;
 
@@ -195,13 +209,60 @@
 			});
 
 		},
-		init_select2: function () {
-			$(this.element).find(".forminator-select").wpmuiSelect({
-				allowClear: false,
-				containerCssClass: "forminator-select2",
-				dropdownCssClass: "forminator-dropdown"
-			});
+
+		small_form: function () {
+
+			var form = $(this.element);
+
+			if ($(window).width() > 782) {
+
+				if (form.parent().width() <= 420) {
+					form.addClass('forminator-size--small');
+				}
+
+			}
+
 		},
+
+		init_select2: function () {
+
+			var form = $(this.element);
+
+			if (form.hasClass('forminator-design--material')) {
+
+				$(this.element).find(".forminator-select").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--material"
+				});
+
+			} else if (form.hasClass('forminator-design--bold')) {
+
+				$(this.element).find(".forminator-select").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--bold"
+				});
+
+			} else if (form.hasClass('forminator-design--flat')) {
+
+				$(this.element).find(".forminator-select").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--flat"
+				});
+
+			} else {
+
+				$(this.element).find(".forminator-select").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--default"
+				});
+
+			}
+		},
+
 		responsive_captcha: function () {
 			$(this.element).find('.forminator-g-recaptcha').each(function () {
 				if ($(this).is(':visible')) {
@@ -217,6 +278,7 @@
 				}
 			});
 		},
+
 		init_pagination: function () {
 			var self = this,
 				num_pages = $(this.element).find(".forminator-pagination").length,
@@ -239,46 +301,7 @@
 				});
 			}
 		},
-		show_messages: function (errors) {
-			var self = this;
-			errors.forEach(function (value) {
-				var element_id = Object.keys(value),
-					message = Object.values(value),
-					$field = $(self.element).find('#' + element_id);
 
-				if ($field.length) {
-					if (!$field.hasClass('forminator-input') && !$field.hasClass('forminator-select') && !$field.hasClass('forminator-button')) {
-						$field = $field.find('.forminator-field');
-					} else {
-						$field = $field.closest('.forminator-field--inner');
-					}
-
-					$field = $field.find('.forminator-field');
-					$field.addClass('forminator-has_error');
-
-					var $validation = $field.find('.forminator-label--validation');
-
-					if ($validation.length === 0) {
-						$field.append('<label class="forminator-label--validation"></label>');
-						$validation = $field.find('.forminator-label--validation');
-					}
-
-					$validation.html(message);
-
-				}
-			});
-
-			return this;
-		},
-		focus_to_element: function ($element) {
-			$('html,body').animate({scrollTop: ($element.offset().top - ($(window).height() - $element.outerHeight(true)) / 2)}, 500, function () {
-				if (!$element.attr("tabindex")) {
-					$element.attr("tabindex", -1).focus();
-				}
-
-			});
-
-		},
 		activate_field: function () {
 			var form = $(this.element);
 
@@ -390,7 +413,6 @@
 				});
 
 			});
-
 		},
 
 		field_number: function () {
@@ -399,7 +421,19 @@
 				var sanitized = $(this).val().replace(/[^0-9]/g, '');
 				$(this).val(sanitized);
 			});
+		},
 
+		field_time: function () {
+			$('.forminator-input-time').on('input', function (e) {
+				var $this = $(this),
+					value = $this.val()
+				;
+
+				// Allow only 2 digits for time fields
+				if (value && value.length >= 2) {
+					$this.val(value.substr(0, 2));
+				}
+			});
 		},
 
 		material_field: function () {
@@ -428,8 +462,6 @@
 
 				$input.wrap('<div class="forminator-input--wrap"></div>');
 			}
-
-
 		},
 
 		toggle_file_input: function () {
@@ -488,6 +520,34 @@
 			});
 		},
 
+		renderCaptcha: function (captcha_field) {
+			var self = this;
+			//render captcha only if not rendered
+			if (typeof $(captcha_field).data('forminator-recapchta-widget') === 'undefined') {
+				var size = $(captcha_field).data('size'),
+					data = {
+						sitekey: $(captcha_field).data('sitekey'),
+						theme: $(captcha_field).data('theme'),
+						size: size
+					};
+
+				if (size === 'invisible') {
+					data.badge = 'inline';
+					data.callback = function(token){
+						$(self.element).trigger('submit.frontSubmit');
+					};
+				}
+
+				if (data.sitekey !== "") {
+					// noinspection Annotator
+					var widget = window.grecaptcha.render(captcha_field, data);
+					// mark as rendered
+					$(captcha_field).data('forminator-recapchta-widget', widget);
+					this.responsive_captcha();
+				}
+			}
+		}
+
 	});
 
 	// A really lightweight plugin wrapper around the constructor,
@@ -500,22 +560,29 @@
 		});
 	};
 
+	// hook from wp_editor tinymce
+	$(document).on('tinymce-editor-init', function (event, editor) {
+		// trigger editor change to save value to textarea,
+		// default wp tinymce textarea update only triggered when submit
+		editor.on('change', function () {
+			editor.save();
+		});
+	});
+
 })(jQuery, window, document);
 
 // noinspection JSUnusedGlobalSymbols
 var forminator_render_captcha = function () {
-	jQuery('.g-recaptcha').each(function () {
-		var siteKey = jQuery(this).data('sitekey'),
-			data = {
-				sitekey: siteKey,
-				theme: jQuery(this).data('theme')
+	// TODO: avoid conflict with another plugins that provide recaptcha
+	//  notify forminator front that grecaptcha loaded. anc can be used
+	jQuery('.forminator-g-recaptcha').each(function () {
+		// find closest form
+		var form = jQuery(this).closest('form');
+		if (form.length > 0) {
+			var forminatorFront = form.data('forminatorFront');
+			if (typeof forminatorFront !== 'undefined') {
+				forminatorFront.renderCaptcha(jQuery(this)[0]);
 			}
-		;
-
-		// Print reCaptcha scripts if sitekey exist
-		if (siteKey !== "") {
-			// noinspection Annotator
-			grecaptcha.render(jQuery(this)[0], data);
 		}
 	});
 };

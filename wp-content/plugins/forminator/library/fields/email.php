@@ -209,7 +209,7 @@ class Forminator_Email extends Forminator_Field {
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
  		$required    = self::get_property( 'required', $field, false );
- 		$placeholder = self::get_property( 'placeholder', $field );
+ 		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
  		$value       = self::get_property( 'value', $field );
 
  		$html = sprintf( '<input class="forminator-email--field forminator-input" type="email" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s"/>', $required, $name, $placeholder, $value, $id );
@@ -260,8 +260,8 @@ class Forminator_Email extends Forminator_Field {
 			if ( $error ) {
 				$error_message = $error;
 			}
-			$messages .= 'emailWP: "' . $error_message . '",' . "\n";
 		}
+		$messages .= 'emailWP: "' . $error_message . '",' . "\n";
 		$messages .= '},' . "\n";
 
 		return $messages;
@@ -297,5 +297,22 @@ class Forminator_Email extends Forminator_Field {
 				}
 			}
 		}
+	}
+
+	/**
+	 * Sanitize data
+	 *
+	 * @since 1.0.2
+	 *
+	 * @param array $field
+	 * @param array|string $data - the data to be sanitized
+	 *
+	 * @return array|string $data - the data after sanitization
+	 */
+	public function sanitize( $field, $data ) {
+		// Sanitize email
+		$data = sanitize_email( $data );
+
+		return apply_filters( 'forminator_field_email_sanitize', $data, $field );
 	}
 }

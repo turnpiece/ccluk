@@ -32,9 +32,16 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 
 		if ( ! is_object( $model ) ) {
 			wp_send_json_error( array(
-				'error' => __( "Form not found" )
+				'error' => apply_filters( 'forminator_submit_quiz_error_not_found', __( "Form not found", Forminator::DOMAIN ) )
 			) );
 		}
+
+		/**
+		 * Action called before submit quizzes
+		 *
+		 * @param Forminator_Quiz_Form_Model $model - the quiz model
+		 */
+		do_action( 'forminator_before_submit_quizzes', $model );
 
 		if ( $model->quiz_type == 'nowrong' ) {
 			$this->_process_nowrong_submit( $model );
@@ -119,13 +126,12 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 
                 <div class="forminator-result--header">
 
-                    <p><?php echo forminator_get_form_name($model->id, 'quiz') ?></p>
+                    <p><?php echo forminator_get_form_name( $model->id, 'quiz' ) ?></p>
 
                     <button type="button">
                         <i class="wpdui-icon wpdui-icon-refresh" aria-hidden="true"></i>
                         <span>
-                            <button type="button"
-                                    class="forminator-field--button"><?php _e( "Retake Quiz", Forminator::DOMAIN ) ?></button>
+                            <?php _e( "Retake Quiz", Forminator::DOMAIN ) ?>
                         </span>
                     </button>
 
@@ -152,7 +158,21 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
             </div>
         </div>
 		<?php
-		return ob_get_clean();
+
+		$nowrong_result_html = ob_get_clean();
+
+		/**
+		 * Filter to modify nowrong results
+		 *
+		 * @since 1.0.2
+		 *
+		 * @param string $nowrong_result_html - the return html
+		 * @param Forminator_Quiz_Form_Model $model - the model
+		 * @param string $finalRes - the final result
+		 *
+		 * @return string $nowrong_result_html
+		 */
+		return apply_filters( 'forminator_quizzes_render_nowrong_result', $nowrong_result_html, $model, $finalRes );
 	}
 
 	/**
@@ -166,7 +186,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		if ( ! is_array( $answers ) || count( $answers ) == 0 ) {
 			wp_send_json_error(
 				array(
-					'error' => __( "You has not answer any questions" )
+					'error' => apply_filters( 'forminator_quizzes_process_knowledge_submit_no_answer_error', __( "You haven't answered any questions", Forminator::DOMAIN ) )
 				)
 			);
 		}
@@ -177,7 +197,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 				//need to check if all the questions are answered
 				wp_send_json_error(
 					array(
-						'error' => __( "Please answer all the questions" )
+						'error' => apply_filters( 'forminator_quizzes_process_knowledge_submit_answer_all_error', __( "Please answer all the questions", Forminator::DOMAIN ) )
 					)
 				);
 			} else {
@@ -201,16 +221,16 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 			$inCorrectText = isset( $model->settings['msg_incorrect'] ) ? $model->settings['msg_incorrect'] : '';
 			$finalText     = isset( $model->settings['msg_count'] ) ? $model->settings['msg_count'] : '';
 			if ( $pick == $index ) {
-				$results[ $id ]['message'] = str_replace( '<%CorrectAnswer%>', $right['title'],
-					str_replace( '<%UserAnswer%>', $userPicked['title'], $correctText ) );
+				$results[ $id ]['message'] = str_replace( '%CorrectAnswer%', $right['title'],
+					str_replace( '%UserAnswer%', $userPicked['title'], $correctText ) );
 				$results[ $id ]['isCorrect'] = true;
 				$results[ $id ]['answer'] = $id . '-' . $pick;
 				$rightCounter ++;
 				$meta['answer']    = $userPicked['title'];
 				$meta['isCorrect'] = true;
 			} else {
-				$results[ $id ]['message']    = str_replace( '<%CorrectAnswer%>', $right['title'],
-					str_replace( '<%UserAnswer%>', $userPicked['title'], $inCorrectText ) );
+				$results[ $id ]['message']    = str_replace( '%CorrectAnswer%', $right['title'],
+					str_replace( '%UserAnswer%', $userPicked['title'], $inCorrectText ) );
 				$results[ $id ]['isCorrect'] = false;
 				$results[ $id ]['answer'] = $id . '-' . $pick;
 				$meta['answer']    = $userPicked['title'];
@@ -223,7 +243,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		wp_send_json_success( array(
 			'result'    => $results,
 			'type'      => 'knowledge',
-			'finalText' => $isFinish == true ? $this->_render_knowledge_result( str_replace( '<%YourNum%>', $rightCounter, str_replace( '<%Total%>', count( $results ), $finalText ) ), $model ) : ''
+			'finalText' => $isFinish == true ? $this->_render_knowledge_result( str_replace( '%YourNum%', $rightCounter, str_replace( '%Total%', count( $results ), $finalText ) ), $model ) : ''
 		) );
 	}
 
@@ -240,11 +260,11 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		ob_start();
 		?>
         <div class="forminator-quiz--footer">
-            <p class="forminator-quiz--summary"><?php echo $text ?></p>
+            <div class="forminator-quiz--summary"><?php echo wpautop( $text, true ); ?></div>
 			<?php
-			$is_fb = isset( $model->settings['facebook'] ) && $model->settings['facebook'] == true ? true : false;
-			$is_tw = isset( $model->settings['twitter'] ) && $model->settings['twitter'] == true ? true : false;
-			$is_g  = isset( $model->settings['google'] ) && $model->settings['google'] == true ? true : false;
+			$is_fb 	= isset( $model->settings['facebook'] ) && $model->settings['facebook'] == true ? true : false;
+			$is_tw 	= isset( $model->settings['twitter'] ) && $model->settings['twitter'] == true ? true : false;
+			$is_g  	= isset( $model->settings['google'] ) && $model->settings['google'] == true ? true : false;
 			$is_li  = isset( $model->settings['linkedin'] ) && $model->settings['linkedin'] == true ? true : false;
 
 			if ( $is_fb || $is_g || $is_tw ):
@@ -277,7 +297,20 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 			<?php endif; ?>
         </div>
 		<?php
-		return ob_get_clean();
+		$knowledge_result_html = ob_get_clean();
+
+		/**
+		 * Filter to modify knowledge results
+		 *
+		 * @since 1.0.2
+		 *
+		 * @param string $knowledge_result_html - the return html
+		 * @param string $text - the summary text
+		 * @param Forminator_Quiz_Form_Model $model - the model
+		 *
+		 * @return string $knowledge_result_html
+		 */
+		return apply_filters( 'forminator_quizzes_render_knowledge_result', $knowledge_result_html, $text, $model );
 	}
 
 	/**
@@ -308,6 +341,18 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		$entry->entry_type = $this->entry_type;
 		$entry->form_id    = $form_id;
 		if ( $entry->save() ) {
+
+			/**
+			 * Action called before setting fields to database
+			 *
+			 * @since 1.0.2
+			 *
+			 * @param Forminator_Form_Entry_Model $entry - the entry model
+			 * @param int $form_id - the form id
+			 * @param array $field_data - the entry data
+			 *
+			 */
+			do_action( 'forminator_quizzes_submit_before_set_fields', $entry, $form_id, $field_data );
 			$entry->set_fields( array(
 				array(
 					'name'  => 'entry',

@@ -148,7 +148,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function render_field( $field ) {
-		if ( $field['type'] == 'knowledge' ) {
+		if ( isset( $field['type'] ) && $field['type'] == 'knowledge' ) {
 			$html = $this->_render_knowledge( $field );
 		} else {
 			$html = $this->_render_nowrong( $field );
@@ -168,7 +168,13 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 */
 	private function _render_nowrong( $field ) {
 		ob_start();
-		$uniq_id = '-' . uniqid();
+		$uniq_id    = '-' . uniqid();
+		$field_slug = uniqid();
+
+		// Make sure slug key exist
+		if( isset( $field['slug'] ) ) {
+			$field_slug = $field['slug'];
+		}
 		?>
         <div class="forminator-quiz--question">
             <p class="forminator-question--title"><?php echo $field['title'] ?></p>
@@ -180,12 +186,12 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 
                             <div class="forminator-answer">
 
-                                <input type="radio" name="answers[<?php echo $field['slug'] ?>]"
+                                <input type="radio" name="answers[<?php echo $field_slug ?>]"
                                        value="<?php echo $key ?>"
-                                       id="<?php echo $field['slug'] . '-' . $key . $uniq_id ?>"
+                                       id="<?php echo $field_slug . '-' . $key . $uniq_id ?>"
                                        class="forminator-answer--input" title="<?php echo $answer['title'] ?>"/>
 
-                                <label class="forminator-answer--design" for="<?php echo $field['slug'] . '-' . $key . $uniq_id ?>"
+                                <label class="forminator-answer--design" for="<?php echo $field_slug . '-' . $key . $uniq_id ?>"
                                        aria-hidden="true">
 
 									<?php if ( isset( $answer['image'] ) && ! empty( $answer['image'] ) ) : ?>
@@ -233,27 +239,29 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
         <div class="forminator-quiz--question" id="<?php echo $field['slug'] ?>">
             <p class="forminator-question--title"><?php echo $field['title'] ?></p>
             <div class="forminator-question--answers">
-				<?php foreach ( $field['answers'] as $k => $answer ): ?>
-					<?php $eID = $field['slug'] . '-' . $k . $uniq_id ?>
-                    <div class="forminator-answer--wrap">
-                        <div class="forminator-answer">
-                            <input type="radio" name="answers[<?php echo $field['slug'] ?>]" value="<?php echo $k ?>"
-                                   id="<?php echo $eID ?>"
-                                   class="forminator-answer--input <?php echo $class ?>"
-                                   title="<?php echo $answer['title'] ?>"/>
+				<?php if( isset( $field['answers'] ) ): ?>
+					<?php foreach ( $field['answers'] as $k => $answer ): ?>
+						<?php $eID = $field['slug'] . '-' . $k . $uniq_id ?>
+						<div class="forminator-answer--wrap">
+							<div class="forminator-answer">
+								<input type="radio" name="answers[<?php echo $field['slug'] ?>]" value="<?php echo $k ?>"
+									   id="<?php echo $eID ?>"
+									   class="forminator-answer--input <?php echo $class ?>"
+									   title="<?php echo $answer['title'] ?>"/>
 
-                            <label class="forminator-answer--design" for="<?php echo $eID ?>" aria-hidden="true">
-								<?php if ( isset( $answer['image'] ) && ! empty( $answer['image'] ) ): ?>
-                                    <span class="forminator-answer--image"
-                                          style="background-image: url('<?php echo $answer['image'] ?>');"></span>
-								<?php endif; ?>
-                                <span class="forminator-answer--text">
-                                 <span class="forminator-answer--name"><?php echo $answer['title'] ?></span>
-                            </span>
-                            </label>
-                        </div>
-                    </div>
-				<?php endforeach ?>
+								<label class="forminator-answer--design" for="<?php echo $eID ?>" aria-hidden="true">
+									<?php if ( isset( $answer['image'] ) && ! empty( $answer['image'] ) ): ?>
+										<span class="forminator-answer--image"
+											  style="background-image: url('<?php echo $answer['image'] ?>');"></span>
+									<?php endif; ?>
+									<span class="forminator-answer--text">
+									 <span class="forminator-answer--name"><?php echo $answer['title'] ?></span>
+								</span>
+								</label>
+							</div>
+						</div>
+					<?php endforeach ?>
+				<?php endif; ?>
             </div>
             <p class="forminator-question--result"></p>
         </div><!-- END Sample Question #1 -->
