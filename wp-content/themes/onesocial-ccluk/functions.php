@@ -12,7 +12,26 @@ require get_stylesheet_directory() . '/inc/customizer.php';
 
 define( 'CCLUK_DEBUGGING', true );
 
-add_filter( 'wp_title', 'buddyboss_wp_title', 10, 2 );
+/*
+ * Override default home page title
+ *
+ */
+function ccluk_override_post_title($title){
+
+    if (is_front_page()) {
+
+        $sep = apply_filters( 'document_title_separator', '-' );
+
+        $title = implode( " $sep ", array( get_bloginfo( 'name', 'display' ), get_bloginfo( 'description', 'display' ) ) );
+        $title = wptexturize( $title );
+        $title = convert_chars( $title );
+        $title = esc_html( $title );
+        $title = capital_P_dangit( $title );
+    }
+
+    return $title;
+}
+add_filter('pre_get_document_title', 'ccluk_override_post_title', 99);
 
 /**
  * Sets up theme defaults
