@@ -95,9 +95,6 @@
 		<!-- all other templates -->
 	<?php else : ?>
 		<div class="entry-main">
-			<header class="entry-meta posted-on">
-				<?php the_date() ?>
-			</header>
 
 			<div class="entry-content">
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'onesocial' ) ); ?>

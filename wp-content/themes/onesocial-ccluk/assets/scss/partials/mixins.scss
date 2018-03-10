@@ -12,3 +12,23 @@
 	-moz-border-radius: $x;
 	border-radius: $x;
 }
+
+@mixin font-size($sizeValue: 1.8) {
+  font-size: ($sizeValue * 10) + px;
+  font-size: $sizeValue + rem;
+}
+
+@mixin margin($y: 1, $x: 1) {
+  margin: ($y * 10) + px ($x * 10) + px;
+  margin: $y + rem $x + rem;
+}
+
+@mixin centred-margin($value: 1.5) {
+  margin: ($value * 10) + px auto;
+  margin: $value + rem auto;
+}
+
+@mixin padding($y: 1, $x: 1) {
+  padding: ($y * 10) + px ($x * 10) + px;
+  padding: $y + rem $x + rem;
+}

@@ -1,13 +1,18 @@
-.single {
-	.entry-post-thumbnail {
-		background-attachment: fixed;
-	}
-}
-
 .home-page {
     #main {
         .section {
-            padding: 30px 0 80px;
+            @include padding(3, 0);
+            padding-bottom: 80px;
+            padding-bottom: 8rem;
+        }
+    }
+}
+
+.single,
+.single-post {
+    .entry-header {
+        h1 {
+            @include font-size(3.5);
         }
     }
 }

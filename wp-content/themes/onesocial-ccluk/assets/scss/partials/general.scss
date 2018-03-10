@@ -26,33 +26,33 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
     margin-bottom: 16px;
 }
 
-h3 {
-    line-height: 1.35;
+h3, h4 {
+    line-height: 1.6;
 }
 
 .bluebox {
     width: 100%;
     color: #fff;
     background-color: $blue_bg;
-    padding: 20px 50px;
-    margin: 20px 0;
+    @include padding(2, 5);
+    @include margin(2, 0);
 }
 
 #save_as_draft:hover {
-    color: #000;
+    color: $black;
     background-color: $green;
 }
 
 .widget-area .widget p, 
 .widget-area .widget li, 
 .widget-area .widget .textwidget {
-    font-size: 18px;
+    @include font-size(1.8);
 }
 
 .archive {
     #content {
         > .archive-header {
-            margin: 24px 0;
+            @include margin(2.4, 0);
 
             h1 {
                 color: $green;
