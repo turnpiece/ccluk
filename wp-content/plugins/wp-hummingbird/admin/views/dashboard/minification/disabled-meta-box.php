@@ -1,6 +1,6 @@
 <?php
 /**
- * Minification disabled meta box on dashboard page.
+ * Asset optimization disabled meta box on dashboard page.
  *
  * @package Hummingbird
  *

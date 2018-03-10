@@ -7,4 +7,5 @@ require('./admin-dashboard.js');
 require('./admin-dashboard-cloudflare.js');
 require('./admin-uptime.js');
 require('./admin-cloudflare.js');
+require('./admin-advanced.js');
 require('./admin-app.js');

@@ -159,6 +159,9 @@ class WP_Hummingbird_Admin_Notices {
 	/**
 	 * Check if a notice has been dismissed by the current user.
 	 *
+	 * Will accept: 'user' for user options, 'option' for site wide options and
+	 * 				'site' for sub site options.
+	 *
 	 * @since  1.7.0 changed to private
 	 * @access private
 	 * @param  string $notice  Notice.
@@ -169,10 +172,11 @@ class WP_Hummingbird_Admin_Notices {
 		if ( 'user' === $mode ) {
 			return get_user_meta( get_current_user_id(), 'wphb-' . $notice . '-dismissed' );
 		} elseif ( 'option' === $mode ) {
-			return 'yes' !== get_site_option( 'wphb-notice-' . $notice . '-show' );
-		} else {
-
-		}
+			return 'yes' !== get_option( 'wphb-notice-' . $notice . '-show' );
+			//return 'yes' !== get_site_option( 'wphb-notice-' . $notice . '-show' );
+		} //elseif ( 'site' === $mode ) {
+		//	return 'yes' !== get_option( 'wphb-notice-' . $notice . '-show' );
+		//}
 	}
 
 	/**
@@ -221,7 +225,7 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		if ( ! current_user_can( wphb_get_admin_capability() ) ) {
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
 			return;
 		}
 
@@ -281,7 +285,7 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		if ( ! get_site_option( 'wphb-pro' ) && wphb_is_member() ) {
+		if ( ! get_site_option( 'wphb-pro' ) && WP_Hummingbird_Utils::is_member() ) {
 			$url = WPMUDEV_Dashboard::$ui->page_urls->plugins_url;
 			/* translators: %s: Upgrade URL */
 			$message = sprintf( __( 'Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free version so you can start using premium features. <a href="%s">Upgrade</a>', 'wphb' ), esc_url( $url ) );
@@ -313,7 +317,7 @@ class WP_Hummingbird_Admin_Notices {
 	 * @since 1.5.4
 	 */
 	public function free_version_rate() {
-		if ( get_site_option( 'wphb-pro' ) && wphb_is_member() ) {
+		if ( get_site_option( 'wphb-pro' ) && WP_Hummingbird_Utils::is_member() ) {
 			return;
 		}
 
@@ -347,11 +351,11 @@ class WP_Hummingbird_Admin_Notices {
 
 		// Only show if minification or page cache is enabled.
 		$minify_active = false;
-		if ( wphb_can_execute_php() ) {
-			$minify = wphb_get_module( 'minify' );
+		if ( WP_Hummingbird_Utils::can_execute_php() ) {
+			$minify = WP_Hummingbird_Utils::get_module( 'minify' );
 			$minify_active = $minify->is_active();
 		}
-		$caching = wphb_get_module( 'page-caching' );
+		$caching = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$caching_active = $caching->is_active();
 
 		// If both modules disabled - don't show notice
@@ -366,13 +370,13 @@ class WP_Hummingbird_Admin_Notices {
 					'clear-cache' => 'true',
 					'clear-pc'    => $caching_active,
 				),
-				wphb_get_admin_menu_url( 'minification' )
+				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 
-			$text = __( "We've noticed you've made changes to your website and have Hummingbird's Minification feature active. You might want to clear cache to avoid any issues.", 'wphb' );
+			$text = __( "We've noticed you've made changes to your website and have Hummingbird's Asset Optimization feature active. You might want to clear cache to avoid any issues.", 'wphb' );
 
 			if ( $caching_active ) {
-				$text = __( "We've noticed you've made changes to your website and have Hummingbird's Minification and Page Caching features active. You might want to clear cache to avoid any issues.", 'wphb' );
+				$text = __( "We've noticed you've made changes to your website and have Hummingbird's Asset Optimization and Page Caching features active. You might want to clear cache to avoid any issues.", 'wphb' );
 			}
 		} elseif ( $caching_active ) {
 			// Clear cache button link
@@ -381,7 +385,7 @@ class WP_Hummingbird_Admin_Notices {
 					'type' => 'pc-purge',
 					'run'  => 'true',
 				),
-				wphb_get_admin_menu_url( 'caching' ) . '&view=main'
+				WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=main'
 			);
 			$clear_cache_url = wp_nonce_url( $clear_cache_url, 'wphb-run-caching' );
 

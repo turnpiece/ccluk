@@ -42,7 +42,7 @@
 		<div class="wphb-block wphb-block-uptime-average-responsive-time">
 			<div class="wphb-block-header">
 				<p class="wphb-block-description"><?php esc_html_e( 'Server response time is the amount of time it takes for a web server to respond to a request from a browser. The longer it takes, the longer your visitors wait for the page to start loading.', 'wphb' ); ?></p>
-				<?php if ( ! ( $uptime_stats && ! is_wp_error( $uptime_stats ) ) ) : ?>
+				<?php if ( $uptime_stats->response_time == null && ! is_wp_error( $uptime_stats ) ) : ?>
 					<div class="wphb-notice wphb-notice-blue">
 						<p><?php esc_html_e( 'We don’t have any data feeding in yet. It can take an hour or two for this graph to populate with data so feel free to check back soon!', 'wphb' ); ?></p>
 					</div>

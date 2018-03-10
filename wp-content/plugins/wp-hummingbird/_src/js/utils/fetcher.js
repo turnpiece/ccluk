@@ -75,7 +75,31 @@ function Fetcher() {
                     .then( ( response ) => {
                         return response;
                     });
-            }
+            },
+
+			/**
+			 * Save settings from rss cache settings.
+			 *
+			 * @param data
+			 */
+			saveSettings: ( data ) => {
+				const action = actionPrefix + 'caching_save_settings';
+				return request( action, { data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+            /**
+             * Toggle Ability for subsite admins to turn off page caching.
+             *
+             * @param value checkbox value.
+             */
+            toggleSubsitePageCaching: ( value ) => {
+                const action = actionPrefix + 'caching_toggle_admin_subsite_page_caching';
+                return request( action, { value }, 'POST' );
+            },
+
         },
 
         /**
@@ -140,7 +164,7 @@ function Fetcher() {
         },
 
         /**
-         * Minification module actions.
+         * Asset Optimization module actions.
          */
         minification: {
             /**
@@ -219,6 +243,19 @@ function Fetcher() {
 			cancelScan: function cancelScan() {
 				const action = actionPrefix + 'minification_cancel_scan';
 				return request( action, {}, 'POST' );
+			},
+
+			/**
+			 * Process critical css form.
+			 *
+			 * @since 1.8
+			 */
+			saveCriticalCss: ( form ) => {
+				const action = actionPrefix + 'minification_save_critical_css';
+				return request( action, { form }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
 			}
         },
 
@@ -270,7 +307,47 @@ function Fetcher() {
                 const action = actionPrefix + 'performance_save_settings';
                 return request( action, { data }, 'POST' );
             }
-        }
+        },
+
+		/**
+		 * Advanced tools module actions.
+		 */
+		advanced: {
+			/**
+			 * Save settings from advanced tools general and db cleanup sections.
+			 *
+			 * @param data
+			 * @param form
+			 */
+			saveSettings: ( data, form ) => {
+				const action = actionPrefix + 'advanced_save_settings';
+				return request( action, { data, form }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+			/**
+			 * Delete selected data from database.
+			 *
+			 * @param data
+			 */
+			deleteSelectedData: ( data ) => {
+				const action = actionPrefix + 'advanced_db_delete_data';
+				return request( action, { data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+			/**
+			 * Schedule cleanup cron.
+			 */
+			scheduleCleanup: () => {
+				const action = actionPrefixPro + 'advanced_db_schedule';
+				return request( action, {}, 'POST' );
+			}
+		}
     };
 
     assign( this, methods );

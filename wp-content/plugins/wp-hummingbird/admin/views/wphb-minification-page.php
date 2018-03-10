@@ -10,8 +10,8 @@
 		$message = sprintf(
 			/* translators: %d: number of files, %d: number of files optimized */
 			__( '<strong>Hummingbird found %1$d files and has automatically optimized %2$d of them!</strong>', 'wphb' ),
-			wphb_minification_files_count(),
-			wphb_minification_optimizied_count()
+			WP_Hummingbird_Utils::minified_files_count(),
+			WP_Hummingbird_Utils::minified_files_count( true )
 		);
 		if ( 'basic' === $this->mode ) {
 			$message .= ' ';
@@ -37,6 +37,12 @@
 				</form>
 			<?php endif; ?>
 
+			<?php if ( 'tools' === $this->get_current_tab() ) : ?>
+				<form id="wphb-minification-tools-form" method="post">
+					<?php $this->do_meta_boxes( 'tools' ); ?>
+				</form>
+			<?php endif; ?>
+
 			<?php if ( 'settings' === $this->get_current_tab() ) : ?>
 				<form id="wphb-minification-settings-form" method="post">
 					<?php $this->do_meta_boxes( 'settings' ); ?>
@@ -46,8 +52,11 @@
 
 	</div><!-- end row -->
 <?php endif;
-wphb_minification_view_modal( $this->mode );
-wphb_membership_modal();
+if ( 'advanced' === $this->mode ) {
+	WP_Hummingbird_Utils::get_modal( 'minification-basic' );
+} else {
+	WP_Hummingbird_Utils::get_modal( 'minification-advanced' );
+}
 ?>
 
 <script>

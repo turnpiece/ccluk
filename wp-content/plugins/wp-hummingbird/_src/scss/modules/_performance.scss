@@ -290,6 +290,11 @@
     color: #333;
 }
 
+.wpmud .box-reporting-summary {
+    .settings-form.disabled {
+        position: relative;
+    }
+}
 .wpmud .box-reporting-summary .wphb-block-entry-content,
 .wpmud .box-reporting-summary .content-box-two-cols-image-left .wphb-block-entry-content {
     margin-top: 0;

@@ -25,5 +25,4 @@
 			window.WPHB_Admin.getModule( 'caching' );
 		}
 	});
-
 </script>

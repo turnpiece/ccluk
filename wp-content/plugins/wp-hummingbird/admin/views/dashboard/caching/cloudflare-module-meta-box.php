@@ -20,11 +20,20 @@
 	<p><?php esc_html_e( 'Store temporary data on your visitors devices so that they don’t have to download assets twice if they don’t have to.', 'wphb' ); ?></p>
 	<?php if ( $issues ) : ?>
 		<div class="wphb-notice wphb-notice-warning">
-			<p><?php esc_html_e( 'None of your cache types meet the recommended expiry period of 8 days.', 'wphb' ); ?></p>
+			<p>
+				<?php
+				printf(
+				/* translators: %s: Number of issues */
+					__( '%1$s of your cache types don’t meet the recommended expiry period of 8+ days. Configure browser caching <a href="%2$s" id="configure-link">here</a>.', 'wphb' ),
+					absint( $issues ),
+					esc_attr( $configure_caching_url )
+				);
+				?>
+			</p>
 		</div>
 	<?php else : ?>
 		<div class="wphb-notice wphb-notice-success">
-			<p><?php esc_html_e( 'All of your cache types meet the recommended expiry period of 8 days. Great work!', 'wphb' ); ?></p>
+			<p><?php esc_html_e( 'All of your cache types meet the recommended expiry period of 8+ days. Great work!', 'wphb' ); ?></p>
 		</div>
 	<?php endif; ?>
 </div>

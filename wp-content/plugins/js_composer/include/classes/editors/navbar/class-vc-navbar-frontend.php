@@ -28,7 +28,7 @@ class Vc_Navbar_Frontend extends Vc_Navbar {
 	/**
 	 * @var string
 	 */
-	protected $brand_url = 'http://vc.wpbakery.com/?utm_campaign=VCplugin&utm_source=vc_user&utm_medium=frontend_editor';
+	protected $brand_url = 'http://wpbakery.com/?utm_campaign=VCplugin&utm_source=vc_user&utm_medium=frontend_editor';
 
 	/**
 	 * @var string

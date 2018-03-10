@@ -129,7 +129,7 @@ class WP_Hummingbird_Logger {
 		}
 
 		try {
-			mkdir( $this->log_dir );
+			@mkdir( $this->log_dir );
 		} catch ( Exception $e ) {
 			$this->status = new WP_Error( 'log-dir-error', $e->getMessage() );
 		}
@@ -218,8 +218,11 @@ class WP_Hummingbird_Logger {
 		switch ( $this->module ) {
 			case 'minify':
 				// Log for minification only if debug is enabled.
-				$settings = wphb_get_settings();
-				if ( $settings['minify_log'] ) {
+				/* @var WP_Hummingbird_Module_Minify $minify */
+				$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+				$options = $minify->get_options();
+
+				if ( $options['log'] ) {
 					$do_log = true;
 				}
 				break;

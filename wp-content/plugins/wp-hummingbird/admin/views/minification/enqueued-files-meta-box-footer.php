@@ -1,6 +1,6 @@
 <?php
 /**
- * Minification meta box footer (common for basic and advanced views).
+ * Asset optimization meta box footer (common for basic and advanced views).
  *
  * @package Hummingbird
  *

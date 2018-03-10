@@ -42,12 +42,16 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 	 */
 	public function on_activate() {
 
-		if ( ! wphb_is_member() ) {
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
 			return;
 		}
 
+		/* @var WP_Hummingbird_Module_Performance $performance */
+		$performance = WP_Hummingbird_Utils::get_module( 'performance' );
+		$options = $performance->get_options();
+
 		// Try to schedule next scan.
-		if ( wphb_get_setting( 'email-notifications' ) ) {
+		if ( $options['reports'] ) {
 			wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
 		}
 
@@ -58,11 +62,15 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 	 */
 	public function on_init_performance_scan() {
 
-		if ( wphb_is_member() ) {
+		if ( WP_Hummingbird_Utils::is_member() ) {
 			// Schedule first scan.
 			wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
 		} else {
-			wphb_update_setting( 'email-notifications', false );
+			/* @var WP_Hummingbird_Module_Performance $performance */
+			$performance = WP_Hummingbird_Utils::get_module( 'performance' );
+			$options = $performance->get_options();
+			$options['reports'] = false;
+			$performance->update_options( $options );
 		}
 
 	}
@@ -70,11 +78,11 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 	/**
 	 * Add a set of default options to Hummingbird settings
 	 *
-	 * @param  array $settings  List of default Hummingbird settings.
+	 * @param  array $options  List of default Hummingbird settings.
 	 * @return array
 	 * @since  1.5.0
 	 */
-	public function add_default_options( $settings ) {
+	public function add_default_options( $options ) {
 		$week_days = array(
 			'Monday',
 			'Tuesday',
@@ -87,47 +95,54 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 
 		$hour = mt_rand( 0, 23 );
 
-		$settings['email-notifications'] = false;
-		$settings['email-recipients'] = array();
-		$settings['email-frequency'] = 7;
-		$settings['email-day'] = $week_days[ array_rand( $week_days, 1 ) ];
-		$settings['email-time'] = $hour . ':00';
+		$options['performance']['reports'] = false;
+		$options['performance']['frequency'] = 7;
+		$options['performance']['day'] = $week_days[ array_rand( $week_days, 1 ) ];
+		$options['performance']['time'] = $hour . ':00';
+		$options['performance']['recipients'] = array();
 
-		return $settings;
-
+		return $options;
 	}
 
 	/**
 	 * Ajax action for processing a scan on page.
 	 *
 	 * TODO: this code needs to be refactored.
+	 * TODO: change wphb_cron_limit to be a transient instead of option
 	 *
 	 * @since 1.4.5
 	 */
 	public function process_scan_cron() {
+		// Clean all cron.
+		wp_clear_scheduled_hook( 'wphb_performance_scan' );
 
-		if ( ! wphb_is_member() ) {
+		if ( ! WP_Hummingbird_Utils::is_member() ) {
 			return;
 		}
 
-		// Clean all cron.
-		wp_clear_scheduled_hook( 'wphb_performance_scan' );
+		/* @var WP_Hummingbird_Module_Performance $perf_module */
+		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
+		$options = $perf_module->get_options();
+
+		// Don't do any reports if they are not set in the options.
+		if ( ! $options['reports'] ) {
+			return;
+		}
 
 		$limit = absint( get_site_option( 'wphb_cron_limit' ) );
 
 		// Refresh the report and get the data.
-		wphb_performance_refresh_report();
-		$last_report = wphb_performance_get_last_report();
+		WP_Hummingbird_Module_Performance::refresh_report();
+		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
+		$dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
 
 		// Time since last report.
 		$time_difference = time() - (int) $last_report->data->time;
 
 		// If no report is present or report is outdated, get new data.
-		if ( ( ! $last_report || $time_difference > 300 ) && $limit < 3 ) {
+		if ( ( ! $last_report || $time_difference > 300 || $dismissed ) && $limit < 3 ) {
 			// First run. Init new report scan.
 			if ( 0 === $limit ) {
-				/* @var WP_Hummingbird_Module_Performance $perf_module */
-				$perf_module = wphb_get_module( 'performance' );
 				$perf_module->init_scan();
 			}
 
@@ -137,22 +152,23 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			wp_schedule_single_event( strtotime( '+1 minutes' ), 'wphb_performance_scan' );
 		} else {
 			// Failed to fetch results in 3 attempts or less, cancel the cron.
-			if ( 3 === $limit ) {
+			if ( 3 >= $limit ) {
 				delete_site_option( 'wphb_cron_limit' );
 			}
 
 			// Check to see it the email has been sent already.
-			$last_sent_report = wphb_get_setting( 'wphb-last-sent-report' );
+			$last_sent_report = $options['last_sent'];
 			$to_utc = self::get_scheduled_scan_time( false );
 
 			// Schedule next test.
 			if ( $time_difference < 300 && $last_report && ( $to_utc - time() - $last_sent_report ) > 0 ) {
 				// Get the recipient list.
-				$recipients = wphb_get_setting( 'email-recipients' );
+				$recipients = $options['recipients'];
 				// Send the report.
 				WP_Hummingbird_Module_Reporting::send_email_report( $last_report->data, $recipients );
 				// Store the last send time.
-				wphb_update_setting( 'wphb-last-sent-report', time() );
+				$options['last_sent'] = time();
+				$perf_module->update_options( $options );
 				delete_site_option( 'wphb_cron_limit' );
 			}
 
@@ -174,22 +190,25 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 		if ( $clear_cron ) {
 			wp_clear_scheduled_hook( 'wphb_performance_scan' );
 		}
-		$settings = wphb_get_settings();
 
-		switch ( $settings['email-frequency'] ) {
+		/* @var WP_Hummingbird_Module_Performance $perf_module */
+		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
+		$options = $perf_module->get_options();
+
+		switch ( $options['frequency'] ) {
 			case '1':
 				// Check if the time is over or not, then send the date.
-				$time_string      = date( 'Y-m-d' ) . ' ' . $settings['email-time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( 'tomorrow' ) ) . ' ' . $settings['email-time'] . ':00';
+				$time_string      = date( 'Y-m-d' ) . ' ' . $options['time'] . ':00';
+				$next_time_string = date( 'Y-m-d', strtotime( 'tomorrow' ) ) . ' ' . $options['time'] . ':00';
 				break;
 			case '7':
 			default:
-				$time_string      = date( 'Y-m-d', strtotime( $settings['email-day'] . ' this week' ) ) . ' ' . $settings['email-time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( $settings['email-day'] . ' next week' ) ) . ' ' . $settings['email-time'] . ':00';
+				$time_string      = date( 'Y-m-d', strtotime( $options['day'] . ' this week' ) ) . ' ' . $options['time'] . ':00';
+				$next_time_string = date( 'Y-m-d', strtotime( $options['day'] . ' next week' ) ) . ' ' . $options['time'] . ':00';
 				break;
 			case '30':
-				$time_string      = date( 'Y-m-d', strtotime( $settings['email-day'] . ' this month' ) ) . ' ' . $settings['email-time'] . ':00';
-				$next_time_string = date( 'Y-m-d', strtotime( $settings['email-day'] . ' next month' ) ) . ' ' . $settings['email-time'] . ':00';
+				$time_string      = date( 'Y-m-d', strtotime( $options['day'] . ' this month' ) ) . ' ' . $options['time'] . ':00';
+				$next_time_string = date( 'Y-m-d', strtotime( $options['day'] . ' next month' ) ) . ' ' . $options['time'] . ':00';
 				break;
 		}
 

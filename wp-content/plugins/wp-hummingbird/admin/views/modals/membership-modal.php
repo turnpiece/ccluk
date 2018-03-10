@@ -9,7 +9,7 @@
 				<p><?php esc_html_e( 'Schedule Hummingbird to run regular performance tests daily, weekly or monthly and get email reports delivered straight to your inbox.', 'wphb' ); ?></p>
 			</li>
 			<li>
-				<strong><?php esc_html_e( 'Enhanced Minify Compression', 'wphb' ); ?></strong>
+				<strong><?php esc_html_e( 'Enhanced Asset Optimization', 'wphb' ); ?></strong>
 				<p><?php esc_html_e( 'Compress your minified files up to 2x more than regular optimization and reduce your page load speed even further.', 'wphb' ); ?></p>
 			</li>
 			<li>
@@ -25,7 +25,9 @@
 		<p class="wphb-block-content-center"><?php esc_html_e( 'Get all of this, plus heaps more as part of a WPMU DEV membership.', 'wphb' ); ?></p>
 
 		<div class="wphb-block-content-center">
-			<a target="_blank" href="<?php echo wphb_plugin_page_link(); ?>" class="button button-content-cta button-large"><?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?></a>
+			<a target="_blank" href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ); ?>" class="button button-content-cta button-large">
+				<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
+			</a>
 		</div>
 
 		<div class="wphb-modal-image wphb-modal-image-bottom dev-man">

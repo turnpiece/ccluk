@@ -1,6 +1,6 @@
 <?php
 /**
- * Minification row (advanced view).
+ * Asset optimization row (advanced view).
  *
  * @package Hummingbird
  *

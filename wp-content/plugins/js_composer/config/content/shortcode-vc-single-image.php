@@ -116,7 +116,7 @@ return array(
 			'heading' => __( 'Image style', 'js_composer' ),
 			'param_name' => 'style',
 			'value' => getVcShared( 'single image styles' ),
-			'description' => __( 'Select image display style.', 'js_comopser' ),
+			'description' => __( 'Select image display style.', 'js_composer' ),
 			'dependency' => array(
 				'element' => 'source',
 				'value' => array(
@@ -130,7 +130,7 @@ return array(
 			'heading' => __( 'Image style', 'js_composer' ),
 			'param_name' => 'external_style',
 			'value' => getVcShared( 'single image external styles' ),
-			'description' => __( 'Select image display style.', 'js_comopser' ),
+			'description' => __( 'Select image display style.', 'js_composer' ),
 			'dependency' => array(
 				'element' => 'source',
 				'value' => 'external_link',

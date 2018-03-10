@@ -1,12 +1,12 @@
 <?php
 
-$settings = wphb_get_settings();
+$options = WP_Hummingbird_Settings::get_settings( 'minify' );
 
 $minification_options = array(
-	'blocked' => $settings['block'],
-	'dont_minify' => $settings['dont_minify'],
-	'combine' => $settings['combine'],
-	'position' => $settings['position'],
+	'blocked' => $options['block'],
+	'dont_minify' => $options['dont_minify'],
+	'combine' => $options['combine'],
+	'position' => $options['position'],
 	'plugins' => get_option( 'active_plugins' ),
 	'network_plugins' => get_site_option( 'active_sitewide_plugins' ),
 	'theme' => get_stylesheet(),

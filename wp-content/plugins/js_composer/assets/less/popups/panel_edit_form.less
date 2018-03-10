@@ -115,7 +115,7 @@
     }
 
     .vc-composer-icon {
-      font-size: 18px;
+      font-size: 12px;
       color: #87D148;
       position: absolute;
       top: 50%;
@@ -259,3 +259,15 @@ option, select {
 @import "../params/hidden.less";
 @import "../lib/css3_animations.less";
 
+// Fix link height due to rel noopener
+.has-text-field.vc-link-wrapper #wp-link #search-panel .query-results {
+  top: 215px;
+}
+.vc-link-nofollow {
+  display: none;
+}
+.vc-link-wrapper {
+  .vc-link-nofollow {
+    display: block;
+  }
+}

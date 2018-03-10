@@ -12530,7 +12530,7 @@ msgstr "Beitragsbild"
 #~ "ly/vcomposer\" target=\"_blank\">Download version <b>%s</b></a>."
 #~ msgstr ""
 #~ "Es ist eine neue Version des WPBakery Page Builder verfügbar. <a href=\"http://"
-#~ "bit.ly/vcomposer\" target=\"_blank\">neue Version herunterladen <b>%s</"
+#~ "go.wpbakery.com/wpb-buy\" target=\"_blank\">neue Version herunterladen <b>%s</"
 #~ "b></a>."
 
 #~ msgid "Wrong layout params"

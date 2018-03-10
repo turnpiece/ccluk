@@ -108,8 +108,8 @@ class Vc_Mapper {
 	 */
 	protected function callActivities() {
 		do_action( 'vc_mapper_call_activities_before' );
-		while ( $activity = each( $this->init_activity ) ) {
-			list( $object, $method, $params ) = $activity[1];
+		foreach ( $this->init_activity as $activity ) {
+			list( $object, $method, $params ) = $activity;
 			if ( 'mapper' === $object ) {
 				switch ( $method ) {
 					case 'map':

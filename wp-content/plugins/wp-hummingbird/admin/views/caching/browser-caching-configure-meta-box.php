@@ -34,14 +34,14 @@
 	<div class="col-two-third">
 		<label for="wphb-server-type"><?php esc_html_e( 'Server type', 'wphb' ); ?></label>
 		<?php
-		wphb_get_servers_dropdown( array(
+		WP_Hummingbird_Utils::get_servers_dropdown( array(
 			'class'    => 'server-type',
 			'selected' => $server_type,
 		) );
 		if ( ! $cf_active ) :
 			if ( ! $show_cf_notice ) :
 			?>
-				<span class="sub">
+				<span class="desc">
 					<?php esc_html_e( 'This is the server type your website is hosted on. If you are using CloudFlare', 'wphb' ); ?>
 					<a href="#" id="connect-cloudflare-link"><?php esc_html_e( 'connect your account' , 'wphb' ); ?></a>
 					<?php esc_html_e( 'to control your cache settings from here.', 'wphb' ); ?>
@@ -91,7 +91,7 @@
 					<div data="expiry-all-types">
 						<label><?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?></label>
 						<?php
-						wphb_get_caching_frequencies_dropdown( array(
+						WP_Hummingbird_Utils::get_caching_frequencies_dropdown( array(
 							'name'      => 'set-expiry-all',
 							'class'     => 'wphb-expiry-select',
 							'selected'  => $expires['css'],
@@ -122,7 +122,7 @@
 							?>
 							<label><?php echo esc_html( $label ); ?></label>
 							<?php
-							wphb_get_caching_frequencies_dropdown( array(
+							WP_Hummingbird_Utils::get_caching_frequencies_dropdown( array(
 								'name'      => 'set-expiry-' . $type,
 								'class'     => 'wphb-expiry-select',
 								'selected'  => $expires[ $type ],
@@ -134,7 +134,7 @@
 				<?php elseif ( $cf_active || $cf_server ) : ?>
 					<label><?php esc_html_e( 'JavaScript, CSS, Media, Images', 'wphb' ); ?></label>
 					<?php
-					wphb_get_caching_frequencies_dropdown( array(
+					WP_Hummingbird_Utils::get_caching_frequencies_dropdown( array(
 						'name'      => 'set-expiry-all',
 						'class'     => 'wphb-expiry-select',
 						'selected'  => $cf_current,
@@ -197,7 +197,7 @@
 						<label id="auto-apache" for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
 						<div class="content">
-							<span class="sub">
+							<span class="desc">
 								<?php esc_html_e( 'Hummingbird can automatically apply browser caching for Apache servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
 
@@ -252,7 +252,7 @@
 								<p><strong>Troubleshooting</strong></p>
 								<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
 								<p><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></p>
-								<?php _wphb_still_having_trouble_link(); ?>
+								<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 							</div><!-- end apache-instructions -->
 						</div><!-- end content -->
 					</div><!-- end tab -->
@@ -320,7 +320,7 @@
 								<p><strong>Troubleshooting</strong></p>
 								<p><?php esc_html_e( 'If adding the rules to your .htaccess doesn’t work and you have access to vhosts.conf or httpd.conf try to find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></p>
 								<p><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></p>
-								<?php _wphb_still_having_trouble_link(); ?>
+								<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 							</div><!-- end litespeed-instructions -->
 						</div><!-- end content -->
 					</div><!-- end tab -->
@@ -354,7 +354,7 @@
 						</div>
 					</div>
 					<p><?php esc_html_e( 'Note: If you do not have access to your NGINX config files you will need to contact your hosting provider to make these changes.', 'wphb' ); ?></p>
-					<?php _wphb_still_having_trouble_link(); ?>
+					<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 				<?php endif; ?>
 
 			</div>
@@ -403,12 +403,12 @@
 		</div><!-- end wphb-content -->
 
 		<div id="wphb-server-instructions-cloudflare" class="wphb-server-instructions hidden" data-server="cloudflare">
-			<span class="sub">
+			<span class="desc">
 				<?php esc_html_e( 'Hummingbird can control your Cloudflare Browser Cache settings from here. Simply add your Cloudflare API details and configure away.', 'wphb' ); ?>
 			</span>
 			<?php
 			/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
-			$cf_module = wphb_get_module( 'cloudflare' );
+			$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 			$current_step = 'credentials';
 			$zones = array();
 			if ( $cf_module->is_zone_selected() && $cf_module->is_connected() ) {
@@ -421,12 +421,13 @@
 				}
 			}
 
+			$cf_settings = $cf_module->get_options();
 			$cloudflare_js_settings = array(
 				'currentStep' => $current_step,
-				'email'       => wphb_get_setting( 'cloudflare-email' ),
-				'apiKey'      => wphb_get_setting( 'cloudflare-api-key' ),
-				'zone'        => wphb_get_setting( 'cloudflare-zone' ),
-				'zoneName'    => wphb_get_setting( 'cloudflare-zone-name' ),
+				'email'       => $cf_settings['email'],
+				'apiKey'      => $cf_settings['api_key'],
+				'zone'        => $cf_settings['zone'],
+				'zoneName'    => $cf_settings['zone_name'],
 				'plan'        => $cf_module->get_plan(),
 				'zones'       => $zones,
 			);
@@ -465,13 +466,13 @@
 						<# if ( ! data.zones.length ) { #>
 							<p><?php _e( 'It appears you have no active zones available. Double check your domain has been added to Cloudflare and try again.', 'wphb' ); ?></p>
 							<p class="cloudflare-submit">
-								<a href="<?php echo esc_url( wphb_get_admin_menu_url( 'caching' ) ); ?>&reload=<?php echo time(); ?>#wphb-box-dashboard-cloudflare" class="button"><?php esc_html_e( 'Re-Check', 'wphb' ); ?></a>
+								<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) ); ?>&reload=<?php echo time(); ?>#wphb-box-dashboard-cloudflare" class="button"><?php esc_html_e( 'Re-Check', 'wphb' ); ?></a>
 							</p>
 						<# } else { #>
 							<# var zone = false; #>
-							<# var current_host = location.host.indexOf('www.') && location.host || location.host.replace(/^www\./,''); #>
+							<# var current_host = location.host; #>
 							<# for( var i = 0, len = data.zones.length; i < len; i++ ) { #>
-								<# if( data.zones[i].label === current_host ) { #>
+								<# if( current_host.indexOf(data.zones[i].label) !== -1 ) { #>
 									<# zone = true; #>
 									<# break; #>
 								<# } #>
@@ -494,7 +495,7 @@
 									<p>
 										<strong><?php esc_html_e( 'CloudFlare is connected, but it appears you don’t have any active zones for this domain.', 'wphb' ); ?></strong>
 										<?php esc_html_e( 'Double check your domain has been added to Cloudflare and tap re-check when ready.', 'wphb' ); ?><br />
-										<a href="<?php echo esc_url( wphb_get_admin_menu_url( 'caching' ) ); ?>&view=browser&reload=<?php echo esc_attr( time() ); ?>#wphb-server-instructions-cloudflare" class="button button-grey notice-button"><?php esc_html_e( 'Re-check', 'wphb' ); ?></a>
+										<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) ); ?>&view=browser&reload=<?php echo esc_attr( time() ); ?>#wphb-server-instructions-cloudflare" class="button button-grey notice-button"><?php esc_html_e( 'Re-check', 'wphb' ); ?></a>
 									</p>
 								</div>
 								<a href="<?php echo esc_url( $cf_disable_url ); ?>" class="button button-ghost button-small"><?php esc_attr_e( 'Deactivate', 'wphb' ); ?></a>

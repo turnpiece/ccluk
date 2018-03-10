@@ -32,10 +32,10 @@ class WP_Hummingbird_Core {
 
 		$this->load_modules();
 
-		if ( wphb_can_execute_php() ) {
-			$minify = wphb_get_setting( 'minify' );
-			if ( ( is_multisite() && ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify && current_user_can( wphb_get_admin_capability() ) ) ) )
-				|| ( ! is_multisite() && current_user_can( wphb_get_admin_capability() ) ) ) {
+		if ( WP_Hummingbird_Utils::can_execute_php() ) {
+			$minify = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
+			if ( ( is_multisite() && ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) ) )
+				|| ( ! is_multisite() && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) ) {
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
 			}
 		}
@@ -43,13 +43,13 @@ class WP_Hummingbird_Core {
 
 	private function includes() {
 		/* @noinspection PhpIncludeInspection */
-		include_once( WPHB_DIR_PATH . 'core/settings-hooks.php' );
+		include_once WPHB_DIR_PATH . 'core/settings-hooks.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( WPHB_DIR_PATH . 'core/api/class-api.php' );
+		include_once WPHB_DIR_PATH . 'core/api/class-api.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( WPHB_DIR_PATH . 'core/class-hub-endpoints.php' );
+		include_once WPHB_DIR_PATH . 'core/class-hub-endpoints.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( WPHB_DIR_PATH . 'core/class-logger.php' );
+		include_once WPHB_DIR_PATH . 'core/class-logger.php';
 	}
 
 	/**
@@ -82,11 +82,13 @@ class WP_Hummingbird_Core {
 			'smush'        => __( 'Smush', 'wphb' ),
 			'cloudflare'   => __( 'Cloudflare', 'wphb' ),
 			'gravatar'     => __( 'Gravatar Caching', 'wphb' ),
-			'page-caching' => __( 'Page Caching', 'wphb' ),
+			'page_cache'   => __( 'Page Caching', 'wphb' ),
+			'advanced'     => __( 'Advanced Tools', 'wphb' ),
+			'rss'          => __( 'RSS Caching', 'wphb' ),
 		) );
 
 		// Do not load minification for PHP less than 5.3.
-		if ( ! wphb_can_execute_php() ) {
+		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
 			unset( $modules['minify'] );
 		}
 
@@ -105,13 +107,17 @@ class WP_Hummingbird_Core {
 	 * @param string $module Module slug
 	 */
 	public function load_module( $name, $module ) {
-		$module_slug = explode( '-', $module );
+		// Split complex slugs (name_subname or name-subname) to an array.
+		$module_slug = preg_split( '/(_|-)/', $module );
+		// Glue together to form name-subname (for filename).
+		$file_part = implode( '-', $module_slug );
+		// Capitalize each word in array (to be used in class name)
 		$module_slug = array_map( 'ucfirst', $module_slug );
-		$module_slug = implode( '_', $module_slug );
-		$class_name = 'WP_Hummingbird_Module_' . $module_slug;
+		// Glue together to form Name_Subname
+		$class_name = 'WP_Hummingbird_Module_' . implode( '_', $module_slug );
 
 		// Default modules files.
-		$filename = WPHB_DIR_PATH . 'core/modules/class-module-' . $module . '.php';
+		$filename = WPHB_DIR_PATH . 'core/modules/class-module-' . $file_part . '.php';
 		if ( file_exists( $filename ) ) {
 			/* @noinspection PhpIncludeInspection */
 			include_once $filename;
@@ -120,7 +126,7 @@ class WP_Hummingbird_Core {
 		if ( class_exists( $class_name ) ) {
 			$module_obj = new $class_name( $module, $name );
 
-			/** @var WP_Hummingbird_Module $module_obj */
+			/* @var WP_Hummingbird_Module $module_obj */
 			if ( $module_obj->is_active() ) {
 				$module_obj->run();
 			}
@@ -136,7 +142,7 @@ class WP_Hummingbird_Core {
 	 */
 	public function admin_bar_menu( $admin_bar ) {
 		/* @var WP_Hummingbird_Module_Minify $minification_module */
-		$minification_module = wphb_get_module( 'minify' );
+		$minification_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
 		$menu_args = array(
 			'id'    => 'wphb',

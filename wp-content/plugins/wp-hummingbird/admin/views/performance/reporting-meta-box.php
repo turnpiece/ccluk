@@ -1,5 +1,9 @@
 <form method="post" class="scan-frm scan-settings">
-	<div class="box-content settings-form <?php echo ( ! wphb_is_member() ) ? 'disabled' : ''; ?>">
+	<div class="box-content settings-form <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? 'disabled' : ''; ?>">
+		<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
+			<div class="wphb-disabled-overlay"></div>
+		<?php endif; ?>
+
 		<div class="row with-bottom-border">
 			<div class="col-third">
 				<strong><?php esc_html_e( 'Schedule Scans', 'wphb' ) ?></strong>
@@ -11,7 +15,7 @@
 				<span class="toggle">
 					<input type="hidden" name="email-notifications" value="0"/>
 					<input type="checkbox" class="toggle-checkbox" name="email-notifications" value="1"
-							id="chk1" <?php checked( 1, $notification ); ?> <?php disabled( ! wphb_is_member() ); ?>/>
+							id="chk1" <?php checked( 1, $notification ); ?> <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>/>
 					<label class="toggle-label small" for="chk1"></label>
 				</span>
 				<label><?php esc_html_e( 'Run regular scans & reports', 'wphb' ) ?></label>
@@ -19,7 +23,7 @@
 				<div class="wphb-border-frame with-padding schedule-box">
 					<strong><?php esc_html_e( 'Schedule', 'wphb' ) ?></strong>
 					<label for="email-frequency"><?php esc_html_e( 'Frequency', 'wphb' ) ?></label>
-					<select name="email-frequency" id="email-frequency" <?php disabled( ! wphb_is_member() ); ?>>
+					<select name="email-frequency" id="email-frequency" <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
 						<option <?php selected( 1, $frequency ) ?> value="1">
 							<?php esc_html_e( 'Daily', 'wphb' ) ?>
 						</option>
@@ -32,16 +36,16 @@
 					</select>
 					<div class="days-container">
 						<label for="email-day"><?php esc_html_e( 'Day of the week', 'wphb' ) ?></label>
-						<select name="email-day" id="email-day" <?php disabled( ! wphb_is_member() ); ?>>
-							<?php foreach ( wphb_get_days_of_week() as $day ) : ?>
+						<select name="email-day" id="email-day" <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
+							<?php foreach ( WP_Hummingbird_Utils::get_days_of_week() as $day ) : ?>
 								<option <?php selected( $day, $send_day ) ?>
 									value="<?php echo $day ?>"><?php echo ucfirst( $day ) ?></option>
 							<?php endforeach; ?>
 						</select>
 					</div>
 					<label for="email-time"><?php esc_html_e( 'Time of day', 'wphb' ) ?></label>
-					<select name="email-time" id="email-time" <?php disabled( ! wphb_is_member() ); ?>>
-						<?php foreach ( wphb_get_times() as $time ) : ?>
+					<select name="email-time" id="email-time" <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
+						<?php foreach ( WP_Hummingbird_Utils::get_times() as $time ) : ?>
 							<option <?php selected( $time, $send_time ) ?> value="<?php echo $time ?>">
 								<?php echo strftime( '%I:%M %p', strtotime( $time ) ); ?>
 							</option>
@@ -85,7 +89,7 @@
 								</span>
 								<span class="email"><?php echo $email; ?></span>
 								<a data-id="<?php echo esc_attr( $key ) ?>"
-								   class="remove wphb-remove-recipient float-r <?php echo ( ! wphb_is_member() ) ? 'disabled' : ''; ?>"
+								   class="remove wphb-remove-recipient float-r <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? 'disabled' : ''; ?>"
 								   href="#"><i class="dev-icon dev-icon-cross"></i></a>
 							</div>
 						<?php endforeach; ?>
@@ -96,7 +100,7 @@
 							name="first-name"
 							id="wphb-first-name"
 							type="text"
-							<?php disabled( ! wphb_is_member() ); ?>
+							<?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>
 						/>
 						<input
 							data-empty-msg="<?php esc_attr_e( 'Empty email', 'wphb' ); ?>"
@@ -104,9 +108,9 @@
 							name="term"
 							id="wphb-username-search"
 							type="email"
-							<?php disabled( ! wphb_is_member() ); ?>
+							<?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>
 						/>
-						<button type="submit" <?php disabled( ! wphb_is_member() ); ?> id="add-receipt" class="button button-notice button-large <?php echo ( ! wphb_is_member() ) ? 'disabled' : ''; ?>">
+						<button type="submit" <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?> id="add-receipt" class="button button-notice button-large <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? 'disabled' : ''; ?>">
 							<i class="wdv-icon wdv-icon-plus"></i>
 						</button>
 					</div>

@@ -1,6 +1,6 @@
 <?php
 /**
- * Minification table (basic view).
+ * Asset optimization table (basic view).
  *
  * @package Hummingbird
  *
@@ -13,7 +13,7 @@
  * @var array  $selector_filter  List of items to filter by.
  * @var array  $server_errors    List of server errors.
  * @var string $styles_rows      Table rows for minified stykes.
- * @var string $type             Minification view. Accepts: 'advanced', 'basic'.
+ * @var string $type             Asset optimization view. Accepts: 'advanced', 'basic'.
  */
 ?>
 <div class="wphb-minification-files">
@@ -27,7 +27,7 @@
 	if ( $is_server_error ) {
 		$message = sprintf(
 			/* translators: %d: Time left before another retry. */
-			__( 'It seems that we are having problems in our servers. Minification will be turned off for %d minutes', 'wphb' ),
+			__( 'It seems that we are having problems in our servers. Asset optimization will be turned off for %d minutes', 'wphb' ),
 			$error_time_left
 		) . '<br>' . $server_errors[0]->get_error_message();
 		$this->admin_notices->show( 'minification-server-error', $message, 'error' );
@@ -103,4 +103,4 @@
 </div><!-- end wphb-minification-files -->
 
 <?php wp_nonce_field( 'wphb-enqueued-files' ); ?>
-<?php wphb_bulk_update_modal(); ?>
+<?php WP_Hummingbird_Utils::get_modal( 'bulk-update' ); ?>

@@ -82,6 +82,10 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 
 		// Process the queue through WP Cron
 		add_action( 'wphb_minify_process_queue', array( $this, 'process_queue' ) );
+
+		if ( ( is_multisite() && is_network_admin() ) || ! is_multisite() ) {
+			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_critical_css' ), 5 );
+		}
 	}
 
 	/**
@@ -101,7 +105,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	}
 
 	public function should_be_active( $is_active ) {
-		if ( ! wphb_can_execute_php() ) {
+		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
 			return false;
 		}
 
@@ -194,7 +198,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	function filter_enqueues_list( $handles, $type ) {
 		if ( ! $this->is_active() ) {
-			// Minification is not active, return the handles.
+			// Asset optimization is not active, return the handles.
 			return $handles;
 		}
 
@@ -242,8 +246,6 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		}
 
 		$handles = array_values( $handles );
-
-		//$return_to_wp = array();
 
 		if ( self::is_in_footer() && ! empty( $this->to_footer[ $type ] ) ) {
 			// Header sent us some handles to be moved to footer.
@@ -784,14 +786,14 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 *
 	 * Clear the module cache.
 	 *
-	 * @param bool $reset_settings If set to true will set Minification settings to default (that includes files positions).
+	 * @param bool $reset_settings If set to true will set Asset Optimization settings to default (that includes files positions).
 	 *
 	 * @return mixed
 	 */
 	public function clear_cache( $reset_settings = true ) {
 		global $wpdb;
 
-		if ( ! wphb_can_execute_php() ) {
+		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
 			return;
 		}
 
@@ -814,20 +816,20 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			delete_option( $name );
 		}
 
-		wphb_minification_clear_files();
+		$this->clear_files();
 
 		if ( $reset_settings ) {
 			// This one when cleared will trigger a new scan.
 			WP_Hummingbird_Sources_Collector::clear_collection();
 
 			// Reset the minification settings.
-			$options = wphb_get_settings();
-			$default_options = wphb_get_default_settings();
-			$options['block'] = $default_options['block'];
-			$options['dont_minify'] = $default_options['dont_minify'];
-			$options['combine'] = $default_options['combine'];
-			$options['position'] = $default_options['position'];
-			wphb_update_settings( $options );
+			$options = $this->get_options();
+			$default_options = WP_Hummingbird_Settings::get_default_settings();
+			$options['block']       = $default_options['minify']['block'];
+			$options['dont_minify'] = $default_options['minify']['dont_minify'];
+			$options['combine']     = $default_options['minify']['combine'];
+			$options['position']    = $default_options['minify']['position'];
+			$this->update_options( $options );
 		}
 
 		// Clear the pending process queue.
@@ -839,20 +841,20 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	}
 
 	public function reset() {
-		if ( ! wphb_can_execute_php() ) {
+		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
 			return;
 		}
 
-		wphb_minification_clear_files();
+		$this->clear_files();
 
 		// Reset the minification settings.
-		$options = wphb_get_settings();
-		$default_options = wphb_get_default_settings();
-		$options['block'] = $default_options['block'];
-		$options['dont_minify'] = $default_options['dont_minify'];
-		$options['combine'] = $default_options['combine'];
-		$options['position'] = $default_options['position'];
-		wphb_update_settings( $options );
+		$options = $this->get_options();
+		$default_options = WP_Hummingbird_Settings::get_default_settings();
+		$options['block']       = $default_options['minify']['block'];
+		$options['dont_minify'] = $default_options['minify']['dont_minify'];
+		$options['combine']     = $default_options['minify']['combine'];
+		$options['position']    = $default_options['minify']['position'];
+		$this->update_options( $options );
 
 		// Clear the pending process queue.
 		self::clear_pending_process_queue();
@@ -865,6 +867,216 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	public static function clear_pending_process_queue() {
 		delete_option( 'wphb_process_queue' );
 		delete_transient( 'wphb-processing' );
+	}
+
+	/***************************
+	 *
+	 * HELPER FUNCTIONS
+	 *
+	 ***************************/
+
+	/**
+	 * Clear minified group files
+	 */
+	public function clear_files() {
+		$groups = WP_Hummingbird_Module_Minify_Group::get_minify_groups();
+
+		foreach ( $groups as $group ) {
+			// This will also delete the file. See WP_Hummingbird_Module_Minify::on_delete_post().
+			wp_delete_post( $group->ID );
+		}
+
+		wp_cache_delete( 'wphb_minify_groups' );
+	}
+
+	/**
+	 * Get all resources collected
+	 *
+	 * This collection is displayed in minification admin page
+	 */
+	public function get_resources_collection() {
+		$collection = WP_Hummingbird_Sources_Collector::get_collection();
+		$posts = WP_Hummingbird_Module_Minify_Group::get_minify_groups();
+		foreach ( $posts as $post ) {
+			$group = WP_Hummingbird_Module_Minify_Group::get_instance_by_post_id( $post->ID );
+			if ( ! $group ) {
+				continue;
+			}
+			foreach ( $group->get_handles() as $handle ) {
+				if ( isset( $collection[ $group->type ][ $handle ] ) ) {
+					$collection[ $group->type ][ $handle ]['original_size'] = $group->get_handle_original_size( $handle );
+					$collection[ $group->type ][ $handle ]['compressed_size'] = $group->get_handle_compressed_size( $handle );
+				}
+			}
+		}
+
+		return $collection;
+	}
+
+	/**
+	 * Init minification scan.
+	 */
+	public function init_scan() {
+		$this->clear_cache( false );
+
+		// Activate minification if is not.
+		$this->toggle_service( true );
+
+		// Init scan.
+		$this->scanner->init_scan();
+	}
+
+	/**
+	 * Check if minification scan is running.
+	 *
+	 * @return bool
+	 */
+	public function is_scanning() {
+		if ( WP_Hummingbird_Utils::can_execute_php() ) {
+			return $this->scanner->is_scanning();
+		}
+		return false;
+	}
+
+	/**
+	 * Toggle minification.
+	 *
+	 * @param bool $value   Value for minification. Accepts boolean value: true or false.
+	 * @param bool $network Value for network. Default: false.
+	 */
+	public function toggle_service( $value, $network = false ) {
+		$options = $this->get_options();
+
+		if ( is_multisite() ) {
+			if ( $network ) {
+				// Updating for the whole network.
+				$options['enabled'] = $value;
+				// If deactivated for whole network, also deactivate CDN.
+				if ( false === $value ) {
+					$options['use_cdn'] = false;
+				}
+			} else {
+				// Updating on subsite.
+				if ( ! $options['enabled'] ) {
+					// Asset optimization is turned down for the whole network, do not activate it per site.
+					$options['minify_blog'] = false;
+				} else {
+					$options['minify_blog'] = $value;
+				}
+			}
+		} else {
+			$options['enabled'] = $value;
+		}
+
+		$this->update_options( $options );
+	}
+
+	/**
+	 * Toggle CDN helper function.
+	 *
+	 * @param bool $value  CDN status to set.
+	 */
+	public function toggle_cdn( $value ) {
+		$options = $this->get_options();
+		$options['use_cdn'] = $value;
+		$this->update_options( $options );
+	}
+
+	/**
+	 * Get CDN status.
+	 *
+	 * @since  1.5.2
+	 * @return bool
+	 */
+	public function get_cdn_status() {
+		$options = $this->get_options();
+		return $options['use_cdn'];
+	}
+
+	/**
+	 * Enqueue critical CSS file (css above the fold).
+	 *
+	 * @since 1.8
+	 */
+	public function enqueue_critical_css() {
+		$src = WPHB_DIR_PATH . 'admin/assets/css/critical.css';
+
+		// If file does not exist or is empty.
+		if ( ! file_exists( $src ) ) {
+			return;
+		}
+
+		$content = file_get_contents( $src );
+		if ( empty( $content ) ) {
+			return;
+		}
+
+		wp_register_style( 'wphb-critical-css', WPHB_DIR_URL . 'admin/assets/css/critical.css' );
+		wp_enqueue_style( 'wphb-critical-css' );
+	}
+
+	/**
+	 * Get css file content for critical css file.
+	 *
+	 * @since 1.8
+	 *
+	 * @return string
+	 */
+	public static function get_css() {
+		$src = WPHB_DIR_PATH. 'admin/assets/css/critical.css';
+
+		if ( ! file_exists( $src ) ) {
+			return '';
+		}
+
+		if ( ! $content = file_get_contents( $src ) ) {
+			return '';
+		}
+
+		return $content;
+	}
+
+	/**
+	 * Save critical css file (css above the fold).
+	 *
+	 * @since 1.8
+	 *
+	 * @param $content
+	 *
+	 * @return array
+	 */
+	public static function save_css( $content ) {
+		if ( ! is_string( $content ) ) {
+			return array(
+				'success' => false,
+				'message' => __( 'Unsupported content', 'wphb' ),
+			);
+		}
+
+		$wphb_fs = WP_Hummingbird_Filesystem::instance();
+
+		if ( is_wp_error( $wphb_fs->status ) ) {
+			return array(
+				'success' => false,
+				'message' => __( 'Error saving file', 'wphb' ),
+			);
+		}
+
+		$file = WPHB_DIR_PATH. 'admin/assets/css/critical.css';
+
+		$status = $wphb_fs->write( $file, $content );
+
+		if ( is_wp_error( $status ) ) {
+			return array(
+				'success' => false,
+				'message' => $status->get_error_message(),
+			);
+		}
+
+		return array(
+			'success' => true,
+			'message' => __( 'Settings updated', 'wphb' ),
+		);
 	}
 
 }

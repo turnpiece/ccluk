@@ -90,7 +90,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 			'type' => 'post',
 			'child_of' => 0,
 			'parent' => '',
-			'orderby' => 'parent',
+			'orderby' => 'name',
 			'order' => 'ASC',
 			'hide_empty' => false,
 			'hierarchical' => 1,
@@ -488,7 +488,7 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 				$categories = get_categories( $args );
 
 				$product_categories_dropdown = array();
-				$this->getCategoryChildsFull( 0, 0, $categories, 0, $product_categories_dropdown );
+				$this->getCategoryChildsFull( 0, $categories, 0, $product_categories_dropdown );
 				$settings = array(
 					'name' => __( 'Product category', 'js_composer' ),
 					'base' => 'product_category',
@@ -1142,24 +1142,32 @@ class Vc_Vendor_Woocommerce implements Vc_Vendor_Interface {
 	 * @since 4.5.3
 	 *
 	 * @param $parent_id
-	 * @param $pos
 	 * @param array $array
 	 * @param $level
 	 * @param array $dropdown - passed by  reference
 	 */
-	protected function getCategoryChildsFull( $parent_id, $pos, $array, $level, &$dropdown ) {
-
-		for ( $i = $pos; $i < count( $array ); $i ++ ) {
-			if ( $array[ $i ]->category_parent == $parent_id ) {
-				$name = str_repeat( '- ', $level ) . $array[ $i ]->name;
-				$value = $array[ $i ]->slug;
+	protected function getCategoryChildsFull( $parent_id, $array, $level, &$dropdown ) {
+		$keys = array_keys( $array );
+		$i = 0;
+		while ( $i < count( $array ) ) {
+			$key = $keys[ $i ];
+			$item = $array[ $key ];
+			$i ++;
+			if ( $item->category_parent == $parent_id ) {
+				$name = str_repeat( '- ', $level ) . $item->name;
+				$value = $item->slug;
 				$dropdown[] = array(
-					'label' => $name,
+					'label' => $name . '(' . $item->term_id . ')',
 					'value' => $value,
 				);
-				$this->getCategoryChildsFull( $array[ $i ]->term_id, $i, $array, $level + 1, $dropdown );
+				unset( $array[ $key ] );
+				$array = $this->getCategoryChildsFull( $item->term_id, $array, $level + 1, $dropdown );
+				$keys = array_keys( $array );
+				$i = 0;
 			}
 		}
+
+		return $array;
 	}
 
 	/**

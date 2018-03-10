@@ -122,6 +122,7 @@ class WP_Hummingbird_Pro {
 		$modules = apply_filters( 'wp_hummingbird_modules', array(
 			'reporting-cron' => __( 'Cron', 'wphb' ),
 			'reporting'      => __( 'Reporting', 'wphb' ),
+			'cleanup-cron'   => __( 'Database Cleanup', 'wphb' ),
 		) );
 
 		array_walk( $modules, array( $this, 'load_module' ) );
@@ -137,8 +138,12 @@ class WP_Hummingbird_Pro {
 	 */
 	public function load_module( $name, $module ) {
 		$class_name = 'WP_Hummingbird_Module_' . ucfirst( $module );
+
+		// TODO: Refactor and automate this like in class-admin.php
 		if ( 'reporting-cron' === $module ) {
 			$class_name = 'WP_Hummingbird_Module_Reporting_Cron';
+		} elseif ( 'cleanup-cron' === $module ) {
+			$class_name = 'WP_Hummingbird_Module_Cleanup_Cron';
 		}
 
 		// Default modules files

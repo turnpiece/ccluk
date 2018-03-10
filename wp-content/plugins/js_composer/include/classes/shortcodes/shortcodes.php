@@ -1182,38 +1182,36 @@ if ( ! class_exists( 'WPBakeryShortCodesContainer' ) ) {
 		 * @return string
 		 */
 		public function contentAdmin( $atts, $content = null ) {
-			$width = $el_class = '';
+			$width = '';
 
 			$atts = shortcode_atts( $this->predefined_atts, $atts );
 			extract( $atts );
 			$this->atts = $atts;
 			$output = '';
 
-			for ( $i = 0; $i < count( $width ); $i ++ ) {
-				$output .= '<div ' . $this->mainHtmlBlockParams( $width, $i ) . '>';
-				if ( $this->backened_editor_prepend_controls ) {
-					$output .= $this->getColumnControls( $this->settings( 'controls' ) );
-				}
-				$output .= '<div class="wpb_element_wrapper">';
-
-				if ( isset( $this->settings['custom_markup'] ) && '' !== $this->settings['custom_markup'] ) {
-					$markup = $this->settings['custom_markup'];
-					$output .= $this->customMarkup( $markup );
-				} else {
-					$output .= $this->outputTitle( $this->settings['name'] );
-					$output .= '<div ' . $this->containerHtmlBlockParams( $width, $i ) . '>';
-					$output .= do_shortcode( shortcode_unautop( $content ) );
-					$output .= '</div>';
-					$output .= $this->paramsHtmlHolders( $atts );
-				}
-
-				$output .= '</div>';
-				if ( $this->backened_editor_prepend_controls ) {
-					$output .= $this->getColumnControls( 'add', 'bottom-controls' );
-
-				}
-				$output .= '</div>';
+			$output .= '<div ' . $this->mainHtmlBlockParams( $width, 1 ) . '>';
+			if ( $this->backened_editor_prepend_controls ) {
+				$output .= $this->getColumnControls( $this->settings( 'controls' ) );
 			}
+			$output .= '<div class="wpb_element_wrapper">';
+
+			if ( isset( $this->settings['custom_markup'] ) && '' !== $this->settings['custom_markup'] ) {
+				$markup = $this->settings['custom_markup'];
+				$output .= $this->customMarkup( $markup );
+			} else {
+				$output .= $this->outputTitle( $this->settings['name'] );
+				$output .= '<div ' . $this->containerHtmlBlockParams( $width, 1 ) . '>';
+				$output .= do_shortcode( shortcode_unautop( $content ) );
+				$output .= '</div>';
+				$output .= $this->paramsHtmlHolders( $atts );
+			}
+
+			$output .= '</div>';
+			if ( $this->backened_editor_prepend_controls ) {
+				$output .= $this->getColumnControls( 'add', 'bottom-controls' );
+
+			}
+			$output .= '</div>';
 
 			return $output;
 		}

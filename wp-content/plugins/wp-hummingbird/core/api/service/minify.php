@@ -37,7 +37,7 @@ class WP_Hummingbird_API_Service_Minify extends WP_Hummingbird_API_Service {
 
 		$args = wp_json_encode( $args );
 
-		$this->request->add_header_argument( 'content-type', 'application/json' );
+		$this->request->add_header_argument( 'content-type', 'application/json' );	   			 	 		  		   		
 
 		$result = $this->request->post( 'minify', $args );
 		if ( is_wp_error( $result ) ) {

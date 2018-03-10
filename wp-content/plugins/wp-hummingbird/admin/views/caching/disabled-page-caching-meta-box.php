@@ -22,7 +22,7 @@
 		</div><!-- end content -->
 
 		<div class="buttons">
-			<a href="<?php echo esc_url( $activate_url ); ?>" class="button button-large" id="activate-page-caching">
+			<a href="<?php echo esc_url( $activate_url ); ?>" class="button" id="activate-page-caching">
 				<?php esc_html_e( 'Activate', 'wphb' ); ?>
 			</a>
 		</div>

@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version: 1.7.2
+Version: 1.8.0.2
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author: WPMU DEV
@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.7.2' );
+	define( 'WPHB_VERSION', '1.8.0.2' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {
@@ -209,16 +209,16 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			}
 		}
 
-		public function maybe_clear_all_cache() {
-			if ( isset( $_GET['wphb-clear'] ) && current_user_can( wphb_get_admin_capability() ) ) {
-				self::flush_cache();
+	public function maybe_clear_all_cache() {
+		if ( isset( $_GET['wphb-clear'] ) && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+			self::flush_cache();
 
-				delete_site_option( 'wphb-last-report-score' );
+			WP_Hummingbird_Settings::update_setting( 'last_score', '', 'performance' );
 
-				if ( 'all' === $_GET['wphb-clear'] ) {
-					wphb_update_settings( wphb_get_default_settings() );
-					delete_option( 'wphb-quick-setup' );
-				}
+			if ( 'all' === $_GET['wphb-clear'] ) {
+				WP_Hummingbird_Settings::reset_to_defaults();
+				delete_option( 'wphb-quick-setup' );
+			}
 
 				wp_safe_redirect( remove_query_arg( 'wphb-clear' ) );
 				exit;
@@ -247,11 +247,12 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 				WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
 			}
 
-			wphb_cloudflare_disconnect();
+		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
+		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
+		$cf_module->disconnect();
 
-			delete_metadata( 'user', '', 'wphb-server-type', '', true );
-			delete_site_option( 'wphb-is-cloudflare' );
-		}
+		delete_metadata( 'user', '', 'wphb-server-type', '', true );
+	}
 
 
 		private function load_textdomain() {
@@ -272,13 +273,11 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 			/* @noinspection PhpIncludeInspection */
 			include_once( WPHB_DIR_PATH . 'core/integration.php' );
 
-			// Helpers files.
-			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'helpers/wp-hummingbird-helpers-core.php' );
-			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'helpers/wp-hummingbird-helpers-settings.php' );
-			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'helpers/wp-hummingbird-helpers-modules.php' );
+		// Helpers files.
+		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/class-utils.php';
+		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/class-settings.php';
 
 			if ( is_admin() ) {
 				// Load only admin files.

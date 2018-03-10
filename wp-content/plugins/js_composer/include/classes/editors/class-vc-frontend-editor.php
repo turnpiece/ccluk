@@ -88,7 +88,7 @@ class Vc_Frontend_Editor implements Vc_Editor_Interface {
 	/**
 	 * @var string
 	 */
-	protected static $brand_url = 'http://vc.wpbakery.com/?utm_campaign=VCplugin&utm_source=vc_user&utm_medium=frontend_editor';
+	protected static $brand_url = 'http://wpbakery.com/?utm_campaign=VCplugin&utm_source=vc_user&utm_medium=frontend_editor';
 
 	/**
 	 *

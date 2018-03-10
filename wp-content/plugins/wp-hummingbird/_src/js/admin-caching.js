@@ -15,8 +15,10 @@ import Fetcher from './utils/fetcher';
         init: function () {
             let self                    = this,
                 cloudflareLink          = $('#wphb-box-caching-settings #connect-cloudflare-link, #wphb-box-caching-summary #connect-cloudflare-link'),
+                configureLink           = $('#configure-link'),
                 cloudFlareDismissLink   = $('#dismiss-cf-notice'),
                 cloudFlareDashNotice    = $('.cf-dash-notice'),
+                hash                    = window.location.hash,
                 viewSnippetLink         = $('#view-snippet-code');
 
 			new Clipboard('.wphb-code-snippet .button');
@@ -33,6 +35,14 @@ import Fetcher from './utils/fetcher';
 				self.selectedServer = 'cloudflare';
 				$('html, body').animate({ scrollTop: $('#cloudflare-steps').offset().top }, 'slow');
             });
+            configureLink.on('click', function(e) {
+                e.preventDefault();
+				$('html, body').animate({ scrollTop: $('#wphb-box-caching-settings').offset().top }, 'slow');
+            });
+            if (hash) {
+                console.log(hash);
+                $('html, body').animate({ scrollTop: $(hash).offset().top }, 'slow');
+            }
 
             this.$serverSelector = $( '#wphb-server-type' );
             this.selectedServer  = this.$serverSelector.val();
@@ -156,6 +166,33 @@ import Fetcher from './utils/fetcher';
                 }
             });
 
+			/**
+			 * Parse rss cache settings.
+			 */
+			$('.box-caching-rss .box-footer').on('click', '.button[type="submit"]', function (e) {
+                e.preventDefault();
+
+				const spinner = $(this).parent().find('.spinner');
+				const settings_form = $('.box-caching-rss').closest('section').find('form[id="rss-caching-settings"]');
+
+				// Make sure a positive value is always reflected for the rss expiry time input.
+                let rss_expiry_time = settings_form.find('#rss-expiry-time');
+                rss_expiry_time.val( Math.abs( rss_expiry_time.val() ) );
+
+				spinner.addClass('visible');
+
+				Fetcher.caching.saveSettings( settings_form.serialize() )
+					.then( ( response ) => {
+						spinner.removeClass('visible');
+
+						if ( 'undefined' !== typeof response && response.success ) {
+							self.showNotice( 'success' );
+						} else {
+							self.showNotice( 'error', wphb.strings.errorSettingsUpdate );
+						}
+					});
+			});
+
             return this;
         },
 
@@ -216,20 +253,46 @@ import Fetcher from './utils/fetcher';
             if ( 'all' === type ){
                 let all = $('#set-expiry-all').val();
                 expiry_times = {
-                    caching_expiry_javascript: all,
-                    caching_expiry_css: all,
-                    caching_expiry_media: all,
-                    caching_expiry_images: all,
+                    expiry_javascript: all,
+                    expiry_css: all,
+                    expiry_media: all,
+                    expiry_images: all,
                 }
             } else {
                 expiry_times = {
-                    caching_expiry_javascript: $('#set-expiry-javascript').val(),
-                    caching_expiry_css: $('#set-expiry-css').val(),
-                    caching_expiry_media: $('#set-expiry-media').val(),
-                    caching_expiry_images: $('#set-expiry-images').val(),
+                    expiry_javascript: $('#set-expiry-javascript').val(),
+                    expiry_css: $('#set-expiry-css').val(),
+                    expiry_media: $('#set-expiry-media').val(),
+                    expiry_images: $('#set-expiry-images').val(),
                 };
             }
             return expiry_times;
-        }
+        },
+
+		/**
+		 * Notice on settings update.
+		 *
+		 * @param type
+		 * @param message
+		 */
+		showNotice: function ( type, message = '' ) {
+			const notice = $('#wphb-notice-rss-cache');
+
+			// Remove set classes if doing multiple calls per page load.
+			notice.removeClass('wphb-notice-error');
+			notice.removeClass('wphb-notice-success');
+
+			window.scrollTo( 0, 0 );
+			notice.addClass('wphb-notice-' + type);
+
+			if ( '' !== message ) {
+				notice.find('p').html(message);
+			}
+
+			notice.slideDown();
+			setTimeout( function() {
+				notice.slideUp();
+			}, 5000 );
+		}
     };
 }( jQuery ));

@@ -150,7 +150,6 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return WP_Hummingbird_Module_Minify_Group|false
 	 */
 	public static function get_instance_by_hash_and_type( $hash, $type ) {
-
 		$posts = self::get_minify_groups();
 
 		$found = false;
@@ -628,8 +627,11 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * a file should not be generated and should pick the default one instead
 	 */
 	public function should_generate_file() {
+		/* @var WP_Hummingbird_Module_Minify $minify */
+		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+
 		// Always generate file when uploading to CDN.
-		if ( wphb_get_cdn_status() ) {
+		if ( $minify->get_cdn_status() ) {
 			return true;
 		}
 
@@ -865,7 +867,7 @@ class WP_Hummingbird_Module_Minify_Group {
 		}
 
 		/** @var WP_Hummingbird_Module_Minify $minify_module */
-		$minify_module = wphb_get_module( 'minify' );
+		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
 		$handles = $this->get_handles();
 
@@ -911,7 +913,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			$is_local = $this->is_handle_local( $handle );
 
 			if ( $is_local ) {
-				$path = wphb_src_to_path( $src );
+				$path = WP_Hummingbird_Utils::src_to_path( $src );
 				if ( is_file( $path ) ) {
 					$content = file_get_contents( $path );
 				}
@@ -1009,7 +1011,7 @@ class WP_Hummingbird_Module_Minify_Group {
 		/**
 		 * If the files should be kept remote in CDN
 		 */
-		$upload_to_cdn = wphb_get_cdn_status();
+		$upload_to_cdn = $minify_module->get_cdn_status();
 
 		/**
 		 * Function that will get files minified
@@ -1067,7 +1069,7 @@ class WP_Hummingbird_Module_Minify_Group {
 				}
 			}
 
-			$expire_on = apply_filters( 'wphb_file_expiration', 3600 * 24 * 7 ) + time() + rand( 3600, 43200 ); // 1 week +  random time between 1h-12h;
+			$expire_on = apply_filters( 'wphb_file_expiration', WEEK_IN_SECONDS ) + time() + rand( HOUR_IN_SECONDS, 12 * HOUR_IN_SECONDS ); // 1 week +  random time between 1h-12h;
 			$vars = get_object_vars( $group );
 
 			// Do not save this metadata
@@ -1143,7 +1145,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			$f->contents[] = $c;
 		}
 
-		$upload = wphb_get_api()->minify->process_files( array( $f ) );
+		$upload = WP_Hummingbird_Utils::get_api()->minify->process_files( array( $f ) );
 
 		if ( is_wp_error( $upload ) ) {
 			return $upload;
@@ -1208,7 +1210,7 @@ class WP_Hummingbird_Module_Minify_Group {
 			if ( $is_local && ! isset( $url_scheme ) ) {
 				$path = get_home_path() . $path;
 			} elseif ( $is_local && isset( $url_scheme ) ) {
-				$path = wphb_src_to_path( $path );
+				$path = WP_Hummingbird_Utils::src_to_path( $path );
 			}
 
 			if ( ( $is_local && is_file( $path ) ) || ! $is_local ) {
@@ -1245,8 +1247,11 @@ class WP_Hummingbird_Module_Minify_Group {
 	}
 
 	public function should_process_group() {
+		/* @var WP_Hummingbird_Module_Minify $minify */
+		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+
 		// Always process group if CDN is enabled.
-		if ( wphb_get_cdn_status() ) {
+		if ( $minify->get_cdn_status() ) {
 			return true;
 		}
 

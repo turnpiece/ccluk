@@ -7,7 +7,7 @@
 		<p><?php _e( '<strong>We recommend you make one tweak at a time</strong> and check the frontend of your website each change to avoid any mishaps. ', 'wphb' ); ?></p>
 
 		<div class="wphb-block-content-center">
-			<a href="<?php echo esc_url( wphb_get_admin_menu_url( 'minification' ) ); ?>" class="button button-grey"><?php esc_html_e( 'Got It', 'wphb' ); ?></a>
+			<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'minification' ) ); ?>" class="button button-grey"><?php esc_html_e( 'Got It', 'wphb' ); ?></a>
 		</div>
 
 		<div class="wphb-modal-image wphb-modal-image-bottom dev-man">

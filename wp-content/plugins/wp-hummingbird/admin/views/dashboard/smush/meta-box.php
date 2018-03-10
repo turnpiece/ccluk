@@ -23,15 +23,14 @@
 			<!-- No plugin is installed -->
 			<?php if ( ! $is_installed ) : ?>
 				<div class="buttons">
-					<?php if ( wphb_is_member() ) : ?>
-						<a href="<?php echo esc_url( wphb_smush_get_install_url() ); ?>" class="button" id="smush-install">
-							<?php esc_html_e( 'Install Smush Pro', 'wphb' ); ?>
-						</a>
-					<?php else : ?>
-						<a href="<?php echo esc_url( wphb_smush_get_install_url() ); ?>" class="button" id="smush-install">
-							<?php esc_html_e( 'Install Smush', 'wphb' ); ?>
-						</a>
-					<?php endif; ?>
+					<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'smush' ) ); ?>" class="button" id="smush-install">
+						<?php
+						if ( WP_Hummingbird_Utils::is_member() ) {
+							esc_html_e( 'Install Smush Pro', 'wphb' );
+						} else {
+							esc_html_e( 'Install Smush', 'wphb' );
+						} ?>
+					</a>
 				</div>
 				<!-- Plugin is installed but not active -->
 			<?php elseif ( $is_installed && ! $is_active ) : ?>
@@ -67,13 +66,13 @@
 				<?php endif; ?>
 			<?php endif; ?>
 			<!-- Regular version is installed and the user in not a PRO member -->
-			<?php if ( ! wphb_is_member() ) : ?>
+			<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
 				<div class="content-box content-box-two-cols-image-left">
 					<div class="wphb-block-entry-content wphb-upsell-free-message">
 						<p>
 							<?php printf(
-								__( 'Did you know WP Smush Pro delivers up to 2x better compression, allows you to smush your originals and removes any bulk smushing limits? <a href="%s" rel="dialog">Try it absolutely FREE</a>', 'wphb' ),
-								'#wphb-upgrade-membership-modal'
+								__( 'Did you know WP Smush Pro delivers up to 2x better compression, allows you to smush your originals and removes any bulk smushing limits? <a href="%s" target="_blank">Try it absolutely FREE</a>', 'wphb' ),
+								WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_smush_upsell_link' )
 							); ?>
 						</p>
 					</div>

@@ -1,4 +1,4 @@
-Thanks to all the great authors who shared their brilliant work and let us to use it.
+﻿Thanks to all the great authors who shared their brilliant work and let us to use it.
 
 Translation credits:
 Thanks to elpuntografico for the Spanish translation (http://graphicriver.net/user/elpuntografico/portfolio)
@@ -11,6 +11,7 @@ Thanks to Muhammad Ali - http://bestit.org for Persian translation
 Thanks to Valentin Val for Bulgarian translation
 Thanks to evange for Japanese translation
 Thanks to Oberon Lai for traditional Chinese translation
+Thanks to Yousefzadeh for Persian translation
 
 Thanks to Abid Omar for the detailed tutorial and WP Auto update class. https://github.com/omarabid/Self-Hosted-WordPress-Plugin-repository
 

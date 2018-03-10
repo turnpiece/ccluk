@@ -16,6 +16,20 @@
 		<div class="wphb-notice wphb-notice-success">
 			<p><?php esc_html_e( 'Page caching is currently active.', 'wphb' ); ?></p>
 		</div>
+
+
+		<?php if ( is_multisite() ) { ?>
+			<div class="settings-form dash-form">
+				<span class="dash-form-title"><?php esc_html_e( 'Subsite Settings', 'wphb' ); ?></span>
+				<span class="toggle">
+						<input type="hidden" name="admin-disable-page-caching" value="0"/>
+						<input type="checkbox" class="toggle-checkbox" name="admin-disable-page-caching" value="1"
+							   id="admins_disable_caching" <?php checked( $admins_can_disable_page_caching ); ?> />
+						<label class="toggle-label small" for="admins_disable_caching"></label>
+					</span>
+				<label for="admins_disable_caching"><?php esc_html_e( 'Allow subsite admins to disable page caching', 'wphb' ); ?></label>
+			</div>
+		<?php } ?>
 	<?php } ?>
 </div>
 

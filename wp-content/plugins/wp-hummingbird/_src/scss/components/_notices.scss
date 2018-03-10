@@ -33,6 +33,13 @@
     width: 100%;
 }
 
+
+.wpmud  .wrap-wp-hummingbird >  .wphb-notice.wphb-dash-settings-updated {
+    position: fixed !important;
+    top: 30px;
+    margin-left: -210px;
+}
+
 .wpmud .wphb-notice.notice p {
     font-size: 14px;
     line-height: 1.5;

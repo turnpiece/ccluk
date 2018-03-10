@@ -9,7 +9,7 @@ return array(
 	'class' => '',
 	'icon' => 'icon-wpb-vc-round-chart',
 	'category' => __( 'Content', 'js_composer' ),
-	'description' => __( 'Pie and Doughnat charts', 'js_composer' ),
+	'description' => __( 'Pie and Doughnut charts', 'js_composer' ),
 	'params' => array(
 		array(
 			'type' => 'textfield',

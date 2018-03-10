@@ -1,6 +1,6 @@
 <?php
 /** @var WP_Hummingbird_Performance_Report_Page $this */
-$last_test = wphb_performance_get_last_report();
+$last_test = WP_Hummingbird_Module_Performance::get_last_report();
 ?>
 
 <?php if ( $this->has_meta_boxes( 'summary' ) ) : ?>

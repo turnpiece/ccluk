@@ -1,0 +1,141 @@
+/* ****************************************************************************
+ * MODULES: ADVANCED TOOLS
+ */
+
+@import "../common/mixins";
+
+/* Styles for all advanced meta boxes */
+.wpmud [class^="box-advanced"] {
+    .spinner {
+        margin: 5px 10px 0;
+        vertical-align: top;
+    }
+}
+
+/* Database cleanup tab */
+.wpmud .box-advanced-db .wphb-border-frame {
+    margin-top: 30px !important;
+
+    .table-header,
+    .table-row {
+        padding: 20px 30px;
+
+        @include bp(tablet) {
+            padding: 20px 0;
+        }
+    }
+
+    .table-header div {
+        flex-basis: 50px;
+    }
+
+    .table-header div:first-child,
+    .table-row div:first-child {
+        flex-basis: 150px;
+    }
+
+    .table-row {
+        div {
+            height: 20px;
+            font-size: 13px;
+            line-height: 20px;
+
+            &:first-child {
+                color: #333;
+                font-weight: 500;
+            }
+        }
+
+        .hb-wpmudev-icon-info {
+            color: #ddd;
+            font-size: 16px;
+            margin-left: 10px;
+
+            &:hover { color: #aaa; }
+            &:before { vertical-align: middle; }
+        }
+
+        .wphb-db-row-delete {
+            width: 30px;
+            height: 30px;
+            display: inline-block;
+            border-radius: 4px;
+            margin-top: -5px;
+            text-align: center;
+            vertical-align: middle;
+
+            &:hover {
+                background-color: #f5f5f5;
+
+                .hb-fi-trash {
+                    color: #FF6D6D;
+                }
+            }
+        }
+
+        .spinner {
+            margin-top: 1px;
+        }
+
+        .hb-fi-trash {
+            color: #888;
+            font-size: 12px;
+            top: 5px;
+        }
+    }
+
+    .table-footer {
+        padding: 0 30px 30px;
+
+        .buttons .spinner {
+            margin-top: 6px;
+        }
+
+        @include bp(tablet) {
+            padding: 20px 0;
+
+            .status-text {
+                text-align: left;
+                margin-top: 0;
+                padding-left: 0;
+            }
+            .buttons {
+                margin-top: 0;
+            }
+        }
+
+        @include bp(phone-large) {
+            .status-text {
+                word-wrap: break-word;
+                max-width: 180px;
+            }
+        }
+    }
+}
+
+/* Database cleanup tab (settings) */
+.wpmud .box-advanced-db-settings {
+    .settings-form {
+        .schedule-box > label:first-child,
+        .included-tables > label:first-child {
+            margin-top: 0;
+        }
+
+        .included-tables > label {
+            margin-top: 7px;
+            color: #333;
+        }
+
+
+    }
+
+    .wphb-db-cleanup-no-membership {
+        padding-top: 0;
+
+        .wphb-block-entry-content {
+            @include bp(desktop-large) {
+                margin-top: 30px;
+            }
+        }
+    }
+}

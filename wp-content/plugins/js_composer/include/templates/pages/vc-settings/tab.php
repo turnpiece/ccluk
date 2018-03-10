@@ -117,7 +117,7 @@ $classes = 'vc_settings-tab-content vc_settings-tab-content-active ' . esc_attr(
 				</p>
 
 				<p class="description">
-					<?php echo sprintf( __( 'Don\'t have direct license yet? <a href="%s" target="_blank">Purchase WPBakery Page Builder license</a>.', 'js_composer' ), esc_url( 'http://bit.ly/vcomposer' ) ) ?>
+					<?php echo sprintf( __( 'Don\'t have direct license yet? <a href="%s" target="_blank">Purchase WPBakery Page Builder license</a>.', 'js_composer' ), esc_url( 'http://go.wpbakery.com/wpb-buy' ) ) ?>
 				</p>
 
 			<?php endif ?>

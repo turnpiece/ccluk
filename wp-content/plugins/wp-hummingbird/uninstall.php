@@ -24,14 +24,12 @@ $option_names = $wpdb->get_col(
 					OR option_name LIKE %s
 					OR option_name LIKE %s
 					OR option_name LIKE %s
-					OR option_name LIKE %s
 					OR option_name LIKE %s",
 		'%wphb-min-scripts%',
 		'%wphb-scripts%',
 		'%wphb-min-styles%',
 		'%wphb-styles%',
-		'%wphb-last-report%',
-		'%wphb-last-report-score%'
+		'%wphb-last-report%'
 	)
 );
 
@@ -50,7 +48,6 @@ delete_site_option( 'wphb_settings' );
 delete_site_option( 'wphb_version' );
 delete_site_option( 'wphb-pro' );
 
-delete_site_option( 'wphb-is-cloudflare' );
 delete_site_option( 'wphb-quick-setup' );
 delete_site_option( 'wphb-free-install-date' );
 
@@ -59,16 +56,14 @@ delete_site_option( 'wphb-gzip-data' );
 delete_site_option( 'wphb-server-type' );
 
 delete_site_option( 'wphb-last-report' );
-delete_site_option( 'wphb-last-report-dismissed' );
 
 // Clean notices.
 delete_site_option( 'wphb-notice-free-rated-show' );
-delete_site_option( 'wphb-notice-cache-cleaned' );
+delete_site_option( 'wphb-notice-cache-cleaned-show' );
 delete_site_option( 'wphb-cloudflare-dash-notice' );
-// Minification notices
-delete_site_option( 'wphb-notice-http2-info-show' );
-delete_site_option( 'wphb-notice-minification-optimized-show' );
-delete_site_option( 'wphb-minification-view' );
+// Asset optimization notices
+delete_option( 'wphb-notice-http2-info-show' );
+delete_option( 'wphb-notice-minification-optimized-show' );
 // Uptime notices
 delete_site_option( 'wphb-notice-uptime-info-show' );
 

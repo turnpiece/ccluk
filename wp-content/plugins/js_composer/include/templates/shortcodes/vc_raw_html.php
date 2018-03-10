@@ -18,6 +18,7 @@ $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
 extract( $atts );
 
 $content = rawurldecode( base64_decode( strip_tags( $content ) ) );
+$content = wpb_js_remove_wpautop( apply_filters( 'vc_raw_html_module_content', $content ) );
 
 // template is also used by 'Raw JS' shortcode which doesn't have Design Options
 if ( ! isset( $css ) ) {

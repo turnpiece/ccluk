@@ -219,15 +219,17 @@ class WPBakeryShortCode_VC_Basic_Grid extends WPBakeryShortCode_Vc_Pageable {
 			return json_decode( urldecode( $grid_id ), true ); // if frontend, no hash exists - just RAW data
 		}
 		$post_meta = get_post_meta( (int) $page_id, '_vc_post_settings' );
+		$shortcode = false;
 		if ( is_array( $post_meta ) ) {
 			foreach ( $post_meta as $meta ) {
 				if ( isset( $meta['vc_grid_id'] ) && ! empty( $meta['vc_grid_id']['shortcodes'] ) && isset( $meta['vc_grid_id']['shortcodes'][ $grid_id ] ) ) {
-					return $meta['vc_grid_id']['shortcodes'][ $grid_id ];
+					$shortcode = $meta['vc_grid_id']['shortcodes'][ $grid_id ];
+					break;
 				}
 			}
 		}
 
-		return false;
+		return apply_filters( 'vc_basic_grid_find_post_shortcode', $shortcode, $page_id, $grid_id );
 	}
 
 	private function renderItems() {

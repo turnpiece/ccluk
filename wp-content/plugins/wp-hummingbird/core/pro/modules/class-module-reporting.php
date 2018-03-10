@@ -25,11 +25,11 @@ class WP_Hummingbird_Module_Reporting extends WP_Hummingbird_Module {
 	 * @since 1.4.5
 	 */
 	public static function send_email_report( $last_report, $recipients = array() ) {
-		if ( wphb_performance_is_doing_report() ) {
+		if ( WP_Hummingbird_Module_Performance::is_doing_report() ) {
 			return;
 		}
 
-		$issues = wphb_get_number_of_issues( 'performance' );
+		$issues = WP_Hummingbird_Utils::get_number_of_issues( 'performance' );
 		if ( 0 === $issues || empty( $recipients ) ) {
 			return;
 		}

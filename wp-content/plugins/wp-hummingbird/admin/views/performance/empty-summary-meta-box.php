@@ -19,9 +19,9 @@
 
 </div><!-- end wphb-block-entry -->
 
-<?php wphb_check_performance_modal(); ?>
-
-<?php if ( $doing_report ) : // Show the progress bar if we are still checking files. ?>
+<?php
+WP_Hummingbird_Utils::get_modal( 'check-performance' );
+if ( $doing_report ) : // Show the progress bar if we are still checking files. ?>
 	<script>
 		jQuery(document).ready( function() {
 			window.WPHB_Admin.getModule( 'performance' );

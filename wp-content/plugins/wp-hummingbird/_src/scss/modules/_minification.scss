@@ -135,7 +135,7 @@
     margin-bottom: 30px;
 }
 
-/* Minification meta box */
+/* Asset Optimization meta box */
 .wpmud .wphb-minification-files {
     background-color: #F8F8F8;
     padding-bottom: 1px;
@@ -424,40 +424,11 @@
     margin-top: 0;
 }
 
-/* Minification switch mode notice */
-.wpmud .wphb-basic-minification-modal .box,
-.wpmud .wphb-advanced-minification-modal .box {
-    width: 400px !important;
-    margin-left: -200px !important;
-    padding: 40px 0 30px !important;
-}
-
-.wpmud .wphb-basic-minification-modal .title,
-.wpmud .wphb-advanced-minification-modal .title {
-    display: none;
-}
-
-.wpmud .wphb-basic-minification-modal h1,
-.wpmud .wphb-advanced-minification-modal h1 {
-    color: #333333;
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 30px;
-    text-transform: none;
-}
-
-.wpmud .wphb-basic-minification-modal p,
-.wpmud .wphb-advanced-minification-modal p {
-    color: #666;
-    font-size: 13px;
-    line-height: 22px;
-    margin: 0 30px;
-    text-align: center;
-}
-
-.wpmud .wphb-basic-minification-modal img,
-.wpmud .wphb-advanced-minification-modal img {
-    margin-left: 0;
+/* Tools */
+.wpmud .box-minification-tools {
+    .box-footer .spinner {
+        margin: 6px 10px 0;
+    }
 }
 
 // Responsive

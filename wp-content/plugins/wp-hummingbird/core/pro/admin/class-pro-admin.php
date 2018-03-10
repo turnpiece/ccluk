@@ -18,7 +18,7 @@ class WP_Hummingbird_Pro_Admin {
 	 */
 	public function register_dashboard_do_meta_boxes( $dashboard_page ) {
 		/* Reports */
-		if ( wphb_is_member() ) {
+		if ( WP_Hummingbird_Utils::is_member() ) {
 			$dashboard_page->add_meta_box(
 				'dashboard-reports',
 				__( 'Reports', 'wphb' ),
@@ -42,16 +42,19 @@ class WP_Hummingbird_Pro_Admin {
 	 * @since 1.4.5
 	 */
 	public function dashboard_reports_metabox() {
-		$performance_module = wphb_get_module( 'performance' );
-		$performance_is_active = $performance_module->is_active();
+		/* @var WP_Hummingbird_Module_Performance $performance_module */
+		$performance_module = WP_Hummingbird_Utils::get_module( 'performance' );
+		$options = $performance_module->get_options();
 
-		$uptime_module = wphb_get_module( 'uptime' );
+		$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
 		$uptime_is_active = $uptime_module->is_active();
 
 		$frequency = '';
-		if ( $performance_is_active ) {
-			$settings = wphb_get_settings();
-			$frequency = $settings['email-frequency'];
+		$performance_is_active = false;
+		if ( $options['reports'] ) {
+			$performance_is_active = true;
+
+			$frequency = $options['frequency'];
 			switch ( $frequency ) {
 				case 1:
 					$frequency = __( 'Daily', 'wphb' );
@@ -73,7 +76,7 @@ class WP_Hummingbird_Pro_Admin {
 	 * @since 1.7.0
 	 */
 	public function dashboard_reports_metabox_footer() {
-		$url = wphb_get_admin_menu_url( 'performance' ) . '&view=reports';
+		$url = WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) . '&view=reports';
 		$this->pro_view( 'dashboard/reports/meta-box-footer', compact( 'url' ) );
 	}
 
@@ -115,6 +118,6 @@ class WP_Hummingbird_Pro_Admin {
 		}
 
 		echo $content;
-
 	}
+
 }

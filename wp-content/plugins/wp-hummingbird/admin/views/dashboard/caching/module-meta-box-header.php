@@ -15,5 +15,5 @@
 <?php if ( $issues && ! $cf_active ) : ?>
 	<div class="wphb-pills"><?php echo intval( $issues ); ?></div>
 <?php elseif ( 691200 !== $cf_current && $cf_active ) : ?>
-	<div class="wphb-pills">1</div>
+	<div class="wphb-pills">5</div>
 <?php endif; ?>

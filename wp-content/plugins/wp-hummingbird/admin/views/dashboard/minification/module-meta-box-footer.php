@@ -1,6 +1,6 @@
 <?php
 /**
- * Minification meta box footer on dashboard page.
+ * Asset optimization meta box footer on dashboard page.
  *
  * @package Hummingbird
  *

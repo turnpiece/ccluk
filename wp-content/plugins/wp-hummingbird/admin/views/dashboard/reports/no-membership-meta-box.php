@@ -18,7 +18,7 @@
 
 		<div class="row">
 			<div class="col-half">
-				<a href="<?php echo wphb_get_admin_menu_url( 'performance' ) . '&view=reports'; ?>">
+				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) . '&view=reports'; ?>">
 					<div class="report-status with-corner">
 						<i class="hb-icon-performancetest"></i>
 						<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
@@ -30,7 +30,7 @@
 			</div>
 			<!--
 			<div class="col-half">
-				<a href="<?php echo wphb_get_admin_menu_url( 'uptime' ); ?>">
+				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ); ?>">
 					<div class="report-status with-corner">
 						<i class="hb-icon-smush"></i>
 						<strong><?php esc_html_e( 'Uptime Report', 'wphb' ); ?></strong>
@@ -47,8 +47,8 @@
 			<div class="wphb-block-entry-content wphb-upsell-free-message">
 				<p>
 					<?php printf(
-						__( 'Schedule automated performance tests and receive email reports direct to your inbox. Get reporting as part of a full WPMU DEV membership. <a href="%s" rel="dialog">Try Pro for FREE today!</a>', 'wphb' ),
-						'#wphb-upgrade-membership-modal'
+						__( 'Schedule automated performance tests and receive email reports direct to your inbox. Get reporting as part of a full WPMU DEV membership. <a href="%s" target="_blank">Try Pro for FREE today!</a>', 'wphb' ),
+						WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_reports_upsell_link' )
 					); ?>
 				</p>
 			</div>

@@ -26,6 +26,7 @@ if ( ! empty( $el_id ) ) {
 $output = '<div ' . implode( ' ', $wrapper_attributes ) . ' class="vc_wp_text wpb_content_element' . esc_attr( $el_class ) . '">';
 $type = 'WP_Widget_Text';
 $args = array();
+$content = apply_filters( 'vc_wp_text_widget_shortcode', $content );
 if ( strlen( $content ) > 0 ) {
 	$atts['text'] = $content;
 }

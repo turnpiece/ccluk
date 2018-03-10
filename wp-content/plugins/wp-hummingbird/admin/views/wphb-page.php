@@ -7,7 +7,7 @@
 	<div class="col-half"><?php $this->do_meta_boxes( 'box-dashboard-right' ); ?></div>
 </div>
 
-<?php if ( ! wphb_is_member() ) : ?>
+<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
 	<div class="row" id="wphb-cross-sell-footer">
 		<div><span class="wphb-icon hb-fi-plugin-2"></span></div>
 		<h3><?php esc_html_e( 'Check out our other free wordpress.org plugins!', 'wphb' ); ?></h3>
@@ -41,8 +41,8 @@
 			<div class="wphb-content">
 				<h3><?php esc_html_e( 'SmartCrawl Search Engine Optimization', 'wphb' ); ?></h3>
 				<p><?php esc_html_e( 'Customize Titles & Meta Data, OpenGraph, Twitter & Pinterest Support, Auto-Keyword Linking, SEO & Readability Analysis, Sitemaps, URL Crawler & more.', 'wphb' ); ?></p>
-				<a href="#" class="button button-gray disabled" target="_blank">
-					<?php esc_html_e( 'Comming soon', 'wphb' ); ?>
+				<a href="https://wordpress.org/plugins/smartcrawl-seo/" class="button button-ghost" target="_blank">
+					<?php esc_html_e( 'View features', 'wphb' ); ?>
 				</a>
 			</div>
 		</div>
@@ -63,11 +63,11 @@
 	</div>
 <?php endif;
 
-wphb_membership_modal();
+WP_Hummingbird_Utils::get_modal( 'membership' );
 ?>
 
 <script>
 	jQuery( document).ready( function () {
-		window.WPHB_Admin.getModule( 'dashboard' );	   			 	 		  		   		
+		window.WPHB_Admin.getModule( 'dashboard' );
 	});
 </script>

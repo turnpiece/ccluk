@@ -7,7 +7,7 @@
 					<p><code style="background:white;"><?php echo $error_details; ?></code></p>
 				</div>
 				<a href="<?php echo esc_url( $retry_url ); ?>" class="button button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
-				<a target="_blank" href="<?php echo esc_url( wphb_support_link() ); ?>" class="button button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
+				<a target="_blank" href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'support' ) ); ?>" class="button button-notice"><?php esc_html_e( 'Support', 'wphb' ); ?></a>
 			</div>
 		</div>
 	</div>
@@ -40,12 +40,9 @@
 		};
 	</script>
 <?php else : ?>
-
 	<div class="box-content no-vertical-padding no-vertical-margin">
 		<div class="content">
-			<?php
-			if ( $report_dismissed ) :
-			?>
+			<?php if ( $report_dismissed ) : ?>
 				<div class="wphb-notice wphb-notice-grey">
 					<p><?php esc_html_e( 'You have chosen to ignore this performance test. Run a new test to see new recommendations.', 'wphb' ); ?></p>
 					<?php if ( ! $disabled ) : ?>
@@ -54,27 +51,15 @@
 						</div>
 					<?php endif; ?>
 				</div>
-			<?php
-			else :
+			<?php else :
 				echo '<p>' . esc_html_e( 'Here are your latest performance test results. Action as many fixes as possible, however you can always ignore warnings if you are unable to fix them.', 'wphb' ) . '</p>';
-			endif;
-			?>
+			endif; ?>
 		</div>
 	</div>
 
 	<div class="wphb-table-wrapper complex">
 
 		<table class="list-table hover-effect wphb-table performance-report-table">
-
-			<thead>
-				<tr class="wphb-performance-report-item-heading">
-					<th class="wphb-performance-report-heading wphb-performance-report-heading-recommendation"><?php esc_html_e( 'Recommendation', 'wphb' ); ?></th>
-					<th class="wphb-performance-report-heading wphb-performance-report-heading-score"><?php esc_html_e( 'Score /100', 'wphb' ); ?></th>
-					<th class="wphb-performance-report-heading wphb-performance-report-heading-type"><?php esc_html_e( 'Type', 'wphb' ); ?></th>
-					<th class="wphb-performance-report-heading wphb-performance-report-heading-cta"></th>
-				</tr><!-- end wphb-performance-report-item-heading -->
-			</thead>
-
 			<tbody>
 				<?php foreach ( $last_test->rule_result as $rule => $rule_result ) :
 					$class = 'dismissed';
@@ -143,12 +128,10 @@
 						<?php if ( 'disabled' !== $class ) : ?>
 							<td class="wphb-performance-report-item-cta">
 								<?php if ( ! empty( $rule_result->summary ) || ! empty( $rule_result->tip ) ) : ?>
-									<?php if ( 100 !== $rule_result->impact_score && ( $is_subsite && 'server' !== $rule_result->type ) ) : ?>
+									<?php if ( 100 !== $rule_result->impact_score && ( ! $is_subsite && 'server' !== $rule_result->type ) && ! $report_dismissed ) : ?>
 										<button class="button button-ghost additional-content-opener"><?php esc_html_e( 'Improve', 'wphb' ); ?></button>
 									<?php endif; ?>
-									<?php if ( $is_subsite && 'server' !== $rule_result->type ) : ?>
-										<span class="additional-content-opener trigger-additional-content"><i class="dev-icon dev-icon-caret_down"></i></span>
-									<?php endif; ?>
+									<span class="additional-content-opener trigger-additional-content"><i class="dev-icon dev-icon-caret_down"></i></span>
 								<?php endif; ?>
 							</td><!-- end wphb-performance-report-item-cta -->
 						<?php endif; ?>
@@ -196,6 +179,7 @@
 
 		</table><!-- end list-table-performance-report -->
 	</div>
+
 <?php endif; ?>
 
-<?php wphb_dismiss_report_modal(); ?>
+<?php WP_Hummingbird_Utils::get_modal( 'dismiss-report' ); ?>

@@ -95,10 +95,23 @@ abstract class WP_Hummingbird_Module {
 	/**
 	 * Return the options array for this module
 	 *
+	 * @since  1.8
+	 *
 	 * @return array List of options
 	 */
-	public function options() {
-		return array();
+	public function get_options() {
+		return WP_Hummingbird_Settings::get_settings( $this->get_slug() );
+	}
+
+	/**
+	* Update the settings for the module.
+	*
+	* @since  1.8
+	*
+	* @param array $options List of settings.
+	*/
+	public function update_options( $options ) {
+		WP_Hummingbird_Settings::update_settings( $options, $this->get_slug() );
 	}
 
 }

@@ -400,29 +400,6 @@
 }
 
 /* Page caching */
-.wpmud .box-page-caching .box-footer {
-    border-top: 1px solid #E6E6E6;
-    padding: 50px 30px;
-}
-
-.wpmud .box-page-caching h4 {
-    color: #666666;
-    font-size: 15px;
-    font-weight: 500;
-    text-align: left;
-    text-transform: none;
-}
-
-.wpmud .box-page-caching textarea {
-    height: 180px;
-    max-width: 490px;
-    color: #333333;
-    border: 1px solid #E6E6E6;
-    border-radius: 4px;
-    background-color: #F8F8F8;
-    margin-top: 20px;
-}
-
 .wpmud .box-page-caching .col-two-third .with-bottom-border {
     margin-bottom: 30px;
 }
@@ -448,6 +425,26 @@
 
 .wpmud .box-page-caching .settings-form .button-ghost {
     margin: 10px 0;
+}
+
+/* Rss caching */
+.wpmud .box-caching-rss {
+    .settings-form {
+        input[type="text"] {
+            margin: 0;
+            display: inline-block;
+            width: 80px;
+        }
+
+        label {
+            margin-top: -5px;
+            color: #666;
+        }
+    }
+
+    .box-footer .spinner {
+        margin: 6px 10px 0;
+    }
 }
 
 @include bp(desktop-large) {

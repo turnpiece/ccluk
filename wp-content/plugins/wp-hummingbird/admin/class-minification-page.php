@@ -18,13 +18,24 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function on_load() {
 		$this->tabs = array(
-			'files'    => __( 'Files', 'wphb' ),
+			'files'    => __( 'Assets', 'wphb' ),
+			'tools'    => __( 'Tools', 'wphb' ),
 			'settings' => __( 'Settings', 'wphb' ),
 		);
 
+		// Remove modules that are not used on subsites in a network.
+		if ( is_multisite() && ! is_network_admin() ) {
+			unset( $this->tabs['tools'] );
+		}
+
 		add_filter( 'wphb_admin_after_tab_' . $this->get_slug(), array( $this, 'after_tab' ) );
 
-		wphb_minification_maybe_stop_scanning_files();
+		/* @var WP_Hummingbird_Module_Minify $minify_module */
+		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
+
+		if ( ! $minify_module->scanner->is_scanning() ) {
+			$minify_module->scanner->finish_scan();
+		}
 
 		// Re-check files button clicked.
 		// Clear cache button click from notice.
@@ -34,16 +45,14 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 
 			// Clear page caching if set.
 			if ( isset( $_GET['clear-cache'] ) ) { // Input var okay.
-				/* @var WP_Hummingbird_Module_Page_Caching $module */
-				$module = wphb_get_module( 'page-caching' );
+				/* @var WP_Hummingbird_Module_Page_Cache $module */
+				$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
 				$module->clear_cache();
 			}
 
-			/* @var WP_Hummingbird_Module_Minify $minify_module */
-			$minify_module = wphb_get_module( 'minify' );
 			$minify_module->clear_cache();
 
-			$url = remove_query_arg( array( 'updated', 'clear-cache', 'recheck-files' ) );
+			$url = remove_query_arg( array( 'updated', 'clear-cache', 'recheck-files', 'clear-pc' ) );
 			wp_safe_redirect( add_query_arg( 'wphb-cache-cleared', 'true', $url ) );
 			exit;
 		}
@@ -51,10 +60,13 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		// If selected to enable CDN from minification scan.
 		if ( isset( $_POST['enable_cdn'] ) ) {
 			$value = wp_validate_boolean( $_POST['enable_cdn'] );
-			wphb_toggle_cdn( $value );
+
+			/* @var WP_Hummingbird_Module_Minify $minify_module */
+			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
+			$minify_module->toggle_cdn( $value );
 
 			wp_safe_redirect(
-				wphb_get_admin_menu_url( 'minification' )
+				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 			exit;
 		}
@@ -62,24 +74,23 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		// Reset to defaults button clicked on settings page.
 		if ( isset( $_GET['reset-minification'] ) ) { // Input var okay.
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
-			$minify_module = wphb_get_module( 'minify' );
+			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 			$minify_module->reset();
 
 			wp_safe_redirect(
-				wphb_get_admin_menu_url( 'minification' )
+				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 			exit;
 		}
 
 		if ( isset( $_GET['disable-minification'] ) ) { // Input var okay.
-			wphb_toggle_minification( false );
-
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
-			$minify_module = wphb_get_module( 'minify' );
+			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
+			$minify_module->toggle_service( false );
 			$minify_module->clear_cache();
 
 			wp_safe_redirect(
-				wphb_get_admin_menu_url( 'minification' )
+				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 			exit;
 		}
@@ -89,16 +100,18 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * Render the template header.
 	 */
 	public function render_header() {
-		// Minification publish changes.
+		// Asset Optimization publish changes.
 		if ( isset( $_POST['submit'] ) ) { // Input var okay.
 			check_admin_referer( 'wphb-enqueued-files' );
 
-			$options = wphb_get_settings();
+			/* @var WP_Hummingbird_Module_Minify $minify_module */
+			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
+			$options = $minify_module->get_options();
 
 			$options = $this->_sanitize_type( 'styles', $options );
 			$options = $this->_sanitize_type( 'scripts', $options );
 
-			wphb_update_settings( $options );
+			$minify_module->update_options( $options );
 
 			// Remove notice.
 			delete_site_option( 'wphb-notice-minification-optimized-show' );
@@ -113,9 +126,12 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		// Clear cache button clicked.
 		if ( isset( $_POST['clear-cache'] ) ) { // Input var okay.
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
-			$minify_module = wphb_get_module( 'minify' );
+			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 			$minify_module->clear_cache( false );
+		}
 
+		// Clear cache show notice (from clear cache button and clear cache notice).
+		if ( isset( $_POST['clear-cache'] ) || isset( $_GET['wphb-cache-cleared'] ) ) {
 			$this->admin_notices->show(
 				'updated',
 				__( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ),
@@ -160,10 +176,11 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * Register meta boxes.
 	 */
 	public function register_meta_boxes() {
-		$collection = wphb_minification_get_resources_collection();
-		$module = wphb_get_module( 'minify' );
+		/* @var WP_Hummingbird_Module_Minify $module */
+		$module = WP_Hummingbird_Utils::get_module( 'minify' );
+		$collection = $module->get_resources_collection();
 
-		if ( ( empty( $collection['styles'] ) && empty( $collection['scripts'] ) ) || wphb_minification_is_scanning_files() || ! $module->is_active() ) {
+		if ( ( empty( $collection['styles'] ) && empty( $collection['scripts'] ) ) || $module->is_scanning() || ! $module->is_active() ) {
 			/**
 			 * Disabled state meta box.
 			 */
@@ -180,9 +197,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			);
 		} else {
 			// Move it here from __construct so we don't make an extra db call if minification is disabled.
-			if ( get_site_option( 'wphb-minification-view' ) ) {
-				$this->mode = 'advanced';
-			}
+			$this->mode = WP_Hummingbird_Settings::get_setting( 'view', 'minify' );
 
 			/**
 			 * Summary meta box.
@@ -204,7 +219,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			 */
 			$this->add_meta_box(
 				'minification/enqueued-files',
-				__( 'Files', 'wphb' ),
+				__( 'Assets', 'wphb' ),
 				array( $this, 'enqueued_files_metabox' ),
 				array( $this, 'eunqeued_files_metabox_header' ),
 				null,
@@ -213,6 +228,18 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 					'box_header_class'  => 'box-title box-title-' . $this->mode,
 					'box_content_class' => 'no-padding',
 				)
+			);
+
+			/**
+			 * Tools meta box.
+			 */
+			$this->add_meta_box(
+				'minification/tools',
+				__( 'Tools', 'wphb' ),
+				array( $this, 'tools_metabox' ),
+				null,
+				null,
+				'tools'
 			);
 
 			/**
@@ -240,7 +267,10 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * Summary meta box.
 	 */
 	function summary_metabox() {
-		$collection = wphb_minification_get_resources_collection();
+		/* @var WP_Hummingbird_Module_Minify $minify_module */
+		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
+		$collection = $minify_module->get_resources_collection();
+
 		// Remove those assets that we don't want to display.
 		foreach ( $collection['styles'] as $key => $item ) {
 			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' ) ) {
@@ -263,7 +293,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		$compressed_size_scripts = array_sum( @wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
 		$compressed_size = $compressed_size_scripts + $compressed_size_styles;
 
-		if ( $original_size <= 0 ) {
+		if ( (int) $original_size <= 0 ) {
 			$percentage = 0;
 		} else {
 			$percentage = 100 - (int) $compressed_size * 100 / (int) $original_size;
@@ -271,15 +301,15 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		$percentage = number_format_i18n( $percentage, 2 );
 		$compressed_size = number_format( (int) $original_size - (int) $compressed_size, 1 );
 
-		$use_cdn = wphb_get_cdn_status();
-		$is_member = wphb_is_member();
+		$use_cdn = $minify_module->get_cdn_status();
+		$is_member = WP_Hummingbird_Utils::is_member();
 
 		$args = compact( 'enqueued_files', 'compressed_size', 'percentage', 'use_cdn', 'is_member' );
 		$this->view( 'minification/summary-meta-box', $args );
 	}
 
 	/***************************
-	 * Minification basic/advanced
+	 * Asset Optimization basic/advanced
 	 ***************************/
 
 	/**
@@ -288,7 +318,9 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.7.1
 	 */
 	public function enqueued_files_metabox() {
-		$collection = wphb_minification_get_resources_collection();
+		/* @var WP_Hummingbird_Module_Minify $module */
+		$module = WP_Hummingbird_Utils::get_module( 'minify' );
+		$collection = $module->get_resources_collection();
 
 		// Prepare filters.
 		$active_plugins = get_option( 'active_plugins', array() );
@@ -313,9 +345,6 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 
-		/* @var WP_Hummingbird_Module_Minify $module */
-		$module = wphb_get_module( 'minify' );
-
 		if ( isset( $_GET['view-export-form'] ) ) {
 			$this->view( 'minification/export-form' );
 		}
@@ -328,8 +357,19 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			'is_server_error' => $module->errors_controller->is_server_error(),
 			'server_errors'   => $module->errors_controller->get_server_errors(),
 			'error_time_left' => $module->errors_controller->server_error_time_left(),
-			'is_http2'        => is_ssl() && wphb_get_http2_status(),
+			'is_http2'        => is_ssl() && WP_Hummingbird_Utils::get_http2_status(),
 		) );
+	}
+
+	/**
+	 * Tools meta box.
+	 *
+	 * @since 1.8
+	 */
+	public function tools_metabox() {
+		$this->view( 'minification/tools-meta-box', array(
+			'css' => WP_Hummingbird_Module_Minify::get_css(),
+		));
 	}
 
 	/**
@@ -339,7 +379,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function eunqeued_files_metabox_header() {
 		$this->view( 'minification/enqueued-files-meta-box-header', array(
-			'title' => __( 'Files', 'wphb' ),
+			'title' => __( 'Assets', 'wphb' ),
 			'type'  => $this->mode,
 		) );
 	}
@@ -351,7 +391,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function after_tab( $tab ) {
 		if ( 'files' === $tab ) {
-			echo ' <span class="wphb-button-label wphb-button-label-light">' . absint( wphb_minification_files_count() ) . '</span>';
+			echo ' <span class="wphb-button-label wphb-button-label-light">' . WP_Hummingbird_Utils::minified_files_count() . '</span>';
 		}
 	}
 
@@ -364,7 +404,9 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * @return mixed
 	 */
 	private function _sanitize_type( $type, $options ) {
-		$current_options = wphb_get_settings();
+		/* @var WP_Hummingbird_Module_Minify $minify */
+		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+		$current_options = $minify->get_options();
 
 		// We'll save what groups have changed so we reset the cache for those groups.
 		$changed_groups = array();
@@ -526,7 +568,10 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 	 * @return string
 	 */
 	private function _collection_rows( $collection, $type, $view ) {
-		$options = wphb_get_settings();
+		/* @var WP_Hummingbird_Module_Minify $minification_module */
+		$minification_module = WP_Hummingbird_Utils::get_module( 'minify' );
+
+		$options = $minification_module->get_options();
 
 		// This will be used for filtering.
 		$theme = wp_get_theme();
@@ -538,10 +583,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		// This will be used to disable the combine button if site is ssl.
-		$is_ssl = is_ssl() && wphb_get_http2_status();
-
-		/* @var WP_Hummingbird_Module_Minify $minification_module */
-		$minification_module = wphb_get_module( 'minify' );
+		$is_ssl = is_ssl() && WP_Hummingbird_Utils::get_http2_status();
 
 		$content = '';
 
@@ -570,9 +612,9 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 
 			if ( isset( $item['original_size'] ) ) {
 				$original_size = $item['original_size'];
-			} elseif ( file_exists( wphb_src_to_path( $item['src'] ) ) ) {
+			} elseif ( file_exists( WP_Hummingbird_Utils::src_to_path( $item['src'] ) ) ) {
 				// Get original file size for local files that don't have it set for some reason.
-				$original_size = number_format_i18n( filesize( wphb_src_to_path( $item['src'] ) ) / 1000, 1 );
+				$original_size = number_format_i18n( filesize( WP_Hummingbird_Utils::src_to_path( $item['src'] ) ) / 1000, 1 );
 			}
 
 			if ( isset( $item['compressed_size'] ) ) {

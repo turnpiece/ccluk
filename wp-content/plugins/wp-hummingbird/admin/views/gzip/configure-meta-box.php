@@ -13,7 +13,6 @@
  * @var bool          $htaccess_written     True if .htaccess has all rules.
  * @var bool          $full_enabled         True if all types are active.
  * @var array         $pages                A list of page types.
- * @var array         $settings             Settings array.
  * @var string        $gzip_server_type     Current server type.
  * @var string        $disable_link         Disable automatic gzip link.
  * @var string        $enable_link          Enable automatic gzip link.
@@ -30,7 +29,7 @@
 	<div class="col-two-third">
 		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type:', 'wphb' ); ?></label>
 		<?php
-		wphb_get_servers_dropdown( array(
+		WP_Hummingbird_Utils::get_servers_dropdown( array(
 			'selected' => $gzip_server_type,
 		), false );
 		?>
@@ -51,7 +50,7 @@
 						<label for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
 						<div class="content">
-							<span class="sub">
+							<span class="desc">
 								<?php esc_html_e( 'Hummingbird can automatically apply GZip compression for Apache servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
 							<?php if ( true === $htaccess_writable ) : ?>
@@ -105,7 +104,7 @@
 									<li><?php esc_html_e( 'Reload Apache.', 'wphb' ); ?></li>
 									<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
 								</ol>
-								<?php _wphb_still_having_trouble_link(); ?>
+								<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 							</div><!-- end apache-instructions -->
 						</div><!-- end content -->
 					</div><!-- end tab -->
@@ -171,7 +170,7 @@
 									<li><?php esc_html_e( 'Reload LiteSpeed.', 'wphb' ); ?></li>
 									<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload LiteSpeed, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
 								</ol>
-								<?php _wphb_still_having_trouble_link(); ?>
+								<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 							</div><!-- end litespeed-instructions -->
 						</div><!-- end content -->
 					</div><!-- end tab -->
@@ -188,7 +187,7 @@
 				</ol>
 
 				<p><?php esc_html_e( 'If you do not have access to your NGINX config files you will need to contact your hosting provider to make these changes.', 'wphb' ); ?></p>
-				<?php _wphb_still_having_trouble_link(); ?>
+				<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 
 				<div id="wphb-code-snippet">
 					<div id="wphb-code-snippet-nginx" class="wphb-code-snippet">

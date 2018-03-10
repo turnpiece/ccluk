@@ -12,16 +12,14 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @since 1.7.1
 	 */
 	public function clear_cache() {
-		$last_report = wphb_get_option( 'wphb-last-report' );
+		$last_report = WP_Hummingbird_Settings::get( 'wphb-last-report' );
 		if ( $last_report && isset( $last_report->data->score ) ) {
 			// Save latest score.
-			wphb_update_option( 'wphb-last-report-score', array(
-				'score' => $last_report->data->score,
-			));
+			WP_Hummingbird_Settings::update_setting( 'last_score', $last_report->data->score,'performance' );
 		}
-		wphb_delete_option( 'wphb-last-report' );
-		wphb_delete_option( 'wphb-doing-report' );
-		wphb_delete_option( 'wphb-stop-report' );
+		WP_Hummingbird_Settings::delete( 'wphb-last-report' );
+		WP_Hummingbird_Settings::delete( 'wphb-doing-report' );
+		WP_Hummingbird_Settings::delete( 'wphb-stop-report' );
 	}
 
 	/**
@@ -35,12 +33,12 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 
 		// Start the test.
 		self::set_doing_report( true );
-		$api = wphb_get_api();
+		$api = WP_Hummingbird_Utils::get_api();
 		$api->performance->ping();
 
 		// Clear dismissed report.
-		if ( wphb_performance_report_dismissed() ) {
-			wphb_performance_remove_report_dismissed();
+		if ( self::report_dismissed() ) {
+			self::dismiss_report( false );
 		}
 
 		// TODO: this creates a duplicate task from cron.
@@ -55,7 +53,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	public static function cron_scan() {
 		// Start the test.
 		self::set_doing_report( true );
-		$api = wphb_get_api();
+		$api = WP_Hummingbird_Utils::get_api();
 		$report = $api->performance->check();
 		// Stop the test.
 		self::set_doing_report( false );
@@ -67,17 +65,16 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	/**
 	 * Return the last Performance scan done data
 	 *
-	 * @return false|array|WP_Error Data of the last scan or false of there's not such data
+	 * @return bool|mixed|WP_Error Data of the last scan or false of there's not such data
 	 */
 	public static function get_last_report() {
-
-		$report = wphb_get_option( 'wphb-last-report' );
+		$report = WP_Hummingbird_Settings::get( 'wphb-last-report' );
 
 		if ( $report ) {
-			$last_score = wphb_get_option( 'wphb-last-report-score' );
+			$last_score = WP_Hummingbird_Settings::get_setting( 'last_score', 'performance' );
 
 			if ( $last_score && ! is_wp_error( $report ) ) {
-				$report->data->last_score = $last_score;
+				$report->data->last_score = array( 'score' => $last_score );
 			} elseif ( is_object( $report ) && ! is_wp_error( $report ) ) {
 				$report->data->last_score = false;
 			}
@@ -94,10 +91,10 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @return false|int Timestamp when the report started, false if there's no report being executed
 	 */
 	public static function is_doing_report() {
-		if ( wphb_get_option( 'wphb-stop-report' ) ) {
+		if ( WP_Hummingbird_Settings::get( 'wphb-stop-report' ) ) {
 			return false;
 		}
-		return wphb_get_option( 'wphb-doing-report' );
+		return WP_Hummingbird_Settings::get( 'wphb-doing-report' );
 	}
 
 	/**
@@ -106,7 +103,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @return bool
 	 */
 	public static function stopped_report() {
-		return (bool) wphb_get_option( 'wphb-stop-report' );
+		return (bool) WP_Hummingbird_Settings::get( 'wphb-stop-report' );
 	}
 
 	/**
@@ -118,12 +115,12 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function set_doing_report( $status = true ) {
 		if ( ! $status ) {
-			wphb_delete_option( 'wphb-doing-report' );
-			wphb_update_option( 'wphb-stop-report', true );
+			WP_Hummingbird_Settings::delete( 'wphb-doing-report' );
+			WP_Hummingbird_Settings::update( 'wphb-stop-report', true );
 		} else {
 			// Set time when we started the report.
-			wphb_update_option( 'wphb-doing-report', current_time( 'timestamp' ) );
-			wphb_delete_option( 'wphb-stop-report' );
+			WP_Hummingbird_Settings::update( 'wphb-doing-report', current_time( 'timestamp' ) );
+			WP_Hummingbird_Settings::delete( 'wphb-stop-report' );
 		}
 	}
 
@@ -132,7 +129,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 */
 	public static function refresh_report() {
 		self::set_doing_report( false );
-		$api = wphb_get_api();
+		$api = WP_Hummingbird_Utils::get_api();
 		$results = $api->performance->results();
 
 		if ( is_wp_error( $results ) ) {
@@ -145,7 +142,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 				)
 			);
 		}
-		wphb_update_option( 'wphb-last-report', $results );
+		WP_Hummingbird_Settings::update( 'wphb-last-report', $results );
 	}
 
 	/**
@@ -154,7 +151,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 * @return bool|integer True if a new test is available or the time in minutes remaining for next test
 	 */
 	public static function can_run_test() {
-		$last_report = wphb_performance_get_last_report();
+		$last_report = self::get_last_report();
 		$current_gmt_time = current_time( 'timestamp', true );
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$data_time = $last_report->data->time;
@@ -171,26 +168,43 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 
 	/**
 	 * Set last report dismissed status to true
+	 *
+	 * @since 1.8
+	 *
+	 * @param bool $dismiss  Enable or disable dismissed report status.
+	 *
+	 * @return bool
 	 */
-	public static function set_report_dismissed() {
-		wphb_update_option( 'wphb-last-report-dismissed', true );
-	}
+	public static function dismiss_report( $dismiss ) {
+		WP_Hummingbird_Settings::update_setting( 'dismissed', (bool) $dismiss, 'performance' );
 
-	/**
-	 * Remove last report dismissed status
-	 */
-	public static function remove_report_dismissed() {
-		wphb_delete_option( 'wphb-last-report-dismissed' );
+		if ( (bool) $dismiss ) {
+			// Ignore report in the Hub
+			$api = WP_Hummingbird_Utils::get_api();
+			$results = $api->performance->ignore();
+
+			if ( is_wp_error( $results ) ) {
+				return $results->get_error_message();
+			}
+		}
+
+		return true;
 	}
 
 	/**
 	 * Return whether the last report was dismissed
 	 *
+	 * @since 1.8
+	 *
 	 * @return bool True if user dismissed report or false of there's no site option
 	 */
 	public static function report_dismissed() {
-		$report = wphb_get_option( 'wphb-last-report-dismissed' );
-		if ( $report ) {
+		if ( WP_Hummingbird_Settings::get_setting( 'dismissed', 'performance' ) ) {
+			return true;
+		}
+
+		$last_report = self::get_last_report();
+		if ( isset( $last_report->data->ignored ) && $last_report->data->ignored ) {
 			return true;
 		}
 

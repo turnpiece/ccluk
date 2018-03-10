@@ -34,7 +34,6 @@ import Fetcher from './utils/fetcher';
                 } else {
                     getParentPerformanceItem.removeClass("wphb-performance-report-item-opened");
                 }
-
             });
 
             if (this.$runTestButton.length) {
@@ -53,7 +52,6 @@ import Fetcher from './utils/fetcher';
                 if (row.length) {
                     row.find('.trigger-additional-content').trigger('click');
                 }
-
             }
 
             // Schedule show/hide day of week
@@ -143,7 +141,6 @@ import Fetcher from './utils/fetcher';
             });
 
             return this;
-
         },
 
         showUpdateMessage: function () {

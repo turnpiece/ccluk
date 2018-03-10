@@ -17,7 +17,7 @@ if ( $external_problem ) : ?>
 			<li>- <?php esc_html_e( 'Contact your host. If deflate is enabled, ask why all .htaccess or nginx.conf compression rules are not being applied.', 'wphb' ); ?></li>
 		</ul>
 		<?php /* translators: %s: support link */ ?>
-		<p><?php printf( __( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ), wphb_support_link() ); ?></p>
+		<p><?php printf( __( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ), WP_Hummingbird_Utils::get_link( 'support' ) ); ?></p>
 	</div>
 <?php endif; ?>
 

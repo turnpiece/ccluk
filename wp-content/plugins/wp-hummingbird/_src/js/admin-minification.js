@@ -98,7 +98,7 @@ import Scanner from './minification/Scanner';
 				window.WDP.showOverlay("#wphb-basic-minification-modal" );
 			});
 
-            // Filter action button on Minification page
+            // Filter action button on Asset Optimization page
             $('#wphb-minification-filter-button').on('click', function(e) {
                 e.preventDefault();
                 $('.wphb-minification-filter').toggle('slow');
@@ -125,7 +125,7 @@ import Scanner from './minification/Scanner';
 			checkboxes.change( function() {
                 const cdn_value = $(this).is(':checked');
 
-                // Handle two CDN checkboxes on Minification page
+                // Handle two CDN checkboxes on Asset Optimization page
 				checkboxes.each( function() {
 					this.checked = cdn_value;
 				});
@@ -133,19 +133,40 @@ import Scanner from './minification/Scanner';
 				// Update CDN status
                 Fetcher.minification.toggleCDN( cdn_value )
                     .then( () => {
-						self.showUpdateMessage();
+						self.showNotice();
                     });
             });
 
 			$("input[type=checkbox][name=debug_log]").change( function() {
 				Fetcher.minification.toggleLog( $(this).is(':checked') )
 					.then( () => {
-						self.showUpdateMessage();
+						self.showNotice();
 					});
 			});
 
 			/**
-             * Minification filters
+			 * Save critical css file
+			 */
+			$('#wphb-minification-tools-form').on('submit', function (e) {
+				e.preventDefault();
+
+				const spinner = $(this).find('.spinner');
+				spinner.addClass('visible');
+
+				Fetcher.minification.saveCriticalCss( $(this).serialize() )
+					.then( ( response ) => {
+						spinner.removeClass('visible');
+						if ( 'undefined' !== typeof response && response.success ) {
+							self.showNotice( 'success', response.message );
+						} else {
+							self.showNotice( 'error', response.message );
+						}
+
+					});
+			});
+
+			/**
+             * Asset Optimization filters
 			 * @type {RowsCollection|*}
 			 */
 			this.rowsCollection = new WPHB_Admin.minification.RowsCollection();
@@ -264,17 +285,6 @@ import Scanner from './minification/Scanner';
         },
 
 		/**
-		 * Show update message when something has been updated in settings.
-		 */
-		showUpdateMessage: function() {
-			const notice = $('#wphb-notice-minification-advanced-settings-updated');
-			notice.slideDown();
-			setTimeout( function() {
-				notice.slideUp();
-			}, 5000 );
-		},
-
-		/**
 		 * Switch from advanced to basic view.
 		 * Called from switch view modal.
 		 */
@@ -284,6 +294,30 @@ import Scanner from './minification/Scanner';
 				.then( () => {
 					window.location.href = getLink( 'minification' );
 				});
+		},
+
+		/**
+		 * Notice on settings update.
+		 *
+		 * @param type
+		 * @param message
+		 */
+		showNotice: function ( type = 'success', message = wphb.strings.successUpdate ) {
+			const notice = $('#wphb-notice-minification-advanced-settings-updated');
+
+			// Remove set classes if doing multiple calls per page load.
+			notice.removeClass('wphb-notice-error');
+			notice.removeClass('wphb-notice-success');
+
+			window.scrollTo( 0, 0 );
+			notice.addClass('wphb-notice-' + type);
+
+			notice.find('p').html(message);
+
+			notice.slideDown();
+			setTimeout( function() {
+				notice.slideUp();
+			}, 5000 );
 		},
 
     }; // End WPHB_Admin.minification

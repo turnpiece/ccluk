@@ -7,7 +7,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class WP_Hummingbird_Module_Minify_Scanner
  *
- * Minification files scan
+ * Asset Optimization files scan
  */
 class WP_Hummingbird_Module_Minify_Scanner {
 
@@ -60,8 +60,8 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		update_option( self::CURRENT_STEP, 0 );
 
 		// Reset notice status
-		update_site_option( self::MINIFICATION_NOTICE, 'yes' );
-		update_site_option( self::HTTP2_NOTICE, 'yes' );
+		update_option( self::MINIFICATION_NOTICE, 'yes' );
+		update_option( self::HTTP2_NOTICE, 'yes' );
 
 		$this->refresh_status();
 	}
@@ -112,8 +112,8 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 *
 	 * @return int
 	 */
-	public static function get_scan_steps() {
-		return count( self::get_scan_urls() );
+	public function get_scan_steps() {
+		return count( $this->get_scan_urls() );
 	}
 
 	/**
@@ -141,7 +141,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 *
 	 * @return array
 	 */
-	public static function get_scan_urls() {
+	public function get_scan_urls() {
 		// Calculate URLs to Check
 		$args = array(
 			'orderby'        => 'rand',
@@ -194,7 +194,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 *
 	 * @return array
 	 */
-	public static function scan_url( $url ) {
+	public function scan_url( $url ) {
 		$cookies = array();
 		foreach ( $_COOKIE as $name => $value ) {
 			if ( strpos( $name, 'wordpress_' ) > -1 ) {

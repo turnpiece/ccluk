@@ -11,10 +11,11 @@
 
 #toplevel_page_wphb-minification .wp-menu-image:before,
 #toplevel_page_wphb-performance .wp-menu-image:before,
-#toplevel_page_wphb .wp-menu-image:before {
+#toplevel_page_wphb .wp-menu-image:before,
+#toplevel_page_wphb-caching .wp-menu-image:before {
     font-family: 'wphb';
     content: "\e900";
 }
 
 
-/* 87274-1518896094-au */
+/* 87274-1520710395-au */

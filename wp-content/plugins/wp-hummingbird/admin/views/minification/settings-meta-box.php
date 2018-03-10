@@ -1,4 +1,8 @@
-<div class="row settings-form with-bottom-border with-padding <?php echo ( ! wphb_is_member() ) ? 'disabled' : ''; ?>">
+<?php
+/* @var WP_Hummingbird_Module_Minify $minify */
+$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+?>
+<div class="row settings-form with-bottom-border with-padding <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? 'disabled' : ''; ?>">
 	<div class="col-third">
 		<strong><?php esc_html_e( 'Super-compress my files', 'wphb' ); ?></strong>
 		<span class="sub">
@@ -6,7 +10,7 @@
 		</span>
 	</div>
 	<div class="col-two-third">
-		<?php if ( wphb_is_member() ) : ?>
+		<?php if ( WP_Hummingbird_Utils::is_member() ) : ?>
 			<span class="wphb-label wphb-label-disabled"><?php esc_html_e( 'Auto Enabled', 'wphb' ); ?></span>
 		<?php else : ?>
 			<span class="toggle tooltip-right" tooltip="<?php esc_html_e( 'Enable Super-minify my files', 'wphb' ); ?>">
@@ -19,7 +23,7 @@
 </div>
 
 <?php if ( ! is_multisite() ) : ?>
-	<div class="row settings-form with-bottom-border with-padding <?php echo ( ! wphb_is_member() ) ? 'disabled' : ''; ?>">
+	<div class="row settings-form with-bottom-border with-padding <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? 'disabled' : ''; ?>">
 		<div class="col-third">
 			<strong><?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?></strong>
 			<span class="sub">
@@ -28,7 +32,7 @@
 		</div>
 		<div class="col-two-third">
 			<span class="toggle tooltip-right" tooltip="<?php esc_attr_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
-				<input type="checkbox" class="toggle-checkbox" name="use_cdn" id="use_cdn" <?php checked( wphb_get_cdn_status() && wphb_is_member() ); ?> <?php disabled( ! wphb_is_member() ); ?>>
+				<input type="checkbox" class="toggle-checkbox" name="use_cdn" id="use_cdn" <?php checked( $minify->get_cdn_status() && WP_Hummingbird_Utils::is_member() ); ?> <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
 				<label for="use_cdn" class="toggle-label small"></label>
 			</span>
 			<label for="use_cdn"><?php esc_html_e( 'Host my files on the WPMU DEV CDN', 'wphb' ); ?></label>
@@ -39,7 +43,7 @@
 	</div>
 <?php endif; ?>
 
-<?php if ( ! wphb_is_member() ) : ?>
+<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
 	<div class="row settings-form with-bottom-border with-padding">
 		<div class="content-box content-box-two-cols-image-left">
 			<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
@@ -52,33 +56,33 @@
 				<p>
 					<?php printf(
 						/* translators: %s: upsell modal href link */
-						__( "With our pro version of Hummingbird you can super-compress your files and then host them on our blazing fast CDN. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins, themes & 24/7 WP support.  <a href='%s' rel='dialog'>Try Pro for FREE today!</a>", 'wphb' ),
-						'#wphb-upgrade-membership-modal'
+						__( "With our pro version of Hummingbird you can super-compress your files and then host them on our blazing fast CDN. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins, themes & 24/7 WP support.  <a href='%s' target='_blank'>Try Pro for FREE today!</a>", 'wphb' ),
+						WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_assetoptimization_settings_upsell_link' )
 					); ?>
 				</p>
 			</div>
 		</div><!-- end content-box -->
 	</div><!-- end settings-form -->
-	<?php wphb_membership_modal(); ?>
 <?php endif;
 
-$settings = wphb_get_settings();
-?>
-<div class="row settings-form with-bottom-border with-padding">
-	<div class="col-third">
-		<strong><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></strong>
-		<span class="sub">
-			<?php esc_html_e( 'If you’re having issues with minification, turn on the debug log to get insight into what’s going on.', 'wphb' ); ?>
-		</span>
+$options = $minify->get_options();
+if ( ! is_multisite() || is_main_site() ) : ?>
+	<div class="row settings-form with-bottom-border with-padding">
+		<div class="col-third">
+			<strong><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></strong>
+			<span class="sub">
+				<?php esc_html_e( 'If you’re having issues with minification, turn on the debug log to get insight into what’s going on.', 'wphb' ); ?>
+			</span>
+		</div>
+		<div class="col-two-third">
+			<span class="toggle tooltip-right" tooltip="<?php esc_attr_e( 'Enable debug log', 'wphb' ); ?>">
+				<input type="checkbox" class="toggle-checkbox" name="debug_log" id="debug_log" <?php checked( $options['log'] ); ?>>
+				<label for="debug_log" class="toggle-label small"></label>
+			</span>
+			<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
+		</div>
 	</div>
-	<div class="col-two-third">
-		<span class="toggle tooltip-right" tooltip="<?php esc_attr_e( 'Enable debug log', 'wphb' ); ?>">
-			<input type="checkbox" class="toggle-checkbox" name="debug_log" id="debug_log" <?php checked( $settings['minify_log'] ); ?>>
-			<label for="debug_log" class="toggle-label small"></label>
-		</span>
-		<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
-	</div>
-</div>
+<?php endif; ?>
 
 <div class="row settings-form with-bottom-border with-padding">
 	<div class="col-third">
@@ -98,7 +102,7 @@ $settings = wphb_get_settings();
 	<div class="col-third">
 		<strong><?php esc_html_e( 'Deactivate', 'wphb' ); ?></strong>
 		<span class="sub">
-			<?php esc_html_e( 'If you no longer wish to use Hummingbird’s Minification feature you can turn it off completely', 'wphb' ); ?>
+			<?php esc_html_e( 'If you no longer wish to use Hummingbird’s asset optimization feature you can turn it off completely', 'wphb' ); ?>
 		</span>
 	</div>
 	<div class="col-two-third">

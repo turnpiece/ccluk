@@ -1,3 +1,33 @@
+08.03.2018 - ver 5.4.7
+   - Fix: Custom shortcode mapping
+
+07.03.2018 - ver 5.4.6
+   - Update: Compatibility with PHP 7.2 added
+   - Update: Compatibility filters for WP Toolset added
+   - Update: French translation updated
+   - Update: Persian translation updated
+
+24.11.2017 - ver 5.4.5
+   - Fix: Firefox tinymce and vc_link issue
+   - Fix: WooCommerce vendor categories list
+
+16.11.2017 - ver 5.4.4
+   - Fix: TinyMCE Saves linebreaks
+
+15.11.2017 - ver 5.4.3
+   - Added: Shortcode support in raw_html
+   - Added: More filters for vc_btn shortcode
+   - Update: Shortcode automapper admin content escaping
+   - Fix: Improve WordPress 4.9 tinyMCE support
+   - Compatibility: with WordPress 4.9
+   - Compatibility: with WP Tool Set plugin
+
+13.10.2017 - ver 5.4.2
+   - Fix: Updater URL typo
+
+12.10.2017 - ver 5.4.1
+   - Fix: Plugin zip size
+
 12.10.2017 - ver 5.4
    - Update: WPBakery Page Builder logo update
    - Update: Navigation bar color schema in Backend and Grid Builder
@@ -27,6 +57,7 @@
    Update: Function wpb_map returned
    Fix: std fixed for attribute types nested in a param group
    Fix: vc_js error on frontend editor
+   Fix: Font dropdown in TinyMCE for WordPress 4.8.1
 
 29.06.2017 - ver 5.2.
    Added: RTL support

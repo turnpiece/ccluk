@@ -26,15 +26,14 @@
 				<li>- <?php esc_html_e( 'Your server may not have the "expires" module enabled (mod_expires for Apache, ngx_http_headers_module for NGINX)', 'wphb' ); ?></li>
 				<li>- <?php esc_html_e( 'Another plugin may be interfering with the configuration', 'wphb' ); ?></li>
 			</ul>
-			<p>
-				<?php
-				printf(
-					/* translators: %s: Support link */
-					__( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ),
-					esc_url( wphb_support_link() )
-				);
-				?>
-			</p>
+
+			<?php
+			printf(
+				/* translators: %s: Support link */
+				__( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ),
+				esc_url( WP_Hummingbird_Utils::get_link( 'support' ) )
+			);
+			?>
 		</div>
 	<?php endif; ?>
 
@@ -46,13 +45,13 @@
 				<?php
 				printf(
 					/* translators: %s: Number of issues */
-				__( '%s of your cache types don’t meet the recommended expiry period of 8 days.', 'wphb' ), absint( $issues ) );
+				__( '%s of your cache types don’t meet the recommended expiry period of 8+ days. Configure browser caching <a href="#" id="configure-link">here</a>.', 'wphb' ), absint( $issues ) );
 				?>
 			</p>
 		</div>
 	<?php else : ?>
 		<div class="wphb-notice wphb-notice-success">
-			<p><?php esc_html_e( 'All of your cache types meet the recommended expiry period of 8 days. Great work!', 'wphb' ); ?></p>
+			<p><?php esc_html_e( 'All of your cache types meet the recommended expiry period of 8+ days. Great work!', 'wphb' ); ?></p>
 		</div>
 	<?php endif; ?>
 

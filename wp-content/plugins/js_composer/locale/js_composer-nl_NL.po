@@ -12046,7 +12046,7 @@ msgstr "Uitgelicht"
 #~ "ly/vcomposer\" target=\"_blank\">Download version <b>%s</b></a>."
 #~ msgstr ""
 #~ "Er is een recentere versie van Visual Composter beschikbaar. <a href="
-#~ "\"http://bit.ly/vcomposer\" target=\"_blank\">Download versie <b>%s</b></"
+#~ "\"http://go.wpbakery.com/wpb-buy\" target=\"_blank\">Download versie <b>%s</b></"
 #~ "a>."
 
 # @ js_composer

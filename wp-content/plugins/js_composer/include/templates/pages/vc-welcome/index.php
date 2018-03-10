@@ -25,7 +25,7 @@ preg_match( '/^(\d+)(\.\d+)?/', WPB_VC_VERSION, $matches );
 		<a href="https://twitter.com/share" class="twitter-share-button"
 			data-via="wpbakery"
 			data-text="Take full control over your #WordPress site with WPBakery Page Builder page builder"
-			data-url="http://vc.wpbakery.com" data-size="large">Tweet</a>
+			data-url="http://wpbakery.com" data-size="large">Tweet</a>
 		<script>! function ( d, s, id ) {
 				var js, fjs = d.getElementsByTagName( s )[ 0 ], p = /^http:/.test( d.location ) ? 'http' : 'https';
 				if ( ! d.getElementById( id ) ) {

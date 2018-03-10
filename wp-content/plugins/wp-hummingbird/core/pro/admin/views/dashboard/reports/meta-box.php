@@ -8,7 +8,7 @@
 
 		<div class="row">
 			<div class="col-half">
-				<a href="<?php echo wphb_get_admin_menu_url( 'performance' ); ?>">
+				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ); ?>">
 					<div class="report-status">
 						<i class="hb-icon-performancetest"></i>
 						<strong><?php _e( 'Performance Test', 'wphb' ); ?></strong>
@@ -22,7 +22,7 @@
 			</div>
 			<!--
 			<div class="col-half">
-				<a href="<?php echo wphb_get_admin_menu_url( 'uptime' ); ?>">
+				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ); ?>">
 					<div class="report-status <?php echo ( ! $uptime_is_active ) ? 'with-corner grey' : ''; ?>">
 						<i class="hb-icon-smush"></i>
 						<strong><?php _e( 'Uptime Report', 'wphb' ); ?></strong>

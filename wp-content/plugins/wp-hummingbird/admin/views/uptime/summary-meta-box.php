@@ -22,7 +22,7 @@
 		<span class="not-present">
 			<?php
 			if ( $uptime_stats && ! is_wp_error( $uptime_stats ) ) :
-				if ( 0 === round( $uptime_stats->availability, 1 ) ) :
+				if ( 0 === round( $uptime_stats->availability, 1 ) || null === $uptime_stats->response_time ) :
 					echo esc_html( '100%' );
 				else :
 					echo esc_html( round( $uptime_stats->availability, 1 ) ) . '%';

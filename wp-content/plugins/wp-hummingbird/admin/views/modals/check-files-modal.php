@@ -26,7 +26,11 @@
 			</div><!-- end wphb-scan-progress -->
 		</div><!-- end wphb-block-test -->
 
-		<?php if ( ! is_multisite() && wphb_is_member() && ! wphb_get_cdn_status() ) : ?>
+		<?php
+		/* @var WP_Hummingbird_Module_Minify $minify */
+		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+
+		if ( ! is_multisite() && WP_Hummingbird_Utils::is_member() && ! $minify->get_cdn_status() ) : ?>
 			<form method="post" class="wphb-cdn-block wphb-notice-box" id="enable-cdn-form">
 				<div>
 					<span class="toggle">
@@ -39,7 +43,7 @@
 					<?php esc_html_e( 'By default your files are hosted on your own server. With this pro setting enabled we will host your files on WPMU DEV’s secure and hyper fast CDN.', 'wphb' ); ?>
 				</p>
 			</form>
-		<?php else : ?>
+		<?php elseif ( ! is_multisite() || $minify->get_cdn_status() ) : ?>
 			<input type="hidden" class="toggle-checkbox" name="enable_cdn" id="enable_cdn" checked="checked">
 		<?php endif; ?>
 

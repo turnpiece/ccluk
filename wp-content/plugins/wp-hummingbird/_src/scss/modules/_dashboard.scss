@@ -44,13 +44,17 @@
 .wpmud section[class^="box-dashboard-caching-page"] .box-title:before {
     content: '\e914';
 }
+.wpmud section[class^="box-dashboard-advanced-tools"] .box-title:before {
+    content: '\5a';
+}
 
 /* Dashboard background images */
 .wpmud .box-dashboard-reports-no-membership,
 .wpmud .box-dashboard-uptime-no-membership,
 .wpmud .box-dashboard-smush-no-membership .box-content,
 .wpmud .box-dashboard-browser-caching-module .box-content,
-.wpmud .box-reporting-summary .wphb-reporting-no-membership {
+.wpmud .box-reporting-summary .wphb-reporting-no-membership,
+.wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
     background: #fff no-repeat 30px 100%;
     padding-bottom: 30px !important;
 }
@@ -76,6 +80,10 @@
 .wpmud .box-reporting-summary .wphb-reporting-no-membership {
     background-image: url("#{$image--path}/hummingbird-upsell-minify.png");
     background-size: 118px 126px;
+}
+.wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
+    background-image: url("#{$image--path}/hb-graphic-db-upsell@1x.png");
+    background-size: 100px 126px;
 }
 
 .wpmud .box-dashboard-browser-caching-module .box-content.no-background-image {
@@ -104,6 +112,9 @@ only screen and (min-resolution: 2dppx) {
     }
     .wpmud .box-reporting-summary .wphb-reporting-no-membership {
         background-image: url("#{$image--path}/hummingbird-upsell-minify@2x.png");
+    }
+    .wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
+        background-image: url("#{$image--path}/hb-graphic-db-upsell@2x.png");
     }
 }
 
@@ -278,7 +289,7 @@ only screen and (min-resolution: 2dppx) {
     margin-right: 8px;
 }
 
-/* Dashboard: Minification */
+/* Dashboard: Asset Optimization */
 .wpmud .box-dashboard-welcome .dev-list > li:last-child .list-detail,
 .wpmud .box-dashboard-uptime .wphb-dash-table-row > div:last-child,
 .wpmud .box-dashboard-minification-module .wphb-dash-table-row > div:last-child {
@@ -410,6 +421,23 @@ only screen and (min-resolution: 2dppx) {
 .wpmud .wrap-wp-hummingbird .report-status.with-corner.grey:before {
     border-right-color: #E6E6E6;
     border-top-color: #E6E6E6;
+}
+
+/* Dashboard Advanced Tools */
+.wpmud .box-dashboard-advanced-tools .wphb-dash-table {
+    span {
+        color: #888;
+        font-size: 13px;
+        vertical-align: top;
+    }
+
+    span.no-issues:before {
+        font-family: $font--icons;
+        font-size: 16px;
+        margin-right: 5px;
+        color: #1abc9c;
+        content: "\E903";
+    }
 }
 
 /* Up-sell meta boxes in the footer */

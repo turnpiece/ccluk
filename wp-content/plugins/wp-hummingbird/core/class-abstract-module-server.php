@@ -94,6 +94,91 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	}
 
 	/**
+	 * Return the server type (Apache, NGINX...)
+	 *
+	 * @return string Server type
+	 */
+	public static function get_server_type() {
+		global $is_apache, $is_IIS, $is_iis7, $is_nginx;
+
+		$type = get_site_option( 'wphb-server-type' );
+		$user_type = get_user_meta( get_current_user_id(), 'wphb-server-type', true );
+		if ( $user_type ) {
+			$type = $user_type;
+		}
+
+		if ( ! $type ) {
+			$type = '';
+
+			if ( $is_apache ) {
+				// It's a common configuration to use nginx in front of Apache.
+				// Let's make sure that this server is Apache
+				$response = wp_remote_get( home_url() );
+
+				if ( is_wp_error( $response ) ) {
+					// Bad luck
+					$type = 'apache';
+				} else {
+					$server = strtolower( wp_remote_retrieve_header( $response, 'server' ) );
+					// Could be LiteSpeed too
+					$type = strpos( $server, 'nginx' ) !== false ? 'nginx' : 'apache';
+					update_site_option( 'wphb-server-type', $type );
+				}
+			} elseif ( $is_nginx ) {
+				$type = 'nginx';
+				update_site_option( 'wphb-server-type', $type );
+			} elseif ( $is_IIS ) {
+				$type = 'IIS';
+				update_site_option( 'wphb-server-type', $type );
+			} elseif ( $is_iis7 ) {
+				$type = 'IIS 7';
+				update_site_option( 'wphb-server-type', $type );
+			}
+		}
+
+		return apply_filters( 'wphb_get_server_type', $type );
+	}
+
+	/**
+	 * Get a list of server types
+	 *
+	 * @return array
+	 */
+	public static function get_servers() {
+		return array(
+			'apache'     => 'Apache',
+			'LiteSpeed'  => 'LiteSpeed',
+			'nginx'      => 'NGINX',
+			'iis'        => 'IIS',
+			'iis-7'      => 'IIS 7',
+			'cloudflare' => 'Cloudflare',
+		);
+	}
+
+	/**
+	 * Get code snippet for a module and server type
+	 *
+	 * @param string $module Module name.
+	 * @param string $server_type Server type (nginx, apache...).
+	 * @param array  $expiry_times Type expiry times (javascript, css...).
+	 *
+	 * @return string Code snippet
+	 */
+	public static function get_code_snippet( $module, $server_type = '', $expiry_times = array() ) {
+		/** @var WP_Hummingbird_Module_Server $module */
+		$module = WP_Hummingbird_Utils::get_module( $module );
+		if ( ! $module ) {
+			return '';
+		}
+
+		if ( ! $server_type ) {
+			$server_type = self::get_server_type();
+		}
+
+		return apply_filters( 'wphb_code_snippet', $module->get_server_code_snippet( $server_type, $expiry_times ), $server_type, $module );
+	}
+
+	/**
 	 * Check if .htaccess is writable.
 	 *
 	 * @return bool
@@ -143,7 +228,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 		$htaccess_file = get_home_path() . '.htaccess';
 
 		if ( self::is_htaccess_writable() ) {
-			$code = wphb_get_code_snippet( $module, 'apache' );
+			$code = self::get_code_snippet( $module, 'apache' );
 			$code = explode( "\n", $code );
 			return insert_with_markers( $htaccess_file, 'WP-HUMMINGBIRD-' . strtoupper( $module ), $code );
 		}

@@ -39,7 +39,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.7.0
 	 */
 	public function on_load() {
-		if ( ! current_user_can( wphb_get_admin_capability() ) ) {
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
 			return;
 		}
 
@@ -58,7 +58,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 				// Clear saved status.
 				/* @var WP_Hummingbird_Module_GZip $gzip_module */
-				$gzip_module = wphb_get_module( 'gzip' );
+				$gzip_module = WP_Hummingbird_Utils::get_module( 'gzip' );
 				$gzip_module->clear_cache();
 			} else {
 				$redirect_to = remove_query_arg( array( 'run', 'enable', 'disable' ) );
@@ -77,7 +77,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 				// Clear saved status.
 				/* @var WP_Hummingbird_Module_GZip $gzip_module */
-				$gzip_module = wphb_get_module( 'gzip' );
+				$gzip_module = WP_Hummingbird_Utils::get_module( 'gzip' );
 				$gzip_module->clear_cache();
 			} else {
 				$redirect_to = remove_query_arg( array( 'run', 'enable', 'disable' ) );
@@ -89,7 +89,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 
 		if ( isset( $_GET['run'] ) ) {
 			// Force a refresh of the data.
-			wphb_get_status_from_api( 'gzip' );
+			WP_Hummingbird_Utils::get_status( 'gzip', true );
 			$redirect = true;
 		}
 
@@ -132,8 +132,8 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 * Render content for display.
 	 */
 	protected function render_inner_content() {
-		$server_name = wphb_get_server_type();
-		$server_type = array_search( $server_name, wphb_get_servers(), true );
+		$server_name = WP_Hummingbird_Module_Server::get_server_type();
+		$server_type = array_search( $server_name, WP_Hummingbird_Module_Server::get_servers(), true );
 		$this->view( $this->slug . '-page', array(
 			'server_type' => $server_type,
 			'server_name' => $server_name,
@@ -144,7 +144,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 * Render gzip summary metabox.
 	 */
 	public function gzip_summary_metabox() {
-		$status = wphb_get_gzip_status();
+		$status = WP_Hummingbird_Utils::get_status( 'gzip' );
 
 		$external_problem = false;
 		if ( $this->htaccess_written ) {
@@ -153,7 +153,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 				$external_problem = true;
 			}
 		}
-		$inactive_types = wphb_get_number_of_issues( 'gzip' );
+		$inactive_types = WP_Hummingbird_Utils::get_number_of_issues( 'gzip' );
 
 		$this->view( 'gzip/summary-meta-box', array(
 			'status'           => $status,
@@ -168,8 +168,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	public function gzip_summary_metabox_header() {
 		$recheck_url = add_query_arg( 'run', 'true' );
 		$recheck_url = remove_query_arg( 'htaccess-error', $recheck_url );
-		$status = wphb_get_gzip_status();
-		$full_enabled = array_sum( $status ) === 3;
+		$full_enabled = array_sum( WP_Hummingbird_Utils::get_status( 'gzip' ) ) === 3;
 		$this->view( 'gzip/summary-meta-box-header', array(
 			'recheck_url'  => $recheck_url,
 			'title'        => __( 'Summary', 'wphb' ),
@@ -183,7 +182,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 * @return bool
 	 */
 	private function _gzip_already_activated_in_server() {
-		$status = wphb_get_gzip_status();
+		$status = WP_Hummingbird_Utils::get_status( 'gzip' );
 		if ( ! is_array( $status ) ) {
 			$status = array();
 		}
@@ -210,14 +209,14 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			'run'     => 'true',
 			'disable' => 'true',
 		));
-		$status = wphb_get_gzip_status();
+		$status = WP_Hummingbird_Utils::get_status( 'gzip' );
 		$full_enabled = array_sum( $status ) === 3;
 		$snippets = array(
-			'apache'    => wphb_get_code_snippet( 'gzip', 'apache' ),
-			'litespeed' => wphb_get_code_snippet( 'gzip', 'LiteSpeed' ),
-			'nginx'     => wphb_get_code_snippet( 'gzip', 'nginx' ),
-			'iis'       => wphb_get_code_snippet( 'gzip', 'iis' ),
-			'iis-7'     => wphb_get_code_snippet( 'gzip', 'iis-7' ),
+			'apache'    => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'apache' ),
+			'litespeed' => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'LiteSpeed' ),
+			'nginx'     => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'nginx' ),
+			'iis'       => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis' ),
+			'iis-7'     => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis-7' ),
 		);
 		$htaccess_error = false;
 		if ( isset( $_GET['htaccess-error'] ) ) {
@@ -233,7 +232,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			'enable_link'         => $enable_link,
 			'disable_link'        => $disable_link,
 			'show_enable_button'  => $show_enable_button,
-			'gzip_server_type'    => wphb_get_server_type(),
+			'gzip_server_type'    => WP_Hummingbird_Module_Server::get_server_type(),
 			'full_enabled'        => $full_enabled,
 			'recheck_url'         => $recheck_url,
 			'htaccess_error'      => $htaccess_error,

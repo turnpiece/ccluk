@@ -1,8 +1,35 @@
 Plugin Name: Hummingbird Pro
 Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
-Tested up to: 4.9.1
+Tested up to: 4.9.4
 
 Change Log:
+
+= 1.8.0.2 ( 2018-03-08 ) =
+- Fix: Cached with Hummingbird comment shows on top of the page
+
+= 1.8.0.1 ( 2018-03-07 ) =
+- Fix: Missing share-ui library
+
+= 1.8.0 ( 2018-03-07 ) =
+- New: Advanced tools
+- New: Option to remove query strings from static resources
+- New: Option to remove Emoji
+- New: Option to add critical CSS
+- New: Link to Hummingbird docs on the plugin page
+- New: Page caching module can now cache 404 pages
+- New: RSS feed cache options
+- New: Clear cache button on specific pages/posts
+- New: Database cleanup module
+- New: Prefetch DNS
+- New: Option to ignore performance reports
+- Enhance: Refactored plugin code to reduce number of errors and collisions with third party plugins
+- Enhance: Add links to docs on the plugin page
+- Enhance: Minification renamed to Asset Optimization
+- Enhance: Minification logs are now stored in wphb-logs instead of wphb-cache folder
+- Fix: CDN being enabled from minification scans on subsites in multinetwork installs
+- Fix: Default page caching exclusion rules regex syntax error
+- Fix: Clear cache notice clearing minification settings
+- Fix: Gzip not activating on Apache even if mod_deflate is installed on host
 
 = 1.7.2 ( 2018-02-06 ) =
 - New: Minification logging
@@ -305,4 +332,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1518896094-au
+87274-1520710395-au

@@ -18,11 +18,14 @@ import Fetcher from './utils/fetcher';
                     .then( () => {
                         // If disabled, uncheck CDN checkbox and disable it.
                         const CDNcheckbox = $('input[name="use_cdn"]');
+                        const CDNtooltip  = $('span[id="cdn_tooltip"]');
                         if ( 'false' === value ) {
                             CDNcheckbox.prop( 'checked', false );
                             CDNcheckbox.prop( 'disabled', true );
+                            CDNtooltip.attr( 'tooltip', $('input[id="cdn_disabled_tooltip"]').val() );
                         } else {
                             CDNcheckbox.prop( 'disabled', false );
+                            CDNtooltip.attr( 'tooltip', $('input[id="cdn_enabled_tooltip"]').val() );
                         }
                         self.showNotice();
                     });
@@ -33,6 +36,14 @@ import Fetcher from './utils/fetcher';
                 Fetcher.minification.toggleCDN( value )
                     .then( () => {
                         self.showNotice();
+                    });
+            });
+
+            $('#admins_disable_caching').change( function() {
+                const value = $(this).is(':checked');
+                Fetcher.caching.toggleSubsitePageCaching( value )
+                    .then( () => {
+                        self.showFixedNotice();
                     });
             });
 
@@ -58,6 +69,17 @@ import Fetcher from './utils/fetcher';
          */
         showNotice: function () {
             const notice = $('#wphb-notice-minification-settings-updated');
+            notice.slideDown();
+            setTimeout( function() {
+                notice.slideUp();
+            }, 5000 );
+        },
+
+        /**
+         * Fixed notice on settings update.
+         */
+        showFixedNotice: function () {
+            const notice = $('#wphb-notice-settings-updated');
             notice.slideDown();
             setTimeout( function() {
                 notice.slideUp();

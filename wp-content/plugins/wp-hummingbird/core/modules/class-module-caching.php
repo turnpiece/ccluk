@@ -85,7 +85,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 		// If tests fail for some reason, we fallback to an API check.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
-			$api = wphb_get_api();
+			$api = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_cache();
 			$api_results = get_object_vars( $api_results );
 
@@ -127,18 +127,18 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	 */
 	public function get_nginx_code( $expiry_times = array() ) {
 		if ( empty( $expiry_times ) ) {
-			$options = wphb_get_settings();
+			$options = $this->get_options();
 		} else {
 			$options = $expiry_times;
 		}
 
-		$assets_expiration = explode( '/', $options['caching_expiry_javascript'] );
+		$assets_expiration = explode( '/', $options['expiry_javascript'] );
 		$assets_expiration = $assets_expiration[0];
-		$css_expiration = explode( '/', $options['caching_expiry_css'] );
-		$css_expiration = $css_expiration[0];
-		$media_expiration = explode( '/', $options['caching_expiry_media'] );
+		$css_expiration    = explode( '/', $options['expiry_css'] );
+		$css_expiration    = $css_expiration[0];
+		$media_expiration  = explode( '/', $options['expiry_media'] );
 		$media_expiration  = $media_expiration [0];
-		$images_expiration = explode( '/', $options['caching_expiry_images'] );
+		$images_expiration = explode( '/', $options['expiry_images'] );
 		$images_expiration = $images_expiration[0];
 
 		$code = '
@@ -174,20 +174,19 @@ location ~* \.(jpg|jpeg|png|gif|swf|webp)$ {
 	 * @return string
 	 */
 	public function get_apache_code( $expiry_times = array() ) {
-
 		if ( empty( $expiry_times ) ) {
-			$options = wphb_get_settings();
+			$options = $this->get_options();
 		} else {
 			$options = $expiry_times;
 		}
 
-		$assets_expiration = explode( '/', $options['caching_expiry_javascript'] );
+		$assets_expiration = explode( '/', $options['expiry_javascript'] );
 		$assets_expiration = $assets_expiration[1];
-		$css_expiration = explode( '/', $options['caching_expiry_css'] );
-		$css_expiration = $css_expiration[1];
-		$media_expiration = explode( '/', $options['caching_expiry_media'] );
+		$css_expiration    = explode( '/', $options['expiry_css'] );
+		$css_expiration    = $css_expiration[1];
+		$media_expiration  = explode( '/', $options['expiry_media'] );
 		$media_expiration  = $media_expiration [1];
-		$images_expiration = explode( '/', $options['caching_expiry_images'] );
+		$images_expiration = explode( '/', $options['expiry_images'] );
 		$images_expiration = $images_expiration[1];
 
 		$code = '

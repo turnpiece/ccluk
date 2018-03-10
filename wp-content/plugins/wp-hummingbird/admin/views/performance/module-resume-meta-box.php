@@ -14,7 +14,7 @@
 				$error_class = ( 'aplus' === $last_report->score_class || 'a' === $last_report->score_class || 'b' === $last_report->score_class ) ? 'tick' : 'warning';
 				echo $last_report->score . "<i class='hb-wpmudev-icon-{$error_class}'></i><span class='score-span'>/100</span>";
 			} elseif ( $report_dismissed ) {
-				echo $last_report->score . '<span class="tooltip" tooltip="' . esc_attr( __( 'You have ignored your current performance test score', 'wphb' ) ) . '"><i class="hb-wpmudev-icon-info"></i><span class="score-span">/100</span></span>';
+				echo $last_score . '<span class="tooltip" tooltip="' . esc_attr( __( 'You have ignored your current performance test score', 'wphb' ) ) . '"><i class="hb-wpmudev-icon-info"></i><span class="score-span">/100</span></span>';
 			} else {
 				echo '-';
 			} ?>
