@@ -62,7 +62,6 @@ h3, h4 {
   font-weight: 600; }
 
 #save_as_draft,
-.entry-meta a.read-more,
 .popup-content .button:not(.ed_button),
 input[type=submit] {
   border: none;
@@ -72,6 +71,9 @@ input[type=submit] {
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px; }
+
+.formatted-content {
+  color: rgba(0, 0, 0, 0.6); }
 
 /* Home page */
 .home-page #main {
@@ -218,12 +220,25 @@ input[type=submit] {
 .single .header-area,
 .single-post .header-area {
   position: relative; }
+  .single .header-area .entry-header,
+  .single .header-area .sap-post-meta,
+  .single-post .header-area .entry-header,
+  .single-post .header-area .sap-post-meta {
+    padding-left: 15px;
+    padding-right: 15px; }
+  .single .header-area .sap-post-meta,
+  .single-post .header-area .sap-post-meta {
+    margin-top: 15px; }
+.single .entry-content.entry-summary,
+.single-post .entry-content.entry-summary {
+  padding-left: 15px;
+  padding-right: 15px; }
 .single .entry-post-thumbnail,
 .single-post .entry-post-thumbnail {
   max-height: 425px;
   max-width: 1200px;
-  margin: 20px auto;
-  margin: 2rem auto;
+  margin-left: auto;
+  margin-right: auto;
   background-size: contain; }
 .single .entry-header,
 .single .entry-header.has-image,
@@ -242,17 +257,63 @@ input[type=submit] {
   .single-post .entry-header h1,
   .single-post .entry-header.has-image h1,
   .single-post .entry-header.not-image h1 {
-    color: #22a7f0;
+    color: #000;
     text-shadow: none;
-    padding: 10px 0px;
-    padding: 1rem 0rem;
-    line-height: 1.6;
+    padding: 5px 0px;
+    padding: 0.5rem 0rem;
+    line-height: 1.4;
     max-height: auto;
     text-align: left; }
-.single.single-ccluk_news .entry-meta.posted-on,
-.single-post.single-ccluk_news .entry-meta.posted-on {
-  margin: 10px 0px;
-  margin: 1rem 0rem; }
+  .single .entry-header .post-author-info,
+  .single .entry-header.has-image .post-author-info,
+  .single .entry-header.not-image .post-author-info,
+  .single-post .entry-header .post-author-info,
+  .single-post .entry-header.has-image .post-author-info,
+  .single-post .entry-header.not-image .post-author-info {
+    border-top: none; }
+    .single .entry-header .post-author-info .details,
+    .single .entry-header.has-image .post-author-info .details,
+    .single .entry-header.not-image .post-author-info .details,
+    .single-post .entry-header .post-author-info .details,
+    .single-post .entry-header.has-image .post-author-info .details,
+    .single-post .entry-header.not-image .post-author-info .details {
+      padding-top: 20px; }
+    .single .entry-header .post-author-info .authors-avatar,
+    .single .entry-header.has-image .post-author-info .authors-avatar,
+    .single .entry-header.not-image .post-author-info .authors-avatar,
+    .single-post .entry-header .post-author-info .authors-avatar,
+    .single-post .entry-header.has-image .post-author-info .authors-avatar,
+    .single-post .entry-header.not-image .post-author-info .authors-avatar {
+      padding-top: 0; }
+    .single .entry-header .post-author-info .author-follow,
+    .single .entry-header.has-image .post-author-info .author-follow,
+    .single .entry-header.not-image .post-author-info .author-follow,
+    .single-post .entry-header .post-author-info .author-follow,
+    .single-post .entry-header.has-image .post-author-info .author-follow,
+    .single-post .entry-header.not-image .post-author-info .author-follow {
+      top: 20px; }
+    .single .entry-header .post-author-info .entry-meta,
+    .single .entry-header.has-image .post-author-info .entry-meta,
+    .single .entry-header.not-image .post-author-info .entry-meta,
+    .single-post .entry-header .post-author-info .entry-meta,
+    .single-post .entry-header.has-image .post-author-info .entry-meta,
+    .single-post .entry-header.not-image .post-author-info .entry-meta {
+      font-size: 14px;
+      font-size: 1.4rem;
+      padding-top: 10px; }
+    .single .entry-header .post-author-info .entry-meta a,
+    .single .entry-header .post-author-info .author-name a,
+    .single .entry-header.has-image .post-author-info .entry-meta a,
+    .single .entry-header.has-image .post-author-info .author-name a,
+    .single .entry-header.not-image .post-author-info .entry-meta a,
+    .single .entry-header.not-image .post-author-info .author-name a,
+    .single-post .entry-header .post-author-info .entry-meta a,
+    .single-post .entry-header .post-author-info .author-name a,
+    .single-post .entry-header.has-image .post-author-info .entry-meta a,
+    .single-post .entry-header.has-image .post-author-info .author-name a,
+    .single-post .entry-header.not-image .post-author-info .entry-meta a,
+    .single-post .entry-header.not-image .post-author-info .author-name a {
+      color: #54ae68; }
 .single #respond form input[type=text],
 .single #respond form input[type=email],
 .single #respond form textarea,
@@ -300,6 +361,8 @@ body.page #secondary .widget_subpages {
 
 /** Navigation **/
 @media screen and (min-width: 481px) {
+  .main-navigation li a {
+    color: rgba(0, 0, 0, 0.7); }
   .main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
     background-color: #54ae68; }
     .main-navigation .nav-menu > li:hover > a, .main-navigation .nav-menu > li.current-menu-item > a, .main-navigation .nav-menu > li.current-menu-ancestor > a {

@@ -10,7 +10,7 @@
  */
 require get_stylesheet_directory() . '/inc/customizer.php';
 
-define( 'CCLUK_DEBUGGING', true );
+define( 'CCLUK_DEBUGGING', false );
 
 /*
  * Override default home page title
@@ -93,7 +93,6 @@ function boss_generate_option_css() {
 
   $accent_color  = onesocial_get_option( 'accent_color' );
   ?>
-
   <style>
 
     /* Accent color */
@@ -601,4 +600,12 @@ if ( ! function_exists( 'ccluk_get_section_about_data' ) ) {
 
         return $page_ids;
     }
+}
+
+if ( ! function_exists( 'ccluk_posted_on' ) ) {
+
+    function ccluk_posted_on() {
+        printf( '<a href="%1$s" title="%2$s" rel="bookmark" class="entry-date"><time datetime="%3$s">%4$s</time></a>', esc_url( get_permalink() ), esc_attr( get_the_time() ), esc_attr( get_the_date( 'c' ) ), esc_html( get_the_date() ));
+    }
+    
 }

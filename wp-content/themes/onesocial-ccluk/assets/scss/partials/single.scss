@@ -2,12 +2,28 @@
 .single-post {
     .header-area {
         position: relative;
+
+        .entry-header,
+        .sap-post-meta {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+
+        .sap-post-meta {
+            margin-top: 15px;
+        }
     }
     
+    .entry-content.entry-summary {
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
     .entry-post-thumbnail {
         max-height: 425px;
         max-width: 1200px;
-        @include centred-margin(2);
+        margin-left: auto;
+        margin-right: auto;
         background-size: contain;
     }
 
@@ -21,17 +37,37 @@
         max-width: 780px;
 
         h1 {
-            color: $blue;
+            color: $black;
             text-shadow: none;
-            @include padding(1, 0);
-            line-height: 1.6;
+            @include padding(.5, 0);
+            line-height: 1.4;
             max-height: auto;  
             text-align: left;   
         }
-    }
 
-    &.single-ccluk_news .entry-meta.posted-on {
-    	@include margin(1, 0);
+        .post-author-info {
+            border-top: none;
+
+            .details {
+                padding-top: 20px;
+            }
+            .authors-avatar {
+                padding-top: 0;
+            }
+            .author-follow {
+                top: 20px;
+            }
+            .entry-meta {
+                @include font-size(1.4); 
+                padding-top: 10px;
+            }
+            .entry-meta,
+            .author-name {
+                a {
+                    color: $green;
+                }
+            }
+        }
     }
 
     #respond {

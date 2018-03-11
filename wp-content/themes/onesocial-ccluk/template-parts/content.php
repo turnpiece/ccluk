@@ -37,7 +37,7 @@
 
 			<?php } ?>
 
-			<div class="profile-visible"><?php echo get_the_date( 'M j' ); ?></div>
+			<div class="profile-visible"><?php the_date(); ?></div>
 
 			<!-- Title -->
 			<header class="entry-header<?php echo $header_class; ?>">
@@ -96,7 +96,6 @@
 		<!-- all other templates -->
 	<?php else : ?>
 		<div class="entry-main">
-
 			<div class="entry-content">
 				<?php the_content( __( 'Continue reading <span class="meta-nav">&rarr;</span>', 'onesocial' ) ); ?>
 				<?php wp_link_pages( array( 'before' => '<div class="page-links">' . __( 'Pages:', 'onesocial' ), 'after' => '</div>' ) ); ?>

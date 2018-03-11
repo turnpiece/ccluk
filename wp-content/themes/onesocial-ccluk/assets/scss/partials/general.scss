@@ -68,7 +68,6 @@ h3, h4 {
 }
 
 #save_as_draft, 
-.entry-meta a.read-more, 
 .popup-content .button:not(.ed_button), 
 input[type=submit] {
     border: none;
@@ -76,4 +75,8 @@ input[type=submit] {
     background-color: $green;
     color: $white;
     @include border-radius(3px);
+}
+
+.formatted-content {
+    color: rgba(0, 0, 0, 0.6);
 }
