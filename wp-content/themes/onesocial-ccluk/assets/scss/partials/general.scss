@@ -46,7 +46,7 @@ h3, h4 {
 .widget-area .widget p, 
 .widget-area .widget li, 
 .widget-area .widget .textwidget {
-    @include font-size(1.8);
+    font-size: 18px;
 }
 
 .archive {
