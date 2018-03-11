@@ -409,7 +409,7 @@ function boss_generate_option_css() {
     }
 
     /* Heading Text color */
-    h1, h2, h3, h4, h5, h6, .entry-header .entry-title a {
+    h1, h2, h3, h4, h5, h6, .entry-header .entry-title {
       color: <?php echo onesocial_get_option( 'heading_text_color' ); ?>;
     }
 

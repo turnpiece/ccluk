@@ -56,10 +56,12 @@ h3, h4 {
   .archive #content > .archive-header h1 {
     color: #54ae68; }
 
-.entry-title {
+.entry-header .entry-title {
   margin-top: 10px;
   margin-top: 1rem;
   font-weight: 600; }
+  .entry-header .entry-title a {
+    color: #22a7f0; }
 
 #save_as_draft,
 .popup-content .button:not(.ed_button),
