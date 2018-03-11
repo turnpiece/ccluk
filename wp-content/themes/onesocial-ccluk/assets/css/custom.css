@@ -285,7 +285,7 @@ input[type=submit] {
     .single-post .entry-header .post-author-info .authors-avatar,
     .single-post .entry-header.has-image .post-author-info .authors-avatar,
     .single-post .entry-header.not-image .post-author-info .authors-avatar {
-      padding-top: 0; }
+      padding: 0; }
     .single .entry-header .post-author-info .author-follow,
     .single .entry-header.has-image .post-author-info .author-follow,
     .single .entry-header.not-image .post-author-info .author-follow,
