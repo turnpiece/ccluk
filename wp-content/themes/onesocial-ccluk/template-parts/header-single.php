@@ -49,7 +49,7 @@
 
 					<div class="details table-cell">
 						<?php
-						printf( '<span class="author-name vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), get_the_author()
+						printf( '<span class="author-name vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), $author_name
 						);
 
 						if ( buddyboss_is_bp_active() ):
