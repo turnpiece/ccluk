@@ -24,7 +24,55 @@
 	<!-- Title -->
 	<header class="entry-header<?php echo $header_class; ?>">
 		<h1 class="entry-title"><?php the_title(); ?><?php if(function_exists('sap_edit_post_link')) sap_edit_post_link(); ?></h1>
-		<div class="profile-visible"><?php the_date(); ?></div>
+
+		<?php if (is_singular( array( 'post', 'ccluk_news' ) ) ) : ?>
+		<div class="post-author-info">
+			<div class="container">
+				<div class="inner">
+					<?php
+					$author_id = $post->post_author;
+
+					$author_name = get_the_author_meta( 'display_name', $author_id );
+
+					$user_link = get_author_posts_url( $author_id );
+
+					if ( function_exists( 'bp_core_get_userlink' ) && !function_exists( 'buddyboss_sap' ) ) {
+						$user_link = bp_core_get_userlink( $author_id, false, true );
+					}
+
+					if ( function_exists( 'bp_core_get_userlink' ) && function_exists( 'buddyboss_sap' ) ) {
+						$user_link = bp_core_get_userlink( $author_id, false, true ) . 'blog';
+					}
+
+					printf( '<span class="authors-avatar vcard table-cell"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), get_avatar( $author_id, 85, '', $author_name ) );
+					?>
+
+					<div class="details table-cell">
+						<?php
+						printf( '<span class="author-name vcard"><a class="url fn n" href="%1$s" title="%2$s" rel="author">%3$s</a></span>', $user_link, esc_attr( sprintf( __( 'View all posts by %s', 'onesocial' ), $author_name ) ), $author_name
+						);
+
+						if ( buddyboss_is_bp_active() ):
+							$bio_field = onesocial_get_option( 'boss_bio_field' );
+							if ( $bio_field ) {
+								$bio = bp_get_profile_field_data( array( 'field' => $bio_field, 'user_id' => $author_id ) );
+								if ( $bio ) {
+									?>
+									<div class="author-bio"><?php echo onesocial_custom_excerpt( $bio, 15 ); ?></div>
+									<?php
+								}
+							}
+						endif;
+
+						echo '<div class="entry-meta">';
+						ccluk_posted_on();
+						echo '</div>';
+					?>
+					</div><!--.details-->
+				</div>
+			</div>
+		</div><!--.post-author-info-->
+		<?php endif; ?>
 	</header>
 
 	<?php if (isset($image)) echo $image; ?>
