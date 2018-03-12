@@ -21,10 +21,10 @@
         max-width: 780px;
 
         h1 {
-            color: $blue;
+            color: $black;
             text-shadow: none;
             @include padding(1, 0);
-            line-height: 1.6;
+            line-height: 1.3;
             max-height: auto;  
             text-align: left;   
         }
