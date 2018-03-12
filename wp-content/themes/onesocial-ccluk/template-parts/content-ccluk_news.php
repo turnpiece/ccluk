@@ -37,7 +37,7 @@
 
 			<?php } ?>
 
-			<div class="profile-visible"><?php echo get_the_date( 'M j' ); ?></div>
+			<div class="profile-visible"><?php the_date(); ?></div>
 
 			<!-- Title -->
 			<header class="entry-header<?php echo $header_class; ?>">

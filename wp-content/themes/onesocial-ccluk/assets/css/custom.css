@@ -49,11 +49,55 @@ h3, h4 {
 .widget-area .widget .textwidget {
   font-size: 18px; }
 
-.archive #content > .archive-header {
-  margin: 24px 0px;
-  margin: 2.4rem 0rem; }
-  .archive #content > .archive-header h1 {
-    color: #54ae68; }
+.dir-header {
+  border-bottom: 1px solid #54ae68; }
+
+.archive.post-type-archive .site-content {
+  max-width: 780px; }
+
+.archive #content > .archive-header h1,
+.blog #content > .archive-header h1 {
+  color: #54ae68; }
+.archive #main,
+.blog #main {
+  max-width: 100%;
+  display: block; }
+  .archive #main article,
+  .blog #main article {
+    padding-top: 0 !important; }
+  .archive #main .post-author,
+  .blog #main .post-author {
+    -webkit-box-ordinal-group: 1;
+    -webkit-order: 0;
+    -ms-flex-order: 0;
+    order: 0;
+    width: 165px;
+    float: left;
+    position: relative;
+    z-index: 1;
+    padding-right: 20px;
+    padding-bottom: 10px; }
+    .archive #main .post-author .author,
+    .blog #main .post-author .author {
+      display: inline-block;
+      width: 84px;
+      position: relative; }
+      .archive #main .post-author .author img,
+      .blog #main .post-author .author img {
+        width: 50px;
+        height: 50px;
+        margin-right: 23px;
+        vertical-align: bottom;
+        margin-bottom: 20px; }
+    .archive #main .post-author .author-details .author-middle,
+    .blog #main .post-author .author-details .author-middle {
+      display: none; }
+    .archive #main .post-author .author-follow,
+    .blog #main .post-author .author-follow {
+      display: none; }
+    .archive #main .post-author .entry-date time,
+    .blog #main .post-author .entry-date time {
+      border-bottom: none; }
 
 .entry-header .entry-title {
   margin-top: 10px;
@@ -75,6 +119,10 @@ input[type=submit] {
 
 .formatted-content {
   color: rgba(0, 0, 0, 0.6); }
+
+.post-author .load-more-posts,
+.trigger-sidebar {
+  display: none; }
 
 /* Home page */
 .home-page #main {
@@ -129,6 +177,9 @@ input[type=submit] {
         font-size: 24px;
         color: #fff;
         text-transform: uppercase; }
+    .home-page #main .section .section-footer {
+      text-align: center;
+      margin: 0 auto; }
     .home-page #main .section.about .section-content {
       text-align: center;
       align-content: center; }
@@ -332,9 +383,11 @@ input[type=submit] {
 
 /* styles for pages */
 body.page article > .entry-header {
-  margin: 24px 0; }
+  margin: 24px 0 60px;
+  border-bottom: 1px solid #54ae68; }
   body.page article > .entry-header .entry-title {
-    color: #22a7f0; }
+    font-size: 70px;
+    color: #54ae68; }
 body.page #secondary,
 body.page .default-page + #secondary, body.page.page-template #secondary {
   padding-top: 50px; }

@@ -4,10 +4,12 @@ body.page {
 
 	article {
 		> .entry-header {
-			margin: 24px 0;
+			margin: 24px 0 60px;
+			border-bottom: 1px solid $green;
 
 			.entry-title {
-				color: $blue;
+				font-size: 70px;
+				color: $green;
 			}
 		}
 	}
