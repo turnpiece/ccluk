@@ -309,7 +309,10 @@ function subscribeFromBatch() {
 	}).then(function (response) {
 		usersProcessed++;
 		response.success ? logger.success(response.message) : logger.error(response.message);
-	}, logger.error).then(updateProgress).then(subscribeFromBatch);
+	}, function (e) {
+		usersProcessed++;
+		logger.error(e);
+	}).then(updateProgress).then(subscribeFromBatch);
 }
 
 // calculate new progress & update progress bar.

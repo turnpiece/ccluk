@@ -990,7 +990,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	 */
 	private static function send_file( $wphb_cache_file ) {
 		// If this is php file (caching for logged-in users - remove die();
-		if ( preg_match( '/\.php$/', basename( $wphb_cache_file ) ) ) {
+		if ( preg_match( '/\.php/', basename( $wphb_cache_file ) ) ) {
 			$content = file_get_contents( $wphb_cache_file );
 			/* Remove <?php die(); ?> from file */
 			if ( 0 === strpos( $content, '<?php die(); ?>' ) ) {

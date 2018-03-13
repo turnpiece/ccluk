@@ -1,6 +1,18 @@
 Changelog
 ===========
 
+### 1.7.1 - March 13, 2018
+
+**Fixes**
+
+- Manual synchronization would not stop running if errors occurred.
+- Fix hooks like `mailchimp_sync_handle_user`.
+
+**Additions**
+
+- Allow users to subscribe/unsubscribe from their WooCommerce account page too.
+
+
 #### 1.7 - February 16, 2018
 
 **Fixes**

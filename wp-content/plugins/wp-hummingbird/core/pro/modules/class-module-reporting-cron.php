@@ -120,9 +120,7 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			return;
 		}
 
-		/* @var WP_Hummingbird_Module_Performance $perf_module */
-		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options = $perf_module->get_options();
+		$options = WP_Hummingbird_Settings::get_settings( 'performance' );
 
 		// Don't do any reports if they are not set in the options.
 		if ( ! $options['reports'] ) {
@@ -134,15 +132,16 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 		// Refresh the report and get the data.
 		WP_Hummingbird_Module_Performance::refresh_report();
 		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-		$dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
 
 		// Time since last report.
 		$time_difference = time() - (int) $last_report->data->time;
 
 		// If no report is present or report is outdated, get new data.
-		if ( ( ! $last_report || $time_difference > 300 || $dismissed ) && $limit < 3 ) {
+		if ( ( ! $last_report || $time_difference > 300 ) && $limit < 3 ) {
 			// First run. Init new report scan.
 			if ( 0 === $limit ) {
+				/* @var WP_Hummingbird_Module_Performance $perf_module */
+				$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
 				$perf_module->init_scan();
 			}
 
@@ -152,7 +151,7 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			wp_schedule_single_event( strtotime( '+1 minutes' ), 'wphb_performance_scan' );
 		} else {
 			// Failed to fetch results in 3 attempts or less, cancel the cron.
-			if ( 3 >= $limit ) {
+			if ( 3 === $limit ) {
 				delete_site_option( 'wphb_cron_limit' );
 			}
 
@@ -168,7 +167,7 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 				WP_Hummingbird_Module_Reporting::send_email_report( $last_report->data, $recipients );
 				// Store the last send time.
 				$options['last_sent'] = time();
-				$perf_module->update_options( $options );
+				WP_Hummingbird_Settings::update_settings( $options, 'performance' );
 				delete_site_option( 'wphb_cron_limit' );
 			}
 
@@ -191,9 +190,7 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			wp_clear_scheduled_hook( 'wphb_performance_scan' );
 		}
 
-		/* @var WP_Hummingbird_Module_Performance $perf_module */
-		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options = $perf_module->get_options();
+		$options = WP_Hummingbird_Settings::get_settings( 'performance' );
 
 		switch ( $options['frequency'] ) {
 			case '1':

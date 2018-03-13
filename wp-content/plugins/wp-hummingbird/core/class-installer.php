@@ -478,6 +478,9 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		 */
 		private static function upgrade_1_8() {
 			$options = get_option( 'wphb_settings' );
+			if ( is_multisite() ) {
+				$options = get_site_option( 'wphb_settings' );
+			}
 
 			// Add cache 404 requests to page caching.
 			$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
@@ -605,7 +608,11 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				$new_settings['performance']['subsite_tests'] = false;
 			}
 
-			update_option( 'wphb_settings', $new_settings );
+			if ( ! is_multisite() ) {
+				update_option( 'wphb_settings', $new_settings );
+			} else {
+				update_site_option( 'wphb_settings', $new_settings );
+			}
 
 			// Delete old options.
 			delete_option( 'wphb-last-sent-report' );

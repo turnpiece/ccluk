@@ -2,14 +2,26 @@
 
 body.page {
 
-	article {
-		> .entry-header {
-			margin: 24px 0 60px;
-			border-bottom: 1px solid $green;
+	#primary {
+		article {
+			> .entry-header {
+				@include margin( 2.4, 0 );
+				border-bottom: 1px solid $green;
 
-			.entry-title {
-				font-size: 70px;
-				color: $green;
+				.entry-title {
+					font-size: 70px;
+					color: $green;
+				}
+
+				a > .entry-title {
+					color: $blue;
+				}
+			}
+
+			&.has-post-thumbnail {
+				> .entry-header {
+					border-bottom: none;
+				}
 			}
 		}
 	}
@@ -17,7 +29,8 @@ body.page {
 	#secondary, 
 	.default-page+#secondary,
 	&.page-template #secondary {
-    	padding-top: 50px;
+    	padding-top: 24px;
+    	padding-top: 2.4rem;
    	}
 
 	#content {
@@ -40,7 +53,7 @@ body.page {
 					font-weight: 600;
 
 					&:hover {
-						color: $blue;
+						color: $green;
 					}
 				}
 

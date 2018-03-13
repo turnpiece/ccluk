@@ -4,6 +4,10 @@ Tested up to: 4.9.4
 
 Change Log:
 
+= 1.8.0.3 ( 2018-03-13 ) =
+- Enhance: Better settings upgrade on multisite installs
+- Fix: Scheduled performance reports stuck on a loop
+
 = 1.8.0.2 ( 2018-03-08 ) =
 - Fix: Cached with Hummingbird comment shows on top of the page
 
@@ -332,4 +336,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1520710395-au
+87274-1520971767-au

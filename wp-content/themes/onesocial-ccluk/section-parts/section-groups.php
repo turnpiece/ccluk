@@ -1,6 +1,7 @@
 <?php // groups
 
-    if (function_exists('bp_has_groups') &&
+    if (is_user_logged_in() &&
+        function_exists('bp_has_groups') &&
         bp_has_groups( array(
         'max' => 3
     ) ) ) : ?>

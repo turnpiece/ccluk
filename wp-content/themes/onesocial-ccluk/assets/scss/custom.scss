@@ -8,10 +8,11 @@ Custom stylesheet.
 @import "partials/variables";
 @import "partials/mixins";
 @import "partials/general";
-@import "partials/home-page";
-@import "partials/single";
-@import "partials/page";
 @import "partials/navigation";
+@import "partials/single";
+//@import "partials/listing";
+@import "partials/page";
+@import "partials/home-page";
 @import "partials/register";
 @import "partials/find-your-mp";
 

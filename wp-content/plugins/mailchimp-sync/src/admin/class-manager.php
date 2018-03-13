@@ -62,12 +62,6 @@ class Manager {
 
 		// for BC with MailChimp for WP < 3.0
 		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_items' ) );
-
-		// only show this if user has settings cap
-		add_action( 'show_user_profile', array( $this, 'user_profile' ), 5 );
-		add_action( 'edit_user_profile', array( $this, 'user_profile' ), 5 );
-		add_action( 'personal_options_update', array( $this, 'process_user_update' ), 20 );
-		add_action( 'edit_user_profile_update', array( $this, 'process_user_update' ), 20 );
 	}
 
 	
@@ -132,58 +126,6 @@ class Manager {
 		$items[] = $item;
 
 		return $items;
-	}
-
-	/**
-	* @param int $user_id
-	*/
-	public function process_user_update( $user_id ) {
-		if ( ! current_user_can( 'edit_user',$user_id ) ) {
-			return;
-		}
-
-		if( empty( $_POST['_mc4wp_sync_lists'] ) ) {
-			return;
-		}
-
-		foreach( $_POST['_mc4wp_sync_lists'] as $list_id => $value ) {
-			$this->users->set_optin_status( $user_id, $value === "1" );
-		}
-	}
-
-	/**
-	 * Show status on User Profile page
-	 */
-	public function user_profile( WP_User $user ) {
-
-		// only show for administrators or if user control is enabled
-		if( $this->options['enable_user_control'] == false ) {
-			return;
-		}
-
-		// do nothing if plugin isn't enabled
-		if( ! $this->users instanceof Users ) {
-			return;
-		}
-
-		// only show if this user matches role criteria
-		if( ! $this->users->should( $user ) ) {
-			return;
-		}
-
-		$opted_in = $this->users->get_optin_status( $user );
-
-		?>
-		<table class="form-table">
-			<tr>
-				<th><?php echo esc_html( $this->options['user_profile_heading_text'] ); ?></th>
-				<td>
-					<input type="hidden" name="_mc4wp_sync_lists[<?php echo $this->options['list']; ?>]" value="0" />
-					<label><input type="checkbox" name="_mc4wp_sync_lists[<?php echo $this->options['list']; ?>]" value="1" <?php checked( $opted_in, true ); ?> /> <?php echo esc_html( $this->options['user_profile_label_text'] ); ?></label>
-				</td>
-			</tr>
-		</table>
-		<?php
 	}
 
 	/**

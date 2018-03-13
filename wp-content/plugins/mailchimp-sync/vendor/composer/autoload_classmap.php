@@ -13,6 +13,7 @@ return array(
     'MC4WP\\Sync\\CLI\\Command' => $baseDir . '/src/cli/class-command.php',
     'MC4WP\\Sync\\Observer' => $baseDir . '/src/class-observer.php',
     'MC4WP\\Sync\\Plugin' => $baseDir . '/src/class-plugin.php',
+    'MC4WP\\Sync\\Profile' => $baseDir . '/src/class-profile.php',
     'MC4WP\\Sync\\Tools' => $baseDir . '/src/class-tools.php',
     'MC4WP\\Sync\\UserHandler' => $baseDir . '/src/class-user-handler.php',
     'MC4WP\\Sync\\UserSubscriber' => $baseDir . '/src/interface-user-subscriber.php',

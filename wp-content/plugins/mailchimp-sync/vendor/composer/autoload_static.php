@@ -18,6 +18,7 @@ class ComposerStaticInitac12fbc37b8877d941c44128ae72b91f
         'MC4WP\\Sync\\CLI\\Command' => __DIR__ . '/../..' . '/src/cli/class-command.php',
         'MC4WP\\Sync\\Observer' => __DIR__ . '/../..' . '/src/class-observer.php',
         'MC4WP\\Sync\\Plugin' => __DIR__ . '/../..' . '/src/class-plugin.php',
+        'MC4WP\\Sync\\Profile' => __DIR__ . '/../..' . '/src/class-profile.php',
         'MC4WP\\Sync\\Tools' => __DIR__ . '/../..' . '/src/class-tools.php',
         'MC4WP\\Sync\\UserHandler' => __DIR__ . '/../..' . '/src/class-user-handler.php',
         'MC4WP\\Sync\\UserSubscriber' => __DIR__ . '/../..' . '/src/interface-user-subscriber.php',

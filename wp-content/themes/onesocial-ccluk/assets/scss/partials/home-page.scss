@@ -1,6 +1,6 @@
 /* Home page */
 
-.home-page {
+body.page-template-homepage {
 
 	#main {
 		display: block;
@@ -31,19 +31,24 @@
 					display: inline-block;
 					text-align: left;
 
-					.entry-header {
+					> .entry-header {
 						display: block;
 						margin: 12px 0;
+
+						> .entry-title {
+							margin-top: 12px;
+							line-height: 1.5;
+							font-size: 22px;
+							color: $green;
+						}
 
 						> a {
 							display: block;
 							margin: 0;
-						}
 
-						.entry-title {
-							margin-top: 12px;
-							line-height: 1.5;
-							font-size: 22px;
+							> .entry-title {
+								color: $blue;
+							}
 						}
 
 						img.wp-post-image {
@@ -160,11 +165,11 @@
 	}
 
 	.homepage-section-title > h4 {
-		background-color: #22a7f0;
+		background-color: $blue;
 		padding: 15px 30px;
 		margin: 10px 30px;
 		font-size: 24px;
-		color: #fff;
+		color: $white;
 		text-transform: uppercase;
 	}
 
@@ -177,7 +182,7 @@
 		display: table;
 		margin: 0 auto;
 		padding: 15px;
-		color: #fff;
+		color: $white;
 		background-color: $blue_bg;
 	}
 
@@ -186,9 +191,9 @@
 	    text-transform: uppercase;
 	    border-radius: 5px;
 	    padding: 14px 30px 13px;
-	    color: #fff;
+	    color: $white;
 	    border: 2px solid;
-	    background-color: #4EAE47;
+	    background-color: $green;
 	    margin-left: 5px;
 	    margin-right: 5px;
 	    display: inline-block;
@@ -212,7 +217,6 @@
 				clear: right;
 				margin-right: 3%;
 			
-
 				> a > img {
 					clear: both;
 				}

@@ -159,34 +159,49 @@ defined( 'ABSPATH' ) or exit;
 						</td>
 					</tr>
 
-					<tr valign="top">
-						<th scope="row"><?php _e( 'Allow users to opt-out?', 'mailchimp-for-wp' ); ?></th>
-						<td class="nowrap">
-							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="1" <?php checked( $this->options['enable_user_control'], 1 ); ?> />
-								<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>
-							</label> &nbsp;
-							<label>
-								<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="0" <?php checked( $this->options['enable_user_control'], 0 ); ?> />
-								<?php _e( 'No', 'mailchimp-for-wp' ); ?>
-							</label>
-							<p class="help"><?php _e( 'Select "yes" if you want to allow your users to opt-out from their profile page.', 'mailchimp-for-wp' ); ?></p>
-						</td>
-					</tr>
+				<tr valign="top">
+					<th scope="row"><?php _e( 'Users must opt-in?', 'mailchimp-for-wp' ); ?></th>
+					<td class="nowrap">
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="1" <?php checked( $this->options['enable_user_control'], 1 ); ?> />
+							<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>
+						</label> &nbsp;
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="0" <?php checked( $this->options['enable_user_control'], 0 ); ?> />
+							<?php _e( 'No', 'mailchimp-for-wp' ); ?>
+						</label>
+						<p class="help"><?php _e( 'Select "yes" if you want to allow users to subscribe or unsubscribe from their profile page.', 'mailchimp-for-wp' ); ?></p>
+					</td>
+				</tr>
 	
 				<?php $config = array( 'element' => 'mailchimp_sync[enable_user_control]', 'value' => 1 ); ?>
+				<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
+					<th scope="row"><?php _e( 'Default opt-in status', 'mailchimp-for-wp' ); ?></th>
+					<td class="nowrap">
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'default_optin_status' ); ?>" value="subscribed" <?php checked( $this->options['default_optin_status'], 'subscribed' ); ?> />
+							<?php _e( 'Subscribed', 'mailchimp-for-wp' ); ?>
+						</label> &nbsp;
+						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'default_optin_status' ); ?>" value="unsubscribed" <?php checked( $this->options['default_optin_status'], 'unsubscribed' ); ?> />
+							<?php _e( 'Not subscribed', 'mailchimp-for-wp' ); ?>
+						</label>
+						<p class="help"><?php _e( 'Select "subscribed" if you want users to be subscribed by default.', 'mailchimp-for-wp' ); ?></p>
+					</td>
+				</tr>
+	
 				<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 						<th scope="row"><?php _e( 'User profile heading text', 'mailchimp-for-wp' ); ?></th>
 						<td class="nowrap">
 							<input type="text" name="<?php echo $this->name_attr( 'user_profile_heading_text' ); ?>" value="<?php echo esc_attr( $this->options['user_profile_heading_text'] ); ?>" class="regular-text" />
-							<p class="help"><?php _e( 'Enter the heading text you want to show on the user\'s profile for managing their subscription.', 'mailchimp-for-wp' ); ?></p>
+							<p class="help"><?php _e( 'Enter the heading text you want to show on the user\'s profile for managing their sign-up status.', 'mailchimp-for-wp' ); ?></p>
 						</td>
 					</tr>
 				<tr valign="top" data-showif="<?php echo esc_attr( json_encode( $config ) ); ?>">
 						<th scope="row"><?php _e( 'User profile label text', 'mailchimp-for-wp' ); ?></th>
 						<td class="nowrap">
 							<input type="text" name="<?php echo $this->name_attr( 'user_profile_label_text' ); ?>" value="<?php echo esc_attr( $this->options['user_profile_label_text'] ); ?>" class="regular-text" />
-							<p class="help"><?php _e( 'Enter the label text you want to show on the user\'s profile for managing their subscription.', 'mailchimp-for-wp' ); ?></p>
+							<p class="help"><?php _e( 'Enter the label text you want to show on the user\'s profile for managing their sign-up status.', 'mailchimp-for-wp' ); ?></p>
 						</td>
 					</tr>
 

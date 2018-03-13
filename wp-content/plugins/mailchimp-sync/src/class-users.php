@@ -229,11 +229,16 @@ class Users {
 	 * @param  int|WP_User $user
 	 * @return boolean
 	 */
-	public function get_optin_status( $user ) {
+	public function get_optin_status( $user, $default = true ) {
 		$user_id = $this->id( $user );
-		$opted_in = get_user_meta( $user_id, $this->get_meta_key_for_optin_status(), true );
-		$opted_in = $opted_in !== "0";
-		return $opted_in;
+		$meta_key = $this->get_meta_key_for_optin_status();
+		$opted_in = get_user_meta( $user_id, $meta_key, true );
+
+		if( $opted_in !== null && strlen($opted_in) > 0 ) {
+			return $opted_in !== "0";
+		}
+
+		return $default;
 	}
 
 	/**
@@ -242,7 +247,8 @@ class Users {
 	 */
 	public function set_optin_status( $user, $status ) {
 		$user_id = $this->id( $user );
-		update_user_meta( $user_id, $this->get_meta_key_for_optin_status(), $status ? "1" : "0" );
+		$meta_key = $this->get_meta_key_for_optin_status();
+		update_user_meta( $user_id, $meta_key, $status ? "1" : "0" );
 	}
 
 	/**

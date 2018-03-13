@@ -10,7 +10,7 @@
  */
 require get_stylesheet_directory() . '/inc/customizer.php';
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /*
  * Override default home page title
@@ -52,6 +52,14 @@ function ccluk_theme_setup()
     // Translate text from the CHILD theme only.
     // Change 'onesocial' instances in all child theme files to 'ccluk_theme'.
     // load_theme_textdomain( 'ccluk_theme', get_stylesheet_directory() . '/languages' );
+
+    // add class to front page
+    if (is_front_page()) {
+        add_filter( 'body_class', function( $classes ) {
+            $classes[] = 'front-page';
+            return $classes;
+        });
+    }
 
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );

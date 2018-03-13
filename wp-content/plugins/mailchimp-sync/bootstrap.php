@@ -37,7 +37,11 @@ if( ! empty( $plugin->options['list'] ) ) {
 	$list_id = $plugin->options['list'];
 	$options = $plugin->options;
 
-	$user_handler = new UserHandler( $list_id, $users, $options );
+	$user_handler = new UserHandler( $list_id, $users, $options );	
+	$user_handler->add_hooks();
+
+	$profile = new Profile( $plugin->options, $users );
+	$profile->add_hooks();
 
 	// if auto-syncing is enabled, setup queue and worker
 	if( $plugin->options['enabled'] ) {

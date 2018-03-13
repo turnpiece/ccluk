@@ -15,7 +15,7 @@
 get_header();
 ?>
 
-<div class="home-inner-wrap">
+<div class="home-inner-wrap listing blog">
 
 	<div id="primary" class="site-content">
 

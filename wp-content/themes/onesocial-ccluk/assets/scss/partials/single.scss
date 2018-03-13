@@ -38,13 +38,8 @@
         h1 {
             color: $black;
             text-shadow: none;
-<<<<<<< HEAD
-            @include padding(1, 0);
-            line-height: 1.3;
-=======
             @include padding(.5, 0);
             line-height: 1.4;
->>>>>>> 57c98743c5e62ba0a972d41f10980fbf5c951a9e
             max-height: auto;  
             text-align: left;
             font-size: 32px;

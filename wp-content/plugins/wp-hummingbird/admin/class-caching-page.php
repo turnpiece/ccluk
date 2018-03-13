@@ -342,9 +342,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			case 'download-logs':
 				$content = file_get_contents( WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php' );
 				/* Remove <?php die(); ?> from file */
-				if ( 0 === strpos( $content, '<?php die(); ?>' ) ) {
-					$content = substr( $content, 15 );
-				}
+				$content = substr( $content, 15 );
 
 				header( 'Content-Description: Page caching log download' );
 				header( 'Content-Type: text/plain' );

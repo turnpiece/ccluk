@@ -52,8 +52,6 @@ class UserHandler {
 		if( $settings ) {
 			$this->settings = array_merge( $this->settings, $settings );
 		}
-
-		$this->log = $this->get_log();
 	}
 
 	/**
@@ -62,13 +60,14 @@ class UserHandler {
 	public function add_hooks() {
 		// custom actions for people to use if they want to call the class actions
 		// @todo If we ever allow multiple instances of this class, these actions need the list_id property
+		add_action( 'mailchimp_sync_handle_user', array( $this, 'subscribe_user' ) );
 		add_action( 'mailchimp_sync_subscribe_user', array( $this, 'subscribe_user' ) );
 		add_action( 'mailchimp_sync_update_subscriber', array( $this, 'subscribe_user' ) );
 		add_action( 'mailchimp_sync_unsubscribe_user', array( $this, 'unsubscribe_user' ), 10, 2 );
 	}
 
 	/**
-	 * Handle
+	 * Subscribers or unsubscribes the given user, based on the User Sync settings. 
 	 *
 	 * @param int $user_id
 	 * @return boolean
@@ -86,7 +85,8 @@ class UserHandler {
 
 		// if user control is enabled, check if user opted out.
 		if( $subscribe && $this->settings['enable_user_control'] ) {
-			$subscribe = $this->users->get_optin_status( $user );
+			$default = $this->settings['default_optin_status'] === 'subscribed';
+			$subscribe = $this->users->get_optin_status( $user, $default );
 		}
 
 		return $subscribe ? $this->subscribe_user( $user->ID ) : $this->unsubscribe_user( $user->ID, $user->user_email );
@@ -116,7 +116,7 @@ class UserHandler {
 		// Only subscribe user if it has a valid email address
 		if( '' === $user->user_email || ! is_email( $user->user_email ) ) {
 			$this->error = 'Invalid email';
-			$this->log->warning( sprintf( 'User Sync > %s is an invalid email address', $user->user_email ) );
+			$this->get_log()->warning( sprintf( 'User Sync > %s is an invalid email address', $user->user_email ) );
 			return false;
 		}
 
@@ -126,12 +126,12 @@ class UserHandler {
 			$existed = $user_subscriber->subscribe( $user->ID, $this->settings['double_optin'], $this->settings['email_type'], $this->settings['replace_interests'], $this->settings['send_welcome'] );
 		} catch( Exception $e ) {
 			$this->error = $e->getMessage();
-			$this->log->error( sprintf( 'User Sync > Error subscribing or updating user %d: %s', $user_id, $this->error ) );
+			$this->get_log()->error( sprintf( 'User Sync > Error subscribing or updating user %d: %s', $user_id, $this->error ) );
 			return false;
 		}
 		
 		// Success!
-		$this->log->info( sprintf( 'User Sync > Successfully %s user %d (%s)', $existed ? 'updated' : 'subscribed', $user->ID, $user->user_email ) );
+		$this->get_log()->info( sprintf( 'User Sync > Successfully %s user %d (%s)', $existed ? 'updated' : 'subscribed', $user->ID, $user->user_email ) );
 
 		return true;
 	}
@@ -153,11 +153,11 @@ class UserHandler {
 			$$existed = $user_subscriber->unsubscribe( $user_id, $email_address, $subscriber_uid, $this->settings['send_goodbye'], $this->settings['send_notification'], $this->settings['delete_member'] );
 		} catch( Exception $e ) {
 			$this->error = $e->getMessage();
-			$this->log->error( sprintf( 'User Sync > Error unsubscribing user %d: %s', $user_id, $this->error ) );
+			$this->get_log()->error( sprintf( 'User Sync > Error unsubscribing user %d: %s', $user_id, $this->error ) );
 			return false;
 		}
 
-		$this->log->info( sprintf( 'User Sync > Successfully unsubscribed user %d (%s)', $user_id, $email_address ) );
+		$this->get_log()->info( sprintf( 'User Sync > Successfully unsubscribed user %d (%s)', $user_id, $email_address ) );
 		return true;
 	}
 
