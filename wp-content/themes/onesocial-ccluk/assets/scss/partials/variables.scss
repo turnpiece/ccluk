@@ -7,15 +7,3 @@ $dark: #333;
 $green: #54ae68;
 $blue: #22a7f0;
 $blue_bg: rgba(0, 152, 218, 0.85);
-
-@mixin button() {
-	border-radius: 5px;
-	background-color: $green;
-	border: none;
-	padding: 12px 24px;
-	color: $white !important;
-	&:hover {
-		color: $black;
-		background-color: $green;
-	}
-}

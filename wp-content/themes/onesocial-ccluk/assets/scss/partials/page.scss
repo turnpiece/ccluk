@@ -5,11 +5,12 @@ body.page {
 	#primary {
 		article {
 			> .entry-header {
-				@include margin( 2.4, 0 );
+				@include margin( 1.2, 0 );
 				border-bottom: 1px solid $green;
 
 				.entry-title {
-					font-size: 70px;
+					font-size: 35px;
+					padding-bottom: 15px;
 					color: $green;
 				}
 
@@ -21,6 +22,11 @@ body.page {
 			&.has-post-thumbnail {
 				> .entry-header {
 					border-bottom: none;
+					padding-bottom: 0;
+
+					img {
+						@include margin( 1.2, 0 ); 
+					}
 				}
 			}
 		}
@@ -29,8 +35,8 @@ body.page {
 	#secondary, 
 	.default-page+#secondary,
 	&.page-template #secondary {
-    	padding-top: 24px;
-    	padding-top: 2.4rem;
+    	padding-top: 40px;
+    	padding-top: 4rem;
    	}
 
 	#content {
@@ -43,6 +49,7 @@ body.page {
 	#secondary {
 		.widget_subpages {
 			position: fixed;
+			width: 290px;
 
 			ul > li {
 
@@ -50,7 +57,8 @@ body.page {
 					display: inline-block;
 					border-left: 10px solid;
 					padding-left: 15px;
-					font-weight: 600;
+					font-weight: 400;
+					font-size: 15px;
 
 					&:hover {
 						color: $green;
@@ -59,18 +67,24 @@ body.page {
 
 				&.first-menu-item {
 					a {
-						font-size: 110%;
+						font-size: 16px;
+						font-weight: 500;
 						border-left: 0;
 						padding-left: 0;
 					}
 				}
 
 				&.widget_subpages_current_page {
-					a {
-						color: $blue;
+					> a {
+						color: $green;
 						pointer-events: none;
 			  			cursor: default;
 					}
+				}
+
+				ul {
+					margin-top: 10px;
+					margin-top: 1rem;
 				}
 			}
 		}

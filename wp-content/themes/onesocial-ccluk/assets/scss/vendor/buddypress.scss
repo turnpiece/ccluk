@@ -24,4 +24,8 @@
 			border: 1px solid $green;
 		}
 	}
+
+	.groups-members-search input[type=text] {
+	    @include padding( .6, 1.2 );
+	}
 }

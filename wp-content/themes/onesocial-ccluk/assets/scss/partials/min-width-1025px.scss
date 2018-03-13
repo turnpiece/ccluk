@@ -1,9 +1,23 @@
-.home-page {
+body.page-template-homepage {
     #main {
         .section {
             @include padding(3, 0);
             padding-bottom: 80px;
             padding-bottom: 8rem;
+        }
+    }
+}
+
+body.page {
+    #primary {
+        article {
+            > .entry-header {
+                @include margin( 2.4, 0 );
+
+                .entry-title {
+                    font-size: 70px;
+                }
+            }
         }
     }
 }

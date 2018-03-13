@@ -23,7 +23,8 @@ textarea,
   border-width: 1px 1px 1px 1px;
   border-color: #54ae68;
   border-style: solid solid solid solid;
-  padding: 12px; }
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
 
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
   margin-bottom: 16px; }
@@ -108,6 +109,7 @@ h3, h4 {
 
 #save_as_draft,
 .popup-content .button:not(.ed_button),
+#buddypress form#whats-new-form #whats-new-submit input[type=submit],
 input[type=submit] {
   border: none;
   padding: 10px 20px 10px 20px;
@@ -117,12 +119,20 @@ input[type=submit] {
   -moz-border-radius: 3px;
   border-radius: 3px; }
 
+#bbpress-forums fieldset.bbp-form input,
+#bbpress-forums fieldset.bbp-form textarea {
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
+
 .formatted-content {
   color: rgba(0, 0, 0, 0.6); }
 
 .post-author .load-more-posts,
 .trigger-sidebar {
   display: none; }
+
+.single-item.groups #buddypress #item-header span.activity {
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); }
 
 /** Navigation **/
 @media screen and (min-width: 481px) {
@@ -246,40 +256,51 @@ input[type=submit] {
 
 /* styles for pages */
 body.page #primary article > .entry-header {
-  margin: 24px 0px;
-  margin: 2.4rem 0rem;
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68; }
   body.page #primary article > .entry-header .entry-title {
-    font-size: 70px;
+    font-size: 35px;
+    padding-bottom: 15px;
     color: #54ae68; }
   body.page #primary article > .entry-header a > .entry-title {
     color: #22a7f0; }
 body.page #primary article.has-post-thumbnail > .entry-header {
-  border-bottom: none; }
+  border-bottom: none;
+  padding-bottom: 0; }
+  body.page #primary article.has-post-thumbnail > .entry-header img {
+    margin: 12px 0px;
+    margin: 1.2rem 0rem; }
 body.page #secondary,
 body.page .default-page + #secondary, body.page.page-template #secondary {
-  padding-top: 24px;
-  padding-top: 2.4rem; }
+  padding-top: 40px;
+  padding-top: 4rem; }
 body.page #content .row {
   margin-left: 0;
   margin-right: 0; }
 body.page #secondary .widget_subpages {
-  position: fixed; }
+  position: fixed;
+  width: 290px; }
   body.page #secondary .widget_subpages ul > li a {
     display: inline-block;
     border-left: 10px solid;
     padding-left: 15px;
-    font-weight: 600; }
+    font-weight: 400;
+    font-size: 15px; }
     body.page #secondary .widget_subpages ul > li a:hover {
       color: #54ae68; }
   body.page #secondary .widget_subpages ul > li.first-menu-item a {
-    font-size: 110%;
+    font-size: 16px;
+    font-weight: 500;
     border-left: 0;
     padding-left: 0; }
-  body.page #secondary .widget_subpages ul > li.widget_subpages_current_page a {
-    color: #22a7f0;
+  body.page #secondary .widget_subpages ul > li.widget_subpages_current_page > a {
+    color: #54ae68;
     pointer-events: none;
     cursor: default; }
+  body.page #secondary .widget_subpages ul > li ul {
+    margin-top: 10px;
+    margin-top: 1rem; }
 
 /* Home page */
 body.page-template-homepage #main {
@@ -560,14 +581,21 @@ body.page-template-homepage #secondary {
 #buddypress .standard-form input[type=password],
 #buddypress .standard-form textarea {
   border: 1px solid #54ae68; }
+#buddypress .groups-members-search input[type=text] {
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 #mobile-right-panel li a {
-  color: #54ae68; }
+  color: #22a7f0; }
   #mobile-right-panel li a:hover {
-    color: #fff; }
+    color: #54ae68; }
+#mobile-right-panel li.current-menu-item {
+  background-color: #fff; }
+  #mobile-right-panel li.current-menu-item a {
+    color: #54ae68; }
 
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
@@ -623,11 +651,17 @@ MINIMUM width of 721 pixels (tablets and larger)
 MINIMUM width of 1025 pixels (desktops)
 --------------------------------------------------------------*/
 @media screen and (min-width: 1025px) {
-  .home-page #main .section {
+  body.page-template-homepage #main .section {
     padding: 30px 0px;
     padding: 3rem 0rem;
     padding-bottom: 80px;
     padding-bottom: 8rem; }
+
+  body.page #primary article > .entry-header {
+    margin: 24px 0px;
+    margin: 2.4rem 0rem; }
+    body.page #primary article > .entry-header .entry-title {
+      font-size: 70px; }
 
   .single .entry-header h1,
   .single-post .entry-header h1 {

@@ -28,11 +28,21 @@ Custom stylesheet.
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 
-#mobile-right-panel li a {
-	color: $green;
+#mobile-right-panel li {
+	a {
+		color: $blue;
 
-	&:hover {
-		color: $white;
+		&:hover {
+			color: $green;
+		}
+	}
+	
+	&.current-menu-item {
+		background-color: $white;
+
+		a {
+			color: $green;
+		}
 	}
 }
 

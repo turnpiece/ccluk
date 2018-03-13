@@ -19,7 +19,7 @@ textarea,
     border-width: 1px 1px 1px 1px;
     border-color: $green;
     border-style: solid solid solid solid;
-    padding: 12px;
+    @include padding( .6, 1.2 );
 }
 
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
@@ -129,12 +129,20 @@ h3, h4 {
 
 #save_as_draft, 
 .popup-content .button:not(.ed_button), 
+#buddypress form#whats-new-form #whats-new-submit input[type=submit],
 input[type=submit] {
     border: none;
     padding: 10px 20px 10px 20px;
     background-color: $green;
     color: $white;
     @include border-radius(3px);
+}
+
+#bbpress-forums fieldset.bbp-form {
+    input,
+    textarea {
+        @include padding( .6, 1.2 );
+    } 
 }
 
 .formatted-content {
@@ -144,4 +152,8 @@ input[type=submit] {
 .post-author .load-more-posts,
 .trigger-sidebar {
     display: none;
+}
+
+.single-item.groups #buddypress #item-header span.activity {
+    text-shadow: 1px 1px 1px rgba(0,0,0,.7);
 }

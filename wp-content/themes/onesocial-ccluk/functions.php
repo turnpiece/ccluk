@@ -114,6 +114,7 @@ function boss_generate_option_css() {
     button,
     input[type="button"],
     input[type="reset"],
+    input[type="submit"],
     article.post-password-required input[type=submit],
     li.bypostauthor cite span,
     a.button,
@@ -324,15 +325,11 @@ function boss_generate_option_css() {
     .bbp-header li.bbp-topic-title,
     .info-group .members-list-filter,
     .info-group .trigger-filter.active:before,
-    #buddypress #group-settings-form input[type="submit"],
-    #buddypress .standard-form div.submit input,
-    #buddypress form#whats-new-form #whats-new-submit input[type="submit"],
     .entry-meta a.read-more,
     #buddypress #group-create-nav .group-create,
     .sap-publish-popup.sap-publish-popup .sap-action-button,
     .sap-container-wrapper .sap-story-publish,
-    #main #buddypress div.item-list-tabs li.hideshow > ul,
-    input[type="submit"] {
+    #main #buddypress div.item-list-tabs li.hideshow > ul {
       border-color: <?php echo $accent_color; ?>;
     }
 
