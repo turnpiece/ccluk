@@ -1,31 +1,45 @@
 /* Buddypress */
 
-#buddypress {
+body.buddypress {
 
-	form#whats-new-form #whats-new-submit
-	#group-settings-form,
-	#create-group-form {
-		input[type="submit"] {
+	&.group-home {
+		#buddypress {
+			.buddypress-content {
+				#item-body {
+					#subnav,
+					#whats-new-form {
+						display: none;
+					}
+				}
+			}
+		}
+	}
+
+	#buddypress {
+		#group-settings-form,
+		#create-group-form {
+			input[type="submit"] {
+				@include button();
+			}
+		}
+
+		.standard-form div.submit input,
+		#save_as_draft {
 			@include button();
 		}
-	}
 
-	.standard-form div.submit input,
-	#save_as_draft {
-		@include button();
-	}
-
-	.standard-form {
-		.datebox, 
-		input[type=text], 
-		input[type=email], 
-		input[type=password],
-		textarea {
-			border: 1px solid $green;
+		.standard-form {
+			.datebox, 
+			input[type=text], 
+			input[type=email], 
+			input[type=password],
+			textarea {
+				border: 1px solid $green;
+			}
 		}
-	}
 
-	.groups-members-search input[type=text] {
-	    @include padding( .6, 1.2 );
+		.groups-members-search input[type=text] {
+		    @include padding( .6, 1.2 );
+		}
 	}
 }
