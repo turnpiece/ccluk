@@ -7,6 +7,9 @@ Custom stylesheet.
 #logo-area {
   width: 380px; }
 
+.site {
+  padding-top: 0; }
+
 .site-header .site-title {
   width: 360px; }
 
