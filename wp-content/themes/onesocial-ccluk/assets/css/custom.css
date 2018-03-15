@@ -288,7 +288,7 @@ body.page #primary article > .entry-header {
   margin: 12px 0px;
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68; }
-  body.page #primary article > .entry-header .entry-title {
+  body.page #primary article > .entry-header h1.entry-title {
     font-size: 35px;
     padding-bottom: 15px;
     color: #54ae68; }
@@ -670,12 +670,10 @@ MINIMUM width of 1025 pixels (desktops)
     padding-bottom: 80px;
     padding-bottom: 8rem; }
 
-  body.page #primary article > .entry-header,
-  body.page .site-content article > .entry-header {
+  body.page #primary article > .entry-header {
     margin: 24px 0px;
     margin: 2.4rem 0rem; }
-    body.page #primary article > .entry-header .entry-title,
-    body.page .site-content article > .entry-header .entry-title {
+    body.page #primary article > .entry-header h1.entry-title {
       font-size: 70px; }
 
   .single .entry-header h1,

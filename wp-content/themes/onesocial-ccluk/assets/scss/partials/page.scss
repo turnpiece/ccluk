@@ -1,14 +1,13 @@
 /* styles for pages */
 
 body.page {
-
 	#primary {
 		article {
 			> .entry-header {
 				@include margin( 1.2, 0 );
 				border-bottom: 1px solid $green;
 
-				.entry-title {
+				h1.entry-title {
 					font-size: 35px;
 					padding-bottom: 15px;
 					color: $green;

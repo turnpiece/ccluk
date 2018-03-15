@@ -9,13 +9,12 @@ body.page-template-homepage {
 }
 
 body.page {
-    #primary, 
-    .site-content {
+    #primary {
         article {
             > .entry-header {
                 @include margin( 2.4, 0 );
 
-                .entry-title {
+                h1.entry-title {
                     font-size: 70px;
                 }
             }
