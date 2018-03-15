@@ -30,3 +30,20 @@ Slider
 .post-author-info .author-follow {
     right: 0;
 }
+
+/*--------------------------------------------------------------
+Is mobile
+--------------------------------------------------------------*/
+
+body.is-mobile {
+	#main-wrap {
+		margin-top: 55px;
+	}
+
+	&.single {
+		#primary {
+			max-width: 780px;
+			@include centred-margin( 0 );
+		}
+	}
+}

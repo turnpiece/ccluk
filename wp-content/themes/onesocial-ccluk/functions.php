@@ -100,6 +100,7 @@ add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 function boss_generate_option_css() {
 
   $accent_color  = onesocial_get_option( 'accent_color' );
+  $body_font_size = onesocial_options[boss_body_font_family][font-size]
   ?>
   <style>
 
@@ -523,11 +524,31 @@ function boss_generate_option_css() {
     .footer-inner-bottom {
       background-color: <?php echo onesocial_get_option( 'footer_background' ) ?>;
     }
-  </style><?php
+
+    <?php if ( $font = onesocial_get_option( 'boss_body_font_family' ) ) { ?>
+    .is-mobile .entry-content,
+    .is-mobile .entry-summary,
+    .is-mobile .mu-register {
+    <?php if (!empty($font['font-family'])) : ?>
+        font-family: <?php echo $font['font-family'] ?>;
+    <?php endif; ?>
+    <?php if (!empty($font['font-weight'])) : ?>
+        font-weight: <?php echo $font['font-weight'] ?>;
+    <?php endif; ?>
+    <?php if (!empty($font['font-style'])) : ?>
+        font-weight: <?php echo $font['font-style'] ?>;
+    <?php endif; ?>
+    <?php if (!empty($font['font-size'])) : ?>
+        font-size: <?php echo $font['font-size'] ?>;
+    <?php endif; ?>
+    }
+    <?php } ?>
+  </style>
+  <?php 
 }
 
 /* Add Action */
-add_action( 'wp_head', 'boss_generate_option_css', 99 );
+add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 // create news post type
 function ccluk_create_news_post_type() {
