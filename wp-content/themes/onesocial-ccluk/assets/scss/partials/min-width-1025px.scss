@@ -9,7 +9,8 @@ body.page-template-homepage {
 }
 
 body.page {
-    #primary {
+    #primary, 
+    .site-content {
         article {
             > .entry-header {
                 @include margin( 2.4, 0 );

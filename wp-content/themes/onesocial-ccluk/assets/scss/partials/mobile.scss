@@ -28,8 +28,11 @@ body.is-mobile {
 		margin-top: 55px;
 	}
 
-	&.single {
-		#primary {
+	&.single,
+	&.archive, 
+	&.blog:not(.bp-user) {
+		#primary,
+		.site-content {
 			max-width: 780px;
 			@include centred-margin( 0 );
 		}
