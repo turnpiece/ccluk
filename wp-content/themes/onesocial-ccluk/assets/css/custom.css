@@ -151,15 +151,6 @@ Mobile Header
     color: #333; }
 
 /*--------------------------------------------------------------
-Slider
---------------------------------------------------------------*/
-.bb-slider-container .title {
-  font-size: 20px !important; }
-
-.post-author-info .author-follow {
-  right: 0; }
-
-/*--------------------------------------------------------------
 Is mobile
 --------------------------------------------------------------*/
 body.is-mobile #main-wrap {
@@ -643,7 +634,13 @@ MAXIMUM width of 520 pixels (large phones and smaller)
     font-size: 30px;
     max-height: 200px;
     overflow: auto;
-    padding: 0; } }
+    padding: 0; }
+
+  .bb-slider-container .title {
+    font-size: 20px !important; }
+
+  .post-author-info .author-follow {
+    right: 0; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 480 pixels (phones and smaller)
 --------------------------------------------------------------*/
@@ -653,9 +650,6 @@ MAXIMUM width of 480 pixels (phones and smaller)
 /*--------------------------------------------------------------
 MINIMUM width of 481 pixels (phones and larger)
 --------------------------------------------------------------*/
-@media screen and (min-width: 481px) {
-  .site {
-    padding-top: 0; } }
 /*--------------------------------------------------------------
 MINIMUM width of 721 pixels (tablets and larger)
 --------------------------------------------------------------*/
