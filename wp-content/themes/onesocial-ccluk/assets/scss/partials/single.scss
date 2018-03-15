@@ -31,7 +31,7 @@
     .entry-header.not-image {
 
         position: static;
-        @include centred-margin(2);
+        @include centred-margin(0);
         text-align: left;  
         max-width: 780px;
 

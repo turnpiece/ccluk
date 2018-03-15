@@ -2,32 +2,3 @@
 .single-ccluk_news .entry-header.has-image h1 {
     font-size: 24px;
 }
-
-/*--------------------------------------------------------------
-1.1.3 - Mobile Header
---------------------------------------------------------------*/
-
-#mobile-header {
-    background-color: $white;
-}
-
-#mobile-header h1 {
-    color: $black;
-}
-
-#mobile-header h1 a {
-    color: $black;
-}
-
-#mobile-header .left-btn:before,
-#mobile-header .right-btn:before {
-	color: $dark;
-}
-
-.bb-slider-container .title {
-	font-size: 20px !important;
-}
-
-.post-author-info .author-follow {
-    right: 0;
-}

@@ -1,0 +1,32 @@
+/*--------------------------------------------------------------
+Mobile Header
+--------------------------------------------------------------*/
+
+#mobile-header {
+    background-color: $white !important;
+
+	h1 {
+	    color: $black;
+	
+		a {
+		    color: $black;
+		}
+	}
+
+	.left-btn:before,
+	.right-btn:before {
+		color: $dark;
+	}
+}
+
+/*--------------------------------------------------------------
+Slider
+--------------------------------------------------------------*/
+
+.bb-slider-container .title {
+	font-size: 20px !important;
+}
+
+.post-author-info .author-follow {
+    right: 0;
+}
