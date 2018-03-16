@@ -159,7 +159,9 @@ body.is-mobile.archive .site-content, body.is-mobile.blog:not(.bp-user) #primary
 body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 780px;
   margin: 0px auto;
-  margin: 0rem auto;
+  margin: 0rem auto; }
+body.is-mobile #primary,
+body.is-mobile .site-content {
   padding-top: 70px; }
 
 /** Navigation **/

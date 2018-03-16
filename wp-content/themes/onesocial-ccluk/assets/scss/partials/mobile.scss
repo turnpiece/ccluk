@@ -31,7 +31,10 @@ body.is-mobile {
 		.site-content {
 			max-width: 780px;
 			@include centred-margin( 0 );
-			padding-top: 70px;
 		}
+	}
+	#primary,
+	.site-content {
+		padding-top: 70px;
 	}
 }
