@@ -620,6 +620,8 @@ body.buddypress #buddypress .groups-members-search input[type=text] {
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
+#mobile-right-panel .sub-menu {
+  background: rgba(0, 0, 0, 0.9); }
 #mobile-right-panel li a {
   color: #22a7f0; }
   #mobile-right-panel li a:hover {
