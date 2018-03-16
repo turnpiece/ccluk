@@ -24,10 +24,6 @@ Is mobile
 --------------------------------------------------------------*/
 
 body.is-mobile {
-	#main-wrap {
-		margin-top: 55px;
-	}
-
 	&.single,
 	&.archive, 
 	&.blog:not(.bp-user) {

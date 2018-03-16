@@ -153,8 +153,6 @@ Mobile Header
 /*--------------------------------------------------------------
 Is mobile
 --------------------------------------------------------------*/
-body.is-mobile #main-wrap {
-  margin-top: 55px; }
 body.is-mobile.single #primary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
 body.is-mobile.archive .site-content, body.is-mobile.blog:not(.bp-user) #primary,
