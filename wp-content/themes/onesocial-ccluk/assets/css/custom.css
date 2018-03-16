@@ -164,11 +164,11 @@ body.is-mobile.blog:not(.bp-user) .site-content {
 
 /** Navigation **/
 @media screen and (min-width: 481px) {
-  .main-navigation li a {
+  #masthead .main-navigation li a {
     color: rgba(0, 0, 0, 0.7); }
-  .main-navigation .nav-menu > li:hover, .main-navigation .nav-menu > li.current-menu-item, .main-navigation .nav-menu > li.current-menu-ancestor {
+  #masthead .main-navigation .nav-menu > li:hover, #masthead .main-navigation .nav-menu > li.current-menu-item, #masthead .main-navigation .nav-menu > li.current-menu-ancestor {
     background-color: #54ae68; }
-    .main-navigation .nav-menu > li:hover > a, .main-navigation .nav-menu > li.current-menu-item > a, .main-navigation .nav-menu > li.current-menu-ancestor > a {
+    #masthead .main-navigation .nav-menu > li:hover > a, #masthead .main-navigation .nav-menu > li.current-menu-item > a, #masthead .main-navigation .nav-menu > li.current-menu-ancestor > a {
       color: #fff; } }
 .single .header-area,
 .single-post .header-area {

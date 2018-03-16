@@ -1,21 +1,23 @@
 /** Navigation **/
 
 @media screen and (min-width: 481px)  {
-	.main-navigation {
-		li {
-			a {
-				color: rgba(0, 0, 0, 0.7);
+	#masthead {
+		.main-navigation {
+			li {
+				a {
+					color: rgba(0, 0, 0, 0.7);
+				}
 			}
-		}
-		.nav-menu {
-			> li {
-				&:hover,
-				&.current-menu-item,
-				&.current-menu-ancestor {
-					background-color: $green;
+			.nav-menu {
+				> li {
+					&:hover,
+					&.current-menu-item,
+					&.current-menu-ancestor {
+						background-color: $green;
 
-					> a {
-						color: $white;
+						> a {
+							color: $white;
+						}
 					}
 				}
 			}
