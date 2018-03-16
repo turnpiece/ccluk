@@ -382,12 +382,17 @@ body.page-template-homepage #main {
       max-width: 420px;
       margin: 0 auto; }
       body.page-template-homepage #main .section .section-title h4 {
-        background-color: #22a7f0;
+        background-color: #54ae68;
         padding: 15px 30px;
         margin: 10px 30px;
         font-size: 24px;
         color: #fff;
-        text-transform: uppercase; }
+        text-transform: uppercase;
+        border-radius: 10px; }
+      body.page-template-homepage #main .section .section-title a > h4 {
+        background-color: #22a7f0; }
+        body.page-template-homepage #main .section .section-title a > h4:hover {
+          background-color: #54ae68; }
     body.page-template-homepage #main .section .section-footer {
       text-align: center;
       margin: 0 auto; }

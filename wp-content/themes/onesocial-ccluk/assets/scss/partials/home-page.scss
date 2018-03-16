@@ -80,12 +80,21 @@ body.page-template-homepage {
 				margin: 0 auto;
 
 				h4 {
-					background-color: $blue;
+					background-color: $green;
 					padding: 15px 30px;
 					margin: 10px 30px;
 					font-size: 24px;
 					color: $white;
 					text-transform: uppercase;
+					border-radius: 10px;
+				}
+
+				a > h4 {
+					background-color: $blue;
+
+					&:hover {
+						background-color: $green;
+					}
 				}
 			}
 
