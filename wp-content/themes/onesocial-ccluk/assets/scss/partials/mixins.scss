@@ -35,6 +35,19 @@
   margin: $y + rem $x + rem;
 }
 
+@mixin margin-bottom($value: 1) {
+  @include margin-pos($value, 'bottom');
+}
+
+@mixin margin-top($value: 1) {
+  @include margin-pos($value, 'top');
+}
+
+@mixin margin-pos($value: 1, $pos: 'bottom') {
+  margin-#{$pos}: ($value * 10) + px;
+  margin-#{$pos}: $value + rem;
+}
+
 @mixin centred-margin($value: 1.5) {
   margin: ($value * 10) + px auto;
   margin: $value + rem auto;

@@ -34,6 +34,14 @@ h3, h4 {
     line-height: 1.6;
 }
 
+a {
+    color: $blue;
+
+    &:hover {
+        color: $green;
+    }
+}
+
 .bluebox {
     width: 100%;
     color: $white;

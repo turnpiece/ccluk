@@ -103,6 +103,11 @@
 
 			<footer class="entry-meta">
 				<div class="row">
+					<?php _e( 'Posted in', 'onesocial' ) ?>
+					<?php echo onesocial_entry_categories() ?>
+				</div>
+
+				<div class="row">
 					<div class="entry-tags col">
 						<?php
 						$terms = wp_get_post_tags( get_the_ID() );
@@ -116,7 +121,7 @@
 						?>
 					</div>
 
-                                <?php if ( get_post_status(get_the_ID()) == 'publish' ) { ?>
+                    <?php if ( get_post_status(get_the_ID()) == 'publish' ) { ?>
 					<!-- /.entry-tags -->
 					<div class="entry-share col">
 						<?php
@@ -154,10 +159,10 @@
 						</ul>
 					</div>
 					<!-- /.entry-share -->
-                                <?php } ?>
+                    <?php } ?>
 				</div>
 
-				<?php //edit_post_link( __( 'Edit', 'onesocial' ), '<span class="edit-link">', '</span>' );    ?>
+				<?php edit_post_link( __( 'Edit', 'onesocial' ), '<span class="edit-link">', '</span>' );    ?>
 
 			</footer><!-- .entry-meta -->
 		</div>

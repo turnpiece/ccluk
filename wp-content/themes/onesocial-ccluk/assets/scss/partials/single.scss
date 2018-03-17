@@ -52,14 +52,14 @@
                 padding-top: 20px;
             }
             .authors-avatar {
-                padding: 0 0 35px;
+                padding: 0 0 15px;
             }
             .author-follow {
                 top: 20px;
             }
             .entry-meta {
                 font-size: 14px;
-                padding-top: 10px;
+                padding-top: 5px;
             }
             .entry-meta,
             .author-name {
@@ -70,21 +70,44 @@
         }
     }
 
-    #respond {
-        form {
-            input[type=text],
-            input[type=email],
-            textarea {
-                border: 1px solid $green;
-                padding: 12px;
-            }
+    .entry-tags {
+        h3 {
+            @include margin-bottom( 1.5 );
+        }
+        a {
+            @include border-radius(5px);
+            background-color: $blue;
+            color: $white;
 
-            p {
-                text-align: right;
-                input[type=submit] {
-                    margin-top: 5px;
-                    float: right;
+            &:hover {
+                background-color: $green;
+            }
+        }
+    }
+
+    .comments-area {
+        #respond {
+            form {
+                input[type=text],
+                input[type=email],
+                textarea {
+                    border: 1px solid $green;
+                    padding: 12px;
                 }
+
+                p {
+                    text-align: right;
+                    input[type=submit] {
+                        margin-top: 5px;
+                        float: right;
+                    }
+                }
+            }
+        }
+
+        article {
+            header {
+                @include margin-bottom( 1.5 );
             }
         }
     }

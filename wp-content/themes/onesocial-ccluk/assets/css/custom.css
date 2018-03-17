@@ -35,6 +35,11 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 h3, h4 {
   line-height: 1.6; }
 
+a {
+  color: #22a7f0; }
+  a:hover {
+    color: #54ae68; }
+
 .bluebox {
   width: 100%;
   color: #fff;
@@ -239,7 +244,7 @@ body.is-mobile .site-content {
     .single-post .entry-header .post-author-info .authors-avatar,
     .single-post .entry-header.has-image .post-author-info .authors-avatar,
     .single-post .entry-header.not-image .post-author-info .authors-avatar {
-      padding: 0 0 35px; }
+      padding: 0 0 15px; }
     .single .entry-header .post-author-info .author-follow,
     .single .entry-header.has-image .post-author-info .author-follow,
     .single .entry-header.not-image .post-author-info .author-follow,
@@ -254,7 +259,7 @@ body.is-mobile .site-content {
     .single-post .entry-header.has-image .post-author-info .entry-meta,
     .single-post .entry-header.not-image .post-author-info .entry-meta {
       font-size: 14px;
-      padding-top: 10px; }
+      padding-top: 5px; }
     .single .entry-header .post-author-info .entry-meta a,
     .single .entry-header .post-author-info .author-name a,
     .single .entry-header.has-image .post-author-info .entry-meta a,
@@ -268,21 +273,39 @@ body.is-mobile .site-content {
     .single-post .entry-header.not-image .post-author-info .entry-meta a,
     .single-post .entry-header.not-image .post-author-info .author-name a {
       color: #54ae68; }
-.single #respond form input[type=text],
-.single #respond form input[type=email],
-.single #respond form textarea,
-.single-post #respond form input[type=text],
-.single-post #respond form input[type=email],
-.single-post #respond form textarea {
+.single .entry-tags h3,
+.single-post .entry-tags h3 {
+  margin-bottom: 15px;
+  margin-bottom: 1.5rem; }
+.single .entry-tags a,
+.single-post .entry-tags a {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #22a7f0;
+  color: #fff; }
+  .single .entry-tags a:hover,
+  .single-post .entry-tags a:hover {
+    background-color: #54ae68; }
+.single .comments-area #respond form input[type=text],
+.single .comments-area #respond form input[type=email],
+.single .comments-area #respond form textarea,
+.single-post .comments-area #respond form input[type=text],
+.single-post .comments-area #respond form input[type=email],
+.single-post .comments-area #respond form textarea {
   border: 1px solid #54ae68;
   padding: 12px; }
-.single #respond form p,
-.single-post #respond form p {
+.single .comments-area #respond form p,
+.single-post .comments-area #respond form p {
   text-align: right; }
-  .single #respond form p input[type=submit],
-  .single-post #respond form p input[type=submit] {
+  .single .comments-area #respond form p input[type=submit],
+  .single-post .comments-area #respond form p input[type=submit] {
     margin-top: 5px;
     float: right; }
+.single .comments-area article header,
+.single-post .comments-area article header {
+  margin-bottom: 15px;
+  margin-bottom: 1.5rem; }
 
 /* styles for pages */
 body.page #primary article > .entry-header {
