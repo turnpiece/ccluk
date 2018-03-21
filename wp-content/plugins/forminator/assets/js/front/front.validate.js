@@ -100,7 +100,9 @@
 			}
 		});
 	};
-	
+	$.validator.addMethod("datedmy", function(value, element) {
+		return this.optional(element) || value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+	});
 	$.validator.addMethod("maxwords", function (value, element, param) {
 		return this.optional(element) || jQuery.trim(value).split(/\s+/).length <= param;
 	});

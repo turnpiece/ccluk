@@ -128,10 +128,11 @@ class Forminator_Section extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
         $this->field = $field;
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';

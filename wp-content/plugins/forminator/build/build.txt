@@ -46,6 +46,7 @@ admin/settings/radio-container.js
 admin/settings/color.js
 admin/settings/multi-value.js
 admin/settings/select.js
+admin/settings/tag.js
 admin/settings/date.js
 admin/settings/editor.js
 admin/settings/variables.js
@@ -69,6 +70,7 @@ admin/builder/drag-drop.js
 text!admin/templates/fields.html
 admin/builder/builder/field.js
 admin/builder/builder/wrapper.js
+admin/popup/confirm.js
 admin/builder/builder/fields-panel.js
 admin/builder/builder/shadows-panel.js
 text!admin/templates/builder.html
@@ -99,9 +101,11 @@ text!tpl/quizzes.html
 admin/quizzes/knowledge/details-settings.js
 admin/quizzes/knowledge/questions-settings.js
 admin/quizzes/knowledge/settings-settings.js
+admin/quizzes/knowledge/appearance-settings.js
 admin/quizzes/no-wrong/details-settings.js
 admin/quizzes/no-wrong/questions-settings.js
 admin/quizzes/no-wrong/results-settings.js
+admin/quizzes/no-wrong/appearance-settings.js
 text!admin/templates/quizzes.html
 admin/quizzes/quizzes.js
 admin/views.js
@@ -109,4 +113,4 @@ admin/application.js
 admin/setup.js
 
 
-87274-1520263722-au
+87274-1521663253-au

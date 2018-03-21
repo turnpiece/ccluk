@@ -41,7 +41,7 @@ class Profile {
 	public function user_profile( $user = null, $field_type = '' ) {
 
 		if( ! $user instanceof WP_User ) {
-			if( is_numerical( $user ) ) {
+			if( is_numeric( $user ) ) {
 				$user = get_userdata( $user );
 			} else {
 				$user = wp_get_current_user();

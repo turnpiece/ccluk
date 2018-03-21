@@ -30,7 +30,8 @@ $modules = get_option( "forminator_uninstall_clear_data", false );
 
 		<div class="wpmudev-section--text">
 
-			<label class="wpmudev-label--notice"><span><?php echo sprintf( __( "This option allows you to delete or keep all your data when the plugin is deleted from the %splugins menu%s", Forminator::DOMAIN ), '<a href="'.plugins_url().'">', '</a>' ); ?></label>
+			<label class="wpmudev-label--notice"><span><?php echo sprintf( __( "This option allows you to delete or keep all your data when the plugin is deleted from the %splugins menu%s",
+                                                                               Forminator::DOMAIN ), '<a href="' . get_admin_url( null, 'plugins.php' ) . '">', '</a>' ); ?></label>
 
 		</div>
 

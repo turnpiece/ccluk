@@ -126,7 +126,7 @@ class Content_Result extends \Hammer\Base\Behavior {
                                 <button type="button" class="button button-small delete-mitem button-grey">
 									<?php _e( "Delete", wp_defender()->domain ) ?></button>
                                 <div class="confirm-box wd-hide">
-									<?php echo $tooltips; ?>
+	                                <?php echo $tooltips; ?>
                                     &nbsp;
                                     <button type="submit" class="button button-small button-grey">
 										<?php _e( "Yes", wp_defender()->domain ) ?>

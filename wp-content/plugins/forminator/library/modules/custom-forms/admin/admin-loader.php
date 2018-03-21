@@ -63,6 +63,7 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 	 * @return mixed
 	 */
 	public function add_js_defaults( $data ) {
+		$model = null;
 		if ( $this->is_admin_wizard() ) {
 			$data['application'] = 'builder';
 
@@ -86,7 +87,6 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 				}
 			} else {
 				$id    = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : null;
-				$model = null;
 				if ( ! is_null( $id ) ) {
 					$model = Forminator_Custom_Form_Model::model()->load( $id );
 				}
@@ -97,11 +97,12 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 				}
 
 				// Load stored record
+				$settings = apply_filters( 'forminator_form_settings', $model->settings, $model, $data, $this );
 				$data['currentForm'] = array_merge( array(
 					'wrappers' => $wrappers,
 					'formName' => $model->name,
 					'formID'   => $model->id
-				), $model->settings );
+				), $settings );
 			}
 		}
 
@@ -112,7 +113,7 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			'preview_nonce' => wp_create_nonce( 'forminator_popup_preview_cforms' )
 		);
 
-		return $data;
+		return apply_filters( 'forminator_form_admin_data', $data, $model, $this );
 	}
 
 	/**
@@ -135,6 +136,7 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"new_field"        => __( "Add New Field", Forminator::DOMAIN ),
 			"save"             => __( "Save", Forminator::DOMAIN ),
 			"continue"         => __( "Continue", Forminator::DOMAIN ),
+			"form_builder"     => __( "Form Builder", Forminator::DOMAIN ),
 			"finish"           => __( "Finish", Forminator::DOMAIN ),
 			"publish"          => __( "Publish", Forminator::DOMAIN ),
 			"form_settings"    => __( "Form Settings", Forminator::DOMAIN ),
@@ -197,20 +199,41 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"lname_label"  => __( "Last Name", Forminator::DOMAIN ),
 		);
 
+		$data['address'] = array(
+			"street_address_label" => __( 'Street address', Forminator::DOMAIN ),
+			"address_line_label"   => __( 'Address Line 2', Forminator::DOMAIN ),
+			"address_city_label"   => __( 'City', Forminator::DOMAIN ),
+			"address_state_label"  => __( 'State/Province', Forminator::DOMAIN ),
+			"address_zip_label"    => __( 'ZIP / Postal Code', Forminator::DOMAIN ),
+		);
+
+		$data['time'] = array(
+			"hh_label" => __( 'Hours', Forminator::DOMAIN ),
+			"mm_label" => __( 'Minutes', Forminator::DOMAIN ),
+		);
+
 		$data['appearance'] = array(
 			"settings_title"              => __( "SETTINGS & BEHAVIOURS", Forminator::DOMAIN ),
 			"preview_form"                => __( "Preview Form", Forminator::DOMAIN ),
 			"appearance"                  => __( "Appearance", Forminator::DOMAIN ),
+			"asterisk"                	  => __( "Asterisk", Forminator::DOMAIN ),
 			"form_behaviour"              => __( "Form behaviour", Forminator::DOMAIN ),
 			"form_emails"                 => __( "Form emails", Forminator::DOMAIN ),
 			"form_pagination"             => __( "Pagination", Forminator::DOMAIN ),
 			"advanced"                    => __( "Advanced", Forminator::DOMAIN ),
+			"filled_elements"             => __( "Filled elements", Forminator::DOMAIN ),
 			"form_style"                  => __( "Form style", Forminator::DOMAIN ),
+			"extras"                	  => __( "Extras", Forminator::DOMAIN ),
+			"error_elements"              => __( "Error elements", Forminator::DOMAIN ),
+			"helper"      		          => __( "Helper", Forminator::DOMAIN ),
 			"fields_style"                => __( "Fields style", Forminator::DOMAIN ),
+			"design_colors"	              => __( "Design & Colors", Forminator::DOMAIN ),
+			"design_colors_desc"          => __( "Choose a pre-made style for your form and further customize it's appearance.", Forminator::DOMAIN ),
 			"default"                     => __( "Default design", Forminator::DOMAIN ),
 			"flat"                        => __( "Flat design", Forminator::DOMAIN ),
 			"bold"                        => __( "Bold design", Forminator::DOMAIN ),
 			"material"                    => __( "Material design", Forminator::DOMAIN ),
+			"typography"                  => __( "Typography", Forminator::DOMAIN ),
 			"custom"                      => __( "Custom design", Forminator::DOMAIN ),
 			"open_fields"                 => __( "Open fields", Forminator::DOMAIN ),
 			"enclosed_fields"             => __( "Enclosed fields", Forminator::DOMAIN ),
@@ -219,21 +242,32 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"custom_font_placeholder"     => __( "E.g. 'Arial', sans-serif", Forminator::DOMAIN ),
 			"custom_font_description"     => __( "Type the font family name, as you would in CSS", Forminator::DOMAIN ),
 			"customize_colors"            => __( "Customize colors", Forminator::DOMAIN ),
+			"field"                 	  => __( "Field", Forminator::DOMAIN ),
 			"font_family"                 => __( "Font family", Forminator::DOMAIN ),
 			"font_size"                   => __( "Font size", Forminator::DOMAIN ),
 			"font_weight"                 => __( "Font weight", Forminator::DOMAIN ),
+			"form_bg"                 	  => __( "Form background", Forminator::DOMAIN ),
+			"form_border"                 => __( "Form border", Forminator::DOMAIN ),
 			"custom_text"                 => __( "Custom text", Forminator::DOMAIN ),
+			"general"         			  => __( "General", Forminator::DOMAIN ),
+			"custom_text_desc"            => __( "To customize content of some available form elements.", Forminator::DOMAIN ),
 			"custom_submit_text"          => __( "Enter your submit button text", Forminator::DOMAIN ),
 			"use_custom_submit"           => __( "Use custom submit button text", Forminator::DOMAIN ),
 			"use_custom_invalid_form"     => __( "Use custom invalid form message", Forminator::DOMAIN ),
 			"custom_invalid_form_message" => __( "Enter your invalid form message", Forminator::DOMAIN ),
+			"custom_css"				  => __( "Custom CSS", Forminator::DOMAIN ),
+			"custom_css_desc"			  => __( "For more advanced customization options use custom CSS.", Forminator::DOMAIN ),
 			"use_custom_css"              => __( "Use custom CSS for this module", Forminator::DOMAIN ),
 			"css_selectors"               => __( "Available CSS Selectors (click to add)", Forminator::DOMAIN ),
 			"form_lifespan"               => __( "Form lifespan", Forminator::DOMAIN ),
 			"after_form_submit"           => __( "After form submit", Forminator::DOMAIN ),
 			"submission"                  => __( "Submission", Forminator::DOMAIN ),
+			"submission_behaviour"        => __( "Submission behaviour", Forminator::DOMAIN ),
+			"submission_behaviour_desc"   => __( "Choose what you want to happen after your visitor has successfully submitted their form.", Forminator::DOMAIN ),
+			"submission_method" 		  => __( "Submission method", Forminator::DOMAIN ),
 			"enable_ajax"                 => __( "Enable AJAX", Forminator::DOMAIN ),
 			"validation"                  => __( "Validation", Forminator::DOMAIN ),
+			"validation_method"           => __( "Validation Method", Forminator::DOMAIN ),
 			"security"                    => __( "Security", Forminator::DOMAIN ),
 			"form_doesnt_expire"          => __( "Form does not expire", Forminator::DOMAIN ),
 			"on_certain_date"             => __( "Expires on certain date", Forminator::DOMAIN ),
@@ -246,6 +280,8 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"enable_honeypot"             => __( "Enable honeypot protection", Forminator::DOMAIN ),
 			"only_logged"                 => __( "Only logged-in users can submit", Forminator::DOMAIN ),
 			"select_font"                 => __( "Select font", Forminator::DOMAIN ),
+			"subtitle"        		      => __( "Subtitle", Forminator::DOMAIN ),
+			"title"			              => __( "Title", Forminator::DOMAIN ),
 			"custom_font"                 => __( "Custom user font", Forminator::DOMAIN ),
 			"label"                       => __( "Label", Forminator::DOMAIN ),
 			"labels"                      => __( "Labels", Forminator::DOMAIN ),
@@ -253,7 +289,10 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"value"                       => __( "Value", Forminator::DOMAIN ),
 			"description"                 => __( "Description", Forminator::DOMAIN ),
 			"send_user_email"             => __( "Send user email", Forminator::DOMAIN ),
-			"send_admin_email"            => __( "Send me (admin) email", Forminator::DOMAIN ),
+			"send_admin_email"            => __( "Send admin(s) email", Forminator::DOMAIN ),
+			"admin_email_recipient"       => __( "Recipients", Forminator::DOMAIN ),
+			"admin_email_search_noresult" => __( "No Result Found", Forminator::DOMAIN ),
+			"admin_email_searching"       => __( "Searching", Forminator::DOMAIN ),
 			"add_form_data"               => __( "Add form based data", Forminator::DOMAIN ),
 			"subject"                     => __( "Subject", Forminator::DOMAIN ),
 			"body"                        => __( "Body", Forminator::DOMAIN ),
@@ -272,9 +311,13 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"months"                      => __( "month(s)", Forminator::DOMAIN ),
 			"years"                       => __( "year(s)", Forminator::DOMAIN ),
 			"form_name"                   => __( "Name your form", Forminator::DOMAIN ),
+			"form_name_main"              => __( "Form name", Forminator::DOMAIN ),
 			"form_name_validation"        => __( "Form name cannot be empty! Please pick a name for your form.", Forminator::DOMAIN ),
+			"form_name_main_desc"         => __( "Pick a name for your form module. This is for you to be able to identify forms and will not be displayed on your site.", Forminator::DOMAIN ),
 			"pagination_none"             => __( "None", Forminator::DOMAIN ),
 			"pagination_bar"              => __( "Progress bar", Forminator::DOMAIN ),
+			"pagination_header"           => __( "Pagination Header", Forminator::DOMAIN ),
+			"pagination_header_desc"      => __( "Choose a pre-made style for your form pagination header or do not show it at all.", Forminator::DOMAIN ),
 			"pagination_nav"              => __( "Navigation Steps", Forminator::DOMAIN ),
 			"pagination_off_label"        => __( "When this option is selected no header with pagination will show up on your form.", Forminator::DOMAIN ),
 			"pagination_bar_label"        => __( "When this option is selected you will see a progress bar going from 0% on first page to 100% on last page.", Forminator::DOMAIN ),
@@ -289,6 +332,8 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"pagination_next"             => __( "Next", Forminator::DOMAIN ),
 			"inputs"                      => __( "Inputs", Forminator::DOMAIN ),
 			"border"                      => __( "Border", Forminator::DOMAIN ),
+			"admin_subject"               => __( "New Form Entry for {form_name}", Forminator::DOMAIN ),
+			"admin_message"               => __( "You have a new website form submission: \n {all_fields} \n This message was sent from {site_url}", Forminator::DOMAIN )
 		);
 
 		return $data;

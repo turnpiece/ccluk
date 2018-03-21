@@ -457,7 +457,7 @@ class Main extends Controller {
 			'message' => __( "Your settings have been updated.", wp_defender()->domain )
 		);
 		$res['reload'] = 1;
-
+		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( $res );
 	}
 }

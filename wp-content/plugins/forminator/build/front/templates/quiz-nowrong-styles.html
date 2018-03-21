@@ -1,0 +1,739 @@
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-title-settings' ) ) { ?>
+	
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-title-color' ) && !empty( $properties['nowrong-title-color'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+			color: <?php echo $properties['nowrong-title-color'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-title-font-size' ) ) { ?>
+
+		<?php if ( $properties['nowrong-title-font-size'] != '24' ) { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+				font-size: calc(<?php echo $properties['nowrong-title-font-size'] ?>px - 6px);
+			}
+
+			@media (min-width: 783px){
+
+				.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+					font-size: <?php echo $properties['nowrong-title-font-size'] ?>px;
+				}
+
+				.forminator-quiz-<?php echo $properties['formID'] ?>.forminator-size--small .forminator-quiz--header .forminator-quiz--title {
+					font-size: calc(<?php echo $properties['nowrong-title-font-size'] ?>px - 6px);
+				}
+
+			}
+
+		<?php } else { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+				font-size: <?php echo $properties['nowrong-title-font-size'] ?>px;
+			}
+
+		<?php } ?>
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-title-font-family' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+
+			<?php if ( $properties['nowrong-title-font-family'] != 'custom' && !empty( $properties['nowrong-title-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-title-font-family'] ?>;
+			<?php } ?>
+			
+			<?php if ( $properties['nowrong-title-font-family'] == 'custom' && !empty( $properties['nowrong-title-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-title-custom-family'] ?>;
+			<?php } ?>
+			
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-title-font-weight' ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--title {
+			font-weight: <?php echo $properties['nowrong-title-font-weight'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-settings' ) ) { ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-color' ) && !empty( $properties['nowrong-description-color'] ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+			color: <?php echo $properties['nowrong-description-color'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-size' ) ) { ?>
+
+		<?php if ( $properties['nowrong-description-font-size'] != '16' ) { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+				font-size: calc(<?php echo $properties['nowrong-description-font-size'] ?>px - 4px);
+			}
+
+			@media (min-width: 783px){
+
+				.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+					font-size: <?php echo $properties['nowrong-description-font-size'] ?>px;
+				}
+
+				.forminator-quiz-<?php echo $properties['formID'] ?>.forminator-size--small .forminator-quiz--header .forminator-quiz--description {
+					font-size: calc(<?php echo $properties['nowrong-description-font-size'] ?>px - 4px);
+				}
+
+			}
+
+		<?php } else { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+				font-size: <?php echo $properties['nowrong-description-font-size'] ?>px;
+			}
+
+		<?php } ?>
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-family' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+
+			<?php if ( $properties['nowrong-description-font-family'] != 'custom' && !empty( $properties['nowrong-description-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-description-font-family'] ?>;
+			<?php } ?>
+			
+			<?php if ( $properties['nowrong-description-font-family'] == 'custom' && !empty( $properties['nowrong-description-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-description-custom-family'] ?>;
+			<?php } ?>
+			
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-description-font-weight' ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--description {
+			font-weight: <?php echo $properties['nowrong-description-font-weight'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-image-settings' ) ) { ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-image-border-color' ) && !empty( $properties['nowrong-image-border-color'] ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--image {
+			color: <?php echo $properties['nowrong-image-border-color'] ?>;
+		}
+
+	<?php } else { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--image {
+			color: #000;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-image-border-width' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--image {
+			border-width: <?php echo $properties['nowrong-image-border-width'] ?>px;
+		}
+
+	<?php } else { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--image {
+			border-width: 0;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-image-border-style' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--header .forminator-quiz--image {
+			border-style: <?php echo $properties['nowrong-image-border-style'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-settings' ) ) { ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-color' ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+			color: <?php echo $properties['nowrong-question-color'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-font-size' ) ) { ?>
+
+		<?php if ( $properties['nowrong-question-font-size'] != '24' ) { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+				font-size: calc(<?php echo $properties['nowrong-question-font-size'] ?>px - 4px);
+			}
+
+			@media (min-width: 783px){
+
+				.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+					font-size: <?php echo $properties['nowrong-question-font-size'] ?>px;
+				}
+
+				.forminator-quiz-<?php echo $properties['formID'] ?>.forminator-size--small .forminator-quiz--question .forminator-question--title {
+					font-size: calc(<?php echo $properties['nowrong-question-font-size'] ?>px - 4px);
+				}
+
+			}
+
+		<?php } else { ?>
+
+			.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+				font-size: <?php echo $properties['nowrong-question-font-size'] ?>px;
+			}
+
+		<?php } ?>
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-font-family' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+
+			<?php if ( $properties['nowrong-question-font-family'] != 'custom' && !empty( $properties['nowrong-question-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-question-font-family'] ?>;
+			<?php } ?>
+			
+			<?php if ( $properties['nowrong-question-font-family'] == 'custom' && !empty( $properties['nowrong-question-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-question-custom-family'] ?>;
+			<?php } ?>
+			
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-question-font-weight' ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-question--title {
+			font-weight: <?php echo $properties['nowrong-question-font-weight'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-settings' ) ) { ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-border-static' ) && !empty( $properties['nowrong-answer-border-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design {
+			border-color: <?php echo $properties['nowrong-answer-border-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-border-hover' ) && !empty( $properties['nowrong-answer-border-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design:hover {
+			border-color: <?php echo $properties['nowrong-answer-border-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-border-active' ) && !empty( $properties['nowrong-answer-border-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--input:checked + .forminator-answer--design {
+			border-color: <?php echo $properties['nowrong-answer-border-active'] ?>;
+			box-shadow: inset 0 0 0 1px <?php echo $properties['nowrong-answer-border-active'] ?>;
+			-ms-box-shadow: inset 0 0 0 1px <?php echo $properties['nowrong-answer-border-active'] ?>;
+			-moz-box-shadow: inset 0 0 0 1px <?php echo $properties['nowrong-answer-border-active'] ?>;
+			-webkit-box-shadow: inset 0 0 0 1px <?php echo $properties['nowrong-answer-border-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-background-static' ) && !empty( $properties['nowrong-answer-background-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design {
+			background-color: <?php echo $properties['nowrong-answer-background-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-background-hover' ) && !empty( $properties['nowrong-answer-background-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design:hover {
+			background-color: <?php echo $properties['nowrong-answer-background-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-background-active' ) && !empty( $properties['nowrong-answer-background-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--input:checked + .forminator-answer--design {
+			background-color: <?php echo $properties['nowrong-answer-background-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbo-static' ) && !empty( $properties['nowrong-answer-chkbo-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--check {
+			border-color: <?php echo $properties['nowrong-answer-chkbo-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbo-hover' ) && !empty( $properties['nowrong-answer-chkbo-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design:hover .forminator-answer--text .forminator-answer--check {
+			border-color: <?php echo $properties['nowrong-answer-chkbo-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbo-active' ) && !empty( $properties['nowrong-answer-chkbo-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--input:checked + .forminator-answer--design .forminator-answer--text .forminator-answer--check {
+			border-color: <?php echo $properties['nowrong-answer-chkbo-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbg-static' ) && !empty( $properties['nowrong-answer-chkbg-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--check {
+			background-color: <?php echo $properties['nowrong-answer-chkbg-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbg-hover' ) && !empty( $properties['nowrong-answer-chkbg-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design:hover .forminator-answer--text .forminator-answer--check {
+			background-color: <?php echo $properties['nowrong-answer-chkbg-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-chkbg-active' ) && !empty( $properties['nowrong-answer-chkbg-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--input:checked + .forminator-answer--design .forminator-answer--text .forminator-answer--check {
+			background-color: <?php echo $properties['nowrong-answer-chkbg-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-color-static' ) && !empty( $properties['nowrong-answer-color-static'] ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--name {
+			color: <?php echo $properties['nowrong-answer-color-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-color-hover' ) && !empty( $properties['nowrong-answer-color-hover'] ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design:hover .forminator-answer--text .forminator-answer--name {
+			color: <?php echo $properties['nowrong-answer-color-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-color-active' ) && !empty( $properties['nowrong-answer-color-active'] ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--input:checked + .forminator-answer--design .forminator-answer--text .forminator-answer--name {
+			color: <?php echo $properties['nowrong-answer-color-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-font-size' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--name {
+			font-size: <?php echo $properties['nowrong-answer-font-size'] ?>px;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-font-family' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--name {
+
+			<?php if ( $properties['nowrong-answer-font-family'] != 'custom' && !empty( $properties['nowrong-answer-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-answer-font-family'] ?>;
+			<?php } ?>
+			
+			<?php if ( $properties['nowrong-answer-font-family'] == 'custom' && !empty( $properties['nowrong-answer-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-answer-custom-family'] ?>;
+			<?php } ?>
+			
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-answer-font-weight' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-quiz--question .forminator-answer .forminator-answer--design .forminator-answer--text .forminator-answer--name {
+			font-weight: <?php echo $properties['nowrong-answer-font-weight'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-settings' ) ) { ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-background-static' ) && !empty( $properties['nowrong-submit-background-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button {
+			background-color: <?php echo $properties['nowrong-submit-background-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-background-hover' ) && !empty( $properties['nowrong-submit-background-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:hover {
+			background-color: <?php echo $properties['nowrong-submit-background-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-background-active' ) && !empty( $properties['nowrong-submit-background-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:focus,
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:active {
+			background-color: <?php echo $properties['nowrong-submit-background-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-color-static' ) && !empty( $properties['nowrong-submit-color-static'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button {
+			color: <?php echo $properties['nowrong-submit-color-static'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-color-hover' ) && !empty( $properties['nowrong-submit-color-hover'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:hover {
+			color: <?php echo $properties['nowrong-submit-color-hover'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-color-active' ) && !empty( $properties['nowrong-submit-color-active'] ) ) { ?>
+		
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:focus,
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button:active {
+			color: <?php echo $properties['nowrong-submit-color-active'] ?>;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-font-size' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button {
+			font-size: <?php echo $properties['nowrong-submit-font-size'] ?>px;
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-font-family' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button {
+
+			<?php if ( $properties['nowrong-submit-font-family'] != 'custom' && !empty( $properties['nowrong-submit-font-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-submit-font-family'] ?>;
+			<?php } ?>
+			
+			<?php if ( $properties['nowrong-submit-font-family'] == 'custom' && !empty( $properties['nowrong-submit-custom-family'] ) ) { ?>
+				font-family: <?php echo $properties['nowrong-submit-custom-family'] ?>;
+			<?php } ?>
+			
+		}
+
+	<?php } ?>
+
+	<?php if ( forminator_array_value_exists( $properties, 'nowrong-submit-font-weight' ) ) { ?>
+
+		.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-button {
+			font-weight: <?php echo $properties['nowrong-submit-font-weight'] ?>;
+		}
+
+	<?php } ?>
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-background-main' ) && !empty( $properties['nowrong-result-background-main'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result {
+		background-color: <?php echo $properties['nowrong-result-background-main'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-background-head' ) && !empty( $properties['nowrong-result-background-head'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header {
+		background-color: <?php echo $properties['nowrong-result-background-head'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-background-body' ) && !empty( $properties['nowrong-result-background-body'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content {
+		background-color: <?php echo $properties['nowrong-result-background-body'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-border-color' ) && !empty( $properties['nowrong-result-border-color'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result {
+		border-color: <?php echo $properties['nowrong-result-border-color'] ?>;
+	}
+
+<?php } else { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result {
+		border-color: #17A8E3;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-border-width' ) && !empty( $properties['nowrong-result-border-width'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result {
+		border-width: <?php echo $properties['nowrong-result-border-width'] ?>px;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-border-style' ) && !empty( $properties['nowrong-result-border-style'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result {
+		border-style: <?php echo $properties['nowrong-result-border-style'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-quiz-color' ) && !empty( $properties['nowrong-result-quiz-color'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header p {
+		color: <?php echo $properties['nowrong-result-quiz-color'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-quiz-font-size' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header p {
+		font-size: <?php echo $properties['nowrong-result-quiz-font-size'] ?>px;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-quiz-font-family' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header p {
+
+		<?php if ( $properties['nowrong-result-quiz-font-family'] != 'custom' && !empty( $properties['nowrong-result-quiz-font-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-quiz-font-family'] ?>;
+		<?php } ?>
+		
+		<?php if ( $properties['nowrong-result-quiz-font-family'] == 'custom' && !empty( $properties['nowrong-result-quiz-custom-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-quiz-custom-family'] ?>;
+		<?php } ?>
+		
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-quiz-font-weight' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header p {
+		font-weight: <?php echo $properties['nowrong-result-quiz-font-weight'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-background-static' ) && !empty( $properties['nowrong-result-retake-background-static'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button {
+		background-color: <?php echo $properties['nowrong-result-retake-background-static'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-background-hover' ) && !empty( $properties['nowrong-result-retake-background-hover'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:hover {
+		background-color: <?php echo $properties['nowrong-result-retake-background-hover'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-background-active' ) && !empty( $properties['nowrong-result-retake-background-active'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:focus,
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:active {
+		background-color: <?php echo $properties['nowrong-result-retake-background-active'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-color-static' ) && !empty( $properties['nowrong-result-retake-color-static'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button {
+		color: <?php echo $properties['nowrong-result-retake-color-static'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-color-hover' ) && !empty( $properties['nowrong-result-retake-color-hover'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:hover {
+		color: <?php echo $properties['nowrong-result-retake-color-hover'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-color-active' ) && !empty( $properties['nowrong-result-retake-color-active'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:focus,
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button:active {
+		color: <?php echo $properties['nowrong-result-retake-color-active'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-font-size' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button {
+		font-size: <?php echo $properties['nowrong-result-retake-font-size'] ?>px;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-font-family' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button {
+
+		<?php if ( $properties['nowrong-result-retake-font-family'] != 'custom' && !empty( $properties['nowrong-result-retake-font-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-retake-font-family'] ?>;
+		<?php } ?>
+		
+		<?php if ( $properties['nowrong-result-retake-font-family'] == 'custom' && !empty( $properties['nowrong-result-retake-custom-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-retake-custom-family'] ?>;
+		<?php } ?>
+		
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-retake-font-weight' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--header button {
+		font-weight: <?php echo $properties['nowrong-result-retake-font-weight'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-title-color' ) && !empty( $properties['nowrong-result-title-color'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--title {
+		color: <?php echo $properties['nowrong-result-title-color'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-title-font-size' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--title {
+		font-size: <?php echo $properties['nowrong-result-title-font-size'] ?>px;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-title-font-family' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--title {
+
+		<?php if ( $properties['nowrong-result-title-font-family'] != 'custom' && !empty( $properties['nowrong-result-title-font-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-title-font-family'] ?>;
+		<?php } ?>
+		
+		<?php if ( $properties['nowrong-result-title-font-family'] == 'custom' && !empty( $properties['nowrong-result-title-custom-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-title-custom-family'] ?>;
+		<?php } ?>
+		
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-title-font-weight' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--title {
+		font-weight: <?php echo $properties['nowrong-result-title-font-weight'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-description-color' ) && !empty( $properties['nowrong-result-description-color'] ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--description {
+		color: <?php echo $properties['nowrong-result-description-color'] ?>;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-description-font-size' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--description {
+		font-size: <?php echo $properties['nowrong-result-description-font-size'] ?>px;
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-description-font-family' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--description {
+
+		<?php if ( $properties['nowrong-result-description-font-family'] != 'custom' && !empty( $properties['nowrong-result-description-font-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-description-font-family'] ?>;
+		<?php } ?>
+		
+		<?php if ( $properties['nowrong-result-description-font-family'] == 'custom' && !empty( $properties['nowrong-result-description-custom-family'] ) ) { ?>
+			font-family: <?php echo $properties['nowrong-result-description-custom-family'] ?>;
+		<?php } ?>
+		
+	}
+
+<?php } ?>
+
+<?php if ( forminator_array_value_exists( $properties, 'nowrong-result-description-font-weight' ) ) { ?>
+
+	.forminator-quiz-<?php echo $properties['formID'] ?> .forminator-result .forminator-result--content .forminator-result--text .forminator-result--description {
+		font-weight: <?php echo $properties['nowrong-result-description-font-weight'] ?>;
+	}
+
+<?php } ?>

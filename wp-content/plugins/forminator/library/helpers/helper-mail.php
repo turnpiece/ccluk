@@ -17,10 +17,11 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @param $user_name
  * @param $user_email
  * @param $user_login
+ * @param $site_url
  *
  * @return array
  */
-function forminator_set_message_vars( $embed_id, $embed_title, $embed_url, $user_name, $user_email, $user_login ) {
+function forminator_set_message_vars( $embed_id, $embed_title, $embed_url, $user_name, $user_email, $user_login, $site_url ) {
 	$message_vars = array();
 	$message_vars['user_ip'] 		= Forminator_Geo::get_user_ip();
 	$message_vars['date_mdy'] 		= date("m/d/Y");
@@ -34,5 +35,7 @@ function forminator_set_message_vars( $embed_id, $embed_title, $embed_url, $user
 	$message_vars['user_name']   	= $user_name;
 	$message_vars['user_email']  	= $user_email;
 	$message_vars['user_login']		= $user_login;
+	$message_vars['site_url']       = $site_url;
+
 	return $message_vars;
 }

@@ -114,7 +114,7 @@ class Security_Key_Service extends Rule_Service implements IRule_Service {
 		//now check the missing
 		if ( count( $missing ) ) {
 			//for any reason we missing a security key, this mean wp-config altered by 3rd party, halt
-			return new \WP_Error( Error_Code::UNKNOWN_WPCONFIG, __( "Defender can't recognize your wp-config.php, please revert it to original state for further process.", wp_defender()->domain ) );
+			return new \WP_Error( Error_Code::UNKNOWN_WPCONFIG, __( "Defender can't recognize your wp-config.php, please revert it to original state for further process.", wp_defender()->domain ) );	   			 	 		  		  	 	
 		}
 
 		//we already check for perm above, no need to check again

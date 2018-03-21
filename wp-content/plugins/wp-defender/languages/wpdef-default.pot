@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License (Version 2 - GPLv2).
 msgid ""
 msgstr ""
-"Project-Id-Version: Defender Pro 1.7.5\n"
+"Project-Id-Version: Defender Pro 1.7.6\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-02-07 07:25:52+00:00\n"
+"POT-Creation-Date: 2018-03-19 04:30:34+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -411,7 +411,7 @@ msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:457
 #: app/module/audit/controller/main.php:197
-#: app/module/ip-lockout/controller/main.php:693
+#: app/module/ip-lockout/controller/main.php:700
 #: app/module/scan/controller/main.php:306
 msgid "Your settings have been updated."
 msgstr ""
@@ -1074,7 +1074,7 @@ msgstr ""
 msgid "Login Name"
 msgstr ""
 
-#: app/module/audit/component/options-audit.php:175 app/view/login-modal.php:11
+#: app/module/audit/component/options-audit.php:175
 msgid "Password"
 msgstr ""
 
@@ -1173,7 +1173,7 @@ msgstr ""
 #: app/module/scan/view/layouts/layout.php:132
 #: app/module/scan/view/layouts/layout.php:149
 #: app/module/scan/view/setting-free.php:3 app/module/scan/view/setting.php:3
-#: app/view/settings.php:6 free/main-activator.php:158 main-activator.php:96
+#: app/view/settings.php:6 free/main-activator.php:157 main-activator.php:98
 msgid "Settings"
 msgstr ""
 
@@ -1437,6 +1437,7 @@ msgid "<a href=\"%s\">Configure reporting preferences</a>"
 msgstr ""
 
 #: app/module/audit/view/free.php:9 free/main-activator.php:118
+#: free/main-activator.php:163
 msgid "Upgrade"
 msgstr ""
 
@@ -2458,8 +2459,8 @@ msgid "Lockout notifications are disabled"
 msgstr ""
 
 #: app/module/ip-lockout/component/login-protection-api.php:61
-#: app/module/ip-lockout/controller/main.php:588
-#: app/module/ip-lockout/controller/main.php:597
+#: app/module/ip-lockout/controller/main.php:595
+#: app/module/ip-lockout/controller/main.php:604
 msgid ""
 "You have been locked out by the administrator for attempting to login with "
 "a banned username"
@@ -2598,64 +2599,64 @@ msgstr ""
 msgid "Demo"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:402
+#: app/module/ip-lockout/controller/main.php:409
 msgid "404 lockout alert for %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:429
+#: app/module/ip-lockout/controller/main.php:436
 msgid "Login lockout alert for %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:527
+#: app/module/ip-lockout/controller/main.php:534
 msgid "Failed login attempt with username %s"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:590
-#: app/module/ip-lockout/controller/main.php:600
+#: app/module/ip-lockout/controller/main.php:597
+#: app/module/ip-lockout/controller/main.php:607
 msgid "%d login attempts remaining"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:689
+#: app/module/ip-lockout/controller/main.php:696
 msgid ""
 "Your settings have been updated, however some IPs were removed because "
 "invalid format, or you blacklist yourself"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:700
+#: app/module/ip-lockout/controller/main.php:707
 msgid "Login Protection has been activated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:702
+#: app/module/ip-lockout/controller/main.php:709
 msgid "Login Protection has been deactivated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:707
+#: app/module/ip-lockout/controller/main.php:714
 msgid "404 Detection has been activated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:709
+#: app/module/ip-lockout/controller/main.php:716
 msgid "404 Detection has been deactivated."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:739 app/module/ip-lockout.php:35
+#: app/module/ip-lockout/controller/main.php:746 app/module/ip-lockout.php:35
 #: app/view/activator-free.php:33 app/view/activator.php:49
 msgid "IP Lockouts"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:756
-#: app/module/ip-lockout/controller/main.php:762
+#: app/module/ip-lockout/controller/main.php:763
+#: app/module/ip-lockout/controller/main.php:769
 msgid "Your file is invalid!"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:768
+#: app/module/ip-lockout/controller/main.php:775
 msgid "Your file content is invalid!"
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:777
+#: app/module/ip-lockout/controller/main.php:784
 msgid "Your whitelist/blacklist has been successfully imported."
 msgstr ""
 
-#: app/module/ip-lockout/controller/main.php:962
+#: app/module/ip-lockout/controller/main.php:969
 msgid "Thanks for your patience. All set."
 msgstr ""
 
@@ -2899,7 +2900,6 @@ msgstr ""
 #: app/module/ip-lockout/view/emails/login-lockout.php:483
 #: app/module/ip-lockout/view/emails/login-username-ban.php:482
 #: app/module/ip-lockout/view/emails/report.php:515
-#: app/module/ip-lockout/view/locked.php:7
 msgid "WP Defender"
 msgstr ""
 
@@ -3320,8 +3320,8 @@ msgid "This WordPress core file appears modified"
 msgstr ""
 
 #: app/module/scan/behavior/core-result.php:75
-#: app/module/scan/behavior/core-result.php:405
-#: app/module/scan/behavior/core-result.php:410
+#: app/module/scan/behavior/core-result.php:406
+#: app/module/scan/behavior/core-result.php:411
 #: app/module/scan/behavior/pro/content-result.php:209
 #: app/module/scan/behavior/pro/content-result.php:230
 #: app/module/scan/behavior/pro/content-result.php:235
@@ -3383,11 +3383,11 @@ msgstr ""
 msgid "No"
 msgstr ""
 
-#: app/module/scan/behavior/core-result.php:215
+#: app/module/scan/behavior/core-result.php:216
 msgid "Restore to Original"
 msgstr ""
 
-#: app/module/scan/behavior/core-result.php:264
+#: app/module/scan/behavior/core-result.php:265
 msgid ""
 "A stray file has been found in your site directory, which your version of "
 "WordPress doesn't need. As far as we can tell, the file is harmless (and "
@@ -3396,21 +3396,21 @@ msgid ""
 "beforehand"
 msgstr ""
 
-#: app/module/scan/behavior/core-result.php:280
-#: app/module/scan/behavior/core-result.php:302
-#: app/module/scan/behavior/core-result.php:324
+#: app/module/scan/behavior/core-result.php:281
+#: app/module/scan/behavior/core-result.php:303
+#: app/module/scan/behavior/core-result.php:325
 #: app/module/scan/behavior/pro/content-result.php:93
 msgid "Pulling source file..."
 msgstr ""
 
-#: app/module/scan/behavior/core-result.php:297
+#: app/module/scan/behavior/core-result.php:298
 msgid ""
 "Compare your file with the original file in the WordPress repository. "
 "Pieces highlighted in red will be removed when you patch the file, and "
 "pieces highlighted in green will be added."
 msgstr ""
 
-#: app/module/scan/behavior/core-result.php:319
+#: app/module/scan/behavior/core-result.php:320
 msgid ""
 "We found this folder in your WordPress file list. Your current version of "
 "WordPress doesn’t use this folder so it might belong to another "
@@ -4051,28 +4051,6 @@ msgstr ""
 msgid "FIND OUT MORE"
 msgstr ""
 
-#: app/view/login-modal.php:3
-msgid ""
-"To get access to our free API services you simply need to create a WPMU DEV "
-"account. It only takes two seconds and it’s absolutely free, forever."
-msgstr ""
-
-#: app/view/login-modal.php:7
-msgid "First name"
-msgstr ""
-
-#: app/view/login-modal.php:9
-msgid "Email address"
-msgstr ""
-
-#: app/view/login-modal.php:12
-msgid "minimum 8 characters"
-msgstr ""
-
-#: app/view/login-modal.php:22
-msgid "Create Account"
-msgstr ""
-
 #: app/view/requirement.php:11
 msgid ""
 "Defender is currently scanning your files for malicious code, please be "
@@ -4225,6 +4203,10 @@ msgstr ""
 msgid "<br/>Something went wrong. Please try again later!"
 msgstr ""
 
+#: free/main-activator.php:162 main-activator.php:103
+msgid "Docs"
+msgstr ""
+
 #: free-dashboard/module.php:377
 msgid ""
 "We're happy that you've chosen to install %s! Are you interested in how to "
@@ -4261,7 +4243,7 @@ msgstr ""
 msgid "Rate %s"
 msgstr ""
 
-#: main-activator.php:85
+#: main-activator.php:87
 msgid ""
 "We noticed you have both the free and pro versions of Defender installed, "
 "so we've automatically deactivated the free version for you."

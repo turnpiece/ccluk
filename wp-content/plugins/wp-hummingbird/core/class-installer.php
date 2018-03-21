@@ -199,6 +199,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 					self::upgrade_1_8();
 				}
 
+				if ( version_compare( $version, '1.8.0.4', '<' ) ) {
+					self::upgrade_1_8_0_4();
+				}
+
 				update_site_option( 'wphb_version', WPHB_VERSION );
 			} // End if().
 		}
@@ -630,6 +634,60 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 				$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
 				$pc_module->toggle_service( false );
 				$pc_module->toggle_service( true );
+			}
+		}
+
+		/**
+		 * Fix for corrupt scheduled performance scans.
+		 *
+		 * @since 1.8.0.4
+		 */
+		private static function upgrade_1_8_0_4() {
+			wp_clear_scheduled_hook( 'wphb_performance_scan' );
+
+			$options = WP_Hummingbird_Settings::get_settings( 'performance' );
+
+			// If not member, unset schedule.
+			if ( ! WP_Hummingbird_Utils::is_member() ) {
+				$options['reports'] = false;
+				unset( $options['frequency'] );
+				unset( $options['day'] );
+				unset( $options['time'] );
+			}
+
+			// If schedule is corrupt, reset it.
+			if ( isset( $options['reports'] ) && $options['reports'] ) {
+				$week_days = array(
+					'Monday',
+					'Tuesday',
+					'Wednesday',
+					'Thursday',
+					'Friday',
+					'Saturday',
+					'Sunday',
+				);
+
+				if ( ! isset( $options['day'] ) || ! in_array( $options['day'], $week_days, true ) ) {
+					$options['day'] = $week_days[ array_rand( $week_days, 1 ) ];
+				}
+
+				$options['time'] = mt_rand( 0, 23 ) . ':00';
+				$options['last_sent'] = '';
+
+				$frequency = array( 1, 7, 30 );
+				if ( ! isset( $options['frequency'] ) || ! in_array( $options['frequency'], $frequency, true ) ) {
+					$options['frequency'] = 7;
+				}
+				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
+			} else {
+				$options['reports'] = false;
+			}
+
+			WP_Hummingbird_Settings::update_settings( $options, 'performance' );
+
+			// Schedule next scan.
+			if ( WP_Hummingbird_Utils::is_member() && $options['reports'] ) {
+				wp_schedule_single_event( WP_Hummingbird_Module_Reporting_Cron::get_scheduled_scan_time(), 'wphb_performance_scan' );
 			}
 		}
 

@@ -162,7 +162,11 @@ $count = $this->countModules();
 									<a href="<?php echo admin_url( 'admin.php?page=forminator-poll-view&form_id=' . $module['id'] ) ?>"><?php _e( "View votes", Forminator::DOMAIN ); ?></a>
 								</li>
 								<li>
-									<a href="#" class="wpmudev-open-modal" data-modal="preview_polls" data-form-id="<?php echo $module['id']; ?>" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_preview_polls' ) ?>">
+									<a href="#" class="wpmudev-open-modal"
+                                       data-modal="preview_polls"
+                                       data-modal-title="<?php echo sprintf("%s - %s", __( "Preview Poll", Forminator::DOMAIN),  forminator_get_form_name( $module['id'], 'poll')); ?>"
+                                       data-form-id="<?php echo $module['id']; ?>"
+                                       data-nonce="<?php echo wp_create_nonce( 'forminator_popup_preview_polls' ) ?>">
 										<?php _e( "Preview poll", Forminator::DOMAIN ); ?>
 									</a>
 								</li>

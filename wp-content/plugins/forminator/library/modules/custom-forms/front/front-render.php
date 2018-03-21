@@ -109,6 +109,9 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 				} else {
 					add_action( 'wp_footer', array( $this, 'print_styles' ), 9999 );
 				}
+				if ( $this->is_admin ) {
+					add_action( 'forminator_before_form_render', array( $this, 'print_styles' ) );
+				}
 			} /** @noinspection PhpStatementHasEmptyBodyInspection */ else {
 				//Maybe show a message
 			}
@@ -188,6 +191,9 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function render_shortcode( $atts = array() ) {
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', 1 );
+		}
 		//use already created instance if already available
 		$view = self::get_instance();
 		if ( ! isset( $atts['id'] ) ) {
@@ -547,18 +553,24 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 
 		do_action( 'forminator_before_field_render', $field );
 
-		if ( ! $this->is_hidden( $field ) ) {
-			// Render before field markup
-			$html .= $this->render_field_before( $field );
-		}
+		// Get field object
+		/** @var Forminator_Field $field_object */
+		$field_object = forminator_get_field( $this->get_field_type($field) );
 
-		// Render field
-		$html .= $this->render_field( $field );
+		if($field_object->is_available($field)) {
+			if ( ! $this->is_hidden( $field ) ) {
+				// Render before field markup
+				$html .= $this->render_field_before( $field );
+			}
 
-		if ( ! $this->is_hidden( $field ) ) {
-			// Render after field markup
-			$html .= $this->render_field_after( $field );
-		}
+			// Render field
+			$html .= $this->render_field( $field );
+
+			if ( ! $this->is_hidden( $field ) ) {
+				// Render after field markup
+				$html .= $this->render_field_after( $field );
+			}
+        }
 
 		do_action( 'forminator_after_field_render', $field );
 
@@ -601,7 +613,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		$field_object = forminator_get_field( $type );
 
 		// Print field markup
-		$html .= $field_object->markup( $field );
+		$html .= $field_object->markup( $field, $this->model->settings );
 
 		$this->inline_rules    .= $field_object->get_validation_rules();
 		$this->inline_messages .= $field_object->get_validation_messages();
@@ -775,7 +787,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		/** @var Forminator_Field $field_object */
 		$field_object = forminator_get_field( $type );
 
-		if ( ( isset( $field['description'] ) && ! empty( $field['description'] ) ) || isset( $field['text_limit'] ) ) {
+		if ( ( isset( $field['description'] ) && ! empty( $field['description'] ) ) || isset( $field['text_limit'] ) || isset( $field['phone_limit'] ) ) {
 
 			$html = sprintf( '<div class="forminator-field--helper">' );
 
@@ -787,9 +799,11 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 				$html .= sprintf( '<label class="forminator-label--helper">%s</label>', $description );
 			}
 
-			if ( isset( $field['text_limit'] ) && isset( $field['limit'] ) && $field_object->has_counter ) {
-				if ( $field['text_limit'] ) {
-					$html .= sprintf( '<label class="forminator-label--limit" data-limit="%s" data-type="%s">0 / %s</label>', $field['limit'], $field['limit_type'], $field['limit'] );
+			if ( ( isset( $field['text_limit'] ) || isset( $field['phone_limit'] ) ) && isset( $field['limit'] ) && $field_object->has_counter ) {
+				if ( ( isset( $field['text_limit'] ) && $field['text_limit'] ) || ( isset( $field['phone_limit'] ) && $field['phone_limit'] ) ) {
+					$limit      = isset( $field['limit'] ) ? $field['limit'] : '';
+					$limit_type = isset( $field['limit_type'] ) ? $field['limit_type'] : '';
+					$html .= sprintf( '<label class="forminator-label--limit" data-limit="%s" data-type="%s">0 / %s</label>', $limit, $limit_type, $limit );
 				}
 			}
 
@@ -1438,7 +1452,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 				include $this->styles_template_path();
 				$styles = ob_get_clean();
 
-				if ( isset( $properties['formID'] ) ) {
+				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
 					?>
                     <style type="text/css"
                            id="forminator-custom-form-styles-<?php echo $properties['formID']; ?>"><?php echo $styles; ?></style>

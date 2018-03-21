@@ -71,6 +71,41 @@
 				e.preventDefault();
 				self.handle_click('next');
 			});
+
+			this.$el.on('reset', function (e) {
+				self.on_form_reset(e);
+			});
+
+			this.$el.on('forminator.front.pagination.focus.input', function (e, input) {
+				self.on_focus_input(e, input);
+			});
+
+		},
+
+		/**
+		 * On reset event of Form
+		 *
+		 * @since 1.0.3
+		 *
+		 * @param e
+		 */
+		on_form_reset: function (e) {
+			// Trigger pagination to first page
+			this.go_to(0);
+			this.update_buttons();
+		},
+
+		/**
+		 * On Input focused
+		 *
+		 * @param e
+		 * @param input
+		 */
+		on_focus_input: function (e, input) {
+			//Go to page where element exist
+			var step = this.get_page_of_input(input);
+			this.go_to(step);
+			this.update_buttons();
 		},
 
 		render_footer_navigation: function () {
@@ -156,11 +191,36 @@
 				.each(function (key, element) {
 					valid = validator.element(element);
 					if (!valid) {
+						if (errors === 0) {
+							// focus on first error
+							element.focus();
+						}
 						errors++;
 					}
 				});
 
 			return errors === 0;
+		},
+
+		/**
+		 * Get page on the input
+		 *
+		 * @since 1.0.3
+		 *
+		 * @param input
+		 * @returns {number|*}
+		 */
+		get_page_of_input: function(input) {
+			var step_page = this.step;
+			var page = $(input).closest('.forminator-pagination');
+			if (page.length > 0) {
+				var step = $(page).data('step');
+				if (typeof step !== 'undefined') {
+					step_page = +step;
+				}
+			}
+
+			return step_page;
 		},
 
 		update_buttons: function () {

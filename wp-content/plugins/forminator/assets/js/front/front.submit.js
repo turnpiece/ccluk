@@ -87,7 +87,7 @@
 						recaptcha_size = $captcha_field.data('size'),
 						$captcha_response = window.grecaptcha.getResponse(recaptcha_widget);
 
-					if(recaptcha_size === 'invisible') {
+					if (recaptcha_size === 'invisible') {
 						if ($captcha_response.length === 0) {
 							window.grecaptcha.execute(recaptcha_widget);
 							return false;
@@ -159,11 +159,14 @@
 									$this.find(".forminator-upload--remove").hide();
 									$this.find('.forminator-upload .forminator-input').val("");
 									$this.find('.forminator-upload .forminator-label').html("No file chosen");
-									
+
 									// Reset selects
-									$this.find('.forminator-select').each(function(){
+									$this.find('.forminator-select').each(function () {
 										$(this).val(null).trigger("change");
 									});
+
+									// restart condition after form reset to ensure values of input already reset-ed too
+									$this.trigger('forminator.front.condition.restart');
 								}
 
 								if (typeof data.data.url !== "undefined") {
@@ -185,7 +188,7 @@
 		},
 		handle_submit_quiz: function () {
 			var self = this;
-			
+
 			$('body').on('submit.frontSubmit', this.settings.forminator_selector, function (e) {
 				var form = $(this),
 					ajaxData = []
@@ -333,12 +336,18 @@
 			if (typeof forminatorFrontCondition !== 'undefined') {
 				// clear all validation message before show new one
 				this.$el.find('.forminator-label--validation').remove();
+				var i = 0;
 				errors.forEach(function (value) {
 					var element_id = Object.keys(value),
 						message = Object.values(value);
 
 					var element = forminatorFrontCondition.get_form_field(element_id);
 					if (element.length) {
+						if (i === 0) {
+							// focus on first error
+							self.$el.trigger('forminator.front.pagination.focus.input',[element]);
+							self.focus_to_element(element);
+						}
 						var $field_holder = $(element).closest('.forminator-field--inner');
 
 						if ($field_holder.length === 0) {
@@ -361,6 +370,7 @@
 						$(element).attr('aria-invalid', 'true');
 						$error_holder.text(message);
 						$field_holder.addClass('forminator-has_error');
+						i++;
 					}
 				});
 			}

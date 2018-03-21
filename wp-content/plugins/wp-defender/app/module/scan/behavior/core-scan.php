@@ -34,11 +34,10 @@ class Core_Scan extends Behavior {
 			$item->parentId = $model->id;
 			$item->type     = 'core';
 			$item->status   = $status;
-			$relPath 		= Scan_Api::convertToUnixPath( $current ); //Windows File path fix set outside to be used in both file and dir checks
-			$current_path	= Scan_Api::convertToWindowsAbsPath( $current ); //Windows needs fixing for the paths
+			$relPath        = Scan_Api::convertToUnixPath( $current ); //Windows File path fix set outside to be used in both file and dir checks
+			$current_path   = Scan_Api::convertToWindowsAbsPath( $current ); //Windows needs fixing for the paths
 			if ( is_file( $current ) ) {
 				//check if this is core or not
-
 				if ( isset( $checksums[ $relPath ] ) && strcmp( md5_file( $current ), $checksums[ $relPath ] ) !== 0 ) {
 					$item->raw = array(
 						'type' => 'modified',
@@ -46,6 +45,10 @@ class Core_Scan extends Behavior {
 					);
 					$id        = $item->save();
 				} elseif ( ! isset( $checksums[ $relPath ] ) ) {
+					//we need to check if this is wp-config, a hot fix for windows
+					if ( DIRECTORY_SEPARATOR == '\\' && $relPath == 'wp-config.php' ) {
+						return null;
+					}
 					$item->raw = array(
 						'type' => 'unknown',
 						'file' => $current_path
@@ -53,6 +56,13 @@ class Core_Scan extends Behavior {
 					$id        = $item->save();
 				}
 			} elseif ( is_dir( $current ) ) {
+				if ( in_array( $relPath, array(
+					'wp-content',
+					'wp-admin',
+					'wp-includes'
+				) ) ) {
+					return null;
+				}
 				//check if this empty then do nothing
 				$files = File_Helper::findFiles( $current, true, false );
 				if ( count( $files ) ) {

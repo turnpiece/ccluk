@@ -398,6 +398,44 @@ class Login_Protection_Api extends Component {
 		return false;
 	}
 
+	/**
+	 * Check if IP is from Bing, base on https://www.bing.com/webmaster/help/how-to-verify-bingbot-3905dc26
+	 *
+	 * @param $ip
+	 */
+	public static function isBingIP( $ip ) {
+		$hostname = gethostbyaddr( $ip );
+		if ( preg_match( '/\.msnbot|msn\.com$/i', $hostname ) ) {
+			$hosts = gethostbynamel( $hostname );
+			//check if this match the oringal ip
+			foreach ( $hosts as $host ) {
+				if ( $ip == $host ) {
+					return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	public static function isBingUA( $userAgent = '' ) {
+		if ( empty( $userAgent ) ) {
+			$userAgent = isset( $_SERVER['HTTP_USER_AGENT'] ) ? $_SERVER['HTTP_USER_AGENT'] : null;
+		}
+		if ( function_exists( 'mb_strtolower' ) ) {
+			$userAgent = mb_strtolower( $userAgent, 'UTF-8' );
+		} else {
+			$userAgent = strtolower( $userAgent );
+		}
+		//MSN Bot Useragent https://www.bing.com/webmaster/help/which-crawlers-does-bing-use-8c184ec0
+		$msnUA = "Bingbot|MSNBot|MSNBot-Media|AdIdxBot|BingPreview";
+
+		if ( preg_match( '/' . $msnUA . '/i', $userAgent ) ) {
+			return true;
+		}
+
+		return false;
+	}
+
 	public static function maybeSendNotification( $type, $model, $settings ) {
 		$lastSentKey = $type == 'login' ? 'lastSentLockout' : 'lastSent404';
 		$stopTimeKey = $type == 'login' ? 'stopTimeLockout' : 'stopTime404';

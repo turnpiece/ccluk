@@ -183,7 +183,7 @@ class Forminator_SingleValue extends Forminator_Field {
 			{[ if( field.value_type === "select" ) { ]}
 				<select class="wpmudev-select" style="width: 100%;" {{ field.required ? "required" : "" }}>
 					{[ _.each( field.options, function( value, key ){ ]}
-					<option>{{ encodeHtmlEntity( value.label ) }}</option>
+					<option>{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</option>
 					{[ }) ]}
 				</select>
 			{[ } ]}
@@ -194,7 +194,7 @@ class Forminator_SingleValue extends Forminator_Field {
 						<input type="radio" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }}>
 						<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpdui-icon wpdui-icon-check"></label>
 					</div>
-					<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpmudev-radio--label">{{ encodeHtmlEntity( value.label ) }}</label>
+					<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpmudev-radio--label">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</label>
 				</div>
 				{[ }) ]}
 			{[ } ]}
@@ -212,10 +212,11 @@ class Forminator_SingleValue extends Forminator_Field {
 	 * @since 1.0
 	 *
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$i           = 1;
 		$html        = '';
@@ -278,11 +279,18 @@ class Forminator_SingleValue extends Forminator_Field {
 	public function get_validation_messages() {
 		$messages    = '';
 		$field       = $this->field;
+		$id          = self::get_property( 'element_id', $field );
 		$is_required = $this->is_required( $field );
 
 		if ( $is_required ) {
 			if ( $is_required ) {
-				$messages .= '"' . $this->get_id( $field ) . '": "' . __( 'This field is required. Please select a value', Forminator::DOMAIN ) . '",' . "\n";
+				$required_message = apply_filters(
+					'forminator_single_field_required_validation_message',
+					__( 'This field is required. Please select a value', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages .= '"' . $this->get_id( $field ) . '": "' . $required_message . '",' . "\n";
 			}
 		}
 
@@ -300,9 +308,13 @@ class Forminator_SingleValue extends Forminator_Field {
 	public function validate( $field, $data ) {
 		if ( $this->is_required( $field ) ) {
 			$id    = self::get_property( 'element_id', $field );
-			$label = self::get_property( 'field_label', $field );
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = sprintf( __( 'This field is required. Please select a %s value', Forminator::DOMAIN ), $label );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_single_field_required_validation_message',
+					__( 'This field is required. Please select a value', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			}
 		}
 	}

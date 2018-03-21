@@ -230,6 +230,8 @@ class Main extends Controller {
 		if ( $settings->isWhitelist( $ip ) ) {
 			return;
 		} elseif ( $settings->isBlacklist( $ip ) ) {
+			header( 'HTTP/1.0 403 Forbidden' );
+			header( 'Cache-Control: private' );
 			$this->renderPartial( 'locked', array(
 				'message' => $settings->ip_lockout_message
 			) );
@@ -338,6 +340,11 @@ class Main extends Controller {
 		}
 		//now check if this from google
 		if ( Login_Protection_Api::isGoogleUA() && Login_Protection_Api::isGoogleIP( $ip ) ) {
+			return;
+		}
+
+		//or bing
+		if ( Login_Protection_Api::isBingUA() && Login_Protection_Api::isBingIP( $ip ) ) {
 			return;
 		}
 

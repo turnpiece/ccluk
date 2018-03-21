@@ -165,7 +165,7 @@ abstract class Forminator_Field {
 	 * @since 1.0
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		return '';
 	}
 
@@ -504,6 +504,19 @@ abstract class Forminator_Field {
 	}
 
 	/**
+	 * Check if phone field has input limit
+	 *
+	 * @since 1.0
+	 * @return bool
+	 */
+	public function has_phone_limit( $field ) {
+		$limit = self::get_property( 'phone_limit', $field, false );
+		$limit = filter_var( $limit , FILTER_VALIDATE_BOOLEAN );
+
+		return $limit;
+	}
+
+	/**
 	 * Check if field is required
 	 *
 	 * @since 1.0
@@ -675,5 +688,37 @@ abstract class Forminator_Field {
 
 	public function sanitize_value( $value ){
 		return htmlspecialchars($value, ENT_COMPAT);
+	}
+
+	/**
+	 * Check if field is available
+	 * Override it for field that needs dependencies
+	 * Example : `captcha` that needs `captcha_key` to be displayed properly
+	 * @see Forminator_Captcha::is_available()
+	 *
+	 * @since 1.0.3
+	 *
+	 * @param $field
+	 *
+	 * @return bool
+	 */
+	public function is_available( $field ) {
+		return true;
+	}
+
+	/**
+	 * Return form style
+	 *
+	 * @since 1.0.3
+	 * @param $settings
+	 *
+	 * @return string|bool
+	 */
+	public function get_form_style( $settings ) {
+		if( isset( $settings['form-style'] ) ) {
+			return $settings['form-style'];
+		}
+
+		return false;
 	}
 }

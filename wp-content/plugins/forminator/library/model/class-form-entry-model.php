@@ -150,12 +150,24 @@ class Forminator_Form_Entry_Model {
 				$value 	= wp_unslash( $value );
 				$value 	= maybe_serialize( $value );
 
-				$wpdb->insert( $this->table_meta_name, array(
+				$meta_id = $wpdb->insert( $this->table_meta_name, array(
 					'entry_id'     	=> $this->entry_id,
 					'meta_key'   	=> $key,
 					'meta_value'    => $value,
 					'date_created'  => date_i18n( 'Y-m-d H:i:s' )
 				) );
+
+				/**
+				 * Set Meta data for later usage
+				 *
+				 * @since 1.0.3
+				 */
+				if ( $meta_id ) {
+					$this->meta_data[ $key ] = array(
+						'id'    => $meta_id,
+						'value' => is_array( $value ) ? array_map( 'maybe_unserialize', $value ) : maybe_unserialize( $value ),
+					);
+				}
 			}
 		}
 		return true;

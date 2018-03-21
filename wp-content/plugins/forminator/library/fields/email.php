@@ -201,10 +201,11 @@ class Forminator_Email extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
@@ -225,7 +226,7 @@ class Forminator_Email extends Forminator_Field {
 	 */
 	public function get_validation_rules() {
 		$field = $this->field;
-		$rules = '"' . $this->get_id( $field)  .'": {' . "\n";
+		$rules = '"' . $this->get_id( $field )  .'": {' . "\n";
 		if( $this->is_required( $field ) ) {
 			$rules .= '"required": true,';
 		}
@@ -248,10 +249,16 @@ class Forminator_Email extends Forminator_Field {
 		$error        = self::get_property( 'validation_text', $field );
 		$error        = htmlentities( $error );
 
-		$messages = '"' . $this->get_id( $field)  .'": {' . "\n";
+		$messages = '"' . $id  .'": {' . "\n";
 
 		if( $this->is_required( $field ) ) {
-			$messages .= 'required: "' . __( 'This field is required. Please input a valid email', Forminator::DOMAIN ) . '",' . "\n";
+			$default_required_error_message = apply_filters(
+				'forminator_email_field_required_validation_message',
+				__( 'This field is required. Please input a valid email', Forminator::DOMAIN ),
+				$field,
+				$id
+			);
+			$messages .= 'required: "' . $default_required_error_message . '",' . "\n";
 		}
 
 		$error_message = __( 'This is not a valid email', Forminator::DOMAIN );
@@ -261,8 +268,26 @@ class Forminator_Email extends Forminator_Field {
 				$error_message = $error;
 			}
 		}
+
+		$error_message = apply_filters(
+			'forminator_email_field_custom_validation_message',
+			$error_message,
+			$id,
+			$field,
+			$custom_error
+		);
+
 		$messages .= 'emailWP: "' . $error_message . '",' . "\n";
+		$messages .= 'email: "' . $error_message . '",' . "\n";
 		$messages .= '},' . "\n";
+
+		$messages = apply_filters(
+			'forminator_email_field_validation_message',
+			$messages,
+			$id,
+			$field,
+			$custom_error
+		);
 
 		return $messages;
 	}

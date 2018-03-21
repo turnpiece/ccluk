@@ -204,14 +204,14 @@ class Forminator_Phone extends Forminator_Field {
 	 * @return array
 	 */
 	public function defaults() {
-		return array(
+		return apply_filters( 'forminator_phone_defaults_settings', array(
 			'required'              => false,
 			'limit'                 => 10,
 			'limit_type'            => 'characters',
 			'phone_validation_type' => "standard",
 			'field_label'           => __( 'Phone', Forminator::DOMAIN ),
 			'placeholder'           => __( 'E.g. +1 300 400 5000', Forminator::DOMAIN ),
-		);
+		) );
 	}
 
 	/**
@@ -226,9 +226,14 @@ class Forminator_Phone extends Forminator_Field {
 				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 			{[ } ]}
 			<input type="{{ field.type }}" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
-			{[ if( field.description ) { ]}
+			{[ if( field.description || field.phone_limit ) { ]}
 			<div class="wpmudev-group--info">
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
+				{[ if( field.description ) { ]}
+					<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
+				{[ } ]}
+				{[ if( field.phone_limit && field.limit ) { ]}
+					<span class="wpmudev-info--limit">0 / {{ field.limit }} </span>
+				{[ } ]}
 			</div>
 			{[ } ]}
 		</div>';
@@ -268,10 +273,11 @@ class Forminator_Phone extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field    = $field;
 		$id = $name  	= self::get_property( 'element_id', $field );
 		$id          	= $id . '-field';
@@ -306,6 +312,7 @@ class Forminator_Phone extends Forminator_Field {
 		$field        = $this->field;
 		$format_check = self::get_property( 'phone_validation', $field, false );
 		$phone_format = self::get_property( 'phone_validation_type', $field );
+		$has_limit = $this->has_phone_limit( $field );
 		$rules        = '"' . $this->get_id( $field ) . '": {';
 
 		if ( $this->is_required( $field ) ) {
@@ -317,6 +324,10 @@ class Forminator_Phone extends Forminator_Field {
 			$rules .= '"phoneUS": true';
 		}
 		//TODO: International Phone
+
+		if ( $has_limit ) {
+			$rules .= '"maxlength": ' . $field['limit'] . ',';
+		}
 
 		$rules .= '},';
 
@@ -333,11 +344,38 @@ class Forminator_Phone extends Forminator_Field {
 		$field          = $this->field;
 		$format_check 	= self::get_property( 'phone_validation', $field, false );
 		$phone_format 	= self::get_property( 'phone_validation_type', $field );
+		$has_limit 		= $this->has_phone_limit( $field );
 		$messages = '"' . $this->get_id( $field)  .'": {' . "\n";
 
 		if( $this->is_required( $field ) ) {
-			$messages .= 'required: "' . __( 'This field is required. Please input a phone number', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= 'phoneUS: "' . __( 'Please input a valid phone number', Forminator::DOMAIN ) . '"';
+			$messages .= 'required: "' . apply_filters(
+					'forminator_field_phone_required_validation_message',
+					__( 'This field is required. Please input a phone number', Forminator::DOMAIN ) . '",' . "\n",
+					$field,
+					$format_check,
+					$phone_format,
+					$this
+				);
+
+			$messages .= 'phoneUS: "' . apply_filters(
+					'forminator_field_phone_phoneUS_validation_message',
+					__( 'Please input a valid phone number', Forminator::DOMAIN ) . '"',
+					$field,
+					$format_check,
+					$phone_format,
+					$this
+				);
+		}
+
+		if ( $has_limit ) {
+			$messages .= '"maxlength": "' . apply_filters(
+					'forminator_field_phone_maxlength_validation_message',
+					__( 'You exceeded the allowed amount of numbers. Please check again', Forminator::DOMAIN ) . '",' . "\n",
+					$field,
+					$format_check,
+					$phone_format,
+					$this
+				);
 		}
 
 		$messages .= '},' . "\n";
@@ -359,9 +397,28 @@ class Forminator_Phone extends Forminator_Field {
 
 		if ( $this->is_required( $field ) ) {
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please input a phone number', Forminator::DOMAIN );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_field_phone_required_field_validation_message',
+					__( 'This field is required. Please input a phone number', Forminator::DOMAIN ),
+					$id,
+					$field,
+					$data,
+					$this
+				);
 
 				return false;
+			}
+		}
+		if ( $this->has_phone_limit( $field ) ) {
+			if ( ($field['limit_type'] === 'characters') && (strlen( $data ) > $field['limit']) ) {
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_field_phone_limit_validation_message',
+					__( 'You exceeded the allowed amount of numbers. Please check again', Forminator::DOMAIN ),
+					$id,
+					$field,
+					$data,
+					$this
+				);
 			}
 		}
 
@@ -378,7 +435,12 @@ class Forminator_Phone extends Forminator_Field {
 			if ( isset( $formats[ $phone_format ] ) ) {
 				$validation_type = $formats[ $phone_format ];
 				if ( $validation_type['regex'] && ! preg_match( $validation_type['regex'], $data ) ) {
-					$this->validation_message[ $id ] = sprintf( __( 'Invalid phone number. Please make sure the format is %s', Forminator::DOMAIN ), $validation_type['instruction'] );
+					$this->validation_message[ $id ] = sprintf(
+						apply_filters(
+							'forminator_field_phone_format_validation_message',
+							__( 'Invalid phone number. Please make sure the format is %s', Forminator::DOMAIN ), $validation_type['instruction']
+						)
+					);
 
 					return false;
 				}

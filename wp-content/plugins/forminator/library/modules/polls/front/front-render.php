@@ -15,6 +15,13 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	private static $instance = null;
 
 	/**
+	 * Scripts of graph results
+	 *
+	 * @var array
+	 */
+	private static $graph_result_scripts = array();
+
+	/**
 	 * @var array
 	 */
 	private static $forms_properties = array();
@@ -52,6 +59,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function render_shortcode( $atts = array() ) {
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', 1 );
+		}
 		//use already created instance if already available
 		$view = self::get_instance();
 		if ( ! isset( $atts['id'] ) ) {
@@ -75,6 +85,13 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 */
 	public function display( $id, $ajax = false, $data = false ) {
 		if ( $data && ! empty( $data ) ) {
+			// New form, we have to update the form id
+			$has_id = filter_var( $id, FILTER_VALIDATE_BOOLEAN );
+
+			if( ! $has_id && isset($data['settings']['formID']) ) {
+				$id = $data['settings']['formID'];
+			}
+
 			$this->model = Forminator_Poll_Form_Model::model()->load_preview( $id, $data );
 		} else {
 			$this->model = Forminator_Poll_Form_Model::model()->load( $id );
@@ -99,6 +116,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			} elseif ( isset( $_REQUEST['results'] ) && $isSameForm && $isSameRender && $this->show_link() ) {
 				$this->track_views = false;
 				$this->render_success();
+			} elseif ( !$this->model->current_user_can_vote() && $this->show_results() ) {
+				$this->track_views = false;
+				$this->render_success();
 			} else {
 				$this->render( $id );
 			}
@@ -113,6 +133,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				forminator_print_front_styles();
 				forminator_print_front_scripts();
 				add_action( 'wp_footer', array( $this, 'forminator_render_front_scripts' ), 9999 );
+				add_action( 'wp_footer', array( $this, 'graph_scripts' ), 100 );
 			}
 
 			if ( $ajax ) {
@@ -367,29 +388,32 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				$html .= $this->render_wrapper_before( $wrapper );
 
 				foreach ( $wrapper['fields'] as $k => $field ) {
-					$uniq_id = uniqid();
-					do_action( 'forminator_before_field_render', $field );
+					if( ! empty( $field['title'] ) ) {
+						$uniq_id = uniqid();
+						do_action( 'forminator_before_field_render', $field );
 
-					// Render before field markup
-					$html .= $this->render_field_before( $field );
-
-					// Render field
-					$html .= $this->render_field_radio( $field, $uniq_id );
-
-					do_action( 'forminator_after_field_render', $field );
-
-					// Render after field markup
-					$html .= $this->render_field_after( $field );
-
-					$use_extra = Forminator_Field::get_property( 'use_extra', $field, false );
-					$use_extra = filter_var( $use_extra, FILTER_VALIDATE_BOOLEAN );
-					if ( $use_extra ) {
 						// Render before field markup
 						$html .= $this->render_field_before( $field );
 
-						$html .= $this->render_extra_field( $field, $uniq_id );
+						// Render field
+						$html .= $this->render_field_radio( $field, $uniq_id );
+
+						do_action( 'forminator_after_field_render', $field );
+
 						// Render after field markup
 						$html .= $this->render_field_after( $field );
+
+
+						$use_extra = Forminator_Field::get_property( 'use_extra', $field, false );
+						$use_extra = filter_var( $use_extra, FILTER_VALIDATE_BOOLEAN );
+						if ( $use_extra ) {
+							// Render before field markup
+							$html .= $this->render_field_before( $field );
+
+							$html .= $this->render_extra_field( $field, $uniq_id );
+							// Render after field markup
+							$html .= $this->render_field_after( $field );
+						}
 					}
 				}
 
@@ -664,23 +688,22 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		if ( is_object( $this->model ) ) {
 			$post_id    = $this->get_post_id();
 			$return_url = get_permalink( $post_id );
+			$chart_container = 'forminator_chart_poll_' . uniqid() . '_' . $this->model->id;
 			ob_start();
 			?>
             <form class="forminator-poll" method="GET" action="<?php echo esc_url( $return_url ); ?>" data-forminator-render="<?php echo self::$render_ids[ $this->model->id ] ?>">
 				<?php echo $this->render_form_header(); ?>
-                <div id="forminator-chart-poll-<?php echo $this->model->id; ?>" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>
+                <div id="<?php echo $chart_container; ?>" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>
                 <div class="forminator-poll--actions">
                     <button class="forminator-button"><?php _e( 'Back To poll', Forminator::DOMAIN ); ?></button>
                 </div>
             </form>
 			<?php
 
-			// TODO : make chart can be rendered more than once
-			if ( isset( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] == $this->model->id
-			     && isset( $_REQUEST['render_id'] )
-			     && $_REQUEST['render_id'] == self::$render_ids[ $this->model->id ] ) {
-				add_action( 'wp_footer', array( $this, 'success_footer_script' ), 100 );
-			}
+            self::$graph_result_scripts[] = array(
+                    'model' => $this->model,
+                    'container' => $chart_container,
+            );
 
 			$html = ob_get_clean();
 
@@ -692,17 +715,18 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		}
 	}
 
+	public function graph_scripts() {
+        foreach (self::$graph_result_scripts as $graph_script) {
+            $this->success_footer_script($graph_script['model'], $graph_script['container']);
+        }
+    }
+
 	/**
 	 * Success footer scripts
 	 *
 	 * @since 1.0
 	 */
-	public function success_footer_script() {
-		$form_id = isset( $_REQUEST['form_id'] ) ? $_REQUEST['form_id'] : false;
-		if ( ! $form_id ) {
-			return '';
-		}
-		$model = Forminator_Poll_Form_Model::model()->load( $form_id );
+	public function success_footer_script($model, $container_id) {
 		if ( ! is_object( $model ) ) {
 			return '';
 		}
@@ -716,9 +740,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				"use strict";
 				jQuery('document').ready(function () {
 					google.charts.load('current', {packages: ['corechart', 'bar']});
-					google.charts.setOnLoadCallback(drawPollResults_<?php echo $model->id; ?>);
+					google.charts.setOnLoadCallback(drawPollResults_<?php echo $container_id; ?>);
 
-					function drawPollResults_<?php echo $model->id; ?>() {
+					function drawPollResults_<?php echo $container_id; ?>() {
 						var data = google.visualization.arrayToDataTable([
 							['<?php _e( 'Question', Forminator::DOMAIN ) ?>', '<?php _e( 'Results', Forminator::DOMAIN ) ?>', {role: 'style'}, {role: 'annotation'}],
 							<?php
@@ -817,6 +841,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 							fontName: 'Roboto',
 							tooltip: {
 								isHtml: false,
+								ignoreBounds: true,
 								trigger: 'focus',
 								text: '<?php echo $pie_tooltip_text?>',
 							}
@@ -825,9 +850,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 						<?php } ?>
 
 						<?php if ( $chart_design == 'pie' ) {    ?>
-						var chart = new google.visualization.PieChart(document.getElementById('forminator-chart-poll-<?php echo $model->id; ?>'));
+						var chart = new google.visualization.PieChart(document.getElementById('<?php echo $container_id; ?>'));
 						<?php } else { ?>
-						var chart = new google.visualization.BarChart(document.getElementById('forminator-chart-poll-<?php echo $model->id; ?>'));
+						var chart = new google.visualization.BarChart(document.getElementById('<?php echo $container_id; ?>'));
 						<?php } ?>
 
 						chart.draw(data, options);
@@ -898,12 +923,20 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				}
 				$properties = $style_property['settings'];
 
+				// If we don't have a formID use $model->id
+				/** @var array $properties */
+				if ( ! isset( $properties['formID'] ) ) {
+					if ( ! isset( $style_property ['id'] ) ) {
+						continue;
+					}
+					$properties['formID'] = $style_property['id'];
+				}
+
 				ob_start();
 				/** @noinspection PhpIncludeInspection */
 				include $this->styles_template_path();
 				$styles = ob_get_clean();
-
-				if ( isset( $properties['formID'] ) ) {
+				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
 					?>
                     <style type="text/css"
                            id="forminator-poll-styles-<?php echo $properties['formID']; ?>"><?php echo $styles; ?></style>

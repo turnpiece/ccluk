@@ -29,6 +29,7 @@
 		this.element = element;
 		this.$el = $(this.element);
 		this.forminator_selector = '#' + $(this.element).attr('id') + '[data-forminator-render="' + $(this.element).data('forminator-render') + '"]';
+		this.forminator_loader_selector = 'div[data-forminator-render="' + $(this.element).data('forminator-render') + '"]' + '[data-form="' + $(this.element).attr('id') + '"]';
 
 		// jQuery has an extend method which merges the contents of two or
 		// more objects, storing the result in the first object. The first object
@@ -44,6 +45,9 @@
 	$.extend(ForminatorFront.prototype, {
 		init: function () {
 			var self = this;
+
+			$(this.forminator_loader_selector).remove();
+			this.$el.show();
 
 			//selective activation based on type of form
 			switch (this.settings.form_type) {
@@ -418,8 +422,10 @@
 		field_number: function () {
 			var form = $(this.element);
 			form.find('input[type=number]').on('change keyup', function () {
-				var sanitized = $(this).val().replace(/[^0-9]/g, '');
-				$(this).val(sanitized);
+				if( ! $(this).val().match(/^\d+$/) ){
+					var sanitized = $(this).val().replace(/[^0-9]/g, '');
+					$(this).val(sanitized);
+				}
 			});
 		},
 

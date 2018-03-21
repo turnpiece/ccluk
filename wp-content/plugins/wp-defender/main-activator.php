@@ -24,7 +24,7 @@ class WD_Main_Activator {
 		}
 
 		if ( version_compare( $db_ver, '1.7', '<' ) ) {
-			if (! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
+			if ( ! \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::checkIfTableExists() ) {
 				add_site_option( 'defenderLockoutNeedUpdateLog', 1 );
 				\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::createTables();
 				update_site_option( 'wd_db_version', "1.7" );
@@ -35,8 +35,10 @@ class WD_Main_Activator {
 			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
 			update_site_option( 'wd_db_version', "1.7.1" );
 		}
-
-		add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), array( &$this, 'addSettingsLink' ) );
+		add_filter( 'plugin_action_links_' . plugin_basename( wp_defender()->plugin_slug ), array(
+			&$this,
+			'addSettingsLink'
+		) );
 		add_action( 'admin_enqueue_scripts', array( &$this, 'register_styles' ) );
 		if ( ! \WP_Defender\Behavior\Utils::instance()->checkRequirement() ) {
 		} else {
@@ -96,7 +98,12 @@ class WD_Main_Activator {
 			'<a href="' . admin_url( 'admin.php?page=wp-defender' ) . '">' . __( "Settings", wp_defender()->domain ) . '</a>',
 		);
 
-		return array_merge( $mylinks, $links );
+		$mylinks = array_merge( $mylinks, $links );
+		$mylinks = array_merge( $mylinks, array(
+			'<a target="_blank" href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/defender/">' . __( "Docs", wp_defender()->domain ) . '</a>',
+		) );
+
+		return $mylinks;
 	}
 
 	/**

@@ -58,9 +58,10 @@ class Forminator_Admin_AJAX {
 
 		// Handle exports popup
 		add_action( "wp_ajax_forminator_load_exports_popup", array( $this, "load_exports" ) );
-		add_action( "wp_ajax_forminator_load_exports_popup", array( $this, "load_exports" ) );
 		add_action( "wp_ajax_forminator_clear_exports_popup", array( $this, "clear_exports" ) );
-		add_action( "wp_ajax_forminator_clear_exports_popup", array( $this, "clear_exports" ) );
+
+		// Handle search user email
+		add_action( "wp_ajax_forminator_builder_search_emails", array( $this, "search_emails" ) );
 	}
 
 	/**
@@ -87,8 +88,12 @@ class Forminator_Admin_AJAX {
 			$formModel->clearFields();
 		}
 
+		$data 		= $_POST['data'];
+		$msg_count 	= $data['msg_count']; //Backup, we allow html here
 		// Sanitize post data
-		$data = forminator_sanitize_field( $_POST['data'] );
+		$data 		= forminator_sanitize_field( $data );
+
+		$data['msg_count'] = $msg_count;
 
 		// Detect action
 		$formModel->quiz_type = ( $_POST['action'] == 'forminator_save_quiz_nowrong' ) ? 'nowrong' : 'knowledge';
@@ -203,7 +208,7 @@ class Forminator_Admin_AJAX {
 
 		// Build the fields
 		if( isset( $_POST['data']['wrappers'] ) ) {
-			$fields = forminator_sanitize_field( $_POST['data']['wrappers'] );
+			$fields = $_POST['data']['wrappers'];
 			unset( $_POST['data']['wrappers'] );
 		}
 
@@ -610,5 +615,47 @@ class Forminator_Admin_AJAX {
 		} else {
 			wp_send_json_error( __( "Exports couldn't be cleared.", Forminator::DOMAIN ) );
 		}
+	}
+
+	/**
+	 * Search Emails
+	 *
+	 * @since 1.0.3
+	 */
+	function search_emails() {
+		if ( ! current_user_can( 'manage_options' ) ) {
+			wp_send_json_error( array() );
+		}
+
+		$admin_email  = ( ( isset( $_POST['admin_email'] ) && $_POST['admin_email'] ) ? true : false );
+		$search_email = ( ( isset( $_POST['q'] ) && $_POST['q'] ) ? sanitize_text_field( $_POST['q'] ) : false );
+
+		// return admin_email when requested
+		if ( $admin_email ) {
+			wp_send_json_success( get_option( 'admin_email' ) );
+		}
+
+		if ( ! $search_email ) {
+			wp_send_json_success( array() );
+		}
+
+		$args = array(
+			'search'  => '*' . $search_email . '*',
+			'number'  => 10,
+			'orderby' => 'user_login',
+			'order'   => 'ASC',
+		);
+
+		$users = get_users( $args );
+		$data  = array();
+		if ( ! empty( $users ) ) {
+			foreach ( $users as $user ) {
+				$data[] = array(
+					'id'   => $user->user_email,
+					'text' => $user->user_email,
+				);
+			}
+		}
+		wp_send_json_success( $data );
 	}
 }

@@ -134,7 +134,10 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
 
 		// Time since last report.
-		$time_difference = time() - (int) $last_report->data->time;
+		$time_difference = 999999;
+		if ( isset( $last_report->data ) && ! is_wp_error( $last_report ) ) {
+			$time_difference = time() - (int) $last_report->data->time;
+		}
 
 		// If no report is present or report is outdated, get new data.
 		if ( ( ! $last_report || $time_difference > 300 ) && $limit < 3 ) {

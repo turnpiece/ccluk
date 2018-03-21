@@ -69,5 +69,5 @@ abstract class Forminator_Template {
 	 public function get_option( $option, $default = '' ) {
 		if( isset( $this->options[ $option ] ) ) return $this->options[ $option ];
 		return $default;
-	}
+	 }
 }

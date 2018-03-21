@@ -1,10 +1,16 @@
 Plugin Name: WP Defender
 Author: Hoang Ngo, Aaron Edwards
-Tested up to: 4.7.4
+Tested up to: 4.9.4
 
 Change Log:
 
-1.7.5 - 2012-07-02
+1.7.6 - 2017-19-03
+----------------------------------------------------------------------
+- Fix: Defender now can recognize and verify Bing Bot for whitelisting
+- Fix: Lockout page now will use site title instead of the text 'WP Defender'
+- Other minor enhancements and fixes
+
+1.7.5 - 2017-07-02
 ----------------------------------------------------------------------
 - Fix: Report status missing in Hub Security tab
 - Fix: Some themes/plugins shown as a vulnerability but no info available
@@ -227,4 +233,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1518896069-au
+87274-1521663248-au

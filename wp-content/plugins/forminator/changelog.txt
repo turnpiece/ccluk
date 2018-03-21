@@ -4,6 +4,35 @@ Author: Cvetan Cvetanov (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+1.0.4 - 2018-03-20
+----------------------------------------------------------------------
+- Add: Validation message for Upload field
+- Add: Confirm prompt on delete field
+- Add: Data field containing all the fields data
+- Add: Form fields variables beautified
+- Add: Set multiple recipients for emails
+- Add: Custom styles for Quizzes
+- Add: Filters for fields validation messages
+- Add: Filters for admin settings
+- Improvement: Clear form data after submission
+- Improvement: PHP 7.2 compatibility
+- Improvement: Form data in email subjects
+- Improvement: IE11 compatibility in admin
+- Fix: Character limit for phone validation
+- Fix: No link to post if PostData's title is empty
+- Fix: Slashes not stripped on preview
+- Fix: Wrong email validation message
+- Fix: Bulk action below pagination not functional
+- Fix: Quiz preview show wrong title
+- Fix: User email not sent on form submit
+- Fix: Time & Address values are empty in submission email
+- Fix: Pagination not working on Safari
+- Fix: Some of Form Data variables not functional
+- Fix: Custom style not functional in preview for new forms
+- Fix: Submissions not recorded on multi-site sub-domain
+- Fix: HTML field tags not rendered as html
+- Other minor enhancements/fixes
+
 1.0.3.1 - 2018-03-05
 ----------------------------------------------------------------------
 - Fix: project meta information update
@@ -36,4 +65,4 @@ Change Log:
 - First public release
 
 
-87274-1520263722-au
+87274-1521663253-au

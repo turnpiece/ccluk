@@ -128,21 +128,42 @@ class Forminator_Captcha extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
-		$key   = get_option( "forminator_captcha_key", false );
-		$theme = get_option( "forminator_captcha_theme", false );
-
-		$captcha_size = 'normal';
+	public function markup( $field, $settings = array() ) {
+		$key           = get_option( "forminator_captcha_key", false );
+		$theme         = get_option( "forminator_captcha_theme", false );
+		$captcha_size  = 'normal';
 		$captcha_class = 'forminator-g-recaptcha';
+
 		if ( $this->is_invisible_recaptcha( $field ) ) {
-			$captcha_size = 'invisible';
+			$captcha_size  = 'invisible';
 			$captcha_class .= ' recaptcha-invisible';
 		}
 
 		// dont use .g-recaptcha class as it will rendered automatically when other plugin load recaptcha with default render
 		return sprintf( '<div class="%s" data-theme="%s" data-sitekey="%s" data-size="%s"></div>', $captcha_class, $theme, $key, $captcha_size );
+	}
+
+
+	/**
+	 * Mark Captcha unavailable when captcha key not available
+	 *
+	 * @since 1.0.3
+	 *
+	 * @param $field
+	 *
+	 * @return bool
+	 */
+	public function is_available($field) {
+		$key = get_option( "forminator_captcha_key", false );
+
+		if ( ! $key ) {
+			return false;
+		}
+
+		return true;
 	}
 }

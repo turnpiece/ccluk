@@ -81,9 +81,33 @@
 
 			// Simulate change
 			this.$el.find('.forminator-field input, .forminator-field select').change();
-
-
+			this.init_events();
 		},
+
+		/**
+		 * Register related events
+		 *
+		 * @since 1.0.3
+		 */
+		init_events: function () {
+			var self = this;
+			this.$el.on('forminator.front.condition.restart', function (e) {
+				self.on_restart(e);
+			});
+		},
+
+		/**
+		 * Restart conditions
+		 *
+		 * @since 1.0.3
+		 *
+		 * @param e
+		 */
+		on_restart: function (e) {
+			// restart condition
+			this.$el.find('.forminator-field input, .forminator-field select').change();
+		},
+
 		/**
 		 * Add missing relations based on fields.conditions
 		 */
@@ -235,8 +259,13 @@
 						return $.inArray(value2, value1) === -1;
 					}
 				case "is_great":
+					// typecasting to integer, with return `NaN` when its literal chars, so `is_numeric` will fail
+					value1 = +value1;
+					value2 = +value2;
 					return this.is_numeric(value1) && this.is_numeric(value2) ? value1 > value2 : false;
 				case "is_less":
+					value1 = +value1;
+					value2 = +value2;
 					return this.is_numeric(value1) && this.is_numeric(value2) ? value1 < value2 : false;
 				case "contains":
 					return this.contains(value1, value2);

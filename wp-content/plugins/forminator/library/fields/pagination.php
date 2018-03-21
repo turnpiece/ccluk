@@ -72,25 +72,7 @@ class Forminator_Pagination extends Forminator_Field {
 				'name' => 'pagination-label',
 				'hide_label' => false,
 				'label'	=> __( 'Step label', Forminator::DOMAIN )
-			),
-
-			/*
-			array(
-				'id' => 'pagination-left-button',
-				'type' => 'Text',
-				'name' => 'btn_left',
-				'hide_label' => false,
-				'label'	=> __( 'Left button text', Forminator::DOMAIN )
-			),
-
-			array(
-				'id' => 'pagination-right-button',
-				'type' => 'Text',
-				'name' => 'btn_right',
-				'hide_label' => false,
-				'label'	=> __( 'Right button text', Forminator::DOMAIN )
-            ),
-			*/
+			)
 		);
 	}
 

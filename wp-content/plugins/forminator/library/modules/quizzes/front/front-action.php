@@ -128,12 +128,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 
                     <p><?php echo forminator_get_form_name( $model->id, 'quiz' ) ?></p>
 
-                    <button type="button">
-                        <i class="wpdui-icon wpdui-icon-refresh" aria-hidden="true"></i>
-                        <span>
-                            <?php _e( "Retake Quiz", Forminator::DOMAIN ) ?>
-                        </span>
-                    </button>
+                    <button type="button"><i class="wpdui-icon wpdui-icon-refresh" aria-hidden="true"></i> <?php _e( "Retake Quiz", Forminator::DOMAIN ) ?></button>
 
                 </div>
 
@@ -192,6 +187,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		}
 		$results  = array();
 		$isFinish = true;
+		/** @var Forminator_Quiz_Form_Model $model */
 		if ( count( $model->questions ) != count( $answers ) ) {
 			if ( $model->settings['results_behav'] == 'end' ) {
 				//need to check if all the questions are answered
@@ -213,8 +209,12 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 				'question' => $question['title']
 			);
 			list( $index, $right ) = $model->getRightAnswerForQuestion( $id );
-			if ( $right == false || $index == - 1 ) {
-				wp_send_json_error();
+
+			// no correct answer set on this quesion
+			if ( is_null( $right ) || $index == - 1 ) {
+				$right = array(
+					'title' => __( 'none above', Forminator::DOMAIN ),
+				);
 			}
 			$userPicked    = $model->getAnswer( $id, $pick );
 			$correctText   = isset( $model->settings['msg_correct'] ) ? $model->settings['msg_correct'] : '';

@@ -119,16 +119,17 @@ class Forminator_Hidden extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$id = $name  = self::get_property( 'element_id', $field );
 		$required    = self::get_property( 'required', $field, false );
 		$placeholder = self::get_property( 'placeholder', $field );
 		$value 		 = $this->get_value( $field );
 
-		return sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );	    	 	 	 	 	 				 	 
+		return sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );
 	}
 
 	/**
@@ -142,7 +143,7 @@ class Forminator_Hidden extends Forminator_Field {
 	public function get_value( $field ) {
 		$value       = '';
 		$saved_value = self::get_property( 'default_value', $field );
-		$embed_url   = forminator_get_post_data( 'guid' );
+		$embed_url   = forminator_get_current_url();
 
 		switch( $saved_value ) {
 			case "user_ip":

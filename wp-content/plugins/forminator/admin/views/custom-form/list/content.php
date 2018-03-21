@@ -146,10 +146,10 @@ $count = $this->countModules();
 							<ul class="wpmudev-menu wpmudev-hidden">
 
 								<li>
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ) ?>"><?php _e( "Form fields", Forminator::DOMAIN ); ?></a>
+									<a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ) ?>"><?php _e( "Edit form fields", Forminator::DOMAIN ); ?></a>
 								</li>
 								<li>
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ) ?>#appearance"><?php _e( "Form settings", Forminator::DOMAIN ); ?></a>
+									<a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ) ?>#appearance"><?php _e( "Edit form settings", Forminator::DOMAIN ); ?></a>
 								</li>
 								<li>
 									<form method="post">
@@ -163,7 +163,12 @@ $count = $this->countModules();
 									<a href="<?php echo admin_url( 'admin.php?page=forminator-cform-view&form_id=' . $module['id'] ) ?>"><?php _e( "View entries", Forminator::DOMAIN ); ?></a>
 								</li>
 								<li>
-									<a href="#" class="wpmudev-open-modal" data-modal="preview_cforms" data-form-id="<?php echo $module['id']; ?>" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_preview_cforms' ) ?>">
+									<a href="#" class="wpmudev-open-modal" data-modal="preview_cforms"
+                                       data-modal-title="<?php echo sprintf("%s - %s", __( "Preview Custom Form", Forminator::DOMAIN),  forminator_get_form_name( $module['id'], 'custom_form')); ?>"
+                                       data-form-id="<?php echo $module['id']; ?>"
+                                       data-nonce="<?php
+                                    echo
+                                    wp_create_nonce( 'forminator_popup_preview_cforms' ) ?>">
 										<?php _e( "Preview form", Forminator::DOMAIN ); ?>
 									</a>
 								</li>

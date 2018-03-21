@@ -143,7 +143,20 @@ abstract class Forminator_Render_Form {
 
 
 		if ( ! $this->is_admin ) {
-			$html .= sprintf( '<form id="forminator-module-%s" class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" action="" method="post" data-forminator-render="%s" %s>',
+			// Markup Loader
+			$loader = sprintf( '<div class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" data-forminator-render="%s" data-form="forminator-module-%s"><br/></div>',
+			                   $form_type,
+			                   $form_type,
+			                   $id,
+			                   $form_design,
+			                   $fields_type,
+			                   $extra_classes,
+			                   $render_id,
+			                   $id );
+
+			$html .= $loader;
+
+			$html .= sprintf( '<form id="forminator-module-%s" class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" action="" method="post" data-forminator-render="%s" %s style="display: none;">',
 			                  $id,
 			                  $form_type,
 			                  $form_type,

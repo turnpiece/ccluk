@@ -63,13 +63,13 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 	 * @return mixed
 	 */
 	public function add_js_defaults( $data ) {
+		$model = null;
 		if ( $this->is_admin_wizard() ) {
 			$data['application'] = 'poll';
 			if ( ! self::is_edit() ) {
 				$data['currentForm'] = array();
 			} else {
 				$id    = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : null;
-				$model = null;
 				if ( ! is_null( $id ) ) {
 					$model = Forminator_Poll_Form_Model::model()->load( $id );
 				}
@@ -88,11 +88,12 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 				}
 
 				// Load stored record
+				$settings = apply_filters( 'forminator_poll_settings', $model->settings, $model, $data, $this );
 				$data['currentForm'] = array_merge( array(
 					'answers'  => $answers,
 					'formName' => $model->name,
 					'formID'   => $model->id
-				), $model->settings );
+				), $settings );
 			}
 		}
 
@@ -102,7 +103,7 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 			'preview_nonce' => wp_create_nonce( 'forminator_popup_preview_polls' )
 		);
 
-		return $data;
+		return apply_filters( 'forminator_poll_admin_data', $data, $model, $this );
 	}
 
 	/**
@@ -131,7 +132,6 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 			"poll_desc"                      => __( "Description (optional)", Forminator::DOMAIN ),
 			"poll_question"                  => __( "Poll question", Forminator::DOMAIN ),
 			"poll_answers"                   => __( "Poll answers", Forminator::DOMAIN ),
-			"add_answer"                     => __( "Add Answer", Forminator::DOMAIN ),
 			"poll_button"                    => __( "Button label", Forminator::DOMAIN ),
 			"poll_title_placeholder"         => __( "Enter title", Forminator::DOMAIN ),
 			"poll_desc_placeholder"          => __( "Enter description", Forminator::DOMAIN ),

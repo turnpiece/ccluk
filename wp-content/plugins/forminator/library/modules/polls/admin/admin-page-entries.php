@@ -371,6 +371,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 								fontName: '"Roboto", Arial, sans-serif',
 								tooltip: {
 									isHtml: false,
+									ignoreBounds: true,
 									trigger: 'focus',
 									text: 'both',
 									textStyle:{

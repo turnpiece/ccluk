@@ -333,7 +333,7 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 	 *
 	 * @return string
 	 */
-	public function render_entry( $item , $column_name ) {
+	public static function render_entry( $item , $column_name ) {
 		$data =  $item->get_meta( $column_name, '' );
 		if ( $data ) {
 			$currency_symbol 	= forminator_get_currency_symbol();
@@ -346,16 +346,20 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 					if ( is_array( $value ) ) {
 						if ( $key == 'file' && isset( $value['file_url'] ) ) {
 							$file_name 	= basename( $value['file_url'] );
-							$file_name 	= "<a href='" .$value['file_url'] . "' target='_blank' rel='noreferrer' title='". __( 'View File', Forminator::DOMAIN ) ."'>$file_name</a> ,";
+							$file_name 	= "<a href='" . esc_url( $value['file_url'] ) . "' target='_blank' rel='noreferrer' title='". __( 'View File', Forminator::DOMAIN ) ."'>$file_name</a> ,";
 							$output 	.= $file_name;
 						}
 
 					} else {
 						if ( !is_int( $key ) ) {
 							if ( $key == 'postdata' ) {
-								$url 	= get_edit_post_link( $value );
-								$name 	= get_the_title( $value );
-								$output .= "<a href='" .$url . "' target='_blank' rel='noreferrer' title='". __( 'Edit Post', Forminator::DOMAIN ) ."'>$name</a> ,";
+							    // possible empty when postdata not required
+							    if (! empty($value)) {
+								    $url 	= get_edit_post_link( $value );
+								    $title  = get_the_title( $value );
+								    $name 	= ! empty( $title ) ? $title : '(no title)' ;
+								    $output .= "<a href='" .$url . "' target='_blank' rel='noreferrer' title='". __( 'Edit Post', Forminator::DOMAIN ) ."'>$name</a> ,";
+                                }
 							}else {
 
 								if ( is_string( $key ) ) {
@@ -374,8 +378,9 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 												$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $value ) . "<br/> ";
 											}
 										} else {
-											$key = strtolower( $key );
-											$key = ucfirst( str_replace( '-', ' ', $key ) );
+											$key   = strtolower( $key );
+											$key   = ucfirst( str_replace( array( '-', '_' ), ' ', $key ) );
+											$value = esc_html( $value );
 											$output .= sprintf( __( '<strong>%s : </strong> %s', Forminator::DOMAIN ), $key, $value ) . "<br/> ";
 										}
 									}
@@ -413,7 +418,7 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 	 *
 	 * @return mixed
 	 */
-	public function render_raw_entry( $item , $column_name ) {
+	public static function render_raw_entry( $item , $column_name ) {
 		$data =  $item->get_meta( $column_name, '' );
 		if ( $data ) {
 			if ( is_array( $data ) ) {

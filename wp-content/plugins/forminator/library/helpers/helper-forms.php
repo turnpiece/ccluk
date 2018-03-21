@@ -83,6 +83,22 @@ function forminator_get_user_data( $property ) {
 function forminator_get_post_data( $property, $default = '' ) {
 	global $post;
 
+	if ( ! $post ) {
+		// fallback on wp_ajax, `global $post` not available
+		$wp_referer = wp_get_referer();
+		if ( $wp_referer ) {
+			$post_id = url_to_postid( $wp_referer );
+			if ( $post_id ) {
+				$post_object = get_post( $post_id );
+				// make sure its wp_post
+				if ( $post_object instanceof WP_Post ) {
+					// set global $post as $post_object retrieved from `get_post` for next usage
+					$post = $post_object;
+				}
+			}
+		}
+	}
+
 	$post_data = forminator_object_to_array( $post );
 	if ( isset( $post_data[ $property ] ) ) {
 		return $post_data[ $property ];
@@ -454,12 +470,13 @@ function forminator_data_to_model_poll( $data ) {
 		return $model;
 	}
 
-	// Set wrappers
-	$model['answers'] = $data['answers'];
+	if( isset($data['answers']) ){
+		// Set wrappers
+		$model['answers'] = $data['answers'];
 
-	// Remove wrappers to get all form settings
-	unset( $data['answers'] );
-
+		// Remove wrappers to get all form settings
+		unset( $data['answers'] );
+	}
 	// Set settings
 	$model['settings'] = $data;
 

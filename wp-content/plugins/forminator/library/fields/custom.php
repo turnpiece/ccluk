@@ -199,10 +199,11 @@ class Forminator_Custom extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$required    	= self::get_property( 'required', $field, false );
 		$id = $name  	= self::get_property( 'element_id', $field );
 		$field_type  	= self::get_property( 'field_type', $field );

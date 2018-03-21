@@ -18,6 +18,11 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	 * Initializes the module. Always executed even if the module is deactivated.
 	 */
 	public function init() {
+		// Only run tests in admin.
+		if ( ! is_admin() ) {
+			return;
+		}
+
 		// Fetch status of selected module.
 		$this->status = $this->get_analysis_data();
 		if ( false === $this->status ) {

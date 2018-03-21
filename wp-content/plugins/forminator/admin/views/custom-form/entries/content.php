@@ -143,10 +143,11 @@
 	                        $schedule_time      = forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $email              = forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
+							$enabled			= ( forminator_get_exporter_info( 'enabled', forminator_get_form_id_helper() . forminator_get_form_type_helper() ) === 'true' );
 	                        ?>
 
                             <label class="wpmudev-label--info">
-		                        <?php if ( empty( $email ) ): ?>
+		                        <?php if ( ! $enabled || empty( $email ) ): ?>
                                     <span><?php _e( "Scheduled export is not enabled", Forminator::DOMAIN ) ?></span>
 		                        <?php else: ?>
 			                        <?php if (  $schedule_timeframe == 'weekly' || $schedule_timeframe == 'monthly' ): ?>
@@ -298,11 +299,12 @@
 
 														<?php
 														$fields 				= $this->get_fields();
-														$total_product 			= $this->render_entry( $entry, 'product_shipping' );
+														$total_product 			= Forminator_CForm_View_Page::render_entry( $entry, 'product_shipping' );
 														$currency_symbol 		= forminator_get_currency_symbol();
 														$ignored_field_types 	= Forminator_Form_Entry_Model::ignored_fields();
 														$visible_fields 		= $this->get_visible_fields();
 														foreach ( $fields as $field ) :
+                                                            /** @var  Forminator_Form_Field_Model $field */
 															$field_array = $field->toFormattedArray();
 															$field_type  = $field->__get( 'type' );
 															if ( in_array( $field_type, $ignored_field_types ) ) {
@@ -322,7 +324,7 @@
 																}
 															}
 															if ( $field_type == "product" ) {
-																$total_product += $this->render_raw_entry( $entry, $slug );
+																$total_product += Forminator_CForm_View_Page::render_raw_entry( $entry, $slug );
 															}
 															if ( empty( $label ) ) {
 																$label = ucfirst( $field_type );
@@ -350,7 +352,7 @@
 																	<?php
 																} else {
 																?>
-																	<p class="wpmudev-results--answer"><?php echo $this->render_entry( $entry, $slug ); ?></p>
+																	<p class="wpmudev-results--answer"><?php echo Forminator_CForm_View_Page::render_entry( $entry, $slug ); ?></p>
 																<?php } ?>
 															</li>
 

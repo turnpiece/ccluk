@@ -122,14 +122,21 @@ class Forminator_Export {
 		if ( isset( $_POST['action'] ) && $_POST['action'] == 'forminator_export_entries' ) {
 			$data         = get_option( 'forminator_entries_export_schedule', array() );
 			$key          = $_POST['form_id'] . $_POST['form_type'];
+			$last_sent    = current_time( 'timestamp' );
+
+			if( $_POST['interval'] == 'daily' ) {
+				$last_sent = strtotime( '-24 hours', current_time( 'timestamp' ) );
+			}
+
 			$data[ $key ] = array(
+				'enabled'   => isset( $_POST['enabled'] ) ? $_POST['enabled'] : 'false',
 				'form_id'   => $_POST['form_id'],
 				'form_type' => $_POST['form_type'],
 				'email'     => $_POST['email'],
 				'interval'  => $_POST['interval'],
 				'day'       => $_POST['day'],
 				'hour'      => $_POST['hour'],
-				'last_sent' => current_time( 'timestamp' )
+				'last_sent' => $last_sent
 			);
 			update_option( 'forminator_entries_export_schedule', $data );
 		}
@@ -144,7 +151,7 @@ class Forminator_Export {
 		$data     = get_option( 'forminator_entries_export_schedule', array() );
 		$receipts = array();
 		foreach ( $data as $row ) {
-			if ( empty( $row['email'] ) ) {
+			if ( ! isset( $row['enabled'] ) || ( isset( $row['enabled'] ) && $row['enabled'] === 'false' ) || ( isset( $row['email'] ) && empty( $row['email'] ) ) ) {
 				continue;
 			}
 			$last_sent = $row['last_sent'];
@@ -164,6 +171,7 @@ class Forminator_Export {
 					$next_sent = date( 'Y-m-d', $next_sent ) . ' ' . $row['hour'];
 					break;
 			}
+
 			if ( current_time( 'timestamp' ) > strtotime( $next_sent ) ) {
 				//queue to prevent spam
 				$info = $this->_prepare_attachment( $row['form_id'], $row['form_type'], $row['email'] );
@@ -182,9 +190,13 @@ class Forminator_Export {
 			foreach ( $info as $row ) {
 				$ids[]    = $row[1]->id . $row[2];
 				$files[]  = $row[0];
-				$titles[] = $row[1]->name;
+				if( isset( $row[1]->settings['formName'] ) ) {
+					$titles[] = $row[1]->settings['formName'];
+				} else {
+					$titles[] = $row[1]->name;
+				}
 			}
-			$subject = sprintf( __( "Entires data for %s", Forminator::DOMAIN ), implode( ',', $titles ) );
+			$subject = sprintf( __( "Entries data for %s", Forminator::DOMAIN ), implode( ',', $titles ) );
 			wp_mail( $email, $subject, 'Your scheduled results have arrived! Forminator has tabulated the responses and packaged the results.', array(), $files );
 			foreach ( $files as $file ) {
 				@unlink( $file );

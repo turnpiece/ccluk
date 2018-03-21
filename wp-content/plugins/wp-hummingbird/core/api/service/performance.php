@@ -55,10 +55,12 @@ class WP_Hummingbird_API_Service_Performance extends WP_Hummingbird_API_Service 
 	/**
 	 * Ping to Performance Module so it starts to gather data.
 	 *
+	 * @since 1.8.1 Changed timeout from 0.1 to 2 seconds.
+	 *
 	 * @return array|mixed|object|WP_Error
 	 */
 	public function ping() {
-		$this->request->set_timeout( 0.1 );
+		$this->request->set_timeout( 2 );
 		return $this->request->post( 'site/check/', array(
 			'domain' => $this->request->get_this_site(),
 		));

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Hummingbird Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird Pro 1.8.0.3\n"
+"Project-Id-Version: Hummingbird Pro 1.8.0.4\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-03-13 07:03:39+00:00\n"
+"POT-Creation-Date: 2018-03-14 18:46:19+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -3177,7 +3177,7 @@ msgid ""
 "regenerating transients."
 msgstr ""
 
-#: core/modules/class-module-cloudflare.php:356
+#: core/modules/class-module-cloudflare.php:361
 msgid "Invalid Cloudflare expiration value"
 msgstr ""
 

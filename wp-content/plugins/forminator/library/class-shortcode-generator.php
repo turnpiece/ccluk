@@ -16,6 +16,9 @@ class Forminator_Shortcode_Generator {
 	public function __construct() {
 		add_filter( 'media_buttons_context', array( $this, 'attach_button' ) );
 		add_action( 'admin_footer', array( $this, 'enqueue_js_scripts' ) );
+		if ( function_exists( 'hustle_activated' ) ) {
+			add_action( 'admin_footer', array( $this, 'enqueue_preview_scripts_for_hustle' ) );
+		}
 	}
 
 	/**
@@ -75,6 +78,31 @@ class Forminator_Shortcode_Generator {
 			});
 		</script>
 		<?php
+	}
+
+	/**
+	 * @since 1.0
+	 * @param $content
+	 *
+	 * @return mixed
+	 */
+	public function enqueue_preview_scripts_for_hustle( $content ) {
+		global $pagenow;
+
+		// If page different than Admin, abort
+		if ( $pagenow !=  'admin.php' ) {
+			return $content;
+		}
+
+		$current_screen = get_current_screen();
+		$screen_base = $current_screen->base;
+
+		// If page is not Hustle module settings page, abort
+		if ( $screen_base !== 'hustle-pro_page_hustle_embedded' && $screen_base !== 'hustle-pro_page_hustle_popup' && $screen_base !== 'hustle-pro_page_hustle_slidein' ) {
+			return $content;
+		}
+
+		wp_enqueue_style( 'forminator-shortcode-generator-front-styles', forminator_plugin_url() . 'assets/css/front.css', array(), FORMINATOR_VERSION );
 	}
 
 	/**

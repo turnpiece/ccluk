@@ -161,7 +161,11 @@ $count = $this->countModules();
 									<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $module['id'] ) ?>"><?php _e( "View entries", Forminator::DOMAIN ); ?></a>
 								</li>
 								<li>
-									<a href="#" class="wpmudev-open-modal" data-modal="preview_quizzes" data-form-id="<?php echo $module['id']; ?>" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_preview_quizzes' ) ?>">
+									<a href="#" class="wpmudev-open-modal"
+                                       data-modal="preview_quizzes"
+                                       data-modal-title="<?php echo sprintf("%s - %s", __( "Preview Quiz", Forminator::DOMAIN),  forminator_get_form_name( $module['id'], 'quiz')); ?>"
+                                       data-form-id="<?php echo $module['id']; ?>"
+                                       data-nonce="<?php echo wp_create_nonce( 'forminator_popup_preview_quizzes' ) ?>">
 										<?php _e( "Preview quiz", Forminator::DOMAIN ); ?>
 									</a>
 								</li>

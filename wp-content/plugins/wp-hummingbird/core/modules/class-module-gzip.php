@@ -31,7 +31,6 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 			// Would be nice to user get_home_url(), but website is not accessible during plugin activation
 			// and curl times out.
 			//'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
-			//'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-html.html',
 			'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-php.php',
 			'JavaScript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
 			'CSS'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',

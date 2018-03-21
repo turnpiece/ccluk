@@ -630,10 +630,11 @@ class Forminator_Name extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$multiple 	 = self::get_property( 'multiple_name', $field, false );
 
@@ -683,16 +684,46 @@ class Forminator_Name extends Forminator_Field {
 	 */
 	public function get_validation_messages() {
 		$field    = $this->field;
+		$id       = self::get_property( 'element_id', $field );
 		$multiple = self::get_property( 'multiple_name', $field, false );
 		$messages = '';
 
 		if( $this->is_required( $field ) ) {
 			if( ! $multiple ) {
-				$messages = '"' . $this->get_id( $field ) . '": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
+				$error_message = apply_filters(
+					'forminator_name_field_required_validation_message',
+					__( 'This field is required. Please input a value', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages = '"' . $this->get_id( $field ) . '": "' . $error_message . '",' . "\n";
 			} else {
-				$messages = '"' . $this->get_id( $field ) . '-first-name": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-				$messages .= '"' . $this->get_id( $field ) . '-middle-name": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-				$messages .= '"' . $this->get_id( $field ) . '-last-name": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
+				// First name validation
+				$first_name_message = apply_filters(
+					'forminator_name_field_first_required_validation_message',
+					__( 'This field is required. Please input your first name', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages = '"' . $this->get_id( $field ) . '-first-name": "' . $first_name_message . '",' . "\n";
+
+				// First name validation
+				$middlet_name_message = apply_filters(
+					'forminator_name_field_middle_required_validation_message',
+					__( 'This field is required. Please input your middle name', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages .= '"' . $this->get_id( $field ) . '-middle-name": "' . $middlet_name_message . '",' . "\n";
+
+				// First name validation
+				$last_name_message = apply_filters(
+					'forminator_name_field_last_required_validation_message',
+					__( 'This field is required. Please input your last name', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages .= '"' . $this->get_id( $field ) . '-last-name": "' . $last_name_message . '",' . "\n";
 			}
 		}
 
@@ -722,13 +753,28 @@ class Forminator_Name extends Forminator_Field {
 					$lastname 	= isset( $data['last-name'] ) ? $data['last-name'] : '';
 
 					if ( $fname && empty( $firstname ) ) {
-						$this->validation_message[ $id . '-first-name' ] = __( 'This field is required. Please input your first name', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-first-name' ] = apply_filters(
+							'forminator_name_field_first_required_validation_message',
+							__( 'This field is required. Please input your first name', Forminator::DOMAIN ),
+							$id,
+							$field
+						);
 					}
 					if ( $mname && empty( $middlename ) ) {
-						$this->validation_message[ $id . '-middle-name' ] = __( 'This field is required. Please input your middle name', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-middle-name' ] = apply_filters(
+							'forminator_name_field_middle_required_validation_message',
+							__( 'This field is required. Please input your middle name', Forminator::DOMAIN ),
+							$id,
+							$field
+						);
 					}
 					if ( $lname && empty( $lastname ) ) {
-						$this->validation_message[ $id . '-last-name' ] = __( 'This field is required. Please input your last name', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-last-name' ] = apply_filters(
+							'forminator_name_field_last_required_validation_message',
+							__( 'This field is required. Please input your last name', Forminator::DOMAIN ),
+							$id,
+							$field
+						);
 					}
 				}
 			}

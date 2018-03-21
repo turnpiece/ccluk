@@ -100,7 +100,7 @@
 				
 				<div class="wpmudev-nav--left">
 					
-					<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-back">Form Builder</button>
+					<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-back">{{Forminator.l10n.builder.form_builder}}</button>
 
 				</div>
 				
@@ -128,8 +128,8 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Form name</label>
-				<label class="wpmudev-name--alt">Pick a name for your form module. This is for you to be able to identify forms and will not be displayed on your site.</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.form_name_main }}</label>
+				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.form_name_main_desc }}</label>
 			</div>
 			<div class="wpmudev-option--container">
 				<div class="appearance-section-form-name"></div>
@@ -143,8 +143,8 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Design & Colors</label>
-				<label class="wpmudev-name--alt">Choose a pre-made style for your form and further customize it's appearance.</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.design_colors }}</label>
+				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.design_colors_desc }}</label>
 			</div>
 			<div class="wpmudev-option--container">
 				<div class="appearance-section-form-style"></div>
@@ -158,7 +158,7 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Typography</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.typography }}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-customize-fonts"></div>
 		</div>
@@ -169,7 +169,7 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Fields style</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.fields_style }}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-fields-style"></div>
 		</div>
@@ -180,8 +180,8 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Custom text</label>
-				<label class="wpmudev-name--alt">To customize content of some available form elements.</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.custom_text }}</label>
+				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.custom_text_desc }}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-custom-submit"></div>
 		</div>
@@ -192,8 +192,8 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Custom CSS</label>
-				<label class="wpmudev-name--alt">For more advanced customization options use custom CSS.</label>
+				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.custom_css }}</label>
+				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.custom_css_desc }}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-custom-style"></div>
 		</div>
@@ -215,8 +215,8 @@
 		
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Submission behaviour</label>
-				<label class="wpmudev-name--alt">Choose what you want to happen after your visitor has successfully submitted their form.</label>
+				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.submission_behaviour}}</label>
+				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.submission_behaviour_desc}}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-form-after-submit"></div>
 		</div>
@@ -227,7 +227,7 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Submission method</label>
+				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.submission_method}}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-form-submission"></div>
 		</div>
@@ -238,7 +238,7 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Validation method</label>
+				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.validation_method}}</label>
 			</div>
 			<div class="wpmudev-option--container appearance-section-form-validation"></div>
 		</div>
@@ -275,8 +275,8 @@
 
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">Pagination Header</label>
-				<label class="wpmudev-name--alt">Choose a pre-made style for your form pagination header or do not show it at all.</label>
+				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.pagination_header}}</label>
+				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.pagination_header_desc}}</label>
 			</div>
 			<div class="wpmudev-option--container pagination-settings-header"></div>
 		</div>
@@ -293,28 +293,28 @@
 		
 		<div class="wpmudev-row">
 			<div class="wpmudev-col col-12">
-				<label class="wpmudev-label--section">General</label>
+				<label class="wpmudev-label--section">{{Forminator.l10n.appearance.general}}</label>
 			</div>
 		</div>
 
 		<div class="wpmudev-row wpmudev-palettes">
 			<div class="wpmudev-col col-12 col-sm-4 color-grid-form-background">
-				<label class="wpmudev-label">Form background</label>
+				<label class="wpmudev-label">{{Forminator.l10n.appearance.form_bg}}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 		    <div class="wpmudev-col col-12 col-sm-4 color-grid-form-border">
-				<label class="wpmudev-label">Form border</label>
+				<label class="wpmudev-label">{{Forminator.l10n.appearance.form_border}}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 			<div class="wpmudev-col col-12 col-sm-4 color-grid-title">
-				<label class="wpmudev-label">Title</label>
+				<label class="wpmudev-label">{{Forminator.l10n.appearance.title}}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 		</div>
 
 		<div class="wpmudev-row wpmudev-palettes">
 		    <div class="wpmudev-col col-12 col-sm-4 color-grid-subtitle">
-				<label class="wpmudev-label">Subtitle</label>
+				<label class="wpmudev-label">{{Forminator.l10n.appearance.subtitle}}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 		</div>
@@ -329,15 +329,15 @@
 
 		<div class="wpmudev-row wpmudev-palettes">
 		    <div class="wpmudev-col col-12 col-sm-4 color-grid-main-label">
-				<label class="wpmudev-label">Field</label>
+				<label class="wpmudev-label">{{ Forminator.l10n.appearance.field }}Field</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 			<div class="wpmudev-col col-12 col-sm-4 color-grid-asterisk-label">
-				<label class="wpmudev-label">Asterisk</label>
+				<label class="wpmudev-label">{{ Forminator.l10n.appearance.asterisk }}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 			<div class="wpmudev-col col-12 col-sm-4 color-grid-helper-label">
-				<label class="wpmudev-label">Helper</label>
+				<label class="wpmudev-label">{{ Forminator.l10n.appearance.helper }}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 		</div>
@@ -410,17 +410,17 @@
 
 		<div class="wpmudev-row">
 			<div class="wpmudev-col col-12">
-				<label class="wpmudev-label--section">Extras</label>
+				<label class="wpmudev-label--section">{{ Forminator.l10n.appearance.extras }}</label>
 			</div>
 		</div>
 
 		<div class="wpmudev-row wpmudev-palettes">
 			<div id="appearance-error-elements" class="wpmudev-col col-12 col-sm-4">
-				<label class="wpmudev-label">Error elements</label>
+				<label class="wpmudev-label">{{ Forminator.l10n.appearance.error_elements }}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 			<div id="appearance-filled-elements" class="wpmudev-col col-12 col-sm-4">
-				<label class="wpmudev-label">Filled elements</label>
+				<label class="wpmudev-label">{{ Forminator.l10n.appearance.filled_elements }}</label>
 				<div class="wpmudev-picker"></div>
 			</div>
 		</div>

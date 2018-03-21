@@ -22,7 +22,7 @@
 <script>
 	jQuery(document).ready( function() {
 		if ( window.WPHB_Admin ) {
-			window.WPHB_Admin.getModule( 'caching' );	   			 	 		  		   		
+			window.WPHB_Admin.getModule( 'caching' );
 		}
 	});
 </script>

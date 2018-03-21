@@ -222,10 +222,11 @@ class Forminator_Time extends Forminator_Field {
 	 * @since 1.0
 	 *
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$html        = '<div class="forminator-row forminator-row--inner forminator-align_btm">';
 		$id          = $name = self::get_property( 'element_id', $field );
@@ -364,11 +365,27 @@ class Forminator_Time extends Forminator_Field {
 	 */
 	public function get_validation_messages() {
 		$field    = $this->field;
+		$id       = self::get_property( 'element_id', $field );
 		$messages = '';
 
 		if ( $this->is_required( $field ) ) {
-			$messages = '"' . $this->get_id( $field ) . '-hours": { required: "' . __( 'This field is required. Please input a valid hour', Forminator::DOMAIN ) . '" },' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-minutes": { required: "' . __( 'This field is required. Please input a valid minute', Forminator::DOMAIN ) . '" },' . "\n";
+			// Hours validation
+			$hours_message = apply_filters(
+				'forminator_time_field_hours_required_validation_message',
+				__( 'This field is required. Please input a valid hour', Forminator::DOMAIN ),
+				$id,
+				$field
+			);
+			$messages = '"' . $this->get_id( $field ) . '-hours": { required: "' . $hours_message . '" },' . "\n";
+
+			// Minutes validation
+			$minutes_message = apply_filters(
+				'forminator_time_field_minutes_required_validation_message',
+				__( 'This field is required. Please input a valid minute', Forminator::DOMAIN ),
+				$id,
+				$field
+			);
+			$messages .= '"' . $this->get_id( $field ) . '-minutes": { required: "' . $minutes_message . '" },' . "\n";
 		}
 
 		return $messages;
@@ -387,19 +404,40 @@ class Forminator_Time extends Forminator_Field {
 			$id = self::get_property( 'element_id', $field );
 
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id . '-hours' ]   = __( 'This field is required. Please enter a valid hour', Forminator::DOMAIN );
-				$this->validation_message[ $id . '-minutes' ] = __( 'This field is required. Please enter a valid minute', Forminator::DOMAIN );
+				$this->validation_message[ $id . '-hours' ] = apply_filters(
+					'forminator_time_field_hours_required_validation_message',
+					__( 'This field is required. Please input a valid hour', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$this->validation_message[ $id . '-minutes' ] = apply_filters(
+					'forminator_time_field_minutes_required_validation_message',
+					__( 'This field is required. Please input a valid minute', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			} else {
 				$hour   = isset( $data['hours'] ) ? $data['hours'] : '';
 				$minute = isset( $data['minutes'] ) ? $data['minutes'] : '';
 				$type   = self::get_property( 'time_type', $field );
-
+				$hours_error_message = apply_filters(
+					'forminator_time_field_minutes_validation_message',
+					__( 'Please enter a valid hour', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$minutes_error_message = apply_filters(
+					'forminator_time_field_minutes_validation_message',
+					__( 'Please enter a valid minute', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 				if ( ! is_numeric( $hour ) || ! is_numeric( $minute ) ) {
 					if ( ! is_numeric( $hour ) ) {
-						$this->validation_message[ $id . '-hours' ] = __( 'Please enter the hour', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-hours' ] = $hours_error_message;
 					}
 					if ( ! is_numeric( $minute ) ) {
-						$this->validation_message[ $id . '-minutes' ] = __( 'Please enter the minute', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-minutes' ] = $minutes_error_message;
 					}
 				} else {
 					$min_hour   = $type == 'twelve' ? 1 : 0;
@@ -410,10 +448,10 @@ class Forminator_Time extends Forminator_Field {
 						$max_minute = 0;
 					}
 					if ( $hour < $min_hour || $hour > $max_hour ) {
-						$this->validation_message[ $id . '-hours' ] = __( 'Please enter a valid hour', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-hours' ] = $hours_error_message;
 					}
 					if ( $minute > $max_minute ) {
-						$this->validation_message[ $id . '-minutes' ] = __( 'Please enter a valid minute', Forminator::DOMAIN );
+						$this->validation_message[ $id . '-minutes' ] = $minutes_error_message;
 					}
 				}
 			}

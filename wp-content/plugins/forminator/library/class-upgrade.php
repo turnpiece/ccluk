@@ -20,7 +20,7 @@ class Forminator_Upgrade {
 		/**
 		 * Initialize the plugin data
 		 */
-		$old_version = get_site_option( 'forminator_version' );
+		$old_version = get_option( 'forminator_version' );
 		if ( $old_version ) {
 			$version_changed = version_compare( $old_version, FORMINATOR_VERSION, 'lt' );
 		} else {
@@ -28,7 +28,7 @@ class Forminator_Upgrade {
 		}
 		if ( $version_changed ) {
 			Forminator_Database_Tables::install_database_tables();
-			update_site_option( 'forminator_version', FORMINATOR_VERSION );
+			update_option( 'forminator_version', FORMINATOR_VERSION );
 		}
 
 	}

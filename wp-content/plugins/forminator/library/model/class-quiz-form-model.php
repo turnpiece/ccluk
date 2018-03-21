@@ -222,7 +222,7 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 		$formModel->questions = $questions;
 
 		//build the settings
-		if( isset( $data['settings'] ) ) {
+		if( isset( $data['settings'] ) && isset( $data['settings']['formID']) ) {
 			$settings            = $data['settings'];
 			$formModel->settings = $settings;
 		}

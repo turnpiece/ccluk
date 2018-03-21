@@ -21,6 +21,14 @@ abstract class Forminator_Mail {
 	protected $recipient = '';
 
 	/**
+	 * Mail recipients
+	 * The emails to receive the mail
+	 *
+	 * @var array
+	 */
+	protected $recipients = array();
+
+	/**
 	 * Mail message
 	 *
 	 * @var string
@@ -98,6 +106,25 @@ abstract class Forminator_Mail {
 	public function set_recipient( $recipient ) {
 		if ( filter_var( $recipient, FILTER_VALIDATE_EMAIL ) ) {
 			$this->recipient = $recipient;
+		}
+	}
+
+
+	/**
+	 * Set Recipients as array
+	 *
+	 * @since 1.0.3
+	 *
+	 * @param array $recipients
+	 */
+	public function set_recipients( $recipients ) {
+		$this->recipients = array();
+		if ( ! empty( $recipients ) ) {
+			foreach ( $recipients as $recipient ) {
+				if ( filter_var( $recipient, FILTER_VALIDATE_EMAIL ) ) {
+					$this->recipients[] = $recipient;
+				}
+			}
 		}
 	}
 
@@ -195,6 +222,23 @@ abstract class Forminator_Mail {
 			$this->clean();
 			$sent = wp_mail( $this->recipient, $this->subject, $this->message, $this->headers );
 		}
+		return $sent;
+	}
+
+	/**
+	 * Send mail for multiple recipients
+	 *
+	 * @since 1.0.3
+	 *
+	 * @return bool
+	 */
+	public function send_multiple() {
+		$sent = false;
+		if ( ! empty( $this->recipients ) && ! empty( $this->subject ) && ! empty( $this->message ) ) {
+			$this->clean();
+			$sent = wp_mail( $this->recipients, $this->subject, $this->message, $this->headers );
+		}
+
 		return $sent;
 	}
 }

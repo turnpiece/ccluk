@@ -245,10 +245,11 @@ class Forminator_Text extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
@@ -277,13 +278,17 @@ class Forminator_Text extends Forminator_Field {
 		$has_limit   = $this->has_limit( $field );
 		$rules       = '';
 
+		if( ! isset( $field['limit'] ) ) {
+			$field['limit'] = 0;
+		}
+
 		if ( $is_required || $has_limit ) {
 			$rules = '"' . $this->get_id( $field ) . '": {';
 			if( $is_required ) {
 				$rules .= '"required": true,';
 			}
 			if( $has_limit ) {
-				if ( $field['limit_type'] === 'characters' ) {
+				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
 					$rules .= '"maxlength": ' . $field['limit'] . ',';
 				} else {
 					$rules .= '"maxwords": ' . $field['limit'] . ',';
@@ -303,6 +308,7 @@ class Forminator_Text extends Forminator_Field {
 	 */
 	public function get_validation_messages() {
 		$field       = $this->field;
+		$id          = self::get_property( 'element_id', $field );
 		$is_required = $this->is_required( $field );
 		$has_limit   = $this->has_limit( $field );
 		$messages    = '';
@@ -311,13 +317,31 @@ class Forminator_Text extends Forminator_Field {
 			$messages .= '"' . $this->get_id( $field ) . '": {';
 
 			if( $is_required ) {
-				$messages .= '"required": "' . __( 'This field is required. Please enter text', Forminator::DOMAIN ) . '",' . "\n";
+				$required_error = apply_filters(
+					'forminator_text_field_required_validation_message',
+					__( 'This field is required. Please enter text', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+				$messages .= '"required": "' . $required_error . '",' . "\n";
 			}
 			if( $has_limit ) {
-				if ( $field['limit_type'] === 'characters' ) {
-					$messages .= '"maxlength": "' . __( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN ) . '",' . "\n";
+				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
+					$max_length_error = apply_filters(
+						'forminator_text_field_characters_validation_message',
+						__( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN ),
+						$id,
+						$field
+					);
+					$messages .= '"maxlength": "' . $max_length_error . '",' . "\n";
 				} else {
-					$messages .= '"maxwords": "' . __( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN ) . '",' . "\n";
+					$max_words_error = apply_filters(
+						'forminator_text_field_words_validation_message',
+						__( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN ),
+						$id,
+						$field
+					);
+					$messages .= '"maxwords": "' . $max_words_error . '",' . "\n";
 				}
 			}
 
@@ -337,17 +361,35 @@ class Forminator_Text extends Forminator_Field {
 	public function validate( $field, $data ) {
 		$id = self::get_property( 'element_id', $field );
 
+		if( ! isset( $field['limit'] ) ) {
+			$field['limit'] = 0;
+		}
+
 		if ( $this->is_required( $field ) ) {
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please enter some text', Forminator::DOMAIN );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_text_field_required_validation_message',
+					__( 'This field is required. Please enter text', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			}
 		}
 		if ( $this->has_limit( $field ) ) {
-			if ( ($field['limit_type'] === 'characters') && (strlen( $data ) > $field['limit']) ) {
-				$this->validation_message[ $id ] = __( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN );
-
-			} elseif ( ($field['limit_type'] === 'words') && (str_word_count($data) > $field['limit']) ) {
-				$this->validation_message[ $id ] = __( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN );
+			if ( ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters') && (strlen( $data ) > $field['limit'] ) ) {
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_text_field_characters_validation_message',
+					__( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
+			} elseif ( ( isset( $field['limit_type'] ) && $field['limit_type'] == 'words') && (str_word_count($data) > $field['limit'] ) ) {
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_text_field_words_validation_message',
+					__( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			}
 		}
 	}

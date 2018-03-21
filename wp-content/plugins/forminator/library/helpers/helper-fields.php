@@ -301,8 +301,16 @@ function forminator_clear_field_id( $string ) {
 function forminator_replace_form_data( $content, $data ) {
 	$matches = array();
 
+	$fields      = forminator_fields_toArray();
+	$field_types = array_keys( $fields );
+
+	$randomed_field_pattern  = 'field-\d+-\d+';
+	$increment_field_pattern = sprintf( '(%s)-\d+', implode( '|', $field_types ) );
+	$pattern                 = '/\{((' . $randomed_field_pattern . ')|(' . $increment_field_pattern . '))(\-[A-Za-z-_]+)?\}/';
+
+
 	// Find all field ID's
-	if ( preg_match_all( '/\{field-\d+-\d+(\-[A-Za-z-]+)?\}/', $content, $matches ) ) {
+	if ( preg_match_all( $pattern, $content, $matches ) ) {
 		if( !isset( $matches[0] ) || !is_array( $matches[0] ) ) {
 			return $content;
 		}
@@ -326,6 +334,94 @@ function forminator_replace_form_data( $content, $data ) {
 	}
 
 	return $content;
+}
+
+/**
+ * Format custom form data variables to html formatted
+ *
+ * @since 1.0.3
+ *
+ * @param string                       $content
+ * @param Forminator_Custom_Form_Model $custom_form
+ * @param array                        $data - submitted `_POST` data
+ * @param Forminator_Form_Entry_Model  $entry
+ * @param array                        $excluded
+ *
+ * @return mixed
+ */
+function forminator_replace_custom_form_data( $content, Forminator_Custom_Form_Model $custom_form, $data, Forminator_Form_Entry_Model $entry, $excluded = array() ) {
+	$custom_form_datas = array(
+		'{all_fields}' => 'forminator_get_formatted_form_entry',
+		'{form_name}'  => 'forminator_get_formatted_form_name',
+	);
+
+	foreach ( $custom_form_datas as $custom_form_data => $function ) {
+		if ( in_array( $custom_form_data, $excluded ) ) {
+			continue;
+		}
+		if ( strpos( $content, $custom_form_data ) !== false ) {
+			if ( is_callable( $function ) ) {
+				$replacer = call_user_func( $function, $custom_form, $data, $entry );
+				$content  = str_replace( $custom_form_data, $replacer, $content );
+			}
+		}
+	}
+
+	return $content;
+}
+
+/**
+ * Get Html Formatted of form entry
+ *
+ * @since 1.0.3
+ *
+ * @param Forminator_Custom_Form_Model $custom_form
+ * @param                              $data
+ * @param Forminator_Form_Entry_Model  $entry
+ *
+ * @return string
+ */
+function forminator_get_formatted_form_entry( Forminator_Custom_Form_Model $custom_form, $data, Forminator_Form_Entry_Model $entry ) {
+	$ignored_field_types = Forminator_Form_Entry_Model::ignored_fields();
+	$form_fields         = $custom_form->getFields();
+	if ( is_null( $form_fields ) ) {
+		$form_fields = array();
+	}
+
+	$html = '<br/><ol>';
+	foreach ( $form_fields as $form_field ) {
+		/** @var  Forminator_Form_Field_Model $form_field */
+		$field_type = $form_field->__get( 'type' );
+		if ( in_array( $field_type, $ignored_field_types ) ) {
+			continue;
+		}
+		$html  .= '<li>';
+		$label = $form_field->get_label_for_entry();
+		$value = Forminator_CForm_View_Page::render_entry( $entry, $form_field->slug );
+		if ( ! empty( $label ) ) {
+			$html .= '<b>' . $label . '</b><br/>';
+		}
+		$html .= $value . '<br/>';
+		$html .= '</li>';
+	}
+	$html .= '</ol><br/>';
+
+	return $html;
+}
+
+/**
+ * Get Html Formatted of form name
+ *
+ * @since 1.0.3
+ *
+ * @param Forminator_Custom_Form_Model $custom_form
+ * @param                              $data
+ * @param Forminator_Form_Entry_Model  $entry
+ *
+ * @return string
+ */
+function forminator_get_formatted_form_name( Forminator_Custom_Form_Model $custom_form, $data, Forminator_Form_Entry_Model $entry ) {
+	return esc_html( forminator_get_form_name( $custom_form->id, 'custom_form' ) );
 }
 
 /**
@@ -358,12 +454,16 @@ function forminator_replace_variables( $content ) {
 		$content = str_replace( '{embed_title}', $embed_title, $content );
 
 		// Handle Embed URL variable
-		$embed_url = forminator_get_post_data( 'guid' );
+		$embed_url = forminator_get_current_url();
 		$content = str_replace( '{embed_url}', $embed_url, $content );
 
 		// Handle HTTP User Agent variable
 		$user_agent = $_SERVER[ 'HTTP_USER_AGENT' ];
 		$content = str_replace( '{user_agent}', $user_agent, $content );
+
+		// Handle site url variable
+		$site_url = site_url();
+		$content = str_replace( '{site_url}', $site_url, $content );
 
 		// Handle HTTP Refer URL variable
 		$refer_url = isset ( $_SERVER['HTTP_REFERER'] ) ? $_SERVER['HTTP_REFERER'] : $embed_url;

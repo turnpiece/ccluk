@@ -196,14 +196,15 @@ class Core_Result extends Behavior {
                                     <button type="button" class="button button-small delete-mitem button-grey">
 										<?php _e( "Delete", wp_defender()->domain ) ?></button>
                                     <div class="confirm-box wd-hide">
-										<?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?>
-                                        &nbsp;
-                                        <button type="submit" class="button button-small button-grey">
-											<?php _e( "Yes", wp_defender()->domain ) ?>
-                                        </button>
-                                        <button type="button" class="button button-small button-secondary">
-											<?php _e( "No", wp_defender()->domain ) ?>
-                                        </button>
+                                        <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
+                                        <div>
+                                            <button type="submit" class="button button-small button-grey">
+		                                        <?php _e( "Yes", wp_defender()->domain ) ?>
+                                            </button>
+                                            <button type="button" class="button button-small button-secondary">
+		                                        <?php _e( "No", wp_defender()->domain ) ?>
+                                            </button>
+                                        </div>
                                     </div>
                                 </form>
 							<?php elseif ( $raw['type'] == 'modified' ): ?>

@@ -342,7 +342,6 @@ class Forminator_Postdata extends Forminator_Field {
 				'className'   => 'toggle-container',
 				'hide_label'  => true,
 				'has_content' => true,
-				'hide_label'  => true,
 				'values'      => array(
 					array(
 						'value'      => 'true',
@@ -370,7 +369,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return array
 	 */
 	public function defaults() {
-		return array(
+		return apply_filters( 'forminator_post_data_defaults_settings', array(
 			'data_status'         => 'pending',
 			'post_title_label'    => 'Post Title',
 			'post_content_label'  => 'Post Content',
@@ -378,7 +377,7 @@ class Forminator_Postdata extends Forminator_Field {
 			'post_image_label'    => 'Featured Image',
 			'post_category_label' => 'Category',
 			'post_tags_label'     => 'Tags',
-		);
+		) );
 	}
 
 	/**
@@ -397,7 +396,7 @@ class Forminator_Postdata extends Forminator_Field {
 			);
 		}
 
-		return $users_list;
+		return apply_filters( 'forminator_postdata_users_list', $users_list );
 	}
 
 	/**
@@ -498,10 +497,11 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @since 1.0
 	 *
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$required    = self::get_property( 'required', $field, false );
 		$id          = $name = self::get_property( 'element_id', $field );
 
@@ -513,7 +513,7 @@ class Forminator_Postdata extends Forminator_Field {
 		$html .= $this->get_post_tag( $id, $name, $field, $required );
 		$html .= $this->_render_custom_fields( $id, $name, $field, $required );
 
-		return apply_filters( 'forminator_field_postdata_markup', $html, $field );
+		return apply_filters( 'forminator_field_postdata_markup', $html, $field, $required, $id, $this );
 	}
 
 	/**
@@ -529,7 +529,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_title( $id, $name, $field, $required ) {
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_title', 'text', 'forminator-input', 'post-title' );
+		return apply_filters( 'forminator_field_postdata_post_title', $this->_get_post_field( $id, $name, $field, $required, 'post_title', 'text', 'forminator-input', 'post-title' ) );
 	}
 
 	/**
@@ -545,7 +545,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_content( $id, $name, $field, $required ) {
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_content', 'wp_editor', 'forminator-textarea', 'post-content' );
+		return apply_filters( 'forminator_field_postdata_post_content', $this->_get_post_field( $id, $name, $field, $required, 'post_content', 'wp_editor', 'forminator-textarea', 'post-content' ) );
 	}
 
 	/**
@@ -561,7 +561,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_excerpt( $id, $name, $field, $required ) {
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_excerpt', 'textarea', 'forminator-textarea', 'post-excerpt' );
+		return apply_filters( 'forminator_field_postdata_post_excerpt', $this->_get_post_field( $id, $name, $field, $required, 'post_excerpt', 'textarea', 'forminator-textarea', 'post-excerpt' ) );
 	}
 
 	/**
@@ -577,7 +577,7 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_post_image( $id, $name, $field, $required ) {
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_image', 'file', 'forminator-upload', 'post-image' );
+		return apply_filters( 'forminator_field_postdata_post_image', $this->_get_post_field( $id, $name, $field, $required, 'post_image', 'file', 'forminator-upload', 'post-image' ) );
 	}
 
 	/**
@@ -594,11 +594,13 @@ class Forminator_Postdata extends Forminator_Field {
 	 */
 	public function get_post_category( $id, $name, $field, $required ) {
 		$options    = array();
-		$categories = get_categories( array(
-			                              'orderby'    => 'name',
-			                              'order'      => 'ASC',
-			                              'hide_empty' => false,
-		                              ) );
+		$categories = get_categories(
+			array(
+				'orderby'    => 'name',
+				'order'      => 'ASC',
+				'hide_empty' => false,
+			)
+		);
 
 		foreach ( $categories as $category ) {
 			$options[] = array(
@@ -607,7 +609,7 @@ class Forminator_Postdata extends Forminator_Field {
 			);
 		}
 
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_category', 'select', 'forminator-select', 'post-category', $options );
+		return apply_filters( 'forminator_field_postdata_post_category', $this->_get_post_field( $id, $name, $field, $required, 'post_category', 'select', 'forminator-select', 'post-category', $options ) );
 	}
 
 	/**
@@ -624,9 +626,11 @@ class Forminator_Postdata extends Forminator_Field {
 	 */
 	public function get_post_tag( $id, $name, $field, $required ) {
 		$options = array();
-		$tags    = get_tags( array(
-			                     'hide_empty' => false,
-		                     ) );
+		$tags    = get_tags(
+			array(
+				'hide_empty' => false,
+			)
+		);
 
 		foreach ( $tags as $tag ) {
 			$options[] = array(
@@ -635,7 +639,7 @@ class Forminator_Postdata extends Forminator_Field {
 			);
 		}
 
-		return $this->_get_post_field( $id, $name, $field, $required, 'post_tags', 'select', 'forminator-select', 'post-tags', $options );
+		return apply_filters( 'forminator_field_postdata_post_tag', $this->_get_post_field( $id, $name, $field, $required, 'post_tags', 'select', 'forminator-select', 'post-tags', $options ) );
 	}
 
 	/**
@@ -781,29 +785,64 @@ class Forminator_Postdata extends Forminator_Field {
 
 		if ( $this->is_required( $field ) ) {
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please fill in post data', Forminator::DOMAIN );
+				$postdata_validation_message = apply_filters(
+					'forminator_postdata_field_validation_message',
+					__( 'This field is required. Please fill in post data', Forminator::DOMAIN ),
+					$id
+				);
+				$this->validation_message[ $id ] = $postdata_validation_message;
 			} elseif ( is_array( $data ) ) {
 				$post_image    = self::get_property( 'post_image', $field, '' );
 				$post_category = self::get_property( 'post_category', $field, '' );
 				$post_tags     = self::get_property( 'post_tags', $field, '' );
 
 				if ( ! empty( $post_title ) && empty( $title ) ) {
-					$this->validation_message[ $id . '-post-title' ] = __( 'This field is required. Please enter the post title', Forminator::DOMAIN );
+					$postdata_post_title_validation_message = apply_filters(
+						'forminator_postdata_field_post_title_validation_message',
+						__( 'This field is required. Please enter the post title', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-title' ] = $postdata_post_title_validation_message;
 				}
 				if ( ! empty( $post_content ) && empty( $content ) ) {
-					$this->validation_message[ $id . '-post-content' ] = __( 'This field is required. Please enter the post content', Forminator::DOMAIN );
+					$postdata_post_content_validation_message = apply_filters(
+						'forminator_postdata_field_post_content_validation_message',
+						__( 'This field is required. Please enter the post content', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-content' ] = $postdata_post_content_validation_message;
 				}
 				if ( ! empty( $post_excerpt ) && empty( $excerpt ) ) {
-					$this->validation_message[ $id . '-post-excerpt' ] = __( 'This field is required. Please enter the post excerpt', Forminator::DOMAIN );
+					$postdata_post_excerpt_validation_message = apply_filters(
+						'forminator_postdata_field_post_excerpt_validation_message',
+						__( 'This field is required. Please enter the post excerpt', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-excerpt' ] = $postdata_post_excerpt_validation_message;
 				}
 				if ( ! empty( $post_image ) && empty( $image ) ) {
-					$this->validation_message[ $id . '-post-image' ] = __( 'This field is required. Please upload a post image', Forminator::DOMAIN );
+					$postdata_post_image_validation_message = apply_filters(
+						'forminator_postdata_field_post_image_validation_message',
+						__( 'This field is required. Please upload a post image', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-image' ] = $postdata_post_image_validation_message;
 				}
 				if ( ! empty( $post_category ) && empty( $category ) ) {
-					$this->validation_message[ $id . '-post-category' ] = __( 'This field is required. Please select a post category', Forminator::DOMAIN );
+					$postdata_post_category_validation_message = apply_filters(
+						'forminator_postdata_field_post_category_validation_message',
+						__( 'This field is required. Please select a post category', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-category' ] = $postdata_post_category_validation_message;
 				}
 				if ( ! empty( $post_tags ) && empty( $tags ) ) {
-					$this->validation_message[ $id . '-post-tags' ] = __( 'This field is required. Please select a post tag', Forminator::DOMAIN );
+					$postdata_post_tag_validation_message = apply_filters(
+						'forminator_postdata_field_post_tag_validation_message',
+						__( 'This field is required. Please select a post tag', Forminator::DOMAIN ),
+						$id
+					);
+					$this->validation_message[ $id . '-post-tags' ] = $postdata_post_tag_validation_message;
 				}
 			}
 		} else {
@@ -825,28 +864,32 @@ class Forminator_Postdata extends Forminator_Field {
 					if ( $is_content_available ) {
 						//check if on postdata these sub field is avail available
 						if ( ! empty( $post_title ) ) {
-							$this->validation_message[ $id . '-post-title' ] = __( 'This field is required. Please enter the post title', Forminator::DOMAIN );
-						} elseif ( ! empty( $post_content ) ) {
-							$this->validation_message[ $id . '-post-content' ] = __( 'This field is required. Please enter the post content', Forminator::DOMAIN );
-						} elseif ( ! empty( $post_excerpt ) ) {
-							$this->validation_message[ $id . '-post-excerpt' ] = __( 'This field is required. Please enter the post excerpt', Forminator::DOMAIN );
+							$this->validation_message[ $id . '-post-title' ] = apply_filters(
+								// nr = not required
+								'forminator_postdata_field_post_title_nr_validation_message',
+								__( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN ),
+								$id
+							);
 						}
-					}
-
-				}
-				if ( empty( $title ) && empty( $content ) && empty( $excerpt ) ) {
-					if ( ! empty( $post_title ) ) {
-						$this->validation_message[ $id . '-post-title' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
-					}
-					if ( ! empty( $post_content ) ) {
-						$this->validation_message[ $id . '-post-content' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
-					}
-					if ( ! empty( $post_excerpt ) ) {
-						$this->validation_message[ $id . '-post-excerpt' ] = __( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN );
+						if ( ! empty( $post_content ) ) {
+							$this->validation_message[ $id . '-post-content' ] = apply_filters(
+								// nr = not required
+								'forminator_postdata_field_post_content_nr_validation_message',
+								__( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN ),
+								$id
+							);
+						}
+						if ( ! empty( $post_excerpt ) ) {
+							$this->validation_message[ $id . '-post-excerpt' ] = apply_filters(
+								// nr = not required
+								'forminator_postdata_field_post_excerpt_nr_validation_message',
+								__( 'At least one of these fields is required: Post Title, Post Excerpt or Post Content', Forminator::DOMAIN ),
+								$id
+							);
+						}
 					}
 				}
 			}
-
 		}
 	}
 
@@ -883,7 +926,7 @@ class Forminator_Postdata extends Forminator_Field {
 
 					// Check image file type
 					$wp_filetype = wp_check_filetype( $filename, null );
-					$image_exts  = apply_filters( 'forminator_field_postdata_image_file_types', array( 'jpg', 'jpeg', 'jpe', 'gif', 'png' ) );
+					$image_exts  = apply_filters( 'forminator_field_postdata_image_file_types', array( 'jpg', 'jpeg', 'jpe', 'gif', 'png', 'bmp' ) );
 					if ( in_array( $wp_filetype['ext'], $image_exts ) ) {
 						// Set attachment data
 						$attachment = array(
@@ -935,7 +978,12 @@ class Forminator_Postdata extends Forminator_Field {
 	 * @return bool|int - success is post id
 	 */
 	public function save_post( $field, $data ) {
-		$post_author = self::get_property( 'select_author', $field, 1 );
+		$default_author = self::get_property( 'default_author', $field, false );
+		$default_author = filter_var( $default_author, FILTER_VALIDATE_BOOLEAN );
+		$post_author    = 1;
+		if ( $default_author ) {
+			$post_author = self::get_property( 'select_author', $field, 1 );
+		}
 		$post_status = self::get_property( 'data_status', $field, 'draft' );
 		$title       = isset( $data['post-title'] ) ? $data['post-title'] : '';
 		$content     = isset( $data['post-content'] ) ? $data['post-content'] : '';
@@ -976,6 +1024,8 @@ class Forminator_Postdata extends Forminator_Field {
 				}
 				add_post_meta( $post_id, '_has_forminator_meta', true );
 			}
+
+			do_action( 'forminator_post_data_field_post_saved', $post_id, $field, $data, $this );
 
 			return $post_id;
 		}

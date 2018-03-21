@@ -113,10 +113,11 @@ class Forminator_Html extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		return forminator_replace_variables( self::get_property( 'variations', $field ) );
 	}
 }

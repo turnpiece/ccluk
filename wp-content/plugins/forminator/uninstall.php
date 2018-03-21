@@ -53,14 +53,14 @@ function forminator_delete_custom_posts() {
  * @since 1.0.2
  */
 function forminator_delete_custom_options() {
-	delete_site_option( "forminator_pagination_listings" );
-	delete_site_option( "forminator_pagination_entries" );
-	delete_site_option( "forminator_captcha_key" );
-	delete_site_option( "forminator_captcha_secret" );
-	delete_site_option( "forminator_captcha_language" );
-	delete_site_option( "forminator_captcha_theme" );
-	delete_site_option( "forminator_welcome_dismissed" );
-	delete_site_option( "forminator_version" );
+	delete_option( "forminator_pagination_listings" );
+	delete_option( "forminator_pagination_entries" );
+	delete_option( "forminator_captcha_key" );
+	delete_option( "forminator_captcha_secret" );
+	delete_option( "forminator_captcha_language" );
+	delete_option( "forminator_captcha_theme" );
+	delete_option( "forminator_welcome_dismissed" );
+	delete_option( "forminator_version" );
 }
 
 $forminator_uninstall = get_option( "forminator_uninstall_clear_data", false );

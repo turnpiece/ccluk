@@ -1,6 +1,13 @@
 Changelog
 ===========
 
+### 1.7.2 - March 14, 2018
+
+**Fixes**
+
+- Fatal error because of unexisting function on WooCommerce my account page.
+
+
 ### 1.7.1 - March 13, 2018
 
 **Fixes**

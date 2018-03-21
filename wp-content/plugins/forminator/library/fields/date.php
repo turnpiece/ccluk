@@ -461,10 +461,11 @@ class Forminator_Date extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field    = $field;
 		$html = $icon 	= '';
 		$id = $name   	= self::get_property( 'element_id', $field );
@@ -656,7 +657,7 @@ class Forminator_Date extends Forminator_Field {
 			);
 		}
 
-		return $array;
+		return apply_filters( 'forminator_field_date_get_years', $array, $min_year, $max_year, $year, $start, $end, $this );
 	}
 
 	/**
@@ -674,7 +675,7 @@ class Forminator_Date extends Forminator_Field {
 			);
 		}
 
-		return $array;
+		return apply_filters( 'forminator_field_date_get_months', $array, $this );
 	}
 
 	/**
@@ -692,7 +693,7 @@ class Forminator_Date extends Forminator_Field {
 			);
 		}
 
-		return $array;
+		return apply_filters( 'forminator_field_date_get_day', $array, $this );
 	}
 
 	/**
@@ -730,7 +731,7 @@ class Forminator_Date extends Forminator_Field {
 					$date_info['day']   = isset( $date['day'] ) ? $date['day'] : 0;
 					break;
 			}
-			return $date_info;
+			return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, $this );
 		}
 
 		$date = preg_replace( "|[/\.]|", '-', $date );
@@ -754,7 +755,7 @@ class Forminator_Date extends Forminator_Field {
 			}
 		}
 
-		return $date_info;
+		return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, $this );
 	}
 
 	/**
@@ -824,21 +825,65 @@ class Forminator_Date extends Forminator_Field {
 		if( $type == "picker" ) {
 			$messages = '"' . $this->get_id( $field ) . '": {' . "\n";
 			if ( $this->is_required( $field ) ) {
-				$messages .= 'required: "' . __( 'This field is required. Please enter a valid date', Forminator::DOMAIN ) . '",' . "\n";
+				$required_validation_message = apply_filters(
+					'forminator_field_date_required_validation_message',
+					__( 'This field is required. Please enter a valid date', Forminator::DOMAIN ),
+					$field,
+					$type,
+					$date_format,
+					$this
+				);
+				$messages .= 'required: "' . $required_validation_message . '",' . "\n";
 			}
+
+			$format_validation_message = apply_filters(
+				'forminator_field_date_format_validation_message',
+				__( 'Not valid date', Forminator::DOMAIN ),
+				$field,
+				$type,
+				$date_format,
+				$this
+			);
+
 			if ( $date_format === 'dd/mm/yy' ) {
-				$messages .= 'datedmy: "' . __( 'Not valid date', Forminator::DOMAIN ) . '",' . "\n";
+				$messages .= 'datedmy: "' . $format_validation_message . '",' . "\n";
 			} else {
-				$messages .= 'date: "' . __( 'Not valid date', Forminator::DOMAIN ) . '",' . "\n";
+				$messages .= 'date: "' . $format_validation_message . '",' . "\n";
 			}
 			$messages .= '},' . "\n";
 		} else {
-			$messages = '"' . $this->get_id( $field ) . '-day": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-month": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-year": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
+			$day_validation_message = apply_filters(
+				'forminator_field_date_day_validation_message',
+				__( 'This field is required. Please input a value', Forminator::DOMAIN ),
+				$field,
+				$type,
+				$date_format,
+				$this
+			);
+			$messages = '"' . $this->get_id( $field ) . '-day": "' . $day_validation_message . '",' . "\n";
+
+			$month_validation_message = apply_filters(
+				'forminator_field_date_month_validation_message',
+				__( 'This field is required. Please input a value', Forminator::DOMAIN ),
+				$field,
+				$type,
+				$date_format,
+				$this
+			);
+			$messages .= '"' . $this->get_id( $field ) . '-month": "' . $month_validation_message . '",' . "\n";
+
+			$year_validation_message = apply_filters(
+				'forminator_field_date_year_validation_message',
+				__( 'This field is required. Please input a value', Forminator::DOMAIN ),
+				$field,
+				$type,
+				$date_format,
+				$this
+			);
+			$messages .= '"' . $this->get_id( $field ) . '-year": "' . $year_validation_message . '",' . "\n";
 		}
 
-		return $messages;
+		return apply_filters( 'forminator_field_date_validation_message', $messages, $field, $type, $date_format, $this );
 	}
 
 	/**
@@ -853,11 +898,25 @@ class Forminator_Date extends Forminator_Field {
 			$id 			= self::get_property( 'element_id', $field );
 			$date_format  	= self::get_property( 'date_format', $field );
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please enter the date', Forminator::DOMAIN );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_field_date_required_field_validation_message',
+					__( 'This field is required. Please enter the date', Forminator::DOMAIN ),
+					$id,
+					$data,
+					$date_format,
+					$this
+				);
 			} else {
 				$date = self::parse_date( $data, $date_format );
 				if ( empty( $date ) || ! $this->check_date( $date['month'], $date['day'], $date['year'] ) ) {
-					$this->validation_message[ $id ] = __( 'Please enter a valid date', Forminator::DOMAIN );
+					$this->validation_message[ $id ] = apply_filters(
+						'forminator_field_date_valid_date_validation_message',
+						__( 'Please enter a valid date', Forminator::DOMAIN ),
+						$id,
+						$data,
+						$date_format,
+						$this
+					);
 				} else {
 					$year_range 	= self::get_property( 'year_range', $field, false );
 					if ( $year_range ) {
@@ -866,21 +925,29 @@ class Forminator_Date extends Forminator_Field {
 						$year 		= intval( $date['year'] );
 						if ( !empty( $min_year ) && !empty( $max_year ) ) {
 							if ( $year < $min_year || $year > $max_year ) {
-								$this->validation_message[ $id ] = __( 'Please enter a valid year', Forminator::DOMAIN );
+								$this->validation_message[ $id ] = apply_filters(
+									'forminator_field_date_valid_maxmin_year_validation_message',
+									__( 'Please enter a valid year', Forminator::DOMAIN )
+								);
 							}
 						} else {
 							if ( !empty( $min_year ) ) {
 								if ( $year < $min_year ) {
-									$this->validation_message[ $id ] = __( 'Please enter a valid year', Forminator::DOMAIN );
+									$this->validation_message[ $id ] = apply_filters(
+										'forminator_field_date_valid_maxmin_year_validation_message',
+										__( 'Please enter a valid year', Forminator::DOMAIN )
+									);
 								}
 							}
 							if ( !empty( $max_year ) ) {
 								if ( $year > $max_year ) {
-									$this->validation_message[ $id ] = __( 'Please enter a valid year', Forminator::DOMAIN );
+									$this->validation_message[ $id ] = apply_filters(
+										'forminator_field_date_valid_maxmin_year_validation_message',
+										__( 'Please enter a valid year', Forminator::DOMAIN )
+									);
 								}
 							}
 						}
-
 					}
 				}
 			}

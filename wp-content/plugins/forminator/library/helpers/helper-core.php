@@ -450,6 +450,18 @@ function forminator_get_export_logs( $form_id ) {
 	return $row;
 }
 
+/**
+ * Return current page url
+ *
+ * @since 1.0.3
+ *
+ * @return mixed
+ */
+function forminator_get_current_url() {
+	global $wp;
+
+	return add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+}
 
 /**
  * Return week day from number

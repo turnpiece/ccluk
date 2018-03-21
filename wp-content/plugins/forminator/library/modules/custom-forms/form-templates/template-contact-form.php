@@ -36,61 +36,61 @@ class Forminator_Template_Contact_Form extends Forminator_Template {
 		return array(
 			array(
 				'wrapper_id' => 'wrapper-1511347711918-1669',
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'element_id'        => 'field-1511347711915-1670',
-						'type'              => 'name',
-						'cols'              => '12',
-						"required"          => "true",
-						"field_label"       => "First Name",
-						"placeholder"       => "E.g. John",
+						'element_id'  => 'name-1',
+						'type'        => 'name',
+						'cols'        => '12',
+						"required"    => "true",
+						"field_label" => "First Name",
+						"placeholder" => "E.g. John",
 					),
-				)
+				),
 			),
 			array(
 				'wrapper_id' => 'wrapper-1511347712118-1739',
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'element_id'        => 'field-1511347711415-1284',
-						'type'              => 'email',
-						'cols'              => '12',
-						"required"          => "true",
-						"field_label"        => "Email Address",
-						"placeholder"       => "E.g. john@doe.com",
-						"validation"   => true,
-						"validation_text"   => ""
+						'element_id'      => 'email-1',
+						'type'            => 'email',
+						'cols'            => '12',
+						"required"        => "true",
+						"field_label"     => "Email Address",
+						"placeholder"     => "E.g. john@doe.com",
+						"validation"      => true,
+						"validation_text" => "",
 					),
-				)
+				),
 			),
 			array(
 				'wrapper_id' => 'wrapper-1311247712118-1194',
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'element_id'        => 'field-1211248711415-5291',
-						'type'              => 'phone',
-						'cols'              => '12',
-						"required"          => false,
-						"field_label"        => "Phone Number",
-						"placeholder"       => "E.g. +1 3004005000",
-						"validation"   => true,
-						"validation_text"   => ""
+						'element_id'      => 'phone-1',
+						'type'            => 'phone',
+						'cols'            => '12',
+						"required"        => false,
+						"field_label"     => "Phone Number",
+						"placeholder"     => "E.g. +1 3004005000",
+						"validation"      => true,
+						"validation_text" => "",
 					),
-				)
+				),
 			),
 			array(
 				'wrapper_id' => 'wrapper-1988247712118-9871',
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'element_id'        => 'field-1218654711415-7529',
-						'type'              => 'text',
-						'cols'              => '12',
-						"required"          => false,
-						"field_label"        => "Message",
-						"placeholder"       => "Enter your message...",
-						"input_type"        => "paragraph",
+						'element_id'  => 'text-1',
+						'type'        => 'text',
+						'cols'        => '12',
+						"required"    => false,
+						"field_label" => "Message",
+						"placeholder" => "Enter your message...",
+						"input_type"  => "paragraph",
 					),
-				)
-			)
+				),
+			),
 		);
 	}
 

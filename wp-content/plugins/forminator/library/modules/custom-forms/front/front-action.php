@@ -326,6 +326,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							}
 
 							if ( isset( $field_forms[ $field_type ] ) && ! empty( $field_forms[ $field_type ] ) ) {
+							    /** @var Forminator_Field $form_field_obj */
 								$form_field_obj = $field_forms[ $field_type ];
 								if ( $field_type == "upload" ) {
 									$upload_data = $this->handle_file_upload( $field_id );
@@ -347,11 +348,10 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 
 								}
 								if ( ! empty( $field_data ) ) {
-									//Validate data
-									if ( ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
+									// Validate data when its available and not hidden on front end
+									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
 										$form_field_obj->validate( $field_array, $field_data );
 									}
-
 									$valid_response = $form_field_obj->is_valid_entry();
 									if ( ! is_array( $valid_response ) ) {
 
@@ -367,13 +367,21 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 
 
 										if ( $field_type == "postdata" && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
-											$post_id = $form_field_obj->save_post( $field_array, $field_data );
-											if ( $post_id ) {
-												$field_data             = array();
-												$field_data['postdata'] = $post_id;
+										    // check if field_data of post values not empty (happen when postdata is not required)
+											$filtered = array_filter( $field_data );
+											if ( ! empty( $filtered ) ) {
+												$post_id = $form_field_obj->save_post( $field_array, $field_data );
+												if ( $post_id ) {
+													$field_data             = array();
+													$field_data['postdata'] = $post_id;
+												} else {
+													$submit_errors[][ $field->slug ] = __( 'There was an error saving the post data. Please try again', Forminator::DOMAIN );
+												}
 											} else {
-												$submit_errors[][ $field->slug ] = __( 'There was an error saving the post data. Please try again', Forminator::DOMAIN );
-											}
+												$field_data             = array();
+												$field_data['postdata'] = null;
+                                            }
+
 										}
 										if ( $field_type == "product" ) {
 											$product_fields[] = array(
@@ -394,7 +402,8 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 									}
 
 								} else {
-									if ( ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
+									// Validate data when its available and not hidden on front end
+									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
 										$form_field_obj->validate( $field_array, '' );
 									}
 									$valid_response = $form_field_obj->is_valid_entry();
@@ -496,7 +505,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 
 							$entry->set_fields( $field_data_array );
 							$forminator_mail_sender = new Forminator_CForm_Front_Mail();
-							$forminator_mail_sender->process_mail( $custom_form, $_POST );
+							$forminator_mail_sender->process_mail( $custom_form, $_POST, $entry );
 							if ( isset( $setting['redirect'] ) ) {
 								// Convert to bool
 								$redirect = filter_var( $setting['redirect'], FILTER_VALIDATE_BOOLEAN );

@@ -50,11 +50,6 @@ class Forminator_Modules {
 				'slug'  => 'custom-forms',
 				'label'	  => __( 'Custom Forms', Forminator::DOMAIN )
 			),
-			'login_registration_forms' => array(
-				'class'	  => 'Login_Registration_Form',
-				'slug'  => 'login-registration-forms',
-				'label'	  => __( 'Login / Registration Forms', Forminator::DOMAIN )
-			),
 			'polls' => array(
 				'class'	  => 'Polls',
 				'slug'  => 'polls',

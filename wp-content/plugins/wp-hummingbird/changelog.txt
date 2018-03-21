@@ -4,6 +4,11 @@ Tested up to: 4.9.4
 
 Change Log:
 
+= 1.8.0.4 ( 2018-03-14 ) =
+- Fix: API spam issue
+- Fix: Performance scans not returning any results on some hosts
+- Fix: High CPU usage with wphb-check-cf checks
+
 = 1.8.0.3 ( 2018-03-13 ) =
 - Enhance: Better settings upgrade on multisite installs
 - Fix: Scheduled performance reports stuck on a loop
@@ -336,4 +341,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1520971767-au
+87274-1521663258-au

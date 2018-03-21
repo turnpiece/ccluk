@@ -34,7 +34,7 @@ $path = forminator_plugin_url();
 
 			<p><?php _e( "Check out the docs to get the most out of the tools and features inside Forminator.", Forminator::DOMAIN ); ?></p>
 
-			<p><a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/#chapter-5" target="_blank" class="wpmudev-button wpmudev-button-blue"><?php _e( "Forminator Docs", Forminator::DOMAIN ); ?></a></p>
+			<p><a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/" target="_blank" class="wpmudev-button wpmudev-button-blue"><?php _e( "Forminator Docs", Forminator::DOMAIN ); ?></a></p>
 
 		</div>
 

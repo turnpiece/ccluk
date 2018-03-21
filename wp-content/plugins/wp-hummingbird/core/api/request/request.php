@@ -214,6 +214,8 @@ abstract class WP_Hummingbird_API_Request {
 	/**
 	 * Make an API Request
 	 *
+	 * @since 1.8.1 Timeout for non-blocking changed from 0.1 to 2 seconds.
+	 *
 	 * @param $path
 	 * @param array $data
 	 * @param string $method
@@ -238,7 +240,7 @@ abstract class WP_Hummingbird_API_Request {
 			'timeout'   => $this->timeout,
 		);
 
-		if ( ! $args['timeout'] || 0.1 === $args['timeout'] ) {
+		if ( ! $args['timeout'] || 2 === $args['timeout'] ) {
 			$args['blocking'] = false;
 		}
 

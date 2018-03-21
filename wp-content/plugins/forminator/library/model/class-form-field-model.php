@@ -99,4 +99,33 @@ class Forminator_Form_Field_Model {
 			$this->$key = $val;
 		}
 	}
+
+	/**
+	 * Get Field Label For Entry
+	 *
+	 * @since 1.0.3
+	 *
+	 * @return string
+	 */
+	public function get_label_for_entry() {
+		$field_type = $this->__get( 'type' );
+		$label      = $this->__get( 'field_label' );
+
+		if ( empty( $label ) ) {
+			$label = $this->title;
+		}
+
+		if ( empty( $label ) ) {
+			$label = ucfirst( $field_type );
+		}
+
+		if ( $field_type == 'name' ) {
+			$multiple = Forminator_Field::get_property( 'multiple_name', $this->raw, false );
+			if ( $multiple ) {
+				$label = '';
+			}
+		}
+
+		return $label;
+	}
 }

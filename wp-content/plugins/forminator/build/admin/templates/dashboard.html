@@ -221,6 +221,14 @@
 	
     <script type="text/template" id="forminator-exports-schedule-popup-tpl">
         <form method="post">
+			<div class="wpmudev-toggle">
+				<div class="wpmudev-toggle--design wpmudev-switch-normal">
+					<input type="checkbox" class="forminator-field-singular" id="forminator-enable-scheduled-exports" name="enabled" value="true" title="Enable scheduled exports">
+					<label for="forminator-enable-scheduled-exports" class="wpmudev-label-container"></label>
+				</div>
+				<label for="forminator-enable-scheduled-exports" class="wpmudev-toggle--label wpmudev-label-container">Enable scheduled exports</label>
+			</div>
+			
             <div class="wpmudev-box-gray">
 
                 <div id="forminator-export-schedule-timeframe" class="wpmudev-row">
@@ -303,12 +311,11 @@
                         <input type="hidden" name="form_type" value="{{ Forminator.l10n.exporter.form_type }}"/>
                         <input type="hidden" name="action" value="forminator_export_entries"/>
 
-                        <button type="submit" class="wpmudev-button wpmudev-button-blue">{{ Forminator.l10n.popup.save_changes }}</button>
-
                     </div>
                     
                 </div>
             </div>
+			<button type="submit" class="wpmudev-button wpmudev-button-blue">{{ Forminator.l10n.popup.save_changes }}</button>
         </form>
     </script>
 
@@ -343,5 +350,16 @@
 		</form>
 	
 	</script>
+
+    <script type="text/template" id="forminator-confirmation-popup-tpl">
+
+        <p>{{ confirmation_message }}</p>
+
+        <form method="post">
+            <button type="button" class="wpmudev-button wpmudev-button-red popup-confirmation-confirm">{{ Forminator.l10n.popup.delete }}</button>
+            <button type="button" class="wpmudev-button wpmudev-button-blue popup-confirmation-cancel">{{ Forminator.l10n.popup.cancel }}</button>
+        </form>
+
+    </script>
 	
 </div>

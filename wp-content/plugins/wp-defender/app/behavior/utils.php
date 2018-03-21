@@ -768,7 +768,7 @@ class Utils extends Behavior {
 		$last_event_date = __( 'Never', wp_defender()->domain );
 
 		if ( ! is_wp_error( $events_in_month ) ) {
-			$last_event_date = $events_in_month['data'][0]['timestamp'];
+			$last_event_date = isset( $events_in_month['data'][0]['timestamp'] ) ? $events_in_month['data'][0]['timestamp'] : '';
 			$events_in_month = count( $events_in_month['data'] );
 		}
 

@@ -195,10 +195,11 @@ class Forminator_Website extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$id = $name  = self::get_property( 'element_id', $field );
 		$id          = $id . '-field';
@@ -219,7 +220,7 @@ class Forminator_Website extends Forminator_Field {
 	 */
 	public function get_validation_rules() {
 		$field = $this->field;
-		$rules = '"' . $this->get_id( $field)  .'": {' . "\n";
+		$rules = '"' . $this->get_id( $field )  .'": {' . "\n";
 
 		if( $this->is_required( $field ) ) {
 			$rules .= '"required": true,';
@@ -243,7 +244,7 @@ class Forminator_Website extends Forminator_Field {
 		$custom_error = self::get_property( 'validation', $field );
 		$error        = self::get_property( 'validation_text', $field );
 		$error        = preg_quote( $error, '"' );
-		$messages = '"' . $this->get_id( $field)  .'": {' . "\n";
+		$messages = '"' . $id  .'": {' . "\n";
 
 		if( $this->is_required( $field ) ) {
 			$required_message = __( 'This field is required. Please input a valid URL', Forminator::DOMAIN );
@@ -252,19 +253,41 @@ class Forminator_Website extends Forminator_Field {
 				if ( $error ) {
 					$required_message = $error;
 				}
-
 			}
+
+			$required_message = apply_filters(
+				'forminator_website_field_required_validation_message',
+				$required_message,
+				$field,
+				$id
+			);
 			$messages .= 'required: "' . $required_message . '",' . "\n";
 		}
 
-		$error_message = __( 'This is not valid URL', Forminator::DOMAIN );
+		$error_message = __( 'Please enter a valid Website URL (e.g. https://premium.wpmudev.org/).', Forminator::DOMAIN );
 		if( isset( $custom_error ) && $custom_error ) {
 			if ( $error ) {
 				$error_message = $error;
 			}
+
+			$error_message = apply_filters(
+				'forminator_website_field_custom_validation_message',
+				$error_message,
+				$id,
+				$field,
+				$custom_error
+			);
 			$messages .= 'url: "' . $error_message . '",' . "\n";
 		}
 		$messages .= '},' . "\n";
+
+		$messages = apply_filters(
+			'forminator_website_field_validation_message',
+			$messages,
+			$id,
+			$field,
+			$custom_error
+		);
 
 		return $messages;
 	}
@@ -287,14 +310,26 @@ class Forminator_Website extends Forminator_Field {
 				if( isset( $custom_error ) && $custom_error && $error ) {
 					$this->validation_message[ $id ] = $error;
 				} else {
-					$this->validation_message[ $id ] = __( 'This field is required. Please input a url', Forminator::DOMAIN );
+					$this->validation_message[ $id ] = apply_filters(
+						'forminator_website_field_required_validation_message',
+						__( 'This field is required. Please input a valid URL', Forminator::DOMAIN ),
+						$id,
+						$field,
+						$custom_error
+					);
 				}
 			} else {
 				if ( !filter_var( $data, FILTER_VALIDATE_URL ) ) {
 					if( isset( $custom_error ) && $custom_error && $error ) {
 						$this->validation_message[ $id ] = $error;
 					} else {
-						$this->validation_message[ $id ] = __( 'Please enter a valid Website URL (e.g. https://premium.wpmudev.org/).', Forminator::DOMAIN );
+						$this->validation_message[ $id ] = apply_filters(
+							'forminator_website_field_custom_validation_message',
+							__( 'Please enter a valid Website URL (e.g. https://premium.wpmudev.org/).', Forminator::DOMAIN ),
+							$id,
+							$field,
+							$custom_error
+						);
 					}
 				}
 			}

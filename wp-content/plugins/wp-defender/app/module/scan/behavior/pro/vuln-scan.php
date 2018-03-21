@@ -116,7 +116,7 @@ class Vuln_Scan extends Behavior {
 				'slug' => $slug,
 				'bugs' => array()
 			);
-			if ( is_array( $bugs['confirmed'] ) ) {
+			if ( isset( $bugs['confirmed'] ) && is_array( $bugs['confirmed'] ) ) {
 				foreach ( $bugs['confirmed'] as $bug ) {
 					$model->raw['bugs'][] = array(
 						'vuln_type' => $bug['vuln_type'],

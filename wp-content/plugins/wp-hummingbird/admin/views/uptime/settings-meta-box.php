@@ -23,6 +23,6 @@
 </div>
 <script>
 	jQuery(document).ready( function() {
-		window.WPHB_Admin.getModule( 'uptime' );
+		window.WPHB_Admin.getModule( 'uptime' );	   			 	 		  		   		
 	});
 </script>

@@ -53,6 +53,9 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function render_shortcode( $atts = array() ) {
+		if ( ! defined( 'DONOTCACHEPAGE' ) ) {
+			define( 'DONOTCACHEPAGE', 1 );
+		}
 		//use already created instance if already available
 		$view = self::get_instance();
 		if ( ! isset( $atts['id'] ) ) {
@@ -75,7 +78,20 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 */
 	public function display( $id, $ajax = false, $data = false ) {
 		if ( $data && ! empty( $data ) ) {
+			// New form, we have to update the form id
+			$has_id = filter_var( $id, FILTER_VALIDATE_BOOLEAN );
+
+			if( ! $has_id && isset($data['settings']['formID']) ) {
+				$id = $data['settings']['formID'];
+			}
+
 			$this->model = Forminator_Quiz_Form_Model::model()->load_preview( $id, $data );
+
+			// If this module haven't been saved, the preview will be of the wrong module
+			if ( ! isset( $data['settings']['quiz_title'] ) || $data['settings']['quiz_title'] !== $this->model->settings['quiz_title'] ) {
+				echo $this->message_save_to_preview();
+				return;
+			}
 		} else {
 			$this->model = Forminator_Quiz_Form_Model::model()->load( $id );
 		}
@@ -84,14 +100,22 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 			$this->generate_render_id( $id );
 			$this->render( $id );
 
+			self::$forms_properties[] = array(
+				'id'        => $id,
+				'render_id' => self::$render_ids[ $id ],
+				'settings'  => $this->get_form_settings()
+			);
+
 			if ( ! $ajax ) {
 				forminator_print_front_styles();
 				forminator_print_front_scripts();
-				self::$forms_properties[] = array(
-					'id'        => $id,
-					'render_id' => self::$render_ids[ $id ],
-				);
 				add_action( 'wp_footer', array( $this, 'forminator_render_front_scripts' ), 9999 );
+			}
+
+			if ( $ajax ) {
+				$this->print_styles();
+			} else {
+				add_action( 'wp_footer', array( $this, 'print_styles' ), 9999 );
 			}
 		} else {
 			$this->message_not_found();
@@ -282,6 +306,16 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	}
 
 	/**
+	 * Return Save to preview message
+	 *
+	 * @since 1.0
+	 * @return mixed
+	 */
+	public function message_save_to_preview() {
+		return __( "Please, save the quiz in order to preview it.", Forminator::DOMAIN );
+	}
+
+	/**
 	 * Return From ID not found message
 	 *
 	 * @since 1.0
@@ -362,7 +396,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function get_submit( $form_id, $render = true ) {
-		$nonce   = wp_nonce_field( 'forminator_submit_quizzes', true, false, false );
+		$nonce   = wp_nonce_field( 'forminator_submit_quizzes', true, true, false );
 		$post_id = $this->get_post_id();
 
 		$html = '<div class="quiz-form-button-holder">';
@@ -382,6 +416,87 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	}
 
 	/**
+	 * Return styles template path
+	 *
+	 * @since 1.0
+	 * @return bool|string
+	 */
+	public function styles_template_path() {
+		if ( isset( $this->model->quiz_type ) && $this->model->quiz_type == 'knowledge' ) {
+			return realpath( forminator_plugin_dir() . '/assets/js/front/templates/quiz-knowledge-styles.html' );
+		} else {
+			return realpath( forminator_plugin_dir() . '/assets/js/front/templates/quiz-nowrong-styles.html' );
+		}
+	}
+
+	/**
+	 * Get Properties styles of each rendered forms
+	 *
+	 * @return array
+	 */
+	public function get_styles_properties() {
+		$properties = array();
+		if ( ! empty( self::$forms_properties ) ) {
+			// avoid same custom style printed
+			$styleRendered = array();
+			foreach ( self::$forms_properties as $form_properties ) {
+				if ( ! in_array( $form_properties['id'], $styleRendered ) ) {
+					$properties[] = $form_properties;
+				}
+			}
+		}
+
+		return $properties;
+	}
+
+	/**
+	 * Return font specific front-end styles
+	 *
+	 * @since 1.0
+	 */
+	public function print_styles() {
+
+		$style_properties = $this->get_styles_properties();
+
+		if ( ! empty( $style_properties ) ) {
+			foreach ( $style_properties as $style_property ) {
+
+				if ( ! isset( $style_property['settings'] ) || empty( $style_property['settings'] ) ) {
+					continue;
+				}
+				$properties = $style_property['settings'];
+
+				// If we don't have a formID use $model->id
+				/** @var array $properties */
+				if ( ! isset( $properties['formID'] ) ) {
+					if ( ! isset( $style_property ['id'] ) ) {
+						continue;
+					}
+					$properties['formID'] = $style_property['id'];
+				}
+
+				ob_start();
+				if ( ! isset( $properties['font-family'] ) ) {
+					$properties['font-family'] = 'custom';
+				}
+
+				if ( isset( $properties['custom_css'] ) && isset( $properties['formID'] ) ) {
+					$properties['custom_css'] = forminator_prepare_css( $properties['custom_css'], '.forminator-quiz-' . $properties['formID'] . '', false, true, 'forminator-quiz' );
+				}
+
+				/** @noinspection PhpIncludeInspection */
+				include $this->styles_template_path();
+				$styles = ob_get_clean();
+
+				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
+					echo '<style type="text/css" id="forminator-quiz-styles-' . $properties['formID'] . '">' . $styles . '</style>';
+				}
+			}
+		}
+
+	}
+
+	/**
 	 *
 	 */
 	public function forminator_render_front_scripts() {
@@ -392,7 +507,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 				if ( ! empty( self::$forms_properties ) ) {
 				foreach ( self::$forms_properties as $form_properties ) {
 				?>
-				jQuery('#forminator-module-<?php echo $form_properties['id'] ?>[data-forminator-render="<?php echo $form_properties['render_id']; ?>"]').forminatorFront({
+				jQuery('#forminator-module-<?php echo $form_properties['id']; ?>[data-forminator-render="<?php echo $form_properties['render_id']; ?>"]').forminatorFront({
 					form_type: '<?php echo $this->get_form_type(); ?>',
 				});
 				<?php

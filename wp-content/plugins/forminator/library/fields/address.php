@@ -342,10 +342,11 @@ class Forminator_Address extends Forminator_Field {
 	 *
 	 * @since 1.0
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 
 		// Address
@@ -636,6 +637,7 @@ class Forminator_Address extends Forminator_Field {
 			$rules .= '"' . $this->get_id( $field ) . '-city": "required",';
 			$rules .= '"' . $this->get_id( $field ) . '-state": "required",';
 			$rules .= '"' . $this->get_id( $field ) . '-zip": "required",';
+			$rules .= '"' . $this->get_id( $field ) . '-country": "required",';
 		}
 		return $rules;
 	}
@@ -648,14 +650,34 @@ class Forminator_Address extends Forminator_Field {
 	 */
 	public function get_validation_messages() {
 		$field    = $this->field;
-		$multiple = self::get_property( 'multiple_name', $field, false );
+		$id       = $this->get_id( $field );
 		$messages = '';
 
 		if( $this->is_required( $field ) ) {
-			$messages .= '"' . $this->get_id( $field ) . '-street_address": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-city": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-state": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
-			$messages .= '"' . $this->get_id( $field ) . '-zip": "' . __( 'This field is required. Please input a value', Forminator::DOMAIN ) . '",' . "\n";
+			// Street required validation
+			$street_required_message = __( 'This field is required. Please enter the street address',  Forminator::DOMAIN );
+			$street_error_message    = apply_filters( 'forminator_address_field_street_validation_message', $street_required_message, $id, $field );
+			$messages               .= '"' . $this->get_id( $field ) . '-street_address": "' . $street_error_message . '",' . "\n";
+
+			// City required validation
+			$city_required_message = __( 'This field is required. Please enter the city',  Forminator::DOMAIN );
+			$city_error_message    = apply_filters( 'forminator_address_field_city_validation_message', $city_required_message, $id, $field );
+			$messages             .= '"' . $this->get_id( $field ) . '-city": "' . $city_error_message . '",' . "\n";
+
+			// State required validation
+			$state_required_message = __( 'This field is required. Please enter the state',  Forminator::DOMAIN );
+			$state_error_message    = apply_filters( 'forminator_address_field_state_validation_message', $state_required_message, $id, $field );
+			$messages              .= '"' . $this->get_id( $field ) . '-state": "' . $state_error_message . '",' . "\n";
+
+			// ZIP required validation
+			$zip_required_message = __( 'This field is required. Please enter the zip code',  Forminator::DOMAIN );
+			$zip_error_message    = apply_filters( 'forminator_address_field_zip_validation_message', $zip_required_message, $id, $field );
+			$messages            .= '"' . $this->get_id( $field ) . '-zip": "' . $zip_error_message . '",' . "\n";
+
+			// Country required validation
+			$country_required_message = __( 'This field is required. Please select the country',  Forminator::DOMAIN );
+			$country_error_message    = apply_filters( 'forminator_address_field_country_validation_message', $country_required_message, $id, $field );
+			$messages                .= '"' . $this->get_id( $field ) . '-country": "' . $country_error_message . '",' . "\n";
 		}
 
 		return $messages;
@@ -672,7 +694,12 @@ class Forminator_Address extends Forminator_Field {
 		if ( $this->is_required( $field ) ) {
 			$id = self::get_property( 'element_id', $field );
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please enter the address', Forminator::DOMAIN );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_address_field_validation_message',
+					__( 'This field is required. Please enter the address', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			} else  {
 				if ( is_array( $data ) ) {
 					//add street address
@@ -687,19 +714,29 @@ class Forminator_Address extends Forminator_Field {
 					$city 				= isset( $data['city'] ) ? $data['city'] : '';
 					$state 				= isset( $data['state'] ) ? $data['state'] : '';
 					if ( $address_street && empty( $street ) ) {
-						$this->validation_message[ $id . '-street_address' ] = __( 'This field is required. Please enter the street address',  Forminator::DOMAIN );
+						$street_required_message = __( 'This field is required. Please enter the street address',  Forminator::DOMAIN );
+						$street_error_message    = apply_filters( 'forminator_address_field_street_validation_message', $street_required_message, $id, $field );
+						$this->validation_message[ $id . '-street_address' ] = $street_error_message;
 					}
 					if ( $address_zip && empty( $zip ) ) {
-						$this->validation_message[ $id . '-zip' ] = __( 'This field is required. Please enter the zip code',  Forminator::DOMAIN );
+						$zip_required_message = __( 'This field is required. Please enter the zip code',  Forminator::DOMAIN );
+						$zip_error_message    = apply_filters( 'forminator_address_field_zip_validation_message', $zip_required_message, $id, $field );
+						$this->validation_message[ $id . '-zip' ] = $zip_error_message;
 					}
 					if ( $address_country && empty( $country ) && $country !== '0' ) {
-						$this->validation_message[ $id . '-country' ] = __( 'This field is required. Please select the country',  Forminator::DOMAIN );
+						$country_required_message = __( 'This field is required. Please select the country',  Forminator::DOMAIN );
+						$country_error_message    = apply_filters( 'forminator_address_field_country_validation_message', $country_required_message, $id, $field );
+						$this->validation_message[ $id . '-country' ] = $country_error_message;
 					}
 					if ( $address_city && empty( $city ) ) {
-						$this->validation_message[ $id . '-city' ] = __( 'This field is required. Please enter the city',  Forminator::DOMAIN );
+						$city_required_message = __( 'This field is required. Please enter the city', Forminator::DOMAIN );
+						$city_error_message    = apply_filters( 'forminator_address_field_city_validation_message', $city_required_message, $id, $field );
+						$this->validation_message[ $id . '-city' ] = $city_error_message;
 					}
 					if ( $address_state && empty( $state ) ) {
-						$this->validation_message[ $id . '-state' ] = __( 'This field is required. Please enter the state',  Forminator::DOMAIN );
+						$state_required_message = __( 'This field is required. Please enter the state', Forminator::DOMAIN );
+						$state_error_message    = apply_filters( 'forminator_address_field_state_validation_message', $state_required_message, $id, $field );
+						$this->validation_message[ $id . '-state' ] = $state_error_message;
 					}
 				}
 			}

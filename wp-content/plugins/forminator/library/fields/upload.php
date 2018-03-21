@@ -180,10 +180,11 @@ class Forminator_Upload extends Forminator_Field {
 	 * @since 1.0
 	 *
 	 * @param $field
+	 * @param $settings
 	 *
 	 * @return mixed
 	 */
-	public function markup( $field ) {
+	public function markup( $field, $settings = array() ) {
 		$id       = $name = self::get_property( 'element_id', $field );
 		$required = self::get_property( 'required', $field, false );
 
@@ -203,7 +204,12 @@ class Forminator_Upload extends Forminator_Field {
 		if ( $this->is_required( $field ) ) {
 			$id 	= self::get_property( 'element_id', $field );
 			if ( empty( $data ) ) {
-				$this->validation_message[ $id ] = __( 'This field is required. Please upload a file', Forminator::DOMAIN );
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_upload_field_required_validation_message',
+					__( 'This field is required. Please upload a file', Forminator::DOMAIN ),
+					$id,
+					$field
+				);
 			}
 		}
 	}
