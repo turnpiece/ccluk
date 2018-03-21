@@ -57,3 +57,26 @@
   padding: ($y * 10) + px ($x * 10) + px;
   padding: $y + rem $x + rem;
 }
+
+@mixin bp-item-list-tabs() {
+  ul {
+    li {
+      a {
+        font-size: 14px;
+        background-color: $white;
+        border-color: $blue;
+        color: $blue;
+        @include border-radius(5px);
+      }
+      &:hover,
+      &.current,
+      &.selected {
+        a {
+          background-color: $green;
+          border-color: $green;
+          color: $white;
+        }
+      }
+    }
+  }
+}

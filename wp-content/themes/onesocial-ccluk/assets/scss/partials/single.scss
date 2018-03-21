@@ -58,8 +58,8 @@
                 top: 20px;
             }
             .entry-meta {
-                font-size: 14px;
-                padding-top: 5px;
+                font-size: 16px;
+                padding-top: 0;
             }
             .entry-meta,
             .author-name {
@@ -72,7 +72,7 @@
 
     .entry-tags {
         h3 {
-            @include margin-bottom( 1.5 );
+            @include margin-bottom( 1.2 );
         }
         a {
             @include border-radius(5px);

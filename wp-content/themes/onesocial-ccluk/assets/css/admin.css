@@ -144,3 +144,9 @@
     position: relative;
     border-left: 4px solid #0085ba;
 }
+
+.redux-sidebar .redux-group-menu > li#8_section_group_li,
+.redux-sidebar .redux-group-menu > li#8_section_group_li > a#8_section_group_li_a {
+    display: none;
+    background-color:  red;
+}

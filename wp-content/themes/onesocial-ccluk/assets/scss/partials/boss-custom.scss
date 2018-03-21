@@ -1,0 +1,689 @@
+.widget_mc4wp_form_widget form p input[type="submit"] {
+  background-color: $green;
+}
+
+.widget.widget_newsletterwidget form {
+  div input[type="submit"], p input[type="submit"] {
+    background-color: $green;
+  }
+}
+
+.footer-widget #switch-mode input[type="submit"] {
+  background-color: $green;
+}
+
+.woocommerce {
+  #respond input#submit, a.button, button.button, input.button {
+    background-color: $green;
+  }
+}
+
+button {
+  background-color: $green;
+}
+
+input {
+  &[type="button"], &[type="reset"] {
+    background-color: $green;
+  }
+}
+
+article.post-password-required input[type=submit], li.bypostauthor cite span, a.button {
+  background-color: $green;
+}
+
+#buddypress {
+  ul.button-nav li a, div.generic-button a {
+    background-color: $green;
+  }
+}
+
+#secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
+  background-color: $green;
+}
+
+#buddypress {
+  #group-create-nav .group-create, div#item-nav .item-list-tabs ul li .bb-menu-button {
+    background-color: $green;
+  }
+}
+
+.is-mobile #buddypress #mobile-item-nav ul li {
+  &:active, &.current, &.selected {
+    background-color: $green;
+  }
+}
+
+#buddyboss-bbpress-media-attach, #buddyboss-comment-media-attach, .woocommerce .site-content nav.woocommerce-pagination ul li .current {
+  background-color: $green;
+}
+
+#trigger-sidebar:hover .bb-side-icon {
+  background-color: $green;
+  &:before, &:after {
+    background-color: $green;
+  }
+}
+
+.header-account-login .count, .header-notifications a.header-button span b, #aw-whats-new-submit-bbmedia {
+  background-color: $green;
+}
+
+.woocommerce span.onsale, .boss-modal-form .button {
+  background: $green;
+}
+
+.bb-sidebar-on .bb-side-icon {
+  background: $green;
+  &:after, &:before {
+    background: $green;
+  }
+}
+
+#primary .author-follow div.generic-button a:before, #buddypress div#item-header .inner-avatar-wrap div.generic-button a:before, #secondary .inner-avatar-wrap div.generic-button a:before, body .selectionSharer a.action:hover {
+  background: $green;
+}
+
+#page #main {
+  .author-follow div.generic-button.loading a:before, #buddypress .inner-avatar-wrap .generic-button.loading a:before {
+    background: $green;
+  }
+}
+
+body #selectionSharerPopunder-inner a.action:hover {
+  background: $green;
+}
+
+.woocommerce {
+  ul.products li.product .price {
+    color: $green;
+  }
+  div.product {
+    p.price, span.price {
+      color: $green;
+    }
+  }
+  [type='checkbox']:checked + span {
+    color: $green;
+  }
+}
+
+.header-account-login .pop {
+  .boss-logout, a:hover {
+    color: $green;
+  }
+}
+
+.bboss_ajax_search_item .item .item-title, body .bb-global-search-ac li.bbls-category:hover a:after, .bb-global-search-ac.ui-menu .bbls-view_all_type-type a:hover:after, .bbp-topics-front ul.super-sticky div.bbp-topic-title-content:before {
+  color: $green;
+}
+
+.bbp-topics ul {
+  &.super-sticky div.bbp-topic-title-content:before, &.sticky div.bbp-topic-title-content:before {
+    color: $green;
+  }
+}
+
+.bbp-forum-content ul.sticky:before, .bbp-forum-data .last-activity a:hover, #onesocial-recommended-by .title, .bbp-forum-data .post-num, div.bbp-breadcrumb a:hover {
+  color: $green;
+}
+
+li {
+  &.bbp-forum-info a.bbp-forum-title:before, &.bbp-topic-title a.bbp-topic-permalink:before {
+    color: $green;
+  }
+}
+
+#buddypress {
+  div {
+    &#subnav.item-list-tabs ul li.feed a {
+      &:hover, &:before {
+        color: $green;
+      }
+    }
+    &.messages-options-nav .buddyboss-select-inner:after {
+      color: $green;
+    }
+  }
+  table#message-threads {
+    input[type="checkbox"]:checked + strong:after, tr td.thread-info p a:hover {
+      color: $green;
+    }
+  }
+}
+
+.info-group {
+  .members-list-filter li a {
+    &:hover, &.selected {
+      color: $green;
+    }
+  }
+  .bb-follow-title span {
+    color: $green;
+  }
+}
+
+#buddypress {
+  .btn-group.social a:hover, .standard-form div.submit a.prev:hover, #group-settings-form input[type="submit"], .standard-form div.submit input {
+    color: $green;
+  }
+}
+
+.dir-header span, #buddypress .dir-list ul.item-list .item-title a:hover {
+  color: $green;
+}
+
+#create-group-form {
+  #invite-list strong, &.standard-form label span.highlight {
+    color: $green;
+  }
+}
+
+#buddypress form#whats-new-form #whats-new-submit input[type="submit"], #whats-new-form .whats-author {
+  color: $green;
+}
+
+#buddypress #activity-stream {
+  .acomment-options .acomment-like.unfav-comment:before, .activity-meta .unfav.bp-secondary-action:before {
+    color: $green;
+  }
+}
+
+#primary #buddypress #activity-stream div.activity-meta a:hover:before {
+  color: $green;
+}
+
+#buddypress {
+  div.activity-comments div.acomment-meta a:not(.activity-time-since):hover, .activity-header a:hover {
+    color: $green;
+  }
+}
+
+#posts-carousel {
+  footer a, h3 a:hover {
+    color: $green;
+  }
+}
+
+.comments-area article header cite a {
+  color: $green;
+}
+
+.post-author-info {
+  .entry-meta a:not(.entry-date), .author-name a:hover {
+    color: $green;
+  }
+}
+
+.posts-stream ul li h2 a:hover, .entry-meta a.read-more, .bb-comment-author {
+  color: $green;
+}
+
+.author-follow div.generic-button {
+  &.pending_friend + span, &.following + span {
+    color: $green;
+  }
+}
+
+.post-author .load-more-posts.active .bb-icon-bars-f:before, .entry-content blockquote .author, .comment-content blockquote .author, .entry-header .entry-title a:hover, .widget_search #searchform button i:before {
+  color: $green;
+}
+
+.widget {
+  #bbp-search-index-form button i:before, .woocommerce-product-search button i:before {
+    color: $green;
+  }
+}
+
+.entry-meta a.read-more, .settings #buddypress div#subnav.item-list-tabs ul li.current a, .bb-user-notifications .avatar + a, #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover, #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
+  color: $green;
+}
+
+a {
+  &.comment-reply-link:hover, &.comment-edit-link:hover {
+    color: $green;
+  }
+}
+
+.bb-user-name, .dir-header .bb-count, .boss-author-name, .posts-stream ul li h3 a:hover {
+  color: $green;
+}
+
+#main #buddypress {
+  .button.bp-secondary-action.loading:after, .acomment-like.bp-secondary-action.loading:after {
+    color: $green;
+  }
+  .activity-comments .acomment-options a:hover {
+    color: $green;
+    &:after, &:before {
+      color: $green;
+    }
+  }
+}
+
+#buddypress .bboss_search_page a.loading:after, .header-account-login .pop .count {
+  color: $green;
+}
+
+.is-mobile #main-wrap #page #buddypress div.item-list-tabs:not(#object-nav) ul li {
+  &.current a, &.selected a {
+    color: $green;
+  }
+}
+
+li {
+  &.bbp-forum-info a.bbp-forum-title:hover, &.bbp-topic-title a.bbp-topic-permalink:hover {
+    color: $green;
+  }
+}
+
+.footer-inner-top a:hover, .boss-group-invite-friend-list strong {
+  color: $green;
+}
+
+.sap-container-wrapper .sap-story-publish {
+  color: $green;
+  &:hover {
+    color: $green;
+  }
+}
+
+.recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before, input[type="submit"] {
+  color: $green;
+}
+
+#mobile-header {
+  background-color: $green;
+}
+
+#onesocial_recommend {
+  &:after, &:before {
+    background-color: $green;
+  }
+}
+
+#bbpress-forums {
+  #favorite-toggle .is-favorite .favorite-toggle:before, #subscription-toggle .is-subscribed .subscription-toggle:before, #favorite-toggle .is-favorite .favorite-toggle:after, #subscription-toggle .is-subscribed .subscription-toggle:after {
+    background-color: $green;
+  }
+}
+
+#buddypress #item-title-area .highlight, .bb-cover-photo .update-cover-photo div, #main ul.horiz-gallery .see-more a {
+  background-color: $green;
+}
+
+.posts-stream ul li time div:first-child {
+  &:after, &:before {
+    background-color: $green;
+  }
+  background-color: $green;
+}
+
+.group-join a:before, .author-follow a:before, .pagination .current, .bbp-pagination-links span {
+  background-color: $green;
+}
+
+.loader {
+  background-color: $green;
+  &:before, &:after {
+    background-color: $green;
+  }
+}
+
+.sap-load-more-posts, .button-load-more-posts {
+  background-color: $green;
+}
+
+#buddypress .activity-list li {
+  &.load-more a, &.load-newest a {
+    background-color: $green;
+  }
+}
+
+#fwslider {
+  .readmore a, .progress {
+    background-color: $green;
+  }
+}
+
+.toggle-sap-widgets:hover .cls-1 {
+  fill: $green;
+}
+
+
+@-webkit-keyframes load1 {
+  0%,
+        80%,
+        100% {
+    box-shadow: 0 0 green;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+
+@keyframes load1 {
+  0%,
+        80%,
+        100% {
+    box-shadow: 0 0 green;
+    height: 4em;
+  }
+
+  40% {
+    box-shadow: 0 -2em green;
+    height: 5em;
+  }
+}
+
+
+.header-notifications .pop, .header-account-login .pop {
+  border-color: $green;
+}
+
+.bbp-header li {
+  &.bbp-forum-info, &.bbp-topic-title {
+    border-color: $green;
+  }
+}
+
+.info-group {
+  .members-list-filter, .trigger-filter.active:before {
+    border-color: $green;
+  }
+}
+
+#buddypress {
+  #group-settings-form input[type="submit"], .standard-form div.submit input, form#whats-new-form #whats-new-submit input[type="submit"] {
+    border-color: $green;
+  }
+}
+
+.entry-meta a.read-more, #buddypress #group-create-nav .group-create, .sap-publish-popup.sap-publish-popup .sap-action-button, .sap-container-wrapper .sap-story-publish, #main #buddypress div.item-list-tabs li.hideshow > ul, input[type="submit"] {
+  border-color: $green;
+}
+
+.main-navigation {
+  .nav-menu > li:hover > a {
+    box-shadow: 0 -2px 0 $green inset;
+  }
+  div > ul > {
+    .current-menu-item > a, .current-menu-ancestor > a {
+      box-shadow: 0 -2px 0 $green inset;
+    }
+  }
+}
+
+.header-button.underlined {
+  box-shadow: 0 -1px 0 $green inset;
+}
+
+input {
+  &[type="checkbox"] + {
+    span:before, label:before, strong:before {
+      -webkit-box-shadow: 0px 0px 0px 2px $green;
+      -moz-box-shadow: 0px 0px 0px 2px $green;
+      box-shadow: 0px 0px 0px 2px $green;
+    }
+  }
+  &[type="radio"] + {
+    span:before, label:before, strong:before {
+      -webkit-box-shadow: 0px 0px 0px 2px $green;
+      -moz-box-shadow: 0px 0px 0px 2px $green;
+      box-shadow: 0px 0px 0px 2px $green;
+    }
+  }
+}
+
+.woocommerce-checkout [type='checkbox']:checked + span:before {
+  -webkit-box-shadow: 0px 0px 0px 1px $green;
+  -moz-box-shadow: 0px 0px 0px 1px $green;
+  box-shadow: 0px 0px 0px 1px $green;
+}
+
+/********** Desktop  *************/
+
+.is-desktop #buddypress div#group-create-tabs ul li {
+  &.current a, &:hover a {
+    border-color: $green;
+  }
+}
+
+.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li#compose-personal-li {
+  border-color: $green;
+}
+
+.is-desktop #buddypress div#group-create-tabs ul li {
+  a, &:before {
+    color: $green;
+  }
+}
+
+.bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li {
+  &:hover a, &.selected a, &.current a, a span {
+    color: $green;
+  }
+}
+
+.search.is-desktop #buddypress div:not(#item-nav) > .dir-form div.item-list-tabs ul li {
+  a span, &.active a, &:hover a {
+    color: $green;
+  }
+}
+
+.settings.bp-user.is-desktop #buddypress div {
+  &#subnav.item-list-tabs ul li:hover a, &:not(#item-nav) > .item-list-tabs ul li:hover a {
+    color: $green;
+  }
+}
+
+.is-desktop {
+  #buddypress div#item-nav .item-list-tabs ul li {
+    &:hover > a, &.selected > a, &.current > a, a span, &:hover a:after, &.selected a:after, &.current a:after {
+      color: $green;
+    }
+  }
+  .buddyboss-select-inner span {
+    color: $green;
+  }
+  .post-author .load-more-posts {
+    &:hover, a:hover {
+      color: $green;
+    }
+  }
+  .header-notifications {
+    a {
+      &#user-messages span.count:before, span.pending-count:before {
+        color: $green;
+      }
+    }
+    .pop a:hover {
+      color: $green;
+    }
+  }
+  #buddypress {
+    div {
+      &#subnav.item-list-tabs ul li a span, &:not(#item-nav) > .item-list-tabs ul li a span {
+        background-color: $green;
+      }
+    }
+    > div[role="navigation"].item-list-tabs ul li a span, .dir-form div.item-list-tabs ul li a span {
+      background-color: $green;
+    }
+  }
+}
+
+.bp-legacy div#item-body div.item-list-tabs ul li a span {
+  background-color: $green;
+}
+
+.is-desktop {
+  #buddypress div#item-nav .item-list-tabs ul li {
+    &:hover a:before, &.selected a:before, &.current a:before {
+      background-color: $green;
+    }
+  }
+  .header-button:hover {
+    background-color: $green;
+  }
+}
+
+body {
+  background-color: $white;
+  #main-wrap {
+    background-color: $white;
+  }
+}
+
+.formatted-content {
+  background-color: $white;
+}
+
+@media screen and (max-width: 1024px) and (min-width: 768px) {
+  .side-panel {
+    background-color: $white;
+  }
+}
+
+body {
+  &:not(.buddypress) #content article, &.buddypress #content article.error404 {
+    background-color: $white;
+  }
+}
+
+.site-content {
+  nav.nav-single, #comments {
+    background-color: $white;
+  }
+}
+
+.bp-legacy div#item-body, .os-loader, .medium-editor-insert-plugin .medium-insert-buttons .medium-insert-buttons-addons li, .sap-publish-popup {
+  background-color: $white;
+}
+
+.posts-stream {
+  background-color: $white;
+  .inner {
+    background-color: $white;
+  }
+}
+
+.sl-count {
+  &:after, &:before {
+    background-color: $white;
+  }
+}
+
+.sl-icon {
+  &:after, &:before {
+    background-color: $white;
+  }
+}
+
+#buddypress div#group-create-tabs ul li:before {
+  background-color: $white;
+}
+
+.sap-editor-wrap .sap-story-publish {
+  &:hover {
+    background-color: $white;
+  }
+  background-color: $white;
+}
+
+.main-navigation li ul {
+  ul {
+    background-color: $white;
+  }
+  background-color: $white;
+}
+
+#main #buddypress div.item-list-tabs li.hideshow > ul, .settings.bp-user #buddypress div#item-nav .item-list-tabs > ul {
+  background-color: $white;
+}
+
+.header-account-login .pop {
+  .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper, .links li > .sub-menu, .bp_components .menupop:not(#wp-admin-bar-my-account) > .ab-sub-wrapper:before, .links li > .sub-menu:before {
+    background-color: $white;
+  }
+}
+
+.header-notifications .pop, .header-account-login .pop, #whats-new-header:after, a.to-top, #onesocial-recommended-by:before, .bbp-forum-data:before {
+  background-color: $white;
+}
+
+.settings.bp-user #item-nav .item-list-tabs > ul:after {
+  border-bottom-color: $white;
+}
+
+#onesocial-recommended-by:after, .bbp-forum-data:after {
+  border-color: transparent $white transparent transparent;
+}
+
+.incom-bubble-style:before {
+  border-color: $white transparent transparent transparent;
+}
+
+div {
+  &.bbp-template-notice, &.indicator-hint {
+    background-color: $secondary_bg;
+  }
+}
+
+#bbpress-forums #bbp-your-profile fieldset {
+  input, textarea {
+    background-color: $secondary_bg;
+  }
+}
+
+div#sitewide-notice div#message p {
+  background-color: $secondary_bg;
+}
+
+#header-search form, .site-header {
+  background-color: $white;
+}
+
+/***************** Mobile ******************/
+
+.is-mobile #buddypress {
+  #mobile-item-nav-wrap, ul#activity-stream li.activity-item {
+    background-color: $secondary_bg;
+  }
+}
+
+body {
+  &.has-activity.is-mobile #buddypress {
+    div.item-list-tabs, form#whats-new-form {
+      background-color: $secondary_bg;
+    }
+  }
+  &.photos.is-mobile #buddypress form#whats-new-form {
+    background-color: $secondary_bg;
+  }
+}
+
+.is-mobile #buddypress div.activity-comments form.root, 
+.is-desktop #buddypress div.buddyboss-media-form-wrapper form {
+  background-color: $secondary_bg;
+}
+
+/***************** End Mobile ******************/
+
+/***************** Desktop ******************/
+
+.is-desktop #buddypress div.buddyboss-media-form-wrapper form {
+  background-color: $secondary_bg;
+}
+
+.footer-inner-top {
+  background-color: $secondary_bg;
+}
+
+.footer-inner-bottom {
+  background-color: $dark;
+}

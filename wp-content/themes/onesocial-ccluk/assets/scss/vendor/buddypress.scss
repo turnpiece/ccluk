@@ -41,5 +41,66 @@ body.buddypress {
 		.groups-members-search input[type=text] {
 		    @include padding( .6, 1.2 );
 		}
+
+		#members-order-select,
+		#groups-order-select,
+		.bp-widget.base > h2,
+		form.standard-form.base > h2 {
+			display: none;
+		}
+
+		.profile {
+			table.profile-fields {
+				.label {
+					font-weight: 100;
+				}
+				.data {
+					font-weight: 600;
+				}
+			}
+			.standard-form {
+				.field-visibility-settings-notoggle {
+					display: none;
+				}
+				fieldset {
+					margin: 0;
+					padding: 0;
+					border: 0;
+
+					legend {
+						margin: 0 0 10px;
+						line-height: 1;
+					}
+				}
+			}
+		}
+		 
+	}
+	.bp-legacy {
+		div#item-body div.item-list-tabs {
+			@include bp-item-list-tabs();
+		}
+	}
+	.bp-user a.button.sap-new-post-btn{
+		font-size: 15px;
+		&:hover {
+			background-color: $green;
+			border-color: $green;
+		}
+	}
+}
+
+.is-desktop {
+	body.buddypress {
+		#buddypress {
+			.dir-form div,
+			div#subnav,
+			div:not(#item-nav)>.item-list-tabs,
+			>div[role=navigation] {
+				&.item-list-tabs {
+					@include bp-item-list-tabs();
+				}
+			}
+		}
 	}
 }

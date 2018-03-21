@@ -5,7 +5,7 @@
  * Add your own functions in this file.
  */
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Customizer additions.
@@ -99,8 +99,12 @@ add_action( 'wp_enqueue_scripts', 'ccluk_theme_scripts_styles', 9999 );
 
 function boss_generate_option_css() {
 
+    return;
+
   $accent_color  = onesocial_get_option( 'accent_color' );
-  $body_font_size = onesocial_options[boss_body_font_family][font-size]
+  $body_font_size = onesocial_options[boss_body_font_family][font-size];
+
+
   ?>
   <style>
 
@@ -635,3 +639,18 @@ if ( ! function_exists( 'ccluk_posted_on' ) ) {
     }
     
 }
+
+/**
+ * Admin styles
+ */
+function ccluk_admin_assets() {
+
+    /**
+     * Assign the OneSocial version to a var
+     */
+    $theme               = wp_get_theme( 'onesocial' );
+    $onesocial_version   = $theme[ 'Version' ];
+
+    wp_enqueue_style( 'ccluk-main-admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), $onesocial_version, 'all' );
+}
+add_action( 'admin_enqueue_scripts', 'ccluk_admin_assets' );

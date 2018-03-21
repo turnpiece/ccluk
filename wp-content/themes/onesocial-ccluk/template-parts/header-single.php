@@ -62,12 +62,19 @@
 									<?php
 								}
 							}
-						endif;
+						endif; ?>
 
-						echo '<div class="entry-meta">';
-						ccluk_posted_on();
-						echo '</div>';
-					?>
+						<div class="entry-meta">
+							<?php
+							// date posted
+							ccluk_posted_on();
+
+							// categories
+				            $categories_list = get_the_category_list(', ');
+				            if (!empty($categories_list)) : ?>
+				                &nbsp; / &nbsp; <span class="cat-links"><?php echo $categories_list ?></span>
+				            <?php endif; ?>
+						</div>
 					</div><!--.details-->
 				</div>
 			</div>

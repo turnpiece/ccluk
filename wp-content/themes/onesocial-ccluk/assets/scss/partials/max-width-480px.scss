@@ -2,3 +2,13 @@
 .single-ccluk_news .entry-header.has-image h1 {
     font-size: 24px;
 }
+
+.archive {
+	.listing {
+		.article-outher {
+			.post-author {
+				display: none;
+			}
+		}
+	}
+}
