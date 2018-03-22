@@ -1,24 +1,27 @@
+body {
+	background-color: $white;
 
-.single-ccluk_news .entry-header.has-image h1 {
-    font-size: 24px;
-}
+	&.single-ccluk_news .entry-header.has-image h1 {
+    	font-size: 24px;
+	}
 
-.archive {
-	.listing {
-		.article-outher {
-			.post-author {
-				display: none;
+	&.archive {
+		.listing {
+			.article-outher {
+				.post-author {
+					display: none;
+				}
 			}
 		}
 	}
-}
 
-#mobile-header {
-	#mobile-logo {
-		img {
-			max-height: 44px;
-			max-width: 240px;
-			margin: 8px auto;
+	#mobile-header {
+		#mobile-logo {
+			img {
+				max-height: 44px;
+				max-width: 240px;
+				margin: 8px auto;
+			}
 		}
-	}
+	}	
 }
