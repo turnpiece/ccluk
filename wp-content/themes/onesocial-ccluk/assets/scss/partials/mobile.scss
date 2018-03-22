@@ -26,6 +26,7 @@ Is mobile
 body.is-mobile {
 	&.single,
 	&.archive, 
+	&.page,
 	&.blog:not(.bp-user) {
 		#primary,
 		.site-content {
