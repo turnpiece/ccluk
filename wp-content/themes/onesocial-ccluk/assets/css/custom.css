@@ -171,10 +171,13 @@ Mobile Menu
   background-color: #fff; }
   #mobile-right-panel li.current-menu-item a {
     color: #54ae68; }
-#mobile-right-panel .sub-menu {
+#mobile-right-panel .sub-menu li a {
+  font-weight: 100;
   background: rgba(0, 0, 0, 0.9); }
-  #mobile-right-panel .sub-menu li a {
-    font-weight: 100; }
+#mobile-right-panel .submenu-btn {
+  color: #22a7f0; }
+  #mobile-right-panel .submenu-btn:hover {
+    color: #54ae68; }
 
 /*--------------------------------------------------------------
 Is mobile
@@ -1159,7 +1162,12 @@ MAXIMUM width of 480 pixels (phones and smaller)
     font-size: 24px; }
 
   .archive .listing .article-outher .post-author {
-    display: none; } }
+    display: none; }
+
+  #mobile-header #mobile-logo img {
+    max-height: 44px;
+    max-width: 240px;
+    margin: 8px auto; } }
 /*--------------------------------------------------------------
 MINIMUM width of 481 pixels (phones and larger)
 --------------------------------------------------------------*/

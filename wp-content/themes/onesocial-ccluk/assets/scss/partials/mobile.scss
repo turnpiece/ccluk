@@ -52,12 +52,19 @@ Mobile Menu
 	}
 
 	.sub-menu {
-		background: rgba(0, 0, 0, .9);
-
 		li {
 			a {
 				font-weight: 100;
+				background: rgba(0, 0, 0, .9);
 			}
+		}
+	}
+
+	.submenu-btn {
+		color: $blue;
+
+		&:hover {
+			color: $green;
 		}
 	}
 }
