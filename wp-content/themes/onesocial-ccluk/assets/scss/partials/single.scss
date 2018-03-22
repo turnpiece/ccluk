@@ -20,10 +20,14 @@
     }
 
     .entry-post-thumbnail {
-        max-height: 425px;
         max-width: 1200px;
         margin-left: auto;
         margin-right: auto;
+
+        img {
+            float: none;
+            width: auto;
+        }
     }
 
     .entry-header,

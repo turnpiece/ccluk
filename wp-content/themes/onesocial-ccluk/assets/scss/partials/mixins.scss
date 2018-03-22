@@ -49,8 +49,12 @@
 }
 
 @mixin centred-margin($value: 1.5) {
-  margin: ($value * 10) + px auto;
-  margin: $value + rem auto;
+  @if $value == 0 {
+    margin: 0 auto;
+  } @else {
+    margin: ($value * 10) + px auto;
+    margin: $value + rem auto;
+  }
 }
 
 @mixin padding($y: 1, $x: 1) {

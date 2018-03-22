@@ -30,27 +30,6 @@ Custom stylesheet.
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 
-#mobile-right-panel {
-	.sub-menu {
-		background: rgba(0, 0, 0, .9);
-	}
-	li {
-		a {
-			color: $blue;
-
-			&:hover {
-				color: $green;
-			}
-		}
-		&.current-menu-item {
-			background-color: $white;
-
-			a {
-				color: $green;
-			}
-		}
-	}
-}
 
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)

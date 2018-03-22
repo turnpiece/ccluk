@@ -103,11 +103,6 @@
 
 			<footer class="entry-meta">
 				<div class="row">
-					<?php _e( 'Posted in', 'onesocial' ) ?>
-					<?php echo onesocial_entry_categories() ?>
-				</div>
-
-				<div class="row">
 					<div class="entry-tags col">
 						<?php
 						$terms = wp_get_post_tags( get_the_ID() );

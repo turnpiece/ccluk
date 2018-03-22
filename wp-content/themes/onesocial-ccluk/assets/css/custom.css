@@ -154,19 +154,39 @@ Mobile Header
   #mobile-header .left-btn:before,
   #mobile-header .right-btn:before {
     color: #333; }
+  #mobile-header #mobile-logo img {
+    max-height: 70px;
+    max-width: 300px;
+    margin: 5px auto; }
+
+/*--------------------------------------------------------------
+Mobile Menu
+--------------------------------------------------------------*/
+#mobile-right-panel li a {
+  color: #22a7f0;
+  font-weight: 700; }
+  #mobile-right-panel li a:hover {
+    color: #54ae68; }
+#mobile-right-panel li.current-menu-item {
+  background-color: #fff; }
+  #mobile-right-panel li.current-menu-item a {
+    color: #54ae68; }
+#mobile-right-panel .sub-menu {
+  background: rgba(0, 0, 0, 0.9); }
+  #mobile-right-panel .sub-menu li a {
+    font-weight: 100; }
 
 /*--------------------------------------------------------------
 Is mobile
 --------------------------------------------------------------*/
 body.is-mobile.single #primary,
 body.is-mobile.single .site-content, body.is-mobile.archive #primary,
-body.is-mobile.archive .site-content, body.is-mobile.blog:not(.bp-user) #primary,
+body.is-mobile.archive .site-content, body.is-mobile.page #primary,
+body.is-mobile.page .site-content, body.is-mobile.blog:not(.bp-user) #primary,
 body.is-mobile.blog:not(.bp-user) .site-content {
   max-width: 780px;
-  margin: 0px auto;
-  margin: 0rem auto; }
-body.is-mobile #primary,
-body.is-mobile .site-content {
+  margin: 0 auto; }
+body.is-mobile #main-wrap {
   padding-top: 70px; }
 
 /** Navigation **/
@@ -195,10 +215,13 @@ body.is-mobile .site-content {
   padding-right: 15px; }
 .single .entry-post-thumbnail,
 .single-post .entry-post-thumbnail {
-  max-height: 425px;
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
+  .single .entry-post-thumbnail img,
+  .single-post .entry-post-thumbnail img {
+    float: none;
+    width: auto; }
 .single .entry-header,
 .single .entry-header.has-image,
 .single .entry-header.not-image,
@@ -206,8 +229,7 @@ body.is-mobile .site-content {
 .single-post .entry-header.has-image,
 .single-post .entry-header.not-image {
   position: static;
-  margin: 0px auto;
-  margin: 0rem auto;
+  margin: 0 auto;
   text-align: left;
   max-width: 780px; }
   .single .entry-header h1,
@@ -1114,17 +1136,6 @@ body.buddypress .bp-user a.button.sap-new-post-btn {
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
-#mobile-right-panel .sub-menu {
-  background: rgba(0, 0, 0, 0.9); }
-#mobile-right-panel li a {
-  color: #22a7f0; }
-  #mobile-right-panel li a:hover {
-    color: #54ae68; }
-#mobile-right-panel li.current-menu-item {
-  background-color: #fff; }
-  #mobile-right-panel li.current-menu-item a {
-    color: #54ae68; }
-
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/

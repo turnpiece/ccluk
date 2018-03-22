@@ -17,6 +17,49 @@ Mobile Header
 	.right-btn:before {
 		color: $dark;
 	}
+
+	#mobile-logo {
+		img {
+			max-height: 70px;
+			max-width: 300px;
+			margin: 5px auto;
+		}
+	}
+}
+
+/*--------------------------------------------------------------
+Mobile Menu
+--------------------------------------------------------------*/
+
+#mobile-right-panel {
+
+	li {
+		a {
+			color: $blue;
+			font-weight: 700;
+
+			&:hover {
+				color: $green;
+			}
+		}
+		&.current-menu-item {
+			background-color: $white;
+
+			a {
+				color: $green;
+			}
+		}
+	}
+
+	.sub-menu {
+		background: rgba(0, 0, 0, .9);
+
+		li {
+			a {
+				font-weight: 100;
+			}
+		}
+	}
 }
 
 /*--------------------------------------------------------------
@@ -34,8 +77,7 @@ body.is-mobile {
 			@include centred-margin( 0 );
 		}
 	}
-	#primary,
-	.site-content {
+	#main-wrap {
 		padding-top: 70px;
 	}
 }
