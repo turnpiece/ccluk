@@ -42,11 +42,22 @@ MAXIMUM width of 520 pixels (large phones and smaller)
 
 
 /*--------------------------------------------------------------
-MAXIMUM width of 480 pixels (phones and smaller)
+MAXIMUM width of 480 pixels (phones)
 --------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
 
 	@import "partials/max-width-480px";
+
+}
+
+
+
+/*--------------------------------------------------------------
+MAXIMUM width of 320 pixels (small phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+
+	@import "partials/max-width-320px";
 
 }
 

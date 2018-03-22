@@ -1155,7 +1155,7 @@ MAXIMUM width of 520 pixels (large phones and smaller)
   .post-author-info .author-follow {
     right: 0; } }
 /*--------------------------------------------------------------
-MAXIMUM width of 480 pixels (phones and smaller)
+MAXIMUM width of 480 pixels (phones)
 --------------------------------------------------------------*/
 @media screen and (max-width: 480px) {
   .single-ccluk_news .entry-header.has-image h1 {
@@ -1168,6 +1168,12 @@ MAXIMUM width of 480 pixels (phones and smaller)
     max-height: 44px;
     max-width: 240px;
     margin: 8px auto; } }
+/*--------------------------------------------------------------
+MAXIMUM width of 320 pixels (small phones)
+--------------------------------------------------------------*/
+@media screen and (max-width: 480px) {
+  #mobile-header #mobile-logo img {
+    max-width: 200px; } }
 /*--------------------------------------------------------------
 MINIMUM width of 481 pixels (phones and larger)
 --------------------------------------------------------------*/
