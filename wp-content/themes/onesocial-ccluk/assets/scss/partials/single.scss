@@ -37,7 +37,7 @@
         position: static;
         @include centred-margin(0);
         text-align: left;  
-        max-width: 780px;
+        max-width: $content_w;
 
         h1 {
             color: $black;

@@ -62,7 +62,7 @@ a {
   border-bottom: 1px solid #54ae68; }
 
 .archive.post-type-archive .site-content {
-  max-width: 780px; }
+  max-width: 750px; }
 
 .archive #content > .archive-header h1,
 .blog #content > .archive-header h1 {
@@ -187,7 +187,7 @@ body.is-mobile.single .site-content, body.is-mobile.archive #primary,
 body.is-mobile.archive .site-content, body.is-mobile.page #primary,
 body.is-mobile.page .site-content, body.is-mobile.blog:not(.bp-user) #primary,
 body.is-mobile.blog:not(.bp-user) .site-content {
-  max-width: 780px;
+  max-width: 750px;
   margin: 0 auto; }
 body.is-mobile #main-wrap {
   padding-top: 70px; }
@@ -234,7 +234,7 @@ body.is-mobile #main-wrap {
   position: static;
   margin: 0 auto;
   text-align: left;
-  max-width: 780px; }
+  max-width: 750px; }
   .single .entry-header h1,
   .single .entry-header.has-image h1,
   .single .entry-header.not-image h1,

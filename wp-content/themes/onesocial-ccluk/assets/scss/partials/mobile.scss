@@ -80,7 +80,7 @@ body.is-mobile {
 	&.blog:not(.bp-user) {
 		#primary,
 		.site-content {
-			max-width: 780px;
+			max-width: $content_w;
 			@include centred-margin( 0 );
 		}
 	}
