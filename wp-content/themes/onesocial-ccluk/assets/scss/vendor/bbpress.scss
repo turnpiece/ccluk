@@ -1,0 +1,28 @@
+#bbpress-forums {
+	div.bbp-the-content-wrapper {
+		textarea.bbp-the-content {
+			font-size: 16px;
+		}
+	}
+
+  	#favorite-toggle .is-favorite .favorite-toggle:before, 
+  	#subscription-toggle .is-subscribed .subscription-toggle:before, 
+  	#favorite-toggle .is-favorite .favorite-toggle:after, 
+  	#subscription-toggle .is-subscribed .subscription-toggle:after {
+    	background-color: $green;
+  	}
+
+	#bbp-your-profile fieldset {
+		input, 
+		textarea {
+			background-color: $secondary_bg;
+		}
+	}
+
+	fieldset.bbp-form {
+	    input,
+	    textarea {
+	        @include padding( .6, 1.2 );
+	    } 
+	}
+}

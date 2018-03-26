@@ -127,11 +127,6 @@ input[type=submit] {
   -moz-border-radius: 3px;
   border-radius: 3px; }
 
-#bbpress-forums fieldset.bbp-form input,
-#bbpress-forums fieldset.bbp-form textarea {
-  padding: 6px 12px;
-  padding: 0.6rem 1.2rem; }
-
 .formatted-content {
   color: rgba(0, 0, 0, 0.6); }
 
@@ -791,9 +786,6 @@ li.bbp-forum-info a.bbp-forum-title:hover, li.bbp-topic-title a.bbp-topic-permal
 #onesocial_recommend:after, #onesocial_recommend:before {
   background-color: #54ae68; }
 
-#bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:before, #bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:before, #bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:after, #bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:after {
-  background-color: #54ae68; }
-
 #buddypress #item-title-area .highlight, .bb-cover-photo .update-cover-photo div, #main ul.horiz-gallery .see-more a {
   background-color: #54ae68; }
 
@@ -984,9 +976,6 @@ body:not(.buddypress) #content article, body.buddypress #content article.error40
 div.bbp-template-notice, div.indicator-hint {
   background-color: #f9f9f9; }
 
-#bbpress-forums #bbp-your-profile fieldset input, #bbpress-forums #bbp-your-profile fieldset textarea {
-  background-color: #f9f9f9; }
-
 div#sitewide-notice div#message p {
   background-color: #f9f9f9; }
 
@@ -1135,6 +1124,21 @@ body.buddypress .bp-user a.button.sap-new-post-btn {
   background-color: #54ae68;
   border-color: #54ae68;
   color: #fff; }
+
+#bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
+  font-size: 16px; }
+#bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:before,
+#bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:before,
+#bbpress-forums #favorite-toggle .is-favorite .favorite-toggle:after,
+#bbpress-forums #subscription-toggle .is-subscribed .subscription-toggle:after {
+  background-color: #54ae68; }
+#bbpress-forums #bbp-your-profile fieldset input,
+#bbpress-forums #bbp-your-profile fieldset textarea {
+  background-color: #f9f9f9; }
+#bbpress-forums fieldset.bbp-form input,
+#bbpress-forums fieldset.bbp-form textarea {
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)

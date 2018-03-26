@@ -302,12 +302,6 @@ li {
   }
 }
 
-#bbpress-forums {
-  #favorite-toggle .is-favorite .favorite-toggle:before, #subscription-toggle .is-subscribed .subscription-toggle:before, #favorite-toggle .is-favorite .favorite-toggle:after, #subscription-toggle .is-subscribed .subscription-toggle:after {
-    background-color: $green;
-  }
-}
-
 #buddypress #item-title-area .highlight, .bb-cover-photo .update-cover-photo div, #main ul.horiz-gallery .see-more a {
   background-color: $green;
 }
@@ -630,12 +624,6 @@ body {
 
 div {
   &.bbp-template-notice, &.indicator-hint {
-    background-color: $secondary_bg;
-  }
-}
-
-#bbpress-forums #bbp-your-profile fieldset {
-  input, textarea {
     background-color: $secondary_bg;
   }
 }

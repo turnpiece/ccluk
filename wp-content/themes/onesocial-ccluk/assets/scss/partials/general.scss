@@ -150,13 +150,6 @@ input[type=submit] {
     @include border-radius(3px);
 }
 
-#bbpress-forums fieldset.bbp-form {
-    input,
-    textarea {
-        @include padding( .6, 1.2 );
-    } 
-}
-
 .formatted-content {
     color: rgba(0, 0, 0, 0.6);
 }
