@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-10-20 11:36:09+0000\n"
+"PO-Revision-Date: 2018-03-16 09:40:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -4436,7 +4436,7 @@ msgstr "Föräldralöst"
 
 #: bbpress.php:690
 msgid "Topics with no replies"
-msgstr "Ämnen utan svar"
+msgstr "Trådar utan svar"
 
 #: includes/admin/admin.php:218 includes/admin/functions.php:281
 #: includes/admin/tools.php:1208

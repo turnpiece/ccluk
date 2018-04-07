@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-10 11:01:01+0000\n"
+"PO-Revision-Date: 2018-03-19 18:19:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,11 +15,19 @@ msgstr ""
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
 msgstr "OnePress er et fremragende kreativt og fleksibelt WordPress en-side tema som er velegnet til virksomheds websteder, portefølge, digitalt bureau, produktfremvisning, freelancere og alle andre der værdsætter et godt design. Overordnet er temaet af den elegante og klassiske type, et godt eksempel på et Bootstrap 4 WordPress-tema som kan forenes med seneste version af WooCommerce. (Live forhåndsvisning: http://www.famethemes.com/preview/?theme=OnePress)"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.0.2)  #-#-#-#-#
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.4)  #-#-#-#-#
 #. Theme Name of the plugin/theme
 #: inc/dashboard.php:327
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/dashboard.php:484
+msgid "Keep %s updated"
+msgstr "Hold %s opdateret"
+
+#: inc/dashboard.php:405
+msgid "Your settings were copied."
+msgstr "Dine indstillinger blev kopieret."
 
 #: inc/metabox.php:162
 msgid "Hide footer."
@@ -86,8 +94,8 @@ msgid "OnePress Plus Available! Take a look"
 msgstr "OnePress Plus er tilgængelig!. Tag et kik"
 
 #: inc/customizer.php:3601
-msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
-msgstr "<h4 class=\"customizer-group-heading-message\">Sortere Træk &amp; Slip sektioner</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> en version med fuld kontrol over sortering af forsidens sektioner!</p><h4 class=\"customizer-group-heading-message\">Advancerede styling af områder.</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> en version med fuld kontrol over sektionens styling som baggrunds farve, billede, video, parallax effekt, tilpasset stile og meget mere ...</p>"
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advandced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Sortere Træk &amp; Slip sektioner</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> for en version med fuld kontrol over sortering af forsidens sektioner!</p><h4 class=\"customizer-group-heading-message\">Avanceret styling af områder.</h4><p class=\"customizer-group-heading-message\">Se også <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> for en version med fuld kontrol over sektionens styling som baggrundsfarve, billede, video, parallaxeffekt, tilpasset stil og meget mere ...</p>"
 
 #: inc/customizer.php:3285
 msgid "Ascending"
@@ -430,10 +438,6 @@ msgstr "Er du sikker på, at du vil kopiere?"
 msgid "Recommend Plugins"
 msgstr "Anbefalede plugins"
 
-#: inc/dashboard.php:405
-msgid "Your settings copied."
-msgstr "Dine indstillinger er kopieret."
-
 #: inc/dashboard.php:402
 msgid "Copy now"
 msgstr "Kopier nu"
@@ -717,8 +721,8 @@ msgid "Why choose Us"
 msgstr "Hvorfor vælge os"
 
 #: inc/customizer.php:2671
-msgid "Services Layout Setting"
-msgstr "Tjenester layout indstillinger"
+msgid "Services Layout Settings"
+msgstr "Tjenester layoutindstillinger"
 
 #: inc/customizer.php:2530 inc/customizer.php:3088
 msgid "Custom Link"
@@ -799,11 +803,11 @@ msgstr "Anvend kun på forside skabelon."
 msgid "Header Transparent"
 msgstr "Sidehoved gennemsigtighed"
 
-#: inc/template-tags.php:1548
+#: inc/template-tags.php:1568
 msgid "Subscribe"
 msgstr "Tilmeld"
 
-#: inc/template-tags.php:1547
+#: inc/template-tags.php:1567
 msgid "Enter your e-mail address"
 msgstr "Indtast din e-mail adresse"
 
@@ -831,8 +835,8 @@ msgid "4 Columns"
 msgstr "4 kolonner"
 
 #: inc/customizer.php:3039
-msgid "Team Layout Setting"
-msgstr "Team layout indstilling"
+msgid "Team Layout Settings"
+msgstr "Team layoutindstilling"
 
 #: inc/customizer.php:2342 inc/customizer.php:2555
 msgid "Page Excerpt"
@@ -935,10 +939,6 @@ msgstr "Sektion: Video Lightbox"
 #: inc/dashboard.php:485
 msgid "Hooray! There are no required actions for you right now."
 msgstr "Hurra! Der kræves ingen handlinger fra din side lige nu."
-
-#: inc/dashboard.php:484
-msgid "Keep update with %s"
-msgstr "Hold dig opdateret med %s"
 
 #: inc/dashboard.php:475
 msgid "Change homepage page template"
@@ -1045,62 +1045,62 @@ msgstr "Du kan installere %1$s plugin og gå til Tilpasser &rarr; Sektion: Konta
 msgid "Search Results for: %s"
 msgstr "Søge resultater for: %s"
 
-#: inc/template-tags.php:458
+#: inc/template-tags.php:469
 msgid "Your comment is awaiting moderation."
 msgstr "Din kommentar afventer godkendelse."
 
-#: inc/template-tags.php:453
+#: inc/template-tags.php:464
 msgid "Edit"
 msgstr "Rediger"
 
 #. translators: 1: date, 2: time
-#: inc/template-tags.php:452
+#: inc/template-tags.php:463
 msgid "Reply"
 msgstr "Svar"
 
-#: inc/template-tags.php:444
+#: inc/template-tags.php:455
 msgid "Post author"
 msgstr "Indlægs forfatter"
 
-#: inc/template-tags.php:425
+#: inc/template-tags.php:436
 msgid "(Edit)"
 msgstr "(Rediger)"
 
-#: inc/template-tags.php:425
+#: inc/template-tags.php:436
 msgid "Pingback:"
 msgstr "Pingback:"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "% Comments"
 msgstr "% Kommentarer"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "1 Comment"
 msgstr "1 kommentar"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "Leave a comment"
 msgstr "Skriv en kommentar"
 
-#: inc/template-tags.php:349
+#: inc/template-tags.php:360
 msgid "Tagged %1$s"
 msgstr "Tagget %1$s"
 
-#: inc/template-tags.php:343
+#: inc/template-tags.php:354
 msgid "Posted in %1$s"
 msgstr "Udgivet i %1$s"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:341 inc/template-tags.php:347
+#: inc/template-tags.php:352 inc/template-tags.php:358
 msgid ", "
 msgstr ", "
 
-#: inc/template-tags.php:323
+#: inc/template-tags.php:334
 msgctxt "post author"
 msgid "by %s"
 msgstr "af %s"
 
-#: inc/template-tags.php:318
+#: inc/template-tags.php:329
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr "Udgivet i %s"
@@ -1480,8 +1480,8 @@ msgid "Social Footer Title"
 msgstr "Sociale sidefods titel"
 
 #: inc/customizer.php:779
-msgid "These social profiles setting below will display at the footer of your site."
-msgstr "Disse social profilers indstillinger herunder vil vises i sidefoden på dit websted."
+msgid "The social profiles specified below will be displayed in the footer of your site."
+msgstr "De sociale profiler angivet herunder, vil blive vist i sidefoden på dit websted."
 
 #: inc/customizer.php:766
 msgid "Check this box to hide footer social section."
@@ -1696,23 +1696,23 @@ msgstr "Sidebar"
 msgid "Primary Menu"
 msgstr "Primære menu"
 
-#: inc/template-tags.php:1336
+#: inc/template-tags.php:1344
 msgid "%1$s theme by %2$s"
 msgstr "%1$s tema af %2$s"
 
-#: inc/template-tags.php:1334
+#: inc/template-tags.php:1342
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "Copyright %1$s %2$s %3$s"
 
-#: footer.php:34
+#: footer.php:44
 msgid "Back To Top"
 msgstr "Tilbage til top"
 
-#: inc/customizer.php:864 inc/template-tags.php:1538
+#: inc/customizer.php:864 inc/template-tags.php:1558
 msgid "Join our Newsletter"
 msgstr "Tilmeld dig vores nyhedsbrev"
 
-#: inc/customizer.php:787 inc/template-tags.php:1557
+#: inc/customizer.php:787 inc/template-tags.php:1577
 msgid "Keep Updated"
 msgstr "Hold dig opdateret"
 

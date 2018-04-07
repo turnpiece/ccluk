@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-31 21:51:10+0000\n"
+"PO-Revision-Date: 2018-03-12 22:12:23+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,32 +11,55 @@ msgstr ""
 "Language: el_GR\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
 
+#: modules/acceptance.php:243
+msgid "Condition"
+msgstr "Συνθήκη"
+
 #. translators: 1: 'Consented' or 'Not consented', 2: conditions
-#: modules/acceptance.php:197
+#: modules/acceptance.php:202
 msgctxt "mail output for acceptance checkboxes"
 msgid "%1$s: %2$s"
 msgstr "%1$s: %2$s"
 
-#: modules/acceptance.php:179
-msgid "Consented"
-msgstr "Συναινέσατε"
-
-#: modules/acceptance.php:181
+#: modules/acceptance.php:186
 msgid "Not consented"
 msgstr "Δεν συναινέσατε"
 
-#: modules/acceptance.php:238
-msgid "Condition"
-msgstr "Συνθήκη"
+#: modules/acceptance.php:184
+msgid "Consented"
+msgstr "Συναινέσατε"
 
 #: includes/submission.php:196
 msgid "Sending mail has been aborted."
 msgstr "Η διαδικασία αποστολής του email ακυρώθηκε"
 
-#. translators: screen reader text
-#: admin/admin.php:326
-msgid "(configuration error)"
-msgstr "(σφάλμα διαμόρφωσης)"
+#: admin/includes/editor.php:211
+msgid "You can edit messages used in various situations here. For details, see %s."
+msgstr "Μπορείτε να επεξεργαστείτε τα μηνύματα που χρησιμοποιούνται σε διάφορες καταστάσεις εδώ. Για λεπτομέρειες, δείτε %s."
+
+#: admin/includes/editor.php:210
+msgid "Editing Messages"
+msgstr "Επεξεργασία μηνυμάτων"
+
+#: admin/includes/editor.php:209
+msgid "https://contactform7.com/editing-messages/"
+msgstr "https://contactform7.com/editing-messages/"
+
+#: admin/includes/editor.php:130
+msgid "You can edit the mail template here. For details, see %s."
+msgstr "Μπορείτε να επεξεργαστείτε το πρότυπο αλληλογραφίας εδώ. Για λεπτομέρειες, δείτε %s."
+
+#: admin/includes/editor.php:57
+msgid "You can edit the form template here. For details, see %s."
+msgstr "Μπορείτε να επεξεργαστείτε το πρότυπο φόρμας εδώ. Για λεπτομέρειες, δείτε %s."
+
+#: admin/includes/editor.php:56
+msgid "Editing Form Template"
+msgstr "Επεξεργασία Προτύπου Φόρμας"
+
+#: admin/includes/editor.php:55
+msgid "https://contactform7.com/editing-form-template/"
+msgstr "https://contactform7.com/editing-form-template/"
 
 #. translators: screen reader text
 #: admin/edit-contact-form.php:192
@@ -48,37 +71,14 @@ msgstr "(αριστερό και δεξιό βέλος)"
 msgid "%1$s %2$s keys switch panels"
 msgstr "%1$s %2$s πλήκτρα αλλάζουν πλαίσια"
 
-#: admin/includes/editor.php:209
-msgid "https://contactform7.com/editing-messages/"
-msgstr "https://contactform7.com/editing-messages/"
-
-#: admin/includes/editor.php:210
-msgid "Editing Messages"
-msgstr "Επεξεργασία μηνυμάτων"
-
-#: admin/includes/editor.php:130
-msgid "You can edit the mail template here. For details, see %s."
-msgstr "Μπορείτε να επεξεργαστείτε το πρότυπο αλληλογραφίας εδώ. Για λεπτομέρειες, δείτε %s."
-
-#: admin/includes/editor.php:55
-msgid "https://contactform7.com/editing-form-template/"
-msgstr "https://contactform7.com/editing-form-template/"
-
-#: admin/includes/editor.php:57
-msgid "You can edit the form template here. For details, see %s."
-msgstr "Μπορείτε να επεξεργαστείτε το πρότυπο φόρμας εδώ. Για λεπτομέρειες, δείτε %s."
-
-#: admin/includes/editor.php:56
-msgid "Editing Form Template"
-msgstr "Επεξεργασία Προτύπου Φόρμας"
+#. translators: screen reader text
+#: admin/admin.php:326
+msgid "(configuration error)"
+msgstr "(σφάλμα διαμόρφωσης)"
 
 #: admin/admin.php:319
 msgid "How to resolve?"
 msgstr "Πώς να επιλύσετε;"
-
-#: admin/includes/editor.php:211
-msgid "You can edit messages used in various situations here. For details, see %s."
-msgstr "Μπορείτε να επεξεργαστείτε τα μηνύματα που χρησιμοποιούνται σε διάφορες καταστάσεις εδώ. Για λεπτομέρειες, δείτε %s."
 
 #: admin/includes/welcome-panel.php:37
 msgid "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
@@ -110,10 +110,6 @@ msgstr "Χρησιμοποιούνται παρωχημένες ρυθμίσει
 msgid "To use CAPTCHA, you need %s plugin installed."
 msgstr "Για την χρήση του CAPTCHA, πρέπει να εγκατασταθεί το plugin %s."
 
-#: includes/rest-api.php:127
-msgid "You are not allowed to create a contact form."
-msgstr "Δεν σας επιτρέπεται να δημιουργήσετε μια φόρμα επικοινωνίας."
-
 #: includes/rest-api.php:261
 msgid "There was an error deleting the contact form."
 msgstr "Υπήρξε ένα σφάλμα κατά τη διαγραφή της φόρμας επικοινωνίας."
@@ -129,15 +125,23 @@ msgstr "Δεν σας επιτρέπεται η πρόσβαση στην φόρ
 msgid "The requested contact form was not found."
 msgstr "Η ζητούμενη φόρμα επικοινωνίας δεν βρέθηκε."
 
+#: includes/rest-api.php:127
+msgid "You are not allowed to create a contact form."
+msgstr "Δεν σας επιτρέπεται να δημιουργήσετε μια φόρμα επικοινωνίας."
+
+#: includes/rest-api.php:121
+msgid "Cannot create existing contact form."
+msgstr "Αδυναμία δημιουργίας υφιστάμενης φόρμας επικοινωνίας."
+
 #: includes/rest-api.php:64
 msgid "You are not allowed to access contact forms."
 msgstr "Δεν σας επιτρέπεται η πρόσβαση στις φόρμες επικοινωνίας."
 
-#: includes/config-validator.php:549
+#: includes/config-validator.php:552
 msgid "Attachment file does not exist at %path%."
 msgstr "To συνημμένο αρχείο δεν υπάρχει στο%path%."
 
-#: includes/config-validator.php:480
+#: includes/config-validator.php:481
 msgid "Invalid mailbox syntax is used in the %name% field."
 msgstr "Μη έγκυρη σύνταξη γραμματοκιβωτίου χρησιμοποιείται στο πεδίο %name%."
 
@@ -168,17 +172,6 @@ msgid_plural "%s configuration errors detected"
 msgstr[0] "%s ανιχνεύθηκε σφάλμα διαμόρφωσης"
 msgstr[1] "%s ανιχνεύθηκαν σφάλματα διαμόρφωσης"
 
-#: includes/rest-api.php:121
-msgid "Cannot create existing contact form."
-msgstr "Αδυναμία δημιουργίας υφιστάμενης φόρμας επικοινωνίας."
-
-#. translators: %names%: a list of form control names
-#: includes/config-validator.php:388
-msgid "An unavailable name (%names%) is used for form controls."
-msgid_plural "Unavailable names (%names%) are used for form controls."
-msgstr[0] "Ένα μη διαθέσιμο ονόμα (%names%) χρησιμοποιείται για στοιχεία ελέγχου φόρμας."
-msgstr[1] "Μη διαθέσιμα ονόματα (%names%) χρησιμοποιούνται για στοιχεία ελέγχου φόρμας."
-
 #: admin/admin.php:323
 msgid "%d configuration errors detected in this tab panel"
 msgstr "Εντοπίστηκαν %d σφάλματα ρύθμισης παραμέτρων σε αυτή την καρτέλα πίνακα"
@@ -199,38 +192,34 @@ msgstr "Εντοπίστηκε 1 σφάλμα ρύθμισης παραμέτρ�
 msgid "There was an error saving the contact form."
 msgstr "Παρουσιάστηκε σφάλμα κατά την αποθήκευση της φόρμας επικοινωνίας."
 
+#: includes/functions.php:365
+msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
+msgstr "%1$s είναι <strong>καταργημένο</strong> από την έκδοση %2$s Contact Form 7! Χρησιμοποιήστε  %3$s αντ 'αυτού."
+
 #: admin/includes/welcome-panel.php:45
 msgid "Flamingo"
 msgstr "Flamingo"
-
-#: admin/includes/welcome-panel.php:26
-msgid "https://contactform7.com/comment-blacklist/"
-msgstr "http://contactform7.com/comment-blacklist/"
 
 #. translators: %s: link labeled 'Flamingo'
 #: admin/includes/welcome-panel.php:45
 msgid "Install a message storage plugin before this happens to you. %s saves all messages through contact forms into the database. Flamingo is a free WordPress plugin created by the same author as Contact Form 7."
 msgstr "Εγκαταστήστε ένα πρόσθετο αποθήκευσης μηνυμάτων πριν συμβεί αυτό σε εσάς. Το %s αποθηκεύει όλα τα μηνύματα των φορμών επικοινωνίας στη βάση δεδομένων. Το Flamingo είναι ένα δωρεάν πρόσθετο του WordPress που δημιουργήθηκε από τον ίδιο εκδότη, ο οποίος δημιούργησε το Contact Form 7."
 
-#: admin/includes/welcome-panel.php:22
-msgid "Getting spammed? You have protection."
-msgstr "Λάβατε ανεπιθύμητη αλληλογραφία; Έχετε προστασία."
+#: admin/includes/welcome-panel.php:43
+msgid "Contact Form 7 doesn&#8217;t store submitted messages anywhere. Therefore, you may lose important messages forever if your mail server has issues or you make a mistake in mail configuration."
+msgstr "Το Contact Form 7 δεν αποθηκεύει τα μηνύματα κάπου. Συνεπώς, μπορεί να χάσετε πολύτιμα μηνύματα για πάντα αν ο διακομιστής αλληλογραφίας σας έχει κάποιο πρόβλημα ή κάνετε κάποιο λάθος στην παραμετροποίηση της αλληλογραφίας."
+
+#: admin/includes/welcome-panel.php:41
+msgid "Before you cry over spilt mail&#8230;"
+msgstr "Πριν προβείτε σε αποστολή παρακαλώ διαχωρίστε το μήνυμα&#8230;"
 
 #: admin/includes/welcome-panel.php:26
 msgid "comment blacklist"
 msgstr "μαύρη λίστα σχολίου"
 
-#: admin/includes/welcome-panel.php:24
-msgid "Spammers target everything; your contact forms aren&#8217;t an exception. Before you get spammed, protect your contact forms with the powerful anti-spam features Contact Form 7 provides."
-msgstr "Οι spammers στοχεύουν τα πάντα; οι φόρμες επικοινωνίας σας δεν είναι εξαίρεση. Πριν από μια τέτοια επίθεση, προστατεύστε τις φόρμες επικοινωνίας σας με το ισχυρό χαρακτηριστικό κατά του spam που παρέχει το Contact Form 7."
-
-#: includes/functions.php:360
-msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
-msgstr "%1$s είναι <strong>καταργημένο</strong> από την έκδοση %2$s Contact Form 7! Χρησιμοποιήστε  %3$s αντ 'αυτού."
-
-#: admin/includes/welcome-panel.php:43
-msgid "Contact Form 7 doesn&#8217;t store submitted messages anywhere. Therefore, you may lose important messages forever if your mail server has issues or you make a mistake in mail configuration."
-msgstr "Το Contact Form 7 δεν αποθηκεύει τα μηνύματα κάπου. Συνεπώς, μπορεί να χάσετε πολύτιμα μηνύματα για πάντα αν ο διακομιστής αλληλογραφίας σας έχει κάποιο πρόβλημα ή κάνετε κάποιο λάθος στην παραμετροποίηση της αλληλογραφίας."
+#: admin/includes/welcome-panel.php:26
+msgid "https://contactform7.com/comment-blacklist/"
+msgstr "http://contactform7.com/comment-blacklist/"
 
 #. translators: links labeled 1: 'Akismet', 2: 'reCAPTCHA', 3: 'comment
 #. blacklist'
@@ -238,9 +227,13 @@ msgstr "Το Contact Form 7 δεν αποθηκεύει τα μηνύματα κ
 msgid "Contact Form 7 supports spam-filtering with %1$s. Intelligent %2$s blocks annoying spambots. Plus, using %3$s, you can block messages containing specified keywords or those sent from specified IP addresses."
 msgstr "Η Contact Form 7 υποστηρίζει το φιλτράρισμα ανεπιθύμητων μηνυμάτων με %1$s. Το ευφυές %2$s μπλοκάρει τους ενοχλητικούς φακέλους. Επιπλέον, χρησιμοποιώντας το %3$s, μπορείτε να αποκλείσετε τα μηνύματα που περιέχουν συγκεκριμένες λέξεις-κλειδιά ή αυτές που αποστέλλονται από καθορισμένες διευθύνσεις IP."
 
-#: admin/includes/welcome-panel.php:41
-msgid "Before you cry over spilt mail&#8230;"
-msgstr "Πριν προβείτε σε αποστολή παρακαλώ διαχωρίστε το μήνυμα&#8230;"
+#: admin/includes/welcome-panel.php:24
+msgid "Spammers target everything; your contact forms aren&#8217;t an exception. Before you get spammed, protect your contact forms with the powerful anti-spam features Contact Form 7 provides."
+msgstr "Οι spammers στοχεύουν τα πάντα; οι φόρμες επικοινωνίας σας δεν είναι εξαίρεση. Πριν από μια τέτοια επίθεση, προστατεύστε τις φόρμες επικοινωνίας σας με το ισχυρό χαρακτηριστικό κατά του spam που παρέχει το Contact Form 7."
+
+#: admin/includes/welcome-panel.php:22
+msgid "Getting spammed? You have protection."
+msgstr "Λάβατε ανεπιθύμητη αλληλογραφία; Έχετε προστασία."
 
 #: includes/config-validator.php:141
 msgid "Multiple form controls are in a single label element."
@@ -254,41 +247,13 @@ msgstr "Συχνές ερωτήσεις για τον Επαληθευτή Ρυ�
 msgid "https://contactform7.com/configuration-validator-faq/"
 msgstr "https://contactform7.com/configuration-validator-faq/"
 
-#: modules/file.php:190
-msgid "The file is too big."
-msgstr "Το αρχείο είναι πολύ μεγάλο."
-
 #: modules/text.php:191
 msgid "The telephone number is invalid."
 msgstr "Ο αριθμός τηλεφώνου δεν είναι έγκυρος."
 
-#: modules/number.php:121
-msgid "The number format is invalid."
-msgstr "Η μορφή αριθμού είναι άκυρη."
-
-#: modules/number.php:126
-msgid "The number is smaller than the minimum allowed."
-msgstr "Ο αριθός είναι μικρότερος από τον ελάχιστο επιτρεπτό"
-
-#: modules/date.php:128
-msgid "The date is after the latest one allowed."
-msgstr "Η ημερομηνία είναι μεταγενέστερη της επιτρεπόμενης."
-
-#: modules/date.php:123
-msgid "The date is before the earliest one allowed."
-msgstr "Η ημερομηνία είναι προγενέστερη της επιτρεπόμενης."
-
-#: modules/file.php:180
-msgid "There was an unknown error uploading the file."
-msgstr "Υπήρξε άγνωστο σφάλμα κατά τη μεταφόρτωση του αρχείου."
-
-#: modules/file.php:185
-msgid "You are not allowed to upload files of this type."
-msgstr "Δεν επιτρέπεται η μεταφόρτωση τέτοιου τύπου αρχείου."
-
-#: modules/file.php:195
-msgid "There was an error uploading the file."
-msgstr "Υπήρξε σφάλμα κατά τη μεταφόρτωση του αρχείου."
+#: modules/text.php:184
+msgid "The URL is invalid."
+msgstr "Το URL είναι εσφαλμενο."
 
 #: modules/text.php:177
 msgid "The e-mail address entered is invalid."
@@ -298,23 +263,45 @@ msgstr "Η διεύθυνση e-mail είναι άκυρη."
 msgid "The answer to the quiz is incorrect."
 msgstr "Η απάντηση στο κουϊζ είναι λάθος."
 
-#: modules/text.php:184
-msgid "The URL is invalid."
-msgstr "Το URL είναι εσφαλμενο."
-
 #: modules/number.php:131
 msgid "The number is larger than the maximum allowed."
 msgstr "Ο αριθμός είναι μεγαλύτερος από τον μέγιστο επιτρεπτό."
 
-#. translators: 1: blog name, 2: [your-subject]
-#: includes/contact-form-template.php:52 includes/contact-form-template.php:86
-msgctxt "mail subject"
-msgid "%1$s \"%2$s\""
-msgstr "%1$s \"%2$s\""
+#: modules/number.php:126
+msgid "The number is smaller than the minimum allowed."
+msgstr "Ο αριθός είναι μικρότερος από τον ελάχιστο επιτρεπτό"
 
-#: includes/contact-form-template.php:181
-msgid "The field is required."
-msgstr "Αυτο το πεδίο είναι υποχρεωτικό."
+#: modules/number.php:121
+msgid "The number format is invalid."
+msgstr "Η μορφή αριθμού είναι άκυρη."
+
+#: modules/file.php:195
+msgid "There was an error uploading the file."
+msgstr "Υπήρξε σφάλμα κατά τη μεταφόρτωση του αρχείου."
+
+#: modules/file.php:190
+msgid "The file is too big."
+msgstr "Το αρχείο είναι πολύ μεγάλο."
+
+#: modules/file.php:185
+msgid "You are not allowed to upload files of this type."
+msgstr "Δεν επιτρέπεται η μεταφόρτωση τέτοιου τύπου αρχείου."
+
+#: modules/file.php:180
+msgid "There was an unknown error uploading the file."
+msgstr "Υπήρξε άγνωστο σφάλμα κατά τη μεταφόρτωση του αρχείου."
+
+#: modules/date.php:128
+msgid "The date is after the latest one allowed."
+msgstr "Η ημερομηνία είναι μεταγενέστερη της επιτρεπόμενης."
+
+#: modules/date.php:123
+msgid "The date is before the earliest one allowed."
+msgstr "Η ημερομηνία είναι προγενέστερη της επιτρεπόμενης."
+
+#: modules/date.php:118
+msgid "The date format is incorrect."
+msgstr "Η μορφή της ημερομηνίας είναι λανθασμένη."
 
 #: includes/contact-form-template.php:195
 msgid "The field is too short."
@@ -324,42 +311,55 @@ msgstr "Το πεδίο είναι πολύ μικρό."
 msgid "The field is too long."
 msgstr "Το πεδίο είναι πολύ μεγάλο."
 
-#: modules/date.php:118
-msgid "The date format is incorrect."
-msgstr "Η μορφή της ημερομηνίας είναι λανθασμένη."
+#: includes/contact-form-template.php:181
+msgid "The field is required."
+msgstr "Αυτο το πεδίο είναι υποχρεωτικό."
+
+#: includes/contact-form-template.php:174
+msgid "You must accept the terms and conditions before sending your message."
+msgstr "Πρέπει να αποδεχτείτε τους όρους χρήσης πριν στείλετε το μήνυμα."
+
+#: includes/contact-form-template.php:160
+msgid "One or more fields have an error. Please check and try again."
+msgstr "Ένα ή περισσότερα πεδία έχουν σφάλματα. Ελέγξτε και ξαναδοκιμάστε."
 
 #: includes/contact-form-template.php:153
 #: includes/contact-form-template.php:167
 msgid "There was an error trying to send your message. Please try again later."
 msgstr "Υπήρξε σφάλμα κατά την αποστολή. Δοκιμάστε ξανά αργότερα."
 
-#: includes/contact-form-template.php:160
-msgid "One or more fields have an error. Please check and try again."
-msgstr "Ένα ή περισσότερα πεδία έχουν σφάλματα. Ελέγξτε και ξαναδοκιμάστε."
-
-#: includes/contact-form-template.php:174
-msgid "You must accept the terms and conditions before sending your message."
-msgstr "Πρέπει να αποδεχτείτε τους όρους χρήσης πριν στείλετε το μήνυμα."
-
 #: includes/contact-form-template.php:146
 msgid "Thank you for your message. It has been sent."
 msgstr "Ευχαριστούμε για το μήνυμά σας. Στάλθηκε με επιτυχία."
 
-#: admin/admin.php:532
-msgid "Configuration validation completed. No invalid contact form was found."
-msgstr "Η επικύρωση διαμόρφωσης ολοκληρώθηκε. Δεν βέθηκαν μη έγγυρες φόρμες επικοινωνίας. "
-
-#: admin/admin.php:626
-msgid "Validate Contact Form 7 Configuration"
-msgstr "Επικύρωση της Contact Form 7 διαμόρφωσης"
+#. translators: 1: blog name, 2: [your-subject]
+#: includes/contact-form-template.php:52 includes/contact-form-template.php:86
+msgctxt "mail subject"
+msgid "%1$s \"%2$s\""
+msgstr "%1$s \"%2$s\""
 
 #: admin/admin.php:628
 msgid "Misconfiguration leads to mail delivery failure or other troubles. Validate your contact forms now."
 msgstr "Εσφαλμένη ρύθμιση οδηγεί σε αποτυχία διανομής της αλληλογραφίας ή άλλα προβλήματα. Επικυρώστε τις φόρμες επικοινωνίας σας τώρα."
 
-#: admin/admin.php:212
-msgid "You are not allowed to validate configuration."
-msgstr "Δεν σας επιτρέπεται να επικυρώσετε την διαμόρφωση."
+#: admin/admin.php:626
+msgid "Validate Contact Form 7 Configuration"
+msgstr "Επικύρωση της Contact Form 7 διαμόρφωσης"
+
+#: includes/config-validator.php:17
+msgid "https://contactform7.com/configuration-errors/"
+msgstr "https://contactform7.com/configuration-errors/"
+
+#: admin/admin.php:532
+msgid "Configuration validation completed. No invalid contact form was found."
+msgstr "Η επικύρωση διαμόρφωσης ολοκληρώθηκε. Δεν βέθηκαν μη έγγυρες φόρμες επικοινωνίας. "
+
+#. translators: %s: number of contact forms
+#: admin/admin.php:524
+msgid "Configuration validation completed. %s invalid contact form was found."
+msgid_plural "Configuration validation completed. %s invalid contact forms were found."
+msgstr[0] "Η επικύρωση της διαμόρφωσης ολοκληρώθηκε. Βρέθηκε %s μη έγκυρη φόρμα επικοινωνίας."
+msgstr[1] "Η επικύρωση της διαμόρφωσης ολοκληρώθηκε. Βρέθηκαν %s μη έγκυρες φόρμες επικοινωνίας."
 
 #: admin/admin.php:420
 msgid "Validate Configuration"
@@ -372,46 +372,25 @@ msgid_plural "Validate %s Contact Forms Now"
 msgstr[0] "Επικυρώστε %s φόρμα επικοινωνίας τώρα"
 msgstr[1] "Επικυρώστε %s φόρμες επικοινωνίας τώρα"
 
-#. translators: %s: number of contact forms
-#: admin/admin.php:524
-msgid "Configuration validation completed. An invalid contact form was found."
-msgid_plural "Configuration validation completed. %s invalid contact forms were found."
-msgstr[0] "Η επικύρωση της διαμόρφωσης ολοκληρώθηκε. Βρέθηκε μία μη έγκυρη φόρμα επικοινωνίας."
-msgstr[1] "Η επικύρωση της διαμόρφωσης ολοκληρώθηκε. Βρέθηκαν %s μη έγκυρες φόρμες επικοινωνίας."
-
-#: includes/config-validator.php:17
-msgid "https://contactform7.com/configuration-errors/"
-msgstr "https://contactform7.com/configuration-errors/"
+#: admin/admin.php:212
+msgid "You are not allowed to validate configuration."
+msgstr "Δεν σας επιτρέπεται να επικυρώσετε την διαμόρφωση."
 
 #: includes/controller.php:64
 msgid "Please verify that you are not a robot."
 msgstr "Επιβεβαιώστε ότι δεν είστε ρομπότ."
 
-#: modules/recaptcha.php:473 modules/recaptcha.php:476
-msgid "Theme"
-msgstr "Θέμα"
+#: modules/recaptcha.php:467
+msgid "Compact"
+msgstr "Συμπιεσμένο"
+
+#: modules/recaptcha.php:465
+msgid "Normal"
+msgstr "Κανονικό"
 
 #: modules/recaptcha.php:461 modules/recaptcha.php:464
 msgid "Size"
 msgstr "Μέγεθος"
-
-#: modules/recaptcha.php:149
-msgid "Settings saved."
-msgstr "Οι ρυθμίσεις αποθηκεύτηκαν!"
-
-#: admin/includes/welcome-panel.php:26 modules/recaptcha.php:23
-#: modules/recaptcha.php:189 modules/recaptcha.php:428
-#: modules/recaptcha.php:441 modules/recaptcha.php:451
-msgid "reCAPTCHA"
-msgstr "reCAPTCHA"
-
-#: modules/recaptcha.php:143
-msgid "ERROR"
-msgstr "ΣΦΑΛΜΑ"
-
-#: modules/really-simple-captcha.php:243
-msgid "CAPTCHA (Really Simple CAPTCHA)"
-msgstr "CAPTCHA (Really Simple CAPTCHA)"
 
 #: modules/recaptcha.php:479
 msgid "Dark"
@@ -421,211 +400,101 @@ msgstr "Σκούρο"
 msgid "Light"
 msgstr "Ανοικτό"
 
-#: modules/recaptcha.php:174 modules/recaptcha.php:205
-msgid "Secret Key"
-msgstr "Μυστικό κλειδί"
-
-#: modules/recaptcha.php:465
-msgid "Normal"
-msgstr "Κανονικό"
-
-#: modules/recaptcha.php:144
-msgid "Invalid key values."
-msgstr "Λανθασμένες τιμές κλειδιού."
+#: modules/recaptcha.php:473 modules/recaptcha.php:476
+msgid "Theme"
+msgstr "Θέμα"
 
 #: modules/recaptcha.php:449
 msgid "Generate a form-tag for a reCAPTCHA widget. For more details, see %s."
 msgstr "Δημιουργείστε ένα form-tag για μια reCAPTCHA μικροεφαρμογή. Για λεπτομέρειες, δείτε %s."
 
-#: modules/recaptcha.php:189
-msgid "For more details, see %s."
-msgstr "Για περισσότερες πληροφορίες, δείτε %s."
-
-#: modules/recaptcha.php:185
-msgid "To use reCAPTCHA, you need to install an API key pair."
-msgstr "Για να χρησιμοποιήσετε το reCAPTCHA χρειάζεται να εγκαταστήσετε ένα ζεύγος κλειδιών API."
-
-#: modules/recaptcha.php:155
-msgid "reCAPTCHA is a free service to protect your website from spam and abuse."
-msgstr "Το reCAPTCHA είναι μια δωρεάν υπηρεσία για να προστατέψετε τον ιστότοπο σας από spam και κατάχρηση."
-
 #: modules/recaptcha.php:441
 msgid "To use reCAPTCHA, first you need to install an API key pair. For more details, see %s."
 msgstr "Για χρήση του reCAPTCHA, πρώτα πρέπει να εγκαταστήσετε ένα ζεύγος κλειδιών API. Για περισσότερες πληροφορίες, δείτε %s"
-
-#: modules/recaptcha.php:187
-msgid "Configure Keys"
-msgstr "Επεξεργασία κλειδιών"
-
-#: modules/recaptcha.php:180
-msgid "Reset Keys"
-msgstr "Επαναφορά Κλειδιών"
-
-#: modules/recaptcha.php:170 modules/recaptcha.php:201
-msgid "Site Key"
-msgstr "Κλειδί ιστότοπου"
-
-#: modules/recaptcha.php:467
-msgid "Compact"
-msgstr "Συμπιεσμένο"
 
 #: admin/includes/welcome-panel.php:26 modules/recaptcha.php:189
 #: modules/recaptcha.php:441 modules/recaptcha.php:451
 msgid "https://contactform7.com/recaptcha/"
 msgstr "https://contactform7.com/recaptcha/"
 
-#: includes/contact-form-template.php:37
-msgid "(required)"
-msgstr "(απαραίτητο)"
+#: modules/recaptcha.php:189
+msgid "For more details, see %s."
+msgstr "Για περισσότερες πληροφορίες, δείτε %s."
 
-#: includes/contact-form.php:156
-msgid "<code>%1$s</code> property of a <code>WPCF7_ContactForm</code> object is <strong>no longer accessible</strong>. Use <code>%2$s</code> method instead."
-msgstr "Η ιδιότητα <code>%1$s</code> ενός αντικειμένου <code>WPCF7_ContactForm</code> <strong>δεν είναι πλέον προσβάσιμη</strong>. Χρησιμοποιήστε τη μέθοδο <code>%2$s</code> αντ' αυτού."
+#: modules/recaptcha.php:187
+msgid "Configure Keys"
+msgstr "Επεξεργασία κλειδιών"
 
-#: modules/file.php:247
-msgid "Acceptable file types"
-msgstr "Επιτρεπόμενοι τύποι αρχείων"
+#: modules/recaptcha.php:185
+msgid "To use reCAPTCHA, you need to install an API key pair."
+msgstr "Για να χρησιμοποιήσετε το reCAPTCHA χρειάζεται να εγκαταστήσετε ένα ζεύγος κλειδιών API."
 
-#: admin/includes/welcome-panel.php:26 modules/text.php:265
-#: modules/text.php:268
-msgid "Akismet"
-msgstr "Akismet"
+#: modules/recaptcha.php:180
+msgid "Reset Keys"
+msgstr "Επαναφορά Κλειδιών"
 
-#: modules/really-simple-captcha.php:270 modules/recaptcha.php:223
-msgid "CAPTCHA"
-msgstr "CAPTCHA"
+#: modules/recaptcha.php:174 modules/recaptcha.php:205
+msgid "Secret Key"
+msgstr "Μυστικό κλειδί"
 
-#: includes/contact-form.php:32
-msgid "Contact Form"
-msgstr "Φόρμα επικοινωνίας"
+#: modules/recaptcha.php:170 modules/recaptcha.php:201
+msgid "Site Key"
+msgstr "Κλειδί ιστότοπου"
+
+#: modules/recaptcha.php:155
+msgid "reCAPTCHA is a free service to protect your website from spam and abuse."
+msgstr "Το reCAPTCHA είναι μια δωρεάν υπηρεσία για να προστατέψετε τον ιστότοπο σας από spam και κατάχρηση."
+
+#: modules/recaptcha.php:149
+msgid "Settings saved."
+msgstr "Οι ρυθμίσεις αποθηκεύτηκαν!"
+
+#: modules/recaptcha.php:144
+msgid "Invalid key values."
+msgstr "Λανθασμένες τιμές κλειδιού."
+
+#: modules/recaptcha.php:143
+msgid "ERROR"
+msgstr "ΣΦΑΛΜΑ"
+
+#: admin/includes/welcome-panel.php:26 modules/recaptcha.php:23
+#: modules/recaptcha.php:189 modules/recaptcha.php:428
+#: modules/recaptcha.php:441 modules/recaptcha.php:451
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: modules/really-simple-captcha.php:243
+msgid "CAPTCHA (Really Simple CAPTCHA)"
+msgstr "CAPTCHA (Really Simple CAPTCHA)"
+
+#. Author URI of the plugin/theme
+msgid "https://ideasilo.wordpress.com/"
+msgstr "https://ideasilo.wordpress.com/"
+
+#. Author of the plugin/theme
+msgid "Takayuki Miyoshi"
+msgstr "Takayuki Miyoshi"
+
+#. Description of the plugin/theme
+msgid "Just another contact form plugin. Simple but flexible."
+msgstr "Ακόμη ένα πρόσθετο για φόρμες επικοινωνίας. Απλό αλλά ευέλικτο."
+
+#. Plugin URI of the plugin/theme
+msgid "https://contactform7.com/"
+msgstr "https://contactform7.com/"
 
 #. translators: title of your first contact form. %d: number fixed to '1'
 #: settings.php:143
 msgid "Contact form %d"
 msgstr "Φόρμα επικοινωνίας %d"
 
-#: modules/date.php:117
-msgid "Date format that the sender entered is invalid"
-msgstr "Η μορφή ημερομηνίας που εισήγαγε ο αποστολέας είναι άκυρη"
+#: modules/textarea.php:134
+msgid "Generate a form-tag for a multi-line text input field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής κειμένου πολλαπλών γραμμών. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: modules/date.php:122
-msgid "Date is earlier than minimum limit"
-msgstr "Η ημερομηνία αυτή είναι προγενέστερη από το ελάχιστο όριο"
-
-#: modules/date.php:127
-msgid "Date is later than maximum limit"
-msgstr "Η ημερομηνία είναι μεταγενέστερη από το μέγιστο όριο"
-
-#: modules/date.php:175 modules/number.php:183 modules/text.php:258
-#: modules/textarea.php:161
-msgid "Default value"
-msgstr "Προεπιλεγμένη τιμή"
-
-#: modules/text.php:175
-msgid "Email address that the sender entered is invalid"
-msgstr "Η διεύθυνση email που εισήγαγε ο αποστολέας είναι άκυρη."
-
-#. translators: %s: [your-name] <[your-email]>
-#: includes/contact-form-template.php:57
-msgid "From: %s"
-msgstr "Από: %s"
-
-#: modules/really-simple-captcha.php:287
-msgid "Image settings"
-msgstr "Ρυθμίσεις εικόνας"
-
-#: modules/really-simple-captcha.php:302
-msgid "Input field settings"
-msgstr "Ρυθμίσεις πεδίου εισαγωγής"
-
-#. Description of the plugin/theme
-msgid "Just another contact form plugin. Simple but flexible."
-msgstr "Ακόμη ένα πρόσθετο για φόρμες επικοινωνίας. Απλό αλλά ευέλικτο."
-
-#: modules/submit.php:65
-msgid "Label"
-msgstr "Eπιγραφή"
-
-#: includes/contact-form-template.php:62 includes/contact-form-template.php:91
-msgid "Message Body:"
-msgstr "Σώμα μηνύματος:"
-
-#: modules/acceptance.php:233 modules/checkbox.php:318 modules/date.php:170
-#: modules/file.php:237 modules/number.php:178 modules/quiz.php:197
-#: modules/really-simple-captcha.php:280 modules/select.php:207
-#: modules/text.php:253 modules/textarea.php:156
-msgid "Name"
-msgstr "Όνομα"
-
-#: modules/number.php:120
-msgid "Number format that the sender entered is invalid"
-msgstr "Η μορφή αριθμού που εισήγαγε ο αποστολέας είναι άκυρος"
-
-#: modules/number.php:130
-msgid "Number is larger than maximum limit"
-msgstr "Ο αριθμός είνιαι μεγαλύτερος από το μέγιστο όριο"
-
-#: modules/number.php:125
-msgid "Number is smaller than minimum limit"
-msgstr "Ο αριθμός είναι μικρότερος από το ελάχιστο όριο"
-
-#: modules/quiz.php:187
-msgid "Quiz"
-msgstr "Κουΐζ"
-
-#: includes/contact-form-template.php:42 modules/submit.php:26
-msgid "Send"
-msgstr "Αποστολή"
-
-#: modules/quiz.php:161
-msgid "Sender doesn't enter the correct answer to the quiz"
-msgstr "Ο αποστολέας δεν εισάγει την σωστή απάντηση στο κουΐζ."
-
-#: includes/contact-form-template.php:144
-msgid "Sender's message was sent successfully"
-msgstr "Το μήνυμα του αποστολέα στάλθηκε επιτυχώς"
-
-#. translators: %s: [your-subject]
-#: includes/contact-form-template.php:60
-msgid "Subject: %s"
-msgstr "Θέμα: %s"
-
-#: includes/contact-form-template.php:165
-msgid "Submission was referred to as spam"
-msgstr "Η υποβολή αναφέρθηκε ως ανεπιθύμητη αλληλογραφία"
-
-#: modules/text.php:189
-msgid "Telephone number that the sender entered is invalid"
-msgstr "Ο τηλεφωνικός αριθμός που εισήγαγε ο αποστολέας είναι άκυρος"
-
-#: modules/really-simple-captcha.php:222
-msgid "The code that sender entered does not match the CAPTCHA"
-msgstr "Ο κώδικας που εισήγαγε ο αποστολέας δεν ταιριάζει με το CAPTCHA."
-
-#: includes/contact-form-template.php:172
-msgid "There are terms that the sender must accept"
-msgstr "Υπάρχουν όροι που ο αποστολέας πρέπει να αποδεχθεί"
-
-#: includes/contact-form-template.php:179
-msgid "There is a field that the sender must fill in"
-msgstr "Υπάρχει πεδίο που ο αποστολέας πρέπει να συμπληρώσει"
-
-#: modules/really-simple-captcha.php:360
-msgid "This contact form contains CAPTCHA fields, but the necessary libraries (GD and FreeType) are not available on your server."
-msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία CAPTCHA, αλλά οι απαραίτητες βιβλιοθήκες (GD και FreeType) δεν είναι διαθέσιμες στο διακομιστή σας."
-
-#: modules/really-simple-captcha.php:353
-msgid "This contact form contains CAPTCHA fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
-msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία CAPTCHA, αλλά ο προσωρινός φάκελος για τα αρχεία (% s) δεν υπάρχει ή δεν είναι εγγράψιμος. Μπορείτε να δημιουργήσετε το φάκελο ή να αλλάξετε την άδειά του χειροκίνητα."
-
-#: modules/file.php:301
-msgid "This contact form contains file uploading fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
-msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία μεταφόρτωσης του αρχείου, αλλά ο προσωρινός φάκελος για τα αρχεία (% s) δεν υπάρχει ή δεν είναι εγγράψιμος. Μπορείτε να δημιουργήσετε το φάκελο ή να αλλάξετε την άδειά του χειροκίνητα."
-
-#. translators: 1: blog name, 2: blog URL
-#: includes/contact-form-template.php:67 includes/contact-form-template.php:96
-msgid "This e-mail was sent from a contact form on %1$s (%2$s)"
-msgstr "Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου εστάλει από την φόρμα επικοινωνίας του %1$s (%2$s)"
+#: modules/textarea.php:126
+msgid "text area"
+msgstr "περιοχή κειμένου"
 
 #: modules/text.php:283
 msgid "This field requires author's URL"
@@ -639,124 +508,288 @@ msgstr "Αυτό το πεδίο απαιτεί τη διεύθυνση email τ
 msgid "This field requires author's name"
 msgstr "Αυτό το πεδίο απαιτεί το όνομα του συντάκτη"
 
-#: modules/text.php:209
-msgid "URL"
-msgstr "URL"
+#: admin/includes/welcome-panel.php:26 modules/text.php:265
+#: modules/text.php:268
+msgid "Akismet"
+msgstr "Akismet"
 
-#: modules/text.php:182
-msgid "URL that the sender entered is invalid"
-msgstr "Το URL που εισήγαγε ο αποστολέας είναι άκυρο"
+#: modules/text.php:233 modules/textarea.php:136
+msgid "Text Fields"
+msgstr "Πεδία Κειμένου"
 
-#: includes/contact-form.php:82 includes/contact-form.php:232
-msgid "Untitled"
-msgstr "Χωρίς τίτλο"
+#: modules/text.php:233 modules/textarea.php:136
+msgid "https://contactform7.com/text-fields/"
+msgstr "https://contactform7.com/text-fields/"
 
-#: modules/file.php:189
-msgid "Uploaded file is too large"
-msgstr "Το αρχείο που μεταφορτώθηκε είναι πολύ μεγάλο."
+#: modules/text.php:230
+msgid "Generate a form-tag for a single-line telephone number input field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής αριθμού τηλεφώνου μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: modules/file.php:194
-msgid "Uploading a file fails for PHP error"
-msgstr "Η μεταφόρτωση αρχείου απέτυχε με σφάλμα PHP"
+#: modules/text.php:228
+msgid "Generate a form-tag for a single-line URL input field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής URL μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: modules/file.php:179
-msgid "Uploading a file fails for any reason"
-msgstr "Αποτυχία μεταφόρτωσης αρχείου για οποιονδήποτε λόγο."
+#: modules/text.php:226
+msgid "Generate a form-tag for a single-line email address input field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής διεύθυνσης email μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: includes/contact-form-template.php:158
-msgid "Validation errors occurred"
-msgstr "Συνέβησαν σφάλματα εγκυρότητας"
-
-#: includes/contact-form-template.php:39
-msgid "Your Email"
-msgstr "Το email σας"
-
-#: includes/contact-form-template.php:41
-msgid "Your Message"
-msgstr "Το μήνυμά σας"
-
-#: includes/contact-form-template.php:38
-msgid "Your Name"
-msgstr "Το όνομά σας"
-
-#: modules/really-simple-captcha.php:224
-msgid "Your entered code is incorrect."
-msgstr "Ο κωδικός που εισάγατε δεν είναι σωστός."
-
-#: modules/acceptance.php:243 modules/acceptance.php:246
-#: modules/checkbox.php:323 modules/checkbox.php:326 modules/select.php:212
-#: modules/select.php:215
-msgid "Options"
-msgstr "Επιλογές"
-
-#: modules/date.php:140
-msgid "date"
-msgstr "ημερομηνία"
-
-#: modules/date.php:150
-msgid "Date Field"
-msgstr "Πεδίο ημερομηνίας."
-
-#: modules/date.php:186 modules/number.php:194
-msgid "Min"
-msgstr "Ελάχιστο"
-
-#: modules/date.php:191 modules/number.php:199
-msgid "Max"
-msgstr "Μέγιστο"
-
-#: modules/file.php:207
-msgid "file"
-msgstr "αρχείο"
-
-#: modules/number.php:143
-msgid "number"
-msgstr "νούμερο"
+#: modules/text.php:224
+msgid "Generate a form-tag for a single-line plain text input field. For more details, see %s."
+msgstr "Δημιουργία ετικέτας φόρμας για πεδίο υποβολής απλού κειμένου. Για περισσότερες πληροφορίες, δείτε %s."
 
 #: modules/text.php:211
 msgid "tel"
 msgstr "Τηλέφωνο"
 
-#: modules/file.php:242
-msgid "File size limit (bytes)"
-msgstr "Όριο μεγέθους αρχείου (bytes)"
-
-#: modules/quiz.php:202 modules/quiz.php:205
-msgid "Questions and answers"
-msgstr "Ερωτήσεις και απαντήσεις"
+#: modules/text.php:209
+msgid "URL"
+msgstr "URL"
 
 #: modules/text.php:207
 msgid "email"
 msgstr "email"
 
-#: admin/includes/help-tabs.php:91
-msgid "For more information:"
-msgstr "Για περισσότερες πληροφορίες : "
+#: modules/text.php:205
+msgid "text"
+msgstr "κείμενο"
 
-#: admin/includes/editor.php:194
-msgid "File Attachments"
-msgstr "Επισυναπτόμενα αρχεία"
+#: modules/text.php:189
+msgid "Telephone number that the sender entered is invalid"
+msgstr "Ο τηλεφωνικός αριθμός που εισήγαγε ο αποστολέας είναι άκυρος"
 
-#: admin/includes/help-tabs.php:16 admin/includes/help-tabs.php:30
-#: admin/includes/help-tabs.php:49
-msgid "Overview"
-msgstr "Επισκόπηση "
+#: modules/text.php:182
+msgid "URL that the sender entered is invalid"
+msgstr "Το URL που εισήγαγε ο αποστολέας είναι άκυρο"
 
-#: admin/includes/help-tabs.php:68
-msgid "<strong>Title</strong> is the title of a contact form. This title is only used for labeling a contact form, and can be edited."
-msgstr "<strong>Τίτλος</strong> είναι ο τίτλος της φόρμας επικοινωνίας. Αυτός ο τίτλος χρησιμοποιείται για την επισήμανση της φόρμας επικοινωνίας και μπορεί να επεξεργαστεί."
+#: modules/text.php:175
+msgid "Email address that the sender entered is invalid"
+msgstr "Η διεύθυνση email που εισήγαγε ο αποστολέας είναι άκυρη."
 
-#: admin/includes/help-tabs.php:67
-msgid "On this screen, you can edit a contact form. A contact form is comprised of the following components:"
-msgstr "Σε αυτή την οθόνη, μπορείτε να επεξεργαστεί την φόρμα επικοινωνίας. Η φόρμα επικοινωνίαε αποτελείται απ' τα ακόλουθα μέρη:"
+#: modules/submit.php:65
+msgid "Label"
+msgstr "Eπιγραφή"
 
-#: modules/acceptance.php:213
-msgid "acceptance"
-msgstr "Αποδοχή"
+#: modules/submit.php:55
+msgid "Submit Button"
+msgstr "Κουμπί Υποβολής"
 
-#. Author of the plugin/theme
-msgid "Takayuki Miyoshi"
-msgstr "Takayuki Miyoshi"
+#: modules/submit.php:55
+msgid "https://contactform7.com/submit-button/"
+msgstr "https://contactform7.com/submit-button/"
+
+#: modules/submit.php:53
+msgid "Generate a form-tag for a submit button. For more details, see %s."
+msgstr "Δημιουργία ετικέτας φόρμας για ένα κουμπί υποβολής. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/submit.php:46
+msgid "submit"
+msgstr "υποβολή"
+
+#: modules/select.php:219
+msgid "Insert a blank item as the first option"
+msgstr "Εισάγετε ένα κενό αντικείμενο ως πρώτη επιλογή"
+
+#: modules/select.php:218
+msgid "Allow multiple selections"
+msgstr "Επιτρέψτε πολλαπλές επιλογές."
+
+#: modules/select.php:185
+msgid "Generate a form-tag for a drop-down menu. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα αναπτυσσόμενο μενού. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/select.php:178
+msgid "drop-down menu"
+msgstr "πτυσσόμενο μενού"
+
+#: modules/quiz.php:207
+msgid "One pipe-separated question-answer pair (e.g. The capital of Brazil?|Rio) per line."
+msgstr "Ένα σωλήνας-διαχωρηστής ερώτηση-απάντηση ζεύγος (π.χ. Η πρωτεύουσα της Βραζιλίας?|Ρίο) για κάθε γραμμή."
+
+#: modules/quiz.php:202 modules/quiz.php:205
+msgid "Questions and answers"
+msgstr "Ερωτήσεις και απαντήσεις"
+
+#: modules/quiz.php:187
+msgid "Quiz"
+msgstr "Κουΐζ"
+
+#: modules/quiz.php:187
+msgid "https://contactform7.com/quiz/"
+msgstr "https://contactform7.com/quiz/"
+
+#: modules/quiz.php:185
+msgid "Generate a form-tag for a question-answer pair. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα ζευγάρι ερωτήσεων-απαντήσεων. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/quiz.php:177
+msgid "quiz"
+msgstr "quiz"
+
+#: modules/quiz.php:161
+msgid "Sender doesn't enter the correct answer to the quiz"
+msgstr "Ο αποστολέας δεν εισάγει την σωστή απάντηση στο κουΐζ."
+
+#: modules/number.php:169
+msgid "Slider"
+msgstr "Slider"
+
+#: modules/number.php:168
+msgid "Spinbox"
+msgstr "Spinbox"
+
+#: modules/number.php:153
+msgid "Number Fields"
+msgstr "Πεδία Αριθμών"
+
+#: modules/number.php:153
+msgid "https://contactform7.com/number-fields/"
+msgstr "https://contactform7.com/number-fields/"
+
+#: modules/number.php:151
+msgid "Generate a form-tag for a field for numeric value input. For more details, see %s."
+msgstr "Δημιουργία ετικέτας φόρμας για ένα πεδίο υποβολής αριθμητικής τιμής. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/number.php:143
+msgid "number"
+msgstr "νούμερο"
+
+#: modules/number.php:130
+msgid "Number is larger than maximum limit"
+msgstr "Ο αριθμός είνιαι μεγαλύτερος από το μέγιστο όριο"
+
+#: modules/number.php:125
+msgid "Number is smaller than minimum limit"
+msgstr "Ο αριθμός είναι μικρότερος από το ελάχιστο όριο"
+
+#: modules/number.php:120
+msgid "Number format that the sender entered is invalid"
+msgstr "Η μορφή αριθμού που εισήγαγε ο αποστολέας είναι άκυρος"
+
+#: modules/file.php:301
+msgid "This contact form contains file uploading fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
+msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία μεταφόρτωσης του αρχείου, αλλά ο προσωρινός φάκελος για τα αρχεία (% s) δεν υπάρχει ή δεν είναι εγγράψιμος. Μπορείτε να δημιουργήσετε το φάκελο ή να αλλάξετε την άδειά του χειροκίνητα."
+
+#: modules/file.php:275
+msgid "To attach the file uploaded through this field to mail, you need to insert the corresponding mail-tag (%s) into the File Attachments field on the Mail tab."
+msgstr "Για να συνδέσετε το αρχείο που θέλετε να ανεβασετε μέσο του πεδίου mail, χρειάζετε να εισάγεται αντίστοιχα mail-tag(%s) μέσα στο πεδίο του αρχείου σύνδεσης στην καρτέλα του mail."
+
+#: modules/file.php:247
+msgid "Acceptable file types"
+msgstr "Επιτρεπόμενοι τύποι αρχείων"
+
+#: modules/file.php:242
+msgid "File size limit (bytes)"
+msgstr "Όριο μεγέθους αρχείου (bytes)"
+
+#: modules/file.php:217
+msgid "File Uploading and Attachment"
+msgstr "Ανέβασα Αρχείου και Επισύναψης"
+
+#: modules/file.php:217
+msgid "https://contactform7.com/file-uploading-and-attachment/"
+msgstr "https://contactform7.com/file-uploading-and-attachment/"
+
+#: modules/file.php:215
+msgid "Generate a form-tag for a file uploading field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο μεταφόρτωσης αρχείου. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/file.php:207
+msgid "file"
+msgstr "αρχείο"
+
+#: modules/file.php:194
+msgid "Uploading a file fails for PHP error"
+msgstr "Η μεταφόρτωση αρχείου απέτυχε με σφάλμα PHP"
+
+#: modules/file.php:189
+msgid "Uploaded file is too large"
+msgstr "Το αρχείο που μεταφορτώθηκε είναι πολύ μεγάλο."
+
+#: modules/file.php:184
+msgid "Uploaded file is not allowed for file type"
+msgstr "Ο τύπος αρχείου που μεταφορτώθηκε δεν είναι επιτρεπτός."
+
+#: modules/file.php:179
+msgid "Uploading a file fails for any reason"
+msgstr "Αποτυχία μεταφόρτωσης αρχείου για οποιονδήποτε λόγο."
+
+#: modules/date.php:191 modules/number.php:199
+msgid "Max"
+msgstr "Μέγιστο"
+
+#: modules/date.php:186 modules/number.php:194
+msgid "Min"
+msgstr "Ελάχιστο"
+
+#: modules/date.php:181 modules/date.php:184 modules/number.php:189
+#: modules/number.php:192
+msgid "Range"
+msgstr "Διακύμανση"
+
+#: modules/date.php:177 modules/number.php:185 modules/text.php:260
+#: modules/textarea.php:163
+msgid "Use this text as the placeholder of the field"
+msgstr "Χρησιμοποιήστε αυτό το κείμενο σαν placeholder του πεδίου."
+
+#: modules/date.php:175 modules/number.php:183 modules/text.php:258
+#: modules/textarea.php:161
+msgid "Default value"
+msgstr "Προεπιλεγμένη τιμή"
+
+#: modules/date.php:150
+msgid "Date Field"
+msgstr "Πεδίο ημερομηνίας."
+
+#: modules/date.php:150
+msgid "https://contactform7.com/date-field/"
+msgstr "https://contactform7.com/date-field/"
+
+#: modules/date.php:148
+msgid "Generate a form-tag for a date input field. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισόδου ημερομηνίας. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/date.php:140
+msgid "date"
+msgstr "ημερομηνία"
+
+#: modules/date.php:127
+msgid "Date is later than maximum limit"
+msgstr "Η ημερομηνία είναι μεταγενέστερη από το μέγιστο όριο"
+
+#: modules/date.php:122
+msgid "Date is earlier than minimum limit"
+msgstr "Η ημερομηνία αυτή είναι προγενέστερη από το ελάχιστο όριο"
+
+#: modules/date.php:117
+msgid "Date format that the sender entered is invalid"
+msgstr "Η μορφή ημερομηνίας που εισήγαγε ο αποστολέας είναι άκυρη"
+
+#: modules/checkbox.php:362 modules/date.php:221 modules/number.php:229
+#: modules/select.php:248 modules/text.php:316 modules/textarea.php:190
+msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
+msgstr "Για να χρησιμοποιήσετε την τιμή εισαγωγής μέσω αυτού του πεδίου σε ένα πεδίο αλληλογραφίας, θα πρέπει να εισαγάγετε την αντίστοιχη ετικέτα αλληλογραφίας (%s) στο πεδίο στην καρτέλα Αλληλογραφία."
+
+#: modules/checkbox.php:332
+msgid "Make checkboxes exclusive"
+msgstr "Κάνε τα checkboxes αποκλειστικά"
+
+#: modules/checkbox.php:330
+msgid "Wrap each item with label element"
+msgstr "Τυλίξτε κάθε αντικείμενο με ένα στοιχείο ετικέτας."
+
+#: modules/checkbox.php:329
+msgid "Put a label first, a checkbox last"
+msgstr "Προσθέστε πρώτα ετικέτα, και αργότερα Checkbox"
+
+#: modules/checkbox.php:328 modules/select.php:217
+msgid "One option per line."
+msgstr "Μία επιλογή ανά γραμμή."
+
+#: modules/checkbox.php:311 modules/date.php:164 modules/file.php:231
+#: modules/number.php:172 modules/select.php:201 modules/text.php:247
+#: modules/textarea.php:150
+msgid "Required field"
+msgstr "Υποχρεωτικό πεδίο"
 
 #: modules/checkbox.php:307 modules/checkbox.php:310 modules/date.php:160
 #: modules/date.php:163 modules/file.php:227 modules/file.php:230
@@ -766,77 +799,223 @@ msgstr "Takayuki Miyoshi"
 msgid "Field type"
 msgstr "Τύπος πεδίου"
 
-#: modules/checkbox.php:311 modules/date.php:164 modules/file.php:231
-#: modules/number.php:172 modules/select.php:201 modules/text.php:247
-#: modules/textarea.php:150
-msgid "Required field"
-msgstr "Υποχρεωτικό πεδίο"
+#: modules/checkbox.php:296 modules/select.php:187
+msgid "Checkboxes, Radio Buttons and Menus"
+msgstr "Πλαίσια Ελέγχου, Κουμπιά Επιλογής και Μενού"
 
-#: modules/checkbox.php:328 modules/select.php:217
-msgid "One option per line."
-msgstr "Μία επιλογή ανά γραμμή."
+#: modules/checkbox.php:296 modules/select.php:187
+msgid "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
+msgstr "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
 
-#: includes/contact-form-template.php:151
-msgid "Sender's message failed to send"
-msgstr "Το μήνυμα του αποστολέα απέτυχε να σταλεί"
+#: modules/checkbox.php:293
+msgid "Generate a form-tag for a group of radio buttons. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισόδου ημερομηνίας. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: modules/file.php:184
-msgid "Uploaded file is not allowed for file type"
-msgstr "Ο τύπος αρχείου που μεταφορτώθηκε δεν είναι επιτρεπτός."
+#: modules/checkbox.php:291
+msgid "Generate a form-tag for a group of checkboxes. For more details, see %s."
+msgstr "Δημιουργήστε μια ετικέτα φόρμας για μια ομάδα checkboxes. Για περισσότερες λεπτομέρειες, δείτε %s."
 
-#: modules/select.php:178
-msgid "drop-down menu"
-msgstr "πτυσσόμενο μενού"
+#: modules/checkbox.php:278
+msgid "radio buttons"
+msgstr "κουμπιά επιλογής"
 
-#: modules/text.php:233 modules/textarea.php:136
-msgid "Text Fields"
-msgstr "Πεδία Κειμένου"
+#: modules/checkbox.php:276
+msgid "checkboxes"
+msgstr "πλαίσια ελέγχου"
 
-#: modules/textarea.php:126
-msgid "text area"
-msgstr "περιοχή κειμένου"
+#: modules/really-simple-captcha.php:360
+msgid "This contact form contains CAPTCHA fields, but the necessary libraries (GD and FreeType) are not available on your server."
+msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία CAPTCHA, αλλά οι απαραίτητες βιβλιοθήκες (GD και FreeType) δεν είναι διαθέσιμες στο διακομιστή σας."
 
-#: modules/date.php:181 modules/date.php:184 modules/number.php:189
-#: modules/number.php:192
-msgid "Range"
-msgstr "Διακύμανση"
+#: modules/really-simple-captcha.php:353
+msgid "This contact form contains CAPTCHA fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
+msgstr "Αυτή η φόρμα επικοινωνίας περιέχει πεδία CAPTCHA, αλλά ο προσωρινός φάκελος για τα αρχεία (% s) δεν υπάρχει ή δεν είναι εγγράψιμος. Μπορείτε να δημιουργήσετε το φάκελο ή να αλλάξετε την άδειά του χειροκίνητα."
 
-#: modules/select.php:218
-msgid "Allow multiple selections"
-msgstr "Επιτρέψτε πολλαπλές επιλογές."
+#: modules/really-simple-captcha.php:302
+msgid "Input field settings"
+msgstr "Ρυθμίσεις πεδίου εισαγωγής"
 
-#: modules/select.php:219
-msgid "Insert a blank item as the first option"
-msgstr "Εισάγετε ένα κενό αντικείμενο ως πρώτη επιλογή"
+#: modules/really-simple-captcha.php:287
+msgid "Image settings"
+msgstr "Ρυθμίσεις εικόνας"
+
+#: modules/really-simple-captcha.php:270
+msgid "https://contactform7.com/captcha/"
+msgstr "https://contactform7.com/captcha/"
+
+#: modules/really-simple-captcha.php:268
+msgid "Generate form-tags for a CAPTCHA image and corresponding response input field. For more details, see %s."
+msgstr "Δημιουργήστε ετικέτες φόρμας για μια εικόνα CAPTCHA και το αντίστοιχο πεδίο εισαγωγής απόκρισης. Για περισσότερες λεπτομέρειες, δείτε %s."
 
 #. translators: %s: link labeled 'Really Simple CAPTCHA'
 #: modules/really-simple-captcha.php:257
 msgid "To use CAPTCHA, you first need to install and activate %s plugin."
 msgstr "Για να χρησιμοποιήσετε CAPTCHA, πρέπει να εγκαταστήσετε και να ενεργοποιήσετε %s πρόσθετο πρώτα."
 
-#: modules/checkbox.php:329
-msgid "Put a label first, a checkbox last"
-msgstr "Προσθέστε πρώτα ετικέτα, και αργότερα Checkbox"
+#: modules/really-simple-captcha.php:270 modules/recaptcha.php:223
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
 
-#: modules/acceptance.php:248
+#: modules/really-simple-captcha.php:224
+msgid "Your entered code is incorrect."
+msgstr "Ο κωδικός που εισάγατε δεν είναι σωστός."
+
+#: modules/really-simple-captcha.php:222
+msgid "The code that sender entered does not match the CAPTCHA"
+msgstr "Ο κώδικας που εισήγαγε ο αποστολέας δεν ταιριάζει με το CAPTCHA."
+
+#: modules/acceptance.php:277 modules/checkbox.php:357 modules/date.php:216
+#: modules/file.php:270 modules/number.php:224 modules/quiz.php:231
+#: modules/really-simple-captcha.php:322 modules/recaptcha.php:503
+#: modules/select.php:243 modules/submit.php:88 modules/text.php:311
+#: modules/textarea.php:185
+msgid "Insert Tag"
+msgstr "Προσθήκη Ετικέτας"
+
+#: modules/acceptance.php:264 modules/checkbox.php:344 modules/date.php:204
+#: modules/file.php:257 modules/number.php:212 modules/quiz.php:218
+#: modules/really-simple-captcha.php:295 modules/really-simple-captcha.php:310
+#: modules/recaptcha.php:490 modules/select.php:230 modules/submit.php:75
+#: modules/text.php:298 modules/textarea.php:172
+msgid "Class attribute"
+msgstr "Ιδιότητα κλάσης"
+
+#: modules/acceptance.php:259 modules/checkbox.php:339 modules/date.php:199
+#: modules/file.php:252 modules/number.php:207 modules/quiz.php:213
+#: modules/really-simple-captcha.php:290 modules/really-simple-captcha.php:305
+#: modules/recaptcha.php:485 modules/select.php:225 modules/submit.php:70
+#: modules/text.php:293 modules/textarea.php:167
+msgid "Id attribute"
+msgstr "Ιδιότητα Id"
+
+#: modules/acceptance.php:253
 msgid "Make this work inversely"
 msgstr "Κάντε αυτό να δουλεύει αντιστρόφως."
 
-#: modules/checkbox.php:278
-msgid "radio buttons"
-msgstr "κουμπιά επιλογής"
+#: modules/acceptance.php:252
+msgid "Make this checkbox checked by default"
+msgstr "Κάντε αυτό το πλάισιο ελέγχου προεπιλεγμένο"
 
-#: modules/file.php:217
-msgid "File Uploading and Attachment"
-msgstr "Ανέβασα Αρχείου και Επισύναψης"
+#: modules/acceptance.php:248 modules/acceptance.php:251
+#: modules/checkbox.php:323 modules/checkbox.php:326 modules/select.php:212
+#: modules/select.php:215
+msgid "Options"
+msgstr "Επιλογές"
 
-#: modules/quiz.php:207
-msgid "One pipe-separated question-answer pair (e.g. The capital of Brazil?|Rio) per line."
-msgstr "Ένα σωλήνας-διαχωρηστής ερώτηση-απάντηση ζεύγος (π.χ. Η πρωτεύουσα της Βραζιλίας?|Ρίο) για κάθε γραμμή."
+#: modules/acceptance.php:238 modules/checkbox.php:318 modules/date.php:170
+#: modules/file.php:237 modules/number.php:178 modules/quiz.php:197
+#: modules/really-simple-captcha.php:280 modules/select.php:207
+#: modules/text.php:253 modules/textarea.php:156
+msgid "Name"
+msgstr "Όνομα"
 
-#: modules/number.php:153
-msgid "Number Fields"
-msgstr "Πεδία Αριθμών"
+#: modules/acceptance.php:228
+msgid "Acceptance Checkbox"
+msgstr "Πλαίσιο ελέγχου αποδοχής"
+
+#: modules/acceptance.php:228
+msgid "https://contactform7.com/acceptance-checkbox/"
+msgstr "https://contactform7.com/acceptance-checkbox/"
+
+#: modules/acceptance.php:226
+msgid "Generate a form-tag for an acceptance checkbox. For more details, see %s."
+msgstr "Δημιουργήστε ένα ετικέτα φόρμας για ένα αποδεκτό checkbox. Για περισσότερες λεπτομέρειες, δείτε %s."
+
+#: modules/acceptance.php:218
+msgid "acceptance"
+msgstr "Αποδοχή"
+
+#: includes/contact-form.php:156
+msgid "<code>%1$s</code> property of a <code>WPCF7_ContactForm</code> object is <strong>no longer accessible</strong>. Use <code>%2$s</code> method instead."
+msgstr "Η ιδιότητα <code>%1$s</code> ενός αντικειμένου <code>WPCF7_ContactForm</code> <strong>δεν είναι πλέον προσβάσιμη</strong>. Χρησιμοποιήστε τη μέθοδο <code>%2$s</code> αντ' αυτού."
+
+#: includes/contact-form.php:82 includes/contact-form.php:232
+msgid "Untitled"
+msgstr "Χωρίς τίτλο"
+
+#: includes/contact-form.php:32
+msgid "Contact Form"
+msgstr "Φόρμα επικοινωνίας"
+
+#: includes/contact-form-template.php:193
+msgid "There is a field with input that is shorter than the minimum allowed length"
+msgstr "Ένα πεδίο που έχει εισαχθεί είναι μικρότερο απο το επιτρεπτό όριο."
+
+#: includes/contact-form-template.php:186
+msgid "There is a field with input that is longer than the maximum allowed length"
+msgstr "Ένα πεδίο που έχει εισαχθεί είναι μεγαλύτερο απο το επιτρεπτό όριο. "
+
+#: includes/contact-form-template.php:179
+msgid "There is a field that the sender must fill in"
+msgstr "Υπάρχει πεδίο που ο αποστολέας πρέπει να συμπληρώσει"
+
+#: includes/contact-form-template.php:172
+msgid "There are terms that the sender must accept"
+msgstr "Υπάρχουν όροι που ο αποστολέας πρέπει να αποδεχθεί"
+
+#: includes/contact-form-template.php:165
+msgid "Submission was referred to as spam"
+msgstr "Η υποβολή αναφέρθηκε ως ανεπιθύμητη αλληλογραφία"
+
+#: includes/contact-form-template.php:158
+msgid "Validation errors occurred"
+msgstr "Συνέβησαν σφάλματα εγκυρότητας"
+
+#: includes/contact-form-template.php:151
+msgid "Sender's message failed to send"
+msgstr "Το μήνυμα του αποστολέα απέτυχε να σταλεί"
+
+#: includes/contact-form-template.php:144
+msgid "Sender's message was sent successfully"
+msgstr "Το μήνυμα του αποστολέα στάλθηκε επιτυχώς"
+
+#. translators: 1: blog name, 2: blog URL
+#: includes/contact-form-template.php:67 includes/contact-form-template.php:96
+msgid "This e-mail was sent from a contact form on %1$s (%2$s)"
+msgstr "Αυτό το μήνυμα ηλεκτρονικού ταχυδρομείου εστάλει από την φόρμα επικοινωνίας του %1$s (%2$s)"
+
+#: includes/contact-form-template.php:62 includes/contact-form-template.php:91
+msgid "Message Body:"
+msgstr "Σώμα μηνύματος:"
+
+#. translators: %s: [your-subject]
+#: includes/contact-form-template.php:60
+msgid "Subject: %s"
+msgstr "Θέμα: %s"
+
+#. translators: %s: [your-name] <[your-email]>
+#: includes/contact-form-template.php:57
+msgid "From: %s"
+msgstr "Από: %s"
+
+#: includes/contact-form-template.php:42 modules/submit.php:26
+msgid "Send"
+msgstr "Αποστολή"
+
+#: includes/contact-form-template.php:41
+msgid "Your Message"
+msgstr "Το μήνυμά σας"
+
+#: includes/contact-form-template.php:39
+msgid "Your Email"
+msgstr "Το email σας"
+
+#: includes/contact-form-template.php:37
+msgid "(required)"
+msgstr "(απαραίτητο)"
+
+#: includes/contact-form-template.php:38
+msgid "Your Name"
+msgstr "Το όνομά σας"
+
+#. translators: %s: title of form-tag like 'email' or 'checkboxes'
+#: admin/includes/tag-generator.php:45
+msgid "Form-tag Generator: %s"
+msgstr "Γεννήτρια ετικετών φόρμας: %s"
+
+#: admin/includes/help-tabs.php:91
+msgid "For more information:"
+msgstr "Για περισσότερες πληροφορίες : "
 
 #: admin/includes/help-tabs.php:83
 msgid "Any information you provide will not be shared with service providers without your authorization."
@@ -846,248 +1025,9 @@ msgstr "Οποιαδήποτε πληροφορία παρέχετε δεν θα
 msgid "You may need to first sign up for an account with the service that you plan to use. When you do so, you would need to authorize Contact Form 7 to access the service with your account."
 msgstr "Ίσως χρειαστεί να εγγραφείτε πρώτα για έναν λογαριασμό για την υπηρεσία που σχεδιάζετε να χρησιμοποιήσετε. Όταν το κάνετε αυτό, θα χρειαστεί να εξουσιοδοτήσετε το Contact Form 7 για να αποκτήσετε πρόσβαση στον λογαριασμό σας."
 
-#: modules/acceptance.php:223
-msgid "Acceptance Checkbox"
-msgstr "Πλαίσιο ελέγχου αποδοχής"
-
 #: admin/includes/help-tabs.php:81
 msgid "On this screen, you can manage services that are available through Contact Form 7. Using API will allow you to collaborate with any services that are available."
 msgstr "Σε αυτή την οθόνη, μπορείτε να διαχειριστείτε υπηρεσίες που είναι διαθέσιμες μέσω του Contact Form 7. Χρησιμοποιώντας API θα σας επιτραπεί να συνεργαστείτε με όποια υπηρεσία είναι διαθέσιμη."
-
-#: modules/checkbox.php:276
-msgid "checkboxes"
-msgstr "πλαίσια ελέγχου"
-
-#. translators: %s: title of form-tag like 'email' or 'checkboxes'
-#: admin/includes/tag-generator.php:45
-msgid "Form-tag Generator: %s"
-msgstr "Γεννήτρια ετικετών φόρμας: %s"
-
-#: modules/checkbox.php:296 modules/select.php:187
-msgid "Checkboxes, Radio Buttons and Menus"
-msgstr "Πλαίσια Ελέγχου, Κουμπιά Επιλογής και Μενού"
-
-#: modules/acceptance.php:247
-msgid "Make this checkbox checked by default"
-msgstr "Κάντε αυτό το πλάισιο ελέγχου προεπιλεγμένο"
-
-#: modules/file.php:275
-msgid "To attach the file uploaded through this field to mail, you need to insert the corresponding mail-tag (%s) into the File Attachments field on the Mail tab."
-msgstr "Για να συνδέσετε το αρχείο που θέλετε να ανεβασετε μέσο του πεδίου mail, χρειάζετε να εισάγεται αντίστοιχα mail-tag(%s) μέσα στο πεδίο του αρχείου σύνδεσης στην καρτέλα του mail."
-
-#: modules/number.php:168
-msgid "Spinbox"
-msgstr "Spinbox"
-
-#: modules/number.php:169
-msgid "Slider"
-msgstr "Slider"
-
-#: modules/acceptance.php:259 modules/checkbox.php:344 modules/date.php:204
-#: modules/file.php:257 modules/number.php:212 modules/quiz.php:218
-#: modules/really-simple-captcha.php:295 modules/really-simple-captcha.php:310
-#: modules/recaptcha.php:490 modules/select.php:230 modules/submit.php:75
-#: modules/text.php:298 modules/textarea.php:172
-msgid "Class attribute"
-msgstr "Ιδιότητα κλάσης"
-
-#: modules/acceptance.php:254 modules/checkbox.php:339 modules/date.php:199
-#: modules/file.php:252 modules/number.php:207 modules/quiz.php:213
-#: modules/really-simple-captcha.php:290 modules/really-simple-captcha.php:305
-#: modules/recaptcha.php:485 modules/select.php:225 modules/submit.php:70
-#: modules/text.php:293 modules/textarea.php:167
-msgid "Id attribute"
-msgstr "Ιδιότητα Id"
-
-#: includes/contact-form-template.php:186
-msgid "There is a field with input that is longer than the maximum allowed length"
-msgstr "Ένα πεδίο που έχει εισαχθεί είναι μεγαλύτερο απο το επιτρεπτό όριο. "
-
-#: includes/contact-form-template.php:193
-msgid "There is a field with input that is shorter than the minimum allowed length"
-msgstr "Ένα πεδίο που έχει εισαχθεί είναι μικρότερο απο το επιτρεπτό όριο."
-
-#: modules/checkbox.php:330
-msgid "Wrap each item with label element"
-msgstr "Τυλίξτε κάθε αντικείμενο με ένα στοιχείο ετικέτας."
-
-#: modules/submit.php:53
-msgid "Generate a form-tag for a submit button. For more details, see %s."
-msgstr "Δημιουργία ετικέτας φόρμας για ένα κουμπί υποβολής. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/number.php:151
-msgid "Generate a form-tag for a field for numeric value input. For more details, see %s."
-msgstr "Δημιουργία ετικέτας φόρμας για ένα πεδίο υποβολής αριθμητικής τιμής. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/text.php:224
-msgid "Generate a form-tag for a single-line plain text input field. For more details, see %s."
-msgstr "Δημιουργία ετικέτας φόρμας για πεδίο υποβολής απλού κειμένου. Για περισσότερες πληροφορίες, δείτε %s."
-
-#: admin/includes/help-tabs.php:72
-msgid "In <strong>Messages</strong>, you can edit various types of messages used for this contact form. These messages are relatively short messages, like a validation error message you see when you leave a required field blank."
-msgstr "Στα <strong>Μηνύματα</strong>, μπορείτε να επεξεργαστείτε διάφορα είδη μηνυμάτων που χρησιμοποιούνται σε αυτή τη φόρμα επικοινωνίας. Είναι σχετικά μικρά μηνύματα, όπως το μήνυμα λάθους που βλέπετε όταν δεν έχετε συμπληρώσει ένα υποχρεωτικό πεδίο. "
-
-#: admin/includes/help-tabs.php:21
-msgid "Available Actions"
-msgstr "Διαθέσιμες ενέργειες"
-
-#: admin/includes/editor.php:248
-msgid "You can add customization code snippets here. For details, see %s."
-msgstr "Μπορείτε να προσθέσετε κομμάτια κώδικα για παραμετροποίηση εδώ. Για λεπτομέρειες,δείτε %s."
-
-#: admin/includes/help-tabs.php:65
-msgid "<strong>Duplicate</strong> - Clones that contact form. A cloned contact form inherits all content from the original, but has a different ID."
-msgstr "<strong>Αντιγραφή</strong> - Αντιγράφει αυτή την φόρμα επικοινωνίας. Μια αντεγραμμένη φόρμα κληρονομεί όλο το περιεχόμενο απο την αρχική αλλά έχει διαφορετικό ID."
-
-#: admin/includes/help-tabs.php:61
-msgid "On this screen, you can manage contact forms provided by Contact Form 7. You can manage an unlimited number of contact forms. Each contact form has a unique ID and Contact Form 7 shortcode ([contact-form-7 ...]). To insert a contact form into a post or a text widget, insert the shortcode into the target."
-msgstr "Σε αυτή την οθόνη μπορείτε να διαχειριστείτε φόρμες που παρέχονται από το Contact Form 7. Μπορείτε να διαχειριστείτε απεριόριστο αριθμό φορμών επικοινωνίας. Κάθε φόρμα επικοινωνίας έχει μοναδικό ID και συντόμευση κώδικα (shortcode) Contact Form 7 ([contact-form-7 ...]). Για να εισάγετε μια φόρμα επικοινωνίας σε μία δημοσίευση ή μια μικροεφαρμογή κειμένου, εισάγετε τη συντόμευση κώδικα μέσα στο στόχο."
-
-#: admin/includes/help-tabs.php:35
-msgid "Form-tags"
-msgstr "Ετικέτες-Φόρμας"
-
-#: admin/includes/help-tabs.php:40
-msgid "Mail-tags"
-msgstr "Ετικέτες-Αλληλογραφίας"
-
-#: admin/includes/help-tabs.php:64
-msgid "<strong>Edit</strong> - Navigates to the editing screen for that contact form. You can also reach that screen by clicking on the contact form title."
-msgstr "<strong>Επεξεργασία</strong> - Πλοήγηση στην οθόνη επεξεργασίας για αυτή την φόρμα επικοινωνίας. Μπορείτε να μεταβείτε σε αυτή την οθόνη και με κλικ πάνω στον τίτλο της φόρμα επικοινωνίας."
-
-#: modules/text.php:205
-msgid "text"
-msgstr "κείμενο"
-
-#: modules/submit.php:55
-msgid "Submit Button"
-msgstr "Κουμπί Υποβολής"
-
-#: modules/submit.php:46
-msgid "submit"
-msgstr "υποβολή"
-
-#: modules/quiz.php:177
-msgid "quiz"
-msgstr "quiz"
-
-#: modules/acceptance.php:272 modules/checkbox.php:357 modules/date.php:216
-#: modules/file.php:270 modules/number.php:224 modules/quiz.php:231
-#: modules/really-simple-captcha.php:322 modules/recaptcha.php:503
-#: modules/select.php:243 modules/submit.php:88 modules/text.php:311
-#: modules/textarea.php:185
-msgid "Insert Tag"
-msgstr "Προσθήκη Ετικέτας"
-
-#: admin/includes/help-tabs.php:63
-msgid "Hovering over a row in the contact forms list will display action links that allow you to manage your contact form. You can perform the following actions:"
-msgstr "Κατά το πέρασμα του κέρσορα πάνω από μια σειρά στη λίστα των φορμών επικοινωνίας θα εμφανιστούν σύνδεσμοι οι οποίοι σας επιτρέπουν να διαχειριστείτε τη φόρμα επικοινωνίας σας. Μπορείτε να εκτελέσετε τις ακόλουθες ενέργειες:"
-
-#: modules/checkbox.php:293
-msgid "Generate a form-tag for a group of radio buttons. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισόδου ημερομηνίας. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/file.php:215
-msgid "Generate a form-tag for a file uploading field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο μεταφόρτωσης αρχείου. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/text.php:230
-msgid "Generate a form-tag for a single-line telephone number input field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής αριθμού τηλεφώνου μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/text.php:226
-msgid "Generate a form-tag for a single-line email address input field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής διεύθυνσης email μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/date.php:148
-msgid "Generate a form-tag for a date input field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισόδου ημερομηνίας. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/checkbox.php:332
-msgid "Make checkboxes exclusive"
-msgstr "Κάνε τα checkboxes αποκλειστικά"
-
-#: modules/date.php:177 modules/number.php:185 modules/text.php:260
-#: modules/textarea.php:163
-msgid "Use this text as the placeholder of the field"
-msgstr "Χρησιμοποιήστε αυτό το κείμενο σαν placeholder του πεδίου."
-
-#: admin/includes/help-tabs.php:73
-msgid "<strong>Additional Settings</strong> provides a place where you can customize the behavior of this contact form by adding code snippets."
-msgstr "<strong>Οι Πρόσθετες Ρυθμίσεις</strong> παρέχουν ένα χώρο που μπορείτει να παραμετροποιήσετε την συμπεριφορά της φόρμας επικοινωνίας με προσθήκη αποσπασμάτων κώδικα."
-
-#: modules/really-simple-captcha.php:270
-msgid "https://contactform7.com/captcha/"
-msgstr "https://contactform7.com/captcha/"
-
-#: modules/submit.php:55
-msgid "https://contactform7.com/submit-button/"
-msgstr "https://contactform7.com/submit-button/"
-
-#: admin/includes/editor.php:246
-msgid "https://contactform7.com/additional-settings/"
-msgstr "https://contactform7.com/additional-settings/"
-
-#: modules/text.php:233 modules/textarea.php:136
-msgid "https://contactform7.com/text-fields/"
-msgstr "https://contactform7.com/text-fields/"
-
-#. Plugin URI of the plugin/theme
-msgid "https://contactform7.com/"
-msgstr "https://contactform7.com/"
-
-#. Author URI of the plugin/theme
-msgid "https://ideasilo.wordpress.com/"
-msgstr "https://ideasilo.wordpress.com/"
-
-#: modules/acceptance.php:223
-msgid "https://contactform7.com/acceptance-checkbox/"
-msgstr "https://contactform7.com/acceptance-checkbox/"
-
-#: modules/checkbox.php:296 modules/select.php:187
-msgid "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
-msgstr "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
-
-#: modules/file.php:217
-msgid "https://contactform7.com/file-uploading-and-attachment/"
-msgstr "https://contactform7.com/file-uploading-and-attachment/"
-
-#: modules/date.php:150
-msgid "https://contactform7.com/date-field/"
-msgstr "https://contactform7.com/date-field/"
-
-#: modules/number.php:153
-msgid "https://contactform7.com/number-fields/"
-msgstr "https://contactform7.com/number-fields/"
-
-#: modules/quiz.php:187
-msgid "https://contactform7.com/quiz/"
-msgstr "https://contactform7.com/quiz/"
-
-#: modules/textarea.php:134
-msgid "Generate a form-tag for a multi-line text input field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής κειμένου πολλαπλών γραμμών. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/text.php:228
-msgid "Generate a form-tag for a single-line URL input field. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα πεδίο εισαγωγής URL μιας γραμμής. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/select.php:185
-msgid "Generate a form-tag for a drop-down menu. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα αναπτυσσόμενο μενού. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/quiz.php:185
-msgid "Generate a form-tag for a question-answer pair. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για ένα ζευγάρι ερωτήσεων-απαντήσεων. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/checkbox.php:362 modules/date.php:221 modules/number.php:229
-#: modules/select.php:248 modules/text.php:316 modules/textarea.php:190
-msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
-msgstr "Για να χρησιμοποιήσετε την τιμή εισαγωγής μέσω αυτού του πεδίου σε ένα πεδίο αλληλογραφίας, θα πρέπει να εισαγάγετε την αντίστοιχη ετικέτα αλληλογραφίας (%s) στο πεδίο στην καρτέλα Αλληλογραφία."
-
-#: modules/really-simple-captcha.php:268
-msgid "Generate form-tags for a CAPTCHA image and corresponding response input field. For more details, see %s."
-msgstr "Δημιουργήστε ετικέτες φόρμας για μια εικόνα CAPTCHA και το αντίστοιχο πεδίο εισαγωγής απόκρισης. Για περισσότερες λεπτομέρειες, δείτε %s."
 
 #: admin/includes/help-tabs.php:79
 msgid "There are also special mail-tags that have specific names, but don&#8217;t have corresponding form-tags. They are used to represent meta information of form submissions like the submitter&#8217;s IP address or the URL of the page."
@@ -1105,17 +1045,13 @@ msgstr "Ενώ οι ετικέτες φόρμας έχουν μια σχετικ
 msgid "A form-tag is a short code enclosed in square brackets used in a form content. A form-tag generally represents an input field, and its components can be separated into four parts: type, name, options, and values. Contact Form 7 supports several types of form-tags including text fields, number fields, date fields, checkboxes, radio buttons, menus, file-uploading fields, CAPTCHAs, and quiz fields."
 msgstr "Μια ετικέτα φόρμας είναι ένας σύντομος κώδικας που περικλείεται σε αγκύλες που χρησιμοποιούνται σε ένα περιεχόμενο φόρμας. Μια ετικέτα φόρμας αντιπροσωπεύει γενικά ένα πεδίο εισαγωγής και τα στοιχεία της μπορούν να χωριστούν σε τέσσερα μέρη: τύπος, όνομα, επιλογές και τιμές. Η Contact Form 7 υποστηρίζει διάφορους τύπους ετικετών φόρμας, όπως πεδία κειμένων, πεδία αριθμών, πεδία ημερομηνίας, πλαίσια ελέγχου, κουμπιά επιλογής, μενού, πεδία φόρτωσης αρχείων, εικόνες CAPTCHA και πεδία κουίζ."
 
-#: admin/includes/help-tabs.php:69
-msgid "<strong>Form</strong> is a content of HTML form. You can use arbitrary HTML, which is allowed inside a form element. You can also use Contact Form 7&#8217;s form-tags here."
-msgstr "Η <strong>Φόρμα</strong> είναι ένα περιεχόμενο της φόρμας HTML. Μπορείτε να χρησιμοποιήσετε αυθαίρετα HTML, το οποίο επιτρέπεται μέσα σε ένα στοιχείο φόρμας. Μπορείτε επίσης να χρησιμοποιήσετε τις ετικέτες φόρμας του Contact Form 7 εδώ."
+#: admin/includes/help-tabs.php:73
+msgid "<strong>Additional Settings</strong> provides a place where you can customize the behavior of this contact form by adding code snippets."
+msgstr "<strong>Οι Πρόσθετες Ρυθμίσεις</strong> παρέχουν ένα χώρο που μπορείτει να παραμετροποιήσετε την συμπεριφορά της φόρμας επικοινωνίας με προσθήκη αποσπασμάτων κώδικα."
 
-#: modules/checkbox.php:291
-msgid "Generate a form-tag for a group of checkboxes. For more details, see %s."
-msgstr "Δημιουργήστε μια ετικέτα φόρμας για μια ομάδα checkboxes. Για περισσότερες λεπτομέρειες, δείτε %s."
-
-#: modules/acceptance.php:221
-msgid "Generate a form-tag for an acceptance checkbox. For more details, see %s."
-msgstr "Δημιουργήστε ένα ετικέτα φόρμας για ένα αποδεκτό checkbox. Για περισσότερες λεπτομέρειες, δείτε %s."
+#: admin/includes/help-tabs.php:72
+msgid "In <strong>Messages</strong>, you can edit various types of messages used for this contact form. These messages are relatively short messages, like a validation error message you see when you leave a required field blank."
+msgstr "Στα <strong>Μηνύματα</strong>, μπορείτε να επεξεργαστείτε διάφορα είδη μηνυμάτων που χρησιμοποιούνται σε αυτή τη φόρμα επικοινωνίας. Είναι σχετικά μικρά μηνύματα, όπως το μήνυμα λάθους που βλέπετε όταν δεν έχετε συμπληρώσει ένα υποχρεωτικό πεδίο. "
 
 #: admin/includes/help-tabs.php:71
 msgid "<strong>Mail (2)</strong> is an additional mail template that works similar to Mail. Mail (2) is different in that it is sent only when Mail has been sent successfully."
@@ -1125,171 +1061,194 @@ msgstr "Το <strong>Αλληλογραφία (2)</strong> είναι ένα π�
 msgid "<strong>Mail</strong> manages a mail template (headers and message body) that this contact form will send when users submit it. You can use Contact Form 7&#8217;s mail-tags here."
 msgstr "Το <strong>Αλληλογραφία</strong> διαχειρίζεται ένα πρότυπο αλληλογραφίας (κεφαλίδες και σώμα μηνυμάτων) που θα αποστέλλει αυτή η φόρμα επικοινωνίας όταν οι χρήστες την υποβάλλουν. Μπορείτε να χρησιμοποιήσετε εδώ τις ετικέτες αλληλογραφίας του Contact Form 7."
 
+#: admin/includes/help-tabs.php:69
+msgid "<strong>Form</strong> is a content of HTML form. You can use arbitrary HTML, which is allowed inside a form element. You can also use Contact Form 7&#8217;s form-tags here."
+msgstr "Η <strong>Φόρμα</strong> είναι ένα περιεχόμενο της φόρμας HTML. Μπορείτε να χρησιμοποιήσετε αυθαίρετα HTML, το οποίο επιτρέπεται μέσα σε ένα στοιχείο φόρμας. Μπορείτε επίσης να χρησιμοποιήσετε τις ετικέτες φόρμας του Contact Form 7 εδώ."
+
+#: admin/includes/help-tabs.php:68
+msgid "<strong>Title</strong> is the title of a contact form. This title is only used for labeling a contact form, and can be edited."
+msgstr "<strong>Τίτλος</strong> είναι ο τίτλος της φόρμας επικοινωνίας. Αυτός ο τίτλος χρησιμοποιείται για την επισήμανση της φόρμας επικοινωνίας και μπορεί να επεξεργαστεί."
+
+#: admin/includes/help-tabs.php:67
+msgid "On this screen, you can edit a contact form. A contact form is comprised of the following components:"
+msgstr "Σε αυτή την οθόνη, μπορείτε να επεξεργαστεί την φόρμα επικοινωνίας. Η φόρμα επικοινωνίαε αποτελείται απ' τα ακόλουθα μέρη:"
+
+#: admin/includes/help-tabs.php:65
+msgid "<strong>Duplicate</strong> - Clones that contact form. A cloned contact form inherits all content from the original, but has a different ID."
+msgstr "<strong>Αντιγραφή</strong> - Αντιγράφει αυτή την φόρμα επικοινωνίας. Μια αντεγραμμένη φόρμα κληρονομεί όλο το περιεχόμενο απο την αρχική αλλά έχει διαφορετικό ID."
+
+#: admin/includes/help-tabs.php:64
+msgid "<strong>Edit</strong> - Navigates to the editing screen for that contact form. You can also reach that screen by clicking on the contact form title."
+msgstr "<strong>Επεξεργασία</strong> - Πλοήγηση στην οθόνη επεξεργασίας για αυτή την φόρμα επικοινωνίας. Μπορείτε να μεταβείτε σε αυτή την οθόνη και με κλικ πάνω στον τίτλο της φόρμα επικοινωνίας."
+
+#: admin/includes/help-tabs.php:63
+msgid "Hovering over a row in the contact forms list will display action links that allow you to manage your contact form. You can perform the following actions:"
+msgstr "Κατά το πέρασμα του κέρσορα πάνω από μια σειρά στη λίστα των φορμών επικοινωνίας θα εμφανιστούν σύνδεσμοι οι οποίοι σας επιτρέπουν να διαχειριστείτε τη φόρμα επικοινωνίας σας. Μπορείτε να εκτελέσετε τις ακόλουθες ενέργειες:"
+
+#: admin/includes/help-tabs.php:61
+msgid "On this screen, you can manage contact forms provided by Contact Form 7. You can manage an unlimited number of contact forms. Each contact form has a unique ID and Contact Form 7 shortcode ([contact-form-7 ...]). To insert a contact form into a post or a text widget, insert the shortcode into the target."
+msgstr "Σε αυτή την οθόνη μπορείτε να διαχειριστείτε φόρμες που παρέχονται από το Contact Form 7. Μπορείτε να διαχειριστείτε απεριόριστο αριθμό φορμών επικοινωνίας. Κάθε φόρμα επικοινωνίας έχει μοναδικό ID και συντόμευση κώδικα (shortcode) Contact Form 7 ([contact-form-7 ...]). Για να εισάγετε μια φόρμα επικοινωνίας σε μία δημοσίευση ή μια μικροεφαρμογή κειμένου, εισάγετε τη συντόμευση κώδικα μέσα στο στόχο."
+
+#: admin/includes/help-tabs.php:40
+msgid "Mail-tags"
+msgstr "Ετικέτες-Αλληλογραφίας"
+
+#: admin/includes/help-tabs.php:35
+msgid "Form-tags"
+msgstr "Ετικέτες-Φόρμας"
+
+#: admin/includes/help-tabs.php:21
+msgid "Available Actions"
+msgstr "Διαθέσιμες ενέργειες"
+
+#: admin/includes/help-tabs.php:16 admin/includes/help-tabs.php:30
+#: admin/includes/help-tabs.php:49
+msgid "Overview"
+msgstr "Επισκόπηση "
+
+#: admin/includes/editor.php:248
+msgid "You can add customization code snippets here. For details, see %s."
+msgstr "Μπορείτε να προσθέσετε κομμάτια κώδικα για παραμετροποίηση εδώ. Για λεπτομέρειες,δείτε %s."
+
+#: admin/includes/editor.php:246
+msgid "https://contactform7.com/additional-settings/"
+msgstr "https://contactform7.com/additional-settings/"
+
+#: admin/includes/editor.php:194
+msgid "File Attachments"
+msgstr "Επισυναπτόμενα αρχεία"
+
+#: admin/includes/editor.php:188
+msgid "Use HTML content type"
+msgstr "Αποστολή σε μορφή HTML"
+
+#: admin/includes/editor.php:186
+msgid "Exclude lines with blank mail-tags from output"
+msgstr "Εξαίρεση γραμμών με κενές ετικέτες ταχυδρομείου από την εμφάνιση"
+
+#: admin/includes/editor.php:181
+msgid "Message Body"
+msgstr "Σώμα Μηνύματος"
+
+#: admin/includes/editor.php:172
+msgid "Additional Headers"
+msgstr "Επιπλέον Κεφαλίδες"
+
+#: admin/includes/editor.php:163 includes/contact-form-template.php:40
+msgid "Subject"
+msgstr "Θέμα"
+
+#: admin/includes/editor.php:154
+msgid "From"
+msgstr "Από"
+
+#: admin/includes/editor.php:145
+msgid "To"
+msgstr "Προς"
+
+#: admin/includes/editor.php:135
+msgid "In the following fields, you can use these mail-tags:"
+msgstr "Στα ακόλουθα πεδία, μπορείτε να χρησιμοποιήσετε τα ακόλουθα mail-tag:"
+
+#: admin/includes/editor.php:119
+msgid "Mail (2) is an additional mail template often used as an autoresponder."
+msgstr "Αλληλογραφία (2) είναι ένα επιπλέον πρότυπο αλληγραφίας συχνά χρησιμοποιείται ως αυτόματος απαντητής."
+
+#: admin/includes/editor.php:85
+msgid "Use Mail (2)"
+msgstr "Χρησιμοποιήσε Αλληλογραφία(2)"
+
+#: admin/includes/editor.php:84
+msgid "Mail (2)"
+msgstr "Αλληλογραφία (2)"
+
+#: admin/includes/class-contact-forms-list-table.php:217
+msgid "Y/m/d"
+msgstr "d/m/Y"
+
 #. translators: %s: time since the creation of the contact form
 #: admin/includes/class-contact-forms-list-table.php:215
 msgid "%s ago"
 msgstr "πριν από %s"
 
-#. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
-#: admin/admin.php:574
-msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
-msgstr "<strong>Το Contact Form 7 %1$s απαιτεί έκδοση του WordPress %2$s ή μεγαλύτερη.</strong> Παρακαλούμε <a href=\"%3$s\">αναβαθμίστε το WordPress</a> πρώτα."
-
-#: admin/admin.php:37 admin/admin.php:378 admin/edit-contact-form.php:46
-msgid "Add New"
-msgstr "Προσθήκη νέας"
-
-#: admin/admin.php:36 admin/edit-contact-form.php:36
-msgid "Add New Contact Form"
-msgstr "Προσθήκη νέας φόρμας επικοινωνίας"
-
-#: admin/edit-contact-form.php:229 admin/includes/editor.php:247
-#: admin/includes/editor.php:252
-msgid "Additional Settings"
-msgstr "Επιπρόσθετες ρυθμίσεις"
-
-#: admin/includes/class-contact-forms-list-table.php:14
-msgid "Author"
-msgstr "Συντάκτης"
-
-#: admin/admin.php:22
-msgid "Contact"
-msgstr "Επικοινωνία"
-
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0)  #-#-#-#-#
-#. Plugin Name of the plugin/theme
-#: admin/admin.php:21 modules/flamingo.php:167
-msgid "Contact Form 7"
-msgstr "Contact Form 7"
-
-#: admin/admin.php:29 admin/admin.php:371 includes/contact-form.php:31
-msgid "Contact Forms"
-msgstr "Φόρμες επικοινωνίας"
-
-#: admin/admin.php:496
-msgid "Contact form created."
-msgstr "Η φόρμα επικοινωνίας δημιουργήθηκε."
-
-#: admin/admin.php:500
-msgid "Contact form deleted."
-msgstr "Η φόρμα επικοινωνίας διαγράφηκε."
-
-#: admin/admin.php:498
-msgid "Contact form saved."
-msgstr "Η φόρμα επικοινωνίας αποθηκεύτηκε."
-
-#: admin/includes/class-contact-forms-list-table.php:15
-msgid "Date"
-msgstr "Ημερομηνία"
-
-#: admin/edit-contact-form.php:154
-#: admin/includes/class-contact-forms-list-table.php:92
-msgid "Delete"
-msgstr "Διαγραφή"
-
-#: admin/includes/welcome-panel.php:16
-msgid "Dismiss"
-msgstr "Απόκρυψη"
-
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
-msgid "Docs"
-msgstr "Τεκμηρίωση"
-
-#: admin/edit-contact-form.php:139
-#: admin/includes/class-contact-forms-list-table.php:156
-msgid "Duplicate"
-msgstr "Δημιουργία διπλότυπου"
-
-#: admin/includes/class-contact-forms-list-table.php:146
-msgid "Edit"
-msgstr "Επεξεργασία"
+#: admin/includes/class-contact-forms-list-table.php:204
+msgid "Y/m/d g:i:s A"
+msgstr "d/m/Y g:i:s A"
 
 #. translators: %s: title of contact form
 #: admin/includes/class-contact-forms-list-table.php:117
 msgid "Edit &#8220;%s&#8221;"
 msgstr "Επεξεργασία &#8220;%s&#8221;"
 
-#: admin/admin.php:28 admin/edit-contact-form.php:38
-msgid "Edit Contact Form"
-msgstr "Επεξεργασία φόρμας επικοινωνίας"
+#: admin/includes/class-contact-forms-list-table.php:146
+msgid "Edit"
+msgstr "Επεξεργασία"
 
-#: admin/admin.php:189
-msgid "Error in deleting."
-msgstr "Σφάλμα κατά την διαγραφή."
+#: admin/includes/class-contact-forms-list-table.php:15
+msgid "Date"
+msgstr "Ημερομηνία"
 
-#: admin/includes/editor.php:186
-msgid "Exclude lines with blank mail-tags from output"
-msgstr "Εξαίρεση γραμμών με κενές ετικέτες ταχυδρομείου από την εμφάνιση"
-
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
-msgid "FAQ"
-msgstr "Συχνές ερωτήσεις"
-
-#: admin/edit-contact-form.php:205 admin/includes/editor.php:61
-msgid "Form"
-msgstr "Φόρμα"
-
-#: admin/edit-contact-form.php:209 admin/includes/editor.php:93
-msgid "Mail"
-msgstr "Αλληλογραφία"
-
-#: admin/includes/editor.php:84
-msgid "Mail (2)"
-msgstr "Αλληλογραφία (2)"
-
-#: admin/edit-contact-form.php:213 admin/includes/editor.php:222
-msgid "Messages"
-msgstr "Μηνύματα"
-
-#: admin/edit-contact-form.php:26 admin/edit-contact-form.php:132
-#: modules/recaptcha.php:211
-msgid "Save"
-msgstr "Αποθήκευση"
-
-#: admin/admin.php:397
-msgid "Search Contact Forms"
-msgstr "Αναζήτηση φορμών επικοινωνίας"
-
-#. translators: %s: search keywords
-#: admin/admin.php:384
-msgid "Search results for &#8220;%s&#8221;"
-msgstr "Αποτελέσματα αναζήτησης για &#8220;%s&#8221;"
-
-#: admin/includes/editor.php:129
-msgid "Setting Up Mail"
-msgstr "Ρύθμιση Αλληλογραφίας"
-
-#: admin/admin.php:554
-msgid "Settings"
-msgstr "Ρυθμίσεις"
+#: admin/includes/class-contact-forms-list-table.php:14
+msgid "Author"
+msgstr "Συντάκτης"
 
 #: admin/includes/class-contact-forms-list-table.php:13
 msgid "Shortcode"
 msgstr "Σύντομος κώδικας"
 
-#: admin/includes/editor.php:163 includes/contact-form-template.php:40
-msgid "Subject"
-msgstr "Θέμα"
+#: admin/includes/class-contact-forms-list-table.php:12
+msgid "Title"
+msgstr "Τίτλος"
+
+#: admin/edit-contact-form.php:229 admin/includes/editor.php:247
+#: admin/includes/editor.php:252
+msgid "Additional Settings"
+msgstr "Επιπρόσθετες ρυθμίσεις"
+
+#. translators: %d: number of additional settings
+#: admin/edit-contact-form.php:227
+msgid "Additional Settings (%d)"
+msgstr "Επιπρόσθετες Ρυθμίσεις (%d)"
+
+#: admin/edit-contact-form.php:213 admin/includes/editor.php:222
+msgid "Messages"
+msgstr "Μηνύματα"
+
+#: admin/edit-contact-form.php:209 admin/includes/editor.php:93
+msgid "Mail"
+msgstr "Αλληλογραφία"
+
+#: admin/edit-contact-form.php:205 admin/includes/editor.php:61
+msgid "Form"
+msgstr "Φόρμα"
 
 #: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
 msgid "Support"
 msgstr "Υποστήριξη"
 
-#: admin/includes/class-contact-forms-list-table.php:12
-msgid "Title"
-msgstr "Τίτλος"
+#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
+msgid "https://contactform7.com/support/"
+msgstr "https://contactform7.com/support/"
 
-#: admin/includes/editor.php:188
-msgid "Use HTML content type"
-msgstr "Αποστολή σε μορφή HTML"
+#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
+msgid "FAQ"
+msgstr "Συχνές ερωτήσεις"
 
-#: admin/includes/class-contact-forms-list-table.php:217
-msgid "Y/m/d"
-msgstr "d/m/Y"
+#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
+msgid "https://contactform7.com/faq/"
+msgstr "https://contactform7.com/faq/"
 
-#: admin/includes/class-contact-forms-list-table.php:204
-msgid "Y/m/d g:i:s A"
-msgstr "d/m/Y g:i:s A"
+#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
+msgid "Docs"
+msgstr "Τεκμηρίωση"
+
+#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
+msgid "https://contactform7.com/docs/"
+msgstr "https://contactform7.com/docs/"
+
+#: admin/edit-contact-form.php:170
+msgid "Information"
+msgstr "Πληροφορία"
 
 #: admin/edit-contact-form.php:154
 msgid ""
@@ -1299,54 +1258,15 @@ msgstr ""
 "Είστε έτοιμος να διαγράψετε αυτή τη φόρμα επικοινωνίας.\n"
 "'Ακύρωση' για να σταματήσετε, 'ΟΚ' για διαγραφή."
 
-#: admin/admin.php:185
-msgid "You are not allowed to delete this item."
-msgstr "Δεν έχετε δικαίωμα να διαγράψετε αυτό το στοιχείο."
+#: admin/edit-contact-form.php:154
+#: admin/includes/class-contact-forms-list-table.php:92
+msgid "Delete"
+msgstr "Διαγραφή"
 
-#: admin/admin.php:79 admin/admin.php:143
-msgid "You are not allowed to edit this item."
-msgstr "Δεν έχετε δικαίωμα να επεξεργαστείτε αυτό το στοιχείο."
-
-#: admin/includes/editor.php:172
-msgid "Additional Headers"
-msgstr "Επιπλέον Κεφαλίδες"
-
-#: admin/includes/editor.php:154
-msgid "From"
-msgstr "Από"
-
-#: admin/edit-contact-form.php:170
-msgid "Information"
-msgstr "Πληροφορία"
-
-#: admin/edit-contact-form.php:81
-msgid "Enter title here"
-msgstr "Εισάγετε τον τίτλο εδώ."
-
-#: admin/admin.php:312
-msgid "The changes you made will be lost if you navigate away from this page."
-msgstr "Οι αλλαγές που κάνατε θα χαθούν αν φύγετε από αυτή τη σελίδα."
-
-#: admin/admin.php:593
-msgid "You are not allowed to edit this contact form."
-msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη φόρμα επικοινωνίας."
-
-#. translators: %d: number of additional settings
-#: admin/edit-contact-form.php:227
-msgid "Additional Settings (%d)"
-msgstr "Επιπρόσθετες Ρυθμίσεις (%d)"
-
-#: admin/includes/editor.php:181
-msgid "Message Body"
-msgstr "Σώμα Μηνύματος"
-
-#: admin/admin.php:48
-msgid "Integration"
-msgstr "Ενσωμάτωση"
-
-#: admin/admin.php:47 admin/admin.php:466
-msgid "Integration with Other Services"
-msgstr "Ενσωμάτωση με τις υπόλοιπες υπηρεσίες."
+#: admin/edit-contact-form.php:139
+#: admin/includes/class-contact-forms-list-table.php:156
+msgid "Duplicate"
+msgstr "Δημιουργία διπλότυπου"
 
 #: admin/edit-contact-form.php:125
 msgid "Status"
@@ -1360,29 +1280,18 @@ msgstr "Μπορείτε επίσης να χρησιμοποιήσετε συν
 msgid "Copy this shortcode and paste it into your post, page, or text widget content:"
 msgstr "Αντιγράψτε την συντόμευση κώδικα (shortcode) και επικολλήστε την στο άρθρο, την σελίδα ή την μικροεφαρμογή κειμένου σας:"
 
-#: admin/includes/editor.php:145
-msgid "To"
-msgstr "Προς"
+#: admin/edit-contact-form.php:81
+msgid "Enter title here"
+msgstr "Εισάγετε τον τίτλο εδώ."
 
-#: admin/includes/editor.php:135
-msgid "In the following fields, you can use these mail-tags:"
-msgstr "Στα ακόλουθα πεδία, μπορείτε να χρησιμοποιήσετε τα ακόλουθα mail-tag:"
+#: admin/edit-contact-form.php:26 admin/edit-contact-form.php:132
+#: modules/recaptcha.php:211
+msgid "Save"
+msgstr "Αποθήκευση"
 
-#: admin/includes/editor.php:85
-msgid "Use Mail (2)"
-msgstr "Χρησιμοποιήσε Αλληλογραφία(2)"
-
-#: admin/includes/editor.php:119
-msgid "Mail (2) is an additional mail template often used as an autoresponder."
-msgstr "Αλληλογραφία (2) είναι ένα επιπλέον πρότυπο αλληγραφίας συχνά χρησιμοποιείται ως αυτόματος απαντητής."
-
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
-msgid "https://contactform7.com/docs/"
-msgstr "https://contactform7.com/docs/"
-
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
-msgid "https://contactform7.com/faq/"
-msgstr "https://contactform7.com/faq/"
+#: admin/admin.php:593
+msgid "You are not allowed to edit this contact form."
+msgstr "Δεν επιτρέπεται να επεξεργαστείτε αυτή τη φόρμα επικοινωνίας."
 
 #: admin/includes/welcome-panel.php:45
 msgid "https://contactform7.com/save-submitted-messages-with-flamingo/"
@@ -1392,18 +1301,102 @@ msgstr "https://contactform7.com/save-submitted-messages-with-flamingo/"
 msgid "https://contactform7.com/spam-filtering-with-akismet/"
 msgstr "https://contactform7.com/spam-filtering-with-akismet/"
 
-#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
-msgid "https://contactform7.com/support/"
-msgstr "https://contactform7.com/support/"
+#: admin/includes/editor.php:129
+msgid "Setting Up Mail"
+msgstr "Ρύθμιση Αλληλογραφίας"
 
-#: admin/includes/welcome-panel.php:31
-msgid "Contact Form 7 needs your support."
-msgstr "Το Contact Form 7 χρειάζεται την υποστήριξη σου."
+#: admin/includes/editor.php:128
+msgid "https://contactform7.com/setting-up-mail/"
+msgstr "https://contactform7.com/setting-up-mail/"
 
 #: admin/includes/welcome-panel.php:35
 msgid "https://contactform7.com/donate/"
 msgstr "https://contactform7.com/donate/"
 
-#: admin/includes/editor.php:128
-msgid "https://contactform7.com/setting-up-mail/"
-msgstr "https://contactform7.com/setting-up-mail/"
+#: admin/includes/welcome-panel.php:31
+msgid "Contact Form 7 needs your support."
+msgstr "Το Contact Form 7 χρειάζεται την υποστήριξη σου."
+
+#: admin/includes/welcome-panel.php:16
+msgid "Dismiss"
+msgstr "Απόκρυψη"
+
+#. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
+#: admin/admin.php:574
+msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
+msgstr "<strong>Το Contact Form 7 %1$s απαιτεί έκδοση του WordPress %2$s ή μεγαλύτερη.</strong> Παρακαλούμε <a href=\"%3$s\">αναβαθμίστε το WordPress</a> πρώτα."
+
+#: admin/admin.php:554
+msgid "Settings"
+msgstr "Ρυθμίσεις"
+
+#: admin/admin.php:500
+msgid "Contact form deleted."
+msgstr "Η φόρμα επικοινωνίας διαγράφηκε."
+
+#: admin/admin.php:498
+msgid "Contact form saved."
+msgstr "Η φόρμα επικοινωνίας αποθηκεύτηκε."
+
+#: admin/admin.php:496
+msgid "Contact form created."
+msgstr "Η φόρμα επικοινωνίας δημιουργήθηκε."
+
+#: admin/admin.php:397
+msgid "Search Contact Forms"
+msgstr "Αναζήτηση φορμών επικοινωνίας"
+
+#. translators: %s: search keywords
+#: admin/admin.php:384
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "Αποτελέσματα αναζήτησης για &#8220;%s&#8221;"
+
+#: admin/admin.php:312
+msgid "The changes you made will be lost if you navigate away from this page."
+msgstr "Οι αλλαγές που κάνατε θα χαθούν αν φύγετε από αυτή τη σελίδα."
+
+#: admin/admin.php:189
+msgid "Error in deleting."
+msgstr "Σφάλμα κατά την διαγραφή."
+
+#: admin/admin.php:185
+msgid "You are not allowed to delete this item."
+msgstr "Δεν έχετε δικαίωμα να διαγράψετε αυτό το στοιχείο."
+
+#: admin/admin.php:79 admin/admin.php:143
+msgid "You are not allowed to edit this item."
+msgstr "Δεν έχετε δικαίωμα να επεξεργαστείτε αυτό το στοιχείο."
+
+#: admin/admin.php:48
+msgid "Integration"
+msgstr "Ενσωμάτωση"
+
+#: admin/admin.php:47 admin/admin.php:466
+msgid "Integration with Other Services"
+msgstr "Ενσωμάτωση με τις υπόλοιπες υπηρεσίες."
+
+#: admin/admin.php:37 admin/admin.php:378 admin/edit-contact-form.php:46
+msgid "Add New"
+msgstr "Προσθήκη νέας"
+
+#: admin/admin.php:36 admin/edit-contact-form.php:36
+msgid "Add New Contact Form"
+msgstr "Προσθήκη νέας φόρμας επικοινωνίας"
+
+#: admin/admin.php:29 admin/admin.php:371 includes/contact-form.php:31
+msgid "Contact Forms"
+msgstr "Φόρμες επικοινωνίας"
+
+#: admin/admin.php:28 admin/edit-contact-form.php:38
+msgid "Edit Contact Form"
+msgstr "Επεξεργασία φόρμας επικοινωνίας"
+
+#: admin/admin.php:22
+msgid "Contact"
+msgstr "Επικοινωνία"
+
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.1)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin/admin.php:21 modules/flamingo.php:167
+msgid "Contact Form 7"
+msgstr "Contact Form 7"

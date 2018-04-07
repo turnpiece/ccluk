@@ -30,37 +30,37 @@ msgstr "Europe/Copenhagen"
 msgid "This changeset cannot be further modified."
 msgstr "Dette ændringssæt kan ikke ændres yderligere."
 
-#: wp-admin/about.php:262
+#: wp-admin/about.php:316
 msgid "Improvements to Roles and Capabilities"
 msgstr "Forbedringer til roller og muligheder"
 
-#: wp-admin/about.php:263
+#: wp-admin/about.php:317
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Nye muligheder er blevet indført som giver gradueret håndtering af plugins og sprogfiler. Derudover er skifte websted funktionen i multisites blevet finjusteret for at opdatere de tilgængelige roller og muligheder på en mere pålidelig og sammenhængende måde."
 
-#: wp-admin/about.php:259
+#: wp-admin/about.php:313
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "Wordpress 4.9 indeholder en opgraderet version af MediaElement.js, som fjerner afhængigheden af JQuery, forbedrer tilgængeligheden, moderniserer brugerfladen, samt retter en del fejl. "
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:312
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js opgraderet til 4.2.6"
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:309
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "Vi har indført et nyt koderedigering bibliotek, CodeMirror, til brug i kernen. Brug det til at forbedre enhver kodeskrivning eller redigeringsoplevelse i dine plugins, såsom CSS eller JavaScript include-felter."
 
-#: wp-admin/about.php:254
+#: wp-admin/about.php:308
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror kan bruges i dine temaer og plugins"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:248
+#: wp-admin/about.php:302
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "Vi har lavet en række forbedringer til Customizer JS API i WordPress 4.9, og fjernet en masse besværlige svagheder og i stedet bare gjort det lige så nemt at bruge som PHP API. Der er også nye basis kontrolskabeloner, en dato/tid kontrol, og sektion/panel/global notifikationer for at nævne nogel få. <a href=\"%s\">Tjek den komplette liste.</a>"
 
-#: wp-admin/about.php:244
+#: wp-admin/about.php:298
 msgid "Customizer JS API Improvements"
 msgstr "Forbedringer i Tilpasserens JS API"
 
@@ -68,7 +68,7 @@ msgstr "Forbedringer i Tilpasserens JS API"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Disse data bliver brugt til at lave generelle forbedringer i WordPress, hvilket hjælper med at beskytte dit websted ved at finde og automatisk installere nye opdateringer. Det bruges også til at beregne statistik, som det der vises på <a href=\"%s\">WordPress.org statistikside</a>."
 
-#: wp-admin/about.php:157
+#: wp-admin/about.php:211
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "Når du redigerer temaer og plugins direkte, vil WordPress 4.9 høfligt advare dig om denne farlige øvelse. Den vil anbefale dig at tage backup af dine filer, inden du gemmer, så de ikke overskrives ved den næste opdatering. Gå den sikre vej: Dit fremtidige jeg vil takke dig. Dit team og dine kunder vil takke dig."
 
@@ -144,53 +144,53 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Indtast adressen her, hvis du <a href=\"%s\">ønsker, at dit websteds startside skal være forskellig fra din WordPress-installationsmappe.</a>."
 
-#: wp-admin/about.php:227
+#: wp-admin/about.php:281
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://da.wordpress.org/plugins/gutenberg/"
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:237
+#: wp-admin/about.php:291
 msgid "Developer Happiness %s"
 msgstr "Udviklerlykke %s"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:280
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "WordPress arbejder på en ny måde, hvorpå du kan skabe og kontrollere dit indhold og vi vil virkelig værdsætte din hjælp. Er du interesseret i at være en <a href=\"%s\">tidlig tester</a> eller blive involveret i Gutenberg projektet? <a href=\"%s\">Bidrag på GitHub</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:220
+#: wp-admin/about.php:274
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Giv en hånd med Gutenberg %s"
 
-#: wp-admin/about.php:195
+#: wp-admin/about.php:249
 msgid "More Reliable Theme Switching"
 msgstr "Mere pålideligt temaskifte"
 
-#: wp-admin/about.php:187
+#: wp-admin/about.php:241
 msgid "Site Building Improvements"
 msgstr "Websted opbygning forbedringer"
 
-#: wp-admin/about.php:172
+#: wp-admin/about.php:226
 msgid "The New Gallery Widget"
 msgstr "Den nye galleri-widget"
 
-#: wp-admin/about.php:164
+#: wp-admin/about.php:218
 msgid "Even More Widget Updates"
 msgstr "Endnu flere widget-opdateringer"
 
-#: wp-admin/about.php:134
+#: wp-admin/about.php:188
 msgid "Coding Enhancements"
 msgstr "Kode-forbedringer"
 
-#: wp-admin/about.php:127
+#: wp-admin/about.php:181
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Blev du lokket væk fra skrivebordet, før du gemte kladden til dit nye design? Fortvivl ikke, når du vender tilbage, så vil WordPress 4.9 høfligt spørge, om du har lyst til at gemme dine ikke-gemte ændringer."
 
-#: wp-admin/about.php:126
+#: wp-admin/about.php:180
 msgid "A Prompt to Protect Your Work"
 msgstr "En påmindelse for at beskytte dit arbejde."
 
-#: wp-admin/about.php:119
+#: wp-admin/about.php:173
 msgid "Design Locking To Guard Your Changes"
 msgstr "Design låser for at beskytte dine ændringer"
 
@@ -202,75 +202,75 @@ msgstr "Vi tager privatliv og gennemsigtighed meget alvorligt. For at lære mere
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "Fra tid til anden kan det være at dit WordPress-websted sender data til &#8212; inklusive, men ikke begrænset til &#8212; den version af WordPress du bruger, og en liste af installerede plugins og temaer."
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:257
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Blev du forvirret over de trin, du skal igennem for at lave en menu? Det bliver du ikke længere! Vi har taget brugerfladen og glattet den ud, så oprettelsen af en menu er meget smidigere. En nyligt opdateret tekst vil hjælpe dig."
 
-#: wp-admin/about.php:202
+#: wp-admin/about.php:256
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Bedre menuinstruktioner = mindre forvirring"
 
-#: wp-admin/about.php:196
+#: wp-admin/about.php:250
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "Når du skifter tema, så kan widgets nogle gange godt få den idé, at de skal skifte placering. Forbedringer i WordPress 4.9 tilbyder en mere vedholdende menu- og widgetplacering, når du beslutter, at det er tid til et nyt tema. Derudover kan du forhåndsvise installerede temaer eller downloade, installere og forhåndsvise temaer på den rigtige måde. Intet er mere praktisk end at være i stand til at forhåndsvise før du sætter noget i søen."
 
-#: wp-admin/about.php:180
+#: wp-admin/about.php:234
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Vil du tilføje medier til din tekstwidget? Indlejr billeder, video og lyd direkte ind i en widget sammen med din tekst med vores simple, men brugbare, Tilføj medier knap. Wauw!"
 
-#: wp-admin/about.php:179
+#: wp-admin/about.php:233
 msgid "Press a Button, Add Media"
 msgstr "Tryk på en knap, Tilføj medier"
 
-#: wp-admin/about.php:173
+#: wp-admin/about.php:227
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "I den gradvist stigende forbedring af de medieændringer som så dagens lys i WordPress 4.8, kan du nu tilføje et galleri via en widget. Jep! "
 
-#: wp-admin/about.php:156
+#: wp-admin/about.php:210
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Advarsel: Mulig fare forude!"
 
-#: wp-admin/about.php:150
+#: wp-admin/about.php:204
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Den frygtede hvide skærm. Du kan undgå den, når du arbejder med tema- og pluginkode, fordi WordPress 4.9 vil advare dig, hvis du prøve at gemme en fejl. Du vil sove bedre om natten."
 
-#: wp-admin/about.php:149
+#: wp-admin/about.php:203
 msgid "Sandbox for Safety"
 msgstr "Sandkasse til sikkerhed"
 
-#: wp-admin/about.php:143
+#: wp-admin/about.php:197
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Du har et problem med visningen, men kan ikke finde ud af, hvad der gik galt med det CSS, du så kærligt skrev. Med syntaksfremhævelse og fejltjek ved CSS-redigering og i den brugerdefinerede HTML-widget, som blev introduceret i WordPress 4.8.1 vil du kunne lokalisere kodefejl hurtigt. Du vil med garanti kunne se din kode igennem meget nemmere og luge ud i og rette kodefejl hurtigere."
 
-#: wp-admin/about.php:142
+#: wp-admin/about.php:196
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Syntaksfremhævning og fejltjek? Ja, tak!"
 
-#: wp-admin/about.php:120
+#: wp-admin/about.php:174
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Har du nogensinde oplevet et scenarie, hvor to designere går ind i et projekt og designer A underkender designer Bs smukke ændringer. WordPress 4.9 og muligheden for at låse designet (minder om muligheden for at låse indlæg) sikrer dit kladdedesign, så ingen kan lave ændringer i det eller slette dit hårde arbejde."
 
-#: wp-admin/about.php:113
+#: wp-admin/about.php:167
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Har du brug for feedback om foreslåede designændringer? WordPress 4.9 giver dig et link til forhåndsvisning, som du kan sende til dit team og kunder, så du kan indsamle og integrere feedback, før du planlægger at lade ændringerne gå i luften. Kan vi kalde det samarbejde&#43;&#43;?"
 
-#: wp-admin/about.php:112
+#: wp-admin/about.php:166
 msgid "Collaborate with Design Preview Links"
 msgstr "Samarbejd med links til forhåndsvisning af designet"
 
-#: wp-admin/about.php:106
+#: wp-admin/about.php:160
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "Ja, du læste rigtigt. På samme måde som du kan lave udkast til og revidere indlæg, og planlægge at de går i luften på den tid og den dato, du vælger, kan du nu pille ved dit websteds design og planlægge at disse designændringer kan gå i luften, når du ønsker det."
 
-#: wp-admin/about.php:97
+#: wp-admin/about.php:151
 msgid "Customizer Workflow Improved"
 msgstr "Tilpasserens arbejdsgange er forbedret"
 
-#: wp-admin/about.php:84
+#: wp-admin/about.php:138
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Velkommen til en forbedret arbejdsgang for tilpasseren med designudkast, fastlåsning, planlægning og links til forhåndsvisning. Derudover vil syntaksfremhævning af kode og fejltjek give dig en smidig og ren opbygning af dit websted. Og hvis det ikke er sejt nok, så har vi også en fed, ny galleriwidget og forbedringer af temavisning og temaskifte."
 
-#: wp-admin/about.php:105
+#: wp-admin/about.php:159
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Lav udkast og planlæg designtilretninger af webstedet"
 
@@ -280,7 +280,7 @@ msgid "Thank you for updating to the latest version! WordPress %s will smooth yo
 msgstr "Tak fordi du opdaterede til den seneste version! WordPress %s vil smidiggøre dine arbejdsgange med designet og beskytte dig mod kodefejl."
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:79
+#: wp-admin/about.php:133
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Store tilpasserforbedringer, tjek af kodefejl og mere! %s"
 
@@ -550,7 +550,7 @@ msgstr "Ingen beskrivelse"
 msgid "%s Active Installations"
 msgstr "%s aktive installationer"
 
-#: wp-admin/includes/class-wp-users-list-table.php:492
+#: wp-admin/includes/class-wp-users-list-table.php:496
 msgctxt "name"
 msgid "Unknown"
 msgstr "Ubekendt"
@@ -1697,7 +1697,7 @@ msgid "(Currently set to: %s)"
 msgstr "(på nuværende tidspunkt sat til: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:390
+#: wp-admin/about.php:444
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>Version %s</strong> tog hånd om ét sikkerhedsproblem."
 
@@ -1719,15 +1719,15 @@ msgstr "Du kan ændre dit profilbillede på <a href=\"%s\">Gravatar</a>."
 msgid "Profile Picture"
 msgstr "Profilbillede"
 
-#: wp-admin/about.php:384
+#: wp-admin/about.php:438
 msgid "Security Releases"
 msgstr "Sikkerhedsudgivelser"
 
-#: wp-admin/about.php:381
+#: wp-admin/about.php:435
 msgid "Maintenance Releases"
 msgstr "Vedligeholdelsesudgivelser"
 
-#: wp-admin/about.php:34 wp-admin/about.php:387
+#: wp-admin/about.php:34 wp-admin/about.php:441
 msgid "Maintenance and Security Releases"
 msgstr "Vedligeholdelses- og sikkerhedsudgivelser"
 
@@ -1775,7 +1775,7 @@ msgid "We&#8217;re going to use this information to create a %s file."
 msgstr "Vi vil bruge disse informationer til at oprette en %s fil."
 
 #. translators: %s: wp-content/uploads
-#: wp-admin/options-media.php:112
+#: wp-admin/options-media.php:114
 msgid "Default is %s"
 msgstr "Standard er %s"
 
@@ -2077,7 +2077,7 @@ msgstr "Visningstilstand"
 msgid "No role"
 msgstr "Ingen rolle"
 
-#: wp-admin/includes/class-wp-users-list-table.php:566
+#: wp-admin/includes/class-wp-users-list-table.php:570
 msgctxt "no user roles"
 msgid "None"
 msgstr "Ingen"
@@ -2399,7 +2399,7 @@ msgstr[1] "Dit tema understøtter %s menuer. Vælg hvilken menu, der skal vises 
 msgid "Live Preview &#8220;%s&#8221;"
 msgstr "Live forhåndsvisning &#8220;%s&#8221;"
 
-#: wp-admin/includes/class-wp-users-list-table.php:505
+#: wp-admin/includes/class-wp-users-list-table.php:509
 msgid "%s post by this author"
 msgid_plural "%s posts by this author"
 msgstr[0] "%s indlæg af denne forfatter"
@@ -2910,7 +2910,7 @@ msgstr ""
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/misc.php:1161
+#: wp-admin/includes/misc.php:1163
 msgid ""
 "Howdy ###USERNAME###,\n"
 "\n"
@@ -5267,7 +5267,7 @@ msgstr "GB"
 msgid "MB"
 msgstr "MB"
 
-#: wp-admin/includes/misc.php:1208
+#: wp-admin/includes/misc.php:1210
 msgid "[%s] New Admin Email Address"
 msgstr "[%s] Ny admin e-mail adresse"
 
@@ -5538,12 +5538,13 @@ msgid "Show Toolbar when viewing site"
 msgstr "Vis værktøjslinje på webstedet"
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:407
+#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
+#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:461
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Hvis du vil vide mere, så læs <a href=\"%s\">udgivelsesnoterne</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:395
+#: wp-admin/about.php:57 wp-admin/about.php:75 wp-admin/about.php:449
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Version %1$s</strong> rettede %2$s fejl."
@@ -5552,7 +5553,8 @@ msgstr[1] "<strong>Version %1$s</strong> rettede %2$s fejl."
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:57 wp-admin/about.php:403
+#: wp-admin/about.php:39 wp-admin/about.php:93 wp-admin/about.php:111
+#: wp-admin/about.php:457
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>Version %1$s</strong> lukkede nogle sikkerhedshuller og rettede %2$s fejl."
@@ -5560,7 +5562,7 @@ msgstr[1] "<strong>Version %1$s</strong> lukkede nogle sikkerhedshuller og rette
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:399
+#: wp-admin/about.php:453
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>Version %1$s</strong> lukkede et sikkerhedshul og rettede %2$s fejl."
@@ -5576,19 +5578,19 @@ msgid "What&#8217;s New"
 msgstr "Hvad er nyt"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:392
+#: wp-admin/about.php:446
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>Version %s</strong> tog sig af nogle sikkerhedsproblemer."
 
-#: wp-admin/about.php:380
+#: wp-admin/about.php:434
 msgid "Maintenance Release"
 msgstr "Vedligeholdelsesudgivelse"
 
-#: wp-admin/about.php:383
+#: wp-admin/about.php:437
 msgid "Security Release"
 msgstr "Sikkerhedsudgivelse"
 
-#: wp-admin/about.php:386
+#: wp-admin/about.php:440
 msgid "Maintenance and Security Release"
 msgstr "Vedligeholdelse- og sikkerhedsudgivelse"
 
@@ -5596,7 +5598,7 @@ msgstr "Vedligeholdelse- og sikkerhedsudgivelse"
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "På dette skærmbillede kan du vælge din permalinkstruktur. Du kan vælge mellem gængse indstillinger eller oprette en brugerdefineret URL-struktur."
 
-#: wp-admin/about.php:273
+#: wp-admin/about.php:327
 msgid "Return to Updates"
 msgstr "Tilbage til opdateringer"
 
@@ -5872,11 +5874,11 @@ msgstr "Da dette er en Multisite-installation, kan du tilføje konti, der allere
 msgid "Welcome to WordPress %s"
 msgstr "Velkommen til WordPress %s"
 
-#: wp-admin/about.php:273
+#: wp-admin/about.php:327
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Tilbage til Kontrolpanel &rarr; Opdateringer"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:330
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Gå til Kontrolpanel &rarr; Forside"
 
@@ -7728,7 +7730,7 @@ msgstr "Indtast venligst navnet på en eksisterende menu."
 msgid "View All"
 msgstr "Vis alle"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:330
 msgid "Go to Dashboard"
 msgstr "Gå til kontrolpanelet"
 
@@ -8064,15 +8066,15 @@ msgstr "Alle kan registrere sig"
 msgid "Media Settings"
 msgstr "Medieindstillinger"
 
-#: wp-admin/options-media.php:67 wp-admin/options-media.php:78
+#: wp-admin/options-media.php:69 wp-admin/options-media.php:80
 msgid "Max Width"
 msgstr "Maksimumbredde"
 
-#: wp-admin/options-media.php:108
+#: wp-admin/options-media.php:110
 msgid "Store uploads in this folder"
 msgstr "Gem uploads i denne mappe"
 
-#: wp-admin/options-media.php:118
+#: wp-admin/options-media.php:120
 msgid "Full URL path to files"
 msgstr "Fuld URL-sti til filer"
 
@@ -8554,7 +8556,7 @@ msgstr "Yderligere rettigheder"
 msgid "New Password"
 msgstr "Ny adgangskode"
 
-#: wp-admin/options-media.php:94
+#: wp-admin/options-media.php:96
 msgid "Embeds"
 msgstr "Indlejringer"
 
@@ -8640,7 +8642,7 @@ msgstr "For at skrive indlæg til WordPress via e-mail skal du oprette en hemmel
 msgid "Latest"
 msgstr "Seneste"
 
-#: wp-admin/options-media.php:60
+#: wp-admin/options-media.php:62
 msgid "Crop thumbnail to exact dimensions (normally thumbnails are proportional)"
 msgstr "Beskær miniaturer til bestemte størrelser (normalt er miniaturer proportionelle)"
 
@@ -8848,31 +8850,31 @@ msgstr "Måned og navn"
 msgid "You should update your .htaccess now."
 msgstr "Du bør opdatere din .htaccess nu."
 
-#: wp-admin/options-media.php:131
+#: wp-admin/options-media.php:133
 msgid "Organize my uploads into month- and year-based folders"
 msgstr "Organiser mine uploads i mapper efter måneds- og årsbaserede mapper"
 
-#: wp-admin/options-media.php:120
+#: wp-admin/options-media.php:122
 msgid "Configuring this is optional. By default, it should be blank."
 msgstr "Det er valgfrit, om du vil indstille dette. Som standard skal feltet være tomt."
 
-#: wp-admin/options-media.php:101
+#: wp-admin/options-media.php:103
 msgid "Uploading Files"
 msgstr "Upload af filer"
 
-#: wp-admin/options-media.php:76 wp-admin/options-media.php:77
+#: wp-admin/options-media.php:78 wp-admin/options-media.php:79
 msgid "Large size"
 msgstr "Stor størrelse"
 
-#: wp-admin/options-media.php:70 wp-admin/options-media.php:81
+#: wp-admin/options-media.php:72 wp-admin/options-media.php:83
 msgid "Max Height"
 msgstr "Maksimumhøjde"
 
-#: wp-admin/options-media.php:65 wp-admin/options-media.php:66
+#: wp-admin/options-media.php:67 wp-admin/options-media.php:68
 msgid "Medium size"
 msgstr "Medium størrelse"
 
-#: wp-admin/options-media.php:53
+#: wp-admin/options-media.php:53 wp-admin/options-media.php:54
 msgid "Thumbnail size"
 msgstr "Miniaturestørrelse"
 

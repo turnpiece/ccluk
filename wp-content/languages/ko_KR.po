@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-10 14:11:52+0000\n"
+"PO-Revision-Date: 2018-03-15 02:27:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,6 +35,22 @@ msgstr ","
 #: wp-includes/class-wp-locale.php:220
 msgid "number_format_decimal_point"
 msgstr "."
+
+#: wp-includes/functions.php:2607
+msgid "The link you followed has expired."
+msgstr "링크가 만료되었습니다."
+
+#: wp-includes/class-wp-customize-manager.php:515
+#: wp-includes/script-loader.php:566
+msgid "You need a higher level of permission."
+msgstr "더 높은 권한이 필요합니다."
+
+#: wp-includes/class-wp-customize-manager.php:450
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2617
+#: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
+#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:839
+msgid "Something went wrong."
+msgstr "뭔가 잘못되었습니다."
 
 #. translators: %s: User who is customizing the changeset in customizer.
 #: wp-includes/class-wp-customize-manager.php:3970
@@ -70,7 +86,7 @@ msgid "%1$s is not a valid property of Object."
 msgstr "%1$s은(는) 오브젝트의 유효한 속성이 아닙니다."
 
 #. translators: %s: URL to Add Themes admin screen
-#: wp-includes/script-loader.php:601
+#: wp-includes/script-loader.php:602
 msgid "You won&#8217;t be able to install new themes from here yet since your install requires SFTP credentials. For now, please <a href=\"%s\">add themes in the admin</a>."
 msgstr "SFTP 정보가 필요하므로 여기서 새 테마를 설치할 수 없습니다. 우선 <a href=\"%s\">관리자 화면에서 테마를 설치하세요</a>."
 
@@ -94,7 +110,7 @@ msgstr "&#8220;다음&#8221;을 클릭해서 새 메뉴에 링크를 추가하�
 msgid "Sorry, we can&#8217;t load the video at the supplied URL. Please check that the URL is for a supported video file (%s) or stream (e.g. YouTube and Vimeo)."
 msgstr "죄송합니다. 제공된 URL에 비디오를 로드 할 수 없습니다. URL이 지원되는 비디오 파일(%s)이나 스트림(예: 유투브와 비미오)인지 확인해주세요."
 
-#: wp-includes/script-loader.php:690
+#: wp-includes/script-loader.php:691
 msgctxt "post action/button label"
 msgid "Schedule"
 msgstr "예약"
@@ -125,11 +141,11 @@ msgstr "사이드바에 내비게이션 메뉴 추가하기"
 
 #. translators: %s: Display name of the user who has taken over the changeset
 #. in customizer.
-#: wp-includes/script-loader.php:578
+#: wp-includes/script-loader.php:579
 msgid "%s has taken over and is currently customizing."
 msgstr "%s님이 넘겨받아 현재 사용자 정의 중입니다."
 
-#: wp-includes/script-loader.php:572
+#: wp-includes/script-loader.php:573
 msgid "Looks like something&#8217;s gone wrong. Wait a couple seconds, and then try again."
 msgstr "뭔가 잘못 된 것 같습니다. 잠시 기다렸다가 다시 시도해주세요."
 
@@ -340,32 +356,32 @@ msgstr "&larr; 카테고리로 돌아가기"
 msgid "&larr; Back to Link Categories"
 msgstr "&larr; 링크 카테고리로 돌아가기"
 
-#: wp-includes/script-loader.php:856
+#: wp-includes/script-loader.php:857
 msgid "Color value"
 msgstr "색상 값"
 
-#: wp-includes/script-loader.php:852
+#: wp-includes/script-loader.php:853
 msgid "Clear color"
 msgstr "색상 지우기"
 
-#: wp-includes/script-loader.php:798
+#: wp-includes/script-loader.php:799
 msgid "Installation Failed!"
 msgstr "설치 실패!"
 
-#: wp-includes/script-loader.php:598
+#: wp-includes/script-loader.php:599
 msgid "Sorry, you can&#8217;t preview new themes when you have changes scheduled or saved as a draft. Please publish your changes, or wait until they publish to preview new themes."
 msgstr "죄송합니다. 예약된 변경사항이 있거나 임시글로 저장한 경우 새로운 테마를 미리보기 할 수 없습니다. 미리보기 하려면 변경사항을 발행하거나 발행될 때가지 기다려주세요."
 
-#: wp-includes/script-loader.php:597
+#: wp-includes/script-loader.php:598
 msgid "Schedule your customization changes to publish (\"go live\") at a future date."
 msgstr "예정된 날짜에 사용자 정의한 변경사항이 발행(공개)되도록 예약하세요."
 
-#: wp-includes/script-loader.php:590
+#: wp-includes/script-loader.php:591
 msgid "Homepage and posts page must be different."
 msgstr "홈페이지와 글 페이지는 달라야 합니다."
 
 #. translators: %d: error count
-#: wp-includes/script-loader.php:586 wp-includes/script-loader.php:588
+#: wp-includes/script-loader.php:587 wp-includes/script-loader.php:589
 #: wp-includes/widgets/class-wp-widget-custom-html.php:217
 #: wp-includes/widgets/class-wp-widget-custom-html.php:219
 msgid "There is %d error which must be fixed before you can save."
@@ -373,23 +389,23 @@ msgid_plural "There are %d errors which must be fixed before you can save."
 msgstr[0] "%d개의 오류가 있으며 수정해야 저장할 수 있습니다."
 
 #. translators: %s: URL to the Customizer to load the autosaved version
-#: wp-includes/script-loader.php:580
+#: wp-includes/script-loader.php:581
 msgid "There is a more recent autosave of your changes than the one you are previewing. <a href=\"%s\">Restore the autosave</a>"
 msgstr "미리보기 하고 있는 것보다 더 최근에 자동저장된 변경사항이 있습니다. <a href=\"%s\">자동저장 복구하기</a>"
 
-#: wp-includes/script-loader.php:576
+#: wp-includes/script-loader.php:577
 msgid "Are you sure you&#8217;d like to discard your unpublished changes?"
 msgstr "발행되지 않은 변경사항을 정말로 폐기하시겠습니까?"
 
-#: wp-includes/script-loader.php:575
+#: wp-includes/script-loader.php:576
 msgid "Reverting unpublished changes&hellip;"
 msgstr "발행되지 않은 변경사항으로 되돌리는 중&hellip;"
 
-#: wp-includes/script-loader.php:574
+#: wp-includes/script-loader.php:575
 msgid "Setting up your live preview. This may take a bit."
 msgstr "실시간 미리보기 설정중. 시간이 조금 걸립니다."
 
-#: wp-includes/script-loader.php:573
+#: wp-includes/script-loader.php:574
 msgid "Downloading your new theme&hellip;"
 msgstr "새로운 테마 다운로드 중&hellip;"
 
@@ -1057,7 +1073,7 @@ msgstr "WordPress.org 테마"
 msgid "Installed themes"
 msgstr "설치된 테마"
 
-#: wp-includes/script-loader.php:604
+#: wp-includes/script-loader.php:605
 msgid "Publish Settings"
 msgstr "설정 발행하기"
 
@@ -1100,7 +1116,7 @@ msgstr "인증 문제가 있습니다. 새로고침 하고 다시 해주세요."
 
 #. translators: %s: number of invalid settings
 #: wp-includes/class-wp-customize-manager.php:2707
-#: wp-includes/script-loader.php:593 wp-includes/script-loader.php:595
+#: wp-includes/script-loader.php:594 wp-includes/script-loader.php:596
 msgid "Unable to save due to %s invalid setting."
 msgid_plural "Unable to save due to %s invalid settings."
 msgstr[0] "%s 유효하지 않은 설정으로 인해 저장할 수 없습니다."
@@ -1201,7 +1217,7 @@ msgid "(no author)"
 msgstr "(글쓴이 없음)"
 
 #. translators: %s: the name of a city
-#: wp-includes/script-loader.php:1201
+#: wp-includes/script-loader.php:1202
 msgid "City updated. Listing events near %s."
 msgstr "도시 업데이트 됨. %s 인근 이벤트 목록"
 
@@ -1212,19 +1228,19 @@ msgstr "도시 업데이트 됨. %s 인근 이벤트 목록"
 #. locale that would be recognizable to most users. Use only the city name
 #. itself, without any region or country. Use the endonym (native locale name)
 #. instead of the English name if possible.
-#: wp-includes/script-loader.php:1197
+#: wp-includes/script-loader.php:1198
 msgid "We couldn&#8217;t locate %s. Please try another nearby city. For example: Kansas City; Springfield; Portland."
 msgstr "%s을(를) 찾을 수 없습니다. 다른 인근 도시를 선택해보세요. 예: 캔자스 시; 스프링필드; 포트랜트"
 
-#: wp-includes/script-loader.php:1180
+#: wp-includes/script-loader.php:1181
 msgid "Attend an upcoming event near you."
 msgstr "인근의 예정된 이벤트 참석하기."
 
-#: wp-includes/script-loader.php:1179
+#: wp-includes/script-loader.php:1180
 msgid "An error occurred. Please try again."
 msgstr "에러가 발생했습니다. 다시 해보세요."
 
-#: wp-includes/script-loader.php:1178
+#: wp-includes/script-loader.php:1179
 msgid "Enter your closest city to find nearby events."
 msgstr "인근 이벤트를 찾으려면 가까운 도시를 입력하세요."
 
@@ -1434,62 +1450,62 @@ msgstr "오디오가 선택되지 않았습니다"
 msgid "Displays an audio player."
 msgstr "오디오 플레이어 표시."
 
-#: wp-includes/script-loader.php:827
+#: wp-includes/script-loader.php:828
 msgctxt "theme"
 msgid "Deleted!"
 msgstr "삭제됨!"
 
-#: wp-includes/script-loader.php:826
+#: wp-includes/script-loader.php:827
 msgctxt "plugin"
 msgid "Deleted!"
 msgstr "삭제됨!"
 
-#: wp-includes/script-loader.php:797
+#: wp-includes/script-loader.php:798
 msgctxt "theme"
 msgid "Installed!"
 msgstr "설치됨!"
 
-#: wp-includes/script-loader.php:796
+#: wp-includes/script-loader.php:797
 msgctxt "plugin"
 msgid "Installed!"
 msgstr "설치됨!"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:794
+#: wp-includes/script-loader.php:795
 msgctxt "plugin"
 msgid "Install %s now"
 msgstr "지금 %s 설치하기"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:784
+#: wp-includes/script-loader.php:785
 msgctxt "plugin"
 msgid "%s update failed"
 msgstr "%s 업데이트 실패"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:782
+#: wp-includes/script-loader.php:783
 msgctxt "plugin"
 msgid "%s updated!"
 msgstr "%s 업데이트 됨!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:780
+#: wp-includes/script-loader.php:781
 msgctxt "plugin"
 msgid "Updating %s..."
 msgstr "%s 업데이트 중..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:775
+#: wp-includes/script-loader.php:776
 msgctxt "plugin"
 msgid "Update %s now"
 msgstr "지금 %s 업데이트 하기"
 
-#: wp-includes/script-loader.php:771
+#: wp-includes/script-loader.php:772
 msgctxt "theme"
 msgid "Updated!"
 msgstr "업데이트 됨!"
 
-#: wp-includes/script-loader.php:770
+#: wp-includes/script-loader.php:771
 msgctxt "plugin"
 msgid "Updated!"
 msgstr "업데이트 됨!"
@@ -1953,7 +1969,7 @@ msgid "Invalid page template."
 msgstr "유효하지 않은 페이지 템플릿."
 
 #: wp-includes/post.php:3207 wp-includes/rest-api.php:1151
-#: wp-includes/script-loader.php:605
+#: wp-includes/script-loader.php:606
 msgid "Invalid date."
 msgstr "유효하지 않은 날짜."
 
@@ -2134,7 +2150,7 @@ msgstr "죄송합니다. 글을 붙박이로 만들 권한이 없습니다."
 msgid "Reassign the deleted user's posts and links to this user ID."
 msgstr "삭제된 사용자의 글과 링크를 이 사용자의 ID에 재배정하기."
 
-#: wp-includes/script-loader.php:581
+#: wp-includes/script-loader.php:582
 msgid "This theme doesn&#8217;t support video headers on this page. Navigate to the front page or another page that supports video headers."
 msgstr "이 테마는 이 페이지에서 비디오 헤더를 지원하지 않습니다. 비디오 헤더를 지원하는 전면페이지나 다른 페이지로 이동하세요."
 
@@ -2268,12 +2284,12 @@ msgstr "사용자명에 유효하지 않은 글자가 포함돼있습니다."
 msgid "Invalid user parameter(s)."
 msgstr "유효하지 않은 사용자 파라미터"
 
-#: wp-includes/script-loader.php:570
+#: wp-includes/script-loader.php:571
 msgctxt "label for hide controls button without length constraints"
 msgid "Show Controls"
 msgstr "패널 보이기"
 
-#: wp-includes/script-loader.php:569
+#: wp-includes/script-loader.php:570
 msgctxt "label for hide controls button without length constraints"
 msgid "Hide Controls"
 msgstr "패널 감추기"
@@ -2411,19 +2427,19 @@ msgstr "이것이 작동하려면 ID가 필요합니다."
 msgid "Homepage"
 msgstr "홈페이지"
 
-#: wp-includes/script-loader.php:675
+#: wp-includes/script-loader.php:676
 msgid "Term removed."
 msgstr "텀 제거됨."
 
-#: wp-includes/script-loader.php:674
+#: wp-includes/script-loader.php:675
 msgid "Term added."
 msgstr "텀 추가됨."
 
-#: wp-includes/script-loader.php:673
+#: wp-includes/script-loader.php:674
 msgid "Term selected."
 msgstr "텀 선택됨."
 
-#: wp-includes/script-loader.php:672
+#: wp-includes/script-loader.php:673
 msgid "Remove term:"
 msgstr "텀 제거:"
 
@@ -3623,7 +3639,7 @@ msgstr "선택한 메뉴 편집"
 msgid "Warning: the link has been inserted but may have errors. Please test it."
 msgstr "주의: 링크가 추가됐지만 에러가 있을 수 있으니 테스트 해주세요."
 
-#: wp-includes/script-loader.php:766
+#: wp-includes/script-loader.php:767
 msgid "Search Results"
 msgstr "검색 결과"
 
@@ -3680,73 +3696,73 @@ msgid "Inexistent terms."
 msgstr "존재하지 않는 텀(term)."
 
 #. translators: %s: Importer name
-#: wp-includes/script-loader.php:837
+#: wp-includes/script-loader.php:838
 msgid "Run %s"
 msgstr "%s 실행 "
 
-#: wp-includes/script-loader.php:835
+#: wp-includes/script-loader.php:836
 msgid "Run Importer"
 msgstr "가져오기 실행"
 
 #. translators: %s: Activation URL
-#: wp-includes/script-loader.php:816
+#: wp-includes/script-loader.php:817
 msgid "Importer installed successfully. <a href=\"%s\">Run importer</a>"
 msgstr "가져오기가 성공적으로 설치되었습니다. <a href=\"%s\">가져오기 실행</a>"
 
-#: wp-includes/script-loader.php:834
+#: wp-includes/script-loader.php:835
 msgctxt "theme"
 msgid "Activate %s"
 msgstr "%s 활성화"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:834
+#: wp-includes/script-loader.php:835
 msgctxt "theme"
 msgid "Network Activate %s"
 msgstr "%s 네트워크 활성화"
 
-#: wp-includes/script-loader.php:832
+#: wp-includes/script-loader.php:833
 msgctxt "plugin"
 msgid "Activate %s"
 msgstr "%s 활성화"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:832
+#: wp-includes/script-loader.php:833
 msgctxt "plugin"
 msgid "Network Activate %s"
 msgstr "%s 네트워크 활성화"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:812
+#: wp-includes/script-loader.php:813
 msgctxt "theme"
 msgid "%s installation failed"
 msgstr "%s 설치 실패"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:810
+#: wp-includes/script-loader.php:811
 msgctxt "plugin"
 msgid "%s installation failed"
 msgstr "%s 설치 실패"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:808
+#: wp-includes/script-loader.php:809
 msgctxt "theme"
 msgid "%s installed!"
 msgstr "%s 설치됨!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:806
+#: wp-includes/script-loader.php:807
 msgctxt "plugin"
 msgid "%s installed!"
 msgstr "%s 설치됨!"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:804
+#: wp-includes/script-loader.php:805
 msgctxt "theme"
 msgid "Installing %s..."
 msgstr "%s 설치중..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:802
+#: wp-includes/script-loader.php:803
 msgctxt "plugin"
 msgid "Installing %s..."
 msgstr "%s 설치중..."
@@ -3755,7 +3771,7 @@ msgstr "%s 설치중..."
 msgid "Sorry, you are not allowed to access user data on this site."
 msgstr "죄송합니다. 이 사이트에서 사용자 데이터에 접근할 권한이 없습니다."
 
-#: wp-includes/script-loader.php:841
+#: wp-includes/script-loader.php:842
 msgid "Number of plugins found: %d"
 msgstr "검색된 플러그인 수: %d"
 
@@ -3810,7 +3826,7 @@ msgid "Tan"
 msgstr "갈색"
 
 #. translators: %s: Error string for a failed installation
-#: wp-includes/script-loader.php:800
+#: wp-includes/script-loader.php:801
 msgid "Installation failed: %s"
 msgstr "설치 실패: %s"
 
@@ -3845,61 +3861,61 @@ msgstr "MySQL에서 오류 메시지를 가져올 수 없습니다."
 msgid "Edit Menu"
 msgstr "메뉴 편집"
 
-#: wp-includes/script-loader.php:1126
+#: wp-includes/script-loader.php:1127
 msgid "Today"
 msgstr "오늘"
 
-#: wp-includes/script-loader.php:829
+#: wp-includes/script-loader.php:830
 msgid "Network Activate"
 msgstr "네트워크 활성화"
 
 #. translators: %s: Error string for a failed deletion
-#: wp-includes/script-loader.php:825
+#: wp-includes/script-loader.php:826
 msgid "Deletion failed: %s"
 msgstr "삭제 실패: %s"
 
-#: wp-includes/script-loader.php:823
+#: wp-includes/script-loader.php:824
 msgid "Deleting..."
 msgstr "삭제 중..."
 
-#: wp-includes/script-loader.php:822
+#: wp-includes/script-loader.php:823
 msgid "Caution: These themes may be active on other sites in the network. Are you sure you want to proceed?"
 msgstr ""
 "주의: 이 테마들은 네트워크의 다른 사이트에서 활성화 돼있을지도 모릅니다.\n"
 "정말로 계속하길 원하시나요?"
 
-#: wp-includes/script-loader.php:821
+#: wp-includes/script-loader.php:822
 msgid "Are you sure you want to delete the selected plugins and their data?"
 msgstr "선택된 플러그인과 해당 데이터를 정말로 삭제하시렵니까?"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:820
+#: wp-includes/script-loader.php:821
 msgid "Are you sure you want to delete %s and its data?"
 msgstr "%s와 해당 데이터를 정말로 삭제하시렵니까?"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:818
+#: wp-includes/script-loader.php:819
 msgid "Are you sure you want to delete %s?"
 msgstr "%s을(를) 정말로 삭제하시렵니까?"
 
-#: wp-includes/script-loader.php:773
+#: wp-includes/script-loader.php:774
 msgid "Update Now"
 msgstr "지금 업데이트"
 
-#: wp-includes/script-loader.php:768
+#: wp-includes/script-loader.php:769
 msgid "Please select at least one item to perform this action on."
 msgstr "이 작업을 수행하려면 적어도 하나의 항목을 선택하십시오."
 
-#: wp-includes/script-loader.php:767
+#: wp-includes/script-loader.php:768
 msgid "You do not appear to have any plugins available at this time."
 msgstr "현재 이용 가능한 플러그인이 없는 것 같습니다."
 
 #. translators: %s: Search string
-#: wp-includes/script-loader.php:765
+#: wp-includes/script-loader.php:766
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221;에 대한 검색 결과"
 
-#: wp-includes/script-loader.php:654
+#: wp-includes/script-loader.php:655
 msgid ""
 "Are you sure you want to do this?\n"
 "The comment changes you made will be lost."
@@ -3917,7 +3933,7 @@ msgid "Password strength unknown"
 msgstr "비밀번호 강도 알 수 없음"
 
 #: wp-includes/rest-api/class-wp-rest-server.php:911
-#: wp-includes/script-loader.php:132 wp-includes/script-loader.php:643
+#: wp-includes/script-loader.php:132 wp-includes/script-loader.php:644
 msgid "Sorry, you are not allowed to do that."
 msgstr "죄송하지만, 실행 권한이 없습니다."
 
@@ -3967,12 +3983,12 @@ msgstr "죄송하지만, 사용자를 목록화할 권한이 없습니다."
 
 #: wp-includes/class-wp-customize-manager.php:2300
 #: wp-includes/class-wp-customize-setting.php:579
-#: wp-includes/script-loader.php:606
+#: wp-includes/script-loader.php:607
 msgid "Invalid value."
 msgstr "유효하지 않은 값."
 
 #: wp-includes/class-wp-customize-manager.php:516
-#: wp-includes/script-loader.php:566
+#: wp-includes/script-loader.php:567
 msgid "Sorry, you are not allowed to customize this site."
 msgstr "죄송하지만, 이 사이트를 사용자 정의할 권한이 없습니다."
 
@@ -4001,7 +4017,7 @@ msgstr "링크 선택됨."
 msgid "%s is required to strip image meta."
 msgstr "이미지 메타를 제거하기 위해 %s이(가) 필요합니다."
 
-#: wp-includes/script-loader.php:756
+#: wp-includes/script-loader.php:757
 msgid "Plugin details"
 msgstr "플러그인 상세"
 
@@ -4025,13 +4041,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "1결과 찾음. 위아래로 이동하려면 화살표 키를 사용하세요."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2232
+#: wp-includes/comment-template.php:2231
 msgid "Logged in as %s. Edit your profile."
 msgstr "%s로(으로) 로그인함. 프로필 편집하기."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2229
+#: wp-includes/comment-template.php:2228
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">%3$s로(으로) 로그인 함</a>. <a href=\"%4$s\">로그아웃?</a>"
 
@@ -4078,11 +4094,11 @@ msgstr "<strong>에러</strong>: 이메일 필드가 비어있습니다."
 msgid "Unregistering a built-in taxonomy is not allowed."
 msgstr "내장된 택소노미의 등록을 해제하는 것은 허용되지 않습니다."
 
-#: wp-includes/script-loader.php:664
+#: wp-includes/script-loader.php:665
 msgid "Drag boxes here"
 msgstr "박스를 여기에 끌어놓으세요"
 
-#: wp-includes/script-loader.php:571
+#: wp-includes/script-loader.php:572
 msgid "(Untitled)"
 msgstr "(제목 없음)"
 
@@ -4301,7 +4317,7 @@ msgstr "<a href=\"%s\">워드프레스 디버깅 하기 페이지</a>를 참고�
 msgid "<strong>ERROR</strong>: %1$s in %2$s can only contain numbers, letters, and underscores."
 msgstr "<strong>오류</strong>:%2$s 의 %1$s 는 숫자, 문자 그리고 밑줄만 포함 가능 합니다."
 
-#: wp-includes/script-loader.php:744 wp-includes/script-loader.php:750
+#: wp-includes/script-loader.php:745 wp-includes/script-loader.php:751
 msgid "Changes saved."
 msgstr "변경사항이 저장됐습니다."
 
@@ -4611,7 +4627,7 @@ msgstr "유효하지 않은 단축코드 이름: %s. 빈 스페이스 또는 유
 msgid "Invalid shortcode name: Empty name given."
 msgstr "유효하지 않은 단축코드 이름: 빈 스페이스가 사용됨."
 
-#: wp-includes/script-loader.php:702
+#: wp-includes/script-loader.php:703
 msgid "Permalink saved"
 msgstr "고유주소 저장됨"
 
@@ -4951,7 +4967,7 @@ msgstr "섹션  토글: %s"
 #. Asian characters), enter 'characters_excluding_spaces' or
 #. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
 #. into your own language.
-#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1088
+#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1089
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
@@ -5244,11 +5260,11 @@ msgid "Attempting to parse a shortcode without a valid callback: %s"
 msgstr "올바른 콜백함수가 없는 숏코드를 분석하는 중: %s"
 
 #. translators: %s: Error string for a failed update
-#: wp-includes/script-loader.php:778
+#: wp-includes/script-loader.php:779
 msgid "Update Failed: %s"
 msgstr "업데이트 실패: %s"
 
-#: wp-includes/script-loader.php:653
+#: wp-includes/script-loader.php:654
 msgid ""
 "Are you sure you want to edit this comment?\n"
 "The changes you made will be lost."
@@ -5621,20 +5637,20 @@ msgstr "https://codex.wordpress.org/"
 msgid "No %1$s was set in the arguments array for the \"%2$s\" sidebar. Defaulting to \"%3$s\". Manually set the %1$s to \"%3$s\" to silence this notice and keep existing sidebar content."
 msgstr "\"%2$s\" 사이드바 배열 매개변수의 %1$s 가 설정되있지 않습니다. \"%3$s\" 기본설정으로 이행하고있습니다. 이 통지를 침묵와 사이드바 내용을 존재 유지하길 위해 %1$s \"%3$s\"으로 수동 설정을 하시길 바랍니다."
 
-#: wp-includes/script-loader.php:839
+#: wp-includes/script-loader.php:840
 msgid "Connection lost or the server is busy. Please try again later."
 msgstr "서버랑 연결이 끊어졌거나 중지된 상태입니다. 잠시 후 다시 시도 해주시길 바랍니다."
 
-#: wp-includes/script-loader.php:791
+#: wp-includes/script-loader.php:792
 msgid "Updates may not complete if you navigate away from this page."
 msgstr "이 페이지에서 다른 곳으로 이동하면 현재 진행 중인 플러그인 업데이트가 완료되지 않을수도 있습니다."
 
-#: wp-includes/script-loader.php:776
+#: wp-includes/script-loader.php:777
 msgid "Update Failed!"
 msgstr "업데이트 실패!"
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:790
+#: wp-includes/script-loader.php:791
 msgid "Update canceled."
 msgstr "업데이트 취소됨."
 
@@ -5658,37 +5674,37 @@ msgstr[0] "%2$s에 대한 %1$s 댓글"
 msgid "<span>Previewing:</span> %s"
 msgstr "<span>미리보기:</span> %s"
 
-#: wp-includes/script-loader.php:567
+#: wp-includes/script-loader.php:568
 msgid "Site Preview"
 msgstr "사이트 미리보기"
 
-#: wp-includes/script-loader.php:769
+#: wp-includes/script-loader.php:770
 msgid "Updating..."
 msgstr "업데이트 중..."
 
-#: wp-includes/script-loader.php:792
+#: wp-includes/script-loader.php:793
 msgid "Install Now"
 msgstr "지금 설치하기"
 
-#: wp-includes/script-loader.php:795
+#: wp-includes/script-loader.php:796
 msgid "Installing..."
 msgstr "설치중..."
 
-#: wp-includes/script-loader.php:813
+#: wp-includes/script-loader.php:814
 msgid "Installing... please wait."
 msgstr "설치중... 기다려주세요."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:786
+#: wp-includes/script-loader.php:787
 msgid "Updating... please wait."
 msgstr "업데이트 중...잠시 기다려 주세요."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:788
+#: wp-includes/script-loader.php:789
 msgid "Update completed successfully."
 msgstr "업데이트 성공."
 
-#: wp-includes/script-loader.php:814
+#: wp-includes/script-loader.php:815
 msgid "Installation completed successfully."
 msgstr "설치 완료 성공."
 
@@ -5860,7 +5876,7 @@ msgid "Theme Details"
 msgstr "테마 상세"
 
 #: wp-includes/customize/class-wp-customize-theme-control.php:118
-#: wp-includes/script-loader.php:828
+#: wp-includes/script-loader.php:829
 msgid "Live Preview"
 msgstr "실시간 미리보기"
 
@@ -5951,7 +5967,7 @@ msgstr "글 내비게이션"
 msgid "Newer posts"
 msgstr "새 글"
 
-#: wp-includes/script-loader.php:1130
+#: wp-includes/script-loader.php:1131
 msgid "Previous"
 msgstr "이전"
 
@@ -6244,7 +6260,7 @@ msgid "%s: %l."
 msgstr "%s: %l."
 
 #: wp-includes/class-wp-customize-nav-menus.php:427
-#: wp-includes/script-loader.php:888
+#: wp-includes/script-loader.php:889
 msgctxt "missing menu item navigation label"
 msgid "(no label)"
 msgstr "(레이블 없음)"
@@ -6253,7 +6269,7 @@ msgstr "(레이블 없음)"
 msgid "This site is no longer available."
 msgstr "이 사이트는 더 이상 가능하지 않습니다."
 
-#: wp-includes/script-loader.php:842
+#: wp-includes/script-loader.php:843
 msgid "No plugins found. Try a different search."
 msgstr "플러그인을 찾을 수 없습니다. 다른 검색을 해보세요."
 
@@ -6379,8 +6395,8 @@ msgstr "%s을(를) 사용자 정의 하고 있습니다"
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>에러</strong>: 댓글을 저장할 수 없습니다. 나중에 다시 해보세요."
 
-#: wp-includes/update.php:154 wp-includes/update.php:356
-#: wp-includes/update.php:538
+#: wp-includes/update.php:154 wp-includes/update.php:346
+#: wp-includes/update.php:528
 msgid "(WordPress could not establish a secure connection to WordPress.org. Please contact your server administrator.)"
 msgstr "(워드프레스가 WordPress.org에 안전한 연결을 설정할 수 없습니다. 서버 관리자와 연락하세요.)"
 
@@ -7162,7 +7178,7 @@ msgid "Align right"
 msgstr "우측 정렬"
 
 #: wp-includes/class-wp-customize-widgets.php:755
-#: wp-includes/script-loader.php:840 wp-includes/script-loader.php:866
+#: wp-includes/script-loader.php:841 wp-includes/script-loader.php:867
 msgid "An error has occurred. Please reload the page and try again."
 msgstr "에러 발생. 페이지를 새로고침 하고 다시 하세요."
 
@@ -7229,7 +7245,7 @@ msgid "https://wordpress.org/support/forum/requests-and-feedback"
 msgstr "https://wordpress.org/support/forum/requests-and-feedback"
 
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
-#: wp-includes/update.php:355 wp-includes/update.php:537
+#: wp-includes/update.php:345 wp-includes/update.php:527
 #: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
 #: wp-includes/wp-db.php:1753 wp-login.php:882
 msgid "https://wordpress.org/support/"
@@ -7335,21 +7351,21 @@ msgstr "사이트의 페이지 목록"
 #. translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.
-#: wp-includes/script-loader.php:935
+#: wp-includes/script-loader.php:936
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
 
 #. translators: %s: support forums URL
-#: wp-includes/update.php:152 wp-includes/update.php:354
-#: wp-includes/update.php:536
+#: wp-includes/update.php:152 wp-includes/update.php:344
+#: wp-includes/update.php:526
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"%s\">support forums</a>."
 msgstr "예상치 않은 에러가 발생했습니다. WordPress.org나 이 서버의 환경설정이 뭔가 잘못된 것 같습니다. 문제가 지속된다면 <a href=\"%s\">지원 포럼</a>에서 해결해보세요."
 
 #. translators: To add an additional Open Sans character subset specific to
 #. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
 #. translate into your own language.
-#: wp-includes/script-loader.php:941
+#: wp-includes/script-loader.php:942
 msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
 msgid "no-subset"
 msgstr "cyrillic"
@@ -7377,7 +7393,7 @@ msgstr "기본"
 msgid "Menu"
 msgstr "메뉴"
 
-#: wp-includes/update.php:643
+#: wp-includes/update.php:633
 msgid "Translation Updates"
 msgstr "번역 업데이트"
 
@@ -7544,7 +7560,7 @@ msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s
 msgstr "이메일을 올바르게 입력하셨나요? %s를 입력하셨습니다. 올바르지 않다면, 이메일을 받을 수 없습니다."
 
 #. translators: 1: month, 2: day, 3: year, 4: hour, 5: minute
-#: wp-includes/script-loader.php:686 wp-includes/script-loader.php:714
+#: wp-includes/script-loader.php:687 wp-includes/script-loader.php:715
 msgid "%1$s %2$s, %3$s @ %4$s:%5$s"
 msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
 
@@ -7577,7 +7593,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "검색 &hellip;"
 
-#: wp-includes/functions.php:5328 wp-includes/script-loader.php:568
+#: wp-includes/functions.php:5328 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "세션이 만료됐습니다"
 
@@ -7947,11 +7963,11 @@ msgstr "%1$s %2$s"
 msgid "Could not insert term relationship into the database."
 msgstr "텀(term)의 관계를 데이터베이스에 삽입할 수 없습니다."
 
-#: wp-includes/script-loader.php:855
+#: wp-includes/script-loader.php:856
 msgid "Select Color"
 msgstr "색상 선택"
 
-#: wp-includes/media-template.php:601 wp-includes/script-loader.php:851
+#: wp-includes/media-template.php:601 wp-includes/script-loader.php:852
 msgid "Clear"
 msgstr "지우기"
 
@@ -8043,7 +8059,7 @@ msgstr "헤더 글 색상"
 msgid "Colors"
 msgstr "색상"
 
-#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:722
+#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:723
 msgid "Saved"
 msgstr "저장함"
 
@@ -8145,7 +8161,7 @@ msgstr "죄송합니다. 이 댓글을 편집할 권한이 없습니다."
 msgid "Posts page"
 msgstr "글 페이지"
 
-#: wp-includes/script-loader.php:583
+#: wp-includes/script-loader.php:584
 msgid "Allowed Files"
 msgstr "허용된 파일"
 
@@ -8323,8 +8339,8 @@ msgstr "죄송합니다, 수정 권한이 없습니다."
 msgid "Edit Site"
 msgstr "사이트 편집"
 
-#: wp-includes/post.php:3952 wp-includes/script-loader.php:671
-#: wp-includes/script-loader.php:743
+#: wp-includes/post.php:3952 wp-includes/script-loader.php:672
+#: wp-includes/script-loader.php:744
 msgctxt "tag delimiter"
 msgid ","
 msgstr ","
@@ -8553,7 +8569,7 @@ msgstr "<strong>에러</strong>&nbsp;: 올바른 이메일 주소를 입력해�
 msgid "<strong>ERROR</strong>: please type a comment."
 msgstr "<strong>에러</strong>&nbsp;: 댓글을 입력해주세요."
 
-#: wp-includes/script-loader.php:871
+#: wp-includes/script-loader.php:872
 msgid "Could not load the preview image. Please reload the page and try again."
 msgstr "미리보기 이미지를 불러올 수 없습니다. 페이지를 새로고침하고 다시 시도하세요."
 
@@ -8686,7 +8702,7 @@ msgstr "모든 글"
 msgid "Link"
 msgstr "링크"
 
-#: wp-includes/script-loader.php:651
+#: wp-includes/script-loader.php:652
 msgid "Approve and Reply"
 msgstr "승인 및 응답하기"
 
@@ -8860,7 +8876,7 @@ msgstr "페이지를 찾을 수 없습니다."
 msgid "No pages found in Trash."
 msgstr "휴지통에서 찾은 페이지가 없습니다."
 
-#: wp-includes/script-loader.php:830
+#: wp-includes/script-loader.php:831
 msgid "Network Enable"
 msgstr "네트워크 활성화"
 
@@ -9160,7 +9176,7 @@ msgstr "<strong>상수 VHOST와 SUBDOMAIN_INSTALL의 충돌 값.</strong> SUBDOM
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>에러</strong>: 이 사용자명은 올바르지 않습니다. 올바른 사용자명을 입력하여 주십시오."
 
-#: wp-includes/comment-template.php:2207
+#: wp-includes/comment-template.php:2206
 msgid "Required fields are marked %s"
 msgstr "필수 입력창은 %s 로 표시되어 있습니다."
 
@@ -9322,7 +9338,7 @@ msgstr "귀하를 이 사이트에 추가하던 중 에러가 발생했습니다
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "이 파일은 너무 큽니다. 파일은  %d KB 보다 작아야 합니다."
 
-#: wp-includes/comment-template.php:2236
+#: wp-includes/comment-template.php:2235
 msgid "Your email address will not be published."
 msgstr "이메일은 공개되지 않습니다."
 
@@ -9365,11 +9381,11 @@ msgstr "먼저 <a href=\"%s\">로그인</a>을 해야 합니다. 그런 후에 �
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
 msgstr "최소한 4글자 이상이어야하고 글자와 숫자만 가능합니다. 변경될 수 없으니 주의해서 선택하세요."
 
-#: wp-includes/script-loader.php:757
+#: wp-includes/script-loader.php:758
 msgid "Are you sure you want to install this plugin?"
 msgstr "이 플러그인을 설치하시겠습니까?"
 
-#: wp-includes/script-loader.php:876
+#: wp-includes/script-loader.php:877
 msgid "Use as featured image"
 msgstr "특성 이미지로 사용"
 
@@ -9406,7 +9422,7 @@ msgstr "%s를 위한 링크"
 msgid "No menus have been created yet. <a href=\"%s\">Create some</a>."
 msgstr "아직 메뉴가 생성되지 않았습니다. <a href=\"%s\">생성하세요</a>"
 
-#: wp-includes/script-loader.php:886
+#: wp-includes/script-loader.php:887
 msgid ""
 "You are about to permanently delete this menu. \n"
 " 'Cancel' to stop, 'OK' to delete."
@@ -9419,19 +9435,19 @@ msgid "This is the short link."
 msgstr "이것은 단축 링크입니다."
 
 #. translators: 1: Number of updates available to plugins
-#: wp-includes/update.php:636
+#: wp-includes/update.php:626
 msgid "%d Plugin Update"
 msgid_plural "%d Plugin Updates"
 msgstr[0] "%d 플러그인 업데이트"
 
 #. translators: 1: Number of updates available to themes
-#: wp-includes/update.php:640
+#: wp-includes/update.php:630
 msgid "%d Theme Update"
 msgid_plural "%d Theme Updates"
 msgstr[0] "%d 테마 업데이트"
 
 #. translators: 1: Number of updates available to WordPress
-#: wp-includes/update.php:632
+#: wp-includes/update.php:622
 msgid "%d WordPress Update"
 msgstr "%d 워드프레스 업데이트"
 
@@ -9785,7 +9801,7 @@ msgid "%s is your new username"
 msgstr "%s 은(는) 새로운 사용자명입니다."
 
 #: wp-includes/class-wp-customize-nav-menus.php:967
-#: wp-includes/script-loader.php:1129 wp-signup.php:562
+#: wp-includes/script-loader.php:1130 wp-signup.php:562
 msgid "Next"
 msgstr "다음"
 
@@ -9977,51 +9993,51 @@ msgstr "데이터베이스에 텀을 추가할 수 없습니다."
 msgid "Empty Term."
 msgstr "빈 텀."
 
-#: wp-includes/script-loader.php:701
+#: wp-includes/script-loader.php:702
 msgid "Saving Draft&#8230;"
 msgstr "임시 글로 저장하기&#8230;"
 
-#: wp-includes/script-loader.php:878
+#: wp-includes/script-loader.php:879
 msgid "Could not set that as the thumbnail image. Try a different attachment."
 msgstr "섬네일 이미지로 설정할 수 없습니다. 다른 첨부파일을 시도해보세요."
 
-#: wp-includes/script-loader.php:877
+#: wp-includes/script-loader.php:878
 msgid "Saving..."
 msgstr "저장중..."
 
-#: wp-includes/script-loader.php:741
+#: wp-includes/script-loader.php:742
 msgid "Remove From Bulk Edit"
 msgstr "대량 편집에서 제거"
 
-#: wp-includes/script-loader.php:740 wp-includes/script-loader.php:749
+#: wp-includes/script-loader.php:741 wp-includes/script-loader.php:750
 msgid "Error while saving the changes."
 msgstr "변경사항을 저장하는데 오류가 발생했습니다."
 
-#: wp-includes/script-loader.php:712
+#: wp-includes/script-loader.php:713
 msgid "Submitted on:"
 msgstr "전송완료:"
 
-#: wp-includes/script-loader.php:697
+#: wp-includes/script-loader.php:698
 msgid "Password Protected"
 msgstr "비밀번호로 보호"
 
-#: wp-includes/script-loader.php:688
+#: wp-includes/script-loader.php:689
 msgid "No more comments found."
 msgstr "더이상의 댓글이 없습니다."
 
-#: wp-includes/script-loader.php:687
+#: wp-includes/script-loader.php:688
 msgid "Show more comments"
 msgstr "더 많은 댓글 보기"
 
-#: wp-includes/script-loader.php:684
+#: wp-includes/script-loader.php:685
 msgid "Published on:"
 msgstr "공개됨:"
 
-#: wp-includes/script-loader.php:683
+#: wp-includes/script-loader.php:684
 msgid "Schedule for:"
 msgstr "예약됨:"
 
-#: wp-includes/script-loader.php:682
+#: wp-includes/script-loader.php:683
 msgid "Publish on:"
 msgstr "공개하기:"
 
@@ -10098,12 +10114,6 @@ msgstr "&lt; 이전"
 #: wp-includes/script-loader.php:273
 msgid "Next &gt;"
 msgstr "다음 &gt;"
-
-#: wp-includes/class-wp-xmlrpc-server.php:3689
-#: wp-includes/script-loader.php:133 wp-includes/script-loader.php:644
-#: wp-includes/script-loader.php:838
-msgid "An unidentified error has occurred."
-msgstr "확인되지 않은 오류가 발생했습니다."
 
 #: wp-includes/script-loader.php:96
 msgid "Enter a description of the image"
@@ -10622,8 +10632,8 @@ msgid "Document properties"
 msgstr "문서 속성"
 
 #: wp-includes/class-wp-editor.php:1238 wp-includes/script-loader.php:477
-#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:700
-#: wp-includes/script-loader.php:723 wp-includes/script-loader.php:887
+#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:701
+#: wp-includes/script-loader.php:724 wp-includes/script-loader.php:888
 #: wp-includes/theme.php:2961
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "이 페이지에서 벗어나면 현재 수정한 것을 잃을 수 있습니다."
@@ -11000,10 +11010,6 @@ msgstr "재시도 하십시오."
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "정말로 <a href=\"%s\">로그아웃</a> 하시려나요?"
 
-#: wp-includes/functions.php:2617
-msgid "WordPress Failure Notice"
-msgstr "워드프레스 실패 알림"
-
 #. translators: %s: site name
 #: wp-includes/functions.php:2596
 msgid "You are attempting to log out of %s"
@@ -11245,19 +11251,19 @@ msgstr "중복된 댓글이 발견되었습니다; 이미 댓글을 다신 것 �
 msgid "Unapproved"
 msgstr "받아들이지 않기"
 
-#: wp-includes/comment-template.php:2251
+#: wp-includes/comment-template.php:2250
 msgid "Post Comment"
 msgstr "댓글 달기"
 
-#: wp-includes/comment-template.php:2250
+#: wp-includes/comment-template.php:2249
 msgid "Cancel reply"
 msgstr "응답 취소"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2245
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2244
 msgid "Leave a Reply to %s"
 msgstr "%s 에 답글 남기기"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2244
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2243
 msgid "Leave a Reply"
 msgstr "답글 남기기"
 
@@ -11328,7 +11334,7 @@ msgstr "입력한 댓글이 검토를 기다리고 있습니다."
 msgid "Comments are closed."
 msgstr "댓글이 닫혀있습니다."
 
-#: wp-includes/script-loader.php:854
+#: wp-includes/script-loader.php:855
 msgid "Select default color"
 msgstr "기본 색상 선택"
 
@@ -11341,7 +11347,7 @@ msgid "Pages:"
 msgstr "페이지:"
 
 #. translators: %s: comments count
-#: wp-includes/script-loader.php:657
+#: wp-includes/script-loader.php:658
 msgid "Comments (%s)"
 msgstr "댓글 (%s)"
 
@@ -11350,7 +11356,7 @@ msgid "Tags: "
 msgstr "태그:"
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2223
+#: wp-includes/comment-template.php:2222
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "<a href=\"%s\">로그인</a>을 해야 댓글을 남길 수 있습니다."
 
@@ -11382,7 +11388,7 @@ msgstr "%s에 댓글"
 
 #: wp-includes/class-wp-customize-nav-menus.php:276
 #: wp-includes/script-loader.php:242 wp-includes/script-loader.php:527
-#: wp-includes/script-loader.php:885
+#: wp-includes/script-loader.php:886
 msgid "No results found."
 msgstr "결과 없음."
 
@@ -11408,7 +11414,7 @@ msgstr "약간 이상하고 성가신 이유로, 이 글은 편집할 수 없습
 msgid "Widgets"
 msgstr "위젯"
 
-#: wp-includes/comment-template.php:2203
+#: wp-includes/comment-template.php:2202
 msgid "Website"
 msgstr "웹사이트"
 
@@ -11433,7 +11439,7 @@ msgstr "각 태그를 쉼표로 분리하세요."
 msgid "Title:"
 msgstr "타이틀:"
 
-#: wp-includes/script-loader.php:755
+#: wp-includes/script-loader.php:756
 msgid "Plugin:"
 msgstr "플러그인:"
 
@@ -11443,7 +11449,7 @@ msgstr "플러그인:"
 #: wp-includes/customize/class-wp-customize-media-control.php:235
 #: wp-includes/customize/class-wp-customize-media-control.php:245
 #: wp-includes/customize/class-wp-customize-media-control.php:255
-#: wp-includes/script-loader.php:853
+#: wp-includes/script-loader.php:854
 msgid "Default"
 msgstr "기본"
 
@@ -11464,7 +11470,7 @@ msgstr "날짜 표시 형식"
 msgid "Allow people to post comments on new articles"
 msgstr "댓글을 쓸 수 있게 합니다."
 
-#: wp-includes/comment-template.php:2201 wp-login.php:809
+#: wp-includes/comment-template.php:2200 wp-login.php:809
 msgid "Email"
 msgstr "이메일"
 
@@ -11594,7 +11600,7 @@ msgid "Help"
 msgstr "도움말"
 
 #: wp-includes/media.php:3143 wp-includes/script-loader.php:526
-#: wp-includes/script-loader.php:742
+#: wp-includes/script-loader.php:743
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:91
 msgid "(no title)"
 msgstr "(제목 없음)"
@@ -11618,7 +11624,7 @@ msgstr "선택"
 #: wp-includes/class-wp-customize-manager.php:5301
 #: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1695
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
-#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1125
+#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1126
 msgid "Close"
 msgstr "닫기"
 
@@ -11677,32 +11683,32 @@ msgid "Add or remove tags"
 msgstr "태그 추가/제거"
 
 #: wp-includes/media.php:3499 wp-includes/script-loader.php:524
-#: wp-includes/script-loader.php:691 wp-includes/script-loader.php:772
+#: wp-includes/script-loader.php:692 wp-includes/script-loader.php:773
 msgid "Update"
 msgstr "업데이트"
 
-#: wp-includes/script-loader.php:695
+#: wp-includes/script-loader.php:696
 msgid "Public"
 msgstr "공개"
 
-#: wp-includes/script-loader.php:696
+#: wp-includes/script-loader.php:697
 msgid "Public, Sticky"
 msgstr "공개, 붙박이"
 
 #: wp-includes/post.php:705 wp-includes/post.php:725
-#: wp-includes/script-loader.php:694
+#: wp-includes/script-loader.php:695
 msgid "Private"
 msgstr "비공개"
 
-#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:680
+#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:681
 msgid "OK"
 msgstr "OK"
 
-#: wp-includes/script-loader.php:698
+#: wp-includes/script-loader.php:699
 msgid "Privately Published"
 msgstr "비공개로 발행됨"
 
-#: wp-includes/script-loader.php:692
+#: wp-includes/script-loader.php:693
 msgid "Save as Pending"
 msgstr "대기중인 글 저장하기"
 
@@ -11837,12 +11843,12 @@ msgstr "트랙백"
 msgid "Pingback"
 msgstr "핑백"
 
-#: wp-includes/comment-template.php:1597 wp-includes/script-loader.php:652
+#: wp-includes/comment-template.php:1597 wp-includes/script-loader.php:653
 msgid "Reply"
 msgstr "응답"
 
 #: wp-includes/class-wp-customize-manager.php:4622
-#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:693
+#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:694
 msgid "Save Draft"
 msgstr "임시 글로 저장하기"
 
@@ -11856,7 +11862,7 @@ msgstr "내용"
 
 #: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1741
 #: wp-includes/media.php:3498 wp-includes/script-loader.php:510
-#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:681
+#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:682
 msgid "Cancel"
 msgstr "취소"
 
@@ -11884,7 +11890,7 @@ msgstr "익명"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:55
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:61
-#: wp-includes/script-loader.php:879
+#: wp-includes/script-loader.php:880
 msgid "Done"
 msgstr "완료"
 
@@ -11924,7 +11930,7 @@ msgstr "없음"
 msgid "Description"
 msgstr "설명"
 
-#: wp-includes/comment-template.php:2199
+#: wp-includes/comment-template.php:2198
 msgid "Name"
 msgstr "이름"
 
@@ -11943,7 +11949,7 @@ msgstr "타겟"
 msgid "Categories"
 msgstr "카테고리"
 
-#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:721
+#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:722
 msgid "Save"
 msgstr "저장하기"
 
@@ -11976,11 +11982,11 @@ msgid "Excerpt"
 msgstr "요약"
 
 #: wp-includes/class-wp-customize-manager.php:4617
-#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:689
+#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:690
 msgid "Publish"
 msgstr "공개하기"
 
-#: wp-includes/script-loader.php:655
+#: wp-includes/script-loader.php:656
 msgid "Comments"
 msgstr "댓글"
 
@@ -12008,11 +12014,11 @@ msgstr "편집"
 msgid "No"
 msgstr "아니오"
 
-#: wp-includes/deprecated.php:3130 wp-includes/functions.php:2607
+#: wp-includes/deprecated.php:3130
 msgid "Are you sure you want to do this?"
 msgstr "이 작업을 수행하시겠습니까?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2219
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2218
 msgctxt "noun"
 msgid "Comment"
 msgstr "댓글"
@@ -12052,7 +12058,7 @@ msgid "Pending Review"
 msgstr "검토중"
 
 #: wp-includes/post.php:706 wp-includes/post.php:726
-#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:699
+#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:700
 msgid "Published"
 msgstr "발행됨"
 
@@ -12064,12 +12070,6 @@ msgstr "타이틀"
 #: wp-includes/post.php:1394
 msgid "No posts found."
 msgstr "글을 찾을 수 없습니다."
-
-#: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-customize-manager.php:515
-#: wp-includes/script-loader.php:565
-msgid "Cheatin&#8217; uh?"
-msgstr "누구를 속이시려고?"
 
 #: wp-activate.php:134 wp-includes/post-template.php:1611
 msgid "Password:"
@@ -12087,8 +12087,8 @@ msgstr "인증하는 도중 에러가 발생했습니다"
 msgid "Your account is now active!"
 msgstr "계정이 활성화되었습니다!"
 
-#: wp-activate.php:85 wp-includes/script-loader.php:829
-#: wp-includes/script-loader.php:830
+#: wp-activate.php:85 wp-includes/script-loader.php:830
+#: wp-includes/script-loader.php:831
 msgid "Activate"
 msgstr "활성화"
 

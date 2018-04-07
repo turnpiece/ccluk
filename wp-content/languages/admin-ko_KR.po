@@ -30,39 +30,39 @@ msgstr "0"
 msgid "This changeset cannot be further modified."
 msgstr "이 변경사항은 더이상 변경할 수 없습니다."
 
-#: wp-admin/about.php:262
+#: wp-admin/about.php:316
 msgid "Improvements to Roles and Capabilities"
 msgstr "역할 및 권한 개선"
 
-#: wp-admin/about.php:263
+#: wp-admin/about.php:317
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "플러그인과 번역 파일의 세심한 관리가 가능한 새로운 기능이 도입됐습니다. 추가로 다중 사이트의 사이트 전환 과정에서 세밀한 조정이 이뤄져 더 신뢰할 수 있고 일관성 있는 역할와 권한 업데이트가 가능해졌습니다."
 
-#: wp-admin/about.php:259
+#: wp-admin/about.php:313
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "워드프레스 4.9는 MediaElement.js의 업그레이드 된 버전을 포함합니다. 이것은 제이쿼리의 의존성을 제거하고 접근성의 개선, UI를 현대화, 그리고 많은 버그를 수정했습니다."
 
-#: wp-admin/about.php:258
+#: wp-admin/about.php:312
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js를 4.2.6으로 업그레이드"
 
-#: wp-admin/about.php:255
+#: wp-admin/about.php:309
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr ""
 "CodeMirror라는 새로운 코드 편집 라이브러리를 도입했으며 코어 내부에서 사용할 수 있습니다. CSS나 자바스크립드의 인클루드 필드와 같이 플러그인에서 코드 작성이나\n"
 " 편집 경험을 개선하는데 사용할 수 있습니다."
 
-#: wp-admin/about.php:254
+#: wp-admin/about.php:308
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "테마와 플러그인에서 사용 가능한 CodeMirror"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:248
+#: wp-admin/about.php:302
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "워드프레스 4.9에서 Customizer JS API의 많은 개선이 있었습니다. 많은 고민거리를 제거하고 PHP API처럼 작업하기 쉽게 만들었습니다. 또한 베이스 콘트롤 템플릿, 날짜/시간 제어, 몇 가지 섹션/패널/글로벌 알림 기능이 있습니다. <a href=\"%s\">전체 목록을 알아보세요.</a>"
 
-#: wp-admin/about.php:244
+#: wp-admin/about.php:298
 msgid "Customizer JS API Improvements"
 msgstr "Customizer JS API 개선"
 
@@ -70,7 +70,7 @@ msgstr "Customizer JS API 개선"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "이 데이터는 워드프레스의 일반적인 개선을 위해 사용됩니다. 여기에는 새로운 업데이트를 찾아서 자동으로 설치하는 등 사이트를 보호하는 것이 포함됩니다. 또한 통계를 위해서도 사용됩니다. 예를들면 <a href=\"%s\">WordPress.org 통계페이지</a>에서 볼 수 있는 것들입니다."
 
-#: wp-admin/about.php:157
+#: wp-admin/about.php:211
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "테마나 플러그인을 직접 수정할 경우 워드프레스 4.9는 이 작업이 위험하다는 것을 친절하게 경고해줍니다. 파일에 저장하기 전에 백업할 것을 권장합니다. 안전한 방법을 선택하세요: 나중에 자신에게 고마워할 것입니다. 팀과 고객도 고마워할 것입니다."
 
@@ -151,52 +151,52 @@ msgid "Enter the address here if you <a href=\"%s\">want your site home page to 
 msgstr "위 두곳의 입력란을 임의로 변경할 경우 관리자 화면에 재접속이 불가능하게 됩니다. 다음 링크에서 내용을 숙지하신 후에 사용하세요(영문). <a href=\"%s\">사이트 홈페이지가 워드프레스 설치 디렉토리와 다르게 하려면</a> 여기에 주소를 입력하세요."
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:237
+#: wp-admin/about.php:291
 msgid "Developer Happiness %s"
 msgstr "개발자의 행복 %s"
 
-#: wp-admin/about.php:227
+#: wp-admin/about.php:281
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://wordpress.org/plugins/gutenberg/"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:280
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "워드프레스는 새로운 방법으로 콘텐츠를 생성하고 제어합니다. 그리고 여러분의 도움을 원합니다. <a href=\"%s\">초기 테스터</a>나 구텐베르그 프로젝트에 참여에 관심이 있으신가요? <a href=\"%s\">깃허브에 기여하기</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:220
+#: wp-admin/about.php:274
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "구텐베르그에 도움주기 %s"
 
-#: wp-admin/about.php:195
+#: wp-admin/about.php:249
 msgid "More Reliable Theme Switching"
 msgstr "더 신뢰할 수 있는 테마 변경"
 
-#: wp-admin/about.php:187
+#: wp-admin/about.php:241
 msgid "Site Building Improvements"
 msgstr "사이트 제작 개선"
 
-#: wp-admin/about.php:172
+#: wp-admin/about.php:226
 msgid "The New Gallery Widget"
 msgstr "새로운 갤러리 위젯"
 
-#: wp-admin/about.php:164
+#: wp-admin/about.php:218
 msgid "Even More Widget Updates"
 msgstr "더 많은 위젯 업데이트"
 
-#: wp-admin/about.php:127
+#: wp-admin/about.php:181
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "새로운 디자인을 저장하지 않고 책상에서 벗어날 일이 있다면 걱정하지 마세요. 돌아왔을 때 워드프레스 4.9는 변경사항을 저장할 것인지 친절하게 물어볼 것입니다."
 
-#: wp-admin/about.php:134
+#: wp-admin/about.php:188
 msgid "Coding Enhancements"
 msgstr "코딩 개선"
 
-#: wp-admin/about.php:126
+#: wp-admin/about.php:180
 msgid "A Prompt to Protect Your Work"
 msgstr "작업물 보호 메시지"
 
-#: wp-admin/about.php:119
+#: wp-admin/about.php:173
 msgid "Design Locking To Guard Your Changes"
 msgstr "변경사항을 보호하는 디자인 잠금"
 
@@ -208,75 +208,75 @@ msgstr "우리는 개인정보 보호와 투명성을 아주 심각하게 취급
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "여러분의 워드프레스 사이트는 가끔 WordPress.org에 데이터를 보낼 수도 있습니다 &#8212; 다음을 포함하며 추가될 수도 있음 &#8212; 사용중인 워드프레스의 버전, 설치된 플러그인 및 테마 목록 등."
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:257
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "새 메뉴를 만드는 단계 때문에 혼란스러운 적이 있나요? 아마도 이제는 없을 겁니다! 더 부드러운 메뉴 생성 과정을 위한 사용자 경험(UX)을 마련했습니다. 새롭게 단장된 가이드가 여러분을 안내할 것입니다."
 
-#: wp-admin/about.php:202
+#: wp-admin/about.php:256
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "더 나아진 메뉴 가이드 = 혼란 제거"
 
-#: wp-admin/about.php:196
+#: wp-admin/about.php:250
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "테마를 변경하면 위젯은 위치가 변경됩니다. 워드프레스 4.9의 개선된 점은 테마를 변경하더라도 일관된 메뉴와 위젯의 위치를 제공합니다. 추가적으로 설치된 테마를 미리보기 하거나 다운로드와 설치, 새로운 테마를 바로 미리보기 할 수 있습니다. 테마를 사이트에 공개하기 전에 간편하게 미리보기 할 수 있습니다."
 
-#: wp-admin/about.php:180
+#: wp-admin/about.php:234
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "텍스트 위젯에 미디어를 추가하고 싶으신가요? 이미지, 비디오, 오디오를 텍스트를 포함해 위젯에 바로 임베드하세요. 심플하고 유용한 미디어 추가하기 버튼을 사용하면 됩니다!"
 
-#: wp-admin/about.php:179
+#: wp-admin/about.php:233
 msgid "Press a Button, Add Media"
 msgstr "버튼을 눌러 미디어 추가하기"
 
-#: wp-admin/about.php:173
+#: wp-admin/about.php:227
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "미디어 변경의 점진적인 개선은 워드프레스 4.8에서 도입됐습니다. 이제는 위젯을 통해 갤러리를 추가할 수 있습니다!"
 
-#: wp-admin/about.php:150
+#: wp-admin/about.php:204
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "공포의 화이트 스크린. 테마와 플러그인 코딩작업 시 피할 수 있습니다. 왜냐하면 워드프레스 4.9가 에러에 대해 경고할 것이기 때문입니다. 잠못이루는 밤이 없어지겠죠."
 
-#: wp-admin/about.php:156
+#: wp-admin/about.php:210
 msgid "Warning: Potential Danger Ahead!"
 msgstr "경고: 잠재적인 위험이 있습니다!"
 
-#: wp-admin/about.php:149
+#: wp-admin/about.php:203
 msgid "Sandbox for Safety"
 msgstr "안전을 위한 샌드박스"
 
-#: wp-admin/about.php:143
+#: wp-admin/about.php:197
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "보이는 것에 문제가 있는데 작성하는 CSS에 정확히 무엇이 문제인지 알 수 없을 경우가 있습니다. 워드프레스 4.8.1에 도입된 CSS 구문 강조 및 에러 점검과 사용자 정의 HTML 위젯은 코딩 에러를 빠르게 집어낼 수 있습니다. 코드를 쉽게 둘러보고 빠르게 에러를 수정하는데 확실한 도움을 줍니다."
 
-#: wp-admin/about.php:142
+#: wp-admin/about.php:196
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "구문강조와 에러 점검을 할까요? 예 그러세요!"
 
-#: wp-admin/about.php:120
+#: wp-admin/about.php:174
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "두 사람의 디자이너가 프로젝트를 진행하고 있는데 한 디자이너가 다른 디자이너의 멋진 작업물을 덮어쓰기해버린 경험이 있으신가요? 워드프레스 4.9의 디자인 잠금기능(글 잠금 기능와 유사함)은 어렵게 만든 작업중인 디자인을 보호하며 다른 사람이 변경하거나 지울 수 없게 합니다."
 
-#: wp-admin/about.php:113
+#: wp-admin/about.php:167
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "제안된 사이트 디자인의 변경사항에 대해 피드백을 받고 싶으신가요? 워드프레스 4.9는 팀이나 고객에게 미리보기 링크를 보낼 수 있는 기능이 있으며 변경사항을 공개하기 전에 피드백을 수집하고 수정할 수 있습니다. 이것을 공동작업&#43;&#43;라고 하죠?"
 
-#: wp-admin/about.php:112
+#: wp-admin/about.php:166
 msgid "Collaborate with Design Preview Links"
 msgstr "디자인 미리보기 링크를 통한 공동작업"
 
-#: wp-admin/about.php:106
+#: wp-admin/about.php:160
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "네, 맞습니다. 임시글을 만든 다음 글을 수정하고 선택한 날짜와 시간에 공개되도록 예약할 수 있듯이 사이트 디자인을 공개하기 전에 원하는 시간에 예약할 수 있습니다."
 
-#: wp-admin/about.php:105
+#: wp-admin/about.php:159
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "사이트 디자인 사용자 정의 임시저장 및 예약"
 
-#: wp-admin/about.php:97
+#: wp-admin/about.php:151
 msgid "Customizer Workflow Improved"
 msgstr "사용자 정의하기 작업흐름 개선"
 
-#: wp-admin/about.php:84
+#: wp-admin/about.php:138
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "개선된 사용자 정의하기 작업흐름에 오신 것을 환영합니다. 디자인 임시저장, 잠금, 예약, 미리보기 링크가 있으며 이에 더해 코드 구문강조와 에러 점검은 깨끗하고 부드러운 사이트 제작 경험을 보여줄 것입니다. 마지막으로 아주 멋지지는 않지만 훌륭한 갤러리 위젯 및 테마 둘러보기와 테마 변경에서 개선된 점이 있습니다."
 
@@ -286,7 +286,7 @@ msgid "Thank you for updating to the latest version! WordPress %s will smooth yo
 msgstr "최신 버전으로 업데이트 해주셔서 감사합니다! 워드프레스 %s는 디자인 워크 플로우를 부드럽게 하고 코드 에러를 안전하게 지켜줄 것입니다."
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:79
+#: wp-admin/about.php:133
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "사용자 정의하기 대폭 개선, 코드 에러 검사, 그리고 더 많은 것들! %s"
 
@@ -548,7 +548,7 @@ msgstr "http://wordpress.org/news/"
 msgid "Your Recent Drafts"
 msgstr "최근 임시글"
 
-#: wp-admin/includes/class-wp-users-list-table.php:492
+#: wp-admin/includes/class-wp-users-list-table.php:496
 msgctxt "name"
 msgid "Unknown"
 msgstr "알 수 없음"
@@ -1696,7 +1696,7 @@ msgid "(Currently set to: %s)"
 msgstr "(현재 설정: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:390
+#: wp-admin/about.php:444
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>버전 %s</strong> 하나의 보안 문제 처리함."
 
@@ -1718,15 +1718,15 @@ msgstr "<a href=\"%s\">Gravatar</a>에서 프로필 사진을 변경할 수 있�
 msgid "Profile Picture"
 msgstr "프로필 사진"
 
-#: wp-admin/about.php:384
+#: wp-admin/about.php:438
 msgid "Security Releases"
 msgstr "보안 릴리즈"
 
-#: wp-admin/about.php:34 wp-admin/about.php:387
+#: wp-admin/about.php:34 wp-admin/about.php:441
 msgid "Maintenance and Security Releases"
 msgstr "유지보수 및 보안 릴리즈"
 
-#: wp-admin/about.php:381
+#: wp-admin/about.php:435
 msgid "Maintenance Releases"
 msgstr "유지 관리 릴리즈"
 
@@ -1774,7 +1774,7 @@ msgid "We&#8217;re going to use this information to create a %s file."
 msgstr "해당 정보를 %s 파일을 생성하는데 사용합니다."
 
 #. translators: %s: wp-content/uploads
-#: wp-admin/options-media.php:112
+#: wp-admin/options-media.php:114
 msgid "Default is %s"
 msgstr "기본은 %s 입니다"
 
@@ -2098,7 +2098,7 @@ msgstr "%1$s 업데이트 중 에러가 발생했습니다: %2$s"
 msgid "No role"
 msgstr "역할 없음"
 
-#: wp-admin/includes/class-wp-users-list-table.php:566
+#: wp-admin/includes/class-wp-users-list-table.php:570
 msgctxt "no user roles"
 msgid "None"
 msgstr "없음"
@@ -2383,7 +2383,7 @@ msgid "Your theme supports %s menu. Select which menu appears in each location."
 msgid_plural "Your theme supports %s menus. Select which menu appears in each location."
 msgstr[0] "사용중인 테마가 %s개의 메뉴를 지원합니다. 각각의 메뉴위치에 어떤 메뉴가 보여질지 선택하세요."
 
-#: wp-admin/includes/class-wp-users-list-table.php:505
+#: wp-admin/includes/class-wp-users-list-table.php:509
 msgid "%s post by this author"
 msgid_plural "%s posts by this author"
 msgstr[0] "이 저자가 올린 글 %s"
@@ -2921,7 +2921,7 @@ msgstr ""
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/misc.php:1161
+#: wp-admin/includes/misc.php:1163
 msgid ""
 "Howdy ###USERNAME###,\n"
 "\n"
@@ -5278,7 +5278,7 @@ msgstr "사이트 보기"
 msgid "Visit Dashboard"
 msgstr "대시보드 방문"
 
-#: wp-admin/includes/misc.php:1208
+#: wp-admin/includes/misc.php:1210
 msgid "[%s] New Admin Email Address"
 msgstr "[%s] 새로운 관리자 이메일 주소"
 
@@ -5510,13 +5510,14 @@ msgid "Show Toolbar when viewing site"
 msgstr "사이트를 볼 때 툴바 보이기"
 
 #. translators: %s: Codex URL
-#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:407
+#: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
+#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:461
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "더 많은 정보는, <a href=\"%s\">릴리즈 노트</a>를 참조하세요."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:399
+#: wp-admin/about.php:453
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>버전 %1$s</strong> 보안 문제와 %2$s 버그를 처리했습니다."
@@ -5524,13 +5525,14 @@ msgstr[0] "<strong>버전 %1$s</strong> 보안 문제와 %2$s 버그를 처리�
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:57 wp-admin/about.php:403
+#: wp-admin/about.php:39 wp-admin/about.php:93 wp-admin/about.php:111
+#: wp-admin/about.php:457
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>버전 %1$s</strong> 몇가지 보안 문제를 처리했고 %2$s 버그를 수리했습니다."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:395
+#: wp-admin/about.php:57 wp-admin/about.php:75 wp-admin/about.php:449
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>버전 %1$s</strong>이(가) %2$s 버그를 해결함."
@@ -5544,20 +5546,20 @@ msgstr "워드프레스 알림판에 오신 것을 환영합니다! 이 화면�
 msgid "What&#8217;s New"
 msgstr "새로운 것"
 
-#: wp-admin/about.php:386
+#: wp-admin/about.php:440
 msgid "Maintenance and Security Release"
 msgstr "관리 보안 릴리즈"
 
-#: wp-admin/about.php:383
+#: wp-admin/about.php:437
 msgid "Security Release"
 msgstr "보안 릴리즈"
 
-#: wp-admin/about.php:380
+#: wp-admin/about.php:434
 msgid "Maintenance Release"
 msgstr "관리 릴리즈"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:392
+#: wp-admin/about.php:446
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>버전 %s</strong> 보안 문제를 처리했습니다."
 
@@ -5565,7 +5567,7 @@ msgstr "<strong>버전 %s</strong> 보안 문제를 처리했습니다."
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "이 화면은 기본 고유주소 구조를 선택할 수 있게 해줍니다. 일반 설정에서 선택하거나 사용자 정의 URL 구조를 만들 수 있습니다."
 
-#: wp-admin/about.php:273
+#: wp-admin/about.php:327
 msgid "Return to Updates"
 msgstr "업데이트로 돌아가기"
 
@@ -5841,11 +5843,11 @@ msgstr "이것은 다중사이트 설치이므로 사용자명이나 이메일�
 msgid "Welcome to WordPress %s"
 msgstr "WordPress %s 사용을 환영합니다"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:330
 msgid "Go to Dashboard &rarr; Home"
 msgstr "대시보드 &rarr; 홈으로 가기"
 
-#: wp-admin/about.php:273
+#: wp-admin/about.php:327
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "대시보드 &rarr; 업데이트로 돌아가기"
 
@@ -7683,7 +7685,7 @@ msgid "Must-Use <span class=\"count\">(%s)</span>"
 msgid_plural "Must-Use <span class=\"count\">(%s)</span>"
 msgstr[0] "Must-Use <span class=\"count\">(%s)</span>"
 
-#: wp-admin/about.php:276
+#: wp-admin/about.php:330
 msgid "Go to Dashboard"
 msgstr "대시보드로 가기 l&rsquo;홈"
 
@@ -7935,23 +7937,23 @@ msgstr "미디어 설정"
 msgid "Image sizes"
 msgstr "이미지 크기"
 
-#: wp-admin/options-media.php:53
+#: wp-admin/options-media.php:53 wp-admin/options-media.php:54
 msgid "Thumbnail size"
 msgstr "작은 사진(썸네일)"
 
-#: wp-admin/options-media.php:65 wp-admin/options-media.php:66
+#: wp-admin/options-media.php:67 wp-admin/options-media.php:68
 msgid "Medium size"
 msgstr "중간크기"
 
-#: wp-admin/options-media.php:70 wp-admin/options-media.php:81
+#: wp-admin/options-media.php:72 wp-admin/options-media.php:83
 msgid "Max Height"
 msgstr "최대 높이"
 
-#: wp-admin/options-media.php:76 wp-admin/options-media.php:77
+#: wp-admin/options-media.php:78 wp-admin/options-media.php:79
 msgid "Large size"
 msgstr "최대 크기"
 
-#: wp-admin/options-media.php:118
+#: wp-admin/options-media.php:120
 msgid "Full URL path to files"
 msgstr "파일을 위한 전체 URL경로"
 
@@ -8240,7 +8242,7 @@ msgstr "워드프레스와의 호환성 %1$s: 100%% (글쓴이에 의하면)"
 msgid "Compatibility with WordPress %1$s: Unknown"
 msgstr "워드프레스와의 호환성 %1$s: 알 수 없음"
 
-#: wp-admin/options-media.php:120
+#: wp-admin/options-media.php:122
 msgid "Configuring this is optional. By default, it should be blank."
 msgstr "이 옵션은 선택사항이며 기본적으로 비어있습니다."
 
@@ -8252,7 +8254,7 @@ msgstr "<code>:-)</code>나 <code>:-P</code> 같은 이모티콘을 그래픽으
 msgid "Could not fully remove the theme %s."
 msgstr "테마 %s를 완전히 지울 수 없습니다."
 
-#: wp-admin/options-media.php:60
+#: wp-admin/options-media.php:62
 msgid "Crop thumbnail to exact dimensions (normally thumbnails are proportional)"
 msgstr "썸네일을 정확한 크기로 잘라냅니다.( 일반적으로 썸네일은 원본에 비례해서 만들어집니다.)"
 
@@ -8310,7 +8312,7 @@ msgstr "사이드바에서 위젯을 삭제하지만 설정을 보존하려면 �
 msgid "Edit Themes"
 msgstr "테마 편집"
 
-#: wp-admin/options-media.php:94
+#: wp-admin/options-media.php:96
 msgid "Embeds"
 msgstr "임베드"
 
@@ -8412,7 +8414,7 @@ msgstr "좌측 사이드바"
 msgid "Mail Server"
 msgstr "메일 서버"
 
-#: wp-admin/options-media.php:67 wp-admin/options-media.php:78
+#: wp-admin/options-media.php:69 wp-admin/options-media.php:80
 msgid "Max Width"
 msgstr "최대 폭"
 
@@ -8449,7 +8451,7 @@ msgstr "1 열"
 msgid "Optional"
 msgstr "옵션"
 
-#: wp-admin/options-media.php:131
+#: wp-admin/options-media.php:133
 msgid "Organize my uploads into month- and year-based folders"
 msgstr "내가 올린 파일들을 년/월별로 분류하기"
 
@@ -8560,7 +8562,7 @@ msgstr "몇가지 데이터베이스 문제들이 수리될 수 없습니다. <a
 msgid "Sticky Post"
 msgstr "붙박이 글"
 
-#: wp-admin/options-media.php:108
+#: wp-admin/options-media.php:110
 msgid "Store uploads in this folder"
 msgstr "이 폴더에 업로드한 파일을 저장"
 
@@ -8651,7 +8653,7 @@ msgstr "플러그인 업로드"
 msgid "Upload Theme"
 msgstr "테마 업로드"
 
-#: wp-admin/options-media.php:101
+#: wp-admin/options-media.php:103
 msgid "Uploading Files"
 msgstr "파일 업로드"
 

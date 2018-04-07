@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-07 14:06:53+0000\n"
+"PO-Revision-Date: 2018-03-03 13:18:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,7 +15,7 @@ msgstr ""
 msgid "wordpressdotorg"
 msgstr "wordpressdotorg"
 
-#: wordpress-importer.php:1142
+#: wordpress-importer.php:1152
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
 msgstr "Vælg en WXR (.xml) fil du vil uploade. Derefter klik på Upload fil og importer."
 
@@ -31,7 +31,7 @@ msgstr "Filen eksisterer ikke, prøv venligst igen."
 msgid "Remember to update the passwords and roles of imported users."
 msgstr "Husk at opdatere kodeord og roller på importerede brugere."
 
-#: wordpress-importer.php:1126
+#: wordpress-importer.php:1136
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
 msgstr "En ny version af denne importer er tilgængelig. Opdater venligst til version %s for at være sikker på kompatibilitet med nyere eksportfiler."
 
@@ -59,7 +59,7 @@ msgstr "Download og importér vedhæftede filer"
 msgid "- Select -"
 msgstr "- Vælg -"
 
-#: wordpress-importer.php:1020
+#: wordpress-importer.php:1029
 msgid "Remote file is too large, limit is %s"
 msgstr "Filen er for stor, grænsen er %s"
 
@@ -71,7 +71,7 @@ msgstr "Alt klaret."
 msgid "Have fun!"
 msgstr "God fornøjelse!"
 
-#: wordpress-importer.php:952
+#: wordpress-importer.php:953
 msgid "Invalid file type"
 msgstr "Ugyldig filtype"
 
@@ -79,19 +79,19 @@ msgstr "Ugyldig filtype"
 msgid "Assign Authors"
 msgstr "Tildel Forfattere"
 
-#: wordpress-importer.php:1119
+#: wordpress-importer.php:1129
 msgid "Import WordPress"
 msgstr "Importer WordPress"
 
-#: wordpress-importer.php:1009
+#: wordpress-importer.php:1018
 msgid "Remote file is incorrect size"
 msgstr "Filen har forkert størrelse"
 
-#: wordpress-importer.php:1216
+#: wordpress-importer.php:1226
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
 msgstr "Importer <strong>indlæg, sider, kommentarer, egne felter, kategorier og tags </strong> fra en WordPress eksporteret fil."
 
-#: wordpress-importer.php:1141
+#: wordpress-importer.php:1151
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
 msgstr "Hejsa! Upload din WordPress eXtended RSS (WXR) fil og vi importerer indlæg, sider, kommentarer, egne felter, kategorier og tags til dette websted."
 
@@ -109,7 +109,7 @@ msgstr "Send"
 msgid "Import Attachments"
 msgstr "Importer vedhæftninger"
 
-#: wordpress-importer.php:996
+#: wordpress-importer.php:1003
 msgid "Remote server did not respond"
 msgstr "Fjernserver svarede ikke"
 
@@ -121,11 +121,11 @@ msgstr "Importer forfatter:"
 msgid "Failed to import %s %s"
 msgstr "Fejlede import af %s %s"
 
-#: wordpress-importer.php:1014
+#: wordpress-importer.php:1023
 msgid "Zero size file downloaded"
 msgstr "Fil uden indhold downloadet"
 
-#: wordpress-importer.php:1002
+#: wordpress-importer.php:1011
 msgid "Remote server returned error response %1$d %2$s"
 msgstr "Fjernserver vente tilbage med fejlmeddelelse %1$d %2$s"
 
@@ -153,7 +153,7 @@ msgstr "Kunne ikke importere indlæg tag %s"
 msgid "%s &#8220;%s&#8221; already exists."
 msgstr "%s &#8220;%s&#8221; eksisterer allerede."
 
-#: wordpress-importer.php:869
+#: wordpress-importer.php:870
 msgid "Menu item skipped due to missing menu slug"
 msgstr "Menupunkt sprunget over pga. manglende menu slug"
 
@@ -169,11 +169,11 @@ msgstr "Denne WXR fil (version %s) er muligvis ikke understøttet af denne versi
 msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
 msgstr "Hvis en ny bruger oprettes af WordPress, vil der automatisk blive lavet en tilfældigt genereret kode og den nye brugers role vil blive tildelt som %s. Det vil være nødvendigt at ændre brugerens oplysninger manuelt."
 
-#: wordpress-importer.php:876
+#: wordpress-importer.php:877
 msgid "Menu item skipped due to invalid menu slug: %s"
 msgstr "Menupunkt sprunget over pga. ugyldigt menu slug: %s"
 
-#: wordpress-importer.php:939
+#: wordpress-importer.php:940
 msgid "Fetching attachments is not enabled"
 msgstr "Hentning af vedhæftede filer ikke aktiveret"
 
@@ -189,17 +189,9 @@ msgstr "Eksport filen kan ikke findes på <code>%s</code>. Det er muligt dette s
 msgid "There was an error when reading this WXR file"
 msgstr "Der var en fejl ved læsning af WXR filen"
 
-#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:495
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:502
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
 msgstr "Det ser ud som om, at det ikke er en WXR fil, der en manglende eller fejlagtigt WXR versions nummer"
-
-#. Author URI of the plugin/theme
-msgid "http://wordpress.org/"
-msgstr "http://wordpress.org/"
-
-#. Plugin URI of the plugin/theme
-msgid "http://wordpress.org/extend/plugins/wordpress-importer/"
-msgstr "http://wordpress.org/extend/plugins/wordpress-importer/"
 
 #: wordpress-importer.php:311
 msgid "as a new user:"
@@ -208,3 +200,11 @@ msgstr "som ny bruger:"
 #. Plugin Name of the plugin/theme
 msgid "WordPress Importer"
 msgstr "WordPress Import"
+
+#. Author URI of the plugin/theme
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/wordpress-importer/"
+msgstr "https://wordpress.org/plugins/wordpress-importer/"

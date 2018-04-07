@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-09-28 23:50:55+0000\n"
+"PO-Revision-Date: 2018-03-22 17:46:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -988,7 +988,7 @@ msgstr "Editar tópico"
 
 #: includes/topics/template.php:52 templates/default/bbpress/form-topic.php:43
 msgid "Create New Topic"
-msgstr "Criar novo Tópico"
+msgstr "Criar novo tópico"
 
 #: includes/topics/template.php:51 includes/topics/template.php:55
 msgid "New Topic"

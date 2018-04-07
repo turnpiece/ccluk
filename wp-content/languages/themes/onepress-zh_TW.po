@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-23 19:46:44+0000\n"
+"PO-Revision-Date: 2018-03-02 13:51:02+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,13 +13,21 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
-msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。你可以在 https://www.famethemes.com/preview/?theme=OnePress 進行線上預覽。繁體中文本地化由佈景主題開發者委託「<a href=\"https://www.alexclassroom.com/\" target=\"_blank\">阿力獅的教室</a>」站長<a href=\"https://www.facebook.com/captain.alexlion\" target=\"_blank\">阿力獅</a>製作提供。"
+msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。你可以在 https://www.famethemes.com/preview/?theme=OnePress 進行線上預覽。繁體中文本地化由佈景主題開發者委託《<a href=\"https://www.alexclassroom.com/\" target=\"_blank\">阿力獅的教室</a>》站長<a href=\"https://www.facebook.com/captain.alexlion\" target=\"_blank\">阿力獅</a>製作提供。"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.0.2)  #-#-#-#-#
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.4)  #-#-#-#-#
 #. Theme Name of the plugin/theme
 #: inc/dashboard.php:327
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/dashboard.php:484
+msgid "Keep %s updated"
+msgstr "保持 %s 為最新狀態"
+
+#: inc/dashboard.php:405
+msgid "Your settings were copied."
+msgstr "設定已複製。"
 
 #: inc/metabox.php:162
 msgid "Hide footer."
@@ -86,8 +94,8 @@ msgid "OnePress Plus Available! Take a look"
 msgstr "現已提供 OnePress Plus，點擊瞭解更多！"
 
 #: inc/customizer.php:3601
-msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
-msgstr "<h4 class=\"customizer-group-heading-message\">拖放區段順序</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制首頁區段順序！</p><h4 class=\"customizer-group-heading-message\">進階區段樣式</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制區段樣式，包含背景色彩、圖片、影片、視差滾動效果、自訂樣式等等...</p>"
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advandced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">拖放區段順序</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制首頁各個區段的順序！</p><h4 class=\"customizer-group-heading-message\">進階區段樣式</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制區段樣式，包含背景色彩、圖片、影片、視差滾動效果、自訂樣式等等...</p>"
 
 #: inc/customizer.php:3285
 msgid "Ascending"
@@ -430,10 +438,6 @@ msgstr "確定要進行複製嗎？"
 msgid "Recommend Plugins"
 msgstr "建議安裝的外掛"
 
-#: inc/dashboard.php:405
-msgid "Your settings copied."
-msgstr "設定已複製。"
-
 #: inc/dashboard.php:402
 msgid "Copy now"
 msgstr "立即複製"
@@ -716,8 +720,8 @@ msgid "Why choose Us"
 msgstr "為什麼選擇我們"
 
 #: inc/customizer.php:2671
-msgid "Services Layout Setting"
-msgstr "服務項目版面配置設定"
+msgid "Services Layout Settings"
+msgstr "[服務項目] 版面配置設定"
 
 #: inc/customizer.php:2530 inc/customizer.php:3088
 msgid "Custom Link"
@@ -798,11 +802,11 @@ msgstr "這項效果僅適用於 [首頁] 模板。"
 msgid "Header Transparent"
 msgstr "透明頁首"
 
-#: inc/template-tags.php:1548
+#: inc/template-tags.php:1568
 msgid "Subscribe"
 msgstr "訂閱"
 
-#: inc/template-tags.php:1547
+#: inc/template-tags.php:1567
 msgid "Enter your e-mail address"
 msgstr "輸入你的電子郵件地址"
 
@@ -830,7 +834,7 @@ msgid "4 Columns"
 msgstr "4 欄"
 
 #: inc/customizer.php:3039
-msgid "Team Layout Setting"
+msgid "Team Layout Settings"
 msgstr "[團隊成員] 版面配置設定"
 
 #: inc/customizer.php:2342 inc/customizer.php:2555
@@ -934,10 +938,6 @@ msgstr "區段: 燈箱效果影片"
 #: inc/dashboard.php:485
 msgid "Hooray! There are no required actions for you right now."
 msgstr "太棒了！目前沒有需要執行的必要動作。"
-
-#: inc/dashboard.php:484
-msgid "Keep update with %s"
-msgstr "為 %s 保持更新"
 
 #: inc/dashboard.php:475
 msgid "Change homepage page template"
@@ -1044,62 +1044,62 @@ msgstr "安裝 %1$s 外掛後，請前往 [外觀自訂器] &rarr; [區段: 聯�
 msgid "Search Results for: %s"
 msgstr "搜尋「%s」的結果"
 
-#: inc/template-tags.php:458
+#: inc/template-tags.php:469
 msgid "Your comment is awaiting moderation."
 msgstr "你的留言正在審核中。"
 
-#: inc/template-tags.php:453
+#: inc/template-tags.php:464
 msgid "Edit"
 msgstr "編輯"
 
 #. translators: 1: date, 2: time
-#: inc/template-tags.php:452
+#: inc/template-tags.php:463
 msgid "Reply"
 msgstr "回覆"
 
-#: inc/template-tags.php:444
+#: inc/template-tags.php:455
 msgid "Post author"
 msgstr "文章作者"
 
-#: inc/template-tags.php:425
+#: inc/template-tags.php:436
 msgid "(Edit)"
 msgstr "(編輯)"
 
-#: inc/template-tags.php:425
+#: inc/template-tags.php:436
 msgid "Pingback:"
 msgstr "通告:"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "% Comments"
 msgstr "% 則留言"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "1 Comment"
 msgstr "1 則留言"
 
-#: inc/template-tags.php:355
+#: inc/template-tags.php:366
 msgid "Leave a comment"
 msgstr "留下留言"
 
-#: inc/template-tags.php:349
+#: inc/template-tags.php:360
 msgid "Tagged %1$s"
 msgstr "標籤為「%1$s」"
 
-#: inc/template-tags.php:343
+#: inc/template-tags.php:354
 msgid "Posted in %1$s"
 msgstr "分類為「%1$s」"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:341 inc/template-tags.php:347
+#: inc/template-tags.php:352 inc/template-tags.php:358
 msgid ", "
 msgstr ", "
 
-#: inc/template-tags.php:323
+#: inc/template-tags.php:334
 msgctxt "post author"
 msgid "by %s"
 msgstr "由 %s 撰寫"
 
-#: inc/template-tags.php:318
+#: inc/template-tags.php:329
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr "發表於 %s"
@@ -1479,7 +1479,7 @@ msgid "Social Footer Title"
 msgstr "頁尾社交網路資料標題"
 
 #: inc/customizer.php:779
-msgid "These social profiles setting below will display at the footer of your site."
+msgid "The social profiles specified below will be displayed in the footer of your site."
 msgstr "在下方設定的社交網路資料，會顯示於網站頁尾。"
 
 #: inc/customizer.php:766
@@ -1683,23 +1683,23 @@ msgstr "側欄"
 msgid "Primary Menu"
 msgstr "主要選單"
 
-#: inc/template-tags.php:1336
+#: inc/template-tags.php:1344
 msgid "%1$s theme by %2$s"
 msgstr "本站採用 %2$s 開發的 %1$s 佈景主題"
 
-#: inc/template-tags.php:1334
+#: inc/template-tags.php:1342
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "版權所有 %1$s %2$s %3$s"
 
-#: footer.php:34
+#: footer.php:44
 msgid "Back To Top"
 msgstr "返回頂端"
 
-#: inc/customizer.php:864 inc/template-tags.php:1538
+#: inc/customizer.php:864 inc/template-tags.php:1558
 msgid "Join our Newsletter"
 msgstr "訂閱電子報"
 
-#: inc/customizer.php:787 inc/template-tags.php:1557
+#: inc/customizer.php:787 inc/template-tags.php:1577
 msgid "Keep Updated"
 msgstr "關注我們"
 

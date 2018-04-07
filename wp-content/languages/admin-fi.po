@@ -26,37 +26,37 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europe/Helsinki"
 
-#: wp-admin/about.php:298
+#: wp-admin/about.php:316
 msgid "Improvements to Roles and Capabilities"
 msgstr "Parannuksia rooleihin ja käyttöoikeuksiin"
 
-#: wp-admin/about.php:299
+#: wp-admin/about.php:317
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Lisäosien ja käännöstiedostojen hallintaa on tarkennettu. Lisäksi sivuston vaihtoa monen sivuston asennuksissa on parannettu niin, että käyttäjäroolit ja -oikeudet päivittyvät varmemmin ja yhtenäisemmin."
 
-#: wp-admin/about.php:295
+#: wp-admin/about.php:313
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "WordPress 4.9 sisältää päivitetyn version MediaElement.js:sta, mikä poistaa riippuvuuksia jQueryyn, parantaa esteettömyyttä ja käyttöliittymää sekä korjaa useita virheitä."
 
-#: wp-admin/about.php:294
+#: wp-admin/about.php:312
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js päivitetty version 4.2.6"
 
-#: wp-admin/about.php:291
+#: wp-admin/about.php:309
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "WordPressin ytimeen on tuotu uusi muokkauskirjasto, CodeMirror. Se helpottaa koodin kirjoittamista ja muokkaamista lisäosissa, esim. CSS:n tai JavaScriptin include-kentissä."
 
-#: wp-admin/about.php:290
+#: wp-admin/about.php:308
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror saatavana käytettäväksi teemoissa ja lisäosissa"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:284
+#: wp-admin/about.php:302
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "Olemme tehneet lukemattomia parannuksia Mukauttimen javascript-API:in WordPressin versiossa 4.9. Olemme poistaneet monia hankalia kohtia ja tehneet siitä yhtä helpon käyttää kuin PHP-API. Käytössäsi on myös uusia hallintasivupohjia, päivämääräsäädin ja osio/paneeli/globaalit ilmoitukset, muutamia ominaisuuksia mainitaksemme. <a href=\"%s\">Katso koko lista.</a>"
 
-#: wp-admin/about.php:280
+#: wp-admin/about.php:298
 msgid "Customizer JS API Improvements"
 msgstr "Customizer JS API-rajapinnan parannukset"
 
@@ -64,7 +64,7 @@ msgstr "Customizer JS API-rajapinnan parannukset"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Tätä tietoa käytetään WordPressin yleisiin parannuksiin, esimerkiksi sivustosi suojaamiseen asentamalla automaattisesti päivityksiä. Siitä myös lasketaan tilastoja, joita näytetään esimerkiksi <a href=\"%s\">WordPress.org:n tilastosivulla</a>."
 
-#: wp-admin/about.php:193
+#: wp-admin/about.php:211
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "Muokatessasi teemoja ja lisäosia suoraan, WordPress 4.9 varoittaa tämän olevan vaarallinen tapa. Se suosittelee varmuuskopioimaan tiedostosi ennen tallentamista, etteivät ne katoa seuraavan päivityksen yhteydessä. Toimiessasi turvallisesti itsesi lisäksi hyötyvät tiimisi ja asiakkaasi."
 
@@ -140,53 +140,53 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Syötä tähän osoite, jos haluat <a href=\"%s\">sivustosi kotisivun olevan muualla kuin WordPressin asennushakemistossa</a>."
 
-#: wp-admin/about.php:263
+#: wp-admin/about.php:281
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://wordpress.org/plugins/gutenberg/"
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:273
+#: wp-admin/about.php:291
 msgid "Developer Happiness %s"
 msgstr "Tyytyväiset kehittäjät %s"
 
-#: wp-admin/about.php:262
+#: wp-admin/about.php:280
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "WordPress kehittää uutta tapaa luoda ja hallita sisältöä. Apu kelpaisi! Haluatko olla <a href=\"%s\">varhainen testaaja</a> tai osallistua muuten Gutenberg-projektin kehitykseen? <a href=\"%s\">Projekti on GitHubissa</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:256
+#: wp-admin/about.php:274
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Auta Gutenbergin kehityksessä %s"
 
-#: wp-admin/about.php:223
+#: wp-admin/about.php:241
 msgid "Site Building Improvements"
 msgstr "Parannuksia sivuston rakentamisessa"
 
-#: wp-admin/about.php:231
+#: wp-admin/about.php:249
 msgid "More Reliable Theme Switching"
 msgstr "Luotettavampi teemanvaihto"
 
-#: wp-admin/about.php:208
+#: wp-admin/about.php:226
 msgid "The New Gallery Widget"
 msgstr "Uusi galleria-vimpain"
 
-#: wp-admin/about.php:200
+#: wp-admin/about.php:218
 msgid "Even More Widget Updates"
 msgstr "Lisää vimpainpäivityksiä"
 
-#: wp-admin/about.php:163
+#: wp-admin/about.php:181
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Unohditko tallentaa uuden designisi luonnoksen? Älä huolestu: palatessasi WordPress 4.9 kysyy, haluatko tallettaa vielä tallentamattomat muutokset."
 
-#: wp-admin/about.php:170
+#: wp-admin/about.php:188
 msgid "Coding Enhancements"
 msgstr "Paremmat koodin muokkausominaisuudet"
 
-#: wp-admin/about.php:162
+#: wp-admin/about.php:180
 msgid "A Prompt to Protect Your Work"
 msgstr "Huomautus muutosten tallentamisesta"
 
-#: wp-admin/about.php:155
+#: wp-admin/about.php:173
 msgid "Design Locking To Guard Your Changes"
 msgstr "Designin lukitseminen muutostesi pysymisen takaamiseksi"
 
@@ -198,80 +198,80 @@ msgstr "Suhtaudumme tietosuojaan ja läpinäkyvyyteen hyvin vakavasti. Lisätiet
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "WordPress-sivustosi saattaa lähetttää ajoittain tietoa WordPress.org:iin. Tieto saattaa sisältää esimerkiksi käyttämäsi WordPressin version ja listan käytössä olevista lisäosista ja teemoista."
 
-#: wp-admin/about.php:239
+#: wp-admin/about.php:257
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Oliko uuden valikon tekeminen vaikeaa? Ehkä ei enää! Olemme parantaneet käyttöliittymää helpommaksi. Päivitetyt ohjeet auttavat sinua."
 
-#: wp-admin/about.php:238
+#: wp-admin/about.php:256
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Paremmat ohjeet valikoiden tekemiseksi = vähemmän hämmennystä"
 
-#: wp-admin/about.php:232
+#: wp-admin/about.php:250
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "Kun vaihdat teemaan, vimpaimet saattavat joskus kuvitella, että ne voivat tuosta noin vain vaihtaa paikkaa. WordPress 4.9 tarjoaa paremmin pysyvät valikoiden ja vimpainten asettelut, kun päätät vaihtaa teemaa. Voit myös esikatsella ladattuja teemoja tai ladata, asentaa ja esikatsella uusia teemoja kunnolla. Esikatselu ennen aktivointia on kätevää."
 
-#: wp-admin/about.php:216
+#: wp-admin/about.php:234
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Haluatko lisätä mediaa tekstivimpaimeen? Lisää kuvia, videota ja ääntä suoraan vimpaimeen tekstin seuraksi käyttäen uutta Lisää media -nappiamme. Huraa!"
 
-#: wp-admin/about.php:215
+#: wp-admin/about.php:233
 msgid "Press a Button, Add Media"
 msgstr "Lisää mediaa napinpainalluksella"
 
-#: wp-admin/about.php:209
+#: wp-admin/about.php:227
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "Parannuksia WordPress 4.8:ssa esiteltyihin muutoksiin median käsittelyssä: voit nyt lisätä gallerian vimpaimella. Jes!"
 
-#: wp-admin/about.php:186
+#: wp-admin/about.php:204
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Pelätty valkoinen ruutu. Vältät sen jatkossa, koska WordPress 4.9 varoittaa sinua, kun olet tallentamassa tiedostoa, jossa on virhe. "
 
-#: wp-admin/about.php:192
+#: wp-admin/about.php:210
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Varoitus: vaara edessä!"
 
-#: wp-admin/about.php:185
+#: wp-admin/about.php:203
 msgid "Sandbox for Safety"
 msgstr "Turvallinen hiekkalaatikko"
 
-#: wp-admin/about.php:179
+#: wp-admin/about.php:197
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Saittisi ulkonäössä on ongelma, mutta et tiedä, mikä meni pieleen CSS-koodissasi? Syntaksikorostus ja virheidentarkastus CSS-tiedostoja muokattaessa ja HTML-vimpaimessa näyttävät virheet nopeasti. Nyt voit tarkastella koodia paljon nopeammin ja löytää koodivirheet hetkessä."
 
-#: wp-admin/about.php:178
+#: wp-admin/about.php:196
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Syntaksikorostus ja virheentarkistus? Kyllä kiitos!"
 
-#: wp-admin/about.php:156
+#: wp-admin/about.php:174
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Oletko koskaan törmännyt tilanteeseen, jossa kaksi henkilöä työskentelee samassa projektissa ja suunnittelija A jyrää suunnittelija B:n hienot muutokset? WordPress 4.9:ssä on ulkoasulukitus, joka suojaa tekemäsi muutokset muiden käyttäjien muutoksilta."
 
-#: wp-admin/about.php:149
+#: wp-admin/about.php:167
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Haluatko saada palautetta sivuston ulkoasun muutoksesta? WordPress 4.9:ssä voit lähettää tiimillesi tai asaiakkaillesi esikatselulinkin, joten voit kerätä palautetta ennen kuin muutokset julkaistaan. Eikö kuulostakin hyvältä yhteistyön kannalta?"
 
-#: wp-admin/about.php:148
+#: wp-admin/about.php:166
 msgid "Collaborate with Design Preview Links"
 msgstr "Tee yhteistyötä design-esikatselulinkeillä"
 
-#: wp-admin/about.php:142
+#: wp-admin/about.php:160
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "Kyllä, luit oikein. Olet voinut katsella artikkelien luonnoksia, tutkailla eri versioita ja ajastaa artikkeleja haluamaasi aikaan, ja nyt voit tehdä samaa sivuston ulkoasun kanssa. Voit ajastaa ulkoasumuutoksia ilmestymään silloin kun haluat."
 
-#: wp-admin/about.php:133
+#: wp-admin/about.php:151
 msgid "Customizer Workflow Improved"
 msgstr "Mukauttimen työnkulkujen kehitys"
 
-#: wp-admin/about.php:120
+#: wp-admin/about.php:138
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Mukauttimen työnkulkua on parannettu reippaasti: ulkoasumuutoksista voi katsella vedoksia, muutoksia voi lukita, ajastaa ja esikatselulinkkejä jakaa. Koodin syntaksin korostaminen ja virheentarkistus helpottavat virheiden välttämistä. Ja jos tämä ei riitä, tarjolla olisi vielä uusi, upea galleriavimpain ja parannuksia teemojen selailuun ja vaihtamiseen."
 
-#: wp-admin/about.php:141
+#: wp-admin/about.php:159
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Tallenna luonnoksia ja ajasta sivuston ulkoasumuutokset"
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:115
+#: wp-admin/about.php:133
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Isoja parannuksia Mukauttimeen, koodin virheentarkistusta ja muuta! %s"
 
@@ -538,7 +538,7 @@ msgstr "Viimeisimmät luonnoksesi"
 msgid "Your PHP code changes were rolled back due to an error on line %1$s of file %2$s. Please fix and try saving again."
 msgstr "PHP-koodin muokkauksesi peruutettiin johtuen virheestä rivillä %1$s tiedostossa %2$s. Korjaa virheet ja yritä tallentamista uudelleen."
 
-#: wp-admin/includes/class-wp-users-list-table.php:492
+#: wp-admin/includes/class-wp-users-list-table.php:496
 msgctxt "name"
 msgid "Unknown"
 msgstr "Tuntematon"
@@ -1693,7 +1693,7 @@ msgid "(Currently set to: %s)"
 msgstr "(Tämänhetkinen asetus: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:426
+#: wp-admin/about.php:444
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>Versio %s</strong> paikkasi yhden tietoturva-aukon."
 
@@ -1715,15 +1715,15 @@ msgstr "https://fi.gravatar.com/"
 msgid "Profile Picture"
 msgstr "Profiilikuva"
 
-#: wp-admin/about.php:420
+#: wp-admin/about.php:438
 msgid "Security Releases"
 msgstr "Tietoturvapäivitykset"
 
-#: wp-admin/about.php:417
+#: wp-admin/about.php:435
 msgid "Maintenance Releases"
 msgstr "Ylläpitopäivitykset"
 
-#: wp-admin/about.php:34 wp-admin/about.php:423
+#: wp-admin/about.php:34 wp-admin/about.php:441
 msgid "Maintenance and Security Releases"
 msgstr "Ylläpito- ja tietoturvapäivitykset"
 
@@ -1771,7 +1771,7 @@ msgid "We&#8217;re going to use this information to create a %s file."
 msgstr "Käytämme näitä tietoja luodaksemme %s-tiedoston."
 
 #. translators: %s: wp-content/uploads
-#: wp-admin/options-media.php:112
+#: wp-admin/options-media.php:114
 msgid "Default is %s"
 msgstr "Oletus on %s"
 
@@ -2077,7 +2077,7 @@ msgstr "Näytä kaikki luonnokset"
 msgid "No role"
 msgstr "Ei roolia"
 
-#: wp-admin/includes/class-wp-users-list-table.php:566
+#: wp-admin/includes/class-wp-users-list-table.php:570
 msgctxt "no user roles"
 msgid "None"
 msgstr "Ei mitään"
@@ -2390,7 +2390,7 @@ msgid_plural "Your theme supports %s menus. Select which menu appears in each lo
 msgstr[0] "Teemassasi on %s valikkopaikka. Valitse mitä valikkoa haluat käyttää."
 msgstr[1] "Teemassasi on %s valikkopaikkaa. Valitse mitä valikkoa haluat käyttää kussakin paikassa."
 
-#: wp-admin/includes/class-wp-users-list-table.php:505
+#: wp-admin/includes/class-wp-users-list-table.php:509
 msgid "%s post by this author"
 msgid_plural "%s posts by this author"
 msgstr[0] "%s artikkeli tältä käyttäjältä"
@@ -2914,7 +2914,7 @@ msgstr ""
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/misc.php:1161
+#: wp-admin/includes/misc.php:1163
 msgid ""
 "Howdy ###USERNAME###,\n"
 "\n"
@@ -5261,7 +5261,7 @@ msgstr "Tiedosto on liian suuri. Maksimitiedostokoko on %1$s KB."
 msgid "You have used your space quota. Please delete files before uploading."
 msgstr "Kovalevytilasi on täynnä. Poista tiedostoja ennen kuin siirrät uusia."
 
-#: wp-admin/includes/misc.php:1208
+#: wp-admin/includes/misc.php:1210
 msgid "[%s] New Admin Email Address"
 msgstr "[%s] Uusi pääkäyttäjän sähköpostiosoite"
 
@@ -5534,7 +5534,7 @@ msgstr "Näytä työkalupalkki kun tarkastelet sivustoa"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:435
+#: wp-admin/about.php:453
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>Versio %1$s</strong> paikkasi tietoturva-aukon ja korjasi %2$s bugin."
@@ -5542,21 +5542,22 @@ msgstr[1] "<strong>Versio %1$s</strong> paikkasi tietoturva-aukon ja korjasi %2$
 
 #. translators: %s: Codex URL
 #: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
-#: wp-admin/about.php:104 wp-admin/about.php:443
+#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:461
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "<a href=\"%s\">Lisätietoja tästä päivityksestä</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:75 wp-admin/about.php:93 wp-admin/about.php:439
+#: wp-admin/about.php:39 wp-admin/about.php:93 wp-admin/about.php:111
+#: wp-admin/about.php:457
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>Versio %1$s</strong> paikkasi joitakin tietoturva-aukkoja ja korjasi %2$s bugin."
 msgstr[1] "<strong>Versio %1$s</strong> paikkasi joitakin tietoturva-aukkoja ja korjasi %2$s bugia."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:39 wp-admin/about.php:57 wp-admin/about.php:431
+#: wp-admin/about.php:57 wp-admin/about.php:75 wp-admin/about.php:449
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Versio %1$s</strong> korjasi %2$s bugin."
@@ -5566,15 +5567,15 @@ msgstr[1] "<strong>Versio %1$s</strong> korjasi %2$s bugia."
 msgid "Welcome to your WordPress Dashboard! This is the screen you will see when you log in to your site, and gives you access to all the site management features of WordPress. You can get help for any screen by clicking the Help tab above the screen title."
 msgstr "Tervetuloa WordPressin ohjausnäkymään! Näet tämän aina kun kirjaudut sisään, ja pääset tätä kautta kaikkiin sivuston hallintaominaisuuksiin. Saat tarvittaessa apua oikean yläkulman Ohje-välilehdeltä."
 
-#: wp-admin/about.php:422
+#: wp-admin/about.php:440
 msgid "Maintenance and Security Release"
 msgstr "Huolto- ja tietoturvapäivitys"
 
-#: wp-admin/about.php:419
+#: wp-admin/about.php:437
 msgid "Security Release"
 msgstr "Tietoturvapäivitys"
 
-#: wp-admin/about.php:416
+#: wp-admin/about.php:434
 msgid "Maintenance Release"
 msgstr "Huoltopäivitys"
 
@@ -5584,7 +5585,7 @@ msgid "What&#8217;s New"
 msgstr "Uudet ominaisuudet"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:428
+#: wp-admin/about.php:446
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>Versio %s</strong> paikkasi tietoturva-aukon."
 
@@ -5592,7 +5593,7 @@ msgstr "<strong>Versio %s</strong> paikkasi tietoturva-aukon."
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "Tällä ruudulla pystyt valitsemaan kestolinkin rakenteen. Voit valita joko vakioasetukset tai luoda oman URL-rakenteen."
 
-#: wp-admin/about.php:309
+#: wp-admin/about.php:327
 msgid "Return to Updates"
 msgstr "Palaa päivitykset -kohtaan"
 
@@ -5868,11 +5869,11 @@ msgstr "Koska tämä on multisite-asennus, voit lisätä jo olemassaolevia tilej
 msgid "Welcome to WordPress %s"
 msgstr "Tervetuloa käyttämään WordPress-versiota %s"
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:330
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Mene ohjausnäkymän etusivulle"
 
-#: wp-admin/about.php:309
+#: wp-admin/about.php:327
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Palaa sivulle Ohjausnäkymä &rarr; Päivitykset"
 
@@ -7690,7 +7691,7 @@ msgstr "Muokkaa valikon kohtaa"
 msgid "Please enter a valid menu name."
 msgstr "Anna valikolle kelvollinen nimi."
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:330
 msgid "Go to Dashboard"
 msgstr "Palaa Ohjausnäkymä-sivulle"
 
@@ -8219,39 +8220,39 @@ msgstr "Mediakirjaston asetukset"
 msgid "Image sizes"
 msgstr "Kuvien koot"
 
-#: wp-admin/options-media.php:53
+#: wp-admin/options-media.php:53 wp-admin/options-media.php:54
 msgid "Thumbnail size"
 msgstr "Koko"
 
-#: wp-admin/options-media.php:60
+#: wp-admin/options-media.php:62
 msgid "Crop thumbnail to exact dimensions (normally thumbnails are proportional)"
 msgstr "Rajaa kuva annettuihin mittoihin (oletuksena kuvan koko on suhteellinen)"
 
-#: wp-admin/options-media.php:65 wp-admin/options-media.php:66
+#: wp-admin/options-media.php:67 wp-admin/options-media.php:68
 msgid "Medium size"
 msgstr "Keskikokoinen"
 
-#: wp-admin/options-media.php:76 wp-admin/options-media.php:77
+#: wp-admin/options-media.php:78 wp-admin/options-media.php:79
 msgid "Large size"
 msgstr "Suuri"
 
-#: wp-admin/options-media.php:94
+#: wp-admin/options-media.php:96
 msgid "Embeds"
 msgstr "Upotetut kohteet"
 
-#: wp-admin/options-media.php:108
+#: wp-admin/options-media.php:110
 msgid "Store uploads in this folder"
 msgstr "Tallenna siirretyt tiedostot tähän kansioon:"
 
-#: wp-admin/options-media.php:118
+#: wp-admin/options-media.php:120
 msgid "Full URL path to files"
 msgstr "Täysi URL-osoite tiedostoihin"
 
-#: wp-admin/options-media.php:120
+#: wp-admin/options-media.php:122
 msgid "Configuring this is optional. By default, it should be blank."
 msgstr "Tämä asetus on valinnainen. Oletuksena sen tulisi olla tyhjä."
 
-#: wp-admin/options-media.php:131
+#: wp-admin/options-media.php:133
 msgid "Organize my uploads into month- and year-based folders"
 msgstr "Järjestä siirtämäni tiedostot kuukauden ja vuoden mukaan nimettyihin kansioihin"
 
@@ -8909,11 +8910,11 @@ msgstr "Artikkeleiden oletuskategoria sähköpostitse"
 msgid "Convert emoticons like <code>:-)</code> and <code>:-P</code> to graphics on display"
 msgstr "Muuta hymiöt esim. <code>:-)</code> ja <code>:-P</code> kuvakkeiksi näytettäessä."
 
-#: wp-admin/options-media.php:70 wp-admin/options-media.php:81
+#: wp-admin/options-media.php:72 wp-admin/options-media.php:83
 msgid "Max Height"
 msgstr "Korkeus maks.:"
 
-#: wp-admin/options-media.php:67 wp-admin/options-media.php:78
+#: wp-admin/options-media.php:69 wp-admin/options-media.php:80
 msgid "Max Width"
 msgstr "Leveys maks.:"
 
@@ -8970,7 +8971,7 @@ msgstr "Yleinen"
 msgid "Compare Revisions of &#8220;%1$s&#8221;"
 msgstr "Vertaile sivun/artikkelin &#8221;%1$s&#8221; versioita"
 
-#: wp-admin/options-media.php:101
+#: wp-admin/options-media.php:103
 msgid "Uploading Files"
 msgstr "Tiedostojen sijainti"
 
