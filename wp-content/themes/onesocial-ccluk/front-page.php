@@ -12,9 +12,8 @@ get_header();
 <section id="primary" class="section site-content default-page">
 
 	<main id="content" role="main" class="section-content">
-
 		<?php while ( have_posts() ) : the_post(); ?>
-			<?php get_template_part( 'template-parts/content', 'page' ); ?>
+			<?php get_template_part( 'template-parts/content', 'primary' ); ?>
 		<?php endwhile; // end of the loop.  ?>
 	</main>
 
