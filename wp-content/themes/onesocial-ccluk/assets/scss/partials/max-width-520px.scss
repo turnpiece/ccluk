@@ -1,14 +1,18 @@
 .single-ccluk_news .entry-header.has-image h1 {
-    font-size: 30px;
+    font-size: $font-size-lg;
     max-height: 200px;
     overflow: auto;
     padding: 0;
 }
 
 .bb-slider-container .title {
-	font-size: 20px !important;
+	font-size: $font-size-std !important;
 }
 
 .post-author-info .author-follow {
     right: 0;
+}
+
+.dir-header {
+	font-size: $font-size-lg;
 }

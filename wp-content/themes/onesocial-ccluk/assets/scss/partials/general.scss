@@ -162,3 +162,10 @@ input[type=submit] {
 .single-item.groups #buddypress #item-header span.activity {
     text-shadow: 1px 1px 1px rgba(0,0,0,.7);
 }
+
+.entry-caption, 
+.gallery-caption, 
+.wp-caption .wp-caption-text {
+    font-size: 14px;
+    line-height: 1.6;
+}

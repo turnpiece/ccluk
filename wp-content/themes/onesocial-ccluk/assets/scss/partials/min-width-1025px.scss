@@ -15,7 +15,7 @@ body.page {
                 @include margin( 2.4, 0 );
 
                 h1.entry-title {
-                    font-size: 70px;
+                    font-size: $font-size-vlg;
                 }
             }
         }
@@ -26,7 +26,7 @@ body.page {
 .single-post {
     .entry-header {
         h1 {
-            font-size: 35px;
+            font-size: $font-size-lg;
         }
     }
 }

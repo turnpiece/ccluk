@@ -137,6 +137,12 @@ input[type=submit] {
 .single-item.groups #buddypress #item-header span.activity {
   text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.7); }
 
+.entry-caption,
+.gallery-caption,
+.wp-caption .wp-caption-text {
+  font-size: 14px;
+  line-height: 1.6; }
+
 /*--------------------------------------------------------------
 Mobile Header
 --------------------------------------------------------------*/
@@ -225,10 +231,6 @@ body.is-mobile #main-wrap {
   max-width: 1200px;
   margin-left: auto;
   margin-right: auto; }
-  .single .entry-post-thumbnail img,
-  .single-post .entry-post-thumbnail img {
-    float: none;
-    width: auto; }
 .single .entry-header,
 .single .entry-header.has-image,
 .single .entry-header.not-image,
@@ -553,7 +555,7 @@ body.page-template-homepage #secondary {
   text-align: left;
   /* newsletter sighup checkbox */ }
   .register div#register-page p {
-    font-size: 20px; }
+    font-size: 21px; }
   .register div#register-page .wp-social-login-widget {
     text-align: center; }
   .register div#register-page .register-section {
@@ -577,20 +579,7 @@ body.page-template-homepage #secondary {
           margin-bottom: 10px;
           line-height: 1; }
     .register div#register-page .register-section#profile-details-section .field-visibility-settings-toggle {
-      display: none;
-                    /*
-                    span, button {
-                        font-size: 12px;
-                        line-height: 18px;
-                    }
-
-                    button {
-                        margin-left: 10px;
-                        border-radius: 3px;
-                        padding: 3px 10px;
-                        line-height: 18px;
-                    }
-                    */ }
+      display: none; }
   .register div#register-page .mc4wp-checkbox {
     text-align: center; }
     .register div#register-page .mc4wp-checkbox label strong {
@@ -1157,16 +1146,19 @@ MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/
 @media screen and (max-width: 520px) {
   .single-ccluk_news .entry-header.has-image h1 {
-    font-size: 30px;
+    font-size: 36px;
     max-height: 200px;
     overflow: auto;
     padding: 0; }
 
   .bb-slider-container .title {
-    font-size: 20px !important; }
+    font-size: 21px !important; }
 
   .post-author-info .author-follow {
-    right: 0; } }
+    right: 0; }
+
+  .dir-header {
+    font-size: 36px; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 480 pixels (phones)
 --------------------------------------------------------------*/
@@ -1180,7 +1172,9 @@ MAXIMUM width of 480 pixels (phones)
     body #mobile-header #mobile-logo img {
       max-height: 44px;
       max-width: 240px;
-      margin: 8px auto; } }
+      margin: 8px auto; }
+    body .bb-slider-container {
+      top: 0; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 320 pixels (small phones)
 --------------------------------------------------------------*/
@@ -1215,7 +1209,7 @@ MINIMUM width of 1025 pixels (desktops)
 
   .single .entry-header h1,
   .single-post .entry-header h1 {
-    font-size: 35px; }
+    font-size: 36px; }
 
   #buddypress div#register-page .register-section {
     width: 46% !important;

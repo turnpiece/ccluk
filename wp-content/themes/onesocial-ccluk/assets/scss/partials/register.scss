@@ -28,7 +28,7 @@
         text-align: left;
 
         p {
-            font-size: 20px;
+            font-size: $font-size-std;
         }
 
         .wp-social-login-widget {
@@ -73,22 +73,7 @@
                 }
 
                 .field-visibility-settings-toggle{
-
                     display: none;
-
-                    /*
-                    span, button {
-                        font-size: 12px;
-                        line-height: 18px;
-                    }
-
-                    button {
-                        margin-left: 10px;
-                        border-radius: 3px;
-                        padding: 3px 10px;
-                        line-height: 18px;
-                    }
-                    */
                 }
             }
         }
