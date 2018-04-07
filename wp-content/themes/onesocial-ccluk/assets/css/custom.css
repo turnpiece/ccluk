@@ -141,14 +141,19 @@ input[type=submit] {
 Mobile Header
 --------------------------------------------------------------*/
 #mobile-header {
-  background-color: #fff !important; }
+  background-color: #fff !important;
+  padding-top: 8px;
+  height: 70px; }
   #mobile-header h1 {
     color: #000; }
     #mobile-header h1 a {
       color: #000; }
-  #mobile-header .left-btn:before,
-  #mobile-header .right-btn:before {
-    color: #333; }
+  #mobile-header .left-btn,
+  #mobile-header .right-btn {
+    padding-top: 8px; }
+    #mobile-header .left-btn:before,
+    #mobile-header .right-btn:before {
+      color: #333; }
   #mobile-header #mobile-logo img {
     max-height: 70px;
     max-width: 300px;
@@ -157,15 +162,17 @@ Mobile Header
 /*--------------------------------------------------------------
 Mobile Menu
 --------------------------------------------------------------*/
-#mobile-right-panel li a {
-  color: #22a7f0;
-  font-weight: 700; }
-  #mobile-right-panel li a:hover {
-    color: #54ae68; }
-#mobile-right-panel li.current-menu-item {
-  background-color: #fff; }
-  #mobile-right-panel li.current-menu-item a {
-    color: #54ae68; }
+#mobile-right-panel li {
+  width: 100%; }
+  #mobile-right-panel li a {
+    color: #22a7f0;
+    font-weight: 700; }
+    #mobile-right-panel li a:hover {
+      color: #54ae68; }
+  #mobile-right-panel li.current-menu-item {
+    background-color: #fff; }
+    #mobile-right-panel li.current-menu-item a {
+      color: #54ae68; }
 #mobile-right-panel .sub-menu li a {
   font-weight: 100;
   background: rgba(0, 0, 0, 0.9); }
@@ -194,7 +201,9 @@ body.is-mobile #main-wrap {
   #masthead .main-navigation .nav-menu > li:hover, #masthead .main-navigation .nav-menu > li.current-menu-item, #masthead .main-navigation .nav-menu > li.current-menu-ancestor {
     background-color: #54ae68; }
     #masthead .main-navigation .nav-menu > li:hover > a, #masthead .main-navigation .nav-menu > li.current-menu-item > a, #masthead .main-navigation .nav-menu > li.current-menu-ancestor > a {
-      color: #fff; } }
+      color: #fff; }
+  #masthead .main-navigation .nav-menu.horizontal-responsive-menu {
+    width: 120%; } }
 .single .header-area,
 .single-post .header-area {
   position: relative; }

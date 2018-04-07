@@ -4,6 +4,8 @@ Mobile Header
 
 #mobile-header {
     background-color: $white !important;
+    padding-top: 8px;
+    height: 70px;
 
 	h1 {
 	    color: $black;
@@ -13,9 +15,13 @@ Mobile Header
 		}
 	}
 
-	.left-btn:before,
-	.right-btn:before {
-		color: $dark;
+	.left-btn,
+	.right-btn {
+		padding-top: 8px;
+
+		&:before {
+			color: $dark;
+		}
 	}
 
 	#mobile-logo {
@@ -34,6 +40,8 @@ Mobile Menu
 #mobile-right-panel {
 
 	li {
+		width: 100%;
+
 		a {
 			color: $blue;
 			font-weight: 700;
