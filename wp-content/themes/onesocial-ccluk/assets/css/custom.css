@@ -333,10 +333,17 @@ body.is-mobile #main-wrap {
   .single-post .comments-area #respond form p input[type=submit] {
     margin-top: 5px;
     float: right; }
-.single .comments-area article header,
-.single-post .comments-area article header {
-  margin-bottom: 15px;
-  margin-bottom: 1.5rem; }
+.single .comments-area article,
+.single-post .comments-area article {
+  padding: 5px 0px;
+  padding: 0.5rem 0rem; }
+  .single .comments-area article header,
+  .single-post .comments-area article header {
+    margin-bottom: 6px;
+    margin-bottom: 0.6rem; }
+  .single .comments-area article .comment-content p,
+  .single-post .comments-area article .comment-content p {
+    line-height: 1.5; }
 
 /* styles for pages */
 body.page #primary article > .entry-header {

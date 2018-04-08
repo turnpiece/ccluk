@@ -105,8 +105,16 @@
         }
 
         article {
+            @include padding( .5, 0 );
+            
             header {
-                @include margin-bottom( 1.5 );
+                @include margin-bottom( .6 );
+            }
+
+            .comment-content {
+                p {
+                    line-height: 1.5;
+                }
             }
         }
     }
