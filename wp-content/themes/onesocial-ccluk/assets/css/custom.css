@@ -229,6 +229,8 @@ body.is-mobile #main-wrap {
 .single .entry-post-thumbnail,
 .single-post .entry-post-thumbnail {
   max-width: 1200px;
+  height: auto;
+  max-height: 800px;
   margin-left: auto;
   margin-right: auto; }
 .single .entry-header,

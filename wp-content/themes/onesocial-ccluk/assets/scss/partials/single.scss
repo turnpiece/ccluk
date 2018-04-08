@@ -21,6 +21,8 @@
 
     .entry-post-thumbnail {
         max-width: 1200px;
+        height: auto;
+        max-height: 800px;
         margin-left: auto;
         margin-right: auto;
     }
@@ -106,7 +108,7 @@
 
         article {
             @include padding( .5, 0 );
-            
+
             header {
                 @include margin-bottom( .6 );
             }

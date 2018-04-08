@@ -1,0 +1,584 @@
+# Translation of Stable (latest release) in Dutch
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2016-06-21 19:10:10+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.1.0-alpha\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: app/Views/forms/quickedit-post.php:135
+msgid "Menu Options"
+msgstr "Menu opties"
+
+#: app/Views/forms/quickedit-post.php:139
+msgid "Taxonomies"
+msgstr "Taxanomieën"
+
+#: app/Views/listing.php:35
+msgid "Sync Menu"
+msgstr "Menu synchroniseren"
+
+#: app/Views/partials/row.php:23
+msgid "Front Page"
+msgstr "Voorpagina"
+
+#: app/Views/partials/row.php:24
+msgid "Posts Page"
+msgstr "Berichten pagina"
+
+#: app/Views/partials/row.php:53
+msgid "currently editing"
+msgstr "nu aan het bewerken"
+
+#: app/Views/partials/row.php:57
+msgid "Edit"
+msgstr "Bewerken"
+
+#: app/Views/partials/tool-list.php:6
+msgid "All"
+msgstr "Alles"
+
+#: app/Views/partials/tool-list.php:24
+msgid "Trash"
+msgstr "Prullenbak"
+
+#: app/Views/partials/tool-list.php:25
+msgid "Empty"
+msgstr "Leeg"
+
+#: app/Views/partials/tool-list.php:47
+msgid "All Authors"
+msgstr "Alle auteurs"
+
+#: app/Views/partials/tool-list.php:62
+msgid "Menu Order"
+msgstr "Menu volgorde"
+
+#: app/Views/partials/tool-list.php:66
+msgid "Order By"
+msgstr "Sorteren op"
+
+#: app/Views/partials/tool-list.php:80
+msgid "Ascending"
+msgstr "Oplopend"
+
+#: app/Views/partials/tool-list.php:81
+msgid "Decending"
+msgstr "Aflopend"
+
+#: app/Views/partials/tool-list.php:110
+msgid "All "
+msgstr "Alle"
+
+#: app/Views/settings/settings-general.php:4
+msgid "Currently Enabled"
+msgstr "Momenteel ingeschakeld"
+
+#: app/Views/settings/settings-general.php:4
+msgid "Currently Disabled"
+msgstr "Momenteel uitgeschakeld"
+
+#: app/Views/settings/settings-general.php:8
+msgid "Nested Pages Version"
+msgstr "Nested Pages Versie"
+
+#: app/Views/settings/settings-general.php:13
+msgid "Menu Name"
+msgstr "Menu naam"
+
+#: app/Views/settings/settings-general.php:16
+msgid "Important: Once the menu name has changed, theme files should be updated to reference the new name."
+msgstr "Belangrijk: Wanneer de menu naam is gewijzigd moeten thema-bestanden bijgewerkt worden met een verwijzing naar de nieuwe naam."
+
+#: app/Views/settings/settings-general.php:21
+msgid "Display Options"
+msgstr "Weergave instellingen"
+
+#: app/Views/settings/settings-general.php:25
+msgid "Enable Date Picker in Quick Edit"
+msgstr "Date Picker inschakelen in Snel Bewerken"
+
+#: app/Views/settings/settings-general.php:30
+msgid "Menu Sync"
+msgstr "Menu Sync"
+
+#: app/Views/settings/settings-general.php:36
+msgid "Hide Menu Sync Checkbox"
+msgstr "Menu Sync optie verbergen"
+
+#: app/Views/settings/settings-general.php:43
+msgid "Disable Menu Sync Completely"
+msgstr "Menu Sync volledig uitschakelen"
+
+#: app/Views/settings/settings-general.php:49
+msgid "Allow Page Sorting"
+msgstr "Pagina sortering toestaan"
+
+#: app/Views/settings/settings-general.php:59
+msgid "Admins always have sorting ability."
+msgstr "Sorteren is altijd ingeschakeld voor beheerders."
+
+#: app/Views/settings/settings-posttypes.php:7
+msgid "Enable Nested Pages for:"
+msgstr "Nested Pages inschakelen voor:"
+
+#: app/Views/settings/settings-posttypes.php:14
+msgid "Post Type"
+msgstr "Post type"
+
+#: app/Views/settings/settings-posttypes.php:15
+msgid "Hierarchical"
+msgstr "Hiërarchisch"
+
+#: app/Views/settings/settings-posttypes.php:16
+msgid "Enabled"
+msgstr "Ingeschakeld"
+
+#: app/Views/settings/settings-posttypes.php:17
+msgid "Replace Default Menu"
+msgstr "Standaard menu vervangen"
+
+#: app/Views/settings/settings-posttypes.php:18
+msgid "Hide Default Link"
+msgstr "Standaard link verbergen"
+
+#: app/Views/settings/settings-posttypes.php:19
+msgid "Disable Nesting"
+msgstr "Nesting uitschakelen"
+
+#: app/Views/settings/settings-posttypes.php:51
+msgid "Note: Nesting features not enabled for non-hierarchical post types."
+msgstr "Opmerking: onderliggende posts zijn niet ingeschakeld voor niet-hiërarchische post typen."
+
+#: app/Views/settings/settings-posttypes.php:54
+msgid "If default menu is not replaced, an additional submenu item will be added for \"Nested/Sort View\""
+msgstr "Als het standaard menu niet wordt vervangen wordt een extra submenu toegevoegd genaamd \"Boom/gesorteerde weergave\""
+
+#: app/Views/settings/settings-posttypes.php:57
+msgid "<strong>Important:</strong> Changing page structures on live sites may effect SEO and existing inbound links. Limit URL structure changes on live sites by disabling nesting. Sorting within the current nesting structure will still be available. If nesting changes are made to a live site, it may help to add a 301 redirect from the old location to the new one."
+msgstr "<strong>Belangrijk:</strong>De pagina structuur van een live site wijzigen kan effect hebben op SEO en bestaande inkomende links. Beperkt URL structuur wijzigingen op live sites door nesting uit te schakelen. Sorteren binnen bestaande structuren blijft dan beschikbaar. Als je toch nesting wijzigingen doet op een live site, kan het help om een 301 redirect toe te voegen van de oude url naar de nieuwe."
+
+#: app/Views/settings/settings.php:6
+msgid "General"
+msgstr "Algemeen"
+
+#: app/Views/settings/settings.php:10
+msgid "Post Types"
+msgstr "Post typen"
+
+#. Plugin URI of the plugin/theme
+msgid "http://nestedpages.com"
+msgstr "http://nestedpages.com"
+
+#. Description of the plugin/theme
+msgid "Provides an intuitive drag and drop interface for managing pages in the Wordpress admin, while maintaining quick edit functionality."
+msgstr "Voegt een intuïtieve drag en drop weergave toe om je pagina's binnen WordPress te beheren, samen met de bestaande opties om snel te bewerken."
+
+#. Author of the plugin/theme
+msgid "Kyle Phillips"
+msgstr "Kyle Phillips"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/kylephillips"
+msgstr "https://github.com/kylephillips"
+
+#: app/Activation/Dependencies.php:108 app/Views/listing.php:29
+msgid "Expand All"
+msgstr "Alles uitklappen"
+
+#: app/Activation/Dependencies.php:109
+msgid "Collapse All"
+msgstr "Alles inklappen"
+
+#: app/Activation/Dependencies.php:110 app/Views/partials/tool-list.php:18
+msgid "Show Hidden"
+msgstr "Toon verborgen"
+
+#: app/Activation/Dependencies.php:111
+msgid "Hide Hidden"
+msgstr "Verberg verborgen"
+
+#: app/Activation/Dependencies.php:112 app/Views/listing.php:16
+#: app/Views/listing.php:17
+msgid "Add Link"
+msgstr "Link toevoegen"
+
+#: app/Activation/Dependencies.php:113
+msgid "Add Child Link"
+msgstr "Onderliggende link toevoegen"
+
+#: app/Activation/Dependencies.php:114
+#: app/Entities/Post/PostUpdateRepository.php:69
+#: app/Views/forms/new-child.php:19 app/Views/forms/new-child.php:21
+#: app/Views/forms/quickedit-post.php:20 app/Views/partials/tool-list.php:64
+msgid "Title"
+msgstr "Titel"
+
+#: app/Activation/Dependencies.php:115 app/Views/forms/quickedit-post.php:11
+#: app/Views/partials/row-link.php:68 app/Views/partials/row.php:130
+msgid "Quick Edit"
+msgstr "Snel bewerken"
+
+#: app/Activation/Dependencies.php:116
+msgid "Page Title"
+msgstr "Pagina titel"
+
+#: app/Activation/Dependencies.php:117 app/Views/partials/row.php:134
+msgid "View"
+msgstr "Bekijken"
+
+#: app/Activation/Dependencies.php:118 app/Views/forms/new-child.php:7
+#: app/Views/partials/row.php:94
+msgid "Add Child"
+msgstr "Onderliggende pagina toevoegen"
+
+#: app/Activation/Dependencies.php:119
+msgid "Add Child Page"
+msgstr "Onderliggende pagina toevoegen"
+
+#: app/Activation/Dependencies.php:120
+msgid "Add Child Pages"
+msgstr "Onderliggende pagina's toevoegen"
+
+#: app/Activation/Dependencies.php:121 app/Views/forms/link-form.php:105
+#: app/Views/forms/new-child.php:93
+msgid "Add"
+msgstr "Toevoegen"
+
+#: app/Activation/Dependencies.php:122
+msgid "Add Page"
+msgstr "Pagina toevoegen"
+
+#: app/Activation/Dependencies.php:123
+msgid "Add Pages"
+msgstr "Pagina's toevoegen"
+
+#: app/Activation/Dependencies.php:124 app/Views/listing.php:10
+#: app/Views/listing.php:11
+msgid "Add Multiple"
+msgstr "Meerdere toevoegen"
+
+#: app/Activation/Dependencies.php:125
+msgid "Are you sure you would like to empty the trash? This action is not reversable."
+msgstr "Weet je zeker dat je de prullenbak leeg wil gooien? Dit is niet te herstellen."
+
+#: app/Activation/Dependencies.php:126 app/Views/partials/row-link.php:40
+#: app/Views/partials/row.php:45
+msgid "Hidden"
+msgstr "Verborgen"
+
+#: app/Bootstrap.php:69
+msgid "Settings"
+msgstr "Instellingen"
+
+#: app/Config/Settings.php:53 app/Views/settings/settings.php:2
+msgid "Nested Pages Settings"
+msgstr "Nested Pages Instellingen"
+
+#. #-#-#-#-#  tmp-wp-nested-pages.pot (Nested Pages 1.5.3)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: app/Config/Settings.php:54
+msgid "Nested Pages"
+msgstr "Nested Pages"
+
+#: app/Entities/AdminMenu/AdminSubmenu.php:75
+#: app/Views/partials/tool-list.php:33
+msgid "Default"
+msgstr "Standaard"
+
+#: app/Entities/Confirmation/LinkDeletedConfirmation.php:12
+msgid "Link successfully deleted."
+msgstr "Link succesvol verwijderd."
+
+#: app/Entities/Confirmation/TrashConfirmation.php:16
+msgid "pages moved to the Trash"
+msgstr "Pagina's verwijderd naar de prullenbak"
+
+#: app/Entities/Confirmation/TrashConfirmation.php:18
+msgid "moved to the Trash"
+msgstr "verplaatst naar de prullenbak"
+
+#: app/Entities/Confirmation/TrashConfirmation.php:23
+msgid "Undo"
+msgstr "Ongedaan maken"
+
+#: app/Entities/Confirmation/TrashRestoredConfirmation.php:14
+msgid "pages"
+msgstr "pagina's"
+
+#: app/Entities/Confirmation/TrashRestoredConfirmation.php:14
+msgid "page"
+msgstr "pagina"
+
+#: app/Entities/Confirmation/TrashRestoredConfirmation.php:15
+msgid "restored from trash"
+msgstr "teruggezet uit de prullenbak"
+
+#: app/Entities/PostType/PostTypeRepository.php:193
+msgid "Nested View"
+msgstr "Boom weergave"
+
+#: app/Entities/PostType/PostTypeRepository.php:193
+msgid "Sort View"
+msgstr "Gesorteerde weergave"
+
+#: app/Entities/PostType/RegisterPostTypes.php:22
+msgid "Redirects"
+msgstr "Doorverwijzingen"
+
+#: app/Entities/PostType/RegisterPostTypes.php:23
+msgid "Redirect"
+msgstr "Doorverwijzing"
+
+#: app/Form/Listeners/BaseHandler.php:80
+msgid "Incorrect Form Field"
+msgstr "Veld niet correct"
+
+#: app/Form/Listeners/BaseHandler.php:109
+msgid "There was an error updating the page."
+msgstr "Er is een probleem opgetreden bij het bijwerken van de pagina."
+
+#: app/Form/Listeners/ClonePost.php:36
+msgid "Post Not Found"
+msgstr "Bericht niet gevonden"
+
+#: app/Form/Listeners/EmptyTrash.php:19
+msgid "Trash successfully emptied."
+msgstr "Prullenbak geleegd."
+
+#: app/Form/Listeners/NewMenuItem.php:27
+msgid "Custom Links must have a label"
+msgstr "Custom Links moeten een label hebben"
+
+#: app/Form/Listeners/NewMenuItem.php:28
+msgid "Please provide a valid URL"
+msgstr "Gelieve een geldige URL in te voeren"
+
+#: app/Form/Listeners/NewMenuItem.php:47
+#: app/Form/Listeners/QuickEditLink.php:30
+msgid "Link successfully updated"
+msgstr "Link succesvol bijgewerkt"
+
+#: app/Form/Listeners/QuickEdit.php:32
+msgid "Post successfully updated"
+msgstr "Bericht succesvol bijgewerkt"
+
+#: app/Form/Listeners/Sort.php:29
+msgid "Page order successfully updated."
+msgstr "Pagina volgorde succesvol aangepast"
+
+#: app/Form/Listeners/Sort.php:31
+msgid "There was an error updating the page order."
+msgstr "Er is een fout opgetreden bij het bijwerken van de pagina volgorde."
+
+#: app/Form/Listeners/SyncMenu.php:27
+msgid "Menu sync enabled."
+msgstr "Menu synchronisatie ingeschakeld."
+
+#: app/Form/Listeners/SyncMenu.php:30
+msgid "Menu sync disabled."
+msgstr "Menu synchronisatie uitgeschakeld."
+
+#: app/Form/Validation/Validation.php:134
+msgid "Please provide a valid date."
+msgstr "Graag een geldige datum invullen."
+
+#: app/Form/Validation/Validation.php:145
+msgid "Please provide a menu title."
+msgstr "Graag een menutitel invullen."
+
+#: app/Form/Validation/Validation.php:148
+msgid "Please provide a valid URL."
+msgstr "Graag een geldige URL invullen."
+
+#: app/Form/Validation/Validation.php:158
+msgid "Please provide a "
+msgstr "Vul een "
+
+#: app/Form/Validation/Validation.php:171
+msgid "A valid parent page was not provided."
+msgstr "Geen bovenliggende pagina opgegeven."
+
+#: app/Form/Validation/Validation.php:178
+msgid "Please provide at least one page title."
+msgstr "Gelieve minimaal 1 pagina titel op de geven."
+
+#: app/Form/Validation/Validation.php:186
+msgid "Page titles cannot be blank."
+msgstr "Pagina titels kunnen niet leeg zijn."
+
+#: app/Views/forms/clone-form.php:9 app/Views/forms/clone-form.php:65
+#: app/Views/partials/row.php:99
+msgid "Clone"
+msgstr "Dupliceren"
+
+#: app/Views/forms/clone-form.php:14
+msgid "Number of Copies"
+msgstr "Aantal kopieën"
+
+#: app/Views/forms/clone-form.php:26 app/Views/forms/new-child.php:35
+#: app/Views/forms/quickedit-link.php:27 app/Views/forms/quickedit-post.php:76
+msgid "Status"
+msgstr "Status"
+
+#: app/Views/forms/clone-form.php:29 app/Views/forms/new-child.php:38
+#: app/Views/forms/quickedit-link.php:30 app/Views/forms/quickedit-post.php:79
+#: app/Views/partials/tool-list.php:10
+msgid "Published"
+msgstr "Gepubliceerd"
+
+#: app/Views/forms/clone-form.php:31 app/Views/forms/quickedit-link.php:33
+#: app/Views/forms/quickedit-post.php:82
+msgid "Pending Review"
+msgstr "Wacht op beoordeling"
+
+#: app/Views/forms/clone-form.php:32 app/Views/forms/new-child.php:40
+#: app/Views/forms/quickedit-link.php:34 app/Views/forms/quickedit-post.php:83
+#: app/Views/partials/tool-list.php:14
+msgid "Draft"
+msgstr "Concept"
+
+#: app/Views/forms/clone-form.php:50 app/Views/forms/new-child.php:61
+#: app/Views/forms/quickedit-post.php:67
+msgid "Author"
+msgstr "Auteur"
+
+#: app/Views/forms/clone-form.php:62
+#: app/Views/forms/delete-confirmation-modal.php:11
+#: app/Views/forms/empty-trash-modal.php:11 app/Views/forms/link-form.php:101
+#: app/Views/forms/new-child.php:90 app/Views/forms/quickedit-link.php:84
+#: app/Views/forms/quickedit-post.php:207
+msgid "Cancel"
+msgstr "Annuleren"
+
+#: app/Views/forms/delete-confirmation-modal.php:12
+msgid "Delete"
+msgstr "Verwijderen"
+
+#: app/Views/forms/empty-trash-modal.php:12
+msgid "Empty Trash"
+msgstr "Prullenbak leegmaken"
+
+#: app/Views/forms/link-form.php:18
+msgid "Custom Link"
+msgstr "Custom Link"
+
+#: app/Views/forms/link-form.php:27 app/Views/forms/link-form.php:44
+msgid "Search"
+msgstr "Zoeken"
+
+#: app/Views/forms/link-form.php:27 app/Views/forms/link-form.php:44
+msgid "No Results"
+msgstr "Geen resultaten"
+
+#: app/Views/forms/link-form.php:58
+msgid "Select an item"
+msgstr "Selecteer een item"
+
+#: app/Views/forms/link-form.php:63
+msgid "Original"
+msgstr "Origineel"
+
+#: app/Views/forms/link-form.php:68 app/Views/forms/quickedit-link.php:22
+msgid "URL"
+msgstr "URL"
+
+#: app/Views/forms/link-form.php:72 app/Views/forms/quickedit-link.php:17
+#: app/Views/forms/quickedit-post.php:171
+msgid "Navigation Label"
+msgstr "Navigatie label"
+
+#: app/Views/forms/link-form.php:76 app/Views/forms/quickedit-link.php:44
+#: app/Views/forms/quickedit-post.php:175
+msgid "Title Attribute"
+msgstr "Titel attribuut"
+
+#: app/Views/forms/link-form.php:80
+msgid "CSS Classes (optional)"
+msgstr "CSS Classes (optional)"
+
+#: app/Views/forms/link-form.php:86 app/Views/forms/quickedit-link.php:66
+#: app/Views/forms/quickedit-post.php:193
+msgid "Open link in a new window/tab"
+msgstr "Open link in een nieuw venster/tab"
+
+#: app/Views/forms/new-child.php:28
+msgid "+"
+msgstr "+"
+
+#: app/Views/forms/new-child.php:71 app/Views/forms/quickedit-post.php:93
+msgid "Template"
+msgstr "Sjabloon"
+
+#: app/Views/forms/new-child.php:73 app/Views/forms/quickedit-post.php:95
+msgid "Default Template"
+msgstr "Standaard sjabloon"
+
+#: app/Views/forms/new-child.php:96
+msgid "Add & Edit"
+msgstr "Toevoegen & bewerken"
+
+#: app/Views/forms/quickedit-link.php:8
+msgid "Link"
+msgstr "Link"
+
+#: app/Views/forms/quickedit-link.php:31 app/Views/forms/quickedit-post.php:80
+msgid "Scheduled"
+msgstr "Ingepland"
+
+#: app/Views/forms/quickedit-link.php:48 app/Views/forms/quickedit-post.php:179
+msgid "CSS Classes"
+msgstr "CSS classes"
+
+#: app/Views/forms/quickedit-link.php:54 app/Views/forms/quickedit-post.php:187
+msgid "Hide in Nav Menu"
+msgstr "Verbergen in navigatie menu"
+
+#: app/Views/forms/quickedit-link.php:60 app/Views/forms/quickedit-post.php:126
+msgid "Hide in Nested Pages"
+msgstr "Verbergen in Nested Pages"
+
+#: app/Views/forms/quickedit-link.php:87 app/Views/forms/quickedit-post.php:210
+msgid "Update"
+msgstr "Bijwerken"
+
+#: app/Views/forms/quickedit-post.php:24
+msgid "Slug"
+msgstr "Slug"
+
+#: app/Views/forms/quickedit-post.php:30 app/Views/forms/quickedit-post.php:45
+#: app/Views/partials/tool-list.php:63
+msgid "Date"
+msgstr "Datum"
+
+#: app/Views/forms/quickedit-post.php:33
+msgid "@"
+msgstr "@"
+
+#: app/Views/forms/quickedit-post.php:36
+msgid "am"
+msgstr "am"
+
+#: app/Views/forms/quickedit-post.php:37
+msgid "pm"
+msgstr "pm"
+
+#: app/Views/forms/quickedit-post.php:103
+msgid "Password"
+msgstr "Wachtwoord"
+
+#: app/Views/forms/quickedit-post.php:106
+msgid "&ndash;OR&ndash;"
+msgstr "&ndash;OF&ndash;"
+
+#: app/Views/forms/quickedit-post.php:109
+msgid "Private"
+msgstr "Privé"
+
+#: app/Views/forms/quickedit-post.php:118
+msgid "Allow Comments"
+msgstr "Reactie's toestaan"
