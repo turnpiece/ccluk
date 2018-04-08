@@ -422,10 +422,10 @@ body.page-template-homepage #main {
         body.page-template-homepage #main .section .section-content .list-item > .entry-header {
           display: block;
           margin: 12px 0; }
-          body.page-template-homepage #main .section .section-content .list-item > .entry-header > .entry-title {
+          body.page-template-homepage #main .section .section-content .list-item > .entry-header .entry-title {
             margin-top: 12px;
             line-height: 1.5;
-            font-size: 22px;
+            font-size: 24px;
             color: #54ae68; }
           body.page-template-homepage #main .section .section-content .list-item > .entry-header > a {
             display: block;
