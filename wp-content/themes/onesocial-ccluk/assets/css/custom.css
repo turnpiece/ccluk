@@ -1080,6 +1080,13 @@ body.buddypress #buddypress .profile .standard-form fieldset {
   body.buddypress #buddypress .profile .standard-form fieldset legend {
     margin: 0 0 10px;
     line-height: 1; }
+body.buddypress #buddypress .activity-list .activity-content .activity-header,
+body.buddypress #buddypress div#item-header #item-meta p,
+body.buddypress #buddypress #activity-stream p {
+  font-size: 15px; }
+body.buddypress #main #buddypress .groups-members-search input[type=text] {
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
 body.buddypress .bp-legacy div#item-body div.item-list-tabs ul li a {
   font-size: 14px;
   background-color: #fff;
@@ -1097,11 +1104,10 @@ body.buddypress .bp-user a.button.sap-new-post-btn {
   body.buddypress .bp-user a.button.sap-new-post-btn:hover {
     background-color: #54ae68;
     border-color: #54ae68; }
-
-.is-desktop body.buddypress #buddypress .dir-form div.item-list-tabs ul li a,
-.is-desktop body.buddypress #buddypress div#subnav.item-list-tabs ul li a,
-.is-desktop body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li a,
-.is-desktop body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li a {
+body.buddypress.is-desktop #buddypress .dir-form div.item-list-tabs ul li a,
+body.buddypress.is-desktop #buddypress div#subnav.item-list-tabs ul li a,
+body.buddypress.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li a,
+body.buddypress.is-desktop #buddypress > div[role=navigation].item-list-tabs ul li a {
   font-size: 14px;
   background-color: #fff;
   border-color: #22a7f0;
@@ -1109,19 +1115,28 @@ body.buddypress .bp-user a.button.sap-new-post-btn {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px; }
-.is-desktop body.buddypress #buddypress .dir-form div.item-list-tabs ul li:hover a, .is-desktop body.buddypress #buddypress .dir-form div.item-list-tabs ul li.current a, .is-desktop body.buddypress #buddypress .dir-form div.item-list-tabs ul li.selected a,
-.is-desktop body.buddypress #buddypress div#subnav.item-list-tabs ul li:hover a,
-.is-desktop body.buddypress #buddypress div#subnav.item-list-tabs ul li.current a,
-.is-desktop body.buddypress #buddypress div#subnav.item-list-tabs ul li.selected a,
-.is-desktop body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li:hover a,
-.is-desktop body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li.current a,
-.is-desktop body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li.selected a,
-.is-desktop body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li:hover a,
-.is-desktop body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li.current a,
-.is-desktop body.buddypress #buddypress > div[role=navigation].item-list-tabs ul li.selected a {
+body.buddypress.is-desktop #buddypress .dir-form div.item-list-tabs ul li:hover a, body.buddypress.is-desktop #buddypress .dir-form div.item-list-tabs ul li.current a, body.buddypress.is-desktop #buddypress .dir-form div.item-list-tabs ul li.selected a,
+body.buddypress.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a,
+body.buddypress.is-desktop #buddypress div#subnav.item-list-tabs ul li.current a,
+body.buddypress.is-desktop #buddypress div#subnav.item-list-tabs ul li.selected a,
+body.buddypress.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li:hover a,
+body.buddypress.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li.current a,
+body.buddypress.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs.item-list-tabs ul li.selected a,
+body.buddypress.is-desktop #buddypress > div[role=navigation].item-list-tabs ul li:hover a,
+body.buddypress.is-desktop #buddypress > div[role=navigation].item-list-tabs ul li.current a,
+body.buddypress.is-desktop #buddypress > div[role=navigation].item-list-tabs ul li.selected a {
   background-color: #54ae68;
   border-color: #54ae68;
   color: #fff; }
+body.buddypress.is-mobile .mobile-item-nav-wrapper {
+  margin-left: auto;
+  margin-right: auto; }
+body.buddypress.is-mobile #buddypress #mobile-item-nav-wrap,
+body.buddypress.is-mobile #buddypress ul#activity-stream li.activity-item {
+  background: transparent; }
+body.buddypress.is-mobile.has-activity #buddypress div.item-list-tabs,
+body.buddypress.is-mobile.has-activity #buddypress form#whats-new-form {
+  background: transparent; }
 
 #bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
   font-size: 16px; }
@@ -1158,7 +1173,10 @@ MAXIMUM width of 520 pixels (large phones and smaller)
     right: 0; }
 
   .dir-header {
-    font-size: 36px; } }
+    font-size: 36px; }
+
+  .single-item.groups #buddypress #item-header span.activity {
+    text-shadow: none; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 480 pixels (phones)
 --------------------------------------------------------------*/

@@ -74,24 +74,40 @@ body.buddypress {
 				}
 			}
 		}
+
+		.activity-list .activity-content .activity-header,
+		div#item-header #item-meta p,
+		#activity-stream p {
+			font-size: $font-size-sm;
+		}
 		 
 	}
+
+	#main {
+		#buddypress {
+			.groups-members-search {
+				input[type=text] {
+					@include padding( .6, 1.2 );
+				}
+			}
+		}
+	}
+
 	.bp-legacy {
 		div#item-body div.item-list-tabs {
 			@include bp-item-list-tabs();
 		}
 	}
+	
 	.bp-user a.button.sap-new-post-btn{
-		font-size: 15px;
+		font-size: $font-size-sm;
 		&:hover {
 			background-color: $green;
 			border-color: $green;
 		}
 	}
-}
 
-.is-desktop {
-	body.buddypress {
+	&.is-desktop {
 		#buddypress {
 			.dir-form div,
 			div#subnav,
@@ -99,6 +115,29 @@ body.buddypress {
 			>div[role=navigation] {
 				&.item-list-tabs {
 					@include bp-item-list-tabs();
+				}
+			}
+		}
+	}
+
+	&.is-mobile {
+		.mobile-item-nav-wrapper {
+			margin-left: auto;
+			margin-right: auto;
+		}
+
+		#buddypress {
+			#mobile-item-nav-wrap, 
+			ul#activity-stream li.activity-item {
+				background: transparent;
+			}
+		}
+
+		&.has-activity {
+			#buddypress {
+				div.item-list-tabs, 
+				form#whats-new-form {
+					background: transparent;
 				}
 			}
 		}

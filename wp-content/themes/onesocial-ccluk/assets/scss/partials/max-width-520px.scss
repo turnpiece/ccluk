@@ -16,3 +16,11 @@
 .dir-header {
 	font-size: $font-size-lg;
 }
+
+.single-item.groups {
+	#buddypress {
+		#item-header span.activity {
+			text-shadow: none;
+		}
+	}
+}
