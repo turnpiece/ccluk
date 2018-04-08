@@ -8,6 +8,13 @@
 define( 'CCLUK_DEBUGGING', false );
 
 /**
+ * Add image size for posts
+ *
+ */
+add_image_size( 'ccluk-medium', 750, 400, false );
+add_image_size( 'ccluk-hero', 1200, 800, true );
+
+/**
  * Customizer additions.
  */
 require get_stylesheet_directory() . '/inc/customizer.php';

@@ -13,7 +13,7 @@
 	<header class="entry-header">
 		<h1 class="entry-title"><?php the_title(); ?></h1>
 		<?php if (has_post_thumbnail()) : ?>
-			<?php the_post_thumbnail( 'large' ) ?>
+			<?php the_post_thumbnail( 'ccluk-medium' ) ?>
 		<?php endif; ?>
 	</header>
 

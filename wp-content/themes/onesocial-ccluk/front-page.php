@@ -7,7 +7,8 @@
  * @since OneSocial Theme 1.0.0
  */
 get_header();
-?>
+
+if (have_posts()) : // insert whatever content is on the home page ?>
 
 <section id="primary" class="section site-content default-page">
 
@@ -19,7 +20,7 @@ get_header();
 
 </section>
 
-<?php
+<?php endif;
 
 do_action( 'ccluk_frontpage_before_section_parts' );
 

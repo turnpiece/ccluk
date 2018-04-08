@@ -8,13 +8,13 @@
 	if ( has_post_thumbnail( $post->ID ) ) {
 		$header_class	 = ' has-image';
 		$image_id = get_post_thumbnail_id( $post->ID );
-		$full_image = wp_get_attachment_image_src( $image_id, 'large-thumb' );
+		$full_image = wp_get_attachment_image_src( $image_id, 'ccluk-hero' );
 
 		ob_start();
 		?>
 
 		<div class="entry-post-thumbnail" style="background-image:url(<?php echo $full_image[ 0 ]; ?>);">
-			<?php the_post_thumbnail('large-thumb'); ?>
+			<?php the_post_thumbnail('ccluk-hero'); ?>
 		</div>
 
 		<?php $image = ob_get_clean(); ?>
