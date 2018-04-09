@@ -146,8 +146,12 @@ body.page-template-homepage {
 						a {
 							float: none;
 							margin: 0 auto;
-							width: 320px;
-						}		
+							width: 420px;
+						}	
+
+						.ctf-header-user {
+							font-size: $font-size-std;
+						}	
 					}
 
 					.ctf-tweets {

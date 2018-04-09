@@ -62,6 +62,10 @@
   padding: $y + rem $x + rem;
 }
 
+@mixin input-field() {
+  @include padding( .6, 1.2 );
+}
+
 @mixin bp-item-list-tabs() {
   ul {
     li {

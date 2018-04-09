@@ -38,8 +38,12 @@ body.buddypress {
 			}
 		}
 
-		.groups-members-search input[type=text] {
-		    @include padding( .6, 1.2 );
+		#search-message-form,
+		div.dir-search,
+		.groups-members-search {
+			input[type=text] {
+		    	@include input-field();
+		    }
 		}
 
 		#members-order-select,
@@ -87,7 +91,7 @@ body.buddypress {
 		#buddypress {
 			.groups-members-search {
 				input[type=text] {
-					@include padding( .6, 1.2 );
+					@include input-field();
 				}
 			}
 		}

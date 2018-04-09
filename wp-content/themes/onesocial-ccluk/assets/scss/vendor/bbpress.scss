@@ -22,7 +22,11 @@
 	fieldset.bbp-form {
 	    input,
 	    textarea {
-	        @include padding( .6, 1.2 );
+	        @include input-field();
 	    } 
+	}
+
+	#bbp-search-index-form input#bbp_search {
+		@include input-field();
 	}
 }

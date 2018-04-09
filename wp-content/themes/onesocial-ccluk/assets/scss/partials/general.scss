@@ -23,7 +23,7 @@ textarea,
     border-width: 1px 1px 1px 1px;
     border-color: $green;
     border-style: solid solid solid solid;
-    @include padding( .6, 1.2 );
+    @include input-field();
 }
 
 h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {

@@ -489,7 +489,9 @@ body.page-template-homepage #main {
       body.page-template-homepage #main .section.twitter #ctf .ctf-header a {
         float: none;
         margin: 0 auto;
-        width: 320px; }
+        width: 420px; }
+      body.page-template-homepage #main .section.twitter #ctf .ctf-header .ctf-header-user {
+        font-size: 21px; }
     body.page-template-homepage #main .section.twitter #ctf .ctf-tweets {
       display: flex;
       flex-direction: row column;
@@ -1068,6 +1070,8 @@ body.buddypress #buddypress .standard-form input[type=email],
 body.buddypress #buddypress .standard-form input[type=password],
 body.buddypress #buddypress .standard-form textarea {
   border: 1px solid #54ae68; }
+body.buddypress #buddypress #search-message-form input[type=text],
+body.buddypress #buddypress div.dir-search input[type=text],
 body.buddypress #buddypress .groups-members-search input[type=text] {
   padding: 6px 12px;
   padding: 0.6rem 1.2rem; }
@@ -1159,6 +1163,9 @@ body.buddypress.is-mobile.has-activity #buddypress form#whats-new-form {
   background-color: #f9f9f9; }
 #bbpress-forums fieldset.bbp-form input,
 #bbpress-forums fieldset.bbp-form textarea {
+  padding: 6px 12px;
+  padding: 0.6rem 1.2rem; }
+#bbpress-forums #bbp-search-index-form input#bbp_search {
   padding: 6px 12px;
   padding: 0.6rem 1.2rem; }
 
