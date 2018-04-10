@@ -1,0 +1,29 @@
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: bp-security-check 1.4.0\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2015-09-03 22:43+1000\n"
+"PO-Revision-Date: 2016-01-27 09:23+0100\n"
+"Last-Translator: Borisa Djuraskovic <borisad@webhostinghub.com>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+
+#: bp-security-check.php:57 trunk/bp-security-check.php:57
+msgid "Sorry, please answer the question again"
+msgstr "Izvinite, molimo vas da na pitanje odgovorite još jednom."
+
+#: bp-security-check.php:62 trunk/bp-security-check.php:62
+msgid "This is a required field"
+msgstr "Ovo polje je obavezno."
+
+#: bp-security-check.php:111 trunk/bp-security-check.php:111
+msgid "Security Question"
+msgstr "Bezbednosno pitanje"
