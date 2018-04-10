@@ -1,0 +1,124 @@
+# Translation of Plugins - BuddyPress Security Check - Development (trunk) in Russian
+# This file is distributed under the same license as the Plugins - BuddyPress Security Check - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-05-04 20:45:35+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ru\n"
+"Project-Id-Version: Plugins - BuddyPress Security Check - Development (trunk)\n"
+
+#: php/class-settings.php:101
+msgid "Audio"
+msgstr "Аудио"
+
+#: php/class-settings.php:100
+msgid "Image"
+msgstr "Изображение"
+
+#: php/class-settings.php:96
+msgid "CAPTCHA type"
+msgstr "Тип капчи"
+
+#: php/class-settings.php:91
+msgid "Dark"
+msgstr "Темный"
+
+#: php/class-settings.php:90
+msgid "Light"
+msgstr "Светлый"
+
+#: php/class-settings.php:86
+msgid "Widget theme"
+msgstr "Тема виджета"
+
+#: php/class-settings.php:56
+msgid "Login Page"
+msgstr "Страница входа"
+
+#: php/class-settings.php:55
+msgid "Lost Password Page"
+msgstr "Страница восстановления пароля"
+
+#: php/class-settings.php:54
+msgid "Registration Page"
+msgstr "Страница регистрации"
+
+#: php/class-settings.php:50
+msgid "Enable security check on these pages"
+msgstr "Включить проверку безопасности на этих страницах"
+
+#. Author URI of the plugin/theme
+msgid "https://bungeshea.com"
+msgstr "https://bungeshea.com"
+
+#. Author of the plugin/theme
+msgid "Shea Bunge"
+msgstr "Shea Bunge"
+
+#. Description of the plugin/theme
+msgid "Help combat spam registrations by forcing the user to answer a simple math sum while registering for your BuddyPress-powered site"
+msgstr "Помогает бороться автоматическими регистрациями, заставляя пользователя посчитать простой математический пример при регистрации на вашем BuddyPress-сайте."
+
+#. Plugin URI of the plugin/theme
+msgid "https://bungeshea.com/plugins/bp-security-check/"
+msgstr "https://bungeshea.com/plugins/bp-security-check/"
+
+#. Plugin Name of the plugin/theme
+msgid "BuddyPress Security Check"
+msgstr "BuddyPress Security Check"
+
+#: php/class-settings.php:135
+msgid "Security Check Settings"
+msgstr "Настройки Проверки Безопасности"
+
+#: php/class-settings.php:79
+msgid "reCAPTCHA secret key"
+msgstr "Серктетный ключ reCAPTCHA"
+
+#: php/class-settings.php:72
+msgid "reCAPTCHA site key"
+msgstr "Ключ reCAPTCHA для сайта"
+
+#: php/class-settings.php:68
+msgid "If you choose to use the reCAPTCHA check, you will need to <a href=\"https://www.google.com/recaptcha/admin\">register your site with Google</a> and enter the site key and secret here."
+msgstr "Если вы решите использовать reCAPTCHA для проверки, вам нужно <a href=\"https://www.google.com/recaptcha/admin\">зарегистрировать свой сайт в Google</a> и ввести здесь ключ и секретный код сайта."
+
+#: php/class-settings.php:66
+msgid "New <a href=\"https://www.google.com/recaptcha\">reCAPTCHA</a> check"
+msgstr "Проверка с помощью <a href=\"https://www.google.com/recaptcha\">reCAPTCHA</a>"
+
+#: php/class-settings.php:65
+msgid "Legacy math check"
+msgstr "Математическая проверка"
+
+#: php/class-settings.php:61
+msgid "Security check type"
+msgstr "Тип проверки безопасности"
+
+#: php/class-recaptcha-check.php:138
+msgid "Please complete the security check again"
+msgstr "Пожалуйста, пройдите проверку безопасности ещё раз"
+
+#: php/class-recaptcha-check.php:131
+msgid "Please answer the security question"
+msgstr "Пожалуйста, ответьте на контрольный вопрос"
+
+#: php/class-plugin.php:94
+msgid "Settings"
+msgstr "Функции"
+
+#: php/class-math-check.php:126
+msgid "Security Question"
+msgstr "Контрольный вопрос"
+
+#: php/class-math-check.php:49
+msgid "This is a required field"
+msgstr "Это обязательное поле"
+
+#: php/class-math-check.php:46
+msgid "Sorry, please answer the question again"
+msgstr "Пожалуйста, ответьте на вопрос ещё раз"

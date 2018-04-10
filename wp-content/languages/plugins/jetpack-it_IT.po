@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-21 17:58:29+0000\n"
+"PO-Revision-Date: 2018-03-21 11:35:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10420,11 +10420,6 @@ msgstr "Radio"
 #: modules/contact-form/grunion-form-view.php:196
 msgid "Drop down"
 msgstr "A tendina"
-
-#: modules/contact-form/grunion-editor-view.php:219
-#: modules/contact-form/grunion-form-view.php:194
-msgid "Checkbox"
-msgstr "Casella di controllo"
 
 #: modules/contact-form/grunion-form-view.php:192
 msgid "Field type"

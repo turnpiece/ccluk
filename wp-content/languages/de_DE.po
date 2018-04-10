@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-02 14:42:12+0000\n"
+"PO-Revision-Date: 2018-04-10 11:23:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -581,7 +581,7 @@ msgstr "Deutsch"
 
 #: wp-includes/script-loader.php:409
 msgid "Galician"
-msgstr "Galizisch"
+msgstr "Galicisch"
 
 #: wp-includes/script-loader.php:408
 msgid "French"
@@ -589,7 +589,7 @@ msgstr "Französisch"
 
 #: wp-includes/script-loader.php:406
 msgid "Filipino"
-msgstr "Philippinisch"
+msgstr "Filipino"
 
 #: wp-includes/script-loader.php:405
 msgid "Estonian"
