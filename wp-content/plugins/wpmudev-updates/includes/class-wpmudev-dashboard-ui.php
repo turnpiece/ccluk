@@ -303,8 +303,6 @@ class WPMUDEV_Dashboard_Ui {
 		);
 
 		if ( $is_logged_in ) {
-			$data = WPMUDEV_Dashboard::$api->get_membership_data();
-
 			/**
 			 * Use this action to register custom sub-menu items.
 			 *
@@ -330,21 +328,6 @@ class WPMUDEV_Dashboard_Ui {
 				__( 'Plugins', 'wpmudev' ) . $plugin_badge,
 				array( $this, 'render_plugins' ),
 				'install_plugins'
-			);
-
-			do_action( 'wpmudev_dashboard_setup_menu', 'themes' );
-
-			$theme_badge = sprintf(
-				' <span class="update-plugins theme-updates count-%s"><span class="countval">%s</span></span>',
-				$update_themes,
-				$update_themes
-			);
-			$this->add_submenu(
-				'themes',
-				__( 'WPMU DEV Themes', 'wpmudev' ),
-				__( 'Themes', 'wpmudev' ) . $theme_badge,
-				array( $this, 'render_themes' ),
-				'install_themes'
 			);
 
 			do_action( 'wpmudev_dashboard_setup_menu', 'support' );
@@ -517,6 +500,10 @@ class WPMUDEV_Dashboard_Ui {
 		remove_all_actions( 'admin_notices' );
 		remove_all_actions( 'network_admin_notices' );
 		remove_all_actions( 'all_admin_notices' );
+
+		//remove any custom contextual help tabs (like from Ultimate Branding)
+		$screen = get_current_screen();
+		$screen->remove_help_tabs();
 	}
 
 	/**
@@ -1194,7 +1181,7 @@ class WPMUDEV_Dashboard_Ui {
 		} elseif ( ! empty( $_REQUEST['set_apikey'] ) ) {
 			// User tried to log-in.
 			WPMUDEV_Dashboard::$api->set_key( trim( $_REQUEST['set_apikey'] ) );
-			$result = WPMUDEV_Dashboard::$api->refresh_membership_data( false, true );
+			$result = WPMUDEV_Dashboard::$api->hub_sync( false, true );
 
 			if ( ! $result || empty( $result['membership'] ) ) {
 				// Don't logout at this point!
@@ -1240,7 +1227,7 @@ class WPMUDEV_Dashboard_Ui {
 			$this->load_template( 'no_access' );
 		} else {
 
-			$data         = WPMUDEV_Dashboard::$api->get_membership_data();
+			$data         = WPMUDEV_Dashboard::$api->get_projects_data();
 			$member       = WPMUDEV_Dashboard::$api->get_profile();
 			$type         = WPMUDEV_Dashboard::$api->get_membership_type( $project_id );
 			$my_project   = false;
@@ -1285,7 +1272,7 @@ class WPMUDEV_Dashboard_Ui {
 			WPMUDEV_Dashboard::$site->refresh_local_projects( 'remote' );
 		}
 
-		$data            = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data            = WPMUDEV_Dashboard::$api->get_projects_data();
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $dummy );
 		$tags            = $this->tags_data( 'plugin' );
 		$urls            = $this->page_urls;
@@ -1328,7 +1315,7 @@ class WPMUDEV_Dashboard_Ui {
 			WPMUDEV_Dashboard::$site->refresh_local_projects( 'remote' );
 		}
 
-		$data            = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data            = WPMUDEV_Dashboard::$api->get_projects_data();
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $dummy );
 		$urls            = $this->page_urls;
 
@@ -1376,7 +1363,7 @@ class WPMUDEV_Dashboard_Ui {
 		$this->page_urls->real_support_url = $this->page_urls->remote_site . 'hub/support/';
 
 		$profile     = WPMUDEV_Dashboard::$api->get_profile();
-		$data        = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data        = WPMUDEV_Dashboard::$api->get_projects_data();
 		$spinner     = WPMUDEV_Dashboard::$site->plugin_url . 'includes/images/spinner-dark.gif';
 		$urls        = $this->page_urls;
 		$staff_login = WPMUDEV_Dashboard::$api->remote_access_details();
@@ -1414,7 +1401,7 @@ class WPMUDEV_Dashboard_Ui {
 			$this->load_template( 'no_access' );
 		}
 
-		$data             = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data             = WPMUDEV_Dashboard::$api->get_projects_data();
 		$member           = WPMUDEV_Dashboard::$api->get_profile();
 		$urls             = $this->page_urls;
 		$membership_label = __( 'Free', 'wpmudev' );
@@ -1771,7 +1758,7 @@ class WPMUDEV_Dashboard_Ui {
 	 */
 	public function tags_data( $type ) {
 		$res  = array();
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 
 		if ( 'plugin' == $type ) {
 			if ( isset( $data['plugin_tags'] ) ) {

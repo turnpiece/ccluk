@@ -1,4 +1,4 @@
-<div class="dev-box">
+<div class="dev-box is-clipped">
     <div class="box-title">
         <h3 class="def-issues-title">
 			<?php _e( "Two-Factor Authentication", wp_defender()->domain ) ?>
@@ -94,7 +94,7 @@
                     <span><?php _e( "Enable lost phone option", wp_defender()->domain ) ?></span>
                 </div>
             </div>
-            <div class="columns">
+            <div class="columns no-shadow">
                 <div class="column is-one-third">
                     <label><?php _e( "Force Authentication", wp_defender()->domain ) ?></label>
                     <span class="sub">
@@ -121,7 +121,10 @@
                     </div>
                 </div>
             </div>
-            <div class="columns">
+            <div class="columns no-shadow">
+                <a href="<?php echo \WP_Defender\Behavior\Utils::instance()->campaignURL( 'defender_twofactor_whitelabel_pro_tag' ) ?>"
+                   role="button" target="_blank" class="button button-small button-pre">
+					<?php _e( "Pro Feature", wp_defender()->domain ) ?></a>
                 <div class="column is-one-third">
                     <label><?php _e( "Custom Graphic", wp_defender()->domain ) ?></label>
                     <span class="sub">
@@ -130,26 +133,13 @@
                 </div>
                 <div class="column">
                     <span class="toggle">
-                        <input type="hidden" name="customGraphic" value="0"/>
-                        <input type="checkbox" <?php checked( 1, $settings->customGraphic ) ?> name="customGraphic"
-                               value="1"
-                               class="toggle-checkbox" id="customGraphic"/>
+                        <input type="checkbox" class="toggle-checkbox" id="customGraphic"/>
                         <label class="toggle-label" for="customGraphic"></label>
                     </span>&nbsp;
                     <span><?php _e( "Enable custom graphics above login fields", wp_defender()->domain ) ?></span>
-                    <span class="form-help"></span>
-                    <div class="well well-white <?php echo $settings->customGraphic == false ? 'is-hidden' : null ?>">
-                        <p>
-                                <span class="form-help"><strong><?php _e( "Custom Graphic", wp_defender()->domain ) ?></strong>
-                                - <?php _e( "For best results use a 168x168px JPG or PNG.", wp_defender()->domain ) ?></span>
-                        </p>
-                        <input type="hidden" id="customGraphicURL" name="customGraphicURL"
-                               value="<?php echo $settings->customGraphicURL ?>"/>
-                        <button type="button" class="button button-light file-picker">
-                            <i class="wdv-icon wdv-icon-fw wdv-icon-plus-sign"></i>
-                        </button>
-                        <img id="customGraphicIMG" height="40" src="<?php echo $settings->customGraphicURL ?>">
-                    </div>
+                </div>
+                <div class="feature-disabled">
+
                 </div>
             </div>
             <div class="columns">

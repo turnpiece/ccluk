@@ -13,6 +13,12 @@
 						        <?php _e( "Two-Factor Authentication", wp_defender()->domain ) ?>
                             </a>
                         </li>
+                        <li class="issues-nav">
+                            <a class="<?php echo \Hammer\Helper\HTTP_Helper::retrieve_get( 'view', false ) == 'mask-login' ? 'active' : null ?>"
+                               href="<?php echo network_admin_url( 'admin.php?page=wdf-advanced-tools&view=mask-login' ) ?>">
+			                    <?php _e( "Mask Login Area", wp_defender()->domain ) ?>
+                            </a>
+                        </li>
                     </ul>
                     <div class="is-hidden-tablet mline">
                         <select class="mobile-nav">

@@ -8,30 +8,36 @@
  * Following variables are passed into the template:
  *   $pid (project ID)
  *
- * @since  4.0.0
+ * @since   4.0.0
  * @package WPMUDEV_Dashboard
  */
 
 // Skip if project-ID is invalid.
 $pid = intval( $pid );
-if ( ! $pid ) { return; }
+if ( ! $pid ) {
+	return;
+}
 
 $res = WPMUDEV_Dashboard::$site->get_project_infos( $pid );
 
 // Skip invalid projects.
-if ( empty( $res->pid ) || empty( $res->name ) ) { return; }
+if ( empty( $res->pid ) || empty( $res->name ) ) {
+	return;
+}
 
 // Skip hidden projects.
-if ( $res->is_hidden ) { return; }
+if ( $res->is_hidden ) {
+	return;
+}
 
-$action = false;
-$action_url = '#project-' . $pid;
+$action       = false;
+$action_url   = '#project-' . $pid;
 $action_class = '';
-$action_ajax = '';
-$action_attr = array();
-$show_badge = false;
-$loading_msg = false;
-$target = '_self';
+$action_ajax  = '';
+$action_attr  = array();
+$show_badge   = false;
+$loading_msg  = false;
+$target       = '_self';
 
 if ( ! $res->is_installed ) {
 	/*
@@ -40,26 +46,27 @@ if ( ! $res->is_installed ) {
 	 */
 
 	if ( ! $res->is_licensed ) {
-		$action = __( 'Upgrade', 'wpmudev' );
-		$action_url = '#upgrade';
-		$action_class = 'is-cta';
+		$action             = __( 'Upgrade', 'wpmudev' );
+		$action_url         = '#upgrade';
+		$action_class       = 'is-cta';
 		$action_attr['rel'] = 'dialog';
 	} elseif ( $res->is_compatible && $res->url->install ) {
-		$action = __( 'Install', 'wpmudev' );
-		$action_ajax = 'project-install';
-		$loading_msg = sprintf(
+		$action       = __( 'Install', 'wpmudev' );
+		$action_ajax  = 'project-install';
+		$loading_msg  = sprintf(
+            /* translators: Plugin/Theme name */
 			__( 'Hang on while we install %s...', 'wpmudev' ),
 			esc_attr( $res->name )
 		);
-		$action_url = $res->url->install;
+		$action_url   = $res->url->install;
 		$action_class = 'is-cta';
 	} elseif ( $res->is_compatible ) {
-		$action = __( 'Download', 'wpmudev' );
-		$action_url = $res->url->download;
+		$action       = __( 'Download', 'wpmudev' );
+		$action_url   = $res->url->download;
 		$action_class = 'is-brand';
-		$target = '_blank';
+		$target       = '_blank';
 	} else {
-		$action = $res->incompatible_reason;
+		$action       = $res->incompatible_reason;
 		$action_class = ' disabled';
 	}
 } else {
@@ -70,13 +77,13 @@ if ( ! $res->is_installed ) {
 
 	if ( $res->has_update ) {
 		// 1. Check if the project can be updated.
-		$action = __( 'Update', 'wpmudev' );
-		$action_url = '#update=' . $pid;
+		$action       = __( 'Update', 'wpmudev' );
+		$action_url   = '#update=' . $pid;
 		$action_class = 'is-brand has-update';
-		$show_badge = $res->type;
+		$show_badge   = $res->type;
 	} elseif ( $res->special ) {
 		// 2. This is a dropin/mu-plugin.
-		$action = __( 'Not available', 'wpmudev' );
+		$action       = __( 'Not available', 'wpmudev' );
 		$action_class .= ' button-deactivated';
 		switch ( $res->special ) {
 			case 'dropin':
@@ -94,7 +101,7 @@ if ( ! $res->is_installed ) {
 			} else {
 				$action = __( 'Deactivate', 'wpmudev' );
 			}
-			$action_ajax = 'project-deactivate';
+			$action_ajax  = 'project-deactivate';
 			$action_class = 'button-light';
 
 			if ( ! $res->can_activate ) {
@@ -124,7 +131,7 @@ if ( ! $res->is_installed ) {
 			} else {
 				$action = __( 'Activate', 'wpmudev' );
 			}
-			$action_ajax = 'project-activate';
+			$action_ajax  = 'project-activate';
 			$action_class = 'is-brand';
 
 			if ( ! $res->can_activate ) {
@@ -156,11 +163,11 @@ if ( $res->is_installed && $res->need_upfront ) {
 		$show_badge = 'warning';
 
 		$id_upfront = WPMUDEV_Dashboard::$site->id_upfront;
-		$upfront = WPMUDEV_Dashboard::$site->get_project_infos( $id_upfront );
+		$upfront    = WPMUDEV_Dashboard::$site->get_project_infos( $id_upfront );
 
-		$action = __( 'Install Upfront Parent', 'wpmudev' );
-		$action_url = $upfront->url->install;
-		$action_ajax = 'project-install-upfront';
+		$action       = __( 'Install Upfront Parent', 'wpmudev' );
+		$action_url   = $upfront->url->install;
+		$action_ajax  = 'project-install-upfront';
 		$action_class = 'button-red';
 	}
 }
@@ -172,7 +179,7 @@ if ( ! $action ) {
 	} else {
 		$action = __( 'Plugin details', 'wpmudev' );
 	}
-	$action_url = '#pid=' . $res->pid;
+	$action_url   = '#pid=' . $res->pid;
 	$action_class = 'show-info';
 }
 
@@ -196,18 +203,18 @@ if ( 'plugin' == $res->type && $res->is_active && defined( 'DOING_AJAX' ) && DOI
 */
 
 $attr = array(
-	'project' => $pid,
-	'licensed' => intval( $res->is_licensed ),
-	'installed' => intval( $res->is_installed ),
-	'hasupdate' => intval( $res->has_update ),
+	'project'      => $pid,
+	'licensed'     => intval( $res->is_licensed ),
+	'installed'    => intval( $res->is_installed ),
+	'hasupdate'    => intval( $res->has_update ),
 	'incompatible' => intval( $res->is_compatible ),
-	'active' => intval( $res->is_active ),
-	'order' => intval( $res->default_order ),
-	'popularity' => $res->popularity,
-	'downloads' => $res->downloads,
-	'released' => $res->release_stamp,
-	'updated' => $res->update_stamp,
-	'type' => $res->type,
+	'active'       => intval( $res->is_active ),
+	'order'        => intval( $res->default_order ),
+	'popularity'   => $res->popularity,
+	'downloads'    => $res->downloads,
+	'released'     => $res->release_stamp,
+	'updated'      => $res->update_stamp,
+	'type'         => $res->type,
 );
 
 foreach ( $res->tags as $tid => $tag ) {
@@ -220,68 +227,67 @@ if ( $action_ajax && empty( $action_url ) ) {
 
 ?>
 <div class="project-box project-<?php echo esc_attr( $pid ); ?>"
-	id="project-<?php echo esc_attr( $pid ); ?>"
+     id="project-<?php echo esc_attr( $pid ); ?>"
 	<?php
 	foreach ( $attr as $key => $value ) {
 		printf( 'data-%s="%s" ', esc_attr( $key ), esc_attr( $value ) );
 	}
 	?>
 >
-<div class="project-inner">
-	<div class="show-info">
-	<h4><?php echo esc_html( $res->name ); ?></h4>
-	<div aria-hidden="true" class="project-image">
+    <div class="project-inner">
+        <div class="show-info">
+            <h4><?php echo esc_html( $res->name ); ?></h4>
+            <div aria-hidden="true" class="project-image">
 		<span class="img" style="background-image: url(<?php echo esc_url( $res->url->thumbnail ); ?>), url(<?php echo esc_url( $url_spinner ); ?>);">
 		</span>
-	</div>
-	</div>
-	<div class="project-info">
-		<?php echo esc_html( $res->info ); ?>
-	</div>
-	<div class="project-action">
-		<a
-		class="wpmudui-btn is-full <?php echo esc_attr( $action_class ); ?>"
-		<?php if ( $action_ajax ) : ?>
-		data-action="<?php echo esc_attr( $action_ajax ); ?>"
-		data-hash="<?php echo esc_attr( wp_create_nonce( $action_ajax ) ); ?>"
-		<?php endif; ?>
-		<?php if ( $loading_msg ) : ?>
-		data-loading="<?php echo esc_attr( $loading_msg ); ?>"
-		<?php endif; ?>
-		<?php
-		if ( $action_attr && is_array( $action_attr ) ) {
-			foreach ( $action_attr as $key => $value ) {
-				printf( ' %s="%s"', sanitize_html_class( $key ), esc_attr( $value ) );
-			}
-		}
-		?>
-		href="<?php echo esc_url( $action_url ); ?>"
-		target="<?php echo esc_attr( $target ); ?>"
-		>
-			<?php echo esc_html( $action ); ?>
-		</a>
-	</div>
-	<div class="project-minor">
-		<?php
-		// @codingStandardsIgnoreStart: Actions contain HTML, no escaping!
-		echo implode( ' &bull; ', $minor_actions );
-		// @codingStandardsIgnoreEnd
-		?>
-	</div>
+            </div>
+        </div>
+        <div class="project-info">
+			<?php echo esc_html( $res->info ); ?>
+        </div>
+        <div class="project-action">
+            <a class="wpmudui-btn is-full <?php echo esc_attr( $action_class ); ?>"
+				<?php if ( $action_ajax ) : ?>
+                    data-action="<?php echo esc_attr( $action_ajax ); ?>"
+                    data-hash="<?php echo esc_attr( wp_create_nonce( $action_ajax ) ); ?>"
+				<?php endif; ?>
+				<?php if ( $loading_msg ) : ?>
+                    data-loading="<?php echo esc_attr( $loading_msg ); ?>"
+				<?php endif; ?>
+				<?php
+				if ( $action_attr && is_array( $action_attr ) ) {
+					foreach ( $action_attr as $key => $value ) {
+						printf( ' %s="%s"', sanitize_html_class( $key ), esc_attr( $value ) );
+					}
+				}
+				?>
+                    href="<?php echo esc_url( $action_url ); ?>"
+                    target="<?php echo esc_attr( $target ); ?>"
+            >
+				<?php echo esc_html( $action ); ?>
+            </a>
+        </div>
+        <div class="project-minor">
+			<?php
+			// @codingStandardsIgnoreStart: Actions contain HTML, no escaping!
+			echo implode( ' &bull; ', $minor_actions );
+			// @codingStandardsIgnoreEnd
+			?>
+        </div>
 
-	<?php if ( $show_badge ) : ?>
-	<span class="badge badge-<?php echo esc_attr( $show_badge ); ?>">
+		<?php if ( $show_badge ) : ?>
+            <span class="badge badge-<?php echo esc_attr( $show_badge ); ?>">
 		<?php if ( 'plugin' == $show_badge ) { ?>
-		<i aria-hidden="true" class="dev-icon dev-icon-plugin"></i>
+            <i aria-hidden="true" class="dev-icon dev-icon-plugin"></i>
 		<?php } elseif ( 'theme' == $show_badge ) { ?>
-		<i aria-hidden="true" class="dev-icon dev-icon-theme"></i>
+            <i aria-hidden="true" class="dev-icon dev-icon-theme"></i>
 		<?php } elseif ( 'warning' == $show_badge ) { ?>
-		<i aria-hidden="true" class="dashicons dashicons-warning"></i>
+            <i aria-hidden="true" class="dashicons dashicons-warning"></i>
 		<?php } elseif ( 'active-theme' == $show_badge ) { ?>
-		<i aria-hidden="true" class="dev-icon dev-icon-radio_checked"></i>
+            <i aria-hidden="true" class="dev-icon dev-icon-radio_checked"></i>
 		<?php } ?>
 	</span>
-	<?php endif; ?>
+		<?php endif; ?>
 
-</div>
+    </div>
 </div>

@@ -157,6 +157,7 @@ $separator = is_rtl() ? ' &rsaquo; ' : ' &lsaquo; ';
 do_action( 'login_header' );
 ?>
 <div id="login">
+
     <h1><a href="<?php echo esc_url( $login_header_url ); ?>" title="<?php echo esc_attr( $login_header_title ); ?>"
            tabindex="-1"><?php bloginfo( 'name' ); ?></a></h1>
 	<?php
@@ -229,12 +230,26 @@ do_action( 'login_header' );
         <input type="hidden" name="redirect_to" value="<?php echo $redirect_to ?>"/>
 		<?php wp_nonce_field( 'DefOtpCheck' ) ?>
     </form>
+	<?php
+	$settings = \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance();
+
+	if ( wp_defender()->isFree == false && $settings->customGraphic ) {
+		?>
+        <style type="text/css">
+            body.login div#login h1 a {
+                background-image: url("<?php echo $settings->customGraphicURL ?>");
+            }
+        </style>
+		<?php
+	}
+	?>
 	<?php if ( \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance()->lostPhone ): ?>
         <p id="nav">
             <a id="lostPhone"
                href="<?php echo admin_url( 'admin-ajax.php?action=defRetrieveOTP&token=' . $loginToken . '&nonce=' . wp_create_nonce( 'defRetrieveOTP' ) ) ?>">
 				<?php _e( "Lost your device?", wp_defender()->domain ) ?></a>
-            <img class="def-ajaxloader" src="<?php echo wp_defender()->getPluginUrl().'app/module/advanced-tools/img/spinner.svg' ?>"/>
+            <img class="def-ajaxloader"
+                 src="<?php echo wp_defender()->getPluginUrl() . 'app/module/advanced-tools/img/spinner.svg' ?>"/>
             <strong class="notification">
 
             </strong>

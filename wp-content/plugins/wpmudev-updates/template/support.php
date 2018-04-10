@@ -6,7 +6,7 @@
  * configuration.
  *
  * Following variables are passed into the template:
- *   $data (membership data)
+ *   $data (projects data)
  *   $profile (user profile data)
  *   $urls (urls of all dashboard menu items)
  *   $staff_login (remote access status/details)
@@ -29,9 +29,9 @@ $this->render_header( $page_title );
 $url_grant = wp_nonce_url( add_query_arg( 'action', 'remote-grant', $urls->support_url ), 'remote-grant', 'hash' );
 $url_revoke = wp_nonce_url( add_query_arg( 'action', 'remote-revoke', $urls->support_url ), 'remote-revoke', 'hash' );
 $url_extend = wp_nonce_url( add_query_arg( 'action', 'remote-extend', $urls->support_url ), 'remote-extend', 'hash' );
-$url_all_tickets = $urls->remote_site . 'hub/support';
+$url_all_tickets = $urls->remote_site . 'hub/support/';
 $url_search = $urls->remote_site . 'forums/search.php';
-$url_open_ticket = $urls->remote_site . 'forums/forum/support/#question-modal';
+$url_open_ticket = $url_all_tickets;
 
 if ( $notes && ! empty( $_COOKIE['wpmudev_is_staff'] ) || ! empty( $_GET['staff'] ) ) {
 	$notes_class = 'active';
@@ -86,11 +86,11 @@ $time_format = get_option( 'time_format' );
 				<?php esc_html_e( 'You have no support tickets, woop!', 'wpmudev' ); ?>
 			</h4>
 			<p aria-hidden="true" class="space-b">
-				<?php esc_html_e( 'When you ask a support question, it will appear here. You can also access this in the WPMU DEV Hub.', 'wpmudev' ); ?>
+				<?php esc_html_e( 'When you create a support ticket, it will appear here. You can also access this in the WPMU DEV Hub.', 'wpmudev' ); ?>
 			</p>
 			<p>
 				<a href="<?php echo esc_url( $url_open_ticket ); ?>" target="_blank" class="wpmudui-btn is-brand">
-				<?php esc_html_e( 'Open new ticket', 'wpmudev' ); ?>
+				<?php esc_html_e( 'Get Support', 'wpmudev' ); ?>
 				</a>
 			</p>
 			</div>

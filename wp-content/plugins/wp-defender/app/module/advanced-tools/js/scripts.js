@@ -2,19 +2,77 @@ jQuery(function ($) {
     Adtools.formHandler();
 
     $('div.advanced-tools').on('form-submitted', function (e, data, form) {
-        if (form.attr('id') != 'advanced-settings-frm') {
-            return;
-        }
-        if (data.success == true) {
-            Defender.showNotification('success', data.data.message);
-        } else {
-            Defender.showNotification('error', data.data.message);
+        if (form.attr('id') === 'advanced-settings-frm' || form.attr('id') === 'ad-mask-settings-frm') {
+            if (data.success == true) {
+                Defender.showNotification('success', data.data.message);
+            } else {
+                Defender.showNotification('error', data.data.message);
+            }
         }
     })
     $('.deactivate-2factor').click(function () {
         $('#advanced-settings-frm').append('<input type="hidden" name="enabled" value="0"/>');
         $(this).attr('disabled', 'disabled');
         $('#advanced-settings-frm').submit();
+    });
+    $('.deactivate-atmasking').click(function () {
+        $('#ad-mask-settings-frm').append('<input type="hidden" name="enabled" value="0"/>');
+        $(this).attr('disabled', 'disabled');
+        $('#ad-mask-settings-frm').submit();
+    })
+
+    $('body').on('change', '#toggle_force_auth', function (e) {
+        if ($(this).prop('checked') == true) {
+            $(this).closest('.column').find('.well').removeClass('is-hidden')
+        } else {
+            $(this).closest('.column').find('.well').addClass('is-hidden')
+        }
+    });
+    $('body').on('change', '#customGraphic', function (e) {
+        if ($(this).prop('checked') == true) {
+            $(this).closest('.column').find('.well').removeClass('is-hidden')
+        } else {
+            $(this).closest('.column').find('.well').addClass('is-hidden')
+        }
+    })
+    $('body').on('change', '#redirectTraffic', function (e) {
+        if ($(this).prop('checked') == true) {
+            $(this).closest('.column').find('.well').removeClass('is-hidden')
+        } else {
+            $(this).closest('.column').find('.well').addClass('is-hidden')
+        }
+    })
+
+
+    var mediaUploader;
+    $('.file-picker').click(function () {
+        if (mediaUploader) {
+            mediaUploader.open();
+            return;
+        }
+        // Extend the wp.media object
+        mediaUploader = wp.media.frames.file_frame = wp.media({
+            title: 'Choose an image file',
+            button: {
+                text: 'Choose File'
+            }, multiple: false,
+            library: {
+                type: ['image']
+            }
+        });
+
+        // When a file is selected, grab the URL and set it as the text field's value
+        mediaUploader.on('select', function () {
+            var attachment = mediaUploader.state().get('selection').first().toJSON();
+            if ($.inArray(attachment.mime, ["image/jpeg", "image/png", "image/gif"]) > -1) {
+                $('#customGraphicURL').val(attachment.url);
+                $('#customGraphicIMG').attr('src', attachment.url);
+            } else {
+                Defender.showNotification('error', 'Invalid image file type');
+            }
+        });
+        // Open the uploader dialog
+        mediaUploader.open();
     })
 });
 window.Adtools = window.Adtools || {};

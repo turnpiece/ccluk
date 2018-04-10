@@ -231,7 +231,7 @@ class Audit_API extends Component {
 		$sks        = $sockets;
 		$r          = null;
 		$e          = null;
-		if ( ( $socket_ready = stream_select( $r, $sks, $e, 1 ) ) === false ) {
+		if ( ( $socket_ready = @stream_select( $r, $sks, $e, 1 ) ) === false ) {
 			//this case error happen
 
 			return false;

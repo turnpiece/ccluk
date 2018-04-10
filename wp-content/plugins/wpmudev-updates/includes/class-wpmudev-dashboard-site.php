@@ -70,24 +70,6 @@ class WPMUDEV_Dashboard_Site {
 	public $id_legacy_themes = 237;
 
 	/**
-	 * Internal cache for plugin options (stored in DB).
-	 *
-	 * This property is used by the functions get_option() and set_option()
-	 *
-	 * @var array (List of settings)
-	 */
-	protected $option_cache = array();
-
-	/**
-	 * Internal cache for plugin options (stored in DB).
-	 *
-	 * This property is used by the functions get_option() and set_option()
-	 *
-	 * @var array (List of settings)
-	 */
-	protected $option_hash = array();
-
-	/**
 	 * Allows specific private ajax actions to work for non-allowed users
 	 *
 	 * @var array Ajax actions that non-allowed users can access
@@ -305,7 +287,7 @@ class WPMUDEV_Dashboard_Site {
 			'remote_access' => '',
 			'refresh_remote_flag' => 0,
 			'refresh_profile_flag' => 0,
-			'updates_data' => '',
+			'updates_data' => null,
 			'profile_data' => '',
 			'farm133_themes' => '',
 			'updates_available' => '',
@@ -563,6 +545,7 @@ class WPMUDEV_Dashboard_Site {
 			// Function to check for updates again.
 			case 'check-updates':
 				WPMUDEV_Dashboard::$site->set_option( 'refresh_profile_flag', 1 );
+				WPMUDEV_Dashboard::$api->refresh_projects_data();
 				WPMUDEV_Dashboard::$site->refresh_local_projects( 'remote' );
 				$success = 'SILENT';
 				break;
@@ -693,6 +676,7 @@ class WPMUDEV_Dashboard_Site {
 
 				case 'check-updates':
 					WPMUDEV_Dashboard::$site->set_option( 'refresh_profile_flag', 1 );
+					WPMUDEV_Dashboard::$api->refresh_projects_data();
 					WPMUDEV_Dashboard::$site->refresh_local_projects( 'remote' );
 					$this->send_json_success();
 					break;
@@ -946,7 +930,7 @@ class WPMUDEV_Dashboard_Site {
 		}
 
 		WPMUDEV_Dashboard::$api->set_key( trim( $_REQUEST['apikey'] ) );
-		$result = WPMUDEV_Dashboard::$api->refresh_membership_data( false, true );
+		$result = WPMUDEV_Dashboard::$api->hub_sync( false, true );
 		if ( ! $result || empty( $result['membership'] ) ) {
 			// Don't logout at this point!
 			WPMUDEV_Dashboard::$api->set_key( '' );
@@ -1017,12 +1001,7 @@ class WPMUDEV_Dashboard_Site {
 			$key = $name;
 		}
 
-		if ( ! $prefix || ! isset( $this->option_cache[ $key ] ) ) {
-			$this->option_cache[ $key ] = get_site_option( $key );
-			$this->option_hash[ $key ] = md5( json_encode( $this->option_cache[ $key ] ) );
-		}
-
-		return $this->option_cache[ $key ];
+		return get_site_option( $key );
 	}
 
 	/**
@@ -1037,26 +1016,7 @@ class WPMUDEV_Dashboard_Site {
 	 */
 	public function set_option( $name, $value ) {
 		$key = 'wdp_un_' . $name;
-		$new_hash = md5( json_encode( $value ) );
-
-		// Don't update if the value did not change.
-		if ( isset( $this->option_hash[ $key ] ) ) {
-			if ( $new_hash == $this->option_hash[ $key ] ) { return; }
-		}
-
-		// Fix to prevent WordPress hashing PHP objects.
-		delete_site_option( $key );
-		unset( $this->option_cache[ $key ] );
-		unset( $this->option_hash[ $key ] );
-
-		if ( null !== $value ) {
-			$this->option_cache[ $key ] = $value;
-			$this->option_hash[ $key ] = $new_hash;
-
-			if ( $value ) {
-				update_site_option( $key, $value );
-			}
-		}
+		update_site_option( $key, $value );
 	}
 
 	/**
@@ -1174,6 +1134,7 @@ class WPMUDEV_Dashboard_Site {
 		WPMUDEV_Dashboard::$api->revoke_remote_access();
 		$this->init_options( 'reset' );
 		WPMUDEV_Dashboard::$api->set_key( '' );
+		WPMUDEV_Dashboard::$api->hub_sync( false, true ); // force a sync so that site is removed from user's hub.
 
 		if ( $redirect ) {
 			// Directly redirect to login page.
@@ -1272,7 +1233,7 @@ class WPMUDEV_Dashboard_Site {
 	 */
 	public function get_project_infos( $pid, $fetch_full = false ) {
 		$pid = intval( $pid );
-		$is_network_admin = is_multisite() && (is_network_admin() || ! empty( $_REQUEST['is_network'] ));
+		$is_network_admin = is_multisite(); // If multisite we only ever do things in network admin
 		$urls = WPMUDEV_Dashboard::$ui->page_urls;
 
 		if ( ! is_array( self::$_cache_projectinfos ) ) {
@@ -1318,6 +1279,7 @@ class WPMUDEV_Dashboard_Site {
 					'download' => '',
 					'website' => '',
 					'thumbnail' => '',
+					'thumbnail_square' => '',
 					'video' => '',
 					'infos' => '',
 				),
@@ -1446,6 +1408,11 @@ class WPMUDEV_Dashboard_Site {
 				$res->url->thumbnail = esc_url( $remote['thumbnail_large'] );
 			} else {
 				$res->url->thumbnail = esc_url( $remote['thumbnail'] );
+			}
+			if ( ! empty( $remote['thumbnail_square'] ) ) {
+				$res->url->thumbnail_square = esc_url( $remote['thumbnail_square'] );
+			} else {
+				$res->url->thumbnail_square = esc_url( $remote['thumbnail'] );
 			}
 			$res->url->video = esc_url( $remote['video'] );
 			$res->url->instructions = WPMUDEV_Dashboard::$api->rest_url( 'usage/' . $pid );
@@ -1915,7 +1882,7 @@ class WPMUDEV_Dashboard_Site {
 	 * @return array List of project-details
 	 */
 	protected function find_projects_by_name( $filter ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$projects = $data['projects'];
 
 		// Remove legacy themes.
@@ -1974,11 +1941,10 @@ class WPMUDEV_Dashboard_Site {
 	 * @return bool
 	 */
 	public function user_can_install( $project_id, $only_license = false ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $license_for );
 
 		// Basic check if we have valid data.
-		if ( empty( $data['membership'] ) ) { return false; }
 		if ( empty( $data['projects'] ) ) { return false; }
 		if ( empty( $data['projects'][ $project_id ] ) ) { return false; }
 
@@ -2158,7 +2124,7 @@ class WPMUDEV_Dashboard_Site {
 				5 * MINUTE_IN_SECONDS
 			);
 			$this->set_option( 'updates_available', false );
-			$data = WPMUDEV_Dashboard::$api->refresh_membership_data( $local_projects );
+			WPMUDEV_Dashboard::$api->hub_sync( $local_projects );
 
 			// Recalculate upgrades with current/updated data.
 			WPMUDEV_Dashboard::$api->calculate_upgrades( $local_projects );
@@ -2177,6 +2143,7 @@ class WPMUDEV_Dashboard_Site {
 		if ( self::$_refresh_updates_flag || isset( $_GET['force-check'] ) ) {
 			self::$_refresh_updates_flag = false;
 			self::$_refresh_shutdown_flag = false;
+			WPMUDEV_Dashboard::$api->refresh_projects_data();
 			$this->refresh_local_projects( 'remote' );
 		} else {
 			$this->refresh_local_projects( 'local' );
@@ -2556,7 +2523,7 @@ class WPMUDEV_Dashboard_Site {
 
 		$string = explode( '-', $args->slug );
 		$id = intval( $string[1] );
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$projects = $data['projects'];
 
 		if ( isset( $projects[ $id ] ) && 1 == $projects[ $id ]['autoupdate'] ) {
@@ -2625,6 +2592,8 @@ class WPMUDEV_Dashboard_Site {
 						$package = WPMUDEV_Dashboard::$api->rest_url_auth( 'download/' . $id );
 					}
 
+					$thumb = isset( $plugin['thumbnail'] ) ? $plugin['thumbnail'] : '';
+
 					// Build plugin class.
 					$object = (object) array(
 						'id'          => "wpmudev/plugins/$id",
@@ -2633,6 +2602,10 @@ class WPMUDEV_Dashboard_Site {
 						'new_version' => $plugin['new_version'],
 						'url'         => $plugin['url'],
 						'package'     => $package,
+						'icons'       => array(
+							'1x'      => $thumb,
+							'default' => $thumb,
+						),
 						'autoupdate'  => $autoupdate,
 						'tested'      => $cur_wp_version,
 					);

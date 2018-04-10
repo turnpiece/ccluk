@@ -53,8 +53,9 @@ class Change_Admin extends Rule {
 		} else {
 			Settings::instance()->addToResolved( self::$slug );
 			wp_send_json_success( array(
-				'message' => sprintf( __( "Your admin name has changed. You will need to <a href='" . wp_login_url() . "'><strong>%s</strong></a>.<br/>This will auto reload after <span class='hardener-timer'>10</span> seconds.", wp_defender()->domain ), "re-login" ),
-				'reload'  => 10
+				'message' => sprintf( __( "Your admin name has changed. You will need to <a href='%s'><strong>%s</strong></a>.<br/>This will auto reload after <span class='hardener-timer'>10</span> seconds.", wp_defender()->domain ), wp_login_url( network_admin_url( 'admin.php?page=wdf-hardener' ) ), "re-login" ),
+				'reload'  => 10,
+				'url'     => wp_login_url( network_admin_url( 'admin.php?page=wdf-hardener' ) )
 			) );
 		}
 	}

@@ -37,9 +37,9 @@ class Main extends Controller {
 			$this->add_action( 'defender_enqueue_assets', 'scripts', 11 );
 		}
 		$this->add_ajax_action( 'saveAdvancedSettings', 'saveSettings' );
+		$this->add_action( 'update_option_jetpack_active_modules', 'listenForJetpackOption', 10, 3 );
 		$setting = Auth_Settings::instance();
 		if ( $setting->enabled ) {
-			$this->add_action( 'update_option_jetpack_active_modules', 'listenForJetpackOption', 10, 3 );
 			//prepare for the login part
 			$isJetpackSSO = Auth_API::isJetPackSSO();
 			$isTML        = Auth_API::isTML();
@@ -55,15 +55,18 @@ class Main extends Controller {
 				 */
 			} else {
 				if ( $isJetpackSSO ) {
-					wp_defender()->global['compatibility'][] = __( "You enabled Jetpack WordPress.com login, so Defender will disable the two factors login for avoiding conflict", wp_defender()->domain );
+					wp_defender()->global['compatibility'][] = __( "We’ve detected a conflict with Jetpack’s Wordpress.com Log In feature. Please disable it and return to this page to continue setup.", wp_defender()->domain );
 				}
 				if ( $isTML ) {
-					wp_defender()->global['compatibility'][] = __( "You enabled the plugin Theme My Login, so Defender will disable the two factors login for avoiding conflict", wp_defender()->domain );
+					wp_defender()->global['compatibility'][] = __( "We’ve detected a conflict with Theme my login. Please disable it and return to this page to continue setup.", wp_defender()->domain );
 				}
 			}
 			$this->add_filter( 'ms_shortcode_ajax_login', 'm2NoAjax' );
 			$this->add_action( 'show_user_profile', 'showUsers2FactorActivation' );
 			$this->add_action( 'profile_update', 'saveBackupEmail' );
+			//$this->add_action( 'wp_login', 'markAsForceAuth', 10, 2 );
+			$this->add_filter( 'login_redirect', 'login_redirect', 99 );
+			$this->add_action( 'current_screen', 'forceProfilePage', 1 );
 			$this->add_ajax_action( 'defVerifyOTP', 'verifyConfigOTP' );
 			$this->add_ajax_action( 'defDisableOTP', 'disableOTP' );
 			$this->add_ajax_action( 'defRetrieveOTP', 'retrieveOTP', false, true );
@@ -74,6 +77,71 @@ class Main extends Controller {
 				$this->add_filter( 'wpmu_users_columns', 'alterUsersTable' );
 				$this->add_filter( 'manage_users_custom_column', 'alterUsersTableRow', 10, 3 );
 			}
+		}
+	}
+
+	/**
+	 * If user have flag then force enable
+	 */
+	public function forceProfilePage() {
+		$user = wp_get_current_user();
+		if ( ! is_object( $user ) ) {
+			return;
+		}
+
+		$settings = Auth_Settings::instance();
+		if ( $settings->forceAuth != true ) {
+			return;
+		}
+
+		//not enable for this role oass
+		if ( ! Auth_API::isEnableForCurrentRole( $user ) ) {
+			return;
+		}
+		//user already enable OTP
+		if ( Auth_API::isUserEnableOTP( $user->ID ) ) {
+			return;
+		}
+		$screen = get_current_screen();
+		if ( $screen->id != 'profile' ) {
+			wp_redirect( admin_url( 'profile.php' ) . '#show2AuthActivator' );
+			exit;
+		}
+	}
+
+	public function login_redirect( $url ) {
+		$settings = Auth_Settings::instance();
+		if ( $settings->forceAuth != true ) {
+			return $url;
+		}
+
+		return $url;
+	}
+
+	/**
+	 * @param $userLogin
+	 * @param $user
+	 */
+	public function markAsForceAuth( $userLogin, $user ) {
+		$settings = Auth_Settings::instance();
+		if ( $settings->forceAuth != true ) {
+			return;
+		}
+		//not enable for this role oass
+		if ( ! Auth_API::isEnableForCurrentRole( $user ) ) {
+			return;
+		}
+		//user already enable OTP
+		if ( Auth_API::isUserEnableOTP( $user->ID ) ) {
+			return;
+		}
+		//if this is normal user, force them
+//		if ( ! current_user_can( 'subscriber' ) ) {
+//			return;
+//		}
+		$flag = get_user_meta( $user->ID, 'defenderForceAuth', true );
+		if ( $flag === '' ) {
+			update_user_meta( $user->ID, 'defenderForceAuth', 1 );
 		}
 	}
 
@@ -221,6 +289,7 @@ class Main extends Controller {
 		if ( $res ) {
 			//save it
 			update_user_meta( get_current_user_id(), 'defenderAuthOn', 1 );
+			update_user_meta( get_current_user_id(), 'defenderForceAuth', 0 );
 			wp_send_json_success();
 		} else {
 			//now need to check if the current user have backup otp
@@ -402,7 +471,11 @@ class Main extends Controller {
 		$view = HTTP_Helper::retrieve_get( 'view' );
 		switch ( $view ) {
 			default:
+				//todo move to another class
 				$this->viewAuth();
+				break;
+			case 'mask-login':
+				do_action( 'defenderATMaskLogin' );
 				break;
 		}
 	}
@@ -415,7 +488,9 @@ class Main extends Controller {
 		if ( $settings->enabled == false ) {
 			$this->render( 'disabled' );
 		} else {
-			$this->render( 'main', array(
+			wp_enqueue_media();
+			$view = wp_defender()->isFree ? 'main-free' : 'main';
+			$this->render( $view, array(
 				'settings' => $settings
 			) );
 		}

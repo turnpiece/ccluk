@@ -143,7 +143,7 @@ jQuery(function initModules() {
 		var searchForm = jQuery("#support-search");
 		searchForm.submit(function() {
 			var query = jQuery('#support-search input[name="q"]').val();
-			window.location.href = 'https://premium.wpmudev.org/forums/search.php?q='+query+'&forum=support';
+			window.open('https://premium.wpmudev.org/forums/search.php?q='+query+'&forum=support', '_blank');
 			return false;
 		});
 		searchForm.on('click', '.search-icon', function() {
@@ -713,15 +713,15 @@ jQuery(function initModules() {
 			return true;
 		}
 
-		if (response.statusText) {
-			// The requiest failed, we have a server error-status.
-			WDP.showError('Server error status: ' + response.statusText + ' [' + response.status + ']');
-			return true;
-		}
-
 		if (response.success && 'function' !== typeof response.success) {
 			// This is no error, it's a success message!
 			return false;
+		}
+
+		if (200 != response.status && response.statusText) {
+			// The requiest failed, we have a server error-status.
+			WDP.showError('Server error status: ' + response.statusText + ' [' + response.status + ']');
+			return true;
 		}
 
 		// WordPress returned an error-state.

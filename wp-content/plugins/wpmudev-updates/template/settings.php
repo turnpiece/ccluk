@@ -6,7 +6,7 @@
  * review/change his subscription details.
  *
  * Following variables are passed into the template:
- *   $data (membership data)
+ *   $data (projects data)
  *   $member (user profile data)
  *   $urls (urls of all dashboard menu items)
  *   $membership_type (full|single|free)
@@ -42,6 +42,11 @@ if ( WPMUDEV_LIMIT_TO_USER ) {
 <div class="col-half">
 <section class="box-membership dev-box">
 	<div class="box-title">
+        <span class="buttons">
+			<a href="<?php echo esc_url( $url_membership ); ?>" class="wpmudui-btn is-ghost is-sm" target="_blank">
+				<?php _e( 'Manage Account', 'wpmudev' ); ?>
+			</a>
+		</span>
 		<h3><?php _e( 'Membership', 'wpmudev' ); ?></h3>
 	</div>
 	<div class="box-content">

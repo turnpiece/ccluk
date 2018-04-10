@@ -39,6 +39,7 @@ $cache->delete( 'cleanchecksum' );
 \WP_Defender\Module\Hardener\Model\Settings::instance()->delete();
 \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->delete();
 \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance()->delete();
+\WP_Defender\Module\Advanced_Tools\Model\Mask_Settings::instance()->delete();
 //clear old stuff
 delete_site_option( 'wp_defender' );
 delete_option( 'wp_defender' );

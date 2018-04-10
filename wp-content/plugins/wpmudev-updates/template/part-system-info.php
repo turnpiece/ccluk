@@ -10,7 +10,7 @@
  *   $profile (user profile data)
  *   $urls (urls of all dashboard menu items)
  *
- * @since  4.0.0
+ * @since   4.0.0
  * @package WPMUDEV_Dashboard
  */
 
@@ -51,8 +51,8 @@ $dump_php['Version'] = phpversion();
 foreach ( $php_vars as $setting ) {
 	$dump_php[ $setting ] = ini_get( $setting );
 }
-$dump_php['Error Reporting'] = implode( '<br>', __error_reporting() );
-$extensions = get_loaded_extensions();
+$dump_php['Error Reporting'] = implode( '<br>', _error_reporting() );
+$extensions                  = get_loaded_extensions();
 natcasesort( $extensions );
 $dump_php['Extensions'] = implode( '<br>', $extensions );
 
@@ -67,16 +67,18 @@ $mysql_vars = array(
 	'query_cache_type'   => 'ON',   // Query cache on or off.
 );
 $extra_info = array();
-$variables = $wpdb->get_results( "
+$variables  = $wpdb->get_results( "
 	SHOW VARIABLES
 	WHERE Variable_name IN ( '" . implode( "', '", array_keys( $mysql_vars ) ) . "' )
 " );
-$dbh = $wpdb->dbh;
+$dbh        = $wpdb->dbh;
 if ( is_resource( $dbh ) ) {
-	$driver  = 'mysql';
+	$driver = 'mysql';
+	// @codingStandardsIgnoreStart: This IS PHP7+ compatible, mysql_get_server_info is included for backwards compatibility
 	$version = function_exists( 'mysqli_get_server_info' ) ? mysqli_get_server_info( $dbh ) : mysql_get_server_info( $dbh );
+	// @codingStandardsIgnoreEnd
 } elseif ( is_object( $dbh ) ) {
-	$driver  = get_class( $dbh );
+	$driver = get_class( $dbh );
 	if ( method_exists( $dbh, 'db_version' ) ) {
 		$version = $dbh->db_version();
 	} elseif ( isset( $dbh->server_info ) ) {
@@ -95,13 +97,13 @@ if ( is_resource( $dbh ) ) {
 } else {
 	$version = $driver = __( 'Unknown', 'wpmudev' );
 }
-$extra_info['Database'] = $wpdb->dbname;
-$extra_info['Charset'] = $wpdb->charset;
-$extra_info['Collate'] = $wpdb->collate;
+$extra_info['Database']     = $wpdb->dbname;
+$extra_info['Charset']      = $wpdb->charset;
+$extra_info['Collate']      = $wpdb->collate;
 $extra_info['Table Prefix'] = $wpdb->prefix;
 
 $dump_mysql['Server Version'] = $version;
-$dump_mysql['Driver'] = $driver;
+$dump_mysql['Driver']         = $driver;
 foreach ( $extra_info as $key => $val ) {
 	$dump_mysql[ $key ] = $val;
 }
@@ -109,12 +111,12 @@ foreach ( $mysql_vars as $key => $val ) {
 	$dump_mysql[ $key ] = $val;
 }
 foreach ( $variables as $item ) {
-	$dump_mysql[ $item->Variable_name ] = __value_format( $item->Value );
+	$dump_mysql[ $item->Variable_name ] = _value_format( $item->Value );
 }
 
 // 3. WordPress ---------------------------------------------------------------
-$dump_wp = array();
-$wp_consts = array(
+$dump_wp                      = array();
+$wp_consts                    = array(
 	'ABSPATH',
 	'WP_CONTENT_DIR',
 	'WP_PLUGIN_DIR',
@@ -153,13 +155,13 @@ $wp_consts = array(
 );
 $dump_wp['WordPress Version'] = $wp_version;
 foreach ( $wp_consts as $const ) {
-	$dump_wp[ $const ] = __const_format( $const );
+	$dump_wp[ $const ] = _const_format( $const );
 }
 
 // 4. Server ------------------------------------------------------------------
 $dump_server = array();
-$server = explode( ' ', $_SERVER['SERVER_SOFTWARE'] );
-$server = explode( '/', reset( $server ) );
+$server      = explode( ' ', $_SERVER['SERVER_SOFTWARE'] );
+$server      = explode( '/', reset( $server ) );
 
 if ( isset( $server[1] ) ) {
 	$server_version = $server[1];
@@ -168,25 +170,27 @@ if ( isset( $server[1] ) ) {
 }
 $lt = localtime();
 
-$dump_server['Software Name'] = $server[0];
-$dump_server['Software Version'] = $server_version;
-$dump_server['Server IP'] = @$_SERVER['SERVER_ADDR'];
-$dump_server['Server Hostname'] = @$_SERVER['SERVER_NAME'];
-$dump_server['Server Admin'] = @$_SERVER['SERVER_ADMIN'];
+$dump_server['Software Name']     = $server[0];
+$dump_server['Software Version']  = $server_version;
+$dump_server['Server IP']         = @$_SERVER['SERVER_ADDR'];
+$dump_server['Server Hostname']   = @$_SERVER['SERVER_NAME'];
+$dump_server['Server Admin']      = @$_SERVER['SERVER_ADMIN'];
 $dump_server['Server local time'] = date( 'Y-m-d H:i:s (\U\T\C P)' );
-$dump_server['Operating System'] = @php_uname( 's' );
-$dump_server['OS Hostname'] = @php_uname( 'n' );
-$dump_server['OS Version'] = @php_uname( 'v' );
+$dump_server['Operating System']  = @php_uname( 's' );
+$dump_server['OS Hostname']       = @php_uname( 'n' );
+$dump_server['OS Version']        = @php_uname( 'v' );
 
 // 5. HTTP Requests -----------------------------------------------------------
 $dump_http = array();
-$options = array();
-if ( WPMUDEV_API_UNCOMPRESSED ) { $options['decompress'] = false; }
+$options   = array();
+if ( WPMUDEV_API_UNCOMPRESSED ) {
+	$options['decompress'] = false;
+}
 
-$remote_url = WPMUDEV_Dashboard::$api->get_test_url();
-$url = parse_url( $remote_url );
-$remote_get = wp_remote_get( $remote_url, $options );
-$remote_post = wp_remote_post( $remote_url, $options );
+$remote_url    = WPMUDEV_Dashboard::$api->get_test_url();
+$url           = parse_url( $remote_url );
+$remote_get    = wp_remote_get( $remote_url, $options );
+$remote_post   = wp_remote_post( $remote_url, $options );
 $remote_paypal = wp_remote_post(
 	'https://api-3t.paypal.com/nvp',
 	array( 'body' => '"METHOD=SetExpressCheckout&VERSION=63.0&USER=xxxxx&PWD=xxxxx&SIGNATURE=xxxxx' )
@@ -211,86 +215,86 @@ if ( is_wp_error( $remote_paypal ) ) {
 }
 
 $dump_http['WPMU DEV API Server'] = $url['scheme'] . '://' . $url['host'];
-$dump_http['WPMU DEV: GET'] = $remote_get;
-$dump_http['WPMU DEV: POST'] = $remote_post;
-$dump_http['PayPal API: POST'] = $remote_paypal;
+$dump_http['WPMU DEV: GET']       = $remote_get;
+$dump_http['WPMU DEV: POST']      = $remote_post;
+$dump_http['PayPal API: POST']    = $remote_paypal;
 
 
 /* -------------------------------------------------------------------------- */
 ?>
 
-<div class="row">
-<div class="tabs">
+    <div class="row">
+        <div class="tabs">
 
-	<div class="tab">
-		<input type="radio" id="tab-php" name="sysinfo" checked>
-		<label for="tab-php">PHP</label>
+            <div class="tab">
+                <input type="radio" id="tab-php" name="sysinfo" checked>
+                <label for="tab-php">PHP</label>
 
-		<div class="content">
-			<?php __render_list( $dump_php ); ?>
-		</div>
-	</div>
+                <div class="content">
+					<?php _render_list( $dump_php ); ?>
+                </div>
+            </div>
 
-	<div class="tab">
-		<input type="radio" id="tab-mysql" name="sysinfo">
-		<label for="tab-mysql">MySQL</label>
+            <div class="tab">
+                <input type="radio" id="tab-mysql" name="sysinfo">
+                <label for="tab-mysql">MySQL</label>
 
-		<div class="content">
-			<?php __render_list( $dump_mysql ); ?>
-		</div>
-	</div>
+                <div class="content">
+					<?php _render_list( $dump_mysql ); ?>
+                </div>
+            </div>
 
-	<div class="tab">
-		<input type="radio" id="tab-wordpress" name="sysinfo">
-		<label for="tab-wordpress">WordPress</label>
+            <div class="tab">
+                <input type="radio" id="tab-wordpress" name="sysinfo">
+                <label for="tab-wordpress">WordPress</label>
 
-		<div class="content">
-			<?php __render_list( $dump_wp ); ?>
-		</div>
-	</div>
+                <div class="content">
+					<?php _render_list( $dump_wp ); ?>
+                </div>
+            </div>
 
-	<div class="tab">
-		<input type="radio" id="tab-server" name="sysinfo">
-		<label for="tab-server">Server</label>
+            <div class="tab">
+                <input type="radio" id="tab-server" name="sysinfo">
+                <label for="tab-server">Server</label>
 
-		<div class="content">
-			<?php __render_list( $dump_server ); ?>
-		</div>
-	</div>
+                <div class="content">
+					<?php _render_list( $dump_server ); ?>
+                </div>
+            </div>
 
-	<div class="tab">
-		<input type="radio" id="tab-http" name="sysinfo">
-		<label for="tab-http">HTTP Requests</label>
+            <div class="tab">
+                <input type="radio" id="tab-http" name="sysinfo">
+                <label for="tab-http">HTTP Requests</label>
 
-		<div class="content">
-			<?php __render_list( $dump_http ); ?>
-		</div>
-	</div>
+                <div class="content">
+					<?php _render_list( $dump_http ); ?>
+                </div>
+            </div>
 
-	<?php if ( ! empty( $_COOKIE['wpmudev_is_staff'] ) || ! empty( $_GET['staff'] ) ) : ?>
-	<div class="tab">
-		<input type="radio" id="tab-notifications" name="sysinfo">
-		<label for="tab-notifications">Notifications</label>
+			<?php if ( ! empty( $_COOKIE['wpmudev_is_staff'] ) || ! empty( $_GET['staff'] ) ) : ?>
+                <div class="tab">
+                    <input type="radio" id="tab-notifications" name="sysinfo">
+                    <label for="tab-notifications">Notifications</label>
 
-		<div class="content">
-			<p class="tc"><em>- Additional briefing for support heroes -</em></p>
-			<?php
-			// @codingStandardsIgnoreStart: Dump is HTML code, no escaping!
-			echo WPMUDEV_Dashboard::$notice->dump_queue();
-			// @codingStandardsIgnoreEnd
-			?>
-		</div>
-	</div>
-	<?php endif; ?>
+                    <div class="content">
+                        <p class="tc"><em>- Additional briefing for support heroes -</em></p>
+						<?php
+						// @codingStandardsIgnoreStart: Dump is HTML code, no escaping!
+						echo WPMUDEV_Dashboard::$notice->dump_queue();
+						// @codingStandardsIgnoreEnd
+						?>
+                    </div>
+                </div>
+			<?php endif; ?>
 
-</div>
-<?php
-printf(
-	esc_html__( 'Dashboard version %s', 'wpmudev' ),
-	esc_html( WPMUDEV_Dashboard::$version )
-);
-?>
-</div>
+        </div>
+		<?php
+		printf(
+			esc_html__( 'Dashboard version %s', 'wpmudev' ),
+			esc_html( WPMUDEV_Dashboard::$version )
+		);
+		?>
+    </div>
 
 
 <?php
@@ -299,9 +303,10 @@ printf(
  * Helper function
  *
  * @since  4.0.0
+ *
  * @param  array $list List of settings.
  */
-function __render_list( $list ) {
+function _render_list( $list ) {
 	echo '<ul class="dev-list left top">';
 
 	foreach ( $list as $key => $value ) {
@@ -310,7 +315,7 @@ function __render_list( $list ) {
 			esc_html( $key ),
 			// @codingStandardsIgnoreStart: Value contains HTML code, no escaping!
 			$value
-			// @codingStandardsIgnoreEnd
+		// @codingStandardsIgnoreEnd
 		);
 	}
 	echo '</ul>';
@@ -322,8 +327,8 @@ function __render_list( $list ) {
  * @since  4.0.0
  * @return array
  */
-function __error_reporting() {
-	$levels = array();
+function _error_reporting() {
+	$levels          = array();
 	$error_reporting = error_reporting();
 
 	$constants = array(
@@ -361,13 +366,16 @@ function __error_reporting() {
  * Helper function.
  *
  * @since  4.0.0
+ *
  * @param  mixed $val Value to format.
+ *
  * @return string
  */
-function __value_format( $val ) {
+function _value_format( $val ) {
 	if ( is_numeric( $val ) and ( $val >= ( 1024 * 1024 ) ) ) {
 		$val = size_format( $val );
 	}
+
 	return $val;
 }
 
@@ -375,10 +383,12 @@ function __value_format( $val ) {
  * Helper function.
  *
  * @since  4.0.0
+ *
  * @param  string $constant Name of a PHP const.
+ *
  * @return string
  */
-function __const_format( $constant ) {
+function _const_format( $constant ) {
 	if ( ! defined( $constant ) ) {
 		return '<em>undefined</em>';
 	}
@@ -386,7 +396,7 @@ function __const_format( $constant ) {
 	$val = constant( $constant );
 	if ( ! is_bool( $val ) ) {
 		return $val;
-	} elseif ( ! $val ) {
+	} else if ( ! $val ) {
 		return 'FALSE';
 	} else {
 		return 'TRUE';

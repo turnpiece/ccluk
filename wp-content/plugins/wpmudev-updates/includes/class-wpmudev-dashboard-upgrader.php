@@ -113,7 +113,7 @@ class WPMUDEV_Dashboard_Upgrader {
 		// Download possible?
 		if ( ! WPMUDEV_Dashboard::$api->has_key() ) { return false; }
 
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$project = WPMUDEV_Dashboard::$api->get_project_data( $project_id );
 
 		// Valid project ID?
@@ -158,7 +158,6 @@ class WPMUDEV_Dashboard_Upgrader {
 		// Download possible?
 		if ( ! WPMUDEV_Dashboard::$api->has_key() ) { return false; }
 
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
 		$project = WPMUDEV_Dashboard::$api->get_project_data( $project_id );
 
 		// Valid project ID?
@@ -206,41 +205,46 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @return bool
 	 */
 	public function user_can_install( $project_id, $only_license = false ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data            = WPMUDEV_Dashboard::$api->get_projects_data();
 		$membership_type = WPMUDEV_Dashboard::$api->get_membership_type( $license_for );
 
 		// Basic check if we have valid data.
-		if ( empty( $data['membership'] ) ) { return false; }
-		if ( empty( $data['projects'] ) ) { return false; }
-		if ( empty( $data['projects'][ $project_id ] ) ) { return false; }
+		if ( empty( $data['projects'] ) ) {
+			return false;
+		}
+		if ( empty( $data['projects'][ $project_id ] ) ) {
+			return false;
+		}
 
 		$project = $data['projects'][ $project_id ];
 
 		if ( ! $only_license ) {
-			if ( ! WPMUDEV_Dashboard::$site->allowed_user() ) { return false; }
+			if ( ! WPMUDEV_Dashboard::$site->allowed_user() ) {
+				return false;
+			}
 			//if ( ! $this->can_auto_install( $project['type'] ) ) { return false; }
 		}
 
 		$is_upfront = WPMUDEV_Dashboard::$site->id_upfront == $project_id;
-		$package = isset( $project['package'] ) ? $project['package'] : '';
-		$access = false;
+		$package    = isset( $project['package'] ) ? $project['package'] : '';
+		$access     = false;
 
 		if ( 'full' == $membership_type ) {
 			// User has full membership.
 			$access = true;
-		} elseif ( 'single' == $membership_type && $license_for == $project_id ) {
+		} else if ( 'single' == $membership_type && $license_for == $project_id ) {
 			// User has single membership for the requested project.
 			$access = true;
-		} elseif ( 'free' == $project['paid'] ) {
+		} else if ( 'free' == $project['paid'] ) {
 			// It's a free project. All users can install this.
 			$access = true;
-		} elseif ( 'lite' == $project['paid'] ) {
+		} else if ( 'lite' == $project['paid'] ) {
 			// It's a lite project. All users can install this.
 			$access = true;
-		} elseif ( 'single' == $membership_type && $package && $package == $license_for ) {
+		} else if ( 'single' == $membership_type && $package && $package == $license_for ) {
 			// A packaged project that the user bought.
 			$access = true;
-		} elseif ( $is_upfront && 'single' == $membership_type ) {
+		} else if ( $is_upfront && 'single' == $membership_type ) {
 			// User wants to get Upfront parent theme.
 			$access = true;
 		}
@@ -259,7 +263,7 @@ class WPMUDEV_Dashboard_Upgrader {
 	 * @return bool True if the project is compatible with current site.
 	 */
 	public function is_project_compatible( $project_id, &$reason = '' ) {
-		$data = WPMUDEV_Dashboard::$api->get_membership_data();
+		$data = WPMUDEV_Dashboard::$api->get_projects_data();
 		$reason = '';
 
 		if ( empty( $data['projects'][ $project_id ] ) ) {
@@ -905,7 +909,7 @@ class WPMUDEV_Dashboard_Upgrader {
 
 		if ( isset( $item->pid ) ) { //DEV themes have this set
 			$project_id = $item->pid;
-		} else if ( false !== strpos( $item->slug, 'wpmudev_install-' ) ) {
+		} else if ( ! empty( $item->slug ) && false !== strpos( $item->slug, 'wpmudev_install-' ) ) {
 			//get the project_id
 			list( , $project_id ) = explode( '-', $item->slug );
 		} else {

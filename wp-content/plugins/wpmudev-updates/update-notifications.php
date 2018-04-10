@@ -4,7 +4,7 @@
  * Plugin URI:  https://premium.wpmudev.org/project/wpmu-dev-dashboard/
  * Description: Brings the powers of WPMU DEV directly to you. It will revolutionize how you use WordPress. Activate now!
  * Author:      WPMU DEV
- * Version:     4.4
+ * Version:     4.5
  * Author URI:  https://premium.wpmudev.org/
  * Text Domain: wpmudev
  * Domain Path: includes/languages/
@@ -15,7 +15,7 @@
  */
 
 /*
-Copyright 2007-2017 Incsub (http://incsub.com)
+Copyright 2007-2018 Incsub (http://incsub.com)
 Author - Aaron Edwards
 Contributors - Philipp Stracker, Victor Ivanov, Vladislav Bailovic, Jeffri H, Marko Miljus
 
@@ -44,7 +44,7 @@ class WPMUDEV_Dashboard {
 	 *
 	 * @var string (Version number)
 	 */
-	static public $version = '4.4';
+	static public $version = '4.5';
 
 	/**
 	 * Holds the API module.
@@ -154,7 +154,10 @@ class WPMUDEV_Dashboard {
 		register_activation_hook( __FILE__, array( $this, 'activate_plugin' ) );
 
 		// Register the plugin deactivation hook.
-		register_activation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
+		register_deactivation_hook( __FILE__, array( $this, 'deactivate_plugin' ) );
+
+		// Register the plugin uninstall hook.
+		register_uninstall_hook( __FILE__, array( 'WPMUDEV_Dashboard', 'uninstall_plugin' ) );
 
 		/**
 		 * Custom code can be executed after Dashboard is initialized with the
@@ -190,6 +193,7 @@ class WPMUDEV_Dashboard {
 
 		// Force refresh of all data when plugin is activated.
 		WPMUDEV_Dashboard::$site->set_option( 'refresh_profile_flag', 1 );
+		WPMUDEV_Dashboard::$api->refresh_projects_data();
 		WPMUDEV_Dashboard::$site->schedule_shutdown_refresh();
 	}
 
@@ -202,6 +206,18 @@ class WPMUDEV_Dashboard {
 	public function deactivate_plugin() {
 		// On next page load we want to redirect user to login page.
 		WPMUDEV_Dashboard::$site->set_option( 'redirected_v4', 0 );
+	}
+
+	/**
+	 * Run code on plugin uninstall.
+	 *
+	 * @since  4.5
+	 * @internal Action hook
+	 */
+	public static function uninstall_plugin() {
+		// On next page load we want to redirect user to login page.
+		WPMUDEV_Dashboard::$site->logout( false );
+		// TODO Delete all options from DB.
 	}
 };
 

@@ -11,20 +11,21 @@
  *   $connection_error
  *   $urls (urls of all dashboard menu items)
  *
- * @since  4.0.0
+ * @since   4.0.0
  * @package WPMUDEV_Dashboard
  */
 
-$register_url = 'https://premium.wpmudev.org/#trial';
-$reset_url = 'https://premium.wpmudev.org/wp-login.php?action=lostpassword';
-$account_url = 'https://premium.wpmudev.org/hub/account/';
-$trial_info_url = 'https://premium.wpmudev.org/manuals/how-free-trials-work/';
-$websites_url = 'https://premium.wpmudev.org/hub/my-websites/';
+$register_url      = 'https://premium.wpmudev.org/#trial';
+$reset_url         = 'https://premium.wpmudev.org/wp-login.php?action=lostpassword';
+$account_url       = 'https://premium.wpmudev.org/hub/account/';
+$trial_info_url    = 'https://premium.wpmudev.org/manuals/how-free-trials-work/';
+$websites_url      = 'https://premium.wpmudev.org/hub/my-websites/';
 $security_info_url = 'https://premium.wpmudev.org/manuals/hub-security/';
+$support_url       = 'https://premium.wpmudev.org/hub/support/';
 
 $login_url = $urls->dashboard_url;
 if ( ! empty( $_GET['pid'] ) ) {
-	$login_url = add_query_arg( 'pid', $_GET['pid'], $login_url );
+	$login_url = add_query_arg( 'pid', (int) $_GET['pid'], $login_url );
 }
 
 $last_user = WPMUDEV_Dashboard::$site->get_option( 'auth_user' );
@@ -46,21 +47,29 @@ if ( isset( $_GET['api_error'] ) ) {
 
 		if ( WPMUDEV_Dashboard::$site->is_localhost() ) {
 			$errors[] = sprintf(
-				'%s<br><a href="%s" target="_blank">%s</a> <a href="%s" target="_blank" class="right">%s</a>',
-				sprintf( __( 'This local development site url has previously been registered with WPMU DEV by the user %s. To use this site url, connect with the original user or upgrade your trial to a full membership. Alternatively, try a more uniquely named development site url. Contact support if you need further assistance.', 'wpmudev' ), esc_html( $_GET['display_name'] ) ),
-				$account_url,
-				__( 'Upgrade membership', 'wpmudev' ),
-				$trial_info_url,
-				__( 'More information &raquo;', 'wpmudev' )
+				'%s<br><a href="%s" target="_blank">%s</a>',
+				sprintf(
+					__( 'This local development site URL has previously been registered with us by the user %1$s. To use WPMU DEV with this site URL, log in with the original user (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Alternatively, try a more uniquely named development site URL. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.', 'wpmudev' ),
+					esc_html( $_GET['display_name'] ),
+					$reset_url,
+					$account_url,
+					$trial_info_url
+				),
+				$support_url,
+				__( 'Contact support if you need further assistance &raquo;', 'wpmudev' )
 			);
 		} else {
 			$errors[] = sprintf(
-				'%s<br><a href="%s" target="_blank">%s</a> <a href="%s" target="_blank" class="right">%s</a>',
-				sprintf( __( 'This domain has previously been registered with WPMU DEV by the user %s. To use the dashboard plugin on this domain, you can either connect with the original account (and upgrade it if necessary), or upgrade your trial to a full WPMU DEV membership.', 'wpmudev' ), esc_html( $_GET['display_name'] ) ),
-				$account_url,
-				__( 'Upgrade membership', 'wpmudev' ),
-				$trial_info_url,
-				__( 'More information &raquo;', 'wpmudev' )
+				'%s<br><a href="%s" target="_blank">%s</a>',
+				sprintf(
+					__( 'This domain has previously been registered with us by the user %1$s. To use WPMU DEV on this domain, you can either log in with the original account (you can <a target="_blank" href="%2$s">reset your password</a>) or <a target="_blank" href="%3$s">upgrade your trial</a> to a full membership. Trial accounts can\'t use previously registered domains - <a target="_blank" href="%4$s">here\'s why</a>.', 'wpmudev' ),
+					esc_html( $_GET['display_name'] ),
+					$reset_url,
+					$account_url,
+					$trial_info_url
+				),
+				$support_url,
+				__( 'Contact support if you need further assistance &raquo;', 'wpmudev' )
 			);
 		}
 
@@ -68,22 +77,19 @@ if ( isset( $_GET['api_error'] ) ) {
 
 		if ( WPMUDEV_Dashboard::$site->is_localhost() ) {
 			$errors[] = sprintf(
-				'%s<br><a href="%s" target="_blank">%s</a> <a href="%s" target="_blank" class="right">%s</a>',
-				sprintf( __( 'This local development site url is currently registered to %s. For security reasons they will need to go to the WPMU DEV Hub and remove this domain before you can connect. If that account is not yours, then make your local development site url more unique. Contact support if you need further assistance.', 'wpmudev' ), esc_html( $_GET['display_name'] ) ),
-				$websites_url,
-				__( 'Remove site', 'wpmudev' ),
-				$security_info_url,
-				__( 'More information &raquo;', 'wpmudev' )
+				'%s<br><a href="%s" target="_blank">%s</a>',
+				sprintf( __( 'This local development site URL is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If that account is not yours, then make your local development site URL more unique.', 'wpmudev' ), esc_html( $_GET['display_name'] ), $security_info_url, $websites_url ),
+				$support_url,
+				__( 'Contact support if you need further assistance &raquo;', 'wpmudev' )
 			);
 		} else {
 			$errors[] = sprintf(
-				'%s<br><a href="%s" target="_blank">%s</a> <a href="%s" target="_blank" class="right">%s</a>',
-				sprintf( __( 'This site is currently registered to %s. For security reasons they will need to go to the WPMU DEV Hub and remove this domain before you can connect. If you do not have access to that account, and have no way of contacting that user, please contact support for assistance.', 'wpmudev' ), esc_html( $_GET['display_name'] ) ),
-				$websites_url,
-				__( 'Remove site', 'wpmudev' ),
-				$security_info_url,
-				__( 'More information &raquo;', 'wpmudev' )
-			);
+                __( 'This site is currently registered to %1$s. For <a target="_blank" href="%2$s">security reasons</a> they will need to go to the <a target="_blank" href="%3$s">WPMU DEV Hub</a> and remove this domain before you can log in. If you do not have access to that account, and have no way of contacting that user, please <a target="_blank" href="%4$s">contact support for assistance</a>.', 'wpmudev' ),
+                esc_html( $_GET['display_name'] ),
+                $security_info_url,
+                $websites_url,
+				$support_url
+            );
 		}
 
 	} else { //this in case we add new error types in the future
@@ -91,7 +97,7 @@ if ( isset( $_GET['api_error'] ) ) {
 		$errors[] = __( 'Unknown error. Please update the WPMU DEV Dashboard plugin and try again.', 'wpmudev' );
 
 	}
-} elseif ( $connection_error ) {
+} else if ( $connection_error ) {
 	// Variable `$connection_error` is set by the UI function `render_dashboard`.
 	$errors[] = sprintf(
 		'%s<br><br>%s<br><br><em>%s</em>',
@@ -105,7 +111,7 @@ if ( isset( $_GET['api_error'] ) ) {
 			WPMUDEV_Dashboard::$api->rest_url( '' )
 		)
 	);
-} elseif ( ! $key_valid ) {
+} else if ( ! $key_valid ) {
 	// Variable `$key_valod` is set by the UI function `render_dashboard`.
 	$errors[] = __( 'Your API Key was invalid. Please try again.', 'wpmudev' );
 }
@@ -114,46 +120,55 @@ if ( isset( $_GET['api_error'] ) ) {
 $form_action = WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
 
 ?>
-<div class="wpmud-system-info"><a href="<?php echo esc_url(add_query_arg( 'view', 'system', $urls->dashboard_url )); ?>" class="wpmudui-btn is-sm is-ghost"><?php esc_html_e( 'System Info', 'wpmudev' ); ?></a></div>
+<div class="wpmud-system-info"><a
+            href="<?php echo esc_url( add_query_arg( 'view', 'system', $urls->dashboard_url ) ); ?>"
+            class="wpmudui-btn is-sm is-ghost"><?php esc_html_e( 'System Info', 'wpmudev' ); ?></a></div>
 <section id="wpmud-login" class="wpmud-login">
-	<div id="wpmud-login-box" class="wpmudui-box is-sm is-center is-login">
-		<section class="wpmudui-box__main">
-			<h2 class="wpmudui-brand-title"><?php esc_html_e( 'Connect with WPMU DEV', 'wpmudev' ); ?></h2>
-			<p><?php esc_html_e( 'Log in using your WPMU DEV account email and password.', 'wpmudev' ); ?></p>
-			<form action="<?php echo esc_url( $form_action ); ?>" method="post" id="wpmudui-login-form" class="wpmudui-form wpmudui-form--login">
+    <div id="wpmud-login-box" class="wpmudui-box is-sm is-center is-login">
+        <section class="wpmudui-box__main">
+            <h2 class="wpmudui-brand-title"><?php esc_html_e( 'Connect with WPMU DEV', 'wpmudev' ); ?></h2>
+            <p><?php esc_html_e( 'Log in using your WPMU DEV account email and password.', 'wpmudev' ); ?></p>
+            <form action="<?php echo esc_url( $form_action ); ?>" method="post" id="wpmudui-login-form"
+                  class="wpmudui-form wpmudui-form--login">
 
-				<div class="wpmudui-form-field">
-					<label for="user_name" class="wpmudui-form-field__label"><?php esc_html_e( 'Account email', 'wpmudev' ); ?></label>
-					<input type="text" class="wpmudui-form-field__input" name="username" id="user_name" autocomplete="off" placeholder="<?php echo esc_attr__( 'Your email address', 'wpmudev' ); ?>" value="<?php echo esc_attr( $last_user ); ?>">
-				</div><!-- end wpmudui-form-field -->
+                <div class="wpmudui-form-field">
+                    <label for="user_name"
+                           class="wpmudui-form-field__label"><?php esc_html_e( 'Account email', 'wpmudev' ); ?></label>
+                    <input type="text" class="wpmudui-form-field__input" name="username" id="user_name"
+                           autocomplete="off" placeholder="<?php echo esc_attr__( 'Your email address', 'wpmudev' ); ?>"
+                           value="<?php echo esc_attr( $last_user ); ?>">
+                </div><!-- end wpmudui-form-field -->
 
-				<div class="wpmudui-form-field is-last">
-					<label for="password" class="wpmudui-form-field__label"><?php esc_html_e( 'Account password', 'wpmudev' ); ?></label>
-					<input type="password" class="wpmudui-form-field__input is-password" name="password" id="password" autocomplete="off" placeholder="<?php echo esc_attr__( 'Your password', 'wpmudev' ); ?>">
-				</div><!-- end wpmudui-form-field -->
+                <div class="wpmudui-form-field is-last">
+                    <label for="password"
+                           class="wpmudui-form-field__label"><?php esc_html_e( 'Account password', 'wpmudev' ); ?></label>
+                    <input type="password" class="wpmudui-form-field__input is-password" name="password" id="password"
+                           autocomplete="off" placeholder="<?php echo esc_attr__( 'Your password', 'wpmudev' ); ?>">
+                </div><!-- end wpmudui-form-field -->
 
 				<?php
 				// Display the errors.
 				if ( count( $errors ) ) {
-					?><div class="wpmudui-form-errors">
+					?>
+                    <div class="wpmudui-form-errors">
 					<?php
 					foreach ( $errors as $message ) {
 						?>
-						<div class="wpmudui-alert is-error is-standalone">
-						<p><?php
-						// @codingStandardsIgnoreStart: Message contains HTML, no escaping!
-						echo $message;
-						// @codingStandardsIgnoreEnd
-						?></p></div>
+                        <div class="wpmudui-alert is-error is-standalone">
+                            <p><?php
+								// @codingStandardsIgnoreStart: Message contains HTML, no escaping!
+								echo $message;
+								// @codingStandardsIgnoreEnd
+								?></p></div>
 						<?php
 					}
 					?>
-					</div><!-- end wpmudui-form-errors --><?php
+                    </div><!-- end wpmudui-form-errors --><?php
 				} ?>
 
-				<div class="wpmudui-form-cta-fields">
-					<div class="wpmudui-form-cta__item is-left">
-						<p class="wpmudui-form-note">
+                <div class="wpmudui-form-cta-fields">
+                    <div class="wpmudui-form-cta__item is-left">
+                        <p class="wpmudui-form-note">
 							<?php
 							printf(
 								esc_html__( 'Don’t have an account? %sSign up%s today!', 'wpmudev' ),
@@ -161,19 +176,19 @@ $form_action = WPMUDEV_Dashboard::$api->rest_url( 'authenticate' );
 								'</a>'
 							);
 							?>
-						</p>
-					</div>
-					<div class="wpmudui-form-cta__item is-right">
-						<button type="submit" class="wpmudui-btn is-brand one-click">
+                        </p>
+                    </div>
+                    <div class="wpmudui-form-cta__item is-right">
+                        <button type="submit" class="wpmudui-btn is-brand one-click">
 							<?php esc_html_e( 'Connect', 'wpmudev' ); ?>
-						</button>
-					</div>
-				</div><!-- end wpmudui-form-cta-fields -->
+                        </button>
+                    </div>
+                </div><!-- end wpmudui-form-cta-fields -->
 
-				<input type="hidden" name="redirect_url" value="<?php echo esc_url( $login_url ); ?>">
-				<input type="hidden" name="domain" value="<?php echo esc_url( network_site_url() ); ?>">
+                <input type="hidden" name="redirect_url" value="<?php echo esc_url( $login_url ); ?>">
+                <input type="hidden" name="domain" value="<?php echo esc_url( network_site_url() ); ?>">
 
-			</form><!-- end wpmudui-login-form -->
-		</section>
-	</div><!-- end wpmudui-login-box -->
+            </form><!-- end wpmudui-login-form -->
+        </section>
+    </div><!-- end wpmudui-login-box -->
 </section><!-- end wpmud-login -->

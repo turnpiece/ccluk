@@ -61,6 +61,10 @@ class WD_Main_Activator {
 	 * redirect to defender dahsboard after plugin activated
 	 */
 	public function redirectToDefender( $plugin ) {
+		if ( isset( $_POST['plugin_status'] ) && $_POST['plugin_status'] == 'all' ) {
+			//seem like a bulk action, do nothing
+			return;
+		}
 		if ( $plugin == wp_defender()->plugin_slug ) {
 			exit( wp_redirect( network_admin_url( 'admin.php?page=wp-defender' ) ) );
 		}

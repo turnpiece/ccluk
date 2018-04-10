@@ -2,9 +2,9 @@
 # This file is distributed under the GNU General Public License (Version 2 - GPLv2).
 msgid ""
 msgstr ""
-"Project-Id-Version: Defender Pro 1.7.6\n"
+"Project-Id-Version: Defender Pro 1.8\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-03-19 04:30:34+00:00\n"
+"POT-Creation-Date: 2018-04-10 03:58:53+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -152,17 +152,17 @@ msgid "Lockout reports are active scheduled to send %s"
 msgstr ""
 
 #: app/behavior/report-free.php:129 app/behavior/report.php:224
-#: app/behavior/utils.php:909 free/utils.php:656
+#: app/behavior/utils.php:909 free/utils.php:706
 msgid "daily"
 msgstr ""
 
 #: app/behavior/report-free.php:132 app/behavior/report.php:227
-#: app/behavior/utils.php:912 free/utils.php:659
+#: app/behavior/utils.php:912 free/utils.php:709
 msgid "weekly"
 msgstr ""
 
 #: app/behavior/report-free.php:135 app/behavior/report.php:230
-#: app/behavior/utils.php:915 free/utils.php:662
+#: app/behavior/utils.php:915 free/utils.php:712
 msgid "monthly"
 msgstr ""
 
@@ -236,7 +236,7 @@ msgstr ""
 msgid "Never"
 msgstr ""
 
-#: app/behavior/utils.php:892 free/utils.php:639
+#: app/behavior/utils.php:892 free/utils.php:689
 msgid "Please upgrade to 5.3 or later"
 msgstr ""
 
@@ -313,111 +313,167 @@ msgstr ""
 msgid "Defender%s"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:17
-#: app/module/advanced-tools/controller/main.php:392
+#: app/module/advanced-tools/behavior/at-widget.php:18
+#: app/module/advanced-tools/controller/main.php:461
 #: app/module/advanced-tools/view/layouts/layout.php:5
 msgid "Advanced Tools"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:23
+#: app/module/advanced-tools/behavior/at-widget.php:24
 msgid ""
 "Enable advanced tools for enhanced protection against even the most "
 "aggressive of hackers and bots."
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:27
+#: app/module/advanced-tools/behavior/at-widget.php:28
 #: app/module/advanced-tools/view/layouts/layout.php:13
+#: app/module/advanced-tools/view/main-free.php:4
 #: app/module/advanced-tools/view/main.php:4
 msgid "Two-Factor Authentication"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:31
+#: app/module/advanced-tools/behavior/at-widget.php:32
 msgid ""
 "Add an extra layer of security to your WordPress account to ensure that "
 "you’re the only person who can log in, even if someone else knows your "
 "password"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:43
+#: app/module/advanced-tools/behavior/at-widget.php:44
 msgid ""
 "<strong>Two-factor authentication is now active.</strong> To turn on this "
 "feature for your account, go to <a href='%s'>Your Profile</a> to complete "
 "setup and sync your account with the Authenticator app."
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:51
+#: app/module/advanced-tools/behavior/at-widget.php:52
 msgid ""
 "Two-factor authentication is currently inactive. Configure and save your "
 "settings to finish setup. "
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:53
+#: app/module/advanced-tools/behavior/at-widget.php:54
+#: app/module/advanced-tools/behavior/at-widget.php:91
 msgid "Finish Setup"
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:58
+#: app/module/advanced-tools/behavior/at-widget.php:59
 msgid ""
 "Note: Each user on your website must individually enable two-factor "
 "authentication via their user profile in order to enable and use this "
 "security feature."
 msgstr ""
 
-#: app/module/advanced-tools/behavior/at-widget.php:67
+#: app/module/advanced-tools/behavior/at-widget.php:68
+#: app/module/advanced-tools/behavior/at-widget.php:105
 #: app/module/advanced-tools/view/disabled.php:19
+#: app/module/advanced-tools/view/mask-login/disabled.php:19
 #: app/module/audit/behavior/audit.php:43 app/module/audit/view/new.php:15
 #: app/module/ip-lockout/behavior/widget.php:37
 msgid "Activate"
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:58
+#: app/module/advanced-tools/behavior/at-widget.php:75
+#: app/module/advanced-tools/view/layouts/layout.php:19
+#: app/module/advanced-tools/view/mask-login/disabled.php:4
+#: app/module/advanced-tools/view/mask-login/enabled.php:4
+msgid "Mask Login Area"
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:79
+msgid "Change the location of WordPress’s default wp-admin and wp-login URLs."
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:89
 msgid ""
-"You enabled Jetpack WordPress.com login, so Defender will disable the two "
-"factors login for avoiding conflict"
+"<strong>Masking is currently inactive.</strong> Choose your URL and save "
+"your settings to finish setup."
+msgstr ""
+
+#: app/module/advanced-tools/behavior/at-widget.php:96
+#: app/module/advanced-tools/view/mask-login/enabled.php:24
+msgid "Masking is currently active at <strong>%s</strong>"
+msgstr ""
+
+#: app/module/advanced-tools/component/mask-api.php:82
+msgid "The URL is invalid"
+msgstr ""
+
+#: app/module/advanced-tools/component/mask-api.php:85
+#: app/module/advanced-tools/component/mask-api.php:96
+msgid ""
+"A page already exists at this URL, please pick a unique page for your new "
+"login area."
+msgstr ""
+
+#: app/module/advanced-tools/controller/main.php:58
+#: app/module/advanced-tools/controller/mask-login.php:47
+msgid ""
+"We’ve detected a conflict with Jetpack’s Wordpress.com Log In feature. "
+"Please disable it and return to this page to continue setup."
 msgstr ""
 
 #: app/module/advanced-tools/controller/main.php:61
+#: app/module/advanced-tools/controller/mask-login.php:50
 msgid ""
-"You enabled the plugin Theme My Login, so Defender will disable the two "
-"factors login for avoiding conflict"
+"We’ve detected a conflict with Theme my login. Please disable it and return "
+"to this page to continue setup."
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:135
+#: app/module/advanced-tools/controller/main.php:203
 msgid "Two Factor"
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:158
+#: app/module/advanced-tools/controller/main.php:226
 msgid "Your token is invalid"
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:170
+#: app/module/advanced-tools/controller/main.php:238
 msgid "Your code has been sent to your email."
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:214
+#: app/module/advanced-tools/controller/main.php:282
 msgid "Please input a valid OTP code"
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:228
+#: app/module/advanced-tools/controller/main.php:297
 msgid "Your OTP code is incorrect. Please try again."
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:289
+#: app/module/advanced-tools/controller/main.php:358
 msgid "Some error happen"
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:326
+#: app/module/advanced-tools/controller/main.php:395
 msgid "Whoops, the passcode you entered was incorrect or expired."
 msgstr ""
 
-#: app/module/advanced-tools/controller/main.php:457
+#: app/module/advanced-tools/controller/main.php:532
+#: app/module/advanced-tools/controller/mask-login.php:191
 #: app/module/audit/controller/main.php:197
 #: app/module/ip-lockout/controller/main.php:700
 #: app/module/scan/controller/main.php:306
 msgid "Your settings have been updated."
 msgstr ""
 
+#: app/module/advanced-tools/controller/mask-login.php:137
+msgid "This feature is disabled"
+msgstr ""
+
+#: app/module/advanced-tools/controller/mask-login.php:169
+msgid "The Login URL is invalid."
+msgstr ""
+
+#: app/module/advanced-tools/controller/mask-login.php:177
+msgid "The Redirection URL is invalid."
+msgstr ""
+
+#: app/module/advanced-tools/controller/mask-login.php:183
+msgid "Login and 404 redirect URLs can't be the same. Please use different URLs."
+msgstr ""
+
 #: app/module/advanced-tools/view/disabled.php:4
-#: app/module/advanced-tools/view/layouts/layout.php:20
+#: app/module/advanced-tools/view/layouts/layout.php:26
 #: app/module/advanced-tools/view/login/disabled.php:6
 #: app/module/advanced-tools/view/login/enabled.php:6
 msgid "Two Factor Authentication"
@@ -436,54 +492,54 @@ msgstr ""
 msgid "Security"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:11
+#: app/module/advanced-tools/view/login/disabled.php:22
 #: app/module/ip-lockout/view/detect-404/disabled.php:16
 #: app/module/ip-lockout/view/login-lockouts/disabled.php:18
 msgid "Enable"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:15
-#: app/module/advanced-tools/view/login/disabled.php:21
+#: app/module/advanced-tools/view/login/disabled.php:26
+#: app/module/advanced-tools/view/login/disabled.php:32
 msgid "Use the Google Authenticator app to sign in with a separate passcode."
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:20
+#: app/module/advanced-tools/view/login/disabled.php:31
 #: app/module/scan/controller/main.php:531 app/module/scan/view/setting.php:138
 #: app/module/scan/view/setting.php:158
 msgid "Cancel"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:24
+#: app/module/advanced-tools/view/login/disabled.php:35
 msgid "1. Install the Verification app"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:27
+#: app/module/advanced-tools/view/login/disabled.php:38
 msgid ""
 "Download and install the Google Authenticator app on your device using the "
 "links below."
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:36
+#: app/module/advanced-tools/view/login/disabled.php:47
 msgid "2. Scan the barcode"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:37
+#: app/module/advanced-tools/view/login/disabled.php:48
 msgid ""
 "Open the Google Authenticator app you just downloaded, tap the “+” symbol "
 "and then use your phone’s camera to scan the barcode below."
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:41
+#: app/module/advanced-tools/view/login/disabled.php:52
 msgid "3. Enter passcode"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:43
+#: app/module/advanced-tools/view/login/disabled.php:54
 msgid ""
 "Enter the 6 digit passcode that is shown on your device into the input "
 "field below and hit “Verify”."
 msgstr ""
 
-#: app/module/advanced-tools/view/login/disabled.php:49
+#: app/module/advanced-tools/view/login/disabled.php:60
 msgid "Verify"
 msgstr ""
 
@@ -513,24 +569,26 @@ msgstr ""
 msgid "Powered by WordPress"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/otp.php:224
+#: app/module/advanced-tools/view/login/otp.php:225
 msgid "Open the Google Authenticator app and enter the 6 digit passcode."
 msgstr ""
 
-#: app/module/advanced-tools/view/login/otp.php:227
+#: app/module/advanced-tools/view/login/otp.php:228
 msgid "Authenticate"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/otp.php:236
+#: app/module/advanced-tools/view/login/otp.php:250
 msgid "Lost your device?"
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:14
 #: app/module/advanced-tools/view/main.php:14
 msgid ""
 "Configure your two-factor authentication settings. Our recommendations are "
 "enabled by default."
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:27
 #: app/module/advanced-tools/view/main.php:27
 msgid ""
 "<strong>Two-factor authentication is now active.</strong> User roles with "
@@ -538,16 +596,19 @@ msgid ""
 "complete setup and sync their account with the Authenticator app."
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:35
 #: app/module/advanced-tools/view/main.php:35
 msgid ""
 "<strong>Two-factor authentication is currently inactive.</strong> Configure "
 "and save your settings to complete setup."
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:41
 #: app/module/advanced-tools/view/main.php:41
 msgid "User Roles"
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:43
 #: app/module/advanced-tools/view/main.php:43
 msgid ""
 "Choose the user roles you want to enable two-factor authentication for. "
@@ -555,58 +616,208 @@ msgid ""
 "Authenticator app to login."
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:50
 #: app/module/advanced-tools/view/main.php:50
 msgid "User role"
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:82
 #: app/module/advanced-tools/view/main.php:82
 msgid "Lost Phone"
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:84
 #: app/module/advanced-tools/view/main.php:84
 msgid ""
 "If a user is unable to access their phone, you can allow an option to send "
 "the one time password to their registered email."
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:94
 #: app/module/advanced-tools/view/main.php:94
 msgid "Enable lost phone option"
 msgstr ""
 
+#: app/module/advanced-tools/view/main-free.php:99
 #: app/module/advanced-tools/view/main.php:99
+msgid "Force Authentication"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:101
+#: app/module/advanced-tools/view/main.php:101
+msgid ""
+"By default, two-factor authentication is optional for users. This setting "
+"forces users to activate two-factor."
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:111
+#: app/module/advanced-tools/view/main.php:111
+msgid "Force users to log in with two-factor authentication"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:112
+#: app/module/advanced-tools/view/main.php:112
+msgid "Note: Users will be forced to set up two-factor when they next login."
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:115
+#: app/module/advanced-tools/view/main.php:115
+msgid "Custom warning message"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:119
+#: app/module/advanced-tools/view/main.php:119
+msgid ""
+"Note: This is shown in the users Profile area indicating they must use "
+"two-factor authentication."
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:127
+#: app/module/scan/behavior/scan.php:137 app/module/scan/behavior/scan.php:152
+#: app/module/scan/view/layouts/layout.php:62
+#: app/module/scan/view/layouts/layout.php:78
+#: app/module/scan/view/setting-free.php:30
+#: app/module/scan/view/setting-free.php:45
+msgid "Pro Feature"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:129
+#: app/module/advanced-tools/view/main.php:126
+#: app/module/advanced-tools/view/main.php:143
+msgid "Custom Graphic"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:131
+#: app/module/advanced-tools/view/main.php:128
+msgid ""
+"By default, Defender’s icon appears above the login fields. You can upload "
+"your own branding, or turn this feature off."
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:139
+#: app/module/advanced-tools/view/main.php:139
+msgid "Enable custom graphics above login fields"
+msgstr ""
+
+#: app/module/advanced-tools/view/main-free.php:147
+#: app/module/advanced-tools/view/main.php:157
 msgid "App Download"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:101
+#: app/module/advanced-tools/view/main-free.php:149
+#: app/module/advanced-tools/view/main.php:159
 msgid "Need the app? Here’s links to the official Google Authenticator apps."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:115
+#: app/module/advanced-tools/view/main-free.php:163
+#: app/module/advanced-tools/view/main.php:173
 msgid "Active Users"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:117
+#: app/module/advanced-tools/view/main-free.php:165
+#: app/module/advanced-tools/view/main.php:175
 msgid ""
 "Here’s a quick link to see which of your users have enabled two-factor "
 "verification."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:121
+#: app/module/advanced-tools/view/main-free.php:169
+#: app/module/advanced-tools/view/main.php:179
 msgid "<a href=\"%s\">View users</a> who have enabled this feature."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:126
-#: app/module/advanced-tools/view/main.php:133
+#: app/module/advanced-tools/view/main-free.php:174
+#: app/module/advanced-tools/view/main-free.php:181
+#: app/module/advanced-tools/view/main.php:184
+#: app/module/advanced-tools/view/main.php:191
+#: app/module/advanced-tools/view/mask-login/enabled.php:78
+#: app/module/advanced-tools/view/mask-login/enabled.php:82
 #: app/module/audit/view/settings.php:10
 msgid "Deactivate"
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:128
+#: app/module/advanced-tools/view/main-free.php:176
+#: app/module/advanced-tools/view/main.php:186
 msgid "Disable two-factor authentication on your website."
 msgstr ""
 
-#: app/module/advanced-tools/view/main.php:141
+#: app/module/advanced-tools/view/main-free.php:189
+#: app/module/advanced-tools/view/main.php:199
 msgid "SAVE SETTINGS"
+msgstr ""
+
+#: app/module/advanced-tools/view/main.php:144
+msgid "For best results use a 168x168px JPG or PNG."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/disabled.php:10
+msgid ""
+"Change the location of WordPress’s default wp-admin and wp-login URLs to "
+"make it harder for automated bots to find, and more convenient for your "
+"users."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:9
+msgid "Change your default wp-admin and wp-content login URL."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:19
+msgid ""
+"Masking is currently inactive. Choose your URL and save your settings to "
+"finish setup. "
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:33
+msgid "Masking URLs"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:35
+msgid ""
+"Choose the new URL slug where users of your website will now navigate to to "
+"log in, register or administrate."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:39
+msgid ""
+"You can specify any URLs. For security reasons, less obvious URLs are "
+"recommended as they are harder for bots to guess."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:40
+msgid "New Login URL"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:42
+msgid "Users will login at <strong>%s</strong>"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:47
+msgid "Redirect traffic"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:49
+msgid ""
+"With this feature you can send visitors and bots who try to visit the "
+"default Wordpress login URLs to a separate URL to avoid 404s."
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:60
+msgid "Enable 404 redirection"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:64
+msgid "Redirection URL"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:70
+msgid ""
+"Visitors who visit the default login URLs will be redirected to "
+"<strong>%s</strong>"
+msgstr ""
+
+#: app/module/advanced-tools/view/mask-login/enabled.php:88
+#: app/view/settings.php:187 app/view/settings.php:326
+msgid "Save Settings"
 msgstr ""
 
 #: app/module/audit/behavior/audit-free.php:25
@@ -1074,7 +1285,7 @@ msgstr ""
 msgid "Login Name"
 msgstr ""
 
-#: app/module/audit/component/options-audit.php:175
+#: app/module/audit/component/options-audit.php:175 app/view/login-modal.php:11
 msgid "Password"
 msgstr ""
 
@@ -1173,7 +1384,7 @@ msgstr ""
 #: app/module/scan/view/layouts/layout.php:132
 #: app/module/scan/view/layouts/layout.php:149
 #: app/module/scan/view/setting-free.php:3 app/module/scan/view/setting.php:3
-#: app/view/settings.php:6 free/main-activator.php:157 main-activator.php:98
+#: app/view/settings.php:6 free/main-activator.php:157 main-activator.php:102
 msgid "Settings"
 msgstr ""
 
@@ -1759,6 +1970,13 @@ msgstr ""
 #: app/module/hardener/component/change-admin.php:36
 #: app/module/hardener/view/rules/change-admin.php:8
 msgid "Change default admin user account"
+msgstr ""
+
+#: app/module/hardener/component/change-admin.php:56
+msgid ""
+"Your admin name has changed. You will need to <a "
+"href='%s'><strong>%s</strong></a>.<br/>This will auto reload after <span "
+"class='hardener-timer'>10</span> seconds."
 msgstr ""
 
 #: app/module/hardener/component/db-prefix-service.php:32
@@ -3528,14 +3746,6 @@ msgstr ""
 msgid "Plugins & Themes"
 msgstr ""
 
-#: app/module/scan/behavior/scan.php:137 app/module/scan/behavior/scan.php:152
-#: app/module/scan/view/layouts/layout.php:62
-#: app/module/scan/view/layouts/layout.php:78
-#: app/module/scan/view/setting-free.php:30
-#: app/module/scan/view/setting-free.php:45
-msgid "Pro Feature"
-msgstr ""
-
 #: app/module/scan/behavior/scan.php:165
 msgid "VIEW REPORT"
 msgstr ""
@@ -4051,6 +4261,28 @@ msgstr ""
 msgid "FIND OUT MORE"
 msgstr ""
 
+#: app/view/login-modal.php:3
+msgid ""
+"To get access to our free API services you simply need to create a WPMU DEV "
+"account. It only takes two seconds and it’s absolutely free, forever."
+msgstr ""
+
+#: app/view/login-modal.php:7
+msgid "First name"
+msgstr ""
+
+#: app/view/login-modal.php:9
+msgid "Email address"
+msgstr ""
+
+#: app/view/login-modal.php:12
+msgid "minimum 8 characters"
+msgstr ""
+
+#: app/view/login-modal.php:22
+msgid "Create Account"
+msgstr ""
+
 #: app/view/requirement.php:11
 msgid ""
 "Defender is currently scanning your files for malicious code, please be "
@@ -4121,10 +4353,6 @@ msgid ""
 "By default, Defender will email you when it runs into trouble on your site. "
 "Enabling this option will ensure you are always kept up-to-date, even when "
 "your site is running smoothly."
-msgstr ""
-
-#: app/view/settings.php:187 app/view/settings.php:326
-msgid "Save Settings"
 msgstr ""
 
 #: app/view/settings.php:208
@@ -4203,7 +4431,7 @@ msgstr ""
 msgid "<br/>Something went wrong. Please try again later!"
 msgstr ""
 
-#: free/main-activator.php:162 main-activator.php:103
+#: free/main-activator.php:162 main-activator.php:107
 msgid "Docs"
 msgstr ""
 
@@ -4243,7 +4471,7 @@ msgstr ""
 msgid "Rate %s"
 msgstr ""
 
-#: main-activator.php:87
+#: main-activator.php:91
 msgid ""
 "We noticed you have both the free and pro versions of Defender installed, "
 "so we've automatically deactivated the free version for you."
@@ -4272,7 +4500,7 @@ msgstr ""
 msgid "http://premium.wpmudev.org/"
 msgstr ""
 
-#: app/module/advanced-tools/view/login/otp.php:286
+#: app/module/advanced-tools/view/login/otp.php:301
 #. translators: %s: site title
 msgctxt "site"
 msgid "&larr; Back to %s"

@@ -3,16 +3,16 @@ jQuery(function ($) {
     WDHardener.rules();
 
     //On key up or is a user decides to paste
-    $('.hardener-instructions textarea.hardener-php-excuted-ignore').on('keyup keypress paste',function(e){
+    $('.hardener-instructions textarea.hardener-php-excuted-ignore').on('keyup keypress paste', function (e) {
         var text_val = $(this).val();
         //We cant allow index.php
-        if( text_val.includes('index.php')){
-            text_val = text_val.replace(/index.php/g,'');
+        if (text_val.includes('index.php')) {
+            text_val = text_val.replace(/index.php/g, '');
             $(this).val(text_val);
         }
 
         //no fancy scripts or html code. We also validate server side
-        if( /<[a-z][\s\S]*>/i.test(text_val)){
+        if (/<[a-z][\s\S]*>/i.test(text_val)) {
             text_val = text_val.replace(/<\/?[^>]+(>|$)/g, "");
             $(this).val(text_val);
         }
@@ -28,42 +28,42 @@ jQuery(function ($) {
             var excludedFiles = text_val.split('\n');
             var newRule = "";
             var $wp_content = $('.hardener-wp-content-dir').val();
-            $.each(excludedFiles, function(index, file) {
-                if(file){
-                    newRule += "\n location ~* ^"+$wp_content+"/.*&#92;"+file+"$ {"+
-                                " \n  allow all;"+
-                                "\n}";
+            $.each(excludedFiles, function (index, file) {
+                if (file) {
+                    newRule += "\n location ~* ^" + $wp_content + "/.*&#92;" + file + "$ {" +
+                        " \n  allow all;" +
+                        "\n}";
                 }
             });
             $('span.hardener-nginx-extra-instructions').html(newRule);
         }
-        if ( $('.hardener-instructions-apache-litespeed').length ) {
+        if ($('.hardener-instructions-apache-litespeed').length) {
             $('.hardener-update-frm [name="file_paths"]').val(text_val);
         }
-	});
-	
-	/**
-	 * Validate that the number put is greater than 0 and is actually a number
-	 */
-	$(document).on('keyup keypress paste','.defender-login-duration', function(){
-		var text_val = $(this).val();
-		if( /^-?[0-9]+$/i.test(text_val)){
-			//is integer
-			if(text_val <= 0){
-				$(this).val('');
-			}
-		} else{
+    });
+
+    /**
+     * Validate that the number put is greater than 0 and is actually a number
+     */
+    $(document).on('keyup keypress paste', '.defender-login-duration', function () {
+        var text_val = $(this).val();
+        if (/^-?[0-9]+$/i.test(text_val)) {
+            //is integer
+            if (text_val <= 0) {
+                $(this).val('');
+            }
+        } else {
             $(this).val('');
-		}
-	});
+        }
+    });
 
     /**
      * Pevent PHP update posts toggle
      */
-    $(document).on('change', 'input.trackback-toggle-update-posts', function(){
-        if(this.checked) {
+    $(document).on('change', 'input.trackback-toggle-update-posts', function () {
+        if (this.checked) {
             $('.hardener-frm-process-trackback [name="updatePosts"]').val('yes');
-        }else{
+        } else {
             $('.hardener-frm-process-trackback [name="updatePosts"]').val('no');
         }
     });
@@ -71,32 +71,32 @@ jQuery(function ($) {
     /**
      * Toggle text area
      */
-    $(document).on('click','button.hardener-php-excuted-execption', function(){
+    $(document).on('click', 'button.hardener-php-excuted-execption', function () {
         $('.hardener-instructions textarea.hardener-php-excuted-ignore').toggle('fast');
     });
 
     /**
      * Server select
      */
-    $(document).on('change', 'select.hardener-server-list', function(){
+    $(document).on('change', 'select.hardener-server-list', function () {
         var selected = $(this).val();
-        if($(this).hasClass('information')){
-            $('.hardener-information').each(function(){
+        if ($(this).hasClass('information')) {
+            $('.hardener-information').each(function () {
                 $(this).addClass('wd-hide');
             });
-            $('.hardener-information-'+selected).removeClass('wd-hide');
-        }else{
-            $('.hardener-instructions').each(function(){
+            $('.hardener-information-' + selected).removeClass('wd-hide');
+        } else {
+            $('.hardener-instructions').each(function () {
                 $(this).addClass('wd-hide');
             });
-            $('.hardener-instructions-'+selected).removeClass('wd-hide');
+            $('.hardener-instructions-' + selected).removeClass('wd-hide');
         }
-        if( selected == 'apache' || selected == 'litespeed' || selected == 'nginx'){
+        if (selected == 'apache' || selected == 'litespeed' || selected == 'nginx') {
             $('.hardener-instructions-extra-exceptions').removeClass('wd-hide');
-        }else{
+        } else {
             $('.hardener-instructions-extra-exceptions').addClass('wd-hide');
         }
-        
+
     });
 
     $('div.hardener').on('form-submitted', function (e, data, form) {
@@ -127,10 +127,10 @@ jQuery(function ($) {
                 $('.count-resolved').addClass('wd-hide');
             }
             var update_rules = true;
-            if ( typeof data.data.update !== "undefined" ) {
+            if (typeof data.data.update !== "undefined") {
                 update_rules = false;
             }
-            if ( update_rules ) {
+            if (update_rules) {
                 form.closest('.rule').slideUp(500, function () {
                     $(this).remove();
                     if ($('.rule').size() == 0) {
@@ -145,6 +145,7 @@ jQuery(function ($) {
         }
     });
 });
+
 function debounce(fn, delay) {
     var timer = null;
     return function () {
@@ -155,6 +156,7 @@ function debounce(fn, delay) {
         }, delay);
     };
 }
+
 window.WDHardener = window.WDHardener || {};
 
 WDHardener.formHandler = function () {
@@ -177,7 +179,7 @@ WDHardener.formHandler = function () {
                         Defender.showNotification('success', data.data.message, false);
 
                         //Count down timer
-                        if(jq('.hardener-timer').length){
+                        if (jq('.hardener-timer').length) {
                             var duration = data.data.reload;
                             var refreshTimer = setInterval(function () {
                                 seconds = parseInt(duration % 60, 10);
@@ -186,14 +188,22 @@ WDHardener.formHandler = function () {
 
                                 if (--duration < 0) {
                                     clearInterval(refreshTimer);
-                                    location.reload()
+                                    if (data.data != undefined && data.data.url != undefined) {
+                                        location.href = data.data.url;
+                                    } else {
+                                        location.reload()
+                                    }
                                 }
                             }, 1000);
                         }
 
                     } else {
                         setTimeout(function () {
-                            location.reload()
+                            if (data.data != undefined && data.data.url != undefined) {
+                                location.href = data.data.url;
+                            } else {
+                                location.reload()
+                            }
                         }, 1500)
                     }
                 } else if (data.data != undefined && data.data.url != undefined) {

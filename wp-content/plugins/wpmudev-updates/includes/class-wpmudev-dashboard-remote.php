@@ -309,7 +309,7 @@ class WPMUDEV_Dashboard_Remote {
 	 */
 	public function action_sync( $params, $action ) {
 		// Simply refresh the membership details.
-		WPMUDEV_Dashboard::$api->refresh_membership_data();
+		WPMUDEV_Dashboard::$api->hub_sync();
 		$this->send_json_success();
 	}
 

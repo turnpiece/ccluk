@@ -58,7 +58,7 @@ class Settings extends \Hammer\WP\Settings {
 	public $cache = array();
 
 	public function __construct( $id, $isMulti ) {
-		if ( is_admin() || is_network_admin() && current_user_can( 'manage_options' ) ) {
+		if ( ( is_admin() || is_network_admin() ) && current_user_can( 'manage_options' ) ) {
 			$this->receipts[]        = get_current_user_id();
 			$this->report_receipts[] = get_current_user_id();
 			$this->ip_whitelist      = $this->getUserIp() . PHP_EOL;

@@ -1,9 +1,29 @@
 Plugin Name: WPMU DEV Dashboard
-Author: Aaron Edwards, Philipp Stracker
+Author: Aaron Edwards
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+4.5 - 04/10/2018 - Aaron
+----------------------------------------------------------------------
+- Support plugin icons in update-core.php list
+- Add support for Hub upgrades of premium plugins that use the EDD updater class
+- Make support search open in a new tab
+- Fix bugs causing dash notice to show multiple times (only display the latest version)
+- Optimize and fix encoding issues when saving/caching options
+- Separate get latest projects and Hub sync API calls for efficiency
+- Lower server and API load by preventing duplicate Hub sync calls if not necessary
+- Implement exponential backoff in API calls in case of API outages
+- Retire themes sections
+- Update login error messages
+- Fix update links in plugin popovers
+- Various text changes and updates
+- Fix bug where activate button could show when plugin already activated
+- Fix missing or incorrect configure links in multisite plugin info popovers
+- Logout and remove site from Hub when deleting/uninstalling the plugin
+- Remove site from Hub immediately when logging out manually
+- Fix compatibility issue with Ultimate Branding - Admin Help Content module
 
 4.4 - 9/21/2017 - Aaron & Alex
 ----------------------------------------------------------------------
@@ -463,4 +483,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1507061848
+87274-1523389527-au

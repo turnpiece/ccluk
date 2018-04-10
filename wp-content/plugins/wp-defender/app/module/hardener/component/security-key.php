@@ -16,11 +16,11 @@ class Security_Key extends Rule {
 	static $service;
 
 	function getDescription() {
-		$settings 	= Settings::instance();
-		$time 		= $settings->getDValues( Security_Key_Service::CACHE_KEY );
-		$interval 	= $settings->getDValues( 'securityReminderDuration' );
-		if ( !$interval ) {
-			$interval  = Security_Key_Service::DEFAULT_DAYS;
+		$settings = Settings::instance();
+		$time     = $settings->getDValues( Security_Key_Service::CACHE_KEY );
+		$interval = $settings->getDValues( 'securityReminderDuration' );
+		if ( ! $interval ) {
+			$interval = Security_Key_Service::DEFAULT_DAYS;
 		}
 		if ( $time ) {
 			$daysAgo = ( time() - $time ) / ( 60 * 60 * 24 );
@@ -79,8 +79,9 @@ class Security_Key extends Rule {
 		} else {
 			Settings::instance()->addToResolved( self::$slug );
 			wp_send_json_success( array(
-				'message' => sprintf( __( 'All key salts have been regenerated. You will now need to <a href="%s"><strong>re-login</strong></a>.<br/>This will auto reload after <span class="hardener-timer">10</span> seconds.', wp_defender()->domain ), network_admin_url( 'admin.php?page=wdf-hardener' ) ),
-				'reload'  => 10
+				'message' => sprintf( __( 'All key salts have been regenerated. You will now need to <a href="%s"><strong>re-login</strong></a>.<br/>This will auto reload after <span class="hardener-timer">10</span> seconds.', wp_defender()->domain ), wp_login_url( network_admin_url( 'admin.php?page=wdf-hardener' ) ) ),
+				'reload'  => 10,
+				'url'     => wp_login_url( network_admin_url( 'admin.php?page=wdf-hardener' ) )
 			) );
 		}
 	}

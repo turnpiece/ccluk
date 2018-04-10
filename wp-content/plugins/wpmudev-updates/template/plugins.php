@@ -6,7 +6,7 @@
  * like installing, activating or updating plugins.
  *
  * Following variables are passed into the template:
- *   $data (membership data)
+ *   $data (project data)
  *   $urls (urls of all dashboard menu items)
  *   $tags (list of plugin tags)
  *

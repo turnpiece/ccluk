@@ -12,7 +12,11 @@ class Auth_Settings extends \Hammer\WP\Settings {
 	private static $_instance;
 	public $enabled = false;
 	public $lostPhone = true;
+	public $forceAuth = false;
+	public $forceAuthMess = "You are required to setup two-factor authentication to use this site.";
 	public $userRoles = array();
+	public $customGraphic = 0;
+	public $customGraphicURL = '';
 	public $isConflict = array();
 
 	public function __construct( $id, $is_multi ) {
@@ -23,6 +27,7 @@ class Auth_Settings extends \Hammer\WP\Settings {
 		$this->userRoles = array_keys( get_editable_roles() );
 		//remove subscriber from the list
 		unset( $this->userRoles[ array_search( 'subscriber', $this->userRoles ) ] );
+		$this->customGraphicURL = wp_defender()->getPluginUrl() . 'assets/img/2factor-disabled.svg';
 		parent::__construct( $id, $is_multi );
 	}
 

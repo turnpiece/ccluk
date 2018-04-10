@@ -16,5 +16,21 @@
     background-color: #1ABC9C;
 }
 
+.def-warning {
+    border-radius: 4px;
+    background-color: #FFF5D5;
+    color: #666;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-style: italic;
+    max-width: 100%;
+    display: inline-block;
+    margin-bottom: 10px;
+}
 
-/* 87274-1521663249-au */
+.def-warning i {
+    color: #FECF2F
+}
+
+
+/* 87274-1523389549-au */

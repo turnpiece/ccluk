@@ -5,6 +5,17 @@
         <tr class="user-sessions-wrap hide-if-no-js">
             <th><?php _e( "Two Factor Authentication", wp_defender()->domain ) ?></th>
             <td aria-live="assertive">
+				<?php
+				$settings = \WP_Defender\Module\Advanced_Tools\Model\Auth_Settings::instance();
+				if ( $settings->forceAuth ):
+					?>
+                    <div class="def-warning">
+                        <i class="dashicons dashicons-warning" aria-hidden="true"></i>
+						<?php
+						echo $settings->forceAuthMess
+						?>
+                    </div>
+				<?php endif; ?>
                 <div id="def2">
                     <div class="destroy-sessions">
                         <button type="button" class="button" id="show2AuthActivator">
@@ -36,7 +47,7 @@
                         <p><strong><?php _e( "2. Scan the barcode", wp_defender()->domain ) ?></strong></p>
                         <p><?php _e( "Open the Google Authenticator app you just downloaded, tap the “+” symbol and then use your phone’s camera to scan the barcode below.", wp_defender()->domain ) ?></p>
                         <img class="barcode"
-                             src="<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( get_site_url(), $secretKey, 149, 149, 'wp-defender' ) ?>"/>
+                             src="<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( get_site_url(), $secretKey, 149, 149, get_site_url() ) ?>"/>
                         <div class="line"></div>
                         <p><strong><?php _e( "3. Enter passcode", wp_defender()->domain ) ?></strong></p>
                         <p>
@@ -92,6 +103,13 @@
                     }
                 }
             })
-        })
+        });
     })
 </script>
+<?php if ( $settings->forceAuth ): ?>
+    <script type="text/javascript">
+        if (!window.location.hash) {
+            window.location.hash = '#show2AuthActivator';
+        }
+    </script>
+<?php endif; ?>

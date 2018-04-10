@@ -6,7 +6,7 @@
  * management functions.
  *
  * Following variables are passed into the template:
- *   $data (membership data)
+ *   $data (projects data)
  *   $urls (urls of all dashboard menu items)
  *
  * @since  4.0.0

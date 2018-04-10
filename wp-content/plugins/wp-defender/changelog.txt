@@ -1,16 +1,17 @@
 Plugin Name: WP Defender
 Author: Hoang Ngo, Aaron Edwards
-Tested up to: 4.9.4
+Tested up to: 4.7.4
 
 Change Log:
 
-1.7.6 - 2017-19-03
+1.8 - 2018-10-04
 ----------------------------------------------------------------------
-- Fix: Defender now can recognize and verify Bing Bot for whitelisting
-- Fix: Lockout page now will use site title instead of the text 'WP Defender'
-- Other minor enhancements and fixes
+- New: Hide the default WordPress login URLs with the new Mask Login Area feature, giving you enhanced protection from hackers and bots.
+- New: Ability to force two-factor authentication for all users.
+- Fix: Fixed a bug where file scanning would detect wp-config.php as suspicious.
+- Fix: Fixed an issue where the lockout pages could be cached by external cache engines.
 
-1.7.5 - 2017-07-02
+1.7.5 - 2018-07-02
 ----------------------------------------------------------------------
 - Fix: Report status missing in Hub Security tab
 - Fix: Some themes/plugins shown as a vulnerability but no info available
@@ -233,4 +234,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1521663248-au
+87274-1523389549-au
