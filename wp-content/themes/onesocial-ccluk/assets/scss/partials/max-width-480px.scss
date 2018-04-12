@@ -19,13 +19,22 @@ body {
 		#mobile-logo {
 			img {
 				max-height: 44px;
-				max-width: 240px;
-				margin: 8px auto;
+				max-width: 200px;
+				margin: 10px auto;
 			}
+		}
+
+		.right-btn:before {
+			font-size: $font-size-sm;
 		}
 	}
 
 	.bb-slider-container {
 		top: 0;
+		margin-bottom: 0;
+
+		.title {
+			font-size: $font-size-sm !important;
+		}
 	}
 }

@@ -191,14 +191,6 @@ body.page-template-homepage {
 		padding-bottom: 70px;
 	}
 
-	.slide_content > .slide_content_wrap > .inner > .slide_text {
-		display: table;
-		margin: 0 auto;
-		padding: 15px;
-		color: $white;
-		background-color: $blue_bg;
-	}
-
 	.bb-slider-container .readmore a, 
 	.slide-content .button {
 	    text-transform: uppercase;
@@ -211,6 +203,21 @@ body.page-template-homepage {
 	    margin-right: 5px;
 	    display: inline-block;
 	    font-weight: 500;
+	}
+
+	.bb-slider-container {
+		.slideNext,
+		.slidePrev {
+			top: calc(50% - 25px);
+		}
+
+		.slide_content > .slide_content_wrap > .inner > .slide_text {
+			display: table;
+			margin: 0 auto;
+			padding: 15px;
+			color: $white;
+			background-color: $blue_bg;
+		}
 	}
 
 	#secondary {
