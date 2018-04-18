@@ -5,7 +5,7 @@
  * Add your own functions in this file.
  */
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Add image size for posts
@@ -13,6 +13,7 @@ define( 'CCLUK_DEBUGGING', false );
  */
 add_image_size( 'ccluk-medium', 750, 1000, false );
 add_image_size( 'ccluk-hero', 1200, 800, true );
+add_image_size( 'ccluk-feature', 580, 387, true );
 
 /**
  * Customizer additions.

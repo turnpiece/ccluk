@@ -11,12 +11,12 @@
 <article id="post-<?php the_ID(); ?>" <?php post_class(); ?>>
 
 	<?php if (has_post_thumbnail()) : ?>
-		<div class="entry-image">
-			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( 'medium' ) ?></a>
+		<div class="entry-image list-item">
+			<a href="<?php the_permalink() ?>"><?php the_post_thumbnail( 'ccluk-feature' ) ?></a>
 		</div>
 	<?php endif; ?>
 
-	<div class="entry-content">
+	<div class="entry-content list-item">
 		<a href="<?php the_permalink() ?>"><h2 class="entry-title"><?php the_title(); ?></h2></a>
 		<?php the_excerpt(); ?>
 	</div>

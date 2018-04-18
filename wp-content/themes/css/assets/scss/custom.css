@@ -160,7 +160,8 @@ Mobile Header
     padding-top: 8px; }
     #mobile-header .left-btn:before,
     #mobile-header .right-btn:before {
-      color: #333; }
+      color: #333;
+      font-size: 21px; }
   #mobile-header #mobile-logo img {
     max-height: 70px;
     max-width: 300px;
@@ -477,6 +478,12 @@ body.page-template-homepage #main {
     body.page-template-homepage #main .section .section-footer {
       text-align: center;
       margin: 0 auto; }
+    body.page-template-homepage #main .section.campaign .section-content .list-item {
+      width: auto; }
+      body.page-template-homepage #main .section.campaign .section-content .list-item.entry-image {
+        max-width: 600px; }
+      body.page-template-homepage #main .section.campaign .section-content .list-item.entry-content {
+        max-width: 500px; }
     body.page-template-homepage #main .section.about .section-content {
       text-align: center;
       align-content: center; }
@@ -536,13 +543,6 @@ body.page-template-homepage .site {
   padding-top: 0;
   padding-bottom: 70px; }
 
-body.page-template-homepage .slide_content > .slide_content_wrap > .inner > .slide_text {
-  display: table;
-  margin: 0 auto;
-  padding: 15px;
-  color: #fff;
-  background-color: rgba(0, 152, 218, 0.85); }
-
 body.page-template-homepage .bb-slider-container .readmore a,
 body.page-template-homepage .slide-content .button {
   text-transform: uppercase;
@@ -555,6 +555,18 @@ body.page-template-homepage .slide-content .button {
   margin-right: 5px;
   display: inline-block;
   font-weight: 500; }
+
+body.page-template-homepage .bb-slider-container .slideNext,
+body.page-template-homepage .bb-slider-container .slidePrev {
+  top: calc(50% - 25px);
+  transform: translate(0, -50%); }
+
+body.page-template-homepage .bb-slider-container .slide_content > .slide_content_wrap > .inner > .slide_text {
+  display: table;
+  margin: 0 auto;
+  padding: 15px;
+  color: #fff;
+  background-color: rgba(0, 152, 218, 0.85); }
 
 body.page-template-homepage #secondary {
   width: auto;
@@ -1271,8 +1283,10 @@ MAXIMUM width of 480 pixels (phones)
       display: none; }
     body #mobile-header #mobile-logo img {
       max-height: 44px;
-      max-width: 240px;
-      margin: 8px auto; }
+      max-width: 200px;
+      margin: 10px auto; }
+    body #mobile-header .right-btn:before {
+      font-size: 15px; }
     body .bb-slider-container {
       top: 0;
       margin-bottom: 0; }

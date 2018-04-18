@@ -20,10 +20,7 @@ body.page-template-homepage {
 			.section-content {
 				max-width: 1170px;
 				margin: 0 auto;
-				display: -webkit-flex;
-				display: flex;
-  				justify-content: center;
-  				flex-wrap: wrap;
+				@include display-flex( flex-start );
 
 				.list-item {
 					width: 300px;
@@ -103,10 +100,36 @@ body.page-template-homepage {
 				margin: 0 auto;
 			}
 
+			&.feature {
+				.section-content {
+					max-width: 580px;
+
+					article {
+						@include display-flex();
+						@include padding( 2, 0 );
+
+						.list-item {
+							width: auto;
+							margin: 0;
+						
+							&.entry-image {
+								max-width: 580px;
+							}
+
+							&.entry-content {
+								max-width: 540px;
+								padding: 20px;
+							}
+						}
+					}
+				}
+			}
+
 			&.about {
 				.section-content {
 					text-align: center;
 					align-content: center;
+					justify-content: center;
 
 					.list-item {
 						padding: 30px;
@@ -155,10 +178,8 @@ body.page-template-homepage {
 					}
 
 					.ctf-tweets {
-						display: flex;
+						@include display-flex( center, space-evenly );
 						flex-direction: row column;
-						flex-wrap: wrap;
-						justify-content: space-evenly;
 						width: 100%;
 						padding: 30px 2%;
 

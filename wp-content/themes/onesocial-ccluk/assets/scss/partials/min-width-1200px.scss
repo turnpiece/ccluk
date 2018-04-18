@@ -1,0 +1,31 @@
+/*--------------------------------------------------------------
+MINIMUM width of 1200 pixels (large desktops)
+--------------------------------------------------------------*/
+
+body.page-template-homepage {
+	#main {
+		.section {
+			padding-bottom: 60px;
+            padding-bottom: 6rem;
+
+			&.feature {
+				.section-content {
+					max-width: 1170px;
+
+					article {
+						.list-item {
+							&.entry-image {
+								width: 580px;
+								text-align: right;
+							}
+
+							&.entry-content {
+								width: 540px;
+							}
+						}
+					}
+				}
+			}
+		}
+	}
+}

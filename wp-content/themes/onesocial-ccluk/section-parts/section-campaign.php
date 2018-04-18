@@ -8,9 +8,11 @@
     );
 
     if ( $q->have_posts() ) : ?>
-<section id="posts" class="section site-content posts">
+<section id="campaign" class="section site-content campaign feature">
     <header class="section-title">
-        <a href="/category/campaign" title="<?php bloginfo('name') ?> <?php _e( 'Campaign', 'onesocial' ) ?>"></a>
+        <a href="/category/campaign" title="<?php bloginfo('name') ?> <?php _e( 'campaigns', 'onesocial' ) ?>">
+            <h4><?php _e( 'Campaign', 'onesocial' ) ?></h4>
+        </a>
     </header>
     <div class="section-content">
         <?php while( $q->have_posts() ) : $q->the_post(); ?>

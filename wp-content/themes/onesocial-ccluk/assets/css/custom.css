@@ -413,8 +413,10 @@ body.page-template-homepage #main {
       margin: 0 auto;
       display: -webkit-flex;
       display: flex;
-      justify-content: center;
-      flex-wrap: wrap; }
+      flex-wrap: wrap;
+      -webkit-align-items: flex-start;
+      align-items: flex-start;
+      justify-content: center; }
       body.page-template-homepage #main .section .section-content .list-item {
         width: 300px;
         margin: 20px;
@@ -460,9 +462,29 @@ body.page-template-homepage #main {
     body.page-template-homepage #main .section .section-footer {
       text-align: center;
       margin: 0 auto; }
+    body.page-template-homepage #main .section.feature .section-content {
+      max-width: 580px; }
+      body.page-template-homepage #main .section.feature .section-content article {
+        display: -webkit-flex;
+        display: flex;
+        flex-wrap: wrap;
+        -webkit-align-items: center;
+        align-items: center;
+        justify-content: center;
+        padding: 20px 0px;
+        padding: 2rem 0rem; }
+        body.page-template-homepage #main .section.feature .section-content article .list-item {
+          width: auto;
+          margin: 0; }
+          body.page-template-homepage #main .section.feature .section-content article .list-item.entry-image {
+            max-width: 580px; }
+          body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
+            max-width: 540px;
+            padding: 20px; }
     body.page-template-homepage #main .section.about .section-content {
       text-align: center;
-      align-content: center; }
+      align-content: center;
+      justify-content: center; }
       body.page-template-homepage #main .section.about .section-content .list-item {
         padding: 30px;
         -webkit-border-radius: 10px;
@@ -494,10 +516,13 @@ body.page-template-homepage #main {
       body.page-template-homepage #main .section.twitter #ctf .ctf-header .ctf-header-user {
         font-size: 21px; }
     body.page-template-homepage #main .section.twitter #ctf .ctf-tweets {
+      display: -webkit-flex;
       display: flex;
-      flex-direction: row column;
       flex-wrap: wrap;
+      -webkit-align-items: center;
+      align-items: center;
       justify-content: space-evenly;
+      flex-direction: row column;
       width: 100%;
       padding: 30px 2%; }
       body.page-template-homepage #main .section.twitter #ctf .ctf-tweets .ctf-item {
@@ -530,7 +555,8 @@ body.page-template-homepage .slide-content .button {
   font-weight: 500; }
 body.page-template-homepage .bb-slider-container .slideNext,
 body.page-template-homepage .bb-slider-container .slidePrev {
-  top: calc(50% - 25px); }
+  top: calc(50% - 25px);
+  transform: translate(0, -50%); }
 body.page-template-homepage .bb-slider-container .slide_content > .slide_content_wrap > .inner > .slide_text {
   display: table;
   margin: 0 auto;
@@ -790,7 +816,7 @@ li.bbp-forum-info a.bbp-forum-title:hover, li.bbp-topic-title a.bbp-topic-permal
   .sap-container-wrapper .sap-story-publish:hover {
     color: #54ae68; }
 
-.recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before, input[type="submit"] {
+.recommend-title, .liked .fa-heart, .bookmarked .bb-helper-icon.fa-bookmark, .fa.bb-helper-icon.fa-spinner.fa-spin, .os-loader i, .breadcrumb-wrapper a:hover, .sap-container-wrapper .sap-author-name.sap-author-name, .sap-publish-popup.sap-publish-popup .sap-action-button, #send-private-message.generic-button a:before {
   color: #54ae68; }
 
 #mobile-header {
@@ -1241,8 +1267,8 @@ MINIMUM width of 1025 pixels (desktops)
   body.page-template-homepage #main .section {
     padding: 30px 0px;
     padding: 3rem 0rem;
-    padding-bottom: 80px;
-    padding-bottom: 8rem; }
+    padding-bottom: 50px;
+    padding-bottom: 5rem; }
 
   body.page #primary article > .entry-header {
     margin: 24px 0px;
@@ -1265,5 +1291,22 @@ MINIMUM width of 1025 pixels (desktops)
     #buddypress div#register-page .register-section#profile-details-section {
       float: right !important;
       clear: right !important; } }
+/*--------------------------------------------------------------
+MINIMUM width of 1025 pixels (large desktops)
+--------------------------------------------------------------*/
+@media screen and (min-width: 1200px) {
+  /*--------------------------------------------------------------
+  MINIMUM width of 1200 pixels (large desktops)
+  --------------------------------------------------------------*/
+  body.page-template-homepage #main .section {
+    padding-bottom: 60px;
+    padding-bottom: 6rem; }
+    body.page-template-homepage #main .section.feature .section-content {
+      max-width: 1170px; }
+      body.page-template-homepage #main .section.feature .section-content article .list-item.entry-image {
+        width: 580px;
+        text-align: right; }
+      body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
+        width: 540px; } }
 
 /*# sourceMappingURL=custom.css.map */

@@ -89,3 +89,12 @@ MINIMUM width of 1025 pixels (desktops)
 	@import "partials/min-width-1025px";
 
 }
+
+/*--------------------------------------------------------------
+MINIMUM width of 1025 pixels (large desktops)
+--------------------------------------------------------------*/
+@media screen and (min-width: 1200px)  {
+
+	@import "partials/min-width-1200px";
+
+}
