@@ -30,10 +30,10 @@ if ( ! has_action( 'ccluk_frontpage_section_parts' ) ) {
         'about',
         'news',
         'campaign',
-        'twitter',
         'posts',
         'events',
-        'groups'
+        'groups',
+        'twitter'
     ) );
 
 	foreach ( $sections as $section ){
