@@ -119,6 +119,10 @@ body.page-template-homepage {
 							&.entry-content {
 								max-width: 540px;
 								padding: 20px;
+
+								.entry-title {
+									@include margin( 1, 0 );
+								}
 							}
 						}
 					}

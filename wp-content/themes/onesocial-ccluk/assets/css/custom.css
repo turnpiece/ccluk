@@ -481,6 +481,9 @@ body.page-template-homepage #main {
           body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
             max-width: 540px;
             padding: 20px; }
+            body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
+              margin: 10px 0px;
+              margin: 1rem 0rem; }
     body.page-template-homepage #main .section.about .section-content {
       text-align: center;
       align-content: center;
