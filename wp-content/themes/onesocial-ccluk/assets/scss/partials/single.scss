@@ -93,7 +93,7 @@
                 input[type=email],
                 textarea {
                     border: 1px solid $green;
-                    padding: 12px;
+                    @include padding();
                 }
 
                 p {
@@ -107,7 +107,7 @@
         }
 
         article {
-            @include padding( .5, 0 );
+            @include padding( 2.5, 0 );
 
             header {
                 @include margin-bottom( .6 );
@@ -116,6 +116,7 @@
             .comment-content {
                 p {
                     line-height: 1.5;
+                    @include margin-bottom( 1 );
                 }
             }
         }

@@ -143,6 +143,9 @@ input[type=submit] {
   font-size: 14px;
   line-height: 1.6; }
 
+div.footer-inner-bottom {
+  padding-bottom: 80px; }
+
 /*--------------------------------------------------------------
 Mobile Header
 --------------------------------------------------------------*/
@@ -328,7 +331,8 @@ body.is-mobile #main-wrap {
 .single-post .comments-area #respond form input[type=email],
 .single-post .comments-area #respond form textarea {
   border: 1px solid #54ae68;
-  padding: 12px; }
+  padding: 10px 10px;
+  padding: 1rem 1rem; }
 .single .comments-area #respond form p,
 .single-post .comments-area #respond form p {
   text-align: right; }
@@ -338,15 +342,17 @@ body.is-mobile #main-wrap {
     float: right; }
 .single .comments-area article,
 .single-post .comments-area article {
-  padding: 5px 0px;
-  padding: 0.5rem 0rem; }
+  padding: 25px 0px;
+  padding: 2.5rem 0rem; }
   .single .comments-area article header,
   .single-post .comments-area article header {
     margin-bottom: 6px;
     margin-bottom: 0.6rem; }
   .single .comments-area article .comment-content p,
   .single-post .comments-area article .comment-content p {
-    line-height: 1.5; }
+    line-height: 1.5;
+    margin-bottom: 10px;
+    margin-bottom: 1rem; }
 
 /* styles for pages */
 body.page #primary article > .entry-header {
