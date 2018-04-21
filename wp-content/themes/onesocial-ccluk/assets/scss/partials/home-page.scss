@@ -165,7 +165,7 @@ body.page-template-homepage {
 				#ctf {
 					.ctf-header {
 						float: none;
-						display: block;
+						display: none;
 						text-align: center;
 						width: 100%;	
 						border-bottom: 0;
@@ -188,9 +188,13 @@ body.page-template-homepage {
 						padding: 30px 2%;
 
 						.ctf-item {
-							width: 320px;
+							width: 300px;
+							padding-right: 15px;
+							padding-left: 15px;
 							align-self: flex-start;
 							border-top: 0;
+							@include margin( 1, 1 );
+							font-size: $font-size-sm;
 						}
 					}
 
@@ -236,7 +240,7 @@ body.page-template-homepage {
 
 	.site {
 		padding-top: 0;
-		padding-bottom: 70px;
+		padding-bottom: 0;
 	}
 
 	.bb-slider-container .readmore a, 
