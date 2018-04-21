@@ -185,7 +185,11 @@ a.cta {
 .green-bg,
 .blue-bg {
     a.cta:hover {
-        background-color: $white;
         color: $green;
+        background-color: $white;
+
+        &:after {
+            color: $green;
+        }
     }
 }

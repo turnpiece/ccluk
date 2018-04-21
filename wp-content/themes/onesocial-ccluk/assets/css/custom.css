@@ -163,22 +163,38 @@ a.cta {
   -moz-border-radius: 10px;
   border-radius: 10px;
   background-color: #22a7f0;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 12px 48px;
+  padding: 1.2rem 4.8rem;
+  padding-right: 108px;
+  padding-right: 10.8rem;
   margin: 10px 30px;
   margin: 1rem 3rem;
   font-size: 24px;
   color: #fff;
   text-transform: uppercase;
   font-weight: 700;
-  text-align: center; }
+  text-align: center;
+  position: relative; }
+  a.cta:after {
+    font-family: "FontAwesome";
+    font-size: 24px;
+    font-weight: 100;
+    color: #fff;
+    content: "\f054";
+    position: absolute;
+    right: 30px;
+    line-height: 30px;
+    top: calc(50% - 15px); }
   a.cta:hover {
     background-color: #54ae68; }
 
 .green-bg a.cta:hover,
 .blue-bg a.cta:hover {
-  background-color: #fff;
-  color: #54ae68; }
+  color: #54ae68;
+  background-color: #fff; }
+  .green-bg a.cta:hover:after,
+  .blue-bg a.cta:hover:after {
+    color: #54ae68; }
 
 /*--------------------------------------------------------------
 Mobile Header
