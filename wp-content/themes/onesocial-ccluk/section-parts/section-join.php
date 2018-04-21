@@ -1,4 +1,7 @@
-<?php
+<?php 
+
+if (!is_user_logged_in()) :
+
 $slug       = 'ccluk_homepage_join';
 $id         = get_theme_mod( $slug.'_id', esc_html__('join', 'onesocial') );
 $disable    = get_theme_mod( $slug.'_disable' ) == 1 ? true : false;
@@ -35,4 +38,6 @@ if (!$disable && $title !== '' ) :
     <?php if ( ! ccluk_is_selective_refresh() ) : ?>
     </section>
     <?php endif; ?>
-<?php endif;
+<?php endif; 
+
+endif; // end of is user logged in
