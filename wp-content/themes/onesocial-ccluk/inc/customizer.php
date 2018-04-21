@@ -141,7 +141,7 @@ class CCLUK_Customizer {
 			// Source page settings
 			$wp_customize->add_setting( self::SLUG.'_homepage_join_source_page',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_number',
+					'sanitize_callback' => array( $this, 'sanitize_number' ),
 					'default'           => '',
 				)
 			);
@@ -259,7 +259,7 @@ class CCLUK_Customizer {
 			// Source page settings
 			$wp_customize->add_setting( self::SLUG.'_homepage_about_source_page',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_number',
+					'sanitize_callback' => array( $this, 'sanitize_number' ),
 					'default'           => '',
 				)
 			);
@@ -683,7 +683,7 @@ class CCLUK_Customizer {
 	    }
 	}
 
-	function ccluk_sanitize_number( $input ) {
+	function sanitize_number( $input ) {
 	    return balanceTags( $input );
 	}
 
