@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-02 13:51:02+0000\n"
+"PO-Revision-Date: 2018-04-10 08:18:49+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,11 +15,15 @@ msgstr ""
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
 msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。你可以在 https://www.famethemes.com/preview/?theme=OnePress 進行線上預覽。繁體中文本地化由佈景主題開發者委託《<a href=\"https://www.alexclassroom.com/\" target=\"_blank\">阿力獅的教室</a>》站長<a href=\"https://www.facebook.com/captain.alexlion\" target=\"_blank\">阿力獅</a>製作提供。"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.0.4)  #-#-#-#-#
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.6)  #-#-#-#-#
 #. Theme Name of the plugin/theme
 #: inc/dashboard.php:327
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/metabox.php:173
+msgid "Apply header cover settings for single product."
+msgstr "為單項產品頁面套用頁首封面。"
 
 #: inc/dashboard.php:484
 msgid "Keep %s updated"
@@ -29,27 +33,27 @@ msgstr "保持 %s 為最新狀態"
 msgid "Your settings were copied."
 msgstr "設定已複製。"
 
-#: inc/metabox.php:162
+#: inc/metabox.php:164
 msgid "Hide footer."
 msgstr "隱藏頁尾。"
 
-#: inc/metabox.php:151
+#: inc/metabox.php:153
 msgid "Display page excerpt as header cover description."
 msgstr "將頁面摘要顯示為封面說明。"
 
-#: inc/metabox.php:145
+#: inc/metabox.php:147
 msgid "Display featured image as header cover."
 msgstr "將特色圖片顯示為頁首封面。"
 
-#: inc/metabox.php:139
+#: inc/metabox.php:141
 msgid "Hide page title area."
 msgstr "隱藏頁面標題區域。"
 
-#: inc/metabox.php:134
+#: inc/metabox.php:136
 msgid "Hide header."
 msgstr "隱藏頁首。"
 
-#: inc/metabox.php:157
+#: inc/metabox.php:159
 msgid "Hide breadcrumb."
 msgstr "隱藏階層連結。"
 
@@ -340,7 +344,7 @@ msgstr "頁首位置"
 
 #: inc/customizer.php:272
 msgid "Contained"
-msgstr "包覆"
+msgstr "完整置於元素區域內"
 
 #: inc/customizer.php:268
 msgid "Header Width"
@@ -372,7 +376,7 @@ msgstr "頁尾 %s"
 
 #: comments.php:32
 msgid "One thought on &ldquo;%2$s&rdquo;"
-msgstr "在「%2$s」中有 1 則留言"
+msgstr "在《%2$s》中有 1 則留言"
 
 #: inc/customizer.php:739
 msgid "Check this box to show featured image on single post."
@@ -802,11 +806,11 @@ msgstr "這項效果僅適用於 [首頁] 模板。"
 msgid "Header Transparent"
 msgstr "透明頁首"
 
-#: inc/template-tags.php:1568
+#: inc/template-tags.php:1604
 msgid "Subscribe"
 msgstr "訂閱"
 
-#: inc/template-tags.php:1567
+#: inc/template-tags.php:1603
 msgid "Enter your e-mail address"
 msgstr "輸入你的電子郵件地址"
 
@@ -1032,7 +1036,7 @@ msgstr "並未搜尋到符合的結果"
 msgid "Pages:"
 msgstr "頁次:"
 
-#: section-parts/section-hero.php:82
+#: section-parts/section-hero.php:88
 msgid "#services"
 msgstr "#services"
 
@@ -1046,7 +1050,7 @@ msgstr "搜尋「%s」的結果"
 
 #: inc/template-tags.php:469
 msgid "Your comment is awaiting moderation."
-msgstr "你的留言正在審核中。"
+msgstr "你的留言正在進行審核。"
 
 #: inc/template-tags.php:464
 msgid "Edit"
@@ -1083,11 +1087,11 @@ msgstr "留下留言"
 
 #: inc/template-tags.php:360
 msgid "Tagged %1$s"
-msgstr "標籤為「%1$s」"
+msgstr "標籤: %1$s"
 
 #: inc/template-tags.php:354
 msgid "Posted in %1$s"
-msgstr "分類為「%1$s」"
+msgstr "分類: %1$s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:352 inc/template-tags.php:358
@@ -1165,8 +1169,8 @@ msgid "Hide contact form completely."
 msgstr "隱藏聯絡表單"
 
 #: inc/customizer.php:3449
-msgid "Contact Form 7 Shortcode."
-msgstr "Contact Form 7 表單短代碼"
+msgid "Contact Form Shortcode."
+msgstr "聯絡表單短代碼"
 
 #: inc/customizer.php:3374 section-parts/section-contact.php:4
 msgid "Get in touch"
@@ -1264,7 +1268,7 @@ msgstr "自訂圖示"
 msgid "Service content"
 msgstr "服務項目內容"
 
-#: inc/customizer.php:2617 section-parts/section-hero.php:81
+#: inc/customizer.php:2617 section-parts/section-hero.php:87
 #: section-parts/section-services.php:4
 msgid "Our Services"
 msgstr "我們的服務項目"
@@ -1340,7 +1344,7 @@ msgstr "區段: 關於"
 msgid "Button #2 Link"
 msgstr "第二顆按鈕的連結"
 
-#: inc/customizer.php:1659 section-parts/section-hero.php:84
+#: inc/customizer.php:1659 section-parts/section-hero.php:90
 msgid "#contact"
 msgstr "#contact"
 
@@ -1348,7 +1352,7 @@ msgstr "#contact"
 msgid "Button #2 Text"
 msgstr "第二顆按鈕的文字"
 
-#: inc/customizer.php:1645 section-parts/section-hero.php:83
+#: inc/customizer.php:1645 section-parts/section-hero.php:89
 msgid "Get Started"
 msgstr "開始使用"
 
@@ -1689,17 +1693,17 @@ msgstr "本站採用 %2$s 開發的 %1$s 佈景主題"
 
 #: inc/template-tags.php:1342
 msgid "Copyright %1$s %2$s %3$s"
-msgstr "版權所有 %1$s %2$s %3$s"
+msgstr "《%3$s》版權所有 %1$s %2$s"
 
 #: footer.php:44
 msgid "Back To Top"
 msgstr "返回頂端"
 
-#: inc/customizer.php:864 inc/template-tags.php:1558
+#: inc/customizer.php:864 inc/template-tags.php:1594
 msgid "Join our Newsletter"
 msgstr "訂閱電子報"
 
-#: inc/customizer.php:787 inc/template-tags.php:1577
+#: inc/customizer.php:787 inc/template-tags.php:1613
 msgid "Keep Updated"
 msgstr "關注我們"
 
@@ -1724,7 +1728,7 @@ msgstr "留言導覽"
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "在「%2$s」中有 %1$s 則留言"
+msgstr[0] "在《%2$s》中有 %1$s 則留言"
 
 #. translators: %1$s: smiley
 #: 404.php:51

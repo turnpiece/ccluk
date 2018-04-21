@@ -10,9 +10,7 @@
 
 	<div class="wphb-block-entry-content">
 
-		<div class="content">
-			<p><?php esc_html_e( 'Monitor your website and get notified if/when it’s inaccessible. We’ll also watch your server response time.', 'wphb' ); ?></p>
-		</div><!-- end content -->
+		<p><?php esc_html_e( 'Monitor your website and get notified if/when it’s inaccessible. We’ll also watch your server response time.', 'wphb' ); ?></p>
 
 		<div class="content-box content-box-two-cols-image-left">
 			<div class="wphb-block-entry-content wphb-upsell-free-message">

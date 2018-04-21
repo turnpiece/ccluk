@@ -6,9 +6,8 @@
  */
 
 ?>
-	<?php wp_nonce_field( 'wphb-caching' ); ?>
-	<input type="hidden" name="pc-settings" value="1">
-	<div class="buttons buttons-on-right">
-		<input type="submit" class="button" name="submit" value="<?php esc_attr_e( 'Save Settings', 'wphb' ); ?>">
-	</div>
-</form>
+<?php wp_nonce_field( 'wphb-caching' ); ?>
+<input type="hidden" name="pc-settings" value="1">
+<div class="sui-actions-right">
+	<input type="submit" class="sui-button sui-button-primary" name="submit" value="<?php esc_attr_e( 'Save Settings', 'wphb' ); ?>">
+</div>

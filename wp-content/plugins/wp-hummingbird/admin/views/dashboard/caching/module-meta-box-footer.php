@@ -9,12 +9,12 @@
  */
 
 ?>
-<div class="buttons buttons-on-left">
-	<a href="<?php echo esc_url( $caching_url ); ?>" class="button button-ghost" name="submit">
-		<i class="hb-wpmudev-icon-wrench-tool wphb-dash-icon"></i>
-		<?php esc_html_e( 'Configure', 'wphb' ); ?>
-	</a>
-	<?php if ( $cf_active ) : ?>
+<a href="<?php echo esc_url( $caching_url ); ?>" class="sui-button sui-button-ghost" name="submit">
+	<i class="sui-icon-wrench-tool" aria-hidden="true"></i>
+	<?php esc_html_e( 'Configure', 'wphb' ); ?>
+</a>
+<?php if ( $cf_active ) : ?>
+	<div class="sui-actions-right">
 		<span class="status-text alignright dash-cloudflare-connected-status"><?php esc_html_e( 'CloudFlare is connected', 'wphb' ); ?></span>
-	<?php endif; ?>
-</div>
+	</div>
+<?php endif; ?>

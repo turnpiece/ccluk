@@ -11,15 +11,15 @@
  */
 
 ?>
-<h3><?php echo esc_html( $title ); ?></h3>
-<div class="buttons">
+<h3 class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
+<div class="sui-actions-right">
 	<?php if ( true === $can_run_scan ) : ?>
-		<a href="<?php echo esc_url( $scan_link ); ?>" class="button"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
+		<a href="<?php echo esc_url( $scan_link ); ?>" class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
 	<?php
 	else :
 		/* translators: %d: number of minutes. */
 		$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $can_run_scan ) );
 		?>
-		<a href="#" class="button tooltip-l" disabled="disabled" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
+		<a href="#" class="sui-button sui-button-primary sui-tooltip sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
 	<?php endif; ?>
 </div>

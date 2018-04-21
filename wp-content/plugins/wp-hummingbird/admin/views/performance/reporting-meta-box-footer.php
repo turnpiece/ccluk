@@ -8,8 +8,8 @@
 			</div>
 		</div>
 	<?php else : ?>
-		<div class="buttons alignright">
-			<button class="button button-large">
+		<div class="sui-actions-right">
+			<button class="sui-button sui-button-primary">
 				<?php esc_html_e( 'Update Settings', 'wphb' ) ?>
 			</button>
 		</div>

@@ -158,16 +158,16 @@
     margin-right: 20px;
 }
 
-.wpmud .box-caching-summary .box-content > .box-content {
+.wpmud .box-caching-summary .sui-box-body {
     background: no-repeat 30px 100%;
 }
 
-.wpmud .box-caching-summary .box-content > .box-content {
+.wpmud .box-caching-summary .sui-box-body {
     background-image: url("#{$image--path}/graphic-hb-cf-sell@2x.png");
     background-size: 107px 148px;
 }
 
-.wpmud .box-caching-summary .box-content > .box-content.no-background-image {
+.wpmud .box-caching-summary .sui-box-body.no-background-image {
     background-image: none;
 }
 
@@ -185,10 +185,6 @@
 
 .wpmud .wphb-expiry-select-box .wphb-expiry-select {
     max-width: 240px;
-}
-
-.wpmud .box-caching-settings .settings-form .col-two-third > label {
-    padding: 0;
 }
 
 @media screen and (max-width: 1200px) and (min-width: 783px) {
@@ -275,34 +271,6 @@
 }
 
 /* Expiration table */
-.wpmud input[name='expiry-set-type'] {
-    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0);
-    border: 1px solid #E6E6E6;
-    background-color: #F8F8F8;
-}
-
-.wpmud input[name='expiry-set-type']:checked {
-    border: 1px solid #17A8E3;
-    background-color: #17A8E3;
-}
-
-.wpmud input[name='expiry-set-type']:checked + label {
-    color: #333333;
-}
-
-.wpmud input[name='expiry-set-type']:checked:before {
-    width: 8px;
-    height: 8px;
-    margin: 3px;
-    background-color: #ffffff;
-}
-
-.wpmud input[name='expiry-set-type'] + label {
-    display: inline-block;
-    margin-top: 0;
-    font-size: 15px;
-}
-
 .wpmud .wphb-border-frame .table-header .wphb-caching-summary-heading-type {
     flex-basis: 85px;
 }
@@ -400,6 +368,34 @@
 }
 
 /* Page caching */
+.wpmud .box-page-caching .box-footer {
+    border-top: 1px solid #E6E6E6;
+    padding: 50px 30px;
+}
+
+.wpmud .box-page-caching .sui-box-body .sui-box-settings-row:first-of-type {
+    padding-bottom: inherit;
+    border-bottom: 1px solid #e6e6e6;;
+}
+
+.wpmud .box-page-caching h4 {
+    color: #666666;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: left;
+    text-transform: none;
+}
+
+.wpmud .box-page-caching textarea {
+    height: 180px;
+    max-width: 490px;
+    color: #333333;
+    border: 1px solid #E6E6E6;
+    border-radius: 4px;
+    background-color: #F8F8F8;
+    margin-top: 20px;
+}
+
 .wpmud .box-page-caching .col-two-third .with-bottom-border {
     margin-bottom: 30px;
 }
@@ -417,19 +413,33 @@
     border-bottom: 0;
 }
 
+@include bp(tablet) {
+    .wpmud .box-page-caching .sui-box-settings-col-2.wphb-deactivate-pc {
+        padding-top: 0;
+    }
+}
+
 /* Gravatar caching */
 .wpmud .box-page-caching .wphb-notice,
 .wpmud .box-caching-gravatar .wphb-notice {
     margin-top: 20px;
 }
 
-.wpmud .box-page-caching .settings-form .button-ghost {
+.wpmud .box-page-caching .sui-box-settings-row .sui-button-ghost {
     margin: 10px 0;
+}
+
+/* Settings */
+.wpmud .box-caching-other-settings .spinner {
+    margin: 2px 10px 0 0;
 }
 
 /* Rss caching */
 .wpmud .box-caching-rss {
-    .settings-form {
+    .sui-box-footer .spinner {
+        margin: 2px 10px 0;
+    }
+    .sui-box-settings-row {
         input[type="text"] {
             margin: 0;
             display: inline-block;
@@ -437,13 +447,10 @@
         }
 
         label {
+            margin-left: 10px;
             margin-top: -5px;
             color: #666;
         }
-    }
-
-    .box-footer .spinner {
-        margin: 6px 10px 0;
     }
 }
 
@@ -473,14 +480,5 @@
 
     .wpmud .box-caching-summary .content-box-two-cols-image-left .wphb-block-entry-content {
         margin: 0;
-    }
-
-    /* overwrite checkboxes */
-    .wpmud input[name='expiry-set-type'] {
-        height: 20px;
-        width: 20px
-    }
-    .wpmud input[name='expiry-set-type']:checked:before {
-        margin: 5px;
     }
 }

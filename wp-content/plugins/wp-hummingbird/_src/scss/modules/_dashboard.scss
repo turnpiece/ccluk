@@ -6,61 +6,70 @@
 @import "../common/mixins";
 
 /* Images */
-.wpmud section[class^="box-dashboard-"] .box-title:before {
+.wpmud div[class^="box-dashboard-"] .sui-box-title:before {
     font-family: $font--icons;
     color: #333333;
     float: left;
     font-size: 20px;
-    margin: 18px 10px 18px 0;
+    margin-right: 10px;
+    line-height: 30px;
 }
 
-.wpmud section[class^="box-dashboard-performance"] .box-title:before {
+.wpmud div[class^="box-dashboard-performance"] .sui-box-title:before {
     content: '\e90c';
 }
-.wpmud section[class^="box-dashboard-minification"] .box-title:before {
+.wpmud div[class^="box-dashboard-minification"] .sui-box-title:before {
     content: '\e90b';
 }
-.wpmud section[class^="box-dashboard-browser"] .box-title:before {
+.wpmud div[class^="box-dashboard-browser"] .sui-box-title:before {
     content: '\e905';
 }
-.wpmud section[class^="box-dashboard-gzip"] .box-title:before {
+.wpmud div[class^="box-dashboard-gzip"] .sui-box-title:before {
     content: '\e907';
 }
-.wpmud section[class^="box-dashboard-uptime"] .box-title:before {
+.wpmud div[class^="box-dashboard-uptime"] .sui-box-title:before {
     content: '\e900';
 }
-.wpmud section[class^="box-dashboard-smush"] .box-title:before {
+.wpmud div[class^="box-dashboard-smush"] .sui-box-title:before {
     content: '\e90f';
 }
-.wpmud section[class^="box-dashboard-cloudflare"] .box-title:before {
+.wpmud div[class^="box-dashboard-cloudflare"] .sui-box-title:before {
     content: '\e906';
 }
-.wpmud section[class^="box-dashboard-reports"] .box-title:before {
+.wpmud div[class^="box-dashboard-reports"] .sui-box-title:before {
     content: '\e90d';
 }
-.wpmud section[class^="box-dashboard-caching-gravatar"] .box-title:before {
+.wpmud div[class^="box-dashboard-caching-gravatar"] .sui-box-title:before {
     content: '\e913';
 }
-.wpmud section[class^="box-dashboard-caching-page"] .box-title:before {
+.wpmud div[class^="box-dashboard-caching-page"] .sui-box-title:before {
     content: '\e914';
 }
-.wpmud section[class^="box-dashboard-advanced-tools"] .box-title:before {
+.wpmud div[class^="box-dashboard-advanced-tools"] .sui-box-title:before {
     content: '\5a';
 }
 
+.wpmud div[class^="box-dashboard-"] .sui-box-footer .sui-button i {
+    margin-right: 5px;
+}
+
 /* Dashboard background images */
+
+.wpmud .box-dashboard-welcome.sui-summary {
+    background-image: url("#{$image--path}/hb-graphic-dash-top@2x.png");
+}
 .wpmud .box-dashboard-reports-no-membership,
 .wpmud .box-dashboard-uptime-no-membership,
-.wpmud .box-dashboard-smush-no-membership .box-content,
-.wpmud .box-dashboard-browser-caching-module .box-content,
+.wpmud .box-dashboard-smush-no-membership .sui-box-body,
+.wpmud .box-dashboard-browser-caching-module .sui-box-body,
 .wpmud .box-reporting-summary .wphb-reporting-no-membership,
 .wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
     background: #fff no-repeat 30px 100%;
     padding-bottom: 30px !important;
 }
 
-.wpmud .box-dashboard-reports-no-membership .box-content,
-.wpmud .box-dashboard-uptime-no-membership .box-content {
+.wpmud .box-dashboard-reports-no-membership .sui-box-body,
+.wpmud .box-dashboard-uptime-no-membership .sui-box-body {
     padding: 30px 30px 0 !important;
 }
 
@@ -70,10 +79,10 @@
 .wpmud .box-dashboard-uptime-no-membership {
     background-image: url("#{$image--path}/hb-graphic-upsell-uptime.png");
 }
-.wpmud .box-dashboard-smush-no-membership .box-content {
+.wpmud .box-dashboard-smush-no-membership .sui-box-body {
     background-image: url("#{$image--path}/smush-share-widget.png");
 }
-.wpmud .box-dashboard-browser-caching-module .box-content {
+.wpmud .box-dashboard-browser-caching-module .sui-box-body {
     background-image: url("#{$image--path}/graphic-hb-cf-sell@2x.png");
     background-size: 107px 148px;
 }
@@ -86,7 +95,7 @@
     background-size: 100px 126px;
 }
 
-.wpmud .box-dashboard-browser-caching-module .box-content.no-background-image {
+.wpmud .box-dashboard-browser-caching-module .sui-box-body.no-background-image {
     background-image: none;
 }
 
@@ -98,7 +107,7 @@ only screen and (min-resolution: 192dpi),
 only screen and (min-resolution: 2dppx) {
     .wpmud .box-dashboard-reports-no-membership,
     .wpmud .box-dashboard-uptime-no-membership,
-    .wpmud .box-dashboard-smush-no-membership .box-content {
+    .wpmud .box-dashboard-smush-no-membership .sui-box-body {
         background-size: 107px 148px;
     }
     .wpmud .box-dashboard-reports-no-membership {
@@ -107,7 +116,7 @@ only screen and (min-resolution: 2dppx) {
     .wpmud .box-dashboard-uptime-no-membership {
         background-image: url("#{$image--path}/hb-graphic-upsell-uptime@2x.png");
     }
-    .wpmud .box-dashboard-smush-no-membership .box-content {
+    .wpmud .box-dashboard-smush-no-membership .sui-box-body {
         background-image: url("#{$image--path}/smush-share-widget@2x.png");
     }
     .wpmud .box-reporting-summary .wphb-reporting-no-membership {
@@ -125,6 +134,49 @@ only screen and (min-resolution: 2dppx) {
     font-weight: bold;
     line-height: 30px;
     display: flex;
+}
+.wpmud .box-dashboard-performance-module {
+    .sui-accordion {
+        &.sui-table {
+            th {
+                @media (max-width: 783px) {
+                    padding: 0 15px 0 20px;
+                }
+            }
+        }
+        th {
+            color: #333333;
+            font-size: 13px;
+            font-weight: bold;
+            line-height: 30px;
+            padding-top: 0;
+            padding-bottom: 0;
+        }
+        .sui-accordion-item {
+            &:hover {
+                cursor: default;
+                background-color: transparent;
+            }
+            .sui-button {
+                @media (max-width: 783px) {
+                    margin-right: 20px;
+                }
+            }
+        }
+        td.sui-accordion-item-title {
+            font-size: 13px;
+            color: #333333;
+            font-weight: 500;
+            line-height: 16px;
+
+            i {
+                font-size: 16px;
+            }
+        }
+        &:after {
+            margin-bottom: 0;
+        }
+    }
 }
 
 .wpmud .wphb-border-frame .wphb-caching-summary-item-type,
@@ -183,87 +235,13 @@ only screen and (min-resolution: 2dppx) {
 }
 
 /* Status text on dashboard meta boxes */
-.wpmud .dev-box .status-text {
+.wpmud .sui-box .status-text {
     color: #888888;
     font-size: 13px;
     line-height: 22px;
     margin-top: 5px;
 }
 
-/* Dashboard Performance */
-.wpmud .box-dashboard-performance-module .box-content .with-padding {
-    margin-bottom: 0;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-performance-report-item-score {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    max-width: 65px;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-score-result-label {
-    font-size: 13px;
-    margin-left: 10px;
-    color: #AAAAAA;
-    font-weight: 500;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-dash-table-header,
-.wpmud .box-dashboard-performance-module .wphb-dash-table-row {
-    padding: 0 30px;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-aplus,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-a,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-b {
-    box-shadow: inset 3px 0 0 -1px #1ABC9C;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-c,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-d {
-    box-shadow: inset 3px 0 0 -1px #FECF2F;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-e,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-f {
-    box-shadow: inset 3px 0 0 -1px #FF6D6D;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-dash-table-row:last-child {
-    margin-bottom: 0;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-aplus > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-a > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-b > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-c > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-d > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-e > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-f > div:first-child:before {
-    font-family: $font--icons;
-    font-size: 16px;
-    margin-right: 10px;
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-aplus > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-a > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-b > div:first-child:before {
-    color: #1ABC9C;
-    content: "\e903";
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-c > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-d > div:first-child:before {
-    color: #FECF2F;
-    content: "\e904";
-}
-
-.wpmud .box-dashboard-performance-module .wphb-row-grade-e > div:first-child:before,
-.wpmud .box-dashboard-performance-module .wphb-row-grade-f > div:first-child:before {
-    color: #FF6D6D;
-    content: "\e904";
-}
 
 /* Dashbard: Cloudflare */
 #wphb-box-dashboard-cloudflare .wphb-block-entry .wphb-block-entry-content {
@@ -655,11 +633,6 @@ only screen and (min-resolution: 2dppx) {
     }
 }
 
-@include bp(phone-large) {
-    .wpmud section[class^="box-dashboard-"] .box-title:before {
-        margin: 5px 10px 5px 0;
-    }
-}
 
 @include bp(phone) {
     .wpmud .box-dashboard-minification-module .wphb-pills {
@@ -671,7 +644,7 @@ only screen and (min-resolution: 2dppx) {
         margin-right: 5px;
     }
 
-    .wpmud .box-dashboard-performance-module .wphb-dash-table .button-ghost {
+    .wpmud .box-dashboard-performance-module .sui-accordion .sui-button-ghost {
         padding: 5px 6px 7px !important;
     }
 
@@ -692,12 +665,12 @@ only screen and (min-resolution: 2dppx) {
         width: 65px;
     }
 
-    .wpmud .dev-box .status-text {
+    .wpmud .sui-box .status-text {
         line-height: 15px;
         margin-top: 0;
         padding-left: 10px;
         word-wrap: break-word;
-        max-width: 150px;
+        max-width: 175px;
     }
 
     /* notices */

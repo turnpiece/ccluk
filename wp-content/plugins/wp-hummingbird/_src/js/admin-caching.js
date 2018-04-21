@@ -28,7 +28,7 @@ import Fetcher from './utils/fetcher';
 
             cloudflareLink.on('click', function(e) {
                 e.preventDefault();
-				$('#wphb-server-type').val('cloudflare').trigger('wpmu:change');
+				$('#wphb-server-type').val('cloudflare').trigger('sui:change');
 				self.hideCurrentInstructions();
                 self.setServer('cloudflare');
 				self.showServerInstructions('cloudflare');
@@ -108,7 +108,7 @@ import Fetcher from './utils/fetcher';
             });
 
             let expiryInput = $("input[name='expiry-set-type']");
-            let expirySettingsForm = $('.settings-form');
+            let expirySettingsForm = $('.sui-box-settings-row');
 			expiryInput.each( function () {
                 if ( this.checked ) {
                     if ( 'expiry-all-types' === $(this).attr('id') ) {
@@ -140,11 +140,6 @@ import Fetcher from './utils/fetcher';
                 self.reloadSnippets( expiry_times );
 			});
 
-            $( '.tab label' ).on( 'click', function() {
-                $( this ).parent().parent().find( '.tab label.active' ).removeClass( 'active' );
-                $( this ).addClass( 'active' );
-            });
-
             cloudFlareDismissLink.click( function(e) {
                 e.preventDefault();
                 Fetcher.notice.dismissCloudflareDash();
@@ -168,12 +163,14 @@ import Fetcher from './utils/fetcher';
 
 			/**
 			 * Parse rss cache settings.
+             *
+             * @since 1.8
 			 */
-			$('.box-caching-rss .box-footer').on('click', '.button[type="submit"]', function (e) {
+			$('.box-caching-rss .sui-box-footer').on('click', '.sui-button[type="submit"]', function (e) {
                 e.preventDefault();
 
 				const spinner = $(this).parent().find('.spinner');
-				const settings_form = $('.box-caching-rss').closest('section').find('form[id="rss-caching-settings"]');
+				const settings_form = $('form[id="rss-caching-settings"]');
 
 				// Make sure a positive value is always reflected for the rss expiry time input.
                 let rss_expiry_time = settings_form.find('#rss-expiry-time');
@@ -186,14 +183,40 @@ import Fetcher from './utils/fetcher';
 						spinner.removeClass('visible');
 
 						if ( 'undefined' !== typeof response && response.success ) {
-							self.showNotice( 'success' );
+							WPHB_Admin.notices.show( 'wphb-notice-cache', true, 'success' );
 						} else {
-							self.showNotice( 'error', wphb.strings.errorSettingsUpdate );
+							WPHB_Admin.notices.show( 'wphb-notice-cache', true, 'error', wphb.strings.errorSettingsUpdate );
 						}
 					});
 			});
 
-            return this;
+			/**
+             * Parse page cache settings.
+             *
+			 * TODO: this method and the method above are very similar, maybe refactor at some point?
+             * @since 1.8.1
+			 */
+			$('.box-caching-other-settings').on('click', 'input[type="submit"]', function (e) {
+			    e.preventDefault();
+
+				const spinner = $(this).parent().find('.spinner');
+				const settings_form = $('form[id="other-caching-settings"]');
+
+				spinner.addClass('visible');
+
+				Fetcher.caching.saveOtherSettings( settings_form.serialize() )
+					.then( ( response ) => {
+						spinner.removeClass('visible');
+
+						if ( 'undefined' !== typeof response && response.success ) {
+							WPHB_Admin.notices.show( 'wphb-notice-cache', true, 'success' );
+						} else {
+							WPHB_Admin.notices.show( 'wphb-notice-cache', true, 'error', wphb.strings.errorSettingsUpdate );
+						}
+					});
+			});
+
+			return this;
         },
 
         setServer: function( value ) {
@@ -201,9 +224,9 @@ import Fetcher from './utils/fetcher';
         },
 
 		updateTabSize: function() {
-			let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.tabs' ),
-                current = jq.find('.tab > input:checked').parent(),
-				content = current.find('.content');
+            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.sui-tabs' ),
+                current = jq.find('.sui-tab > input:checked').parent(),
+                content = current.find('.sui-tab-content');
 			jq.height( content.outerHeight() + current.outerHeight() - 6 );
         },
 
@@ -219,7 +242,7 @@ import Fetcher from './utils/fetcher';
                 let serverTab = this.$serverInstructions[ server ];
 				serverTab.show();
                 // Show tab.
-				serverTab.find('.tab:first-child > label').trigger('click');
+				serverTab.find('.sui-tab:first-child > label').trigger('click');
             }
 
             if ( 'apache' === server || 'LiteSpeed' === server ) {
@@ -267,32 +290,6 @@ import Fetcher from './utils/fetcher';
                 };
             }
             return expiry_times;
-        },
-
-		/**
-		 * Notice on settings update.
-		 *
-		 * @param type
-		 * @param message
-		 */
-		showNotice: function ( type, message = '' ) {
-			const notice = $('#wphb-notice-rss-cache');
-
-			// Remove set classes if doing multiple calls per page load.
-			notice.removeClass('wphb-notice-error');
-			notice.removeClass('wphb-notice-success');
-
-			window.scrollTo( 0, 0 );
-			notice.addClass('wphb-notice-' + type);
-
-			if ( '' !== message ) {
-				notice.find('p').html(message);
-			}
-
-			notice.slideDown();
-			setTimeout( function() {
-				notice.slideUp();
-			}, 5000 );
-		}
+        }
     };
 }( jQuery ));

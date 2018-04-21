@@ -840,7 +840,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		WP_Hummingbird_Minification_Errors_Controller::clear_errors();
 	}
 
-	public function reset() {
+	/**
+	 * Reset settings.
+	 *
+	 * @param bool $reset_minify  Reset minify settings.
+	 */
+	public function reset( $reset_minify = true ) {
 		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
 			return;
 		}
@@ -851,7 +856,9 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		$options = $this->get_options();
 		$default_options = WP_Hummingbird_Settings::get_default_settings();
 		$options['block']       = $default_options['minify']['block'];
-		$options['dont_minify'] = $default_options['minify']['dont_minify'];
+		if ( $reset_minify ) {
+			$options['dont_minify'] = $default_options['minify']['dont_minify'];
+		}
 		$options['combine']     = $default_options['minify']['combine'];
 		$options['position']    = $default_options['minify']['position'];
 		$this->update_options( $options );

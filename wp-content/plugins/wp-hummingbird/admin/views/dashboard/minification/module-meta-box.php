@@ -13,44 +13,40 @@
  */
 
 ?>
-<div class="content">
-	<p><?php esc_html_e( 'Compress, combine and position your assets to dramatically improve your page load speed.', 'wphb' ); ?></p>
-</div>
+<p class="sui-margin-bottom"><?php esc_html_e( 'Compress, combine and position your assets to dramatically improve your page load speed.', 'wphb' ); ?></p>
 
-<div class="wphb-dash-table two-columns">
-	<div class="wphb-dash-table-row">
-		<div><?php esc_html_e( 'Total Enqueued Files', 'wphb' ); ?></div>
-		<div><?php echo absint( $enqueued_files ); ?></div>
-	</div>
-
-	<div class="wphb-dash-table-row">
-		<div><?php esc_html_e( 'Total Size Reductions', 'wphb' ); ?></div>
-		<div>
+<ul class="sui-list sui-list-top-border sui-no-margin-bottom">
+	<li>
+		<span class="sui-list-label"><?php esc_html_e( 'Total Enqueued Files', 'wphb' ); ?></span>
+		<span class="sui-list-detail"><?php echo absint( $enqueued_files ); ?></span>
+	</li>
+	<li>
+		<span class="sui-list-label"><?php esc_html_e( 'Total Size Reductions', 'wphb' ); ?></span>
+		<span class="sui-list-detail">
 			<div class="wphb-pills-group">
 				<span class="wphb-pills with-arrow right grey"><?php echo esc_html( $original_size ); ?>KB</span>
 				<span class="wphb-pills"><?php echo esc_html( $compressed_size ); ?>KB</span>
 			</div>
-		</div>
-	</div>
-
-	<div class="wphb-dash-table-row">
-		<div><?php esc_html_e( 'Total % Reductions', 'wphb' ); ?></div>
-		<div><?php echo esc_html( $percentage ); ?>%</div>
-	</div>
-
-	<div class="wphb-dash-table-row">
-		<div>
+		</span>
+	</li>
+	<li>
+		<span class="sui-list-label"><?php esc_html_e( 'Total % Reductions', 'wphb' ); ?></span>
+		<span class="sui-list-detail"><?php echo esc_html( $percentage ); ?>%</span>
+	</li>
+	</li>
+	<li>
+		<span class="sui-list-label">
 			<span class="wphb-filename-extension wphb-filename-extension-js"><?php esc_html_e( 'JS', 'wphb' ); ?></span>
-			<?php esc_html_e( 'JavaScript', 'wphb' ); ?>
-		</div>
-		<div><?php echo esc_html( $compressed_size_scripts ); ?>KB</div>
-	</div>
-
-	<div class="wphb-dash-table-row">
-		<div>
+			<span class="wphb-filename-extension-label"><?php esc_html_e( 'JavaScript', 'wphb' ); ?></span>
+		</span>
+		<span class="sui-list-detail"><?php echo esc_html( $compressed_size_scripts ); ?>KB</span>
+	</li>
+	</li>
+	<li>
+		<span class="sui-list-label">
 			<span class="wphb-filename-extension wphb-filename-extension-css"><?php esc_html_e( 'CSS', 'wphb' ); ?></span>
-			<?php esc_html_e( 'CSS', 'wphb' ); ?>
-		</div>
-		<div><?php echo esc_html( $compressed_size_styles ); ?>KB</div>
-	</div>
-</div><!-- end wphb-dash-table -->
+			<span class="wphb-filename-extension-label"><?php esc_html_e( 'CSS', 'wphb' ); ?></span>
+		</span>
+		<span class="sui-list-detail"><?php echo esc_html( $compressed_size_styles ); ?>KB</span>
+	</li>
+</ul>

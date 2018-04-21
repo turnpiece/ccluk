@@ -1,7 +1,10 @@
 <?php
 /**
- * Hummingbird Page Caching
+ * Hummingbird Advanced Tools module
+ *
+ * @package Hummingbird
  */
+
 if ( ! defined( 'ABSPATH' ) ) {
 	die();
 }

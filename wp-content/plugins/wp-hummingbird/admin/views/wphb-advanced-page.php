@@ -4,14 +4,21 @@
  */
 ?>
 
-<div class="row">
-	<div class="col-fifth">
-		<?php $this->show_tabs(); ?>
-	</div><!-- end col-sixth -->
 
-	<div class="col-four-fifths">
+<div class="sui-row-with-sidenav">
+	<?php $this->show_tabs(); ?>
+
+	<?php if ( 'main' === $this->get_current_tab() ) : ?>
+		<form id="advanced-general-settings" method="post">
+			<?php $this->do_meta_boxes( 'main' ); ?>
+		</form>
+	<?php elseif ( 'db' === $this->get_current_tab() ) : ?>
+		<form id="advanced-db-settings" method="post">
+			<?php $this->do_meta_boxes( 'db' ); ?>
+		</form>
+	<?php else : ?>
 		<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
-	</div>
+	<?php endif; ?>
 </div>
 
 <script>

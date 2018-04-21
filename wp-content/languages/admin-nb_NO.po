@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-02 11:50:29+0000\n"
+"PO-Revision-Date: 2018-04-12 10:26:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -236,13 +236,13 @@ msgstr "Advarsel! Potensiell fare foreligger! "
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Den fryktede \"white screen\". Du vil unngå denne når du jobber med tema og utvidelseskode fordi du i WordPress 4.9 vil få en advarsel når du lagrer en feil. Du kommer til å få sove bedre!"
 
-#: wp-admin/about.php:203
-msgid "Sandbox for Safety"
-msgstr "Sandbox for sikkerhet"
-
 #: wp-admin/about.php:197
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Du har et visningsproblem, men kan ikke helt eksakt finne ut hva som gikk feil med CSSen du så kjærlig skrev. Med syntaksfremheving feilsjekking for CSS-redigering og den Tilpassede HTML-widgeten introdusert i WordPress 4.8.1 vil du raskt finne kodefeil. Praktisk talt garantert å hjelpe deg med å scanne kode lettere og å finne og fikse feil raskt."
+
+#: wp-admin/about.php:203
+msgid "Sandbox for Safety"
+msgstr "Sandkasse for sikkerhet"
 
 #: wp-admin/about.php:196
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"

@@ -15,7 +15,6 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		$this->tabs = array(
 			'main'   => __( 'General', 'wphb' ),
 			'db'     => __( 'Database Cleanup', 'wphb' ),
-			//'system' => __( 'System Information', 'wphb' ),
 		);
 	}
 
@@ -24,7 +23,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function render_header() {
 		?>
-		<div class="wphb-notice hidden" id="wphb-notice-advanced-tools">
+		<div class="sui-notice sui-notice-top hidden" id="wphb-notice-advanced-tools">
 			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 		<?php
@@ -57,28 +56,30 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			array( $this, 'advanced_db_metabox' ),
 			null,
 			null,
-			'db'
+			'db',
+			array(
+				'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
+			)
 		);
 
 		$this->add_meta_box(
 			'advanced/db-settings',
 			__( 'Settings', 'wphb' ),
-			array( $this, 'db_settings_metabox'),
+			array( $this, 'db_settings_metabox' ),
 			null,
 			null,
 			'db',
 			array(
-				'box_content_class' => 'box-content no-padding',
-				'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'box-footer' : 'box-footer wphb-db-cleanup-no-membership',
+				'box_content_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
+				'box_footer_class'   => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
 			)
 		);
 	}
 
-	/**********************
-	 *
+	/**
+	 * *************************
 	 * Advanced General page meta boxes.
-	 *
-	 *********************/
+	 ***************************/
 
 	/**
 	 * Advanced general meta box.
@@ -87,7 +88,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		$options = WP_Hummingbird_Settings::get_settings( 'advanced' );
 
 		$prefetch = '';
-		foreach( $options['prefetch'] as $url ) {
+		foreach ( $options['prefetch'] as $url ) {
 			$prefetch .= $url . "\r\n";
 		}
 
@@ -98,11 +99,10 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		) );
 	}
 
-	/**********************
-	 *
+	/**
+	 * *************************
 	 * Advanced Database cleanup page meta boxes.
-	 *
-	 *********************/
+	 ***************************/
 
 	/**
 	 * Database cleanup meta box.

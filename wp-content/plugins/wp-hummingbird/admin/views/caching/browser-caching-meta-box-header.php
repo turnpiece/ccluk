@@ -10,13 +10,15 @@
  */
 
 ?>
-<h3><?php echo esc_html( $title ); ?></h3>
+<h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( $issues ) : ?>
-	<div class="wphb-pills"><?php echo intval( $issues ); ?></div>
+	<div class="sui-actions-left">
+		<span class="sui-tag"><?php echo intval( $issues ); ?></span>
+	</div>
 <?php endif; ?>
-<div class="buttons">
-	<p class="wphb-label-notice-inline hide-to-mobile"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></p>
-	<a href="<?php echo esc_url( $url ); ?>" class="button button-ghost" id="recheck-expiry" name="submit">
+<div class="sui-actions-right">
+	<span class="wphb-label-notice-inline hide-to-mobile"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></span>
+	<a href="<?php echo esc_url( $url ); ?>" class="sui-button sui-button-ghost" id="recheck-expiry" name="submit">
 		<?php esc_html_e( 'Re-Check Expiry', 'wphb' ); ?>
 	</a>
 </div>

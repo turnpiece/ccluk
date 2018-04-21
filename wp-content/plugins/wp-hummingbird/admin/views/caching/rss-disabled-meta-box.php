@@ -15,12 +15,12 @@
 	you can disable it all together.', 'wphb' ); ?>
 </p>
 
-<div class="wphb-notice wphb-notice-warning">
+<div class="sui-notice sui-notice-warning">
 	<p>
 		<?php esc_html_e( 'RSS Caching is currently disabled.', 'wphb' ); ?>
 	</p>
-	<div class="buttons">
-		<a href="<?php echo esc_url( $url ); ?>" class="button button-grey">
+	<div class="sui-notice-buttons">
+		<a href="<?php echo esc_url( $url ); ?>" class="sui-button">
 			<?php esc_html_e( 'Enable Caching', 'wphb' ); ?>
 		</a>
 	</div>

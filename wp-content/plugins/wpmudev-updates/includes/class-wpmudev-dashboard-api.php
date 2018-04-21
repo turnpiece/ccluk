@@ -1725,12 +1725,7 @@ class WPMUDEV_Dashboard_Api {
 			/* Authentication was successful, log in our support user. */
 
 			// Force 1 hour cookie timeout.
-			add_filter(
-				'auth_cookie_expiration',
-				function ( $a ) {
-					return 3600;
-				}
-			);
+			add_filter( 'auth_cookie_expiration', array( $this, 'auth_cookie_expiration' ) );
 
 			wp_clear_auth_cookie();
 			wp_set_auth_cookie( $access['userid'], false );
@@ -1768,6 +1763,18 @@ class WPMUDEV_Dashboard_Api {
 	 * *********************************************************************** *
 	 */
 
+	/**
+	 * Used to filter auth cookie expiration.
+	 *
+	 * @since  4.5
+	 *
+	 * @param  int $timeout Time in seconds.
+	 *
+	 * @return int $timeout
+	 */
+	public function auth_cookie_expiration( $timeout ) {
+		return HOUR_IN_SECONDS;
+	}
 
 	/**
 	 * Parses an HTTP response object (or other value) to determine an error

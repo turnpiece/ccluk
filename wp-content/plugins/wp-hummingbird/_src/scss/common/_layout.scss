@@ -124,12 +124,7 @@
     margin: 10px 0 0;
 }
 
-.wpmud .dev-box .box-title .test-results {
-    float: right;
-    margin-top: 15px;
-}
-
-.wpmud .dev-box .box-title .test-results-label {
+.wpmud .sui-box-header .test-results-label {
     display: block;
     float: left;
     font-family: $font--alt;
@@ -382,8 +377,10 @@
     margin: 0 0 20px;
 }
 
-.wpmud .wphb-block-entry-content .content > p:last-child,
-.wpmud .wphb-block-entry-content .content > p:last-of-type {
+.wpmud .content {
+    margin-bottom: 30px;
+}
+.wpmud .wphb-block-entry-content .content > p:last-child {
     margin-bottom: 0;
 }
 
@@ -422,22 +419,12 @@
     margin-bottom: 20px;
 }
 
-.wpmud .wphb-block-entry-third .hb-wpmudev-icon-warning,
-.wpmud .wphb-block-entry-third .hb-wpmudev-icon-info,
-.wpmud .wphb-block-entry-third .hb-wpmudev-icon-tick {
-    position: relative;
-    top: -22px;
-    left: 5px;
-    font-size: 20px;
-}
-
-.wpmud .wphb-tab i.hb-wpmudev-icon-info.dismissed,
+.wpmud i.hb-wpmudev-icon-info.dismissed,
 .wpmud .wphb-block-entry-third .hb-wpmudev-icon-info {
     color: #888888;
-}
-
-.wpmud .wphb-block-entry-third .hb-wpmudev-icon-warning {
-    color: #FECF2F;
+    &:before {
+        color: #888888;
+    }
 }
 
 .wpmud .wphb-block-entry-third .hb-wpmudev-icon-tick {

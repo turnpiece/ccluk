@@ -109,6 +109,7 @@ class WP_Hummingbird_Hub_Endpoints {
 
 		/**
 		 * Gravatar
+		 *
 		 * @var WP_Hummingbird_Module_Gravatar $module
 		 */
 		$module = WP_Hummingbird_Utils::get_module( 'gravatar' );
@@ -155,6 +156,7 @@ class WP_Hummingbird_Hub_Endpoints {
 
 		/**
 		 * Page caching
+		 *
 		 * @var WP_Hummingbird_Module_Page_Cache $module
 		 */
 		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
@@ -162,6 +164,7 @@ class WP_Hummingbird_Hub_Endpoints {
 
 		/**
 		 * Reports
+		 *
 		 * @var WP_Hummingbird_Module_Performance $performance_module
 		 */
 		$performance_module = WP_Hummingbird_Utils::get_module( 'performance' );

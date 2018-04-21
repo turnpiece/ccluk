@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-28 12:42:14+0000\n"
+"PO-Revision-Date: 2018-04-13 11:16:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -58,11 +58,11 @@ msgstr "CodeMirror tersedia untuk digunakan pada Tema dan Plugin Anda"
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
 #: wp-admin/about.php:302
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
-msgstr "Kita telah membuat sejumlah penyempurnaan pada Customizer JS API di WordPress 4.9, mengeliminir beberapa titik masalah dan membuatnya semudah bekerja dengan PHP API. Ada juga beberapa rangka dasar kontrol baru seperti kontrol tanggal / waktu, dan notifikasi bagian / panel / global. <a href=\"%s\">Lihat daftar lengkap.</a>"
+msgstr "Kita telah membuat sejumlah penyempurnaan pada Customizer JS API di WordPress 4.9, menghilangkan beberapa titik masalah dan membuatnya semudah bekerja dengan PHP API. Ada juga beberapa rangka dasar kontrol baru seperti kontrol tanggal / waktu, dan notifikasi bagian / panel / global. <a href=\"%s\">Lihat daftar lengkap.</a>"
 
 #: wp-admin/about.php:298
 msgid "Customizer JS API Improvements"
-msgstr "Penyempurnaan Customizer JS API"
+msgstr "Penyempurnaan Peracik JS API"
 
 #: wp-admin/privacy.php:36
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
@@ -70,7 +70,7 @@ msgstr "Data ini digunakan untuk menyediakan peningkatan umum untuk WordPress, y
 
 #: wp-admin/about.php:211
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
-msgstr "Ketika Anda mengedit tema dan plugin secara langsung, WordPress 4.9 dengan sopan akan memperingatkan Anda bahwa ini adalah praktik yang berbahaya. WordPress 4.9 akan merekomendasikan Anda untuk membuat cadangan file Anda sebelum disimpan, jadi tidak akan ditimpa oleh pembaruan berikutnya. Ambil rute yang aman: masa depan Anda akan berterima kasih. Tim dan pelanggan Anda akan berterima kasih."
+msgstr "Ketika Anda menyunting tema dan plugin secara langsung, WordPress 4.9 dengan sopan akan memperingatkan Anda bahwa ini adalah praktik yang berbahaya. WordPress 4.9 akan merekomendasikan Anda untuk membuat cadangan file Anda sebelum disimpan, jadi tidak akan ditimpa oleh pembaruan berikutnya. Ambil rute yang aman: masa depan Anda akan berterima kasih. Tim dan pelanggan Anda akan berterima kasih."
 
 #. translators: %s: link to Custom CSS section in the Customizer
 #: wp-admin/theme-editor.php:195
@@ -83,7 +83,7 @@ msgstr "Tahukah Anda?"
 
 #: wp-admin/credits.php:122
 msgid "Noteworthy Contributors"
-msgstr "Para Kontributor Penting"
+msgstr "Para Kontributor Yang Layak Disebut"
 
 #: wp-admin/theme-editor.php:329
 msgid "If you decide to go ahead with direct edits anyway, use a file manager to create a copy with a new name and hang on to the original. That way, you can re-enable a functional version if something goes wrong."
@@ -114,7 +114,7 @@ msgstr "https://codex.wordpress.org/Update_Services"
 #. translators: 1: .htaccess, 2: Codex URL, 3: CTRL + a
 #: wp-admin/options-permalink.php:356
 msgid "If your %1$s file was <a href=\"%2$s\">writable</a>, we could do this automatically, but it isn&#8217;t so these are the mod_rewrite rules you should have in your %1$s file. Click in the field and press %3$s to select all."
-msgstr "Jika berkas %1$s Anda sudah <a href=\"%2$s\">bisa ditulisi</a>, kami harus melakukannya dengan otomatis, tetapi jika tidak, ada aturan  mod_rewrite yang harus ada di berkas %1$s . Klik di bidang dan tekan %3$s untuk memilih semua."
+msgstr "Jika berkas %1$s Anda sudah <a href=\"%2$s\">bisa ditulisi</a>, kami harus melakukannya dengan otomatis, tetapi jika tidak, ada aturan  mod_rewrite yang harus ada di berkas %1$s . Klik di ruas dan tekan %3$s untuk memilih semua."
 
 #. translators: 1: Codex URL, 2: web.config, 3: CTRL + a
 #: wp-admin/options-permalink.php:330
@@ -142,7 +142,7 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 #. translators: %s: Codex URL
 #: wp-admin/options-general.php:85
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
-msgstr "Masukkan alamat di sini jika Anda <a href=\"%s\">menginginkan beranda situs Anda berbeda dengan direktori instalasi WordPress</a>."
+msgstr "Masukkan alamat di sini jika Anda <a href=\"%s\">menginginkan beranda situs Anda berbeda dengan direktori pemasangan WordPress</a>."
 
 #. translators: %s: smiling face with smiling eyes emoji
 #: wp-admin/about.php:291
@@ -160,7 +160,7 @@ msgstr "WordPress sedang mengupayakan cara baru untuk membuat dan mengatur konte
 #. translators: %s: handshake emoji
 #: wp-admin/about.php:274
 msgid "Lend a Hand with Gutenberg %s"
-msgstr "Ikut Bantu Gutenberg %s"
+msgstr "Ikut Bantu bersama Gutenberg %s"
 
 #: wp-admin/about.php:241
 msgid "Site Building Improvements"
@@ -212,19 +212,19 @@ msgstr "Instruksi Menu yang Lebih Baik = Tak Lagi Membingungkan"
 
 #: wp-admin/about.php:250
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
-msgstr "Ketika Anda mengganti tema, terkadang widget mengira mereka dapat langsung aktif dan berpindah lokasi. Penyempurnaan di WordPress 4.9 menawarkan menu dan penempatan widget yang lebih tepat saat Anda memutuskan untuk menggunakan tema baru. Selain itu, Anda dapat melihat pratinjau tema yang terinstal atau mendownload, menginstal, dan melihat pratinjau tema baru segera. Tidak ada yang lebih berguna seperti dapat melihat pratinjau sebelum Anda menerapkannya."
+msgstr "Ketika Anda mengganti tema, terkadang widget mengira mereka dapat langsung aktif dan berpindah lokasi. Penyempurnaan di WordPress 4.9 menawarkan menu dan penempatan widget yang lebih tepat saat Anda memutuskan untuk menggunakan tema baru. Selain itu, Anda dapat melihat pratinjau tema yang terpasang atau mengunduh, memasang, dan melihat pratinjau tema baru segera. Tidak ada yang lebih berguna seperti dapat melihat pratinjau sebelum Anda menerapkannya."
 
 #: wp-admin/about.php:234
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Ingin menambahkan media ke text widget? Gambar, video dan musik dapat langsung ditanamkan kedalam Widget bersaamaan dengan teks Anda, caranya mudah namun berguna dengan tombol menambahkan media. Woo!"
 
-#: wp-admin/about.php:233
-msgid "Press a Button, Add Media"
-msgstr "Klik Tombol, Tambahkan Media"
-
 #: wp-admin/about.php:227
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "Penyempurnaan bertahap terhadap perubahan media lahir di WordPress 4.8, Anda sekarang bisa menambahkan galeri melalu widget. Yay!"
+
+#: wp-admin/about.php:233
+msgid "Press a Button, Add Media"
+msgstr "Klik satu Tombol, Tambahkan Media"
 
 #: wp-admin/about.php:210
 msgid "Warning: Potential Danger Ahead!"
@@ -266,13 +266,13 @@ msgstr "Ya, Anda membacanya dengan benar. Sama seperti Anda dapat membuat draf, 
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Drafkan dan Jadwalkan Kustomisasi Desain Situs"
 
-#: wp-admin/about.php:151
-msgid "Customizer Workflow Improved"
-msgstr "Perbaikan Alur Kerja Customizer"
-
 #: wp-admin/about.php:138
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Selamat datang di alur kerja Customizer yang telah disempurnakan dengan draf desain, penguncian, penjadwalan, dan tautan pratinjau. Terlebih lagi, Syntax Highlighting Code dan pengecekan kesalahan akan menjadikan pengembangan website lancar dan bersih. Akhirnya, jika semua itu tidak cukup bagus, kami memiliki widget Galeri baru yang cukup bagus dan perbaikan pada penjelajahan dan peralihan tema."
+
+#: wp-admin/about.php:151
+msgid "Customizer Workflow Improved"
+msgstr "Perbaikan Alur Kerja Peracik"
 
 #: wp-admin/about.php:23 wp-admin/credits.php:23 wp-admin/freedoms.php:22
 #: wp-admin/privacy.php:22
@@ -696,7 +696,7 @@ msgstr "Anda bisa memperbarui ke <a href=\"https://codex.wordpress.org/Version_%
 
 #: wp-admin/update-core.php:60
 msgid "If you need to re-install version %s, you can do so here:"
-msgstr "Jika perlu menginstal ulang versi %s, Anda bisa menjalankannya di sini:"
+msgstr "Jika perlu memasang ulang versi %s, Anda bisa menjalankannya di sini:"
 
 #: wp-admin/update-core.php:57
 msgid "You are using a development version of WordPress. You can update to the latest nightly build automatically:"
@@ -1159,11 +1159,6 @@ msgstr "Aktif"
 msgid "No plugin specified."
 msgstr "Tak ada plugin yang ditentukan."
 
-#: wp-admin/includes/ajax-actions.php:3659 wp-admin/plugin-install.php:18
-#: wp-admin/update.php:96 wp-admin/update.php:144
-msgid "Sorry, you are not allowed to install plugins on this site."
-msgstr "Maaf, Anda tak diizinkan menginstal plugin ke situs ini."
-
 #: wp-admin/includes/ajax-actions.php:3764 wp-admin/update.php:24
 #: wp-admin/update.php:50 wp-admin/update.php:71
 msgid "Sorry, you are not allowed to update plugins for this site."
@@ -1173,16 +1168,16 @@ msgstr "Maaf, Anda tak diizinkan memperbarui plugin untuk situs ini."
 msgid "Sorry, you are not allowed to delete plugins for this site."
 msgstr "Maaf, Anda tak diizinkan menghapus plugin di situs ini."
 
+#: wp-admin/includes/ajax-actions.php:3659 wp-admin/plugin-install.php:18
+#: wp-admin/update.php:96 wp-admin/update.php:144
+msgid "Sorry, you are not allowed to install plugins on this site."
+msgstr "Maaf, Anda tak diizinkan memasang plugin ke situs ini."
+
 #: wp-admin/includes/ajax-actions.php:3377
 #: wp-admin/includes/ajax-actions.php:3486
 #: wp-admin/includes/ajax-actions.php:3579
 msgid "No theme specified."
 msgstr "Tak ada tema yang ditentukan."
-
-#: wp-admin/includes/ajax-actions.php:3389 wp-admin/theme-install.php:16
-#: wp-admin/update.php:218 wp-admin/update.php:247
-msgid "Sorry, you are not allowed to install themes on this site."
-msgstr "Maaf, Anda tak diizinkan menginstal tema ke situs ini."
 
 #: wp-admin/includes/ajax-actions.php:3559
 msgid "Update failed."
@@ -1195,6 +1190,11 @@ msgstr "Maaf, Anda tak diizinkan menghapus tema di situs ini."
 #: wp-admin/includes/ajax-actions.php:3626
 msgid "Theme could not be deleted."
 msgstr "Tema tak bisa dihapus."
+
+#: wp-admin/includes/ajax-actions.php:3389 wp-admin/theme-install.php:16
+#: wp-admin/update.php:218 wp-admin/update.php:247
+msgid "Sorry, you are not allowed to install themes on this site."
+msgstr "Maaf, Anda tak diizinkan memasang tema ke situs ini."
 
 #: wp-admin/export.php:13
 msgid "Sorry, you are not allowed to export the content of this site."
@@ -1408,11 +1408,6 @@ msgstr "Waktu universal (%1$s) adalah %2$s."
 msgid "Dismiss the welcome panel"
 msgstr "Tutup panel selamat datang"
 
-#. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
-#: wp-admin/install.php:272
-msgid "The constant %s cannot be defined when installing WordPress."
-msgstr "Konstanta %s tak bisa didefinisikan saat menginstal WordPress."
-
 #: wp-admin/install.php:378
 msgid "WordPress has been installed. Thank you, and enjoy!"
 msgstr "WordPress telah terinstal. Terimakasih, dan selamat bekerja!"
@@ -1421,6 +1416,11 @@ msgstr "WordPress telah terinstal. Terimakasih, dan selamat bekerja!"
 #: wp-admin/install.php:259
 msgid "Your %s file has an empty database table prefix, which is not supported."
 msgstr "Berkas %s Anda memiliki prefiks tabel database kosong, yang tidak didukung."
+
+#. translators: %s: DO_NOT_UPGRADE_GLOBAL_TABLES
+#: wp-admin/install.php:272
+msgid "The constant %s cannot be defined when installing WordPress."
+msgstr "Konstanta %s tak bisa didefinisikan saat memasang WordPress."
 
 #: wp-admin/includes/plugin-install.php:619
 msgid "Read all reviews on WordPress.org or write your own!"
@@ -2672,19 +2672,19 @@ msgstr "Anda tidak dapat memperbarui karena <a href=\"https://codex.wordpress.or
 #. number, 5: Current MySQL version number
 #: wp-admin/install.php:239
 msgid "You cannot install because <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %1$s</a> requires PHP version %2$s or higher and MySQL version %3$s or higher. You are running PHP version %4$s and MySQL version %5$s."
-msgstr "Anda tidak dapat menginstal karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan PHP versi %2$s atau lebih tinggi dan MySQL versi %3$s atau lebih tinggi. Anda sedang menjalankan PHP versi %4$s dan MySQL versi %5$s."
+msgstr "Anda tidak dapat memasang karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan PHP versi %2$s atau lebih tinggi dan MySQL versi %3$s atau lebih tinggi. Anda sedang menjalankan PHP versi %4$s dan MySQL versi %5$s."
 
 #. translators: 1: WordPress version number, 2: Minimum required PHP version
 #. number, 3: Current PHP version number
 #: wp-admin/install.php:242
 msgid "You cannot install because <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %1$s</a> requires PHP version %2$s or higher. You are running version %3$s."
-msgstr "Anda tidak dapat menginstal karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan PHP versi %2$s atau lebih tinggi. Anda sedang menjalankan versi %3$s."
+msgstr "Anda tidak dapat memasang karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan PHP versi %2$s atau lebih tinggi. Anda sedang menjalankan versi %3$s."
 
 #. translators: 1: WordPress version number, 2: Minimum required MySQL version
 #. number, 3: Current MySQL version number
 #: wp-admin/install.php:245
 msgid "You cannot install because <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress %1$s</a> requires MySQL version %2$s or higher. You are running version %3$s."
-msgstr "Anda tidak dapat menginstal karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan MySQL versi %2$s atau lebih tinggi. Anda sedang menjalankan versi %3$s."
+msgstr "Anda tidak dapat memasang karena <a href=\"https://codex.wordpress.org/Version_%1$s\">WordPress%1$s</a> memerlukan MySQL versi %2$s atau lebih tinggi. Anda sedang menjalankan versi %3$s."
 
 #: wp-admin/widgets.php:81
 msgid "The theme you are currently using isn&#8217;t widget-aware, meaning that it has no sidebars that you are able to change. For information on making your theme widget-aware, please <a href=\"https://codex.wordpress.org/Widgetizing_Themes\">follow these instructions</a>."
@@ -2726,7 +2726,7 @@ msgstr "Pencarian tema terinstal akan mencari terma-terma yang ada dalam nama, d
 
 #: wp-admin/theme-install.php:95
 msgid "Alternately, you can browse the themes that are Featured, Popular, or Latest. When you find a theme you like, you can preview it or install it."
-msgstr "Selain itu, Anda bisa menelusuri tema-tema Andalan, Populer, atau Terbaru. Saat menemukan tema yang Anda sukai, Anda bisa melihat pratinjau atau menginstalnya."
+msgstr "Selain itu, Anda bisa menelusuri tema-tema Andalan, Populer, atau Terbaru. Saat menemukan tema yang Anda sukai, Anda bisa melihat pratinjau atau memasangnya."
 
 #: wp-admin/options-general.php:315
 msgid "Custom date format:"
@@ -3252,12 +3252,12 @@ msgid "The grid view for the Media Library requires JavaScript. <a href=\"%s\">S
 msgstr "Tampilan kisi-kisi untuk Pustaka Media membutuhkan JavaScript. <a href=\"%s\">Ubah ke tampilan daftar</a>."
 
 #: wp-admin/update-core.php:196
-msgid "This site is set up to install updates of future beta versions automatically."
-msgstr "Situs ini dipersiapkan untuk menginstal pembaruan versi-versi beta mendatang secara otomatis."
-
-#: wp-admin/update-core.php:196
 msgid "BETA TESTERS:"
 msgstr "PENGUJI BETA:"
+
+#: wp-admin/update-core.php:196
+msgid "This site is set up to install updates of future beta versions automatically."
+msgstr "Situs ini dipersiapkan untuk memasang pembaruan versi-versi beta mendatang secara otomatis."
 
 #: wp-admin/includes/class-wp-automatic-updater.php:681
 msgid "The WordPress team is willing to help you. Forward this email to %s and the team will work with you to make sure your site is working."
@@ -4207,7 +4207,7 @@ msgstr "Tambahkan item menu dari kolom di sebelah kiri."
 
 #: wp-admin/includes/plugin-install.php:239
 msgid "Plugins extend and expand the functionality of WordPress. You may automatically install plugins from the <a href=\"%1$s\">WordPress Plugin Directory</a> or upload a plugin in .zip format by clicking the button at the top of this page."
-msgstr "Plugin memperlebar dan memperluas fungsionalitas WordPress. Anda bisa menginstal plugin secara otomatis dari <a href=\"%1$s\">Direktori Plugin WordPress</a> atau mengunggah plugin dalam format .zip dengan mengklik tombol di bagian atas laman ini."
+msgstr "Plugin memperlebar dan memperluas fungsionalitas WordPress. Anda bisa memasang plugin secara otomatis dari <a href=\"%1$s\">Direktori Plugin WordPress</a> atau mengunggah plugin dalam format .zip dengan mengklik tombol di bagian atas laman ini."
 
 #. Plugin URI of the plugin/theme
 msgid "http://wordpress.org/plugins/hello-dolly/"
@@ -4563,13 +4563,13 @@ msgstr "Ketika mengubah tema, ada beberapa variasi pada jumlah dan pengaturan ar
 msgid "Don&#8217;t forget to click &#8220;Save Changes&#8221; when you&#8217;re done!"
 msgstr "Jangan lupa untuk mengklik &#8220;Simpan Perubahaan&#8221; bila sudah selesai!"
 
-#: wp-admin/custom-background.php:90
-msgid "To use a background image, simply upload it or choose an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button. You can display a single instance of your image, or tile it to fill the screen. You can have your background fixed in place, so your site content moves on top of it, or you can have it scroll with your site."
-msgstr "Untuk menggunakan sebuah gambar latar, cukup unggah atau pilih sebuah gambar yang sudah terunggah ke Pustaka Media sebelumnya dengan tombol &#8220;Pilih Gambar&#8221;. Anda dapat menampilkan gambar tadi sekali saja, atau menampilkannya berurutan untuk memenuhi layar. Anda juga dapat memposisikan latar pada posisi permanen, jadi ketika konten situs Anda dapat bergerak di atasnya, atau juga dapat membuatnya ikut tergulung ketika menjelajah ke bawah."
-
 #: wp-admin/edit-form-advanced.php:435
 msgid "Inserting Media"
 msgstr "Sisipkan Media"
+
+#: wp-admin/custom-background.php:90
+msgid "To use a background image, simply upload it or choose an image that has already been uploaded to your Media Library by clicking the &#8220;Choose Image&#8221; button. You can display a single instance of your image, or tile it to fill the screen. You can have your background fixed in place, so your site content moves on top of it, or you can have it scroll with your site."
+msgstr "Untuk menggunakan sebuah gambar latar, cukup unggah atau pilih sebuah gambar yang sudah terunggah ke Pustaka Media sebelumnya dengan tombol &#8220;Pilih Gambar&#8221;. Anda dapat menampilkan gambar tadi sekali saja, atau menampilkannya berurutan untuk memenuhi layar. Anda juga dapat memposisikan latar pada posisi permanen, jadi ketika konten situs Anda dapat bergerak di atasnya, atau juga dapat membuatnya ikut tergulung ketika menjelajah ke bawah."
 
 #: wp-admin/edit-form-advanced.php:441
 msgid "Several boxes on this screen contain settings for how your content will be published, including:"
@@ -4768,10 +4768,6 @@ msgstr "Jika Anda tahu apa yang Anda cari, Laman Pencarian memiliki opsi untuk m
 msgid "You can also browse a user&#8217;s favorite plugins, by using the Favorites link above the plugins list and entering their WordPress.org username."
 msgstr "Anda juga bisa menelusuri plugin favorit pengguna, dengan menggunakan tautan Favorit di atas daftar plugin dan mengetikkan nama pengguna WordPress.org mereka."
 
-#: wp-admin/plugin-install.php:93
-msgid "If you want to install a plugin that you&#8217;ve downloaded elsewhere, click the Upload Plugin button above the plugins list. You will be prompted to upload the .zip package, and once uploaded, you can activate the new plugin."
-msgstr "Jika Anda ingin menginstal plugin yang Anda unduh di tempat lain, klik tombol Unggah Plugin di atas daftar plugin. Anda akan diminta untuk mengunggah paket .zip, kemudian sesudah terunggah, Anda bisa mengaktifkan plugin baru itu."
-
 #: wp-admin/includes/dashboard.php:1584 wp-admin/includes/dashboard.php:1587
 msgid "Edit your front page"
 msgstr "Edit laman depan Anda"
@@ -4779,6 +4775,10 @@ msgstr "Edit laman depan Anda"
 #: wp-admin/setup-config.php:381
 msgid "After you&#8217;ve done that, click &#8220;Run the installation.&#8221;"
 msgstr "Setelah Anda menyelesaikannya, klik &#8220;Jalankan Instalasi.&#8221;"
+
+#: wp-admin/plugin-install.php:93
+msgid "If you want to install a plugin that you&#8217;ve downloaded elsewhere, click the Upload Plugin button above the plugins list. You will be prompted to upload the .zip package, and once uploaded, you can activate the new plugin."
+msgstr "Jika Anda ingin memasang plugin yang Anda unduh di tempat lain, klik tombol Unggah Plugin di atas daftar plugin. Anda akan diminta untuk mengunggah paket .zip, kemudian sesudah terunggah, Anda bisa mengaktifkan plugin baru itu."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:112
 msgctxt "Plugin Installer"
@@ -4923,17 +4923,17 @@ msgstr "Terinstal"
 msgid "This theme is already installed and is up to date"
 msgstr "Tema ini sudah terinstal dan sudah terbaru"
 
-#: wp-admin/theme-install.php:114
-msgid "Previewing and Installing"
-msgstr "Mempratinjau dan Menginstal"
-
 #: wp-admin/themes.php:111
 msgid "Previewing and Customizing"
 msgstr "Mempratinjai dan Menyesuaikan"
 
+#: wp-admin/theme-install.php:114
+msgid "Previewing and Installing"
+msgstr "Mempratinjau dan Memasang"
+
 #: wp-admin/theme-install.php:109
 msgid "Once you have generated a list of themes, you can preview and install any of them. Click on the thumbnail of the theme you&#8217;re interested in previewing. It will open up in a full-screen Preview page to give you a better idea of how that theme will look."
-msgstr "Ketika daftar tema telah berhasil dibuat, Anda dapat mempratinjau dan menginstal mereka. Klik pada gambar mini dari tema yang ingin Anda pratinjau. Maka sebuah halaman Pratinjau satu layar penuh akan memberikan gambaran bagaimana tema tadi akan terlihat."
+msgstr "Ketika daftar tema telah berhasil dibuat, Anda dapat mempratinjau dan memasang mereka. Klik pada gambar mini dari tema yang ingin Anda pratinjau. Maka sebuah halaman Pratinjau satu layar penuh akan memberikan gambaran bagaimana tema tadi akan terlihat."
 
 #: wp-admin/includes/media.php:2669
 msgid "You are using the browser&#8217;s built-in file uploader. The WordPress uploader includes multiple file selection and drag and drop capability. <a href=\"#\">Switch to the multi-file uploader</a>."
@@ -4963,13 +4963,13 @@ msgstr "Anda dapat memilih gambar tajuk bawaan tema, atau gunakan milik Anda sen
 msgid "Some themes come with additional header images bundled. If you see multiple images displayed, select the one you&#8217;d like and click the &#8220;Save Changes&#8221; button."
 msgstr "Beberapa tema datang bersama beberapa gambar tajuk dipaket di dalamnya. Jika Anda melihat beberapa gambar ditampilkan, pilih salah satu yang Anda sukai dan klik tombol &#8220;Simpan Perubahan&#8221;."
 
-#: wp-admin/custom-header.php:116
-msgid "For most themes, the header text is your Site Title and Tagline, as defined in the <a href=\"%1$s\">General Settings</a> section."
-msgstr "Untuk sebagian besar tema, teks tajuk biasanya Judul Situs dan Slogan, yang didefinisikan di bagian <a href=\"%1$s\">Pengaturan Umum</a>."
-
 #: wp-admin/custom-header.php:108
 msgid "If your theme has more than one default header image, or you have uploaded more than one custom header image, you have the option of having WordPress display a randomly different image on each page of your site. Click the &#8220;Random&#8221; radio button next to the Uploaded Images or Default Images section to enable this feature."
 msgstr "Jika tema Anda datang bersama beberapa gambar tajuk dipaket di dalamnya, atau Anda telah mengunggah lebih dari satu gambar tajuk, Anda memiliki opsi agar WordPress menampilkan gambar yang berbeda di setiap halamannya. Klik tombol radio &#8220;Acak&#8221; di sebelah bagian Gambar Terunggah atau Gambar Bawaan untuk mengaktifkan fitur ini."
+
+#: wp-admin/custom-header.php:116
+msgid "For most themes, the header text is your Site Title and Tagline, as defined in the <a href=\"%1$s\">General Settings</a> section."
+msgstr "Untuk sebagian besar tema, teks tajuk biasanya Judul Situs dan Slogan, yang didefinisikan di bagian <a href=\"%1$s\">Pengaturan Umum</a>."
 
 #: wp-admin/install.php:256 wp-admin/install.php:269
 msgid "Configuration Error"
@@ -5153,7 +5153,7 @@ msgstr "Telah berhasil memasang tema induk, <strong>%1$s %2$s</strong>."
 #. translators: %s: theme name
 #: wp-admin/includes/class-theme-upgrader.php:81
 msgid "<strong>The parent theme could not be found.</strong> You will need to install the parent theme, %s, before you can use this child theme."
-msgstr "<strong>Tema induk tidak ditemukan.</strong> Anda harus menginstal tema induk, %s, sebelum bisa mengaktifkan tema turunan ini."
+msgstr "<strong>Tema induk tidak ditemukan.</strong> Anda harus memasang tema induk, %s, sebelum bisa mengaktifkan tema turunan ini."
 
 #: wp-admin/custom-header.php:114 wp-admin/custom-header.php:653
 #: wp-admin/custom-header.php:658
@@ -5802,13 +5802,13 @@ msgstr "Anda juga dapat melakukan tindakan yang sama, termasuk mempersempit daft
 msgid "Managing pages is very similar to managing posts, and the screens can be customized in the same way."
 msgstr "Pengelolaan laman mirip dengan pengelolaan pos, dan layar-layarnya dapat disesuaikan dengan cara yang sama."
 
-#: wp-admin/edit-comments.php:169
-msgid "You can manage comments made on your site similar to the way you manage posts and other content. This screen is customizable in the same ways as other management screens, and you can act on comments using the on-hover action links or the Bulk Actions."
-msgstr "Anda bisa mengelola komentar pada situs Anda dengan cara yang mirip dengan cara mengelola pos dan konten lainnya. Layar ini bisa dikustomisasi seperti layar pengelolaan lainnya, dan Anda bisa menerapkan tindakan pada komentar menggunakan tautan tindakan yang muncul pada saat kursor berada di atas komentar, juga melalui Tindakan Massal."
-
 #: wp-admin/edit-form-advanced.php:396 wp-admin/edit.php:237
 msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
 msgstr "Laman mirip dengan Pos dalam hal keberadaan sebuah judul, teks isi, dan metadata terkait, namun berbeda dalam hal Laman bukan bagian dari suatu aliran blog kronologis, Laman lebih menyerupai pos permanen. Laman tidak dikategorikan atau ditag, namun bisa memiliki hirarki. Anda dapat menyarangkan laman di bawah laman lain dengan menjadikan salah satunya sebagai Induk; sehingga menghasilkan sekelompok laman."
+
+#: wp-admin/edit-comments.php:169
+msgid "You can manage comments made on your site similar to the way you manage posts and other content. This screen is customizable in the same ways as other management screens, and you can act on comments using the on-hover action links or the Bulk Actions."
+msgstr "Anda bisa mengelola komentar pada situs Anda dengan cara yang mirip dengan cara mengelola pos dan konten lainnya. Layar ini bisa dikustomisasi seperti layar pengelolaan lainnya, dan Anda bisa menerapkan tindakan pada komentar menggunakan tautan tindakan yang muncul pada saat kursor berada di atas komentar, juga melalui Tindakan Massal."
 
 #: wp-admin/upload.php:207
 msgid "If a media file has not been attached to any content, you will see that in the Uploaded To column, and can click on Attach to launch a small popup that will allow you to search for existing content and attach the file."

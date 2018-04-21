@@ -8,9 +8,9 @@
  */
 
 ?>
-<div class="buttons buttons-on-right">
-	<span class="status-text alignleft">
+<span class="status-text">
 		<?php esc_html_e( 'Publishing changes will regenerate any necessary assets, this may take a few seconds to run.', 'wphb' ); ?>
 	</span>
-	<input type="submit" class="button disabled" name="submit" value="<?php esc_attr_e( 'Publish Changes', 'wphb' ); ?>"/>
+<div class="sui-actions-right">
+	<input type="submit" class="sui-button sui-button-primary disabled" name="submit" value="<?php esc_attr_e( 'Publish Changes', 'wphb' ); ?>"/>
 </div>

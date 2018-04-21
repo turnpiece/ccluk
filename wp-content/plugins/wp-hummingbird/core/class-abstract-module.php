@@ -22,12 +22,20 @@ abstract class WP_Hummingbird_Module {
 	protected $name = '';
 
 	/**
+	 * Logger
+	 *
 	 * @var WP_Hummingbird_Logger instance.
 	 *
 	 * @since 1.7.2
 	 */
 	public $logger;
 
+	/**
+	 * WP_Hummingbird_Module constructor.
+	 *
+	 * @param string $slug  Module slug.
+	 * @param string $name  Module name.
+	 */
 	public function __construct( $slug, $name ) {
 		$this->slug = $slug;
 		$this->name = $name;
@@ -52,6 +60,54 @@ abstract class WP_Hummingbird_Module {
 		 * @param boolean $active if the module is active or not
 		 */
 		return apply_filters( "wp_hummingbird_is_active_module_$slug", true );
+	}
+
+	/**
+	 * Checks if user is on the page of a specific module.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @param bool $dashboard  If set, function will return true when user is either on module page
+	 *                         or on dashboard page.
+	 *
+	 * @return bool
+	 */
+	public function is_on_page( $dashboard = false ) {
+		$slug = $this->slug;
+		$page = get_current_screen()->id;
+
+		/**
+		'toplevel_page_wphb',
+		'hummingbird_page_wphb-performance',
+		'hummingbird_page_wphb-minification',
+		'hummingbird_page_wphb-caching',
+		'hummingbird_page_wphb-gzip',
+		'hummingbird_page_wphb-uptime',
+		'hummingbird-pro_page_wphb-advanced',
+		'toplevel_page_wphb-network',
+		'hummingbird_page_wphb-performance-network',
+		'hummingbird_page_wphb-minification-network',
+		'hummingbird_page_wphb-caching-network',
+		'hummingbird_page_wphb-gzip-network',
+		'hummingbird_page_wphb-uptime-network',
+		 */
+
+		// Asset optimization module has a different slug rather than the page id.
+		if ( 'minify' === $slug ) {
+			$slug = 'minification';
+		}
+
+		// Check if on dashboard page.
+		if ( $dashboard && preg_match( '/^(toplevel_page_wphb)/', $page ) ) {
+			return true;
+		}
+
+		// Check if on module page.
+		if ( preg_match( "/(wphb-{$slug})/", $page ) ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
@@ -80,7 +136,7 @@ abstract class WP_Hummingbird_Module {
 	public abstract function init();
 
 	/**
-	 * Execute the module actions. It must be defined in subclasses.
+	 * Execute the module actions. It must be defined in subclasses. Executed when module is active.
 	 */
 	public abstract function run();
 
@@ -104,12 +160,12 @@ abstract class WP_Hummingbird_Module {
 	}
 
 	/**
-	* Update the settings for the module.
-	*
-	* @since  1.8
-	*
-	* @param array $options List of settings.
-	*/
+	 * Update the settings for the module.
+	 *
+	 * @since  1.8
+	 *
+	 * @param array $options List of settings.
+	 */
 	public function update_options( $options ) {
 		WP_Hummingbird_Settings::update_settings( $options, $this->get_slug() );
 	}

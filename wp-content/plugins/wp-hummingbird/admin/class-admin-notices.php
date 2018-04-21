@@ -94,7 +94,23 @@ class WP_Hummingbird_Admin_Notices {
 	 * @used-by deactivated_plugin action
 	 */
 	public function plugin_changed() {
-		update_site_option( 'wphb-notice-cache-cleaned-show', 'yes' );
+		$detection = WP_Hummingbird_Settings::get_setting( 'detection', 'page_cache' );
+
+		// Do nothing selected in settings.
+		if ( 'none' === $detection ) {
+			return;
+		}
+
+		// Show notice.
+		if ( 'manual' === $detection ) {
+			update_site_option( 'wphb-notice-cache-cleaned-show', 'yes' );
+			return;
+		}
+
+		// Auto clear cache, don't show any notice.
+		if ( 'auto' === $detection ) {
+			WP_Hummingbird::flush_cache();
+		}
 	}
 
 	/**
@@ -109,22 +125,7 @@ class WP_Hummingbird_Admin_Notices {
 	 */
 	private function show_notice( $id = '', $message = '', $additional = false, $only_hb_pages = false ) {
 		// Only run on HB pages.
-		$hb_pages = array(
-			'toplevel_page_wphb',
-			'hummingbird_page_wphb-performance',
-			'hummingbird_page_wphb-minification',
-			'hummingbird_page_wphb-caching',
-			'hummingbird_page_wphb-gzip',
-			'hummingbird_page_wphb-uptime',
-			'toplevel_page_wphb-network',
-			'hummingbird_page_wphb-performance-network',
-			'hummingbird_page_wphb-minification-network',
-			'hummingbird_page_wphb-caching-network',
-			'hummingbird_page_wphb-gzip-network',
-			'hummingbird_page_wphb-uptime-network',
-		);
-
-		if ( $only_hb_pages && ! in_array( get_current_screen()->id, $hb_pages, true ) ) {
+		if ( $only_hb_pages && ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
 			return;
 		}
 
@@ -160,7 +161,7 @@ class WP_Hummingbird_Admin_Notices {
 	 * Check if a notice has been dismissed by the current user.
 	 *
 	 * Will accept: 'user' for user options, 'option' for site wide options and
-	 * 				'site' for sub site options.
+	 *              'site' for sub site options.
 	 *
 	 * @since  1.7.0 changed to private
 	 * @access private
@@ -171,12 +172,11 @@ class WP_Hummingbird_Admin_Notices {
 	private function is_dismissed( $notice, $mode = 'user' ) {
 		if ( 'user' === $mode ) {
 			return get_user_meta( get_current_user_id(), 'wphb-' . $notice . '-dismissed' );
-		} elseif ( 'option' === $mode ) {
+		}
+
+		if ( 'option' === $mode ) {
 			return 'yes' !== get_option( 'wphb-notice-' . $notice . '-show' );
-			//return 'yes' !== get_site_option( 'wphb-notice-' . $notice . '-show' );
-		} //elseif ( 'site' === $mode ) {
-		//	return 'yes' !== get_option( 'wphb-notice-' . $notice . '-show' );
-		//}
+		}
 	}
 
 	/**
@@ -217,11 +217,12 @@ class WP_Hummingbird_Admin_Notices {
 	 * @param string $message      The notice text.
 	 * @param string $class        Class for the notice wrapper.
 	 * @param bool   $auto_hide    Auto hide notice.
-	 * @param bool   $dismissable  If is dissmisable or not.
+	 * @param bool   $can_dismiss  If is dissmisable or not.
+	 * @param bool   $notice_top   Show notice on top.
 	 */
-	public function show( $id, $message, $class = 'error', $auto_hide = false, $dismissable = false ) {
+	public function show( $id, $message, $class = 'error', $auto_hide = false, $can_dismiss = false, $notice_top = true ) {
 		// Is already dismissed ?
-		if ( $dismissable && $this->is_dismissed( $id, 'option' ) ) {
+		if ( $can_dismiss && $this->is_dismissed( $id, 'option' ) ) {
 			return;
 		}
 
@@ -229,32 +230,29 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		if ( in_array( $id, self::$displayed_notices ) ) {
+		if ( in_array( $id, self::$displayed_notices, true ) ) {
 			return;
 		}
 
 		self::$displayed_notices[] = $id;
 
 		?>
-		<div class="wphb-notice wphb-notice-<?php echo $class; ?> can-close" <?php if ( $dismissable ) : ?>
+		<div class="sui-notice<?php echo $notice_top ? ' sui-notice-top ' : ' '; ?>sui-notice-<?php echo esc_attr( $class ); ?>" <?php if ( $can_dismiss ) : ?>
 			id="wphb-dismissable"
 			data-id="<?php echo esc_attr( $id ); ?>"<?php endif; ?>>
 
 			<p><?php echo $message; ?></p>
 
-			<span class="close">
-				<?php esc_html_e( 'Dismiss', 'wphb' ); ?>
+			<span class="sui-notice-dismiss">
+				<a href="#"><?php esc_html_e( 'Dismiss', 'wphb' ); ?></a>
 			</span>
 		</div>
 
-		<?php if ( $auto_hide ) : ?>
-			<script type="text/javascript">
-				jQuery('.wphb-notice:not(.notice)').delay(3000).slideUp('slow');
-			</script>
-		<?php endif;
+		<?php
 	}
 
-	/***************************
+	/**
+	 * *************************
 	 * NOTICES
 	 ***************************/
 
@@ -335,7 +333,7 @@ class WP_Hummingbird_Admin_Notices {
 		$this->show_notice(
 			'free-rated',
 			__( "We've spent countless hours developing Hummingbird and making it free for you to use. We would really appreciate it if you dropped us a quick rating!", 'wphb' ),
-			'<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="button" target="_blank">' . __( 'Rate Hummingbird', 'wphb' ) . '</a>'
+			'<a href="https://wordpress.org/support/plugin/hummingbird-performance/reviews/" class="sui-button sui-button-primary" target="_blank">' . __( 'Rate Hummingbird', 'wphb' ) . '</a>'
 		);
 	}
 
@@ -358,13 +356,14 @@ class WP_Hummingbird_Admin_Notices {
 		$caching = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$caching_active = $caching->is_active();
 
-		// If both modules disabled - don't show notice
+		// If both modules disabled - don't show notice.
 		if ( ! $minify_active && ! $caching_active ) {
 			return;
 		}
 
+		$sub = '';
 		if ( $minify_active ) {
-			// Clear cache button link
+			// Clear cache button link.
 			$clear_cache_url = add_query_arg(
 				array(
 					'clear-cache' => 'true',
@@ -373,29 +372,38 @@ class WP_Hummingbird_Admin_Notices {
 				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 
-			$text = __( "We've noticed you've made changes to your website and have Hummingbird's Asset Optimization feature active. You might want to clear cache to avoid any issues.", 'wphb' );
-
+			$sub = __( 'Asset Optimization feature', 'wphb' );
 			if ( $caching_active ) {
-				$text = __( "We've noticed you've made changes to your website and have Hummingbird's Asset Optimization and Page Caching features active. You might want to clear cache to avoid any issues.", 'wphb' );
+				$sub = __( 'Asset Optimization and Page Caching features', 'wphb' );
 			}
 		} elseif ( $caching_active ) {
-			// Clear cache button link
-			$clear_cache_url = add_query_arg(
+			// Clear cache button link.
+			$clear_cache_url = wp_nonce_url( add_query_arg(
 				array(
 					'type' => 'pc-purge',
 					'run'  => 'true',
 				),
 				WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=main'
-			);
-			$clear_cache_url = wp_nonce_url( $clear_cache_url, 'wphb-run-caching' );
+			), 'wphb-run-caching' );
 
-			$text = __( "We've noticed you've made changes to your website and have Hummingbird's Page Caching feature active. You might want to clear cache to avoid any issues.", 'wphb' );
+			$sub = __( 'Page Caching feature', 'wphb' );
+		}
+
+		$text = sprintf(
+			/* translators: %s - active features */
+			__( "We've noticed you've made changes to your website and have Hummingbird's %s active. You might want to clear cache to avoid any issues.", 'wphb' ),
+			$sub
+		);
+
+		// If, for some reason, we don't have clear cache url - do nothing.
+		if ( ! isset( $clear_cache_url ) ) {
+			return;
 		}
 
 		$this->show_notice(
 			'cache-cleaned',
 			$text,
-			'<a href="' . esc_url( $clear_cache_url ) . '" class="button">' . __( 'Clear Cache', 'wphb' ) . '</a>'
+			'<a href="' . esc_url( $clear_cache_url ) . '" class="sui-button sui-button-primary button">' . __( 'Clear Cache', 'wphb' ) . '</a>'
 		);
 	}
 

@@ -13,23 +13,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	protected $status;
 
 	public function run() {}
-
-	/**
-	 * Initializes the module. Always executed even if the module is deactivated.
-	 */
-	public function init() {
-		// Only run tests in admin.
-		if ( ! is_admin() ) {
-			return;
-		}
-
-		// Fetch status of selected module.
-		$this->status = $this->get_analysis_data();
-		if ( false === $this->status ) {
-			// Force only when we don't have any data yet.
-			$this->status = $this->get_analysis_data( true );
-		}
-	}
+	public function init() {}
 
 	/**
 	 * Return the analized data for the module
@@ -45,24 +29,24 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 		}
 
 		$transient = 'wphb-' . $this->transient_slug . '-data';
-		$results = get_site_option( $transient );
 
 		if ( $force ) {
-
 			$this->clear_cache();
 
-
 			if ( $check_api ) {
-				$results = $this->analize_data( true );
+				$this->status = $this->analize_data( true );
 			} else {
-				$results = $this->analize_data();
+				$this->status = $this->analize_data();
 			}
 
-			update_site_option( $transient, $results );
+			update_site_option( $transient, $this->status );
 
+			return $this->status;
 		}
 
-		return $results;
+		$this->status = get_site_option( $transient );
+
+		return $this->status;
 	}
 
 	/**

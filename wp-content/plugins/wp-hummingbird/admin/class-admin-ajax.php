@@ -11,28 +11,66 @@ class WP_Hummingbird_Admin_AJAX {
 	 * WP_Hummingbird_Admin_AJAX constructor.
 	 */
 	public function __construct() {
+		/**
+		 * DASHBOARD AJAX ACTIONS
+		 */
+
+		// Activate network minification.
+		add_action( 'wp_ajax_wphb_dash_toggle_network_minification', array( $this, 'dash_toggle_network_minification' ) );
+		// Skip quick setup.
+		add_action( 'wp_ajax_wphb_dash_skip_setup', array( $this, 'dashboard_skip_setup' ) );
+		// Dismiss notice.
+		add_action( 'wp_ajax_wphb_notice_dismiss', array( $this, 'notice_dismiss' ) );
+		// Dismiss notice.
+		add_action( 'wp_ajax_wphb_cf_notice_dismiss', array( $this, 'cf_notice_dismiss' ) );
+
+		/**
+		 * PERFORMANCE TEST AJAX ACTIONS
+		 */
+
 		// Run performance test.
 		add_action( 'wp_ajax_wphb_performance_run_test', array( $this, 'performance_run_test' ) );
 		// Save performance settings.
 		add_action( 'wp_ajax_wphb_performance_save_settings', array( $this, 'performance_save_settings' ) );
+
+		/**
+		 * CACHING MODULE AJAX ACTIONS
+		 */
+
+		/* PAGE CACHING */
+
+		// Toggle ability for subsite admins to turn off page caching.
+		add_action( 'wp_ajax_wphb_caching_toggle_admin_subsite_page_caching', array( $this, 'caching_toggle_admin_subsite_page_caching' ) );
+
+		/* BROWSER CACHING */
+
 		// Set expiration for browser caching.
 		add_action( 'wp_ajax_wphb_caching_set_expiration', array( $this, 'caching_set_expiration' ) );
 		// Set server type.
 		add_action( 'wp_ajax_wphb_caching_set_server_type', array( $this, 'caching_set_server_type' ) );
 		// Reload snippet.
 		add_action( 'wp_ajax_wphb_caching_reload_snippet', array( $this, 'caching_reload_snippet' ) );
-		// Toggle ability for subsite admins to turn off page caching.
-		add_action( 'wp_ajax_wphb_caching_toggle_admin_subsite_page_caching', array( $this, 'caching_toggle_admin_subsite_page_caching' ) );
 		// Cloudflare connect.
 		add_action( 'wp_ajax_wphb_cloudflare_connect', array( $this, 'cloudflare_connect' ) );
 		// Cloudflare expirtion cache.
 		add_action( 'wp_ajax_wphb_cloudflare_set_expiry', array( $this, 'cloudflare_set_expiry' ) );
 		// Cloudflare purge cache.
 		add_action( 'wp_ajax_wphb_cloudflare_purge_cache', array( $this, 'cloudflare_purge_cache' ) );
-		// Activate network minification.
-		add_action( 'wp_ajax_wphb_dash_toggle_network_minification', array( $this, 'dash_toggle_network_minification' ) );
-		// Skip quick setup.
-		add_action( 'wp_ajax_wphb_dash_skip_setup', array( $this, 'dashboard_skip_setup' ) );
+
+		/* RSS CACHING */
+
+		// Save settings for rss caching module.
+		add_action( 'wp_ajax_wphb_caching_save_settings', array( $this, 'rss_caching_save_settings' ) );
+
+		/* CACHE SETTINGS */
+
+		// Parse settings form.
+		add_action( 'wp_ajax_wphb_caching_save_other_settings', array( $this, 'save_caching_other_settings' ) );
+
+		/**
+		 * ASSET OPTIMIZATION AJAX ACTIONS
+		 */
+
 		// Toggle CDN.
 		add_action( 'wp_ajax_wphb_minification_toggle_cdn', array( $this, 'minification_toggle_cdn' ) );
 		// Toggle logs.
@@ -47,20 +85,19 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_minification_check_step', array( $this, 'minification_check_step' ) );
 		// Cancel scan.
 		add_action( 'wp_ajax_wphb_minification_cancel_scan', array( $this, 'minification_cancel_scan' ) );
-		// Delete scan
+		// Delete scan.
 		add_action( 'wp_ajax_wphb_minification_finish_scan', array( $this, 'minification_finish_scan' ) );
-		// Save critical css file
+		// Save critical css file.
 		add_action( 'wp_ajax_wphb_minification_save_critical_css', array( $this, 'minification_save_critical_css' ) );
-		// Dismiss notice.
-		add_action( 'wp_ajax_wphb_notice_dismiss', array( $this, 'notice_dismiss' ) );
-		// Dismiss notice.
-		add_action( 'wp_ajax_wphb_cf_notice_dismiss', array( $this, 'cf_notice_dismiss' ) );
-		// Clean database
+
+		/**
+		 * ADVANCED TOOLS AJAX ACTIONS
+		 */
+
+		// Clean database.
 		add_action( 'wp_ajax_wphb_advanced_db_delete_data', array( $this, 'advanced_db_delete_data' ) );
 		// Save settings in advanced tools module.
 		add_action( 'wp_ajax_wphb_advanced_save_settings', array( $this, 'advanced_save_settings' ) );
-		// Save settings for rss caching module.
-		add_action( 'wp_ajax_wphb_caching_save_settings', array( $this, 'rss_caching_save_settings' ) );
 	}
 
 	/**
@@ -140,12 +177,17 @@ class WP_Hummingbird_Admin_AJAX {
 		wp_send_json_success();
 	}
 
+	/**
+	 * Toggle Uptime.
+	 *
+	 * @param string $data  Status.
+	 */
 	public function uptime_toggle_uptime( $data ) {
 		if ( ! isset( $data['value'] ) ) {
 			die();
 		}
 
-		$value = 'false' == $data['value'] ? false : true;
+		$value = 'false' === $data['value'] ? false : true;
 
 		$uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
 		$options = $uptime->get_options();
@@ -440,7 +482,7 @@ class WP_Hummingbird_Admin_AJAX {
 		if ( 'basic' === $type ) {
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
 			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
-			$minify_module->reset();
+			$minify_module->reset( false );
 		}
 
 		wp_send_json_success();
@@ -751,7 +793,10 @@ class WP_Hummingbird_Admin_AJAX {
 		if ( 'advanced-general-settings' === $form ) {
 			$options['query_string'] = rest_sanitize_boolean( $data['query_strings'] );
 			$options['emoji']        = rest_sanitize_boolean( $data['emojis'] );
-			$options['prefetch']     = preg_split( '/[\r\n\t ]+/', $data['url_strings'] );
+			$options['prefetch']     = array();
+			if ( isset( $data['url_strings'] ) && ! empty( $data['url_strings'] ) ) {
+				$options['prefetch'] = preg_split( '/[\r\n\t ]+/', $data['url_strings'] );
+			}
 		}
 
 		// Database cleanup settings tab
@@ -797,6 +842,27 @@ class WP_Hummingbird_Admin_AJAX {
 		$options['duration'] = isset( $data['rss-expiry-time'] ) ? absint( $data['rss-expiry-time'] ) : 0;
 
 		$rss_module->update_options( $options );
+		wp_send_json_success( array( 'success' => true ) );
+	}
+
+	/**
+	 * Parse save cache settings form.
+	 *
+	 * @since 1.8.1
+	 */
+	public function save_caching_other_settings() {
+		$this->check_permission();
+
+		parse_str( wp_unslash( $_POST['data'] ), $data );
+
+		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
+		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$options = $pc_module->get_options();
+
+		$options['control'] = ( isset( $data['cc_button'] ) && 'on' === $data['cc_button'] ) ? true : false;
+		$options['detection'] = isset( $data['detection'] ) ? sanitize_text_field( $data['detection'] ) : 'manual';
+
+		$pc_module->update_options( $options );
 		wp_send_json_success( array( 'success' => true ) );
 	}
 

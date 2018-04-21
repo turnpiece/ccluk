@@ -8,12 +8,9 @@
  */
 
 ?>
-<div class="content">
-	<p><?php esc_html_e( 'Monitor your website and get notified if/when it’s inaccessible. We’ll also watch your server response time.', 'wphb' ); ?></p>
-</div>
+<p class="sui-margin-bottom"><?php esc_html_e( 'Monitor your website and get notified if/when it’s inaccessible. We’ll also watch your server response time.', 'wphb' ); ?></p>
 
-<div class="buttons">
-	<a class="button button-cta-green" href="<?php echo esc_url( $enable_url ); ?>" id="enable-uptime">
-		<?php esc_html_e( 'Activate', 'wphb' ); ?>
-	</a>
-</div>
+
+<a class="sui-button sui-button-primary button-cta-green" href="<?php echo esc_url( $enable_url ); ?>" id="enable-uptime">
+	<?php esc_html_e( 'Activate', 'wphb' ); ?>
+</a>

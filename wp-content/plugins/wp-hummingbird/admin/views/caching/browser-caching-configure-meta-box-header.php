@@ -9,9 +9,9 @@
  */
 
 ?>
-<h3><?php echo esc_html( $title ); ?></h3>
+<h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( ! $cf_active ) : ?>
-	<div class="buttons buttons-group">
+	<div class="sui-actions-right">
 		<p class="wphb-label-notice-inline hide-to-mobile">
 			<?php esc_html_e( 'Using Cloudflare?', 'wphb' ); ?>
 			<a href="#" id="connect-cloudflare-link">

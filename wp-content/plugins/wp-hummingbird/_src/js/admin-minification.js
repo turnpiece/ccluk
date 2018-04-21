@@ -37,7 +37,10 @@ import Scanner from './minification/Scanner';
             if ( this.$checkFilesButton.length ) {
                 this.$checkFilesButton.click( function( e ) {
                     e.preventDefault();
-					window.WDP.showOverlay("#check-files-modal", { class: 'wphb-modal small wphb-progress-modal no-close' } );
+                    let el = document.getElementById('check-files-modal');
+                    let dialog = new A11yDialog(el);
+                    dialog.show();
+
                     $(this).attr('disabled', true);
                     self.updateProgressBar( self.scanner.getProgress() );
                     self.scanner.scan();
@@ -71,16 +74,14 @@ import Scanner from './minification/Scanner';
 
 			// Enable/disable bulk update button.
 			$(':input.wphb-minification-file-selector, :input.wphb-minification-bulk-file-selector').on('change', function() {
-				$(this).toggleClass('changed');
+                $(this).toggleClass('changed');
 				let changed = $('.wphb-minification-files').find('input.changed');
 				let bulkUpdateButton = $('#bulk-update');
 
 				if ( changed.length === 0 ) {
-					bulkUpdateButton.removeClass('button-grey');
 					bulkUpdateButton.addClass('button-notice disabled');
 				} else {
 					bulkUpdateButton.removeClass('button-notice disabled');
-					bulkUpdateButton.addClass('button-grey');
 				}
 			});
 
@@ -88,14 +89,19 @@ import Scanner from './minification/Scanner';
 			let switchButtons = $('.box-title-basic > a.wphb-switch-button, #wphb-dismissable a.wphb-switch-button');
 			switchButtons.on('click', function(e) {
                 e.preventDefault();
-				window.WDP.showOverlay("#wphb-advanced-minification-modal" );
-				Fetcher.minification.toggleView( 'advanced' );
+
+                let el = document.getElementById('wphb-advanced-minification-modal');
+                let dialog = new A11yDialog(el);
+                dialog.show();
             });
 
             // Switch back to basic mode
 			$('.box-title-advanced > a').on('click', function(e) {
 				e.preventDefault();
-				window.WDP.showOverlay("#wphb-basic-minification-modal" );
+
+                let el = document.getElementById('wphb-basic-minification-modal');
+                let dialog = new A11yDialog(el);
+                dialog.show();
 			});
 
             // Filter action button on Asset Optimization page
@@ -133,14 +139,14 @@ import Scanner from './minification/Scanner';
 				// Update CDN status
                 Fetcher.minification.toggleCDN( cdn_value )
                     .then( () => {
-						self.showNotice();
+						WPHB_Admin.notices.show( 'wphb-notice-minification-advanced-settings-updated', true);
                     });
             });
 
 			$("input[type=checkbox][name=debug_log]").change( function() {
 				Fetcher.minification.toggleLog( $(this).is(':checked') )
 					.then( () => {
-						self.showNotice();
+						WPHB_Admin.notices.show( 'wphb-notice-minification-advanced-settings-updated', true);
 					});
 			});
 
@@ -157,9 +163,9 @@ import Scanner from './minification/Scanner';
 					.then( ( response ) => {
 						spinner.removeClass('visible');
 						if ( 'undefined' !== typeof response && response.success ) {
-							self.showNotice( 'success', response.message );
+							WPHB_Admin.notices.show( 'wphb-notice-minification-advanced-settings-updated', true, 'success', response.message  );
 						} else {
-							self.showNotice( 'error', response.message );
+							WPHB_Admin.notices.show( 'wphb-notice-minification-advanced-settings-updated', true, 'error', response.message  );
 						}
 
 					});
@@ -274,13 +280,13 @@ import Scanner from './minification/Scanner';
                 progress = 100;
             }
             // Update progress bar
-            $('.wphb-scan-progress .wphb-scan-progress-text span').text( progress + '%' );
-            $('.wphb-scan-progress .wphb-scan-progress-bar span').width( progress + '%' );
+            $('.sui-progress-block .sui-progress-text span').text( progress + '%' );
+            $('.sui-progress-block .sui-progress-bar span').width( progress + '%' );
             if ( progress >= 90 ) {
-                $('.wphb-progress-state .wphb-progress-state-text').text('Finalizing...');
+                $('.sui-progress-state .sui-progress-state-text').text('Finalizing...');
             }
             if ( cancel ) {
-                $('.wphb-progress-state .wphb-progress-state-text').text('Cancelling...');
+                $('.sui-progress-state .sui-progress-state-text').text('Cancelling...');
             }
         },
 
@@ -288,36 +294,12 @@ import Scanner from './minification/Scanner';
 		 * Switch from advanced to basic view.
 		 * Called from switch view modal.
 		 */
-		switchView: function() {
+		switchView: function( mode ) {
 			Fetcher.minification
-				.toggleView( 'basic' )
+				.toggleView( mode )
 				.then( () => {
 					window.location.href = getLink( 'minification' );
 				});
-		},
-
-		/**
-		 * Notice on settings update.
-		 *
-		 * @param type
-		 * @param message
-		 */
-		showNotice: function ( type = 'success', message = wphb.strings.successUpdate ) {
-			const notice = $('#wphb-notice-minification-advanced-settings-updated');
-
-			// Remove set classes if doing multiple calls per page load.
-			notice.removeClass('wphb-notice-error');
-			notice.removeClass('wphb-notice-success');
-
-			window.scrollTo( 0, 0 );
-			notice.addClass('wphb-notice-' + type);
-
-			notice.find('p').html(message);
-
-			notice.slideDown();
-			setTimeout( function() {
-				notice.slideUp();
-			}, 5000 );
 		},
 
     }; // End WPHB_Admin.minification

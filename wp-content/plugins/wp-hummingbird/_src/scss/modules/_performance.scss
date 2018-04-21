@@ -4,10 +4,8 @@
 
 @import "../common/mixins";
 
-.wpmud .performance-report-table {
-    text-align: left;
-    margin-top: 30px;
-    overflow: hidden;
+.wpmud .box-performance-welcome.sui-summary {
+    background-image: url("#{$image--path}/graphic-hb-minify-summary@2x.png");
 }
 
 .wpmud .performance-report-table .wpdui-btn {
@@ -19,7 +17,15 @@
 .wpmud .performance-report-table .wpdui-btn:hover {
     color: #ffffff;
 }
-
+.wpmud .sui-dismissed .sui-circle-score svg circle:last-child {
+    stroke: #AAAAAA;
+}
+.wpmud .sui-accordion-item.sui-dismissed {
+    border-left: 2px solid #AAAAAA;
+}
+.wpmud .sui-button.wphb-disabled-test:last-child {
+    margin-right: 10px;
+}
 .wpmud .performance-report-table a,
 .wpmud .performance-report-table a:hover {
     color: #17A8E3;
@@ -63,7 +69,7 @@
     transition: color .3s;
     width: 130px;
 }
-.wpmud .performance-report-table .wphb-performance-report-item-type:first-letter {
+.wpmud .wphb-performance-report-item-type:first-letter {
     text-transform: capitalize;
 }
 
@@ -121,20 +127,13 @@
     padding: 0 !important;
 }
 
-.wpmud .dev-box-performance-report-additional-content {
-    padding: 30px;
-    margin: 0 30px 30px;
-    border-radius: 5px;
-    background-color: #FFFFFF;
-    box-shadow: 0 2px 0 0 #EAEAEA;
-}
-
-.wpmud .dev-box-performance-report-additional-content h4:first-child {
+.wpmud .sui-box-performance-report-additional-content h4:first-child {
     margin-top: 0;
 }
 
-.wpmud .wphb-performance-report-item-additional-content h4,
-.wpmud .wphb-performance-report-item-additional-content h5 {
+.wpmud .sui-box-performance-report-additional-content h4,
+.wpmud .sui-box-performance-report-additional-content h5 {
+    font-family: 'Roboto', sans-serif;
     color: #333333;
     font-size: 13px;
     text-transform: none;
@@ -269,10 +268,12 @@
     border-radius: 4px 0 0 4px;
     border-right: 0;
     background-color: #F8F8F8;
+    margin: 0;
 }
 
 .wpmud .wrap-wphb-performance .add-recipient #wphb-username-search {
     background-color: #F8F8F8;
+    margin: 0;
 }
 
 .wpmud .wrap-wphb-performance .wphb-tag {
@@ -303,8 +304,8 @@
 .wpmud .list-table > tbody > tr > td.wphb-performance-report-item-type.disabled {
     padding-right: 30px;
 }
-.wpmud .performance-report-table .dev-box-performance-report-additional-content.disable-buttons a.wpdui-btn,
-.wpmud .performance-report-table .dev-box-performance-report-additional-content.disable-buttons a.button {
+.wpmud .sui-box-performance-report-additional-content.disable-buttons a.wpdui-btn,
+.wpmud .sui-box-performance-report-additional-content.disable-buttons a.button {
     display: none;
 }
 
@@ -377,8 +378,7 @@
         margin-right: 20px;
     }
 
-    .wpmud .dev-box-performance-report-additional-content {
-        margin: 0 20px 20px;
+    .wpmud .sui-box-performance-report-additional-content {
         padding: 15px 20px;
     }
 }

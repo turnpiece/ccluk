@@ -100,6 +100,19 @@ function Fetcher() {
                 return request( action, { value }, 'POST' );
             },
 
+			/**
+			 * Save settings in cache module.
+			 *
+			 * @since 1.8.1
+			 * @param data
+			 */
+			saveOtherSettings: ( data ) => {
+            	const action = actionPrefix + 'caching_save_other_settings';
+            	return request( action, { data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			}
         },
 
         /**

@@ -8,10 +8,10 @@
  */
 
 ?>
-<h3><?php echo esc_html( $title ); ?></h3>
+<h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
-	<div class="buttons">
-		<a class="button button-content-cta" href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upgrade_button' ); ?>" target="_blank">
+	<div class="sui-actions-right">
+		<a class="sui-button sui-button-primary button-content-cta" href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_uptime_upgrade_button' ); ?>" target="_blank">
 			<?php esc_html_e( 'Upgrade to PRO', 'wphb' ); ?>
 		</a>
 	</div>

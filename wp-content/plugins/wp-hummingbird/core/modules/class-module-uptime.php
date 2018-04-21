@@ -46,12 +46,16 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 	 * Get latest report from server
 	 *
 	 * @since 1.7.1 Removed static property.
+	 * @since 1.8.1 Access changed to private. Added $current_reports param.
 	 *
-	 * @param string $time
+	 * @access private
+	 *
+	 * @param string     $time
+	 * @param bool|array $current_reports
 	 *
 	 * @return array|mixed
 	 */
-	public function refresh_report( $time = 'day' ) {
+	private function refresh_report( $time = 'day', $current_reports = false ) {
 		/* @var WP_Hummingbird_API $api */
 		$api = WP_Hummingbird_Utils::get_api();
 		$results = $api->uptime->check( $time );
@@ -63,7 +67,6 @@ class WP_Hummingbird_Module_Uptime extends WP_Hummingbird_Module {
 			return false;
 		}
 
-		$current_reports = get_site_transient( 'wphb-uptime-last-report' );
 		if ( ! $current_reports ) {
 			$current_reports = array();
 		}

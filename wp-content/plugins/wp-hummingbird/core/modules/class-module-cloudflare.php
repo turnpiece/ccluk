@@ -19,28 +19,20 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 */
 	protected $name = 'Cloudflare';
 
+	/**
+	 * Execute the module actions. Executed when module is active.
+	 */
 	public function run() {}
 
 	/**
 	 * Initializes Cloudflare module
 	 */
-	public function init() {
-		// Only run tests in admin.
-		if ( ! is_admin() ) {
-			return;
-		}
-
-		if ( $this->has_cloudflare() ) {
-			add_filter( 'wp_hummingbird_is_active_module_' . $this->get_slug(), '__return_true' );
-		} else {
-			add_filter( 'wp_hummingbird_is_active_module_' . $this->get_slug(), '__return_false' );
-		}
-	}
+	public function init() {}
 
 	/**
 	 * Detect if site is using Cloudflare
 	 *
-	 * @param bool $force If set to true it will check again
+	 * @param bool $force If set to true it will check again.
 	 *
 	 * @return bool
 	 */
@@ -56,17 +48,14 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 
 		$is_cloudflare_db = WP_Hummingbird_Settings::get_setting( 'connected', $this->slug );
 
+		$is_cloudflare = false;
 		if ( ! is_numeric( $is_cloudflare_db ) || $force ) {
 			$url = add_query_arg( 'wphb-check-cf', 'true', home_url() );
 			$head = wp_remote_head( $url, array(
 				'sslverify' => false,
 			) );
 
-			if ( is_wp_error( $head ) ) {
-				// Something weird happened
-				$is_cloudflare = false;
-			} else {
-				$is_cloudflare = false;
+			if ( ! is_wp_error( $head ) ) {
 				$headers = wp_remote_retrieve_headers( $head );
 				if ( isset( $headers['server'] ) && strpos( $headers['server'], 'cloudflare' ) > -1 ) {
 					$is_cloudflare = true;
@@ -83,18 +72,33 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		return apply_filters( 'wphb_has_cloudflare', $is_cloudflare );
 	}
 
+	/**
+	 * Check if Cloudflare is connected.
+	 *
+	 * @return bool
+	 */
 	public function is_connected() {
 		$options = $this->get_options();
 
 		return $options['enabled'];
 	}
 
+	/**
+	 * Check if zone is selected.
+	 *
+	 * @return bool
+	 */
 	public function is_zone_selected() {
 		$options = $this->get_options();
 
 		return ! empty( $options['zone'] );
 	}
 
+	/**
+	 * Get Cloudflare plan.
+	 *
+	 * @return mixed
+	 */
 	public function get_plan() {
 		$options = $this->get_options();
 
@@ -102,7 +106,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	}
 
 	/**
-	 * Tries to set the same caching rules in CF
+	 * Tries to set the same caching rules in CF.
 	 */
 	private function set_caching_rules() {
 		if ( ! $this->is_connected() || ! $this->is_zone_selected() ) {
@@ -118,6 +122,9 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 	}
 
+	/**
+	 * Clear Cloudflare caching page rules.
+	 */
 	private function clear_caching_page_rules() {
 		$rules = $this->get_registered_caching_page_rules();
 
@@ -126,6 +133,11 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 	}
 
+	/**
+	 * Delete Cloudflare caching page rule.
+	 *
+	 * @param string $filetype  File type.
+	 */
 	private function delete_caching_page_rule( $filetype ) {
 		$id = $this->get_registered_caching_page_rule_id( $filetype );
 		$this->unregister_caching_page_rule( $filetype );
@@ -143,20 +155,34 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		$api->cloudflare->delete_page_rule( $id, $options['zone'] );
 	}
 
+	/**
+	 * Update Cloduflare caching page rule.
+	 *
+	 * @param string $filetype  File type.
+	 *
+	 * @return bool
+	 */
 	private function update_caching_page_rule( $filetype ) {
-		// Check if the rule exists already
+		// Check if the rule exists already.
 		$id = $this->get_registered_caching_page_rule_id( $filetype );
 
 		if ( $id ) {
-			// Delete the rule and add it a new one
+			// Delete the rule and add it a new one.
 			$this->delete_caching_page_rule( $filetype );
 		}
 
 		return $this->add_caching_page_rule( $filetype );
 	}
 
+	/**
+	 * Add Cloduflare caching page rule.
+	 *
+	 * @param string $filetype  File type.
+	 *
+	 * @return bool
+	 */
 	private function add_caching_page_rule( $filetype ) {
-		// If exists, delete it
+		// If exists, delete it.
 		$this->delete_caching_page_rule( $filetype );
 
 		if ( ! $this->is_connected() || ! $this->is_zone_selected() ) {
@@ -192,6 +218,11 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 
 	}
 
+	/**
+	 * Get expiration values.
+	 *
+	 * @return array
+	 */
 	private function get_filetypes_expirations() {
 		$options = $this->get_options();
 
@@ -215,7 +246,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 			}
 
 			$time = explode( '/', $time );
-			if ( count( $time ) != 2 ) {
+			if ( 2 !== count( $time ) ) {
 				$expirations[ $filetype ] = false;
 				continue;
 			}
@@ -233,6 +264,13 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		return $expirations;
 	}
 
+	/**
+	 * Page rule targets.
+	 *
+	 * @param string $filetype  File type.
+	 *
+	 * @return array
+	 */
 	private static function page_rule_targets( $filetype ) {
 		return array(
 			array(
@@ -245,6 +283,13 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		);
 	}
 
+	/**
+	 * Page rule actions.
+	 *
+	 * @param string $time  Time.
+	 *
+	 * @return array
+	 */
 	private static function page_rule_actions( $time ) {
 		return array(
 			array(
@@ -257,8 +302,8 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	/**
 	 * Register a rule added to CF so they can be listed them later
 	 *
-	 * @param $id
-	 * @param $filetype
+	 * @param int    $id        Id.
+	 * @param string $filetype  File type.
 	 */
 	private function register_caching_page_rule( $id, $filetype ) {
 		$options = $this->get_options();
@@ -269,7 +314,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	/**
 	 * Register a rule added to CF so they can be listed them later
 	 *
-	 * @param $filetype
+	 * @param string $filetype  File type.
 	 */
 	private function unregister_caching_page_rule( $filetype ) {
 		$options = $this->get_options();
@@ -280,12 +325,24 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 	}
 
+	/**
+	 * Get the ID of registered rule.
+	 *
+	 * @param string $filetype  File type.
+	 *
+	 * @return bool
+	 */
 	private function get_registered_caching_page_rule_id( $filetype ) {
 		$options = $this->get_options();
 
 		return ( isset( $options['page_rules'][ $filetype ] ) ) ? $options['page_rules'][ $filetype ] : false;
 	}
 
+	/**
+	 * Get registered caching rules.
+	 *
+	 * @return mixed
+	 */
 	private function get_registered_caching_page_rules() {
 		$options = $this->get_options();
 
@@ -295,8 +352,8 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	/**
 	 * Get a list of Cloudflare zones
 	 *
-	 * @param int $page
-	 * @param array $zones
+	 * @param int   $page   Current page.
+	 * @param array $zones  List of zones.
 	 *
 	 * @return WP_Error|array
 	 */
@@ -323,7 +380,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 
 		if ( $result->result_info->total_pages > $page ) {
-			// Get the next page
+			// Get the next page.
 			return $this->get_zones_list( ++$page, $zones );
 		}
 
@@ -349,6 +406,13 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		return $result->result;
 	}
 
+	/**
+	 * Set caching expiration.
+	 *
+	 * @param int $value  Expiration value.
+	 *
+	 * @return array|mixed|object|WP_Error
+	 */
 	public function set_caching_expiration( $value ) {
 		$options = $this->get_options();
 		$api = WP_Hummingbird_Utils::get_api();
@@ -364,6 +428,11 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		return $api->cloudflare->set_caching_expiration( $options['zone'], $value );
 	}
 
+	/**
+	 * Get caching expiration.
+	 *
+	 * @return mixed
+	 */
 	public function get_caching_expiration() {
 		$options = $this->get_options();
 		$api = WP_Hummingbird_Utils::get_api();

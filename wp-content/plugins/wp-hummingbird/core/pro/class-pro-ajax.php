@@ -15,7 +15,7 @@ class WP_Hummingbird_Pro_AJAX {
 		add_action( 'wp_ajax_wphb_pro_performance_save_reports_settings', array( $this, 'performance_save_scan_settings' ) );
 		// Add the selected user.
 		add_action( 'wp_ajax_wphb_pro_performance_add_recipient', array( $this, 'performance_add_recipient' ) );
-		// Schedule advanced tools database cleanup
+		// Schedule advanced tools database cleanup.
 		add_action( 'wp_ajax_wphb_pro_advanced_db_schedule', array( $this, 'advanced_db_schedule' ) );
 	}
 

@@ -7,7 +7,7 @@
  */
 ?>
 
-<div class="buttons buttons-on-right">
+<div class="sui-actions-right">
 	<span class="spinner standalone"></span>
-	<input type="submit" class="button" name="submit" value="<?php esc_attr_e( 'Save changes', 'wphb' ); ?>">
+	<input type="submit" class="sui-button sui-button-primary" name="submit" value="<?php esc_attr_e( 'Save changes', 'wphb' ); ?>">
 </div>

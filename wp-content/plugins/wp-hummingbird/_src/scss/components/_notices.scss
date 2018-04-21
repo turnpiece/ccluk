@@ -7,6 +7,8 @@
 
 .wpmud .wrap-wp-hummingbird .notice {
     margin: 15px 0 0;
+    order: 10;
+    width: 100%;
 }
 
 .wpmud .wrap-wp-hummingbird > .wphb-notice:not(.notice) {
@@ -46,11 +48,12 @@
     margin: 10px 0;
 }
 
-.wpmud .wphb-notice p,
-.wpmud .wphb-notice p a {
-    color: #333333;
-    font-weight: 400;
+.wpmud .wphb-notice {
+    p {
+        color: #333;
+    }
 }
+
 
 .wpmud .wphb-notice:not(.notice) p,
 .wpmud .wphb-notice:not(.notice) span,
@@ -62,14 +65,6 @@
 
 .wpmud .wphb-notice:not(.notice) p:last-of-type {
     margin: 0;
-}
-
-.wpmud .wphb-notice p a {
-    font-weight: 500;
-}
-
-.wpmud .wphb-notice p a:hover {
-    color: #333;
 }
 
 .wpmud .wphb-notice .wphb-icon,
@@ -185,10 +180,6 @@
     line-height: 22px;
 }
 
-.wpmud .wphb-notice-warning p,
-.wpmud .wphb-notice-warning p a {
-    color: #333333;
-}
 
 .wpmud .wphb-heading-status-green {
     color: #1ABC9C;

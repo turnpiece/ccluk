@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-03 18:38:35+0000\n"
+"PO-Revision-Date: 2018-04-16 12:25:04+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fi\n"
 "Project-Id-Version: Plugins - BuddyPress - Stable (latest release)\n"
+
+#. Description of the plugin/theme
+msgid "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+msgstr "BuddyPress lisää yhteisöominaisuuksia WordPressiin. Jäsenprofiileja, toimintasyötteitä, viestintää, ilmoituksia ja paljon muuta! "
 
 #: bp-core/classes/class-bp-admin.php:686
 msgid "Output a group name as a text hyperlink where appropriate."
@@ -80,6 +84,56 @@ msgstr "Keskustelu johon yritit päästä, ei ole enää käytettävissä"
 msgid "you"
 msgstr "sinä"
 
+#: bp-groups/bp-groups-screens.php:844
+msgid "Groups must have a name and a description. Please try again."
+msgstr "Ryhmillä on oltava nimi ja kuvaus. Yritä uudelleen."
+
+#: bp-groups/bp-groups-screens.php:88
+msgid "Group invite accepted. Visit %s."
+msgstr "Kutsu ryhmään hyväksytty. Vieralie %s."
+
+#: bp-groups/bp-groups-notifications.php:50
+msgctxt "Group update email text"
+msgid "* Permalink changed from \"%s\" to \"%s\"."
+msgstr "* Osoiterakenne muutettu arvosta \"%s\" arvoon \"%s\"."
+
+#: bp-groups/bp-groups-admin.php:532
+msgid "Group name, slug, and description are all required fields."
+msgstr "Ryhmän nimi, polkutunnus ja kuvaus ovat kaikki pakollisia kenttiä."
+
+#: bp-groups/bp-groups-activity.php:194
+msgid "%1$s changed the permalink of the group %2$s."
+msgstr "%1$s muutti ryhmän %2$s osoiterakenteen."
+
+#: bp-core/classes/class-bp-admin.php:903
+msgid "Thank you for installing BuddyPress! BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
+msgstr "Kiitos BuddyPressin asennuksesta! BuddyPress lisää yhteisöominaisuuksia WordPressiin. Jäsenprofiileja, toimintasyötteitä, viestintää, ilmoituksia ja paljon muuta!"
+
+#: bp-core/classes/class-bp-admin.php:677
+msgid "Register your new BuddyPress theme package and allow the user to select which template pack to use."
+msgstr "Rekisteröi uusi BuddyPress-teemapakettisi ja anna käyttäjän valita mitä mallipohjaa käytetään."
+
+#: bp-core/classes/class-bp-admin.php:676
+msgid "Template Packs UI in BuddyPress > Settings."
+msgstr "Teemapaketin käyttöliittymä kohdassa BuddyPress > asetukset."
+
+#: bp-core/classes/class-bp-admin.php:634
+msgid "Prevent duplicate group invitations from being sent to a user by double-checking if a group invitation has already been sent to that user."
+msgstr "Estä ryhmäkutsujen kaksoiskappaleiden lähetykset käyttäjälle tarkistamalla, onko ryhmäkutsut jo lähetetty kyseiselle käyttäjälle."
+
+#: bp-core/classes/class-bp-admin.php:628
+msgid "Related form fields are grouped together in fieldsets and all interactive form controls are associated with necessary ARIA states and properties."
+msgstr "Toisiinsa liittyvät lomakekentät ryhmitellään yhteen HTML-fieldset:in sisään ja kaikki aktiiviset lomakekontrollit on varustettu tarvittavin ARIA ominaisuuksin."
+
+#. translators: %s: trailingslashit()
+#: bp-core/classes/class-bp-admin.php:671
+msgid "Audited and changed template link functions to use %s where necessary."
+msgstr "Tarkistetut ja muutetut mallipohja-linkin funktiot käytettäväksi kohteessa %s tarvittaessa."
+
+#: bp-core/classes/class-bp-admin.php:657
+msgid "Removed issues with BuddyPress-generated content being hidden in the Groups loop and Activity comments in Bootstrap themes."
+msgstr "Poistettu ongelmia joissa BuddyPressin luoma sisältö Ryhmät-silmukassa ja Bootstrap-teemojen aktiviteettikommentit olivat piilossa"
+
 #: bp-core/classes/class-bp-admin.php:627
 msgid "Improve accessibility of Extended Profile Fields"
 msgstr "Parantaa laajennettujen profiilikenttien saavutettavuutta"
@@ -87,6 +141,22 @@ msgstr "Parantaa laajennettujen profiilikenttien saavutettavuutta"
 #: bp-core/classes/class-bp-admin.php:399
 msgid "Template Pack"
 msgstr "Templatepaketti"
+
+#: bp-core/admin/bp-core-admin-settings.php:74
+msgid "The selected Template Pack will serve all BuddyPress templates."
+msgstr "Valittu mallipohja palvelee kaikkia BuddyPress-malleja."
+
+#: bp-core/admin/bp-core-admin-settings.php:77
+msgid "No template packages available."
+msgstr "Mallipaketteja ei ole saatavilla."
+
+#: bp-core/classes/class-bp-admin.php:622
+msgid "Allow administrators to change group names and permalinks. Navigate to the Groups screen in the wp-admin dashboard, click on the Edit link under the Group name, and adjust as needed."
+msgstr "Sallii järjestelmänvalvojien muuttaa ryhmien nimiä sekä osoiterakenteita. permalinkeja. Siirry wp-admin kohdassa ryhmät-ruutuun, napsauta muokkaa-linkkiä ryhmän nimen alapuolella ja säädä asetuksia tarvittaessa."
+
+#: bp-core/classes/class-bp-admin.php:621
+msgid "Edit Group Slug"
+msgstr "Muokkaa ryhmän polkutunnusta"
 
 #: bp-forums/deprecated/1.7.php:24
 msgid "Forums (Legacy)"
@@ -3269,6 +3339,10 @@ msgstr "Muuta"
 #: bp-themes/bp-default/members/single/profile/edit.php:10
 msgid "Editing '%s' Profile Group"
 msgstr "Muokataan profiiliryhmää '%s'"
+
+#: bp-templates/bp-legacy/buddypress/members/single/profile/change-avatar.php:84
+msgid "Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href=\"https://gravatar.com\">Gravatar</a> using the same email address as you used to register with this site."
+msgstr "Profiilikuvaasi käytetään profiilissasi ja läpi koko sivuston. Vaihtaaksesi profiilikuvasi, ole hyvä ja luo tili täällä <a href=\"https://gravatar.com\">Gravatar</a> käyttämällä samaa sähköpostiosoitetta jolla rekisteröidyit tälle sivustolle."
 
 #: bp-templates/bp-legacy/buddypress/members/single/profile/change-avatar.php:52
 msgid "Crop Your New Profile Photo"

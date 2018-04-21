@@ -9,9 +9,7 @@
  */
 
 ?>
-<div class="buttons buttons-on-left">
-	<a href="<?php echo esc_url( $url ); ?>" class="button button-ghost">
-		<i class="hb-wpmudev-icon-wrench-tool wphb-dash-icon"></i>
-		<?php esc_html_e( 'Configure', 'wphb' ); ?>
-	</a>
-</div>
+<a href="<?php echo esc_url( $url ); ?>" class="sui-button sui-button-ghost">
+	<i class="sui-icon-wrench-tool" aria-hidden="true"></i>
+	<?php esc_html_e( 'Configure', 'wphb' ); ?>
+</a>

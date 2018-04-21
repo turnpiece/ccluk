@@ -27,7 +27,7 @@ import Fetcher from './utils/fetcher';
                             CDNcheckbox.prop( 'disabled', false );
                             CDNtooltip.attr( 'tooltip', $('input[id="cdn_enabled_tooltip"]').val() );
                         }
-                        self.showNotice();
+						WPHB_Admin.notices.show( 'wphb-notice-minification-settings-updated' );
                     });
             });
 
@@ -35,7 +35,7 @@ import Fetcher from './utils/fetcher';
                 const value = $(this).is(':checked');
                 Fetcher.minification.toggleCDN( value )
                     .then( () => {
-                        self.showNotice();
+						WPHB_Admin.notices.show( 'wphb-notice-minification-settings-updated' );
                     });
             });
 
@@ -43,7 +43,7 @@ import Fetcher from './utils/fetcher';
                 const value = $(this).is(':checked');
                 Fetcher.caching.toggleSubsitePageCaching( value )
                     .then( () => {
-                        self.showFixedNotice();
+						WPHB_Admin.notices.show( 'wphb-notice-pc-settings-updated' );
                     });
             });
 
@@ -64,34 +64,15 @@ import Fetcher from './utils/fetcher';
             return this;
         },
 
-        /**
-         * Notice on settings update.
-         */
-        showNotice: function () {
-            const notice = $('#wphb-notice-minification-settings-updated');
-            notice.slideDown();
-            setTimeout( function() {
-                notice.slideUp();
-            }, 5000 );
-        },
-
-        /**
-         * Fixed notice on settings update.
-         */
-        showFixedNotice: function () {
-            const notice = $('#wphb-notice-settings-updated');
-            notice.slideDown();
-            setTimeout( function() {
-                notice.slideUp();
-            }, 5000 );
-        },
-
 		/**
          * Run quick setup.
 		 */
 		startQuickSetup: function () {
             // Show quick setup modal
-			window.WDP.showOverlay( '#wphb-quick-setup-modal', { class: 'wphb-modal small wphb-quick-setup-modal no-close' } );
+            let el = document.getElementById('wphb-quick-setup-modal');
+            let dialog = new A11yDialog(el);
+            dialog.show();
+
         },
 
 		/**
@@ -109,7 +90,9 @@ import Fetcher from './utils/fetcher';
 		 */
 		runPerformanceTest: function() {
 			// Show performance test modal
-			window.WDP.showOverlay("#run-performance-test-modal", { class: 'wphb-modal small wphb-progress-modal no-close' } );
+            let el = document.getElementById('run-performance-test-modal');
+            let dialog = new A11yDialog(el);
+            dialog.show();
 
 			// Run performance test
 			const module = window.WPHB_Admin.getModule('performance');

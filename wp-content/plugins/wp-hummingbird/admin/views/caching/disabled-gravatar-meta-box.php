@@ -17,15 +17,12 @@
 			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-gravatarcaching-disabled@2x.png'; ?> 2x"
 			 alt="<?php esc_attr_e( 'Gravatar Caching', 'wphb' ); ?>">
 
-		<div class="content">
-			<p><?php esc_html_e( 'Gravatar Caching stores local copies of avatars used in comments and in your theme. You can control how often you want the cache purged depending on how your website is set up.', 'wphb' ); ?></p>
-		</div><!-- end content -->
+		<p class="sui-margin-bottom"><?php esc_html_e( 'Gravatar Caching stores local copies of avatars used in comments and in your theme. You can control how often you want the cache purged depending on how your website is set up.', 'wphb' ); ?></p>
 
-		<div class="buttons">
-			<a href="<?php echo esc_url( $activate_url ); ?>" class="button button-large" id="activate-page-caching">
-				<?php esc_html_e( 'Activate', 'wphb' ); ?>
-			</a>
-		</div>
+
+		<a href="<?php echo esc_url( $activate_url ); ?>" class="sui-button sui-button-primary button-large" id="activate-page-caching">
+			<?php esc_html_e( 'Activate', 'wphb' ); ?>
+		</a>
 
 	</div><!-- end wphb-block-entry-content -->
 

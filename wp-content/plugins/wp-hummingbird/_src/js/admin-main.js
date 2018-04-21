@@ -20,7 +20,7 @@ import Fetcher from './utils/fetcher';
 				};
             }
 
-            /*
+            /* Above code replaces this with native js
 			$('body').on('change', '.mobile-nav', function () {
 				let url = $(this).val();
 				if (url.length > 0) {
@@ -30,7 +30,7 @@ import Fetcher from './utils/fetcher';
 			*/
 
 			// Dismiss notice via an ajax call.
-            let notice = document.querySelector('#wphb-dismissable > .close');
+            let notice = document.querySelector('#wphb-dismissable > .sui-notice-dismiss');
 
             if ( notice ) {
 				notice.addEventListener('click', () => {
@@ -39,7 +39,7 @@ import Fetcher from './utils/fetcher';
 				});
             }
 
-			/*
+			/* Above code replaces this with native js
 			$('#wphb-dismissable').on('click', '.close', function() {
 			    const notice_id = $(this).parent().attr('data-id');
 			    Fetcher.notice.dismiss( notice_id );
@@ -99,7 +99,9 @@ import Fetcher from './utils/fetcher';
     WPHB_Admin.utils = {
         membershipModal: {
             open: function() {
-                $( '#wphb-upgrade-membership-modal-link').trigger( 'click' );
+                let el = document.getElementById('wphb-upgrade-membership-modal');
+                let dialog = new A11yDialog(el);
+                dialog.show();
             }
         },
 
@@ -114,17 +116,43 @@ import Fetcher from './utils/fetcher';
         }
     };
 
-    /*WPHB_Admin.notices = {
-        init: function() {
-            $( '.wphb-notice:not(.notice) a.wphb-dismiss').click( function( e ) {
-                e.preventDefault();
-                let id = $(this).data( 'id' );
-                let nonce = $(this).data( 'nonce' );
+	/**
+     * Admin notices.
+	 */
+	WPHB_Admin.notices = {
+		init: function() {},
+		/**
+		 * Show notice.
+		 *
+		 * @since 1.8
+		 *
+		 * @param id       ID of notice element.
+		 * @param top      Scroll to top.
+		 * @param type     Error or success.
+		 * @param message  Message to display.
+		 */
+        show: function( id, top = false, type = '', message = wphb.strings.successUpdate ) {
+			const notice = $('#' + id);
 
-                $(this).parent( '.error' ).hide();
-            });
+			if ( top ) {
+				window.scrollTo(0,0);
+			}
+
+			if ( '' !== type ) {
+				// Remove set classes if doing multiple calls per page load.
+				notice.removeClass('sui-notice-error');
+				notice.removeClass('sui-notice-success');
+				notice.addClass('sui-notice-' + type);
+			}
+
+			notice.find('p').html(message);
+
+			notice.slideDown();
+			setTimeout( function() {
+				notice.slideUp();
+			}, 5000 );
         }
-    };*/
+    };
 
     window.WPHB_Admin = WPHB_Admin;
 

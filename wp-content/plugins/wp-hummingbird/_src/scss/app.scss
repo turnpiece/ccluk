@@ -32,6 +32,11 @@
 /* ****************************************************************************
  * 1. EXTEND/OVERRIDE WPMUDEV DASHBOARD/WP STYLES
  */
+
+.sui-header .sui-button i {
+    margin-right: 5px;
+}
+
 .wpmud .wrap-wp-hummingbird .mline {
     margin-bottom: 30px;
 }
@@ -54,67 +59,6 @@
     border-bottom: 1px solid #E6E6E6;
     padding-bottom: 30px;
 }
-
-.wpmud #header {
-    position: relative;
-    margin-bottom: 0;
-}
-
-.wpmud #header .actions.status {
-    left: 200px;
-    margin-top: 1px;
-}
-
-.wpmud #header .actions.status [tooltip]:after {
-    margin-left: 27px;
-    bottom: -60%;
-}
-
-.wpmud #header .actions.status [tooltip]:before {
-    bottom: 25%;
-    left: 100%;
-    border-right-color: #0B2F3F;
-    border-top: 5px solid transparent;
-}
-
-.wpmud #header .actions {
-    position: absolute;
-    display: flex;
-    align-items: center;
-    top: 5px;
-    right: 0;
-}
-
-.wpmud #header .actions > * {
-    display: inline-block;
-    margin-left: 10px;
-}
-
-.wpmud #header .actions.label-and-button > *:first-child {
-    margin-left: 0;
-}
-
-.wpmud #header .actions.label-and-button .actions-label {
-    color: #888888;
-    font-size: 13px;
-    line-height: 18px;
-    margin: 0;
-    text-align: right;
-}
-
-.wpmud #header .actions .header-label {
-    font-size: 12px;
-    color: #AAAAAA;
-}
-
-.wpmud #header ~ .sub-header {
-    margin-top: -15px;
-    margin-bottom: 30px;
-}
-
-
-
-
 .wpmud .list-table > tbody > tr:last-child > td {
     border-bottom: 1px solid #eee;
 }
@@ -329,6 +273,7 @@
     display: inline-block;
     font-size: 13px;
     color: #888888;
+    margin: 0 15px;
 }
 
 .wpmud .wrap-wp-hummingbird .wphb-label-disabled {
@@ -346,17 +291,6 @@
 /* ****************************************************************************
  * 2. COMMON/GENERAL STYLES
  */
-.wpmud .footer-love {
-    text-align: center;
-    margin-top: 50px;
-    color: #C0C0C0;
-    font-size: 13px;
-}
-
-.wpmud .footer-love > .dashicons-heart {
-    font-size: 14px;
-    line-height: 22px;
-}
 
 /* Tables */
 .wpmud .wphb-table-wrapper.complex {
@@ -580,9 +514,6 @@
 .wphb-block-test {
     background-color: #F9F9F9;
     border-radius: 5px;
-    max-width: 700px;
-    width: 100%;
-    height: 60px;
     padding: 15px 30px;
 }
 
@@ -610,6 +541,14 @@
 .wphb-block-test-standalone .wphb-progress {
     margin: 0 auto;
 }
+.wphb-check-files-modal {
+    p {
+        font-size: 13px;
+        line-height: 22px;
+        margin-right: 14px;
+        margin-bottom: 0;
+    }
+}
 
 /* Filename Extensions Icons */
 .wphb-filename-extension {
@@ -625,6 +564,15 @@
     height: 30px;
     margin: 0 10px 0 0;
     width: 30px;
+}
+
+.sui-list-label {
+    .wphb-filename-extension {
+        margin: -5px 10px -5px 0px;
+    }
+    .wphb-filename-extension-label {
+        line-height: 22px;
+    }
 }
 
 .wphb-filename-extension-html {
@@ -988,21 +936,7 @@
 /* TABLET */
 @media screen and (max-width: 783px) {
     /* Generic */
-    .wpmud #header .actions {
-        position: relative;
-        display: flex;
-        align-items: center;
-        top: 0;
-        margin: 10px 0 10px;
-        float: none;
-        padding-bottom: 0;
-    }
-    .wpmud #header .actions .button:first-child {
-        margin-left: 0;
-    }
-    .wpmud #header .actions [tooltip].tooltip-bottom:after {
-        margin-left: -54px;
-    }
+
 
 
 
@@ -1033,11 +967,6 @@
 
     .wpmud .dev-box .box-title .toggle-group {
         margin-top: 0;
-    }
-
-
-    .wpmud #header .after-header-actions .button {
-        margin-top: -15px;
     }
 }
 

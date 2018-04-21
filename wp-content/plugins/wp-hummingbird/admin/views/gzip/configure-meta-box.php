@@ -19,15 +19,15 @@
  */
 
 ?>
-<div class="row settings-form with-bottom-border">
-	<div class="col-third">
-		<strong><?php esc_html_e( 'Server type', 'wphb' ) ?></strong>
-		<span class="sub">
+<div class="sui-box-settings-row">
+	<div class="sui-box-settings-col-1">
+		<span class="sui-settings-label"><?php esc_html_e( 'Server type', 'wphb' ) ?></span>
+		<span class="sui-description">
 			<?php esc_html_e( 'Choose your server type. If you don’t know this, please contact your hosting provider.', 'wphb' ); ?>
 		</span>
-	</div><!-- end col-third -->
-	<div class="col-two-third">
-		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type:', 'wphb' ); ?></label>
+	</div><!-- end sui-box-settings-col-1 -->
+	<div class="sui-box-settings-col-2">
+		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type', 'wphb' ); ?></label>
 		<?php
 		WP_Hummingbird_Utils::get_servers_dropdown( array(
 			'selected' => $gzip_server_type,
@@ -35,46 +35,46 @@
 		?>
 	</div>
 </div>
-<div class="row settings-form">
-	<div class="col-third">
-		<strong><?php esc_html_e( 'Enable compression', 'wphb' ); ?></strong>
-		<span class="sub">
+<div class="sui-box-settings-row">
+	<div class="sui-box-settings-col-1">
+		<span class="sui-settings-label"><?php esc_html_e( 'Enable compression', 'wphb' ); ?></span>
+		<span class="sui-description">
 			<?php esc_html_e( 'Follow the instructions to activate GZip compression for this website.', 'wphb' ); ?>
 		</span>
-	</div><!-- end col-third -->
-	<div class="col-two-third">
+	</div><!-- end sui-box-settings-col-1 -->
+	<div class="sui-box-settings-col-2">
 		<?php if ( ! ( $htaccess_written && $full_enabled ) ) : ?>
 			<div id="wphb-server-instructions-apache" class="wphb-server-instructions hidden" data-server="apache">
-				<div class="tabs">
-					<div class="tab">
+				<div class="sui-tabs">
+					<div class="sui-tab">
 						<label for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="apache-config-type" id="apache-config-auto" checked>
-						<div class="content">
-							<span class="desc">
+						<div class="sui-tab-content">
+							<span class="sui-description">
 								<?php esc_html_e( 'Hummingbird can automatically apply GZip compression for Apache servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
 							<?php if ( true === $htaccess_writable ) : ?>
 								<div id="enable-cache-wrap" class="<?php echo ! in_array( $gzip_server_type, array( 'apache', 'LiteSpeed' ), true ) ? 'hidden' : ''; ?>">
 									<?php if ( $show_enable_button ) : ?>
 										<?php if ( true === $htaccess_written ) : ?>
-											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $disable_link ); ?>" class="sui-button sui-button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php else : ?>
 											<?php if ( $htaccess_error ) : ?>
-												<div class="wphb-notice wphb-notice-warning htaccess-warning">
+												<div class="sui-notice sui-notice-warning htaccess-warning">
 													<p><?php _e( 'We tried applying the .htaccess rules automatically but we weren’t able to. Make sure your file permissions on your .htaccess file are set to 644, or <a href="#apache-config-manual" class="switch-manual">switch to manual mode</a> and apply the rules yourself.', 'wphb' ); ?></p>
 												</div>
 											<?php endif; ?>
-											<a href="<?php echo esc_url( $enable_link ); ?>" class="button"><?php esc_html_e( 'Apply Rules', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $enable_link ); ?>" class="sui-button sui-button-primary sui-margin-top"><?php esc_html_e( 'Apply Rules', 'wphb' ); ?></a>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>
 							<?php endif; ?>
 						</div><!-- end content -->
 					</div><!-- end tab -->
-					<div class="tab">
+					<div class="sui-tab">
 						<label for="apache-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
 						<input type="radio" name="apache-config-type" id="apache-config-manual">
-						<div class="content">
+						<div class="sui-tab-content">
 							<div class="apache-instructions">
 								<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
@@ -92,8 +92,7 @@
 								<div id="wphb-code-snippet">
 									<div id="wphb-code-snippet-apache" class="wphb-code-snippet">
 										<div class="wphb-block-content">
-											<button class="button button-grey" data-clipboard-target="#wphb-apache"><?php esc_html_e( 'Copy', 'wphb' ); ?></button>
-											<pre id="wphb-apache"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
+											<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
 										</div>
 									</div>
 								</div>
@@ -112,36 +111,36 @@
 			</div><!-- end wphb-server-instructions -->
 
 			<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions hidden" data-server="LiteSpeed">
-				<div class="tabs">
-					<div class="tab">
+				<div class="sui-tabs">
+					<div class="sui-tab">
 						<label for="litespeed-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
 						<input type="radio" name="litespeed-config-type" id="litespeed-config-auto" checked>
-						<div class="content">
-							<span class="sub">
+						<div class="sui-tab-content">
+							<span class="sui-description">
 								<?php esc_html_e( 'Hummingbird can automatically apply browser caching for LiteSpeed servers by writing your .htaccess file. Alternately, switch to Manual to apply these rules yourself.', 'wphb' ); ?>
 							</span>
 							<?php if ( true === $htaccess_writable ) : ?>
 								<div id="enable-cache-wrap" class="<?php echo ! in_array( $gzip_server_type, array( 'apache', 'LiteSpeed' ), true ) ? 'hidden' : ''; ?>">
 									<?php if ( $show_enable_button ) : ?>
 										<?php if ( true === $htaccess_written ) : ?>
-											<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $disable_link ); ?>" class="sui-button sui-button-ghost sui-margin-top"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 										<?php else : ?>
 											<?php if ( $htaccess_error ) : ?>
-												<div class="wphb-notice wphb-notice-warning htaccess-warning">
+												<div class="sui-notice sui-notice-warning htaccess-warning">
 													<p><?php _e( 'We tried applying the .htaccess rules automatically but we weren’t able to. Make sure your file permissions on your .htaccess file are set to 644, or <a href="#litespeed-config-manual" class="switch-manual">switch to manual mode</a> and apply the rules yourself.', 'wphb' ); ?></p>
 												</div>
 											<?php endif; ?>
-											<a href="<?php echo esc_url( $enable_link ); ?>" class="button"><?php esc_html_e( 'Apply Rules', 'wphb' ); ?></a>
+											<a href="<?php echo esc_url( $enable_link ); ?>" class="sui-button sui-button-primary sui-margin-top"><?php esc_html_e( 'Apply Rules', 'wphb' ); ?></a>
 										<?php endif; ?>
 									<?php endif; ?>
 								</div>
 							<?php endif; ?>
 						</div><!-- end content -->
 					</div><!-- end tab -->
-					<div class="tab">
+					<div class="sui-tab">
 						<label for="litespeed-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
 						<input type="radio" name="litespeed-config-type" id="litespeed-config-manual">
-						<div class="content">
+						<div class="sui-tab-content">
 							<div class="litespeed-instructions">
 								<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
@@ -158,8 +157,7 @@
 								<div id="wphb-code-snippet">
 									<div id="wphb-code-snippet-litespeed" class="wphb-code-snippet">
 										<div class="wphb-block-content">
-											<button class="button button-grey" data-clipboard-target="#wphb-litespeed"><?php esc_html_e( 'Copy', 'wphb' ); ?></button>
-											<pre id="wphb-litespeed"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
+											<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
 										</div>
 									</div>
 								</div>
@@ -192,8 +190,7 @@
 				<div id="wphb-code-snippet">
 					<div id="wphb-code-snippet-nginx" class="wphb-code-snippet">
 						<div class="wphb-block-content">
-							<button class="button button-grey" data-clipboard-target="#wphb-nginx"><?php esc_html_e( 'Copy', 'wphb' ); ?></button>
-							<pre id="wphb-nginx"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
+							<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
 						</div>
 					</div>
 				</div>
@@ -220,10 +217,10 @@
 				</p>
 			</div>
 		<?php elseif ( $htaccess_written && $full_enabled ) : ?>
-			<div class="wphb-notice wphb-notice-blue">
+			<div class="sui-notice sui-notice-info">
 				<p><?php esc_html_e( 'Automatic .htaccess rules have been applied.', 'wphb' ); ?></p>
 			</div>
-			<a href="<?php echo esc_url( $disable_link ); ?>" class="button button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
+			<a href="<?php echo esc_url( $disable_link ); ?>" class="sui-button sui-button-ghost"><?php esc_html_e( 'Deactivate', 'wphb' ); ?></a>
 		<?php endif; ?>
 	</div>
 </div>

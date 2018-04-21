@@ -45,15 +45,6 @@ import Clipboard from './utils/clipboard';
                 e.preventDefault();
                 $('html, body').animate({ scrollTop: $('#troubleshooting-gzip-litespeed').offset().top }, 'slow');
             });
-            $( '.tab label' ).on( 'click', function() {
-                $( this ).parent().parent().find( '.tab label.active' ).removeClass( 'active' );
-                $( this ).addClass( 'active' );
-            });
-            $( '.switch-manual' ).on( 'click', function() {
-                let lowercaseServername = self.selectedServer.toLowerCase();
-                $( '#wphb-server-instructions-' + lowercaseServername ).find( '.tab label.active' ).first().removeClass( 'active' );
-                $( this ).parents().find( '#' + lowercaseServername + '-config-manual' ).prev().addClass( 'active' );
-            });
             return this;
         },
 
@@ -75,9 +66,9 @@ import Clipboard from './utils/clipboard';
             }
         },
         updateTabSize: function() {
-            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.tabs' ),
-                current = jq.find('.tab > input:checked').parent(),
-                content = current.find('.content');
+            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.sui-tabs' ),
+                current = jq.find('.sui-tab > input:checked').parent(),
+                content = current.find('.sui-tab-content');
 
             jq.height( content.outerHeight() + current.outerHeight() - 6 );
         },

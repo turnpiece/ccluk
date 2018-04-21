@@ -25,10 +25,7 @@ class WP_Hummingbird_Pro_Admin {
 				array( $this, 'dashboard_reports_metabox' ),
 				null,
 				array( $this, 'dashboard_reports_metabox_footer' ),
-				'box-dashboard-right',
-				array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				)
+				'box-dashboard-right'
 			);
 		}
 	}
@@ -96,10 +93,6 @@ class WP_Hummingbird_Pro_Admin {
 		if ( is_file( $file ) ) {
 
 			ob_start();
-
-			if ( class_exists( 'WDEV_Plugin_Ui' ) ) {
-				WDEV_Plugin_Ui::output();
-			}
 
 			if ( isset( $args['id'] ) ) {
 				$args['orig_id'] = $args['id'];

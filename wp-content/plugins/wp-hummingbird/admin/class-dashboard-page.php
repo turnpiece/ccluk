@@ -9,16 +9,78 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * Uptime report.
 	 *
 	 * @since 1.7.0
-	 * @var   array $uptime_report
+	 *
+	 * @var   array|stdClass $uptime_report
 	 */
 	private $uptime_report = array();
 
 	/**
-	 * Function triggered when the page is loaded
-	 * before render any content
+	 * Uptime status.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @var bool $uptime_active
+	 */
+	private $uptime_active = false;
+
+	/**
+	 * Gzip status.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @var array $gzip_status
+	 */
+	private $gzip_status = array();
+
+	/**
+	 * Caching status.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @var array $caching_status
+	 */
+	private $caching_status = array();
+
+	/**
+	 * Performance report data.
+	 *
+	 * @var stdClass $performance
+	 */
+	private $performance;
+
+	/**
+	 * Init page variables.
+	 *
+	 * @since 1.8.1
+	 */
+	private function init() {
+		$this->gzip_status    = WP_Hummingbird_Utils::get_status( 'gzip' );
+		$this->caching_status = WP_Hummingbird_Utils::get_status( 'caching' );
+
+		/* @var WP_Hummingbird_Module_Uptime $uptime_module */
+		$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
+		$this->uptime_active = $uptime_module->is_active();
+		if ( $this->uptime_active ) {
+			$this->uptime_report = $uptime_module->get_last_report();
+		}
+
+		$this->performance = new stdClass();
+		$this->performance->last_report = WP_Hummingbird_Module_Performance::get_last_report();
+		// Check to see if there's a fresh report on the server (but don't update it on quick setup dialog).
+		$quick_setup = get_option( 'wphb-quick-setup' );
+		if ( false === $this->performance->last_report && true === $quick_setup['finished'] ) {
+			WP_Hummingbird_Module_Performance::refresh_report();
+			$this->performance->last_report = WP_Hummingbird_Module_Performance::get_last_report();
+		}
+		$this->performance->report_dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
+		$this->performance->is_doing_report  = WP_Hummingbird_Module_Performance::is_doing_report();
+	}
+
+	/**
+	 * Function triggered when the page is loaded before render any content.
 	 */
 	public function on_load() {
-		if ( is_multisite() && ! is_network_admin() ) {
+		if ( is_multisite() && ! is_network_admin() && WP_Hummingbird_Utils::can_execute_php() ) {
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
 			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
@@ -27,43 +89,36 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 
-		if ( isset( $_GET['wphb-clear-files'] ) && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+		if ( isset( $_GET['wphb-clear-files'] ) ) { // Input var ok.
 			check_admin_referer( 'wphb-clear-files' );
 
-			if ( WP_Hummingbird_Utils::can_execute_php() ) {
-				/* @var WP_Hummingbird_Module_Minify $minify_module */
-				$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
-				if ( $minify_module->is_active() ) {
-					$minify_module->clear_files();
+			$modules = WP_Hummingbird_Utils::get_active_cache_modules();
+			$url = remove_query_arg( array( 'wphb-clear-files', 'updated', '_wpnonce' ) );
+			$query_arg = 'wphb-cache-cleared';
+
+			foreach ( $modules as $module => $name ) {
+				/* @var WP_Hummingbird_Module|WP_Hummingbird_Module_Minify $mod */
+				$mod = WP_Hummingbird_Utils::get_module( $module );
+
+				if ( $mod->is_active() ) {
+					if ( 'minify' === $module ) {
+						$mod->clear_files();
+					} else {
+						$mod->clear_cache();
+					}
+
+					if ( 'cloudflare' === $module ) {
+						$query_arg = 'wphb-cache-cleared-with-cloudflare';
+					}
 				}
 			}
 
-			/* @var WP_Hummingbird_Module_GZip $gzip_module */
-			$gzip_module = WP_Hummingbird_Utils::get_module( 'gzip' );
-			if ( $gzip_module->is_active() ) {
-				$gzip_module->clear_cache();
-			}
-			/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
-			$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-			if ( $pc_module->is_active() ) {
-				$pc_module->clear_cache();
-			}
-			/* @var WP_Hummingbird_Module_Gravatar $gc_module */
-			$gc_module = WP_Hummingbird_Utils::get_module( 'gravatar' );
-			if ( $gc_module->is_active() ) {
-				$gc_module->clear_cache();
-			}
-			$url = remove_query_arg( array( 'wphb-clear-files', 'updated', '_wpnonce' ) );
-
-			/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
-			$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
-			if ( $cf_module->is_active() ) {
-				$cf_module->clear_cache();
-				wp_safe_redirect( add_query_arg( 'wphb-cache-cleared-with-cloudflare', 'true', $url ) );
-			} else {
-				wp_safe_redirect( add_query_arg( 'wphb-cache-cleared', 'true', $url ) );
-			}
+			wp_safe_redirect( add_query_arg( $query_arg, 'true', $url ) );
 			exit;
+		}
+
+		if ( isset( $_GET['run'] ) && isset( $_GET['type'] ) ) { // Input var ok.
+			$this->run_actions( wp_unslash( $_GET['type'] ) ); // Input var ok.
 		}
 	}
 
@@ -74,19 +129,18 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * From WPMU DEV Dashboard
 	 */
 	public function render_header() {
-		$clear_cache_url = add_query_arg( 'wphb-clear-files', 'true' );
-		$clear_cache_url = wp_nonce_url( $clear_cache_url, 'wphb-clear-files' );
-
-		if ( isset( $_GET['wphb-cache-cleared'] ) ) {
+		if ( isset( $_GET['wphb-cache-cleared'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
 		}
 
-		if ( isset( $_GET['wphb-cache-cleared-with-cloudflare'] ) ) {
+		if ( isset( $_GET['wphb-cache-cleared-with-cloudflare'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'Your local and Cloudflare caches have been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
 		}
+
 		$tooltip = '';
 		$modules = WP_Hummingbird_Utils::get_active_cache_modules();
 		$show_clear_cache = false;
+
 		if ( count( $modules ) > 0 ) {
 			$show_clear_cache = true;
 			if ( count( $modules ) === 1 ) {
@@ -100,22 +154,24 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 		?>
-		<div class="wphb-notice wphb-notice-success wphb-dash-settings-updated" id="wphb-notice-settings-updated" style="display: none">
+		<div class="sui-notice sui-notice-success sui-notice-top wphb-dash-settings-updated" id="wphb-notice-settings-updated" style="display: none">
 			<p><?php esc_html_e( 'Settings Updated', 'wphb' ); ?></p>
 		</div>
-		<section id="header">
+		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<div class="actions">
-				<?php if ( $show_clear_cache ) { ?>
-					<a href="<?php echo esc_url( $clear_cache_url ); ?>" class="button button-grey tooltip-l tooltip-bottom" tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
+			<div class="sui-actions-right">
+				<?php if ( $show_clear_cache ) {
+					$clear_cache_url = wp_nonce_url( add_query_arg( 'wphb-clear-files', 'true' ), 'wphb-clear-files' ); ?>
+					<a href="<?php echo esc_url( $clear_cache_url ); ?>" class="sui-button sui-tooltip sui-tooltip-bottom sui-tooltip-constrained" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
 						<?php esc_html_e( 'Clear Cache', 'wphb' ); ?>
 					</a>
 				<?php } ?>
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+					<i class="sui-icon-academy" aria-hidden="true"></i>
 					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
 				</a>
 			</div>
-		</section><!-- end header -->
+		</div><!-- end header -->
 		<?php
 	}
 
@@ -127,10 +183,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	private function run_actions( $type ) {
 		check_admin_referer( 'wphb-run-dashboard' );
 
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			return;
-		}
-
 		/* @var WP_Hummingbird_Module_Uptime $uptime */
 		$uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
 
@@ -141,59 +193,55 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			$uptime->disable_locally();
 		}
 
-		if ( 'performance' === $type ) {
-			// Start performance test.
-			/* @var WP_Hummingbird_Module_Performance $perf_module */
-			$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-			$perf_module->init_scan();
+		// Start performance or asset optimization scam.
+		if ( 'performance' === $type || 'minification' === $type ) {
+			$module = $type;
+			if ( 'minification' === $type ) {
+				$module = 'minify';
+			}
 
-			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ), WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) ) );
+			/* @var WP_Hummingbird_Module_Performance|WP_Hummingbird_Module_Minify $mod */
+			$mod = WP_Hummingbird_Utils::get_module( $module );
+			$mod->init_scan();
+
+			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ), WP_Hummingbird_Utils::get_admin_menu_url( $type ) ) );
 			exit;
-		}
-
-		if ( 'minification' === $type ) {
-			/* @var WP_Hummingbird_Module_Minify $minify_module */
-			$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
-			$minify_module->init_scan();
-
-			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ), WP_Hummingbird_Utils::get_admin_menu_url( 'minification' ) ) );
-			exit;
-		}
-
-		if ( 'uptime' === $type ) {
+		} elseif ( 'uptime' === $type ) {
 			// Uptime reports.
 			$uptime->get_last_report( 'week', true );
 			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ) ) );
 			exit;
 		}
-
 	}
 
 	/**
 	 * Register available metaboxes on the Dashboard page.
 	 */
 	public function register_meta_boxes() {
-		if ( isset( $_GET['run'] ) && isset( $_GET['type'] ) ) {
-			$this->run_actions( $_GET['type'] );
-		}
+		$this->init();
 
-		$this->add_meta_box( 'dashboard/welcome', null , array( $this, 'dashboard_welcome_metabox' ), null, null, 'main', array(
-			'box_class' => 'dev-box content-box content-box-two-cols-image-left',
-		));
+		$this->add_meta_box( 'dashboard/welcome',
+			null,
+			array( $this, 'dashboard_welcome_metabox' ),
+			null,
+			null,
+			'main',
+			array(
+				'box_class' => 'sui-box sui-summary',
+				'box_content_class' => false,
+			)
+		);
 
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-
-		// Check to see if there's a fresh report on the server (but don't update it on quick setup dialog).
-		$quick_setup = get_option( 'wphb-quick-setup' );
-		if ( false === $last_report && true === $quick_setup['finished'] ) {
-			WP_Hummingbird_Module_Performance::refresh_report();
-			$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-		}
-
-		$report_dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
-		if ( WP_Hummingbird_Module_Performance::is_doing_report() ) {
-			$this->add_meta_box( 'dashboard/performance/running-test', __( 'Performance test in progress', 'wphb' ), null, null, null, 'box-dashboard-left' );
-		} elseif ( ! WP_Hummingbird_Module_Performance::is_doing_report() && $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) {
+		if ( $this->performance->is_doing_report ) {
+			$this->add_meta_box(
+				'dashboard/performance/running-test',
+				__( 'Performance test in progress', 'wphb' ),
+				null,
+				null,
+				null,
+				'box-dashboard-left'
+			);
+		} elseif ( ! $this->performance->is_doing_report && $this->performance->last_report && ! is_wp_error( $this->performance->last_report ) && ! $this->performance->report_dismissed ) {
 			$this->add_meta_box(
 				'dashboard-performance-module',
 				__( 'Performance Report', 'wphb' ),
@@ -202,32 +250,26 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'dashboard_performance_module_metabox_footer' ),
 				'box-dashboard-left',
 				array(
-					'box_content_class' => 'box-content no-padding',
+					'box_content_class' => false,
 				)
 			);
-		} elseif ( is_wp_error( $last_report ) ) {
+		} elseif ( is_wp_error( $this->performance->last_report ) ) {
 			$this->add_meta_box(
 				'dashboard-performance-module-error',
 				__( 'Performance Report', 'wphb' ),
 				array( $this, 'dashboard_performance_module_error_metabox' ),
 				null,
 				null,
-				'box-dashboard-left',
-				array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				)
+				'box-dashboard-left'
 			);
-		} elseif ( $report_dismissed ) {
+		} elseif ( $this->performance->report_dismissed ) {
 			$this->add_meta_box(
 				'dashboard-performance-module',
 				__( 'Performance Report', 'wphb' ),
 				array( $this, 'dashboard_performance_module_metabox_dismissed' ),
 				array( $this, 'dashboard_performance_module_metabox_header' ),
 				array( $this, 'dashboard_performance_module_metabox_footer' ),
-				'box-dashboard-left',
-				array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				)
+				'box-dashboard-left'
 			);
 		} else {
 			$this->add_meta_box(
@@ -236,14 +278,12 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'dashboard_performance_disabled_metabox' ),
 				null,
 				null,
-				'box-dashboard-left',
-				array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				)
+				'box-dashboard-left'
 			);
 		} // End if().
 
 		/* Page caching */
+
 		/* @var WP_Hummingbird_Module_Page_Cache $module */
 		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
 		$footer = null;
@@ -261,9 +301,10 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 
 		/* Browser caching */
 		$browser_caching_args = array(
-			'box_content_class' => 'box-content no-background-image',
+			'box_content_class' => 'sui-box-body no-background-image',
+			'box_footer_class' => 'sui-box-footer sui-pull-up',
 		);
-		/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
+		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 		if ( ! ( $cf_module->is_connected() && $cf_module->is_zone_selected() ) ) {
 			if ( ! get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' !== get_site_option( 'wphb-cloudflare-dash-notice' ) ) {
@@ -281,8 +322,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			$browser_caching_args
 		);
 
-		/* Gravatar caching */
-		/* @var WP_Hummingbird_Module_Gravatar $module */
+		/**
+		 * Gravatar caching
+		 *
+		 * @var WP_Hummingbird_Module_Gravatar $module
+		 */
 		$module = WP_Hummingbird_Utils::get_module( 'gravatar' );
 		$footer = null;
 		if ( $module->is_active() ) {
@@ -304,19 +348,32 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			array( $this, 'dashboard_gzip_module_metabox' ),
 			array( $this, 'dashboard_gzip_module_metabox_header' ),
 			array( $this, 'dashboard_gzip_module_metabox_footer' ),
-			'box-dashboard-right'
+			'box-dashboard-right',
+			array(
+				'box_footer_class' => 'sui-box-footer sui-pull-up',
+			)
 		);
 
 		/* Asset Optimization */
 		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
-			$this->add_meta_box( 'dashboard/minification/cant-execute-php', __( 'Asset Optimization', 'wphb' ), null, null, null, 'box-dashboard-right', array(
-				'box_class' => 'dev-box content-box content-box-one-col-center',
-			) );
+			$this->add_meta_box(
+				'dashboard/minification/cant-execute-php',
+				__( 'Asset Optimization', 'wphb' ),
+				null,
+				null,
+				null,
+				'box-dashboard-right'
+			);
 		} elseif ( is_multisite() && is_network_admin() ) {
-			// Asset optimization metabox is different on network admin
-			$this->add_meta_box( 'dashboard/minification/network-module', __( 'Asset Optimization', 'wphb' ), array( $this, 'dashboard_minification_network_module_metabox' ), null, null, 'box-dashboard-right', array(
-				'box_class' => 'dev-box content-box content-box-one-col-center',
-			) );
+			// Asset optimization metabox is different on network admin.
+			$this->add_meta_box(
+				'dashboard/minification/network-module',
+				__( 'Asset Optimization', 'wphb' ),
+				array( $this, 'dashboard_minification_network_module_metabox' ),
+				null,
+				null,
+				'box-dashboard-right'
+			);
 		} else {
 			/* @var WP_Hummingbird_Module_Minify $module */
 			$module = WP_Hummingbird_Utils::get_module( 'minify' );
@@ -332,14 +389,22 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 					'box-dashboard-right'
 				);
 			} else {
-				$this->add_meta_box( 'dashboard/minification-disabled', __( 'Asset Optimization', 'wphb' ), array( $this, 'dashboard_minification_disabled_metabox' ), null, null, 'box-dashboard-right', array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				) );
+				$this->add_meta_box(
+					'dashboard/minification-disabled',
+					__( 'Asset Optimization', 'wphb' ),
+					array( $this, 'dashboard_minification_disabled_metabox' ),
+					null,
+					null,
+					'box-dashboard-right'
+				);
 			}
-		}
+		} // End if().
 
-		/* Advanced tools */
-		// At the moment advanced tools is only for non network installs.
+		/**
+		 * Advanced tools
+		 *
+		 * At the moment advanced tools is only for non network installs.
+		 */
 		if ( ! is_multisite() ) {
 			$this->add_meta_box(
 				'dashboard/advanced-tools',
@@ -347,7 +412,10 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'dashboard_advanced_metabox' ),
 				null,
 				array( $this, 'dashboard_advanced_metabox_footer' ),
-				'box-dashboard-right'
+				'box-dashboard-right',
+				array(
+					'box_footer_class' => 'sui-box-footer sui-pull-up',
+				)
 			);
 		}
 
@@ -367,13 +435,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		);
 
 		/* Uptime */
-		/* @var WP_Hummingbird_Module_Uptime $uptime_module */
-		$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
-		$is_active = $uptime_module->is_active();
-		if ( $is_active ) {
-			$this->uptime_report = $uptime_module->get_last_report();
-		}
-
 		if ( ! WP_Hummingbird_Utils::is_member() ) {
 			$this->add_meta_box(
 				'dashboard/uptime/no-membership',
@@ -383,7 +444,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'box-dashboard-right'
 			);
-		} elseif ( is_wp_error( $this->uptime_report ) && $is_active ) {
+		} elseif ( is_wp_error( $this->uptime_report ) && $this->uptime_active ) {
 			$this->add_meta_box(
 				'dashboard-uptime-error',
 				__( 'Uptime', 'wphb' ),
@@ -392,7 +453,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'box-dashboard-right'
 			);
-		} elseif ( ! $is_active ) {
+		} elseif ( ! $this->uptime_active ) {
 			$this->add_meta_box(
 				'dashboard-uptime-disabled',
 				__( 'Uptime', 'wphb' ),
@@ -409,7 +470,9 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'dashboard_uptime_module_metabox_header' ),
 				array( $this, 'dashboard_uptime_module_metabox_footer' ),
 				'box-dashboard-right',
-				null
+				array(
+					'box_footer_class' => 'sui-box-footer sui-pull-up',
+				)
 			);
 		} // End if().
 
@@ -430,29 +493,16 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * Display dashboard welcome metabox.
 	 */
 	public function dashboard_welcome_metabox() {
-		$caching_status = WP_Hummingbird_Utils::get_status( 'caching' );
-		$caching_issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
+		$site_date  = $cf_current = '';
+		$cf_active  = false;
 
-		$gzip_status = WP_Hummingbird_Utils::get_status( 'gzip' );
-		$gzip_issues = WP_Hummingbird_Utils::get_number_of_issues( 'gzip' );
-
-		$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
-		$uptime_active = $uptime_module->is_active();
-		$uptime_report = $this->uptime_report;
-		$site_date = '';
-		if ( WP_Hummingbird_Utils::is_member() && isset( $uptime_report->up_since ) && false !== $uptime_report->up_since ) {
-			$gmt_date = date( 'Y-m-d H:i:s', $uptime_report->up_since );
+		if ( WP_Hummingbird_Utils::is_member() && isset( $this->uptime_report->up_since ) && false !== $this->uptime_report->up_since ) {
+			$gmt_date = date( 'Y-m-d H:i:s', $this->uptime_report->up_since );
 			$site_date = get_date_from_gmt( $gmt_date, get_option( 'date_format' ) . ' ' . get_option( 'time_format' ) );
 		}
 
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-		$report_dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
-		$is_doing_report = WP_Hummingbird_Module_Performance::is_doing_report();
 		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
-		$cf_active = false;
-
-		$cf_current = '';
 		if ( $cf_module->is_connected() && $cf_module->is_zone_selected() ) {
 			$cf_active = true;
 			$cf_current = $cf_module->get_caching_expiration();
@@ -461,21 +511,20 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 
-		$args = compact(
-			'caching_status',
-			'caching_issues',
-			'gzip_status',
-			'gzip_issues',
-			'uptime_active',
-			'uptime_report',
-			'last_report',
-			'cf_active',
-			'cf_current',
-			'site_date',
-			'report_dismissed',
-			'is_doing_report'
-		);
-		$this->view( 'dashboard/welcome/meta-box', $args );
+		$this->view( 'dashboard/welcome/meta-box', array(
+			'caching_status'   => $this->caching_status,
+			'caching_issues'   => WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->caching_status ),
+			'gzip_status'      => $this->gzip_status,
+			'gzip_issues'      => WP_Hummingbird_Utils::get_number_of_issues( 'gzip', $this->gzip_status ),
+			'uptime_active'    => $this->uptime_active,
+			'uptime_report'    => $this->uptime_report,
+			'last_report'      => $this->performance->last_report,
+			'report_dismissed' => $this->performance->report_dismissed,
+			'is_doing_report'  => $this->performance->is_doing_report,
+			'cf_active'        => $cf_active,
+			'cf_current'       => $cf_current,
+			'site_date'        => $site_date,
+		));
 	}
 
 	/**
@@ -487,15 +536,16 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/welcome/meta-box-header', compact( 'title' ) );
 	}
 
-	/*******************
-	 * CACHING         *
-	 *******************/
+	/**
+	 * *************************
+	 * CACHING
+	 ***************************/
 
 	/**
 	 * Display browser caching metabox.
 	 */
 	public function dashboard_browser_caching_module_metabox() {
-		$caching_status = WP_Hummingbird_Utils::get_status( 'caching' );
+		$caching_status = $this->caching_status;
 		$recommended = WP_Hummingbird_Utils::get_recommended_caching_values();
 		$expiration = 0;
 		// Get expiration setting values.
@@ -525,7 +575,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 				$cf_current = '';
 			}
 
-			$cf_tooltip = 691200 == $cf_current ? __( 'Caching is enabled', 'wphb' ) : __( "Caching is enabled but you aren't using our recommended value", 'wphb' );
+			$cf_tooltip = 691200 === $cf_current ? __( 'Caching is enabled', 'wphb' ) : __( "Caching is enabled but you aren't using our recommended value", 'wphb' );
 			$cf_current_human = WP_Hummingbird_Utils::human_read_time_diff( $cf_current );
 
 			// Fill the report with values from Cloudflare.
@@ -537,7 +587,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 
 		// Get number of issues for notification box.
 		if ( ! $cf_active ) {
-			$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
+			$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $caching_status );
 		} elseif ( 691200 > $expiration ) {
 			count( $caching_status );
 			$issues = count( $caching_status );
@@ -575,7 +625,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function dashboard_browser_caching_module_metabox_header() {
 		$title = __( 'Browser Caching', 'wphb' );
-		$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
+		$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->caching_status );
 
 		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
@@ -600,7 +650,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.7.0
 	 */
 	public function dashboard_browser_caching_module_metabox_footer() {
-		/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
+		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 		$this->view( 'dashboard/caching/module-meta-box-footer', array(
 			'caching_url' => WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=browser',
@@ -673,9 +723,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/caching/gravatar-module-meta-box-footer', compact( 'url' ) );
 	}
 
-	/*******************
-	 * UPTIME          *
-	 *******************/
+	/**
+	 * *************************
+	 * UPTIME
+	 ***************************/
+
 	/**
 	 * Uptime meta box.
 	 */
@@ -702,11 +754,18 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/uptime/module-meta-box-footer', compact( 'url' ) );
 	}
 
+	/**
+	 * Uptime disabled meta box.
+	 */
 	public function dashboard_uptime_disabled_metabox() {
 		$enable_url = add_query_arg( 'action', 'enable', WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
 		$enable_url = wp_nonce_url( $enable_url, 'wphb-toggle-uptime' );
 		$this->view( 'dashboard/uptime/disabled-meta-box', compact( 'enable_url' ) );
 	}
+
+	/**
+	 * Uptime error meta box.
+	 */
 	public function dashboard_uptime_error_metabox() {
 		$report = $this->uptime_report;
 		$retry_url = add_query_arg(
@@ -723,9 +782,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/uptime/error-meta-box', compact( 'retry_url', 'support_url', 'error' ) );
 	}
 
-	/**********************
-	 * ASSET OPTIMIZATION *
-	 **********************/
+	/**
+	 * *************************
+	 * ASSET OPTIMIZATION
+	 ***************************/
+
 	/**
 	 * Asset optimization meta box.
 	 */
@@ -734,7 +795,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 		$collection = $minify_module->get_resources_collection();
 
-		// Remove those assets that we don't want to display
+		// Remove those assets that we don't want to display.
 		foreach ( $collection['styles'] as $key => $item ) {
 			if ( ! apply_filters( 'wphb_minification_display_enqueued_file', true, $item, 'styles' ) ) {
 				unset( $collection['styles'][ $key ] );
@@ -790,6 +851,9 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/minification/module-meta-box-footer', compact( 'url', 'cdn_status' ) );
 	}
 
+	/**
+	 * Asset optimization network meta box.
+	 */
 	public function dashboard_minification_network_module_metabox() {
 		/* @var WP_Hummingbird_Module_Minify $minify */
 		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
@@ -804,6 +868,9 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/minification/network-module-meta-box', $args );
 	}
 
+	/**
+	 * Asset optimization disabled meta box.
+	 */
 	public function dashboard_minification_disabled_metabox() {
 		$minification_url = add_query_arg(
 			array(
@@ -816,27 +883,20 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/minification/disabled-meta-box', compact( 'minification_url' ) );
 	}
 
-	/*******************
-	 * ADVANCED TOOLS  *
-	 *******************/
+	/**
+	 * *************************
+	 * ADVANCED TOOLS
+	 ***************************/
+
 	/**
 	 * Advanced tools meta box.
 	 *
 	 * @since 1.8
 	 */
 	public function dashboard_advanced_metabox() {
-		/* @var WP_Hummingbird_Module_Advanced $adv_module */
-		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-
-		$fields = WP_Hummingbird_Module_Advanced::get_db_fields();
-
-		$count = 0;
-		foreach ( $fields as $type => $data ) {
-			$count += $adv_module->get_db_count( $type );
-		}
-
+		$items = WP_Hummingbird_Module_Advanced::get_db_count();
 		$this->view( 'dashboard/advanced/module-meta-box', array(
-			'count' => $count,
+			'count' => $items->total,
 		) );
 	}
 
@@ -851,32 +911,45 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		) );
 	}
 
-	/*******************
-	 * GZIP            *
-	 *******************/
+	/**
+	 * *************************
+	 * GZIP
+	 ***************************/
+
+	/**
+	 * Dashboard gzip meta box.
+	 */
 	public function dashboard_gzip_module_metabox() {
 		$this->view( 'dashboard/gzip/module-meta-box', array(
-			'status'         => WP_Hummingbird_Utils::get_status( 'gzip' ),
-			'inactive_types' => WP_Hummingbird_Utils::get_number_of_issues( 'gzip' ),
+			'status'         => $this->gzip_status,
+			'inactive_types' => WP_Hummingbird_Utils::get_number_of_issues( 'gzip', $this->gzip_status ),
 		) );
 	}
 
+	/**
+	 * Dashboard gzip meta box header.
+	 */
 	public function dashboard_gzip_module_metabox_header() {
 		$this->view( 'dashboard/gzip/module-meta-box-header', array(
 			'title'  => __( 'GZIP Compression', 'wphb' ),
-			'issues' => WP_Hummingbird_Utils::get_number_of_issues( 'gzip' ),
+			'issues' => WP_Hummingbird_Utils::get_number_of_issues( 'gzip', $this->gzip_status ),
 		) );
 	}
 
+	/**
+	 * Dashboard gzip meta box footer.
+	 */
 	public function dashboard_gzip_module_metabox_footer() {
 		$this->view( 'dashboard/gzip/module-meta-box-footer', array(
 			'gzip_url' => WP_Hummingbird_Utils::get_admin_menu_url( 'gzip' ),
 		) );
 	}
 
-	/********************
-	 * PERFORMANCE      *
-	 ********************/
+	/**
+	 * *************************
+	 * PERFORMANCE
+	 ***************************/
+
 	/**
 	 * Performance disabled meta box.
 	 */
@@ -888,7 +961,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			),
 			WP_Hummingbird_Utils::get_admin_menu_url()
 		);
-		$run_url = wp_nonce_url( $run_url, 'wphb-run-dashboard' ) . '#wphb-box-dashboard-performance-running-test';
+		$run_url = wp_nonce_url( $run_url, 'wphb-run-dashboard' );
 
 		$this->view( 'dashboard/performance/disabled-meta-box', compact( 'run_url' ) );
 	}
@@ -897,12 +970,10 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * Performance meta box.
 	 */
 	public function dashboard_performance_module_metabox() {
-		$report = WP_Hummingbird_Module_Performance::get_last_report();
-		$report = $report->data;
-
-		$viewreport_link = WP_Hummingbird_Utils::get_admin_menu_url( 'performance' );
-
-		$this->view( 'dashboard/performance/module-meta-box', compact( 'report', 'viewreport_link' ) );
+		$this->view( 'dashboard/performance/module-meta-box', array(
+			'report'          => $this->performance->last_report->data,
+			'viewreport_link' => WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ),
+		));
 	}
 
 	/**
@@ -924,13 +995,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * Performance meta box header.
 	 */
 	public function dashboard_performance_module_metabox_header() {
-		$title = __( 'Performance Test', 'wphb' );
-
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
+		$last_report = $this->performance->last_report;
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$last_report = $last_report->data;
 		}
-		$report_dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
+
 		$scan_link = add_query_arg(
 			array(
 				'run'  => 'true',
@@ -938,10 +1007,14 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			),
 			WP_Hummingbird_Utils::get_admin_menu_url()
 		);
-		$scan_link = wp_nonce_url( $scan_link, 'wphb-run-dashboard' ) . '#wphb-box-dashboard-performance-running-test';
-		$can_run_scan = WP_Hummingbird_Module_Performance::can_run_test();
 
-		$this->view( 'dashboard/performance/module-meta-box-header', compact( 'title', 'last_report', 'scan_link', 'can_run_scan', 'report_dismissed' ) );
+		$this->view( 'dashboard/performance/module-meta-box-header', array(
+			'title'            => __( 'Performance Test', 'wphb' ),
+			'last_report'      => $last_report,
+			'scan_link'        => wp_nonce_url( $scan_link, 'wphb-run-dashboard' ),
+			'can_run_scan'     => WP_Hummingbird_Module_Performance::can_run_test(),
+			'report_dismissed' => $this->performance->report_dismissed,
+		));
 	}
 
 	/**
@@ -969,8 +1042,6 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 * Performance errors meta box.
 	 */
 	public function dashboard_performance_module_error_metabox() {
-		/* @var WP_Error $last_report */
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
 		$retry_url = add_query_arg(
 			array(
 				'run'  => 'true',
@@ -978,17 +1049,19 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			),
 			WP_Hummingbird_Utils::get_admin_menu_url()
 		);
-		$retry_url = wp_nonce_url( $retry_url, 'wphb-run-dashboard' ) . '#wphb-box-dashboard-performance-running-test';
 
-		$support_url = WP_Hummingbird_Utils::get_link( 'support' );
-		$error = $last_report->get_error_message();
-
-		$this->view( 'dashboard/performance/module-error-meta-box', compact( 'error', 'retry_url', 'support_url' ) );
+		$this->view( 'dashboard/performance/module-error-meta-box', array(
+			'error'       => $this->performance->last_report->get_error_message(),
+			'retry_url'   => wp_nonce_url( $retry_url, 'wphb-run-dashboard' ),
+			'support_url' => WP_Hummingbird_Utils::get_link( 'support' ),
+		));
 	}
 
-	/*********************************
-	/** SMUSH                        *
-	 *********************************/
+	/**
+	 * *************************
+	 * SMUSH
+	 ***************************/
+
 	/**
 	 * Smush meta box.
 	 */
@@ -1039,9 +1112,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( 'dashboard/smush/meta-box-footer', compact( 'url' ) );
 	}
 
-	/*********************************
-	/** REPORTS                      *
-	 *********************************/
+	/**
+	 * *************************
+	 * REPORTS
+	 ***************************/
+
 	/**
 	 * Reports header meta box
 	 *

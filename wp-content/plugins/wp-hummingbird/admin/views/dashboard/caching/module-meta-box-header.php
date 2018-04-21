@@ -11,9 +11,11 @@
  */
 
 ?>
-<h3><?php echo esc_html( $title ); ?></h3>
+<h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( $issues && ! $cf_active ) : ?>
-	<div class="wphb-pills"><?php echo intval( $issues ); ?></div>
+	<div class="sui-actions-left">
+		<div class="sui-tag"><?php echo intval( $issues ); ?></div>
+	</div>
 <?php elseif ( 691200 !== $cf_current && $cf_active ) : ?>
-	<div class="wphb-pills">5</div>
+	<div class="sui-tag">5</div>
 <?php endif; ?>

@@ -74,7 +74,9 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 			$last_score = WP_Hummingbird_Settings::get_setting( 'last_score', 'performance' );
 
 			if ( $last_score && ! is_wp_error( $report ) ) {
-				$report->data->last_score = array( 'score' => $last_score );
+				$report->data->last_score = array(
+					'score' => $last_score,
+				);
 			} elseif ( is_object( $report ) && ! is_wp_error( $report ) ) {
 				$report->data->last_score = false;
 			}

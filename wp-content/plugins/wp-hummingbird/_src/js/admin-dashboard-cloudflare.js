@@ -76,7 +76,7 @@ import Fetcher from './utils/fetcher';
             });
 
             this.$stepsContainer.find( 'select' ).each( function() {
-				window.WDP.wpmuSelect( this );
+				suiSelect( this );
             });
 
             if ( 'final' === this.currentStep ) {

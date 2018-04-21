@@ -13,6 +13,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Class WP_Hummingbird_Logger
+ */
 class WP_Hummingbird_Logger {
 
 	/**
@@ -60,7 +63,7 @@ class WP_Hummingbird_Logger {
 	 * @since  1.7.2
 	 *
 	 * @access private
-	 * @var    string $module  Module slug.
+	 * @param  string $module  Module slug.
 	 */
 	public function __construct( $module ) {
 		$this->module = $module;
@@ -128,10 +131,9 @@ class WP_Hummingbird_Logger {
 			return;
 		}
 
-		try {
-			@mkdir( $this->log_dir );
-		} catch ( Exception $e ) {
-			$this->status = new WP_Error( 'log-dir-error', $e->getMessage() );
+		if ( ! @mkdir( $this->log_dir ) ) {
+			$error = error_get_last();
+			$this->status = new WP_Error( 'log-dir-error', $error['message'] );
 		}
 	}
 
@@ -142,7 +144,7 @@ class WP_Hummingbird_Logger {
 	 *
 	 * @access private
 	 *
-	 * @param  string $mode     Accepts any mode from the list: http://php.net/manual/en/function.fopen.php
+	 * @param  string $mode     Accepts any mode from the list: http://php.net/manual/en/function.fopen.php.
 	 * @param  string $message  String to write to file.
 	 */
 	private function write_file( $mode, $message = '' ) {
@@ -192,7 +194,7 @@ class WP_Hummingbird_Logger {
 			closedir( $dir );
 			rmdir( $log_dir );
 		} catch ( Exception $e ) {
-			error_log( '[' . current_time( 'mysql' ) . '] - Unable to clean Hummingbird log directory. Error: ' . $e->getMessage() );
+			error_log( '[' . current_time( 'mysql' ) . '] - Unable to clean Hummingbird log directory. Error: ' . $e->getMessage() );	   			 	 		  		   		
 		}
 	}
 

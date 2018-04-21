@@ -1,16 +1,41 @@
 <?php
 
+/**
+ * Class WP_Hummingbird_Admin_Page
+ */
 abstract class WP_Hummingbird_Admin_Page {
 
+	/**
+	 * Page slug.
+	 *
+	 * @var string
+	 */
 	protected $slug = '';
 
+	/**
+	 * Meta boxes array.
+	 *
+	 * @var array
+	 */
 	protected $meta_boxes = array();
 
+	/**
+	 * Submenu tabs.
+	 *
+	 * @var array
+	 */
 	protected $tabs = array();
 
+	/**
+	 * Page ID.
+	 *
+	 * @var false|null|string
+	 */
 	public $page_id = null;
 
 	/**
+	 * Admin notices.
+	 *
 	 * @var WP_Hummingbird_Admin_Notices
 	 */
 	protected $admin_notices;
@@ -74,11 +99,11 @@ abstract class WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * Load an admin view
+	 * Load an admin view.
 	 *
-	 * @param $name
-	 * @param array $args
-	 * @param bool $echo
+	 * @param string $name  View name = file name.
+	 * @param array  $args  Arguments.
+	 * @param bool   $echo  Echo or return.
 	 *
 	 * @return string
 	 */
@@ -89,10 +114,6 @@ abstract class WP_Hummingbird_Admin_Page {
 		if ( is_file( $file ) ) {
 
 			ob_start();
-
-			if ( class_exists( 'WDEV_Plugin_Ui' ) ) {
-				WDEV_Plugin_Ui::output();
-			}
 
 			if ( isset( $args['id'] ) ) {
 				$args['orig_id'] = $args['id'];
@@ -113,6 +134,13 @@ abstract class WP_Hummingbird_Admin_Page {
 		echo $content;
 	}
 
+	/**
+	 * Check if view exists.
+	 *
+	 * @param string $name  View name = file name.
+	 *
+	 * @return bool
+	 */
 	protected function view_exists( $name ) {
 		$file = WPHB_DIR_PATH . "admin/views/{$name}.php";
 		return is_file( $file );
@@ -125,8 +153,28 @@ abstract class WP_Hummingbird_Admin_Page {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
 		add_action( 'admin_notices', array( $this, 'notices' ) );
 		add_action( 'network_admin_notices', array( $this, 'notices' ) );
+
+		// Add the admin body classes.
+		add_filter( 'admin_body_class', array( $this, 'admin_body_class' ) );
 	}
 
+	/**
+	 * Return the classes to be added to the body in the admin.
+	 *
+	 * @param String $classes Classes to be added.
+	 * @return String
+	 */
+	public function admin_body_class( $classes ) {
+
+		$classes .= ' sui-2-1-0 wpmud ';
+
+		return $classes;
+
+	}
+
+	/**
+	 * Notices.
+	 */
 	public function notices() {}
 
 	/**
@@ -134,18 +182,36 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function on_load() {}
 
+	/**
+	 * Enqueue scripts.
+	 *
+	 * @param string $hook  Hook from where the call is made.
+	 */
 	public function enqueue_scripts( $hook ) {
-		/* Enqueue Dashboard UI Shared Lib */
-		WDEV_Plugin_Ui::load( WPHB_DIR_URL . 'externals/shared-ui' );
+		// WPMU DEV Shared UI.
+		wp_enqueue_style( 'wpmudev-sui', plugins_url( 'admin/assets/css/shared-ui.min.css', __DIR__ ) );
 
-		// Styles
-		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.css', array(), WPHB_VERSION );
+		// Styles.
+		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.min.css', array(), WPHB_VERSION );
 
-		// Scripts
+		// Scripts.
 		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
+		wp_enqueue_script(
+			'wpmudev-sui',
+			plugins_url( 'admin/assets/js/shared-ui.min.js', __DIR__ ),
+			array( 'jquery' ),
+			null,
+			true
+		);
 
-		// TODO: remove this once it's fixed in Smush
-		wp_dequeue_style( 'wp-smushit-admin-css' );
+		// Google visualization library for Uptime.
+		if ( 'hummingbird-pro_page_wphb-uptime' === $hook ) {
+			wp_enqueue_script(
+				'wphb-google-chart',
+				"https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart','timeline']}]}",
+				array( 'jquery' )
+			);
+		}
 	}
 
 	/**
@@ -154,20 +220,22 @@ abstract class WP_Hummingbird_Admin_Page {
 	public function register_meta_boxes() {}
 
 	/**
-	 * @param $id
-	 * @param $title
-	 * @param callable|string|null $callback
-	 * @param callable|string|null $callback_header
-	 * @param callable|string|null $callback_footer
-	 * @param string $context
-	 * @param array $args
+	 * Add meta box.
+	 *
+	 * @param string $id               Meta box ID.
+	 * @param string $title            Meta box title.
+	 * @param string $callback         Callback for meta box content.
+	 * @param string $callback_header  Callback for meta box header.
+	 * @param string $callback_footer  Callback for meta box footer.
+	 * @param string $context          Meta box context.
+	 * @param array  $args             Arguments.
 	 */
 	public function add_meta_box( $id, $title, $callback = '', $callback_header = '', $callback_footer = '', $context = 'main', $args = array() ) {
 		$default_args = array(
-			'box_class'         => 'dev-box',
-			'box_header_class'  => 'box-title',
-			'box_content_class' => 'box-content',
-			'box_footer_class'  => 'box-footer',
+			'box_class'         => 'sui-box',
+			'box_header_class'  => 'sui-box-header',
+			'box_content_class' => 'sui-box-body',
+			'box_footer_class'  => 'sui-box-footer',
 		);
 
 		$args = wp_parse_args( $args, $default_args );
@@ -209,8 +277,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * Render
-	 * @param string $context
+	 * Render meta box.
+	 *
+	 * @param string $context  Meta box context. Default: main.
 	 */
 	protected function do_meta_boxes( $context = 'main' ) {
 		if ( empty( $this->meta_boxes[ $this->slug ][ $context ] ) ) {
@@ -233,9 +302,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * Check if there is any meta box for a given context
+	 * Check if there is any meta box for a given context.
 	 *
-	 * @param $context
+	 * @param string $context  Meta box context.
 	 *
 	 * @return bool
 	 */
@@ -249,14 +318,15 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	protected function render_header() {
 		?>
-		<section id="header">
+		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
-			<div class="actions">
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+			<div class="sui-actions-right">
+				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+					<i class="sui-icon-academy" aria-hidden="true"></i>
 					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
 				</a>
 			</div>
-		</section><!-- end header -->
+		</div><!-- end header -->
 		<?php
 	}
 
@@ -265,9 +335,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function render() {
 		?>
-		<div id="container" class="wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . $this->slug; ?>">
+		<div class="sui-wrap wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
 			<?php
-			if ( isset( $_GET['updated'] ) ) {
+			if ( isset( $_GET['updated'] ) ) { // Input var ok.
 				$this->admin_notices->show( 'updated', __( 'Settings Updated', 'wphb' ), 'success' );
 			}
 
@@ -275,16 +345,18 @@ abstract class WP_Hummingbird_Admin_Page {
 
 			$this->render_inner_content();
 			?>
-			<div class="footer-love">
-				<?php printf( __( 'Made with %s by WPMU DEV', 'wphb' ), '<span class="dashicons-heart dashicons"></span>' ); ?>
+			<div class="sui-footer">
+				<?php
+					printf(
+						/* translators: %s - icon */
+						esc_html__( 'Made with %s by WPMU DEV', 'wphb' ),
+						'<i aria-hidden="true" class="sui-icon-heart"></i>'
+					);
+				?>
 			</div>
 		</div><!-- end container -->
 
 		<script>
-			jQuery(document).ready( function() {
-				window.WPHB_Admin.getModule( 'notices' );
-			});
-
 			// Avoid moving dashboard notice under h2
 			var wpmuDash = document.getElementById( 'wpmu-install-dashboard' );
 			if ( wpmuDash )
@@ -295,6 +367,9 @@ abstract class WP_Hummingbird_Admin_Page {
 		<?php
 	}
 
+	/**
+	 * Render inner content.
+	 */
 	protected function render_inner_content() {
 		$this->view( $this->slug . '-page' );
 	}
@@ -334,8 +409,8 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function get_current_tab() {
 		$tabs = $this->get_tabs();
-		if ( isset( $_GET['view'] ) && array_key_exists( $_GET['view'], $tabs ) ) {
-			return $_GET['view'];
+		if ( isset( $_GET['view'] ) && array_key_exists( wp_unslash( $_GET['view'] ), $tabs ) ) { // Input var ok.
+			return wp_unslash( $_GET['view'] ); // Input var ok.
 		}
 
 		if ( empty( $tabs ) ) {
@@ -367,7 +442,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	/**
 	 * Get a tab URL
 	 *
-	 * @param $tab
+	 * @param string $tab  Tab ID.
 	 *
 	 * @return string
 	 */
@@ -387,7 +462,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	/**
 	 * Return the name of a tab
 	 *
-	 * @param $tab
+	 * @param string $tab  Tab ID.
 	 *
 	 * @return mixed|string
 	 */

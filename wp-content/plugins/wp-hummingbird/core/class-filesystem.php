@@ -147,7 +147,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				require_once( ABSPATH . 'wp-admin/includes/file.php' );
 			}
 
-			// Removes CRITICAL Uncaught Error: Call to undefined function submit_button() in wp-admin/includes/file.php:1287
+			// Removes CRITICAL Uncaught Error: Call to undefined function submit_button() in wp-admin/includes/file.php:1287.
 			require_once( ABSPATH . 'wp-admin/includes/template.php' );
 
 			// Check if the user has write permissions.
@@ -183,7 +183,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 		 * @since  1.7.2
 		 *
 		 * @access private
-		 * @param  string $path
+		 * @param string $path  Path to delete.
 		 *
 		 * @return bool
 		 */
@@ -391,7 +391,6 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 				}
 			} else {
 				// Use direct filesystem php functions.
-
 				// Check if cache folder exists. If not - create it.
 				if ( ! is_dir( $path ) ) {
 					if ( ! @wp_mkdir_p( $path ) ) {

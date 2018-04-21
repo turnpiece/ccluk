@@ -193,8 +193,8 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	/**
 	 * Get data from the database.
 	 *
-	 * @param string $param Accepts: 'revisions', 'drafts', 'trash', 'spam', 'trash_comment',
-	 *                      'expired_transients', 'transients', 'all'.
+	 * @param string $type Accepts: 'revisions', 'drafts', 'trash', 'spam', 'trash_comment',
+	 *                     'expired_transients', 'transients', 'all'.
 	 *
 	 * @return int|array
 	 */
@@ -248,6 +248,8 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 				$count = $wpdb->get_row( $query );
 				break;
 		}
+
+
 
 		return $count;
 	}

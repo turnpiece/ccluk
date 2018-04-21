@@ -31,60 +31,11 @@
     margin: 10px 30px 0;
 }
 
-.wpmud #header .button[disabled] {
-    background-color: #E6E6E6 !important;
-    border-radius: 4px;
-    color: #AAAAAA !important;
-}
 
-.wpmud .documentation-button:before {
-    content: '\e915';
-    color: #888888;
-    font-family: $font--icons;
-    font-size: 12px;
-    vertical-align: middle;
-    line-height: 16px;
-    top: -2px;
-    position: relative;
-    margin-right: 5px;
-}
 
-.wpmud .documentation-button:hover:before,
-.wpmud .documentation-button:focus:before {
-    color: #FFFFFF;
-}
 
-.wpmud .wphb-modal .wphb-dialog-content .button {
-    margin-bottom: 15px;
-}
-
-.wpmud .wphb-modal .alignleft,
-.wpmud .wphb-modal .button {
-    margin-bottom: 0 !important;
-}
-
-.wpmud .wphb-block-entry-content .buttons-group .button {
-    display: inline-block;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status button {
-    border-radius: 20px !important;
-    margin-top: 10px !important;
-    background-color: #D1F1EA !important;
-    color: #1ABC9C !important;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status button i {
-    color: #1ABC9C;
-    font-size: 16px;
-    position: relative;
-    line-height: 10px;
-    top: 3px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status button.inactive {
-    background-color: #E6E6E6 !important;
-    color: #AAAAAA !important;
+.wpmud .wrap-wp-hummingbird .report-status .sui-tag {
+    margin-top: 10px;
 }
 
 .wpmud .wrap-wphb-performance .scan-settings .buttons {
@@ -128,20 +79,12 @@
 }
 
 /* Buttons */
-.wpmud .wphb-modal button:not(.wph-button):not(#collapse-button),
-.wpmud .wphb-modal .button:hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]) {
-    background: #17A8E3;
-}
 
-.wpmud .wrap-wp-hummingbird .wpdui-btn,
-.wpmud .wphb-modal .button:not(.notice-dismiss),
-.wpmud .wrap-wp-hummingbird button:not(.notice-dismiss),
-.wpmud .wrap-wp-hummingbird .button,
-.wpmud .wrap-wp-hummingbird button:not(.wph-button):not(#collapse-button):not(.notice-dismiss) {
+.wpmud .wrap-wp-hummingbird .wpdui-btn {
     font: 500 12px/16px $font !important;
     padding: 7px 16px;
     height: 30px;
-    background-color: #17A8E3;
+    background-color: #888;
     color: #FFFFFF;
     border-radius: 3px;
     -moz-border-radius: 3px;
@@ -149,27 +92,48 @@
     -webkit-transition: all .3s ease;
     text-shadow: none !important;
 }
+.wpmud .report-status button.sui-button-upsell {
+    margin-top: 10px !important;
+    text-transform: uppercase;
 
-.wpmud .wrap-wp-hummingbird button:hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]):not(.notice-dismiss),
-.wpmud .wrap-wp-hummingbird .button:hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]),
-.wpmud .wphb-modal .button:hover:not(:focus):not(:active):not(.wph-button):not(#collapse-button):not([tooltip]),
-.wpmud .wrap-wp-hummingbird button:active,
-.wpmud .wrap-wp-hummingbird button:focus,
-.wpmud .wrap-wp-hummingbird .button:active,
-.wpmud .wrap-wp-hummingbird .button:focus,
-.wpmud .wphb-modal .button:focus,
-.wpmud .wphb-modal .button:active {
-    background: #0A9BD6;
+    height: 30px;
+    line-height: 16px;
+    padding: 0 16px;
+    &:not(:disabled){
+        background-color: #d1f1ea !important;
+        color: #1abc9c !important;
+        &:hover,
+        &:focus {
+            background-color: #d1f1ea !important;
+            color: #1abc9c !important;
+            border-color: #d1f1ea !important;
+        }
+    }
+
+
+
+    i {
+        color: #1abc9c;
+        font-size: 16px;
+        position: relative;
+        line-height: 16px;
+        top: 2px;
+    }
 }
 
-.wpmud .wrap-wp-hummingbird .button-disabled {
-    border-radius: 15px;
-    background-color: #F8F8F8;
-    color: #C0C0C0;
+.wpmud .wrap-wp-hummingbird {
+    .wphb-notice {
+        &.notice {
+            .sui-button.button {
+                &:hover,
+                &:focus {
+                    color: white;
+                }
+            }
+        }
+    }
 }
 
-.wpmud .wphb-modal .button.button-large,
-.wpmud .wrap-wp-hummingbird .wpdui-btn--full,
 .wpmud .wrap-wp-hummingbird button.button-large:not(.wph-button):not(#collapse-button),
 .wpmud .wrap-wp-hummingbird button.button-large,
 .wpmud .wrap-wp-hummingbird .button.button-large {
@@ -189,14 +153,10 @@
 
 .wpmud .wrap-wp-hummingbird button.button-ghost:hover:not(.wph-button):not(#collapse-button),
 .wpmud .wrap-wp-hummingbird .button-ghost:hover:not(:focus):not(:active),
-.wpmud .wphb-modal .button-ghost:hover:not(:focus):not(:active),
 .wpmud .wrap-wp-hummingbird .button-ghost:active,
 .wpmud .wrap-wp-hummingbird .button-ghost.active,
 .wpmud .wrap-wp-hummingbird .button-ghost:hover:enabled,
 .wpmud .wrap-wp-hummingbird .button-ghost:focus,
-.wpmud .wphb-modal .button-ghost:active,
-.wpmud .wphb-modal .button-ghost:hover:enabled,
-.wpmud .wphb-modal .button-ghost:focus,
 .wpmud .wrap-wp-hummingbird .button-grey:hover {
     background-color: #7B7B7B !important;
     border-color: #7B7B7B;
@@ -224,9 +184,7 @@
 .wpmud .wrap-wp-hummingbird .button-content-cta:hover:not(:focus):not(:active),
 .wpmud .wphb-modal .button-content-cta:hover:not(:focus):not(:active),
 .wpmud .wrap-wp-hummingbird .button-content-cta:active,
-.wpmud .wrap-wp-hummingbird .button-content-cta:focus,
-.wpmud .wphb-modal .button-content-cta:active,
-.wpmud .wphb-modal .button-content-cta:focus {
+.wpmud .wrap-wp-hummingbird .button-content-cta:focus {
     background: #0DAF8F !important;
     border-color: #0DAF8F;
 }
@@ -256,36 +214,9 @@
     color: #FFFFFF !important;
 }
 
-.wpmud .wphb-modal .button-grey,
 .wpmud .wrap-wp-hummingbird .button-grey {
     background-color: #888888 !important;
     color: #FFFFFF !important;
-}
-
-.wrap-wp-hummingbird .button-load-more {
-    background-color: transparent;
-    border: 1px solid #ddd;
-    border-radius: 50%;
-    color: #bababa;
-    font-family: $font--alt;
-    font-size: 13px;
-    font-weight: 700;
-    line-height: 18px;
-    height: 140px;
-    padding: 0;
-    transition: color .4s, background-color .4s;
-    width: 140px;
-}
-
-.wrap-wp-hummingbird .button-load-more:hover:not(:focus):not(:active) {
-    background-color: #fafafa;
-    border-color: #ddd;
-    color: #777771;
-}
-
-.wrap-wp-hummingbird .button-load-more:active,
-.wrap-wp-hummingbird .button-load-more:focus {
-    background: #777771;
 }
 
 @include bp(phone) {

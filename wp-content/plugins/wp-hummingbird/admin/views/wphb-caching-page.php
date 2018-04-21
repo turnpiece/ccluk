@@ -1,17 +1,25 @@
 <?php if ( $this->has_meta_boxes( 'box-caching' ) ) : ?>
-	<div class="row">
-		<?php $this->do_meta_boxes( 'box-caching' ); ?>
-	</div>
+	<?php $this->do_meta_boxes( 'box-caching' ); ?>
 <?php endif; ?>
 
-<div class="row">
-	<div class="col-fifth">
-		<?php $this->show_tabs(); ?>
-	</div><!-- end col-sixth -->
+<div class="sui-row-with-sidenav">
+	<?php $this->show_tabs(); ?>
 
-	<div class="col-four-fifths">
+	<?php if ( 'main' === $this->get_current_tab() ) : ?>
+		<form id="page-caching-form" method="post">
+			<?php $this->do_meta_boxes( 'main' ); ?>
+		</form>
+	<?php elseif ( 'rss' === $this->get_current_tab() ) : ?>
+		<form id="rss-caching-settings" method="post">
+			<?php $this->do_meta_boxes( 'rss' ); ?>
+		</form>
+	<?php elseif ( 'settings' === $this->get_current_tab() ) : ?>
+		<form id="other-caching-settings" method="post">
+			<?php $this->do_meta_boxes( 'settings' ); ?>
+		</form>
+	<?php else : ?>
 		<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
-	</div>
+	<?php endif; ?>
 </div>
 
 <div class="row">

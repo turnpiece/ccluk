@@ -4,11 +4,19 @@
 
 @import "../common/variables";
 
-.wpmud .wrap-wphb-uptime > #header .actions.status {
-    left: 120px;
-    margin-top: 1px !important;
+.sui-header .sui-actions-right {
+    label,
+    .select-container {
+        margin-right: 10px;
+    }
+    label {
+        font-size: 12px;
+        color: #aaa;
+    }
 }
-
+.wpmud .box-uptime-summary .sui-summary {
+    background-image: url("#{$image--path}/hb-graphic-uptime-up@2x.png");
+}
 .wpmud .wphb-block-uptime-status .wphb-uptime-icon {
     max-height: 110px;
 }
@@ -130,21 +138,25 @@
 .wpmud .wrap-wphb-uptime .dev-list-stats-item {
     margin-bottom: 10px;
 }
-.wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_up,
-.wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_down {
-    color: #FFFFFF;
+.wpmud .box-uptime-downtime .sui-icon-chevron-up,
+.wpmud .box-uptime-downtime .sui-icon-chevron-down {
     padding: 6px;
     margin-right: 10px;
     vertical-align: middle;
     border-radius: 5px;
-    font-size: 18px;
+    font-size: 15px;
+    line-height: 10px;
+    &:before {
+        color: #FFFFFF;
+
+    }
 }
 
-.wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_down {
+.wpmud .box-uptime-downtime .sui-icon-chevron-down {
     background-color: #FF6D6D;
 }
 
-.wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_up {
+.wpmud .box-uptime-downtime .sui-icon-chevron-up {
     background-color: #1ABC9C;
 }
 
@@ -228,10 +240,11 @@
 }
 
 @include bp(phone-large) {
-    .wpmud .uptime-data-range {
+    .wpmud .select-container.uptime-data-range {
         position: absolute;
-        top: -50px;
+        top: 0;
         right: 0;
+        margin-right: 0;
     }
 
     .wpmud .uptime-data-range .select-list-container {
@@ -260,8 +273,8 @@
         border-radius: 5px 0 5px 5px !important;
     }
 
-    .wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_down,
-    .wpmud .wrap-wphb-uptime .dev-icon.dev-icon-caret_up {
+    .wpmud .box-uptime-downtime .sui-icon-chevron-down,
+    .wpmud .box-uptime-downtime .sui-icon-chevron-up {
         padding: 4px;
         border-radius: 4px;
         font-size: 12px;

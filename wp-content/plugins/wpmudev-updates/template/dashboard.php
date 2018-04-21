@@ -238,7 +238,7 @@ $this->render_header( $page_title );
                             </div>
                             <div class="wpmudui-product-list__cta">
 								<?php
-								$res = WPMUDEV_Dashboard::$site->get_project_infos( $item['id'] );	 	 	 	 	 		    	
+								$res = WPMUDEV_Dashboard::$site->get_project_infos( $item['id'] );
 								if ( $res->is_compatible ) { ?>
                                     <a href="<?php echo esc_url( $url ); ?>" class="wpmudui-product-list__btn"
                                        tooltip="<?php esc_html_e( 'View plugin info', 'wpmudev' ); ?>"><i

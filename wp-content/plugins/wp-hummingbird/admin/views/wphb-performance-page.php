@@ -4,20 +4,13 @@ $last_test = WP_Hummingbird_Module_Performance::get_last_report();
 ?>
 
 <?php if ( $this->has_meta_boxes( 'summary' ) ) : ?>
-	<div class="row">
-		<?php $this->do_meta_boxes( 'summary' ); ?>
-	</div>
+	<?php $this->do_meta_boxes( 'summary' ); ?>
 <?php endif; ?>
 
-<div class="row">
+<div class="sui-row-with-sidenav">
 	<?php if ( $last_test ) : ?>
-		<div class="col-fifth">
-			<?php $this->show_tabs(); ?>
-		</div><!-- end col-sixth -->
-
-		<div class="col-four-fifths">
-			<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
-		</div>
+		<?php $this->show_tabs(); ?>
+		<?php $this->do_meta_boxes( $this->get_current_tab() ); ?>
 	<?php else : ?>
 		<?php $this->do_meta_boxes( 'main' ); ?>
 	<?php endif; ?>

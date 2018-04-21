@@ -47,6 +47,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * If site is using Cloudflare.
 	 *
 	 * @since 1.7.1
+	 * @var   bool $cf_server
 	 */
 	private $cf_server = false;
 
@@ -77,6 +78,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			'browser'  => __( 'Browser Caching', 'wphb' ),
 			'gravatar' => __( 'Gravatar Caching', 'wphb' ),
 			'rss'      => __( 'RSS Caching', 'wphb' ),
+			'settings' => __( 'Settings', 'wphb' ),
 		);
 
 		// We need to actually tweak these tasks.
@@ -87,14 +89,32 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			unset( $this->tabs['browser'] );
 			unset( $this->tabs['gravatar'] );
 			unset( $this->tabs['rss'] );
+			unset( $this->tabs['settings'] );
 
 			// Don't run anything else.
 			return;
 		}
 
-		/* @var WP_Hummingbird_Module_Caching $caching */
-		$caching = WP_Hummingbird_Utils::get_module( 'caching' );
-		$options = $caching->get_options();
+		// Remove settings menu point.
+		/* @var WP_Hummingbird_Module_Page_Cache $module */
+		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		if ( ! $module->is_active() && isset( $this->tabs['settings'] ) ) {
+			unset( $this->tabs['settings'] );
+		}
+
+		// Re-check browser expiry whenever the browser caching page is loaded.
+		if ( isset( $_GET['view'] ) && 'browser' === $_GET['view'] ) { // Input var ok.
+			$this->update_cache_status();
+		}
+	}
+
+	/**
+	 * Init browser cache settings.
+	 *
+	 * @since 1.8.1
+	 */
+	private function update_cache_status() {
+		$options = WP_Hummingbird_Settings::get_settings( 'caching' );
 
 		$this->expires = array(
 			'css'        => $options['expiry_css'],
@@ -121,23 +141,19 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$this->report = array_fill_keys( array_keys( $this->expires ), $this->expiration );
 			// Save status.
 			$this->cf_server = $cf_module->has_cloudflare( true );
-		} else {
-			// Get latest local report.
-			$this->report = WP_Hummingbird_Utils::get_status( 'caching' );
+			// Get number of issues.
+			if ( 691200 > $this->expiration ) {
+				$this->issues = count( $this->report );
+			}
+			return;
 		}
+
+		// Get latest local report.
+		$this->report = WP_Hummingbird_Utils::get_status( 'caching' );
 
 		// Get number of issues.
-		if ( ! $this->cloudflare ) {
-			$this->htaccess_written = WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' );
-			$this->issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
-		} elseif ( 691200 > $this->expiration ) {
-			$this->issues = count( $this->report );
-		}
-
-		// Re-check browser expiry whenever the browser caching page is loaded.
-		if ( isset( $_GET['view'] ) && 'browser' === $_GET['view'] ) {
-			$caching->get_analysis_data( true );
-		}
+		$this->htaccess_written = WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' );
+		$this->issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
 	}
 
 	/**
@@ -146,10 +162,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.7.0
 	 */
 	public function on_load() {
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			return;
-		}
-
 		$this->init();
 
 		$redirect_to = remove_query_arg( array(
@@ -166,9 +178,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		if ( isset( $_POST['submit'] ) ) { // Input var ok.
 			check_admin_referer( 'wphb-caching' );
 
-			if ( isset( $_POST['pc-settings'] ) && 1 === absint( $_POST['pc-settings'] ) ) {
+			if ( isset( $_POST['pc-settings'] ) && 1 === absint( $_POST['pc-settings'] ) ) { // Input var ok.
 				$form = 'page-caching';
-			} elseif ( isset( $_POST['expiry-settings'] ) && 1 === absint( $_POST['expiry-settings'] ) ) {
+			} elseif ( isset( $_POST['expiry-settings'] ) && 1 === absint( $_POST['expiry-settings'] ) ) { // Input var ok.
 				$form = 'expiry-settings';
 			}
 		}
@@ -177,8 +189,8 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		if ( isset( $form ) && 'page-caching' === $form ) {
 			$admins_can_disable_pc = false;
 			$page_types = array();
-			if ( isset( $_POST['page_types'] ) && is_array( $_POST['page_types'] ) ) {
-				$page_types = array_keys( $_POST['page_types'] );
+			if ( isset( $_POST['page_types'] ) && is_array( $_POST['page_types'] ) ) { // Input var ok.
+				$page_types = array_keys( wp_unslash( $_POST['page_types'] ) ); // Input var ok.
 			}
 
 			$cache_settings = array(
@@ -189,8 +201,8 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				'debug_log'    => 0,
 			);
 
-			if ( isset( $_POST['settings'] ) ) {
-				$form_data = $_POST['settings'];
+			if ( isset( $_POST['settings'] ) ) { // Input var ok.
+				$form_data = $_POST['settings']; // Input var ok.
 				$cache_settings['logged_in']    = isset( $form_data['logged-in'] ) ? absint( $form_data['logged-in'] ) : 0;
 				$cache_settings['url_queries']  = isset( $form_data['url-queries'] ) ? absint( $form_data['url-queries'] ) : 0;
 				$cache_settings['cache_404']    = isset( $form_data['cache-404'] ) ? absint( $form_data['cache-404'] ) : 0;
@@ -203,16 +215,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			}
 
 			$url_strings = '';
-			if ( isset( $_POST['url_strings'] ) ) {
+			if ( isset( $_POST['url_strings'] ) ) { // Input var ok.
 				$url_strings = sanitize_textarea_field( wp_unslash( $_POST['url_strings'] ) ); // Input var okay.
 				$url_strings = preg_split( '/[\r\n\t ]+/', $url_strings );
-				$url_strings = str_replace( '\\', '', $url_strings );
-				$url_strings = str_replace( '/', '\/', $url_strings );
-				$url_strings = str_replace( '.', '\.', $url_strings );
+
+				foreach ( $url_strings as $id => $string ) {
+					$string = str_replace( '\\', '', $string );
+					$string = str_replace( '/', '\/', $string );
+					$string = preg_replace( '/.php$/', '\\.php', $string );
+					$url_strings[ $id ] = $string;
+				}
 			}
 
 			$user_agents = '';
-			if ( isset( $_POST['user_agents'] ) ) {
+			if ( isset( $_POST['user_agents'] ) ) { // Input var ok.
 				$user_agents = sanitize_textarea_field( wp_unslash( $_POST['user_agents'] ) ); // Input var okay.
 				$user_agents = preg_split( '/[\r\n\t ]+/', $user_agents );
 			}
@@ -235,17 +251,23 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$module->update_options( $options );
 
 			$module->save_settings( $settings );
+			$redirect_to = remove_query_arg( array( 'run', '_wpnonce', 'type', 'page-cache-purged', 'purge-error' ) );
+
+			$redirect_to = add_query_arg( 'pc-settings-updated', true, $redirect_to );
+
+			wp_safe_redirect( $redirect_to );
+			exit;
 		} // End if().
 
 		// Process form submit from expiry settings.
 		if ( isset( $form ) && 'expiry-settings' === $form ) {
 			if ( isset( $_POST['expiry-set-type'] ) && 'all' === sanitize_text_field( wp_unslash( $_POST['expiry-set-type'] ) ) ) { // Input var ok.
-				$this->caching_set_expiration( 'all', $_POST['set-expiry-all'] );
+				$this->caching_set_expiration( 'all', wp_unslash( $_POST['set-expiry-all'] ) ); // Input var ok.
 			} else {
-				$this->caching_set_expiration( 'javascript', $_POST['set-expiry-javascript'] );
-				$this->caching_set_expiration( 'css', $_POST['set-expiry-css'] );
-				$this->caching_set_expiration( 'media', $_POST['set-expiry-media'] );
-				$this->caching_set_expiration( 'images', $_POST['set-expiry-images'] );
+				$this->caching_set_expiration( 'javascript', wp_unslash( $_POST['set-expiry-javascript'] ) ); // Input var ok.
+				$this->caching_set_expiration( 'css', wp_unslash( $_POST['set-expiry-css'] ) ); // Input var ok.
+				$this->caching_set_expiration( 'media', wp_unslash( $_POST['set-expiry-media'] ) ); // Input var ok.
+				$this->caching_set_expiration( 'images', wp_unslash( $_POST['set-expiry-images'] ) ); // Input var ok.
 			}
 
 			$response = $this->caching_reload_snippet();
@@ -302,14 +324,13 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		} // End if().
 
 		if ( isset( $_GET['run'] ) && isset( $_GET['type'] ) ) { // Input var ok.
-			$this->run_actions( $_GET['type'] );
+			$this->run_actions( wp_unslash( $_GET['type'] ) ); // Input var ok.
 		}
 
-		if ( isset( $_POST['submit'] ) || isset( $_GET['enable'] ) || isset( $_GET['disable'] ) || isset( $_GET['run'] ) ) {
+		if ( isset( $_POST['submit'] ) || isset( $_GET['enable'] ) || isset( $_GET['disable'] ) || isset( $_GET['run'] ) ) { // Input var ok.
 			wp_safe_redirect( $redirect_to );
 			exit;
 		}
-
 	}
 
 	/**
@@ -320,10 +341,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	private function run_actions( $type ) {
 		check_admin_referer( 'wphb-run-caching' );
-
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			return;
-		}
 
 		switch ( $type ) {
 			// Activate Page Cache.
@@ -397,7 +414,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 				/* @var WP_Hummingbird_Module_Page_Cache $module */
 				$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-				$redirect_to = remove_query_arg( array( 'run', '_wpnonce', 'type', 'page-cache-purged', 'purge-error' ) );
+				$redirect_to = remove_query_arg( array( 'run', '_wpnonce', 'type', 'page-cache-purged', 'purge-error', 'pc-settings-updated' ) );
 
 				if ( $module->clear_cache() ) {
 					$redirect_to = add_query_arg( 'page-cache-purged', true, $redirect_to );
@@ -413,7 +430,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 				/* @var WP_Hummingbird_Module_Page_Cache $module */
 				$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
-				$redirect_to = remove_query_arg( array( 'run', '_wpnonce', 'type', 'page-cache-purged', 'purge-error' ) );
+				$redirect_to = remove_query_arg( array( 'run', '_wpnonce', 'type', 'page-cache-purged', 'purge-error', 'pc-settings-updated'  ) );
 
 				if ( $module->clear_cache( null ) ) {
 					$redirect_to = add_query_arg( 'page-cache-purged', true, $redirect_to );
@@ -446,16 +463,16 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function render_header() {
 		?>
-		<div class="wphb-notice wphb-notice-success hidden" id="wphb-notice-cloudflare-purge-cache">
+		<div class="sui-notice sui-notice-success sui-hidden" id="wphb-notice-cloudflare-purge-cache">
 			<p><?php esc_html_e( 'Cloudflare cache successfully purged. Please wait 30 seconds for the purge to complete.', 'wphb' ); ?></p>
 		</div>
 
-		<div class="wphb-notice hidden" id="wphb-notice-rss-cache">
+		<div class="sui-notice sui-notice-top hidden" id="wphb-notice-cache">
 			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 
 		<?php
-		if ( isset( $_GET['caching-updated'] ) && ! isset( $_GET['htaccess-error'] ) ) {
+		if ( isset( $_GET['caching-updated'] ) && ! isset( $_GET['htaccess-error'] ) ) { // Input var ok.
 			if ( $this->htaccess_written ) {
 				$this->admin_notices->show( 'updated', __( 'Your .htaccess file has been updated', 'wphb' ), 'success', true );
 			} else {
@@ -463,23 +480,27 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 
-		if ( isset( $_GET['cache-enabled'] ) ) {
+		if ( isset( $_GET['cache-enabled'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'Browser cache enabled. Your .htaccess file has been updated', 'wphb' ), 'success', true );
 		}
 
-		if ( isset( $_GET['cache-disabled'] ) ) {
+		if ( isset( $_GET['cache-disabled'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'updated', __( 'Browser cache disabled. Your .htaccess file has been updated', 'wphb' ), 'success', true );
 		}
 
-		if ( isset( $_GET['gravatars-purged'] ) ) {
+		if ( isset( $_GET['gravatars-purged'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'purged', __( 'Gravatar cache purged.', 'wphb' ), 'success', true );
 		}
 
-		if ( isset( $_GET['page-cache-purged'] ) ) {
+		if ( isset( $_GET['page-cache-purged'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'purged', __( 'Page cache purged.', 'wphb' ), 'success', true );
 		}
 
-		if ( isset( $_GET['purge-error'] ) ) {
+		if ( isset( $_GET['pc-settings-updated'] ) ) { // Input var ok.
+			$this->admin_notices->show( 'updated', __( 'Settings Updated.', 'wphb' ), 'success', true );
+		}
+
+		if ( isset( $_GET['purge-error'] ) ) { // Input var ok.
 			$this->admin_notices->show( 'purged', __( 'There was an error during the cache purge. Check file permissions are 755 for /wp-content/wphb-cache or delete directory manually.', 'wphb' ), 'error', true );
 		}
 
@@ -492,6 +513,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	public function register_meta_boxes() {
 		/**
 		 * PAGE CACHING META BOXES.
+		 *
 		 * @var WP_Hummingbird_Module_Page_Cache $module
 		 */
 		$module = WP_Hummingbird_Utils::get_module( 'page_cache' );
@@ -509,6 +531,18 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					array( $this, 'page_caching_metabox_header' ),
 					array( $this, 'page_caching_metabox_footer' ),
 					'main'
+				);
+
+				/**
+				 * SETTINGS META BOX
+				 */
+				$this->add_meta_box(
+					'caching/other-settings',
+					__( 'Settings', 'wphb' ),
+					array( $this, 'settings_metabox' ),
+					null,
+					null,
+					'settings'
 				);
 			} else {
 				$this->add_meta_box(
@@ -543,7 +577,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					'main'
 				);
 			}
-		}
+		} // End if().
 
 		// Do not continue on subsites.
 		if ( is_multisite() && ! is_network_admin() ) {
@@ -554,29 +588,37 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		 * BROWSER CACHING META BOXES.
 		 */
 
-		$this->add_meta_box(
-			'caching-summary',
-			__( 'Browser Caching', 'wphb' ),
-			array( $this, 'caching_summary_metabox' ),
-			array( $this, 'caching_summary_metabox_header' ),
-			null,
-			'browser',
-			array(
-				'box_content_class' => 'box-content no-padding',
-			)
-		);
+		if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
+			$show_cf_image = 'no-background-image';
+			$cf_notice     = get_site_option( 'wphb-cloudflare-dash-notice' );
+			if ( ! $this->cloudflare && ( ! $cf_notice && 'dismissed' !== $cf_notice ) ) {
+				$show_cf_image = '';
+			}
+			$this->add_meta_box(
+				'caching-summary',
+				__( 'Browser Caching', 'wphb' ),
+				array( $this, 'caching_summary_metabox' ),
+				array( $this, 'caching_summary_metabox_header' ),
+				null,
+				'browser',
+				array(
+					'box_content_class' => 'sui-box-body ' . $show_cf_image
+				)
+			);
 
-		$this->add_meta_box(
-			'caching-settings',
-			__( 'Configure', 'wphb' ),
-			array( $this, 'caching_settings_metabox' ),
-			array( $this, 'caching_settings_metabox_header' ),
-			null,
-			'browser'
-		);
+			$this->add_meta_box(
+				'caching-settings',
+				__( 'Configure', 'wphb' ),
+				array( $this, 'caching_settings_metabox' ),
+				array( $this, 'caching_settings_metabox_header' ),
+				null,
+				'browser'
+			);
+		}
 
 		/**
 		 * GRAVATAR CACHING META BOXES.
+		 *
 		 * @var WP_Hummingbird_Module_Gravatar $module
 		 */
 		$module = WP_Hummingbird_Utils::get_module( 'gravatar' );
@@ -603,6 +645,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		/**
 		 * RSS CACHING META BOXES.
+		 *
 		 * @var WP_Hummingbird_Module_Rss $module
 		 */
 		$module = WP_Hummingbird_Utils::get_module( 'rss' );
@@ -626,7 +669,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				'rss'
 			);
 		}
-
 	}
 
 	/**
@@ -656,7 +698,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		if ( 'browser' === $tab ) {
 			if ( ! $this->cloudflare ) {
-				$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
+				$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
 			} elseif ( 691200 > $this->expiration ) {
 				count( $this->report );
 				$issues = count( $this->report );
@@ -666,16 +708,16 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				$issues = 0;
 			}
 			if ( 0 !== $issues ) {
-				echo '<span class="wphb-button-label wphb-button-label-yellow">' . absint( $issues ) . '</span>';
+				echo '<span class="sui-tag">' . absint( $issues ) . '</span>';
 				return;
 			}
-			echo '<i class="hb-wpmudev-icon-tick"></i>';
+			echo '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>';
 			return;
 		}
 
 		// Available modules.
 		$modules = array( 'gravatar', 'page_cache', 'rss' );
-		if ( ! in_array( $tab, $modules ) ) {
+		if ( ! in_array( $tab, $modules, true ) ) {
 			return;
 		}
 
@@ -683,9 +725,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		$module = WP_Hummingbird_Utils::get_module( $tab );
 
 		if ( $module->is_active() && ( ! isset( $module->error ) || ! is_wp_error( $module->error ) ) ) {
-			echo '<i class="hb-wpmudev-icon-tick"></i>';
+			echo '<i class="sui-icon-check-tick sui-success" aria-hidden="true"></i>';
 		} elseif ( isset( $module->error ) && is_wp_error( $module->error ) ) {
-			echo '<i class="hb-wpmudev-icon-warning"></i>';
+			echo '<i class="sui-icon-warning-alert sui-warning" aria-hidden="true"></i>';
 		}
 	}
 
@@ -698,23 +740,21 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	private function is_caching_fully_enabled() {
 		$recommended = WP_Hummingbird_Utils::get_recommended_caching_values();
 
-		$results = WP_Hummingbird_Utils::get_status( 'caching' );
-
 		$result_sum = 0;
 
-		foreach ( $results as $key => $result ) {
+		foreach ( $this->report as $key => $result ) {
 			if ( $result >= $recommended[ $key ]['value'] ) {
 				$result_sum++;
 			}
 		}
 
-		return count( $results ) === $result_sum;
+		return count( $this->report ) === $result_sum;
 	}
 
 	/**
-	 * ******************
-	 * PAGE CACHING     *
-	 ********************/
+	 * *************************
+	 * PAGE CACHING
+	 ***************************/
 
 	/**
 	 * Disabled page caching meta box.
@@ -826,9 +866,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * ******************
-	 * BROWSER CACHING  *
-	 ********************/
+	 * *************************
+	 * BROWSER CACHING
+	 ***************************/
 
 	/**
 	 * Display header for caching summary meta box.
@@ -836,7 +876,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	public function caching_summary_metabox_header() {
 
 		if ( ! $this->cloudflare ) {
-			$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching' );
+			$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
 		} elseif ( 691200 > $this->expiration ) {
 			count( $this->report );
 			$issues = count( $this->report );
@@ -869,7 +909,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$htaccess_issue = true;
 		}
 
-		/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
+		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 		$show_cf_notice = false;
 		if ( ! $cf_module->is_connected() && ( ! get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' !== get_site_option( 'wphb-cloudflare-dash-notice' ) ) ) {
@@ -946,7 +986,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			$caching_module->clear_cache();
 		} elseif ( $this->cf_server ) {
 			$server_type = 'cloudflare';
-			/** @var WP_Hummingbird_Module_Cloudflare $cf_module */
+			/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 			$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
 			if ( ! ($cf_module->is_active() && $cf_module->is_connected() && $cf_module->is_zone_selected() ) ) {
 				if ( get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' === get_site_option( 'wphb-cloudflare-dash-notice' ) ) {
@@ -983,9 +1023,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * ******************
-	 * GRAVATAR CACHING *
-	 ********************/
+	 * *************************
+	 * GRAVATAR CACHING
+	 ***************************/
 
 	/**
 	 * Disabled Gravatar caching metabox.
@@ -1052,10 +1092,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @param string $value  Expiry value.
 	 */
 	public function caching_set_expiration( $type, $value ) {
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			return;
-		}
-
 		$type  = sanitize_text_field( wp_unslash( $type ) ); // Input var okay.
 		$value = sanitize_text_field( wp_unslash( $value ) ); // Input var okay.
 
@@ -1101,10 +1137,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @return array|bool
 	 */
 	public function caching_reload_snippet() {
-		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			return false;
-		}
-
 		if ( ! isset( $_POST['hb_server_type'] ) ) { // Input var okay.
 			die();
 		}
@@ -1128,9 +1160,9 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * ******************
-	 * RSS CACHING      *
-	 ********************/
+	 * *************************
+	 * RSS CACHING
+	 ***************************/
 
 	/**
 	 * Display Rss caching meta box.
@@ -1159,6 +1191,27 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		$this->view( 'caching/rss-disabled-meta-box', array(
 			'url'      => $url,
+		));
+	}
+
+	/**
+	 * *************************
+	 * SETTINGS
+	 ***************************/
+
+	/**
+	 * Display settings meta box.
+	 *
+	 * @since 1.8.1
+	 */
+	public function settings_metabox() {
+		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
+		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$options = $pc_module->get_options();
+
+		$this->view( 'caching/other-settings-meta-box', array(
+			'control'   => $options['control'],
+			'detection' => $options['detection'],
 		));
 	}
 

@@ -42,7 +42,7 @@
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
 			<?php elseif ( $original_size && $compressed_size ) : ?>
 				<span class="original-size crossed-out"><?php echo esc_html( $original_size ); ?>KB</span>
-				<span class="dev-icon dev-icon-caret_down"></span>
+				<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 				<span class="compressed-size"><?php echo esc_html( $compressed_size ); ?>KB &mdash;</span>
 			<?php else : ?>
 				<span><?php esc_html_e( 'Compressing...', 'wphb' ); ?></span>
@@ -56,11 +56,11 @@
 
 	<div class="checkbox-group">
 		<?php if ( in_array( 'minify', $disable_switchers, true ) && ! $disabled ) : ?>
-			<span class="tooltip tooltip-right" tooltip="<?php esc_attr_e( 'This file type cannot be compressed and will be left alone', 'wphb' ); ?>">
+			<span class="sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_attr_e( 'This file type cannot be compressed and will be left alone', 'wphb' ); ?>">
 				<?php esc_html_e( "Can't be compressed", 'wphb' ); ?>
 			</span>
 		<?php elseif ( $minified_file ) : ?>
-			<span class="tooltip tooltip-right" tooltip="<?php esc_attr_e( 'This file has already been compressed', 'wphb' ); ?>">
+			<span class="sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_attr_e( 'This file has already been compressed', 'wphb' ); ?>">
 				<?php esc_html_e( 'Already compressed', 'wphb' ); ?>
 			</span>
 		<?php else : ?>
@@ -69,7 +69,9 @@
 				   class="toggle-checkbox toggle-minify"
 				   name="<?php echo esc_attr( $base_name ); ?>[minify]" <?php checked( in_array( $item['handle'], $options['dont_minify'][ $type ], true ), false ); ?>
 				   aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
-			<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" class="toggle-label">
+			<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
+				   class="toggle-label tooltip-right"
+				   tooltip="<?php esc_attr_e( 'Compress this file to reduce it’s filesize', 'wphb' ); ?>">
 				<span class="hb-icon-minify" aria-hidden="true">
 					<span><?php esc_html_e( 'Compress', 'wphb' ); ?></span>
 				</span>

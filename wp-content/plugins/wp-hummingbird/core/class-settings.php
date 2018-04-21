@@ -22,13 +22,14 @@ class WP_Hummingbird_Settings {
 	 *
 	 * @var array
 	 */
-	private static $available_modules = array( 'minify', 'page_cache', 'performance', 'uptime', 'gravatar', 'caching',
-		'cloudflare', 'advanced', 'rss' );
+	private static $available_modules = array( 'minify', 'page_cache', 'performance', 'uptime', 'gravatar', 'caching', 'cloudflare', 'advanced', 'rss' );
 
 	/**
 	 * List of network modules that have settings for each sub-site.
 	 *
 	 * @since 1.8
+	 *
+	 * @var array
 	 */
 	private static $network_modules = array( 'minify', 'page_cache', 'performance' );
 
@@ -102,6 +103,9 @@ class WP_Hummingbird_Settings {
 				// Only for multisites. Toggles page caching in a subsite
 				// By default is true as if 'page_cache'-'enabled' is set to false, this option has no meaning.
 				'cache_blog' => true,
+				'control'    => false,
+				// Accepts: 'manual', 'auto' and 'none'.
+				'detection'  => 'manual',
 			),
 			'caching' => array(
 				// Always enabled, so no 'enabled' option.
@@ -161,12 +165,12 @@ class WP_Hummingbird_Settings {
 	 *
 	 * @access private
 	 *
-	 * @var string $module  Module for to get sub site setting fields for.
+	 * @param string $module  Module for to get sub site setting fields for.
 	 *
 	 * @return array
 	 */
 	private static function get_blog_option_names( $module ) {
-		if ( ! in_array( $module, self::$network_modules ) ) {
+		if ( ! in_array( $module, self::$network_modules, true ) ) {
 			return array();
 		}
 
@@ -184,7 +188,7 @@ class WP_Hummingbird_Settings {
 	 *
 	 * @access private
 	 *
-	 * @param array $options
+	 * @param array $options  Options array.
 	 *
 	 * @return array
 	 */
@@ -297,15 +301,59 @@ class WP_Hummingbird_Settings {
 			return '';
 		}
 
+		/**
+		 * Failsafe for when options are stored incorrectly.
+		 */
+		$defaults = self::get_default_settings();
+		if ( $for_module ) {
+			$defaults = $defaults[ $for_module ];
+		}
+
+		if ( self::is_exception( $for_module, $options, $option_name ) ) {
+			return $options[ $option_name ];
+		}
+
+		if ( gettype( $defaults[ $option_name ] ) !== gettype( $options[ $option_name ] ) ) {
+			self::update_setting( $option_name, $defaults[ $option_name ], $for_module );
+			return $defaults[ $option_name ];
+		}
+
 		return $options[ $option_name ];
+	}
+
+	/**
+	 * Check if setting has an exception.
+	 *
+	 * In get_settings we compare the values to defaults (including value type).
+	 * Two options can be bool/string: minify -> enabled and page_cache -> enabled.
+	 *
+	 * @since 1.8.1
+	 *
+	 * @param string $module       Module.
+	 * @param array  $options      Options.
+	 * @param string $option_name  Option name.
+	 *
+	 * @return bool
+	 */
+	private static function is_exception( $module, $options, $option_name ) {
+		$exceptions = array(
+			'page_cache' => 'blog-admins',
+			'minify'     => 'super-admins',
+		);
+
+		if ( isset( $exceptions[ $module ] ) && $exceptions[ $module ] === $options[ $option_name ] ) {
+			return true;
+		}
+
+		return false;
 	}
 
 	/**
 	 * Update selected plugin setting.
 	 *
-	 * @param string       $option_name  Setting name.
-	 * @param mixed        $value        Setting value.
-	 * @param bool|string  $for_module   Module to update settings for.
+	 * @param string      $option_name  Setting name.
+	 * @param mixed       $value        Setting value.
+	 * @param bool|string $for_module   Module to update settings for.
 	 */
 	public static function update_setting( $option_name, $value, $for_module = false ) {
 		$options = self::get_settings( $for_module );
@@ -316,7 +364,7 @@ class WP_Hummingbird_Settings {
 	/**
 	 * Return a single WP Hummingbird option.
 	 *
-	 * @param string $option
+	 * @param string $option  Option.
 	 *
 	 * @return mixed
 	 */
@@ -333,7 +381,7 @@ class WP_Hummingbird_Settings {
 	/**
 	 * Delete a single WP Hummingbird option.
 	 *
-	 * @param string $option
+	 * @param string $option  Option.
 	 */
 	public static function delete( $option ) {
 		if ( ! is_main_site() ) {

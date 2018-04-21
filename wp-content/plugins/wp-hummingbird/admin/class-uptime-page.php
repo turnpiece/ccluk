@@ -1,7 +1,15 @@
 <?php
 
+/**
+ * Class WP_Hummingbird_Uptime_Page
+ */
 class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
+	/**
+	 * Current report.
+	 *
+	 * @var $current_report
+	 */
 	private $current_report;
 
 	/**
@@ -24,18 +32,21 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	}
 
+	/**
+	 * Render header.
+	 */
 	public function render_header() {
 		$data_ranges = $this->get_data_ranges();
-		$data_range_selected = isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $this->get_data_ranges() ) ? $_GET['data-range'] : 'week';
-		$current_view = isset( $_GET['view'] ) ? $_GET['view'] : 'main';
+		$data_range_selected = isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $this->get_data_ranges() ) ? $_GET['data-range'] : 'week'; // Input var ok.
+		$current_view = isset( $_GET['view'] ) ? wp_unslash( $_GET['view'] ) : 'main'; // Input var ok.
 		?>
 
-		<section id="header">
+		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<?php
 			$module = WP_Hummingbird_Utils::get_module( 'uptime' );
 			$is_active = $module->is_active(); ?>
-			<div class="actions">
+			<div class="sui-actions-right">
 				<?php if ( WP_Hummingbird_Utils::is_member() && $is_active ) : ?>
 					<label for="wphb-uptime-data-range" class="inline-label header-label hide-to-mobile"><?php esc_html_e( 'Reporting period', 'wphb' ); ?></label>
 					<select name="wphb-uptime-data-range" class="uptime-data-range" id="wphb-uptime-data-range">
@@ -58,14 +69,18 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 						<?php endforeach; ?>
 					</select>
 				<?php endif; ?>
-				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="button button-ghost documentation-button">
+				<a href="<?php echo esc_url( WP_Hummingbird_Utils::get_documentation_url( $this->slug, $this->get_current_tab() ) ); ?>" target="_blank" class="sui-button sui-button-ghost">
+					<i class="sui-icon-academy" aria-hidden="true"></i>
 					<?php esc_html_e( 'View Documentation', 'wphb' ); ?>
 				</a>
 			</div>
-		</section><!-- end header -->
+		</div><!-- end header -->
 		<?php
 	}
 
+	/**
+	 * Register meta boxes.
+	 */
 	public function register_meta_boxes() {
 		/* @var WP_Hummingbird_Module_Uptime $uptime */
 		$uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
@@ -112,10 +127,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'uptime_disabled_metabox' ),
 				null,
 				null,
-				'box-uptime-disabled',
-				array(
-					'box_class' => 'dev-box content-box content-box-one-col-center',
-				)
+				'box-uptime-disabled'
 			);
 		} else {
 			$this->add_meta_box(
@@ -126,7 +138,8 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'summary',
 				array(
-					'box_class' => 'dev-box content-box content-box-two-cols-image-left',
+					'box_class' => '',
+					'box_content_class' => 'sui-box sui-summary',
 				)
 			);
 			$this->add_meta_box(
@@ -159,15 +172,14 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		} // End if().
 	}
 
+	/**
+	 * Run actions.
+	 */
 	private function run_actions() {
-		$action = isset( $_GET['action'] ) ? $_GET['action'] : false;
+		$action = isset( $_GET['action'] ) ? wp_unslash( $_GET['action'] ) : false; // Input var ok.
 
 		if ( 'enable' === $action ) {
 			check_admin_referer( 'wphb-toggle-uptime' );
-
-			if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-				return;
-			}
 
 			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
 			$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
@@ -177,55 +189,50 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 				$redirect_to = add_query_arg( 'error', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
 				$redirect_to = add_query_arg( array(
 					'code' => $result->get_error_code(),
-					'message' => urlencode( $result->get_error_message() ),
+					'message' => rawurlencode( $result->get_error_message() ),
 				), $redirect_to );
-				wp_redirect( $redirect_to );
+				wp_safe_redirect( $redirect_to );
 				exit;
 			}
 
 			$redirect_to = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
 			$redirect_to = add_query_arg( '_wpnonce', wp_create_nonce( 'wphb-run-uptime' ), $redirect_to );
 
-			wp_redirect( $redirect_to );
+			wp_safe_redirect( $redirect_to );
 			exit;
 		}
 
 		if ( 'disable' === $action ) {
 			check_admin_referer( 'wphb-toggle-uptime' );
 
-			if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-				return;
-			}
-
 			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
 			$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
 			$uptime_module->disable();
 
-			wp_redirect( WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
+			wp_safe_redirect( WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
 		}
 
-		if ( isset( $_GET['run'] ) ) {
+		if ( isset( $_GET['run'] ) ) { // Input var ok.
 			check_admin_referer( 'wphb-run-uptime' );
-
-			if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-				return;
-			}
 
 			// Start the test
 			/* @var WP_Hummingbird_Module_Uptime $uptime_module */
 			$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
 			$uptime_module->clear_cache();
 
-			// Start the test
+			// Start the test.
 			$uptime_module->get_last_report( 'week', true );
 
-			wp_redirect( remove_query_arg( array( 'run', '_wpnonce' ) ) );
+			wp_safe_redirect( remove_query_arg( array( 'run', '_wpnonce' ) ) );
 			exit;
 		}
 	}
 
+	/**
+	 * On load actions.
+	 */
 	public function on_load() {
-		if ( isset( $_GET['activate'] ) && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+		if ( isset( $_GET['activate'] ) ) { // Input var ok.
 			check_admin_referer( 'activate-uptime' );
 
 			/* @var WP_Hummingbird_Module_Uptime $uptime */
@@ -234,18 +241,16 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			$options['enabled'] = true;
 			$uptime->update_options( $options );
 
-			wp_redirect( esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) ) );
+			wp_safe_redirect( esc_url( WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) ) );
 			exit;
 		}
 	}
 
-	public function enqueue_scripts( $hook ) {
-		parent::enqueue_scripts( $hook );
-		wp_enqueue_script( 'wphb-google-chart', "https://www.google.com/jsapi?autoload={'modules':[{'name':'visualization','version':'1.1','packages':['corechart','timeline']}]}", array( 'jquery' ) );
-	}
-
+	/**
+	 * Uptime disabled meta box.
+	 */
 	public function uptime_disabled_metabox() {
-		// Get current user name
+		// Get current user name.
 		$user = WP_Hummingbird_Utils::get_current_user_info();
 		$activate_url = add_query_arg( 'action', 'enable', WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ) );
 		$activate_url = wp_nonce_url( $activate_url, 'wphb-toggle-uptime' );
@@ -255,6 +260,11 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		));
 	}
 
+	/**
+	 * Get available data ranges.
+	 *
+	 * @return array
+	 */
 	private function get_data_ranges() {
 		return array(
 			'day'   => __( 'Last 1 day', 'wphb' ),
@@ -263,8 +273,13 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		);
 	}
 
+	/**
+	 * Get current data range.
+	 *
+	 * @return string
+	 */
 	private function get_current_data_range() {
-		return isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $this->get_data_ranges() ) ? $_GET['data-range'] : 'week';
+		return isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $this->get_data_ranges() ) ? $_GET['data-range'] : 'week'; // Input var ok.
 	}
 
 	/**
@@ -293,12 +308,15 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 
 	}
 
+	/**
+	 * Render inner content.
+	 */
 	protected function render_inner_content() {
 		$data_range = $this->get_current_data_range();
 
 		$error = false;
 
-		/** @var WP_Hummingbird_Module_Uptime $module */
+		/* @var WP_Hummingbird_Module_Uptime $module */
 		$module = WP_Hummingbird_Utils::get_module( 'uptime' );
 		$is_active = $module->is_active();
 
@@ -325,13 +343,18 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		$this->view( $this->slug . '-page', $args );
 	}
 
+	/**
+	 * Get current report.
+	 *
+	 * @return bool|WP_Error
+	 */
 	public function get_current_report() {
 		if ( ! is_null( $this->current_report ) ) {
 			return $this->current_report;
 		}
 
 		$data_ranges = $this->get_data_ranges();
-		$data_range = isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $data_ranges ) ? $_GET['data-range'] : 'week';
+		$data_range = isset( $_GET['data-range'] ) && array_key_exists( $_GET['data-range'], $data_ranges ) ? $_GET['data-range'] : 'week'; // Input var ok.
 
 		/* @var WP_Hummingbird_Module_Uptime $uptime */
 		$uptime = WP_Hummingbird_Utils::get_module( 'uptime' );
@@ -340,6 +363,9 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		return $this->current_report;
 	}
 
+	/**
+	 * Uptime meta box.
+	 */
 	public function uptime_metabox() {
 		$error = '';
 
@@ -351,8 +377,8 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			$error = $stats->get_error_message();
 			$error_type = 'error';
 		} else {
-			if ( isset( $_GET['error'] ) ) {
-				$error = urldecode( $_GET['message'] );
+			if ( isset( $_GET['error'] ) ) { // Input var ok.
+				$error = urldecode( $_GET['message'] ); // Input var ok.
 				$error_type = 'error';
 			}
 		}
@@ -432,10 +458,8 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 		$stats = $uptime->get_last_report( $this->get_current_data_range() );
 		if ( is_wp_error( $stats ) ) {
 			return;
-		} else {
-			if ( isset( $_GET['error'] ) ) {
-				return;
-			}
+		} elseif ( isset( $_GET['error'] ) ) { // Input var ok.
+			return;
 		}
 
 		$this->view( 'uptime/downtime-meta-box', array(
@@ -473,7 +497,7 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 	 *
 	 * @since 1.7.1
 	 *
-	 * @param string $type
+	 * @param string $type  Chart type.
 	 *
 	 * @return false|string
 	 */

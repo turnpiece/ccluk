@@ -9,10 +9,10 @@
  */
 ?>
 
-<div class="row settings-form">
-	<div class="col-third">
+<div class="sui-box-settings-row">
+	<div class="sui-box-settings-col-1">
 		<strong><?php esc_html_e( 'CSS above the fold', 'wphb' ); ?></strong>
-		<span class="sub">
+		<span class="sui-description">
 			<?php esc_html_e( 'Drastically reduce your page load time by moving all of your stylesheets
 			to the footer to force them to load after your content.', 'wphb' ); ?>
 			<br><br>
@@ -20,8 +20,8 @@
 			followed shortly after.', 'wphb' ); ?>
 		</span>
 	</div>
-	<div class="col-two-third">
-		<ol>
+	<div class="sui-box-settings-col-2">
+		<ol class="sui-description">
 			<li>
 				<?php esc_html_e( 'Add critical layout and styling CSS here.
 				We will insertinto <style> tags in your <head> section of each page.', 'wphb' ); ?>
@@ -32,9 +32,9 @@
 			</li>
 		</ol>
 
-		<span class="sub">
+		<span class="sui-description">
 			<?php esc_html_e( 'CSS to insert into your <head> area', 'wphb' ); ?>
 		</span>
-		<textarea name="critical_css" placeholder="<?php esc_attr_e( 'Add CSS here', 'wphb' ); ?>"><?php echo esc_html( $css ); ?></textarea>
+		<textarea class="sui-form-control" name="critical_css" placeholder="<?php esc_attr_e( 'Add CSS here', 'wphb' ); ?>"><?php echo esc_html( $css ); ?></textarea>
 	</div>
 </div>

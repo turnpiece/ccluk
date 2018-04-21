@@ -2,20 +2,18 @@
 
 	<div class="wphb-block-entry-content">
 
-		<div class="content">
-			<p><?php _e( 'Monitor your website and get notified if/when it\'s inaccessible. We\'ll also watch your server response time.', 'wphb' ); ?></p>
-		</div><!-- end content -->
+		<p class="sui-margin-bottom"><?php esc_html_e( 'Automate your workflow with daily, weekly or monthly reports sent directly to your inbox.', 'wphb' ); ?></p>
 
-		<div class="row">
-			<div class="col-half">
+		<div class="sui-row">
+			<div class="sui-col-lg-6">
 				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ); ?>">
 					<div class="report-status">
 						<i class="hb-icon-performancetest"></i>
-						<strong><?php _e( 'Performance Test', 'wphb' ); ?></strong>
+						<strong><?php esc_html_e( 'Performance Test', 'wphb' ); ?></strong>
 						<?php if ( ! $performance_is_active ) : ?>
-							<button class="inactive" disabled><?php _e( 'Inactive', 'wphb' ); ?></button>
+							<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Inactive', 'wphb' ); ?></span>
 						<?php else : ?>
-							<button><i class="hb-wpmudev-icon-tick"></i> <?php echo $frequency; ?></button>
+							<span class="sui-tag sui-tag-success"><?php echo $frequency; ?></span>
 						<?php endif; ?>
 					</div>
 				</a>

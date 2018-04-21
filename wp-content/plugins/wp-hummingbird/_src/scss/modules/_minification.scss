@@ -12,7 +12,7 @@
     justify-content: flex-end;
     height: 40px;
 }
-.wpmud .wphb-modal .checkbox-group {
+.wpmud .sui-dialog .checkbox-group {
     justify-content: flex-start;
 }
 
@@ -52,18 +52,18 @@
 }
 
 /* Modal window */
-.wpmud .wphb-modal .checkbox-group {
+.wpmud .sui-dialog .checkbox-group {
     width: 100%;
     height: 52px;
 }
 
-.wpmud .wphb-modal .checkbox-group input[type="checkbox"] + label {
+.wpmud .sui-dialog .checkbox-group input[type="checkbox"] + label {
     padding: 10px 10px;
     width: 70px;
     height: 50px;
 }
 
-.wpmud .wphb-modal .wphb-progress-state {
+.wpmud .sui-dialog .wphb-progress-state {
     text-align: left;
     margin-top: 0;
 }
@@ -92,6 +92,10 @@
     font-size: 14px;
     vertical-align: -2px;
     margin-right: 8px;
+}
+
+.wpmud .sui-dialog .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
+    margin-right: 0;
 }
 
 /* Overwrite for advanced view */
@@ -161,14 +165,29 @@
     width: 60px;
 }
 
-.wpmud .box-minification-enqueued-files .box-title .wphb-switch-button > i {
+.wpmud .box-minification-enqueued-files .sui-box-header .wphb-heading-divider {
+    border-left: 1px solid #E6E6E6;
+    height: 62px;
+    margin-top: -21px;
+    margin-bottom: -22px;
+    margin-left: 10px;
+}
+.wpmud .box-minification-enqueued-files .sui-box-header .sui-button:last-child {
+    margin-right: 10px;
+}
+.wpmud .box-minification-enqueued-files .sui-box-header .wphb-switch-button {
+    height: 60px;
+    width: 60px;
+    display: block;
+    margin: -15px -30px -15px 0px;
+}
+
+.wpmud .box-minification-enqueued-files .sui-box-header .wphb-switch-button > i {
     color: #AAAAAA;
     font-size: 20px;
-    left: 50%;
-    margin-left: -10px;
-    margin-top: -10px;
+    margin-left: 20px;
     position: absolute;
-    top: 50%;
+    top: 18px;
 }
 
 .wpmud .box-minification-enqueued-files .box-title-advanced .wphb-switch-button > i {
@@ -313,22 +332,24 @@
     text-decoration: line-through;
 }
 
-.wpmud .wphb-minification-file-info > .dev-icon-caret_down,
+.wpmud .wphb-minification-file-info > .sui-icon-chevron-down:before,
 .wpmud .wphb-minification-file-info > .compressed-size {
     color: #1ABC9C;
 }
 
-.wpmud .wphb-minification-file-info > .dev-icon-caret_down {
-    font-size: 12px;
-    letter-spacing: -3px;
-    margin-left: -3px;
+.wpmud .wphb-minification-file-info > .sui-icon-chevron-down:before {
+    font-size: 8px;
     position: relative;
-    top: 2px;
+    top: 0;
 }
 
 /* Advanced minification section */
 .wpmud .wphb-minification-filter-buttons {
     padding: 0 30px 20px;
+    display: flex;
+    .sui-actions-left {
+        margin-left: 0;
+    }
 }
 
 .wpmud .wphb-minification-files-select {
@@ -336,6 +357,12 @@
     align-items: center;
     align-content: center;
     margin: 0 50px;
+    .sui-checkbox {
+        margin-right: 5px;
+        span {
+            margin-top: -4px;
+        }
+    }
 }
 
 .wpmud .wphb-minification-files-select h3 {
@@ -350,6 +377,7 @@
     float: left;
     line-height: 30px;
     margin-right: 10px;
+    margin-top: 4px;
 }
 
 .wpmud .wphb-minification-exclude {
@@ -360,6 +388,7 @@
 .wpmud .wphb-minification-filter {
     background-color: #FFFFFF;
     padding: 0 30px;
+    margin: 10px 30px;
 }
 
 .wpmud .wphb-minification-filter > div {
@@ -407,6 +436,10 @@
 .wpmud .wphb-border-row.disabled .wphb-filename-extension-javascript,
 .wpmud .wphb-border-row.disabled .wphb-filename-extension-js {
     opacity: 0.4;
+}
+
+.wpmud .wphb-filename-extension-label {
+    line-height: 30px;
 }
 
 .wpmud .wphb-border-row.disabled .wphb-minification-file-info > span {
@@ -508,6 +541,10 @@
         z-index: 100;
     }
 
+    .wpmud .box-minification-enqueued-files .sui-box-header .wphb-switch-button > i {
+        margin-left: 15px;
+    }
+
     .wpmud .wphb-minification-files-advanced .wphb-minification-advanced-group {
         float: left;
     }
@@ -550,7 +587,7 @@
     }
 
     .wpmud .wphb-minification-files-header {
-        padding: 15px 30px;
+        padding: 20px;
     }
 
     .wpmud .box-minification-enqueued-files .buttons .button {

@@ -27,6 +27,8 @@ class WP_Hummingbird_Pro {
 	public $modules = array();
 
 	/**
+	 * Admin instance
+	 *
 	 * @var null|WP_Hummingbird_Pro_Admin
 	 */
 	public $admin;
@@ -50,8 +52,7 @@ class WP_Hummingbird_Pro {
 	 * @since 1.5.0
 	 */
 	public function init() {
-
-		//load dashboard notice
+		// Load dashboard notice.
 		global $wpmudev_notices;
 		$wpmudev_notices[] = array(
 			'id'      => 1081721,
@@ -59,10 +60,17 @@ class WP_Hummingbird_Pro {
 			'screens' => array(
 				'toplevel_page_wphb',
 				'hummingbird_page_wphb-performance',
-				'hummingbird_page_wphb-minification',
 				'hummingbird_page_wphb-caching',
 				'hummingbird_page_wphb-gzip',
+				'hummingbird_page_wphb-minification',
+				'hummingbird_page_wphb-advanced',
 				'hummingbird_page_wphb-uptime',
+				'hummingbird-pro_page_wphb-performance',
+				'hummingbird-pro_page_wphb-caching',
+				'hummingbird-pro_page_wphb-gzip',
+				'hummingbird-pro_page_wphb-minification',
+				'hummingbird-pro_page_wphb-advanced',
+				'hummingbird-pro_page_wphb-uptime',
 			),
 		);
 
@@ -82,20 +90,20 @@ class WP_Hummingbird_Pro {
 		$this->load_ajax();
 		$this->load_modules();
 
-		if ( is_admin() && ! get_site_option( 'wphb-pro' ) ) {
-			// Make this check only on admin to avoid extra queries
-			update_site_option( 'wphb-pro', true );
-		}
-
 		add_action( 'wphb_deactivate', array( $this, 'on_deactivate' ) );
 		add_action( 'wphb_activate', array( $this, 'on_activate' ) );
-
 	}
 
+	/**
+	 * Action on deactivate.
+	 */
 	public function on_deactivate() {
 		delete_site_option( 'wphb-pro' );
 	}
 
+	/**
+	 * Actions on activate.
+	 */
 	public function on_activate() {
 		update_site_option( 'wphb-pro', 'yes' );
 	}
@@ -131,22 +139,22 @@ class WP_Hummingbird_Pro {
 	/**
 	 * Load a single module
 	 *
-	 * @param string $name Module Name
-	 * @param string $module Module slug
+	 * @param string $name    Module name.
+	 * @param string $module  Module slug.
 	 *
 	 * @since 1.5.0
 	 */
 	public function load_module( $name, $module ) {
 		$class_name = 'WP_Hummingbird_Module_' . ucfirst( $module );
 
-		// TODO: Refactor and automate this like in class-admin.php
+		// TODO: Refactor and automate this like in class-admin.php.
 		if ( 'reporting-cron' === $module ) {
 			$class_name = 'WP_Hummingbird_Module_Reporting_Cron';
 		} elseif ( 'cleanup-cron' === $module ) {
 			$class_name = 'WP_Hummingbird_Module_Cleanup_Cron';
 		}
 
-		// Default modules files
+		// Default modules files.
 		$filename = WPHB_DIR_PATH . 'core/pro/modules/class-module-' . $module . '.php';
 		if ( file_exists( $filename ) ) {
 			/* @noinspection PhpIncludeInspection */
@@ -156,7 +164,7 @@ class WP_Hummingbird_Pro {
 		if ( class_exists( $class_name ) ) {
 			$module_obj = new $class_name( $module, $name );
 
-			/** @var WP_Hummingbird_Module $module_obj */
+			/* @var WP_Hummingbird_Module $module_obj */
 			if ( $module_obj->is_active() ) {
 				$module_obj->run();
 			}

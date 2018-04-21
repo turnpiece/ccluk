@@ -39,7 +39,9 @@ import Fetcher from './utils/fetcher';
             if (this.$runTestButton.length) {
                 this.$runTestButton.click(function (e) {
                     e.preventDefault();
-					window.WDP.showOverlay("#run-performance-test-modal", { class: 'wphb-modal small wphb-progress-modal no-close' } );
+                    let el = document.getElementById('run-performance-test-modal');
+                    let dialog = new A11yDialog(el);
+                    dialog.show();
                     $(this).attr('disabled', true);
                     self.performanceTest(self.strings.finishedTestURLsLink);
                 });
@@ -124,7 +126,7 @@ import Fetcher from './utils/fetcher';
                 Fetcher.performance.saveReportsSettings( form_data )
                     .then( () => {
                         that.find('.button').removeAttr('disabled');
-                        self.showUpdateMessage();
+						WPHB_Admin.notices.show('wphb-notice-performance-report-settings-updated', true);
                     });
                 return false;
             });
@@ -135,21 +137,12 @@ import Fetcher from './utils/fetcher';
 
                 Fetcher.performance.savePerformanceTestSettings( form_data )
                     .then( () => {
-                        self.showUpdateMessage();
+						WPHB_Admin.notices.show('wphb-notice-performance-report-settings-updated', true);
                     });
                 return false;
             });
 
             return this;
-        },
-
-        showUpdateMessage: function () {
-            const notice = $('#wphb-notice-performance-report-settings-updated');
-            window.scrollTo(0,0);
-            notice.slideDown();
-            setTimeout( function() {
-                notice.slideUp();
-            }, 5000 );
         },
 
 		performanceTest: function ( redirect ) {
@@ -184,8 +177,8 @@ import Fetcher from './utils/fetcher';
 			if ( this.progress > 100 ) {
 				this.progress = 90;
 			}
-			$('.wphb-scan-progress .wphb-scan-progress-text span').text( this.progress + '%' );
-			$('.wphb-scan-progress .wphb-scan-progress-bar span').attr( 'style', 'width:' + this.progress + '%' );
+			$('.sui-progress-block .sui-progress-text span').text( this.progress + '%' );
+			$('.sui-progress-block .sui-progress-bar span').attr( 'style', 'width:' + this.progress + '%' );
         }
     };
 }( jQuery ));

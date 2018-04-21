@@ -6,11 +6,15 @@
 class WP_Hummingbird_Core {
 
 	/**
+	 * API
+	 *
 	 * @var WP_Hummingbird_API
 	 */
 	public $api;
 
 	/**
+	 * Hub endpoints
+	 *
 	 * @var WP_Hummingbird_Hub_Endpoints
 	 */
 	public $hub_endpoints;
@@ -32,15 +36,25 @@ class WP_Hummingbird_Core {
 
 		$this->load_modules();
 
-		if ( WP_Hummingbird_Utils::can_execute_php() ) {
-			$minify = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
-			if ( ( is_multisite() && ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) ) )
-				|| ( ! is_multisite() && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) ) {
+		if ( WP_Hummingbird_Utils::can_execute_php() && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+			// Return is user has no proper permissions.
+			if ( ! ( is_super_admin() || is_blog_admin() ) ) {
+				return;
+			}
+
+			$minify    = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
+			$pc_module = WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' );
+
+			// Do not stric compare $pc_module to true, because it can also be 'blog-admins'.
+			if ( ! is_multisite() || ( is_multisite() && ( ( 'super-admin' === $minify && is_super_admin() ) || true === $minify || true == $pc_module ) ) ) {
 				add_action( 'admin_bar_menu', array( $this, 'admin_bar_menu' ), 100 );
 			}
 		}
 	}
 
+	/**
+	 * Includes.
+	 */
 	private function includes() {
 		/* @noinspection PhpIncludeInspection */
 		include_once WPHB_DIR_PATH . 'core/settings-hooks.php';
@@ -103,17 +117,17 @@ class WP_Hummingbird_Core {
 	/**
 	 * Load a single module
 	 *
-	 * @param string $name Module Name
-	 * @param string $module Module slug
+	 * @param string $name   Module name.
+	 * @param string $module Module slug.
 	 */
 	public function load_module( $name, $module ) {
 		// Split complex slugs (name_subname or name-subname) to an array.
 		$module_slug = preg_split( '/(_|-)/', $module );
 		// Glue together to form name-subname (for filename).
 		$file_part = implode( '-', $module_slug );
-		// Capitalize each word in array (to be used in class name)
+		// Capitalize each word in array (to be used in class name).
 		$module_slug = array_map( 'ucfirst', $module_slug );
-		// Glue together to form Name_Subname
+		// Glue together to form Name_Subname.
 		$class_name = 'WP_Hummingbird_Module_' . implode( '_', $module_slug );
 
 		// Default modules files.
@@ -138,7 +152,7 @@ class WP_Hummingbird_Core {
 	/**
 	 * Add a HB menu to the admin bar
 	 *
-	 * @param WP_Admin_Bar $admin_bar
+	 * @param WP_Admin_Bar $admin_bar  Admin bar.
 	 */
 	public function admin_bar_menu( $admin_bar ) {
 		/* @var WP_Hummingbird_Module_Minify $minification_module */
@@ -147,8 +161,14 @@ class WP_Hummingbird_Core {
 		$menu_args = array(
 			'id'    => 'wphb',
 			'title' => 'Hummingbird',
-			'href'  => admin_url( 'admin.php?page=wphb-minification' ),
+			'href'  => admin_url( 'admin.php?page=wphb' ),
 		);
+
+		if ( is_multisite() && is_main_site() ) {
+			$menu_args['href'] = network_admin_url( 'admin.php?page=wphb' );
+		} elseif ( is_multisite() && ! is_main_site() ) {
+			unset( $menu_args['href'] );
+		}
 
 		if ( $minification_module->is_active() ) {
 			if ( ! is_admin() && ! isset( $_GET['avoid-minify'] ) ) {
@@ -170,6 +190,35 @@ class WP_Hummingbird_Core {
 					'parent' => 'wphb',
 				));
 			}
+		}
+
+		/* @var WP_Hummingbird_Module_Page_Cache $pc_module */
+		$pc_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$options = $pc_module->get_options();
+
+		if ( $pc_module->is_active() && $options['control'] ) {
+			$pc_link = admin_url( 'admin.php?page=wphb-caching&view=main' );
+
+			if ( ! is_main_network() || ! is_main_site() ) {
+				$purge_url = add_query_arg( array(
+					'type' => 'pc-purge-subsite',
+					'run'  => 'true',
+				), $pc_link );
+			} else {
+				$purge_url = add_query_arg( array(
+					'type' => 'pc-purge',
+					'run'  => 'true',
+				), $pc_link );
+			}
+			$purge_url = wp_nonce_url( $purge_url, 'wphb-run-caching' );
+
+			$admin_bar->add_menu( $menu_args );
+			$admin_bar->add_menu( array(
+				'id'     => 'wphb-clear-cache',
+				'title'  => __( 'Clear page cache', 'wphb' ),
+				'href'   => $purge_url,
+				'parent' => 'wphb',
+			));
 		}
 	}
 

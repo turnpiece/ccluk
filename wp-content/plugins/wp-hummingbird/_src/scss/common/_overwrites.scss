@@ -15,10 +15,6 @@ button.notice-dismiss {
     cursor: pointer !important;
 }
 
-.wpmud #header .actions .button + .button {
-    margin-left: 10px;
-}
-
 .wpmud .wphb-dismiss {
     float: right;
 }
@@ -45,10 +41,6 @@ button.notice-dismiss {
     margin-left: -150px;
 }
 
-.wpmud .wrap-wp-hummingbird a:not('.wdpun-button') {
-    color: #17A8E3;
-}
-
 .wpmud .wrap-wp-hummingbird strong {
     color: #333333;
 }
@@ -69,24 +61,6 @@ button.notice-dismiss {
     font-size: 13px;
     line-height: 30px;
     margin-right: -20px;
-}
-
-.wpmud .wrap-wp-hummingbird i.wdv-icon-chevron-down {
-    color: #8A8A8A;
-}
-
-.wpmud .select-container:not(.mobile-nav) i.wdv-icon-reorder:before {
-    content: "\f078";
-}
-
-.wpmud .select-container:not(.mobile-nav) {
-    border: 1px solid #E6E6E6;
-    background-color: #F8F8F8;
-}
-
-.wpmud .select-container:not(.mobile-nav) .dropdown-handle {
-    background-color: #F8F8F8;
-    color: #898989;
 }
 
 /* Install dashboard message */
