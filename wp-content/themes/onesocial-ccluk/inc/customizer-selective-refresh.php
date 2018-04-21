@@ -171,11 +171,11 @@ function ccluk_customizer_partials( $wp_customize ) {
             'id' => 'about',
             'selector' => '.section-about',
             'settings' => array(
-                'ccluk_about_boxes',
-                'ccluk_about_title',
-                'ccluk_about_subtitle',
-                'ccluk_about_desc',
-                'ccluk_about_content_source',
+                'ccluk_homepage_about_boxes',
+                'ccluk_homepage_about_title',
+                'ccluk_homepage_about_subtitle',
+                'ccluk_homepage_about_desc',
+                'ccluk_homepage_about_content_source',
             ),
         ),
 

@@ -1,12 +1,12 @@
 <?php
-$id       = get_theme_mod( 'ccluk_about_id', esc_html__('about', 'onesocial') );
-$disable  = get_theme_mod( 'ccluk_about_disable' ) == 1 ? true : false;
-$title    = get_theme_mod( 'ccluk_about_title', esc_html__('About Us', 'onesocial' ));
-$link     = get_theme_mod( 'ccluk_about_source_page' );
-$box_1    = wp_kses_post( get_theme_mod( 'ccluk_about_box_1') );
-$box_2    = wp_kses_post( get_theme_mod( 'ccluk_about_box_2') );
-$intro    = wp_kses_post( get_theme_mod( 'ccluk_about_intro') );
-$footer   = wp_kses_post( get_theme_mod( 'ccluk_about_footer') );
+$id       = get_theme_mod( 'ccluk_homepage_about_id', esc_html__('about', 'onesocial') );
+$disable  = get_theme_mod( 'ccluk_homepage_about_disable' ) == 1 ? true : false;
+$title    = get_theme_mod( 'ccluk_homepage_about_title', esc_html__('About Us', 'onesocial' ));
+$link     = get_theme_mod( 'ccluk_homepage_about_source_page' );
+$box_1    = wp_kses_post( get_theme_mod( 'ccluk_homepage_about_box_1') );
+$box_2    = wp_kses_post( get_theme_mod( 'ccluk_homepage_about_box_2') );
+$intro    = wp_kses_post( get_theme_mod( 'ccluk_homepage_about_intro') );
+$footer   = wp_kses_post( get_theme_mod( 'ccluk_homepage_about_footer') );
 
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;

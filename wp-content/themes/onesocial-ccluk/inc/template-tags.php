@@ -560,7 +560,7 @@ if ( ! function_exists( 'ccluk_get_section_about_data' ) ) {
      */
     function ccluk_get_section_about_data()
     {
-        $boxes = get_theme_mod('ccluk_about_boxes');
+        $boxes = get_theme_mod('ccluk_homepage_about_boxes');
         if (is_string($boxes)) {
             $boxes = json_decode($boxes, true);
         }
