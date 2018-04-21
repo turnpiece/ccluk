@@ -173,3 +173,19 @@ input[type=submit] {
 div.footer-inner-bottom {
     padding-bottom: 80px;
 }
+
+a.button {
+    @include button();
+}
+
+a.cta {
+    @include cta();
+}
+
+.green-bg,
+.blue-bg {
+    a.cta:hover {
+        background-color: $white;
+        color: $green;
+    }
+}

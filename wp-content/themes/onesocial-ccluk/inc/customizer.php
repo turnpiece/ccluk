@@ -26,7 +26,7 @@ class CCLUK_Customizer {
 	/**
 	 * Add postMessage support for site title and description for the Theme Customizer.
 	 *
-	 * @param WP_Customize_Manager $wp_customize Theme Customizer object.
+	 * @param WP_Customize_Manager $this->customize Theme Customizer object.
 	 */
 	function register( $wp_customize ) {
 
@@ -39,7 +39,7 @@ class CCLUK_Customizer {
 		/**
 		 * Hook to add other customize
 		 */
-		do_action( self::SLUG.'_customize_before_register', $wp_customize );
+		do_action( self::SLUG.'_customize_before_register', $this->customize );
 
 		$pages = get_pages();
 		$option_pages = array();
@@ -68,7 +68,7 @@ class CCLUK_Customizer {
 	    /*  Homepage: Join
 	    /*------------------------------------------------------------------------*/
 
-		    $wp_customize->add_panel( self::SLUG.'_homepage_join' ,
+		    $this->customize->add_panel( self::SLUG.'_homepage_join' ,
 				array(
 					'priority'        => 160,
 					'title'           => esc_html__( 'Homepage: Join', 'onesocial' ),
@@ -79,58 +79,15 @@ class CCLUK_Customizer {
 
 		    $this->standard_settings( self::SLUG.'_homepage_join', 'join' );
 
-		    /*
-			$wp_customize->add_section( self::SLUG.'_homepage_join_settings' ,
-				array(
-					'priority'    => 3,
-					'title'       => esc_html__( 'Section Settings', 'onesocial' ),
-					'description' => '',
-					'panel'       => self::SLUG.'_homepage_join',
-				)
-			);
-
-			// Show Content
-			$wp_customize->add_setting( self::SLUG.'_homepage_join_disable',
-				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_checkbox',
-					'default'           => '',
-				)
-			);
-
-			$wp_customize->add_control( self::SLUG.'_homepage_join_disable',
-				array(
-					'type'        => 'checkbox',
-					'label'       => esc_html__('Hide this section?', 'onesocial'),
-					'section'     => self::SLUG.'_homepage_join_settings',
-					'description' => esc_html__('Check this box to hide this section.', 'onesocial'),
-				)
-			);
-
-			// Section ID
-			$wp_customize->add_setting( self::SLUG.'_homepage_join_id',
-				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
-					'default'           => esc_html__('about', 'onesocial'),
-				)
-			);
-
-			$wp_customize->add_control( self::SLUG.'_homepage_join_id',
-				array(
-					'label' 		=> esc_html__('Section ID:', 'onesocial'),
-					'section' 		=> self::SLUG.'_homepage_join_settings',
-					'description'   => esc_html__( 'The section id, we will use this for link anchor.', 'onesocial' )
-				)
-			);
-			*/
 			// Title
-			$wp_customize->add_setting( self::SLUG.'_homepage_join_title',
+			$this->customize->add_setting( self::SLUG.'_homepage_join_title',
 				array(
 					'sanitize_callback' => 'sanitize_text_field',
 					'default'           => sprintf( __('Join %s', 'onesocial'), get_bloginfo('name') ),
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_join_title',
+			$this->customize->add_control( self::SLUG.'_homepage_join_title',
 				array(
 					'label' 		=> esc_html__('Section Title', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_join_settings',
@@ -139,24 +96,24 @@ class CCLUK_Customizer {
 			);
 
 			// Source page settings
-			$wp_customize->add_setting( self::SLUG.'_homepage_join_source_page',
+			$this->customize->add_setting( self::SLUG.'_homepage_join_source_page',
 				array(
 					'sanitize_callback' => array( $this, 'sanitize_number' ),
 					'default'           => '',
 				)
 			);
-			$wp_customize->add_control( self::SLUG.'_homepage_join_source_page',
+			$this->customize->add_control( self::SLUG.'_homepage_join_source_page',
 				array(
-					'label'     	=> esc_html__('Title Link', 'onesocial'),
+					'label'     	=> esc_html__('Button Link', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_join_settings',
 					'type'          => 'select',
 					'priority'      => 10,
 					'choices'       => $option_pages,
-					'description'   => esc_html__('Select a page the title will link to.', 'onesocial'),
+					'description'   => esc_html__('Select a page to link to.', 'onesocial'),
 				)
 			);
 
-			$wp_customize->add_section( self::SLUG.'_homepage_join_content' ,
+			$this->customize->add_section( self::SLUG.'_homepage_join_content' ,
 				array(
 					'priority'    => 6,
 					'title'       => esc_html__( 'Section Content', 'onesocial' ),
@@ -165,20 +122,20 @@ class CCLUK_Customizer {
 				)
 			);
 
-			$wp_customize->add_setting( self::SLUG.'_homepage_join_intro',
+			$this->customize->add_setting( self::SLUG.'_homepage_join_text',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
-					'default'           => '',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
+					'default'           => __( 'If you want to be part of a movement lobbying for effective action on climate change, click the button and join us.', 'onesocial' )
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
-				self::SLUG.'_homepage_join_intro',
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_homepage_join_text',
 				array(
-					'label' 		=> sprintf( esc_html__('Introduction', 'onesocial'), $box ),
+					'label' 		=> esc_html__('Text', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_join_content',
-					'description'   => '',
+					'description'   => __( 'Text that will go alongside the join button', 'onesocial' )
 				)
 			));
 
@@ -187,7 +144,7 @@ class CCLUK_Customizer {
 	    /*  Homepage: About
 	    /*------------------------------------------------------------------------*/
 
-		    $wp_customize->add_panel( self::SLUG.'_homepage_about' ,
+		    $this->customize->add_panel( self::SLUG.'_homepage_about' ,
 				array(
 					'priority'        => 160,
 					'title'           => esc_html__( 'Homepage: About', 'onesocial' ),
@@ -197,58 +154,16 @@ class CCLUK_Customizer {
 			);
 
 		    $this->standard_settings( self::SLUG.'_homepage_about', 'about' );
-		    /*
-			$wp_customize->add_section( self::SLUG.'_homepage_about_settings' ,
-				array(
-					'priority'    => 3,
-					'title'       => esc_html__( 'Section Settings', 'onesocial' ),
-					'description' => '',
-					'panel'       => self::SLUG.'_homepage_about',
-				)
-			);
 
-			// Show Content
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_disable',
-				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_checkbox',
-					'default'           => '',
-				)
-			);
-
-			$wp_customize->add_control( self::SLUG.'_homepage_about_disable',
-				array(
-					'type'        => 'checkbox',
-					'label'       => esc_html__('Hide this section?', 'onesocial'),
-					'section'     => self::SLUG.'_homepage_about_settings',
-					'description' => esc_html__('Check this box to hide this section.', 'onesocial'),
-				)
-			);
-
-			// Section ID
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_id',
-				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
-					'default'           => esc_html__('about', 'onesocial'),
-				)
-			);
-
-			$wp_customize->add_control( self::SLUG.'_homepage_about_id',
-				array(
-					'label' 		=> esc_html__('Section ID:', 'onesocial'),
-					'section' 		=> self::SLUG.'_homepage_about_settings',
-					'description'   => esc_html__( 'The section id, we will use this for link anchor.', 'onesocial' )
-				)
-			);
-			*/
 			// Title
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_title',
+			$this->customize->add_setting( self::SLUG.'_homepage_about_title',
 				array(
 					'sanitize_callback' => 'sanitize_text_field',
 					'default'           => esc_html__('About Us', 'onesocial'),
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_about_title',
+			$this->customize->add_control( self::SLUG.'_homepage_about_title',
 				array(
 					'label' 		=> esc_html__('Section Title', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_about_settings',
@@ -257,13 +172,13 @@ class CCLUK_Customizer {
 			);
 
 			// Source page settings
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_source_page',
+			$this->customize->add_setting( self::SLUG.'_homepage_about_source_page',
 				array(
 					'sanitize_callback' => array( $this, 'sanitize_number' ),
 					'default'           => '',
 				)
 			);
-			$wp_customize->add_control( self::SLUG.'_homepage_about_source_page',
+			$this->customize->add_control( self::SLUG.'_homepage_about_source_page',
 				array(
 					'label'     	=> esc_html__('Title Link', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_about_settings',
@@ -274,7 +189,7 @@ class CCLUK_Customizer {
 				)
 			);
 
-			$wp_customize->add_section( self::SLUG.'_homepage_about_content' ,
+			$this->customize->add_section( self::SLUG.'_homepage_about_content' ,
 				array(
 					'priority'    => 6,
 					'title'       => esc_html__( 'Section Content', 'onesocial' ),
@@ -283,15 +198,15 @@ class CCLUK_Customizer {
 				)
 			);
 
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_intro',
+			$this->customize->add_setting( self::SLUG.'_homepage_about_intro',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
 				self::SLUG.'_homepage_about_intro',
 				array(
 					'label' 		=> sprintf( esc_html__('Introduction', 'onesocial'), $box ),
@@ -303,15 +218,15 @@ class CCLUK_Customizer {
 			// Boxes
 			for ( $box = 1; $box <= 2; $box++ ) :
 
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_box_'.$box,
+			$this->customize->add_setting( self::SLUG.'_homepage_about_box_'.$box,
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
 				self::SLUG.'_homepage_about_box_'.$box,
 				array(
 					'label' 		=> sprintf( esc_html__('Box %d content', 'onesocial'), $box ),
@@ -322,15 +237,15 @@ class CCLUK_Customizer {
 
 			endfor;
 
-			$wp_customize->add_setting( self::SLUG.'_homepage_about_footer',
+			$this->customize->add_setting( self::SLUG.'_homepage_about_footer',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
 				self::SLUG.'_homepage_about_footer',
 				array(
 					'label' 		=> sprintf( esc_html__('Footer', 'onesocial'), $box ),
@@ -345,7 +260,7 @@ class CCLUK_Customizer {
 	    /*------------------------------------------------------------------------*/
 
 
-		    $wp_customize->add_panel( self::SLUG.'_homepage_contact' ,
+		    $this->customize->add_panel( self::SLUG.'_homepage_contact' ,
 				array(
 					'priority'        => 270,
 					'title'           => esc_html__( 'Home page: Contact', 'onesocial' ),
@@ -356,7 +271,7 @@ class CCLUK_Customizer {
 
 			$this->standard_settings( self::SLUG.'_homepage_contact', 'contact' );
 			/*
-			$wp_customize->add_section( self::SLUG.'_homepage_contact_settings' ,
+			$this->customize->add_section( self::SLUG.'_homepage_contact_settings' ,
 				array(
 					'priority'    => 3,
 					'title'       => esc_html__( 'Section Settings', 'onesocial' ),
@@ -366,14 +281,14 @@ class CCLUK_Customizer {
 			);
 			/*
 			// Show Content
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_disable',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_disable',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_checkbox',
+					'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_disable',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_disable',
 				array(
 					'type'        => 'checkbox',
 					'label'       => esc_html__('Hide this section?', 'onesocial'),
@@ -383,14 +298,14 @@ class CCLUK_Customizer {
 			);
 
 			// Section ID
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_id',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_id',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => esc_html__('contact', 'onesocial'),
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_id',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_id',
 				array(
 					'label'     => esc_html__('Section ID:', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_settings',
@@ -399,14 +314,14 @@ class CCLUK_Customizer {
 			);
 			*/
 			// Title
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_title',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_title',
 				array(
-					'sanitize_callback' => 'sanitize_text_field',
+					'sanitize_callback' => array( $this, 'sanitize_text_field' ),
 					'default'           => esc_html__('Get in touch', 'onesocial'),
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_title',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_title',
 				array(
 					'label'     => esc_html__('Section Title', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_settings',
@@ -415,14 +330,14 @@ class CCLUK_Customizer {
 			);
 
 			// Sub Title
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_subtitle',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_subtitle',
 				array(
 					'sanitize_callback' => 'sanitize_text_field',
 					'default'           => esc_html__('Section subtitle', 'onesocial'),
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_subtitle',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_subtitle',
 				array(
 					'label'     => esc_html__('Section Subtitle', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_settings',
@@ -431,15 +346,15 @@ class CCLUK_Customizer {
 			);
 
 	        // Description
-	        $wp_customize->add_setting( self::SLUG.'_homepage_contact_desc',
+	        $this->customize->add_setting( self::SLUG.'_homepage_contact_desc',
 	            array(
-	                'sanitize_callback' => self::SLUG.'_sanitize_text',
+	                'sanitize_callback' => array( $this, 'sanitize_text' ),
 	                'default'           => '',
 	            )
 	        );
 
-	        $wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-	            $wp_customize,
+	        $this->customize->add_control( new CCLUK_Editor_Custom_Control(
+	            $this->customize,
 	            self::SLUG.'_homepage_contact_desc',
 	            array(
 	                'label' 		=> esc_html__('Section Description', 'onesocial'),
@@ -448,7 +363,7 @@ class CCLUK_Customizer {
 	            )
 	        ));
 
-			$wp_customize->add_section( self::SLUG.'_homepage_contact_content' ,
+			$this->customize->add_section( self::SLUG.'_homepage_contact_content' ,
 				array(
 					'priority'    => 6,
 					'title'       => esc_html__( 'Section Content', 'onesocial' ),
@@ -458,13 +373,13 @@ class CCLUK_Customizer {
 			);
 
 			// Contact form 7 guide.
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_cf7_guide',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7_guide',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text'
+					'sanitize_callback' => array( $this, 'sanitize_text' )
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Misc_Control( $wp_customize, self::SLUG.'_homepage_contact_cf7_guide',
+			$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, self::SLUG.'_homepage_contact_cf7_guide',
 				array(
 					'section'     => self::SLUG.'_homepage_contact_content',
 					'type'        => 'custom_message',
@@ -473,14 +388,14 @@ class CCLUK_Customizer {
 			));
 
 			// Contact Form 7 Shortcode
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_cf7',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_cf7',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_cf7',
 				array(
 					'label'     	=> esc_html__('Contact Form 7 Shortcode.', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -489,14 +404,14 @@ class CCLUK_Customizer {
 			);
 
 			// Show CF7
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_cf7_disable',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7_disable',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_checkbox',
+					'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_cf7_disable',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_cf7_disable',
 				array(
 					'type'        => 'checkbox',
 					'label'       => esc_html__('Hide contact form completely.', 'onesocial'),
@@ -506,15 +421,15 @@ class CCLUK_Customizer {
 			);
 
 			// Contact Text
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_text',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_text',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
 				self::SLUG.'_homepage_contact_text',
 				array(
 					'label'     	=> esc_html__('Contact Text', 'onesocial'),
@@ -524,8 +439,8 @@ class CCLUK_Customizer {
 			));
 
 			// hr
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_text_hr', array( 'sanitize_callback' => self::SLUG.'_sanitize_text' ) );
-			$wp_customize->add_control( new CCLUK_Misc_Control( $wp_customize, self::SLUG.'_homepage_contact_text_hr',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_text_hr', array( 'sanitize_callback' => array( $this, 'sanitize_text' ) ) );
+			$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, self::SLUG.'_homepage_contact_text_hr',
 				array(
 					'section'     => self::SLUG.'_homepage_contact_content',
 					'type'        => 'hr'
@@ -533,14 +448,14 @@ class CCLUK_Customizer {
 			));
 
 			// Address Box
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_address_title',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_address_title',
 				array(
 					'sanitize_callback' => 'sanitize_text_field',
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_address_title',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_address_title',
 				array(
 					'label'     	=> esc_html__('Contact Box Title', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -549,14 +464,14 @@ class CCLUK_Customizer {
 			);
 
 			// Contact Text
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_address',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_address',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_address',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_address',
 				array(
 					'label'     => esc_html__('Address', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -565,14 +480,14 @@ class CCLUK_Customizer {
 			);
 
 			// Contact Phone
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_phone',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_phone',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_phone',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_phone',
 				array(
 					'label'     	=> esc_html__('Phone', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -581,14 +496,14 @@ class CCLUK_Customizer {
 			);
 
 			// Contact Email
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_email',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_email',
 				array(
 					'sanitize_callback' => 'sanitize_email',
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_email',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_email',
 				array(
 					'label'     	=> esc_html__('Email', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -597,14 +512,14 @@ class CCLUK_Customizer {
 			);
 
 			// Contact Fax
-			$wp_customize->add_setting( self::SLUG.'_homepage_contact_fax',
+			$this->customize->add_setting( self::SLUG.'_homepage_contact_fax',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => '',
 				)
 			);
 
-			$wp_customize->add_control( self::SLUG.'_homepage_contact_fax',
+			$this->customize->add_control( self::SLUG.'_homepage_contact_fax',
 				array(
 					'label'     	=> esc_html__('Fax', 'onesocial'),
 					'section' 		=> self::SLUG.'_homepage_contact_content',
@@ -619,7 +534,7 @@ class CCLUK_Customizer {
 	    /*  Join CCL
 	    /*------------------------------------------------------------------------*/
 
-			$wp_customize->add_section( self::SLUG.'_join' ,
+			$this->customize->add_section( self::SLUG.'_join' ,
 				array(
 					'priority'    => 3,
 					'title'       => esc_html__( 'Join CCL', 'onesocial' ),
@@ -627,15 +542,15 @@ class CCLUK_Customizer {
 				)
 			);
 
-			$wp_customize->add_setting( self::SLUG.'_join_intro',
+			$this->customize->add_setting( self::SLUG.'_join_intro',
 				array(
-					'sanitize_callback' => self::SLUG.'_sanitize_text',
+					'sanitize_callback' => array( $this, 'sanitize_text' ),
 					'default'           => sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') )
 				)
 			);
 
-			$wp_customize->add_control( new CCLUK_Editor_Custom_Control(
-				$wp_customize,
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
 				self::SLUG.'_join_intro',
 				array(
 					'label'     	=> esc_html__('Introduction', 'onesocial'),
@@ -645,12 +560,10 @@ class CCLUK_Customizer {
 			));
 
 
-
-
 			/**
 			 * Hook to add other customize
 			 */
-			do_action( self::SLUG.'_customize_after_register', $wp_customize );
+			do_action( self::SLUG.'_customize_after_register', $this->customize );
 
 	}
 
@@ -659,7 +572,7 @@ class CCLUK_Customizer {
 	/*  CCLUK Sanitize Functions.
 	/*------------------------------------------------------------------------*/
 
-	function ccluk_sanitize_file_url( $file_url ) {
+	function sanitize_file_url( $file_url ) {
 		$output = '';
 		$filetype = wp_check_filetype( $file_url );
 		if ( $filetype["ext"] ) {
@@ -675,7 +588,7 @@ class CCLUK_Customizer {
 	 * @param $control
 	 * @return bool
 	 */
-	function ccluk_hero_fullscreen_callback ( $control ) {
+	function hero_fullscreen_callback ( $control ) {
 		if ( $control->manager->get_setting(self::SLUG.'_hero_fullscreen')->value() == '' ) {
 	        return true;
 	    } else {
@@ -687,7 +600,7 @@ class CCLUK_Customizer {
 	    return balanceTags( $input );
 	}
 
-	function ccluk_sanitize_hex_color( $color ) {
+	function sanitize_hex_color( $color ) {
 		if ( $color === '' ) {
 			return '';
 		}
@@ -697,7 +610,7 @@ class CCLUK_Customizer {
 		return null;
 	}
 
-	function ccluk_sanitize_checkbox( $input ) {
+	function sanitize_checkbox( $input ) {
 	    if ( $input == 1 ) {
 			return 1;
 	    } else {
@@ -705,11 +618,11 @@ class CCLUK_Customizer {
 	    }
 	}
 
-	function ccluk_sanitize_text( $string ) {
+	function sanitize_text( $string ) {
 		return wp_kses_post( balanceTags( $string ) );
 	}
 
-	function ccluk_sanitize_html_input( $string ) {
+	function sanitize_html_input( $string ) {
 		return wp_kses_allowed_html( $string );
 	}
 
@@ -718,19 +631,10 @@ class CCLUK_Customizer {
 		//return is_page_template( 'template-frontpage.php' );
 	}
 
-	function ccluk_gallery_source_validate( $validity, $value ){
-		if ( ! class_exists( self::SLUG.'_PLus' ) ) {
-			if ( $value != 'page' ) {
-				$validity->add('notice', esc_html__('Upgrade to CCLUK Plus to unlock this feature.', 'onesocial' ) );
-			}
-		}
-		return $validity;
-	}
-
 	/**
 	 * Binds JS handlers to make Theme Customizer preview reload changes asynchronously.
 	 */
-	function preview_js() {
+	public function preview_js() {
 	    wp_enqueue_script( self::SLUG.'_customizer_liveview', get_stylesheet_directory_uri() . '/assets/js/customizer-liveview.js', array( 'customize-preview', 'customize-selective-refresh' ), false, true );
 	}
 
@@ -738,12 +642,12 @@ class CCLUK_Customizer {
 	 *
 	 * customize standard settings
 	 *
-	 * @param object $wp_customize
+	 * @param object $this->customize
 	 * @param string $name
 	 * @param string $id
 	 *
 	 */
-	function standard_settings( $name, $id ) {
+	private function standard_settings( $name, $id ) {
 
 		$this->customize->add_section( $name.'_settings' ,
 			array(
@@ -757,7 +661,7 @@ class CCLUK_Customizer {
 		// Show Content
 		$this->customize->add_setting( $name.'_disable',
 			array(
-				'sanitize_callback' => 'ccluk_sanitize_checkbox',
+				'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
 				'default'           => '',
 			)
 		);
@@ -774,7 +678,7 @@ class CCLUK_Customizer {
 		// Section ID
 		$this->customize->add_setting( $name.'_id',
 			array(
-				'sanitize_callback' => 'ccluk_sanitize_text',
+				'sanitize_callback' => array( $this, 'sanitize_text' ),
 				'default'           => $id,
 			)
 		);

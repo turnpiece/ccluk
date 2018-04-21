@@ -31,6 +31,7 @@ if ( ! has_action( 'ccluk_frontpage_section_parts' ) ) {
         'news',
         'campaign',
         'posts',
+        'join',
         'events',
         'groups',
         'twitter'

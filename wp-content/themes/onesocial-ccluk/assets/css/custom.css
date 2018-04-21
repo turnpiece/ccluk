@@ -146,6 +146,40 @@ input[type=submit] {
 div.footer-inner-bottom {
   padding-bottom: 80px; }
 
+a.button {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-color: #22a7f0;
+  border: none;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  color: #fff !important; }
+  a.button:hover {
+    background-color: #54ae68; }
+
+a.cta {
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  background-color: #22a7f0;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  margin: 10px 30px;
+  margin: 1rem 3rem;
+  font-size: 24px;
+  color: #fff;
+  text-transform: uppercase;
+  font-weight: 700;
+  text-align: center; }
+  a.cta:hover {
+    background-color: #54ae68; }
+
+.green-bg a.cta:hover,
+.blue-bg a.cta:hover {
+  background-color: #fff;
+  color: #54ae68; }
+
 /*--------------------------------------------------------------
 Mobile Header
 --------------------------------------------------------------*/
@@ -411,7 +445,8 @@ body.page-template-homepage #main {
   body.page-template-homepage #main .section {
     display: block;
     width: 100%;
-    padding: 20px 0 40px; }
+    padding: 20px 0px;
+    padding: 2rem 0rem; }
     body.page-template-homepage #main .section#primary {
       padding: 0; }
     body.page-template-homepage #main .section .section-content {
@@ -486,7 +521,8 @@ body.page-template-homepage #main {
             max-width: 580px; }
           body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
             max-width: 540px;
-            padding: 20px; }
+            padding: 20px 40px;
+            padding: 2rem 4rem; }
             body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
               margin: 10px 0px;
               margin: 1rem 0rem; }
@@ -540,13 +576,35 @@ body.page-template-homepage #main {
         border-top: 0; }
     body.page-template-homepage #main .section.twitter #ctf .ctf-more {
       display: none; }
+    body.page-template-homepage #main .section.join .section-content {
+      justify-content: space-around;
+      -webkit-align-items: center;
+      align-items: center;
+      padding: 20px 0px;
+      padding: 2rem 0rem; }
+      body.page-template-homepage #main .section.join .section-content .intro {
+        color: #fff;
+        font-size: 24px; }
+      body.page-template-homepage #main .section.join .section-content .list-item {
+        width: auto;
+        max-width: 450px;
+        margin: 10px 10px;
+        margin: 1rem 1rem; }
+    body.page-template-homepage #main .section.green-bg {
+      background-color: #54ae68; }
+    body.page-template-homepage #main .section.blue-bg {
+      background-color: #22a7f0; }
 body.page-template-homepage .homepage-section-title > h4 {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
   background-color: #22a7f0;
-  padding: 15px 30px;
-  margin: 10px 30px;
-  font-size: 24px;
-  color: #fff;
-  text-transform: uppercase; }
+  border: none;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  color: #fff !important; }
+  body.page-template-homepage .homepage-section-title > h4:hover {
+    background-color: #54ae68; }
 body.page-template-homepage .site {
   padding-top: 0;
   padding-bottom: 70px; }
@@ -1081,27 +1139,29 @@ body.buddypress.group-home #buddypress .buddypress-content #item-body #whats-new
   display: none; }
 body.buddypress #buddypress #group-settings-form input[type="submit"],
 body.buddypress #buddypress #create-group-form input[type="submit"] {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
-  background-color: #54ae68;
+  background-color: #22a7f0;
   border: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
   body.buddypress #buddypress #group-settings-form input[type="submit"]:hover,
   body.buddypress #buddypress #create-group-form input[type="submit"]:hover {
-    color: #000;
     background-color: #54ae68; }
 body.buddypress #buddypress .standard-form div.submit input,
 body.buddypress #buddypress #save_as_draft {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
   border-radius: 5px;
-  background-color: #54ae68;
+  background-color: #22a7f0;
   border: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
   body.buddypress #buddypress .standard-form div.submit input:hover,
   body.buddypress #buddypress #save_as_draft:hover {
-    color: #000;
     background-color: #54ae68; }
 body.buddypress #buddypress .standard-form .datebox,
 body.buddypress #buddypress .standard-form input[type=text],
@@ -1275,9 +1335,7 @@ MINIMUM width of 1025 pixels (desktops)
 @media screen and (min-width: 1025px) {
   body.page-template-homepage #main .section {
     padding: 30px 0px;
-    padding: 3rem 0rem;
-    padding-bottom: 50px;
-    padding-bottom: 5rem; }
+    padding: 3rem 0rem; }
 
   body.page #primary article > .entry-header {
     margin: 24px 0px;
@@ -1307,15 +1365,12 @@ MINIMUM width of 1025 pixels (large desktops)
   /*--------------------------------------------------------------
   MINIMUM width of 1200 pixels (large desktops)
   --------------------------------------------------------------*/
-  body.page-template-homepage #main .section {
-    padding-bottom: 60px;
-    padding-bottom: 6rem; }
-    body.page-template-homepage #main .section.feature .section-content {
-      max-width: 1170px; }
-      body.page-template-homepage #main .section.feature .section-content article .list-item.entry-image {
-        width: 580px;
-        text-align: right; }
-      body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
-        width: 540px; } }
+  body.page-template-homepage #main .section.feature .section-content {
+    max-width: 1170px; }
+    body.page-template-homepage #main .section.feature .section-content article .list-item.entry-image {
+      width: 580px;
+      text-align: right; }
+    body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
+      width: 540px; } }
 
 /*# sourceMappingURL=custom.css.map */
