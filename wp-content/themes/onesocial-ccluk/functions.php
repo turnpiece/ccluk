@@ -574,7 +574,8 @@ function ccluk_create_news_post_type() {
       'has_archive' => true,
       'rewrite' => array('slug' => 'news'),
       'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-      'taxonomies' => array( 'category', 'post_tag' )
+      'taxonomies' => array( 'category', 'post_tag' ),
+      'menu_position' => 4
     )
   );
 }
