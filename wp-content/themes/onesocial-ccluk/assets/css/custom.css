@@ -421,6 +421,8 @@ body.page #primary article.has-post-thumbnail > .entry-header {
   body.page #primary article.has-post-thumbnail > .entry-header img {
     margin: 12px 0px;
     margin: 1.2rem 0rem; }
+body.page.page-template-page-nosidebar #main {
+  max-width: 750px; }
 body.page #secondary,
 body.page .default-page + #secondary, body.page.page-template #secondary {
   padding-top: 40px;
