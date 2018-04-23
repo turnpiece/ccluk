@@ -744,31 +744,34 @@ body.page-template-homepage #secondary {
   max-width: 400px; }
 
 .widget_mc4wp_form_widget form p input[type="submit"] {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
-.widget.widget_newsletterwidget form div input[type="submit"], .widget.widget_newsletterwidget form p input[type="submit"] {
-  background-color: #54ae68; }
+.widget.widget_newsletterwidget form div input[type="submit"],
+.widget.widget_newsletterwidget form p input[type="submit"] {
+  background-color: #22a7f0; }
 
 .footer-widget #switch-mode input[type="submit"] {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
 .woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
 button {
   background-color: #54ae68; }
 
 input[type="button"], input[type="reset"] {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
-article.post-password-required input[type=submit], li.bypostauthor cite span, a.button {
-  background-color: #54ae68; }
+article.post-password-required input[type=submit],
+i.bypostauthor cite span,
+a.button {
+  background-color: #22a7f0; }
 
 #buddypress ul.button-nav li a, #buddypress div.generic-button a {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
 #secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
-  background-color: #54ae68; }
+  background-color: #22a7f0; }
 
 #buddypress #group-create-nav .group-create, #buddypress div#item-nav .item-list-tabs ul li .bb-menu-button {
   background-color: #54ae68; }
@@ -847,7 +850,10 @@ li.bbp-forum-info a.bbp-forum-title:before, li.bbp-topic-title a.bbp-topic-perma
 #create-group-form #invite-list strong, #create-group-form.standard-form label span.highlight {
   color: #54ae68; }
 
-#buddypress form#whats-new-form #whats-new-submit input[type="submit"], #whats-new-form .whats-author {
+#buddypress form#whats-new-form #whats-new-submit input[type="submit"] {
+  color: #fff; }
+
+#whats-new-form .whats-author {
   color: #54ae68; }
 
 #buddypress #activity-stream .acomment-options .acomment-like.unfav-comment:before, #buddypress #activity-stream .activity-meta .unfav.bp-secondary-action:before {
@@ -977,11 +983,18 @@ li.bbp-forum-info a.bbp-forum-title:hover, li.bbp-topic-title a.bbp-topic-permal
 .info-group .members-list-filter, .info-group .trigger-filter.active:before {
   border-color: #54ae68; }
 
-#buddypress #group-settings-form input[type="submit"], #buddypress .standard-form div.submit input, #buddypress form#whats-new-form #whats-new-submit input[type="submit"] {
-  border-color: #54ae68; }
+#buddypress #group-settings-form input[type="submit"],
+#buddypress .standard-form div.submit input,
+#buddypress form#whats-new-form #whats-new-submit input[type="submit"] {
+  border-color: #22a7f0; }
 
-.entry-meta a.read-more, #buddypress #group-create-nav .group-create, .sap-publish-popup.sap-publish-popup .sap-action-button, .sap-container-wrapper .sap-story-publish, #main #buddypress div.item-list-tabs li.hideshow > ul, input[type="submit"] {
-  border-color: #54ae68; }
+.entry-meta a.read-more,
+#buddypress #group-create-nav .group-create,
+.sap-publish-popup.sap-publish-popup .sap-action-button,
+.sap-container-wrapper .sap-story-publish,
+#main #buddypress div.item-list-tabs li.hideshow > ul,
+input[type="submit"] {
+  border-color: #22a7f0; }
 
 .main-navigation .nav-menu > li:hover > a {
   box-shadow: 0 -2px 0 #54ae68 inset; }

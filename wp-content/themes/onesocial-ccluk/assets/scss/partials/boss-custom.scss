@@ -1,20 +1,21 @@
 .widget_mc4wp_form_widget form p input[type="submit"] {
-  background-color: $green;
+  background-color: $blue;
 }
 
 .widget.widget_newsletterwidget form {
-  div input[type="submit"], p input[type="submit"] {
-    background-color: $green;
+  div input[type="submit"], 
+  p input[type="submit"] {
+    background-color: $blue;
   }
 }
 
 .footer-widget #switch-mode input[type="submit"] {
-  background-color: $green;
+  background-color: $blue;
 }
 
 .woocommerce {
   #respond input#submit, a.button, button.button, input.button {
-    background-color: $green;
+    background-color: $blue;
   }
 }
 
@@ -23,23 +24,26 @@ button {
 }
 
 input {
-  &[type="button"], &[type="reset"] {
-    background-color: $green;
+  &[type="button"], 
+  &[type="reset"] {
+    background-color: $blue;
   }
 }
 
-article.post-password-required input[type=submit], li.bypostauthor cite span, a.button {
-  background-color: $green;
+article.post-password-required input[type=submit], 
+i.bypostauthor cite span, 
+a.button {
+  background-color: $blue;
 }
 
 #buddypress {
   ul.button-nav li a, div.generic-button a {
-    background-color: $green;
+    background-color: $blue;
   }
 }
 
 #secondary div.generic-button a, #buddypress .comment-reply-link, .select2-container--default .select2-results__option--highlighted[aria-selected], .entry-header .entry-title a.button, a.bp-title-button, #search-members-form > label:after, #messages-bulk-manage, .boss-search-wrapper label:after, .groups-members-search label:after {
-  background-color: $green;
+  background-color: $blue;
 }
 
 #buddypress {
@@ -179,7 +183,11 @@ li {
   }
 }
 
-#buddypress form#whats-new-form #whats-new-submit input[type="submit"], #whats-new-form .whats-author {
+#buddypress form#whats-new-form #whats-new-submit input[type="submit"] {
+  color: $white;
+}
+
+#whats-new-form .whats-author {
   color: $green;
 }
 
@@ -392,13 +400,20 @@ li {
 }
 
 #buddypress {
-  #group-settings-form input[type="submit"], .standard-form div.submit input, form#whats-new-form #whats-new-submit input[type="submit"] {
-    border-color: $green;
+  #group-settings-form input[type="submit"], 
+  .standard-form div.submit input, 
+  form#whats-new-form #whats-new-submit input[type="submit"] {
+    border-color: $blue;
   }
 }
 
-.entry-meta a.read-more, #buddypress #group-create-nav .group-create, .sap-publish-popup.sap-publish-popup .sap-action-button, .sap-container-wrapper .sap-story-publish, #main #buddypress div.item-list-tabs li.hideshow > ul, input[type="submit"] {
-  border-color: $green;
+.entry-meta a.read-more, 
+#buddypress #group-create-nav .group-create, 
+.sap-publish-popup.sap-publish-popup .sap-action-button, 
+.sap-container-wrapper .sap-story-publish, 
+#main #buddypress div.item-list-tabs li.hideshow > ul, 
+input[type="submit"] {
+  border-color: $blue;
 }
 
 .main-navigation {
