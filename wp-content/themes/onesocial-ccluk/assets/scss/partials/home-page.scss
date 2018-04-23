@@ -201,6 +201,15 @@ body.page-template-homepage {
 					.ctf-more {
 						display: none;
 					}
+
+					&.ctf-styles {
+						.ctf-author-screenname, 
+						.ctf-context, 
+						.ctf-twitterlink, 
+						.ctf-tweet-meta {
+							font-size: 11px;
+						}
+					}
 				}
 			}
 

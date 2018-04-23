@@ -564,20 +564,23 @@ add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
 // create news post type
 function ccluk_create_news_post_type() {
-  register_post_type( 'ccluk_news',
-    array(
-      'labels' => array(
-        'name' => __( 'News' ),
-        'singular_name' => __( 'News' )
-      ),
-      'public' => true,
-      'has_archive' => true,
-      'rewrite' => array('slug' => 'news'),
-      'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
-      'taxonomies' => array( 'category', 'post_tag' ),
-      'menu_position' => 4
-    )
-  );
+    register_post_type( 'ccluk_news',
+        array(
+          'labels' => array(
+            'name' => __( 'News' ),
+            'singular_name' => __( 'News' )
+          ),
+          'public' => true,
+          'has_archive' => true,
+          'rewrite' => array('slug' => 'news'),
+          'supports' => array( 'title', 'editor', 'thumbnail', 'revisions' ),
+          'taxonomies' => array( 'category', 'post_tag' ),
+          'menu_position' => 4
+        )
+    );
+
+    // add to Buddypress activity stream
+    add_post_type_support( 'ccluk_news', 'buddypress-activity' );
 }
 add_action( 'init', 'ccluk_create_news_post_type' );
 

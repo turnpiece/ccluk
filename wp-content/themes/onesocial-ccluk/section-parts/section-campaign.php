@@ -2,6 +2,7 @@
 <?php
     $q = new WP_Query(
         array(
+            'post_type' => array( 'post', 'ccluk_news' ),
             'posts_per_page' => 1,
             'category_name' => 'campaign'
         )

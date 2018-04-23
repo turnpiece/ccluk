@@ -35,9 +35,11 @@ h1, h2, h3, h4, h5, h6, ul, ol, dd, table, p, address, pre, hr, figure, video {
 h3, h4 {
   line-height: 1.6; }
 
-a {
+a,
+#posts-carousel h3 a {
   color: #22a7f0; }
-  a:hover {
+  a:hover,
+  #posts-carousel h3 a:hover {
     color: #54ae68; }
 
 .bluebox {
@@ -599,6 +601,11 @@ body.page-template-homepage #main {
         font-size: 15px; }
     body.page-template-homepage #main .section.twitter #ctf .ctf-more {
       display: none; }
+    body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-author-screenname,
+    body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-context,
+    body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-twitterlink,
+    body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-tweet-meta {
+      font-size: 11px; }
     body.page-template-homepage #main .section.join .section-content {
       justify-content: space-around;
       -webkit-align-items: center;
@@ -1335,7 +1342,16 @@ MAXIMUM width of 480 pixels (phones)
       top: 0;
       margin-bottom: 0; }
       body .bb-slider-container .title {
-        font-size: 15px !important; } }
+        font-size: 15px !important; }
+
+  #buddypress .dir-form div.item-list-tabs ul li a span,
+  #buddypress div#subnav.item-list-tabs ul li a span,
+  #buddypress div:not(#item-nav) > .item-list-tabs ul li a span,
+  #buddypress > div[role=navigation].item-list-tabs ul li a span,
+  .bp-legacy div#item-body div.item-list-tabs ul li a span {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 320 pixels (small phones)
 --------------------------------------------------------------*/

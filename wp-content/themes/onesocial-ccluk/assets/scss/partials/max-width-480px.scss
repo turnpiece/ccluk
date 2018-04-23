@@ -38,3 +38,11 @@ body {
 		}
 	}
 }
+
+#buddypress .dir-form div.item-list-tabs ul li a span, 
+#buddypress div#subnav.item-list-tabs ul li a span, 
+#buddypress div:not(#item-nav)>.item-list-tabs ul li a span, 
+#buddypress>div[role=navigation].item-list-tabs ul li a span, 
+.bp-legacy div#item-body div.item-list-tabs ul li a span {
+    @include border-radius( 5px );
+}

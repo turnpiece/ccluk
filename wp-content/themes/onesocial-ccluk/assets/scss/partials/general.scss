@@ -34,7 +34,8 @@ h3, h4 {
     line-height: 1.6;
 }
 
-a {
+a,
+#posts-carousel h3 a {
     color: $blue;
 
     &:hover {
