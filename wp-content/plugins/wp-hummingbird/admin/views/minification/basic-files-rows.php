@@ -44,6 +44,8 @@
 				<span class="original-size crossed-out"><?php echo esc_html( $original_size ); ?>KB</span>
 				<i class="sui-icon-chevron-down" aria-hidden="true"></i>
 				<span class="compressed-size"><?php echo esc_html( $compressed_size ); ?>KB &mdash;</span>
+			<?php elseif ( in_array( $item['handle'], $options['dont_minify'][ $type ], true ) ) : ?>
+				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
 			<?php else : ?>
 				<span><?php esc_html_e( 'Compressing...', 'wphb' ); ?></span>
 			<?php endif; ?>

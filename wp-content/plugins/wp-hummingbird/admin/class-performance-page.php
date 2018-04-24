@@ -8,29 +8,61 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	/**
 	 * Status of error. If true, than we have some error.
 	 *
+	 * @since 1.8.2  Changed to private.
+	 *
 	 * @var bool $has_error True if error present.
 	 */
-	public $has_error;
+	private $has_error = false;
+
+	/**
+	 * Latest report.
+	 *
+	 * @since 1.8.2
+	 *
+	 * @var wp_error|array|object $report  Latest performance report.
+	 */
+	private $report;
+
+	/**
+	 * Report dismissed.
+	 *
+	 * @since 1.8.2
+	 *
+	 * @var bool $dismissed  Dismiss status.
+	 */
+	private $dismissed = false;
+
+	/**
+	 * Can run new performance test.
+	 *
+	 * @since 1.8.2
+	 *
+	 * @var bool $can_run_test
+	 */
+	private $can_run_test = true;
 
 	/**
 	 * Render header.
 	 */
 	public function render_header() {
-		$this->get_error_status();
-
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
+		$this->report = WP_Hummingbird_Module_Performance::get_last_report();
+		if ( is_wp_error( $this->report ) ) {
+			$this->has_error = true;
+		}
 
 		// Check to see if there's a fresh report on the server.
-		if ( false === $last_report && ! WP_Hummingbird_Module_Performance::is_doing_report() ) {
+		if ( false === $this->report && ! WP_Hummingbird_Module_Performance::is_doing_report() ) {
 			WP_Hummingbird_Module_Performance::refresh_report();
 		}
 
+		$this->dismissed = WP_Hummingbird_Module_Performance::report_dismissed( $this->report );
+		$this->can_run_test = WP_Hummingbird_Module_Performance::can_run_test( $this->report );
+
 		$run_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
 		$run_url = wp_nonce_url( $run_url, 'wphb-run-performance-test' );
-		$can_run_scan = WP_Hummingbird_Module_Performance::can_run_test();
 
 		if ( isset( $_GET['report-dismissed'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'You have successfully ignored this performance test.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'You have successfully ignored this performance test.', 'wphb' ), 'success' );
 		}
 		?>
 		<div class="sui-notice sui-notice-top sui-notice-success" style="display: none" id="wphb-notice-performance-report-settings-updated">
@@ -39,14 +71,14 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 		<div class="sui-header">
 			<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<div class="sui-actions-right">
-				<?php if ( true === $can_run_scan ) : ?>
+				<?php if ( true === $this->can_run_test ) : ?>
 					<a href="<?php echo esc_url( $run_url ); ?>" class="sui-button">
 						<?php esc_html_e( 'New Test', 'wphb' ); ?>
 					</a>
 					<?php
 				else :
 					/* translators: %d: number of minutes. */
-					$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $can_run_scan ) );
+					$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $this->can_run_test ) );
 					?>
 					<span class="sui-tooltip sui-tooltip-bottom sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
 						<a href="#" class="sui-button wphb-disabled-test" disabled="disabled" aria-hidden="true">
@@ -61,6 +93,19 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 			</div>
 		</div><!-- end header -->
 		<?php
+	}
+
+	/**
+	 * Overwrite parent render_inner_content method.
+	 *
+	 * Render content for display.
+	 *
+	 * @since 1.8.2
+	 */
+	protected function render_inner_content() {
+		$this->view( $this->slug . '-page', array(
+			'report' => $this->report,
+		));
 	}
 
 	/**
@@ -181,7 +226,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * Summary meta box.
 	 */
 	public function performance_summary_metabox() {
-		$last_test = WP_Hummingbird_Module_Performance::get_last_report();
+		$last_test = $this->report;
 		$doing_report = WP_Hummingbird_Module_Performance::is_doing_report();
 
 		$error_details = '';
@@ -198,7 +243,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 
 				$this->has_error = true;
 			} else {
-				$last_test = $last_test->data;
+				$last_test = $this->report->data;
 			}
 
 			$retry_url = add_query_arg( 'run', 'true', WP_Hummingbird_Utils::get_admin_menu_url( 'performance' ) );
@@ -212,8 +257,8 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 					'error_details'    => $error_details,
 					'error_text'       => $error_text,
 					'retry_url'        => $retry_url,
-					'report_dismissed' => WP_Hummingbird_Module_Performance::report_dismissed(),
-					'can_run_test'     => WP_Hummingbird_Module_Performance::can_run_test(),
+					'report_dismissed' => $this->dismissed,
+					'can_run_test'     => $this->can_run_test,
 					'is_subsite'       => ! is_main_site(),
 				)
 			);
@@ -231,16 +276,14 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	 * Performance welcome meta box.
 	 */
 	public function performance_welcome_metabox() {
-		$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-		$dismissed = WP_Hummingbird_Module_Performance::report_dismissed();
+		$last_report = $this->report;
 
-		$last_score = '';
+		$last_score = false;
 		$improvement = 0;
 
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$last_report = $last_report->data;
 
-			$last_score = false;
 			if ( $last_report->last_score ) {
 				$improvement = $last_report->score - $last_report->last_score['score'];
 				$last_score = $last_report->last_score['score'];
@@ -253,8 +296,8 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				'last_report'      => $last_report,
 				'improvement'      => $improvement,
 				'last_score'       => $last_score,
-				'recommendations'  => WP_Hummingbird_Utils::get_number_of_issues( 'performance' ),
-				'report_dismissed' => $dismissed,
+				'recommendations'  => WP_Hummingbird_Utils::get_number_of_issues( 'performance', $this->report ),
+				'report_dismissed' => $this->dismissed,
 				'is_doing_report'  => WP_Hummingbird_Module_Performance::is_doing_report(),
 			)
 		);
@@ -268,7 +311,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 			'performance/summary-meta-box-header',
 			array(
 				'title'     => __( 'Improvements', 'wphb' ),
-				'dismissed' => WP_Hummingbird_Module_Performance::report_dismissed(),
+				'dismissed' => $this->dismissed,
 			)
 		);
 	}
@@ -381,19 +424,6 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * See if there are any errors. Set the variable to true if some errors are found.
-	 *
-	 * @since 1.4.5
-	 */
-	private function get_error_status() {
-		$this->has_error = false;
-		$last_test = WP_Hummingbird_Module_Performance::get_last_report();
-		if ( is_wp_error( $last_test ) ) {
-			$this->has_error = true;
-		}
-	}
-
-	/**
 	 * We need to insert an extra label to the tabs sometimes
 	 *
 	 * @param string $tab Current tab.
@@ -403,14 +433,13 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 			return;
 		}
 
-		$last_test = WP_Hummingbird_Module_Performance::get_last_report();
-		if ( ! $last_test ) {
+		if ( ! $this->report ) {
 			return;
 		}
 
 		$class = '';
-		if ( isset( $last_test->data->score_class ) ) {
-			switch ( $last_test->data->score_class ) {
+		if ( isset( $this->report->data->score_class ) ) {
+			switch ( $this->report->data->score_class ) {
 				case 'aplus':
 				case 'a':
 				case 'b':
@@ -426,10 +455,10 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 					break;
 			}
 		}
-		if ( WP_Hummingbird_Module_Performance::report_dismissed() ) {
+		if ( $this->dismissed ) {
 			echo ' <i class="hb-wpmudev-icon-info dismissed"></i>';
 		} elseif ( ! $this->has_error ) {
-			echo ' <span class="sui-tag sui-tag-' . esc_attr( $class ) . '">' . esc_html( WP_Hummingbird_Utils::get_number_of_issues( 'performance' ) ) . '</span>';
+			echo ' <span class="sui-tag sui-tag-' . esc_attr( $class ) . '">' . esc_html( WP_Hummingbird_Utils::get_number_of_issues( 'performance', $this->report ) ) . '</span>';
 		} else {
 			echo ' <i class="hide-on-mobile hb-wpmudev-icon-warning sui-warning"></i>';
 		}

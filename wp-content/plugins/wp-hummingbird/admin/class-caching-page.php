@@ -102,10 +102,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			unset( $this->tabs['settings'] );
 		}
 
-		// Re-check browser expiry whenever the browser caching page is loaded.
-		if ( isset( $_GET['view'] ) && 'browser' === $_GET['view'] ) { // Input var ok.
-			$this->update_cache_status();
-		}
+		$this->update_cache_status();
 	}
 
 	/**
@@ -146,6 +143,15 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				$this->issues = count( $this->report );
 			}
 			return;
+		}
+
+		/*
+		 * Remove no-background-image class on the metabox.
+		 * We do it here, because register_metx_boxes() is fired before this code and there's no way to get CF status.
+		 */
+		$cf_notice = get_site_option( 'wphb-cloudflare-dash-notice' );
+		if ( ! $cf_notice && 'dismissed' !== $cf_notice ) {
+			$this->meta_boxes[ $this->get_slug() ]['browser']['caching-summary']['args']['box_content_class'] = 'sui-box-body';
 		}
 
 		// Get latest local report.
@@ -272,9 +278,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 			$response = $this->caching_reload_snippet();
 
-			/* @var WP_Hummingbird_Module_Caching $caching_module */
-			$caching_module = WP_Hummingbird_Utils::get_module( 'caching' );
-			$caching_module->clear_cache();
+			WP_Hummingbird_Utils::get_module( 'caching' )->clear_cache();
 
 			if ( 'apache' === $response['type'] && $response['updatedFile'] ) {
 				$redirect_to = add_query_arg( array(
@@ -474,34 +478,34 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		<?php
 		if ( isset( $_GET['caching-updated'] ) && ! isset( $_GET['htaccess-error'] ) ) { // Input var ok.
 			if ( $this->htaccess_written ) {
-				$this->admin_notices->show( 'updated', __( 'Your .htaccess file has been updated', 'wphb' ), 'success', true );
+				$this->admin_notices->show( 'updated', __( 'Your .htaccess file has been updated', 'wphb' ), 'success' );
 			} else {
-				$this->admin_notices->show( 'updated', __( 'Code snippet updated', 'wphb' ), 'success', true );
+				$this->admin_notices->show( 'updated', __( 'Code snippet updated', 'wphb' ), 'success' );
 			}
 		}
 
 		if ( isset( $_GET['cache-enabled'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Browser cache enabled. Your .htaccess file has been updated', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Browser cache enabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['cache-disabled'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Browser cache disabled. Your .htaccess file has been updated', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Browser cache disabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['gravatars-purged'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'purged', __( 'Gravatar cache purged.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'purged', __( 'Gravatar cache purged.', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['page-cache-purged'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'purged', __( 'Page cache purged.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'purged', __( 'Page cache purged.', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['pc-settings-updated'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Settings Updated.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Settings Updated.', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['purge-error'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'purged', __( 'There was an error during the cache purge. Check file permissions are 755 for /wp-content/wphb-cache or delete directory manually.', 'wphb' ), 'error', true );
+			$this->admin_notices->show( 'purged', __( 'There was an error during the cache purge. Check file permissions are 755 for /wp-content/wphb-cache or delete directory manually.', 'wphb' ), 'error' );
 		}
 
 		parent::render_header();
@@ -589,11 +593,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		 */
 
 		if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
-			$show_cf_image = 'no-background-image';
-			$cf_notice     = get_site_option( 'wphb-cloudflare-dash-notice' );
-			if ( ! $this->cloudflare && ( ! $cf_notice && 'dismissed' !== $cf_notice ) ) {
-				$show_cf_image = '';
-			}
 			$this->add_meta_box(
 				'caching-summary',
 				__( 'Browser Caching', 'wphb' ),
@@ -602,7 +601,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				'browser',
 				array(
-					'box_content_class' => 'sui-box-body ' . $show_cf_image
+					'box_content_class' => 'sui-box-body no-background-image',
 				)
 			);
 
@@ -700,7 +699,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			if ( ! $this->cloudflare ) {
 				$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $this->report );
 			} elseif ( 691200 > $this->expiration ) {
-				count( $this->report );
 				$issues = count( $this->report );
 				// Add an issue for the CloudFlare type.
 				$issues++;
@@ -951,7 +949,6 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			'litespeed' => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'LiteSpeed' ),
 			'nginx'     => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'nginx' ),
 			'iis'       => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'iis' ),
-			'iis-7'     => WP_Hummingbird_Module_Server::get_code_snippet( 'caching', 'iis-7' ),
 		);
 
 		$htaccess_writable = WP_Hummingbird_Module_Server::is_htaccess_writable();
@@ -1146,7 +1143,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		$code = WP_Hummingbird_Module_Server::get_code_snippet( 'caching', $type );
 
 		$updated_file = false;
-		if ( true === $this->htaccess_written && 'apache' === $type ) {
+		if ( true === $this->htaccess_written && ( 'apache' === $type || 'LiteSpeed' === $type ) ) {
 			WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
 			$updated_file = WP_Hummingbird_Module_Server::save_htaccess( 'caching' );
 		}

@@ -28,7 +28,6 @@
 		'uptime-info',
 		'Uptime monitor will report your site as down when it takes 30+ seconds to load your homepage. Your host may report your site as online, but as far as user experience goes, slow page speeds are bad practice. Consider upgrading your hosting if your site is regularly down.',
 		'grey',
-		false,
 		true,
 		false
 	);

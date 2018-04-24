@@ -73,12 +73,12 @@
 				<label class="sui-radio">
 					<input type="radio" name="expiry-set-type" id="expiry-all-types" value="all" <?php checked( $all_expiry ); ?>>
 					<span aria-hidden="true"></span>
-					<div class="sui-description"><?php esc_html_e( 'All file types', 'wphb' ); ?></div>
+					<span class="sui-description"><?php esc_html_e( 'All file types', 'wphb' ); ?></span>
 				</label>
 				<label class="sui-radio">
 					<input type="radio" name="expiry-set-type" id="expiry-single-type" value="single" <?php checked( ! $all_expiry ); ?>>
 					<span aria-hidden="true"></span>
-					<div class="sui-description"><?php esc_html_e( 'Individual file types', 'wphb' ); ?></div>
+					<span class="sui-description"><?php esc_html_e( 'Individual file types', 'wphb' ); ?></span>
 				</label>
 			<?php endif; ?>
 			<?php
@@ -355,7 +355,6 @@
 					<p><?php esc_html_e( 'Note: If you do not have access to your NGINX config files you will need to contact your hosting provider to make these changes.', 'wphb' ); ?></p>
 					<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 				<?php endif; ?>
-
 			</div>
 
 			<div id="wphb-server-instructions-iis" class="wphb-server-instructions hidden" data-server="iis">
@@ -372,29 +371,8 @@
 						<?php
 						printf(
 							/* translators: %s: Link to TechNet */
-							__( 'For IIS servers, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ),
-						'https://www.microsoft.com/technet/prodtechnol/WindowsServer2003/Library/IIS/25d2170b-09c0-45fd-8da4-898cf9a7d568.mspx?mfr=true' );
-						?>
-					</p>
-				<?php endif; ?>
-			</div>
-
-			<div id="wphb-server-instructions-iis-7" class="wphb-server-instructions hidden" data-server="iis-7">
-				<?php if ( $already_enabled ) : ?>
-					<div class="wphb-caching-success wphb-notice wphb-notice-success">
-						<p><?php esc_html_e( 'Your browser caching is already enabled and working well', 'wphb' ); ?></p>
-					</div>
-				<?php elseif ( $htaccess_writable && $htaccess_written ) : ?>
-					<div class="wphb-caching-active wphb-notice wphb-notice-blue">
-						<p><?php esc_html_e( 'Automatic browser caching is active.', 'wphb' ); ?></p>
-					</div>
-				<?php else : ?>
-					<p>
-						<?php
-						printf(
-							/* translators: %s: Link to TechNet */
-							__( 'For IIS 7 servers, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ),
-						'https://technet.microsoft.com/en-us/library/cc771003(v=ws.10).aspx' );
+							__( 'For IIS 7 servers and above, <a href="%s" target="_blank">visit Microsoft TechNet</a>', 'wphb' ),
+						'https://technet.microsoft.com/en-us/library/cc732475(v=ws.10).aspx' );
 						?>
 					</p>
 				<?php endif; ?>
@@ -558,9 +536,3 @@
 		});
 	</script>
 <?php endif; ?>
-<script>
-	jQuery(window).load(function() {
-		var caching = window.WPHB_Admin.getModule( 'caching' );
-		caching.updateTabSize();
-	});
-</script>

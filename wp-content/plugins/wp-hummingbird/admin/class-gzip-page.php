@@ -28,15 +28,15 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function render_header() {
 		if ( isset( $_GET['htaccess-error'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'error', __( 'Hummingbird could not update or write your .htaccess file. Please, make .htaccess writable or paste the code yourself.', 'wphb' ), 'error', true );
+			$this->admin_notices->show( 'error', __( 'Hummingbird could not update or write your .htaccess file. Please, make .htaccess writable or paste the code yourself.', 'wphb' ), 'error' );
 		}
 
 		if ( isset( $_GET['gzip-enabled'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Gzip enabled. Your .htaccess file has been updated', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Gzip enabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['gzip-disabled'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Gzip disabled. Your .htaccess file has been updated', 'wphb' ), 'error', true );
+			$this->admin_notices->show( 'updated', __( 'Gzip disabled. Your .htaccess file has been updated', 'wphb' ), 'error' );
 		}
 
 		parent::render_header();
@@ -213,7 +213,6 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			'litespeed' => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'LiteSpeed' ),
 			'nginx'     => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'nginx' ),
 			'iis'       => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis' ),
-			'iis-7'     => WP_Hummingbird_Module_Server::get_code_snippet( 'gzip', 'iis-7' ),
 		);
 		$htaccess_error = false;
 		if ( isset( $_GET['htaccess-error'] ) ) { // Input var ok.

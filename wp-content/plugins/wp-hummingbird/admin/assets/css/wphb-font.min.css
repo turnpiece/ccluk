@@ -1,0 +1,22 @@
+@font-face {
+  font-family: 'wphb';
+  src: url(../fonts/wphb.eot);
+  src: url(../fonts/wphb.eot) format("embedded-opentype"), url(../fonts/wphb.ttf) format("truetype"), url(../fonts/wphb.woff) format("woff"), url(../fonts/wphb.svg) format("svg");
+  font-weight: normal;
+  font-style: normal;
+}
+
+#toplevel_page_wphb-minification .wp-menu-image:before,
+#toplevel_page_wphb-performance .wp-menu-image:before,
+#toplevel_page_wphb .wp-menu-image:before,
+#toplevel_page_wphb-caching .wp-menu-image:before {
+  font-family: 'wphb';
+  content: "\E900";
+}
+
+
+
+/*# sourceMappingURL=wphb-font.min.css.map*/
+
+
+/* 87274-1524597812-au */

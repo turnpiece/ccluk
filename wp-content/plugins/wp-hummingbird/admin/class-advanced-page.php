@@ -15,6 +15,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		$this->tabs = array(
 			'main'   => __( 'General', 'wphb' ),
 			'db'     => __( 'Database Cleanup', 'wphb' ),
+			'system' => __( 'System Information', 'wphb' ),
 		);
 	}
 
@@ -73,6 +74,18 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 				'box_content_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
 				'box_footer_class'   => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
 			)
+		);
+
+		/**
+		 * System information meta box.
+		 */
+		$this->add_meta_box(
+			'advanced/system-info',
+			__( 'System Information', 'wphb' ),
+			array( $this, 'system_info_metabox' ),
+			null,
+			null,
+			'system'
 		);
 	}
 
@@ -135,6 +148,33 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			'schedule'  => $options['db_cleanups'],
 			'frequency' => $options['db_frequency'],
 		));
+	}
+
+	/**********************
+	 *
+	 * System Information page meta boxes.
+	 *
+	 *********************/
+
+	/**
+	 * System Information meta box.
+	 */
+	public function system_info_metabox() {
+		$php_info    = WP_Hummingbird_Module_Advanced::get_php_info();
+		$db_info     = WP_Hummingbird_Module_Advanced::get_db_info();
+		$wp_info     = WP_Hummingbird_Module_Advanced::get_wp_info();
+		$server_info = WP_Hummingbird_Module_Advanced::get_server_info();
+
+		$system_info = array(
+			'php'    => $php_info,
+			'db'     => $db_info,
+			'wp'     => $wp_info,
+			'server' => $server_info,
+		);
+
+		$this->view( 'advanced/system-info-meta-box', array(
+			'system_info' => $system_info,
+		) );
 	}
 
 }

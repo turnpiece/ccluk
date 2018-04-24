@@ -8,18 +8,30 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Class WP_Hummingbird_Module_Minify_Groups_List
+ */
 class WP_Hummingbird_Module_Minify_Groups_List {
 
 	/**
+	 * Groups.
+	 *
 	 * @var array List of WP_Hummingbird_Module_Minifynew_Group objects
 	 */
 	private $groups = array();
 
 	/**
+	 * Type
+	 *
 	 * @var string styles|scripts
 	 */
 	private $type = '';
 
+	/**
+	 * Group dependencies.
+	 *
+	 * @var bool $groups_dependencies
+	 */
 	private $groups_dependencies = false;
 
 	/**
@@ -29,10 +41,16 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * - 'process' = The group should process its file
 	 * - 'ready' = The group has already a processed file and must be enqueued
 	 * - 'only-handles' = The group file won't be processed and its files will be enqueued by separate
-	 * @var array
+	 *
+	 * @var array $group_statuses
 	 */
 	private $group_statuses = array();
 
+	/**
+	 * WP_Hummingbird_Module_Minify_Groups_List constructor.
+	 *
+	 * @param string $type  Type.
+	 */
 	public function __construct( $type ) {
 		$this->type = $type;
 	}
@@ -46,6 +64,11 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		return $this->type;
 	}
 
+	/**
+	 * Get groups.
+	 *
+	 * @return array
+	 */
 	public function get_groups() {
 		return $this->groups;
 	}
@@ -53,7 +76,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	/**
 	 * Return a group from the list
 	 *
-	 * @param int|string $key_or_hash
+	 * @param int|string $key_or_hash  Key or hash.
 	 *
 	 * @return bool|mixed
 	 */
@@ -69,7 +92,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	/**
 	 * Add a new group to the list
 	 *
-	 * @param WP_Hummingbird_Module_Minify_Group $group
+	 * @param WP_Hummingbird_Module_Minify_Group $group  Group.
 	 *
 	 * @return bool
 	 */
@@ -86,7 +109,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	/**
 	 * Remove a group from the list
 	 *
-	 * @param string|int $key_or_hash
+	 * @param string|int $key_or_hash  Key or hash.
 	 *
 	 * @return bool
 	 */
@@ -112,12 +135,12 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * if you want this function to work properly. Otherwise it will return WP_Error
 	 * and self::preprocess_groups() should has been called
 	 *
-	 * @param $key_or_hash
+	 * @param string|int $key_or_hash  Key or hash.
 	 *
 	 * @return array|WP_Error
 	 */
 	public function get_group_dependencies( $key_or_hash ) {
-		/** @var WP_Hummingbird_Module_Minify_Group $group */
+		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$group = $this->get_group( $key_or_hash );
 		if ( ! $group ) {
 			return array();
@@ -127,12 +150,14 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	}
 
 	/**
-	 * @param $group_id
+	 * Return group by group ID.
+	 *
+	 * @param int $group_id  Group ID.
 	 *
 	 * @return bool|WP_Hummingbird_Module_Minify_Group
 	 */
 	public function get_group_by_group_id( $group_id ) {
-		/** @var WP_Hummingbird_Module_Minify_Group $group */
+		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$groups = $this->get_groups();
 		$result = wp_list_filter( $groups, array(
 			'group_id' => $group_id,
@@ -172,8 +197,8 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 *
 	 * The function will keep the groups order instead of adding them at the end of the list
 	 *
-	 * @param $key_or_hash
-	 * @param $new_handles_order
+	 * @param string|int $key_or_hash        Key or hash.
+	 * @param array      $new_handles_order  New order of handles.
 	 *
 	 * @return bool
 	 */
@@ -187,7 +212,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 			return false;
 		}
 
-		/** @var WP_Hummingbird_Module_Minify_Group $group */
+		/* @var WP_Hummingbird_Module_Minify_Group $group */
 		$group = $this->groups[ $position ];
 		$new_groups = array();
 		foreach ( $new_handles_order as $handles_order ) {
@@ -201,7 +226,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 
 			$sliced_left = array_merge( $sliced_left, $new_groups );
 
-			// Remove the group from the right, we don't need it anymore
+			// Remove the group from the right, we don't need it anymore.
 			unset( $sliced_right[ $first_key_on_right_slice ] );
 
 			// And merge the right side on the left too
@@ -218,7 +243,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 	 * Return a group position based on its key (that's actually its position)
 	 * or hash
 	 *
-	 * @param string|int $key_or_hash
+	 * @param string|int $key_or_hash  Key or hash.
 	 *
 	 * @return bool|mixed
 	 */
@@ -228,7 +253,7 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		}
 
 		$group_hashes = wp_list_pluck( $this->groups, 'hash' );
-		$position = array_search( $key_or_hash, $group_hashes );
+		$position = array_search( $key_or_hash, $group_hashes, true );
 
 		if ( false !== $position ) {
 			return $position;
@@ -237,6 +262,13 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		return false;
 	}
 
+	/**
+	 * Get the status of the group.
+	 *
+	 * @param string $hash  Hash.
+	 *
+	 * @return bool|mixed
+	 */
 	public function get_group_status( $hash ) {
 		if ( ! isset( $this->group_statuses[ $hash ] ) ) {
 			return false;
@@ -245,32 +277,37 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		return $this->group_statuses[ $hash ];
 	}
 
+	/**
+	 * Set group status.
+	 *
+	 * @param string $hash    Hash.
+	 * @param string $status  Status.
+	 */
 	public function set_group_status( $hash, $status ) {
 		$this->group_statuses[ $hash ] = $status;
 	}
 
 	/**
 	 * Mark the groups to be processed or not
-	 *
 	 */
 	public function preprocess_groups() {
 		foreach ( $this->get_groups() as $group ) {
-			/** @var WP_Hummingbird_Module_Minify_Group $group */
+			/* @var WP_Hummingbird_Module_Minify_Group $group */
 			$group->maybe_load_file();
 			$group_src = $group->get_group_src();
 
 			if ( $group->should_process_group() && $group->file_id && $group_src && ! $group->is_expired() ) {
-				// The group has its file and is not expired
+				// The group has its file and is not expired.
 				$this->set_group_status( $group->hash, 'ready' );
 			} elseif ( ( $group->should_process_group() && ( empty( $group_src ) ) || $group->is_expired() ) ) {
-				// The group must be processed but it has no file yet
+				// The group must be processed but it has no file yet.
 				$this->set_group_status( $group->hash, 'process' );
 
-				// Delete file in case there's one (but is expired)
+				// Delete file in case there's one (but is expired).
 				$group->delete_file();
 			} else {
 				// The group won't be processed
-				// Use the original handles and their URLs instead
+				// Use the original handles and their URLs instead.
 				$this->set_group_status( $group->hash, 'only-handles' );
 			}
 		}
@@ -278,6 +315,11 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		$this->parse_groups_dependencies();
 	}
 
+	/**
+	 * Parse dependencies for the group.
+	 *
+	 * @return array|bool
+	 */
 	public function parse_groups_dependencies() {
 		if ( false !== $this->groups_dependencies ) {
 			return $this->groups_dependencies;
@@ -286,29 +328,29 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		$deps = array();
 		$self = $this;
 		// Now that every is marked, let's parse dependencies
-		// This cannot be undone, so do not change groups after this
+		// This cannot be undone, so do not change groups after this.
 		array_map( function( $group ) use ( &$deps, $self ) {
-			/** @var WP_Hummingbird_Module_Minify_Group $group */
+			/* @var WP_Hummingbird_Module_Minify_Group $group */
 			$search_group_deps = $group->get_all_handles_dependencies();
 			$search_group_hash = $group->hash;
 			$deps[ $search_group_hash ] = array();
 
 			foreach ( $self->get_groups() as $position => $g ) {
-				/** @var WP_Hummingbird_Module_Minify_Group $g */
+				/* @var WP_Hummingbird_Module_Minify_Group $g */
 				$g_status = $self->get_group_status( $g->hash );
 				$g_hash = $g->hash;
 
 				if ( $g_hash === $search_group_hash ) {
-					// Don't search deps in the same group
+					// Don't search deps in the same group.
 					continue;
 				}
 
 				$g_handles = $g->get_handles();
 				$intersect = array_intersect( $g_handles, $search_group_deps );
 				if ( ! empty( $intersect ) ) {
-					// We've found dependencies
-					if ( 'ready' != $g_status ) {
-						// The group is not ready, dependencies are one or more of its handles
+					// We've found dependencies.
+					if ( 'ready' !== $g_status ) {
+						// The group is not ready, dependencies are one or more of its handles.
 						$deps[ $search_group_hash ] = array_merge(
 							$deps[ $search_group_hash ],
 							array_map( function( $handle ) use ( $g ) {
@@ -327,4 +369,5 @@ class WP_Hummingbird_Module_Minify_Groups_List {
 		$this->groups_dependencies = $deps;
 		return $deps;
 	}
+
 }

@@ -47,7 +47,7 @@
 						<label for="<?php echo esc_attr( $type ); ?>" class="sui-checkbox">
 							<input type="checkbox" name="<?php echo esc_attr( $type ); ?>" id="<?php echo esc_attr( $type ); ?>" <?php checked( $field['checked'] ); ?>>
 							<span aria-hidden="true"></span>
-							<div class="sui-description sui-description-sm"><?php echo esc_html( $field['title'] ); ?></div>
+							<span class="sui-description sui-description-sm"><?php echo esc_html( $field['title'] ); ?></span>
 						</label>
 					<?php endforeach; ?>
 				</div>

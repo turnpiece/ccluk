@@ -105,7 +105,7 @@ body.page-template-homepage {
 					max-width: 580px;
 
 					article {
-						@include display-flex();
+						@include display-flex( flex-start );
 						@include padding( 2, 0 );
 
 						.list-item {
@@ -122,6 +122,7 @@ body.page-template-homepage {
 
 								.entry-title {
 									@include margin( 1, 0 );
+									font-size: $font-size-lg;
 								}
 							}
 						}

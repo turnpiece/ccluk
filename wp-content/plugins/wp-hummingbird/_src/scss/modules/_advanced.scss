@@ -125,3 +125,35 @@
         }
     }
 }
+
+
+/* Database cleanup tab */
+.wpmud .box-advanced-system-info {
+    .sui-table {
+        &.wphb-sys-info-table {
+            border: none;
+            tr {
+                height: 40px;
+                &:nth-child(odd){
+                    border-radius: 4px;
+                    background-color: #FAFAFA
+                }
+                td {
+                    vertical-align: top;
+                    padding: 5px 20px;
+                    border-bottom: none;
+                    border-radius: 4px;
+                    &:first-child {
+                        color: #333;
+                        font-weight: 500;
+                    }
+                }
+            }
+        }
+    }
+
+    .wphb-system-info-dropdown {
+        max-width: 160px;
+    }
+
+}

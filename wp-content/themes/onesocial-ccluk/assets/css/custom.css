@@ -529,8 +529,8 @@ body.page-template-homepage #main {
         display: -webkit-flex;
         display: flex;
         flex-wrap: wrap;
-        -webkit-align-items: center;
-        align-items: center;
+        -webkit-align-items: flex-start;
+        align-items: flex-start;
         justify-content: center;
         padding: 20px 0px;
         padding: 2rem 0rem; }
@@ -545,7 +545,8 @@ body.page-template-homepage #main {
             padding: 2rem 3rem; }
             body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
               margin: 10px 0px;
-              margin: 1rem 0rem; }
+              margin: 1rem 0rem;
+              font-size: 36px; }
     body.page-template-homepage #main .section.about .section-content {
       text-align: center;
       align-content: center;
@@ -1423,6 +1424,9 @@ MINIMUM width of 1025 pixels (large desktops)
       width: 580px;
       text-align: right; }
     body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
-      width: 540px; } }
+      width: 540px;
+      padding-top: 0; }
+      body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
+        font-size: 50px; } }
 
 /*# sourceMappingURL=custom.css.map */

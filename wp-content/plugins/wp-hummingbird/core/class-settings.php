@@ -60,7 +60,7 @@ class WP_Hummingbird_Settings {
 		$defaults = array(
 			'minify' => array(
 				'enabled'     => false,
-				'use_cdn'     => false,
+				'use_cdn'     => true,
 				'log'         => false,
 				// Only for multisites. Toggles minification in a subsite
 				// By default is true as if 'minify'-'enabled' is set to false, this option has no meaning.
@@ -129,7 +129,7 @@ class WP_Hummingbird_Settings {
 				'reports'       => false,
 				'subsite_tests' => false,
 				'dismissed'     => false,
-				'last_score'    => '',
+				'last_score'    => 0,
 			),
 			'advanced' => array(
 				'query_string' => false,
@@ -337,8 +337,8 @@ class WP_Hummingbird_Settings {
 	 */
 	private static function is_exception( $module, $options, $option_name ) {
 		$exceptions = array(
-			'page_cache' => 'blog-admins',
-			'minify'     => 'super-admins',
+			'minify'      => 'super-admins',
+			'page_cache'  => 'blog-admins',
 		);
 
 		if ( isset( $exceptions[ $module ] ) && $exceptions[ $module ] === $options[ $option_name ] ) {

@@ -17,7 +17,7 @@
 			$message .= ' ';
 			$message .= __( 'If you wish to have more control, <a href="#" class="wphb-switch-button">switch to advanced mode</a>.', 'wphb' );
 		}
-		$this->admin_notices->show( 'minification-optimized', $message, 'warning', false, true, false );
+		$this->admin_notices->show( 'minification-optimized', $message, 'warning', true, false );
 	}
 
 	$this->do_meta_boxes( 'summary' );

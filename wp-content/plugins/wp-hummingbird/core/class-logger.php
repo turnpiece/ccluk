@@ -112,6 +112,8 @@ class WP_Hummingbird_Logger {
 
 		if ( '/' === $blog->path ) {
 			return $blog->domain . '-';
+		} elseif ( defined( 'SUBDOMAIN_INSTALL' ) && ! SUBDOMAIN_INSTALL ) {
+			return $blog->domain . '-' . str_replace( '/', '', $blog->path ) . '-';
 		}
 
 		return $blog->path . '-';
@@ -194,7 +196,7 @@ class WP_Hummingbird_Logger {
 			closedir( $dir );
 			rmdir( $log_dir );
 		} catch ( Exception $e ) {
-			error_log( '[' . current_time( 'mysql' ) . '] - Unable to clean Hummingbird log directory. Error: ' . $e->getMessage() );	   			 	 		  		   		
+			error_log( '[' . current_time( 'mysql' ) . '] - Unable to clean Hummingbird log directory. Error: ' . $e->getMessage() );
 		}
 	}
 

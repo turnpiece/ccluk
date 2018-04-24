@@ -28,15 +28,6 @@ class WP_Hummingbird_Admin_Notices {
 	private static $instance = null;
 
 	/**
-	 * Store list of installed plugins.
-	 *
-	 * @since  1.7.0
-	 * @access private
-	 * @var    array $plugins  List of installed plugins.
-	 */
-	private $plugins = array();
-
-	/**
 	 * Return the plugin instance.
 	 *
 	 * @since 1.7.0
@@ -62,7 +53,6 @@ class WP_Hummingbird_Admin_Notices {
 		if ( ! function_exists( 'get_plugins' ) ) {
 			include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 		}
-		$this->plugins = get_plugins();
 
 		// Only show notices to users who can do something about it (update, for example).
 		$cap = is_multisite() ? 'manage_network_plugins' : 'update_plugins';
@@ -216,11 +206,10 @@ class WP_Hummingbird_Admin_Notices {
 	 * @param string $id           Unique identifier for the notice.
 	 * @param string $message      The notice text.
 	 * @param string $class        Class for the notice wrapper.
-	 * @param bool   $auto_hide    Auto hide notice.
 	 * @param bool   $can_dismiss  If is dissmisable or not.
 	 * @param bool   $notice_top   Show notice on top.
 	 */
-	public function show( $id, $message, $class = 'error', $auto_hide = false, $can_dismiss = false, $notice_top = true ) {
+	public function show( $id, $message, $class = 'error', $can_dismiss = false, $notice_top = true ) {
 		// Is already dismissed ?
 		if ( $can_dismiss && $this->is_dismissed( $id, 'option' ) ) {
 			return;
@@ -361,8 +350,18 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		$sub = '';
+		$text = __( "We've noticed you've made changes to your website. We recommend you clear Hummingbird's page cache to avoid any issues.", 'wphb' );
+		$additional = '';
+
 		if ( $minify_active ) {
+			// Add new files link.
+			$recheck_file_url = add_query_arg(
+				array(
+					'recheck-files' => 'true',
+				),
+				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
+			);
+
 			// Clear cache button link.
 			$clear_cache_url = add_query_arg(
 				array(
@@ -372,10 +371,11 @@ class WP_Hummingbird_Admin_Notices {
 				WP_Hummingbird_Utils::get_admin_menu_url( 'minification' )
 			);
 
-			$sub = __( 'Asset Optimization feature', 'wphb' );
-			if ( $caching_active ) {
-				$sub = __( 'Asset Optimization and Page Caching features', 'wphb' );
-			}
+			$text = __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes,
+			we recommend you re-do Hummingbird's Asset Optimization configuration to ensure those new files are added
+			correctly. <i>Note: This will wipe your existing asset optimization settings</i>. <!--<a href='#'>Learn more</a>.-->", 'wphb' );
+
+			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="sui-button sui-button-primary button button-primary" style="margin-right:10px">' . __( 'Reset Asset Optimization', 'wphb' ) . '</a>';
 		} elseif ( $caching_active ) {
 			// Clear cache button link.
 			$clear_cache_url = wp_nonce_url( add_query_arg(
@@ -385,25 +385,23 @@ class WP_Hummingbird_Admin_Notices {
 				),
 				WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=main'
 			), 'wphb-run-caching' );
-
-			$sub = __( 'Page Caching feature', 'wphb' );
 		}
-
-		$text = sprintf(
-			/* translators: %s - active features */
-			__( "We've noticed you've made changes to your website and have Hummingbird's %s active. You might want to clear cache to avoid any issues.", 'wphb' ),
-			$sub
-		);
 
 		// If, for some reason, we don't have clear cache url - do nothing.
 		if ( ! isset( $clear_cache_url ) ) {
 			return;
 		}
 
+		$additional .= '<a href="' . esc_url( $clear_cache_url ) . '" class="sui-button sui-button-ghost button">' . __( 'Clear Cache', 'wphb' ) . '</a>';
+		if ( $caching_active ) {
+			$adjust_settings_url = WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=settings';
+			$additional .= '<a href="' . esc_url( $adjust_settings_url ) . '" style="color:#888;margin-left:10px;text-decoration:none">' . __( 'Adjust notification settings', 'wphb' ) . '</a>';
+		}
+
 		$this->show_notice(
 			'cache-cleaned',
 			$text,
-			'<a href="' . esc_url( $clear_cache_url ) . '" class="sui-button sui-button-primary button">' . __( 'Clear Cache', 'wphb' ) . '</a>'
+			$additional
 		);
 	}
 

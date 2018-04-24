@@ -26,10 +26,9 @@
 
 <?php
 WP_Hummingbird_Utils::get_modal( 'check-files' );
-/* @var WP_Hummingbird_Module_Minify $minify_module */
-$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
 
-if ( $minify_module->is_scanning() || isset( $_GET['wphb-cache-cleared'] ) ) : // Show the progress bar if we are still checking files. ?>
+// Show the progress bar if we are still checking files.
+if ( WP_Hummingbird_Utils::get_module( 'minify' )->is_scanning() || isset( $_GET['wphb-cache-cleared'] ) ) : ?>
 	<script>
 		window.onload = function () {
 			jQuery(function() {

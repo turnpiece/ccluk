@@ -19,6 +19,9 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	 */
 	private $server_errors = array();
 
+	/**
+	 * WP_Hummingbird_Minification_Errors_Controller constructor.
+	 */
 	public function __construct() {
 		$this->errors = $this->get_errors();
 		$this->server_errors = $this->get_server_errors();
@@ -40,11 +43,11 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	/**
 	 * Add an error coming from server
 	 *
-	 * @param $error
+	 * @param WP_Error $error  Error.
 	 */
 	public function add_server_error( $error ) {
 		$this->server_errors[] = $error;
-		set_transient( 'wphb-minify-server-errors', $this->server_errors, 7200 ); // save for 2 hours
+		set_transient( 'wphb-minify-server-errors', $this->server_errors, 7200 ); // save for 2 hours.
 	}
 
 
@@ -54,7 +57,7 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	 * if there have been too many errors
 	 */
 	public function is_server_error() {
-		// More than 2 errors is too many
+		// More than 2 errors is too many.
 		return ( count( $this->server_errors ) > 2 );
 	}
 
@@ -93,8 +96,8 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	/**
 	 * Return a single handle error
 	 *
-	 * @param string $handle
-	 * @param string $type styles|scripts
+	 * @param string $handle               Asset handle.
+	 * @param string $type styles|scripts  Asset type.
 	 *
 	 * @return bool|array
 	 */
@@ -123,8 +126,8 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	/**
 	 * Delete a single handle error
 	 *
-	 * @param string|array $handles
-	 * @param string $type
+	 * @param string|array $handles  Asset handle, or array of handles.
+	 * @param string       $type     Type of assset.
 	 */
 	public function clear_handle_error( $handles, $type ) {
 		if ( ! is_array( $handles ) ) {
@@ -146,12 +149,12 @@ class WP_Hummingbird_Minification_Errors_Controller {
 	/**
 	 * Add a minification error for a list of handles
 	 *
-	 * @param array|string $handles Handles list or single handle
-	 * @param string $type scripts|styles
-	 * @param string $code Error code
-	 * @param string $message Error message
-	 * @param array $actions List of actions to take (don't minify, don't combine)
-	 * @param array $disable List of switchers to disable in Asset Optimization screen (minify, combine)
+	 * @param array|string $handles  Handles list or single handle.
+	 * @param string       $type     scripts|styles.
+	 * @param string       $code     Error code.
+	 * @param string       $message  Error message.
+	 * @param array        $actions  List of actions to take (don't minify, don't combine).
+	 * @param array        $disable  List of switchers to disable in Asset Optimization screen (minify, combine).
 	 */
 	public function add_error( $handles, $type, $code, $message, $actions = array(), $disable = array() ) {
 		if ( ! is_array( $handles ) ) {
@@ -171,12 +174,12 @@ class WP_Hummingbird_Minification_Errors_Controller {
 
 			if ( ! empty( $actions ) && is_array( $actions ) ) {
 
-				if ( in_array( 'minify', $actions ) && ! in_array( $handle, $options['dont_minify'][ $type ], true ) ) {
+				if ( in_array( 'minify', $actions, true ) && ! in_array( $handle, $options['dont_minify'][ $type ], true ) ) {
 					$options['dont_minify'][ $type ][] = $handle;
 				}
 
-				$key = in_array( $handle, $options['combine'][ $type ] );
-				if ( in_array( 'combine', $actions ) && false !== $key ) {
+				$key = in_array( $handle, $options['combine'][ $type ], true );
+				if ( in_array( 'combine', $actions, true ) && false !== $key ) {
 					unset( $options['combine'][ $type ][ $key ] );
 					$options['combine'][ $type ] = array_values( $options['combine'][ $type ] );
 				}

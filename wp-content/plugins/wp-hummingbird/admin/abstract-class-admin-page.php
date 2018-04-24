@@ -166,7 +166,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function admin_body_class( $classes ) {
 
-		$classes .= ' sui-2-1-0 wpmud ';
+		$classes .= ' sui-2-1-3 wpmud ';
 
 		return $classes;
 
@@ -189,7 +189,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function enqueue_scripts( $hook ) {
 		// WPMU DEV Shared UI.
-		wp_enqueue_style( 'wpmudev-sui', plugins_url( 'admin/assets/css/shared-ui.min.css', __DIR__ ) );
+		wp_enqueue_style( 'wpmudev-sui', WPHB_DIR_URL . 'admin/assets/css/shared-ui.min.css', array(), WPHB_VERSION );
 
 		// Styles.
 		wp_enqueue_style( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/css/app.min.css', array(), WPHB_VERSION );
@@ -198,9 +198,9 @@ abstract class WP_Hummingbird_Admin_Page {
 		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
 		wp_enqueue_script(
 			'wpmudev-sui',
-			plugins_url( 'admin/assets/js/shared-ui.min.js', __DIR__ ),
+			WPHB_DIR_URL . 'admin/assets/js/shared-ui.min.js',
 			array( 'jquery' ),
-			null,
+			WPHB_VERSION,
 			true
 		);
 

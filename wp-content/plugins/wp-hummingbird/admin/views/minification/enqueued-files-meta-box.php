@@ -34,7 +34,7 @@
 	}
 
 	if ( $is_http2 ) {
-		$this->admin_notices->show( 'http2-info', __( "We've disabled the Combine option because your server has HTTP/2 activated. HTTP/2 automatically optimizes the delivery of assets for you", 'wphb' ), 'blue-info', false, true );
+		$this->admin_notices->show( 'http2-info', __( "We've disabled the Combine option because your server has HTTP/2 activated. HTTP/2 automatically optimizes the delivery of assets for you", 'wphb' ), 'blue-info', true );
 	}
 	?>
 

@@ -2,8 +2,16 @@
 
 class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 
+	/**
+	 * Initializes the module. Always executed even if the module is deactivated.
+	 *
+	 * Do not use __construct in subclasses, use init() instead
+	 */
 	public function init() {}
 
+	/**
+	 * Execute the module actions. It must be defined in subclasses.
+	 */
 	public function run() {}
 
 	/**
@@ -73,7 +81,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 		if ( $report ) {
 			$last_score = WP_Hummingbird_Settings::get_setting( 'last_score', 'performance' );
 
-			if ( $last_score && ! is_wp_error( $report ) ) {
+			if ( 0 < $last_score && ! is_wp_error( $report ) ) {
 				$report->data->last_score = array(
 					'score' => $last_score,
 				);
@@ -113,7 +121,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 *
 	 * It sets the new status for the report
 	 *
-	 * @param bool $status If set to true, it will start a new Performance Report, otherwise it will stop the current one
+	 * @param bool $status If set to true, it will start a new Performance Report, otherwise it will stop the current one.
 	 */
 	public static function set_doing_report( $status = true ) {
 		if ( ! $status ) {
@@ -150,10 +158,15 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	/**
 	 * Check if time enough has passed to make another test ( 5 minutes )
 	 *
+	 * @param bool|wp_error|array|object $last_report  Last report.
+	 *
 	 * @return bool|integer True if a new test is available or the time in minutes remaining for next test
 	 */
-	public static function can_run_test() {
-		$last_report = self::get_last_report();
+	public static function can_run_test( $last_report = false ) {
+		if ( ! $last_report || is_wp_error( $last_report ) ) {
+			$last_report = self::get_last_report();
+		}
+
 		$current_gmt_time = current_time( 'timestamp', true );
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$data_time = $last_report->data->time;
@@ -181,7 +194,7 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 		WP_Hummingbird_Settings::update_setting( 'dismissed', (bool) $dismiss, 'performance' );
 
 		if ( (bool) $dismiss ) {
-			// Ignore report in the Hub
+			// Ignore report in the Hub.
 			$api = WP_Hummingbird_Utils::get_api();
 			$results = $api->performance->ignore();
 
@@ -198,14 +211,19 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 	 *
 	 * @since 1.8
 	 *
+	 * @param bool|wp_error|array|object $last_report  Last report.
+
 	 * @return bool True if user dismissed report or false of there's no site option
 	 */
-	public static function report_dismissed() {
+	public static function report_dismissed( $last_report = false ) {
 		if ( WP_Hummingbird_Settings::get_setting( 'dismissed', 'performance' ) ) {
 			return true;
 		}
 
-		$last_report = self::get_last_report();
+		if ( ! $last_report || is_wp_error( $last_report ) ) {
+			$last_report = self::get_last_report();
+		}
+
 		if ( isset( $last_report->data->ignored ) && $last_report->data->ignored ) {
 			return true;
 		}

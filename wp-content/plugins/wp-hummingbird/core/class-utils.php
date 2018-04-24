@@ -102,16 +102,6 @@ class WP_Hummingbird_Utils {
 		);
 		wp_localize_script( 'wphb-admin', 'wphbCachingStrings', $i10n );
 
-		if ( self::can_execute_php() ) {
-			$i10n = array(
-				'checkFilesNonce'       => wp_create_nonce( 'wphb-minification-check-files' ),
-				'chartNonce'            => wp_create_nonce( 'wphb-chart' ),
-				'finishedCheckURLsLink' => self::get_admin_menu_url( 'minification' ),
-				'discardAlert'          => __( 'Are you sure? All your changes will be lost', 'wphb' ),
-			);
-			wp_localize_script( 'wphb-admin', 'wphbMinificationStrings', $i10n );
-		}
-
 		$i10n = array(
 			'finishedTestURLsLink' => self::get_admin_menu_url( 'performance' ),
 			'removeButtonText'     => __( 'Remove', 'wphb' ),
@@ -168,6 +158,7 @@ class WP_Hummingbird_Utils {
 		if ( self::can_execute_php() ) {
 			/* @var WP_Hummingbird_Module_Minify $minify_module */
 			$minify_module = self::get_module( 'minify' );
+
 			$is_scanning = $minify_module->scanner->is_scanning();
 
 			if ( $minify_module->is_on_page() || $is_scanning ) {
@@ -1003,11 +994,16 @@ class WP_Hummingbird_Utils {
 				$issues = count( $report ) - count( array_filter( $report ) );
 				break;
 			case 'performance':
-				$last_report = WP_Hummingbird_Module_Performance::get_last_report();
-				if ( ! $last_report || is_wp_error( $last_report ) ) {
+				if ( ! $report ) {
+					$report = WP_Hummingbird_Module_Performance::get_last_report();
+				}
+
+				// No report - break.
+				if ( ! $report || is_wp_error( $report ) ) {
 					break;
 				}
-				$last_report = $last_report->data;
+
+				$last_report = $report->data;
 				foreach ( $last_report->rule_result as $recommendation ) {
 					if ( 'a' !== $recommendation->impact_score_class ) {
 						$issues++;

@@ -59,7 +59,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		delete_option( self::IS_SCANNED_SLUG );
 		update_option( self::CURRENT_STEP, 0 );
 
-		// Reset notice status
+		// Reset notice status.
 		update_option( self::MINIFICATION_NOTICE, 'yes' );
 		update_option( self::HTTP2_NOTICE, 'yes' );
 
@@ -89,7 +89,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	/**
 	 * Update the current step being scanned
 	 *
-	 * @param $step
+	 * @param int $step  Current scan step.
 	 */
 	public function update_current_step( $step ) {
 		$step = absint( $step );
@@ -142,12 +142,12 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 * @return array
 	 */
 	public function get_scan_urls() {
-		// Calculate URLs to Check
+		// Calculate URLs to Check.
 		$args = array(
-			'orderby'        => 'rand',
-			'posts_per_page' => '1',
+			'orderby'             => 'rand',
+			'posts_per_page'      => '1',
 			'ignore_sticky_posts' => true,
-			'post_status' => 'publish',
+			'post_status'         => 'publish',
 		);
 
 		$urls = array();
@@ -177,7 +177,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		$urls = array_unique( $urls );
 
 		$urls_list = array();
-		// Duplicate every URL 3 times. This will be enough to generate all the files for most of the sites
+		// Duplicate every URL 3 times. This will be enough to generate all the files for most of the sites.
 		for ( $i = 0; $i < 3; $i++ ) {
 			$urls_list = array_merge( $urls_list, $urls );
 		}
@@ -190,7 +190,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 	 * This function send a request to a URL in the site
 	 * that will trigger the files collection
 	 *
-	 * @param string $url
+	 * @param string $url  URL.
 	 *
 	 * @return array
 	 */
@@ -215,7 +215,7 @@ class WP_Hummingbird_Module_Minify_Scanner {
 		);
 		$result['cookie'] = wp_remote_get( $url, $args );
 
-		// One call logged out
+		// One call logged out.
 		$args = array(
 			'timeout'   => 0.01,
 			'blocking ' => false,

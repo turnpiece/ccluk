@@ -39,7 +39,7 @@
 		<label class="sui-radio">
 			<input type="radio" name="detection" id="manual" value="manual" <?php checked( $detection, 'manual' ); ?>>
 			<span aria-hidden="true"></span>
-			<div class="sui-description"><?php esc_html_e( 'Manual Notice', 'wphb' ); ?></div>
+			<span class="sui-description"><?php esc_html_e( 'Manual Notice', 'wphb' ); ?></span>
 		</label>
 		<span class="sui-description sui-radio-description">
 			<?php esc_html_e( 'Get a global notice inside your WordPress Admin area anytime your
@@ -48,7 +48,7 @@
 		<label class="sui-radio">
 			<input type="radio" name="detection" id="automatic" value="auto" <?php checked( $detection, 'auto' ); ?>>
 			<span aria-hidden="true"></span>
-			<div class="sui-description"><?php esc_html_e( 'Automatic', 'wphb' ); ?></div>
+			<span class="sui-description"><?php esc_html_e( 'Automatic', 'wphb' ); ?></span>
 		</label>
 		<span class="sui-description sui-radio-description">
 			<?php esc_html_e( 'Set Hummingbird to automatically clear your cache instead of
@@ -58,7 +58,7 @@
 		<label class="sui-radio">
 			<input type="radio" name="detection" id="none" value="none" <?php checked( $detection, 'none' ); ?>>
 			<span aria-hidden="true"></span>
-			<div class="sui-description"><?php esc_html_e( 'None', 'wphb' ); ?></div>
+			<span class="sui-description"><?php esc_html_e( 'None', 'wphb' ); ?></span>
 		</label>
 		<span class="sui-description sui-radio-description">
 				<?php esc_html_e( 'Disable warnings in your WP Admin area.', 'wphb' ); ?>

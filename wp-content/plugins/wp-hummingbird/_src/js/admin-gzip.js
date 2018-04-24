@@ -30,8 +30,8 @@ import Clipboard from './utils/clipboard';
                 self.showServerInstructions(value);
                 self.setServer(value);
                 self.selectedServer = value;
-                // Update tab size on select change.
-                self.updateTabSize();
+                // This is used to trigger the resizing of the tabs.
+                $(window).trigger( 'resize' );
             });
             configureLink.on('click', function(e) {
                 e.preventDefault();
@@ -64,13 +64,6 @@ import Clipboard from './utils/clipboard';
             } else {
                 $("#enable-cache-wrap").hide();
             }
-        },
-        updateTabSize: function() {
-            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.sui-tabs' ),
-                current = jq.find('.sui-tab > input:checked').parent(),
-                content = current.find('.sui-tab-content');
-
-            jq.height( content.outerHeight() + current.outerHeight() - 6 );
         },
 
         setServer: function( value ) {

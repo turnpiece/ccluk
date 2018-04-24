@@ -6,9 +6,11 @@ import Fetcher from './utils/fetcher';
 		module: 'advanced',
 
 		init: function () {
-			let self           = this,
-				common_form    = $('form[id="advanced-db-settings"], form[id="advanced-general-settings"]'),
-				delete_entries = $('#wphb-db-delete-all, #wphb-db-row-delete');
+			let self                  = this,
+				common_form           = $('form[id="advanced-db-settings"], form[id="advanced-general-settings"]'),
+				system_info_dropdown  = $('#wphb-system-info-dropdown'),
+                hash                    = window.location.hash,
+				delete_entries        = $('#wphb-db-delete-all, #wphb-db-row-delete');
 
 			/**
 			 * Process form submit for advanced tools forms
@@ -25,7 +27,6 @@ import Fetcher from './utils/fetcher';
 				e.preventDefault();
 
 				const spinner = $(this).parent().find('.sui-icon-loader');
-
 				spinner.removeClass('sui-hidden');
 
 				Fetcher.advanced.saveSettings( $(this).serialize(), $(this).attr('id') )
@@ -50,6 +51,27 @@ import Fetcher from './utils/fetcher';
 			$('input[id="scheduled_cleanup"]').on('change', function () {
 				$('.schedule-box').toggle();
 			});
+
+            /**
+             * Show initial system information table.
+             */
+            $('#wphb-system-info-php').removeClass('sui-hidden');
+            if ( hash ) {
+            	const system = hash.replace('#','');
+                $('.wphb-sys-info-table').addClass('sui-hidden');
+                $('#wphb-system-info-' + system).removeClass('sui-hidden');
+                system_info_dropdown.val(system).trigger('sui:change');
+			}
+
+            /**
+             * Show/hide system information tables on dropdown change.
+             */
+            system_info_dropdown.change( function(e) {
+            	e.preventDefault();
+            	$('.wphb-sys-info-table').addClass('sui-hidden');
+                $('#wphb-system-info-' + $(this).val()).removeClass('sui-hidden');
+                location.hash = $(this).val();
+            });
 
 			return this;
 		},

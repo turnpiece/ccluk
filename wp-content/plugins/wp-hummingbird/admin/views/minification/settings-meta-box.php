@@ -63,10 +63,12 @@ $minify = WP_Hummingbird_Utils::get_module( 'minify' );
 			</div>
 		</div><!-- end content-box -->
 	</div><!-- end settings-form -->
-<?php endif;
+<?php
+endif;
 
 $options = $minify->get_options();
-if ( ! is_multisite() || is_main_site() ) : ?>
+if ( ! is_multisite() ) :
+?>
 	<div class="sui-box-settings-row">
 		<div class="sui-box-settings-col-1">
 			<span class="sui-settings-label"><?php esc_html_e( 'Debug', 'wphb' ); ?></span>
@@ -92,7 +94,7 @@ if ( ! is_multisite() || is_main_site() ) : ?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<a href="<?php echo esc_url( add_query_arg( 'reset-minification', 'true' ) ); ?>" class="sui-button sui-button-ghost">
+		<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'reset', 'true' ), 'wphb-reset-minification' ) ); ?>" class="sui-button sui-button-ghost">
 			<?php esc_html_e( 'Reset', 'wphb' ); ?>
 		</a>
 		<span class="sui-description"><?php esc_html_e( 'Note: This will clear all your settings and run a new file check.', 'wphb' ); ?></span>
@@ -107,7 +109,7 @@ if ( ! is_multisite() || is_main_site() ) : ?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<a href="<?php echo esc_url( add_query_arg( 'disable-minification', 'true' ) ); ?>" class="sui-button sui-button-ghost">
+		<a href="<?php echo esc_url( wp_nonce_url( add_query_arg( 'disable', 'true' ), 'wphb-disable-minification' ) ); ?>" class="sui-button sui-button-ghost">
 			<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 		</a>
 		<span class="sui-description"><?php esc_html_e( 'Note: This will not remove any files, they will just go back to their original, unoptimized state.', 'wphb' ); ?></span>

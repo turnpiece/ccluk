@@ -1,0 +1,93 @@
+# Translation of Plugins - Custom Post Type Permalinks - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - Custom Post Type Permalinks - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-07-10 06:51:59+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - Custom Post Type Permalinks - Stable (latest release)\n"
+
+#. translators: %s URL.
+#: CPTP/Module/Admin.php:212
+msgid "[Custom Post Type Permalinks] <a href=\"%s\"><strong>Please check your permalink settings!</strong></a>"
+msgstr "[Custom Post Type Permalinks] <a href=\"%s\"><strong>パーマリンク設定を確認してください！</strong></a>"
+
+#. translators: %s simple post type permalinks install page.
+#: CPTP/Module/Admin.php:88
+msgid "If you need post type permalink only, you should use <a href=\"%s\">Simple Post Type Permalinks</a>."
+msgstr "投稿タイプのパーマリンクだけならば、 <a href=\"%s\">Simple Post Type Permalinks</a> をお使いください。"
+
+#: CPTP/Module/Admin.php:192
+msgid "You can setting permalink for post type in <a href=\"options-permalink.php\">Permalinks</a>."
+msgstr "<a href=\"options-permalink.php\">パーマリンク設定</a>内で投稿タイプごとのパーマリンクを設定できます。"
+
+#: CPTP/Module/Admin.php:109
+msgid "<code>%\"custom_taxonomy_slug\"%</code> is replaced by the term of taxonomy."
+msgstr "<code>%\"custom_taxonomy_slug\"%</code> はタクソノミーのタームに置換されます。"
+
+#. Author URI of the plugin/theme
+msgid "https://torounit.com/"
+msgstr "https://torounit.com/"
+
+#. Plugin URI of the plugin/theme
+msgid "https://github.com/torounit/custom-post-type-permalinks"
+msgstr "https://github.com/torounit/custom-post-type-permalinks"
+
+#. Author of the plugin/theme
+msgid "Toro_Unit"
+msgstr "Toro Unit"
+
+#. Description of the plugin/theme
+msgid "Add post archives of custom post type and customizable permalinks."
+msgstr "カスタム投稿タイプにアーカイブを追加、そしてカスタマイズ出来るパーマリンクを提供します。"
+
+#. #-#-#-#-#  custom-post-type-permalinks-code.pot (Custom Post Type Permalinks
+#. 3.2.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: CPTP/Module/Admin.php:191
+msgid "Custom Post Type Permalinks"
+msgstr "Custom Post Type Permalinks"
+
+#: CPTP/Util.php:161
+msgid "View all posts in %s"
+msgstr "%sのすべての投稿を表示"
+
+#: CPTP/Module/Admin.php:176
+msgid "There are cases when the template to be loaded is changed."
+msgstr "ロードされるテンプレートが変わる場合もあります。"
+
+#: CPTP/Module/Admin.php:175
+msgid "Custom taxonomy archive also works as post type archive. "
+msgstr "カスタムタクソノミーのアーカイブを投稿タイプのアーカイブとしても動作させます。"
+
+#: CPTP/Module/Admin.php:166
+msgid "If you check this, the custom taxonomy's permalinks will be <code>%s/post_type/taxonomy/term</code>."
+msgstr "これをオンにした場合、カスタムタクソノミーのパーマリンクは、<code>%s/post_type/taxonomy/term</code> となります。"
+
+#: CPTP/Module/Admin.php:112
+msgid "If <code>has_archive</code> is true, add permalinks for custom post type archive."
+msgstr "<code>has_archive</code> が true の場合、カスタム投稿タイプのアーカイブのパーマリンクを追加します。"
+
+#: CPTP/Module/Admin.php:111
+msgid "Presence of the trailing '/' is unified into a standard permalink structure setting."
+msgstr "末尾の '/' の有無は、標準のパーマリンク構造の設定に統一されます。 "
+
+#: CPTP/Module/Admin.php:108
+msgid "The tags you can use are WordPress Structure Tags and <code>%\"custom_taxonomy_slug\"%</code> (e.g. <code>%actors%</code> or <code>%movie_actors%</code>)."
+msgstr "使用できるタグは、WordPress の構造タグと、 <code>%\"カスタムタクソノミーのスラッグ\"%</code> (例えば <code>%actors%</code> や <code>%movie_actors%</code>) です。"
+
+#: CPTP/Module/Admin.php:70
+msgid "Add <code>post_type</code> query for custom taxonomy archive."
+msgstr "カスタムタクソノミーのアーカイブに、 <code>post_type</code> クエリーを追加。"
+
+#: CPTP/Module/Admin.php:57
+msgid "Use custom permalink of custom taxonomy archive."
+msgstr "カスタマイズされたカスタムタクソノミーのパーマリンクを使用する。"
+
+#: CPTP/Module/Admin.php:32
+msgid "Permalink Settings for Custom Post Types"
+msgstr "カスタム投稿タイプのパーマリンク設定"

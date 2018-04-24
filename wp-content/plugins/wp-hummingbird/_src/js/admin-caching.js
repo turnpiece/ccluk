@@ -40,7 +40,6 @@ import Fetcher from './utils/fetcher';
 				$('html, body').animate({ scrollTop: $('#wphb-box-caching-settings').offset().top }, 'slow');
             });
             if (hash) {
-                console.log(hash);
                 $('html, body').animate({ scrollTop: $(hash).offset().top }, 'slow');
             }
 
@@ -56,7 +55,6 @@ import Fetcher from './utils/fetcher';
                 let serverInstructions = $( '#wphb-server-instructions-' + self.selectedServer.toLowerCase() );
                 $('#manual-' + self.selectedServer.toLowerCase() ).trigger("click");
                 let caching = window.WPHB_Admin.getModule( 'caching' );
-                caching.updateTabSize();
                 $('html, body').animate({ scrollTop: serverInstructions.offset().top - 50 }, 'slow');
             });
 
@@ -102,9 +100,9 @@ import Fetcher from './utils/fetcher';
                 self.showServerInstructions( value );
                 self.setServer(value);
                 self.selectedServer = value;
-				// Update tab size on select change.
-                self.updateTabSize();
                 $('.hb-server-type').val( value );
+                // This is used to trigger the resizing of the tabs.
+                $(window).trigger( 'resize' );
             });
 
             let expiryInput = $("input[name='expiry-set-type']");
@@ -221,13 +219,6 @@ import Fetcher from './utils/fetcher';
 
         setServer: function( value ) {
             Fetcher.caching.setServer( value );
-        },
-
-		updateTabSize: function() {
-            let jq      = $( '#wphb-server-instructions-' + this.selectedServer.toLowerCase() ).find( '.sui-tabs' ),
-                current = jq.find('.sui-tab > input:checked').parent(),
-                content = current.find('.sui-tab-content');
-			jq.height( content.outerHeight() + current.outerHeight() - 6 );
         },
 
         hideCurrentInstructions: function() {

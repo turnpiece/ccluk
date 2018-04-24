@@ -202,7 +202,7 @@ if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 
 				$full = $path . '/' . $file;
 				if ( is_dir( $full ) ) {
-					@rmdir( $full );
+					$this->native_dir_delete( $full );
 				} else {
 					@unlink( $full );
 				}

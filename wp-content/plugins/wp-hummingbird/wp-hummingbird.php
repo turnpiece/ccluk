@@ -1,7 +1,7 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version: 1.8.1
+Version: 1.8.2
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
 Author: WPMU DEV
@@ -32,7 +32,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.8.1' );
+	define( 'WPHB_VERSION', '1.8.2' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {
@@ -161,12 +161,14 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 
 			// Add upgrade schedule.
 			add_action( 'wphb_upgrade_to_pro', array( $this, 'upgrade_to_pro' ) );
-			$running_cron_update = get_site_option( 'wphb_cron_update_running' );
 			// Try to update to pro version is user can do that.
-			if ( self::is_free_installed() && self::can_install_pro() && empty( $running_cron_update ) ) {
-				// Schedule upgrade.
-				wp_schedule_single_event( time(), 'wphb_upgrade_to_pro' );
-				update_site_option( 'wphb_cron_update_running', true );
+			if ( self::is_free_installed() && self::can_install_pro() ) {
+				$running_cron_update = get_site_option( 'wphb_cron_update_running' );
+				if ( empty( $running_cron_update ) ) {
+					// Schedule upgrade.
+					wp_schedule_single_event( time(), 'wphb_upgrade_to_pro' );
+					update_site_option( 'wphb_cron_update_running', true );
+				}
 			}
 
 			add_action( 'init', array( $this, 'maybe_clear_all_cache' ) );
@@ -215,19 +217,21 @@ if ( ! class_exists( 'WP_Hummingbird' ) ) {
 		 * Clear all cache?
 		 */
 		public function maybe_clear_all_cache() {
-			if ( isset( $_GET['wphb-clear'] ) && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-				self::flush_cache();
-
-				WP_Hummingbird_Settings::update_setting( 'last_score', '', 'performance' );
-
-				if ( 'all' === $_GET['wphb-clear'] ) {
-					WP_Hummingbird_Settings::reset_to_defaults();
-					delete_option( 'wphb-quick-setup' );
-				}
-
-					wp_safe_redirect( remove_query_arg( 'wphb-clear' ) );
-					exit;
+			if ( ! isset( $_GET['wphb-clear'] ) || ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+				return;
 			}
+
+			self::flush_cache();
+
+			WP_Hummingbird_Settings::update_setting( 'last_score', 0, 'performance' );
+
+			if ( 'all' === $_GET['wphb-clear'] ) {
+				WP_Hummingbird_Settings::reset_to_defaults();
+				delete_option( 'wphb-quick-setup' );
+			}
+
+			wp_safe_redirect( remove_query_arg( 'wphb-clear' ) );
+			exit;
 		}
 
 		/**

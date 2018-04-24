@@ -15,11 +15,11 @@
 
 			<div class="sui-box-body">
 				<script type="text/javascript">
-                    jQuery('label[for="enable_cdn"]').on('click', function(e) {
-                        e.preventDefault();
-                        var checkbox = jQuery('input[name="enable_cdn"]');
-                        checkbox.prop('checked', !checkbox.prop('checked') );
-                    });
+					jQuery('label[for="enable_cdn"]').on('click', function(e) {
+						e.preventDefault();
+						var checkbox = jQuery('input[name="enable_cdn"]');
+						checkbox.prop('checked', !checkbox.prop('checked') );
+					});
 				</script>
 				<p><?php esc_html_e( 'Hummingbird is running a test to measure your website performance, please wait.', 'wphb' ); ?></p>
 
@@ -38,28 +38,37 @@
 				</div>
 
 				<div class="sui-progress-state">
-					<span class="sui-progress-state-text"></span>
+					<span class="sui-progress-state-text"><?php esc_html_e( 'Looking for files...', 'wphb' ); ?></span>
 				</div>
+
+				<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
+				<div class="sui-notice sui-notice-info">
+					<p style="font-size:13px;line-height:22px;">
+						<?php /* translators: %s - learn more link */
+						printf( __( 'Did you know the Pro version of Hummingbird comes up to 2x better compression and
+						a CDN to store your assets on? Get it as part of a WPMU DEV membership. <a href="%s" target="_blank">Learn more.</a>', 'wphb' ),
+						esc_url( WP_Hummingbird_Utils::get_link( 'plugin' ) ) );
+						?>
+					</p>
+				</div>
+				<?php endif; ?>
 			<?php
 			/* @var WP_Hummingbird_Module_Minify $minify */
 			$minify = WP_Hummingbird_Utils::get_module( 'minify' );
 
-			if ( ! is_multisite() && WP_Hummingbird_Utils::is_member() && ! $minify->get_cdn_status() ) : ?>
+			if ( ! is_multisite() && WP_Hummingbird_Utils::is_member() ) : ?>
 				<form method="post" class="sui-border-frame" id="enable-cdn-form">
 					<label class="sui-toggle">
-						<input type="checkbox" name="enable_cdn" id="enable_cdn" checked="checked">
+						<input type="checkbox" name="enable_cdn" id="enable_cdn" <?php checked( $minify->get_cdn_status() ); ?>>
 						<span class="sui-toggle-slider"></span>
 					</label>
 					<label><?php esc_html_e( 'Store my files on the WPMU DEV CDN', 'wphb' ); ?></label>
 					<span class="sui-description sui-toggle-description">
-							<?php esc_html_e( 'By default your files are hosted on your own server. With this pro setting enabled we will host your files on WPMU DEV’s secure and hyper fast CDN.', 'wphb' ); ?>
-						</span>
+						<?php esc_html_e( 'By default your files are hosted on your own server. With this pro setting enabled we will host your files on WPMU DEV’s secure and hyper fast CDN.', 'wphb' ); ?>
+					</span>
 				</form>
-			<?php elseif ( ! is_multisite() || $minify->get_cdn_status() ) : ?>
-				<label class="sui-toggle sui-hidden">
-					<input type="checkbox" name="enable_cdn" id="enable_cdn" checked="checked">
-					<span class="sui-toggle-slider"></span>
-				</label>
+			<?php elseif ( is_multisite() && WP_Hummingbird_Utils::is_member() ) : ?>
+				<input type="checkbox" class="sui-hidden" name="enable_cdn" id="enable_cdn" <?php checked( $minify->get_cdn_status() ); ?>>
 			<?php endif; ?>
 
 			</div>

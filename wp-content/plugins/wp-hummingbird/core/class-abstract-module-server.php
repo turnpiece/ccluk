@@ -139,7 +139,6 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 			'LiteSpeed'  => 'LiteSpeed',
 			'nginx'      => 'NGINX',
 			'iis'        => 'IIS',
-			'iis-7'      => 'IIS 7',
 			'cloudflare' => 'Cloudflare',
 		);
 	}

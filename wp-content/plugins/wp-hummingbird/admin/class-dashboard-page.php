@@ -130,11 +130,11 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function render_header() {
 		if ( isset( $_GET['wphb-cache-cleared'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Your cache has been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success' );
 		}
 
 		if ( isset( $_GET['wphb-cache-cleared-with-cloudflare'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Your local and Cloudflare caches have been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success', true );
+			$this->admin_notices->show( 'updated', __( 'Your local and Cloudflare caches have been successfully cleared. Your assets will regenerate the next time someone visits your website.', 'wphb' ), 'success' );
 		}
 
 		$tooltip = '';
@@ -856,12 +856,13 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function dashboard_minification_network_module_metabox() {
 		/* @var WP_Hummingbird_Module_Minify $minify */
-		$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+		$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 		$options = $minify->get_options();
 
 		$args = array(
-			'enabled' => $options['enabled'],
-			'use_cdn' => $minify->get_cdn_status(),
+			'enabled'          => $options['enabled'],
+			'log'              => $options['log'],
+			'use_cdn'          => $minify->get_cdn_status(),
 			'use_cdn_disabled' => ! WP_Hummingbird_Utils::is_member() || ! $options['enabled'],
 		);
 

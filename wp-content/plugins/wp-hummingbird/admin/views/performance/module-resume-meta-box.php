@@ -11,9 +11,13 @@
 			<i class="sui-icon-<?php echo esc_attr( $icon_class ); ?> sui-lg sui-<?php echo esc_attr( $error_class ); ?>"></i>
 			<span class='sui-summary-percent'>/100</span>
 		<?php elseif ( $report_dismissed ) : ?>
-			<span class="sui-summary-large"><?php echo esc_html( $last_report->score ); ?></span>
-			<i class="sui-icon-info sui-lg"></i>
-			<span class='sui-summary-percent'>/100</span>
+			<?php if ( isset( $last_report->score ) ) : ?>
+				<span class="sui-summary-large"><?php echo esc_html( $last_report->score ); ?></span>
+				<i class="sui-icon-info sui-lg"></i>
+				<span class='sui-summary-percent'>/100</span>
+			<?php else : ?>
+				<span class="sui-summary-large">-</span>
+			<?php endif; ?>
 			<?php
 		else :
 			echo '-';

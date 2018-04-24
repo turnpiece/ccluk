@@ -6,6 +6,7 @@
  *
  * @var bool $enabled           Asset optimization status.
  * @var bool $use_cdn           CDN status.
+ * @var bool $log               Debug log status.
  * @var bool $use_cdn_disabled  Can use CDN?
  */
 
@@ -41,13 +42,27 @@
 		?>
 		<input type="hidden" id="cdn_enabled_tooltip" value="<?php echo esc_attr( $tooltip_msg_enabled ); ?>">
 		<input type="hidden" id="cdn_disabled_tooltip" value="<?php echo esc_attr( $tooltip_msg_disabled ); ?>">
-
+		<div>
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-right" data-tooltip="<?php echo esc_attr( $tooltip_msg ); ?>">
+			<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( $use_cdn_disabled ); ?>>
+			<span class="sui-toggle-slider"></span>
+		</label>
 		<label for="use_cdn"><?php esc_html_e( 'Store my files on the WPMU DEV CDN', 'wphb' ); ?></label>
-		<div class="toggle-actions">
-			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php echo esc_attr( $tooltip_msg ); ?>">
-				<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $use_cdn ); ?> <?php disabled( $use_cdn_disabled ); ?>>
-				<span class="sui-toggle-slider"></span>
-			</label>
-		</div><!-- end toggle-actions -->
+		</div>
+		<div>
+		<label class="sui-toggle sui-tooltip sui-tooltip-top-right"
+			   data-tooltip="<?php esc_html_e( 'Turn on the debug log to get insight into any issues you’re having across your subsites.', 'wphb' ); ?>">
+			<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $log ); ?>>
+			<span class="sui-toggle-slider"></span>
+		</label>
+		<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
+		<span id="wphb-minification-debug-log" class="sui-description sui-toggle-description <?php echo ! $log ? 'sui-hidden' : ''; ?>">
+			<?php
+			printf(
+			/* translators: %s: Logs location */
+				esc_html__( 'Location: %s', 'wphb' ),
+				esc_url( get_home_url() . '/wp-content/wphb-logs/' )
+			); ?></span>
+		</div>
 	</div>
 </div>

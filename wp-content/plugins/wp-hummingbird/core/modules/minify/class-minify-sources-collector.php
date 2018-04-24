@@ -3,25 +3,51 @@
 /**
  * Class WP_Hummingbird_Sources_Collector
  *
- * Manages the collection of all sources that WP HUmmingbird is going to compress
+ * Manages the collection of all sources that WP Hummingbird is going to compress
  */
 class WP_Hummingbird_Sources_Collector {
 
+	/**
+	 * Where to store styles.
+	 *
+	 * @var string $styles_option
+	 */
 	private static $styles_option = 'wphb_styles_collection';
+
+	/**
+	 * Where to store scripts.
+	 *
+	 * @var string $scripts_option
+	 */
 	private static $scripts_option = 'wphb_scripts_collection';
 
+	/**
+	 * Has the collection of assets been updated.
+	 *
+	 * @var bool $collection_updated
+	 */
 	private $collection_updated = false;
 
+	/**
+	 * Collected assets so far.
+	 *
+	 * @var array $collected
+	 */
 	private $collected = array(
 		'styles'  => array(),
 		'scripts' => array(),
 	);
 
-
+	/**
+	 * WP_Hummingbird_Sources_Collector constructor.
+	 */
 	public function __construct() {
 		$this->collected = self::get_collection();
 	}
 
+	/**
+	 * Save collection to the database.
+	 */
 	public function save_collection() {
 		if ( $this->collection_updated ) {
 			update_option( self::$styles_option, $this->collected['styles'] );
@@ -30,6 +56,12 @@ class WP_Hummingbird_Sources_Collector {
 
 	}
 
+	/**
+	 * Add asset to collection.
+	 *
+	 * @param array|string $registered  Array of registered assets.
+	 * @param string       $type        Type of asset.
+	 */
 	public function add_to_collection( $registered, $type ) {
 		$registered = (array) $registered;
 
@@ -41,7 +73,11 @@ class WP_Hummingbird_Sources_Collector {
 		$this->collected[ $type ][ $registered['handle'] ] = $registered;
 	}
 
-
+	/**
+	 * Get collection.
+	 *
+	 * @return array
+	 */
 	public static function get_collection() {
 		return array(
 			'styles'  => get_option( self::$styles_option, array() ),
@@ -49,11 +85,20 @@ class WP_Hummingbird_Sources_Collector {
 		);
 	}
 
+	/**
+	 * Clear collection.
+	 */
 	public static function clear_collection() {
 		delete_option( self::$styles_option );
 		delete_option( self::$scripts_option );
 	}
 
+	/**
+	 * Remove asset from collection.
+	 *
+	 * @param string $handle  Asset handle.
+	 * @param string $type    Asset type.
+	 */
 	public static function clear_handle_from_collection( $handle, $type ) {
 		$collection = self::get_collection();
 		if ( ! isset( $collection[ $type ][ $handle ] ) ) {
@@ -65,19 +110,5 @@ class WP_Hummingbird_Sources_Collector {
 		update_option( self::$styles_option, $collection['styles'] );
 		update_option( self::$scripts_option, $collection['scripts'] );
 	}
-
-	/**
-	 * @TODO Finish
-	 * @param $plugin
-	 */
-	/*
-	public static function remove_sources_from_plugin( $plugin ) {
-		$collection = self::get_collection();
-		$plugin_dir = '/plugins/' . dirname( $plugin );
-		foreach ( $collection['styles'] as $style ) {
-
-		}
-	}
-	*/
 
 }

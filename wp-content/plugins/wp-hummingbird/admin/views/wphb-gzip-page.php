@@ -6,7 +6,7 @@
 <script>
 	jQuery(document).ready( function() {
 		if ( window.WPHB_Admin ) {
-			window.WPHB_Admin.getModule( 'gzip' );
+			window.WPHB_Admin.getModule( 'gzip' );	   			 	 		  		   		
 		}
 	});
 </script>

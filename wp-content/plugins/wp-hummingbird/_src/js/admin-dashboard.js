@@ -39,6 +39,14 @@ import Fetcher from './utils/fetcher';
                     });
             });
 
+            $("input[type=checkbox][name=debug_log]").change( function() {
+                Fetcher.minification.toggleLog( $(this).is(':checked') )
+                    .then( () => {
+                        WPHB_Admin.notices.show( 'wphb-notice-minification-settings-updated' );
+                        $('#wphb-minification-debug-log').toggleClass('sui-hidden');
+                    });
+            });
+
             $('#admins_disable_caching').change( function() {
                 const value = $(this).is(':checked');
                 Fetcher.caching.toggleSubsitePageCaching( value )

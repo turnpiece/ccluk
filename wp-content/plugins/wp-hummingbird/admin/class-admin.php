@@ -172,7 +172,7 @@ class WP_Hummingbird_Admin {
 				exit;
 			}
 
-			if ( $minify && WP_Hummingbird_Utils::can_execute_php() ) {
+			if ( WP_Hummingbird_Utils::can_execute_php() ) {
 				if ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify ) ) {
 					$this->pages['wphb-minification'] = new WP_Hummingbird_Minification_Page( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ), "wphb-{$slug}" );
 				} elseif ( isset( $_GET['page'] ) && 'wphb-minification' === $_GET['page'] ) {
@@ -237,7 +237,7 @@ class WP_Hummingbird_Admin {
 
 		/* @var WP_Hummingbird_Module_Minify $minify_module */
 		$minify_module = WP_Hummingbird_Utils::get_module( 'minify' );
-		if ( WP_Hummingbird_Utils::can_execute_php() ) {
+		if ( WP_Hummingbird_Utils::can_execute_php() && $minify_module->is_active() ) {
 			$checking_files = $minify_module->is_scanning();
 		}
 
