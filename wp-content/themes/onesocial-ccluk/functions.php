@@ -20,6 +20,9 @@ add_image_size( 'ccluk-feature', 580, 387, true );
  */
 require get_stylesheet_directory() . '/inc/customizer.php';
 
+// BP custom text
+load_plugin_textdomain( 'buddypress', FALSE, get_stylesheet_directory() . '/languages/buddypress-en_GB.mo' );
+
 /*
  * Override default home page title
  *

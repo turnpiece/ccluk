@@ -29,4 +29,12 @@
 	#bbp-search-index-form input#bbp_search {
 		@include input-field();
 	}
+
+	.bbp-forum-data {
+		border-color: $green_bg;
+		.last-activity {
+			font-size: $font-size-sm;
+			color: $green;
+		}
+	}
 }

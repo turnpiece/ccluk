@@ -84,7 +84,23 @@ body.buddypress {
 		#activity-stream p {
 			font-size: $font-size-sm;
 		}
-		 
+
+		.bb-group-avatar-wrap,
+		.bb-group-avatar-wrap-mobile {
+			.svg-graphic {
+				@include border-radius( 10% );
+			}
+		}
+
+		.bb-cover-photo {
+			background-color: $dark_blue;
+			#header-cover-image {
+				opacity: 0.5;
+			}
+			.progress {
+				background-color: $dark_blue;
+			}
+		}
 	}
 
 	#main {

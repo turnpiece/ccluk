@@ -1132,6 +1132,9 @@ div#sitewide-notice div#message p {
 #header-search form, .site-header {
   background-color: #fff; }
 
+.buddyboss-select-inner span {
+  font-size: 15px; }
+
 /***************** Mobile ******************/
 .is-mobile #buddypress #mobile-item-nav-wrap, .is-mobile #buddypress ul#activity-stream li.activity-item {
   background-color: #f9f9f9; }
@@ -1240,6 +1243,17 @@ body.buddypress #buddypress .activity-list .activity-content .activity-header,
 body.buddypress #buddypress div#item-header #item-meta p,
 body.buddypress #buddypress #activity-stream p {
   font-size: 15px; }
+body.buddypress #buddypress .bb-group-avatar-wrap .svg-graphic,
+body.buddypress #buddypress .bb-group-avatar-wrap-mobile .svg-graphic {
+  -webkit-border-radius: 10%;
+  -moz-border-radius: 10%;
+  border-radius: 10%; }
+body.buddypress #buddypress .bb-cover-photo {
+  background-color: #00418A; }
+  body.buddypress #buddypress .bb-cover-photo #header-cover-image {
+    opacity: 0.5; }
+  body.buddypress #buddypress .bb-cover-photo .progress {
+    background-color: #00418A; }
 body.buddypress #main #buddypress .groups-members-search input[type=text] {
   padding: 6px 12px;
   padding: 0.6rem 1.2rem; }
@@ -1311,6 +1325,11 @@ body.buddypress.is-mobile.has-activity #buddypress form#whats-new-form {
 #bbpress-forums #bbp-search-index-form input#bbp_search {
   padding: 6px 12px;
   padding: 0.6rem 1.2rem; }
+#bbpress-forums .bbp-forum-data {
+  border-color: rgba(84, 174, 104, 0.85); }
+  #bbpress-forums .bbp-forum-data .last-activity {
+    font-size: 15px;
+    color: #54ae68; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
