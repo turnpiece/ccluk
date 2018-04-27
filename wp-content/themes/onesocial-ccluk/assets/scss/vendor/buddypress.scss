@@ -101,6 +101,14 @@ body.buddypress {
 				background-color: $dark_blue;
 			}
 		}
+
+		div#message p {
+			background-color: $green;
+			color: $white;
+			max-width: 100%;
+			@include border-radius( 10px );
+			font-size: $font-size-sm;
+		}
 	}
 
 	#main {
@@ -158,6 +166,64 @@ body.buddypress {
 				div.item-list-tabs, 
 				form#whats-new-form {
 					background: transparent;
+				}
+			}
+		}
+	}
+
+	&.calendar {
+		#buddypress {
+			#item-body {
+				.bp-widget {
+					@include padding( .7, 2 );
+
+					h4 > span {
+						font-size: $font-size-std;
+					}
+					
+					table.calendar-view {
+						line-height: 1.5;
+						width: auto;
+
+						table.calendar {
+							caption {
+								background: $green;
+								color: $white;
+							}
+
+							a {
+								color: $blue;
+
+								&:hover {
+									color: $green;
+								}
+							}
+
+							.today {
+								a {
+									color: $dark_blue;
+								}
+							}
+
+							th{
+								font-size: $font-size-tiny;
+							}
+						}
+					}
+					
+					.standard-form {
+						label {
+							input {
+								@include margin( .4, 0 );
+							}
+							line-height: 1.5;
+							@include margin( .8, 0 );
+
+							.buddyboss-select {
+								@include padding( 0, .4 );
+							}
+						}
+					}
 				}
 			}
 		}

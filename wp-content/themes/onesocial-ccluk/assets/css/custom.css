@@ -1254,6 +1254,14 @@ body.buddypress #buddypress .bb-cover-photo {
     opacity: 0.5; }
   body.buddypress #buddypress .bb-cover-photo .progress {
     background-color: #00418A; }
+body.buddypress #buddypress div#message p {
+  background-color: #54ae68;
+  color: #fff;
+  max-width: 100%;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  font-size: 15px; }
 body.buddypress #main #buddypress .groups-members-search input[type=text] {
   padding: 6px 12px;
   padding: 0.6rem 1.2rem; }
@@ -1307,6 +1315,35 @@ body.buddypress.is-mobile #buddypress ul#activity-stream li.activity-item {
 body.buddypress.is-mobile.has-activity #buddypress div.item-list-tabs,
 body.buddypress.is-mobile.has-activity #buddypress form#whats-new-form {
   background: transparent; }
+body.buddypress.calendar #buddypress #item-body .bp-widget {
+  padding: 7px 20px;
+  padding: 0.7rem 2rem; }
+  body.buddypress.calendar #buddypress #item-body .bp-widget h4 > span {
+    font-size: 21px; }
+  body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view {
+    line-height: 1.5;
+    width: auto; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view table.calendar caption {
+      background: #54ae68;
+      color: #fff; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view table.calendar a {
+      color: #22a7f0; }
+      body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view table.calendar a:hover {
+        color: #54ae68; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view table.calendar .today a {
+      color: #00418A; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget table.calendar-view table.calendar th {
+      font-size: 12px; }
+  body.buddypress.calendar #buddypress #item-body .bp-widget .standard-form label {
+    line-height: 1.5;
+    margin: 8px 0px;
+    margin: 0.8rem 0rem; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget .standard-form label input {
+      margin: 4px 0px;
+      margin: 0.4rem 0rem; }
+    body.buddypress.calendar #buddypress #item-body .bp-widget .standard-form label .buddyboss-select {
+      padding: 0px 4px;
+      padding: 0rem 0.4rem; }
 
 #bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
   font-size: 16px; }
