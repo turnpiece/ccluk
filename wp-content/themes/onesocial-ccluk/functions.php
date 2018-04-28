@@ -23,6 +23,20 @@ require get_stylesheet_directory() . '/inc/customizer.php';
 // BP custom text
 load_plugin_textdomain( 'buddypress', FALSE, get_stylesheet_directory() . '/languages/buddypress-en_GB.mo' );
 
+// Category archives to include news posts
+function ccluk_show_cpt_archives( $query ) {
+    if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
+        $query->set( 
+            'post_type', 
+            array(
+                'post', 'ccluk_news'
+            )
+        );
+        return $query;
+    }
+}
+add_filter( 'pre_get_posts', 'ccluk_show_cpt_archives' );
+
 /*
  * Override default home page title
  *
