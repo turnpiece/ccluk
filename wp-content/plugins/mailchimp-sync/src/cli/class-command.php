@@ -78,15 +78,29 @@ class Command extends WP_CLI_Command {
 		}
 
 		// show progress bar
-		$notify = \WP_CLI\Utils\make_progress_bar( __( 'Working', 'mailchim-sync'), $count );
+		$notify = \WP_CLI\Utils\make_progress_bar( 'Working', $count );
 		$user_ids = wp_list_pluck( $users, 'ID' );
+		$errors = array();
 
 		foreach( $user_ids as $user_id ) {
-			$this->user_handler->subscribe_user( $user_id );
+			$result = $this->user_handler->handle_user( $user_id );
+
+			if( ! $result ) {
+				$errors[$user_id] = $this->user_handler->error;
+			}
+
 			$notify->tick();
 		}
 
 		$notify->finish();
+
+		if( ! empty( $errors ) ) {
+			$errors_msg =  'The following errors occurred: ';
+			foreach( $errors as $user_id => $e ) {
+				$errors_msg .= PHP_EOL . sprintf( " - User #%d: %s", $user_id, $e );
+			}
+			WP_CLI::warning( $errors_msg );
+		}
 
 		WP_CLI::success( sprintf( "Synchronized %d users.", $count ) );
 	}
@@ -114,7 +128,7 @@ class Command extends WP_CLI_Command {
 
 		$user_id = absint( $args[0] );
 
-		$result = $this->user_handler->subscribe_user( $user_id );
+		$result = $this->user_handler->handle_user( $user_id );
 
 		if( $result ) {
 			WP_CLI::success( sprintf( "User %d synchronized.", $user_id ) );

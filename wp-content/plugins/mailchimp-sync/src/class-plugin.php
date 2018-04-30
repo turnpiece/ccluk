@@ -48,7 +48,7 @@ final class Plugin {
 
 		$defaults = array(
 			'list' => '',
-			'double_optin' => 0,
+			'double_optin' => 1,
 			'send_welcome' => 0,
 			'role' => '',
 			'enabled' => 1,
@@ -57,11 +57,19 @@ final class Plugin {
 				'enabled' => 1,
 				'secret_key' => ''
 			),
-			'enable_user_control' => 0,
-			'default_optin_status' => 'subscribed',
+			'enable_user_control' => 1,
+			'default_optin_status' => 'unsubscribed',
 			'user_profile_heading_text' => __( 'Newsletter', 'mailchimp-sync' ),
-			'user_profile_label_text' => __( 'Send me occassional email updates.', 'mailchimp-sync'),
+			'user_profile_label_text' => __( 'Send me occasional email updates.', 'mailchimp-sync'),
 		);
+
+		// if some options were present in the database, user has been running plugin for some time
+		// for those users, change default (fallback) values to old less-privacy friendly values
+		if( ! empty( $options ) && ! empty( $options['list'] ) ) {
+			$defaults['double_optin'] = 0;
+			$defaults['enable_user_control'] = 0;
+			$defaults['default_optin_status'] = 'subscribed';
+		}
 
 		$options = array_merge( $defaults, $options );
 		$options['webhook'] = array_merge( $defaults['webhook'], $options['webhook'] );

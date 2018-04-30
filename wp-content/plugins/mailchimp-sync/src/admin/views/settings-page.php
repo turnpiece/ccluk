@@ -35,7 +35,7 @@ defined( 'ABSPATH' ) or exit;
 					<tr>
 						<th scope="row"><?php _e( 'Enable auto-sync', 'mailchimp-sync' ); ?></th>
 						<td class="nowrap">
-							<label><input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $this->options['enabled'], 1 ); ?> /> <?php _e( 'Yes' ); ?></label> &nbsp;
+							<label><input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="1" <?php checked( $this->options['enabled'], 1 ); ?> /> <?php _e( 'Yes' ); ?></label> <br />
 							<label><input type="radio" name="<?php echo $this->name_attr( 'enabled' ); ?>" value="0" <?php checked( $this->options['enabled'], 0 ); ?> /> <?php _e( 'No' ); ?></label>
 							<p  class="help"><?php _e( 'Select "yes" if you want the plugin to "listen" to all changes in your WordPress user base and auto-sync them with the selected MailChimp list.', 'mailchimp-sync' ); ?></p>
 						</td>
@@ -65,14 +65,17 @@ defined( 'ABSPATH' ) or exit;
 						<td class="nowrap">
 							<label>
 								<input type="radio" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="1" <?php checked( $this->options['double_optin'], 1 ); ?> />
-								<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>
-							</label> &nbsp;
+								<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>  &nbsp; <em><?php _e( '(recommended)', 'mailchimp-sync'); ?></em>
+							</label> <br />
 							<label>
 								<input type="radio" id="mc4wp_checkbox_double_optin_0" name="<?php echo $this->name_attr( 'double_optin' ); ?>" value="0" <?php checked( $this->options['double_optin'], 0 ); ?> />
 								<?php _e( 'No', 'mailchimp-for-wp' ); ?>
 							</label>
 
-							<p class="help"><?php _e( 'Select "yes" if you want people to confirm their email address before being subscribed (recommended)', 'mailchimp-for-wp' ); ?></p>
+							<p class="help">
+								<?php _e( 'Select "no" if you do not want people to verify their email address before they are subscribed.', 'mailchimp-sync' ); ?>
+								<?php printf( __( '<strong>Warning: </strong> this may affect your <a href="%s">GDPR compliance</a>.', 'mailchimp-sync' ), 'https://kb.mc4wp.com/gdpr-compliance/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=integrations-page' ); ?> 	
+							</p>
 						</td>
 					</tr>
 
@@ -164,13 +167,17 @@ defined( 'ABSPATH' ) or exit;
 					<td class="nowrap">
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="1" <?php checked( $this->options['enable_user_control'], 1 ); ?> />
-							<?php _e( 'Yes', 'mailchimp-for-wp' ); ?>
-						</label> &nbsp;
+							<?php _e( 'Yes', 'mailchimp-for-wp' ); ?> &nbsp; <em><?php _e( '(recommended)', 'mailchimp-sync'); ?></em>
+						</label><br />
 						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'enable_user_control' ); ?>" value="0" <?php checked( $this->options['enable_user_control'], 0 ); ?> />
 							<?php _e( 'No', 'mailchimp-for-wp' ); ?>
 						</label>
-						<p class="help"><?php _e( 'Select "yes" if you want to allow users to subscribe or unsubscribe from their profile page.', 'mailchimp-for-wp' ); ?></p>
+						<p class="help">
+							<?php _e( 'Select "no" if you do not want users to be able to manage their sign-up status from their profile page.', 'mailchimp-for-wp' ); ?> 
+							<?php printf( __( '<strong>Warning: </strong> this may affect your <a href="%s">GDPR compliance</a>.', 'mailchimp-sync' ), 'https://kb.mc4wp.com/gdpr-compliance/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=integrations-page' ); ?> 
+						</p>
+
 					</td>
 				</tr>
 	
@@ -179,14 +186,18 @@ defined( 'ABSPATH' ) or exit;
 					<th scope="row"><?php _e( 'Default opt-in status', 'mailchimp-for-wp' ); ?></th>
 					<td class="nowrap">
 						<label>
+							<input type="radio" name="<?php echo $this->name_attr( 'default_optin_status' ); ?>" value="unsubscribed" <?php checked( $this->options['default_optin_status'], 'unsubscribed' ); ?> />
+							<?php _e( 'Not subscribed', 'mailchimp-for-wp' ); ?> &nbsp; <em><?php _e( '(recommended)', 'mailchimp-sync'); ?></em>
+						</label> <br />
+						<label>
 							<input type="radio" name="<?php echo $this->name_attr( 'default_optin_status' ); ?>" value="subscribed" <?php checked( $this->options['default_optin_status'], 'subscribed' ); ?> />
 							<?php _e( 'Subscribed', 'mailchimp-for-wp' ); ?>
-						</label> &nbsp;
-						<label>
-							<input type="radio" name="<?php echo $this->name_attr( 'default_optin_status' ); ?>" value="unsubscribed" <?php checked( $this->options['default_optin_status'], 'unsubscribed' ); ?> />
-							<?php _e( 'Not subscribed', 'mailchimp-for-wp' ); ?>
 						</label>
-						<p class="help"><?php _e( 'Select "subscribed" if you want users to be subscribed by default.', 'mailchimp-for-wp' ); ?></p>
+						
+						<p class="help">
+							<?php _e( 'Select "subscribed" if you want users to be subscribed by default.', 'mailchimp-for-wp' ); ?> 
+							<?php printf( __( '<strong>Warning: </strong> this may affect your <a href="%s">GDPR compliance</a>.', 'mailchimp-sync' ), 'https://kb.mc4wp.com/gdpr-compliance/#utm_source=wp-plugin&utm_medium=mailchimp-for-wp&utm_campaign=integrations-page' ); ?> 							
+						</p>
 					</td>
 				</tr>
 	

@@ -5,6 +5,12 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+4.5.2 - 04/26/2018 - Aaron
+----------------------------------------------------------------------
+- Important security fix for staff remote logins and protect against timing attacks (props Steve Truman @a3rev)
+- Fix a rare fatal error during activation in some WP installs
+- Fix a missing string in translations
+
 4.5.1 - 04/11/2018 - Aaron
 ----------------------------------------------------------------------
 - Fix PHP 5.2 compatibility issue
@@ -487,4 +493,4 @@ Added option to disable admin notices.
 Initial Release.
 
 
-87274-1524342565-au
+87274-1525112972-au

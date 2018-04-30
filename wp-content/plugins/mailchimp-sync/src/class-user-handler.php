@@ -99,6 +99,7 @@ class UserHandler {
 	 * @return bool
 	 */
 	public function subscribe_user( $user_id ) {
+		$this->error = '';
 
 		try {
 			$user = $this->users->user( $user_id );
@@ -122,10 +123,18 @@ class UserHandler {
 
 		$user_subscriber = $this->get_user_subscriber();
 
+		$args = array(
+			'double_optin' => $this->settings['double_optin'],
+			'email_type' => $this->settings['email_type'],
+			'replace_interests' => $this->settings['replace_interests'],
+			'send_welcome' => $this->settings['send_welcome'],
+			'resubscribe' => $this->settings['enable_user_control']
+		);
+
 		try {
-			$existed = $user_subscriber->subscribe( $user->ID, $this->settings['double_optin'], $this->settings['email_type'], $this->settings['replace_interests'], $this->settings['send_welcome'] );
+			$existed = $user_subscriber->subscribe( $user->ID, $args );
 		} catch( Exception $e ) {
-			$this->error = $e->getMessage();
+			$this->error = (string) $e;
 			$this->get_log()->error( sprintf( 'User Sync > Error subscribing or updating user %d: %s', $user_id, $this->error ) );
 			return false;
 		}
@@ -146,13 +155,13 @@ class UserHandler {
 	 * @return bool
 	 */
 	public function unsubscribe_user( $user_id, $email_address, $subscriber_uid = null ) {
-
+		$this->error = '';
 		$user_subscriber = $this->get_user_subscriber();
 
 		try{
-			$$existed = $user_subscriber->unsubscribe( $user_id, $email_address, $subscriber_uid, $this->settings['send_goodbye'], $this->settings['send_notification'], $this->settings['delete_member'] );
+			$existed = $user_subscriber->unsubscribe( $user_id, $email_address, $subscriber_uid, $this->settings['send_goodbye'], $this->settings['send_notification'], $this->settings['delete_member'] );
 		} catch( Exception $e ) {
-			$this->error = $e->getMessage();
+			$this->error = (string) $e;
 			$this->get_log()->error( sprintf( 'User Sync > Error unsubscribing user %d: %s', $user_id, $this->error ) );
 			return false;
 		}

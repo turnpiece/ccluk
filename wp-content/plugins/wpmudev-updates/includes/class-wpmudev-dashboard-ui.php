@@ -156,7 +156,7 @@ class WPMUDEV_Dashboard_Ui {
 
 	/**
 	 * Checks if plugin was just activated, and redirects to login page.
-	 * No redirect if plugin was actiavted via bulk-update.
+	 * No redirect if plugin was activated via bulk-update.
 	 *
 	 * @since    1.0.0
 	 * @internal Action hook

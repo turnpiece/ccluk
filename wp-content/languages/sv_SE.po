@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-09 12:42:33+0000\n"
+"PO-Revision-Date: 2018-04-30 06:40:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -35,6 +35,10 @@ msgstr " "
 #: wp-includes/class-wp-locale.php:220
 msgid "number_format_decimal_point"
 msgstr ","
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:228
+msgid "Whether or not the post type can be viewed."
+msgstr "Om inläggstypen kan visas."
 
 #: wp-includes/functions.php:2607
 msgid "The link you followed has expired."
@@ -1247,27 +1251,27 @@ msgid "Enter your closest city to find nearby events."
 msgstr "Skriv in din närmaste stad för att hålla koll på evenemang i närheten."
 
 #. translators: %s: network settings URL
-#: wp-signup.php:845
+#: wp-signup.php:847
 msgid "To change or disable registration go to your <a href=\"%s\">Options page</a>."
 msgstr "Gå till dina <a href=\"%s\">inställningssida</a> för att ändra eller inaktivera registreringar."
 
-#: wp-signup.php:838
+#: wp-signup.php:840
 msgid "The network currently allows both site and user registrations."
 msgstr "För närvarande tillåter nätverket registrering av både webbplatser och användare."
 
-#: wp-signup.php:835
+#: wp-signup.php:837
 msgid "The network currently allows user registrations."
 msgstr "För närvarande tillåter nätverket registrering av användare."
 
-#: wp-signup.php:832
+#: wp-signup.php:834
 msgid "The network currently allows site registrations."
 msgstr "För närvarande tillåter nätverket registrering av webbplatser."
 
-#: wp-signup.php:829
+#: wp-signup.php:831
 msgid "The network currently disallows registrations."
 msgstr "För närvarande tillåter inte nätverket registreringar."
 
-#: wp-signup.php:824
+#: wp-signup.php:826
 msgid "Greetings Network Administrator!"
 msgstr "Hej, nätverksadminastratör!"
 
@@ -1552,7 +1556,7 @@ msgstr "Antalet begärda sidor överskrider antalet tillgängliga sidor."
 msgid "You need to define an include parameter to order by include."
 msgstr "Du behöver ange en ”include”-parameter för att kunna sortera efter include."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:245
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:252
 msgid "All features, supported by the post type."
 msgstr "Alla funktioner som stöds av inläggstypen."
 
@@ -1752,28 +1756,28 @@ msgstr "En alfanumerisk ID-sträng för taxonomin."
 msgid "Required to be true, as revisions do not support trashing."
 msgstr "Måste ha värdet true eftersom versioner inte kan hanteras via papperskorgen."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:260
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:267
 msgid "REST base route for the post type."
 msgstr "REST basadress för inläggstypen."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:239
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:246
 msgid "An alphanumeric identifier for the post type."
 msgstr "En alfanumerisk ID-sträng för inläggstypen."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:227
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:234
 msgid "Human-readable labels for the post type for various contexts."
 msgstr "Läsbara etiketter för inläggstypen i olika sammanhang."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:221
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:222
 msgid "Whether or not the post type should have children."
 msgstr "Om inläggstypen kan ha underordnade objekt."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:215
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:216
 msgid "A human-readable description of the post type."
 msgstr "En läsbar beskrivning av inläggstypen."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:209
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:210
 msgid "All capabilities used by the post type."
 msgstr "Alla behörigheter som används av inläggstypen."
 
@@ -1877,7 +1881,7 @@ msgstr "Taxonomins titel."
 msgid "Types associated with the taxonomy."
 msgstr "Typer associerade med taxonomin."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:233
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:240
 msgid "The title for the post type."
 msgstr "Inläggstypens titel."
 
@@ -1981,60 +1985,60 @@ msgstr "Ogiltig sidmall."
 msgid "Invalid date."
 msgstr "Ogiltigt datum."
 
-#: wp-includes/theme.php:1397
+#: wp-includes/theme.php:1398
 msgid "Video is playing."
 msgstr "Videon spelas."
 
-#: wp-includes/theme.php:1396
+#: wp-includes/theme.php:1397
 msgid "Video is paused."
 msgstr "Videon är pausad."
 
-#: wp-includes/theme.php:1960
+#: wp-includes/theme.php:1961
 msgctxt "Theme starter content"
 msgid "Archives"
 msgstr "Arkiv"
 
-#: wp-includes/theme.php:2082
+#: wp-includes/theme.php:2083
 msgctxt "Theme starter content"
 msgid "This is an example of a homepage section. Homepage sections can be any page other than the homepage itself, including the page that shows your latest blog posts."
 msgstr "Detta är ett exempel på en startsidessektion. Startsidessektioner kan vara vilken sida som helst annan än själva startsidan, inklusive sidan som visar dina senaste blogginlägg."
 
-#: wp-includes/theme.php:2076
+#: wp-includes/theme.php:2077
 msgctxt "Theme starter content"
 msgid "News"
 msgstr "Nyheter"
 
-#: wp-includes/theme.php:2068
+#: wp-includes/theme.php:2069
 msgctxt "Theme starter content"
 msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
 msgstr "Detta är en sida med viss grundläggande kontaktinformation, såsom adress och telefonnummer. Du kan även prova något tillägg för att lägga till ett kontaktformulär."
 
-#: wp-includes/theme.php:2063
+#: wp-includes/theme.php:2064
 msgctxt "Theme starter content"
 msgid "You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe."
 msgstr "Du kanske är konstnär och vill presentera dig själv och dina arbeten här, eller så kanske du är ett företag som vill berätta om din vision."
 
-#: wp-includes/theme.php:2058
+#: wp-includes/theme.php:2059
 msgctxt "Theme starter content"
 msgid "Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time."
 msgstr "Välkommen till din nya webbplats. Det här är din startsida, som de flesta besökarna kommer att se när de kommer till din webbplats för första gången."
 
-#: wp-includes/theme.php:1975
+#: wp-includes/theme.php:1976
 msgctxt "Theme starter content"
 msgid "Recent Posts"
 msgstr "De senaste inläggen"
 
-#: wp-includes/theme.php:1972
+#: wp-includes/theme.php:1973
 msgctxt "Theme starter content"
 msgid "Recent Comments"
 msgstr "De senaste kommentarerna"
 
-#: wp-includes/theme.php:1969
+#: wp-includes/theme.php:1970
 msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "Meta"
 
-#: wp-includes/theme.php:1963
+#: wp-includes/theme.php:1964
 msgctxt "Theme starter content"
 msgid "Calendar"
 msgstr "Kalender"
@@ -2100,37 +2104,37 @@ msgstr "Du har inte behörighet att läsa denna kommentar."
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "Du har inte behörighet att se kommentarer utan inlägg."
 
-#: wp-includes/theme.php:2050
+#: wp-includes/theme.php:2051
 msgctxt "Theme starter content"
 msgid "YouTube"
 msgstr "YouTube"
 
-#: wp-includes/theme.php:2038
+#: wp-includes/theme.php:2039
 msgctxt "Theme starter content"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: wp-includes/theme.php:2034
+#: wp-includes/theme.php:2035
 msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: wp-includes/theme.php:2026
+#: wp-includes/theme.php:2027
 msgctxt "Theme starter content"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: wp-includes/theme.php:2022
+#: wp-includes/theme.php:2023
 msgctxt "Theme starter content"
 msgid "Foursquare"
 msgstr "Foursquare"
 
-#: wp-includes/theme.php:1955
+#: wp-includes/theme.php:1956
 msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "Det här kan vara en lämplig plats att presentera dig själv och din webbplats eller räkna upp några av dina meriter."
 
-#: wp-includes/theme.php:1954
+#: wp-includes/theme.php:1955
 msgctxt "Theme starter content"
 msgid "About This Site"
 msgstr "Om denna webbplats"
@@ -2180,97 +2184,97 @@ msgstr "Ingen video vald"
 msgid "Choose video"
 msgstr "Välj video"
 
-#: wp-includes/theme.php:2081
+#: wp-includes/theme.php:2082
 msgctxt "Theme starter content"
 msgid "A homepage section"
 msgstr "En hemsides-sektion"
 
-#: wp-includes/theme.php:2072
+#: wp-includes/theme.php:2073
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Blogg"
 
-#: wp-includes/theme.php:2067
+#: wp-includes/theme.php:2068
 msgctxt "Theme starter content"
 msgid "Contact"
 msgstr "Kontakta oss"
 
-#: wp-includes/theme.php:2062
+#: wp-includes/theme.php:2063
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "Om oss"
 
-#: wp-includes/theme.php:1984 wp-includes/theme.php:2057
+#: wp-includes/theme.php:1985 wp-includes/theme.php:2058
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Startsida"
 
-#: wp-includes/theme.php:2014
+#: wp-includes/theme.php:2015
 msgctxt "Theme starter content"
 msgid "Email"
 msgstr "E-post"
 
-#: wp-includes/theme.php:2030
+#: wp-includes/theme.php:2031
 msgctxt "Theme starter content"
 msgid "Instagram"
 msgstr "Instagram"
 
-#: wp-includes/theme.php:2042
+#: wp-includes/theme.php:2043
 msgctxt "Theme starter content"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: wp-includes/theme.php:2018
+#: wp-includes/theme.php:2019
 msgctxt "Theme starter content"
 msgid "Facebook"
 msgstr "Facebook"
 
-#: wp-includes/theme.php:2046
+#: wp-includes/theme.php:2047
 msgctxt "Theme starter content"
 msgid "Yelp"
 msgstr "Yelp"
 
-#: wp-includes/theme.php:1966
+#: wp-includes/theme.php:1967
 msgctxt "Theme starter content"
 msgid "Categories"
 msgstr "Kategorier"
 
-#: wp-includes/theme.php:1978
+#: wp-includes/theme.php:1979
 msgctxt "Theme starter content"
 msgid "Search"
 msgstr "Sök"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Saturday &amp; Sunday: 11:00AM&ndash;3:00PM"
 msgstr "Lördag och söndag kl. 11:00&ndash;15:00"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Monday&mdash;Friday: 9:00AM&ndash;5:00PM"
 msgstr "Måndag&mdash;fredag: 9:00&ndash;17:00"
 
-#: wp-includes/theme.php:1947
+#: wp-includes/theme.php:1948
 msgctxt "Theme starter content"
 msgid "Hours"
 msgstr "Timmar"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "New York, NY 10001"
 msgstr "192 00 STORSTAD"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "123 Main Street"
 msgstr "Storgatan 10"
 
-#: wp-includes/theme.php:1945
+#: wp-includes/theme.php:1946
 msgctxt "Theme starter content"
 msgid "Address"
 msgstr "Adress"
 
-#: wp-includes/theme.php:1943
+#: wp-includes/theme.php:1944
 msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "Hitta till oss"
@@ -2399,7 +2403,7 @@ msgstr "Begränsa sökresultatet till inlägg som är kopplade till ett eller fl
 msgid "Comment field exceeds maximum length allowed."
 msgstr "Kommentarfältet överskrider den tillåtna maxlängden."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:251
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
 msgid "Taxonomies associated with post type."
 msgstr "Taxonomier förknippade med inläggstypen."
 
@@ -3687,11 +3691,11 @@ msgstr "Hoppa fram 1 sekund"
 msgid "Time Slider"
 msgstr "Sökare"
 
-#: wp-includes/script-loader.php:370 wp-includes/theme.php:1394
+#: wp-includes/script-loader.php:370 wp-includes/theme.php:1395
 msgid "Pause"
 msgstr "Pause"
 
-#: wp-includes/script-loader.php:369 wp-includes/theme.php:1395
+#: wp-includes/script-loader.php:369 wp-includes/theme.php:1396
 msgid "Play"
 msgstr "Spela upp"
 
@@ -4478,7 +4482,7 @@ msgid "This site has not been activated yet. If you are having problems activati
 msgstr "Den här webbplatsen har inte aktiverats än. Om du har problem med att aktivera din webbplats, vänligen kontakta %s."
 
 #. translators: %s: email address
-#: wp-signup.php:611 wp-signup.php:757
+#: wp-signup.php:613 wp-signup.php:759
 msgid "Check your inbox at %s and click the link given."
 msgstr "Kolla din inkorg för %s och klicka på angiven länk."
 
@@ -4488,7 +4492,7 @@ msgid "The menu name %s conflicts with another menu name. Please try another."
 msgstr "Menynamnet %s står i konflikt med ett annat menynamn. Försök med ett annat namn."
 
 #. translators: %s: site address
-#: wp-signup.php:904
+#: wp-signup.php:906
 msgid "The site you were looking for, %s, does not exist."
 msgstr "Webbplatsen du söker, %s, existerar inte."
 
@@ -4506,7 +4510,7 @@ msgstr "Oops! Den inbäddningen kan inte hittas."
 msgid "Continue reading %s"
 msgstr "Fortsätt läsa %s"
 
-#: wp-signup.php:146
+#: wp-signup.php:148
 msgid "Site Language:"
 msgstr "Webbplatsspråk:"
 
@@ -5724,7 +5728,7 @@ msgstr "Namn på taxanomier måste vara mellan 1 och 32 tecken."
 msgid "Could not split shared term."
 msgstr "Kunde inte dela på delad term."
 
-#: wp-includes/theme.php:2962
+#: wp-includes/theme.php:2963
 msgid "Customizer"
 msgstr "Anpassare"
 
@@ -5898,7 +5902,7 @@ msgid "Distraction-free writing mode"
 msgstr "Distraktionsfritt skrivläge"
 
 #. translators: 1: Theme support 2: hook name
-#: wp-includes/theme.php:2417
+#: wp-includes/theme.php:2418
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "Temastöd för %1$s bör registreras innan hooken %2$s."
 
@@ -5949,7 +5953,7 @@ msgstr "En term med angivet namn och permalänk finns redan under denna taxanomi
 msgid "%s must set a database connection for use with escaping."
 msgstr "%s måste ange en databasanslutning för användning med escape-procedurer."
 
-#: wp-includes/theme.php:2261
+#: wp-includes/theme.php:2262
 msgid "You need to pass an array of types."
 msgstr "Du måste skicka en array med typer."
 
@@ -7562,12 +7566,12 @@ msgid "(more&hellip;)"
 msgstr "(mer&hellip;)"
 
 #. translators: %s: site address
-#: wp-signup.php:899
+#: wp-signup.php:901
 msgid "The site you were looking for, %s, does not exist, but you can create it now!"
 msgstr "Webbplatsen du letar efter, %s, existerar inte, men du kan skapa den nu!"
 
 #. translators: %s: email address
-#: wp-signup.php:767
+#: wp-signup.php:769
 msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s incorrect, you will not receive your email."
 msgstr "Har du angett din e-postadress korrekt? Du har angett %s, om denna adress är felaktig så kommer du inte att få något mail."
 
@@ -8473,7 +8477,7 @@ msgctxt "opening curly double quote"
 msgid "&#8220;"
 msgstr "&#8221;"
 
-#: wp-signup.php:174
+#: wp-signup.php:176
 msgid "Allow search engines to index this site."
 msgstr "Tillåt sökmotorer att indexera denna webbplats."
 
@@ -8496,7 +8500,7 @@ msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> 
 msgstr "Ditt konto har aktiverats. Du kan nu <a href=\"%1$s\">logga in</a> på webbplatsen med användarnamnet &#8221;%2$s&#8221;.  Lösenord och inloggningsinstruktioner har skickats till e-postadressen %3$s. Om du inte får något mail, försäkra dig om att det inte fastnat i ditt skräppostfiler. Om du efter en timme inte mottagit något mail så kan du försöka med att <a href=\"%4$s\">återställa ditt lösenord</a>."
 
 #. translators: 1: link to new site, 2: login URL, 3: username
-#: wp-signup.php:474
+#: wp-signup.php:476
 msgid "%1$s is your new site. <a href=\"%2$s\">Log in</a> as &#8220;%3$s&#8221; using your existing password."
 msgstr "%1$s är din nya webbplats. <a href=\"%2$s\">Logga in</a> som &#8221;%3$s&#8221; med ditt nuvarande lösenord."
 
@@ -8809,12 +8813,12 @@ msgctxt "Post format"
 msgid "Standard"
 msgstr "Standard"
 
-#: wp-signup.php:123
+#: wp-signup.php:125
 msgid "domain"
 msgstr "domän"
 
 #. translators: %s: site address
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Your address will be %s."
 msgstr "Din adress kommer att bli %s."
 
@@ -9124,19 +9128,19 @@ msgctxt "taxonomy singular name"
 msgid "Category"
 msgstr "Kategori"
 
-#: wp-signup.php:764
+#: wp-signup.php:766
 msgid "Check the junk or spam folder of your email client. Sometime emails wind up there by mistake."
 msgstr "Kolla ditt skräppostfilter/skräppostmapp i ditt e-postprogram. Ibland hamnar mail där av misstag."
 
-#: wp-signup.php:763
+#: wp-signup.php:765
 msgid "Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control."
 msgstr "Vänta en liten stund till. Ibland fördröjs mail av orsaker utanför vår kontroll."
 
-#: wp-signup.php:890
+#: wp-signup.php:892
 msgid "Sorry, new registrations are not allowed at this time."
 msgstr "Beklagar, nya registreringar tillåts inte just nu."
 
-#: wp-signup.php:240
+#: wp-signup.php:242
 msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
 msgstr "Vi skickar ditt registreringsmail till denna adress. (Kontrollera att rätt e-postadressen är angiven innan du fortsätter.)"
 
@@ -9372,11 +9376,11 @@ msgstr "Kunde inte beräkna dimensioner för den omskalade bilden"
 msgid "If you&#8217;re still stuck with this message, then check that your database contains the following tables:"
 msgstr "Om du fortfarande får upp det här meddelandet, kontrollera så att databasen innehåller följande tabeller:"
 
-#: wp-signup.php:761
+#: wp-signup.php:763
 msgid "If you haven&#8217;t received your email yet, there are a number of things you can do:"
 msgstr "Om du inte fått ditt mail än så finns det ett par saker du kan göra:"
 
-#: wp-signup.php:313
+#: wp-signup.php:315
 msgid "Welcome back, %s. By filling out the form below, you can <strong>add another site to your account</strong>. There is no limit to the number of sites you can have, so create to your heart&#8217;s content, but write responsibly!"
 msgstr "Välkommen tillbaka, %s. Genom att fylla i formuläret nedan så kan du <strong>skapa flera webbplatser för ditt konto</strong>. Det finns ingen gräns för hur många webbplatser du kan skapa. Publicera material ansvarsfullt."
 
@@ -9384,16 +9388,16 @@ msgstr "Välkommen tillbaka, %s. Genom att fylla i formuläret nedan så kan du 
 msgid "This action has been disabled by the administrator."
 msgstr "Den här åtgärden har inaktiverats av administratören."
 
-#: wp-signup.php:892
+#: wp-signup.php:894
 msgid "You are logged in already. No need to register again!"
 msgstr "Du är redan inloggad. Du behöver inte registrera dig igen!"
 
 #. translators: %s: login URL
-#: wp-signup.php:857
+#: wp-signup.php:859
 msgid "You must first <a href=\"%s\">log in</a>, and then you can create a new site."
 msgstr "Du måste först <a href=\"%s\">logga in</a>, sen kan du skapa en ny webbplats."
 
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
 msgstr "Måste bestå av minst 4 tecken, endast bokstäver och siffror. Detta kan inte ändras, så välj varsamt!"
 
@@ -9469,44 +9473,44 @@ msgstr[1] "%d uppdateringar för teman"
 msgid "%d WordPress Update"
 msgstr "%d Uppdatering för WordPress"
 
-#: wp-signup.php:758
+#: wp-signup.php:760
 msgid "If you do not activate your site within two days, you will have to sign up again."
 msgstr "Om du inte aktiverar ditt användarnamn inom 2 dagar så måste du registrera dig igen."
 
-#: wp-signup.php:755
+#: wp-signup.php:757
 msgid "But, before you can start using your site, <strong>you must activate it</strong>."
 msgstr "Men, innan du kan börja använda din webbplats så <strong>måste du aktivera den</strong>."
 
-#: wp-signup.php:555
+#: wp-signup.php:557
 msgid "Gimme a site!"
 msgstr "Ge mig en webbplats!"
 
-#: wp-signup.php:871
+#: wp-signup.php:873
 msgid "Site registration has been disabled."
 msgstr "Registrering av nya webbplatser ha inaktiverats."
 
 #. translators: %s: site address
-#: wp-signup.php:753
+#: wp-signup.php:755
 msgid "Congratulations! Your new site, %s, is almost ready."
 msgstr "Grattis! Din nya webbplats, %s, är nästan redo att använda."
 
-#: wp-signup.php:307
+#: wp-signup.php:309
 msgid "Get <em>another</em> %s site in seconds"
 msgstr "Skapa <em>en till</em> %s webbplats på bara några sekunder"
 
-#: wp-signup.php:121
+#: wp-signup.php:123
 msgid "sitename"
 msgstr "webbplatsnamn"
 
-#: wp-signup.php:106
+#: wp-signup.php:108
 msgid "Site Name:"
 msgstr "Webbplatsnamn:"
 
-#: wp-signup.php:108
+#: wp-signup.php:110
 msgid "Site Domain:"
 msgstr "Webbplatsdomän:"
 
-#: wp-signup.php:132
+#: wp-signup.php:134
 msgid "Site Title:"
 msgstr "Titel för webbplats:"
 
@@ -9551,20 +9555,20 @@ msgstr "Om du är ägaren av det här nätverket, vänligen kontrollera att MySQ
 msgid "New trackback on your post \"%s\""
 msgstr "En ny trackback till ditt inlägg \\\"%s\\\""
 
-#: wp-signup.php:319
+#: wp-signup.php:321
 msgid "Sites you are already a member of:"
 msgstr "Webbplatser som du redan är medlem på:"
 
-#: wp-signup.php:328
+#: wp-signup.php:330
 msgid "If you&#8217;re not going to use a great site domain, leave it for a new user. Now have at it!"
 msgstr "Om du inte ska använda den här webbplatsdomänen, låt någon annan få möjligheten att använda den."
 
-#: wp-signup.php:343
+#: wp-signup.php:345
 msgid "Create Site"
 msgstr "Skapa webbplats"
 
 #. translators: %s: site name
-#: wp-signup.php:469
+#: wp-signup.php:471
 msgid "The site %s is yours."
 msgstr "Webbplatsen %s är din."
 
@@ -9789,62 +9793,62 @@ msgstr "Mjukvaruversion"
 msgid "Software Name"
 msgstr "Mjukvarunamn"
 
-#: wp-signup.php:865
+#: wp-signup.php:867
 msgid "User registration has been disabled."
 msgstr "Registrering av nya användare ha inaktiverats."
 
-#: wp-signup.php:853
+#: wp-signup.php:855
 msgid "Registration has been disabled."
 msgstr "Nya registreringar har inaktiverats."
 
-#: wp-signup.php:759
+#: wp-signup.php:761
 msgid "Still waiting for your email?"
 msgstr "Väntar du fortfarande på ditt mail?"
 
-#: wp-signup.php:676
+#: wp-signup.php:678
 msgid "Signup"
 msgstr "Registrera dig"
 
-#: wp-signup.php:612
+#: wp-signup.php:614
 msgid "If you do not activate your username within two days, you will have to sign up again."
 msgstr "Om du inte aktiverar ditt användarnamn inom 2 dagar så måste du registrera dig igen."
 
-#: wp-signup.php:609
+#: wp-signup.php:611
 msgid "But, before you can start using your new username, <strong>you must activate it</strong>."
 msgstr "Men, innan du kan börja använda ditt nya användarnamn så <strong>måste du aktivera det</strong>."
 
 #. translators: %s: username
-#: wp-signup.php:608
+#: wp-signup.php:610
 msgid "%s is your new username"
 msgstr "%s är ditt nya användarnamn"
 
 #: wp-includes/class-wp-customize-nav-menus.php:967
-#: wp-includes/script-loader.php:1130 wp-signup.php:562
+#: wp-includes/script-loader.php:1130 wp-signup.php:564
 msgid "Next"
 msgstr "Nästa"
 
-#: wp-signup.php:558
+#: wp-signup.php:560
 msgid "Just a username, please."
 msgstr "Bara ett användarnamn, tack."
 
 #. translators: %s: name of the network
-#: wp-signup.php:538
+#: wp-signup.php:540
 msgid "Get your own %s account in seconds"
 msgstr "Skapa ett eget %s konto på bara några sekunder"
 
-#: wp-signup.php:310
+#: wp-signup.php:312
 msgid "There was a problem, please correct the form below and try again."
 msgstr "Ett fel har uppstått. Vänligen kontrollera formuläret nedan och försök igen."
 
-#: wp-signup.php:236
+#: wp-signup.php:238
 msgid "Email&nbsp;Address:"
 msgstr "E-postadress:"
 
-#: wp-signup.php:233
+#: wp-signup.php:235
 msgid "(Must be at least 4 characters, letters and numbers only.)"
 msgstr "(Måste bestå av minst 4 tecken, endast bokstäver och siffror.)"
 
-#: wp-signup.php:173
+#: wp-signup.php:175
 msgid "Privacy:"
 msgstr "Integritet:"
 
@@ -10659,7 +10663,7 @@ msgstr "Dokumentegenskaper"
 #: wp-includes/class-wp-editor.php:1238 wp-includes/script-loader.php:477
 #: wp-includes/script-loader.php:559 wp-includes/script-loader.php:701
 #: wp-includes/script-loader.php:724 wp-includes/script-loader.php:888
-#: wp-includes/theme.php:2961
+#: wp-includes/theme.php:2962
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "Ändringarna du gjort kommer att förloras om du går i från sidan utan att spara."
 
@@ -11533,7 +11537,7 @@ msgstr "Teman"
 msgid "Sites"
 msgstr "Webbplatser"
 
-#: wp-signup.php:178
+#: wp-signup.php:180
 msgid "Yes"
 msgstr "Ja"
 
@@ -12038,7 +12042,7 @@ msgstr "Sökresultat för &#8221;%s&#8221;"
 msgid "Edit"
 msgstr "Redigera"
 
-#: wp-signup.php:182
+#: wp-signup.php:184
 msgid "No"
 msgstr "Nej"
 
@@ -12103,7 +12107,7 @@ msgstr "Hittade inga inlägg."
 msgid "Password:"
 msgstr "Lösenord:"
 
-#: wp-activate.php:133 wp-signup.php:228
+#: wp-activate.php:133 wp-signup.php:230
 msgid "Username:"
 msgstr "Användarnamn:"
 

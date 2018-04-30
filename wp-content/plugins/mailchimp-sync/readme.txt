@@ -3,8 +3,8 @@ Contributors: Ibericode, DvanKooten, hchouhan, lapzor
 Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-sync&utm_campaign=donate-link
 Tags: mailchimp,users,sync,mailchimp list,synchronize,zapier,woocommerce,mc4wp
 Requires at least: 4.1
-Tested up to: 4.9.4
-Stable tag: 1.7.2
+Tested up to: 4.9.5
+Stable tag: 1.7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -125,6 +125,17 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 2. Status overview
 
 == Changelog ==
+
+
+### 1.7.3 - April 30, 2018
+
+**Improvements**
+
+- Allow users that unsubscribed to be re-subscribed, but only if users can manage their sign-up status from their profile page.
+- Better (more privacy friendly) default settings.
+- Add warning text to settings that may affect GDPR compliance.
+- CLI commands shows a list of errors now (if any).
+- More detailed error messages when MailChimp API returns an error.
 
 
 ### 1.7.2 - March 14, 2018

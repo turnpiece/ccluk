@@ -1,6 +1,17 @@
 Changelog
 ===========
 
+### 1.7.3 - April 30, 2018
+
+**Improvements**
+
+- Allow users that unsubscribed to be re-subscribed, but only if users can manage their sign-up status from their profile page.
+- Better (more privacy friendly) default settings.
+- Add warning text to settings that may affect GDPR compliance.
+- CLI commands shows a list of errors now (if any).
+- More detailed error messages when MailChimp API returns an error.
+
+
 ### 1.7.2 - March 14, 2018
 
 **Fixes**

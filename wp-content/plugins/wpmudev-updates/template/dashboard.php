@@ -250,8 +250,10 @@ $this->render_header( $page_title );
                 </ul>
             </section>
             <footer class="wpmudui-box__footer">
-                <a href="<?php echo esc_url( $urls->plugins_url ); ?>"
-                   class="wpmudui-btn is-sm is-ghost"><?php esc_html_e( 'View ' . $projects_nr['plugins'] . ' Plugins', 'wpmudev' ); ?></a>
+                <a href="<?php echo esc_url( $urls->plugins_url ); ?>" class="wpmudui-btn is-sm is-ghost"><?php
+                    /* translators: Number of plugins */
+                    printf( __( 'View %s Plugins', 'wpmudev' ), $projects_nr['plugins'] );
+                    ?></a>
             </footer>
         </div><!-- end wpmud-dash-plugins-box -->
 

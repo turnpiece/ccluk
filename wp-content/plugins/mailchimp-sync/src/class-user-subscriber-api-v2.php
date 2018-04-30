@@ -27,34 +27,40 @@ class UserSubscriberAPIv2 implements UserSubscriber {
 
     /**
      * @param int $user_id
-     * @param bool $double_optin
-     * @param string $email_type
-     * @param bool $replace_interests
-     * @param bool $send_welcome
+     * @param array $args
      *
      * @return bool Whether user was already subscribed to the MailChimp list.
      *
      * @throws \Exception
      */
-    public function subscribe( $user_id, $double_optin = false, $email_type = 'html', $replace_interests = false, $send_welcome = false ) {
+    public function subscribe( $user_id, array $args = array() ) {
+        $args = array_merge( 
+            array( 
+              'double_optin' => false, 
+              'email_type' => 'html', 
+              'replace_interests' => false, 
+              'send_welcome' => false,
+              'resubscribe' => false, // unused
+          ), $args );
 
         $subscriber_uid = $this->users->get_subscriber_uid( $user_id );
         if( ! empty( $subscriber_uid ) ) {
-            return $this->update( $user_id, $email_type, $replace_interests );
+            return $this->update( $user_id, $args );
         }
 
+        $api = $this->get_api();
         $user = $this->users->user( $user_id );
         $merge_vars = $this->users->get_user_merge_fields( $user );
         $update_existing = true;
-        $success = $this->get_api()->subscribe( $this->list_id, $user->user_email, $merge_vars, $email_type, $double_optin, $update_existing, $replace_interests, $send_welcome );
+        $success = $api->subscribe( $this->list_id, $user->user_email, $merge_vars, $args['email_type'], $args['double_optin'], $update_existing, $args['replace_interests'], $args['send_welcome'] );
 
         if( ! $success ) {
-            $error_code = $this->get_api()->get_error_code();
-            $error_message = $this->get_api()->get_error_message();
+            $error_code = $api->get_error_code();
+            $error_message = $api->get_error_message();
             throw new Exception( $error_code, $error_message );
         }
 
-        $last_api_response = $this->get_api()->get_last_response();
+        $last_api_response = $api->get_last_response();
         $subscriber_uid = $last_api_response->leid;
         $this->users->set_subscriber_uid( $user_id, $subscriber_uid );
 
@@ -62,28 +68,34 @@ class UserSubscriberAPIv2 implements UserSubscriber {
     }
 
     /**
-     * @param $user_id
-     * @param string $email_type
-     * @param bool $replace_interests
+     * @param int $user_id
+     * @param array $args
      *
      * @return bool Whether user was already subscribed to the MailChimp list.
      *
      * @throws \Exception
      */
-    public function update( $user_id, $email_type = 'html', $replace_interests = false ) {
+    public function update( $user_id, array $args = array() ) {
         $user = $this->users->user( $user_id );
+        $args = array_merge( 
+            array( 
+              'email_type' => 'html', 
+              'replace_interests' => false, 
+          ), $args );
+
         $merge_vars = $this->users->get_user_merge_fields( $user );
         $merge_vars['new-email'] = $user->user_email;
 
         $subscriber_uid = $this->users->get_subscriber_uid( $user->ID );
 
         // update subscriber in mailchimp
-        $success = $this->get_api()->update_subscriber( $this->list_id, array( 'leid' => $subscriber_uid ), $merge_vars, $email_type, $replace_interests );
+        $api = $this->get_api();
+        $success = $api->update_subscriber( $this->list_id, array( 'leid' => $subscriber_uid ), $merge_vars, $args['email_type'], $args['replace_interests'] );
 
         // Error?
         if( ! $success ) {
-            $error_code = $this->get_api()->get_error_code();
-            $error_message = $this->get_api()->get_error_message();
+            $error_code = $api->get_error_code();
+            $error_message = $api->get_error_message();
 
             // subscriber leid did not match anything in the list
             if( in_array( $error_code, array( 215, 232 ) ) ) {
@@ -92,7 +104,7 @@ class UserSubscriberAPIv2 implements UserSubscriber {
                 $this->users->delete_subscriber_uid( $user->ID );
 
                 // re-subscribe user
-                return $this->subscribe( $user->ID, false, $email_type, $replace_interests );
+                return $this->subscribe( $user->ID, $args );
             }
 
             // throw exception for other errors

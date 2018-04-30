@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-20 08:39:27+0000\n"
+"PO-Revision-Date: 2018-04-27 09:48:26+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2969,10 +2969,6 @@ msgstr ""
 "\n"
 "Grazie! -- Il team di WordPress"
 
-#: wp-admin/includes/class-wp-posts-list-table.php:978
-msgid "Y/m/d g:i:s a"
-msgstr "d/m/Y g:i:s"
-
 #. translators: Publish box date format, see https://secure.php.net/date
 #: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
@@ -2988,6 +2984,10 @@ msgstr "j M, Y @ H:i"
 #: wp-admin/includes/ajax-actions.php:3889
 msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr "Impossibilitato al collegamento al filesystem. Controlla le tue credenziali."
+
+#: wp-admin/includes/class-wp-posts-list-table.php:978
+msgid "Y/m/d g:i:s a"
+msgstr "d/m/Y G:i:s"
 
 #: wp-admin/comment.php:195
 msgid "Submitted on"
@@ -6208,10 +6208,6 @@ msgstr "Impostazioni salvate."
 msgid "Confirm Deletion"
 msgstr "Conferma eliminazione"
 
-#: wp-admin/menu.php:248 wp-admin/ms-delete-site.php:30
-msgid "Delete Site"
-msgstr "Elimina sito"
-
 #: wp-admin/edit-tag-form.php:264
 #: wp-admin/includes/class-wp-links-list-table.php:82
 #: wp-admin/includes/class-wp-links-list-table.php:318
@@ -6229,6 +6225,10 @@ msgstr "Elimina sito"
 #: wp-admin/themes.php:499 wp-admin/widgets.php:320
 msgid "Delete"
 msgstr "Elimina"
+
+#: wp-admin/menu.php:248 wp-admin/ms-delete-site.php:30
+msgid "Delete Site"
+msgstr "Elimina sito"
 
 #: wp-admin/edit-form-advanced.php:371
 msgid "Customizing This Display"

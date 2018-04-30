@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-22 17:46:46+0000\n"
+"PO-Revision-Date: 2018-04-30 16:11:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -944,7 +944,7 @@ msgstr "Aberto"
 #: includes/topics/template.php:2685
 msgctxt "Topic Status"
 msgid "Close"
-msgstr "Fechado"
+msgstr "Fechar"
 
 #: includes/topics/template.php:2295
 msgid "Tagged:"

@@ -55,20 +55,26 @@ class UserSubscriberAPIv3 implements UserSubscriber {
 
   /**
   * @param int $user_id
-  * @param bool $double_optin
-  * @param string $email_type
-  * @param bool $replace_interests
-  * @param bool $send_welcome (Unused)
+  * @param array $args 
   *
   * @return bool Whether user was already subscribed to the MailChimp list.
   *
   * @throws \Exception
   */
-  public function subscribe( $user_id, $double_optin = false, $email_type = 'html', $replace_interests = false, $send_welcome = null ) {
+  public function subscribe( $user_id, array $args = array() ) {
+     $args = array_merge( 
+        array( 
+          'double_optin' => false, 
+          'email_type' => 'html', 
+          'replace_interests' => false, 
+          'send_welcome' => false,
+          'resubscribe' => false,
+      ), $args );
+
     $user = $this->users->user( $user_id );
-    $subscriber = $this->transform( $user, $double_optin, $email_type );
+    $subscriber = $this->transform( $user, $args['double_optin'], $args['email_type'] );
     $exists = false;
-    $args = $subscriber->to_array();
+    $data = $subscriber->to_array();
    
     // get old email
     $mailchimp_email_address = $this->users->get_mailchimp_email_address( $user_id );
@@ -88,18 +94,18 @@ class UserSubscriberAPIv3 implements UserSubscriber {
             $existing_interests = (array) $existing_member_data->interests;
 
             // if replace, assume all existing interests disabled
-            if ($replace_interests) {
+            if ($args['replace_interests']) {
               $existing_interests = array_fill_keys(array_keys($existing_interests), false);
             }
 
-            $new_interests = $args['interests'];
-            $args['interests'] = $existing_interests;
+            $new_interests = $data['interests'];
+            $data['interests'] = $existing_interests;
             foreach( $new_interests as $interest_id => $interest_status ) {
-              $args['interests']["{$interest_id}"] = $interest_status;
+              $data['interests']["{$interest_id}"] = $interest_status;
             }
           }
 
-          $args['status'] = 'subscribed';
+          $data['status'] = 'subscribed';
           break;
 
         case 'transactional':
@@ -110,9 +116,11 @@ class UserSubscriberAPIv3 implements UserSubscriber {
           $exists = false;
           break;  
 
-        // do not re-subscribe people that unsubscribed
+        // do not re-subscribe people that unsubscribed (unless user control is on)
         case 'unsubscribed':
-          $args['status'] = 'unsubscribed';
+          if( ! $args['resubscribe'] ) {
+            $data['status'] = 'unsubscribed';
+          }
           break;
       }
     } catch( \MC4WP_API_Resource_Not_Found_Exception $e ) {
@@ -122,9 +130,9 @@ class UserSubscriberAPIv3 implements UserSubscriber {
 
     // add or update subscriber
     if( $exists ) {
-      $member = $this->get_api()->update_list_member( $this->list_id, $mailchimp_email_address, $args );
+      $member = $this->get_api()->update_list_member( $this->list_id, $mailchimp_email_address, $data );
     } else {
-      $member = $this->get_api()->add_list_member( $this->list_id, $args );
+      $member = $this->get_api()->add_list_member( $this->list_id, $data );
     }
     
     // Store remote email address & last updated timestamp
@@ -136,15 +144,14 @@ class UserSubscriberAPIv3 implements UserSubscriber {
 
   /**
   * @param $user_id
-  * @param string $email_type
-  * @param bool $replace_interests
+  * @param array $args
   *
   * @return bool Whether user was already subscribed to the MailChimp list.
   *
   * @throws \Exception
   */
-  public function update( $user_id, $email_type = 'html', $replace_interests = false ) {
-    return $this->subscribe( $user_id, false, $email_type, $replace_interests );
+  public function update( $user_id, array $args = array() ) {
+    return $this->subscribe( $user_id, $args );
   }
 
   /**

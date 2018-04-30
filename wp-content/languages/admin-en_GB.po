@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-22 09:15:22+0000\n"
+"PO-Revision-Date: 2018-04-30 07:40:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "1"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europe/London"
+
+#: wp-admin/includes/plugin-install.php:595
+msgid "Requires PHP Version:"
+msgstr "Requires PHP Version:"
 
 #: wp-admin/customize.php:80
 msgid "This changeset cannot be further modified."
@@ -81,7 +85,7 @@ msgstr "There&#8217;s no need to change your CSS here &mdash; you can edit and l
 msgid "Did you know?"
 msgstr "Did you know?"
 
-#: wp-admin/credits.php:122
+#: wp-admin/credits.php:121
 msgid "Noteworthy Contributors"
 msgstr "Noteworthy Contributors"
 
@@ -498,7 +502,7 @@ msgstr "Plugin Installation"
 msgid "Custom installation script."
 msgstr "Custom installation script."
 
-#: wp-admin/includes/plugin-install.php:594
+#: wp-admin/includes/plugin-install.php:602
 msgid "Active Installations:"
 msgstr "Active Installations:"
 
@@ -754,13 +758,13 @@ msgid "Sorry, you are not allowed to attach files to this post."
 msgstr "Sorry, you are not allowed to attach files to this post."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:604
-#: wp-admin/includes/plugin-install.php:598
+#: wp-admin/includes/plugin-install.php:606
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr "Less Than 10"
 
 #: wp-admin/freedoms.php:47 wp-admin/includes/plugin-install.php:239
-#: wp-admin/includes/plugin-install.php:604 wp-admin/plugin-install.php:82
+#: wp-admin/includes/plugin-install.php:612 wp-admin/plugin-install.php:82
 #: wp-admin/plugins.php:418
 msgid "https://wordpress.org/plugins/"
 msgstr "https://wordpress.org/plugins/"
@@ -1216,11 +1220,11 @@ msgstr "Close the Customiser and go back to the previous page"
 msgid "Sorry, you are not allowed to import content."
 msgstr "Sorry, you are not allowed to import content."
 
-#: wp-admin/credits.php:127
+#: wp-admin/credits.php:126
 msgid "Release Deputy"
 msgstr "Release Deputy"
 
-#: wp-admin/credits.php:126
+#: wp-admin/credits.php:125
 msgid "Release Design Lead"
 msgstr "Release Design Lead"
 
@@ -1430,11 +1434,11 @@ msgstr "Attach to existing content"
 msgid "Click the image to edit or update"
 msgstr "Click the image to edit or update"
 
-#: wp-admin/includes/plugin-install.php:619
+#: wp-admin/includes/plugin-install.php:627
 msgid "Read all reviews on WordPress.org or write your own!"
 msgstr "Read all reviews on WordPress.org or write your own!"
 
-#: wp-admin/includes/plugin-install.php:618
+#: wp-admin/includes/plugin-install.php:626
 msgid "Reviews"
 msgstr "Reviews"
 
@@ -1448,7 +1452,7 @@ msgstr "You are using a development version of WordPress. These feature plugins 
 
 #. translators: 1: number of stars (used to determine singular/plural), 2:
 #. number of reviews
-#: wp-admin/includes/plugin-install.php:625
+#: wp-admin/includes/plugin-install.php:633
 msgid "Reviews with %1$d star: %2$s. Opens in a new window."
 msgid_plural "Reviews with %1$d stars: %2$s. Opens in a new window."
 msgstr[0] "Reviews with %1$d star: %2$s. Opens in a new window."
@@ -2749,7 +2753,7 @@ msgid "Plugins updated successfully."
 msgstr "Plugins updated successfully."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:602
-#: wp-admin/includes/plugin-install.php:596
+#: wp-admin/includes/plugin-install.php:604
 msgctxt "Active plugin installations"
 msgid "1+ Million"
 msgstr "1+ Million"
@@ -3158,7 +3162,7 @@ msgstr "Name"
 msgid "If you like, you may enter custom structures for your category and tag URLs here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorized/</code>. If you leave these blank the defaults will be used."
 msgstr "If you like, you may enter custom structures for your category and tag URLs here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorised/</code>. If you leave these blank the defaults will be used."
 
-#: wp-admin/credits.php:125
+#: wp-admin/credits.php:124
 msgid "Release Lead"
 msgstr "Release Lead"
 
@@ -3222,7 +3226,7 @@ msgstr "<strong>Incompatible</strong> with your version of WordPress"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Compatible</strong> with your version of WordPress"
 
-#: wp-admin/includes/plugin-install.php:632
+#: wp-admin/includes/plugin-install.php:640
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] "%d star"
@@ -3325,12 +3329,12 @@ msgctxt "Plugin installer section title"
 msgid "Reviews"
 msgstr "Reviews"
 
-#: wp-admin/includes/plugin-install.php:608
-#: wp-admin/includes/plugin-install.php:662
+#: wp-admin/includes/plugin-install.php:616
+#: wp-admin/includes/plugin-install.php:670
 msgid "Donate to this plugin &#187;"
 msgstr "Donate to this plugin &#187;"
 
-#: wp-admin/includes/plugin-install.php:642
+#: wp-admin/includes/plugin-install.php:650
 msgid "Contributors"
 msgstr "Contributors"
 
@@ -3456,7 +3460,7 @@ msgstr "Type"
 msgid "Thank you for creating with <a href=\"%s\">WordPress</a>."
 msgstr "Thank you for creating with <a href=\"%s\">WordPress</a>."
 
-#: wp-admin/credits.php:44 wp-admin/credits.php:107
+#: wp-admin/credits.php:44 wp-admin/credits.php:58
 msgid "https://make.wordpress.org/"
 msgstr "https://make.wordpress.org/"
 
@@ -5454,7 +5458,7 @@ msgstr "Screenshots"
 msgid "You should update your web.config now."
 msgstr "You should update your web.config now."
 
-#: wp-admin/includes/plugin-install.php:606
+#: wp-admin/includes/plugin-install.php:614
 msgid "Plugin Homepage &#187;"
 msgstr "Plugin Homepage &#187;"
 
@@ -5913,7 +5917,7 @@ msgstr ""
 "Please click the following link to confirm the invite:\n"
 "%4$s"
 
-#: wp-admin/credits.php:128
+#: wp-admin/credits.php:127
 msgid "Core Developer"
 msgstr "Core Developer"
 
@@ -6369,7 +6373,7 @@ msgstr "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
 msgstr "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
 
-#: wp-admin/credits.php:129
+#: wp-admin/credits.php:128
 msgid "External Libraries"
 msgstr "External Libraries"
 
@@ -6381,7 +6385,7 @@ msgstr "Available Tools"
 msgid "Network Setup"
 msgstr "Network Setup"
 
-#: wp-admin/credits.php:59
+#: wp-admin/credits.php:65
 msgctxt "Translate this to be the equivalent of English Translators in your language for the credits page Translators section"
 msgid "Translators"
 msgstr "Translators"
@@ -6398,12 +6402,12 @@ msgstr "Every plugin and theme in WordPress.org&#8217;s directory is 100%% GPL o
 msgid "WordPress is Free and open source software, built by a distributed community of mostly volunteer developers from around the world. WordPress comes with some awesome, worldview-changing rights courtesy of its <a href=\"%s\">license</a>, the GPL."
 msgstr "WordPress is Free and open source software, built by a distributed community of mostly volunteer developers from around the world. WordPress comes with some awesome, worldview-changing rights courtesy of its <a href=\"%s\">license</a>, the GPL."
 
-#: wp-admin/credits.php:124
+#: wp-admin/credits.php:123
 msgid "Lead Developer"
 msgstr "Lead Developer"
 
 #. translators: %s: https://make.wordpress.org/
-#: wp-admin/credits.php:106
+#: wp-admin/credits.php:57
 msgid "Want to see your name in lights on this page? <a href=\"%s\">Get involved in WordPress</a>."
 msgstr "Want to see your name in lights on this page? <a href=\"%s\">Get involved in WordPress</a>."
 
@@ -6417,11 +6421,11 @@ msgctxt "removing-widget"
 msgid "Deactivate"
 msgstr "Deactivate"
 
-#: wp-admin/credits.php:123
+#: wp-admin/credits.php:122
 msgid "Cofounder, Project Lead"
 msgstr "Cofounder, Project Lead"
 
-#: wp-admin/credits.php:121
+#: wp-admin/credits.php:120
 msgid "Core Contributors to WordPress %s"
 msgstr "Core Contributors to WordPress %s"
 
@@ -6434,7 +6438,7 @@ msgstr "All Comments"
 msgid "WordPress is created by a <a href=\"%1$s\">worldwide team</a> of passionate individuals. <a href=\"%2$s\">Get involved in WordPress</a>."
 msgstr "WordPress is created by a <a href=\"%1$s\">worldwide team</a> of passionate individuals. <a href=\"%2$s\">Get involved in WordPress</a>."
 
-#: wp-admin/credits.php:120
+#: wp-admin/credits.php:119
 msgid "Project Leaders"
 msgstr "Project Leaders"
 
@@ -10476,22 +10480,22 @@ msgstr "If you have a plugin in a .zip format, you may install it by uploading i
 msgid "Plugin zip file"
 msgstr "Plugin zip file"
 
-#: wp-admin/includes/plugin-install.php:614
+#: wp-admin/includes/plugin-install.php:622
 msgid "(based on %s rating)"
 msgid_plural "(based on %s ratings)"
 msgstr[0] "(based on %s rating)"
 msgstr[1] "(based on %s ratings)"
 
-#: wp-admin/includes/plugin-install.php:702
+#: wp-admin/includes/plugin-install.php:710
 msgid "Install Update Now"
 msgstr "Install Update Now"
 
 #. translators: %s: Plugin version
-#: wp-admin/includes/plugin-install.php:707
+#: wp-admin/includes/plugin-install.php:715
 msgid "Newer Version (%s) Installed"
 msgstr "Newer Version (%s) Installed"
 
-#: wp-admin/includes/plugin-install.php:710
+#: wp-admin/includes/plugin-install.php:718
 msgid "Latest Version Installed"
 msgstr "Latest Version Installed"
 
@@ -10504,8 +10508,9 @@ msgstr "Last Updated:"
 msgid "Requires WordPress Version:"
 msgstr "Requires WordPress Version:"
 
-#. translators: %s: WordPress version
+#. translators: %s: version number
 #: wp-admin/includes/plugin-install.php:588
+#: wp-admin/includes/plugin-install.php:598
 msgid "%s or higher"
 msgstr "%s or higher"
 
@@ -10513,19 +10518,19 @@ msgstr "%s or higher"
 msgid "Compatible up to:"
 msgstr "Compatible up to:"
 
-#: wp-admin/includes/plugin-install.php:604
+#: wp-admin/includes/plugin-install.php:612
 msgid "WordPress.org Plugin Page &#187;"
 msgstr "WordPress.org Plugin Page &#187;"
 
-#: wp-admin/includes/plugin-install.php:612
+#: wp-admin/includes/plugin-install.php:620
 msgid "Average Rating"
 msgstr "Average Rating"
 
-#: wp-admin/includes/plugin-install.php:671
+#: wp-admin/includes/plugin-install.php:679
 msgid "<strong>Warning:</strong> This plugin has <strong>not been tested</strong> with your current version of WordPress."
 msgstr "<strong>Warning:</strong> This plugin has <strong>not been tested</strong> with your current version of WordPress."
 
-#: wp-admin/includes/plugin-install.php:673
+#: wp-admin/includes/plugin-install.php:681
 msgid "<strong>Warning:</strong> This plugin has <strong>not been marked as compatible</strong> with your version of WordPress."
 msgstr "<strong>Warning:</strong> This plugin has <strong>not been marked as compatible</strong> with your version of WordPress."
 

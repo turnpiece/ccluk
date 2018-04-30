@@ -1715,7 +1715,7 @@ class WPMUDEV_Dashboard_Api {
 			$error = 'no token';
 		} else if ( empty( $_REQUEST['wdpunkey'] ) ) {
 			$error = 'invalid';
-		} else if ( $_REQUEST['wdpunkey'] == $access['key'] ) {
+		} else if ( ! hash_equals( $_REQUEST['wdpunkey'], $access['key'] ) ) { // timing attack safe key comparison.
 			$error = 'invalid';
 		} else if ( (int) $access['expire'] <= current_time( 'timestamp' ) ) {
 			$error = 'expired';

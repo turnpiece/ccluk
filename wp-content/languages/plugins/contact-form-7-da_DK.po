@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-12-07 19:32:02+0000\n"
+"PO-Revision-Date: 2018-04-05 14:50:17+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,75 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: da_DK\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: modules/acceptance.php:243
+msgid "Condition"
+msgstr "Betingelse"
+
+#. translators: 1: 'Consented' or 'Not consented', 2: conditions
+#: modules/acceptance.php:202
+msgctxt "mail output for acceptance checkboxes"
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: modules/acceptance.php:186
+msgid "Not consented"
+msgstr "Ikke samtykket"
+
+#: modules/acceptance.php:184
+msgid "Consented"
+msgstr "Samtykket"
+
+#: includes/submission.php:196
+msgid "Sending mail has been aborted."
+msgstr "Afsendelse af mail blev afbrudt."
+
+#: admin/includes/editor.php:211
+msgid "You can edit messages used in various situations here. For details, see %s."
+msgstr "Du kan rette i beskeder der bliver brugt i forskellige situationer her. For flere detaljer, se %s."
+
+#: admin/includes/editor.php:210
+msgid "Editing Messages"
+msgstr "Ret Beskeder"
+
+#: admin/includes/editor.php:209
+msgid "https://contactform7.com/editing-messages/"
+msgstr "https://contactform7.com/editing-messages/"
+
+#: admin/includes/editor.php:130
+msgid "You can edit the mail template here. For details, see %s."
+msgstr "Du kan rette mail skabelonen her. For flere detaljer, se %s."
+
+#: admin/includes/editor.php:57
+msgid "You can edit the form template here. For details, see %s."
+msgstr "Du kan rediger e-mail skabelonen her. For flere detaljer, se %s."
+
+#: admin/includes/editor.php:56
+msgid "Editing Form Template"
+msgstr "Rediger formular skabelon"
+
+#: admin/includes/editor.php:55
+msgid "https://contactform7.com/editing-form-template/"
+msgstr "https://contactform7.com/editing-form-template/"
+
+#. translators: screen reader text
+#: admin/edit-contact-form.php:192
+msgid "(left and right arrow)"
+msgstr "(venstre og højre piletast)"
+
+#. translators: 1: ◀ ▶ dashicon, 2: screen reader text for the dashicon
+#: admin/edit-contact-form.php:187
+msgid "%1$s %2$s keys switch panels"
+msgstr "%1$s %2$s piletasterne skifter faner"
+
+#. translators: screen reader text
+#: admin/admin.php:326
+msgid "(configuration error)"
+msgstr "(konfigurationsfejl)"
+
+#: admin/admin.php:319
+msgid "How to resolve?"
+msgstr "Hvordan løses det?"
 
 #: admin/includes/welcome-panel.php:37
 msgid "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
@@ -28,15 +97,16 @@ msgstr "Hvis du holder af, at anvende Contact Form 7 og finder det brugbart, kan
 msgid "It is hard to continue development and support for this plugin without contributions from users like you."
 msgstr "Det er svært at fortsætte med udvikling og support af dette plugin uden deltagelse fra brugere som dig selv."
 
-#: includes/contact-form.php:294 includes/contact-form.php:673
+#: includes/contact-form.php:294 includes/contact-form.php:707
 msgid "This contact form is available only for logged in users."
 msgstr "Denne kontaktformular er kun tilgængelig for brugere, der er logget ind."
 
-#: includes/config-validator.php:144
+#: includes/config-validator.php:145
 msgid "Deprecated settings are used."
 msgstr "Forældede indstillinger bruges."
 
-#: modules/really-simple-captcha.php:30
+#. translators: %s: link labeled 'Really Simple CAPTCHA'
+#: modules/really-simple-captcha.php:36
 msgid "To use CAPTCHA, you need %s plugin installed."
 msgstr "For at bruge CAPTCHA skal du installere %s plugin."
 
@@ -51,7 +121,7 @@ msgstr "Du har ikke adgang til den ønskede kontaktformular."
 
 #: includes/rest-api.php:171 includes/rest-api.php:198
 #: includes/rest-api.php:247 includes/rest-api.php:276
-#: includes/rest-api.php:324
+#: includes/rest-api.php:316
 msgid "The requested contact form was not found."
 msgstr "Den ønskede kontakt formular blev ikke fundet."
 
@@ -67,35 +137,36 @@ msgstr "Kan ikke oprette eksisterende kontaktformular."
 msgid "You are not allowed to access contact forms."
 msgstr "Du har ikke adgang til kontaktformularer."
 
-#: includes/config-validator.php:541
+#: includes/config-validator.php:552
 msgid "Attachment file does not exist at %path%."
 msgstr "Vedhæftningsfilen findes ikke ved %path%."
 
-#: includes/config-validator.php:472
+#: includes/config-validator.php:481
 msgid "Invalid mailbox syntax is used in the %name% field."
 msgstr "Ugyldig postkasse syntaks anvendes i %navn% felt."
 
-#: includes/config-validator.php:383
+#. translators: %names%: a list of form control names
+#: includes/config-validator.php:392
 msgid "Unavailable names (%names%) are used for form controls."
 msgstr "Ikke tilgængelig navne (%navne%) er brugt til formular kontrol."
 
-#: includes/config-validator.php:142
+#: includes/config-validator.php:143
 msgid "There are invalid mail header fields."
 msgstr "Der er ugyldige mail header felter."
 
-#: includes/config-validator.php:138
+#: includes/config-validator.php:139
 msgid "HTML tags are used in a message."
 msgstr "HTML-tags bruges i en besked."
 
-#: includes/config-validator.php:136
+#: includes/config-validator.php:137
 msgid "Sender email address does not belong to the site domain."
 msgstr "Afsenderens e-mail-adresse tilhører ikke webstedets domæne."
 
-#: includes/config-validator.php:134
+#: includes/config-validator.php:135
 msgid "Invalid mailbox syntax is used."
 msgstr "Ugyldig email syntaks anvendes."
 
-#: includes/config-validator.php:132
+#: includes/config-validator.php:133
 msgid "There is a possible empty field."
 msgstr "Der er et muligt tomt felt."
 
@@ -106,27 +177,27 @@ msgid_plural "%s configuration errors detected"
 msgstr[0] "%s konfigurationfejl er fundet"
 msgstr[1] "%s konfigurationfejl er fundet"
 
-#: admin/admin.php:321
+#: admin/admin.php:323
 msgid "%d configuration errors detected in this tab panel"
 msgstr "%d konfigurationfejl er fundet i denne fane"
 
-#: admin/admin.php:320
+#: admin/admin.php:322
 msgid "1 configuration error detected in this tab panel"
 msgstr "1 konfigurationfejl er fundet i denne fane"
 
-#: admin/admin.php:319
+#: admin/admin.php:321
 msgid "%d configuration errors detected"
 msgstr "%d konfigurationfejl er fundet"
 
-#: admin/admin.php:318
+#: admin/admin.php:320
 msgid "1 configuration error detected"
 msgstr "1 konfigurationfejl er fundet"
 
-#: admin/admin.php:505 includes/rest-api.php:138 includes/rest-api.php:214
+#: admin/admin.php:509 includes/rest-api.php:138 includes/rest-api.php:214
 msgid "There was an error saving the contact form."
 msgstr "En fejl opstod da kontaktformen blev gemt."
 
-#: includes/functions.php:355
+#: includes/functions.php:365
 msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
 msgstr "%1$s er <strong>forældet</strong> siden Contact Form 7 version %2$s! Brug %3$s i stedet for."
 
@@ -169,19 +240,15 @@ msgstr "Spammere rammer alt; dine formularer er ingen undtagelse. Før du bliver
 msgid "Getting spammed? You have protection."
 msgstr "Modtager du spam? Du har et forsvar."
 
-#: includes/config-validator.php:140
+#: includes/config-validator.php:141
 msgid "Multiple form controls are in a single label element."
 msgstr "Der er flere formular elementer i et enkelt etiket element."
 
-#: admin/admin.php:317
-msgid "How to correct this?"
-msgstr "Hvordan retter jeg det til?"
-
-#: admin/admin.php:424
+#: admin/admin.php:428
 msgid "FAQ about Configuration Validator"
 msgstr "FAQ om Configuration Validator"
 
-#: admin/admin.php:424
+#: admin/admin.php:428
 msgid "https://contactform7.com/configuration-validator-faq/"
 msgstr "https://contactform7.com/configuration-validator-faq/"
 
@@ -197,7 +264,7 @@ msgstr "URL'en er ikke gyldig."
 msgid "The e-mail address entered is invalid."
 msgstr "E-mail adressen er ikke gyldig."
 
-#: modules/quiz.php:162
+#: modules/quiz.php:163
 msgid "The answer to the quiz is incorrect."
 msgstr "Svaret til kontrolspørgsmålet er ukorrekt."
 
@@ -213,19 +280,19 @@ msgstr "Tallet er mindre end minimum grænsen."
 msgid "The number format is invalid."
 msgstr "Tal formatet er ikke gyldig."
 
-#: modules/file.php:210
+#: modules/file.php:195
 msgid "There was an error uploading the file."
 msgstr "Der skete en fejl under upload af filen."
 
-#: modules/file.php:205
+#: modules/file.php:190
 msgid "The file is too big."
 msgstr "Filen er for stor."
 
-#: modules/file.php:200
+#: modules/file.php:185
 msgid "You are not allowed to upload files of this type."
 msgstr "Du har ikke rettigheder til at upload filer af denne type."
 
-#: modules/file.php:195
+#: modules/file.php:180
 msgid "There was an unknown error uploading the file."
 msgstr "Der skete en ukendt fejl under upload af fil."
 
@@ -276,11 +343,11 @@ msgctxt "mail subject"
 msgid "%1$s \"%2$s\""
 msgstr "%1$s \"%2$s\""
 
-#: admin/admin.php:619
+#: admin/admin.php:628
 msgid "Misconfiguration leads to mail delivery failure or other troubles. Validate your contact forms now."
 msgstr "Ukorrekt konfiguration giver problemer med e-mail afsendelser og andet. Valider dine kontaktformularer nu."
 
-#: admin/admin.php:617
+#: admin/admin.php:626
 msgid "Validate Contact Form 7 Configuration"
 msgstr "Valider Contact Form 7 konfiguration"
 
@@ -288,23 +355,23 @@ msgstr "Valider Contact Form 7 konfiguration"
 msgid "https://contactform7.com/configuration-errors/"
 msgstr "https://contactform7.com/configuration-errors/"
 
-#: admin/admin.php:528
+#: admin/admin.php:532
 msgid "Configuration validation completed. No invalid contact form was found."
 msgstr "Konfigurationsvalidering udført. Ingen ugyldige kontaktformularer blev fundet."
 
 #. translators: %s: number of contact forms
-#: admin/admin.php:520
-msgid "Configuration validation completed. An invalid contact form was found."
+#: admin/admin.php:524
+msgid "Configuration validation completed. %s invalid contact form was found."
 msgid_plural "Configuration validation completed. %s invalid contact forms were found."
-msgstr[0] "Konfigurationsvalidering udført. En ugyldig kontaktformular blev fundet. "
+msgstr[0] "Konfigurationsvalidering udført. %s ugyldig kontaktformular blev fundet. "
 msgstr[1] "Konfigurationsvalidering udført. %s ugyldige kontaktformularer blev fundet. "
 
-#: admin/admin.php:416
+#: admin/admin.php:420
 msgid "Validate Configuration"
 msgstr "Valider konfiguration"
 
 #. translators: %s: number of contact forms
-#: admin/admin.php:407
+#: admin/admin.php:411
 msgid "Validate %s Contact Form Now"
 msgid_plural "Validate %s Contact Forms Now"
 msgstr[0] "Valider %s Kontaktformular nu"
@@ -401,7 +468,7 @@ msgstr "FEJL"
 msgid "reCAPTCHA"
 msgstr "reCAPTCHA"
 
-#: modules/really-simple-captcha.php:236
+#: modules/really-simple-captcha.php:243
 msgid "CAPTCHA (Really Simple CAPTCHA)"
 msgstr "CAPTCHA (Really Simple CAPTCHA)"
 
@@ -422,7 +489,7 @@ msgid "https://contactform7.com/"
 msgstr "https://contactform7.com/"
 
 #. translators: title of your first contact form. %d: number fixed to '1'
-#: settings.php:142
+#: settings.php:143
 msgid "Contact form %d"
 msgstr "Kontaktformular %d"
 
@@ -539,31 +606,31 @@ msgstr "Generer et form-tag til en drop-ned menu. For detaljer %s."
 msgid "drop-down menu"
 msgstr "Drop-ned menu"
 
-#: modules/quiz.php:206
+#: modules/quiz.php:207
 msgid "One pipe-separated question-answer pair (e.g. The capital of Brazil?|Rio) per line."
 msgstr "Lodretstreg adskilt spørgsmål/svar pr. linje (f.eks. Hovedstaden i Danmark?|København)."
 
-#: modules/quiz.php:201 modules/quiz.php:204
+#: modules/quiz.php:202 modules/quiz.php:205
 msgid "Questions and answers"
 msgstr "Spørgsmål og svar"
 
-#: modules/quiz.php:186
+#: modules/quiz.php:187
 msgid "Quiz"
 msgstr "Kontrolspørgsmål"
 
-#: modules/quiz.php:186
+#: modules/quiz.php:187
 msgid "https://contactform7.com/quiz/"
 msgstr "https://contactform7.com/quiz/"
 
-#: modules/quiz.php:184
+#: modules/quiz.php:185
 msgid "Generate a form-tag for a question-answer pair. For more details, see %s."
 msgstr "Generer et form-tag til spørgsmål/svar. For detaljer %s."
 
-#: modules/quiz.php:176
+#: modules/quiz.php:177
 msgid "quiz"
 msgstr "Kontrolspørgsmål"
 
-#: modules/quiz.php:160
+#: modules/quiz.php:161
 msgid "Sender doesn't enter the correct answer to the quiz"
 msgstr "Afsender indtastede ikke det rigtige svar på kontrolspørgsmålet"
 
@@ -603,51 +670,51 @@ msgstr "Tallet er mindre en tilladte"
 msgid "Number format that the sender entered is invalid"
 msgstr "Tal format som brugeren indtastede er ugyldig"
 
-#: modules/file.php:316
+#: modules/file.php:301
 msgid "This contact form contains file uploading fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
 msgstr "Denne kontaktformular indeholder felter for filuploadning, men den midlertidige mappe til filerne (%s) eksisterer ikke eller er ikke skrivbar. Du kan oprette mappen eller ændre <span title=\"permissions\">adgangstilladelserne</span> selv."
 
-#: modules/file.php:290
+#: modules/file.php:275
 msgid "To attach the file uploaded through this field to mail, you need to insert the corresponding mail-tag (%s) into the File Attachments field on the Mail tab."
 msgstr "For at vedhæfte filer igennem dette felt, skal du indsætte tilsvarende mail-tag (%s) i Vedhæftninger feltet under E-mail fanen."
 
-#: modules/file.php:262
+#: modules/file.php:247
 msgid "Acceptable file types"
 msgstr "Tilladte filtyper"
 
-#: modules/file.php:257
+#: modules/file.php:242
 msgid "File size limit (bytes)"
 msgstr "Fil størrelse grænse (bytes)"
 
-#: modules/file.php:232
+#: modules/file.php:217
 msgid "File Uploading and Attachment"
 msgstr "Fil upload og Vedhæftning"
 
-#: modules/file.php:232
+#: modules/file.php:217
 msgid "https://contactform7.com/file-uploading-and-attachment/"
 msgstr "https://contactform7.com/file-uploading-and-attachment/"
 
-#: modules/file.php:230
+#: modules/file.php:215
 msgid "Generate a form-tag for a file uploading field. For more details, see %s."
 msgstr "Generer et form-tag til et vedhæftningsfelt. For detaljer %s."
 
-#: modules/file.php:222
+#: modules/file.php:207
 msgid "file"
 msgstr "Vedhæft"
 
-#: modules/file.php:209
+#: modules/file.php:194
 msgid "Uploading a file fails for PHP error"
 msgstr "Uploadning af en fil mislykkedes på grund af en PHP-fejl"
 
-#: modules/file.php:204
+#: modules/file.php:189
 msgid "Uploaded file is too large"
 msgstr "Uploadet fil er for stor"
 
-#: modules/file.php:199
+#: modules/file.php:184
 msgid "Uploaded file is not allowed for file type"
 msgstr "Uploadet fils filtype er ikke tilladt"
 
-#: modules/file.php:194
+#: modules/file.php:179
 msgid "Uploading a file fails for any reason"
 msgstr "Uploadning af en fil mislykkedes af en eller anden grund"
 
@@ -723,14 +790,14 @@ msgstr "Sæt en label først, afkrydsningsfelt sidst"
 msgid "One option per line."
 msgstr "Én indstilling pr. linje"
 
-#: modules/checkbox.php:311 modules/date.php:164 modules/file.php:246
+#: modules/checkbox.php:311 modules/date.php:164 modules/file.php:231
 #: modules/number.php:172 modules/select.php:201 modules/text.php:247
 #: modules/textarea.php:150
 msgid "Required field"
 msgstr "Påkrævet felt"
 
 #: modules/checkbox.php:307 modules/checkbox.php:310 modules/date.php:160
-#: modules/date.php:163 modules/file.php:242 modules/file.php:245
+#: modules/date.php:163 modules/file.php:227 modules/file.php:230
 #: modules/number.php:163 modules/number.php:166 modules/select.php:197
 #: modules/select.php:200 modules/text.php:243 modules/text.php:246
 #: modules/textarea.php:146 modules/textarea.php:149
@@ -761,104 +828,105 @@ msgstr "Radio knapper"
 msgid "checkboxes"
 msgstr "Afkrydsningsfelter"
 
-#: modules/really-simple-captcha.php:346
+#: modules/really-simple-captcha.php:360
 msgid "This contact form contains CAPTCHA fields, but the necessary libraries (GD and FreeType) are not available on your server."
 msgstr "Denne kontaktformular indeholder CAPTCHA-felter, men de nødvendige biblioteker (GD og FreeType) er ikke tilgængelige på din server."
 
-#: modules/really-simple-captcha.php:340
+#: modules/really-simple-captcha.php:353
 msgid "This contact form contains CAPTCHA fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
 msgstr "Denne kontaktformular indeholder CAPTCHA-felter, men den midlertidige mappe til filerne (%s) eksisterer ikke eller er ikke skrivbar. Du kan oprette mappen eller ændre <span title=\"permissions\">adgangstilladelserne</span> selv."
 
-#: modules/really-simple-captcha.php:289
+#: modules/really-simple-captcha.php:302
 msgid "Input field settings"
 msgstr "Indstillinger for inputfeltet"
 
-#: modules/really-simple-captcha.php:274
+#: modules/really-simple-captcha.php:287
 msgid "Image settings"
 msgstr "Billedindstillinger"
 
-#: modules/really-simple-captcha.php:257
+#: modules/really-simple-captcha.php:270
 msgid "https://contactform7.com/captcha/"
 msgstr "https://contactform7.com/captcha/"
 
-#: modules/really-simple-captcha.php:255
+#: modules/really-simple-captcha.php:268
 msgid "Generate form-tags for a CAPTCHA image and corresponding response input field. For more details, see %s."
 msgstr "Generer et form-tag til CAPTCHA. For detaljer %s."
 
-#: modules/really-simple-captcha.php:247
+#. translators: %s: link labeled 'Really Simple CAPTCHA'
+#: modules/really-simple-captcha.php:257
 msgid "To use CAPTCHA, you first need to install and activate %s plugin."
 msgstr "For at bruge CAPTCHA, skal du først installere og aktivere %s plugin."
 
-#: modules/really-simple-captcha.php:257 modules/recaptcha.php:223
+#: modules/really-simple-captcha.php:270 modules/recaptcha.php:223
 msgid "CAPTCHA"
 msgstr "CAPTCHA-kontrol"
 
-#: modules/really-simple-captcha.php:217
+#: modules/really-simple-captcha.php:224
 msgid "Your entered code is incorrect."
 msgstr "Dit indtastede svar er forkert."
 
-#: modules/really-simple-captcha.php:215
+#: modules/really-simple-captcha.php:222
 msgid "The code that sender entered does not match the CAPTCHA"
 msgstr "Svaret, som afsender indtastede, matcher ikke CAPTCHA-kontrollen"
 
-#: modules/acceptance.php:195 modules/checkbox.php:357 modules/date.php:216
-#: modules/file.php:285 modules/number.php:224 modules/quiz.php:230
-#: modules/really-simple-captcha.php:309 modules/recaptcha.php:503
+#: modules/acceptance.php:277 modules/checkbox.php:357 modules/date.php:216
+#: modules/file.php:270 modules/number.php:224 modules/quiz.php:231
+#: modules/really-simple-captcha.php:322 modules/recaptcha.php:503
 #: modules/select.php:243 modules/submit.php:88 modules/text.php:311
 #: modules/textarea.php:185
 msgid "Insert Tag"
 msgstr "Indsæt tag"
 
-#: modules/acceptance.php:182 modules/checkbox.php:344 modules/date.php:204
-#: modules/file.php:272 modules/number.php:212 modules/quiz.php:217
-#: modules/really-simple-captcha.php:282 modules/really-simple-captcha.php:297
+#: modules/acceptance.php:264 modules/checkbox.php:344 modules/date.php:204
+#: modules/file.php:257 modules/number.php:212 modules/quiz.php:218
+#: modules/really-simple-captcha.php:295 modules/really-simple-captcha.php:310
 #: modules/recaptcha.php:490 modules/select.php:230 modules/submit.php:75
 #: modules/text.php:298 modules/textarea.php:172
 msgid "Class attribute"
 msgstr "Klasse (CSS)"
 
-#: modules/acceptance.php:177 modules/checkbox.php:339 modules/date.php:199
-#: modules/file.php:267 modules/number.php:207 modules/quiz.php:212
-#: modules/really-simple-captcha.php:277 modules/really-simple-captcha.php:292
+#: modules/acceptance.php:259 modules/checkbox.php:339 modules/date.php:199
+#: modules/file.php:252 modules/number.php:207 modules/quiz.php:213
+#: modules/really-simple-captcha.php:290 modules/really-simple-captcha.php:305
 #: modules/recaptcha.php:485 modules/select.php:225 modules/submit.php:70
 #: modules/text.php:293 modules/textarea.php:167
 msgid "Id attribute"
 msgstr "Id (CSS)"
 
-#: modules/acceptance.php:171
+#: modules/acceptance.php:253
 msgid "Make this work inversely"
 msgstr "Skal det virke omvendt"
 
-#: modules/acceptance.php:170
+#: modules/acceptance.php:252
 msgid "Make this checkbox checked by default"
 msgstr "Afkrydsningsfeltet skal være afkrydset som standard"
 
-#: modules/acceptance.php:166 modules/acceptance.php:169
+#: modules/acceptance.php:248 modules/acceptance.php:251
 #: modules/checkbox.php:323 modules/checkbox.php:326 modules/select.php:212
 #: modules/select.php:215
 msgid "Options"
 msgstr "Indstillinger"
 
-#: modules/acceptance.php:161 modules/checkbox.php:318 modules/date.php:170
-#: modules/file.php:252 modules/number.php:178 modules/quiz.php:196
-#: modules/really-simple-captcha.php:267 modules/select.php:207
+#: modules/acceptance.php:238 modules/checkbox.php:318 modules/date.php:170
+#: modules/file.php:237 modules/number.php:178 modules/quiz.php:197
+#: modules/really-simple-captcha.php:280 modules/select.php:207
 #: modules/text.php:253 modules/textarea.php:156
 msgid "Name"
 msgstr "Navn"
 
-#: modules/acceptance.php:151
+#: modules/acceptance.php:228
 msgid "Acceptance Checkbox"
 msgstr "Betingelser afkrydsningsfelt"
 
-#: modules/acceptance.php:151
+#: modules/acceptance.php:228
 msgid "https://contactform7.com/acceptance-checkbox/"
 msgstr "https://contactform7.com/acceptance-checkbox/"
 
-#: modules/acceptance.php:149
+#: modules/acceptance.php:226
 msgid "Generate a form-tag for an acceptance checkbox. For more details, see %s."
 msgstr "Generer et form-tag til betingelser afkrydsningsfelt. For detaljer %s."
 
-#: modules/acceptance.php:141
+#: modules/acceptance.php:218
 msgid "acceptance"
 msgstr "Betingelser"
 
@@ -1043,63 +1111,59 @@ msgstr "Tilgængelige handlinger"
 msgid "Overview"
 msgstr "Oversigt"
 
-#: admin/includes/editor.php:218
+#: admin/includes/editor.php:248
 msgid "You can add customization code snippets here. For details, see %s."
 msgstr "Du kan tilføje brugerdefineret kode her. For detaljer, se %s."
 
-#: admin/includes/editor.php:216
+#: admin/includes/editor.php:246
 msgid "https://contactform7.com/additional-settings/"
 msgstr "https://contactform7.com/additional-settings/"
 
 #: admin/includes/editor.php:194
-msgid "Edit messages used in the following situations."
-msgstr "Rediger beskeder brugt i følgende situationer."
-
-#: admin/includes/editor.php:170
 msgid "File Attachments"
 msgstr "Vedhæftninger"
 
-#: admin/includes/editor.php:164
+#: admin/includes/editor.php:188
 msgid "Use HTML content type"
 msgstr "Brug HTML til indholdet"
 
-#: admin/includes/editor.php:162
+#: admin/includes/editor.php:186
 msgid "Exclude lines with blank mail-tags from output"
 msgstr "Ekskludere linjer med blanke e-mail tags fra resultatet"
 
-#: admin/includes/editor.php:157
+#: admin/includes/editor.php:181
 msgid "Message Body"
 msgstr "Selve beskeden"
 
-#: admin/includes/editor.php:148
+#: admin/includes/editor.php:172
 msgid "Additional Headers"
 msgstr "Yderligere headers"
 
-#: admin/includes/editor.php:139 includes/contact-form-template.php:40
+#: admin/includes/editor.php:163 includes/contact-form-template.php:40
 msgid "Subject"
 msgstr "Emne"
 
-#: admin/includes/editor.php:130
+#: admin/includes/editor.php:154
 msgid "From"
 msgstr "Fra"
 
-#: admin/includes/editor.php:121
+#: admin/includes/editor.php:145
 msgid "To"
 msgstr "Til"
 
-#: admin/includes/editor.php:115
+#: admin/includes/editor.php:135
 msgid "In the following fields, you can use these mail-tags:"
 msgstr "I følgende felter, kan du bruge disse e-mail tags:"
 
-#: admin/includes/editor.php:109
+#: admin/includes/editor.php:119
 msgid "Mail (2) is an additional mail template often used as an autoresponder."
 msgstr "Mail (2) er en ekstra skabelon, ofte brugt til autosvar."
 
-#: admin/includes/editor.php:75
+#: admin/includes/editor.php:85
 msgid "Use Mail (2)"
 msgstr "Brug mail (2)"
 
-#: admin/includes/editor.php:74
+#: admin/includes/editor.php:84
 msgid "Mail (2)"
 msgstr "E-mail (2)"
 
@@ -1141,62 +1205,57 @@ msgstr "Kortkode"
 msgid "Title"
 msgstr "Titel"
 
-#: admin/edit-contact-form.php:216 admin/includes/editor.php:217
-#: admin/includes/editor.php:222
+#: admin/edit-contact-form.php:229 admin/includes/editor.php:247
+#: admin/includes/editor.php:252
 msgid "Additional Settings"
 msgstr "Yderligere indstillinger"
 
 #. translators: %d: number of additional settings
-#: admin/edit-contact-form.php:214
+#: admin/edit-contact-form.php:227
 msgid "Additional Settings (%d)"
 msgstr "Yderligere indstillinger (%d)"
 
-#: admin/edit-contact-form.php:202 admin/includes/editor.php:192
+#: admin/edit-contact-form.php:213 admin/includes/editor.php:222
 msgid "Messages"
 msgstr "Beskeder"
 
-#: admin/edit-contact-form.php:199 admin/includes/editor.php:83
+#: admin/edit-contact-form.php:209 admin/includes/editor.php:93
 msgid "Mail"
 msgstr "E-mail"
 
-#: admin/edit-contact-form.php:196 admin/includes/editor.php:55
+#: admin/edit-contact-form.php:205 admin/includes/editor.php:61
 msgid "Form"
 msgstr "Formular"
 
-#. translators: %s: ◀ ▶ dashicon
-#: admin/edit-contact-form.php:185
-msgid "%s keys switch panels"
-msgstr "Brug %s tasterne til at skifte i mellem fanebladene"
-
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:94
+#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
 msgid "Support"
 msgstr "Support"
 
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:94
+#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
 msgid "https://contactform7.com/support/"
 msgstr "https://contactform7.com/support/"
 
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:93
+#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
 msgid "FAQ"
 msgstr "FAQ"
 
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:93
+#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
 msgid "https://contactform7.com/faq/"
 msgstr "https://contactform7.com/faq/"
 
-#: admin/edit-contact-form.php:172 admin/includes/help-tabs.php:92
+#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
 msgid "Docs"
 msgstr "Dokumenter"
 
-#: admin/edit-contact-form.php:172 admin/includes/help-tabs.php:92
+#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
 msgid "https://contactform7.com/docs/"
 msgstr "https://contactform7.com/docs/"
 
-#: admin/edit-contact-form.php:169
+#: admin/edit-contact-form.php:170
 msgid "Information"
 msgstr "Information"
 
-#: admin/edit-contact-form.php:153
+#: admin/edit-contact-form.php:154
 msgid ""
 "You are about to delete this contact form.\n"
 "  'Cancel' to stop, 'OK' to delete."
@@ -1204,25 +1263,25 @@ msgstr ""
 "Du er ved at slette din kontakt formular.\n"
 "Tryk 'Annullér' for at stoppe, 'OK' for at slette."
 
-#: admin/edit-contact-form.php:153
+#: admin/edit-contact-form.php:154
 #: admin/includes/class-contact-forms-list-table.php:92
 msgid "Delete"
 msgstr "Slet"
 
-#: admin/edit-contact-form.php:138
+#: admin/edit-contact-form.php:139
 #: admin/includes/class-contact-forms-list-table.php:156
 msgid "Duplicate"
 msgstr "Duplikér"
 
-#: admin/edit-contact-form.php:124
+#: admin/edit-contact-form.php:125
 msgid "Status"
 msgstr "Status"
 
-#: admin/edit-contact-form.php:110
+#: admin/edit-contact-form.php:111
 msgid "You can also use this old-style shortcode:"
 msgstr "Du kan også bruge denne old-style shortcode:"
 
-#: admin/edit-contact-form.php:103
+#: admin/edit-contact-form.php:104
 msgid "Copy this shortcode and paste it into your post, page, or text widget content:"
 msgstr "Kopiere denne shortcode og indsæt den i et Indlæg, Side, Widget osv.:"
 
@@ -1230,12 +1289,12 @@ msgstr "Kopiere denne shortcode og indsæt den i et Indlæg, Side, Widget osv.:"
 msgid "Enter title here"
 msgstr "Skriv titel her"
 
-#: admin/edit-contact-form.php:26 admin/edit-contact-form.php:131
+#: admin/edit-contact-form.php:26 admin/edit-contact-form.php:132
 #: modules/recaptcha.php:211
 msgid "Save"
 msgstr "Gem"
 
-#: admin/admin.php:584
+#: admin/admin.php:593
 msgid "You are not allowed to edit this contact form."
 msgstr "Du har ikke lov til at redigere denne formular"
 
@@ -1246,6 +1305,14 @@ msgstr "https://contactform7.com/save-submitted-messages-with-flamingo/"
 #: admin/includes/welcome-panel.php:26
 msgid "https://contactform7.com/spam-filtering-with-akismet/"
 msgstr "https://contactform7.com/spam-filtering-with-akismet/"
+
+#: admin/includes/editor.php:129
+msgid "Setting Up Mail"
+msgstr "Opsætning af Mail"
+
+#: admin/includes/editor.php:128
+msgid "https://contactform7.com/setting-up-mail/"
+msgstr "https://contactform7.com/setting-up-mail/"
 
 #: admin/includes/welcome-panel.php:35
 msgid "https://contactform7.com/donate/"
@@ -1260,36 +1327,36 @@ msgid "Dismiss"
 msgstr "Afvis"
 
 #. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
-#: admin/admin.php:565
+#: admin/admin.php:574
 msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
 msgstr "<strong>Contact Form 7 %1$s kræver WordPress %2$s eller nyere.</strong> <a href=\"%3$s\">opdatér venligst WordPress</a> først."
 
-#: admin/admin.php:545
+#: admin/admin.php:554
 msgid "Settings"
 msgstr "Indstillinger"
 
-#: admin/admin.php:496
+#: admin/admin.php:500
 msgid "Contact form deleted."
 msgstr "Kontaktformular slettet."
 
-#: admin/admin.php:494
+#: admin/admin.php:498
 msgid "Contact form saved."
 msgstr "Kontaktformular gemt."
 
-#: admin/admin.php:492
+#: admin/admin.php:496
 msgid "Contact form created."
 msgstr "Kontaktformular oprettet."
 
-#: admin/admin.php:393
+#: admin/admin.php:397
 msgid "Search Contact Forms"
 msgstr "Søg i kontaktformularer"
 
 #. translators: %s: search keywords
-#: admin/admin.php:380
+#: admin/admin.php:384
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Søgeresultater for &#8220;%s&#8221;"
 
-#: admin/admin.php:310
+#: admin/admin.php:312
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "De ændringer, du har foretaget, vil blive tabt, hvis du navigerer væk fra denne side."
 
@@ -1309,11 +1376,11 @@ msgstr "Du har ikke lov til at redigere dette."
 msgid "Integration"
 msgstr "Integration"
 
-#: admin/admin.php:47 admin/admin.php:462
+#: admin/admin.php:47 admin/admin.php:466
 msgid "Integration with Other Services"
 msgstr "Integration med andre tjenester"
 
-#: admin/admin.php:37 admin/admin.php:374 admin/edit-contact-form.php:46
+#: admin/admin.php:37 admin/admin.php:378 admin/edit-contact-form.php:46
 msgid "Add New"
 msgstr "Tilføj ny"
 
@@ -1321,7 +1388,7 @@ msgstr "Tilføj ny"
 msgid "Add New Contact Form"
 msgstr "Tilføj ny kontakt formular"
 
-#: admin/admin.php:29 admin/admin.php:367 includes/contact-form.php:31
+#: admin/admin.php:29 admin/admin.php:371 includes/contact-form.php:31
 msgid "Contact Forms"
 msgstr "Kontaktformularer"
 
@@ -1333,8 +1400,8 @@ msgstr "Rediger kontaktformular"
 msgid "Contact"
 msgstr "Kontakt"
 
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 4.9.2)  #-#-#-#-#
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
-#: admin/admin.php:21 modules/flamingo.php:150
+#: admin/admin.php:21 modules/flamingo.php:167
 msgid "Contact Form 7"
 msgstr "Contact Form 7"

@@ -1257,27 +1257,27 @@ msgid "Enter your closest city to find nearby events."
 msgstr "Введите ближайший город, чтобы найти мероприятия рядом."
 
 #. translators: %s: network settings URL
-#: wp-signup.php:845
+#: wp-signup.php:847
 msgid "To change or disable registration go to your <a href=\"%s\">Options page</a>."
 msgstr "Для изменения настроек или отключения регистрации пройдите на <a href=\"%s\">Страницу настроек</a>."
 
-#: wp-signup.php:838
+#: wp-signup.php:840
 msgid "The network currently allows both site and user registrations."
 msgstr "Регистрация сайтов и пользователей в сети разрешена."
 
-#: wp-signup.php:835
+#: wp-signup.php:837
 msgid "The network currently allows user registrations."
 msgstr "Регистрация пользователей в сети разрешена."
 
-#: wp-signup.php:832
+#: wp-signup.php:834
 msgid "The network currently allows site registrations."
 msgstr "Регистрация сайтов в сети разрешена."
 
-#: wp-signup.php:829
+#: wp-signup.php:831
 msgid "The network currently disallows registrations."
 msgstr "Регистрация сайтов и пользователей в сети запрещена."
 
-#: wp-signup.php:824
+#: wp-signup.php:826
 msgid "Greetings Network Administrator!"
 msgstr "Приветствуем Администратора Сети!"
 
@@ -4494,7 +4494,7 @@ msgid "This site has not been activated yet. If you are having problems activati
 msgstr "Этот сайт ещё не был активирован. Если у вас проблемы с активацией, пожалуйста, напишите по адресу %s."
 
 #. translators: %s: email address
-#: wp-signup.php:611 wp-signup.php:757
+#: wp-signup.php:613 wp-signup.php:759
 msgid "Check your inbox at %s and click the link given."
 msgstr "Проверьте почтовый ящик %s и перейдите по полученной ссылке."
 
@@ -4504,7 +4504,7 @@ msgid "The menu name %s conflicts with another menu name. Please try another."
 msgstr "Заголовок меню %s конфликтует с существующим меню. Пожалуйста, выберите другой."
 
 #. translators: %s: site address
-#: wp-signup.php:904
+#: wp-signup.php:906
 msgid "The site you were looking for, %s, does not exist."
 msgstr "Сайта, который вы ищете, %s, не существует."
 
@@ -4522,7 +4522,7 @@ msgstr "Ой! Объект не найден."
 msgid "Continue reading %s"
 msgstr "Читать далее %s"
 
-#: wp-signup.php:146
+#: wp-signup.php:148
 msgid "Site Language:"
 msgstr "Язык сайта:"
 
@@ -7585,12 +7585,12 @@ msgid "(more&hellip;)"
 msgstr "(далее&hellip;)"
 
 #. translators: %s: site address
-#: wp-signup.php:899
+#: wp-signup.php:901
 msgid "The site you were looking for, %s, does not exist, but you can create it now!"
 msgstr "Сайта, который вы ищете, <strong>%s</strong>, не существует. Но его можно создать прямо сейчас!"
 
 #. translators: %s: email address
-#: wp-signup.php:767
+#: wp-signup.php:769
 msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s incorrect, you will not receive your email."
 msgstr "Вы правильно указали свой e-mail? У нас он записан как %s, но если это неправильный адрес, письмо не придёт."
 
@@ -8500,7 +8500,7 @@ msgctxt "opening curly double quote"
 msgid "&#8220;"
 msgstr "&#171;"
 
-#: wp-signup.php:174
+#: wp-signup.php:176
 msgid "Allow search engines to index this site."
 msgstr "Разрешить поисковым системам индексировать сайт."
 
@@ -8523,7 +8523,7 @@ msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> 
 msgstr "Ваша учётная запись активирована. Теперь можно <a href=\"%1$s\">войти</a> на сайт, используя выбранное имя пользователя (%2$s). Пожалуйста, проверьте почтовый ящик %3$s, там будут пароль и инструкции для входа. Если вы не получили письмо, проверьте корзину или папку со спамом. Если в течение часа вы так и не получите письмо, вы можете <a href=\"%4$s\">сбросить ваш пароль</a>."
 
 #. translators: 1: link to new site, 2: login URL, 3: username
-#: wp-signup.php:474
+#: wp-signup.php:476
 msgid "%1$s is your new site. <a href=\"%2$s\">Log in</a> as &#8220;%3$s&#8221; using your existing password."
 msgstr "%1$s - ваш новый сайт. <a href=\"%2$s\">Войдите</a> как &#8220;%3$s&#8221;, используя ваш пароль."
 
@@ -8838,12 +8838,12 @@ msgctxt "Post format"
 msgid "Standard"
 msgstr "Стандартный"
 
-#: wp-signup.php:123
+#: wp-signup.php:125
 msgid "domain"
 msgstr "домен"
 
 #. translators: %s: site address
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Your address will be %s."
 msgstr "Вашим адресом будет %s."
 
@@ -9153,19 +9153,19 @@ msgctxt "taxonomy singular name"
 msgid "Category"
 msgstr "Рубрика"
 
-#: wp-signup.php:764
+#: wp-signup.php:766
 msgid "Check the junk or spam folder of your email client. Sometime emails wind up there by mistake."
 msgstr "Проверьте корзину или папку для спама в вашем почтовом клиенте. Иногда письма по ошибке оказываются там."
 
-#: wp-signup.php:763
+#: wp-signup.php:765
 msgid "Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control."
 msgstr "Подождите ещё немного. Иногда доставка электронного письма может задержаться по независящим от нас причинам."
 
-#: wp-signup.php:890
+#: wp-signup.php:892
 msgid "Sorry, new registrations are not allowed at this time."
 msgstr "Извините, в настоящий момент регистрация закрыта."
 
-#: wp-signup.php:240
+#: wp-signup.php:242
 msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
 msgstr "На этот адрес будет отправлено письмо для подтверждения. (Внимательно проверьте адрес e-mail, перед тем как продолжить.)"
 
@@ -9401,11 +9401,11 @@ msgstr "Не удалось вычислить новый размер изоб�
 msgid "If you&#8217;re still stuck with this message, then check that your database contains the following tables:"
 msgstr "Если вы по-прежнему видите это сообщение &#8212; убедитесь, что в базе данных содержатся следующие таблицы:"
 
-#: wp-signup.php:761
+#: wp-signup.php:763
 msgid "If you haven&#8217;t received your email yet, there are a number of things you can do:"
 msgstr "Если вы ещё не получили письмо со ссылкой для активации, можно сделать несколько вещей:"
 
-#: wp-signup.php:313
+#: wp-signup.php:315
 msgid "Welcome back, %s. By filling out the form below, you can <strong>add another site to your account</strong>. There is no limit to the number of sites you can have, so create to your heart&#8217;s content, but write responsibly!"
 msgstr "Добро пожаловать, %s. Заполнив форму ниже, вы сможете <strong>добавить к вашей учётной записи ещё один сайт</strong>. На количество сайтов нет ограничений, но к написанию материалов подходите ответственно!"
 
@@ -9413,16 +9413,16 @@ msgstr "Добро пожаловать, %s. Заполнив форму ниж�
 msgid "This action has been disabled by the administrator."
 msgstr "Это действие запрещено администратором."
 
-#: wp-signup.php:892
+#: wp-signup.php:894
 msgid "You are logged in already. No need to register again!"
 msgstr "Вы уже вошли на сайт. Нет нужды регистрироваться снова!"
 
 #. translators: %s: login URL
-#: wp-signup.php:857
+#: wp-signup.php:859
 msgid "You must first <a href=\"%s\">log in</a>, and then you can create a new site."
 msgstr "Вам необходимо <a href=\"%s\">авторизоваться</a>, чтобы создать новый сайт."
 
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
 msgstr "Не менее 4 символов, только буквы и цифры. Значение нельзя изменить позже, будьте внимательны!"
 
@@ -9500,44 +9500,44 @@ msgstr[2] "%d обновлений тем"
 msgid "%d WordPress Update"
 msgstr "%d обновление WordPress"
 
-#: wp-signup.php:758
+#: wp-signup.php:760
 msgid "If you do not activate your site within two days, you will have to sign up again."
 msgstr "Если вы не активируете ваш сайт в течение двух дней, вам придётся регистрироваться заново."
 
-#: wp-signup.php:755
+#: wp-signup.php:757
 msgid "But, before you can start using your site, <strong>you must activate it</strong>."
 msgstr "Но прежде чем вы сможете пользоваться своим сайтом, <strong>нужно его активировать</strong>."
 
-#: wp-signup.php:555
+#: wp-signup.php:557
 msgid "Gimme a site!"
 msgstr "Дайте мне сайт!"
 
-#: wp-signup.php:871
+#: wp-signup.php:873
 msgid "Site registration has been disabled."
 msgstr "Регистрация сайтов отключена."
 
 #. translators: %s: site address
-#: wp-signup.php:753
+#: wp-signup.php:755
 msgid "Congratulations! Your new site, %s, is almost ready."
 msgstr "Поздравляем! Ваш новый сайт, %s, почти готов."
 
-#: wp-signup.php:307
+#: wp-signup.php:309
 msgid "Get <em>another</em> %s site in seconds"
 msgstr "Получите <em>ещё один</em> сайт в сети &laquo;%s&raquo; за считанные секунды"
 
-#: wp-signup.php:121
+#: wp-signup.php:123
 msgid "sitename"
 msgstr "имя-сайта"
 
-#: wp-signup.php:106
+#: wp-signup.php:108
 msgid "Site Name:"
 msgstr "Имя сайта:"
 
-#: wp-signup.php:108
+#: wp-signup.php:110
 msgid "Site Domain:"
 msgstr "Домен сайта:"
 
-#: wp-signup.php:132
+#: wp-signup.php:134
 msgid "Site Title:"
 msgstr "Название сайта:"
 
@@ -9582,20 +9582,20 @@ msgstr "Если вы администратор сети &#8212; убедите
 msgid "New trackback on your post \"%s\""
 msgstr "Новая обратная ссылка на вашу запись \"%s\""
 
-#: wp-signup.php:319
+#: wp-signup.php:321
 msgid "Sites you are already a member of:"
 msgstr "Сайты, участником которых вы являетесь:"
 
-#: wp-signup.php:328
+#: wp-signup.php:330
 msgid "If you&#8217;re not going to use a great site domain, leave it for a new user. Now have at it!"
 msgstr "Если вы не собираетесь использовать отличный домен, оставьте его для новых пользователей. А теперь приступайте!"
 
-#: wp-signup.php:343
+#: wp-signup.php:345
 msgid "Create Site"
 msgstr "Создать сайт"
 
 #. translators: %s: site name
-#: wp-signup.php:469
+#: wp-signup.php:471
 msgid "The site %s is yours."
 msgstr "Сайт &laquo;%s&raquo; &#8212; ваш."
 
@@ -9820,62 +9820,62 @@ msgstr "Версия платформы"
 msgid "Software Name"
 msgstr "Название платформы"
 
-#: wp-signup.php:865
+#: wp-signup.php:867
 msgid "User registration has been disabled."
 msgstr "Регистрация пользователей отключена."
 
-#: wp-signup.php:853
+#: wp-signup.php:855
 msgid "Registration has been disabled."
 msgstr "Регистрация отключена."
 
-#: wp-signup.php:759
+#: wp-signup.php:761
 msgid "Still waiting for your email?"
 msgstr "Всё ещё ждёте письмо?"
 
-#: wp-signup.php:676
+#: wp-signup.php:678
 msgid "Signup"
 msgstr "Зарегистрироваться"
 
-#: wp-signup.php:612
+#: wp-signup.php:614
 msgid "If you do not activate your username within two days, you will have to sign up again."
 msgstr "Если вы не активируете своё имя пользователя в течение двух дней, вам придётся регистрироваться заново."
 
-#: wp-signup.php:609
+#: wp-signup.php:611
 msgid "But, before you can start using your new username, <strong>you must activate it</strong>."
 msgstr "Но прежде чем вы начнёте использовать своё новое имя пользователя, <strong>нужно его активировать</strong>."
 
 #. translators: %s: username
-#: wp-signup.php:608
+#: wp-signup.php:610
 msgid "%s is your new username"
 msgstr "%s &#8212 ваше новое имя пользователя"
 
 #: wp-includes/class-wp-customize-nav-menus.php:967
-#: wp-includes/script-loader.php:1130 wp-signup.php:562
+#: wp-includes/script-loader.php:1130 wp-signup.php:564
 msgid "Next"
 msgstr "Далее"
 
-#: wp-signup.php:558
+#: wp-signup.php:560
 msgid "Just a username, please."
 msgstr "Только имя пользователя, пожалуйста."
 
 #. translators: %s: name of the network
-#: wp-signup.php:538
+#: wp-signup.php:540
 msgid "Get your own %s account in seconds"
 msgstr "Создайте учётную запись в сети &laquo;%s&raquo; за считанные секунды"
 
-#: wp-signup.php:310
+#: wp-signup.php:312
 msgid "There was a problem, please correct the form below and try again."
 msgstr "Что-то не получилось. Пожалуйста, исправьте данные в этой форме и попробуйте ещё раз."
 
-#: wp-signup.php:236
+#: wp-signup.php:238
 msgid "Email&nbsp;Address:"
 msgstr "Адрес&nbsp;e-mail:"
 
-#: wp-signup.php:233
+#: wp-signup.php:235
 msgid "(Must be at least 4 characters, letters and numbers only.)"
 msgstr "(Не менее 4 символов, только буквы и цифры.)"
 
-#: wp-signup.php:173
+#: wp-signup.php:175
 msgid "Privacy:"
 msgstr "Приватность:"
 
@@ -11574,7 +11574,7 @@ msgstr "Темы"
 msgid "Sites"
 msgstr "Сайты"
 
-#: wp-signup.php:178
+#: wp-signup.php:180
 msgid "Yes"
 msgstr "Да"
 
@@ -12079,7 +12079,7 @@ msgstr "Результаты поиска &laquo;%s&raquo;"
 msgid "Edit"
 msgstr "Изменить"
 
-#: wp-signup.php:182
+#: wp-signup.php:184
 msgid "No"
 msgstr "Нет"
 
@@ -12144,7 +12144,7 @@ msgstr "Записей не найдено."
 msgid "Password:"
 msgstr "Пароль:"
 
-#: wp-activate.php:133 wp-signup.php:228
+#: wp-activate.php:133 wp-signup.php:230
 msgid "Username:"
 msgstr "Имя пользователя:"
 
