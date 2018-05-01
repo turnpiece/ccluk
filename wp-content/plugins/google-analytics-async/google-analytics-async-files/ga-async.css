@@ -1,0 +1,131 @@
+/* General CSS */
+#google-analytics-chart-visitors {
+    width: 100%;
+    height: 300px;
+}
+.google-analytics-basic-stats {
+    text-align: center;
+}
+.google-analytics-basic-stats ul {
+    margin: 0;
+    text-align: center;
+}
+.google-analytics-basic-stats ul li {
+    display: inline-block;
+    margin: 0px 15px 5px 0;
+    padding: 0 0 5px 0;
+    border-bottom: 2px solid #E5E5E5;
+    max-width: 100px;
+    min-width: 80px;
+    text-align: left;
+}
+.google-analytics-basic-stats ul li:last-child {
+    margin: 5px 0 5px 0;
+}
+.google-analytics-basic-stats ul li label {
+    display: block;
+}
+.google-analytics-basic-stats ul li span {
+    display: block;
+    font-weight: bold;
+    font-size: 20px;
+    margin: 5px 0 0 0;
+}
+.google-analytics-table {
+    background-color:#f9f9f9;
+    margin-top: 13px !important;
+}
+.google-analytics-table th.right {
+    text-align: right;
+}
+/* Statistics page CSS */
+#google-analytics-statistics-page .loading {
+    text-align: center;
+    margin: 50px;
+}
+#google-analytics-statistics-page .hndle {
+    cursor: default !important;
+}
+#google-analytics-statistics-page .google-analytics-basic-stats ul li {
+    width: 100px
+}
+#google-analytics-statistics-page .google-analytics-basic-stats ul li:last-child {
+    margin: 0px 15px 5px 0;
+}
+#google-analytics-statistics-page .google-analytics-countries .inside {
+    overflow-x: auto;
+}
+#google-analytics-chart-countries {
+    width: 650px;
+    height: 400px;
+}
+
+/* Widget CSS */
+#google-analytics-widget .google-analytics-extended-stats {
+    overflow: hidden;
+}
+#google-analytics-widget .loading {
+    display: none;
+}
+#google-analytics-widget .post-loader {
+    text-align: center;
+}
+#google-analytics-widget .google_analytics_top_posts_pages, #google-analytics-widget .google-analytics-searches, #google-analytics-widget .google-analytics-top-referrals {
+    float: left;
+    margin: 10px 2% 0 0;
+}
+#google-analytics-widget .google-analytics-extended-stats .last {
+    margin-right: 0;
+}
+#google-analytics-widget .google-analytics-extended-stats table {
+    width: 100%;
+}
+#google-analytics-widget .google-analytics-top-referrals, #google-analytics-widget .google-analytics-searches {
+    width: 49%;
+}
+@media screen and (max-width: 850px) {
+    #google-analytics-widget .google_analytics_top_posts_pages, #google-analytics-widget .google-analytics-searches, #google-analytics-widget .google-analytics-top-referrals {	 	 	 	 	   			 	
+        float: none;
+        width: 100%;
+    }
+}
+/* Network admin CSS */
+.control-modules .button-holder {
+    line-height: 35px;
+    margin-bottom: 0;
+}
+.control-modules .sub-options {
+    display: none;
+}
+.control-modules {
+    margin: 5px 0;
+}
+.control-modules .sub-options .postbox {
+    cursor: default;
+    padding: 12px;
+    margin: 0 0 5px 0;
+    display: inline-block;
+    min-width: 370px;
+}
+.control-modules .button {
+    outline: none;
+    margin-bottom: 0 !important;
+    vertical-align: baseline !important;
+}
+.control-modules .button.active {
+    -webkit-border-radius: 3px 3px 0 0;
+    border-radius: 3px 3px 0 0;
+    border-color: #e5e5e5 !important;
+    box-shadow: none !important;
+    border-bottom: none;
+    background: #fff !important;
+    height: 35px;
+    color: #333 !important;
+}
+.control-modules ol li span {
+    display: inline-block;
+    min-width: 140px;
+}
+
+
+/* 87274-1525113156-ai */
