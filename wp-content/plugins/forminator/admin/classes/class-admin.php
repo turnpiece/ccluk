@@ -41,6 +41,7 @@ class Forminator_Admin {
 	private function includes() {
 		// Admin pages
 		include_once( forminator_plugin_dir() . 'admin/pages/dashboard-page.php' );
+		include_once( forminator_plugin_dir() . 'admin/pages/entries-page.php' );
 		include_once( forminator_plugin_dir() . 'admin/pages/settings-page.php' );
 
 		// Admin AJAX
@@ -79,5 +80,27 @@ class Forminator_Admin {
 	 */
 	public function init_settings_page() {
 		$this->pages['forminator-settings'] = new Forminator_Settings_Page( 'forminator-settings', 'settings', __( 'Global Settings', Forminator::DOMAIN ), __( 'Settings', Forminator::DOMAIN ), 'forminator' );
+	}
+
+	/**
+	 * Add Entries page
+	 *
+	 * @since 1.0.5
+	 */
+	public function add_entries_page() {
+		add_action( 'admin_menu', array( $this, 'init_entries_page' ) );
+	}
+
+	/**
+	 * Initialize Entries page
+	 *
+	 * @since 1.0.5
+	 */
+	public function init_entries_page() {
+		$this->pages['forminator-entries'] = new Forminator_Entries_Page( 'forminator-entries',
+		                                                                  'entries',
+		                                                                  __( 'Forminator Entries', Forminator::DOMAIN ),
+		                                                                  __( 'Entries', Forminator::DOMAIN ),
+		                                                                  'forminator' );
 	}
 }

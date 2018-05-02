@@ -759,3 +759,40 @@ function forminator_list_pagination( $total, $type = 'listings' ) {
 		<?php
 	}
 }
+
+/**
+ * Get Form Model from id
+ *
+ * @since 1.0.5
+ *
+ * @param $id
+ *
+ * @return bool|Forminator_Base_Form_Model|null
+ */
+function forminator_get_model_from_id( $id ) {
+	$post = get_post( $id );
+	if ( ! $post instanceof WP_Post ) {
+		return null;
+	}
+
+	$custom_form_model = Forminator_Custom_Form_Model::model();
+	$quiz_form_model   = Forminator_Quiz_Form_Model::model();
+	$poll_form_model   = Forminator_Poll_Form_Model::model();
+
+	switch ( $post->post_type ) {
+		case $custom_form_model->getPostType():
+			$form_model = $custom_form_model->load( $id );
+			break;
+		case $quiz_form_model->getPostType():
+			$form_model = $quiz_form_model->load( $id );
+			break;
+		case $poll_form_model->getPostType():
+			$form_model = $poll_form_model->load( $id );
+			break;
+		default:
+			$form_model = null;
+			break;
+	}
+
+	return $form_model;
+}

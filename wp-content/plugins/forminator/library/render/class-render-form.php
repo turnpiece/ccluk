@@ -127,55 +127,49 @@ abstract class Forminator_Render_Form {
 
 		$render_id = self::$render_ids[ $id ];
 
-		if ( $form_type === 'custom-form' ) {
-
-			$fields_style = $this->get_fields_style();
-
-			if ( $fields_style === 'enclosed' ) {
-				$fields_type = 'forminator-enclosed';
-			} else {
-				$fields_type = '';
-			}
-
-		} else {
-			$fields_type = '';
-		}
-
+		$fields_type_class = $this->get_fields_type_class();
+		$design_class      = $this->get_form_design_class();
 
 		if ( ! $this->is_admin ) {
-			// Markup Loader
-			$loader = sprintf( '<div class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" data-forminator-render="%s" data-form="forminator-module-%s"><br/></div>',
-			                   $form_type,
-			                   $form_type,
-			                   $id,
-			                   $form_design,
-			                   $fields_type,
-			                   $extra_classes,
-			                   $render_id,
-			                   $id );
+			// Markup Loader.
+			$loader = sprintf(
+				'<div class="forminator-%s forminator-%s-%s %s %s %s" data-forminator-render="%s" data-form="forminator-module-%s"><br/></div>',
+				$form_type,
+				$form_type,
+				$id,
+				$design_class,
+				$fields_type_class,
+				$extra_classes,
+				$render_id,
+				$id
+			);
 
 			$html .= $loader;
 
-			$html .= sprintf( '<form id="forminator-module-%s" class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" action="" method="post" data-forminator-render="%s" %s style="display: none;">',
-			                  $id,
-			                  $form_type,
-			                  $form_type,
-			                  $id,
-			                  $form_design,
-			                  $fields_type,
-			                  $extra_classes,
-			                  $render_id,
-			                  $form_enctype );
+			$html .= sprintf(
+				'<form id="forminator-module-%s" class="forminator-%s forminator-%s-%s %s %s %s" action="" method="post" data-forminator-render="%s" %s style="display: none;">',
+				$id,
+				$form_type,
+				$form_type,
+				$id,
+				$design_class,
+				$fields_type_class,
+				$extra_classes,
+				$render_id,
+				$form_enctype
+			);
 		} else {
-			$html .= sprintf( '<div id="forminator-module-%s" class="forminator-%s forminator-%s-%s forminator-design--%s %s %s" %s>',
-			                  $id,
-			                  $form_type,
-			                  $form_type,
-			                  $id,
-			                  $form_design,
-			                  $fields_type,
-			                  $extra_classes,
-			                  $form_enctype );
+			$html .= sprintf(
+				'<div id="forminator-module-%s" class="forminator-%s forminator-%s-%s %s %s %s" %s>',
+				$id,
+				$form_type,
+				$form_type,
+				$id,
+				$design_class,
+				$fields_type_class,
+				$extra_classes,
+				$form_enctype
+			);
 		}
 
 		$html .= $this->render_form_header();
@@ -202,6 +196,62 @@ abstract class Forminator_Render_Form {
 			/** @noinspection PhpInconsistentReturnPointsInspection */
 			return apply_filters( 'forminator_render_form_markup', $html, $form_fields, $form_type, $form_settings, $form_design, $render_id );
 		}
+	}
+
+	/**
+	 * Get Additional CSS class to be aplied based on fields style (enclosed or not)
+	 *
+	 * @since 1.0.5
+	 * @return string
+	 */
+	public function get_fields_type_class() {
+		$form_type    = $this->get_form_type();
+		$fields_style = $this->get_fields_style();
+		if ( 'custom-form' === $form_type ) {
+			if ( 'enclosed' === $fields_style ) {
+				$fields_type = 'forminator-enclosed';
+			} else {
+				$fields_type = '';
+			}
+		} else {
+			$fields_type = '';
+		}
+
+		/**
+		 * Filter CSS of fields_type that will be added on user
+		 *
+		 * @since 1.0.5
+		 *
+		 * @param string $fields_type  current fields type CSS class that aplied
+		 * @param string $form_type    (custom-form / poll / quiz)
+		 * @param string $fields_style (enclosed ?)
+		 */
+		return apply_filters( 'forminator_render_fields_type_class', $fields_type, $form_type, $fields_style );
+	}
+
+	/**
+	 * Get Additional CSS class to be aplied based on get_form_design
+	 *
+	 * @since 1.0.5
+	 * @return string
+	 */
+	public function get_form_design_class() {
+		$form_design = $this->get_form_design();
+		if ( 'clean' === $form_design ) {
+			$design_class = '';
+		} else {
+			$design_class = 'forminator-design--' . $form_design;
+		}
+
+		/**
+		 * Filter design CSS class that will be aplied on <form
+		 *
+		 * @since 1.0.5
+		 *
+		 * @param string $design_class current design CSS class applied
+		 * @param string $form_design (clean/material, etc)
+		 */
+		return apply_filters( 'forminator_render_form_design_class', $design_class, $form_design );
 	}
 
 	/**
@@ -245,8 +295,14 @@ abstract class Forminator_Render_Form {
 		$html   = '<div class="forminator-row">';
 		$html   .= '<div class="forminator-col forminator-col-12">';
 		$html   .= '<div class="forminator-field">';
-		$html   .= sprintf( '<button id="forminator-submit" class="forminator-button"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
+
+		if( $this->get_form_design() !== 'material' ) {
+			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button">%s</button>',
 		                    $button );
+		} else {
+			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
+		                    $button );
+		}
 		$html   .= '</div>';
 		$html   .= '</div>';
 		$html   .= '</div>';

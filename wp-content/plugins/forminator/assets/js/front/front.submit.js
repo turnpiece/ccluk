@@ -19,7 +19,9 @@
 		defaults = {
 			form_type: 'custom-form',
 			forminatorFront: false,
-			forminator_selector: ''
+			forminator_selector: '',
+			chart_design: 'bar',
+			chart_options: {}
 		};
 
 	// The actual plugin constructor
@@ -42,6 +44,7 @@
 	// Avoid Plugin.prototype conflicts
 	$.extend(ForminatorFrontSubmit.prototype, {
 		init: function () {
+			this.forminatorFront = this.$el.data('forminatorFront');
 			switch (this.settings.form_type) {
 				case 'custom-form':
 					if (!this.settings.forminator_selector || !$(this.settings.forminator_selector).length) {
@@ -294,6 +297,24 @@
 							if (data.success === true) {
 								if (typeof data.data.url !== "undefined") {
 									window.location.href = data.data.url;
+								} else {
+									// url not exist, it will render chart on the fly if chart_data exist on response
+									// check length is > 1, because [0] is header
+									if (typeof data.data.chart_data !== "undefined" && data.data.chart_data.length > 1) {
+										// only render when google loader defined
+										if (typeof google !== 'undefined') {
+											if (typeof google.visualization === 'undefined') {
+												// try to load google chart
+												google.charts.load('current', {packages: ['corechart', 'bar']});
+												google.charts.setOnLoadCallback(function () {
+													self.render_poll_chart(data.data.chart_data, data.data.back_button, self);
+												});
+											} else {
+												// google chart already loaded render
+												self.render_poll_chart(data.data.chart_data, data.data.back_button, self);
+											}
+										}
+									}
 								}
 							}
 						},
@@ -309,6 +330,43 @@
 				}
 				return true;
 			});
+		},
+
+		render_poll_chart: function (chart_data, back_button, forminatorSubmit) {
+			// remove previously chart if avail
+			forminatorSubmit.$el.find('.forminator-poll--chart').remove();
+			var form_id = forminatorSubmit.$el.attr('id') + '-' + forminatorSubmit.$el.data('forminatorRender'),
+				poll_element_id = 'forminator-chart-poll-' + form_id,
+				poll_container = $('<div id="' + poll_element_id + '" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>'),
+				data = google.visualization.arrayToDataTable(chart_data),
+				back_element = $(back_button),
+				chart = false;
+
+			// create poll container
+			$(poll_container).insertBefore(forminatorSubmit.$el.find('.forminator-poll--answers'));
+			// hide answers radio
+			forminatorSubmit.$el.find('.forminator-poll--answers').hide();
+			// remove buttons
+			forminatorSubmit.$el.find('.forminator-poll--actions').empty();
+			//append back button
+
+			back_element.click(function (e) {
+				e.preventDefault();
+				// TODO : re-render poll, with updated state (user_can_vote etc)
+				location.reload();
+			});
+			forminatorSubmit.$el.find('.forminator-poll--actions').append(back_element);
+
+			if (forminatorSubmit.settings.chart_design === 'bar') {
+				chart = new google.visualization.BarChart(document.getElementById(poll_element_id));
+			} else if (this.settings.chart_design === 'pie') {
+				chart = new google.visualization.PieChart(document.getElementById(poll_element_id));
+			}
+			if (chart) {
+				chart.draw(data, forminatorSubmit.settings.chart_options);
+			}
+
+
 		},
 
 		focus_to_element: function ($element, fadeout) {
@@ -348,6 +406,18 @@
 							self.$el.trigger('forminator.front.pagination.focus.input',[element]);
 							self.focus_to_element(element);
 						}
+						
+						if ($(element).hasClass('forminator-input-time')) {
+							var $time_field_holder = $(element).closest('.forminator-field:not(.forminator-field--inner)'),
+								$time_error_holder = $time_field_holder.children('.forminator-label--validation');
+
+							if ($time_error_holder.length === 0) {
+								$time_field_holder.append('<label class="forminator-label--validation"></label>');
+								$time_error_holder = $time_field_holder.children('.forminator-label--validation');
+							}
+							$time_error_holder.text(message);
+						}
+						
 						var $field_holder = $(element).closest('.forminator-field--inner');
 
 						if ($field_holder.length === 0) {

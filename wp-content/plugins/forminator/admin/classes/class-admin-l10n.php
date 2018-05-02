@@ -93,8 +93,9 @@ class Forminator_Admin_l10n {
 				"hidden"        => __( "Hidden", Forminator::DOMAIN )
 			),
 			"colors"        => array(
-				"box_background"    => __( "Box background", Forminator::DOMAIN ),
-				"box_border"        => __( "Box border", Forminator::DOMAIN ),
+				"poll_background"	=> __( "Poll BG", Forminator::DOMAIN ),
+				"poll_border"		=> __( "Poll border", Forminator::DOMAIN ),
+				"poll_shadow"		=> __( "Poll shadow", Forminator::DOMAIN ),
 				"title"             => __( "Title text", Forminator::DOMAIN ),
 				"question"          => __( "Question text", Forminator::DOMAIN ),
 				"answer"            => __( "Answer text", Forminator::DOMAIN ),
@@ -149,6 +150,7 @@ class Forminator_Admin_l10n {
 				"form_type"    => forminator_get_form_type_helper(),
 				"enabled"      => ( forminator_get_exporter_info( 'enabled', forminator_get_form_id_helper() . forminator_get_form_type_helper() ) === 'true' ),
 				"interval"     => forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() ),
+				"month_day"    => forminator_get_exporter_info( 'month_day', forminator_get_form_id_helper() . forminator_get_form_type_helper() ),
 				"day"          => forminator_get_exporter_info( 'day', forminator_get_form_id_helper() . forminator_get_form_type_helper() ),
 				"hour"         => forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() ),
 				"email"        => forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() ),

@@ -285,14 +285,28 @@
 
 		toggle_field: function (element_id, action, type) {
 			var $element_id = this.get_form_field(element_id),
-				$column_field = $element_id.closest('.forminator-col');
-
+				$column_field = $element_id.closest('.forminator-col'),
+				$hidden_upload = $column_field.find('.forminator-input-file-required'),
+				$hidden_wp_editor = $column_field.find('.forminator-wp-editor-required');
+			
 			// Handle show action
 			if (action === "show") {
 				if (type === "valid") {
 					$column_field.removeClass('forminator-hidden');
+					if ($hidden_upload.length > 0) {
+						$hidden_upload.addClass('do-validate');
+					}
+					if ($hidden_wp_editor.length > 0) {
+						$hidden_wp_editor.addClass('do-validate');
+					}
 				} else {
 					$column_field.addClass('forminator-hidden');
+					if ($hidden_upload.length > 0) {
+						$hidden_upload.removeClass('do-validate');
+					}
+					if ($hidden_wp_editor.length > 0) {
+						$hidden_wp_editor.removeClass('do-validate');
+					}
 				}
 			}
 
@@ -300,8 +314,20 @@
 			if (action === "hide") {
 				if (type === "valid") {
 					$column_field.addClass('forminator-hidden');
+					if ($hidden_upload.length > 0) {
+						$hidden_upload.removeClass('do-validate');
+					}
+					if ($hidden_wp_editor.length > 0) {
+						$hidden_wp_editor.removeClass('do-validate');
+					}
 				} else {
 					$column_field.removeClass('forminator-hidden');
+					if ($hidden_upload.length > 0) {
+						$hidden_upload.addClass('do-validate');
+					}
+					if ($hidden_wp_editor.length > 0) {
+						$hidden_wp_editor.addClass('do-validate');
+					}
 				}
 			}
 		}

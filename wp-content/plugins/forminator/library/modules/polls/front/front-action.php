@@ -155,33 +155,35 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 			 * @since 1.0.2
 			 *
 			 * @param bool $user_can_vote - if can vote depending on above conditions
-			 * @param int $form_id - the form id
+			 * @param int  $form_id       - the form id
 			 *
 			 * @return bool $user_can_vote - true|false
 			 */
 			$user_can_vote = apply_filters( 'forminator_poll_handle_form_user_can_vote', $user_can_vote, $form_id );
 
 			if ( $user_can_vote ) {
-				$field_data 	= isset( $_POST[$form_id] ) ? $_POST[$form_id] : false;
-				$extra_field 	= isset( $_POST[$form_id .'-extra'] ) ? $_POST[$form_id .'-extra'] : false;
-				if ( $field_data && !empty( $field_data ) ) {
-					$entry 				= new Forminator_Form_Entry_Model();
-					$entry->entry_type 	= $this->entry_type;
-					$entry->form_id 	= $form_id;
+				$field_data  = isset( $_POST[ $form_id ] ) ? $_POST[ $form_id ] : false;
+				$extra_field = isset( $_POST[ $form_id . '-extra' ] ) ? $_POST[ $form_id . '-extra' ] : false;
+				if ( $field_data && ! empty( $field_data ) ) {
+					$entry             = new Forminator_Form_Entry_Model();
+					$entry->entry_type = $this->entry_type;
+					$entry->form_id    = $form_id;
+					// get fields labels
+					$fields_labels    = $poll->pluck_fields_array( 'title', 'element_id', '1' );
 					$field_data_array = array(
 						array(
-							'name' 	=> $field_data,
-							'value' => '1'
+							'name'  => $field_data,
+							'value' => isset( $fields_labels[ $field_data ] ) ? $fields_labels[ $field_data ] : '1',
 						),
 						array(
-							'name' 	=> '_forminator_user_ip',
-							'value' => Forminator_Geo::get_user_ip()
-						)
+							'name'  => '_forminator_user_ip',
+							'value' => Forminator_Geo::get_user_ip(),
+						),
 					);
-					if ( $extra_field && !empty( $extra_field ) ) {
+					if ( $extra_field && ! empty( $extra_field ) ) {
 						$field_data_array[] = array(
-							'name' 	=> 'extra',
-							'value' => $extra_field
+							'name'  => 'extra',
+							'value' => $extra_field,
 						);
 
 						/**
@@ -191,9 +193,9 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 						 * @since 1.0.2
 						 *
 						 * @param bool false - defauls to false
-						 * @param array $field_data_array - the entry data
-						 * @param int $form_id - the form id
-						 * @param string $form_type - the form type. In this case defaults to 'poll'
+						 * @param array  $field_data_array - the entry data
+						 * @param int    $form_id          - the form id
+						 * @param string $form_type        - the form type. In this case defaults to 'poll'
 						 *
 						 * @return bool true|false
 						 */
@@ -210,7 +212,7 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 						 * @since 1.0.2
 						 *
 						 * @param array $field_data_array - the entry data
-						 * @param int $form_id - the form id
+						 * @param int   $form_id          - the form id
 						 *
 						 * @return array $field_data_array
 						 */
@@ -221,50 +223,134 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 						 *
 						 * @since 1.0.2
 						 *
-						 * @param Forminator_Form_Entry_Model $entry - the entry model
-						 * @param int $form_id - the form id
-						 * @param array $field_data_array - the entry data
+						 * @param Forminator_Form_Entry_Model $entry            - the entry model
+						 * @param int                         $form_id          - the form id
+						 * @param array                       $field_data_array - the entry data
 						 *
 						 */
 						do_action( 'forminator_polls_submit_before_set_fields', $entry, $form_id, $field_data_array );
 
 						$entry->set_fields( $field_data_array );
-						$setting   = $poll->settings;
+						$setting = $poll->settings;
 
-						if ( isset( $setting[ 'results-behav' ] ) && ( $setting[ 'results-behav' ] == 'show_after' ) ) {
-							$url       	= $_POST['_wp_http_referer'];
-							$render_id 	= $_POST['render_id'];
-							$url       	= add_query_arg( array( 'saved' => 'true', 'form_id' => $form_id, 'render_id' => $render_id ), $url );
-							$url 	 	= apply_filters( 'forminator_poll_submit_url', $url, $form_id );
-							return array(
-								'message' => __( "Your vote has been saved", Forminator::DOMAIN ),
-								'url'	  => $url,
-								'notice'  => 'success',
-								'success' => true
+						if ( isset( $setting['results-behav'] ) && ( 'show_after' == $setting['results-behav'] || 'link_on' == $setting['results-behav'] ) ) {
+							$url       = $_POST['_wp_http_referer'];
+							$render_id = $_POST['render_id'];
+							$url       = add_query_arg(
+								array(
+									'saved'     => 'true',
+									'form_id'   => $form_id,
+									'render_id' => $render_id,
+								),
+								$url
 							);
+							$url       = apply_filters( 'forminator_poll_submit_url', $url, $form_id );
+							$response  = array(
+								'message' => __( 'Your vote has been saved', Forminator::DOMAIN ),
+								'notice'  => 'success',
+								'success' => true,
+							);
+
+							if ( ! isset( $setting['enable-ajax'] ) || empty( $setting['enable-ajax'] ) ) {
+								$is_ajax_enabled = false;
+							} else {
+								$is_ajax_enabled = filter_var( $setting['enable-ajax'], FILTER_VALIDATE_BOOLEAN );
+							}
+
+							if ( $is_ajax_enabled ) {
+								// ajax enabled send result data to front end
+								$response['chart_data']  = $this->get_chart_data( $poll );
+								$response['back_button'] = '<button class="forminator-button" type="button">' . __( 'Back To poll', Forminator::DOMAIN ) . '</button>';
+							} else {
+								// its not ajax enabled, send url result to front end
+								$response['url'] = $url;
+							}
+
+							return $response;
 						}
+
 						return array(
-							'message' => __( "Your vote has been saved", Forminator::DOMAIN ),
+							'message' => __( 'Your vote has been saved', Forminator::DOMAIN ),
 							'notice'  => 'success',
-							'success' => true
+							'success' => true,
 						);
 					}
 				} else {
 					return array(
 						'message' => __( "You need to select a poll option", Forminator::DOMAIN ),
 						'notice'  => 'error',
-						'success' => false
+						'success' => false,
 					);
 				}
 			} else {
 				return array(
 					'message' => __( "You have already submitted a vote to this poll", Forminator::DOMAIN ),
 					'notice'  => 'notice',
-					'success' => false
+					'success' => false,
 				);
 			}
 		}
+
 		return false;
+	}
+
+	/**
+	 * Get Chart data of Poll
+	 *
+	 * @param Forminator_Poll_Form_Model $poll
+	 *
+	 * @return array
+	 */
+	private function get_chart_data( Forminator_Poll_Form_Model $poll ) {
+		$chart_colors         = apply_filters( 'forminator_poll_chart_color', Forminator_Poll_Front::$default_chart_colors );
+		$default_chart_colors = $chart_colors;
+		$chart_datas          = array();
+		$chart_datas[]        = array(
+			__( 'Question', Forminator::DOMAIN ),
+			__( 'Results', Forminator::DOMAIN ),
+			array( 'role' => 'style' ),
+			array( 'role' => 'annotation' ),
+		);
+
+		$form_settings        = $poll->settings;
+		$number_votes_enabled = false;
+		if ( isset( $settings['show-votes-count'] ) && $form_settings['show-votes-count'] ) {
+			$number_votes_enabled = true;
+		}
+
+		$fields_array = $poll->getFieldsAsArray();
+		$map_entries  = Forminator_Form_Entry_Model::map_polls_entries( $poll->id, $fields_array );
+		$fields       = $poll->getFields();
+		if ( ! is_null( $fields ) ) {
+			foreach ( $fields as $field ) {
+				$annotation = '';
+				$label = addslashes( $field->title );
+
+				if ( empty( $chart_colors ) ) {
+					$chart_colors = $default_chart_colors;
+				}
+				$color   = array_shift( $chart_colors );
+				$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
+				$entries = 0;
+				if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+					$entries = $map_entries[ $slug ];
+				}
+				if ( $number_votes_enabled ) {
+					$annotation = $entries . __( ' vote(s)', Forminator::DOMAIN );
+				}
+				$style = 'color: ' . $color;
+
+				$chart_datas[] = array(
+					(string) $label,
+					(int) $entries,
+					(string) $style,
+					(string) $annotation,
+				);
+			}
+
+		}
+
+		return $chart_datas;
 	}
 
 	/**

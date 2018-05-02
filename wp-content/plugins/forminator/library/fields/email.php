@@ -167,6 +167,27 @@ class Forminator_Email extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'email' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -206,14 +227,44 @@ class Forminator_Email extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
-		$id = $name  = self::get_property( 'element_id', $field );
-		$id          = $id . '-field';
- 		$required    = self::get_property( 'required', $field, false );
- 		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
- 		$value       = self::get_property( 'value', $field );
+		$this->field         = $field;
+		$this->form_settings = $settings;
 
- 		$html = sprintf( '<input class="forminator-email--field forminator-input" type="email" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s"/>', $required, $name, $placeholder, $value, $id );
+		$this->init_autofill($settings);
+
+		$id				= $name = self::get_property( 'element_id', $field );
+		$design			= $this->get_form_style( $settings );
+		$ariaid			= $id;
+		$id				= $id . '-field';
+		$required		= self::get_property( 'required', $field, false );
+		$placeholder	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$value			= self::get_property( 'value', $field );
+
+		$html = '';
+
+		if ( $design === 'material' ) {
+			$html .= '<div class="forminator-input--wrap">';
+		}
+
+		$email_attr       = array(
+			'id'				=> $id,
+			'name'				=> $name,
+			'placeholder'		=> $placeholder,
+			'data-required'		=> $required,
+			'class'				=> 'forminator-email--field forminator-input',
+			'type'				=> 'email',
+			'aria-labelledby'	=> 'forminator-label-' . $ariaid
+		);
+
+		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
+
+		$email_attr = array_merge( $email_attr, $autofill_markup );
+
+		$html .= self::create_input($email_attr);
+
+		if ( $design === 'material' ) {
+			$html .= '</div>';
+		}
 
 		return apply_filters( 'forminator_field_email_markup', $html, $id, $required, $placeholder, $value );
 	}

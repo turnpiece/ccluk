@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Forminator_Time
  *
+ * @property  array field
  * @since 1.0
  */
 class Forminator_Time extends Forminator_Field {
@@ -159,6 +160,25 @@ class Forminator_Time extends Forminator_Field {
 				),
 			),
 
+			array(
+				'id' => 'type',
+				'type' => 'Radio',
+				'name' => 'field_type',
+				'label' => __( "Field type", Forminator::DOMAIN ),
+				'size' => 12,
+				'className' => 'type-field',
+				'values' => array(
+					array(
+						'value' => "input",
+						'label' => __( 'Number inputs', Forminator::DOMAIN )
+					),
+					array(
+						'value' => "select",
+						'label' => __( 'Drop downs', Forminator::DOMAIN )
+					),
+				)
+			),
+
 		);
 	}
 
@@ -170,6 +190,7 @@ class Forminator_Time extends Forminator_Field {
 	 */
 	public function defaults() {
 		return array(
+			'field_type'  	 => 'input',
 			'time_type'      => 'twelve',
 			'field_label'    => '',
 			'hh_label'       => __( 'Hours', Forminator::DOMAIN ),
@@ -177,6 +198,35 @@ class Forminator_Time extends Forminator_Field {
 			'mm_label'       => __( 'Minutes', Forminator::DOMAIN ),
 			'mm_placeholder' => __( 'E.g. 00', Forminator::DOMAIN ),
 		);
+	}
+
+	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$hours_providers   = apply_filters( 'forminator_field_' . $this->slug . '_hours' . '_autofill', array(), $this->slug . '_hours' );
+		$minutes_providers = apply_filters( 'forminator_field_' . $this->slug . '_minutes' . '_autofill', array(), $this->slug . '_minutes' );
+		$ampm_providers    = apply_filters( 'forminator_field_' . $this->slug . '_ampm' . '_autofill', array(), $this->slug . '_ampm' );
+
+		$autofill_settings = array(
+			'time-hours'   => array(
+				'values' => forminator_build_autofill_providers( $hours_providers ),
+			),
+			'time-minutes' => array(
+				'values' => forminator_build_autofill_providers( $minutes_providers ),
+			),
+			'time-ampm'    => array(
+				'values' => forminator_build_autofill_providers( $ampm_providers ),
+			),
+		);
+
+		return $autofill_settings;
 	}
 
 	/**
@@ -192,18 +242,38 @@ class Forminator_Time extends Forminator_Field {
 			</div>
 		{[ } ]}
 		<div class="wpmudev-form-field--grouped">
-			<div class="wpmudev-form-field--group">
-				{[ if( field.hh_label !== "" ) { ]}
-					<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.hh_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
-				{[ } ]}
-				<input class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.hh_placeholder ) }}" />
-			</div>
-			<div class="wpmudev-form-field--group">
-				{[ if( field.mm_label !== "" ) { ]}
-					<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.mm_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
-				{[ } ]}
-				<input class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.mm_placeholder ) }}" />
-			</div>
+			{[ if( _.isUndefined(field.field_type) || field.field_type === "input" ) { ]}
+				<div class="wpmudev-form-field--group">
+					{[ if( field.hh_label !== "" ) { ]}
+						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.hh_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
+					{[ } ]}
+					<input class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.hh_placeholder ) }}" />
+				</div>
+				<div class="wpmudev-form-field--group">
+					{[ if( field.mm_label !== "" ) { ]}
+						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.mm_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
+					{[ } ]}
+					<input class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.mm_placeholder ) }}" />
+				</div>
+			{[ } ]}
+			{[ if( field.field_type === "select" ) { ]}
+				<div class="wpmudev-form-field--group">
+					{[ if( field.hh_label !== "" ) { ]}
+						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.hh_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
+					{[ } ]}
+					<select class="wpmudev-select">
+						<option>1</option>
+					</select>
+				</div>
+				<div class="wpmudev-form-field--group">
+					{[ if( field.mm_label !== "" ) { ]}
+						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.mm_label ) }}{[ if( field.field_label === "" && field.required == "true" ) { ]} *{[ } ]}</label>
+					{[ } ]}
+					<select class="wpmudev-select">
+						<option>0</option>
+					</select>
+				</div>
+			{[ } ]}
 			{[ if( field.time_type === "twelve" ) { ]}
 				<div class="wpmudev-form-field--group">
 					<label class="wpmudev-group--label"></label>
@@ -227,13 +297,15 @@ class Forminator_Time extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
-		$html        = '<div class="forminator-row forminator-row--inner forminator-align_btm">';
-		$id          = $name = self::get_property( 'element_id', $field );
-		$required    = self::get_property( 'required', $field, false );
-		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$type        = self::get_property( 'time_type', $field );
-		$field_label = self::get_property( 'field_label', $field );
+		$this->field	= $field;
+		$html			= '<div class="forminator-row forminator-row--time forminator-row--inner">';
+		$id				= $name = self::get_property( 'element_id', $field );
+		$required		= self::get_property( 'required', $field, false );
+		$design			= $this->get_form_style( $settings );
+		// backward compatibilty when time doesnt have field_type
+		$field_type		= self::get_property( 'field_type', $field, 'input' );
+		$type			= self::get_property( 'time_type', $field );
+		$field_label	= self::get_property( 'field_label', $field );
 
 		//mark hours and minutes required markup as false
 		if ( ! empty( $field_label ) ) {
@@ -266,9 +338,22 @@ class Forminator_Time extends Forminator_Field {
 				$html .= '<label class="forminator-label">' . $label . ' <span class="wpdui-icon wpdui-icon-asterisk"></span></label>';
 				$html .= '</div>';
 			}
-			$html .= self::create_simple_input( $hours, false, $field );
+			if ( $field_type === 'input' ) {
+				$html .= self::create_input( $hours, false, '', $required, $design );
+			}
 		} else {
-			$html .= self::create_input( $hours, self::get_property( 'hh_label', $field ) );
+			if ( $field_type === 'input' ) {
+				$html .= self::create_input( $hours, self::get_property( 'hh_label', $field ), '', $required, $design );
+			}
+		}
+		if ( $field_type === 'select' ) {
+			$hours_data = array(
+				'class' => 'forminator-time',
+				'name' => $id . '-hours',
+				'id' => $id . '-hours',
+			);
+
+			$html .= self::create_select( $hours_data, '', $this->get_hours( $type ), '', '', $required );
 		}
 
 		$html .= '</div>';
@@ -297,9 +382,23 @@ class Forminator_Time extends Forminator_Field {
 				$html .= '<label class="forminator-label">' . $label . ' <span class="wpdui-icon wpdui-icon-asterisk"></span></label>';
 				$html .= '</div>';
 			}
-			$html .= self::create_simple_input( $minutes, false, $field );
+
+			if ( $field_type === 'input' ) {
+				$html .= self::create_input( $minutes, false, '', $required, $design );
+			}
 		} else {
-			$html .= self::create_input( $minutes, self::get_property( 'mm_label', $field ) );
+			if ( $field_type === 'input' ) {
+				$html .= self::create_input( $minutes, self::get_property( 'mm_label', $field ), '', $required, $design );
+			}
+		}
+		if ( $field_type === 'select' ) {
+			$minutes_data = array(
+				'class' => 'forminator-time',
+				'name' => $id . '-minutes',
+				'id' => $id . '-minutes',
+			);
+
+			$html .= self::create_select( $minutes_data, '', $this->get_minutes(), '', '', $required );
 		}
 
 		$html .= '</div>';
@@ -310,7 +409,7 @@ class Forminator_Time extends Forminator_Field {
 			 * Create AM/PM field
 			 */
 			$ampm = array(
-				'class' => 'forminator-select',
+				'class' => 'forminator-time',
 				'name'  => $id . '-ampm',
 				'id'    => $id . '-ampm',
 			);
@@ -337,6 +436,54 @@ class Forminator_Time extends Forminator_Field {
 		$html .= '</div>';
 
 		return apply_filters( 'forminator_field_time_markup', $html, $field );
+	}
+
+	/**
+	 * Return hours
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $type
+	 *
+	 * @return array
+	 */
+	public function get_hours( $type ) {
+		$array = array();
+		if ( $type === 'twelve'  ) {
+			$min = 1;
+			$max = 12;
+		} else {
+			$min = 0;
+			$max = 23;
+		}
+
+		for ( $i = $min; $i <= $max; $i ++ ) {
+			$array[] = array(
+				'label' => $i,
+				'value' => $i
+			);
+		}
+
+		return apply_filters( 'forminator_field_time_get_hours', $array, $this );
+	}
+
+	/**
+	 * Return minutes
+	 *
+	 * @since 1.0.5
+	 * @return array
+	 */
+	public function get_minutes() {
+		$array = array();
+
+		for ( $i = 0; $i < 60; $i ++ ) {
+			$array[] = array(
+				'label' => $i,
+				'value' => $i
+			);
+		}
+
+		return apply_filters( 'forminator_field_time_get_minutes', $array, $this );
 	}
 
 	/**

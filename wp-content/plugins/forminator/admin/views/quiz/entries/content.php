@@ -140,8 +140,6 @@ $total_page = ceil( $count / $per_page );
 
 						<?php $path = forminator_plugin_dir(); ?>
 
-                        <label><?php _e( "Manual exports", Forminator::DOMAIN ); ?></label>
-
 						<div id="forminator-export--buttons">
 
                             <form class="wpmudev-export--form" method="post">
@@ -166,6 +164,7 @@ $total_page = ceil( $count / $per_page );
 
 							<?php
 							$schedule_day       = forminator_get_exporter_info( 'day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
+							$schedule_month_day = forminator_get_exporter_info( 'month_day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 							$schedule_time      = forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 							$schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 							$email              = forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
@@ -176,8 +175,14 @@ $total_page = ceil( $count / $per_page );
 								<?php if ( ! $enabled || empty( $email ) ): ?>
                                     <span><?php _e( "Scheduled export is not enabled", Forminator::DOMAIN ) ?></span>
 								<?php else: ?>
-                                    <span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
-                                        <br/><?php _e( "To be sent by email.", Forminator::DOMAIN ); ?></span>
+			                        <?php if (  $schedule_timeframe == 'weekly' ): ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
+			                        <?php elseif ( $schedule_timeframe == 'monthly' ): ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> every <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ( $schedule_month_day ? $schedule_month_day : 1 ), $schedule_time ); ?>
+			                        <?php else: ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), $schedule_time ); ?>
+                                    <?php endif; ?>
+									<br/><?php _e( "To be sent by email.", Forminator::DOMAIN ); ?></span>
 								<?php endif; ?>
                                 <a href="/"
                                    class="wpmudev-button wpmudev-button-ghost wpmudev-button-sm wpmudev-open-modal"

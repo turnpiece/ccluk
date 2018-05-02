@@ -127,8 +127,8 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 					$subject = forminator_replace_form_data( $setting['admin-email-title'], $data );
 					$subject = forminator_replace_custom_form_data( $subject, $custom_form, $data, $entry, $this->skip_custom_form_data['admin'] );
 
-					$message = forminator_replace_form_data( $setting['admin-email-editor'], $data );
-					$message = forminator_replace_variables( $message );
+					$message = forminator_replace_form_data( $setting['admin-email-editor'], $data, $custom_form, $entry );
+					$message = forminator_replace_variables( $message, $custom_form->id, $data['current_url'] );
 					$message = forminator_replace_custom_form_data( $message, $custom_form, $data, $entry, $this->skip_custom_form_data['admin'] );
 
 					/**
@@ -181,7 +181,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 				$subject = forminator_replace_custom_form_data( $subject, $custom_form, $data, $entry, $this->skip_custom_form_data['user'] );
 
 				$message = forminator_replace_form_data( $setting['user-email-editor'], $data );
-				$message = forminator_replace_variables( $message );
+				$message = forminator_replace_variables( $message, $custom_form->id, $data['current_url'] );
 				$message = forminator_replace_custom_form_data( $message, $custom_form, $data, $entry, $this->skip_custom_form_data['user'] );
 
 				/**
@@ -259,7 +259,13 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 				if( $field_type == "email" ) {
 					$field_id = $field_array['element_id'];
 					if( isset( $data[$field_id] ) && !empty( $data[$field_id] ) ) {
-						return $data[$field_id];
+						return apply_filters(
+							'forminator_get_user_email_data',
+							$data[$field_id],
+							$data,
+							$custom_form,
+							$this
+						);
 					}
 				}
 			}
@@ -279,19 +285,20 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 * @return bool
 	 */
 	private function get_user_email( $data, $custom_form ) {
+		$email = false;
 		$data_email = $this->get_user_email_data( $data, $custom_form );
 
 		if( $data_email && !empty( $data_email ) ) {
 			// We have data email, use it
-			return $data_email;
+			$email =  $data_email;
 		} else {
 			// Check if user logged in
 			if( is_user_logged_in() ) {
-				return $this->message_vars['user_email'];
+				$email = $this->message_vars['user_email'];
 			}
 		}
 
-		return false;
+		return apply_filters( 'forminator_get_user_email', $email, $data, $custom_form, $data_email, $this );
 	}
 
 	/**
@@ -324,19 +331,20 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 * @return array
 	 */
 	private function get_admin_email_recipents( $setting ) {
+		$email = array();
 		// backward compatibility for version < 1.0.3
 		// when `admin-email-recipients` not exist use admin email
 		if ( ! isset( $setting['admin-email-recipients'] ) ) {
-			return array( get_option( 'admin_email' ) );
+			$email = array( get_option( 'admin_email' ) );
 		}
 
 		if ( isset( $setting['admin-email-recipients'] ) && ! empty( $setting['admin-email-recipients'] ) ) {
 			if ( is_array( $setting['admin-email-recipients'] ) ) {
-				return $setting['admin-email-recipients'];
+				$email = $setting['admin-email-recipients'];
 			}
 		}
 
-		return array();
+		return apply_filters( 'forminator_get_admin_email_recipents', $email, $setting );
 	}
 
 	/**

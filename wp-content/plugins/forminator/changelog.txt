@@ -4,6 +4,33 @@ Author: Cvetan Cvetanov (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+1.0.5 - 2018-05-01
+----------------------------------------------------------------------
+- Add: Share quiz contains results not only URL to the quiz
+- Add: Uploaded file variable
+- Add: DropDown type for time field
+- Add: GDPR consent checkbox field
+- Add: Entries have own page
+- Add: Auto fill data for logged in users.
+- Add: Preview button to form builder.
+- Add: Vanilla theme ( Theme styles used )
+- Add: New color settings
+- Improvement: Toggle color fields in appearance depending on selection.
+- Improvement: Create anonymous user when visitor submit post
+- Improvement: DatePicker localized
+- Improvement: Form data variables added for thank you message
+- Fix: Wrong message displays if user selected single text line in Text field and turned on field limit
+- Fix: Character Limit in Phone field not functional
+- Fix: "Date" field calendar minimum year is 2008
+- Fix: Scheduled exports changes are not saved correctly
+- Fix: Time field validation appearance
+- Fix: Jpg format not saved for quizzes
+- Fix: Field settings updated on change instead of blur
+- Fix: Hustle compatibility issues
+- Fix: IE11 appearance issues
+- Fix: Multiple styling issues
+- Other minor enhancements/fixes
+
 1.0.4 - 2018-03-20
 ----------------------------------------------------------------------
 - Add: Validation message for Upload field
@@ -65,4 +92,4 @@ Change Log:
 - First public release
 
 
-87274-1521663253-au
+87274-1525286356-au

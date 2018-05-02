@@ -1,0 +1,1 @@
+<h1><?php _e( "Forminator Entries", Forminator::DOMAIN ); ?></h1>

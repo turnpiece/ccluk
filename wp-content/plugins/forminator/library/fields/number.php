@@ -168,6 +168,27 @@ class Forminator_Number extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'number' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -197,22 +218,43 @@ class Forminator_Number extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field    = $field;
-		$min            = 0;
-		$max            = '';
-		$id = $name  	= self::get_property( 'element_id', $field );
-		$id          	= $id . '-field';
-		$required 		= self::get_property( 'required', $field, false );
-		$placeholder 	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$value 			= self::get_property( 'value', $field );
-		$limit 	        = self::get_property( 'number_limit', $field, false );
+		$this->field         = $field;
+		$this->form_settings = $settings;
+
+		$this->init_autofill($settings);
+
+		$min         = 0;
+		$max         = '';
+		$id          = $name = self::get_property( 'element_id', $field );
+		$id          = $id . '-field';
+		$required    = self::get_property( 'required', $field, false );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$value       = self::get_property( 'value', $field );
+		$limit       = self::get_property( 'number_limit', $field, false );
 
 		if( $limit ) {
 			$min = self::get_property( 'limit_min', $field, '' );
 			$max = self::get_property( 'limit_max', $field, '' );
 		}
 
-		$html = !empty( $max ) || $max === '0' ? sprintf( '<input class="forminator-number--field forminator-input" type="number" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" min="%s" max="%s"/>', $required, $name, $placeholder, $value, $id, $min, $max ) : sprintf( '<input class="forminator-number--field forminator-input" type="number" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" min="%s" />', $required, $name, $placeholder, $value, $id, $min );
+		$number_attr = array(
+			'type'          => 'number',
+			'class'         => 'forminator-number--field forminator-input',
+			'data-required' => $required,
+			'name'          => $name,
+			'placeholder'   => $placeholder,
+			'value'         => $value,
+			'min'           => $min,
+
+		);
+
+		if ( ! empty( $max ) || $max === '0' ) {
+			$number_attr['max'] = $max;
+		}
+		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
+		$number_attr     = array_merge( $number_attr, $autofill_markup );
+
+		$html = self::create_input( $number_attr );
 
 		return apply_filters( 'forminator_field_number_markup', $html, $id, $required, $placeholder, $value );
 	}
@@ -291,10 +333,12 @@ class Forminator_Number extends Forminator_Field {
 	 * @param array|string $data
 	 */
 	public function validate( $field, $data ) {
+		$id 	= self::get_property( 'element_id', $field );
+		$max 	= self::get_property( 'limit_max', $field, $data );
+		$min 	= self::get_property( 'limit_min', $field, $data );
+		$is_limited = self::get_property( 'number_limit', $field, false );
+
 		if ( $this->is_required( $field ) ) {
-			$id 	= self::get_property( 'element_id', $field );
-			$max 	= self::get_property( 'limit_max', $field, $data );
-			$min 	= self::get_property( 'limit_min', $field, $data );
 
 			if ( empty( $data ) ) {
 				$this->validation_message[ $id ] = apply_filters(
@@ -305,34 +349,34 @@ class Forminator_Number extends Forminator_Field {
 					$data,
 					$this
 				);
-			} else {
-				if ( !is_numeric( $data ) ) {
-					$this->validation_message[ $id ] = apply_filters(
-						'forminator_field_number_numeric_validation_message',
-						__( 'Only numbers allowed', Forminator::DOMAIN ),
+			}
+		}
+
+		if ( !is_numeric( $data ) && ! empty( $data ) ) {
+			$this->validation_message[ $id ] = apply_filters(
+				'forminator_field_number_numeric_validation_message',
+				__( 'Only numbers allowed', Forminator::DOMAIN ),
+				$id,
+				$field,
+				$data,
+				$this
+			);
+		} else {
+			$data 	= intval( $data );
+			$min 	= intval( $min );
+			$max 	= intval( $max );
+			if ( $is_limited && ( ( $data < $min ) || ( $data > $max ) ) ) {
+				$this->validation_message[ $id ] = sprintf(
+					apply_filters(
+						'forminator_field_number_max_min_validation_message',
+						__( 'The number shoud be less than %d and greater than %d', Forminator::DOMAIN ),
 						$id,
 						$field,
-						$data,
-						$this
-					);
-				} else {
-					$data 	= intval( $data );
-					$min 	= intval( $min );
-					$max 	= intval( $max );
-					if ( ( $data < $min ) || ( $data > $max ) ) {
-						$this->validation_message[ $id ] = sprintf(
-							apply_filters(
-								'forminator_field_number_max_min_validation_message',
-								__( 'The number shoud be less than %d and greater than %d', Forminator::DOMAIN ),
-								$id,
-								$field,
-								$data
-							),
-							$max,
-							$min
-						);
-					}
-				}
+						$data
+					),
+					$max,
+					$min
+				);
 			}
 		}
 	}

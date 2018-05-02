@@ -330,6 +330,7 @@ function forminator_get_form_id_helper() {
 		'forminator_page_forminator-quiz-view',
 		'forminator_page_forminator-cform-view',
 		'forminator_page_forminator-poll-view',
+		'forminator_page_forminator-entries',
 	);
 	if ( ! in_array( $screen->id, $ids ) ) {
 		return 0;
@@ -350,6 +351,7 @@ function forminator_get_form_type_helper() {
 		'forminator_page_forminator-quiz-view',
 		'forminator_page_forminator-cform-view',
 		'forminator_page_forminator-poll-view',
+		'forminator_page_forminator-entries',
 	);
 	if ( ! in_array( $screen->id, $ids ) ) {
 		return 0;
@@ -370,6 +372,21 @@ function forminator_get_form_type_helper() {
 			break;
 		case 'forminator-cform-view':
 			$form_type = "cform";
+			break;
+		case 'forminator-entries':
+			if ( isset( $_GET['form_type'] ) && $_GET['form_type'] ) {
+				switch ( $_GET['form_type'] ) {
+					case 'forminator_forms':
+						$form_type = "cform";
+						break;
+					case 'forminator_polls':
+						$form_type = "poll";
+						break;
+					case 'forminator_quizzes':
+						$form_type = "quiz";
+						break;
+				}
+			}
 			break;
 	}
 

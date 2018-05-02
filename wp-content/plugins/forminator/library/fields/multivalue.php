@@ -169,6 +169,27 @@ class Forminator_MultiValue extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'checkbox' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -218,40 +239,74 @@ class Forminator_MultiValue extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
-		$i           = 1;
-		$html        = '';
-		$id          = $name = self::get_property( 'element_id', $field );
-		$id          = $id . '-field';
-		$uniq_id     = uniqid();
-		$name        = $name . '[]';
-		$required    = self::get_property( 'required', $field, false );
-		$options     = self::get_property( 'options', $field, array() );
-		$value_type  = isset( $field['value_type'] ) ? $field['value_type'] : "multiselect";
+		$this->field	= $field;
+		$i				= 1;
+		$html			= '';
+		$id				= $name = self::get_property( 'element_id', $field );
+		$ariaid			= $id;
+		$id				= $id . '-field';
+		$uniq_id		= uniqid();
+		$name			= $name . '[]';
+		$required		= self::get_property( 'required', $field, false );
+		$options		= self::get_property( 'options', $field, array() );
+		$value_type		= isset( $field['value_type'] ) ? $field['value_type'] : "multiselect";
 
 		if ( $value_type == "multiselect" ) {
+
 			$html .= '<ul class="forminator-multiselect">';
-			foreach ( $options as $option ) {
-				$value    = $option['value'] ? $option['value'] : $option['label'];
-				$input_id = $id . '-' . $i;
-				$html     .= sprintf( '<li class="forminator-multiselect--item">' );
-				$html     .= sprintf( '<input id="%s" name="%s" type="checkbox" value="%s">', $input_id . '-' . $uniq_id, $name, $value );
-				$html     .= sprintf( '<label for="%s">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
-				$html     .= sprintf( '</li>' );
-				$i ++;
-			}
+
+				foreach ( $options as $option ) {
+
+					$value    = $option['value'] ? $option['value'] : $option['label'];
+					$input_id = $id . '-' . $i;
+
+					if ( $this->get_form_style( $settings ) == 'clean' ) {
+
+						$html .= '<li class="forminator-multiselect--item">';
+						$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s"> %s', $input_id . '-' . $uniq_id, $name, $value, $option['label'] );
+						$html .= '</li>';
+
+					} else {
+
+						$html     .= sprintf( '<li class="forminator-multiselect--item">' );
+						$html     .= sprintf( '<input id="%s" name="%s" type="checkbox" value="%s">', $input_id . '-' . $uniq_id, $name, $value );
+						$html     .= sprintf( '<label for="%s">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
+						$html     .= sprintf( '</li>' );
+
+					}
+
+					$i ++;
+				}
+
 			$html .= '</ul>';
+
 		} else {
+
 			foreach ( $options as $option ) {
+
 				$value    = $option['value'] ? $option['value'] : $option['label'];
 				$input_id = $id . '-' . $i;
-				$html     .= '<div class="forminator-checkbox">';
-				$html     .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" class="forminator-checkbox--input">', $input_id . '-' . $uniq_id, $name, $value );
-				$html     .= sprintf( '<label for="%s" class="forminator-checkbox--design wpdui-icon wpdui-icon-check" aria-hidden="true"></label>', $input_id . '-' . $uniq_id );
-				$html     .= sprintf( '<label for="%s" class="forminator-checkbox--label">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
-				$html     .= '</div>';
+
+				if ( $this->get_form_style( $settings ) == 'clean' ) {
+
+					$html .= '<label class="forminator-checkbox">';
+					$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s"> %s', $input_id . '-' . $uniq_id, $name, $value, $option['label'] );
+					$html .= '</label>';
+
+				} else {
+
+					$html     .= '<div class="forminator-checkbox">';
+					$html     .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" class="forminator-checkbox--input">', $input_id . '-' . $uniq_id, $name, $value );
+					$html     .= sprintf( '<label for="%s" class="forminator-checkbox--design wpdui-icon wpdui-icon-check" aria-hidden="true"></label>', $input_id . '-' . $uniq_id );
+					$html     .= sprintf( '<label for="%s" class="forminator-checkbox--label">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
+					$html     .= '</div>';
+
+				}
+
 				$i ++;
+
 			}
+
 		}
 
 		return apply_filters( 'forminator_field_multiple_markup', $html, $id, $required, $options, $value_type );

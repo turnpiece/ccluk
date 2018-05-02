@@ -108,12 +108,24 @@
 			this.update_buttons();
 		},
 
-		render_footer_navigation: function () {
-			// noinspection Annotator
-			this.$el.append('<div class="forminator-pagination--footer">' +
-				'<button class="forminator-button forminator-pagination-prev"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_prev + '</span></button>' +
-				'<button class="forminator-button forminator-pagination-next"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_next + '</span></button>' +
-				'</div>');
+		render_footer_navigation: function() {
+
+			if ( this.$el.hasClass('forminator-design--material') ) {
+				
+				this.$el.append( '<div class="forminator-pagination--footer">' +
+					'<button class="forminator-button forminator-pagination-prev"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_prev + '</span></button>' +
+					'<button class="forminator-button forminator-pagination-next"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_next + '</span></button>' +
+				'</div>' );
+
+			} else {
+				
+				this.$el.append( '<div class="forminator-pagination--footer">' +
+					'<button class="forminator-button forminator-pagination-prev">' + window.ForminatorFront.cform.pagination_prev + '</button>' +
+					'<button class="forminator-button forminator-pagination-next">' + window.ForminatorFront.cform.pagination_next + '</button>' +
+				'</div>' );
+
+			}
+
 		},
 
 		render_navigation: function () {
@@ -123,33 +135,63 @@
 
 			var steps = this.$el.find('.forminator-pagination').not('.forminator-pagination-start');
 
-			steps.each(function () {
-				var $step = $(this),
-					label = $step.data('label'),
-					step = $step.data('step') - 1
-				;
-
-				$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
-					'<span class="forminator-step-text">' + label + '</span>' +
-					'<span class="forminator-step-dot" aria-label="hidden"></span>' +
-					'</li>'
-				);
-			});
-
 			var finalSteps = this.$el.find('.forminator-pagination-start');
 
-			finalSteps.each(function () {
-				var $step = $(this),
-					label = $step.data('label'),
-					step = steps.length
-				;
+			if ( this.$el.hasClass('forminator-design--material') ) {
 
-				$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
-					'<span class="forminator-step-text">' + label + '</span>' +
-					'<span class="forminator-step-dot" aria-label="hidden"></span>' +
-					'</li>'
-				);
-			});
+				steps.each(function () {
+					var $step = $(this),
+						label = $step.data('label'),
+						step = $step.data('step') - 1
+					;
+	
+					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
+						'<span class="forminator-step-text">' + label + '</span>' +
+						'</li>'
+					);
+				});
+
+				finalSteps.each(function () {
+					var $step = $(this),
+						label = $step.data('label'),
+						step = steps.length
+					;
+	
+					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
+						'<span class="forminator-step-text">' + label + '</span>' +
+						'</li>'
+					);
+				});
+
+			} else {
+
+				steps.each(function () {
+					var $step = $(this),
+						label = $step.data('label'),
+						step = $step.data('step') - 1
+					;
+	
+					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
+						'<span class="forminator-step-text">' + label + '</span>' +
+						'<span class="forminator-step-dot" aria-label="hidden"></span>' +
+						'</li>'
+					);
+				});
+
+				finalSteps.each(function () {
+					var $step = $(this),
+						label = $step.data('label'),
+						step = steps.length
+					;
+	
+					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
+						'<span class="forminator-step-text">' + label + '</span>' +
+						'<span class="forminator-step-dot" aria-label="hidden"></span>' +
+						'</li>'
+					);
+				});
+
+			}
 		},
 
 		handle_click: function (type) {

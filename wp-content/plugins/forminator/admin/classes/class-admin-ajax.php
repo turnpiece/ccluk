@@ -21,8 +21,7 @@ class Forminator_Admin_AJAX {
 		add_action( "wp_ajax_nopriv_forminator_dismiss_welcome", array( $this, "dismiss_welcome" ) );
 
 		// Handle load google fonts
-		add_action( "wp_ajax_forminator_load_google_fonts", array( $this, "load_fonts" ) );
-		add_action( "wp_ajax_nopriv_forminator_load_google_fonts", array( $this, "load_fonts" ) );
+		add_action( "wp_ajax_forminator_load_google_fonts", array( $this, "load_google_fonts" ) );
 
 		// Handle save settings
 		add_action( "wp_ajax_forminator_save_builder_fields", array( $this, "save_custom_form" ) );
@@ -169,8 +168,10 @@ class Forminator_Admin_AJAX {
 		$formModel->settings = $settings;
 
 		foreach ( $answers as $answer ) {
-			$fieldModel = new Forminator_Form_Field_Model();
+			$fieldModel   = new Forminator_Form_Field_Model();
+			$answer['id'] = $answer['element_id'];
 			$fieldModel->import( $answer );
+			$fieldModel->slug = $answer['element_id'];
 			$formModel->addField( $fieldModel );
 		}
 
@@ -290,6 +291,7 @@ class Forminator_Admin_AJAX {
 	 * @since 1.0
 	 */
 	function load_fonts() {
+		_deprecated_function( 'load_fonts', '1.0.5', 'load_google_fonts' );
 		$active = $html = "";
 		$fonts  = forminator_get_font_families();
 
@@ -305,6 +307,17 @@ class Forminator_Admin_AJAX {
 			}
 		}
 		wp_send_json_success( $html );
+	}
+
+
+	/**
+	 * Load google events
+	 *
+	 * @since 1.0.5
+	 */
+	function load_google_fonts() {
+		$fonts = forminator_get_font_families();
+		wp_send_json_success( $fonts );
 	}
 
 	/**
@@ -491,13 +504,10 @@ class Forminator_Admin_AJAX {
 		$preview_data = false;
 		$form_id      = false;
 
+		// Only set form_id if only `id` was sent, if its not sent, let it go
+		// Since form can be preview-ed, even its not already been saved
 		if ( isset( $_POST['id'] ) ) {
 			$form_id = intval( $_POST['id'] );
-		}
-
-		// Validate ID
-		if ( ! isset( $_POST['id'] ) || empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {
-			wp_send_json_error();
 		}
 
 		// Check if preview data set

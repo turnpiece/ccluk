@@ -63,6 +63,7 @@ class Forminator_Text extends Forminator_Field {
 
 	/**
 	 * @since 1.0
+	 *
 	 * @param array $settings
 	 *
 	 * @return array
@@ -70,128 +71,128 @@ class Forminator_Text extends Forminator_Field {
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
-				'className' => 'required-field',
-				'hide_label' => true,
+				'id'            => 'required',
+				'type'          => 'Toggle',
+				'name'          => 'required',
+				'className'     => 'required-field',
+				'hide_label'    => true,
 				'default_value' => false,
-				'values' => array(
+				'values'        => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
 			),
 
 			array(
-				'id' => 'separator-1',
-				'type' => 'Separator',
-				'name' => 'separator',
+				'id'         => 'separator-1',
+				'type'       => 'Separator',
+				'name'       => 'separator',
 				'hide_label' => true,
-				'className' => 'separator-field',
+				'className'  => 'separator-field',
 			),
 
 			array(
-				'id' => 'input-type',
-				'type' => 'Radio',
-				'name' => 'input_type',
-				'label' => __( "Text input type", Forminator::DOMAIN ),
-				'className' => 'radio-field',
+				'id'            => 'input-type',
+				'type'          => 'Radio',
+				'name'          => 'input_type',
+				'label'         => __( "Text input type", Forminator::DOMAIN ),
+				'className'     => 'radio-field',
 				'default_value' => 'line',
-				'values' => array(
+				'values'        => array(
 					array(
 						'value' => 'line',
-						'label' => __( 'Single line text', Forminator::DOMAIN )
+						'label' => __( 'Single line text', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => 'paragraph',
-						'label' => __( 'Paragraph text', Forminator::DOMAIN )
-					)
-				)
-			),
-
-			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
-				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'field-placeholder',
-				'type' => 'Text',
-				'name' => 'placeholder',
-				'hide_label' => false,
-				'label'	=> __( 'Placeholder', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'field-description',
-				'type' => 'Text',
-				'name' => 'description',
-				'hide_label' => false,
-				'label'	=> __( 'Description', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'separator-2',
-				'type' => 'Separator',
-				'name' => 'separator',
-				'hide_label' => true,
-				'className' => 'separator-field',
-			),
-
-			array(
-				'id' => 'text-limit',
-				'type' => 'ToggleContainer',
-				'name' => 'text_limit',
-				'hide_label' => true,
-				'has_content' => true,
-				'containerClass' => 'wpmudev-has_cols',
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Use input limit', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
+						'label' => __( 'Paragraph text', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+			),
+
+			array(
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
+				'hide_label' => false,
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'field-placeholder',
+				'type'       => 'Text',
+				'name'       => 'placeholder',
+				'hide_label' => false,
+				'label'      => __( 'Placeholder', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'field-description',
+				'type'       => 'Text',
+				'name'       => 'description',
+				'hide_label' => false,
+				'label'      => __( 'Description', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'separator-2',
+				'type'       => 'Separator',
+				'name'       => 'separator',
+				'hide_label' => true,
+				'className'  => 'separator-field',
+			),
+
+			array(
+				'id'             => 'text-limit',
+				'type'           => 'ToggleContainer',
+				'name'           => 'text_limit',
+				'hide_label'     => true,
+				'has_content'    => true,
+				'containerClass' => 'wpmudev-has_cols',
+				'values'         => array(
+					array(
+						'value'      => "true",
+						'label'      => __( 'Use input limit', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+				'fields'         => array(
 
 					array(
-						'id' => 'field-limit',
-						'type' => 'Number',
-						'name' => 'limit',
-						'className' => 'select-field',
+						'id'            => 'field-limit',
+						'type'          => 'Number',
+						'name'          => 'limit',
+						'className'     => 'select-field',
 						'default_value' => 180,
-						'label' => __( 'Limit field to:', Forminator::DOMAIN )
+						'label'         => __( 'Limit field to:', Forminator::DOMAIN ),
 					),
 
 					array(
-						'id' => 'field-limit-type',
-						'type' => 'Select',
-						'name' => 'limit_type',
-						'className' => 'number-field',
-						'hide_label' => true,
+						'id'            => 'field-limit-type',
+						'type'          => 'Select',
+						'name'          => 'limit_type',
+						'className'     => 'number-field',
+						'hide_label'    => true,
 						'default_value' => 'characters',
-						'values' => array(
+						'values'        => array(
 							array(
 								'value' => 'characters',
-								'label' => __( 'Characters', Forminator::DOMAIN )
+								'label' => __( 'Characters', Forminator::DOMAIN ),
 							),
 							array(
 								'value' => 'words',
-								'label' => __( 'Words', Forminator::DOMAIN )
-							)
-						)
-					)
+								'label' => __( 'Words', Forminator::DOMAIN ),
+							),
+						),
+					),
 
-				)
+				),
 			),
 		);
 	}
@@ -209,6 +210,27 @@ class Forminator_Text extends Forminator_Field {
 			'limit_type'  => 'characters',
 			'field_label' => __( 'Text', Forminator::DOMAIN ),
 		);
+	}
+
+	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'text' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
 	}
 
 	/**
@@ -244,23 +266,79 @@ class Forminator_Text extends Forminator_Field {
 	 * Field front-end markup
 	 *
 	 * @since 1.0
+	 *
 	 * @param $field
 	 * @param $settings
 	 *
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
-		$id = $name  = self::get_property( 'element_id', $field );
-		$id          = $id . '-field';
-		$required    = self::get_property( 'required', $field, false );
-		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ));
-		$field_type  = self::get_property( 'input_type', $field );
+		$this->field         = $field;
+		$this->form_settings = $settings;
 
-		if( $field_type == "paragraph" ) {
-			$html = sprintf( '<textarea class="forminator-textarea" name="%s" placeholder="%s" id="%s" /></textarea>', $name, $placeholder, $id );
+		$this->init_autofill($settings);
+
+		$id				= $name = self::get_property( 'element_id', $field );
+		$ariaid			= $id;
+		$id				= $id . '-field';
+		$required		= self::get_property( 'required', $field, false );
+		$placeholder	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$field_type		= self::get_property( 'input_type', $field );
+		$design			= $this->get_form_style( $settings );
+
+		$html = '';
+
+		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
+
+		if ( $field_type == "paragraph" ) {
+
+			if ( $design === 'material' ) {
+				$html .= '<div class="forminator-textarea--wrap">';
+			}
+
+			$textarea = array(
+				'class'				=> 'forminator-textarea',
+				'name'				=> $name,
+				'placeholder'		=> $placeholder,
+				'id'				=> $id,
+				'aria-labelledby'	=> 'forminator-label-' . $ariaid
+			);
+
+			if ( isset( $autofill_markup['value'] ) ) {
+				$textarea['content'] = $autofill_markup['value'];
+				unset( $autofill_markup['value'] );
+			}
+			$textarea = array_merge( $textarea, $autofill_markup );
+
+			$html     .= self::create_textarea( $textarea );
+
+			if ( $design === 'material' ) {
+				$html .= '</div>';
+			}
+
 		} else {
-			$html = sprintf( '<input class="forminator-input forminator-name--field" type="text" data-required="%s" name="%s" placeholder="%s" id="%s" />', $required, $name, $placeholder, $id );
+
+			if ( $design === 'material' ) {
+				$html .= '<div class="forminator-input--wrap">';
+			}
+
+			$input_text = array(
+				'class'				=> 'forminator-input forminator-name--field',
+				'name'				=> $name,
+				'placeholder'		=> $placeholder,
+				'id'				=> $id,
+				'data-required'		=> $required,
+				'aria-labelledby'	=> 'forminator-label-' . $ariaid
+			);
+
+			$input_text = array_merge( $input_text, $autofill_markup );
+
+			$html .= self::create_input( $input_text );
+
+			if ( $design === 'material' ) {
+				$html .= '</div>';
+			}
+
 		}
 
 		return apply_filters( 'forminator_field_text_markup', $html, $field );
@@ -284,9 +362,10 @@ class Forminator_Text extends Forminator_Field {
 
 		if ( $is_required || $has_limit ) {
 			$rules = '"' . $this->get_id( $field ) . '": {';
-			if( $is_required ) {
+			if ( $is_required ) {
 				$rules .= '"required": true,';
 			}
+
 			if( $has_limit ) {
 				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
 					$rules .= '"maxlength": ' . $field['limit'] . ',';
@@ -316,15 +395,16 @@ class Forminator_Text extends Forminator_Field {
 		if ( $is_required || $has_limit ) {
 			$messages .= '"' . $this->get_id( $field ) . '": {';
 
-			if( $is_required ) {
+			if ( $is_required ) {
 				$required_error = apply_filters(
 					'forminator_text_field_required_validation_message',
 					__( 'This field is required. Please enter text', Forminator::DOMAIN ),
 					$id,
 					$field
 				);
-				$messages .= '"required": "' . $required_error . '",' . "\n";
+				$messages       .= '"required": "' . $required_error . '",' . "\n";
 			}
+
 			if( $has_limit ) {
 				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
 					$max_length_error = apply_filters(
@@ -333,7 +413,7 @@ class Forminator_Text extends Forminator_Field {
 						$id,
 						$field
 					);
-					$messages .= '"maxlength": "' . $max_length_error . '",' . "\n";
+					$messages         .= '"maxlength": "' . $max_length_error . '",' . "\n";
 				} else {
 					$max_words_error = apply_filters(
 						'forminator_text_field_words_validation_message',
@@ -341,7 +421,7 @@ class Forminator_Text extends Forminator_Field {
 						$id,
 						$field
 					);
-					$messages .= '"maxwords": "' . $max_words_error . '",' . "\n";
+					$messages        .= '"maxwords": "' . $max_words_error . '",' . "\n";
 				}
 			}
 
@@ -355,7 +435,8 @@ class Forminator_Text extends Forminator_Field {
 	 * Field back-end validation
 	 *
 	 * @since 1.0
-	 * @param array $field
+	 *
+	 * @param array        $field
 	 * @param array|string $data
 	 */
 	public function validate( $field, $data ) {
@@ -399,7 +480,7 @@ class Forminator_Text extends Forminator_Field {
 	 *
 	 * @since 1.0.2
 	 *
-	 * @param array $field
+	 * @param array        $field
 	 * @param array|string $data - the data to be sanitized
 	 *
 	 * @return array|string $data - the data after sanitization

@@ -21,7 +21,9 @@
 			rules: {},
 			messages: {},
 			conditions: {},
-			inline_validation: false
+			inline_validation: false,
+			chart_design: 'bar',
+			chart_options: {}
 		};
 
 	// The actual plugin constructor
@@ -47,7 +49,23 @@
 			var self = this;
 
 			$(this.forminator_loader_selector).remove();
-			this.$el.show();
+
+			// If form from hustle popup, do not show
+			if(this.$el.closest('.wph-modal').length === 0) {
+				this.$el.show();
+			}
+
+			// Show form when popup trigger with click
+			$(document).on("hustle:module:displayed", function( e, data ) {
+				var $modal = $('.wph-modal-active');
+				$modal.find('form').css('display', '');
+			});
+
+			// Show form when popup trigger
+			setTimeout(function() {
+				var $modal = $('.wph-modal-active');
+				$modal.find('form').css('display', '');
+			}, 10);
 
 			//selective activation based on type of form
 			switch (this.settings.form_type) {
@@ -64,7 +82,13 @@
 			}
 
 			//init submit
-			$(this.element).forminatorFrontSubmit({form_type: self.settings.form_type, forminator_selector: self.forminator_selector});
+			$(this.element).forminatorFrontSubmit({
+				form_type: self.settings.form_type,
+				forminator_selector: self.forminator_selector,
+				chart_design: self.settings.chart_design,
+				chart_options: self.settings.chart_options,
+			});
+
 
 			// TODO: confirm usage on form type
 			// Handle field activation classes
@@ -95,7 +119,7 @@
 			$(this.element).forminatorFrontCondition(this.settings.conditions);
 
 			//initiate datepicker
-			$(this.element).find('.forminator-datepicker').forminatorFrontDatePicker();
+			$(this.element).find('.forminator-datepicker').forminatorFrontDatePicker(this.settings.calendar);
 
 			//initiate select2
 			this.init_select2();
@@ -123,7 +147,6 @@
 			});
 
 		},
-
 		init_poll_form: function () {
 			var self = this,
 				$selection = this.$el.find('.forminator-radio--field'),
@@ -175,16 +198,18 @@
 				$(this).closest('.forminator-question--answers').find('.forminator-submit-rightaway').addClass('forminator-has-been-disabled').attr('disabled', 'disabled');
 			});
 
-			var social_shares = {
-				'facebook': 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href,
-				'twitter': 'https://twitter.com/intent/tweet?url=' + window.location.href,
-				'google': 'https://plus.google.com/share?url=' + window.location.href,
-				'linkedin': 'https://www.linkedin.com/shareArticle?mini=true&url=' + window.location.href
-			};
 
 			this.$el.on('click', '.forminator-share--icon a', function (e) {
 				e.preventDefault();
-				var social = $(this).data('social');
+				var social = $(this).data('social'),
+					message = $(this).closest('.forminator-share--icons').data('message'),
+					social_shares = {
+						'facebook': 'https://www.facebook.com/sharer/sharer.php?u=' + window.location.href + '&t=' + message,
+						'twitter': 'https://twitter.com/intent/tweet?&url=' + window.location.href + '&text=' + message,
+						'google': 'https://plus.google.com/share?url=' + window.location.href,
+						'linkedin': 'https://www.linkedin.com/shareArticle?mini=true&url=' + window.location.href + '&title=' + message
+					};
+
 				if (social_shares[social] !== undefined) {
 					var newwindow = window.open(social_shares[social], social, 'height=' + $(window).height() + ',width=' + $(window).width());
 					if (window.focus) {
@@ -230,14 +255,35 @@
 
 		init_select2: function () {
 
-			var form = $(this.element);
+			var form = $(this.element),
+				form_id = form.attr('id');
 
-			if (form.hasClass('forminator-design--material')) {
+			if (form.hasClass('forminator-design--default')) {
 
 				$(this.element).find(".forminator-select").wpmuiSelect({
 					allowClear: false,
 					containerCssClass: "forminator-select2",
-					dropdownCssClass: "forminator-dropdown forminator-dropdown--material"
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--default forminator-ddfor--" + form_id
+				});
+
+				$(this.element).find(".forminator-time").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-droptime forminator-droptime--default forminator-ddfor--" + form_id
+				});
+
+			} else if (form.hasClass('forminator-design--material')) {
+
+				$(this.element).find(".forminator-select").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--material forminator-ddfor--" + form_id
+				});
+
+				$(this.element).find(".forminator-time").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-droptime forminator-droptime--material forminator-ddfor--" + form_id
 				});
 
 			} else if (form.hasClass('forminator-design--bold')) {
@@ -245,7 +291,13 @@
 				$(this.element).find(".forminator-select").wpmuiSelect({
 					allowClear: false,
 					containerCssClass: "forminator-select2",
-					dropdownCssClass: "forminator-dropdown forminator-dropdown--bold"
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--bold forminator-ddfor--" + form_id
+				});
+
+				$(this.element).find(".forminator-time").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-droptime forminator-droptime--bold forminator-ddfor--" + form_id
 				});
 
 			} else if (form.hasClass('forminator-design--flat')) {
@@ -253,7 +305,13 @@
 				$(this.element).find(".forminator-select").wpmuiSelect({
 					allowClear: false,
 					containerCssClass: "forminator-select2",
-					dropdownCssClass: "forminator-dropdown forminator-dropdown--flat"
+					dropdownCssClass: "forminator-dropdown forminator-dropdown--flat forminator-ddfor--" + form_id
+				});
+
+				$(this.element).find(".forminator-time").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-droptime forminator-droptime--flat forminator-ddfor--" + form_id
 				});
 
 			} else {
@@ -261,7 +319,13 @@
 				$(this.element).find(".forminator-select").wpmuiSelect({
 					allowClear: false,
 					containerCssClass: "forminator-select2",
-					dropdownCssClass: "forminator-dropdown forminator-dropdown--default"
+					dropdownCssClass: "forminator-dropdown forminator-ddfor--" + form_id
+				});
+
+				$(this.element).find(".forminator-time").wpmuiSelect({
+					allowClear: false,
+					containerCssClass: "forminator-select2",
+					dropdownCssClass: "forminator-droptime forminator-droptime--flat forminator-ddfor--" + form_id
 				});
 
 			}
@@ -339,13 +403,13 @@
 				$ftype.change(function (e) {
 					e.stopPropagation();
 
-					if ($(this).val() !== "") {
+					if ($(this).val().trim() !== "") {
 						$(this).closest('.forminator-field').addClass('forminator-is_filled');
 					} else {
 						$(this).closest('.forminator-field').removeClass('forminator-is_filled');
 					}
 
-					if ($(this).val() !== "" && $(this).find('forminator-label--validation').text() !== "") {
+					if ($(this).val().trim() !== "" && $(this).find('forminator-label--validation').text() !== "") {
 						$(this).find('.forminator-label--validation').remove();
 						$(this).find('.forminator-field').removeClass('forminator-has_error');
 					}
@@ -353,7 +417,7 @@
 
 			});
 
-			form.find('.forminator-select + .select2').each(function () {
+			form.find('.forminator-select + .select2, .forminator-time + .select2').each(function () {
 
 				var $select = $(this);
 
@@ -406,10 +470,10 @@
 
 					if ($limit.length) {
 						if ($limit.data('limit')) {
-							if ($limit.data('type') === "characters") {
-								count = $(this).val().length;
+							if ($limit.data('type') !== "words") {
+								count = $(this).val().trim().length;
 							} else {
-								count = $.trim($(this).val()).split(/\s+/).length;
+								count = $(this).val().trim().split(/\s+/).length;
 							}
 							$limit.html(count + ' / ' + $limit.data('limit'));
 						}
@@ -445,10 +509,10 @@
 		material_field: function () {
 			var form = $(this.element);
 			if (form.is('.forminator-design--material')) {
-				var $input = form.find('.forminator-input'),
-					$textarea = form.find('.forminator-textarea'),
-					$date = form.find('.forminator-date'),
-					$product = form.find('.forminator-product');
+				var $input		= form.find('.forminator-input--wrap'),
+					$textarea	= form.find('.forminator-textarea--wrap'),
+					$date		= form.find('.forminator-date'),
+					$product	= form.find('.forminator-product');
 
 				var $navigation = form.find('.forminator-pagination--nav'),
 					$navitem = $navigation.find('li');
@@ -463,10 +527,6 @@
 				} else {
 					$date.prev('.forminator-field--label').addClass('forminator-floating--input');
 				}
-
-				$product.closest('.forminator-field').addClass('forminator-product--material');
-
-				$input.wrap('<div class="forminator-input--wrap"></div>');
 			}
 		},
 

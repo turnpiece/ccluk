@@ -220,103 +220,152 @@
     </script>
 	
     <script type="text/template" id="forminator-exports-schedule-popup-tpl">
-        <form method="post">
+		
+		<form method="post">
+			
 			<div class="wpmudev-toggle">
+				
 				<div class="wpmudev-toggle--design wpmudev-switch-normal">
 					<input type="checkbox" class="forminator-field-singular" id="forminator-enable-scheduled-exports" name="enabled" value="true" title="Enable scheduled exports">
 					<label for="forminator-enable-scheduled-exports" class="wpmudev-label-container"></label>
 				</div>
+
 				<label for="forminator-enable-scheduled-exports" class="wpmudev-toggle--label wpmudev-label-container">Enable scheduled exports</label>
+
+				<div class="wpmudev-toggle--box wpmudev-is_gray">
+					
+					<div id="forminator-export-schedule-timeframe" class="wpmudev-row">
+
+						<div class="wpmudev-col col-12 col-md-4">
+
+							<label class="wpmudev-label">{{ Forminator.l10n.popup.frequency }}</label>
+
+							<select name="interval" class="wpmudev-select">
+								<option value="daily">{{ Forminator.l10n.popup.daily }}</option>
+								<option value="weekly">{{ Forminator.l10n.popup.weekly }}</option>
+								<option value="monthly">{{ Forminator.l10n.popup.monthly }}</option>
+							</select>
+
+						</div>
+
+						<div class="wpmudev-col col-12 col-md-4">
+
+							<label class="wpmudev-label">{{ Forminator.l10n.popup.week_day }}</label>
+
+							<select name="day" class="wpmudev-select">
+								<option value="mon">{{ Forminator.l10n.popup.monday }}</option>
+								<option value="tue">{{ Forminator.l10n.popup.tuesday }}</option>
+								<option value="wed">{{ Forminator.l10n.popup.wednesday }}</option>
+								<option value="thu">{{ Forminator.l10n.popup.thursday }}</option>
+								<option value="fri">{{ Forminator.l10n.popup.friday }}</option>
+								<option value="sat">{{ Forminator.l10n.popup.saturday }}</option>
+								<option value="sun">{{ Forminator.l10n.popup.sunday }}</option>
+							</select>
+
+						</div>
+
+						<div class="wpmudev-col col-12 col-md-4">
+
+							<label class="wpmudev-label">Day of the month</label>
+
+							<select name="month_day" class="wpmudev-select">
+								<option value="1">1</option>
+								<option value="2">2</option>
+								<option value="3">3</option>
+								<option value="4">4</option>
+								<option value="5">5</option>
+								<option value="6">6</option>
+								<option value="7">7</option>
+								<option value="8">8</option>
+								<option value="9">9</option>
+								<option value="10">10</option>
+								<option value="11">11</option>
+								<option value="12">12</option>
+								<option value="13">13</option>
+								<option value="14">14</option>
+								<option value="15">15</option>
+								<option value="16">16</option>
+								<option value="17">17</option>
+								<option value="18">18</option>
+								<option value="19">19</option>
+								<option value="20">20</option>
+								<option value="21">21</option>
+								<option value="22">22</option>
+								<option value="23">23</option>
+								<option value="24">24</option>
+								<option value="25">25</option>
+								<option value="26">26</option>
+								<option value="27">27</option>
+								<option value="28">28</option>
+								<option value="29">29</option>
+								<option value="30">30</option>
+								<option value="31">31</option>
+							</select>
+
+						</div>
+
+						<div class="wpmudev-col col-12 col-md-4">
+
+							<label class="wpmudev-label">{{ Forminator.l10n.popup.day_time }}</label>
+
+							<select name="hour" class="wpmudev-select">
+								<option value="00:00">12:00 AM</option>
+								<option value="01:00">01:00 AM</option>
+								<option value="02:00">02:00 AM</option>
+								<option value="03:00">03:00 AM</option>
+								<option value="04:00">04:00 AM</option>
+								<option value="05:00">05:00 AM</option>
+								<option value="06:00">06:00 AM</option>
+								<option value="07:00">07:00 AM</option>
+								<option value="08:00">08:00 AM</option>
+								<option value="09:00">09:00 AM</option>
+								<option value="10:00">10:00 AM</option>
+								<option value="11:00">11:00 AM</option>
+								<option value="12:00">12:00 PM</option>
+								<option value="13:00">01:00 PM</option>
+								<option value="14:00">02:00 PM</option>
+								<option value="15:00">03:00 PM</option>
+								<option value="16:00">04:00 PM</option>
+								<option value="17:00">05:00 PM</option>
+								<option value="18:00">06:00 PM</option>
+								<option value="19:00">07:00 PM</option>
+								<option value="20:00">08:00 PM</option>
+								<option value="21:00">09:00 PM</option>
+								<option value="22:00">10:00 PM</option>
+								<option value="23:00">11:00 PM</option>
+							</select>
+
+						</div>
+
+					</div>
+
+					<div id="forminator-export-schedule-email" class="wpmudev-row">
+
+						<div class="wpmudev-col col-12">
+
+							<label class="wpmudev-label">{{ Forminator.l10n.popup.email_to }}</label>
+
+							<input type="email" name="email" class="wpmudev-input"
+								value="{{ Forminator.l10n.exporter.email }}" placeholder="{{ Forminator.l10n.popup.email_placeholder }}">
+
+							<label class="wpmudev-helper">{{ Forminator.l10n.popup.schedule_help }}</label>
+
+							<input type="hidden" name="form_id" value="{{ Forminator.l10n.exporter.form_id }}"/>
+							<input type="hidden" name="form_type" value="{{ Forminator.l10n.exporter.form_type }}"/>
+							<input type="hidden" name="action" value="forminator_export_entries"/>
+
+						</div>
+						
+					</div>
+
+				</div>
+
 			</div>
-			
-            <div class="wpmudev-box-gray">
 
-                <div id="forminator-export-schedule-timeframe" class="wpmudev-row">
-
-                    <div class="wpmudev-col col-12 col-md-4">
-
-                        <label class="wpmudev-label">{{ Forminator.l10n.popup.frequency }}</label>
-
-                        <select name="interval" class="wpmudev-select">
-                            <option value="daily">{{ Forminator.l10n.popup.daily }}</option>
-                            <option value="weekly">{{ Forminator.l10n.popup.weekly }}</option>
-                            <option value="monthly">{{ Forminator.l10n.popup.monthly }}</option>
-                        </select>
-
-                    </div>
-
-                    <div class="wpmudev-col col-12 col-md-4">
-
-                        <label class="wpmudev-label">{{ Forminator.l10n.popup.week_day }}</label>
-
-                        <select name="day" class="wpmudev-select">
-                            <option value="mon">{{ Forminator.l10n.popup.monday }}</option>
-                            <option value="tue">{{ Forminator.l10n.popup.tuesday }}</option>
-                            <option value="wed">{{ Forminator.l10n.popup.wednesday }}</option>
-                            <option value="thu">{{ Forminator.l10n.popup.thursday }}</option>
-                            <option value="fri">{{ Forminator.l10n.popup.friday }}</option>
-                            <option value="sat">{{ Forminator.l10n.popup.saturday }}</option>
-                            <option value="sun">{{ Forminator.l10n.popup.sunday }}</option>
-                        </select>
-
-                    </div>
-
-                    <div class="wpmudev-col col-12 col-md-4">
-
-                        <label class="wpmudev-label">{{ Forminator.l10n.popup.day_time }}</label>
-
-                        <select name="hour" class="wpmudev-select">
-                            <option value="00:00">12:00 AM</option>
-                            <option value="01:00">01:00 AM</option>
-                            <option value="02:00">02:00 AM</option>
-                            <option value="03:00">03:00 AM</option>
-                            <option value="04:00">04:00 AM</option>
-                            <option value="05:00">05:00 AM</option>
-                            <option value="06:00">06:00 AM</option>
-                            <option value="07:00">07:00 AM</option>
-                            <option value="08:00">08:00 AM</option>
-                            <option value="09:00">09:00 AM</option>
-                            <option value="10:00">10:00 AM</option>
-                            <option value="11:00">11:00 AM</option>
-                            <option value="12:00">12:00 PM</option>
-                            <option value="13:00">01:00 PM</option>
-                            <option value="14:00">02:00 PM</option>
-                            <option value="15:00">03:00 PM</option>
-                            <option value="16:00">04:00 PM</option>
-                            <option value="17:00">05:00 PM</option>
-                            <option value="18:00">06:00 PM</option>
-                            <option value="19:00">07:00 PM</option>
-                            <option value="20:00">08:00 PM</option>
-                            <option value="21:00">09:00 PM</option>
-                            <option value="22:00">10:00 PM</option>
-                            <option value="23:00">11:00 PM</option>
-                        </select>
-
-                    </div>
-
-                </div>
-
-                <div id="forminator-export-schedule-email" class="wpmudev-row">
-
-                    <div class="wpmudev-col col-12">
-
-                        <label class="wpmudev-label">{{ Forminator.l10n.popup.email_to }}</label>
-
-                        <input type="email" name="email" class="wpmudev-input"
-                               value="{{ Forminator.l10n.exporter.email }}" placeholder="{{ Forminator.l10n.popup.email_placeholder }}">
-
-                        <label class="wpmudev-helper">{{ Forminator.l10n.popup.schedule_help }}</label>
-
-                        <input type="hidden" name="form_id" value="{{ Forminator.l10n.exporter.form_id }}"/>
-                        <input type="hidden" name="form_type" value="{{ Forminator.l10n.exporter.form_type }}"/>
-                        <input type="hidden" name="action" value="forminator_export_entries"/>
-
-                    </div>
-                    
-                </div>
-            </div>
 			<button type="submit" class="wpmudev-button wpmudev-button-blue">{{ Forminator.l10n.popup.save_changes }}</button>
-        </form>
+
+		</form>
+		
     </script>
 
     <script type="text/template" id="forminator-new-form-popup-tpl">

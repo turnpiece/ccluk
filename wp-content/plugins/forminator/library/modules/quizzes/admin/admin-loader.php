@@ -33,6 +33,7 @@ class Forminator_Quizz_Admin extends Forminator_Admin_Module {
 		include_once( dirname(__FILE__) . '/admin-page-new-knowledge.php' );
 		include_once( dirname(__FILE__) . '/admin-page-view.php' );
 		include_once( dirname(__FILE__) . '/admin-page-entries.php' );
+		include_once( dirname(__FILE__) . '/admin-renderer-entries.php' );
 	}
 
 	/**

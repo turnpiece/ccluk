@@ -125,7 +125,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	 */
 	public function render_form_header() {
 		//if rendered on Preview, the array is empty and sometimes PHP notices show up
-		if ( $this->is_admin && empty( self::$render_ids ) ) {
+		if ( $this->is_admin && !isset(self::$render_ids[ $this->model->id ]) ) {
 			self::$render_ids[ $this->model->id ] = 0;
 		}
 		$content = '<div class="forminator-cform-response-message">';
@@ -436,15 +436,26 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function pagination_header() {
-		$has_pagination = $this->has_pagination_header();
+
+		$type			= 'bar';
+		$has_pagination	= $this->has_pagination_header();
 
 		if ( ! $has_pagination ) {
 			return '';
 		}
 
-		$html = '<ul class="forminator-pagination--nav"></ul>';
+		if ( $type === 'bar' ) {
+
+			$html = '<div class="forminator-pagination--bar"></div>';
+
+		} else {
+
+			$html = '<ol class="forminator-pagination--nav"></ol>';
+
+		}
 
 		return apply_filters( 'forminator_pagination_header_markup', $html );
+
 	}
 
 	/**
@@ -454,6 +465,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function pagination_start() {
+
 		$form_settings = $this->get_form_settings();
 		$label         = __( "Finish", Forminator::DOMAIN );
 
@@ -464,6 +476,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		$html = sprintf( '<div class="forminator-pagination forminator-pagination-start" data-step="0" data-label="%s">', $label );
 
 		return apply_filters( 'forminator_pagination_start_markup', $html, $label );
+
 	}
 
 	/**
@@ -499,9 +512,15 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 	public function pagination_submit_button() {
 		$button = $this->get_submit_button_text();
 		//hide submit button on markup, use it later
-		$html
-			= sprintf( '<button class="forminator-button forminator-pagination-submit" style="display: none;" disabled><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
-			           $button );
+
+		if( $this->get_form_design() !== 'material' ){
+
+			$html = sprintf( '<button class="forminator-button forminator-pagination-submit" style="display: none;" disabled>%s</button>',
+							$button );
+		} else {
+			$html = sprintf( '<button class="forminator-button forminator-pagination-submit" style="display: none;" disabled><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
+						   $button );
+		}
 
 		return apply_filters( 'forminator_pagination_submit_markup', $html );
 	}
@@ -755,11 +774,6 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		$field_object = forminator_get_field( $type );
 		$design       = $this->get_form_design();
 
-		/** @noinspection PhpStatementHasEmptyBodyInspection */
-		if ( $field_object->is_input && $design == "material" ) {
-			//$container_class .= ' forminator-floating--input';
-		}
-
 		if ( $required ) {
 			$asterisk = ' ' . forminator_get_required_icon();
 		} else {
@@ -767,7 +781,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		}
 
 		$html = sprintf( '<div class="%s">', $container_class );
-		$html .= sprintf( '<label class="forminator-label">%s%s</label>', $label, $asterisk );
+		$html .= sprintf( '<label class="forminator-label" id="%s">%s%s</label>', 'forminator-label-' . $field['element_id'], $label, $asterisk );
 		$html .= sprintf( '</div>' );
 
 		return apply_filters( 'forminator_field_get_field_label', $html, $label );
@@ -786,8 +800,9 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		$type = $this->get_field_type( $field );
 		/** @var Forminator_Field $field_object */
 		$field_object = forminator_get_field( $type );
+		$has_phone_character_limit = ( ( isset( $field['phone_validation'] ) && $field['phone_validation'] ) && ( isset( $field['phone_validation_type'] ) && $field['phone_validation_type'] === 'character_limit' ) );
 
-		if ( ( isset( $field['description'] ) && ! empty( $field['description'] ) ) || isset( $field['text_limit'] ) || isset( $field['phone_limit'] ) ) {
+		if ( ( isset( $field['description'] ) && ! empty( $field['description'] ) ) || isset( $field['text_limit'] ) || $has_phone_character_limit ) {
 
 			$html = sprintf( '<div class="forminator-field--helper">' );
 
@@ -1298,6 +1313,7 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 		$html .= $nonce;
 		$html .= sprintf( '<input type="hidden" name="form_id" value="%s">', $form_id );
 		$html .= sprintf( '<input type="hidden" name="page_id" value="%s">', $post_id );
+		$html .= sprintf( '<input type="hidden" name="current_url" value="%s">', forminator_get_current_url() );
 		if ( isset( self::$render_ids[ $form_id ] ) ) {
 			$html .= sprintf( '<input type="hidden" name="render_id" value="%s">', self::$render_ids[ $form_id ] );
 		}
@@ -1450,12 +1466,14 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 
 				/** @noinspection PhpIncludeInspection */
 				include $this->styles_template_path();
-				$styles = ob_get_clean();
+				$styles         = ob_get_clean();
+				$trimmed_styles = trim( $styles );
 
-				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
+				if ( isset( $properties['formID'] ) && strlen( $trimmed_styles ) > 0 ) {
 					?>
-                    <style type="text/css"
-                           id="forminator-custom-form-styles-<?php echo $properties['formID']; ?>"><?php echo $styles; ?></style>
+                    <style type="text/css" id="forminator-custom-form-styles-<?php echo $properties['formID']; ?>">
+	                    <?php echo $trimmed_styles; ?>
+                    </style>
 					<?php
 				}
 			}
@@ -1489,6 +1507,25 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 			/** @noinspection PhpUndefinedMethodInspection */
 			self::$paypal->render_buttons_script( $paypal_form_id );
 		}
+	}
+
+	/**
+	 * Defines translatable strings to pass to datepicker
+	 * Add other strings if required
+	 *
+	 * @since 1.0.5
+	 */
+	public function get_strings_for_calendar() {
+		$days = array(
+				__( 'Su', Forminator::DOMAIN ),
+				__( 'Mo', Forminator::DOMAIN ),
+				__( 'Tu', Forminator::DOMAIN ),
+				__( 'We', Forminator::DOMAIN ),
+				__( 'Th', Forminator::DOMAIN ),
+				__( 'Fr', Forminator::DOMAIN ),
+				__( 'Sa', Forminator::DOMAIN )
+			);
+		return '"' . implode('","', $days ) . '"';
 	}
 
 	/**
@@ -1557,7 +1594,8 @@ class Forminator_CForm_Front extends Forminator_Render_Form {
 					inline_validation: <?php echo $form_properties['inline_validation']; ?>,
 					rules: {<?php echo $form_properties['validation_rules']; ?>},
 					messages: {<?php echo $form_properties['validation_messages']; ?>},
-					conditions: <?php echo wp_json_encode( $form_properties['conditions'] ); ?>
+					conditions: <?php echo wp_json_encode( $form_properties['conditions'] ); ?>,
+					calendar: [ <?php echo $this->get_strings_for_calendar(); ?> ]
 				});
 				<?php
 				}

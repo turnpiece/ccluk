@@ -166,6 +166,27 @@ class Forminator_Website extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'website' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -200,14 +221,15 @@ class Forminator_Website extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
-		$id = $name  = self::get_property( 'element_id', $field );
-		$id          = $id . '-field';
-		$required    = $this->get_property( 'required', $field, false );
-		$placeholder = $this->sanitize_value( $this->get_property( 'placeholder', $field ) );
-		$value       = $this->get_property( 'value', $field );
+		$this->field	= $field;
+		$id = $name		= self::get_property( 'element_id', $field );
+		$ariaid			= $id;
+		$id				= $id . '-field';
+		$required		= $this->get_property( 'required', $field, false );
+		$placeholder	= $this->sanitize_value( $this->get_property( 'placeholder', $field ) );
+		$value			= $this->get_property( 'value', $field );
 
-		$html = sprintf( '<input class="forminator-website--field forminator-input" type="url" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s"/>', $required, $name, $placeholder, $value, $id );
+		$html = sprintf( '<input class="forminator-website--field forminator-input" type="url" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" aria-labelledby="%s"/>', $required, $name, $placeholder, $value, $id, $ariaid );
 
 		return apply_filters( 'forminator_field_website_markup', $html, $id, $required, $placeholder, $value );
 	}

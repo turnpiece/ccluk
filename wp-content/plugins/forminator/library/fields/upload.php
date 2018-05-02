@@ -152,6 +152,22 @@ class Forminator_Upload extends Forminator_Field {
 		);
 	}
 
+	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		//Unsupported Autofill
+		$autofill_settings = array();
+
+		return $autofill_settings;
+	}
+
 
 	/**
 	 * Field admin markup
@@ -187,8 +203,9 @@ class Forminator_Upload extends Forminator_Field {
 	public function markup( $field, $settings = array() ) {
 		$id       = $name = self::get_property( 'element_id', $field );
 		$required = self::get_property( 'required', $field, false );
+		$design = $this->get_form_style( $settings );
 
-		$html = self::create_file_upload( $id, $name, $required );
+		$html = self::create_file_upload( $id, $name, $required, $design );
 
 		return apply_filters( 'forminator_field_file_markup', $html, $field );
 	}

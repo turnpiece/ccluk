@@ -99,6 +99,13 @@ class Forminator_Form_Entry_Model {
 		$entry_object_cache = wp_cache_get( $entry_id, $cache_key );
 
 		if ( $entry_object_cache ) {
+			$this->entry_id         = $entry_object_cache->entry_id;
+			$this->entry_type       = $entry_object_cache->entry_type;
+			$this->form_id          = $entry_object_cache->form_id;
+			$this->is_spam          = $entry_object_cache->is_spam;
+			$this->date_created_sql = $entry_object_cache->date_created_sql;
+			$this->date_created     = $entry_object_cache->date_created;
+			$this->meta_data        = $entry_object_cache->meta_data;
 			return $entry_object_cache;
 		} else {
 			$sql 		= "SELECT `entry_type`, `form_id`, `is_spam`, `date_created` FROM {$this->table_name} WHERE `entry_id` = %d";
@@ -287,6 +294,60 @@ class Forminator_Form_Entry_Model {
 	}
 
 	/**
+	 * Field suffix label
+	 * Displayable label for suffix
+	 *
+	 * @since 1.0.5
+	 * @return string
+	 */
+	public static function translate_suffix( $suffix ) {
+		$translated_suffix = $suffix;
+		$field_suffixes    = self::field_suffix();
+		$default_label_map = array(
+			'hours'            => __( 'Hour', Forminator::DOMAIN ),
+			'minutes'          => __( 'Minute', Forminator::DOMAIN ),
+			'ampm'             => __( 'AM/PM', Forminator::DOMAIN ),
+			'country'          => __( 'Country', Forminator::DOMAIN ),
+			'city'             => __( 'City', Forminator::DOMAIN ),
+			'state'            => __( 'State', Forminator::DOMAIN ),
+			'zip'              => __( 'Zip', Forminator::DOMAIN ),
+			'street_address'   => __( 'Street Address', Forminator::DOMAIN ),
+			'address_line'     => __( 'Address Line 2', Forminator::DOMAIN ),
+			'year'             => __( 'Year', Forminator::DOMAIN ),
+			'day'              => __( 'Day', Forminator::DOMAIN ),
+			'month'            => __( 'Month', Forminator::DOMAIN ),
+			'prefix'           => __( 'Prefix', Forminator::DOMAIN ),
+			'first-name'       => __( 'First Name', Forminator::DOMAIN ),
+			'middle-name'      => __( 'Middle Name', Forminator::DOMAIN ),
+			'last-name'        => __( 'Last Name', Forminator::DOMAIN ),
+			'post-title'       => __( 'Post Title', Forminator::DOMAIN ),
+			'post-content'     => __( 'Post Content', Forminator::DOMAIN ),
+			'post-excerpt'     => __( 'Post Excerpt', Forminator::DOMAIN ),
+			'post-image'       => __( 'Post Image', Forminator::DOMAIN ),
+			'post-category'    => __( 'Post Category', Forminator::DOMAIN ),
+			'post-tags'        => __( 'Post Tags', Forminator::DOMAIN ),
+			'product-id'       => __( 'Product ID', Forminator::DOMAIN ),
+			'product-quantity' => __( 'Product Quantity', Forminator::DOMAIN ),
+		);
+
+		// could be filtered out field_suffix
+		if ( in_array( $suffix, $field_suffixes ) && isset( $default_label_map[ $suffix ] ) ) {
+			$translated_suffix = $default_label_map[ $suffix ];
+		}
+
+		/**
+		 * Translatable suffix
+		 *
+		 * @param string $translated_suffix
+		 * @param string $suffix            original suffix
+		 * @param array  $default_label_map default translated suffix
+		 *
+		 * @since 1.0.5
+		 */
+		return apply_filters( "forminator_translate_suffix", $translated_suffix, $suffix, $default_label_map );
+	}
+
+	/**
 	 * Ignored fields
 	 * Fields not saved or shown
 	 *
@@ -333,9 +394,7 @@ class Forminator_Form_Entry_Model {
 	 * @since 1.0
 	 * @param int $form_id - the form id
 	 *
-	 * @return array(
-	 * 		Forminator_Form_Entry_Model
-	 * )
+	 * @return Forminator_Form_Entry_Model[]
 	 */
 	public static function get_entries( $form_id ) {
 		global $wpdb;
@@ -351,6 +410,70 @@ class Forminator_Form_Entry_Model {
 		}
 
 		return $entries;
+	}
+
+	/**
+	 * Group count of Entries with extra selected
+	 *
+	 * @since   1.0.5
+	 *
+	 * @example = [
+	 *  'FIELDS_WITH_EXTRA_ELEMENT_ID' => [
+	 *      'META_VALUE-1' => COUNT
+	 *      'META_VALUE-2' => COUNT
+	 * ],
+	 * 'answer-3' => [
+	 *      'javascript is the best' => 8
+	 *      'php is the best' => 7
+	 * ],
+	 * ]
+	 *
+	 * @param $form_id
+	 * @param $fields_element_id_with_extra
+	 *
+	 * @return array|null|object
+	 */
+	public static function count_polls_with_extra( $form_id, $fields_element_id_with_extra ) {
+		global $wpdb;
+
+		$polls_with_extras = array();
+
+		$table_name       = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
+		$entry_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
+
+		foreach ( $fields_element_id_with_extra as $field_element_id_with_extra ) {
+			$sql
+				       = "SELECT m.entry_id AS entry_id
+							FROM {$table_name} m
+							LEFT JOIN {$entry_table_name} e
+							ON (m.entry_id = e.entry_id)
+							WHERE e.form_id = %d
+							AND m.meta_key = %s
+							GROUP BY m.entry_id";
+			$sql       = $wpdb->prepare( $sql, $form_id, $field_element_id_with_extra );
+			$entry_ids = $wpdb->get_col( $sql );
+
+			if ( ! empty( $entry_ids ) ) {
+				$entry_id_placeholders = implode( ', ', array_fill( 0, count( $entry_ids ), '%d' ) );
+
+				$sql
+					 = "SELECT m.meta_value AS meta_value, COUNT(1) votes
+							FROM {$table_name} m
+							WHERE m.entry_id IN ({$entry_id_placeholders})
+							AND m.meta_key = 'extra'
+							GROUP BY m.meta_value ORDER BY votes DESC";
+				$sql = $wpdb->prepare( $sql, $entry_ids );
+
+				$votes = $wpdb->get_results( $sql, ARRAY_A );
+
+				$polls_with_extras[ $field_element_id_with_extra ] = array();
+				foreach ( $votes as $vote ) {
+					$polls_with_extras[ $field_element_id_with_extra ][ $vote['meta_value'] ] = $vote['votes'];
+				}
+			}
+		}
+
+		return $polls_with_extras;
 	}
 
 	/**
@@ -389,11 +512,13 @@ class Forminator_Form_Entry_Model {
 	 * Count entries by form
 	 *
 	 * @since 1.0
+	 * @deprecated
 	 * @param int $form_id - the form id
 	 *
 	 * @return int - total entries
 	 */
 	public static function count_entries_by_form_and_field( $form_id, $field ) {
+		_deprecated_function('count_entries_by_form_and_field', '1.0.5');
 		global $wpdb;
 		$table_name 		= Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
 		$entry_table_name 	= Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
@@ -405,6 +530,98 @@ class Forminator_Form_Entry_Model {
 		}
 
 		return 0;
+	}
+
+	/**
+	 * Map Polls Entries with its votes
+	 *
+	 * @since 1.0.5
+	 *
+	 * @example [
+	 *  'ELEMENT_ID' => 'NUMBER'
+	 *  'answer-1' = 9
+	 * ]
+	 *
+	 * @param       $form_id
+	 * @param array $fields
+	 *
+	 * @return array
+	 */
+	public static function map_polls_entries( $form_id, $fields ) {
+		global $wpdb;
+		$map_entries      = array();
+		$table_name       = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
+		$entry_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
+
+		$element_ids = array();
+		foreach ( $fields as $field ) {
+			$element_id    = (string) $field['element_id'];
+			$element_ids[] = $element_id;
+			$title         = sanitize_title( $field['title'] );
+
+			// First, escape the link for use in a LIKE statement.
+			$new_element_id_format = $wpdb->esc_like( 'answer-' );
+			// Add wildcards
+			$new_element_id_format = $new_element_id_format . '%';
+
+			// find old format entries of this field
+			$sql
+				= "SELECT count(1) FROM {$table_name} m LEFT JOIN {$entry_table_name} e
+					ON (e.`entry_id` = m.`entry_id`)
+					WHERE e.form_id = {$form_id} AND m.meta_key NOT LIKE '{$new_element_id_format}' AND m.meta_value = '1' AND m.meta_key = '{$title}' LIMIT 1";
+
+			$old_format_entries = $wpdb->get_var( $sql );
+
+			// old format exist
+			if ( $old_format_entries ) {
+				// update old format entries if avail
+				self::maybe_update_poll_entries_meta_key_to_element_id( $form_id, $title, $element_id );
+			}
+		}
+
+		if ( ! empty( $element_ids ) ) {
+			$element_ids_placeholders = implode( ', ', array_fill( 0, count( $element_ids ), '%s' ) );
+
+			$sql
+				= "SELECT m.meta_key as element_id, count(1) as votes
+					FROM {$table_name} m LEFT JOIN {$entry_table_name} e
+					ON (e.`entry_id` = m.`entry_id`)
+					WHERE e.form_id = {$form_id} AND m.meta_key IN ({$element_ids_placeholders}) GROUP BY m.meta_key";
+
+			$sql = $wpdb->prepare( $sql, $element_ids );
+
+			$results = $wpdb->get_results( $sql, ARRAY_A );
+			foreach ( $results as $result ) {
+				$map_entries[ $result['element_id'] ] = $result['votes'];
+			}
+
+		}
+
+		return $map_entries;
+	}
+
+	/**
+	 * Update poll entries meta_key to its element_id
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $form_id
+	 * @param $old_meta_key
+	 * @param $element_id
+	 */
+	public static function maybe_update_poll_entries_meta_key_to_element_id( $form_id, $old_meta_key, $element_id ) {
+		global $wpdb;
+		$table_name       = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
+		$entry_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
+		// find entries that using old
+		$sql = "SELECT entry_id FROM {$entry_table_name} where form_id = $form_id";
+
+		$entry_ids = $wpdb->get_col( $sql );
+		if ( ! empty( $entry_ids ) && count( $entry_ids ) > 0 ) {
+			$entry_ids = implode( ', ', $entry_ids );
+			$sql       = "UPDATE {$table_name} SET meta_key = '{$element_id}', meta_value = '{$old_meta_key}' WHERE entry_id IN ({$entry_ids}) AND meta_key = '{$old_meta_key}' AND meta_value = '1'";
+			$wpdb->query( $sql );
+		}
 	}
 
 	/**
@@ -556,5 +773,175 @@ class Forminator_Form_Entry_Model {
 
 		wp_cache_delete( $entry_id, $cache_key );
 		wp_cache_delete( $form_id, 'forminator_total_entries' );
+	}
+
+	/**
+	 * Convert meta value to string
+	 * Useful on displaying metadata without PHP warning on conversion
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $field_type
+	 * @param $meta_value
+	 * @param bool $allow_html
+	 * @param int $truncate truncate returned string (usefull if display container is limited)
+	 *
+	 * @return string
+	 */
+	public static function meta_value_to_string( $field_type, $meta_value, $allow_html = false, $truncate = PHP_INT_MAX ) {
+		switch ( $field_type ) {
+			case 'postdata':
+				if ( ! isset( $meta_value['postdata'] ) || empty( $meta_value['postdata'] ) ) {
+					$string_value = '';
+				} else {
+					$post_id = $meta_value['postdata'];
+					$url     = get_edit_post_link( $post_id, 'link' );
+					if ( $url ) {
+						$string_value = $url;
+						if ( $allow_html ) {
+							// make link
+							$title = get_the_title( $post_id );
+							$title = ! empty( $title ) ? $title : __( '(no title)', Forminator::DOMAIN );
+							//truncate
+							if ( strlen( $title ) > $truncate ) {
+								$title = substr( $title, 0, $truncate ) . '...';
+							}
+							$string_value = '<a href="' . $url . '" target="_blank" title="' . __( 'Edit Post', Forminator::DOMAIN ) . '">' . $title . '</a>';
+						} else {
+							//truncate url
+							if ( strlen( $string_value ) > $truncate ) {
+								$string_value = substr( $string_value, 0, $truncate ) . '...';
+							}
+						}
+					} else {
+						$string_value = '';
+					}
+
+				}
+				break;
+			case 'time':
+				if ( ! isset( $meta_value['hours'] ) || ! isset( $meta_value['minutes'] ) ) {
+					$string_value = '';
+				} else {
+					$string_value = sprintf( "%02d", $meta_value['hours'] ) . ':' . sprintf( "%02d", $meta_value['minutes'] ) . ' ' . ( isset( $meta_value ['ampm'] ) ? $meta_value['ampm'] : '' );
+				}
+				//truncate
+				if ( strlen( $string_value ) > $truncate ) {
+					$string_value = substr( $string_value, 0, $truncate ) . '...';
+				}
+				break;
+			case 'date':
+				if ( ! isset( $meta_value['year'] ) || ! isset( $meta_value['month'] ) || ! isset( $meta_value['day'] ) ) {
+					$string_value = '';
+				} else {
+					$string_value = $meta_value['year'] . '/' . sprintf( "%02d", $meta_value['month'] ) . '/' . sprintf( "%02d", $meta_value['day'] );
+				}
+				//truncate
+				if ( strlen( $string_value ) > $truncate ) {
+					$string_value = substr( $string_value, 0, $truncate ) . '...';
+				}
+				break;
+			case 'email':
+				if ( ! empty( $meta_value ) ) {
+					$string_value = $meta_value;
+					//truncate
+					if ( $allow_html ) {
+						// make link
+						$email = $string_value;
+						//truncate
+						if ( strlen( $email ) > $truncate ) {
+							$email = substr( $email, 0, $truncate ) . '...';
+						}
+						$string_value = '<a href="mailto:' . $email . '" target="_blank" title="' . __( 'Send Email', Forminator::DOMAIN ) . '">' . $email . '</a>';
+					} else {
+						//truncate url
+						if ( strlen( $string_value ) > $truncate ) {
+							$string_value = substr( $string_value, 0, $truncate ) . '...';
+						}
+					}
+				} else {
+					$string_value = '';
+				}
+
+				break;
+			case 'url':
+				if ( ! empty( $meta_value ) ) {
+					$string_value = $meta_value;
+					//truncate
+					if ( $allow_html ) {
+						// make link
+						$website = $string_value;
+						//truncate
+						if ( strlen( $website ) > $truncate ) {
+							$website = substr( $website, 0, $truncate ) . '...';
+						}
+						$string_value = '<a href="' . $website . '" target="_blank" title="' . __( 'View Website', Forminator::DOMAIN ) . '">' . $website . '</a>';
+					} else {
+						//truncate url
+						if ( strlen( $string_value ) > $truncate ) {
+							$string_value = substr( $string_value, 0, $truncate ) . '...';
+						}
+					}
+				} else {
+					$string_value = '';
+				}
+
+				break;
+			case 'upload':
+				$file = '';
+				if ( isset( $meta_value['file'] ) ) {
+					$file = $meta_value['file'];
+				}
+				if ( ! empty( $file ) && is_array( $file ) && isset( $file['file_url'] ) ) {
+					$string_value = $file['file_url'];
+					if ( $allow_html ) {
+						// make link
+						$url       = $string_value;
+						$file_name = basename( $url );
+						$file_name = ! empty( $file_name ) ? $file_name : __( '(no filename)', Forminator::DOMAIN );
+						//truncate
+						if ( strlen( $file_name ) > $truncate ) {
+							$file_name = substr( $file_name, 0, $truncate ) . '...';
+						}
+						$string_value = '<a href="' . $url . '" target="_blank" title="' . __( 'View File', Forminator::DOMAIN ) . '">' . $file_name . '</a>';
+					} else {
+						//truncate url
+						if ( strlen( $string_value ) > $truncate ) {
+							$string_value = substr( $string_value, 0, $truncate ) . '...';
+						}
+					}
+
+				} else {
+					$string_value = '';
+				}
+				break;
+			case 'checkbox':
+				if ( ! is_array( $meta_value ) ) {
+					$string_value = '';
+				} else {
+					$string_value = implode( ', ', $meta_value );
+				}
+				//truncate
+				if ( strlen( $string_value ) > $truncate ) {
+					$string_value = substr( $string_value, 0, $truncate ) . '...';
+				}
+				break;
+			default:
+				// base flattener
+				// implode on array
+				if ( is_array( $meta_value ) ) {
+					$string_value = implode( ', ', $meta_value );
+				} else {
+					// or juggling to string
+					$string_value = (string) $meta_value;
+				}
+				//truncate
+				if ( strlen( $string_value ) > $truncate ) {
+					$string_value = substr( $string_value, 0, $truncate ) . '...';
+				}
+				break;
+		}
+
+		return $string_value;
 	}
 }

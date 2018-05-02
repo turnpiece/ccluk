@@ -84,8 +84,9 @@ class Forminator_Core {
 		$fields       = new Forminator_Fields();
 		$this->fields = $fields->get_fields();
 
-		// HACK: Add settings page at the end of the list
+		// HACK: Add settings and entries page at the end of the list
 		if ( is_admin() ) {
+			$this->admin->add_entries_page();
 			$this->admin->add_settings_page();
 		}
 
@@ -164,6 +165,8 @@ class Forminator_Core {
 		include_once( forminator_plugin_dir() . 'library/helpers/helper-mail.php' );
 		/* @noinspection PhpIncludeInspection */
 		include_once( forminator_plugin_dir() . 'library/helpers/helper-currency.php' );
+		/* @noinspection PhpIncludeInspection */
+		include_once( forminator_plugin_dir() . 'library/helpers/helper-autofill.php' );
 
 		//Model
 		/* @noinspection PhpIncludeInspection */

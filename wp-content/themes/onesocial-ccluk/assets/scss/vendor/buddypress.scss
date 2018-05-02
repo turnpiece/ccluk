@@ -109,6 +109,10 @@ body.buddypress {
 			@include border-radius( 10px );
 			font-size: $font-size-sm;
 		}
+
+		#activity-filter-select {
+			display: none !important;
+		}
 	}
 
 	#main {
@@ -117,6 +121,15 @@ body.buddypress {
 				input[type=text] {
 					@include input-field();
 				}
+			}
+		}
+	}
+
+	&.activity {
+		#main {
+			.entry-header,
+			#buddypress > div[role=navigation].item-list-tabs {
+				text-align: center;
 			}
 		}
 	}
@@ -143,6 +156,19 @@ body.buddypress {
 			>div[role=navigation] {
 				&.item-list-tabs {
 					@include bp-item-list-tabs();
+				}
+			}
+
+			div:not(#item-nav) > .item-list-tabs.item-list-tabs,
+			div#subnav.item-list-tabs {
+				ul li {
+					&.current,
+					&.selected {
+						a {
+							background-color: transparent;
+							color: $green;
+						}
+					}
 				}
 			}
 		}

@@ -70,7 +70,8 @@ class Forminator_Date extends Forminator_Field {
 
 					array(
 						'value' => "true",
-						'label' => __( 'Restrict date choices', Forminator::DOMAIN )
+						'label' => __( 'Restrict date choices', Forminator::DOMAIN ),
+						'labelSmall' => "true"
 					)
 
 				),
@@ -215,7 +216,8 @@ class Forminator_Date extends Forminator_Field {
 				'values' => array(
 					array(
 						'value' => "true",
-						'label' => __( 'Restrict Year Range', Forminator::DOMAIN )
+						'label' => __( 'Restrict Year Range', Forminator::DOMAIN ),
+						'labelSmall' => "true"
 					)
 				),
 				'fields' => array(
@@ -396,6 +398,28 @@ class Forminator_Date extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		// TODO: support for multiple field date
+		$autofill_settings = array(
+			'date' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -466,31 +490,37 @@ class Forminator_Date extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field    = $field;
-		$html = $icon 	= '';
-		$id = $name   	= self::get_property( 'element_id', $field );
-		$required	  	= self::get_property( 'required', $field, false );
-		$placeholder  	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$type 	     	= self::get_property( 'field_type', $field );
-		$has_icon     	= self::get_property( 'icon', $field );
-		$date_format  	= self::get_property( 'date_format', $field );
-		$year_range 	= self::get_property( 'year_range', $field, false );
-		$min_year = $max_year = '';
+
+		$this->field			= $field;
+		$html = $icon			= '';
+		$design					= $this->get_form_style( $settings );
+		$id = $name				= self::get_property( 'element_id', $field );
+		$required				= self::get_property( 'required', $field, false );
+		$placeholder			= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$type					= self::get_property( 'field_type', $field );
+		$has_icon				= self::get_property( 'icon', $field );
+		$date_format			= self::get_property( 'date_format', $field );
+		$year_range				= self::get_property( 'year_range', $field, false );
+		$min_year = $max_year	= '';
+
+		$sep = false !== strpos( $date_format, '/' ) ? '/' : '-';
+		$formats = explode( $sep, $date_format );
+
 		if ( $year_range ) {
 			$min_year = self::get_property( 'min_year', $field );
 			$max_year = self::get_property( 'max_year', $field );
 		}
 
-		if( $has_icon ) {
+		if ( $has_icon ) {
 			$icon = 'forminator-has_icon';
 		}
 
 		// If field type == picker
-		if( $type == "picker" ) {
+		if ( $type == "picker" ) {
 			$restrict      = array();
 			$restrict_type = self::get_property( 'howto-restrict', $field );
 
-			if( $restrict_type == "week" ) {
+			if ( $restrict_type == "week" ) {
 				$days = forminator_week_days();
 				$i = 0;
 				foreach( $days as $k => $day ) {
@@ -510,130 +540,160 @@ class Forminator_Date extends Forminator_Field {
 			}
 
 			$html .= sprintf( '<div class="forminator-date %s">', $icon );
-			$html .= sprintf( '<input type="text" class="forminator-input forminator-datepicker" data-required="%s" name="%s" placeholder="%s" data-format="%s" data-restrict-type="%s" data-restrict="%s" data-start-year="%s" data-end-year="%s">', $required, $name, $placeholder, $date_format, $restrict_type, implode( ",", $restrict ), $min_year, $max_year );
-			$html .= '</div>';
-		}
 
-		// If field type == select
-		if( $type == "select" ) {
+				if ( $design === 'material' ) {
+					$html .= '<div class="forminator-input--wrap">';
+				}
+
+				$html .= sprintf( '<input type="text" class="forminator-input forminator-datepicker" data-required="%s" name="%s" placeholder="%s" aria-labelledby="%s" data-format="%s" data-restrict-type="%s" data-restrict="%s" data-start-year="%s" data-end-year="%s">', $required, $name, $placeholder, 'forminator-label-' . $name, $date_format, $restrict_type, implode( ",", $restrict ), $min_year, $max_year );
+
+				if ( $design === 'material' ) {
+					$html .= '</div>';
+				}
+
+			$html .= '</div>';
+		} elseif( $type == "select" ) {
 			// Start row
 			$html .= '<div class="forminator-row forminator-row--inner">';
 
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
+			foreach( $formats as $format ) {
+				switch ( $format ) {
+					case 'dd':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
 
-			$year_data = array(
-				'class' => 'forminator-select',
-				'name' => $id . '-year',
-				'id' => $id . '-year',
-			);
+						$day_data = array(
+							'class' => 'forminator-select',
+							'name' => $id . '-day',
+							'id' => $id . '-day',
+						);
 
-			$html .= self::create_select( $year_data, __( "Year", Forminator::DOMAIN ), $this->get_years( $min_year, $max_year ) );
+						$html .= self::create_select( $day_data, __( "Day", Forminator::DOMAIN ), $this->get_day() );
 
-			// End field
-			$html .= '</div>';
-			$html .= '</div>';
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
 
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
+					case 'mm':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
 
-			$month_data = array(
-				'class' => 'forminator-select',
-				'name' => $id . '-month',
-				'id' => $id . '-month',
-			);
+						$month_data = array(
+							'class' => 'forminator-select',
+							'name' => $id . '-month',
+							'id' => $id . '-month',
+						);
 
-			$html .= self::create_select( $month_data, __( "Month", Forminator::DOMAIN ), $this->get_months() );
+						$html .= self::create_select( $month_data, __( "Month", Forminator::DOMAIN ), $this->get_months() );
 
-			// End field
-			$html .= '</div>';
-			$html .= '</div>';
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
 
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
+					case 'yy':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
 
-			$day_data = array(
-				'class' => 'forminator-select',
-				'name' => $id . '-day',
-				'id' => $id . '-day',
-			);
+						$year_data = array(
+							'class' => 'forminator-select',
+							'name' => $id . '-year',
+							'id' => $id . '-year',
+						);
 
-			$html .= self::create_select( $day_data, __( "Day", Forminator::DOMAIN ), $this->get_day() );
+						$html .= self::create_select( $year_data, __( "Year", Forminator::DOMAIN ), $this->get_years( $min_year, $max_year ) );
 
-			// End field
-			$html .= '</div>';
-			$html .= '</div>';
-
-			// End row
-			$html .= '</div>';
-		}
-
-		// If field type == input
-		if( $type == "input" ) {
-			// Start row
-			$html .= '<div class="forminator-row forminator-row--inner">';
-
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
-
-			$year_data = array(
-				'class' => 'forminator-input',
-				'name' => $id . '-year',
-				'id' => $id . '-year',
-			);
-			$description = '';
-			if ( !empty( $min_year ) && !empty( $max_year ) ) {
-				//Not sure if we add this
-				//$description = sprintf( __( 'Between %s and %s ', Forminator::DOMAIN ), $min_year, $max_year );
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
+				}
 			}
 
-			$html .= self::create_input( $year_data, __( "Year", Forminator::DOMAIN ), $description );
-
-			// End field
-			$html .= '</div>';
+			// End row
 			$html .= '</div>';
 
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
+		} elseif( $type == "input" ) {
+			// Start row
+			$html .= '<div class="forminator-row forminator-row--inner">';
 
-			$month_data = array(
-				'class' => 'forminator-input',
-				'name' => $id . '-month',
-				'id' => $id . '-month',
-			);
+			foreach( $formats as $format ) {
+				switch ( $format ) {
+					case 'dd':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
 
-			$html .= self::create_input( $month_data, __( "Month", Forminator::DOMAIN ) );
+						$day_data = array(
+							'class'				=> 'forminator-input',
+							'name'				=> $id . '-day',
+							'id'				=> $id . '-day',
+							'aria-labelledby'	=> 'forminator-label-' . $id . '-day'
+						);
 
-			// End field
-			$html .= '</div>';
-			$html .= '</div>';
+						$description = '';
+						$html .= self::create_input( $day_data, __( "Day", Forminator::DOMAIN ), $description, $required, $design );
 
-			// Start field
-			$html .= '<div class="forminator-col forminator-col-4">';
-			$html .= '<div class="forminator-field forminator-field--inner">';
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
 
-			$day_data = array(
-				'class' => 'forminator-input',
-				'name' => $id . '-day',
-				'id' => $id . '-day',
-			);
+					case 'mm':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
 
-			$html .= self::create_input( $day_data, __( "Day", Forminator::DOMAIN ) );
+						$month_data = array(
+							'class'				=> 'forminator-input',
+							'name'				=> $id . '-month',
+							'id'				=> $id . '-month',
+							'aria-labelledby'	=> 'forminator-label-' . $id . '-month'
+						);
 
-			// End field
-			$html .= '</div>';
-			$html .= '</div>';
+						$description = '';
+						$html .= self::create_input( $month_data, __( "Month", Forminator::DOMAIN ), $description, $required, $design );
+
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
+
+					case 'yy':
+						// Start field
+						$html .= '<div class="forminator-col forminator-col-4">';
+						$html .= '<div class="forminator-field forminator-field--inner">';
+
+						$year_data = array(
+							'class'				=> 'forminator-input',
+							'name'				=> $id . '-year',
+							'id'				=> $id . '-year',
+							'aria-labelledby'	=> 'forminator-label-' . $id . '-year'
+						);
+						$description = '';
+						if ( !empty( $min_year ) && !empty( $max_year ) ) {
+							//Not sure if we add this
+							//$description = sprintf( __( 'Between %s and %s ', Forminator::DOMAIN ), $min_year, $max_year );
+						}
+
+						$html .= self::create_input( $year_data, __( "Year", Forminator::DOMAIN ), $description, $required, $design );
+
+						// End field
+						$html .= '</div>';
+						$html .= '</div>';
+						break;
+				}
+			}
 
 			// End row
 			$html .= '</div>';
 		}
 
-		return apply_filters( 'forminator_field_date_markup', $html, $field );
+		return apply_filters( 'forminator_field_date_markup', $html, $field, $this );
 	}
 
 	/**
@@ -731,7 +791,7 @@ class Forminator_Date extends Forminator_Field {
 					$date_info['day']   = isset( $date['day'] ) ? $date['day'] : 0;
 					break;
 			}
-			return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, $this );
+			return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, self );
 		}
 
 		$date = preg_replace( "|[/\.]|", '-', $date );
@@ -755,7 +815,7 @@ class Forminator_Date extends Forminator_Field {
 			}
 		}
 
-		return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, $this );
+		return apply_filters( 'forminator_field_date_parse_dates', $date_info, $date, $format, self );
 	}
 
 	/**

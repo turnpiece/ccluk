@@ -1,7 +1,7 @@
 <div>
 	
 	<script type="text/template" id="builder-layout-tpl">
-		
+
 		<div id="wpmudev-form-builder" class="wpmudev-form-builder"></div>
 
 		<aside id="wpmudev-sidebar" class="wpmudev-sidebar wpmudev-is_active" role="complementary">
@@ -13,6 +13,8 @@
 	</script>
 
 	<script type="text/template" id="builder-main-tpl">
+
+		<button class="wpmudev-builder-preview wpmudev-button wpmudev-button-sm wpmudev-button-ghost" aria-hidden="true" data-modal="preview_cforms" style="display: none;" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.custom_form.preview_nonce }}">{{ Forminator.l10n.appearance.preview_form }}</button>
 
 		<div id="forminator-wizard-name" class="wpmudev-box">
 

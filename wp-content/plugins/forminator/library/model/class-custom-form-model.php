@@ -75,7 +75,6 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 					$field         = new Forminator_Form_Field_Model();
 					$field->formID = $row['wrapper_id'];
 					$field->slug   = $f['element_id'];
-					unset( $f['element_id'] );
 					$field->import( $f );
 					$formModel->addField( $field );
 				}

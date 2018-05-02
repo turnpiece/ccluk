@@ -486,10 +486,11 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 
 				/** @noinspection PhpIncludeInspection */
 				include $this->styles_template_path();
-				$styles = ob_get_clean();
+				$styles         = ob_get_clean();
+				$trimmed_styles = trim( $styles );
 
-				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
-					echo '<style type="text/css" id="forminator-quiz-styles-' . $properties['formID'] . '">' . $styles . '</style>';
+				if ( isset( $properties['formID'] ) && strlen( trim( $trimmed_styles ) ) > 0 ) {
+					echo '<style type="text/css" id="forminator-quiz-styles-' . $properties['formID'] . '">' . $trimmed_styles . '</style>';
 				}
 			}
 		}

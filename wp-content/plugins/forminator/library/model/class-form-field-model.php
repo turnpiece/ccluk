@@ -119,13 +119,6 @@ class Forminator_Form_Field_Model {
 			$label = ucfirst( $field_type );
 		}
 
-		if ( $field_type == 'name' ) {
-			$multiple = Forminator_Field::get_property( 'multiple_name', $this->raw, false );
-			if ( $multiple ) {
-				$label = '';
-			}
-		}
-
 		return $label;
 	}
 }

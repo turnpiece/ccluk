@@ -5,7 +5,7 @@
  * Add your own functions in this file.
  */
 
-define( 'CCLUK_DEBUGGING', true );
+define( 'CCLUK_DEBUGGING', false );
 
 /**
  * Add image size for posts

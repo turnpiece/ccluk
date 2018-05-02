@@ -43,7 +43,7 @@
 				restrictedDays = this.$el.data('restrict'),
 				minYear = this.$el.data('start-year'),
 				maxYear = this.$el.data('end-year');
-
+			
 			//possible restrict only one
 			if (!isNaN(parseFloat(restrictedDays)) && isFinite(restrictedDays)) {
 				restrictedDays = [restrictedDays.toString()];
@@ -52,10 +52,10 @@
 			}
 
 			if (!minYear) {
-				minYear = "c-10";
+				minYear = "c-95";
 			}
 			if (!maxYear) {
-				maxYear = "c+10";
+				maxYear = "c+95";
 			}
 			var disabledWeekDays = function (current_date) {
 				if (restrictType === "week") {
@@ -65,11 +65,26 @@
 				}
 			};
 
+			var parent = this.$el.closest('.forminator-custom-form'),
+				add_class = "forminator-calendar";
+
+			if ( parent.hasClass('forminator-design--default') ) {
+				add_class = "forminator-calendar--default";
+			} else if ( parent.hasClass('forminator-design--material') ) {
+				add_class = "forminator-calendar--material";
+			} else if ( parent.hasClass('forminator-design--flat') ) {
+				add_class = "forminator-calendar--flat";
+			} else if ( parent.hasClass('forminator-design--bold') ) {
+				add_class = "forminator-calendar--bold";
+			}
+				
+			
 			this.$el.datepicker({
 				"beforeShow": function (input, inst) {
-					(inst.dpDiv).addClass("forminator-datepicker--cal");
+					(inst.dpDiv).addClass(add_class + ' forminator-calfor--' + parent.attr('id'));
 				},
 				"beforeShowDay": disabledWeekDays,
+				"dayNamesMin": this.settings,
 				"changeMonth": true,
 				"changeYear": true,
 				"dateFormat": dateFormat,
@@ -81,7 +96,6 @@
 					$(this).valid();
 				}
 			});
-
 		},
 		restrict_week: function (restrictedDays, date) {
 			var day = date.getDay();

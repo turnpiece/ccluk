@@ -86,7 +86,7 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 	 *
 	 * @since 1.0
 	 */
-	public function init() {
+	public function before_render() {
 		if ( isset( $_REQUEST['form_id'] ) ) {
 			$this->form_id  = sanitize_text_field( $_REQUEST['form_id'] );
 			$this->model 	= Forminator_Custom_Form_Model::model()->load( $this->form_id );
@@ -140,8 +140,8 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 					if ( isset( $_POST['entry'] ) && is_array( $_POST['entry'] ) ) {
 						$entries = implode( ",", $_POST['entry'] );
 						Forminator_Form_Entry_Model::delete_by_entrys( $this->model->id, $entries );
-
-						wp_redirect( admin_url( 'admin.php?page=forminator-cform-view&form_id=' . $this->model->id ) );
+						$url = add_query_arg( '', '' );
+						wp_redirect( $url );
 						exit;
 					}
 				break;
@@ -328,85 +328,17 @@ class Forminator_CForm_View_Page extends Forminator_Admin_Page {
 	 * Render entry
 	 *
 	 * @since 1.0
-	 * @param object $item - the entry
+	 *
+	 * @param object $item        - the entry
 	 * @param string $column_name - the column name
 	 *
+	 * @param null   $field @since 1.0.5, optional Forminator_Form_Field_Model
+	 *
 	 * @return string
+	 * TO-DO: replace Forminator_CForm_View_Page::render_entry() by render_entry() on other files
 	 */
-	public static function render_entry( $item , $column_name ) {
-		$data =  $item->get_meta( $column_name, '' );
-		if ( $data ) {
-			$currency_symbol 	= forminator_get_currency_symbol();
-			if ( is_array( $data ) ) {
-				$output 		= '';
-				$product_cost 	= 0;
-				$is_product 	= false;
-				$countries 		= forminator_get_countries_list();
-				foreach ( $data as $key => $value ) {
-					if ( is_array( $value ) ) {
-						if ( $key == 'file' && isset( $value['file_url'] ) ) {
-							$file_name 	= basename( $value['file_url'] );
-							$file_name 	= "<a href='" . esc_url( $value['file_url'] ) . "' target='_blank' rel='noreferrer' title='". __( 'View File', Forminator::DOMAIN ) ."'>$file_name</a> ,";
-							$output 	.= $file_name;
-						}
-
-					} else {
-						if ( !is_int( $key ) ) {
-							if ( $key == 'postdata' ) {
-							    // possible empty when postdata not required
-							    if (! empty($value)) {
-								    $url 	= get_edit_post_link( $value );
-								    $title  = get_the_title( $value );
-								    $name 	= ! empty( $title ) ? $title : '(no title)' ;
-								    $output .= "<a href='" .$url . "' target='_blank' rel='noreferrer' title='". __( 'Edit Post', Forminator::DOMAIN ) ."'>$name</a> ,";
-                                }
-							}else {
-
-								if ( is_string( $key ) ) {
-									if ( $key == 'product-id' || $key == 'product-quantity' ) {
-										if ( $product_cost == 0 ) {
-											$product_cost = $value;
-										} else {
-											$product_cost = $product_cost * $value;
-										}
-										$is_product = true;
-									} else {
-										if ( $key  == 'country' ) {
-											if ( isset( $countries[$value] ) ) {
-												$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $countries[$value] ) . "<br/> ";
-											} else {
-												$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $value ) . "<br/> ";
-											}
-										} else {
-											$key   = strtolower( $key );
-											$key   = ucfirst( str_replace( array( '-', '_' ), ' ', $key ) );
-											$value = esc_html( $value );
-											$output .= sprintf( __( '<strong>%s : </strong> %s', Forminator::DOMAIN ), $key, $value ) . "<br/> ";
-										}
-									}
-
-								}
-
-							}
-						}
-					}
-				}
-				if ( $is_product ) {
-					$output = sprintf( __( '<strong>Total</strong> %s', Forminator::DOMAIN ), $currency_symbol . '' .$product_cost );
-				} else {
-					if ( !empty( $output ) ) {
-						$output = substr( trim( $output ), 0, -1 );
-					} else {
-						$output = implode( ",", $data );
-					}
-				}
-				return $output;
-			} else {
-				return $data;
-			}
-		}
-
-		return '';
+	public static function render_entry( $item , $column_name, $field = null ) {
+		return render_entry( $item , $column_name, $field );
 	}
 
 	/**

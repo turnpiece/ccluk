@@ -265,6 +265,43 @@ class Forminator_Address extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$street_address_providers = apply_filters( 'forminator_field_' . $this->slug . '_street_address' . '_autofill', array(), $this->slug . '_street_address' );
+		$address_line_providers   = apply_filters( 'forminator_field_' . $this->slug . '_address_line' . '_autofill', array(), $this->slug . '_address_line' );
+		$city_providers           = apply_filters( 'forminator_field_' . $this->slug . '_city' . '_autofill', array(), $this->slug . '_city' );
+		$state_providers          = apply_filters( 'forminator_field_' . $this->slug . '_state' . '_autofill', array(), $this->slug . '_state' );
+		$zip_providers            = apply_filters( 'forminator_field_' . $this->slug . '_zip' . '_autofill', array(), $this->slug . '_zip' );
+
+		$autofill_settings = array(
+			'address-street_address' => array(
+				'values' => forminator_build_autofill_providers( $street_address_providers ),
+			),
+			'address-address_line'   => array(
+				'values' => forminator_build_autofill_providers( $address_line_providers ),
+			),
+			'address-city'           => array(
+				'values' => forminator_build_autofill_providers( $city_providers ),
+			),
+			'address-state'          => array(
+				'values' => forminator_build_autofill_providers( $state_providers ),
+			),
+			'address-zip'            => array(
+				'values' => forminator_build_autofill_providers( $zip_providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -347,19 +384,22 @@ class Forminator_Address extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field = $field;
+		$this->field         = $field;
+		$this->form_settings = $settings;
+
+		$design = $this->get_form_style( $settings );
 
 		// Address
-		$html = $this->get_address( $field, 'street_address' );
+		$html = $this->get_address( $field, 'street_address', $design );
 
 		// Second Address
-		$html .= $this->get_address( $field, 'address_line' );
+		$html .= $this->get_address( $field, 'address_line', $design );
 
 		// City & State fields
-		$html .= $this->get_city_state( $field );
+		$html .= $this->get_city_state( $field, $design );
 
 		// ZIP & Country fields
-		$html .= $this->get_zip_country( $field );
+		$html .= $this->get_zip_country( $field, $design );
 
 		return apply_filters( 'forminator_field_address_markup', $html, $field );
 	}
@@ -373,7 +413,7 @@ class Forminator_Address extends Forminator_Field {
 	 *
 	 * @return string
 	 */
-	public function get_address( $field, $slug ) {
+	public function get_address( $field, $slug, $design ) {
 		$cols 		  	= 12;
 		$html        	= '';
 		$id = $name 	= self::get_property( 'element_id', $field );
@@ -398,18 +438,7 @@ class Forminator_Address extends Forminator_Field {
 		$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 		$html .= '<div class="forminator-field forminator-field--inner">';
 
-		if ( $required ) {
-			$label = self::get_property( $slug .  '_label', $field );
-			$asterisk = '<i class="wpdui-icon wpdui-icon-asterisk" aria-hidden="true"></i>';
-			if ( ! empty( $label ) ) {
-				$html .= '<div class="forminator-field--label">';
-				$html .= '<label class="forminator-label">' . $label . ' ' . $asterisk . '</label>';
-				$html .= '</div>';
-			}
-			$html .= self::create_simple_input( $address );
-		} else {
-			$html .= self::create_input( $address, self::get_property( $slug .  '_label', $field ) );
-		}
+		$html .= self::create_input( $address, self::get_property( $slug .  '_label', $field ), '', $required, $design );
 
 		$html .= '</div>';
 		$html .= '</div>';
@@ -426,7 +455,7 @@ class Forminator_Address extends Forminator_Field {
 	 *
 	 * @return string
 	 */
-	public function get_city_state( $field ) {
+	public function get_city_state( $field, $design ) {
 		$cols        = 12;
 		$html        = '';
 		$id = $name  = self::get_property( 'element_id', $field );
@@ -459,18 +488,7 @@ class Forminator_Address extends Forminator_Field {
 			$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
-			if ( $required ) {
-				$label = self::get_property( 'address_city_label', $field );
-				$asterisk = '<i class="wpdui-icon wpdui-icon-asterisk" aria-hidden="true"></i>';
-				if ( ! empty( $label ) ) {
-					$html .= '<div class="forminator-field--label">';
-					$html .= '<label class="forminator-label">' . $label . ' ' . $asterisk . '</label>';
-					$html .= '</div>';
-				}
-				$html .= self::create_simple_input( $city_data );
-			} else {
-				$html .= self::create_input( $city_data, self::get_property( 'address_city_label', $field ) );
-			}
+			$html .= self::create_input( $city_data, self::get_property( 'address_city_label', $field ), '', $required, $design );
 
 			$html .= '</div>';
 			$html .= '</div>';
@@ -500,18 +518,7 @@ class Forminator_Address extends Forminator_Field {
 			$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
-			if ( $required ) {
-				$label = self::get_property( 'address_state_label', $field );
-				$asterisk = '<i class="wpdui-icon wpdui-icon-asterisk" aria-hidden="true"></i>';
-				if ( ! empty( $label ) ) {
-					$html .= '<div class="forminator-field--label">';
-					$html .= '<label class="forminator-label">' . $label . ' ' . $asterisk . '</label>';
-					$html .= '</div>';
-				}
-				$html .= self::create_simple_input( $state_data );
-			} else {
-				$html .= self::create_input( $state_data, self::get_property( 'address_state_label', $field ) );
-			}
+			$html .= self::create_input( $state_data, self::get_property( 'address_state_label', $field ), '', $required, $design );
 
 			$html .= '</div>';
 			$html .= '</div>';
@@ -529,7 +536,7 @@ class Forminator_Address extends Forminator_Field {
 	 *
 	 * @return string
 	 */
-	public function get_zip_country( $field ) {
+	public function get_zip_country( $field, $design ) {
 		$cols           	= 12;
 		$html           	= '';
 		$id = $name     	= self::get_property( 'element_id', $field );
@@ -561,18 +568,7 @@ class Forminator_Address extends Forminator_Field {
 			$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
-			if ( $required ) {
-				$label = self::get_property( 'address_zip_label', $field );
-				$asterisk = '<i class="wpdui-icon wpdui-icon-asterisk" aria-hidden="true"></i>';
-				if ( ! empty( $label ) ) {
-					$html .= '<div class="forminator-field--label">';
-					$html .= '<label class="forminator-label">' . $label . ' ' . $asterisk . '</label>';
-					$html .= '</div>';
-				}
-				$html .= self::create_simple_input( $zip_data );
-			} else {
-				$html .= self::create_input( $zip_data, self::get_property( 'address_zip_label', $field ) );
-			}
+			$html .= self::create_input( $zip_data, self::get_property( 'address_zip_label', $field ), '', $required, $design );
 
 			$html .= '</div>';
 			$html .= '</div>';
@@ -596,7 +592,15 @@ class Forminator_Address extends Forminator_Field {
 				$html .= '<div class="forminator-row">';
 			}
 
+			$countries = array(
+				array(
+					'value' => '',
+					'label' => __( "Select country", Forminator::DOMAIN )
+				)
+			);
+
 			$options = forminator_to_field_array( forminator_get_countries_list(), true );
+			$countries = array_merge( $countries, $options );
 			$html .= sprintf( '<div class="forminator-col forminator-col-%s">', $cols );
 			$html .= '<div class="forminator-field forminator-field--inner">';
 
@@ -608,9 +612,9 @@ class Forminator_Address extends Forminator_Field {
 					$html .= '<label class="forminator-label">' . $label . ' ' . $asterisk . '</label>';
 					$html .= '</div>';
 				}
-				$html .= self::create_simple_select( $country_data, $options, self::get_property( 'address_country_placeholder', $field ) );
+				$html .= self::create_simple_select( $country_data, $countries, self::get_property( 'address_country_placeholder', $field ) );
 			} else {
-				$html .= self::create_select( $country_data, self::get_property( 'address_country_label', $field ), $options, self::get_property( 'address_country_placeholder', $field ) );
+				$html .= self::create_select( $country_data, self::get_property( 'address_country_label', $field ), $countries, self::get_property( 'address_country_placeholder', $field ) );
 			}
 
 			$html .= '</div>';

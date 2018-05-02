@@ -32,19 +32,23 @@
 
                     <div class="wpmudev-section--text">
 
-                        <?php
-                        $custom_votes = $this->get_custom_votes();
-                        $empty_text = __( "No one has added custom votes just yet.", Forminator::DOMAIN );
+	                    <?php
+	                    $custom_votes = $this->map_custom_votes();
+	                    $empty_text   = __( "No one has added custom votes just yet.", Forminator::DOMAIN );
+	                    if ( ! empty( $custom_votes ) && count( $custom_votes ) > 0 ) {
+		                    foreach ( $custom_votes as $element_id => $custom_vote ) {
+			                    echo '<b>' . $this->get_field_title( $element_id ) . '</b><br/>';
+			                    foreach ( $custom_vote as $answer => $vote ) {
+				                    echo '' . $answer . ': ' . $vote . '<br/>';
+			                    }
+			                    echo '<hr/>';
+		                    }
 
-                        if ( count( $custom_votes ) > 0 && ! empty( $custom_votes ) ) {
-	                        $custom_votes = implode ( ", ", $custom_votes );
-                            echo $custom_votes;
+	                    } else {
 
-                        } else {
+		                    echo '<p>' . $empty_text . '</p>';
 
-                            echo '<p>' . $empty_text . '</p>';
-
-                        } ?>
+	                    } ?>
 
                     </div>
 
@@ -109,8 +113,9 @@
 
 	                        <?php
 	                        $schedule_day       = forminator_get_exporter_info( 'day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
+							$schedule_month_day = forminator_get_exporter_info( 'month_day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $schedule_time      = forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-	                        $schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );	    	 	 	 	 	 				 	 
+	                        $schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $email              = forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 							$enabled			= ( forminator_get_exporter_info( 'enabled', forminator_get_form_id_helper() . forminator_get_form_type_helper() ) === 'true' );
 	                        ?>
@@ -119,8 +124,14 @@
 		                        <?php if ( ! $enabled || empty( $email ) ): ?>
 									<span><?php _e( "Scheduled export is not enabled", Forminator::DOMAIN ) ?></span>
 		                        <?php else: ?>
-									<span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
-										<br/><?php _e( "To be sent by email.", Forminator::DOMAIN ); ?></span>
+			                        <?php if (  $schedule_timeframe == 'weekly' ): ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
+			                        <?php elseif ( $schedule_timeframe == 'monthly' ): ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> every <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ( $schedule_month_day ? $schedule_month_day : 1 ), $schedule_time ); ?>
+			                        <?php else: ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), $schedule_time ); ?>
+                                    <?php endif; ?>
+									<br/><?php _e( "To be sent by email.", Forminator::DOMAIN ); ?></span>
 		                        <?php endif; ?>
 								<a href="/"
 								   class="wpmudev-button wpmudev-button-ghost wpmudev-button-sm wpmudev-open-modal"

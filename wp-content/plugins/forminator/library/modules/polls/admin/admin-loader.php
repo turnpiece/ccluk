@@ -31,6 +31,7 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 		include_once( dirname(__FILE__) . '/admin-page-new.php' );
 		include_once( dirname(__FILE__) . '/admin-page-view.php' );
 		include_once( dirname(__FILE__) . '/admin-page-entries.php' );
+		include_once( dirname(__FILE__) . '/admin-renderer-entries.php' );
 	}
 
 	/**
@@ -77,7 +78,8 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 				if ( is_object( $model ) ) {
 					foreach ( (array) $model->getFields() as $field ) {
 						$a = array(
-							'title' => $field->title,
+							'title'      => $field->title,
+							'element_id' => $field->element_id,
 						);
 						if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) == true ) {
 							$a['use_extra'] = true;

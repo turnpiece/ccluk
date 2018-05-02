@@ -27,6 +27,13 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	private static $forms_properties = array();
 
 	/**
+	 * Default Combination of Chart Colors
+	 *
+	 * @var array
+	 */
+	public static $default_chart_colors = array( '#F4B414', '#1ABC9C', '#17A8E3', '#18485D', '#D30606' );
+
+	/**
 	 * Return class instance
 	 *
 	 * @since 1.0
@@ -116,7 +123,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			} elseif ( isset( $_REQUEST['results'] ) && $isSameForm && $isSameRender && $this->show_link() ) {
 				$this->track_views = false;
 				$this->render_success();
-			} elseif ( !$this->model->current_user_can_vote() && $this->show_results() ) {
+			} elseif ( ! $this->is_admin && ( ! $this->model->current_user_can_vote() && ( $this->show_results() || $this->show_link() ) ) ) {
 				$this->track_views = false;
 				$this->render_success();
 			} else {
@@ -124,9 +131,11 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			}
 
 			self::$forms_properties[] = array(
-				'id'        => $id,
-				'render_id' => self::$render_ids[ $id ],
-				'settings'  => $this->get_form_settings(),
+				'id'            => $id,
+				'render_id'     => self::$render_ids[ $id ],
+				'settings'      => $this->get_form_settings(),
+				'chart_design'  => $this->get_chart_design(),
+				'chart_options' => self::get_default_chart_options( $this->model ),
 			);
 
 			if ( ! $ajax ) {
@@ -206,7 +215,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				<?php
 			}
 		} else {
-			if ( ! $this->model->current_user_can_vote() ) {
+			if ( ! $this->is_admin && ! $this->model->current_user_can_vote() ) {
 				$this->track_views = false;
 				?>
                 <label class="forminator-label--info"><span><?php _e( "You have already voted for this poll", Forminator::DOMAIN ); ?></span></label>
@@ -235,7 +244,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function get_submit_button_text() {
-		if ( is_object( $this->model ) && isset( $this->model->settings['poll-button-label'] ) ) {
+		if ( is_object( $this->model ) && isset( $this->model->settings['poll-button-label'] ) && ! empty( $this->model->settings['poll-button-label'] ) ) {
 			return $this->model->settings['poll-button-label'];
 		} else {
 			return __( "Submit", Forminator::DOMAIN );
@@ -249,7 +258,8 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return string
 	 */
 	public function get_button_markup() {
-		if ( is_object( $this->model ) && $this->model->current_user_can_vote() ) {
+		// if its on admin then bypass current_user_can_vote.
+		if ( is_object( $this->model ) && ( $this->is_admin || $this->model->current_user_can_vote() ) ) {
 			$button = $this->get_submit_button_text();
 			$html   = '<div class="forminator-poll--actions">';
 			$html   .= sprintf( '<button class="forminator-button">%s</button>', $button );
@@ -266,7 +276,11 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				} else {
 					$url = add_query_arg( array( 'results' => 'true', 'form_id' => $this->model->id, 'render_id' => self::$render_ids[ $this->model->id ] ), $url );
 				}
-				$html .= sprintf( '<a href="%s" class="forminator-button forminator-button-ghost">%s</a>', esc_url( $url ), __( 'View results', Forminator::DOMAIN ) );
+				if ( 0 === Forminator_Form_Entry_Model::count_entries($this->model->id) ) {
+					$html .= sprintf( '<span class="forminator-button forminator-button-ghost">%s</span>', __( 'No votes yet', Forminator::DOMAIN ) );
+				} else {
+					$html .= sprintf( '<a href="%s" class="forminator-button forminator-button-ghost">%s</a>', esc_url( $url ), __( 'View results', Forminator::DOMAIN ) );
+				}
 			}
 			$html .= '</div>';
 
@@ -289,7 +303,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			}
 			$html .= '</div>';
 
-			return apply_filters( 'forminator_render_button_disabled_markup', $html );
+			return apply_filters( 'forminator_render_button_disabled_markup', $html, $this );
 		}
 	}
 
@@ -327,11 +341,11 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$classes .= ' forminator_ajax';
 		}
 
-		if ( is_object( $this->model ) && ! $this->model->current_user_can_vote() ) {
+		if ( is_object( $this->model ) && ! $this->is_admin && ! $this->model->current_user_can_vote() ) {
 			$classes .= ' forminator-poll-disabled';
 		}
 
-		return $classes;
+		return apply_filters( 'forminator_polls_form_extra_classes', $classes, $this );
 	}
 
 	/**
@@ -425,7 +439,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		if ( $render ) {
 			echo $html;
 		} else {
-			return apply_filters( 'forminator_render_fields_markup', $html, $wrappers );
+			return apply_filters( 'forminator_render_fields_markup', $html, $wrappers, $this );
 		}
 
 	}
@@ -442,21 +456,20 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 */
 	public function render_field_radio( $field, $uniq_id ) {
 		$label = Forminator_Field::get_property( 'title', $field, $this->model->id );
-		if ( ! isset( $field['element_id'] ) ) {
-			$field['element_id'] = $this->model->id;
-		}
 		// Get field object
-		$name = Forminator_Field::get_property( 'element_id', $field );
+		$element_id = Forminator_Field::get_property( 'element_id', $field );
+		$name       = $this->model->id;
 
 		if ( ! isset( $field['value'] ) ) {
 			$field['value'] = sanitize_title( $label );
 		}
 
-		$field_label = sanitize_title( $label );
-		$input_id    = $field_label . '-' . $name . '-' . $uniq_id;
+		// form_id - render_id - element_id
+		$input_id = $name . '-' . self::$render_ids[ $this->model->id ] . '-' . $element_id;
 
 		// Print field markup
 		$html = $this->radio_field_markup( $field, $input_id, $name );
+
 		$html .= sprintf( '<label class="forminator-radio--design" aria-hidden="true" for="%s"></label><label class="forminator-radio--label" for="%s">%s</label>', $input_id, $input_id, $label );
 
 		return apply_filters( 'forminator_field_markup', $html, $field, $this );
@@ -476,9 +489,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	public function radio_field_markup( $field, $id, $name ) {
 
 		$required = Forminator_Field::get_property( 'required', $field, false );
-		$value    = Forminator_Field::get_property( 'value', $field );
+		$value    = Forminator_Field::get_property( 'element_id', $field );
 		$disabled = '';
-		if ( ! $this->model->current_user_can_vote() ) {
+		if ( ! $this->is_admin && ! $this->model->current_user_can_vote() ) {
 			$disabled = 'disabled="disabled"';
 		}
 
@@ -498,20 +511,17 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function render_extra_field( $field, $uniq_id ) {
-		if ( ! isset( $field['element_id'] ) ) {
-			$field['element_id'] = $this->model->id;
-		}
-		$label = Forminator_Field::get_property( 'title', $field, $this->model->id );
-		// Get field object
-		$name = Forminator_Field::get_property( 'element_id', $field );
-
 		$extra = Forminator_Field::get_property( 'extra', $field );
 
-		$field_label = sanitize_title( $label );
-		$input_id    = $field_label . '-' . $name . '-' . $uniq_id;
+		// Get field object
+		$element_id = Forminator_Field::get_property( 'element_id', $field );
+		$name       = $this->model->id;
+
+		// form_id - render_id - element_id
+		$input_id = $name . '-' . self::$render_ids[ $this->model->id ] . '-' . $element_id;
 
 
-		$html = sprintf( '<input style="display:none" class="forminator-name--field forminator-input" type="text" name="" placeholder="%s" id="%s" />', $extra, $input_id . '-extra' );
+		$html = sprintf( '<input style="display:none" class="forminator-name--field forminator-input" type="text" name="%s" placeholder="%s" id="%s" />', $name . '-extra', $extra, $input_id . '-extra' );
 
 		return apply_filters( 'forminator_field_textfield_extra_markup', $html, $name );
 	}
@@ -691,7 +701,14 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$chart_container = 'forminator_chart_poll_' . uniqid() . '_' . $this->model->id;
 			ob_start();
 			?>
-            <form class="forminator-poll" method="GET" action="<?php echo esc_url( $return_url ); ?>" data-forminator-render="<?php echo self::$render_ids[ $this->model->id ] ?>">
+            <form class="forminator-poll forminator-poll-<?php echo $this->model->id;?>
+            <?php echo $this->get_form_design_class();?>
+            <?php echo $this->get_fields_type_class();?>
+            <?php echo $this->form_extra_classes();?>" method="GET" action="<?php echo
+            esc_url( $return_url ); ?>"
+                  data-forminator-render="<?php echo
+            self::$render_ids[
+                    $this->model->id ] ?>">
 				<?php echo $this->render_form_header(); ?>
                 <div id="<?php echo $chart_container; ?>" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>
                 <div class="forminator-poll--actions">
@@ -722,6 +739,94 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
     }
 
 	/**
+	 * Get Options for google chart
+	 *
+	 * @param $model
+	 *
+	 * @return array
+	 */
+	public static function get_default_chart_options( $model ) {
+		$chart_colors     = apply_filters( 'forminator_poll_chart_color', self::$default_chart_colors );
+		$chart_design     = 'bar';
+		$pie_tooltip_text = 'percentage';
+		$form_settings    = $model->settings;
+		if ( isset( $form_settings['results-style'] ) ) {
+			$chart_design = $form_settings['results-style'];
+		}
+
+		if ( isset( $form_settings['show-votes-count'] ) && $form_settings['show-votes-count'] ) {
+			if ( $chart_design == 'pie' ) {
+				$pie_tooltip_text = 'both';
+			}
+		}
+
+		if ( $chart_design != 'pie' ) {
+			$chart_options = array(
+				'annotations'     => array(
+					'textStyle' => array(
+						'fontSize' => 13,
+						'bold'     => false,
+						'color'    => '#333',
+					),
+				),
+				'backgroundColor' => 'transparent',
+				'fontSize'        => 13,
+				'fontName'        => 'Roboto',
+				'hAxis'           => array(
+					'format'        => 'decimal',
+					'baselineColor' => '#4D4D4D',
+					'gridlines'     => array(
+						'color' => '#E9E9E9',
+					),
+					'textStyle'     => array(
+						'color'    => '#4D4D4D',
+						'fontSize' => 13,
+						'bold'     => false,
+						'italic'   => false,
+					),
+					'minValue'      => 0,
+				),
+				'vAxis'           => array(
+					'baselineColor' => '#4D4D4D',
+					'gridlines'     => array(
+						'color' => '#E9E9E9',
+					),
+					'textStyle'     => array(
+						'color'    => '#4D4D4D',
+						'fontSize' => 13,
+						'bold'     => false,
+						'italic'   => false,
+					),
+					'minValue'      => 0,
+				),
+				'tooltip'         => array(
+					'isHtml'  => true,
+					'trigger' => 'none',
+				),
+				'legend'          => array(
+					'position' => 'none',
+				),
+			);
+		} else {
+			$chart_options = array(
+				'colors'          => $chart_colors,
+				'backgroundColor' => 'transparent',
+				'fontSize'        => 13,
+				'fontName'        => 'Roboto',
+				'tooltip'         => array(
+					'isHtml'  => false,
+					'trigger' => 'focus',
+					'text'    => $pie_tooltip_text,
+				),
+			);
+		}
+
+		return apply_filters( 'forminator_poll_chart_options', $chart_options, $model );
+
+
+	}
+
+	/**
 	 * Success footer scripts
 	 *
 	 * @since 1.0
@@ -730,10 +835,20 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		if ( ! is_object( $model ) ) {
 			return '';
 		}
-		$chart_colors         = apply_filters( 'forminator_poll_chart_color', array( '#F4B414', '#1ABC9C', '#17A8E3', '#18485D', '#D30606' ) );
+		$form_settings = $model->settings;
+
+		$chart_design = 'bar';
+		if ( isset( $form_settings['results-style'] ) ) {
+			$chart_design = $form_settings['results-style'];
+		}
+
+		$number_votes_enabled = false;
+		if ( isset( $settings['show-votes-count'] ) && $form_settings['show-votes-count'] ) {
+			$number_votes_enabled = true;
+		}
+
+		$chart_colors         = apply_filters( 'forminator_poll_chart_color', self::$default_chart_colors );
 		$default_chart_colors = $chart_colors;
-		$chart_design         = $this->get_chart_design();
-		$pie_tooltip_text     = 'percentage';
 		?>
         <script type="text/javascript">
 			(function ($, doc) {
@@ -746,34 +861,28 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 						var data = google.visualization.arrayToDataTable([
 							['<?php _e( 'Question', Forminator::DOMAIN ) ?>', '<?php _e( 'Results', Forminator::DOMAIN ) ?>', {role: 'style'}, {role: 'annotation'}],
 							<?php
+							$fields_array = $model->getFieldsAsArray();
+							$map_entries = Forminator_Form_Entry_Model::map_polls_entries( $model->id, $fields_array );
 							$fields = $model->getFields();
 							if ( ! is_null( $fields ) ) {
 								$html = '';
 								foreach ( $fields as $field ) {
 									$annotation = '';
-									$label      = $field->__get( 'main_label' );
-									if ( ! $label ) {
-										$label = $field->__get( 'field_label' );
-										if ( ! $label ) {
-											$label = addslashes( $field->title );
-										}
-									}
+									$label      = addslashes( $field->title );
 
 									if ( empty( $chart_colors ) ) {
 										$chart_colors = $default_chart_colors;
 									}
 									$color   = array_shift( $chart_colors );
 									$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
-									$entries = Forminator_Form_Entry_Model::count_entries_by_form_and_field( $model->id, $slug );
-									$style   = 'color: ' . $color;
-
-									if ( $this->has_votes_enabled() ) {
-										$number_votes = Forminator_Form_Entry_Model::count_entries_by_form_and_field( $model->id, $slug );
-										if ( $chart_design == 'pie' ) {
-											$pie_tooltip_text = 'both';
-										}
-										$annotation = $number_votes . __( ' vote(s)', Forminator::DOMAIN );
+									$entries = 0;
+									if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+										$entries = $map_entries[ $slug ];
 									}
+									if ( $number_votes_enabled ) {
+										$annotation = $entries . __( ' vote(s)', Forminator::DOMAIN );
+									}
+									$style = 'color: ' . $color;
 
 									$html .= "['$label', $entries, '$style', '$annotation'],";
 								}
@@ -783,71 +892,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 							?>
 						]);
 
-						<?php if ( $chart_design != 'pie' ) { ?>
-
-						var options = {
-							annotations: {
-								textStyle: {
-									fontSize: 13,
-									bold: false,
-									color: '#333'
-								}
-							},
-							backgroundColor: 'transparent',
-							fontSize: 13,
-							fontName: 'Roboto',
-							hAxis: {
-								format: 'decimal',
-								baselineColor: '#4D4D4D',
-								gridlines: {
-									color: '#E9E9E9'
-								},
-								textStyle: {
-									color: '#4D4D4D',
-									fontSize: 13,
-									bold: false,
-									italic: false
-								},
-								minValue: 0
-							},
-							vAxis: {
-								baselineColor: '#4D4D4D',
-								gridlines: {
-									color: '#E9E9E9'
-								},
-								textStyle: {
-									color: '#4D4D4D',
-									fontSize: 13,
-									bold: false,
-									italic: false
-								},
-								minValue: 0
-							},
-							tooltip: {
-								isHtml: true,
-								trigger: 'none'
-							},
-							legend: {
-								position: "none"
-							}
-						};
-
-						<?php } else { ?>
-
-						var options = {
-							colors: <?php echo wp_json_encode( $default_chart_colors )?>,
-							backgroundColor: 'transparent',
-							fontSize: 13,
-							fontName: 'Roboto',
-							tooltip: {
-								isHtml: false,
-								ignoreBounds: true,
-								trigger: 'focus',
-								text: '<?php echo $pie_tooltip_text?>',
-							}
-						};
-
-						<?php } ?>
+						var options = <?php echo wp_json_encode( self::get_default_chart_options( $model ) ) ?>;
 
 						<?php if ( $chart_design == 'pie' ) {    ?>
 						var chart = new google.visualization.PieChart(document.getElementById('<?php echo $container_id; ?>'));
@@ -935,11 +980,14 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				ob_start();
 				/** @noinspection PhpIncludeInspection */
 				include $this->styles_template_path();
-				$styles = ob_get_clean();
-				if ( isset( $properties['formID'] ) && strlen(trim($styles)) > 0 ) {
+				$styles         = ob_get_clean();
+				$trimmed_styles = trim( $styles );
+
+				if ( isset( $properties['formID'] ) && strlen( $trimmed_styles ) > 0 ) {
 					?>
-                    <style type="text/css"
-                           id="forminator-poll-styles-<?php echo $properties['formID']; ?>"><?php echo $styles; ?></style>
+                    <style type="text/css" id="forminator-poll-styles-<?php echo $properties['formID']; ?>">
+	                    <?php echo $trimmed_styles; ?>
+                    </style>
 					<?php
 				}
 			}
@@ -960,6 +1008,8 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				?>
 				jQuery('#forminator-module-<?php echo $form_properties['id'] ?>[data-forminator-render="<?php echo $form_properties['render_id']; ?>"]').forminatorFront({
 					form_type: '<?php echo $this->get_form_type(); ?>',
+					chart_design: '<?php echo $form_properties['chart_design']; ?>',
+					chart_options: <?php echo wp_json_encode($form_properties['chart_options']); ?>,
 				});
 				<?php
 				}

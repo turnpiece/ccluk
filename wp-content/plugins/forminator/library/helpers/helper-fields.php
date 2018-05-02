@@ -135,7 +135,7 @@ function forminator_fields_toArray() {
 		}
 	}
 
-	return $fields;
+	return apply_filters( 'forminator_fields_to_array', $fields, $fields_array );
 }
 
 /**
@@ -298,7 +298,7 @@ function forminator_clear_field_id( $string ) {
  * @since 1.0
  * @return mixed
  */
-function forminator_replace_form_data( $content, $data ) {
+function forminator_replace_form_data( $content, $data, Forminator_Custom_Form_Model $custom_form = null, Forminator_Form_Entry_Model $entry = null ) {
 	$matches = array();
 
 	$fields      = forminator_fields_toArray();
@@ -320,6 +320,8 @@ function forminator_replace_form_data( $content, $data ) {
 			// Check if field exist, if not we replace the ID with empty string
 			if( isset( $data[ $element_id ] ) && !empty( $data[ $element_id ] ) ) {
 				$value = $data[ $element_id ];
+			} else if( (strpos($element_id, 'postdata') !== false || strpos($element_id, 'upload') !== false) && $custom_form && $entry ) {
+				$value = forminator_get_field_from_form_entry( $element_id, $custom_form, $data, $entry );
 			} else {
 				$value = '';
 			}
@@ -333,7 +335,7 @@ function forminator_replace_form_data( $content, $data ) {
 		}
 	}
 
-	return $content;
+	return apply_filters( 'forminator_replace_form_data', $content, $data, $fields );
 }
 
 /**
@@ -367,7 +369,7 @@ function forminator_replace_custom_form_data( $content, Forminator_Custom_Form_M
 		}
 	}
 
-	return $content;
+	return apply_filters( 'forminator_replace_custom_form_data', $content, $custom_form, $data, $entry, $excluded, $custom_form_datas );
 }
 
 /**
@@ -397,7 +399,7 @@ function forminator_get_formatted_form_entry( Forminator_Custom_Form_Model $cust
 		}
 		$html  .= '<li>';
 		$label = $form_field->get_label_for_entry();
-		$value = Forminator_CForm_View_Page::render_entry( $entry, $form_field->slug );
+		$value = render_entry( $entry, $form_field->slug );
 		if ( ! empty( $label ) ) {
 			$html .= '<b>' . $label . '</b><br/>';
 		}
@@ -406,7 +408,34 @@ function forminator_get_formatted_form_entry( Forminator_Custom_Form_Model $cust
 	}
 	$html .= '</ol><br/>';
 
-	return $html;
+	return apply_filters( 'forminator_get_formatted_form_entry', $html, $custom_form, $data, $entry, $ignored_field_types );
+}
+
+/**
+ * Get field from registered entries
+ *
+ * @since 1.0.5
+ *
+ * @param 							   $element_id
+ * @param Forminator_Custom_Form_Model $custom_form
+ * @param                              $data
+ * @param Forminator_Form_Entry_Model  $entry
+ *
+ * @return string
+ */
+function forminator_get_field_from_form_entry( $element_id, Forminator_Custom_Form_Model $custom_form, $data, Forminator_Form_Entry_Model $entry ) {
+	$form_fields         = $custom_form->getFields();
+	if ( is_null( $form_fields ) ) {
+		$form_fields = array();
+	}
+	foreach ( $form_fields as $form_field ) {
+		/** @var  Forminator_Form_Field_Model $form_field */
+		if ( $form_field->slug !== $element_id ) {
+			continue;
+		}
+		$value = render_entry( $entry, $form_field->slug );
+		return $value;
+	}
 }
 
 /**
@@ -428,9 +457,15 @@ function forminator_get_formatted_form_name( Forminator_Custom_Form_Model $custo
  * Return filtered editor content with replaced variables
  *
  * @since 1.0
+ *
+ * @param $content
+ * @param $id
+ *
  * @return string
  */
-function forminator_replace_variables( $content ) {
+function forminator_replace_variables( $content, $id = false, $data_current_url = false ) {
+	$content_before_replacement = $content;
+
 	// If we have no variables, skip
 	if ( strpos( $content, '{' ) !== false ) {
 		// Handle User IP Address variable
@@ -454,7 +489,7 @@ function forminator_replace_variables( $content ) {
 		$content = str_replace( '{embed_title}', $embed_title, $content );
 
 		// Handle Embed URL variable
-		$embed_url = forminator_get_current_url();
+		$embed_url = $data_current_url ? $data_current_url : forminator_get_current_url();
 		$content = str_replace( '{embed_url}', $embed_url, $content );
 
 		// Handle HTTP User Agent variable
@@ -481,9 +516,102 @@ function forminator_replace_variables( $content ) {
 		// Handle User Login variable
 		$user_login = forminator_get_user_data( 'user_login' );
 		$content = str_replace( '{user_login}', $user_login, $content );
+
+		// Handle form_name data
+		$form_name = ( $id != false ) ? esc_html( forminator_get_form_name( $id, 'custom_form' ) ) : '';
+		$content = str_replace( '{form_name}', $form_name, $content );
 	}
 
-	return $content;
+	return apply_filters( 'forminator_replace_variables', $content, $content_before_replacement );
+}
+
+/**
+ * Render entry
+ *
+ * @since 1.0
+ *
+ * @param object $item        - the entry
+ * @param string $column_name - the column name
+ *
+ * @param null   $field @since 1.0.5, optional Forminator_Form_Field_Model
+ *
+ * @return string
+ */
+function render_entry( $item , $column_name, $field = null ) {
+	$data =  $item->get_meta( $column_name, '' );
+	if ( $data ) {
+		$currency_symbol 	= forminator_get_currency_symbol();
+		if ( is_array( $data ) ) {
+			$output 		= '';
+			$product_cost 	= 0;
+			$is_product 	= false;
+			$countries 		= forminator_get_countries_list();
+			foreach ( $data as $key => $value ) {
+				if ( is_array( $value ) ) {
+					if ( $key == 'file' && isset( $value['file_url'] ) ) {
+						$file_name 	= basename( $value['file_url'] );
+						$file_name 	= "<a href='" . esc_url( $value['file_url'] ) . "' target='_blank' rel='noreferrer' title='". __( 'View File', Forminator::DOMAIN ) ."'>$file_name</a> ,";
+						$output 	.= $file_name;
+					}
+
+				} else {
+					if ( !is_int( $key ) ) {
+						if ( $key == 'postdata' ) {
+							// possible empty when postdata not required
+							if (! empty($value)) {
+								$url 	= get_edit_post_link( $value );
+								$title  = get_the_title( $value );
+								$name 	= ! empty( $title ) ? $title : '(no title)' ;
+								$output .= "<a href='" .$url . "' target='_blank' rel='noreferrer' title='". __( 'Edit Post', Forminator::DOMAIN ) ."'>$name</a> ,";
+							}
+						} else {
+							if ( is_string( $key ) ) {
+								if ( $key == 'product-id' || $key == 'product-quantity' ) {
+									if ( $product_cost == 0 ) {
+										$product_cost = $value;
+									} else {
+										$product_cost = $product_cost * $value;
+									}
+									$is_product = true;
+								} else {
+									if ( $key  == 'country' ) {
+										if ( isset( $countries[$value] ) ) {
+											$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $countries[$value] ) . "<br/> ";
+										} else {
+											$output .=  sprintf( __( '<strong>Country : </strong> %s', Forminator::DOMAIN ), $value ) . "<br/> ";
+										}
+									} else {
+										if ( in_array( $key, Forminator_Form_Entry_Model::field_suffix() ) ) {
+											$key = Forminator_Form_Entry_Model::translate_suffix( $key );
+										} else {
+											$key = strtolower( $key );
+											$key = ucfirst( str_replace( array( '-', '_' ), ' ', $key ) );
+										}
+										$value  = esc_html( $value );
+										$output .= sprintf( __( '<strong>%s : </strong> %s', Forminator::DOMAIN ), $key, $value ) . "<br/> ";
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+			if ( $is_product ) {
+				$output = sprintf( __( '<strong>Total</strong> %s', Forminator::DOMAIN ), $currency_symbol . '' .$product_cost );
+			} else {
+				if ( !empty( $output ) ) {
+					$output = substr( trim( $output ), 0, -1 );
+				} else {
+					$output = implode( ",", $data );
+				}
+			}
+			return $output;
+		} else {
+			return $data;
+		}
+	}
+
+	return '';
 }
 
 /**

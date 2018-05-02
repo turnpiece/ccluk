@@ -33,7 +33,7 @@ body.page {
 
 	&.page-template-page-nosidebar {
 		#main {
-			max-width: 750px;
+			max-width: $content_w;
 		}
 	}
 

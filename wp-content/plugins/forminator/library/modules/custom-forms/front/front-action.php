@@ -328,6 +328,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							if ( isset( $field_forms[ $field_type ] ) && ! empty( $field_forms[ $field_type ] ) ) {
 							    /** @var Forminator_Field $form_field_obj */
 								$form_field_obj = $field_forms[ $field_type ];
+
 								if ( $field_type == "upload" ) {
 									$upload_data = $this->handle_file_upload( $field_id );
 									if ( $upload_data ) {
@@ -347,10 +348,24 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 									}
 
 								}
+
+								/**
+                                 * @since 1.0.5
+								 * Load Autofill
+								 */
+								$form_field_obj->init_autofill( $setting );
+
 								if ( ! empty( $field_data ) ) {
 									// Validate data when its available and not hidden on front end
 									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
-										$form_field_obj->validate( $field_array, $field_data );
+
+										/**
+                                         * @since 1.0.5
+										 * Mayble re autofill, when autofill not editable, it should return autofill value
+										 */
+									    $field_data = $form_field_obj->maybe_re_autofill($field_array, $field_data, $setting);
+
+									    $form_field_obj->validate( $field_array, $field_data );
 									}
 									$valid_response = $form_field_obj->is_valid_entry();
 									if ( ! is_array( $valid_response ) ) {
@@ -404,7 +419,12 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 								} else {
 									// Validate data when its available and not hidden on front end
 									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
-										$form_field_obj->validate( $field_array, '' );
+										/**
+										 * @since 1.0.5
+										 * Mayble re autofill, when autofill not editable, it should return autofill value
+										 */
+										$field_data = $form_field_obj->maybe_re_autofill($field_array, '', $setting);
+										$form_field_obj->validate( $field_array, $field_data );
 									}
 									$valid_response = $form_field_obj->is_valid_entry();
 									if ( is_array( $valid_response ) && isset( $valid_response[ $field_id ] ) ) {
@@ -427,7 +447,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 				 *
 				 * @return array $submit_errors
 				 */
-				$submit_errors = apply_filters( 'forminator_custom_form_submit_errors', $submit_errors, $form_id );
+				$submit_errors = apply_filters( 'forminator_custom_form_submit_errors', $submit_errors, $form_id, $field_data_array );
 
 				if ( empty( $submit_errors ) ) {
 					if ( isset( $setting['honeypot'] ) && filter_var( $setting['honeypot'], FILTER_VALIDATE_BOOLEAN ) ) {
@@ -519,9 +539,9 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							if ( isset( $setting['thankyou'] ) && $setting['thankyou'] ) {
 								if ( isset( $setting['thankyou-message'] ) && ! empty( $setting['thankyou-message'] ) ) {
 									//replace form data vars with value
-									$thankyou_message = forminator_replace_form_data( wp_strip_all_tags( $setting['thankyou-message'] ), $_POST );
+									$thankyou_message = forminator_replace_form_data( $setting['thankyou-message'] , $_POST );
 									//replace misc data vars with value
-									$thankyou_message    = forminator_replace_variables( $thankyou_message );
+									$thankyou_message    = forminator_replace_variables( $thankyou_message, $form_id );
 									$response['message'] = $thankyou_message;
 								}
 							}

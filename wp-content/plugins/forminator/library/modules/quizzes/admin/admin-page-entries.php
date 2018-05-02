@@ -64,7 +64,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 *
 	 * @since 1.0
 	 */
-	public function init() {
+	public function before_render() {
 		if ( isset( $_REQUEST['form_id'] ) ) {
 			$this->form_id = sanitize_text_field( $_REQUEST['form_id'] );
 			$this->model   = Forminator_Quiz_Form_Model::model()->load( $this->form_id );
@@ -116,8 +116,8 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 						if ( isset( $_POST['ids'] ) && is_array( $_POST['ids'] ) ) {
 							$entries = implode( ",", $_POST['ids'] );
 							Forminator_Form_Entry_Model::delete_by_entrys( $this->model->id, $entries );
-
-							wp_redirect( admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->model->id ) );
+							$url = add_query_arg( '', '' );
+							wp_redirect( $url );
 							exit;
 						}
 					break;

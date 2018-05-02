@@ -472,4 +472,14 @@ abstract class Forminator_Base_Form_Model {
 
 		return $class;
 	}
+
+	/**
+	 * Get Post Type of cpt
+	 * @since 1.0.5
+	 *
+	 * @return mixed
+	 */
+	public function getPostType() {
+		return $this->post_type;
+	}
 }

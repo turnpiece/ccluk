@@ -1,5 +1,5 @@
 <?php
-$api_mode     	= get_option( "forminator_paypal_api_mode", "" );
+$api_mode     	= get_option( "forminator_paypal_api_mode", "" );	    	 	 	 	 	 				 	 
 $client_id 		= get_option( "forminator_paypal_client_id", "" );
 $secret 		= get_option( "forminator_paypal_secret", "" );
 ?>

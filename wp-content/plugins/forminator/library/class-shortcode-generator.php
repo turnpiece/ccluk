@@ -22,6 +22,33 @@ class Forminator_Shortcode_Generator {
 	}
 
 	/**
+	 * Check if current page is Hustle wizard page
+	 *
+	 * @since 1.0.5
+	 *
+	 * @return bool
+	 */
+	public function is_hustle_wizard() {
+		$screen = get_current_screen();
+
+		// If no screen id, abort
+		if( !isset( $screen->id ) ) return false;
+
+		// Hustle wizard pages
+		$pages = array(
+			'hustle_page_hustle_popup',
+			'hustle_page_hustle_slidein',
+			'hustle_page_hustle_embedded',
+			'hustle_page_hustle_sshare'
+		);
+
+		// Check if current page is hustle wizard page
+		if( in_array( $screen->id, $pages ) ) return true;
+
+		return false;
+	}
+
+	/**
 	 * Attach button
 	 *
 	 * @since 1.0
@@ -34,7 +61,7 @@ class Forminator_Shortcode_Generator {
 		$html = '';
 
 		// If page different than Post or Page, abort
-		if ( $pagenow !=  'post.php' && $pagenow !=  'post-new.php' ) {
+		if ( $pagenow !=  'post.php' && $pagenow !=  'post-new.php' && ! $this->is_hustle_wizard() ) {
 			return $content;
 		}
 
@@ -55,7 +82,7 @@ class Forminator_Shortcode_Generator {
 		global $pagenow;
 
 		// If page different than Post or Page, abort
-		if ( $pagenow !=  'post.php' && $pagenow != 'post-new.php' ) {
+		if ( $pagenow !=  'post.php' && $pagenow != 'post-new.php' && ! $this->is_hustle_wizard() ) {
 			return $content;
 		}
 
@@ -87,18 +114,8 @@ class Forminator_Shortcode_Generator {
 	 * @return mixed
 	 */
 	public function enqueue_preview_scripts_for_hustle( $content ) {
-		global $pagenow;
-
-		// If page different than Admin, abort
-		if ( $pagenow !=  'admin.php' ) {
-			return $content;
-		}
-
-		$current_screen = get_current_screen();
-		$screen_base = $current_screen->base;
-
 		// If page is not Hustle module settings page, abort
-		if ( $screen_base !== 'hustle-pro_page_hustle_embedded' && $screen_base !== 'hustle-pro_page_hustle_popup' && $screen_base !== 'hustle-pro_page_hustle_slidein' ) {
+		if ( ! $this->is_hustle_wizard() ) {
 			return $content;
 		}
 

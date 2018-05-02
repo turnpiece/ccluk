@@ -140,6 +140,7 @@
 
 	                        <?php
 	                        $schedule_day       = forminator_get_exporter_info( 'day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
+							$schedule_month_day = forminator_get_exporter_info( 'month_day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $schedule_time      = forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
 	                        $email              = forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
@@ -150,8 +151,10 @@
 		                        <?php if ( ! $enabled || empty( $email ) ): ?>
                                     <span><?php _e( "Scheduled export is not enabled", Forminator::DOMAIN ) ?></span>
 		                        <?php else: ?>
-			                        <?php if (  $schedule_timeframe == 'weekly' || $schedule_timeframe == 'monthly' ): ?>
+			                        <?php if (  $schedule_timeframe == 'weekly' ): ?>
                                         <span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
+			                        <?php elseif ( $schedule_timeframe == 'monthly' ): ?>
+                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> every <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ( $schedule_month_day ? $schedule_month_day : 1 ), $schedule_time ); ?>
 			                        <?php else: ?>
                                         <span><?php printf( __( "Export schedule: <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), $schedule_time ); ?>
                                     <?php endif; ?>
@@ -331,10 +334,7 @@
 															}
 
 															if ( $field_type =='name' ) {
-																$multiple 	 = Forminator_Field::get_property( 'multiple_name', $field_array, false );
-																if ( $multiple ) {
-																	$label = '';
-																}
+																$label = $field->get_label_for_entry();
 															}
 															?>
 

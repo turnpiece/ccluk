@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Forminator Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Forminator Pro 1.0.4\n"
+"Project-Id-Version: Forminator Pro 1.0.5\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/forminator\n"
-"POT-Creation-Date: 2018-03-20 08:38:14+00:00\n"
+"POT-Creation-Date: 2018-05-01 11:08:26+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,36 +17,36 @@ msgstr ""
 msgid "Made with %s by WPMU DEV"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:85
+#: admin/classes/class-admin-ajax.php:84
 msgid "Quiz model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:153
+#: admin/classes/class-admin-ajax.php:152
 msgid "Poll model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:202
+#: admin/classes/class-admin-ajax.php:203
 msgid "Form model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:593
+#: admin/classes/class-admin-ajax.php:603
 msgid "Not valid module ID provided."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:608
+#: admin/classes/class-admin-ajax.php:618
 msgid "No ID was provided."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:614
+#: admin/classes/class-admin-ajax.php:624
 msgid "Exports cleared."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:616
+#: admin/classes/class-admin-ajax.php:626
 msgid "Exports couldn't be cleared."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:32
-#: library/modules/custom-forms/admin/admin-loader.php:313
+#: library/modules/custom-forms/admin/admin-loader.php:309
 msgid "Name your form"
 msgstr ""
 
@@ -58,8 +58,8 @@ msgstr ""
 #: admin/views/dashboard/widgets/widget-cform.php:49
 #: admin/views/dashboard/widgets/widget-poll.php:49
 #: admin/views/dashboard/widgets/widget-quiz.php:49 library/fields/name.php:50
-#: library/fields/name.php:298
-#: library/modules/custom-forms/admin/admin-loader.php:191
+#: library/fields/name.php:299
+#: library/modules/custom-forms/admin/admin-loader.php:192
 msgid "Name"
 msgstr ""
 
@@ -68,12 +68,12 @@ msgid "Fields"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:36
-#: admin/views/custom-form/entries/content.php:218
+#: admin/views/custom-form/entries/content.php:221
 #: admin/views/custom-form/entries/content.php:396
-#: admin/views/quiz/entries/content.php:262
-#: admin/views/quiz/entries/content.php:432
+#: admin/views/quiz/entries/content.php:267
+#: admin/views/quiz/entries/content.php:437
 #: admin/views/settings/popup/exports-content.php:12 library/fields/date.php:51
-#: library/fields/date.php:392
+#: library/fields/date.php:394
 msgid "Date"
 msgstr ""
 
@@ -87,7 +87,7 @@ msgid "Your exports"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:39
-#: library/modules/quizzes/admin/admin-loader.php:181
+#: library/modules/quizzes/admin/admin-loader.php:182
 msgid "Choose Quiz Type"
 msgstr ""
 
@@ -126,49 +126,49 @@ msgstr ""
 
 #: admin/classes/class-admin-l10n.php:47
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:25
-#: library/fields/date.php:106 library/helpers/helper-core.php:477
+#: library/fields/date.php:107 library/helpers/helper-core.php:494
 #: library/helpers/helper-fields.php:252
 msgid "Monday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:48
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:26
-#: library/fields/date.php:120 library/helpers/helper-core.php:478
+#: library/fields/date.php:121 library/helpers/helper-core.php:495
 #: library/helpers/helper-fields.php:253
 msgid "Tuesday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:49
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:27
-#: library/fields/date.php:134 library/helpers/helper-core.php:479
+#: library/fields/date.php:135 library/helpers/helper-core.php:496
 #: library/helpers/helper-fields.php:254
 msgid "Wednesday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:50
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:28
-#: library/fields/date.php:148 library/helpers/helper-core.php:480
+#: library/fields/date.php:149 library/helpers/helper-core.php:497
 #: library/helpers/helper-fields.php:255
 msgid "Thursday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:51
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:29
-#: library/fields/date.php:162 library/helpers/helper-core.php:481
+#: library/fields/date.php:163 library/helpers/helper-core.php:498
 #: library/helpers/helper-fields.php:256
 msgid "Friday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:52
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:30
-#: library/fields/date.php:176 library/helpers/helper-core.php:482
+#: library/fields/date.php:177 library/helpers/helper-core.php:499
 #: library/helpers/helper-fields.php:257
 msgid "Saturday"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:53
 #: admin/views/custom-form/entries/popup/schedule-export-content.php:31
-#: library/fields/date.php:190 library/helpers/helper-core.php:483
+#: library/fields/date.php:191 library/helpers/helper-core.php:500
 #: library/helpers/helper-fields.php:251
 msgid "Sunday"
 msgstr ""
@@ -184,6 +184,7 @@ msgid "Email export data to"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:56 library/fields/email.php:164
+#: library/modules/custom-forms/form-templates/template-contact-form.php:66
 msgid "E.g. john@doe.com"
 msgstr ""
 
@@ -220,7 +221,7 @@ msgid "Preview Poll"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:64 admin/views/quiz/list/content.php:166
-#: library/modules/quizzes/admin/admin-loader.php:192
+#: library/modules/quizzes/admin/admin-loader.php:193
 msgid "Preview Quiz"
 msgstr ""
 
@@ -248,7 +249,7 @@ msgid "Uninstall Settings"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:70
-#: library/modules/custom-forms/admin/admin-loader.php:315
+#: library/modules/custom-forms/admin/admin-loader.php:311
 msgid "Form name cannot be empty! Please pick a name for your form."
 msgstr ""
 
@@ -262,7 +263,7 @@ msgid "Records"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:73 admin/classes/class-admin-l10n.php:88
-#: admin/classes/class-admin-l10n.php:130
+#: admin/classes/class-admin-l10n.php:131
 msgid "Delete"
 msgstr ""
 
@@ -291,9 +292,9 @@ msgid "Please confirm that you want to delete this field"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:80
-#: library/modules/custom-forms/admin/admin-loader.php:135
-#: library/modules/polls/admin/admin-loader.php:161
-#: library/modules/quizzes/admin/admin-loader.php:242
+#: library/modules/custom-forms/admin/admin-loader.php:136
+#: library/modules/polls/admin/admin-loader.php:163
+#: library/modules/quizzes/admin/admin-loader.php:243
 msgid "Cancel"
 msgstr ""
 
@@ -308,19 +309,19 @@ msgstr ""
 #: admin/classes/class-admin-l10n.php:85 library/fields/address.php:97
 #: library/fields/address.php:124 library/fields/address.php:151
 #: library/fields/address.php:179 library/fields/address.php:207
-#: library/fields/address.php:234 library/fields/name.php:120
-#: library/fields/name.php:151 library/fields/name.php:189
-#: library/fields/name.php:227 library/fields/postdata.php:153
+#: library/fields/address.php:234 library/fields/name.php:121
+#: library/fields/name.php:152 library/fields/name.php:190
+#: library/fields/name.php:228 library/fields/postdata.php:153
 #: library/fields/postdata.php:190 library/fields/postdata.php:227
 #: library/fields/postdata.php:264 library/fields/postdata.php:294
-#: library/fields/postdata.php:325 library/fields/time.php:125
-#: library/fields/time.php:149
-#: library/modules/custom-forms/admin/admin-loader.php:286
+#: library/fields/postdata.php:325 library/fields/time.php:126
+#: library/fields/time.php:150
+#: library/modules/custom-forms/admin/admin-loader.php:282
 msgid "Label"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:86
-#: library/modules/custom-forms/admin/admin-loader.php:289
+#: library/modules/custom-forms/admin/admin-loader.php:285
 msgid "Value"
 msgstr ""
 
@@ -349,227 +350,281 @@ msgid "Hidden"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:96
-msgid "Box background"
+msgid "Poll BG"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:97
-msgid "Box border"
+msgid "Poll border"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:98
-msgid "Title text"
+msgid "Poll shadow"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:99
-msgid "Question text"
+msgid "Title text"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:100
-msgid "Answer text"
+msgid "Question text"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:101
-msgid "Input field bg"
+msgid "Answer text"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:102
-msgid "Input field border"
+msgid "Input field bg"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:103
-msgid "Input field placeholder"
+msgid "Input field border"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:104
-msgid "Input field text"
+msgid "Input field placeholder"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:105
-#: library/modules/custom-forms/admin/admin-loader.php:304
-msgid "Button background"
+msgid "Input field text"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:106
-#: library/modules/custom-forms/admin/admin-loader.php:305
-msgid "Button text"
+#: library/modules/custom-forms/admin/admin-loader.php:300
+msgid "Button background"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:107
-#: library/modules/custom-forms/admin/admin-loader.php:306
-msgid "Results link"
+#: library/modules/custom-forms/admin/admin-loader.php:301
+msgid "Button text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:110
-#: library/modules/quizzes/admin/admin-loader.php:206
-msgid "Browse"
+#: admin/classes/class-admin-l10n.php:108
+#: library/modules/custom-forms/admin/admin-loader.php:302
+msgid "Results link"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:111
 #: library/modules/quizzes/admin/admin-loader.php:207
-msgid "Clear"
+msgid "Browse"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:112
-msgid "You don't have any results yet."
+#: library/modules/quizzes/admin/admin-loader.php:208
+msgid "Clear"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:113
-msgid "Select result"
+msgid "You don't have any results yet."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:114
-msgid "You don't have any answer yet."
+msgid "Select result"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:115
-msgid "Click browse to add image..."
+msgid "You don't have any answer yet."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:116
-msgid "Click on image container (at left) to add one..."
+msgid "Click browse to add image..."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:117
-msgid "You don't have any questions yet."
+msgid "Click on image container (at left) to add one..."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:118
-msgid "Add Question"
+msgid "You don't have any questions yet."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:119
-msgid "Question title"
+msgid "Add Question"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:120
-#: library/modules/quizzes/admin/admin-loader.php:239
-msgid "Answers"
+msgid "Question title"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:121
-msgid "Add Answer"
+#: library/modules/quizzes/admin/admin-loader.php:240
+msgid "Answers"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:122
-msgid "Add Result"
+msgid "Add Answer"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:123
-msgid "Delete Result"
+msgid "Add Result"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:124
-#: admin/views/custom-form/entries/content.php:217
-#: admin/views/custom-form/entries/content.php:394
-#: admin/views/quiz/entries/content.php:260
-#: admin/views/quiz/entries/content.php:430
-#: library/modules/custom-forms/admin/admin-loader.php:284
-#: library/modules/polls/admin/admin-loader.php:131
-#: library/modules/quizzes/admin/admin-loader.php:198
-msgid "Title"
+msgid "Delete Result"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:125
+#: admin/views/custom-form/entries/content.php:220
+#: admin/views/custom-form/entries/content.php:394
+#: admin/views/quiz/entries/content.php:265
+#: admin/views/quiz/entries/content.php:435
+#: library/field-autofill-providers/class-wp-post.php:30
+#: library/modules/custom-forms/admin/admin-loader.php:280
+#: library/modules/polls/admin/admin-loader.php:133
+#: library/modules/quizzes/admin/admin-loader.php:199
+msgid "Title"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:126
 msgid "Image (optional)"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:126 library/fields/date.php:305
-#: library/fields/email.php:114 library/fields/multivalue.php:103
-#: library/fields/number.php:113 library/fields/phone.php:120
-#: library/fields/singlevalue.php:104 library/fields/text.php:138
-#: library/fields/website.php:114
-#: library/modules/custom-forms/admin/admin-loader.php:290
+#: admin/classes/class-admin-l10n.php:127
+#: library/field-autofill-providers/class-wp-user.php:47
+#: library/fields/date.php:307 library/fields/email.php:114
+#: library/fields/multivalue.php:103 library/fields/number.php:113
+#: library/fields/phone.php:120 library/fields/singlevalue.php:104
+#: library/fields/text.php:139 library/fields/website.php:114
+#: library/modules/custom-forms/admin/admin-loader.php:286
 msgid "Description"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:127
+#: admin/classes/class-admin-l10n.php:128
 msgid "Delete Answer"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:128
-#: library/modules/quizzes/admin/admin-loader.php:244
+#: admin/classes/class-admin-l10n.php:129
+#: library/modules/quizzes/admin/admin-loader.php:245
 msgid "Correct answer"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:129
+#: admin/classes/class-admin-l10n.php:130
 msgid "You don't have any options yet."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:131
+#: admin/classes/class-admin-l10n.php:132
 msgid "Restricted dates:"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:132
+#: admin/classes/class-admin-l10n.php:133
 msgid "Add"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:133
+#: admin/classes/class-admin-l10n.php:134
 msgid "Pick custom date(s) to restrict:"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:134
+#: admin/classes/class-admin-l10n.php:135
 msgid "Form Data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:135
+#: admin/classes/class-admin-l10n.php:136
 msgid "Required Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:136
+#: admin/classes/class-admin-l10n.php:137
 msgid "Optional Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:137
+#: admin/classes/class-admin-l10n.php:138
 msgid "All Submitted Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:138
+#: admin/classes/class-admin-l10n.php:139
 msgid "Form Name"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:139
+#: admin/classes/class-admin-l10n.php:140
 msgid "Misc Data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:140
+#: admin/classes/class-admin-l10n.php:141
 msgid "Add form data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:141
+#: admin/classes/class-admin-l10n.php:142
 msgid "has been saved."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:142
+#: admin/classes/class-admin-l10n.php:143
 msgid "has been published."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:143
+#: admin/classes/class-admin-l10n.php:144
 msgid "Error! Form cannot be saved."
 msgstr ""
 
-#: admin/classes/class-admin.php:62 library/class-shortcode-generator.php:42
+#: admin/classes/class-admin.php:63 library/class-shortcode-generator.php:69
 msgid "Forminator"
 msgstr ""
 
-#: admin/classes/class-admin.php:63
+#: admin/classes/class-admin.php:64
 msgid "Forminator Dashboard"
 msgstr ""
 
-#: admin/classes/class-admin.php:63 admin/views/dashboard/header.php:3
+#: admin/classes/class-admin.php:64 admin/views/dashboard/header.php:3
 msgid "Dashboard"
 msgstr ""
 
-#: admin/classes/class-admin.php:81
+#: admin/classes/class-admin.php:82
 msgid "Global Settings"
 msgstr ""
 
-#: admin/classes/class-admin.php:81 admin/views/settings/header.php:3
-#: library/modules/quizzes/admin/admin-loader.php:189
+#: admin/classes/class-admin.php:82 admin/views/settings/header.php:3
+#: library/modules/quizzes/admin/admin-loader.php:190
 msgid "Settings"
+msgstr ""
+
+#: admin/classes/class-admin.php:102 admin/views/entries/header.php:1
+msgid "Forminator Entries"
+msgstr ""
+
+#: admin/classes/class-admin.php:103
+#: admin/views/custom-form/list/content.php:77
+#: admin/views/dashboard/widgets/widget-quiz.php:53
+#: admin/views/quiz/list/content.php:77
+msgid "Entries"
 msgstr ""
 
 #: admin/pages/dashboard-page.php:22
 msgid "Create modules"
+msgstr ""
+
+#: admin/pages/entries-page.php:52 admin/views/custom-form/list/header.php:3
+#: admin/views/dashboard/widgets/widget-cform.php:19
+#: library/modules/custom-forms/admin/admin-loader.php:43
+msgid "Forms"
+msgstr ""
+
+#: admin/pages/entries-page.php:56
+#: admin/views/dashboard/widgets/widget-poll.php:19
+#: admin/views/poll/list/header.php:3 library/class-modules.php:56
+#: library/class-shortcode-generator.php:163
+#: library/modules/polls/admin/admin-loader.php:43
+#: library/modules/polls/loader.php:101
+msgid "Polls"
+msgstr ""
+
+#: admin/pages/entries-page.php:60
+#: admin/views/dashboard/widgets/widget-quiz.php:19
+#: admin/views/quiz/list/header.php:3 library/class-modules.php:61
+#: library/class-shortcode-generator.php:165
+#: library/modules/quizzes/admin/admin-loader.php:45
+#: library/modules/quizzes/admin/admin-loader.php:181
+#: library/modules/quizzes/loader.php:100
+msgid "Quizzes"
+msgstr ""
+
+#: admin/pages/entries-page.php:200
+msgid "Choose Form"
+msgstr ""
+
+#: admin/pages/entries-page.php:202
+msgid "Choose Poll"
+msgstr ""
+
+#: admin/pages/entries-page.php:204
+msgid "Choose Quiz"
 msgstr ""
 
 #: admin/views/boxes/popup-box.php:21
@@ -599,7 +654,7 @@ msgstr ""
 #: admin/views/custom-form/entries/content.php:97
 #: admin/views/custom-form/entries/content.php:124
 #: admin/views/quiz/entries/content.php:119
-#: admin/views/quiz/entries/content.php:148
+#: admin/views/quiz/entries/content.php:146
 msgid "Export Entries"
 msgstr ""
 
@@ -609,87 +664,97 @@ msgid "Open Export Entries"
 msgstr ""
 
 #: admin/views/custom-form/entries/content.php:132
-#: admin/views/quiz/entries/content.php:158
+#: admin/views/quiz/entries/content.php:156
 msgid "Previous Exports"
 msgstr ""
 
 #: admin/views/custom-form/entries/content.php:139
-#: admin/views/poll/entries/content.php:108
-#: admin/views/quiz/entries/content.php:165
+#: admin/views/poll/entries/content.php:112
+#: admin/views/quiz/entries/content.php:163
 msgid "Scheduled exports"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:151
-#: admin/views/poll/entries/content.php:120
-#: admin/views/quiz/entries/content.php:177
+#: admin/views/custom-form/entries/content.php:152
+#: admin/views/poll/entries/content.php:125
+#: admin/views/quiz/entries/content.php:176
 msgid "Scheduled export is not enabled"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:154
-#: admin/views/poll/entries/content.php:122
+#: admin/views/custom-form/entries/content.php:155
+#: admin/views/poll/entries/content.php:128
 #: admin/views/quiz/entries/content.php:179
 msgid ""
 "Export schedule: <strong>%s</strong> on <strong>%s</strong> at "
 "<strong>%s</strong>"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:156
+#: admin/views/custom-form/entries/content.php:157
+#: admin/views/poll/entries/content.php:130
+#: admin/views/quiz/entries/content.php:181
+msgid ""
+"Export schedule: <strong>%s</strong> every <strong>%s</strong> at "
+"<strong>%s</strong>"
+msgstr ""
+
+#: admin/views/custom-form/entries/content.php:159
+#: admin/views/poll/entries/content.php:132
+#: admin/views/quiz/entries/content.php:183
 msgid "Export schedule: <strong>%s</strong> at <strong>%s</strong>"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:158
-#: admin/views/poll/entries/content.php:123
-#: admin/views/quiz/entries/content.php:180
+#: admin/views/custom-form/entries/content.php:161
+#: admin/views/poll/entries/content.php:134
+#: admin/views/quiz/entries/content.php:185
 msgid "To be sent by email."
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:162
+#: admin/views/custom-form/entries/content.php:165
 #: admin/views/dashboard/widgets/widget-cform.php:100
 #: admin/views/dashboard/widgets/widget-poll.php:101
 #: admin/views/dashboard/widgets/widget-quiz.php:101
-#: admin/views/poll/entries/content.php:127
-#: admin/views/quiz/entries/content.php:184
+#: admin/views/poll/entries/content.php:138
+#: admin/views/quiz/entries/content.php:189
 msgid "Edit"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:194
+#: admin/views/custom-form/entries/content.php:197
 #: admin/views/custom-form/entries/content.php:410
 #: admin/views/custom-form/list/content.php:44
 #: admin/views/custom-form/list/content.php:225
 #: admin/views/poll/list/content.php:44 admin/views/poll/list/content.php:223
-#: admin/views/quiz/entries/content.php:214
-#: admin/views/quiz/entries/content.php:449
+#: admin/views/quiz/entries/content.php:219
+#: admin/views/quiz/entries/content.php:454
 #: admin/views/quiz/list/content.php:44 admin/views/quiz/list/content.php:222
 msgid "%s result"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:194
+#: admin/views/custom-form/entries/content.php:197
 #: admin/views/custom-form/entries/content.php:410
 #: admin/views/custom-form/list/content.php:44
 #: admin/views/custom-form/list/content.php:225
 #: admin/views/poll/list/content.php:44 admin/views/poll/list/content.php:223
-#: admin/views/quiz/entries/content.php:216
-#: admin/views/quiz/entries/content.php:451
+#: admin/views/quiz/entries/content.php:221
+#: admin/views/quiz/entries/content.php:456
 #: admin/views/quiz/list/content.php:44 admin/views/quiz/list/content.php:222
 msgid "%s results"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:235
-#: admin/views/quiz/entries/content.php:276
+#: admin/views/custom-form/entries/content.php:238
+#: admin/views/quiz/entries/content.php:281
 msgid "No results were found."
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:271
+#: admin/views/custom-form/entries/content.php:274
 msgid "Entry #%s"
 msgstr ""
 
-#: admin/views/custom-form/entries/content.php:282
-#: admin/views/quiz/entries/content.php:324
+#: admin/views/custom-form/entries/content.php:285
+#: admin/views/quiz/entries/content.php:329
 msgid "Open result details"
 msgstr ""
 
 #: admin/views/custom-form/entries/content.php:351
-#: library/modules/custom-forms/admin/admin-page-entries.php:395
+#: library/helpers/helper-fields.php:600
 msgid "<strong>Total</strong> %s"
 msgstr ""
 
@@ -709,7 +774,7 @@ msgstr ""
 #: admin/views/custom-form/list/content.php:208
 #: admin/views/poll/list/content.php:27 admin/views/poll/list/content.php:206
 #: admin/views/quiz/list/content.php:27 admin/views/quiz/list/content.php:205
-#: library/modules/custom-forms/admin/admin-page-entries.php:494
+#: library/modules/custom-forms/admin/admin-page-entries.php:426
 #: library/modules/quizzes/admin/admin-page-entries.php:286
 msgid "Bulk Actions"
 msgstr ""
@@ -718,7 +783,7 @@ msgstr ""
 #: admin/views/custom-form/list/content.php:219
 #: admin/views/poll/list/content.php:38 admin/views/poll/list/content.php:217
 #: admin/views/quiz/list/content.php:38 admin/views/quiz/list/content.php:216
-#: library/modules/custom-forms/admin/admin-page-entries.php:499
+#: library/modules/custom-forms/admin/admin-page-entries.php:431
 #: library/modules/quizzes/admin/admin-page-entries.php:291
 msgid "Apply"
 msgstr ""
@@ -738,12 +803,6 @@ msgstr ""
 #: admin/views/dashboard/widgets/widget-quiz.php:51
 #: admin/views/poll/list/content.php:75 admin/views/quiz/list/content.php:75
 msgid "Views"
-msgstr ""
-
-#: admin/views/custom-form/list/content.php:77
-#: admin/views/dashboard/widgets/widget-quiz.php:53
-#: admin/views/quiz/list/content.php:77
-msgid "Entries"
 msgstr ""
 
 #: admin/views/custom-form/list/content.php:79
@@ -807,16 +866,10 @@ msgstr ""
 msgid "Create"
 msgstr ""
 
-#: admin/views/custom-form/list/header.php:3
-#: admin/views/dashboard/widgets/widget-cform.php:19
-#: library/modules/custom-forms/admin/admin-loader.php:42
-msgid "Forms"
-msgstr ""
-
 #: admin/views/custom-form/list/header.php:5
 #: admin/views/dashboard/widgets/widget-cform.php:114
 #: admin/views/dashboard/widgets/widget-cform.php:129
-#: library/modules/custom-forms/admin/admin-loader.php:134
+#: library/modules/custom-forms/admin/admin-loader.php:135
 #: library/modules/custom-forms/admin/admin-page-new.php:23
 msgid "New Form"
 msgstr ""
@@ -886,14 +939,6 @@ msgstr ""
 msgid "Create Modules"
 msgstr ""
 
-#: admin/views/dashboard/widgets/widget-poll.php:19
-#: admin/views/poll/list/header.php:3 library/class-modules.php:56
-#: library/class-shortcode-generator.php:146
-#: library/modules/polls/admin/admin-loader.php:42
-#: library/modules/polls/loader.php:101
-msgid "Polls"
-msgstr ""
-
 #: admin/views/dashboard/widgets/widget-poll.php:53
 #: admin/views/poll/list/content.php:77
 msgid "Votes"
@@ -905,7 +950,7 @@ msgstr ""
 
 #: admin/views/dashboard/widgets/widget-poll.php:115
 #: admin/views/poll/list/header.php:5
-#: library/modules/polls/admin/admin-loader.php:43
+#: library/modules/polls/admin/admin-loader.php:44
 #: library/modules/polls/admin/admin-page-new.php:23
 #: library/modules/polls/loader.php:104
 msgid "New Poll"
@@ -922,19 +967,10 @@ msgstr ""
 msgid "Create Poll"
 msgstr ""
 
-#: admin/views/dashboard/widgets/widget-quiz.php:19
-#: admin/views/quiz/list/header.php:3 library/class-modules.php:61
-#: library/class-shortcode-generator.php:148
-#: library/modules/quizzes/admin/admin-loader.php:44
-#: library/modules/quizzes/admin/admin-loader.php:180
-#: library/modules/quizzes/loader.php:100
-msgid "Quizzes"
-msgstr ""
-
 #: admin/views/dashboard/widgets/widget-quiz.php:115
 #: admin/views/quiz/list/header.php:5
-#: library/modules/quizzes/admin/admin-loader.php:45
 #: library/modules/quizzes/admin/admin-loader.php:46
+#: library/modules/quizzes/admin/admin-loader.php:47
 #: library/modules/quizzes/admin/admin-page-new-knowledge.php:23
 #: library/modules/quizzes/admin/admin-page-new-nowrong.php:22
 #: library/modules/quizzes/loader.php:103
@@ -1009,6 +1045,10 @@ msgstr ""
 msgid "Create New Form"
 msgstr ""
 
+#: admin/views/entries/content.php:14
+msgid "Choose your entries:"
+msgstr ""
+
 #: admin/views/poll/entries/content.php:13
 msgid "List of custom votes"
 msgstr ""
@@ -1021,16 +1061,16 @@ msgstr ""
 msgid "No one has added custom votes just yet."
 msgstr ""
 
-#: admin/views/poll/entries/content.php:65
-#: admin/views/poll/entries/content.php:92
+#: admin/views/poll/entries/content.php:69
+#: admin/views/poll/entries/content.php:96
 msgid "Export Votes"
 msgstr ""
 
-#: admin/views/poll/entries/content.php:75
+#: admin/views/poll/entries/content.php:79
 msgid "Open Export Votes"
 msgstr ""
 
-#: admin/views/poll/entries/content.php:101
+#: admin/views/poll/entries/content.php:105
 msgid "Previous Votes"
 msgstr ""
 
@@ -1090,27 +1130,23 @@ msgstr ""
 msgid "Update Table"
 msgstr ""
 
-#: admin/views/quiz/entries/content.php:143
-msgid "Manual exports"
-msgstr ""
-
-#: admin/views/quiz/entries/content.php:224
-#: admin/views/quiz/entries/content.php:459
+#: admin/views/quiz/entries/content.php:229
+#: admin/views/quiz/entries/content.php:464
 #: library/helpers/helper-forms.php:715
 msgid "Previous page"
 msgstr ""
 
-#: admin/views/quiz/entries/content.php:235
-#: admin/views/quiz/entries/content.php:470
+#: admin/views/quiz/entries/content.php:240
+#: admin/views/quiz/entries/content.php:475
 #: library/helpers/helper-forms.php:748 library/helpers/helper-forms.php:754
 msgid "Next page"
 msgstr ""
 
-#: admin/views/quiz/entries/content.php:312
+#: admin/views/quiz/entries/content.php:317
 msgid "Result #%s"
 msgstr ""
 
-#: admin/views/quiz/entries/content.php:376
+#: admin/views/quiz/entries/content.php:381
 msgid "You got %s/%s correct"
 msgstr ""
 
@@ -1174,7 +1210,7 @@ msgstr ""
 #: admin/views/settings/popup/edit-captcha-content.php:67
 #: admin/views/settings/popup/edit-currency-content.php:33
 #: admin/views/settings/popup/edit-paypal-content.php:48
-#: library/modules/custom-forms/admin/admin-loader.php:179
+#: library/modules/custom-forms/admin/admin-loader.php:180
 msgid "Done"
 msgstr ""
 
@@ -1223,11 +1259,13 @@ msgstr ""
 
 #: admin/views/settings/popup/edit-uninstall-content.php:13
 #: admin/views/settings/widget-uninstall.php:49
+#: library/modules/custom-forms/admin/admin-loader.php:401
 msgid "Yes"
 msgstr ""
 
 #: admin/views/settings/popup/edit-uninstall-content.php:14
 #: admin/views/settings/widget-uninstall.php:49
+#: library/modules/custom-forms/admin/admin-loader.php:402
 msgid "No"
 msgstr ""
 
@@ -1419,47 +1457,119 @@ msgstr ""
 msgid "Dismiss"
 msgstr ""
 
-#: library/abstracts/abstract-class-field.php:443
+#: library/abstracts/abstract-class-field.php:481
+#: library/abstracts/abstract-class-field.php:486
+#: library/lib/dash-notice/abstract-class-field.php:444
 msgid "Choose File"
 msgstr ""
 
-#: library/abstracts/abstract-class-field.php:444
+#: library/abstracts/abstract-class-field.php:488
+#: library/lib/dash-notice/abstract-class-field.php:446
 msgid "No file chosen"
 msgstr ""
 
-#: library/class-core.php:224
+#: library/class-core.php:227
 msgid "Post Custom Data"
 msgstr ""
 
-#: library/class-export.php:199
+#: library/class-export.php:239
 msgid "Entries data for %s"
 msgstr ""
 
-#: library/class-modules.php:51 library/class-shortcode-generator.php:144
+#: library/class-export.php:269
+#: library/modules/polls/admin/admin-page-entries.php:340
+#: library/modules/polls/front/front-action.php:309
+#: library/modules/polls/front/front-render.php:862
+msgid "Question"
+msgstr ""
+
+#: library/class-export.php:270 library/class-export.php:310
+msgid "Answer"
+msgstr ""
+
+#: library/class-export.php:271
+msgid "Result"
+msgstr ""
+
+#: library/class-export.php:292
+msgid "Correct"
+msgstr ""
+
+#: library/class-export.php:292
+msgid "Incorrect"
+msgstr ""
+
+#: library/class-export.php:310
+msgid "Total"
+msgstr ""
+
+#: library/class-export.php:486
+msgid "Submission date"
+msgstr ""
+
+#: library/class-modules.php:51 library/class-shortcode-generator.php:161
 #: library/modules/custom-forms/loader.php:115
 msgid "Custom Forms"
 msgstr ""
 
-#: library/class-shortcode-generator.php:124
+#: library/class-shortcode-generator.php:141
 msgid "Generate form shortcode"
 msgstr ""
 
-#: library/class-shortcode-generator.php:158
-#: library/class-shortcode-generator.php:170
-#: library/class-shortcode-generator.php:182
+#: library/class-shortcode-generator.php:175
+#: library/class-shortcode-generator.php:187
+#: library/class-shortcode-generator.php:199
 msgid "Insert Form"
 msgstr ""
 
-#: library/class-shortcode-generator.php:208
+#: library/class-shortcode-generator.php:225
 msgid "Select a form"
 msgstr ""
 
-#: library/class-shortcode-generator.php:230
+#: library/class-shortcode-generator.php:247
 msgid "Select poll"
 msgstr ""
 
-#: library/class-shortcode-generator.php:252
+#: library/class-shortcode-generator.php:269
 msgid "Select quiz"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-post.php:26
+msgid "ID"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-post.php:34
+msgid "Permalink"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-user.php:35
+msgid "Display Name"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-user.php:39
+#: library/fields/name.php:143 library/fields/name.php:302
+#: library/model/class-form-entry-model.php:320
+#: library/modules/custom-forms/admin/admin-loader.php:198
+#: library/modules/custom-forms/form-templates/template-contact-form.php:45
+#: library/modules/custom-forms/form-templates/template-contact-form.php:48
+msgid "First Name"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-user.php:43
+#: library/fields/name.php:219 library/fields/name.php:306
+#: library/model/class-form-entry-model.php:322
+#: library/modules/custom-forms/admin/admin-loader.php:200
+#: library/modules/custom-forms/form-templates/template-contact-form.php:52
+msgid "Last Name"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-user.php:51
+#: library/fields/email.php:55
+msgid "Email"
+msgstr ""
+
+#: library/field-autofill-providers/class-wp-user.php:55
+msgid "Username"
 msgstr ""
 
 #: library/fields/address.php:50
@@ -1467,40 +1577,42 @@ msgid "Address"
 msgstr ""
 
 #: library/fields/address.php:69 library/fields/custom.php:65
-#: library/fields/date.php:259 library/fields/email.php:76
-#: library/fields/multivalue.php:73 library/fields/name.php:71
+#: library/fields/date.php:261 library/fields/email.php:76
+#: library/fields/multivalue.php:73 library/fields/name.php:72
 #: library/fields/number.php:75 library/fields/phone.php:80
 #: library/fields/postdata.php:67 library/fields/singlevalue.php:74
-#: library/fields/text.php:82 library/fields/time.php:72
+#: library/fields/text.php:83 library/fields/time.php:73
 #: library/fields/upload.php:72 library/fields/website.php:77
 msgid "Required"
 msgstr ""
 
 #: library/fields/address.php:89 library/fields/address.php:255
-#: library/modules/custom-forms/admin/admin-loader.php:203
+#: library/modules/custom-forms/admin/admin-loader.php:204
 msgid "Street address"
 msgstr ""
 
 #: library/fields/address.php:103 library/fields/address.php:130
 #: library/fields/address.php:157 library/fields/address.php:186
-#: library/fields/address.php:213 library/fields/date.php:287
-#: library/fields/email.php:104 library/fields/name.php:158
-#: library/fields/name.php:196 library/fields/name.php:234
+#: library/fields/address.php:213 library/fields/date.php:289
+#: library/fields/email.php:104 library/fields/name.php:159
+#: library/fields/name.php:197 library/fields/name.php:235
 #: library/fields/number.php:104 library/fields/phone.php:110
 #: library/fields/postdata.php:160 library/fields/postdata.php:197
-#: library/fields/postdata.php:234 library/fields/text.php:129
-#: library/fields/time.php:132 library/fields/time.php:156
+#: library/fields/postdata.php:234 library/fields/text.php:130
+#: library/fields/time.php:133 library/fields/time.php:157
 #: library/fields/website.php:104
+#: library/modules/custom-forms/admin/admin-loader.php:337
 msgid "Placeholder"
 msgstr ""
 
-#: library/fields/address.php:116
-#: library/modules/custom-forms/admin/admin-loader.php:204
+#: library/fields/address.php:116 library/model/class-form-entry-model.php:315
+#: library/modules/custom-forms/admin/admin-loader.php:205
 msgid "Address Line 2"
 msgstr ""
 
 #: library/fields/address.php:143 library/fields/address.php:257
-#: library/modules/custom-forms/admin/admin-loader.php:205
+#: library/model/class-form-entry-model.php:311
+#: library/modules/custom-forms/admin/admin-loader.php:206
 msgid "City"
 msgstr ""
 
@@ -1509,11 +1621,12 @@ msgid "State / Province"
 msgstr ""
 
 #: library/fields/address.php:199 library/fields/address.php:261
-#: library/modules/custom-forms/admin/admin-loader.php:207
+#: library/modules/custom-forms/admin/admin-loader.php:208
 msgid "ZIP / Postal Code"
 msgstr ""
 
 #: library/fields/address.php:226 library/fields/address.php:263
+#: library/model/class-form-entry-model.php:310
 msgid "Country"
 msgstr ""
 
@@ -1526,7 +1639,7 @@ msgid "E.g. Sydney"
 msgstr ""
 
 #: library/fields/address.php:259
-#: library/modules/custom-forms/admin/admin-loader.php:206
+#: library/modules/custom-forms/admin/admin-loader.php:207
 msgid "State/Province"
 msgstr ""
 
@@ -1538,27 +1651,31 @@ msgstr ""
 msgid "E.g. 2000"
 msgstr ""
 
-#: library/fields/address.php:658 library/fields/address.php:717
+#: library/fields/address.php:598
+msgid "Select country"
+msgstr ""
+
+#: library/fields/address.php:662 library/fields/address.php:721
 msgid "This field is required. Please enter the street address"
 msgstr ""
 
-#: library/fields/address.php:663 library/fields/address.php:732
+#: library/fields/address.php:667 library/fields/address.php:736
 msgid "This field is required. Please enter the city"
 msgstr ""
 
-#: library/fields/address.php:668 library/fields/address.php:737
+#: library/fields/address.php:672 library/fields/address.php:741
 msgid "This field is required. Please enter the state"
 msgstr ""
 
-#: library/fields/address.php:673 library/fields/address.php:722
+#: library/fields/address.php:677 library/fields/address.php:726
 msgid "This field is required. Please enter the zip code"
 msgstr ""
 
-#: library/fields/address.php:678 library/fields/address.php:727
+#: library/fields/address.php:682 library/fields/address.php:731
 msgid "This field is required. Please select the country"
 msgstr ""
 
-#: library/fields/address.php:699
+#: library/fields/address.php:703
 msgid "This field is required. Please enter the address"
 msgstr ""
 
@@ -1567,13 +1684,13 @@ msgid "Captcha"
 msgstr ""
 
 #: library/fields/captcha.php:72 library/fields/custom.php:82
-#: library/fields/date.php:278 library/fields/email.php:94
-#: library/fields/hidden.php:67 library/fields/html.php:67
-#: library/fields/multivalue.php:93 library/fields/name.php:262
-#: library/fields/number.php:95 library/fields/phone.php:100
-#: library/fields/singlevalue.php:94 library/fields/text.php:120
-#: library/fields/time.php:91 library/fields/upload.php:91
-#: library/fields/website.php:94
+#: library/fields/date.php:280 library/fields/email.php:94
+#: library/fields/gdprcheckbox.php:83 library/fields/hidden.php:67
+#: library/fields/html.php:67 library/fields/multivalue.php:93
+#: library/fields/name.php:263 library/fields/number.php:95
+#: library/fields/phone.php:100 library/fields/singlevalue.php:94
+#: library/fields/text.php:121 library/fields/time.php:92
+#: library/fields/upload.php:91 library/fields/website.php:94
 msgid "Field label"
 msgstr ""
 
@@ -1585,11 +1702,12 @@ msgstr ""
 msgid "Custom field"
 msgstr ""
 
-#: library/fields/custom.php:92 library/fields/date.php:345
+#: library/fields/custom.php:92 library/fields/date.php:347
+#: library/fields/time.php:167
 msgid "Field type"
 msgstr ""
 
-#: library/fields/custom.php:96 library/fields/text.php:106
+#: library/fields/custom.php:96 library/fields/text.php:107
 msgid "Single line text"
 msgstr ""
 
@@ -1607,6 +1725,7 @@ msgstr ""
 
 #: library/fields/custom.php:112 library/fields/number.php:56
 #: library/fields/number.php:165
+#: samples/forminator-simple-autofill-plugin/forminator-autofill-simple.php:37
 msgid "Number"
 msgstr ""
 
@@ -1646,110 +1765,109 @@ msgstr ""
 msgid "Restrict date choices"
 msgstr ""
 
-#: library/fields/date.php:84
+#: library/fields/date.php:85
 msgid "How to restrict"
 msgstr ""
 
-#: library/fields/date.php:88
+#: library/fields/date.php:89
 msgid "Days of week"
 msgstr ""
 
-#: library/fields/date.php:92
+#: library/fields/date.php:93
 msgid "Custom dates"
 msgstr ""
 
-#: library/fields/date.php:101
+#: library/fields/date.php:102
 msgid "Don't allow user to select following days:"
 msgstr ""
 
-#: library/fields/date.php:218
+#: library/fields/date.php:219
 msgid "Restrict Year Range"
 msgstr ""
 
-#: library/fields/date.php:227
+#: library/fields/date.php:229
 msgid "Minimum Year"
 msgstr ""
 
-#: library/fields/date.php:234
+#: library/fields/date.php:236
 msgid "Maximum year"
 msgstr ""
 
-#: library/fields/date.php:324
+#: library/fields/date.php:326
 msgid "Date format"
 msgstr ""
 
-#: library/fields/date.php:328
+#: library/fields/date.php:330
 msgid "Y-m-d"
 msgstr ""
 
-#: library/fields/date.php:332
+#: library/fields/date.php:334
 msgid "m/d/Y"
 msgstr ""
 
-#: library/fields/date.php:336
+#: library/fields/date.php:338
 msgid "d/m/Y"
 msgstr ""
 
-#: library/fields/date.php:351
+#: library/fields/date.php:353
 msgid "Date picker"
 msgstr ""
 
-#: library/fields/date.php:355
+#: library/fields/date.php:357 library/fields/time.php:177
 msgid "Drop downs"
 msgstr ""
 
-#: library/fields/date.php:359
+#: library/fields/date.php:361
 msgid "Text inputs"
 msgstr ""
 
-#: library/fields/date.php:375
+#: library/fields/date.php:377
 msgid "Use calendar icon"
 msgstr ""
 
-#: library/fields/date.php:393
+#: library/fields/date.php:395
 msgid "Choose Date"
 msgstr ""
 
-#: library/fields/date.php:532 library/fields/date.php:594
-msgid "Year"
-msgstr ""
-
-#: library/fields/date.php:548 library/fields/date.php:610
-msgid "Month"
-msgstr ""
-
-#: library/fields/date.php:564 library/fields/date.php:626
+#: library/fields/date.php:572 library/fields/date.php:639
+#: library/model/class-form-entry-model.php:317
 msgid "Day"
 msgstr ""
 
-#: library/fields/date.php:830
+#: library/fields/date.php:590 library/fields/date.php:659
+#: library/model/class-form-entry-model.php:318
+msgid "Month"
+msgstr ""
+
+#: library/fields/date.php:608 library/fields/date.php:683
+#: library/model/class-form-entry-model.php:316
+msgid "Year"
+msgstr ""
+
+#: library/fields/date.php:890
 msgid "This field is required. Please enter a valid date"
 msgstr ""
 
-#: library/fields/date.php:841
+#: library/fields/date.php:901
 msgid "Not valid date"
 msgstr ""
 
-#: library/fields/date.php:857 library/fields/date.php:867
-#: library/fields/date.php:877 library/fields/name.php:695
+#: library/fields/date.php:917 library/fields/date.php:927
+#: library/fields/date.php:937 library/fields/name.php:750
 msgid "This field is required. Please input a value"
 msgstr ""
 
-#: library/fields/date.php:903
+#: library/fields/date.php:963
 msgid "This field is required. Please enter the date"
 msgstr ""
 
-#: library/fields/date.php:914
+#: library/fields/date.php:974
 msgid "Please enter a valid date"
 msgstr ""
 
-#: library/fields/date.php:930 library/fields/date.php:938
-#: library/fields/date.php:946
+#: library/fields/date.php:990 library/fields/date.php:998
+#: library/fields/date.php:1006
 msgid "Please enter a valid year"
-msgstr ""
-
-#: library/fields/email.php:55
-msgid "Email"
 msgstr ""
 
 #: library/fields/email.php:137 library/fields/website.php:137
@@ -1761,23 +1879,46 @@ msgid "Custom validation error message"
 msgstr ""
 
 #: library/fields/email.php:165
+#: library/modules/custom-forms/form-templates/template-contact-form.php:65
 msgid "Email Address"
 msgstr ""
 
-#: library/fields/email.php:257
+#: library/fields/email.php:308
 msgid "This field is required. Please input a valid email"
 msgstr ""
 
-#: library/fields/email.php:264
+#: library/fields/email.php:315
 msgid "This is not a valid email"
 msgstr ""
 
-#: library/fields/email.php:313
+#: library/fields/email.php:364
 msgid "This field is required. Please enter the email"
 msgstr ""
 
-#: library/fields/email.php:320
+#: library/fields/email.php:371
 msgid "Please enter a valid email address"
+msgstr ""
+
+#: library/fields/gdprcheckbox.php:51
+msgid "GDPR Checkbox"
+msgstr ""
+
+#: library/fields/gdprcheckbox.php:69
+msgid "GDPR Checkbox is always marked as required."
+msgstr ""
+
+#: library/fields/gdprcheckbox.php:91
+msgid "GDPR Description"
+msgstr ""
+
+#: library/fields/gdprcheckbox.php:107
+msgid ""
+"Yes, I agree with <a href=\"#\">privacy policy</a>, <a href=\"#\">terms and "
+"condition</a>"
+msgstr ""
+
+#: library/fields/gdprcheckbox.php:200 library/fields/gdprcheckbox.php:223
+msgid "This field is required. Please check it."
 msgstr ""
 
 #: library/fields/hidden.php:51
@@ -1816,77 +1957,75 @@ msgstr ""
 msgid "Option 2"
 msgstr ""
 
-#: library/fields/multivalue.php:294 library/fields/multivalue.php:319
-#: library/fields/singlevalue.php:289 library/fields/singlevalue.php:314
+#: library/fields/multivalue.php:349 library/fields/multivalue.php:374
+#: library/fields/singlevalue.php:327 library/fields/singlevalue.php:352
 msgid "This field is required. Please select a value"
 msgstr ""
 
-#: library/fields/name.php:96
+#: library/fields/name.php:97
 msgid "Use multiple name fields"
 msgstr ""
 
-#: library/fields/name.php:111 library/fields/name.php:300
-#: library/modules/custom-forms/admin/admin-loader.php:196
+#: library/fields/name.php:112 library/fields/name.php:301
+#: library/model/class-form-entry-model.php:319
+#: library/modules/custom-forms/admin/admin-loader.php:197
+#: library/modules/custom-forms/form-templates/template-contact-form.php:47
 msgid "Prefix"
 msgstr ""
 
-#: library/fields/name.php:127 library/fields/name.php:165
-#: library/fields/name.php:203 library/fields/name.php:241
-#: library/fields/name.php:282 library/fields/postdata.php:167
+#: library/fields/name.php:128 library/fields/name.php:166
+#: library/fields/name.php:204 library/fields/name.php:242
+#: library/fields/name.php:283 library/fields/postdata.php:167
 #: library/fields/postdata.php:204 library/fields/postdata.php:241
 #: library/fields/postdata.php:271 library/fields/postdata.php:301
 #: library/fields/postdata.php:332
 msgid "Description (below field)"
 msgstr ""
 
-#: library/fields/name.php:142 library/fields/name.php:301
-#: library/modules/custom-forms/admin/admin-loader.php:197
-msgid "First Name"
-msgstr ""
-
-#: library/fields/name.php:180 library/fields/name.php:303
-#: library/modules/custom-forms/admin/admin-loader.php:198
+#: library/fields/name.php:181 library/fields/name.php:304
+#: library/model/class-form-entry-model.php:321
+#: library/modules/custom-forms/admin/admin-loader.php:199
+#: library/modules/custom-forms/form-templates/template-contact-form.php:50
 msgid "Middle Name"
 msgstr ""
 
-#: library/fields/name.php:218 library/fields/name.php:305
-#: library/modules/custom-forms/admin/admin-loader.php:199
-msgid "Last Name"
-msgstr ""
-
-#: library/fields/name.php:272
+#: library/fields/name.php:273
 msgid "Field placeholder (optional)"
 msgstr ""
 
-#: library/fields/name.php:299
+#: library/fields/name.php:300
 msgid "E.g. John Doe"
 msgstr ""
 
-#: library/fields/name.php:302
+#: library/fields/name.php:303
+#: library/modules/custom-forms/form-templates/template-contact-form.php:46
+#: library/modules/custom-forms/form-templates/template-contact-form.php:49
 msgid "E.g. John"
 msgstr ""
 
-#: library/fields/name.php:304
+#: library/fields/name.php:305
+#: library/modules/custom-forms/form-templates/template-contact-form.php:51
 msgid "E.g. Smith"
 msgstr ""
 
-#: library/fields/name.php:306
+#: library/fields/name.php:307
+#: library/modules/custom-forms/form-templates/template-contact-form.php:53
 msgid "E.g. Doe"
 msgstr ""
 
-#: library/fields/name.php:704 library/fields/name.php:758
+#: library/fields/name.php:759 library/fields/name.php:814
 msgid "This field is required. Please input your first name"
 msgstr ""
 
-#: library/fields/name.php:713 library/fields/name.php:766
+#: library/fields/name.php:768 library/fields/name.php:822
 msgid "This field is required. Please input your middle name"
 msgstr ""
 
-#: library/fields/name.php:722 library/fields/name.php:774
+#: library/fields/name.php:777 library/fields/name.php:830
 msgid "This field is required. Please input your last name"
 msgstr ""
 
-#: library/fields/name.php:745
+#: library/fields/name.php:801
 msgid "This field is required. Please input your name"
 msgstr ""
 
@@ -1906,28 +2045,28 @@ msgstr ""
 msgid "E.g. 10"
 msgstr ""
 
-#: library/fields/number.php:269
+#: library/fields/number.php:311
 msgid "This field is required. Please enter digits"
 msgstr ""
 
-#: library/fields/number.php:277
+#: library/fields/number.php:319
 msgid "This is not valid number"
 msgstr ""
 
-#: library/fields/number.php:302
+#: library/fields/number.php:346
 msgid "This field is required. Please input a number"
 msgstr ""
 
-#: library/fields/number.php:312
+#: library/fields/number.php:358
 msgid "Only numbers allowed"
 msgstr ""
 
-#: library/fields/number.php:326
+#: library/fields/number.php:372
 msgid "The number shoud be less than %d and greater than %d"
 msgstr ""
 
 #: library/fields/pagination.php:57
-#: library/modules/custom-forms/admin/admin-loader.php:222
+#: library/modules/custom-forms/admin/admin-loader.php:223
 msgid "Pagination"
 msgstr ""
 
@@ -1943,51 +2082,48 @@ msgstr ""
 msgid "Next Step »"
 msgstr ""
 
-#: library/fields/phone.php:61 library/fields/phone.php:212
+#: library/fields/phone.php:61 library/fields/phone.php:185
 msgid "Phone"
 msgstr ""
 
-#: library/fields/phone.php:134
-msgid "Use character limit"
-msgstr ""
-
-#: library/fields/phone.php:144 library/fields/text.php:172
-msgid "Limit field to:"
-msgstr ""
-
-#: library/fields/phone.php:156 library/fields/text.php:185
-msgid "Characters"
-msgstr ""
-
-#: library/fields/phone.php:173
+#: library/fields/phone.php:133
 msgid "Enable Validation"
 msgstr ""
 
-#: library/fields/phone.php:187
+#: library/fields/phone.php:147
 msgid "Standard %s"
 msgstr ""
 
-#: library/fields/phone.php:191 library/fields/phone.php:261
+#: library/fields/phone.php:151 library/fields/phone.php:255
 msgid "International"
 msgstr ""
 
-#: library/fields/phone.php:213
+#: library/fields/phone.php:155
+msgid "Limit characters"
+msgstr ""
+
+#: library/fields/phone.php:166
+msgid "Limit to:"
+msgstr ""
+
+#: library/fields/phone.php:186
 msgid "E.g. +1 300 400 5000"
 msgstr ""
 
-#: library/fields/phone.php:353 library/fields/phone.php:402
+#: library/fields/phone.php:367 library/fields/phone.php:375
+#: library/fields/phone.php:427
 msgid "This field is required. Please input a phone number"
 msgstr ""
 
-#: library/fields/phone.php:362
+#: library/fields/phone.php:387
 msgid "Please input a valid phone number"
 msgstr ""
 
-#: library/fields/phone.php:373 library/fields/phone.php:416
+#: library/fields/phone.php:396 library/fields/phone.php:451
 msgid "You exceeded the allowed amount of numbers. Please check again"
 msgstr ""
 
-#: library/fields/phone.php:441
+#: library/fields/phone.php:466
 msgid "Invalid phone number. Please make sure the format is %s"
 msgstr ""
 
@@ -2047,50 +2183,53 @@ msgstr ""
 msgid "This post has custom fields"
 msgstr ""
 
-#: library/fields/postdata.php:790
+#: library/fields/postdata.php:833
 msgid "This field is required. Please fill in post data"
 msgstr ""
 
-#: library/fields/postdata.php:802
+#: library/fields/postdata.php:845
 msgid "This field is required. Please enter the post title"
 msgstr ""
 
-#: library/fields/postdata.php:810
+#: library/fields/postdata.php:853
 msgid "This field is required. Please enter the post content"
 msgstr ""
 
-#: library/fields/postdata.php:818
+#: library/fields/postdata.php:861
 msgid "This field is required. Please enter the post excerpt"
 msgstr ""
 
-#: library/fields/postdata.php:826
+#: library/fields/postdata.php:869
 msgid "This field is required. Please upload a post image"
 msgstr ""
 
-#: library/fields/postdata.php:834
+#: library/fields/postdata.php:877
 msgid "This field is required. Please select a post category"
 msgstr ""
 
-#: library/fields/postdata.php:842
+#: library/fields/postdata.php:885
 msgid "This field is required. Please select a post tag"
 msgstr ""
 
-#: library/fields/postdata.php:870 library/fields/postdata.php:878
-#: library/fields/postdata.php:886
+#: library/fields/postdata.php:913 library/fields/postdata.php:921
+#: library/fields/postdata.php:929
 msgid ""
 "At least one of these fields is required: Post Title, Post Excerpt or Post "
 "Content"
 msgstr ""
 
 #: library/fields/section.php:51
+#: library/modules/custom-forms/admin/admin-loader.php:335
 msgid "Section"
 msgstr ""
 
 #: library/fields/section.php:67
+#: library/modules/custom-forms/admin/admin-loader.php:379
 msgid "Section title"
 msgstr ""
 
 #: library/fields/section.php:75
+#: library/modules/custom-forms/admin/admin-loader.php:380
 msgid "Section subtitle"
 msgstr ""
 
@@ -2110,101 +2249,116 @@ msgstr ""
 msgid "Select dropdown"
 msgstr ""
 
-#: library/fields/text.php:61 library/fields/text.php:210
+#: library/fields/text.php:61 library/fields/text.php:211
+#: library/modules/custom-forms/admin/admin-loader.php:364
+#: library/modules/custom-forms/admin/admin-loader.php:365
+#: samples/forminator-simple-autofill-plugin/forminator-autofill-simple.php:33
 msgid "Text"
 msgstr ""
 
-#: library/fields/text.php:100
+#: library/fields/text.php:101
 msgid "Text input type"
 msgstr ""
 
-#: library/fields/text.php:110
+#: library/fields/text.php:111
 msgid "Paragraph text"
 msgstr ""
 
-#: library/fields/text.php:160
+#: library/fields/text.php:161
 msgid "Use input limit"
 msgstr ""
 
-#: library/fields/text.php:189
+#: library/fields/text.php:173
+msgid "Limit field to:"
+msgstr ""
+
+#: library/fields/text.php:186
+msgid "Characters"
+msgstr ""
+
+#: library/fields/text.php:190
 msgid "Words"
 msgstr ""
 
-#: library/fields/text.php:322 library/fields/text.php:372
+#: library/fields/text.php:401 library/fields/text.php:453
 msgid "This field is required. Please enter text"
 msgstr ""
 
-#: library/fields/text.php:332 library/fields/text.php:382
+#: library/fields/text.php:412 library/fields/text.php:463
 msgid "You exceeded the allowed amount of characters. Please check again"
 msgstr ""
 
-#: library/fields/text.php:340 library/fields/text.php:389
+#: library/fields/text.php:420 library/fields/text.php:470
 msgid "You exceeded the allowed amount of words. Please check again"
 msgstr ""
 
-#: library/fields/time.php:51
+#: library/fields/time.php:52
 msgid "Time"
 msgstr ""
 
-#: library/fields/time.php:99
+#: library/fields/time.php:100
 msgid "Time format"
 msgstr ""
 
-#: library/fields/time.php:105
+#: library/fields/time.php:106
 msgid "12 hour"
 msgstr ""
 
-#: library/fields/time.php:109
+#: library/fields/time.php:110
 msgid "24 hour"
 msgstr ""
 
-#: library/fields/time.php:118
+#: library/fields/time.php:119
 msgid "Hours field"
 msgstr ""
 
-#: library/fields/time.php:142
+#: library/fields/time.php:143
 msgid "Minutes field"
 msgstr ""
 
-#: library/fields/time.php:175
-#: library/modules/custom-forms/admin/admin-loader.php:211
+#: library/fields/time.php:173
+msgid "Number inputs"
+msgstr ""
+
+#: library/fields/time.php:196
+#: library/modules/custom-forms/admin/admin-loader.php:212
 msgid "Hours"
 msgstr ""
 
-#: library/fields/time.php:176
+#: library/fields/time.php:197
 msgid "E.g. 08"
 msgstr ""
 
-#: library/fields/time.php:177
-#: library/modules/custom-forms/admin/admin-loader.php:212
+#: library/fields/time.php:198
+#: library/modules/custom-forms/admin/admin-loader.php:213
 msgid "Minutes"
 msgstr ""
 
-#: library/fields/time.php:178
+#: library/fields/time.php:199
 msgid "E.g. 00"
 msgstr ""
 
-#: library/fields/time.php:321
+#: library/fields/time.php:420
 msgid "AM"
 msgstr ""
 
-#: library/fields/time.php:325
+#: library/fields/time.php:424
 msgid "PM"
 msgstr ""
 
-#: library/fields/time.php:375 library/fields/time.php:409
+#: library/fields/time.php:522 library/fields/time.php:556
 msgid "This field is required. Please input a valid hour"
 msgstr ""
 
-#: library/fields/time.php:384 library/fields/time.php:415
+#: library/fields/time.php:531 library/fields/time.php:562
 msgid "This field is required. Please input a valid minute"
 msgstr ""
 
-#: library/fields/time.php:425
+#: library/fields/time.php:572
 msgid "Please enter a valid hour"
 msgstr ""
 
-#: library/fields/time.php:431
+#: library/fields/time.php:578
 msgid "Please enter a valid minute"
 msgstr ""
 
@@ -2224,7 +2378,7 @@ msgstr ""
 msgid "Upload file"
 msgstr ""
 
-#: library/fields/upload.php:209
+#: library/fields/upload.php:226
 msgid "This field is required. Please upload a file"
 msgstr ""
 
@@ -2236,11 +2390,11 @@ msgstr ""
 msgid "E.g. http://www.example.com"
 msgstr ""
 
-#: library/fields/website.php:250 library/fields/website.php:315
+#: library/fields/website.php:272 library/fields/website.php:337
 msgid "This field is required. Please input a valid URL"
 msgstr ""
 
-#: library/fields/website.php:267 library/fields/website.php:328
+#: library/fields/website.php:289 library/fields/website.php:350
 msgid "Please enter a valid Website URL (e.g. https://premium.wpmudev.org/)."
 msgstr ""
 
@@ -2257,24 +2411,24 @@ msgid "An error occured processing the form. Please try again"
 msgstr ""
 
 #: library/helpers/helper-core.php:222
-#: library/modules/custom-forms/admin/admin-loader.php:145
-#: library/modules/custom-forms/admin/admin-loader.php:331
-#: library/modules/polls/admin/admin-loader.php:160
-#: library/modules/quizzes/admin/admin-loader.php:241
+#: library/modules/custom-forms/admin/admin-loader.php:146
+#: library/modules/custom-forms/admin/admin-loader.php:327
+#: library/modules/polls/admin/admin-loader.php:162
+#: library/modules/quizzes/admin/admin-loader.php:242
 msgid "Back"
 msgstr ""
 
 #: library/helpers/helper-core.php:223
-#: library/modules/custom-forms/admin/admin-loader.php:144
-#: library/modules/custom-forms/admin/admin-loader.php:332
+#: library/modules/custom-forms/admin/admin-loader.php:145
+#: library/modules/custom-forms/admin/admin-loader.php:328
 msgid "Next"
 msgstr ""
 
 #: library/helpers/helper-core.php:224
-#: library/modules/custom-forms/front/front-render.php:1324
-#: library/modules/polls/front/front-render.php:241
-#: library/modules/quizzes/admin/admin-loader.php:248
-#: library/render/class-render-form.php:264
+#: library/modules/custom-forms/front/front-render.php:1340
+#: library/modules/polls/front/front-render.php:250
+#: library/modules/quizzes/admin/admin-loader.php:249
+#: library/render/class-render-form.php:320
 msgid "Submit"
 msgstr ""
 
@@ -2370,847 +2524,867 @@ msgstr ""
 msgid "Prof."
 msgstr ""
 
-#: library/helpers/helper-fields.php:497
-msgid "Afghanistan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:498
-msgid "Albania"
-msgstr ""
-
-#: library/helpers/helper-fields.php:499
-msgid "Algeria"
-msgstr ""
-
-#: library/helpers/helper-fields.php:500
-msgid "American Samoa"
-msgstr ""
-
-#: library/helpers/helper-fields.php:501
-msgid "Andorra"
-msgstr ""
-
-#: library/helpers/helper-fields.php:502
-msgid "Angola"
-msgstr ""
-
-#: library/helpers/helper-fields.php:503
-msgid "Antigua and Barbuda"
-msgstr ""
-
-#: library/helpers/helper-fields.php:504
-msgid "Argentina"
-msgstr ""
-
-#: library/helpers/helper-fields.php:505
-msgid "Armenia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:506
-msgid "Australia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:507
-msgid "Austria"
-msgstr ""
-
-#: library/helpers/helper-fields.php:508
-msgid "Azerbaijan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:509
-msgid "Bahamas"
-msgstr ""
-
-#: library/helpers/helper-fields.php:510
-msgid "Bahrain"
-msgstr ""
-
-#: library/helpers/helper-fields.php:511
-msgid "Bangladesh"
-msgstr ""
-
-#: library/helpers/helper-fields.php:512
-msgid "Barbados"
-msgstr ""
-
-#: library/helpers/helper-fields.php:513
-msgid "Belarus"
-msgstr ""
-
-#: library/helpers/helper-fields.php:514
-msgid "Belgium"
-msgstr ""
-
-#: library/helpers/helper-fields.php:515
-msgid "Belize"
-msgstr ""
-
-#: library/helpers/helper-fields.php:516
-msgid "Benin"
-msgstr ""
-
-#: library/helpers/helper-fields.php:517
-msgid "Bermuda"
-msgstr ""
-
-#: library/helpers/helper-fields.php:518
-msgid "Bhutan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:519
-msgid "Bolivia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:520
-msgid "Bosnia and Herzegovina"
-msgstr ""
-
-#: library/helpers/helper-fields.php:521
-msgid "Botswana"
-msgstr ""
-
-#: library/helpers/helper-fields.php:522
-msgid "Brazil"
-msgstr ""
-
-#: library/helpers/helper-fields.php:523
-msgid "Brunei"
-msgstr ""
-
-#: library/helpers/helper-fields.php:524
-msgid "Bulgaria"
-msgstr ""
-
-#: library/helpers/helper-fields.php:525
-msgid "Burkina Faso"
-msgstr ""
-
-#: library/helpers/helper-fields.php:526
-msgid "Burundi"
-msgstr ""
-
-#: library/helpers/helper-fields.php:527
-msgid "Cambodia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:528
-msgid "Cameroon"
-msgstr ""
-
-#: library/helpers/helper-fields.php:529
-msgid "Canada"
-msgstr ""
-
-#: library/helpers/helper-fields.php:530
-msgid "Cape Verde"
-msgstr ""
-
-#: library/helpers/helper-fields.php:531
-msgid "Cayman Islands"
-msgstr ""
-
-#: library/helpers/helper-fields.php:532
-msgid "Central African Republic"
-msgstr ""
-
-#: library/helpers/helper-fields.php:533
-msgid "Chad"
-msgstr ""
-
-#: library/helpers/helper-fields.php:534
-msgid "Chile"
-msgstr ""
-
-#: library/helpers/helper-fields.php:535
-msgid "China"
-msgstr ""
-
-#: library/helpers/helper-fields.php:536
-msgid "Colombia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:537
-msgid "Comoros"
-msgstr ""
-
-#: library/helpers/helper-fields.php:538
-msgid "Congo, Democratic Republic of the"
-msgstr ""
-
-#: library/helpers/helper-fields.php:539
-msgid "Congo, Republic of the"
-msgstr ""
-
-#: library/helpers/helper-fields.php:540
-msgid "Costa Rica"
-msgstr ""
-
-#: library/helpers/helper-fields.php:541
-msgid "Côte d'Ivoire"
-msgstr ""
-
-#: library/helpers/helper-fields.php:542
-msgid "Croatia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:543
-msgid "Cuba"
-msgstr ""
-
-#: library/helpers/helper-fields.php:544
-msgid "Curaçao"
-msgstr ""
-
-#: library/helpers/helper-fields.php:545
-msgid "Cyprus"
-msgstr ""
-
-#: library/helpers/helper-fields.php:546
-msgid "Czech Republic"
-msgstr ""
-
-#: library/helpers/helper-fields.php:547
-msgid "Denmark"
-msgstr ""
-
-#: library/helpers/helper-fields.php:548
-msgid "Djibouti"
-msgstr ""
-
-#: library/helpers/helper-fields.php:549
-msgid "Dominica"
-msgstr ""
-
-#: library/helpers/helper-fields.php:550
-msgid "Dominican Republic"
-msgstr ""
-
-#: library/helpers/helper-fields.php:551
-msgid "East Timor"
-msgstr ""
-
-#: library/helpers/helper-fields.php:552
-msgid "Ecuador"
-msgstr ""
-
 #: library/helpers/helper-fields.php:553
-msgid "Egypt"
-msgstr ""
-
-#: library/helpers/helper-fields.php:554
-msgid "El Salvador"
-msgstr ""
-
-#: library/helpers/helper-fields.php:555
-msgid "Equatorial Guinea"
-msgstr ""
-
-#: library/helpers/helper-fields.php:556
-msgid "Eritrea"
-msgstr ""
-
-#: library/helpers/helper-fields.php:557
-msgid "Estonia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:558
-msgid "Ethiopia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:559
-msgid "Faroe Islands"
-msgstr ""
-
-#: library/helpers/helper-fields.php:560
-msgid "Fiji"
-msgstr ""
-
-#: library/helpers/helper-fields.php:561
-msgid "Finland"
-msgstr ""
-
-#: library/helpers/helper-fields.php:562
-msgid "France"
-msgstr ""
-
-#: library/helpers/helper-fields.php:563
-msgid "French Polynesia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:564
-msgid "Gabon"
+#: library/model/class-form-entries-list-table.php:282
+#: library/model/class-form-entry-model.php:906
+msgid "View File"
 msgstr ""
 
 #: library/helpers/helper-fields.php:565
-msgid "Gambia"
+#: library/model/class-form-entries-list-table.php:290
+#: library/model/class-form-entry-model.php:809
+msgid "Edit Post"
 msgstr ""
 
-#: library/helpers/helper-fields.php:566
-msgid "Georgia, Country"
-msgstr ""
-
-#: library/helpers/helper-fields.php:567
-msgid "Germany"
-msgstr ""
-
-#: library/helpers/helper-fields.php:568
-msgid "Ghana"
-msgstr ""
-
-#: library/helpers/helper-fields.php:569
-msgid "Greece"
-msgstr ""
-
-#: library/helpers/helper-fields.php:570
-msgid "Greenland"
-msgstr ""
-
-#: library/helpers/helper-fields.php:571
-msgid "Grenada"
-msgstr ""
-
-#: library/helpers/helper-fields.php:572
-msgid "Guam"
-msgstr ""
-
-#: library/helpers/helper-fields.php:573
-msgid "Guatemala"
-msgstr ""
-
-#: library/helpers/helper-fields.php:574
-msgid "Guinea"
-msgstr ""
-
-#: library/helpers/helper-fields.php:575
-msgid "Guinea-Bissau"
-msgstr ""
-
-#: library/helpers/helper-fields.php:576
-msgid "Guyana"
-msgstr ""
-
-#: library/helpers/helper-fields.php:577
-msgid "Haiti"
-msgstr ""
-
-#: library/helpers/helper-fields.php:578
-msgid "Honduras"
-msgstr ""
-
-#: library/helpers/helper-fields.php:579
-msgid "Hong Kong"
-msgstr ""
-
-#: library/helpers/helper-fields.php:580
-msgid "Hungary"
-msgstr ""
-
-#: library/helpers/helper-fields.php:581
-msgid "Iceland"
-msgstr ""
-
-#: library/helpers/helper-fields.php:582
-msgid "India"
-msgstr ""
-
-#: library/helpers/helper-fields.php:583
-msgid "Indonesia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:584
-msgid "Iran"
-msgstr ""
-
-#: library/helpers/helper-fields.php:585
-msgid "Iraq"
-msgstr ""
-
-#: library/helpers/helper-fields.php:586
-msgid "Ireland"
-msgstr ""
-
-#: library/helpers/helper-fields.php:587
-msgid "Israel"
-msgstr ""
-
-#: library/helpers/helper-fields.php:588
-msgid "Italy"
-msgstr ""
-
-#: library/helpers/helper-fields.php:589
-msgid "Jamaica"
-msgstr ""
-
-#: library/helpers/helper-fields.php:590
-msgid "Japan"
+#: library/helpers/helper-fields.php:579 library/helpers/helper-fields.php:581
+msgid "<strong>Country : </strong> %s"
 msgstr ""
 
 #: library/helpers/helper-fields.php:591
-msgid "Jordan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:592
-msgid "Kazakhstan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:593 library/helpers/helper-fields.php:597
-msgid "Kenya"
-msgstr ""
-
-#: library/helpers/helper-fields.php:594
-msgid "Kiribati"
-msgstr ""
-
-#: library/helpers/helper-fields.php:595
-msgid "North Korea"
-msgstr ""
-
-#: library/helpers/helper-fields.php:596
-msgid "South Korea"
-msgstr ""
-
-#: library/helpers/helper-fields.php:598
-msgid "Kosovo"
-msgstr ""
-
-#: library/helpers/helper-fields.php:599
-msgid "Kuwait"
-msgstr ""
-
-#: library/helpers/helper-fields.php:600
-msgid "Kyrgyzstan"
-msgstr ""
-
-#: library/helpers/helper-fields.php:601
-msgid "Laos"
-msgstr ""
-
-#: library/helpers/helper-fields.php:602
-msgid "Latvia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:603
-msgid "Lebanon"
-msgstr ""
-
-#: library/helpers/helper-fields.php:604
-msgid "Lesotho"
-msgstr ""
-
-#: library/helpers/helper-fields.php:605
-msgid "Liberia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:606
-msgid "Libya"
-msgstr ""
-
-#: library/helpers/helper-fields.php:607
-msgid "Liechtenstein"
-msgstr ""
-
-#: library/helpers/helper-fields.php:608
-msgid "Lithuania"
-msgstr ""
-
-#: library/helpers/helper-fields.php:609
-msgid "Luxembourg"
-msgstr ""
-
-#: library/helpers/helper-fields.php:610
-msgid "Macedonia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:611
-msgid "Madagascar"
-msgstr ""
-
-#: library/helpers/helper-fields.php:612
-msgid "Malawi"
-msgstr ""
-
-#: library/helpers/helper-fields.php:613
-msgid "Malaysia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:614
-msgid "Maldives"
-msgstr ""
-
-#: library/helpers/helper-fields.php:615
-msgid "Mali"
-msgstr ""
-
-#: library/helpers/helper-fields.php:616
-msgid "Malta"
-msgstr ""
-
-#: library/helpers/helper-fields.php:617
-msgid "Marshall Islands"
-msgstr ""
-
-#: library/helpers/helper-fields.php:618
-msgid "Mauritania"
-msgstr ""
-
-#: library/helpers/helper-fields.php:619
-msgid "Mauritius"
-msgstr ""
-
-#: library/helpers/helper-fields.php:620
-msgid "Mexico"
-msgstr ""
-
-#: library/helpers/helper-fields.php:621
-msgid "Micronesia"
-msgstr ""
-
-#: library/helpers/helper-fields.php:622
-msgid "Moldova"
-msgstr ""
-
-#: library/helpers/helper-fields.php:623
-msgid "Monaco"
-msgstr ""
-
-#: library/helpers/helper-fields.php:624
-msgid "Mongolia"
+msgid "<strong>%s : </strong> %s"
 msgstr ""
 
 #: library/helpers/helper-fields.php:625
-msgid "Montenegro"
+msgid "Afghanistan"
 msgstr ""
 
 #: library/helpers/helper-fields.php:626
-msgid "Morocco"
+msgid "Albania"
 msgstr ""
 
 #: library/helpers/helper-fields.php:627
-msgid "Mozambique"
+msgid "Algeria"
 msgstr ""
 
 #: library/helpers/helper-fields.php:628
-msgid "Myanmar"
+msgid "American Samoa"
 msgstr ""
 
 #: library/helpers/helper-fields.php:629
-msgid "Namibia"
+msgid "Andorra"
 msgstr ""
 
 #: library/helpers/helper-fields.php:630
-msgid "Nauru"
+msgid "Angola"
 msgstr ""
 
 #: library/helpers/helper-fields.php:631
-msgid "Nepal"
+msgid "Antigua and Barbuda"
 msgstr ""
 
 #: library/helpers/helper-fields.php:632
-msgid "Netherlands"
+msgid "Argentina"
 msgstr ""
 
 #: library/helpers/helper-fields.php:633
-msgid "New Zealand"
+msgid "Armenia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:634
-msgid "Nicaragua"
+msgid "Australia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:635
-msgid "Niger"
+msgid "Austria"
 msgstr ""
 
 #: library/helpers/helper-fields.php:636
-msgid "Nigeria"
+msgid "Azerbaijan"
 msgstr ""
 
 #: library/helpers/helper-fields.php:637
-msgid "Northern Mariana Islands"
+msgid "Bahamas"
 msgstr ""
 
 #: library/helpers/helper-fields.php:638
-msgid "Norway"
+msgid "Bahrain"
 msgstr ""
 
 #: library/helpers/helper-fields.php:639
-msgid "Oman"
+msgid "Bangladesh"
 msgstr ""
 
 #: library/helpers/helper-fields.php:640
-msgid "Pakistan"
+msgid "Barbados"
 msgstr ""
 
 #: library/helpers/helper-fields.php:641
-msgid "Palau"
+msgid "Belarus"
 msgstr ""
 
 #: library/helpers/helper-fields.php:642
-msgid "Palestine, State of"
+msgid "Belgium"
 msgstr ""
 
 #: library/helpers/helper-fields.php:643
-msgid "Panama"
+msgid "Belize"
 msgstr ""
 
 #: library/helpers/helper-fields.php:644
-msgid "Papua New Guinea"
+msgid "Benin"
 msgstr ""
 
 #: library/helpers/helper-fields.php:645
-msgid "Paraguay"
+msgid "Bermuda"
 msgstr ""
 
 #: library/helpers/helper-fields.php:646
-msgid "Peru"
+msgid "Bhutan"
 msgstr ""
 
 #: library/helpers/helper-fields.php:647
-msgid "Philippines"
+msgid "Bolivia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:648
-msgid "Poland"
+msgid "Bosnia and Herzegovina"
 msgstr ""
 
 #: library/helpers/helper-fields.php:649
-msgid "Portugal"
+msgid "Botswana"
 msgstr ""
 
 #: library/helpers/helper-fields.php:650
-msgid "Puerto Rico"
+msgid "Brazil"
 msgstr ""
 
 #: library/helpers/helper-fields.php:651
-msgid "Qatar"
+msgid "Brunei"
 msgstr ""
 
 #: library/helpers/helper-fields.php:652
-msgid "Romania"
+msgid "Bulgaria"
 msgstr ""
 
 #: library/helpers/helper-fields.php:653
-msgid "Russia"
+msgid "Burkina Faso"
 msgstr ""
 
 #: library/helpers/helper-fields.php:654
-msgid "Rwanda"
+msgid "Burundi"
 msgstr ""
 
 #: library/helpers/helper-fields.php:655
-msgid "Saint Kitts and Nevis"
+msgid "Cambodia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:656
-msgid "Saint Lucia"
+msgid "Cameroon"
 msgstr ""
 
 #: library/helpers/helper-fields.php:657
-msgid "Saint Vincent and the Grenadines"
+msgid "Canada"
 msgstr ""
 
 #: library/helpers/helper-fields.php:658
-msgid "Samoa"
+msgid "Cape Verde"
 msgstr ""
 
 #: library/helpers/helper-fields.php:659
-msgid "San Marino"
+msgid "Cayman Islands"
 msgstr ""
 
 #: library/helpers/helper-fields.php:660
-msgid "Sao Tome and Principe"
+msgid "Central African Republic"
 msgstr ""
 
 #: library/helpers/helper-fields.php:661
-msgid "Saudi Arabia"
+msgid "Chad"
 msgstr ""
 
 #: library/helpers/helper-fields.php:662
-msgid "Senegal"
+msgid "Chile"
 msgstr ""
 
 #: library/helpers/helper-fields.php:663
-msgid "Serbia"
+msgid "China"
 msgstr ""
 
 #: library/helpers/helper-fields.php:664
-msgid "Seychelles"
+msgid "Colombia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:665
-msgid "Sierra Leone"
+msgid "Comoros"
 msgstr ""
 
 #: library/helpers/helper-fields.php:666
-msgid "Singapore"
+msgid "Congo, Democratic Republic of the"
 msgstr ""
 
 #: library/helpers/helper-fields.php:667
-msgid "Sint Maarten"
+msgid "Congo, Republic of the"
 msgstr ""
 
 #: library/helpers/helper-fields.php:668
-msgid "Slovakia"
+msgid "Costa Rica"
 msgstr ""
 
 #: library/helpers/helper-fields.php:669
-msgid "Slovenia"
+msgid "Côte d'Ivoire"
 msgstr ""
 
 #: library/helpers/helper-fields.php:670
-msgid "Solomon Islands"
+msgid "Croatia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:671
-msgid "Somalia"
+msgid "Cuba"
 msgstr ""
 
 #: library/helpers/helper-fields.php:672
-msgid "South Africa"
+msgid "Curaçao"
 msgstr ""
 
 #: library/helpers/helper-fields.php:673
-msgid "Spain"
+msgid "Cyprus"
 msgstr ""
 
 #: library/helpers/helper-fields.php:674
-msgid "Sri Lanka"
+msgid "Czech Republic"
 msgstr ""
 
 #: library/helpers/helper-fields.php:675
-msgid "Sudan"
+msgid "Denmark"
 msgstr ""
 
 #: library/helpers/helper-fields.php:676
-msgid "Sudan, South"
+msgid "Djibouti"
 msgstr ""
 
 #: library/helpers/helper-fields.php:677
-msgid "Suriname"
+msgid "Dominica"
 msgstr ""
 
 #: library/helpers/helper-fields.php:678
-msgid "Swaziland"
+msgid "Dominican Republic"
 msgstr ""
 
 #: library/helpers/helper-fields.php:679
-msgid "Sweden"
+msgid "East Timor"
 msgstr ""
 
 #: library/helpers/helper-fields.php:680
-msgid "Switzerland"
+msgid "Ecuador"
 msgstr ""
 
 #: library/helpers/helper-fields.php:681
-msgid "Syria"
+msgid "Egypt"
 msgstr ""
 
 #: library/helpers/helper-fields.php:682
-msgid "Taiwan"
+msgid "El Salvador"
 msgstr ""
 
 #: library/helpers/helper-fields.php:683
-msgid "Tajikistan"
+msgid "Equatorial Guinea"
 msgstr ""
 
 #: library/helpers/helper-fields.php:684
-msgid "Tanzania"
+msgid "Eritrea"
 msgstr ""
 
 #: library/helpers/helper-fields.php:685
-msgid "Thailand"
+msgid "Estonia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:686
-msgid "Togo"
+msgid "Ethiopia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:687
-msgid "Tonga"
+msgid "Faroe Islands"
 msgstr ""
 
 #: library/helpers/helper-fields.php:688
-msgid "Trinidad and Tobago"
+msgid "Fiji"
 msgstr ""
 
 #: library/helpers/helper-fields.php:689
-msgid "Tunisia"
+msgid "Finland"
 msgstr ""
 
 #: library/helpers/helper-fields.php:690
-msgid "Turkey"
+msgid "France"
 msgstr ""
 
 #: library/helpers/helper-fields.php:691
-msgid "Turkmenistan"
+msgid "French Polynesia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:692
-msgid "Tuvalu"
+msgid "Gabon"
 msgstr ""
 
 #: library/helpers/helper-fields.php:693
-msgid "Uganda"
+msgid "Gambia"
 msgstr ""
 
 #: library/helpers/helper-fields.php:694
-msgid "Ukraine"
+msgid "Georgia, Country"
 msgstr ""
 
 #: library/helpers/helper-fields.php:695
-msgid "United Arab Emirates"
+msgid "Germany"
 msgstr ""
 
 #: library/helpers/helper-fields.php:696
-msgid "United Kingdom"
+msgid "Ghana"
 msgstr ""
 
 #: library/helpers/helper-fields.php:697
-msgid "United States of America (USA)"
+msgid "Greece"
 msgstr ""
 
 #: library/helpers/helper-fields.php:698
-msgid "Uruguay"
+msgid "Greenland"
 msgstr ""
 
 #: library/helpers/helper-fields.php:699
-msgid "Uzbekistan"
+msgid "Grenada"
 msgstr ""
 
 #: library/helpers/helper-fields.php:700
-msgid "Vanuatu"
+msgid "Guam"
 msgstr ""
 
 #: library/helpers/helper-fields.php:701
-msgid "Vatican City"
+msgid "Guatemala"
 msgstr ""
 
 #: library/helpers/helper-fields.php:702
-msgid "Venezuela"
+msgid "Guinea"
 msgstr ""
 
 #: library/helpers/helper-fields.php:703
-msgid "Vietnam"
+msgid "Guinea-Bissau"
 msgstr ""
 
 #: library/helpers/helper-fields.php:704
-msgid "Virgin Islands, British"
+msgid "Guyana"
 msgstr ""
 
 #: library/helpers/helper-fields.php:705
-msgid "Virgin Islands, U.S."
+msgid "Haiti"
 msgstr ""
 
 #: library/helpers/helper-fields.php:706
-msgid "Yemen"
+msgid "Honduras"
 msgstr ""
 
 #: library/helpers/helper-fields.php:707
-msgid "Zambia"
+msgid "Hong Kong"
 msgstr ""
 
 #: library/helpers/helper-fields.php:708
+msgid "Hungary"
+msgstr ""
+
+#: library/helpers/helper-fields.php:709
+msgid "Iceland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:710
+msgid "India"
+msgstr ""
+
+#: library/helpers/helper-fields.php:711
+msgid "Indonesia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:712
+msgid "Iran"
+msgstr ""
+
+#: library/helpers/helper-fields.php:713
+msgid "Iraq"
+msgstr ""
+
+#: library/helpers/helper-fields.php:714
+msgid "Ireland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:715
+msgid "Israel"
+msgstr ""
+
+#: library/helpers/helper-fields.php:716
+msgid "Italy"
+msgstr ""
+
+#: library/helpers/helper-fields.php:717
+msgid "Jamaica"
+msgstr ""
+
+#: library/helpers/helper-fields.php:718
+msgid "Japan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:719
+msgid "Jordan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:720
+msgid "Kazakhstan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:721 library/helpers/helper-fields.php:725
+msgid "Kenya"
+msgstr ""
+
+#: library/helpers/helper-fields.php:722
+msgid "Kiribati"
+msgstr ""
+
+#: library/helpers/helper-fields.php:723
+msgid "North Korea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:724
+msgid "South Korea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:726
+msgid "Kosovo"
+msgstr ""
+
+#: library/helpers/helper-fields.php:727
+msgid "Kuwait"
+msgstr ""
+
+#: library/helpers/helper-fields.php:728
+msgid "Kyrgyzstan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:729
+msgid "Laos"
+msgstr ""
+
+#: library/helpers/helper-fields.php:730
+msgid "Latvia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:731
+msgid "Lebanon"
+msgstr ""
+
+#: library/helpers/helper-fields.php:732
+msgid "Lesotho"
+msgstr ""
+
+#: library/helpers/helper-fields.php:733
+msgid "Liberia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:734
+msgid "Libya"
+msgstr ""
+
+#: library/helpers/helper-fields.php:735
+msgid "Liechtenstein"
+msgstr ""
+
+#: library/helpers/helper-fields.php:736
+msgid "Lithuania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:737
+msgid "Luxembourg"
+msgstr ""
+
+#: library/helpers/helper-fields.php:738
+msgid "Macedonia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:739
+msgid "Madagascar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:740
+msgid "Malawi"
+msgstr ""
+
+#: library/helpers/helper-fields.php:741
+msgid "Malaysia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:742
+msgid "Maldives"
+msgstr ""
+
+#: library/helpers/helper-fields.php:743
+msgid "Mali"
+msgstr ""
+
+#: library/helpers/helper-fields.php:744
+msgid "Malta"
+msgstr ""
+
+#: library/helpers/helper-fields.php:745
+msgid "Marshall Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:746
+msgid "Mauritania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:747
+msgid "Mauritius"
+msgstr ""
+
+#: library/helpers/helper-fields.php:748
+msgid "Mexico"
+msgstr ""
+
+#: library/helpers/helper-fields.php:749
+msgid "Micronesia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:750
+msgid "Moldova"
+msgstr ""
+
+#: library/helpers/helper-fields.php:751
+msgid "Monaco"
+msgstr ""
+
+#: library/helpers/helper-fields.php:752
+msgid "Mongolia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:753
+msgid "Montenegro"
+msgstr ""
+
+#: library/helpers/helper-fields.php:754
+msgid "Morocco"
+msgstr ""
+
+#: library/helpers/helper-fields.php:755
+msgid "Mozambique"
+msgstr ""
+
+#: library/helpers/helper-fields.php:756
+msgid "Myanmar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:757
+msgid "Namibia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:758
+msgid "Nauru"
+msgstr ""
+
+#: library/helpers/helper-fields.php:759
+msgid "Nepal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:760
+msgid "Netherlands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:761
+msgid "New Zealand"
+msgstr ""
+
+#: library/helpers/helper-fields.php:762
+msgid "Nicaragua"
+msgstr ""
+
+#: library/helpers/helper-fields.php:763
+msgid "Niger"
+msgstr ""
+
+#: library/helpers/helper-fields.php:764
+msgid "Nigeria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:765
+msgid "Northern Mariana Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:766
+msgid "Norway"
+msgstr ""
+
+#: library/helpers/helper-fields.php:767
+msgid "Oman"
+msgstr ""
+
+#: library/helpers/helper-fields.php:768
+msgid "Pakistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:769
+msgid "Palau"
+msgstr ""
+
+#: library/helpers/helper-fields.php:770
+msgid "Palestine, State of"
+msgstr ""
+
+#: library/helpers/helper-fields.php:771
+msgid "Panama"
+msgstr ""
+
+#: library/helpers/helper-fields.php:772
+msgid "Papua New Guinea"
+msgstr ""
+
+#: library/helpers/helper-fields.php:773
+msgid "Paraguay"
+msgstr ""
+
+#: library/helpers/helper-fields.php:774
+msgid "Peru"
+msgstr ""
+
+#: library/helpers/helper-fields.php:775
+msgid "Philippines"
+msgstr ""
+
+#: library/helpers/helper-fields.php:776
+msgid "Poland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:777
+msgid "Portugal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:778
+msgid "Puerto Rico"
+msgstr ""
+
+#: library/helpers/helper-fields.php:779
+msgid "Qatar"
+msgstr ""
+
+#: library/helpers/helper-fields.php:780
+msgid "Romania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:781
+msgid "Russia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:782
+msgid "Rwanda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:783
+msgid "Saint Kitts and Nevis"
+msgstr ""
+
+#: library/helpers/helper-fields.php:784
+msgid "Saint Lucia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:785
+msgid "Saint Vincent and the Grenadines"
+msgstr ""
+
+#: library/helpers/helper-fields.php:786
+msgid "Samoa"
+msgstr ""
+
+#: library/helpers/helper-fields.php:787
+msgid "San Marino"
+msgstr ""
+
+#: library/helpers/helper-fields.php:788
+msgid "Sao Tome and Principe"
+msgstr ""
+
+#: library/helpers/helper-fields.php:789
+msgid "Saudi Arabia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:790
+msgid "Senegal"
+msgstr ""
+
+#: library/helpers/helper-fields.php:791
+msgid "Serbia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:792
+msgid "Seychelles"
+msgstr ""
+
+#: library/helpers/helper-fields.php:793
+msgid "Sierra Leone"
+msgstr ""
+
+#: library/helpers/helper-fields.php:794
+msgid "Singapore"
+msgstr ""
+
+#: library/helpers/helper-fields.php:795
+msgid "Sint Maarten"
+msgstr ""
+
+#: library/helpers/helper-fields.php:796
+msgid "Slovakia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:797
+msgid "Slovenia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:798
+msgid "Solomon Islands"
+msgstr ""
+
+#: library/helpers/helper-fields.php:799
+msgid "Somalia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:800
+msgid "South Africa"
+msgstr ""
+
+#: library/helpers/helper-fields.php:801
+msgid "Spain"
+msgstr ""
+
+#: library/helpers/helper-fields.php:802
+msgid "Sri Lanka"
+msgstr ""
+
+#: library/helpers/helper-fields.php:803
+msgid "Sudan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:804
+msgid "Sudan, South"
+msgstr ""
+
+#: library/helpers/helper-fields.php:805
+msgid "Suriname"
+msgstr ""
+
+#: library/helpers/helper-fields.php:806
+msgid "Swaziland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:807
+msgid "Sweden"
+msgstr ""
+
+#: library/helpers/helper-fields.php:808
+msgid "Switzerland"
+msgstr ""
+
+#: library/helpers/helper-fields.php:809
+msgid "Syria"
+msgstr ""
+
+#: library/helpers/helper-fields.php:810
+msgid "Taiwan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:811
+msgid "Tajikistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:812
+msgid "Tanzania"
+msgstr ""
+
+#: library/helpers/helper-fields.php:813
+msgid "Thailand"
+msgstr ""
+
+#: library/helpers/helper-fields.php:814
+msgid "Togo"
+msgstr ""
+
+#: library/helpers/helper-fields.php:815
+msgid "Tonga"
+msgstr ""
+
+#: library/helpers/helper-fields.php:816
+msgid "Trinidad and Tobago"
+msgstr ""
+
+#: library/helpers/helper-fields.php:817
+msgid "Tunisia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:818
+msgid "Turkey"
+msgstr ""
+
+#: library/helpers/helper-fields.php:819
+msgid "Turkmenistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:820
+msgid "Tuvalu"
+msgstr ""
+
+#: library/helpers/helper-fields.php:821
+msgid "Uganda"
+msgstr ""
+
+#: library/helpers/helper-fields.php:822
+msgid "Ukraine"
+msgstr ""
+
+#: library/helpers/helper-fields.php:823
+msgid "United Arab Emirates"
+msgstr ""
+
+#: library/helpers/helper-fields.php:824
+msgid "United Kingdom"
+msgstr ""
+
+#: library/helpers/helper-fields.php:825
+msgid "United States of America (USA)"
+msgstr ""
+
+#: library/helpers/helper-fields.php:826
+msgid "Uruguay"
+msgstr ""
+
+#: library/helpers/helper-fields.php:827
+msgid "Uzbekistan"
+msgstr ""
+
+#: library/helpers/helper-fields.php:828
+msgid "Vanuatu"
+msgstr ""
+
+#: library/helpers/helper-fields.php:829
+msgid "Vatican City"
+msgstr ""
+
+#: library/helpers/helper-fields.php:830
+msgid "Venezuela"
+msgstr ""
+
+#: library/helpers/helper-fields.php:831
+msgid "Vietnam"
+msgstr ""
+
+#: library/helpers/helper-fields.php:832
+msgid "Virgin Islands, British"
+msgstr ""
+
+#: library/helpers/helper-fields.php:833
+msgid "Virgin Islands, U.S."
+msgstr ""
+
+#: library/helpers/helper-fields.php:834
+msgid "Yemen"
+msgstr ""
+
+#: library/helpers/helper-fields.php:835
+msgid "Zambia"
+msgstr ""
+
+#: library/helpers/helper-fields.php:836
 msgid "Zimbabwe"
 msgstr ""
 
@@ -3325,273 +3499,330 @@ msgstr ""
 msgid "Select All"
 msgstr ""
 
-#: library/model/class-form-entries-list-table.php:282
-#: library/modules/custom-forms/admin/admin-page-entries.php:349
-msgid "View File"
-msgstr ""
-
-#: library/model/class-form-entries-list-table.php:290
-#: library/modules/custom-forms/admin/admin-page-entries.php:361
-msgid "Edit Post"
-msgstr ""
-
 #: library/model/class-form-entries-list-table.php:309
 msgid "Total %d"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:43
-#: library/modules/custom-forms/admin/admin-loader.php:133
+#: library/model/class-form-entry-model.php:307
+msgid "Hour"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:308
+msgid "Minute"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:309
+msgid "AM/PM"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:312
+msgid "State"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:313
+msgid "Zip"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:314
+msgid "Street Address"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:323
+msgid "Post Title"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:324
+msgid "Post Content"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:325
+msgid "Post Excerpt"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:326
+msgid "Post Image"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:327
+msgid "Post Category"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:328
+msgid "Post Tags"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:329
+msgid "Product ID"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:330
+msgid "Product Quantity"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:804
+msgid "(no title)"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:855
+msgid "Send Email"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:878
+msgid "View Website"
+msgstr ""
+
+#: library/model/class-form-entry-model.php:901
+msgid "(no filename)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:44
+#: library/modules/custom-forms/admin/admin-loader.php:134
 #: library/modules/custom-forms/admin/admin-page-new.php:21
 msgid "Edit Form"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:43
+#: library/modules/custom-forms/admin/admin-loader.php:44
 #: library/modules/custom-forms/loader.php:118
 msgid "New Custom Form"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:44
-#: library/modules/polls/admin/admin-loader.php:44
-#: library/modules/quizzes/admin/admin-loader.php:47
+#: library/modules/custom-forms/admin/admin-loader.php:45
+#: library/modules/polls/admin/admin-loader.php:45
+#: library/modules/quizzes/admin/admin-loader.php:48
 msgid "Entries:"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:44
+#: library/modules/custom-forms/admin/admin-loader.php:45
 msgid "View Custom Form"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:129
+#: library/modules/custom-forms/admin/admin-loader.php:130
 msgid "Choose Form Type"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:136
+#: library/modules/custom-forms/admin/admin-loader.php:137
 msgid "Add New Field"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:137
+#: library/modules/custom-forms/admin/admin-loader.php:138
 msgid "Save"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:138
-#: library/modules/polls/admin/admin-loader.php:162
-#: library/modules/quizzes/admin/admin-loader.php:243
+#: library/modules/custom-forms/admin/admin-loader.php:139
+#: library/modules/polls/admin/admin-loader.php:164
+#: library/modules/quizzes/admin/admin-loader.php:244
 msgid "Continue"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:139
+#: library/modules/custom-forms/admin/admin-loader.php:140
 msgid "Form Builder"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:140
-#: library/modules/custom-forms/admin/admin-loader.php:325
-#: library/modules/custom-forms/front/front-render.php:458
-#: library/modules/polls/admin/admin-loader.php:163
-#: library/modules/quizzes/admin/admin-loader.php:246
+#: library/modules/custom-forms/admin/admin-loader.php:141
+#: library/modules/custom-forms/admin/admin-loader.php:321
+#: library/modules/custom-forms/front/front-render.php:470
+#: library/modules/polls/admin/admin-loader.php:165
+#: library/modules/quizzes/admin/admin-loader.php:247
 msgid "Finish"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:141
+#: library/modules/custom-forms/admin/admin-loader.php:142
 msgid "Publish"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:142
+#: library/modules/custom-forms/admin/admin-loader.php:143
 msgid "Form Settings"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:143
+#: library/modules/custom-forms/admin/admin-loader.php:144
 msgid "Enter form name"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:146
+#: library/modules/custom-forms/admin/admin-loader.php:147
 msgid "Click & Drag fields"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:147
+#: library/modules/custom-forms/admin/admin-loader.php:148
 msgid "Standard"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:148
+#: library/modules/custom-forms/admin/admin-loader.php:149
 msgid "Posts"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:149
+#: library/modules/custom-forms/admin/admin-loader.php:150
 msgid "Pricing"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:150
+#: library/modules/custom-forms/admin/admin-loader.php:151
 msgid "Back to Fields"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:151
+#: library/modules/custom-forms/admin/admin-loader.php:152
 #: library/modules/custom-forms/admin/admin-page-view.php:70
 #: library/modules/polls/admin/admin-page-view.php:138
 #: library/modules/quizzes/admin/admin-page-view.php:111
 msgid "Clone"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:152
-#: library/modules/custom-forms/admin/admin-loader.php:252
+#: library/modules/custom-forms/admin/admin-loader.php:153
 msgid "General"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:153
-#: library/modules/custom-forms/admin/admin-loader.php:223
+#: library/modules/custom-forms/admin/admin-loader.php:154
+#: library/modules/custom-forms/admin/admin-loader.php:224
 msgid "Advanced"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:154
+#: library/modules/custom-forms/admin/admin-loader.php:155
 msgid "Required field: %s"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:155
+#: library/modules/custom-forms/admin/admin-loader.php:156
 msgid "You have not yet created any conditions."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:156
+#: library/modules/custom-forms/admin/admin-loader.php:157
 msgid "Drag and drop fields from the sidebar to add them to your form."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:157
 #: library/modules/custom-forms/admin/admin-loader.php:158
+#: library/modules/custom-forms/admin/admin-loader.php:159
 msgid "Custom class"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:159
+#: library/modules/custom-forms/admin/admin-loader.php:160
 msgid "Delete field"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:163
+#: library/modules/custom-forms/admin/admin-loader.php:164
 msgid "Conditional logic"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:164
+#: library/modules/custom-forms/admin/admin-loader.php:165
 msgid "Set Up Conditions"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:165
+#: library/modules/custom-forms/admin/admin-loader.php:166
 msgid "Edit Conditions"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:166
+#: library/modules/custom-forms/admin/admin-loader.php:167
 msgid "Show"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:167
+#: library/modules/custom-forms/admin/admin-loader.php:168
 msgid "Hide"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:168
+#: library/modules/custom-forms/admin/admin-loader.php:169
 msgid "this field if"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:169
+#: library/modules/custom-forms/admin/admin-loader.php:170
 msgid "Any"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:170
+#: library/modules/custom-forms/admin/admin-loader.php:171
 msgid "is"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:171
+#: library/modules/custom-forms/admin/admin-loader.php:172
 msgid "is not"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:172
+#: library/modules/custom-forms/admin/admin-loader.php:173
 msgid "is greater than"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:173
+#: library/modules/custom-forms/admin/admin-loader.php:174
 msgid "is less than"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:174
+#: library/modules/custom-forms/admin/admin-loader.php:175
 msgid "contains"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:175
+#: library/modules/custom-forms/admin/admin-loader.php:176
 msgid "starts with"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:176
+#: library/modules/custom-forms/admin/admin-loader.php:177
 msgid "ends with"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:177
+#: library/modules/custom-forms/admin/admin-loader.php:178
 msgid "of the following match"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:178
+#: library/modules/custom-forms/admin/admin-loader.php:179
 msgid "Add a condition"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:180
+#: library/modules/custom-forms/admin/admin-loader.php:181
 msgid "All"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:181
+#: library/modules/custom-forms/admin/admin-loader.php:182
 msgid "Select option..."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:182
+#: library/modules/custom-forms/admin/admin-loader.php:183
 msgid "more condition"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:183
+#: library/modules/custom-forms/admin/admin-loader.php:184
 msgid "more conditions"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:187
+#: library/modules/custom-forms/admin/admin-loader.php:188
 msgid "Add some variations of your product."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:188
+#: library/modules/custom-forms/admin/admin-loader.php:189
 msgid "Display in list?"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:189
+#: library/modules/custom-forms/admin/admin-loader.php:190
 msgid "Add Variation"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:190
+#: library/modules/custom-forms/admin/admin-loader.php:191
 msgid "Image"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:192
+#: library/modules/custom-forms/admin/admin-loader.php:193
 msgid "Price"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:216
+#: library/modules/custom-forms/admin/admin-loader.php:217
 msgid "SETTINGS & BEHAVIOURS"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:217
+#: library/modules/custom-forms/admin/admin-loader.php:218
 msgid "Preview Form"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:218
-#: library/modules/polls/admin/admin-loader.php:128
-#: library/modules/quizzes/admin/admin-loader.php:190
+#: library/modules/custom-forms/admin/admin-loader.php:219
+#: library/modules/polls/admin/admin-loader.php:130
+#: library/modules/quizzes/admin/admin-loader.php:191
 msgid "Appearance"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:219
+#: library/modules/custom-forms/admin/admin-loader.php:220
 msgid "Asterisk"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:220
+#: library/modules/custom-forms/admin/admin-loader.php:221
 msgid "Form behaviour"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:221
+#: library/modules/custom-forms/admin/admin-loader.php:222
 msgid "Form emails"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:224
-msgid "Filled elements"
-msgstr ""
-
 #: library/modules/custom-forms/admin/admin-loader.php:225
-msgid "Form style"
+msgid "Filled elements"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:226
@@ -3603,35 +3834,35 @@ msgid "Error elements"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:228
-msgid "Helper"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:229
 msgid "Fields style"
 msgstr ""
 
+#: library/modules/custom-forms/admin/admin-loader.php:229
+msgid "Forminator UI"
+msgstr ""
+
 #: library/modules/custom-forms/admin/admin-loader.php:230
-msgid "Design & Colors"
+msgid "Forminator Flat"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:231
-msgid "Choose a pre-made style for your form and further customize it's appearance."
+msgid "Forminator Bold"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:232
-msgid "Default design"
+msgid "Material Theme"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:233
-msgid "Flat design"
+msgid "Vanilla Theme"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:234
-msgid "Bold design"
+msgid "Design & Colors"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:235
-msgid "Material design"
+msgid "Choose a pre-made style for your form and further customize it's appearance."
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:236
@@ -3671,336 +3902,569 @@ msgid "Customize colors"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:245
-msgid "Field"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:246
 msgid "Font family"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:247
+#: library/modules/custom-forms/admin/admin-loader.php:246
 msgid "Font size"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:248
+#: library/modules/custom-forms/admin/admin-loader.php:247
 msgid "Font weight"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:249
-msgid "Form background"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:250
-msgid "Form border"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:251
+#: library/modules/custom-forms/admin/admin-loader.php:248
 msgid "Custom text"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:253
+#: library/modules/custom-forms/admin/admin-loader.php:249
 msgid "To customize content of some available form elements."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:254
+#: library/modules/custom-forms/admin/admin-loader.php:250
 msgid "Enter your submit button text"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:255
+#: library/modules/custom-forms/admin/admin-loader.php:251
 msgid "Use custom submit button text"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:256
+#: library/modules/custom-forms/admin/admin-loader.php:252
 msgid "Use custom invalid form message"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:257
+#: library/modules/custom-forms/admin/admin-loader.php:253
 msgid "Enter your invalid form message"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:258
+#: library/modules/custom-forms/admin/admin-loader.php:254
 msgid "Custom CSS"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:259
+#: library/modules/custom-forms/admin/admin-loader.php:255
 msgid "For more advanced customization options use custom CSS."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:260
+#: library/modules/custom-forms/admin/admin-loader.php:256
 msgid "Use custom CSS for this module"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:261
+#: library/modules/custom-forms/admin/admin-loader.php:257
 msgid "Available CSS Selectors (click to add)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:262
+#: library/modules/custom-forms/admin/admin-loader.php:258
 msgid "Form lifespan"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:263
+#: library/modules/custom-forms/admin/admin-loader.php:259
 msgid "After form submit"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:264
-#: library/modules/polls/admin/admin-loader.php:155
+#: library/modules/custom-forms/admin/admin-loader.php:260
+#: library/modules/polls/admin/admin-loader.php:157
 msgid "Submission"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:265
+#: library/modules/custom-forms/admin/admin-loader.php:261
 msgid "Submission behaviour"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:266
+#: library/modules/custom-forms/admin/admin-loader.php:262
 msgid ""
 "Choose what you want to happen after your visitor has successfully "
 "submitted their form."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:267
+#: library/modules/custom-forms/admin/admin-loader.php:263
 msgid "Submission method"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:268
-#: library/modules/polls/admin/admin-loader.php:156
+#: library/modules/custom-forms/admin/admin-loader.php:264
+#: library/modules/polls/admin/admin-loader.php:158
 msgid "Enable AJAX"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:269
+#: library/modules/custom-forms/admin/admin-loader.php:265
 msgid "Validation"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:270
+#: library/modules/custom-forms/admin/admin-loader.php:266
 msgid "Validation Method"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:271
+#: library/modules/custom-forms/admin/admin-loader.php:267
 msgid "Security"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:272
+#: library/modules/custom-forms/admin/admin-loader.php:268
 msgid "Form does not expire"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:273
+#: library/modules/custom-forms/admin/admin-loader.php:269
 msgid "Expires on certain date"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:274
+#: library/modules/custom-forms/admin/admin-loader.php:270
 msgid "Expires after x-submits"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:275
+#: library/modules/custom-forms/admin/admin-loader.php:271
 msgid "Show a Thank you message"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:276
+#: library/modules/custom-forms/admin/admin-loader.php:272
 msgid "Re-direct user to URL"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:277
+#: library/modules/custom-forms/admin/admin-loader.php:273
 msgid "Server only"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:278
+#: library/modules/custom-forms/admin/admin-loader.php:274
 msgid "On form submit"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:279
+#: library/modules/custom-forms/admin/admin-loader.php:275
 msgid "Enable inline validation (as user types)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:280
+#: library/modules/custom-forms/admin/admin-loader.php:276
 msgid "Enable honeypot protection"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:281
+#: library/modules/custom-forms/admin/admin-loader.php:277
 msgid "Only logged-in users can submit"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:282
+#: library/modules/custom-forms/admin/admin-loader.php:278
 msgid "Select font"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:283
+#: library/modules/custom-forms/admin/admin-loader.php:279
 msgid "Subtitle"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:285
+#: library/modules/custom-forms/admin/admin-loader.php:281
 msgid "Custom user font"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:287
+#: library/modules/custom-forms/admin/admin-loader.php:283
 msgid "Labels"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:288
+#: library/modules/custom-forms/admin/admin-loader.php:284
 msgid "Border line"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:291
+#: library/modules/custom-forms/admin/admin-loader.php:287
 msgid "Send user email"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:292
+#: library/modules/custom-forms/admin/admin-loader.php:288
 msgid "Send admin(s) email"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:293
+#: library/modules/custom-forms/admin/admin-loader.php:289
 msgid "Recipients"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:294
+#: library/modules/custom-forms/admin/admin-loader.php:290
 msgid "No Result Found"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:295
+#: library/modules/custom-forms/admin/admin-loader.php:291
 msgid "Searching"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:296
+#: library/modules/custom-forms/admin/admin-loader.php:292
 msgid "Add form based data"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:297
+#: library/modules/custom-forms/admin/admin-loader.php:293
 msgid "Subject"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:298
+#: library/modules/custom-forms/admin/admin-loader.php:294
 msgid "Body"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:299
+#: library/modules/custom-forms/admin/admin-loader.php:295
 msgid "Generate PDF using data"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:300
+#: library/modules/custom-forms/admin/admin-loader.php:296
 msgid "Various service integrations (send to Mailchimp etc)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:301
+#: library/modules/custom-forms/admin/admin-loader.php:297
 msgid "Static"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:302
+#: library/modules/custom-forms/admin/admin-loader.php:298
 msgid "Hover"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:303
+#: library/modules/custom-forms/admin/admin-loader.php:299
 msgid "Active"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:307
+#: library/modules/custom-forms/admin/admin-loader.php:303
 msgid "minute(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:308
+#: library/modules/custom-forms/admin/admin-loader.php:304
 msgid "hour(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:309
+#: library/modules/custom-forms/admin/admin-loader.php:305
 msgid "day(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:310
+#: library/modules/custom-forms/admin/admin-loader.php:306
 msgid "week(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:311
+#: library/modules/custom-forms/admin/admin-loader.php:307
 msgid "month(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:312
+#: library/modules/custom-forms/admin/admin-loader.php:308
 msgid "year(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:314
+#: library/modules/custom-forms/admin/admin-loader.php:310
 msgid "Form name"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:316
+#: library/modules/custom-forms/admin/admin-loader.php:312
 msgid ""
 "Pick a name for your form module. This is for you to be able to identify "
 "forms and will not be displayed on your site."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:317
+#: library/modules/custom-forms/admin/admin-loader.php:313
+#: library/modules/custom-forms/admin/admin-loader.php:385
 msgid "None"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:318
+#: library/modules/custom-forms/admin/admin-loader.php:314
 msgid "Progress bar"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:319
+#: library/modules/custom-forms/admin/admin-loader.php:315
 msgid "Pagination Header"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:320
+#: library/modules/custom-forms/admin/admin-loader.php:316
 msgid ""
 "Choose a pre-made style for your form pagination header or do not show it "
 "at all."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:321
+#: library/modules/custom-forms/admin/admin-loader.php:317
 msgid "Navigation Steps"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:322
+#: library/modules/custom-forms/admin/admin-loader.php:318
 msgid ""
 "When this option is selected no header with pagination will show up on your "
 "form."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:323
+#: library/modules/custom-forms/admin/admin-loader.php:319
 msgid ""
 "When this option is selected you will see a progress bar going from 0% on "
 "first page to 100% on last page."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:324
+#: library/modules/custom-forms/admin/admin-loader.php:320
 msgid "Last step label"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:326
+#: library/modules/custom-forms/admin/admin-loader.php:322
 msgid "Edit last page 'back' button text"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:327
+#: library/modules/custom-forms/admin/admin-loader.php:323
 msgid "« Previous"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:328
+#: library/modules/custom-forms/admin/admin-loader.php:324
 msgid "Submit Button"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:329
-#: library/modules/quizzes/admin/admin-loader.php:254
+#: library/modules/custom-forms/admin/admin-loader.php:325
+#: library/modules/quizzes/admin/admin-loader.php:255
 msgid "Background"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:330
+#: library/modules/custom-forms/admin/admin-loader.php:326
 msgid "Upload Button"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:333
+#: library/modules/custom-forms/admin/admin-loader.php:329
 msgid "Inputs"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:334
-#: library/modules/quizzes/admin/admin-loader.php:251
+#: library/modules/custom-forms/admin/admin-loader.php:330
+msgid "Input"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:331
+#: library/modules/quizzes/admin/admin-loader.php:252
 msgid "Border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:335
+#: library/modules/custom-forms/admin/admin-loader.php:332
 msgid "New Form Entry for {form_name}"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:336
+#: library/modules/custom-forms/admin/admin-loader.php:333
 msgid ""
 "You have a new website form submission: \n"
 " {all_fields} \n"
 " This message was sent from {site_url}"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:334
+msgid "Main"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:336
+#: library/render/class-widget.php:93
+msgid "Form"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:338
+msgid "Error"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:339
+msgid "Filled"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:340
+msgid "Input & Textarea"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:341
+msgid "Select"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:342
+msgid "Select Dropdown"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:343
+msgid "Option color"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:344
+msgid "Option BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:345
+msgid "Search value"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:346
+msgid "Search BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:347
+msgid "Search border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:348
+msgid "Icon"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:349
+msgid "Date Calendar"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:350
+#: library/modules/quizzes/admin/admin-loader.php:258
+msgid "Header BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:351
+#: library/modules/quizzes/admin/admin-loader.php:259
+msgid "Content BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:352
+msgid "Nav arrows"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:353
+msgid "Day of week"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:354
+msgid "Days color"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:355
+msgid "Days BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:356
+msgid "Radio & Checkbox"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:357
+msgid "Check / Icon"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:358
+msgid "Multi Select"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:359
+msgid "Item color"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:360
+msgid "Item BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:361
+msgid "Item border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:362
+msgid "Open settings"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:363
+msgid "Pagination Timeline"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:366
+msgid "Text (Current)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:367
+#: library/modules/custom-forms/front/front-render.php:551
+msgid "Step"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:368
+msgid "Step (Current)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:369
+msgid "Dot border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:370
+msgid "Dot border (Current)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:371
+msgid "Dot BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:372
+msgid "Dot BG (Current)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:373
+msgid "Timeline border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:374
+msgid "Pagination Footer"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:375
+msgid "Back button BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:376
+msgid "Back button value"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:377
+msgid "Next button BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:378
+msgid "Next button value"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:381
+msgid "Notification"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:382
+msgid "Form style"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:383
+msgid "Form padding"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:384
+msgid "Form border"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:386
+msgid "Solid"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:387
+msgid "Dashed"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:388
+msgid "Dotted"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:389
+msgid "Box shadow"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:390
+msgid "Calendar icon"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:391
+msgid "Error BG"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:392
+msgid "Error color"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:396
+msgid "Form Field"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:397
+msgid "Autofill Source"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:398
+msgid "Editable"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:399
+msgid "Form does not have fields that can be autofilled"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:400
+msgid "Disable Autofill"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:403
+msgid "Autofill"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:404
+msgid "Choose which field should be autofilled"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-page-entries.php:160
@@ -4021,16 +4485,7 @@ msgstr ""
 msgid "Showing %s of %s fields"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-page-entries.php:376
-#: library/modules/custom-forms/admin/admin-page-entries.php:378
-msgid "<strong>Country : </strong> %s"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-page-entries.php:384
-msgid "<strong>%s : </strong> %s"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-page-entries.php:495
+#: library/modules/custom-forms/admin/admin-page-entries.php:427
 #: library/modules/quizzes/admin/admin-page-entries.php:287
 msgid "Delete Entries"
 msgstr ""
@@ -4058,25 +4513,50 @@ msgstr ""
 msgid "A simple contact form for your users to contact you"
 msgstr ""
 
+#: library/modules/custom-forms/form-templates/template-contact-form.php:80
+msgid "Phone Number"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:81
+msgid "E.g. +1 3004005000"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:95
+msgid "Message"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:96
+msgid "Enter your message..."
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:115
+msgid "Thank you for contacting us, we will be in touch shortly."
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:117
+msgid "Send Message"
+msgstr ""
+
+#: library/modules/custom-forms/form-templates/template-contact-form.php:119
+#: library/modules/custom-forms/front/front-action.php:630
+msgid "Error: Your form is not valid, please fix the errors!"
+msgstr ""
+
 #: library/modules/custom-forms/front/front-action.php:279
 msgid "Error saving form"
 msgstr ""
 
-#: library/modules/custom-forms/front/front-action.php:378
+#: library/modules/custom-forms/front/front-action.php:393
 msgid "There was an error saving the post data. Please try again"
 msgstr ""
 
-#: library/modules/custom-forms/front/front-action.php:441
-#: library/modules/custom-forms/front/front-action.php:468
+#: library/modules/custom-forms/front/front-action.php:461
+#: library/modules/custom-forms/front/front-action.php:488
 msgid "Form entry saved"
 msgstr ""
 
-#: library/modules/custom-forms/front/front-action.php:565
+#: library/modules/custom-forms/front/front-action.php:585
 msgid "Only logged in users can submit this form"
-msgstr ""
-
-#: library/modules/custom-forms/front/front-action.php:610
-msgid "Error: Your form is not valid, please fix the errors!"
 msgstr ""
 
 #: library/modules/custom-forms/front/front-render.php:217
@@ -4089,185 +4569,205 @@ msgstr ""
 msgid "Form ID not found!"
 msgstr ""
 
-#: library/modules/custom-forms/front/front-render.php:532
-msgid "Step"
+#: library/modules/custom-forms/front/front-render.php:1520
+msgid "Su"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1521
+msgid "Mo"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1522
+msgid "Tu"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1523
+msgid "We"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1524
+msgid "Th"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1525
+msgid "Fr"
+msgstr ""
+
+#: library/modules/custom-forms/front/front-render.php:1526
+msgid "Sa"
 msgstr ""
 
 #: library/modules/custom-forms/loader.php:116
 msgid "Custom Form"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:44
+#: library/modules/polls/admin/admin-loader.php:45
 msgid "View Poll"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:119
+#: library/modules/polls/admin/admin-loader.php:121
 #: library/modules/polls/loader.php:102 library/render/class-widget.php:94
 msgid "Poll"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:120
+#: library/modules/polls/admin/admin-loader.php:122
 msgid "Add Answers"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:121
+#: library/modules/polls/admin/admin-loader.php:123
 msgid "Enter poll answer"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:122
+#: library/modules/polls/admin/admin-loader.php:124
 msgid "Custom input placeholder"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:123
+#: library/modules/polls/admin/admin-loader.php:125
 msgid "Type placeholder here..."
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:124
+#: library/modules/polls/admin/admin-loader.php:126
 msgid "Add custom input field"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:125
+#: library/modules/polls/admin/admin-loader.php:127
 msgid "Remove custom input field"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:126
+#: library/modules/polls/admin/admin-loader.php:128
 msgid "Delete answer"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:127
-#: library/modules/quizzes/admin/admin-loader.php:188
+#: library/modules/polls/admin/admin-loader.php:129
+#: library/modules/quizzes/admin/admin-loader.php:189
 msgid "Details"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:129
-#: library/modules/quizzes/admin/admin-loader.php:191
+#: library/modules/polls/admin/admin-loader.php:131
+#: library/modules/quizzes/admin/admin-loader.php:192
 msgid "Preview"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:130
+#: library/modules/polls/admin/admin-loader.php:132
 msgid "Poll Details"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:132
+#: library/modules/polls/admin/admin-loader.php:134
 msgid "Description (optional)"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:133
+#: library/modules/polls/admin/admin-loader.php:135
 msgid "Poll question"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:134
+#: library/modules/polls/admin/admin-loader.php:136
 msgid "Poll answers"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:135
+#: library/modules/polls/admin/admin-loader.php:137
 msgid "Button label"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:136
+#: library/modules/polls/admin/admin-loader.php:138
 msgid "Enter title"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:137
+#: library/modules/polls/admin/admin-loader.php:139
 msgid "Enter description"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:138
+#: library/modules/polls/admin/admin-loader.php:140
 msgid "Enter question title"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:139
+#: library/modules/polls/admin/admin-loader.php:141
 msgid "E.g. Vote"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:140
+#: library/modules/polls/admin/admin-loader.php:142
 msgid "Poll Appearance"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:141
+#: library/modules/polls/admin/admin-loader.php:143
 msgid "Poll results behaviour"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:142
+#: library/modules/polls/admin/admin-loader.php:144
 msgid "Poll results style"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:143
+#: library/modules/polls/admin/admin-loader.php:145
 msgid "Poll votes count"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:144
+#: library/modules/polls/admin/admin-loader.php:146
 msgid "Colors"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:145
+#: library/modules/polls/admin/admin-loader.php:147
 msgid "Vote number limit"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:146
+#: library/modules/polls/admin/admin-loader.php:148
 msgid "Link on poll"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:147
+#: library/modules/polls/admin/admin-loader.php:149
 msgid "Show after voted"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:148
+#: library/modules/polls/admin/admin-loader.php:150
 msgid "Do not show"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:149
+#: library/modules/polls/admin/admin-loader.php:151
 msgid "Bar chart"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:150
+#: library/modules/polls/admin/admin-loader.php:152
 msgid "Pie chart"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:151
+#: library/modules/polls/admin/admin-loader.php:153
 msgid "Show number of votes"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:152
+#: library/modules/polls/admin/admin-loader.php:154
 msgid "Allow same visitor to vote more than once"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:153
+#: library/modules/polls/admin/admin-loader.php:155
 msgid "How long before user can vote again"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:154
+#: library/modules/polls/admin/admin-loader.php:156
 msgid "Poll description"
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:157
+#: library/modules/polls/admin/admin-loader.php:159
 msgid "Form name cannot be empty! Please pick a name for your poll."
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:158
+#: library/modules/polls/admin/admin-loader.php:160
 msgid "Poll question cannot be empty! Please add questions for your poll."
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:159
+#: library/modules/polls/admin/admin-loader.php:161
 msgid "Poll answers cannot be empty! Please add answers to your poll."
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:164
+#: library/modules/polls/admin/admin-loader.php:166
 msgid "Enable AJAX to prevent refresh while submitting poll data."
 msgstr ""
 
-#: library/modules/polls/admin/admin-loader.php:165
+#: library/modules/polls/admin/admin-loader.php:167
 msgid "Enable this option to display number of votes on Bar Chart results."
 msgstr ""
 
-#: library/modules/polls/admin/admin-page-entries.php:284
-#: library/modules/polls/front/front-render.php:747
-msgid "Question"
-msgstr ""
-
-#: library/modules/polls/admin/admin-page-entries.php:284
-#: library/modules/polls/front/front-render.php:747
-#: library/modules/quizzes/admin/admin-loader.php:186
+#: library/modules/polls/admin/admin-page-entries.php:340
+#: library/modules/polls/front/front-action.php:310
+#: library/modules/polls/front/front-render.php:862
+#: library/modules/quizzes/admin/admin-loader.php:187
 msgid "Results"
 msgstr ""
 
@@ -4283,265 +4783,271 @@ msgstr ""
 msgid "Delete Polls"
 msgstr ""
 
-#: library/modules/polls/front/front-action.php:240
-#: library/modules/polls/front/front-action.php:247
-#: library/modules/polls/front/front-render.php:205
+#: library/modules/polls/front/front-action.php:249
+#: library/modules/polls/front/front-action.php:273
+#: library/modules/polls/front/front-render.php:214
 msgid "Your vote has been saved"
 msgstr ""
 
-#: library/modules/polls/front/front-action.php:254
-msgid "You need to select a poll option"
-msgstr ""
-
-#: library/modules/polls/front/front-action.php:261
-msgid "You have already submitted a vote to this poll"
-msgstr ""
-
-#: library/modules/polls/front/front-render.php:212
-msgid "You have already voted for this poll"
-msgstr ""
-
-#: library/modules/polls/front/front-render.php:269
-#: library/modules/polls/front/front-render.php:288
-msgid "View results"
-msgstr ""
-
-#: library/modules/polls/front/front-render.php:303
-msgid "Poll ID attribute is required!"
-msgstr ""
-
-#: library/modules/polls/front/front-render.php:313
-msgid "Poll not found!"
-msgstr ""
-
-#: library/modules/polls/front/front-render.php:698
+#: library/modules/polls/front/front-action.php:263
+#: library/modules/polls/front/front-render.php:715
 msgid "Back To poll"
 msgstr ""
 
-#: library/modules/polls/front/front-render.php:775
+#: library/modules/polls/front/front-action.php:280
+msgid "You need to select a poll option"
+msgstr ""
+
+#: library/modules/polls/front/front-action.php:287
+msgid "You have already submitted a vote to this poll"
+msgstr ""
+
+#: library/modules/polls/front/front-action.php:339
+#: library/modules/polls/front/front-render.php:883
 msgid " vote(s)"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:47
+#: library/modules/polls/front/front-render.php:221
+msgid "You have already voted for this poll"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:280
+msgid "No votes yet"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:282
+#: library/modules/polls/front/front-render.php:302
+msgid "View results"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:317
+msgid "Poll ID attribute is required!"
+msgstr ""
+
+#: library/modules/polls/front/front-render.php:327
+msgid "Poll not found!"
+msgstr ""
+
+#: library/modules/quizzes/admin/admin-loader.php:48
 msgid "View Quizzes"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:182
+#: library/modules/quizzes/admin/admin-loader.php:183
 msgid "No Wrong Answer"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:183
+#: library/modules/quizzes/admin/admin-loader.php:184
 msgid ""
 "Similar to quizzes you see on Facebook. e.g. Answer these questions, and we "
 "will tell you what breed of dog you are at heart."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:184
+#: library/modules/quizzes/admin/admin-loader.php:185
 msgid "Knowledge"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:185
+#: library/modules/quizzes/admin/admin-loader.php:186
 msgid ""
 "Quizzes that test your knowledge af things. e.g. Just how well exactly do "
 "you know your Seinfeld quotes."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:187
-#: library/modules/quizzes/admin/admin-loader.php:225
+#: library/modules/quizzes/admin/admin-loader.php:188
+#: library/modules/quizzes/admin/admin-loader.php:226
 msgid "Questions"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:193
+#: library/modules/quizzes/admin/admin-loader.php:194
 msgid "List"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:194
+#: library/modules/quizzes/admin/admin-loader.php:195
 msgid "Grid"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:195
+#: library/modules/quizzes/admin/admin-loader.php:196
 msgid "Visual style"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:196
+#: library/modules/quizzes/admin/admin-loader.php:197
 msgid "Quiz Title"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:197
+#: library/modules/quizzes/admin/admin-loader.php:198
 msgid ""
 "Further customize the appearance for quiz title. It appears as result's "
 "header."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:199
+#: library/modules/quizzes/admin/admin-loader.php:200
 msgid "Further customize appearance for quiz title."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:200
+#: library/modules/quizzes/admin/admin-loader.php:201
 msgid "Further customize appearance for quiz featured image."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:201
+#: library/modules/quizzes/admin/admin-loader.php:202
 msgid "Enable custom styles"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:202
+#: library/modules/quizzes/admin/admin-loader.php:203
 msgid "Further customize appearance for quiz description / intro."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:203
+#: library/modules/quizzes/admin/admin-loader.php:204
 msgid "Description / Intro"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:204
+#: library/modules/quizzes/admin/admin-loader.php:205
 msgid "Feature image"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:205
+#: library/modules/quizzes/admin/admin-loader.php:206
 msgid "Font Color"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:208
+#: library/modules/quizzes/admin/admin-loader.php:209
 msgid "Results behaviour"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:209
+#: library/modules/quizzes/admin/admin-loader.php:210
 msgid ""
 "Pick if you want to reveal the correct answer as user finishes question, or "
 "only after the whole quiz is completed."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:210
+#: library/modules/quizzes/admin/admin-loader.php:211
 msgid "When to reveal correct answer"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:211
+#: library/modules/quizzes/admin/admin-loader.php:212
 msgid "After user picks answer"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:212
+#: library/modules/quizzes/admin/admin-loader.php:213
 msgid "At the end of whole quiz"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:213
+#: library/modules/quizzes/admin/admin-loader.php:214
 msgid "Answer phrasing"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:214
+#: library/modules/quizzes/admin/admin-loader.php:215
 msgid ""
 "Pick how you want the correct & incorrect answers to read. Use "
 "<strong>%UserAnswer%</strong> to pull in the value user selected & "
 "<strong>%CorrectAnswer%</strong> to pull in the correct value."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:215
+#: library/modules/quizzes/admin/admin-loader.php:216
 msgid "Further customize appearance for answer message."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:216
+#: library/modules/quizzes/admin/admin-loader.php:217
 msgid "Correct answer message"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:217
+#: library/modules/quizzes/admin/admin-loader.php:218
 msgid "Incorrect answer message"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:218
+#: library/modules/quizzes/admin/admin-loader.php:219
 msgid "Final count message"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:219
+#: library/modules/quizzes/admin/admin-loader.php:220
 msgid ""
 "Edit the copy of the final result count message that will appear after the "
 "quiz is complete. Use <strong>%YourNum%</strong> to display number of "
 "correct answers & <strong>%Total%</strong> for total number of questions."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:220
+#: library/modules/quizzes/admin/admin-loader.php:221
 msgid ""
 "You can now add some html content here to personalize even more text "
 "displayed as Final Count Message. Try it now!"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:221
+#: library/modules/quizzes/admin/admin-loader.php:222
 msgid "Share on social media"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:222
+#: library/modules/quizzes/admin/admin-loader.php:223
 msgid "Results priority order"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:223
+#: library/modules/quizzes/admin/admin-loader.php:224
 msgid "Pick priority for results"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:224
+#: library/modules/quizzes/admin/admin-loader.php:225
 msgid ""
 "Quizzes can have even number of scores for 2 or more results, in those "
 "scenarious, this order will help determine the result."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:226
+#: library/modules/quizzes/admin/admin-loader.php:227
 msgid "Further customize appearance for quiz questions."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:227
+#: library/modules/quizzes/admin/admin-loader.php:228
 msgid "Result title"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:228
+#: library/modules/quizzes/admin/admin-loader.php:229
 msgid "Result description"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:229
+#: library/modules/quizzes/admin/admin-loader.php:230
 msgid "Further customize the appearance for result description typography."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:230
+#: library/modules/quizzes/admin/admin-loader.php:231
 msgid "Further customize the appearance for result title typography."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:231
+#: library/modules/quizzes/admin/admin-loader.php:232
 msgid "Retake button"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:232
+#: library/modules/quizzes/admin/admin-loader.php:233
 msgid "Further customize the appearance for retake quiz button."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:233
+#: library/modules/quizzes/admin/admin-loader.php:234
 msgid "Form name cannot be empty! Please pick a name for your quiz."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:234
+#: library/modules/quizzes/admin/admin-loader.php:235
 msgid "Quiz question cannot be empty! Please add questions for your quiz."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:235
+#: library/modules/quizzes/admin/admin-loader.php:236
 msgid "Quiz answers cannot be empty! Please add some questions."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:236
+#: library/modules/quizzes/admin/admin-loader.php:237
 msgid "Result answer cannot be empty! Please select a result."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:237
+#: library/modules/quizzes/admin/admin-loader.php:238
 msgid "Please select a correct answer for this question."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:238
+#: library/modules/quizzes/admin/admin-loader.php:239
 msgid "Please add an answer for this question."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:240
+#: library/modules/quizzes/admin/admin-loader.php:241
 msgid "Further customize appearance for quiz answers."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:245
+#: library/modules/quizzes/admin/admin-loader.php:246
 msgid "Customize appearance for correct answers."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:247
+#: library/modules/quizzes/admin/admin-loader.php:248
 msgid ""
 "<strong>Want more control?</strong> <strong><a "
 "href='https://premium.wpmudev.org/project/smartcrawl-wordpress-seo/' "
@@ -4549,81 +5055,73 @@ msgid ""
 "lets you choose how your content looks when it’s shared on social media."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:249
+#: library/modules/quizzes/admin/admin-loader.php:250
 msgid "Further customize appearance for quiz submit button."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:250
+#: library/modules/quizzes/admin/admin-loader.php:251
 msgid "Main styles"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:252
+#: library/modules/quizzes/admin/admin-loader.php:253
 msgid "Further customize border for result's main container."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:253
+#: library/modules/quizzes/admin/admin-loader.php:254
 msgid "Padding"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:255
+#: library/modules/quizzes/admin/admin-loader.php:256
 msgid ""
 "Further customize background color for result's main container, header and "
 "content."
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:256
+#: library/modules/quizzes/admin/admin-loader.php:257
 msgid "Main BG"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:257
-msgid "Header BG"
-msgstr ""
-
-#: library/modules/quizzes/admin/admin-loader.php:258
-msgid "Content BG"
-msgstr ""
-
-#: library/modules/quizzes/admin/admin-loader.php:259
+#: library/modules/quizzes/admin/admin-loader.php:260
 msgid "Color"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:260
+#: library/modules/quizzes/admin/admin-loader.php:261
 msgid "Quiz Result Appearance"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:261
+#: library/modules/quizzes/admin/admin-loader.php:262
 msgid "Margin"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:262
+#: library/modules/quizzes/admin/admin-loader.php:263
 msgid "Summary"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:263
+#: library/modules/quizzes/admin/admin-loader.php:264
 msgid "Further customize appearance for quiz final count message"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:264
+#: library/modules/quizzes/admin/admin-loader.php:265
 msgid "Sharing text"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:265
+#: library/modules/quizzes/admin/admin-loader.php:266
 msgid "Further customize appearance for share on social media text"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:266
+#: library/modules/quizzes/admin/admin-loader.php:267
 msgid "Social icons"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:267
+#: library/modules/quizzes/admin/admin-loader.php:268
 msgid "Further customize appearance for social media icons"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:268
+#: library/modules/quizzes/admin/admin-loader.php:269
 msgid "Wrong answer"
 msgstr ""
 
-#: library/modules/quizzes/admin/admin-loader.php:269
+#: library/modules/quizzes/admin/admin-loader.php:270
 msgid "Customize appearance for wrong answers."
 msgstr ""
 
@@ -4660,6 +5158,10 @@ msgstr ""
 msgid "Share your results"
 msgstr ""
 
+#: library/modules/quizzes/front/front-action.php:274
+msgid "I got %s/%s on %s quiz! "
+msgstr ""
+
 #: library/modules/quizzes/front/front-render.php:315
 msgid "Please, save the quiz in order to preview it."
 msgstr ""
@@ -4678,10 +5180,6 @@ msgstr ""
 
 #: library/render/class-widget.php:90
 msgid "Form Type"
-msgstr ""
-
-#: library/render/class-widget.php:93
-msgid "Form"
 msgstr ""
 
 #: library/render/class-widget.php:101

@@ -6,11 +6,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Forminator_Field
  *
+ * @since 1.0
  * Abstract class for fields
  *
- * @since 1.0
+ * @since 1.0.5
+ * @property array form_settings
+ * @property array field
+ *
  */
-
 abstract class Forminator_Field {
 
 	/**
@@ -72,9 +75,19 @@ abstract class Forminator_Field {
 	 */
 	public $validation_message = array();
 
+	/**
+	 * Activated Autofill Providers for this field based @see autofill_settings
+	 *
+	 * @since 1.0.5
+	 * @var Forminator_Autofill_Provider_Abstract[]
+	 *
+	 */
+	protected $activated_autofill_providers = array();
+
 	public function __construct() {
 		if( is_admin() ) {
 			$this->settings = apply_filters( "forminator_field_{{ $this->slug }}_general_settings", $this->load_settings() );
+			$this->autofill_settings = apply_filters( "forminator_field_{{ $this->slug }}_autofill_settings", $this->autofill_settings() );
 			$this->advanced_settings = apply_filters( "forminator_field_{{ $this->slug }}_advanced_settings", $this->load_advanced_settings() );
 			$this->markup   = apply_filters( "forminator_field_{{ $this->slug }}_admin_markup", $this->admin_html() );
 			$this->defaults = apply_filters( "forminator_field_{{ $this->slug }}_defaults", $this->defaults() );
@@ -203,74 +216,92 @@ abstract class Forminator_Field {
 	 *
 	 * @return mixed
 	 */
-	public static function create_input( $attr = array(), $label = '', $description = '', $required = false ) {
+	public static function create_input( $attr = array(), $label = '', $description = '', $required = false, $design = '' ) {
 		$html   = '';
 		$markup = self::implode_attr( $attr );
 
 		if ( $label ) {
+
 			if ( $required ) {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label>', $label );
-				$html .= sprintf( '<div class="forminator-icon" aria-hidden="true">%s</div>', forminator_get_required_icon() );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s %s</label>', $attr['id'], $label, forminator_get_required_icon() );
 				$html .= '</div>';
+
 			} else {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s</label>', $attr['id'], $label );
+				$html .= '</div>';
+
 			}
+
 		}
 
-		$html .= sprintf( '<input %s />', $markup );
+		if ( $design === 'material' ) {
+			$html .= '<div class="forminator-input--wrap">';
+		}
 
-		if( ! empty( $description ) ) {
+			$html .= sprintf( '<input %s />', $markup );
+
+		if ( $design === 'material' ) {
+			$html .= '</div>';
+		}
+
+		if( ! empty( $description ) || $description !== '' ) {
 			$html .= self::get_description( $description );
 		}
 
 		return apply_filters( 'forminator_field_create_input', $html, $attr, $label, $description );
 	}
 
+
 	/**
-	 * Return new simple input field
+	 * Return new textarea field
 	 *
 	 * @since 1.0
 	 * @param array $attr
 	 *
 	 * @return mixed
 	 */
-	public static function create_simple_input( $attr = array(), $description = '' ) {
+	public static function create_textarea( $attr = array(), $label = '', $description = '', $required = false, $design = '' ) {
 		$html   = '';
-		$markup = self::implode_attr( $attr );
 
-		$html .= sprintf( '<input %s />', $markup );
-
-		if( ! empty( $description ) ) {
-			$html .= self::get_description( $description );
+		$content = '';
+		if ( isset( $attr['content'] ) && $attr['content'] ) {
+			$content = $attr['content'];
+			unset( $attr['content'] );
 		}
 
-		return apply_filters( 'forminator_field_create_simple_input', $html, $attr, $description );
-	}
-
-
-	/**
-	 * Return new input field
-	 *
-	 * @since 1.0
-	 * @param array $attr
-	 *
-	 * @return mixed
-	 */
-	public static function create_textarea( $attr = array(), $label = '', $description = '', $required = false ) {
-		$html   = '';
 		$markup = self::implode_attr( $attr );
 
-		if( $label ) {
+		if ( $label ) {
+
 			if ( $required ) {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label>', $label );
-				$html .= sprintf( '<div class="forminator-icon" aria-hidden="true">%s</div>', forminator_get_required_icon() );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s %s</label>', $attr['id'], $label, forminator_get_required_icon() );
 				$html .= '</div>';
+
 			} else {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s</label>', $attr['id'], $label );
+				$html .= '</div>';
+
 			}
+
 		}
 
-		$html .= sprintf( '<textarea %s ></textarea>', $markup );
+		if ( $design === 'material' ) {
+			$html .= '<div class="forminator-textarea--wrap">';
+		}
+
+			$html .= sprintf( '<textarea %s >%s</textarea>', $markup, $content );
+
+		if ( $design === 'material' ) {
+			$html .= '</div>';
+		}
 
 		if( ! empty( $description ) ) {
 			$html .= self::get_description( $description );
@@ -292,19 +323,27 @@ abstract class Forminator_Field {
 		$html = '';
 
 		if ( $label ) {
+
 			if ( $required ) {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label>', $label );
-				$html .= sprintf( '<div class="forminator-icon" aria-hidden="true">%s</div>', forminator_get_required_icon() );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s %s</label>', $attr['id'], $label, forminator_get_required_icon() );
 				$html .= '</div>';
+
 			} else {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
+
+				$html .= '<div class="forminator-field--label">';
+				$html .= sprintf( '<label id="forminator-label-%s" class="forminator-label">%s</label>', $attr['id'], $label );
+				$html .= '</div>';
+
 			}
+
 		}
 
 		$wp_editor_class = isset( $attr['class'] ) ? $attr['class'] : '';
 		if ( $required ) {
 			add_action( 'the_editor', array( __CLASS__, 'add_required_wp_editor' ) );
-			$wp_editor_class .= ' forminator-wp-editor-required';
+			$wp_editor_class .= ' do-validate forminator-wp-editor-required';
 		}
 		ob_start();
 		wp_editor( '',
@@ -357,9 +396,7 @@ abstract class Forminator_Field {
 
 		if( $label ) {
 			if ( $required ) {
-				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label>', $label );
-				$html .= sprintf( '<div class="forminator-icon" aria-hidden="true">%s</div>', forminator_get_required_icon() );
-				$html .= '</div>';
+				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s %s</label></div>', $label, forminator_get_required_icon() );
 			} else {
 				$html .= sprintf( '<div class="forminator-field--label"><label class="forminator-label">%s</label></div>', $label );
 			}
@@ -430,17 +467,24 @@ abstract class Forminator_Field {
 	 *
 	 * @return string $html
 	 */
-	public static function create_file_upload( $id, $name, $required = false ) {
+	public static function create_file_upload( $id, $name, $required = false, $design ) {
 		$id    = $id . '-field';
 		$class = 'forminator-input-file';
 		if ( $required ) {
-			$class .= '-required';
+			$class .= '-required do-validate';
 		}
 		$html = '<div class="forminator-upload">';
-		$html .= sprintf( '<button type="button" class="forminator-button forminator-upload-button" data-id="%s" id="%s"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
-		                  $id,
-		                  $id,
-		                  __( 'Choose File', Forminator::DOMAIN ) );
+		if ( $design !== 'material') {
+			$html .= sprintf( '<button type="button" class="forminator-button forminator-upload-button" data-id="%s" id="%s">%s</button>',
+							  $id,
+							  $id,
+							  __( 'Choose File', Forminator::DOMAIN ) );
+		} else {
+			$html .= sprintf( '<button type="button" class="forminator-button forminator-upload-button" data-id="%s" id="%s"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
+							  $id,
+							  $id,
+							  __( 'Choose File', Forminator::DOMAIN ) );
+		}
 		$html .= sprintf( '<label class="forminator-label" id="%s">%s</label>', $id, __( 'No file chosen', Forminator::DOMAIN ) );
 		$html .= '<button class="forminator-upload--remove" style="display: none;"><span class="wpdui-icon wpdui-icon-close"></span></button>';
 		$html .= sprintf( '<input class="forminator-input %s" type="file" name="%s" id="%s" style="display:none" %s/>', $class, $name, $id, ( $required ? 'required="true"' : '' ) );
@@ -498,19 +542,6 @@ abstract class Forminator_Field {
 	 */
 	public function has_limit( $field ) {
 		$limit = self::get_property( 'text_limit', $field, false );
-		$limit = filter_var( $limit , FILTER_VALIDATE_BOOLEAN );
-
-		return $limit;
-	}
-
-	/**
-	 * Check if phone field has input limit
-	 *
-	 * @since 1.0
-	 * @return bool
-	 */
-	public function has_phone_limit( $field ) {
-		$limit = self::get_property( 'phone_limit', $field, false );
 		$limit = filter_var( $limit , FILTER_VALIDATE_BOOLEAN );
 
 		return $limit;
@@ -717,6 +748,292 @@ abstract class Forminator_Field {
 	public function get_form_style( $settings ) {
 		if( isset( $settings['form-style'] ) ) {
 			return $settings['form-style'];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Abstraction of autofill settings
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		return $settings;
+	}
+
+
+	/**
+	 * Init available autofill providers
+	 * It will only init provider that ACTIVATED by user form on `fields-autofill` not all of the AVAILABLE
+	 * Call it just when it needed
+	 *
+	 * @since 1.0.5
+	 *
+	 * @example
+	 * @see   Forminator_Field::markup() : when its rendering
+	 * @see   Forminator_CForm_Front_Action::handle_form() : when form submitted
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $settings
+	 */
+	public function init_autofill( $settings ) {
+
+		// Lazy init providers
+		if ( self::is_autofill_enabled( $settings )
+		     && isset( $settings['fields-autofill'] )
+		     && ! empty( $settings['fields-autofill'] ) ) {
+
+			foreach ( $settings['fields-autofill'] as $fields_autofill ) {
+				if ( ! isset( $fields_autofill['provider'] ) || empty( $fields_autofill['provider'] ) ) {
+					continue;
+				}
+
+				$provider       = $fields_autofill['provider'];
+				$provider_parts = explode( '.', $provider );
+				if ( ! isset( $provider_parts[0] ) || empty( $provider_parts[0] ) ) {
+					continue;
+				}
+
+				$provider_slug     = $provider_parts[0];
+				$provider_instance = forminator_autofill_init_provider( $provider_slug );
+
+				if ( $provider_instance ) {
+					$this->activated_autofill_providers[ $provider ] = $provider_instance;
+				}
+			}
+		}
+	}
+
+	/**
+	 * Get Autofill setting as paired ['element_id' => $setting]
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $settings
+	 *
+	 * @return array
+	 */
+	public static function get_autofill_setting( $settings ) {
+
+		// Autofill not enabled
+		if ( ! self::is_autofill_enabled( $settings ) ) {
+			return array();
+		}
+
+		if ( isset( $settings['fields-autofill'] ) && ! empty( $settings['fields-autofill'] ) ) {
+			// build to array key
+			$fields_autofill      = $settings['fields-autofill'];
+			$fields_autofill_pair = array();
+			if ( ! is_array( $fields_autofill ) ) {
+				return array();
+			}
+
+			foreach ( $fields_autofill as $field_autofill ) {
+				if ( ! isset( $field_autofill['element_id'] ) || empty( $field_autofill['element_id'] ) ) {
+					continue;
+				}
+				$fields_autofill_pair[ $field_autofill['element_id'] ] = $field_autofill;
+			}
+
+			return $fields_autofill_pair;
+		}
+
+		return array();
+	}
+
+	/**
+	 * Check if autofill enabled on this form
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $settings
+	 *
+	 * @return bool
+	 */
+	public static function is_autofill_enabled( $settings ) {
+		if ( isset( $settings['use-autofill'] ) && $settings['use-autofill'] == "true" ) {
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Restore value of the POST fields if its not editable, so we ensure its not modified by anykind
+	 * Happens before this POST fields getting validated, so autofill-ed value will be getting validated too
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $field_array
+	 * @param $field_data
+	 * @param $settings
+	 *
+	 * @return array|mixed|string
+	 */
+	public function maybe_re_autofill( $field_array, $field_data, $settings ) {
+		$autofill_settings = self::get_autofill_setting( $settings );
+
+		if ( empty( $autofill_settings ) ) {
+			return $field_data;
+		}
+
+		if ( ! self::is_autofill_enabled( $settings ) ) {
+			return $field_data;
+		}
+
+		$element_id = self::get_property( 'element_id', $field_array );
+		if ( is_array( $field_data ) ) {
+			foreach ( $field_data as $element_id_suffix => $field_datum ) {
+				$element_id                = $element_id . '-' . $element_id_suffix;
+				$element_autofill_settings = self::get_element_autofill_settings( $element_id, $autofill_settings );
+				if ( ! self::element_autofill_is_editable( $element_autofill_settings ) ) {
+					// refill with autofill provider
+					$autofill_value = $this->maybe_get_element_autofill_value( $field_datum, $element_autofill_settings );
+					// only assign autofill value if autofill_value is not empty
+					if ( ! empty( $autofill_value ) ) {
+						$field_data[ $element_id_suffix ] = $autofill_value;
+					}
+				}
+			}
+		} else {
+			$element_autofill_settings = self::get_element_autofill_settings( $element_id, $autofill_settings );
+
+			if ( ! self::element_autofill_is_editable( $element_autofill_settings ) ) {
+				// refill with autofill provider
+				$autofill_value = $this->maybe_get_element_autofill_value( $field_data, $element_autofill_settings );
+				// only assign autofill value if autofill_value is not empty
+				if ( ! empty( $autofill_value ) ) {
+					$field_data = $autofill_value;
+				}
+			}
+
+		}
+
+		return $field_data;
+	}
+
+
+	/**
+	 * Get autofill as markup attributes to used later
+	 *
+	 * @since   1.0.5
+	 *
+	 * @example [
+	 *  'value' => [] / VALUE
+	 *   'readonly' => 'readonly'
+	 * ]
+	 *
+	 * @param $element_id
+	 * @param $settings
+	 *
+	 * @return array;
+	 */
+	public function get_element_autofill_markup_attr( $element_id, $settings ) {
+		if ( ! self::is_autofill_enabled( $settings ) ) {
+			return array();
+		}
+
+		$autofill_settings = self::get_autofill_setting( $settings );
+
+		if ( empty( $autofill_settings ) ) {
+			return array();
+		}
+
+		$element_autofill_settings = self::get_element_autofill_settings( $element_id, $autofill_settings );
+		$value                     = $this->maybe_get_element_autofill_value( '', $element_autofill_settings );
+
+		// only return value when its autofilled
+		if ( ! empty( $value ) ) {
+			$markup_attr = array(
+				'value' => $value,
+			);
+			//only disable if value is not empty
+			if ( ! self::element_autofill_is_editable( $element_autofill_settings ) ) {
+				$markup_attr['readonly'] = 'readonly';
+			}
+
+			return $markup_attr;
+		}
+
+		return array();
+	}
+
+	/**
+	 * Get element autofill value if all requirement(s) fulfilled
+	 * - Autofill Provider activated
+	 *
+	 * @param $element_value
+	 * @param $element_autofill_settings
+	 *
+	 * @return mixed|string
+	 */
+	public function maybe_get_element_autofill_value( $element_value, $element_autofill_settings ) {
+		if ( isset( $element_autofill_settings['provider'] ) && ! empty( $element_autofill_settings['provider'] ) ) {
+			$attribute_provider = $element_autofill_settings['provider'];
+			if ( isset( $this->activated_autofill_providers[ $attribute_provider ] ) ) {
+				$attribute_provider_parts = explode( '.', $attribute_provider );
+				if ( isset( $attribute_provider_parts[1] ) && ! empty( $attribute_provider_parts[1] ) ) {
+					$element_value = $this->activated_autofill_providers[ $attribute_provider ]->fill( $attribute_provider_parts[1] );
+				}
+			}
+		}
+
+		return $element_value;
+	}
+
+	/**
+	 * Check if element has autofill
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $element_id
+	 * @param $autofill_settings
+	 *
+	 * @return bool
+	 */
+	public static function element_has_autofill( $element_id, $autofill_settings ) {
+		return in_array( $element_id, array_keys( $autofill_settings ) );
+	}
+
+	/**
+	 * Get individial element autofill setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $element_id
+	 * @param $autofill_settings
+	 *
+	 * @return array
+	 */
+	public static function get_element_autofill_settings( $element_id, $autofill_settings ) {
+		$autofill_element_settings = array();
+		if ( ! self::element_has_autofill( $element_id, $autofill_settings ) ) {
+			return array();
+		}
+
+		if ( isset( $autofill_settings[ $element_id ] ) && is_array( $autofill_settings[ $element_id ] ) ) {
+			$autofill_element_settings = $autofill_settings[ $element_id ];
+		}
+
+		return $autofill_element_settings;
+	}
+
+	/**
+	 * Check if an element is editable when autofill enabled
+	 *
+	 * @param $element_autofill_settings
+	 *
+	 * @return bool
+	 */
+	public static function element_autofill_is_editable( $element_autofill_settings ) {
+		if ( isset( $element_autofill_settings['is_editable'] ) && $element_autofill_settings['is_editable'] == 'yes' ) {
+			return true;
 		}
 
 		return false;

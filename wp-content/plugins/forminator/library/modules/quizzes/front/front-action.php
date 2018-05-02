@@ -243,7 +243,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 		wp_send_json_success( array(
 			'result'    => $results,
 			'type'      => 'knowledge',
-			'finalText' => $isFinish == true ? $this->_render_knowledge_result( str_replace( '%YourNum%', $rightCounter, str_replace( '%Total%', count( $results ), $finalText ) ), $model ) : ''
+			'finalText' => $isFinish == true ? $this->_render_knowledge_result( str_replace( '%YourNum%', $rightCounter, str_replace( '%Total%', count( $results ), $finalText ) ), $model, $rightCounter, count( $results ) ) : ''
 		) );
 	}
 
@@ -256,7 +256,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 	 *
 	 * @return string
 	 */
-	private function _render_knowledge_result( $text, $model ) {
+	private function _render_knowledge_result( $text, $model, $right_answers, $total_answers ) {
 		ob_start();
 		?>
         <div class="forminator-quiz--footer">
@@ -271,7 +271,7 @@ class Forminator_Quizz_Front_Action extends Forminator_Front_Action {
 			?>
 				<div class="forminator-quiz--share">
 					<p><?php _e( "Share your results", Forminator::DOMAIN ) ?></p>
-					<ul class="forminator-share--icons">
+					<ul class="forminator-share--icons" data-message="<?php printf( __( "I got %s/%s on %s quiz! ", Forminator::DOMAIN ), $right_answers, $total_answers, $model->settings['formName'] ); ?>">
 						<?php if ( $is_fb ): ?>
 							<li class="forminator-share--icon">
 								<a href="#" data-social="facebook" class="wpdui-icon wpdui-icon-social-facebook"></a>

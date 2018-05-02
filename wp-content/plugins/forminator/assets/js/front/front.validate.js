@@ -42,10 +42,10 @@
 			var self = this;
 
 			$(this.element).validate({
-				// add support for wp_editor when its required
-				ignore: ":hidden:not(.forminator-wp-editor-required, .forminator-input-file-required)",
+				// add support for hidden required fields (uploads, wp_editor) when required
+				ignore: ":hidden:not(.do-validate)",
 				errorPlacement: function (error, element) {
-				},		
+				},
 				onfocusout: function (element) {
 					//datepicker will be validated when its closed
 					if ($(element).hasClass('hasDatepicker') === false) {
@@ -55,6 +55,7 @@
 				highlight: function (element, errorClass, message) {
 					var errorMessage = this.errorMap[element.name],
 						$field_holder = $(element).closest('.forminator-field--inner');
+
 
 					if ($field_holder.length === 0) {
 						$field_holder = $(element).closest('.forminator-field');
@@ -66,9 +67,34 @@
 						$field_holder.append('<label class="forminator-label--validation"></label>');
 						$error_holder = $field_holder.find('.forminator-label--validation');
 					}
+
 					$(element).attr('aria-invalid', 'true');
 					$error_holder.text(errorMessage);
 					$field_holder.addClass('forminator-has_error');
+
+					// For time field error message showing up on larger screens
+					if ($(element).hasClass('forminator-input-time')) {
+						var $time_field_holder = $(element).closest('.forminator-field:not(.forminator-field--inner)'),
+							$time_error_holder = $time_field_holder.children('.forminator-label--validation'),
+							$time_normal_error_holder = '',
+							time_error_messages = [];
+
+						if ($time_error_holder.length === 0) {
+							$time_field_holder.append('<label class="forminator-label--validation"></label>');
+							$time_error_holder = $time_field_holder.children('.forminator-label--validation');
+						}
+
+						$time_error_holder.text('');
+						$time_field_holder.find('.forminator-input-time').each(function(){
+							$time_normal_error_holder = $(this).siblings('.forminator-label--validation');
+							// So it works for material design markup
+							if ($time_normal_error_holder.length === 0) {
+								$time_normal_error_holder = $(this).closest('.forminator-field').find('.forminator-label--validation');
+							}
+							time_error_messages.push($time_normal_error_holder.text());
+						});
+						$time_error_holder.html(time_error_messages[0] + ( time_error_messages[0].length > 0 ? ' <br/> ' : '' ) + time_error_messages[1] );
+					}
 				},
 
 				unhighlight: function (element, errorClass, validClass) {
@@ -83,6 +109,32 @@
 					$(element).removeAttr('aria-invalid');
 					$error_holder.remove();
 					$field_holder.removeClass('forminator-has_error');
+
+					// For time field error message showing up on larger screens
+					if ($(element).hasClass('forminator-input-time')) {
+						var $time_field_holder = $(element).closest('.forminator-field:not(.forminator-field--inner)'),
+							$time_error_holder = $time_field_holder.children('.forminator-label--validation'),
+							invalids = 0,
+							time_error_message = '',
+							$time_normal_error_holder = '';
+
+						$time_field_holder.find('.forminator-input-time').each(function(){
+							if ($(this).attr('aria-invalid') === 'true'){
+								$time_normal_error_holder = $(this).siblings('.forminator-label--validation');
+									// So it works for material design markup
+									if ($time_normal_error_holder.length === 0) {
+										$time_normal_error_holder = $(this).closest('.forminator-field').find('.forminator-label--validation');
+									}
+								time_error_message = $time_normal_error_holder.text();
+								invalids++;
+							}
+						});
+						if (invalids === 0) {
+							$time_error_holder.remove();
+						} else {
+							$time_error_holder.text(time_error_message);
+						}
+					}
 				},
 				rules: self.settings.rules,
 				messages: self.settings.messages
@@ -106,13 +158,16 @@
 	$.validator.addMethod("maxwords", function (value, element, param) {
 		return this.optional(element) || jQuery.trim(value).split(/\s+/).length <= param;
 	});
+	$.validator.addMethod("trim", function (value, element, param) {
+		return true === this.optional(element) || 0 !== value.trim().length;
+	});
 	$.validator.addMethod("emailWP", function (value, element, param) {
 		if (this.optional(element)) {
 			return true;
 		}
 
 		// Test for the minimum length the email can be
-		if (value.length < 6) {
+		if (value.trim().length < 6) {
 			return false;
 		}
 
@@ -155,5 +210,3 @@
 	});
 
 })(jQuery, window, document);
-
-

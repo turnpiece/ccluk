@@ -13,7 +13,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	/**
 	 * Current model
 	 *
-	 * @var onject
+	 * @var Forminator_Poll_Form_Model
 	 */
 	protected $model = false;
 
@@ -57,7 +57,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	 *
 	 * @since 1.0
 	 */
-	public function init() {
+	public function before_render() {
 		if ( isset( $_REQUEST['form_id'] ) ) {
 			$this->form_id  = sanitize_text_field( $_REQUEST['form_id'] );
 			$this->model 	= Forminator_Poll_Form_Model::model()->load( $this->form_id );
@@ -263,6 +263,61 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	}
 
 	/**
+	 * Map Custom Votes
+	 *
+	 * @since   1.0.5
+	 * @example [
+	 *  'ELEMENT_ID' => [
+	 *      'EXTRA_VALUE' => COUNT
+	 *  ],
+	 * 'answer-2' => [
+	 *      'skip it' => 9
+	 *  ]
+	 * ]
+	 *
+	 * @return array
+	 */
+	public function map_custom_votes() {
+		$custom_votes = array();
+		if ( is_object( $this->model ) ) {
+			$fields_with_extra_enabled = array();
+
+			$fields_array = $this->model->getFieldsAsArray();
+			// Trigger Update DB if needed.
+			Forminator_Form_Entry_Model::map_polls_entries( $this->model->id, $fields_array );
+
+			$fields = $this->model->getFields();
+
+			foreach ( (array) $fields as $field ) {
+				if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) == true ) {
+					$fields_with_extra_enabled[] = $field->slug;
+				}
+			}
+
+			if ( ! empty( $fields_with_extra_enabled ) ) {
+				$custom_votes = Forminator_Form_Entry_Model::count_polls_with_extra( $this->model->id, $fields_with_extra_enabled );
+			}
+		}
+
+		return $custom_votes;
+	}
+
+	/**
+	 * Get Element Title
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param $element_id
+	 *
+	 * @return mixed
+	 */
+	public function get_field_title( $element_id ) {
+		$fields = $this->model->pluck_fields_array( 'title', 'element_id', $element_id );
+
+		return ( isset( $fields[ $element_id ] ) ? $fields[ $element_id ] : $element_id );
+	}
+
+	/**
 	 * Render the chart
 	 * Generate the google charts js for the chart
 	 *
@@ -273,116 +328,45 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 		$default_chart_colors = $chart_colors;
 		$chart_design         = $this->get_chart_design();
 		?>
-		<script type="text/javascript">
-			(function( $, doc ) {
+        <script type="text/javascript">
+			(function ($, doc) {
 				"use strict";
-				jQuery('document').ready(function(){
+				jQuery('document').ready(function () {
 					google.charts.load('current', {packages: ['corechart', 'bar']});
 					google.charts.setOnLoadCallback(drawPollResults_<?php echo $this->model->id; ?>);
+
 					function drawPollResults_<?php echo $this->model->id; ?>() {
 						var data = google.visualization.arrayToDataTable([
-							['<?php _e( 'Question', Forminator::DOMAIN ) ?>', '<?php _e( 'Results', Forminator::DOMAIN ) ?>', {role: 'style'}, {role: 'annotation'}],
+							['<?php _e( 'Question', Forminator::DOMAIN ); ?>', '<?php _e( 'Results', Forminator::DOMAIN ); ?>', {role: 'style'}, {role: 'annotation'}],
 							<?php
+							$fields_array = $this->model->getFieldsAsArray();
+							$map_entries = Forminator_Form_Entry_Model::map_polls_entries( $this->model->id, $fields_array );
 							$fields = $this->model->getFields();
-							if ( !is_null( $fields ) ) {
+							if ( ! is_null( $fields ) ) {
 								foreach ( $fields as $field ) {
-									$label = $field->__get( 'main_label' );
-									if ( !$label ) {
-										$label = $field->__get( 'field_label' );
-										if ( !$label ) {
-											$label = addslashes( $field->title );
-										}
-									}
+									$label = addslashes( $field->title );
 
 									if ( empty( $chart_colors ) ) {
 										$chart_colors = $default_chart_colors;
 									}
-									$color      = array_shift( $chart_colors );
-									$slug       = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
-									$entries    = Forminator_Form_Entry_Model::count_entries_by_form_and_field( $this->model->id, $slug );
+
+									$color   = array_shift( $chart_colors );
+									$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
+									$entries = 0;
+									if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+										$entries = $map_entries[ $slug ];
+									}
 									$style      = 'color: ' . $color;
-									$annotation = Forminator_Form_Entry_Model::count_entries_by_form_and_field( $this->model->id, $slug ) . ' vote(s)';
+									$annotation = $entries . ' vote(s)';
 
 									echo "['$label', $entries, '$style', '$annotation'],";
 								}
-
 							}
 							?>
 						]);
 
-						<?php if ( $chart_design != 'pie' ) { ?>
-
-							var options = {
-								annotations: {
-									textStyle: {
-										fontName: '"Roboto", Arial, sans-serif',
-										fontSize: 13,
-										bold: false,
-										color: '#333'
-									}
-								},
-								backgroundColor: 'transparent',
-								fontSize: 13,
-								fontName: '"Roboto", Arial, sans-serif',
-								hAxis: {
-									format: 'decimal',
-									baselineColor: '#4D4D4D',
-									gridlines: {
-										color: '#E9E9E9'
-									},
-									textStyle: {
-										color: '#4D4D4D',
-										fontName: '"Roboto", Arial, sans-serif',
-										fontSize: 13,
-										bold: false,
-										italic: false
-									},
-									minValue: 0
-								},
-								vAxis: {
-									baselineColor: '#4D4D4D',
-									gridlines: {
-										color: '#E9E9E9'
-									},
-									textStyle: {
-										color: '#4D4D4D',
-										fontName: '"Roboto", Arial, sans-serif',
-										fontSize: 13,
-										bold: false,
-										italic: false
-									},
-									minValue: 0
-								},
-								tooltip: {
-									isHtml: true,
-									trigger: 'none'
-								},
-								legend: {
-									position: "none"
-								}
-							};
-
-						<?php } else { ?>
-
-							var options = {
-								colors: <?php echo wp_json_encode( $default_chart_colors )?>,
-								backgroundColor: 'transparent',
-								fontSize: 13,
-								fontName: '"Roboto", Arial, sans-serif',
-								tooltip: {
-									isHtml: false,
-									ignoreBounds: true,
-									trigger: 'focus',
-									text: 'both',
-									textStyle:{
-										fontName: '"Roboto", Arial, sans-serif'
-									}
-								}
-							};
-
-						<?php } ?>
-
-						<?php if ( $chart_design == 'pie' ) {	?>
+						var options = <?php echo wp_json_encode( Forminator_Poll_Front::get_default_chart_options( $this->model ) ); ?>;
+						<?php if ( 'pie' == $chart_design ) { ?>
 						var chart = new google.visualization.PieChart(document.getElementById('forminator-chart-poll'));
 						<?php } else { ?>
 						var chart = new google.visualization.BarChart(document.getElementById('forminator-chart-poll'));
@@ -391,8 +375,8 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 						chart.draw(data, options);
 					}
 				});
-			}( jQuery, document ));
-			</script>
+			}(jQuery, document));
+        </script>
 		<?php
 	}
 }

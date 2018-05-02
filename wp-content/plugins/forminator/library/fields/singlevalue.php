@@ -170,6 +170,27 @@ class Forminator_SingleValue extends Forminator_Field {
 	}
 
 	/**
+	 * Autofill Setting
+	 *
+	 * @since 1.0.5
+	 *
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
+	public function autofill_settings( $settings = array() ) {
+		$providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
+
+		$autofill_settings = array(
+			'select' => array(
+				'values' => forminator_build_autofill_providers( $providers ),
+			),
+		);
+
+		return $autofill_settings;
+	}
+
+	/**
 	 * Field admin markup
 	 *
 	 * @since 1.0
@@ -227,26 +248,43 @@ class Forminator_SingleValue extends Forminator_Field {
 		$value_type  = $field['value_type'] ? $field['value_type'] : "multiselect";
 
 		if ( $value_type == "select" ) {
+
 			$html = sprintf( '<select class="forminator-select--field forminator-select" id="%s" data-required="%s" name="%s">', $id, $required, $name );
 
-			foreach ( $options as $option ) {
-				$value = $option['value'] ? $option['value'] : $option['label'];
-				$html  .= sprintf( '<option value="%s">%s</option>', $value, $option['label'] );
-			}
+				foreach ( $options as $option ) {
+					$value = $option['value'] ? $option['value'] : $option['label'];
+					$html  .= sprintf( '<option value="%s">%s</option>', $value, $option['label'] );
+				}
 
 			$html .= sprintf( '</select>' );
+
 		} else {
+
 			$uniq_id = uniqid();
+
 			foreach ( $options as $option ) {
+
 				$input_id = $id . '-' . $i . '-' . $uniq_id;
 				$value    = $option['value'] ? $option['value'] : $option['label'];
-				$html     .= '<div class="forminator-radio">';
-				$html     .= sprintf( '<input id="%s" name="%s" type="radio" value="%s" class="forminator-radio--input">', $input_id, $name, $value );
-				$html     .= sprintf( '<label for="%s" class="forminator-radio--design" aria-hidden="true"></label>', $input_id );
-				$html     .= sprintf( '<label for="%s" class="forminator-radio--label">%s</label>', $input_id, $option['label'] );
-				$html     .= '</div>';
+
+				if ( $this->get_form_style( $settings ) == 'clean' ) {
+
+					$html	.= sprintf( '<label class="forminator-radio"><input id="%s" name="%s" type="radio" value="%s"> %s</label>', $input_id, $name, $value, $option['label'] );
+
+				} else {
+
+					$html     .= '<div class="forminator-radio">';
+					$html     .= sprintf( '<input id="%s" name="%s" type="radio" value="%s" class="forminator-radio--input">', $input_id, $name, $value );
+					$html     .= sprintf( '<label for="%s" class="forminator-radio--design" aria-hidden="true"></label>', $input_id );
+					$html     .= sprintf( '<label for="%s" class="forminator-radio--label">%s</label>', $input_id, $option['label'] );
+					$html     .= '</div>';
+
+				}
+
 				$i ++;
+
 			}
+
 		}
 
 		return apply_filters( 'forminator_field_single_markup', $html, $id, $required, $options, $value_type );
