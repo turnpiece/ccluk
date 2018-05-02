@@ -8,7 +8,7 @@
  */
 get_header();
 
-if (have_posts()) : // insert whatever content is on the home page ?>
+if (have_posts() && get_the_content() != '') : // insert whatever content is on the home page ?>
 
 <section id="primary" class="section site-content default-page">
 

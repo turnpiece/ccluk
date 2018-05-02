@@ -34,8 +34,16 @@ body {
 		margin-bottom: 0;
 
 		.title {
-			font-size: $font-size-sm !important;
+			font-size: $font-size-mid !important;
 		}
+	}
+
+	h1, h2, h3, h4, h5, h6 {
+		color: inherit;
+	}
+
+	a.cta {
+		@include padding-right( 6.8 );
 	}
 }
 

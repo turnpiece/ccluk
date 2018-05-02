@@ -677,6 +677,8 @@ body.page-template-homepage #secondary {
       clear: both; }
     body.page-template-homepage #secondary .widget.recent-posts-widget-with-thumbnails ul > li .rpwwt-post-title {
       display: block; }
+body.page-template-homepage .slick-slide img {
+  min-width: 600px; }
 
 /** Register **/
 .register fieldset,
@@ -1412,7 +1414,12 @@ MAXIMUM width of 480 pixels (phones)
       top: 0;
       margin-bottom: 0; }
       body .bb-slider-container .title {
-        font-size: 15px !important; }
+        font-size: 24px !important; }
+    body h1, body h2, body h3, body h4, body h5, body h6 {
+      color: inherit; }
+    body a.cta {
+      padding-right: 68px;
+      padding-right: 6.8rem; }
 
   #buddypress .dir-form div.item-list-tabs ul li a span,
   #buddypress div#subnav.item-list-tabs ul li a span,
