@@ -240,11 +240,6 @@ class Give_Updates {
 	 * @access public
 	 */
 	public function __register_menu() {
-		// Bailout.
-		if ( ! give_test_ajax_works() ) {
-			return;
-		}
-
 		// Load plugin updates.
 		$this->__register_plugin_addon_updates();
 
@@ -304,7 +299,7 @@ class Give_Updates {
 		) {
 			delete_option( 'give_show_db_upgrade_complete_notice' );
 
-			wp_redirect( add_query_arg( array( 'give-db-update-completed' => 'give_db_upgrade_completed' ) ) );
+			wp_redirect( admin_url( 'edit.php?post_type=give_forms&page=give-updates&give-db-update-completed=give_db_upgrade_completed' ) );
 			exit();
 		}
 	}
@@ -538,24 +533,46 @@ class Give_Updates {
 		/**
 		 * Fix give_doing_upgrade option
 		 */
-		$fresh_new_db_count = $this->get_total_new_db_update_count( true );
-
-		update_option( 'give_db_update_count', $fresh_new_db_count );
+		if( $fresh_new_db_count = $this->get_total_new_db_update_count( true ) ) {
+			update_option( 'give_db_update_count', $fresh_new_db_count );
+		}
 
 		$doing_upgrade_args['update']           = 1;
 		$doing_upgrade_args['heading']          = sprintf( 'Update %s of %s', 1, $fresh_new_db_count );
 		$doing_upgrade_args['total_percentage'] = $this->get_db_update_processing_percentage( true );
 
 		// Remove already completed update from info.
-		if ( give_has_upgrade_completed( $doing_upgrade_args['update_info']['id'] ) ) {
+		if (
+			empty( $doing_upgrade_args['update_info'] )
+			|| give_has_upgrade_completed( $doing_upgrade_args['update_info']['id'] )
+		) {
 			$doing_upgrade_args['update_info'] = current( array_values( $batch->data ) );
 			$doing_upgrade_args['step']        = 1;
 		}
 
-		update_option( 'give_doing_upgrade', $doing_upgrade_args );
+		// Check if dependency completed or not.
+		if ( isset( $doing_upgrade_args['update_info']['depend'] ) ) {
+			foreach ( $doing_upgrade_args['update_info']['depend'] as $depend ) {
+				if ( give_has_upgrade_completed( $depend ) ) {
+					continue;
+				}
 
-		$log_data .= 'Updated doing update:' . "\n";
-		$log_data .= print_r( $doing_upgrade_args, true ) . "\n";
+				$doing_upgrade_args['update_info']      = $all_updates[ array_search( $depend, $all_update_ids ) ];
+				$doing_upgrade_args['step']             = 1;
+				$doing_upgrade_args['percentage']       = 0;
+				$doing_upgrade_args['total_percentage'] = 0;
+
+				break;
+			}
+		}
+
+		if( ! empty( $doing_upgrade_args['update_info'] ) ) {
+			update_option( 'give_doing_upgrade', $doing_upgrade_args );
+
+			$log_data .= 'Updated doing update:' . "\n";
+			$log_data .= print_r( $doing_upgrade_args, true ) . "\n";
+		}
+
 		Give()->logs->add( 'Update Health Check', $log_data, 0, 'update' );
 	}
 
@@ -567,6 +584,8 @@ class Give_Updates {
 	 * @access public
 	 */
 	public function __show_notice() {
+		$current_screen = get_current_screen();
+
 		// Bailout.
 		if ( ! current_user_can( 'manage_give_settings' ) ) {
 			return;
@@ -579,7 +598,7 @@ class Give_Updates {
 
 
 		// Bailout.
-		if ( isset( $_GET['page'] ) && 'give-updates' === $_GET['page'] ) {
+		if ( in_array( $current_screen->base, array( 'give_forms_page_give-updates', 'update-core' ) ) ) {
 			return;
 		}
 
@@ -596,11 +615,6 @@ class Give_Updates {
 				<a href="<?php echo esc_url( add_query_arg( array( 'give-restart-db-upgrades' => 1 ), admin_url( 'edit.php?post_type=give_forms&page=give-updates' ) ) ); ?>" class="button button-primary give-restart-updater-btn">
 					<?php _e( 'Restart the updater', 'give' ); ?>
 				</a>
-				<script type="text/javascript">
-					jQuery('.give-restart-updater-btn').click('click', function () {
-						return window.confirm('<?php echo esc_js( __( 'It is recommended that you backup your database before proceeding. Do you want to run the update now?', 'give' ) ); ?>'); // jshint ignore:line
-					});
-				</script>
 			<?php else: ?>
 				<strong><?php _e( 'Database Update', 'give' ); ?></strong>
 				&nbsp;&#8211;&nbsp;<?php _e( 'An unexpected issue occurred during the database update which caused it to stop automatically. Please contact support for assistance.', 'give' ); ?>
@@ -661,11 +675,6 @@ class Give_Updates {
 					<?php _e( 'Run the updater', 'give' ); ?>
 				</a>
 			</p>
-			<script type="text/javascript">
-				jQuery('.give-run-update-now').click('click', function () {
-					return window.confirm('<?php echo esc_js( __( 'It is recommended that you backup your database before proceeding. Do you want to run the update now?', 'give' ) ); ?>'); // jshint ignore:line
-				});
-			</script>
 			<?php
 			$desc_html = ob_get_clean();
 
@@ -794,7 +803,7 @@ class Give_Updates {
 		if ( self::$background_updater->is_paused_process() ) {
 			$update_info = array(
 				'message'    => __( 'The updates have been paused.', 'give' ),
-				'heading'    => __( '', 'give' ),
+				'heading'    => '',
 				'percentage' => 0,
 			);
 
@@ -804,7 +813,7 @@ class Give_Updates {
 
 			$response_type = 'error';
 
-		} elseif ( empty( $update_info ) ) {
+		} elseif ( empty( $update_info ) || ! $this->get_total_new_db_update_count( true ) ) {
 			$update_info   = array(
 				'message'    => __( 'Give database updates completed successfully. Thank you for updating to the latest version!', 'give' ),
 				'heading'    => __( 'Updates Completed.', 'give' ),

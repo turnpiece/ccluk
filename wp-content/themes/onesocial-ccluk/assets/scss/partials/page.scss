@@ -34,6 +34,12 @@ body.page {
 	&.page-template-page-nosidebar {
 		#main {
 			max-width: $content_w;
+
+			#primary {
+				article > .entry-header {
+					text-align: center;
+				}
+			}
 		}
 	}
 
