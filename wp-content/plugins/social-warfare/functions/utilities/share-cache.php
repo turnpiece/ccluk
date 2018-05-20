@@ -85,7 +85,7 @@ function swp_is_cache_fresh( $post_id, $output = false, $ajax = false ) {
 	$fresh_cache = false;
 
 	// Bail if output isn't being forced and legacy caching isn't enabled.
-	if ( ! $output && 'legacy' !== $options['cacheMethod'] ) {
+	if ( ! $output && isset( $options['cache_metod'] ) && 'legacy' !== $options['cache_method'] ) {
 		if ( empty( $_GET['swp_cache'] ) && empty( $_POST['swp_cache'] ) ) {
 			$fresh_cache = true;
 		}
@@ -121,6 +121,10 @@ function swp_is_cache_fresh( $post_id, $output = false, $ajax = false ) {
 	} else {
 		$fresh_cache = false;
 	}
+
+    if ( _swp_is_debug( 'is_cache_fresh' ) ) {
+        echo "The cache is fresh: " . (int) $fresh_cache;
+    }
 
 	return $fresh_cache;
 }
@@ -168,7 +172,7 @@ function swp_cache_rebuild() {
 	 *
 	 */
 	foreach ( $shares as $key => $value ) :
-		swp_process_url( get_permalink( $post_id ) , $key , $post_id );
+		SWP_URL_Management::process_url( get_permalink( $post_id ) , $key , $post_id );
 	endforeach;
 
 	/**
@@ -228,13 +232,12 @@ add_action( 'publish_post', 'swp_clear_bitly_cache' );
  * @return null
  */
 function swp_clear_bitly_cache() {
-	$icons_array = array(
-		'type'		=> 'buttons'
-	);
-	$networks = apply_filters( 'swp_button_options' , $icons_array );
-	foreach($networks['content'] as $network=>$data):
-		delete_post_meta( get_the_ID() ,'bitly_link_' . $network );
+    global $swp_social_networks;
+
+	foreach( $swp_social_networks as $network_key => $network ):
+		delete_post_meta( get_the_ID() ,'bitly_link_' . $network_key );
 	endforeach;
+
 	delete_post_meta( get_the_ID() ,'bitly_link' );
 }
 
@@ -264,7 +267,7 @@ function swp_cache_store_autoloads() {
 function swp_cache_rebuild_og_image($post_id) {
 
 	// Check if an OG image has been declared
-	$image_id = get_post_meta( $post_id , 'nc_ogImage' , true );
+	$image_id = get_post_meta( $post_id , 'swp_og_image' , true );
 	if ( $image_id ):
 
 		$cur_image_url = get_post_meta( $post_id , 'swp_open_graph_image_url' , true );
@@ -300,7 +303,7 @@ function swp_cache_rebuild_og_image($post_id) {
 function swp_cache_rebuild_pin_image($post_id) {
 
 	// Check if a custom pinterest image has been declared
-	$pin_image_id = get_post_meta( $post_id , 'nc_pinterestImage' , true );
+	$pin_image_id = get_post_meta( $post_id , 'swp_pinterest_image' , true );
 	if ( false !== $pin_image_id ) :
 		$pin_image_url = wp_get_attachment_url( $pin_image_id );
 		$cur_image_url = get_post_meta( $post_id , 'swp_pinterest_image_url' , true );
@@ -357,17 +360,17 @@ function swp_output_cache_trigger( $info ) {
 
 		// Fetch the alternate URL if share recovery is turned on
 		if( $info['swp_user_options']['recover_shares'] == true ) {
-			$alternateURL = swp_get_alt_permalink( $info['postID'] );
-			$alternateURL = apply_filters( 'swp_recovery_filter',$alternateURL );
+			$alternateURL = SWP_Permalink::get_alt_permalink( $info['postID'] );
+			$alternateURL = apply_filters( 'swp_recovery_filter', $alternateURL );
 		} else {
 			$alternateURL = false;
 		}
 
 		// Bail if we're not using the newer cache method.
-		if ( 'legacy' === $info['swp_user_options']['cacheMethod'] && is_singular() ) {
+		if ( is_singular() && !empty( $info['swp_user_options']['cache_method'] ) && 'legacy' === $info['swp_user_options']['cache_method'] ) {
 			ob_start(); ?>
 
-			var swp_buttons_exist = (document.getElementsByClassName( 'nc_socialPanel' ).length > 0);
+			var swp_buttons_exist = (document.getElementsByClassName( 'swp_social_panel' ).length > 0);
 			if ( swp_buttons_exist ) {
 				document.addEventListener('DOMContentLoaded', function() {
 					swp_admin_ajax = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
@@ -400,7 +403,7 @@ function swp_output_cache_trigger( $info ) {
 			?>
 	        var within_timelimit;
 			swp_admin_ajax = '<?php echo admin_url( 'admin-ajax.php' ); ?>';
-			var swp_buttons_exist = (document.getElementsByClassName( 'nc_socialPanel' ).length > 0);
+			var swp_buttons_exist = (document.getElementsByClassName( 'swp_social_panel' ).length > 0);
 			if ( swp_buttons_exist ) {
 				document.addEventListener('DOMContentLoaded', function() {
 					var swp_check_for_js = setInterval( function() {

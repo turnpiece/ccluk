@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-07 14:52:42+0000\n"
+"PO-Revision-Date: 2018-05-09 07:11:47+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,32 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: nb_NO\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: modules/acceptance.php:243
+msgid "Condition"
+msgstr "Betingelse"
+
+#. translators: 1: 'Consented' or 'Not consented', 2: conditions
+#: modules/acceptance.php:202
+msgctxt "mail output for acceptance checkboxes"
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: modules/acceptance.php:186
+msgid "Not consented"
+msgstr "Har ikke gitt samtykke"
+
+#: modules/acceptance.php:184
+msgid "Consented"
+msgstr "Har gitt samtykke"
+
+#: includes/submission.php:196
+msgid "Sending mail has been aborted."
+msgstr "E-postinnsending har blitt avbrutt"
+
+#: admin/includes/editor.php:211
+msgid "You can edit messages used in various situations here. For details, see %s."
+msgstr "Her kan du redigere meldinger brukt i forskjellige situasjoner. For detaljer, besøk %s."
 
 #: admin/includes/editor.php:210
 msgid "Editing Messages"
@@ -19,9 +45,40 @@ msgstr "Redigeringsmeldinger"
 msgid "https://contactform7.com/editing-messages/"
 msgstr "https://contactform7.com/editing-messages/"
 
+#: admin/includes/editor.php:130
+msgid "You can edit the mail template here. For details, see %s."
+msgstr "Her kan du redigere e-postmal. For detaljer, besøk %s."
+
+#: admin/includes/editor.php:57
+msgid "You can edit the form template here. For details, see %s."
+msgstr "Her kan du redigere skjemamal. For detaljer, besøk %s."
+
+#: admin/includes/editor.php:56
+msgid "Editing Form Template"
+msgstr "Redigerer skjemamal."
+
 #: admin/includes/editor.php:55
 msgid "https://contactform7.com/editing-form-template/"
 msgstr "https://contactform7.com/editing-form-template/"
+
+#. translators: screen reader text
+#: admin/edit-contact-form.php:192
+msgid "(left and right arrow)"
+msgstr "(venstre- og høyrepil)"
+
+#. translators: 1: ◀ ▶ dashicon, 2: screen reader text for the dashicon
+#: admin/edit-contact-form.php:187
+msgid "%1$s %2$s keys switch panels"
+msgstr "%1$s %2$s tastene skifter paneler"
+
+#. translators: screen reader text
+#: admin/admin.php:326
+msgid "(configuration error)"
+msgstr "(konfigurasjonsfeil)"
+
+#: admin/admin.php:319
+msgid "How to resolve?"
+msgstr "Hvordan løse?"
 
 #: admin/includes/welcome-panel.php:37
 msgid "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
@@ -34,7 +91,7 @@ msgstr "Gi en donasjon"
 #. translators: %s: link labeled 'making a donation'
 #: admin/includes/welcome-panel.php:35
 msgid "If you enjoy using Contact Form 7 and find it useful, please consider %s."
-msgstr "Hvis du er fornøyd med Kontaktskjema 7 og finner den nyttig, vær så snill %s."
+msgstr "Hvis du er fornøyd med Contact Form 7 og finner den nyttig, vær så snill %s."
 
 #: admin/includes/welcome-panel.php:33
 msgid "It is hard to continue development and support for this plugin without contributions from users like you."
@@ -1251,6 +1308,10 @@ msgstr "http://contactform7.com/save-submitted-messages-with-flamingo/"
 msgid "https://contactform7.com/spam-filtering-with-akismet/"
 msgstr "http://contactform7.com/spam-filtering-with-akismet/"
 
+#: admin/includes/editor.php:129
+msgid "Setting Up Mail"
+msgstr "Setter opp e-post"
+
 #: admin/includes/editor.php:128
 msgid "https://contactform7.com/setting-up-mail/"
 msgstr "https://contactform7.com/setting-up-mail/"
@@ -1258,6 +1319,10 @@ msgstr "https://contactform7.com/setting-up-mail/"
 #: admin/includes/welcome-panel.php:35
 msgid "https://contactform7.com/donate/"
 msgstr "https://contactform7.com/donate/"
+
+#: admin/includes/welcome-panel.php:31
+msgid "Contact Form 7 needs your support."
+msgstr "Contact Form 7 trenger din støtte."
 
 #: admin/includes/welcome-panel.php:16
 msgid "Dismiss"

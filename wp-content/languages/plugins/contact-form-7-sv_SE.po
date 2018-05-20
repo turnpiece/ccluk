@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-27 11:26:06+0000\n"
+"PO-Revision-Date: 2018-05-19 14:08:53+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -258,7 +258,7 @@ msgstr "Telefonnumret är ogiltigt."
 
 #: modules/text.php:184
 msgid "The URL is invalid."
-msgstr "URL:en är ogiltig"
+msgstr "URL:en är ogiltig."
 
 #: modules/text.php:177
 msgid "The e-mail address entered is invalid."
@@ -286,23 +286,23 @@ msgstr "Ett fel inträffade när filen skulle laddas upp."
 
 #: modules/file.php:190
 msgid "The file is too big."
-msgstr "Filen är för stor"
+msgstr "Filen är för stor."
 
 #: modules/file.php:185
 msgid "You are not allowed to upload files of this type."
-msgstr "Du får inte ladda upp den här typen av filer"
+msgstr "Du saknar behörighet att ladda upp filer av denna typ."
 
 #: modules/file.php:180
 msgid "There was an unknown error uploading the file."
-msgstr "Ett okänt fel inträffade när filen laddades upp"
+msgstr "Det var ett okänt fel när filen skulle laddas upp."
 
 #: modules/date.php:128
 msgid "The date is after the latest one allowed."
-msgstr "Datumet är senare än tillåtet"
+msgstr "Datumet är efter det senast tillåtna."
 
 #: modules/date.php:123
 msgid "The date is before the earliest one allowed."
-msgstr "Datumet är tidigare än tillåtet"
+msgstr "Datumet är före den tidigaste tillåtna."
 
 #: modules/date.php:118
 msgid "The date format is incorrect."
@@ -314,7 +314,7 @@ msgstr "Fältet är för kort."
 
 #: includes/contact-form-template.php:188
 msgid "The field is too long."
-msgstr "Fältet är för långt"
+msgstr "Fältet är för långt."
 
 #: includes/contact-form-template.php:181
 msgid "The field is required."
@@ -503,15 +503,15 @@ msgstr "textarea"
 
 #: modules/text.php:283
 msgid "This field requires author's URL"
-msgstr "Det här fältet kräver författarens URL"
+msgstr "Detta fält kräver författarens URL"
 
 #: modules/text.php:278
 msgid "This field requires author's email address"
-msgstr "Det här fältet kräver författarens epost"
+msgstr "Detta fält kräver författarens e-postadress"
 
 #: modules/text.php:273
 msgid "This field requires author's name"
-msgstr "Det här fältet kräver författarens namn"
+msgstr "Detta fält kräver författarens namn"
 
 #: admin/includes/welcome-panel.php:26 modules/text.php:265
 #: modules/text.php:268
@@ -552,7 +552,7 @@ msgstr "URL"
 
 #: modules/text.php:207
 msgid "email"
-msgstr "epost"
+msgstr "e-post"
 
 #: modules/text.php:205
 msgid "text"
@@ -560,19 +560,19 @@ msgstr "text"
 
 #: modules/text.php:189
 msgid "Telephone number that the sender entered is invalid"
-msgstr "Avsändarens telefonnummer är ogiltigt"
+msgstr "Telefonnummer som avsändaren har angett är ogiltig"
 
 #: modules/text.php:182
 msgid "URL that the sender entered is invalid"
-msgstr "Avsändarens URL är ogiltig"
+msgstr "URL som avsändaren angett är ogiltig"
 
 #: modules/text.php:175
 msgid "Email address that the sender entered is invalid"
-msgstr "Avsändarens epost-adress är ogiltig"
+msgstr "E-postadress som avsändaren har angett är ogiltig"
 
 #: modules/submit.php:65
 msgid "Label"
-msgstr "Märkning"
+msgstr "Etikett"
 
 #: modules/submit.php:55
 msgid "Submit Button"
@@ -604,7 +604,7 @@ msgstr "Generera en form-tagg för rullgardinsmeny. För mer information, se %s.
 
 #: modules/select.php:178
 msgid "drop-down menu"
-msgstr "Rullgardinsmeny"
+msgstr "rullgardinsmeny"
 
 #: modules/quiz.php:207
 msgid "One pipe-separated question-answer pair (e.g. The capital of Brazil?|Rio) per line."
@@ -822,11 +822,11 @@ msgstr "Skapa en form-tagg för en grupp kryssrutor. För mer information, se %s
 
 #: modules/checkbox.php:278
 msgid "radio buttons"
-msgstr "Radioknappar"
+msgstr "radioknappar"
 
 #: modules/checkbox.php:276
 msgid "checkboxes"
-msgstr "Kryssrutor"
+msgstr "kryssrutor"
 
 #: modules/really-simple-captcha.php:360
 msgid "This contact form contains CAPTCHA fields, but the necessary libraries (GD and FreeType) are not available on your server."
@@ -956,7 +956,7 @@ msgstr "Det finns ett fält som användaren måste fylla i"
 
 #: includes/contact-form-template.php:172
 msgid "There are terms that the sender must accept"
-msgstr "Det finns villkor som avsändaren måste godkänna."
+msgstr "Det finns villkor som avsändaren måste acceptera"
 
 #: includes/contact-form-template.php:165
 msgid "Submission was referred to as spam"
@@ -1003,7 +1003,7 @@ msgstr "Ditt meddelande"
 
 #: includes/contact-form-template.php:39
 msgid "Your Email"
-msgstr "Din epost"
+msgstr "Din e-post"
 
 #: includes/contact-form-template.php:37
 msgid "(required)"
@@ -1362,7 +1362,7 @@ msgstr "Ändringarna du gjort kommer att förloras om du lämnar sidan."
 
 #: admin/admin.php:189
 msgid "Error in deleting."
-msgstr "Fel vid radera."
+msgstr "Fel vid radering."
 
 #: admin/admin.php:185
 msgid "You are not allowed to delete this item."

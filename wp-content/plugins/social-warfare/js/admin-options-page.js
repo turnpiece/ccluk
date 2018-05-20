@@ -2,6 +2,99 @@
 (function( window, $, undefined ) {
 	'use strict';
 
+    window.onload = function() {
+        /*********************************************************
+    		Temporary patch for the custom color selects.
+    	*********************************************************/
+        /*
+        *  Temp patch on the Visual Options colors.
+        *  This makes the custom colors appear/disappear as necessary.
+        */
+        var panelSelector = "[name=default_colors],[name=hover_colors], [name=single_colors]";
+        var floatSelector = "[name=float_default_colors], [name=float_hover_colors], [name=float_single_colors]";
+
+        //* Hide the custom color inputs by default.
+        $("[name=custom_color],[name=custom_color_outlines],[name=float_custom_color],[name=float_custom_color_outlines]").parent().parent().hide();
+
+        //* Show custom fields if they have already been selected.
+        $(panelSelector).each(function(index, select) {
+            var value = $(select).val();
+            var customColor = $("[name=custom_color]").parent().parent();
+            var customOutlines = $("[name=custom_color_outlines]").parent().parent();
+
+            if ( value.indexOf("custom") !== -1) {
+                //* A custom value is set for this input.
+                if (value.indexOf('outlines') > 0 ) {
+                    customOutlines.show();
+
+                } else {
+                    customColor.show();
+                }
+            }
+        });
+
+
+        //* Same, for floating button options.
+        $(floatSelector).each(function(index, select) {
+            var value = $(select).val();
+            var customColor = $("[name=float_custom_color]").parent().parent();
+            var customOutlines = $("[name=float_custom_color_outlines]").parent().parent();
+
+            if ( value.indexOf("custom") !== -1) {
+                //* A custom value is set for this input.
+                value.indexOf('outlines') > 0 ? customOutlines.show() : customColor.show();
+            }
+        });
+
+
+        //* Change handlers for style.
+        $(panelSelector).on("change", function(e) {
+            var value = e.target.value;
+            var customColor = $("[name=custom_color]").parent().parent();
+            var customOutlines = $("[name=custom_color_outlines]").parent().parent();
+
+            handleCustomColors(e, panelSelector, customColor, customOutlines, value);
+        });
+
+
+        //* Same, for floating button options.
+        $(floatSelector).on("change", function(e) {
+            var value = e.target.value;
+            var customColor = $("[name=float_custom_color]").parent().parent();
+            var customOutlines = $("[name=float_custom_color_outlines]").parent().parent();
+
+            customColor.hide();
+            customOutlines.hide();
+
+            handleCustomColors(e, floatSelector, customColor, customOutlines, value);
+        });
+    }
+
+    function handleCustomColors(event, selector, customColor, customOutlines) {
+        var visible = false;
+        var value = event.target.value;
+        var visibility = {
+            customColor: false,
+            customOutlines: false
+        };
+
+        $(selector).each(function(index, select) {
+            var val = $(select).val();
+            //* Check to see if this or a sibling input has custom_color selected.
+            if (val.indexOf("custom") !== -1) {
+                if (val.indexOf("outlines") > 0) {
+                    visibility.customOutlines = true;
+                } else {
+                    visibility.customColor = true;
+                }
+            }
+        });
+
+        visibility.customColor ? customColor.slideDown() : customColor.slideUp();
+        visibility.customOutlines ? customOutlines.slideDown() : customOutlines.slideUp();
+
+    }
+
 	/*********************************************************
 		A Function send the array of setting to ajax.php
 	*********************************************************/
@@ -35,7 +128,7 @@
 		var values = {};
 
 		// Loop through all the inputs
-		$( 'form.sw-admin-settings-form input, form.sw-admin-settings-form select' ).each( function() {
+		$( 'form.sw-admin-settings-form input, form.sw-admin-settings-form select, form.sw-admin-settings-form textarea' ).each( function() {
 			var $field = $( this );
 
 			var name = $field.attr( 'name' );
@@ -47,61 +140,20 @@
 				value = $field.val();
 			}
 
+
 			values[name] = value;
 		});
 
 		// Create the objects
-		values.newOrderOfIcons = {};
+		values.order_of_icons = {};
 
 		// Loop through each active network
 		$( '.sw-active i' ).each( function() {
 			var network = $( this ).data( 'network' );
-			values.newOrderOfIcons[network] = network;
+			values.order_of_icons[network] = network;
 		});
 
 		return values;
-	}
-
-	/*********************************************************
-		A function to show/hide conditionals
-	*********************************************************/
-	function conditionalFields() {
-		// Loop through all the fields that have dependancies
-		$( 'div[dep]' ).each( function() {
-			// Fetch the conditional values
-			var conDep = $( this ).attr( 'dep' );
-
-			var conDepVal = $.parseJSON( $( this ).attr( 'dep_val' ) );
-			var value;
-
-			// Fetch the value of checkboxes or other input types
-			if ( $( '[name="' + conDep + '"]' ).attr( 'type' ) == 'checkbox' ) {
-				value = $( '[name="' + conDep + '"]' ).prop( 'checked' );
-			} else {
-				value = $( '[name="' + conDep + '"]' ).val();
-			}
-
-			// Show or hide based on the conditional values (and the dependancy must be visible in case it is dependant)
-			if ( $.inArray( value, conDepVal ) !== -1 && $( '[name="' + conDep + '"]' ).parent( '.sw-grid' ).is( ':visible' ) ) {
-				$( this ).show();
-			} else {
-				$( this ).hide();
-			}
-		});
-
-		if ( swp_check_val('floatStyleSource') == false && (swp_select_val('sideDColorSet') == 'customColor' || swp_select_val('sideDColorSet') == 'ccOutlines' || swp_select_val('sideIColorSet') == 'customColor' || swp_select_val('sideIColorSet') == 'ccOutlines' || swp_select_val('sideOColorSet') == 'customColor' || swp_select_val('sideOColorSet') == 'ccOutlines') ) {
-			$( '.sideCustomColor_wrapper' ).slideDown();
-		} else {
-			$( '.sideCustomColor_wrapper' ).slideUp();
-		}
-	}
-
-	function swp_select_val(name) {
-		return $('select[name="' + name + '"]').val();
-	}
-
-	function swp_check_val(name) {
-		return $( '[name="' + name + '"]' ).prop( 'checked' );
 	}
 
 	/*********************************************************
@@ -127,9 +179,9 @@
 	*********************************************************/
 	function tabNavInit() {
 		$( '.sw-tab-selector' ).on( 'click', function( event ) {
-			event.preventDefault ? event.preventDefault() : ( event.returnValue = false );
+			event.preventDefault();
 
-			$( 'html, body' ).animate( { scrollTop: 0 }, 0 );
+			$( 'html, body' ).animate( { scrollTop: 0 }, 300 );
 
 			var tab = $( this ).attr( 'data-link' );
 
@@ -145,7 +197,7 @@
 				socialWarfarePlugin.activateHoverStates();
 			}
 
-			conditionalFields();
+			swpConditionalFields();
 
 		});
 	}
@@ -172,13 +224,13 @@
 
 			saveColorToggle();
 
-			conditionalFields();
+			swpConditionalFields();
 		});
 	}
 
 	function populateOptions() {
 		$( 'form.sw-admin-settings-form input, form.sw-admin-settings-form select' ).on( 'change', function() {
-			conditionalFields();
+			swpConditionalFields();
 
 			socialWarfarePlugin.newOptions = fetchAllOptions();
 
@@ -214,7 +266,6 @@
 
 			// Fetch all the settings
 			var settings = fetchAllOptions();
-			console.log(settings);
 
 			// Prepare date
 			var data = {
@@ -227,7 +278,6 @@
 			$.post( ajaxurl, data, function(response) {
 				// Clear the loading screen
 				clearLoadingScreen();
-				console.log($.parseJSON(response));
 
 				// Reset the default options variable
 				socialWarfarePlugin.defaultOptions = fetchAllOptions();
@@ -249,26 +299,28 @@
 		setTimeout( function() {
 			$( '.sw-loading-bg' ).remove();
 		}, 2000 );
+
+
 	}
 
 	function updateCustomColor() {
-		var visualTheme  = $( 'select[name="visualTheme"]' ).val();
-		var dColorSet    = $( 'select[name="dColorSet"]' ).val();
-		var iColorSet    = $( 'select[name="iColorSet"]' ).val();
-		var oColorSet    = $( 'select[name="oColorSet"]' ).val();
+		var visualTheme  = $( 'select[name="button_shape"]' ).val();
+		var dColorSet    = $( 'select[name="default_colors"]' ).val();
+		var iColorSet    = $( 'select[name="single_colors"]' ).val();
+		var oColorSet    = $( 'select[name="hover_colors"]' ).val();
 
 		$( 'style.swp_customColorStuff' ).remove();
 
-		var colorCode = $( 'input[name="customColor"]' ).val();
+		var colorCode = $( 'input[name="custom_color"]' ).val();
 
 		var customCSS = '';
 
-		if ( dColorSet == 'customColor' || iColorSet == 'customColor' || oColorSet == 'customColor' ) {
-			customCSS = '.nc_socialPanel.swp_d_customColor a, html body .nc_socialPanel.swp_i_customColor .nc_tweetContainer:hover a, body .nc_socialPanel.swp_o_customColor:hover a {color:white} .nc_socialPanel.swp_d_customColor .nc_tweetContainer, html body .nc_socialPanel.swp_i_customColor .nc_tweetContainer:hover, body .nc_socialPanel.swp_o_customColor:hover .nc_tweetContainer {background-color:' + colorCode + ';border:1px solid ' + colorCode + ';}';
+		if ( dColorSet == 'custom_color' || iColorSet == 'custom_color' || oColorSet == 'custom_color' ) {
+			customCSS = '.swp_social_panel.swp_default_customColor a, html body .swp_social_panel.swp_individual_customColor .nc_tweetContainer:hover a, body .swp_social_panel.swp_other_customColor:hover a {color:white} .swp_social_panel.swp_default_customColor .nc_tweetContainer, html body .swp_social_panel.swp_individual_customColor .nc_tweetContainer:hover, body .swp_social_panel.swp_other_customColor:hover .nc_tweetContainer {background-color:' + colorCode + ';border:1px solid ' + colorCode + ';}';
 		}
 
-		if ( dColorSet == 'ccOutlines' || iColorSet == 'ccOutlines' || oColorSet == 'ccOutlines' ) {
-			customCSS = customCSS + ' .nc_socialPanel.swp_d_ccOutlines a, html body .nc_socialPanel.swp_i_ccOutlines .nc_tweetContainer:hover a, body .nc_socialPanel.swp_o_ccOutlines:hover a { color:' + colorCode + '; } .nc_socialPanel.swp_d_ccOutlines .nc_tweetContainer, html body .nc_socialPanel.swp_i_ccOutlines .nc_tweetContainer:hover, body .nc_socialPanel.swp_o_ccOutlines:hover .nc_tweetContainer { background:transparent; border:1px solid ' + colorCode + '; }';
+		if ( dColorSet == 'custom_color_outlines' || iColorSet == 'custom_color_outlines' || oColorSet == 'custom_color_outlines' ) {
+			customCSS = customCSS + ' .swp_social_panel.swp_default_custom_color_outlines a, html body .swp_social_panel.swp_individual_custom_color_outlines .nc_tweetContainer:hover a, body .swp_social_panel.swp_other_custom_color_outlines:hover a { color:' + colorCode + '; } .swp_social_panel.swp_default_custom_color_outlines .nc_tweetContainer, html body .swp_social_panel.swp_individual_custom_color_outlines .nc_tweetContainer:hover, body .swp_social_panel.swp_other_custom_color_outlines:hover .nc_tweetContainer { background:transparent; border:1px solid ' + colorCode + '; }';
 		}
 
 		$( 'head' ).append( '<style type="text/css" class="swp_customColorStuff">' + customCSS + '</style>' );
@@ -276,31 +328,45 @@
 
 	// A function for updating the preview
 	function updateTheme() {
-		var visualTheme  = $( 'select[name="visualTheme"]' ).val();
-		var dColorSet    = $( 'select[name="dColorSet"]' ).val();
-		var iColorSet    = $( 'select[name="iColorSet"]' ).val();
-		var oColorSet    = $( 'select[name="oColorSet"]' ).val();
-		var buttonsClass = 'swp_' + visualTheme + ' swp_d_' + dColorSet + ' swp_i_' + iColorSet + ' swp_o_' + oColorSet;
+		var visualTheme  = getParsedValue("button_shape");
+		var dColorSet    = getParsedValue("default_colors");
+        var iColorSet    = getParsedValue("single_colors");
+		var oColorSet    = getParsedValue("hover_colors");
+
+        function getParsedValue(selector) {
+            var value = $( 'select[name="' + selector + '"]' ).val();
+
+            if (value.indexOf("custom") === 0) {
+                var prefix = selector.slice(0, selector.indexOf("_"));
+                return prefix + "_full_color";
+            }
+
+            return value;
+        }
+
+		var buttonsClass = 'swp_' + visualTheme + ' swp_default_' + dColorSet + ' swp_individual_' + iColorSet + ' swp_other_' + oColorSet;
 
 		// Declare a default lastClass based on the default HTML if we haven't declared one
-		if('undefined' === typeof socialWarfarePlugin.lastClass){
-			console.log('boom');
-			socialWarfarePlugin.lastClass = 'swp_flatFresh swp_d_fullColor swp_i_fullColor swp_o_fullColor';
+		if ('undefined' === typeof socialWarfarePlugin.lastClass) {
+			socialWarfarePlugin.lastClass = 'swp_flat_fresh swp_default_full_color swp_individual_full_color swp_other_full_color';
 		}
+
 		// Put together the new classes, remove the old ones, add the new ones, store the new ones for removal next time.
-		var buttonsClass = 'swp_' + visualTheme + ' swp_d_' + dColorSet + ' swp_i_' + iColorSet + ' swp_o_' + oColorSet;
-		$( '.nc_socialPanel' ).removeClass( socialWarfarePlugin.lastClass ).addClass( buttonsClass );
+		var buttonsClass = 'swp_' + visualTheme + ' swp_default_' + dColorSet + ' swp_individual_' + iColorSet + ' swp_other_' + oColorSet;
+
+
+        $( '.swp_social_panel' ).removeClass("swp_other_medium_gray");
+        $( '.swp_social_panel' ).removeClass( socialWarfarePlugin.lastClass ).addClass( buttonsClass );
+
 		socialWarfarePlugin.lastClass = buttonsClass;
 
-		var lastClass = buttonsClass;
-
-		if ( dColorSet == 'customColor' || dColorSet == 'ccOutlines' || iColorSet == 'customColor' || iColorSet == 'ccOutlines' || oColorSet == 'customColor' || oColorSet == 'ccOutlines' ) {
-			$( '.customColor_wrapper' ).slideDown();
-
-			updateCustomColor();
-		} else {
-			$( '.customColor_wrapper' ).slideUp();
-		}
+		// if ( dColorSet == 'custom_color' || dColorSet == 'custom_color_outlines' || iColorSet == 'custom_color' || iColorSet == 'custom_color_outlines' || oColorSet == 'custom_color' || oColorSet == 'custom_color_outlines' ) {
+		// 	$( '.customColor_wrapper' ).slideDown();
+        //
+		// 	updateCustomColor();
+		// } else {
+		// 	$( '.customColor_wrapper' ).slideUp();
+		// }
 	}
 
 	/*********************************************************
@@ -309,108 +375,67 @@
 
 	function updateButtonPreviews() {
 
+		var defaults = {
+				full_color: 'Full Color',
+				light_gray: 'Light Gray',
+				medium_gray: 'Medium Gray',
+				dark_gray: 'Dark Gray',
+				light_gray_outlines: 'Light Gray Outlines',
+				medium_gray_outlines: 'Medium Gray Outlines',
+				dark_gray_outlines: 'Dark Gray Outlines',
+				color_outlines: 'Color Outlines',
+				custom_color: 'Custom Color',
+				custom_color_outlines: 'Custom Color Outlines'
+			};
+
 		var availableOptions = {
-			flatFresh: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray',
-				lgOutlines: 'Light Gray Outlines',
-				mdOutlines: 'Medium Gray Outlines',
-				dgOutlines: 'Dark Gray Outlines',
-				colorOutlines: 'Color Outlines',
-				customColor: 'Custom Color',
-				ccOutlines: 'Custom Color Outlines'
+			flat_fresh: defaults,
+			leaf: defaults,
+			pill: defaults,
+			three_dee: {
+				full_color: 'Full Color',
+				light_gray: 'Light Gray',
+				medium_gray: 'Medium Gray',
+				dark_gray: 'Dark Gray'
 			},
-			leaf: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray',
-				lgOutlines: 'Light Gray Outlines',
-				mdOutlines: 'Medium Gray Outlines',
-				dgOutlines: 'Dark Gray Outlines',
-				colorOutlines: 'Color Outlines',
-				customColor: 'Custom Color',
-				ccOutlines: 'Custom Color Outlines'
-			},
-			pill: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray',
-				lgOutlines: 'Light Gray Outlines',
-				mdOutlines: 'Medium Gray Outlines',
-				dgOutlines: 'Dark Gray Outlines',
-				colorOutlines: 'Color Outlines',
-				customColor: 'Custom Color',
-				ccOutlines: 'Custom Color Outlines'
-			},
-			threeDee: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray'
-			},
-			connected: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray',
-				lgOutlines: 'Light Gray Outlines',
-				mdOutlines: 'Medium Gray Outlines',
-				dgOutlines: 'Dark Gray Outlines',
-				colorOutlines: 'Color Outlines',
-				customColor: 'Custom Color',
-				ccOutlines: 'Custom Color Outlines'
-			},
-			shift: {
-				fullColor: 'Full Color',
-				lightGray: 'Light Gray',
-				mediumGray: 'Medium Gray',
-				darkGray: 'Dark Gray',
-				lgOutlines: 'Light Gray Outlines',
-				mdOutlines: 'Medium Gray Outlines',
-				dgOutlines: 'Dark Gray Outlines',
-				colorOutlines: 'Color Outlines',
-				customColor: 'Custom Color',
-				ccOutlines: 'Custom Color Outlines'
-			}
+			connected: defaults,
+			shift: defaults,
+			boxed: defaults
 		};
 
 		// Check if we are on the admin page
-		if ( 0 === $( 'select[name="visualTheme"]' ).length ) {
+		if ( 0 === $( 'select[name="button_shape"]' ).length ) {
 			return;
 		}
 
 		// Update the items and previews on the initial page load
-		var visualTheme = $( 'select[name="visualTheme"]' ).val();
-		var dColorSet   = $( 'select[name="dColorSet"]' ).val();
-		var iColorSet   = $( 'select[name="iColorSet"]' ).val();
-		var oColorSet   = $( 'select[name="oColorSet"]' ).val();
+		var visualTheme = $( 'select[name="button_shape"]' ).val();
+		var dColorSet   = $( 'select[name="default_colors"]' ).val();
+		var iColorSet   = $( 'select[name="single_colors"]' ).val();
+		var oColorSet   = $( 'select[name="hover_colors"]' ).val();
 
-		$( 'select[name="dColorSet"] option, select[name="iColorSet"] option, select[name="oColorSet"] option' ).remove();
+		$( 'select[name="default_colors"] option, select[name="single_colors"] option, select[name="hover_colors"] option' ).remove();
 
 		$.each( availableOptions[visualTheme], function( index, value ) {
 			if ( index === dColorSet ) {
-				$( 'select[name="dColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+				$( 'select[name="default_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 			} else {
-				$( 'select[name="dColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+				$( 'select[name="default_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 			}
 
 			if ( index === iColorSet ) {
-				$( 'select[name="iColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+				$( 'select[name="single_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 			} else {
-				$( 'select[name="iColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+				$( 'select[name="single_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 			}
 
 			if ( index === oColorSet ) {
-				$( 'select[name="oColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+				$( 'select[name="hover_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 			} else {
-				$( 'select[name="oColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+				$( 'select[name="hover_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 			}
 
-			if ( dColorSet == 'customColor' || dColorSet == 'ccOutlines' || iColorSet == 'customColor' || iColorSet == 'ccOutlines' || oColorSet == 'customColor' || oColorSet == 'ccOutlines' ) {
+			if ( dColorSet == 'custom_color' || dColorSet == 'custom_color_outlines' || iColorSet == 'custom_color' || iColorSet == 'custom_color_outlines' || oColorSet == 'custom_color' || oColorSet == 'custom_color_outlines' ) {
 				$( '.customColor_wrapper' ).slideDown();
 
 				updateCustomColor();
@@ -420,51 +445,51 @@
 		});
 
 		// If the color set changes, update the preview with the function
-		$( 'select[name="dColorSet"], select[name="iColorSet"], select[name="oColorSet"]' ).on( 'change', updateTheme );
+		$( 'select[name="default_colors"], select[name="single_colors"], select[name="hover_colors"]' ).on( 'change', updateTheme );
 
 		// If the visual theme is updated, update the preview manually
-		$( 'select[name="visualTheme"]' ).on( 'change', function() {
-			var visualTheme  = $( 'select[name="visualTheme"]' ).val();
-			var dColorSet    = $( 'select[name="dColorSet"]' ).val();
-			var iColorSet    = $( 'select[name="iColorSet"]' ).val();
-			var oColorSet    = $( 'select[name="oColorSet"]' ).val();
+		$( 'select[name="button_shape"]' ).on( 'change', function() {
+			var visualTheme  = $( 'select[name="button_shape"]' ).val();
+			var dColorSet    = $( 'select[name="default_colors"]' ).val();
+			var iColorSet    = $( 'select[name="single_colors"]' ).val();
+			var oColorSet    = $( 'select[name="hover_colors"]' ).val();
 			var i = 0;
 			var array = availableOptions[visualTheme];
 			var dColor = array.hasOwnProperty( dColorSet );
 			var iColor = array.hasOwnProperty( iColorSet );
 			var oColor = array.hasOwnProperty( oColorSet );
 
-			$( 'select[name="dColorSet"] option, select[name="iColorSet"] option, select[name="oColorSet"] option' ).remove();
+			$( 'select[name="default_colors"] option, select[name="single_colors"] option, select[name="hover_colors"] option' ).remove();
 
 			$.each( availableOptions[visualTheme], function( index, value ) {
 				if ( index === dColorSet || ( dColor == false && i == 0 ) ) {
-					$( 'select[name="dColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+					$( 'select[name="default_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 				} else {
-					$( 'select[name="dColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+					$( 'select[name="default_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 				}
 
 				if ( index === iColorSet || ( iColor == false && i == 0 ) ) {
-					$( 'select[name="iColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+					$( 'select[name="single_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 				} else {
-					$( 'select[name="iColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+					$( 'select[name="single_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 				}
 
 				if ( index === oColorSet || ( oColor == false && i == 0 ) ) {
-					$( 'select[name="oColorSet"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
+					$( 'select[name="hover_colors"]' ).append( '<option value="' + index + '" selected>' + value + '</option>' );
 				} else {
-					$( 'select[name="oColorSet"]' ).append( '<option value="' + index + '">' + value + '</option>' );
+					$( 'select[name="hover_colors"]' ).append( '<option value="' + index + '">' + value + '</option>' );
 				}
 
 				++i;
 			});
 			// Declare a default lastClass based on the default HTML if we haven't declared one
 			if('undefined' === typeof socialWarfarePlugin.lastClass){
-				console.log('boom');
-				socialWarfarePlugin.lastClass = 'swp_flatFresh swp_d_fullColor swp_i_fullColor swp_o_fullColor';
+				socialWarfarePlugin.lastClass = 'swp_flat_fresh swp_default_full_color swp_individual_full_color swp_other_full_color';
 			}
 			// Put together the new classes, remove the old ones, add the new ones, store the new ones for removal next time.
-			var buttonsClass = 'swp_' + visualTheme + ' swp_d_' + dColorSet + ' swp_i_' + iColorSet + ' swp_o_' + oColorSet;
-			$( '.nc_socialPanel' ).removeClass( socialWarfarePlugin.lastClass ).addClass( buttonsClass );
+			var buttonsClass = 'swp_' + visualTheme + ' swp_default_' + dColorSet + ' swp_individual_' + iColorSet + ' swp_other_' + oColorSet;
+
+			$( '.swp_social_panel' ).removeClass( socialWarfarePlugin.lastClass ).addClass( buttonsClass );
 			socialWarfarePlugin.lastClass = buttonsClass;
 		});
 	}
@@ -473,28 +498,28 @@
 		A Function to update the button sizing options
 	 *********************************************************/
 	function updateScale() {
-		$( 'select[name="buttonSize"],select[name="buttonFloat"]' ).on( 'change', function() {
-			$( '.nc_socialPanel' ).css( { width: '100%' } );
+		$( 'select[name="button_size"],select[name="button_alignment"]' ).on( 'change', function() {
+			$( '.swp_social_panel' ).css( { width: '100%' } );
 
-			var width = $( '.nc_socialPanel' ).width();
-			var scale = $( 'select[name="buttonSize"]' ).val();
-			var align = $( 'select[name="buttonFloat"]' ).val();
+			var width = $( '.swp_social_panel' ).width();
+			var scale = $( 'select[name="button_size"]' ).val();
+			var align = $( 'select[name="button_alignment"]' ).val();
 
 			var newWidth;
 
-			if ( ( align == 'fullWidth' && scale != 1 ) || scale >= 1 ) {
+			if ( ( align == 'full_width' && scale != 1 ) || scale >= 1 ) {
 				newWidth = width / scale;
 
-				$( '.nc_socialPanel' ).css( 'cssText', 'width:' + newWidth + 'px!important;' );
+				$( '.swp_social_panel' ).css( 'cssText', 'width:' + newWidth + 'px!important;' );
 
-				$( '.nc_socialPanel' ).css({
+				$( '.swp_social_panel' ).css({
 					transform: 'scale(' + scale + ')',
 					'transform-origin': 'left'
 				});
-			} else if ( align != 'fullWidth' && scale < 1 ) {
+			} else if ( align != 'full_width' && scale < 1 ) {
 				newWidth = width / scale;
 
-				$( '.nc_socialPanel' ).css({
+				$( '.swp_social_panel' ).css({
 					transform: 'scale(' + scale + ')',
 					'transform-origin': align
 				});
@@ -508,10 +533,10 @@
 		Update the Click To Tweet Demo
 	 *********************************************************/
 	function updateCttDemo() {
-		var $cttOptions = $( 'select[name="cttTheme"]' );
+		var $cttOptions = $( 'select[name="ctt_theme"]' );
 
 		$cttOptions.on( 'change', function() {
-			var newStyle = $( 'select[name="cttTheme"]' ).val();
+			var newStyle = $( 'select[name="ctt_theme"]' ).val();
 
 			$( '.swp_CTT' ).attr( 'class', 'swp_CTT' ).addClass( newStyle );
 		});
@@ -520,12 +545,41 @@
 	}
 
 	function toggleRegistration( status , key ) {
-		$( '.registration-wrapper.'+key ).attr( 'registration', status );
-		if('pro' == key) {
-			$( '.sw-admin-wrapper' ).attr( 'sw-registered', status );
-			$( '.sw-top-menu' ).attr( 'sw-registered', status );
-		}
+        var adminWrapper = $(".sw-admin-wrapper");
+        var addons = adminWrapper.attr("swp-addons");
+        var registeredAddons = adminWrapper.attr("swp-registrations");
+
+        //* Toggle visibility of the registration input field for {key}.
+		$('.registration-wrapper.' + key).attr('registration', status);
+
+        if (1 === parseInt(status)) {
+            adminWrapper.attr('sw-registered', status);
+            $('.sw-top-menu').attr('sw-registered', status);
+            addAttrValue(adminWrapper, "swp-registrations", key);
+        } else {
+            removeAttrValue(adminWrapper, "swp-registrations", key);
+        }
 	}
+
+    //* Removes a string from a given attribute.
+    function removeAttrValue(el, attribute, removal) {
+        var value = $(el).attr(attribute);
+        var startIndex = value.indexOf(removal);
+        if (startIndex === -1) return;
+
+        var stopIndex = startIndex + removal.length;
+        var newValue = value.slice(0, startIndex) + value.slice(stopIndex);
+
+        $(el).attr(attribute, newValue);
+    }
+
+    //* Adds a string to a given attribute.
+    function addAttrValue(el, attribute, addition) {
+        var value = $(el).attr(attribute);
+        if (value.includes(addition)) return;
+
+        $(el).attr(attribute, value + addition);
+    }
 
 	/*******************************************************
 		Register the Plugin
@@ -543,14 +597,11 @@
 
 		loadingScreen();
 
-		console.log(data);
 
 		$.post( ajaxurl, data, function( response ) {
 			// If the response was a failure...
-			console.log(response);
 			response = JSON.parse(response);
 
-			console.log(response);
 			if ( !response.success ) {
 				alert( 'Failure: ' + response.data );
 			} else {
@@ -558,7 +609,10 @@
 				registered = true;
 			}
 
+            //* Passing in true forces reload from the server rather than cache.
+            window.location.reload(true);
 			clearLoadingScreen();
+
 		});
 
 		return registered;
@@ -576,14 +630,12 @@
 			name_key: key,
 			item_id: item_id,
 		};
-		console.log(ajaxData);
 		loadingScreen();
 
 		// Ping the home server to create a registration log
 		$.post( ajaxurl, ajaxData, function( response ) {
 			// If the response was a failure...
 			//
-			console.log(response);
 			response = JSON.parse(response);
 			if ( !response.success ) {
 				alert( 'Failure: ' + response.data );
@@ -594,6 +646,8 @@
 				unregistered = true;
 			}
 
+            //* Passing in true forces reload from the server rather than cache.
+            window.location.reload(true);
 			clearLoadingScreen();
 		});
 
@@ -605,7 +659,6 @@
 		$( '.register-plugin' ).on( 'click', function() {
 			var key = $(this).attr('swp-addon');
 			var item_id = $(this).attr('swp-item-id');
-			console.log(key);
 			registerPlugin(key,item_id);
 			return false;
 		});
@@ -613,7 +666,6 @@
 		$( '.unregister-plugin' ).on( 'click', function() {
 			var key = $(this).attr('swp-addon');
 			var item_id = $(this).attr('swp-item-id');
-			console.log(key);
 			unregisterPlugin(key,item_id);
 			return false;
 		});
@@ -725,6 +777,35 @@
 		});
 	}
 
+	function set_ctt_preview() {
+        var preview = $("#ctt_preview");
+        var select = $("select[name=ctt_theme]");
+
+        if (!preview.length) {
+        	preview = $('<style id="ctt_preview"></style>');
+        	$("head").append(preview);
+        }
+
+        if ($(select).val() === "none") {
+        	update_ctt_preview();
+        }
+
+        $(select).on("change", function(e) {
+        	if (e.target.value === 'none') {
+        		update_ctt_preview();
+        	}
+        });
+
+        $("textarea[name=ctt_css]").on("keyup", update_ctt_preview);
+	}
+
+	function update_ctt_preview() {
+		var preview = $("#ctt_preview");
+        var textarea = $("textarea[name=ctt_css]");
+
+        $(preview).text($(textarea).val());
+	}
+
 	$( document ).ready(function() {
 		handleSettingSave();
 		populateOptions();
@@ -732,7 +813,7 @@
 		tabNavInit();
 		checkboxesInit();
 		updateButtonPreviews();
-		conditionalFields();
+		swpConditionalFields();
 		updateCttDemo();
 		updateScale();
 		handleRegistration();
@@ -740,5 +821,8 @@
 		getSystemStatus();
 		blockPremiumFeatures();
 		customUploaderInit();
+		set_ctt_preview();
 	});
+
+
 })( this, jQuery );

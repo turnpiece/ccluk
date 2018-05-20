@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-27 11:27:23+0000\n"
+"PO-Revision-Date: 2018-05-17 01:08:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -31,7 +31,7 @@ msgstr "Consentido"
 
 #: includes/submission.php:196
 msgid "Sending mail has been aborted."
-msgstr "El envío del correo electrónico se canceló"
+msgstr "El envío de correo electrónico se canceló."
 
 #: admin/includes/editor.php:211
 msgid "You can edit messages used in various situations here. For details, see %s."
@@ -520,7 +520,7 @@ msgstr "Akismet"
 
 #: modules/text.php:233 modules/textarea.php:136
 msgid "Text Fields"
-msgstr "campos de texto"
+msgstr "Campos de texto"
 
 #: modules/text.php:233 modules/textarea.php:136
 msgid "https://contactform7.com/text-fields/"
@@ -576,7 +576,7 @@ msgstr "Etiqueta"
 
 #: modules/submit.php:55
 msgid "Submit Button"
-msgstr "Botón 'Enviar'"
+msgstr "Botón Enviar"
 
 #: modules/submit.php:55
 msgid "https://contactform7.com/submit-button/"
@@ -999,7 +999,7 @@ msgstr "Enviar"
 
 #: includes/contact-form-template.php:41
 msgid "Your Message"
-msgstr "Mensaje"
+msgstr "Tu mensaje"
 
 #: includes/contact-form-template.php:39
 msgid "Your Email"
@@ -1011,7 +1011,7 @@ msgstr "(requerido)"
 
 #: includes/contact-form-template.php:38
 msgid "Your Name"
-msgstr "Nombre"
+msgstr "Tu nombre"
 
 #. translators: %s: title of form-tag like 'email' or 'checkboxes'
 #: admin/includes/tag-generator.php:45

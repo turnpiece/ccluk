@@ -236,7 +236,6 @@ class Sitemaps extends Metaboxes {
 		}
 
 		$this->the_seo_framework_debug and $freed_memory = $memory - memory_get_usage();
-
 	}
 
 	/**
@@ -513,6 +512,7 @@ class Sitemaps extends Metaboxes {
 	 * Create sitemap.xml content transient.
 	 *
 	 * @since 2.6.0
+	 * @since 3.0.6 Now only sets transient when the option is checked.
 	 *
 	 * @param string|bool $content required The sitemap transient content.
 	 * @return string The sitemap content.
@@ -529,7 +529,8 @@ class Sitemaps extends Metaboxes {
 			 */
 			$expiration = WEEK_IN_SECONDS;
 
-			$this->set_transient( $this->sitemap_transient, $sitemap_content, $expiration );
+			if ( $this->is_option_checked( 'cache_sitemap' ) )
+				$this->set_transient( $this->sitemap_transient, $sitemap_content, $expiration );
 		}
 
 		return $sitemap_content;
@@ -608,7 +609,7 @@ class Sitemaps extends Metaboxes {
 				'has_password'     => false,
 				'fields'           => 'ids',
 				'cache_results'    => false,
-				'suppress_filters' => true,
+				'suppress_filters' => false,
 				'no_found_rows'    => true,
 			);
 
@@ -616,6 +617,7 @@ class Sitemaps extends Metaboxes {
 			 * Applies filters 'the_seo_framework_sitemap_pages_query_args' : array
 			 *
 			 * @since 2.8.0
+			 * @since 3.0.6: $args['suppress_filters'] now defaults to false.
 			 *
 			 * @param array $args The new query arguments.
 			 * @param array $defaults The default query arguments
@@ -633,7 +635,7 @@ class Sitemaps extends Metaboxes {
 			$page_on_front_id = (int) \get_option( 'page_on_front' );
 			$page_for_posts_id = (int) \get_option( 'page_for_posts' );
 
-			$id_on_front = $page_on_front ? $page_on_front_id : (int) $page_for_posts_id;
+			$id_on_front = $page_on_front ? $page_on_front_id : $page_for_posts_id;
 
 			//* Remove ID on front from list and add frontpage to list.
 			if ( $page_on_front && false !== $key_on_front = array_search( $id_on_front, $latest_pages, true ) ) {
@@ -780,7 +782,7 @@ class Sitemaps extends Metaboxes {
 				'has_password'     => false,
 				'fields'           => 'ids',
 				'cache_results'    => false,
-				'suppress_filters' => true,
+				'suppress_filters' => false,
 				'no_found_rows'    => true,
 			);
 
@@ -788,6 +790,7 @@ class Sitemaps extends Metaboxes {
 			 * Applies filters 'the_seo_framework_sitemap_posts_query_args' : array
 			 *
 			 * @since 2.8.0
+			 * @since 3.0.6: $args['suppress_filters'] now defaults to false.
 			 *
 			 * @param array $args The new query arguments.
 			 * @param array $defaults The default query arguments
@@ -894,7 +897,7 @@ class Sitemaps extends Metaboxes {
 					'has_password'     => false,
 					'fields'           => 'ids',
 					'cache_results'    => false,
-					'suppress_filters' => true,
+					'suppress_filters' => false,
 					'no_found_rows'    => true,
 				);
 
@@ -902,6 +905,7 @@ class Sitemaps extends Metaboxes {
 				 * Applies filters 'the_seo_framework_sitemap_cpt_query_args' : array
 				 *
 				 * @since 2.8.0
+				 * @since 3.0.6: $args['suppress_filters'] now defaults to false.
 				 *
 				 * @param array $args The new query arguments.
 				 * @param array $defaults The default query arguments
@@ -1040,6 +1044,7 @@ class Sitemaps extends Metaboxes {
 	 * The URL also isn't checked, nor the position.
 	 *
 	 * @since 3.0.4
+	 * @since 3.1.0 : First filter value now works as intended.
 	 *
 	 * @param int $id The post ID to check. When 0, the custom field will not be checked.
 	 * @return bool True if included, false otherwise.
@@ -1049,7 +1054,7 @@ class Sitemaps extends Metaboxes {
 		static $excluded = null;
 		if ( null === $excluded ) {
 			/**
-			 * Applies filters the_seo_framework_sitemap_exclude_ids : array of id's
+			 * Applies filters the_seo_framework_sitemap_exclude_ids : sequential array of id's
 			 *
 			 * @since 2.5.2
 			 * @since 2.8.0 : No longer accepts '0' as entry.
@@ -1063,8 +1068,7 @@ class Sitemaps extends Metaboxes {
 			}
 		}
 
-		$included = empty( $excluded[ $id ] );
-		if ( $included && $id ) {
+		if ( ! isset( $excluded[ $id ] ) && $id ) {
 			$included = ! $this->get_custom_field( '_genesis_noindex', $id );
 		}
 

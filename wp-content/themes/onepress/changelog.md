@@ -1,6 +1,19 @@
 ====================================================================
 CHANGELOG
 ====================================================================
+# 2.0.8
+* NEW: Setting height for transparent logo.
+* IMPROVED: Small strings corrections.
+* FIXED: Include hero animation in global animation setting.
+* FIXED: Remove duplicate single post thumbnail setting.
+
+# 2.0.7
+* NEW: Add hero button target.
+* FIXED: Duplicate title on single post.
+* FIXED: Duplicate title on product archive.
+* FIXED: Contact form issue.
+
+
 ## 2.0.6
 * FIXED: JS error issue.
 

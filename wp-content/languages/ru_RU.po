@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-18 18:29:56+0000\n"
+"PO-Revision-Date: 2018-05-17 13:04:41+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,7 +36,409 @@ msgstr " "
 msgid "number_format_decimal_point"
 msgstr ","
 
-#: wp-includes/functions.php:2607
+#: wp-includes/user.php:3128
+msgid "The site administrator has been notified. You will receive an email confirmation when they erase your data."
+msgstr "Администрации сайта было отправлено уведомление. Вы получите уведомление по электронной почте при удалении ваших данных."
+
+#: wp-includes/user.php:3127
+msgid "Thanks for confirming your erasure request."
+msgstr "Спасибо за подтверждение вашего запроса на удаление данных."
+
+#: wp-includes/user.php:3125
+msgid "The site administrator has been notified. You will receive a link to download your export via email when they fulfill your request."
+msgstr "Администрации сайта было отправлено уведомление. Вы получите ссылку на скачивание файла экспорта данных по электронной почте, когда ваш запрос выполнят."
+
+#: wp-includes/user.php:3124
+msgid "Thanks for confirming your export request."
+msgstr "Спасибо за подтверждение вашего запроса на экспорт данных."
+
+#. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
+#. are placeholders.
+#: wp-includes/user.php:3052
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"For more information, you can also read our privacy policy: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Привет,\n"
+"\n"
+"Ваш запрос на удаление ваших персональных данных на ###SITENAME### был выполнен.\n"
+"\n"
+" Если у вас есть какие-либо последующие вопросы или проблемы, свяжитесь с администрацией сайта.\n"
+"\n"
+"Для подробной информации вы также можете прочитать нашу политику конфиденциальности: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"С наилучшими пожеланиями,\n"
+"Команда сайта ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate SITENAME, SITEURL; those are placeholders.
+#: wp-includes/user.php:3039
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Привет,\n"
+"\n"
+"Ваш запрос на удаление ваших персональных данных на ###SITENAME### был выполнен.\n"
+"\n"
+"Если у вас есть какие-либо последующие вопросы или проблемы, свяжитесь с администрацией сайта.\n"
+"\n"
+"С наилучшими пожеланиями,\n"
+"Команда сайта ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: %s Site name.
+#: wp-includes/user.php:3015
+msgid "[%s] Erasure Request Fulfilled"
+msgstr "[%s] Запрос на удаление данных выполнен"
+
+#. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
+#. SITEURL; those are placeholders.
+#: wp-includes/user.php:2933
+msgid ""
+"Howdy,\n"
+"\n"
+"A user data privacy request has been confirmed on ###SITENAME###:\n"
+"\n"
+"User: ###USER_EMAIL###\n"
+"Request: ###DESCRIPTION###\n"
+"\n"
+"You can view and manage these data privacy requests here:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Привет,\n"
+"\n"
+"Запрос на действие с персональными данными был подтвержден на ###SITENAME###:\n"
+"\n"
+"Пользователь: ###USER_EMAIL###\n"
+"Запрос: ###DESCRIPTION###\n"
+"\n"
+"Вы можете посмотреть и управлять запросами на этой странице:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"С наилучшими пожеланиями,\n"
+"Команда сайта ###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: %s Site name.
+#: wp-includes/user.php:2900
+msgid "[%s] Action Confirmed"
+msgstr "[%s] Действие подтверждено"
+
+#. translators: Privacy data request subject. 1: Site name, 2: Name of the
+#. action
+#: wp-includes/user.php:3320
+msgid "[%1$s] Confirm Action: %2$s"
+msgstr "[%1$s] Подтвердите действие: %2$s"
+
+#: wp-includes/user.php:3214
+msgid "Erase Personal Data"
+msgstr "Удаление персональных данных"
+
+#: wp-includes/comment-template.php:2206
+msgid "Save my name, email, and website in this browser for the next time I comment."
+msgstr "Сохранить моё имя, email и адрес сайта в этом браузере для последующих моих комментариев."
+
+#: wp-includes/user.php:2802
+msgid "User Description"
+msgstr "Информация о пользователе"
+
+#: wp-includes/user.php:2801
+msgid "User Last Name"
+msgstr "Фамилия пользователя"
+
+#: wp-includes/user.php:2800
+msgid "User First Name"
+msgstr "Имя пользователя"
+
+#: wp-includes/user.php:2799
+msgid "User Nickname"
+msgstr "Ник пользователя"
+
+#: wp-includes/user.php:2798
+msgid "User Display Name"
+msgstr "Отображаемое имя пользователя"
+
+#: wp-includes/user.php:2797
+msgid "User Registration Date"
+msgstr "Дата регистрации пользователя"
+
+#: wp-includes/user.php:2796
+msgid "User URL"
+msgstr "URL пользователя"
+
+#: wp-includes/user.php:2795
+msgid "User Email"
+msgstr "Адрес email пользователя"
+
+#: wp-includes/user.php:2794
+msgid "User Nice Name"
+msgstr "Псевдоним пользователя"
+
+#: wp-includes/user.php:2793
+msgid "User Login Name"
+msgstr "Имя входа пользователя"
+
+#: wp-includes/user.php:2792
+msgid "User ID"
+msgstr "ID пользователя"
+
+#: wp-includes/user.php:2760
+msgid "WordPress User"
+msgstr "Пользователь WordPress"
+
+#: wp-includes/media.php:3969
+msgid "WordPress Media"
+msgstr "Медиаданные WordPress"
+
+#: wp-includes/link-template.php:4166
+msgid "Privacy Policy"
+msgstr "Политика конфиденциальности"
+
+#: wp-includes/script-loader.php:670
+msgid "An error occurred while attempting to export personal data."
+msgstr "Возникла ошибка при попытке экспорта персональных данных."
+
+#: wp-includes/script-loader.php:669
+msgid "No personal data export file was generated."
+msgstr "Файл персональных данных для экспорта не создан."
+
+#: wp-login.php:875
+msgid "User action confirmed."
+msgstr "Действие пользователя подтверждено."
+
+#: wp-includes/user.php:3396
+msgid "This link has expired."
+msgstr "Время действия этой ссылки истекло."
+
+#: wp-includes/user.php:3248 wp-includes/user.php:3392 wp-login.php:844
+msgid "Invalid request."
+msgstr "Неверный запрос."
+
+#. translators: %s: action name
+#: wp-includes/user.php:3218
+msgid "Confirm the \"%s\" action"
+msgstr "Подтверждение действия \"%s\" "
+
+#: wp-includes/user.php:3211
+msgid "Export Personal Data"
+msgstr "Экспорт персональных данных"
+
+#: wp-includes/user.php:3183
+msgid "A request for this email address already exists."
+msgstr "Запрос для этого адреса email уже существует."
+
+#: wp-includes/user.php:3167
+msgid "Invalid action name."
+msgstr "Неверное имя действия."
+
+#: wp-includes/user.php:3120
+msgid "The site administrator has been notified and will fulfill your request as soon as possible."
+msgstr "Администратору сайта было отослано уведомление, ваш запрос будет выполнен так скоро, насколько это возможно."
+
+#: wp-includes/post.php:216
+msgid "User Request"
+msgstr "Запрос пользователя"
+
+#: wp-includes/post.php:215
+msgid "User Requests"
+msgstr "Запросы пользователя"
+
+#. translators: deleted long text
+#: wp-includes/functions.php:5921
+msgid "This content was deleted by the author."
+msgstr "Содержимое было удалено автором."
+
+#. translators: deleted text
+#: wp-includes/functions.php:5917
+msgid "[deleted]"
+msgstr "[удалено]"
+
+#. translators: %d: Comment ID
+#: wp-includes/comment.php:3358
+msgid "Comment %d contains personal data but could not be anonymized."
+msgstr "Комментарий %d содержит персональные данные, но не может быть анонимизирован."
+
+#: wp-includes/user.php:3119
+msgid "Action has been confirmed."
+msgstr "Действие подтверждено."
+
+#: wp-includes/user.php:3434
+msgid "The confirmation email has expired."
+msgstr "Время действия ссылки для подтверждения истекло."
+
+#: wp-includes/user.php:3416
+msgid "Invalid action"
+msgstr "Неверное действие"
+
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, EMAIL, SITENAME,
+#. SITEURL: those are placeholders.
+#: wp-includes/user.php:3264
+msgid ""
+"Howdy,\n"
+"\n"
+"A request has been made to perform the following action on your account:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"To confirm this, please click on the following link:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"You can safely ignore and delete this email if you do not want to\n"
+"take this action.\n"
+"\n"
+"This email has been sent to ###EMAIL###.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Привет,\n"
+"\n"
+"Был получен запрос на следующее действие для вашей учетной записи:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"Чтобы подтвердить запрос, пожалуйста нажмите на следующую ссылку:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"Вы можете проигнорировать и удалить это сообщение,\n"
+"если вы не хотите совершать это действие.\n"
+"\n"
+"Это сообщение было отослано на адрес ###EMAIL###.\n"
+"\n"
+"С наилучшими пожеланиями,\n"
+"Команда сайта ###SITENAME###\n"
+"###SITEURL###"
+
+#: wp-includes/script-loader.php:668
+msgid "An error occurred while attempting to find and erase personal data."
+msgstr "Возникла ошибка при поиске и удалении персональных данных."
+
+#: wp-includes/script-loader.php:667
+msgid "Personal data was found for this user but some of the personal data found was not erased."
+msgstr "Персональные данные для этого пользователя найдены, но некоторые найденные данные не были удалены."
+
+#: wp-includes/script-loader.php:666
+msgid "Personal data was found for this user but was not erased."
+msgstr "Персональные данные для этого пользователя найдены, но они не были удалены. "
+
+#: wp-includes/script-loader.php:665
+msgid "All of the personal data found for this user was erased."
+msgstr "Все найденные персональные данные для этого пользователя удалены."
+
+#: wp-includes/script-loader.php:664
+msgid "No personal data was found for this user."
+msgstr "Персональных данных для этого пользователя не найдено."
+
+#: wp-includes/post.php:787
+msgid "Completed"
+msgstr "Выполнен"
+
+#: wp-includes/post.php:785
+msgid "Confirmed"
+msgstr "Подтвержден"
+
+#: wp-includes/post.php:784
+msgid "Pending"
+msgstr "В ожидании"
+
+#: wp-includes/post.php:306
+msgctxt "request status"
+msgid "Completed"
+msgstr "Выполнен"
+
+#: wp-includes/post.php:299
+msgctxt "request status"
+msgid "Failed"
+msgstr "Неудачно"
+
+#: wp-includes/post.php:292
+msgctxt "request status"
+msgid "Confirmed"
+msgstr "Подтвержден"
+
+#: wp-includes/post.php:285
+msgctxt "request status"
+msgid "Pending"
+msgstr "В ожидании"
+
+#: wp-includes/comment.php:3215
+msgid "Comment URL"
+msgstr "URL комментария"
+
+#: wp-includes/comment.php:3214
+msgid "Comment Content"
+msgstr "Содержимое комментария"
+
+#: wp-includes/comment.php:3213
+msgid "Comment Date"
+msgstr "Дата комментария"
+
+#: wp-includes/comment.php:3212
+msgid "Comment Author User Agent"
+msgstr "User Agent автора комментария"
+
+#: wp-includes/comment.php:3211
+msgid "Comment Author IP"
+msgstr "IP автора комментария"
+
+#: wp-includes/comment.php:3210
+msgid "Comment Author URL"
+msgstr "URL автора комментария"
+
+#: wp-includes/comment.php:3209
+msgid "Comment Author Email"
+msgstr "Адрес email автора комментария"
+
+#: wp-includes/comment.php:3208
+msgid "Comment Author"
+msgstr "Автор комментария"
+
+#: wp-includes/comment.php:3173 wp-includes/comment.php:3282
+msgid "WordPress Comments"
+msgstr "Комментарии WordPress"
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1382
+msgid "Limit result set to users who are considered authors."
+msgstr "Ограничить выборку пользователями-авторами."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:199
+msgid "Sorry, you are not allowed to query users by this parameter."
+msgstr "Извините, вам не разрешено делать запрос пользователей по этому параметру."
+
+#: wp-includes/media.php:3526
+msgctxt "media items"
+msgid "Mine"
+msgstr "Моё"
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:228
+msgid "Whether or not the post type can be viewed."
+msgstr "Может ли тип записи быть доступным для просмотра."
+
+#: wp-includes/functions.php:2608
 msgid "The link you followed has expired."
 msgstr "Ссылка, по которой вы перешли, устарела."
 
@@ -46,9 +448,9 @@ msgid "You need a higher level of permission."
 msgstr "Вам требуется более высокий уровень доступа."
 
 #: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2617
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2618
 #: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
-#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:839
+#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
 msgid "Something went wrong."
 msgstr "Что-то пошло не так."
 
@@ -110,7 +512,7 @@ msgstr "Нажмите &#8220;Далее&#8221;, чтобы начать доб�
 msgid "Sorry, we can&#8217;t load the video at the supplied URL. Please check that the URL is for a supported video file (%s) or stream (e.g. YouTube and Vimeo)."
 msgstr "К сожалению, не получилось загрузить видео по указанному URL. Пожалуйста проверьте что URL указывает на поддерживаемый видео файл (%s) или поток (например YouTube или Vimeo)."
 
-#: wp-includes/script-loader.php:691
+#: wp-includes/script-loader.php:702
 msgctxt "post action/button label"
 msgid "Schedule"
 msgstr "Запланировать"
@@ -251,7 +653,7 @@ msgid "Your theme can display menus in one location. Select which menu you would
 msgstr "Ваша тема может отображать меню в одной области. Выберите меню, которое вы хотите использовать."
 
 #. translators: %s: site name
-#: wp-login.php:362
+#: wp-login.php:363
 msgid "Site Name: %s"
 msgstr "Название сайта: %s"
 
@@ -356,15 +758,15 @@ msgstr "&larr; Назад к рубрикам"
 msgid "&larr; Back to Link Categories"
 msgstr "&larr; Назад к категориям ссылок"
 
-#: wp-includes/script-loader.php:857
+#: wp-includes/script-loader.php:868
 msgid "Color value"
 msgstr "Значение цвета"
 
-#: wp-includes/script-loader.php:853
+#: wp-includes/script-loader.php:864
 msgid "Clear color"
 msgstr "Очистить цвет"
 
-#: wp-includes/script-loader.php:799
+#: wp-includes/script-loader.php:810
 msgid "Installation Failed!"
 msgstr "Установка не удалась!"
 
@@ -820,13 +1222,13 @@ msgstr "Ошибка проверки nonce. Пожалуйста, попроб�
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5779
+#: wp-includes/functions.php:5780
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Уведомление о смене адреса электронной почты администратора"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5764
+#: wp-includes/functions.php:5765
 msgid ""
 "Hi,\n"
 "\n"
@@ -853,7 +1255,7 @@ msgstr ""
 "Команда сайта ###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-includes/functions.php:5700
+#: wp-includes/functions.php:5701
 msgid "Only UUID V4 is supported at this time."
 msgstr "В настоящее время поддерживаются только UUID V4."
 
@@ -1229,7 +1631,7 @@ msgid "(no author)"
 msgstr "(без автора)"
 
 #. translators: %s: the name of a city
-#: wp-includes/script-loader.php:1202
+#: wp-includes/script-loader.php:1213
 msgid "City updated. Listing events near %s."
 msgstr "Настройки города обновлены. Выводим список мероприятий рядом с %s."
 
@@ -1240,19 +1642,19 @@ msgstr "Настройки города обновлены. Выводим сп�
 #. locale that would be recognizable to most users. Use only the city name
 #. itself, without any region or country. Use the endonym (native locale name)
 #. instead of the English name if possible.
-#: wp-includes/script-loader.php:1198
+#: wp-includes/script-loader.php:1209
 msgid "We couldn&#8217;t locate %s. Please try another nearby city. For example: Kansas City; Springfield; Portland."
 msgstr "Не удалось найти %s. Пожалуйста, попробуйте другой город рядом. Например: Златоуст; Челябинская область."
 
-#: wp-includes/script-loader.php:1181
+#: wp-includes/script-loader.php:1192
 msgid "Attend an upcoming event near you."
 msgstr "Участвовать в предстоящем мероприятии рядом с вами."
 
-#: wp-includes/script-loader.php:1180
+#: wp-includes/script-loader.php:1191
 msgid "An error occurred. Please try again."
 msgstr "Произошла ошибка. Пожалуйста, попробуйте ещё раз."
 
-#: wp-includes/script-loader.php:1179
+#: wp-includes/script-loader.php:1190
 msgid "Enter your closest city to find nearby events."
 msgstr "Введите ближайший город, чтобы найти мероприятия рядом."
 
@@ -1470,62 +1872,62 @@ msgstr "Аудиофайл не выбран"
 msgid "Displays an audio player."
 msgstr "Показывает аудио проигрыватель."
 
-#: wp-includes/script-loader.php:828
+#: wp-includes/script-loader.php:839
 msgctxt "theme"
 msgid "Deleted!"
 msgstr "Удалена!"
 
-#: wp-includes/script-loader.php:827
+#: wp-includes/script-loader.php:838
 msgctxt "plugin"
 msgid "Deleted!"
 msgstr "Удален!"
 
-#: wp-includes/script-loader.php:798
+#: wp-includes/script-loader.php:809
 msgctxt "theme"
 msgid "Installed!"
 msgstr "Установлена!"
 
-#: wp-includes/script-loader.php:797
+#: wp-includes/script-loader.php:808
 msgctxt "plugin"
 msgid "Installed!"
 msgstr "Установлен!"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:795
+#: wp-includes/script-loader.php:806
 msgctxt "plugin"
 msgid "Install %s now"
 msgstr "Установить %s сейчас"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:785
+#: wp-includes/script-loader.php:796
 msgctxt "plugin"
 msgid "%s update failed"
 msgstr "Обновить%s не удалось"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:783
+#: wp-includes/script-loader.php:794
 msgctxt "plugin"
 msgid "%s updated!"
 msgstr "%s обновлён!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:781
+#: wp-includes/script-loader.php:792
 msgctxt "plugin"
 msgid "Updating %s..."
 msgstr "Обновление %s..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:776
+#: wp-includes/script-loader.php:787
 msgctxt "plugin"
 msgid "Update %s now"
 msgstr "Обновить %s сейчас"
 
-#: wp-includes/script-loader.php:772
+#: wp-includes/script-loader.php:783
 msgctxt "theme"
 msgid "Updated!"
 msgstr "Обновлена!"
 
-#: wp-includes/script-loader.php:771
+#: wp-includes/script-loader.php:782
 msgctxt "plugin"
 msgid "Updated!"
 msgstr "Обновлён!"
@@ -1550,7 +1952,7 @@ msgstr "%1$s должно быть больше или равно %2$d"
 msgid "%1$s must be greater than %2$d"
 msgstr "%1$s должно быть больше, чем %2$d"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1350
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1366
 msgid "Limit result set to users with one or more specific slugs."
 msgstr "Ограничить выборку пользователями с одним или более специальными ярлыками."
 
@@ -1566,7 +1968,7 @@ msgstr "Номер запрошенной страницы превышает к
 msgid "You need to define an include parameter to order by include."
 msgstr "Требуется определить параметр включения в порядке включения."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:245
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:252
 msgid "All features, supported by the post type."
 msgstr "Все возможности поддерживаемые типом записи."
 
@@ -1575,42 +1977,42 @@ msgstr "Все возможности поддерживаемые типом з
 msgid "The password for the parent post of the comment (if the post is password protected)."
 msgstr "Пароль для родительской записи комментария (если запись защищена паролем)."
 
-#: wp-includes/post.php:1405
+#: wp-includes/post.php:1464
 msgctxt "page"
 msgid "Use as featured image"
 msgstr "Использовать как изображение страницы"
 
-#: wp-includes/post.php:1405
+#: wp-includes/post.php:1464
 msgctxt "post"
 msgid "Use as featured image"
 msgstr "Использовать как изображение записи"
 
-#: wp-includes/post.php:1404
+#: wp-includes/post.php:1463
 msgctxt "page"
 msgid "Remove featured image"
 msgstr "Удалить изображение страницы"
 
-#: wp-includes/post.php:1404
+#: wp-includes/post.php:1463
 msgctxt "post"
 msgid "Remove featured image"
 msgstr "Удалить изображение записи"
 
-#: wp-includes/post.php:1403
+#: wp-includes/post.php:1462
 msgctxt "page"
 msgid "Set featured image"
 msgstr "Установить изображение страницы"
 
-#: wp-includes/post.php:1403
+#: wp-includes/post.php:1462
 msgctxt "post"
 msgid "Set featured image"
 msgstr "Установить изображение записи"
 
-#: wp-includes/post.php:1402
+#: wp-includes/post.php:1461
 msgctxt "page"
 msgid "Featured Image"
 msgstr "Изображение страницы"
 
-#: wp-includes/post.php:1402
+#: wp-includes/post.php:1461
 msgctxt "post"
 msgid "Featured Image"
 msgstr "Изображение записи"
@@ -1620,7 +2022,7 @@ msgstr "Изображение записи"
 msgid "%1$s is deprecated. The callback from %2$s is used instead."
 msgstr "%1$s устарело. Вместо этого используйте обратный вызов %2$s."
 
-#: wp-includes/media.php:3529 wp-includes/script-loader.php:80
+#: wp-includes/media.php:3530 wp-includes/script-loader.php:80
 msgid ""
 "You are about to permanently delete these items from your site.\n"
 "This action cannot be undone.\n"
@@ -1630,7 +2032,7 @@ msgstr ""
 "Это действие не может быть отменено.\n"
 " 'Отмена' для отмены, 'OK' для удаления."
 
-#: wp-includes/media.php:3528
+#: wp-includes/media.php:3529
 msgid ""
 "You are about to permanently delete this item from your site.\n"
 "This action cannot be undone.\n"
@@ -1641,7 +2043,7 @@ msgstr ""
 " 'Отмена' для отмены, 'OK' для удаления."
 
 #. translators: 1: suggested width number, 2: suggested height number.
-#: wp-includes/media-template.php:240 wp-includes/media.php:3578
+#: wp-includes/media-template.php:240 wp-includes/media.php:3579
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "Предлагаемый размер изображения: %1$s на %2$s пикселов."
 
@@ -1649,7 +2051,7 @@ msgstr "Предлагаемый размер изображения: %1$s на 
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "Извините, этот тип файла недопустим по соображениям безопасности."
 
-#: wp-includes/comment.php:3052
+#: wp-includes/comment.php:3066
 msgid "Sorry, comments are not allowed for this item."
 msgstr "Извините, комментарии для этого элемента не разрешены."
 
@@ -1768,28 +2170,28 @@ msgstr "Буквенно-цифровой идентификатор таксо�
 msgid "Required to be true, as revisions do not support trashing."
 msgstr "Должно быть истинно, так как ревизии не поддерживают перемещение в корзину. "
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:260
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:267
 msgid "REST base route for the post type."
 msgstr "базовый путь REST для типа записи."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:239
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:246
 msgid "An alphanumeric identifier for the post type."
 msgstr "Буквенно-цифровой идентификатор типа записи."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:227
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:234
 msgid "Human-readable labels for the post type for various contexts."
 msgstr "Человекочитабельные метки для типа записи для различных контекстов."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:221
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:222
 msgid "Whether or not the post type should have children."
 msgstr "Может ли этот тип записи быть родительским."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:215
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:216
 msgid "A human-readable description of the post type."
 msgstr "Человекочитаемое описание типа записи."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:209
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:210
 msgid "All capabilities used by the post type."
 msgstr "Все возможности используемые типом записи."
 
@@ -1806,56 +2208,56 @@ msgstr "Ограничить ответ комментариями опубли�
 msgid "Limit response to comments published after a given ISO8601 compliant date."
 msgstr "Ограничить ответ комментариями опубликованными после заданной ISO8601 совместимой даты."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1278
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1294
 msgid "Avatar URLs for the user."
 msgstr "URL аватара пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1231
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1247
 msgid "Roles assigned to the user."
 msgstr "Роли назначенные пользователю."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1208
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1224
 msgid "The nickname for the user."
 msgstr "Ник пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1202
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1218
 msgid "Locale for the user."
 msgstr "Локаль для пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1195
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1211
 msgid "Author URL of the user."
 msgstr "URL автора для пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1190
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1206
 msgid "Description of the user."
 msgstr "Описание пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1184
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1200
 msgid "URL of the user."
 msgstr "URL пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1169
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1185
 msgid "Last name for the user."
 msgstr "Фамилия пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1161
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1177
 msgid "First name for the user."
 msgstr "Имя пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1153
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1169
 msgid "Display name for the user."
 msgstr "Отображаемое имя пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1144
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1160
 msgid "Login name for the user."
 msgstr "Имя входа для пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:731
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:764
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:747
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:780
 msgid "The user cannot be deleted."
 msgstr "Этот пользователь не может быть удален."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:486
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:502
 msgid "Error creating new user."
 msgstr "Ошибка создания нового пользователя."
 
@@ -1893,7 +2295,7 @@ msgstr "Название таксономии."
 msgid "Types associated with the taxonomy."
 msgstr "Типы ассоциированные с таксономией."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:233
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:240
 msgid "The title for the post type."
 msgstr "Название для типа записи."
 
@@ -1970,12 +2372,12 @@ msgstr "Ошибка RSS:"
 msgid "Cannot create a comment with that type."
 msgstr "Невозможно создать комментарий с этим типом."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:615
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:631
 msgid "Invalid slug."
 msgstr "Неверный ярлык."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:607
-#: wp-includes/rest-api.php:1157
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:623
+#: wp-includes/rest-api.php:1157 wp-includes/user.php:3163
 msgid "Invalid email address."
 msgstr "Неверный адрес e-mail."
 
@@ -1988,69 +2390,69 @@ msgstr "Неверное содержание комментария."
 msgid "Invalid JSONP callback function."
 msgstr "Неверная функция обратного вызова JSONP."
 
-#: wp-includes/post.php:3487
+#: wp-includes/post.php:3546
 msgid "Invalid page template."
 msgstr "Неверный шаблон страницы."
 
-#: wp-includes/post.php:3207 wp-includes/rest-api.php:1151
+#: wp-includes/post.php:3266 wp-includes/rest-api.php:1151
 #: wp-includes/script-loader.php:606
 msgid "Invalid date."
 msgstr "Неверная дата."
 
-#: wp-includes/theme.php:1397
+#: wp-includes/theme.php:1398
 msgid "Video is playing."
 msgstr "Видео воспроизводится."
 
-#: wp-includes/theme.php:1396
+#: wp-includes/theme.php:1397
 msgid "Video is paused."
 msgstr "Видео приостановлено."
 
-#: wp-includes/theme.php:1960
+#: wp-includes/theme.php:1961
 msgctxt "Theme starter content"
 msgid "Archives"
 msgstr "Архивы"
 
-#: wp-includes/theme.php:2082
+#: wp-includes/theme.php:2083
 msgctxt "Theme starter content"
 msgid "This is an example of a homepage section. Homepage sections can be any page other than the homepage itself, including the page that shows your latest blog posts."
 msgstr "Это пример раздела главной страницы. Разделы домашней страницы могут быть любыми страницами кроме самой главной страницы, включая страницу последних записей блога."
 
-#: wp-includes/theme.php:2076
+#: wp-includes/theme.php:2077
 msgctxt "Theme starter content"
 msgid "News"
 msgstr "Новости"
 
-#: wp-includes/theme.php:2068
+#: wp-includes/theme.php:2069
 msgctxt "Theme starter content"
 msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
 msgstr "Это страница с основной контактной информацией, такой как адрес и номер телефона. Вы также можете попробовать добавить форму контактов с помощью плагина."
 
-#: wp-includes/theme.php:2063
+#: wp-includes/theme.php:2064
 msgctxt "Theme starter content"
 msgid "You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe."
 msgstr "Вы можете быть художником, который желает здесь представить себя и свои работы или представителем бизнеса с описанием миссии."
 
-#: wp-includes/theme.php:2058
+#: wp-includes/theme.php:2059
 msgctxt "Theme starter content"
 msgid "Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time."
 msgstr "Добро пожаловать на сайт! Это ваша главная страница, которую большинство посетителей увидят, впервые зайдя на ваш сайт."
 
-#: wp-includes/theme.php:1975
+#: wp-includes/theme.php:1976
 msgctxt "Theme starter content"
 msgid "Recent Posts"
 msgstr "Последние записи"
 
-#: wp-includes/theme.php:1972
+#: wp-includes/theme.php:1973
 msgctxt "Theme starter content"
 msgid "Recent Comments"
 msgstr "Последние комментарии"
 
-#: wp-includes/theme.php:1969
+#: wp-includes/theme.php:1970
 msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "Мета"
 
-#: wp-includes/theme.php:1963
+#: wp-includes/theme.php:1964
 msgctxt "Theme starter content"
 msgid "Calendar"
 msgstr "Календарь"
@@ -2059,8 +2461,8 @@ msgstr "Календарь"
 msgid "Sorry, you are not allowed to change the comment type."
 msgstr "Извините, вам не разрешено изменить тип комментария."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1052
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1062
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1068
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1078
 msgid "Sorry, you are not allowed to give users that role."
 msgstr "Извините, вам не разрешено задавать пользователям эту роль."
 
@@ -2116,37 +2518,37 @@ msgstr "Извините, вам не разрешено прочитать эт
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "Извините, вам не разрешено читать комментарии без записи."
 
-#: wp-includes/theme.php:2050
+#: wp-includes/theme.php:2051
 msgctxt "Theme starter content"
 msgid "YouTube"
 msgstr "YouTube"
 
-#: wp-includes/theme.php:2038
+#: wp-includes/theme.php:2039
 msgctxt "Theme starter content"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: wp-includes/theme.php:2034
+#: wp-includes/theme.php:2035
 msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "LinkedIn"
 
-#: wp-includes/theme.php:2026
+#: wp-includes/theme.php:2027
 msgctxt "Theme starter content"
 msgid "GitHub"
 msgstr "GitHub"
 
-#: wp-includes/theme.php:2022
+#: wp-includes/theme.php:2023
 msgctxt "Theme starter content"
 msgid "Foursquare"
 msgstr "Foursquare"
 
-#: wp-includes/theme.php:1955
+#: wp-includes/theme.php:1956
 msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "Здесь может быть отличное место для того, чтобы представить себя, свой сайт или выразить какие-то благодарности."
 
-#: wp-includes/theme.php:1954
+#: wp-includes/theme.php:1955
 msgctxt "Theme starter content"
 msgid "About This Site"
 msgstr "О сайте"
@@ -2196,115 +2598,115 @@ msgstr "Видео не выбрано"
 msgid "Choose video"
 msgstr "Выбрать видео"
 
-#: wp-includes/theme.php:2081
+#: wp-includes/theme.php:2082
 msgctxt "Theme starter content"
 msgid "A homepage section"
 msgstr "Раздел главной страницы"
 
-#: wp-includes/theme.php:2072
+#: wp-includes/theme.php:2073
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "Блог"
 
-#: wp-includes/theme.php:2067
+#: wp-includes/theme.php:2068
 msgctxt "Theme starter content"
 msgid "Contact"
 msgstr "Контакты"
 
-#: wp-includes/theme.php:2062
+#: wp-includes/theme.php:2063
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "О нас"
 
-#: wp-includes/theme.php:1984 wp-includes/theme.php:2057
+#: wp-includes/theme.php:1985 wp-includes/theme.php:2058
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "Главная страница"
 
-#: wp-includes/theme.php:2014
+#: wp-includes/theme.php:2015
 msgctxt "Theme starter content"
 msgid "Email"
 msgstr "E-mail"
 
-#: wp-includes/theme.php:2030
+#: wp-includes/theme.php:2031
 msgctxt "Theme starter content"
 msgid "Instagram"
 msgstr "Instagram"
 
-#: wp-includes/theme.php:2042
+#: wp-includes/theme.php:2043
 msgctxt "Theme starter content"
 msgid "Twitter"
 msgstr "Twitter"
 
-#: wp-includes/theme.php:2018
+#: wp-includes/theme.php:2019
 msgctxt "Theme starter content"
 msgid "Facebook"
 msgstr "Facebook"
 
-#: wp-includes/theme.php:2046
+#: wp-includes/theme.php:2047
 msgctxt "Theme starter content"
 msgid "Yelp"
 msgstr "Yelp"
 
-#: wp-includes/theme.php:1966
+#: wp-includes/theme.php:1967
 msgctxt "Theme starter content"
 msgid "Categories"
 msgstr "Рубрики"
 
-#: wp-includes/theme.php:1978
+#: wp-includes/theme.php:1979
 msgctxt "Theme starter content"
 msgid "Search"
 msgstr "Поиск"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Saturday &amp; Sunday: 11:00AM&ndash;3:00PM"
 msgstr "Суббота и воскресенье: 11:00&ndash;15:00"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Monday&mdash;Friday: 9:00AM&ndash;5:00PM"
 msgstr "Понедельник&mdash;пятница: 9:00&ndash;17:00"
 
-#: wp-includes/theme.php:1947
+#: wp-includes/theme.php:1948
 msgctxt "Theme starter content"
 msgid "Hours"
 msgstr "Часы"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "New York, NY 10001"
 msgstr "Нью Йорк, NY 10001"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "123 Main Street"
 msgstr "123 Мейн стрит"
 
-#: wp-includes/theme.php:1945
+#: wp-includes/theme.php:1946
 msgctxt "Theme starter content"
 msgid "Address"
 msgstr "Адрес"
 
-#: wp-includes/theme.php:1943
+#: wp-includes/theme.php:1944
 msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "Найдите нас"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1118
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1134
 msgid "Passwords cannot contain the \"\\\" character."
 msgstr "Пароли не могут содержать символ \"\\\"."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1114
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1130
 msgid "Passwords cannot be empty."
 msgstr "Пароли не могут быть пустыми."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1085
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1101
 msgid "Username contains invalid characters."
 msgstr "Имя пользователя содержит недопустимые символы."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:164
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:469
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:485
 msgid "Invalid user parameter(s)."
 msgstr "Неверный(-е) параметр(ы) пользователя."
 
@@ -2369,7 +2771,7 @@ msgid "Collapse Main menu"
 msgstr "Свернуть главное меню"
 
 #. translators: %s: force=true
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:745
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:761
 msgid "Users do not support trashing. Set '%s' to delete."
 msgstr "Пользователей нельзя переместить в корзину. Установите '%s' для удаления."
 
@@ -2415,7 +2817,7 @@ msgstr "Ограничить выборку до записей с одним и
 msgid "Comment field exceeds maximum length allowed."
 msgstr "Поле комментария превышает максимальную допустимую длину."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:251
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
 msgid "Taxonomies associated with post type."
 msgstr "Таксономии ассоциированные с типом записи."
 
@@ -2451,19 +2853,19 @@ msgstr "Мне нужен ID, чтобы это сработало."
 msgid "Homepage"
 msgstr "Домашняя страница"
 
-#: wp-includes/script-loader.php:676
+#: wp-includes/script-loader.php:687
 msgid "Term removed."
 msgstr "Элемент удален."
 
-#: wp-includes/script-loader.php:675
+#: wp-includes/script-loader.php:686
 msgid "Term added."
 msgstr "Элемент добавлен."
 
-#: wp-includes/script-loader.php:674
+#: wp-includes/script-loader.php:685
 msgid "Term selected."
 msgstr "Элемент выбран."
 
-#: wp-includes/script-loader.php:673
+#: wp-includes/script-loader.php:684
 msgid "Remove term:"
 msgstr "Удалить элемент:"
 
@@ -2523,56 +2925,56 @@ msgstr "Невозможно обновить значение мета в ба�
 msgid "Could not delete meta value from database."
 msgstr "Невозможно удалить значение мета из базы данных."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1358
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1374
 msgid "Limit result set to users matching at least one specific role provided. Accepts csv list or single role."
 msgstr "Ограничить выборку до пользователей удовлетворяющих как минимум одной указанной роли. Можно указать CSV список или одну роль."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1254
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1270
 msgid "Any extra capabilities assigned to the user."
 msgstr "Любые дополнительные возможности назначенные пользователю."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1248
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1264
 msgid "All capabilities assigned to the user."
 msgstr "Все возможности назначенные пользователю."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1239
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1255
 msgid "Password for the user (never included)."
 msgstr "Пароль пользователя (никогда не показывается)."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1224
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1240
 msgid "Registration date for the user."
 msgstr "Дата регистрации пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1177
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1193
 msgid "The email address for the user."
 msgstr "Адрес e-mail пользователя."
 
 #. translators: %s: role key
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1038
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1054
 msgid "The role %s does not exist."
 msgstr "Роль %s не существует."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:750
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:766
 msgid "Invalid user ID for reassignment."
 msgstr "Неверное значение ID пользователя для переназначения."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:714
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:730
 msgid "Sorry, you are not allowed to delete this user."
 msgstr "Извините, вам не разрешено удалить этого пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:611
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:627
 msgid "Username isn't editable."
 msgstr "Имя пользователя не может быть изменено."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:567
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:583
 msgid "Sorry, you are not allowed to edit roles of this user."
 msgstr "Извините, вам не разрешено редактировать роли этого пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:450
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:466
 msgid "Cannot create existing user."
 msgstr "Невозможно создать уже имеющегося пользователя."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:412
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:428
 msgid "You are not currently logged in."
 msgstr "Вы не авторизованы."
 
@@ -2609,7 +3011,7 @@ msgid "Number of published posts for the term."
 msgstr "Число опубликованных записей элемента."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:67
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1138
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1154
 msgid "Unique identifier for the user."
 msgstr "Уникальный идентификатор пользователя."
 
@@ -2658,7 +3060,7 @@ msgstr "Ограничить выборку до определенных ID р�
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1361
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2136
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:921
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1322
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1338
 msgid "Offset the result set by a specific number of items."
 msgstr "Сдвиг выборки на определенное число объектов."
 
@@ -2831,7 +3233,7 @@ msgstr "Извините, вам не разрешено редактирова�
 msgid "Cannot create existing post."
 msgstr "Невозможно создать уже имеющуюся запись."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:434
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:450
 msgid "Sorry, you are not allowed to create new users."
 msgstr "Извините, вам не разрешено создавать новых пользователей."
 
@@ -2864,7 +3266,7 @@ msgstr "Человекочитаемое описание таксономии."
 msgid "All capabilities used by the taxonomy."
 msgstr "Все возможности используемые таксономией."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1216
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1232
 msgid "An alphanumeric identifier for the user."
 msgstr "Буквенно-цифровой идентификатор пользователя."
 
@@ -2942,28 +3344,28 @@ msgstr "Ограничить выборку комментариями с опр
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1376
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2148
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1335
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1351
 msgid "Sort collection by object attribute."
 msgstr "Сортировать коллекцию по атрибуту объекта."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1366
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2141
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:927
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1328
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1344
 msgid "Order sort attribute ascending or descending."
 msgstr "Упорядочить сортировку атрибута по возрастанию или убыванию."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1352
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2120
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:911
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1313
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1329
 msgid "Limit result set to specific IDs."
 msgstr "Ограничить выборку до определенных ID."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1343
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2111
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:902
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1304
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1320
 msgid "Ensure result set excludes specific IDs."
 msgstr "Убедиться что выборка исключает определенные ID."
 
@@ -2993,7 +3395,7 @@ msgstr "URL аватары автора объекта."
 
 #. translators: %d: avatar image size in pixels
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1274
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1270
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1286
 msgid "Avatar URL with image size of %d pixels."
 msgstr "URL аватары с размером изображения в %d пикселей."
 
@@ -3102,7 +3504,7 @@ msgstr "Для создания комментария необходимо ук
 msgid "Cannot create existing comment."
 msgstr "Нельзя создать уже имеющийся комментарий."
 
-#: wp-includes/comment.php:3103
+#: wp-includes/comment.php:3117
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:395
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:412
 msgid "Sorry, you must be logged in to comment."
@@ -3180,19 +3582,19 @@ msgstr "Извините, вам не разрешено загружать ме
 msgid "The REST API can no longer be completely disabled, the rest_authentication_errors filter can be used to restrict access to the API, instead."
 msgstr "REST API более не может быть полностью отключен, вместо этого для ограничения доступа к API может быть использован фильтр rest_authentication_errors."
 
-#: wp-includes/post.php:1399
+#: wp-includes/post.php:1458
 msgid "Page Attributes"
 msgstr "Атрибуты страницы"
 
-#: wp-includes/post.php:1399
+#: wp-includes/post.php:1458
 msgid "Post Attributes"
 msgstr "Свойства записи"
 
-#: wp-includes/post.php:1392
+#: wp-includes/post.php:1451
 msgid "View Pages"
 msgstr "Просмотр страниц"
 
-#: wp-includes/post.php:1392
+#: wp-includes/post.php:1451
 msgid "View Posts"
 msgstr "Просмотр записей"
 
@@ -3320,7 +3722,7 @@ msgstr "Город в той же временной зоне что и у ва�
 msgid "Site title."
 msgstr "Название сайта."
 
-#: wp-includes/media.php:3541
+#: wp-includes/media.php:3542
 msgid "Search media items..."
 msgstr "Поиск медиафайлов..."
 
@@ -3334,7 +3736,7 @@ msgctxt "previous set of posts"
 msgid "Previous"
 msgstr "Назад"
 
-#: wp-includes/general-template.php:396 wp-login.php:588 wp-login.php:988
+#: wp-includes/general-template.php:396 wp-login.php:589 wp-login.php:1026
 msgid "Username or Email Address"
 msgstr "Имя пользователя или e-mail"
 
@@ -3663,7 +4065,7 @@ msgstr "Изменить выбранное меню"
 msgid "Warning: the link has been inserted but may have errors. Please test it."
 msgstr "Внимание: ссылка добавлена, но может содержать ошибки. Пожалуйста, проверьте её."
 
-#: wp-includes/script-loader.php:767
+#: wp-includes/script-loader.php:778
 msgid "Search Results"
 msgstr "Результаты поиска"
 
@@ -3703,11 +4105,11 @@ msgstr "Вперёд на 1 секунду"
 msgid "Time Slider"
 msgstr "Шкала времени"
 
-#: wp-includes/script-loader.php:370 wp-includes/theme.php:1394
+#: wp-includes/script-loader.php:370 wp-includes/theme.php:1395
 msgid "Pause"
 msgstr "Пауза"
 
-#: wp-includes/script-loader.php:369 wp-includes/theme.php:1395
+#: wp-includes/script-loader.php:369 wp-includes/theme.php:1396
 msgid "Play"
 msgstr "Воспроизвести"
 
@@ -3720,73 +4122,73 @@ msgid "Inexistent terms."
 msgstr "Элементы не существуют."
 
 #. translators: %s: Importer name
-#: wp-includes/script-loader.php:838
+#: wp-includes/script-loader.php:849
 msgid "Run %s"
 msgstr "Запустить %s"
 
-#: wp-includes/script-loader.php:836
+#: wp-includes/script-loader.php:847
 msgid "Run Importer"
 msgstr "Запустить импорт"
 
 #. translators: %s: Activation URL
-#: wp-includes/script-loader.php:817
+#: wp-includes/script-loader.php:828
 msgid "Importer installed successfully. <a href=\"%s\">Run importer</a>"
 msgstr "Плагин успешно установлен. <a href=\"%s\">Запустить импорт</a>"
 
-#: wp-includes/script-loader.php:835
+#: wp-includes/script-loader.php:846
 msgctxt "theme"
 msgid "Activate %s"
 msgstr "Активировать %s"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:835
+#: wp-includes/script-loader.php:846
 msgctxt "theme"
 msgid "Network Activate %s"
 msgstr "Активировать %s для сети"
 
-#: wp-includes/script-loader.php:833
+#: wp-includes/script-loader.php:844
 msgctxt "plugin"
 msgid "Activate %s"
 msgstr "Активировать %s"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:833
+#: wp-includes/script-loader.php:844
 msgctxt "plugin"
 msgid "Network Activate %s"
 msgstr "Активировать %s для сети"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:813
+#: wp-includes/script-loader.php:824
 msgctxt "theme"
 msgid "%s installation failed"
 msgstr "Установка %s не удалась"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:811
+#: wp-includes/script-loader.php:822
 msgctxt "plugin"
 msgid "%s installation failed"
 msgstr "Установка %s не удалась"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:809
+#: wp-includes/script-loader.php:820
 msgctxt "theme"
 msgid "%s installed!"
 msgstr "%s установлена!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:807
+#: wp-includes/script-loader.php:818
 msgctxt "plugin"
 msgid "%s installed!"
 msgstr "%s установлен!"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:805
+#: wp-includes/script-loader.php:816
 msgctxt "theme"
 msgid "Installing %s..."
 msgstr "Установка %s..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:803
+#: wp-includes/script-loader.php:814
 msgctxt "plugin"
 msgid "Installing %s..."
 msgstr "Установка %s..."
@@ -3795,7 +4197,7 @@ msgstr "Установка %s..."
 msgid "Sorry, you are not allowed to access user data on this site."
 msgstr "Извините, вам не разрешено получать данные пользователей этого сайта."
 
-#: wp-includes/script-loader.php:842
+#: wp-includes/script-loader.php:853
 msgid "Number of plugins found: %d"
 msgstr "Количество найденных плагинов: %d"
 
@@ -3810,7 +4212,7 @@ msgid "Sorry, you are not allowed to edit your profile."
 msgstr "Извините, вам не разрешено редактировать свой профиль."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2500
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:580
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:596
 msgid "Sorry, you are not allowed to edit this user."
 msgstr "Извините, вам не разрешено редактировать этого пользователя."
 
@@ -3850,7 +4252,7 @@ msgid "Tan"
 msgstr "Жёлто-коричневый"
 
 #. translators: %s: Error string for a failed installation
-#: wp-includes/script-loader.php:801
+#: wp-includes/script-loader.php:812
 msgid "Installation failed: %s"
 msgstr "Установка не удалась: %s"
 
@@ -3885,55 +4287,55 @@ msgstr "Не удалось получить текст ошибки от MySQL"
 msgid "Edit Menu"
 msgstr "Редактировать меню"
 
-#: wp-includes/script-loader.php:1127
+#: wp-includes/script-loader.php:1138
 msgid "Today"
 msgstr "Сегодня"
 
-#: wp-includes/script-loader.php:830
+#: wp-includes/script-loader.php:841
 msgid "Network Activate"
 msgstr "Активировать для сети"
 
 #. translators: %s: Error string for a failed deletion
-#: wp-includes/script-loader.php:826
+#: wp-includes/script-loader.php:837
 msgid "Deletion failed: %s"
 msgstr "Удаление не удалось: %s"
 
-#: wp-includes/script-loader.php:824
+#: wp-includes/script-loader.php:835
 msgid "Deleting..."
 msgstr "Удаление..."
 
-#: wp-includes/script-loader.php:823
+#: wp-includes/script-loader.php:834
 msgid "Caution: These themes may be active on other sites in the network. Are you sure you want to proceed?"
 msgstr "Внимание: Эти темы могут быть активными на других сайтах сети. Вы уверены, что хотите продолжить?"
 
-#: wp-includes/script-loader.php:822
+#: wp-includes/script-loader.php:833
 msgid "Are you sure you want to delete the selected plugins and their data?"
 msgstr "Вы уверены, что хотите удалить выбранные плагины и их данные?"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:821
+#: wp-includes/script-loader.php:832
 msgid "Are you sure you want to delete %s and its data?"
 msgstr "Вы уверены, что хотите удалить плагин %s и его данные?"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:819
+#: wp-includes/script-loader.php:830
 msgid "Are you sure you want to delete %s?"
 msgstr "Вы уверены, что хотите удалить %s?"
 
-#: wp-includes/script-loader.php:774
+#: wp-includes/script-loader.php:785
 msgid "Update Now"
 msgstr "Обновить сейчас"
 
-#: wp-includes/script-loader.php:769
+#: wp-includes/script-loader.php:780
 msgid "Please select at least one item to perform this action on."
 msgstr "Выберите хотя бы один элемент для совершения действия."
 
-#: wp-includes/script-loader.php:768
+#: wp-includes/script-loader.php:779
 msgid "You do not appear to have any plugins available at this time."
 msgstr "Похоже, в настоящий момент у вас нет ни одного плагина."
 
 #. translators: %s: Search string
-#: wp-includes/script-loader.php:766
+#: wp-includes/script-loader.php:777
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Результаты поиска «%s»"
 
@@ -3945,7 +4347,7 @@ msgstr ""
 "Вы уверены, что хотите сделать это?\n"
 "Все несохранённые изменения в комментарии будут потеряны."
 
-#: wp-includes/script-loader.php:507 wp-login.php:704
+#: wp-includes/script-loader.php:507 wp-login.php:705
 msgid "Confirm use of weak password"
 msgstr "Разрешить использование слабого пароля."
 
@@ -3998,8 +4400,8 @@ msgstr "Извините, вам не разрешено добавлять ру
 
 #: wp-includes/class-wp-xmlrpc-server.php:2558
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:182
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:372
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:374
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:388
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:390
 msgid "Sorry, you are not allowed to list users."
 msgstr "Извините, вам не разрешено просматривать список пользователей."
 
@@ -4039,11 +4441,11 @@ msgstr "Ссылка выбрана."
 msgid "%s is required to strip image meta."
 msgstr "Для удаления метаданных изображения необходим метод %s."
 
-#: wp-includes/script-loader.php:757
+#: wp-includes/script-loader.php:768
 msgid "Plugin details"
 msgstr "Детали плагина"
 
-#: wp-includes/media.php:3542
+#: wp-includes/media.php:3543
 msgid "No media files found."
 msgstr "Медиафайлов не найдено."
 
@@ -4063,13 +4465,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "Найден 1 результат. Для перемещения используйте клавиши вверх/вниз."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2234
 msgid "Logged in as %s. Edit your profile."
 msgstr "Вы вошли как %s. Изменить профиль."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2228
+#: wp-includes/comment-template.php:2231
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">Вы вошли как %3$s</a>. <a href=\"%4$s\">Выйти?</a>"
 
@@ -4089,7 +4491,7 @@ msgstr "Ручное удаление %1$s вызовет предупрежде
 msgid "The next group of formatting shortcuts are applied as you type or when you insert them around plain text in the same paragraph. Press Escape or the Undo button to undo."
 msgstr "Следующая группа комбинаций заменяется по мере набора или при обрамлении простого текста в том же параграфе. Нажмите Escape или кнопку отмены, чтобы отменить."
 
-#: wp-login.php:942
+#: wp-login.php:980
 msgid "Your session has expired. Please log in to continue where you left off."
 msgstr "Ваша сессия истекла. Пожалуйста, авторизуйтесь снова, чтобы продолжить работу."
 
@@ -4116,7 +4518,7 @@ msgstr "<strong>ОШИБКА</strong>: Вы не ввели e-mail."
 msgid "Unregistering a built-in taxonomy is not allowed."
 msgstr "Удаление встроенных таксономий не допускается"
 
-#: wp-includes/script-loader.php:665
+#: wp-includes/script-loader.php:676
 msgid "Drag boxes here"
 msgstr "Перетащите блоки сюда"
 
@@ -4132,36 +4534,36 @@ msgstr "Необходимо указать маршрут."
 msgid "Routes must be namespaced with plugin or theme name and version."
 msgstr "Маршруты должны быть в пространстве имён с названием и версией плагина или темы."
 
-#: wp-includes/post.php:1182
+#: wp-includes/post.php:1241
 msgid "Unregistering a built-in post type is not allowed"
 msgstr "Удаление встроенных типов записей не допускается"
 
-#: wp-includes/post.php:249
+#: wp-includes/post.php:264
 msgctxt "post status"
 msgid "Trash"
 msgstr "В корзине"
 
-#: wp-includes/post.php:242
+#: wp-includes/post.php:257
 msgctxt "post status"
 msgid "Private"
 msgstr "Личное"
 
-#: wp-includes/post.php:235
+#: wp-includes/post.php:250
 msgctxt "post status"
 msgid "Pending"
 msgstr "На утверждении"
 
-#: wp-includes/post.php:228
+#: wp-includes/post.php:243
 msgctxt "post status"
 msgid "Draft"
 msgstr "Черновик"
 
-#: wp-includes/post.php:221
+#: wp-includes/post.php:236
 msgctxt "post status"
 msgid "Scheduled"
 msgstr "Запланировано"
 
-#: wp-includes/post.php:214
+#: wp-includes/post.php:229
 msgctxt "post status"
 msgid "Published"
 msgstr "Опубликовано"
@@ -4181,13 +4583,13 @@ msgstr "<strong>ОШИБКА</strong>: Неверное имя пользова�
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "%1$s %2$s Лента элемента %3$s таксономии %4$s"
 
-#: wp-includes/functions.php:5313
+#: wp-includes/functions.php:5314
 msgid "Close dialog"
 msgstr "Закрыть окно"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3901
+#: wp-includes/functions.php:3902
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Вызванный метод конструктора класса %1$s в %2$s считается <strong>устаревшим</strong> с версии %3$s! Используйте %4$s."
 
@@ -4217,19 +4619,19 @@ msgstr "Метод %s запрещён"
 msgid "Partial render must echo the content or return the content string (or array), but not both."
 msgstr "Функция частичного отображения должна выводить содержимое или возвращать его в виде строки (или массива), но не делать и то и другое одновременно."
 
-#: wp-includes/comment.php:1158
+#: wp-includes/comment.php:1172
 msgid "<strong>ERROR</strong>: your comment is too long."
 msgstr "<strong>ОШИБКА</strong>: ваш комментарий слишком длинный."
 
-#: wp-includes/comment.php:1154
+#: wp-includes/comment.php:1168
 msgid "<strong>ERROR</strong>: your url is too long."
 msgstr "<strong>ОШИБКА</strong>: ваша ссылка слишком длинная."
 
-#: wp-includes/comment.php:1150
+#: wp-includes/comment.php:1164
 msgid "<strong>ERROR</strong>: your email address is too long."
 msgstr "<strong>ОШИБКА</strong>: ваш адрес e-mail слишком длинный."
 
-#: wp-includes/comment.php:1146
+#: wp-includes/comment.php:1160
 msgid "<strong>ERROR</strong>: your name is too long."
 msgstr "<strong>ОШИБКА</strong>: ваше имя слишком длинное."
 
@@ -4325,12 +4727,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "Прочтите страницу для <a href=\"%s\" target=\"_blank\">сообщения об ошибках</a>. Некоторые рекомендации могут помочь вам понять, что нужно исправить."
 
-#: wp-includes/functions.php:4144
+#: wp-includes/functions.php:4145
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4143
+#: wp-includes/functions.php:4144
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Дополнительную информацию можно найти на странице <a href=\"%s\">&laquo;Отладка в WordPress&raquo;</a>."
 
@@ -4339,7 +4741,7 @@ msgstr "Дополнительную информацию можно найти 
 msgid "<strong>ERROR</strong>: %1$s in %2$s can only contain numbers, letters, and underscores."
 msgstr "<strong>ОШИБКА</strong>: %1$s в %2$s может содержать только числа, буквы и подчёркивания."
 
-#: wp-includes/script-loader.php:745 wp-includes/script-loader.php:751
+#: wp-includes/script-loader.php:756 wp-includes/script-loader.php:762
 msgid "Changes saved."
 msgstr "Изменения сохранены."
 
@@ -4649,7 +5051,7 @@ msgstr "Неверное имя шорткода: %1$s. Не используй�
 msgid "Invalid shortcode name: Empty name given."
 msgstr "Неверное имя шорткода: Указано пустое имя."
 
-#: wp-includes/script-loader.php:703
+#: wp-includes/script-loader.php:714
 msgid "Permalink saved"
 msgstr "Постоянная ссылка сохранена"
 
@@ -4704,35 +5106,35 @@ msgstr "Отсутствует параметр: %s"
 msgid "In %1$s, use the %2$s method, not the %3$s function. See %4$s."
 msgstr "В %1$s используйте метод %2$s вместо функции %3$s. См. %4$s."
 
-#: wp-includes/post.php:1408
+#: wp-includes/post.php:1467
 msgid "Pages list"
 msgstr "Список страниц"
 
-#: wp-includes/post.php:1408
+#: wp-includes/post.php:1467
 msgid "Posts list"
 msgstr "Список записей"
 
-#: wp-includes/post.php:1407
+#: wp-includes/post.php:1466
 msgid "Pages list navigation"
 msgstr "Навигация по списку страниц"
 
-#: wp-includes/post.php:1407
+#: wp-includes/post.php:1466
 msgid "Posts list navigation"
 msgstr "Навигация по списку записей"
 
-#: wp-includes/post.php:1406
+#: wp-includes/post.php:1465
 msgid "Filter pages list"
 msgstr "Фильтровать список страниц"
 
-#: wp-includes/post.php:1406
+#: wp-includes/post.php:1465
 msgid "Filter posts list"
 msgstr "Фильтровать список записей"
 
-#: wp-includes/post.php:1398
+#: wp-includes/post.php:1457
 msgid "Page Archives"
 msgstr "Архивы страниц"
 
-#: wp-includes/post.php:1398
+#: wp-includes/post.php:1457
 msgid "Post Archives"
 msgstr "Архивы записей"
 
@@ -4747,7 +5149,7 @@ msgid "Site names can only contain lowercase letters (a-z) and numbers."
 msgstr "Имя сайта может содержать только латинские буквы в нижнем регистре (a&#8212;z) и цифры."
 
 #: wp-includes/ms-functions.php:460 wp-includes/ms-functions.php:467
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1092
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1108
 #: wp-includes/user.php:1499
 msgid "Sorry, that username is not allowed."
 msgstr "Извините, это имя пользователя не разрешено."
@@ -4961,8 +5363,8 @@ msgid "Sorry, you are not allowed to edit theme options on this site."
 msgstr "Извините, вам не разрешено менять настройки темы на этом сайте."
 
 #. translators: 1: post type, 2: capability name
-#: wp-includes/capabilities.php:83 wp-includes/capabilities.php:144
-#: wp-includes/capabilities.php:203 wp-includes/capabilities.php:240
+#: wp-includes/capabilities.php:83 wp-includes/capabilities.php:153
+#: wp-includes/capabilities.php:221 wp-includes/capabilities.php:258
 msgid "The post type %1$s is not registered, so it may not be reliable to check the capability \"%2$s\" against a post of that type."
 msgstr "Тип записей «%1$s» не зарегистрирован, поэтому проверка возможности «%2$s» относительно него может привести к неожиданным результатам."
 
@@ -4991,7 +5393,7 @@ msgstr "Скрыть/показать секцию: %s"
 #. Asian characters), enter 'characters_excluding_spaces' or
 #. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
 #. into your own language.
-#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1089
+#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1100
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
@@ -5048,7 +5450,7 @@ msgstr "Как иконка в браузере"
 msgid "No items"
 msgstr "Нет записей"
 
-#: wp-login.php:820
+#: wp-login.php:821
 msgid "Registration confirmation will be emailed to you."
 msgstr "Подтверждение регистрации будет отправлено на ваш e-mail."
 
@@ -5113,11 +5515,11 @@ msgstr "Добавить в меню: %1$s (%2$s)"
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "Если новый абзац начинается с одной из этих комбинаций и пробела, произойдёт автоматическое форматирование. Нажмите Backspace или Escape, чтобы отменить."
 
-#: wp-login.php:555
+#: wp-login.php:556
 msgid "Your password reset link has expired. Please request a new link below."
 msgstr "Срок действия ссылки для сброса пароля истёк. Пожалуйста, запросите новую ссылку ниже."
 
-#: wp-login.php:553
+#: wp-login.php:554
 msgid "Your password reset link appears to be invalid. Please request a new link below."
 msgstr "Ваша ссылка для сброса пароля некорректна. Пожалуйста, запросите новую ссылку ниже."
 
@@ -5139,7 +5541,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "Для работы с RTL необходимо использовать директорию %s репозитория develop."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3905
+#: wp-includes/functions.php:3906
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Вызванный метод конструктора класса %1$s считается <strong>устаревшим</strong> с версии %2$s! Используйте %3$s."
 
@@ -5283,7 +5685,7 @@ msgid "Attempting to parse a shortcode without a valid callback: %s"
 msgstr "Попытка вывести шорткод без функции обработки: %s"
 
 #. translators: %s: Error string for a failed update
-#: wp-includes/script-loader.php:779
+#: wp-includes/script-loader.php:790
 msgid "Update Failed: %s"
 msgstr "Обновление не удалось: %s"
 
@@ -5608,7 +6010,7 @@ msgstr "Классы CSS"
 msgid "Title Attribute"
 msgstr "Атрибут title"
 
-#: wp-includes/class-wp-editor.php:1709
+#: wp-includes/class-wp-editor.php:1717
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:100
 #: wp-includes/media-template.php:1008
 #: wp-includes/widgets/class-wp-widget-media-image.php:136
@@ -5645,7 +6047,7 @@ msgstr "Ошибка XML: %1$s в строке %2$s"
 msgid "User Dashboard: %s"
 msgstr "Консоль пользователя: %s"
 
-#: wp-login.php:882 wp-login.php:887
+#: wp-login.php:920 wp-login.php:925
 msgid "https://codex.wordpress.org/Cookies"
 msgstr "https://codex.wordpress.org/Cookies"
 
@@ -5662,20 +6064,20 @@ msgstr "https://codex.wordpress.org/Заглавная_страница"
 msgid "No %1$s was set in the arguments array for the \"%2$s\" sidebar. Defaulting to \"%3$s\". Manually set the %1$s to \"%3$s\" to silence this notice and keep existing sidebar content."
 msgstr "В массиве аргументов для боковой колонки «%2$s» не задан параметр %1$s. Присвоенное по умолчанию значение равно «%3$s». Чтобы убрать это сообщение и сохранить текущее содержимое боковой колонки, задайте вручную параметр %1$s, равный «%3$s»."
 
-#: wp-includes/script-loader.php:840
+#: wp-includes/script-loader.php:851
 msgid "Connection lost or the server is busy. Please try again later."
 msgstr "Соединение с сервером утеряно. Пожалуйста, повторите попытку позже."
 
-#: wp-includes/script-loader.php:792
+#: wp-includes/script-loader.php:803
 msgid "Updates may not complete if you navigate away from this page."
 msgstr "Обновления могут не завершиться, если вы уйдёте с этой страницы."
 
-#: wp-includes/script-loader.php:777
+#: wp-includes/script-loader.php:788
 msgid "Update Failed!"
 msgstr "Обновление не удалось"
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:791
+#: wp-includes/script-loader.php:802
 msgid "Update canceled."
 msgstr "Обновление отменено."
 
@@ -5705,33 +6107,33 @@ msgstr "<span>Предварительный просмотр:</span> %s"
 msgid "Site Preview"
 msgstr "Просмотр сайта"
 
-#: wp-includes/script-loader.php:770
+#: wp-includes/script-loader.php:781
 msgid "Updating..."
 msgstr "Обновление..."
 
-#: wp-includes/script-loader.php:793
+#: wp-includes/script-loader.php:804
 msgid "Install Now"
 msgstr "Установить"
 
-#: wp-includes/script-loader.php:796
+#: wp-includes/script-loader.php:807
 msgid "Installing..."
 msgstr "Установка..."
 
-#: wp-includes/script-loader.php:814
+#: wp-includes/script-loader.php:825
 msgid "Installing... please wait."
 msgstr "Установка... Пожалуйста, подождите."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:787
+#: wp-includes/script-loader.php:798
 msgid "Updating... please wait."
 msgstr "Обновление... Пожалуйста, подождите."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:789
+#: wp-includes/script-loader.php:800
 msgid "Update completed successfully."
 msgstr "Обновление успешно завершено."
 
-#: wp-includes/script-loader.php:815
+#: wp-includes/script-loader.php:826
 msgid "Installation completed successfully."
 msgstr "Установка успешно завершена."
 
@@ -5743,7 +6145,7 @@ msgstr "Имена таксономий должны быть от 1 до 20 с�
 msgid "Could not split shared term."
 msgstr "Не удалось разделить связанные элементы."
 
-#: wp-includes/theme.php:2962
+#: wp-includes/theme.php:2963
 msgid "Customizer"
 msgstr "Настройка темы"
 
@@ -5833,7 +6235,7 @@ msgstr "Произвольная ссылка"
 msgid "<strong>Could not find site %1$s.</strong> Searched for table %2$s in database %3$s. Is that right?"
 msgstr "<strong>Не удалось найти сайт %1$s.</strong> Поиск выполнялся в таблице %2$s базы данных %3$s. Это правильно?"
 
-#: wp-includes/post.php:1131 wp-includes/post.php:1132
+#: wp-includes/post.php:1190 wp-includes/post.php:1191
 msgid "Post type names must be between 1 and 20 characters in length."
 msgstr "Имена типов записей должны быть от 1 до 20 символов."
 
@@ -5844,7 +6246,7 @@ msgid "F j, Y @ H:i:s"
 msgstr "d.m.Y, H:i:s"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1115
-#: wp-includes/class-wp-editor.php:1704 wp-includes/media-template.php:820
+#: wp-includes/class-wp-editor.php:1712 wp-includes/media-template.php:820
 msgid "Link Text"
 msgstr "Текст ссылки"
 
@@ -5905,7 +6307,7 @@ msgid "Theme Details"
 msgstr "Информация о теме"
 
 #: wp-includes/customize/class-wp-customize-theme-control.php:118
-#: wp-includes/script-loader.php:829
+#: wp-includes/script-loader.php:840
 msgid "Live Preview"
 msgstr "Просмотреть"
 
@@ -5918,7 +6320,7 @@ msgid "Distraction-free writing mode"
 msgstr "Полноэкранный режим"
 
 #. translators: 1: Theme support 2: hook name
-#: wp-includes/theme.php:2417
+#: wp-includes/theme.php:2418
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "Поддержка функции %1$s в теме дожна быть зарегистрирована раньше действия %2$s."
 
@@ -5969,7 +6371,7 @@ msgstr "Элемент с указанным именем и ярлыком уж
 msgid "%s must set a database connection for use with escaping."
 msgstr "Класс %s должен указать соединение, используемое для экранирования."
 
-#: wp-includes/theme.php:2261
+#: wp-includes/theme.php:2262
 msgid "You need to pass an array of types."
 msgstr "Необходимо передать массив типов."
 
@@ -5996,7 +6398,7 @@ msgstr "Навигация по записям"
 msgid "Newer posts"
 msgstr "Следующие записи"
 
-#: wp-includes/script-loader.php:1131
+#: wp-includes/script-loader.php:1142
 msgid "Previous"
 msgstr "Назад"
 
@@ -6004,7 +6406,7 @@ msgstr "Назад"
 msgid "Edit Selection"
 msgstr "Изменить выбор"
 
-#: wp-includes/media.php:3526
+#: wp-includes/media.php:3527
 msgctxt "noun"
 msgid "Trash"
 msgstr "Корзина"
@@ -6242,19 +6644,19 @@ msgctxt "add new media"
 msgid "Add New"
 msgstr "Добавить новый"
 
-#: wp-login.php:956
+#: wp-login.php:994
 msgid "<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new."
 msgstr "<strong>Вы успешно обновили WordPress!</strong> Пожалуйста, войдите, чтобы узнать, что нового."
 
-#: wp-includes/media.php:3534
+#: wp-includes/media.php:3535
 msgid "Untrash Selected"
 msgstr "Восстановить выбранные"
 
-#: wp-includes/media.php:3533
+#: wp-includes/media.php:3534
 msgid "Trash Selected"
 msgstr "Удалить выбранные"
 
-#: wp-includes/media.php:3530
+#: wp-includes/media.php:3531
 msgid ""
 "You are about to trash these items.\n"
 "  'Cancel' to stop, 'OK' to delete."
@@ -6270,15 +6672,15 @@ msgstr "Восстановить"
 msgid "Press return or enter to open this panel"
 msgstr "Нажмите Enter, чтобы открыть эту панель"
 
-#: wp-includes/media.php:3535
+#: wp-includes/media.php:3536
 msgid "Delete Selected"
 msgstr "Удалить выбранные"
 
-#: wp-includes/media.php:3532
+#: wp-includes/media.php:3533
 msgid "Cancel Selection"
 msgstr "Снять выделение"
 
-#: wp-includes/media.php:3531
+#: wp-includes/media.php:3532
 msgid "Bulk Select"
 msgstr "Множественный выбор"
 
@@ -6289,7 +6691,7 @@ msgid "%s: %l."
 msgstr "%s: %l."
 
 #: wp-includes/class-wp-customize-nav-menus.php:427
-#: wp-includes/script-loader.php:889
+#: wp-includes/script-loader.php:900
 msgctxt "missing menu item navigation label"
 msgid "(no label)"
 msgstr "(без текста)"
@@ -6298,19 +6700,19 @@ msgstr "(без текста)"
 msgid "This site is no longer available."
 msgstr "Этот сайт недоступен."
 
-#: wp-includes/script-loader.php:843
+#: wp-includes/script-loader.php:854
 msgid "No plugins found. Try a different search."
 msgstr "Плагинов не найдено. Попробуйте другой запрос."
 
-#: wp-includes/media.php:3540
+#: wp-includes/media.php:3541
 msgid "Search Media"
 msgstr "Поиск медиафайлов"
 
-#: wp-includes/media.php:3539
+#: wp-includes/media.php:3540
 msgid "Filter by type"
 msgstr "Фильтр по типу"
 
-#: wp-includes/media.php:3538
+#: wp-includes/media.php:3539
 msgid "Filter by date"
 msgstr "Фильтр по дате"
 
@@ -6394,7 +6796,7 @@ msgstr "Закрыть окно загрузчика"
 msgid "Close media panel"
 msgstr "Закрыть окно параметров файла"
 
-#: wp-includes/class-wp-editor.php:1730
+#: wp-includes/class-wp-editor.php:1738
 msgid "Search or use up and down arrow keys to select an item."
 msgstr "Воспользуйтесь поиском или клавишами вверх/вниз, чтобы выбрать элемент."
 
@@ -6420,7 +6822,7 @@ msgstr "Виджеты &#8212; это независимые блоки соде
 msgid "You are customizing %s"
 msgstr "Вы настраиваете %s"
 
-#: wp-includes/comment.php:3143
+#: wp-includes/comment.php:3157
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>ОШИБКА</strong>: Не удалось сохранить комментарий. Пожалуйста, повторите попытку позже."
 
@@ -6447,40 +6849,40 @@ msgid "Keyboard Shortcuts"
 msgstr "Горячие клавиши"
 
 #. translators: 1: Browser cookie documentation URL
-#: wp-login.php:886
+#: wp-login.php:924
 msgid "<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href=\"%s\">enable cookies</a> to use WordPress."
 msgstr "<strong>ОШИБКА</strong>: Cookies либо заблокированы, либо не поддерживаются вашим браузером. Чтобы использовать WordPress, нужно <a href=\"%s\">разрешить cookies</a>."
 
 #. translators: 1: Browser cookie documentation URL, 2: Support forums URL
-#: wp-login.php:881
+#: wp-login.php:919
 msgid "<strong>ERROR</strong>: Cookies are blocked due to unexpected output. For help, please see <a href=\"%1$s\">this documentation</a> or try the <a href=\"%2$s\">support forums</a>."
 msgstr "<strong>ОШИБКА</strong>: Cookies заблокированы из-за неожиданного вывода на экран. Посмотрите <a href=\"%1$s\">документацию</a> или обратитесь за помощью на <a href=\"%2$s\">форумы поддержки</a>."
 
-#: wp-includes/media.php:3603
+#: wp-includes/media.php:3604
 msgid "Add to Audio Playlist"
 msgstr "Добавить в плей-лист"
 
-#: wp-includes/media.php:3602
+#: wp-includes/media.php:3603
 msgid "Add to audio playlist"
 msgstr "Добавить в плей-лист аудио"
 
-#: wp-includes/media.php:3601
+#: wp-includes/media.php:3602
 msgid "Update audio playlist"
 msgstr "Обновить плей-лист аудио"
 
-#: wp-includes/media.php:3600
+#: wp-includes/media.php:3601
 msgid "Insert audio playlist"
 msgstr "Вставить плей-лист аудио"
 
-#: wp-includes/media.php:3599
+#: wp-includes/media.php:3600
 msgid "&#8592; Cancel Audio Playlist"
 msgstr "&#8592; Отменить создание плей-листа"
 
-#: wp-includes/media.php:3598
+#: wp-includes/media.php:3599
 msgid "Edit Audio Playlist"
 msgstr "Изменить плей-лист"
 
-#: wp-includes/media.php:3579
+#: wp-includes/media.php:3580
 msgid "There has been an error cropping your image."
 msgstr "При обрезке изображения произошла ошибка."
 
@@ -6600,7 +7002,7 @@ msgstr "Авто"
 msgid "Tracks (subtitles, captions, descriptions, chapters, or metadata)"
 msgstr "Треки (субтитры, подписи, описания, главы или метаданные)"
 
-#: wp-includes/media.php:3576
+#: wp-includes/media.php:3577
 msgid "Cropping&hellip;"
 msgstr "Обработка&hellip;"
 
@@ -6855,104 +7257,104 @@ msgstr "Аргумент запроса метода %s должен содер�
 msgid "Invalid menu ID."
 msgstr "Неверный ID меню."
 
-#: wp-includes/media.php:3613
+#: wp-includes/media.php:3614
 msgid "Add to Video Playlist"
 msgstr "Добавить в плей-лист"
 
-#: wp-includes/media.php:3612
+#: wp-includes/media.php:3613
 msgid "Add to video playlist"
 msgstr "Добавить в плей-лист видео"
 
-#: wp-includes/media.php:3611
+#: wp-includes/media.php:3612
 msgid "Update video playlist"
 msgstr "Обновить плей-лист видео"
 
-#: wp-includes/media.php:3610
+#: wp-includes/media.php:3611
 msgid "Insert video playlist"
 msgstr "Вставить плей-лист видео"
 
-#: wp-includes/media.php:3609
+#: wp-includes/media.php:3610
 msgid "&#8592; Cancel Video Playlist"
 msgstr "&#8592; Отменить создание плей-листа"
 
-#: wp-includes/media.php:3608
+#: wp-includes/media.php:3609
 msgid "Edit Video Playlist"
 msgstr "Изменить плей-лист"
 
-#: wp-includes/media.php:3607
+#: wp-includes/media.php:3608
 msgid "Create Video Playlist"
 msgstr "Создать плей-лист видео"
 
-#: wp-includes/media.php:3606
+#: wp-includes/media.php:3607
 msgid "Drag and drop to reorder videos."
 msgstr "Отсортируйте видеофайлы путём перетаскивания."
 
-#: wp-includes/media.php:3597
+#: wp-includes/media.php:3598
 msgid "Create Audio Playlist"
 msgstr "Создать плей-лист аудио"
 
-#: wp-includes/media.php:3596
+#: wp-includes/media.php:3597
 msgid "Drag and drop to reorder tracks."
 msgstr "Отсортируйте треки путём перетаскивания."
 
-#: wp-includes/media.php:3593
+#: wp-includes/media.php:3594
 msgid "Add Subtitles"
 msgstr "Добавить субтитры"
 
-#: wp-includes/media.php:3592
+#: wp-includes/media.php:3593
 msgid "Select Poster Image"
 msgstr "Добавить постер"
 
-#: wp-includes/media.php:3590
+#: wp-includes/media.php:3591
 msgid "Add Video Source"
 msgstr "Добавить источник видео"
 
-#: wp-includes/media.php:3589
+#: wp-includes/media.php:3590
 msgid "Replace Video"
 msgstr "Заменить видеофайл"
 
-#: wp-includes/media.php:3588
+#: wp-includes/media.php:3589
 msgid "Video Details"
 msgstr "Параметры видеофайла"
 
-#: wp-includes/media.php:3584
+#: wp-includes/media.php:3585
 msgid "Add Audio Source"
 msgstr "Добавить источник аудио"
 
-#: wp-includes/media.php:3583
+#: wp-includes/media.php:3584
 msgid "Replace Audio"
 msgstr "Заменить аудиофайл"
 
-#: wp-includes/media.php:3582
+#: wp-includes/media.php:3583
 msgid "Audio Details"
 msgstr "Параметры аудиофайла"
 
-#: wp-includes/media.php:3575
+#: wp-includes/media.php:3576
 msgid "Crop your image"
 msgstr "Обрезать изображение"
 
-#: wp-includes/media.php:3574
+#: wp-includes/media.php:3575
 msgid "Crop Image"
 msgstr "Обрезать изображение"
 
-#: wp-includes/media.php:3573
+#: wp-includes/media.php:3574
 msgid "Skip Cropping"
 msgstr "Не обрезать"
 
-#: wp-includes/media.php:3572
+#: wp-includes/media.php:3573
 msgid "Select and Crop"
 msgstr "Выбрать и обрезать"
 
-#: wp-includes/media.php:3571
+#: wp-includes/media.php:3572
 msgid "Choose Image"
 msgstr "Выбрать изображение"
 
-#: wp-includes/media.php:3567 wp-includes/media.php:3585
-#: wp-includes/media.php:3591
+#: wp-includes/media.php:3568 wp-includes/media.php:3586
+#: wp-includes/media.php:3592
 msgid "Cancel Edit"
 msgstr "Отменить редактирование"
 
-#: wp-includes/media.php:3566
+#: wp-includes/media.php:3567
 msgid "Replace Image"
 msgstr "Заменить изображение"
 
@@ -7030,7 +7432,7 @@ msgstr "Назад"
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"https://wordpress.org/support/\">support forums</a>."
 msgstr "Произошла непредвиденная ошибка. Возможно, что-то не так с сайтом WordPress.org или с настройками вашего сервера. Если проблема не решится, обратитесь на <a href=\"https://ru.forums.wordpress.org/\">форумы поддержки</a>."
 
-#: wp-includes/media.php:3565
+#: wp-includes/media.php:3566
 msgid "Image Details"
 msgstr "Параметры изображения"
 
@@ -7207,7 +7609,7 @@ msgid "Align right"
 msgstr "По правому краю"
 
 #: wp-includes/class-wp-customize-widgets.php:755
-#: wp-includes/script-loader.php:841 wp-includes/script-loader.php:867
+#: wp-includes/script-loader.php:852 wp-includes/script-loader.php:878
 msgid "An error has occurred. Please reload the page and try again."
 msgstr "Произошла ошибка. Пожалуйста, обновите страницу и повторите попытку."
 
@@ -7276,7 +7678,7 @@ msgstr "https://ru.forums.wordpress.org/forum/20"
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
 #: wp-includes/update.php:345 wp-includes/update.php:527
 #: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
-#: wp-includes/wp-db.php:1753 wp-login.php:882
+#: wp-includes/wp-db.php:1753 wp-login.php:920
 msgid "https://wordpress.org/support/"
 msgstr "https://ru.forums.wordpress.org/"
 
@@ -7380,7 +7782,7 @@ msgstr "Список страниц вашего сайта."
 #. translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.
-#: wp-includes/script-loader.php:936
+#: wp-includes/script-loader.php:947
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
@@ -7394,7 +7796,7 @@ msgstr "Произошла непредвиденная ошибка. Возмо
 #. translators: To add an additional Open Sans character subset specific to
 #. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
 #. translate into your own language.
-#: wp-includes/script-loader.php:942
+#: wp-includes/script-loader.php:953
 msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
 msgid "no-subset"
 msgstr "cyrillic"
@@ -7502,6 +7904,10 @@ msgstr "Включить/выключить звук"
 msgid "Download Video"
 msgstr "Скачать видео"
 
+#: wp-includes/post.php:786
+msgid "Failed"
+msgstr "Ошибка проверки ключа"
+
 #: wp-includes/script-loader.php:556
 msgid "Invalid"
 msgstr "Ключ неверен"
@@ -7576,7 +7982,7 @@ msgstr "Браузер на вашем устройстве не поддерж�
 msgid "<strong>ERROR</strong>: Couldn&#8217;t register you&hellip; please contact the <a href=\"mailto:%s\">webmaster</a> !"
 msgstr "<strong>ОШИБКА</strong>: Регистрация не удалась. Пожалуйста, свяжитесь с <a href=\"mailto:%s\">администратором</a>!"
 
-#: wp-login.php:400
+#: wp-login.php:401
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr "Возможная причина: на сервере отключена функция mail()."
 
@@ -7595,7 +8001,7 @@ msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s
 msgstr "Вы правильно указали свой e-mail? У нас он записан как %s, но если это неправильный адрес, письмо не придёт."
 
 #. translators: 1: month, 2: day, 3: year, 4: hour, 5: minute
-#: wp-includes/script-loader.php:687 wp-includes/script-loader.php:715
+#: wp-includes/script-loader.php:698 wp-includes/script-loader.php:726
 msgid "%1$s %2$s, %3$s @ %4$s:%5$s"
 msgstr "%1$s %2$s, %3$s в %4$s:%5$s"
 
@@ -7603,7 +8009,7 @@ msgstr "%1$s %2$s, %3$s в %4$s:%5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "Ваша сессия истекла. Вы можете войти снова с этой страницы или перейти на страницу входа."
 
-#: wp-includes/functions.php:5330
+#: wp-includes/functions.php:5331
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Страница входа откроется в новом окне. После входа вы можете закрыть окно и вернуться к текущей странице."
 
@@ -7628,7 +8034,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "Поиск&hellip;"
 
-#: wp-includes/functions.php:5328 wp-includes/script-loader.php:569
+#: wp-includes/functions.php:5329 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "Сессия истекла"
 
@@ -7655,8 +8061,8 @@ msgid "WordPress Address (URL)"
 msgstr "Адрес WordPress (URL)"
 
 #: wp-includes/class-wp-xmlrpc-server.php:2505
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:334
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:603
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:350
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:619
 #: wp-includes/user.php:1451 wp-includes/user.php:1804
 #: wp-includes/user.php:1810
 msgid "Invalid user ID."
@@ -7670,7 +8076,7 @@ msgstr "Подпишите это изображение&hellip;"
 msgid "Random Order"
 msgstr "Случайный порядок"
 
-#: wp-includes/media.php:3548
+#: wp-includes/media.php:3549
 msgid "Insert from URL"
 msgstr "Вставить с сайта"
 
@@ -7687,7 +8093,7 @@ msgctxt "Links widget"
 msgid "Random"
 msgstr "Случайно"
 
-#: wp-includes/media.php:3561
+#: wp-includes/media.php:3562
 msgid "Add to Gallery"
 msgstr "Добавить в галерею"
 
@@ -7695,7 +8101,7 @@ msgstr "Добавить в галерею"
 msgid "No items found."
 msgstr "Элементов не найдено."
 
-#: wp-includes/media.php:3562
+#: wp-includes/media.php:3563
 msgid "Reverse order"
 msgstr "В обратном порядке"
 
@@ -7709,7 +8115,7 @@ msgid "Sorry, that file cannot be edited."
 msgstr "Извините, этот файл не может быть изменён."
 
 #: wp-includes/media-template.php:441 wp-includes/media-template.php:544
-#: wp-includes/media.php:3536
+#: wp-includes/media.php:3537
 msgid "Delete Permanently"
 msgstr "Удалить навсегда"
 
@@ -7729,58 +8135,58 @@ msgstr "Загрузка"
 msgid "No editor could be selected."
 msgstr "Не удалось выбрать редактор."
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 msgid "Video <span class=\"count\">(%s)</span>"
 msgid_plural "Video <span class=\"count\">(%s)</span>"
 msgstr[0] "Видеофайлы <span class=\"count\">(%s)</span>"
 msgstr[1] "Видеофайлы <span class=\"count\">(%s)</span>"
 msgstr[2] "Видеофайлы <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 msgid "Manage Video"
 msgstr "Управление видеофайлами"
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 #: wp-includes/widgets/class-wp-widget-media-video.php:25
 msgid "Video"
 msgstr "Видео"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 msgid "Audio <span class=\"count\">(%s)</span>"
 msgid_plural "Audio <span class=\"count\">(%s)</span>"
 msgstr[0] "Аудиофайлы <span class=\"count\">(%s)</span>"
 msgstr[1] "Аудиофайлы <span class=\"count\">(%s)</span>"
 msgstr[2] "Аудиофайлы <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 msgid "Manage Audio"
 msgstr "Управление аудиофайлами"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Image <span class=\"count\">(%s)</span>"
 msgid_plural "Images <span class=\"count\">(%s)</span>"
 msgstr[0] "Изображения <span class=\"count\">(%s)</span>"
 msgstr[1] "Изображения <span class=\"count\">(%s)</span>"
 msgstr[2] "Изображения <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Manage Images"
 msgstr "Управление изображениями"
 
-#: wp-includes/post.php:1401
+#: wp-includes/post.php:1460
 msgid "Uploaded to this page"
 msgstr "Загруженные для этой страницы"
 
-#: wp-includes/post.php:1400
+#: wp-includes/post.php:1459
 msgid "Insert into page"
 msgstr "Вставить в страницу"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 #: wp-includes/widgets/class-wp-widget-media-audio.php:25
 msgid "Audio"
 msgstr "Аудио"
 
-#: wp-includes/post.php:1401
+#: wp-includes/post.php:1460
 msgid "Uploaded to this post"
 msgstr "Загруженные для этой записи"
 
@@ -7806,7 +8212,7 @@ msgstr "Колонки"
 msgid "Alt Text"
 msgstr "Атрибут alt"
 
-#: wp-includes/media-template.php:501 wp-includes/media.php:3545
+#: wp-includes/media-template.php:501 wp-includes/media.php:3546
 msgid "Attachment Details"
 msgstr "Параметры файла"
 
@@ -7815,7 +8221,7 @@ msgstr "Параметры файла"
 msgid "Large"
 msgstr "Большой"
 
-#: wp-includes/media.php:3557
+#: wp-includes/media.php:3558
 msgid "&#8592; Cancel Gallery"
 msgstr "&#8592; Отменить создание галереи"
 
@@ -7843,7 +8249,7 @@ msgstr "Загрузить файлы"
 msgid "Drop files anywhere to upload"
 msgstr "Перетащите файлы сюда"
 
-#: wp-includes/media.php:3558
+#: wp-includes/media.php:3559
 msgid "Insert gallery"
 msgstr "Вставить галерею"
 
@@ -7851,7 +8257,7 @@ msgstr "Вставить галерею"
 msgid "Drop files to upload"
 msgstr "Перетащите файлы сюда"
 
-#: wp-includes/media.php:3555
+#: wp-includes/media.php:3556
 msgid "Create Gallery"
 msgstr "Создать галерею"
 
@@ -7939,7 +8345,7 @@ msgstr "Опишите этот аудиофайл&hellip;"
 msgid "Describe this video&hellip;"
 msgstr "Опишите этот видеофайл&hellip;"
 
-#: wp-includes/media.php:3559
+#: wp-includes/media.php:3560
 msgid "Update gallery"
 msgstr "Обновить галерею"
 
@@ -8004,19 +8410,19 @@ msgstr "%1$s %2$s"
 msgid "Could not insert term relationship into the database."
 msgstr "Не удалось вставить связь элемента в базу данных"
 
-#: wp-includes/script-loader.php:856
+#: wp-includes/script-loader.php:867
 msgid "Select Color"
 msgstr "Выбрать цвет"
 
-#: wp-includes/media-template.php:601 wp-includes/script-loader.php:852
+#: wp-includes/media-template.php:601 wp-includes/script-loader.php:863
 msgid "Clear"
 msgstr "Сброс"
 
-#: wp-includes/media.php:3560
+#: wp-includes/media.php:3561
 msgid "Add to gallery"
 msgstr "Добавить в галерею"
 
-#: wp-includes/post.php:1400
+#: wp-includes/post.php:1459
 msgid "Insert into post"
 msgstr "Вставить в запись"
 
@@ -8100,7 +8506,7 @@ msgstr "Цвет текста заголовка"
 msgid "Colors"
 msgstr "Цвета"
 
-#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:723
+#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:734
 msgid "Saved"
 msgstr "Сохранено"
 
@@ -8382,8 +8788,8 @@ msgstr "Извините, вам не разрешено редактирова�
 msgid "Edit Site"
 msgstr "Редактировать сайт"
 
-#: wp-includes/post.php:3952 wp-includes/script-loader.php:672
-#: wp-includes/script-loader.php:744
+#: wp-includes/post.php:4011 wp-includes/script-loader.php:683
+#: wp-includes/script-loader.php:755
 msgctxt "tag delimiter"
 msgid ","
 msgstr ","
@@ -8518,7 +8924,7 @@ msgid "https://codex.wordpress.org/CSS"
 msgstr "https://codex.wordpress.org/CSS_(Каскадные_таблицы_стилей)"
 
 #. translators: 1: login URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:103
+#: wp-activate.php:105
 msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
 msgstr "Ваша учётная запись активирована. Теперь можно <a href=\"%1$s\">войти</a> на сайт, используя выбранное имя пользователя (%2$s). Пожалуйста, проверьте почтовый ящик %3$s, там будут пароль и инструкции для входа. Если вы не получили письмо, проверьте корзину или папку со спамом. Если в течение часа вы так и не получите письмо, вы можете <a href=\"%4$s\">сбросить ваш пароль</a>."
 
@@ -8528,7 +8934,7 @@ msgid "%1$s is your new site. <a href=\"%2$s\">Log in</a> as &#8220;%3$s&#8221; 
 msgstr "%1$s - ваш новый сайт. <a href=\"%2$s\">Войдите</a> как &#8220;%3$s&#8221;, используя ваш пароль."
 
 #. translators: 1: site URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:112
+#: wp-activate.php:114
 msgid "Your site at %1$s is active. You may now log in to your site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
 msgstr "Ваш сайт на %1$s активен. Теперь можно войти на сайт используя выбранное имя пользователя (%2$s). Пожалуйста, проверьте почтовый ящик %3$s, там будут пароль и инструкции для входа. Если вы не получили письмо, проверьте корзину или папку со спамом. Если в течение часа вы так и не получите письмо, вы можете <a href=\"%4$s\">сбросить ваш пароль</a>."
 
@@ -8537,8 +8943,8 @@ msgstr "Ваш сайт на %1$s активен. Теперь можно вой
 msgid "One or more database tables are unavailable. The database may need to be <a href=\"%s\">repaired</a>."
 msgstr "Одна или несколько таблиц базы данных недоступны. Возможно, база нуждается в <a href=\"%s\">ремонте</a>."
 
-#: wp-includes/comment.php:726 wp-includes/comment.php:872
-#: wp-includes/comment.php:875
+#: wp-includes/comment.php:740 wp-includes/comment.php:886
+#: wp-includes/comment.php:889
 msgid "You are posting comments too quickly. Slow down."
 msgstr "Вы комментируете слишком быстро. Попридержите коней."
 
@@ -8600,19 +9006,19 @@ msgstr "Размер файла «%s» превышает максимальны
 msgid "Feedback"
 msgstr "Обратная связь"
 
-#: wp-includes/comment.php:3111
+#: wp-includes/comment.php:3125
 msgid "<strong>ERROR</strong>: please fill the required fields (name, email)."
 msgstr "<strong>ОШИБКА</strong>: пожалуйста, заполните необходимые поля (имя, e-mail)."
 
-#: wp-includes/comment.php:3113
+#: wp-includes/comment.php:3127
 msgid "<strong>ERROR</strong>: please enter a valid email address."
 msgstr "<strong>ОШИБКА</strong>: пожалуйста, введите корректный адрес e-mail."
 
-#: wp-includes/comment.php:3118
+#: wp-includes/comment.php:3132
 msgid "<strong>ERROR</strong>: please type a comment."
 msgstr "<strong>ОШИБКА</strong>: пожалуйста, введите комментарий."
 
-#: wp-includes/script-loader.php:872
+#: wp-includes/script-loader.php:883
 msgid "Could not load the preview image. Please reload the page and try again."
 msgstr "Не удалось загрузить изображение для просмотра. Пожалуйста, обновите страницу и повторите попытку."
 
@@ -8636,12 +9042,12 @@ msgstr "Документация"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3778 wp-includes/ms-load.php:455
+#: wp-includes/functions.php:3779 wp-includes/ms-load.php:455
 #: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Ошибка установки соединения с базой данных"
 
-#: wp-includes/functions.php:3774
+#: wp-includes/functions.php:3775
 msgid "Database Error"
 msgstr "Ошибка базы данных"
 
@@ -8726,20 +9132,20 @@ msgid "You should specify a nonce action to be verified by using the first param
 msgstr "Первым параметром функции нужно указать заранее известное действие для проверки."
 
 #. translators: 1: site URL, 2: login URL
-#: wp-activate.php:144
+#: wp-activate.php:146
 msgid "Your account is now activated. <a href=\"%1$s\">View your site</a> or <a href=\"%2$s\">Log in</a>"
 msgstr "Ваша учётная запись активирована. Можно <a href=\"%1$s\">перейти на ваш сайт</a> или <a href=\"%2$s\">авторизоваться</a>"
 
 #. translators: 1: login URL, 2: network home URL
-#: wp-activate.php:149
+#: wp-activate.php:151
 msgid "Your account is now activated. <a href=\"%1$s\">Log in</a> or go back to the <a href=\"%2$s\">homepage</a>."
 msgstr "Ваша учётная запись активирована. Можно <a href=\"%1$s\">войти</a> или вернуться на <a href=\"%2$s\">главную страницу</a>."
 
-#: wp-includes/post.php:1397
+#: wp-includes/post.php:1456
 msgid "All Pages"
 msgstr "Все страницы"
 
-#: wp-includes/post.php:1397
+#: wp-includes/post.php:1456
 msgid "All Posts"
 msgstr "Все записи"
 
@@ -8790,11 +9196,11 @@ msgctxt "post format"
 msgid "Format"
 msgstr "Формат"
 
-#: wp-includes/class-wp-editor.php:1712
+#: wp-includes/class-wp-editor.php:1720
 msgid "Or link to existing content"
 msgstr "Или сделайте ссылку на существующий материал"
 
-#: wp-includes/class-wp-editor.php:1698
+#: wp-includes/class-wp-editor.php:1706
 msgid "Enter the destination URL"
 msgstr "Введите адрес назначения (URL)"
 
@@ -8819,13 +9225,13 @@ msgid "The user is already active."
 msgstr "Этот пользователь уже активирован."
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4140
+#: wp-includes/functions.php:4141
 msgid "(This message was added in version %s.)"
 msgstr "(Это сообщение было добавлено в версии %s.)"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4147
+#: wp-includes/functions.php:4148
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "Функция %1$s вызвана <strong>неправильно</strong>. %2$s %3$s"
 
@@ -8857,7 +9263,7 @@ msgstr "Аудио"
 msgid "Invalid post format."
 msgstr "Неверный формат записи"
 
-#: wp-includes/class-wp-editor.php:1729
+#: wp-includes/class-wp-editor.php:1737
 msgid "No search term specified. Showing recent items."
 msgstr "Поисковый запрос не задан. Показаны недавние элементы."
 
@@ -8865,7 +9271,7 @@ msgstr "Поисковый запрос не задан. Показаны нед
 msgid "Only a static class method or function can be used in an uninstall hook."
 msgstr "Для удаления можно использовать только статический метод класса или функцию."
 
-#: wp-includes/post.php:2954
+#: wp-includes/post.php:3013
 msgid "Passing an integer number of posts is deprecated. Pass an array of arguments instead."
 msgstr "Целочисленный параметр количества записей считается устаревшим. Передавайте массив аргументов."
 
@@ -8909,19 +9315,19 @@ msgctxt "Post format"
 msgid "Aside"
 msgstr "Заметка"
 
-#: wp-includes/post.php:1395
+#: wp-includes/post.php:1454
 msgid "No posts found in Trash."
 msgstr "Записей в корзине не найдено."
 
-#: wp-includes/post.php:1394
+#: wp-includes/post.php:1453
 msgid "No pages found."
 msgstr "Страниц не найдено."
 
-#: wp-includes/post.php:1395
+#: wp-includes/post.php:1454
 msgid "No pages found in Trash."
 msgstr "Страниц в корзине не найдено."
 
-#: wp-includes/script-loader.php:831
+#: wp-includes/script-loader.php:842
 msgid "Network Enable"
 msgstr "Разрешить для сети"
 
@@ -8940,7 +9346,7 @@ msgstr "Неверный ID вложения."
 msgid "This file no longer needs to be included."
 msgstr "Подключение этого файла больше не требуется."
 
-#: wp-login.php:576
+#: wp-login.php:577
 msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr "Пожалуйста, введите ваше имя пользователя или e-mail. Вы получите письмо со ссылкой для создания нового пароля."
 
@@ -8977,43 +9383,43 @@ msgstr "Ширина среднего размера"
 msgid "Large size image height"
 msgstr "Высота крупного размера"
 
-#: wp-login.php:681
+#: wp-login.php:682
 msgid "Enter your new password below."
 msgstr "Введите свой новый пароль."
 
-#: wp-login.php:365
+#: wp-login.php:366
 msgid "If this was a mistake, just ignore this email and nothing will happen."
 msgstr "Если произошла ошибка, просто проигнорируйте это письмо, и ничего не произойдёт."
 
-#: wp-login.php:360
+#: wp-login.php:361
 msgid "Someone has requested a password reset for the following account:"
 msgstr "Кто-то запросил сброс пароля для следующей учётной записи:"
 
-#: wp-login.php:673
+#: wp-login.php:674
 msgid "Your password has been reset."
 msgstr "Ваш новый пароль вступил в силу."
 
-#: wp-login.php:673
+#: wp-login.php:674
 msgid "Password Reset"
 msgstr "Сброс пароля"
 
-#: wp-login.php:658
+#: wp-login.php:659
 msgid "The passwords do not match."
 msgstr "Пароли не совпадают."
 
-#: wp-login.php:681 wp-login.php:728
+#: wp-login.php:682 wp-login.php:729
 msgid "Reset Password"
 msgstr "Задать пароль"
 
-#: wp-login.php:366
+#: wp-login.php:367
 msgid "To reset your password, visit the following address:"
 msgstr "Чтобы сбросить пароль, перейдите по следующей ссылке:"
 
-#: wp-login.php:710
+#: wp-login.php:711
 msgid "Confirm new password"
 msgstr "Подтвердите новый пароль"
 
-#: wp-login.php:689
+#: wp-login.php:690
 msgid "New password"
 msgstr "Новый пароль"
 
@@ -9034,7 +9440,7 @@ msgid "Blavatar"
 msgstr "Блаватар"
 
 #. translators: %s: taxonomy name
-#: wp-includes/post.php:3420
+#: wp-includes/post.php:3479
 msgid "Invalid taxonomy: %s."
 msgstr "Неверная таксономия: %s."
 
@@ -9061,6 +9467,10 @@ msgstr "Добавить новую рубрику ссылок"
 #: wp-includes/taxonomy.php:119
 msgid "New Link Category Name"
 msgstr "Название новой рубрики ссылок"
+
+#: wp-includes/user.php:2838
+msgid "User"
+msgstr "Пользователь"
 
 #: wp-includes/admin-bar.php:444
 msgid "Network Admin"
@@ -9169,47 +9579,47 @@ msgstr "Извините, в настоящий момент регистрац�
 msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
 msgstr "На этот адрес будет отправлено письмо для подтверждения. (Внимательно проверьте адрес e-mail, перед тем как продолжить.)"
 
-#: wp-includes/post.php:1386
+#: wp-includes/post.php:1445
 msgctxt "post type singular name"
 msgid "Post"
 msgstr "Запись"
 
-#: wp-includes/post.php:1386
+#: wp-includes/post.php:1445
 msgctxt "post type singular name"
 msgid "Page"
 msgstr "Страница"
 
-#: wp-includes/post.php:1385
+#: wp-includes/post.php:1444
 msgctxt "post type general name"
 msgid "Pages"
 msgstr "Страницы"
 
-#: wp-includes/post.php:1388
+#: wp-includes/post.php:1447
 msgid "Add New Page"
 msgstr "Добавить страницу"
 
-#: wp-includes/post.php:1393
+#: wp-includes/post.php:1452
 msgid "Search Posts"
 msgstr "Поиск записей"
 
-#: wp-includes/post.php:1389
+#: wp-includes/post.php:1448
 msgid "Edit Page"
 msgstr "Редактировать страницу"
 
-#: wp-includes/post.php:1385
+#: wp-includes/post.php:1444
 msgctxt "post type general name"
 msgid "Posts"
 msgstr "Записи"
 
-#: wp-includes/post.php:1396
+#: wp-includes/post.php:1455
 msgid "Parent Page:"
 msgstr "Родительская страница:"
 
-#: wp-includes/post.php:1388
+#: wp-includes/post.php:1447
 msgid "Add New Post"
 msgstr "Добавить запись"
 
-#: wp-includes/post.php:1393
+#: wp-includes/post.php:1452
 msgid "Search Pages"
 msgstr "Поиск страниц"
 
@@ -9221,7 +9631,7 @@ msgstr "<strong>Конфликт значений VHOST и SUBDOMAIN_INSTALL.</s
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>ОШИБКА</strong>: Это имя пользователя некорректно, поскольку оно содержит недопустимые символы. Пожалуйста, введите корректное имя пользователя."
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2209
 msgid "Required fields are marked %s"
 msgstr "Обязательные поля помечены %s"
 
@@ -9383,7 +9793,7 @@ msgstr "При добавлении вас к этому сайту произо
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "Файл слишком велик. Размер файлов должен быть менее %d КБ."
 
-#: wp-includes/comment-template.php:2235
+#: wp-includes/comment-template.php:2238
 msgid "Your email address will not be published."
 msgstr "Ваш e-mail не будет опубликован."
 
@@ -9426,11 +9836,11 @@ msgstr "Вам необходимо <a href=\"%s\">авторизоваться<
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
 msgstr "Не менее 4 символов, только буквы и цифры. Значение нельзя изменить позже, будьте внимательны!"
 
-#: wp-includes/script-loader.php:758
+#: wp-includes/script-loader.php:769
 msgid "Are you sure you want to install this plugin?"
 msgstr "Вы уверены, что хотите установить этот плагин?"
 
-#: wp-includes/script-loader.php:877
+#: wp-includes/script-loader.php:888
 msgid "Use as featured image"
 msgstr "Использовать как изображение записи"
 
@@ -9467,7 +9877,7 @@ msgstr "Ссылки сайта «%s»"
 msgid "No menus have been created yet. <a href=\"%s\">Create some</a>."
 msgstr "Ни одного меню ещё не создано. <a href=\"%s\">Создать</a>"
 
-#: wp-includes/script-loader.php:887
+#: wp-includes/script-loader.php:898
 msgid ""
 "You are about to permanently delete this menu. \n"
 " 'Cancel' to stop, 'OK' to delete."
@@ -9703,7 +10113,7 @@ msgstr "Вам не разрешено обновлять записи от ли
 #: wp-includes/class-wp-xmlrpc-server.php:4959
 #: wp-includes/class-wp-xmlrpc-server.php:5017
 #: wp-includes/class-wp-xmlrpc-server.php:5295
-#: wp-includes/class-wp-xmlrpc-server.php:5359 wp-includes/post.php:1175
+#: wp-includes/class-wp-xmlrpc-server.php:5359 wp-includes/post.php:1234
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:123
 msgid "Invalid post type."
 msgstr "Неверный тип записи."
@@ -9764,8 +10174,8 @@ msgstr "Требуются имя и e-mail автора комментария"
 #: wp-includes/class-wp-xmlrpc-server.php:5585
 #: wp-includes/class-wp-xmlrpc-server.php:6098
 #: wp-includes/class-wp-xmlrpc-server.php:6152
-#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3088
-#: wp-includes/post.php:3622
+#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3147
+#: wp-includes/post.php:3681
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:326
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:688
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:369
@@ -9850,7 +10260,7 @@ msgid "%s is your new username"
 msgstr "%s &#8212 ваше новое имя пользователя"
 
 #: wp-includes/class-wp-customize-nav-menus.php:967
-#: wp-includes/script-loader.php:1130 wp-signup.php:564
+#: wp-includes/script-loader.php:1141 wp-signup.php:564
 msgid "Next"
 msgstr "Далее"
 
@@ -9897,40 +10307,40 @@ msgstr "Похоже, новых писем нет."
 msgid "Slow down cowboy, no need to check for new mails so often!"
 msgstr "Притормози, ковбой! Не нужно проверять почту так часто."
 
-#: wp-login.php:954
+#: wp-login.php:992
 msgid "Registration complete. Please check your email."
 msgstr "Регистрация завершена. Проверьте вашу почту."
 
-#: wp-login.php:952
+#: wp-login.php:990
 msgid "Check your email for your new password."
 msgstr "Вам отправлено письмо с новым паролем."
 
-#: wp-login.php:950
+#: wp-login.php:988
 msgid "Check your email for the confirmation link."
 msgstr "Вам отправлено письмо со ссылкой для подтверждения."
 
-#: wp-login.php:948
+#: wp-login.php:986
 msgid "User registration is currently not allowed."
 msgstr "В данный момент регистрация запрещена."
 
-#: wp-login.php:946
+#: wp-login.php:984
 msgid "You are now logged out."
 msgstr "Вы вышли из системы."
 
-#: wp-login.php:905
+#: wp-login.php:943
 msgid "You have logged in successfully."
 msgstr "Вы успешно вошли в систему."
 
 #: wp-includes/user.php:149 wp-includes/user.php:175 wp-includes/user.php:227
-#: wp-includes/user.php:247 wp-login.php:829 wp-login.php:1030
+#: wp-includes/user.php:247 wp-login.php:830 wp-login.php:1068
 msgid "Lost your password?"
 msgstr "Забыли пароль?"
 
-#: wp-login.php:801
+#: wp-login.php:802
 msgid "Register For This Site"
 msgstr "Зарегистрироваться на этом сайте"
 
-#: wp-login.php:801
+#: wp-login.php:802
 msgid "Registration Form"
 msgstr "Регистрационная форма"
 
@@ -9938,11 +10348,11 @@ msgstr "Регистрационная форма"
 msgid "&larr; Back to Tags"
 msgstr "&larr; Назад к меткам"
 
-#: wp-login.php:599
+#: wp-login.php:600
 msgid "Get New Password"
 msgstr "Получить новый пароль"
 
-#: wp-login.php:576
+#: wp-login.php:577
 msgid "Lost Password"
 msgstr "Забыли пароль?"
 
@@ -9957,16 +10367,17 @@ msgstr "<strong>ОШИБКА</strong>: Пожалуйста, введите ва
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289
+#: wp-includes/user.php:2289 wp-includes/user.php:3400
+#: wp-includes/user.php:3412 wp-includes/user.php:3430 wp-login.php:853
 msgid "Invalid key"
 msgstr "Неверный ключ"
 
-#: wp-login.php:400
+#: wp-login.php:401
 msgid "The email could not be sent."
 msgstr "Не удалось отправить письмо."
 
 #. translators: Password reset email subject. %s: Site name
-#: wp-login.php:370
+#: wp-login.php:371
 msgid "[%s] Password Reset"
 msgstr "[%s] Новый пароль"
 
@@ -9974,15 +10385,15 @@ msgstr "[%s] Новый пароль"
 msgid "Password reset is not allowed for this user"
 msgstr "Сброс пароля для этого пользователя не разрешён"
 
-#: wp-login.php:337
+#: wp-login.php:338
 msgid "<strong>ERROR</strong>: Invalid username or email."
 msgstr "<strong>ОШИБКА</strong>: Неверное имя пользователя или e-mail."
 
-#: wp-login.php:316
+#: wp-login.php:317
 msgid "<strong>ERROR</strong>: There is no user registered with that email address."
 msgstr "<strong>ОШИБКА</strong>: Пользователей с таким адресом e-mail не зарегистрировано."
 
-#: wp-login.php:312
+#: wp-login.php:313
 msgid "<strong>ERROR</strong>: Enter a username or email address."
 msgstr "<strong>ОШИБКА</strong>: Введите имя пользователя или e-mail."
 
@@ -10000,7 +10411,7 @@ msgstr "<strong>ОШИБКА</strong>: WordPress %1$s требует MySQL %2$s 
 msgid "Sidebar %d"
 msgstr "Боковая колонка %d"
 
-#: wp-includes/functions.php:5329 wp-includes/user.php:285
+#: wp-includes/functions.php:5330 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Пожалуйста, войдите заново."
 
@@ -10042,51 +10453,51 @@ msgstr "Не удалось вставить элемент в базу данн
 msgid "Empty Term."
 msgstr "Пустой элемент"
 
-#: wp-includes/script-loader.php:702
+#: wp-includes/script-loader.php:713
 msgid "Saving Draft&#8230;"
 msgstr "Сохранение черновика&#8230;"
 
-#: wp-includes/script-loader.php:879
+#: wp-includes/script-loader.php:890
 msgid "Could not set that as the thumbnail image. Try a different attachment."
 msgstr "Не удалось задать это изображение в качестве миниатюры. Попробуйте другое вложение."
 
-#: wp-includes/script-loader.php:878
+#: wp-includes/script-loader.php:889
 msgid "Saving..."
 msgstr "Сохранение..."
 
-#: wp-includes/script-loader.php:742
+#: wp-includes/script-loader.php:753
 msgid "Remove From Bulk Edit"
 msgstr "Удалить из массового редактирования"
 
-#: wp-includes/script-loader.php:741 wp-includes/script-loader.php:750
+#: wp-includes/script-loader.php:752 wp-includes/script-loader.php:761
 msgid "Error while saving the changes."
 msgstr "Ошибка при сохранении изменений."
 
-#: wp-includes/script-loader.php:713
+#: wp-includes/script-loader.php:724
 msgid "Submitted on:"
 msgstr "Отправлено:"
 
-#: wp-includes/script-loader.php:698
+#: wp-includes/script-loader.php:709
 msgid "Password Protected"
 msgstr "Защищено паролем"
 
-#: wp-includes/script-loader.php:689
+#: wp-includes/script-loader.php:700
 msgid "No more comments found."
 msgstr "Больше комментариев не найдено."
 
-#: wp-includes/script-loader.php:688
+#: wp-includes/script-loader.php:699
 msgid "Show more comments"
 msgstr "Показать ещё комментарии"
 
-#: wp-includes/script-loader.php:685
+#: wp-includes/script-loader.php:696
 msgid "Published on:"
 msgstr "Дата:"
 
-#: wp-includes/script-loader.php:684
+#: wp-includes/script-loader.php:695
 msgid "Schedule for:"
 msgstr "Запланировать:"
 
-#: wp-includes/script-loader.php:683
+#: wp-includes/script-loader.php:694
 msgid "Publish on:"
 msgstr "Опубликовать:"
 
@@ -10208,54 +10619,54 @@ msgstr "Нельзя создать пользователя с пустым л�
 msgid "Cannot create a revision of a revision"
 msgstr "Нельзя создать редакцию редакции"
 
-#: wp-includes/post.php:3389
+#: wp-includes/post.php:3448
 msgid "Could not insert post into the database"
 msgstr "Не удалось вставить запись в базу данных"
 
-#: wp-includes/post.php:3374
+#: wp-includes/post.php:3433
 msgid "Could not update post in the database"
 msgstr "Не удалось обновить запись в базе данных"
 
-#: wp-includes/post.php:3135
+#: wp-includes/post.php:3194
 msgid "Content, title, and excerpt are empty."
 msgstr "Содержимое, заголовок и отрывок пусты."
 
-#: wp-includes/post.php:252
+#: wp-includes/post.php:267
 msgid "Trash <span class=\"count\">(%s)</span>"
 msgid_plural "Trash <span class=\"count\">(%s)</span>"
 msgstr[0] "Корзина <span class=\"count\">(%s)</span>"
 msgstr[1] "Корзина <span class=\"count\">(%s)</span>"
 msgstr[2] "Корзина <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:245
+#: wp-includes/post.php:260
 msgid "Private <span class=\"count\">(%s)</span>"
 msgid_plural "Private <span class=\"count\">(%s)</span>"
 msgstr[0] "Личные <span class=\"count\">(%s)</span>"
 msgstr[1] "Личные <span class=\"count\">(%s)</span>"
 msgstr[2] "Личные <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:238
+#: wp-includes/post.php:253
 msgid "Pending <span class=\"count\">(%s)</span>"
 msgid_plural "Pending <span class=\"count\">(%s)</span>"
 msgstr[0] "На утверждении <span class=\"count\">(%s)</span>"
 msgstr[1] "На утверждении <span class=\"count\">(%s)</span>"
 msgstr[2] "На утверждении <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:231
+#: wp-includes/post.php:246
 msgid "Draft <span class=\"count\">(%s)</span>"
 msgid_plural "Drafts <span class=\"count\">(%s)</span>"
 msgstr[0] "Черновики <span class=\"count\">(%s)</span>"
 msgstr[1] "Черновики <span class=\"count\">(%s)</span>"
 msgstr[2] "Черновики <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:224
+#: wp-includes/post.php:239
 msgid "Scheduled <span class=\"count\">(%s)</span>"
 msgid_plural "Scheduled <span class=\"count\">(%s)</span>"
 msgstr[0] "Запланированные <span class=\"count\">(%s)</span>"
 msgstr[1] "Запланированные <span class=\"count\">(%s)</span>"
 msgstr[2] "Запланированные <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:217
+#: wp-includes/post.php:232
 msgid "Published <span class=\"count\">(%s)</span>"
 msgid_plural "Published <span class=\"count\">(%s)</span>"
 msgstr[0] "Опубликованные <span class=\"count\">(%s)</span>"
@@ -10314,7 +10725,7 @@ msgstr "[%s] Регистрация нового пользователя"
 
 #. translators: %s: user login
 #: wp-includes/pluggable.php:1830 wp-includes/pluggable.php:1894
-#: wp-login.php:364
+#: wp-login.php:365
 msgid "Username: %s"
 msgstr "Имя пользователя: %s"
 
@@ -10517,7 +10928,7 @@ msgstr "Отношение"
 msgid "Source"
 msgstr "Источник"
 
-#: wp-includes/media.php:3556
+#: wp-includes/media.php:3557
 msgid "Edit Gallery"
 msgstr "Редактировать галерею"
 
@@ -10695,9 +11106,9 @@ msgid "Document properties"
 msgstr "Свойства документа"
 
 #: wp-includes/class-wp-editor.php:1238 wp-includes/script-loader.php:477
-#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:701
-#: wp-includes/script-loader.php:724 wp-includes/script-loader.php:888
-#: wp-includes/theme.php:2961
+#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:712
+#: wp-includes/script-loader.php:735 wp-includes/script-loader.php:899
+#: wp-includes/theme.php:2962
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "Сделанные вами изменения будут отменены, если вы уйдёте с этой страницы."
 
@@ -10762,7 +11173,7 @@ msgid "Insert row before"
 msgstr "Вставить строку до"
 
 #: wp-includes/class-wp-editor.php:1126 wp-includes/class-wp-editor.php:1132
-#: wp-includes/class-wp-editor.php:1694 wp-includes/script-loader.php:523
+#: wp-includes/class-wp-editor.php:1702 wp-includes/script-loader.php:523
 msgid "Insert/edit link"
 msgstr "Вставить/изменить ссылку"
 
@@ -10997,12 +11408,12 @@ msgstr "Результаты поиска %1$s %2$s"
 msgid "Site Admin"
 msgstr "Управление сайтом"
 
-#: wp-includes/general-template.php:527 wp-login.php:606 wp-login.php:735
-#: wp-login.php:823 wp-login.php:1022
+#: wp-includes/general-template.php:527 wp-login.php:607 wp-login.php:736
+#: wp-login.php:824 wp-login.php:1060
 msgid "Register"
 msgstr "Регистрация"
 
-#: wp-includes/general-template.php:398 wp-login.php:1003
+#: wp-includes/general-template.php:398 wp-login.php:1041
 msgid "Remember Me"
 msgstr "Запомнить меня"
 
@@ -11010,39 +11421,39 @@ msgstr "Запомнить меня"
 msgid "Log out"
 msgstr "Выйти"
 
-#: wp-includes/general-template.php:260 wp-login.php:603 wp-login.php:673
-#: wp-login.php:732 wp-login.php:827
+#: wp-includes/general-template.php:260 wp-login.php:604 wp-login.php:674
+#: wp-login.php:733 wp-login.php:828
 msgid "Log in"
 msgstr "Войти"
 
-#: wp-includes/functions.php:4723
+#: wp-includes/functions.php:4724
 msgid "Manual Offsets"
 msgstr "Ручные смещения"
 
-#: wp-includes/functions.php:4715 wp-includes/functions.php:4719
+#: wp-includes/functions.php:4716 wp-includes/functions.php:4720
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4670
+#: wp-includes/functions.php:4671
 msgid "Select a city"
 msgstr "Выберите город"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4034
+#: wp-includes/functions.php:4035
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "Функция %1$s вызвана с аргументом, который <strong>считается устаревшим</strong> с версии %2$s. Альтернативы не предусмотрено."
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4031
+#: wp-includes/functions.php:4032
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "Функция %1$s вызвана с аргументом, который <strong>считается устаревшим</strong> с версии %2$s! %3$s."
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3842 wp-includes/functions.php:3970
-#: wp-includes/functions.php:4093
+#: wp-includes/functions.php:3843 wp-includes/functions.php:3971
+#: wp-includes/functions.php:4094
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "Функция %1$s с версии %2$s <strong>считается устаревшей</strong>. Альтернативы не предусмотрено."
 
@@ -11051,30 +11462,30 @@ msgstr "Функция %1$s с версии %2$s <strong>считается ус
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3839 wp-includes/functions.php:3967
-#: wp-includes/functions.php:4090
+#: wp-includes/functions.php:3840 wp-includes/functions.php:3968
+#: wp-includes/functions.php:4091
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Функция %1$s с версии %2$s <strong>считается устаревшей</strong>! Используйте %3$s."
 
-#: wp-includes/functions.php:2749 wp-load.php:92
+#: wp-includes/functions.php:2750 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Ошибка"
 
-#: wp-includes/functions.php:2737
+#: wp-includes/functions.php:2738
 msgid "&laquo; Back"
 msgstr "&larr; Назад"
 
-#: wp-includes/functions.php:2612 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2613 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Пожалуйста, попробуйте ещё раз."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2603
+#: wp-includes/functions.php:2604
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Вы действительно хотите <a href='%s'>выйти</a>?"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2596
+#: wp-includes/functions.php:2597
 msgid "You are attempting to log out of %s"
 msgstr "Вы пытаетесь выйти с сайта &laquo;%s&raquo;"
 
@@ -11307,12 +11718,12 @@ msgstr "Каждый час"
 msgid "This argument has changed to an array to match the behavior of the other cron functions."
 msgstr "Этот аргумент изменён на массив, чтобы соответствовать поведению других функций планировщика."
 
-#: wp-includes/comment.php:2129
+#: wp-includes/comment.php:2143
 msgid "Could not update comment status"
 msgstr "Не удалось обновить статус комментария"
 
-#: wp-includes/comment.php:670 wp-includes/comment.php:673
-#: wp-includes/comment.php:676
+#: wp-includes/comment.php:684 wp-includes/comment.php:687
+#: wp-includes/comment.php:690
 msgid "Duplicate comment detected; it looks as though you&#8217;ve already said that!"
 msgstr "Обнаружен дубликат комментария. Кажется, вы уже сказали это!"
 
@@ -11320,19 +11731,19 @@ msgstr "Обнаружен дубликат комментария. Кажетс
 msgid "Unapproved"
 msgstr "Не одобрен"
 
-#: wp-includes/comment-template.php:2250
+#: wp-includes/comment-template.php:2253
 msgid "Post Comment"
 msgstr "Отправить комментарий"
 
-#: wp-includes/comment-template.php:2249
+#: wp-includes/comment-template.php:2252
 msgid "Cancel reply"
 msgstr "Отменить ответ"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2244
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
 msgid "Leave a Reply to %s"
 msgstr "Добавить комментарий для %s"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2243
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
 msgid "Leave a Reply"
 msgstr "Добавить комментарий"
 
@@ -11403,7 +11814,7 @@ msgstr "Ваш комментарий ожидает проверки."
 msgid "Comments are closed."
 msgstr "Обсуждение закрыто."
 
-#: wp-includes/script-loader.php:855
+#: wp-includes/script-loader.php:866
 msgid "Select default color"
 msgstr "Выбрать цвет по умолчанию"
 
@@ -11425,7 +11836,7 @@ msgid "Tags: "
 msgstr "Метки: "
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2222
+#: wp-includes/comment-template.php:2225
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Для отправки комментария вам необходимо <a href=\"%s\">авторизоваться</a>."
 
@@ -11457,7 +11868,7 @@ msgstr "Комментарии: %s"
 
 #: wp-includes/class-wp-customize-nav-menus.php:276
 #: wp-includes/script-loader.php:242 wp-includes/script-loader.php:527
-#: wp-includes/script-loader.php:886
+#: wp-includes/script-loader.php:897
 msgid "No results found."
 msgstr "Результатов не найдено."
 
@@ -11469,7 +11880,7 @@ msgstr "Следующая страница &rarr;"
 msgid "&laquo; Previous Page"
 msgstr "&larr; Предыдущая страница"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3025
+#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3039
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:465
 msgid "Sorry, comments are closed for this item."
 msgstr "Извините, обсуждение этой записи закрыто."
@@ -11479,11 +11890,11 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "По какой-то странной и неприятной причине эту запись не удалось отредактировать."
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3715
+#: wp-includes/functions.php:3716
 msgid "Widgets"
 msgstr "Виджеты"
 
-#: wp-includes/comment-template.php:2202
+#: wp-includes/comment-template.php:2203
 msgid "Website"
 msgstr "Сайт"
 
@@ -11508,7 +11919,7 @@ msgstr "Метки разделяются запятыми"
 msgid "Title:"
 msgstr "Заголовок:"
 
-#: wp-includes/script-loader.php:756
+#: wp-includes/script-loader.php:767
 msgid "Plugin:"
 msgstr "Плагин:"
 
@@ -11518,7 +11929,7 @@ msgstr "Плагин:"
 #: wp-includes/customize/class-wp-customize-media-control.php:235
 #: wp-includes/customize/class-wp-customize-media-control.php:245
 #: wp-includes/customize/class-wp-customize-media-control.php:255
-#: wp-includes/script-loader.php:854
+#: wp-includes/script-loader.php:865
 msgid "Default"
 msgstr "По умолчанию"
 
@@ -11539,7 +11950,7 @@ msgstr "Формат даты"
 msgid "Allow people to post comments on new articles"
 msgstr "Разрешить оставлять комментарии на новые статьи"
 
-#: wp-includes/comment-template.php:2200 wp-login.php:809
+#: wp-includes/comment-template.php:2201 wp-login.php:810
 msgid "Email"
 msgstr "E-mail"
 
@@ -11556,7 +11967,7 @@ msgstr "Первая запись"
 msgid "Settings"
 msgstr "Настройки"
 
-#: wp-includes/post.php:1387
+#: wp-includes/post.php:1446
 msgctxt "page"
 msgid "Add New"
 msgstr "Добавить новую"
@@ -11582,11 +11993,11 @@ msgstr "Да"
 msgid "Edit Category"
 msgstr "Изменить рубрику"
 
-#: wp-includes/general-template.php:399 wp-login.php:973 wp-login.php:1005
+#: wp-includes/general-template.php:399 wp-login.php:1011 wp-login.php:1043
 msgid "Log In"
 msgstr "Войти"
 
-#: wp-login.php:699
+#: wp-login.php:700
 msgid "Strength indicator"
 msgstr "Индикатор надёжности"
 
@@ -11669,12 +12080,12 @@ msgid "Help"
 msgstr "Помощь"
 
 #: wp-includes/media.php:3143 wp-includes/script-loader.php:526
-#: wp-includes/script-loader.php:743
+#: wp-includes/script-loader.php:754
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:91
 msgid "(no title)"
 msgstr "(без названия)"
 
-#: wp-includes/admin-bar.php:550 wp-includes/post.php:1390
+#: wp-includes/admin-bar.php:550 wp-includes/post.php:1449
 msgid "New Post"
 msgstr "Новая запись"
 
@@ -11682,7 +12093,7 @@ msgstr "Новая запись"
 msgid "Edit Media"
 msgstr "Изменить медиафайл"
 
-#: wp-includes/post.php:1390
+#: wp-includes/post.php:1449
 msgid "New Page"
 msgstr "Новая страница"
 
@@ -11691,9 +12102,9 @@ msgid "Select"
 msgstr "Выбрать"
 
 #: wp-includes/class-wp-customize-manager.php:5301
-#: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1695
+#: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1703
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
-#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1126
+#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1137
 msgid "Close"
 msgstr "Закрыть"
 
@@ -11718,16 +12129,16 @@ msgstr "Без рубрики"
 msgid "Links"
 msgstr "Ссылки"
 
-#: wp-includes/post.php:1391
+#: wp-includes/post.php:1450
 msgid "View Page"
 msgstr "Просмотреть страницу"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Images"
 msgstr "Изображения"
 
 #: wp-includes/admin-bar.php:904 wp-includes/admin-bar.php:905
-#: wp-includes/class-wp-editor.php:1716 wp-includes/media.php:3496
+#: wp-includes/class-wp-editor.php:1724 wp-includes/media.php:3496
 msgid "Search"
 msgstr "Поиск"
 
@@ -11752,32 +12163,32 @@ msgid "Add or remove tags"
 msgstr "Добавить или удалить метки"
 
 #: wp-includes/media.php:3499 wp-includes/script-loader.php:524
-#: wp-includes/script-loader.php:692 wp-includes/script-loader.php:773
+#: wp-includes/script-loader.php:703 wp-includes/script-loader.php:784
 msgid "Update"
 msgstr "Обновить"
 
-#: wp-includes/script-loader.php:696
+#: wp-includes/script-loader.php:707
 msgid "Public"
 msgstr "Открыто"
 
-#: wp-includes/script-loader.php:697
+#: wp-includes/script-loader.php:708
 msgid "Public, Sticky"
 msgstr "Открыто, прилеплено"
 
-#: wp-includes/post.php:705 wp-includes/post.php:725
-#: wp-includes/script-loader.php:695
+#: wp-includes/post.php:748 wp-includes/post.php:768
+#: wp-includes/script-loader.php:706
 msgid "Private"
 msgstr "Личное"
 
-#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:681
+#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:692
 msgid "OK"
 msgstr "OK"
 
-#: wp-includes/script-loader.php:699
+#: wp-includes/script-loader.php:710
 msgid "Privately Published"
 msgstr "Опубликовано как личное"
 
-#: wp-includes/script-loader.php:693
+#: wp-includes/script-loader.php:704
 msgid "Save as Pending"
 msgstr "Сохранить для утверждения"
 
@@ -11785,12 +12196,12 @@ msgstr "Сохранить для утверждения"
 msgid "Image URL"
 msgstr "Адрес (URL)"
 
-#: wp-includes/class-wp-editor.php:1103
+#: wp-includes/class-wp-editor.php:1103 wp-includes/media.php:4022
 msgid "Media"
 msgstr "Медиафайлы"
 
 #: wp-includes/media-template.php:330 wp-includes/media-template.php:528
-#: wp-includes/media.php:3568
+#: wp-includes/media.php:3569
 msgid "Edit Image"
 msgstr "Редактировать"
 
@@ -11873,11 +12284,11 @@ msgstr "Миниатюра"
 msgid "Redo"
 msgstr "Повторить"
 
-#: wp-includes/general-template.php:397 wp-login.php:992
+#: wp-includes/general-template.php:397 wp-login.php:1030
 msgid "Password"
 msgstr "Пароль"
 
-#: wp-login.php:805
+#: wp-login.php:806
 msgid "Username"
 msgstr "Имя пользователя"
 
@@ -11917,7 +12328,7 @@ msgid "Reply"
 msgstr "Ответить"
 
 #: wp-includes/class-wp-customize-manager.php:4622
-#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:694
+#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:705
 msgid "Save Draft"
 msgstr "Сохранить"
 
@@ -11929,9 +12340,9 @@ msgstr "Метки"
 msgid "Content"
 msgstr "Содержимое"
 
-#: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1741
+#: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1749
 #: wp-includes/media.php:3498 wp-includes/script-loader.php:510
-#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:682
+#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:693
 msgid "Cancel"
 msgstr "Отмена"
 
@@ -11954,12 +12365,13 @@ msgid "RSS"
 msgstr "RSS"
 
 #: wp-includes/class-wp-theme.php:732 wp-includes/comment-template.php:31
+#: wp-includes/comment.php:3327
 msgid "Anonymous"
 msgstr "Аноним"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:55
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:61
-#: wp-includes/script-loader.php:880
+#: wp-includes/script-loader.php:891
 msgid "Done"
 msgstr "Готово"
 
@@ -11967,15 +12379,15 @@ msgstr "Готово"
 msgid "Users"
 msgstr "Пользователи"
 
-#: wp-includes/post.php:1389
+#: wp-includes/post.php:1448
 msgid "Edit Post"
 msgstr "Редактировать запись"
 
-#: wp-includes/post.php:1391
+#: wp-includes/post.php:1450
 msgid "View Post"
 msgstr "Просмотреть запись"
 
-#: wp-includes/post.php:1387
+#: wp-includes/post.php:1446
 msgctxt "post"
 msgid "Add New"
 msgstr "Добавить новую"
@@ -11999,7 +12411,7 @@ msgstr "Нет"
 msgid "Description"
 msgstr "Описание"
 
-#: wp-includes/comment-template.php:2198
+#: wp-includes/comment-template.php:2199
 msgid "Name"
 msgstr "Имя"
 
@@ -12018,11 +12430,11 @@ msgstr "Цель"
 msgid "Categories"
 msgstr "Рубрики"
 
-#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:722
+#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:733
 msgid "Save"
 msgstr "Сохранить"
 
-#: wp-includes/class-wp-editor.php:1744 wp-includes/script-loader.php:525
+#: wp-includes/class-wp-editor.php:1752 wp-includes/script-loader.php:525
 msgid "Add Link"
 msgstr "Добавить ссылку"
 
@@ -12051,16 +12463,16 @@ msgid "Excerpt"
 msgstr "Отрывок"
 
 #: wp-includes/class-wp-customize-manager.php:4617
-#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:690
+#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:701
 msgid "Publish"
 msgstr "Опубликовать"
 
-#: wp-includes/script-loader.php:656
+#: wp-includes/comment.php:3258 wp-includes/script-loader.php:656
 msgid "Comments"
 msgstr "Комментарии"
 
 #: wp-includes/class-wp-customize-widgets.php:751
-#: wp-includes/class-wp-editor.php:1261 wp-includes/media.php:3537
+#: wp-includes/class-wp-editor.php:1261 wp-includes/media.php:3538
 msgid "Apply"
 msgstr "Применить"
 
@@ -12087,16 +12499,16 @@ msgstr "Нет"
 msgid "Are you sure you want to do this?"
 msgstr "Вы уверены, что хотите это сделать?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2218
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
 msgctxt "noun"
 msgid "Comment"
 msgstr "Комментарий"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1111
-#: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1700
+#: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1708
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
 #: wp-includes/media-template.php:376 wp-includes/media-template.php:557
-#: wp-includes/media.php:3494
+#: wp-includes/media.php:3494 wp-includes/media.php:4017
 #: wp-includes/widgets/class-wp-widget-media-image.php:105
 msgid "URL"
 msgstr "URL"
@@ -12114,20 +12526,20 @@ msgstr "Выйти"
 msgid "Visit Site"
 msgstr "Перейти на сайт"
 
-#: wp-includes/class-wp-editor.php:1634
+#: wp-includes/class-wp-editor.php:1642
 msgid "Y/m/d"
 msgstr "d.m.Y"
 
-#: wp-includes/post.php:703 wp-includes/post.php:724
+#: wp-includes/post.php:746 wp-includes/post.php:767
 msgid "Draft"
 msgstr "Черновик"
 
-#: wp-includes/post.php:704
+#: wp-includes/post.php:747
 msgid "Pending Review"
 msgstr "На утверждении"
 
-#: wp-includes/post.php:706 wp-includes/post.php:726
-#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:700
+#: wp-includes/post.php:749 wp-includes/post.php:769
+#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:711
 msgid "Published"
 msgstr "Опубликовано"
 
@@ -12136,35 +12548,35 @@ msgstr "Опубликовано"
 msgid "Title"
 msgstr "Заголовок"
 
-#: wp-includes/post.php:1394
+#: wp-includes/post.php:1453
 msgid "No posts found."
 msgstr "Записей не найдено."
 
-#: wp-activate.php:134 wp-includes/post-template.php:1611
+#: wp-activate.php:136 wp-includes/post-template.php:1611
 msgid "Password:"
 msgstr "Пароль:"
 
-#: wp-activate.php:133 wp-signup.php:230
+#: wp-activate.php:135 wp-signup.php:230
 msgid "Username:"
 msgstr "Имя пользователя:"
 
-#: wp-activate.php:122
+#: wp-activate.php:124
 msgid "An error occurred during the activation"
 msgstr "При активации произошла ошибка"
 
-#: wp-activate.php:97 wp-activate.php:130
+#: wp-activate.php:99 wp-activate.php:132
 msgid "Your account is now active!"
 msgstr "Ваша учётная запись активирована!"
 
-#: wp-activate.php:85 wp-includes/script-loader.php:830
-#: wp-includes/script-loader.php:831
+#: wp-activate.php:87 wp-includes/script-loader.php:841
+#: wp-includes/script-loader.php:842
 msgid "Activate"
 msgstr "Активировать"
 
-#: wp-activate.php:81
+#: wp-activate.php:83
 msgid "Activation Key:"
 msgstr "Ключ активации:"
 
-#: wp-activate.php:78
+#: wp-activate.php:80
 msgid "Activation Key Required"
 msgstr "Требуется ключ активации"

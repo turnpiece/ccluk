@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-12 10:26:07+0000\n"
+"PO-Revision-Date: 2018-05-18 14:35:39+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,49 +26,859 @@ msgctxt "start of week"
 msgid "1"
 msgstr "1"
 
+#. translators: %s: Privacy Policy Guide URL
+#: wp-admin/includes/misc.php:1356
+msgid "The suggested privacy policy text has changed. Please <a href=\"%s\">review the guide</a> and update your privacy policy."
+msgstr "Den foreslåtte teksten i personvernserklæringen har blitt forandret. Vennligst <a href=\"%s\">se på den nye teksten</a>, og oppdater din egen erklæring."
+
+#: wp-admin/privacy.php:214
+msgid "There are no pages."
+msgstr "Det finnes ingen sider."
+
+#: wp-admin/privacy.php:212
+msgid "Or:"
+msgstr "Eller:"
+
+#: wp-admin/privacy.php:186
+msgid "Select an existing page:"
+msgstr "Velg en eksisterende side:"
+
+#. translators: %s is the update notification bubble, if updates are available.
+#: wp-admin/menu.php:266
+msgid "Privacy %s"
+msgstr "Personvern %s"
+
+#. translators: %s is the update notification bubble, if updates are available.
+#: wp-admin/menu.php:258
+msgid "Settings %s"
+msgstr "Innstillinger %s"
+
+#: wp-admin/privacy.php:119
+msgid "After your privacy policy page is set, we suggest that you edit it."
+msgstr "Etter at du har valgt side for personvernserklæring, anbefaler vi at du tilpasser den."
+
+#: wp-admin/includes/class-wp-internal-pointers.php:164
+msgid "Personal Data and Privacy"
+msgstr "Personopplysninger og personvern"
+
+#. translators: accessibility text
+#: wp-admin/includes/misc.php:1542
+msgid "(opens in a new tab)"
+msgstr "(åpnes i ny fane)"
+
+#. translators: 1: Privacy Policy guide URL, 2: additional link attributes, 3:
+#. accessibility text
+#: wp-admin/includes/misc.php:1536 wp-admin/privacy.php:149
+msgid "Need help putting together your new Privacy Policy page? <a href=\"%1$s\" %2$s>Check out our guide%3$s</a> for recommendations on what content to include, along with policies suggested by your plugins and theme."
+msgstr "Trenger du hjelp med å lage din egen personvernerklæring? <a href=\"%1$s\" %2$s>Bruk veiviseren vår%3$s</a> for å få anbefalinger om hva erklæringen bør inneholde, i tillegg til formuleringer foreslått av utvidelser og temaer."
+
+#: wp-admin/tools.php:15
+msgid "Privacy Policy Guide"
+msgstr "Veiviser for personvernserklæring"
+
+#: wp-admin/includes/misc.php:1736
+msgid "Visitor comments may be checked through an automated spam detection service."
+msgstr "Besøkendes kommentarer kan bli kontrollert gjennom en automatisk gjenkjennelsestjeneste mot søppelkommentarer."
+
+#: wp-admin/includes/misc.php:1708
+msgid "In this subsection you should note what analytics package you use, how users can opt out of analytics tracking, and a link to your analytics provider&#8217;s privacy policy, if any."
+msgstr "I denne delen bør du skrive noe om hvilket brukeranalyseverktøy du bruker, hvordan besøkende kan velge å ikke bli sporet og en lenke til personvernserklæringen til den som leverer verktøyet, hvis en slik foreligger."
+
+#: wp-admin/includes/misc.php:1684
+msgid "In this subsection you should note what information may be disclosed by users who can upload media files. All uploaded files are usually publicly accessible."
+msgstr "I denne delen bør du skrive noe om hva slags informasjon som blir offentliggjort om brukere som kan laste opp mediefiler. Alle opplastede filer er vanligvis offentlig tilgjengelige."
+
+#: wp-admin/includes/misc.php:1677
+msgid "In this subsection you should note what information is captured through comments. We have noted the data which WordPress collects by default."
+msgstr "I denne delen bør du skrive noe om hva slags informasjon som lagres når en kommentar legges inn. Vi har allerede informert om informasjonen WordPress samler inn som standard."
+
+#: wp-admin/includes/misc.php:1668
+msgid "In this section you should note what personal data you collect from users and site visitors. This may include personal data, such as name, email address, personal account preferences; transactional data, such as purchase information; and technical data, such as information about cookies."
+msgstr "I denne delen bør du skrive noe om hva slags personopplysninger du samler inn om brukere og besøkende på nettstedet. Dette kan omfatte personopplysninger, slik som navn, e-postadresse, brukerkontoinnstillinger, transaksjonsdata slik som kjøpsinformasjon, og teknisk informasjon slik som opplysninger om informasjonskapsler."
+
+#: wp-admin/includes/misc.php:1651
+msgid "Suggested text:"
+msgstr "Foreslått tekst:"
+
+#: wp-admin/includes/misc.php:1630
+msgid "We have suggested the sections you will need. Under each section heading you will find a short summary of what information you should provide, which will help you to get started. Some sections include suggested policy content, others will have to be completed with information from your theme and plugins."
+msgstr "Det som følger er et forslag til hvilke seksjoner du trenger. Under hver overskrift vil du finne en kort oppsummering av hva slags informasjon du bør oppgi. Dette skal være en hjelp til å komme i gang. Noen seksjoner inneholder forslag til innhold, men andre må utfylles med informasjon fra utvidelser og temaer."
+
+#. translators: %s: plugin name
+#: wp-admin/includes/misc.php:1594
+msgid "Source: %s"
+msgstr "Kilde: %s"
+
+#: wp-admin/includes/misc.php:1580
+msgid "Updated %s."
+msgstr "Oppdatert %s."
+
+#: wp-admin/includes/misc.php:1575
+msgid "You deactivated this plugin on %s and may no longer need this policy."
+msgstr "Du har deaktivert utvidelsen på %s og trenger kanskje ikke lengre denne erklæringen."
+
+#: wp-admin/includes/misc.php:1573
+msgid "Removed %s."
+msgstr "Fjernet %s."
+
+#: wp-admin/includes/misc.php:1562 wp-admin/includes/misc.php:1627
+msgid "Introduction"
+msgstr "Innledning"
+
+#: wp-admin/includes/user.php:930
+msgid "Invalid request ID when processing eraser data."
+msgstr "Under bearbeiding av informasjon som skal slettes, ble det oppdaget at forespørselens ID er ugyldig."
+
+#: wp-admin/includes/user.php:845
+msgid "Add Data Erasure Request"
+msgstr "Legg til forespørsel om å slette opplysninger"
+
+#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+msgid "Erasing Data..."
+msgstr "Sletter opplysninger …"
+
+#: wp-admin/includes/class-wp-internal-pointers.php:165
+msgid "Personal Data Export and Erasure"
+msgstr "Sletting og eksportering av personopplysninger"
+
+#: wp-admin/includes/class-wp-internal-pointers.php:166
+msgid "New <strong>Tools</strong> have been added to help you with personal data export and erasure requests."
+msgstr "Nye <strong>verktøy</strong> er blitt lagt til for å hjelpe deg til å slette og eksportere personopplysninger."
+
+#: wp-admin/includes/class-wp-internal-pointers.php:168
+msgid "Create or select your site&#8217;s privacy policy page under <strong>Settings &gt; Privacy</strong> to keep your users informed and aware."
+msgstr "Opprett eller velg siden med personvernserklæringen til nettstedet ditt under <strong>Innstillinger og personvern</strong> for å informere og bevisstgjøre dine besøkende."
+
+#: wp-admin/includes/misc.php:1770
+msgid "If you are a member of a regulated industry, or if you are subject to additional privacy laws, you may be required to disclose that information here."
+msgstr "Hvis du er i en bransje med spesielle krav til personvern eller av en annen grunn underligger ytterligere personvernslovgivning, kan det være at du må ha tilleggsinformasjon her."
+
+#: wp-admin/includes/misc.php:1765
+msgid "If your web site provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
+msgstr "Hvis nettstedet ditt inneholder en tjeneste som omfatter automatiske avgjørelser - for eksempel muliggjør at de besøkende kan søke om kreditt eller legger opplysningene om dem inn en annonseringsprofil - må du informere om at dette finner sted og inkludere informasjon om hvordan denne informasjonen blir brukt, hvilke avgjørelser som tas på grunnlag av de innsamlede opplysningene og hvilke rettigheten de besøkende har når det gjelder slike avgjørelser som tas uten menneskelig inngripen."
+
+#: wp-admin/includes/misc.php:1768
+msgid "Industry regulatory disclosure requirements"
+msgstr "Opplysningskrav fra bransjelovgivning"
+
+#: wp-admin/includes/misc.php:1763
+msgid "What automated decision making and/or profiling we do with user data"
+msgstr "Hvilke automatiske avgjørelser som tas og/eller hva slags profiler som bygges på grunnlag av brukernes opplysninger."
+
+#: wp-admin/includes/misc.php:1760
+msgid "If your web site receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
+msgstr "Hvis nettsiden din mottar opplysninger om brukere fra tredjeparter, inkludert annonsetjenester, må du opplyse om det i den delen av personvernserklæringen som omhandler tredjepartsopplysninger."
+
+#: wp-admin/includes/misc.php:1758
+msgid "What third parties we receive data from"
+msgstr "Hvilke tredjeparter vi mottar opplysninger fra"
+
+#: wp-admin/includes/misc.php:1755
+msgid "In this section you should explain what procedures you have in place to deal with data breaches, either potential or real, such as internal reporting systems, contact mechanisms, or bug bounties."
+msgstr "I denne delen bør du forklare hvilke rutiner du har når det gjelder lekkasjer av data, både potensielle og faktiske. Dette kan omfatte interne rapporteringssystemer, kontaktmekanismer eller belønninger for å finne feil."
+
+#: wp-admin/includes/misc.php:1753
+msgid "What data breach procedures we have in place"
+msgstr "Våre rutiner for datalekkasjer"
+
+#: wp-admin/includes/misc.php:1750
+msgid "In this section you should explain what measures you have taken to protect your users&#8217; data. This could include technical measures such as encryption; security measures such as two factor authentication; and measures such as staff training in data protection. If you have carried out a Privacy Impact Assessment, you can mention it here too."
+msgstr "I denne delen bør du si noe om hva slags tiltak du har iverksatt for å beskytte opplysninger om brukeren dine. Dette kan omfatte tekniske tiltak som kryptering, sikkerhetstiltak som tofaktorautentisering eller andre tiltak som opplæring av de ansatte i personvern. Hvis du har gjennomført en analyse av personvernkonsekvenser (PIA), kan du nevne det også her."
+
+#: wp-admin/includes/misc.php:1748
+msgid "How we protect your data"
+msgstr "Hvordan vi beskytter dine personopplysninger"
+
+#: wp-admin/includes/misc.php:1745
+msgid "If you use your site for commercial purposes and you engage in more complex collection or processing of personal data, you should note the following information in your privacy policy in addition to the information we have already discussed."
+msgstr "Hvis nettstedet ditt har kommersielle formål, og du foretar mer komplekse innsamlinger og bearbeidinger av personlige opplysninger, bør du inkludere den følgende informasjonen i personvernserklæringen din i tillegg til informasjonen vi allerede har nevnt."
+
+#: wp-admin/includes/misc.php:1743
+msgid "Additional information"
+msgstr "Tilleggsinformasjon"
+
+#: wp-admin/includes/misc.php:1740
+msgid "In this section you should provide a contact method for privacy-specific concerns. If you are required to have a Data Protection Officer, list their name and full contact details here as well."
+msgstr "I denne delen bør du oppgi en måte å komme i kontakt med deg på ved kommentarer eller spørsmål som har med personvern å gjøre. Hvis du har et personvernombud, oppgi dennes fulle navn og kontaktinformasjon i tillegg."
+
+#: wp-admin/includes/misc.php:1738
+msgid "Your contact information"
+msgstr "Din kontaktinformasjon"
+
+#: wp-admin/includes/misc.php:1734
+msgid "European data protection law requires data about European residents which is transferred outside the European Union to be safeguarded to the same standards as if the data was in Europe. So in addition to listing where data goes, you should describe how you ensure that these standards are met either by yourself or by your third party providers, whether that is through an agreement such as Privacy Shield, model clauses in your contracts, or binding corporate rules."
+msgstr "Europeisk personvernlovgivning krever at opplysninger som omhandler europeiske borgere, og som sendes ut av EU, beskyttes på samme måte som om opplysningene befant seg i Europa. I tillegg til å si noe om hvor opplysningene dine sendes, bør du si noe om hvordan du forsikrer deg om at disse opplysningene behandles med like høy grad av sikkerhet, enten av deg selv eller av leverandøren av tredjeartstjenester. Dette kan være gjennom en avtale som for eksempel Privacy Shield, modellklausuler i kontraktene eller bindende selskapsregler."
+
+#: wp-admin/includes/misc.php:1733
+msgid "In this section you should list all transfers of your site data outside the European Union and describe the means by which that data is safeguarded to European data protection standards. This could include your web hosting, cloud storage, or other third party services."
+msgstr "I denne delen bør du ramse opp alle tilfeller der opplysninger overføres til land utenfor EU og beskrive måten opplysningene beskyttes på der. Denne beskyttelsen må være minst like god som den europeisk lovgivning krever. Dette kan gjelde webhosting, skylagring eller andre tredjepartstjenester."
+
+#: wp-admin/includes/misc.php:1731
+msgid "Where we send your data"
+msgstr "Hvor vi sender opplysninger om deg"
+
+#: wp-admin/includes/misc.php:1729
+msgid "If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes."
+msgstr "Hvis du har en konto på dette nettstedet eller har lagt igjen kommentarer, kan du be om å få en eksportfil som inneholder personopplysningene vi har om deg. Dette omfatter all data du har gitt oss. Du kan også be om at vi sletter alle personopplysninger vi har om deg. Dette omfatter ikke opplysninger vi er pålagt å lagre av administrative, juridiske eller sikkerhetsmessige årsaker."
+
+#: wp-admin/includes/misc.php:1727
+msgid "In this section you should explain what rights your users have over their data and how they can invoke those rights."
+msgstr "I denne delen bør du forklare de rettighetene brukerne har når det gjelder opplysningene du lagrer om dem, og hvordan de kan påberope seg disse rettighetene."
+
+#: wp-admin/includes/misc.php:1725
+msgid "What rights you have over your data"
+msgstr "Rettighetene dine når det gjelder opplysninger vi har om deg"
+
+#: wp-admin/includes/misc.php:1723
+msgid "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information."
+msgstr "For brukere som registrerer seg på dette nettstedet (dersom denne muligheten eksisterer), lagres det også personopplysninger som de oppgir i brukerprofilen sin. Alle brukere kan se, redigere og slette sine egne personopplysninger når som helst (bortsett fra brukernavn). Nettstedets administratorer kan også se og redigere denne informasjonen."
+
+#: wp-admin/includes/misc.php:1722
+msgid "If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue."
+msgstr "Hvis du legger igjen en kommentar, blir kommentaren og informasjon om kommentaren lagret på ubestemt tid. Dette er for at vi kan gjenkjenne oppfølgingskommentarer og godkjenne dem automatisk i stedet for å legge dem i en kø der de må godkjennes manuelt av en redaktør."
+
+#: wp-admin/includes/misc.php:1720
+msgid "In this section you should explain how long you retain personal data collected or processed by the web site. While it is your responsibility to come up with the schedule of how long you keep each dataset for and why you keep it, that information does need to be listed here. For example, you may want to say that you keep contact form entries for six months, analytics records for a year, and customer purchase records for ten years."
+msgstr "I denne delen bør du forklare hvor lenge du lagrer personopplysninger samlet inn eller behandlet av nettstedet. Selv om det er ditt ansvar å lage en plan for hvor lenge du skal beholde hvert datasett og hvorfor du beholder dem, så er det ikke nødvendig å oppgi den informasjonen her. For eksempel kan du si at du beholder kontaktskjema-oppføringer i seks måneder, analysedata i ett år og kunders kjøpsinformasjon i ti år."
+
+#: wp-admin/includes/misc.php:1718
+msgid "How long we retain your data"
+msgstr "Hvor lenge vi oppbevarer opplysninger om deg"
+
+#: wp-admin/includes/misc.php:1715
+msgid "By default WordPress does not share any personal data with anyone."
+msgstr "Som standard deler ikke WordPress noen personopplysninger med andre."
+
+#: wp-admin/includes/misc.php:1714
+msgid "In this section you should name and list all third party providers with whom you share site data, including partners, cloud-based services, payment processors, and third party service providers, and note what data you share with them and why. Link to their own privacy policies if possible."
+msgstr "I denne delen bør du navngi alle tredjepartsleverandører som du deler opplysninger med. Dette kan være samarbeidspartnere, skytjenester, betalingstjenester og andre tredjepartstjenester. Fortell også noe om hva slags opplysninger som deles med dem og hvorfor. Legg ved en lenke til tjenestens egen personvernerklæring om mulig."
+
+#: wp-admin/includes/misc.php:1712
+msgid "Who we share your data with"
+msgstr "Hvem vi deler dine opplysninger med"
+
+#: wp-admin/includes/misc.php:1709
+msgid "By default WordPress does not collect any analytics data. However, many web hosting accounts collect some anonymous analytics data. You may also have installed a WordPress plugin that provides analytics services. In that case, add information from that plugin here."
+msgstr "Som standard samler ikke WordPress selv inn noe analyseinformasjon. Det finnes likevel en del webhostingtjenester som samler inn noe slik anonymisert informasjon. Det kan også være at du har installert en WordPress-utvidelse som tilbyr analysetjenester. Hvis det er tilfellet, legg inn informasjon fra denne utvidelsen her."
+
+#: wp-admin/includes/misc.php:1706
+msgid "Analytics"
+msgstr "Analyse"
+
+#: wp-admin/includes/misc.php:1704
+msgid "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracing your interaction with the embedded content if you have an account and are logged in to that website."
+msgstr "Disse nettstedene kan samle inn opplysninger om deg, bruke informasjonskapsler eller bygge inn sporingssystemer fra en tredjepart og overvåke hva du gjør via dette innebygde innholdet. Dette omfatter også sporing av handlingene dine via det innebygde innholdet dersom du har en konto og er logget inn på nettstedet."
+
+#: wp-admin/includes/misc.php:1703
+msgid "Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website."
+msgstr "Artikler på denne siden kan inkludere innebygd innhold (f.eks. videoer, bilder, artikler osv.). Innebygd innhold fra andre nettsteder oppfører seg på nøyaktig samme måte som om den besøkende hadde besøkt nettstedet som det innebygde innholdet kommer fra."
+
+#: wp-admin/includes/misc.php:1702
+msgid "Embedded content from other websites"
+msgstr "Innebygd innhold fra andre nettsteder"
+
+#: wp-admin/includes/misc.php:1700
+msgid "If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day."
+msgstr "Hvis du redigerer eller publiserer en artikkel, vil ytterligere en informasjonskapsel bli lagret i nettleseren din. Denne informasjonskapselen inneholder ingen personopplysninger, men bare ID-en til artikkelen du nettopp redigerte. Den utløper etter én dag."
+
+#: wp-admin/includes/misc.php:1699
+msgid "When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed."
+msgstr "Når du logger deg inn, blir det opprettet informasjonskapsler som lagrer innloggingsinformasjonen din og valg du har tatt når det gjelder hvordan innhold skal vises. Informasjonskapsler med innloggingsinformasjon utløper etter to dager, mens de med visningsvalg varer i ett år. Hvis du krysser av for &lauot;Husk meg&raquot;, vil innloggingsinformasjonen din oppbevares i to uker. Hvis du logger deg ut av kontoen din, vil disse informasjonskapslene forsvinne."
+
+#: wp-admin/includes/misc.php:1698
+msgid "If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
+msgstr "Hvis du har en konto og logger deg inn på dette nettstedet, vil vi opprette en midlertidig informasjonskapsel for å avgjøre om nettleseren din støtter bruk av dette. Denne informasjonskapselen innholder ingen personopplysninger og forsvinner så snart du lukker nettleseren din."
+
+#: wp-admin/includes/misc.php:1697
+msgid "If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year."
+msgstr "Hvis du legger inn en kommentar på dette nettstedet, kan du be oss om å huske navn, e-post og nettsted. Denne informasjonen lagres i en informasjonskapsel og er der for å gjøre ting lettere for deg. Du trenger da ikke å gi inn denne informasjonen på nytt neste gang du legger inn en kommentar. Disse informasjonskapslene utløper etter ett år."
+
+#: wp-admin/includes/misc.php:1695
+msgid "In this subsection you should list the cookies your web site uses, including those set by your plugins, social media, and analytics. We have provided the cookies which WordPress installs by default."
+msgstr "I denne delen bør du ramse opp informasjonskapsler som nettstedet ditt bruker, inkludert de som opprettes av utvidelser, sosiale medier og analyseverktøy. Informasjonskapsler som WordPress selv oppretter, er allerede omtalt."
+
+#: wp-admin/includes/misc.php:1693
+msgid "Cookies"
+msgstr "Informasjonskapsler"
+
+#: wp-admin/includes/misc.php:1680
+msgid "An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment."
+msgstr "En anonym tekststreng generert på grunnlag av e-postadressen din (også kalt en «hash») kan bli sendt til tjenesten Gravatar for å undersøke om du har en konto der. Personvernerklæringen til Gravatar ligger her: https://automattic.com/privacy/. Etter at kommentaren din er blitt godkjent, vil profilbildet ditt være synlig for hvem som helst i forbindelse med kommentaren din."
+
+#: wp-admin/includes/misc.php:1679
+msgid "When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection."
+msgstr "Når besøkende legger inn kommentarer på siden, lagres informasjonen gitt inn i kommentarskjemaet i tillegg til IP-adressen til den besøkende og den besøkendes nettleserversjon. Dette gjøres for å bidra til å unngå useriøse kommentarer."
+
+#: wp-admin/includes/misc.php:1690
+msgid "By default, WordPress does not include a contact form. If you use a contact form plugin, use this subsection to note what personal data is captured when someone submits a contact form, and how long you keep it. For example, you may note that you keep contact form submissions for a certain period for customer service purposes, but you do not use the information submitted through them for marketing purposes."
+msgstr "WordPress selv inneholder i utgangspunktet ikke noe kontaktskjema. Hvis du benytter en utvidelse for å opprette et, bruker du denne delen til å si noe om hvilke personopplysninger som lagres når noen sender inn skjemaet og hvor lenge du oppbevarer dem. For eksempel kan du si at du oppbevarer innsendt informasjon i en viss tidsperiode av årsaker som har å gjøre med kundesørvis, men at du ikke bruker denne informasjonen til markedsføring."
+
+#: wp-admin/includes/misc.php:1688
+msgid "Contact forms"
+msgstr "Kontaktskjemaer"
+
+#: wp-admin/includes/misc.php:1686
+msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
+msgstr "Hvis du laster opp bilder til nettstedet, bør du unngå å laste opp bilder som inneholder informasjon om stedet det er tatt (EXIF GPS). Besøkende på siden kan laste ned og hente ut slik informasjon fra bilder på siden."
+
+#: wp-admin/includes/misc.php:1672
+msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
+msgstr "I utgangspunktet samler ikke WordPress selv inn personopplysninger om besøkende, og samler bare inn opplysningene som vises på brukerens profilvisning om brukere som har en konto. Det kan likevel være at du har utvidelser som samler inn personopplysninger. Hvis det er tilfelle, skal du legge inn informasjon om det nedenfor."
+
+#: wp-admin/includes/misc.php:1671
+msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
+msgstr "Personopplysninger blir ikke bare opprettet av brukernes handlinger med nettstedet. Personopplysninger blir også generert av tekniske prosesser slik som kontaktskjema, kommentarer, informasjonskapsler og innbygging av innhold fra tredjeparter."
+
+#: wp-admin/includes/misc.php:1670
+msgid "In addition to listing what personal data you collect, you need to note why you collect it. These explanations must note either the legal basis for your data collection and retention or the active consent the user has given."
+msgstr "I tillegg til å ramse opp hva hvilke personopplysninger du samler inn, trenger du forklare hvorfor du samler dem. Denne forklaringen må oppgi enten det juridiske grunnlaget for datainnsamlingen og -lagringen, eller det aktive samtykket brukeren har gitt."
+
+#: wp-admin/includes/misc.php:1669
+msgid "You should also note any collection and retention of sensitive personal data, such as data concerning health."
+msgstr "Du bør også oppgi enhver innsamling og lagring av sensitive personopplysninger, slik som opplysninger om helsetilstand."
+
+#. translators: %s Site URL
+#: wp-admin/includes/misc.php:1664
+msgid "Our website address is: %s."
+msgstr "Vår nettstedsadresse er: %s"
+
+#: wp-admin/includes/misc.php:1661
+msgid "The amount of information you may be required to show will vary depending on your local or national business regulations. You may, for example, be required to display a physical address, a registered address, or your company registration number."
+msgstr "Mengden informasjon du trenger å vise avhenger dine lokale eller nasjonale reguleringer. Du kan, for eksempel, måtte vise en fysisk adresse, en registrert adresse, eller din bedrifts registreringsnummer."
+
+#: wp-admin/includes/misc.php:1666
+msgid "What personal data we collect and why we collect it"
+msgstr "Hvilke personopplysninger vi samler inn og hvorfor vi samler de inn"
+
+#: wp-admin/includes/misc.php:1658
+msgid "Who we are"
+msgstr "Hvem vi er"
+
+#: wp-admin/includes/misc.php:1660
+msgid "In this section you should note your site URL, as well as the name of the company, organization, or individual behind it, and some accurate contact information."
+msgstr "I denne seksjonen bør du legge inn nettstedets URL, navnet på firmaet, organisasjonen eller personen bak nettstedet, og korrekt kontaktinformasjon."
+
+#: wp-admin/includes/misc.php:1632
+msgid "It is your responsibility to write a comprehensive privacy policy, to make sure it reflects all national and international legal requirements on privacy, and to keep your policy current and accurate."
+msgstr "Det er ditt ansvar å skrive en omfattende personvernerklæring, å sørge for at den gjenspeiler alle nasjonale og internasjonale lovkrav om personvern, og å holde din din personvernerklæring oppdatert og korrekt."
+
+#: wp-admin/includes/misc.php:1631
+msgid "Please edit your privacy policy content, making sure to delete the summaries, and adding any information from your theme and plugins. Once you publish your policy page, remember to add it to your navigation menu."
+msgstr "Vennligst rediger din personvernerklæring. Sørg for å slette sammendragene og legg til all informasjon fra ditt tema og dine utvidelser. Når du har publisert personvernerklæringen, må du huske å legge den til i en navigasjonsmeny."
+
+#: wp-admin/includes/misc.php:1628
+msgid "Hello,"
+msgstr "Hei,"
+
+#: wp-admin/includes/misc.php:1629
+msgid "This text template will help you to create your web site&#8217;s privacy policy."
+msgstr "Denne tekstmalen vil hjelpe deg å lage en personvernerklæring for ditt nettsted."
+
+#: wp-admin/privacy.php:111
+msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
+msgstr "Som nettstedseier kan du måtte følge nasjonale og internasjonale personvernlover. For eksempel kan du være pålagt å lage og vise en personvernerklæring."
+
+#: wp-admin/includes/user.php:1550
+msgid "Erasing Data has failed."
+msgstr "Sletting av data mislyktes."
+
+#: wp-admin/includes/user.php:1508
+msgid "Force Erase has failed."
+msgstr "Tvungen sletting mislyktes."
+
+#: wp-admin/includes/user.php:1439
+msgid "Email could not be sent."
+msgstr "Epost kunne ikke sendes."
+
+#: wp-admin/includes/user.php:1397
+msgid "Download has failed."
+msgstr "Nedlasting mislyktes."
+
+#: wp-admin/includes/file.php:1971
+msgctxt "date/time"
+msgid "On"
+msgstr "den"
+
+#: wp-admin/includes/file.php:1967
+msgctxt "website URL"
+msgid "At URL"
+msgstr "På URL"
+
+#: wp-admin/includes/file.php:1963
+msgctxt "website name"
+msgid "For site"
+msgstr "For nettsted"
+
+#: wp-admin/includes/file.php:1959
+msgctxt "email address"
+msgid "Report generated for"
+msgstr "Rapport laget for"
+
+#. translators: %s: array index
+#: wp-admin/includes/ajax-actions.php:4119
+msgid "Exporter array at index %s does not include a friendly name."
+msgstr "Eksport-rekken på indeks %s inneholder ikke et vennlig navn."
+
+#: wp-admin/includes/ajax-actions.php:4029
+#: wp-admin/includes/ajax-actions.php:4209
+msgid "Missing request ID."
+msgstr "Mangler forespørsel-ID."
+
+#: wp-admin/includes/ajax-actions.php:4047
+msgid "Invalid request type."
+msgstr "Ugyldig forespørselstype."
+
+#: wp-admin/includes/ajax-actions.php:4056
+msgid "Missing exporter index."
+msgstr "Mangler eksportør-indeks."
+
+#: wp-admin/includes/ajax-actions.php:4061
+#: wp-admin/includes/ajax-actions.php:4245
+msgid "Missing page index."
+msgstr "Mangler side-indeks."
+
+#: wp-admin/includes/ajax-actions.php:4095
+msgid "Exporter index cannot be negative."
+msgstr "Eksportør-indeksen kan ikke være negativ."
+
+#: wp-admin/includes/ajax-actions.php:4099
+msgid "Exporter index out of range."
+msgstr "Eksportør-indeksen er utenfor grensene."
+
+#. translators: %s: array index
+#: wp-admin/includes/ajax-actions.php:4113
+msgid "Expected an array describing the exporter at index %s."
+msgstr "Forventet en rekke som beskriver eksportøren på indeks %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4125
+msgid "Exporter does not include a callback: %s."
+msgstr "Eksportøren inneholder ikke et tilbakekall: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4131
+msgid "Exporter callback is not a valid callback: %s."
+msgstr "Eksportørens tilbakekall er ikke et gyldig tilbakekall: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4146
+msgid "Expected response as an array from exporter: %s."
+msgstr "Forventet responsen som en rekke fra eksportøren: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4152
+msgid "Expected data in response array from exporter: %s."
+msgstr "Forventet data i respons-rekken fra eksportør: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4158
+msgid "Expected data array in response array from exporter: %s."
+msgstr "Forventet data-rekke i respons-rekken fra eksportør: %s"
+
+#: wp-admin/includes/ajax-actions.php:4239
+msgid "Missing eraser index."
+msgstr "Manglende sletter-indeks."
+
+#: wp-admin/includes/ajax-actions.php:4280
+msgid "Eraser index is out of range."
+msgstr "Sletter-indeksen er utenfor grensene."
+
+#: wp-admin/includes/user.php:820
+msgid "Sorry, you are not allowed to erase data on this site."
+msgstr "Beklager, du har ikke adgang til å slette data på dette nettstedet."
+
+#: wp-admin/includes/ajax-actions.php:4089
+msgid "An exporter has improperly used the registration filter."
+msgstr "En eksportør har brukt registreringsfilteret på en ukorrekt måte."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4164
+msgid "Expected done (boolean) in response array from exporter: %s."
+msgstr "Forventet markert utført (boolsk) i respons-rekken fra eksportør: %s."
+
+#: wp-admin/includes/user.php:749
+msgid "Sorry, you are not allowed to export personal data on this site."
+msgstr "Beklager, du har ikke adgang til å eksportere personopplysninger på dette nettstedet."
+
+#: wp-admin/privacy.php:202
+msgid "Use This Page"
+msgstr "Bruk denne siden"
+
+#: wp-admin/privacy.php:221
+msgid "Create New Page"
+msgstr "Lag en ny side"
+
+#: wp-admin/privacy.php:120
+msgid "We would also suggest reviewing your privacy policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new suggested information for you to consider adding to your policy."
+msgstr "Vi vil også foreslå å gjennomgå din personvernerklæring fra tid til annen, spesielt etter å ha installert eller oppdatert et tema eller noen utvidelser. Det kan være mange endringer eller foreslått ny informasjon å vurdere å legge til i din personvernerklæring."
+
+#. translators: 1: URL to edit page, 2: URL to view page
+#: wp-admin/privacy.php:140
+msgid "<a href=\"%1$s\">Edit</a> or <a href=\"%2$s\">view</a> your privacy policy page content."
+msgstr "<a href=\"%1$s\">Rediger</a> eller <a href=\"%2$s\">vis</a> innholdet på din personvernerklæring."
+
+#: wp-admin/privacy.php:166
+msgid "Change your Privacy Policy page"
+msgstr "Endre din personvernerklæring"
+
+#: wp-admin/privacy.php:168
+msgid "Select a Privacy Policy page"
+msgstr "Velg en side for personvernerklæring"
+
+#: wp-admin/privacy.php:116
+msgid "However, it is your responsibility to use those resources correctly, to provide the information that your privacy policy requires, and to keep that information current and accurate."
+msgstr "Men det er ditt ansvar å bruke de ressursene riktig, å skaffe den informasjonen som din personvernerklæring krever, og å holde den informasjonen oppdatert og korrekt."
+
+#: wp-admin/privacy.php:109
+msgid "Privacy Policy page"
+msgstr "Personvernerklæring"
+
+#. translators: Privacy Policy page slug
+#: wp-admin/includes/upgrade.php:280
+msgid "privacy-policy"
+msgstr "personvern"
+
+#. translators: %s: URL to Customizer -> Menus
+#: wp-admin/privacy.php:30
+msgid "Privacy policy page updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
+msgstr "Siden med personvernerklæringen ble oppdatert. Husk å <a href=\"%s\">oppdatere dine menyer</a>!"
+
+#: wp-admin/privacy.php:56
+msgid "Unable to create privacy policy page."
+msgstr "Klarte ikke å opprette siden for personvernerklæringen."
+
+#: wp-admin/privacy.php:80
+msgid "The currently selected privacy policy page does not exist. Please create or select new page."
+msgstr "Den valgte siden for personvernerklæringen eksisterer ikke. Vennligst opprett en eller velg en annen side."
+
+#. translators: URL to Pages Trash
+#: wp-admin/privacy.php:90
+msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
+msgstr "Den nåværende siden for personvernerklæringen ligger i papirkurven. Vennligst opprett en ny side, velg en annen side, eller <a href=\"%s\">gjenopprett nåværende side</a>."
+
+#: wp-admin/privacy.php:112
+msgid "If you already have a privacy policy page, please select it below. If not, please create one."
+msgstr "Om du allerede har en side med personvernerklæring, vennligst velg den nedenfor. Om ikke, vennligst opprett en."
+
+#: wp-admin/privacy.php:115
+msgid "The new page will include help and suggestions for your privacy policy."
+msgstr "Den nye siden vil inkludere hjelp og forslag til din personvernerklæring."
+
+#: wp-admin/includes/misc.php:1604
+msgid "Copy suggested policy text from %s."
+msgstr "Kopiér foreslått personvernerklæring fra %s."
+
+#. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-admin/includes/file.php:2070
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request for an export of personal data has been completed. You may\n"
+"download your personal data by clicking on the link below. For privacy\n"
+"and security, we will automatically delete the file on ###EXPIRATION###,\n"
+"so please download it before then.\n"
+"\n"
+"###LINK###\n"
+"\n"
+"This email has been sent to ###EMAIL###.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Hei,\n"
+"\n"
+"Din forespørsel om eksport av personopplysninger er fullført. Du kan\n"
+"laste ned dine personopplysninger ved å klikke på lenken nedenfor. Av hensyn til\n"
+"personvern og sikkerhet vil vi automatisk slette denne filen den ###EXPIRATION###,\n"
+"så vær vennlig å laste den ned før det.\n"
+"\n"
+"###LINK###\n"
+"\n"
+"Denne eposten har blitt sendt til ###EMAIL###.\n"
+"\n"
+"Vennlig hilsen\n"
+"Alle på ###SITENAME###\n"
+"###SITEURL###"
+
+#: wp-admin/includes/file.php:2019
+msgid "Unable to add data to export file."
+msgstr "Kunne ikke legge til data i eksportfilen."
+
+#: wp-admin/includes/file.php:2170
+msgid "Invalid request ID when merging exporter data."
+msgstr "Ugyldig forespørsles-ID når eksport-data skulle slås sammen."
+
+#: wp-admin/includes/user.php:1436
+msgid "Email Data"
+msgstr "Send data med epost"
+
+#: wp-admin/includes/user.php:1437
+msgid "Sending Email..."
+msgstr "Sender epost&hellip;"
+
+#: wp-admin/includes/user.php:1438
+msgid "Email sent."
+msgstr "Epost sendt."
+
+#: wp-admin/includes/user.php:1396
+msgid "Download Personal Data Again"
+msgstr "Last ned personopplysninger på nytt."
+
+#: wp-admin/includes/file.php:2118
+msgid "[%s] Personal Data Export"
+msgstr "[%s] eksport av personopplysninger"
+
+#: wp-admin/includes/file.php:2125
+msgid "Unable to send personal data export email."
+msgstr "Kunne ikke sende epost med eksport av personopplysninger."
+
+#: wp-admin/includes/ajax-actions.php:4052
+msgid "A valid email address must be given."
+msgstr "En gyldig epost-adresse må oppgis."
+
+#: wp-admin/includes/file.php:1872
+msgid "Unable to generate export file. ZipArchive not available."
+msgstr "Ikke i stand til å lage eksportfilen. ZipArchive er ikke tilgjengelig."
+
+#: wp-admin/includes/file.php:1879
+msgid "Invalid request ID when generating export file."
+msgstr "Ugyldig forespørsel-ID når eksportfilen skulle lages."
+
+#: wp-admin/includes/file.php:1885
+msgid "Invalid email address when generating export file."
+msgstr "Ugyldig epost-adresse når eksportfilen skulle lages."
+
+#: wp-admin/includes/file.php:1902
+msgid "Unable to protect export folder from browsing."
+msgstr "Klarer ikke beskytte eksport-mappen mot nettlesing."
+
+#: wp-admin/includes/file.php:1916
+msgid "Unable to open export file (HTML report) for writing."
+msgstr "Klarer ikke åpne eksportfilen (HTML-rapport) for skriving."
+
+#: wp-admin/includes/file.php:2038
+msgid "Unable to open export file (archive) for writing."
+msgstr "Klarer ikke å åpne eksportfilen (arkiv) for skriving."
+
+#. translators: %s: user's e-mail address
+#: wp-admin/includes/file.php:1921
+msgid "Personal Data Export for %s"
+msgstr "Eksport av personopplysninger for %s"
+
+#: wp-admin/includes/file.php:1948
+msgid "Personal Data Export"
+msgstr "Eksport av personopplysninger"
+
+#: wp-admin/includes/file.php:2062
+msgid "Invalid request ID when sending personal data export email."
+msgstr "Ugyldig forespørsles-ID når epost med eksport av personopplysninger skulle sendes."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4368
+msgid "Expected messages key to reference an array in response array from %1$s eraser (index %2$d)."
+msgstr "Forventet at meldingsnøkkelen refererer til en rekke i respons-rekken fra %1$s sletter (indeks %2$d)."
+
+#: wp-admin/includes/ajax-actions.php:4235
+msgid "Invalid email address in request."
+msgstr "Ugyldig epost i forespørsel."
+
+#: wp-admin/includes/ajax-actions.php:4276
+msgid "Eraser index cannot be less than one."
+msgstr "Sletteindeksen kan ikke være mindre enn én."
+
+#: wp-admin/includes/ajax-actions.php:4103
+#: wp-admin/includes/ajax-actions.php:4284
+msgid "Page index cannot be less than one."
+msgstr "Sideindeksen kan ikke være mindre enn én."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4293
+msgid "Expected an array describing the eraser at index %d."
+msgstr "Forventet en rekke som beskriver sletteren på indeks %d."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4298
+msgid "Eraser array at index %d does not include a callback."
+msgstr "Sletter-rekken på indeks %d inkluderer ikke en tilbakekobling."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4303
+msgid "Eraser callback at index %d is not a valid callback."
+msgstr "Tilbakekoblingen på sletter-indeks %d er ikke gyldig."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4308
+msgid "Eraser array at index %d does not include a friendly name."
+msgstr "Sletter-rekken på indeks %d inneholder ikke et vennlig navn."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4324
+msgid "Did not receive array from %1$s eraser (index %2$d)."
+msgstr "Mottok ikke en rekke fra %1$s sletteren (indeks %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4335
+msgid "Expected items_removed key in response array from %1$s eraser (index %2$d)."
+msgstr "Forventet nøkkel items_removed i respons-rekken fra %1$s sletter (indeks %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4346
+msgid "Expected items_retained key in response array from %1$s eraser (index %2$d)."
+msgstr "Forventet nøkkel items_retained i respons-rekken fra %1$s eraser (index %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4357
+msgid "Expected messages key in response array from %1$s eraser (index %2$d)."
+msgstr "Forventet meldingsnøkkel i respons-rekken fra %1$s sletter (indeks %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4379
+msgid "Expected done flag in response array from %1$s eraser (index %2$d)."
+msgstr "Forventet fullført-flagg i respons-rekken fra %1$s sletter (indeks %2$d)."
+
+#: wp-admin/includes/ajax-actions.php:4034
+#: wp-admin/includes/ajax-actions.php:4215
+#: wp-admin/includes/ajax-actions.php:4229
+msgid "Invalid request ID."
+msgstr "Ugyldig forespørsel-ID."
+
+#: wp-admin/includes/user.php:637 wp-admin/includes/user.php:649
+msgid "Invalid action."
+msgstr "Ugyldig handling."
+
+#: wp-admin/includes/user.php:772
+msgid "Add Data Export Request"
+msgstr "Legg til forespørsel om data-eksport"
+
+#: wp-admin/includes/user.php:776 wp-admin/includes/user.php:849
+msgid "Username or email address"
+msgstr "Brukernavn eller epost-adresse"
+
+#: wp-admin/includes/user.php:778 wp-admin/includes/user.php:851
+msgid "Send Request"
+msgstr "Send forespørsel"
+
+#: wp-admin/includes/user.php:1010
+msgid "Requester"
+msgstr "Forespørrer"
+
+#: wp-admin/includes/user.php:1112
+msgid "Resend email"
+msgstr "Send eposten på nytt"
+
+#. translators: %d: number of requests
+#: wp-admin/includes/user.php:1142
+msgid "Deleted %d request"
+msgid_plural "Deleted %d requests"
+msgstr[0] "Slettet %d forespørsel"
+msgstr[1] "Slettet %d forespørsler"
+
+#: wp-admin/includes/user.php:1395
+msgid "Downloading Data..."
+msgstr "Laster ned data&hellip;"
+
+#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+msgid "Retry"
+msgstr "Forsøk igjen"
+
+#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+msgid "Waiting for confirmation"
+msgstr "Venter på bekreftelse"
+
+#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+msgid "Remove request"
+msgstr "Fjern forespørsel"
+
+#: wp-admin/includes/user.php:1012
+msgid "Requested"
+msgstr "Forespurt"
+
+#: wp-admin/includes/user.php:564 wp-admin/includes/user.php:688
+msgid "Unable to initiate confirmation request."
+msgstr "Kunne ikke starte bekreftelsesforespørsel."
+
+#: wp-admin/includes/user.php:621
+msgid "Confirmation request sent again successfully."
+msgstr "Bekreftelsesforespørsel ble sendt på nytt."
+
+#: wp-admin/includes/user.php:660
+msgid "Unable to add this request. A valid email address or username must be supplied."
+msgstr "Kunne ikke legge til denne forespørselen. En gyldig epost-adresse eller et brukernavn må leveres med."
+
+#: wp-admin/includes/user.php:699
+msgid "Confirmation request initiated successfully."
+msgstr "Bekreftelsesforespørsel ble startet."
+
+#. translators: %d: number of requests
+#: wp-admin/includes/user.php:1159
+msgid "Re-sent %d request"
+msgid_plural "Re-sent %d requests"
+msgstr[0] "Sendte %d forespørsel på nytt"
+msgstr[1] "Sendte %d forespørsler på nytt"
+
+#: wp-admin/includes/user.php:1394
+msgid "Download Personal Data"
+msgstr "Last ned personopplysninger"
+
+#: wp-admin/includes/user.php:1506
+msgid "Force Erase Personal Data"
+msgstr "Tving sletting av personopplysninger"
+
+#: wp-admin/includes/user.php:773 wp-admin/includes/user.php:846
+msgid "An email will be sent to the user at this email address asking them to verify the request."
+msgstr "En epost som ber om bekreftelse av forespørselen vil bli sendt til brukeren på denne epost-adressen."
+
+#: wp-admin/includes/plugin-install.php:595
+msgid "Requires PHP Version:"
+msgstr "Krever PHP-versjon:"
+
 #: wp-admin/customize.php:80
 msgid "This changeset cannot be further modified."
 msgstr "Dette endringssettet kan ikke endres ytterligere."
 
-#: wp-admin/about.php:316
+#: wp-admin/about.php:334
 msgid "Improvements to Roles and Capabilities"
 msgstr "Forbedringer i roller og tilganger"
 
-#: wp-admin/about.php:317
+#: wp-admin/about.php:335
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Nye rolleegenskaper som tillater granulær administrasjon av utvidelser og oversettelsesfiler er innført. I tillegg har har sidebytte-prosessen for multisite blitt finjustert til å oppdatere de tilgjengelige rollene og rolleegenskapene på en mer pålitelig og konsistent måte."
 
-#: wp-admin/about.php:313
+#: wp-admin/about.php:331
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "WordPress 4.9 inkluderer en oppgradert versjon av MediaElement.js hvilket fjerner avhengighet til jQuery, forbedrer tilgjengelighet, moderniserer grensesnitt og fikser mange bugs. "
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:330
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js oppgradert til 4.2.6"
 
-#: wp-admin/about.php:309
+#: wp-admin/about.php:327
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "Vi har innført et nytt koderedigeringsbibliotek, CodeMirror, for bruk med kjernen. Bruk den for å forbedre kodeskriving og redigeringsopplevelser, som CSS- og JavaScript-inkluderingsfelt, i din utvidelse"
 
-#: wp-admin/about.php:308
+#: wp-admin/about.php:326
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror tilgjengelig for bruk i dine temaer og plugins."
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:302
+#: wp-admin/about.php:320
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "Vi har gjort flere forbedringer på JS-APIet til Customizeren i WordPress 4.9, vanskeligheter er fjernet og det er nå like enkelt å jobbe med som PHP-APIet. Det er også en ny base med kontrollmaler, en dato-/tid-kontroll og seksjon-/panel-/global-notifikasjoner for å nevne noen. <a href=\"%s\">Se hele listen.</a>"
 
-#: wp-admin/about.php:298
+#: wp-admin/about.php:316
 msgid "Customizer JS API Improvements"
 msgstr "Forbedringer i JS-APIet til Customizeren"
 
-#: wp-admin/privacy.php:36
+#: wp-admin/freedoms.php:41
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Disse dataene blir brukt til å sørge for generelle forsterkninger til WordPress, hvilket inkluderer hjelp til å beskytte ditt nettsted ved å finne og automatisk installere nye oppdateringer. Den blir også brukt til å kalkulere statistikk, som vist på <a href=\"%s\">WordPress.org stats page</a>."
 
-#: wp-admin/about.php:211
+#: wp-admin/about.php:229
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr ""
 "Når du redigerer temaer og plugins direkte, vil WordPress 4.9 høflig advare deg om at dette er en farlig praksis. WordPress vil anbefale deg på det sterkeste å ta backup av filene dine før du lagrer, så de ikke blir overskrevet ved neste oppdatering. \n"
@@ -83,7 +893,7 @@ msgstr "Det er ikke nødvendig å endre CSS-koden herfra &ndash; du kan redigere
 msgid "Did you know?"
 msgstr "Visste du at?"
 
-#: wp-admin/credits.php:122
+#: wp-admin/credits.php:121
 msgid "Noteworthy Contributors"
 msgstr "Bemerkelsesverdige bidragsytere"
 
@@ -146,143 +956,142 @@ msgstr "https://codex.wordpress.org/Giving_WordPress_Its_Own_Directory"
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Skriv inn adressen her om du  <a href=\"%s\">vil at ditt nettsteds hjemmeside skal være forskjellig fra din WordPressinstallasjonsmappe</a>. "
 
-#: wp-admin/about.php:281
+#: wp-admin/about.php:299
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://nb.wordpress.org/plugins/gutenberg/"
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:291
+#: wp-admin/about.php:309
 msgid "Developer Happiness %s"
 msgstr "Utviklerglede %s"
 
-#: wp-admin/about.php:280
+#: wp-admin/about.php:298
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "WordPress jobber med en ny måte å lage og behandle innhold på, og vi vil gjerne ha din hjelp. Er du interessert i å være en <a href=\"%s\">tidlig tester</a> eller eller å bidra til Gutenberg-prosjektet? <a href=\"%s\">Bidra på GitHub</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:274
+#: wp-admin/about.php:292
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Lån en hånd med Gutenberg %s"
 
-#: wp-admin/about.php:241
+#: wp-admin/about.php:259
 msgid "Site Building Improvements"
 msgstr "Sidebyggerforbedringer"
 
-#: wp-admin/about.php:249
+#: wp-admin/about.php:267
 msgid "More Reliable Theme Switching"
 msgstr "Mer pålitelig temabytting"
 
-#: wp-admin/about.php:218
+#: wp-admin/about.php:236
 msgid "Even More Widget Updates"
 msgstr "Enda fler widgetoppdateringer"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:244
 msgid "The New Gallery Widget"
 msgstr "Den nye galleriwidgeten"
 
-#: wp-admin/about.php:188
+#: wp-admin/about.php:206
 msgid "Coding Enhancements"
 msgstr "Kodeforsterkninger"
 
-#: wp-admin/about.php:181
+#: wp-admin/about.php:199
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Ble du distrahert vekk fra pulten din før du rakk å lagre det nye utkastet til ditt nye design? Bekymre deg ikke, for når du kommer tilbake så vil WordPress 4.9 spørre deg høflig om du vil lagre dine nylige endringer. "
 
-#: wp-admin/about.php:180
+#: wp-admin/about.php:198
 msgid "A Prompt to Protect Your Work"
 msgstr "En melding om å bevare arbeidet ditt"
 
-#: wp-admin/about.php:173
+#: wp-admin/about.php:191
 msgid "Design Locking To Guard Your Changes"
 msgstr "Design-lås for å beskytte dine endringer"
 
-#: wp-admin/privacy.php:38
+#: wp-admin/freedoms.php:43
 msgid "We take privacy and transparency very seriously. To learn more about what data we collect, and how we use it, please visit <a href=\"%s\">WordPress.org/about/privacy</a>."
 msgstr "Vi tar personvern og åpenhet seriøst. For å lære mer om dataene vi samler og hvordan vi bruker dem, besøk oss gjerne på <a href=\"%s\">WordPress.org/about/privacy</a> ."
 
-#: wp-admin/privacy.php:34
+#: wp-admin/freedoms.php:39
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "Fra tid til annen, vil ditt WordPressnettsted kanskje sende data til WordPress.org &#8212; ikludert, men ikke begrenset til &#8212; versjonen av WordPress du bruker, og en liste av alle installerte plugins og temaer. "
 
-#: wp-admin/about.php:257
+#: wp-admin/about.php:275
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Var du forvirret av stegene for å lage en ny meny? Kanskje ikke nå lenger! Vi har forbedret brukeropplevelsen for en smidigere prosess. Nylig oppdatert tekst vil guide deg."
 
-#: wp-admin/about.php:256
+#: wp-admin/about.php:274
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Bedre menyinstruksjoner = mindre forvirring"
 
-#: wp-admin/about.php:250
+#: wp-admin/about.php:268
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "Når du bytter temaer kan widgeter noen ganger tro at de kan bytte plassering etter eget forgodtbefinnende. Forbedringer i WordPress 4.9 gir en mer persistent meny- og widgetplassering når du bestemmer deg for at det er på tide med et nytt tema. I tillegg kan du forhåndsvise installerte temaer eller laste ned, installere og forhåndsvise nye temaer riktig. Ingenting sier hendig som å kunne forhåndsvise før du lanserer."
 
-#: wp-admin/about.php:234
+#: wp-admin/about.php:252
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Vil du legge til media i din tekst-widget? Bygg inn bilder, video og lyd direkte inn i widgeten sammen med teksten din med vår enkle, men nyttige, Legg til media-knapp. Woo!"
 
-#: wp-admin/about.php:233
+#: wp-admin/about.php:251
 msgid "Press a Button, Add Media"
 msgstr "Trykk på en knapp, legg til media"
 
-#: wp-admin/about.php:227
+#: wp-admin/about.php:245
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "En inkrementell forbedring til media-endringene i WordPress 4.8, du kan nå legge til et galleri via en widget. Yes!"
 
-#: wp-admin/about.php:210
+#: wp-admin/about.php:228
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Advarsel! Potensiell fare foreligger! "
 
-#: wp-admin/about.php:204
+#: wp-admin/about.php:222
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Den fryktede \"white screen\". Du vil unngå denne når du jobber med tema og utvidelseskode fordi du i WordPress 4.9 vil få en advarsel når du lagrer en feil. Du kommer til å få sove bedre!"
 
-#: wp-admin/about.php:197
+#: wp-admin/about.php:215
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Du har et visningsproblem, men kan ikke helt eksakt finne ut hva som gikk feil med CSSen du så kjærlig skrev. Med syntaksfremheving feilsjekking for CSS-redigering og den Tilpassede HTML-widgeten introdusert i WordPress 4.8.1 vil du raskt finne kodefeil. Praktisk talt garantert å hjelpe deg med å scanne kode lettere og å finne og fikse feil raskt."
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:221
 msgid "Sandbox for Safety"
 msgstr "Sandkasse for sikkerhet"
 
-#: wp-admin/about.php:196
+#: wp-admin/about.php:214
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Syntaksfremheving og feilsjekking? Ja takk!"
 
-#: wp-admin/about.php:174
+#: wp-admin/about.php:192
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Har du noen gang kommet opp i et tilfelle der to designere går inn i et prosjekt og designer A overskriver designer Bs vakre endringer? WordPress 4.9s designlås-funksjonalitet (tilsvarende innleggslås) sikrer designkladder slik at ingen andre kan gjøre endringer på eller slette ditt harde arbeid."
 
-#: wp-admin/about.php:167
+#: wp-admin/about.php:185
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Trenger du å få tilbakemelding på foreslåtte designendringer på nettsiden? WordPress 4.9 gir deg en forhåndsvisningslenke du kan sende til teamet ditt og til kunder slik at du kan samle og integrere tilbamekeldinger før du planlegger når endringene skal gå live. Kan vi si samarbeid?"
 
-#: wp-admin/about.php:160
+#: wp-admin/about.php:178
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "Ja, du leste riktig. Akkurat som du kan utarbeide og revidere innlegg og tidsplanlegge dem til å postes på de datoene og tidspunktene du velger, så kan du nå også gjøre endringer på designet ditt og tidsplanlegge disse endringene til å bli aktive når du måtte ønske det. "
 
-#: wp-admin/about.php:166
+#: wp-admin/about.php:184
 msgid "Collaborate with Design Preview Links"
 msgstr "Samarbeid med andre om design"
 
-#: wp-admin/about.php:159
+#: wp-admin/about.php:177
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Kladd og planlegg tilpasning av nettsidens design"
 
-#: wp-admin/about.php:151
+#: wp-admin/about.php:169
 msgid "Customizer Workflow Improved"
 msgstr "Forbedret arbeidsflyt i Customizer"
 
-#: wp-admin/about.php:138
+#: wp-admin/about.php:156
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Velkommen til en forbedret arbeidsflyt i Customizeren, med designutkast, låsing, planlegging og lenker for forhåndsvisning. Videre er koderedigering og feilsjekking forbedret for en ren og velsmurt sidebygging. Til slutt, som om ikke alt det skulle være ganske bra, har vi en flott ny galleri-widget og forbedringer i måten du blar i temaer og bytter."
 
-#: wp-admin/about.php:23 wp-admin/credits.php:23 wp-admin/freedoms.php:22
-#: wp-admin/privacy.php:22
+#: wp-admin/about.php:23 wp-admin/credits.php:23 wp-admin/freedoms.php:25
 msgid "Thank you for updating to the latest version! WordPress %s will smooth your design workflow and keep you safe from coding errors."
 msgstr "Takk for at du oppdaterte til siste versjon! WordPress %s vil gjøre din designarbeidsflyt  bedre og holde deg trygg fra kodefeil. "
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:133
+#: wp-admin/about.php:151
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Store forbedringer i Customizeren, feilmeldingssjekking og mer! %s"
 
@@ -475,12 +1284,12 @@ msgid "%s (The year of the post, four digits, for example 2004.)"
 msgstr "%s (Året denne posten ble postet, fire tall, for eksempel 2004.)"
 
 #. translators: %s: user's display name
-#: wp-admin/includes/post.php:1603
+#: wp-admin/includes/post.php:1607
 msgid "%s is already editing this post."
 msgstr "%s redigerer allerede denne posten."
 
 #. translators: %s: user's display name
-#: wp-admin/includes/post.php:1600
+#: wp-admin/includes/post.php:1604
 msgid "%s is already editing this post. Do you want to take over?"
 msgstr "%s redigerer allerede denne posten. Vil du ta over? "
 
@@ -492,7 +1301,7 @@ msgstr "Temainstallasjon"
 msgid "Plugin Installation"
 msgstr "Plugininstallasjon"
 
-#: wp-admin/includes/plugin-install.php:594
+#: wp-admin/includes/plugin-install.php:602
 msgid "Active Installations:"
 msgstr "Aktive installasjoner:"
 
@@ -639,7 +1448,7 @@ msgstr "WordPress-arrangementer og -nyheter"
 
 #. translators: Date format for upcoming events on the dashboard. Include the
 #. day of the week. See https://secure.php.net/date.
-#: wp-admin/includes/class-wp-community-events.php:410
+#: wp-admin/includes/class-wp-community-events.php:379
 msgid "l, M j, Y"
 msgstr "l j. F Y"
 
@@ -752,7 +1561,7 @@ msgid "(%s ratings)"
 msgstr "(%s vurderinger)"
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:604
-#: wp-admin/includes/plugin-install.php:598
+#: wp-admin/includes/plugin-install.php:606
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr "Færre enn 10"
@@ -761,8 +1570,8 @@ msgstr "Færre enn 10"
 msgid "Sorry, you are not allowed to attach files to this post."
 msgstr "Beklager, du har ikke lov til å legge ved filer til dette innlegget."
 
-#: wp-admin/freedoms.php:47 wp-admin/includes/plugin-install.php:239
-#: wp-admin/includes/plugin-install.php:604 wp-admin/plugin-install.php:82
+#: wp-admin/freedoms.php:61 wp-admin/includes/plugin-install.php:239
+#: wp-admin/includes/plugin-install.php:612 wp-admin/plugin-install.php:82
 #: wp-admin/plugins.php:418
 msgid "https://wordpress.org/plugins/"
 msgstr "https://nb.wordpress.org/plugins/"
@@ -800,7 +1609,7 @@ msgstr "Original"
 #: wp-admin/plugin-editor.php:137 wp-admin/plugin-install.php:99
 #: wp-admin/plugins.php:436 wp-admin/revision.php:121
 #: wp-admin/theme-editor.php:49 wp-admin/theme-install.php:121
-#: wp-admin/themes.php:119 wp-admin/tools.php:24 wp-admin/update-core.php:586
+#: wp-admin/themes.php:119 wp-admin/tools.php:34 wp-admin/update-core.php:586
 #: wp-admin/upload.php:67 wp-admin/upload.php:213 wp-admin/user-edit.php:62
 #: wp-admin/user-new.php:221 wp-admin/users.php:69 wp-admin/widgets.php:77
 msgid "<a href=\"https://wordpress.org/support/\">Support Forums</a>"
@@ -1165,7 +1974,7 @@ msgstr "Beklager, du har ikke lov til å redigere lenker på dette nettstedet."
 msgid "Plugin could not be deleted."
 msgstr "Utvidelse kunne ikke slettes."
 
-#: wp-admin/includes/class-wp-media-list-table.php:479
+#: wp-admin/includes/class-wp-media-list-table.php:487
 msgid "(Private post)"
 msgstr "(Privat innlegg)"
 
@@ -1174,6 +1983,10 @@ msgstr "(Privat innlegg)"
 #: wp-admin/includes/ajax-actions.php:3855
 msgid "No plugin specified."
 msgstr "Ingen utvidelser spesifisert."
+
+#: wp-admin/privacy.php:13
+msgid "Sorry, you are not allowed to manage privacy on this site."
+msgstr "Beklager, du har ikke tillatelse til å administrere personvern på dette nettstedet."
 
 #: wp-admin/includes/ajax-actions.php:3377
 #: wp-admin/includes/ajax-actions.php:3486
@@ -1218,11 +2031,11 @@ msgstr "Lukk Customizeren og gå tilbake til forrige side"
 msgid "Sorry, you are not allowed to import content."
 msgstr "Beklager, du har ikke lov til å importere innhold."
 
-#: wp-admin/credits.php:126
+#: wp-admin/credits.php:125
 msgid "Release Design Lead"
 msgstr "Designansvarlig for utgivelse"
 
-#: wp-admin/credits.php:127
+#: wp-admin/credits.php:126
 msgid "Release Deputy"
 msgstr "Utgivelsesansvarlig"
 
@@ -1376,7 +2189,7 @@ msgstr "Ditt databasebrukernavn."
 msgid "Your database password."
 msgstr "Ditt databasepassord."
 
-#: wp-admin/freedoms.php:48 wp-admin/theme-install.php:92
+#: wp-admin/freedoms.php:62 wp-admin/theme-install.php:92
 #: wp-admin/themes.php:92
 msgid "https://wordpress.org/themes/"
 msgstr "https://wordpress.org/themes/"
@@ -1424,23 +2237,23 @@ msgstr "Konstanten %s kan ikke være definert når WordPress installeres."
 msgid "WordPress has been installed. Thank you, and enjoy!"
 msgstr "WordPress har blitt installert. Takk, og lykke til!"
 
-#: wp-admin/includes/plugin-install.php:618
+#: wp-admin/includes/plugin-install.php:626
 msgid "Reviews"
 msgstr "Vurderinger"
 
-#: wp-admin/includes/plugin-install.php:619
+#: wp-admin/includes/plugin-install.php:627
 msgid "Read all reviews on WordPress.org or write your own!"
 msgstr "Les alle vurderinger på WordPress.org eller skriv dine egne!"
 
 #. translators: 1: number of stars (used to determine singular/plural), 2:
 #. number of reviews
-#: wp-admin/includes/plugin-install.php:625
+#: wp-admin/includes/plugin-install.php:633
 msgid "Reviews with %1$d star: %2$s. Opens in a new window."
 msgid_plural "Reviews with %1$d stars: %2$s. Opens in a new window."
 msgstr[0] "Vurderinger med %1$d stjerne: %2$s. Åpnes i et nytt vindu."
 msgstr[1] "Vurderinger med %1$d stjerner: %2$s. Åpnes i et nytt vindu."
 
-#: wp-admin/includes/post.php:1426
+#: wp-admin/includes/post.php:1430
 msgid "Click the image to edit or update"
 msgstr "Klikk bildet for å redigere eller oppdatere"
 
@@ -1570,30 +2383,30 @@ msgid "Another update is currently in progress."
 msgstr "En annen oppdatering kjøres nå."
 
 #. translators: %s: attachment title
-#: wp-admin/includes/class-wp-media-list-table.php:504
-#: wp-admin/includes/class-wp-media-list-table.php:681
+#: wp-admin/includes/class-wp-media-list-table.php:512
+#: wp-admin/includes/class-wp-media-list-table.php:689
 msgid "Attach &#8220;%s&#8221; to existing content"
 msgstr "Legg ved «%s» til eksisterende innhold"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:653
-#: wp-admin/includes/class-wp-media-list-table.php:710
+#: wp-admin/includes/class-wp-media-list-table.php:661
+#: wp-admin/includes/class-wp-media-list-table.php:718
 #: wp-admin/includes/class-wp-posts-list-table.php:1262
 msgid "Move &#8220;%s&#8221; to the Trash"
 msgstr "Flytt «%s» til papirkurven"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:663
-#: wp-admin/includes/class-wp-media-list-table.php:721
+#: wp-admin/includes/class-wp-media-list-table.php:671
+#: wp-admin/includes/class-wp-media-list-table.php:729
 #: wp-admin/includes/class-wp-posts-list-table.php:1271
 msgid "Delete &#8220;%s&#8221; permanently"
 msgstr "Slett «%s» permanent"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:702
+#: wp-admin/includes/class-wp-media-list-table.php:710
 #: wp-admin/includes/class-wp-posts-list-table.php:1254
 msgid "Restore &#8220;%s&#8221; from the Trash"
 msgstr "Gjenopprett «%s» fra papirkurven"
@@ -1616,7 +2429,7 @@ msgstr "Hurtigrediger denne kommentaren inline"
 msgid "The ssh2 PHP extension is available, however, we require the PHP5 function %s"
 msgstr "PHP-utvidelsen ssh2 er tilgjengelig, men vi krever PHP5-funksjonen %s"
 
-#: wp-admin/includes/class-wp-media-list-table.php:128
+#: wp-admin/includes/class-wp-media-list-table.php:135
 msgctxt "attachment filter"
 msgid "Trash"
 msgstr "Papirkurv"
@@ -1624,14 +2437,14 @@ msgstr "Papirkurv"
 #. translators: %s: attachment title
 #. translators: %s: post title
 #. translators: %s: taxonomy term name
-#: wp-admin/includes/class-wp-media-list-table.php:372
+#: wp-admin/includes/class-wp-media-list-table.php:380
 #: wp-admin/includes/class-wp-posts-list-table.php:936
 #: wp-admin/includes/class-wp-terms-list-table.php:380
 msgid "&#8220;%s&#8221; (Edit)"
 msgstr "«%s» (rediger)"
 
 #. translators: %s: title of the post the attachment is attached to
-#: wp-admin/includes/class-wp-media-list-table.php:492
+#: wp-admin/includes/class-wp-media-list-table.php:500
 msgid "Detach from &#8220;%s&#8221;"
 msgstr "Fjern fra «%s»"
 
@@ -1699,12 +2512,12 @@ msgid "(Currently set to: %s)"
 msgstr "(Nå satt til: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:444
+#: wp-admin/about.php:462
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "<strong>Version %s</strong> tettet et sikkerhetshull."
 
 #. translators: %s: site link
-#: wp-admin/includes/schema.php:1002 wp-admin/includes/upgrade.php:163
+#: wp-admin/includes/schema.php:1005 wp-admin/includes/upgrade.php:163
 msgid "Welcome to %s. This is your first post. Edit or delete it, then start blogging!"
 msgstr "Velkommen til %s. Dette er ditt første innlegg. Rediger eller slett det, og start bloggingen!"
 
@@ -1721,15 +2534,15 @@ msgstr "Du kan endre profilbildet ditt på <a href=\"%s\">Gravatar</a>."
 msgid "Profile Picture"
 msgstr "Profilbilde"
 
-#: wp-admin/about.php:435
+#: wp-admin/about.php:453
 msgid "Maintenance Releases"
 msgstr "Vedlikeholdsutgivelser"
 
-#: wp-admin/about.php:438
+#: wp-admin/about.php:456
 msgid "Security Releases"
 msgstr "Sikkerhetsutgivelser"
 
-#: wp-admin/about.php:34 wp-admin/about.php:441
+#: wp-admin/about.php:34 wp-admin/about.php:459
 msgid "Maintenance and Security Releases"
 msgstr "Vedlikehold- og sikkerhetsutgivelser"
 
@@ -1991,7 +2804,7 @@ msgstr "Hent versjon %s"
 msgid "Toggle panel: %s"
 msgstr "Veksle panel: %s"
 
-#: wp-admin/includes/post.php:1352
+#: wp-admin/includes/post.php:1356
 msgid "Edit permalink"
 msgstr "Rediger permalenke"
 
@@ -2000,7 +2813,7 @@ msgstr "Rediger permalenke"
 msgid "The %1$s plugin header is deprecated. Use %2$s instead."
 msgstr "Utvidelsestoppen %1$s er utgått. Bruk %2$s isteden."
 
-#: wp-admin/includes/post.php:1641
+#: wp-admin/includes/post.php:1645
 msgid "Saving revision&hellip;"
 msgstr "Lagrer revisjon…"
 
@@ -2569,7 +3382,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Links_Screen\">Dokumentasjon om h�
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Header_Screen\">Documentation on Custom Header</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Appearance_Header_Screen\">Dokumentasjon av egendefinert sidetopp</a>"
 
-#: wp-admin/tools.php:23
+#: wp-admin/tools.php:33
 msgid "<a href=\"https://codex.wordpress.org/Tools_Screen\">Documentation on Tools</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Tools_Screen\">Dokumentasjon om Verktøy</a>"
 
@@ -2751,12 +3564,12 @@ msgid "Plugins updated successfully."
 msgstr "Utvidelser oppdatert."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:602
-#: wp-admin/includes/plugin-install.php:596
+#: wp-admin/includes/plugin-install.php:604
 msgctxt "Active plugin installations"
 msgid "1+ Million"
 msgstr "1+ million"
 
-#: wp-admin/includes/class-wp-media-list-table.php:493
+#: wp-admin/includes/class-wp-media-list-table.php:501
 msgid "Detach"
 msgstr "Koble fra"
 
@@ -2895,11 +3708,6 @@ msgstr "Størrelse i megabyte"
 msgid "Site Upload Space Quota"
 msgstr "Kvote for opplasting på nettsted"
 
-#: wp-admin/includes/revision.php:208 wp-admin/includes/revision.php:250
-msgctxt "revision date short format"
-msgid "j M @ H:i"
-msgstr "j. M @ H:i"
-
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
 #: wp-admin/includes/misc.php:1163
@@ -2934,6 +3742,11 @@ msgstr ""
 "\n"
 "Vennlig hilsen\n"
 "-- ###SITENAME### ###SITEURL###"
+
+#: wp-admin/includes/revision.php:208 wp-admin/includes/revision.php:250
+msgctxt "revision date short format"
+msgid "j M @ H:i"
+msgstr "j. M @ H:i"
 
 #: wp-admin/includes/class-wp-automatic-updater.php:846
 msgid ""
@@ -3022,7 +3835,7 @@ msgstr "Anbefalte"
 
 #. translators: New site notification email. 1: New site URL, 2: User login, 3:
 #. User password or password reset link, 4: Login URL
-#: wp-admin/includes/upgrade.php:382
+#: wp-admin/includes/upgrade.php:428
 msgid ""
 "Your new WordPress site has been successfully set up at:\n"
 "\n"
@@ -3157,7 +3970,7 @@ msgstr "Navn"
 msgid "If you like, you may enter custom structures for your category and tag URLs here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorized/</code>. If you leave these blank the defaults will be used."
 msgstr "Hvis du vil, kan du skrive inn tilpassede strukturer for dine kategori- og stikkord-URLer her. For eksempel kan du bruke <code>emner</code> som din kategoribase, som vil få dine kategorilenker til å se slik ut: <code>%s/emner/ukategorisert/</code>. Hvis disse er tomme, brukes standardoppsettet."
 
-#: wp-admin/credits.php:125
+#: wp-admin/credits.php:124
 msgid "Release Lead"
 msgstr "Utgivelsesansvarlig"
 
@@ -3221,7 +4034,7 @@ msgstr "<strong>Ikke kompatibel</strong> med din versjon av WordPress"
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Kompatibel</strong> med din versjon av WordPress"
 
-#: wp-admin/includes/plugin-install.php:632
+#: wp-admin/includes/plugin-install.php:640
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] "%d stjerne"
@@ -3277,12 +4090,12 @@ msgctxt "Plugin installer section title"
 msgid "Reviews"
 msgstr "Omtaler"
 
-#: wp-admin/includes/plugin-install.php:608
-#: wp-admin/includes/plugin-install.php:662
+#: wp-admin/includes/plugin-install.php:616
+#: wp-admin/includes/plugin-install.php:670
 msgid "Donate to this plugin &#187;"
 msgstr "Doner til denne utvidelsen &#187;"
 
-#: wp-admin/includes/plugin-install.php:642
+#: wp-admin/includes/plugin-install.php:650
 msgid "Contributors"
 msgstr "Bidragsytere"
 
@@ -3471,7 +4284,7 @@ msgstr "Takk for at du skaper med <a href=\"%s\">WordPress</a>."
 msgid "<a href=\"https://wordpress.org/support/forum/multisite/\">Support Forums</a>"
 msgstr "<a href=\"https://wordpress.org/support/\" target=\"_blank\">Supportforum</a>"
 
-#: wp-admin/credits.php:44 wp-admin/credits.php:107
+#: wp-admin/credits.php:44 wp-admin/credits.php:58
 msgid "https://make.wordpress.org/"
 msgstr "https://make.wordpress.org/"
 
@@ -4298,7 +5111,7 @@ msgctxt "menu"
 msgid "Use new menu"
 msgstr "Bruk ny meny"
 
-#: wp-admin/includes/post.php:1642
+#: wp-admin/includes/post.php:1646
 msgid "Your latest changes were saved as a revision."
 msgstr "Dine siste endringer ble lagret som en revisjon."
 
@@ -4597,7 +5410,7 @@ msgid "Default: %s"
 msgstr "Standard: %s"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:305
+#: wp-admin/includes/class-wp-media-list-table.php:313
 msgctxt "column name"
 msgid "Uploaded to"
 msgstr "Lastet opp til"
@@ -4694,7 +5507,7 @@ msgstr "Kom i gang"
 msgid "or, <a href=\"%s\">change your theme completely</a>"
 msgstr "eller, <a href=\"%s\">endre hele temaet</a>"
 
-#: wp-admin/includes/dashboard.php:1581
+#: wp-admin/includes/dashboard.php:1581 wp-admin/includes/user.php:1013
 msgid "Next Steps"
 msgstr "Neste skritt"
 
@@ -4846,7 +5659,7 @@ msgstr "Velg kommentar"
 #. translators: %s: plugin name
 #. translators: %s: theme name
 #: wp-admin/includes/class-wp-links-list-table.php:168
-#: wp-admin/includes/class-wp-media-list-table.php:347
+#: wp-admin/includes/class-wp-media-list-table.php:355
 #: wp-admin/includes/class-wp-plugins-list-table.php:723
 #: wp-admin/includes/class-wp-posts-list-table.php:831
 #: wp-admin/includes/class-wp-terms-list-table.php:335
@@ -4942,11 +5755,11 @@ msgstr "Du bruker nettleserens innebygde opplaster. Med WordPress' flerfilopplas
 msgid "Preview %s"
 msgstr "Forhåndsvis %s"
 
-#: wp-admin/tools.php:17
+#: wp-admin/tools.php:27
 msgid "Categories have hierarchy, meaning that you can nest sub-categories. Tags do not have hierarchy and cannot be nested. Sometimes people start out using one on their posts, then later realize that the other would work better for their content."
 msgstr "Kategorier har hierarki, som betyr at du kan lage underkategorier. Stikkord har ikke hierarki, og du kan derfor ikke lage &laquo;understikkord&raquo;. Iblant starter folk med å bruke en type klassifisering av sine innlegg, men finner så senere ut at den andre typen fungerer bedre for deres innhold."
 
-#: wp-admin/tools.php:18
+#: wp-admin/tools.php:28
 msgid "The Categories and Tags Converter link on this screen will take you to the Import screen, where that Converter is one of the plugins you can install. Once that plugin is installed, the Activate Plugin &amp; Run Importer link will take you to a screen where you can choose to convert tags into categories or vice versa."
 msgstr "Kategori- og stikkordkonverterer-lenken på denne skjermen vil ta deg til import-skjermen, der konvertereren er en av utvidelsene som du kan innstallere. Når utvidelsen er innstallert, vil &laquo;Aktiver utvidelsen og kjør importør&raquo;-lenken ta deg til en skjerm der du kan velge å konvertere stikkord til kategorier og omvendt."
 
@@ -5027,8 +5840,8 @@ msgstr "Trekk sammen sidekolonnen"
 
 #: wp-admin/includes/class-wp-comments-list-table.php:303
 #: wp-admin/includes/class-wp-comments-list-table.php:579
-#: wp-admin/includes/class-wp-media-list-table.php:142
-#: wp-admin/includes/class-wp-media-list-table.php:703
+#: wp-admin/includes/class-wp-media-list-table.php:150
+#: wp-admin/includes/class-wp-media-list-table.php:711
 #: wp-admin/includes/class-wp-posts-list-table.php:394
 #: wp-admin/includes/class-wp-posts-list-table.php:1255
 msgid "Restore"
@@ -5058,20 +5871,22 @@ msgid "Plugin"
 msgstr "Utvidelse"
 
 #. translators: %s: Time since the last update
-#: wp-admin/includes/class-wp-media-list-table.php:441
+#. translators: human readable timestamp
+#: wp-admin/includes/class-wp-media-list-table.php:449
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:597
 #: wp-admin/includes/class-wp-posts-list-table.php:985
 #: wp-admin/includes/plugin-install.php:580 wp-admin/includes/revision.php:209
-#: wp-admin/includes/revision.php:251
+#: wp-admin/includes/revision.php:251 wp-admin/includes/user.php:1281
 msgid "%s ago"
 msgstr "%s siden"
 
 #: wp-admin/export.php:173 wp-admin/export.php:184 wp-admin/export.php:207
 #: wp-admin/export.php:226 wp-admin/export.php:249
+#: wp-admin/includes/user.php:1092
 msgid "All"
 msgstr "Alle"
 
-#: wp-admin/about.php:14
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
 msgid "About"
 msgstr "Om"
 
@@ -5124,6 +5939,10 @@ msgstr "(obligatorisk)"
 #: wp-admin/options-general.php:318 wp-admin/options-general.php:355
 msgid "Preview:"
 msgstr "Forhåndsvisning:"
+
+#: wp-admin/includes/misc.php:1565
+msgid "&uarr; Return to Top"
+msgstr "&uarr; Tilbake til toppen"
 
 #: wp-admin/includes/plugin-install.php:287
 #: wp-admin/includes/theme-install.php:67
@@ -5453,7 +6272,7 @@ msgstr "Skjermdumper"
 msgid "You should update your web.config now."
 msgstr "Du bør oppdatere din web.config nå."
 
-#: wp-admin/includes/plugin-install.php:606
+#: wp-admin/includes/plugin-install.php:614
 msgid "Plugin Homepage &#187;"
 msgstr "Utvidelser &rarr;"
 
@@ -5538,12 +6357,14 @@ msgstr "Vis verktøylinjen når du ser på nettstedet"
 
 #. translators: %s: Codex URL
 #: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
-#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:461
+#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:140
+#: wp-admin/about.php:479
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "For mer informasjon, se <a href=\"%s\">versjonsmerknadene</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:57 wp-admin/about.php:75 wp-admin/about.php:449
+#: wp-admin/about.php:39 wp-admin/about.php:75 wp-admin/about.php:93
+#: wp-admin/about.php:467
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Versjon %1$s</strong> rettet %2$s programfeil."
@@ -5551,7 +6372,7 @@ msgstr[1] "<strong>Versjon %1$s</strong> rettet %2$s programfeil."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:453
+#: wp-admin/about.php:471
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "<strong>Versjon %1$s</strong> tettet et sikkerhetshull og rettet %2$s programfeil."
@@ -5560,8 +6381,8 @@ msgstr[1] "<strong>Versjon %1$s</strong> tettet et sikkerhetshull og rettet %2$s
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:93 wp-admin/about.php:111
-#: wp-admin/about.php:457
+#: wp-admin/about.php:57 wp-admin/about.php:111 wp-admin/about.php:129
+#: wp-admin/about.php:475
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "<strong>Versjon %1$s</strong> tettet noen sikkerhetshull og rettet %2$s programfeil."
@@ -5571,25 +6392,24 @@ msgstr[1] "<strong>Versjon %1$s</strong> tettet noen sikkerhetshull og rettet %2
 msgid "Welcome to your WordPress Dashboard! This is the screen you will see when you log in to your site, and gives you access to all the site management features of WordPress. You can get help for any screen by clicking the Help tab above the screen title."
 msgstr "Velkommen til kontrollpanelet i WordPress! Dette er det skjermbildet vil du se hver gang du logger inn på nettstedet, og gir deg tilgang alle administrative funksjoner i WordPress. Du kan få mer informasjon om hvert enkelt skjermbilde om du klikker Hjelp-fanen over skjermtittelen."
 
-#: wp-admin/about.php:437
+#: wp-admin/about.php:455
 msgid "Security Release"
 msgstr "Sikkerhetsoppdatering"
 
-#: wp-admin/about.php:27 wp-admin/credits.php:28 wp-admin/freedoms.php:27
-#: wp-admin/privacy.php:27
+#: wp-admin/about.php:27 wp-admin/credits.php:28 wp-admin/freedoms.php:30
 msgid "What&#8217;s New"
 msgstr "Hva er nytt"
 
-#: wp-admin/about.php:440
+#: wp-admin/about.php:458
 msgid "Maintenance and Security Release"
 msgstr "Vedlikeholds- og sikkerhetsoppdatering"
 
-#: wp-admin/about.php:434
+#: wp-admin/about.php:452
 msgid "Maintenance Release"
 msgstr "Vedlikeholdsoppdatering"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:446
+#: wp-admin/about.php:464
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "<strong>Versjon %s</strong> tettet noen sikkerhetshull."
 
@@ -5597,7 +6417,7 @@ msgstr "<strong>Versjon %s</strong> tettet noen sikkerhetshull."
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "Dette skjermbildet lar deg velge strukturen på permalenkene dine. Du kan velge blant de vanligste eller opprette din egen URL-struktur."
 
-#: wp-admin/about.php:327
+#: wp-admin/about.php:345
 msgid "Return to Updates"
 msgstr "Tilbake til oppdateringer"
 
@@ -5677,7 +6497,7 @@ msgstr "Legge til temaer"
 msgid "You can also edit or move multiple posts to the trash at once. Select the posts you want to act on using the checkboxes, then select the action you want to take from the Bulk Actions menu and click Apply."
 msgstr "Du kan redigere eller slette mange innlegg samtidig. Velg de innleggene du vil endre ved å krysse dem av i boksen til venstre for tittlfeltet. Så velger du hva du vil gjøre i boksen Massehandlinger, før du klikker Bruk."
 
-#: wp-admin/tools.php:39
+#: wp-admin/tools.php:60
 msgid "If you want to convert your categories to tags (or vice versa), use the <a href=\"%s\">Categories and Tags Converter</a> available from the Import screen."
 msgstr "Hvis du vil konvertere kategorier til stikkord (og omvendt), bruker du <a href=\"%s\">Kategorier og stikkord konverterer</a>, som er tilgjengelig i Import-skjermen."
 
@@ -5869,15 +6689,15 @@ msgstr "<strong>Rediger</strong> lar deg endre profilen for den enkelte brukeren
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
 msgstr "Fordi dette er en nettverksinstallasjon, kan du legge til brukerkontoer som allerede eksisterer i nettverket ved enten å spesifisere brukernavn eller e-post, og i tillegg definere roller. For flere valg, som å sette passord, må du være nettverksadministrator. Beveg musa over den enkelte brukerens navn for å redigere profilen under Nettverksadministrasjon &rarr; Alle brukere."
 
-#: wp-admin/credits.php:21 wp-admin/freedoms.php:20 wp-admin/privacy.php:20
+#: wp-admin/credits.php:21 wp-admin/freedoms.php:23
 msgid "Welcome to WordPress %s"
 msgstr "Velkommen til WordPress %s"
 
-#: wp-admin/about.php:327
+#: wp-admin/about.php:345
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Tilbake til Kontrollpanel &rarr; Oppdateringer"
 
-#: wp-admin/about.php:330
+#: wp-admin/about.php:348
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Gå til Kontrollpanel &rarr; Hjem"
 
@@ -5912,7 +6732,7 @@ msgstr ""
 "Vennligst klikk denne lenken for å bekrefte invitasjonen:\n"
 "%4$s"
 
-#: wp-admin/credits.php:128
+#: wp-admin/credits.php:127
 msgid "Core Developer"
 msgstr "Kjerneutvikler"
 
@@ -6100,8 +6920,8 @@ msgstr "Redigering"
 msgid "Delete Site"
 msgstr "Slett nettsted"
 
-#: wp-admin/includes/class-wp-media-list-table.php:673
-#: wp-admin/includes/class-wp-media-list-table.php:732
+#: wp-admin/includes/class-wp-media-list-table.php:681
+#: wp-admin/includes/class-wp-media-list-table.php:740
 #: wp-admin/includes/class-wp-posts-list-table.php:1295
 #: wp-admin/includes/class-wp-terms-list-table.php:461
 #: wp-admin/includes/class-wp-users-list-table.php:428
@@ -6157,12 +6977,11 @@ msgid "Search Users"
 msgstr "Søk i brukere"
 
 #. translators: %s: Plugin version
-#: wp-admin/about.php:24 wp-admin/credits.php:25 wp-admin/freedoms.php:24
+#: wp-admin/about.php:24 wp-admin/credits.php:25 wp-admin/freedoms.php:27
 #: wp-admin/includes/ajax-actions.php:3774
 #: wp-admin/includes/ajax-actions.php:3817
 #: wp-admin/includes/class-wp-plugins-list-table.php:767
 #: wp-admin/includes/update.php:193 wp-admin/includes/update.php:218
-#: wp-admin/privacy.php:24
 msgid "Version %s"
 msgstr "Versjon %s"
 
@@ -6186,7 +7005,7 @@ msgstr "Installer"
 #: wp-admin/plugin-editor.php:134 wp-admin/plugin-install.php:97
 #: wp-admin/plugins.php:434 wp-admin/revision.php:119
 #: wp-admin/theme-editor.php:44 wp-admin/theme-install.php:119
-#: wp-admin/themes.php:117 wp-admin/tools.php:22 wp-admin/update-core.php:584
+#: wp-admin/themes.php:117 wp-admin/tools.php:32 wp-admin/update-core.php:584
 #: wp-admin/upload.php:65 wp-admin/upload.php:211 wp-admin/user-edit.php:60
 #: wp-admin/user-new.php:219 wp-admin/users.php:66 wp-admin/widgets.php:75
 msgid "For more information:"
@@ -6368,7 +7187,7 @@ msgstr "Den opplastede filen er større enn upload_max_filesize-regelen i php.in
 msgid "The uploaded file exceeds the MAX_FILE_SIZE directive that was specified in the HTML form."
 msgstr "Den opplastede filen er større enn MAX_FILE_SIZE-regelen som ble spesifisert i HTML-skjemaet."
 
-#: wp-admin/credits.php:129
+#: wp-admin/credits.php:128
 msgid "External Libraries"
 msgstr "Eksterne programbibliotek"
 
@@ -6380,20 +7199,20 @@ msgstr "Tilgjengelige verktøy"
 msgid "Network Setup"
 msgstr "Nettverksoppsett"
 
-#: wp-admin/credits.php:59
+#: wp-admin/credits.php:65
 msgctxt "Translate this to be the equivalent of English Translators in your language for the credits page Translators section"
 msgid "Translators"
 msgstr "Oversettere til norsk (bokmål)"
 
-#: wp-admin/freedoms.php:43
+#: wp-admin/freedoms.php:57
 msgid "WordPress grows when people like you tell their friends about it, and the thousands of businesses and services that are built on and around WordPress share that fact with their users. We&#8217;re flattered every time someone spreads the good word, just make sure to <a href=\"%s\">check out our trademark guidelines</a> first."
 msgstr "WordPress vokser når folk som deg forteller sine venner om det, og tusenvis av virksomheter og tjenester som er bygd på og rundt WordPress deler dette faktum med sine brukere. Vi blir smigret hver gang noen sprer gode ord, bare sørg for å <a href=\"%s\">sjekke ut våre retningslinjer for bruk av varemerket</a> først."
 
-#: wp-admin/freedoms.php:50
+#: wp-admin/freedoms.php:64
 msgid "Every plugin and theme in WordPress.org&#8217;s directory is 100%% GPL or a similarly free and compatible license, so you can feel safe finding <a href=\"%1$s\">plugins</a> and <a href=\"%2$s\">themes</a> there. If you get a plugin or theme from another source, make sure to <a href=\"%3$s\">ask them if it&#8217;s GPL</a> first. If they don&#8217;t respect the WordPress license, we don&#8217;t recommend them."
 msgstr "Hver utvidelse og hvert tema i WordPress.org-katalogen er 100%% GPL eller annen fri og kompatibel lisens, slik at du kan føle deg trygg når du finner <a href=\"%1$s\">utvidelser</a> og <a href=\"%2$s\">temaer</a> der. Hvis du får en utvidelse eller et tema fra en annen kilde, sørg for å <a href=\"%3$s\">spørre dem om det er GPL</a> først. Hvis de ikke respekterer lisensen til WordPress, anbefaler vi dem ikke."
 
-#: wp-admin/freedoms.php:34
+#: wp-admin/freedoms.php:48
 msgid "WordPress is Free and open source software, built by a distributed community of mostly volunteer developers from around the world. WordPress comes with some awesome, worldview-changing rights courtesy of its <a href=\"%s\">license</a>, the GPL."
 msgstr "WordPress er gratis og bruker åpen kildekode, som er bygget av et distribuert fellesskap av hovedsakelig frivillige utviklere fra hele verden. WordPress kommer med noen kule rettigheter, som følge av sin <a href=\"%s\">lisens</a>, GPL."
 
@@ -6412,49 +7231,49 @@ msgid "Deactivate"
 msgstr "Deaktiver"
 
 #: wp-admin/about.php:28 wp-admin/credits.php:13 wp-admin/credits.php:29
-#: wp-admin/freedoms.php:28 wp-admin/privacy.php:28
+#: wp-admin/freedoms.php:31
 msgid "Credits"
 msgstr "Takk til"
 
 #. translators: %s: https://make.wordpress.org/
-#: wp-admin/credits.php:106
+#: wp-admin/credits.php:57
 msgid "Want to see your name in lights on this page? <a href=\"%s\">Get involved in WordPress</a>."
 msgstr "Ønsker du å se navnet ditt her? <a href=\"%s\">Delta i utviklingen av WordPress</a>."
 
-#: wp-admin/credits.php:120
+#: wp-admin/credits.php:119
 msgid "Project Leaders"
 msgstr "Prosjektledere"
 
-#: wp-admin/credits.php:123
+#: wp-admin/credits.php:122
 msgid "Cofounder, Project Lead"
 msgstr "Grunnlegger, prosjektleder"
 
-#: wp-admin/credits.php:121
+#: wp-admin/credits.php:120
 msgid "Core Contributors to WordPress %s"
 msgstr "Bidragsytere til WordPress-kjernen i %s"
 
-#: wp-admin/credits.php:124
+#: wp-admin/credits.php:123
 msgid "Lead Developer"
 msgstr "Ledende utvikler"
 
-#: wp-admin/freedoms.php:37
+#: wp-admin/freedoms.php:51
 msgid "You have the freedom to run the program, for any purpose."
 msgstr "Du står fritt til å bruke programmet til alle formål."
 
-#: wp-admin/freedoms.php:38
+#: wp-admin/freedoms.php:52
 msgid "You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish."
 msgstr "Du har tilgang til kildekoden, friheten til å utforske programmet og endre det til ditt eget formål."
 
-#: wp-admin/freedoms.php:39
+#: wp-admin/freedoms.php:53
 msgid "You have the freedom to redistribute copies of the original program so you can help your neighbor."
 msgstr "Du står fritt til å dele kopier av det opprinnelige programmet. På den måten hjelper du andre."
 
-#: wp-admin/freedoms.php:40
+#: wp-admin/freedoms.php:54
 msgid "You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes."
 msgstr "Du står fritt til å videresende kopier av dine modifikasjoner til andre. Gjør du det, gir du hele fellesskapet muligheter til å vokse videre på grunn av din innsats."
 
 #: wp-admin/about.php:29 wp-admin/credits.php:30 wp-admin/freedoms.php:12
-#: wp-admin/freedoms.php:29 wp-admin/privacy.php:29
+#: wp-admin/freedoms.php:32
 msgid "Freedoms"
 msgstr "Friheter"
 
@@ -6466,7 +7285,7 @@ msgstr "Din nettleser er ikke trygg!"
 msgid "Your browser is out of date!"
 msgstr "Nettleseren din er ikke oppdatert!"
 
-#: wp-admin/freedoms.php:52
+#: wp-admin/freedoms.php:66
 msgid "Don&#8217;t you wish all software came with these freedoms? So do we! For more information, check out the <a href=\"https://www.fsf.org/\">Free Software Foundation</a>."
 msgstr "Skulle ikke du ønske at all programvare kom med samme frihet? Det mener vi! For nærmere opplysninger, sjekk <a href=\"https://www.fsf.org/\">Stiftelsen for fri programvare</a>."
 
@@ -7287,7 +8106,7 @@ msgstr "Ditt tema støtter %s meny. Velg hvilken meny du vil bruke."
 msgid "Your theme does not support navigation menus or widgets."
 msgstr "Det aktive temaet støtter ikke menyer eller widgeter."
 
-#: wp-admin/includes/import.php:175 wp-admin/tools.php:16 wp-admin/tools.php:38
+#: wp-admin/includes/import.php:175 wp-admin/tools.php:26 wp-admin/tools.php:59
 msgid "Categories and Tags Converter"
 msgstr "Kategorier og stikkord konverterer"
 
@@ -7370,7 +8189,7 @@ msgstr "Tilpasset beskjed for ikke aktivt nettsted."
 msgid "My Site"
 msgstr "Mitt nettsted"
 
-#: wp-admin/includes/upgrade.php:398
+#: wp-admin/includes/upgrade.php:444
 msgid "New WordPress Site"
 msgstr "Nytt WordPress-nettsted"
 
@@ -7399,12 +8218,12 @@ msgid "No items."
 msgstr "Ingen valg."
 
 #. translators: %s: asterisk symbol (*)
-#: wp-admin/includes/schema.php:1089
+#: wp-admin/includes/schema.php:1092
 msgid "To use a subdomain configuration, you must have a wildcard entry in your DNS. This usually means adding a %s hostname record pointing at your web server in your DNS configuration tool."
 msgstr "For å bruke en underdomenekonfigurasjon må du ha en wildcard-innstilling i DNS-en din. Dette betyr vanligvis å legge til hostname-oppføringen %s som peker til din nettjener i din DNS-konfigurasjon."
 
 #. translators: %s: host name
-#: wp-admin/includes/schema.php:1078
+#: wp-admin/includes/schema.php:1081
 msgid "The installer attempted to contact a random hostname (%s) on your domain."
 msgstr "Installeringen forsøkte å kontakte en tilfeldig tjener (%s) på ditt domene."
 
@@ -7616,28 +8435,28 @@ msgstr "CSS-klasser (valgfritt)"
 msgid "Updating Theme %1$s (%2$d/%3$d)"
 msgstr "Oppdaterer tema %1$s (%2$d/%3$d)"
 
-#: wp-admin/includes/schema.php:884
+#: wp-admin/includes/schema.php:887
 msgid "You must provide a domain name."
 msgstr "Du må skrive inn et domenenavn."
 
-#: wp-admin/includes/schema.php:886
+#: wp-admin/includes/schema.php:889
 msgid "You must provide a name for your network of sites."
 msgstr "Du må oppgi et navn for ditt nettverk med nettsteder."
 
-#: wp-admin/includes/schema.php:892 wp-admin/includes/schema.php:896
+#: wp-admin/includes/schema.php:895 wp-admin/includes/schema.php:899
 msgid "The network already exists."
 msgstr "Nettverket finnes allerede."
 
 #. translators: %s: error message
-#: wp-admin/includes/schema.php:1083
+#: wp-admin/includes/schema.php:1086
 msgid "This resulted in an error message: %s"
 msgstr "Dette medførte en feilmelding: %s"
 
-#: wp-admin/includes/schema.php:1093
+#: wp-admin/includes/schema.php:1096
 msgid "You can still use your site but any subdomain you create may not be accessible. If you know your DNS is correct, ignore this message."
 msgstr "Du kan fortsatt bruke nettstedet, men underdomener du lager kan bli utilgjengelige. Ignorer denne beskjeden hvis du vet at din DNS er riktig."
 
-#: wp-admin/includes/schema.php:901
+#: wp-admin/includes/schema.php:904
 msgid "You must provide a valid email address."
 msgstr "Du må skrive inn en gyldig e-postadresse."
 
@@ -7729,7 +8548,7 @@ msgid_plural "Drop-ins <span class=\"count\">(%s)</span>"
 msgstr[0] "Innslipp <span class=\"count\">(%s)</span>"
 msgstr[1] "Innslipp <span class=\"count\">(%s)</span>"
 
-#: wp-admin/about.php:330
+#: wp-admin/about.php:348
 msgid "Go to Dashboard"
 msgstr "Gå til kontrollpanel"
 
@@ -7947,7 +8766,7 @@ msgid "Hello world!"
 msgstr "Hei, verden!"
 
 #. translators: Default post slug
-#: wp-admin/includes/upgrade.php:185 wp-admin/includes/upgrade.php:331
+#: wp-admin/includes/upgrade.php:185 wp-admin/includes/upgrade.php:377
 msgctxt "Default post slug"
 msgid "hello-world"
 msgstr "hei-verden"
@@ -8068,24 +8887,23 @@ msgstr "Profil"
 msgid "Your Profile"
 msgstr "Din profil"
 
-#: wp-admin/menu.php:243 wp-admin/tools.php:12
+#: wp-admin/menu.php:243 wp-admin/tools.php:22
 msgid "Tools"
 msgstr "Verktøy"
 
-#: wp-admin/menu.php:254
+#: wp-admin/menu.php:260
 msgid "Writing"
 msgstr "Skriving"
 
-#: wp-admin/menu.php:255
+#: wp-admin/menu.php:261
 msgid "Reading"
 msgstr "Lesing"
 
-#: wp-admin/about.php:30 wp-admin/credits.php:31 wp-admin/freedoms.php:30
-#: wp-admin/privacy.php:12 wp-admin/privacy.php:30
+#: wp-admin/about.php:30 wp-admin/credits.php:31 wp-admin/freedoms.php:33
 msgid "Privacy"
 msgstr "Fortrolighet"
 
-#: wp-admin/menu.php:258
+#: wp-admin/menu.php:264
 msgid "Permalinks"
 msgstr "Permalenker"
 
@@ -8351,6 +9169,10 @@ msgstr "Kategoriprefiks"
 #: wp-admin/options-permalink.php:291
 msgid "Tag base"
 msgstr "Stikkordprefiks"
+
+#: wp-admin/privacy.php:101
+msgid "Privacy Settings"
+msgstr "Innstillinger for fortrolighet"
 
 #: wp-admin/options-reading.php:15
 msgid "Reading Settings"
@@ -8768,7 +9590,7 @@ msgstr "Velg både sidekolonnen for denne widgeten og posisjonen til widgeten i 
 msgid "Save Widget"
 msgstr "Lagre widget"
 
-#: wp-admin/includes/misc.php:1056 wp-admin/includes/post.php:1801
+#: wp-admin/includes/misc.php:1056 wp-admin/includes/post.php:1805
 #: wp-admin/widgets.php:342
 msgid "Error while saving."
 msgstr "Feil under lagring."
@@ -8810,7 +9632,7 @@ msgstr "Kommentarforfatteren må tidligere ha fått godkjent en kommentar"
 msgid "Comment author must fill out name and email"
 msgstr "Kommentarforfatteren må fylle ut navn og e-post"
 
-#: wp-admin/menu.php:253
+#: wp-admin/menu.php:259
 msgctxt "settings screen"
 msgid "General"
 msgstr "Generelt"
@@ -9022,7 +9844,7 @@ msgid "Sorry, you are not allowed to edit this attachment."
 msgstr "Beklager, du har ikke lov til å redigere dette vedlegget."
 
 #: wp-admin/async-upload.php:47 wp-admin/edit-tags.php:156
-#: wp-admin/includes/post.php:1807 wp-admin/media-upload.php:46
+#: wp-admin/includes/post.php:1811 wp-admin/media-upload.php:46
 #: wp-admin/post.php:117 wp-admin/term.php:38
 msgid "Sorry, you are not allowed to edit this item."
 msgstr "Beklager, du har ikke lov til å redigere dette."
@@ -9110,22 +9932,22 @@ msgstr "Bildebehandlingsfeil"
 msgid "Choose the part of the image you want to use as your header."
 msgstr "Velg den delen av bildet du ønsker å bruke som toppbilde."
 
-#: wp-admin/includes/class-wp-media-list-table.php:433
+#: wp-admin/includes/class-wp-media-list-table.php:441
 #: wp-admin/includes/class-wp-posts-list-table.php:975
 msgid "Unpublished"
 msgstr "Upublisert"
 
-#: wp-admin/includes/class-wp-media-list-table.php:439
+#: wp-admin/includes/class-wp-media-list-table.php:447
 msgid "%s from now"
 msgstr "%s fra nå"
 
-#: wp-admin/includes/class-wp-media-list-table.php:497
+#: wp-admin/includes/class-wp-media-list-table.php:505
 msgid "(Unattached)"
 msgstr "(Frakoblet)"
 
-#: wp-admin/includes/class-wp-media-list-table.php:152
-#: wp-admin/includes/class-wp-media-list-table.php:505
-#: wp-admin/includes/class-wp-media-list-table.php:682
+#: wp-admin/includes/class-wp-media-list-table.php:160
+#: wp-admin/includes/class-wp-media-list-table.php:513
+#: wp-admin/includes/class-wp-media-list-table.php:690
 msgid "Attach"
 msgstr "Legg ved"
 
@@ -9176,7 +9998,7 @@ msgstr "Ping"
 
 #: wp-admin/includes/class-wp-comments-list-table.php:362
 #: wp-admin/includes/class-wp-links-list-table.php:113
-#: wp-admin/includes/class-wp-media-list-table.php:175
+#: wp-admin/includes/class-wp-media-list-table.php:183
 #: wp-admin/includes/class-wp-posts-list-table.php:484
 msgid "Filter"
 msgstr "Filter"
@@ -9213,7 +10035,7 @@ msgstr "Send tilbakesporinger"
 msgid "Custom Fields"
 msgstr "Tilpassede felt"
 
-#: wp-admin/edit-form-advanced.php:302 wp-admin/menu.php:256
+#: wp-admin/edit-form-advanced.php:302 wp-admin/menu.php:262
 msgid "Discussion"
 msgstr "Diskusjon"
 
@@ -9883,9 +10705,10 @@ msgstr "Galleri (%s)"
 msgid "Uploads"
 msgstr "Opplastinger"
 
-#: wp-admin/includes/media.php:464 wp-admin/includes/template.php:1627
-#: wp-admin/install.php:80 wp-admin/maint/repair.php:26
-#: wp-admin/setup-config.php:110 wp-admin/upgrade.php:71
+#: wp-admin/includes/media.php:464 wp-admin/includes/misc.php:1791
+#: wp-admin/includes/template.php:1627 wp-admin/install.php:80
+#: wp-admin/maint/repair.php:26 wp-admin/setup-config.php:110
+#: wp-admin/upgrade.php:71
 msgid "WordPress"
 msgstr "WordPress"
 
@@ -10274,22 +11097,22 @@ msgstr "(Velg 0 for ingen vurdering.)"
 msgid "Popular tags"
 msgstr "Populære stikkord"
 
-#: wp-admin/includes/plugin-install.php:614
+#: wp-admin/includes/plugin-install.php:622
 msgid "(based on %s rating)"
 msgid_plural "(based on %s ratings)"
 msgstr[0] "(basert på %s vurdering)"
 msgstr[1] "(basert på %s vurderinger)"
 
-#: wp-admin/includes/plugin-install.php:702
+#: wp-admin/includes/plugin-install.php:710
 msgid "Install Update Now"
 msgstr "Installer oppdatering nå"
 
 #. translators: %s: Plugin version
-#: wp-admin/includes/plugin-install.php:707
+#: wp-admin/includes/plugin-install.php:715
 msgid "Newer Version (%s) Installed"
 msgstr "Nyere versjon (%s) installert"
 
-#: wp-admin/includes/plugin-install.php:710
+#: wp-admin/includes/plugin-install.php:718
 msgid "Latest Version Installed"
 msgstr "Siste versjon installert"
 
@@ -10298,8 +11121,9 @@ msgstr "Siste versjon installert"
 msgid "Last Updated:"
 msgstr "Sist oppdatert:"
 
-#. translators: %s: WordPress version
+#. translators: %s: version number
 #: wp-admin/includes/plugin-install.php:588
+#: wp-admin/includes/plugin-install.php:598
 msgid "%s or higher"
 msgstr "%s eller høyere"
 
@@ -10307,7 +11131,7 @@ msgstr "%s eller høyere"
 msgid "Compatible up to:"
 msgstr "Kompatibel opp til:"
 
-#: wp-admin/includes/plugin-install.php:612
+#: wp-admin/includes/plugin-install.php:620
 msgid "Average Rating"
 msgstr "Gjennomsnittlig vurdering"
 
@@ -10315,11 +11139,11 @@ msgstr "Gjennomsnittlig vurdering"
 msgid "Auto Draft"
 msgstr "Automatisk kladd"
 
-#: wp-admin/includes/post.php:1326 wp-admin/includes/post.php:1349
+#: wp-admin/includes/post.php:1330 wp-admin/includes/post.php:1353
 msgid "Permalink:"
 msgstr "Permalenke:"
 
-#: wp-admin/includes/post.php:1337
+#: wp-admin/includes/post.php:1341
 msgid "Change Permalinks"
 msgstr "Endre permalenker"
 
@@ -10329,41 +11153,41 @@ msgid "Just another WordPress site"
 msgstr "Bare enda et WordPress-nettsted"
 
 #. translators: site tagline
-#: wp-admin/includes/schema.php:530
+#: wp-admin/includes/schema.php:533
 msgid "Just another %s site"
 msgstr "Bare enda et %s-nettsted"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:617
+#: wp-admin/includes/schema.php:620
 msgctxt "User role"
 msgid "Administrator"
 msgstr "Administrator"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:619
+#: wp-admin/includes/schema.php:622
 msgctxt "User role"
 msgid "Editor"
 msgstr "Redaktør"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:621
+#: wp-admin/includes/schema.php:624
 msgctxt "User role"
 msgid "Author"
 msgstr "Forfatter"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:623
+#: wp-admin/includes/schema.php:626
 msgctxt "User role"
 msgid "Contributor"
 msgstr "Bidragsyter"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:625
+#: wp-admin/includes/schema.php:628
 msgctxt "User role"
 msgid "Subscriber"
 msgstr "Abonnent"
 
-#: wp-admin/includes/schema.php:1074
+#: wp-admin/includes/schema.php:1077
 msgid "Warning! Wildcard DNS may not be configured correctly!"
 msgstr "Advarsel! Wildcard DNS kan være feilkonfigurert!"
 
@@ -10385,13 +11209,13 @@ msgid "Title"
 msgstr "Tittel"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:275
+#: wp-admin/includes/class-wp-media-list-table.php:283
 msgctxt "column name"
 msgid "File"
 msgstr "Fil"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:310
+#: wp-admin/includes/class-wp-media-list-table.php:318
 msgctxt "column name"
 msgid "Date"
 msgstr "Dato"
@@ -10568,7 +11392,7 @@ msgid "Move to Trash"
 msgstr "Flytt til papirkurven"
 
 #: wp-admin/includes/class-wp-comments-list-table.php:367
-#: wp-admin/includes/class-wp-media-list-table.php:179
+#: wp-admin/includes/class-wp-media-list-table.php:187
 #: wp-admin/includes/class-wp-posts-list-table.php:489
 msgid "Empty Trash"
 msgstr "Tøm papirkurven"
@@ -10611,8 +11435,8 @@ msgstr "Lenketekst, f.eks. &laquo;Fjellvettreglene (PDF)&raquo;"
 #. translators: %s: taxonomy term name
 #. translators: %s: post title
 #: wp-admin/includes/class-wp-links-list-table.php:185
-#: wp-admin/includes/class-wp-media-list-table.php:643
-#: wp-admin/includes/class-wp-media-list-table.php:692
+#: wp-admin/includes/class-wp-media-list-table.php:651
+#: wp-admin/includes/class-wp-media-list-table.php:700
 #: wp-admin/includes/class-wp-posts-list-table.php:1237
 #: wp-admin/includes/class-wp-terms-list-table.php:436
 #: wp-admin/includes/dashboard.php:578 wp-admin/includes/dashboard.php:866
@@ -10621,8 +11445,8 @@ msgstr "Endre &laquo;%s&raquo;"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:672
-#: wp-admin/includes/class-wp-media-list-table.php:731
+#: wp-admin/includes/class-wp-media-list-table.php:680
+#: wp-admin/includes/class-wp-media-list-table.php:739
 #: wp-admin/includes/class-wp-posts-list-table.php:1294
 msgid "View &#8220;%s&#8221;"
 msgstr "Vis &laquo;%s&raquo;"
@@ -10652,15 +11476,15 @@ msgstr "Prøv igjen"
 msgid "Custom Header"
 msgstr "Egendefinert sidetopp"
 
-#: wp-admin/includes/plugin-install.php:604
+#: wp-admin/includes/plugin-install.php:612
 msgid "WordPress.org Plugin Page &#187;"
 msgstr "WordPress.org utvidelsesside &#187;"
 
-#: wp-admin/includes/plugin-install.php:671
+#: wp-admin/includes/plugin-install.php:679
 msgid "<strong>Warning:</strong> This plugin has <strong>not been tested</strong> with your current version of WordPress."
 msgstr "<strong>Advarsel:</strong> Denne utvidelsen har <strong>ikke blitt testet</strong> med din versjon av WordPress."
 
-#: wp-admin/includes/plugin-install.php:673
+#: wp-admin/includes/plugin-install.php:681
 msgid "<strong>Warning:</strong> This plugin has <strong>not been marked as compatible</strong> with your version of WordPress."
 msgstr "<strong>Advarsel:</strong> Denne utvidelsen er <strong>ikke merket som kompatibel</strong> med din versjon av WordPress."
 
@@ -10875,6 +11699,10 @@ msgstr "Klarte ikke å finne WordPress-mappen for innhold (wp-content)."
 msgid "Could not fully remove the plugins %s."
 msgstr "Kunne ikke fjerne utvidelsene %s helt."
 
+#: wp-admin/includes/user.php:789 wp-admin/includes/user.php:862
+msgid "Search Requests"
+msgstr "Søk i forespørsler"
+
 #: wp-admin/includes/media.php:2456 wp-admin/includes/nav-menu.php:361
 #: wp-admin/includes/nav-menu.php:649
 msgid "&laquo;"
@@ -10928,6 +11756,7 @@ msgstr "Saken ble ikke oppdatert."
 
 #: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
+#: wp-admin/includes/user.php:1011
 msgid "Status"
 msgstr "Status"
 

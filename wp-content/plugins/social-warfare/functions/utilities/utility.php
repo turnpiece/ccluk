@@ -3,10 +3,156 @@
  * General utility helper functions.
  *
  * @package   SocialWarfare\Functions
- * @copyright Copyright (c) 2016, Warfare Plugins, LLC
+ * @copyright Copyright (c) 2018, Warfare Plugins, LLC
  * @license   GPL-3.0+
  * @since     2.1.0
  */
+
+
+/**
+ * Writes data to the wordpress log.
+ *
+ * @var mixed $log The data you want to print.
+ * @var string optional $context Context about the data you are writing.
+ */
+ if ( ! function_exists('write_log')) {
+    function write_log ( $log, $context = '' )  {
+       error_log( "Context: " . $context );
+       if ( is_array( $log ) || is_object( $log ) ) {
+          error_log( print_r( $log, true ) );
+       } else {
+          error_log( $log );
+       }
+    }
+ }
+
+
+/**
+ * A global function to ensure that we always have a value for
+ * every option. Grab and use the default value if it hasn't been
+ * set.
+ *
+ * @since  3.0.0 | 24 APR 2018 | Created
+ * @param  string $key   The key associated with the option we want.
+ * @return mixed  $value The value of the option.
+ *
+ */
+
+function swp_get_option( $key ){
+	global $swp_user_options;
+	$defaults = array();
+	$defaults = apply_filters('swp_options_page_defaults' , $defaults );
+
+	// If the options exists, return it.
+	if( !empty( $swp_user_options[$key] ) ):
+		return $swp_user_options[$key];
+
+	// Else check if we have a default to use:
+	elseif( !empty($defaults[$key]) ):
+		return $defaults[$key];
+
+	// If neither, just return false.
+	else:
+		return false;
+	endif;
+}
+
+add_action( 'wp_ajax_swp_store_settings', 'swp_store_the_settings' );
+/**
+ * Handle the options save request inside of admin-ajax.php
+ *
+ * @since  unknown
+ * @return void
+ */
+function swp_store_the_settings() {
+	global $swp_user_options;
+
+	if ( ! check_ajax_referer( 'swp_plugin_options_save', 'security', false ) ) {
+		wp_send_json_error( esc_html__( 'Security failed.', 'social-warfare' ) );
+		die;
+	}
+
+	$data = wp_unslash( $_POST );
+
+	if ( empty( $data['settings'] ) ) {
+		wp_send_json_error( esc_html__( 'No settings to save.', 'social-warfare' ) );
+		die;
+	}
+
+	$settings = $data['settings'];
+	$options = $swp_user_options;
+
+	unset( $options['order_of_icons']['active'] );
+	unset( $options['order_of_icons']['inactive'] );
+
+	// Loop and check for checkbox values, convert them to boolean.
+	foreach ( $settings as $key => $value ) {
+		if ( 'true' == $value ) {
+			$options[ $key ] = true;
+		} elseif ( 'false' == $value ) {
+			$options[ $key ] = false;
+		} else {
+			$options[ $key ] = $value;
+		}
+	}
+
+	swp_update_options( $options );
+	echo json_encode($options);
+
+	die;
+}
+
+
+ /**
+  * A wrapper for the legacy version of the function
+  *
+  * This version accepted 3 parameters, but was scrapped for a
+  * new version that now accepts an array of unlimited parameters
+  *
+  * @since  1.4.0
+  * @access public
+  * @param  boolean $content The content to which the buttons will be added
+  * @param  string  $where   Where the buttons should appear (above, below, both, none)
+  * @param  boolean $echo    Echo the content or return it
+  * @return string 			Returns the modified content
+  */
+ function socialWarfare( $content = false, $where = 'default', $echo = true ) {
+
+    // Collect the deprecated fields and place them into an array
+    $array['content'] 	= $content;
+    $array['where'] 	= $where;
+    $array['echo'] 		= $echo;
+    $array['devs']		= true;
+
+    // Pass the array into the new function
+    return social_warfare( $array );
+ }
+
+
+/**
+ * The primary social_warfare function
+ *
+ * This is the function that we encourage users to use in their themes and whatnot
+ * if they want to be able to directly output the buttons in their theme. It accepts
+ * an array of arguments that correspond to the arguments that the SWP_Buttons_Panel
+ * accepts.
+ *
+ * @since  1.0.0 | Unknown | Created
+ * @since  3.0.0 | 08 MAY 2018 | Converted to a passthrough function that calls
+ *                               the buttons panel class.
+ * @param  array $args An array of arguments to manipulate the output of the buttons.
+ * @return none        The html of the buttons will be output to the screen.
+ *
+ */
+ function social_warfare( $args = array() ) {
+
+	 if( !is_array($args) ):
+		 $args = array();
+	 endif;
+
+    $buttons_panel = new SWP_Buttons_Panel( $args );
+	echo $buttons_panel->render_HTML();
+ }
 
 
 /**
@@ -39,16 +185,16 @@ function swp_kilomega( $val ) {
 			$val = intval( $val ) / 1000;
 
 			// If the decimal separator is a period
-			if ( $options['swp_decimal_separator'] == 'period' ) :
+			if ( $options['decimal_separator'] == 'period' ) :
 
 				// Then format the number to the appropriate number of decimals
-				return number_format( $val,$options['swDecimals'],'.',',' ) . 'K';
+				return number_format( $val,$options['decimals'],'.',',' ) . 'K';
 
 				// If the decimal separator is a comma
 			else :
 
 				// Then format the number to the appropriate number of decimals
-				return number_format( $val,$options['swDecimals'],',','.' ) . 'K';
+				return number_format( $val,$options['decimals'],',','.' ) . 'K';
 
 			endif;
 
@@ -59,16 +205,16 @@ function swp_kilomega( $val ) {
 			$val = intval( $val ) / 1000000;
 
 			// If the decimal separator is a period
-			if ( $options['swp_decimal_separator'] == 'period' ) :
+			if ( $options['decimal_separator'] == 'period' ) :
 
 				// Then format the number to the appropriate number of decimals
-				return number_format( $val,$options['swDecimals'],'.',',' ) . 'M';
+				return number_format( $val,$options['decimals'],'.',',' ) . 'M';
 
 				// If the decimal separator is a comma
 			else :
 
 				// Then format the number to the appropriate number of decimals
-				return number_format( $val,$options['swDecimals'],',','.' ) . 'M';
+				return number_format( $val,$options['decimals'],',','.' ) . 'M';
 
 			endif;
 
@@ -187,13 +333,14 @@ function _swp_is_debug( $type = 'all' ) {
  * @param Array $options The options Array
  * @return Array $options The modified options array
  */
-function swp_buttons_cleanup( $options ) {
-	if(isset($options['content']['active'])) {
-		unset($options['content']['active']);
-	}
-	return $options;
-}
-add_filter( 'swp_button_options', 'swp_buttons_cleanup', 999 );
+// DEPRECATED
+// function swp_buttons_cleanup( $options ) {
+// 	if(isset($options['icons']['active'])) {
+// 		unset($options['icons']['active']);
+// 	}
+// 	return $options;
+// }
+// add_filter( 'swp_button_options', 'swp_buttons_cleanup', 999 );
 
 /**
  * A function to recursively search arrays
@@ -362,7 +509,7 @@ function swp_get_license_key($key) {
 
 	if(is_swp_addon_registered($key)):
 
-		$options = get_option( 'socialWarfareOptions' );
+		$options = get_option( 'social_warfare_settings' );
 		$license = $options[$key.'_license_key'];
 		return $license;
 
@@ -386,4 +533,18 @@ function swp_get_site_url() {
 	} else {
 		return get_site_url();
 	}
+}
+
+
+/**
+ * A function to convert strings into snake_case
+ *
+ * @since  3.0.0 | 02 MAY 2018 | Created
+ * @param  string $string The string to be modified.
+ * @return string         The snake_case modified string.
+ *
+ */
+function swp_snake_case( $string ) {
+	$snake_case = str_replace( ' ' , '_' , strtolower($string) );
+	return $snake_case;
 }

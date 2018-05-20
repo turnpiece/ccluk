@@ -512,6 +512,23 @@ function onepress_customize_register( $wp_customize ) {
             )
         );
 
+    /**
+     * @since 2.0.8
+     */
+        $wp_customize->add_setting( 'onepress_transparent_logo_height',
+            array(
+                'sanitize_callback' => 'sanitize_text_field',
+                'default' => ''
+            )
+        );
+        $wp_customize->add_control( 'onepress_transparent_logo_height',
+           array(
+               'label'       => esc_html__( 'Transparent Logo Height in Pixel', 'onepress' ),
+               'section'     => 'onepress_header_settings',
+               'description' => '',
+           )
+        );
+
         $wp_customize->add_setting( 'onepress_transparent_site_title_c',
             array(
                 'sanitize_callback' => 'sanitize_hex_color',
@@ -725,20 +742,6 @@ function onepress_customize_register( $wp_customize ) {
         )
     );
 
-    $wp_customize->add_setting( 'single_thumbnail',
-        array(
-            'sanitize_callback' => 'onepress_sanitize_checkbox',
-            'default'           => '',
-        )
-    );
-    $wp_customize->add_control( 'single_thumbnail',
-        array(
-            'type'        => 'checkbox',
-            'label'       => esc_html__('Show single post thumbnail', 'onepress'),
-            'section'     => 'onepress_single',
-            'description' => esc_html__('Check this box to show featured image on single post.', 'onepress')
-        )
-    );
 
 		/* Footer top Social Settings
 		----------------------------------------------------------------------*/
@@ -1532,7 +1535,7 @@ function onepress_customize_register( $wp_customize ) {
 					array(
 						'label' 		=> esc_html__('Large Text', 'onepress'),
 						'section' 		=> 'onepress_hero_content_layout1',
-						'description'   => esc_html__('Text Rotating Guide: Put your rotate texts separate by "|" into <span class="js-rotating">...</span>, go to Customizer->Site Option->Animate to control rotate animation.', 'onepress'),
+						'description'   => esc_html__('Text Rotating Guide: Put your rotate texts separate by "|" into <span class="js-rotating">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation.', 'onepress'),
 					)
 				));
 
@@ -1637,6 +1640,19 @@ function onepress_customize_register( $wp_customize ) {
                         )
 					)
 				);
+				$wp_customize->add_setting( 'onepress_hcl1_btn1_target',
+					array(
+						'sanitize_callback' => 'onepress_sanitize_checkbox',
+						'default'           => null,
+					)
+				);
+				$wp_customize->add_control( 'onepress_hcl1_btn1_target',
+					array(
+						'label' 		=> __('Open Button #1 In New Window', 'onepress'),
+						'section' 		=> 'onepress_hero_content_layout1',
+						'type'          => 'checkbox',
+					)
+				);
 
 				// Button #2 Text
 				$wp_customize->add_setting( 'onepress_hcl1_btn2_text',
@@ -1666,7 +1682,7 @@ function onepress_customize_register( $wp_customize ) {
 					)
 				);
 
-                // Button #1 Style
+                // Button #2 Style
                 $wp_customize->add_setting( 'onepress_hcl1_btn2_style',
                     array(
                         'sanitize_callback' => 'onepress_sanitize_text',
@@ -1690,6 +1706,19 @@ function onepress_customize_register( $wp_customize ) {
                         )
                     )
                 );
+				$wp_customize->add_setting( 'onepress_hcl1_btn2_target',
+					array(
+						'sanitize_callback' => 'onepress_sanitize_checkbox',
+						'default'           => null,
+					)
+				);
+				$wp_customize->add_control( 'onepress_hcl1_btn2_target',
+					array(
+						'label' 		=> __('Open Button #2 In New Window', 'onepress'),
+						'section' 		=> 'onepress_hero_content_layout1',
+						'type'          => 'checkbox',
+					)
+				);
 
 
 				/* Layout 2 ---- */
@@ -3433,7 +3462,7 @@ function onepress_customize_register( $wp_customize ) {
 			array(
 				'section'     => 'onepress_contact_content',
 				'type'        => 'custom_message',
-				'description' => wp_kses_post( 'In order to display contact form please install <a target="_blank" href="https://vi.wordpress.org/plugins/pirate-forms/">PirateForms</a> plugin and then copy the contact form shortcode and paste it here, the shortcode will be like this <code>[pirate_forms]</code>', 'onepress' )
+				'description' => wp_kses_post( 'Paste your form shortcode from contact form plugin here, e.g <code>[pirate_forms]</code>', 'onepress' )
 			)
 		));
 
@@ -3598,7 +3627,7 @@ function onepress_customize_register( $wp_customize ) {
                 'section'     => 'onepress_news_settings',
                 'type'        => 'custom_message',
                 'section'     => 'onepress_order_styling_preview',
-                'description' => __('<h4 class="customizer-group-heading-message">Drag &amp; Drop Section Orders</h4><p class="customizer-group-heading-message">Check out the <a target="_blank" href="https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class="customizer-group-heading-message">Advandced Section Styling</h4><p class="customizer-group-heading-message">Check out the <a target="_blank" href="https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>', 'onepress' )
+                'description' => __('<h4 class="customizer-group-heading-message">Drag &amp; Drop Section Orders</h4><p class="customizer-group-heading-message">Check out the <a target="_blank" href="https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class="customizer-group-heading-message">Advanced Section Styling</h4><p class="customizer-group-heading-message">Check out the <a target="_blank" href="https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>', 'onepress' )
             )
         ));
 

@@ -11,8 +11,6 @@
  * Display header brand
  * @since 1.2.1
  */
-
-
 function onepress_add_retina_logo( $html ){
     $custom_logo_id = get_theme_mod( 'custom_logo' );
 
@@ -537,6 +535,7 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
 	function onepress_custom_inline_style( ) {
 
 	        $logo_height= absint( get_theme_mod( 'onepress_logo_height' ) );
+	        $logo_tran_height= absint( get_theme_mod( 'onepress_transparent_logo_height' ) );
 
             /**
              *  Custom hero section css
@@ -547,8 +546,13 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
             $hero_bg_color = onepress_hex_to_rgba( $hero_bg_color, floatval( get_theme_mod( 'onepress_hero_overlay_opacity' , .3 ) ) );
 
             ob_start();
+
             if ( $logo_height > 0 ) {
                 echo ".site-logo-div img{ height: {$logo_height}px; width: auto; }";
+            }
+
+            if ( $logo_tran_height ) {
+                echo ".site-logo-div img.custom-logo-transparent{ height: {$logo_tran_height}px; width: auto; }";
             }
 
             $t_site_name_color = sanitize_hex_color( get_theme_mod( 'onepress_transparent_site_title_c' ) );
@@ -773,9 +777,6 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
                 }
                 <?php
             }
-
-
-
 
             $onepress_footer_bg = sanitize_hex_color_no_hash( get_theme_mod( 'onepress_footer_bg' ) );
             $footer_top_text = sanitize_hex_color( get_theme_mod( 'onepress_footer_top_color' ) );
@@ -1461,19 +1462,33 @@ if ( ! function_exists( 'onepress_display_page_title' ) ) {
         } else {
             $page_id = get_the_ID();
         }
-
         $el = 'h1';
+        if ( is_singular('post') ) {
+            if ( ! apply_filters( 'onepress_single_show_page_header', false ) ) {
+                return;
+            }
+            $page_id = get_option( 'page_for_posts' );
+            $el = 'h2';
+        }
+
+
         $apply_shop = false;
         $is_single_product = false;
+
         if (onepress_is_wc_active()) {
-            if (is_shop() || is_product_category() || is_product_tag() || is_singular('product')) {
+            if (is_shop() || is_product_category() || is_product_tag() || is_product() || is_singular('product') || is_product_taxonomy() ) {
+
                 $page_id = wc_get_page_id('shop');
-                if ( is_singular('product') ) {
+                if ( is_product() ) {
                     $el = 'h2';
-                    $is_single_product =  true;
+                    $is_single_product = true;
                     $apply_shop = get_post_meta( $page_id, '_wc_apply_product', true );
                 }
                 $return = false;
+
+                remove_action('woocommerce_archive_description', 'woocommerce_taxonomy_archive_description', 10);
+                remove_action('woocommerce_archive_description', 'woocommerce_product_archive_description', 10);
+                add_action( 'woocommerce_show_page_title', '__return_false', 95 );
             }
         }
 
@@ -1521,9 +1536,6 @@ if ( ! function_exists( 'onepress_display_page_title' ) ) {
         if ( ! $apply_shop && $is_single_product ) {
             $excerpt = '';
         }
-
-
-
 
         ?>
         <?php if ( ! $hide_page_title ){ ?>

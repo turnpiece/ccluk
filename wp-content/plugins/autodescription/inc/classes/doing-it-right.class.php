@@ -760,6 +760,7 @@ class Doing_It_Right extends Generate_Ldjson {
 	 *
 	 * @since 2.6.0
 	 * @since 2.9.0 Now also returns noindex value.
+	 * @since 3.0.6 Now considers custom field filters for the description.
 	 * @staticvar array $data
 	 *
 	 * @param array $args The term args.
@@ -782,7 +783,7 @@ class Doing_It_Right extends Generate_Ldjson {
 		$data = $this->get_term_meta( $term_id );
 
 		$title_custom_field = isset( $data['doctitle'] ) ? $data['doctitle'] : '';
-		$description_custom_field = isset( $data['description'] ) ? $data['description'] : '';
+		$description_custom_field = $this->get_description_from_custom_field( $term_id );
 		$noindex = isset( $data['noindex'] ) ? $data['noindex'] : '';
 		$nofollow = isset( $data['nofollow'] ) ? $data['nofollow'] : '';
 		$noarchive = isset( $data['noarchive'] ) ? $data['noarchive'] : '';
@@ -795,21 +796,13 @@ class Doing_It_Right extends Generate_Ldjson {
 		}
 
 		$description_is_from_custom_field = (bool) $description_custom_field;
+		//= Call sanitized version.
 		if ( $description_is_from_custom_field ) {
-			$taxonomy = ! empty( $term->taxonomy ) ? $term->taxonomy : '';
-			$description_args = $taxonomy ? array( 'id' => $term_id, 'taxonomy' => $term->taxonomy, 'get_custom_field' => true ) : array( 'get_custom_field' => true );
-
-			$description = $this->generate_description( '', $description_args );
+			$description = $this->get_description_from_custom_field( $term_id );
 		} else {
-			$taxonomy = ! empty( $term->taxonomy ) ? $term->taxonomy : '';
-			$description_args = $taxonomy ? array( 'id' => $term_id, 'taxonomy' => $term->taxonomy, 'get_custom_field' => false ) : array( 'get_custom_field' => false );
-
-			$description = $this->generate_description( '', $description_args );
+			$description = $this->get_generated_description( $term_id );
 		}
 
-		/**
-		 * No longer uses is_checked. As it strict checks 1/0 strings.
-		 */
 		$noindex = (bool) $noindex;
 		$nofollow = (bool) $nofollow;
 		$noarchive = (bool) $noarchive;
@@ -830,6 +823,7 @@ class Doing_It_Right extends Generate_Ldjson {
 	 *
 	 * @since 2.6.0
 	 * @since 2.9.0 Now also returns noindex value.
+	 * @since 3.0.6 Now considers custom field filters for the description.
 	 * @staticvar array $data
 	 *
 	 * @param array $args The post args.
@@ -849,14 +843,14 @@ class Doing_It_Right extends Generate_Ldjson {
 		$page_on_front = $this->is_static_frontpage( $post_id );
 
 		$title_custom_field = $this->get_custom_field( '_genesis_title', $post_id );
-		$description_custom_field = $this->get_custom_field( '_genesis_description', $post_id );
+		$description_custom_field = $this->get_description_from_custom_field( $post_id );
 		$noindex = $this->get_custom_field( '_genesis_noindex', $post_id );
 		$nofollow = $this->get_custom_field( '_genesis_nofollow', $post_id );
 		$noarchive = $this->get_custom_field( '_genesis_noarchive', $post_id );
 
 		if ( $page_on_front ) {
 			$title_custom_field = $this->get_option( 'homepage_title' ) ?: $title_custom_field;
-			$description_custom_field = $this->get_option( 'homepage_description' ) ?: $description_custom_field;
+			// $description_custom_field = $description_custom_field; // We already got this.
 			$noindex = $this->get_option( 'homepage_noindex' ) ?: $nofollow;
 			$nofollow = $this->get_option( 'homepage_nofollow' ) ?: $nofollow;
 			$noarchive = $this->get_option( 'homepage_noarchive' ) ?: $noarchive;
@@ -870,10 +864,11 @@ class Doing_It_Right extends Generate_Ldjson {
 		}
 
 		$description_is_from_custom_field = (bool) $description_custom_field;
+		//= Call sanitized version.
 		if ( $description_is_from_custom_field ) {
-			$description = $this->generate_description( '', array( 'id' => $post_id, 'get_custom_field' => true ) );
+			$description = $this->get_description_from_custom_field( $post_id );
 		} else {
-			$description = $this->generate_description( '', array( 'id' => $post_id, 'get_custom_field' => false ) );
+			$description = $this->get_generated_description( $post_id );
 		}
 
 		$noindex = (bool) $noindex;
@@ -1435,10 +1430,10 @@ class Doing_It_Right extends Generate_Ldjson {
 			$arc_notice = $archive_i18n . ' ' . sprintf( \esc_attr__( "Search Engines aren't allowed to archive this %s.", 'autodescription' ), $post_low );
 			$arc_class = $unknown;
 			$archived = false;
-			$arc_but = true;
 		} else {
 			$arc_notice = $archive_i18n . ' ' . sprintf( \esc_attr__( 'Search Engines are allowed to archive this %s.', 'autodescription' ), $post_low );
 			$arc_class = $good;
+			$arc_but = true;
 		}
 
 		/**
@@ -1449,7 +1444,7 @@ class Doing_It_Right extends Generate_Ldjson {
 		if ( $this->is_option_checked( 'site_noarchive' ) ) {
 			$but_and = isset( $arc_but ) ? $and_i18n : $but_i18n;
 
-			$arc_notice .= '<br>' . sprintf( \esc_attr__( "But you've discouraged archiving for the whole site.", 'autodescription' ), $but_and );
+			$arc_notice .= '<br>' . sprintf( \esc_attr__( "%s you've discouraged archiving for the whole site.", 'autodescription' ), $but_and );
 			$arc_class = $unknown;
 			$arc_but = true;
 

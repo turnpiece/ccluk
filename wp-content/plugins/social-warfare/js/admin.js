@@ -1,6 +1,133 @@
-var socialWarfareAdmin = socialWarfareAdmin || {};
+/**
+*
+* Functions for widgets and global utility functions.
+*
+* @since 1.0.0
+* @package   SocialWarfare\Admin\Functions
+* @copyright Copyright (c) 2018, Warfare Plugins, LLC
+* @license   GPL-3.0+
+*/
 
-(function( window, $, undefined ) {
+var socialWarfareAdmin = socialWarfareAdmin || {};
+var swpWidget, widgetSubmit;
+
+/**
+* Show and hide input fields based on conditional values.
+*
+* This function iterates over each element with the "dep" data attribute. For each
+* such dependant element, its parent element controls whether the dependant is shown or hidden
+* if the parent's value matches the condition.
+*
+* @since 3.0.0 Feb 12 2018 | Brought func in from admin-options-page.js and set to global scope; Updated variable names for semantics, switched to Yoda condietionals.
+* @since 3.0.0 Feb 14 2018 | Mapped the required array from variable types to string.
+*
+* @see admin-options-page.js
+* @return none
+*/
+function swpConditionalFields() {
+
+	function swp_selected(name) {
+		return jQuery('select[name="' + name + '"]').val();
+	}
+
+	function swp_checked(name) {
+		return jQuery( '[name="' + name + '"]' ).prop( 'checked' );
+	}
+
+	function string_to_bool(string) {
+		if( string === 'true') { string = true };
+		if( string === 'false') { string = false };
+		return string;
+	}
+
+	// Loop through all the fields that have dependancies
+	jQuery( '[data-dep]' ).each( function() {
+
+		// Fetch the conditional values
+		var condition = jQuery(this).data( 'dep' );
+		var required = JSON.parse( JSON.stringify( jQuery(this).data( 'dep_val' ) ) );
+
+		// Check if we're on the options page or somewhere else
+		if (window.location.href.indexOf("page=social-warfare") === -1) {
+			var conditionEl = jQuery(this).parents('.widgets-holder-wrap').find( '[data-swp-name="' + condition + '"]' );
+		} else {
+			var conditionEl = jQuery( '[name="' + condition + '"]' )[0];
+		}
+
+		var value;
+
+		if (typeof conditionEl === 'undefined') {
+			conditionEl = jQuery( '[name="' + condition + '"]' )[0];
+
+			if (typeof conditionEl === 'undefined') {
+				conditionEl = jQuery( '[fieldjQuery=' + condition + ']' )[0];
+			}
+		}
+
+		// Fetch the value of checkboxes or other input types
+		if ( jQuery( conditionEl ).attr( 'type' ) == 'checkbox' ) {
+			value = jQuery( conditionEl ).prop( 'checked' );
+		} else {
+			value = jQuery( conditionEl ).val();
+		}
+		value = string_to_bool(value);
+
+        //* Options page uses parent visibilty to check. Widget page does not. This could definiitely look better.
+		// Show or hide based on the conditional values (and the dependancy must be visible in case it is dependant)
+
+		if (window.location.href.indexOf("page=social-warfare") !== -1) {
+
+			// If the required value matches and it's parent is also being shown, show this conditional field
+			if (jQuery.inArray( value, required ) !== -1 && jQuery( conditionEl ).parent( '.sw-grid' ).is( ':visible' )  ) {
+				jQuery(this).show();
+			} else {
+				jQuery(this).hide();
+			}
+		} else {
+
+			// If the required value matches, show this conditional field
+			if (jQuery.inArray( value, required ) !== -1 || value === required ) {
+				jQuery(this).show();
+			} else {
+				jQuery(this).hide();
+			}
+		}
+	});
+
+	if ( false === swp_checked('float_style_source') &&
+	       'custom_color'              === swp_selected('float_default_colors')
+	    || 'custom_color_outlines'     === swp_selected('float_default_colors')
+	    || 'custom_color'              === swp_selected('float_single_colors')
+	    || 'custom_color_outlines'     === swp_selected('float_single_colors')
+	    || 'custom_color'              === swp_selected('float_hover_colors')
+        || 'custom_color_outlines'     === swp_selected('float_hover_colors') ) {
+		jQuery( '.sideCustomColor_wrapper' ).slideDown();
+
+	} else {
+		jQuery( '.sideCustomColor_wrapper' ).slideUp();
+	}
+}
+
+//* Only run on widgets.php
+if (window.location.href.indexOf("widgets.php") > -1 ) {
+
+	//* Make sure the elements exist before trying to read them.
+	var widgetFinder = setInterval(function() {
+		if (typeof swpWidget !== 'undefined') clearInterval(widgetFinder);
+
+		swpWidget = jQuery("#widgets-right [id*=_swp_popular_posts_widget], [id*=_swp_popular_posts_widget].open")[0];
+		widgetSubmit = jQuery(swpWidget).find("[idjQuery=savewidget]")[0];
+
+        //* Force swpConditionalFields to run when the widget is opened or saved.
+		jQuery(swpWidget).on("click", swpConditionalFields);
+		jQuery(widgetSubmit).on("click", function() {
+			setTimeout(swpConditionalFields, 600);
+		});
+
+	}, 50);
+}
+
+(function( window, jQuery, undefined ) {
 	'use strict';
 
 	socialWarfareAdmin.linkLength = function( input ) {
@@ -15,44 +142,44 @@ var socialWarfareAdmin = socialWarfareAdmin || {};
 
 	// Function for SM Title Counting
 	function smTitleRemaining() {
-		var smTitle = $( '#socialWarfare textarea#nc_ogTitle' ).val();
+		var smTitle = jQuery( '#social_warfare textarea#swp_og_title' ).val();
 		var remaining = 60 - smTitle.length;
 		if ( smTitle.length > 0 && remaining >= 0 ) {
-			$( '#socialWarfare .nc_ogTitleWrapper .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
+			jQuery( '#social_warfare .swp_og_title .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
 		} else if ( smTitle.length > 0 && remaining < 0 ) {
-			$( '#socialWarfare .nc_ogTitleWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_og_title .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
 		} else {
-			$( '#socialWarfare .nc_ogTitleWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_og_title .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
 		}
-		$( '#socialWarfare .nc_ogTitleWrapper .counterNumber' ).html( remaining );
+		jQuery( '#social_warfare .swp_og_title .counterNumber' ).html( remaining );
 	}
 
 	// Function for SM Description Counting
 	function smDescriptionRemaining() {
-		var smDescription = $( '#socialWarfare textarea#nc_ogDescription' ).val();
+		var smDescription = jQuery( '#social_warfare textarea#swp_og_description' ).val();
 		var remaining = 160 - smDescription.length;
 		if ( smDescription.length > 0 && remaining >= 0 ) {
-			$( '#socialWarfare .nc_ogDescriptionWrapper .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
+			jQuery( '#social_warfare .swp_og_description .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
 		} else if ( smDescription.length > 0 && remaining < 0 ) {
-			$( '#socialWarfare .nc_ogDescriptionWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_og_description .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
 		} else {
-			$( '#socialWarfare .nc_ogDescriptionWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_og_description .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
 		}
-		$( '#socialWarfare .nc_ogDescriptionWrapper .counterNumber' ).html( remaining );
+		jQuery( '#social_warfare .swp_og_description .counterNumber' ).html( remaining );
 	}
 
 	// Function for Twitter Box Counting
 	function twitterRemaining() {
-		var smTwitter = $( '#socialWarfare textarea#nc_customTweet' ).val();
-		var handle = $( '#socialWarfare .twitterIDWrapper label' ).html();
+		var smTwitter = jQuery( '#social_warfare textarea#swp_custom_tweet' ).val();
+		var handle = jQuery( '#social_warfare .twitterIDWrapper label' ).html();
 		var linkSpace;
 
 		if ( smTwitter.indexOf( 'http' ) > -1 || smTwitter.indexOf( 'https' ) > -1 ) {
 			linkSpace = 0;
-			$( '.tweetLinkSection' ).css({ 'text-decoration': 'line-through' });
+			jQuery( '.tweetLinkSection' ).css({ 'text-decoration': 'line-through' });
 		} else {
 			linkSpace = 23;
-			$( '.tweetLinkSection' ).css({ 'text-decoration': 'none' });
+			jQuery( '.tweetLinkSection' ).css({ 'text-decoration': 'none' });
 		}
 
 		var remaining;
@@ -63,46 +190,59 @@ var socialWarfareAdmin = socialWarfareAdmin || {};
 		}
 
 		if ( smTwitter.length > 0 && remaining >= 0 ) {
-			$( '#socialWarfare .nc_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
+			jQuery( '#social_warfare .swp_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
 		} else if ( smTwitter.length > 0 && remaining < 0 ) {
-			$( '#socialWarfare .nc_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
 		} else {
-			$( '#socialWarfare .nc_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
+			jQuery( '#social_warfare .swp_customTweetWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
 		}
 
-		$( '#socialWarfare .nc_customTweetWrapper .counterNumber' ).html( remaining );
+		jQuery( '#social_warfare .swp_customTweetWrapper .counterNumber' ).html( remaining );
 	}
 
-	$( document ).ready( function() {
-		if ( $( '#socialWarfare.postbox' ).length ) {
+	function toggleCustomThumbnailFields(show) {
+		if (typeof show === 'undefined') show = true;
+
+		if (show) {
+			jQuery(".custom_thumb_size").show();
+		}
+        else {
+        	jQuery(".custom_thumb_size").hide();
+        }
+	}
+
+	jQuery( document ).ready( function() {
+		if ( jQuery( '#social_warfare.postbox' ).length ) {
+
 			// Add the CountDown Box for the Social Media Title
-			$( '#socialWarfare #nc_ogTitle' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">60</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
+			jQuery( '#social_warfare #swp_og_title' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">60</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
 
 			// Add the CountDown Box for the Social Media Description
-			$( '#socialWarfare #nc_ogDescription' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">150</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
+			jQuery( '#social_warfare #swp_og_description' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">150</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
 
 			// Add the CountDown Box for the Twitter Box
-			$( '#socialWarfare #nc_customTweet' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">118</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
+			jQuery( '#social_warfare #swp_customTweet' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">118</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
 
 			smTitleRemaining();
-			$( '#socialWarfare textarea#nc_ogTitle' ).on( 'input', function() {
+			jQuery( '#social_warfare textarea#swp_og_title' ).on( 'input', function() {
 				smTitleRemaining();
 			});
 
 			smDescriptionRemaining();
-			$( '#socialWarfare textarea#nc_ogDescription' ).on( 'input', function() {
+			jQuery( '#social_warfare textarea#swp_og_description' ).on( 'input', function() {
 				smDescriptionRemaining();
 			});
 
 			twitterRemaining();
-			$( '#socialWarfare textarea#nc_customTweet' ).on( 'input', function() {
+			jQuery( '#social_warfare textarea#swp_customTweet' ).on( 'input', function() {
 				twitterRemaining();
 			});
 
 			// Setup an initilazation loop
 			var swpPostInit = setInterval( function() {
-				var swpOgImage  = $( '.nc_ogImageWrapper ul.swpmb-media-list' );
-				var swpPinImage = $( '.nc_pinterestImageWrapper ul.swpmb-media-list' );
+
+				var swpOgImage  = jQuery( '.swp_og_imageWrapper ul.swpmb-media-list' );
+				var swpPinImage = jQuery( '.swp_pinterest_imageWrapper ul.swpmb-media-list' );
 
 				var smWidth, smHeight;
 
@@ -133,45 +273,20 @@ var socialWarfareAdmin = socialWarfareAdmin || {};
 			}, 1000 );
 		}
 
-		// Show and Hide the Count Label based on if we're showing counts
-		$( '.swp_popular_post_options .showCount select' ).on( 'change', function() {
-			var value = $( this ).val();
-			if ( value = true ) {
-				$( '.swp_popular_post_options .countLabel' ).slideDown( 'slow' );
-			} else {
-				$( '.swp_popular_post_options .countLabel' ).slideUp( 'slow' );
-			}
+		swpConditionalFields();
+		jQuery( '.swp_popular_post_options select' ).on( 'change', function() {
+			swpConditionalFields();
 		});
 
-		// Show and Hide the Thumbnail size based on if we're showing thmbnails
-		$( '.swp_popular_post_options .thumbnails select' ).on( 'change', function() {
-			var value = $( this ).val();
-			if ( value = true ) {
-				$( '.swp_popular_post_options .thumb_size' ).slideDown( 'slow' );
-			} else {
-				$( '.swp_popular_post_options .thumb_size' ).slideUp( 'slow' );
-			}
-		});
-
-		// Show and Hide the Custom fields based on if we're using a custom color scheme
-		$( '.swp_popular_post_options .style select' ).on( 'change', function() {
-			var value = $( this ).val();
-			if ( value = 'custom' ) {
-				$( '.swp_popular_post_options .custom_bg, .swp_popular_post_options .custom_link' ).slideDown( 'slow' );
-			} else {
-				$( '.swp_popular_post_options .custom_bg, .swp_popular_post_options .custom_link' ).slideUp( 'slow' );
-			}
-		});
-
-		if ( $( '.postbox#socialWarfare' ).length ) {
-			var registrationStatus = $( '#socialWarfare .registrationWrapper input' ).attr( 'id' );
+		if ( jQuery( '.postbox#social_warfare' ).length ) {
+			var registrationStatus = jQuery( '#social_warfare .registrationWrapper input' ).attr( 'id' );
 			if ( registrationStatus == 'false' ) {
-				$( '.postbox#socialWarfare' )
+				jQuery( '.postbox#social_warfare' )
 					.css({ position: 'relative',opacity: '0.3' })
 					.append( '<div class="sw-premium-blocker"></div>' );
 
-				$( '#socialWarfare .sw-premium-blocker' ).tooltip({
-					items: '#socialWarfare .sw-premium-blocker',
+				jQuery( '#social_warfare .sw-premium-blocker' ).tooltip({
+					items: '#social_warfare .sw-premium-blocker',
 					content: '<i></i>Unlock these features by registering your license.',
 					position: {
 						my: 'center top',
@@ -183,25 +298,43 @@ var socialWarfareAdmin = socialWarfareAdmin || {};
 							return false;
 						}
 
-						var $id = $( ui.tooltip ).attr( 'id' );
+						var jQueryid = jQuery( ui.tooltip ).attr( 'id' );
 
 						// close any lingering tooltips
-						$( 'div.ui-tooltip' ).not( '#' + $id ).remove();
+						jQuery( 'div.ui-tooltip' ).not( '#' + jQueryid ).remove();
 
 						// ajax function to pull in data and add it to the tooltip goes here
 					},
 					close: function( event, ui ) {
 						ui.tooltip.hover(function() {
-							$( this ).stop( true ).fadeTo( 400, 1 );
+							jQuery(this).stop( true ).fadeTo( 400, 1 );
 						},
 						function() {
-							$( this ).fadeOut( '400', function() {
-								$( this ).remove();
+							jQuery(this).fadeOut( '400', function() {
+								jQuery(this).remove();
 							});
 						});
 					}
 				});
 			}
 		}
+
+		/*
+		var customThumbnailSelect = jQuery("#widget-swp_popular_posts_widget-2-thumb_size");
+
+		if (customThumbnailSelect.value === 'custom') {
+			toggleCustomThumbnailFields();
+		}
+
+		jQuery(customThumbnailSelect).on("change", function(e) {
+			console.log("changing");
+			console.log(e.target.value);
+            if (e.target.value === 'custom') {
+            	toggleCustomThumbnailFields();
+            } else {
+            	toggleCustomThumbnailFields(false);
+            }
+		});
+		*/
 	});
 })( this, jQuery );

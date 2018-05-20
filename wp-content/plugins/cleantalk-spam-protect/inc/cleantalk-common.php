@@ -482,6 +482,7 @@ function ct_def_data() {
         'js_keys' => array(), // Keys to do JavaScript antispam test 
         'js_keys_store_days' => 14, // JavaScript keys store days - 8 days now
         'js_key_lifetime' => 86400, // JavaScript key life time in seconds - 1 day now
+		'ip_license' => 0,
 		'sfw_counter' => array(
 			'all' => 0,
 			'blocked' => 0

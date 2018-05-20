@@ -44,6 +44,7 @@ class Detect extends Render {
 	/**
 	 * Determines if we're doing ajax.
 	 *
+	 * @todo use wp_doing_ajax() in a future version. Requires WP 4.7+.
 	 * @since 2.9.0
 	 * @staticvar bool $cache
 	 *
@@ -126,6 +127,7 @@ class Detect extends Render {
 	 * Filterable list of conflicting plugins.
 	 *
 	 * @since 2.6.0
+	 * @TODO consider removing "Header and Footer"
 	 * @credits JetPack for most code.
 	 *
 	 * @return array List of conflicting plugins.
@@ -157,7 +159,6 @@ class Detect extends Render {
 				'Facebook Open Graph Meta Tags for WordPress' => 'wonderm00ns-simple-facebook-open-graph-tags/wonderm00n-open-graph.php',
 				'Facebook Thumb Fixer'                 => 'facebook-thumb-fixer/_facebook-thumb-fixer.php',
 				'Fedmichs Facebook Open Graph Meta'    => 'facebook-and-digg-thumbnail-generator/facebook-and-digg-thumbnail-generator.php',
-				'Header and Footer'                    => 'header-footer/plugin.php',
 				'NextGEN Facebook OG'                  => 'nextgen-facebook/nextgen-facebook.php',
 				'Open Graph'                           => 'opengraph/opengraph.php',
 				'Open Graph Protocol Framework'        => 'open-graph-protocol-framework/open-graph-protocol-framework.php',

@@ -1,0 +1,14 @@
+Feb 5 2018
+
+Brief phone call w/Nick go over items
+
+Debugged Meta tag output for #454
+Resolved issues #454, 455,
+
+Grabbed dev screenshot of CTT for Nick
+
+keys
+    "top"
+    "middle"
+    "bottom"
+

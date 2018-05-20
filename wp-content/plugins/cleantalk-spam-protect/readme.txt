@@ -1,12 +1,12 @@
-=== Spam protection, AntiSpam, FireWall, Cleaner by CleanTalk ===
-Contributors: znaeff, shagimuratov, sartemd174 
+=== Spam protection, AntiSpam, FireWall by CleanTalk ===
+Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 4.9.5
-Stable tag: 5.95
+Tested up to: 4.9
+Stable tag: 5.95.1
 License: GPLv2
 
-Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce spam. Forget spam.
+Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
 
 == Description ==
 
@@ -26,9 +26,7 @@ No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bo
 1. Stops spam in WooCommerce.
 1. Checks and removes the existing spam comments and spam users.
 1. Compatible with mobile users and devices. 
-
-= Free trial then $8 per year =
-CleanTalk is a free anti spam plugin which work with the premium Cloud AntiSpam service cleantalk.org. This plugin as a service https://en.wikipedia.org/wiki/Software_as_a_service.
+1. Compatible with General Data Protection Regulation (GDPR) (EU). 
 
 = Public reviews =
 > Using CleanTalk on WPLift was a great test as we receive huge amounts of spam.
@@ -39,6 +37,9 @@ CleanTalk is a free anti spam plugin which work with the premium Cloud AntiSpam 
 
 > The key selling point of CleanTalk for me is not simply its effectiveness. It's the fact that CleanTalk works in the background. It does not make users jump through hoops in order to submit a comment or complete a form.
 > <a href="https://www.kevinmuldoon.com/cleantalk-anti-spam-service/">www.kevinmuldoon.com</a>
+
+= Free trial then $8 per year =
+CleanTalk is a free anti spam plugin which work with the premium Cloud AntiSpam service cleantalk.org. This plugin as a service https://en.wikipedia.org/wiki/Software_as_a_service.
 
 = AntiSpam protection for comments =
 Native spam protection for WordPress, JetPack comments and any other comment plugins. The plugin moves spam comments to SPAM folder or you can set the option to ban spam comments silently. You can also enable the option in the plugin settings to auto-delete comments from SPAM folder.
@@ -200,29 +201,21 @@ CleanTalk has an advanced option "Spam FireWall". This option allows you to bloc
 
 "CleanTalk team has been developing a cloud spam protection system for five years and has created a truly reliable anti-spam service designed for you to guarantee your safety".
 
-= Auto-Update CleanTalk Anti-Spam =
+= Auto-Update CleanTalk AntiSpam =
 
-CleanTalk Dashboard(<a href="https://cleantalk.org/my?cp_mode=antispam">https://cleantalk.org/my?cp_mode=antispam</a>) allows you to set auto-update plugin and select several websites and update the plugin at once on all sites by one click or you can setup auto-update for all websites or separate websites. 
+CleanTalk Dashboard allows you to set auto-update plugin and select several websites and update the plugin at once on all sites by one click or you can setup auto-update for all websites or separate websites. 
 
 Note: there is 24 hours delay before auto-update will do. This delay allows needing to avoid any issues. All updates that made through CleanTalk Dashboard manually will do immediately. 
 
-Auto-updating system will work from CleanTalk Anti-Spam version 5.88
+Auto-updating system will work from CleanTalk AntiSpam version 5.88
 
 = Translations = 
-* Danish (da_DK) 
-* French (fr_FR) - thanks to Gilles Santacreu <a href="http://net-ik.net">http://net-ik.net</a> 
-* German (de_DE) 
-* Italian (it_IT) 
-* Polish (pl_PL) 
-* Portuguese (pt_PT) 
-* Spanish (es_ES) - thanks to Andrew Kurtis and <a href="http://www.webhostinghub.com/index-c.html">WebHostingHub</a> 
-* Russian (ru_RU) 
+* Albanian (sq_AL) - thanks to fjalaime https://wordpress.org/support/users/fjalaime/ 
+* French (fr_FR) - thanks to Gilles Santacreu http://net-ik.net
+* Spanish (es_ES) - thanks to Andrew Kurtis and WebHostingHub
 
 = Requirements =
-WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. <a href="http://cleantalk.org/register?platform=wordpress">Sign up</a> to get an Access key. The plugin is fully compatible with PHP 7.
-
-= We recommend =
- * <a href="https://wordpress.org/plugins/security-malware-firewall/">Security & Firewall plugin by CleanTalk</a>
+WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enabled 'allow_url_fopen' setting. The plugin is fully compatible with PHP 7.
 
 > Max power, all-in-one, premium anti-spam WordPress plugin. No comments & registrations spam, no contact spam, protects any forms. Just install and forget spam. 
 
@@ -506,6 +499,10 @@ https://cleantalk.org/faq#feedback_spam
 = Is the plugin fast? =
 We develop plugin to do it as optimized as possible, CleanTalk doesn't downgrade response time in backend or frontend. The plugin proccess only POST requests to WordPress core, it tackes less than 1 second to return results.
 
+= Is the plugin EU GDPR compatible? =
+Yes, it is. Please read this article,
+<a href="https://cleantalk.org/help/CleanTalk-GDPR-Compliance">https://cleantalk.org/help/CleanTalk-GDPR-Compliance</a>
+
 == Screenshots ==
 1. AntiSpam settings are easy to use. 
 2. AntiSpam plugin rejected a spam bot at the CAPTCHA less registration form. The plugin provides explanation to visitor and websites about each rejected comment/registration or contact message. 
@@ -519,6 +516,10 @@ We develop plugin to do it as optimized as possible, CleanTalk doesn't downgrade
 10. Website's options.
 
 == Changelog ==
+= 5.95.1 May 3 2018 =
+  * Fix: "Get key automatically" button display logic.
+  * Fix: PHP notices.
+  
 = 5.95 May 2 2018 =
   * Spam filtration improved.
   * Fix: Public widget layout.
@@ -1586,6 +1587,10 @@ We develop plugin to do it as optimized as possible, CleanTalk doesn't downgrade
   * First version
   
 == Upgrade Notice ==
+= 5.95.1 May 3 2018 =
+  * Fix: "Get key automatically" button display logic.
+  * Fix: PHP notices.
+
 = 5.95 May 2 2018 =
   * Spam filtration improved.
   * Fix: Public widget layout.

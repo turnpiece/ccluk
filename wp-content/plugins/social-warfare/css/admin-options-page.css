@@ -83,6 +83,11 @@
 	margin-right: 0 !important;
 }
 
+.sw-option-container *:last-child {
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+}
+
 .sw-clearfix:after, .sw-clearfix:before {
 	content: ' ';
 	display: table;
@@ -553,6 +558,16 @@ p.sw-subtitle.sw-registration-text {
 	margin-left: -120px;
 }
 
+/*********************************************************
+
+	Textarea
+
+*********************************************************/
+
+.sw-grid textarea {
+	width:100%;
+	height:120px;
+}
 
 /*********************************************************
 
@@ -597,11 +612,11 @@ p.sw-subtitle.sw-registration-text {
 	border-color: #3c87b2;
 }
 
-.sw-googlePlus-icon:before {
+.sw-google_plus-icon:before {
 	content: 'h';
 }
 
-.sw-s.sw-googlePlus-icon {
+.sw-s.sw-google_plus-icon {
 	background-color: #df4b37;
 	border-color: #c44133;
 }
@@ -624,11 +639,11 @@ p.sw-subtitle.sw-registration-text {
 	border-color: #aa1b29;
 }
 
-.sw-linkedIn-icon:before {
+.sw-linkedin-icon:before {
 	content: 'f';
 }
 
-.sw-s.sw-linkedIn-icon {
+.sw-s.sw-linkedin-icon {
 	background-color: #0d77b7;
 	border-color: #0c6591;
 }
@@ -743,7 +758,7 @@ p.sw-subtitle.sw-registration-text {
 
 *********************************************************/
 
-.sw-admin-wrapper[sw-registered="0"] div[premium="1"] {
+.sw-admin-wrapper[sw-registered="0"] [premium="1"] {
 	display:none!important;
 }
 
@@ -751,11 +766,11 @@ p.sw-subtitle.sw-registration-text {
 	position: relative;
 }
 
-.sw-admin-wrapper[sw-registered="0"] div[premium="1"] .sw-premium-blocker {
+.sw-admin-wrapper[sw-registered="0"] [premium="1"] .sw-premium-blocker {
 	display:none;
 }
 
-.sw-admin-wrapper[sw-registered="0"] div[premium="1"] .sw-premium-blocker:not(.no-icon):before {
+.sw-admin-wrapper[sw-registered="0"] [premium="1"] .sw-premium-blocker:not(.no-icon):before {
 	font-family: 'sw-icon-font';
 	content: 'E';
 	font-size: 24px;
@@ -771,8 +786,18 @@ p.sw-subtitle.sw-registration-text {
 	display: none;
 }
 
-.sw-admin-wrapper[sw-registered="1"] .sw-premium-blocker {
-	display: none;
+.sw-admin-wrapper[swp-addons*="pro"] [premium],
+.sw-admin-wrapper[swp-addons*="affiliatewp"] [premium],
+.sw-admin-wrapper[swp-addons*="enhanced_shortcodes"] [premium],
+.sw-admin-wrapper[swp-addons*="advanced_display"] [premium] {
+    display: none;
+}
+
+.sw-admin-wrapper[swp-addons*="pro"][swp-registrations*="pro"] [premium],
+.sw-admin-wrapper[swp-addons*="affiliatewp"][swp-registrations*="affiliatewp"] [premium],
+.sw-admin-wrapper[swp-addons*="enhanced_shortcodes"][swp-registrations*="enhanced_shortcodes"] [premium],
+.sw-admin-wrapper[swp-addons*="advanced_display"][swp-registrations*="advanced_display"] [premium]{
+    display: inherit;
 }
 
 .ui-tooltip.sw-admin-hover-notice {
@@ -810,4 +835,11 @@ p.sw-subtitle.sw-registration-text {
 
 .toplevel_page_social-warfare .notice-error, .toplevel_page_social-warfare .notice-warning, .toplevel_page_social-warfare .notice-success, .toplevel_page_social-warfare .notice-info, .toplevel_page_social-warfare .is-dismissible, .toplevel_page_social-warfare .update-nag, .toplevel_page_social-warfare #notice-error, .toplevel_page_social-warfare #notice-warning, .toplevel_page_social-warfare #notice-success, .toplevel_page_social-warfare #notice-info, .toplevel_page_social-warfare #is-dismissible, .toplevel_page_social-warfare #update-nag, div.error {
 	display: none;
+}
+
+.sw-grid-textarea {
+	border: rgb(221, 221, 221);
+    box-shadow: inset 0 1px 2px rgba(0,0,0,.07);
+    height: 120px;
+    width: 97%
 }

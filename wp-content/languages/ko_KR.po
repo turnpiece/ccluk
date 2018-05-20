@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-15 02:27:09+0000\n"
+"PO-Revision-Date: 2018-05-18 09:30:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -28,15 +28,417 @@ msgstr "ltr"
 #. https://secure.php.net/number_format, default is ,
 #: wp-includes/class-wp-locale.php:207
 msgid "number_format_thousands_sep"
-msgstr ","
+msgstr "number_format_thousands_sep"
 
 #. translators: $dec_point argument for https://secure.php.net/number_format,
 #. default is .
 #: wp-includes/class-wp-locale.php:220
 msgid "number_format_decimal_point"
-msgstr "."
+msgstr "number_format_decimal_point"
 
-#: wp-includes/functions.php:2607
+#: wp-includes/user.php:3128
+msgid "The site administrator has been notified. You will receive an email confirmation when they erase your data."
+msgstr "사이트 관리자에게 알렸습니다. 데이터를 삭제가 완료되면 이메일 확인을 받을 것입니다."
+
+#: wp-includes/user.php:3127
+msgid "Thanks for confirming your erasure request."
+msgstr "삭제 요청을 확인해주셔서 감사합니다."
+
+#: wp-includes/user.php:3125
+msgid "The site administrator has been notified. You will receive a link to download your export via email when they fulfill your request."
+msgstr "사이트 관리자에게 알렸습니다. 요청을 확인하는대로 자료를 내려받을 수 있는 링크를 이메일로 발송할 것입니다."
+
+#: wp-includes/user.php:3124
+msgid "Thanks for confirming your export request."
+msgstr "자료 내보내기 요청을 확인해주셔서 감사합니다."
+
+#. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
+#. are placeholders.
+#: wp-includes/user.php:3052
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"For more information, you can also read our privacy policy: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"안녕하세요,\n"
+"\n"
+"###SITENAME###에서 개인 데이터 삭제 요청이 완료됐습니다.\n"
+"\n"
+"추가 질문이나 관심사항이 있으시면 사이트 관리자에게 연락주세요.\n"
+"\n"
+"추가 정보는 저희 개인정보 처리지침을 참고하세요: ###PRIVACY_POLICY_URL###\n"
+"\n"
+"안녕히 계세요,\n"
+"###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: Do not translate SITENAME, SITEURL; those are placeholders.
+#: wp-includes/user.php:3039
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request to erase your personal data on ###SITENAME### has been completed.\n"
+"\n"
+"If you have any follow-up questions or concerns, please contact the site administrator.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"안녕하세요,\n"
+"\n"
+"###SITENAME###에서 개인 데이터 삭제 요청이 완료됐습니다.\n"
+"\n"
+"추가 질문이나 관심사항이 있으시면 사이트 관리자에게 연락주세요.\n"
+"\n"
+"안녕히 계세요,\n"
+"###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: %s Site name.
+#: wp-includes/user.php:3015
+msgid "[%s] Erasure Request Fulfilled"
+msgstr "[%s] 삭제 요청이 완료되었습니다"
+
+#. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
+#. SITEURL; those are placeholders.
+#: wp-includes/user.php:2933
+msgid ""
+"Howdy,\n"
+"\n"
+"A user data privacy request has been confirmed on ###SITENAME###:\n"
+"\n"
+"User: ###USER_EMAIL###\n"
+"Request: ###DESCRIPTION###\n"
+"\n"
+"You can view and manage these data privacy requests here:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"안녕하세요,\n"
+"\n"
+"###SITENAME###의 사용자 정보 처리요청이 확인됐습니다:\n"
+"\n"
+"사용자: ###USER_EMAIL###\n"
+"요청: ###DESCRIPTION###\n"
+"\n"
+"이러한 데이터 처리요청을 보거나 관리하려면 다음에서 할 수 있습니다:\n"
+"\n"
+"###MANAGE_URL###\n"
+"\n"
+"안녕히 계세요,\n"
+"###SITENAME###\n"
+"###SITEURL###"
+
+#. translators: %s Site name.
+#: wp-includes/user.php:2900
+msgid "[%s] Action Confirmed"
+msgstr "[%s] 동작 확인됨"
+
+#. translators: Privacy data request subject. 1: Site name, 2: Name of the
+#. action
+#: wp-includes/user.php:3320
+msgid "[%1$s] Confirm Action: %2$s"
+msgstr "[%1$s] 작업 확인: %2$s"
+
+#: wp-includes/user.php:3214
+msgid "Erase Personal Data"
+msgstr "개인 데이터 삭제"
+
+#: wp-includes/comment-template.php:2206
+msgid "Save my name, email, and website in this browser for the next time I comment."
+msgstr "나중을 위해 이름, 이메일주소, 웹사이트 주소를 이 브라우저에 저장."
+
+#: wp-includes/user.php:2802
+msgid "User Description"
+msgstr "사용자 설명"
+
+#: wp-includes/user.php:2801
+msgid "User Last Name"
+msgstr "사용자 이름"
+
+#: wp-includes/user.php:2800
+msgid "User First Name"
+msgstr "사용자 성"
+
+#: wp-includes/user.php:2799
+msgid "User Nickname"
+msgstr "사용자 닉네임"
+
+#: wp-includes/user.php:2798
+msgid "User Display Name"
+msgstr "사용자 표시이름"
+
+#: wp-includes/user.php:2797
+msgid "User Registration Date"
+msgstr "사용자 등록일자"
+
+#: wp-includes/user.php:2796
+msgid "User URL"
+msgstr "사용자 URL"
+
+#: wp-includes/user.php:2795
+msgid "User Email"
+msgstr "사용자 이메일"
+
+#: wp-includes/user.php:2794
+msgid "User Nice Name"
+msgstr "사용자 닉네임"
+
+#: wp-includes/user.php:2793
+msgid "User Login Name"
+msgstr "사용자 로그인 이름"
+
+#: wp-includes/user.php:2792
+msgid "User ID"
+msgstr "사용자 아이디"
+
+#: wp-includes/user.php:2760
+msgid "WordPress User"
+msgstr "워드프레스 사용자"
+
+#: wp-includes/media.php:3969
+msgid "WordPress Media"
+msgstr "워드프레스 미디어"
+
+#: wp-includes/link-template.php:4166
+msgid "Privacy Policy"
+msgstr "개인정보 정책"
+
+#: wp-includes/script-loader.php:670
+msgid "An error occurred while attempting to export personal data."
+msgstr "개인 데이터 내보내기 시도중 에러가 발생했습니다."
+
+#: wp-includes/script-loader.php:669
+msgid "No personal data export file was generated."
+msgstr "개인 데이터 내보내기 파일이 생성되지 않았습니다."
+
+#: wp-login.php:875
+msgid "User action confirmed."
+msgstr "사용자 작업이 확인됐습니다."
+
+#: wp-includes/user.php:3396
+msgid "This link has expired."
+msgstr "이 링크는 만료 되었습니다."
+
+#: wp-includes/user.php:3248 wp-includes/user.php:3392 wp-login.php:844
+msgid "Invalid request."
+msgstr "유효하지 않은 요청."
+
+#. translators: %s: action name
+#: wp-includes/user.php:3218
+msgid "Confirm the \"%s\" action"
+msgstr "\"%s\" 작업 확인"
+
+#: wp-includes/user.php:3211
+msgid "Export Personal Data"
+msgstr "개인 데이터 내보내기"
+
+#: wp-includes/user.php:3183
+msgid "A request for this email address already exists."
+msgstr "이 이메일 주소에 대한 요청이 이미 존재합니다."
+
+#: wp-includes/user.php:3167
+msgid "Invalid action name."
+msgstr "올바르지 않은 작업 이름."
+
+#: wp-includes/user.php:3120
+msgid "The site administrator has been notified and will fulfill your request as soon as possible."
+msgstr "사이트 관리자는 알림을 받고 요청을 최대한 빨리 실행할 것입니다."
+
+#: wp-includes/post.php:216
+msgid "User Request"
+msgstr "사용자 요청"
+
+#: wp-includes/post.php:215
+msgid "User Requests"
+msgstr "사용자 요청"
+
+#. translators: deleted long text
+#: wp-includes/functions.php:5921
+msgid "This content was deleted by the author."
+msgstr "이 콘텐츠는 글쓴이에 의해 삭제됐습니다."
+
+#. translators: deleted text
+#: wp-includes/functions.php:5917
+msgid "[deleted]"
+msgstr "[삭제됨]"
+
+#. translators: %d: Comment ID
+#: wp-includes/comment.php:3358
+msgid "Comment %d contains personal data but could not be anonymized."
+msgstr "댓글 %d은(는) 개인 데이터가 포함돼있지만 익명화 할 수 없습니다."
+
+#: wp-includes/user.php:3119
+msgid "Action has been confirmed."
+msgstr "작업이 확인됐습니다."
+
+#: wp-includes/user.php:3434
+msgid "The confirmation email has expired."
+msgstr "확인 이메일이 만료됐습니다."
+
+#: wp-includes/user.php:3416
+msgid "Invalid action"
+msgstr "올바르지 않은 작업"
+
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, EMAIL, SITENAME,
+#. SITEURL: those are placeholders.
+#: wp-includes/user.php:3264
+msgid ""
+"Howdy,\n"
+"\n"
+"A request has been made to perform the following action on your account:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"To confirm this, please click on the following link:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"You can safely ignore and delete this email if you do not want to\n"
+"take this action.\n"
+"\n"
+"This email has been sent to ###EMAIL###.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"안녕하세요,\n"
+"\n"
+"다음 계정에 대한 작업요청이 실행됐습니다:\n"
+"\n"
+"     ###DESCRIPTION###\n"
+"\n"
+"이를 확인하려면 다음 링크를 클릭해주세요:\n"
+"###CONFIRM_URL###\n"
+"\n"
+"이 작업을 실행하길 원하지 않으시면\n"
+"이 이메일을 무시하고 삭제하세요.\n"
+"\n"
+"이 이메일은 ###EMAIL###로(으로) 보내진 것입니다.\n"
+"\n"
+"안녕히 계세요,\n"
+"###SITENAME###\n"
+"###SITEURL###"
+
+#: wp-includes/script-loader.php:668
+msgid "An error occurred while attempting to find and erase personal data."
+msgstr "개인 데이터를 찾아 제거하는 중 에러가 발생했습니다."
+
+#: wp-includes/script-loader.php:667
+msgid "Personal data was found for this user but some of the personal data found was not erased."
+msgstr "이 사용자에 대한 개인 데이터를 발견했으나 일부는 삭제할 수 없습니다."
+
+#: wp-includes/script-loader.php:666
+msgid "Personal data was found for this user but was not erased."
+msgstr "이 사용자에 대한 개인 데이터를 찾았으나 제거할 수 없습니다."
+
+#: wp-includes/script-loader.php:665
+msgid "All of the personal data found for this user was erased."
+msgstr "이 사용자에 대한 모든 개인 데이터가 제거됐습니다."
+
+#: wp-includes/script-loader.php:664
+msgid "No personal data was found for this user."
+msgstr "이 사용자에 대한 개인 데이터를 찾을 수 없습니다."
+
+#: wp-includes/post.php:787
+msgid "Completed"
+msgstr "완료됨"
+
+#: wp-includes/post.php:785
+msgid "Confirmed"
+msgstr "승인됨"
+
+#: wp-includes/post.php:784
+msgid "Pending"
+msgstr "대기중"
+
+#: wp-includes/post.php:306
+msgctxt "request status"
+msgid "Completed"
+msgstr "완료됨"
+
+#: wp-includes/post.php:299
+msgctxt "request status"
+msgid "Failed"
+msgstr "실패함"
+
+#: wp-includes/post.php:292
+msgctxt "request status"
+msgid "Confirmed"
+msgstr "승인됨"
+
+#: wp-includes/post.php:285
+msgctxt "request status"
+msgid "Pending"
+msgstr "대기중"
+
+#: wp-includes/comment.php:3215
+msgid "Comment URL"
+msgstr "댓글 URL"
+
+#: wp-includes/comment.php:3214
+msgid "Comment Content"
+msgstr "댓글 콘텐츠"
+
+#: wp-includes/comment.php:3213
+msgid "Comment Date"
+msgstr "댓글 날짜"
+
+#: wp-includes/comment.php:3212
+msgid "Comment Author User Agent"
+msgstr "댓글 글쓴이 사용자 에이전트"
+
+#: wp-includes/comment.php:3211
+msgid "Comment Author IP"
+msgstr "댓글 글쓴이 IP"
+
+#: wp-includes/comment.php:3210
+msgid "Comment Author URL"
+msgstr "댓글 글쓴이 URL"
+
+#: wp-includes/comment.php:3209
+msgid "Comment Author Email"
+msgstr "댓글 글쓴이 이메일"
+
+#: wp-includes/comment.php:3208
+msgid "Comment Author"
+msgstr "댓글 글쓴이"
+
+#: wp-includes/comment.php:3173 wp-includes/comment.php:3282
+msgid "WordPress Comments"
+msgstr "워드프레스 댓글"
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1382
+msgid "Limit result set to users who are considered authors."
+msgstr "글쓴이로 간주되는 사용자에 대한 제한 결과 세트."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:199
+msgid "Sorry, you are not allowed to query users by this parameter."
+msgstr "죄송합니다. 이 파라미터에 의해 사용자를 쿼리할 권한이 없습니다."
+
+#: wp-includes/media.php:3526
+msgctxt "media items"
+msgid "Mine"
+msgstr "내 것"
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:228
+msgid "Whether or not the post type can be viewed."
+msgstr "글 타입을 볼 수 있는지 여부"
+
+#: wp-includes/functions.php:2608
 msgid "The link you followed has expired."
 msgstr "링크가 만료되었습니다."
 
@@ -46,9 +448,9 @@ msgid "You need a higher level of permission."
 msgstr "더 높은 권한이 필요합니다."
 
 #: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2617
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2618
 #: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
-#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:839
+#: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
 msgid "Something went wrong."
 msgstr "뭔가 잘못되었습니다."
 
@@ -110,7 +512,7 @@ msgstr "&#8220;다음&#8221;을 클릭해서 새 메뉴에 링크를 추가하�
 msgid "Sorry, we can&#8217;t load the video at the supplied URL. Please check that the URL is for a supported video file (%s) or stream (e.g. YouTube and Vimeo)."
 msgstr "죄송합니다. 제공된 URL에 비디오를 로드 할 수 없습니다. URL이 지원되는 비디오 파일(%s)이나 스트림(예: 유투브와 비미오)인지 확인해주세요."
 
-#: wp-includes/script-loader.php:691
+#: wp-includes/script-loader.php:702
 msgctxt "post action/button label"
 msgid "Schedule"
 msgstr "예약"
@@ -137,7 +539,7 @@ msgstr "%2$s에 %1$s를 위한 핸들을 열 수 없습니다."
 
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:26
 msgid "Add a navigation menu to your sidebar."
-msgstr "사이드바에 내비게이션 메뉴 추가하기"
+msgstr "사이드바에 내비게이션 메뉴 추가하기."
 
 #. translators: %s: Display name of the user who has taken over the changeset
 #. in customizer.
@@ -251,7 +653,7 @@ msgid "Your theme can display menus in one location. Select which menu you would
 msgstr "사용중인 테마는 하나의 위치에 메뉴를 표시할 수 있습니다. 사용하려는 메뉴를 선택하세요."
 
 #. translators: %s: site name
-#: wp-login.php:362
+#: wp-login.php:363
 msgid "Site Name: %s"
 msgstr "사이트 이름: %s"
 
@@ -356,15 +758,15 @@ msgstr "&larr; 카테고리로 돌아가기"
 msgid "&larr; Back to Link Categories"
 msgstr "&larr; 링크 카테고리로 돌아가기"
 
-#: wp-includes/script-loader.php:857
+#: wp-includes/script-loader.php:868
 msgid "Color value"
 msgstr "색상 값"
 
-#: wp-includes/script-loader.php:853
+#: wp-includes/script-loader.php:864
 msgid "Clear color"
 msgstr "색상 지우기"
 
-#: wp-includes/script-loader.php:799
+#: wp-includes/script-loader.php:810
 msgid "Installation Failed!"
 msgstr "설치 실패!"
 
@@ -815,13 +1217,13 @@ msgstr "Scrape nonce check가 실패했습니다. 다시 시도해주세요."
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5779
+#: wp-includes/functions.php:5780
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] 관리자 이메일 변경 알림"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5764
+#: wp-includes/functions.php:5765
 msgid ""
 "Hi,\n"
 "\n"
@@ -847,7 +1249,7 @@ msgstr ""
 "###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-includes/functions.php:5700
+#: wp-includes/functions.php:5701
 msgid "Only UUID V4 is supported at this time."
 msgstr "현재는 UUID V4만 지원됩니다."
 
@@ -1169,7 +1571,7 @@ msgstr "이 위젯은 &#8220;사용자 정의 HTML&#8221; 위젯에서 더 잘 �
 
 #: wp-includes/widgets/class-wp-widget-text.php:35
 msgid "Arbitrary text."
-msgstr "임의의 텍스트"
+msgstr "임의의 텍스트."
 
 #: wp-includes/widgets/class-wp-widget-custom-html.php:271
 msgid "Some HTML tags are not permitted, including:"
@@ -1217,9 +1619,9 @@ msgid "(no author)"
 msgstr "(글쓴이 없음)"
 
 #. translators: %s: the name of a city
-#: wp-includes/script-loader.php:1202
+#: wp-includes/script-loader.php:1213
 msgid "City updated. Listing events near %s."
-msgstr "도시 업데이트 됨. %s 인근 이벤트 목록"
+msgstr "도시 업데이트 됨. %s 인근 이벤트 목록."
 
 #. translators: %s is the name of the city we couldn't locate. Replace the
 #. examples with cities related to your locale. Test that they match the
@@ -1228,44 +1630,44 @@ msgstr "도시 업데이트 됨. %s 인근 이벤트 목록"
 #. locale that would be recognizable to most users. Use only the city name
 #. itself, without any region or country. Use the endonym (native locale name)
 #. instead of the English name if possible.
-#: wp-includes/script-loader.php:1198
+#: wp-includes/script-loader.php:1209
 msgid "We couldn&#8217;t locate %s. Please try another nearby city. For example: Kansas City; Springfield; Portland."
-msgstr "%s을(를) 찾을 수 없습니다. 다른 인근 도시를 선택해보세요. 예: 캔자스 시; 스프링필드; 포트랜트"
+msgstr "%s을(를) 찾을 수 없습니다. 다른 인근 도시를 선택해보세요. 예: 캔자스 시; 스프링필드; 포트랜트."
 
-#: wp-includes/script-loader.php:1181
+#: wp-includes/script-loader.php:1192
 msgid "Attend an upcoming event near you."
 msgstr "인근의 예정된 이벤트 참석하기."
 
-#: wp-includes/script-loader.php:1180
+#: wp-includes/script-loader.php:1191
 msgid "An error occurred. Please try again."
 msgstr "에러가 발생했습니다. 다시 해보세요."
 
-#: wp-includes/script-loader.php:1179
+#: wp-includes/script-loader.php:1190
 msgid "Enter your closest city to find nearby events."
 msgstr "인근 이벤트를 찾으려면 가까운 도시를 입력하세요."
 
 #. translators: %s: network settings URL
-#: wp-signup.php:845
+#: wp-signup.php:847
 msgid "To change or disable registration go to your <a href=\"%s\">Options page</a>."
 msgstr "회원가입을 변경하거나 비활성화 하려면 <a href=\"%s\">옵션 페이지</a>로 가세요."
 
-#: wp-signup.php:838
+#: wp-signup.php:840
 msgid "The network currently allows both site and user registrations."
 msgstr "네트워크가 현재 사이트 만들기와 사용자 회원가입을 허용하고 있습니다."
 
-#: wp-signup.php:835
+#: wp-signup.php:837
 msgid "The network currently allows user registrations."
 msgstr "네트워크가 현재 사용자 회원가입을 허용하고 있습니다."
 
-#: wp-signup.php:832
+#: wp-signup.php:834
 msgid "The network currently allows site registrations."
 msgstr "네트워크가 현재 사이트 만들기를 허용하고 있습니다."
 
-#: wp-signup.php:829
+#: wp-signup.php:831
 msgid "The network currently disallows registrations."
 msgstr "네트워크가 현재 회원가입을 허용하지 않고 있습니다."
 
-#: wp-signup.php:824
+#: wp-signup.php:826
 msgid "Greetings Network Administrator!"
 msgstr "네트워크 관리자님 안녕하세요!"
 
@@ -1450,62 +1852,62 @@ msgstr "오디오가 선택되지 않았습니다"
 msgid "Displays an audio player."
 msgstr "오디오 플레이어 표시."
 
-#: wp-includes/script-loader.php:828
+#: wp-includes/script-loader.php:839
 msgctxt "theme"
 msgid "Deleted!"
 msgstr "삭제됨!"
 
-#: wp-includes/script-loader.php:827
+#: wp-includes/script-loader.php:838
 msgctxt "plugin"
 msgid "Deleted!"
 msgstr "삭제됨!"
 
-#: wp-includes/script-loader.php:798
+#: wp-includes/script-loader.php:809
 msgctxt "theme"
 msgid "Installed!"
 msgstr "설치됨!"
 
-#: wp-includes/script-loader.php:797
+#: wp-includes/script-loader.php:808
 msgctxt "plugin"
 msgid "Installed!"
 msgstr "설치됨!"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:795
+#: wp-includes/script-loader.php:806
 msgctxt "plugin"
 msgid "Install %s now"
 msgstr "지금 %s 설치하기"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:785
+#: wp-includes/script-loader.php:796
 msgctxt "plugin"
 msgid "%s update failed"
 msgstr "%s 업데이트 실패"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:783
+#: wp-includes/script-loader.php:794
 msgctxt "plugin"
 msgid "%s updated!"
 msgstr "%s 업데이트 됨!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:781
+#: wp-includes/script-loader.php:792
 msgctxt "plugin"
 msgid "Updating %s..."
 msgstr "%s 업데이트 중..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:776
+#: wp-includes/script-loader.php:787
 msgctxt "plugin"
 msgid "Update %s now"
 msgstr "지금 %s 업데이트 하기"
 
-#: wp-includes/script-loader.php:772
+#: wp-includes/script-loader.php:783
 msgctxt "theme"
 msgid "Updated!"
 msgstr "업데이트 됨!"
 
-#: wp-includes/script-loader.php:771
+#: wp-includes/script-loader.php:782
 msgctxt "plugin"
 msgid "Updated!"
 msgstr "업데이트 됨!"
@@ -1530,7 +1932,7 @@ msgstr "%1$s은(는) %2$d와(과) 같거나 커야 합니다"
 msgid "%1$s must be greater than %2$d"
 msgstr "%1$s은(는) %2$d보다 커야 합니다"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1350
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1366
 msgid "Limit result set to users with one or more specific slugs."
 msgstr "결과 세트를 하나 이상의 특정 슬러그가 있는 사용자에 제한."
 
@@ -1546,7 +1948,7 @@ msgstr "요청된 페이지 수가 가능한 페이지 수보다 큽니다."
 msgid "You need to define an include parameter to order by include."
 msgstr "인클루드로 순서를 정하려면 인클루드 파라미터를 정의해야 합니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:245
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:252
 msgid "All features, supported by the post type."
 msgstr "모든 기능, 글 타입에 의해 지원됨."
 
@@ -1555,42 +1957,42 @@ msgstr "모든 기능, 글 타입에 의해 지원됨."
 msgid "The password for the parent post of the comment (if the post is password protected)."
 msgstr "댓글의 부모 글에 대한 비밀번호 (글이 비밀번호 보호될 경우)."
 
-#: wp-includes/post.php:1405
+#: wp-includes/post.php:1464
 msgctxt "page"
 msgid "Use as featured image"
 msgstr "특성 이미지로 사용"
 
-#: wp-includes/post.php:1405
+#: wp-includes/post.php:1464
 msgctxt "post"
 msgid "Use as featured image"
 msgstr "특성 이미지로 사용"
 
-#: wp-includes/post.php:1404
+#: wp-includes/post.php:1463
 msgctxt "page"
 msgid "Remove featured image"
 msgstr "특성 이미지 제거"
 
-#: wp-includes/post.php:1404
+#: wp-includes/post.php:1463
 msgctxt "post"
 msgid "Remove featured image"
 msgstr "특성 이미지 제거"
 
-#: wp-includes/post.php:1403
+#: wp-includes/post.php:1462
 msgctxt "page"
 msgid "Set featured image"
 msgstr "특성 이미지 설정"
 
-#: wp-includes/post.php:1403
+#: wp-includes/post.php:1462
 msgctxt "post"
 msgid "Set featured image"
 msgstr "특성 이미지 설정"
 
-#: wp-includes/post.php:1402
+#: wp-includes/post.php:1461
 msgctxt "page"
 msgid "Featured Image"
 msgstr "특성 이미지"
 
-#: wp-includes/post.php:1402
+#: wp-includes/post.php:1461
 msgctxt "post"
 msgid "Featured Image"
 msgstr "특성 이미지"
@@ -1600,7 +2002,7 @@ msgstr "특성 이미지"
 msgid "%1$s is deprecated. The callback from %2$s is used instead."
 msgstr "%1$s은(는) 폐기 예정입니다. 대신 %2$s로(으로)부터 콜백이 사용됩니다."
 
-#: wp-includes/media.php:3529 wp-includes/script-loader.php:80
+#: wp-includes/media.php:3530 wp-includes/script-loader.php:80
 msgid ""
 "You are about to permanently delete these items from your site.\n"
 "This action cannot be undone.\n"
@@ -1610,7 +2012,7 @@ msgstr ""
 "이 작업은 취소할 수 없습니다.\n"
 "중지하려면 '취소'를, 삭제하려면 'OK'를 클릭하세요."
 
-#: wp-includes/media.php:3528
+#: wp-includes/media.php:3529
 msgid ""
 "You are about to permanently delete this item from your site.\n"
 "This action cannot be undone.\n"
@@ -1621,7 +2023,7 @@ msgstr ""
 "중지하려면 '취소'를, 삭제하려면 'OK'를 클릭하세요."
 
 #. translators: 1: suggested width number, 2: suggested height number.
-#: wp-includes/media-template.php:240 wp-includes/media.php:3578
+#: wp-includes/media-template.php:240 wp-includes/media.php:3579
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "제안된 이미지 크기: %1$s x %2$s 픽셀."
 
@@ -1629,7 +2031,7 @@ msgstr "제안된 이미지 크기: %1$s x %2$s 픽셀."
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "죄송합니다. 이 파일 타입은 보안을 이유로 허용되지 않습니다."
 
-#: wp-includes/comment.php:3052
+#: wp-includes/comment.php:3066
 msgid "Sorry, comments are not allowed for this item."
 msgstr "죄송합니다. 이 아이템에 대해서는 댓글이 허용되지 않습니다."
 
@@ -1744,28 +2146,28 @@ msgstr "택소노미에 대한 영숫자 식별자."
 msgid "Required to be true, as revisions do not support trashing."
 msgstr "리비전은 휴지통 기능을 지원하지 않으므로 true가 필수임."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:260
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:267
 msgid "REST base route for the post type."
 msgstr "글 타입에 대한 REST 기본 루트."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:239
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:246
 msgid "An alphanumeric identifier for the post type."
 msgstr "글 타입에 대한 영숫자 식별자."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:227
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:234
 msgid "Human-readable labels for the post type for various contexts."
 msgstr "다양한 문맥에 대한 글 타입의 인간이 읽을 수 있는 레이블."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:221
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:222
 msgid "Whether or not the post type should have children."
 msgstr "글 타입이 자식을 가질 수 있는지 여부."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:215
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:216
 msgid "A human-readable description of the post type."
 msgstr "글 타입의 인간이 읽을 수 있는 설명."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:209
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:210
 msgid "All capabilities used by the post type."
 msgstr "글 타입에 의해 사용되는 모든 권한."
 
@@ -1782,56 +2184,56 @@ msgstr "주어진 ISO8601에 따른 날짜 이전에 발행된 댓글에 반응�
 msgid "Limit response to comments published after a given ISO8601 compliant date."
 msgstr "주어진 ISO8601에 따른 날짜 이후에 발행된 댓글에 반응을 제한."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1278
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1294
 msgid "Avatar URLs for the user."
 msgstr "사용자에 대한 아바타 URL."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1231
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1247
 msgid "Roles assigned to the user."
 msgstr "사용자에 배정된 역할."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1208
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1224
 msgid "The nickname for the user."
 msgstr "사용자에 대한 별명."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1202
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1218
 msgid "Locale for the user."
 msgstr "사용자에 대한 로케일."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1195
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1211
 msgid "Author URL of the user."
 msgstr "사용자의 글쓴이 URL."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1190
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1206
 msgid "Description of the user."
 msgstr "사용자의 설명."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1184
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1200
 msgid "URL of the user."
 msgstr "사용자의 URL."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1169
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1185
 msgid "Last name for the user."
 msgstr "사용자에 대한 성."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1161
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1177
 msgid "First name for the user."
 msgstr "사용자에 대한 이름."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1153
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1169
 msgid "Display name for the user."
 msgstr "사용자에 대한 표시 이름."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1144
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1160
 msgid "Login name for the user."
 msgstr "사용자에 대한 로그인 이름."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:731
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:764
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:747
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:780
 msgid "The user cannot be deleted."
 msgstr "사용자는 삭제할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:486
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:502
 msgid "Error creating new user."
 msgstr "새 사용자 생성중 에러."
 
@@ -1869,7 +2271,7 @@ msgstr "택소노미에 대한 타이틀."
 msgid "Types associated with the taxonomy."
 msgstr "택소노미와 관련된 타입."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:233
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:240
 msgid "The title for the post type."
 msgstr "글 타입에 대한 타이틀."
 
@@ -1946,12 +2348,12 @@ msgstr "RSS 에러:"
 msgid "Cannot create a comment with that type."
 msgstr "해당 타입이 있는 댓글을 생성할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:615
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:631
 msgid "Invalid slug."
 msgstr "유효하지 않은 슬러그."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:607
-#: wp-includes/rest-api.php:1157
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:623
+#: wp-includes/rest-api.php:1157 wp-includes/user.php:3163
 msgid "Invalid email address."
 msgstr "유효하지 않은 이메일 주소."
 
@@ -1964,69 +2366,69 @@ msgstr "유효하지 않은 댓글 내용."
 msgid "Invalid JSONP callback function."
 msgstr "유효하지 않은 JSONP 콜백 함수."
 
-#: wp-includes/post.php:3487
+#: wp-includes/post.php:3546
 msgid "Invalid page template."
 msgstr "유효하지 않은 페이지 템플릿."
 
-#: wp-includes/post.php:3207 wp-includes/rest-api.php:1151
+#: wp-includes/post.php:3266 wp-includes/rest-api.php:1151
 #: wp-includes/script-loader.php:606
 msgid "Invalid date."
 msgstr "유효하지 않은 날짜."
 
-#: wp-includes/theme.php:1397
+#: wp-includes/theme.php:1398
 msgid "Video is playing."
 msgstr "비디오 실행중."
 
-#: wp-includes/theme.php:1396
+#: wp-includes/theme.php:1397
 msgid "Video is paused."
 msgstr "비디오 정지됨."
 
-#: wp-includes/theme.php:1960
+#: wp-includes/theme.php:1961
 msgctxt "Theme starter content"
 msgid "Archives"
 msgstr "글 보관함"
 
-#: wp-includes/theme.php:2082
+#: wp-includes/theme.php:2083
 msgctxt "Theme starter content"
 msgid "This is an example of a homepage section. Homepage sections can be any page other than the homepage itself, including the page that shows your latest blog posts."
 msgstr "이것은 홈페이지 영역의 예제입니다. 홈페이지 영역에서는 최근 글을 보여주는 블로그 글 목록 페이지와 홈페이지 자체를 제외한 어떤 페이지라도 선택할 수 있습니다."
 
-#: wp-includes/theme.php:2076
+#: wp-includes/theme.php:2077
 msgctxt "Theme starter content"
 msgid "News"
 msgstr "뉴스"
 
-#: wp-includes/theme.php:2068
+#: wp-includes/theme.php:2069
 msgctxt "Theme starter content"
 msgid "This is a page with some basic contact information, such as an address and phone number. You might also try a plugin to add a contact form."
 msgstr "이것은 주소와 전화번호 등 기본적인 컨택트 정보가 있는 페이지입니다. 컨택트 폼을 추가하려면 플러그인을 설치하면 됩니다."
 
-#: wp-includes/theme.php:2063
+#: wp-includes/theme.php:2064
 msgctxt "Theme starter content"
 msgid "You might be an artist who would like to introduce yourself and your work here or maybe you&rsquo;re a business with a mission to describe."
 msgstr "자신이나 자신의 작품을 이곳에 소개하고 싶어하는 예술가일 수도 있으며 임무가 있는 비지니스 일 수도 있습니다."
 
-#: wp-includes/theme.php:2058
+#: wp-includes/theme.php:2059
 msgctxt "Theme starter content"
 msgid "Welcome to your site! This is your homepage, which is what most visitors will see when they come to your site for the first time."
 msgstr "사이트에 오신 것을 환영합니다! 이것은 홈페이지이며 대부분의 방문자들이 사이트를 처음 방문할 때 보는 곳입니다."
 
-#: wp-includes/theme.php:1975
+#: wp-includes/theme.php:1976
 msgctxt "Theme starter content"
 msgid "Recent Posts"
 msgstr "최근 글"
 
-#: wp-includes/theme.php:1972
+#: wp-includes/theme.php:1973
 msgctxt "Theme starter content"
 msgid "Recent Comments"
 msgstr "최근 댓글"
 
-#: wp-includes/theme.php:1969
+#: wp-includes/theme.php:1970
 msgctxt "Theme starter content"
 msgid "Meta"
 msgstr "메타"
 
-#: wp-includes/theme.php:1963
+#: wp-includes/theme.php:1964
 msgctxt "Theme starter content"
 msgid "Calendar"
 msgstr "달력"
@@ -2035,8 +2437,8 @@ msgstr "달력"
 msgid "Sorry, you are not allowed to change the comment type."
 msgstr "죄송합니다. 댓글 형식을 변경할 권한이 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1052
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1062
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1068
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1078
 msgid "Sorry, you are not allowed to give users that role."
 msgstr "죄송합니다. 해당 역할을 사용자에게 부여할 권한이 없습니다."
 
@@ -2092,37 +2494,37 @@ msgstr "죄송합니다. 이 댓글을 읽을 권한이 없습니다."
 msgid "Sorry, you are not allowed to read comments without a post."
 msgstr "죄송합니다. 글이 없는 댓글을 읽을 권한이 없습니다."
 
-#: wp-includes/theme.php:2050
+#: wp-includes/theme.php:2051
 msgctxt "Theme starter content"
 msgid "YouTube"
 msgstr "유투브"
 
-#: wp-includes/theme.php:2038
+#: wp-includes/theme.php:2039
 msgctxt "Theme starter content"
 msgid "Pinterest"
 msgstr "핀터레스트"
 
-#: wp-includes/theme.php:2034
+#: wp-includes/theme.php:2035
 msgctxt "Theme starter content"
 msgid "LinkedIn"
 msgstr "링크트인"
 
-#: wp-includes/theme.php:2026
+#: wp-includes/theme.php:2027
 msgctxt "Theme starter content"
 msgid "GitHub"
 msgstr "깃허브"
 
-#: wp-includes/theme.php:2022
+#: wp-includes/theme.php:2023
 msgctxt "Theme starter content"
 msgid "Foursquare"
 msgstr "포스퀘어"
 
-#: wp-includes/theme.php:1955
+#: wp-includes/theme.php:1956
 msgctxt "Theme starter content"
 msgid "This may be a good place to introduce yourself and your site or include some credits."
 msgstr "이곳은 자신과 자신의 사이트를 소개하거나 몇 가지 크레딧을 추가할 수 있는 적합한 장소입니다."
 
-#: wp-includes/theme.php:1954
+#: wp-includes/theme.php:1955
 msgctxt "Theme starter content"
 msgid "About This Site"
 msgstr "이 사이트 소개"
@@ -2172,117 +2574,117 @@ msgstr "비디오 선택되지 않음"
 msgid "Choose video"
 msgstr "비디오 선택"
 
-#: wp-includes/theme.php:2081
+#: wp-includes/theme.php:2082
 msgctxt "Theme starter content"
 msgid "A homepage section"
 msgstr "홈페이지 영역"
 
-#: wp-includes/theme.php:2072
+#: wp-includes/theme.php:2073
 msgctxt "Theme starter content"
 msgid "Blog"
 msgstr "블로그"
 
-#: wp-includes/theme.php:2067
+#: wp-includes/theme.php:2068
 msgctxt "Theme starter content"
 msgid "Contact"
 msgstr "문의하기"
 
-#: wp-includes/theme.php:2062
+#: wp-includes/theme.php:2063
 msgctxt "Theme starter content"
 msgid "About"
 msgstr "소개"
 
-#: wp-includes/theme.php:1984 wp-includes/theme.php:2057
+#: wp-includes/theme.php:1985 wp-includes/theme.php:2058
 msgctxt "Theme starter content"
 msgid "Home"
 msgstr "홈"
 
-#: wp-includes/theme.php:2014
+#: wp-includes/theme.php:2015
 msgctxt "Theme starter content"
 msgid "Email"
 msgstr "이메일"
 
-#: wp-includes/theme.php:2030
+#: wp-includes/theme.php:2031
 msgctxt "Theme starter content"
 msgid "Instagram"
 msgstr "인스타그램"
 
-#: wp-includes/theme.php:2042
+#: wp-includes/theme.php:2043
 msgctxt "Theme starter content"
 msgid "Twitter"
 msgstr "트위터"
 
-#: wp-includes/theme.php:2018
+#: wp-includes/theme.php:2019
 msgctxt "Theme starter content"
 msgid "Facebook"
 msgstr "페이스북"
 
-#: wp-includes/theme.php:2046
+#: wp-includes/theme.php:2047
 msgctxt "Theme starter content"
 msgid "Yelp"
 msgstr "Yelp"
 
-#: wp-includes/theme.php:1966
+#: wp-includes/theme.php:1967
 msgctxt "Theme starter content"
 msgid "Categories"
 msgstr "카테고리"
 
-#: wp-includes/theme.php:1978
+#: wp-includes/theme.php:1979
 msgctxt "Theme starter content"
 msgid "Search"
 msgstr "검색"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Saturday &amp; Sunday: 11:00AM&ndash;3:00PM"
 msgstr "토요일 &amp; 일요일: 11:00AM&ndash;3:00PM"
 
-#: wp-includes/theme.php:1948
+#: wp-includes/theme.php:1949
 msgctxt "Theme starter content"
 msgid "Monday&mdash;Friday: 9:00AM&ndash;5:00PM"
 msgstr "월요일&mdash;금요일: 9:00AM&ndash;5:00PM"
 
-#: wp-includes/theme.php:1947
+#: wp-includes/theme.php:1948
 msgctxt "Theme starter content"
 msgid "Hours"
 msgstr "시간"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "New York, NY 10001"
 msgstr "서울시, 12345"
 
-#: wp-includes/theme.php:1946
+#: wp-includes/theme.php:1947
 msgctxt "Theme starter content"
 msgid "123 Main Street"
 msgstr "123 번지"
 
-#: wp-includes/theme.php:1945
+#: wp-includes/theme.php:1946
 msgctxt "Theme starter content"
 msgid "Address"
 msgstr "주소"
 
-#: wp-includes/theme.php:1943
+#: wp-includes/theme.php:1944
 msgctxt "Theme starter content"
 msgid "Find Us"
 msgstr "위치"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1118
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1134
 msgid "Passwords cannot contain the \"\\\" character."
 msgstr "비밀번호는 \"\\\" 글자를 포함할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1114
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1130
 msgid "Passwords cannot be empty."
 msgstr "비밀번호는 비어있으면 안됩니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1085
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1101
 msgid "Username contains invalid characters."
 msgstr "사용자명에 유효하지 않은 글자가 포함돼있습니다."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:164
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:469
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:485
 msgid "Invalid user parameter(s)."
-msgstr "유효하지 않은 사용자 파라미터"
+msgstr "유효하지 않은 사용자 파라미터."
 
 #: wp-includes/script-loader.php:571
 msgctxt "label for hide controls button without length constraints"
@@ -2304,7 +2706,7 @@ msgstr "헤더 미디어"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:287
 msgid "REST base route for the taxonomy."
-msgstr "택소노미에 대한 REST 기본 루트"
+msgstr "택소노미에 대한 REST 기본 루트."
 
 #. translators: %s: add new page label
 #: wp-includes/class-wp-customize-control.php:628
@@ -2345,7 +2747,7 @@ msgid "Collapse Main menu"
 msgstr "메인메뉴 축소"
 
 #. translators: %s: force=true
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:745
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:761
 msgid "Users do not support trashing. Set '%s' to delete."
 msgstr "사용자는 휴지통 기능을 지원하지 않습니다. 삭제하려면 '%s'를 설정하세요."
 
@@ -2391,13 +2793,13 @@ msgstr "결과세트를 하나 이상의 상태가 배정된 글에 제한."
 msgid "Comment field exceeds maximum length allowed."
 msgstr "댓글 필드가 허용된 최대 길이를 초과합니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:251
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
 msgid "Taxonomies associated with post type."
 msgstr "글 타입과 관련된 택소노미."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2191
 msgid "Limit result set to posts with one or more specific slugs."
-msgstr "결과세트를 하나 이상의 특정 슬러그가 있는 글에 제한"
+msgstr "결과세트를 하나 이상의 특정 슬러그가 있는 글에 제한."
 
 #: wp-includes/class-wp-xmlrpc-server.php:3638
 msgid "Comment is required."
@@ -2427,19 +2829,19 @@ msgstr "이것이 작동하려면 ID가 필요합니다."
 msgid "Homepage"
 msgstr "홈페이지"
 
-#: wp-includes/script-loader.php:676
+#: wp-includes/script-loader.php:687
 msgid "Term removed."
 msgstr "텀 제거됨."
 
-#: wp-includes/script-loader.php:675
+#: wp-includes/script-loader.php:686
 msgid "Term added."
 msgstr "텀 추가됨."
 
-#: wp-includes/script-loader.php:674
+#: wp-includes/script-loader.php:685
 msgid "Term selected."
 msgstr "텀 선택됨."
 
-#: wp-includes/script-loader.php:673
+#: wp-includes/script-loader.php:684
 msgid "Remove term:"
 msgstr "텀 제거:"
 
@@ -2499,56 +2901,56 @@ msgstr "데이터베이스에 메타값을 업데이트 할 수 없습니다."
 msgid "Could not delete meta value from database."
 msgstr "데이터베이스에서 메타값을 삭제할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1358
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1374
 msgid "Limit result set to users matching at least one specific role provided. Accepts csv list or single role."
 msgstr "결과 세트를 제공된 최소한 하나의 특정 역할과 일치하도록 사용자를 제한. csv 목록 또는 단일 역할 가능."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1254
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1270
 msgid "Any extra capabilities assigned to the user."
 msgstr "사용자에 배정된 모든 추가 권한."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1248
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1264
 msgid "All capabilities assigned to the user."
 msgstr "사용자에 배정된 모든 권한."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1239
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1255
 msgid "Password for the user (never included)."
 msgstr "사용자에 대한 비밀번호 (포함된 적이 없음)."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1224
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1240
 msgid "Registration date for the user."
 msgstr "사용자에 대한 등록날짜."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1177
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1193
 msgid "The email address for the user."
 msgstr "사용자에 대한 이메일 주소."
 
 #. translators: %s: role key
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1038
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1054
 msgid "The role %s does not exist."
 msgstr "역할 %s은(는) 존재하지 않습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:750
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:766
 msgid "Invalid user ID for reassignment."
 msgstr "재배정에 대한 유효하지 않은 사용자 ID."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:714
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:730
 msgid "Sorry, you are not allowed to delete this user."
 msgstr "죄송합니다. 이 사용자를 삭제할 권한이 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:611
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:627
 msgid "Username isn't editable."
 msgstr "사용자명이 편집 가능하지 않습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:567
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:583
 msgid "Sorry, you are not allowed to edit roles of this user."
 msgstr "죄송합니다. 이 사용자의 역할을 편집할 권한이 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:450
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:466
 msgid "Cannot create existing user."
 msgstr "기존 사용자를 생성할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:412
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:428
 msgid "You are not currently logged in."
 msgstr "현재 로그인 상태가 아닙니다."
 
@@ -2585,7 +2987,7 @@ msgid "Number of published posts for the term."
 msgstr "텀에 대한 발행된 글 수."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:67
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1138
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1154
 msgid "Unique identifier for the user."
 msgstr "텀에 대한 독특한 식별자."
 
@@ -2634,7 +3036,7 @@ msgstr "결과 세트를 특정 부모 ID가 있는 아이템에 제한."
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1361
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2136
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:921
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1322
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1338
 msgid "Offset the result set by a specific number of items."
 msgstr "결과세트를 특정 아이템 수로 오프셋."
 
@@ -2807,7 +3209,7 @@ msgstr "죄송합니다. 댓글을 편집할 권한이 없습니다."
 msgid "Cannot create existing post."
 msgstr "기존 글을 생성할 수 없습니다."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:434
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:450
 msgid "Sorry, you are not allowed to create new users."
 msgstr "죄송합니다. 새 사용자를 생성할 권한이 없습니다."
 
@@ -2840,7 +3242,7 @@ msgstr "인간이 읽을 수 있는 택소노미의 설명."
 msgid "All capabilities used by the taxonomy."
 msgstr "택소노미에 의해 사용되는 모든 권한."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1216
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1232
 msgid "An alphanumeric identifier for the user."
 msgstr "사용자에 대한 영숫자(alphanumeric) 식별자."
 
@@ -2918,28 +3320,28 @@ msgstr "결과세트를 특정 부모 ID의 댓글에 제한."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1376
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2148
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1335
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1351
 msgid "Sort collection by object attribute."
 msgstr "콜렉션을 오브젝트 속성으로 분류."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1366
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2141
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:927
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1328
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1344
 msgid "Order sort attribute ascending or descending."
 msgstr "오름차순 또는 내림차순으로 분류 속성 정렬."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1352
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2120
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:911
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1313
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1329
 msgid "Limit result set to specific IDs."
 msgstr "결과세트를 특정 ID에 제한."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1343
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2111
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:902
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1304
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1320
 msgid "Ensure result set excludes specific IDs."
 msgstr "결과세트는 특정 ID를 제외해야 함."
 
@@ -2969,7 +3371,7 @@ msgstr "오브젝트 글쓴이의 아바타 URL."
 
 #. translators: %d: avatar image size in pixels
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1274
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1270
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1286
 msgid "Avatar URL with image size of %d pixels."
 msgstr "이미지 크기 %d 픽셀을 가진 아바타 URL."
 
@@ -3078,7 +3480,7 @@ msgstr "댓글 생성은 유효한 글쓴이 이름과 이메일 값이 필요�
 msgid "Cannot create existing comment."
 msgstr "기존 댓글을 생성할 수 없습니다."
 
-#: wp-includes/comment.php:3103
+#: wp-includes/comment.php:3117
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:395
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:412
 msgid "Sorry, you must be logged in to comment."
@@ -3120,7 +3522,7 @@ msgstr "Content-Disposition 제공되지 않음."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:490
 msgid "No Content-Type supplied."
-msgstr "Content-Type 제공되지 않음"
+msgstr "Content-Type 제공되지 않음."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:486
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:682
@@ -3156,19 +3558,19 @@ msgstr "죄송합니다. 이 사이트에서 미디어를 업로드할 권한이
 msgid "The REST API can no longer be completely disabled, the rest_authentication_errors filter can be used to restrict access to the API, instead."
 msgstr "REST API는 더 이상 완전히 비활성화 될 수 없습니다. 대신 API에 접근을 제한하기 위해 rest_authentication_errors필터를 사용할 수 있습니다."
 
-#: wp-includes/post.php:1399
+#: wp-includes/post.php:1458
 msgid "Page Attributes"
 msgstr "페이지 속성"
 
-#: wp-includes/post.php:1399
+#: wp-includes/post.php:1458
 msgid "Post Attributes"
 msgstr "글 속성"
 
-#: wp-includes/post.php:1392
+#: wp-includes/post.php:1451
 msgid "View Pages"
 msgstr "페이지 보기"
 
-#: wp-includes/post.php:1392
+#: wp-includes/post.php:1451
 msgid "View Posts"
 msgstr "글 보기"
 
@@ -3266,7 +3668,7 @@ msgstr "블로그 페이지는 최대한 보입니다."
 
 #: wp-includes/option.php:1914
 msgid "Default post format."
-msgstr "기본 글 형식"
+msgstr "기본 글 형식."
 
 #: wp-includes/option.php:1901
 msgid "Convert emoticons like :-) and :-P to graphics on display."
@@ -3296,7 +3698,7 @@ msgstr "사이트의 같은 타임존에 있는 도시."
 msgid "Site title."
 msgstr "사이트 타이틀."
 
-#: wp-includes/media.php:3541
+#: wp-includes/media.php:3542
 msgid "Search media items..."
 msgstr "미디어 아이템 검색..."
 
@@ -3310,7 +3712,7 @@ msgctxt "previous set of posts"
 msgid "Previous"
 msgstr "이전"
 
-#: wp-includes/general-template.php:396 wp-login.php:588 wp-login.php:988
+#: wp-includes/general-template.php:396 wp-login.php:589 wp-login.php:1026
 msgid "Username or Email Address"
 msgstr "사용자명 또는 이메일 주소"
 
@@ -3639,7 +4041,7 @@ msgstr "선택한 메뉴 편집"
 msgid "Warning: the link has been inserted but may have errors. Please test it."
 msgstr "주의: 링크가 추가됐지만 에러가 있을 수 있으니 테스트 해주세요."
 
-#: wp-includes/script-loader.php:767
+#: wp-includes/script-loader.php:778
 msgid "Search Results"
 msgstr "검색 결과"
 
@@ -3679,11 +4081,11 @@ msgstr "%1초 앞으로 가기"
 msgid "Time Slider"
 msgstr "타임 슬라이더"
 
-#: wp-includes/script-loader.php:370 wp-includes/theme.php:1394
+#: wp-includes/script-loader.php:370 wp-includes/theme.php:1395
 msgid "Pause"
 msgstr "중지"
 
-#: wp-includes/script-loader.php:369 wp-includes/theme.php:1395
+#: wp-includes/script-loader.php:369 wp-includes/theme.php:1396
 msgid "Play"
 msgstr "실행"
 
@@ -3696,73 +4098,73 @@ msgid "Inexistent terms."
 msgstr "존재하지 않는 텀(term)."
 
 #. translators: %s: Importer name
-#: wp-includes/script-loader.php:838
+#: wp-includes/script-loader.php:849
 msgid "Run %s"
-msgstr "%s 실행 "
+msgstr "%s 실행"
 
-#: wp-includes/script-loader.php:836
+#: wp-includes/script-loader.php:847
 msgid "Run Importer"
 msgstr "가져오기 실행"
 
 #. translators: %s: Activation URL
-#: wp-includes/script-loader.php:817
+#: wp-includes/script-loader.php:828
 msgid "Importer installed successfully. <a href=\"%s\">Run importer</a>"
 msgstr "가져오기가 성공적으로 설치되었습니다. <a href=\"%s\">가져오기 실행</a>"
 
-#: wp-includes/script-loader.php:835
+#: wp-includes/script-loader.php:846
 msgctxt "theme"
 msgid "Activate %s"
 msgstr "%s 활성화"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:835
+#: wp-includes/script-loader.php:846
 msgctxt "theme"
 msgid "Network Activate %s"
 msgstr "%s 네트워크 활성화"
 
-#: wp-includes/script-loader.php:833
+#: wp-includes/script-loader.php:844
 msgctxt "plugin"
 msgid "Activate %s"
 msgstr "%s 활성화"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:833
+#: wp-includes/script-loader.php:844
 msgctxt "plugin"
 msgid "Network Activate %s"
 msgstr "%s 네트워크 활성화"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:813
+#: wp-includes/script-loader.php:824
 msgctxt "theme"
 msgid "%s installation failed"
 msgstr "%s 설치 실패"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:811
+#: wp-includes/script-loader.php:822
 msgctxt "plugin"
 msgid "%s installation failed"
 msgstr "%s 설치 실패"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:809
+#: wp-includes/script-loader.php:820
 msgctxt "theme"
 msgid "%s installed!"
 msgstr "%s 설치됨!"
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:807
+#: wp-includes/script-loader.php:818
 msgctxt "plugin"
 msgid "%s installed!"
 msgstr "%s 설치됨!"
 
 #. translators: %s: Theme name and version
-#: wp-includes/script-loader.php:805
+#: wp-includes/script-loader.php:816
 msgctxt "theme"
 msgid "Installing %s..."
 msgstr "%s 설치중..."
 
 #. translators: %s: Plugin name and version
-#: wp-includes/script-loader.php:803
+#: wp-includes/script-loader.php:814
 msgctxt "plugin"
 msgid "Installing %s..."
 msgstr "%s 설치중..."
@@ -3771,7 +4173,7 @@ msgstr "%s 설치중..."
 msgid "Sorry, you are not allowed to access user data on this site."
 msgstr "죄송합니다. 이 사이트에서 사용자 데이터에 접근할 권한이 없습니다."
 
-#: wp-includes/script-loader.php:842
+#: wp-includes/script-loader.php:853
 msgid "Number of plugins found: %d"
 msgstr "검색된 플러그인 수: %d"
 
@@ -3786,7 +4188,7 @@ msgid "Sorry, you are not allowed to edit your profile."
 msgstr "죄송합니다. 자신의 프로필을 편집할 권한이 없습니다."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2500
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:580
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:596
 msgid "Sorry, you are not allowed to edit this user."
 msgstr "죄송합니다. 이 사용자를 편집할 권한이 없습니다."
 
@@ -3826,7 +4228,7 @@ msgid "Tan"
 msgstr "갈색"
 
 #. translators: %s: Error string for a failed installation
-#: wp-includes/script-loader.php:801
+#: wp-includes/script-loader.php:812
 msgid "Installation failed: %s"
 msgstr "설치 실패: %s"
 
@@ -3854,64 +4256,64 @@ msgstr "&larr; %s(으)로 돌아가기"
 
 #: wp-includes/wp-db.php:1849 wp-includes/wp-db.php:1855
 msgid "Unable to retrieve the error message from MySQL"
-msgstr "MySQL에서 오류 메시지를 가져올 수 없습니다."
+msgstr "MySQL에서 오류 메시지를 가져올 수 없습니다"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-location-control.php:78
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:153
 msgid "Edit Menu"
 msgstr "메뉴 편집"
 
-#: wp-includes/script-loader.php:1127
+#: wp-includes/script-loader.php:1138
 msgid "Today"
 msgstr "오늘"
 
-#: wp-includes/script-loader.php:830
+#: wp-includes/script-loader.php:841
 msgid "Network Activate"
 msgstr "네트워크 활성화"
 
 #. translators: %s: Error string for a failed deletion
-#: wp-includes/script-loader.php:826
+#: wp-includes/script-loader.php:837
 msgid "Deletion failed: %s"
 msgstr "삭제 실패: %s"
 
-#: wp-includes/script-loader.php:824
+#: wp-includes/script-loader.php:835
 msgid "Deleting..."
 msgstr "삭제 중..."
 
-#: wp-includes/script-loader.php:823
+#: wp-includes/script-loader.php:834
 msgid "Caution: These themes may be active on other sites in the network. Are you sure you want to proceed?"
 msgstr ""
 "주의: 이 테마들은 네트워크의 다른 사이트에서 활성화 돼있을지도 모릅니다.\n"
 "정말로 계속하길 원하시나요?"
 
-#: wp-includes/script-loader.php:822
+#: wp-includes/script-loader.php:833
 msgid "Are you sure you want to delete the selected plugins and their data?"
 msgstr "선택된 플러그인과 해당 데이터를 정말로 삭제하시렵니까?"
 
 #. translators: %s: Plugin name
-#: wp-includes/script-loader.php:821
+#: wp-includes/script-loader.php:832
 msgid "Are you sure you want to delete %s and its data?"
 msgstr "%s와 해당 데이터를 정말로 삭제하시렵니까?"
 
 #. translators: %s: Theme name
-#: wp-includes/script-loader.php:819
+#: wp-includes/script-loader.php:830
 msgid "Are you sure you want to delete %s?"
 msgstr "%s을(를) 정말로 삭제하시렵니까?"
 
-#: wp-includes/script-loader.php:774
+#: wp-includes/script-loader.php:785
 msgid "Update Now"
 msgstr "지금 업데이트"
 
-#: wp-includes/script-loader.php:769
+#: wp-includes/script-loader.php:780
 msgid "Please select at least one item to perform this action on."
 msgstr "이 작업을 수행하려면 적어도 하나의 항목을 선택하십시오."
 
-#: wp-includes/script-loader.php:768
+#: wp-includes/script-loader.php:779
 msgid "You do not appear to have any plugins available at this time."
 msgstr "현재 이용 가능한 플러그인이 없는 것 같습니다."
 
 #. translators: %s: Search string
-#: wp-includes/script-loader.php:766
+#: wp-includes/script-loader.php:777
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221;에 대한 검색 결과"
 
@@ -3923,7 +4325,7 @@ msgstr ""
 "정말로 이것을 실행하길 원하시나요?\n"
 "실행한 댓글 변경은 잃을 수도 있습니다."
 
-#: wp-includes/script-loader.php:507 wp-login.php:704
+#: wp-includes/script-loader.php:507 wp-login.php:705
 msgid "Confirm use of weak password"
 msgstr "약한 비밀번호 사용 확인"
 
@@ -3976,8 +4378,8 @@ msgstr "죄송하지만, 카테고리를 추가할 권한이 없습니다."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2558
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:182
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:372
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:374
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:388
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:390
 msgid "Sorry, you are not allowed to list users."
 msgstr "죄송하지만, 사용자를 목록화할 권한이 없습니다."
 
@@ -4017,11 +4419,11 @@ msgstr "링크 선택됨."
 msgid "%s is required to strip image meta."
 msgstr "이미지 메타를 제거하기 위해 %s이(가) 필요합니다."
 
-#: wp-includes/script-loader.php:757
+#: wp-includes/script-loader.php:768
 msgid "Plugin details"
 msgstr "플러그인 상세"
 
-#: wp-includes/media.php:3542
+#: wp-includes/media.php:3543
 msgid "No media files found."
 msgstr "미디어 파일을 찾을 수 없습니다."
 
@@ -4041,13 +4443,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "1결과 찾음. 위아래로 이동하려면 화살표 키를 사용하세요."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2234
 msgid "Logged in as %s. Edit your profile."
 msgstr "%s로(으로) 로그인함. 프로필 편집하기."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2228
+#: wp-includes/comment-template.php:2231
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">%3$s로(으로) 로그인 함</a>. <a href=\"%4$s\">로그아웃?</a>"
 
@@ -4067,7 +4469,7 @@ msgstr "%1$s을 수동으로 제거하면 PHP 경고가 발생합니다. 대신 
 msgid "The next group of formatting shortcuts are applied as you type or when you insert them around plain text in the same paragraph. Press Escape or the Undo button to undo."
 msgstr "포맷 단축키의 다음 그룹은 글자를 입력하거나 또는 같은 문단에서 단순 글자 주위에 삽입할 때 적용됩니다. 취소하려면 Esc를 누르거나 되돌리기 버튼을 클릭하세요."
 
-#: wp-login.php:942
+#: wp-login.php:980
 msgid "Your session has expired. Please log in to continue where you left off."
 msgstr "세션이 만료됐습니다. 원래 있던 곳으로 가려면 로그인 하세요."
 
@@ -4094,7 +4496,7 @@ msgstr "<strong>에러</strong>: 이메일 필드가 비어있습니다."
 msgid "Unregistering a built-in taxonomy is not allowed."
 msgstr "내장된 택소노미의 등록을 해제하는 것은 허용되지 않습니다."
 
-#: wp-includes/script-loader.php:665
+#: wp-includes/script-loader.php:676
 msgid "Drag boxes here"
 msgstr "박스를 여기에 끌어놓으세요"
 
@@ -4110,36 +4512,36 @@ msgstr "Route는 특정돼야 합니다."
 msgid "Routes must be namespaced with plugin or theme name and version."
 msgstr "Route는 플러그인이나 테마 이름 및 버전으로 namespaced 돼야 합니다."
 
-#: wp-includes/post.php:1182
+#: wp-includes/post.php:1241
 msgid "Unregistering a built-in post type is not allowed"
-msgstr "내장된 글 타입을 등록 해제하는 것은 허용되지 않습니다."
+msgstr "내장된 글 타입을 등록 해제하는 것은 허용되지 않습니다"
 
-#: wp-includes/post.php:249
+#: wp-includes/post.php:264
 msgctxt "post status"
 msgid "Trash"
 msgstr "휴지통"
 
-#: wp-includes/post.php:242
+#: wp-includes/post.php:257
 msgctxt "post status"
 msgid "Private"
 msgstr "비공개"
 
-#: wp-includes/post.php:235
+#: wp-includes/post.php:250
 msgctxt "post status"
 msgid "Pending"
 msgstr "대기중"
 
-#: wp-includes/post.php:228
+#: wp-includes/post.php:243
 msgctxt "post status"
 msgid "Draft"
 msgstr "임시글"
 
-#: wp-includes/post.php:221
+#: wp-includes/post.php:236
 msgctxt "post status"
 msgid "Scheduled"
 msgstr "예약됨"
 
-#: wp-includes/post.php:214
+#: wp-includes/post.php:229
 msgctxt "post status"
 msgid "Published"
 msgstr "공개됨"
@@ -4159,13 +4561,13 @@ msgstr "<strong>에러</strong>:유효하지 않은 사용자명, 이메일 주�
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "%1$s %2$s %3$s %4$s 피드"
 
-#: wp-includes/functions.php:5313
+#: wp-includes/functions.php:5314
 msgid "Close dialog"
 msgstr "대화상자 닫기"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3901
+#: wp-includes/functions.php:3902
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "%2$s에서 %1$s에 호출된 컨스트럭터 메소드는 버전 %3$s로(으로) 인해 <strong>폐기 예정입니다.</strong> 대신 %4$s을(를) 사용하세요."
 
@@ -4193,21 +4595,21 @@ msgstr "%s 금지됨"
 
 #: wp-includes/customize/class-wp-customize-partial.php:207
 msgid "Partial render must echo the content or return the content string (or array), but not both."
-msgstr "Partial render는 콘텐츠를 echo 하거나 또는 콘텐츠 스트링(또는 배열)을 리턴 해야 하며 두가지 모두는 가능하지 않습니다. "
+msgstr "Partial render는 콘텐츠를 echo 하거나 또는 콘텐츠 스트링(또는 배열)을 리턴 해야 하며 두가지 모두는 가능하지 않습니다."
 
-#: wp-includes/comment.php:1158
+#: wp-includes/comment.php:1172
 msgid "<strong>ERROR</strong>: your comment is too long."
 msgstr "<strong>에러</strong>: 댓글이 너무 깁니다."
 
-#: wp-includes/comment.php:1154
+#: wp-includes/comment.php:1168
 msgid "<strong>ERROR</strong>: your url is too long."
 msgstr "<strong>에러</strong>: URL이 너무 깁니다."
 
-#: wp-includes/comment.php:1150
+#: wp-includes/comment.php:1164
 msgid "<strong>ERROR</strong>: your email address is too long."
 msgstr "<strong>에러</strong>: 이메일 주소가 너무 깁니다."
 
-#: wp-includes/comment.php:1146
+#: wp-includes/comment.php:1160
 msgid "<strong>ERROR</strong>: your name is too long."
 msgstr "<strong>에러</strong>: 이름이 너무 깁니다."
 
@@ -4301,14 +4703,14 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 #. translators: %s: Codex URL
 #: wp-includes/ms-load.php:478
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
-msgstr " <a href=\"%s\" target=\"_blank\">버그 리포트</a> 페이지를 참고하세요. 가이드 라인에서 잘못된 부분을 찾을 수 있을 것입니다."
+msgstr "<a href=\"%s\" target=\"_blank\">버그 리포트</a> 페이지를 참고하세요. 가이드 라인에서 잘못된 부분을 찾을 수 있을 것입니다."
 
-#: wp-includes/functions.php:4144
+#: wp-includes/functions.php:4145
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4143
+#: wp-includes/functions.php:4144
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "<a href=\"%s\">워드프레스 디버깅 하기 페이지</a>를 참고하시면, 더 많은 정보를 얻을 수 있습니다."
 
@@ -4317,7 +4719,7 @@ msgstr "<a href=\"%s\">워드프레스 디버깅 하기 페이지</a>를 참고�
 msgid "<strong>ERROR</strong>: %1$s in %2$s can only contain numbers, letters, and underscores."
 msgstr "<strong>오류</strong>:%2$s 의 %1$s 는 숫자, 문자 그리고 밑줄만 포함 가능 합니다."
 
-#: wp-includes/script-loader.php:745 wp-includes/script-loader.php:751
+#: wp-includes/script-loader.php:756 wp-includes/script-loader.php:762
 msgid "Changes saved."
 msgstr "변경사항이 저장됐습니다."
 
@@ -4339,7 +4741,7 @@ msgstr "%s 라는 파일이 없습니다. 시작하기 위해 이것이 필요�
 #: wp-includes/class-wp-user.php:264 wp-includes/class-wp-user.php:293
 #: wp-includes/class-wp-user.php:331 wp-includes/class-wp-user.php:354
 msgid "Use %s instead."
-msgstr "대신 %s 사용"
+msgstr "대신 %s 사용."
 
 #. translators: %s: get_the_author()
 #. translators: %s: get_trackback_url()
@@ -4349,7 +4751,7 @@ msgstr "값이 표시되기를 원하지 않을 경우 대신 %s를 사용하세
 
 #: wp-includes/class-wp-term.php:160
 msgid "Term ID is shared between multiple taxonomies"
-msgstr "텀 ID가 다중 택소노미에서 공유돼 있습니다."
+msgstr "텀 ID가 다중 택소노미에서 공유돼 있습니다"
 
 #: wp-includes/taxonomy.php:1144 wp-includes/taxonomy.php:1226
 msgid "Term meta cannot be added to terms that are shared between taxonomies."
@@ -4472,7 +4874,7 @@ msgid "This site has not been activated yet. If you are having problems activati
 msgstr "이 사이트는 아직 활성화 되지않았습니다. 사이트 활성화에 문제가 있으시면 %s 로 연락주세요."
 
 #. translators: %s: email address
-#: wp-signup.php:611 wp-signup.php:757
+#: wp-signup.php:613 wp-signup.php:759
 msgid "Check your inbox at %s and click the link given."
 msgstr "이메일 주소 %s 에서 받은 메일함을 확인하시고 주어진 링크를 클릭하세요."
 
@@ -4482,7 +4884,7 @@ msgid "The menu name %s conflicts with another menu name. Please try another."
 msgstr "메뉴 이름 %s, 다른 메뉴 이름과 충돌됩니다. 다른 이름을 사용하세요."
 
 #. translators: %s: site address
-#: wp-signup.php:904
+#: wp-signup.php:906
 msgid "The site you were looking for, %s, does not exist."
 msgstr "찾으시는 %s 란 사이트는 존재하지 않습니다."
 
@@ -4500,7 +4902,7 @@ msgstr "해당 임베드를 찾을 수 없습니다."
 msgid "Continue reading %s"
 msgstr "%s 계속 읽기"
 
-#: wp-signup.php:146
+#: wp-signup.php:148
 msgid "Site Language:"
 msgstr "사이트 언어:"
 
@@ -4528,7 +4930,7 @@ msgstr "이러한 현상은 데이터베이스 서버 %s 에 접속을 실패했
 
 #: wp-includes/wp-db.php:1737
 msgid "Error reconnecting to the database"
-msgstr "데이터베이스 재접속 오류입니다."
+msgstr "데이터베이스 재접속 오류입니다"
 
 #. translators: %s: support forums URL
 #: wp-includes/wp-db.php:1594 wp-includes/wp-db.php:1752
@@ -4578,7 +4980,7 @@ msgstr "데이터베이스 서버에는 접속(사용자명과 비밀번호는 �
 
 #: wp-includes/wp-db.php:1033
 msgid "Can&#8217;t select database"
-msgstr "데이터베이스를 지정할 수 없습니다."
+msgstr "데이터베이스를 지정할 수 없습니다"
 
 #: wp-includes/widgets/class-wp-widget-tag-cloud.php:147
 msgid "The tag cloud will not be displayed since there are no taxonomies that support the tag cloud widget."
@@ -4621,13 +5023,13 @@ msgstr "태그 목록 탐색하기"
 #. characters
 #: wp-includes/shortcodes.php:74
 msgid "Invalid shortcode name: %1$s. Do not use spaces or reserved characters: %2$s"
-msgstr "유효하지 않은 단축코드 이름: %s. 빈 스페이스 또는 유보된 문자( & / < > [ ] )를 사용하지 마세요."
+msgstr "유효하지 않은 단축코드 이름: %1$s. 빈 스페이스 또는 유보된 문자 %2$s 를 사용하지 마세요"
 
 #: wp-includes/shortcodes.php:67
 msgid "Invalid shortcode name: Empty name given."
 msgstr "유효하지 않은 단축코드 이름: 빈 스페이스가 사용됨."
 
-#: wp-includes/script-loader.php:703
+#: wp-includes/script-loader.php:714
 msgid "Permalink saved"
 msgstr "고유주소 저장됨"
 
@@ -4682,35 +5084,35 @@ msgstr "실종된 파라미터:%s"
 msgid "In %1$s, use the %2$s method, not the %3$s function. See %4$s."
 msgstr "%1$s에서 %3$s 함수가 아닌 %2$s 메써드를 사용하세요. %4$s를 참조하세요."
 
-#: wp-includes/post.php:1408
+#: wp-includes/post.php:1467
 msgid "Pages list"
 msgstr "페이지 목록"
 
-#: wp-includes/post.php:1408
+#: wp-includes/post.php:1467
 msgid "Posts list"
 msgstr "글 목록"
 
-#: wp-includes/post.php:1407
+#: wp-includes/post.php:1466
 msgid "Pages list navigation"
 msgstr "페이지 목록 탐색"
 
-#: wp-includes/post.php:1407
+#: wp-includes/post.php:1466
 msgid "Posts list navigation"
 msgstr "글 목록 탐색"
 
-#: wp-includes/post.php:1406
+#: wp-includes/post.php:1465
 msgid "Filter pages list"
 msgstr "페이지 목록 필터"
 
-#: wp-includes/post.php:1406
+#: wp-includes/post.php:1465
 msgid "Filter posts list"
 msgstr "글 목록 필터"
 
-#: wp-includes/post.php:1398
+#: wp-includes/post.php:1457
 msgid "Page Archives"
 msgstr "페이지 보관함"
 
-#: wp-includes/post.php:1398
+#: wp-includes/post.php:1457
 msgid "Post Archives"
 msgstr "글 보관함"
 
@@ -4725,7 +5127,7 @@ msgid "Site names can only contain lowercase letters (a-z) and numbers."
 msgstr "사이트 이름은 영문소문자(a-z)와 숫자만을 포함할 수 있습니다."
 
 #: wp-includes/ms-functions.php:460 wp-includes/ms-functions.php:467
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1092
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1108
 #: wp-includes/user.php:1499
 msgid "Sorry, that username is not allowed."
 msgstr "죄송합니다, 해당 사용자명은 허용되지 않습니다."
@@ -4921,7 +5323,7 @@ msgstr "위젯 재정렬"
 
 #: wp-includes/class-wp-customize-section.php:344
 msgid "Press return or enter to open this section"
-msgstr "이 영역을 열기 위해서는 엔터나 리턴키를 누르세요."
+msgstr "이 영역을 열기 위해서는 엔터나 리턴키를 누르세요"
 
 #. translators: %s: document title from the preview
 #: wp-includes/class-wp-customize-manager.php:4372
@@ -4937,8 +5339,8 @@ msgid "Sorry, you are not allowed to edit theme options on this site."
 msgstr "이 사이트에서 테마 옵션을 수정할 권한을 갖고 있지 않습니다."
 
 #. translators: 1: post type, 2: capability name
-#: wp-includes/capabilities.php:83 wp-includes/capabilities.php:144
-#: wp-includes/capabilities.php:203 wp-includes/capabilities.php:240
+#: wp-includes/capabilities.php:83 wp-includes/capabilities.php:153
+#: wp-includes/capabilities.php:221 wp-includes/capabilities.php:258
 msgid "The post type %1$s is not registered, so it may not be reliable to check the capability \"%2$s\" against a post of that type."
 msgstr "글 형식 %1$s이 등록되지 않았습니다. 따라서 해당 형식의 글에 대해 \"%2$s\"의 호환성 점검을 신뢰할 수 없습니다."
 
@@ -4967,7 +5369,7 @@ msgstr "섹션  토글: %s"
 #. Asian characters), enter 'characters_excluding_spaces' or
 #. 'characters_including_spaces'. Otherwise, enter 'words'. Do not translate
 #. into your own language.
-#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1089
+#: wp-includes/formatting.php:3372 wp-includes/script-loader.php:1100
 msgctxt "Word count type. Do not translate!"
 msgid "words"
 msgstr "words"
@@ -5024,7 +5426,7 @@ msgstr "브라우저 아이콘으로"
 msgid "No items"
 msgstr "아이템 없음"
 
-#: wp-login.php:820
+#: wp-login.php:821
 msgid "Registration confirmation will be emailed to you."
 msgstr "가입 확인용 이메일이 발송될 것입니다."
 
@@ -5089,13 +5491,13 @@ msgstr "메뉴 추가: %1$s (종류:%2$s)"
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "공백 다음에 입력한 포매팅 숏컷으로 시작하여 새로운 문단을 작성하는 경우, 포맷은 자동적으로 반영됩니다. 되돌리려면 백스페이스 키나 ESC키를 눌러주세요."
 
-#: wp-login.php:555
+#: wp-login.php:556
 msgid "Your password reset link has expired. Please request a new link below."
-msgstr "비밀번호 초기화 링크가 만료되었습니다. 새 링크를 요청하십시오"
+msgstr "비밀번호 초기화 링크가 만료되었습니다. 새 링크를 요청하십시오."
 
-#: wp-login.php:553
+#: wp-login.php:554
 msgid "Your password reset link appears to be invalid. Please request a new link below."
-msgstr "비밀번호 초기화 링크가 올바르지 않은 것 같습니다. 새 링크를 요청하십시오"
+msgstr "비밀번호 초기화 링크가 올바르지 않은 것 같습니다. 새 링크를 요청하십시오."
 
 #: wp-includes/wp-db.php:1379 wp-includes/wp-db.php:1396
 msgid "WordPress database error:"
@@ -5115,7 +5517,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "개발 저장소의 %s 디렉토리는 RTL 에서 사용합니다."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3905
+#: wp-includes/functions.php:3906
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s에서 호출한 생성자 함수는 %2$s 버전부터 <strong>폐지예정</strong>입니다. 대신 %3$s를 사용해주세요."
 
@@ -5144,9 +5546,7 @@ msgstr "메뉴는 테마에서 지정한 위치에 표시됩니다."
 #. translators: URL to the widgets panel of the customizer
 #: wp-includes/class-wp-customize-nav-menus.php:576
 msgid "Menus can be displayed in locations defined by your theme or in <a href=\"%s\">widget areas</a> by adding a &#8220;Navigation Menu&#8221; widget."
-msgstr ""
-"메뉴는 테마에서 지정한 위치나 &#8220;내비게이션 메뉴&#8221; 위젯에 의해 추가된\n"
-"<a href=\"%s\">위젯영역</a> 에 표시할 수 있습니다. "
+msgstr "메뉴는 테마에서 지정한 위치나 &#8220;내비게이션 메뉴&#8221; 위젯에 의해 추가된<a href=\"%s\">위젯영역</a> 에 표시할 수 있습니다."
 
 #: wp-includes/class-wp-customize-nav-menus.php:455
 #: wp-includes/class-wp-customize-widgets.php:762
@@ -5260,7 +5660,7 @@ msgid "Attempting to parse a shortcode without a valid callback: %s"
 msgstr "올바른 콜백함수가 없는 숏코드를 분석하는 중: %s"
 
 #. translators: %s: Error string for a failed update
-#: wp-includes/script-loader.php:779
+#: wp-includes/script-loader.php:790
 msgid "Update Failed: %s"
 msgstr "업데이트 실패: %s"
 
@@ -5387,7 +5787,7 @@ msgstr "추가 숏컷,"
 
 #: wp-includes/class-wp-editor.php:1268
 msgid "Default shortcuts,"
-msgstr "기본 숏컷"
+msgstr "기본 단축키,"
 
 #: wp-includes/class-wp-customize-section.php:232
 msgid "Customizing"
@@ -5504,11 +5904,11 @@ msgstr "더 많은 결과를 읽고 있는 중입니다... 잠시만 기다려�
 
 #: wp-includes/class-wp-customize-nav-menus.php:452
 msgid "Additional items found: %d"
-msgstr "%d 개의 추가 아이템이 발견되었습니다."
+msgstr "%d 개의 추가 아이템이 발견되었습니다"
 
 #: wp-includes/class-wp-customize-nav-menus.php:451
 msgid "Number of items found: %d"
-msgstr "%d개의 아이템이 발견되었습니다:"
+msgstr "%d개의 아이템이 발견되었습니다"
 
 #. translators: %s: title of menu item in draft status
 #: wp-includes/class-wp-customize-nav-menus.php:450
@@ -5522,7 +5922,7 @@ msgstr "%s (잘못된 값)"
 
 #: wp-includes/class-wp-customize-nav-menus.php:444
 msgid "Menu item is now a sub-item"
-msgstr "이제 서브아이템입니다."
+msgstr "이제 서브아이템입니다"
 
 #: wp-includes/class-wp-customize-nav-menus.php:443
 msgid "Menu item moved out of submenu"
@@ -5583,7 +5983,7 @@ msgstr "CSS 클래스"
 msgid "Title Attribute"
 msgstr "타이틀 속성"
 
-#: wp-includes/class-wp-editor.php:1709
+#: wp-includes/class-wp-editor.php:1717
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:100
 #: wp-includes/media-template.php:1008
 #: wp-includes/widgets/class-wp-widget-media-image.php:136
@@ -5620,7 +6020,7 @@ msgstr "XML 에러: %2$s 줄에서 %1$s"
 msgid "User Dashboard: %s"
 msgstr "사용자 대시보드: %s"
 
-#: wp-login.php:882 wp-login.php:887
+#: wp-login.php:920 wp-login.php:925
 msgid "https://codex.wordpress.org/Cookies"
 msgstr "https://codex.wordpress.org/Cookies"
 
@@ -5637,20 +6037,20 @@ msgstr "https://codex.wordpress.org/"
 msgid "No %1$s was set in the arguments array for the \"%2$s\" sidebar. Defaulting to \"%3$s\". Manually set the %1$s to \"%3$s\" to silence this notice and keep existing sidebar content."
 msgstr "\"%2$s\" 사이드바 배열 매개변수의 %1$s 가 설정되있지 않습니다. \"%3$s\" 기본설정으로 이행하고있습니다. 이 통지를 침묵와 사이드바 내용을 존재 유지하길 위해 %1$s \"%3$s\"으로 수동 설정을 하시길 바랍니다."
 
-#: wp-includes/script-loader.php:840
+#: wp-includes/script-loader.php:851
 msgid "Connection lost or the server is busy. Please try again later."
 msgstr "서버랑 연결이 끊어졌거나 중지된 상태입니다. 잠시 후 다시 시도 해주시길 바랍니다."
 
-#: wp-includes/script-loader.php:792
+#: wp-includes/script-loader.php:803
 msgid "Updates may not complete if you navigate away from this page."
 msgstr "이 페이지에서 다른 곳으로 이동하면 현재 진행 중인 플러그인 업데이트가 완료되지 않을수도 있습니다."
 
-#: wp-includes/script-loader.php:777
+#: wp-includes/script-loader.php:788
 msgid "Update Failed!"
 msgstr "업데이트 실패!"
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:791
+#: wp-includes/script-loader.php:802
 msgid "Update canceled."
 msgstr "업데이트 취소됨."
 
@@ -5678,33 +6078,33 @@ msgstr "<span>미리보기:</span> %s"
 msgid "Site Preview"
 msgstr "사이트 미리보기"
 
-#: wp-includes/script-loader.php:770
+#: wp-includes/script-loader.php:781
 msgid "Updating..."
 msgstr "업데이트 중..."
 
-#: wp-includes/script-loader.php:793
+#: wp-includes/script-loader.php:804
 msgid "Install Now"
 msgstr "지금 설치하기"
 
-#: wp-includes/script-loader.php:796
+#: wp-includes/script-loader.php:807
 msgid "Installing..."
 msgstr "설치중..."
 
-#: wp-includes/script-loader.php:814
+#: wp-includes/script-loader.php:825
 msgid "Installing... please wait."
 msgstr "설치중... 기다려주세요."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:787
+#: wp-includes/script-loader.php:798
 msgid "Updating... please wait."
 msgstr "업데이트 중...잠시 기다려 주세요."
 
 #. translators: Accessibility text
-#: wp-includes/script-loader.php:789
+#: wp-includes/script-loader.php:800
 msgid "Update completed successfully."
 msgstr "업데이트 성공."
 
-#: wp-includes/script-loader.php:815
+#: wp-includes/script-loader.php:826
 msgid "Installation completed successfully."
 msgstr "설치 완료 성공."
 
@@ -5716,7 +6116,7 @@ msgstr "택소노미 이름은 1 이상 32 이하의 글자만 가능합니다."
 msgid "Could not split shared term."
 msgstr "공유된 텀은 분리할 수 없습니다."
 
-#: wp-includes/theme.php:2962
+#: wp-includes/theme.php:2963
 msgid "Customizer"
 msgstr "사용자 정의 하기"
 
@@ -5806,7 +6206,7 @@ msgstr "사용자 정의 링크"
 msgid "<strong>Could not find site %1$s.</strong> Searched for table %2$s in database %3$s. Is that right?"
 msgstr "<strong>%1$s 사이트를 찾을 수 없음.</strong> %3$s 데이터 베이스에서 %2$s 테이블을 검색했는데 이게 맞나요?"
 
-#: wp-includes/post.php:1131 wp-includes/post.php:1132
+#: wp-includes/post.php:1190 wp-includes/post.php:1191
 msgid "Post type names must be between 1 and 20 characters in length."
 msgstr "글 타입 이름은 20문자 이하만 가능합니다."
 
@@ -5817,7 +6217,7 @@ msgid "F j, Y @ H:i:s"
 msgstr "Y-m-d @ H:i:s"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1115
-#: wp-includes/class-wp-editor.php:1704 wp-includes/media-template.php:820
+#: wp-includes/class-wp-editor.php:1712 wp-includes/media-template.php:820
 msgid "Link Text"
 msgstr "링크 텍스트"
 
@@ -5876,7 +6276,7 @@ msgid "Theme Details"
 msgstr "테마 상세"
 
 #: wp-includes/customize/class-wp-customize-theme-control.php:118
-#: wp-includes/script-loader.php:829
+#: wp-includes/script-loader.php:840
 msgid "Live Preview"
 msgstr "실시간 미리보기"
 
@@ -5889,7 +6289,7 @@ msgid "Distraction-free writing mode"
 msgstr "글쓰기 집중 모드"
 
 #. translators: 1: Theme support 2: hook name
-#: wp-includes/theme.php:2417
+#: wp-includes/theme.php:2418
 msgid "Theme support for %1$s should be registered before the %2$s hook."
 msgstr "%1$s의 테마 지원은 %2$s hook 이전에 등록돼야 합니다."
 
@@ -5903,7 +6303,7 @@ msgstr "위젯 아래로 이동됨"
 
 #: wp-includes/class-wp-editor.php:1235
 msgid "Rich Text Area. Press Alt-Shift-H for help."
-msgstr "리치 텍스트 에어리어. 도움말은 Alt-Shift-H 키를 누르세요"
+msgstr "리치 텍스트 에어리어. 도움말은 Alt-Shift-H 키를 누르세요."
 
 #: wp-includes/class-wp-editor.php:1270
 msgid "Focus shortcuts:"
@@ -5940,7 +6340,7 @@ msgstr "해당 이름과 슬러그의 텀(term)이 이 택소노미에 이미 �
 msgid "%s must set a database connection for use with escaping."
 msgstr "이스케이프를 사용하기 위해서는 %s의 데이터베이스 연결이 설정돼야 합니다."
 
-#: wp-includes/theme.php:2261
+#: wp-includes/theme.php:2262
 msgid "You need to pass an array of types."
 msgstr "형식 어레이를 패스 해야 합니다."
 
@@ -5967,7 +6367,7 @@ msgstr "글 내비게이션"
 msgid "Newer posts"
 msgstr "새 글"
 
-#: wp-includes/script-loader.php:1131
+#: wp-includes/script-loader.php:1142
 msgid "Previous"
 msgstr "이전"
 
@@ -5975,7 +6375,7 @@ msgstr "이전"
 msgid "Edit Selection"
 msgstr "선택 편집하기"
 
-#: wp-includes/media.php:3526
+#: wp-includes/media.php:3527
 msgctxt "noun"
 msgid "Trash"
 msgstr "휴지통"
@@ -6213,19 +6613,19 @@ msgctxt "add new media"
 msgid "Add New"
 msgstr "미디어 추가"
 
-#: wp-login.php:956
+#: wp-login.php:994
 msgid "<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new."
 msgstr "<strong>WordPress를 성공적으로 업데이트하였습니다!</strong> what&#8217;s new를 보시려면 다시 로그인해주세요.."
 
-#: wp-includes/media.php:3534
+#: wp-includes/media.php:3535
 msgid "Untrash Selected"
 msgstr "선택 항목 휴지통에서 복원"
 
-#: wp-includes/media.php:3533
+#: wp-includes/media.php:3534
 msgid "Trash Selected"
 msgstr "선택 항목 휴지통으로"
 
-#: wp-includes/media.php:3530
+#: wp-includes/media.php:3531
 msgid ""
 "You are about to trash these items.\n"
 "  'Cancel' to stop, 'OK' to delete."
@@ -6241,15 +6641,15 @@ msgstr "휴지통에서 복원"
 msgid "Press return or enter to open this panel"
 msgstr "이 패널을 열려면 리턴이나 엔터 키를 누르세요"
 
-#: wp-includes/media.php:3535
+#: wp-includes/media.php:3536
 msgid "Delete Selected"
 msgstr "선택 삭제"
 
-#: wp-includes/media.php:3532
+#: wp-includes/media.php:3533
 msgid "Cancel Selection"
 msgstr "선택 취소"
 
-#: wp-includes/media.php:3531
+#: wp-includes/media.php:3532
 msgid "Bulk Select"
 msgstr "일괄 선택"
 
@@ -6260,7 +6660,7 @@ msgid "%s: %l."
 msgstr "%s: %l."
 
 #: wp-includes/class-wp-customize-nav-menus.php:427
-#: wp-includes/script-loader.php:889
+#: wp-includes/script-loader.php:900
 msgctxt "missing menu item navigation label"
 msgid "(no label)"
 msgstr "(레이블 없음)"
@@ -6269,19 +6669,19 @@ msgstr "(레이블 없음)"
 msgid "This site is no longer available."
 msgstr "이 사이트는 더 이상 가능하지 않습니다."
 
-#: wp-includes/script-loader.php:843
+#: wp-includes/script-loader.php:854
 msgid "No plugins found. Try a different search."
 msgstr "플러그인을 찾을 수 없습니다. 다른 검색을 해보세요."
 
-#: wp-includes/media.php:3540
+#: wp-includes/media.php:3541
 msgid "Search Media"
 msgstr "미디어 검색"
 
-#: wp-includes/media.php:3539
+#: wp-includes/media.php:3540
 msgid "Filter by type"
 msgstr "형식으로 필터"
 
-#: wp-includes/media.php:3538
+#: wp-includes/media.php:3539
 msgid "Filter by date"
 msgstr "날짜로 필터"
 
@@ -6365,7 +6765,7 @@ msgstr "업로더 닫기"
 msgid "Close media panel"
 msgstr "미디어 패널 닫기"
 
-#: wp-includes/class-wp-editor.php:1730
+#: wp-includes/class-wp-editor.php:1738
 msgid "Search or use up and down arrow keys to select an item."
 msgstr "아이템을 선택하려면 검색이나 상하 방향키를 사용하세요."
 
@@ -6391,7 +6791,7 @@ msgstr "위젯은 콘텐츠의 독립적인 영역이며 사용 중인 테마가
 msgid "You are customizing %s"
 msgstr "%s을(를) 사용자 정의 하고 있습니다"
 
-#: wp-includes/comment.php:3143
+#: wp-includes/comment.php:3157
 msgid "<strong>ERROR</strong>: The comment could not be saved. Please try again later."
 msgstr "<strong>에러</strong>: 댓글을 저장할 수 없습니다. 나중에 다시 해보세요."
 
@@ -6418,40 +6818,40 @@ msgid "Keyboard Shortcuts"
 msgstr "키보드 단축키"
 
 #. translators: 1: Browser cookie documentation URL
-#: wp-login.php:886
+#: wp-login.php:924
 msgid "<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href=\"%s\">enable cookies</a> to use WordPress."
 msgstr "<strong>에러</strong>: 쿠키가 차단됐거나 사용 중인 브라우저가 지원하지 않습니다. 워드프레스를 사용하려면 <a href=\"%s\">쿠키를 활성화</a> 해야 합니다."
 
 #. translators: 1: Browser cookie documentation URL, 2: Support forums URL
-#: wp-login.php:881
+#: wp-login.php:919
 msgid "<strong>ERROR</strong>: Cookies are blocked due to unexpected output. For help, please see <a href=\"%1$s\">this documentation</a> or try the <a href=\"%2$s\">support forums</a>."
 msgstr "<strong>에러</strong>: 예상치 못한 출력으로 인해 쿠키가 차단됐습니다. 도움이 필요하시면 <a href=\"%1$s\">이 문서</a>를 보거나 <a href=\"%2$s\">지원 포럼</a>을 방문하세요."
 
-#: wp-includes/media.php:3603
+#: wp-includes/media.php:3604
 msgid "Add to Audio Playlist"
 msgstr "오디오 실행 목록에 추가"
 
-#: wp-includes/media.php:3602
+#: wp-includes/media.php:3603
 msgid "Add to audio playlist"
 msgstr "오디오 실행 목록에 추가"
 
-#: wp-includes/media.php:3601
+#: wp-includes/media.php:3602
 msgid "Update audio playlist"
 msgstr "오디오 실행 목록 업데이트"
 
-#: wp-includes/media.php:3600
+#: wp-includes/media.php:3601
 msgid "Insert audio playlist"
 msgstr "오디오 실행 목록 삽입"
 
-#: wp-includes/media.php:3599
+#: wp-includes/media.php:3600
 msgid "&#8592; Cancel Audio Playlist"
 msgstr "&#8592; 오디오 실행 목록 취소"
 
-#: wp-includes/media.php:3598
+#: wp-includes/media.php:3599
 msgid "Edit Audio Playlist"
 msgstr "오디오 실행 목록 편집"
 
-#: wp-includes/media.php:3579
+#: wp-includes/media.php:3580
 msgid "There has been an error cropping your image."
 msgstr "이미지를 자르는데 에러가 발생했습니다."
 
@@ -6571,7 +6971,7 @@ msgstr "자동"
 msgid "Tracks (subtitles, captions, descriptions, chapters, or metadata)"
 msgstr "트랙 (부제, 캡션, 설명, 챕터, 또는 메타데이터)"
 
-#: wp-includes/media.php:3576
+#: wp-includes/media.php:3577
 msgid "Cropping&hellip;"
 msgstr "자르기&hellip;"
 
@@ -6826,104 +7226,104 @@ msgstr "%s의 쿼리 변수는 플레이스홀더가 있어야 합니다."
 msgid "Invalid menu ID."
 msgstr "유효하지 않은 메뉴 ID."
 
-#: wp-includes/media.php:3613
+#: wp-includes/media.php:3614
 msgid "Add to Video Playlist"
 msgstr "비디오 실행 목록에 추가"
 
-#: wp-includes/media.php:3612
+#: wp-includes/media.php:3613
 msgid "Add to video playlist"
 msgstr "비디오 실행 목록에 추가"
 
-#: wp-includes/media.php:3611
+#: wp-includes/media.php:3612
 msgid "Update video playlist"
 msgstr "비디오 실행 목록 업데이트"
 
-#: wp-includes/media.php:3610
+#: wp-includes/media.php:3611
 msgid "Insert video playlist"
 msgstr "비디오 실행 목록 삽입"
 
-#: wp-includes/media.php:3609
+#: wp-includes/media.php:3610
 msgid "&#8592; Cancel Video Playlist"
 msgstr "&#8592; 비디오 실행 목록 취소"
 
-#: wp-includes/media.php:3608
+#: wp-includes/media.php:3609
 msgid "Edit Video Playlist"
 msgstr "비디오 실행 목록 편집"
 
-#: wp-includes/media.php:3607
+#: wp-includes/media.php:3608
 msgid "Create Video Playlist"
 msgstr "비디오 실행 목록 만들기"
 
-#: wp-includes/media.php:3606
+#: wp-includes/media.php:3607
 msgid "Drag and drop to reorder videos."
 msgstr "비디오 순서를 재정렬하러면 끌어놓기 하세요."
 
-#: wp-includes/media.php:3597
+#: wp-includes/media.php:3598
 msgid "Create Audio Playlist"
 msgstr "자동 실행 목록 만들기"
 
-#: wp-includes/media.php:3596
+#: wp-includes/media.php:3597
 msgid "Drag and drop to reorder tracks."
 msgstr "트랙의 순서를 재정렬하러면 끌어놓기 하세요."
 
-#: wp-includes/media.php:3593
+#: wp-includes/media.php:3594
 msgid "Add Subtitles"
 msgstr "부제 추가"
 
-#: wp-includes/media.php:3592
+#: wp-includes/media.php:3593
 msgid "Select Poster Image"
 msgstr "포스터 이미지 선택"
 
-#: wp-includes/media.php:3590
+#: wp-includes/media.php:3591
 msgid "Add Video Source"
 msgstr "비디오 소스 추가"
 
-#: wp-includes/media.php:3589
+#: wp-includes/media.php:3590
 msgid "Replace Video"
 msgstr "비디오 교체"
 
-#: wp-includes/media.php:3588
+#: wp-includes/media.php:3589
 msgid "Video Details"
 msgstr "비디오 상세"
 
-#: wp-includes/media.php:3584
+#: wp-includes/media.php:3585
 msgid "Add Audio Source"
 msgstr "오디오 소스 추가"
 
-#: wp-includes/media.php:3583
+#: wp-includes/media.php:3584
 msgid "Replace Audio"
 msgstr "오디오 교체"
 
-#: wp-includes/media.php:3582
+#: wp-includes/media.php:3583
 msgid "Audio Details"
 msgstr "오디오 상세"
 
-#: wp-includes/media.php:3575
+#: wp-includes/media.php:3576
 msgid "Crop your image"
 msgstr "이미지 자르기"
 
-#: wp-includes/media.php:3574
+#: wp-includes/media.php:3575
 msgid "Crop Image"
 msgstr "이미지 자르기"
 
-#: wp-includes/media.php:3573
+#: wp-includes/media.php:3574
 msgid "Skip Cropping"
 msgstr "자르기 생략"
 
-#: wp-includes/media.php:3572
+#: wp-includes/media.php:3573
 msgid "Select and Crop"
 msgstr "선택 & 자르기"
 
-#: wp-includes/media.php:3571
+#: wp-includes/media.php:3572
 msgid "Choose Image"
 msgstr "이미지 선택"
 
-#: wp-includes/media.php:3567 wp-includes/media.php:3585
-#: wp-includes/media.php:3591
+#: wp-includes/media.php:3568 wp-includes/media.php:3586
+#: wp-includes/media.php:3592
 msgid "Cancel Edit"
 msgstr "편집 취소"
 
-#: wp-includes/media.php:3566
+#: wp-includes/media.php:3567
 msgid "Replace Image"
 msgstr "이미지 교체"
 
@@ -7001,7 +7401,7 @@ msgstr "돌아가기"
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"https://wordpress.org/support/\">support forums</a>."
 msgstr "예상치 못한 에러가 발생했습니다. WordPress.org나 서버 설정에 오류가 있습니다. 문제가 지속되면 <a href=\"https://wordpress.org/support/\">지원 포럼</a>에 문의하세요."
 
-#: wp-includes/media.php:3565
+#: wp-includes/media.php:3566
 msgid "Image Details"
 msgstr "이미지 상세"
 
@@ -7178,7 +7578,7 @@ msgid "Align right"
 msgstr "우측 정렬"
 
 #: wp-includes/class-wp-customize-widgets.php:755
-#: wp-includes/script-loader.php:841 wp-includes/script-loader.php:867
+#: wp-includes/script-loader.php:852 wp-includes/script-loader.php:878
 msgid "An error has occurred. Please reload the page and try again."
 msgstr "에러 발생. 페이지를 새로고침 하고 다시 하세요."
 
@@ -7247,7 +7647,7 @@ msgstr "https://wordpress.org/support/forum/requests-and-feedback"
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
 #: wp-includes/update.php:345 wp-includes/update.php:527
 #: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
-#: wp-includes/wp-db.php:1753 wp-login.php:882
+#: wp-includes/wp-db.php:1753 wp-login.php:920
 msgid "https://wordpress.org/support/"
 msgstr "https://wordpress.org/support/"
 
@@ -7314,7 +7714,7 @@ msgstr "가장 많이 사용한 태그 클라우드."
 
 #: wp-includes/widgets/class-wp-widget-rss.php:26
 msgid "Entries from any RSS or Atom feed."
-msgstr "모든 RSS 또는 Atom 피드 항목"
+msgstr "모든 RSS 또는 Atom 피드 항목."
 
 #: wp-includes/widgets/class-wp-widget-recent-comments.php:27
 msgid "Your site&#8217;s most recent comments."
@@ -7330,7 +7730,7 @@ msgstr "카테고리 목록 또는 드롭다운."
 
 #: wp-includes/widgets/class-wp-widget-calendar.php:36
 msgid "A calendar of your site&#8217;s Posts."
-msgstr "사이트 글의 달력"
+msgstr "사이트 글의 달력."
 
 #: wp-includes/widgets/class-wp-widget-meta.php:29
 msgid "Login, RSS, &amp; WordPress.org links."
@@ -7342,16 +7742,16 @@ msgstr "사이트의 월별 글 보관함."
 
 #: wp-includes/widgets/class-wp-widget-search.php:27
 msgid "A search form for your site."
-msgstr "사이트를 위한 검색 폼"
+msgstr "사이트를 위한 검색 폼."
 
 #: wp-includes/widgets/class-wp-widget-pages.php:27
 msgid "A list of your site&#8217;s Pages."
-msgstr "사이트의 페이지 목록"
+msgstr "사이트의 페이지 목록."
 
 #. translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.
-#: wp-includes/script-loader.php:936
+#: wp-includes/script-loader.php:947
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "on"
@@ -7365,7 +7765,7 @@ msgstr "예상치 않은 에러가 발생했습니다. WordPress.org나 이 서�
 #. translators: To add an additional Open Sans character subset specific to
 #. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
 #. translate into your own language.
-#: wp-includes/script-loader.php:942
+#: wp-includes/script-loader.php:953
 msgctxt "Open Sans font: add new subset (greek, cyrillic, vietnamese)"
 msgid "no-subset"
 msgstr "cyrillic"
@@ -7409,7 +7809,7 @@ msgstr "테마 디렉토리 \"%s\"가 존재하지 않습니다."
 #: wp-includes/class-wp-query.php:1373
 msgctxt "Comma-separated list of search stopwords in your language"
 msgid "about,an,are,as,at,be,by,com,for,from,how,in,is,it,of,on,or,that,the,this,to,was,what,when,where,who,will,with,www"
-msgstr "관해서, 에, 에서, 부터, 위해서, 으로, 의, 와, 그것, 이것, 저것, 또는, 그리고, 입니다, 이었습니다, 일 것입니다, 무엇, 언제, 어디서, 누가, www, com "
+msgstr "관해서, 에, 에서, 부터, 위해서, 으로, 의, 와, 그것, 이것, 저것, 또는, 그리고, 입니다, 이었습니다, 일 것입니다, 무엇, 언제, 어디서, 누가, www, com"
 
 #: wp-includes/post-template.php:1610
 msgid "This content is password protected. To view it please enter your password below:"
@@ -7472,6 +7872,10 @@ msgstr "무음 토글"
 #: wp-includes/script-loader.php:365
 msgid "Download Video"
 msgstr "비디오 내려받기"
+
+#: wp-includes/post.php:786
+msgid "Failed"
+msgstr "실패함"
 
 #: wp-includes/script-loader.php:556
 msgid "Invalid"
@@ -7541,26 +7945,26 @@ msgstr "사용 중인 기기의 웹브라우저가 파일을 업로드하는데 
 msgid "<strong>ERROR</strong>: Couldn&#8217;t register you&hellip; please contact the <a href=\"mailto:%s\">webmaster</a> !"
 msgstr "<strong>에러</strong>: 회원가입할 수 없습니다&hellip; <a href=\"mailto:%s\">웹마스터</a>에게 연락해주세요 !"
 
-#: wp-login.php:400
+#: wp-login.php:401
 msgid "Possible reason: your host may have disabled the mail() function."
-msgstr "가능성 있는 원인: 호스트가 mail() 함수를 비활성화했을 수도 있습니다.  "
+msgstr "가능성 있는 원인: 호스트가 mail() 함수를 비활성화했을 수도 있습니다."
 
 #: wp-includes/post-template.php:273
 msgid "(more&hellip;)"
 msgstr "(더 보기&hellip;)"
 
 #. translators: %s: site address
-#: wp-signup.php:899
+#: wp-signup.php:901
 msgid "The site you were looking for, %s, does not exist, but you can create it now!"
 msgstr "찾고 있는 사이트인 %s는 존재하지 않습니다. 하지만 지금 만들 수 있습니다!"
 
 #. translators: %s: email address
-#: wp-signup.php:767
+#: wp-signup.php:769
 msgid "Have you entered your email correctly? You have entered %s, if it&#8217;s incorrect, you will not receive your email."
 msgstr "이메일을 올바르게 입력하셨나요? %s를 입력하셨습니다. 올바르지 않다면, 이메일을 받을 수 없습니다."
 
 #. translators: 1: month, 2: day, 3: year, 4: hour, 5: minute
-#: wp-includes/script-loader.php:687 wp-includes/script-loader.php:715
+#: wp-includes/script-loader.php:698 wp-includes/script-loader.php:726
 msgid "%1$s %2$s, %3$s @ %4$s:%5$s"
 msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
 
@@ -7568,7 +7972,7 @@ msgstr "%1$s %2$s, %3$s @ %4$s : %5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "세션이 만료됐습니다. 이 페이지에서 다시 로그인하거나 로그인 페이지로 이동할 수 있습니다."
 
-#: wp-includes/functions.php:5330
+#: wp-includes/functions.php:5331
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "로그인 페이지는 새 창에 열릴 것입니다. 로그인 후에 새 창을 닫고 이 페이지에 다시 올 수 있습니다."
 
@@ -7593,7 +7997,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "검색 &hellip;"
 
-#: wp-includes/functions.php:5328 wp-includes/script-loader.php:569
+#: wp-includes/functions.php:5329 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "세션이 만료됐습니다"
 
@@ -7620,12 +8024,12 @@ msgid "WordPress Address (URL)"
 msgstr "워드프레스 주소(URL)"
 
 #: wp-includes/class-wp-xmlrpc-server.php:2505
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:334
-#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:603
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:350
+#: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:619
 #: wp-includes/user.php:1451 wp-includes/user.php:1804
 #: wp-includes/user.php:1810
 msgid "Invalid user ID."
-msgstr "유효하지 않은 사용자 ID"
+msgstr "유효하지 않은 사용자 ID."
 
 #: wp-includes/media-template.php:485
 msgid "Caption this image&hellip;"
@@ -7635,7 +8039,7 @@ msgstr "이 이미지에 캡션&hellip;"
 msgid "Random Order"
 msgstr "랜덤 순서"
 
-#: wp-includes/media.php:3548
+#: wp-includes/media.php:3549
 msgid "Insert from URL"
 msgstr "URL에서 삽입하기"
 
@@ -7652,7 +8056,7 @@ msgctxt "Links widget"
 msgid "Random"
 msgstr "랜덤"
 
-#: wp-includes/media.php:3561
+#: wp-includes/media.php:3562
 msgid "Add to Gallery"
 msgstr "갤러리에 추가하기"
 
@@ -7660,7 +8064,7 @@ msgstr "갤러리에 추가하기"
 msgid "No items found."
 msgstr "항목을 찾을 수 없습니다."
 
-#: wp-includes/media.php:3562
+#: wp-includes/media.php:3563
 msgid "Reverse order"
 msgstr "순서 바꾸기"
 
@@ -7674,13 +8078,13 @@ msgid "Sorry, that file cannot be edited."
 msgstr "죄송합니다, 해당 파일은 편집할 수 없습니다."
 
 #: wp-includes/media-template.php:441 wp-includes/media-template.php:544
-#: wp-includes/media.php:3536
+#: wp-includes/media.php:3537
 msgid "Delete Permanently"
 msgstr "영구적으로 삭제하기"
 
 #: wp-includes/media-template.php:196
 msgid "Upload Limit Exceeded"
-msgstr "업로드 제한 초과 "
+msgstr "업로드 제한 초과"
 
 #: wp-includes/media-template.php:264
 msgid "Dismiss Errors"
@@ -7694,52 +8098,52 @@ msgstr "업로드"
 msgid "No editor could be selected."
 msgstr "편집기를 선택할 수 없습니다."
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 msgid "Video <span class=\"count\">(%s)</span>"
 msgid_plural "Video <span class=\"count\">(%s)</span>"
 msgstr[0] "비디오 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 msgid "Manage Video"
 msgstr "비디오 관리"
 
-#: wp-includes/post.php:2320
+#: wp-includes/post.php:2379
 #: wp-includes/widgets/class-wp-widget-media-video.php:25
 msgid "Video"
 msgstr "비디오"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 msgid "Audio <span class=\"count\">(%s)</span>"
 msgid_plural "Audio <span class=\"count\">(%s)</span>"
 msgstr[0] "오디오 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 msgid "Manage Audio"
 msgstr "오디오 관리"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Image <span class=\"count\">(%s)</span>"
 msgid_plural "Images <span class=\"count\">(%s)</span>"
 msgstr[0] "이미지 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Manage Images"
 msgstr "이미지 관리"
 
-#: wp-includes/post.php:1401
+#: wp-includes/post.php:1460
 msgid "Uploaded to this page"
-msgstr "이 페이지에 업로드 됐습니다."
+msgstr "이 페이지에 업로드 됐습니다"
 
-#: wp-includes/post.php:1400
+#: wp-includes/post.php:1459
 msgid "Insert into page"
 msgstr "페이지에 삽입하기"
 
-#: wp-includes/post.php:2319
+#: wp-includes/post.php:2378
 #: wp-includes/widgets/class-wp-widget-media-audio.php:25
 msgid "Audio"
 msgstr "오디오"
 
-#: wp-includes/post.php:1401
+#: wp-includes/post.php:1460
 msgid "Uploaded to this post"
 msgstr "이 글에 업로드된 것"
 
@@ -7765,7 +8169,7 @@ msgstr "열(컬럼)"
 msgid "Alt Text"
 msgstr "대체 텍스트"
 
-#: wp-includes/media-template.php:501 wp-includes/media.php:3545
+#: wp-includes/media-template.php:501 wp-includes/media.php:3546
 msgid "Attachment Details"
 msgstr "첨부 상세"
 
@@ -7774,7 +8178,7 @@ msgstr "첨부 상세"
 msgid "Large"
 msgstr "최대 크기"
 
-#: wp-includes/media.php:3557
+#: wp-includes/media.php:3558
 msgid "&#8592; Cancel Gallery"
 msgstr "&#8592; 갤러리 취소"
 
@@ -7802,7 +8206,7 @@ msgstr "파일 업로드"
 msgid "Drop files anywhere to upload"
 msgstr "업로드 하려면 아무 곳에나 파일을 놓으세요"
 
-#: wp-includes/media.php:3558
+#: wp-includes/media.php:3559
 msgid "Insert gallery"
 msgstr "갤러리 삽입"
 
@@ -7810,7 +8214,7 @@ msgstr "갤러리 삽입"
 msgid "Drop files to upload"
 msgstr "업로드 하려면 파일을 놓으세요"
 
-#: wp-includes/media.php:3555
+#: wp-includes/media.php:3556
 msgid "Create Gallery"
 msgstr "갤러리 생성하기"
 
@@ -7898,7 +8302,7 @@ msgstr "이 오디오 파일에 대한 설명&hellip;"
 msgid "Describe this video&hellip;"
 msgstr "이 비디오에 대한 설명&hellip;"
 
-#: wp-includes/media.php:3559
+#: wp-includes/media.php:3560
 msgid "Update gallery"
 msgstr "갤러리 업데이트"
 
@@ -7963,19 +8367,19 @@ msgstr "%1$s %2$s"
 msgid "Could not insert term relationship into the database."
 msgstr "텀(term)의 관계를 데이터베이스에 삽입할 수 없습니다."
 
-#: wp-includes/script-loader.php:856
+#: wp-includes/script-loader.php:867
 msgid "Select Color"
 msgstr "색상 선택"
 
-#: wp-includes/media-template.php:601 wp-includes/script-loader.php:852
+#: wp-includes/media-template.php:601 wp-includes/script-loader.php:863
 msgid "Clear"
 msgstr "지우기"
 
-#: wp-includes/media.php:3560
+#: wp-includes/media.php:3561
 msgid "Add to gallery"
 msgstr "갤러리에 추가"
 
-#: wp-includes/post.php:1400
+#: wp-includes/post.php:1459
 msgid "Insert into post"
 msgstr "글에 삽입하기"
 
@@ -8059,7 +8463,7 @@ msgstr "헤더 글 색상"
 msgid "Colors"
 msgstr "색상"
 
-#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:723
+#: wp-includes/script-loader.php:560 wp-includes/script-loader.php:734
 msgid "Saved"
 msgstr "저장함"
 
@@ -8339,8 +8743,8 @@ msgstr "죄송합니다, 수정 권한이 없습니다."
 msgid "Edit Site"
 msgstr "사이트 편집"
 
-#: wp-includes/post.php:3952 wp-includes/script-loader.php:672
-#: wp-includes/script-loader.php:744
+#: wp-includes/post.php:4011 wp-includes/script-loader.php:683
+#: wp-includes/script-loader.php:755
 msgctxt "tag delimiter"
 msgid ","
 msgstr ","
@@ -8394,7 +8798,7 @@ msgstr "죄송합니다. 이 카테고리를 삭제할 권한이 없습니다."
 #: wp-includes/class-wp-xmlrpc-server.php:5021
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1018
 msgid "Invalid author ID."
-msgstr "유효하지 않은 글작성자 아이디"
+msgstr "유효하지 않은 글작성자 아이디."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1867
 #: wp-includes/class-wp-xmlrpc-server.php:4201
@@ -8457,7 +8861,7 @@ msgctxt "opening curly double quote"
 msgid "&#8220;"
 msgstr "&#8220;"
 
-#: wp-signup.php:174
+#: wp-signup.php:176
 msgid "Allow search engines to index this site."
 msgstr "검색엔진이 이 사이트를 검색목록에 포함하도록 허용합니다."
 
@@ -8475,19 +8879,19 @@ msgid "https://codex.wordpress.org/CSS"
 msgstr "https://codex.wordpress.org/CSS"
 
 #. translators: 1: login URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:103
+#: wp-activate.php:105
 msgid "Your account has been activated. You may now <a href=\"%1$s\">log in</a> to the site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
 msgstr "계정이 활성화되었습니다. 이제 선택한 &#8220;%2$s&#8221; 사용자명으로 사이트에 <a href=\"%1$s\">로그인</a>할 수 있습니다. 비밀번호와 로그인안내를 보시려면 %3$s 에서 이메일을 확인하세요. 이메일을 받지 못한 경우 스팸메일이나 정크메일 폴더를 확인하세요. 한시간이 지나도 이메일을 받지 못하면 <a href=\"%4$s\">비밀번호 초기화</a>를 할 수 있습니다."
 
 #. translators: 1: link to new site, 2: login URL, 3: username
-#: wp-signup.php:474
+#: wp-signup.php:476
 msgid "%1$s is your new site. <a href=\"%2$s\">Log in</a> as &#8220;%3$s&#8221; using your existing password."
 msgstr ""
 "%1$s은(는) 새로운 사이트입니다. 기존의 비밀번호를 이용해 &#8220;%3$s&#8221;로\n"
 "(으로) <a href=\"%2$s\">로그인</a>하세요."
 
 #. translators: 1: site URL, 2: username, 3: user email, 4: lost password URL
-#: wp-activate.php:112
+#: wp-activate.php:114
 msgid "Your site at %1$s is active. You may now log in to your site using your chosen username of &#8220;%2$s&#8221;. Please check your email inbox at %3$s for your password and login instructions. If you do not receive an email, please check your junk or spam folder. If you still do not receive an email within an hour, you can <a href=\"%4$s\">reset your password</a>."
 msgstr "%1$s의 사이트가 활성화 됐습니다. 선택한 사용자명 &#8220;%2$s&#8221;을(를) 이용해 사이트에 로그인 할 수 있습니다. 비밀번호화 로그인 안내는 %3$s의 받은편지함의 이메일을 확인해주세요. 이메일을 받지 않았다면 스팸 폴더를 확인하세요. 그래도 한시간 이내에 이메일을 받지 못한다면 <a href=\"%4$s\">비밀번호 초기화</a>를 할 수 있습니다."
 
@@ -8496,8 +8900,8 @@ msgstr "%1$s의 사이트가 활성화 됐습니다. 선택한 사용자명 &#82
 msgid "One or more database tables are unavailable. The database may need to be <a href=\"%s\">repaired</a>."
 msgstr "하나 이상의 데이터베이스 테이블이 불가능합니다. 데이터베이스는 <a href=\"%s\">수리</a>가 필요할 수도 있습니다."
 
-#: wp-includes/comment.php:726 wp-includes/comment.php:872
-#: wp-includes/comment.php:875
+#: wp-includes/comment.php:740 wp-includes/comment.php:886
+#: wp-includes/comment.php:889
 msgid "You are posting comments too quickly. Slow down."
 msgstr "댓글을 너무 빨리 달고 있습니다. 천천히 하세요."
 
@@ -8509,7 +8913,7 @@ msgstr "새로 추가"
 #: wp-includes/admin-bar.php:790
 msgid "%s comment awaiting moderation"
 msgid_plural "%s comments awaiting moderation"
-msgstr[0] "%s 댓글이 검토를 기다리고 있습니다."
+msgstr[0] "%s 댓글이 검토를 기다리고 있습니다"
 
 #: wp-includes/script-loader.php:302
 msgid "%s exceeds the maximum upload size for the multi-file uploader when used in your browser."
@@ -8557,19 +8961,19 @@ msgstr "이 사이트에 허용된 최대 업로드 용량을 %s 초과 했습�
 msgid "Feedback"
 msgstr "피드백"
 
-#: wp-includes/comment.php:3111
+#: wp-includes/comment.php:3125
 msgid "<strong>ERROR</strong>: please fill the required fields (name, email)."
 msgstr "<strong>에러</strong>&nbsp;: 꼭 필요한 항목(이름, 이메일)을 입력해주세요."
 
-#: wp-includes/comment.php:3113
+#: wp-includes/comment.php:3127
 msgid "<strong>ERROR</strong>: please enter a valid email address."
 msgstr "<strong>에러</strong>&nbsp;: 올바른 이메일 주소를 입력해주세요."
 
-#: wp-includes/comment.php:3118
+#: wp-includes/comment.php:3132
 msgid "<strong>ERROR</strong>: please type a comment."
 msgstr "<strong>에러</strong>&nbsp;: 댓글을 입력해주세요."
 
-#: wp-includes/script-loader.php:872
+#: wp-includes/script-loader.php:883
 msgid "Could not load the preview image. Please reload the page and try again."
 msgstr "미리보기 이미지를 불러올 수 없습니다. 페이지를 새로고침하고 다시 시도하세요."
 
@@ -8579,7 +8983,7 @@ msgstr "<strong>에러</strong>: 문제가 발생하여 사이트 엔트리를 �
 
 #: wp-includes/ms-deprecated.php:399
 msgid "<strong>ERROR</strong>: Site URL already taken."
-msgstr "<strong>에러</strong>: 사이트 URL이 이미 사용되고 있습니다. "
+msgstr "<strong>에러</strong>: 사이트 URL이 이미 사용되고 있습니다."
 
 #: wp-includes/admin-bar.php:163
 msgid "Support Forums"
@@ -8593,12 +8997,12 @@ msgstr "문서"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3778 wp-includes/ms-load.php:455
+#: wp-includes/functions.php:3779 wp-includes/ms-load.php:455
 #: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "데이터베이스 연결중 에러"
 
-#: wp-includes/functions.php:3774
+#: wp-includes/functions.php:3775
 msgid "Database Error"
 msgstr "데이터베이스 에러"
 
@@ -8681,20 +9085,20 @@ msgid "You should specify a nonce action to be verified by using the first param
 msgstr "첫 번째 매개 변수를 사용하여 인증될 수 있도록 넌스 액션(nonce action)을 특정해야 합니다."
 
 #. translators: 1: site URL, 2: login URL
-#: wp-activate.php:144
+#: wp-activate.php:146
 msgid "Your account is now activated. <a href=\"%1$s\">View your site</a> or <a href=\"%2$s\">Log in</a>"
 msgstr "계정이 활성화되었습니다. <a href=\"%1$s\">사이트 보기</a> 또는 <a href=\"%2$s\">로그인</a>"
 
 #. translators: 1: login URL, 2: network home URL
-#: wp-activate.php:149
+#: wp-activate.php:151
 msgid "Your account is now activated. <a href=\"%1$s\">Log in</a> or go back to the <a href=\"%2$s\">homepage</a>."
 msgstr "계정이 활성화되었습니다. <a href=\"%1$s\">로그인</a> 또는 <a href=\"%2$s\">홈페이지</a>로 돌아가기."
 
-#: wp-includes/post.php:1397
+#: wp-includes/post.php:1456
 msgid "All Pages"
 msgstr "모든 페이지"
 
-#: wp-includes/post.php:1397
+#: wp-includes/post.php:1456
 msgid "All Posts"
 msgstr "모든 글"
 
@@ -8745,11 +9149,11 @@ msgctxt "post format"
 msgid "Format"
 msgstr "글 형식"
 
-#: wp-includes/class-wp-editor.php:1712
+#: wp-includes/class-wp-editor.php:1720
 msgid "Or link to existing content"
 msgstr "또는 기존의 컨텐츠에 링크하기"
 
-#: wp-includes/class-wp-editor.php:1698
+#: wp-includes/class-wp-editor.php:1706
 msgid "Enter the destination URL"
 msgstr "대상 URL을 입력하세요"
 
@@ -8774,13 +9178,13 @@ msgid "The user is already active."
 msgstr "사용자는 이미 활동 중입니다."
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4140
+#: wp-includes/functions.php:4141
 msgid "(This message was added in version %s.)"
 msgstr "(이 메세지는 버전 %s에서 추가되었습니다.)"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4147
+#: wp-includes/functions.php:4148
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s 은 <strong>잘못불렀습니다</strong>. %2$s %3$s"
 
@@ -8793,12 +9197,12 @@ msgctxt "Post format"
 msgid "Standard"
 msgstr "표준"
 
-#: wp-signup.php:123
+#: wp-signup.php:125
 msgid "domain"
 msgstr "도메인"
 
 #. translators: %s: site address
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Your address will be %s."
 msgstr "주소는 %s가 될 것입니다."
 
@@ -8812,7 +9216,7 @@ msgstr "오디오"
 msgid "Invalid post format."
 msgstr "유효하지 않은 글 형식."
 
-#: wp-includes/class-wp-editor.php:1729
+#: wp-includes/class-wp-editor.php:1737
 msgid "No search term specified. Showing recent items."
 msgstr "지정된 검색어를 찾을 수 없습니다. 최근의 아이템을 보여줍니다."
 
@@ -8820,7 +9224,7 @@ msgstr "지정된 검색어를 찾을 수 없습니다. 최근의 아이템을 �
 msgid "Only a static class method or function can be used in an uninstall hook."
 msgstr "언인스톨 후크에서 정적 클래스 방법이나 기능만 사용할 수 있습니다."
 
-#: wp-includes/post.php:2954
+#: wp-includes/post.php:3013
 msgid "Passing an integer number of posts is deprecated. Pass an array of arguments instead."
 msgstr "글의 정수 전달은 사용 중지되었습니다. 대신 인자의 배열로 전달합니다."
 
@@ -8864,19 +9268,19 @@ msgctxt "Post format"
 msgid "Aside"
 msgstr "추가 정보"
 
-#: wp-includes/post.php:1395
+#: wp-includes/post.php:1454
 msgid "No posts found in Trash."
 msgstr "휴지통에서 찾은 글이 없습니다."
 
-#: wp-includes/post.php:1394
+#: wp-includes/post.php:1453
 msgid "No pages found."
 msgstr "페이지를 찾을 수 없습니다."
 
-#: wp-includes/post.php:1395
+#: wp-includes/post.php:1454
 msgid "No pages found in Trash."
 msgstr "휴지통에서 찾은 페이지가 없습니다."
 
-#: wp-includes/script-loader.php:831
+#: wp-includes/script-loader.php:842
 msgid "Network Enable"
 msgstr "네트워크 활성화"
 
@@ -8893,9 +9297,9 @@ msgstr "잘못된 첨부 ID."
 
 #: wp-includes/registration-functions.php:7 wp-includes/registration.php:7
 msgid "This file no longer needs to be included."
-msgstr "이 파일은 더이상 포함할 필요가 없습니다"
+msgstr "이 파일은 더이상 포함할 필요가 없습니다."
 
-#: wp-login.php:576
+#: wp-login.php:577
 msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr "사용자명이나 이메일 주소를 입력하세요. 이메일로 새로운 비밀번호 생성 링크를 받을 수 있습니다."
 
@@ -8914,7 +9318,7 @@ msgstr "섬네일 높이"
 
 #: wp-includes/class-wp-xmlrpc-server.php:575
 msgid "Crop thumbnail to exact dimensions"
-msgstr "썸네일을 정확한 크기로 잘라냅니다."
+msgstr "썸네일을 정확한 크기로 잘라냅니다"
 
 #: wp-includes/class-wp-xmlrpc-server.php:600
 msgid "Large size image width"
@@ -8932,43 +9336,43 @@ msgstr "중간 크기의 이미지 폭"
 msgid "Large size image height"
 msgstr "최대 크기의 이미지 높이"
 
-#: wp-login.php:681
+#: wp-login.php:682
 msgid "Enter your new password below."
 msgstr "아래에 새 비밀번호를 입력하세요."
 
-#: wp-login.php:365
+#: wp-login.php:366
 msgid "If this was a mistake, just ignore this email and nothing will happen."
 msgstr "만약 실수라면 이 이메일을 무시하세요. 아무일도 생기지 않습니다."
 
-#: wp-login.php:360
+#: wp-login.php:361
 msgid "Someone has requested a password reset for the following account:"
 msgstr "어떤 사람이 다음 계정의 비밀번호의 초기화를 요청했습니다:"
 
-#: wp-login.php:673
+#: wp-login.php:674
 msgid "Your password has been reset."
 msgstr "비밀번호가 초기화되었습니다."
 
-#: wp-login.php:673
+#: wp-login.php:674
 msgid "Password Reset"
 msgstr "비밀번호 초기화"
 
-#: wp-login.php:658
+#: wp-login.php:659
 msgid "The passwords do not match."
 msgstr "비밀번호가 일치하지 않습니다."
 
-#: wp-login.php:681 wp-login.php:728
+#: wp-login.php:682 wp-login.php:729
 msgid "Reset Password"
 msgstr "비밀번호 초기화"
 
-#: wp-login.php:366
+#: wp-login.php:367
 msgid "To reset your password, visit the following address:"
 msgstr "비밀번호를 변경하려면 다음 주소를 방문하십시오:"
 
-#: wp-login.php:710
+#: wp-login.php:711
 msgid "Confirm new password"
 msgstr "새 비밀번호 확인"
 
-#: wp-login.php:689
+#: wp-login.php:690
 msgid "New password"
 msgstr "새 비밀번호"
 
@@ -8982,16 +9386,16 @@ msgstr "내 프로필 편집"
 
 #: wp-includes/post-formats.php:68
 msgid "Invalid post."
-msgstr "잘못된 글"
+msgstr "잘못된 글."
 
 #: wp-includes/class-wp-theme.php:786
 msgid "Blavatar"
 msgstr "Blavatar"
 
 #. translators: %s: taxonomy name
-#: wp-includes/post.php:3420
+#: wp-includes/post.php:3479
 msgid "Invalid taxonomy: %s."
-msgstr "유효하지 않은 택소노미: %s"
+msgstr "유효하지 않은 택소노미: %s."
 
 #: wp-includes/taxonomy.php:112
 msgid "Link Category"
@@ -9016,6 +9420,10 @@ msgstr "새로운 링크 카테고리 추가"
 #: wp-includes/taxonomy.php:119
 msgid "New Link Category Name"
 msgstr "새로운 링크 카테고리 이름"
+
+#: wp-includes/user.php:2838
+msgid "User"
+msgstr "사용자"
 
 #: wp-includes/admin-bar.php:444
 msgid "Network Admin"
@@ -9108,77 +9516,77 @@ msgctxt "taxonomy singular name"
 msgid "Category"
 msgstr "카테고리"
 
-#: wp-signup.php:764
+#: wp-signup.php:766
 msgid "Check the junk or spam folder of your email client. Sometime emails wind up there by mistake."
 msgstr "스팸 편지함을 확인해보세요. 가끔씩 이메일이 그 곳으로 전송되는 경우가 있습니다."
 
-#: wp-signup.php:763
+#: wp-signup.php:765
 msgid "Wait a little longer. Sometimes delivery of email can be delayed by processes outside of our control."
 msgstr "좀 더 기다려보세요. 우리의 통제를 벗어나 가끔씩 이메일이 늦게 전송될 때가 있습니다."
 
-#: wp-signup.php:890
+#: wp-signup.php:892
 msgid "Sorry, new registrations are not allowed at this time."
 msgstr "죄송합니다. 새 회원가입이 지금은 허용되지 않습니다."
 
-#: wp-signup.php:240
+#: wp-signup.php:242
 msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
 msgstr "이 주소로 가입 이메일을 보냅니다. (계속하기 전에 다시 한번 이메일 주소를 확인하세요.)"
 
-#: wp-includes/post.php:1386
+#: wp-includes/post.php:1445
 msgctxt "post type singular name"
 msgid "Post"
 msgstr "글"
 
-#: wp-includes/post.php:1386
+#: wp-includes/post.php:1445
 msgctxt "post type singular name"
 msgid "Page"
 msgstr "페이지"
 
-#: wp-includes/post.php:1385
+#: wp-includes/post.php:1444
 msgctxt "post type general name"
 msgid "Pages"
 msgstr "페이지"
 
-#: wp-includes/post.php:1388
+#: wp-includes/post.php:1447
 msgid "Add New Page"
 msgstr "새 페이지 추가"
 
-#: wp-includes/post.php:1393
+#: wp-includes/post.php:1452
 msgid "Search Posts"
 msgstr "글 검색"
 
-#: wp-includes/post.php:1389
+#: wp-includes/post.php:1448
 msgid "Edit Page"
 msgstr "페이지 편집"
 
-#: wp-includes/post.php:1385
+#: wp-includes/post.php:1444
 msgctxt "post type general name"
 msgid "Posts"
 msgstr "글"
 
-#: wp-includes/post.php:1396
+#: wp-includes/post.php:1455
 msgid "Parent Page:"
 msgstr "상위 페이지:"
 
-#: wp-includes/post.php:1388
+#: wp-includes/post.php:1447
 msgid "Add New Post"
 msgstr "새 글 쓰기"
 
-#: wp-includes/post.php:1393
+#: wp-includes/post.php:1452
 msgid "Search Pages"
 msgstr "페이지 검색"
 
 #: wp-includes/ms-default-constants.php:139
 msgid "<strong>Conflicting values for the constants VHOST and SUBDOMAIN_INSTALL.</strong> The value of SUBDOMAIN_INSTALL will be assumed to be your subdomain configuration setting."
-msgstr "<strong>상수 VHOST와 SUBDOMAIN_INSTALL의 충돌 값.</strong> SUBDOMAIN_INSTALL값은 서브 도메인 환경설정 설정값으로 추정됩니다. "
+msgstr "<strong>상수 VHOST와 SUBDOMAIN_INSTALL의 충돌 값.</strong> SUBDOMAIN_INSTALL값은 서브 도메인 환경설정 설정값으로 추정됩니다."
 
 #: wp-includes/user.php:2351
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>에러</strong>: 이 사용자명은 올바르지 않습니다. 올바른 사용자명을 입력하여 주십시오."
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2209
 msgid "Required fields are marked %s"
-msgstr "필수 입력창은 %s 로 표시되어 있습니다."
+msgstr "필수 입력창은 %s 로 표시되어 있습니다"
 
 #. translators: %s: template name
 #: wp-includes/theme-compat/comments.php:12
@@ -9338,7 +9746,7 @@ msgstr "귀하를 이 사이트에 추가하던 중 에러가 발생했습니다
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "이 파일은 너무 큽니다. 파일은  %d KB 보다 작아야 합니다."
 
-#: wp-includes/comment-template.php:2235
+#: wp-includes/comment-template.php:2238
 msgid "Your email address will not be published."
 msgstr "이메일은 공개되지 않습니다."
 
@@ -9350,17 +9758,17 @@ msgstr "유효한 URL이 제공되지 않았습니다."
 #: wp-includes/class-wp-image-editor-gd.php:178
 #: wp-includes/class-wp-image-editor-imagick.php:258
 msgid "Could not calculate resized image dimensions"
-msgstr "조정된 이미지 크기를 계산할 수 없습니다."
+msgstr "조정된 이미지 크기를 계산할 수 없습니다"
 
 #: wp-includes/ms-load.php:481
 msgid "If you&#8217;re still stuck with this message, then check that your database contains the following tables:"
 msgstr "만약 아직도 이 메세지가 보인다면, 다음 테이블을 포함하는지 데이터베이스를 확인하세요:"
 
-#: wp-signup.php:761
+#: wp-signup.php:763
 msgid "If you haven&#8217;t received your email yet, there are a number of things you can do:"
 msgstr "만약 아직 이메일을 받지 못했다면, 할 수 있는 것들이 있습니다:"
 
-#: wp-signup.php:313
+#: wp-signup.php:315
 msgid "Welcome back, %s. By filling out the form below, you can <strong>add another site to your account</strong>. There is no limit to the number of sites you can have, so create to your heart&#8217;s content, but write responsibly!"
 msgstr "%s님 다시 방문해 주서서 감사합니다. 아래의 양식을 작성해 주시면 <strong>귀하의 계정에 다른 사이트를 추가할 수</strong> 있습니다. 개설할 수 있는 사이트는 제한이 없으며 원하는대로 사이트를 만들 수 있습니다. 하지만 책임감을 갖고 글을 올려주세요."
 
@@ -9368,24 +9776,24 @@ msgstr "%s님 다시 방문해 주서서 감사합니다. 아래의 양식을 �
 msgid "This action has been disabled by the administrator."
 msgstr "관리자에 의해 이 작업은 취소되었습니다."
 
-#: wp-signup.php:892
+#: wp-signup.php:894
 msgid "You are logged in already. No need to register again!"
 msgstr "이미 로그인했습니다. 다시 등록할 필요가 없습니다!"
 
 #. translators: %s: login URL
-#: wp-signup.php:857
+#: wp-signup.php:859
 msgid "You must first <a href=\"%s\">log in</a>, and then you can create a new site."
 msgstr "먼저 <a href=\"%s\">로그인</a>을 해야 합니다. 그런 후에 새로운 사이트를 생성할 수 있습니다."
 
-#: wp-signup.php:127
+#: wp-signup.php:129
 msgid "Must be at least 4 characters, letters and numbers only. It cannot be changed, so choose carefully!"
 msgstr "최소한 4글자 이상이어야하고 글자와 숫자만 가능합니다. 변경될 수 없으니 주의해서 선택하세요."
 
-#: wp-includes/script-loader.php:758
+#: wp-includes/script-loader.php:769
 msgid "Are you sure you want to install this plugin?"
 msgstr "이 플러그인을 설치하시겠습니까?"
 
-#: wp-includes/script-loader.php:877
+#: wp-includes/script-loader.php:888
 msgid "Use as featured image"
 msgstr "특성 이미지로 사용"
 
@@ -9420,9 +9828,9 @@ msgstr "%s를 위한 링크"
 
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:133
 msgid "No menus have been created yet. <a href=\"%s\">Create some</a>."
-msgstr "아직 메뉴가 생성되지 않았습니다. <a href=\"%s\">생성하세요</a>"
+msgstr "아직 메뉴가 생성되지 않았습니다. <a href=\"%s\">생성하세요</a>."
 
-#: wp-includes/script-loader.php:887
+#: wp-includes/script-loader.php:898
 msgid ""
 "You are about to permanently delete this menu. \n"
 " 'Cancel' to stop, 'OK' to delete."
@@ -9451,44 +9859,44 @@ msgstr[0] "%d 테마 업데이트"
 msgid "%d WordPress Update"
 msgstr "%d 워드프레스 업데이트"
 
-#: wp-signup.php:758
+#: wp-signup.php:760
 msgid "If you do not activate your site within two days, you will have to sign up again."
 msgstr "2 일 이내에 사이트를 활성화하지 않으면, 다시 가입해야 합니다."
 
-#: wp-signup.php:755
+#: wp-signup.php:757
 msgid "But, before you can start using your site, <strong>you must activate it</strong>."
 msgstr "하지만, 사이트를 사용하기 전에 <strong>활성화해야 합니다</strong>."
 
-#: wp-signup.php:555
+#: wp-signup.php:557
 msgid "Gimme a site!"
 msgstr "사이트를 주세요!"
 
-#: wp-signup.php:871
+#: wp-signup.php:873
 msgid "Site registration has been disabled."
 msgstr "사이트 등록이 중지되어 있습니다."
 
 #. translators: %s: site address
-#: wp-signup.php:753
+#: wp-signup.php:755
 msgid "Congratulations! Your new site, %s, is almost ready."
 msgstr "축하합니다! 새로운 사이트인 %s 이(가) 거의 준비되었습니다."
 
-#: wp-signup.php:307
+#: wp-signup.php:309
 msgid "Get <em>another</em> %s site in seconds"
 msgstr "<em>다른</em> %s 사이트를 가져오기"
 
-#: wp-signup.php:121
+#: wp-signup.php:123
 msgid "sitename"
 msgstr "사이트 이름"
 
-#: wp-signup.php:106
+#: wp-signup.php:108
 msgid "Site Name:"
 msgstr "사이트 이름:"
 
-#: wp-signup.php:108
+#: wp-signup.php:110
 msgid "Site Domain:"
 msgstr "사이트 도메인:"
 
-#: wp-signup.php:132
+#: wp-signup.php:134
 msgid "Site Title:"
 msgstr "사이트 제목:"
 
@@ -9499,26 +9907,26 @@ msgstr "파일이 취소되었습니다."
 #. translators: 1: Post title
 #: wp-includes/pluggable.php:1651
 msgid "A new comment on the post \"%s\" is waiting for your approval"
-msgstr "\"%s\" 글에 새로운 댓글이 있습니다. 승인해주세요."
+msgstr "\"%s\" 글에 새로운 댓글이 있습니다. 승인해주세요"
 
 #. translators: 1: Post title
 #: wp-includes/pluggable.php:1641
 msgid "A new pingback on the post \"%s\" is waiting for your approval"
-msgstr "\"%s\" 글에 새로운 핑백이 있습니다. 승인해주세요."
+msgstr "\"%s\" 글에 새로운 핑백이 있습니다. 승인해주세요"
 
 #. translators: 1: Post title
 #: wp-includes/pluggable.php:1631
 msgid "A new trackback on the post \"%s\" is waiting for your approval"
-msgstr "\"%s\" 글에 새로운 트랙백이 있습니다. 승인해주세요."
+msgstr "\"%s\" 글에 새로운 트랙백이 있습니다. 승인해주세요"
 
 #. translators: 1: Post title
 #: wp-includes/pluggable.php:1482
 msgid "New pingback on your post \"%s\""
-msgstr "\"%s\"글에 새로운 핑백이 있습니다."
+msgstr "\"%s\"글에 새로운 핑백이 있습니다"
 
 #: wp-includes/pluggable.php:1492
 msgid "New comment on your post \"%s\""
-msgstr "\"%s\"글에 새로운 댓글이 있습니다."
+msgstr "\"%s\"글에 새로운 댓글이 있습니다"
 
 #: wp-includes/ms-load.php:458
 msgid "If your site does not display, please contact the owner of this network."
@@ -9531,22 +9939,22 @@ msgstr "네트워크 관리자라면 MySQL이 정상적으로 동작중이며 �
 #. translators: 1: Post title
 #: wp-includes/pluggable.php:1471
 msgid "New trackback on your post \"%s\""
-msgstr "\"%s\"글에 새로운 트랙백이 있습니다."
+msgstr "\"%s\"글에 새로운 트랙백이 있습니다"
 
-#: wp-signup.php:319
+#: wp-signup.php:321
 msgid "Sites you are already a member of:"
 msgstr "이미 멤버인 사이트들:"
 
-#: wp-signup.php:328
+#: wp-signup.php:330
 msgid "If you&#8217;re not going to use a great site domain, leave it for a new user. Now have at it!"
 msgstr "만약 좋은 사이트 도메인을 사용하지 않을거라면, 새로운 사용자를 위해 놔두세요. 지금 그걸 가지세요!"
 
-#: wp-signup.php:343
+#: wp-signup.php:345
 msgid "Create Site"
 msgstr "사이트 생성"
 
 #. translators: %s: site name
-#: wp-signup.php:469
+#: wp-signup.php:471
 msgid "The site %s is yours."
 msgstr "사이트 %s 은(는) 당신 것입니다."
 
@@ -9654,7 +10062,7 @@ msgstr "죄송합니다. 이 사용자로 글을 업데이트 할 권한이 없�
 #: wp-includes/class-wp-xmlrpc-server.php:4959
 #: wp-includes/class-wp-xmlrpc-server.php:5017
 #: wp-includes/class-wp-xmlrpc-server.php:5295
-#: wp-includes/class-wp-xmlrpc-server.php:5359 wp-includes/post.php:1175
+#: wp-includes/class-wp-xmlrpc-server.php:5359 wp-includes/post.php:1234
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:123
 msgid "Invalid post type."
 msgstr "잘못된 글 종류."
@@ -9715,8 +10123,8 @@ msgstr "댓글 작성자 이름과 이메일이 필요합니다."
 #: wp-includes/class-wp-xmlrpc-server.php:5585
 #: wp-includes/class-wp-xmlrpc-server.php:6098
 #: wp-includes/class-wp-xmlrpc-server.php:6152
-#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3088
-#: wp-includes/post.php:3622
+#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3147
+#: wp-includes/post.php:3681
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:326
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:688
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:369
@@ -9771,64 +10179,64 @@ msgstr "소프트웨어 버전"
 msgid "Software Name"
 msgstr "소프트웨어 이름"
 
-#: wp-signup.php:865
+#: wp-signup.php:867
 msgid "User registration has been disabled."
 msgstr "사용자 등록이 중지되어 있습니다."
 
-#: wp-signup.php:853
+#: wp-signup.php:855
 msgid "Registration has been disabled."
 msgstr "가입이 중지되었습니다."
 
-#: wp-signup.php:759
+#: wp-signup.php:761
 msgid "Still waiting for your email?"
 msgstr "여전히 이메일을 기다리고 있습니까?"
 
-#: wp-signup.php:676
+#: wp-signup.php:678
 msgid "Signup"
 msgstr "가입"
 
-#: wp-signup.php:612
+#: wp-signup.php:614
 msgid "If you do not activate your username within two days, you will have to sign up again."
 msgstr "2 일 이내에 사용자명을 활성화하지 않으면, 다시 가입해야 합니다."
 
-#: wp-signup.php:609
+#: wp-signup.php:611
 msgid "But, before you can start using your new username, <strong>you must activate it</strong>."
 msgstr "하지만, 새로운 사용자명을 사용하기 전에 <strong>활성화해야 합니다</strong>."
 
 #. translators: %s: username
-#: wp-signup.php:608
+#: wp-signup.php:610
 msgid "%s is your new username"
-msgstr "%s 은(는) 새로운 사용자명입니다."
+msgstr "%s 은(는) 새로운 사용자명입니다"
 
 #: wp-includes/class-wp-customize-nav-menus.php:967
-#: wp-includes/script-loader.php:1130 wp-signup.php:562
+#: wp-includes/script-loader.php:1141 wp-signup.php:564
 msgid "Next"
 msgstr "다음"
 
-#: wp-signup.php:558
+#: wp-signup.php:560
 msgid "Just a username, please."
 msgstr "사용자명만 등록합니다."
 
 #. translators: %s: name of the network
-#: wp-signup.php:538
+#: wp-signup.php:540
 msgid "Get your own %s account in seconds"
 msgstr "몇 초만에 자신만의 %s 계정을 만드세요"
 
-#: wp-signup.php:310
+#: wp-signup.php:312
 msgid "There was a problem, please correct the form below and try again."
 msgstr "문제가 있습니다. 아래 양식을 수정하고 다시 시도하세요."
 
-#: wp-signup.php:236
+#: wp-signup.php:238
 msgid "Email&nbsp;Address:"
 msgstr "이메일&nbsp;주소:"
 
-#: wp-signup.php:233
+#: wp-signup.php:235
 msgid "(Must be at least 4 characters, letters and numbers only.)"
 msgstr "(최소 4글자 이상, 글자와 숫자만.)"
 
-#: wp-signup.php:173
+#: wp-signup.php:175
 msgid "Privacy:"
-msgstr "프라이버시:"
+msgstr "개인정보:"
 
 #. translators: %s: POP3 error
 #: wp-mail.php:238
@@ -9838,7 +10246,7 @@ msgstr "이크: %s"
 #. translators: Post author email address
 #: wp-mail.php:128
 msgid "Author is %s"
-msgstr "글 쓴이는 %s입니다."
+msgstr "글 쓴이는 %s입니다"
 
 #: wp-mail.php:60
 msgid "There doesn&#8217;t seem to be any new mail."
@@ -9848,40 +10256,40 @@ msgstr "새로운 메일이 없는 것 같습니다."
 msgid "Slow down cowboy, no need to check for new mails so often!"
 msgstr "서두르지 마세요, 새로운 메일을 자주 확인할 필요가 없습니다!"
 
-#: wp-login.php:954
+#: wp-login.php:992
 msgid "Registration complete. Please check your email."
 msgstr "가입이 완료 되었습니다. 이메일을 확인하세요."
 
-#: wp-login.php:952
+#: wp-login.php:990
 msgid "Check your email for your new password."
 msgstr "새 비밀번호는 이메일을 확인하세요."
 
-#: wp-login.php:950
+#: wp-login.php:988
 msgid "Check your email for the confirmation link."
 msgstr "이메일에서 확인 링크를 클릭하세요."
 
-#: wp-login.php:948
+#: wp-login.php:986
 msgid "User registration is currently not allowed."
 msgstr "현재 사용자 등록이 허용되지 않습니다."
 
-#: wp-login.php:946
+#: wp-login.php:984
 msgid "You are now logged out."
 msgstr "로그아웃 하셨습니다."
 
-#: wp-login.php:905
+#: wp-login.php:943
 msgid "You have logged in successfully."
 msgstr "성공적으로 로그인하였습니다."
 
 #: wp-includes/user.php:149 wp-includes/user.php:175 wp-includes/user.php:227
-#: wp-includes/user.php:247 wp-login.php:829 wp-login.php:1030
+#: wp-includes/user.php:247 wp-login.php:830 wp-login.php:1068
 msgid "Lost your password?"
 msgstr "비밀번호를 잃어버렸나요?"
 
-#: wp-login.php:801
+#: wp-login.php:802
 msgid "Register For This Site"
 msgstr "이 사이트에 회원가입"
 
-#: wp-login.php:801
+#: wp-login.php:802
 msgid "Registration Form"
 msgstr "등록 양식"
 
@@ -9889,11 +10297,11 @@ msgstr "등록 양식"
 msgid "&larr; Back to Tags"
 msgstr "&larr; 태그로 돌아가기"
 
-#: wp-login.php:599
+#: wp-login.php:600
 msgid "Get New Password"
 msgstr "새 비밀번호 얻기"
 
-#: wp-login.php:576
+#: wp-login.php:577
 msgid "Lost Password"
 msgstr "비밀번호 분실"
 
@@ -9908,32 +10316,33 @@ msgstr "<strong>오류</strong>: 이메일 주소를 넣으세요."
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289
+#: wp-includes/user.php:2289 wp-includes/user.php:3400
+#: wp-includes/user.php:3412 wp-includes/user.php:3430 wp-login.php:853
 msgid "Invalid key"
 msgstr "잘못된 키"
 
-#: wp-login.php:400
+#: wp-login.php:401
 msgid "The email could not be sent."
 msgstr "이메일을 보낼 수 없습니다."
 
 #. translators: Password reset email subject. %s: Site name
-#: wp-login.php:370
+#: wp-login.php:371
 msgid "[%s] Password Reset"
 msgstr "[%s] 비밀번호 새로 고치기"
 
 #: wp-includes/user.php:2172
 msgid "Password reset is not allowed for this user"
-msgstr "이 사용자는 비밀번호를 재설정할 수 없습니다."
+msgstr "이 사용자는 비밀번호를 재설정할 수 없습니다"
 
-#: wp-login.php:337
+#: wp-login.php:338
 msgid "<strong>ERROR</strong>: Invalid username or email."
 msgstr "<strong>오류</strong>:사용자명이나 이메일 주소가 올바르지 않습니다."
 
-#: wp-login.php:316
+#: wp-login.php:317
 msgid "<strong>ERROR</strong>: There is no user registered with that email address."
 msgstr "<strong>오류</strong>: 입력한 이메일 주소로는 사용자를 찾을 수 없습니다."
 
-#: wp-login.php:312
+#: wp-login.php:313
 msgid "<strong>ERROR</strong>: Enter a username or email address."
 msgstr "<strong>오류</strong>: 사용자명이나 이메일 주소를 넣으세요."
 
@@ -9945,13 +10354,13 @@ msgstr "Powered by WordPress"
 #. number
 #: wp-includes/wp-db.php:3311
 msgid "<strong>ERROR</strong>: WordPress %1$s requires MySQL %2$s or higher"
-msgstr "<strong>에러</strong>: 워드프레스 %1$s는 MySQL %2$s 또는 그 이상을 필요로 합니다."
+msgstr "<strong>에러</strong>: 워드프레스 %1$s는 MySQL %2$s 또는 그 이상을 필요로 합니다"
 
 #: wp-includes/widgets.php:177 wp-includes/widgets.php:248
 msgid "Sidebar %d"
 msgstr "사이드바 %d"
 
-#: wp-includes/functions.php:5329 wp-includes/user.php:285
+#: wp-includes/functions.php:5330 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "다시 로그인하세요."
 
@@ -9977,7 +10386,7 @@ msgstr "상위 테마가 없습니다. \"%s\" 상위 테마를 설치하세요."
 
 #: wp-includes/taxonomy.php:4137
 msgid "Invalid object ID."
-msgstr "유효하지 않은 오브젝트 ID"
+msgstr "유효하지 않은 오브젝트 ID."
 
 #. translators: 1: Taxonomy term slug
 #: wp-includes/taxonomy.php:2710
@@ -9993,51 +10402,51 @@ msgstr "데이터베이스에 텀을 추가할 수 없습니다."
 msgid "Empty Term."
 msgstr "빈 텀."
 
-#: wp-includes/script-loader.php:702
+#: wp-includes/script-loader.php:713
 msgid "Saving Draft&#8230;"
 msgstr "임시 글로 저장하기&#8230;"
 
-#: wp-includes/script-loader.php:879
+#: wp-includes/script-loader.php:890
 msgid "Could not set that as the thumbnail image. Try a different attachment."
 msgstr "섬네일 이미지로 설정할 수 없습니다. 다른 첨부파일을 시도해보세요."
 
-#: wp-includes/script-loader.php:878
+#: wp-includes/script-loader.php:889
 msgid "Saving..."
 msgstr "저장중..."
 
-#: wp-includes/script-loader.php:742
+#: wp-includes/script-loader.php:753
 msgid "Remove From Bulk Edit"
 msgstr "대량 편집에서 제거"
 
-#: wp-includes/script-loader.php:741 wp-includes/script-loader.php:750
+#: wp-includes/script-loader.php:752 wp-includes/script-loader.php:761
 msgid "Error while saving the changes."
 msgstr "변경사항을 저장하는데 오류가 발생했습니다."
 
-#: wp-includes/script-loader.php:713
+#: wp-includes/script-loader.php:724
 msgid "Submitted on:"
 msgstr "전송완료:"
 
-#: wp-includes/script-loader.php:698
+#: wp-includes/script-loader.php:709
 msgid "Password Protected"
 msgstr "비밀번호로 보호"
 
-#: wp-includes/script-loader.php:689
+#: wp-includes/script-loader.php:700
 msgid "No more comments found."
 msgstr "더이상의 댓글이 없습니다."
 
-#: wp-includes/script-loader.php:688
+#: wp-includes/script-loader.php:699
 msgid "Show more comments"
 msgstr "더 많은 댓글 보기"
 
-#: wp-includes/script-loader.php:685
+#: wp-includes/script-loader.php:696
 msgid "Published on:"
 msgstr "공개됨:"
 
-#: wp-includes/script-loader.php:684
+#: wp-includes/script-loader.php:695
 msgid "Schedule for:"
 msgstr "예약됨:"
 
-#: wp-includes/script-loader.php:683
+#: wp-includes/script-loader.php:694
 msgid "Publish on:"
 msgstr "공개하기:"
 
@@ -10157,46 +10566,46 @@ msgstr "로그인명이 없는 상태로는 사용자를 생성할 수 없습니
 
 #: wp-includes/revision.php:295
 msgid "Cannot create a revision of a revision"
-msgstr "리비전의 리비전을 만들 수 없습니다."
+msgstr "리비전의 리비전을 만들 수 없습니다"
 
-#: wp-includes/post.php:3389
+#: wp-includes/post.php:3448
 msgid "Could not insert post into the database"
-msgstr "데이터베이스로 글을 넣을 수 없습니다."
+msgstr "데이터베이스로 글을 넣을 수 없습니다"
 
-#: wp-includes/post.php:3374
+#: wp-includes/post.php:3433
 msgid "Could not update post in the database"
-msgstr "데이터베이스에 글을 업데이트 할 수 없습니다."
+msgstr "데이터베이스에 글을 업데이트 할 수 없습니다"
 
-#: wp-includes/post.php:3135
+#: wp-includes/post.php:3194
 msgid "Content, title, and excerpt are empty."
 msgstr "내용, 제목, 요약이 비어 있음."
 
-#: wp-includes/post.php:252
+#: wp-includes/post.php:267
 msgid "Trash <span class=\"count\">(%s)</span>"
 msgid_plural "Trash <span class=\"count\">(%s)</span>"
 msgstr[0] "휴지통 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:245
+#: wp-includes/post.php:260
 msgid "Private <span class=\"count\">(%s)</span>"
 msgid_plural "Private <span class=\"count\">(%s)</span>"
 msgstr[0] "비공개 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:238
+#: wp-includes/post.php:253
 msgid "Pending <span class=\"count\">(%s)</span>"
 msgid_plural "Pending <span class=\"count\">(%s)</span>"
 msgstr[0] "보류중 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:231
+#: wp-includes/post.php:246
 msgid "Draft <span class=\"count\">(%s)</span>"
 msgid_plural "Drafts <span class=\"count\">(%s)</span>"
 msgstr[0] "임시글 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:224
+#: wp-includes/post.php:239
 msgid "Scheduled <span class=\"count\">(%s)</span>"
 msgid_plural "Scheduled <span class=\"count\">(%s)</span>"
 msgstr[0] "예약됨 <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:217
+#: wp-includes/post.php:232
 msgid "Published <span class=\"count\">(%s)</span>"
 msgid_plural "Published <span class=\"count\">(%s)</span>"
 msgstr[0] "발행됨 <span class=\"count\">(%s)</span>"
@@ -10253,7 +10662,7 @@ msgstr "[%s] 새로운 사용자 만들기"
 
 #. translators: %s: user login
 #: wp-includes/pluggable.php:1830 wp-includes/pluggable.php:1894
-#: wp-login.php:364
+#: wp-login.php:365
 msgid "Username: %s"
 msgstr "사용자명: %s"
 
@@ -10332,7 +10741,7 @@ msgstr "해당 사용자명은 이미 활성화 되었습니다."
 
 #: wp-includes/ms-functions.php:1068
 msgid "Could not create user"
-msgstr "사용자를 생성할 수 없습니다."
+msgstr "사용자를 생성할 수 없습니다"
 
 #: wp-includes/ms-functions.php:1048
 msgid "Invalid activation key."
@@ -10454,7 +10863,7 @@ msgstr "링크 관계"
 msgid "Source"
 msgstr "원본"
 
-#: wp-includes/media.php:3556
+#: wp-includes/media.php:3557
 msgid "Edit Gallery"
 msgstr "갤러리 편집"
 
@@ -10632,9 +11041,9 @@ msgid "Document properties"
 msgstr "문서 속성"
 
 #: wp-includes/class-wp-editor.php:1238 wp-includes/script-loader.php:477
-#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:701
-#: wp-includes/script-loader.php:724 wp-includes/script-loader.php:888
-#: wp-includes/theme.php:2961
+#: wp-includes/script-loader.php:559 wp-includes/script-loader.php:712
+#: wp-includes/script-loader.php:735 wp-includes/script-loader.php:899
+#: wp-includes/theme.php:2962
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "이 페이지에서 벗어나면 현재 수정한 것을 잃을 수 있습니다."
 
@@ -10699,7 +11108,7 @@ msgid "Insert row before"
 msgstr "앞에 줄 삽입"
 
 #: wp-includes/class-wp-editor.php:1126 wp-includes/class-wp-editor.php:1132
-#: wp-includes/class-wp-editor.php:1694 wp-includes/script-loader.php:523
+#: wp-includes/class-wp-editor.php:1702 wp-includes/script-loader.php:523
 msgid "Insert/edit link"
 msgstr "링크 삽입/편집"
 
@@ -10923,7 +11332,7 @@ msgstr "%2$d년 %1$s"
 
 #: wp-includes/general-template.php:972 wp-includes/general-template.php:1187
 msgid "Page not found"
-msgstr "페이지가 없습니다."
+msgstr "페이지가 없습니다"
 
 #. translators: 1: separator, 2: search phrase
 #: wp-includes/general-template.php:1182
@@ -10934,12 +11343,12 @@ msgstr "검색 결과 %1$s %2$s"
 msgid "Site Admin"
 msgstr "사이트 관리"
 
-#: wp-includes/general-template.php:527 wp-login.php:606 wp-login.php:735
-#: wp-login.php:823 wp-login.php:1022
+#: wp-includes/general-template.php:527 wp-login.php:607 wp-login.php:736
+#: wp-login.php:824 wp-login.php:1060
 msgid "Register"
 msgstr "회원가입"
 
-#: wp-includes/general-template.php:398 wp-login.php:1003
+#: wp-includes/general-template.php:398 wp-login.php:1041
 msgid "Remember Me"
 msgstr "기억하기"
 
@@ -10947,39 +11356,39 @@ msgstr "기억하기"
 msgid "Log out"
 msgstr "로그아웃"
 
-#: wp-includes/general-template.php:260 wp-login.php:603 wp-login.php:673
-#: wp-login.php:732 wp-login.php:827
+#: wp-includes/general-template.php:260 wp-login.php:604 wp-login.php:674
+#: wp-login.php:733 wp-login.php:828
 msgid "Log in"
 msgstr "로그인"
 
-#: wp-includes/functions.php:4723
+#: wp-includes/functions.php:4724
 msgid "Manual Offsets"
 msgstr "메뉴얼 오프셋"
 
-#: wp-includes/functions.php:4715 wp-includes/functions.php:4719
+#: wp-includes/functions.php:4716 wp-includes/functions.php:4720
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4670
+#: wp-includes/functions.php:4671
 msgid "Select a city"
 msgstr "도시 선택"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4034
+#: wp-includes/functions.php:4035
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s는 버전 %2$s때부터 대체할 내용이 없이 <strong>사용중단</strong>되었습니다."
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4031
+#: wp-includes/functions.php:4032
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%1$s는 버전 %2$s부터 <strong>사용중단</strong>되었습니다! %3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3842 wp-includes/functions.php:3970
-#: wp-includes/functions.php:4093
+#: wp-includes/functions.php:3843 wp-includes/functions.php:3971
+#: wp-includes/functions.php:4094
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s는 버전 %2$s때부터 대체할 내용이 없이 <strong>사용중단</strong>되었습니다."
 
@@ -10988,40 +11397,40 @@ msgstr "%1$s는 버전 %2$s때부터 대체할 내용이 없이 <strong>사용�
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3839 wp-includes/functions.php:3967
-#: wp-includes/functions.php:4090
+#: wp-includes/functions.php:3840 wp-includes/functions.php:3968
+#: wp-includes/functions.php:4091
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s는 버전 %2$s부터 <strong>사용 중단</strong>되었습니다! 대신 %3$s를 사용하십시오."
 
-#: wp-includes/functions.php:2749 wp-load.php:92
+#: wp-includes/functions.php:2750 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "워드프레스 &rsaquo; 오류"
 
-#: wp-includes/functions.php:2737
+#: wp-includes/functions.php:2738
 msgid "&laquo; Back"
 msgstr "&laquo; 뒤로"
 
-#: wp-includes/functions.php:2612 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2613 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "재시도 하십시오."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2603
+#: wp-includes/functions.php:2604
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "정말로 <a href=\"%s\">로그아웃</a> 하시려나요?"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2596
+#: wp-includes/functions.php:2597
 msgid "You are attempting to log out of %s"
-msgstr "%s에서 로그아웃 하려고 합니다."
+msgstr "%s에서 로그아웃 하려고 합니다"
 
 #: wp-includes/functions.php:2182
 msgid "Could not write file %s"
-msgstr "%s 파일을 저장할 수 없습니다."
+msgstr "%s 파일을 저장할 수 없습니다"
 
 #: wp-includes/functions.php:2136
 msgid "Empty filename"
-msgstr "파일 이름이 비어 있습니다."
+msgstr "파일 이름이 비어 있습니다"
 
 #. translators: %s: directory path
 #: wp-includes/functions.php:1905 wp-includes/functions.php:2174
@@ -11030,7 +11439,7 @@ msgstr "디렉토리 %s를 만들 수 없습니다. 서버에서 부모 디렉�
 
 #: wp-includes/option.php:163
 msgid "%s is a protected WP option and may not be modified"
-msgstr "%s는 WP 옵션으로 보호되고 있습니다. 수정할 수 없습니다."
+msgstr "%s는 WP 옵션으로 보호되고 있습니다. 수정할 수 없습니다"
 
 #. translators: used between list items, there is a space after the comma
 #: wp-includes/class-wp-theme.php:739
@@ -11154,7 +11563,7 @@ msgstr "카테고리 선택"
 
 #: wp-includes/widgets/class-wp-widget-text.php:489
 msgid "Automatically add paragraphs"
-msgstr "단락을 자동으로 추가합니다."
+msgstr "단락을 자동으로 추가합니다"
 
 #: wp-includes/widgets/class-wp-widget-text.php:42
 msgid "Text"
@@ -11238,12 +11647,12 @@ msgstr "매 시간"
 msgid "This argument has changed to an array to match the behavior of the other cron functions."
 msgstr "이 인수는 배열에 따른 다른 크론 기능의 동작과 일치하도록 변경되었습니다."
 
-#: wp-includes/comment.php:2129
+#: wp-includes/comment.php:2143
 msgid "Could not update comment status"
-msgstr "댓글 상태를 업데이트할 수 없습니다."
+msgstr "댓글 상태를 업데이트할 수 없습니다"
 
-#: wp-includes/comment.php:670 wp-includes/comment.php:673
-#: wp-includes/comment.php:676
+#: wp-includes/comment.php:684 wp-includes/comment.php:687
+#: wp-includes/comment.php:690
 msgid "Duplicate comment detected; it looks as though you&#8217;ve already said that!"
 msgstr "중복된 댓글이 발견되었습니다; 이미 댓글을 다신 것 같습니다!"
 
@@ -11251,19 +11660,19 @@ msgstr "중복된 댓글이 발견되었습니다; 이미 댓글을 다신 것 �
 msgid "Unapproved"
 msgstr "받아들이지 않기"
 
-#: wp-includes/comment-template.php:2250
+#: wp-includes/comment-template.php:2253
 msgid "Post Comment"
 msgstr "댓글 달기"
 
-#: wp-includes/comment-template.php:2249
+#: wp-includes/comment-template.php:2252
 msgid "Cancel reply"
 msgstr "응답 취소"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2244
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
 msgid "Leave a Reply to %s"
 msgstr "%s 에 답글 남기기"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2243
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
 msgid "Leave a Reply"
 msgstr "답글 남기기"
 
@@ -11334,7 +11743,7 @@ msgstr "입력한 댓글이 검토를 기다리고 있습니다."
 msgid "Comments are closed."
 msgstr "댓글이 닫혀있습니다."
 
-#: wp-includes/script-loader.php:855
+#: wp-includes/script-loader.php:866
 msgid "Select default color"
 msgstr "기본 색상 선택"
 
@@ -11353,10 +11762,10 @@ msgstr "댓글 (%s)"
 
 #: wp-includes/category-template.php:1131
 msgid "Tags: "
-msgstr "태그:"
+msgstr "태그: "
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2222
+#: wp-includes/comment-template.php:2225
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "<a href=\"%s\">로그인</a>을 해야 댓글을 남길 수 있습니다."
 
@@ -11388,7 +11797,7 @@ msgstr "%s에 댓글"
 
 #: wp-includes/class-wp-customize-nav-menus.php:276
 #: wp-includes/script-loader.php:242 wp-includes/script-loader.php:527
-#: wp-includes/script-loader.php:886
+#: wp-includes/script-loader.php:897
 msgid "No results found."
 msgstr "결과 없음."
 
@@ -11400,7 +11809,7 @@ msgstr "뒷 페이지 &raquo;"
 msgid "&laquo; Previous Page"
 msgstr "&laquo; 앞 페이지"
 
-#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3025
+#: wp-includes/class-wp-xmlrpc-server.php:3634 wp-includes/comment.php:3039
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:465
 msgid "Sorry, comments are closed for this item."
 msgstr "죄송합니다, 이 항목에는 댓글을 달 수 없습니다."
@@ -11410,17 +11819,17 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "약간 이상하고 성가신 이유로, 이 글은 편집할 수 없습니다."
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3715
+#: wp-includes/functions.php:3716
 msgid "Widgets"
 msgstr "위젯"
 
-#: wp-includes/comment-template.php:2202
+#: wp-includes/comment-template.php:2203
 msgid "Website"
 msgstr "웹사이트"
 
 #: wp-includes/taxonomy.php:517
 msgid "Separate tags with commas"
-msgstr "각 태그를 쉼표로 분리하세요."
+msgstr "각 태그를 쉼표로 분리하세요"
 
 #: wp-includes/widgets/class-wp-nav-menu-widget.php:137
 #: wp-includes/widgets/class-wp-widget-archives.php:160
@@ -11439,7 +11848,7 @@ msgstr "각 태그를 쉼표로 분리하세요."
 msgid "Title:"
 msgstr "타이틀:"
 
-#: wp-includes/script-loader.php:756
+#: wp-includes/script-loader.php:767
 msgid "Plugin:"
 msgstr "플러그인:"
 
@@ -11449,7 +11858,7 @@ msgstr "플러그인:"
 #: wp-includes/customize/class-wp-customize-media-control.php:235
 #: wp-includes/customize/class-wp-customize-media-control.php:245
 #: wp-includes/customize/class-wp-customize-media-control.php:255
-#: wp-includes/script-loader.php:854
+#: wp-includes/script-loader.php:865
 msgid "Default"
 msgstr "기본"
 
@@ -11468,9 +11877,9 @@ msgstr "날짜 표시 형식"
 
 #: wp-includes/class-wp-xmlrpc-server.php:610
 msgid "Allow people to post comments on new articles"
-msgstr "댓글을 쓸 수 있게 합니다."
+msgstr "댓글을 쓸 수 있게 합니다"
 
-#: wp-includes/comment-template.php:2200 wp-login.php:809
+#: wp-includes/comment-template.php:2201 wp-login.php:810
 msgid "Email"
 msgstr "이메일"
 
@@ -11487,7 +11896,7 @@ msgstr "첫번째 글"
 msgid "Settings"
 msgstr "설정"
 
-#: wp-includes/post.php:1387
+#: wp-includes/post.php:1446
 msgctxt "page"
 msgid "Add New"
 msgstr "새 페이지 추가"
@@ -11505,7 +11914,7 @@ msgstr "테마"
 msgid "Sites"
 msgstr "사이트"
 
-#: wp-signup.php:178
+#: wp-signup.php:180
 msgid "Yes"
 msgstr "예"
 
@@ -11513,11 +11922,11 @@ msgstr "예"
 msgid "Edit Category"
 msgstr "카테고리 편집"
 
-#: wp-includes/general-template.php:399 wp-login.php:973 wp-login.php:1005
+#: wp-includes/general-template.php:399 wp-login.php:1011 wp-login.php:1043
 msgid "Log In"
 msgstr "로그인"
 
-#: wp-login.php:699
+#: wp-login.php:700
 msgid "Strength indicator"
 msgstr "강도 표시기"
 
@@ -11537,7 +11946,7 @@ msgstr "<strong>오류</strong>: 이 이메일 주소는 이미 등록되어 있
 
 #: wp-includes/user.php:2349
 msgid "<strong>ERROR</strong>: Please enter a username."
-msgstr "<strong>오류</strong>:사용자명을 적어주세요"
+msgstr "<strong>오류</strong>:사용자명을 적어주세요."
 
 #: wp-includes/class-wp-editor.php:1200 wp-includes/media-template.php:965
 #: wp-includes/widgets/class-wp-widget-media-image.php:70
@@ -11600,12 +12009,12 @@ msgid "Help"
 msgstr "도움말"
 
 #: wp-includes/media.php:3143 wp-includes/script-loader.php:526
-#: wp-includes/script-loader.php:743
+#: wp-includes/script-loader.php:754
 #: wp-includes/widgets/class-wp-widget-recent-posts.php:91
 msgid "(no title)"
 msgstr "(제목 없음)"
 
-#: wp-includes/admin-bar.php:550 wp-includes/post.php:1390
+#: wp-includes/admin-bar.php:550 wp-includes/post.php:1449
 msgid "New Post"
 msgstr "새 글"
 
@@ -11613,7 +12022,7 @@ msgstr "새 글"
 msgid "Edit Media"
 msgstr "미디어 편집"
 
-#: wp-includes/post.php:1390
+#: wp-includes/post.php:1449
 msgid "New Page"
 msgstr "새 페이지"
 
@@ -11622,9 +12031,9 @@ msgid "Select"
 msgstr "선택"
 
 #: wp-includes/class-wp-customize-manager.php:5301
-#: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1695
+#: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1703
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
-#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1126
+#: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1137
 msgid "Close"
 msgstr "닫기"
 
@@ -11649,16 +12058,16 @@ msgstr "미분류"
 msgid "Links"
 msgstr "링크"
 
-#: wp-includes/post.php:1391
+#: wp-includes/post.php:1450
 msgid "View Page"
 msgstr "페이지 보기"
 
-#: wp-includes/post.php:2318
+#: wp-includes/post.php:2377
 msgid "Images"
 msgstr "이미지"
 
 #: wp-includes/admin-bar.php:904 wp-includes/admin-bar.php:905
-#: wp-includes/class-wp-editor.php:1716 wp-includes/media.php:3496
+#: wp-includes/class-wp-editor.php:1724 wp-includes/media.php:3496
 msgid "Search"
 msgstr "검색"
 
@@ -11683,32 +12092,32 @@ msgid "Add or remove tags"
 msgstr "태그 추가/제거"
 
 #: wp-includes/media.php:3499 wp-includes/script-loader.php:524
-#: wp-includes/script-loader.php:692 wp-includes/script-loader.php:773
+#: wp-includes/script-loader.php:703 wp-includes/script-loader.php:784
 msgid "Update"
 msgstr "업데이트"
 
-#: wp-includes/script-loader.php:696
+#: wp-includes/script-loader.php:707
 msgid "Public"
 msgstr "공개"
 
-#: wp-includes/script-loader.php:697
+#: wp-includes/script-loader.php:708
 msgid "Public, Sticky"
 msgstr "공개, 붙박이"
 
-#: wp-includes/post.php:705 wp-includes/post.php:725
-#: wp-includes/script-loader.php:695
+#: wp-includes/post.php:748 wp-includes/post.php:768
+#: wp-includes/script-loader.php:706
 msgid "Private"
 msgstr "비공개"
 
-#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:681
+#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:692
 msgid "OK"
 msgstr "OK"
 
-#: wp-includes/script-loader.php:699
+#: wp-includes/script-loader.php:710
 msgid "Privately Published"
 msgstr "비공개로 발행됨"
 
-#: wp-includes/script-loader.php:693
+#: wp-includes/script-loader.php:704
 msgid "Save as Pending"
 msgstr "대기중인 글 저장하기"
 
@@ -11716,12 +12125,12 @@ msgstr "대기중인 글 저장하기"
 msgid "Image URL"
 msgstr "이미지 URL"
 
-#: wp-includes/class-wp-editor.php:1103
+#: wp-includes/class-wp-editor.php:1103 wp-includes/media.php:4022
 msgid "Media"
 msgstr "미디어"
 
 #: wp-includes/media-template.php:330 wp-includes/media-template.php:528
-#: wp-includes/media.php:3568
+#: wp-includes/media.php:3569
 msgid "Edit Image"
 msgstr "이미지 편집"
 
@@ -11804,11 +12213,11 @@ msgstr "작은 사진(썸네일)"
 msgid "Redo"
 msgstr "다시하기"
 
-#: wp-includes/general-template.php:397 wp-login.php:992
+#: wp-includes/general-template.php:397 wp-login.php:1030
 msgid "Password"
 msgstr "비밀번호"
 
-#: wp-login.php:805
+#: wp-login.php:806
 msgid "Username"
 msgstr "사용자명"
 
@@ -11848,7 +12257,7 @@ msgid "Reply"
 msgstr "응답"
 
 #: wp-includes/class-wp-customize-manager.php:4622
-#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:694
+#: wp-includes/script-loader.php:551 wp-includes/script-loader.php:705
 msgid "Save Draft"
 msgstr "임시 글로 저장하기"
 
@@ -11860,9 +12269,9 @@ msgstr "태그"
 msgid "Content"
 msgstr "내용"
 
-#: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1741
+#: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1749
 #: wp-includes/media.php:3498 wp-includes/script-loader.php:510
-#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:682
+#: wp-includes/script-loader.php:561 wp-includes/script-loader.php:693
 msgid "Cancel"
 msgstr "취소"
 
@@ -11885,12 +12294,13 @@ msgid "RSS"
 msgstr "RSS"
 
 #: wp-includes/class-wp-theme.php:732 wp-includes/comment-template.php:31
+#: wp-includes/comment.php:3327
 msgid "Anonymous"
 msgstr "익명"
 
 #: wp-includes/customize/class-wp-customize-nav-menu-control.php:55
 #: wp-includes/customize/class-wp-widget-area-customize-control.php:61
-#: wp-includes/script-loader.php:880
+#: wp-includes/script-loader.php:891
 msgid "Done"
 msgstr "완료"
 
@@ -11898,15 +12308,15 @@ msgstr "완료"
 msgid "Users"
 msgstr "사용자"
 
-#: wp-includes/post.php:1389
+#: wp-includes/post.php:1448
 msgid "Edit Post"
 msgstr "이 글 편집"
 
-#: wp-includes/post.php:1391
+#: wp-includes/post.php:1450
 msgid "View Post"
 msgstr "글 보기"
 
-#: wp-includes/post.php:1387
+#: wp-includes/post.php:1446
 msgctxt "post"
 msgid "Add New"
 msgstr "새 글 쓰기"
@@ -11930,7 +12340,7 @@ msgstr "없음"
 msgid "Description"
 msgstr "설명"
 
-#: wp-includes/comment-template.php:2198
+#: wp-includes/comment-template.php:2199
 msgid "Name"
 msgstr "이름"
 
@@ -11949,11 +12359,11 @@ msgstr "타겟"
 msgid "Categories"
 msgstr "카테고리"
 
-#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:722
+#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:733
 msgid "Save"
 msgstr "저장하기"
 
-#: wp-includes/class-wp-editor.php:1744 wp-includes/script-loader.php:525
+#: wp-includes/class-wp-editor.php:1752 wp-includes/script-loader.php:525
 msgid "Add Link"
 msgstr "링크 추가"
 
@@ -11982,16 +12392,16 @@ msgid "Excerpt"
 msgstr "요약"
 
 #: wp-includes/class-wp-customize-manager.php:4617
-#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:690
+#: wp-includes/script-loader.php:549 wp-includes/script-loader.php:701
 msgid "Publish"
 msgstr "공개하기"
 
-#: wp-includes/script-loader.php:656
+#: wp-includes/comment.php:3258 wp-includes/script-loader.php:656
 msgid "Comments"
 msgstr "댓글"
 
 #: wp-includes/class-wp-customize-widgets.php:751
-#: wp-includes/class-wp-editor.php:1261 wp-includes/media.php:3537
+#: wp-includes/class-wp-editor.php:1261 wp-includes/media.php:3538
 msgid "Apply"
 msgstr "적용"
 
@@ -12010,7 +12420,7 @@ msgstr "&#8220;%s&#8221;에 대한 검색 결과"
 msgid "Edit"
 msgstr "편집"
 
-#: wp-signup.php:182
+#: wp-signup.php:184
 msgid "No"
 msgstr "아니오"
 
@@ -12018,16 +12428,16 @@ msgstr "아니오"
 msgid "Are you sure you want to do this?"
 msgstr "이 작업을 수행하시겠습니까?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2218
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
 msgctxt "noun"
 msgid "Comment"
 msgstr "댓글"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1111
-#: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1700
+#: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1708
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
 #: wp-includes/media-template.php:376 wp-includes/media-template.php:557
-#: wp-includes/media.php:3494
+#: wp-includes/media.php:3494 wp-includes/media.php:4017
 #: wp-includes/widgets/class-wp-widget-media-image.php:105
 msgid "URL"
 msgstr "URL"
@@ -12045,20 +12455,20 @@ msgstr "로그아웃"
 msgid "Visit Site"
 msgstr "사이트 방문하기"
 
-#: wp-includes/class-wp-editor.php:1634
+#: wp-includes/class-wp-editor.php:1642
 msgid "Y/m/d"
 msgstr "Y-m-d"
 
-#: wp-includes/post.php:703 wp-includes/post.php:724
+#: wp-includes/post.php:746 wp-includes/post.php:767
 msgid "Draft"
 msgstr "임시 글"
 
-#: wp-includes/post.php:704
+#: wp-includes/post.php:747
 msgid "Pending Review"
 msgstr "검토중"
 
-#: wp-includes/post.php:706 wp-includes/post.php:726
-#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:700
+#: wp-includes/post.php:749 wp-includes/post.php:769
+#: wp-includes/script-loader.php:550 wp-includes/script-loader.php:711
 msgid "Published"
 msgstr "발행됨"
 
@@ -12067,35 +12477,35 @@ msgstr "발행됨"
 msgid "Title"
 msgstr "타이틀"
 
-#: wp-includes/post.php:1394
+#: wp-includes/post.php:1453
 msgid "No posts found."
 msgstr "글을 찾을 수 없습니다."
 
-#: wp-activate.php:134 wp-includes/post-template.php:1611
+#: wp-activate.php:136 wp-includes/post-template.php:1611
 msgid "Password:"
 msgstr "비밀번호:"
 
-#: wp-activate.php:133 wp-signup.php:228
+#: wp-activate.php:135 wp-signup.php:230
 msgid "Username:"
 msgstr "사용자명:"
 
-#: wp-activate.php:122
+#: wp-activate.php:124
 msgid "An error occurred during the activation"
 msgstr "인증하는 도중 에러가 발생했습니다"
 
-#: wp-activate.php:97 wp-activate.php:130
+#: wp-activate.php:99 wp-activate.php:132
 msgid "Your account is now active!"
 msgstr "계정이 활성화되었습니다!"
 
-#: wp-activate.php:85 wp-includes/script-loader.php:830
-#: wp-includes/script-loader.php:831
+#: wp-activate.php:87 wp-includes/script-loader.php:841
+#: wp-includes/script-loader.php:842
 msgid "Activate"
 msgstr "활성화"
 
-#: wp-activate.php:81
+#: wp-activate.php:83
 msgid "Activation Key:"
 msgstr "인증 키:"
 
-#: wp-activate.php:78
+#: wp-activate.php:80
 msgid "Activation Key Required"
 msgstr "인증 키가 필요합니다"

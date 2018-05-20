@@ -16,7 +16,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-defined( 'ABSPATH' ) or die;
+defined( 'THE_SEO_FRAMEWORK_PLUGIN_BASENAME' ) or die;
 
 /**
  * This file holds functions for upgrading the plugin.
@@ -85,6 +85,10 @@ function the_seo_framework_do_upgrade() {
 		the_seo_framework_do_upgrade_3001();
 		$version = '3001';
 	}
+	if ( $version < '3060' ) {
+		the_seo_framework_do_upgrade_3060();
+		$version = '3060';
+	}
 
 	do_action( 'the_seo_framework_upgraded' );
 }
@@ -140,6 +144,7 @@ function the_seo_framework_output_upgrade_notices() {
 		the_seo_framework()->do_dismissible_notice( 'SEO: ' . $notice, 'updated' );
 	}
 }
+
 
 /**
  * Upgrades term metadata for version 2701.
@@ -202,33 +207,44 @@ function the_seo_framework_do_upgrade_2900() {
  * Invalidates object cache.
  *
  * @since 3.0.0
+ * @since 3.0.6 'display_character_counter' option now correctly defaults to 1.
  */
 function the_seo_framework_do_upgrade_3001() {
 
 	$tsf = the_seo_framework();
-	$previous_version = the_seo_framework_previous_db_version();
 
 	$timestamp_format = $tsf->get_option( 'sitemap_timestamps', false );
 	//= Only change if option exists. Falls back to default upgrader instead.
 	if ( '' !== $timestamp_format ) {
 		$tsf->update_option( 'timestamps_format', (string) (int) $timestamp_format );
 		//= Only set notice if an actual upgrade took place. (redundancy check)
-		if ( $previous_version > '0' ) {
+		if ( the_seo_framework_previous_db_version() > '0' ) {
 			the_seo_framework_add_upgrade_notice(
 				esc_html__( 'The previous sitemap timestamp settings have been converted into new global timestamp settings.', 'autodescription' )
 			);
 		}
 	}
 
-	if ( $previous_version > '0' ) {
-		$tsf->update_option( 'display_character_counter', 1 );
-		$tsf->update_option( 'display_pixel_counter', 1 );
-	} else {
-		$tsf->update_option( 'display_character_counter', 0 );
-		$tsf->update_option( 'display_pixel_counter', 1 );
-	}
+	$tsf->update_option( 'display_character_counter', 1 );
+	$tsf->update_option( 'display_pixel_counter', 1 );
 
 	$tsf->delete_object_cache();
 
 	update_option( 'the_seo_framework_upgraded_db_version', '3001' );
+}
+
+/**
+ * Loads suggestion for TSFEM.
+ * Also deletes sitemap cache.
+ *
+ * @since 3.0.6
+ */
+function the_seo_framework_do_upgrade_3060() {
+
+	the_seo_framework()->delete_cache( 'sitemap' );
+
+	require THE_SEO_FRAMEWORK_DIR_PATH_FUNCT . 'tsfem-suggestion.php';
+	the_seo_framework_load_extension_manager_suggestion();
+
+	update_option( 'the_seo_framework_upgraded_db_version', '3060' );
 }

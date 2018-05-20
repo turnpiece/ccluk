@@ -3,7 +3,7 @@
  * Functions for getting and setting the plugin's registration status.
  *
  * @package   SocialWarfare\Functions
- * @copyright Copyright (c) 2017, Warfare Plugins, LLC
+ * @copyright Copyright (c) 2018, Warfare Plugins, LLC
  * @license   GPL-3.0+
  * @since     1.0.0
  */
@@ -59,13 +59,14 @@ function swp_get_registration_key( $domain, $context = 'api' ) {
  * Once per week, we'll ping our server to ask if the license key is still valid.
  *
  * @since  2.3.3 - Created the function to work for all addons, not just the pro addon
+ * @since  3.0.6 | 14 MAY 2018 | Added check for array key to prevent undefined index notice.
  * @param string The unique key for the addon
  * @return bool True if the plugin is registered, false otherwise.
  */
 function is_swp_addon_registered($key) {
 
 	// Get the plugin options from the database
-	$options = get_option( 'socialWarfareOptions' );
+	$options = get_option( 'social_warfare_settings' );
 	$is_registered = false;
 
 	// Get the timestamps setup for comparison to see if a week has passed since our last check
@@ -91,6 +92,11 @@ function is_swp_addon_registered($key) {
         $store_url = 'https://warfareplugins.com';
         $registration_array = array();
         $registration_array = apply_filters( 'swp_registrations' , $registration_array );
+
+        if ( !array_key_exists( $key, $registration_array ) ) :
+            return $is_registered;
+        endif;
+
         $item_id = $registration_array[$key]['product_id'];
 
 
@@ -113,19 +119,19 @@ function is_swp_addon_registered($key) {
 				$is_registered = false;
 				$options[$key.'_license_key'] = '';
 				$options[$key.'_license_key_timestamp'] = $current_time;
-				update_option( 'socialWarfareOptions' , $options );
+				update_option( 'social_warfare_settings' , $options );
 
 			// If the property is some other status, just go with it.
 			} else {
 				$options[$key.'_license_key_timestamp'] = $current_time;
-				update_option( 'socialWarfareOptions' , $options );
+				update_option( 'social_warfare_settings' , $options );
 				$is_registered = true;
 			}
 
 		// If we recieved no response from the server, we'll just check again next week
 		} else {
 			$options[$key.'_license_key_timestamp'] = $current_time;
-			update_option( 'socialWarfareOptions' , $options );
+			update_option( 'social_warfare_settings' , $options );
 			$is_registered = true;
 		}
 	}
@@ -191,10 +197,10 @@ function swp_register_plugin() {
 			if( isset($license_data->license) && 'valid' == $license_data->license ) {
 
 				$current_time = time();
-				$options = get_option( 'socialWarfareOptions' );
+				$options = get_option( 'social_warfare_settings' );
 				$options[$name_key.'_license_key'] = $license;
 				$options[$name_key.'_license_key_timestamp'] = $current_time;
-				update_option( 'socialWarfareOptions' , $options );
+				update_option( 'social_warfare_settings' , $options );
 
 				echo json_encode($license_data);
 				wp_die();
@@ -242,7 +248,7 @@ add_action( 'wp_ajax_swp_unregister_plugin', 'swp_unregister_plugin' );
 function swp_unregister_plugin() {
 
     // Setup the variables needed for processing
-	$options = get_option( 'socialWarfareOptions' );
+	$options = get_option( 'social_warfare_settings' );
 	$name_key = $_POST['name_key'];
 	$item_id = $_POST['item_id'];
     $site_url = swp_get_site_url();
@@ -273,18 +279,18 @@ function swp_unregister_plugin() {
 		// If the deactivation was valid update the database
 		if( isset($license_data->license) && $license_data->license == 'valid' ) {
 
-			$options = get_option( 'socialWarfareOptions' );
+			$options = get_option( 'social_warfare_settings' );
 			$options[$name_key.'_license_key'] = '';
-			update_option( 'socialWarfareOptions' , $options );
+			update_option( 'social_warfare_settings' , $options );
 			echo json_encode($license_data);
 			wp_die();
 
 		// If the API request didn't work, just deactivate locally anyways
 		} else {
 
-			$options = get_option( 'socialWarfareOptions' );
+			$options = get_option( 'social_warfare_settings' );
 			$options[$name_key.'_license_key'] = '';
-			update_option( 'socialWarfareOptions' , $options );
+			update_option( 'social_warfare_settings' , $options );
 			echo json_encode($license_data);
 			wp_die();
 		}

@@ -1,4 +1,4 @@
-.nc_socialPanel {
+.swp_social_panel {
 	clear: both;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -29,16 +29,16 @@
 	justify-content: space-between;
 }
 
-.nc_socialPanel:not(.nc_floater):not(.nc_socialPanelSide) {
+.swp_social_panel:not(.nc_floater):not(.swp_social_panelSide) {
 	width: 100%!important;
 }
 
-.nc_wrapper .nc_socialPanel {
+.nc_wrapper .swp_social_panel {
 	margin-bottom: 10px!important;
 	margin-top: 10px!important;
 }
 
-div.nc_socialPanel .nc_tweetContainer {
+div.swp_social_panel .nc_tweetContainer {
 	-webkit-border-radius: 2px;
 	border-radius: 2px;
 	cursor: pointer;
@@ -51,11 +51,9 @@ div.nc_socialPanel .nc_tweetContainer {
 	text-align: center;
 	-webkit-transition: all 0.1s linear;
 	transition: all 0.1s linear;
-
-	border-size: 1px;
 }
 
-div.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer {
+div.swp_social_panel:not(.swp_social_panelSide) .nc_tweetContainer {
 	-webkit-box-flex: 1;
 	-moz-box-flex: 1;
 	-webkit-flex: 1;
@@ -63,8 +61,8 @@ div.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer {
 	flex: 1;
 }
 
-.nc_socialPanel .nc_tweetContainer a.nc_tweet,
-.nc_socialPanel .totes .swp_count {
+.swp_social_panel .nc_tweetContainer a.nc_tweet,
+.swp_social_panel .total_shares .swp_count {
 	display: block;
 	display: -webkit-box;
 	display: -webkit-flex;
@@ -88,19 +86,19 @@ div.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer {
 	flex-flow: row wrap;
 }
 
-.nc_socialPanel:not(.nc_floater):not(.nc_socialPanelSide).swp_shift {
+.swp_social_panel:not(.nc_floater):not(.swp_social_panelSide).swp_shift {
  	padding:0 10px;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer:nth-child(1) {
+.swp_social_panel:not(.swp_social_panelSide) .nc_tweetContainer:nth-child(1) {
 	margin-left: 0;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer:nth-last-child(1) {
+.swp_social_panel:not(.swp_social_panelSide) .nc_tweetContainer:nth-last-child(1) {
 	margin-right: 0;
 }
 
-.nc_socialPanel a .swp_count:not(.swp_hide) {
+.swp_social_panel a .swp_count:not(.swp_hide) {
 	display: inline-block;
 	line-height: 32px;
 	margin: 0;
@@ -113,43 +111,43 @@ div.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer {
 	flex: 1;
 }
 
-.nc_socialPanel a .swp_count.swp_hide {
+.swp_social_panel a .swp_count.swp_hide {
 	margin: 0 auto;
 }
 
-.nc_socialPanel span:before {
+.swp_social_panel span:before {
 	content: initial!important;
 }
 
-.nc_socialPanel .totes .swp_count {
+.swp_social_panel .total_shares .swp_count {
 	line-height: 30px;
 }
 
-.nc_socialPanel span.swp_count {
+.swp_social_panel span.swp_count {
 	font-size: 14px;
 }
 
-.nc_socialPanel span.iconFiller {
+.swp_social_panel span.iconFiller {
 	font-size: 18px;
 	margin: 0 auto;
 }
 
-.nc_socialPanel.notMobile .nc_tweetContainer:nth-child(1) {
+.swp_social_panel.notMobile .nc_tweetContainer:nth-child(1) {
 	margin-left: 0;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) {
+.swp_social_panel:not(.swp_social_panelSide) {
 	-webkit-transition: opacity 0.2s ease-in-out;
 	transition: opacity 0.2s ease-in-out;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) div.totes.totesalt:nth-child(1) {
+.swp_social_panel:not(.swp_social_panelSide) div.total_shares.total_sharesalt:nth-child(1) {
 	margin-left: 0;
 	margin-right: 15px;
 	padding-left: 0;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) div.totes.totesalt:nth-last-child(1) {
+.swp_social_panel:not(.swp_social_panelSide) div.total_shares.total_sharesalt:nth-last-child(1) {
 	margin-right: 0;
 	padding-right: 0;
 }
@@ -171,11 +169,11 @@ span.swp_share {
 	vertical-align: middle;
 }
 
-.nc_socialPanelSide span.swp_share {
+.swp_social_panelSide span.swp_share {
 	margin: 0;
 }
 
-.nc_socialPanel .sw {
+.swp_social_panel .sw {
 	float: left;
 	height: 30px;
 	line-height: 32px;
@@ -193,7 +191,7 @@ span.swp_share {
 	transition: width 0.1s linear;
 }
 
-.nc_socialPanel .iconFiller {
+.swp_social_panel .iconFiller {
 	width: 30px;
 }
 
@@ -202,7 +200,7 @@ span.spaceManWilly {
 	width: 120px;
 }
 
-.nc_socialPanel .totes {
+.swp_social_panel .total_shares {
 	background: #c4c4c4;
 	border: 1px solid #e08a0f;
 	-webkit-border-radius: 2px;
@@ -220,21 +218,21 @@ span.spaceManWilly {
 	flex: none!important;
 }
 
-.nc_socialPanel div.totes.totesalt,
-.nc_socialPanel:hover div.totes.totesalt:not(:nth-child(1)) {
+.swp_social_panel div.total_shares.total_sharesalt,
+.swp_social_panel:hover div.total_shares.total_sharesalt:not(:nth-child(1)) {
 	background: transparent!important;
 	border: none;
 	color: #474b4d;
 	margin-left: 0!important;
 }
 
-div.nc_socialPanel:hover div.totes.totesalt:not(:nth-child(1)) {
+div.swp_social_panel:hover div.total_shares.total_sharesalt:not(:nth-child(1)) {
 	background: transparent;
 	color: #474b4d;
 	margin-left: 10px;
 }
 
-.nc_socialPanel .totes.totesalt .swp_label {
+.swp_social_panel .total_shares.total_sharesalt .swp_label {
 	color: #474b4d;
 	font-size: 10px;
 	letter-spacing: 0;
@@ -242,24 +240,24 @@ div.nc_socialPanel:hover div.totes.totesalt:not(:nth-child(1)) {
 	vertical-align: middle;
 }
 
-.nc_socialPanel .totes .swp_label {
+.swp_social_panel .total_shares .swp_label {
 	font-size: 10px;
 	vertical-align: middle;
 }
 
-.nc_socialPanel .totes.totesalt .swp_count {
+.swp_social_panel .total_shares.total_sharesalt .swp_count {
 	color: #474b4d;
 	font-size: 24px;
 }
 
-.nc_socialPanel:hover .totes,
-.nc_socialPanel.swp_fullColor .totes,
-.nc_socialPanel.swp_fade .totes,
-.nc_socialPanel.swp_customFull:hover div.totes {
+.swp_social_panel:hover .total_shares,
+.swp_social_panel.swp_full_color .total_shares,
+.swp_social_panel.swp_fade .total_shares,
+.swp_social_panel.swp_customFull:hover div.total_shares {
 	background: #e08a0f;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) .nc_tweetContainer.totes.totesalt:before {
+.swp_social_panel:not(.swp_social_panelSide) .nc_tweetContainer.total_shares.total_sharesalt:before {
 	content: "o";
 	display: inline-block;
 	font-family: sw-icon-font;
@@ -267,7 +265,7 @@ div.nc_socialPanel:hover div.totes.totesalt:not(:nth-child(1)) {
 	vertical-align: top;
 }
 
-.nc_socialPanel:not(.nc_socialPanelSide) .totes.totesalt .swp_count {
+.swp_social_panel:not(.swp_social_panelSide) .total_shares.total_sharesalt .swp_count {
 	display: inline-block;
 	line-height: 0;
 	margin-left: 8px;
@@ -286,30 +284,30 @@ span.swp_label {
 	text-transform: uppercase;
 }
 
-.nc_socialPanelSide span.swp_label {
+.swp_social_panelSide span.swp_label {
 	margin-top: 0;
 }
 
-.nc_socialPanel.swp_leaf .nc_tweetContainer {
+.swp_social_panel.swp_leaf .nc_tweetContainer {
 	-webkit-border-radius: 15px 0!important;
 	border-radius: 15px 0!important;
 	border-width: 1px;
 }
 
-.nc_socialPanel.swp_pill .nc_tweetContainer {
+.swp_social_panel.swp_pill .nc_tweetContainer {
 	-webkit-border-radius: 50px;
 	border-radius: 50px;
 	border-width: 1px;
 }
 
-.nc_socialPanel.swp_shift .nc_tweetContainer:not(.totes) {
+.swp_social_panel.swp_shift .nc_tweetContainer:not(.total_shares) {
 	border-width: 1px;
 	-moz-transform: skew(-25deg);
 	-o-transform: skew(-25deg);
 	-webkit-transform: skew(-25deg);
 }
 
-.nc_socialPanel.swp_shift .nc_tweetContainer a {
+.swp_social_panel.swp_shift .nc_tweetContainer a {
 	-moz-transform: skew(25deg);
 	-o-transform: skew(25deg);
 	-webkit-transform: skew(25deg);
@@ -324,567 +322,569 @@ span.swp_label {
 	margin: 0!important;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .googlePlus,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .googlePlus:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .googlePlus:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_google_plus,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_google_plus:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_google_plus:not(:hover) {
 	border: 1px solid #df4b37;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .twitter,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .twitter:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .twitter:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_twitter,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_twitter:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_twitter:not(:hover) {
 	border: 1px solid #429cd6;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_fb,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_fb:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_fb:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_facebook,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_facebook:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_facebook:not(:hover) {
 	border: 1px solid #3a589e;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .nc_pinterest,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .nc_pinterest:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .nc_pinterest:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_pinterest,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_pinterest:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_pinterest:not(:hover) {
 	border: 1px solid #cd2029;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .linkedIn,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .linkedIn:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .linkedIn:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_linkedin,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_linkedin:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_linkedin:not(:hover) {
 	border: 1px solid #0d77b7;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_tumblr,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_tumblr:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_tumblr:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_tumblr,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_tumblr:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_tumblr:not(:hover) {
 	border: 1px solid #39475d;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_stumbleupon,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_stumbleupon:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_stumbleupon:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_stumbleupon,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_stumbleupon:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_stumbleupon:not(:hover) {
 	border: 1px solid #ef5025;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_yummly,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_yummly:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_yummly:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_yummly,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_yummly:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_yummly:not(:hover) {
 	border: 1px solid #e26426;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_reddit,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_reddit:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_reddit:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_reddit,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_reddit:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_reddit:not(:hover) {
 	border: 1px solid #f04b23;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_email,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_email:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_email:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_email,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_email:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_email:not(:hover) {
 	border: 1px solid #6bcce9;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_whatsapp,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_whatsapp:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_whatsapp:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_whatsapp,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_whatsapp:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_whatsapp:not(:hover) {
 	border: 1px solid #71c169;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_pocket,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_pocket:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_pocket:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_pocket,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_pocket:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_pocket:not(:hover) {
 	border: 1px solid #ef4056;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_buffer,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_buffer:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_buffer:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_buffer,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_buffer:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_buffer:not(:hover) {
 	border: 1px solid #323b43;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_hacker_news,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_hacker_news:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_hacker_news:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_hacker_news,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_hacker_news:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_hacker_news:not(:hover) {
 	border: 1px solid #d85623;
 }
 
-.nc_socialPanel.swp_flatFresh.swp_d_fullColor .swp_flipboard,
-html body .nc_socialPanel.swp_flatFresh.swp_i_fullColor .swp_flipboard:hover,
-body .nc_socialPanel.swp_flatFresh.swp_o_fullColor:hover .swp_flipboard:not(:hover) {
+.swp_social_panel.swp_flat_fresh.swp_default_full_color .swp_flipboard,
+html body .swp_social_panel.swp_flat_fresh.swp_individual_full_color .swp_flipboard:hover,
+body .swp_social_panel.swp_flat_fresh.swp_other_full_color:hover .swp_flipboard:not(:hover) {
 	border: 1px solid #bf2626;
 }
 
-.nc_socialPanel.swp_d_fullColor .googlePlus,
-html body .nc_socialPanel.swp_i_fullColor .googlePlus:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .googlePlus {
+.swp_social_panel.swp_default_full_color .swp_google_plus,
+html body .swp_social_panel.swp_individual_full_color .swp_google_plus:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_google_plus {
 	background: #df4b37;
 	border: 1px solid #c44133;
 }
 
-.nc_socialPanel.swp_d_fullColor .twitter,
-html body .nc_socialPanel.swp_i_fullColor .twitter:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .twitter {
+.swp_social_panel.swp_default_full_color .swp_twitter,
+html body .swp_social_panel.swp_individual_full_color .swp_twitter:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_twitter {
 	background: #429cd6;
 	border: 1px solid #3c87b2;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_fb,
-html body .nc_socialPanel.swp_i_fullColor .swp_fb:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_fb {
+.swp_social_panel.swp_default_full_color .swp_facebook,
+html body .swp_social_panel.swp_individual_full_color .swp_facebook:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_facebook {
 	background: #3a589e;
 	border: 1px solid #2e4675;
 }
 
-.nc_socialPanel.swp_d_fullColor .nc_pinterest,
-html body .nc_socialPanel.swp_i_fullColor .nc_pinterest:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .nc_pinterest {
+.swp_social_panel.swp_default_full_color .swp_pinterest,
+html body .swp_social_panel.swp_individual_full_color .swp_pinterest:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_pinterest {
 	background: #cd2029;
 	border: 1px solid #aa1b29;
 }
 
-.nc_socialPanel.swp_d_fullColor .linkedIn,
-html body .nc_socialPanel.swp_i_fullColor .linkedIn:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .linkedIn {
+.swp_social_panel.swp_default_full_color .swp_linkedin,
+html body .swp_social_panel.swp_individual_full_color .swp_linkedin:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_linkedin {
 	background: #0d77b7;
 	border: 1px solid #0c6591;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_tumblr,
-html body .nc_socialPanel.swp_i_fullColor .swp_tumblr:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_tumblr {
+.swp_social_panel.swp_default_full_color .swp_tumblr,
+html body .swp_social_panel.swp_individual_full_color .swp_tumblr:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_tumblr {
 	background: #39475d;
 	border: 1px solid #27313f;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_stumbleupon,
-html body .nc_socialPanel.swp_i_fullColor .swp_stumbleupon:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_stumbleupon {
+.swp_social_panel.swp_default_full_color .swp_stumbleupon,
+html body .swp_social_panel.swp_individual_full_color .swp_stumbleupon:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_stumbleupon {
 	background: #ef5025;
 	border: 1px solid #d34427;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_yummly,
-html body .nc_socialPanel.swp_i_fullColor .swp_yummly:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_yummly {
+.swp_social_panel.swp_default_full_color .swp_yummly,
+html body .swp_social_panel.swp_individual_full_color .swp_yummly:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_yummly {
 	background: #e26426;
 	border: 1px solid #b65027;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_reddit,
-html body .nc_socialPanel.swp_i_fullColor .swp_reddit:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_reddit {
+.swp_social_panel.swp_default_full_color .swp_reddit,
+html body .swp_social_panel.swp_individual_full_color .swp_reddit:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_reddit {
 	background: #f04b23;
 	border: 1px solid #d33f27;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_email,
-html body .nc_socialPanel.swp_i_fullColor .swp_email:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_email {
+.swp_social_panel.swp_default_full_color .swp_email,
+html body .swp_social_panel.swp_individual_full_color .swp_email:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_email {
 	background: #6bcce9;
 	border: 1px solid #61bace;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_whatsapp,
-html body .nc_socialPanel.swp_i_fullColor .swp_whatsapp:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_whatsapp {
+.swp_social_panel.swp_default_full_color .swp_whatsapp,
+html body .swp_social_panel.swp_individual_full_color .swp_whatsapp:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_whatsapp {
 	background: #71c169;
 	border: 1px solid #28b04b;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_pocket,
-html body .nc_socialPanel.swp_i_fullColor .swp_pocket:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_pocket {
+.swp_social_panel.swp_default_full_color .swp_pocket,
+html body .swp_social_panel.swp_individual_full_color .swp_pocket:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_pocket {
 	background: #ef4056;
 	border: 1px solid #ce3d55;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_buffer,
-html body .nc_socialPanel.swp_i_fullColor .swp_buffer:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_buffer {
+.swp_social_panel.swp_default_full_color .swp_buffer,
+html body .swp_social_panel.swp_individual_full_color .swp_buffer:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_buffer {
 	background: #323b43;
 	border: 1px solid #000;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_hacker_news,
-html body .nc_socialPanel.swp_i_fullColor .swp_hacker_news:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_hacker_news {
+.swp_social_panel.swp_default_full_color .swp_hacker_news,
+html body .swp_social_panel.swp_individual_full_color .swp_hacker_news:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_hacker_news {
 	background: #f16522;
 	border: 1px solid #d85623;
 }
 
-.nc_socialPanel.swp_d_fullColor .swp_flipboard,
-html body .nc_socialPanel.swp_i_fullColor .swp_flipboard:hover,
-body .nc_socialPanel.swp_o_fullColor:hover .swp_flipboard {
+.swp_social_panel.swp_default_full_color .swp_flipboard,
+html body .swp_social_panel.swp_individual_full_color .swp_flipboard:hover,
+body .swp_social_panel.swp_other_full_color:hover .swp_flipboard {
 	background: #e02828;
 	border: 1px solid #bf2626;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .googlePlus,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .googlePlus:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .googlePlus {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_google_plus,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_google_plus:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_google_plus {
 	border-bottom: 3px solid #c44133;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .twitter,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .twitter:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .twitter {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_twitter,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_twitter:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_twitter {
 	border-bottom: 3px solid #5595bc;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_fb,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_fb:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_fb {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_facebook,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_facebook:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_facebook {
 	border-bottom: 3px solid #2e4675;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .nc_pinterest,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .nc_pinterest:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .nc_pinterest {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_pinterest,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_pinterest:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_pinterest {
 	border-bottom: 3px solid #aa1b29;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .linkedIn,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .linkedIn:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .linkedIn {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_linkedin,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_linkedin:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_linkedin {
 	border-bottom: 3px solid #0c6591;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_tumblr,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_tumblr:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_tumblr {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_tumblr,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_tumblr:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_tumblr {
 	border-bottom: 3px solid #27313f;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_stumbleupon,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_stumbleupon:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_stumbleupon {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_stumbleupon,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_stumbleupon:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_stumbleupon {
 	border-bottom: 3px solid #d34427;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_yummly,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_yummly:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_yummly {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_yummly,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_yummly:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_yummly {
 	border-bottom: 3px solid #b65027;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_reddit,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_reddit:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_reddit {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_reddit,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_reddit:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_reddit {
 	border-bottom: 3px solid #d33f27;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_email,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_email:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_email {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_email,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_email:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_email {
 	border-bottom: 3px solid #61bace;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_whatsapp,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_whatsapp:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_whatsapp {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_whatsapp,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_whatsapp:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_whatsapp {
 	border-bottom: 3px solid #28b04b;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_pocket,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_pocket:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_pocket {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_pocket,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_pocket:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_pocket {
 	border-bottom: 3px solid #ce3d55;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_buffer,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_buffer:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_buffer {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_buffer,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_buffer:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_buffer {
 	border-bottom: 3px solid #000;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_hacker_news,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_hacker_news:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_hacker_news {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_hacker_news,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_hacker_news:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_hacker_news {
 	border-bottom: 3px solid #d85623;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_fullColor .swp_flipboard,
-html body .nc_socialPanel.swp_threeDee.swp_i_fullColor .swp_flipboard:hover,
-body .nc_socialPanel.swp_threeDee.swp_o_fullColor:hover .swp_flipboard {
+.swp_social_panel.swp_three_dee.swp_default_full_color .swp_flipboard,
+html body .swp_social_panel.swp_three_dee.swp_individual_full_color .swp_flipboard:hover,
+body .swp_social_panel.swp_three_dee.swp_other_full_color:hover .swp_flipboard {
 	border-bottom: 3px solid #bf2626;
 }
 
-.nc_socialPanel.swp_d_lightGray .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_lightGray .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_lightGray:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_light_gray .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_light_gray .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_light_gray:hover .nc_tweetContainer {
 	background-color: #ccc;
 	border: 1px solid #ccc;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_lightGray .nc_tweetContainer:not(.totesalt),
-html body .nc_socialPanel.swp_threeDee.swp_i_lightGray .nc_tweetContainer:not(.totesalt):hover,
-body .nc_socialPanel.swp_threeDee.swp_o_lightGray:hover .nc_tweetContainer:not(.totesalt) {
+.swp_social_panel.swp_three_dee.swp_default_light_gray .nc_tweetContainer:not(.total_sharesalt),
+html body .swp_social_panel.swp_three_dee.swp_individual_light_gray .nc_tweetContainer:not(.total_sharesalt):hover,
+body .swp_social_panel.swp_three_dee.swp_other_light_gray:hover .nc_tweetContainer:not(.total_sharesalt) {
 	border-bottom: 3px solid #999;
 }
 
-.nc_socialPanel.swp_d_mediumGray .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_mediumGray .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_mediumGray:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_medium_gray .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_medium_gray .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_medium_gray:hover .nc_tweetContainer {
 	background-color: #999;
 	border: 1px solid #999;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_mediumGray .nc_tweetContainer:not(.totesalt),
-html body .nc_socialPanel.swp_threeDee.swp_i_mediumGray .nc_tweetContainer:not(.totesalt):hover,
-body .nc_socialPanel.swp_threeDee.swp_o_mediumGray:hover .nc_tweetContainer:not(.totesalt) {
+.swp_social_panel.swp_three_dee.swp_default_medium_gray .nc_tweetContainer:not(.total_sharesalt),
+html body .swp_social_panel.swp_three_dee.swp_individual_medium_gray .nc_tweetContainer:not(.total_sharesalt):hover,
+body .swp_social_panel.swp_three_dee.swp_other_medium_gray:hover .nc_tweetContainer:not(.total_sharesalt) {
 	border-bottom: 3px solid #444;
 }
 
-.nc_socialPanel.swp_d_darkGray .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_darkGray .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_darkGray:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_dark_gray .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_dark_gray .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_dark_gray:hover .nc_tweetContainer {
 	background-color: #444;
 	border: 1px solid #444;
 }
 
-.nc_socialPanel.swp_threeDee.swp_d_darkGray .nc_tweetContainer:not(.totesalt),
-html body .nc_socialPanel.swp_threeDee.swp_i_darkGray .nc_tweetContainer:not(.totesalt):hover,
-body .nc_socialPanel.swp_threeDee.swp_o_darkGray:hover .nc_tweetContainer:not(.totesalt) {
+.swp_social_panel.swp_three_dee.swp_default_dark_gray .nc_tweetContainer:not(.total_sharesalt),
+html body .swp_social_panel.swp_three_dee.swp_individual_dark_gray .nc_tweetContainer:not(.total_sharesalt):hover,
+body .swp_social_panel.swp_three_dee.swp_other_dark_gray:hover .nc_tweetContainer:not(.total_sharesalt) {
 	border-bottom: 3px solid #222;
 }
 
-.nc_socialPanel.swp_d_lgOutlines a,
-html body .nc_socialPanel.swp_i_lgOutlines a:hover,
-body .nc_socialPanel.swp_o_lgOutlines:hover a {
+.swp_social_panel.swp_default_light_gray_outlines a,
+html body .swp_social_panel.swp_individual_light_gray_outlines a:hover,
+body .swp_social_panel.swp_other_light_gray_outlines:hover a {
 	color: #ccc;
 }
 
-.nc_socialPanel.swp_d_lgOutlines .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_lgOutlines .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_lgOutlines:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_light_gray_outlines .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_light_gray_outlines .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_light_gray_outlines:hover .nc_tweetContainer {
 	background: transparent;
 	border: 1px solid #ccc;
 }
 
-.nc_socialPanel.swp_d_mdOutlines a,
-html body .nc_socialPanel.swp_i_mdOutlines a:hover,
-body .nc_socialPanel.swp_o_mdOutlines:hover a {
+.swp_social_panel.swp_default_medium_gray_outlines a,
+html body .swp_social_panel.swp_individual_medium_gray_outlines a:hover,
+body .swp_social_panel.swp_other_medium_gray_outlines:hover a {
 	color: #999;
 }
 
-.nc_socialPanel.swp_d_mdOutlines .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_mdOutlines .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_mdOutlines:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_medium_gray_outlines .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_medium_gray_outlines .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_medium_gray_outlines:hover .nc_tweetContainer {
 	background: transparent;
 	border: 1px solid #999;
 }
 
-.nc_socialPanel.swp_d_dgOutlines a,
-html body .nc_socialPanel.swp_i_dgOutlines a:hover,
-body .nc_socialPanel.swp_o_dgOutlines:hover a {
+.swp_social_panel.swp_default_dark_gray_outlines a,
+html body .swp_social_panel.swp_individual_dark_gray_outlines a:hover,
+body .swp_social_panel.swp_other_dark_gray_outlines:hover a {
 	color: #444;
 }
 
-.nc_socialPanel.swp_d_dgOutlines .nc_tweetContainer,
-html body .nc_socialPanel.swp_i_dgOutlines .nc_tweetContainer:hover,
-body .nc_socialPanel.swp_o_dgOutlines:hover .nc_tweetContainer {
+.swp_social_panel.swp_default_dark_gray_outlines .nc_tweetContainer,
+html body .swp_social_panel.swp_individual_dark_gray_outlines .nc_tweetContainer:hover,
+body .swp_social_panel.swp_other_dark_gray_outlines:hover .nc_tweetContainer {
 	background: transparent;
 	border: 1px solid #444;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .googlePlus a,
-html body .nc_socialPanel.swp_i_colorOutlines .googlePlus a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .googlePlus a {
+.swp_social_panel.swp_default_color_outlines .swp_google_plus a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_google_plus a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_google_plus a {
 	color: #df4b37;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_fb a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_fb a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_fb a {
+.swp_social_panel.swp_default_color_outlines .swp_facebook a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_facebook a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_facebook a {
 	color: #3a589e;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .nc_pinterest a,
-html body .nc_socialPanel.swp_i_colorOutlines .nc_pinterest a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .nc_pinterest a {
+.swp_social_panel.swp_default_color_outlines .swp_pinterest a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_pinterest a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_pinterest a {
 	color: #cd2029;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .linkedIn a,
-html body .nc_socialPanel.swp_i_colorOutlines .linkedIn a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .linkedIn a {
+.swp_social_panel.swp_default_color_outlines .swp_linkedin a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_linkedin a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_linkedin a {
 	color: #0d77b7;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_tumblr a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_tumblr a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_tumblr a {
+.swp_social_panel.swp_default_color_outlines .swp_tumblr a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_tumblr a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_tumblr a {
 	color: #39475d;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_stumbleupon a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_stumbleupon a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_stumbleupon a {
+.swp_social_panel.swp_default_color_outlines .swp_stumbleupon a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_stumbleupon a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_stumbleupon a {
 	color: #ef5025;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_yummly a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_yummly a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_yummly a {
+.swp_social_panel.swp_default_color_outlines .swp_yummly a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_yummly a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_yummly a {
 	color: #e26426;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_whatsapp a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_whatsapp a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_whatsapp a {
+.swp_social_panel.swp_default_color_outlines .swp_whatsapp a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_whatsapp a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_whatsapp a {
 	color: #71c169;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_pocket a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_pocket a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_pocket a {
+.swp_social_panel.swp_default_color_outlines .swp_pocket a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_pocket a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_pocket a {
 	color: #ef4056;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_reddit a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_reddit a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_reddit a {
+.swp_social_panel.swp_default_color_outlines .swp_reddit a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_reddit a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_reddit a {
 	color: #f04b23;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_email a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_email a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_email a {
+.swp_social_panel.swp_default_color_outlines .swp_email a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_email a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_email a {
 	color: #6bcce9;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_buffer a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_buffer a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_buffer a {
+.swp_social_panel.swp_default_color_outlines .swp_buffer a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_buffer a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_buffer a {
 	color: #323b43;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_hacker_news a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_hacker_news a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_hacker_news a {
+.swp_social_panel.swp_default_color_outlines .swp_hacker_news a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_hacker_news a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_hacker_news a {
 	color: #f16522;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_flipboard a,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_flipboard a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard a {
+.swp_social_panel.swp_default_color_outlines .swp_flipboard a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_flipboard a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_flipboard a {
 	color: #e02828;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .googlePlus,
-html body .nc_socialPanel.swp_i_colorOutlines .googlePlus:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .googlePlus {
+.swp_social_panel.swp_default_color_outlines .swp_google_plus,
+html body .swp_social_panel.swp_individual_color_outlines .swp_google_plus:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_google_plus {
 	background: transparent;
 	border: 1px solid #df4b37;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .twitter,
-html body .nc_socialPanel.swp_i_colorOutlines .twitter:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .twitter {
+.swp_social_panel.swp_default_color_outlines .swp_twitter,
+html body .swp_social_panel.swp_individual_color_outlines .swp_twitter:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_twitter {
 	background: transparent;
 	border: 1px solid #429cd6;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_fb,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_fb:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_fb {
+.swp_social_panel.swp_default_color_outlines .swp_facebook,
+html body .swp_social_panel.swp_individual_color_outlines .swp_facebook:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_facebook {
 	background: transparent;
 	border: 1px solid #3a589e;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .nc_pinterest,
-html body .nc_socialPanel.swp_i_colorOutlines .nc_pinterest:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .nc_pinterest {
+.swp_social_panel.swp_default_color_outlines .swp_pinterest,
+html body .swp_social_panel.swp_individual_color_outlines .swp_pinterest:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_pinterest {
 	background: transparent;
 	border: 1px solid #cd2029;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .linkedIn,
-html body .nc_socialPanel.swp_i_colorOutlines .linkedIn:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .linkedIn {
+.swp_social_panel.swp_default_color_outlines .swp_linkedin,
+html body .swp_social_panel.swp_individual_color_outlines .swp_linkedin:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_linkedin {
 	background: transparent;
 	border: 1px solid #0d77b7;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_tumblr,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_tumblr:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_tumblr {
+.swp_social_panel.swp_default_color_outlines .swp_tumblr,
+html body .swp_social_panel.swp_individual_color_outlines .swp_tumblr:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_tumblr {
 	background: transparent;
 	border: 1px solid #39475d;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_stumbleupon,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_stumbleupon:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_stumbleupon {
+.swp_social_panel.swp_default_color_outlines .swp_stumbleupon,
+html body .swp_social_panel.swp_individual_color_outlines .swp_stumbleupon:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_stumbleupon {
 	background: transparent;
 	border: 1px solid #ef5025;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_yummly,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_yummly:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_yummly {
+.swp_social_panel.swp_default_color_outlines .swp_yummly,
+html body .swp_social_panel.swp_individual_color_outlines .swp_yummly:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_yummly {
 	background: transparent;
 	border: 1px solid #e26426;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_whatsapp,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_whatsapp:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_whatsapp {
+.swp_social_panel.swp_default_color_outlines .swp_whatsapp,
+html body .swp_social_panel.swp_individual_color_outlines .swp_whatsapp:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_whatsapp {
 	background: transparent;
 	border: 1px solid #71c169;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_reddit,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_reddit:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_reddit {
+.swp_social_panel.swp_default_color_outlines .swp_reddit,
+html body .swp_social_panel.swp_individual_color_outlines .swp_reddit:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_reddit {
 	background: transparent;
 	border: 1px solid #f04b23;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_email,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_email:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_email {
+.swp_social_panel.swp_default_color_outlines .swp_email,
+html body .swp_social_panel.swp_individual_color_outlines .swp_email:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_email {
 	background: transparent;
 	border: 1px solid #6bcce9;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_pocket,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_pocket:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_pocket {
+.swp_social_panel.swp_default_color_outlines .swp_pocket,
+html body .swp_social_panel.swp_individual_color_outlines .swp_pocket:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_pocket {
 	background: transparent;
 	border: 1px solid #ef4056;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_buffer,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_buffer:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_buffer {
+.swp_social_panel.swp_default_color_outlines .swp_buffer,
+html body .swp_social_panel.swp_individual_color_outlines .swp_buffer:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_buffer {
 	background: transparent;
 	border: 1px solid #323b43;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_hacker_news,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_hacker_news:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_hacker_news {
+.swp_social_panel.swp_default_color_outlines .swp_hacker_news,
+html body .swp_social_panel.swp_individual_color_outlines .swp_hacker_news:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_hacker_news {
 	background: transparent;
 	border: 1px solid #f16522;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .swp_flipboard,
-html body .nc_socialPanel.swp_i_colorOutlines .swp_flipboard:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
+.swp_social_panel.swp_default_color_outlines .swp_flipboard,
+html body .swp_social_panel.swp_individual_color_outlines .swp_flipboard:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_flipboard {
 	background: transparent;
 	border: 1px solid #bf2626;
 }
 
-.nc_socialPanelSide {
+.swp_social_panelSide {
 	flex-direction: column;
 	height: auto;
 	overflow: visible;
-	top: 200px;
+	/*top: 200px;*/
 	-webkit-transition: all 0.2s linear;
 	transition: all 0.2s linear;
 	width: 100px!important;
 	z-index: 9999999;
+    margin: 10px 5px !important;
+    padding: 0;
 
 	-webkit-box-direction: normal;
 	-moz-box-direction: normal;
@@ -894,22 +894,50 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	-ms-flex-direction: column;
 }
 
-.nc_socialPanelSide.slide {
+.swp_social_panelSide.slide,
+.swp_social_panelSide.fade  {
 	position: fixed;
-	left: -100px;
 	-webkit-transition: all 0.2s linear;
 	transition: all 0.2s linear;
 }
 
-.nc_socialPanelSide.fade {
+.swp_social_panelSide.fade {
 	display: none;
-	position: fixed;
-	left: 5px;
-	-webkit-transition: all 0.2s linear;
-	transition: all 0.2s linear;
 }
 
-.nc_socialPanelSide .nc_tweetContainer {
+.swp_social_panelSide.fade.swp_float_left {
+	left: 5px;
+}
+
+.swp_social_panelSide.fade.swp_float_right {
+	right: 5px;
+}
+
+.swp_social_panelSide[class*=swp_side] {
+    height: 100vh;
+    display: flex;
+    position: fixed;
+    padding: 30px 0;
+    top: 0;
+}
+
+.swp_social_panelSide.swp_float_right {
+    align-content: flex-end;
+}
+
+.swp_social_panelSide.swp_side_top {
+	justify-content: flex-start;
+}
+
+.swp_social_panelSide.swp_side_bottom {
+	justify-content: flex-end;
+}
+
+.swp_social_panelSide.swp_side_center {
+    justify-content: center;
+}
+
+.swp_social_panelSide .nc_tweetContainer {
 	background: #dd4b38;
 	-webkit-border-radius: 3px;
 	border-radius: 3px;
@@ -926,7 +954,7 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 90px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer .iconFiller {
+.swp_social_panelSide .nc_tweetContainer .iconFiller {
 	display: inline-block;
 	height: 40px;
 	margin: 0 6px;
@@ -937,11 +965,11 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 21px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer .swp_count {
+.swp_social_panelSide .nc_tweetContainer .swp_count {
 	display: inline-block;
 	font-size: 14px;
 	height: 32px;
-	line-height: 35px;
+	line-height: 16px;
 	margin: 0;
 	overflow: hidden;
 	padding: 0;
@@ -952,7 +980,7 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 0;
 }
 
-.nc_socialPanelSide .nc_tweetContainer a {
+.swp_social_panelSide .nc_tweetContainer a {
 	cursor: pointer;
 	display: block;
 	font-weight: 500;
@@ -965,49 +993,51 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	vertical-align: top;
 }
 
-.nc_socialPanelSide .nc_tweetContainer .sw,
-.nc_socialPanelSide .nc_tweetContainer .swp_share {
+.swp_social_panelSide .nc_tweetContainer .sw,
+.swp_social_panelSide .nc_tweetContainer .swp_share {
 	float: left;
 	line-height: 34px;
 }
 
-.nc_socialPanelSide.swp_default .nc_tweetContainer .sw {
+.swp_social_panelSide.swp_default .nc_tweetContainer .sw {
 	line-height: 32px;
 }
 
-.nc_socialPanelSide.swp_default .nc_tweetContainer .swp_share {
+.swp_social_panelSide.swp_default .nc_tweetContainer .swp_share {
 	line-height: 30px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer .swp_share {
+.swp_social_panelSide .nc_tweetContainer .swp_share {
 	font-size: 13px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:hover,
-.nc_socialPanelSide .nc_tweetContainer:hover .iconFiller,
-.nc_socialPanelSide .nc_tweetContainer:hover .swp_count {
+.swp_social_panelSide .nc_tweetContainer:hover,
+.swp_social_panelSide .nc_tweetContainer:hover .iconFiller,
+.swp_social_panelSide .nc_tweetContainer:hover .swp_count {
 	-webkit-transition: all 0.1s linear;
 	transition: all 0.1s linear;
 }
 
-.nc_socialPanelSide.swp_boxed {
-	-ms-transform: scale(0.9);
-	-webkit-transform: scale(0.9);
-	transform: scale(0.9);
-}
-
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer, .swp_social_panelSide.swp_circles .nc_tweetContainer {
 	margin-bottom: 5px;
+    width: 67.5px !important;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer,
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer a {
-	height: 75px;
+.swp_social_panelSide.swp_boxed .nc_tweetContainer,
+.swp_social_panelSide.swp_boxed .nc_tweetContainer a,
+.swp_social_panelSide.swp_circles .nc_tweetContainer,
+.swp_social_panelSide.swp_circles .nc_tweetContainer a {
+    width: 67.5px;
+	height: 67.5px;
 	position: relative;
-	width: 75px;
+}
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares),
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) a {
+	border-radius:50%!important;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer i.sw {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer i.sw,
+.swp_social_panelSide.swp_circles .nc_tweetContainer i.sw {
 	font-size: 27px;
 	height: 40px;
 	margin: 0;
@@ -1016,17 +1046,19 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 100%;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes) span.swp_share {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares) span.swp_share,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) span.swp_share {
 	height: 35px;
 	opacity: 0;
 	position: absolute;
 	bottom: 0;
 	left: 0;
 	text-align: center;
-	width: 75px;
+	width: 67.5px;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes) span.swp_count {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares) span.swp_count,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) span.swp_count {
 	height: 35px;
 	margin: 0;
 	padding: 0;
@@ -1039,67 +1071,77 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 100%;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes) span.swp_count.swp_hide,
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer span.swp_hide .iconFiller,
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer span.swp_hide .spaceManWilly {
-	height: 75px;
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares) span.swp_count.swp_hide,
+.swp_social_panelSide.swp_boxed .nc_tweetContainer span.swp_hide .iconFiller,
+.swp_social_panelSide.swp_boxed .nc_tweetContainer span.swp_hide .spaceManWilly,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) span.swp_count.swp_hide,
+.swp_social_panelSide.swp_circles .nc_tweetContainer span.swp_hide .iconFiller,
+.swp_social_panelSide.swp_circles .nc_tweetContainer span.swp_hide .spaceManWilly {
+	height: 67.5px;
 	opacity: 1;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer span.iconFiller {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer span.iconFiller,
+.swp_social_panelSide.swp_circles .nc_tweetContainer span.iconFiller {
 	height: 40px;
-	width: 75px;
+	width: 67.5px;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes):hover span.swp_count:not(.swp_hide) {
+
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares):hover span.swp_count:not(.swp_hide),
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares):hover span.swp_count:not(.swp_hide) {
 	opacity: 0;
 }
 
-.nc_socialPanelSide.swp_boxed .totes {
+.swp_social_panelSide.swp_boxed .total_shares,
+.swp_social_panelSide.swp_circles .total_shares {
 	padding: 0;
-	width: 75px!important;
+	width: 67.5px!important;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:not(.totes) {
+.swp_social_panelSide .nc_tweetContainer:not(.total_shares) {
 	line-height: 34px;
 }
 
-.nc_socialPanelSide:not(.swp_boxed) .nc_tweetContainer:not(.totes) .iconFiller {
+.swp_social_panelSide:not(.swp_boxed):not(.swp_circles) .nc_tweetContainer:not(.total_shares) .iconFiller{
 	margin-left: 2px;
 	width: 30px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:not(.totes) .swp_count {
+.swp_social_panelSide .nc_tweetContainer:not(.total_shares) .swp_count {
 	padding: 0 8px;
 	width: 48px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:not(.totes) .swp_count.swp_hide {
+.swp_social_panelSide .nc_tweetContainer:not(.total_shares) .swp_count.swp_hide {
 	padding: 0;
 	width: 100%;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:not(.totes) .swp_hide .iconFiller {
+.swp_social_panelSide .nc_tweetContainer:not(.total_shares) .swp_count.swp_hide .iconFiller {
 	display: block;
 	float: none;
 	margin: 0 auto;
 }
 
-.nc_socialPanelSide:not(.swp_boxed) .nc_tweetContainer:not(.totes):hover {
+
+.swp_social_panelSide:not(.swp_boxed):not(.swp_circles) .nc_tweetContainer:not(.total_shares):hover {
 	width: 150px;
 }
 
-.nc_socialPanelSide .nc_tweetContainer:not(.totes):hover .iconFiller,
-.nc_socialPanelSide .nc_tweetContainer:not(.totes) .spaceManWilly {
+.swp_social_panelSide .nc_tweetContainer[data-network]:not(.total_shares):hover .iconFiller,
+.swp_social_panelSide .nc_tweetContainer:not(.total_shares) .spaceManWilly {
 	width: 90px;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes):hover .iconFiller,
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes) .spaceManWilly {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares):hover .iconFiller,
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares) .spaceManWilly,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares):hover .iconFiller,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) .spaceManWilly {
 	width: 100%;
 }
 
-.nc_socialPanelSide .nc_tweetContainer.totes {
+.swp_social_panelSide .nc_tweetContainer.total_shares {
 	background: rgba(0, 0, 0, 0);
 	border: 0!important;
 	font-weight: 800;
@@ -1108,9 +1150,10 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	padding: 0;
 	text-align: center;
 	width: 90px;
+	order:-100;
 }
 
-.nc_socialPanelSide .nc_tweetContainer.totes .swp_count {
+.swp_social_panelSide .nc_tweetContainer.total_shares .swp_count {
 	color: #444;
 	display: block;
 	font-family: Lato, sans-serif;
@@ -1119,7 +1162,7 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 100%;
 }
 
-.nc_socialPanelSide .nc_tweetContainer.totes .swp_label {
+.swp_social_panelSide .nc_tweetContainer.total_shares .swp_label {
 	color: #444;
 	display: block;
 	font-family: Lato, sans-serif;
@@ -1138,12 +1181,12 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	z-index: 99999;
 }
 
-.nc_wrapper.floatBottom {
+.nc_wrapper.bottom {
 	bottom: 0;
 	left: 0;
 }
 
-.nc_wrapper.floatTop {
+.nc_wrapper.top {
 	top: 0;
 	left: 0;
 }
@@ -1155,11 +1198,11 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	width: 740px;
 }
 
-.nc_socialPanelSide.hideCounts a {
+.swp_social_panelSide.hideCounts a {
 	text-align: center;
 }
 
-.nc_socialPanelSide.hideCounts .iconFiller {
+.swp_social_panelSide.hideCounts .iconFiller {
 	float: none;
 	text-align: left;
 }
@@ -1199,63 +1242,63 @@ body .nc_socialPanel.swp_o_colorOutlines:hover .swp_flipboard {
 	vertical-align: middle;
 }
 
-.sw-google-plus:before {
+i.swp_google_plus_icon:before {
 	content: "h";
 }
 
-.sw-pinterest:before {
+i.swp_pinterest_icon:before {
 	content: "b";
 }
 
-.sw-twitter:before {
+i.swp_twitter_icon:before {
 	content: "s";
 }
 
-.sw-facebook:before {
+i.swp_facebook_icon:before {
 	content: "j";
 }
 
-.sw-linkedin:before {
+i.swp_linkedin_icon:before {
 	content: "f";
 }
 
-.sw-tumblr:before {
+i.swp_tumblr_icon:before {
 	content: "r";
 }
 
-.sw-stumbleupon:before {
+i.swp_stumbleupon_icon:before {
 	content: "q";
 }
 
-.sw-reddit:before {
+i.swp_reddit_icon:before {
 	content: "a";
 }
 
-.sw-email:before {
+i.swp_email_icon:before {
 	content: "k";
 }
 
-.sw-yummly:before {
+i.swp_yummly_icon:before {
 	content: "x";
 }
 
-.sw-whatsapp:before {
+i.swp_whatsapp_icon:before {
 	content: "y";
 }
 
-.sw-pocket:before {
+i.swp_pocket_icon:before {
 	content: "B";
 }
 
-.sw-buffer:before {
+i.swp_buffer_icon:before {
 	content: "z";
 }
 
-.sw-hacker_news:before {
+i.swp_hacker_news_icon:before {
 	content: "D";
 }
 
-.sw-flipboard:before {
+i.swp_flipboard_icon:before {
 	content: "C";
 }
 
@@ -1328,10 +1371,10 @@ a .sw-click-to-tweet .sw-ctt-text {
 	text-transform: uppercase;
 }
 
-.sw-click-to-tweet i.sw-twitter {
+.sw-click-to-tweet i.swp_twitter_icon {
 	float: right;
 	font-size: 21px;
-	margin-left: 15px;
+	margin-left: 15px !important;
 	margin-top: 2px;
 	text-transform: none;
 }
@@ -1427,7 +1470,7 @@ a.swp_CTT.style6 .sw-click-to-tweet {
 	transition: all 0.25s linear;
 }
 
-a.style6 .sw-click-to-tweet i.sw-twitter {
+a.style6 .sw-click-to-tweet i.swp_twitter {
 	color: #30394f;
 }
 
@@ -1522,8 +1565,8 @@ div.sw-pinit a.sw-pinit-button:hover::before {
 	content: "F";
 }
 
-div.sw-pinit a.sw-pinit-button::hover,
-div.sw-pinit a.sw-pinit-button::focus {
+div.sw-pinit a.sw-pinit-button:hover,
+div.sw-pinit a.sw-pinit-button:focus {
 	background: #aa1b29;
 	color: #fff;
 	text-decoration: none;
@@ -1555,42 +1598,44 @@ div.sw-pinit .sw-pinit-bottom {
 	bottom: 30px;
 }
 
-.nc_socialPanel.notMobile .nc_tweetContainer:nth-last-child(1),
+.swp_social_panel.notMobile .nc_tweetContainer:nth-last-child(1),
 .mobile .nc_tweetContainer:nth-last-child(2),
-.nc_tweetContainer.totes:nth-last-child(1) {
+.nc_tweetContainer.total_shares:nth-last-child(1) {
 	margin-right: 0;
 }
 
-.nc_socialPanel.swp_d_fullColor a,
-html body .nc_socialPanel.swp_i_fullColor .nc_tweetContainer:hover a,
-body .nc_socialPanel.swp_o_fullColor:hover a,
-.nc_socialPanel.swp_d_lightGray a,
-html body .nc_socialPanel.swp_i_lightGray .nc_tweetContainer:hover a,
-body .nc_socialPanel.swp_o_lightGray:hover a,
-.nc_socialPanel.swp_d_mediumGray a,
-html body .nc_socialPanel.swp_i_mediumGray a:hover,
-body .nc_socialPanel.swp_o_mediumGray:hover a,
-.nc_socialPanel.swp_d_darkGray a,
-html body .nc_socialPanel.swp_i_darkGray a:hover,
-body .nc_socialPanel.swp_o_darkGray:hover a {
+.swp_social_panel.swp_default_full_color a,
+html body .swp_social_panel.swp_individual_full_color .nc_tweetContainer:hover a,
+body .swp_social_panel.swp_other_full_color:hover a,
+.swp_social_panel.swp_default_light_gray a,
+html body .swp_social_panel.swp_individual_light_gray .nc_tweetContainer:hover a,
+body .swp_social_panel.swp_other_light_gray:hover a,
+.swp_social_panel.swp_default_medium_gray a,
+html body .swp_social_panel.swp_individual_medium_gray a:hover,
+body .swp_social_panel.swp_other_medium_gray:hover a,
+.swp_social_panel.swp_default_dark_gray a,
+html body .swp_social_panel.swp_individual_dark_gray a:hover,
+body .swp_social_panel.swp_other_dark_gray:hover a {
 	color: white;
 }
 
-.nc_socialPanel.swp_d_colorOutlines .twitter a,
-html body .nc_socialPanel.swp_i_colorOutlines .twitter a:hover,
-body .nc_socialPanel.swp_o_colorOutlines:hover .twitter a,
-.wp-editor-container .sw-twitter:before,
-a.style1 .sw-click-to-tweet i.sw-twitter,
-a.style2 .sw-click-to-tweet i.sw-twitter {
+.swp_social_panel.swp_default_color_outlines .swp_twitter a,
+html body .swp_social_panel.swp_individual_color_outlines .swp_twitter a:hover,
+body .swp_social_panel.swp_other_color_outlines:hover .swp_twitter a,
+.wp-editor-container .swp_twitter:before,
+a.style1 .sw-click-to-tweet i.swp_twitter,
+a.style2 .sw-click-to-tweet i.swp_twitter {
 	color: #429cd6;
 }
 
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes) .swp_hide span.swp_share,
-.nc_socialPanelSide.swp_boxed .nc_tweetContainer:not(.totes):hover span.swp_share:not(.swp_hide) {
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares) .swp_hide span.swp_share,
+.swp_social_panelSide.swp_boxed .nc_tweetContainer:not(.total_shares):hover span.swp_share:not(.swp_hide),
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares) .swp_hide span.swp_share,
+.swp_social_panelSide.swp_circles .nc_tweetContainer:not(.total_shares):hover span.swp_share:not(.swp_hide) {
 	opacity: 1;
 }
 
-.nc_socialPanel.mobile .iconFiller ~ .swp_count,
+.swp_social_panel.mobile .iconFiller ~ .swp_count,
 .sw-content-locator {
 	display: none;
 }
@@ -1613,7 +1658,7 @@ a.style2:hover .sw-click-to-tweet .sw-ctt-btn {
 a.style3:hover .sw-click-to-tweet .sw-ctt-text,
 a.style3 .sw-click-to-tweet .sw-ctt-btn,
 a.style3:hover .sw-click-to-tweet .sw-ctt-btn,
-a.style3 .sw-click-to-tweet i.sw-twitter,
+a.style3 .sw-click-to-tweet i.swp_twitter,
 a.style4 .sw-click-to-tweet .sw-ctt-text,
 a.style4:hover .sw-click-to-tweet .sw-ctt-text,
 a.style4 .sw-click-to-tweet .sw-ctt-btn,
@@ -1626,8 +1671,8 @@ a.style5:hover .sw-click-to-tweet .sw-ctt-btn {
 	text-decoration: none;
 }
 
-a.style4 .sw-click-to-tweet i.sw-twitter,
-a.style5 .sw-click-to-tweet i.sw-twitter {
+a.style4 .sw-click-to-tweet i.swp_twitter,
+a.style5 .sw-click-to-tweet i.swp_twitter {
 	color: #fff;
 }
 
@@ -1639,7 +1684,7 @@ a.style6 .sw-click-to-tweet .sw-ctt-btn {
 
 a.style6:hover .sw-click-to-tweet .sw-ctt-text,
 a.style6:hover .sw-click-to-tweet .sw-ctt-btn,
-a.style6:hover .sw-click-to-tweet i.sw-twitter {
+a.style6:hover .sw-click-to-tweet i.swp_twitter {
 	color: #2a2d34;
 	text-decoration: none;
 }
@@ -1650,7 +1695,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(0.7);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-70.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-70.scale-full_width {
 	width: 142.8571428571429%!important;
 }
 
@@ -1660,7 +1705,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(0.8);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-80.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-80.scale-full_width {
 	width: 125%!important;
 }
 
@@ -1670,7 +1715,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(0.9);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-90.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-90.scale-full_width {
 	width: 111.111111111111%!important;
 }
 
@@ -1680,7 +1725,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(1.1);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-110.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-110.scale-full_width {
 	width: 90.90909090909091%!important;
 }
 
@@ -1690,7 +1735,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(1.2);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-120.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-120.scale-full_width {
 	width: 83.33333333333333%!important;
 }
 
@@ -1700,7 +1745,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(1.3);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-130.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-130.scale-full_width {
 	width: 76.92307692307692%!important;
 }
 
@@ -1710,11 +1755,11 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform: scale(1.4);
 }
 
-.nc_socialPanel:not(.nc_floater).scale-140.scale-fullWidth {
+.swp_social_panel:not(.nc_floater).scale-140.scale-full_width {
 	width: 71.42857142857143%!important;
 }
 
-.scale-fullWidth,
+.scale-full_width,
 .scale-left,
 .nc_floater.scale-center,
 .nc_floater.scale-right {
@@ -1735,7 +1780,7 @@ a.style6:hover .sw-click-to-tweet i.sw-twitter {
 	transform-origin: center;
 }
 
-div.nc_socialPanel .nc_tweetContainer.swp_emphasize {
+div.swp_social_panel .nc_tweetContainer.swp_emphasize {
 	-webkit-box-flex: 2;
 	-moz-box-flex: 2;
 	-webkit-flex: 2;
@@ -1763,4 +1808,40 @@ div.nc_socialPanel .nc_tweetContainer.swp_emphasize {
 }
 .fl-module-content .uabb-blog-posts .uabb-post-thumbnail .sw-pinit.lazyloaded {
 	display: block !important;
+}
+
+/*In FF, the "Shares" is cutoff */
+@-moz-document url-prefix() { .swp_social_panel .total_shares .swp_label { margin-top: 8px; } }
+
+.swp-content-locator {
+   display: none !important;
+   margin: 0 !important;
+}
+
+.float-position-top-left {
+    transform-origin: top left;
+}
+
+.float-position-center-left {
+    transform-origin: center left;
+}
+
+.float-position-bottom-left {
+    transform-origin: bottom left;
+}
+
+.float-position-top-right {
+    transform-origin: top right;
+}
+
+.float-position-center-right {
+    transform-origin: center right;
+}
+
+.float-position-bottom-right {
+    transform-origin: bottom right;
+}
+
+div[class*=custom_color][class^=_wrapper] {
+    display: none;
 }

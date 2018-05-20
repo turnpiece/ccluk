@@ -497,7 +497,8 @@ function apbct_admin_init(){
 			add_settings_field('cleantalk_apikey', '', 'ct_input_apikey', 'cleantalk', 'cleantalk_settings_main');
 		}
 		
-		add_settings_field('cleantalk_connection_reports', '', 'ct_report_builder', 'cleantalk', 'cleantalk_settings_main');
+		if(ct_valid_key())
+			add_settings_field('cleantalk_connection_reports', '', 'ct_report_builder', 'cleantalk', 'cleantalk_settings_main');
 		
 		//Forms for protection
 		add_settings_field('cleantalk_title_fiels_for_protect', "", 'ct_input_what_fields_should_be_protected', 'cleantalk', 'cleantalk_settings_anti_spam');//Title settings
@@ -1062,7 +1063,7 @@ function ct_input_apikey() {
 		if (function_exists('curl_init') && function_exists('json_decode')){
 			echo '<br /><br />';
 			echo "<a target='__blank' style='' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(ct_get_admin_email())."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'><input type='button' class='cleantalk_auto_link' value='".__('Get access key manually', 'cleantalk')."' /></a>";
-			if($ct_data['ip_license'] != 0){
+			if($ct_data['ip_license'] == 0){
 				echo "&nbsp;" .  __("or") . "&nbsp;";
 				echo '<input name="get_apikey_auto" type="submit" class="cleantalk_manual_link" value="' . __('Get access key automatically', 'cleantalk') . '" />';
 			}
@@ -1083,6 +1084,13 @@ function ct_input_apikey() {
         $cleantalk_support_links .= "&nbsp;&nbsp;";
         $cleantalk_support_links .= "&nbsp;&nbsp;";
         $cleantalk_support_links .= "<a href='#' id='cleantalk_negative_report_link' class='ct_support_link'>" . __("Negative report", 'cleantalk') . "</a>";
+        $cleantalk_support_links .= "</div>";
+		echo "<script type=\"text/javascript\">var cleantalk_good_key=true; var cleantalk_support_links = \"$cleantalk_support_links\";</script>";
+	}
+	
+	if($ct_data['ip_license']){
+		$cleantalk_support_links = "<br /><div>";
+        $cleantalk_support_links .= "<a href='#' id='cleantalk_access_key_link' class='ct_support_link'>" . __("Show the access key", 'cleantalk') . "</a>";
         $cleantalk_support_links .= "</div>";
 		echo "<script type=\"text/javascript\">var cleantalk_good_key=true; var cleantalk_support_links = \"$cleantalk_support_links\";</script>";
 	}

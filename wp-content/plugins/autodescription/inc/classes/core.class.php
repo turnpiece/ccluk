@@ -115,9 +115,6 @@ class Core {
 	 * Latest Class. Doesn't have parent.
 	 */
 	protected function __construct() {
-
-		\add_action( 'current_screen', array( $this, 'post_type_support' ), 0 );
-
 		if ( $this->the_seo_framework_debug ) {
 
 			$debug_instance = Debug::get_instance();
@@ -206,36 +203,6 @@ class Core {
 	}
 
 	/**
-	 * Adds post type support for The SEO Framework.
-	 *
-	 * @since 2.1.6
-	 */
-	public function post_type_support() {
-
-		$defaults = array(
-			'post',
-			'page',
-			'product',
-			'forum',
-			'topic',
-			'jetpack-testimonial',
-			'jetpack-portfolio',
-		);
-
-		/**
-		 * Applies filters the_seo_framework_supported_post_types : Array The supported post types.
-		 * @since 2.3.1
-		 */
-		$post_types = (array) \apply_filters( 'the_seo_framework_supported_post_types', $defaults );
-
-		$types = \wp_parse_args( $defaults, $post_types );
-
-		foreach ( $types as $type ) {
-			\add_post_type_support( $type, array( 'autodescription-meta' ) );
-		}
-	}
-
-	/**
 	 * Adds link from plugins page to SEO Settings page.
 	 *
 	 * @since 2.2.8
@@ -290,6 +257,7 @@ class Core {
 	 * Also loads scripts and styles if out of The SEO Framework's context.
 	 *
 	 * @since 2.6.0
+	 * @since 3.0.6 The messages are no longer auto-styled to "strong".
 	 *
 	 * @param string $message The notice message. Expected to be escaped if $escape is false.
 	 * @param string $type The notice type : 'updated', 'error', 'warning'. Expected to be escaped.
@@ -302,9 +270,6 @@ class Core {
 		if ( empty( $message ) )
 			return '';
 
-		if ( $escape )
-			$message = \esc_html( $message );
-
 		//* Make sure the scripts are loaded.
 		$this->init_admin_scripts( true );
 
@@ -315,7 +280,7 @@ class Core {
 
 		$notice = '<div class="notice ' . \esc_attr( $type ) . ' tsf-notice ' . $a11y . '"><p>';
 		$notice .= '<a class="hide-if-no-js tsf-dismiss" title="' . \esc_attr__( 'Dismiss', 'autodescription' ) . '"></a>';
-		$notice .= '<strong>' . $message . '</strong>';
+		$notice .= $escape ? \esc_html( $message ) : $message;
 		$notice .= '</p></div>';
 
 		return $notice;
@@ -627,7 +592,7 @@ class Core {
 	 *
 	 * @param bool $guess : If true, the timezone will be guessed from the
 	 * WordPress core gmt_offset option.
-	 * @return string PHP Timezone String.
+	 * @return string PHP Timezone String. May be empty (thus invalid).
 	 */
 	public function get_timezone_string( $guess = false ) {
 
@@ -672,6 +637,7 @@ class Core {
 	 * Sets and resets the timezone.
 	 *
 	 * @since 2.6.0
+	 * @since 3.0.6 Now uses the old timezone string when a new one can't be generated.
 	 *
 	 * @param string $tzstring Optional. The PHP Timezone string. Best to leave empty to always get a correct one.
 	 * @link http://php.net/manual/en/timezones.php
@@ -692,7 +658,7 @@ class Core {
 			return date_default_timezone_set( $old_tz );
 
 		if ( empty( $tzstring ) )
-			$tzstring = $this->get_timezone_string( true );
+			$tzstring = $this->get_timezone_string( true ) ?: $old_tz;
 
 		return date_default_timezone_set( $tzstring );
 	}

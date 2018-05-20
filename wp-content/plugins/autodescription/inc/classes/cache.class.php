@@ -159,6 +159,7 @@ class Cache extends Sitemaps {
 
 		//* Excluded IDs cache.
 		\add_action( 'save_post', array( $this, 'delete_excluded_ids_cache' ) );
+		\add_action( 'edit_attachment', array( $this, 'delete_excluded_ids_cache' ) );
 
 		$run = true;
 	}
@@ -777,6 +778,7 @@ class Cache extends Sitemaps {
 			$query = '';
 
 			//* TODO figure out why this check is here... admin compat maybe?
+			//! TODO convert the search query to a hash: search_(hash)... encode first!
 			if ( function_exists( 'get_search_query' ) ) {
 				$search_query = \get_search_query( $_escaped = true );
 
