@@ -1,19 +1,19 @@
-# Translation of Themes - OnePress in Chinese (Taiwan)
+# Translation of Themes - OnePress in Ukrainian
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-14 15:54:59+0000\n"
+"PO-Revision-Date: 2018-05-14 20:00:27+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=1; plural=0;\n"
+"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
-"Language: zh_TW\n"
+"Language: uk_UA\n"
 "Project-Id-Version: Themes - OnePress\n"
 
 #. Description of the plugin/theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
-msgstr "OnePress 是一款優秀、兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示、自由工作者以及任何喜歡好設計的人。佈景主題整體呈現出高雅經典的外觀，是個使用 Bootstrap 4 並相容於最新版 WooCommerce 的絕佳範例。你可以在 https://www.famethemes.com/preview/?theme=OnePress 進行線上預覽。繁體中文本地化由佈景主題開發者委託《<a href=\"https://www.alexclassroom.com/\" target=\"_blank\">阿力獅的教室</a>》站長<a href=\"https://www.facebook.com/captain.alexlion\" target=\"_blank\">阿力獅</a>製作提供。"
+msgstr "OnePress - виняткова креативна та гнучка односторінкова WordPress тема, яка добре підходить для бізнес-сайту, портфоліо, цифрового агентства, демонстрації продукції, фрилансерів та всіх інших, які цінують гарний дизайн. Тема має вишуканий та класичний вигляд, чудовий приклад WordPress теми на Bootstrap 4, що сумісна з останньою версію WooCommerce. (Попередній перегляд : http://www.famethemes.com/preview/?theme=OnePress)"
 
 #. #-#-#-#-#  onepress.pot (OnePress 2.0.8)  #-#-#-#-#
 #. Theme Name of the plugin/theme
@@ -23,35 +23,35 @@ msgstr "OnePress"
 
 #: inc/dashboard.php:457
 msgid "Create a support ticket"
-msgstr "提出技術支援需求"
+msgstr "Створити запит в підтримку"
 
 #: inc/dashboard.php:81
 msgid "Don't show this again"
-msgstr "不再顯示這項訊息"
+msgstr "Не показувати цього знову"
 
 #: inc/dashboard.php:80
 msgid "Install Customify Now"
-msgstr "立即安裝 Customify"
+msgstr "Встановити Customify зараз"
 
 #: inc/dashboard.php:78
 msgid "Customify is both a WordPress Theme and a WordPress Theme Editor. It’s a powerful styling platform that ensures exceptional design control over your website’s looks and feel. The most highlight feature is the <strong>comprehensive Header & Footer builder</strong>."
-msgstr "Customify 既是 WordPress 佈景主題，也是 WordPress 佈景主題編輯器。它是一個可確保控制網站外觀與風格具有獨特設計的強大樣式平台，其中最突出的特色是<strong>功能齊全的的頁首及頁尾編輯器</strong>。"
+msgstr "Customify це одночасно WordPress тема та редактор WordPress теми. Це потужна платформа для стилів, яка забезпечує винятковий контроль дизайну сайту відповідно вашим вподобанням та відчуттям. Найбільш важливою особливістю є  <strong>всеосяжний конструктор заголовку та підвалу</strong>."
 
 #: inc/dashboard.php:77
 msgid "Meet Customify - the improved version of OnePress theme by the same team!"
-msgstr "瞭解 Customify - 由同一個團隊開發的 OnePress 佈景主題改進版本！"
+msgstr "Зустрічайте Customify - покращена версія теми OnePress від тієї ж команди!"
 
 #: inc/customizer.php:526
 msgid "Transparent Logo Height in Pixel"
-msgstr "透明標誌高度 (單位為 px)"
+msgstr "Висота прозорого логотипу в пікселях"
 
 #: inc/customizer.php:1717
 msgid "Open Button #2 In New Window"
-msgstr "在新視窗中開啟第二顆按鈕的連結"
+msgstr "Кнопка #2 відкрити в новому вікні"
 
 #: inc/customizer.php:1651
 msgid "Open Button #1 In New Window"
-msgstr "在新視窗中開啟第一顆按鈕的連結"
+msgstr "Кнопка #1 відкрити в новому вікні"
 
 #: functions.php:102
 msgid "Pirate Forms"
@@ -59,115 +59,115 @@ msgstr "Pirate Forms"
 
 #: inc/metabox.php:173
 msgid "Apply header cover settings for single product."
-msgstr "為單項產品頁面套用頁首封面。"
+msgstr "Застосувати налаштування обкладинки шапки для окремого товару."
 
 #: inc/dashboard.php:581
 msgid "Keep %s updated"
-msgstr "保持 %s 為最新狀態"
+msgstr "Тримати %s оновленим"
 
 #: inc/dashboard.php:502
 msgid "Your settings were copied."
-msgstr "設定已複製。"
+msgstr "Ваші налаштування скопійовані."
 
 #: inc/metabox.php:164
 msgid "Hide footer."
-msgstr "隱藏頁尾。"
+msgstr "Приховати підвал."
 
 #: inc/metabox.php:153
 msgid "Display page excerpt as header cover description."
-msgstr "將頁面摘要顯示為封面說明。"
+msgstr "Відобразити уривок сторінки як опис обкладинки шапки."
 
 #: inc/metabox.php:147
 msgid "Display featured image as header cover."
-msgstr "將特色圖片顯示為頁首封面。"
+msgstr "Відобразити головне зображення як обкладинку шапки."
 
 #: inc/metabox.php:141
 msgid "Hide page title area."
-msgstr "隱藏頁面標題區域。"
+msgstr "Приховати зону заголовку сторінки."
 
 #: inc/metabox.php:136
 msgid "Hide header."
-msgstr "隱藏頁首。"
+msgstr "Приховати шапку."
 
 #: inc/metabox.php:159
 msgid "Hide breadcrumb."
-msgstr "隱藏階層連結。"
+msgstr "Приховати хлібні крихти."
 
 #: inc/customizer.php:391
 msgid "Only set if display site tagline."
-msgstr "僅適用於網站說明。"
+msgstr "Встановити лише якщо відображається ключова фраза сайту."
 
 #: inc/customizer.php:389
 msgid "Site Tagline Color"
-msgstr "網站說明色彩"
+msgstr "Колір ключової фрази сайту"
 
 #. Template Name of the plugin/theme
 msgid "Full Width - Contained Content"
-msgstr "全螢幕寬度 - 包覆的內容"
+msgstr "На всю ширину - обмеженний вміст"
 
 #. Template Name of the plugin/theme
 msgid "Full Width - Stretched Content"
-msgstr "全螢幕寬度 - 延伸的內容"
+msgstr "На всю ширину - розтягнутий вміст"
 
 #: inc/sanitize.php:240
 msgid "Upgrade to %1s to unlock this feature."
-msgstr "升級至 %1s 以取得這項功能。"
+msgstr "Оновити до %1s, для розблокування цієї особливості."
 
 #: inc/metabox.php:38
 msgid "Page Settings"
-msgstr "頁面設定"
+msgstr "Налаштування сторінки"
 
 #: inc/dashboard.php:782
 msgid "Get OnePress Plus now!"
-msgstr "立即取得 OnePress Plus！"
+msgstr "Отримай OnePress Plus зараз!"
 
 #: inc/dashboard.php:427
 msgid "Free vs PLUS"
-msgstr "版本比較"
+msgstr "Безкоштовно в порівнянні з PLUS"
 
 #: inc/dashboard.php:425
 msgid "Recommended Actions"
-msgstr "建議操作"
+msgstr "Рекомендовані дії"
 
 #: inc/customizer.php:3640
 msgid "OnePress Plus Available! Take a look"
-msgstr "現已提供 OnePress Plus，點擊瞭解更多！"
+msgstr "Доступний OnePress Plus! Ознайомтесь"
 
 #: inc/customizer.php:3630
 msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
-msgstr "<h4 class=\"customizer-group-heading-message\">拖放區段順序</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制首頁區段順序！</p><h4 class=\"customizer-group-heading-message\">進階區段樣式</h4><p class=\"customizer-group-heading-message\">購買 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 的授權便能完全控制區段樣式，包含背景色彩、圖片、影片、視差滾動效果、自訂樣式等等...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Розсташування секцій за допомогою перетягувань</h4><p class=\"customizer-group-heading-message\">Спробуйте <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версія для повного контролю РОЗСТАШУВАННЯ СЕКЦІЙ на головній сторінці!</p><h4 class=\"customizer-group-heading-message\">Розширене налаштування розділів</h4><p class=\"customizer-group-heading-message\">Спробуйте <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версія для повного контролю налаштування розділів, що включає колір фону, зображення, відео, ефект паралаксу, користувацьки стилі та багато іншого ...</p>"
 
 #: inc/customizer.php:3314
 msgid "Ascending"
-msgstr "升冪"
+msgstr "Висхідний"
 
 #: inc/customizer.php:3313
 msgid "Descending"
-msgstr "降冪"
+msgstr "Низхідний"
 
 #: inc/customizer.php:3309
 msgid "Order"
-msgstr "排序冪次"
+msgstr "Порядок"
 
 #: inc/customizer.php:3294
 msgid "Random order"
-msgstr "隨機排序"
+msgstr "Випадковий порядок"
 
 #: inc/customizer.php:3293
 msgid "Order by Page Order"
-msgstr "依頁面順序排序"
+msgstr "Упорядкувати за порядком сторінки"
 
 #: inc/customizer.php:3292
 msgid "Comment Count"
-msgstr "留言計數"
+msgstr "Кількість коментарів"
 
 #: inc/customizer.php:3291
 msgid "Date"
-msgstr "發表日期"
+msgstr "Дата"
 
 #: inc/customizer.php:3289
 msgid "Author"
-msgstr "作者"
+msgstr "Автор"
 
 #: inc/customizer.php:3288
 msgid "ID"
@@ -175,288 +175,288 @@ msgstr "ID"
 
 #: inc/customizer.php:3287
 msgid "Default"
-msgstr "預設"
+msgstr "За замовчуванням"
 
 #: inc/customizer.php:3283
 msgid "Order By"
-msgstr "排序方式"
+msgstr "Сортувати за"
 
 #: inc/customizer.php:3267
 msgid "Category to show"
-msgstr "要顯示的分類"
+msgstr "Категорія для показу"
 
 #: inc/customizer.php:2799
 msgid "1x"
-msgstr "原尺寸"
+msgstr "1x"
 
 #: inc/customizer.php:2798
 msgid "2x"
-msgstr "2 倍"
+msgstr "2x"
 
 #: inc/customizer.php:2797
 msgid "3x"
-msgstr "3 倍"
+msgstr "3x"
 
 #: inc/customizer.php:2796
 msgid "4x"
-msgstr "4 倍"
+msgstr "4x"
 
 #: inc/customizer.php:2795
 msgid "5x"
-msgstr "5 倍"
+msgstr "5x"
 
 #: inc/customizer.php:2790
 msgid "Icon Size"
-msgstr "圖示尺寸"
+msgstr "Розмір іконки"
 
 #: inc/customizer.php:2288
 msgid "Layout Settings"
-msgstr "版面配置設定"
+msgstr "Налаштування макету"
 
 #: inc/customizer.php:1568
 msgid "Rotating Text Background"
-msgstr "旋轉文字背景色彩"
+msgstr "Фон поворотного тексту"
 
 #: inc/customizer.php:1553
 msgid "Rotating Text Color"
-msgstr "旋轉文字色彩"
+msgstr "Колір поворотного тексту"
 
 #: inc/customizer.php:1529
 msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
-msgstr "這便是 <span class=\"js-rotating\">OnePress | 一頁式 | 回應式 | 盡善盡美</span>"
+msgstr "Ми це <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
 
 #: inc/customizer.php:1486
 msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
-msgstr "想為 [宣傳內容] 區段新增<strong>背景影片</strong>嗎？請升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> 即可取得這項功能。"
+msgstr "Хочете додати <strong>відео на фон</strong> для розділу Головний? Оновіться до  <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версії."
 
 #: inc/customizer.php:1255
 msgid "Disable Preload Icon"
-msgstr "停用預載圖示"
+msgstr "Приховати іконку попереднього завантаження"
 
 #: inc/customizer.php:1080
 msgid "Footer Copyright"
-msgstr "頁尾版權"
+msgstr "Авторське право в підвалі"
 
 #: inc/customizer.php:1067 inc/customizer.php:1134
 msgid "Link Hover Color"
-msgstr "連結游標停駐色彩"
+msgstr "Колір наведення на посилання"
 
 #: inc/customizer.php:1051 inc/customizer.php:1121
 msgid "Link Color"
-msgstr "連結色彩"
+msgstr "Колір посилання"
 
 #: inc/customizer.php:1034
 msgid "Widget Title Color"
-msgstr "小工具標題色彩"
+msgstr "Колір заголовку віджету"
 
 #: inc/customizer.php:985
 msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
-msgstr "輸入以 + (半形加號) 分隔的各欄欄寬數字，各欄欄寬數字加總必須小於或等於 12。"
+msgstr "Введіть цілі числа, їх сума повинна бути меншою або рівною 12, розділені  \"+\""
 
 #: inc/customizer.php:983
 msgid "Custom footer %s columns width"
-msgstr "自訂頁尾 %s 欄欄寬"
+msgstr "Ширина %s колонок користувацького підвалу"
 
 #: inc/customizer.php:983
 msgid "Custom footer 1 column width"
-msgstr "自訂頁尾 1 欄欄寬"
+msgstr "Ширина 1 колонки користувацького підвалу"
 
 #: inc/customizer.php:959
 msgid "Disable footer widgets"
-msgstr "停用頁尾小工具"
+msgstr "Вимкнути віджети підвалу"
 
 #: inc/customizer.php:953
 msgid "Number footer columns to display."
-msgstr "頁尾顯示欄數。"
+msgstr "Кількість колонок підвалу для відображення."
 
 #: inc/customizer.php:933
 msgid "Footer Widgets"
-msgstr "頁尾小工具"
+msgstr "Віджети підвалу"
 
 #: inc/customizer.php:918 inc/customizer.php:1001 inc/customizer.php:1108
 msgid "Text Color"
-msgstr "文字色彩"
+msgstr "Колір тексту"
 
 #: inc/customizer.php:822 inc/customizer.php:2334 inc/customizer.php:2530
 #: inc/customizer.php:2743 inc/customizer.php:2931 inc/customizer.php:3109
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
-msgstr "升級至 <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>，便能新增更多項目並取得其他付費功能！"
+msgstr "Оновити до <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> щоб мати змогу додавати більше елементів та розблокувати інші преміальні  premium можливості!"
 
 #: inc/customizer.php:750
 msgid "Footer Socials"
-msgstr "頁尾社交網路資料"
+msgstr "Соціальний мережі у підвалі"
 
 #: inc/customizer.php:696
 msgid "Right"
-msgstr "靠右"
+msgstr "Справа"
 
 #: inc/customizer.php:695
 msgid "Left"
-msgstr "靠左"
+msgstr "Зліва"
 
 #: inc/customizer.php:694
 msgid "Center"
-msgstr "置中"
+msgstr "По центру"
 
 #: inc/customizer.php:690
 msgid "Content Align"
-msgstr "內容對齊方式"
+msgstr "Розташування вмісту"
 
 #: inc/customizer.php:657
 msgid "Color"
-msgstr "色彩"
+msgstr "Колір"
 
 #: inc/customizer.php:641
 msgid "The page cover padding bottom in percent (%)."
-msgstr "宣傳內容的下邊框間距，單位為百分比 (%)。"
+msgstr "Внутрішній відступ обкладинки сторінки знизу у відсотках (%)."
 
 #: inc/customizer.php:640
 msgid "Padding Bottom"
-msgstr "下邊框距離"
+msgstr "Внутрішній відступ знизу"
 
 #: inc/customizer.php:626
 msgid "The page cover padding top in percent (%)."
-msgstr "宣傳內容的上邊框間距，單位為百分比 (%)。"
+msgstr "Внутрішній відступ обкладинки сторінки зверху у відсотках (%)."
 
 #: inc/customizer.php:625
 msgid "Padding Top"
-msgstr "上邊框距離"
+msgstr "Внутрішній відступ зверху"
 
 #: inc/customizer.php:612
 msgid "Check this box to disable the page title bar on all pages."
-msgstr "啟用這項設定後，便可在所有頁面停用頁面標題列。"
+msgstr "Позначте щоб вимкнути заголовок сторінки на усіх сторінках."
 
 #: inc/customizer.php:610
 msgid "Disable Page Title bar?"
-msgstr "停用頁面標題列"
+msgstr "Вимкнути заголовок сторінки?"
 
 #: inc/customizer.php:594
 msgid "Page Title Area"
-msgstr "頁面標題區域"
+msgstr "Зона заголовку сторінки"
 
 #: inc/customizer.php:584
 msgid "Padding left and right for Navigation items (pixels)."
-msgstr "導覽項目的左右邊框間距 (單位為 px)"
+msgstr "Внутрішні відступи з ліва та з права для елементів навігації (пікселі)."
 
 #: inc/customizer.php:583
 msgid "Menu Item Padding"
-msgstr "選單項目邊框間距"
+msgstr "Внутрішні відступи елемента меню"
 
 #: inc/customizer.php:569
 msgid "Navigation"
-msgstr "導覽"
+msgstr "Навігація"
 
 #: inc/customizer.php:557
 msgid "Transparent Site Tagline Color"
-msgstr "透明網站說明色彩"
+msgstr "Прозорий колір ключової фрази сайту"
 
 #: inc/customizer.php:541
 msgid "Transparent Site Title Color"
-msgstr "透明網站標題色彩"
+msgstr "Прозорий колір заголовку сайту"
 
 #: inc/customizer.php:508
 msgid "Transparent Retina Logo"
-msgstr "透明 Retina 標誌"
+msgstr "Прозорий логотип Retina"
 
 #: inc/customizer.php:490 inc/customizer.php:509
 msgid "Only apply when transparent header option is checked."
-msgstr "啟用 [透明頁首] 後才會產生效果。"
+msgstr "Застосовується лише при налаштованому прозорому заголовку."
 
 #: inc/customizer.php:488
 msgid "Transparent Logo"
-msgstr "透明標誌"
+msgstr "Прозорий логотип"
 
 #: inc/customizer.php:294
 msgid "Below Hero Slider"
-msgstr "宣傳內容投影片輪播下方"
+msgstr "Під Головним слайдером"
 
 #: inc/customizer.php:293
 msgid "Top"
-msgstr "頂端"
+msgstr "Зверху"
 
 #: inc/customizer.php:290
 msgid "Header Position"
-msgstr "頁首位置"
+msgstr "Розташування заголовку"
 
 #: inc/customizer.php:272
 msgid "Contained"
-msgstr "完整置於元素區域內"
+msgstr "Обмеженний"
 
 #: inc/customizer.php:268
 msgid "Header Width"
-msgstr "頁首寬度"
+msgstr "Ширина заголовку"
 
 #: inc/customizer.php:218
 msgid "Check this if you want to disable default google fonts in theme."
-msgstr "啟用這項設定後，便可停用佈景主題預設的 Google Fonts。"
+msgstr "Відмітьте якщо хочете вимкнути в темі google fonts за замовчанням."
 
 #: inc/customizer.php:216
 msgid "Disable Google Fonts"
-msgstr "停用 Google Fonts"
+msgstr "Вимкнути Google Fonts"
 
 #: inc/customizer.php:119
 msgid "Logo Height In Pixel"
-msgstr "標誌高度 (單位為 px)"
+msgstr "Висота логотипу в пікселях"
 
 #: inc/customizer.php:101
 msgid "Retina Logo"
-msgstr "Retina 標誌"
+msgstr "Логотип Retina"
 
 #: inc/customizer-controls.php:632
 msgid "All"
-msgstr "所有分類"
+msgstr "Всі"
 
 #: functions.php:165
 msgid "Footer %s"
-msgstr "頁尾 %s"
+msgstr "Підвал %s"
 
 #: comments.php:32
 msgid "One thought on &ldquo;%2$s&rdquo;"
-msgstr "在《%2$s》中有 1 則留言"
+msgstr "Один коментар до &ldquo;%2$s&rdquo;"
 
 #: inc/customizer.php:741
 msgid "Check this box to show single post meta such as post date, author, category,..."
-msgstr "啟用這項設定後，便可顯示單篇文章的發表日期、作者、分類等中繼資料。"
+msgstr "Відмітьте якщо хочете показувати такі метаданні як дата допису, автор, категорія і т.д. на окремому записі"
 
 #: inc/customizer.php:739
 msgid "Show single post meta"
-msgstr "顯示單篇文章中繼資料"
+msgstr "Показувати метаданні на окремому записі"
 
 #: inc/customizer.php:726
 msgid "Check this box to show post thumbnail on single post."
-msgstr "啟用這項設定後，便可在單篇文章中顯示縮圖。"
+msgstr "Відмітьте щоб показувати мініатюру запису на окремому записі."
 
 #: inc/customizer.php:724
 msgid "Show single post thumbnail"
-msgstr "顯示單篇文章的精選圖片"
+msgstr "Показівати мініатюру на окремому записі"
 
 #: inc/customizer.php:709
 msgid "Single Post"
-msgstr "單篇文章"
+msgstr "Окремий запис"
 
 #: inc/customizer.php:1378
 msgid "The amount of time in between slides, expressed as the number of milliseconds."
-msgstr "每張投影片的間隔時間，以毫秒為單位。"
+msgstr "Кількість часу між слайдами, виражена як число мілісекунд."
 
 #: inc/customizer.php:1377
 msgid "Slider duration speed"
-msgstr "投影片輪播間隔時間"
+msgstr "Швидкість тривалості слайдера"
 
 #: inc/customizer.php:1361
 msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
-msgstr "設定圖片淡入顯示速度。請輸入整數，單位為毫秒。"
+msgstr "Це швидкість, з якою зображення зникне. Цілі числа в мілісекундах приймаються."
 
 #: inc/customizer.php:1360
 msgid "Slider animation speed"
-msgstr "投影片輪播動畫速度"
+msgstr "Швидкість анімації слайдера"
 
 #: inc/customizer.php:1342
 msgid "Text animation speed"
-msgstr "文字動畫速度"
+msgstr "Швидкість анімації тексту"
 
 #: inc/dashboard.php:479
 msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
-msgstr "子佈景主題使用自己的佈景主題設定名稱，你想將設定資料從上層佈景主題複製到這個子佈景主題嗎？"
+msgstr "Тема нащадок використовує власну назву налаштування теми, чи хочете ви скопіювати дані налаштування з батьківської теми до цієї теми нащадка?"
 
 #: inc/customizer.php:3697
 msgid "Font Awesome"
@@ -464,75 +464,75 @@ msgstr "Font Awesome"
 
 #: inc/customizer.php:3693
 msgid "Search"
-msgstr "搜尋"
+msgstr "Пошук"
 
 #: inc/dashboard.php:860
 msgid "Are you sure want to copy ?"
-msgstr "確定要進行複製嗎？"
+msgstr "Ви впевнені що хочете скопіювати?"
 
 #: inc/dashboard.php:519
 msgid "Recommend Plugins"
-msgstr "建議安裝的外掛"
+msgstr "Рекомендовані плагіни"
 
 #: inc/dashboard.php:499
 msgid "Copy now"
-msgstr "立即複製"
+msgstr "Копіювати зараз"
 
 #: inc/dashboard.php:491
 msgid "To Theme"
-msgstr "到佈景主題"
+msgstr "До теми"
 
 #: inc/dashboard.php:485
 msgid "From Theme"
-msgstr "從佈景主題"
+msgstr "З теми"
 
 #: inc/dashboard.php:477
 msgid "You're using %1$s theme, It's a child theme of OnePress"
-msgstr "這個網站目前使用的 %1$s 佈景主題，是 OnePress 的子佈景主題。"
+msgstr "Ви використовуєте тему %1$s, яка є темою нащадком OnePress"
 
 #: inc/dashboard.php:331
 msgid "Details"
-msgstr "詳細資料"
+msgstr "Деталі"
 
 #: inc/dashboard.php:259
 msgid "Import Demo Data"
-msgstr "匯入示範資料"
+msgstr "Імпортувати демо-дані"
 
 #: inc/dashboard.php:259
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
-msgstr "匯入我們提供的示範資料便可大幅節省時間，而網站將會在幾分鐘內設定完畢並可供自訂。%s"
+msgstr "Економте час, імпортуючи наші демонстраційні дані, ваш веб-сайт буде встановлений і готовий до налаштування в лічені хвилини. %s"
 
 #: inc/customizer.php:2170
 msgid "Read More Text"
-msgstr "[檢閱更多] 連結文字"
+msgstr "Текст читати далі"
 
 #: inc/customizer.php:2165 section-parts/section-gallery.php:38
 msgid "View More"
-msgstr "檢閱更多"
+msgstr "Переглянути більше"
 
 #: inc/customizer.php:2155
 msgid "Read More Link"
-msgstr "[檢閱更多] 連結"
+msgstr "Посилання Читати далі"
 
 #: inc/customizer.php:166
 msgid "No sidebar"
-msgstr "無側欄"
+msgstr "Без бічної колонки"
 
 #: inc/customizer.php:165
 msgid "Left sidebar"
-msgstr "左側欄"
+msgstr "Ліва бічна колонка"
 
 #: inc/customizer.php:164
 msgid "Right sidebar"
-msgstr "右側欄"
+msgstr "Права бічна колонка"
 
 #: inc/customizer.php:161
 msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
-msgstr "網站版面配置會套用至所有頁面，但不包含首頁及頁面自訂模板。"
+msgstr "Макет сайту, застосувати до всіх сторінок, виключивши домашню сторінку та користувацьки шаблони сторінок."
 
 #: inc/customizer.php:160
 msgid "Site Layout"
-msgstr "網站版面配置"
+msgstr "Макет сайту"
 
 #: functions.php:106
 msgid "Famethemes Demo Importer"
@@ -540,95 +540,95 @@ msgstr "Famethemes Demo Importer"
 
 #: functions.php:154
 msgid "WooCommerce Sidebar"
-msgstr "WooCommerce 側欄"
+msgstr "Бічна колонка WooCommerce"
 
 #: inc/customizer.php:2296 inc/customizer.php:2708
 msgid "1 Column"
-msgstr "1 欄"
+msgstr "1 колонка"
 
 #: inc/customizer.php:2139
 msgid "Enable Lightbox"
-msgstr "啟用燈箱效果"
+msgstr "Увімкнути Lightbox"
 
 #: inc/customizer.php:2125
 msgid "Number items"
-msgstr "項目數量"
+msgstr "Кількість елементів"
 
 #: inc/customizer.php:2100
 msgid "Layout columns"
-msgstr "項目行版面配置"
+msgstr "Розміщення колонок"
 
 #: inc/customizer.php:2084
 msgid "Row Height"
-msgstr "項目列高"
+msgstr "Висота рядку"
 
 #: inc/customizer.php:2068
 msgid "Item Spacing"
-msgstr "項目間距"
+msgstr "Відступ навколо елемента"
 
 #: inc/customizer.php:2054
 msgid "Masonry"
-msgstr "柱狀"
+msgstr "Плитка"
 
 #: inc/customizer.php:2053
 msgid "Justified"
-msgstr "左右對齊"
+msgstr "По ширині"
 
 #: inc/customizer.php:2052
 msgid "Slider"
-msgstr "投影片輪播"
+msgstr "Слайдер"
 
 #: inc/customizer.php:2051
 msgid "Carousel"
-msgstr "輪播"
+msgstr "Карусель"
 
 #: inc/customizer.php:2050
 msgid "Grid"
-msgstr "格線"
+msgstr "Сітка"
 
 #: inc/customizer.php:2045
 msgid "Display"
-msgstr "顯示方式"
+msgstr "Відобразити"
 
 #: inc/customizer.php:2030
 msgid "Default, inside container"
-msgstr "在容器中顯示 (預設值)"
+msgstr "По замовчуванню, всередині контейнера"
 
 #: inc/customizer.php:950 inc/customizer.php:2025
 msgid "Layout"
-msgstr "版面配置"
+msgstr "Макет"
 
 #: inc/customizer.php:2011
 msgid "Select a page which have content contain [gallery] shortcode."
-msgstr "選取內容中包含 [gallery] 短代碼的頁面。"
+msgstr "Обрати сторінку у якій вміст містить скорочений код [gallery]."
 
 #: inc/customizer.php:2006
 msgid "Select Gallery Page"
-msgstr "選取藝廊頁面"
+msgstr "Обрати сторінку Галерея"
 
 #: inc/customizer.php:1989
 msgid "Page"
-msgstr "頁面"
+msgstr "Сторінка"
 
 #: inc/customizer.php:1984
 msgid "Select Gallery Source"
-msgstr "選取藝廊來源"
+msgstr "Обрати джерело Галереї"
 
 #: inc/customizer.php:1923 section-parts/section-gallery.php:4
 msgid "Gallery"
-msgstr "藝廊"
+msgstr "Галерея"
 
 #: inc/customizer.php:1908 section-parts/section-gallery.php:2
 msgid "gallery"
-msgstr "gallery"
+msgstr "галерея"
 
 #: inc/customizer.php:1873
 msgid "Section: Gallery"
-msgstr "區段: 藝廊"
+msgstr "Розділ: Галерея"
 
 #: inc/customizer.php:345
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
-msgstr "按一下網站標誌或網站標題便能返回頂端，這項效果僅適用於首頁。"
+msgstr "Переміщатись угору, коли натискаєте логотип або назву сайту, застосовувати лише на головній сторінці."
 
 #: inc/dashboard.php:840
 msgid "FameThemes Demo Importer"
@@ -636,433 +636,435 @@ msgstr "FameThemes Demo Importer"
 
 #: inc/dashboard.php:839
 msgid "Hey."
-msgstr "請注意！"
+msgstr "Привіт."
 
 #: inc/dashboard.php:837
 msgid "%1$s you will need to install and activate the %2$s plugin first."
-msgstr "%1$s你必須先安裝 %2$s 外掛並予以啟用。"
+msgstr "%1$s спершу необхідно встановити та активувати плагін %2$s."
 
 #: inc/dashboard.php:311 inc/dashboard.php:821
 msgid "Active Now"
-msgstr "立即啟用"
+msgstr "Активувати зараз"
 
 #: inc/dashboard.php:289 inc/dashboard.php:799
 msgid "Install Now"
-msgstr "立即安裝"
+msgstr "Встановити зараз"
 
 #: inc/dashboard.php:429
 msgid "One Click Demo Import"
-msgstr "一鍵匯入示範資料"
+msgstr "One Click Demo Import"
 
 #: inc/customizer.php:1694
 msgid "Button #2 style"
-msgstr "第二顆按鈕的樣式"
+msgstr "Стиль кнопки #2"
 
 #: inc/customizer.php:3341
 msgid "More News Button Text"
-msgstr "[更多消息] 按鈕文字"
+msgstr "Текст кнопки Більше новин"
 
 #: inc/customizer.php:3330
 msgid "It should be your blog page link."
-msgstr "請在此輸入網站文章頁面連結。"
+msgstr "Це має бути посилання на ваш блог."
 
 #: inc/customizer.php:1639 inc/customizer.php:1705
 msgid "Danger"
-msgstr "危險"
+msgstr "Небезпека"
 
 #: inc/customizer.php:1638 inc/customizer.php:1704
 msgid "Warning"
-msgstr "警告"
+msgstr "Попередження"
 
 #: inc/customizer.php:1637 inc/customizer.php:1703
 msgid "Info"
-msgstr "資訊"
+msgstr "Інформація"
 
 #: inc/customizer.php:1636 inc/customizer.php:1702
 msgid "Success"
-msgstr "成功"
+msgstr "Успішно"
 
 #: inc/customizer.php:1635 inc/customizer.php:1701
 msgid "Primary"
-msgstr "主要"
+msgstr "Головна"
 
 #: inc/customizer.php:1634 inc/customizer.php:1700
 msgid "Button"
-msgstr "按鈕"
+msgstr "Кнопка"
 
 #: inc/customizer.php:1633 inc/customizer.php:1699
 msgid "Button Secondary"
-msgstr "按鈕次色"
+msgstr "Допоміжна кнопка"
 
 #: inc/customizer.php:1632 inc/customizer.php:1698
 msgid "Button Primary"
-msgstr "按鈕主色"
+msgstr "Головна кнопка"
 
 #: inc/customizer.php:1628
 msgid "Button #1 style"
-msgstr "第一顆按鈕的樣式"
+msgstr "Стиль кнопки #1"
 
 #: inc/customizer.php:1287
 msgid "The hero content padding bottom in percent (%)."
-msgstr "宣傳內容的下邊框間距，單位為百分比 (%)。"
+msgstr "Внутрішній відступ знизу від Головного вмісту у відсотках (%)."
 
 #: inc/customizer.php:1271
 msgid "The hero content padding top in percent (%)."
-msgstr "宣傳內容的上邊框間距，單位為百分比 (%)。"
+msgstr "Внутрішній відступ зверху від Головного вмісту у відсотках (%)."
 
 #: inc/customizer.php:1343
 msgid "The delay between the changing of each phrase in milliseconds."
-msgstr "設定短語變更時的延遲時間，以毫秒為單位。"
+msgstr "Затримка між зміною кожної фрази в мілісекундах."
 
 #: inc/customizer.php:891
 msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
-msgstr "這份電子報訂閱表單採用了 MailChimp 服務，請參考<a target=\"_blank\" href=\"http://goo.gl/uRVIst\">這份線上說明</a>，進以瞭解如何取得 MailChimp 訂閱網址。此處的範例為 <b>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</b>。"
+msgstr "Форма підписки використовує сервіс MailChimp, перейдіть за посиланням <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">на настанови</a>, щоб дізнатися як отримати посилання до дії від MailChimp. Наприклад: <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 
 #: inc/customizer.php:81
 msgid "Hide site tagline"
-msgstr "隱藏網站說明"
+msgstr "Приховати ключову фразу сайту"
 
 #: inc/customizer.php:66
 msgid "Hide site title"
-msgstr "隱藏網站標題"
+msgstr "Приховати заголовок сайту"
 
 #: inc/customizer.php:2541 inc/customizer.php:2750
 msgid "image"
-msgstr "圖片"
+msgstr "Зображення"
 
 #: inc/customizer.php:1323
 msgid "Text animation"
-msgstr "文字動畫效果"
+msgstr "Анімація тексту"
 
 #: inc/dashboard.php:225
 msgid "OnePress Theme %s"
-msgstr "OnePress 佈景主題 %s"
+msgstr "Тема OnePress %s"
 
 #: inc/dashboard.php:223
 msgid "%1$s action required"
 msgid_plural "%1$s actions required"
-msgstr[0] "%1$s 個必要動作"
+msgstr[0] "%1$s необхідна дія"
+msgstr[1] "%1$s необхідні дії"
+msgstr[2] "%1$s необхідно дії"
 
 #: inc/customizer.php:1148 inc/customizer.php:1166
 msgid "Custom CSS"
-msgstr "自訂 CSS"
+msgstr "Користувацький код CSS"
 
 #: section-parts/section-features.php:5
 msgid "Why choose Us"
-msgstr "為什麼選擇我們"
+msgstr "Чому варто обрати нас"
 
 #: inc/customizer.php:2700
 msgid "Services Layout Settings"
-msgstr "[服務項目] 版面配置設定"
+msgstr "Налаштування макету Послуги"
 
 #: inc/customizer.php:2559 inc/customizer.php:3117
 msgid "Custom Link"
-msgstr "自訂連結"
+msgstr "Користувацьке посилання"
 
 #: inc/customizer.php:2555
 msgid "Description"
-msgstr "內容說明"
+msgstr "Надпис"
 
 #: inc/customizer.php:2524
 msgid "Features content"
-msgstr "精選內容"
+msgstr "Вміст Особливості"
 
 #: inc/customizer.php:2488
 msgid "Features Layout Setting"
-msgstr "[精選內容] 版面配置設定"
+msgstr "Налаштування макету Особливості"
 
 #: inc/customizer.php:2435 section-parts/section-features.php:4
 msgid "Features"
-msgstr "精選內容"
+msgstr "риси"
 
 #: inc/customizer.php:2420 section-parts/section-features.php:2
 msgid "features"
-msgstr "features"
+msgstr "особливості"
 
 #: inc/customizer.php:2385
 msgid "Section: Features"
-msgstr "區段: 精選內容"
+msgstr "Розділ: Особливості"
 
 #: inc/customizer.php:1960 inc/customizer.php:2271 inc/customizer.php:2472
 #: inc/customizer.php:2683 inc/customizer.php:2896 inc/customizer.php:3052
 #: inc/customizer.php:3222 inc/customizer.php:3440
 msgid "Section Description"
-msgstr "區段內容說明"
+msgstr "Розділ Опис"
 
 #: inc/customizer.php:1756 inc/customizer.php:2550 inc/customizer.php:2759
 msgid "Image"
-msgstr "圖片"
+msgstr "Графіка"
 
 #: inc/customizer.php:1738
 msgid "Content Text"
-msgstr "內容文字"
+msgstr "Зміст"
 
 #: inc/customizer.php:1518
 msgid "Layout 2"
-msgstr "版面配置 2"
+msgstr "Макет 2"
 
 #: inc/customizer.php:1517
 msgid "Layout 1"
-msgstr "版面配置 1"
+msgstr "Макет 1"
 
 #: inc/customizer.php:1512
 msgid "Display Layout"
-msgstr "顯示方式版面配置"
+msgstr "Відобразити макет"
 
 #: inc/customizer.php:833
 msgid "URL"
-msgstr "網址"
+msgstr "Посилання"
 
 #: inc/customizer.php:829 inc/customizer.php:2540 inc/customizer.php:2545
 #: inc/customizer.php:2749 inc/customizer.php:2754
 msgid "Icon"
-msgstr "圖示"
+msgstr "Иконка РС"
 
 #: inc/customizer.php:825
 msgid "Social network"
-msgstr "社交網路"
+msgstr "Соціальні мережі"
 
 #: inc/customizer.php:816
 msgid "Socials"
-msgstr "社交網路"
+msgstr "Соціальні мережі"
 
 #: inc/customizer.php:471
 msgid "Apply for front page template only."
-msgstr "這項效果僅適用於 [首頁] 模板。"
+msgstr "Застозувати лише для макету головної сторінки."
 
 #: inc/customizer.php:469
 msgid "Header Transparent"
-msgstr "透明頁首"
+msgstr "Прозорий заголовок"
 
 #: inc/template-tags.php:1616
 msgid "Subscribe"
-msgstr "訂閱"
+msgstr "Підписатися"
 
 #: inc/template-tags.php:1615
 msgid "Enter your e-mail address"
-msgstr "輸入你的電子郵件地址"
+msgstr "Введіть ваш e-mail"
 
 #: inc/dashboard.php:455
 msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
-msgstr "%s 這款 WordPress 佈景主題的技術支援，是透過 FameThemes 的技術支援需求系統進行。"
+msgstr "Підтримка для WordPress теми %s, ведеться через систему тікітів підтримки FameThemes."
 
 #: inc/dashboard.php:449
 msgid "OnePress Documentation"
-msgstr "OnePress 線上文件"
+msgstr "Документація OnePress"
 
 #: inc/customizer.php:2295 inc/customizer.php:2495 inc/customizer.php:2707
 #: inc/customizer.php:3075
 msgid "2 Columns"
-msgstr "2 欄"
+msgstr "2 колонки"
 
 #: inc/customizer.php:2294 inc/customizer.php:2494 inc/customizer.php:2706
 #: inc/customizer.php:3074
 msgid "3 Columns"
-msgstr "3 欄"
+msgstr "3 колонки"
 
 #: inc/customizer.php:2293 inc/customizer.php:2493 inc/customizer.php:2705
 #: inc/customizer.php:3073
 msgid "4 Columns"
-msgstr "4 欄"
+msgstr "4 колонки"
 
 #: inc/customizer.php:3068
 msgid "Team Layout Settings"
-msgstr "[團隊成員] 版面配置設定"
+msgstr "Налаштування макету Команда"
 
 #: inc/customizer.php:2371 inc/customizer.php:2584
 msgid "Page Excerpt"
-msgstr "頁面摘要"
+msgstr "Уривок сторінки"
 
 #: inc/customizer.php:2370 inc/customizer.php:2583
 msgid "Full Page Content"
-msgstr "完整頁面內容"
+msgstr "Повний вміст сторінки"
 
 #: inc/customizer.php:2365 inc/customizer.php:2578
 msgid "Item content source"
-msgstr "項目內容來源"
+msgstr "Джерело вмісту елемента"
 
 #: inc/customizer.php:2328
 msgid "About content page"
-msgstr "[關於] 內容頁面"
+msgstr "Вміст сторінки Про нас"
 
 #: inc/customizer.php:1468
 msgid "Enable parallax effect (apply for first BG image only)"
-msgstr "啟用視差滾動效果，但效果僅會套用至第一張背景圖片"
+msgstr "Увімкнути паралакс ефект (додається лише на перше зображення BG)"
 
 #: inc/customizer.php:330
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
-msgstr "如果使用了標誌但標誌高度太高，核取這項設定後便可自動將選單垂直居中對齊。"
+msgstr "Якщо ви використовуєте логотип і ваш логотип занадто високий, поставте прапорець біля цього пункту для автоматичного вертикального вирівнювання меню."
 
 #: inc/customizer.php:328
 msgid "Center vertical align for menu"
-msgstr "將選單垂直居中對齊"
+msgstr "Центр вертикального вирівнювання для меню"
 
 #: inc/customizer.php:450
 msgid "Responsive Menu Button Color"
-msgstr "回應式選單按鈕色彩"
+msgstr "Колір кнопки адаптивного меню"
 
 #: inc/customizer.php:435
 msgid "Menu Link Hover/Active BG Color"
-msgstr "選單連結游標停駐/點擊背景色彩"
+msgstr "BG колір посилання меню наведення/діючий"
 
 #: inc/customizer.php:419
 msgid "Menu Link Hover/Active Color"
-msgstr "選單連結游標停駐/點擊色彩"
+msgstr "Колір посилання меню наведення/діючий"
 
 #: inc/customizer.php:404
 msgid "Menu Link Color"
-msgstr "選單連結色彩"
+msgstr "Колір посилання меню"
 
 #: inc/customizer.php:377
 msgid "Only set if you don't use an image logo."
-msgstr "僅適用於未使用圖片標誌。"
+msgstr "Встановлюється лише якщо ви не використовуєте зображення як логотип."
 
 #: inc/customizer.php:375
 msgid "Site Title Color"
-msgstr "網站標題色彩"
+msgstr "Колір назви сайту"
 
 #: inc/customizer.php:359 inc/customizer.php:1017
 msgid "Background Color"
-msgstr "背景色彩"
+msgstr "Колір фону"
 
 #: inc/customizer.php:250
 msgid "Header"
-msgstr "頁首"
+msgstr "Шапка"
 
 #: inc/customizer.php:237
 msgid "Primary Color"
-msgstr "主要色彩"
+msgstr "Основний колір"
 
 #: inc/customizer.php:228
 msgid "Site Colors"
-msgstr "網站色彩"
+msgstr "Кольори сайту"
 
 #: inc/customizer.php:3112
 msgid "User media"
-msgstr "成員照片"
+msgstr "Медіа користувача"
 
 #: inc/customizer.php:1861
 msgid "Background image"
-msgstr "背景圖片"
+msgstr "Фонове зображення"
 
 #: inc/customizer.php:1846
 msgid "Paste Youtube or Vimeo url here"
-msgstr "在此貼上 YouTube 或 Vimeo 影片網址"
+msgstr "Вставьте тут посилання Youtube чи Vimeo"
 
 #: inc/customizer.php:1844
 msgid "Video url"
-msgstr "影片網址"
+msgstr "Посилання відео"
 
 #: inc/customizer.php:1829
 msgid "Section heading"
-msgstr "區段標題"
+msgstr "Заголовок розділу"
 
 #: inc/customizer.php:1225 inc/customizer.php:1813 inc/customizer.php:1915
 #: inc/customizer.php:2226 inc/customizer.php:2427 inc/customizer.php:2851
 #: inc/customizer.php:3177 inc/customizer.php:3395
 msgid "The section id, we will use this for link anchor."
-msgstr "下方的區段 ID 會用於連結錨點。如果你不清楚何謂連結錨點，請不要變更預設值。"
+msgstr "ID розділу, ми використовуємо як посилання якір."
 
 #: inc/customizer.php:1771
 msgid "Section: Video Lightbox"
-msgstr "區段: 燈箱效果影片"
+msgstr "Розділ: Відео лайтбокс"
 
 #: inc/dashboard.php:582
 msgid "Hooray! There are no required actions for you right now."
-msgstr "太棒了！目前沒有需要執行的必要動作。"
+msgstr "Ура! Зараз немає жодної дії для вас."
 
 #: inc/dashboard.php:572
 msgid "Change homepage page template"
-msgstr "變更首頁頁面模板"
+msgstr "Змінити шаблон головної сторінки"
 
 #: inc/dashboard.php:558
 msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
-msgstr "為了變更首頁區段內容，你必須將網站首頁設定為 [首頁] 模板。"
+msgstr "У випадку зміни вмісту розділу головної сторінки, вам необхідно встановити шаблон \"Головна сторінка\" як головну сторінку."
 
 #: inc/dashboard.php:555
 msgid "Set your homepage page template to \"Frontpage\"."
-msgstr "將首頁模板設定為 [首頁]。"
+msgstr "Встановити шаблон головна сторінка для \"Головна сторінка\"."
 
 #: inc/dashboard.php:541 inc/dashboard.php:565
 msgid "Setup front page displays"
-msgstr "設定 [首頁顯示]"
+msgstr "Налаштувати відображення головної сторінки"
 
 #: inc/dashboard.php:538
 msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
-msgstr "為了讓這個網站有個一頁式外觀，請前往 [外觀自訂器] -&gt; [指定首頁頁面]，並將 [首頁顯示] 設定為 [靜態頁面]。你也可以在 [設定] -&gt; [閱讀] 設定頁中進行相同的變更，效果相同。"
+msgstr "У випадку налаштування вигляду вашого сайту як односторінковий сайт, будь ласка перейдіть у Налаштування -&gt; Статична головна сторінка та перемкніть \"Відображення головної сторінки\" на \"Статична сторінка\"."
 
 #: inc/dashboard.php:536
 msgid "Switch \"Front page displays\" to \"A static page\""
-msgstr "將 [首頁顯示] 設定切換至 [靜態頁面]"
+msgstr "Перемкніть \"Відображення головної сторінки\" на \"Статична сторінка\""
 
 #: inc/dashboard.php:529 inc/dashboard.php:548
 msgid "Dismiss"
-msgstr "關閉"
+msgstr "Відхилити"
 
 #: inc/dashboard.php:416
 msgid "Welcome to OnePress - Version %1s"
-msgstr "歡迎使用 OnePress %1s 版"
+msgstr "Ласкаво просимо до OnePress - Версія %1s"
 
 #: inc/dashboard.php:250
 msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
-msgstr "你好，感謝採用 %1$s！要充分發揮這個佈景主題所提供的功能，請造訪 [<a href=\"%2$s\">歡迎頁面</a>]。"
+msgstr "Ласкаво просимо! Дякуємо що обрали %1$s! Щоб скористатися усіма перевагами нашої теми, будь ласка відвідайте нашу <a href=\"%2$s\">Вітальну сторінку</a>"
 
 #: inc/dashboard.php:227
 msgid "OnePress Theme"
-msgstr "OnePress 佈景主題"
+msgstr "Тема OnePress"
 
 #: inc/dashboard.php:230
 msgid "OnePress Dashboard"
-msgstr "OnePress 控制台"
+msgstr "Майстерня OnePress"
 
 #: inc/customizer.php:675 inc/customizer.php:1449
 msgid "Background Overlay Color"
-msgstr "背景重疊色彩"
+msgstr "Колір нашарування фону"
 
 #: inc/customizer.php:3614
 msgid "Section Order & Styling"
-msgstr "區段順序及樣式"
+msgstr "Розділ Послідовність та Стиль"
 
 #: inc/customizer.php:312
 msgid "Check this box to disable sticky header when scroll."
-msgstr "啟用這項設定後，便可停用頁面捲動時的固定式頁首。"
+msgstr "Відмітьте щоб вимкнути прикріплений заголовок при прокрутці."
 
 #: inc/customizer.php:310
 msgid "Disable Sticky Header?"
-msgstr "停用固定式頁首"
+msgstr "Вимкнути Прикріпленний заголовок?"
 
 #. Template Name of the plugin/theme
 msgid "Left Sidebar"
-msgstr "左側欄"
+msgstr "Лівий сайдбар"
 
 #: inc/customizer.php:271 inc/customizer.php:2031
 msgid "Full Width"
-msgstr "全螢幕寬度"
+msgstr "На всю ширину"
 
 #. Template Name of the plugin/theme
 msgid "Frontpage"
-msgstr "首頁"
+msgstr "Головна сторінка"
 
 #: template-parts/content-none.php:27
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "找不到你要的內容，也許搜尋功能能幫到你！"
+msgstr "Схоже, що не вдалося знайти те, що ви шукаєте. Можливо допоможе пошук."
 
 #: template-parts/content-none.php:22
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr "很抱歉，找不到你想要的內容，請換一個關鍵詞再次搜尋。"
+msgstr "Вибачте, але за вашим пошуковим запитом нічого не знайдено. Будь ласка, спробуйте інші ключові слова."
 
 #: template-parts/content-none.php:18
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "準備好發表你的第一篇文章嗎？<a href=\"%1$s\">由此開始</a>。"
+msgstr "Готові опублікувати свій перший запис? <a href=\"%1$s\">Почніть звідси</a>."
 
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
-msgstr "並未搜尋到符合的結果"
+msgstr "Нічого не Знайдено"
 
 #: template-parts/content-list.php:38 template-parts/content-page.php:21
 #: template-parts/content-single.php:35 template-parts/content.php:39
 msgid "Pages:"
-msgstr "頁次:"
+msgstr "Сторінки:"
 
 #: section-parts/section-hero.php:88
 msgid "#services"
@@ -1070,56 +1072,56 @@ msgstr "#services"
 
 #: section-parts/section-contact.php:48
 msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
-msgstr "安裝 %1$s 外掛後，請前往 [外觀自訂器] &rarr; [區段: 聯絡資訊] &rarr; [區段內容] 進行設定，便能在此顯示工作聯絡資訊。"
+msgstr "Ви можете встановити плагін  %1$s та перейти у Налаштовувач &rarr; Розділ: Контакт &rarr; Вміст розділу для відображення тут працюючої контактної форми."
 
 #: search.php:16
 msgid "Search Results for: %s"
-msgstr "搜尋「%s」的結果"
+msgstr "Пошукові результати для: %s"
 
 #: inc/template-tags.php:467
 msgid "Your comment is awaiting moderation."
-msgstr "你的留言正在進行審核。"
+msgstr "Ваш коментар очікує на модерацію"
 
 #: inc/template-tags.php:462
 msgid "Edit"
-msgstr "編輯"
+msgstr "Змінити"
 
 #. translators: 1: date, 2: time
 #: inc/template-tags.php:461
 msgid "Reply"
-msgstr "回覆"
+msgstr "Відповісти"
 
 #: inc/template-tags.php:453
 msgid "Post author"
-msgstr "文章作者"
+msgstr "Автор запису"
 
 #: inc/template-tags.php:434
 msgid "(Edit)"
-msgstr "(編輯)"
+msgstr "(Редагувати)"
 
 #: inc/template-tags.php:434
 msgid "Pingback:"
-msgstr "通告:"
+msgstr "Pingback:"
 
 #: inc/template-tags.php:364
 msgid "% Comments"
-msgstr "% 則留言"
+msgstr "Коментарів: %"
 
 #: inc/template-tags.php:364
 msgid "1 Comment"
-msgstr "1 則留言"
+msgstr "1 Коментар"
 
 #: inc/template-tags.php:364
 msgid "Leave a comment"
-msgstr "留下留言"
+msgstr "Коментувати"
 
 #: inc/template-tags.php:358
 msgid "Tagged %1$s"
-msgstr "標籤: %1$s"
+msgstr "Позначено %1$s"
 
 #: inc/template-tags.php:352
 msgid "Posted in %1$s"
-msgstr "分類: %1$s"
+msgstr "Опубліковано у %1$s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:350 inc/template-tags.php:356
@@ -1129,197 +1131,197 @@ msgstr ", "
 #: inc/template-tags.php:332
 msgctxt "post author"
 msgid "by %s"
-msgstr "由 %s 撰寫"
+msgstr "від %s"
 
 #: inc/template-tags.php:327
 msgctxt "post date"
 msgid "Posted on %s"
-msgstr "發表於 %s"
+msgstr "Опубліковано %s"
 
 #: inc/dashboard.php:454
 msgid "Having Trouble, Need Support?"
-msgstr "發生問題需要協助嗎？"
+msgstr "Маєте питання, потрібна допомога?"
 
 #: inc/dashboard.php:447
 msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
-msgstr "在設定與配置 %s 時需要協助嗎？請參考我們的線上文件說明。"
+msgstr "Потрібна допомога у встановленні чи налаштуванні %s? Будь ласка ознайомтесь з нашою документацією."
 
 #: inc/dashboard.php:446
 msgid "Theme Documentation"
-msgstr "佈景主題線上文件"
+msgstr "Документація теми"
 
 #: inc/dashboard.php:442
 msgid "Start Customize"
-msgstr "立即自訂"
+msgstr "Розпочати налаштування"
 
 #: inc/dashboard.php:440
 msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
-msgstr "%s 支援佈景主題 [外觀自訂器] 的所有設定，按一下 [立即自訂] 便能為這網站進行外觀設計。"
+msgstr "%s підтримує Налаштовувач теми для усіх налаштувань теми. Натисніть \"Налаштувати\" для початку налаштування вашого сайту."
 
 #: inc/dashboard.php:439
 msgid "Theme Customizer"
-msgstr "佈景主題外觀自訂器"
+msgstr "Налаштовувач теми"
 
 #: inc/dashboard.php:417
 msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
-msgstr "OnePress 是一款兼具創意及彈性的 WordPress 一頁式佈景主題，尤其適合商務用途、作品集展示、數位行銷代理、產品展示以及自由工作者的網站。"
+msgstr "OnePress це креативна та гнучка одно сторінкова WordPress тема, яка добре підходить для бізнесу, портфоліо, цифрових агентств, вітрин продуктів та фріланс веб-сайтів."
 
 #: inc/customizer.php:3595
 msgid "Fax"
-msgstr "傳真號碼"
+msgstr "Факс"
 
 #: inc/customizer.php:3580
 msgid "Email"
-msgstr "電子郵件地址"
+msgstr "Електронна Пошта"
 
 #: inc/customizer.php:3565
 msgid "Phone"
-msgstr "電話號碼"
+msgstr "телефон"
 
 #: inc/customizer.php:3550
 msgid "Address"
-msgstr "地址"
+msgstr "Адреса"
 
 #: inc/customizer.php:3535
 msgid "Contact Box Title"
-msgstr "聯絡資訊區塊標題"
+msgstr "Заголовок вікна Контакти"
 
 #: inc/customizer.php:3511
 msgid "Contact Text"
-msgstr "聯絡資訊內容"
+msgstr "Текст Контакти"
 
 #: inc/customizer.php:3496
 msgid "Check this box to hide contact form."
-msgstr "啟用這項設定後，便可隱藏聯絡表單。"
+msgstr "Відмітьте, щоб приховати контактну форму."
 
 #: inc/customizer.php:3494
 msgid "Hide contact form completely."
-msgstr "隱藏聯絡表單"
+msgstr "Повністю приховати контактну форму."
 
 #: inc/customizer.php:3478
 msgid "Contact Form Shortcode."
-msgstr "聯絡表單短代碼"
+msgstr "Скорочений код контактної форми."
 
 #: inc/customizer.php:3403 section-parts/section-contact.php:4
 msgid "Get in touch"
-msgstr "保持聯絡"
+msgstr "Будемо на зв'язку"
 
 #: inc/customizer.php:3388 section-parts/section-contact.php:2
 msgid "contact"
-msgstr "contact"
+msgstr "контакт"
 
 #: inc/customizer.php:3353
 msgid "Section: Contact"
-msgstr "區段: 聯絡資訊"
+msgstr "Розділ: Контакти"
 
 #: inc/customizer.php:3336 section-parts/section-news.php:8
 msgid "Read Our Blog"
-msgstr "閱讀更多消息"
+msgstr "Читайте наш блог"
 
 #: inc/customizer.php:3328
 msgid "More News button link"
-msgstr "[更多消息] 按鈕連結"
+msgstr "Посилання кнопки Більше новин"
 
 #: inc/customizer.php:3250
 msgid "Number of post to show"
-msgstr "文章顯示數量"
+msgstr "Кількість записів для відображення"
 
 #: inc/customizer.php:3185 section-parts/section-news.php:4
 msgid "Latest News"
-msgstr "最新消息"
+msgstr "Останні новини"
 
 #: inc/customizer.php:3170 section-parts/section-news.php:2
 msgid "news"
-msgstr "news"
+msgstr "новини"
 
 #: inc/customizer.php:3135
 msgid "Section: News"
-msgstr "區段: 最新消息"
+msgstr "Розділ: Новини"
 
 #: inc/customizer.php:3103
 msgid "Team members"
-msgstr "團隊成員"
+msgstr "Учасники команди"
 
 #: inc/customizer.php:3015 section-parts/section-team.php:4
 msgid "Our Team"
-msgstr "我們的團隊"
+msgstr "Наша команда"
 
 #: inc/customizer.php:3000 section-parts/section-team.php:2
 msgid "team"
-msgstr "team"
+msgstr "команда"
 
 #: inc/customizer.php:2966
 msgid "Section: Team"
-msgstr "區段: 團隊成員"
+msgstr "Розділ: Команда"
 
 #: inc/customizer.php:2950
 msgid "After number"
-msgstr "數字後的文字"
+msgstr "Після номеру"
 
 #: inc/customizer.php:2945
 msgid "Before number"
-msgstr "數字前的文字"
+msgstr "Перед номером"
 
 #: inc/customizer.php:2940
 msgid "Number"
-msgstr "數字"
+msgstr "Число"
 
 #: inc/customizer.php:2937
 msgid "Your counter label"
-msgstr "統計數字標籤"
+msgstr "Мітка ваш лічильник"
 
 #: inc/customizer.php:2533 inc/customizer.php:2934 inc/customizer.php:3290
 msgid "Title"
-msgstr "標題"
+msgstr "Тема"
 
 #: inc/customizer.php:2925
 msgid "Counter content"
-msgstr "統計數字內容"
+msgstr "Вміст лічильника"
 
 #: inc/customizer.php:2859 section-parts/section-counter.php:4
 msgid "Our Numbers"
-msgstr "我們的表現"
+msgstr "Наші цифри"
 
 #: inc/customizer.php:2844 section-parts/section-counter.php:2
 msgid "counter"
-msgstr "counter"
+msgstr "лічильник"
 
 #: inc/customizer.php:2810
 msgid "Section: Counter"
-msgstr "區段: 統計數字"
+msgstr "Розділ: Лічильник"
 
 #: inc/customizer.php:2537 inc/customizer.php:2746
 msgid "Custom icon"
-msgstr "自訂圖示"
+msgstr "Користувацька іконка"
 
 #: inc/customizer.php:2737
 msgid "Service content"
-msgstr "服務項目內容"
+msgstr "Вміст Послуги"
 
 #: inc/customizer.php:2646 section-parts/section-hero.php:87
 #: section-parts/section-services.php:4
 msgid "Our Services"
-msgstr "我們的服務項目"
+msgstr "Наші послуги"
 
 #: inc/customizer.php:2631 section-parts/section-services.php:2
 msgid "services"
-msgstr "services"
+msgstr "послуги"
 
 #: inc/customizer.php:2596
 msgid "Section: Services"
-msgstr "區段: 服務項目"
+msgstr "Розділ: Послуги"
 
 #: inc/customizer.php:2346 inc/customizer.php:2770
 msgid "Link to single page"
-msgstr "連結至單篇頁面"
+msgstr "Посилання на окрему сторінку"
 
 #: inc/customizer.php:2342
 msgid "Hide item title"
-msgstr "隱藏項目標題"
+msgstr "Приховати заголовок елементу"
 
 #: inc/customizer.php:2337 inc/customizer.php:2765
 msgid "Select a page"
-msgstr "選取頁面"
+msgstr "Обрати сторінку"
 
 #: inc/customizer.php:820 inc/customizer.php:2332 inc/customizer.php:2528
 #: inc/customizer.php:2741 inc/customizer.php:2929 inc/customizer.php:3107
@@ -1330,13 +1332,13 @@ msgstr "[live_title]"
 #: inc/customizer.php:2717 inc/customizer.php:2905 inc/customizer.php:3083
 #: inc/customizer.php:3450
 msgid "Section Content"
-msgstr "區段內容"
+msgstr "Вміст розділу"
 
 #: inc/customizer.php:1943 inc/customizer.php:2254 inc/customizer.php:2455
 #: inc/customizer.php:2666 inc/customizer.php:2879 inc/customizer.php:3035
 #: inc/customizer.php:3205 inc/customizer.php:3423
 msgid "Section Subtitle"
-msgstr "區段副標題"
+msgstr "Підзаголовок розділу"
 
 #: inc/customizer.php:1938 inc/customizer.php:2249 inc/customizer.php:2450
 #: inc/customizer.php:2661 inc/customizer.php:2874 inc/customizer.php:3030
@@ -1346,31 +1348,31 @@ msgstr "區段副標題"
 #: section-parts/section-news.php:5 section-parts/section-services.php:5
 #: section-parts/section-team.php:5
 msgid "Section subtitle"
-msgstr "區段副標題"
+msgstr "Підзаголовок розділу"
 
 #: inc/customizer.php:1928 inc/customizer.php:2239 inc/customizer.php:2440
 #: inc/customizer.php:2651 inc/customizer.php:2864 inc/customizer.php:3020
 #: inc/customizer.php:3190 inc/customizer.php:3408
 msgid "Section Title"
-msgstr "區段標題"
+msgstr "Заголовок розділу"
 
 #: inc/customizer.php:2219 section-parts/section-about.php:2
 msgid "about"
-msgstr "about"
+msgstr "Деталі"
 
 #: inc/customizer.php:1780 inc/customizer.php:1882 inc/customizer.php:2193
 #: inc/customizer.php:2394 inc/customizer.php:2605 inc/customizer.php:2819
 #: inc/customizer.php:2975 inc/customizer.php:3144 inc/customizer.php:3362
 msgid "Section Settings"
-msgstr "區段設定"
+msgstr "Налаштування розділу"
 
 #: inc/customizer.php:2184
 msgid "Section: About"
-msgstr "區段: 關於"
+msgstr "Розділ: Про нас"
 
 #: inc/customizer.php:1680
 msgid "Button #2 Link"
-msgstr "第二顆按鈕的連結"
+msgstr "Посилання Кнопки #2"
 
 #: inc/customizer.php:1675 section-parts/section-hero.php:90
 msgid "#contact"
@@ -1378,15 +1380,15 @@ msgstr "#contact"
 
 #: inc/customizer.php:1666
 msgid "Button #2 Text"
-msgstr "第二顆按鈕的文字"
+msgstr "Текст Кнопки #2"
 
 #: inc/customizer.php:1661 section-parts/section-hero.php:89
 msgid "Get Started"
-msgstr "開始使用"
+msgstr "отримати почав"
 
 #: inc/customizer.php:1615
 msgid "Button #1 Link"
-msgstr "第一顆按鈕的連結"
+msgstr "Посилання Кнопки #1"
 
 #: inc/customizer.php:1610
 msgid "#about"
@@ -1394,56 +1396,56 @@ msgstr "#about"
 
 #: inc/customizer.php:1601
 msgid "Button #1 Text"
-msgstr "第一顆按鈕的文字"
+msgstr "Текст Кнопки #1"
 
 #: inc/customizer.php:1596 inc/customizer.php:2234
 #: section-parts/section-about.php:4
 msgid "About Us"
-msgstr "關於我們"
+msgstr "Про нас"
 
 #: inc/customizer.php:1588
 msgid "You can use text rotate slider in this textarea too."
-msgstr "在這個文字區域也能使用旋轉文字輪播動畫效果。"
+msgstr "Ви також можете використовувати свлайдер обертання тексту в цьому текстовому полі."
 
 #: inc/customizer.php:1585
 msgid "Small Text"
-msgstr "小型文字"
+msgstr "Маленький текст"
 
 #: inc/customizer.php:1538
 msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation."
-msgstr "旋轉文字說明: 將需要旋轉的文字包含在 <span class=\"js-rotating\"> 起始標籤及 </span> 結束標籤中，並使用 \"|\" 符號加以區隔，然後請至 [外觀自訂器] -> [區段: 宣傳內容] -> [[宣傳內容] 設定] 中控制旋轉動畫效果。"
+msgstr "Інструкція Обертання тексту: Помістіть текст обертання розділений \"|\" у <span class=\"js-rotating\">...</span>, перейдіть у Налаштовувач -> Налаштування теми -> Розділ: Головний -> Налаштування Головний для керування анімацією поворота."
 
 #: inc/customizer.php:1536
 msgid "Large Text"
-msgstr "大型文字"
+msgstr "Великий текст"
 
 #: inc/customizer.php:1496
 msgid "Hero Content Layout"
-msgstr "[宣傳內容] 版面配置"
+msgstr "Шаблон вмісту Головний"
 
 #: inc/customizer.php:1423
 msgid "Background Image"
-msgstr "背景圖片"
+msgstr "Фонове зображення"
 
 #: inc/customizer.php:904 inc/customizer.php:1094 inc/customizer.php:1418
 msgid "Background"
-msgstr "背景"
+msgstr "Задній фон"
 
 #: inc/customizer.php:1414
 msgid "Background Images"
-msgstr "背景圖片"
+msgstr "Зображення фону"
 
 #: inc/customizer.php:1388
 msgid "Hero Background Media"
-msgstr "[宣傳內容] 背景媒體"
+msgstr "Медіа фону Головний"
 
 #: inc/customizer.php:1285
 msgid "Padding Bottom:"
-msgstr "下邊框距離:"
+msgstr "Внутрішній відступ знизу:"
 
 #: inc/customizer.php:1269
 msgid "Padding Top:"
-msgstr "上邊框距離:"
+msgstr "Внутрішній відступ зверху:"
 
 #: inc/customizer.php:1264 inc/customizer.php:1280
 msgid "10"
@@ -1451,245 +1453,269 @@ msgstr "10"
 
 #: inc/customizer.php:1241
 msgid "Check this box to make hero section full screen."
-msgstr "啟用這項設定後，便可以全螢幕寬度顯示宣傳內容。"
+msgstr "Відмітьте щоб зробити розділ Головний на весь екран."
 
 #: inc/customizer.php:1239
 msgid "Make hero section full screen"
-msgstr "以全螢幕寬度顯示宣傳內容"
+msgstr "Зробити розділ Головний на весь екран"
 
 #: inc/customizer.php:1223 inc/customizer.php:1811 inc/customizer.php:1913
 #: inc/customizer.php:2224 inc/customizer.php:2425 inc/customizer.php:2636
 #: inc/customizer.php:2849 inc/customizer.php:3005 inc/customizer.php:3175
 #: inc/customizer.php:3393
 msgid "Section ID:"
-msgstr "區段 ID:"
+msgstr "ID розділу:"
 
 #: inc/customizer.php:1218 section-parts/section-hero.php:2
 msgid "hero"
-msgstr "hero"
+msgstr "головний"
 
 #: inc/customizer.php:1211 inc/customizer.php:1798 inc/customizer.php:1900
 #: inc/customizer.php:2211 inc/customizer.php:2412 inc/customizer.php:2623
 #: inc/customizer.php:2836 inc/customizer.php:2993 inc/customizer.php:3162
 #: inc/customizer.php:3380
 msgid "Check this box to hide this section."
-msgstr "啟用這項設定後，便可隱藏這個區段。"
+msgstr "Відмітьте щоб приховати цей розділ."
 
 #: inc/customizer.php:1209 inc/customizer.php:1796 inc/customizer.php:1898
 #: inc/customizer.php:2209 inc/customizer.php:2410 inc/customizer.php:2621
 #: inc/customizer.php:2834 inc/customizer.php:2991 inc/customizer.php:3160
 #: inc/customizer.php:3378
 msgid "Hide this section?"
-msgstr "隱藏這個區段"
+msgstr "Приховати цей розділ?"
 
 #: inc/customizer.php:1193
 msgid "Hero Settings"
-msgstr "[宣傳內容] 設定"
+msgstr "Налаштування Головний"
 
 #: inc/customizer.php:1183
 msgid "Section: Hero"
-msgstr "區段: 宣傳內容"
+msgstr "Розділ: Головний"
 
 #: inc/customizer.php:889
 msgid "MailChimp Action URL"
-msgstr "MailChimp 訂閱網址"
+msgstr "Посилання до дії MailChimp"
 
 #: inc/customizer.php:873
 msgid "Newsletter Form Title"
-msgstr "電子報訂閱表單標題"
+msgstr "Заголовок форми підписки на розсилку"
 
 #: inc/customizer.php:859
 msgid "Check this box to hide footer newsletter form."
-msgstr "啟用這項設定後，便可隱藏頁尾電子報訂閱表單。"
+msgstr "Відмітьте щоб приховати форму підписки на розсилку у підвалі."
 
 #: inc/customizer.php:857
 msgid "Hide Footer Newsletter?"
-msgstr "隱藏頁尾訂閱電子報功能"
+msgstr "Приховати форму підписки на розсилку?"
 
 #: inc/customizer.php:796
 msgid "Social Footer Title"
-msgstr "頁尾社交網路資料標題"
+msgstr "Заголовок соціальні мережи у підвалі"
 
 #: inc/customizer.php:782
 msgid "The social profiles specified below will be displayed in the footer of your site."
-msgstr "在下方設定的社交網路資料，會顯示於網站頁尾。"
+msgstr "Наведені нижче соціальні профілі відображатимуться у підвалі вашого сайту."
 
 #: inc/customizer.php:769
 msgid "Check this box to hide footer social section."
-msgstr "啟用這項設定後，便可隱藏頁尾社交網路資料區段。"
+msgstr "Відмітьте щоб приховати соціальні мережи у підвалі."
 
 #: inc/customizer.php:767
 msgid "Hide Footer Social?"
-msgstr "隱藏頁尾社交網路資料"
+msgstr "Приховати соціальні мережи у підвалі?"
 
 #: inc/customizer.php:201
 msgid "Check this box to hide footer back to top button."
-msgstr "啟用這項設定後，便可隱藏頁尾的 [返回頂端] 按鈕。"
+msgstr "Відмітьте щоб приховати кнопку Повернутись вверх у підвалі."
 
 #: inc/customizer.php:199
 msgid "Hide footer back to top?"
-msgstr "隱藏頁尾 [返回頂端] 按鈕"
+msgstr "Приховати кнопку Повернутись вверх?"
 
 #: inc/customizer.php:184
 msgid "Check this box to disable all element animation when scroll."
-msgstr "啟用這項設定後，便可停用頁面捲動時的所有元素動畫效果。"
+msgstr "Відмітьте щоб приховати усі елементи анімації при прокручуванні."
 
 #: inc/customizer.php:182
 msgid "Disable animation effect?"
-msgstr "停用動畫效果"
+msgstr "Приховати ефекти анімації?"
 
 #: inc/customizer.php:143
 msgid "Global"
-msgstr "全域設定"
+msgstr "Загальний"
 
 #: inc/customizer.php:133
 msgid "Theme Options"
-msgstr "佈景主題選項"
+msgstr "Параметри теми"
 
 #: inc/customizer.php:46
 msgid "Select member"
-msgstr "選取成員"
+msgstr "Оберіть учасника"
 
 #: inc/customizer.php:35
 msgid "Select page"
-msgstr "選取頁面"
+msgstr "Оберіть сторінку"
 
 #: inc/customizer-controls.php:588
 msgid "Close"
-msgstr "關閉"
+msgstr "Закрити"
 
 #: inc/customizer-controls.php:553
 msgid "Change"
-msgstr "變更"
+msgstr "Зміна"
 
 #: inc/customizer-controls.php:553
 msgid "Add"
-msgstr "新增"
+msgstr "Добавити"
 
 #: inc/customizer-controls.php:552 inc/customizer-controls.php:574
 #: inc/customizer-controls.php:586
 msgid "Remove"
-msgstr "移除"
+msgstr "Видалити"
 
 #: inc/customizer-controls.php:321 inc/customizer-controls.php:436
 msgid "Item"
-msgstr "項目"
+msgstr "Елемент"
 
 #: inc/customizer-controls.php:421
 msgid "Add an item"
-msgstr "新增項目"
+msgstr "Додати елемент"
 
 #: inc/template-tags.php:229
 msgid "Menu"
-msgstr "選單"
+msgstr "Меню"
 
 #: header.php:25
 msgid "Skip to content"
-msgstr "跳至主內容區"
+msgstr "Перейти до вмісту"
 
 #: functions.php:391
 msgid "Please contact the administrator of this site for help."
-msgstr "請聯絡這個網站的管理者尋求協助。"
+msgstr "Будь ласка, зверніться за допомогою до адміністратора сайту."
 
 #: functions.php:390
 msgid "All plugins installed and activated successfully. %1$s"
-msgstr "所有外掛均已成功安裝並完成啟用。%1$s"
+msgstr "Все плагіни успішно встановлені і активовані.%1$s"
 
 #: functions.php:389
 msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
-msgstr "外掛尚未啟用。這個佈景主題須要配合較新版本的 %s，請將外掛予以更新。"
+msgstr "Плагін не активовано. Для цієї теми потрібна новіша версія %s. Будь ласка, оновіть плагін."
 
 #: functions.php:388
 msgid "No action taken. Plugin %1$s was already active."
-msgstr "無須進行任何操作。外掛 %1$s 已完成啟用。"
+msgstr "Ніяких дій не здійснено. Плагін %1$s було вже активовано."
 
 #: functions.php:387
 msgid "The following plugin was activated successfully:"
-msgstr "下列外掛以成功完成啟用:"
+msgstr "Наступний плагін успішно активовано:"
 
 #: functions.php:386
 msgid "Plugin activated successfully."
-msgstr "外掛啟用成功。"
+msgstr "Плагін успішно активовано."
 
 #: functions.php:385
 msgid "Return to Required Plugins Installer"
-msgstr "返回 [安裝必要的外掛]"
+msgstr "Повернутися до Устанвка необхідних плагінів"
 
 #: functions.php:384
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
-msgstr[0] "啟用外掛"
+msgstr[0] "Розпочати активацію плагіна"
+msgstr[1] "Розпочати активацію плагінів"
+msgstr[2] "Розпочати активацію плагінів"
 
 #: functions.php:383
 msgid "Begin updating plugin"
 msgid_plural "Begin updating plugins"
-msgstr[0] "更新外掛"
+msgstr[0] "Розпочати оновлення плагіна"
+msgstr[1] "Розпочати оновлення плагінів"
+msgstr[2] "Розпочати оновлення плагінів"
 
 #: functions.php:382
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
-msgstr[0] "安裝外掛"
+msgstr[0] "Початок встановлення плагіна"
+msgstr[1] "Початок встановлення плагінів"
+msgstr[2] ""
 
 #: functions.php:381
 msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
-msgstr[0] "很抱歉，你沒有啟用這 %1$s 個外掛的必要權限。"
+msgstr[0] "Просимо вибачення, але у вас нема прав для активації %1$s плагіна."
+msgstr[1] "Просимо вибачення, але у вас нема прав для активації %1$s плагінів."
+msgstr[2] "Просимо вибачення, але у вас нема прав для активації %1$s плагінів."
 
 #: functions.php:380
 msgid "The following recommended plugin is currently inactive: %1$s."
 msgid_plural "The following recommended plugins are currently inactive: %1$s."
-msgstr[0] "下列建議安裝的外掛目前尚未啟用: %1$s。"
+msgstr[0] "Наступний рекомендований плагін наразі неактивован: %1$s."
+msgstr[1] "Наступні рекомендовані плагіни наразі неактивовані: %1$s."
+msgstr[2] "Наступні рекомендовані плагіни наразі неактивовані: %1$s."
 
 #: functions.php:379
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
-msgstr[0] "下列必要安裝的外掛目前尚未啟用: %1$s。"
+msgstr[0] "Наступний необхідний плагін наразі неактивован: %1$s."
+msgstr[1] "Наступні необхідні плагіни наразі неактивовані: %1$s."
+msgstr[2] "Наступні необхідні плагіни наразі неактивовані: %1$s."
 
 #: functions.php:378
 msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
-msgstr[0] "很抱歉，你沒有更新這 %1$s 個外掛的必要權限。"
+msgstr[0] "Просимо вибачення, але у вас нема прав для оновлення %1$s плагіна."
+msgstr[1] "Просимо вибачення, але у вас нема прав для оновлення %1$s плагінів."
+msgstr[2] "Просимо вибачення, але у вас нема прав для оновлення %1$s плагінів."
 
 #: functions.php:377
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
-msgstr[0] "下列外掛有可用的更新: %1$s。"
+msgstr[0] "Є оновлення для: %1$s."
+msgstr[1] "Є оновлення для наступних плагінів: %1$s."
+msgstr[2] "Є оновлення для наступних плагінів: %1$s."
 
 #: functions.php:376
 msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
 msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
-msgstr[0] "為確保與這個佈景主題保持最高相容性，下列外掛必須更新至最新版本: %1$s。"
+msgstr[0] "Наступний плагін повинен бути оновлений до останньої версії для забезпечення максимальної сумісності з цією темою: %1$s."
+msgstr[1] "Наступні плагіни повинні бути оновлені до останньої версії для забезпечення максимальної сумісності з цією темою: %1$s."
+msgstr[2] "Наступні плагіни повинні бути оновлені до останньої версії для забезпечення максимальної сумісності з цією темою: %1$s."
 
 #: functions.php:375
 msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
-msgstr[0] "很抱歉，你沒有安裝這 %1$s 個外掛的必要權限。"
+msgstr[0] "Просимо вибачення, але у вас нема прав для встановлення %1$s плагіна."
+msgstr[1] "Просимо вибачення, але у вас нема прав для встановлення %1$s плагінів."
+msgstr[2] "Просимо вибачення, але у вас нема прав для встановлення %1$s плагінів."
 
 #: functions.php:374
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
-msgstr[0] "這個佈景主題建議安裝以下外掛: %1$s。"
+msgstr[0] "Ця тема рекомендує наступний плагін: %1$s."
+msgstr[1] "Ця тема рекомендує наступні плагіни: %1$s."
+msgstr[2] "Ця тема рекомендує наступні плагіни: %1$s."
 
 #: functions.php:373
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
-msgstr[0] "這個佈景主題須要安裝以下外掛: %1$s。"
+msgstr[0] "Ця тема потребує наступного плагіна: %1$s."
+msgstr[1] "Ця тема потребує наступних плагінів: %1$s."
+msgstr[2] ""
 
 #: functions.php:372
 msgid "Something went wrong with the plugin API."
-msgstr "外掛 API 出了點小問題。"
+msgstr "Щось пішло не так із API плагіну."
 
 #: functions.php:371
 msgid "Installing Plugin: %s"
-msgstr "安裝中的外掛: %s"
+msgstr "Встановлення плагіну: %s"
 
 #: functions.php:370
 msgid "Install Plugins"
-msgstr "安裝外掛"
+msgstr "Встановити плаґіни"
 
 #: functions.php:369
 msgid "Install Required Plugins"
-msgstr "安裝必要的外掛"
+msgstr "Встановіть потрібні плагіни"
 
 #. Translators: If there are characters in your language that are not supported
 #. by Raleway, translate this to 'off'. Do not translate into your own
@@ -1697,7 +1723,7 @@ msgstr "安裝必要的外掛"
 #: functions.php:289
 msgctxt "Raleway font: on or off"
 msgid "on"
-msgstr "on"
+msgstr "вкл."
 
 #. Translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
@@ -1709,75 +1735,77 @@ msgstr "on"
 
 #: functions.php:143
 msgid "Sidebar"
-msgstr "側欄"
+msgstr "Бічна панель"
 
 #: functions.php:59
 msgid "Primary Menu"
-msgstr "主要選單"
+msgstr "Головне меню"
 
 #: inc/template-tags.php:1345
 msgid "%1$s theme by %2$s"
-msgstr "本站採用 %2$s 開發的 %1$s 佈景主題"
+msgstr "Тема %1$s від %2$s"
 
 #: inc/template-tags.php:1343
 msgid "Copyright %1$s %2$s %3$s"
-msgstr "《%3$s》版權所有 %1$s %2$s"
+msgstr "Авторське право %1$s %2$s %3$s"
 
 #: footer.php:44
 msgid "Back To Top"
-msgstr "返回頂端"
+msgstr "Повернутись вверх"
 
 #: inc/customizer.php:867 inc/template-tags.php:1606
 msgid "Join our Newsletter"
-msgstr "訂閱電子報"
+msgstr "Підпишіться на наші новини"
 
 #: inc/customizer.php:790 inc/template-tags.php:1625
 msgid "Keep Updated"
-msgstr "關注我們"
+msgstr "Тримайте оновленим"
 
 #: comments.php:91
 msgid "Comments are closed."
-msgstr "留言功能已關閉。"
+msgstr "Коментарі закриті."
 
 #: comments.php:59 comments.php:79
 msgid "Newer Comments"
-msgstr "較新的留言"
+msgstr "Новіші коментарі"
 
 #: comments.php:58 comments.php:78
 msgid "Older Comments"
-msgstr "較舊的留言"
+msgstr "Старіші коментарі"
 
 #: comments.php:55 comments.php:75
 msgid "Comment navigation"
-msgstr "留言導覽"
+msgstr "Навігація по коментарях"
 
 #. translators: 1: number of comments, 2: post title
 #: comments.php:37
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "在《%2$s》中有 %1$s 則留言"
+msgstr[0] "%1$s коментар до &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s коментаря до &ldquo;%2$s&rdquo;"
+msgstr[2] "%1$s коментарів до &ldquo;%2$s&rdquo;"
 
 #. translators: %1$s: smiley
 #: 404.php:51
 msgid "Try looking in the monthly archives. %1$s"
-msgstr "請至按月彙整的文章中看看。%1$s"
+msgstr "Перегляньте архіви по місяцям %1$s"
 
 #: 404.php:34
 msgid "Most Used Categories"
-msgstr "常用類別"
+msgstr "Популярні категорії"
 
 #: 404.php:26
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr "在這個地方似乎找不到你要找的，要不要試試下方連結或進行搜尋？"
+msgstr "Нічого не знайдено. Спробуйте використати один з наведених нижче посилань, або скористайтесь форму пошуку."
 
 #: 404.php:15
 msgid "Oops! That page can&rsquo;t be found."
-msgstr "糟糕！找不到這個頁面。"
+msgstr "Отакої! Сторінка не знайдена."
 
 #. Author URI of the plugin/theme
 msgid "http://www.famethemes.com"
-msgstr "https://www.famethemes.com"
+msgstr "http://www.famethemes.com"
 
 #. Author of the plugin/theme
 msgid "FameThemes"

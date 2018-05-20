@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-11 07:58:29+0000\n"
+"PO-Revision-Date: 2018-05-14 07:15:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -15,15 +15,71 @@ msgstr ""
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
 msgstr "Το OnePress είναι ένα εξαιρετικό δημιουργικό και ευέλικτο θέμα WordPress μιας σελίδας κατάλληλο για επιχειρηματικούς ιστότοπους, χαρτοφυλάκια, ψηφιακά πρακτορεία, προβολή προϊόντων, ελεύθερους επαγγελματίες και όλους τους άλλους που εκτιμούν τον καλό σχεδιασμό. Το θέμα συνολικά είναι ένα κομψό και κλασικό θέμα, ένα καλό παράδειγμα του θέματος Bootstrap 4 WordPress το οποίο είναι συμβατό με την τελευταία έκδοση του WooCommerce. (Ζωντανή προεπισκόπηση: http://www.famethemes.com/preview/?theme=OnePress)"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.0.6)  #-#-#-#-#
+#. #-#-#-#-#  onepress.pot (OnePress 2.0.8)  #-#-#-#-#
 #. Theme Name of the plugin/theme
-#: inc/dashboard.php:327
+#: inc/dashboard.php:424
 msgid "OnePress"
 msgstr "OnePress"
+
+#: inc/dashboard.php:457
+msgid "Create a support ticket"
+msgstr "Δημιουργήστε ένα δελτίο υποστήριξης"
+
+#: inc/dashboard.php:81
+msgid "Don't show this again"
+msgstr "Να μην εμφανιστεί ξανά"
+
+#: inc/dashboard.php:80
+msgid "Install Customify Now"
+msgstr "Άμεση εγκατάσταση Customify"
+
+#: inc/dashboard.php:78
+msgid "Customify is both a WordPress Theme and a WordPress Theme Editor. It’s a powerful styling platform that ensures exceptional design control over your website’s looks and feel. The most highlight feature is the <strong>comprehensive Header & Footer builder</strong>."
+msgstr "Το Customify είναι και θέμα εμφάνιση WordPress και WordPress Theme Editor. Είναι μια ισχυρή πλατφόρμα μορφοποίησης που εξασφαλίζει εξαιρετικό έλεγχο στην σχεδίαση και αισθητική του ιστοτόπου σας. Το πιο εντυπωσιακό χαρακτηριστικό τους είναι το <strong>ολοκληρωμένο εργαλείο Header & Footer builder</strong>."
+
+#: inc/dashboard.php:77
+msgid "Meet Customify - the improved version of OnePress theme by the same team!"
+msgstr "Γνωρίστε τo Customify - τη βελτιωμένη έκδοση του θέματος OnePress από την ίδια ομάδα!"
+
+#: inc/customizer.php:526
+msgid "Transparent Logo Height in Pixel"
+msgstr "Ύψος διάφανου λογότυπου σε Pixel"
+
+#: inc/customizer.php:1717
+msgid "Open Button #2 In New Window"
+msgstr "Άνοιγμα του κουμπιού #2 σε νέο παράθυρο"
+
+#: inc/customizer.php:1651
+msgid "Open Button #1 In New Window"
+msgstr "Άνοιγμα του κουμπιού #1 σε νέο παράθυρο"
+
+#: functions.php:102
+msgid "Pirate Forms"
+msgstr "Pirate Forms"
+
+#: inc/metabox.php:173
+msgid "Apply header cover settings for single product."
+msgstr "Εφαρμογή ρυθμίσεων εξωφύλλου κεφαλίδας για μεμονωμένο προϊόν."
+
+#: inc/dashboard.php:581
+msgid "Keep %s updated"
+msgstr "Μείνετε ενημερωμένοι με το %s"
+
+#: inc/dashboard.php:502
+msgid "Your settings were copied."
+msgstr "Οι ρυθμίσεις σας αντιγράφηκαν."
 
 #: inc/metabox.php:164
 msgid "Hide footer."
 msgstr "Απόκρυψη υποσέλιδου."
+
+#: inc/metabox.php:153
+msgid "Display page excerpt as header cover description."
+msgstr "Εμφάνιση αποσπάσματος σελίδας ως περιγραφή εξώφυλλου κεφαλίδας."
+
+#: inc/metabox.php:147
+msgid "Display featured image as header cover."
+msgstr "Εμφάνιση χαρακτηριστικής εικόνας ως εξώφυλλο κεφαλίδας."
 
 #: inc/metabox.php:141
 msgid "Hide page title area."
@@ -37,9 +93,21 @@ msgstr "Απόκρυψη κεφαλίδας."
 msgid "Hide breadcrumb."
 msgstr "Απόκρυψη Breadcrumb"
 
+#: inc/customizer.php:391
+msgid "Only set if display site tagline."
+msgstr "Μόνο αν εμφανίζεται ο υπότιτλος του ιστοτόπου."
+
 #: inc/customizer.php:389
 msgid "Site Tagline Color"
 msgstr "Χρώμα υπότιτλου ιστότοπου"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Contained Content"
+msgstr "Πλήρους πλάτους - Εντός πλαισίου"
+
+#. Template Name of the plugin/theme
+msgid "Full Width - Stretched Content"
+msgstr "Πλήρες πλάτος - τεντωμένο περιεχόμενο"
 
 #: inc/sanitize.php:240
 msgid "Upgrade to %1s to unlock this feature."
@@ -49,218 +117,246 @@ msgstr "Αναβαθμίστε στην %1s για να ξεκλειδώσετε
 msgid "Page Settings"
 msgstr "Ρυθμίσεις σελίδας"
 
-#: inc/dashboard.php:685
+#: inc/dashboard.php:782
 msgid "Get OnePress Plus now!"
 msgstr "Αποκτήστε το OnePress Plus τώρα!"
 
-#: inc/dashboard.php:330
+#: inc/dashboard.php:427
 msgid "Free vs PLUS"
 msgstr "Δωρεάν vs PLUS"
 
-#: inc/dashboard.php:328
+#: inc/dashboard.php:425
 msgid "Recommended Actions"
 msgstr "Προτεινόμενες ενέργειες"
 
-#: inc/customizer.php:3611
+#: inc/customizer.php:3640
 msgid "OnePress Plus Available! Take a look"
 msgstr "Διαθέσιμο το OnePress Plus! Ρίξτε μία ματιά."
 
-#: inc/customizer.php:3285
+#: inc/customizer.php:3314
 msgid "Ascending"
 msgstr "Αύξουσα"
 
-#: inc/customizer.php:3284
+#: inc/customizer.php:3313
 msgid "Descending"
 msgstr "Φθίνουσα"
 
-#: inc/customizer.php:3280
+#: inc/customizer.php:3309
 msgid "Order"
 msgstr "Ταξινόμηση"
 
-#: inc/customizer.php:3265
+#: inc/customizer.php:3294
 msgid "Random order"
 msgstr "Τυχαία σειρά"
 
-#: inc/customizer.php:3264
+#: inc/customizer.php:3293
 msgid "Order by Page Order"
 msgstr "Ταξινόμηση βάσει σειράς σελίδων"
 
-#: inc/customizer.php:3263
+#: inc/customizer.php:3292
 msgid "Comment Count"
 msgstr "Καταμέτρηση σχολίων"
 
-#: inc/customizer.php:3262
+#: inc/customizer.php:3291
 msgid "Date"
 msgstr "Ημερομηνία"
 
-#: inc/customizer.php:3260
+#: inc/customizer.php:3289
 msgid "Author"
 msgstr "Συγγραφέας"
 
-#: inc/customizer.php:3259
+#: inc/customizer.php:3288
 msgid "ID"
 msgstr "Ταυτότητα"
 
-#: inc/customizer.php:3258
+#: inc/customizer.php:3287
 msgid "Default"
 msgstr "Προεπιλεγμένη"
 
-#: inc/customizer.php:3254
+#: inc/customizer.php:3283
 msgid "Order By"
 msgstr "Ταξινόμιση κατά"
 
-#: inc/customizer.php:3238
+#: inc/customizer.php:3267
 msgid "Category to show"
 msgstr "Κατηγορία προς εμφάνιση"
 
-#: inc/customizer.php:2770
+#: inc/customizer.php:2799
 msgid "1x"
 msgstr "1x"
 
-#: inc/customizer.php:2769
+#: inc/customizer.php:2798
 msgid "2x"
 msgstr "2x"
 
-#: inc/customizer.php:2768
+#: inc/customizer.php:2797
 msgid "3x"
 msgstr "3x"
 
-#: inc/customizer.php:2767
+#: inc/customizer.php:2796
 msgid "4x"
 msgstr "4x"
 
-#: inc/customizer.php:2766
+#: inc/customizer.php:2795
 msgid "5x"
 msgstr "5x"
 
-#: inc/customizer.php:2761
+#: inc/customizer.php:2790
 msgid "Icon Size"
 msgstr "Μέγεθος εικονιδίου"
 
-#: inc/customizer.php:2259
+#: inc/customizer.php:2288
 msgid "Layout Settings"
 msgstr "Ρυθμίσεις Διάταξης"
 
-#: inc/customizer.php:1565
+#: inc/customizer.php:1568
 msgid "Rotating Text Background"
 msgstr "Φόντο περιστρεφόμενου κειμένου"
 
-#: inc/customizer.php:1550
+#: inc/customizer.php:1553
 msgid "Rotating Text Color"
 msgstr "Χρώμα περιστρεφόμενου κειμένου"
 
-#: inc/customizer.php:1483
+#: inc/customizer.php:1529
+msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
+msgstr "Είμαστε το <span class=\"js-rotating\">OnePress | Μία σελίδα | Συμβατό με όλες τις συσκευές| Τέλειο</span>"
+
+#: inc/customizer.php:1486
 msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
 msgstr "Θέλετε να προσθέσετε <strong>βίντεο φόντου</strong> ως ενότητα hero; Κάντε αναβάθμιση στο <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> ."
 
-#: inc/customizer.php:1252
+#: inc/customizer.php:1255
 msgid "Disable Preload Icon"
 msgstr "Απενεργοποίηση εικονιδίου προφόρτωσης"
 
-#: inc/customizer.php:1077
+#: inc/customizer.php:1080
 msgid "Footer Copyright"
 msgstr "Κείμενο πνευματικών δικαιωμάτων Υποσέλιδου"
 
-#: inc/customizer.php:1048 inc/customizer.php:1118
+#: inc/customizer.php:1067 inc/customizer.php:1134
+msgid "Link Hover Color"
+msgstr "Χρώμα καταδεικνούμενου συνδέσμου"
+
+#: inc/customizer.php:1051 inc/customizer.php:1121
 msgid "Link Color"
 msgstr "Χρώμα συνδέσμου"
 
-#: inc/customizer.php:1031
+#: inc/customizer.php:1034
 msgid "Widget Title Color"
 msgstr "Χρώμα τίτλου μικροεφαρμογής"
 
-#: inc/customizer.php:982
+#: inc/customizer.php:985
 msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
 msgstr "Εισαγάγετε ακέραιους αριθμούς και το άθροισμα τους πρέπει να είναι μικρότερο ή ίσο με 12, χωρισμένο με \"+\""
 
-#: inc/customizer.php:956
+#: inc/customizer.php:983
+msgid "Custom footer %s columns width"
+msgstr "Προσαρμοσμένο πλάτος υποσέλιδου %s στηλών"
+
+#: inc/customizer.php:983
+msgid "Custom footer 1 column width"
+msgstr "Προσαρμοσμένο πλάτος υποσέλιδου 1 στήλης"
+
+#: inc/customizer.php:959
 msgid "Disable footer widgets"
 msgstr "Απενεργοποίηση μικροεφαρμογών υποσέλιδου"
 
-#: inc/customizer.php:950
+#: inc/customizer.php:953
 msgid "Number footer columns to display."
 msgstr "Πλήθος στηλών υποσέλιδου προς εμφάνιση."
 
-#: inc/customizer.php:930
+#: inc/customizer.php:933
 msgid "Footer Widgets"
 msgstr "Μικροεφαρμογές στο υποσέλιδο"
 
-#: inc/customizer.php:915 inc/customizer.php:998 inc/customizer.php:1105
+#: inc/customizer.php:918 inc/customizer.php:1001 inc/customizer.php:1108
 msgid "Text Color"
 msgstr "κείμενο Χρώμα"
 
-#: inc/customizer.php:819 inc/customizer.php:2305 inc/customizer.php:2501
-#: inc/customizer.php:2714 inc/customizer.php:2902 inc/customizer.php:3080
+#: inc/customizer.php:822 inc/customizer.php:2334 inc/customizer.php:2530
+#: inc/customizer.php:2743 inc/customizer.php:2931 inc/customizer.php:3109
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
 msgstr "Αναβαθμίστε στο <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>  για να μπορέσετε να προσθέσετε περισσότερα στοιχεία και να ξεκλειδώσετε άλλα χαρακτηριστικά premium!"
 
-#: inc/customizer.php:747
+#: inc/customizer.php:750
 msgid "Footer Socials"
 msgstr "Υποσέλιδο Κοινωνικά δίκτυα"
 
-#: inc/customizer.php:679
+#: inc/customizer.php:696
 msgid "Right"
 msgstr "Δεξιά"
 
-#: inc/customizer.php:678
+#: inc/customizer.php:695
 msgid "Left"
 msgstr "Aριστερά"
 
-#: inc/customizer.php:677
+#: inc/customizer.php:694
 msgid "Center"
 msgstr "Κέντρο"
 
-#: inc/customizer.php:673
+#: inc/customizer.php:690
 msgid "Content Align"
 msgstr "Στοίχιση περιεχομένου"
 
-#: inc/customizer.php:640
+#: inc/customizer.php:657
 msgid "Color"
 msgstr "Χρώμα"
 
-#: inc/customizer.php:623
+#: inc/customizer.php:641
+msgid "The page cover padding bottom in percent (%)."
+msgstr "Το κάτω γέμισμα της κεφαλίδας σελίδας σε ποσοστό (%)."
+
+#: inc/customizer.php:640
 msgid "Padding Bottom"
 msgstr "Κάλυψη αναπλήρωση κάτω"
 
-#: inc/customizer.php:608
+#: inc/customizer.php:626
+msgid "The page cover padding top in percent (%)."
+msgstr "Το πάνω γέμισμα της κεφαλίδας σελίδας σε ποσοστό (%)."
+
+#: inc/customizer.php:625
 msgid "Padding Top"
 msgstr "Κάλυψη αναπλήρωση επάνω"
 
-#: inc/customizer.php:595
+#: inc/customizer.php:612
 msgid "Check this box to disable the page title bar on all pages."
 msgstr "Επιλέξτε για να αποκρύψετε τη γραμμή τίτλου από όλες τις σελίδες."
 
-#: inc/customizer.php:593
+#: inc/customizer.php:610
 msgid "Disable Page Title bar?"
 msgstr "Απενεργοποίηση της γραμμής τίτλου σελίδας;"
 
-#: inc/customizer.php:577
+#: inc/customizer.php:594
 msgid "Page Title Area"
 msgstr "Περιοχή τίτλου σελίδας"
 
-#: inc/customizer.php:567
+#: inc/customizer.php:584
 msgid "Padding left and right for Navigation items (pixels)."
 msgstr "Περιθώριο αριστερά και δεξιά για στοιχεία πλοήγησης (pixels)."
 
-#: inc/customizer.php:566
+#: inc/customizer.php:583
 msgid "Menu Item Padding"
 msgstr "Περιθώριο στοιχείων μενού"
 
-#: inc/customizer.php:552
+#: inc/customizer.php:569
 msgid "Navigation"
 msgstr "Πλοήγηση "
 
-#: inc/customizer.php:540
+#: inc/customizer.php:557
 msgid "Transparent Site Tagline Color"
 msgstr "Διαφανή χρώμα υπότιτλου ιστότοπου"
 
-#: inc/customizer.php:524
+#: inc/customizer.php:541
 msgid "Transparent Site Title Color"
 msgstr "Διαφανή χρώμα τίτλου ιστότοπου"
 
 #: inc/customizer.php:508
 msgid "Transparent Retina Logo"
 msgstr "Διαφανές λογότυπο Retina"
+
+#: inc/customizer.php:490 inc/customizer.php:509
+msgid "Only apply when transparent header option is checked."
+msgstr "Εφαρμόζεται μόνο όταν είναι επιλεγμένη η επιλογή διαφανής κεφαλίδα."
 
 #: inc/customizer.php:488
 msgid "Transparent Logo"
@@ -314,107 +410,103 @@ msgstr "Υποσέλιδο %s"
 msgid "One thought on &ldquo;%2$s&rdquo;"
 msgstr "Μια σκέψη στο &ldquo;%2$s&rdquo;"
 
-#: inc/customizer.php:739
-msgid "Check this box to show featured image on single post."
-msgstr "Επιλέξτε αυτό το πλαίσιο για να εμφανίζεται η προβαλλόμενη εικόνα σε μεμονωμένα άρθρα."
-
-#: inc/customizer.php:724
+#: inc/customizer.php:741
 msgid "Check this box to show single post meta such as post date, author, category,..."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να εμφανίζονται μεμονωμένα μεταδεδομένα, όπως ημερομηνία, συγγραφέας, κατηγορία, ..."
 
-#: inc/customizer.php:722
+#: inc/customizer.php:739
 msgid "Show single post meta"
 msgstr "Εμφάνιση μεμονωμένων μεταδεδομένων άρθρου"
 
-#: inc/customizer.php:709
+#: inc/customizer.php:726
 msgid "Check this box to show post thumbnail on single post."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να εμφανιστεί η μικρογραφία του άρθρου σε μεμονωμένα άρθρα."
 
-#: inc/customizer.php:707 inc/customizer.php:737
+#: inc/customizer.php:724
 msgid "Show single post thumbnail"
 msgstr "Εμφάνιση μικρογραφίας σε άρθρο"
 
-#: inc/customizer.php:692
+#: inc/customizer.php:709
 msgid "Single Post"
 msgstr "Μονό άρθρο"
 
-#: inc/customizer.php:1375
+#: inc/customizer.php:1378
 msgid "The amount of time in between slides, expressed as the number of milliseconds."
 msgstr "Ο χρόνος μεταξύ των διαφανειών, εκφρασμένος ως αριθμός χιλιοστών του δευτερολέπτου."
 
-#: inc/customizer.php:1374
+#: inc/customizer.php:1377
 msgid "Slider duration speed"
 msgstr "Ταχύτητα διάρκειας μηχανισμού κύλισης"
 
-#: inc/customizer.php:1358
+#: inc/customizer.php:1361
 msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
 msgstr "Αυτή είναι η ταχύτητα με την οποία θα σβήνει η εικόνα. Ακέραιοι αριθμοί σε χιλιοστά του δευτερολέπτου γίνονται δεκτοί."
 
-#: inc/customizer.php:1357
+#: inc/customizer.php:1360
 msgid "Slider animation speed"
 msgstr "Ταχύτητα αλλαγής μηχανισμού κύλισης"
 
-#: inc/customizer.php:1339
+#: inc/customizer.php:1342
 msgid "Text animation speed"
 msgstr "Ταχύτητα κίνησης κειμένου"
 
-#: inc/dashboard.php:382
+#: inc/dashboard.php:479
 msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
 msgstr "Το θέμα απόγονος χρησιμοποιεί το δικό του όνομα ρύθμισης θέματος, θέλετε να αντιγράψετε τις ρύθμισεις από θέμα γονέα σε αυτό το θέμα απόγονο;"
 
-#: inc/customizer.php:3668
+#: inc/customizer.php:3697
 msgid "Font Awesome"
 msgstr "Font Awesome"
 
-#: inc/customizer.php:3664
+#: inc/customizer.php:3693
 msgid "Search"
 msgstr "Αναζήτηση"
 
-#: inc/dashboard.php:763
+#: inc/dashboard.php:860
 msgid "Are you sure want to copy ?"
 msgstr "Είστε βέβαιοι ότι θέλετε να αντιγράψετε;"
 
-#: inc/dashboard.php:422
+#: inc/dashboard.php:519
 msgid "Recommend Plugins"
 msgstr "Προτεινόμενα πρόσθετα"
 
-#: inc/dashboard.php:402
+#: inc/dashboard.php:499
 msgid "Copy now"
 msgstr "Εκκίνηση αντιγραφής"
 
-#: inc/dashboard.php:394
+#: inc/dashboard.php:491
 msgid "To Theme"
 msgstr "Στο Θέμα"
 
-#: inc/dashboard.php:388
+#: inc/dashboard.php:485
 msgid "From Theme"
 msgstr "Από το Θέμα"
 
-#: inc/dashboard.php:380
+#: inc/dashboard.php:477
 msgid "You're using %1$s theme, It's a child theme of OnePress"
 msgstr "Χρησιμοποιείτε το θέμα%1$s, είναι ένα θέμα απόγονος του OnePress."
 
-#: inc/dashboard.php:238
+#: inc/dashboard.php:331
 msgid "Details"
 msgstr "Λεπτομέρειες"
 
-#: inc/dashboard.php:166
+#: inc/dashboard.php:259
 msgid "Import Demo Data"
 msgstr "Εισαγωγή Demo Δεδομένων"
 
-#: inc/dashboard.php:166
+#: inc/dashboard.php:259
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
 msgstr "Εξοικονομήστε χρόνο με την εισαγωγή των δεδομένων επίδειξης, ο ιστότοπός σας θα ρυθμιστεί και θα είναι έτοιμος για προσαρμογή μέσα σε λίγα λεπτά. %s"
 
-#: inc/customizer.php:2141
+#: inc/customizer.php:2170
 msgid "Read More Text"
 msgstr "Κέιμενο διαβάστε περισσότερα"
 
-#: inc/customizer.php:2136 section-parts/section-gallery.php:38
+#: inc/customizer.php:2165 section-parts/section-gallery.php:38
 msgid "View More"
 msgstr "Δείτε περισσότερα"
 
-#: inc/customizer.php:2126
+#: inc/customizer.php:2155
 msgid "Read More Link"
 msgstr "Σύνδεσμος Διαβάστε περισσότερα"
 
@@ -442,95 +534,91 @@ msgstr "Διάταξη ιστοτόπου"
 msgid "Famethemes Demo Importer"
 msgstr "Εισαγωγέας περιεχομένου επίδειξης FameThemes"
 
-#: functions.php:102
-msgid "Contact Form 7"
-msgstr "Contact Form 7"
-
 #: functions.php:154
 msgid "WooCommerce Sidebar"
 msgstr "WooCommerce πλευρική στήλη"
 
-#: inc/customizer.php:2267 inc/customizer.php:2679
+#: inc/customizer.php:2296 inc/customizer.php:2708
 msgid "1 Column"
 msgstr "1 στήλη"
 
-#: inc/customizer.php:2110
+#: inc/customizer.php:2139
 msgid "Enable Lightbox"
 msgstr "Ενεργοποίηση Lightbox"
 
-#: inc/customizer.php:2096
+#: inc/customizer.php:2125
 msgid "Number items"
 msgstr "Πλήθος στοιχείων"
 
-#: inc/customizer.php:2071
+#: inc/customizer.php:2100
 msgid "Layout columns"
 msgstr "Στήλες διάταξης"
 
-#: inc/customizer.php:2055
+#: inc/customizer.php:2084
 msgid "Row Height"
 msgstr "Ύψος γραμμής"
 
-#: inc/customizer.php:2039
+#: inc/customizer.php:2068
 msgid "Item Spacing"
 msgstr "Απόσταση στοιχείου"
 
-#: inc/customizer.php:2025
+#: inc/customizer.php:2054
 msgid "Masonry"
 msgstr "Masonry"
 
-#: inc/customizer.php:2024
+#: inc/customizer.php:2053
 msgid "Justified"
 msgstr "Πλήρης στοίχιση"
 
-#: inc/customizer.php:2023
+#: inc/customizer.php:2052
 msgid "Slider"
 msgstr "Μηχανισμός κύλισης"
 
-#: inc/customizer.php:2022
+#: inc/customizer.php:2051
 msgid "Carousel"
 msgstr "Καρουζέλ"
 
-#: inc/customizer.php:2021
+#: inc/customizer.php:2050
 msgid "Grid"
 msgstr "Διάταξη πλέγματος"
 
-#: inc/customizer.php:2016
+#: inc/customizer.php:2045
 msgid "Display"
 msgstr "Εμφάνιση"
 
-#: inc/customizer.php:2001
+#: inc/customizer.php:2030
 msgid "Default, inside container"
 msgstr "Προεπιλογή, μέσα στο αντικείμενο"
 
-#: inc/customizer.php:947 inc/customizer.php:1996
+#: inc/customizer.php:950 inc/customizer.php:2025
 msgid "Layout"
 msgstr "Διάταξη"
 
-#: inc/customizer.php:1982
+#: inc/customizer.php:2011
 msgid "Select a page which have content contain [gallery] shortcode."
 msgstr "Επιλέξτε μια σελίδα που να περιέχει και το [gallery] shortcode."
 
-#: inc/customizer.php:1977
+#: inc/customizer.php:2006
 msgid "Select Gallery Page"
 msgstr "Επιλέξτε τη σελίδα Συλλογής"
 
-#: inc/customizer.php:1960
+#: inc/customizer.php:1989
 msgid "Page"
 msgstr "Σελίδα"
 
-#: inc/customizer.php:1955
+#: inc/customizer.php:1984
 msgid "Select Gallery Source"
 msgstr "Επιλέξτε την πηγή Συλλογής"
 
-#: inc/customizer.php:1894 section-parts/section-gallery.php:4
+#: inc/customizer.php:1923 section-parts/section-gallery.php:4
 msgid "Gallery"
 msgstr "Συλλογή"
 
-#: inc/customizer.php:1879 section-parts/section-gallery.php:2
+#: inc/customizer.php:1908 section-parts/section-gallery.php:2
 msgid "gallery"
 msgstr "συλλογή"
 
-#: inc/customizer.php:1844
+#: inc/customizer.php:1873
 msgid "Section: Gallery"
 msgstr "Ενότητα: Συλλογή"
 
@@ -538,91 +626,91 @@ msgstr "Ενότητα: Συλλογή"
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
 msgstr "Μετάβαση στην κορυφή με κλικ στο λογότυπο του ιστότοπου ή στον τίτλο ιστότοπου. Εφαρμόζεται μόνο στην αρχική σελίδα."
 
-#: inc/dashboard.php:743
+#: inc/dashboard.php:840
 msgid "FameThemes Demo Importer"
 msgstr "Εισαγωγέας επίδειξης FameThemes"
 
-#: inc/dashboard.php:742
+#: inc/dashboard.php:839
 msgid "Hey."
 msgstr "Γεια."
 
-#: inc/dashboard.php:740
+#: inc/dashboard.php:837
 msgid "%1$s you will need to install and activate the %2$s plugin first."
 msgstr "%1$s, θα πρέπει πρώτα να εγκαταστήσετε και να ενεργοποιήσετε τo πρόσθετο %2$s."
 
-#: inc/dashboard.php:218 inc/dashboard.php:724
+#: inc/dashboard.php:311 inc/dashboard.php:821
 msgid "Active Now"
 msgstr "Ενεργό"
 
-#: inc/dashboard.php:196 inc/dashboard.php:702
+#: inc/dashboard.php:289 inc/dashboard.php:799
 msgid "Install Now"
 msgstr "Εγκατάσταση τώρα"
 
-#: inc/dashboard.php:332
+#: inc/dashboard.php:429
 msgid "One Click Demo Import"
 msgstr "Εισαγωγή One Click Demo"
 
-#: inc/customizer.php:1678
+#: inc/customizer.php:1694
 msgid "Button #2 style"
 msgstr "Κουμπί #2 στυλ"
 
-#: inc/customizer.php:3312
+#: inc/customizer.php:3341
 msgid "More News Button Text"
 msgstr "Κείμενο Κουμπιού Περισσότερα νέα"
 
-#: inc/customizer.php:3301
+#: inc/customizer.php:3330
 msgid "It should be your blog page link."
 msgstr "Θα πρέπει να είναι ο σύνδεσμος της σελίδας του ιστολογίου σας."
 
-#: inc/customizer.php:1636 inc/customizer.php:1689
+#: inc/customizer.php:1639 inc/customizer.php:1705
 msgid "Danger"
 msgstr "Κίνδυνος"
 
-#: inc/customizer.php:1635 inc/customizer.php:1688
+#: inc/customizer.php:1638 inc/customizer.php:1704
 msgid "Warning"
 msgstr "Προειδοποίηση"
 
-#: inc/customizer.php:1634 inc/customizer.php:1687
+#: inc/customizer.php:1637 inc/customizer.php:1703
 msgid "Info"
 msgstr "Πληροφορίες"
 
-#: inc/customizer.php:1633 inc/customizer.php:1686
+#: inc/customizer.php:1636 inc/customizer.php:1702
 msgid "Success"
 msgstr "Έτοιμο"
 
-#: inc/customizer.php:1632 inc/customizer.php:1685
+#: inc/customizer.php:1635 inc/customizer.php:1701
 msgid "Primary"
 msgstr "Κύριο"
 
-#: inc/customizer.php:1631 inc/customizer.php:1684
+#: inc/customizer.php:1634 inc/customizer.php:1700
 msgid "Button"
 msgstr "Κουμπί"
 
-#: inc/customizer.php:1630 inc/customizer.php:1683
+#: inc/customizer.php:1633 inc/customizer.php:1699
 msgid "Button Secondary"
 msgstr "Δευτερεύον κουμπί"
 
-#: inc/customizer.php:1629 inc/customizer.php:1682
+#: inc/customizer.php:1632 inc/customizer.php:1698
 msgid "Button Primary"
 msgstr "Κουμπί βασικό"
 
-#: inc/customizer.php:1625
+#: inc/customizer.php:1628
 msgid "Button #1 style"
 msgstr "Κουμπί #1 στυλ"
 
-#: inc/customizer.php:1284
+#: inc/customizer.php:1287
 msgid "The hero content padding bottom in percent (%)."
 msgstr "Το κάτω γέμισμα του περιεχομένου του hero σε ποσοστά (%)."
 
-#: inc/customizer.php:1268
+#: inc/customizer.php:1271
 msgid "The hero content padding top in percent (%)."
 msgstr "Το πάνω γέμισμα του περιεχομένου του hero σε ποσοστά (%)."
 
-#: inc/customizer.php:1340
+#: inc/customizer.php:1343
 msgid "The delay between the changing of each phrase in milliseconds."
 msgstr "Η καθυστέρηση μεταξύ της αλλαγής των φράσεων σε χιλιοστά του δευτερολέπτου."
 
-#: inc/customizer.php:888
+#: inc/customizer.php:891
 msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 msgstr "Η φόρμα ενημερωτικού δελτίου χρησιμοποιεί το MailChimp, ακολουθήστε <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">αυτόν τον οδηγό</a> για να μάθετε πώς να πάρετε τη διεύθυνση URL Action MailChimp. Παράδειγμα <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 
@@ -634,25 +722,25 @@ msgstr "Απόκρυψη υπότιτλου ιστότοπου"
 msgid "Hide site title"
 msgstr "Απόκρυψη τίτλου ιστοτόπου"
 
-#: inc/customizer.php:2512 inc/customizer.php:2721
+#: inc/customizer.php:2541 inc/customizer.php:2750
 msgid "image"
 msgstr "εικόνα"
 
-#: inc/customizer.php:1320
+#: inc/customizer.php:1323
 msgid "Text animation"
 msgstr "Κίνηση κειμένου"
 
-#: inc/dashboard.php:132
+#: inc/dashboard.php:225
 msgid "OnePress Theme %s"
 msgstr "OnePress Theme %s"
 
-#: inc/dashboard.php:130
+#: inc/dashboard.php:223
 msgid "%1$s action required"
 msgid_plural "%1$s actions required"
 msgstr[0] "Απαιτείται %1$s ενέργεια"
 msgstr[1] "Απαιτούνται %1$s ενέργειες"
 
-#: inc/customizer.php:1145 inc/customizer.php:1163
+#: inc/customizer.php:1148 inc/customizer.php:1166
 msgid "Custom CSS"
 msgstr "Προσαρμοσμένη  CSS"
 
@@ -660,78 +748,78 @@ msgstr "Προσαρμοσμένη  CSS"
 msgid "Why choose Us"
 msgstr "Γιατί να μας επιλέξετε"
 
-#: inc/customizer.php:2671
+#: inc/customizer.php:2700
 msgid "Services Layout Settings"
 msgstr "Ρύθμιση διάταξης υπηρεσιών"
 
-#: inc/customizer.php:2530 inc/customizer.php:3088
+#: inc/customizer.php:2559 inc/customizer.php:3117
 msgid "Custom Link"
 msgstr "Προσαρμοσμένος σύνδεσμος"
 
-#: inc/customizer.php:2526
+#: inc/customizer.php:2555
 msgid "Description"
 msgstr "Περιγραφή"
 
-#: inc/customizer.php:2495
+#: inc/customizer.php:2524
 msgid "Features content"
 msgstr "Δυνατότητες περιεχομένου"
 
-#: inc/customizer.php:2459
+#: inc/customizer.php:2488
 msgid "Features Layout Setting"
 msgstr "Ρύθμιση διάταξης"
 
-#: inc/customizer.php:2406 section-parts/section-features.php:4
+#: inc/customizer.php:2435 section-parts/section-features.php:4
 msgid "Features"
 msgstr "Δυνατότητες"
 
-#: inc/customizer.php:2391 section-parts/section-features.php:2
+#: inc/customizer.php:2420 section-parts/section-features.php:2
 msgid "features"
 msgstr "χαρακτηριστικά"
 
-#: inc/customizer.php:2356
+#: inc/customizer.php:2385
 msgid "Section: Features"
 msgstr "Ενότητα: Χαρακτηριστικά"
 
-#: inc/customizer.php:1931 inc/customizer.php:2242 inc/customizer.php:2443
-#: inc/customizer.php:2654 inc/customizer.php:2867 inc/customizer.php:3023
-#: inc/customizer.php:3193 inc/customizer.php:3411
+#: inc/customizer.php:1960 inc/customizer.php:2271 inc/customizer.php:2472
+#: inc/customizer.php:2683 inc/customizer.php:2896 inc/customizer.php:3052
+#: inc/customizer.php:3222 inc/customizer.php:3440
 msgid "Section Description"
 msgstr "Περιγραφή ενότητας"
 
-#: inc/customizer.php:1727 inc/customizer.php:2521 inc/customizer.php:2730
+#: inc/customizer.php:1756 inc/customizer.php:2550 inc/customizer.php:2759
 msgid "Image"
 msgstr "Εικόνα"
 
-#: inc/customizer.php:1709
+#: inc/customizer.php:1738
 msgid "Content Text"
 msgstr "Γραμματοσειρά περιεχομένου"
 
-#: inc/customizer.php:1515
+#: inc/customizer.php:1518
 msgid "Layout 2"
 msgstr "Διάταξη 2"
 
-#: inc/customizer.php:1514
+#: inc/customizer.php:1517
 msgid "Layout 1"
 msgstr "Διάταξη 1"
 
-#: inc/customizer.php:1509
+#: inc/customizer.php:1512
 msgid "Display Layout"
 msgstr "Διάταξη προβολής"
 
-#: inc/customizer.php:830
+#: inc/customizer.php:833
 msgid "URL"
 msgstr "Διεύθυνση URL"
 
-#: inc/customizer.php:826 inc/customizer.php:2511 inc/customizer.php:2516
-#: inc/customizer.php:2720 inc/customizer.php:2725
+#: inc/customizer.php:829 inc/customizer.php:2540 inc/customizer.php:2545
+#: inc/customizer.php:2749 inc/customizer.php:2754
 msgid "Icon"
 msgstr "Εικονίδιο"
 
-#: inc/customizer.php:822
+#: inc/customizer.php:825
 msgid "Social network"
 msgstr "Κοινωνικό δίκτυο"
 
-#: inc/customizer.php:813
+#: inc/customizer.php:816
 msgid "Socials"
 msgstr "Κοινωνικά"
 
@@ -743,58 +831,58 @@ msgstr "Εφαρμόζεται μόνο σε πρότυπα αρχικής σε�
 msgid "Header Transparent"
 msgstr "Διαφάνεια κεφαλίδας"
 
-#: inc/template-tags.php:1604
+#: inc/template-tags.php:1616
 msgid "Subscribe"
 msgstr "Εγγραφή"
 
-#: inc/template-tags.php:1603
+#: inc/template-tags.php:1615
 msgid "Enter your e-mail address"
 msgstr "Πληκτρολογήστε το email σας"
 
-#: inc/dashboard.php:358
+#: inc/dashboard.php:455
 msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
 msgstr "Η υποστήριξη για το θέμα%s WordPress διεξάγεται μέσω του συστήματος υποστήριξης FameThemes."
 
-#: inc/dashboard.php:352
+#: inc/dashboard.php:449
 msgid "OnePress Documentation"
 msgstr "Τεκμηρίωση OnePress"
 
-#: inc/customizer.php:2266 inc/customizer.php:2466 inc/customizer.php:2678
-#: inc/customizer.php:3046
+#: inc/customizer.php:2295 inc/customizer.php:2495 inc/customizer.php:2707
+#: inc/customizer.php:3075
 msgid "2 Columns"
 msgstr "2 Στήλες"
 
-#: inc/customizer.php:2265 inc/customizer.php:2465 inc/customizer.php:2677
-#: inc/customizer.php:3045
+#: inc/customizer.php:2294 inc/customizer.php:2494 inc/customizer.php:2706
+#: inc/customizer.php:3074
 msgid "3 Columns"
 msgstr "3 Στήλες"
 
-#: inc/customizer.php:2264 inc/customizer.php:2464 inc/customizer.php:2676
-#: inc/customizer.php:3044
+#: inc/customizer.php:2293 inc/customizer.php:2493 inc/customizer.php:2705
+#: inc/customizer.php:3073
 msgid "4 Columns"
 msgstr "4 στήλες"
 
-#: inc/customizer.php:3039
+#: inc/customizer.php:3068
 msgid "Team Layout Settings"
 msgstr "Ρύθμιση διάταξης ομάδας"
 
-#: inc/customizer.php:2342 inc/customizer.php:2555
+#: inc/customizer.php:2371 inc/customizer.php:2584
 msgid "Page Excerpt"
 msgstr "Απόσπασμα σελίδας"
 
-#: inc/customizer.php:2341 inc/customizer.php:2554
+#: inc/customizer.php:2370 inc/customizer.php:2583
 msgid "Full Page Content"
 msgstr "Σελίδα πλήρους πλάτους περιεχομένου"
 
-#: inc/customizer.php:2336 inc/customizer.php:2549
+#: inc/customizer.php:2365 inc/customizer.php:2578
 msgid "Item content source"
 msgstr "Πηγή περιεχομένου αντικειμένου"
 
-#: inc/customizer.php:2299
+#: inc/customizer.php:2328
 msgid "About content page"
 msgstr "Σχετικά με τη σελίδα περιεχομένου"
 
-#: inc/customizer.php:1465
+#: inc/customizer.php:1468
 msgid "Enable parallax effect (apply for first BG image only)"
 msgstr "Ενεργοποίηση εφέ parallax (ισχύει μόνο για την πρώτη εικόνα BG)"
 
@@ -830,7 +918,7 @@ msgstr "Ορίστε μόνο εάν δεν χρησιμοποιείτε λογ�
 msgid "Site Title Color"
 msgstr "Χρώμα τίτλου ιστότοπου"
 
-#: inc/customizer.php:359 inc/customizer.php:1014
+#: inc/customizer.php:359 inc/customizer.php:1017
 msgid "Background Color"
 msgstr "Χρώμα Φόντου"
 
@@ -846,89 +934,89 @@ msgstr "Κύριο χρώμα"
 msgid "Site Colors"
 msgstr "Χρώματα ιστοτόπου"
 
-#: inc/customizer.php:3083
+#: inc/customizer.php:3112
 msgid "User media"
 msgstr "Πολυμέσα χρήστη"
 
-#: inc/customizer.php:1832
+#: inc/customizer.php:1861
 msgid "Background image"
 msgstr "Εικόνα φόντου"
 
-#: inc/customizer.php:1817
+#: inc/customizer.php:1846
 msgid "Paste Youtube or Vimeo url here"
 msgstr "Επικολλήστε τη διεύθυνση URL του Youtube ή του Vimeo εδώ"
 
-#: inc/customizer.php:1815
+#: inc/customizer.php:1844
 msgid "Video url"
 msgstr "Video url"
 
-#: inc/customizer.php:1800
+#: inc/customizer.php:1829
 msgid "Section heading"
 msgstr "Επικεφαλίδα ενότητας"
 
-#: inc/customizer.php:1222 inc/customizer.php:1784 inc/customizer.php:1886
-#: inc/customizer.php:2197 inc/customizer.php:2398 inc/customizer.php:2822
-#: inc/customizer.php:3148 inc/customizer.php:3366
+#: inc/customizer.php:1225 inc/customizer.php:1813 inc/customizer.php:1915
+#: inc/customizer.php:2226 inc/customizer.php:2427 inc/customizer.php:2851
+#: inc/customizer.php:3177 inc/customizer.php:3395
 msgid "The section id, we will use this for link anchor."
 msgstr "Το id της ενότητας, θα το χρησιμοποιήσουμε για την άγκυρα σύνδεσης."
 
-#: inc/customizer.php:1742
+#: inc/customizer.php:1771
 msgid "Section: Video Lightbox"
 msgstr "Ενότητα: Video Lightbox"
 
-#: inc/dashboard.php:485
+#: inc/dashboard.php:582
 msgid "Hooray! There are no required actions for you right now."
 msgstr "Ζήτω! Δεν απαιτούνται δικές σας ενέργειες προς το παρόν."
 
-#: inc/dashboard.php:475
+#: inc/dashboard.php:572
 msgid "Change homepage page template"
 msgstr "Αλλαγή προτύπου αρχικής σελίδας"
 
-#: inc/dashboard.php:461
+#: inc/dashboard.php:558
 msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
 msgstr "Για να αλλάξετε τα περιεχόμενα της αρχικής σελίδας, θα πρέπει να ορίσετε το πρότυπο \"Αρχική σελίδα\" για την αρχική σας σελίδα."
 
-#: inc/dashboard.php:458
+#: inc/dashboard.php:555
 msgid "Set your homepage page template to \"Frontpage\"."
 msgstr "Ορίστε το πρότυπο σελίδας αρχικής σελίδας στο \"Αρχική σελίδα\"."
 
-#: inc/dashboard.php:444 inc/dashboard.php:468
+#: inc/dashboard.php:541 inc/dashboard.php:565
 msgid "Setup front page displays"
 msgstr "Καθορισμός εμφάνισης αρχικής σελίδας"
 
-#: inc/dashboard.php:441
+#: inc/dashboard.php:538
 msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
 msgstr "Για να προσδώσετε την αίσθηση μιας σελίδας στον ιστότοπό σας, μεταβείτε στην επιλογή Προσαρμογή  -&gt; Στατική αρχική σελίδα και αλλάξτε στην ενότητα \"Η αρχική σελίδα δείχνει\" σε \"Μια στατική σελίδα\"."
 
-#: inc/dashboard.php:439
+#: inc/dashboard.php:536
 msgid "Switch \"Front page displays\" to \"A static page\""
 msgstr "Αλλάξτε το \"Η αρχική σελίδα δείχει\" σε \"Μια στατική σελίδα\""
 
-#: inc/dashboard.php:432 inc/dashboard.php:451
+#: inc/dashboard.php:529 inc/dashboard.php:548
 msgid "Dismiss"
 msgstr "Απόρριψη"
 
-#: inc/dashboard.php:323
+#: inc/dashboard.php:416
 msgid "Welcome to OnePress - Version %1s"
 msgstr "Καλώς ήλθατε στο OnePress - Έκδοση% 1s"
 
-#: inc/dashboard.php:157
+#: inc/dashboard.php:250
 msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
 msgstr "Καλως ήρθατε! Σας ευχαριστούμε που επιλέξατε το %1$s! Για να επωφεληθείτε πλήρως από τις δυνατότητες που προσφέρει το θέμα μας, βεβαιωθείτε ότι έχετε επισκεφθεί την <a href=\"%2$s\">σελίδα υποδοχής</a> μας"
 
-#: inc/dashboard.php:134
+#: inc/dashboard.php:227
 msgid "OnePress Theme"
 msgstr "Θέμα OnePress"
 
-#: inc/dashboard.php:137
+#: inc/dashboard.php:230
 msgid "OnePress Dashboard"
 msgstr "Πίνακας ελέγχου OnePress"
 
-#: inc/customizer.php:658 inc/customizer.php:1446
+#: inc/customizer.php:675 inc/customizer.php:1449
 msgid "Background Overlay Color"
 msgstr "Χρώμα επικάλυψης φόντου"
 
-#: inc/customizer.php:3585
+#: inc/customizer.php:3614
 msgid "Section Order & Styling"
 msgstr "Ταξινόμηση και μορφοποίηση ενότητας"
 
@@ -944,7 +1032,7 @@ msgstr "Απενεργοποίηση καρφιτσωμένης κεφαλίδα
 msgid "Left Sidebar"
 msgstr "Αριστερή πλευρική στήλη"
 
-#: inc/customizer.php:271 inc/customizer.php:2002
+#: inc/customizer.php:271 inc/customizer.php:2031
 msgid "Full Width"
 msgstr "Πλήρους πλάτους"
 
@@ -985,271 +1073,271 @@ msgstr "Μπορείτε να εγκαταστήσετε το πρόσθετο %
 msgid "Search Results for: %s"
 msgstr "Αποτέλεσμα αναζήτησης για: %s"
 
-#: inc/template-tags.php:469
+#: inc/template-tags.php:467
 msgid "Your comment is awaiting moderation."
 msgstr "Το σχόλιο αναμένει έγκριση."
 
-#: inc/template-tags.php:464
+#: inc/template-tags.php:462
 msgid "Edit"
 msgstr "Επεξεργασία"
 
 #. translators: 1: date, 2: time
-#: inc/template-tags.php:463
+#: inc/template-tags.php:461
 msgid "Reply"
 msgstr "Σχολιάστε"
 
-#: inc/template-tags.php:455
+#: inc/template-tags.php:453
 msgid "Post author"
 msgstr "Συντάκτης άρθρου"
 
-#: inc/template-tags.php:436
+#: inc/template-tags.php:434
 msgid "(Edit)"
 msgstr "(Επεξεργασία)"
 
-#: inc/template-tags.php:436
+#: inc/template-tags.php:434
 msgid "Pingback:"
 msgstr "Pingback:"
 
-#: inc/template-tags.php:366
+#: inc/template-tags.php:364
 msgid "% Comments"
 msgstr "% Σχόλια"
 
-#: inc/template-tags.php:366
+#: inc/template-tags.php:364
 msgid "1 Comment"
 msgstr "1 σχόλιο"
 
-#: inc/template-tags.php:366
+#: inc/template-tags.php:364
 msgid "Leave a comment"
 msgstr "Κάντε ένα σχόλιο"
 
-#: inc/template-tags.php:360
+#: inc/template-tags.php:358
 msgid "Tagged %1$s"
 msgstr "Ετικέτα: %1$s"
 
-#: inc/template-tags.php:354
+#: inc/template-tags.php:352
 msgid "Posted in %1$s"
 msgstr "Δημοσιεύθηκε στη %1$s"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:352 inc/template-tags.php:358
+#: inc/template-tags.php:350 inc/template-tags.php:356
 msgid ", "
 msgstr ", "
 
-#: inc/template-tags.php:334
+#: inc/template-tags.php:332
 msgctxt "post author"
 msgid "by %s"
 msgstr "από %s"
 
-#: inc/template-tags.php:329
+#: inc/template-tags.php:327
 msgctxt "post date"
 msgid "Posted on %s"
 msgstr "Αναρτήθηκε στις %s"
 
-#: inc/dashboard.php:357
+#: inc/dashboard.php:454
 msgid "Having Trouble, Need Support?"
 msgstr "Αντιμετωπίζετε πρόβλημα, χρειάζεστε υποστήριξη;"
 
-#: inc/dashboard.php:350
+#: inc/dashboard.php:447
 msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
 msgstr "Χρειάζεστε βοήθεια για να ρυθμίσετε και να διαμορφώσετε το%s; Παρακαλώ ρίξτε μια ματιά στις οδηγίες τεκμηρίωσης μας."
 
-#: inc/dashboard.php:349
+#: inc/dashboard.php:446
 msgid "Theme Documentation"
 msgstr "Τεκμηρίωση θέματος"
 
-#: inc/dashboard.php:345
+#: inc/dashboard.php:442
 msgid "Start Customize"
 msgstr "Ξεκινήστε την Προσαρμογή"
 
-#: inc/dashboard.php:343
+#: inc/dashboard.php:440
 msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
 msgstr "Το%s υποστηρίζει τον Προσαρμογέα θεμάτων για όλες τις ρυθμίσεις θέματος. Κάντε κλικ στην επιλογή \"Προσαρμογή\" για να ξεκινήσετε την προσαρμογή του ιστότοπού σας."
 
-#: inc/dashboard.php:342
+#: inc/dashboard.php:439
 msgid "Theme Customizer"
 msgstr "Προσαρμογέας θέματος"
 
-#: inc/dashboard.php:324
+#: inc/dashboard.php:417
 msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
 msgstr "Το OnePress είναι ένα δημιουργικό και ευέλικτο θέμα εμφάνισης WordPress ΜΙΑΣ ΣΕΛΙΔΑΣ κατάλληλο για επιχειρήσεις, χαρτοφυλάκιο, ψηφιακές υπηρεσίες, προβολής προϊόντων, ιστότοπους ελεύθερων επαγγελματιών."
 
-#: inc/customizer.php:3566
+#: inc/customizer.php:3595
 msgid "Fax"
 msgstr "Φαξ"
 
-#: inc/customizer.php:3551
+#: inc/customizer.php:3580
 msgid "Email"
 msgstr "E-mail"
 
-#: inc/customizer.php:3536
+#: inc/customizer.php:3565
 msgid "Phone"
 msgstr "Αριθμός τηλεφώνου"
 
-#: inc/customizer.php:3521
+#: inc/customizer.php:3550
 msgid "Address"
 msgstr "Διεύθυνση"
 
-#: inc/customizer.php:3506
+#: inc/customizer.php:3535
 msgid "Contact Box Title"
 msgstr "Τίτλος πλαισίου επικοινωνίας"
 
-#: inc/customizer.php:3482
+#: inc/customizer.php:3511
 msgid "Contact Text"
 msgstr "Κείμενο επικοινωνίας"
 
-#: inc/customizer.php:3467
+#: inc/customizer.php:3496
 msgid "Check this box to hide contact form."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να αποκρύψετε τη φόρμα επικοινωνίας."
 
-#: inc/customizer.php:3465
+#: inc/customizer.php:3494
 msgid "Hide contact form completely."
 msgstr "Πλήρης απόκρυψη της φόρμας επικοινωνίας."
 
-#: inc/customizer.php:3449
+#: inc/customizer.php:3478
 msgid "Contact Form Shortcode."
 msgstr "Contact Form 7 Shortcode."
 
-#: inc/customizer.php:3374 section-parts/section-contact.php:4
+#: inc/customizer.php:3403 section-parts/section-contact.php:4
 msgid "Get in touch"
 msgstr "Επικοινωνήστε μαζί μας"
 
-#: inc/customizer.php:3359 section-parts/section-contact.php:2
+#: inc/customizer.php:3388 section-parts/section-contact.php:2
 msgid "contact"
 msgstr "επικοινωνία"
 
-#: inc/customizer.php:3324
+#: inc/customizer.php:3353
 msgid "Section: Contact"
 msgstr "Ενότητα: Επικοινωνία"
 
-#: inc/customizer.php:3307 section-parts/section-news.php:8
+#: inc/customizer.php:3336 section-parts/section-news.php:8
 msgid "Read Our Blog"
 msgstr "Διαβάστε το ιστολόγιό μας"
 
-#: inc/customizer.php:3299
+#: inc/customizer.php:3328
 msgid "More News button link"
 msgstr "Σύνδεσμος κουμπιού Περισσότερα νέα"
 
-#: inc/customizer.php:3221
+#: inc/customizer.php:3250
 msgid "Number of post to show"
 msgstr "Αριθμός άρθρων προς προβολή"
 
-#: inc/customizer.php:3156 section-parts/section-news.php:4
+#: inc/customizer.php:3185 section-parts/section-news.php:4
 msgid "Latest News"
 msgstr "Τελευταία νέα"
 
-#: inc/customizer.php:3141 section-parts/section-news.php:2
+#: inc/customizer.php:3170 section-parts/section-news.php:2
 msgid "news"
 msgstr "νέα"
 
-#: inc/customizer.php:3106
+#: inc/customizer.php:3135
 msgid "Section: News"
 msgstr "Ενότητα: Νέα"
 
-#: inc/customizer.php:3074
+#: inc/customizer.php:3103
 msgid "Team members"
 msgstr "Μέλη ομάδας"
 
-#: inc/customizer.php:2986 section-parts/section-team.php:4
+#: inc/customizer.php:3015 section-parts/section-team.php:4
 msgid "Our Team"
 msgstr "Η ομάδα μας"
 
-#: inc/customizer.php:2971 section-parts/section-team.php:2
+#: inc/customizer.php:3000 section-parts/section-team.php:2
 msgid "team"
 msgstr "ομάδα"
 
-#: inc/customizer.php:2937
+#: inc/customizer.php:2966
 msgid "Section: Team"
 msgstr "Ενότητα: Ομάδα"
 
-#: inc/customizer.php:2921
+#: inc/customizer.php:2950
 msgid "After number"
 msgstr "Μετά τον αριθμό"
 
-#: inc/customizer.php:2916
+#: inc/customizer.php:2945
 msgid "Before number"
 msgstr "Πριν τον αριθμό"
 
-#: inc/customizer.php:2911
+#: inc/customizer.php:2940
 msgid "Number"
 msgstr "Αριθμός"
 
-#: inc/customizer.php:2908
+#: inc/customizer.php:2937
 msgid "Your counter label"
 msgstr "Την ετικέτα του μετρητή σας"
 
-#: inc/customizer.php:2504 inc/customizer.php:2905 inc/customizer.php:3261
+#: inc/customizer.php:2533 inc/customizer.php:2934 inc/customizer.php:3290
 msgid "Title"
 msgstr "Title"
 
-#: inc/customizer.php:2896
+#: inc/customizer.php:2925
 msgid "Counter content"
 msgstr "Περιεχόμενο μετρητή"
 
-#: inc/customizer.php:2830 section-parts/section-counter.php:4
+#: inc/customizer.php:2859 section-parts/section-counter.php:4
 msgid "Our Numbers"
 msgstr "Οι αριθμοί μας"
 
-#: inc/customizer.php:2815 section-parts/section-counter.php:2
+#: inc/customizer.php:2844 section-parts/section-counter.php:2
 msgid "counter"
 msgstr "μετρητής"
 
-#: inc/customizer.php:2781
+#: inc/customizer.php:2810
 msgid "Section: Counter"
 msgstr "Ενότητα: Μετρητής"
 
-#: inc/customizer.php:2508 inc/customizer.php:2717
+#: inc/customizer.php:2537 inc/customizer.php:2746
 msgid "Custom icon"
 msgstr "Προσαρμοσμένο εικονίδιο"
 
-#: inc/customizer.php:2708
+#: inc/customizer.php:2737
 msgid "Service content"
 msgstr "Περιεχόμενο υπηρεσίας"
 
-#: inc/customizer.php:2617 section-parts/section-hero.php:87
+#: inc/customizer.php:2646 section-parts/section-hero.php:87
 #: section-parts/section-services.php:4
 msgid "Our Services"
 msgstr "Οι υπηρεσίες μας"
 
-#: inc/customizer.php:2602 section-parts/section-services.php:2
+#: inc/customizer.php:2631 section-parts/section-services.php:2
 msgid "services"
 msgstr "υπηρεσίες"
 
-#: inc/customizer.php:2567
+#: inc/customizer.php:2596
 msgid "Section: Services"
 msgstr "Ενότητα: Υπηρεσίες"
 
-#: inc/customizer.php:2317 inc/customizer.php:2741
+#: inc/customizer.php:2346 inc/customizer.php:2770
 msgid "Link to single page"
 msgstr "Σύνδεσμος προς μεμονωμένη σελίδα"
 
-#: inc/customizer.php:2313
+#: inc/customizer.php:2342
 msgid "Hide item title"
 msgstr "Απόκρυψη τίτλου στοιχείου"
 
-#: inc/customizer.php:2308 inc/customizer.php:2736
+#: inc/customizer.php:2337 inc/customizer.php:2765
 msgid "Select a page"
 msgstr "Επιλέξτε μία σελίδα"
 
-#: inc/customizer.php:817 inc/customizer.php:2303 inc/customizer.php:2499
-#: inc/customizer.php:2712 inc/customizer.php:2900 inc/customizer.php:3078
+#: inc/customizer.php:820 inc/customizer.php:2332 inc/customizer.php:2528
+#: inc/customizer.php:2741 inc/customizer.php:2929 inc/customizer.php:3107
 msgid "[live_title]"
 msgstr "[live_title]"
 
-#: inc/customizer.php:1940 inc/customizer.php:2278 inc/customizer.php:2475
-#: inc/customizer.php:2688 inc/customizer.php:2876 inc/customizer.php:3054
-#: inc/customizer.php:3421
+#: inc/customizer.php:1969 inc/customizer.php:2307 inc/customizer.php:2504
+#: inc/customizer.php:2717 inc/customizer.php:2905 inc/customizer.php:3083
+#: inc/customizer.php:3450
 msgid "Section Content"
 msgstr "Περιεχόμενο ενότητας"
 
-#: inc/customizer.php:1914 inc/customizer.php:2225 inc/customizer.php:2426
-#: inc/customizer.php:2637 inc/customizer.php:2850 inc/customizer.php:3006
-#: inc/customizer.php:3176 inc/customizer.php:3394
+#: inc/customizer.php:1943 inc/customizer.php:2254 inc/customizer.php:2455
+#: inc/customizer.php:2666 inc/customizer.php:2879 inc/customizer.php:3035
+#: inc/customizer.php:3205 inc/customizer.php:3423
 msgid "Section Subtitle"
 msgstr "Υπότίτλος ενότητας"
 
-#: inc/customizer.php:1909 inc/customizer.php:2220 inc/customizer.php:2421
-#: inc/customizer.php:2632 inc/customizer.php:2845 inc/customizer.php:3001
-#: inc/customizer.php:3171 inc/customizer.php:3389
+#: inc/customizer.php:1938 inc/customizer.php:2249 inc/customizer.php:2450
+#: inc/customizer.php:2661 inc/customizer.php:2874 inc/customizer.php:3030
+#: inc/customizer.php:3200 inc/customizer.php:3418
 #: section-parts/section-about.php:5 section-parts/section-contact.php:5
 #: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
 #: section-parts/section-news.php:5 section-parts/section-services.php:5
@@ -1257,177 +1345,177 @@ msgstr "Υπότίτλος ενότητας"
 msgid "Section subtitle"
 msgstr "Υπότίτλος ενότητας"
 
-#: inc/customizer.php:1899 inc/customizer.php:2210 inc/customizer.php:2411
-#: inc/customizer.php:2622 inc/customizer.php:2835 inc/customizer.php:2991
-#: inc/customizer.php:3161 inc/customizer.php:3379
+#: inc/customizer.php:1928 inc/customizer.php:2239 inc/customizer.php:2440
+#: inc/customizer.php:2651 inc/customizer.php:2864 inc/customizer.php:3020
+#: inc/customizer.php:3190 inc/customizer.php:3408
 msgid "Section Title"
 msgstr "Τίτλος ενότητας"
 
-#: inc/customizer.php:2190 section-parts/section-about.php:2
+#: inc/customizer.php:2219 section-parts/section-about.php:2
 msgid "about"
 msgstr "σχετικά"
 
-#: inc/customizer.php:1751 inc/customizer.php:1853 inc/customizer.php:2164
-#: inc/customizer.php:2365 inc/customizer.php:2576 inc/customizer.php:2790
-#: inc/customizer.php:2946 inc/customizer.php:3115 inc/customizer.php:3333
+#: inc/customizer.php:1780 inc/customizer.php:1882 inc/customizer.php:2193
+#: inc/customizer.php:2394 inc/customizer.php:2605 inc/customizer.php:2819
+#: inc/customizer.php:2975 inc/customizer.php:3144 inc/customizer.php:3362
 msgid "Section Settings"
 msgstr "Ρυθμίσεις ενότητας"
 
-#: inc/customizer.php:2155
+#: inc/customizer.php:2184
 msgid "Section: About"
 msgstr "Ενότητα: Σχετικά"
 
-#: inc/customizer.php:1664
+#: inc/customizer.php:1680
 msgid "Button #2 Link"
 msgstr "Κουμπί #2 σύνδεσμος"
 
-#: inc/customizer.php:1659 section-parts/section-hero.php:90
+#: inc/customizer.php:1675 section-parts/section-hero.php:90
 msgid "#contact"
 msgstr "#contact"
 
-#: inc/customizer.php:1650
+#: inc/customizer.php:1666
 msgid "Button #2 Text"
 msgstr "Κουμπί #2 κείμενο"
 
-#: inc/customizer.php:1645 section-parts/section-hero.php:89
+#: inc/customizer.php:1661 section-parts/section-hero.php:89
 msgid "Get Started"
 msgstr "Πρώτα βήματα"
 
-#: inc/customizer.php:1612
+#: inc/customizer.php:1615
 msgid "Button #1 Link"
 msgstr "Κουμπί #1 σύνδεσμος"
 
-#: inc/customizer.php:1607
+#: inc/customizer.php:1610
 msgid "#about"
 msgstr "#about"
 
-#: inc/customizer.php:1598
+#: inc/customizer.php:1601
 msgid "Button #1 Text"
 msgstr "Κουμπί #1 κείμενο"
 
-#: inc/customizer.php:1593 inc/customizer.php:2205
+#: inc/customizer.php:1596 inc/customizer.php:2234
 #: section-parts/section-about.php:4
 msgid "About Us"
 msgstr "Σχετικά με εμάς"
 
-#: inc/customizer.php:1585
+#: inc/customizer.php:1588
 msgid "You can use text rotate slider in this textarea too."
 msgstr "Μπορείτε επίσης να χρησιμοποιήσετε το ρυθμιστικό περιστροφής κειμένου σε αυτό το κείμενο."
 
-#: inc/customizer.php:1582
+#: inc/customizer.php:1585
 msgid "Small Text"
 msgstr "Μικρό κείμενο"
 
-#: inc/customizer.php:1535
-msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer->Site Option->Animate to control rotate animation."
-msgstr "Οδηγός περιστρεφόμενου κειμένου: Βάλτε τα κείμενα περιστροφής διαχωρισμένα με \"|\" σε <span class=\"js-rotating\">...</span> , μεταβείτε στον Προσαρμογέα->   Επιλογές -> Κίνηση για να ελέγξετε την κίνηση της περιστροφής."
+#: inc/customizer.php:1538
+msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation."
+msgstr "Οδηγός περιστρεφόμενου κειμένου: Βάλτε τα κείμενα περιστροφής διαχωρισμένα με \"|\" σε <span class=\"js-rotating\">...</span> , μεταβείτε στον Προσαρμογέα-> Επιλογές Θέματος-> Περιοχή: Hero -> Ρυθμίσεις Hero για να ελέγξετε την κίνηση της περιστροφής."
 
-#: inc/customizer.php:1533
+#: inc/customizer.php:1536
 msgid "Large Text"
 msgstr "Μεγάλο κείμενο"
 
-#: inc/customizer.php:1493
+#: inc/customizer.php:1496
 msgid "Hero Content Layout"
 msgstr "Διάταξη Περιεχομένου Hero"
 
-#: inc/customizer.php:1420
+#: inc/customizer.php:1423
 msgid "Background Image"
 msgstr "Εικόνα φόντου"
 
-#: inc/customizer.php:901 inc/customizer.php:1091 inc/customizer.php:1415
+#: inc/customizer.php:904 inc/customizer.php:1094 inc/customizer.php:1418
 msgid "Background"
 msgstr "Background"
 
-#: inc/customizer.php:1411
+#: inc/customizer.php:1414
 msgid "Background Images"
 msgstr "Εικόνες φόντου"
 
-#: inc/customizer.php:1385
+#: inc/customizer.php:1388
 msgid "Hero Background Media"
 msgstr "Πολυμέσο φόντου Hero"
 
-#: inc/customizer.php:1282
+#: inc/customizer.php:1285
 msgid "Padding Bottom:"
 msgstr "Κάτω γέμισμα:"
 
-#: inc/customizer.php:1266
+#: inc/customizer.php:1269
 msgid "Padding Top:"
 msgstr "Πάνω γέμισμα:"
 
-#: inc/customizer.php:1261 inc/customizer.php:1277
+#: inc/customizer.php:1264 inc/customizer.php:1280
 msgid "10"
 msgstr "10"
 
-#: inc/customizer.php:1238
+#: inc/customizer.php:1241
 msgid "Check this box to make hero section full screen."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να μετατρέψετε σε πλήρους οθόνης την ενότητα hero."
 
-#: inc/customizer.php:1236
+#: inc/customizer.php:1239
 msgid "Make hero section full screen"
 msgstr "Κάντε πλήρους οθόνης το τμήμα hero"
 
-#: inc/customizer.php:1220 inc/customizer.php:1782 inc/customizer.php:1884
-#: inc/customizer.php:2195 inc/customizer.php:2396 inc/customizer.php:2607
-#: inc/customizer.php:2820 inc/customizer.php:2976 inc/customizer.php:3146
-#: inc/customizer.php:3364
+#: inc/customizer.php:1223 inc/customizer.php:1811 inc/customizer.php:1913
+#: inc/customizer.php:2224 inc/customizer.php:2425 inc/customizer.php:2636
+#: inc/customizer.php:2849 inc/customizer.php:3005 inc/customizer.php:3175
+#: inc/customizer.php:3393
 msgid "Section ID:"
 msgstr "ID ενότητας:"
 
-#: inc/customizer.php:1215 section-parts/section-hero.php:2
+#: inc/customizer.php:1218 section-parts/section-hero.php:2
 msgid "hero"
 msgstr "hero"
 
-#: inc/customizer.php:1208 inc/customizer.php:1769 inc/customizer.php:1871
-#: inc/customizer.php:2182 inc/customizer.php:2383 inc/customizer.php:2594
-#: inc/customizer.php:2807 inc/customizer.php:2964 inc/customizer.php:3133
-#: inc/customizer.php:3351
+#: inc/customizer.php:1211 inc/customizer.php:1798 inc/customizer.php:1900
+#: inc/customizer.php:2211 inc/customizer.php:2412 inc/customizer.php:2623
+#: inc/customizer.php:2836 inc/customizer.php:2993 inc/customizer.php:3162
+#: inc/customizer.php:3380
 msgid "Check this box to hide this section."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να αποκρύψετε την ενότητα."
 
-#: inc/customizer.php:1206 inc/customizer.php:1767 inc/customizer.php:1869
-#: inc/customizer.php:2180 inc/customizer.php:2381 inc/customizer.php:2592
-#: inc/customizer.php:2805 inc/customizer.php:2962 inc/customizer.php:3131
-#: inc/customizer.php:3349
+#: inc/customizer.php:1209 inc/customizer.php:1796 inc/customizer.php:1898
+#: inc/customizer.php:2209 inc/customizer.php:2410 inc/customizer.php:2621
+#: inc/customizer.php:2834 inc/customizer.php:2991 inc/customizer.php:3160
+#: inc/customizer.php:3378
 msgid "Hide this section?"
 msgstr "Απόκρυψη αυτής της ενότητας;"
 
-#: inc/customizer.php:1190
+#: inc/customizer.php:1193
 msgid "Hero Settings"
 msgstr "Ρυθμίσεις Hero"
 
-#: inc/customizer.php:1180
+#: inc/customizer.php:1183
 msgid "Section: Hero"
 msgstr "Ενότητα: Hero"
 
-#: inc/customizer.php:886
+#: inc/customizer.php:889
 msgid "MailChimp Action URL"
 msgstr "MailChimp Action URL"
 
-#: inc/customizer.php:870
+#: inc/customizer.php:873
 msgid "Newsletter Form Title"
 msgstr "Τίτλος φόρμας newsletter"
 
-#: inc/customizer.php:856
+#: inc/customizer.php:859
 msgid "Check this box to hide footer newsletter form."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να αποκρύψετε τη φόρμα newsletter υποσέλιδου."
 
-#: inc/customizer.php:854
+#: inc/customizer.php:857
 msgid "Hide Footer Newsletter?"
 msgstr "Απόκρυψη Newsletter από το υποσέλιδο;"
 
-#: inc/customizer.php:793
+#: inc/customizer.php:796
 msgid "Social Footer Title"
 msgstr "Τίτλος περιοχή κοινωνικών δικτύων στο υποσέλιδο"
 
-#: inc/customizer.php:779
+#: inc/customizer.php:782
 msgid "The social profiles specified below will be displayed in the footer of your site."
 msgstr "Οι παρακάτω ρυθμίσεις των κοινωνικών προφίλ θα εμφανίζονται στο υποσέλιδο του ιστότοπού σας."
 
-#: inc/customizer.php:766
+#: inc/customizer.php:769
 msgid "Check this box to hide footer social section."
 msgstr "Επιλέξτε αυτό το πλαίσιο για να αποκρύψετε την ενότητα κοινωνικών του υποσέλιδου."
 
-#: inc/customizer.php:764
+#: inc/customizer.php:767
 msgid "Hide Footer Social?"
 msgstr "Απόκρυψη υποσέλιδου Κοινωνικά δίκτυα;"
 
@@ -1488,7 +1576,7 @@ msgstr "Τεμάχιο"
 msgid "Add an item"
 msgstr "Προσθήκη στοιχείου"
 
-#: inc/template-tags.php:231
+#: inc/template-tags.php:229
 msgid "Menu"
 msgstr "Μενού"
 
@@ -1496,119 +1584,119 @@ msgstr "Μενού"
 msgid "Skip to content"
 msgstr "Προχωρήστε στο περιεχόμενο"
 
-#: functions.php:392
+#: functions.php:391
 msgid "Please contact the administrator of this site for help."
 msgstr "Παρακαλούμε επικοινωνήστε με το διαχειριστή του ιστοτόπου για βοήθεια."
 
-#: functions.php:391
+#: functions.php:390
 msgid "All plugins installed and activated successfully. %1$s"
 msgstr "Όλα τα Plugins εγκαταστάθηκαν και ενεργοποιήθηκαν με επιτυχία. %1$s"
 
-#: functions.php:390
+#: functions.php:389
 msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
 msgstr "Το πρόσθετο δεν ενεργοποιήθηκε. Απαιτείται νεότερη έκδοση του %s για αυτό το θέμα. Παρακαλώ ενημερώστε το πρόσθετο."
 
-#: functions.php:389
+#: functions.php:388
 msgid "No action taken. Plugin %1$s was already active."
 msgstr "Δεν εκτελέστηκε καμία ενέργεια. Το πρόσθετο %1$s ήταν ήδη ενεργό."
 
-#: functions.php:388
+#: functions.php:387
 msgid "The following plugin was activated successfully:"
 msgstr "Το παρακάτω Plugin ενεργοποιήθηκε σωστά:"
 
-#: functions.php:387
+#: functions.php:386
 msgid "Plugin activated successfully."
 msgstr "Το Plugin ενεργοποιήθηκε σωστά."
 
-#: functions.php:386
+#: functions.php:385
 msgid "Return to Required Plugins Installer"
 msgstr "Επέστρεψε στα απαραίτητα για εγκατάσταση  Plugins"
 
-#: functions.php:385
+#: functions.php:384
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
 msgstr[0] "Έναρξη ενεργοποίησης επέκτασης"
 msgstr[1] "Έναρξη ενεργοποίησης επεκτάσεων"
 
-#: functions.php:384
+#: functions.php:383
 msgid "Begin updating plugin"
 msgid_plural "Begin updating plugins"
 msgstr[0] "Ξεκινήστε την ενημέρωση του πρόσθετου"
 msgstr[1] "Ξεκινήστε την ενημέρωση των πρόσθετων"
 
-#: functions.php:383
+#: functions.php:382
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
 msgstr[0] "Έναρξη εγκατάστασης επέκτασης"
 msgstr[1] "Έναρξη εγκατάστασης επεκτάσεων"
 
-#: functions.php:382
+#: functions.php:381
 msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
 msgstr[0] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για να ενεργοποιήσετε το πρόσθετο %1$s."
 msgstr[1] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για να ενεργοποιήσετε τα πρόσθετα %1$s."
 
-#: functions.php:381
+#: functions.php:380
 msgid "The following recommended plugin is currently inactive: %1$s."
 msgid_plural "The following recommended plugins are currently inactive: %1$s."
 msgstr[0] "Το παρακάτω προτεινόμενο πρόσθετο είναι ανενεργό: %1$s."
 msgstr[1] "Τα παρακάτω προτεινόμενα πρόσθετα είναι ανενεργά: %1$s."
 
-#: functions.php:380
+#: functions.php:379
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
 msgstr[0] "Η ακόλουθη απαραίτητη επέκταση είναι αυτή την στιγμή ανενεργή: %1$s."
 msgstr[1] "Οι ακόλουθες απαραίτητες επεκτάσεις είναι αυτή την στιγμή ανενεργές: %1$s."
 
-#: functions.php:379
+#: functions.php:378
 msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
 msgstr[0] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για να ενημερώσετε το πρόσθετο %1$s."
 msgstr[1] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για να ενημερώσετε τα πρόσθετα %1$s."
 
-#: functions.php:378
+#: functions.php:377
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
 msgstr[0] "Υπάρχει διαθέσιμη ενημέρωση για το: %1$s."
 msgstr[1] "Υπάρχουν διαθέσιμες ενημερώσεις για τα ακόλουθα πρόσθετα:%1$s."
 
-#: functions.php:377
+#: functions.php:376
 msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
 msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
 msgstr[0] "Το ακόλουθο πρόσθετο πρέπει να ενημερωθεί στην τελευταία του έκδοση για να εξασφαλιστεί η μέγιστη συμβατότητα τους με αυτό το θέμα:%1$s."
 msgstr[1] "Τα ακόλουθα πρόσθετα πρέπει να ενημερωθούν στην τελευταία τους έκδοση για να εξασφαλιστεί η μέγιστη συμβατότητα τους με αυτό το θέμα:%1$s."
 
-#: functions.php:376
+#: functions.php:375
 msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
 msgstr[0] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για την εγκατάσταση του πρόσθετου %1$s."
 msgstr[1] "Λυπούμαστε, αλλά δεν έχετε τα σωστά δικαιώματα για την εγκατάσταση των πρόσθετων %1$s."
 
-#: functions.php:375
+#: functions.php:374
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
 msgstr[0] "Αυτό το θέμα προτείνει την παρακάτω επέκταση: %1$s."
 msgstr[1] "Αυτό το θέμα προτείνει τις παρακάτω επεκτάσεις: %1$s."
 
-#: functions.php:374
+#: functions.php:373
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
 msgstr[0] "Αυτό το θέμα απαιτεί την παρακάτω επέκταση: %1$s."
 msgstr[1] "Αυτό το θέμα απαιτεί τις παρακάτω επεκτάσεις: %1$s."
 
-#: functions.php:373
+#: functions.php:372
 msgid "Something went wrong with the plugin API."
 msgstr "Κάτι πήγε λάθος με το Plugin API."
 
-#: functions.php:372
+#: functions.php:371
 msgid "Installing Plugin: %s"
 msgstr "Εγκατάσταση προσθέτου: %s"
 
-#: functions.php:371
+#: functions.php:370
 msgid "Install Plugins"
 msgstr "Εγκατάσταση προσθέτων"
 
-#: functions.php:370
+#: functions.php:369
 msgid "Install Required Plugins"
 msgstr "Εγκαταστήστε τα απαιτούμενα Plugins"
 
@@ -1636,11 +1724,11 @@ msgstr "Πλευρική στήλη"
 msgid "Primary Menu"
 msgstr "Κύριο Μενού"
 
-#: inc/template-tags.php:1344
+#: inc/template-tags.php:1345
 msgid "%1$s theme by %2$s"
 msgstr "%1$s θέμα από %2$s"
 
-#: inc/template-tags.php:1342
+#: inc/template-tags.php:1343
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "Πνευματικά δικαιώματα%1$s %2$s %3$s"
 
@@ -1648,11 +1736,11 @@ msgstr "Πνευματικά δικαιώματα%1$s %2$s %3$s"
 msgid "Back To Top"
 msgstr "Πισω στην κορυφη"
 
-#: inc/customizer.php:864 inc/template-tags.php:1594
+#: inc/customizer.php:867 inc/template-tags.php:1606
 msgid "Join our Newsletter"
 msgstr "Εγγραφείτε στο Newsletter μας"
 
-#: inc/customizer.php:787 inc/template-tags.php:1613
+#: inc/customizer.php:790 inc/template-tags.php:1625
 msgid "Keep Updated"
 msgstr "Μείνετε ενημερωμένοι"
 
