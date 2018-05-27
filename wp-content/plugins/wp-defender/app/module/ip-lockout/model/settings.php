@@ -62,8 +62,11 @@ class Settings extends \Hammer\WP\Settings {
 			$this->receipts[]        = get_current_user_id();
 			$this->report_receipts[] = get_current_user_id();
 			$this->ip_whitelist      = $this->getUserIp() . PHP_EOL;
-		}
 
+			//default is weekly
+			$this->report_day  = strtolower( date( 'l' ) );
+			$this->report_time = ltrim( date( 'H', current_time( 'timestamp' ) ) . ':0', '0' );
+		}
 		parent::__construct( $id, $isMulti );
 	}
 

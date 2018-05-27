@@ -43,7 +43,60 @@ jQuery(function ($) {
         }
     })
 
+    $('body').on( 'click','.2f-send-test-email', function(){
+        var jq = jQuery,
+            parentForm = jq('.wd-one-time-pass-email form'),
+            that = jq(this),
+            data = parentForm.serialize();
+        data = data + '&action=testTwoFactorOPTEmail';
+        // return;
+        jq.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: data,
+            beforeSend: function () {
+                parentForm.find('button[type="button"]').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                var notificationType = 'success';
+                if( ! data.success ) {
+                    notificationType = 'error';
+                }
+                parentForm.find('button[type="button"]').removeAttr('disabled');
+                Defender.showNotification( notificationType, data.data.message);
+            }
+        })
+        return false;
+    });
 
+    $('body').on( 'click','.save-2f-opt-email', function(){
+        var jq = jQuery,
+            parentForm = jq('.wd-one-time-pass-email form'),
+            that = jq(this),
+            data = parentForm.serialize();
+        data = data + '&action=saveTwoFactorOPTEmail';
+        // return;
+        jq.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: data,
+            beforeSend: function () {
+                parentForm.find('button[type="button"]').attr('disabled', 'disabled');
+            },
+            success: function (data) {
+                var notificationType = 'success';
+                if( ! data.success ) {
+                    notificationType = 'error';
+                }
+                parentForm.find('button[type="button"]').removeAttr('disabled');
+                Defender.showNotification( notificationType, data.data.message);
+                if (data.data.reload != undefined) {
+                    location.reload();
+                }
+            }
+        })
+        return false;
+    });
     var mediaUploader;
     $('.file-picker').click(function () {
         if (mediaUploader) {

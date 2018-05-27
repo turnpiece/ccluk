@@ -8,6 +8,7 @@ namespace WP_Defender\Module\IP_Lockout\Model;
 
 use Hammer\Base\DB_Model;
 use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api;
 
 class Log_Model extends DB_Model {
 	const AUTH_FAIL = 'auth_fail', AUTH_LOCK = 'auth_lock', ERROR_404 = '404_error', LOCKOUT_404 = '404_lockout', ERROR_404_IGNORE = '404_error_ignore';
@@ -36,7 +37,7 @@ class Log_Model extends DB_Model {
 		if ( ! $format ) {
 			return esc_html( $this->log );
 		} else {
-			$text = sprintf( __( "Request for file <span class='log-text-table' tooltip='%s'>%s</span> which doesn't exist", wp_defender()->domain ), esc_attr( $this->log ), pathinfo( $this->log, PATHINFO_BASENAME ) );
+			$text = sprintf( __( "Request for file <span class='log-text-table'>%s</span> which doesn't exist", wp_defender()->domain ), esc_attr( $this->log ) );
 
 			return $text;
 		}
@@ -54,7 +55,11 @@ class Log_Model extends DB_Model {
 	 * @return string
 	 */
 	public function get_date() {
-		return Utils::instance()->formatDateTime( date( 'Y-m-d H:i:s', $this->date ) );
+		if ( strtotime( '-24 hours' ) > $this->date ) {
+			return Utils::instance()->formatDateTime( date( 'Y-m-d H:i:s', $this->date ) );
+		} else {
+			return Login_Protection_Api::time_since( $this->date );
+		}
 	}
 
 	/**

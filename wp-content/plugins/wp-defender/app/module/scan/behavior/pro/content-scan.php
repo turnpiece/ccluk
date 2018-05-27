@@ -70,6 +70,93 @@ class Content_Scan extends Behavior {
 		return false;
 	}
 
+	public function _scan_a_file2( $file ) {
+		if ( ! file_exists( $file ) ) {
+			return false;
+		}
+		if ( $this->checksumCheck( $file, $checksum ) ) {
+			//this one is good and still same, no need to do
+			//return true;
+		}
+
+		//this file has changed, unset the old one
+		unset( $this->oldChecksum[ $checksum ] );
+		$this->tries[] = $file;
+		$count         = array_count_values( $this->tries );
+		$altCache      = WP_Helper::getArrayCache();
+		if ( isset( $count[ $file ] ) && $count[ $file ] > 1 ) {
+			//we fail this once, just ignore for now
+			return true;
+		} else {
+			$this->tries[] = $file;
+			$this->tries   = array_unique( $this->tries );
+			$altCache->set( self::FILES_TRIED, $this->tries );
+			//if the file larger than 400kb, we will save immediatly to prevent stuck
+			if ( filesize( $file ) >= apply_filters( 'wdScanPreventStuckSize', 400000 ) ) {
+				$cache = WP_Helper::getCache();
+				$cache->set( Content_Scan::FILES_TRIED, $this->tries );
+			}
+		}
+
+		$scanError           = array();
+		$patterns            = file_get_contents( __DIR__ . '/pattern.json' );
+		$patterns            = json_decode( $patterns, true );
+		$content             = file_get_contents( $file );
+		$smallestStartOffset = 0;
+		$maxEndOffset        = 0;
+		$isInit              = true;
+		foreach ( $patterns as $pattern ) {
+			if ( preg_match( '/' . $pattern[1] . '/m', $content, $matches, PREG_OFFSET_CAPTURE ) ) {
+				if ( $pattern[0] == 'enMaliciousThreatType' ) {
+					$startOffset = $matches[0][1];
+					$endOffset   = strlen( $matches[0][0] ) + $matches[0][1];
+					if ( $isInit == true ) {
+						$smallestStartOffset = $startOffset;
+						$maxEndOffset        = $endOffset;
+						$isInit              = false;
+					} else {
+						if ( $startOffset >= $smallestStartOffset && $endOffset <= $maxEndOffset ) {
+							//this is is ide the current, just move on
+							continue;
+						}
+					}
+					$scanError[] = array(
+						'lineFrom'   => 0,
+						'lineTo'     => 0,
+						'columnFrom' => 0,
+						'columnTo'   => 0,
+						'offsetFrom' => $startOffset,
+						'offsetTo'   => $endOffset,
+						'name'       => $pattern[2]
+					);
+				}
+			}
+		}
+		$scanError = array_filter( $scanError );
+		//need to recheck the offset, if it is inside another offset, then remove
+		if ( count( $scanError ) ) {
+			$item           = new Scan\Model\Result_Item();
+			$item->type     = 'content';
+			$item->raw      = array(
+				'file' => $file,
+				'meta' => array_merge( $scanError )
+			);
+			$item->parentId = $this->model->id;
+			$item->status   = Scan\Model\Result_Item::STATUS_ISSUE;
+			$item->save();
+		} else {
+			//store the checksum for later use
+			$this->oldChecksum[ $checksum ] = $file;
+			$altCache->set( self::CONTENT_CHECKSUM, $this->oldChecksum );
+		}
+		$content      = null;
+		$this->tokens = null;
+		unset( $tokens );
+		unset( $content );
+
+		return true;
+	}
+
 	public function _scan_a_file( $file ) {
 		if ( ! file_exists( $file ) ) {
 			return false;

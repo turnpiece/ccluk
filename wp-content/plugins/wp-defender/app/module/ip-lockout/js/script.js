@@ -3,6 +3,7 @@ jQuery(function ($) {
     WDIP.formHandler();
     WDIP.listenFilter();
     WDIP.pullSummaryData();
+    WDIP.showHideLog();
 
     $('div.iplockout').on('form-submitted', function (e, data, form) {
         if (form.attr('id') != 'settings-frm') {
@@ -105,7 +106,7 @@ jQuery(function ($) {
             },
             success: function (data) {
                 if (data.success == 1) {
-                    that.closest('td').html(data.data.message);
+                    that.parent().html(data.data.message);
                 }
             }
         })
@@ -159,6 +160,23 @@ jQuery(function ($) {
     $('input[name="login_protection"], input[name="detect_404"]').change(function () {
         $('#settings-frm').submit();
     })
+
+    $('#bulk-select').on('click', function () {
+        $('.single-select').prop('checked', $(this).prop('checked'))
+    })
+
+    $('#lockout-logs-sort').change(function () {
+        var value = $(this).val();
+        if (value === 'latest') {
+            query = 'orderby=id&order=desc'
+        } else if (value === 'oldest') {
+            query = 'orderby=id&order=asc'
+        } else if (value === 'ip') {
+            query = 'orderby=ip&order=asc'
+        }
+        console.log(query);
+        WDIP.ajaxPull(query);
+    })
 });
 
 window.WDIP = window.WDIP || {};
@@ -203,33 +221,12 @@ WDIP.formHandler = function () {
 WDIP.listenFilter = function () {
     var jq = jQuery;
     var form = jq('.lockout-logs-filter form');
-    var inputs = form.find(':input');
-    var typingTimer;                //timer identifier
-    var doneTypingInterval = 800;  //time in ms, 5 second for example
-    var old_query = '';
-    //on keyup, start the countdown
-    inputs.on('change', function () {
-        clearTimeout(typingTimer);
-        typingTimer = setTimeout(doneTyping, doneTypingInterval);
-    });
-
-    //on keydown, clear the countdown
-    inputs.on('click', function () {
-        clearTimeout(typingTimer);
-    });
-
-    //user is "finished typing," do something
-    function doneTyping() {
-        //build query
+    form.on('submit', function () {
         var query = WDIP.buildFilterQuery();
-        if (query == old_query) {
-            //no need
-            return;
-        }
         WDIP.ajaxPull(query, function () {
-            old_query = query;
         })
-    }
+        return false;
+    })
 };
 var isFirst = true;
 var urlOrigin = location.href;
@@ -244,10 +241,12 @@ WDIP.ajaxPull = function (query, callback) {
             jq('.lockout-logs-container').prepend(overlay);
         },
         success: function (data) {
-            jq('.lockout-logs-container').html(data.data.html);
+            jq('.lockout-logs-container table').replaceWith(jq(data.data.html).find('table').first());
+            jq('.lockout-logs-container .nav').replaceWith(jq(data.data.html).find('.nav').first());
+            //jq('.lockout-logs-container').replaceWith(jq(data.data.html));
             overlay.remove();
             if (isFirst == false) {
-                window.history.pushState(null, document.title, urlOrigin + '&' + query);
+                //window.history.pushState(null, document.title, urlOrigin + '&' + query);
             } else {
                 isFirst = false;
             }
@@ -262,7 +261,9 @@ WDIP.buildFilterQuery = function () {
     var inputs = form.find(':input');
     var query = [];
     inputs.each(function () {
-        query.push(jq(this).attr('name') + '=' + jq(this).val());
+        if (jq(this).attr('name') !== undefined) {
+            query.push(jq(this).attr('name') + '=' + jq(this).val());
+        }
     });
     return query.join('&');
 };
@@ -290,4 +291,23 @@ WDIP.pullSummaryData = function () {
             }
         })
     }
+}
+
+WDIP.showHideLog = function () {
+    var jq = jQuery;
+    jq('body').on('click', '.show-hide-log', function (e) {
+        if (jq(e.target).is('input')) {
+            return;
+        }
+        var target = jq(this).next('tr.table-info');
+        if (target.hasClass('wd-hide')) {
+            target.removeClass('wd-hide');
+            jq(this).addClass('opened');
+            jq(this).find('i').removeClass().addClass('dev-icon dev-icon-caret_up')
+        } else {
+            target.addClass('wd-hide');
+            jq(this).removeClass('opened');
+            jq(this).find('i').removeClass().addClass('dev-icon dev-icon-caret_down')
+        }
+    })
 }

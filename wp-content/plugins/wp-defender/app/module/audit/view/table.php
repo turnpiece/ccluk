@@ -1,15 +1,11 @@
 <?php if ( ! is_wp_error( $data ) ): ?>
     <div class="bulk-nav">
-        <div class="bulk-action">
-
-        </div>
         <div class="nav">
             <span><?php printf( __( "%d Results", wp_defender()->domain ), $data['total_items'] ) ?></span>
             <div class="button-group is-hidden-mobile">
 				<?php echo $pagination ?>
             </div>
         </div>
-        <div class="clear"></div>
     </div>
     <div class="clear"></div>
 	<?php if ( count( $data['data'] ) ): ?>
@@ -17,9 +13,8 @@
             <table>
                 <thead>
                 <tr>
-                    <th><?php _e( "Summary", wp_defender()->domain ) ?></th>
-                    <th><?php _e( "Time", wp_defender()->domain ) ?></th>
-                    <th class="is-hidden-touch"><?php _e( "IP Address", wp_defender()->domain ) ?></th>
+                    <th><?php _e( "Event Summary", wp_defender()->domain ) ?></th>
+                    <th><?php _e( "Date", wp_defender()->domain ) ?></th>
                     <th></th>
                 </tr>
                 </thead>
@@ -29,12 +24,9 @@
 					$timestamp = is_array( $row['timestamp'] ) ? $row['timestamp'][1] : $row['timestamp'];
 					?>
                     <tr class="critical show-info" data-target="#<?php echo $timestamp ?>">
-                        <td><?php echo wp_trim_words( $row['msg'], 10 ) ?></td>
+                        <td><strong><?php echo wp_trim_words( $row['msg'], 10 ) ?></strong></td>
                         <td><?php
 							echo \WP_Defender\Module\Audit\Component\Audit_API::time_since( $timestamp ) . esc_html__( " ago", wp_defender()->domain ); ?>
-                        </td>
-                        <td class="is-hidden-touch">
-							<?php echo $row['ip'] ?>
                         </td>
                         <td>
                             <a href="#<?php echo $timestamp ?>">
@@ -154,29 +146,24 @@
                                                 <strong><?php _e( "Date / Time", wp_defender()->domain ) ?></strong>
                                             </div>
                                             <div class="list-detail">
-	                                            <?php
-	                                            echo $controller->formatDateTime( date( 'Y-m-d H:i:s', $timestamp ) );
-	                                            ?>
+												<?php
+												echo $controller->formatDateTime( date( 'Y-m-d H:i:s', $timestamp ) );
+												?>
                                             </div>
                                         </li>
                                     </ul>
-									<?php if ( ! \WP_Defender\Module\IP_Lockout\Model\Settings::instance()->isBlacklist( $row['ip'] ) ): ?>
+									<?php if ( $row['action_type'] == \WP_Defender\Module\Audit\Component\Users_Audit::ACTION_LOGIN ): ?>
                                         <div class="clear mline"></div>
                                         <div class="well">
-                                            <div class="columns">
-                                                <div class="column is-10">
-                                                    <p><?php _e( "You can ban this IP address from being able to access your site, just be sure it’s not a legitimate operation of a plugin or service that needs access.", wp_defender()->domain ) ?></p>
-                                                </div>
-                                                <div class="column is-2 tc">
-                                                    <form method="post" class="audit-frm banIP">
-                                                        <input type="hidden" name="action" value="lockoutIPAction"/>
-                                                        <input type="hidden" name="type" value="blacklist">
-                                                        <input type="hidden" name="ip"
-                                                               value="<?php echo $row['ip'] ?>"/>
-														<?php wp_nonce_field( 'lockoutIPAction', 'nonce' ) ?>
-                                                        <button type="submit" class="button">
-															<?php _e( "Ban Ip", wp_defender()->domain ) ?></button>
-                                                    </form>
+                                            <p><?php _e( "You can ban this IP address from being able to access your site, just be sure it’s not a legitimate operation of a plugin or service that needs access.", wp_defender()->domain ) ?></p>
+                                            <br/>
+                                            <div>
+                                                <div>
+													<?php
+													$item     = new StdClass();
+													$item->ip = $row['ip'];
+													echo \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::getLogsActionsText( $item );
+													?>
                                                 </div>
                                             </div>
                                         </div>
@@ -190,18 +177,6 @@
             </table>
         </div>
         <div class="clear"></div>
-        <div class="bulk-nav">
-            <div class="bulk-action">
-
-            </div>
-            <div class="nav">
-                <span><?php printf( __( "%d Results", wp_defender()->domain ), $data['total_items'] ) ?></span>
-                <div class="button-group is-hidden-mobile">
-					<?php echo $pagination ?>
-                </div>
-            </div>
-            <div class="clear"></div>
-        </div>
 	<?php else: ?>
         <div class="well with-cap well-blue">
             <i class="def-icon icon-info fill-blue"></i>
@@ -209,7 +184,7 @@
         </div>
 	<?php endif; ?>
 <?php else: ?>
-    <div class="well well-error with-cap">
+    <div class="well well-error with-cap mline">
         <i class="def-icon icon-warning"></i>
 		<?php echo $data->get_error_message() ?>
     </div>

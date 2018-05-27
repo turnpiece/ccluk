@@ -62,6 +62,7 @@ class Main extends Controller {
 		$this->add_ajax_action( 'lockoutEmptyLogs', 'lockoutEmptyLogs' );
 		$this->add_ajax_action( 'lockoutSummaryData', 'lockoutSummaryData' );
 		$this->add_ajax_action( 'migrateData', 'movingDataToTable' );
+		$this->add_ajax_action( 'lockoutExportAsCsv', 'exportAsCsv' );
 
 		$this->handleIpAction();
 		$this->handleUserSearch();
@@ -136,6 +137,40 @@ class Main extends Controller {
 		wp_send_json_success( $data );
 	}
 
+	public function exportAsCsv() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+		$logs    = Log_Model::findAll();
+		$fp      = fopen( 'php://memory', 'w' );
+		$headers = array(
+			__( "Log", wp_defender()->domain ),
+			__( "Date / Time", wp_defender()->domain ),
+			__( "Type", wp_defender()->domain ),
+			__( "IP address", wp_defender()->domain ),
+			__( "Status", wp_defender()->domain )
+		);
+		fputcsv( $fp, $headers );
+		foreach ( $logs as $log ) {
+			$item = array(
+				$log->log,
+				$log->get_date(),
+				$log->get_type(),
+				$log->ip,
+				Login_Protection_Api::getIPStatusText( $log->ip )
+			);
+			fputcsv( $fp, $item );
+		}
+
+		$filename = 'wdf-lockout-logs-export-' . date( 'ymdHis' ) . '.csv';
+		fseek( $fp, 0 );
+		header( 'Content-Type: text/csv' );
+		header( 'Content-Disposition: attachment; filename="' . $filename . '";' );
+		// make php send the generated csv lines to the browser
+		fpassthru( $fp );
+		exit();
+	}
+
 	public function lockoutEmptyLogs() {
 		if ( ! $this->checkPermission() ) {
 			return;
@@ -187,8 +222,11 @@ class Main extends Controller {
 					'message' => Login_Protection_Api::getLogsActionsText( $log )
 				) );
 			} else {
+				$item = new \StdClass();
+				$item->ip = $ip;
 				wp_send_json_success( array(
-					'message' => sprintf( __( "IP %s has been added to your blacklist. You can control your blacklist in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), $ip, network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) )
+					'message' => sprintf( __( "IP %s has been added to your blacklist. You can control your blacklist in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), $ip, network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) ),
+					'buttons' => Login_Protection_Api::getLogsActionsText($item )
 				) );
 			}
 		} else {

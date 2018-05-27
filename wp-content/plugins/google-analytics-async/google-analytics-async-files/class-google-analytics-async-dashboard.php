@@ -1,18 +1,17 @@
 <?php
 /*  Copyright Maniu, Carson McDonald */
-include_once 'externals/OAuth.php';
-
-class GAPGoogle_Analytics_Async_Dashboard {
-
+class Google_Analytics_Async_Dashboard {
     var $text_domain;
     var $plugin_url;
     var $required_capability;
 
     var $ready;
-
     var $oauth_token;
     var $oauth_secret;
 
+	/**
+	 * @var Google_Client
+	 */
     var $google_client;
     var $google_login;
 
@@ -46,20 +45,39 @@ class GAPGoogle_Analytics_Async_Dashboard {
         $this->text_domain = $google_analytics_async->text_domain;
         $this->plugin_url = $google_analytics_async->plugin_url;
 
+        include_once( 'helpers-google-analytics-async-dashboard.php' );
+
         //required capability
-        $this->required_capability = (!empty($google_analytics_async->current_settings['track_settings']['minimum_capability_reports'])) ? $google_analytics_async->current_settings['track_settings']['minimum_capability_reports'] : ((!empty($google_analytics_async->current_settings['track_settings']['minimum_role_capability_reports'])) ? $google_analytics_async->current_settings['track_settings']['minimum_role_capability_reports']: 'manage_options');	 	 	 	 	   			 	
+	    $track_settings = ga_plus_get_track_settings();
+
+	    $this->required_capability = 'manage_options';
+	    if ( ! empty( $track_settings['minimum_capability_reports'] ) ) {
+		    $this->required_capability = $track_settings['minimum_capability_reports'];
+	    }
+	    elseif ( ! empty( $track_settings['minimum_role_capability_reports'] ) ) {
+		    $this->required_capability = $track_settings['minimum_role_capability_reports'];
+	    }
 
         //setup correct google analytics data source
-        $this->is_network_admin = (is_network_admin() || (defined('DOING_AJAX') && isset($_POST['network_admin']) && $_POST['network_admin'])) ? 1 : 0;
+        $this->is_network_admin = (is_network_admin() || (wp_doing_ajax() && isset($_POST['network_admin']) && $_POST['network_admin'])) ? 1 : 0;
 
-        if(!$this->is_network_admin && isset($google_analytics_async->settings['google_login']['logged_in']) && isset($google_analytics_async->settings['track_settings']['google_analytics_account_id']) && $google_analytics_async->settings['track_settings']['google_analytics_account_id'])
-            $this->stats_source = 'site';
-        elseif(isset($google_analytics_async->network_settings['google_login']['logged_in']) && isset($google_analytics_async->network_settings['track_settings']['google_analytics_account_id']) && $google_analytics_async->network_settings['track_settings']['google_analytics_account_id'])
-            $this->stats_source = 'network';
+	    $site_settings = ga_plus_get_settings( 'site' );
+	    $network_settings = ga_plus_get_settings( 'network' );
+	    if (
+	    	! $this->is_network_admin
+		    && isset( $site_settings['google_login']['logged_in'] )
+		    && ! empty( $site_settings['track_settings']['google_analytics_account_id'] )
+	    ) {
+		    $this->stats_source = 'site';
+	    }
+        elseif(
+	        $network_settings['google_login']['logged_in']
+	        && ! empty( $network_settings['track_settings']['google_analytics_account_id'] )
+        ) {
+	        $this->stats_source = 'network';
+        }
 
         add_action('admin_init', array($this, 'create_tables' ));
-
-        add_action('admin_init', array($this, 'admin_init_handle_google_login' ));
 
         add_action('admin_init', array($this, 'admin_init_handle_google_login2' ), 20);
         add_action('init', array($this, 'init_handle_google_login2' ));
@@ -119,7 +137,9 @@ class GAPGoogle_Analytics_Async_Dashboard {
             return;
 
         include_once 'class-widget-ga-most-popular-content.php';
-        add_action( 'widgets_init', create_function( '', 'return register_widget("GAPGoogle_Analytics_Async_Frontend_Widget");' ) );
+        add_action( 'widgets_init', function () {
+            return register_widget("Google_Analytics_Async_Frontend_Widget");
+        } );
     }
 
     function admin_init() {
@@ -137,10 +157,10 @@ class GAPGoogle_Analytics_Async_Dashboard {
             )
         ) {
             $this->set_up_ga_data();
-            }
         }
+    }
     function init() {
-        if( defined( 'DOING_AJAX' ) && DOING_AJAX && (isset($_POST['action']) && $_POST['action'] == 'load_google_analytics') )
+        if( wp_doing_ajax() && (isset($_POST['action']) && $_POST['action'] == 'load_google_analytics') )
             $this->set_up_ga_data();
     }
 
@@ -183,16 +203,15 @@ class GAPGoogle_Analytics_Async_Dashboard {
     }
 
     function admin_menu() {
-        global $google_analytics_async;
-
+        $network_settings = ga_plus_get_settings( 'network' );
         if(
             !current_user_can($this->required_capability) ||
             (
                 $this->stats_source == 'network'
                 && !is_super_admin()
-                && !empty($google_analytics_async->network_settings['track_settings']['supporter_only_reports'])
+                && !empty($network_settings['track_settings']['supporter_only_reports'])
                 && function_exists('is_pro_site')
-                && !is_pro_site(get_current_blog_id(), $google_analytics_async->network_settings['track_settings']['supporter_only_reports'])
+                && !is_pro_site(get_current_blog_id(), $network_settings['track_settings']['supporter_only_reports'])
             )
         )
             return;
@@ -205,16 +224,15 @@ class GAPGoogle_Analytics_Async_Dashboard {
     }
 
     function register_google_analytics_dashboard_widget() {
-        global $google_analytics_async;
-
+	    $network_settings = ga_plus_get_settings( 'network' );
         if(
             !current_user_can($this->required_capability) ||
             (
                 $this->stats_source == 'network'
                 && !is_super_admin()
-                && !empty( $google_analytics_async->network_settings['track_settings']['supporter_only_reports'] )
+                && !empty( $network_settings['track_settings']['supporter_only_reports'] )
                 && function_exists('is_pro_site')
-                && !is_pro_site(get_current_blog_id(), $google_analytics_async->network_settings['track_settings']['supporter_only_reports'])
+                && !is_pro_site(get_current_blog_id(), $network_settings['track_settings']['supporter_only_reports'])
             )
         )
             return;
@@ -223,16 +241,15 @@ class GAPGoogle_Analytics_Async_Dashboard {
     }
 
     function register_google_analytics_post_widget() {
-        global $google_analytics_async;
-
+	    $network_settings = ga_plus_get_settings( 'network' );
         if(
             !current_user_can($this->required_capability) ||
             (
                 $this->stats_source == 'network'
                 && !is_super_admin()
-                && !empty( $google_analytics_async->network_settings['track_settings']['supporter_only_reports'] )
+                && !empty( $network_settings['track_settings']['supporter_only_reports'] )
                 && function_exists('is_pro_site')
-                && !is_pro_site(get_current_blog_id(), $google_analytics_async->network_settings['track_settings']['supporter_only_reports'])
+                && !is_pro_site(get_current_blog_id(), $network_settings['track_settings']['supporter_only_reports'])
             )
         )
             return;
@@ -244,130 +261,30 @@ class GAPGoogle_Analytics_Async_Dashboard {
     }
 
     function reauthenticate_notice() {
-        global $google_analytics_async;
-
-        if(current_user_can('manage_options') && isset($google_analytics_async->settings['google_login']['logged_in']) && $google_analytics_async->settings['google_login']['logged_in'] == '1')
+        $site_settings = ga_plus_get_settings( 'site' );
+        $network_settings = ga_plus_get_settings( 'network' );
+        if(current_user_can('manage_options') && isset($site_settings['google_login']['logged_in']) && $site_settings['google_login']['logged_in'] == '1')
             echo '<div class="error"><p>'.sprintf(__('Google Analytics dashboard statistics require reauthentication. You can do it <a href="%s">here</a> and this message will disappear.', $this->text_domain), admin_url('options-general.php?page=google-analytics')).'</p></div>';
 
-        if(is_super_admin() && isset($google_analytics_async->network_settings['google_login']['logged_in']) && $google_analytics_async->network_settings['google_login']['logged_in'] == '1')
+        if(is_super_admin() && isset($network_settings['google_login']['logged_in']) && $network_settings['google_login']['logged_in'] == '1')
             echo '<div class="error"><p>'.sprintf(__('Google Analytics dashboard network statistics require reauthentication. You can do it <a href="%s">here</a> and this message will disappear.', $this->text_domain), network_admin_url('settings.php?page=google-analytics')).'</p></div>';
     }
 
     function settings_page_data() {
-        global $google_analytics_async, $pagenow;
+        global $pagenow;
 
         //load only for: dashboard, post type page and correct ajax call
         if(($pagenow == 'settings.php' || $pagenow == 'options-general.php') && isset($_GET['page']) && $_GET['page'] == 'google-analytics') {
             //this is just for getting accounts for now and then we need current settings... always.
-            if(isset($google_analytics_async->current_settings['google_login']['logged_in'])) {
-                $this->oauth_token = $google_analytics_async->current_settings['google_login']['token'];
-                $this->oauth_secret = $google_analytics_async->current_settings['google_login']['token_secret'];
+	        $google_login = ga_plus_get_google_login_settings();
+	        if ( ga_plus_is_google_login_logged_in() ) {
+                $this->oauth_token = $google_login['token'];
+                $this->oauth_secret = $google_login['token_secret'];
             }
 
-            $this->google_login = isset($google_analytics_async->current_settings['google_login']) ? $google_analytics_async->current_settings['google_login'] : array();
+            $this->google_login = ga_plus_get_google_login_settings();
 
             $this->setting_page = is_network_admin() ? 'network' : 'site';
-        }
-    }
-
-    function admin_init_handle_google_login() {
-        global $google_analytics_async;
-        $is_network = is_network_admin() ? 'network' : '';
-        $redirect_url = $is_network ? admin_url('/network/settings.php') : admin_url('/options-general.php');
-
-        //handle google login process
-        if( isset($_REQUEST['google_login']) && $_REQUEST['google_login'] == '1' ) {
-            if(($is_network && !is_super_admin()) || !current_user_can('manage_options'))
-                die(__('Cheatin&#8217; uh?'));
-
-            $google_analytics_async->save_options(array('google_login_temp' => array()), $is_network);
-
-            $parameters = array(
-                'oauth_callback' => add_query_arg(array('page' => 'google-analytics', 'google_login_return' => 'true'), $redirect_url),
-                'scope' => 'https://www.googleapis.com/auth/analytics.readonly',
-                'xoauth_displayname' => 'Google Analytics'
-            );
-
-            $method = new GAPGoogle_Analytics_OAuthSignatureMethod_HMAC_SHA1();
-            $consumer = new GAPGoogle_Analytics_OAuthConsumer('anonymous', 'anonymous', NULL);
-            $request = GAPGoogle_Analytics_OAuthRequest::from_consumer_and_token($consumer, NULL, 'GET', 'https://www.google.com/accounts/OAuthGetRequestToken', $parameters);
-            $request->sign_request($method, $consumer, NULL);
-
-            $response = wp_remote_get($request->to_url(), array('sslverify' => false));
-            if(is_wp_error($response)) {
-                wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode($response->get_error_message()))));
-                exit();
-            }
-            else{
-                $response_code = wp_remote_retrieve_response_code( $response );
-                $response_body = wp_remote_retrieve_body($response);
-
-                if($response_code == 200) {
-                    parse_str($response_body, $access_parameters);
-
-                    $google_analytics_async->save_options(array('google_login_temp' => array('token' => $access_parameters['oauth_token'], 'token_secret' => $access_parameters['oauth_token_secret'])), $is_network);
-
-                    wp_redirect(add_query_arg('oauth_token', urlencode($access_parameters['oauth_token']), 'https://www.google.com/accounts/OAuthAuthorizeToken?oauth_token'));
-                }
-                else
-                    wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode($response_body)), $redirect_url));
-
-                exit();
-            }
-        }
-        else if( isset($_REQUEST['google_login_return']) ) {
-            if(($is_network && !is_super_admin()) || !current_user_can('manage_options'))
-                die(__('Cheatin&#8217; uh?'));
-
-            $google_login_temp = $google_analytics_async->current_settings['google_login_temp'];
-
-            $parameters = array('oauth_verifier' => $_REQUEST['oauth_verifier']);
-
-            $method = new GAPGoogle_Analytics_OAuthSignatureMethod_HMAC_SHA1();
-            $consumer = new GAPGoogle_Analytics_OAuthConsumer('anonymous', 'anonymous', NULL);
-            $upgrade_token = new GAPGoogle_Analytics_OAuthConsumer($google_login_temp['token'], $google_login_temp['token_secret']);
-            $request = GAPGoogle_Analytics_OAuthRequest::from_consumer_and_token($consumer, $upgrade_token, 'GET', 'https://www.google.com/accounts/OAuthGetAccessToken', $parameters);
-            $request->sign_request($method, $consumer, $upgrade_token);
-
-            $response = wp_remote_get($request->to_url(), array('sslverify' => false));
-            if(is_wp_error($response)) {
-                wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode($response->get_error_message()), $redirect_url)));
-                exit();
-            }
-            else{
-                $response_code = wp_remote_retrieve_response_code( $response );
-                $response_body = wp_remote_retrieve_body($response);
-
-                $google_analytics_async->save_options(array('google_login_temp' => array()), $is_network);
-
-                if($response_code == 200) {
-                    parse_str($response_body, $access_parameters);
-
-                    $google_analytics_async->save_options(array('google_login' => array('token' => $access_parameters['oauth_token'], 'token_secret' => $access_parameters['oauth_token_secret'], 'logged_in' => 1)), $is_network);
-
-                    wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode(__( 'Login successful!', $this->text_domain ))), $redirect_url));
-                }
-                else
-                    wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode($response_body)), $redirect_url));
-
-                exit();
-            }
-        }
-        //REMEMBER logout part is also needed for new login method
-        elseif( isset($_REQUEST['google_logout']) && $_REQUEST['google_logout'] == 1 ) {
-            if(($is_network && !is_super_admin()) || !current_user_can('manage_options'))
-                die(__('Cheatin&#8217; uh?'));
-
-            $google_analytics_async->save_options(array('google_login' => array()), $is_network);
-
-            if(isset($google_analytics_async->network_settings['google_api']) && $is_network) {
-                $google_api = $google_analytics_async->network_settings['google_api'];
-                $google_api['verified'] = false;
-                $google_analytics_async->save_options(array('google_api' => $google_api), $is_network);
-            }
-
-            wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode(__( 'Logout successful!', $this->text_domain ))), $redirect_url));
-            exit();
         }
     }
 
@@ -375,18 +292,27 @@ class GAPGoogle_Analytics_Async_Dashboard {
         //we might be getting authentication code from google - we might need to redirect to ga setting page
         if(isset($_GET['state'])) {
             $state = json_decode(urldecode($_GET['state']), true);
-            if(isset($state['gaplus_login'])) {
+            if(isset($state['gaplus_login']) && wp_verify_nonce( $state['gaplus_login'], 'gaplus_login' )) {
                 $code = isset($_GET['code']) ? $_GET['code'] : false;
                 $url = $state['orgin'] == 'network' ? network_admin_url('settings.php') : get_admin_url($state['orgin']).'options-general.php';
+                $url = $url.'?page=google-analytics&code='.$code.'&gaplus_loggedin='.wp_create_nonce('gaplus_loggedin');
 
-                wp_redirect($url.'?page=google-analytics&gaplus_loggedin=true&code='.$code);
+                wp_redirect(esc_url_raw($url));
                 exit();
             }
         }
     }
 
     function admin_init_handle_google_login2() {
-        global $google_analytics_async, $wpdb;
+        global $wpdb;
+
+        //lets verify nonces for certain actions righ away
+        if(isset($_GET['gaplus_loggedin']) && !wp_verify_nonce($_GET['gaplus_loggedin'], 'gaplus_loggedin'))
+            return;
+        if(isset($_POST['gaplus_access_by_api']) && !wp_verify_nonce($_POST['gaplus_access_by_api'], 'gaplus_access_by_api'))
+            return;
+        if(isset($_POST['gaplus_access_by_code']) && !wp_verify_nonce($_POST['gaplus_access_by_code'], 'gaplus_access_by_code'))
+            return;
 
         $is_network = is_network_admin() ? 'network' : '';
 
@@ -396,11 +322,17 @@ class GAPGoogle_Analytics_Async_Dashboard {
         $this->google_client->setScopes(array('https://www.googleapis.com/auth/analytics.readonly', 'https://www.googleapis.com/auth/userinfo.profile'));
         $this->google_client->setAccessType('offline');
 
-        $google_api = isset($google_analytics_async->network_settings['google_api']) ? $google_analytics_async->network_settings['google_api'] : array();
+	    $google_api = ga_plus_get_google_api_settings( 'network' );
 
         //lets save api detials if user tries to configure them
-        if(isset($_POST['by_api'])) {
-            $google_analytics_async->save_options(array('google_api' => array('client_id' => $_POST['client_id'], 'client_secret' => $_POST['client_secret'], 'api_key' => $_POST['api_key'], 'verified' => false)), $is_network);
+        if(isset($_POST['gaplus_access_by_api'])) {
+	        $new_google_api_settings = array(
+		        'client_id' => $_POST['client_id'],
+		        'client_secret' => $_POST['client_secret'],
+		        'api_key' => $_POST['api_key'],
+		        'verified' => false
+	        );
+            ga_plus_update_setting( 'google_api', $new_google_api_settings, $is_network );
 
             $this->google_client->setApprovalPrompt('force');
             $this->google_client->setRedirectUri(network_site_url());
@@ -424,45 +356,29 @@ class GAPGoogle_Analytics_Async_Dashboard {
         }
 
         //lets save orgin used to login and redirect to login page
-        if(isset($_POST['by_api']) || (isset($_REQUEST['google_login']) && $_REQUEST['google_login'] == '2')) {
+        if(isset($_POST['gaplus_access_by_api']) || (isset($_GET['gaplus_login']) && wp_verify_nonce( $_GET['gaplus_login'], 'gaplus_login' ))) {
             $orgin = $is_network ? 'network' : get_current_blog_id();
 
-            $this->google_client->setState(urlencode(json_encode(array('gaplus_login' => true, 'orgin' => $orgin))));
+            $this->google_client->setState(urlencode(json_encode(array('gaplus_login' => wp_create_nonce('gaplus_login'), 'orgin' => $orgin))));
 
             wp_redirect($this->google_client->createAuthUrl());
             exit();
         }
 
-        if(isset($_REQUEST['by_code']) || isset($_GET['gaplus_loggedin'])) {
+        if(isset($_POST['gaplus_access_by_code']) || isset($_GET['gaplus_loggedin'])) {
             if($_REQUEST['code']) {
                 try {
-                    $this->google_client->authenticate($_REQUEST['code']);
-                    $token = $this->google_client->getAccessToken();
-                    $token_object = json_decode($token);
-
-                    $this->google_client->setAccessToken($token);
-
-                    $google_user_info = new GAPGoogle_Service_Oauth2($this->google_client);
-                    $google_user_id = $google_user_info->userinfo->get();
-                    $google_user_id = $google_user_id->id;
-
-                    $db_token = $wpdb->get_row($wpdb->prepare("SELECT id, token FROM {$wpdb->base_prefix}gaplus_login WHERE user_id = %s", $google_user_id), ARRAY_A);
-                    if($db_token['id']) {
-                        $wpdb->query( $wpdb->prepare("UPDATE {$wpdb->base_prefix}gaplus_login SET token = %s WHERE id = %d", $token, $db_token['id']));
-                    }
-                    else {
-                        $wpdb->query( $wpdb->prepare("INSERT INTO {$wpdb->base_prefix}gaplus_login SET user_id = %s, token = %s", $google_user_id, $token));
-                        $db_token['id'] = $wpdb->insert_id;
-                    }
+	                $result = ga_plus_code_authenticate( $_REQUEST['code'] );
+                    $db_token_id = ga_plus_update_saved_token( $result['google_user_id'], $result['token_object'] );
 
                     if(isset($_GET['gaplus_loggedin']) && $is_network) {
-                        $google_api = $google_analytics_async->network_settings['google_api'];
+	                    $google_api = ga_plus_get_google_api_settings( 'network' );
                         $google_api['verified'] = true;
-                        $google_analytics_async->save_options(array('google_api' => $google_api), $is_network);
+                        ga_plus_update_setting( 'google_api', $google_api, $is_network );
                     }
 
                     //lets store data for site
-                    $google_analytics_async->save_options(array('google_login' => array('token_id' => $db_token['id'], 'token' => $token, 'orginal_token' => $token, 'expire' => time() + $token_object->expires_in, 'token_secret' => 1, 'logged_in' => 2)), $is_network);
+	                ga_plus_refresh_google_login_settings( $db_token_id, $is_network );
 
                     wp_redirect(add_query_arg(array('dmsg' => urlencode(__('You are successfuly logged in.', $this->text_domain)), 'type' => 'success', 'gaplus_loggedin' => false, 'code' => false)));
                     exit();
@@ -473,8 +389,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                     wp_redirect(add_query_arg(array('dmsg' => urlencode(esc_html("(" . $e->getCode() . ") " . $e->getMessage())), 'type' => 'error', 'gaplus_loggedin' => false, 'code' => false)));
                     exit();
                 } catch (Exception $e) {
-                    $google_analytics_async->save_options(array('google_login' => array()), $is_network);
-                    $google_analytics_async->save_options(array('google_api' => array()), $is_network);
+                	ga_plus_reset_google_login_settings( $is_network );
                 }
             }
 
@@ -482,118 +397,91 @@ class GAPGoogle_Analytics_Async_Dashboard {
             exit();
         }
 
+        //this handles logging out
+        if( isset($_GET['gaplus_logout']) && wp_verify_nonce($_GET['gaplus_logout'], 'gaplus_logout') ) {
+            if(($is_network && !is_super_admin()) || !current_user_can('manage_options'))
+                die(__('Cheatin&#8217; uh?'));
+
+	        ga_plus_update_setting( 'google_login', array(), $is_network );
+
+	        $google_api = ga_plus_get_google_api_settings( 'network' );
+            if( $google_api && $is_network) {
+                $google_api['verified'] = false;
+	            ga_plus_update_setting( 'google_api', $google_api, $is_network );
+            }
+
+            $redirect_url = $is_network ? admin_url('/network/settings.php') : admin_url('/options-general.php');
+
+            wp_redirect(add_query_arg(array('page' => 'google-analytics', 'dmsg' => urlencode(__( 'Logout successful!', $this->text_domain ))), $redirect_url));
+            exit();
+        }
+
         //this is used to translate token data from token table to old method
         if(isset($this->google_login['token_id']) && $this->google_login['token_id']) {
             global $wpdb;
-            $db_token = $wpdb->get_var($wpdb->prepare("SELECT token FROM {$wpdb->base_prefix}gaplus_login WHERE id = %d", $this->google_login['token_id']));
+            $db_token = ga_plus_get_saved_token_by_token_id( $this->google_login['token_id'] );
             if($db_token) {
-                $db_token_object = json_decode($db_token);
-                $this->google_login['token'] = $this->google_login['orginal_token'] = $db_token;
-                $this->google_login['expire'] = $db_token_object->created + $db_token_object->expires_in;
+                $this->google_login['token'] = $this->google_login['orginal_token'] = json_encode( $db_token );
+                $this->google_login['expire'] = $db_token->created + $db_token->expires_in;
             }
         }
 
         if(isset($this->google_login['logged_in']) && $this->google_login['logged_in'] == 2) {
-            $token = $this->google_login['token'];
-            $token_object = json_decode($token);
-
             //lets wait a minute before we try to refresh a token after failure
             if(isset($this->google_login['fail_time']) && $this->google_login['fail_time']+MINUTE_IN_SECONDS < time())
                 return;
 
-            if($this->google_login['expire'] < time()) {
-	            $orginal_token = $this->google_login['orginal_token'];
-	            $orginal_token_object = json_decode($orginal_token);
+	        if ( $this->google_login['expire'] < time() ) {
+		        if ( $this->setting_page ) {
+			        $source = $this->setting_page == 'network' ? 'network' : '';
+		        } else {
+			        $source = $this->stats_source == 'network' ? 'network' : '';
+		        }
 
-                if(isset($orginal_token_object->refresh_token)) {
-                    if($this->setting_page)
-                        $source = $this->setting_page == 'network' ? 'network' : '';
-                    else
-                        $source = $this->stats_source == 'network' ? 'network' : '';
-
-                    try {
-                        $this->google_client->refreshToken($orginal_token_object->refresh_token);
-                        $token = $this->google_client->getAccessToken();
-                        $token_object = json_decode($token);
-
-                        $this->google_login['token'] = $token;
-                        $this->google_login['expire'] = time() + $token_object->expires_in;
-
-                        //lets store the refresh token
-                        if(isset($this->google_login['token_id']) && $this->google_login['token_id']) {
-                            //lets keep refresh token
-                            $db_token_object = $token_object;
-                            $db_token_object->refresh_token = $orginal_token_object->refresh_token;
-                            $db_token_object->token_type = $orginal_token_object->token_type;
-                            $db_token = json_encode($db_token_object);
-
-                            $wpdb->query($wpdb->prepare("UPDATE {$wpdb->base_prefix}gaplus_login SET token = %s WHERE id = %d", $db_token, $this->google_login['token_id']));
-                        }
-
-                        $google_analytics_async->save_options(array('google_login' => $this->google_login), $source);
-                    } catch (GAPGoogle_IO_Exception $e) {
-                        $token = false;
-                        $this->handle_refesh_token_failure($source, $e);
-                    } catch (Exception $e) {
-                        $token = false;
-
-                        $this->handle_refesh_token_failure($source, $e);
-                    }
-                }
-            }
-            if($token)
-                $this->google_client->setAccessToken($token);
+		        try {
+			        ga_plus_refresh_google_login_token( $this->google_login, $source );
+			        $this->google_login = ga_plus_get_google_login_settings();
+		        } catch ( GAPGoogle_IO_Exception $e ) {
+			        $this->handle_refesh_token_failure( $source, $e );
+		        } catch ( Exception $e ) {
+			        $this->handle_refesh_token_failure( $source, $e );
+		        }
+	        }
         }
     }
 
     function handle_refesh_token_failure($source, $e) {
-        global $google_analytics_async;
-
         //lets store reason for failure separately
-        $google_analytics_async->save_options(array('google_login_failure' => $e->getMessage()), $source);
+	    ga_plus_update_setting( 'google_login_failure', $e->getMessage(), $source );
 
         $this->google_login['fail_time'] = time();
         $this->google_login['fail_count'] = isset($this->google_login['fail_count']) ? $this->google_login['fail_count']+1 : 1;
 
         if($this->google_login['fail_count'] < 10)
-            $google_analytics_async->save_options(array('google_login' => $this->google_login), $source);
+	        ga_plus_update_setting( 'google_login', $this->google_login, $source );
         else
-            $google_analytics_async->save_options(array('google_login' => array()), $source);
+	        ga_plus_update_setting( 'google_login', array(), $source );
     }
 
     function prepare_authentication_header($url) {
-        global $google_analytics_async;
+        $token = $this->google_login['token'];
+        $token_object = json_decode($token);
+        $orginal_token = $this->google_login['orginal_token'];
+        $orginal_token_object = json_decode($orginal_token);
 
-        if($this->google_login['logged_in'] == 2) {
-            $token = $this->google_login['token'];
-            $token_object = json_decode($token);
-            $orginal_token = $this->google_login['orginal_token'];
-            $orginal_token_object = json_decode($orginal_token);
-
-            $headers['Authorization'] = $orginal_token_object->token_type.' '.$token_object->access_token;
-        }
-        else {
-            $signature_method = new GAPGoogle_Analytics_OAuthSignatureMethod_HMAC_SHA1();
-            $consumer = new GAPGoogle_Analytics_OAuthConsumer('anonymous', 'anonymous', NULL);
-            $token = new GAPGoogle_Analytics_OAuthConsumer($this->oauth_token, $this->oauth_secret);
-            $oauth_req = GAPGoogle_Analytics_OAuthRequest::from_consumer_and_token($consumer, $token, 'GET', $url, array());
-            $oauth_req->sign_request($signature_method, $consumer, $token);
-
-            $headers = $oauth_req->to_header();
-            $headers = explode(": ",$headers);
-            $headers[$headers[0]] = $headers[1];
-        }
+        $headers['Authorization'] = $orginal_token_object->token_type.' '.$token_object->access_token;
 
         return $headers;
     }
 
     function get_accounts() {
-        global $google_analytics_async;
-
         $headers = $this->prepare_authentication_header($this->account_base_url_new.'accounts/~all/webproperties/~all/profiles');
         $response = wp_remote_get($this->account_base_url_new.'accounts/~all/webproperties/~all/profiles', array('sslverify' => false, 'headers' => $headers));
         if(is_wp_error($response)) {
-            $this->error = $response->get_error_message();
+            $response_body = wp_remote_retrieve_body($response);
+            $response = json_decode($response_body);
+            if(isset($response->error->message))
+                $this->error = $response_body;
             return false;
         }
         else {
@@ -603,7 +491,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
             if($this->http_code != 200) {
                 $response = json_decode($response_body);
                 if(isset($response->error->message))
-                $this->error = $response_body;
+                    $this->error = $response_body;
                 return false;
             }
             else {
@@ -613,7 +501,6 @@ class GAPGoogle_Analytics_Async_Dashboard {
 
                 $current_site_url = rtrim(get_site_url(), "/");
 
-                global $google_analytics_async;
                 $is_network = is_network_admin() ? 'network' : '';
 
                 $accounts = array();
@@ -624,15 +511,16 @@ class GAPGoogle_Analytics_Async_Dashboard {
                     $website_url = rtrim($analytics_profile->websiteUrl, "/");
 
                     $this->profile_id = $account_id;
-                    if(!isset($save_settings) && (empty($google_analytics_async->current_settings['track_settings']['tracking_code']) || empty($google_analytics_async->current_settings['track_settings']['google_analytics_account_id']))) {
+                    $current_settings = ga_plus_get_settings( 'current' );
+                    if(!isset($save_settings) && (empty($current_settings['track_settings']['tracking_code']) || empty($current_settings['track_settings']['google_analytics_account_id']))) {
                         if($current_site_url == $website_url) {
-                            if(empty($google_analytics_async->current_settings['track_settings']['tracking_code'])){
-                                $google_analytics_async->current_settings['track_settings']['tracking_code'] = $tracking_code;
+                            if(empty($current_settings['track_settings']['tracking_code'])){
+                                $current_settings['track_settings']['tracking_code'] = $tracking_code;
                             }
-                            if(empty($google_analytics_async->current_settings['track_settings']['google_analytics_account_id'])) {
-                                $google_analytics_async->current_settings['track_settings']['google_analytics_account_id'] = $account_id;
+                            if(empty($current_settings['track_settings']['google_analytics_account_id'])) {
+                                $current_settings['track_settings']['google_analytics_account_id'] = $account_id;
                             }
-                            $google_analytics_async->save_options( $google_analytics_async->current_settings, $is_network );
+	                        ga_plus_update_setting( 'track_settings', $current_settings['track_settings'], $is_network );
                         }
                     }
 
@@ -645,52 +533,57 @@ class GAPGoogle_Analytics_Async_Dashboard {
     }
 
     function set_up_ga_data() {
-        global $google_analytics_async, $pagenow;
+        global $pagenow;
 
         //filter variables
         $this->cache_timeout = apply_filters('ga_cache_timeout', $this->cache_timeout);
         $this->cache_timeout_personal = apply_filters('ga_cache_timeout_personal', $this->cache_timeout);
 
+
         //setup correct google analytics profile id
         if($this->stats_source == 'site') {
-            $this->profile_id = $google_analytics_async->settings['track_settings']['google_analytics_account_id'];
+        	$login_settings = ga_plus_get_google_login_settings( 'site' );
+        	$track_settings = ga_plus_get_track_settings( 'site' );
+            $this->profile_id = $track_settings['google_analytics_account_id'];
 
-            $this->oauth_token = $google_analytics_async->settings['google_login']['token'];
-            $this->oauth_secret = $google_analytics_async->settings['google_login']['token_secret'];
+            $this->oauth_token = $login_settings['token'];
+            $this->oauth_secret = $login_settings['token_secret'];
 
-                $this->google_login = $google_analytics_async->settings['google_login'];
+            $this->google_login = $login_settings;
 
             //change cache timeout for site based stats
             $this->cache_timeout = $this->cache_timeout_personal;
         }
         elseif($this->stats_source == 'network') {
-            $this->profile_id = $google_analytics_async->network_settings['track_settings']['google_analytics_account_id'];
+	        $login_settings = ga_plus_get_google_login_settings( 'network' );
+	        $track_settings = ga_plus_get_track_settings( 'network' );
+            $this->profile_id = $track_settings['google_analytics_account_id'];
 
-            $this->oauth_token = $google_analytics_async->network_settings['google_login']['token'];
-            $this->oauth_secret = $google_analytics_async->network_settings['google_login']['token_secret'];
+            $this->oauth_token = $login_settings['token'];
+            $this->oauth_secret = $login_settings['token_secret'];
 
-                $this->google_login = $google_analytics_async->network_settings['google_login'];
+            $this->google_login = $login_settings;
+        }
+
+        //set up filters to show correct stats for current site
+        if($this->stats_source == 'network'&& !$this->is_network_admin) {
+            global $dm_map;
+
+            $url = method_exists($dm_map, 'domain_mapping_siteurl') ? $dm_map->domain_mapping_siteurl(home_url()) : home_url();
+
+            $site_url_parts = explode('/', str_replace('http://', '', str_replace('https://', '', $url)));
+            if(!$site_url_parts)
+                $site_url_parts = explode('/', str_replace('http://', '', str_replace('https://', '', site_url())));
+
+            $this->filter[] = 'ga:hostname=='.$site_url_parts[0];
+
+            //if its in subdirectory mode, then set correct beggining for page path
+            if(count($site_url_parts) > 1) {
+                unset($site_url_parts[0]);
+                $pagepath = implode('/', $site_url_parts);
+
+                $this->filter[] = 'ga:pagePath=~^/'.$pagepath.'/.*';
             }
-
-            //set up filters to show correct stats for current site
-            if($this->stats_source == 'network'&& !$this->is_network_admin) {
-                global $dm_map;
-
-                $url = method_exists($dm_map, 'domain_mapping_siteurl') ? $dm_map->domain_mapping_siteurl(home_url()) : home_url();
-
-                $site_url_parts = explode('/', str_replace('http://', '', str_replace('https://', '', $url)));
-                if(!$site_url_parts)
-                    $site_url_parts = explode('/', str_replace('http://', '', str_replace('https://', '', site_url())));
-
-                $this->filter[] = 'ga:hostname=='.$site_url_parts[0];
-
-                //if its in subdirectory mode, then set correct beggining for page path
-                if(count($site_url_parts) > 1) {
-                    unset($site_url_parts[0]);
-                    $pagepath = implode('/', $site_url_parts);
-
-                    $this->filter[] = 'ga:pagePath=~^/'.$pagepath.'/.*';
-                }
         }
 
         if($this->profile_id && $this->oauth_token && $this->oauth_secret) {
@@ -731,11 +624,11 @@ class GAPGoogle_Analytics_Async_Dashboard {
             $this->cache_name = 'gac32_'.$this->profile_id.get_current_blog_id().$this->is_network_admin.$this->start_date.$this->end_date.$this->post;
 
             //if its a ajax call, we dont want cached version
-            if(!defined('DOING_AJAX'))
+            if(!wp_doing_ajax())
                 $this->cache = get_transient($this->cache_name);
 
             //unset cache if it needs to get more data
-            if($this->type != 'widget' && count($this->cache) == 1)
+            if($this->type != 'widget' && $this->cache && count($this->cache) == 1)
                 $this->cache = 0;
 
             if($this->type != 'frontend_widget') {
@@ -792,7 +685,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                         $settings_page_url = admin_url('options-general.php?page=google-analytics');
                     $this->error = '<a href="'.$settings_page_url.'">'.__('Please logout and login to Google Account.', $this->text_domain).'</a>';
                 }
-                $return['html'] = __('Error loading data. ', $this->text_domain).' '.$this->error;
+                $return['html'] = __('Error loading data.', $this->text_domain).' '.$this->error;
                 $return['error'] = true;
             }
             else {
@@ -917,7 +810,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
 
     function google_analytics_widget_html($stats) {
         $return = '
-            <div class="google_analytics_chart_holder">
+            <div aria-hidden="true" class="google_analytics_chart_holder">
                 <div id="google-analytics-chart-visitors" class="google_analytics_chart" style="width: 100%; height: 300px;"></div>
             </div>';
 
@@ -926,19 +819,19 @@ class GAPGoogle_Analytics_Async_Dashboard {
 
     function google_analytics_widget_extended_html($stats) {
         $return = '
-            <div class="google_analytics_chart_holder">
+            <div aria-hidden="true" class="google_analytics_chart_holder">
                 <div id="google-analytics-chart-visitors" class="google_analytics_chart" style="width: 100%; height: 300px;"></div>
             </div>
 
             <div class="google-analytics-basic-stats">
                 <ul>
-                    <li><label>'.__( 'Visits', $this->text_domain ).'</label><span>'.$stats['visits'].'</span></li>
-                    <li><label>'.__( 'Unique Visitors', $this->text_domain ).'</label><span>'.$stats['unique_visitors'].'</span></li>
-                    <li><label>'.__( 'Pageviews', $this->text_domain ).'</label><span>'.$stats['pageviews'].'</span></li>
-                    <li><label>'.__( 'Pages / Visit', $this->text_domain ).'</label><span>'.$stats['page_per_visit'].'</span></li>
-                    <li><label>'.__( 'Bounce Rate', $this->text_domain ).'</label><span>'.$stats['bounce_rate'].'</span></li>
-                    <li><label>'.__( 'Avg. Visit Dur.', $this->text_domain ).'</label><span>'.$stats['avg_visit_duration'].'</span></li>
-                    <li><label>'.__( 'New Visits', $this->text_domain ).'</label><span>'.$stats['new_visits'].'</span></li>
+                    <li><label>'.__( 'Visits', $this->text_domain ).'</label><span>'.esc_html($stats['visits']).'</span></li>
+                    <li><label>'.__( 'Unique Visitors', $this->text_domain ).'</label><span>'.esc_html($stats['unique_visitors']).'</span></li>
+                    <li><label>'.__( 'Pageviews', $this->text_domain ).'</label><span>'.esc_html($stats['pageviews']).'</span></li>
+                    <li><label>'.__( 'Pages / Visit', $this->text_domain ).'</label><span>'.esc_html($stats['page_per_visit']).'</span></li>
+                    <li><label>'.__( 'Bounce Rate', $this->text_domain ).'</label><span>'.esc_html($stats['bounce_rate']).'</span></li>
+                    <li><label>'.__( 'Avg. Visit Dur.', $this->text_domain ).'</label><span>'.esc_html($stats['avg_visit_duration']).'</span></li>
+                    <li><label>'.__( 'New Visits', $this->text_domain ).'</label><span>'.esc_html($stats['new_visits']).'</span></li>
                 </ul>
             </div>';
         if((isset($stats['top_searches']) && $stats['top_searches']) || (isset($stats['top_referers']) && $stats['top_referers'])) {
@@ -952,7 +845,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                     if(isset($stats['top_searches']) && $stats['top_searches']) {
                         $top_searches = array();
                         foreach ($stats['top_searches'] as $key => $data)
-                            $top_searches[] = '<tr><td>'.$data['keyword'].'</td><td align="right">'.$data['stat'].'</td></tr>';
+                            $top_searches[] = '<tr><td>'.$data['keyword'].'</td><td align="right">'.esc_html($data['stat']).'</td></tr>';
 
                         $return .= '
                             <div id="postcustomstuff" class="google-analytics-searches">
@@ -973,7 +866,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                     if(isset($stats['top_referers']) && $stats['top_referers']) {
                         $top_referers = array();
                         foreach ($stats['top_referers'] as $key => $data)
-                            $top_referers[] = '<tr><td>'.$data['source'].'</td><td align="right">'.$data['stat'].'</td></tr>';
+                            $top_referers[] = '<tr><td>'.esc_html($data['source']).'</td><td align="right">'.esc_html($data['stat']).'</td></tr>';
 
                         $return .= '
                             <div id="postcustomstuff" class="google-analytics-top-referrals last">
@@ -1035,7 +928,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                     <div id="post-body" class="metabox-holder columns-2">
                         <div id="postbox-container-1" class="postbox-container">
 
-                            <div id="side-sortables" class="meta-box-sortables ui-sortable">
+                            <div aria-hidden="true" id="side-sortables" class="meta-box-sortables ui-sortable">
                                 <div class="postbox google-analytics-countries">
                                     <h3 class="hndle"><span>'.__( 'Visitors: Country', $this->text_domain ).'</span></h3>
                                     <div class="inside">
@@ -1066,7 +959,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                                                 $top_searches = array();
                                                 foreach ($stats['top_searches'] as $key => $data)
                                                     $return .= '
-                                                        <tr><td>'.$data['keyword'].'</td><td>'.$data['stat'].'</td></tr>';
+                                                        <tr><td>'.esc_html($data['keyword']).'</td><td>'.esc_html($data['stat']).'</td></tr>';
                                             }
                                             else
                                                 $return .= '
@@ -1090,7 +983,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                                                 $top_referers = array();
                                                 foreach ($stats['top_referers'] as $key => $data)
                                                     $return .= '
-                                                        <tr><td>'.$data['source'].'</td><td>'.$data['stat'].'</td></tr>';
+                                                        <tr><td>'.esc_html($data['source']).'</td><td>'.esc_html($data['stat']).'</td></tr>';
                                             }
                                             else
                                                 $return .= '
@@ -1110,16 +1003,16 @@ class GAPGoogle_Analytics_Async_Dashboard {
                                 <div class="postbox">
                                     <h3 class="hndle"><span>'.__( 'Visitors', $this->text_domain ).'</span></h3>
                                     <div class="inside">
-                                        <div id="google-analytics-chart-visitors" class="google_analytics_chart"></div>
+                                        <div aria-hidden="true" id="google-analytics-chart-visitors" class="google_analytics_chart"></div>
                                         <div class="google-analytics-basic-stats">
                                             <ul>
-                                                <li><label>'.__( 'Visits', $this->text_domain ).'</label><span>'.$stats['visits'].'</span></li>
-                                                <li><label>'.__( 'Unique Visitors', $this->text_domain ).'</label><span>'.$stats['unique_visitors'].'</span></li>
-                                                <li><label>'.__( 'Pageviews', $this->text_domain ).'</label><span>'.$stats['pageviews'].'</span></li>
-                                                <li><label>'.__( 'Pages / Visit', $this->text_domain ).'</label><span>'.$stats['page_per_visit'].'</span></li>
-                                                <li><label>'.__( 'Bounce Rate', $this->text_domain ).'</label><span>'.$stats['bounce_rate'].'</span></li>
-                                                <li><label>'.__( 'Avg. Visit Dur.', $this->text_domain ).'</label><span>'.$stats['avg_visit_duration'].'</span></li>
-                                                <li><label>'.__( 'New Visits', $this->text_domain ).'</label><span>'.$stats['new_visits'].'</span></li>
+                                                <li><label>'.__( 'Visits', $this->text_domain ).'</label><span>'.esc_html($stats['visits']).'</span></li>
+                                                <li><label>'.__( 'Unique Visitors', $this->text_domain ).'</label><span>'.esc_html($stats['unique_visitors']).'</span></li>
+                                                <li><label>'.__( 'Pageviews', $this->text_domain ).'</label><span>'.esc_html($stats['pageviews']).'</span></li>
+                                                <li><label>'.__( 'Pages / Visit', $this->text_domain ).'</label><span>'.esc_html($stats['page_per_visit']).'</span></li>
+                                                <li><label>'.__( 'Bounce Rate', $this->text_domain ).'</label><span>'.esc_html($stats['bounce_rate']).'</span></li>
+                                                <li><label>'.__( 'Avg. Visit Dur.', $this->text_domain ).'</label><span>'.esc_html($stats['avg_visit_duration']).'</span></li>
+                                                <li><label>'.__( 'New Visits', $this->text_domain ).'</label><span>'.esc_html($stats['new_visits']).'</span></li>
                                             </ul>
                                         </div>
                                     </div>
@@ -1157,7 +1050,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
                                              }
                                             foreach ($pages_ready as $url => $data) {
                                                 $return .= '
-                                                    <tr><td><a href="http://'.$url.'">'.$data['title'].'</a></td><td>'.$data['visits'].'</td><td>'.$data['unique_visitors'].'</td><td>'.$data['pageviews'].'</td></tr>';
+                                                    <tr><td><a href="'.esc_url('http://'.$url).'">'.esc_html($data['title']).'</a></td><td>'.esc_html($data['visits']).'</td><td>'.esc_html($data['unique_visitors']).'</td><td>'.esc_html($data['pageviews']).'</td></tr>';
                                             }
                                         }
                                         else
@@ -1208,7 +1101,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
             $duplicate_check[] = $postid;
 
             $count ++;
-            $return .= '<li><a href="'.(is_ssl() ? 'https://' : 'http://').$url.'">'.$post->post_title.'</a></li>';
+            $return .= '<li><a href="'.(is_ssl() ? 'https://' : 'http://').$url.'">'.esc_html($post->post_title).'</a></li>';
 
             if(isset($args['number']) && $count == $args['number'])
                 break;
@@ -1255,7 +1148,7 @@ class GAPGoogle_Analytics_Async_Dashboard {
             $url_parameters['metrics'] = $metrics;
         if(!empty($sort))
             $url_parameters['sort'] = $sort;
-        if(count($this->filter) > 0)
+        if($this->filter && count($this->filter) > 0)
             $url_parameters['filters'] = implode(';', $this->filter);
         $url = add_query_arg($url_parameters, $this->base_url . 'data');
 
@@ -1330,4 +1223,4 @@ class GAPGoogle_Analytics_Async_Dashboard {
 }
 
 global $google_analytics_async_dashboard;
-$google_analytics_async_dashboard = new GAPGoogle_Analytics_Async_Dashboard();
+$google_analytics_async_dashboard = new Google_Analytics_Async_Dashboard();

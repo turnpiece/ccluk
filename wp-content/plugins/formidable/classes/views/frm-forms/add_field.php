@@ -14,7 +14,7 @@
     </span>
 	<?php } ?>
 	<label class="<?php echo esc_attr( $field['type'] === 'end_divider' ? '' : 'frm_ipe_field_label' ); ?> frm_primary_label <?php echo esc_attr( $field['type'] === 'break' ? 'button' : '' ); ?>" id="field_label_<?php echo esc_attr( $field['id'] ); ?>"><?php
-		echo ( $field['name'] === '' ) ? esc_html__( '(no label)', 'formidable' ) : FrmAppHelper::kses( force_balance_tags( $field['name'], 'all' ) ); // WPCS: XSS ok.
+		echo ( $field['name'] === '' ) ? esc_html__( '(no label)', 'formidable' ) : FrmAppHelper::kses( force_balance_tags( $field['name'] ), 'all' ); // WPCS: XSS ok.
 	?></label>
 	<input type="hidden" name="field_options[name_<?php echo esc_attr( $field['id'] ) ?>]" value="<?php echo esc_attr( $field['name'] ); ?>" />
 
@@ -71,7 +71,7 @@ if ( in_array( $field['type'], array( 'select', 'radio', 'checkbox' ) ) ) {
 	} elseif ( ! isset( $field['post_field'] ) || ! in_array( $field['post_field'], array( 'post_category' ) ) ) {
 ?>
         <div id="frm_add_field_<?php echo esc_attr( $field['id'] ); ?>">
-            <a href="javascript:void(0);" data-opttype="single" class="button frm_cb_button frm_add_opt"><?php esc_html_e( 'Add Option', 'formidable' ) ?></a>
+            <a href="javascript:void(0);" data-opttype="single" class="button frm_cb_button frm_add_opt" data-clicks="0"><?php esc_html_e( 'Add Option', 'formidable' ) ?></a>
 
             <?php if ( FrmAppHelper::pro_is_installed() ) { ?>
 				<a href="javascript:void(0);" id="other_button_<?php echo esc_attr( $field['id'] ); ?>" data-opttype="other" data-ftype="<?php echo esc_attr( $field['type'] ) ?>" class="button frm_cb_button frm_add_opt<?php echo ( in_array( $field['type'], array( 'radio', 'select' ) ) && $field['other'] == true ? ' frm_hidden' : '' ); ?>"><?php esc_html_e( 'Add "Other"', 'formidable' ) ?></a>
@@ -186,7 +186,7 @@ if ( $display['options'] ) {
                 </tr>
                 <?php } ?>
 
-				<?php if ( $display['label_position'] ) { ?>
+                <?php if ( $display['label_position'] ) { ?>
 					<tr>
 						<td class="frm_150_width"><label><?php esc_html_e( 'Label Position', 'formidable' ) ?></label></td>
 						<td>

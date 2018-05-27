@@ -1,8 +1,8 @@
 msgid ""
 msgstr ""
 "Project-Id-Version: Google Analytics v1.1.3\n"
-"Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2017-07-06 08:56+0100\n"
+"Report-Msgid-Bugs-To: https://github.com/Freemius/wordpress-sdk/issues\n"
+"POT-Creation-Date: \n"
 "PO-Revision-Date: \n"
 "Last-Translator: Andrey Shipilov\n"
 "Language-Team: \n"
@@ -11,456 +11,388 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "X-Poedit-KeywordsList: __;_e\n"
-"X-Poedit-Basepath: C:\\Programs Portable\\EasyPHP\\data\\localweb\\wordpress-"
-"incsub\\wp-content\\plugins\\google-analytics-async\n"
-"X-Generator: Poedit 1.6.4\n"
+"X-Poedit-Basepath: C:/Programs Portable/EasyPHP/data/localweb/wordpress-"
+"incsub/wp-content/plugins/google-analytics-async\n"
+"X-Generator: Poedit 2.0.5\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Poedit-SearchPath-0: C:\\Programs Portable\\EasyPHP\\data\\localweb"
-"\\wordpress-incsub\\wp-content\\plugins\\google-analytics-async\n"
+"X-Poedit-SearchPath-0: C:/Programs Portable/EasyPHP/data/localweb/wordpress-"
+"incsub/wp-content/plugins/google-analytics-async\n"
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:171
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
 msgid "Month"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:171
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
 msgid "Week"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:171
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
 msgid "Day"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:177
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:197
 msgid "Problem loading data"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:200
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:204
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1028
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:219
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:223
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:921
 msgid "Statistics"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:222
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:243
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:240
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:260
 msgid "Statistics - Last 30 Days"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:250
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:267
 #, php-format
 msgid ""
 "Google Analytics dashboard statistics require reauthentication. You can do "
 "it <a href=\"%s\">here</a> and this message will disappear."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:253
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:270
 #, php-format
 msgid ""
 "Google Analytics dashboard network statistics require reauthentication. You "
 "can do it <a href=\"%s\">here</a> and this message will disappear."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:281
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:320
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:359
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:755
-msgid "Cheatin&#8217; uh?"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:348
-msgid "Login successful!"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:369
-msgid "Logout successful!"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:467
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:383
 msgid "You are successfuly logged in."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:481
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:396
 msgid "Authorisation error."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:793
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:403
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:648
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:415
+msgid "Logout successful!"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:686
 msgid "Please logout and login to Google Account."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:795
-msgid "Error loading data. "
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:688
+msgid "Error loading data."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:802
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:695
 msgid "Jan"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:803
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:696
 msgid "Feb"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:804
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:697
 msgid "Mar"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:805
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:698
 msgid "Apr"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:806
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:699
 msgid "May"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:807
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:700
 msgid "Jun"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:808
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:701
 msgid "Jul"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:809
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:702
 msgid "Aug"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:810
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:703
 msgid "Sep"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:811
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:704
 msgid "Oct"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:812
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:705
 msgid "Nov"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:813
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:706
 msgid "Dec"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:815
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
 msgid "Date"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:815
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:937
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1118
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:830
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1011
 msgid "Pageviews"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:815
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:863
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:935
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:963
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:984
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1060
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1085
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1116
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1138
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:756
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:828
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:856
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:877
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:953
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:978
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1009
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1031
 msgid "Visits"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:815
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:936
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1117
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:829
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1010
 msgid "Unique Visitors"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:863
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:756
 msgid "Country"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:909
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:802
 msgid "Load Post Stats"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:909
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:911
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1007
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1227
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:802
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:804
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:900
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1120
 msgid "Loading..."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:912
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:915
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:805
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:808
 msgid "See All Stats"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:938
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1119
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:831
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1012
 msgid "Pages / Visit"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:939
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1120
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:832
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1013
 msgid "Bounce Rate"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:940
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1121
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:833
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1014
 msgid "Avg. Visit Dur."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:941
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1122
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:834
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1015
 msgid "New Visits"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:962
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1059
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:855
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:952
 msgid "Top Searches"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:983
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1084
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:876
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:977
 msgid "Top Referrals"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1014
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1029
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:907
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:922
 msgid "Last Month"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1016
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1030
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:909
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:923
 msgid "Last 3 Months"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1018
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1031
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:911
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:924
 msgid "Last Year"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1040
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:933
 msgid "Visitors: Country"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1049
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:942
 msgid "Referrers"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1073
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1097
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1165
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:966
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:990
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1058
 msgid "Data is not available yet"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1111
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1004
 msgid "Visitors"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1131
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1024
 msgid "Content"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1137
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1030
 msgid "Top Posts / Pages"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1139
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1032
 msgid "Unique"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1140
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1033
 msgid "Views"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-google-analytics-async-dashboard.php:1218
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1111
 msgid "No data yet"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-widget-ga-most-popular-content.php:10
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:10
 msgid "Your site's most popular posts"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-widget-ga-most-popular-content.php:11
-msgid "Most popular posts (beta)"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-widget-ga-most-popular-content.php:65
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:11
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:65
 msgid "Most popular posts"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-widget-ga-most-popular-content.php:71
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:71
 msgid "Title"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/class-widget-ga-most-popular-content.php:75
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:75
 msgid "Maximum number of posts to show:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:223
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:223
 msgid "install"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:230
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:230
 #, php-format
 msgid ""
 "Important updates are available for <strong>%s</strong>. Install the free "
 "WPMU DEV Dashboard plugin now for updates and support!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:232
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:232
 #, php-format
 msgid ""
 "<strong>%s</strong> is almost ready - install the free WPMU DEV Dashboard "
 "plugin for updates and support!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:236
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:236
 msgid ""
 "Important updates are available for your WPMU DEV plugins/themes. Install "
 "the free WPMU DEV Dashboard plugin now for updates and support!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:238
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:238
 msgid ""
 "Almost ready - install the free WPMU DEV Dashboard plugin for updates and "
 "support!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:244
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:244
 msgid "Install Plugin"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:247
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:288
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:247
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:288
 msgid "Saving..."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:248
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:289
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:248
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:289
 msgid "Dismiss"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:264
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:264
 msgid "activate"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:271
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:271
 #, php-format
 msgid ""
 "Important updates are available for <strong>%s</strong>. Activate the WPMU "
 "DEV Dashboard to update now!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:273
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:273
 #, php-format
 msgid ""
 "Just one more step to enable updates and support for <strong>%s</strong>!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:277
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:277
 msgid ""
 "Important updates are available for your WPMU DEV plugins/themes. Activate "
 "the WPMU DEV Dashboard to update now!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:279
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:279
 msgid ""
 "Just one more step - activate the WPMU DEV Dashboard plugin and you're all "
 "done!"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:285
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:285
 msgid "Activate WPMU DEV Dashboard"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:952
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:952
 msgid "We did not find any data for this plugin or theme..."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1161
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1131
+#, php-format
+msgid "%s changelog"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1161
 msgid "Current"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1167
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1167
 msgid "New"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:2
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1184
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1202
+msgid "Show all changes"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1203
+msgid "Hide details"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:2
 msgid "Google Analytics"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:14
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:265
+#: google-analytics-async-files/page-settings.php:15
+#: google-analytics-async-files/page-settings.php:228
 msgid ""
 "Google Analytics is the enterprise-class web analytics solution that gives "
 "you rich insights into your website traffic and marketing effectiveness. "
@@ -470,9 +402,8 @@ msgid ""
 "and create higher converting websites."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:16
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:266
+#: google-analytics-async-files/page-settings.php:17
+#: google-analytics-async-files/page-settings.php:229
 msgid ""
 "To get going, just <a href=\"http://www.google.com/analytics/\">sign up for "
 "Google Analytics</a>, set up a new account and log in with the button below "
@@ -480,41 +411,29 @@ msgid ""
 "settings if necessary."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:16
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:266
+#: google-analytics-async-files/page-settings.php:17
+#: google-analytics-async-files/page-settings.php:229
 msgid ""
 "Please keep in mind that it can take several hours before you see any stats."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:18
+#: google-analytics-async-files/page-settings.php:19
 msgid "Basic Network Tracking Settings"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:23
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:279
+#: google-analytics-async-files/page-settings.php:24
+#: google-analytics-async-files/page-settings.php:242
 msgid ""
 "Get access to google analytics account to automatically get tracking code "
 "for this website and enable access to network statistics inside WordPress "
 "Admin Dashboard."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:23
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:33
+#: google-analytics-async-files/page-settings.php:24
 msgid "You can do it in two ways:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:24
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:280
-msgid "Login with Google account"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:25
+#: google-analytics-async-files/page-settings.php:25
 msgid ""
 "Easily <button class=\"button button-secondary open-module-options\" data-"
 "module=\"code\">get access code</button> or <button class=\"button button-"
@@ -522,67 +441,38 @@ msgid ""
 "API project</button>"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:29
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:289
-msgid "Logout from Google account"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:33
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:294
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:298
-msgid "Google is changing login method. Reauthentication is needed."
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:34
-msgid ""
-"Easily <button class=\"button button-primary open-module-options\" data-"
-"module=\"code\">get access code</button> or <button class=\"button button-"
-"primary open-module-options\" data-module=\"api_project\">set up Google API "
-"project</button>"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:43
+#: google-analytics-async-files/page-settings.php:30
 msgid "Google Client ID:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:44
+#: google-analytics-async-files/page-settings.php:31
 msgid "Google Client Secret:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:45
+#: google-analytics-async-files/page-settings.php:32
 msgid "Google API key:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:48
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:57
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:311
+#: google-analytics-async-files/page-settings.php:35
+#: google-analytics-async-files/page-settings.php:44
+#: google-analytics-async-files/page-settings.php:254
 msgid "Authorize"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:54
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:308
+#: google-analytics-async-files/page-settings.php:41
+#: google-analytics-async-files/page-settings.php:251
 #, php-format
 msgid "Login and get access code <a target=\"_blank\" href=\"%s\">here</a>."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:55
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:309
+#: google-analytics-async-files/page-settings.php:42
+#: google-analytics-async-files/page-settings.php:252
 msgid "Input access code: "
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:61
+#: google-analytics-async-files/page-settings.php:48
 msgid ""
-"Access code it quicker solution but setting up Google API project is more "
+"Access code is quicker solution but setting up Google API project is more "
 "suitable for high traffic website and will result in smoother experience for "
 "site admins (whole login process will be automatic, no access code copy "
 "pasting). You can read more about setting Google API project <a target="
@@ -591,108 +481,96 @@ msgid ""
 "under \"usage\""
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:71
+#: google-analytics-async-files/page-settings.php:52
+#: google-analytics-async-files/page-settings.php:261
+msgid "Logout from Google account"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:60
 msgid "Network-wide Tracking Code"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:74
+#: google-analytics-async-files/page-settings.php:63
 msgid ""
 "Your Google Analytics tracking code. Ex: UA-XXXXX-X. The Network-wide "
 "tracking code will track your entire network of sub-sites."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:79
+#: google-analytics-async-files/page-settings.php:67
 msgid ""
 "Google Analytics Statistics inside WordPress Dashboard For All Sites In "
 "Network"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:90
+#: google-analytics-async-files/page-settings.php:78
 msgid ""
 "Choose correct Google Analytics profile to use for displaying statistics "
 "inside WordPress admin panel. Please make sure that this is a profile used "
 "for network wide tracking."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:96
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:347
+#: google-analytics-async-files/page-settings.php:84
+#: google-analytics-async-files/page-settings.php:293
 msgid ""
 "You do not have any Google Analytics profiles to choose from. Please <a href="
 "\"http://www.google.com/analytics/\">create</a> new one."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:100
+#: google-analytics-async-files/page-settings.php:88
 msgid ""
 "You need to login to google with the button above to enable this "
 "functionality."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:110
+#: google-analytics-async-files/page-settings.php:97
 msgid "Admin pages tracking"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:112
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:121
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:136
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:146
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:366
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:376
+#: google-analytics-async-files/page-settings.php:99
+#: google-analytics-async-files/page-settings.php:113
+#: google-analytics-async-files/page-settings.php:124
+#: google-analytics-async-files/page-settings.php:311
+#: google-analytics-async-files/page-settings.php:322
 msgid "Enable"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:114
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:123
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:138
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:148
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:215
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:234
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:368
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:378
+#: google-analytics-async-files/page-settings.php:101
+#: google-analytics-async-files/page-settings.php:116
+#: google-analytics-async-files/page-settings.php:126
+#: google-analytics-async-files/page-settings.php:177
+#: google-analytics-async-files/page-settings.php:196
+#: google-analytics-async-files/page-settings.php:313
+#: google-analytics-async-files/page-settings.php:324
 msgid "Disable"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:119
-msgid "Domain Mapping"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:129
+#: google-analytics-async-files/page-settings.php:106
 msgid "Advanced Network Tracking Settings"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:134
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:374
+#: google-analytics-async-files/page-settings.php:111
+#: google-analytics-async-files/page-settings.php:309
 msgid "IP Anonymization"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:139
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:379
+#: google-analytics-async-files/page-settings.php:114
+msgid "Force on sub-sites tracking"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:117
 msgid ""
 "When enabled, the IP address of the visitor will be anonymized. You can read "
 "more about it <a href=\"https://support.google.com/analytics/answer/2763052?"
-"hl=en\">here</a>."
+"hl=en\">here</a>. It is also possible to force IP Anonymization for all sub-"
+"sites tracking configurations."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:144
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:364
+#: google-analytics-async-files/page-settings.php:122
+#: google-analytics-async-files/page-settings.php:320
 msgid "Support Display Advertising"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:149
+#: google-analytics-async-files/page-settings.php:127
 msgid ""
 "This feature allows you to add demographics and interests reporting to "
 "Google Analytics. You can read more about it <a href=\"https://support."
@@ -702,191 +580,122 @@ msgid ""
 "network."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:154
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:384
-msgid "Tracking Method"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:156
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:386
-msgid "Universal Analytics"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:157
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:387
-msgid ""
-"You can read more about this method <a href=\"https://support.google.com/"
-"analytics/answer/2790010?hl=en-GB&ref_topic=2790009\">here</a>."
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:159
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:389
-msgid "Classic Analytics"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:161
-msgid "Use both"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:162
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:392
-msgid ""
-"To use both, you need to have separate tracking code for universal "
-"analytics. Please add it here:"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:171
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:402
+#: google-analytics-async-files/page-settings.php:132
+#: google-analytics-async-files/page-settings.php:334
 msgid ""
 "Minimum role or capability to view Google Analytics Statistics inside "
 "WordPress Dashboard"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:174
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:405
+#: google-analytics-async-files/page-settings.php:135
+#: google-analytics-async-files/page-settings.php:337
 msgid "Select minimum role:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:180
+#: google-analytics-async-files/page-settings.php:141
 msgid "Super Administrator"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:181
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:411
+#: google-analytics-async-files/page-settings.php:142
+#: google-analytics-async-files/page-settings.php:343
 msgid "Administrator"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:182
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:412
+#: google-analytics-async-files/page-settings.php:143
+#: google-analytics-async-files/page-settings.php:344
 msgid "Editor"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:183
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:413
+#: google-analytics-async-files/page-settings.php:144
+#: google-analytics-async-files/page-settings.php:345
 msgid "Author"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:184
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:414
+#: google-analytics-async-files/page-settings.php:145
+#: google-analytics-async-files/page-settings.php:346
 msgid "Contributor"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:185
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:415
+#: google-analytics-async-files/page-settings.php:146
+#: google-analytics-async-files/page-settings.php:347
 msgid "Subscriber"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:194
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:424
+#: google-analytics-async-files/page-settings.php:155
+#: google-analytics-async-files/page-settings.php:356
 msgid "...or set custom capability:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:198
+#: google-analytics-async-files/page-settings.php:159
 msgid "Allow site admins to overwrite this setting:"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:198
+#: google-analytics-async-files/page-settings.php:159
 msgid "No"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:198
+#: google-analytics-async-files/page-settings.php:159
 msgid "Yes"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:200
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:427
+#: google-analytics-async-files/page-settings.php:161
+#: google-analytics-async-files/page-settings.php:359
 msgid ""
 "Choose minimum role or set custom capability (leave blank to disable) "
 "required to see Google Analytics Statistics inside WordPress Dashboard."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:200
+#: google-analytics-async-files/page-settings.php:161
 msgid ""
 "You can also allow admistrators to overwrite this setting for the sites they "
 "control."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:210
+#: google-analytics-async-files/page-settings.php:172
 msgid "Minimum Pro Site level for use of Google Analytics features"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:224
+#: google-analytics-async-files/page-settings.php:186
 msgid ""
 "Enable use of Google Analytics features for sites with selected minimum Pro "
 "Site level."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:229
+#: google-analytics-async-files/page-settings.php:191
 msgid ""
 "Minimum Pro Site level for Google Analytics Statistics inside WordPress "
 "Dashboard"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:243
+#: google-analytics-async-files/page-settings.php:205
 msgid ""
 "Enable network-wide tracking code based Google Analytics Statistics inside "
 "WordPress Dashboard for sites with selected minimum Pro Site level."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:254
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:438
+#: google-analytics-async-files/page-settings.php:217
+#: google-analytics-async-files/page-settings.php:370
 msgid "Save Changes"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:271
+#: google-analytics-async-files/page-settings.php:234
 msgid "Basic Site Tracking Settings"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:282
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:284
+#: google-analytics-async-files/page-settings.php:244
+#: google-analytics-async-files/page-settings.php:246
 msgid "Login with google account"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:284
+#: google-analytics-async-files/page-settings.php:246
 msgid "and get access code"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:294
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:298
-msgid "Reauthenticate"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:321
+#: google-analytics-async-files/page-settings.php:268
 msgid "Site Tracking Code"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:325
+#: google-analytics-async-files/page-settings.php:272
 msgid ""
 "Your Google Analytics tracking code. Ex: UA-XXXXX-X. The Site tracking code "
 "will track this site. For more information on finding the tracking code, "
@@ -894,37 +703,38 @@ msgid ""
 "rd=1\">this</a> site."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:330
+#: google-analytics-async-files/page-settings.php:276
 msgid "Custom Google Analytics Statistics inside WordPress Dashboard"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:335
+#: google-analytics-async-files/page-settings.php:281
 msgid "Currently ."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:344
+#: google-analytics-async-files/page-settings.php:290
 msgid ""
 "Choose your own Google Analytics profile to use for displaying statistics "
 "inside WordPress admin panel."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:351
+#: google-analytics-async-files/page-settings.php:297
 msgid ""
 "You need to login to google with the button above to use your profile for "
 "displaying statistics."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:360
+#: google-analytics-async-files/page-settings.php:305
 msgid "Advanced Site Tracking Settings"
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:369
+#: google-analytics-async-files/page-settings.php:314
+msgid ""
+"When enabled, the IP address of the visitor will be anonymized. You can read "
+"more about it <a href=\"https://support.google.com/analytics/answer/2763052?"
+"hl=en\">here</a>."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:325
 msgid ""
 "This feature allows you to add demographics and interests reporting to "
 "Google Analytics. You can read more about it <a href=\"https://support."
@@ -933,13 +743,6 @@ msgid ""
 "analytics/answer/2700409\">updating your privacy policy</a>."
 msgstr ""
 
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async-files/page-settings.php:391
-msgid "Use both (beta)"
-msgstr ""
-
-#: C:\Programs
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async.php:327
-#: Portable\EasyPHP\data\localweb\wordpress-incsub\wp-content\plugins\google-analytics-async/google-analytics-async.php:335
+#: google-analytics-async.php:257 google-analytics-async.php:265
 msgid "Changes were saved!"
 msgstr ""

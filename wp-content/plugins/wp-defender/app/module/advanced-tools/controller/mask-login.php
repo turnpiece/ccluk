@@ -166,19 +166,19 @@ class Mask_Login extends Controller {
 		     && is_wp_error( $error = Mask_Api::isValidMaskSlug( $data['maskUrl'] ) ) ) {
 			//validate
 			$res = array(
-				'message' => __( "The Login URL is invalid.", wp_defender()->domain )
+				'message' => $error->get_error_message()
 			);
 			wp_send_json_error( $res );
 		}
 		if ( isset( $data['redirectTrafficUrl'] ) && $setting->redirectTrafficUrl != $data['redirectTrafficUrl']
-		     && is_wp_error( $error = Mask_Api::isValidMaskSlug( $data['redirectTrafficUrl'] ) ) ) {
+		     && is_wp_error( $error = Mask_Api::isValidMaskSlug( $data['redirectTrafficUrl'], 'redirect' ) ) ) {
 			//validate
 			$res = array(
-				'message' => __( "The Redirection URL is invalid.", wp_defender()->domain )
+				'message' => $error->get_error_message()
 			);
 			wp_send_json_error( $res );
 		}
-		if ( $data['redirectTrafficUrl'] == $data['maskUrl'] && strlen( $data['maskUrl'] ) > 0 ) {
+		if ( ! empty( $data['redirectTrafficUrl'] ) && ! empty( $data['maskUrl'] ) && $data['redirectTrafficUrl'] === $data['maskUrl'] && strlen( $data['maskUrl'] ) > 0 ) {
 			$res = array(
 				'message' => __( "Login and 404 redirect URLs can't be the same. Please use different URLs.", wp_defender()->domain )
 			);

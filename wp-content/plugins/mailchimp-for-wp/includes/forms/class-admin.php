@@ -55,6 +55,9 @@ class MC4WP_Forms_Admin {
 		wp_enqueue_script( 'mc4wp-forms-admin');
 		wp_localize_script( 'mc4wp-forms-admin', 'mc4wp_forms_i18n', array(
 			'addToForm'     => __( "Add to form", 'mailchimp-for-wp' ),
+			'agreeToTerms' => __( "I have read and agree to the terms & conditions", 'mailchimp-for-wp' ),
+			'agreeToTermsShort' => __( "Agree to terms", 'mailchimp-for-wp' ),
+			'agreeToTermsLink' => __( 'Link to your terms & conditions page', 'mailchimp-for-wp' ),
 			'city'          => __( 'City', 'mailchimp-for-wp' ),
 			'checkboxes'    => __( 'Checkboxes', 'mailchimp-for-wp' ),
 			'choices'       => __( 'Choices', 'mailchimp-for-wp' ),
@@ -314,18 +317,24 @@ class MC4WP_Forms_Admin {
 			return;
 		}
 
-		// query first available form and go there
-		$forms = mc4wp_get_forms( array( 'numberposts' => 1 ) );
+		try{
+			// try default form first
+			$default_form = mc4wp_get_form();
+			$redirect_url = mc4wp_get_edit_form_url( $default_form->ID );
+		} catch(Exception $e) {
+			// no default form, query first available form and go there
+			$forms = mc4wp_get_forms( array( 'numberposts' => 1 ) );
 
-		if( $forms ) {
-			// if we have a post, go to the "edit form" screen
-			$form = array_pop( $forms );
-			$redirect_url = mc4wp_get_edit_form_url( $form->ID );
-		} else {
-			// we don't have a form yet, go to "add new" screen
-			$redirect_url = mc4wp_get_add_form_url();
+			if( $forms ) {
+				// if we have a post, go to the "edit form" screen
+				$form = array_pop( $forms );
+				$redirect_url = mc4wp_get_edit_form_url( $form->ID );
+			} else {
+				// we don't have a form yet, go to "add new" screen
+				$redirect_url = mc4wp_get_add_form_url();
+			}
 		}
-
+		
 		wp_redirect( $redirect_url );
 		exit;
 	}
@@ -371,9 +380,10 @@ class MC4WP_Forms_Admin {
 		$opts = $form->settings;
 		$active_tab = ( isset( $_GET['tab'] ) ) ? $_GET['tab'] : 'fields';
 
+
 		$form_preview_url = add_query_arg( array( 
             'mc4wp_preview_form' => $form_id,
-        ), get_option( 'home' ) );
+        ), site_url( '/', 'admin' ) );
 
 		require dirname( __FILE__ ) . '/views/edit-form.php';
 	}

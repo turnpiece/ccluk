@@ -8,6 +8,7 @@ namespace WP_Defender\Module\IP_Lockout\Component;
 use Hammer\Helper\HTTP_Helper;
 use Hammer\Helper\WP_Helper;
 use WP_Defender\Behavior\Utils;
+use WP_Defender\Module\IP_Lockout\Model\IP_Model;
 use WP_Defender\Module\IP_Lockout\Model\Log_Model;
 
 class Logs_Table extends \WP_List_Table {
@@ -36,9 +37,8 @@ class Logs_Table extends \WP_List_Table {
 	 */
 	function get_columns() {
 		$columns = array(
-			'reason' => esc_html__( 'DETAILS', wp_defender()->domain ),
-			'date'   => esc_html__( 'DATE', wp_defender()->domain ),
-			'ip'     => esc_html__( 'IP', wp_defender()->domain ),
+			'reason' => esc_html__( 'Details', wp_defender()->domain ),
+			'date'   => esc_html__( 'Time', wp_defender()->domain ),
 			'action' => ''
 		);
 
@@ -48,8 +48,8 @@ class Logs_Table extends \WP_List_Table {
 	protected function get_sortable_columns() {
 		return array(
 			//'reason' => array( 'log', true ),
-			'date' => array( 'date', true ),
-			'ip'   => array( 'ip', true ),
+//			'date' => array( 'date', true ),
+//			'ip'   => array( 'ip', true ),
 		);
 	}
 
@@ -68,6 +68,10 @@ class Logs_Table extends \WP_List_Table {
 		if ( ( $filter = Http_Helper::retrieve_get( 'type', null ) ) != null ) {
 			$params['type'] = $filter;
 		}
+		if ( ( $ip = Http_Helper::retrieve_get( 'ip_address', null ) ) != null ) {
+			$params['ip'] = $ip;
+		}
+
 		$logs       = Log_Model::findAll( $params,
 			HTTP_Helper::retrieve_get( 'orderby', 'id' ),
 			HTTP_Helper::retrieve_get( 'order', 'desc' ),
@@ -96,7 +100,7 @@ class Logs_Table extends \WP_List_Table {
 	 * @return string
 	 */
 	public function column_action( Log_Model $log ) {
-		return Login_Protection_Api::getLogsActionsText( $log );
+		return '<i class="dev-icon dev-icon-caret_down"></i>';
 	}
 
 	/**
@@ -109,8 +113,14 @@ class Logs_Table extends \WP_List_Table {
 		if ( $log->type == Log_Model::ERROR_404 ) {
 			$format = true;
 		}
+		ob_start();
+		?>
+        <!--        <input type="checkbox" class="single-select" name="ids[]" value="--><?php //echo $log->id ?><!--"/>-->
+        <span class="badge <?php echo $log->type == 'auth_lock' || $log->type == '404_lock' ? 'locked' : null ?>"><?php echo $log->type == 'auth_fail' || $log->type == 'auth_lock' ? 'login' : '404' ?></span>
+		<?php
+		echo $log->get_log_text( $format );
 
-		return $log->get_log_text( $format );
+		return ob_get_clean();
 	}
 
 	/**
@@ -141,56 +151,61 @@ class Logs_Table extends \WP_List_Table {
 
 		$this->screen->render_screen_reader_content( 'heading_list' );
 		?>
-		<?php if ( ! defined( 'DOING_AJAX' ) ): ?>
-            <div class="well well-white lockout-logs-filter mline wd-hide">
-                <form>
-                    <strong>
-						<?php _e( "Filter", wp_defender()->domain ) ?>
-                    </strong>
-                    <div class="columns">
-                        <div class="column is-5">
-                            <select name="interval">
-                                <option value="1"><?php _e( "Last 24 hours", wp_defender()->domain ) ?></option>
-                                <option value="7"><?php _e( "Last 7 days", wp_defender()->domain ) ?></option>
-                                <option value="30"
-                                        selected><?php _e( "Last 30 days", wp_defender()->domain ) ?></option>
-                            </select>
-                        </div>
-                        <div class="column is-5">
-                            <select name="type">
-                                <option value=""><?php esc_html_e( "All", wp_defender()->domain ) ?></option>
-                                <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
-                                        value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL ?>">
-									<?php esc_html_e( "Failed login attempts", wp_defender()->domain ) ?></option>
-                                <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
-                                        value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK ?>"><?php esc_html_e( "Login lockout", wp_defender()->domain ) ?></option>
-                                <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
-                                        value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404 ?>"><?php esc_html_e( "404 error", wp_defender()->domain ) ?></option>
-                                <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
-                                        value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404 ?>"><?php esc_html_e( "404 lockout", wp_defender()->domain ) ?></option>
-                            </select>
-                        </div>
-                    </div>
-                </form>
-            </div>
-		<?php endif; ?>
         <div class="lockout-logs-container">
+			<?php $this->display_tablenav( 'top' ); ?>
 			<?php if ( $this->_pagination_args['total_items'] > 0 ): ?>
-				<?php $this->display_tablenav( 'top' ); ?>
-                <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
-                    <thead>
-                    <tr>
-						<?php $this->print_column_headers(); ?>
-                    </tr>
-                    </thead>
+                <div class="lockout-logs-inner">
+                    <div class="lockout-logs-filter mline wd-hide">
+                        <form method="post">
+                            <div class="well well-white">
+                                <div class="columns">
+                                    <div class="column is-4">
+                                        <strong>
+											<?php _e( "Lockout Type", wp_defender()->domain ) ?>
+                                        </strong>
+                                        <select name="type">
+                                            <option value=""><?php esc_html_e( "All", wp_defender()->domain ) ?></option>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                                    value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_FAIL ?>">
+												<?php esc_html_e( "Failed login attempts", wp_defender()->domain ) ?></option>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                                    value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::AUTH_LOCK ?>"><?php esc_html_e( "Login lockout", wp_defender()->domain ) ?></option>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                                    value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::ERROR_404 ?>"><?php esc_html_e( "404 error", wp_defender()->domain ) ?></option>
+                                            <option <?php selected( \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404, \Hammer\Helper\HTTP_Helper::retrieve_get( 'filter' ) ) ?>
+                                                    value="<?php echo \WP_Defender\Module\IP_Lockout\Model\Log_Model::LOCKOUT_404 ?>"><?php esc_html_e( "404 lockout", wp_defender()->domain ) ?></option>
+                                        </select>
+                                    </div>
+                                    <div class="column is-4">
+                                        <strong>
+											<?php _e( "Ip Address", wp_defender()->domain ) ?>
+                                        </strong>
+                                        <input name="ip_address" type="text"
+                                               placeholder="<?php esc_attr_e( "Enter an IP address", wp_defender()->domain ) ?>">
+                                    </div>
+                                </div>
+                                <div class="well-footer tr">
+                                    <button type="submit" class="button button-small">
+										<?php _e( "Apply", wp_defender()->domain ) ?></button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                    <table class="wp-list-table <?php echo implode( ' ', $this->get_table_classes() ); ?>">
+                        <thead>
+                        <tr>
+							<?php $this->print_column_headers(); ?>
+                        </tr>
+                        </thead>
 
-                    <tbody id="the-list"<?php
-					if ( $singular ) {
-						echo " data-wp-lists='list:$singular'";
-					} ?>>
-					<?php $this->display_rows_or_placeholder(); ?>
-                    </tbody>
-                </table>
+                        <tbody id="the-list"<?php
+						if ( $singular ) {
+							echo " data-wp-lists='list:$singular'";
+						} ?>>
+						<?php $this->display_rows_or_placeholder(); ?>
+                        </tbody>
+                    </table>
+                </div>
 				<?php
 				$this->display_tablenav( 'bottom' );
 				?>
@@ -199,6 +214,7 @@ class Logs_Table extends \WP_List_Table {
                     <i class="def-icon icon-info fill-blue"></i>
 					<?php _e( "No lockout events have been logged within the selected time period.", wp_defender()->domain ) ?>
                 </div>
+                <table></table>
 			<?php endif; ?>
         </div>
 		<?php
@@ -228,33 +244,99 @@ class Logs_Table extends \WP_List_Table {
 		) ) ) {
 			$class .= ' lockout';
 		}
-
+		$class .= ' show-hide-log';
 		echo '<tr class="' . $class . '">';
 		$this->single_row_columns( $item );
 		echo '</tr>';
+		echo '<tr class="table-info wd-hide">';
+		echo $this->detailRow( $item );
+		echo '<tr>';
+	}
+
+	public function detailRow( $item ) {
+
+		?>
+        <td colspan="4">
+            <div class="dev-box">
+                <div class="box-content">
+                    <div class="columns">
+                        <div class="column is-8">
+                            <p><strong><?php _e( "Description", wp_defender()->domain ) ?></strong></p>
+                            <p><?php
+								if ( $item->type == '404_error' ) {
+									printf( __( "%s tried to access file %s", wp_defender()->domain ), $item->ip, $item->log );
+								} elseif ( $item->type == 'auth_fail' ) {
+									printf( __( "%s tried to login with username %s", wp_defender()->domain ), $item->ip, $item->tried );
+								}
+								?></p>
+                        </div>
+                        <div class="column is-4">
+                            <p><strong><?php _e( "Type", wp_defender()->domain ) ?></strong></p>
+                            <p>
+                                <a href=""><?php echo $item->type == '404_error' ? __( "404 error", wp_defender()->domain ) : __( "Login failed", wp_defender()->domain ) ?></a>
+                            </p>
+                        </div>
+                    </div>
+                    <div class="columns">
+                        <div class="column is-4">
+                            <p><strong><?php _e( "IP", wp_defender()->domain ) ?></strong></p>
+                            <p><a href=""><?php
+									echo $item->ip
+									?></a></p>
+                        </div>
+                        <div class="column is-4">
+                            <p><strong><?php _e( "Date/Time", wp_defender()->domain ) ?></strong></p>
+                            <p><?php
+								echo Utils::instance()->formatDateTime( $item->date )
+								?></p>
+                        </div>
+                        <div class="column is-4">
+                            <p><strong><?php _e( "Ban Status", wp_defender()->domain ) ?></strong></p>
+                            <p><?php
+								echo Login_Protection_Api::getIPStatusText( $item->ip )
+								?></p>
+                        </div>
+                    </div>
+                    <div class="well well-white">
+                        <div>
+							<?php
+							echo Login_Protection_Api::getLogsActionsText( $item );
+							?>
+                        </div>
+                        <p>
+							<?php _e( "Note: Make sure this IP is not a legitimate operation, banning the IP will result in being permanently locked out from accessing your website.", wp_defender()->domain ) ?>
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </td>
+		<?php
 	}
 
 	protected function display_tablenav( $which ) {
 		?>
         <div class="intro">
-			<?php if ( $which === 'top' ): ?>
-
-			<?php endif; ?>
-            <div class="bulk-nav">
-                <div class="bulk-action">
-					<?php if ( $which === 'top' ): ?>
-                        <p><?php
-							$dayText = sprintf( _n( '%s day', '%s days', HTTP_Helper::retrieve_get( 'interval', 30 ), wp_defender()->domain ), HTTP_Helper::retrieve_get( 'interval', 30 ) );
-							printf( esc_html__( 'Your website\'s lockout log for the past %s.', wp_defender()->domain ), $dayText ) ?></p>
-					<?php endif; ?>
+            <div class="columns">
+                <div class="column is-3">
+                    <!--                    <input type="checkbox" id="bulk-select">-->
+                    <!--                    <a href="#bulk" rel="dialog" class="button button-small button-light button-disabled">-->
+                    <!--						--><?php //_e( "Bulk Action", wp_defender()->domain ) ?>
+                    <!--                    </a>-->
                 </div>
-                <div class="nav">
-                    <span><?php echo sprintf( esc_html__( "%s results", wp_defender()->domain ), $this->get_pagination_arg( 'total_items' ) ) ?></span>
-                    <div class="button-group">
-						<?php $this->pagination( $which ); ?>
+                <div class="column is-7">
+                    <div class="nav">
+                        <span><?php echo sprintf( esc_html__( "%s results", wp_defender()->domain ), $this->get_pagination_arg( 'total_items' ) ) ?></span>
+                        <div class="button-group">
+							<?php $this->pagination( $which ); ?>
+                        </div>
                     </div>
                 </div>
+                <div class="column is-2 tr">
+                    <button type="button" rel="show-filter" data-target=".lockout-logs-filter"
+                            class="button button-small button-secondary"><?php _e( "Filter", wp_defender()->domain ) ?></button>
+                </div>
             </div>
+
             <div class="clear"></div>
         </div>
 		<?php
@@ -288,32 +370,32 @@ class Logs_Table extends \WP_List_Table {
 		$current_url = set_url_scheme( 'http://' . parse_url( get_site_url(), PHP_URL_HOST ) . $_SERVER['REQUEST_URI'] );
 		$current_url = remove_query_arg( array( 'hotkeys_highlight_last', 'hotkeys_highlight_first' ), $current_url );
 		$current_url = esc_url( $current_url );
-		$radius      = 3;
+		$radius      = 1;
 		if ( $current_page > 1 && $total_pages > $radius ) {
-			$links['first'] = sprintf( '<a class="button lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
-				1, add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
-			$links['prev']  = sprintf( '<a class="button lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
+//			$links['first'] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
+//				1, add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
+			$links['prev'] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
 				$current_page - 1, add_query_arg( 'paged', $current_page - 1, $current_url ), '&lsaquo;' );
 		}
 
 		for ( $i = 1; $i <= $total_pages; $i ++ ) {
 			if ( ( $i >= 1 && $i <= $radius ) || ( $i > $current_page - 2 && $i < $current_page + 2 ) || ( $i <= $total_pages && $i > $total_pages - $radius ) ) {
 				if ( $i == $current_page ) {
-					$links[ $i ] = sprintf( '<a href="#" class="button lockout-nav button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
+					$links[ $i ] = sprintf( '<a href="#" class="button button-small lockout-nav button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
 				} else {
-					$links[ $i ] = sprintf( '<a class="button lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
+					$links[ $i ] = sprintf( '<a class="button button-small lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
 						$i, add_query_arg( 'paged', $i, $current_url ), $i );
 				}
 			} elseif ( $i == $current_page - $radius || $i == $current_page + $radius ) {
-				$links[ $i ] = '<a href="#" class="button lockout-nav button-light" disabled="">...</a>';
+				$links[ $i ] = '<a href="#" class="button lockout-nav button-small button-light" disabled="">...</a>';
 			}
 		}
 
 		if ( $current_page < $total_pages && $total_pages > $radius ) {
-			$links['next'] = sprintf( '<a class="button lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
+			$links['next'] = sprintf( '<a class="button lockout-nav button-small button-light" data-paged="%s" href="%s">%s</a>',
 				$current_page + 1, add_query_arg( 'paged', $current_page + 1, $current_url ), '&rsaquo;' );
-			$links['last'] = sprintf( '<a class="button lockout-nav button-light" data-paged="%s" href="%s">%s</a>',
-				$total_pages, add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
+//			$links['last'] = sprintf( '<a class="button lockout-nav button-small button-light" data-paged="%s" href="%s">%s</a>',
+//				$total_pages, add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
 		}
 		$output            = join( "\n", $links );
 		$this->_pagination = $output;

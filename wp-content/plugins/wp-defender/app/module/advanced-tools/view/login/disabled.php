@@ -79,6 +79,35 @@
             $('#def2qr').hide();
             $('#def2').show();
         })
+        $("input#otpCode").keydown(function(event) {
+            if (event.keyCode == 13) {
+                event.preventDefault();
+
+                var data = {
+                    action: 'defVerifyOTP',
+                    otp: $('#otpCode').val(),
+                    nonce: $('#defNonce').val()
+                }
+                var that = $(this).next('#verifyOTP');
+                var parent = that.closest('.well');
+                $.ajax({
+                    type: 'POST',
+                    url: ajaxurl,
+                    data: data,
+                    beforeSend: function () {
+                        that.attr('disabled', 'disabled');
+                    },
+                    success: function (data) {
+                        if (data.success == true) {
+                            location.reload();
+                        } else {
+                            that.removeAttr('disabled');
+                            parent.find('.error').text(data.data.message);
+                        }
+                    }
+                })
+            }
+        });
         $('#verifyOTP').click(function () {
             var data = {
                 action: 'defVerifyOTP',

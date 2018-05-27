@@ -3,21 +3,24 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.95.1
+  Version: 5.96
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
 
 $cleantalk_executed = false;
 
-define('APBCT_VERSION', '5.95.1');
-define('APBCT_AGENT',   'wordpress-5951');
+define('APBCT_VERSION', '5.96');
+define('APBCT_AGENT',   'wordpress-596');
 
 define('CLEANTALK_REMOTE_CALL_SLEEP', 10); // Minimum time between remote call
 define('APBCT_CASERT_PATH', file_exists(ABSPATH . WPINC . '/certificates/ca-bundle.crt') 
 	? ABSPATH . WPINC . '/certificates/ca-bundle.crt'
 	: ''
 ); // SSL SERTTIFICATE PATH
+
+define('APBCT_URL_PATH', plugins_url('', __FILE__)); //URL path to plugin.
+define('APBCT_DIR_PATH', plugin_dir_path(__FILE__)); //Filesystem path to plugin.
 
 if(!defined('CLEANTALK_PLUGIN_DIR')){
 	
@@ -33,7 +36,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkCron.php');       // Cron handling
     require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-widget.php');
     require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-common.php');
-	
+	 
     $ct_options=ct_get_options();
     $ct_data=ct_get_data();	
 	
@@ -77,7 +80,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     	$_POST['action']='ninja_forms_ajax_submit';
     
 	//*/ REMOTE CALLS
-	if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name']) && in_array($_GET['plugin_name'], array('antispam','anti-spam'))){
+	if(isset($_GET['spbc_remote_call_token'], $_GET['spbc_remote_call_action'], $_GET['plugin_name']) && in_array($_GET['plugin_name'], array('antispam','anti-spam', 'apbct'))){
 		
 		// Comparing with cleantalk's IP
 		$spbc_remote_ip = CleantalkHelper::ip_get(array('real'), false);
@@ -372,6 +375,10 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 			$_POST['redirect_to']=$tmp;
 		}
     }
+	
+	// Short code for GDPR
+	add_shortcode('cleantalk_gdpr_form', 'apbct_shrotcode_hadler__GDPR_public_notice__form');
+	
 }
 
 /**
@@ -588,7 +595,7 @@ function apbct_update(){
 		$apbct_agent = 'wordpress-'.str_replace('.', '', $plugin_data['Version']);
 		ct_send_feedback('0:' . $apbct_agent);
 		
-		die('OK '.json_encode(array('agent' => APBCT_AGENT)));
+		die('OK '.json_encode(array('agent' => $apbct_agent)));
 		
 	}else{
 		die('FAIL '. json_encode(array('error' => $upgrader->apbct_result)));

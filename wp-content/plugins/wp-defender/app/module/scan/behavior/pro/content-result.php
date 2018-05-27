@@ -126,7 +126,7 @@ class Content_Result extends \Hammer\Base\Behavior {
                                 <button type="button" class="button button-small delete-mitem button-grey">
 									<?php _e( "Delete", wp_defender()->domain ) ?></button>
                                 <div class="confirm-box wd-hide">
-	                                <?php echo $tooltips; ?>
+									<?php echo $tooltips; ?>
                                     &nbsp;
                                     <button type="submit" class="button button-small button-grey">
 										<?php _e( "Yes", wp_defender()->domain ) ?>
@@ -150,21 +150,26 @@ class Content_Result extends \Hammer\Base\Behavior {
 	 * @return string
 	 */
 	public function getSrcCode() {
-		$raw     = $this->getRaw();
-		$content = file_get_contents( $raw['file'] );
-		$content = explode( PHP_EOL, $content );
+		$raw        = $this->getRaw();
+		$contentRaw = file_get_contents( $raw['file'] );
+		$content    = explode( PHP_EOL, $contentRaw );
 		foreach ( $raw['meta'] as $meta ) {
-			$line = $meta['lineFrom'];
-			if ( ! isset( $content[ $line - 1 ] ) ) {
-				continue;
-			}
-			$colFrom = $meta['columnFrom'];
-			$colTo   = $meta['columnTo'];
+			if ( isset( $meta['offsetFrom'] ) ) {
+				$content = substr_replace( $contentRaw, '[[del]]', $meta['offsetFrom'], 0 );
+				$content = substr_replace( $content, '[[/del]]', $meta['offsetTo'] + 1, 0 );
+			} else {
+				$line = $meta['lineFrom'];
+				if ( ! isset( $content[ $line - 1 ] ) ) {
+					continue;
+				}
+				$colFrom = $meta['columnFrom'];
+				$colTo   = $meta['columnTo'];
 
-			$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
-			$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
+				$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
+				$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
+				$content = implode( PHP_EOL, $content );
+			}
 		}
-		$content = implode( PHP_EOL, $content );
 
 		if ( function_exists( 'mb_convert_encoding' ) ) {
 			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );

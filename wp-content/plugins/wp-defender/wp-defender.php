@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Defender Pro
  * Plugin URI: https://premium.wpmudev.org/project/wp-defender/
- * Version:     1.8
+ * Version:     1.9
  * Description: Get regular security scans, vulnerability reports, safety recommendations and customized hardening for your site in just a few clicks. Defender is the analyst and enforcer who never sleeps.
  * Author:      WPMU DEV
  * Author URI:  http://premium.wpmudev.org/

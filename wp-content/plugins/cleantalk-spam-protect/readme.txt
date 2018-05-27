@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 4.9
-Stable tag: 5.95.1
+Stable tag: 5.96
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -516,6 +516,12 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.96 May 22 2018 =
+  * Fix: Update system.
+  * Mod: Reset all counters button in admin bar.
+  * Mod: GDPR compliance.
+  * Minor fixes.
+
 = 5.95.1 May 3 2018 =
   * Fix: "Get key automatically" button display logic.
   * Fix: PHP notices.
@@ -1587,6 +1593,12 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.96 May 22 2018 =
+  * Fix: Update system.
+  * Mod: Reset all counters button in admin bar.
+  * Mod: GDPR compliance.
+  * Minor fixes.
+
 = 5.95.1 May 3 2018 =
   * Fix: "Get key automatically" button display logic.
   * Fix: PHP notices.

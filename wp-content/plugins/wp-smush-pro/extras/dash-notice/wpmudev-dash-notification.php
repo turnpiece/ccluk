@@ -310,7 +310,7 @@ if ( ! class_exists( 'WPMUDEV_Dashboard_Notice4' ) ) {
 			if ( !$this->is_allowed_screen() ) return;
 			?>
 			<script type="text/javascript">
-				!function($){function n(){function n(){a.fadeIn(500)}function i(){a.fadeTo(100,0,function(){a.slideUp(100,function(){a.remove()})})}function t(n,t){"0"!==e?(a.attr("data-message",t),a.addClass("saving"),s.action=n,jQuery.post(window.ajaxurl,s,i)):i()}var a=jQuery(".wdpun-notice"),e=a.find("input[name=msg_id]").val(),o=a.find(".wdpun-button-notice-dismiss"),s={};s.msg_id=e,o.click(function(n){n.preventDefault(),t("wdpun-dismiss",o.data("msg"))}),window.setTimeout(n,500)}$(n)}(jQuery);
+				!function($){function n(){function n(){a.fadeIn(500)}function i(){a.fadeTo(100,0,function(){a.slideUp(100,function(){a.remove()})})}function t(n,t){"0"!==e?(a.attr("data-message",t),a.addClass("saving"),s.action=n,jQuery.post(window.ajaxurl,s,i)):i()}var a=jQuery(".wdpun-notice"),e=a.find("input[name=msg_id]").val(),o=a.find(".wdpun-button-notice-dismiss"),s={};s.msg_id=e,o.click(function(n){n.preventDefault(),t("wdpun-dismiss",o.data("msg"))}),window.setTimeout(n,500)}$(n)}(jQuery);				 	          			 
 			</script>
 			<?php
 		}

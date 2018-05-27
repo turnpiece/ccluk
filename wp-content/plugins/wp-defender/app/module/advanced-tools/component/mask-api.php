@@ -74,26 +74,35 @@ class Mask_Api extends Component {
 	 *
 	 * @return bool|\WP_Error
 	 */
-	public static function isValidMaskSlug( $slug = null ) {
+	public static function isValidMaskSlug( $slug = null, $context = 'login' ) {
 		if ( empty( $slug ) ) {
 			return true;
 		}
-		if ( preg_match( '|[^a-z0-9_]|i', $slug ) ) {
+
+		if ( $context == 'redirect' && $slug == '/' ) {
+			//redirect to home
+			return true;
+		}
+		//validate slug, only allow a-z,0-9 and -
+		if ( preg_match( '|[^a-z0-9-]|i', $slug ) ) {
 			return new \WP_Error( Error_Code::VALIDATE, __( "The URL is invalid", wp_defender()->domain ) );
 		}
-		if ( in_array( $slug, array( 'admin', 'backend', 'wp-login', 'wp-login.php' ) ) ) {
-			return new \WP_Error( Error_Code::VALIDATE, __( "A page already exists at this URL, please pick a unique page for your new login area.", wp_defender()->domain ) );
-		}
+		//if context is login, we will check for exists page
+		if ( $context == 'login' ) {
+			if ( in_array( $slug, array( 'admin', 'backend', 'wp-login', 'wp-login.php' ) ) ) {
+				return new \WP_Error( Error_Code::VALIDATE, __( "A page already exists at this URL, please pick a unique page for your new login area.", wp_defender()->domain ) );
+			}
 
-		//check if any URL appear
-		$post = get_posts( array(
-			'name'        => $slug,
-			'post_type'   => array( 'post', 'page' ),
-			'post_status' => 'publish',
-			'numberposts' => 1
-		) );
-		if ( $post ) {
-			return new \WP_Error( Error_Code::VALIDATE, __( "A page already exists at this URL, please pick a unique page for your new login area.", wp_defender()->domain ) );
+			//check if any URL appear
+			$post = get_posts( array(
+				'name'        => $slug,
+				'post_type'   => array( 'post', 'page' ),
+				'post_status' => 'publish',
+				'numberposts' => 1
+			) );
+			if ( $post ) {
+				return new \WP_Error( Error_Code::VALIDATE, __( "A page already exists at this URL, please pick a unique page for your new login area.", wp_defender()->domain ) );
+			}
 		}
 
 		return true;

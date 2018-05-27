@@ -1,7 +1,8 @@
 jQuery(function ($) {
     //bind form handler for every form inside scan section
     WDAudit.formHandler();
-    WDAudit.listenFilter();
+    //WDAudit.listenFilter();
+    WDAudit.filterForm();
     $('div.auditing').on('form-submitted', function (e, data, form) {
         if (form.attr('id') != 'active-audit') {
             return;
@@ -25,6 +26,29 @@ jQuery(function ($) {
             Defender.showNotification('error', data.data.message);
         }
     });
+
+    $('body').on('click', '.ip-action', function (e) {
+        e.preventDefault();
+        var that = $(this);
+        $.ajax({
+            type: 'POST',
+            url: ajaxurl,
+            data: {
+                action: 'lockoutIPAction',
+                ip: that.data('ip'),
+                type: that.data('type'),
+                nonce: that.data('nonce')
+            },
+            success: function (data) {
+                if (data.success == 1) {
+                    that.parent().html(data.data.buttons);
+                    Defender.showNotification('success', data.data.message);
+                } else {
+                    Defender.showNotification('error', data.data.message);
+                }
+            }
+        })
+    })
 
     $('div.auditing').on('form-submitted', function (e, data, form) {
         if (!form.hasClass('audit-settings')) {
@@ -210,15 +234,15 @@ WDAudit.formHandler = function () {
                 that.find('.button').attr('disabled', 'disabled');
             },
             success: function (data) {
-				if (data.data != undefined && data.data.notification != undefined){
-					if(data.data.notification == 0){
-						jq('.defender-audit-frequency').html(data.data.text);
-						jq('.defender-audit-schedule').html('');
-					} else {
-						jq('.defender-audit-frequency').html(data.data.frequency);
-						jq('.defender-audit-schedule').html(data.data.schedule);
-					}
-				}
+                if (data.data != undefined && data.data.notification != undefined) {
+                    if (data.data.notification == 0) {
+                        jq('.defender-audit-frequency').html(data.data.text);
+                        jq('.defender-audit-schedule').html('');
+                    } else {
+                        jq('.defender-audit-frequency').html(data.data.frequency);
+                        jq('.defender-audit-schedule').html(data.data.schedule);
+                    }
+                }
                 if (data.data != undefined && data.data.reload != undefined) {
                     Defender.showNotification('success', data.data.message);
                     location.reload();
@@ -246,6 +270,17 @@ WDAudit.listenForEvents = function () {
     })
 }
 
+WDAudit.filterForm = function () {
+    var jq = jQuery;
+    jq('body').on('submit', '.audit-filter form', function () {
+        var query = WDAudit.buildFilterQuery();
+        WDAudit.ajaxPull(query, function () {
+
+        })
+        return false;
+    })
+}
+
 WDAudit.listenFilter = function () {
     var jq = jQuery;
     var form = jq('.audit-filter form');
@@ -267,6 +302,7 @@ WDAudit.listenFilter = function () {
         state = 1;
         clearTimeout(typingTimer);
     });
+
     //user is "finished typing," do something
     function doneTyping() {
         //build query
@@ -324,12 +360,13 @@ WDAudit.ajaxPull = function (query, callback) {
             if (data.success == 1) {
                 if (data.data.html != undefined) {
                     var html = jq(data.data.html);
-                    if (html.find('#audit-table') > 0 && jq('#audit-table').size() > 0) {
+                    if (html.find('#audit-table') > 0 && jq('audit-table').size() > 0) {
+                        jq('.bulk-nav').replaceWith(html.find('.bulk-nav').first());
                         jq('#audit-table').replaceWith(html.filter('#audit-table').first());
-                        jq('.nav').replaceWith(html.filter('.bulk-nav').first().find('.nav').first());
                         callback();
                     } else {
-                        jq('#audit-table-container').html(html);
+                        jq('#audit-table-inner').html(html.filter('#audit-table').first());
+                        jq('.bulk-nav').html(html.filter('.bulk-nav').first().html());
                         jQuery(".wpmud select").each(function () {
                             WDP.wpmuSelect(this);
                         });
@@ -347,6 +384,9 @@ WDAudit.ajaxPull = function (query, callback) {
                     count = data.data.count;
                     callback();
                 }
+            } else {
+                jq('#audit-table-inner').html(data.data.html);
+                overlay.remove();
             }
         }
     })

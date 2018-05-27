@@ -28,20 +28,19 @@ if ( ! class_exists( 'WPSmushNextGenBulk' ) ) {
 				$error      = $smush->get_error_message();
 				//Check for timeout error and suggest to filter timeout
 				if ( strpos( $error, 'timed out' ) ) {
-					$msg = '<p class="wp-smush-error-message">' . esc_html__( "Smush request timed out. You can try setting a higher value ( > 60 ) for `WP_SMUSH_API_TIMEOUT`.", "wp-smushit" ) . '</p>';				 	          			 
+					$msg = '<p class="wp-smush-error-message">' . esc_html__( "Smush request timed out. You can try setting a higher value ( > 60 ) for `WP_SMUSH_API_TIMEOUT`.", "wp-smushit" ) . '</p>';
 				}
 			} else {
 				//Check if a resmush request, update the resmush list
 				if ( ! empty( $_REQUEST['is_bulk_resmush'] ) && $_REQUEST['is_bulk_resmush'] ) {
 					$wpsmushit_admin->update_resmush_list( $atchmnt_id, 'wp-smush-nextgen-resmush-list' );
 				}
+				$stats['is_lossy'] = !empty( $smush['stats'] ) ? $smush['stats']['lossy'] : 0;
+
+				//Size before and after smush
+				$stats['size_before'] = !empty( $smush['stats'] ) ? $smush['stats']['size_before'] : 0;
+				$stats['size_after'] = !empty( $smush['stats'] ) ? $smush['stats']['size_after'] : 0;
 			}
-
-			$stats['is_lossy'] = !empty( $smush['stats'] ) ? $smush['stats']['lossy'] : 0;
-
-			//Size before and after smush
-			$stats['size_before'] = !empty( $smush['stats'] ) ? $smush['stats']['size_before'] : 0;
-			$stats['size_after'] = !empty( $smush['stats'] ) ? $smush['stats']['size_after'] : 0;
 
 			//Get the resmush ids list
 			if ( empty( $wpsmushnextgenadmin->resmush_ids ) ) {

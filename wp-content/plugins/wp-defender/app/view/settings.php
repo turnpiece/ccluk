@@ -69,7 +69,7 @@
 												<div class="col span_1_of_12">
 													<?php
 													$key     = 'use_' . WD_Scan_Api::SCAN_VULN_DB . '_scan';
-													$tooltip = WD_Utils::get_setting( 'use_' . WD_Scan_Api::SCAN_VULN_DB . '_scan' ) == 1 ? esc_html__( "Disable This Scan", wp_defender()->domain ) : esc_html__( "Enable This Scan", wp_defender()->domain );
+													$tooltip = WD_Utils::get_setting( 'use_' . WD_Scan_Api::SCAN_VULN_DB . '_scan' ) == 1 ? esc_html__( "Disable This Scan", wp_defender()->domain ) : esc_html__( "Enable This Scan", wp_defender()->domain );	   			 	 		  		  	 	
 													?>
 													<span class="toggle"
 													      tooltip="<?php echo esc_attr( $tooltip ) ?>">

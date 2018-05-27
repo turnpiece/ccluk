@@ -88,7 +88,6 @@ function ga_load_charts(disable) {
 	if(typeof(disable)==='undefined') disable = '';
 
 	if(ga_chart_visitors && ga_chart_visitors.length > 1 && disable != 'chart_visitors') {
-		console.log(ga_chart_visitors);
 		var data = google.visualization.arrayToDataTable(ga_chart_visitors);
 
 		var options = {

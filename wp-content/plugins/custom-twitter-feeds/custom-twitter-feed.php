@@ -3,7 +3,7 @@
 Plugin Name: Custom Twitter Feeds
 Plugin URI: http://smashballoon.com/custom-twitter-feeds
 Description: Customizable Twitter feeds for your website
-Version: 1.2.8
+Version: 1.2.9
 Author: Smash Balloon
 Author URI: http://smashballoon.com/
 Text Domain: custom-twitter-feeds
@@ -24,7 +24,7 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 define( 'CTF_URL', plugin_dir_path( __FILE__ )  );
-define( 'CTF_VERSION', '1.2.8' );
+define( 'CTF_VERSION', '1.2.9' );
 define( 'CTF_TITLE', 'Custom Twitter Feeds' );
 define( 'CTF_JS_URL', plugins_url( '/js/ctf-scripts.js?ver=' . CTF_VERSION , __FILE__ ) );
 define( 'OAUTH_PROCESSOR_URL', 'https://smashballoon.com/ctf-at-retriever/?return_uri=' );
@@ -329,13 +329,25 @@ register_deactivation_hook( __FILE__, 'ctf_deactivate' );
  * Loads the javascript for the plugin front-end. Also localizes the admin-ajax file location for use in ajax calls
  */
 function ctf_scripts_and_styles() {
-    wp_enqueue_style( 'ctf_styles', plugins_url( '/css/ctf-styles.css', __FILE__ ), array(), CTF_VERSION );
+	$options = get_option( 'ctf_options' );
+	$not_ajax_theme = (! isset( $options['ajax_theme'] ) || ! $options['ajax_theme']);
+
+	wp_enqueue_style( 'ctf_styles', plugins_url( '/css/ctf-styles.css', __FILE__ ), array(), CTF_VERSION );
     wp_enqueue_script( 'ctf_twitter_intents', 'https://platform.twitter.com/widgets.js' );
-    wp_enqueue_script( 'ctf_scripts', plugins_url( '/js/ctf-scripts.js', __FILE__ ), array( 'jquery' ), CTF_VERSION, true );
-    wp_localize_script( 'ctf_scripts', 'ctf', array(
-            'ajax_url' => admin_url( 'admin-ajax.php' )
-        )
-    );
+
+    if ( $not_ajax_theme ) {
+	    wp_enqueue_script( 'ctf_scripts', plugins_url( '/js/ctf-scripts.js', __FILE__ ), array( 'jquery' ), CTF_VERSION, true );
+	    wp_localize_script( 'ctf_scripts', 'ctf', array(
+			    'ajax_url' => admin_url( 'admin-ajax.php' )
+		    )
+	    );
+    } else {
+	    wp_localize_script( 'jquery', 'ctf', array(
+			    'ajax_url' => admin_url( 'admin-ajax.php' )
+		    )
+	    );
+    }
+
 }
 add_action( 'wp_enqueue_scripts', 'ctf_scripts_and_styles' );
 

@@ -144,6 +144,23 @@
             </div>
             <div class="columns">
                 <div class="column is-one-third">
+                    <label><?php _e( "Emails", wp_defender()->domain ) ?></label>
+                    <span class="sub">
+                        <?php _e( "Customize the default copy for emails the two-factor feature sends to users.", wp_defender()->domain ) ?>
+                    </span>
+                </div>
+                <div class="column">
+                  <div class="well well-white">
+                    <div class="box-title">
+                        <strong><?php _e( 'Email', wp_defender()->domain );?></strong>
+                    </div>
+                    <div class="line"><?php _e( 'Lost phone one time password', wp_defender()->domain );?></div>
+                    <span class="pull-right"><span class="span-icon icon-edit change-one-time-pass-email" tooltip="Edit"></span></span>
+                  </div>
+                </div>
+            </div>
+            <div class="columns">
+                <div class="column is-one-third">
                     <label><?php _e( "App Download", wp_defender()->domain ) ?></label>
                     <span class="sub">
                         <?php _e( "Need the app? Here’s links to the official Google Authenticator apps.", wp_defender()->domain ) ?>
@@ -192,3 +209,8 @@
         </form>
     </div>
 </div>
+<?php
+$view     = '2factor-otp-email-edit-from';
+$settings = array( 'settings' => $settings );
+$controller->renderPartial( $view, $settings );
+?>

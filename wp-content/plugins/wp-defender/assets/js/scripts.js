@@ -56,6 +56,13 @@ jQuery(function ($) {
         });
     }
 
+    $('.change-one-time-pass-email').click(function(){
+      WDP.showOverlay("#edit-one-time-password-email", {
+          title: defender_adtools.edit_email_title,
+          class: 'wd-one-time-pass-email'
+      });
+    });
+
     if ($('#requirement').size() > 0) {
         WDP.showOverlay("#requirement", {
             class: 'no-close wp-defender wd-requirement'

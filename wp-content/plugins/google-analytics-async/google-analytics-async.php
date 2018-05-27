@@ -5,7 +5,7 @@ Plugin URI: http://premium.wpmudev.org/project/google-analytics-for-wordpress-mu
 Description: Enables Google Analytics for your site with statistics inside WordPress admin panel. Single and multi site compatible!
 Author: WPMU DEV
 Author URI: http://premium.wpmudev.org
-Version: 3.1.6
+Version: 3.1.7.1
 WDP ID: 51
 License: GNU General Public License (Version 2 - GPLv2)
 */
@@ -46,8 +46,6 @@ class Google_Analytics_Async {
     var $plugin_dir;
     /** @var string $plugin_url The plugin directory URL */
     var $plugin_url;
-    /** @var string $domain The plugin domain */
-    var $domain;
     /** @var string $options_name The plugin options string */
     var $options_name = 'ga2_settings';
     /** @var array $settings The plugin site options */
@@ -95,11 +93,6 @@ class Google_Analytics_Async {
      * @return void
      */
     function init_vars() {
-        global $wpdb;
-
-        if ( isset( $wpdb->site) )
-            $this->domain = $wpdb->get_var( "SELECT domain FROM {$wpdb->site}" );
-
         $this->settings = $this->get_options();
         $this->network_settings = $this->get_options(null, 'network');
         $this->current_settings = is_network_admin() ? $this->network_settings : $this->settings;
@@ -149,10 +142,11 @@ class Google_Analytics_Async {
             && function_exists('is_pro_site')
             && !is_pro_site(get_current_blog_id(), $this->network_settings['track_settings']['supporter_only'])
             && apply_filters('ga_additional_block', true)
-        )
+        ) {
             return;
-
-        add_submenu_page( 'options-general.php', 'Google Analytics', 'Google Analytics', 'manage_options', 'google-analytics', array( &$this, 'output_site_settings_page' ) );
+        } else {
+            add_submenu_page( 'options-general.php', 'Google Analytics', 'Google Analytics', 'manage_options', 'google-analytics', array( &$this, 'output_site_settings_page' ) );
+        }
     }
 
 	/**
@@ -175,13 +169,15 @@ class Google_Analytics_Async {
             add_action( 'admin_head', array( &$this, 'tracking_code_output' ) );
     }
 
-
     /**
      * Google Analytics code output.
      *
      * @return void
      */
     function tracking_code_output() {
+        if(is_preview() || wp_doing_ajax()) {
+            return false;
+        }
 
         $network_settings = isset( $this->network_settings['track_settings'] ) ? $this->network_settings['track_settings'] : array();
         $site_settings    = isset( $this->settings['track_settings'] ) ? $this->settings['track_settings'] : array();
@@ -194,82 +190,15 @@ class Google_Analytics_Async {
 			unset( $site_settings['tracking_code'] );
 		}
 
-		// For domain mapping selection see: http://productforums.google.com/forum/#!topic/analytics/ZaK5zu8KIf8
-        if
-        (
-            (
-                (!isset( $network_settings['track_method'] ) || $network_settings['track_method'] == 'classic' || $network_settings['track_method'] == 'both')
-                && !empty( $network_settings['tracking_code'] )
-            )
-            ||
-            (
-                (!isset( $site_settings['track_method'] ) || $site_settings['track_method'] == 'classic' || $site_settings['track_method'] == 'both')
-                && !empty( $site_settings['tracking_code'] )
-                && !is_admin()
-            )
-        ) :
-        ?>
-			<script type="text/javascript">
-				var _gaq = _gaq || [];
-
-				<?php if ( !empty( $network_settings['tracking_code'] ) && (!isset( $network_settings['track_method'] ) || $network_settings['track_method'] == 'classic' || $network_settings['track_method'] == 'both') ): ?>
-					_gaq.push(['_setAccount', '<?php echo $network_settings['tracking_code']; ?>']);
-					<?php if ( defined('SUBDOMAIN_INSTALL') && is_multisite() ): ?>
-						<?php if ( !empty( $network_settings['domain_mapping'] ) ): ?>
-							_gaq.push(['_setDomainName', 'none']);
-							_gaq.push(['_setAllowLinker', true]);
-						<?php else : ?>
-							_gaq.push(['_setDomainName', '.<?php echo $this->domain; ?>']);
-						<?php endif; ?>
-						_gaq.push(['_setAllowHash', false]);
-					<?php endif; ?>
-                    <?php if ( isset($network_settings['anonymize_ip']) && !empty( $network_settings['anonymize_ip'] ) ): ?>
-                        _gaq.push(['_anonymizeIp']);
-                    <?php endif; ?>
-                    <?php do_action('ga_plus_network_tracking_code_add_vars', ''); ?>
-					_gaq.push(['_trackPageview']);
-				<?php endif; ?>
-
-                <?php if ( !is_admin() && !empty( $site_settings['tracking_code'] ) && (!isset( $site_settings['track_method'] ) || $site_settings['track_method'] == 'classic' || $site_settings['track_method'] == 'both') ): ?>
-					_gaq.push(['b._setAccount', '<?php echo $site_settings['tracking_code']; ?>']);
-                    <?php if ( isset($site_settings['anonymize_ip']) && !empty( $site_settings['anonymize_ip'] ) ): ?>
-                        _gaq.push(['b._anonymizeIp']);
-                    <?php endif; ?>
-                    <?php do_action('ga_plus_site_tracking_code_add_vars', 'b'); ?>
-					_gaq.push(['b._trackPageview']);
-				<?php endif; ?>
-
-				(function() {
-				var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
-                <?php if ( empty( $site_settings['display_advertising'] ) && empty( $network_settings['display_advertising'] ) ): ?>
-				    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
-                <?php else : ?>
-                    ga.src = ('https:' == document.location.protocol ? 'https://' : 'http://') + 'stats.g.doubleclick.net/dc.js';
-                <?php endif; ?>
-				var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
-				})();
-			</script>
-
-        <?php
-        endif;
-        if( isset( $network_settings['track_method'] ) && $network_settings['track_method'] == 'both' && isset($network_settings['tracking_code2']) && !empty($network_settings['tracking_code2']) )
-            $network_settings['tracking_code'] = $network_settings['tracking_code2'];
-
-        if( isset( $site_settings['track_method'] ) && $site_settings['track_method'] == 'both' && isset($site_settings['tracking_code2']) && !empty($site_settings['tracking_code2']) )
-            $site_settings['tracking_code'] = $site_settings['tracking_code2'];
-
         if (
-            (
-                isset( $network_settings['track_method'] ) && ( $network_settings['track_method'] == 'universal' || $network_settings['track_method'] == 'both' )
-                && !empty( $network_settings['tracking_code'] )
-            )
-            ||
-            (
-                isset( $site_settings['track_method'] ) && ($site_settings['track_method'] == 'universal' || $site_settings['track_method'] == 'both')
-                && !empty( $site_settings['tracking_code'] )
-                && !is_admin()
-            )
-        ): ?>
+            ( isset( $network_settings['tracking_code'] ) && !empty( $network_settings['tracking_code'] ) ) ||
+            ( !is_admin() && isset( $site_settings['tracking_code'] ) && !empty( $site_settings['tracking_code'] ) )
+        ):
+
+        if ( isset( $network_settings['anonymize_ip'] ) && $network_settings['anonymize_ip'] && isset( $network_settings['anonymize_ip_force'] ) && $network_settings['anonymize_ip_force'] ) {
+            $site_settings['anonymize_ip'] = true;
+        }
+        ?>
 
             <script>
                 (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
@@ -277,35 +206,36 @@ class Google_Analytics_Async {
                 m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
                 })(window,document,'script','//www.google-analytics.com/analytics.js','gaplusu');
 
-                <?php if ( !empty( $network_settings['tracking_code'] ) && (isset( $network_settings['track_method'] ) && ( $network_settings['track_method'] == 'universal' || $network_settings['track_method'] == 'both' )) ): ?>
-                    <?php if ( !empty( $network_settings['domain_mapping'] ) && is_multisite() ): ?>
-                        gaplusu('create', '<?php echo $network_settings['tracking_code']; ?>', 'auto', {'allowLinker': true});
-                    <?php else : ?>
-                        gaplusu('create', '<?php echo $network_settings['tracking_code']; ?>', 'auto');
+                function gaplus_track() {
+                    <?php if ( isset( $network_settings['tracking_code'] ) && !empty( $network_settings['tracking_code'] ) ): ?>
+                            gaplusu('create', '<?php echo $network_settings['tracking_code']; ?>', 'auto');
+                        <?php if ( isset( $network_settings['anonymize_ip'] ) && $network_settings['anonymize_ip'] ): ?>
+                            gaplusu('set', 'anonymizeIp', true);
+                        <?php endif; ?>
+                        <?php if ( isset( $network_settings['display_advertising'] ) && $network_settings['display_advertising'] ): ?>
+                            gaplusu('require', 'displayfeatures');
+                        <?php endif; ?>
+                        <?php do_action('ga_plus_network_tracking_code_add_vars', ''); ?>
+                            gaplusu('send', 'pageview');
                     <?php endif; ?>
 
-                    <?php if ( isset($network_settings['anonymize_ip']) && !empty( $network_settings['anonymize_ip'] ) ): ?>
-                        gaplusu('set', 'anonymizeIp', true);
+                    <?php if ( !is_admin() && isset( $site_settings['tracking_code'] ) && !empty( $site_settings['tracking_code'] ) ): ?>
+                            gaplusu('create', '<?php echo $site_settings['tracking_code']; ?>', 'auto', {'name': 'single'});
+                        <?php if ( isset($site_settings['anonymize_ip']) && !empty( $site_settings['anonymize_ip'] ) ): ?>
+                            gaplusu('single.set', 'anonymizeIp', true);
+                        <?php endif; ?>
+                        <?php if ( $site_settings['display_advertising'] ): ?>
+                            gaplusu('single.require', 'displayfeatures');
+                        <?php endif; ?>
+                            <?php do_action('ga_plus_site_tracking_code_add_vars', 'b'); ?>
+                            gaplusu('single.send', 'pageview');
                     <?php endif; ?>
-                    <?php if ( $network_settings['display_advertising'] ) : ?>
-                        gaplusu('require', 'displayfeatures');
-                    <?php endif; ?>
+                }
 
-                    gaplusu('send', 'pageview');
-                <?php endif; ?>
+                <?php if(apply_filters('ga_load_tracking', true)) { ?>
+                    gaplus_track();
+                <?php } ?>
 
-                <?php if ( !is_admin() && !empty( $site_settings['tracking_code'] ) && (isset( $site_settings['track_method'] ) && ( $site_settings['track_method'] == 'universal' || $site_settings['track_method'] == 'both' )) ): ?>
-                    gaplusu('create', '<?php echo $site_settings['tracking_code']; ?>', 'auto', {'name': 'single'});
-
-                    <?php if ( isset($site_settings['anonymize_ip']) && !empty( $site_settings['anonymize_ip'] ) ): ?>
-                        gaplusu('single.set', 'anonymizeIp', true);
-                    <?php endif; ?>
-                    <?php if ( $site_settings['display_advertising'] ) : ?>
-                        gaplusu('single.require', 'displayfeatures');
-                    <?php endif; ?>
-
-                    gaplusu('single.send', 'pageview');
-                <?php endif; ?>
             </script>
 
 		<?php
@@ -336,8 +266,12 @@ class Google_Analytics_Async {
                 exit;
 			}
         }
-    }
 
+        if(function_exists('wp_add_privacy_policy_content')) {
+            $privacy_text = __( "This website uses Google Analytics to track website traffic. Collected data is processed in such a way that visitors cannot be identified.", $this->text_domain );
+            wp_add_privacy_policy_content('Google Analytics +', $privacy_text);
+        }
+    }
 
 	/**
 	 * Network settings page
@@ -356,10 +290,10 @@ class Google_Analytics_Async {
      * @return void
      */
     function output_site_settings_page( $network = '' ) {
+	    global $google_analytics_async_dashboard;
         $google_loggedin = isset($this->current_settings['google_login']['logged_in']) ? 1 : 0;
         /* analytics repot account */
         if($google_loggedin) {
-            global $google_analytics_async_dashboard;
             $accounts = $google_analytics_async_dashboard->get_accounts();
         }
 
@@ -406,7 +340,11 @@ class Google_Analytics_Async {
         else
             $options = get_site_option( $this->options_name );
 
-        $options = apply_filters('ga_get_options', $options, $network, $this->options_name);
+        if(!is_array($options))
+            $options = array();
+
+        do_action('ga_plus_before_return_options', $options, $network, $this->options_name);
+		$options = apply_filters('ga_get_options', $options, $network, $this->options_name);
 
         /* Check if specific plugin option is requested and return it */
         if ( isset( $key ) && array_key_exists( $key, $options ) )
@@ -414,32 +352,6 @@ class Google_Analytics_Async {
         else
             return $options;
     }
-
-
-
-    /**
-     * Encrypt text (SMTP password)
-     **/
-    private function _encrypt( $text ) {
-        if  ( function_exists( 'mcrypt_encrypt' ) ) {
-            return base64_encode( @mcrypt_encrypt( MCRYPT_RIJNDAEL_256, DB_PASSWORD, $text, MCRYPT_MODE_ECB ) );
-        } else {
-            return $text;
-        }
-    }
-
-    /**
-     * Decrypt password (SMTP password)
-     **/
-    private function _decrypt( $text ) {
-        if ( function_exists( 'mcrypt_decrypt' ) ) {
-            return trim( @mcrypt_decrypt( MCRYPT_RIJNDAEL_256, DB_PASSWORD, base64_decode( $text ), MCRYPT_MODE_ECB ) );
-        } else {
-            return $text;
-        }
-    }
-
-
 }
 
 global $google_analytics_async;

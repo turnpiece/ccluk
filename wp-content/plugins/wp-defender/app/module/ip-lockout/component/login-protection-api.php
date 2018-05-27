@@ -239,6 +239,33 @@ class Login_Protection_Api extends Component {
 		return null;
 	}
 
+	public static function time_since( $since ) {
+		$since = time() - $since;
+		if ( $since < 0 ) {
+			$since = 0;
+		}
+		$chunks = array(
+			array( 60 * 60 * 24 * 365, esc_html__( "year" ) ),
+			array( 60 * 60 * 24 * 30, esc_html__( "month" ) ),
+			array( 60 * 60 * 24 * 7, esc_html__( "week" ) ),
+			array( 60 * 60 * 24, esc_html__( 'day' ) ),
+			array( 60 * 60, esc_html__( "hour" ) ),
+			array( 60, esc_html__( "minute" ) ),
+			array( 1, esc_html__( "second" ) )
+		);
+
+		for ( $i = 0, $j = count( $chunks ); $i < $j; $i ++ ) {
+			$seconds = $chunks[ $i ][0];
+			$name    = $chunks[ $i ][1];
+			if ( ( $count = floor( $since / $seconds ) ) != 0 ) {
+				break;
+			}
+		}
+
+		$print = ( $count == 1 ) ? '1 ' . $name : "$count {$name}s";
+
+		return $print;
+	}
 
 	/**
 	 * @return string
@@ -253,19 +280,19 @@ class Login_Protection_Api extends Component {
 		$nonce = wp_create_nonce( 'lockoutIPAction' );
 		if ( $ip != $log->ip ) {
 			if ( ! in_array( $log->ip, $blacklist ) ) {
-				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action" data-type="blacklist" data-id="' . $log->id . '" href="#">' . __( "Ban", wp_defender()->domain ) . '</a>';
+				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-primary button-small" data-type="blacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Ban IP", wp_defender()->domain ) . '</a>';
 			} else {
-				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action" data-type="unblacklist" data-id="' . $log->id . '" href="#">' . __( "Unban", wp_defender()->domain ) . '</a>';
+				$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-primary button-small" data-type="unblacklist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unban IP", wp_defender()->domain ) . '</a>';
 			}
 		}
 
 		if ( ! in_array( $log->ip, $whitelist ) ) {
-			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action" data-type="whitelist" data-id="' . $log->id . '" href="#">' . __( "Whitelist", wp_defender()->domain ) . '</a>';
+			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-secondary button-small" data-type="whitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Add Whitelist", wp_defender()->domain ) . '</a>';
 		} else {
-			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action" data-type="unwhitelist" data-id="' . $log->id . '" href="#">' . __( "Unwhitelist", wp_defender()->domain ) . '</a>';
+			$links[] = '<a data-nonce="' . $nonce . '" class="ip-action button button-secondary button-small" data-type="unwhitelist" data-id="' . esc_attr( $log->id ) . '" data-ip="' . esc_attr( $log->ip ) . '" href="#">' . __( "Unwhitelist", wp_defender()->domain ) . '</a>';
 		}
 
-		return implode( ' | ', $links );
+		return implode( '', $links );
 	}
 
 	/**
@@ -414,6 +441,7 @@ class Login_Protection_Api extends Component {
 				}
 			}
 		}
+
 		return false;
 	}
 
@@ -527,6 +555,33 @@ CREATE TABLE `{$tableName2}` (
 		if ( count( $check ) == 0 ) {
 			$sql = "ALTER TABLE " . $tableName2 . " ADD COLUMN `meta` text;";
 			$wpdb->query( $sql );
+		}
+	}
+
+	/**
+	 * @param $ip
+	 *
+	 * @return string|void
+	 */
+	public static function getIPStatusText( $ip ) {
+		if ( Settings::instance()->isWhitelist( $ip ) ) {
+			return __( "Is whitelisted", wp_defender()->domain );
+		}
+		if ( Settings::instance()->isBlacklist( $ip ) ) {
+			return __( "Is blacklisted", wp_defender()->domain );
+		}
+
+		$model = IP_Model::findOne( array(
+			'ip' => $ip
+		) );
+		if ( ! is_object( $model ) ) {
+			return __( "Not banned", wp_defender()->domain );
+		}
+
+		if ( $model->status == IP_Model::STATUS_BLOCKED ) {
+			return __( "Banned", wp_defender()->domain );
+		} elseif ( $model->status == IP_Model::STATUS_NORMAL ) {
+			return __( "Not banned", wp_defender()->domain );
 		}
 	}
 

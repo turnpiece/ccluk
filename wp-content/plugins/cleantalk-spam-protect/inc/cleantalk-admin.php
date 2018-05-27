@@ -206,7 +206,7 @@ function apbct_enqueue_scripts($hook) {
 	}
 	
 	// Scripts for comments check
-	if( $hook == 'comments_page_ct_check_spam' || $hook == 'edit-comments.php'){
+	if( $hook == 'comments_page_ct_check_spam' || $hook == 'edit-comments.php' || $hook == 'settings_page_cleantalk'){
 		
 		wp_enqueue_style('cleantalk_admin_css_settings_page', plugins_url('/cleantalk-spam-protect/css/cleantalk-spam-check.css'),       array(),         APBCT_VERSION, 'all');
 		wp_enqueue_style('jqueryui_css',                      plugins_url('/cleantalk-spam-protect/css/jquery-ui.min.css'),               array(),        '1.21.1',      'all');
@@ -533,7 +533,11 @@ function apbct_admin_init(){
 		add_settings_field('cleantalk_daily_conter', "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".__('Show 24 hours counter', 'cleantalk'), 'ct_input_daily_counter', 'cleantalk', 'cleantalk_settings_anti_spam');
 		add_settings_field('cleantalk_sfw_counter', "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;".__('SpamFireWall counter', 'cleantalk'), 'ct_input_sfw_counter', 'cleantalk', 'cleantalk_settings_anti_spam');
 		
-
+		// GDPR
+		// add_settings_field('cleantalk_collect_details', __('Collect details about browsers', 'cleantalk'), 'ct_input_collect_details', 'cleantalk', 'cleantalk_settings_anti_spam');
+		// add_settings_field('cleantalk_connection_reports', __('Send connection reports', 'cleantalk'), 'ct_send_connection_reports', 'cleantalk', 'cleantalk_settings_anti_spam');
+		
+		// Misc
 		add_settings_field('cleantalk_collect_details', __('Collect details about browsers', 'cleantalk'), 'ct_input_collect_details', 'cleantalk', 'cleantalk_settings_anti_spam');
 		add_settings_field('cleantalk_connection_reports', __('Send connection reports', 'cleantalk'), 'ct_send_connection_reports', 'cleantalk', 'cleantalk_settings_anti_spam');
 		add_settings_field('cleantalk_async_js', __('Async JavaScript loading', 'cleantalk'), 'ct_async_js', 'cleantalk', 'cleantalk_settings_anti_spam');
@@ -731,6 +735,16 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 			$ct_data['user_counter']['since'] = date('d M');
             update_option('cleantalk_data', $ct_data);
         }
+		//Reset or create all counters
+		if(!empty($_GET['ct_reset_all_counters'])){
+			$ct_data['sfw_counter']      = array('all' => 0, 'blocked' => 0);
+			$ct_data['all_time_counter'] = array('accepted' => 0, 'blocked' => 0);
+			$ct_data['user_counter']     = array('all' => 0, 'accepted' => 0, 'blocked' => 0, 'since' => date('d M'));
+			$ct_data['array_accepted']   = array();
+			$ct_data['array_blocked']    = array();
+			$ct_data['current_hour']     = '';
+            update_option('cleantalk_data', $ct_data);
+        }
 		if (!empty($_GET['ct_send_connection_report'])){
 			ct_mail_send_connection_report();
 		}		
@@ -789,14 +803,6 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 			);
 		}
 		$wp_admin_bar->add_node( $args );
-
-		// add a child item to our parent item. Support link.
-		$args = array(
-			'id'	 => 'ct_admin_bar_support_link',
-			'title'  => '<hr style="margin-top: 7px;" /><a target="_blank" href="https://wordpress.org/support/plugin/cleantalk-spam-protect">'.__('Support', 'cleantalk').'</a>',
-			'parent' => 'ct_parent_node'
-		);
-		$wp_admin_bar->add_node( $args );
 		
 		// add a child item to our parent item. Bulk checks.
 		if(!is_network_admin()){
@@ -818,10 +824,26 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 		}
 		$wp_admin_bar->add_node( $args );
 		
-        // add a child item to our parent item. Counter reset.
+        // User counter reset.
 		$args = array(
 			'id'	 => 'ct_reset_counter',
-			'title'  => '<hr style="margin-top: 7px;"><a href="?ct_reset_user_counter=1" title="Reset your personal counter of submissions.">'.__('Reset counter', 'cleantalk').'</a>',
+			'title'  => '<hr style="margin-top: 7px;"><a href="?ct_reset_user_counter=1" title="Reset your personal counter of submissions.">'.__('Reset first counter', 'cleantalk').'</a>',
+			'parent' => 'ct_parent_node'
+		);
+		$wp_admin_bar->add_node( $args );// add a child item to our parent item. Counter reset.
+		
+		// Reset ALL counter
+		$args = array(
+			'id'	 => 'ct_reset_counters_all',
+			'title'  => '<a href="?ct_reset_all_counters=1" title="Reset all counters.">'.__('Reset all counters', 'cleantalk').'</a>',
+			'parent' => 'ct_parent_node'
+		);
+		$wp_admin_bar->add_node( $args );
+		
+		// Support link
+		$args = array(
+			'id'	 => 'ct_admin_bar_support_link',
+			'title'  => '<hr style="margin-top: 7px;" /><a target="_blank" href="https://wordpress.org/support/plugin/cleantalk-spam-protect">'.__('Support', 'cleantalk').'</a>',
 			'parent' => 'ct_parent_node'
 		);
 		$wp_admin_bar->add_node( $args );
@@ -1065,14 +1087,23 @@ function ct_input_apikey() {
 			echo "<a target='__blank' style='' href='https://cleantalk.org/register?platform=wordpress&email=".urlencode(ct_get_admin_email())."&website=".urlencode(parse_url(get_option('siteurl'),PHP_URL_HOST))."'><input type='button' class='cleantalk_auto_link' value='".__('Get access key manually', 'cleantalk')."' /></a>";
 			if($ct_data['ip_license'] == 0){
 				echo "&nbsp;" .  __("or") . "&nbsp;";
-				echo '<input name="get_apikey_auto" type="submit" class="cleantalk_manual_link" value="' . __('Get access key automatically', 'cleantalk') . '" />';
+				echo '<input id="get_key_auto" name="get_apikey_auto" type="submit" class="cleantalk_manual_link" value="' . __('Get access key automatically', 'cleantalk') . '" />';
 			}
 			echo '<input id="ct_admin_timezone" name="ct_admin_timezone" type="hidden" value="null" />';
             echo "<br />";
             echo "<br />";
 			
 			ct_add_descriptions_to_fields(sprintf(__('Admin e-mail (%s) will be used for registration', 'cleantalk'), ct_get_admin_email()));
-			ct_add_descriptions_to_fields(sprintf('<a target="__blank" style="color:#BBB;" href="https://cleantalk.org/publicoffer">%s</a>', __('License agreement', 'cleantalk')));
+			echo '<div>';
+				echo '<input checked type="checkbox" id="license_agreed" onclick="spbcSettingsDependencies(\'get_key_auto\');"/>';
+				echo '<label for="spbc_license_agreed">';
+					printf(
+						__('I agree with %sPrivacy Policy%s of %sLicense Agreement%s', 'security-malware-firewall'),
+						'<a href="https://cleantalk.org/publicoffer#privacy" target="_blank" style="color:#66b;">', '</a>',
+						'<a href="https://cleantalk.org/publicoffer"         target="_blank" style="color:#66b;">', '</a>'
+					);
+				echo "</label>";
+			echo '</div>';
 		}
 	} else {
         $cleantalk_support_links = "<br /><div>";
@@ -1660,12 +1691,15 @@ function apbct_settings_page() {
 				// .' <a href="https://community.cleantalk.org/viewforum.php?f=25" target="_blank">'.__("Tech forum", 'cleantalk').'</a>'
 				// .($user_token ? ", <a href='https://cleantalk.org/my/support?user_token=$user_token&cp_mode=antispam' target='_blank'>".__("Service support ", 'cleantalk').'</a>' : '').
 					.'<br>';
-				echo __('Plugin Homepage at', 'cleantalk').' <a href="http://cleantalk.org" target="_blank">cleantalk.org</a>.<br />';
+				echo __('Plugin Homepage at', 'cleantalk').' <a href="http://cleantalk.org" target="_blank">cleantalk.org</a>.<br/>';
+				echo '<span id="apbct_gdpr_open_modal" style="text-decoration: underline;">'.__('GDPR compliance', 'cleantalk').'</span><br/>';
 				echo __('Use s@cleantalk.org to test plugin in any WordPress form.', 'cleantalk').'<br>';
-				echo __('CleanTalk is registered Trademark. All rights reserved.', 'cleantalk').'<br />';
+				echo __('CleanTalk is registered Trademark. All rights reserved.', 'cleantalk').'<br/>';
 				echo '<b style="display: inline-block; margin-top: 10px;">'.sprintf(__('Do you like CleanTalk? %sPost your feedback here%s.', 'cleantalk'), '<a href="https://wordpress.org/support/plugin/cleantalk-spam-protect/reviews/#new-post" target="_blank">', '</a>').'</b><br />';
 				ct_input_get_premium();
-				
+			echo '<div id="gdpr_dialog" style="display: none; padding: 7px;">';
+				apbct_show_GDPR_text();
+			echo '</div>';
 			echo '</div>';
 			echo '<form action="options.php" method="post">';
 			settings_fields('cleantalk_settings');
@@ -2043,6 +2077,31 @@ function ct_unmark_red($message) {
 	$message = preg_replace("/\<font rel\=\"cleantalk\" color\=\"\#FF1000\"\>(\S+)\<\/font>/iu", '$1', $message);
 
 	return $message;
+}
+
+function apbct_show_GDPR_text(){
+?>
+	<p>The notice requirements remain and are expanded. They must include the retention time for personal data, and contact information for data controller and data protection officer has to be provided.</p>
+
+	<p>Automated individual decision-making, including profiling (Article 22) is contestable, similarly to the Data Protection Directive (Article 15). Citizens have rights to question and fight significant decisions that affect them that have been made on a solely-algorithmic basis. Many media outlets have commented on the introduction of a "right to explanation" of algorithmic decisions, but legal scholars have since argued that the existence of such a right is highly unclear without judicial tests and is limited at best.</p>
+
+	<p>To be able to demonstrate compliance with the GDPR, the data controller should implement measures, which meet the principles of data protection by design and data protection by default. Privacy by design and by default (Article 25) require data protection measures to be designed into the development of business processes for products and services. Such measures include pseudonymising personal data, by the controller, as soon as possible (Recital 78).</p>
+
+	<p>It is the responsibility and the liability of the data controller to implement effective measures and be able to demonstrate the compliance of processing activities even if the processing is carried out by a data processor on behalf of the controller (Recital 74).</p>
+
+	<p>Data Protection Impact Assessments (Article 35) have to be conducted when specific risks occur to the rights and freedoms of data subjects. Risk assessment and mitigation is required and prior approval of the national data protection authorities (DPAs) is required for high risks. Data protection officers (Articles 37–39) are required to ensure compliance within organisations.</p>
+
+	<p>They have to be appointed:</p>
+	<ul style="padding: 0px 25px; list-style: disc;">
+		<li>for all public authorities, except for courts acting in their judicial capacity</li>
+		<li>if the core activities of the controller or the processor are:</li>
+			<ul style="padding: 0px 25px; list-style: disc;">
+				<li>processing operations, which, by virtue of their nature, their scope and/or their purposes, require regular and systematic monitoring of data subjects on a large scale</li>
+				<li>processing on a large scale of special categories of data pursuant to Article 9 and personal data relating to criminal convictions and offences referred to in Article 10';</li>
+			</ul>
+		</li>
+	</ul>
+	<?php
 }
 
 ?>

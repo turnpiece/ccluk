@@ -2334,8 +2334,17 @@ function ct_enqueue_scripts_public($hook){
 	$ct_options = ct_get_options();
 	$ct_data = ct_get_data();
 	
-	if(!empty($ct_options['registrations_test']) || !empty($ct_options['comments_test']) || !empty($ct_options['contact_forms_test']) || !empty($ct_options['general_contact_forms_test']) || !empty($ct_options['wc_checkout_test']) || !empty($ct_options['check_external']) || !empty($ct_options['check_internal']) || !empty($ct_options['bp_private_messages']) || !empty($ct_options['general_postdata_test']))
-		wp_enqueue_script('ct_public',  plugins_url('/cleantalk-spam-protect/js/apbct-public.js'),                        array(),          APBCT_VERSION, 'in_footer');
+	if(!empty($ct_options['registrations_test']) || !empty($ct_options['comments_test']) || !empty($ct_options['contact_forms_test']) || !empty($ct_options['general_contact_forms_test']) || !empty($ct_options['wc_checkout_test']) || !empty($ct_options['check_external']) || !empty($ct_options['check_internal']) || !empty($ct_options['bp_private_messages']) || !empty($ct_options['general_postdata_test'])){
+		
+		wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery'), APBCT_VERSION);
+		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array('jquery'), APBCT_VERSION, 'in_footer');
+		
+		wp_localize_script('ct_public_gdpr', 'ctPublic', array(
+			'gdpr_forms'   => isset($ct_options['gdpr_forms_id']) ? explode(', ', $ct_options['gdpr_forms_id']) : array(),
+			'gdpr_text'  => isset($ct_options['gdpr_text'])       ? $ct_options['gdpr_text']                    : __('By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.', 'cleantalk'),
+		));
+		
+	}
 	
 	if(!defined('CLEANTALK_AJAX_USE_FOOTER_HEADER') || (defined('CLEANTALK_AJAX_USE_FOOTER_HEADER') && CLEANTALK_AJAX_USE_FOOTER_HEADER)){
 		if(!empty($ct_options['use_ajax']) && stripos($_SERVER['REQUEST_URI'],'.xml') === false && stripos($_SERVER['REQUEST_URI'],'.xsl') === false){
@@ -2371,7 +2380,7 @@ function ct_enqueue_scripts_public($hook){
 			wp_enqueue_style ('ct_public_admin_css', plugins_url('/cleantalk-spam-protect/css/cleantalk-public-admin.css'), array(),         APBCT_VERSION, 'all');
 			wp_enqueue_script('ct_public_admin_js',  plugins_url('/cleantalk-spam-protect/js/cleantalk-public-admin.js'),   array('jquery'), APBCT_VERSION, true);
 			
-			wp_localize_script('ct_public_admin_js', 'ctPublic', array(
+			wp_localize_script('ct_public_admin_js', 'ctPublicAdmin', array(
 				'ct_ajax_nonce'               => $ajax_nonce,
 				'ajaxurl'                     => admin_url('admin-ajax.php'),
 				'ct_feedback_error'           => __('Error occured while sending feedback.', 'cleantalk'),
@@ -2402,6 +2411,7 @@ function apbct_add_async_attribute($tag, $handle, $src) {
 		!empty($ct_options['async_js']) &&
 		(
 			   $handle === 'ct_public'
+			|| $handle === 'ct_public_gdpr'
 			|| $handle === 'ct_debug_js'
 			|| $handle === 'ct_public_admin_js'
 			|| $handle === 'ct_internal'
@@ -2481,5 +2491,24 @@ function ct_comments_output($curr_comment, $param2, $wp_list_comments_args){
 	
 	// Ending comment output
 	echo "</{$wp_list_comments_args['style']}>";
+}
+
+/**
+ * Callback function for the bootom comment output.
+ *
+ * attrs = array()
+ */
+function apbct_shrotcode_hadler__GDPR_public_notice__form( $attrs ){
+	
+	$out = '';
+	
+	if(isset($attrs['id']))
+		$out .= 'ctPublic.gdpr_forms.push("'.$attrs['id'].'");';
+	
+	if(isset($attrs['text']))
+		$out .= 'ctPublic.gdpr_text = "'.$attrs['text'].'";';
+	
+	$out = '<script>'.$out.'</script>';
+	return $out;
 }
 ?>

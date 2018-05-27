@@ -231,10 +231,17 @@ class Main extends \WP_Defender\Controller {
 			$params = $this->prepareAuditParams();
 			$data   = Audit_API::pullLogs( $params );
 			$table  = $this->_renderTable( $data );
-			wp_send_json_success( array(
-				'html'  => $table,
-				'count' => is_array( $data ) ? $data['total_items'] : 0
-			) );
+			if ( ! is_wp_error( $data ) ) {
+				wp_send_json_success( array(
+					'html'  => $table,
+					'count' => is_array( $data ) ? $data['total_items'] : 0
+				) );
+			} else {
+				wp_send_json_error( array(
+					'html'  => $table,
+					'count' => 0
+				) );
+			}
 		}
 	}
 
@@ -654,18 +661,18 @@ class Main extends \WP_Defender\Controller {
 
 		$radius = 2;
 		if ( $current_page > 1 && $total_pages > $radius ) {
-			$links['first'] = sprintf( '<a class="button button-light" data-paged="%s" href="%s">%s</a>',
+			$links['first'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
 				1, add_query_arg( 'paged', 1, $current_url ), '&laquo;' );
-			$links['prev']  = sprintf( '<a class="button button-light" data-paged="%s" href="%s">%s</a>',
+			$links['prev']  = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
 				$current_page - 1, add_query_arg( 'paged', $current_page - 1, $current_url ), '&lsaquo;' );
 		}
 
 		for ( $i = 1; $i <= $total_pages; $i ++ ) {
 			if ( ( $i >= 1 && $i <= $radius ) || ( $i > $current_page - 2 && $i < $current_page + 2 ) || ( $i <= $total_pages && $i > $total_pages - $radius ) ) {
 				if ( $i == $current_page ) {
-					$links[ $i ] = sprintf( '<a href="#" class="button button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
+					$links[ $i ] = sprintf( '<a href="#" class="button button-small button-light" data-paged="%s" disabled="">%s</a>', $i, $i );
 				} else {
-					$links[ $i ] = sprintf( '<a class="button button-light" data-paged="%s" href="%s">%s</a>',
+					$links[ $i ] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
 						$i, add_query_arg( 'paged', $i, $current_url ), $i );
 				}
 			} elseif ( $i == $current_page - $radius || $i == $current_page + $radius ) {
@@ -674,9 +681,9 @@ class Main extends \WP_Defender\Controller {
 		}
 
 		if ( $current_page < $total_pages && $total_pages > $radius ) {
-			$links['next'] = sprintf( '<a class="button button-light" data-paged="%s" href="%s">%s</a>',
+			$links['next'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
 				$current_page + 1, add_query_arg( 'paged', $current_page + 1, $current_url ), '&rsaquo;' );
-			$links['last'] = sprintf( '<a class="button button-light" data-paged="%s" href="%s">%s</a>',
+			$links['last'] = sprintf( '<a class="button button-small button-light" data-paged="%s" href="%s">%s</a>',
 				$total_pages, add_query_arg( 'paged', $total_pages, $current_url ), '&raquo;' );
 		}
 		$output = join( "\n", $links );

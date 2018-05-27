@@ -52,6 +52,7 @@ class WD_Main_Activator {
 			\Hammer\Base\Container::instance()->set( 'audit', new \WP_Defender\Module\Audit() );
 			\Hammer\Base\Container::instance()->set( 'lockout', new \WP_Defender\Module\IP_Lockout() );
 			\Hammer\Base\Container::instance()->set( 'advanced_tool', new \WP_Defender\Module\Advanced_Tools() );
+			\Hammer\Base\Container::instance()->set( 'gdpr', new \WP_Defender\Controller\GDPR() );
 			//no need to set debug
 			new \WP_Defender\Controller\Debug();
 		}

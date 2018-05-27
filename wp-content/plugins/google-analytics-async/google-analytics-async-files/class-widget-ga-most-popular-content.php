@@ -1,6 +1,6 @@
 <?php
 // Widget for Subscribe
-class GAPGoogle_Analytics_Async_Frontend_Widget extends WP_Widget {
+class Google_Analytics_Async_Frontend_Widget extends WP_Widget {
     //constructor
     function __construct() {
         global $google_analytics_async_dashboard;
@@ -8,7 +8,7 @@ class GAPGoogle_Analytics_Async_Frontend_Widget extends WP_Widget {
         $this->text_domain = $google_analytics_async_dashboard->text_domain;
 
         $widget_ops = array( 'description' => __( 'Your site\'s most popular posts', $this->text_domain) );
-        parent::__construct( false, __( 'Most popular posts (beta)', $this->text_domain ), $widget_ops );
+        parent::__construct( false, __( 'Most popular posts', $this->text_domain ), $widget_ops );
     }
 
     /** @see WP_Widget::widget */

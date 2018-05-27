@@ -1,0 +1,658 @@
+# Copyright (C) 2016 freemius
+# This file is distributed under the same license as the freemius package.
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: Google Analytics\n"
+"Report-Msgid-Bugs-To: https://github.com/Freemius/wordpress-sdk/issues\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Vova Feldman <vova@freemius.com>\n"
+"Language-Team: \n"
+"X-Poedit-Basepath: ../..\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"POT-Creation-Date: \n"
+"X-Generator: Poedit 2.0.5\n"
+"X-Poedit-SearchPath-0: google-analytics-async-files\n"
+"X-Poedit-SearchPath-1: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
+msgid "Month"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
+msgid "Week"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:191
+msgid "Day"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:197
+msgid "Problem loading data"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:219
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:223
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:921
+msgid "Statistics"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:240
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:260
+msgid "Statistics - Last 30 Days"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:267
+#, php-format
+msgid "Google Analytics dashboard statistics require reauthentication. You can do it <a href=\"%s\">here</a> and this message will disappear."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:270
+#, php-format
+msgid "Google Analytics dashboard network statistics require reauthentication. You can do it <a href=\"%s\">here</a> and this message will disappear."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:383
+msgid "You are successfuly logged in."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:396
+msgid "Authorisation error."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:403
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:648
+msgid "Cheatin&#8217; uh?"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:415
+msgid "Logout successful!"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:686
+msgid "Please logout and login to Google Account."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:688
+msgid "Error loading data."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:695
+msgid "Jan"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:696
+msgid "Feb"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:697
+msgid "Mar"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:698
+msgid "Apr"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:699
+msgid "May"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:700
+msgid "Jun"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:701
+msgid "Jul"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:702
+msgid "Aug"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:703
+msgid "Sep"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:704
+msgid "Oct"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:705
+msgid "Nov"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:706
+msgid "Dec"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+msgid "Date"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:830
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1011
+msgid "Pageviews"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:756
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:828
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:856
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:877
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:953
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:978
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1009
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1031
+msgid "Visits"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:708
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:829
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1010
+msgid "Unique Visitors"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:756
+msgid "Country"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:802
+msgid "Load Post Stats"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:802
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:804
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:900
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1120
+msgid "Loading..."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:805
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:808
+msgid "See All Stats"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:831
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1012
+msgid "Pages / Visit"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:832
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1013
+msgid "Bounce Rate"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:833
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1014
+msgid "Avg. Visit Dur."
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:834
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1015
+msgid "New Visits"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:855
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:952
+msgid "Top Searches"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:876
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:977
+msgid "Top Referrals"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:907
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:922
+msgid "Last Month"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:909
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:923
+msgid "Last 3 Months"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:911
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:924
+msgid "Last Year"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:933
+msgid "Visitors: Country"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:942
+msgid "Referrers"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:966
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:990
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1058
+msgid "Data is not available yet"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1004
+msgid "Visitors"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1024
+msgid "Content"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1030
+msgid "Top Posts / Pages"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1032
+msgid "Unique"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1033
+msgid "Views"
+msgstr ""
+
+#: google-analytics-async-files/class-google-analytics-async-dashboard.php:1111
+msgid "No data yet"
+msgstr ""
+
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:10
+msgid "Your site's most popular posts"
+msgstr ""
+
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:11
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:65
+msgid "Most popular posts"
+msgstr ""
+
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:71
+msgid "Title"
+msgstr ""
+
+#: google-analytics-async-files/class-widget-ga-most-popular-content.php:75
+msgid "Maximum number of posts to show:"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:223
+msgid "install"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:230
+#, php-format
+msgid "Important updates are available for <strong>%s</strong>. Install the free WPMU DEV Dashboard plugin now for updates and support!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:232
+#, php-format
+msgid "<strong>%s</strong> is almost ready - install the free WPMU DEV Dashboard plugin for updates and support!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:236
+msgid "Important updates are available for your WPMU DEV plugins/themes. Install the free WPMU DEV Dashboard plugin now for updates and support!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:238
+msgid "Almost ready - install the free WPMU DEV Dashboard plugin for updates and support!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:244
+msgid "Install Plugin"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:247
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:288
+msgid "Saving..."
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:248
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:289
+msgid "Dismiss"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:264
+msgid "activate"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:271
+#, php-format
+msgid "Important updates are available for <strong>%s</strong>. Activate the WPMU DEV Dashboard to update now!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:273
+#, php-format
+msgid "Just one more step to enable updates and support for <strong>%s</strong>!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:277
+msgid "Important updates are available for your WPMU DEV plugins/themes. Activate the WPMU DEV Dashboard to update now!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:279
+msgid "Just one more step - activate the WPMU DEV Dashboard plugin and you're all done!"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:285
+msgid "Activate WPMU DEV Dashboard"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:952
+msgid "We did not find any data for this plugin or theme..."
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1131
+#, php-format
+msgid "%s changelog"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1161
+msgid "Current"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1167
+msgid "New"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1184
+#, php-format
+msgid "Version %s"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1202
+msgid "Show all changes"
+msgstr ""
+
+#: google-analytics-async-files/externals/dash-notice/wpmudev-dash-notification.php:1203
+msgid "Hide details"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:2
+msgid "Google Analytics"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:15
+#: google-analytics-async-files/page-settings.php:228
+msgid "Google Analytics is the enterprise-class web analytics solution that gives you rich insights into your website traffic and marketing effectiveness. Powerful, flexible and easy-to-use features now let you see and analyze your traffic data in an entirely new way. With Google Analytics, you're more prepared to write better-targeted ads, strengthen your marketing initiatives and create higher converting websites."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:17
+#: google-analytics-async-files/page-settings.php:229
+msgid "To get going, just <a href=\"http://www.google.com/analytics/\">sign up for Google Analytics</a>, set up a new account and log in with the button below to automatically configure basic settings. You may have to manually adjust settings if necessary."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:17
+#: google-analytics-async-files/page-settings.php:229
+msgid "Please keep in mind that it can take several hours before you see any stats."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:19
+msgid "Basic Network Tracking Settings"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:24
+#: google-analytics-async-files/page-settings.php:242
+msgid "Get access to google analytics account to automatically get tracking code for this website and enable access to network statistics inside WordPress Admin Dashboard."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:24
+msgid "You can do it in two ways:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:25
+msgid "Easily <button class=\"button button-secondary open-module-options\" data-module=\"code\">get access code</button> or <button class=\"button button-secondary open-module-options\" data-module=\"api_project\">set up Google API project</button>"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:30
+msgid "Google Client ID:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:31
+msgid "Google Client Secret:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:32
+msgid "Google API key:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:35
+#: google-analytics-async-files/page-settings.php:44
+#: google-analytics-async-files/page-settings.php:254
+msgid "Authorize"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:41
+#: google-analytics-async-files/page-settings.php:251
+#, php-format
+msgid "Login and get access code <a target=\"_blank\" href=\"%s\">here</a>."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:42
+#: google-analytics-async-files/page-settings.php:252
+msgid "Input access code: "
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:48
+msgid "Access code is quicker solution but setting up Google API project is more suitable for high traffic website and will result in smoother experience for site admins (whole login process will be automatic, no access code copy pasting). You can read more about setting Google API project <a target=\"_blank\" href=\"http://premium.wpmudev.org/project/google-analytics-for-wordpress-mu-sitewide-and-single-blog-solution/#product-usage\">here</a> under \"usage\""
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:52
+#: google-analytics-async-files/page-settings.php:261
+msgid "Logout from Google account"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:60
+msgid "Network-wide Tracking Code"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:63
+msgid "Your Google Analytics tracking code. Ex: UA-XXXXX-X. The Network-wide tracking code will track your entire network of sub-sites."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:67
+msgid "Google Analytics Statistics inside WordPress Dashboard For All Sites In Network"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:78
+msgid "Choose correct Google Analytics profile to use for displaying statistics inside WordPress admin panel. Please make sure that this is a profile used for network wide tracking."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:84
+#: google-analytics-async-files/page-settings.php:293
+msgid "You do not have any Google Analytics profiles to choose from. Please <a href=\"http://www.google.com/analytics/\">create</a> new one."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:88
+msgid "You need to login to google with the button above to enable this functionality."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:97
+msgid "Admin pages tracking"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:99
+#: google-analytics-async-files/page-settings.php:113
+#: google-analytics-async-files/page-settings.php:124
+#: google-analytics-async-files/page-settings.php:311
+#: google-analytics-async-files/page-settings.php:322
+msgid "Enable"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:101
+#: google-analytics-async-files/page-settings.php:116
+#: google-analytics-async-files/page-settings.php:126
+#: google-analytics-async-files/page-settings.php:177
+#: google-analytics-async-files/page-settings.php:196
+#: google-analytics-async-files/page-settings.php:313
+#: google-analytics-async-files/page-settings.php:324
+msgid "Disable"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:106
+msgid "Advanced Network Tracking Settings"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:111
+#: google-analytics-async-files/page-settings.php:309
+msgid "IP Anonymization"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:114
+msgid "Force on sub-sites tracking"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:117
+msgid "When enabled, the IP address of the visitor will be anonymized. You can read more about it <a href=\"https://support.google.com/analytics/answer/2763052?hl=en\">here</a>. It is also possible to force IP Anonymization for all sub-sites tracking configurations."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:122
+#: google-analytics-async-files/page-settings.php:320
+msgid "Support Display Advertising"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:127
+msgid "This feature allows you to add demographics and interests reporting to Google Analytics. You can read more about it <a href=\"https://support.google.com/analytics/answer/3450482?hl=en&ref_topic=3413645&rd=1\">here</a>. Please keep in mind that it requires <a href=\"https://support.google.com/analytics/answer/2700409\">updating your privacy policy</a> on all sites in network."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:132
+#: google-analytics-async-files/page-settings.php:334
+msgid "Minimum role or capability to view Google Analytics Statistics inside WordPress Dashboard"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:135
+#: google-analytics-async-files/page-settings.php:337
+msgid "Select minimum role:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:141
+msgid "Super Administrator"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:142
+#: google-analytics-async-files/page-settings.php:343
+msgid "Administrator"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:143
+#: google-analytics-async-files/page-settings.php:344
+msgid "Editor"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:144
+#: google-analytics-async-files/page-settings.php:345
+msgid "Author"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:145
+#: google-analytics-async-files/page-settings.php:346
+msgid "Contributor"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:146
+#: google-analytics-async-files/page-settings.php:347
+msgid "Subscriber"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:155
+#: google-analytics-async-files/page-settings.php:356
+msgid "...or set custom capability:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:159
+msgid "Allow site admins to overwrite this setting:"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:159
+msgid "No"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:159
+msgid "Yes"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:161
+#: google-analytics-async-files/page-settings.php:359
+msgid "Choose minimum role or set custom capability (leave blank to disable) required to see Google Analytics Statistics inside WordPress Dashboard."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:161
+msgid "You can also allow admistrators to overwrite this setting for the sites they control."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:172
+msgid "Minimum Pro Site level for use of Google Analytics features"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:186
+msgid "Enable use of Google Analytics features for sites with selected minimum Pro Site level."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:191
+msgid "Minimum Pro Site level for Google Analytics Statistics inside WordPress Dashboard"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:205
+msgid "Enable network-wide tracking code based Google Analytics Statistics inside WordPress Dashboard for sites with selected minimum Pro Site level."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:217
+#: google-analytics-async-files/page-settings.php:370
+msgid "Save Changes"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:234
+msgid "Basic Site Tracking Settings"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:244
+#: google-analytics-async-files/page-settings.php:246
+msgid "Login with google account"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:246
+msgid "and get access code"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:268
+msgid "Site Tracking Code"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:272
+msgid "Your Google Analytics tracking code. Ex: UA-XXXXX-X. The Site tracking code will track this site. For more information on finding the tracking code, please visit <a href=\"https://support.google.com/analytics/answer/1032385?rd=1\">this</a> site."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:276
+msgid "Custom Google Analytics Statistics inside WordPress Dashboard"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:281
+msgid "Currently ."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:290
+msgid "Choose your own Google Analytics profile to use for displaying statistics inside WordPress admin panel."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:297
+msgid "You need to login to google with the button above to use your profile for displaying statistics."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:305
+msgid "Advanced Site Tracking Settings"
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:314
+msgid "When enabled, the IP address of the visitor will be anonymized. You can read more about it <a href=\"https://support.google.com/analytics/answer/2763052?hl=en\">here</a>."
+msgstr ""
+
+#: google-analytics-async-files/page-settings.php:325
+msgid "This feature allows you to add demographics and interests reporting to Google Analytics. You can read more about it <a href=\"https://support.google.com/analytics/answer/3450482?hl=en&ref_topic=3413645&rd=1\">here</a>. Please keep in mind that it requires <a href=\"https://support.google.com/analytics/answer/2700409\">updating your privacy policy</a>."
+msgstr ""
+
+#: google-analytics-async.php:257 google-analytics-async.php:265
+msgid "Changes were saved!"
+msgstr ""

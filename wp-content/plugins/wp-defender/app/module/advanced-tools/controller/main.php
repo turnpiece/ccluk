@@ -37,6 +37,8 @@ class Main extends Controller {
 			$this->add_action( 'defender_enqueue_assets', 'scripts', 11 );
 		}
 		$this->add_ajax_action( 'saveAdvancedSettings', 'saveSettings' );
+		$this->add_ajax_action( 'saveTwoFactorOPTEmail', 'saveTwoFactorOPTEmail' );
+		$this->add_ajax_action( 'testTwoFactorOPTEmail', 'testTwoFactorOPTEmail' );
 		$this->add_action( 'update_option_jetpack_active_modules', 'listenForJetpackOption', 10, 3 );
 		$setting = Auth_Settings::instance();
 		if ( $setting->enabled ) {
@@ -232,8 +234,24 @@ class Main extends Controller {
 		$code = Auth_API::createBackupCode( $user->ID );
 		//send email
 		$backupEmail = Auth_API::getBackupEmail( $user->ID );
+
+		$settings = Auth_Settings::instance();
+		$subject  = ! empty( $settings->email_subject ) ? esc_attr( $settings->email_subject ) : __( 'Your OTP code', wp_defender()->domain );
+		$sender   = ! empty( $settings->email_sender ) ? esc_attr( $settings->email_sender ) : false;
+		$body     = ! empty( $settings->email_body ) ? $settings->email_body : $settings->two_factor_opt_email_default_body();
+		$body     = $this->replace_email_vars( $body, array(
+			'display_name' => $user->display_name,
+			'passcode'     => $code,
+		) );
+		$headers  = array( 'Content-Type: text/html; charset=UTF-8' );
+		if ( $sender ) {
+			$from_email = get_bloginfo( 'admin_email' );
+			$headers[]  = sprintf( 'From: %s <%s>', $sender, $from_email );
+		}
+
 		//send
-		wp_mail( $backupEmail, 'Your OTP code', $code );
+		wp_mail( $backupEmail, $subject, $body, $headers );
+
 		wp_send_json_success( array(
 			'message' => __( "Your code has been sent to your email.", wp_defender()->domain )
 		) );
@@ -505,6 +523,10 @@ class Main extends Controller {
 			wp_enqueue_script( 'defender' );
 			wp_enqueue_style( 'defender' );
 			wp_enqueue_script( 'adtools', wp_defender()->getPluginUrl() . 'app/module/advanced-tools/js/scripts.js' );
+			$data = array(
+				'edit_email_title' => __( 'Edit Email', wp_defender()->domain ),
+			);
+			wp_localize_script( 'adtools', 'defender_adtools', $data );
 		}
 	}
 
@@ -534,5 +556,111 @@ class Main extends Controller {
 		$res['reload'] = 1;
 		Utils::instance()->submitStatsToDev();
 		wp_send_json_success( $res );
+	}
+
+	/**
+	 * Saving email settings in admin area
+	 */
+	public function saveTwoFactorOPTEmail() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'twoFactorOPTEmail' ) ) {
+			return;
+		}
+
+		$data    = $_POST;
+		$subject = ! empty( $data['subject'] ) ? esc_attr( $data['subject'] ) : __( 'Your OTP code', wp_defender()->domain );
+		$sender  = ! empty( $data['sender'] ) ? esc_attr( $data['sender'] ) : false;
+		$body    = ! empty( $data['body'] ) ? $data['body'] : false;
+
+		if ( false === strpos( $body, '{{passcode}}' ) ) {
+			wp_send_json_error( array(
+				'message' => sprintf( __( '%s variable was not found in mail body.', wp_defender()->domain ), '{{passcode}}' ),
+			) );
+		}
+		$email_settings['email_subject'] = $subject;
+		$email_settings['email_sender']  = $sender;
+		$email_settings['email_body']    = $body;
+
+		$setting = Auth_Settings::instance();
+		$setting->import( $email_settings );
+		$setting->save();
+
+		$res           = array(
+			'message' => __( 'Email settings has been saved.', wp_defender()->domain )
+		);
+		$res['reload'] = 1;
+		Utils::instance()->submitStatsToDev();
+		wp_send_json_success( $res );
+	}
+
+	/**
+	 * Test OPT email.
+	 */
+	public function testTwoFactorOPTEmail() {
+		if ( ! $this->checkPermission() ) {
+			return;
+		}
+
+		if ( ! wp_verify_nonce( HTTP_Helper::retrieve_post( '_wpnonce' ), 'twoFactorOPTEmail' ) ) {
+			return;
+		}
+
+		$user = wp_get_current_user();
+		//create a backup code for this user
+		$code = Auth_API::createBackupCode( $user->ID );
+		//send email
+		$backup_email = Auth_API::getBackupEmail( $user->ID );
+
+		$data    = $_POST;
+		$subject = ! empty( $data['subject'] ) ? esc_attr( $data['subject'] ) : __( 'Your OTP code', wp_defender()->domain );
+		$sender  = ! empty( $data['sender'] ) ? esc_attr( $data['sender'] ) : false;
+		$body    = ! empty( $data['body'] ) ? $data['body'] : false;
+
+		if ( false === strpos( $body, '{{passcode}}' ) ) {
+			wp_send_json_error( array(
+				'message' => sprintf( __( '%s variable was not found in mail body.', wp_defender()->domain ), '{{passcode}}' ),
+			) );
+		}
+		$body    = $this->replace_email_vars( $body, array(
+			'display_name' => $user->display_name,
+			'passcode'     => $code,
+		) );
+		$headers = array( 'Content-Type: text/html; charset=UTF-8' );
+		if ( $sender ) {
+			$from_email = get_bloginfo( 'admin_email' );
+			$headers[]  = sprintf( 'From: %s <%s>', $sender, $from_email );
+		}
+
+		//send
+		$send_mail = wp_mail( $backup_email, $subject, $body, $headers );
+		if ( $send_mail ) {
+			wp_send_json_success( array(
+				'message' => __( 'Test email has been sent to your email.', wp_defender()->domain ),
+			) );
+		} else {
+			wp_send_json_error( array(
+				'message' => __( 'Test email failed.', wp_defender()->domain ),
+			) );
+		}
+	}
+
+	/**
+	 * Replace email variables.
+	 * @param  string $content Content to replace.
+	 * @param  array  $values  Variables values.
+	 * @return string
+	 */
+	public function replace_email_vars( $content, $values ) {
+		$content = apply_filters( 'the_content', $content );
+		$tags = array( 'display_name', 'passcode' );
+		foreach ( $tags as $key => $tag ) {
+			$upper_tag = strtoupper( $tag );
+			$content   = str_replace( '{{' . $upper_tag . '}}', $values[ $tag ], $content );
+			$content   = str_replace( '{{' . $tag . '}}', $values[ $tag ], $content );
+		}
+		return $content;
 	}
 }

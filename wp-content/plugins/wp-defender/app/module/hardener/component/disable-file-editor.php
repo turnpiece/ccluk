@@ -88,7 +88,7 @@ class Disable_File_Editor extends Rule {
 	function current_screen() {
 		$current_screen = get_current_screen();
 		if( $current_screen->id == 'theme-editor-network' || $current_screen->id == 'theme-editor' ){
-			wp_die('<p>'.__('Sorry, you are not allowed to edit templates for this site.').'</p>');	   			 	 		  		  	 	
+			wp_die('<p>'.__('Sorry, you are not allowed to edit templates for this site.').'</p>');
 		}
 		if( $current_screen->id == 'plugin-editor-network' || $current_screen->id == 'plugin-editor' ){
 			wp_die('<p>'.__('Sorry, you are not allowed to edit plugins for this site.').'</p>');

@@ -51,7 +51,7 @@ a.ct_support_link{
 	}
 		.ct_button_rate:hover,
 		.ct_button_rate:focus {
-			border: 1px solid ##297bbe;
+			border: 1px solid #297bbe;
 			background: #40c0ff;
 			background: -webkit-gradient(linear, left top, left bottom, from(#40c0ff), to(#2876b6));
 			background: -moz-linear-gradient(top, #40c0ff, #2876b6);

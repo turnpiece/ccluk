@@ -6,9 +6,26 @@ Contributors: Ivan Shaovchev, Andrey Shipilov
 
 == Changelog ==
 
-= 3.1.6 =
+= 3.1.7.1 =
+* Fixed backward compatibility
+
+= 3.1.7 =
+* Added ability to force IP Anonymization on sub-sites tracking
+* Added "ga_load_tracking" filter to be able to disabled tracking on demand
+* Added "gaplus_track" JS function to be able to turn on tracking when it has been disabled
+* Added privacy guide support
+* Improved accessibility
+* Removed deprecated Google authorization code
+* Removed old tracking method
+* Removed domain mapping option
+* Other small improvements
+
+ = 3.1.6 =
+
 * Fix: use async loading for Google visualization API
-* Fix: only draw cisitors table if we have actual data
+
+* Fix: only draw visitors table if we have actual data
+
 
 = 3.1.5.6 =
 * Fixed Google Analytics API compatibility issue
@@ -172,4 +189,4 @@ Contributors: Ivan Shaovchev, Andrey Shipilov
 
 
 
-87274-1525113156-ai
+87274-1527448822-au
