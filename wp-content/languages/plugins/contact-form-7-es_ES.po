@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-17 01:08:34+0000\n"
+"PO-Revision-Date: 2018-05-22 00:22:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,35 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: es\n"
 "Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: admin/edit-contact-form.php:193
+msgid "Professional Services"
+msgstr "Servicios profesionales"
+
+#: admin/edit-contact-form.php:192
+msgid "https://contactform7.com/custom-development/"
+msgstr "https://contactform7.com/custom-development/"
+
+#: admin/edit-contact-form.php:188
+msgid "Support Forums"
+msgstr "Foros de soporte"
+
+#: admin/edit-contact-form.php:187
+msgid "https://wordpress.org/support/plugin/contact-form-7/"
+msgstr "https://wordpress.org/support/plugin/contact-form-7/"
+
+#. translators: 1: FAQ, 2: Docs ("FAQ & Docs")
+#: admin/edit-contact-form.php:176
+msgid "%1$s &#38; %2$s"
+msgstr "%1$s &#38; %2$s"
+
+#: admin/edit-contact-form.php:172
+msgid "Here are some available options to help solve your problems."
+msgstr "Aquí tienes algunas opciones disponibles para ayudarte a resolver tus problemas."
+
+#: admin/edit-contact-form.php:170
+msgid "Do you need help?"
+msgstr "¿Necesitas ayuda?"
 
 #: modules/acceptance.php:243
 msgid "Condition"
@@ -62,21 +91,21 @@ msgid "https://contactform7.com/editing-form-template/"
 msgstr "https://contactform7.com/editing-form-template/"
 
 #. translators: screen reader text
-#: admin/edit-contact-form.php:192
+#: admin/edit-contact-form.php:212
 msgid "(left and right arrow)"
 msgstr "(flecha izquierda y derecha)"
 
 #. translators: 1: ◀ ▶ dashicon, 2: screen reader text for the dashicon
-#: admin/edit-contact-form.php:187
+#: admin/edit-contact-form.php:207
 msgid "%1$s %2$s keys switch panels"
 msgstr "Las teclas %1$s %2$s cambian de panel"
 
 #. translators: screen reader text
-#: admin/admin.php:326
+#: admin/admin.php:327
 msgid "(configuration error)"
 msgstr "(error de configuración)"
 
-#: admin/admin.php:319
+#: admin/admin.php:320
 msgid "How to resolve?"
 msgstr "¿Cómo se resuelve?"
 
@@ -177,23 +206,23 @@ msgid_plural "%s configuration errors detected"
 msgstr[0] "%s error de configuración detectado"
 msgstr[1] "%s errores de configuración detectados"
 
-#: admin/admin.php:323
+#: admin/admin.php:324
 msgid "%d configuration errors detected in this tab panel"
 msgstr "%d errores de configuración detectdos en esta pestaña"
 
-#: admin/admin.php:322
+#: admin/admin.php:323
 msgid "1 configuration error detected in this tab panel"
 msgstr "Se ha detectado un error de configuración en esta pestaña"
 
-#: admin/admin.php:321
+#: admin/admin.php:322
 msgid "%d configuration errors detected"
 msgstr "%d errores de configuración detectados"
 
-#: admin/admin.php:320
+#: admin/admin.php:321
 msgid "1 configuration error detected"
 msgstr "1 error de configuración detectado"
 
-#: admin/admin.php:509 includes/rest-api.php:138 includes/rest-api.php:214
+#: admin/admin.php:510 includes/rest-api.php:138 includes/rest-api.php:214
 msgid "There was an error saving the contact form."
 msgstr "Hubo un error guardado en formulario de contacto."
 
@@ -244,11 +273,11 @@ msgstr "¿Recibes spam? Puedes protegerte."
 msgid "Multiple form controls are in a single label element."
 msgstr "Hay varios controles de formulario en un solo elemento de etiqueta."
 
-#: admin/admin.php:428
+#: admin/admin.php:429
 msgid "FAQ about Configuration Validator"
 msgstr "Preguntas frecuentes sobre el validador de configuración"
 
-#: admin/admin.php:428
+#: admin/admin.php:429
 msgid "https://contactform7.com/configuration-validator-faq/"
 msgstr "https://contactform7.com/configuration-validator-faq/"
 
@@ -343,11 +372,11 @@ msgctxt "mail subject"
 msgid "%1$s \"%2$s\""
 msgstr "%1$s \"%2$s\""
 
-#: admin/admin.php:628
+#: admin/admin.php:629
 msgid "Misconfiguration leads to mail delivery failure or other troubles. Validate your contact forms now."
 msgstr "Una configuración errónea provoca fallos en el envío de los mensajes u otros problemas. Valida ahora tus formularios de contacto."
 
-#: admin/admin.php:626
+#: admin/admin.php:627
 msgid "Validate Contact Form 7 Configuration"
 msgstr "Validar la configuración de Contact Form 7"
 
@@ -355,23 +384,23 @@ msgstr "Validar la configuración de Contact Form 7"
 msgid "https://contactform7.com/configuration-errors/"
 msgstr "https://contactform7.com/configuration-errors/"
 
-#: admin/admin.php:532
+#: admin/admin.php:533
 msgid "Configuration validation completed. No invalid contact form was found."
 msgstr "La validación de la configuración ha sido completada. No se ha encontrado ningún formulario de contacto no válido."
 
 #. translators: %s: number of contact forms
-#: admin/admin.php:524
+#: admin/admin.php:525
 msgid "Configuration validation completed. %s invalid contact form was found."
 msgid_plural "Configuration validation completed. %s invalid contact forms were found."
 msgstr[0] "La validación de la configuración ha sido completada. Se ha encontrado %s formulario de contacto no válido."
 msgstr[1] "La validación de la configuración ha sido completada. Se han encontrado %s formularios de contacto no válidos."
 
-#: admin/admin.php:420
+#: admin/admin.php:421
 msgid "Validate Configuration"
 msgstr "Validar configuración"
 
 #. translators: %s: number of contact forms
-#: admin/admin.php:411
+#: admin/admin.php:412
 msgid "Validate %s Contact Form Now"
 msgid_plural "Validate %s Contact Forms Now"
 msgstr[0] "Validar ahora %s formulario de contacto"
@@ -1205,55 +1234,51 @@ msgstr "Código abreviado"
 msgid "Title"
 msgstr "Título"
 
-#: admin/edit-contact-form.php:229 admin/includes/editor.php:247
+#: admin/edit-contact-form.php:249 admin/includes/editor.php:247
 #: admin/includes/editor.php:252
 msgid "Additional Settings"
 msgstr "Ajustes adicionales"
 
 #. translators: %d: number of additional settings
-#: admin/edit-contact-form.php:227
+#: admin/edit-contact-form.php:247
 msgid "Additional Settings (%d)"
 msgstr "Ajustes adicionales (%d)"
 
-#: admin/edit-contact-form.php:213 admin/includes/editor.php:222
+#: admin/edit-contact-form.php:233 admin/includes/editor.php:222
 msgid "Messages"
 msgstr "Mensajes"
 
-#: admin/edit-contact-form.php:209 admin/includes/editor.php:93
+#: admin/edit-contact-form.php:229 admin/includes/editor.php:93
 msgid "Mail"
 msgstr "Correo electrónico"
 
-#: admin/edit-contact-form.php:205 admin/includes/editor.php:61
+#: admin/edit-contact-form.php:225 admin/includes/editor.php:61
 msgid "Form"
 msgstr "Formulario"
 
-#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
+#: admin/includes/help-tabs.php:94
 msgid "Support"
 msgstr "Soporte"
 
-#: admin/edit-contact-form.php:175 admin/includes/help-tabs.php:94
+#: admin/includes/help-tabs.php:94
 msgid "https://contactform7.com/support/"
 msgstr "https://contactform7.com/support/"
 
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
+#: admin/edit-contact-form.php:179 admin/includes/help-tabs.php:93
 msgid "FAQ"
 msgstr "Preguntas frecuentes"
 
-#: admin/edit-contact-form.php:174 admin/includes/help-tabs.php:93
+#: admin/edit-contact-form.php:178 admin/includes/help-tabs.php:93
 msgid "https://contactform7.com/faq/"
 msgstr "https://contactform7.com/faq/"
 
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
+#: admin/edit-contact-form.php:183 admin/includes/help-tabs.php:92
 msgid "Docs"
 msgstr "Documentación"
 
-#: admin/edit-contact-form.php:173 admin/includes/help-tabs.php:92
+#: admin/edit-contact-form.php:182 admin/includes/help-tabs.php:92
 msgid "https://contactform7.com/docs/"
 msgstr "https://contactform7.com/docs/"
-
-#: admin/edit-contact-form.php:170
-msgid "Information"
-msgstr "Información"
 
 #: admin/edit-contact-form.php:154
 msgid ""
@@ -1294,7 +1319,7 @@ msgstr "Introduce el título aquí"
 msgid "Save"
 msgstr "Guardar"
 
-#: admin/admin.php:593
+#: admin/admin.php:594
 msgid "You are not allowed to edit this contact form."
 msgstr "No tienes permisos para editar este formulario de contacto."
 
@@ -1327,36 +1352,36 @@ msgid "Dismiss"
 msgstr "Descartar"
 
 #. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
-#: admin/admin.php:574
+#: admin/admin.php:575
 msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
 msgstr "<strong>Contact Form 7 %1$s requiere WordPress %2$s o superior.</strong> Por favor, <a href=\"%3$s\">actualiza WordPress</a> primero."
 
-#: admin/admin.php:554
+#: admin/admin.php:555
 msgid "Settings"
 msgstr "Ajustes"
 
-#: admin/admin.php:500
+#: admin/admin.php:501
 msgid "Contact form deleted."
 msgstr "Formulario de contacto eliminado."
 
-#: admin/admin.php:498
+#: admin/admin.php:499
 msgid "Contact form saved."
 msgstr "Formulario de contacto guardado."
 
-#: admin/admin.php:496
+#: admin/admin.php:497
 msgid "Contact form created."
 msgstr "Formulario de contacto creado."
 
-#: admin/admin.php:397
+#: admin/admin.php:398
 msgid "Search Contact Forms"
 msgstr "Buscar formularios de contacto"
 
 #. translators: %s: search keywords
-#: admin/admin.php:384
+#: admin/admin.php:385
 msgid "Search results for &#8220;%s&#8221;"
 msgstr "Resultados de búsqueda para &#8220;%s&#8221;"
 
-#: admin/admin.php:312
+#: admin/admin.php:313
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "Los cambios realizados se perderán si sales de esta página."
 
@@ -1376,11 +1401,11 @@ msgstr "No tienes permisos para editar este elemento."
 msgid "Integration"
 msgstr "Integración"
 
-#: admin/admin.php:47 admin/admin.php:466
+#: admin/admin.php:47 admin/admin.php:467
 msgid "Integration with Other Services"
 msgstr "Integración con otros servicios"
 
-#: admin/admin.php:37 admin/admin.php:378 admin/edit-contact-form.php:46
+#: admin/admin.php:37 admin/admin.php:379 admin/edit-contact-form.php:46
 msgid "Add New"
 msgstr "Añadir nuevo"
 
@@ -1388,7 +1413,7 @@ msgstr "Añadir nuevo"
 msgid "Add New Contact Form"
 msgstr "Añadir nuevo formulario de contacto"
 
-#: admin/admin.php:29 admin/admin.php:371 includes/contact-form.php:31
+#: admin/admin.php:29 admin/admin.php:372 includes/contact-form.php:31
 msgid "Contact Forms"
 msgstr "Formularios de contacto"
 
@@ -1400,7 +1425,7 @@ msgstr "Editar formulario de contacto"
 msgid "Contact"
 msgstr "Contacto"
 
-#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.1)  #-#-#-#-#
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.2)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: admin/admin.php:21 modules/flamingo.php:167
 msgid "Contact Form 7"

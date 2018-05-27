@@ -157,7 +157,7 @@ msgstr "[%1$s] Conferma l'azione: %2$s"
 msgid "Erase Personal Data"
 msgstr "Cancella dati personali"
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr "Do il mio consenso affinché un cookie salvi i miei dati  (nome, email, sito web) per il prossimo commento."
 
@@ -673,7 +673,7 @@ msgid "Unsupported value type (%s)."
 msgstr "Tipo di valore non supportato (%s)."
 
 #. translators: %s: register_widget()
-#: wp-includes/widgets.php:1053
+#: wp-includes/widgets.php:1054
 msgid "Widgets need to be registered using %s, before they can be displayed."
 msgstr "I widget, prima di poter essere visualizzati, necessitano di essere registrati utilizzando %s, ."
 
@@ -2348,7 +2348,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] %2$s è stato attivato"
 
-#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
+#: wp-includes/widgets.php:1399 wp-includes/widgets.php:1508
 msgid "RSS Error:"
 msgstr "Errore RSS:"
 
@@ -4449,13 +4449,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "Trovato 1 risultato. Usa i tasti freccia su e giù per esplorarlo."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2234
+#: wp-includes/comment-template.php:2236
 msgid "Logged in as %s. Edit your profile."
 msgstr "Autenticato come %s. Modifica il tuo profilo."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2233
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">Autenticato come %3$s</a>. <a href=\"%4$s\">Uscire?</a>"
 
@@ -9601,7 +9601,7 @@ msgstr "<strong>Conflitto fra i valori per le costanti VHOST e SUBDOMAIN_INSTALL
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>ERRORE</strong>: questo nome utente non è valido perché utilizza dei caratteri non ammessi. Inserisci un nome utente valido."
 
-#: wp-includes/comment-template.php:2209
+#: wp-includes/comment-template.php:2211
 msgid "Required fields are marked %s"
 msgstr "I campi obbligatori sono contrassegnati %s"
 
@@ -9761,7 +9761,7 @@ msgstr "Si è verificato un errore nell'aggiunta del proprio sito. Tornare alla 
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "Il file è troppo grande. I file devono avere una dimensione inferiore a %d KB."
 
-#: wp-includes/comment-template.php:2238
+#: wp-includes/comment-template.php:2240
 msgid "Your email address will not be published."
 msgstr "Il tuo indirizzo email non sarà pubblicato."
 
@@ -10561,7 +10561,7 @@ msgstr "chiudi tag"
 msgid "Close all open tags"
 msgstr "Chiudi tutti i tag aperti"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1414
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "Si è verificato un errore; probabilmente il feed non è attivo. Riprova più tardi."
 
@@ -11537,31 +11537,31 @@ msgstr "nuovo WordPress Loop"
 msgid "Tag Cloud"
 msgstr "Tag Cloud"
 
-#: wp-includes/widgets.php:1535
+#: wp-includes/widgets.php:1536
 msgid "Display item date?"
 msgstr "Visualizza la data delle voci?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1533
 msgid "Display item author if available?"
 msgstr "Se disponibile, visualizza l'autore delle voci?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1530
 msgid "Display item content?"
 msgstr "Visualizza il contenuto delle voci?"
 
-#: wp-includes/widgets.php:1519
+#: wp-includes/widgets.php:1520
 msgid "How many items would you like to display?"
 msgstr "Quante voci vuoi visualizzare?"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1517
 msgid "Give the feed a title (optional):"
 msgstr "Inserisci un titolo per il feed RSS (opzionale):"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1514
 msgid "Enter the RSS feed URL here:"
 msgstr "Inserisci l'URL del feed RSS:"
 
-#: wp-includes/widgets.php:1429
+#: wp-includes/widgets.php:1430
 msgid "Untitled"
 msgstr "Senza titolo"
 
@@ -11687,19 +11687,19 @@ msgstr "Identificato un commento duplicato; sembra che tu abbia già scritto que
 msgid "Unapproved"
 msgstr "Non approvato"
 
-#: wp-includes/comment-template.php:2253
+#: wp-includes/comment-template.php:2255
 msgid "Post Comment"
 msgstr "Commento all'articolo"
 
-#: wp-includes/comment-template.php:2252
+#: wp-includes/comment-template.php:2254
 msgid "Cancel reply"
 msgstr "Annulla risposta"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2249
 msgid "Leave a Reply to %s"
 msgstr "Rispondi a %s"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2248
 msgid "Leave a Reply"
 msgstr "Lascia un commento"
 
@@ -11792,7 +11792,7 @@ msgid "Tags: "
 msgstr "Tag:"
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2225
+#: wp-includes/comment-template.php:2227
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Devi essere <a href=\"%s\">connesso</a> per inviare un commento."
 
@@ -11850,7 +11850,7 @@ msgstr "Per qualche strano motivo, non è possibile modificare questo articolo."
 msgid "Widgets"
 msgstr "Widget"
 
-#: wp-includes/comment-template.php:2203
+#: wp-includes/comment-template.php:2205
 msgid "Website"
 msgstr "Sito web"
 
@@ -11906,7 +11906,7 @@ msgstr "Formato data"
 msgid "Allow people to post comments on new articles"
 msgstr "Consenti la scrittura di commenti per i nuovi articoli"
 
-#: wp-includes/comment-template.php:2201 wp-login.php:810
+#: wp-includes/comment-template.php:2203 wp-login.php:810
 msgid "Email"
 msgstr "Email"
 
@@ -12367,7 +12367,7 @@ msgstr "Nessuna"
 msgid "Description"
 msgstr "Descrizione"
 
-#: wp-includes/comment-template.php:2199
+#: wp-includes/comment-template.php:2201
 msgid "Name"
 msgstr "Nome"
 
@@ -12455,7 +12455,7 @@ msgstr "No"
 msgid "Are you sure you want to do this?"
 msgstr "Sei sicuro di voler fare questo?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2223
 msgctxt "noun"
 msgid "Comment"
 msgstr "Commento"

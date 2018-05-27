@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Post Type Switcher - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-02 11:03:53+0000\n"
+"PO-Revision-Date: 2018-05-22 22:50:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -14,10 +14,6 @@ msgstr ""
 #: post-type-switcher.php:277
 msgid "&mdash; No Change &mdash;"
 msgstr "&mdash; Sin cambios &mdash;"
-
-#: post-type-switcher.php:199 post-type-switcher.php:224
-msgid "Post Type"
-msgstr "Tipo Publicación"
 
 #. Author of the plugin/theme
 msgid "John James Jacoby"
@@ -39,9 +35,13 @@ msgstr "https://es.wordpress.org/plugins/post-type-switcher/"
 msgid "Post Type Switcher"
 msgstr "Post Type Switcher"
 
+#: post-type-switcher.php:199 post-type-switcher.php:224
+msgid "Post Type"
+msgstr "Tipo de contenido"
+
 #: post-type-switcher.php:165
 msgid "Type"
-msgstr "Clase"
+msgstr "Tipo"
 
 #: post-type-switcher.php:147
 msgid "Cancel"
@@ -57,4 +57,4 @@ msgstr "Tipo de artículo: "
 
 #: post-type-switcher.php:131
 msgid "Edit"
-msgstr "corregir"
+msgstr "Editar"

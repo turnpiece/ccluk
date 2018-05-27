@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-15 17:14:00+0000\n"
+"PO-Revision-Date: 2018-05-21 15:07:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "1"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europe/Stockholm"
+
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "Det gick inte att skapa exportkatalogen."
 
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356
@@ -133,7 +137,7 @@ msgstr "Vid behandling borttagarens data var ID för begäran ogiltigt."
 msgid "Add Data Erasure Request"
 msgstr "Lägg till begäran att ta bort data"
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
 msgid "Erasing Data..."
 msgstr "Tar bort data..."
 
@@ -319,7 +323,7 @@ msgstr "Kontaktformulär"
 
 #: wp-admin/includes/misc.php:1686
 msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
-msgstr "Om du laddar upp bilder till webbplatsen för du undvika att ladda upp bilder där EXIF-data inkluderar data från GPS-lokalisering.  Besökare till webbplatsen kan ladda ned och ta fram alla positioneringsuppgifter från bilder på webbplatsen."
+msgstr "Om du laddar upp bilder till webbplatsen bör du undvika att ladda upp bilder där EXIF-data inkluderar data från GPS-lokalisering.  Besökare till webbplatsen kan ladda ned och ta fram alla positioneringsuppgifter från bilder på webbplatsen."
 
 #: wp-admin/includes/misc.php:1672
 msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
@@ -378,39 +382,39 @@ msgstr "Denna textmall kommer att hjälpa er skapa en integritetspolicy för er 
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Som ägare av en webbplats kan du behöva följa nationella eller internationella integritetslagar. Till exempel kan du behöva skapa en integritetspolicy och göra den tillgänglig."
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "Rapporten skapad för"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "För webbplatsen"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "Med URL"
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "den"
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "Nedladdningen misslyckades."
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "Det gick inte att skicka e-post."
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "Tvingad borttagning misslyckades."
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "Borttagning av data misslyckades."
 
@@ -570,7 +574,7 @@ msgstr "Kopiera föreslagen policytext från %s."
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -600,35 +604,35 @@ msgstr ""
 "Vi på ###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
 msgstr "Det går inte att lägga till data i exportfilen."
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] Export av personuppgifter"
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "Kan inte skicka e-post om export av personuppgifter."
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "Ladda ned personuppgifterna en gång till"
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "E-posta data"
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "Skickar e-post..."
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "Ogiltigt beställnings-ID vid sammanläggning av exportdata."
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "E-post har skickats."
 
@@ -637,19 +641,19 @@ msgid "Unable to generate export file. ZipArchive not available."
 msgstr "Det går inte att skapa exportfilen. ZipArchive är inte tillgängligt."
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "Export av personuppgifter för %s"
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "Export av personuppgifter"
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "Ogiltigt beställnings-ID vid sändning av e-post med export av personuppgifter."
 
-#: wp-admin/includes/file.php:2038
+#: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "Kan inte öppna exportfilen (arkivfil) för skrivning."
 
@@ -665,11 +669,11 @@ msgstr "Ogiltigt beställnings-ID vid generering av exportfil."
 msgid "Invalid email address when generating export file."
 msgstr "Ogiltig e-postadress vid generering av exportfil."
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "Det går inte att skydda exportkatalogen från bläddring."
 
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "Kan inte öppna exportfilen (HTML-rapport) för skrivning."
 
@@ -687,29 +691,29 @@ msgstr "Raderingsmatrisen vid index %d saknar callback."
 msgid "Eraser index cannot be less than one."
 msgstr "Raderarindex kan inte vara mindre än ett."
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "Tvinga borttagning av personuppgifter"
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "Ta bort begäran"
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "Väntar på bekräftelse"
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "Försök igen"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "Laddar ned data..."
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "Ladda ned personuppgifter"
 
@@ -2459,7 +2463,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "Importören %s är ogiltig eller är inte installerad."
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "Väntande"
@@ -3014,7 +3018,7 @@ msgid "You can view posts in a simple title list or with an excerpt using the Sc
 msgstr "Du kan visa inlägg i en enkel titellista eller tillsammans med utdrag genom att använda fliken Panelinställningar."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Postad: %s"
 
@@ -3221,20 +3225,20 @@ msgid "Last page"
 msgstr "Sista sidan"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "Som svar till: %s"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Kommentarsstatus"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "Som svar till: %s"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Datum och tid"
 
@@ -3795,7 +3799,7 @@ msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr "Kunde inte ansluta till filsystemet. Vänligen kontrollera dina uppgifter."
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4263,7 +4267,7 @@ msgstr "<strong>Radera</strong> tar dig till sidan för radering av användare f
 msgid "Edit status"
 msgstr "Redigera status"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Redigera datum och tid"
 
@@ -5901,7 +5905,7 @@ msgstr "%s sedan"
 msgid "Enter a link URL or click above for presets."
 msgstr "Ange en länkadress eller klicka för förinställningar ovan."
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Om"
 
@@ -10088,15 +10092,15 @@ msgstr "Permalänk"
 msgid "Update Comment"
 msgstr "Uppdatera kommentar"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Namn:"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "E-post:"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -10454,7 +10458,7 @@ msgstr "Visa alla"
 msgid "Configure"
 msgstr "Konfigurera"
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -11603,7 +11607,7 @@ msgstr "Populära taggar"
 msgid "Categories, unlike tags, can have a hierarchy. You might have a Jazz category, and under that have children categories for Bebop and Big Band. Totally optional."
 msgstr "Kategorier kan till skillnad från taggar sättas i hierarki. Du kanske vill ha en kategori för musik, och under den ha två underkategorier för rock och pop. Helt valfritt."
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -11742,7 +11746,7 @@ msgstr "Sparande inaktiverat: %s redigerar just nu detta inlägg."
 msgid "Item not updated."
 msgstr "Posten uppdaterades inte."
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"

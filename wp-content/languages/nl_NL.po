@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-18 11:40:23+0000\n"
+"PO-Revision-Date: 2018-05-23 08:59:20+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,19 +38,19 @@ msgstr ","
 
 #: wp-includes/user.php:3128
 msgid "The site administrator has been notified. You will receive an email confirmation when they erase your data."
-msgstr "De site admin heeft een melding gekregen. Je ontvangt een e-mail bevestiging wanneer je data is verwijderd."
+msgstr "De sitebeheerder heeft een melding gekregen. Je ontvangt een e-mailbevestiging wanneer je gegevens zijn verwijderd."
 
 #: wp-includes/user.php:3127
 msgid "Thanks for confirming your erasure request."
-msgstr "Bedankt voor het bevestigen van je verzoek om te verwijderen."
+msgstr "Bedankt voor het bevestigen van je verwijderingsverzoek."
 
 #: wp-includes/user.php:3125
 msgid "The site administrator has been notified. You will receive a link to download your export via email when they fulfill your request."
-msgstr "De site admin heeft een melding gekregen. Je ontvangt een e-mail met daarin een link om je exportbestand te downloaden wanneer je verzoek is verwerkt."
+msgstr "De sitebeheerder heeft een melding gekregen. Je ontvangt een e-mail met daarin een link om je exportbestand te downloaden wanneer je verzoek is verwerkt."
 
 #: wp-includes/user.php:3124
 msgid "Thanks for confirming your export request."
-msgstr "Bedankt voor het bevestigen van je export verzoek. "
+msgstr "Bedankt voor het bevestigen van je exportverzoek."
 
 #. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
 #. are placeholders.
@@ -70,11 +70,11 @@ msgid ""
 msgstr ""
 "Hallo,\n"
 "\n"
-"Je verzoek om je persoonlijke data te wissen op ###SITENAME### is afgerond.\n"
+"Je verzoek om je persoonlijke gegevens te verwijderen op ###SITENAME### is afgerond.\n"
 "\n"
-"Mocht je aanvullende vragen hebben, neem dan contact op met de site admin.\n"
+"Mocht je aanvullende vragen hebben, neem dan contact op met de sitebeheerder.\n"
 "\n"
-"Meer informatie kun je vinden in onze privacybeleidspagina: ###PRIVACY_POLICY_URL###\n"
+"Voor meer informatie kun je ons privacybeleid lezen: ###PRIVACY_POLICY_URL###\n"
 "\n"
 "Met vriendelijke groet,\n"
 "Iedereen van ###SITENAME###\n"
@@ -95,9 +95,9 @@ msgid ""
 msgstr ""
 "Hallo,\n"
 "\n"
-"Je verzoek om je persoonlijke data te wissen op ###SITENAME### is afgerond.\n"
+"Je verzoek om je persoonlijke gegevens te verwijderen op ###SITENAME### is afgerond.\n"
 "\n"
-"Mocht je aanvullende vragen hebben, neem dan contact op met de site admin.\n"
+"Mocht je aanvullende vragen hebben, neem dan contact op met de sitebeheerder.\n"
 "\n"
 "Met vriendelijke groet,\n"
 "Iedereen van ###SITENAME###\n"
@@ -106,7 +106,7 @@ msgstr ""
 #. translators: %s Site name.
 #: wp-includes/user.php:3015
 msgid "[%s] Erasure Request Fulfilled"
-msgstr "[%s] Verzoek tot wissen afgerond"
+msgstr "[%s] Verwijderingsverzoek afgerond"
 
 #. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
 #. SITEURL; those are placeholders.
@@ -157,7 +157,7 @@ msgstr "[%1$s] Bevestig actie: %2$s"
 msgid "Erase Personal Data"
 msgstr "Persoonlijke gegevens wissen"
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr "Bewaar mijn naam, e-mailadres en website in deze browser voor de volgende keer wanneer ik een reactie plaats."
 
@@ -219,11 +219,11 @@ msgstr "Privacybeleid"
 
 #: wp-includes/script-loader.php:670
 msgid "An error occurred while attempting to export personal data."
-msgstr "Er deed zich een fout voor tijdens het exporteren van persoonlijke data."
+msgstr "Er is een fout opgetreden tijdens het exporteren van persoonlijke gegevens."
 
 #: wp-includes/script-loader.php:669
 msgid "No personal data export file was generated."
-msgstr "Er is geen persoonlijk data exportbestand gegenereerd."
+msgstr "Er is geen exportbestand met persoonlijke gegevens gegenereerd."
 
 #: wp-login.php:875
 msgid "User action confirmed."
@@ -244,7 +244,7 @@ msgstr "Bevestig de \"%s\" actie"
 
 #: wp-includes/user.php:3211
 msgid "Export Personal Data"
-msgstr "Persoonlijke data exporteren"
+msgstr "Persoonlijke gegevens exporteren"
 
 #: wp-includes/user.php:3183
 msgid "A request for this email address already exists."
@@ -256,7 +256,7 @@ msgstr "Ongeldige actie naam."
 
 #: wp-includes/user.php:3120
 msgid "The site administrator has been notified and will fulfill your request as soon as possible."
-msgstr "De administrator van de site heeft de melding ontvangen en zal je verzoek zo snel mogelijk afhandelen."
+msgstr "De sitebeheerder heeft de melding ontvangen en zal je verzoek zo snel mogelijk afhandelen."
 
 #: wp-includes/post.php:216
 msgid "User Request"
@@ -279,7 +279,7 @@ msgstr "[verwijderd]"
 #. translators: %d: Comment ID
 #: wp-includes/comment.php:3358
 msgid "Comment %d contains personal data but could not be anonymized."
-msgstr "Reactie %d bevat persoonlijke data, maar kon niet geanonimiseerd worden."
+msgstr "Reactie %d bevat persoonlijke gegevens, maar kon niet geanonimiseerd worden."
 
 #: wp-includes/user.php:3119
 msgid "Action has been confirmed."
@@ -335,23 +335,23 @@ msgstr ""
 
 #: wp-includes/script-loader.php:668
 msgid "An error occurred while attempting to find and erase personal data."
-msgstr "Er is een fout opgetreden tijdens het zoeken naar en verwijderen van persoonlijke data."
+msgstr "Er is een fout opgetreden tijdens het zoeken naar en verwijderen van persoonlijke gegevens."
 
 #: wp-includes/script-loader.php:667
 msgid "Personal data was found for this user but some of the personal data found was not erased."
-msgstr "Persoonlijke data is gevonden voor deze gebruiker, maar sommige gevonden data is niet verwijderd."
+msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar sommige gevonden gegevens zijn niet gewist."
 
 #: wp-includes/script-loader.php:666
 msgid "Personal data was found for this user but was not erased."
-msgstr "Persoonlijke data is gevonden voor deze gebruiker, maar is niet verwijderd."
+msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar zijn niet gewist."
 
 #: wp-includes/script-loader.php:665
 msgid "All of the personal data found for this user was erased."
-msgstr "Alle gevonden persoonlijke data voor deze gebruiker is verwijderd."
+msgstr "Alle gevonden persoonlijke gegevens voor deze gebruiker zijn gewist."
 
 #: wp-includes/script-loader.php:664
 msgid "No personal data was found for this user."
-msgstr "Geen persoonlijke data gevonden voor deze gebruiker."
+msgstr "Geen persoonlijke gegevens gevonden voor deze gebruiker."
 
 #: wp-includes/post.php:787
 msgid "Completed"
@@ -673,7 +673,7 @@ msgid "Unsupported value type (%s)."
 msgstr "Niet ondersteunde waardetype (%s)."
 
 #. translators: %s: register_widget()
-#: wp-includes/widgets.php:1053
+#: wp-includes/widgets.php:1054
 msgid "Widgets need to be registered using %s, before they can be displayed."
 msgstr "Widgets moeten geregistreerd zijn met %s, alvorens ze getoond kunnen worden."
 
@@ -2063,7 +2063,7 @@ msgstr "Het te gebruiken oEmbed-format."
 
 #: wp-includes/class-wp-oembed-controller.php:62
 msgid "The URL of the resource for which to fetch oEmbed data."
-msgstr "De url van de gegevensbron om de oEmbed-gegevens van op te halen."
+msgstr "De URL van de gegevensbron om de oEmbed-gegevens van op te halen."
 
 #: wp-includes/class-wp-editor.php:1148
 msgctxt "Short for blue in RGB"
@@ -2348,7 +2348,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] Activeer %2$s"
 
-#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
+#: wp-includes/widgets.php:1399 wp-includes/widgets.php:1508
 msgid "RSS Error:"
 msgstr "RSS-fout:"
 
@@ -2732,7 +2732,7 @@ msgstr "HTML-beschrijving voor het object, aangepast voor weergave."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:421
 msgid "Description for the object, as it exists in the database."
-msgstr "Beschrijving van het object, zoals het bestaat in de database."
+msgstr "Beschrijving van het object, zoals deze in de database staat."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:403
 msgid "HTML caption for the attachment, transformed for display."
@@ -2740,7 +2740,7 @@ msgstr "HTML-titel voor de bijlage, aangepast voor weergave."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:398
 msgid "Caption for the attachment, as it exists in the database."
-msgstr "Beschrijving voor de bijlage zoals deze staat in de database."
+msgstr "Bijschrift voor de bijlage, zoals deze in de database staat."
 
 #: wp-includes/class-wp-customize-manager.php:5665
 msgid "Please enter a valid YouTube URL."
@@ -3416,7 +3416,7 @@ msgstr "HTML-inhoud van het object, aangepast voor weergave."
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1207
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1924
 msgid "Content for the object, as it exists in the database."
-msgstr "Inhoud van het object, zoals deze bestaat in de database."
+msgstr "Inhoud van het object, zoals deze in de database staat."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1198
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1915
@@ -4179,7 +4179,7 @@ msgstr "%s installeren..."
 
 #: wp-includes/class-wp-xmlrpc-server.php:4514
 msgid "Sorry, you are not allowed to access user data on this site."
-msgstr "Sorry, je hebt geen toegang tot de gebruikersdata op deze site."
+msgstr "Sorry, je hebt geen toegang tot de gebruikersgegevens op deze site."
 
 #: wp-includes/script-loader.php:853
 msgid "Number of plugins found: %d"
@@ -4294,12 +4294,12 @@ msgstr "Let op: deze thema's zijn mogelijk actief op andere sites in het netwerk
 
 #: wp-includes/script-loader.php:833
 msgid "Are you sure you want to delete the selected plugins and their data?"
-msgstr "Weet je zeker dat je de geselecteerde plugins en bijbehorende data wilt verwijderen?"
+msgstr "Weet je zeker dat je de geselecteerde plugins en bijbehorende gegevens wilt verwijderen?"
 
 #. translators: %s: Plugin name
 #: wp-includes/script-loader.php:832
 msgid "Are you sure you want to delete %s and its data?"
-msgstr "Weet je zeker dat je %s en de bijbehorende data wilt verwijderen?"
+msgstr "Weet je zeker dat je %s en de bijbehorende gegevens wilt verwijderen?"
 
 #. translators: %s: Theme name
 #: wp-includes/script-loader.php:830
@@ -4449,13 +4449,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "Één resultaat gevonden. Gebruik de omhoog/omlaag-pijlen op je toetsenbord om te navigeren."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2234
+#: wp-includes/comment-template.php:2236
 msgid "Logged in as %s. Edit your profile."
 msgstr "Ingelogd als %s. Je profiel bewerken."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2233
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">Ingelogd als %3$s</a>. <a href=\"%4$s\">Uitloggen?</a>"
 
@@ -4641,7 +4641,7 @@ msgstr "https://codex.wordpress.org/Child_Themes"
 #. translators: 1: index.php, 2: Codex URL, 3: style.css
 #: wp-includes/class-wp-theme.php:267
 msgid "Template is missing. Standalone themes need to have a %1$s template file. <a href=\"%2$s\">Child themes</a> need to have a Template header in the %3$s stylesheet."
-msgstr "Template niet aanwezig. Thema's moeten een %1$s templatebestand hebben. <a href=\"%2$s\">Child-thema's</a> moeten een template header hebben in het %3$s stylesheet."
+msgstr "Template niet aanwezig. Thema's moeten een %1$s templatebestand hebben. <a href=\"%2$s\">subthema's</a> moeten een template header hebben in de %3$s stylesheet."
 
 #: wp-includes/class-wp-metadata-lazyloader.php:77
 #: wp-includes/class-wp-metadata-lazyloader.php:117
@@ -6326,7 +6326,7 @@ msgstr "Editor-menu (indien ingeschakeld)"
 
 #: wp-includes/class-wp-editor.php:1273
 msgid "Editor toolbar"
-msgstr "Editor-werkbalk"
+msgstr "Editor toolbar"
 
 #: wp-includes/class-wp-editor.php:1283
 msgid "To move focus to other buttons use Tab or the arrow keys. To return focus to the editor press Escape or use one of the buttons."
@@ -8470,7 +8470,7 @@ msgstr "Tekst"
 
 #: wp-includes/class-wp-admin-bar.php:415
 msgid "Skip to toolbar"
-msgstr "Spring naar werkbalk"
+msgstr "Spring naar toolbar"
 
 #: wp-includes/class-wp-customize-manager.php:4981
 msgid "Header Text Color"
@@ -9142,7 +9142,7 @@ msgstr "Reactienavigatie"
 
 #: wp-includes/class-wp-admin-bar.php:417
 msgid "Toolbar"
-msgstr "Werkbalk"
+msgstr "Toolbar"
 
 #: wp-includes/media-template.php:1082 wp-includes/media-template.php:1171
 #: wp-includes/widgets/class-wp-widget-media-audio.php:65
@@ -9602,7 +9602,7 @@ msgstr "<strong>Conflicterende waarden voor de constanten VHOST en SUBDOMAIN_INS
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>FOUT</strong>: Deze gebruikersnaam is ongeldig omdat er illegale tekens in voorkomen. Vul een geldige gebruikersnaam in."
 
-#: wp-includes/comment-template.php:2209
+#: wp-includes/comment-template.php:2211
 msgid "Required fields are marked %s"
 msgstr "Vereiste velden zijn gemarkeerd met %s"
 
@@ -9764,7 +9764,7 @@ msgstr "Er is een fout opgetreden bij het toevoegen van jou op deze site. Ga ter
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "Dit bestand is te groot. Bestanden moeten kleiner zijn dan %d KB."
 
-#: wp-includes/comment-template.php:2238
+#: wp-includes/comment-template.php:2240
 msgid "Your email address will not be published."
 msgstr "Het e-mailadres wordt niet gepubliceerd."
 
@@ -10564,7 +10564,7 @@ msgstr "tags sluiten"
 msgid "Close all open tags"
 msgstr "Alle open tags sluiten"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1414
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "Er is een fout opgetreden, wat waarschijnlijk betekent dat de feed uit de lucht is. Probeer later opnieuw."
 
@@ -11540,31 +11540,31 @@ msgstr "nieuwe WordPress-loop"
 msgid "Tag Cloud"
 msgstr "Tagwolk"
 
-#: wp-includes/widgets.php:1535
+#: wp-includes/widgets.php:1536
 msgid "Display item date?"
 msgstr "Itemdatum tonen?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1533
 msgid "Display item author if available?"
 msgstr "Itemauteur tonen als deze beschikbaar is?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1530
 msgid "Display item content?"
 msgstr "Iteminhoud tonen"
 
-#: wp-includes/widgets.php:1519
+#: wp-includes/widgets.php:1520
 msgid "How many items would you like to display?"
 msgstr "Hoeveel items wil je tonen?"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1517
 msgid "Give the feed a title (optional):"
 msgstr "Geef de RSS-feed een titel (optioneel):"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1514
 msgid "Enter the RSS feed URL here:"
 msgstr "Voer de URL van de RSS-feed hier in:"
 
-#: wp-includes/widgets.php:1429
+#: wp-includes/widgets.php:1430
 msgid "Untitled"
 msgstr "Zonder titel"
 
@@ -11690,19 +11690,19 @@ msgstr "Dubbele reactie ontdekt: het lijkt erop dat je dit al hebt gezegd."
 msgid "Unapproved"
 msgstr "Geweigerd"
 
-#: wp-includes/comment-template.php:2253
+#: wp-includes/comment-template.php:2255
 msgid "Post Comment"
 msgstr "Reactie plaatsen"
 
-#: wp-includes/comment-template.php:2252
+#: wp-includes/comment-template.php:2254
 msgid "Cancel reply"
 msgstr "Reactie annuleren"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2249
 msgid "Leave a Reply to %s"
 msgstr "Laat een reactie achter op %s"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2248
 msgid "Leave a Reply"
 msgstr "Geef een reactie"
 
@@ -11795,7 +11795,7 @@ msgid "Tags: "
 msgstr "Tags: "
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2225
+#: wp-includes/comment-template.php:2227
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Je moet <a href=\"%s\">inloggen</a> om een reactie te kunnen plaatsen."
 
@@ -11853,7 +11853,7 @@ msgstr "Om een onbekende maar bijzonder irritante reden kan dit bericht niet wor
 msgid "Widgets"
 msgstr "Widgets"
 
-#: wp-includes/comment-template.php:2203
+#: wp-includes/comment-template.php:2205
 msgid "Website"
 msgstr "Website"
 
@@ -11909,7 +11909,7 @@ msgstr "Datumnotatie"
 msgid "Allow people to post comments on new articles"
 msgstr "Sta toe dat bezoekers kunnen reageren op nieuwe artikelen"
 
-#: wp-includes/comment-template.php:2201 wp-login.php:810
+#: wp-includes/comment-template.php:2203 wp-login.php:810
 msgid "Email"
 msgstr "E-mail"
 
@@ -12370,7 +12370,7 @@ msgstr "Geen"
 msgid "Description"
 msgstr "Omschrijving"
 
-#: wp-includes/comment-template.php:2199
+#: wp-includes/comment-template.php:2201
 msgid "Name"
 msgstr "Naam"
 
@@ -12458,7 +12458,7 @@ msgstr "Nee"
 msgid "Are you sure you want to do this?"
 msgstr "Weet je zeker dat je dit wilt doen?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2223
 msgctxt "noun"
 msgid "Comment"
 msgstr "Reactie"

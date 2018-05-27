@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-14 07:15:11+0000\n"
+"PO-Revision-Date: 2018-05-24 08:01:58+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -132,6 +132,10 @@ msgstr "Προτεινόμενες ενέργειες"
 #: inc/customizer.php:3640
 msgid "OnePress Plus Available! Take a look"
 msgstr "Διαθέσιμο το OnePress Plus! Ρίξτε μία ματιά."
+
+#: inc/customizer.php:3630
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Ταξινόμηση περιοχων</h4><p class=\"customizer-group-heading-message\">Ρίξτε μία ματιά στην έκδοση <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> για πλήρη έλεγχο της σειράς των περιοχών της αρχικής σελίδας!</p><h4 class=\"customizer-group-heading-message\">Περισσότερες δυνατότητες μορφοποίησης περιοχών</h4><p class=\"customizer-group-heading-message\">Δείτε την έκδοση <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> για πλήρη έλεγχο της μορφής των περιοχών όπως χρώμα φόντου, εικόνα φόντου, βίντες, parallax εφέ, προσαρμογή στυλ και άλλα...</p>"
 
 #: inc/customizer.php:3314
 msgid "Ascending"

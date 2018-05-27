@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-18 16:46:51+0000\n"
+"PO-Revision-Date: 2018-05-24 20:14:56+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "1"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "0"
+
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "No ha sido posible crear la carpeta de exportación."
 
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356
@@ -102,7 +106,7 @@ msgstr "Texto sugerido:"
 
 #: wp-admin/includes/misc.php:1630
 msgid "We have suggested the sections you will need. Under each section heading you will find a short summary of what information you should provide, which will help you to get started. Some sections include suggested policy content, others will have to be completed with information from your theme and plugins."
-msgstr "Hemos sugerido las secciones que necesitarás. Bajo el encabezado de cada sección encontrarás un breve resumen de qué información deberías facilitar, lo que te ayudará a empezar. Alguna secciones incluyen contenido sugerido para la política, otras estarán completos con información de tu tema y plugins."
+msgstr "Hemos sugerido las secciones que necesitarás. Bajo el encabezado de cada sección encontrarás un breve resumen de qué información deberías facilitar, lo que te ayudará a empezar. Algunas secciones incluyen contenido sugerido para la política, otras tendrán que ser completadas con información de tu tema y plugins."
 
 #. translators: %s: plugin name
 #: wp-admin/includes/misc.php:1594
@@ -129,7 +133,7 @@ msgstr "Introducción"
 msgid "Invalid request ID when processing eraser data."
 msgstr "ID de solicitud no válido al procesar los datos del borrador."
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
 msgid "Erasing Data..."
 msgstr "Borrando datos..."
 
@@ -378,38 +382,38 @@ msgstr "Esta plantilla de texto te ayudará a crear la política de privacidad d
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Como propietario de una web, es posible que tengas que cumplir con las leyes de privacidad nacionales o internacionales. Por ejemplo, es posible que tengas que crear y mostrar una política de privacidad."
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "La eliminación de datos ha fallado."
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "La eliminación forzada ha fallado."
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "No se ha podido enviar el correo electrónico."
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "La descarga ha fallado."
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "En"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "En la URL"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "Para el sitio"
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "Informe generado para"
@@ -527,7 +531,7 @@ msgstr "También te sugerimos que revises tu política de privacidad de vez en c
 
 #: wp-admin/privacy.php:116
 msgid "However, it is your responsibility to use those resources correctly, to provide the information that your privacy policy requires, and to keep that information current and accurate."
-msgstr "Sin embargo, es tu responsabilidad usar estos recursos correctamente, para ofrecer la información que requiera tu política de privacidad, y para asegurar que la información es actual y precisa."
+msgstr "Sin embargo, es tu responsabilidad usar estos recursos correctamente, para ofrecer la información que requiera tu política de privacidad, y mantener esa información actualizada y precisa."
 
 #: wp-admin/privacy.php:109
 msgid "Privacy Policy page"
@@ -566,7 +570,7 @@ msgstr "politica-privacidad"
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -602,44 +606,44 @@ msgstr ""
 msgid "Copy suggested policy text from %s."
 msgstr "Copiar texto de política sugerido desde %s."
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
 msgstr "No ha sido posible añadir datos al archivo de exportación."
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] Exportación de datos personales"
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "Enviando correo electrónico…"
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "Descargar de nuevo los datos personales"
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "No ha sido posible enviar el correo electrónico de exportación de datos personales."
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "ID de petición no válido al fusionar los datos del exportador"
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "Correo electrónico enviado."
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "Enviar datos"
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "Exportación de datos personales"
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "Exportación de datos personales para %s"
 
@@ -647,15 +651,15 @@ msgstr "Exportación de datos personales para %s"
 msgid "A valid email address must be given."
 msgstr "Se debe facilitar una dirección de correo electrónico válida."
 
-#: wp-admin/includes/file.php:2038
+#: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "No ha sido posible abrir el archivo de exportación (archivo) para escribir en él."
 
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "No ha sido posible abrir el archivo de exportación (informe en HTML) para escribir en él."
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "No ha sido posible proteger contra navegación la carpeta de exportación"
 
@@ -671,21 +675,21 @@ msgstr "ID de petición no válida al generar el archivo de exportación"
 msgid "Unable to generate export file. ZipArchive not available."
 msgstr "No ha sido posible generar el archivo de exportación. ZipArchive no disponible."
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "ID de petición no válida al enviar el correo electrónico de exportación de datos personales."
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "Reintentar"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "Descargando datos…"
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "Descargar datos personales"
 
@@ -719,15 +723,15 @@ msgstr "Solicitante"
 msgid "Send Request"
 msgstr "Enviar petición"
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "Forzar el borrado de datos personales"
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "Petición de borrado"
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "Esperando confirmación"
 
@@ -2461,7 +2465,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "El importador %s no es válido o no está instalado."
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "Pendiente"
@@ -3016,7 +3020,7 @@ msgid "Deleting a category does not delete the posts in that category. Instead, 
 msgstr "Borrar una categoría no hará que se borren sus entradas. Las entradas que solo estuvieran asignadas a la categoría borrada serán asignadas a la categoría %s."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Enviado el: %s"
 
@@ -3222,21 +3226,21 @@ msgstr "Vista previa &#8220;%s&#8221;"
 msgid "Last page"
 msgstr "Última página"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Estado del comentario"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "En respuesta a: %s"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "En respuesta a: %s"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Fecha y hora"
 
@@ -3788,7 +3792,7 @@ msgid "Y/m/d g:i:s a"
 msgstr "d/m/Y g:i:s a"
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4293,7 +4297,7 @@ msgstr "Editar visibilidad"
 msgid "Browse revisions"
 msgstr "Buscar revisiones"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Editar fecha y hora"
 
@@ -5429,17 +5433,17 @@ msgstr "Elige una imagen de fondo"
 msgid "Choose a Custom Header"
 msgstr "Elige una cabecera personalizada"
 
-#: wp-admin/custom-header.php:117
-msgid "In the Header Text section of this page, you can choose whether to display this text or hide it. You can also choose a color for the text by clicking the Select Color button and either typing in a legitimate HTML hex value, e.g. &#8220;#ff0000&#8221; for red, or by choosing a color using the color picker."
-msgstr "En la sección del texto de la cabecera puedes elegir entre mostrarlo u ocultarlo. También puedes elegir el color del texto haciendo click en el botón de selección del color o escribiendo un valor hexadecimal HTML válido. Por ejemplo &#8220;#ff0000&#8221 para rojo o utilizando el selector de color."
-
 #: wp-admin/custom-background.php:91
 msgid "You can also choose a background color by clicking the Select Color button and either typing in a legitimate HTML hex value, e.g. &#8220;#ff0000&#8221; for red, or by choosing a color using the color picker."
 msgstr "Puedes elegir un color de fondo haciendo click en el botón de selección del color o escribiendo un valor hexadecimal HTML válido. Por ejemplo &#8220;#ff0000&#8221 para rojo o utilizando el selector de color."
 
+#: wp-admin/custom-header.php:117
+msgid "In the Header Text section of this page, you can choose whether to display this text or hide it. You can also choose a color for the text by clicking the Select Color button and either typing in a legitimate HTML hex value, e.g. &#8220;#ff0000&#8221; for red, or by choosing a color using the color picker."
+msgstr "En la sección del texto de la cabecera de esta página puedes elegir si mostrarlo u ocultarlo. También puedes elegir el color del texto haciendo clic en el botón de selección del color o escribiendo un valor hexadecimal HTML válido. Por ejemplo &#8220;#ff0000&#8221 para rojo, o utilizando el selector de color."
+
 #: wp-admin/options-reading.php:32
 msgid "You can choose whether or not your site will be crawled by robots, ping services, and spiders. If you want those services to ignore your site, click the checkbox next to &#8220;Discourage search engines from indexing this site&#8221; and click the Save Changes button at the bottom of the screen. Note that your privacy is not complete; your site is still visible on the web."
-msgstr "Puedes elegir si quieres (o no) que tu sitio sea rastreado por robots, servicios de notificación o arañas. Si quieres que esos servicios ignoren tu sitio, haz click en la casilla de verificación que están junto a &#8220;No permitir a los motores de búsqueda indexar este sitio&#8221;y hacer clic en el botón de Guardar cambios que hay en la parte inferior de la pantalla. Ten en cuenta que la privacidad no es completa, el sitio sigue siendo visible y público en la web."
+msgstr "Puedes elegir si quieres (o no) que tu sitio sea rastreado por robots, servicios de notificación o arañas. Si quieres que esos servicios ignoren tu sitio, haz clic en la casilla de verificación que está junto a &#8220;No permitir a los motores de búsqueda indexar este sitio&#8221; y hacer clic en el botón de Guardar cambios que está en la parte inferior de la pantalla. Ten en cuenta que la privacidad no es completa, el sitio sigue siendo visible y público en la web."
 
 #: wp-admin/includes/dashboard.php:1598
 msgid "More Actions"
@@ -5929,7 +5933,7 @@ msgstr "(obligatorio)"
 msgid "No comments yet."
 msgstr "No hay comentarios aún."
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Acerca de"
 
@@ -6560,7 +6564,7 @@ msgstr "Si lo deseas, WordPress puede alertar automáticamente a varios servicio
 
 #: wp-admin/options-discussion.php:22
 msgid "This screen provides many options for controlling the management and display of comments and links to your posts/pages. So many, in fact, they won&#8217;t all fit here! :) Use the documentation links to get information on what each discussion setting does."
-msgstr "Esta pantalla ofrece muchas opciones para controlar la gestión y la visualización de los comentarios y enlaces de tus páginas y entradas. Hay tantas que no todas caben aquí :). Puedes consultar en los enlaces de la documentación para saber qué hace cada opción de comentarios."
+msgstr "Esta pantalla ofrece muchas opciones para controlar la gestión y la visualización de los comentarios y enlaces de tus páginas y entradas. ¡Hay tantas que no todas caben aquí! :) Utiliza los enlaces a la documentación para obtener información sobre qué hace cada ajuste de comentarios."
 
 #: wp-admin/user-edit.php:46
 msgid "You can change your password, turn on keyboard shortcuts, change the color scheme of your WordPress administration screens, and turn off the WYSIWYG (Visual) editor, among other things. You can hide the Toolbar (formerly called the Admin Bar) from the front end of your site, however it cannot be disabled on the admin screens."
@@ -7821,10 +7825,6 @@ msgstr "<strong>Slug</strong> &mdash; El &#8220;slug&#8221; es la versión amiga
 msgid "Your username cannot be changed, but you can use other fields to enter your real name or a nickname, and change which name to display on your posts."
 msgstr "Tu nombre de usuario no puede cambiarse, pero puedes usar los otros campos para introducir tu nombre real o tu alias y utilizarlo para que se muestre en tus entradas."
 
-#: wp-admin/user-edit.php:51
-msgid "Remember to click the Update Profile button when you are finished."
-msgstr "Recuerda hacer click en el botón actualizar Perfil cuando acabes."
-
 #: wp-admin/user-new.php:213
 msgid "Editors can publish posts, manage posts as well as manage other people&#8217;s posts, etc."
 msgstr "Los Editores pueden publicar entradas, gestionar sus entradas y entradas de otras personas, etc."
@@ -7832,6 +7832,10 @@ msgstr "Los Editores pueden publicar entradas, gestionar sus entradas y entradas
 #: wp-admin/user-edit.php:50
 msgid "Required fields are indicated; the rest are optional. Profile information will only be displayed if your theme is set up to do so."
 msgstr "Los campos necesarios están marcados; el resto son opcionales. El perfil solo se mostrará si tu tema está configurado para ello."
+
+#: wp-admin/user-edit.php:51
+msgid "Remember to click the Update Profile button when you are finished."
+msgstr "Recuerda hacer clic en el botón Actualizar perfil cuando termines."
 
 #: wp-admin/comment.php:45
 msgid "You can edit the information left in a comment if needed. This is often useful when you notice that a commenter has made a typographical error."
@@ -9982,11 +9986,11 @@ msgstr "Mostrar comentarios"
 msgid "Update Comment"
 msgstr "Actualizar comentario"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Nombre:"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -10589,7 +10593,7 @@ msgstr "Mostrando %s&#8211;%s de %s"
 msgid "Bulk Actions"
 msgstr "Acciones en lote"
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -10792,7 +10796,7 @@ msgstr "Por favor elige un archivo"
 msgid "The uploaded file could not be moved to %s."
 msgstr "El archivo subido no se ha podido mover a %s."
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Comentario"
 
@@ -11547,7 +11551,7 @@ msgctxt "column name"
 msgid "Comment"
 msgstr "Comentario"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "Correo electrónico:"
 
@@ -11768,7 +11772,7 @@ msgstr "Guardar está desactivado: %s está ahora mismo editando esta página."
 msgid "Saving is disabled: %s is currently editing this post."
 msgstr "Guardar está desactivado: %s está ahora mismo editando esta entrada."
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"

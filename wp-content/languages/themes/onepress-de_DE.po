@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-20 11:37:57+0000\n"
+"PO-Revision-Date: 2018-05-23 21:20:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,7 +13,7 @@ msgstr ""
 
 #. Description of the plugin/theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
-msgstr "OnePress ist ein besonders kreatives und flexibles WordPress-OnePage-Theme, das sich bestens eignet für Business-Websites, Portfolios, Digitale Agenturen, Produkt- Präsentationen, Freiberufler und grundsätzlich jeden, der gutes Design zu schätzen weiß. Das gesamte Theme zeigt sich elegant und klassisch, als sehr schönes Beispiel eines Bootstrap 4 WordPress Themes, das natürlich auch mit der aktuellen Version von WooCommerce kompatibel ist. (Live Demo: http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress ist ein besonders kreatives und flexibles WordPress-OnePage-Theme, das sich bestens eignet für Business-Websites, Portfolios, Digitale Agenturen, Produkt- Präsentationen, Freiberufler und grundsätzlich jeden, der gutes Design zu schätzen weiß. Das gesamte Theme zeigt sich elegant und klassisch, als sehr schönes Beispiel eines Bootstrap 4 WordPress-Themes, das natürlich auch mit der aktuellen Version von WooCommerce kompatibel ist. (Live Demo: https://www.famethemes.com/preview/?theme=OnePress)"
 
 #. #-#-#-#-#  onepress.pot (OnePress 2.0.8)  #-#-#-#-#
 #. Theme Name of the plugin/theme
@@ -24,6 +24,22 @@ msgstr "OnePress"
 #: inc/dashboard.php:457
 msgid "Create a support ticket"
 msgstr "Erstelle ein Support-Ticket"
+
+#: inc/dashboard.php:81
+msgid "Don't show this again"
+msgstr "Diese Meldung nicht mehr anzeigen"
+
+#: inc/dashboard.php:80
+msgid "Install Customify Now"
+msgstr "Customify JETZT installieren"
+
+#: inc/dashboard.php:78
+msgid "Customify is both a WordPress Theme and a WordPress Theme Editor. It’s a powerful styling platform that ensures exceptional design control over your website’s looks and feel. The most highlight feature is the <strong>comprehensive Header & Footer builder</strong>."
+msgstr "Customify ist sowohl ein WordPress-Theme als auch ein WordPress Theme-Editor. Es ist eine leistungsstarke Umgebung zur stylischen Gestaltung, die außergewöhnliche Möglichkeiten für das Design deiner Website bietet. Das Highlight ist der <strong>umfangreiche Header & Footer-Builder</strong>."
+
+#: inc/dashboard.php:77
+msgid "Meet Customify - the improved version of OnePress theme by the same team!"
+msgstr "Hol dir „Customify“ - die verbesserte Version des OnePress-Themes vom gleichen Team!"
 
 #: inc/customizer.php:526
 msgid "Transparent Logo Height in Pixel"
@@ -41,6 +57,10 @@ msgstr "Öffne Button #1 in neuem Fenster"
 msgid "Pirate Forms"
 msgstr "Pirate Forms"
 
+#: inc/metabox.php:173
+msgid "Apply header cover settings for single product."
+msgstr "Headerbild-Einstellungen auf einzelnes Produkt anwenden."
+
 #: inc/dashboard.php:581
 msgid "Keep %s updated"
 msgstr "Halte %s aktuell"
@@ -55,7 +75,7 @@ msgstr "Footer verbergen."
 
 #: inc/metabox.php:153
 msgid "Display page excerpt as header cover description."
-msgstr "Auszug der Seite als Header-Bildbeschreibung anzeigen."
+msgstr "Textauszug der Seite als Header-Bildbeschreibung anzeigen."
 
 #: inc/metabox.php:147
 msgid "Display featured image as header cover."
@@ -163,7 +183,7 @@ msgstr "Ordnen nach"
 
 #: inc/customizer.php:3267
 msgid "Category to show"
-msgstr "Anzuzeigende Kategorie"
+msgstr "Zu zeigende Kategorie"
 
 #: inc/customizer.php:2799
 msgid "1x"
@@ -195,11 +215,11 @@ msgstr "Layout-Einstellungen"
 
 #: inc/customizer.php:1568
 msgid "Rotating Text Background"
-msgstr "Rotierender Text-Hintergrund"
+msgstr "Hintergrundfarbe des rotierenden Textes"
 
 #: inc/customizer.php:1553
 msgid "Rotating Text Color"
-msgstr "Rotierende Text-Farbe"
+msgstr "Farbe des rotierenden Textes"
 
 #: inc/customizer.php:1529
 msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
@@ -336,7 +356,7 @@ msgstr "Transparenter Website-Titel"
 
 #: inc/customizer.php:508
 msgid "Transparent Retina Logo"
-msgstr "Transparentes Retina Logo"
+msgstr "Transparentes Retina-Logo"
 
 #: inc/customizer.php:490 inc/customizer.php:509
 msgid "Only apply when transparent header option is checked."
@@ -380,7 +400,7 @@ msgstr "Höhe des Logos in Pixel"
 
 #: inc/customizer.php:101
 msgid "Retina Logo"
-msgstr "Retina Logo"
+msgstr "Retina-Logo"
 
 #: inc/customizer-controls.php:632
 msgid "All"
@@ -420,7 +440,7 @@ msgstr "Die Zeit zwischen den Slides in Millisekunden."
 
 #: inc/customizer.php:1377
 msgid "Slider duration speed"
-msgstr "Slide Geschwindigkeit"
+msgstr "Slide-Geschwindigkeit"
 
 #: inc/customizer.php:1361
 msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
@@ -428,11 +448,11 @@ msgstr "Das ist die Zeit, in der das Bild eingeblendet wird. Ganze Zahlen in Mil
 
 #: inc/customizer.php:1360
 msgid "Slider animation speed"
-msgstr "Slider Animations Geschwindigkeit"
+msgstr "Slider Animations-Geschwindigkeit"
 
 #: inc/customizer.php:1342
 msgid "Text animation speed"
-msgstr "Text Animations Geschwindigkeit"
+msgstr "Text Animations-Geschwindigkeit"
 
 #: inc/dashboard.php:479
 msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
@@ -508,15 +528,15 @@ msgstr "Rechte Seitenleiste"
 
 #: inc/customizer.php:161
 msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
-msgstr "Das Website Layout auf alle Seiten anwenden, außer auf die Startseite und eigene Seiten-Templates."
+msgstr "Das Website-Layout auf alle Seiten anwenden, außer auf die Startseite und eigene Seiten-Templates."
 
 #: inc/customizer.php:160
 msgid "Site Layout"
-msgstr "Website Layout"
+msgstr "Website-Layout"
 
 #: functions.php:106
 msgid "Famethemes Demo Importer"
-msgstr "Famethemes Demo Importer"
+msgstr "Famethemes Demo-Importer"
 
 #: functions.php:154
 msgid "WooCommerce Sidebar"
@@ -612,7 +632,7 @@ msgstr "Nach-Oben-Scrollen, wenn auf das Logo oder den Website-Titel geklickt wi
 
 #: inc/dashboard.php:840
 msgid "FameThemes Demo Importer"
-msgstr "FameThemes Demo Importer"
+msgstr "FameThemes Demo-Importer"
 
 #: inc/dashboard.php:839
 msgid "Hey."
@@ -640,7 +660,7 @@ msgstr "Button #2 Stil"
 
 #: inc/customizer.php:3341
 msgid "More News Button Text"
-msgstr "Mehr News Button Text"
+msgstr "„Aktuelle News“-Button-Text"
 
 #: inc/customizer.php:3330
 msgid "It should be your blog page link."
@@ -712,7 +732,7 @@ msgstr "Bild"
 
 #: inc/customizer.php:1323
 msgid "Text animation"
-msgstr "Text Animation"
+msgstr "Text-Animation"
 
 #: inc/dashboard.php:225
 msgid "OnePress Theme %s"
@@ -750,15 +770,15 @@ msgstr "Features-Inhalt"
 
 #: inc/customizer.php:2488
 msgid "Features Layout Setting"
-msgstr "Layout-Einstellung"
+msgstr "Features Layout-Einstellung"
 
 #: inc/customizer.php:2435 section-parts/section-features.php:4
 msgid "Features"
-msgstr "Funktionen"
+msgstr "Features"
 
 #: inc/customizer.php:2420 section-parts/section-features.php:2
 msgid "features"
-msgstr "Funktionen"
+msgstr "features"
 
 #: inc/customizer.php:2385
 msgid "Section: Features"
@@ -788,7 +808,7 @@ msgstr "Layout 1"
 
 #: inc/customizer.php:1512
 msgid "Display Layout"
-msgstr "Darstellungs Layout"
+msgstr "Layout der Anzeige"
 
 #: inc/customizer.php:833
 msgid "URL"
@@ -872,7 +892,7 @@ msgstr "Parallax Effekt aktivieren (wird nur für erstes Hintergrundbild genutzt
 
 #: inc/customizer.php:330
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
-msgstr "Wenn ein Logo verwendet wird, und dieses zu groß ist, dann wähle diese Option, um das Menü vertikal auszurichten."
+msgstr "Wenn du ein Logo verwendest und das Logo zu groß ist, dann wähle diese Option, um das Menü automatisch vertikal auszurichten."
 
 #: inc/customizer.php:328
 msgid "Center vertical align for menu"
@@ -920,7 +940,7 @@ msgstr "Farben"
 
 #: inc/customizer.php:3112
 msgid "User media"
-msgstr "Benutzer Medien"
+msgstr "Benutzer-Medien"
 
 #: inc/customizer.php:1861
 msgid "Background image"
@@ -928,11 +948,11 @@ msgstr "Hintergrundbild"
 
 #: inc/customizer.php:1846
 msgid "Paste Youtube or Vimeo url here"
-msgstr "Youtube oder Vimeo URL hier einfügen:"
+msgstr "YouTube- oder Vimeo-URL hier einfügen:"
 
 #: inc/customizer.php:1844
 msgid "Video url"
-msgstr "Video URL"
+msgstr "Video-URL"
 
 #: inc/customizer.php:1829
 msgid "Section heading"
@@ -946,11 +966,11 @@ msgstr "Die Bereichs ID wird genutzt, um einen Anker für einen Link zu setzen."
 
 #: inc/customizer.php:1771
 msgid "Section: Video Lightbox"
-msgstr "Video Lightbox"
+msgstr "Video-Lightbox"
 
 #: inc/dashboard.php:582
 msgid "Hooray! There are no required actions for you right now."
-msgstr "Hurra! Es gibt im Moment keine erforderlichen Maßnahmen für dich."
+msgstr "Hurra! Es gibt im Moment keine erforderlichen Aktionen für dich."
 
 #: inc/dashboard.php:572
 msgid "Change homepage page template"
@@ -1002,7 +1022,7 @@ msgstr "Hintergrund-Overlay-Farbe"
 
 #: inc/customizer.php:3614
 msgid "Section Order & Styling"
-msgstr "Anordnungs- & Styling Bereich"
+msgstr "Bereich für Anordnung & Styling"
 
 #: inc/customizer.php:312
 msgid "Check this box to disable sticky header when scroll."
@@ -1010,7 +1030,7 @@ msgstr "Wähle diese Option, um den fixierten Header beim Scrollen zu deaktivier
 
 #: inc/customizer.php:310
 msgid "Disable Sticky Header?"
-msgstr "Header Fixierung deaktivieren?"
+msgstr "Header-Fixierung deaktivieren?"
 
 #. Template Name of the plugin/theme
 msgid "Left Sidebar"
@@ -1051,7 +1071,7 @@ msgstr "#services"
 
 #: section-parts/section-contact.php:48
 msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
-msgstr "Du kannst das %1$s Plugin installieren und im Customizer über Anpassen &rarr; Kontakt &rarr; Abschnitts-Inhalt ein funktionierendes Kontakt Formular erstellen."
+msgstr "Du kannst das %1$s Plugin installieren und im Customizer über Anpassen &rarr; Kontakt &rarr; Abschnitts-Inhalt ein funktionsfähiges Kontaktformular erstellen."
 
 #: search.php:16
 msgid "Search Results for: %s"
@@ -1072,7 +1092,7 @@ msgstr "Antworten"
 
 #: inc/template-tags.php:453
 msgid "Post author"
-msgstr "Autor des Beitrages"
+msgstr "Autor des Beitrags"
 
 #: inc/template-tags.php:434
 msgid "(Edit)"
@@ -1127,7 +1147,7 @@ msgstr "Braucht du Hilfe, um %s einzurichten und zu konfigurieren? Dann sieh dir
 
 #: inc/dashboard.php:446
 msgid "Theme Documentation"
-msgstr "Theme Dokumentation"
+msgstr "Theme-Dokumentation"
 
 #: inc/dashboard.php:442
 msgid "Start Customize"
@@ -1171,15 +1191,15 @@ msgstr "Kontakt Text"
 
 #: inc/customizer.php:3496
 msgid "Check this box to hide contact form."
-msgstr "Markieren, um Kontakt Formular zu verbergen."
+msgstr "Markieren, um Kontaktformular zu verbergen."
 
 #: inc/customizer.php:3494
 msgid "Hide contact form completely."
-msgstr "Kontakt Formular komplett verbergen."
+msgstr "Kontaktformular komplett verbergen."
 
 #: inc/customizer.php:3478
 msgid "Contact Form Shortcode."
-msgstr "Contact Form Shortcode."
+msgstr "Kontaktformular-Shortcode"
 
 #: inc/customizer.php:3403 section-parts/section-contact.php:4
 msgid "Get in touch"
@@ -1195,11 +1215,11 @@ msgstr "Kontakt"
 
 #: inc/customizer.php:3336 section-parts/section-news.php:8
 msgid "Read Our Blog"
-msgstr "Lies unseren Blog"
+msgstr "Mehr in unseren Blog"
 
 #: inc/customizer.php:3328
 msgid "More News button link"
-msgstr "Mehr News Button Link"
+msgstr "„Aktuelle News“-Button-Link"
 
 #: inc/customizer.php:3250
 msgid "Number of post to show"
@@ -1219,7 +1239,7 @@ msgstr "News"
 
 #: inc/customizer.php:3103
 msgid "Team members"
-msgstr "Team Mitglieder"
+msgstr "Team-Mitglieder"
 
 #: inc/customizer.php:3015 section-parts/section-team.php:4
 msgid "Our Team"
@@ -1392,7 +1412,7 @@ msgstr "Kleiner Text"
 
 #: inc/customizer.php:1538
 msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation."
-msgstr "Anleitung für rotierenden Text: Setzte deine rotierenden Satzteile durch \"|\" getrennt in <span class=\"js-rotating\">...</span>, gehe im Customizer zu den Theme-Optionen -> Hero-Optioen -> Text Animationen."
+msgstr "Anleitung für rotierenden Text: Setze deine rotierenden Satzteile durch \"|\" getrennt in <span class=\"js-rotating\">...</span>, gehe im Customizer zu den Theme-Optionen -> Hero-Optionen -> Text-Animationen."
 
 #: inc/customizer.php:1536
 msgid "Large Text"
@@ -1400,7 +1420,7 @@ msgstr "Großer Text"
 
 #: inc/customizer.php:1496
 msgid "Hero Content Layout"
-msgstr "Hero Inhalts Layout"
+msgstr "Layout des Hero-Inhalts"
 
 #: inc/customizer.php:1423
 msgid "Background Image"
@@ -1432,11 +1452,11 @@ msgstr "10"
 
 #: inc/customizer.php:1241
 msgid "Check this box to make hero section full screen."
-msgstr "Markieren, um den Hero Bereich als Vollbild anzuzeigen."
+msgstr "Markieren, um den Hero-Bereich als Vollbild anzuzeigen."
 
 #: inc/customizer.php:1239
 msgid "Make hero section full screen"
-msgstr "Hero Bereich als Vollbild?"
+msgstr "Hero-Bereich als Vollbild?"
 
 #: inc/customizer.php:1223 inc/customizer.php:1811 inc/customizer.php:1913
 #: inc/customizer.php:2224 inc/customizer.php:2425 inc/customizer.php:2636
@@ -1469,7 +1489,7 @@ msgstr "Hero-Einstellungen"
 
 #: inc/customizer.php:1183
 msgid "Section: Hero"
-msgstr "Hero Bereich"
+msgstr "Hero-Bereich"
 
 #: inc/customizer.php:889
 msgid "MailChimp Action URL"
@@ -1642,7 +1662,7 @@ msgstr[1] "Du hast nicht die erforderlichen Berechtigungen, um die Plugins %1$s 
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
 msgstr[0] "Es ist eine Aktualisierung verfügbar für: %1$s."
-msgstr[1] "Es sind für folgende Plugins Aktualisierungen verfügbar: %1$s."
+msgstr[1] "Es sind Aktualisierungen für folgende Plugins verfügbar: %1$s."
 
 #: functions.php:376
 msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."

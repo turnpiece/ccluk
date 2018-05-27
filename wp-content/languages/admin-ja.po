@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-18 01:58:57+0000\n"
+"PO-Revision-Date: 2018-05-23 11:35:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "Asia/Tokyo"
 msgctxt "start of week"
 msgid "1"
 msgstr "1"
+
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "エクスポートフォルダーを作成できません。"
 
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356
@@ -129,7 +133,7 @@ msgstr "はじめに"
 msgid "Invalid request ID when processing eraser data."
 msgstr "消去ツールを処理する際のリクエスト ID が不正です。"
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
 msgid "Erasing Data..."
 msgstr "データを消去中&hellip;"
 
@@ -323,7 +327,7 @@ msgstr "サイトに画像をアップロードする際、位置情報 (EXIF GP
 
 #: wp-admin/includes/misc.php:1672
 msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
-msgstr "デフォルトでは、 WordPress は訪問者に関する個人データは収集せず、登録ユーザーのユーザープロフィール画面に表示されるデータだけを収集します。しかし、お使いのプラグインの中には個人データを収集するものがあるかもしれません。その場合には適切な情報を下に追加するきです。"
+msgstr "デフォルトでは、 WordPress は訪問者に関する個人データは収集せず、登録ユーザーのユーザープロフィール画面に表示されるデータだけを収集します。しかし、お使いのプラグインの中には個人データを収集するものがあるかもしれません。その場合には適切な情報を下に追加するべきです。"
 
 #: wp-admin/includes/misc.php:1671
 msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
@@ -378,38 +382,38 @@ msgstr "こんにちは。"
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "サイト所有者として、国内または国際的なプライバシーに関する法律を遵守する必要がある場合があります。例えば、プライバシーポリシーを作成して表示する必要があるかもしれません。"
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "データの消去に失敗しました。"
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "強制消去に失敗しました。"
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "メールを送信できませんでした。"
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "ダウンロードに失敗しました。"
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "日時"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "URL"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "サイト"
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "レポート生成先"
@@ -570,7 +574,7 @@ msgstr "%s からの提案テキストをコピーします。"
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -604,60 +608,60 @@ msgstr ""
 "###SITENAME### 運営者一同\n"
 "###SITEURL###"
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
 msgstr "データをエクスポートファイルに追加できません。"
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "メールを送信しました。"
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "メールを送信中…"
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "データをメールで送信"
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "個人データを再ダウンロードする"
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "エクスポータデータをマージする際のリクエスト ID が無効です。"
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "個人データエクスポートメールを送信できません。"
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] 個人データのエクスポート"
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "個人データエクスポートメールを送信する際のリクエスト ID が不正です。"
 
-#: wp-admin/includes/file.php:2038
+#: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "エクスポートファイル (アーカイブ) を書き込み用に開けません。"
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "個人データのエクスポート"
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "%s の個人データをエクスポート"
 
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "エクスポートファイル (HTML レポート) を書き込み用に開けません。"
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "エクスポートフォルダーを閲覧保護できません。"
 
@@ -677,29 +681,29 @@ msgstr "エクスポートファイルを再生できません。ZipArchive が�
 msgid "A valid email address must be given."
 msgstr "有効なメールアドレスが必要です。"
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "個人データを強制消去する"
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "リクエストを削除"
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "確認待ち"
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "再試行"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "データのダウンロード中&hellip;"
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "個人データをダウンロード"
 
@@ -2321,7 +2325,7 @@ msgstr "タクソノミーテンプレート"
 
 #: wp-admin/includes/dashboard.php:1468
 msgid "Dismiss the browser warning panel"
-msgstr "ブラウザの警告パネルを非表示"
+msgstr "ブラウザーの警告パネルを非表示"
 
 #: wp-admin/includes/dashboard.php:927
 msgid "View more comments"
@@ -2456,7 +2460,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "%s インポートツールが無効か、またはインストールされていません。"
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "承認待ち"
@@ -3005,7 +3009,7 @@ msgid "Deleting a category does not delete the posts in that category. Instead, 
 msgstr "カテゴリーを削除してもカテゴリー内の投稿は削除されません。そのカテゴリーのみにしか属していない投稿には、カテゴリー「%s」が設定されます。"
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "投稿日時: %s"
 
@@ -3211,20 +3215,20 @@ msgid "First page"
 msgstr "最初の固定ページ"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "%s への返信"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "%s へのコメント"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "日付と時刻"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "コメントの状態"
 
@@ -3765,7 +3769,7 @@ msgid "Size in megabytes"
 msgstr "メガバイト単位のサイズ"
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4239,7 +4243,7 @@ msgstr "<strong>ボックスのコントロール</strong> &mdash; ボックス�
 msgid "<strong>Remove</strong> allows you to remove a user from your site. It does not delete their content. You can also remove multiple users at once by using Bulk Actions."
 msgstr "<strong>削除</strong>を使うとサイトからユーザーを削除できます。そのユーザーのコンテンツは削除されません。また、一括操作で一度に複数のユーザーを削除することもできます。"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "日時を編集"
 
@@ -5908,7 +5912,7 @@ msgstr "コメントの編集"
 msgid "Preview:"
 msgstr "プレビュー:"
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "詳細"
 
@@ -10953,7 +10957,7 @@ msgstr "レビュー待ちとして送信"
 msgid "Page"
 msgstr "固定ページ"
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "コメント"
 
@@ -11386,7 +11390,7 @@ msgstr "この説明はデフォルトではあまり重要な意味を持ちま
 msgid "The &#8220;slug&#8221; is the URL-friendly version of the name. It is usually all lowercase and contains only letters, numbers, and hyphens."
 msgstr "&#8220;スラッグ&#8221; は URL に適した形式の名前です。通常はすべて半角小文字で、英数字とハイフンのみが使われます。"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -11394,11 +11398,11 @@ msgstr "URL:"
 msgid "Visit site"
 msgstr "サイトを表示"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "メールアドレス:"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "名前:"
 
@@ -11494,7 +11498,7 @@ msgstr "絞り込み検索"
 msgid "Pings"
 msgstr "トラックバック/ピンバック"
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -11693,7 +11697,7 @@ msgstr "無効なプラグインのページ。"
 msgid "Scheduled"
 msgstr "予約済み"
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"

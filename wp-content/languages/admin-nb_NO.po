@@ -133,7 +133,7 @@ msgstr "Under bearbeiding av informasjon som skal slettes, ble det oppdaget at f
 msgid "Add Data Erasure Request"
 msgstr "Legg til forespørsel om å slette opplysninger"
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
 msgid "Erasing Data..."
 msgstr "Sletter opplysninger …"
 
@@ -378,38 +378,38 @@ msgstr "Denne tekstmalen vil hjelpe deg å lage en personvernerklæring for ditt
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Som nettstedseier kan du måtte følge nasjonale og internasjonale personvernlover. For eksempel kan du være pålagt å lage og vise en personvernerklæring."
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "Sletting av data mislyktes."
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "Tvungen sletting mislyktes."
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "Epost kunne ikke sendes."
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "Nedlasting mislyktes."
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "den"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "På URL"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "For nettsted"
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "Rapport laget for"
@@ -570,7 +570,7 @@ msgstr "Kopiér foreslått personvernerklæring fra %s."
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -602,35 +602,35 @@ msgstr ""
 "Alle på ###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
 msgstr "Kunne ikke legge til data i eksportfilen."
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "Ugyldig forespørsles-ID når eksport-data skulle slås sammen."
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "Send data med epost"
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "Sender epost&hellip;"
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "Epost sendt."
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "Last ned personopplysninger på nytt."
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] eksport av personopplysninger"
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "Kunne ikke sende epost med eksport av personopplysninger."
 
@@ -650,28 +650,28 @@ msgstr "Ugyldig forespørsel-ID når eksportfilen skulle lages."
 msgid "Invalid email address when generating export file."
 msgstr "Ugyldig epost-adresse når eksportfilen skulle lages."
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "Klarer ikke beskytte eksport-mappen mot nettlesing."
 
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "Klarer ikke åpne eksportfilen (HTML-rapport) for skriving."
 
-#: wp-admin/includes/file.php:2038
+#: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "Klarer ikke å åpne eksportfilen (arkiv) for skriving."
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "Eksport av personopplysninger for %s"
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "Eksport av personopplysninger"
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "Ugyldig forespørsles-ID når epost med eksport av personopplysninger skulle sendes."
 
@@ -775,21 +775,21 @@ msgid_plural "Deleted %d requests"
 msgstr[0] "Slettet %d forespørsel"
 msgstr[1] "Slettet %d forespørsler"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "Laster ned data&hellip;"
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "Forsøk igjen"
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "Venter på bekreftelse"
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "Fjern forespørsel"
 
@@ -820,11 +820,11 @@ msgid_plural "Re-sent %d requests"
 msgstr[0] "Sendte %d forespørsel på nytt"
 msgstr[1] "Sendte %d forespørsler på nytt"
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "Last ned personopplysninger"
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "Tving sletting av personopplysninger"
 
@@ -2463,7 +2463,7 @@ msgctxt "user autocomplete result"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "Ventende"
@@ -3018,7 +3018,7 @@ msgid "You can view posts in a simple title list or with an excerpt using the Sc
 msgstr "Du kan se innlegg i en enkel tittelliste eller med et utdrag ved hjelp av Visningsinnstillinger-fanen."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Sendt inn: %s"
 
@@ -3225,20 +3225,20 @@ msgid "Last page"
 msgstr "Siste side"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "Kommentar til: %s"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Dato og tid"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "Svar på: %s"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Kommentarstatus"
 
@@ -3796,7 +3796,7 @@ msgid "Unable to connect to the filesystem. Please confirm your credentials."
 msgstr "Kunne ikke koble til filsystemet. Vennligst bekreft din innloggingsinformasjon."
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4268,7 +4268,7 @@ msgstr "Rediger synlighet"
 msgid "Browse revisions"
 msgstr "Bla i revisjoner"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Rediger dato og tid"
 
@@ -5886,7 +5886,7 @@ msgstr "%s siden"
 msgid "All"
 msgstr "Alle"
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Om"
 
@@ -10052,15 +10052,15 @@ msgstr "Permalenke"
 msgid "Update Comment"
 msgstr "Oppdater kommentar"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Navn:"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "E-post:"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -11384,7 +11384,7 @@ msgstr "Sist endret av %1$s, %2$s kl. %3$s"
 msgid "Last edited on %1$s at %2$s"
 msgstr "Sist endret %1$s kl. %2$s"
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -11606,7 +11606,7 @@ msgstr "Kunne ikke koble til SSH2-tjeneren %s"
 msgid "Failed to connect to FTP Server %s"
 msgstr "Kunne ikke koble til FTP-tjeneren %s"
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Kommentar"
 
@@ -11754,7 +11754,7 @@ msgstr "Lagring er deaktivert: %s redigerer dette innlegget nå."
 msgid "Item not updated."
 msgstr "Saken ble ikke oppdatert."
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"

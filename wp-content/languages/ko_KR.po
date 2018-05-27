@@ -157,7 +157,7 @@ msgstr "[%1$s] 작업 확인: %2$s"
 msgid "Erase Personal Data"
 msgstr "개인 데이터 삭제"
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr "나중을 위해 이름, 이메일주소, 웹사이트 주소를 이 브라우저에 저장."
 
@@ -673,7 +673,7 @@ msgid "Unsupported value type (%s)."
 msgstr "지원되지 않는 값 형태 (%s)."
 
 #. translators: %s: register_widget()
-#: wp-includes/widgets.php:1053
+#: wp-includes/widgets.php:1054
 msgid "Widgets need to be registered using %s, before they can be displayed."
 msgstr "위젯은 표시되기 전에 %s를 사용해 등록돼야 합니다."
 
@@ -2340,7 +2340,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] 활성화 %2$s"
 
-#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
+#: wp-includes/widgets.php:1399 wp-includes/widgets.php:1508
 msgid "RSS Error:"
 msgstr "RSS 에러:"
 
@@ -4443,13 +4443,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "1결과 찾음. 위아래로 이동하려면 화살표 키를 사용하세요."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2234
+#: wp-includes/comment-template.php:2236
 msgid "Logged in as %s. Edit your profile."
 msgstr "%s로(으로) 로그인함. 프로필 편집하기."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2233
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">%3$s로(으로) 로그인 함</a>. <a href=\"%4$s\">로그아웃?</a>"
 
@@ -9584,7 +9584,7 @@ msgstr "<strong>상수 VHOST와 SUBDOMAIN_INSTALL의 충돌 값.</strong> SUBDOM
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>에러</strong>: 이 사용자명은 올바르지 않습니다. 올바른 사용자명을 입력하여 주십시오."
 
-#: wp-includes/comment-template.php:2209
+#: wp-includes/comment-template.php:2211
 msgid "Required fields are marked %s"
 msgstr "필수 입력창은 %s 로 표시되어 있습니다"
 
@@ -9746,7 +9746,7 @@ msgstr "귀하를 이 사이트에 추가하던 중 에러가 발생했습니다
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "이 파일은 너무 큽니다. 파일은  %d KB 보다 작아야 합니다."
 
-#: wp-includes/comment-template.php:2238
+#: wp-includes/comment-template.php:2240
 msgid "Your email address will not be published."
 msgstr "이메일은 공개되지 않습니다."
 
@@ -10544,7 +10544,7 @@ msgstr "태그 닫기"
 msgid "Close all open tags"
 msgstr "열린 태그를 모두 닫기"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1414
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "오류가 발생했습니다, 아마도 피드가 다운된 것 같습니다. 잠시후에 다시 시도하십시오."
 
@@ -11510,31 +11510,31 @@ msgstr "새 워드프레스 루프"
 msgid "Tag Cloud"
 msgstr "태그 구름"
 
-#: wp-includes/widgets.php:1535
+#: wp-includes/widgets.php:1536
 msgid "Display item date?"
 msgstr "날자를 표시합니까?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1533
 msgid "Display item author if available?"
 msgstr "가능하다면 제작자를 표시합니까?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1530
 msgid "Display item content?"
 msgstr "항목 내용을 표시합니까?"
 
-#: wp-includes/widgets.php:1519
+#: wp-includes/widgets.php:1520
 msgid "How many items would you like to display?"
 msgstr "얼마나 많은 내용을 표시하시겠습니까?"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1517
 msgid "Give the feed a title (optional):"
 msgstr "피드의 제목을 넣어주십시오 (생략가능):"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1514
 msgid "Enter the RSS feed URL here:"
 msgstr "RSS 피드의 URL을 넣어주십시오:"
 
-#: wp-includes/widgets.php:1429
+#: wp-includes/widgets.php:1430
 msgid "Untitled"
 msgstr "제목없음"
 
@@ -11660,19 +11660,19 @@ msgstr "중복된 댓글이 발견되었습니다; 이미 댓글을 다신 것 �
 msgid "Unapproved"
 msgstr "받아들이지 않기"
 
-#: wp-includes/comment-template.php:2253
+#: wp-includes/comment-template.php:2255
 msgid "Post Comment"
 msgstr "댓글 달기"
 
-#: wp-includes/comment-template.php:2252
+#: wp-includes/comment-template.php:2254
 msgid "Cancel reply"
 msgstr "응답 취소"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2249
 msgid "Leave a Reply to %s"
 msgstr "%s 에 답글 남기기"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2248
 msgid "Leave a Reply"
 msgstr "답글 남기기"
 
@@ -11765,7 +11765,7 @@ msgid "Tags: "
 msgstr "태그: "
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2225
+#: wp-includes/comment-template.php:2227
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "<a href=\"%s\">로그인</a>을 해야 댓글을 남길 수 있습니다."
 
@@ -11823,7 +11823,7 @@ msgstr "약간 이상하고 성가신 이유로, 이 글은 편집할 수 없습
 msgid "Widgets"
 msgstr "위젯"
 
-#: wp-includes/comment-template.php:2203
+#: wp-includes/comment-template.php:2205
 msgid "Website"
 msgstr "웹사이트"
 
@@ -11879,7 +11879,7 @@ msgstr "날짜 표시 형식"
 msgid "Allow people to post comments on new articles"
 msgstr "댓글을 쓸 수 있게 합니다"
 
-#: wp-includes/comment-template.php:2201 wp-login.php:810
+#: wp-includes/comment-template.php:2203 wp-login.php:810
 msgid "Email"
 msgstr "이메일"
 
@@ -12340,7 +12340,7 @@ msgstr "없음"
 msgid "Description"
 msgstr "설명"
 
-#: wp-includes/comment-template.php:2199
+#: wp-includes/comment-template.php:2201
 msgid "Name"
 msgstr "이름"
 
@@ -12428,7 +12428,7 @@ msgstr "아니오"
 msgid "Are you sure you want to do this?"
 msgstr "이 작업을 수행하시겠습니까?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2223
 msgctxt "noun"
 msgid "Comment"
 msgstr "댓글"

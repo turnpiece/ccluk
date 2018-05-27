@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-16 19:27:21+0000\n"
+"PO-Revision-Date: 2018-05-25 10:48:51+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -131,7 +131,7 @@ msgid ""
 msgstr ""
 "Bonjour,\n"
 "\n"
-"Une demande de données utilisateur à été confirmée sur ###SITENAME### :\n"
+"Une demande de données utilisateur a été confirmée sur ###SITENAME### :\n"
 "\n"
 "Utilisateur : ###USER_EMAIL###\n"
 "Demande : ###DESCRIPTION###\n"
@@ -159,7 +159,7 @@ msgstr "[%1$s] Confirmer l’action : %2$s"
 msgid "Erase Personal Data"
 msgstr "Effacer les données"
 
-#: wp-includes/comment-template.php:2206
+#: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr "Enregistrer mon nom, mon e-mail et mon site web dans le navigateur pour mon prochain commentaire."
 
@@ -580,7 +580,7 @@ msgstr "Aucun jeu de modification trouvé sur lequel prendre prendre la main."
 
 #: wp-includes/class-wp-customize-manager.php:3212
 msgid "Security check failed."
-msgstr "Erreur de vérification de sécurité"
+msgstr "Erreur de vérification de sécurité."
 
 #: wp-includes/class-wp-customize-manager.php:2456
 msgid "Changeset is being edited by other user."
@@ -674,7 +674,7 @@ msgid "Unsupported value type (%s)."
 msgstr "Type de valeur non supporté (%s)."
 
 #. translators: %s: register_widget()
-#: wp-includes/widgets.php:1053
+#: wp-includes/widgets.php:1054
 msgid "Widgets need to be registered using %s, before they can be displayed."
 msgstr "Les widgets nécessitent d’être enregistrés en utilisant %s avant qu’ils ne puissent être affichés."
 
@@ -789,8 +789,8 @@ msgstr "La page d’accueil et la page des articles doivent être différentes."
 #: wp-includes/widgets/class-wp-widget-custom-html.php:219
 msgid "There is %d error which must be fixed before you can save."
 msgid_plural "There are %d errors which must be fixed before you can save."
-msgstr[0] "Il y a %d erreur que vous devriez corriger avant de sauvegarder."
-msgstr[1] "Il y a %d erreurs que vous devriez corriger avant de sauvegarder."
+msgstr[0] "Il y a %d erreur que vous devriez corriger avant d’enregistrer."
+msgstr[1] "Il y a %d erreurs que vous devriez corriger avant d’enregistrer."
 
 #. translators: %s: URL to the Customizer to load the autosaved version
 #: wp-includes/script-loader.php:581
@@ -2350,7 +2350,7 @@ msgctxt "New site notification email subject"
 msgid "[%1$s] Activate %2$s"
 msgstr "[%1$s] Activation de %2$s"
 
-#: wp-includes/widgets.php:1398 wp-includes/widgets.php:1507
+#: wp-includes/widgets.php:1399 wp-includes/widgets.php:1508
 msgid "RSS Error:"
 msgstr "Erreur RSS :"
 
@@ -4451,13 +4451,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "Un résultat trouvé. Utilisez les flèches haut et bas du clavier pour les parcourir. "
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2234
+#: wp-includes/comment-template.php:2236
 msgid "Logged in as %s. Edit your profile."
 msgstr "Connexion en tant que %s. Modifier votre profil."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2231
+#: wp-includes/comment-template.php:2233
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">Connecté en tant que %3$s</a>. <a href=\"%4$s\">Déconnexion ?</a>"
 
@@ -9601,9 +9601,9 @@ msgstr "<strong>Les valeurs des constantes VHOST et SUBDOMAIN_INSTALL ne corresp
 
 #: wp-includes/user.php:2351
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
-msgstr "<strong>ERREUR</strong> : cet identifiant n’est pas valide, car il utilise des caractères non autorisés. Merci d’utiliser un identifiant valide."
+msgstr "<strong>ERREUR</strong> : cet identifiant n’est pas valide, car il utilise des caractères non autorisés. Veuillez utiliser un identifiant valide."
 
-#: wp-includes/comment-template.php:2209
+#: wp-includes/comment-template.php:2211
 msgid "Required fields are marked %s"
 msgstr "Les champs obligatoires sont indiqués avec %s"
 
@@ -9765,7 +9765,7 @@ msgstr "Une erreur est survenue lors de votre ajout à ce site. Retournez à l�
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "Ce fichier est trop gros. La taille des fichiers doit être inférieure %d Ko."
 
-#: wp-includes/comment-template.php:2238
+#: wp-includes/comment-template.php:2240
 msgid "Your email address will not be published."
 msgstr "Votre adresse de messagerie ne sera pas publiée."
 
@@ -10109,7 +10109,7 @@ msgstr "Désolé, vous n’avez pas l’autorisation de publier sur cet article.
 #: wp-includes/class-wp-xmlrpc-server.php:4621
 #: wp-includes/class-wp-xmlrpc-server.php:6003
 msgid "Either there are no posts, or something went wrong."
-msgstr "Soit il n’y a pas d’articles, soit une erreur s’est produite."
+msgstr "Soit il n’y a aucun article, soit une erreur s’est produite."
 
 #: wp-includes/class-wp-xmlrpc-server.php:3969
 msgid "Sorry, you are not allowed to update options."
@@ -10395,7 +10395,7 @@ msgstr "<strong>ERREUR</strong> : le champ du mot de passe est vide."
 
 #: wp-includes/user.php:135
 msgid "<strong>ERROR</strong>: The username field is empty."
-msgstr "<strong>ERREUR</strong> : le champ de l’identifiant est vide."
+msgstr "<strong>ERREUR</strong> : le champ du nom d’utilisateur est vide."
 
 #: wp-includes/class-wp-theme.php:231
 msgid "Stylesheet is missing."
@@ -10565,7 +10565,7 @@ msgstr "fermer les balises"
 msgid "Close all open tags"
 msgstr "Fermer toutes les balises ouvertes"
 
-#: wp-includes/rss.php:917 wp-includes/widgets.php:1413
+#: wp-includes/rss.php:917 wp-includes/widgets.php:1414
 msgid "An error has occurred, which probably means the feed is down. Try again later."
 msgstr "Une erreur est survenue, le flux est probablement indisponible. Veuillez réessayer plus tard."
 
@@ -11541,31 +11541,31 @@ msgstr "Nouvelle boucle WordPress"
 msgid "Tag Cloud"
 msgstr "Nuage d’étiquettes"
 
-#: wp-includes/widgets.php:1535
+#: wp-includes/widgets.php:1536
 msgid "Display item date?"
 msgstr "Afficher la date de l’élément ?"
 
-#: wp-includes/widgets.php:1532
+#: wp-includes/widgets.php:1533
 msgid "Display item author if available?"
 msgstr "Afficher l’auteur de l’élément si disponible ?"
 
-#: wp-includes/widgets.php:1529
+#: wp-includes/widgets.php:1530
 msgid "Display item content?"
 msgstr "Afficher le contenu de l’élément ?"
 
-#: wp-includes/widgets.php:1519
+#: wp-includes/widgets.php:1520
 msgid "How many items would you like to display?"
 msgstr "Combien d’entrées souhaitez-vous afficher ?"
 
-#: wp-includes/widgets.php:1516
+#: wp-includes/widgets.php:1517
 msgid "Give the feed a title (optional):"
 msgstr "Donnez un titre au flux (facultatif) :"
 
-#: wp-includes/widgets.php:1513
+#: wp-includes/widgets.php:1514
 msgid "Enter the RSS feed URL here:"
 msgstr "Saisissez l’URL du flux RSS ici :"
 
-#: wp-includes/widgets.php:1429
+#: wp-includes/widgets.php:1430
 msgid "Untitled"
 msgstr "Sans titre"
 
@@ -11691,19 +11691,19 @@ msgstr "Détection d’un doublon : il semble que vous avez déjà envoyé ce c
 msgid "Unapproved"
 msgstr "Désapprouvé"
 
-#: wp-includes/comment-template.php:2253
+#: wp-includes/comment-template.php:2255
 msgid "Post Comment"
 msgstr "Laisser un commentaire"
 
-#: wp-includes/comment-template.php:2252
+#: wp-includes/comment-template.php:2254
 msgid "Cancel reply"
 msgstr "Annuler la réponse"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2247
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2249
 msgid "Leave a Reply to %s"
 msgstr "Répondre à %s"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2246
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2248
 msgid "Leave a Reply"
 msgstr "Laisser un commentaire"
 
@@ -11796,7 +11796,7 @@ msgid "Tags: "
 msgstr "Étiquettes : "
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2225
+#: wp-includes/comment-template.php:2227
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Vous devez <a href=\"%s\">être connecté</a> pour publier un commentaire."
 
@@ -11854,7 +11854,7 @@ msgstr "Pour une étrange et très ennuyeuse raison, cet article n’a pas pu ê
 msgid "Widgets"
 msgstr "Widgets"
 
-#: wp-includes/comment-template.php:2203
+#: wp-includes/comment-template.php:2205
 msgid "Website"
 msgstr "Site web"
 
@@ -11910,7 +11910,7 @@ msgstr "Format de date"
 msgid "Allow people to post comments on new articles"
 msgstr "Autoriser les lecteurs à publier des commentaires sur les nouveaux articles"
 
-#: wp-includes/comment-template.php:2201 wp-login.php:810
+#: wp-includes/comment-template.php:2203 wp-login.php:810
 msgid "Email"
 msgstr "Adresse de messagerie"
 
@@ -11973,7 +11973,7 @@ msgstr "Il n’y a pas d’options pour ce widget."
 
 #: wp-includes/user.php:2371
 msgid "<strong>ERROR</strong>: This email is already registered, please choose another one."
-msgstr "<strong>ERREUR</strong> : cette adresse de messagerie est déjà utilisée. Merci d’en choisir une autre."
+msgstr "<strong>ERREUR</strong> : cette adresse de messagerie est déjà utilisée. Veuillez en choisir une autre."
 
 #: wp-includes/user.php:2349
 msgid "<strong>ERROR</strong>: Please enter a username."
@@ -12107,7 +12107,7 @@ msgstr "Recherche"
 #: wp-includes/widgets/class-wp-widget-text.php:521
 #: wp-includes/widgets/class-wp-widget-text.php:536
 msgid "Dismiss"
-msgstr "Fermer"
+msgstr "Ignorer"
 
 #: wp-includes/taxonomy.php:509
 msgid "All Categories"
@@ -12371,7 +12371,7 @@ msgstr "Aucun"
 msgid "Description"
 msgstr "Description"
 
-#: wp-includes/comment-template.php:2199
+#: wp-includes/comment-template.php:2201
 msgid "Name"
 msgstr "Nom"
 
@@ -12459,7 +12459,7 @@ msgstr "Non"
 msgid "Are you sure you want to do this?"
 msgstr "Voulez-vous vraiment faire cela ?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2221
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2223
 msgctxt "noun"
 msgid "Comment"
 msgstr "Commentaire"
@@ -12522,7 +12522,7 @@ msgstr "Identifiant :"
 
 #: wp-activate.php:124
 msgid "An error occurred during the activation"
-msgstr "Une erreur est survenue lors de l’activation"
+msgstr "Une erreur est survenue lors de l’activation."
 
 #: wp-activate.php:99 wp-activate.php:132
 msgid "Your account is now active!"

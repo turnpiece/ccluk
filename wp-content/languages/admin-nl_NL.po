@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-18 11:37:42+0000\n"
+"PO-Revision-Date: 2018-05-23 14:20:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,10 +26,14 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europa/Amsterdam"
 
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "Kon exportmap niet maken."
+
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356
 msgid "The suggested privacy policy text has changed. Please <a href=\"%s\">review the guide</a> and update your privacy policy."
-msgstr "De voorgestelde privacybeleidstekst is gewijzigd. Bekijk <a href=\"%s\">de gids</a> en werk je privacybeleid bij daar waar nodig."
+msgstr "De voorgestelde privacybeleid tekst is gewijzigd. Bekijk <a href=\"%s\">de gids</a> en werk je privacybeleid daar waar nodig bij."
 
 #: wp-admin/privacy.php:214
 msgid "There are no pages."
@@ -53,13 +57,13 @@ msgstr "Privacy %s"
 msgid "Settings %s"
 msgstr "Instellingen %s"
 
-#: wp-admin/includes/class-wp-internal-pointers.php:164
-msgid "Personal Data and Privacy"
-msgstr "Persoonlijke Data en Privacy"
-
 #: wp-admin/privacy.php:119
 msgid "After your privacy policy page is set, we suggest that you edit it."
 msgstr "Nadat je privacybeleids pagina is vastgesteld, stellen we voor dat je deze aanpast."
+
+#: wp-admin/includes/class-wp-internal-pointers.php:164
+msgid "Personal Data and Privacy"
+msgstr "Persoonlijke gegevens en privacy"
 
 #. translators: accessibility text
 #: wp-admin/includes/misc.php:1542
@@ -70,15 +74,15 @@ msgstr "(opent in een nieuw tabblad)"
 #. accessibility text
 #: wp-admin/includes/misc.php:1536 wp-admin/privacy.php:149
 msgid "Need help putting together your new Privacy Policy page? <a href=\"%1$s\" %2$s>Check out our guide%3$s</a> for recommendations on what content to include, along with policies suggested by your plugins and theme."
-msgstr "Hulp nodig in het maken van je privacybeleidspagina? <a href=\"%1$s\" %2$s>Bekijk onze gids%3$s</a> voor aanbevelingen over welke content je moet toevoegen samen met policies die door jouw plugins en thema's voorgesteld worden."
+msgstr "Hulp nodig bij het maken van je privacybeleidspagina? <a href=\"%1$s\" %2$s>Bekijk onze gids%3$s</a> voor aanbevelingen over welke inhoud je moet toevoegen samen met policies die door jouw plugins en thema voorgesteld worden."
 
 #: wp-admin/tools.php:15
 msgid "Privacy Policy Guide"
-msgstr "Privacypagina gids"
+msgstr "Privacybeleid gids"
 
 #: wp-admin/includes/misc.php:1736
 msgid "Visitor comments may be checked through an automated spam detection service."
-msgstr "Reacties van bezoekers kunnen door een geautomatiseerde spam detectie service geleid worden."
+msgstr "Reacties van bezoekers kunnen door een geautomatiseerde spamdetectie service geleid worden."
 
 #: wp-admin/includes/misc.php:1708
 msgid "In this subsection you should note what analytics package you use, how users can opt out of analytics tracking, and a link to your analytics provider&#8217;s privacy policy, if any."
@@ -86,11 +90,11 @@ msgstr "In dit onderdeel moet je aangeven wat voor analytics programma je gebrui
 
 #: wp-admin/includes/misc.php:1684
 msgid "In this subsection you should note what information may be disclosed by users who can upload media files. All uploaded files are usually publicly accessible."
-msgstr "In dit onderdeel moet je aangeven welke informatie getoond kan worden door gebruikers die media bestanden kunnen uploaden. Alle bestanden die zijn geüpload zijn normaliter publiekelijk beschikbaar."
+msgstr "In dit onderdeel moet je aangeven welke informatie getoond kan worden door gebruikers die mediabestanden kunnen uploaden. Alle bestanden die zijn geüpload zijn normaliter publiekelijk beschikbaar."
 
 #: wp-admin/includes/misc.php:1677
 msgid "In this subsection you should note what information is captured through comments. We have noted the data which WordPress collects by default."
-msgstr "In dit onderdeel geef je aan welke informatie verzameld wordt door middel van reacties. We hebben al genoteerd welke data WordPress standaard verzameld in deze."
+msgstr "In dit onderdeel geef je aan welke informatie verzameld wordt door middel van reacties. We hebben al genoteerd welke gegevens WordPress standaard verzameld."
 
 #: wp-admin/includes/misc.php:1668
 msgid "In this section you should note what personal data you collect from users and site visitors. This may include personal data, such as name, email address, personal account preferences; transactional data, such as purchase information; and technical data, such as information about cookies."
@@ -129,13 +133,13 @@ msgstr "Je hebt deze plugin op %s gedeactiveerd en hebt mogelijk deze policy nie
 msgid "Invalid request ID when processing eraser data."
 msgstr "Ongeldig request ID tijdens het wissen van de data."
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
-msgid "Erasing Data..."
-msgstr "Data verwijderen..."
-
 #: wp-admin/includes/user.php:845
 msgid "Add Data Erasure Request"
 msgstr "Een data verwijderingsaanvraag toevoegen"
+
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
+msgid "Erasing Data..."
+msgstr "Gegevens wissen..."
 
 #: wp-admin/includes/class-wp-internal-pointers.php:165
 msgid "Personal Data Export and Erasure"
@@ -161,13 +165,13 @@ msgstr "Openbaarmakingsverplichtingen van de industrie"
 msgid "If your web site provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
 msgstr "Indien je website een dienst levert die geautomatiseerde besluiten maakt, zoals bijvoorbeeld het aanvragen van leningen of je verzamelt data in een advertentieprofiel, dan moet je aangeven dat dit gebeurd. Daarnaast moet je ook aangeven hoe deze informatie gebruikt wordt, welke besluiten genomen worden op basis van de verzamelde data en welke rechten gebruikers hebben over besluiten die genomen zijn zonder menselijk ingrijpen. "
 
-#: wp-admin/includes/misc.php:1763
-msgid "What automated decision making and/or profiling we do with user data"
-msgstr "Wat voor geautomatiseerde besluiten we nemen en profilering we doen met gebruikersdata"
-
 #: wp-admin/includes/misc.php:1760
 msgid "If your web site receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
 msgstr "Als je website data ontvangt van gebruikers van derde partijen, inclusief adverteerders, dan moet deze informatie toegevoegd worden aan het onderdeel over derde partijen data op je privacybeleidspagina."
+
+#: wp-admin/includes/misc.php:1763
+msgid "What automated decision making and/or profiling we do with user data"
+msgstr "Wat voor geautomatiseerde besluiten we nemen en profilering we doen met gebruikersgegevens"
 
 #: wp-admin/includes/misc.php:1758
 msgid "What third parties we receive data from"
@@ -342,13 +346,13 @@ msgstr "Noteer ook hoe je persoonlijke data, zoals bijvoorbeeld data met betrekk
 msgid "Our website address is: %s."
 msgstr "Ons website-adres is: %s."
 
-#: wp-admin/includes/misc.php:1666
-msgid "What personal data we collect and why we collect it"
-msgstr "Welke persoonlijke data we verzamelen en waarom we het verzamelen"
-
 #: wp-admin/includes/misc.php:1661
 msgid "The amount of information you may be required to show will vary depending on your local or national business regulations. You may, for example, be required to display a physical address, a registered address, or your company registration number."
 msgstr "De hoeveelheid informatie die je moet tonen varieert op basis van lokale of nationale zakelijke bepalingen. Je zou bijvoorbeeld  je fysieke adres of KVK nummer moeten publiceren."
+
+#: wp-admin/includes/misc.php:1666
+msgid "What personal data we collect and why we collect it"
+msgstr "Welke persoonlijke gegevens we verzamelen en waarom we die verzamelen"
 
 #: wp-admin/includes/misc.php:1658
 msgid "Who we are"
@@ -378,39 +382,39 @@ msgstr "Dit template helpt je om het privacybeleid van jouw site te maken."
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Als website-eigenaar moet je voldoen aan nationale of internationale privacy wetgeving. Je kan bijvoorbeeld een privacybeleid maken en tonen."
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "E-mail kon niet verzonden worden."
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "Download is mislukt."
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "Op"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "Op URL"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "Voor site"
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "Rapport gegenereerd voor"
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "Verwijderen data is mislukt."
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "Geforceerd verwijderen is mislukt."
 
@@ -562,7 +566,7 @@ msgstr "privacybeleid"
 #. translators: %s: URL to Customizer -> Menus
 #: wp-admin/privacy.php:30
 msgid "Privacy policy page updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
-msgstr "Privacybeleids tekst is succesvol bijgewerkt. Denk je er aan <a href=\"%s\">om je menu's bij te werken</a>?"
+msgstr "Privacybeleidtekst is succesvol bijgewerkt. Denk je er aan <a href=\"%s\">om je menu's bij te werken</a>?"
 
 #: wp-admin/includes/misc.php:1604
 msgid "Copy suggested policy text from %s."
@@ -570,7 +574,7 @@ msgstr "Kopieer aanbevolen privacybeleids tekst van %s."
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -602,44 +606,44 @@ msgstr ""
 "###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
-msgstr "Het is niet gelukt data toe te voegen aan het export bestand."
+msgstr "Het is niet gelukt data toe te voegen aan het exportbestand."
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "E-mail versturen..."
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "E-mail data"
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "Download persoonlijke data opnieuw"
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] Persoonlijke Data Export"
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "E-mail verstuurd."
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "Ongeldig request ID tijdens het samenvoegen van export data."
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "Het is niet gelukt om persoonlijke data export e-mail te versturen."
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "Exporteer persoonlijke data"
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "Exporteer persoonlijke data voor %s"
 
@@ -655,15 +659,11 @@ msgstr "Ongeldig e-mailadres tijdens genereren exportbestand."
 msgid "Unable to generate export file. ZipArchive not available."
 msgstr "Niet mogelijk exportbestand te genereren. ZipArchive niet beschikbaar."
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "Ongeldig request ID tijdens het versturen van de persoonlijke data export e-mail."
 
-#: wp-admin/includes/file.php:2038
-msgid "Unable to open export file (archive) for writing."
-msgstr "Het is niet gelukt om het  export bestand (archief) te openen om weg te schrijven."
-
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "Het is niet gelukt om het export bestand (HTML rapport) te openen om weg te schrijven."
 
@@ -671,25 +671,29 @@ msgstr "Het is niet gelukt om het export bestand (HTML rapport) te openen om weg
 msgid "Invalid request ID when generating export file."
 msgstr "Ongeldig request ID tijdens het aanmaken van het export bestand."
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "Het is niet gelukt om de export map te beschermen tegen bezoekers."
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/file.php:2037
+msgid "Unable to open export file (archive) for writing."
+msgstr "Het is niet gelukt om het exportbestand (archief) te openen om weg te schrijven."
+
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "Wacht op bevestiging"
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "Probeer opnieuw"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "Data downloaden..."
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "Download persoonlijke data"
 
@@ -697,7 +701,7 @@ msgstr "Download persoonlijke data"
 msgid "Requested"
 msgstr "Aangevraagd"
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "Verwijder aanvraag"
 
@@ -717,7 +721,7 @@ msgstr "Verstuur aanvraag"
 msgid "Username or email address"
 msgstr "Gebruikersnaam of e-mailadres"
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "Forceer verwijderen persoonlijke data"
 
@@ -2461,7 +2465,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "De %s importeerfunctie is ongeldig of niet geïnstalleerd."
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "Wachtend"
@@ -3016,7 +3020,7 @@ msgid "Deleting a category does not delete the posts in that category. Instead, 
 msgstr "Het verwijderen van een categorie leidt niet tot verwijdering van de berichten binnen die categorie. Berichten die onderdeel waren van de verwijderde categorie zijn nu gekoppeld aan categorie %s."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Geplaatst op: %s"
 
@@ -3223,20 +3227,20 @@ msgid "Last page"
 msgstr "Laatste pagina"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "In antwoord op: %s"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "In antwoord op: %s"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Reactiestatus"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Datum en tijd"
 
@@ -3778,7 +3782,7 @@ msgstr ""
 "###SITEURL###"
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4271,7 +4275,7 @@ msgstr "Zichtbaarheid bewerken"
 msgid "Browse revisions"
 msgstr "Revisies tonen"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Datum en tijd bewerken"
 
@@ -5895,7 +5899,7 @@ msgstr "Alles selecteren"
 msgid "Enter title here"
 msgstr "Titel hier invoeren"
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Over"
 
@@ -6352,7 +6356,7 @@ msgstr "Reparatie is voltooid. Verwijder de volgende regel code uit wp-config.ph
 
 #: wp-admin/user-edit.php:301
 msgid "Show Toolbar when viewing site"
-msgstr "Toon toolbar tijdens bekijken van de site"
+msgstr "Toolbar tonen tijdens bekijken van de site"
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
@@ -9426,10 +9430,6 @@ msgstr "Links zoeken"
 msgid "No links found."
 msgstr "Geen links gevonden."
 
-#: wp-admin/user-edit.php:293
-msgid "Enable keyboard shortcuts for comment moderation."
-msgstr "Inschakelen toetsenbord snelkoppelingen voor het modereren van reacties."
-
 #: wp-admin/link-add.php:15
 msgid "Add New Link"
 msgstr "Nieuwe link toevoegen"
@@ -9879,6 +9879,10 @@ msgstr "Stuur mij een e-mail wanneer"
 msgid "Tools"
 msgstr "Hulpmiddelen"
 
+#: wp-admin/user-edit.php:293
+msgid "Enable keyboard shortcuts for comment moderation."
+msgstr "Toetsenbord snelkoppelingen inschakelen voor het modereren van reacties."
+
 #: wp-admin/edit.php:220 wp-admin/includes/class-wp-list-table.php:436
 msgid "Bulk Actions"
 msgstr "Acties"
@@ -10019,15 +10023,15 @@ msgstr "Laatst bewerkt op %1$s om %2$s"
 msgid "Update Comment"
 msgstr "Reactie bijwerken"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Naam:"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "E-mail:"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -10218,7 +10222,7 @@ msgstr "Alles tonen"
 msgid "Configure"
 msgstr "Configureren"
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Reactie"
 
@@ -11626,7 +11630,7 @@ msgstr "Je hebt geen toestemming om pagina&#39;s te bewerken."
 msgid "Unable to locate WordPress root directory."
 msgstr "Kan de WordPress-map niet lokaliseren."
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -11733,7 +11737,7 @@ msgstr "Autosave uitgeschakeld: %s bewerkt deze pagina momenteel."
 msgid "Saving is disabled: %s is currently editing this post."
 msgstr "Autosave uitgeschakeld: %s bewerkt dit bericht momenteel."
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-17 13:16:46+0000\n"
+"PO-Revision-Date: 2018-05-24 11:43:38+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "0"
 msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "America/Sao_Paulo"
+
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "Não foi possível criar a pasta de exportações."
 
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356
@@ -129,7 +133,7 @@ msgstr "Removido em %s."
 msgid "Invalid request ID when processing eraser data."
 msgstr "ID de solicitação inválido ao processar dados de remoção."
 
-#: wp-admin/includes/user.php:1507 wp-admin/includes/user.php:1549
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
 msgid "Erasing Data..."
 msgstr "Apagando dados..."
 
@@ -378,39 +382,39 @@ msgstr "Este modelo de texto ajudará você criar a página de política de priv
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Como proprietário de um site, você pode ter de seguir a legislação nacional ou internacional de privacidade. Por exemplo, você pode ter de criar e exibir uma política de privacidade."
 
-#: wp-admin/includes/file.php:1971
+#: wp-admin/includes/file.php:1970
 msgctxt "date/time"
 msgid "On"
 msgstr "Em"
 
-#: wp-admin/includes/file.php:1967
+#: wp-admin/includes/file.php:1966
 msgctxt "website URL"
 msgid "At URL"
 msgstr "No URL"
 
-#: wp-admin/includes/file.php:1963
+#: wp-admin/includes/file.php:1962
 msgctxt "website name"
 msgid "For site"
 msgstr "Para o site"
 
-#: wp-admin/includes/user.php:1508
+#: wp-admin/includes/user.php:1511
 msgid "Force Erase has failed."
 msgstr "A remoção forçada fracassou."
 
-#: wp-admin/includes/user.php:1550
+#: wp-admin/includes/user.php:1554
 msgid "Erasing Data has failed."
 msgstr "A remoção de dados fracassou."
 
-#: wp-admin/includes/user.php:1397
+#: wp-admin/includes/user.php:1398
 msgid "Download has failed."
 msgstr "O download fracassou."
 
-#: wp-admin/includes/file.php:1959
+#: wp-admin/includes/file.php:1958
 msgctxt "email address"
 msgid "Report generated for"
 msgstr "Relatório gerado para"
 
-#: wp-admin/includes/user.php:1439
+#: wp-admin/includes/user.php:1441
 msgid "Email could not be sent."
 msgstr "Não foi possível enviar o e-mail."
 
@@ -570,7 +574,7 @@ msgstr "Copiar o texto sugerido de política a partir de %s."
 
 #. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/file.php:2070
+#: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
 "\n"
@@ -602,44 +606,44 @@ msgstr ""
 "Equipe do site ###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-admin/includes/file.php:2019
+#: wp-admin/includes/file.php:2018
 msgid "Unable to add data to export file."
 msgstr "Não foi possível adicionar dados ao arquivo de exportação."
 
-#: wp-admin/includes/user.php:1438
+#: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "E-mail enviado."
 
-#: wp-admin/includes/user.php:1437
+#: wp-admin/includes/user.php:1439
 msgid "Sending Email..."
 msgstr "Enviando e-mail..."
 
-#: wp-admin/includes/user.php:1396
+#: wp-admin/includes/user.php:1397
 msgid "Download Personal Data Again"
 msgstr "Baixar dados pessoais novamente"
 
-#: wp-admin/includes/file.php:2125
+#: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
 msgstr "Não foi possível enviar o e-mail de exportação dos dados pessoais."
 
-#: wp-admin/includes/user.php:1436
+#: wp-admin/includes/user.php:1438
 msgid "Email Data"
 msgstr "Dados do e-mail"
 
-#: wp-admin/includes/file.php:2118
+#: wp-admin/includes/file.php:2117
 msgid "[%s] Personal Data Export"
 msgstr "[%s] Exportação de dados pessoais"
 
-#: wp-admin/includes/file.php:2170
+#: wp-admin/includes/file.php:2169
 msgid "Invalid request ID when merging exporter data."
 msgstr "ID inválido de solicitação quando mesclando com os dados de exportação."
 
-#: wp-admin/includes/file.php:1948
+#: wp-admin/includes/file.php:1947
 msgid "Personal Data Export"
 msgstr "Exportar dados pessoais"
 
 #. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1921
+#: wp-admin/includes/file.php:1920
 msgid "Personal Data Export for %s"
 msgstr "Exportar dados pessoais para %s"
 
@@ -655,15 +659,15 @@ msgstr "Solicitação de ID inválida ao gerar o arquivo de exportação."
 msgid "A valid email address must be given."
 msgstr "Um endereço de e-mail válido deve ser fornecido."
 
-#: wp-admin/includes/file.php:2038
+#: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "Não foi possível abrir o arquivo de exportação para edição."
 
-#: wp-admin/includes/file.php:1916
+#: wp-admin/includes/file.php:1915
 msgid "Unable to open export file (HTML report) for writing."
 msgstr "Não foi possível abrir o arquivo de exportação (HTML) para edição."
 
-#: wp-admin/includes/file.php:1902
+#: wp-admin/includes/file.php:1901
 msgid "Unable to protect export folder from browsing."
 msgstr "Não é possível proteger a pasta de exportação contra navegação."
 
@@ -671,11 +675,11 @@ msgstr "Não é possível proteger a pasta de exportação contra navegação."
 msgid "Unable to generate export file. ZipArchive not available."
 msgstr "Não é possível gerar o arquivo de exportação. ZipArchive indisponível."
 
-#: wp-admin/includes/file.php:2062
+#: wp-admin/includes/file.php:2061
 msgid "Invalid request ID when sending personal data export email."
 msgstr "ID de solicitação inválida ao enviar o e-mail de exportação de dados pessoais"
 
-#: wp-admin/includes/user.php:1394
+#: wp-admin/includes/user.php:1395
 msgid "Download Personal Data"
 msgstr "Baixar dados pessoais"
 
@@ -728,21 +732,21 @@ msgstr "Solicitação de confirmação reenviada com sucesso."
 msgid "Invalid request ID."
 msgstr "ID de solicitação inválida."
 
-#: wp-admin/includes/user.php:1397 wp-admin/includes/user.php:1439
-#: wp-admin/includes/user.php:1445 wp-admin/includes/user.php:1508
-#: wp-admin/includes/user.php:1550 wp-admin/includes/user.php:1557
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
 msgid "Retry"
 msgstr "Tentar novamente"
 
-#: wp-admin/includes/user.php:1395
+#: wp-admin/includes/user.php:1396
 msgid "Downloading Data..."
 msgstr "Baixando dados..."
 
-#: wp-admin/includes/user.php:1451 wp-admin/includes/user.php:1563
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
 msgid "Remove request"
 msgstr "Solicitação de remoção"
 
-#: wp-admin/includes/user.php:1420 wp-admin/includes/user.php:1532
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
 msgstr "Aguardando confirmação"
 
@@ -750,7 +754,7 @@ msgstr "Aguardando confirmação"
 msgid "Invalid email address in request."
 msgstr "Solicitação com endereço de e-mail inválido."
 
-#: wp-admin/includes/user.php:1506
+#: wp-admin/includes/user.php:1509
 msgid "Force Erase Personal Data"
 msgstr "Forçar remoção de dados pessoais"
 
@@ -2461,7 +2465,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "O importador %s não é válido ou não está instalado."
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "Pendente"
@@ -3016,7 +3020,7 @@ msgid "Deleting a category does not delete the posts in that category. Instead, 
 msgstr "Excluindo uma categoria não exclui os posts naquela categoria. Ao invés disso, posts que eram atribuídos apenas a categoria deletada serão atribuídos a categoria %s."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Enviado em: %s"
 
@@ -3226,21 +3230,21 @@ msgstr "Última página"
 msgid "First page"
 msgstr "Primeira página"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Data e hora"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "Em resposta a: %s"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Status do comentário"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "Em resposta a: %s"
 
@@ -3795,7 +3799,7 @@ msgid "Y/m/d g:i:s a"
 msgstr "d/m/Y G:i:s"
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -4287,7 +4291,7 @@ msgstr "Editar visibilidade"
 msgid "Browse revisions"
 msgstr "Procurar revisões"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Editar data e hora "
 
@@ -5022,7 +5026,7 @@ msgstr "Plugins estendem e expandem a funcionalidade do WordPress. Você pode in
 
 #. Plugin URI of the plugin/theme
 msgid "http://wordpress.org/plugins/hello-dolly/"
-msgstr "http://wordpress.org/plugins/hello-dolly/"
+msgstr "https://br.wordpress.org/plugins/hello-dolly/"
 
 #: wp-admin/includes/class-wp-upgrader.php:160
 msgid "The package contains no files."
@@ -5837,7 +5841,7 @@ msgstr "Personalizar &#8220;%s&#8221;"
 msgid "Collapse Sidebar"
 msgstr "Recolher"
 
-#: wp-admin/about.php:14 wp-admin/includes/file.php:1955
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Sobre"
 
@@ -7650,11 +7654,11 @@ msgstr "Pesquisar sites"
 
 #: wp-admin/includes/dashboard.php:1297
 msgid "http://wordpress.org/news/feed/"
-msgstr "http://wordpress.org/news/feed/"
+msgstr "https://br.wordpress.org/news/feed/"
 
 #: wp-admin/includes/dashboard.php:1288
 msgid "https://wordpress.org/news/"
-msgstr "https://wordpress.org/news/"
+msgstr "https://br.wordpress.org/news/"
 
 #: wp-admin/options-discussion.php:68
 msgid "(Signup has been disabled. Only members of this site can comment.)"
@@ -10035,11 +10039,11 @@ msgstr "Última edição em %1$s às %2$s "
 msgid "Update Comment"
 msgstr "Atualizar comentário"
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Nome:"
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -10269,7 +10273,7 @@ msgstr "Ver tudo"
 msgid "Configure"
 msgstr "Configurar"
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Comentário"
 
@@ -11346,7 +11350,7 @@ msgstr "Por exemplo: <code>http://br.wordpress.org/</code> &mdash; não se esque
 msgid "This will be shown when someone hovers over the link in the blogroll, or optionally below the link."
 msgstr "O texto acima será mostrado quando alguém passar o mouse sobre o link na lista de links, ou opcionalmente, abaixo dele."
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -11465,7 +11469,7 @@ msgstr "Voltar para a página de plugins"
 msgid "Bulk Actions"
 msgstr "Ações em massa"
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "E-mail:"
 
@@ -11720,7 +11724,7 @@ msgstr "G:i:s"
 msgid "Someone"
 msgstr "Alguém"
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
 #: wp-admin/includes/user.php:1011
 msgid "Status"
