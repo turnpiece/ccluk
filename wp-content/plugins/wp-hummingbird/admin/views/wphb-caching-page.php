@@ -1,4 +1,11 @@
-<?php if ( $this->has_meta_boxes( 'box-caching' ) ) : ?>
+<?php
+/**
+ * Caching page layout.
+ *
+ * @package Hummingbird
+ */
+
+if ( $this->has_meta_boxes( 'box-caching' ) ) : ?>
 	<?php $this->do_meta_boxes( 'box-caching' ); ?>
 <?php endif; ?>
 

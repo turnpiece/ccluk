@@ -4,6 +4,12 @@ Author: Cvetan Cvetanov (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+1.0.6 - 2018-06-05
+----------------------------------------------------------------------
+- Add: GDPR personal data erase and export.
+- Add: Plugin information to default "Private Policy" page.
+- Add: Auto Delete entries after X time
+
 1.0.5 - 2018-05-01
 ----------------------------------------------------------------------
 - Add: Share quiz contains results not only URL to the quiz
@@ -92,4 +98,4 @@ Change Log:
 - First public release
 
 
-87274-1525286356-au
+87274-1528550891-au

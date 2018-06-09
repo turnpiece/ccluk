@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-03 09:54:08+0000\n"
+"PO-Revision-Date: 2018-05-30 07:54:10+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,102 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ko_KR\n"
 "Project-Id-Version: Plugins - Jetpack by WordPress.com - Stable (latest release)\n"
+
+#: modules/widgets/eu-cookie-law.php:122
+msgid ""
+"Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. \n"
+"To find out more, including how to control cookies, see here:"
+msgstr ""
+"개인정보 및 쿠키: 이 사이트에서는 쿠키를 사용합니다. 이 웹사이트를 계속 사용하면 해당 사용에 동의하는 것입니다. \n"
+"쿠키 제어 방법을 포함하여 자세한 내용을 알아보려면 여기를 참조하세요."
+
+#: modules/widgets/eu-cookie-law.php:120
+msgid "Cookie Policy"
+msgstr "쿠키 정책"
+
+#: modules/widgets/eu-cookie-law.php:74
+msgid "Display a banner for EU Cookie Law and GDPR compliance."
+msgstr "EU 쿠키 법률 및 GDPR 준수에 대한 배너를 표시합니다."
+
+#: modules/widgets/eu-cookie-law.php:72
+msgid "Cookies & Consents Banner"
+msgstr "쿠키 및 동의 배너"
+
+#: modules/widgets/eu-cookie-law/form.php:189
+msgctxt "action"
+msgid "Consent expires after"
+msgstr "동의는 다음 이후에 만료됨"
+
+#: modules/widgets/eu-cookie-law/form.php:179
+msgid "Visitors must provide consent by clicking the dismiss button when Jetpack Ads is turned on."
+msgstr "젯팩 광고가 켜져 있으면 방문자는 무시 버튼을 클릭하여 동의해야 합니다."
+
+#: modules/widgets/eu-cookie-law/form.php:127
+msgctxt "action"
+msgid "Capture consent & hide the banner"
+msgstr "동의 캡처 및 배너 숨기기"
+
+#: modules/widgets/eu-cookie-law/form.php:95
+msgid "Link text"
+msgstr "링크 텍스트"
+
+#: modules/widgets/eu-cookie-law/form.php:83
+msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to Jetpack Ads</a>."
+msgstr "GDPR 준수를 위해 정책에 <a href=\"%s\" target=\"_blank\">젯팩 광고와 관련된 개인 정보 보호</a>가 포함되어 있는지 확인하세요."
+
+#: modules/widgets/eu-cookie-law/form.php:75
+msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
+msgstr "기본 정책 URL은 젯팩에서 설정한 쿠키만 다룹니다. 다른 플러그인, 사용자 정의 쿠키 또는 타사 추적 기술을 실행 중인 경우 귀하의 고유한 쿠키 문구를 작성하여 연결해야 합니다."
+
+#: modules/widgets/eu-cookie-law/form.php:74
+#: modules/widgets/eu-cookie-law/form.php:81
+msgid "Caution:"
+msgstr "주의:"
+
+#: modules/widgets/eu-cookie-law/form.php:62
+msgid "Custom URL:"
+msgstr "사용자 정의 URL:"
+
+#: modules/widgets/eu-cookie-law/form.php:40
+msgid "Privacy Policy Link"
+msgstr "개인정보 취급방침 링크"
+
+#. translators: %d: Post ID.
+#: modules/contact-form/grunion-contact-form.php:859
+msgid "Feedback ID %d could not be removed at this time."
+msgstr "지금 피드백 ID %d을(를) 제거할 수 없습니다."
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an HTTP
+#. status code.
+#: class.jetpack-cli.php:1114
+msgid "Request to %1$s returned a non-200 response code: %2$d."
+msgstr "%1$s 요청 결과로 반환된 non-200 응답 코드: %2$d."
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an error
+#. code, %3$s is an error message.
+#: class.jetpack-cli.php:1104
+msgid "Request to %1$s returned an error: (%2$d) %3$s."
+msgstr "%1$s 요청 결과로 반환된 오류: (%2$d) %3$s."
+
+#: _inc/jetpack-strings.php:279
+msgid "Keep tabs on your site and receive alerts the moment downtime is detected."
+msgstr "사이트를 계속 모니터링하여 다운시간이 감지되면 알림을 받으세요."
+
+#: _inc/jetpack-strings.php:153
+msgid "For more information on how specific Jetpack features use data and track activity, please refer to our {{privacyCenterLink}}Privacy Center{{/privacyCenterLink}}."
+msgstr "특정 젯팩 기능에서 데이터를 사용하고 활동을 추적하는 방법에 대한 자세한 내용은 {{privacyCenterLink}}개인정보취급방침 페이지{{/privacyCenterLink}}를 참조하세요."
+
+#: _inc/jetpack-strings.php:152
+msgid "We use other tracking tools, including some from third parties. {{cookiePolicyLink}}Read about these{{/cookiePolicyLink}} and how to control them."
+msgstr "워드프레스는 타사 제품을 포함한 다른 추적 도구를 사용합니다. {{cookiePolicyLink}}이 도구에 대해 읽고{{/cookiePolicyLink}} 제어하는 방법에 대해 알아보세요."
+
+#: _inc/jetpack-strings.php:151
+msgid "This information helps us improve our products, make marketing to you more relevant, personalize your WordPress.com experience, and more as detailed in our {{pp}}privacy policy{{/pp}}."
+msgstr "이 정보는 {{pp}}개인정보 취급방침{{/pp}}에 명시된 것처럼 제품을 개선하고, 보다 관련된 마케팅을 제공하며, 워드프레스닷컴 환경을 개인 설정하는 데 도움을 줍니다."
+
+#: _inc/jetpack-strings.php:150
+msgid "Share information with our analytics tool about your use of services while logged in to your WordPress.com account. {{cookiePolicyLink}}Learn more{{/cookiePolicyLink}}."
+msgstr "워드프레스닷컴 계정에 로그인되어 있는 동안 이용하는 서비스에 대한 정보를 워드프레스의 분석 도구와 공유합니다. {{cookiePolicyLink}}자세히 알아보세요{{/cookiePolicyLink}}."
 
 #. translators: %s is UTC offset, e.g. "+1"
 #: sync/class.jetpack-sync-functions.php:385
@@ -180,303 +276,299 @@ msgstr "%s을(를) 활성화할 수 없습니다."
 msgid "The requested Jetpack module is not supported by your plan."
 msgstr "요청한 젯팩 모듈이 회원님의 요금제에서 지원되지 않습니다."
 
-#: _inc/jetpack-strings.php:684
+#: _inc/jetpack-strings.php:716
 msgid "VideoPress allows you to upload videos from your computer to be hosted on WordPress.com, rather than on your host’s servers. You can then insert these on your self-hosted Jetpack site. "
 msgstr "비디오프레스를 통해 컴퓨터의 비디오를 업로드하여 호스트 서버가 아니라 워드프레스닷컴에 호스팅 되도록 할 수 있습니다. 그런 다음 독립 호스트 젯팩 사이트에 이를 삽입할 수 있습니다. "
 
-#: _inc/jetpack-strings.php:678
+#: _inc/jetpack-strings.php:710
 msgid "Add the Search (Jetpack) widget to your sidebar"
 msgstr "사이드바에 검색(젯팩) 위젯 추가"
 
-#: _inc/jetpack-strings.php:672
+#: _inc/jetpack-strings.php:704
 msgid "Give your visitor's a great search experience by letting them filter and sort fast, relevant search results."
 msgstr "빠르게 관련 검색 결과를 필터링 및 정렬할 수 있게 하여 방문자에게 우수한 검색 환경을 제공합니다."
 
-#: _inc/jetpack-strings.php:603
+#: _inc/jetpack-strings.php:634
 msgid "This feature is being managed by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "사이트 관리자가 이 기능을 관리하고 있습니다. {{link}}자세히 알아보세요{{/link}}."
 
-#: _inc/jetpack-strings.php:602
+#: _inc/jetpack-strings.php:633
 msgid "This feature has been disabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "사이트 관리자가 이 기능을 비활성화했습니다. {{link}}자세히 알아보세요{{/link}}."
 
-#: _inc/jetpack-strings.php:601
+#: _inc/jetpack-strings.php:632
 msgid "This feature has been enabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "사이트 관리자가 이 기능을 활성화했습니다. {{link}}자세히 알아보세요{{/link}}."
 
-#: _inc/jetpack-strings.php:571
+#: _inc/jetpack-strings.php:635
 msgid "%(moduleName)s has been disabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "사이트 관리자가 %(moduleName)s(을)를 비활성화했습니다. {{link}}자세히 알아보세요{{/link}}."
 
-#: _inc/jetpack-strings.php:433
+#: _inc/jetpack-strings.php:240
 msgctxt "Caption for a button to purchase a pro plan."
 msgid "Upgrade"
 msgstr "업그레이드"
 
-#: _inc/jetpack-strings.php:427
-msgid "Send information to help us improve our products."
-msgstr "제품 개선에 도움이 되는 정보를 보내주세요."
-
-#: _inc/jetpack-strings.php:425
+#: _inc/jetpack-strings.php:149
 msgid "We are committed to your privacy and security. "
 msgstr "당사는 회원님의 개인정보 보호 및 보안을 위해 최선을 노력을 다하고 있습니다. "
 
-#: _inc/jetpack-strings.php:424
+#: _inc/jetpack-strings.php:148
 msgctxt "Settings header"
 msgid "Privacy Settings"
 msgstr "프라이버시 설정"
 
-#: _inc/jetpack-strings.php:423
+#: _inc/jetpack-strings.php:147
 msgctxt "Search term."
 msgid "terms of service"
 msgstr "서비스 약관"
 
-#: _inc/jetpack-strings.php:422
+#: _inc/jetpack-strings.php:146
 msgctxt "Search term."
 msgid "tos"
 msgstr "tos"
 
-#: _inc/jetpack-strings.php:421
+#: _inc/jetpack-strings.php:145
 msgctxt "Search term."
 msgid "gdpr"
 msgstr "gdpr"
 
-#: _inc/jetpack-strings.php:420
+#: _inc/jetpack-strings.php:144
 msgctxt "Search term."
 msgid "data"
 msgstr "데이터"
 
-#: _inc/jetpack-strings.php:419
+#: _inc/jetpack-strings.php:143
 msgctxt "Search term."
 msgid "tracks"
 msgstr "트랙"
 
-#: _inc/jetpack-strings.php:418
+#: _inc/jetpack-strings.php:142
 msgctxt "Search term."
 msgid "privacy"
 msgstr "개인정보"
 
-#: _inc/jetpack-strings.php:414
+#: _inc/jetpack-strings.php:438
 msgid "Enables a lightweight, mobile-friendly theme that will be displayed to visitors on mobile devices."
 msgstr "모바일 장치에서 방문자에게 표시할 경량 모바일 친화적 테마를 사용합니다."
 
-#: _inc/jetpack-strings.php:407
+#: _inc/jetpack-strings.php:431
 msgid "Loads the next posts automatically when the reader approaches the bottom of the page."
 msgstr "리더가 페이지 맨 아래에 접근하면 자동으로 다음 글을 로드합니다."
 
-#: _inc/jetpack-strings.php:405
+#: _inc/jetpack-strings.php:429
 msgid "Delays the loading of images until they are visible in the visitor's browser."
 msgstr "방문자의 브라우저에 이미지가 표시될 때까지 이미지 로드를 지연합니다."
 
-#: _inc/jetpack-strings.php:404
+#: _inc/jetpack-strings.php:428
 msgid "Hosts your image files on the global WordPress.com servers."
 msgstr "글로벌 워드프레스닷컴 서버에 이미지 파일을 호스팅합니다."
 
-#: _inc/jetpack-strings.php:395
+#: _inc/jetpack-strings.php:419
 msgid "Allows you to publish new posts by sending an email to a special address."
 msgstr "특정한 주소로 이메일을 보내 새 글을 공개합니다."
 
-#: _inc/jetpack-strings.php:393
+#: _inc/jetpack-strings.php:417
 msgid "Hosts your video files on the global WordPress.com servers."
 msgstr "글로벌 워드프레스닷컴 서버에 비디오 파일을 호스팅합니다."
 
-#: _inc/jetpack-strings.php:390
+#: _inc/jetpack-strings.php:414
 msgid "Replaces the standard WordPress galleries with a full-screen photo browsing experience, including comments and EXIF metadata."
 msgstr "표준 워드프레스 갤러리를 전체 화면 사진 탐색 환경(댓글 및 EXIF 메타데이터 포함)으로 바꿉니다."
 
-#: _inc/jetpack-strings.php:386
+#: _inc/jetpack-strings.php:410
 msgid "Adds a toolbar with links to all your sites, notifications, your WordPress.com profile, and the Reader."
 msgstr "모든 회원님의 사이트, 알림, 워드프레스닷컴 프로필 및 리더에 대한 링크가 있는 도구 모음을 추가합니다."
 
-#: _inc/jetpack-strings.php:381
+#: _inc/jetpack-strings.php:405
 msgid "Adds the Portfolio custom post type, allowing you to manage and showcase projects on your site."
 msgstr "포트폴리오 사용자 정의 글 타입을 추가하여 사이트에서 프로젝트를 관리하고 쇼케이스할 수 있습니다."
 
-#: _inc/jetpack-strings.php:378
+#: _inc/jetpack-strings.php:402
 msgid "Adds the Testimonial custom post type, allowing you to collect, organize, and display testimonials on your site."
 msgstr "추천 글 사용자 정의 글 타입을 추가하여 사이트에서 추천 글을 수집, 정리 및 표시할 수 있습니다."
 
-#: _inc/jetpack-strings.php:377
+#: _inc/jetpack-strings.php:401
 msgid "This feature has been disabled by a site administrator."
 msgstr "사이트 관리자가 이 기능을 비활성화했습니다."
 
-#: _inc/jetpack-strings.php:375
+#: _inc/jetpack-strings.php:399
 msgid "Allows you to compose content with links, lists, and other styles using the Markdown syntax."
 msgstr "마크다운 문법을 사용하여 링크, 목록 및 기타 스타일이 있는 콘텐츠를 작성할 수 있습니다."
 
-#: _inc/jetpack-strings.php:352
+#: _inc/jetpack-strings.php:376
 msgid "Checks your content for correct grammar and spelling, misused words, and style while you write."
 msgstr "작성하는 동안 콘텐츠를 검사하여 문법 및 맞춤법이 올바른지, 잘못 사용된 단어는 없는지와 스타일을 확인합니다."
 
-#: _inc/jetpack-strings.php:346
+#: _inc/jetpack-strings.php:370
 msgid "Provides the necessary hidden tags needed to verify your WordPress site with various services."
 msgstr "다양한 서비스로 워드프레스 사이트를 확인하는 데 필요한 숨겨진 태그를 제공합니다."
 
-#: _inc/jetpack-strings.php:344
+#: _inc/jetpack-strings.php:368
 msgid "%(moduleName)s has been disabled by a site administrator."
 msgstr "사이트 관리자가 %(moduleName)s(을)를 비활성화했습니다."
 
-#: _inc/jetpack-strings.php:340
+#: _inc/jetpack-strings.php:364
 msgid "Automatically generates the files required for search engines to index your site."
 msgstr "검색 엔진에서 회원님의 사이트를 인덱싱하는 데 필요한 파일을 자동으로 생성합니다."
 
-#: _inc/jetpack-strings.php:334
+#: _inc/jetpack-strings.php:358
 msgid "Displays information on your site activity, including visitors and popular posts or pages."
 msgstr "방문자 및 인기 있는 글 또는 페이지를 비롯한 회원님의 사이트 활동에 대한 정보를 표시합니다."
 
-#: _inc/jetpack-strings.php:325
+#: _inc/jetpack-strings.php:349
 msgid "Allows you to optimize your site and its content for better results in search engines."
 msgstr "검색 엔진에서 더 나은 결과를 위해 회원님의 사이트 및 해당 콘텐츠를 최적화할 수 있게 해줍니다."
 
-#: _inc/jetpack-strings.php:320
+#: _inc/jetpack-strings.php:344
 msgid "Replaces the default WordPress search with a faster, filterable search experience."
 msgstr "기본 워드프레스 검색을 더 빠르게 필터링 가능한 검색 환경으로 바꿉니다."
 
-#: _inc/jetpack-strings.php:304
+#: _inc/jetpack-strings.php:328
 msgid "Automatically displays similar content at the end of each post."
 msgstr "각 글의 끝부분에 유사한 콘텐츠를 자동으로 표시합니다."
 
-#: _inc/jetpack-strings.php:301
+#: _inc/jetpack-strings.php:325
 msgid "Integrates your WordPress site with Google Analytics, a platform that offers insights into your traffic, visitors, and conversions."
 msgstr "워드프레스 사이트를 회원님의 트래픽, 방문자 및 전환에 인사이트를 제공하는 플랫폼인 Google 웹로그 분석과 통합합니다."
 
-#: _inc/jetpack-strings.php:298
+#: _inc/jetpack-strings.php:322
 msgid "You can place additional ads using the Ad widget. {{link}}Try it out!{{/link}}"
 msgstr "Ad 위젯을 사용하여 광고를 추가할 수 있습니다. {{link}}시도해 보세요!{{/link}}"
 
-#: _inc/jetpack-strings.php:286
+#: _inc/jetpack-strings.php:310
 msgid "Displays high-quality ads on your site that allow you to earn income."
 msgstr "수입을 올릴 수 있도록 회원님의 사이트에 고품질 광고를 표시합니다."
 
-#: _inc/jetpack-strings.php:283
+#: _inc/jetpack-strings.php:307
 msgid "Adds sharing buttons to your content so that visitors can share it on social media sites."
 msgstr "방문자가 소셜 미디어 사이트에서 공유할 수 있도록 콘텐츠에 공유 버튼을 추가합니다."
 
-#: _inc/jetpack-strings.php:277
+#: _inc/jetpack-strings.php:301
 msgid "Allows you to automatically share your newest content on social media sites, including Facebook and Twitter."
 msgstr "페이스북, Twitter 등의 소셜 미디어 사이트에서 회원님의 최신 콘텐츠를 자동으로 공유할 수 있게 해줍니다."
 
-#: _inc/jetpack-strings.php:272
+#: _inc/jetpack-strings.php:296
 msgid "Adds like buttons to your content so that visitors can show their appreciation or enjoyment."
 msgstr "방문자가 호감이나 즐거움을 표시할 수 있도록 회원님의 콘텐츠에 좋아요 버튼을 추가합니다."
 
-#: _inc/jetpack-strings.php:266
+#: _inc/jetpack-strings.php:289
 msgid "Allows registered users to log in to your site with their WordPress.com accounts."
 msgstr "등록된 사용자가 자신의 워드프레스닷컴 계정으로 회원님의 사이트에 로그인할 수 있게 해줍니다."
 
-#: _inc/jetpack-strings.php:258
+#: _inc/jetpack-strings.php:281
 msgid "Configure your notification settings"
 msgstr "알림 설정 구성"
 
-#: _inc/jetpack-strings.php:257
+#: _inc/jetpack-strings.php:280
 msgid "Monitor your site's downtime"
 msgstr "사이트 가동 시간 모니터링"
 
-#: _inc/jetpack-strings.php:256
+#: _inc/jetpack-strings.php:278
 msgctxt "Settings header"
 msgid "Downtime monitoring"
 msgstr "다운시간 모니터링"
 
-#: _inc/jetpack-strings.php:237 _inc/jetpack-strings.php:254
+#: _inc/jetpack-strings.php:259 _inc/jetpack-strings.php:276
 msgid "Backs up your site to the global WordPress.com servers, allowing you to restore your content in the event of an emergency or error."
 msgstr "회원님의 사이트를 글로벌 워드프레스닷컴 서버에 백업하여 비상 상황 또는 오류 발생 시 회원님의 콘텐츠를 복원할 수 있습니다."
 
-#: _inc/jetpack-strings.php:233
+#: _inc/jetpack-strings.php:255
 msgid "Removes spam from comments and contact forms."
 msgstr "댓글 및 문의 양식에서 스팸을 제거합니다."
 
-#: _inc/jetpack-strings.php:222
+#: _inc/jetpack-strings.php:124
 msgid "{{a}}Activate{{/a}} to replace the WordPress built-in search with an improved search experience."
 msgstr "워드프레스에 내장된 검색을 향상된 검색 환경으로 바꾸려면 {{a}}활성화{{/a}}합니다."
 
-#: _inc/jetpack-strings.php:221
+#: _inc/jetpack-strings.php:123
 msgid "Add Search (Jetpack) Widget"
 msgstr "검색(젯팩) 위젯 추가"
 
-#: _inc/jetpack-strings.php:220
+#: _inc/jetpack-strings.php:122
 msgid "Jetpack Search is powering search on your site."
 msgstr "젯팩 검색은 사이트에서 검색을 강화합니다."
 
-#: _inc/jetpack-strings.php:217
+#: _inc/jetpack-strings.php:119
 msgid "Give your visitors {{a}}a great search experience{{/a}}."
 msgstr "방문자에게 {{a}}우수한 검색 환경{{/a}}을 제공하세요."
 
-#: _inc/jetpack-strings.php:215 _inc/jetpack-strings.php:219
+#: _inc/jetpack-strings.php:117 _inc/jetpack-strings.php:121
 msgid "Jetpack’s Search module is a powerful replacement for the search capability built into WordPress."
 msgstr "젯팩의 검색 모듈은 워드프레스에 내장된 검색 기능을 대체하는 강력한 기능입니다."
 
-#: _inc/jetpack-strings.php:203
+#: _inc/jetpack-strings.php:105
 msgid "Your site’s files are regularly scanned for unauthorized or suspicious modifications that could compromise your security and data."
 msgstr "고객님 사이트의 파일을 정기적으로 점검하여 보안성 및 데이터를 훼손할 수 있는 무단 수정 또는 의심스러운 수정이 있는지를 확인합니다."
 
-#: _inc/jetpack-strings.php:197 _inc/jetpack-strings.php:260
+#: _inc/jetpack-strings.php:99 _inc/jetpack-strings.php:283
 msgid "Protects your site from traditional and distributed brute force login attacks."
 msgstr "기존의 분산 무차별 로그인 공격 대입으로부터 회원님의 사이트를 보호합니다."
 
-#: _inc/jetpack-strings.php:196
+#: _inc/jetpack-strings.php:98
 msgid "Manage your plugins"
 msgstr "플러그인 관리"
 
-#: _inc/jetpack-strings.php:193
+#: _inc/jetpack-strings.php:95
 msgid "Plugin needs updating."
 msgid_plural "Plugins need updating."
 msgstr[0] "플러그인을 업데이트해야 합니다."
 
-#: _inc/jetpack-strings.php:192
+#: _inc/jetpack-strings.php:94
 msgid "%(number)s"
 msgid_plural "%(number)s"
 msgstr[0] "%(number)s"
 
-#: _inc/jetpack-strings.php:190
+#: _inc/jetpack-strings.php:92
 msgid "Jetpack’s Plugin Updates allows you to choose which plugins update automatically."
 msgstr "젯팩의 플러그인 업데이트를 통해 자동으로 업데이트할 플러그인을 선택할 수 있습니다."
 
-#: _inc/jetpack-strings.php:185
+#: _inc/jetpack-strings.php:87
 msgid "Jetpack will optimize your images and serve them from the server location nearest to your visitors. Using our global content delivery network will boost the loading speed of your site."
 msgstr "젯팩은 회원님의 이미지를 최적화하며 방문자에게 가장 가까운 서버 위치에서 이미지를 제공합니다. 글로벌 콘텐츠 제공 네트워크를 사용하면 사이트의 로드 속도가 향상됩니다."
 
-#: _inc/jetpack-strings.php:180
+#: _inc/jetpack-strings.php:82
 msgid "Jetpack’s downtime monitor will keep tabs on your site, and alert you the moment that downtime is detected."
 msgstr "젯팩의 다운타임 모니터는 고객님 사이트의 탭을 보호하며, 다운타임이 감지되는 순간 경고 메시지를 보냅니다."
 
-#: _inc/jetpack-strings.php:159
+#: _inc/jetpack-strings.php:61
 msgid "Jetpack Backups allow you to easily restore or download a backup from a specific moment."
 msgstr "젯팩 백업을 통해 특정 순간부터 백업을 쉽게 복원 또는 다운로드할 수 있습니다."
 
-#: _inc/jetpack-strings.php:157
+#: _inc/jetpack-strings.php:59
 msgid "Moderate comments"
 msgstr "댓글 검토"
 
-#: _inc/jetpack-strings.php:150
+#: _inc/jetpack-strings.php:52
 msgid "Akismet checks your comments and contact form submissions against our global database of spam."
 msgstr "Akismet은 전체 스팸 데이터베이스에 대비해 고객님의 메모와 문의 양식 제출을 점검합니다."
 
-#: _inc/jetpack-strings.php:128
+#: _inc/jetpack-strings.php:217
 msgid "View all Jetpack plans"
 msgstr "모든 젯팩 요금제 보기"
 
-#: _inc/jetpack-strings.php:127
+#: _inc/jetpack-strings.php:216
 msgid "Manage your plan"
 msgstr "요금제 관리"
 
-#: _inc/jetpack-strings.php:126
+#: _inc/jetpack-strings.php:215
 msgid "Your Plan"
 msgstr "회원님의 요금제"
 
-#: _inc/jetpack-strings.php:125
+#: _inc/jetpack-strings.php:214
 msgid "You’re currently on Jetpack %(plan)s."
 msgstr "회원님은 현재 젯팩 %(plan)s을(를) 사용하고 있습니다."
 
-#: _inc/jetpack-strings.php:62
+#: _inc/jetpack-strings.php:139
 msgid "Allows readers to subscribe to your posts or comments, and receive notifications of new content by email."
 msgstr "독자가 글이나 댓글을 구독하여 이메일을 통해 새 콘텐츠에 대한 알림을 받을 수 있게 해줍니다."
 
-#: _inc/jetpack-strings.php:54 _inc/jetpack-strings.php:57
-#: _inc/jetpack-strings.php:59 _inc/jetpack-strings.php:635
+#: _inc/jetpack-strings.php:131 _inc/jetpack-strings.php:134
+#: _inc/jetpack-strings.php:136 _inc/jetpack-strings.php:667
 msgid "Privacy Information"
 msgstr "개인 정보"
 
-#: _inc/jetpack-strings.php:49
+#: _inc/jetpack-strings.php:126
 msgid "Replaces the standard WordPress comment form with a new comment system that includes social media login options."
 msgstr "표준 워드프레스 댓글 양식을 소셜 미디어 로그인 옵션을 포함하는 새로운 댓글 시스템으로 바꿉니다."
 
@@ -512,99 +604,99 @@ msgstr "현재 요금제에 문제가 있습니다."
 msgid "Can not cancel a plan while in safe mode. See: https://jetpack.com/support/safe-mode/"
 msgstr "안전 모드에 있는 동안에는 요금제를 취소할 수 없습니다. 다음을 참조하세요. https://jetpack.com/support/safe-mode/"
 
-#: _inc/jetpack-strings.php:323
+#: _inc/jetpack-strings.php:347
 msgid "Add Jetpack Search Widget"
 msgstr "젯팩 검색 위젯 추가"
 
-#: _inc/jetpack-strings.php:322
+#: _inc/jetpack-strings.php:346
 msgid "Add the Jetpack search widget to your sidebar to configure advanced search filters."
 msgstr "고급 검색 필터를 구성하려면 젯팩 검색 위젯을 사이드바에 추가하세요."
 
-#: _inc/jetpack-strings.php:143
+#: _inc/jetpack-strings.php:232
 msgid "Full security suite, marketing and revenue automation tools, unlimited video hosting, unlimited themes, enhanced search, and priority support."
 msgstr "전체 보안 제품군, 마케팅 및 수익 자동화 도구, 무제한 비디오 호스팅, 무제한 테마, 향상된 검색 및 우선 지원."
 
-#: _inc/jetpack-strings.php:141
+#: _inc/jetpack-strings.php:230
 msgid "Full security suite, marketing and revenue automation tools, unlimited video hosting, and priority support."
 msgstr "전체 보안 제품군, 마케팅 및 수익 자동화 도구, 무제한 비디오 호스팅 및 우선 지원."
 
-#: _inc/jetpack-strings.php:139
+#: _inc/jetpack-strings.php:228
 msgid "Daily backups, spam filtering, and priority support."
 msgstr "일일 백업, 스팸 필터링 및 우선 지원."
 
-#: _inc/jetpack-strings.php:137
+#: _inc/jetpack-strings.php:226
 msgid "Always-on security, a better search experience, unlimited CDN use, advanced marketing tools, and monetization services."
 msgstr "상설 보안, 더 나은 검색 환경, 무제한 CDN 사용, 고급 마케팅 도구 및 수익 서비스."
 
-#: _inc/jetpack-strings.php:136
+#: _inc/jetpack-strings.php:225
 msgid "Powerful services for your site"
 msgstr "회원님의 사이트를 위한 강력한 서비스"
 
-#: _inc/jetpack-strings.php:133
+#: _inc/jetpack-strings.php:222
 msgid "Upgrade to a weekly coffee and fully protect your site from malware, infiltrations, and security loopholes with automated malware scanning."
 msgstr "매주 한 잔의 커피값으로 한 달 요금제를 업그레이드하고 자동화된 악성 코드 검사로 악성 코드, 침투 및 보안 허점으로부터 회원님의 사이트를 완벽하게 보호하세요."
 
-#: _inc/jetpack-strings.php:130
+#: _inc/jetpack-strings.php:219
 msgid "Automated backups, one-click restores, spam filtering, and malware scanning."
 msgstr "자동화된 백업, 원클릭 복원, 스팸 필터링 및 악성 코드 검사."
 
-#: _inc/jetpack-strings.php:129
+#: _inc/jetpack-strings.php:218
 msgid "Jetpack Premium now includes our full security suite"
 msgstr "젯팩 프리미엄에는 이제 전체 보안 제품군이 포함됨"
 
-#: _inc/jetpack-strings.php:121
+#: _inc/jetpack-strings.php:210
 msgid "Automatic defense against hacks, malware, spam, data loss, and downtime with automated backups, unlimited storage, and malware scanning."
 msgstr "자동화된 백업, 무제한 저장 공간 및 악성 코드 검사로 해킹, 악성 코드, 스팸, 데이터 손실 및 다운시간을 자동으로 방어합니다."
 
-#: _inc/jetpack-strings.php:120
+#: _inc/jetpack-strings.php:209
 msgid "Always-on Security"
 msgstr "상설 보안"
 
-#: _inc/jetpack-strings.php:119
+#: _inc/jetpack-strings.php:208
 msgid "Reach more people and earn money with automated social media scheduling, better search results, SEO preview tools, PayPal payments, and an ad program."
 msgstr "자동화된 소셜 미디어 스케줄링, 더 나은 검색 결과, SEO 미리보기 도구, PayPal 결제 및 광고 프로그램으로 더 많은 사람에게 도달하고 수익을 올리세요."
 
-#: _inc/jetpack-strings.php:117
+#: _inc/jetpack-strings.php:206
 msgid "Get unlimited access to hundreds of professional themes, a superior search experience for your users, and unlimited high-speed, and ad-free video hosting."
 msgstr "수백 개의 전문가 테마, 사용자를 위한 탁월한 검색 환경 및 광고 없는 무제한 고속 비디오 호스팅에 제한 없이 이용하세요."
 
-#: _inc/jetpack-strings.php:114
+#: _inc/jetpack-strings.php:203
 msgid "A superior search experience powered by Elasticsearch providing your users with faster and more relevant search results. Previously only available to WordPress.com VIP customers and trusted by industry-leading brands."
 msgstr "Elasticsearch에서 제공하는 탁월한 검색 환경은 사용자에게 더 빠르고 더 관련성 높은 검색 결과를 제공합니다. 이전에는 워드프레스닷컴 VIP 고객만 이용할 수 있었으며 업계를 주도하는 브랜드의 신뢰를 받고 있습니다."
 
-#: _inc/jetpack-strings.php:113
+#: _inc/jetpack-strings.php:202
 msgid "Unlimited access to hundreds of premium WordPress themes with dedicated support directly from the theme authors."
 msgstr "테마 작성자로부터 직접 전담 지원을 받는 수백 개의 프리미엄 워드프레스 테마를 무제한으로 이용하세요."
 
-#: _inc/jetpack-strings.php:112
+#: _inc/jetpack-strings.php:201
 msgid "Two great reasons to go Pro"
 msgstr "Pro로 전환해야 할 두 가지 주된 이유"
 
-#: _inc/jetpack-strings.php:110
+#: _inc/jetpack-strings.php:199
 msgid "Grow your traffic and revenue with social media scheduling, enhanced site search, SEO tools, PayPal payments, and an ad program."
 msgstr "소셜 미디어 스케줄링, 향상된 사이트 검색, SEO 도구, PayPal 결제 및 광고 프로그램으로 트래픽과 수익을 늘리세요."
 
-#: _inc/jetpack-strings.php:109
+#: _inc/jetpack-strings.php:198
 msgid "Always-on security including real-time backups, malware scanning, and automatic threat resolution."
 msgstr "실시간 백업, 악성 코드 검사 및 자동 위협 해결을 포함하는 상설 보안."
 
-#: _inc/jetpack-strings.php:108
+#: _inc/jetpack-strings.php:197
 msgid "Design the perfect site with unlimited access to hundreds of themes and unlimited, high-speed, and ad-free video hosting."
 msgstr "수백 개의 테마 및 광고 없는 무제한 고속 비디오 호스팅을 제한 없이 이용하는 완벽한 사이트를 디자인하세요."
 
-#: _inc/jetpack-strings.php:107
+#: _inc/jetpack-strings.php:196
 msgid "Three great reasons to go Pro"
 msgstr "Pro로 전환해야 할 세 가지 주된 이유"
 
-#: _inc/jetpack-strings.php:98
+#: _inc/jetpack-strings.php:187
 msgid "Activate Video Hosting"
 msgstr "비디오 호스팅 활성화"
 
-#: _inc/jetpack-strings.php:96
+#: _inc/jetpack-strings.php:185
 msgid "Fast, optimized, ad-free, and unlimited video hosting for your site."
 msgstr "빠르고 최적화된, 광고 없는 무제한의 비디오를 사이트에 호스팅하세요."
 
-#: _inc/jetpack-strings.php:78
+#: _inc/jetpack-strings.php:167
 msgid "Browse Themes"
 msgstr "테마 찾아보기"
 
@@ -878,193 +970,193 @@ msgstr "\"%s\" 글의 새 트랙백"
 msgid "Primary language for the site."
 msgstr "사이트의 기본 언어를 선택하세요."
 
-#: _inc/jetpack-strings.php:640
+#: _inc/jetpack-strings.php:672
 msgid "This release of Jetpack brings major new features and big improvements to your WordPress site."
 msgstr "이 젯팩 릴리스는 새로운 주요 기능과 크게 향상된 기능을 워드프레스 사이트에 제공합니다."
 
-#: _inc/jetpack-strings.php:641
+#: _inc/jetpack-strings.php:673
 msgid "Speed up your site and its content"
 msgstr "사이트 및 해당 콘텐츠 속도 향상"
 
-#: _inc/jetpack-strings.php:642
+#: _inc/jetpack-strings.php:674
 msgid "Sites with large numbers of images can now activate the Lazy Loading Images feature, which significantly speeds up loading times for visitors. Instead of waiting for the entire page to load, Jetpack will instead show pages instantly, and only download additional images when they are about to come into view."
 msgstr "이제 이미지가 많은 사이트에서 Lazy 이미지 로드 기능을 활성화하여 방문자를 위한 업로드 속도를 높일 수 있습니다. 젯팩에서는 전체 페이지가 로드될 때까지 기다리지 않고 즉시 페이지를 표시하고, 페이지가 보이게 되면 추가 이미지만 다운로드합니다."
 
-#: _inc/jetpack-strings.php:643
+#: _inc/jetpack-strings.php:675
 msgid "If this sounds like a great improvement (and it is) you can enable it now by clicking the toggle below."
 msgstr "기능이 크게 개선되었다고 생각되면 아래 토글을 클릭하여 활성화할 수 있습니다."
 
-#: _inc/jetpack-strings.php:644
+#: _inc/jetpack-strings.php:676
 msgid "We have also upgraded all our Premium plan customers to unlimited high-speed video storage (up from 13GB), and significantly reduced the CSS and JavaScript assets that Jetpack downloads when using features like infinite scroll and embedding rich content."
 msgstr "또한 모든 프리미엄 요금제 고객의 스토리지를 무제한 고속 비디오 스토리지(13GB)로 업그레이드하고, 젯팩에서 무한 스크롤과 같은 기능 사용 및 리치 콘텐츠 포함 시 다운로드하는 CSS와 JavaScript 자산을 크게 줄였습니다."
 
-#: _inc/jetpack-strings.php:645
+#: _inc/jetpack-strings.php:677
 msgid "Faster, more relevant search results"
 msgstr "훨씬 빠르고 보다 관련성이 있는 검색 결과"
 
-#: _inc/jetpack-strings.php:646
+#: _inc/jetpack-strings.php:678
 msgid "Elasticsearch"
 msgstr "Elasticsearch"
 
-#: _inc/jetpack-strings.php:647
+#: _inc/jetpack-strings.php:679
 msgid "Our faster site search is now available to all Professional plan customers. This replaces the default WordPress search with an Elasticsearch-powered infrastructure that returns faster, more relevant results to users."
 msgstr "이제 모든 전문가 요금제 고객이 빠른 사이트 검색 기능을 이용할 수 있습니다. 이 기능은 기본 워드프레스 검색을 훨씬 빠르고 보다 관련성이 있는 결과를 제공하는 Elasticsearch 지원 인프라로 대체합니다."
 
-#: _inc/jetpack-strings.php:648
+#: _inc/jetpack-strings.php:680
 msgid "Read the full announcement!"
 msgstr "전체 공지 읽기!"
 
-#: _inc/jetpack-strings.php:649
+#: _inc/jetpack-strings.php:681
 msgid "Compare paid plans"
 msgstr "유료 요금제 비교"
 
-#: _inc/jetpack-strings.php:651
+#: _inc/jetpack-strings.php:683
 msgid "Major new features from Jetpack"
 msgstr "젯팩의 새로운 주요 기능"
 
-#: _inc/jetpack-strings.php:622
+#: _inc/jetpack-strings.php:654
 msgid "Faster, more relevant and more powerful sitewide search."
 msgstr "훨씬 빠르고 보다 관련성이 있으며 강력한 사이트 전체 검색."
 
-#: _inc/jetpack-strings.php:468
+#: _inc/jetpack-strings.php:502
 msgid "Hassle-free design, marketing, and security for your WordPress site. Connect Jetpack to a WordPress.com account to start building your own success story."
 msgstr "워드프레스 사이트에 대한 편리한 디자인, 마케팅 및 보안. 젯팩을 워드프레스닷컴 계정에 연결하여 고유한 성공 사례 작성."
 
-#: _inc/jetpack-strings.php:469
+#: _inc/jetpack-strings.php:503
 msgid "WordPress themes and customization tools for designing your site."
 msgstr "사이트 디자인용 워드프레스 테마 및 사용자 정의 도구."
 
-#: _inc/jetpack-strings.php:116 _inc/jetpack-strings.php:470
+#: _inc/jetpack-strings.php:205 _inc/jetpack-strings.php:504
 msgid "Design the perfect website"
 msgstr "완벽한 웹 사이트 디자인"
 
-#: _inc/jetpack-strings.php:471
+#: _inc/jetpack-strings.php:505
 msgid "Bring your ideas to life with elegant and professional designs and code-free customization tools."
 msgstr "우아하고 전문적인 디자인과 코드 작성 없는 사용자 정의 도구로 아이디어 실현."
 
-#: _inc/jetpack-strings.php:472
+#: _inc/jetpack-strings.php:506
 msgid "Jetpack's photon serves up lightning fast, optimized images"
 msgstr "젯팩의 Photon이 매우 빠르고 최적화된 이미지 제공"
 
-#: _inc/jetpack-strings.php:473
+#: _inc/jetpack-strings.php:507
 msgid "Jetpack's WordPress themes"
 msgstr "젯팩의 워드프레스 테마"
 
-#: _inc/jetpack-strings.php:474
+#: _inc/jetpack-strings.php:508
 msgid "Professional themes"
 msgstr "전문가 테마"
 
-#: _inc/jetpack-strings.php:475
+#: _inc/jetpack-strings.php:509
 msgid "Find the perfect design for your site from hundreds of available themes."
 msgstr "수백 개의 사용 가능한 테마 중에서 사이트에 적합한 디자인 찾기."
 
-#: _inc/jetpack-strings.php:476
+#: _inc/jetpack-strings.php:510
 msgid "Jetpack's customization tools"
 msgstr "잿펙의 사용자 정의 도구"
 
-#: _inc/jetpack-strings.php:477
+#: _inc/jetpack-strings.php:511
 msgid "Code-free customization"
 msgstr "코드 작성 없이 사용자 정의"
 
-#: _inc/jetpack-strings.php:478
+#: _inc/jetpack-strings.php:512
 msgid "Customize your site with endless widget options, image galleries, and embedded media."
 msgstr "수많은 위젯 옵션, 이미지 갤러리 및 포함된 미디어로 사이트 사용자 정의."
 
-#: _inc/jetpack-strings.php:479
+#: _inc/jetpack-strings.php:513
 msgid "Jetpack's performance features"
 msgstr "젯팩 성능의 기능"
 
-#: _inc/jetpack-strings.php:481
+#: _inc/jetpack-strings.php:515
 msgid "Deliver blazing fast images and video and improve site load times."
 msgstr "이미지와 비디오의 빠른 제공 및 사이트 로드 시간 개선."
 
-#: _inc/jetpack-strings.php:482
+#: _inc/jetpack-strings.php:516
 msgid "Drive more traffic to your site with Jetpack"
 msgstr "젯팩으로 사이트에 더 많은 트래픽 유도"
 
-#: _inc/jetpack-strings.php:118 _inc/jetpack-strings.php:483
+#: _inc/jetpack-strings.php:207 _inc/jetpack-strings.php:517
 msgid "Increase traffic and revenue"
 msgstr "트래픽 및 매출 신장"
 
-#: _inc/jetpack-strings.php:484
+#: _inc/jetpack-strings.php:518
 msgid "Reach more people and earn money with automated marketing tools."
 msgstr "자동화된 마케팅 도구로 더 많은 사람에게 도달하고 수익 올리기."
 
-#: _inc/jetpack-strings.php:485
+#: _inc/jetpack-strings.php:519
 msgctxt "Image alternate text."
 msgid "Decoration: Jetpack clouds"
 msgstr "장식: 젯팩 클라우드"
 
-#: _inc/jetpack-strings.php:486
+#: _inc/jetpack-strings.php:520
 msgctxt "Image alternate text."
 msgid "Decoration: Jetpack bar graph"
 msgstr "장식: 젯팩 막대 그래프"
 
-#: _inc/jetpack-strings.php:487
+#: _inc/jetpack-strings.php:521
 msgid "Jetpack's site stats feature"
 msgstr "젯팩의 사이트 통계 기능"
 
-#: _inc/jetpack-strings.php:489
+#: _inc/jetpack-strings.php:523
 msgid "Keep an eye on your success with simple, concise, and mobile-friendly stats."
 msgstr "간단하고 간결하며 모바일 친화된 통계를 이용하여 성공을 놓치지 마세요."
 
-#: _inc/jetpack-strings.php:490
+#: _inc/jetpack-strings.php:524
 msgid "Jetpack's publicize features"
 msgstr "젯팩의 홍보 기능"
 
-#: _inc/jetpack-strings.php:491
+#: _inc/jetpack-strings.php:525
 msgid "Automated marketing"
 msgstr "자동화된 마케팅"
 
-#: _inc/jetpack-strings.php:492
+#: _inc/jetpack-strings.php:526
 msgid "Schedule social media posts in advance, show related content, and give better search results."
 msgstr "미리 소셜 미디어 글을 예약하고 관련 콘텐츠를 표시하며 향상된 검색 결과를 제공합니다."
 
-#: _inc/jetpack-strings.php:493
+#: _inc/jetpack-strings.php:527
 msgid "Jetpack's ads and PayPal features"
 msgstr "젯팩의 광고 및 PayPal 기능"
 
-#: _inc/jetpack-strings.php:494
+#: _inc/jetpack-strings.php:528
 msgid "Generate revenue"
 msgstr "수익 창출"
 
-#: _inc/jetpack-strings.php:495
+#: _inc/jetpack-strings.php:529
 msgid "Monetize your site with high-quality ads and take PayPal payments."
 msgstr "사이트 상의 고품질 광고 및 PayPal 결제를 이용하여 수익을 창출합니다."
 
-#: _inc/jetpack-strings.php:496 _inc/jetpack-strings.php:497
+#: _inc/jetpack-strings.php:530 _inc/jetpack-strings.php:531
 msgid "Keep your site safe, 24/7"
 msgstr "연중무휴로 사이트를 안전하게 유지"
 
-#: _inc/jetpack-strings.php:498
+#: _inc/jetpack-strings.php:532
 msgid "Automatic defense against hacks, malware, spam, data loss, and downtime."
 msgstr "자동으로 해킹, 악성 코드, 스팸, 데이터 손실 및 다운시간으로부터 보호합니다."
 
-#: _inc/jetpack-strings.php:499
+#: _inc/jetpack-strings.php:533
 msgid "Jetpack's monitor feature"
 msgstr "젯팩의 모니터링 기능"
 
-#: _inc/jetpack-strings.php:501
+#: _inc/jetpack-strings.php:535
 msgid "Be alerted about any unexpected downtime the moment it happens."
 msgstr "예기치 않은 다운시간이 발생하는 순간 알림을 표시합니다."
 
-#: _inc/jetpack-strings.php:502
+#: _inc/jetpack-strings.php:536
 msgid "Jetpack's Protect features"
 msgstr "젯팩의 보호 기능"
 
-#: _inc/jetpack-strings.php:504
+#: _inc/jetpack-strings.php:538
 msgid "Guard your site against brute force login attacks, spam, and harmfulmalware injections."
 msgstr "무차별 대입 로그인 공격, 스팸 및 유해한 삽입으로부터 사이트를 보호합니다."
 
-#: _inc/jetpack-strings.php:505
+#: _inc/jetpack-strings.php:539
 msgid "Backup and restore"
 msgstr "백업 및 복원"
 
-#: _inc/jetpack-strings.php:506
+#: _inc/jetpack-strings.php:540
 msgid "Automatic, real-time backups mean your entire site is always ready to be restored."
 msgstr "자동 실시간 백업은 사이트 전체가 항상 복원될 준비가 되어 있음을 의미합니다."
 
-#: _inc/jetpack-strings.php:446 class.jetpack-connection-banner.php:271
+#: _inc/jetpack-strings.php:478 class.jetpack-connection-banner.php:271
 #: class.jetpack-connection-banner.php:331
 #: class.jetpack-connection-banner.php:385
 #: class.jetpack-connection-banner.php:439
@@ -1079,11 +1171,11 @@ msgstr "자동 실시간 백업은 사이트 전체가 항상 복원될 준비�
 msgid "Set up Jetpack"
 msgstr "젯팩 설정"
 
-#: _inc/jetpack-strings.php:403 _inc/jetpack-strings.php:480
+#: _inc/jetpack-strings.php:427 _inc/jetpack-strings.php:514
 msgid "Speed up your site"
 msgstr "사이트 속도 향상"
 
-#: _inc/jetpack-strings.php:70
+#: _inc/jetpack-strings.php:159
 msgid "Real-time backup of all your site data with unlimited space, one-click restores, and automated security scanning."
 msgstr "무제한 공간, 원클릭 복원, 자동화된 보안 검사로 모든 사이트 데이터를 실시간 백업합니다."
 
@@ -1112,7 +1204,7 @@ msgid "cache hit"
 msgstr "캐시 히트"
 
 #: 3rd-party/debug-bar/class.jetpack-search-debug-bar.php:26
-#: _inc/jetpack-strings.php:650
+#: _inc/jetpack-strings.php:682
 msgid "Jetpack Search"
 msgstr "젯팩 검색"
 
@@ -1209,56 +1301,56 @@ msgstr "되돌리기 데이터를 가져오지 못했습니다. 나중에 다시
 msgid "Rewind data correctly received."
 msgstr "되돌리기 데이터를 제대로 받았습니다."
 
-#: _inc/jetpack-strings.php:458
+#: _inc/jetpack-strings.php:491
 msgid "Jetpack version %(version)s"
 msgstr "젯팩 버전 %(version)s"
 
-#: _inc/jetpack-strings.php:321
+#: _inc/jetpack-strings.php:345
 msgid "Replace WordPress built-in search with an improved search experience"
 msgstr "워드프레스의 내장된 검색을 향상된 검색 환경(베타)으로 바꾸기"
 
-#: _inc/jetpack-strings.php:241
+#: _inc/jetpack-strings.php:263
 msgid "Your site is being backed up in real time and regularly scanned for security threats."
 msgstr "보안 위협을 위해 고객님의 사이트를 실시간으로 백업하고 정기적으로 스캔합니다."
 
-#: _inc/jetpack-strings.php:66
+#: _inc/jetpack-strings.php:155
 msgid "Daily backup of all your site data with unlimited space and one-click restores"
 msgstr "무제한 공간 및 원클릭 복원으로 모든 사이트 데이터의 일일 백업 제공"
 
-#: _inc/jetpack-strings.php:68
+#: _inc/jetpack-strings.php:157
 msgid "Real-time backup of all your site data with unlimited space, one-click restores, automated security scanning, and priority support"
 msgstr "무제한 공간, 원클릭 복원, 자동화된 보안 검사 및 우선 지원으로 모든 사이트 데이터를 실시간으로 백업하세요."
 
-#: _inc/jetpack-strings.php:71
+#: _inc/jetpack-strings.php:160
 msgid "View your security activity"
 msgstr "보안 활동 보기"
 
-#: _inc/jetpack-strings.php:73
+#: _inc/jetpack-strings.php:162
 msgid " (powered by VaultPress)."
 msgstr " (VaultPress에서 제공)"
 
-#: _inc/jetpack-strings.php:88
+#: _inc/jetpack-strings.php:177
 msgid "Replace the default WordPress search with better results that will help your users find what they are looking for."
 msgstr "기본 워드프레스 검색을 사이트에서 사용자들이 검색하는 것을 찾을 수 있도록 향상된 결과로 바꿉니다."
 
-#: _inc/jetpack-strings.php:89
+#: _inc/jetpack-strings.php:178
 msgid "Customize Search Widget"
 msgstr "검색 위젯 사용자 정의"
 
-#: _inc/jetpack-strings.php:90
+#: _inc/jetpack-strings.php:179
 msgid "Activate Search"
 msgstr "검색 활성화"
 
-#: _inc/jetpack-strings.php:65
+#: _inc/jetpack-strings.php:154
 msgid "Please correct the issue below and try again."
 msgid_plural "Please correct the issues listed below and try again."
 msgstr[0] "아래 나열된 문제를 수정하고 다시 시도해 주세요."
 
-#: _inc/jetpack-strings.php:213
+#: _inc/jetpack-strings.php:115
 msgid "We are making sure your site stays free of security threats. You will be notified if we find one."
 msgstr "사이트에 보안 위협이 없는지 확인 중입니다. 찾으면 알려드리겠습니다."
 
-#: _inc/jetpack-strings.php:165
+#: _inc/jetpack-strings.php:67
 msgid "Your site is being backed up in real-time."
 msgstr "사이트를 실시간으로 백업 중입니다."
 
@@ -1329,27 +1421,27 @@ msgstr "%s에 대한 연결 테스트 중"
 msgid "Checking status for %s"
 msgstr "%s에 대한 상태 확인 중"
 
-#: _inc/jetpack-strings.php:681
+#: _inc/jetpack-strings.php:713
 msgid "Your Jetpack Professional plan is taking care of business!"
 msgstr "젯팩 프로 요금제는 비즈니스에 적합합니다!"
 
-#: _inc/jetpack-strings.php:668
+#: _inc/jetpack-strings.php:700
 msgid "Your Jetpack Premium plan is powering up!"
 msgstr "젯팩 프리미엄 요금제를 켜는 중입니다!"
 
-#: _inc/jetpack-strings.php:659
+#: _inc/jetpack-strings.php:691
 msgid "Your Jetpack Personal plan is powering up!"
 msgstr "젯팩 개인 요금제를 켜는 중입니다!"
 
-#: _inc/jetpack-strings.php:457
+#: _inc/jetpack-strings.php:490
 msgid "Jetpack version"
 msgstr "젯팩 버전"
 
-#: _inc/jetpack-strings.php:146
+#: _inc/jetpack-strings.php:48
 msgid "{{a}}View your site's activity{{/a}} in a single feed."
 msgstr "단일 피드에서 {{a}}회원님 사이트의 활동을 확인{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:147
+#: _inc/jetpack-strings.php:49
 msgid "Activity"
 msgstr "활동"
 
@@ -1489,11 +1581,11 @@ msgstr "갤러리 유형입니다."
 msgid "The requested widget was not found."
 msgstr "요청한 위젯을 찾지 못했습니다."
 
-#: _inc/jetpack-strings.php:374
+#: _inc/jetpack-strings.php:398
 msgid "Confirm each new phrase you add by pressing enter."
 msgstr "Enter 키를 눌러 추가한 새 구문을 각각 확인하세요."
 
-#: _inc/jetpack-strings.php:245
+#: _inc/jetpack-strings.php:267
 msgid "{{a}}View details{{/a}}"
 msgstr "{{a}}상세 보기{{/a}}"
 
@@ -1564,67 +1656,67 @@ msgstr "내부 처리 실패: %s"
 msgid "Not valid onboarding data."
 msgstr "유효한 내부 데이터가 아닙니다."
 
-#: _inc/jetpack-strings.php:671
+#: _inc/jetpack-strings.php:703
 msgid "With Jetpack Professional, you can create the perfect site with one of over 300 professionally-designed WordPress themes, including more than 200 premium themes. Customize your content with a variety of widgets, or add unlimited videos to your posts and pages -- displayed free of ads or watermarks."
 msgstr "젯팩 프로를 사용하면 100개 이상의 프리미엄 테마를 포함하여 300개 이상의 전문적으로 디자인된 WordPress 테마 중 하나로 완벽한 사이트를 만들 수 있습니다. 다양한 위젯으로 콘텐츠를 사용자 정의하거나, 광고 또는 워터마크 없이 표시되는 무제한 동영상을 글과 페이지에 추가합니다."
 
-#: _inc/jetpack-strings.php:674 _inc/jetpack-strings.php:683
+#: _inc/jetpack-strings.php:706 _inc/jetpack-strings.php:715
 msgid "Growing your following is easy with your Professional plan, thanks to content sharing and scheduling, SEO tools, and built-in subscription options. You can monetize your site with a simple payment button and in-line ads, and monitor the success of your efforts by integrating with Google Analytics."
 msgstr "콘텐츠 공유 및 예약, SEO 도구 및 내장된 구독 옵션으로 인해 프로 요금제를 사용하면 팔로잉을 쉽게 늘릴 수 있습니다. 간단한 결제 버튼과 인라인 광고로 사이트를 수익화하고, Google 웹로그 분석과 통합하여 성공 여부를 모니터링할 수 있습니다."
 
-#: _inc/jetpack-strings.php:675
+#: _inc/jetpack-strings.php:707
 msgid "Start exploring Jetpack Professional now to see all the benefits of your new plan."
 msgstr "이제 젯팩 프로 탐색을 시작하여 새 요금제의 모든 혜택을 확인하세요."
 
-#: _inc/jetpack-strings.php:676
+#: _inc/jetpack-strings.php:708
 msgid "Install premium themes"
 msgstr "프리미엄 테마 설치"
 
-#: _inc/jetpack-strings.php:679
+#: _inc/jetpack-strings.php:711
 msgid "Review SEO features"
 msgstr "SEO 기능 검토"
 
-#: _inc/jetpack-strings.php:680
+#: _inc/jetpack-strings.php:712
 msgid "Welcome Professional"
 msgstr "프로 시작"
 
-#: _inc/jetpack-strings.php:660
+#: _inc/jetpack-strings.php:692
 msgid "Thanks for choosing Jetpack Premium. Jetpack is now backing up your site, scanning for  security threats, and enabling monetization features."
 msgstr "젯팩 프리미엄 요금제를 선택해 주셔서 감사합니다. 젯팩은 이제 사이트를 백업하고, 보안 위협을 검사하고, 수익 기능을 활성화합니다."
 
-#: _inc/jetpack-strings.php:662
+#: _inc/jetpack-strings.php:694
 msgid "With Jetpack Premium, you can create the perfect site, no matter its purpose. Customize your site’s appearance with one of more than 100 free themes, or enhance your content with unlimited HD video -- all hosted free of ads or watermarks."
 msgstr "젯팩 프리미엄을 사용하면 목적에 관계없이 완벽한 사이트를 만들 수 있습니다. 200개 이상의 무료 테마 중 하나로 사이트 모양을 사용자 정의하거나, 최대 13GB의 HD 비디오로 콘텐츠를 개선합니다. 모든 콘텐츠가 광고나 워터마크 없이 호스팅됩니다."
 
-#: _inc/jetpack-strings.php:664
+#: _inc/jetpack-strings.php:696
 msgid "Using Jetpack’s powerful sharing tools, you can automatically share your newest posts on social media, or schedule your content to be re-shared at any date or time you choose. And along with growing your following, you can grow your business with tools like payment buttons and ads."
 msgstr "젯팩의 강력한 공유 도구를 사용하여 소셜 미디어에 최신 글을 자동으로 공유하거나, 선택한 날짜나 시간에 콘텐츠를 다시 공유하도록 예약할 수 있습니다. 또한 팔로잉의 증가와 함께 결제 버튼 및 광고와 같은 도구로 비즈니스 성장을 도모할 수 있습니다."
 
-#: _inc/jetpack-strings.php:665
+#: _inc/jetpack-strings.php:697
 msgid "Start exploring Jetpack Premium now to see all the benefits of your new plan."
 msgstr "이제 젯팩 프리미엄 탐색을 시작하여 새 요금제의 모든 혜택을 확인하세요."
 
-#: _inc/jetpack-strings.php:666 _inc/jetpack-strings.php:677
+#: _inc/jetpack-strings.php:698 _inc/jetpack-strings.php:709
 msgid "Monetize your site with ads"
 msgstr "광고로 사이트 수익 창출"
 
-#: _inc/jetpack-strings.php:667
+#: _inc/jetpack-strings.php:699
 msgid "Welcome Premium"
 msgstr "프리미엄 시작"
 
-#: _inc/jetpack-strings.php:654
+#: _inc/jetpack-strings.php:686
 msgid "Thanks for choosing Jetpack Personal. Jetpack is now backing up your site and scanning for security threats."
 msgstr "젯팩 개인 요금제를 선택해 주셔서 감사합니다. 젯팩은 이제 사이트를 백업하고, 보안 위협을 검사합니다."
 
-#: _inc/jetpack-strings.php:656
+#: _inc/jetpack-strings.php:688
 msgid "With Jetpack Personal, you have access to more than 100 free, professionally-designed WordPress themes. Choose the theme that best fits your site and customize colors, images, or add a variety of new widgets."
 msgstr "젯팩 개인을 사용하면 100개 이상의 전문적으로 디자인된 무료 WordPress 테마에 액세스할 수 있습니다. 사이트에 적합한 테마를 선택하고, 색상, 이미지를 사용자 정의하거나 여러 가지 새로운 위젯을 추가합니다."
 
-#: _inc/jetpack-strings.php:657
+#: _inc/jetpack-strings.php:689
 msgid "Got it!"
 msgstr "확인"
 
-#: _inc/jetpack-strings.php:658
+#: _inc/jetpack-strings.php:690
 msgid "Welcome personal"
 msgstr "개인 시작"
 
@@ -2015,127 +2107,127 @@ msgstr "프론트 페이지에 광고를 표시하시겠어요?"
 msgid "Display second ad below post?"
 msgstr "글 아래에 다른 광고를 표시하시겠어요?"
 
-#: _inc/jetpack-strings.php:636
+#: _inc/jetpack-strings.php:668
 msgid "Introducing Unlimited Themes"
 msgstr "무제한 테마 소개"
 
-#: _inc/jetpack-strings.php:637
+#: _inc/jetpack-strings.php:669
 msgid "{{subhead}}Only with Jetpack Professional{{/subhead}}{{p}}Protect your site and work with Jetpack Personal: daily automated backups, unlimited storage, and expert priority support. Security essentials for every WordPress site starting from $3.50.{{/p}}{{p}}Or go Pro with more than 200 Premium Themes, business class security, unlimited video hosting, monetization, marketing automation, and SEO tools.{{/p}}"
 msgstr "{{subhead}}젯팩 전문가만 해당{{/subhead}}{{p}}사이트 보호 및 젯팩 개인과 작업: 일별 자동 백업, 무제한 저장 공간 및 전문가 우선 지원받기. $3.50로 시작하는 모든 워드프레스 사이트에 대한 보안 필수 사항.{{/p}}{{p}}또는 200개 이상의 프리미엄 테마, 비즈니스 급 보안, 무제한 비디오 호스팅, 수익, 마케팅 자동화 및 SEO 도구를 제공하는 Pro로 이동하세요.{{/p}}"
 
-#: _inc/jetpack-strings.php:638
+#: _inc/jetpack-strings.php:670
 msgid "Explore Professional"
 msgstr "전문가 둘러보기"
 
-#: _inc/jetpack-strings.php:639
+#: _inc/jetpack-strings.php:671
 msgid "Compare All Plans"
 msgstr "모든 요금제 비교"
 
-#: _inc/jetpack-strings.php:567
+#: _inc/jetpack-strings.php:599
 msgid "Person with laptop"
 msgstr "랩톱 사용자"
 
-#: _inc/jetpack-strings.php:568
+#: _inc/jetpack-strings.php:600
 msgid "Your Jetpack site is ready to go!"
 msgstr "회원님의 젯팩 사이트가 준비되었습니다!"
 
-#: _inc/jetpack-strings.php:564
+#: _inc/jetpack-strings.php:596
 msgid "We're now collecting stats, securing your site, and speeding up your images. Pretty soon you'll be able to see everything going on with your site right through Jetpack! Welcome aboard."
 msgstr "현재 워드프레스닷컴에서는 통계를 수집하고, 사이트를 보호하고, 이미지 속도를 높입니다. 곧 젯팩을 통해 바로 회원님의 사이트와 관련된 모든 것을 볼 수 있습니다! 어서 참여하세요."
 
-#: _inc/jetpack-strings.php:543
+#: _inc/jetpack-strings.php:575
 msgid "Connect your account to get the most out of Jetpack"
 msgstr "젯팩을 최대한 활용하려면 계정을 연결하세요"
 
-#: _inc/jetpack-strings.php:508
+#: _inc/jetpack-strings.php:499
 msgid "Stars"
 msgstr "별"
 
-#: _inc/jetpack-strings.php:509
+#: _inc/jetpack-strings.php:500
 msgid "Jupiter"
 msgstr "목성"
 
-#: _inc/jetpack-strings.php:700
+#: _inc/jetpack-strings.php:457
 msgid "Jetpack Stats People"
 msgstr "젯팩 사용자 통계"
 
-#: _inc/jetpack-strings.php:701
+#: _inc/jetpack-strings.php:458
 msgid "Hello there! Your stats have been activated."
 msgstr "안녕하세요? 통계가 활성화되었습니다."
 
-#: _inc/jetpack-strings.php:702
+#: _inc/jetpack-strings.php:459
 msgid "Just give us a little time to collect data so we can display it for you here."
 msgstr "여기에 표시할 데이터를 수집하는 동안 잠시 기다려 주세요."
 
-#: _inc/jetpack-strings.php:703
+#: _inc/jetpack-strings.php:460
 msgid "Okay, got it!"
 msgstr "이제 되었습니다."
 
-#: _inc/jetpack-strings.php:290
+#: _inc/jetpack-strings.php:314
 msgid "Display ads below posts on"
 msgstr "글 아래에 광고 표시"
 
-#: _inc/jetpack-strings.php:294
+#: _inc/jetpack-strings.php:318
 msgid "Archives"
 msgstr "아카이브"
 
-#: _inc/jetpack-strings.php:295
+#: _inc/jetpack-strings.php:319
 msgid "Additional ad placements"
 msgstr "추가 광고 배치 공간"
 
-#: _inc/jetpack-strings.php:296
+#: _inc/jetpack-strings.php:320
 msgid "Top of each page"
 msgstr "각 페이지 상단"
 
-#: _inc/jetpack-strings.php:297
+#: _inc/jetpack-strings.php:321
 msgid "Second ad below post"
 msgstr "글 아래에 다른 광고"
 
-#: _inc/jetpack-strings.php:248
+#: _inc/jetpack-strings.php:270
 msgid "Your site is backed up."
 msgstr "사이트가 백업되었습니다."
 
-#: _inc/jetpack-strings.php:138
+#: _inc/jetpack-strings.php:227
 msgid "Welcome to Jetpack Personal"
 msgstr "젯팩 개인에 오신 것을 환영합니다"
 
-#: _inc/jetpack-strings.php:140
+#: _inc/jetpack-strings.php:229
 msgid "Welcome to Jetpack Premium"
 msgstr "젯팩 프리미엄에 오신 것을 환영합니다"
 
-#: _inc/jetpack-strings.php:142
+#: _inc/jetpack-strings.php:231
 msgid "Welcome to Jetpack Professional"
 msgstr "젯팩 전문가에 오신 것을 환영합니다"
 
-#: _inc/jetpack-strings.php:76
+#: _inc/jetpack-strings.php:165
 msgid "Unlimited Premium Themes"
 msgstr "무제한 프리미엄 테마"
 
-#: _inc/jetpack-strings.php:77
+#: _inc/jetpack-strings.php:166
 msgid "Exclusive hand-crafted designs you will love with dedicated support directly from the theme authors."
 msgstr "섬세하게 제작된 프리미엄 테마는 테마 제작자로부터 직접 지원받을 수 있습니다."
 
-#: _inc/jetpack-strings.php:91
+#: _inc/jetpack-strings.php:180
 msgid "Social Media Scheduling"
 msgstr "소셜 미디어 예약"
 
-#: _inc/jetpack-strings.php:92
+#: _inc/jetpack-strings.php:181
 msgid "Schedule multiple Facebook, Twitter, and other social media postings in advance and view share history stats."
 msgstr "여러 페이스북, 트위터 및 기타 소셜 미디어 게시를 예약하고 공유 내역 통계를 봅니다."
 
-#: _inc/jetpack-strings.php:93
+#: _inc/jetpack-strings.php:182
 msgid "Schedule Posts"
 msgstr "글 예약"
 
-#: _inc/jetpack-strings.php:94
+#: _inc/jetpack-strings.php:183
 msgid "Activate Publicize"
 msgstr "배포 기능 활성화"
 
-#: _inc/jetpack-strings.php:115
+#: _inc/jetpack-strings.php:204
 msgid "Explore Jetpack Professional"
 msgstr "젯팩 전문가 둘러보기"
 
-#: _inc/jetpack-strings.php:184
+#: _inc/jetpack-strings.php:86
 msgid "Image Performance"
 msgstr "이미지 성능"
 
@@ -2246,89 +2338,55 @@ msgstr "Flickr RSS URL을 찾으려면 포토 스트림으로 이동하고 \"더
 msgid "Flickr RSS URL:"
 msgstr "Flickr RSS URL:"
 
-#: modules/widgets/eu-cookie-law.php:128
-msgid "Privacy & Cookies: This site uses cookies."
-msgstr "개인정보 및 쿠키: 이 사이트에서는 쿠키를 사용합니다."
-
-#: modules/widgets/eu-cookie-law.php:127
+#: modules/widgets/eu-cookie-law.php:121
 msgid "Close and accept"
 msgstr "닫은 후 수락"
 
-#: modules/widgets/eu-cookie-law.php:126
-msgid "Our Cookie Policy"
-msgstr "쿠키 정책"
-
-#: modules/widgets/eu-cookie-law.php:81
-msgid "Display a banner for compliance with the EU Cookie Law."
-msgstr "EU 쿠키 법률 준수에 대한 배너를 표시합니다."
-
-#: modules/widgets/eu-cookie-law.php:79
-msgid "EU Cookie Law Banner"
-msgstr "EU 쿠키 법률 배너"
-
-#: modules/widgets/eu-cookie-law/widget.php:16
-msgid "To find out more, as well as how to remove or block these, see here:"
-msgstr "자세한 내용 및 이들을 제거하거나 차단하는 방법을 찾아보려면 다음을 참조하세요."
-
-#: modules/widgets/eu-cookie-law/form.php:193
+#: modules/widgets/eu-cookie-law/form.php:243
 msgid "Click here for more information"
 msgstr "자세한 정보를 원하시면 여기를 클릭하세요."
 
-#: modules/widgets/eu-cookie-law/form.php:191
+#: modules/widgets/eu-cookie-law/form.php:241
 msgid "It is your own responsibility to ensure that your site complies with the relevant laws."
 msgstr "회원님의 사이트가 관련 법률을 준수하는지 확인하는 것은 회원님의 책임입니다."
 
-#: modules/widgets/eu-cookie-law/form.php:178
+#: modules/widgets/eu-cookie-law/form.php:111
 msgid "Button text"
 msgstr "버튼 텍스트"
 
-#: modules/widgets/eu-cookie-law/form.php:162
-msgid "Policy link text"
-msgstr "정책 링크 텍스트"
-
-#: modules/widgets/eu-cookie-law/form.php:124
-msgid "Policy URL"
-msgstr "정책 URL"
-
-#: modules/widgets/eu-cookie-law/form.php:77
-#: modules/widgets/eu-cookie-law/form.php:146
+#: modules/widgets/eu-cookie-law/form.php:25
 msgid "Custom:"
 msgstr "사용자 정의:"
 
-#: modules/widgets/eu-cookie-law/form.php:55
+#: modules/widgets/eu-cookie-law/form.php:3
 msgid "Banner text"
 msgstr "배너 텍스트"
 
-#: modules/widgets/eu-cookie-law/form.php:36
+#: modules/widgets/eu-cookie-law/form.php:163
 msgid "after this amount of time"
 msgstr "다음 시간 이후"
 
-#: modules/widgets/eu-cookie-law/form.php:25
+#: modules/widgets/eu-cookie-law/form.php:151
 msgid "after the user scrolls the page"
 msgstr "사용자가 페이지를 스크롤한 후"
 
-#: modules/widgets/eu-cookie-law/form.php:14
+#: modules/widgets/eu-cookie-law/form.php:139
 msgid "after the user clicks the dismiss button"
 msgstr "사용자가 무시 버튼을 클릭한 후"
 
-#: modules/widgets/eu-cookie-law/form.php:3
-msgctxt "action"
-msgid "Hide the banner"
-msgstr "배너 숨기기"
-
-#: _inc/jetpack-strings.php:439
+#: _inc/jetpack-strings.php:471
 msgid "Get WordPress Apps for every device"
 msgstr "어느 기기에서나 워드프레스 앱 이용"
 
-#: _inc/jetpack-strings.php:440
+#: _inc/jetpack-strings.php:472
 msgid "Manage all your sites from a single dashboard: publish content, track stats, moderate comments, and so much more from anywhere in the world."
 msgstr "단일 알림판에서 사이트를 모두 관리합니다. 전 세계 어디서나 콘텐츠를 공개하고, 통계를 추적하고, 댓글을 검토합니다."
 
-#: _inc/jetpack-strings.php:442
+#: _inc/jetpack-strings.php:474
 msgid "I already use this app."
 msgstr "이 앱을 이미 사용하고 있습니다."
 
-#: _inc/jetpack-strings.php:401
+#: _inc/jetpack-strings.php:425
 msgid "Create address"
 msgstr "주소 만들기"
 
@@ -2506,7 +2564,7 @@ msgstr "추가"
 msgid "People"
 msgstr "사람"
 
-#: modules/masterbar/masterbar.php:873
+#: modules/masterbar/masterbar.php:868
 msgctxt "admin bar customize item label"
 msgid "Customize"
 msgstr "사용자 정의"
@@ -2521,7 +2579,7 @@ msgctxt "Button label for adding a new item via the toolbar menu"
 msgid "Add"
 msgstr "추가"
 
-#: _inc/jetpack-strings.php:293
+#: _inc/jetpack-strings.php:317
 msgid "Pages"
 msgstr "페이지"
 
@@ -2710,561 +2768,561 @@ msgstr "색 구성표"
 msgid "Error fetching static.html. Try running: "
 msgstr "static.html을 가져오는 동안 오류가 발생했습니다. 다음을 실행해 보세요. "
 
-#: _inc/jetpack-strings.php:626
+#: _inc/jetpack-strings.php:658
 msgid "We're here to help"
 msgstr "저희가 도와드리겠습니다."
 
-#: _inc/jetpack-strings.php:627
+#: _inc/jetpack-strings.php:659
 msgid "Jetpack comes with free, basic support for all users."
 msgstr "젯팩은 모든 사용자에게 무료 지원을 제공합니다."
 
-#: _inc/jetpack-strings.php:628
+#: _inc/jetpack-strings.php:660
 msgid "Your paid plan gives you access to prioritized Jetpack support."
 msgstr "유료 요금제를 통해 우선순위가 높은 젯팩 지원을 받으실 수 있습니다."
 
-#: _inc/jetpack-strings.php:629
+#: _inc/jetpack-strings.php:661
 msgid "Ask a question"
 msgstr "질문하기"
 
-#: _inc/jetpack-strings.php:630
+#: _inc/jetpack-strings.php:662
 msgid "Search our support site"
 msgstr "지원 사이트 검색"
 
-#: _inc/jetpack-strings.php:631
+#: _inc/jetpack-strings.php:663
 msgid "Get a faster resolution to your support questions."
 msgstr "지원 관련 질문에 대해 신속하게 해결 방법을 얻으세요."
 
-#: _inc/jetpack-strings.php:615
+#: _inc/jetpack-strings.php:647
 msgctxt "A caption for a button to upgrade an existing paid feature to a higher tier."
 msgid "Upgrade"
 msgstr "업그레이드"
 
-#: _inc/jetpack-strings.php:616
+#: _inc/jetpack-strings.php:648
 msgid "Host fast, high-quality, ad-free video."
 msgstr "광고가 없는 빠른 고화질 비디오를 호스팅합니다."
 
-#: _inc/jetpack-strings.php:617
+#: _inc/jetpack-strings.php:649
 msgid "Generate income with high-quality ads."
 msgstr "고품질의 광고로 수익을 생성하세요."
 
-#: _inc/jetpack-strings.php:618
+#: _inc/jetpack-strings.php:650
 msgid "Real-time site backups and automatic threat resolution."
 msgstr "실시간 사이트 백업 및 자동 위협 해결 기능을 제공합니다."
 
-#: _inc/jetpack-strings.php:619
+#: _inc/jetpack-strings.php:651
 msgid "Protect against data loss, malware, and malicious attacks."
 msgstr "데이터 손실, 악성 코드 및 악의적인 공격으로부터 보호합니다."
 
-#: _inc/jetpack-strings.php:620
+#: _inc/jetpack-strings.php:652
 msgid "Integrate easily with Google Analytics."
 msgstr "Google 웹로그 분석과 쉽게 통합됩니다."
 
-#: _inc/jetpack-strings.php:621
+#: _inc/jetpack-strings.php:653
 msgid "Help your content get found and shared with SEO tools."
 msgstr "콘텐츠를 찾고 SEO 도구와 공유할 수 있습니다."
 
-#: _inc/jetpack-strings.php:623
+#: _inc/jetpack-strings.php:655
 msgid "Protect your site from spam."
 msgstr "스팸으로부터 사이트를 보호합니다."
 
-#: _inc/jetpack-strings.php:624
+#: _inc/jetpack-strings.php:656
 msgctxt "Button caption"
 msgid "Saving…"
 msgstr "저장 중…"
 
-#: _inc/jetpack-strings.php:625
+#: _inc/jetpack-strings.php:657
 msgctxt "Button caption"
 msgid "Save settings"
 msgstr "설정 저장"
 
-#: _inc/jetpack-strings.php:578
+#: _inc/jetpack-strings.php:609
 msgctxt "A header for a block of related posts."
 msgid "Related"
 msgstr "관련"
 
-#: _inc/jetpack-strings.php:582
+#: _inc/jetpack-strings.php:613
 msgctxt "Noun, a header for a preview block in a configuration screen."
 msgid "Preview"
 msgstr "미리보기"
 
-#: _inc/jetpack-strings.php:545
+#: _inc/jetpack-strings.php:577
 msgid "This site is not connected to WordPress.com. Please ask the site administrator to connect."
 msgstr "이 사이트는 워드프레스닷컴과 연결되어 있지 않습니다. 연결하려면 사이트 관리자에게 요청하세요."
 
-#: _inc/jetpack-strings.php:512
+#: _inc/jetpack-strings.php:544
 msgid "Spam filtering"
 msgstr "스팸 필터링"
 
-#: _inc/jetpack-strings.php:514
+#: _inc/jetpack-strings.php:546
 msgid "Daily, automated malware scanning"
 msgstr "일일 자동 악성 코드 검사"
 
-#: _inc/jetpack-strings.php:516
+#: _inc/jetpack-strings.php:548
 msgid "13Gb of high-speed video hosting"
 msgstr "13Gb의 고속 비디오 호스팅"
 
-#: _inc/jetpack-strings.php:510 _inc/jetpack-strings.php:513
-#: _inc/jetpack-strings.php:517
+#: _inc/jetpack-strings.php:542 _inc/jetpack-strings.php:545
+#: _inc/jetpack-strings.php:549
 msgid "Daily, automated backups (unlimited storage)"
 msgstr "일일 자동 백업(무제한 저장 공간)"
 
-#: _inc/jetpack-strings.php:518
+#: _inc/jetpack-strings.php:550
 msgid "Daily, automated malware scanning with automated resolution"
 msgstr "자동 문제 해결로 일일 자동 악성 코드 검사"
 
-#: _inc/jetpack-strings.php:511 _inc/jetpack-strings.php:515
-#: _inc/jetpack-strings.php:519
+#: _inc/jetpack-strings.php:543 _inc/jetpack-strings.php:547
+#: _inc/jetpack-strings.php:551
 msgid "Priority support"
 msgstr "우선 지원"
 
-#: _inc/jetpack-strings.php:520
+#: _inc/jetpack-strings.php:552
 msgid "Unlimited high-speed video hosting"
 msgstr "무제한 고속 비디오 호스팅"
 
-#: _inc/jetpack-strings.php:521
+#: _inc/jetpack-strings.php:553
 msgid "SEO preview tools"
 msgstr "SEO 미리보기 도구"
 
-#: _inc/jetpack-strings.php:522
+#: _inc/jetpack-strings.php:554
 msgid "Site stats, related content, and sharing tools"
 msgstr "사이트 통계, 관련 콘텐츠 및 공유 도구"
 
-#: _inc/jetpack-strings.php:524
+#: _inc/jetpack-strings.php:556
 msgid "Unlimited, high-speed image hosting"
 msgstr "무제한 고속 이미지 호스팅"
 
-#: _inc/jetpack-strings.php:526
+#: _inc/jetpack-strings.php:558
 msgid "By disconnecting %(siteName)s from WordPress.com you will no longer have access to the following:"
 msgstr "워드프레스닷컴에서 %(siteName)s와(과)의 연결을 해제하면 더 이상 다음에 액세스할 수 없습니다."
 
-#: _inc/jetpack-strings.php:527
+#: _inc/jetpack-strings.php:559
 msgctxt "A caption for a button to cancel disconnection."
 msgid "Stay connected"
 msgstr "연결 상태 유지"
 
-#: _inc/jetpack-strings.php:528
+#: _inc/jetpack-strings.php:560
 msgctxt "A caption for a button to disconnect."
 msgid "Disconnect"
 msgstr "연결 해제"
 
-#: _inc/jetpack-strings.php:529
+#: _inc/jetpack-strings.php:561
 msgid "Read more about Jetpack benefits"
 msgstr "젯팩 혜택 더 보기"
 
-#: _inc/jetpack-strings.php:455
+#: _inc/jetpack-strings.php:488
 msgctxt "Navigation item."
 msgid "Dev Tools"
 msgstr "개발자 도구"
 
-#: _inc/jetpack-strings.php:456
+#: _inc/jetpack-strings.php:489
 msgid "An Automattic Airline"
 msgstr "Automattic 항공사"
 
-#: _inc/jetpack-strings.php:448
+#: _inc/jetpack-strings.php:480
 msgctxt "Short warning message"
 msgid "Updates needed"
 msgstr "업데이트 필요"
 
-#: _inc/jetpack-strings.php:450
+#: _inc/jetpack-strings.php:482
 msgctxt "Short label appearing near a paid feature configuration block."
 msgid "Paid"
 msgstr "유료"
 
-#: _inc/jetpack-strings.php:445
+#: _inc/jetpack-strings.php:477
 msgid "Manage site connection"
 msgstr "사이트 연결 관리"
 
-#: _inc/jetpack-strings.php:696
+#: _inc/jetpack-strings.php:453
 msgid "Connect your account to WordPress.com to view more stats"
 msgstr "계정을 워드프레스닷컴에 연결하여 통계 더 보기"
 
-#: _inc/jetpack-strings.php:406
+#: _inc/jetpack-strings.php:430
 msgid "Theme enhancements"
 msgstr "테마 기능 향상"
 
-#: _inc/jetpack-strings.php:408
+#: _inc/jetpack-strings.php:432
 msgid "Load more posts using the default theme behavior"
 msgstr "기본 테마 동작을 사용하여 더 많은 글 로드"
 
-#: _inc/jetpack-strings.php:409
+#: _inc/jetpack-strings.php:433
 msgid "Load more posts in page with a button"
 msgstr "버튼을 사용하여 페이지에 더 많은 글 로드"
 
-#: _inc/jetpack-strings.php:410
+#: _inc/jetpack-strings.php:434
 msgid "Load more posts as the reader scrolls down"
 msgstr "리더가 아래로 스크롤될 때 더 많은 글 로드"
 
-#: _inc/jetpack-strings.php:411
+#: _inc/jetpack-strings.php:435
 msgid "Theme support required."
 msgstr "테마 지원이 필요합니다."
 
-#: _inc/jetpack-strings.php:412
+#: _inc/jetpack-strings.php:436
 msgid "Learn more about adding support for Infinite Scroll to your theme."
 msgstr "테마에 무한 스크롤 기능을 추가하는 것에 대해 더 알아보세요."
 
-#: _inc/jetpack-strings.php:415
+#: _inc/jetpack-strings.php:439
 msgid "Use excerpts instead of full posts on front page and archive pages"
 msgstr "프론트 페이지와 아카이브 페이지에 전체 글 대신 요약문 사용"
 
-#: _inc/jetpack-strings.php:416
+#: _inc/jetpack-strings.php:440
 msgid "Show featured images"
 msgstr "추천 이미지 표시"
 
-#: _inc/jetpack-strings.php:385
+#: _inc/jetpack-strings.php:409
 msgctxt "Settings header"
 msgid "WordPress.com toolbar"
 msgstr "워드프레스닷컴 도구 모음"
 
-#: _inc/jetpack-strings.php:387
+#: _inc/jetpack-strings.php:411
 msgid "Enable the WordPress.com toolbar"
 msgstr "워드프레스닷컴 도구 모음 사용"
 
-#: _inc/jetpack-strings.php:388
+#: _inc/jetpack-strings.php:412
 msgid "The WordPress.com toolbar replaces the default admin bar and offers quick links to the Reader, all your sites, your WordPress.com profile, and notifications. Centralize your WordPress experience with a single global toolbar."
 msgstr "워드프레스닷컴 도구 모음은 기본 관리 바를 대체하며 리더, 회원님의 모든 사이트, 워드프레스닷컴 프로필 및 알림에 대한 빠른 링크를 제공합니다. 단일 글로벌 도구 모음으로 워드프레스 환경을 중앙에서 관리합니다."
 
-#: _inc/jetpack-strings.php:384
+#: _inc/jetpack-strings.php:408
 msgid "Writing tools available to you will be shown here when an administrator enables them."
 msgstr "관리자가 쓰기 도구를 활성화한 경우 사용 가능한 쓰기 도구가 여기에 표시됩니다."
 
-#: _inc/jetpack-strings.php:380
+#: _inc/jetpack-strings.php:404
 msgid "Add, organize, and display {{testimonialLink}}testimonials{{/testimonialLink}}. If your theme doesn’t support testimonials yet, you can display them using the shortcode\t( [testimonials] )."
 msgstr "{{testimonialLink}}추천 글{{/testimonialLink}}을 추가, 구성 및 표시합니다. 테마가 추천 글을 지원하지 않으면 쇼트코드 \t([추천 글])을(를) 사용하여 표시할 수 있습니다."
 
-#: _inc/jetpack-strings.php:382
+#: _inc/jetpack-strings.php:406
 msgid "Portfolios"
 msgstr "포트폴리오"
 
-#: _inc/jetpack-strings.php:383
+#: _inc/jetpack-strings.php:407
 msgid "Add, organize, and display {{portfolioLink}}portfolios{{/portfolioLink}}. If your theme doesn’t support portfolios yet, you can display them using the shortcode ( [portfolio] )."
 msgstr "{{portfolioLink}}포트폴리오{{/portfolioLink}}를 추가, 구성 및 표시합니다. 테마가 포트폴리오를 지원하지 않으면 쇼트코드([추천 글])를 사용하여 표시할 수 있습니다."
 
-#: _inc/jetpack-strings.php:376
+#: _inc/jetpack-strings.php:400
 msgctxt "Settings header"
 msgid "Composing"
 msgstr "작성"
 
-#: _inc/jetpack-strings.php:347
+#: _inc/jetpack-strings.php:371
 msgid "Note that {{b}}verifying your site with these services is not necessary{{/b}} in order for your site to be indexed by search engines. To use these advanced search engine tools and verify your site with a service, paste the HTML Tag code below. Read the {{support}}full instructions{{/support}} if you are having trouble. Supported verification services: {{google}}Google Search Console{{/google}}, {{bing}}Bing Webmaster Center{{/bing}}, {{pinterest}}Pinterest Site Verification{{/pinterest}}, and {{yandex}}Yandex.Webmaster{{/yandex}}."
 msgstr "검색 엔진에서 {{b}}사이트를 검색할 수 있게 하기 위해서 이 서비스를 이용하여 {{/b}}사이트를 확인할 필요는 없습니다. 이 고급 검색 엔진 도구를 사용하여 서비스로 사이트를 확인하려면 아래의 HTML 태그 코드를 붙여넣으세요. 문제가 있으면 {{support}}전체 지침{{/support}}을 읽어 보세요. 지원되는 확인 서비스: {{google}}Google Search Console{{/google}}, {{bing}}Bing Webmaster Center{{/bing}}, {{pinterest}}Pinterest Site Verification{{/pinterest}}, {{yandex}}Yandex.Webmaster{{/yandex}}"
 
-#: _inc/jetpack-strings.php:349
+#: _inc/jetpack-strings.php:373
 msgid "Bing"
 msgstr "Bing"
 
-#: _inc/jetpack-strings.php:351
+#: _inc/jetpack-strings.php:375
 msgid "Yandex"
 msgstr "Yandex"
 
-#: _inc/jetpack-strings.php:341
+#: _inc/jetpack-strings.php:365
 msgid "Generate XML sitemaps"
 msgstr "XML 사이트맵 생성"
 
-#: _inc/jetpack-strings.php:342
+#: _inc/jetpack-strings.php:366
 msgid "Your sitemap is automatically sent to all major search engines for indexing."
 msgstr "사이트맵이 검색되도록 자동으로 모든 주요 검색 엔진으로 전송되었습니다."
 
-#: _inc/jetpack-strings.php:343
+#: _inc/jetpack-strings.php:367
 msgid "Your site is not currently accessible to search engines. You might have \"Search Engine Visibility\" disabled in your {{a}}Reading Settings{{/a}}."
 msgstr "사이트에서 현재 검색 엔진에 액세스할 수 없습니다. {{a}}읽기 설정{{/a}}에 \"검색 엔진 접근 여부\"가 비활성화되어 있을 수 있습니다."
 
-#: _inc/jetpack-strings.php:332
+#: _inc/jetpack-strings.php:356
 msgctxt "Settings header"
 msgid "Site stats"
 msgstr "사이트 통계"
 
-#: _inc/jetpack-strings.php:333
+#: _inc/jetpack-strings.php:357
 msgid "Collecting valuable traffic stats and insights"
 msgstr "중요한 트래픽 통계와 인사이트 수집"
 
-#: _inc/jetpack-strings.php:337
+#: _inc/jetpack-strings.php:361
 msgid "The image helps collect stats, but should work when hidden."
 msgstr "이미지는 통계를 수집하는 데 유용하지만 숨긴 상태에서도 작동합니다."
 
-#: _inc/jetpack-strings.php:338
+#: _inc/jetpack-strings.php:362
 msgid "Count logged in page views from"
 msgstr "로그인된 페이지 조회수"
 
-#: _inc/jetpack-strings.php:339
+#: _inc/jetpack-strings.php:363
 msgid "Allow stats reports to be viewed by"
 msgstr "통계 보고서를 볼 수 있는 사람"
 
-#: _inc/jetpack-strings.php:324
+#: _inc/jetpack-strings.php:348
 msgctxt "Settings header"
 msgid "Search engine optimization"
 msgstr "검색 엔진 최적화"
 
-#: _inc/jetpack-strings.php:326
+#: _inc/jetpack-strings.php:350
 msgid "You can tweak these settings if you'd like more advanced control. Read more about what you can do to {{a}}optimize your site's SEO{{/a}}."
 msgstr "더욱 세부적으로 제어하고 싶다면 이 설정을 약간 변경하면 됩니다. {{a}}사이트의 SEO를 최적화{{/a}}하는 방법에는 어떤 것이 있는지 확인해 보세요."
 
-#: _inc/jetpack-strings.php:327
+#: _inc/jetpack-strings.php:351
 msgid "Configure your SEO settings"
 msgstr "SEO 설정 구성"
 
-#: _inc/jetpack-strings.php:309
+#: _inc/jetpack-strings.php:333
 msgctxt "A header for a preview area in the configuration screen."
 msgid "Preview"
 msgstr "미리보기"
 
 #. translators: It refers to the category where a post was found. Used in an
 #. example preview.
-#: _inc/jetpack-strings.php:319
+#: _inc/jetpack-strings.php:343
 msgid "In \"Upgrade\""
 msgstr "\"업그레이드\"에서"
 
-#: _inc/jetpack-strings.php:300
+#: _inc/jetpack-strings.php:324
 msgctxt "Settings header"
 msgid "Google Analytics"
 msgstr "Google 웹로그 분석"
 
-#: _inc/jetpack-strings.php:303
+#: _inc/jetpack-strings.php:327
 msgid "Configure your Google Analytics settings"
 msgstr "Google 웹로그 분석 설정 구성"
 
-#: _inc/jetpack-strings.php:285
+#: _inc/jetpack-strings.php:309
 msgctxt "Ads header"
 msgid "Ads"
 msgstr "광고"
 
-#: _inc/jetpack-strings.php:287
+#: _inc/jetpack-strings.php:311
 msgid "Show ads on the first article on your home page or at the end of every page and post. Place additional ads at the top of your site and to any widget area to increase your earnings."
 msgstr "홈 페이지의 첫 번째 글 또는 모든 페이지와 글 끝에 광고를 표시하세요. 수입을 늘리기 위해 광고를 사이트 상단 및 위젯 영역에 추가할 수도 있습니다."
 
-#: _inc/jetpack-strings.php:289
+#: _inc/jetpack-strings.php:313
 msgid "Enable ads and display an ad below each post"
 msgstr "광고 활성화 및 각 글 아래에 광고 표시"
 
-#: _inc/jetpack-strings.php:269
+#: _inc/jetpack-strings.php:293
 msgid "No search results found for %(term)s"
 msgstr "%(term)s에 대한 검색 결과가 없습니다."
 
-#: _inc/jetpack-strings.php:270
+#: _inc/jetpack-strings.php:294
 msgid "Enter a search term to find settings or close search."
 msgstr "검색어를 입력하여 설정을 찾거나 검색을 종료합니다."
 
-#: _inc/jetpack-strings.php:265
+#: _inc/jetpack-strings.php:288
 msgctxt "Settings header"
 msgid "WordPress.com log in"
 msgstr "워드프레스닷컴 로그인"
 
-#: _inc/jetpack-strings.php:267
+#: _inc/jetpack-strings.php:290
 msgid "Match accounts using email addresses"
 msgstr "이메일 주소를 사용하여 계정 일치"
 
-#: _inc/jetpack-strings.php:268
+#: _inc/jetpack-strings.php:291
 msgid "Require accounts to use WordPress.com Two-Step Authentication"
 msgstr "워드프레스닷컴 2단계 인증을 사용하려면 계정이 필요합니다."
 
-#: _inc/jetpack-strings.php:259
+#: _inc/jetpack-strings.php:282
 msgctxt "Settings header"
 msgid "Brute force attack protection"
 msgstr "무차별 공격 대입 보호"
 
-#: _inc/jetpack-strings.php:262
+#: _inc/jetpack-strings.php:285
 msgid "Add to whitelist"
 msgstr "화이트리스트에 추가"
 
-#: _inc/jetpack-strings.php:264
+#: _inc/jetpack-strings.php:287
 msgid "You may whitelist an IP address or series of addresses preventing them from ever being blocked by Jetpack. IPv4 and IPv6 are acceptable. To specify a range, enter the low value and high value separated by a dash. Example: 12.12.12.1-12.12.12.100"
 msgstr "젯팩에서 차단하지 않도록 하나 이상의 IP 주소를 화이트리스트에 추가할 수 있습니다. IPv4 및 IPv6를 사용할 수 있습니다. 범위를 지정하려면 낮은 값과 높은 값을 대시로 구분하여 입력하세요. 예: 12.12.12.1~12.12.12.100"
 
-#: _inc/jetpack-strings.php:247
+#: _inc/jetpack-strings.php:269
 msgid "Your site is backed up and threat-free."
 msgstr "사이트가 백업되었고 위협으로부터 안전합니다."
 
-#: _inc/jetpack-strings.php:249
+#: _inc/jetpack-strings.php:271
 msgid "You have paid for backups but they're not yet active."
 msgstr "백업을 구매하셨지만, 아직 활성화되지 않았습니다."
 
-#: _inc/jetpack-strings.php:251
+#: _inc/jetpack-strings.php:273
 msgid "You have paid for backups and security scanning but they’re not yet active."
 msgstr "백업 및 보안 검사를 구매하셨지만, 아직 활성화되지 않았습니다."
 
-#: _inc/jetpack-strings.php:250 _inc/jetpack-strings.php:252
+#: _inc/jetpack-strings.php:272 _inc/jetpack-strings.php:274
 msgid "Click \"Set Up\" to finish installation."
 msgstr "설치를 마치려면 \"설정\"을 클릭하세요."
 
-#: _inc/jetpack-strings.php:238
+#: _inc/jetpack-strings.php:260
 msgid "Checking site status…"
 msgstr "사이트 상태 확인 중…"
 
-#: _inc/jetpack-strings.php:236 _inc/jetpack-strings.php:242
-#: _inc/jetpack-strings.php:253
+#: _inc/jetpack-strings.php:258 _inc/jetpack-strings.php:264
+#: _inc/jetpack-strings.php:275
 msgctxt "Settings header"
 msgid "Backups and security scanning"
 msgstr "백업 및 보안 검사"
 
-#: _inc/jetpack-strings.php:224
+#: _inc/jetpack-strings.php:246
 msgid "Checking your spam protection…"
 msgstr "스팸 방지 검사 중…"
 
-#: _inc/jetpack-strings.php:225
+#: _inc/jetpack-strings.php:247
 msgid "Fetching key…"
 msgstr "키 가져오는 중…"
 
-#: _inc/jetpack-strings.php:226
+#: _inc/jetpack-strings.php:248
 msgid "Your site needs an Antispam key."
 msgstr "사이트에 안티스팸 키가 필요합니다."
 
-#: _inc/jetpack-strings.php:227
+#: _inc/jetpack-strings.php:249
 msgid "There's a problem with your Antispam API key. {{a}}Learn more{{/a}}."
 msgstr "안티스팸 API 키에 문제가 있습니다. {{a}}자세히 알아보세요{{/a}}."
 
-#: _inc/jetpack-strings.php:228
+#: _inc/jetpack-strings.php:250
 msgid "Your site is not protected from spam."
 msgstr "사이트가 스팸으로부터 보호되어 있지 않습니다."
 
-#: _inc/jetpack-strings.php:229
+#: _inc/jetpack-strings.php:251
 msgid "Your Antispam key is valid."
 msgstr "안티스팸 키가 유효합니다."
 
-#: _inc/jetpack-strings.php:230
+#: _inc/jetpack-strings.php:252
 msgid "Your site is protected from spam."
 msgstr "사이트가 스팸으로부터 보호되어 있습니다."
 
-#: _inc/jetpack-strings.php:231
+#: _inc/jetpack-strings.php:253
 msgid "Checking key…"
 msgstr "키 확인 중…"
 
-#: _inc/jetpack-strings.php:232
+#: _inc/jetpack-strings.php:254
 msgctxt "Settings header"
 msgid "Spam filtering"
 msgstr "스팸 필터링"
 
-#: _inc/jetpack-strings.php:234
+#: _inc/jetpack-strings.php:256
 msgid "Your API key"
 msgstr "API 키"
 
-#: _inc/jetpack-strings.php:235
+#: _inc/jetpack-strings.php:257
 msgid "If you don't already have an API key, then {{a}}get your API key here{{/a}}, and you'll be guided through the process of getting one."
 msgstr "API 키가 없는 경우 {{a}}여기에서 API 키를 받은 후{{/a}} 키를 얻는 방법에 대한 설명을 받을 수 있습니다."
 
-#: _inc/jetpack-strings.php:279 _inc/jetpack-strings.php:280
+#: _inc/jetpack-strings.php:303 _inc/jetpack-strings.php:304
 msgid "Configure your sharing buttons"
 msgstr "공유 버튼 구성"
 
-#: _inc/jetpack-strings.php:282
+#: _inc/jetpack-strings.php:306
 msgctxt "Settings header"
 msgid "Sharing buttons"
 msgstr "공유 버튼"
 
-#: _inc/jetpack-strings.php:284
+#: _inc/jetpack-strings.php:308
 msgid "Add sharing buttons to your posts"
 msgstr "글에 공유 버튼 추가"
 
-#: _inc/jetpack-strings.php:274
+#: _inc/jetpack-strings.php:298
 msgid "Connect your social media accounts"
 msgstr "소셜 미디어 계정 연결"
 
-#: _inc/jetpack-strings.php:275 _inc/jetpack-strings.php:281
-#: _inc/jetpack-strings.php:389 _inc/jetpack-strings.php:402
+#: _inc/jetpack-strings.php:299 _inc/jetpack-strings.php:305
+#: _inc/jetpack-strings.php:413 _inc/jetpack-strings.php:426
 msgid "Connect your user account to WordPress.com to use this feature"
 msgstr "사용자 계정을 워드프레스닷컴에 연결하여 이 기능 사용"
 
-#: _inc/jetpack-strings.php:276
+#: _inc/jetpack-strings.php:300
 msgctxt "Settings header"
 msgid "Publicize connections"
 msgstr "배포 기능 연결"
 
-#: _inc/jetpack-strings.php:278
+#: _inc/jetpack-strings.php:302
 msgid "Automatically share your posts to social networks"
 msgstr "글을 소셜 네트워크에 자동으로 공유"
 
-#: _inc/jetpack-strings.php:271
+#: _inc/jetpack-strings.php:295
 msgctxt "Settings header"
 msgid "Like buttons"
 msgstr "좋아요 버튼"
 
-#: _inc/jetpack-strings.php:273
+#: _inc/jetpack-strings.php:297
 msgid "Allow readers to show their appreciation of your posts by adding a like button to your content"
 msgstr "독자들이 콘텐츠에 좋아요 버튼을 눌러 글에 대한 공감을 표시할 수 있습니다."
 
-#: _inc/jetpack-strings.php:428
+#: _inc/jetpack-strings.php:235
 msgctxt "A caption for a small button to fix security issues."
 msgid "Threats"
 msgstr "위협"
 
-#: _inc/jetpack-strings.php:429
+#: _inc/jetpack-strings.php:236
 msgctxt "Short warning message about new threats found."
 msgid "Threats found!"
 msgstr "위협이 발견되었습니다!"
 
-#: _inc/jetpack-strings.php:430
+#: _inc/jetpack-strings.php:237
 msgctxt "A caption for a small button to fix security issues."
 msgid "FIX"
 msgstr "해결"
 
-#: _inc/jetpack-strings.php:431
+#: _inc/jetpack-strings.php:238
 msgctxt "Short warning message about site having no security scan."
 msgid "No scanning"
 msgstr "검사 안 함"
 
-#: _inc/jetpack-strings.php:432
+#: _inc/jetpack-strings.php:239
 msgctxt "Caption for a button to purchase a paid feature."
 msgid "Upgrade"
 msgstr "업그레이드"
 
-#: _inc/jetpack-strings.php:434
+#: _inc/jetpack-strings.php:241
 msgctxt "Short message informing user that the site is secure."
 msgid "Secure"
 msgstr "보안"
 
-#: _inc/jetpack-strings.php:435
+#: _inc/jetpack-strings.php:242
 msgctxt "Short warning message about an invalid key being used for Akismet."
 msgid "Invalid key"
 msgstr "잘못된 키"
 
-#: _inc/jetpack-strings.php:438
+#: _inc/jetpack-strings.php:245
 msgctxt "Caption for a button to set up a feature."
 msgid "Set up"
 msgstr "설정"
 
-#: _inc/jetpack-strings.php:60
+#: _inc/jetpack-strings.php:137
 msgid "View your Email Followers"
 msgstr "이메일 팔로워 보기"
 
-#: _inc/jetpack-strings.php:61
+#: _inc/jetpack-strings.php:138
 msgid "Connect your user account to WordPress.com to view your email followers"
 msgstr "이메일 팔로워를 보려면 사용자 계정을 워드프레스닷컴에 연결하세요."
 
-#: _inc/jetpack-strings.php:52 _inc/jetpack-strings.php:392
+#: _inc/jetpack-strings.php:129 _inc/jetpack-strings.php:416
 #: _inc/lib/class.core-rest-api-endpoints.php:1324
-#: modules/widgets/eu-cookie-law/form.php:92
+#: modules/widgets/eu-cookie-law/form.php:210
 msgid "Color scheme"
 msgstr "색상표"
 
-#: _inc/jetpack-strings.php:55
+#: _inc/jetpack-strings.php:132
 msgid "Enable Markdown use for comments."
 msgstr "댓글에 마크다운을 사용하려면 활성화하세요."
 
-#: _inc/jetpack-strings.php:177
+#: _inc/jetpack-strings.php:79
 msgid "Connections"
 msgstr "연결"
 
-#: _inc/jetpack-strings.php:166
+#: _inc/jetpack-strings.php:68
 msgid "Your site is in Development Mode, so it can not be connected to WordPress.com."
 msgstr "사이트가 개발 모드에 있으므로 워드프레스닷컴에 연결할 수 없습니다."
 
-#: _inc/jetpack-strings.php:167
+#: _inc/jetpack-strings.php:69
 msgid "Your site is connected to WordPress.com."
 msgstr "사이트가 워드프레스닷컴에 연결되어 있습니다."
 
-#: _inc/jetpack-strings.php:168
+#: _inc/jetpack-strings.php:70
 msgid "You are the Jetpack owner."
 msgstr "젯팩 소유자입니다."
 
 #. translators: %(username) is the WordPress user login name.
-#: _inc/jetpack-strings.php:171
+#: _inc/jetpack-strings.php:73
 msgid "Connected as {{span}}%(username)s{{/span}}"
 msgstr "{{span}}%(username)s{{/span}}(으)로 연결됨"
 
-#: _inc/jetpack-strings.php:173
+#: _inc/jetpack-strings.php:75
 msgctxt "Dashboard widget header"
 msgid "Site connection"
 msgstr "사이트 연결"
 
-#: _inc/jetpack-strings.php:174
+#: _inc/jetpack-strings.php:76
 msgctxt "Dashboard widget header"
 msgid "Account connection"
 msgstr "계정 연결"
@@ -3302,18 +3360,18 @@ msgctxt "Navigation item."
 msgid "Settings"
 msgstr "설정"
 
-#: _inc/jetpack-strings.php:8 _inc/jetpack-strings.php:610
+#: _inc/jetpack-strings.php:8 _inc/jetpack-strings.php:642
 msgctxt "Navigation item."
 msgid "Discussion"
 msgstr "토론"
 
-#: _inc/jetpack-strings.php:10 _inc/jetpack-strings.php:611
+#: _inc/jetpack-strings.php:10 _inc/jetpack-strings.php:643
 msgctxt "Navigation item."
 msgid "Traffic"
 msgstr "트래픽"
 
-#: _inc/jetpack-strings.php:12 _inc/jetpack-strings.php:609
-#: _inc/jetpack-strings.php:613
+#: _inc/jetpack-strings.php:12 _inc/jetpack-strings.php:641
+#: _inc/jetpack-strings.php:645
 msgctxt "Navigation item."
 msgid "Sharing"
 msgstr "공유"
@@ -3379,7 +3437,7 @@ msgstr "내 <strong>페이스북 페이지</strong>에 배포:"
 msgid "Publicize to my <strong>Facebook Wall</strong>:"
 msgstr "내 <strong>페이스북 담벼락</strong>에 게시:"
 
-#: modules/contact-form/grunion-contact-form.php:224
+#: modules/contact-form/grunion-contact-form.php:228
 msgid "Export CSV"
 msgstr "CSV 내보내기"
 
@@ -3423,23 +3481,23 @@ msgstr "글에 마크다운을 사용합니다."
 msgid "Track each scroll load (7 posts by default) as a page view in Google Analytics"
 msgstr "Google 웹로그 분석의 페이지 조회로 각 스크롤 로드(기본적으로 7개 글) 추적"
 
-#: _inc/jetpack-strings.php:541
+#: _inc/jetpack-strings.php:573
 msgid "Currently in {{a}}Development Mode{{/a}} (some features are disabled) because: {{reasons/}}"
 msgstr "현재 {{a}}개발 모드{{/a}}(일부 기능을 사용할 수 없음)인 이유:"
 
-#: _inc/jetpack-strings.php:538
+#: _inc/jetpack-strings.php:570
 msgid "{{li}}The jetpack_development_mode filter is active{{/li}}"
 msgstr "{{li}}jetpack_development_mode 필터가 활성화됨{{/li}}"
 
-#: _inc/jetpack-strings.php:539
+#: _inc/jetpack-strings.php:571
 msgid "{{li}}The JETPACK_DEV_DEBUG constant is defined{{/li}}"
 msgstr "{{li}}JETPACK_DEV_DEBUG 상수가 정의되어 있음{{/li}}"
 
-#: _inc/jetpack-strings.php:540
+#: _inc/jetpack-strings.php:572
 msgid "{{li}}Your site URL lacks a dot (e.g. http://localhost){{/li}}"
 msgstr "{{li}}사이트 URL에 점이 없음(예: http://localhost){{/li}}"
 
-#: modules/wordads/php/widgets.php:36 modules/wordads/wordads.php:410
+#: modules/wordads/php/widgets.php:36 modules/wordads/wordads.php:415
 msgid "Advertisements"
 msgstr "광고"
 
@@ -3474,35 +3532,35 @@ msgstr "글 ID를 지정해야 합니다."
 msgid "Nothing is in the queue: %s"
 msgstr "대기열에 아무 것도 없습니다. %s"
 
-#: _inc/jetpack-strings.php:302 _inc/jetpack-strings.php:594
+#: _inc/jetpack-strings.php:326 _inc/jetpack-strings.php:625
 msgid "Google Analytics is a free service that complements our {{a}}built-in stats{{/a}} with different insights into your traffic. WordPress.com stats and Google Analytics use different methods to identify and track activity on your site, so they will normally show slightly different totals for your visits, views, etc."
 msgstr "구글 애널리틱스는 트래픽을 또 다른 관점에서 파악하여 워드프레스의 {{a}}내장된 통계{{/a}}를 보완하는 무료 서비스입니다. 워드프레스닷컴 통계와 구글 애널리틱스는 각자 다른 방법을 사용해 사이트의 활동을 식별하고 추적하므로 방문, 조회 등에 대한 합계가 조금 다르게 표시됩니다."
 
-#: _inc/jetpack-strings.php:595
+#: _inc/jetpack-strings.php:626
 msgid "Configure Google Analytics settings."
 msgstr "Google 웹로그 분석 설정을 구성합니다."
 
-#: _inc/jetpack-strings.php:135
+#: _inc/jetpack-strings.php:224
 msgid "Image of WordPress login screen protected by Jetpack"
 msgstr "젯팩으로 보호되는 워드프레스 로그인 화면의 이미지"
 
-#: _inc/jetpack-strings.php:103 _inc/lib/class.core-rest-api-endpoints.php:1842
+#: _inc/jetpack-strings.php:192 _inc/lib/class.core-rest-api-endpoints.php:1842
 msgid "Google Analytics"
 msgstr "Google 웹로그 분석"
 
-#: _inc/jetpack-strings.php:104 modules/module-info.php:665
+#: _inc/jetpack-strings.php:193 modules/module-info.php:665
 msgid "Track website statistics with Google Analytics for a deeper understanding of your website visitors and customers."
 msgstr "웹사이트 방문자와 고객에 대해 더 깊이 이해하기 위해 Google 웹로그 분석을 통해 웹사이트 통계를 추적합니다."
 
-#: _inc/jetpack-strings.php:105
+#: _inc/jetpack-strings.php:194
 msgid "Configure Google Analytics"
 msgstr "Google 웹로그 분석 구성"
 
-#: _inc/jetpack-strings.php:106
+#: _inc/jetpack-strings.php:195
 msgid "Activate Google Analytics"
 msgstr "Google 웹로그 분석 활성화"
 
-#: _inc/jetpack-strings.php:441
+#: _inc/jetpack-strings.php:473
 msgid "Download the free apps"
 msgstr "무료 앱 다운로드"
 
@@ -3790,7 +3848,7 @@ msgstr "쓰기는 Android에서 새 워드프레스 앱으로 다시 새로워�
 
 #. translators: It refers to the category where a post was found. Used in an
 #. example preview.
-#: _inc/jetpack-strings.php:313 _inc/jetpack-strings.php:316
+#: _inc/jetpack-strings.php:337 _inc/jetpack-strings.php:340
 #: modules/related-posts/jetpack-related-posts.php:846
 #: modules/related-posts/jetpack-related-posts.php:866
 #: modules/related-posts/jetpack-related-posts.php:886
@@ -4054,59 +4112,59 @@ msgstr "사이트가 WordAds를 사용할 수 있게 승인되었습니까?"
 msgid "Display an ad unit at the top of each page."
 msgstr "각 페이지 상단에 광고 유닛을 표시합니다."
 
-#: _inc/jetpack-strings.php:573
+#: _inc/jetpack-strings.php:604
 msgid "To get started, click on Add Media in your post editor and upload a video; we’ll take care of the rest!"
 msgstr "시작하려면 글 에디터에서 미디어 추가를 클릭하고 비디오를 업로드하세요. 나머지는 당사에서 처리합니다!"
 
-#: _inc/jetpack-strings.php:308 _inc/jetpack-strings.php:579
+#: _inc/jetpack-strings.php:332 _inc/jetpack-strings.php:610
 msgid "{{span}}You can now also configure related posts in the Customizer. {{ExternalLink}}Try it out!{{/ExternalLink}}{{/span}}"
 msgstr "{{span}}사용자 정의 기능에서 관련된 글을 구성할 수도 있습니다. {{ExternalLink}}시도해 보세요!{{/ExternalLink}}{{/span}}"
 
-#: _inc/jetpack-strings.php:585
+#: _inc/jetpack-strings.php:616
 msgid "{{link}}Configure your Monitor notification settings on WordPress.com{{/link}}"
 msgstr "{{link}}워드프레스닷컴에서 모니터 알림 설정 구성{{/link}}"
 
-#: _inc/jetpack-strings.php:586 modules/module-info.php:649
+#: _inc/jetpack-strings.php:617 modules/module-info.php:649
 msgid "By default ads are shown at the end of every page, post, or the first article on your front page. You can also add them to the top of your site and to any widget area to increase your earnings!"
 msgstr "기본적으로 광고는 모든 페이지, 글 또는 첫 페이지의 첫 번째 문서에 표시됩니다. 수입을 늘리기 위해 광고를 사이트 상단 및 위젯 영역에 추가할 수도 있습니다."
 
-#: _inc/jetpack-strings.php:587
+#: _inc/jetpack-strings.php:618
 msgid "Display an ad unit at the top of your site."
 msgstr "사이트 상단에 광고 유닛을 표시합니다."
 
-#: _inc/jetpack-strings.php:560
+#: _inc/jetpack-strings.php:592
 msgid "Your server is misconfigured, which means that Jetpack Protect is unable to effectively protect your site."
 msgstr "서버가 잘못 구성되었습니다. 즉, Jetpack Protect에서 사이트를 효율적으로 보호할 수 없습니다."
 
-#: _inc/jetpack-strings.php:83
+#: _inc/jetpack-strings.php:172
 msgid "Ads"
 msgstr "광고"
 
-#: _inc/jetpack-strings.php:84
+#: _inc/jetpack-strings.php:173
 msgid "Earn income by allowing Jetpack to display high quality ads (powered by WordAds)."
 msgstr "젯팩이 고급 광고(WordAds에서 제공)를 표시할 수 있도록 하여 수입을 올립니다."
 
-#: _inc/jetpack-strings.php:86
+#: _inc/jetpack-strings.php:175
 msgid "Activate Ads"
 msgstr "광고 활성화"
 
-#: _inc/jetpack-strings.php:95
+#: _inc/jetpack-strings.php:184
 msgid "Video Hosting"
 msgstr "비디오 호스팅"
 
-#: _inc/jetpack-strings.php:97
+#: _inc/jetpack-strings.php:186
 msgid "Upload Videos Now"
 msgstr "지금 비디오 업로드"
 
-#: _inc/jetpack-strings.php:123
+#: _inc/jetpack-strings.php:212
 msgid "We support all Jetpack users, regardless of plan. But customers on a paid subscription enjoy priority support so that security issues are identified and fixed for you as soon as possible."
 msgstr "요금제에 관계없이 젯팩 사용자라면 누구나 지원을 받으실 수 있습니다. 하지만 유로 구독 고객이 우선 지원을 받을 수 있으므로 보안 문제가 가능한 한 빠르게 식별되고 해결됩니다. "
 
-#: _inc/jetpack-strings.php:85 _inc/jetpack-strings.php:299
+#: _inc/jetpack-strings.php:174 _inc/jetpack-strings.php:323
 msgid "View your earnings"
 msgstr "수입 보기"
 
-#: _inc/jetpack-strings.php:288
+#: _inc/jetpack-strings.php:312
 msgid "By activating ads, you agree to the Automattic Ads {{link}}Terms of Service{{/link}}."
 msgstr "광고를 활성화하면 자동 광고 {{link}}서비스 약관{{/link}}에 동의하는 것입니다."
 
@@ -4374,16 +4432,16 @@ msgstr "테마 다운로드용 파일을 만드는 동안 문제가 발생했습
 msgid "This theme does not exist"
 msgstr "이 테마는 존재하지 않습니다."
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:687
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:693
 msgid "Invalid SEO title format."
 msgstr "잘못된 SEO 제목 형식입니다."
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:671
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:677
 msgid "Invalid SEO meta description value."
 msgstr "잘못된 SEO 메타 설명 값입니다."
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:667
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:683
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:673
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:689
 #: json-endpoints/class.wpcom-json-api-update-post-endpoint.php:710
 #: json-endpoints/class.wpcom-json-api-update-post-v1-1-endpoint.php:785
 #: json-endpoints/class.wpcom-json-api-update-post-v1-2-endpoint.php:756
@@ -4651,55 +4709,55 @@ msgstr "동기화 오류 옵션을 삭제할 수 없습니다."
 msgid "Could not confirm safe mode."
 msgstr "안전 모드를 확인할 수 없습니다."
 
-#: _inc/jetpack-strings.php:591
+#: _inc/jetpack-strings.php:622
 msgid "Make sure your site is easily found on search engines with SEO tools for your content and social posts."
 msgstr "검색 엔진에서 SEO 도구를 사용하여 콘텐츠 및 소셜 글을 쉽게 찾을 수 있는지 확인하세요."
 
-#: _inc/jetpack-strings.php:592
+#: _inc/jetpack-strings.php:623
 msgid "Activate this module to use the advanced SEO tools."
 msgstr "고급 SEO 도구를 사용하려면 이 모듈을 활성화하세요."
 
-#: _inc/jetpack-strings.php:593
+#: _inc/jetpack-strings.php:624
 msgid "Configure your SEO settings."
 msgstr "SEO 설정을 구성하세요."
 
-#: _inc/jetpack-strings.php:572
+#: _inc/jetpack-strings.php:603
 msgid "The easiest way to upload ad-free and unbranded videos to your site. You get stats on video playback and shares and the player is lightweight and responsive."
 msgstr "광고 없는 비디오 및 브랜드 없는 비디오를 사이트에 업로드하는 가장 쉬운 방법입니다. 비디오 재생에 대한 통계를 얻을 수 있으며, 플레이어는 간단한 반응형입니다."
 
-#: _inc/jetpack-strings.php:536
+#: _inc/jetpack-strings.php:568
 msgid "You are running Jetpack on a staging server."
 msgstr "스테이징 서버에서 젯팩을 실행하고 있습니다."
 
-#: _inc/jetpack-strings.php:537
+#: _inc/jetpack-strings.php:569
 msgid "More Info"
 msgstr "자세한 정보"
 
-#: _inc/jetpack-strings.php:131
+#: _inc/jetpack-strings.php:220
 msgid "How much is your website worth?"
 msgstr "회원님의 웹사이트는 얼마나 가치가 있습니까?"
 
-#: _inc/jetpack-strings.php:132
+#: _inc/jetpack-strings.php:221
 msgid "For less than the price of a coffee a month you can rest easy knowing your hard work (or livelihood) is backed up."
 msgstr "매월 커피 한 잔보다 적은 가격으로 소중한 작업(또는 생계 수단)을 백업하고 안심하세요."
 
-#: _inc/jetpack-strings.php:67
+#: _inc/jetpack-strings.php:156
 msgid "Daily backup of all your site data with unlimited space, one-click restores, automated security scanning, and priority support"
 msgstr "무제한 공간, 원클릭 복원, 자동 보안 검사, 원클릭 위협 해결로 모든 사이트 데이터를 실시간 백업합니다."
 
-#: _inc/jetpack-strings.php:99
+#: _inc/jetpack-strings.php:188
 msgid "SEO Tools"
 msgstr "SEO 도구"
 
-#: _inc/jetpack-strings.php:100
+#: _inc/jetpack-strings.php:189
 msgid "Advanced SEO tools to help your site get found when people search for relevant content."
 msgstr "사람들이 관련 콘텐츠를 검색할 때 사이트가 검색되도록 하는 고급 SEO 도구입니다."
 
-#: _inc/jetpack-strings.php:101
+#: _inc/jetpack-strings.php:190
 msgid "Configure Site SEO"
 msgstr "사이트 SEO 구성"
 
-#: _inc/jetpack-strings.php:102
+#: _inc/jetpack-strings.php:191
 msgid "Activate SEO Tools"
 msgstr "SEO 도구 활성화"
 
@@ -4715,19 +4773,19 @@ msgstr "워드프레스닷컴을 통해 로그인하는 동안 오류가 발생�
 msgid "Logging in with WordPress.com is not currently available because this site is experiencing connection problems."
 msgstr "이 사이트에 연결 문제가 발생하여 현재 워드프레스닷컴으로 로그인할 수 없습니다."
 
-#: _inc/jetpack-strings.php:584
+#: _inc/jetpack-strings.php:615
 msgid "{{a}}Manage Likes visibility from the Sharing Module Settings{{/a}}"
 msgstr "{{a}}공유 모듈 설정에서 좋아요 표시 여부 관리{{/a}}"
 
-#: _inc/jetpack-strings.php:261
+#: _inc/jetpack-strings.php:284
 msgid "Your current IP: %(ip)s"
 msgstr "현재 IP: %(ip)s"
 
-#: _inc/jetpack-strings.php:451
+#: _inc/jetpack-strings.php:484
 msgid "This will reset all Jetpack options, are you sure?"
 msgstr "모든 젯팩 옵션이 초기화됩니다. 계속하시겠습니까?"
 
-#: _inc/jetpack-strings.php:695
+#: _inc/jetpack-strings.php:452
 msgid "{{button}}View more stats on WordPress.com {{/button}}"
 msgstr "{{button}}워드프레스닷컴에서 추가 통계 보기 {{/button}}"
 
@@ -5463,214 +5521,214 @@ msgstr "젯팩의 잠재력을 발휘하려면 자바스크립트를 켜세요!"
 msgid "You have JavaScript disabled"
 msgstr "자바스크립트를 비활성화했습니다."
 
-#: _inc/jetpack-strings.php:569
+#: _inc/jetpack-strings.php:601
 #: _inc/lib/admin-pages/class.jetpack-react-page.php:54
 #: class.jetpack-network-sites-list-table.php:59
 #: modules/masterbar/masterbar.php:1001
 msgid "Dashboard"
 msgstr "알림판"
 
-#: _inc/jetpack-strings.php:604 _inc/jetpack-strings.php:606
+#: _inc/jetpack-strings.php:636 _inc/jetpack-strings.php:638
 msgctxt "Navigation item."
 msgid "At a Glance"
 msgstr "둘러보기"
 
-#: _inc/jetpack-strings.php:607
+#: _inc/jetpack-strings.php:639
 msgid "Search for a Jetpack feature."
 msgstr "젯팩 기능을 검색합니다."
 
-#: _inc/jetpack-strings.php:588
+#: _inc/jetpack-strings.php:619
 msgid "Upgrade Jetpack and our state-of-the-art security scanner will hunt out malicious files and report them immediately so that you're never unaware of what is happening on your website."
 msgstr "젯팩을 업그레이드하면 최첨단 보안 스캐너가 악성 파일을 찾아내어 바로 보고하므로 고객님은 웹사이트에서 무슨 일이 발생하고 있는지 전혀 알 수 없습니다."
 
-#: _inc/jetpack-strings.php:589
+#: _inc/jetpack-strings.php:620
 msgid "You can see the information about security scanning in the \"At a Glance\" section."
 msgstr "\"둘러보기\" 섹션에서 보안 검사에 대한 정보를 확인할 수 있습니다."
 
-#: _inc/jetpack-strings.php:255 _inc/jetpack-strings.php:590
+#: _inc/jetpack-strings.php:277 _inc/jetpack-strings.php:621
 msgid "Configure your Security Scans"
 msgstr "보안 검사 구성"
 
-#: _inc/jetpack-strings.php:596
+#: _inc/jetpack-strings.php:627
 msgid "This module has no configuration options"
 msgstr "이 모듈에는 구성 옵션이 없습니다."
 
-#: _inc/jetpack-strings.php:597
+#: _inc/jetpack-strings.php:628
 msgid "Let search engines and visitors know that you are serious about your websites integrity by upgrading Jetpack. Our anti-spam tools will eliminate comment spam, protect your SEO, and make it easier for visitors to stay in touch."
 msgstr "젯팩을 업그레이드함으로써 검색 엔진 및 방문자에게 회원님이 웹사이트 무결성에 대해 염려하고 있다는 것을 알리세요. 스팸 방지 도구는 스팸 댓글을 제거하고, SEO를 보호하고, 방문자가 연락을 쉽게 주고받을 수 있도록 합니다."
 
-#: _inc/jetpack-strings.php:598
+#: _inc/jetpack-strings.php:629
 msgid "Real-time offsite backups with automated restores deliver peace-of-mind, so you can focus on writing great content and increasing traffic while we protect every aspect of your investment. Upgrade today."
 msgstr "자동 복구를 사용한 실시간 외부 백업을 통해 안심할 수 있으므로 멋진 콘텐츠 작성 및 트래픽 증가에 집중하면서 모든 투자 측면을 보호할 수 있습니다. 오늘 업그레이드하세요."
 
-#: _inc/jetpack-strings.php:599 _inc/jetpack-strings.php:600
+#: _inc/jetpack-strings.php:630 _inc/jetpack-strings.php:631
 msgid "{{link}}Configure your %(module_slug)s Settings {{/link}}"
 msgstr "{{link}}%(module_slug)s 설정 {{/link}} 구성"
 
-#: _inc/jetpack-strings.php:574
+#: _inc/jetpack-strings.php:605
 msgid "Subscriber"
 msgstr "구독자"
 
-#: _inc/jetpack-strings.php:311 _inc/jetpack-strings.php:575
+#: _inc/jetpack-strings.php:335 _inc/jetpack-strings.php:606
 #: modules/related-posts/jetpack-related-posts.php:841
 msgid "Big iPhone/iPad Update Now Available"
 msgstr "iPhone/iPad 업데이트 지금 이용 가능"
 
-#: _inc/jetpack-strings.php:314 _inc/jetpack-strings.php:576
+#: _inc/jetpack-strings.php:338 _inc/jetpack-strings.php:607
 #: modules/related-posts/jetpack-related-posts.php:861
 msgid "The WordPress for Android App Gets a Big Facelift"
 msgstr "대대적으로 업데이트된 Android 앱용 워드프레스"
 
-#: _inc/jetpack-strings.php:317 _inc/jetpack-strings.php:577
+#: _inc/jetpack-strings.php:341 _inc/jetpack-strings.php:608
 msgid "Upgrade Focus: VideoPress For Weddings"
 msgstr "업그레이드 핵심: 웨딩용 비디오프레스"
 
-#: _inc/jetpack-strings.php:583
+#: _inc/jetpack-strings.php:614
 msgid "WordPress.com Likes are:"
 msgstr "워드프레스닷컴 좋아요:"
 
-#: _inc/jetpack-strings.php:50
+#: _inc/jetpack-strings.php:127
 msgid "Comments headline"
 msgstr "댓글 헤드라인"
 
-#: _inc/jetpack-strings.php:51
+#: _inc/jetpack-strings.php:128
 msgid "A few catchy words to motivate your readers to comment."
 msgstr "독자가 댓글을 달도록 유도하는 관심을 끄는 몇 가지 단어입니다."
 
-#: _inc/jetpack-strings.php:63
+#: _inc/jetpack-strings.php:140
 msgid "Show a \"follow blog\" option in the comment form"
 msgstr "댓글 양식에 \"블로그 팔로우\" 옵션 표시"
 
-#: _inc/jetpack-strings.php:64
+#: _inc/jetpack-strings.php:141
 msgid "Show a \"follow comments\" option in the comment form"
 msgstr "댓글 양식에 \"댓글 팔로우\" 옵션을 표시합니다."
 
-#: _inc/jetpack-strings.php:335
+#: _inc/jetpack-strings.php:359
 msgid "Put a chart showing 48 hours of views in the admin bar"
 msgstr "관리 바에 48시간 보기를 표시하는 차트 넣기"
 
-#: _inc/jetpack-strings.php:336
+#: _inc/jetpack-strings.php:360
 msgid "Hide the stats smiley face image"
 msgstr "통계 웃는 얼굴 이미지 숨기기"
 
-#: _inc/jetpack-strings.php:263
+#: _inc/jetpack-strings.php:286
 msgid "Whitelisted IP addresses"
 msgstr "화이트리스트에 포함된 IP 주소"
 
-#: _inc/jetpack-strings.php:391
+#: _inc/jetpack-strings.php:415
 msgid "Show photo metadata (Exif) in carousel, when available"
 msgstr "가능한 경우 캐러셀에 사진 메타데이터(Exif) 보이기"
 
-#: _inc/jetpack-strings.php:417
+#: _inc/jetpack-strings.php:441
 msgid "Show an ad for the WordPress mobile apps in the footer of the mobile theme"
 msgstr "모바일 테마 푸터에 워드프레스 모바일 앱에 대한 프로모션 표시"
 
-#: _inc/jetpack-strings.php:397
+#: _inc/jetpack-strings.php:421
 msgctxt "verb"
 msgid "Copy"
 msgstr "복사"
 
-#: _inc/jetpack-strings.php:398
+#: _inc/jetpack-strings.php:422
 msgid "Copied!"
 msgstr "복사되었습니다!"
 
-#: _inc/jetpack-strings.php:399
+#: _inc/jetpack-strings.php:423
 msgid "Highlight and copy the following text to your clipboard:"
 msgstr "다음 텍스트를 강조 표시 후 클립보드로 복사:"
 
-#: _inc/jetpack-strings.php:400
+#: _inc/jetpack-strings.php:424
 msgid "Regenerate address"
 msgstr "주소 재생성"
 
-#: _inc/jetpack-strings.php:354
+#: _inc/jetpack-strings.php:378
 msgid "Automatically proofread content when: "
 msgstr "다음의 경우 자동으로 콘텐츠 교정: "
 
-#: _inc/jetpack-strings.php:355
+#: _inc/jetpack-strings.php:379
 msgid "A post or page is first published"
 msgstr "글 또는 페이지가 먼저 발행되었습니다."
 
-#: _inc/jetpack-strings.php:356
+#: _inc/jetpack-strings.php:380
 msgid "A post or page is updated"
 msgstr "글 또는 페이지가 업데이트되었습니다."
 
-#: _inc/jetpack-strings.php:357
+#: _inc/jetpack-strings.php:381
 msgid "Automatic Language Detection"
 msgstr "자동 언어 감지"
 
-#: _inc/jetpack-strings.php:358
+#: _inc/jetpack-strings.php:382
 msgid "The proofreader supports English, French, German, Portuguese and Spanish."
 msgstr "교정자는 영어, 프랑스어, 독일어, 포르투갈어 및 스페인어를 지원합니다."
 
-#: _inc/jetpack-strings.php:361
+#: _inc/jetpack-strings.php:385
 msgid "Enable proofreading for the following grammar and style rules: "
 msgstr "다음 문법 및 스타일 규칙에 대한 교정 기능 켜기: "
 
-#: _inc/jetpack-strings.php:363 _inc/lib/class.core-rest-api-endpoints.php:1677
+#: _inc/jetpack-strings.php:387 _inc/lib/class.core-rest-api-endpoints.php:1677
 msgid "Clichés"
 msgstr "클리셰"
 
-#: _inc/jetpack-strings.php:373
+#: _inc/jetpack-strings.php:397
 msgid "Add a phrase"
 msgstr "구문 추가"
 
-#: _inc/jetpack-strings.php:563
+#: _inc/jetpack-strings.php:595
 msgid "Activate recommended features"
 msgstr "권장 기능 활성화"
 
-#: _inc/jetpack-strings.php:565
+#: _inc/jetpack-strings.php:597
 msgid "Jetpack's recommended features include:"
 msgstr "젯팩의 권장 기능은 다음과 같습니다."
 
-#: _inc/jetpack-strings.php:566
+#: _inc/jetpack-strings.php:598
 msgid "Features can be activated or deactivated at any time."
 msgstr "기능을 언제든지 활성화하거나 비활성화할 수 있습니다."
 
-#: _inc/jetpack-strings.php:546
+#: _inc/jetpack-strings.php:578
 msgid "Cheatin' uh?"
 msgstr "속임수를 쓰고 계시나요?"
 
-#: _inc/jetpack-strings.php:547
+#: _inc/jetpack-strings.php:579
 msgid "{{p}}Would you mind telling us why you did not complete the Jetpack connection in this {{a}}2 question survey{{/a}}?{{/p}}{{p}}A Jetpack connection is required for our free security and traffic features to work.{{/p}}"
 msgstr "{{p}}이 {{a}}2문항짜리 설문 조사{{/a}}에서 젯팩 연결을 완료하지 않은 이유를 설명해 주시겠습니까?{{/p}}{{p}}무료 보안 및 트래픽 기능이 작동하려면 젯팩 연결이 필수입니다.{{/p}}"
 
-#: _inc/jetpack-strings.php:556
+#: _inc/jetpack-strings.php:588
 msgid "Welcome to {{s}}Jetpack %(jetpack_version)s{{/s}}!"
 msgstr "{{s}}젯팩%(jetpack_version)s{{/s}}에 오신 것을 환영합니다!"
 
-#: _inc/jetpack-strings.php:557
+#: _inc/jetpack-strings.php:589
 msgid "Your Jetpack is already connected."
 msgstr "젯팩이 이미 연결되었습니다."
 
-#: _inc/jetpack-strings.php:558
+#: _inc/jetpack-strings.php:590
 msgid "You're fueled up and ready to go, Jetpack is now active."
 msgstr "연료가 채워졌으니 이제 출발하세요. 젯팩이 이제 활성화되었습니다."
 
-#: _inc/jetpack-strings.php:559
+#: _inc/jetpack-strings.php:591
 msgid "You're fueled up and ready to go."
 msgstr "연료가 채워졌으니 이제 출발하세요."
 
-#: _inc/jetpack-strings.php:534
+#: _inc/jetpack-strings.php:566
 msgid "You are currently running a development version of Jetpack."
 msgstr "현재 젯팩 개발 버전이 실행 중입니다."
 
-#: _inc/jetpack-strings.php:535
+#: _inc/jetpack-strings.php:567
 msgid "Submit Beta feedback"
 msgstr "베타 피드백 제출"
 
-#: _inc/jetpack-strings.php:532
+#: _inc/jetpack-strings.php:564
 msgid "What would you like to see on your Jetpack Dashboard?"
 msgstr "젯팩 알림판에서 무엇을 보고 싶으신가요?"
 
-#: _inc/jetpack-strings.php:533
+#: _inc/jetpack-strings.php:565
 msgid "Let us know!"
 msgstr "알려주세요!"
 
-#: _inc/jetpack-strings.php:531
+#: _inc/jetpack-strings.php:563
 msgid "Would you tell us why? Just {{a}}answering two simple questions{{/a}} would help us improve Jetpack."
 msgstr "이유를 말씀해 주시겠어요? {{a}}간단한 질문 두 가지에 대해 답변{{/a}}해 주시면 젯팩을 개선하는 데 도움이 됩니다."
 
-#: _inc/jetpack-strings.php:467 class.jetpack-connection-banner.php:183
+#: _inc/jetpack-strings.php:501 class.jetpack-connection-banner.php:183
 #: class.jetpack-connection-banner.php:601
 #: class.jetpack-connection-banner.php:627
 msgid "Welcome to Jetpack"
@@ -5680,325 +5738,325 @@ msgstr "젯팩을 시작합니다."
 msgid "Please connect to or create a WordPress.com account to start using Jetpack. This will enable powerful security, traffic, and customization services."
 msgstr "젯팩 사용을 시작하려면 워드프레스닷컴 계정에 연결하거나 워드프레스닷컴 계정을 만드세요. 이 경우 강력한 보안, 트래픽 및 사용자 정의 서비스를 활성화합니다."
 
-#: _inc/jetpack-strings.php:503
+#: _inc/jetpack-strings.php:537
 msgctxt "Header. Noun: Protect is a module of Jetpack."
 msgid "Protect"
 msgstr "보호"
 
-#: _inc/jetpack-strings.php:500
+#: _inc/jetpack-strings.php:534
 msgctxt "Header. Noun: Monitor is a module of Jetpack."
 msgid "Monitor"
 msgstr "모니터"
 
-#: _inc/jetpack-strings.php:507
+#: _inc/jetpack-strings.php:541
 msgid "Join the millions of users who rely on Jetpack to enhance and secure their sites. We're passionate about WordPress and here to make your life easier."
 msgstr "젯팩을 사용하여 자신의 사이트를 향상하고 보호하는 수백만 명의 사용자에 참여하세요. 워드프레스닷컴은 워드프레스에 열정적이며, 회원님의 삶을 용이하게 합니다."
 
-#: _inc/jetpack-strings.php:452
+#: _inc/jetpack-strings.php:485
 msgctxt "Navigation item."
 msgid "Reset Options (dev only)"
 msgstr "옵션 재설정(개발자 버전 전용)"
 
-#: _inc/jetpack-strings.php:454
+#: _inc/jetpack-strings.php:487
 msgctxt "Navigation item. Noun. Links to a debugger tool for Jetpack."
 msgid "Debug"
 msgstr "디버그"
 
-#: _inc/jetpack-strings.php:460
+#: _inc/jetpack-strings.php:493
 msgid "WordPress.com Terms of Service"
 msgstr "워드프레스닷컴 서비스 약관"
 
-#: _inc/jetpack-strings.php:461
+#: _inc/jetpack-strings.php:494
 msgctxt "Shorthand for Terms of Service."
 msgid "Terms"
 msgstr "용어"
 
-#: _inc/jetpack-strings.php:462
+#: _inc/jetpack-strings.php:495
 msgid "Automattic's Privacy Policy"
 msgstr "Automattic's 개인정보 보호정책"
 
-#: _inc/jetpack-strings.php:463
+#: _inc/jetpack-strings.php:496
 msgctxt "Shorthand for Privacy Policy."
 msgid "Privacy"
 msgstr "개인 정보"
 
-#: _inc/jetpack-strings.php:464
+#: _inc/jetpack-strings.php:497
 msgid "Saving…"
 msgstr "저장 중..."
 
-#: _inc/jetpack-strings.php:465
+#: _inc/jetpack-strings.php:498
 msgid "Save Settings"
 msgstr "설정 저장"
 
-#: _inc/jetpack-strings.php:466
+#: _inc/jetpack-strings.php:483
 msgctxt "Noun. Displayed to screen readers."
 msgid "Settings"
 msgstr "설정"
 
-#: _inc/jetpack-strings.php:443
+#: _inc/jetpack-strings.php:475
 msgid "Unlink me from WordPress.com"
 msgstr "워드프레스닷컴에서 링크 해제"
 
-#: _inc/jetpack-strings.php:444
+#: _inc/jetpack-strings.php:476
 msgid "Link to WordPress.com"
 msgstr "워드프레스닷컴에 연결"
 
-#: _inc/jetpack-strings.php:697
+#: _inc/jetpack-strings.php:454
 msgid "Week of %(date)s"
 msgstr "%(date)s번째 주"
 
-#: _inc/jetpack-strings.php:698
+#: _inc/jetpack-strings.php:455
 msgid "Views: %(numberOfViews)s"
 msgstr "보기: %(numberOfViews)s"
 
-#: _inc/jetpack-strings.php:699
+#: _inc/jetpack-strings.php:456
 msgid "Click to view detailed stats."
 msgstr "세부 통계를 보려면 클릭하세요."
 
-#: _inc/jetpack-strings.php:704
+#: _inc/jetpack-strings.php:461
 msgid "Something happened while loading stats. Please try again later or {{a}}view your stats now on WordPress.com{{/a}}"
 msgstr "통계를 로드하는 동안 문제가 발생했습니다. 나중에 다시 시도하거나 {{a}}워드프레스닷컴에서 통계를 보세요{{/a}}"
 
-#: _inc/jetpack-strings.php:328 _inc/jetpack-strings.php:705
+#: _inc/jetpack-strings.php:352 _inc/jetpack-strings.php:462
 msgid "Jetpack Stats Icon"
 msgstr "젯팩 통계 아이콘"
 
-#: _inc/jetpack-strings.php:330 _inc/jetpack-strings.php:707
+#: _inc/jetpack-strings.php:354 _inc/jetpack-strings.php:464
 msgid "{{a}}Activate Site Stats{{/a}} to see detailed stats, likes, followers, subscribers, and more! {{a1}}Learn More{{/a1}}"
 msgstr "세부 통계, 좋아요, 팔로워, 구독자 등을 보려면 {{a}}사이트 통계를 활성화{{/a}}하세요! {{a1}}더 알아보기{{/a1}}"
 
-#: _inc/jetpack-strings.php:331 _inc/jetpack-strings.php:708
+#: _inc/jetpack-strings.php:355 _inc/jetpack-strings.php:465
 msgid "Activate Site Stats"
 msgstr "사이트 통계 활성화"
 
-#: _inc/jetpack-strings.php:709
+#: _inc/jetpack-strings.php:466
 msgid "Days"
 msgstr "일"
 
-#: _inc/jetpack-strings.php:710
+#: _inc/jetpack-strings.php:467
 msgid "Weeks"
 msgstr "주"
 
-#: _inc/jetpack-strings.php:711
+#: _inc/jetpack-strings.php:468
 msgid "Months"
 msgstr "월"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:686
+#: _inc/jetpack-strings.php:443
 msgid "Views today"
 msgstr "오늘 보기"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:688
+#: _inc/jetpack-strings.php:445
 msgid "Best overall day"
 msgstr "전반적으로 최상의 날"
 
-#: _inc/jetpack-strings.php:689
+#: _inc/jetpack-strings.php:446
 msgid "%(number)s View"
 msgid_plural "%(number)s Views"
 msgstr[0] "%(number)s 보기"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:691
+#: _inc/jetpack-strings.php:448
 msgid "All-time views"
 msgstr "모든 시간 보기"
 
 #. translators: Referring to a number of comments
-#: _inc/jetpack-strings.php:693
+#: _inc/jetpack-strings.php:450
 msgid "All-time comments"
 msgstr "최고 댓글"
 
-#: _inc/jetpack-strings.php:694
+#: _inc/jetpack-strings.php:451
 msgid "{{button}}View detailed stats{{/button}}"
 msgstr "{{button}}이전 통계 보기{{/button}}"
 
-#: _inc/jetpack-strings.php:202
+#: _inc/jetpack-strings.php:104
 msgid "Security Scanning"
 msgstr "보안 검사"
 
-#: _inc/jetpack-strings.php:632
+#: _inc/jetpack-strings.php:664
 msgid "Upgrade"
 msgstr "업그레이드"
 
-#: _inc/jetpack-strings.php:437
+#: _inc/jetpack-strings.php:244
 msgid "ACTIVE"
 msgstr "활성"
 
-#: _inc/jetpack-strings.php:144
+#: _inc/jetpack-strings.php:233
 msgid "Your site is on Development Mode"
 msgstr "사이트가 개발 모드에 있습니다."
 
-#: _inc/jetpack-strings.php:145
+#: _inc/jetpack-strings.php:234
 msgid "Once you connect, you can upgrade to a paid plan in order to unlock world-class security, spam protection tools, and priority support."
 msgstr "연결하면 최상급 보안, 스팸 보호 도구 및 우선 지원 잠금을 해제하기 위해 유료 요금제로 업그레이드할 수 있습니다."
 
-#: _inc/jetpack-strings.php:80
+#: _inc/jetpack-strings.php:169
 msgid "State-of-the-art spam defense powered by Akismet."
 msgstr "Akismet의 첨단 스팸 방지 기능"
 
-#: _inc/jetpack-strings.php:81
+#: _inc/jetpack-strings.php:170
 msgid "View your spam stats"
 msgstr "스팸 통계 보기"
 
-#: _inc/jetpack-strings.php:82
+#: _inc/jetpack-strings.php:171
 msgid "Configure Akismet"
 msgstr "Akismet 구성"
 
-#: _inc/jetpack-strings.php:74
+#: _inc/jetpack-strings.php:163
 msgid "View your security dashboard"
 msgstr "보안 알림판 보기"
 
-#: _inc/jetpack-strings.php:75
+#: _inc/jetpack-strings.php:164
 msgid "Configure VaultPress"
 msgstr "VaultPress 구성"
 
-#: _inc/jetpack-strings.php:111 _inc/jetpack-strings.php:124
+#: _inc/jetpack-strings.php:200 _inc/jetpack-strings.php:213
 msgid "Compare Plans"
 msgstr "요금제 비교"
 
-#: _inc/jetpack-strings.php:122
+#: _inc/jetpack-strings.php:211
 msgid "Enjoy priority support"
 msgstr "우선 지원받기"
 
-#: _inc/jetpack-strings.php:169
+#: _inc/jetpack-strings.php:71
 msgid "The site is in Development Mode, so you can not connect to WordPress.com."
 msgstr "사이트가 개발 모드에 있으므로 워드프레스닷컴에 연결할 수 없습니다."
 
-#: _inc/jetpack-strings.php:172
+#: _inc/jetpack-strings.php:74
 msgid "Link your account to WordPress.com to get the most out of Jetpack."
 msgstr "젯팩을 최대한 활용하려면 계정을 워드프레스닷컴에 연결하세요."
 
-#: _inc/jetpack-strings.php:205 _inc/jetpack-strings.php:244
+#: _inc/jetpack-strings.php:107 _inc/jetpack-strings.php:266
 msgid "Uh oh, %(number)s threat found."
 msgid_plural "Uh oh, %(number)s threats found."
 msgstr[0] "%(number)s 위협을 발견했습니다."
 
-#: _inc/jetpack-strings.php:206
+#: _inc/jetpack-strings.php:108
 msgid "{{a}}View details at VaultPress.com{{/a}}"
 msgstr "{{a}}VaultPress.com에서 세부 사항 보기{{/a}}"
 
-#: _inc/jetpack-strings.php:207 _inc/jetpack-strings.php:246
+#: _inc/jetpack-strings.php:109 _inc/jetpack-strings.php:268
 msgid "{{a}}Contact Support{{/a}}"
 msgstr "{{a}}지원팀에 문의{{/a}}"
 
-#: _inc/jetpack-strings.php:208
+#: _inc/jetpack-strings.php:110
 msgid "No threats found, you're good to go!"
 msgstr "위협이 발견되지 않았으므로, 이동할 수 있습니다!"
 
-#: _inc/jetpack-strings.php:210
+#: _inc/jetpack-strings.php:112
 msgid "For automated, comprehensive scanning of security threats, please {{a}}install and activate{{/a}} VaultPress."
 msgstr "자동화된 포괄적인 보안 위협 검사를 위해 VaultPress를 {{a}}설치 및 활성화{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:211
+#: _inc/jetpack-strings.php:113
 msgid "For automated, comprehensive scanning of security threats, please {{a}}upgrade your account{{/a}}."
 msgstr "자동화된 포괄적인 보안 위협 검사를 위해 {{a}}계정을 업그레이드{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:198
+#: _inc/jetpack-strings.php:100
 msgid "Jetpack is actively blocking malicious login attempts. Data will display here soon!"
 msgstr "젯팩이 악의적인 로그인 시도를 차단 중입니다. 데이터가 곧 여기에 표시됩니다!"
 
-#: _inc/jetpack-strings.php:199
+#: _inc/jetpack-strings.php:101
 msgid "Total malicious attacks blocked on your site."
 msgstr "사이트에서 차단된 총 악의적인 공격 수입니다."
 
-#: _inc/jetpack-strings.php:201
+#: _inc/jetpack-strings.php:103
 msgid "{{a}}Activate Protect{{/a}} to keep your site protected from malicious sign in attempts."
 msgstr "악의적인 로그인 시도로부터 사이트를 보호하려면 {{a}}보호를 활성화{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:189
+#: _inc/jetpack-strings.php:91
 msgid "Plugin Updates"
 msgstr "플러그인 업데이트"
 
-#: _inc/jetpack-strings.php:195
+#: _inc/jetpack-strings.php:97
 msgid "All plugins are up-to-date. Awesome work!"
 msgstr "모든 플러그인이 최신 상태입니다. 멋진 작업입니다!"
 
-#: _inc/jetpack-strings.php:186
+#: _inc/jetpack-strings.php:88
 msgid "Jetpack is improving and optimizing your image speed."
 msgstr "젯팩이 이미지 속도를 개선 및 최적화 중입니다."
 
-#: _inc/jetpack-strings.php:188
+#: _inc/jetpack-strings.php:90
 msgid "{{a}}Activate{{/a}} to enhance the performance and speed of your images."
 msgstr "이미지 성능 및 속도를 향상하려면 {{a}}Photon을 활성화{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:181
+#: _inc/jetpack-strings.php:83
 msgid "Jetpack is monitoring your site. If we think your site is down, you will receive an email."
 msgstr "젯팩이 사이트를 모니터링합니다. 사이트가 다운된 상태라고 생각되면 이메일을 받게 됩니다."
 
-#: _inc/jetpack-strings.php:175 _inc/jetpack-strings.php:652
+#: _inc/jetpack-strings.php:77 _inc/jetpack-strings.php:684
 #: modules/masterbar/masterbar.php:473
 msgid "Security"
 msgstr "보안"
 
-#: _inc/jetpack-strings.php:176
+#: _inc/jetpack-strings.php:78
 msgid "Manage security on WordPress.com"
 msgstr "워드프레스닷컴의 보안 관리"
 
-#: _inc/jetpack-strings.php:178 class.jetpack-connection-banner.php:207
+#: _inc/jetpack-strings.php:80 class.jetpack-connection-banner.php:207
 msgid "Performance"
 msgstr "성능"
 
-#: _inc/jetpack-strings.php:69 _inc/jetpack-strings.php:72
-#: _inc/jetpack-strings.php:158
+#: _inc/jetpack-strings.php:60 _inc/jetpack-strings.php:158
+#: _inc/jetpack-strings.php:161
 msgid "Backups"
 msgstr "백업"
 
-#: _inc/jetpack-strings.php:160
+#: _inc/jetpack-strings.php:62
 msgid "{{a}}View backup details{{/a}}."
 msgstr "{{a}}백업 세부 사항을 확인{{/a}}합니다."
 
-#: _inc/jetpack-strings.php:161
+#: _inc/jetpack-strings.php:63
 msgid "To automatically back up your entire site, please {{a}}install and activate{{/a}} VaultPress."
 msgstr "전체 사이트를 자동으로 백업하려면 VaultPress를 {{a}}설치하고 활성화{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:162
+#: _inc/jetpack-strings.php:64
 msgid "To automatically back up your entire site, please {{a}}upgrade your account{{/a}}."
 msgstr "전체 사이트를 자동으로 백업하려면 {{a}}계정을 업그레이드{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:148 _inc/jetpack-strings.php:164
-#: _inc/jetpack-strings.php:182 _inc/jetpack-strings.php:212
-#: _inc/jetpack-strings.php:239 _inc/jetpack-strings.php:243
+#: _inc/jetpack-strings.php:50 _inc/jetpack-strings.php:66
+#: _inc/jetpack-strings.php:84 _inc/jetpack-strings.php:114
+#: _inc/jetpack-strings.php:261 _inc/jetpack-strings.php:265
 msgid "Unavailable in Dev Mode."
 msgstr "개발 모드에서 사용할 수 없습니다."
 
-#: _inc/jetpack-strings.php:79 _inc/jetpack-strings.php:149
+#: _inc/jetpack-strings.php:51 _inc/jetpack-strings.php:168
 msgid "Spam Protection"
 msgstr "스팸 방지"
 
-#: _inc/jetpack-strings.php:151 _inc/jetpack-strings.php:163
-#: _inc/jetpack-strings.php:191 _inc/jetpack-strings.php:204
-#: _inc/jetpack-strings.php:209
+#: _inc/jetpack-strings.php:53 _inc/jetpack-strings.php:65
+#: _inc/jetpack-strings.php:93 _inc/jetpack-strings.php:106
+#: _inc/jetpack-strings.php:111
 msgid "Loading…"
 msgstr "로드 중..."
 
-#: _inc/jetpack-strings.php:152
+#: _inc/jetpack-strings.php:54
 msgid "For state-of-the-art spam defense, please {{a}}install Akismet{{/a}}."
 msgstr "최첨단 스팸 방지 기능을 위해 {{a}}Akismet를 설치{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:153
+#: _inc/jetpack-strings.php:55
 msgid "For state-of-the-art spam defense, please {{a}}activate Akismet{{/a}}."
 msgstr "최첨단 스팸 방지 기능을 위해 {{a}}Akismet를 활성화{{/a}}하세요."
 
-#: _inc/jetpack-strings.php:154
+#: _inc/jetpack-strings.php:56
 msgid "Invalid key"
 msgstr "유효하지 않은 키"
 
-#: _inc/jetpack-strings.php:155
+#: _inc/jetpack-strings.php:57
 msgid "Whoops! Your Akismet key is missing or invalid. {{akismetSettings}}Go to Akismet settings to fix{{/akismetSettings}}."
 msgstr "이런! Akismet 키가 누락되었거나 유효하지 않습니다. {{akismetSettings}}수정할 Akismet 설정으로 이동{{/akismetSettings}}합니다."
 
-#: _inc/jetpack-strings.php:156
+#: _inc/jetpack-strings.php:58
 msgctxt "Example: \"412 Spam comments blocked\""
 msgid "Spam comments blocked."
 msgstr "스팸 댓글이 차단되었습니다."
 
-#: _inc/jetpack-strings.php:187 _inc/jetpack-strings.php:200
-#: _inc/jetpack-strings.php:216 _inc/jetpack-strings.php:329
-#: _inc/jetpack-strings.php:706
+#: _inc/jetpack-strings.php:89 _inc/jetpack-strings.php:102
+#: _inc/jetpack-strings.php:118 _inc/jetpack-strings.php:353
+#: _inc/jetpack-strings.php:463
 msgid "Unavailable in Dev Mode"
 msgstr "개발 모드에서 사용할 수 없음"
 
-#: _inc/jetpack-strings.php:21 _inc/jetpack-strings.php:562
+#: _inc/jetpack-strings.php:21 _inc/jetpack-strings.php:594
 msgid "Activating recommended features…"
 msgstr "권장 기능 활성화 중…"
 
@@ -6095,18 +6153,18 @@ msgstr "둘러보기"
 msgid "At A Glance"
 msgstr "둘러보기"
 
-#: _inc/jetpack-strings.php:6 _inc/jetpack-strings.php:605
+#: _inc/jetpack-strings.php:6 _inc/jetpack-strings.php:637
 msgctxt "Navigation item."
 msgid "Plans"
 msgstr "요금제"
 
-#: _inc/jetpack-strings.php:9 _inc/jetpack-strings.php:612
+#: _inc/jetpack-strings.php:9 _inc/jetpack-strings.php:644
 msgctxt "Navigation item."
 msgid "Security"
 msgstr "보안"
 
-#: _inc/jetpack-strings.php:11 _inc/jetpack-strings.php:608
-#: _inc/jetpack-strings.php:614
+#: _inc/jetpack-strings.php:11 _inc/jetpack-strings.php:640
+#: _inc/jetpack-strings.php:646
 msgctxt "Navigation item."
 msgid "Writing"
 msgstr "쓰기"
@@ -6404,7 +6462,7 @@ msgstr "플러그인 관리"
 msgid "Jetpack is not active on this site."
 msgstr "이 사이트에서는 젯팩이 활성화되어 있지 않습니다."
 
-#: _inc/jetpack-strings.php:488
+#: _inc/jetpack-strings.php:522
 msgid "Track your growth"
 msgstr "증가 현황 추적"
 
@@ -6441,7 +6499,7 @@ msgid "High definition on by default"
 msgstr "기본으로 고화질 사용"
 
 #: modules/videopress/editor-media-view.php:37
-#: modules/widgets/eu-cookie-law/form.php:46
+#: modules/widgets/eu-cookie-law/form.php:173
 msgid "seconds"
 msgstr "초"
 
@@ -6478,15 +6536,15 @@ msgstr "Wufoo 양식을 작성하세요."
 msgid "<a href=\"%s\" target=\"_blank\">Learn more</a> about these options."
 msgstr "이 옵션에 대해 <a href=\"%s\" target=\"_blank\">자세히 알아보세요</a>."
 
-#: _inc/jetpack-strings.php:550
+#: _inc/jetpack-strings.php:582
 msgid "There was an issue connecting your Jetpack. Please click \"Connect to WordPress.com\" again."
 msgstr "젯팩을 연결하는 데 문제가 발생했습니다. \"워드프레스닷컴 연결하기\"를 다시 클릭하세요."
 
-#: _inc/jetpack-strings.php:549
+#: _inc/jetpack-strings.php:581
 msgid "We had an issue connecting Jetpack; deactivate then reactivate the Jetpack plugin, then connect again."
 msgstr "젯팩을 연결하는 데 문제가 발생했습니다. 젯팩 플러그인을 비활성화했다가 재활성화한 후 다시 연결하세요."
 
-#: _inc/jetpack-strings.php:548
+#: _inc/jetpack-strings.php:580
 msgid "You need to stay logged in to your WordPress blog while you authorize Jetpack."
 msgstr "젯팩에 권한을 주려면 워드프레스 블로그에 로그인되어 있어야 합니다."
 
@@ -6610,11 +6668,11 @@ msgid "Sitemaps"
 msgstr "사이트맵"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2533
+#: modules/contact-form/grunion-contact-form.php:2726
 msgid "%s requires at least one selection"
 msgstr "%s에 하나 이상의 선택이 필요합니다."
 
-#: _inc/jetpack-strings.php:555
+#: _inc/jetpack-strings.php:587
 msgid "{{s}}Your Jetpack has a glitch.{{/s}}  We're sorry for the inconvenience. Please try again later, if the issue continues please contact support with this message: %(error_key)s"
 msgstr "{{s}}젯팩에 문제가 있습니다.{{/s}} 불편을 드려 죄송합니다. 나중에 다시 시도하세요. 문제가 계속되면 다음 메시지로 지원팀에 문의하세요. %(error_key)s"
 
@@ -6962,10 +7020,10 @@ msgstr "연결에 의해 젯팩이 설치된 멀티사이트 관리를 시작하
 msgid "Get started with Jetpack Multisite"
 msgstr "젯팩 멀티사이트로 시작하세요"
 
-#: _inc/jetpack-strings.php:53 _inc/jetpack-strings.php:56
-#: _inc/jetpack-strings.php:58 _inc/jetpack-strings.php:134
-#: _inc/jetpack-strings.php:413 _inc/jetpack-strings.php:633
-#: _inc/jetpack-strings.php:634 class.jetpack.php:3910
+#: _inc/jetpack-strings.php:130 _inc/jetpack-strings.php:133
+#: _inc/jetpack-strings.php:135 _inc/jetpack-strings.php:223
+#: _inc/jetpack-strings.php:437 _inc/jetpack-strings.php:665
+#: _inc/jetpack-strings.php:666 class.jetpack.php:3910
 msgid "Learn more"
 msgstr "더 알아보기"
 
@@ -7196,7 +7254,7 @@ msgstr "표시할 피드:"
 msgid "Posts & Comments"
 msgstr "글 및 댓글"
 
-#: _inc/jetpack-strings.php:292 modules/widgets/rsslinks-widget.php:96
+#: _inc/jetpack-strings.php:316 modules/widgets/rsslinks-widget.php:96
 #: modules/widgets/rsslinks-widget.php:162
 msgid "Posts"
 msgstr "글"
@@ -7612,7 +7670,7 @@ msgstr "페이지 보관"
 msgid "Posts page"
 msgstr "글 페이지"
 
-#: _inc/jetpack-strings.php:291
+#: _inc/jetpack-strings.php:315
 #: modules/widget-visibility/widget-conditions.php:96
 msgid "Front page"
 msgstr "전면 페이지"
@@ -8334,7 +8392,7 @@ msgctxt "share to"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: _inc/jetpack-strings.php:350 modules/sharedaddy/sharing-sources.php:1476
+#: _inc/jetpack-strings.php:374 modules/sharedaddy/sharing-sources.php:1476
 msgid "Pinterest"
 msgstr "Pinterest"
 
@@ -8381,7 +8439,7 @@ msgctxt "share to"
 msgid "Google"
 msgstr "구글"
 
-#: _inc/jetpack-strings.php:348 modules/sharedaddy/sharing-sources.php:1128
+#: _inc/jetpack-strings.php:372 modules/sharedaddy/sharing-sources.php:1128
 msgid "Google"
 msgstr "Google"
 
@@ -8592,7 +8650,7 @@ msgstr "\"%s\"에서"
 msgid "Untitled Post"
 msgstr "제목이 없는 글"
 
-#: _inc/jetpack-strings.php:305
+#: _inc/jetpack-strings.php:329
 #: modules/related-posts/jetpack-related-posts.php:423
 msgid "Show related content after posts"
 msgstr "글 다음에 관련 콘텐츠 보이기"
@@ -8605,19 +8663,19 @@ msgstr "글 다음에 관련 콘텐츠 감추기"
 msgid "Preview:"
 msgstr "미리보기:"
 
-#: _inc/jetpack-strings.php:307 _inc/jetpack-strings.php:581
+#: _inc/jetpack-strings.php:331 _inc/jetpack-strings.php:612
 #: _inc/lib/class.core-rest-api-endpoints.php:1647
 #: modules/related-posts/jetpack-related-posts.php:389
 msgid "Use a large and visually striking layout"
 msgstr "크고 돋보이는 레이아웃을 사용하세요"
 
-#: _inc/jetpack-strings.php:306 _inc/jetpack-strings.php:580
+#: _inc/jetpack-strings.php:330 _inc/jetpack-strings.php:611
 #: _inc/lib/class.core-rest-api-endpoints.php:1640
 #: modules/related-posts/jetpack-related-posts.php:387
 msgid "Show a \"Related\" header to more clearly separate the related section from posts"
 msgstr "글과 관련 영역을 보다 분명히 분리하기 위해 \"관련\" 헤더 표시"
 
-#: _inc/jetpack-strings.php:310
+#: _inc/jetpack-strings.php:334
 #: modules/related-posts/class.related-posts-customize.php:154
 #: modules/related-posts/jetpack-related-posts.php:282
 #: modules/related-posts/jetpack-related-posts.php:342
@@ -8931,7 +8989,7 @@ msgstr "추가 정보"
 msgid "Enable Post By Email"
 msgstr "이메일 글 발행 활성화"
 
-#: _inc/jetpack-strings.php:396 _inc/lib/class.core-rest-api-endpoints.php:1487
+#: _inc/jetpack-strings.php:420 _inc/lib/class.core-rest-api-endpoints.php:1487
 #: modules/post-by-email.php:89 modules/subscriptions.php:1039
 msgid "Email Address"
 msgstr "전자 우편 주소"
@@ -8953,7 +9011,7 @@ msgstr "최종 수정일"
 msgid "Title"
 msgstr "타이틀"
 
-#: _inc/jetpack-strings.php:394
+#: _inc/jetpack-strings.php:418
 msgid "Media"
 msgstr "미디어"
 
@@ -8969,8 +9027,8 @@ msgstr "이메일이 %s에게 보내질 것입니다 (<a href=\"%s\">편집</a>)
 msgid "Receive Monitor Email Notifications."
 msgstr "모니터 이메일 알림 받기."
 
-#: _inc/jetpack-strings.php:655 _inc/jetpack-strings.php:661
-#: _inc/jetpack-strings.php:670 modules/masterbar/masterbar.php:868
+#: _inc/jetpack-strings.php:687 _inc/jetpack-strings.php:693
+#: _inc/jetpack-strings.php:702 modules/masterbar/masterbar.php:873
 msgid "Themes"
 msgstr "테마"
 
@@ -9020,7 +9078,7 @@ msgstr "홍보하기 사용에 대한 더 많은 정보."
 msgid "Publicize"
 msgstr "공개"
 
-#: _inc/jetpack-strings.php:712 _inc/jetpack-strings.php:713
+#: _inc/jetpack-strings.php:469 _inc/jetpack-strings.php:470
 #: class.jetpack.php:6919 modules/stats.php:415 modules/stats.php:538
 #: modules/stats.php:1032
 msgid "Site Stats"
@@ -9645,8 +9703,8 @@ msgstr "공유 버튼"
 msgid "Settings have been saved"
 msgstr "설정이 저장되었습니다"
 
-#: _inc/jetpack-strings.php:663 _inc/jetpack-strings.php:673
-#: _inc/jetpack-strings.php:682 modules/likes/jetpack-likes-settings.php:164
+#: _inc/jetpack-strings.php:695 _inc/jetpack-strings.php:705
+#: _inc/jetpack-strings.php:714 modules/likes/jetpack-likes-settings.php:164
 #: modules/masterbar/masterbar.php:909 modules/publicize/ui.php:54
 #: modules/sharedaddy/sharedaddy.php:143 modules/sharedaddy/sharing.php:79
 msgid "Sharing"
@@ -9883,7 +9941,7 @@ msgstr "이 사이트에서 추천 글을 사용합니다."
 msgid "Your theme supports Testimonials"
 msgstr "추천 글을 지원하는 테마"
 
-#: _inc/jetpack-strings.php:379 modules/custom-post-types/testimonial.php:125
+#: _inc/jetpack-strings.php:403 modules/custom-post-types/testimonial.php:125
 #: modules/custom-post-types/testimonial.php:300
 #: modules/custom-post-types/testimonial.php:302
 #: modules/custom-post-types/testimonial.php:467
@@ -10673,8 +10731,8 @@ msgstr "%s px"
 
 #: modules/custom-css/custom-css.php:1048
 #: modules/theme-tools/content-options/customizer.php:71
-#: modules/widgets/eu-cookie-law/form.php:66
-#: modules/widgets/eu-cookie-law/form.php:135
+#: modules/widgets/eu-cookie-law/form.php:14
+#: modules/widgets/eu-cookie-law/form.php:51
 msgid "Default"
 msgstr "기본"
 
@@ -10977,116 +11035,116 @@ msgctxt "Label for HTML form \"Name\" field in contact form builder"
 msgid "Name"
 msgstr "이름"
 
-#: modules/contact-form/grunion-contact-form.php:2674
+#: modules/contact-form/grunion-contact-form.php:2867
 #: modules/contact-form/grunion-editor-view.php:152
 #: modules/minileven/minileven.php:278
 msgid "Yes"
 msgstr "예"
 
-#: modules/contact-form/grunion-contact-form.php:2634
+#: modules/contact-form/grunion-contact-form.php:2827
 #: modules/contact-form/grunion-editor-view.php:91
 msgid "(required)"
 msgstr "(필수)"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2540
+#: modules/contact-form/grunion-contact-form.php:2733
 msgid "%s is required"
 msgstr "%s이(가) 필요합니다"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2526
+#: modules/contact-form/grunion-contact-form.php:2719
 msgid "%s requires a valid email address"
 msgstr "%s에는 유효한 이메일 주소가 필요합니다"
 
-#: modules/contact-form/grunion-contact-form.php:2151
+#: modules/contact-form/grunion-contact-form.php:2344
 msgid "Sent by an unverified visitor to your site."
 msgstr "확인되지 않은 사이트 방문자가 보냄."
 
-#: modules/contact-form/grunion-contact-form.php:2145
+#: modules/contact-form/grunion-contact-form.php:2338
 msgid "Sent by a verified %s user."
 msgstr "인증된 %s 사용자가 전송했습니다."
 
-#: modules/contact-form/grunion-contact-form.php:2138
+#: modules/contact-form/grunion-contact-form.php:2331
 msgid "Contact Form URL:"
 msgstr "연락 양식 URL:"
 
-#: modules/contact-form/grunion-contact-form.php:2137
+#: modules/contact-form/grunion-contact-form.php:2330
 msgid "IP Address:"
 msgstr "IP 주소:"
 
-#: modules/contact-form/grunion-contact-form.php:2136
+#: modules/contact-form/grunion-contact-form.php:2329
 msgid "Time:"
 msgstr "시간:"
 
-#: modules/contact-form/grunion-contact-form.php:1521
+#: modules/contact-form/grunion-contact-form.php:1714
 msgid "go back"
 msgstr "돌아가기"
 
-#: modules/contact-form/grunion-contact-form.php:1503
+#: modules/contact-form/grunion-contact-form.php:1696
 msgid "Error!"
 msgstr "오류!"
 
-#: modules/contact-form/grunion-contact-form.php:1395
+#: modules/contact-form/grunion-contact-form.php:1588
 msgid "Subject"
 msgstr "주제"
 
-#: modules/contact-form/grunion-contact-form.php:1361
+#: modules/contact-form/grunion-contact-form.php:1554
 msgctxt "%1$s = blog name, %2$s = post title"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: modules/contact-form/grunion-contact-form.php:1358
+#: modules/contact-form/grunion-contact-form.php:1551
 msgctxt "%1$s = blog name"
 msgid "%1$s Sidebar"
 msgstr "%1$s 사이드바"
 
-#: modules/contact-form/grunion-contact-form.php:719
-#: modules/contact-form/grunion-contact-form.php:1118
+#: modules/contact-form/grunion-contact-form.php:723
+#: modules/contact-form/grunion-contact-form.php:1311
 #: modules/contact-form/grunion-form-view.php:51
 msgid "Contact Form"
 msgstr "연락 폼"
 
-#: modules/contact-form/grunion-contact-form.php:643
+#: modules/contact-form/grunion-contact-form.php:647
 msgid "Download"
 msgstr "다운로드"
 
-#: modules/contact-form/grunion-contact-form.php:638
+#: modules/contact-form/grunion-contact-form.php:642
 msgid "All posts"
 msgstr "모든 글"
 
-#: modules/contact-form/grunion-contact-form.php:636
+#: modules/contact-form/grunion-contact-form.php:640
 msgid "Select feedback to download"
 msgstr "내려받을 피드백을 선택하세요"
 
-#: modules/contact-form/grunion-contact-form.php:223
-#: modules/contact-form/grunion-contact-form.php:630
+#: modules/contact-form/grunion-contact-form.php:227
+#: modules/contact-form/grunion-contact-form.php:634
 msgid "Export feedback as CSV"
 msgstr "피드백을 CSV로 내보내기"
 
-#: modules/contact-form/grunion-contact-form.php:566
+#: modules/contact-form/grunion-contact-form.php:570
 msgid "Feedback discarded."
 msgstr "피드백 무시됨."
 
-#: modules/contact-form/grunion-contact-form.php:375
-#: modules/contact-form/grunion-contact-form.php:1520
+#: modules/contact-form/grunion-contact-form.php:379
+#: modules/contact-form/grunion-contact-form.php:1713
 msgid "Message Sent"
 msgstr "메시지 전송됨"
 
-#: modules/contact-form/grunion-contact-form.php:367
+#: modules/contact-form/grunion-contact-form.php:371
 msgid "An error occurred. Please try again later."
 msgstr "에러가 발생했습니다. 나중에 다시 해주세요."
 
-#: modules/contact-form/grunion-contact-form.php:189
+#: modules/contact-form/grunion-contact-form.php:193
 msgid "Spam <span class=\"count\">(%s)</span>"
 msgid_plural "Spam <span class=\"count\">(%s)</span>"
 msgstr[0] "스팸<span class=\"count\">(%s)</span>"
 
-#: modules/contact-form/grunion-contact-form.php:153
-#: modules/contact-form/grunion-contact-form.php:154
+#: modules/contact-form/grunion-contact-form.php:157
+#: modules/contact-form/grunion-contact-form.php:158
 msgid "No feedback found"
 msgstr "피드백을 찾을 수 없습니다"
 
-#: modules/contact-form/grunion-contact-form.php:152
+#: modules/contact-form/grunion-contact-form.php:156
 msgid "Search Feedback"
 msgstr "피드백 검색"
 
@@ -11115,7 +11173,7 @@ msgid "You are not allowed to move this item out of the Trash."
 msgstr "해당 아이템을 휴지통에서 꺼낼 수 없습니다."
 
 #: modules/contact-form/admin.php:483
-#: modules/contact-form/grunion-contact-form.php:2075
+#: modules/contact-form/grunion-contact-form.php:2268
 msgctxt "{$date_format} \\a\\t {$time_format}"
 msgid "%1$s \\a\\t %2$s"
 msgstr "%1$s %2$s"
@@ -11154,7 +11212,7 @@ msgstr "일자"
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: modules/contact-form/admin.php:263
-#: modules/contact-form/grunion-contact-form.php:1399
+#: modules/contact-form/grunion-contact-form.php:1592
 #: modules/contact-form/grunion-editor-view.php:87
 msgid "Message"
 msgstr "메시지"
@@ -11242,7 +11300,7 @@ msgstr "색상표"
 msgid "Greeting Text"
 msgstr "인사 글"
 
-#: _inc/jetpack-strings.php:48 modules/comments/admin.php:72
+#: _inc/jetpack-strings.php:125 modules/comments/admin.php:72
 #: modules/masterbar/masterbar.php:761 modules/widgets/rsslinks-widget.php:97
 #: modules/widgets/rsslinks-widget.php:165
 msgid "Comments"
@@ -11254,14 +11312,14 @@ msgid "Transparent"
 msgstr "투명"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:1334
-#: modules/comments/admin.php:55 modules/widgets/eu-cookie-law/form.php:114
+#: modules/comments/admin.php:55 modules/widgets/eu-cookie-law/form.php:232
 #: modules/widgets/googleplus-badge.php:271
 #: modules/widgets/twitter-timeline.php:501
 msgid "Dark"
 msgstr "검정"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:1333
-#: modules/comments/admin.php:54 modules/widgets/eu-cookie-law/form.php:103
+#: modules/comments/admin.php:54 modules/widgets/eu-cookie-law/form.php:221
 #: modules/widgets/googleplus-badge.php:270
 #: modules/widgets/twitter-timeline.php:498
 msgid "Light"
@@ -11357,7 +11415,7 @@ msgstr "첨부 ID 없음."
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: modules/carousel/jetpack-carousel.php:267
-#: modules/contact-form/grunion-contact-form.php:1391
+#: modules/contact-form/grunion-contact-form.php:1584
 #: modules/contact-form/grunion-editor-view.php:86
 #: modules/contact-form/grunion-editor-view.php:217
 #: modules/contact-form/grunion-form-view.php:202
@@ -11366,7 +11424,7 @@ msgstr "웹사이트"
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: class.jetpack-debugger.php:404 modules/carousel/jetpack-carousel.php:263
-#: modules/contact-form/grunion-contact-form.php:1390
+#: modules/contact-form/grunion-contact-form.php:1583
 #: modules/contact-form/grunion-editor-view.php:85
 #: modules/contact-form/grunion-editor-view.php:216
 #: modules/contact-form/grunion-form-view.php:197
@@ -11543,12 +11601,12 @@ msgstr "추가하기"
 msgid "Identify words and phrases to ignore while proofreading your posts and pages:"
 msgstr "글 및 페이지 교정 시 무시할 단어와 구절 확인:"
 
-#: _inc/jetpack-strings.php:372
+#: _inc/jetpack-strings.php:396
 #: modules/after-the-deadline/config-unignore.php:131
 msgid "Ignored Phrases"
 msgstr "무시된 구문"
 
-#: _inc/jetpack-strings.php:359 _inc/lib/class.core-rest-api-endpoints.php:1740
+#: _inc/jetpack-strings.php:383 _inc/lib/class.core-rest-api-endpoints.php:1740
 #: modules/after-the-deadline/config-options.php:93
 msgid "Use automatically detected language to proofread posts and pages"
 msgstr "자동 감지된 언어를 사용하여 글과 페이지 교정"
@@ -11561,42 +11619,42 @@ msgstr "교정은 영어, 프랑스어, 포르투갈어, 스페인어만 지원�
 msgid "Language"
 msgstr "언어"
 
-#: _inc/jetpack-strings.php:371 _inc/lib/class.core-rest-api-endpoints.php:1733
+#: _inc/jetpack-strings.php:395 _inc/lib/class.core-rest-api-endpoints.php:1733
 #: modules/after-the-deadline/config-options.php:81
 msgid "Redundant Phrases"
 msgstr "중복 구문"
 
-#: _inc/jetpack-strings.php:370 _inc/lib/class.core-rest-api-endpoints.php:1726
+#: _inc/jetpack-strings.php:394 _inc/lib/class.core-rest-api-endpoints.php:1726
 #: modules/after-the-deadline/config-options.php:79
 msgid "Phrases to Avoid"
 msgstr "금칙어"
 
-#: _inc/jetpack-strings.php:369 _inc/lib/class.core-rest-api-endpoints.php:1719
+#: _inc/jetpack-strings.php:393 _inc/lib/class.core-rest-api-endpoints.php:1719
 #: modules/after-the-deadline/config-options.php:77
 msgid "Passive Voice"
 msgstr "수동태"
 
-#: _inc/jetpack-strings.php:368 _inc/lib/class.core-rest-api-endpoints.php:1712
+#: _inc/jetpack-strings.php:392 _inc/lib/class.core-rest-api-endpoints.php:1712
 #: modules/after-the-deadline/config-options.php:75
 msgid "Jargon"
 msgstr "전문용어"
 
-#: _inc/jetpack-strings.php:367 _inc/lib/class.core-rest-api-endpoints.php:1705
+#: _inc/jetpack-strings.php:391 _inc/lib/class.core-rest-api-endpoints.php:1705
 #: modules/after-the-deadline/config-options.php:73
 msgid "Hidden Verbs"
 msgstr "숨은 동사"
 
-#: _inc/jetpack-strings.php:366 _inc/lib/class.core-rest-api-endpoints.php:1698
+#: _inc/jetpack-strings.php:390 _inc/lib/class.core-rest-api-endpoints.php:1698
 #: modules/after-the-deadline/config-options.php:71
 msgid "Double Negatives"
 msgstr "이중 부정"
 
-#: _inc/jetpack-strings.php:365 _inc/lib/class.core-rest-api-endpoints.php:1691
+#: _inc/jetpack-strings.php:389 _inc/lib/class.core-rest-api-endpoints.php:1691
 #: modules/after-the-deadline/config-options.php:69
 msgid "Diacritical Marks"
 msgstr "구별 부호"
 
-#: _inc/jetpack-strings.php:364 _inc/lib/class.core-rest-api-endpoints.php:1684
+#: _inc/jetpack-strings.php:388 _inc/lib/class.core-rest-api-endpoints.php:1684
 #: modules/after-the-deadline/config-options.php:67
 msgid "Complex Phrases"
 msgstr "복잡한 구문"
@@ -11605,7 +11663,7 @@ msgstr "복잡한 구문"
 msgid "Clich&eacute;s"
 msgstr "클리셰"
 
-#: _inc/jetpack-strings.php:362 _inc/lib/class.core-rest-api-endpoints.php:1670
+#: _inc/jetpack-strings.php:386 _inc/lib/class.core-rest-api-endpoints.php:1670
 #: modules/after-the-deadline/config-options.php:63
 msgid "Bias Language"
 msgstr "차별적 언어"
@@ -11614,7 +11672,7 @@ msgstr "차별적 언어"
 msgid "Enable proofreading for the following grammar and style rules when writing posts and pages:"
 msgstr "글 및 페이지를 작성할 때 다음의 문법 및 스타일 규칙에 대한 교정 기능을 켜세요."
 
-#: _inc/jetpack-strings.php:360
+#: _inc/jetpack-strings.php:384
 #: modules/after-the-deadline/config-options.php:58
 msgid "English Options"
 msgstr "영어 옵션"
@@ -11631,7 +11689,7 @@ msgstr "글 또는 페이지가 처음 게시되었습니다"
 msgid "Automatically proofread content when:"
 msgstr "다음의 경우 자동으로 컨텐츠 교정:"
 
-#: _inc/jetpack-strings.php:353
+#: _inc/jetpack-strings.php:377
 #: modules/after-the-deadline/config-options.php:48
 msgid "Proofreading"
 msgstr "교정"
@@ -11985,23 +12043,23 @@ msgstr "관리 기능이 활성화되었습니다!"
 msgid "You are all set! Your site can now be managed from <a href=\"%s\" target=\"_blank\">wordpress.com/sites</a>."
 msgstr "설정이 모두 완료되었습니다! 이제 <a href=\"%s\" target=\"_blank\">wordpress.com/sites</a>에서 사이트를 관리할 수 있습니다."
 
-#: _inc/jetpack-strings.php:554
+#: _inc/jetpack-strings.php:586
 msgid "Jetpack could not contact WordPress.com: %(error_key)s.  This usually means something is incorrectly configured on your web host."
 msgstr "젯팩이 워드프레스닷컴에 연결할 수 없습니다. %(error_key)s. 이는 웹 호스트에서 설정이 잘못되었다는 것을 의미합니다."
 
-#: _inc/jetpack-strings.php:553
+#: _inc/jetpack-strings.php:585
 msgid "WordPress.com is currently having problems and is unable to fuel up your Jetpack.  Please try again later."
 msgstr "워드프레스닷컴이 지금 문제가 있어서 젯팩을 도울 수 없습니다. 나중에 다시 해보세요."
 
-#: _inc/jetpack-strings.php:552
+#: _inc/jetpack-strings.php:584
 msgid "{{s}}Your Jetpack has a glitch.{{/s}} Connecting this site with WordPress.com is not possible. This usually means your site is not publicly accessible (localhost)."
 msgstr "{{s}}젯팩에 문제가 있습니다.{{/s}} 이 사이트를 워드프레스닷컴과 연결할 수 없습니다. 즉, 고객님의 사이트에 공개적으로 액세스할 수 없습니다(localhost)."
 
-#: _inc/jetpack-strings.php:551
+#: _inc/jetpack-strings.php:583
 msgid "Your website needs to be publicly accessible to use Jetpack: %(error_key)s"
 msgstr "젯팩을 사용하려면 고객님의 웹사이트에 공개적으로 액세스할 수 있어야 합니다. %(error_key)s"
 
-#: _inc/jetpack-strings.php:530
+#: _inc/jetpack-strings.php:562
 msgid "You have successfully disconnected Jetpack"
 msgstr "젯팩을 분리했습니다."
 
@@ -12013,7 +12071,7 @@ msgstr "<strong>젯팩이 활성화됐습니다!</strong> 네트워크의 각 �
 msgid "<p><a href=\"%1$s\" title=\"Opt in to WordPress.com Site Management\" >Activate Site Management</a> to manage multiple sites from our centralized dashboard at wordpress.com/sites. <a href=\"%2$s\" target=\"_blank\">Learn more</a>.</p><a href=\"%1$s\" class=\"jp-button\">Activate Now</a>"
 msgstr "<p><a href=\"%1$s\" title=\"WordPress.com 사이트 관리 기능 사용하기\" >사이트 관리를 활성화</a>하고 wordpress.com/sites의 중앙 집중식 대시보드에서 여러 사이트를 관리하세요. <a href=\"%2$s\" target=\"_blank\">자세히 알아보세요</a>.</p><a href=\"%1$s\" class=\"jp-button\">지금 활성화</a>"
 
-#: _inc/jetpack-strings.php:544 views/admin/must-connect-main-blog.php:11
+#: _inc/jetpack-strings.php:576 views/admin/must-connect-main-blog.php:11
 msgid "Connect to WordPress.com"
 msgstr "WordPress.com 연결하기"
 
@@ -12053,7 +12111,7 @@ msgstr "이 페이지에서 잿팩으로 가능한 모듈을 볼 수 있습니�
 msgid "Jetpack supercharges your self-hosted WordPress site with the awesome cloud power of WordPress.com."
 msgstr "젯팩은 워드프레스닷컴의 놀라운 클라우드 기능으로 사이트에 힘을 더할 것입니다. "
 
-#. #-#-#-#-#  jetpack-code.pot (Jetpack by WordPress.com 6.1)  #-#-#-#-#
+#. #-#-#-#-#  jetpack-code.pot (Jetpack by WordPress.com 6.1.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.jetpack.php:3778 class.jetpack.php:3791 class.jetpack.php:4766
 #: views/admin/network-admin-header.php:5
@@ -12148,7 +12206,7 @@ msgstr "젯팩 사이트"
 msgid "Edit"
 msgstr "편집"
 
-#: _inc/jetpack-strings.php:240 _inc/jetpack-strings.php:436
+#: _inc/jetpack-strings.php:243 _inc/jetpack-strings.php:262
 #: class.jetpack-network-sites-list-table.php:16
 msgid "Connected"
 msgstr "연결됨"
@@ -12165,7 +12223,7 @@ msgstr "사이트 이름"
 msgid "No Modules Found"
 msgstr "모듈이 없습니다"
 
-#: _inc/jetpack-strings.php:223 _inc/jetpack-strings.php:345
+#: _inc/jetpack-strings.php:292 _inc/jetpack-strings.php:369
 #: class.jetpack-modules-list-table.php:111
 #: class.jetpack-modules-list-table.php:211
 #: class.jetpack-modules-list-table.php:276
@@ -12183,7 +12241,7 @@ msgid "Search Modules…"
 msgstr "모듈 검색..."
 
 #: class.jetpack-debugger.php:422
-#: modules/contact-form/grunion-contact-form.php:1375
+#: modules/contact-form/grunion-contact-form.php:1568
 msgid "Submit &#187;"
 msgstr "전송 &#187;"
 
@@ -12206,7 +12264,7 @@ msgstr "이름을 알려주세요."
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: class.jetpack-debugger.php:398 class.jetpack-modules-list-table.php:204
 #: modules/carousel/jetpack-carousel.php:265
-#: modules/contact-form/grunion-contact-form.php:1389
+#: modules/contact-form/grunion-contact-form.php:1582
 #: modules/contact-form/grunion-editor-view.php:84
 #: modules/contact-form/grunion-editor-view.php:215
 #: modules/contact-form/grunion-form-view.php:198
@@ -12333,15 +12391,15 @@ msgid "An administrator for this blog must set up the Jetpack connection."
 msgstr "이 블로그이 관리자가 젯팩 연결을 설정해야합니다."
 
 #. translators: Don't translate the word yes here.
-#: class.jetpack-cli.php:1078
+#: class.jetpack-cli.php:1246
 msgid "Are you sure? Modifying this option may disrupt your Jetpack connection.  Type \"yes\" to continue."
 msgstr "계속할까요? 이 옵션을 수정하면 젯팩 연결이 끊어질 수 있습니다. 계속하려면 \"yes\"를 입력하세요."
 
-#: class.jetpack-cli.php:1075
+#: class.jetpack-cli.php:1243
 msgid "Are you sure? This cannot be undone. Type \"yes\" to continue:"
 msgstr "계속할까요? 이 작업은 되돌릴 수 없습니다. 계속하려면 \"yes\"를 입력하세요."
 
-#: class.jetpack-cli.php:1067
+#: class.jetpack-cli.php:1235
 msgid "Action cancelled. Have a question?"
 msgstr "작업이 취소되었습니다. 문의 사항이 있으십니까?"
 
@@ -12534,6 +12592,7 @@ msgid "%s is not a valid command."
 msgstr "%s는 유효한 명령이 아닙니다."
 
 #: class.jetpack-cli.php:36 class.jetpack-cli.php:113 class.jetpack-cli.php:973
+#: class.jetpack-cli.php:1071
 msgid "Jetpack is not currently connected to WordPress.com"
 msgstr "젯팩이 현재 워드프레스닷컴에 연결되지 않았습니다."
 
@@ -12572,7 +12631,7 @@ msgstr "정렬 :"
 msgid "Inactive"
 msgstr "비활성"
 
-#: _inc/jetpack-strings.php:449
+#: _inc/jetpack-strings.php:481
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:127
 #: class.jetpack-cli.php:358 modules/vaultpress.php:26
 msgid "Active"
@@ -12588,8 +12647,8 @@ msgstr "모두"
 msgid "View:"
 msgstr "보기:"
 
-#: _inc/jetpack-strings.php:87 _inc/jetpack-strings.php:214
-#: _inc/jetpack-strings.php:218
+#: _inc/jetpack-strings.php:116 _inc/jetpack-strings.php:120
+#: _inc/jetpack-strings.php:176
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:123
 #: modules/masterbar/masterbar.php:313
 #: modules/minileven/theme/pub/minileven/searchform.php:9
@@ -12612,13 +12671,16 @@ msgctxt "The menu item label"
 msgid "Jetpack"
 msgstr "젯팩"
 
-#: modules/contact-form/grunion-contact-form.php:150
-#: modules/contact-form/grunion-contact-form.php:151
+#: modules/contact-form/grunion-contact-form.php:154
+#: modules/contact-form/grunion-contact-form.php:155
+#: modules/contact-form/grunion-contact-form.php:753
+#: modules/contact-form/grunion-contact-form.php:771
+#: modules/contact-form/grunion-contact-form.php:823
 #: modules/contact-form/grunion-form-view.php:175
 msgid "Feedback"
 msgstr "피드백"
 
-#: _inc/jetpack-strings.php:570
+#: _inc/jetpack-strings.php:602
 #: _inc/lib/admin-pages/class.jetpack-react-page.php:67
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:15
 #: class.jetpack-network.php:272 class.jetpack.php:3789 class.jetpack.php:3870
@@ -12627,7 +12689,7 @@ msgstr "피드백"
 msgid "Settings"
 msgstr "설정"
 
-#: _inc/jetpack-strings.php:459 class.jetpack-network.php:204
+#: _inc/jetpack-strings.php:492 class.jetpack-network.php:204
 #: class.jetpack-network.php:270 class.jetpack.php:3865
 #: modules/publicize/ui.php:105
 msgid "Jetpack"
@@ -12637,14 +12699,14 @@ msgstr "젯팩"
 msgid "Config"
 msgstr "환경설정"
 
-#: _inc/footer.php:6 _inc/jetpack-strings.php:542 _inc/jetpack-strings.php:561
+#: _inc/footer.php:6 _inc/jetpack-strings.php:574 _inc/jetpack-strings.php:593
 #: modules/custom-content-types.php:48
 #: modules/custom-post-types/portfolios.php:132
 #: modules/custom-post-types/testimonial.php:160
 msgid "Learn More"
 msgstr "더 알아보기"
 
-#: _inc/jetpack-strings.php:525
+#: _inc/jetpack-strings.php:557
 msgid "Disconnect Jetpack"
 msgstr "Jetpack 분리"
 
@@ -12657,6 +12719,6 @@ msgstr "지원"
 msgid "Debug"
 msgstr "디버그"
 
-#: _inc/jetpack-strings.php:453
+#: _inc/jetpack-strings.php:486
 msgid "Test your site’s compatibility with Jetpack."
 msgstr "사이트가 젯팩과 호환되는지 테스트하세요."

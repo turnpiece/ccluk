@@ -33,6 +33,7 @@ class Forminator_Custom_Form extends Forminator_Module {
 	 * Init
 	 *
 	 * @since 1.0
+	 * @since 1.0.6 Include General Data Protecion
 	 */
 	public function init() {
 		self::$instance = $this;
@@ -45,6 +46,14 @@ class Forminator_Custom_Form extends Forminator_Module {
 		 * Filters the custom form templates list
 		 */
 		$this->templates = apply_filters( 'forminator_custom_form_templates', $templates );
+
+		if ( ! class_exists( 'Forminator_General_Data_Protection' ) ) {
+			include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-general-data-protection.php';
+		}
+		include_once dirname( __FILE__ ) . '/protection/general-data-protection.php';
+		if ( class_exists( 'Forminator_CForm_General_Data_Protection' ) ) {
+			new Forminator_CForm_General_Data_Protection();
+		}
 	}
 
 	/**

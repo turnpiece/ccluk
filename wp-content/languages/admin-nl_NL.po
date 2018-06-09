@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-23 14:20:12+0000\n"
+"PO-Revision-Date: 2018-05-30 12:22:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -163,7 +163,7 @@ msgstr "Openbaarmakingsverplichtingen van de industrie"
 
 #: wp-admin/includes/misc.php:1765
 msgid "If your web site provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
-msgstr "Indien je website een dienst levert die geautomatiseerde besluiten maakt, zoals bijvoorbeeld het aanvragen van leningen of je verzamelt data in een advertentieprofiel, dan moet je aangeven dat dit gebeurd. Daarnaast moet je ook aangeven hoe deze informatie gebruikt wordt, welke besluiten genomen worden op basis van de verzamelde data en welke rechten gebruikers hebben over besluiten die genomen zijn zonder menselijk ingrijpen. "
+msgstr "Indien je website een dienst levert die geautomatiseerde besluiten maakt, zoals bijvoorbeeld het aanvragen van leningen of je verzamelt gegevens in een advertentieprofiel, dan moet je aangeven dat dit gebeurt. Daarnaast moet je ook aangeven hoe deze informatie gebruikt wordt, welke besluiten genomen worden op basis van de verzamelde gegevens en welke rechten gebruikers hebben over besluiten die genomen zijn zonder menselijk ingrijpen. "
 
 #: wp-admin/includes/misc.php:1760
 msgid "If your web site receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
@@ -215,7 +215,7 @@ msgstr "De Europese data beschermingswet verplicht dat data van Europeanen die b
 
 #: wp-admin/includes/misc.php:1733
 msgid "In this section you should list all transfers of your site data outside the European Union and describe the means by which that data is safeguarded to European data protection standards. This could include your web hosting, cloud storage, or other third party services."
-msgstr "In dit onderdeel moet je alle data overdracht van de data van je site buiten de Europese Unie opnoemen en beschrijven op welke manier die data is beveiligd naar Europese data beveiligingsstandaarden. Dit kunnen bijvoorbeeld web hosting, cloud opslag of andere diensten van derden zijn."
+msgstr "In dit onderdeel moet je alle dataoverdracht van de gegevens van je site buiten de Europese Unie opnoemen en beschrijven op welke manier die gegevens zijn beveiligd naar Europese gegevens beveiligingsstandaarden. Dit kunnen bijvoorbeeld webhosting, cloudopslag of andere diensten van derden zijn."
 
 #: wp-admin/includes/misc.php:1731
 msgid "Where we send your data"
@@ -243,7 +243,7 @@ msgstr "Wanneer je een reactie achterlaat dan wordt die reactie en de metadata v
 
 #: wp-admin/includes/misc.php:1720
 msgid "In this section you should explain how long you retain personal data collected or processed by the web site. While it is your responsibility to come up with the schedule of how long you keep each dataset for and why you keep it, that information does need to be listed here. For example, you may want to say that you keep contact form entries for six months, analytics records for a year, and customer purchase records for ten years."
-msgstr "In dit onderdeel moet je uitleggen hoe lang je verzamelde persoonlijke data of verwerkte data door deze website bewaard. Ondanks dat het jouw verantwoordelijkheid is om een planning te maken om deze dataset te bewaren en waarom, die informatie hoeft hier niet getoond te worden. Bijvoorbeeld, je kan bijvoorbeeld zeggen dat je data van contactformulieren 6 maanden bewaard, statistieken voor 1 jaar en klant aankopen voor 10 jaar."
+msgstr "In dit onderdeel moet je uitleggen hoe lang je verzamelde persoonlijke gegevens of verwerkte gegevens door deze website bewaart. Ondanks dat het jouw verantwoordelijkheid is om een planning te maken hoe lang je deze gegevens bewaart en waarom, dient die informatie hier wel getoond te worden. Je kan bijvoorbeeld zeggen dat je gegevens van contactformulieren zes maanden bewaart, statistieken één jaar en klant aankopen tien jaar."
 
 #: wp-admin/includes/misc.php:1718
 msgid "How long we retain your data"
@@ -275,7 +275,7 @@ msgstr "Deze websites kunnen data over jou verzamelen, cookies gebruiken, tracki
 
 #: wp-admin/includes/misc.php:1703
 msgid "Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website."
-msgstr "Berichten op deze site kunnen ingesloten (embedded) inhoud tonen. Bijvoorbeeld video's, afbeeldingen, berichten). Ingesloten inhoud van andere websites gedraagd zich exact hetzelfde als alsof de bezoeker deze andere heeft website bezocht."
+msgstr "Berichten op deze site kunnen ingesloten (embedded) inhoud bevatten (bijvoorbeeld video's, afbeeldingen, berichten, etc.). Ingesloten inhoud van andere websites gedraagt zich exact hetzelfde alsof de bezoeker deze andere website heeft bezocht."
 
 #: wp-admin/includes/misc.php:1702
 msgid "Embedded content from other websites"
@@ -287,11 +287,11 @@ msgstr "Wanneer je een bericht wijzigt of publiceert wordt een aanvullende cooki
 
 #: wp-admin/includes/misc.php:1699
 msgid "When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed."
-msgstr "Zodra je inlogt, zullen we enkele cookies bewaren in verband met jouw login informatie en schermweergave opties. Login cookies zijn 2 dagen geldig en cookies voor schermweergave opties 1 jaar. Als je &quot;Herinner mij&quot; selecteert, wordt je login 2 weken bewaart. Zodra je uitlogt van jouw account, worden login cookies verwijderd."
+msgstr "Zodra je inlogt, zullen we enkele cookies bewaren in verband met jouw login informatie en schermweergave opties. Login cookies zijn 2 dagen geldig en cookies voor schermweergave opties 1 jaar. Als je &quot;Herinner mij&quot; selecteert, wordt je login 2 weken bewaard. Zodra je uitlogt van jouw account, worden login cookies verwijderd."
 
 #: wp-admin/includes/misc.php:1698
 msgid "If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
-msgstr "Indien je een account hebt en je logt in op deze site, slaan we een tijdelijk cookie op om te bepalen of jouw browser cookies accepteert. Dit cookie bevat geen persoonlijke data en wordt weggegooid zodra je je browser sluit."
+msgstr "Indien je een account hebt en je logt in op deze site, slaan we een tijdelijk cookie op om te bepalen of jouw browser cookies accepteert. Dit cookie bevat geen persoonlijke gegevens en wordt verwijderd zodra je je browser sluit."
 
 #: wp-admin/includes/misc.php:1697
 msgid "If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year."
@@ -311,7 +311,7 @@ msgstr "Een geanonimiseerde string, gemaakt op basis van je e-mailadres (dit wor
 
 #: wp-admin/includes/misc.php:1679
 msgid "When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection."
-msgstr "Als bezoekers reacties achterlaten op de site, verzamelen we de data getoond in het reactieformulier en ook het IP-adres van de bezoeker en de browser gebruikersagent string om spam opsporing te helpen."
+msgstr "Als bezoekers reacties achterlaten op de site, verzamelen we de gegevens getoond in het reactieformulier, het IP-adres van de bezoeker en de browser user agent om te helpen spam te detecteren."
 
 #: wp-admin/includes/misc.php:1690
 msgid "By default, WordPress does not include a contact form. If you use a contact form plugin, use this subsection to note what personal data is captured when someone submits a contact form, and how long you keep it. For example, you may note that you keep contact form submissions for a certain period for customer service purposes, but you do not use the information submitted through them for marketing purposes."
@@ -323,15 +323,15 @@ msgstr "Contactformulieren"
 
 #: wp-admin/includes/misc.php:1686
 msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
-msgstr "Als je een geregistreerde gebruiker bent en afbeeldingen naar de site upload, moet je voorkomen dat je afbeeldingen upload met daarin EXIF GPS locatie gegevens. Bezoekers van de website kunnen de afbeeldingen van de website downloaden en de locatiegegevens inzien."
+msgstr "Als je een geregistreerde gebruiker bent en afbeeldingen naar de site upload, moet je voorkomen dat je afbeeldingen uploadt met daarin EXIF GPS locatie gegevens. Bezoekers van de website kunnen de afbeeldingen van de website downloaden en de locatiegegevens inzien."
 
 #: wp-admin/includes/misc.php:1672
 msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
-msgstr "Standaard verzamelt WordPress geen persoonlijke data over bezoekers, alleen de data die getoond word in het scherm met het gebruikersprofiel van geregistreerde gebruikers. Maar sommige van je plugins kunnen ook persoonlijke data verzamelen; voeg de relevante informatie hieronder toe."
+msgstr "Standaard verzamelt WordPress geen persoonlijke gegevens over bezoekers, alleen de gegevens die getoond worden in het scherm met het gebruikersprofiel van geregistreerde gebruikers. Maar sommige van je plugins kunnen ook persoonlijke gegevens verzamelen; voeg de relevante informatie hieronder toe."
 
 #: wp-admin/includes/misc.php:1671
 msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
-msgstr "Persoonlijke data worden niet alleen gecreëerd door interacties van gebruikers met je site. Persoonlijke data wordt ook gegenereerd door technische processen zoals, contact formulieren, reacties, analytics en insluitingen van derden."
+msgstr "Persoonlijke gegevens worden niet alleen gecreëerd door interacties van gebruikers met je site. Persoonlijke gegevens worden ook gegenereerd door technische processen zoals, contact formulieren, reacties, analytics en insluitingen van derden."
 
 #: wp-admin/includes/misc.php:1670
 msgid "In addition to listing what personal data you collect, you need to note why you collect it. These explanations must note either the legal basis for your data collection and retention or the active consent the user has given."
@@ -541,10 +541,6 @@ msgstr "Het is helaas niet gelukt een Privacybeleids pagina aan te maken."
 msgid "The new page will include help and suggestions for your privacy policy."
 msgstr "De nieuwe pagina bevat hulp en suggesties voor je privacybeleid."
 
-#: wp-admin/privacy.php:112
-msgid "If you already have a privacy policy page, please select it below. If not, please create one."
-msgstr "Als je al een privacybeleids pagina hebt, selecteer het hieronder. Zo niet, maak er één."
-
 #: wp-admin/privacy.php:109
 msgid "Privacy Policy page"
 msgstr "Privacybeleids pagina"
@@ -554,14 +550,18 @@ msgstr "Privacybeleids pagina"
 msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
 msgstr "De huidig geselecteerde privacybeleids pagina bevindt zich in de prullenmand. Maak of selecteer een nieuwe privacybeleids pagina of <a href=\"%s\">zet de huidige pagina terug</a>."
 
-#: wp-admin/privacy.php:80
-msgid "The currently selected privacy policy page does not exist. Please create or select new page."
-msgstr "De huidig geselecteerde privacybeleids pagina bestaat niet. Maak of selecteer nieuwe pagina."
-
 #. translators: Privacy Policy page slug
 #: wp-admin/includes/upgrade.php:280
 msgid "privacy-policy"
 msgstr "privacybeleid"
+
+#: wp-admin/privacy.php:112
+msgid "If you already have a privacy policy page, please select it below. If not, please create one."
+msgstr "Als je al een privacybeleidpagina hebt, selecteer het hieronder. Zo niet, maak er één."
+
+#: wp-admin/privacy.php:80
+msgid "The currently selected privacy policy page does not exist. Please create or select new page."
+msgstr "De huidig geselecteerde privacybeleidpagina bestaat niet. Maak of selecteer nieuwe pagina."
 
 #. translators: %s: URL to Customizer -> Menus
 #: wp-admin/privacy.php:30
@@ -880,7 +880,7 @@ msgstr "Customizer JS API verbeteringen"
 
 #: wp-admin/freedoms.php:41
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
-msgstr "Deze data wordt gebruikt voor algehele verbeteringen aan WordPress, zoals het beschermen van je site door middel van het automatisch installeren van nieuwe updates. Ook wordt het gebruikt voor algemene statistieken, zoals deze getoond worden op de <a href=\"%s\">WordPress.org statistieken pagina</a>."
+msgstr "Deze gegevens worden gebruikt voor algehele verbeteringen aan WordPress, zoals het beschermen van je site door middel van het automatisch installeren van nieuwe updates. Ook worden deze gebruikt voor algemene statistieken, zoals deze getoond worden op de <a href=\"%s\">WordPress.org statistieken pagina</a>."
 
 #: wp-admin/about.php:229
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."

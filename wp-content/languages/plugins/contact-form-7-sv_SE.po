@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-22 00:22:09+0000\n"
+"PO-Revision-Date: 2018-06-04 07:24:28+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -245,7 +245,7 @@ msgstr "Contact Form 7 sparar inte de sända meddelandena någonstan. Därför r
 
 #: admin/includes/welcome-panel.php:41
 msgid "Before you cry over spilt mail&#8230;"
-msgstr "Innan du gråter över försvunna e-brev"
+msgstr "Innan du gråter över spilld e-post&#8230;"
 
 #: admin/includes/welcome-panel.php:26
 msgid "comment blacklist"
@@ -1158,7 +1158,7 @@ msgstr "Använd HTML-innehåll"
 
 #: admin/includes/editor.php:186
 msgid "Exclude lines with blank mail-tags from output"
-msgstr "Uteslut rader med tomma epost-taggar."
+msgstr "Uteslut rader med tomma mail-taggar från utdata"
 
 #: admin/includes/editor.php:181
 msgid "Message Body"
@@ -1308,7 +1308,7 @@ msgstr "Du kan också använda denna äldre kortkod:"
 
 #: admin/edit-contact-form.php:104
 msgid "Copy this shortcode and paste it into your post, page, or text widget content:"
-msgstr "Kopiera kortkoden och klistra in i ett inlägg, en sida eller en text-widget."
+msgstr "Kopiera denna kortkod och klistra in den i ditt inlägg, sida eller textwidgetinnehåll:"
 
 #: admin/edit-contact-form.php:81
 msgid "Enter title here"

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress Security Check - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-05-04 20:45:35+0000\n"
+"PO-Revision-Date: 2018-05-28 10:04:52+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -73,7 +73,7 @@ msgstr "BuddyPress Security Check"
 
 #: php/class-settings.php:135
 msgid "Security Check Settings"
-msgstr "Настройки Проверки Безопасности"
+msgstr "Настройки проверки безопасности"
 
 #: php/class-settings.php:79
 msgid "reCAPTCHA secret key"
@@ -109,7 +109,7 @@ msgstr "Пожалуйста, ответьте на контрольный во�
 
 #: php/class-plugin.php:94
 msgid "Settings"
-msgstr "Функции"
+msgstr "Настройки"
 
 #: php/class-math-check.php:126
 msgid "Security Question"

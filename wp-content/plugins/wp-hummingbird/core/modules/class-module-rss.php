@@ -30,7 +30,7 @@ class WP_Hummingbird_Module_Rss extends WP_Hummingbird_Module {
 	 * @return bool
 	 */
 	public function is_active() {
-		if ( ! WP_Hummingbird_Settings::get_setting( 'enabled', 'rss' ) ) {
+		if ( ! WP_Hummingbird_Settings::get_setting( 'enabled', $this->slug ) ) {
 			return false;
 		}
 
@@ -38,6 +38,26 @@ class WP_Hummingbird_Module_Rss extends WP_Hummingbird_Module {
 	}
 
 	/**
+	 * Activate module.
+	 *
+	 * @since 1.9.0
+	 */
+	public function enable() {
+		WP_Hummingbird_Settings::update_setting( 'enabled', true, $this->slug );
+	}
+
+	/**
+	 * Deactivate module.
+	 *
+	 * @since 1.9.0
+	 */
+	public function disable() {
+		WP_Hummingbird_Settings::update_setting( 'enabled', false, $this->slug );
+	}
+
+	/**
+	 * Set caching status.
+	 *
 	 * @param object $feed  SimplePie feed object (passed by reference).
 	 */
 	public function rss_caching_status( $feed ) {

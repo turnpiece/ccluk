@@ -9,9 +9,9 @@ class Bootstrap
 	public function __construct()
 	{
 		$this->initializePlugin();
-		add_action( 'wp_loaded', array($this, 'wpLoaded'));
-		add_action( 'init', array($this, 'initializeWordPress') );
-		add_filter( 'plugin_action_links_' . 'wp-nested-pages/nestedpages.php', array($this, 'settingsLink' ) );
+		add_action( 'wp_loaded', [$this, 'wpLoaded']);
+		add_action( 'init', [$this, 'initializeWordPress']);
+		add_filter( 'plugin_action_links_' . 'wp-nested-pages/nestedpages.php', [$this, 'settingsLink']);
 	}
 
 	/**
@@ -30,6 +30,7 @@ class Bootstrap
 	{
 		new Entities\PostType\RegisterPostTypes;
 		new Entities\Post\PostTrashActions;
+		new Entities\Post\PrivatePostParent;
 		new Entities\Listing\ListingActions;
 		new Entities\NavMenu\NavMenuActions;
 		new Entities\NavMenu\NavMenuTrashActions;
@@ -63,7 +64,7 @@ class Bootstrap
 	*/
 	public function settingsLink($links)
 	{ 
-		$settings_link = '<a href="options-general.php?page=nested-pages-settings">' . __('Settings') . '</a>'; 
+		$settings_link = '<a href="options-general.php?page=nested-pages-settings">' . __('Settings', 'wp-nested-pages') . '</a>'; 
 		array_unshift($links, $settings_link); 
 		return $links; 
 	}

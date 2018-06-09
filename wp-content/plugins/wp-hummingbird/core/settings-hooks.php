@@ -130,13 +130,9 @@ function wphb_cloudflare_module_status( $current ) {
 	return $current;
 }
 
-add_filter( 'wphb_get_server_type', 'wphb_set_user_server_type' );
-function wphb_set_user_server_type( $type ) {
-	$user_type = get_user_meta( get_current_user_id(), 'wphb-server-type', true );
-	if ( $user_type ) {
-		$type = $user_type;
-	}
-	return $type;
+add_filter( 'wphb_get_server_type', 'wphb_set_cloudflare_server_type' );
+function wphb_set_cloudflare_server_type( $type ) {
+	return apply_filters( 'wp_hummingbird_is_active_module_cloudflare', $type );
 }
 
 // Do not minify files that already are named with .min

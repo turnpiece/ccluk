@@ -31,9 +31,18 @@ class Forminator_Polls extends Forminator_Module {
 	 * Initialize
 	 *
 	 * @since 1.0
+	 * @since 1.0.6 Add General Data Protection
 	 */
 	public function init() {
 		self::$instance = $this;
+
+		if ( ! class_exists( 'Forminator_General_Data_Protection' ) ) {
+			include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-general-data-protection.php';
+		}
+		include_once dirname( __FILE__ ) . '/protection/general-data-protection.php';
+		if ( class_exists( 'Forminator_Polls_General_Data_Protection' ) ) {
+			new Forminator_Polls_General_Data_Protection();
+		}
 	}
 
 	/**

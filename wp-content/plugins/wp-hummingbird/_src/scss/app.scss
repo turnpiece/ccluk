@@ -423,7 +423,6 @@
  * 3. COMPONENTS/MODULES
  */
 
-
 /* Progress bar */
 @keyframes spinner {
     0% {
@@ -440,6 +439,11 @@
         -webkit-transform: rotate(360deg);
         transform: rotate(360deg)
     }
+}
+
+/* Asset Optimization - changed file */
+@keyframes pop{
+    50%  {transform: scale(1.2);}
 }
 
 .wphb-scan-progress {

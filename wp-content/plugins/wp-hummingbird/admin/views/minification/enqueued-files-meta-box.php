@@ -12,7 +12,8 @@
  * @var string $scripts_rows     Table rows for minified scripts.
  * @var array  $selector_filter  List of items to filter by.
  * @var array  $server_errors    List of server errors.
- * @var string $styles_rows      Table rows for minified stykes.
+ * @var string $styles_rows      Table rows for minified styles.
+ * @var string $others_rows      Table rows for files not hosted locally.
  * @var string $type             Asset optimization view. Accepts: 'advanced', 'basic'.
  */
 ?>
@@ -107,6 +108,25 @@
 	<div class="wphb-minification-files-table wphb-minification-files-<?php echo esc_attr( $type ); ?>">
 		<?php echo $scripts_rows; ?>
 	</div><!-- end wphb-minification-files-table -->
+
+	<?php if ( '' !== $others_rows ) : ?>
+		<?php if ( 'advanced' === $type ) : ?>
+			<div class="wphb-minification-files-select">
+				<label for="minification-bulk-file" class="screen-reader-text"><?php esc_html_e( 'Select all Other files', 'wphb' ); ?></label>
+				<label class="sui-checkbox">
+					<input type="checkbox" id="minification-bulk-file" name="minification-bulk-files" class="wphb-minification-bulk-file-selector" data-type="OTHER">
+					<span aria-hidden="true"></span>
+				</label>
+				<h3><?php esc_html_e( 'Other', 'wphb' ); ?></h3>
+			</div>
+		<?php else : ?>
+			<h3><?php esc_html_e( 'Other', 'wphb' ); ?></h3>
+		<?php endif; ?>
+
+		<div class="wphb-minification-files-table wphb-minification-files-<?php echo esc_attr( $type ); ?>">
+			<?php echo $others_rows; ?>
+		</div><!-- end wphb-minification-files-table -->
+	<?php endif; ?>
 </div><!-- end wphb-minification-files -->
 
 <?php wp_nonce_field( 'wphb-enqueued-files' ); ?>

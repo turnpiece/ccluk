@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-01 20:52:22+0000\n"
+"PO-Revision-Date: 2018-06-02 08:58:02+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -19,7 +19,7 @@ msgstr "詳細資訊如上所示。匯入程式將以不同的剖析器再次嘗
 msgid "There was an error when reading this WXR file"
 msgstr "讀取 WXR 檔案時發生錯誤"
 
-#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:495
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:502
 msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
 msgstr "由於遺失或無效的版本號碼，系統判定這不是 WXR 格式的檔案。"
 
@@ -125,7 +125,7 @@ msgstr "無法匯入%s「%s」"
 msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
 msgstr "無法匯入「%s」: 不正確的「%s」文章類型"
 
-#: wordpress-importer.php:869
+#: wordpress-importer.php:870
 msgid "Menu item skipped due to missing menu slug"
 msgstr "由於缺漏了選單代稱，選單項目不予匯入"
 
@@ -137,61 +137,61 @@ msgstr "無法匯入%s「%s」"
 msgid "%s &#8220;%s&#8221; already exists."
 msgstr "%s「%s」已存在。"
 
-#: wordpress-importer.php:876
+#: wordpress-importer.php:877
 msgid "Menu item skipped due to invalid menu slug: %s"
 msgstr "由於不正確的選單代稱 %s，選單項目不予匯入"
 
-#: wordpress-importer.php:939
+#: wordpress-importer.php:940
 msgid "Fetching attachments is not enabled"
 msgstr "[擷取附件] 未啟用"
 
-#: wordpress-importer.php:952
+#: wordpress-importer.php:953
 msgid "Invalid file type"
 msgstr "不正確的檔案型態"
 
-#: wordpress-importer.php:996
+#: wordpress-importer.php:1003
 msgid "Remote server did not respond"
 msgstr "遠端伺服器未回應"
 
-#: wordpress-importer.php:1009
+#: wordpress-importer.php:1018
 msgid "Remote file is incorrect size"
 msgstr "遠端檔案的大小錯誤"
 
-#: wordpress-importer.php:1002
+#: wordpress-importer.php:1011
 msgid "Remote server returned error response %1$d %2$s"
 msgstr "遠端伺服器傳回的錯誤回應為 %1$d %2$s"
 
-#: wordpress-importer.php:1020
+#: wordpress-importer.php:1029
 msgid "Remote file is too large, limit is %s"
 msgstr "遠端檔案過大，限制為 %s"
 
-#: wordpress-importer.php:1014
+#: wordpress-importer.php:1023
 msgid "Zero size file downloaded"
 msgstr "大小為零的檔案已完成下載"
 
-#: wordpress-importer.php:1126
+#: wordpress-importer.php:1136
 msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
 msgstr "這個匯入程式已有新版本可供更新，請更新至 %s 版以確保與較新版匯出檔格式的相容性。"
 
-#: wordpress-importer.php:1119
+#: wordpress-importer.php:1129
 msgid "Import WordPress"
 msgstr "匯入 WordPress 內容"
 
-#: wordpress-importer.php:1141
+#: wordpress-importer.php:1151
 msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
 msgstr "你好，請上傳 WordPress eXtended RSS 格式檔案 (WXR 格式，副檔名為 .xml)，匯入程式會將文章、頁面、迴響、自訂欄位、分類以及標籤匯入這個網站中。"
 
-#: wordpress-importer.php:1142
+#: wordpress-importer.php:1152
 msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
 msgstr "選擇要匯入的 WXR 檔案 (副檔名為 .xml)，然後按一下 [上傳檔案並匯入]。"
 
-#: wordpress-importer.php:1216
+#: wordpress-importer.php:1226
 msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
 msgstr "從 WordPress 的內容匯出檔中匯入<strong>文章、迴響、自訂欄位、頁面、分類及標籤</strong>。"
 
 #. Plugin URI of the plugin/theme
-msgid "http://wordpress.org/extend/plugins/wordpress-importer/"
-msgstr "https://wordpress.org/extend/plugins/wordpress-importer/"
+msgid "https://wordpress.org/plugins/wordpress-importer/"
+msgstr "https://wordpress.org/plugins/wordpress-importer/"
 
 #. Plugin Name of the plugin/theme
 msgid "WordPress Importer"
@@ -206,5 +206,5 @@ msgid "wordpressdotorg"
 msgstr "wordpressdotorg"
 
 #. Author URI of the plugin/theme
-msgid "http://wordpress.org/"
+msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"

@@ -14,7 +14,7 @@
 	<?php esc_html_e( 'Database Cleanups and tools to remove unnecessary functions WordPress does that
 							can slow down your server.', 'wphb' ); ?>
 </p>
-
+<?php if ( ! is_multisite() ) : ?>
 <ul class="sui-list sui-list-top-border">
 	<li>
 		<span class="sui-list-label"><?php esc_html_e( 'Database Cleanup', 'wphb' ); ?></span>
@@ -30,3 +30,4 @@
 		<?php endif; ?>
 	</li>
 </ul>
+<?php endif; ?>

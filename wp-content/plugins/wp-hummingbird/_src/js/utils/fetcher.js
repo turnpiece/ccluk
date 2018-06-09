@@ -31,6 +31,7 @@ function Fetcher() {
 		        const action = actionPrefix + 'notice_dismiss';
 		        return request( action, { id }, 'POST' );
             },
+
             /**
              * Dismiss CloudFlare dash notice
              */
@@ -39,19 +40,61 @@ function Fetcher() {
                 return request( action, {}, 'POST' );
             }
         },
+
 		/**
 		 * Caching module actions.
          */
         caching: {
-            /**
+			/**
+			 * Activate browser caching.
+			 *
+			 * @since 1.9.0
+			 */
+			activate: () => {
+        		const action = actionPrefix + 'caching_activate';
+        		return request( action, {}, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+			/**
+			 * Unified save settings method.
+			 *
+			 * @since 1.9.0
+			 */
+			saveSettings: ( module, data ) => {
+				const action = actionPrefix + module + '_save_settings';
+				return request( action, { data }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+			/**
+			 * Clear cache for selected module.
+			 *
+			 * @since 1.9.0
+			 */
+			clearCache: ( module ) => {
+				const action = actionPrefix + 'clear_module_cache';
+				return request( action, { module }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
+			},
+
+			/**
              * Set expiration for browser caching.
              *
-             * @param type File type.
              * @param expiry_times Type expiry times.
              */
-            setExpiration: ( type, expiry_times ) => {
+            setExpiration: ( expiry_times ) => {
                 const action = actionPrefix + 'caching_set_expiration';
-                return request( action, { type, expiry_times }, 'POST' );
+                return request( action, { expiry_times }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
             },
             /**
              * Set server type.
@@ -78,13 +121,13 @@ function Fetcher() {
             },
 
 			/**
-			 * Save settings from rss cache settings.
+			 * Update htaccess file.
 			 *
-			 * @param data
+			 * @returns {*}
 			 */
-			saveSettings: ( data ) => {
-				const action = actionPrefix + 'caching_save_settings';
-				return request( action, { data }, 'POST' )
+			updateHtaccess: () => {
+            	const action = actionPrefix + 'caching_update_htaccess';
+				return request( action, {}, 'POST' )
 					.then( ( response ) => {
 						return response;
 					});
@@ -101,14 +144,11 @@ function Fetcher() {
             },
 
 			/**
-			 * Save settings in cache module.
-			 *
-			 * @since 1.8.1
-			 * @param data
+			 * Re-check expiry in meta box header button action.
 			 */
-			saveOtherSettings: ( data ) => {
-            	const action = actionPrefix + 'caching_save_other_settings';
-            	return request( action, { data }, 'POST' )
+			recheckExpiry: () => {
+				const action = actionPrefix + 'caching_recheck_expiry';
+				return request( action, {}, 'POST' )
 					.then( ( response ) => {
 						return response;
 					});
@@ -269,6 +309,18 @@ function Fetcher() {
 					.then( ( response ) => {
 						return response;
 					});
+			},
+
+			/**
+			 * Update custom asset path
+			 *
+			 * @since 1.9
+			 *
+			 * @param value
+			 */
+			updateAssetPath: ( value ) => {
+				const action = actionPrefix + 'minification_update_asset_path';
+				return request( action, { value }, 'POST' );
 			}
         },
 

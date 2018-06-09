@@ -61,7 +61,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 		}
 
 		// Will only trigger on 're-check status' button click.
-		if ( $try_api || $check_api ) {
+		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = WP_Hummingbird_Utils::get_api();
 			$api_results = $api->performance->check_gzip();

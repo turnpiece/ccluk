@@ -168,7 +168,7 @@
 					<?php
 					echo esc_html( $cf_notice );
 					?>
-					<a href="#" id="connect-cloudflare-link">
+					<a href="#" class="connect-cloudflare-link">
 						<?php esc_html_e( 'Connect your account', 'wphb' ); ?>
 					</a>
 					<?php

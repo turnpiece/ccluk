@@ -166,6 +166,10 @@ function apbct_base_call($params = array(), $reg_flag = false){
     {
         $ct_data['connection_reports']['negative']++;
         $ct_data['connection_reports']['negative_report'][] = array('date'=>date("Y-m-d H:i:s"),'page_url'=>$_SERVER['REQUEST_URI'],'lib_report'=>$ct_result->errstr);
+		
+		if(count($ct_data['connection_reports']['negative_report']) > 20)
+			$ct_data['connection_reports']['negative_report'] = array_slice($ct_data['connection_reports']['negative_report'], -20, 20);
+		
     }
     if ($ct->server_change) {
 		update_option(

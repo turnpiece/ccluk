@@ -34,6 +34,12 @@
 
 	<div class="wpmudev-row">
 
+		<div class="wpmudev-col col-12 col-md-6">
+
+			<?php $this->template( 'settings/widget-privacy' ); ?>
+
+		</div>
+
         <div class="wpmudev-col col-12 col-md-6">
 
 			<?php $this->template( 'settings/widget-uninstall' ); ?>

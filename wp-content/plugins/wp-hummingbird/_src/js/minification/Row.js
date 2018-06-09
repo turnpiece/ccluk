@@ -89,23 +89,43 @@ const Row = ( _element, _filter, _filter_sec ) => {
             switch ( what ) {
                 case 'minify': {
                     $minify.prop( 'checked', value );
+                    $minify.toggleClass('changed');
+                    let row = $minify.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
                     break;
                 }
                 case 'combine': {
                     $combine.prop( 'checked', value );
+                    $combine.toggleClass('changed');
+                    let row = $combine.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
                     break;
                 }
                 case 'defer': {
                     $defer.prop( 'checked', value );
+                    $defer.toggleClass('changed');
+                    let row = $defer.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
                     break;
                 }
 				case 'inline': {
 					$inline.prop( 'checked', value );
+					$inline.toggleClass('changed');
+                    let row = $inline.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
 					break;
 				}
                 case 'include': {
                     $disableIcon.removeClass();
                     $include.prop( 'checked', value );
+                    $include.toggleClass('changed');
+                    let row = $include.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
                     if ( value ) {
                         $el.removeClass( 'disabled' );
                         $disableIcon.addClass( 'dev-icon dev-icon-cross' );
@@ -119,6 +139,10 @@ const Row = ( _element, _filter, _filter_sec ) => {
                 }
                 case 'footer': {
                     $posFooter.prop( 'checked', value );
+                    $posFooter.toggleClass('changed');
+                    let row = $posFooter.closest('.wphb-border-row');
+                    let row_status = row.find('span.wphb-row-status');
+                    row_status.removeClass('hidden');
                     break;
                 }
             }

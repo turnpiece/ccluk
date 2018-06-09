@@ -165,11 +165,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return String
 	 */
 	public function admin_body_class( $classes ) {
-
-		$classes .= ' sui-2-1-3 wpmud ';
+		$classes .= ' sui-2-1-6 wpmud ';
 
 		return $classes;
-
 	}
 
 	/**
@@ -336,6 +334,9 @@ abstract class WP_Hummingbird_Admin_Page {
 	public function render() {
 		?>
 		<div class="sui-wrap wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
+			<div class="sui-notice sui-notice-top hidden" id="wphb-ajax-update-notice">
+				<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
+			</div>
 			<?php
 			if ( isset( $_GET['updated'] ) ) { // Input var ok.
 				$this->admin_notices->show( 'updated', __( 'Settings Updated', 'wphb' ), 'success' );

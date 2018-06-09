@@ -209,16 +209,18 @@ class CleantalkHelper
 	 * @param string website platform
 	 * @return type
 	 */
-	static public function api_method__get_api_key($email, $host, $platform, $timezone = null, $do_check = true)
+	static public function api_method__get_api_key($email, $host, $platform, $timezone = null, $language = null, $ip = null, $do_check = true)
 	{		
 		$request = array(
-			'method_name' => 'get_api_key',
-			'agent' => APBCT_AGENT,
-			'email' => $email,
-			'website' => $host,
-			'platform' => $platform,
-			'timezone' => $timezone,
-			'product_name' => 'antispam',
+			'method_name'          => 'get_api_key',
+			'product_name'         => 'antispam',
+			'agent'                => APBCT_AGENT,
+			'email'                => $email,
+			'website'              => $host,
+			'platform'             => $platform,
+			'timezone'             => $timezone,
+			'http_accept_language' => !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : null,
+			'user_ip'              => $ip ? $ip : self::ip_get(array('real'), false),
 		);
 		
 		$result = self::api_send_request($request);

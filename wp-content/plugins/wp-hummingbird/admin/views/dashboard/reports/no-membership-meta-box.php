@@ -26,19 +26,18 @@
 					</div>
 				</a>
 			</div>
-			<!--
 			<div class="sui-col-lg-6">
-				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'uptime' ); ?>">
+				<a href="<?php echo WP_Hummingbird_Utils::get_admin_menu_url( 'advanced' ) . '&view=db#wphb-box-advanced-db-settings'; ?>">
 					<div class="report-status with-corner">
-						<i class="hb-icon-smush"></i>
-						<strong><?php esc_html_e( 'Uptime Report', 'wphb' ); ?></strong>
+						<i class="sui-icon-user-reputation-points"></i>
+						<strong><?php esc_html_e( 'Database Cleanup', 'wphb' ); ?></strong>
+						<span class="sui-tag sui-tag-inactive"><?php esc_html_e( 'Coming soon', 'wphb' ); ?></span>
 						<div class="corner">
 							<?php esc_html_e( 'Pro', 'wphb' ); ?>
 						</div>
 					</div>
 				</a>
 			</div>
-			-->
 		</div>
 
 		<div class="content-box content-box-two-cols-image-left">

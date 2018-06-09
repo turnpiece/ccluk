@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-02 07:54:08+0000\n"
+"PO-Revision-Date: 2018-05-30 06:54:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,102 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: zh_TW\n"
 "Project-Id-Version: Plugins - Jetpack by WordPress.com - Stable (latest release)\n"
+
+#: modules/widgets/eu-cookie-law.php:122
+msgid ""
+"Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. \n"
+"To find out more, including how to control cookies, see here:"
+msgstr ""
+"隱私權與 Cookie：此網站可使用 Cookie。繼續使用此網站即表示你同意使用 Cookie。\n"
+"若要瞭解更多資訊，包括如何控制 Cookie，請參閱此處："
+
+#: modules/widgets/eu-cookie-law.php:120
+msgid "Cookie Policy"
+msgstr "Cookie 政策"
+
+#: modules/widgets/eu-cookie-law.php:74
+msgid "Display a banner for EU Cookie Law and GDPR compliance."
+msgstr "顯示橫幅以表示遵循歐盟 Cookie 法律和 GDPR。"
+
+#: modules/widgets/eu-cookie-law.php:72
+msgid "Cookies & Consents Banner"
+msgstr "Cookie 和同意聲明橫幅"
+
+#: modules/widgets/eu-cookie-law/form.php:189
+msgctxt "action"
+msgid "Consent expires after"
+msgstr "同意聲明失效時間"
+
+#: modules/widgets/eu-cookie-law/form.php:179
+msgid "Visitors must provide consent by clicking the dismiss button when Jetpack Ads is turned on."
+msgstr "Jetpack Ads 開啟時，訪客必須點選「關閉」按鈕方可提供同意聲明。"
+
+#: modules/widgets/eu-cookie-law/form.php:127
+msgctxt "action"
+msgid "Capture consent & hide the banner"
+msgstr "擷取同意內容並隱藏橫幅"
+
+#: modules/widgets/eu-cookie-law/form.php:95
+msgid "Link text"
+msgstr "連結文字"
+
+#: modules/widgets/eu-cookie-law/form.php:83
+msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to Jetpack Ads</a>."
+msgstr "為了遵循 GDPR，請確定你的政策包含<a href=\"%s\" target=\"_blank\">有關 Jetpack Ads 的隱私權資訊</a>。"
+
+#: modules/widgets/eu-cookie-law/form.php:75
+msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
+msgstr "預設政策 URL 僅涵蓋 Jetpack 設定的 Cookie。如果你正在執行其他外掛程式、自訂 Cookie 或第三方追蹤技術，則應建立並連結至你自己的 Cookie 聲明。"
+
+#: modules/widgets/eu-cookie-law/form.php:74
+#: modules/widgets/eu-cookie-law/form.php:81
+msgid "Caution:"
+msgstr "警告："
+
+#: modules/widgets/eu-cookie-law/form.php:62
+msgid "Custom URL:"
+msgstr "自訂 URL："
+
+#: modules/widgets/eu-cookie-law/form.php:40
+msgid "Privacy Policy Link"
+msgstr "隱私權政策連結"
+
+#. translators: %d: Post ID.
+#: modules/contact-form/grunion-contact-form.php:859
+msgid "Feedback ID %d could not be removed at this time."
+msgstr "目前無法移除意見回饋 ID %d。"
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an HTTP
+#. status code.
+#: class.jetpack-cli.php:1114
+msgid "Request to %1$s returned a non-200 response code: %2$d."
+msgstr "%1$s 要求傳回非 200 回應代碼：%2$d。"
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an error
+#. code, %3$s is an error message.
+#: class.jetpack-cli.php:1104
+msgid "Request to %1$s returned an error: (%2$d) %3$s."
+msgstr "%1$s 要求傳回錯誤訊息：(%2$d) %3$s。"
+
+#: _inc/jetpack-strings.php:279
+msgid "Keep tabs on your site and receive alerts the moment downtime is detected."
+msgstr "密切注意你的網站，並在偵測到停機時立即對你發出警示。"
+
+#: _inc/jetpack-strings.php:153
+msgid "For more information on how specific Jetpack features use data and track activity, please refer to our {{privacyCenterLink}}Privacy Center{{/privacyCenterLink}}."
+msgstr "若需關於特定 Jetpack 功能如何使用資料和追蹤活動的詳細資訊，請參閱我們的{{privacyCenterLink}}隱私權中心{{/privacyCenterLink}}。"
+
+#: _inc/jetpack-strings.php:152
+msgid "We use other tracking tools, including some from third parties. {{cookiePolicyLink}}Read about these{{/cookiePolicyLink}} and how to control them."
+msgstr "我們會使用其他的追蹤工具，包括由第三方所提供的追蹤工具。{{cookiePolicyLink}}瞭解相關資訊{{/cookiePolicyLink}}及其管理方式。"
+
+#: _inc/jetpack-strings.php:151
+msgid "This information helps us improve our products, make marketing to you more relevant, personalize your WordPress.com experience, and more as detailed in our {{pp}}privacy policy{{/pp}}."
+msgstr "這類資訊有助我們改進產品、提供與你更加相關的行銷活動、帶來更為個人化的 WordPress.com 使用體驗；若要瞭解更多詳細內容，請參見我們的{{pp}}「隱私權政策」{{/pp}}。"
+
+#: _inc/jetpack-strings.php:150
+msgid "Share information with our analytics tool about your use of services while logged in to your WordPress.com account. {{cookiePolicyLink}}Learn more{{/cookiePolicyLink}}."
+msgstr "在登入你的 WordPress.com 帳號時，請將你的服務使用情況相關資訊與我們的分析工具分享。{{cookiePolicyLink}}瞭解更多資訊{{/cookiePolicyLink}}。"
 
 #. translators: %s is UTC offset, e.g. "+1"
 #: sync/class.jetpack-sync-functions.php:385
@@ -180,303 +276,299 @@ msgstr "%s 無法啟用。"
 msgid "The requested Jetpack module is not supported by your plan."
 msgstr "你的方案不支援要求的 Jetpack 模組。"
 
-#: _inc/jetpack-strings.php:684
+#: _inc/jetpack-strings.php:716
 msgid "VideoPress allows you to upload videos from your computer to be hosted on WordPress.com, rather than on your host’s servers. You can then insert these on your self-hosted Jetpack site. "
 msgstr "VideoPress 可讓你從電腦上傳影片，並由 WordPress.com 而非主機伺服器託管。你可以接著將這些影片插入自助託管的 Jetpack 網站。"
 
-#: _inc/jetpack-strings.php:678
+#: _inc/jetpack-strings.php:710
 msgid "Add the Search (Jetpack) widget to your sidebar"
 msgstr "新增搜尋 (Jetpack) 小工具至側邊欄"
 
-#: _inc/jetpack-strings.php:672
+#: _inc/jetpack-strings.php:704
 msgid "Give your visitor's a great search experience by letting them filter and sort fast, relevant search results."
 msgstr "讓訪客快速篩選和排序相關搜尋結果，為訪客提供絕佳的搜尋體驗。"
 
-#: _inc/jetpack-strings.php:603
+#: _inc/jetpack-strings.php:634
 msgid "This feature is being managed by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "這個功能是由網站管理員所管理。{{link}}瞭解更多{{/link}}。"
 
-#: _inc/jetpack-strings.php:602
+#: _inc/jetpack-strings.php:633
 msgid "This feature has been disabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "這個功能已由網站管理員停用。{{link}}瞭解更多{{/link}}。"
 
-#: _inc/jetpack-strings.php:601
+#: _inc/jetpack-strings.php:632
 msgid "This feature has been enabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "這個功能已由網站管理員啟用。{{link}}瞭解更多{{/link}}。"
 
-#: _inc/jetpack-strings.php:571
+#: _inc/jetpack-strings.php:635
 msgid "%(moduleName)s has been disabled by a site administrator. {{link}}Learn more{{/link}}."
 msgstr "網站管理員已停用 %(moduleName)s。{{link}}瞭解更多{{/link}}。"
 
-#: _inc/jetpack-strings.php:433
+#: _inc/jetpack-strings.php:240
 msgctxt "Caption for a button to purchase a pro plan."
 msgid "Upgrade"
 msgstr "升級"
 
-#: _inc/jetpack-strings.php:427
-msgid "Send information to help us improve our products."
-msgstr "傳送資訊以協助我們改善產品。"
-
-#: _inc/jetpack-strings.php:425
+#: _inc/jetpack-strings.php:149
 msgid "We are committed to your privacy and security. "
 msgstr "我們致力維護你的隱私權及安全。"
 
-#: _inc/jetpack-strings.php:424
+#: _inc/jetpack-strings.php:148
 msgctxt "Settings header"
 msgid "Privacy Settings"
 msgstr "隱私設定"
 
-#: _inc/jetpack-strings.php:423
+#: _inc/jetpack-strings.php:147
 msgctxt "Search term."
 msgid "terms of service"
 msgstr "服務條款"
 
-#: _inc/jetpack-strings.php:422
+#: _inc/jetpack-strings.php:146
 msgctxt "Search term."
 msgid "tos"
 msgstr "tos"
 
-#: _inc/jetpack-strings.php:421
+#: _inc/jetpack-strings.php:145
 msgctxt "Search term."
 msgid "gdpr"
 msgstr "gdpr"
 
-#: _inc/jetpack-strings.php:420
+#: _inc/jetpack-strings.php:144
 msgctxt "Search term."
 msgid "data"
 msgstr "資料"
 
-#: _inc/jetpack-strings.php:419
+#: _inc/jetpack-strings.php:143
 msgctxt "Search term."
 msgid "tracks"
 msgstr "追蹤"
 
-#: _inc/jetpack-strings.php:418
+#: _inc/jetpack-strings.php:142
 msgctxt "Search term."
 msgid "privacy"
 msgstr "隱私權"
 
-#: _inc/jetpack-strings.php:414
+#: _inc/jetpack-strings.php:438
 msgid "Enables a lightweight, mobile-friendly theme that will be displayed to visitors on mobile devices."
 msgstr "啟用輕量且適用於手機的佈景主題，以顯示在訪客的行動裝置上。"
 
-#: _inc/jetpack-strings.php:407
+#: _inc/jetpack-strings.php:431
 msgid "Loads the next posts automatically when the reader approaches the bottom of the page."
 msgstr "讀者閱讀到網頁底部時，可自動載入後續文章。"
 
-#: _inc/jetpack-strings.php:405
+#: _inc/jetpack-strings.php:429
 msgid "Delays the loading of images until they are visible in the visitor's browser."
 msgstr "延遲圖片載入進度，直到出現在訪客瀏覽器中。"
 
-#: _inc/jetpack-strings.php:404
+#: _inc/jetpack-strings.php:428
 msgid "Hosts your image files on the global WordPress.com servers."
 msgstr "將圖片檔案託管在全球的 WordPress.com 伺服器上。"
 
-#: _inc/jetpack-strings.php:395
+#: _inc/jetpack-strings.php:419
 msgid "Allows you to publish new posts by sending an email to a special address."
 msgstr "讓你可透過寄信至特定電子郵件地址來發佈新文章。"
 
-#: _inc/jetpack-strings.php:393
+#: _inc/jetpack-strings.php:417
 msgid "Hosts your video files on the global WordPress.com servers."
 msgstr "將你的影片檔案託管在全球的 WordPress.com 伺服器上。"
 
-#: _inc/jetpack-strings.php:390
+#: _inc/jetpack-strings.php:414
 msgid "Replaces the standard WordPress galleries with a full-screen photo browsing experience, including comments and EXIF metadata."
 msgstr "以全螢幕照片瀏覽體驗 (包括留言和 EXIF 中繼資料) 取代標準 WordPress 圖庫。"
 
-#: _inc/jetpack-strings.php:386
+#: _inc/jetpack-strings.php:410
 msgid "Adds a toolbar with links to all your sites, notifications, your WordPress.com profile, and the Reader."
 msgstr "新增包含所有網站、通知、WordPress.com 個人檔案和讀取器連結的工具列。"
 
-#: _inc/jetpack-strings.php:381
+#: _inc/jetpack-strings.php:405
 msgid "Adds the Portfolio custom post type, allowing you to manage and showcase projects on your site."
 msgstr "新增「個人作品集」自訂文章類型，以便你在網站上管理及展示專案。"
 
-#: _inc/jetpack-strings.php:378
+#: _inc/jetpack-strings.php:402
 msgid "Adds the Testimonial custom post type, allowing you to collect, organize, and display testimonials on your site."
 msgstr "新增「證言」自訂文章類型，讓你在網站上收集、管理及顯示證言。"
 
-#: _inc/jetpack-strings.php:377
+#: _inc/jetpack-strings.php:401
 msgid "This feature has been disabled by a site administrator."
 msgstr "這個功能已由網站管理員停用。"
 
-#: _inc/jetpack-strings.php:375
+#: _inc/jetpack-strings.php:399
 msgid "Allows you to compose content with links, lists, and other styles using the Markdown syntax."
 msgstr "使用 Markdown 語法，讓你撰寫含有連結、清單和其他樣式的內容。"
 
-#: _inc/jetpack-strings.php:352
+#: _inc/jetpack-strings.php:376
 msgid "Checks your content for correct grammar and spelling, misused words, and style while you write."
 msgstr "在撰寫時檢查內容的文法、拼字、錯別字和樣式。"
 
-#: _inc/jetpack-strings.php:346
+#: _inc/jetpack-strings.php:370
 msgid "Provides the necessary hidden tags needed to verify your WordPress site with various services."
 msgstr "提供所需的隱藏標籤，以便將你的 WordPress 網站與多項服務進行驗證。"
 
-#: _inc/jetpack-strings.php:344
+#: _inc/jetpack-strings.php:368
 msgid "%(moduleName)s has been disabled by a site administrator."
 msgstr "網站管理員已停用 %(moduleName)s。"
 
-#: _inc/jetpack-strings.php:340
+#: _inc/jetpack-strings.php:364
 msgid "Automatically generates the files required for search engines to index your site."
 msgstr "自動產生搜尋引擎所需檔案，以便將你的網站加入索引。"
 
-#: _inc/jetpack-strings.php:334
+#: _inc/jetpack-strings.php:358
 msgid "Displays information on your site activity, including visitors and popular posts or pages."
 msgstr "顯示網站活動相關資訊，包括訪客身分以及熱門文章或頁面。"
 
-#: _inc/jetpack-strings.php:325
+#: _inc/jetpack-strings.php:349
 msgid "Allows you to optimize your site and its content for better results in search engines."
 msgstr "讓你最佳化你的網站和內容，在搜尋引擎中顯示較佳結果。"
 
-#: _inc/jetpack-strings.php:320
+#: _inc/jetpack-strings.php:344
 msgid "Replaces the default WordPress search with a faster, filterable search experience."
 msgstr "以更快的篩選搜尋體驗取代預設 WordPress 搜尋功能。"
 
-#: _inc/jetpack-strings.php:304
+#: _inc/jetpack-strings.php:328
 msgid "Automatically displays similar content at the end of each post."
 msgstr "在每篇文章底部自動顯示類似內容。"
 
-#: _inc/jetpack-strings.php:301
+#: _inc/jetpack-strings.php:325
 msgid "Integrates your WordPress site with Google Analytics, a platform that offers insights into your traffic, visitors, and conversions."
 msgstr "將你的 WordPress 網站與 Google Analytics 整合 (Google Analytics 是一個可提供關於流量、訪客和轉換洞察報告的平台)。"
 
-#: _inc/jetpack-strings.php:298
+#: _inc/jetpack-strings.php:322
 msgid "You can place additional ads using the Ad widget. {{link}}Try it out!{{/link}}"
 msgstr "您可以使用廣告小工具刊登其他廣告。{{link}}立即試用！{{/link}}"
 
-#: _inc/jetpack-strings.php:286
+#: _inc/jetpack-strings.php:310
 msgid "Displays high-quality ads on your site that allow you to earn income."
 msgstr "在你的網站上顯示高品質廣告，讓你賺取收入。"
 
-#: _inc/jetpack-strings.php:283
+#: _inc/jetpack-strings.php:307
 msgid "Adds sharing buttons to your content so that visitors can share it on social media sites."
 msgstr "將分享按鈕新增至你的內容，讓訪客可以將文章分享至社交媒體網站。"
 
-#: _inc/jetpack-strings.php:277
+#: _inc/jetpack-strings.php:301
 msgid "Allows you to automatically share your newest content on social media sites, including Facebook and Twitter."
 msgstr "讓你將最新內容自動分享至社交媒體網站，包括 Facebook 和 Twitter。"
 
-#: _inc/jetpack-strings.php:272
+#: _inc/jetpack-strings.php:296
 msgid "Adds like buttons to your content so that visitors can show their appreciation or enjoyment."
 msgstr "新增「讚」按鈕至你的內容，讓訪客能夠表達欣賞或高興的感受。"
 
-#: _inc/jetpack-strings.php:266
+#: _inc/jetpack-strings.php:289
 msgid "Allows registered users to log in to your site with their WordPress.com accounts."
 msgstr "讓已註冊使用者能夠透過其 WordPress.com 帳號登入你的網站。"
 
-#: _inc/jetpack-strings.php:258
+#: _inc/jetpack-strings.php:281
 msgid "Configure your notification settings"
 msgstr "調整你的通知設定"
 
-#: _inc/jetpack-strings.php:257
+#: _inc/jetpack-strings.php:280
 msgid "Monitor your site's downtime"
 msgstr "監控你的網站停機時間"
 
-#: _inc/jetpack-strings.php:256
+#: _inc/jetpack-strings.php:278
 msgctxt "Settings header"
 msgid "Downtime monitoring"
 msgstr "停機時間監控"
 
-#: _inc/jetpack-strings.php:237 _inc/jetpack-strings.php:254
+#: _inc/jetpack-strings.php:259 _inc/jetpack-strings.php:276
 msgid "Backs up your site to the global WordPress.com servers, allowing you to restore your content in the event of an emergency or error."
 msgstr "將你的網站備份至全球的 WordPress.com 伺服器，讓你在發生緊急情況或錯誤時還原內容。"
 
-#: _inc/jetpack-strings.php:233
+#: _inc/jetpack-strings.php:255
 msgid "Removes spam from comments and contact forms."
 msgstr "從留言和聯絡表單移除垃圾留言。"
 
-#: _inc/jetpack-strings.php:222
+#: _inc/jetpack-strings.php:124
 msgid "{{a}}Activate{{/a}} to replace the WordPress built-in search with an improved search experience."
 msgstr "{{a}}啟用{{/a}}以改良的搜尋體驗取代 WordPress 內建搜尋工具。"
 
-#: _inc/jetpack-strings.php:221
+#: _inc/jetpack-strings.php:123
 msgid "Add Search (Jetpack) Widget"
 msgstr "新增搜尋 (Jetpack) 小工具"
 
-#: _inc/jetpack-strings.php:220
+#: _inc/jetpack-strings.php:122
 msgid "Jetpack Search is powering search on your site."
 msgstr "「Jetpack 搜尋」為你的網站提供搜尋功能。"
 
-#: _inc/jetpack-strings.php:217
+#: _inc/jetpack-strings.php:119
 msgid "Give your visitors {{a}}a great search experience{{/a}}."
 msgstr "為訪客提供{{a}}更佳的搜尋體驗{{/a}}。"
 
-#: _inc/jetpack-strings.php:215 _inc/jetpack-strings.php:219
+#: _inc/jetpack-strings.php:117 _inc/jetpack-strings.php:121
 msgid "Jetpack’s Search module is a powerful replacement for the search capability built into WordPress."
 msgstr "Jetpack 的搜尋模組功能強大，可用來取代 WordPress 內建的搜尋功能。"
 
-#: _inc/jetpack-strings.php:203
+#: _inc/jetpack-strings.php:105
 msgid "Your site’s files are regularly scanned for unauthorized or suspicious modifications that could compromise your security and data."
 msgstr "系統會定期對你網站的檔案進行掃描，確認是否有可能會損害你安全性和資料的未授權或可疑的。"
 
-#: _inc/jetpack-strings.php:197 _inc/jetpack-strings.php:260
+#: _inc/jetpack-strings.php:99 _inc/jetpack-strings.php:283
 msgid "Protects your site from traditional and distributed brute force login attacks."
 msgstr "保護你的網站不受傳統和分散式暴力破解攻擊。"
 
-#: _inc/jetpack-strings.php:196
+#: _inc/jetpack-strings.php:98
 msgid "Manage your plugins"
 msgstr "管理你的外掛程式"
 
-#: _inc/jetpack-strings.php:193
+#: _inc/jetpack-strings.php:95
 msgid "Plugin needs updating."
 msgid_plural "Plugins need updating."
 msgstr[0] "外掛程式需要更新。"
 
-#: _inc/jetpack-strings.php:192
+#: _inc/jetpack-strings.php:94
 msgid "%(number)s"
 msgid_plural "%(number)s"
 msgstr[0] "%(number)s"
 
-#: _inc/jetpack-strings.php:190
+#: _inc/jetpack-strings.php:92
 msgid "Jetpack’s Plugin Updates allows you to choose which plugins update automatically."
 msgstr "Jetpack 的外掛程式更新可讓您選擇要自動更新的外掛程式。"
 
-#: _inc/jetpack-strings.php:185
+#: _inc/jetpack-strings.php:87
 msgid "Jetpack will optimize your images and serve them from the server location nearest to your visitors. Using our global content delivery network will boost the loading speed of your site."
 msgstr "Jetpack 會最佳化你的圖片，並從與訪客距離最近的伺服器提供圖片。使用我們的全球內容傳遞網路可大幅提升網站的載入速度。"
 
-#: _inc/jetpack-strings.php:180
+#: _inc/jetpack-strings.php:82
 msgid "Jetpack’s downtime monitor will keep tabs on your site, and alert you the moment that downtime is detected."
 msgstr "Jetpack 的停機時間監控功能可全面掌控你的網站，並在偵測到停機時立即對你發出警示。"
 
-#: _inc/jetpack-strings.php:159
+#: _inc/jetpack-strings.php:61
 msgid "Jetpack Backups allow you to easily restore or download a backup from a specific moment."
 msgstr "Jetpack 備份功能可讓您輕鬆復原或下載特定時刻的備份。"
 
-#: _inc/jetpack-strings.php:157
+#: _inc/jetpack-strings.php:59
 msgid "Moderate comments"
 msgstr "審核留言"
 
-#: _inc/jetpack-strings.php:150
+#: _inc/jetpack-strings.php:52
 msgid "Akismet checks your comments and contact form submissions against our global database of spam."
 msgstr "Akismet 會將你提交的留言和聯絡表單與我們的全球垃圾郵件資料庫進行檢查。"
 
-#: _inc/jetpack-strings.php:128
+#: _inc/jetpack-strings.php:217
 msgid "View all Jetpack plans"
 msgstr "檢視所有 Jetpack 方案"
 
-#: _inc/jetpack-strings.php:127
+#: _inc/jetpack-strings.php:216
 msgid "Manage your plan"
 msgstr "管理你的方案"
 
-#: _inc/jetpack-strings.php:126
+#: _inc/jetpack-strings.php:215
 msgid "Your Plan"
 msgstr "你的方案"
 
-#: _inc/jetpack-strings.php:125
+#: _inc/jetpack-strings.php:214
 msgid "You’re currently on Jetpack %(plan)s."
 msgstr "你目前使用的 Jetpack 方案為 %(plan)s。"
 
-#: _inc/jetpack-strings.php:62
+#: _inc/jetpack-strings.php:139
 msgid "Allows readers to subscribe to your posts or comments, and receive notifications of new content by email."
 msgstr "允許讀者訂閱你的文章和留言，並透過電子郵件接收新內容的通知。"
 
-#: _inc/jetpack-strings.php:54 _inc/jetpack-strings.php:57
-#: _inc/jetpack-strings.php:59 _inc/jetpack-strings.php:635
+#: _inc/jetpack-strings.php:131 _inc/jetpack-strings.php:134
+#: _inc/jetpack-strings.php:136 _inc/jetpack-strings.php:667
 msgid "Privacy Information"
 msgstr "隱私權資訊"
 
-#: _inc/jetpack-strings.php:49
+#: _inc/jetpack-strings.php:126
 msgid "Replaces the standard WordPress comment form with a new comment system that includes social media login options."
 msgstr "使用包含社交媒體登入選項的全新留言系統，取代標準的 WordPress 留言表單。"
 
@@ -512,99 +604,99 @@ msgstr "我想對目前方案提出問題。"
 msgid "Can not cancel a plan while in safe mode. See: https://jetpack.com/support/safe-mode/"
 msgstr "處於安全模式時無法取消方案。請參閱：https://jetpack.com/support/safe-mode/"
 
-#: _inc/jetpack-strings.php:323
+#: _inc/jetpack-strings.php:347
 msgid "Add Jetpack Search Widget"
 msgstr "新增 Jetpack 搜尋小工具"
 
-#: _inc/jetpack-strings.php:322
+#: _inc/jetpack-strings.php:346
 msgid "Add the Jetpack search widget to your sidebar to configure advanced search filters."
 msgstr "將 Jetpack 搜尋小工具新增到側邊欄以設定進階搜尋篩選條件。"
 
-#: _inc/jetpack-strings.php:143
+#: _inc/jetpack-strings.php:232
 msgid "Full security suite, marketing and revenue automation tools, unlimited video hosting, unlimited themes, enhanced search, and priority support."
 msgstr "完整安全性套件、行銷與營收自動化工具、無限影片託管、無限使用佈景主題、增強的搜尋功能及優先支援。"
 
-#: _inc/jetpack-strings.php:141
+#: _inc/jetpack-strings.php:230
 msgid "Full security suite, marketing and revenue automation tools, unlimited video hosting, and priority support."
 msgstr "完整安全性套件、行銷與營收自動化工具、無限影片託管及優先支援。"
 
-#: _inc/jetpack-strings.php:139
+#: _inc/jetpack-strings.php:228
 msgid "Daily backups, spam filtering, and priority support."
 msgstr "每日備份、過濾垃圾訊息和優先支援。"
 
-#: _inc/jetpack-strings.php:137
+#: _inc/jetpack-strings.php:226
 msgid "Always-on security, a better search experience, unlimited CDN use, advanced marketing tools, and monetization services."
 msgstr "全天候安全性、更優異的搜尋體驗、無限制使用 CDN、進階行銷工具及獲利服務。"
 
-#: _inc/jetpack-strings.php:136
+#: _inc/jetpack-strings.php:225
 msgid "Powerful services for your site"
 msgstr "專為你的網站提供的強大服務"
 
-#: _inc/jetpack-strings.php:133
+#: _inc/jetpack-strings.php:222
 msgid "Upgrade to a weekly coffee and fully protect your site from malware, infiltrations, and security loopholes with automated malware scanning."
 msgstr "用一週花在買咖啡的錢進行升級，就能利用自動惡意軟體掃描全面保護你的網站，讓你免受惡意軟體、入侵與安全漏洞侵擾。"
 
-#: _inc/jetpack-strings.php:130
+#: _inc/jetpack-strings.php:219
 msgid "Automated backups, one-click restores, spam filtering, and malware scanning."
 msgstr "自動備份、一鍵復原、過濾垃圾訊息和惡意軟體掃描。"
 
-#: _inc/jetpack-strings.php:129
+#: _inc/jetpack-strings.php:218
 msgid "Jetpack Premium now includes our full security suite"
 msgstr "Jetpack Premium 現在包含完整安全性套件"
 
-#: _inc/jetpack-strings.php:121
+#: _inc/jetpack-strings.php:210
 msgid "Automatic defense against hacks, malware, spam, data loss, and downtime with automated backups, unlimited storage, and malware scanning."
 msgstr "透過自動備份、無限的儲存空間和惡意軟體掃描，自動阻擋駭客入侵、惡意軟體、垃圾郵件、資料遺失及停機。"
 
-#: _inc/jetpack-strings.php:120
+#: _inc/jetpack-strings.php:209
 msgid "Always-on Security"
 msgstr "全天候安全性"
 
-#: _inc/jetpack-strings.php:119
+#: _inc/jetpack-strings.php:208
 msgid "Reach more people and earn money with automated social media scheduling, better search results, SEO preview tools, PayPal payments, and an ad program."
 msgstr "透過自動社交媒體排程、更優異的搜尋結果、SEO 預覽工具、PayPal 付款方式和廣告方案，觸及更多讀者並賺取更多收益。"
 
-#: _inc/jetpack-strings.php:117
+#: _inc/jetpack-strings.php:206
 msgid "Get unlimited access to hundreds of professional themes, a superior search experience for your users, and unlimited high-speed, and ad-free video hosting."
 msgstr "無限制使用數以百計的專業佈景主題、為使用者提供絕佳的搜尋體驗，並享受高速且不含廣告的無限影片託管服務。"
 
-#: _inc/jetpack-strings.php:114
+#: _inc/jetpack-strings.php:203
 msgid "A superior search experience powered by Elasticsearch providing your users with faster and more relevant search results. Previously only available to WordPress.com VIP customers and trusted by industry-leading brands."
 msgstr "由 Elasticsearch 提供的技術支援的絕佳搜尋體驗，可為使用者帶來更快速且相關度更高的搜尋結果。先前僅供 WordPress.com VIP 客戶使用，且深受領先業界的各大品牌信任。"
 
-#: _inc/jetpack-strings.php:113
+#: _inc/jetpack-strings.php:202
 msgid "Unlimited access to hundreds of premium WordPress themes with dedicated support directly from the theme authors."
 msgstr "無限制使用數以百計的 WordPress 進階版佈景主題，並享受佈景主題作者直接提供的專屬支援。"
 
-#: _inc/jetpack-strings.php:112
+#: _inc/jetpack-strings.php:201
 msgid "Two great reasons to go Pro"
 msgstr "升級為專業版的兩大理由"
 
-#: _inc/jetpack-strings.php:110
+#: _inc/jetpack-strings.php:199
 msgid "Grow your traffic and revenue with social media scheduling, enhanced site search, SEO tools, PayPal payments, and an ad program."
 msgstr "透過社交媒體排程功能、更優異的網站搜尋功能、SEO 工具、PayPal 付款方式和廣告方案，提高你的流量和收益。"
 
-#: _inc/jetpack-strings.php:109
+#: _inc/jetpack-strings.php:198
 msgid "Always-on security including real-time backups, malware scanning, and automatic threat resolution."
 msgstr "全天候安全性包含即時備份、惡意軟體掃描和自動排除威脅功能。"
 
-#: _inc/jetpack-strings.php:108
+#: _inc/jetpack-strings.php:197
 msgid "Design the perfect site with unlimited access to hundreds of themes and unlimited, high-speed, and ad-free video hosting."
 msgstr "無限制使用數以百計的佈景主題，並運用高速且不含廣告的無限影片託管服務，設計出超讚的完美網站。"
 
-#: _inc/jetpack-strings.php:107
+#: _inc/jetpack-strings.php:196
 msgid "Three great reasons to go Pro"
 msgstr "升級為專業版的三大理由"
 
-#: _inc/jetpack-strings.php:98
+#: _inc/jetpack-strings.php:187
 msgid "Activate Video Hosting"
 msgstr "啟用影片託管"
 
-#: _inc/jetpack-strings.php:96
+#: _inc/jetpack-strings.php:185
 msgid "Fast, optimized, ad-free, and unlimited video hosting for your site."
 msgstr "你的網站可享快速、最佳化且不含廣告的無限影片託管服務。"
 
-#: _inc/jetpack-strings.php:78
+#: _inc/jetpack-strings.php:167
 msgid "Browse Themes"
 msgstr "瀏覽佈景主題"
 
@@ -878,193 +970,193 @@ msgstr "你的文章「%s」有新的引用通知"
 msgid "Primary language for the site."
 msgstr "網站的主要語言。"
 
-#: _inc/jetpack-strings.php:640
+#: _inc/jetpack-strings.php:672
 msgid "This release of Jetpack brings major new features and big improvements to your WordPress site."
 msgstr "這次的 Jetpack 版本推出了重要的全新功能，並大大改善你的 WordPress 網站。"
 
-#: _inc/jetpack-strings.php:641
+#: _inc/jetpack-strings.php:673
 msgid "Speed up your site and its content"
 msgstr "加快網站和內容的載入速度"
 
-#: _inc/jetpack-strings.php:642
+#: _inc/jetpack-strings.php:674
 msgid "Sites with large numbers of images can now activate the Lazy Loading Images feature, which significantly speeds up loading times for visitors. Instead of waiting for the entire page to load, Jetpack will instead show pages instantly, and only download additional images when they are about to come into view."
 msgstr "你現在可以對含有大量圖片的網站啟用延遲載入圖片功能，這樣能大幅提升訪客的載入速度。你再也無需等待載入整個網頁，Jetpack 能立即顯示網頁，當你打算瀏覽其他圖片時才會加以下載。"
 
-#: _inc/jetpack-strings.php:643
+#: _inc/jetpack-strings.php:675
 msgid "If this sounds like a great improvement (and it is) you can enable it now by clicking the toggle below."
 msgstr "如果這可視為一大改進 (實際上也是)，那麼你只要按下方的切換選項，即可啟用此功能。"
 
-#: _inc/jetpack-strings.php:644
+#: _inc/jetpack-strings.php:676
 msgid "We have also upgraded all our Premium plan customers to unlimited high-speed video storage (up from 13GB), and significantly reduced the CSS and JavaScript assets that Jetpack downloads when using features like infinite scroll and embedding rich content."
 msgstr "我們也升級了所有進階版方案客戶的功能，提供無限高速影片儲存空間 (高達 13GB)；此外，使用無限捲動和嵌入多格式內容等功能時，還可大幅減少 Jetpack 下載的 CSS 和 JavaScript 資產。"
 
-#: _inc/jetpack-strings.php:645
+#: _inc/jetpack-strings.php:677
 msgid "Faster, more relevant search results"
 msgstr "更快、相關度更高的搜尋結果"
 
-#: _inc/jetpack-strings.php:646
+#: _inc/jetpack-strings.php:678
 msgid "Elasticsearch"
 msgstr "Elasticsearch"
 
-#: _inc/jetpack-strings.php:647
+#: _inc/jetpack-strings.php:679
 msgid "Our faster site search is now available to all Professional plan customers. This replaces the default WordPress search with an Elasticsearch-powered infrastructure that returns faster, more relevant results to users."
 msgstr "所有專業版方案客戶現在都能使用更快速的網站搜尋功能。此功能以採用 Elasticsearch 技術的基礎架構取代預設 WordPress 搜尋功能，可更快將相關度更高的搜尋結果傳回給使用者。"
 
-#: _inc/jetpack-strings.php:648
+#: _inc/jetpack-strings.php:680
 msgid "Read the full announcement!"
 msgstr "閱讀完整公告！"
 
-#: _inc/jetpack-strings.php:649
+#: _inc/jetpack-strings.php:681
 msgid "Compare paid plans"
 msgstr "比較付費方案"
 
-#: _inc/jetpack-strings.php:651
+#: _inc/jetpack-strings.php:683
 msgid "Major new features from Jetpack"
 msgstr "Jetpack 的重要全新功能"
 
-#: _inc/jetpack-strings.php:622
+#: _inc/jetpack-strings.php:654
 msgid "Faster, more relevant and more powerful sitewide search."
 msgstr "更快、相關度更高的搜尋結果，以及更強大的網站搜尋功能。"
 
-#: _inc/jetpack-strings.php:468
+#: _inc/jetpack-strings.php:502
 msgid "Hassle-free design, marketing, and security for your WordPress site. Connect Jetpack to a WordPress.com account to start building your own success story."
 msgstr "輕鬆設計你的 WordPress 網站並行銷，同時擁有可靠的安全性。將 Jetpack 連結至 WordPress.com 帳號，開始創造你的成功案例。"
 
-#: _inc/jetpack-strings.php:469
+#: _inc/jetpack-strings.php:503
 msgid "WordPress themes and customization tools for designing your site."
 msgstr "利用 WordPress 佈景主題和自訂工具設計網站。"
 
-#: _inc/jetpack-strings.php:116 _inc/jetpack-strings.php:470
+#: _inc/jetpack-strings.php:205 _inc/jetpack-strings.php:504
 msgid "Design the perfect website"
 msgstr "設計完美的網站"
 
-#: _inc/jetpack-strings.php:471
+#: _inc/jetpack-strings.php:505
 msgid "Bring your ideas to life with elegant and professional designs and code-free customization tools."
 msgstr "利用優雅專業的設計以及無需程式碼的自訂工具，助你實現各種構想。"
 
-#: _inc/jetpack-strings.php:472
+#: _inc/jetpack-strings.php:506
 msgid "Jetpack's photon serves up lightning fast, optimized images"
 msgstr "Jetpack 的 Photon 功能可飛速載入最佳化的圖片"
 
-#: _inc/jetpack-strings.php:473
+#: _inc/jetpack-strings.php:507
 msgid "Jetpack's WordPress themes"
 msgstr "Jetpack 的 WordPress 佈景主題"
 
-#: _inc/jetpack-strings.php:474
+#: _inc/jetpack-strings.php:508
 msgid "Professional themes"
 msgstr "專業佈景主題"
 
-#: _inc/jetpack-strings.php:475
+#: _inc/jetpack-strings.php:509
 msgid "Find the perfect design for your site from hundreds of available themes."
 msgstr "從數百個佈景主題中選擇最適合你網站的設計。"
 
-#: _inc/jetpack-strings.php:476
+#: _inc/jetpack-strings.php:510
 msgid "Jetpack's customization tools"
 msgstr "Jetpack 的自訂工具"
 
-#: _inc/jetpack-strings.php:477
+#: _inc/jetpack-strings.php:511
 msgid "Code-free customization"
 msgstr "無需程式碼的自訂工具"
 
-#: _inc/jetpack-strings.php:478
+#: _inc/jetpack-strings.php:512
 msgid "Customize your site with endless widget options, image galleries, and embedded media."
 msgstr "利用許多小工具選項、圖庫和嵌入式媒體來自訂網站。"
 
-#: _inc/jetpack-strings.php:479
+#: _inc/jetpack-strings.php:513
 msgid "Jetpack's performance features"
 msgstr "Jetpack 的效能表現"
 
-#: _inc/jetpack-strings.php:481
+#: _inc/jetpack-strings.php:515
 msgid "Deliver blazing fast images and video and improve site load times."
 msgstr "以飛快的速度提供圖片和影片，並提升網站載入速度。"
 
-#: _inc/jetpack-strings.php:482
+#: _inc/jetpack-strings.php:516
 msgid "Drive more traffic to your site with Jetpack"
 msgstr "Jetpack 讓你的網站吸引更多流量"
 
-#: _inc/jetpack-strings.php:118 _inc/jetpack-strings.php:483
+#: _inc/jetpack-strings.php:207 _inc/jetpack-strings.php:517
 msgid "Increase traffic and revenue"
 msgstr "增加流量，提高收益"
 
-#: _inc/jetpack-strings.php:484
+#: _inc/jetpack-strings.php:518
 msgid "Reach more people and earn money with automated marketing tools."
 msgstr "利用自動化行銷工具觸及更多人，並賺取收入。"
 
-#: _inc/jetpack-strings.php:485
+#: _inc/jetpack-strings.php:519
 msgctxt "Image alternate text."
 msgid "Decoration: Jetpack clouds"
 msgstr "裝飾：Jetpack 雲端"
 
-#: _inc/jetpack-strings.php:486
+#: _inc/jetpack-strings.php:520
 msgctxt "Image alternate text."
 msgid "Decoration: Jetpack bar graph"
 msgstr "裝飾：Jetpack 長條圖"
 
-#: _inc/jetpack-strings.php:487
+#: _inc/jetpack-strings.php:521
 msgid "Jetpack's site stats feature"
 msgstr "Jetpack 的網站統計功能"
 
-#: _inc/jetpack-strings.php:489
+#: _inc/jetpack-strings.php:523
 msgid "Keep an eye on your success with simple, concise, and mobile-friendly stats."
 msgstr "精簡且適用於行動裝置的統計資料，讓你可以隨時留意網站的表現。"
 
-#: _inc/jetpack-strings.php:490
+#: _inc/jetpack-strings.php:524
 msgid "Jetpack's publicize features"
 msgstr "Jetpack 的 Publicize 功能"
 
-#: _inc/jetpack-strings.php:491
+#: _inc/jetpack-strings.php:525
 msgid "Automated marketing"
 msgstr "自動化行銷"
 
-#: _inc/jetpack-strings.php:492
+#: _inc/jetpack-strings.php:526
 msgid "Schedule social media posts in advance, show related content, and give better search results."
 msgstr "預先排程社交媒體文章、顯示相關內容，並提供更佳的搜尋結果。"
 
-#: _inc/jetpack-strings.php:493
+#: _inc/jetpack-strings.php:527
 msgid "Jetpack's ads and PayPal features"
 msgstr "Jetpack 的廣告和 PayPal 功能"
 
-#: _inc/jetpack-strings.php:494
+#: _inc/jetpack-strings.php:528
 msgid "Generate revenue"
 msgstr "產生收益"
 
-#: _inc/jetpack-strings.php:495
+#: _inc/jetpack-strings.php:529
 msgid "Monetize your site with high-quality ads and take PayPal payments."
 msgstr "以高品質廣告和 PayPal 付款功能，利用你的網站賺取收益。"
 
-#: _inc/jetpack-strings.php:496 _inc/jetpack-strings.php:497
+#: _inc/jetpack-strings.php:530 _inc/jetpack-strings.php:531
 msgid "Keep your site safe, 24/7"
 msgstr "全年無休保護網站安全"
 
-#: _inc/jetpack-strings.php:498
+#: _inc/jetpack-strings.php:532
 msgid "Automatic defense against hacks, malware, spam, data loss, and downtime."
 msgstr "自動預防駭客入侵、惡意軟體、垃圾留言、資料遺失和停機問題。"
 
-#: _inc/jetpack-strings.php:499
+#: _inc/jetpack-strings.php:533
 msgid "Jetpack's monitor feature"
 msgstr "Jetpack 的監控功能"
 
-#: _inc/jetpack-strings.php:501
+#: _inc/jetpack-strings.php:535
 msgid "Be alerted about any unexpected downtime the moment it happens."
 msgstr "發生意外停機當下，即會收到警示。"
 
-#: _inc/jetpack-strings.php:502
+#: _inc/jetpack-strings.php:536
 msgid "Jetpack's Protect features"
 msgstr "Jetpack 的 Protect 功能"
 
-#: _inc/jetpack-strings.php:504
+#: _inc/jetpack-strings.php:538
 msgid "Guard your site against brute force login attacks, spam, and harmfulmalware injections."
 msgstr "保護你的網站，防範暴力密碼破解登入攻擊、垃圾留言以及有害的惡意軟體感染。"
 
-#: _inc/jetpack-strings.php:505
+#: _inc/jetpack-strings.php:539
 msgid "Backup and restore"
 msgstr "備份與復原"
 
-#: _inc/jetpack-strings.php:506
+#: _inc/jetpack-strings.php:540
 msgid "Automatic, real-time backups mean your entire site is always ready to be restored."
 msgstr "自動化即時備份功能，讓你隨時可以復原整個網站。"
 
-#: _inc/jetpack-strings.php:446 class.jetpack-connection-banner.php:271
+#: _inc/jetpack-strings.php:478 class.jetpack-connection-banner.php:271
 #: class.jetpack-connection-banner.php:331
 #: class.jetpack-connection-banner.php:385
 #: class.jetpack-connection-banner.php:439
@@ -1079,11 +1171,11 @@ msgstr "自動化即時備份功能，讓你隨時可以復原整個網站。"
 msgid "Set up Jetpack"
 msgstr "設定 Jetpack"
 
-#: _inc/jetpack-strings.php:403 _inc/jetpack-strings.php:480
+#: _inc/jetpack-strings.php:427 _inc/jetpack-strings.php:514
 msgid "Speed up your site"
 msgstr "為網站加速"
 
-#: _inc/jetpack-strings.php:70
+#: _inc/jetpack-strings.php:159
 msgid "Real-time backup of all your site data with unlimited space, one-click restores, and automated security scanning."
 msgstr "透過無限制空間、一鍵復原以及自動安全掃描功能，即時備份所有網站資料。"
 
@@ -1112,7 +1204,7 @@ msgid "cache hit"
 msgstr "快取命中次數"
 
 #: 3rd-party/debug-bar/class.jetpack-search-debug-bar.php:26
-#: _inc/jetpack-strings.php:650
+#: _inc/jetpack-strings.php:682
 msgid "Jetpack Search"
 msgstr "Jetpack 搜尋"
 
@@ -1209,56 +1301,56 @@ msgstr "擷取還原資料失敗。請稍後再試一次。"
 msgid "Rewind data correctly received."
 msgstr "已正確接收還原資料。"
 
-#: _inc/jetpack-strings.php:458
+#: _inc/jetpack-strings.php:491
 msgid "Jetpack version %(version)s"
 msgstr "Jetpack 版本 %(version)s"
 
-#: _inc/jetpack-strings.php:321
+#: _inc/jetpack-strings.php:345
 msgid "Replace WordPress built-in search with an improved search experience"
 msgstr "將 WordPress 內建搜尋功能更換為改良的搜尋體驗 (測試版)"
 
-#: _inc/jetpack-strings.php:241
+#: _inc/jetpack-strings.php:263
 msgid "Your site is being backed up in real time and regularly scanned for security threats."
 msgstr "你的網站已即時備份，並定期執行安全性威脅掃描。"
 
-#: _inc/jetpack-strings.php:66
+#: _inc/jetpack-strings.php:155
 msgid "Daily backup of all your site data with unlimited space and one-click restores"
 msgstr "透過無限制的空間每日備份所有網站資料，還有一鍵復原"
 
-#: _inc/jetpack-strings.php:68
+#: _inc/jetpack-strings.php:157
 msgid "Real-time backup of all your site data with unlimited space, one-click restores, automated security scanning, and priority support"
 msgstr "透過無限空間、一鍵復原、自動安全掃描功能及優先支援服務，即時備份所有網站資料。"
 
-#: _inc/jetpack-strings.php:71
+#: _inc/jetpack-strings.php:160
 msgid "View your security activity"
 msgstr "檢視安全性活動"
 
-#: _inc/jetpack-strings.php:73
+#: _inc/jetpack-strings.php:162
 msgid " (powered by VaultPress)."
 msgstr "(由 VaultPress 建置)。"
 
-#: _inc/jetpack-strings.php:88
+#: _inc/jetpack-strings.php:177
 msgid "Replace the default WordPress search with better results that will help your users find what they are looking for."
 msgstr "將預設的 WordPress 搜尋更換為更理想的結果，以協助你的使用者找到要尋找的內容。"
 
-#: _inc/jetpack-strings.php:89
+#: _inc/jetpack-strings.php:178
 msgid "Customize Search Widget"
 msgstr "自訂搜尋小工具"
 
-#: _inc/jetpack-strings.php:90
+#: _inc/jetpack-strings.php:179
 msgid "Activate Search"
 msgstr "啟用搜尋"
 
-#: _inc/jetpack-strings.php:65
+#: _inc/jetpack-strings.php:154
 msgid "Please correct the issue below and try again."
 msgid_plural "Please correct the issues listed below and try again."
 msgstr[0] "請更正以下列出的問題，然後再試一次。"
 
-#: _inc/jetpack-strings.php:213
+#: _inc/jetpack-strings.php:115
 msgid "We are making sure your site stays free of security threats. You will be notified if we find one."
 msgstr "我們會確保你的網站遠離安全性威脅。如果我們發現安全性威脅，你將收到通知。"
 
-#: _inc/jetpack-strings.php:165
+#: _inc/jetpack-strings.php:67
 msgid "Your site is being backed up in real-time."
 msgstr "你的網站會即時備份。"
 
@@ -1329,27 +1421,27 @@ msgstr "正在測試 %s 的連結"
 msgid "Checking status for %s"
 msgstr "正在檢查 %s 的狀態"
 
-#: _inc/jetpack-strings.php:681
+#: _inc/jetpack-strings.php:713
 msgid "Your Jetpack Professional plan is taking care of business!"
 msgstr "Jetpack 專業版方案會打點好公司的一切！"
 
-#: _inc/jetpack-strings.php:668
+#: _inc/jetpack-strings.php:700
 msgid "Your Jetpack Premium plan is powering up!"
 msgstr "你的 Jetpack 進階版方案已啟用！"
 
-#: _inc/jetpack-strings.php:659
+#: _inc/jetpack-strings.php:691
 msgid "Your Jetpack Personal plan is powering up!"
 msgstr "你的 Jetpack 個人版方案已啟用！"
 
-#: _inc/jetpack-strings.php:457
+#: _inc/jetpack-strings.php:490
 msgid "Jetpack version"
 msgstr "Jetpack 版本"
 
-#: _inc/jetpack-strings.php:146
+#: _inc/jetpack-strings.php:48
 msgid "{{a}}View your site's activity{{/a}} in a single feed."
 msgstr "以單一摘要方式{{a}}檢視網站活動{{/a}}。"
 
-#: _inc/jetpack-strings.php:147
+#: _inc/jetpack-strings.php:49
 msgid "Activity"
 msgstr "活動"
 
@@ -1489,11 +1581,11 @@ msgstr "圖庫類型。"
 msgid "The requested widget was not found."
 msgstr "找不到要求的小工具。"
 
-#: _inc/jetpack-strings.php:374
+#: _inc/jetpack-strings.php:398
 msgid "Confirm each new phrase you add by pressing enter."
 msgstr "按下 Enter 以逐個確認你新增的字詞。"
 
-#: _inc/jetpack-strings.php:245
+#: _inc/jetpack-strings.php:267
 msgid "{{a}}View details{{/a}}"
 msgstr "{{a}}查看詳細資訊{{/a}}"
 
@@ -1564,67 +1656,67 @@ msgstr "上線無法處理：%s"
 msgid "Not valid onboarding data."
 msgstr "不是有效的上線資料。"
 
-#: _inc/jetpack-strings.php:671
+#: _inc/jetpack-strings.php:703
 msgid "With Jetpack Professional, you can create the perfect site with one of over 300 professionally-designed WordPress themes, including more than 200 premium themes. Customize your content with a variety of widgets, or add unlimited videos to your posts and pages -- displayed free of ads or watermarks."
 msgstr "使用 Jetpack 專業版，你便可以建立完美的網站，其中有超過 300 種專業設計的 WordPress 佈景主題，包括超過 100 種進階版佈景主題。使用各種小工具自訂你的內容，或將無限制的影片新增到你的文章和頁面 -- 不顯示任何廣告或浮水印。"
 
-#: _inc/jetpack-strings.php:674 _inc/jetpack-strings.php:683
+#: _inc/jetpack-strings.php:706 _inc/jetpack-strings.php:715
 msgid "Growing your following is easy with your Professional plan, thanks to content sharing and scheduling, SEO tools, and built-in subscription options. You can monetize your site with a simple payment button and in-line ads, and monitor the success of your efforts by integrating with Google Analytics."
 msgstr "使用專業版方案的內容分享和排程、SEO 工具，以及內建的訂閱選項，可以輕鬆提高你的曝光追蹤。你可以利用簡單的付款按鈕和內置廣告來賺取網站獲利，並透過與 Google Analytics 整合，來監控你付出的努力是否獲得成效。"
 
-#: _inc/jetpack-strings.php:675
+#: _inc/jetpack-strings.php:707
 msgid "Start exploring Jetpack Professional now to see all the benefits of your new plan."
 msgstr "開始探索 Jetpack 專業版，瞭解新方案的所有優點。"
 
-#: _inc/jetpack-strings.php:676
+#: _inc/jetpack-strings.php:708
 msgid "Install premium themes"
 msgstr "安裝進階版佈景主題"
 
-#: _inc/jetpack-strings.php:679
+#: _inc/jetpack-strings.php:711
 msgid "Review SEO features"
 msgstr "檢閱 SEO 功能"
 
-#: _inc/jetpack-strings.php:680
+#: _inc/jetpack-strings.php:712
 msgid "Welcome Professional"
 msgstr "歡迎使用專業版"
 
-#: _inc/jetpack-strings.php:660
+#: _inc/jetpack-strings.php:692
 msgid "Thanks for choosing Jetpack Premium. Jetpack is now backing up your site, scanning for  security threats, and enabling monetization features."
 msgstr "感謝你選擇 Jetpack 進階版方案。Jetpack 現在正在備份你的網站、掃描安全性威脅，並啟用獲利功能。"
 
-#: _inc/jetpack-strings.php:662
+#: _inc/jetpack-strings.php:694
 msgid "With Jetpack Premium, you can create the perfect site, no matter its purpose. Customize your site’s appearance with one of more than 100 free themes, or enhance your content with unlimited HD video -- all hosted free of ads or watermarks."
 msgstr "你可以使用 Jetpack 進階版打造完美的網站，無論其用途為何。使用 200 種以上的免費佈景主題自訂你的網站外觀，或使用高達 13 GB 的高畫質影片來增強內容 -- 全部皆以沒有任何廣告或浮水印的方式託管。"
 
-#: _inc/jetpack-strings.php:664
+#: _inc/jetpack-strings.php:696
 msgid "Using Jetpack’s powerful sharing tools, you can automatically share your newest posts on social media, or schedule your content to be re-shared at any date or time you choose. And along with growing your following, you can grow your business with tools like payment buttons and ads."
 msgstr "你可以使用 Jetpack 功能強大的分享工具，在社交媒體上分享最新文章，也可以將內容安排在由你選擇的任何日期或時間重新分享。隨著曝光追蹤不斷增加，你可以使用付款按鈕和廣告等工具來拓展你的業務。"
 
-#: _inc/jetpack-strings.php:665
+#: _inc/jetpack-strings.php:697
 msgid "Start exploring Jetpack Premium now to see all the benefits of your new plan."
 msgstr "開始探索 Jetpack 進階版，瞭解新方案的所有優點。"
 
-#: _inc/jetpack-strings.php:666 _inc/jetpack-strings.php:677
+#: _inc/jetpack-strings.php:698 _inc/jetpack-strings.php:709
 msgid "Monetize your site with ads"
 msgstr "利用網站廣告獲利"
 
-#: _inc/jetpack-strings.php:667
+#: _inc/jetpack-strings.php:699
 msgid "Welcome Premium"
 msgstr "歡迎使用進階版"
 
-#: _inc/jetpack-strings.php:654
+#: _inc/jetpack-strings.php:686
 msgid "Thanks for choosing Jetpack Personal. Jetpack is now backing up your site and scanning for security threats."
 msgstr "感謝你選擇 Jetpack 個人版方案。Jetpack 現在正在備份你的網站，並掃描安全性威脅。"
 
-#: _inc/jetpack-strings.php:656
+#: _inc/jetpack-strings.php:688
 msgid "With Jetpack Personal, you have access to more than 100 free, professionally-designed WordPress themes. Choose the theme that best fits your site and customize colors, images, or add a variety of new widgets."
 msgstr "使用 Jetpack 個人版，你便可以存取超過 100 種免費的專業設計 WordPress 佈景主題。選擇最適合你網站的佈景主題，並自訂顏色、圖片，或新增各種新的小工具。"
 
-#: _inc/jetpack-strings.php:657
+#: _inc/jetpack-strings.php:689
 msgid "Got it!"
 msgstr "知道了！"
 
-#: _inc/jetpack-strings.php:658
+#: _inc/jetpack-strings.php:690
 msgid "Welcome personal"
 msgstr "歡迎使用個人版"
 
@@ -2015,127 +2107,127 @@ msgstr "是否要在首頁上顯示廣告？?"
 msgid "Display second ad below post?"
 msgstr "是否要在文章下方顯示第二則廣告？"
 
-#: _inc/jetpack-strings.php:636
+#: _inc/jetpack-strings.php:668
 msgid "Introducing Unlimited Themes"
 msgstr "推出無限使用佈景主題"
 
-#: _inc/jetpack-strings.php:637
+#: _inc/jetpack-strings.php:669
 msgid "{{subhead}}Only with Jetpack Professional{{/subhead}}{{p}}Protect your site and work with Jetpack Personal: daily automated backups, unlimited storage, and expert priority support. Security essentials for every WordPress site starting from $3.50.{{/p}}{{p}}Or go Pro with more than 200 Premium Themes, business class security, unlimited video hosting, monetization, marketing automation, and SEO tools.{{/p}}"
 msgstr "{{subhead}}Jetpack 專業版獨享{{/subhead}}{{p}}保護你的網站，並可搭配 Jetpack 個人方案使用：每日自動備份、無限儲存空間，還可享有專家提供的優先支援服務。所有 WordPress 網站必備的安全性功能，只要 $3.50 美元起。{{/p}}{{p}}還可升級至專業版，獲得超過 200 個進階版佈景主題、企業級安全性服務、無限量影片託管、獲利機會、自動行銷和 SEO 工具等功能。{{/p}}"
 
-#: _inc/jetpack-strings.php:638
+#: _inc/jetpack-strings.php:670
 msgid "Explore Professional"
 msgstr "探索專業版功能"
 
-#: _inc/jetpack-strings.php:639
+#: _inc/jetpack-strings.php:671
 msgid "Compare All Plans"
 msgstr "比較所有方案"
 
-#: _inc/jetpack-strings.php:567
+#: _inc/jetpack-strings.php:599
 msgid "Person with laptop"
 msgstr "使用筆記型電腦的訪客"
 
-#: _inc/jetpack-strings.php:568
+#: _inc/jetpack-strings.php:600
 msgid "Your Jetpack site is ready to go!"
 msgstr "你的 Jetpack 網站已經準備就緒！"
 
-#: _inc/jetpack-strings.php:564
+#: _inc/jetpack-strings.php:596
 msgid "We're now collecting stats, securing your site, and speeding up your images. Pretty soon you'll be able to see everything going on with your site right through Jetpack! Welcome aboard."
 msgstr "我們正在收集統計資料、加強保護網站，並加速顯示圖片。很快你就能在自己的網站上透過 Jetpack 啟用所有服務！歡迎加入。"
 
-#: _inc/jetpack-strings.php:543
+#: _inc/jetpack-strings.php:575
 msgid "Connect your account to get the most out of Jetpack"
 msgstr "將帳號連結到 WordPress.com，即可更完善地運用 Jetpack 的功能"
 
-#: _inc/jetpack-strings.php:508
+#: _inc/jetpack-strings.php:499
 msgid "Stars"
 msgstr "星星"
 
-#: _inc/jetpack-strings.php:509
+#: _inc/jetpack-strings.php:500
 msgid "Jupiter"
 msgstr "木星"
 
-#: _inc/jetpack-strings.php:700
+#: _inc/jetpack-strings.php:457
 msgid "Jetpack Stats People"
 msgstr "Jetpack 統計使用者"
 
-#: _inc/jetpack-strings.php:701
+#: _inc/jetpack-strings.php:458
 msgid "Hello there! Your stats have been activated."
 msgstr "你好！你的統計功能已啟用。"
 
-#: _inc/jetpack-strings.php:702
+#: _inc/jetpack-strings.php:459
 msgid "Just give us a little time to collect data so we can display it for you here."
 msgstr "請稍候片刻，待我們收集完資料，很快就會在這裡顯示統計資料。"
 
-#: _inc/jetpack-strings.php:703
+#: _inc/jetpack-strings.php:460
 msgid "Okay, got it!"
 msgstr "了解！"
 
-#: _inc/jetpack-strings.php:290
+#: _inc/jetpack-strings.php:314
 msgid "Display ads below posts on"
 msgstr "在文章下方顯示廣告"
 
-#: _inc/jetpack-strings.php:294
+#: _inc/jetpack-strings.php:318
 msgid "Archives"
 msgstr "封存"
 
-#: _inc/jetpack-strings.php:295
+#: _inc/jetpack-strings.php:319
 msgid "Additional ad placements"
 msgstr "其他廣告版位"
 
-#: _inc/jetpack-strings.php:296
+#: _inc/jetpack-strings.php:320
 msgid "Top of each page"
 msgstr "每個頁面的頂端"
 
-#: _inc/jetpack-strings.php:297
+#: _inc/jetpack-strings.php:321
 msgid "Second ad below post"
 msgstr "文章下方的第二則廣告"
 
-#: _inc/jetpack-strings.php:248
+#: _inc/jetpack-strings.php:270
 msgid "Your site is backed up."
 msgstr "你的網站已備份。"
 
-#: _inc/jetpack-strings.php:138
+#: _inc/jetpack-strings.php:227
 msgid "Welcome to Jetpack Personal"
 msgstr "歡迎使用 Jetpack 個人方案"
 
-#: _inc/jetpack-strings.php:140
+#: _inc/jetpack-strings.php:229
 msgid "Welcome to Jetpack Premium"
 msgstr "歡迎使用 Jetpack 進階版"
 
-#: _inc/jetpack-strings.php:142
+#: _inc/jetpack-strings.php:231
 msgid "Welcome to Jetpack Professional"
 msgstr "歡迎使用 Jetpack 專業版"
 
-#: _inc/jetpack-strings.php:76
+#: _inc/jetpack-strings.php:165
 msgid "Unlimited Premium Themes"
 msgstr "無限使用進階版佈景主題"
 
-#: _inc/jetpack-strings.php:77
+#: _inc/jetpack-strings.php:166
 msgid "Exclusive hand-crafted designs you will love with dedicated support directly from the theme authors."
 msgstr "由佈景主題作者直接提供專屬支援，你一定會喜歡這些獨特設計。"
 
-#: _inc/jetpack-strings.php:91
+#: _inc/jetpack-strings.php:180
 msgid "Social Media Scheduling"
 msgstr "社交媒體排程"
 
-#: _inc/jetpack-strings.php:92
+#: _inc/jetpack-strings.php:181
 msgid "Schedule multiple Facebook, Twitter, and other social media postings in advance and view share history stats."
 msgstr "事先排程多篇要在 Facebook、Twitter 和其他社交媒體上發佈的文章，並查看分享記錄統計資料。"
 
-#: _inc/jetpack-strings.php:93
+#: _inc/jetpack-strings.php:182
 msgid "Schedule Posts"
 msgstr "排程文章"
 
-#: _inc/jetpack-strings.php:94
+#: _inc/jetpack-strings.php:183
 msgid "Activate Publicize"
 msgstr "啟用 Publicize"
 
-#: _inc/jetpack-strings.php:115
+#: _inc/jetpack-strings.php:204
 msgid "Explore Jetpack Professional"
 msgstr "探索 Jetpack 專業版"
 
-#: _inc/jetpack-strings.php:184
+#: _inc/jetpack-strings.php:86
 msgid "Image Performance"
 msgstr "圖片效能"
 
@@ -2242,89 +2334,55 @@ msgstr "將 Flickr RSS URL 欄位留白，即可顯示<a target=\"_blank\" href=
 msgid "Flickr RSS URL:"
 msgstr "Flickr RSS URL："
 
-#: modules/widgets/eu-cookie-law.php:128
-msgid "Privacy & Cookies: This site uses cookies."
-msgstr "隱私權與 Cookie：此網站可使用 Cookie。"
-
-#: modules/widgets/eu-cookie-law.php:127
+#: modules/widgets/eu-cookie-law.php:121
 msgid "Close and accept"
 msgstr "關閉並接受"
 
-#: modules/widgets/eu-cookie-law.php:126
-msgid "Our Cookie Policy"
-msgstr "我們的 Cookie 政策"
-
-#: modules/widgets/eu-cookie-law.php:81
-msgid "Display a banner for compliance with the EU Cookie Law."
-msgstr "顯示橫幅以表示遵循歐盟 Cookie 法律。"
-
-#: modules/widgets/eu-cookie-law.php:79
-msgid "EU Cookie Law Banner"
-msgstr "歐盟 Cookie 法律橫幅"
-
-#: modules/widgets/eu-cookie-law/widget.php:16
-msgid "To find out more, as well as how to remove or block these, see here:"
-msgstr "如需更多資訊，以及如何移除或封鎖這些，請參閱："
-
-#: modules/widgets/eu-cookie-law/form.php:193
+#: modules/widgets/eu-cookie-law/form.php:243
 msgid "Click here for more information"
 msgstr "按一下這裡以取得更多資訊"
 
-#: modules/widgets/eu-cookie-law/form.php:191
+#: modules/widgets/eu-cookie-law/form.php:241
 msgid "It is your own responsibility to ensure that your site complies with the relevant laws."
 msgstr "你須自行負責確保你的網站內容遵循相關法律。"
 
-#: modules/widgets/eu-cookie-law/form.php:178
+#: modules/widgets/eu-cookie-law/form.php:111
 msgid "Button text"
 msgstr "按鈕文字"
 
-#: modules/widgets/eu-cookie-law/form.php:162
-msgid "Policy link text"
-msgstr "政策連結文字"
-
-#: modules/widgets/eu-cookie-law/form.php:124
-msgid "Policy URL"
-msgstr "政策 URL"
-
-#: modules/widgets/eu-cookie-law/form.php:77
-#: modules/widgets/eu-cookie-law/form.php:146
+#: modules/widgets/eu-cookie-law/form.php:25
 msgid "Custom:"
 msgstr "自訂："
 
-#: modules/widgets/eu-cookie-law/form.php:55
+#: modules/widgets/eu-cookie-law/form.php:3
 msgid "Banner text"
 msgstr "橫幅文字"
 
-#: modules/widgets/eu-cookie-law/form.php:36
+#: modules/widgets/eu-cookie-law/form.php:163
 msgid "after this amount of time"
 msgstr "在經過下列時間後"
 
-#: modules/widgets/eu-cookie-law/form.php:25
+#: modules/widgets/eu-cookie-law/form.php:151
 msgid "after the user scrolls the page"
 msgstr "在使用者捲動頁面後"
 
-#: modules/widgets/eu-cookie-law/form.php:14
+#: modules/widgets/eu-cookie-law/form.php:139
 msgid "after the user clicks the dismiss button"
 msgstr "在使用者按一下「關閉」按鈕後"
 
-#: modules/widgets/eu-cookie-law/form.php:3
-msgctxt "action"
-msgid "Hide the banner"
-msgstr "隱藏橫幅"
-
-#: _inc/jetpack-strings.php:439
+#: _inc/jetpack-strings.php:471
 msgid "Get WordPress Apps for every device"
 msgstr "下載適用於各種裝置的 WordPress 應用程式"
 
-#: _inc/jetpack-strings.php:440
+#: _inc/jetpack-strings.php:472
 msgid "Manage all your sites from a single dashboard: publish content, track stats, moderate comments, and so much more from anywhere in the world."
 msgstr "從單一儀表板管理所有網站：無論你身在何處，都可以發表內容、追蹤統計數據、審核留言，還能使用其他許多功能。"
 
-#: _inc/jetpack-strings.php:442
+#: _inc/jetpack-strings.php:474
 msgid "I already use this app."
 msgstr "我已經使用此應用程式。"
 
-#: _inc/jetpack-strings.php:401
+#: _inc/jetpack-strings.php:425
 msgid "Create address"
 msgstr "建立位址"
 
@@ -2502,7 +2560,7 @@ msgstr "新增"
 msgid "People"
 msgstr "使用者"
 
-#: modules/masterbar/masterbar.php:873
+#: modules/masterbar/masterbar.php:868
 msgctxt "admin bar customize item label"
 msgid "Customize"
 msgstr "自訂"
@@ -2517,7 +2575,7 @@ msgctxt "Button label for adding a new item via the toolbar menu"
 msgid "Add"
 msgstr "新增"
 
-#: _inc/jetpack-strings.php:293
+#: _inc/jetpack-strings.php:317
 msgid "Pages"
 msgstr "頁面"
 
@@ -2689,561 +2747,561 @@ msgstr "顏色配置。"
 msgid "Error fetching static.html. Try running: "
 msgstr "擷取 static.html 時發生錯誤。請嘗試執行："
 
-#: _inc/jetpack-strings.php:626
+#: _inc/jetpack-strings.php:658
 msgid "We're here to help"
 msgstr "我們樂意提供協助"
 
-#: _inc/jetpack-strings.php:627
+#: _inc/jetpack-strings.php:659
 msgid "Jetpack comes with free, basic support for all users."
 msgstr "Jetpack 為所有使用者提供免費的基本支援。"
 
-#: _inc/jetpack-strings.php:628
+#: _inc/jetpack-strings.php:660
 msgid "Your paid plan gives you access to prioritized Jetpack support."
 msgstr "你的付費方案給予你優先的 Jetpack 支援。"
 
-#: _inc/jetpack-strings.php:629
+#: _inc/jetpack-strings.php:661
 msgid "Ask a question"
 msgstr "提出疑問"
 
-#: _inc/jetpack-strings.php:630
+#: _inc/jetpack-strings.php:662
 msgid "Search our support site"
 msgstr "搜尋我們的支援網站"
 
-#: _inc/jetpack-strings.php:631
+#: _inc/jetpack-strings.php:663
 msgid "Get a faster resolution to your support questions."
 msgstr "讓您的支援問題更快獲得解決。"
 
-#: _inc/jetpack-strings.php:615
+#: _inc/jetpack-strings.php:647
 msgctxt "A caption for a button to upgrade an existing paid feature to a higher tier."
 msgid "Upgrade"
 msgstr "升級"
 
-#: _inc/jetpack-strings.php:616
+#: _inc/jetpack-strings.php:648
 msgid "Host fast, high-quality, ad-free video."
 msgstr "託管快速、高品質、無廣告的影片。"
 
-#: _inc/jetpack-strings.php:617
+#: _inc/jetpack-strings.php:649
 msgid "Generate income with high-quality ads."
 msgstr "以高品質廣告賺取收入。"
 
-#: _inc/jetpack-strings.php:618
+#: _inc/jetpack-strings.php:650
 msgid "Real-time site backups and automatic threat resolution."
 msgstr "即時網站備份與自動排除威脅。"
 
-#: _inc/jetpack-strings.php:619
+#: _inc/jetpack-strings.php:651
 msgid "Protect against data loss, malware, and malicious attacks."
 msgstr "防禦資料遺失、惡意軟體及惡意攻擊。"
 
-#: _inc/jetpack-strings.php:620
+#: _inc/jetpack-strings.php:652
 msgid "Integrate easily with Google Analytics."
 msgstr "輕鬆與 Google Analytics (分析) 進行整合。"
 
-#: _inc/jetpack-strings.php:621
+#: _inc/jetpack-strings.php:653
 msgid "Help your content get found and shared with SEO tools."
 msgstr "使用 SEO 工具協助他人找到及分享您的內容。"
 
-#: _inc/jetpack-strings.php:623
+#: _inc/jetpack-strings.php:655
 msgid "Protect your site from spam."
 msgstr "保護您的網站不受垃圾訊息攻擊。"
 
-#: _inc/jetpack-strings.php:624
+#: _inc/jetpack-strings.php:656
 msgctxt "Button caption"
 msgid "Saving…"
 msgstr "正在儲存..."
 
-#: _inc/jetpack-strings.php:625
+#: _inc/jetpack-strings.php:657
 msgctxt "Button caption"
 msgid "Save settings"
 msgstr "儲存設定"
 
-#: _inc/jetpack-strings.php:578
+#: _inc/jetpack-strings.php:609
 msgctxt "A header for a block of related posts."
 msgid "Related"
 msgstr "相關"
 
-#: _inc/jetpack-strings.php:582
+#: _inc/jetpack-strings.php:613
 msgctxt "Noun, a header for a preview block in a configuration screen."
 msgid "Preview"
 msgstr "預覽"
 
-#: _inc/jetpack-strings.php:545
+#: _inc/jetpack-strings.php:577
 msgid "This site is not connected to WordPress.com. Please ask the site administrator to connect."
 msgstr "此網站未與 WordPress.com 連結。請要求網站管理員連結。"
 
-#: _inc/jetpack-strings.php:512
+#: _inc/jetpack-strings.php:544
 msgid "Spam filtering"
 msgstr "過濾垃圾訊息"
 
-#: _inc/jetpack-strings.php:514
+#: _inc/jetpack-strings.php:546
 msgid "Daily, automated malware scanning"
 msgstr "每日自動掃描惡意軟體"
 
-#: _inc/jetpack-strings.php:516
+#: _inc/jetpack-strings.php:548
 msgid "13Gb of high-speed video hosting"
 msgstr "13 GB 的高速影片託管"
 
-#: _inc/jetpack-strings.php:510 _inc/jetpack-strings.php:513
-#: _inc/jetpack-strings.php:517
+#: _inc/jetpack-strings.php:542 _inc/jetpack-strings.php:545
+#: _inc/jetpack-strings.php:549
 msgid "Daily, automated backups (unlimited storage)"
 msgstr "每日自動備份 (無限儲存空間)"
 
-#: _inc/jetpack-strings.php:518
+#: _inc/jetpack-strings.php:550
 msgid "Daily, automated malware scanning with automated resolution"
 msgstr "每日自動掃描惡意軟體，並自動排除威脅"
 
-#: _inc/jetpack-strings.php:511 _inc/jetpack-strings.php:515
-#: _inc/jetpack-strings.php:519
+#: _inc/jetpack-strings.php:543 _inc/jetpack-strings.php:547
+#: _inc/jetpack-strings.php:551
 msgid "Priority support"
 msgstr "優先支援服務"
 
-#: _inc/jetpack-strings.php:520
+#: _inc/jetpack-strings.php:552
 msgid "Unlimited high-speed video hosting"
 msgstr "無限高速影片託管"
 
-#: _inc/jetpack-strings.php:521
+#: _inc/jetpack-strings.php:553
 msgid "SEO preview tools"
 msgstr "SEO 預覽工具"
 
-#: _inc/jetpack-strings.php:522
+#: _inc/jetpack-strings.php:554
 msgid "Site stats, related content, and sharing tools"
 msgstr "網站統計資料、相關內容與分享工具"
 
-#: _inc/jetpack-strings.php:524
+#: _inc/jetpack-strings.php:556
 msgid "Unlimited, high-speed image hosting"
 msgstr "無限高速圖片託管"
 
-#: _inc/jetpack-strings.php:526
+#: _inc/jetpack-strings.php:558
 msgid "By disconnecting %(siteName)s from WordPress.com you will no longer have access to the following:"
 msgstr "中斷 %(siteName)s 與 WordPress.com 的連結後，您將無法再存取下列項目："
 
-#: _inc/jetpack-strings.php:527
+#: _inc/jetpack-strings.php:559
 msgctxt "A caption for a button to cancel disconnection."
 msgid "Stay connected"
 msgstr "保持連結"
 
-#: _inc/jetpack-strings.php:528
+#: _inc/jetpack-strings.php:560
 msgctxt "A caption for a button to disconnect."
 msgid "Disconnect"
 msgstr "中斷連結"
 
-#: _inc/jetpack-strings.php:529
+#: _inc/jetpack-strings.php:561
 msgid "Read more about Jetpack benefits"
 msgstr "深入瞭解 Jetpack 的優點"
 
-#: _inc/jetpack-strings.php:455
+#: _inc/jetpack-strings.php:488
 msgctxt "Navigation item."
 msgid "Dev Tools"
 msgstr "開發工具"
 
-#: _inc/jetpack-strings.php:456
+#: _inc/jetpack-strings.php:489
 msgid "An Automattic Airline"
 msgstr "一個 Automattic 主公司"
 
-#: _inc/jetpack-strings.php:448
+#: _inc/jetpack-strings.php:480
 msgctxt "Short warning message"
 msgid "Updates needed"
 msgstr "需要更新"
 
-#: _inc/jetpack-strings.php:450
+#: _inc/jetpack-strings.php:482
 msgctxt "Short label appearing near a paid feature configuration block."
 msgid "Paid"
 msgstr "付費"
 
-#: _inc/jetpack-strings.php:445
+#: _inc/jetpack-strings.php:477
 msgid "Manage site connection"
 msgstr "管理網站連結"
 
-#: _inc/jetpack-strings.php:696
+#: _inc/jetpack-strings.php:453
 msgid "Connect your account to WordPress.com to view more stats"
 msgstr "將您的帳號與 WordPress.com 連結，即可查看更多統計資料"
 
-#: _inc/jetpack-strings.php:406
+#: _inc/jetpack-strings.php:430
 msgid "Theme enhancements"
 msgstr "佈景主題增強項目"
 
-#: _inc/jetpack-strings.php:408
+#: _inc/jetpack-strings.php:432
 msgid "Load more posts using the default theme behavior"
 msgstr "使用預設佈景主題行為載入更多文章"
 
-#: _inc/jetpack-strings.php:409
+#: _inc/jetpack-strings.php:433
 msgid "Load more posts in page with a button"
 msgstr "使用按鈕在頁面中載入更多文章"
 
-#: _inc/jetpack-strings.php:410
+#: _inc/jetpack-strings.php:434
 msgid "Load more posts as the reader scrolls down"
 msgstr "隨著讀者向下捲動頁面載入更多文章"
 
-#: _inc/jetpack-strings.php:411
+#: _inc/jetpack-strings.php:435
 msgid "Theme support required."
 msgstr "需要佈景主題支援。"
 
-#: _inc/jetpack-strings.php:412
+#: _inc/jetpack-strings.php:436
 msgid "Learn more about adding support for Infinite Scroll to your theme."
 msgstr "可於佈景主題中加入無限捲動支援。立即深入瞭解。"
 
-#: _inc/jetpack-strings.php:415
+#: _inc/jetpack-strings.php:439
 msgid "Use excerpts instead of full posts on front page and archive pages"
 msgstr "在首頁和存檔頁面使用摘要而非全文"
 
-#: _inc/jetpack-strings.php:416
+#: _inc/jetpack-strings.php:440
 msgid "Show featured images"
 msgstr "顯示特色圖片"
 
-#: _inc/jetpack-strings.php:385
+#: _inc/jetpack-strings.php:409
 msgctxt "Settings header"
 msgid "WordPress.com toolbar"
 msgstr "WordPress.com 工具列"
 
-#: _inc/jetpack-strings.php:387
+#: _inc/jetpack-strings.php:411
 msgid "Enable the WordPress.com toolbar"
 msgstr "啟用 WordPress.com 工具列"
 
-#: _inc/jetpack-strings.php:388
+#: _inc/jetpack-strings.php:412
 msgid "The WordPress.com toolbar replaces the default admin bar and offers quick links to the Reader, all your sites, your WordPress.com profile, and notifications. Centralize your WordPress experience with a single global toolbar."
 msgstr "WordPress.com 工具列會取代預設管理員列，並提供讀取器、您的所有網站、您的 WordPress.com 個人檔案與通知的快速連結。使用單一全域工具列，把所需功能集中在此，盡享 WordPress 絕佳體驗。"
 
-#: _inc/jetpack-strings.php:384
+#: _inc/jetpack-strings.php:408
 msgid "Writing tools available to you will be shown here when an administrator enables them."
 msgstr "管理員啟用撰寫工具時，您的可用撰寫工具會顯示在這裡。"
 
-#: _inc/jetpack-strings.php:380
+#: _inc/jetpack-strings.php:404
 msgid "Add, organize, and display {{testimonialLink}}testimonials{{/testimonialLink}}. If your theme doesn’t support testimonials yet, you can display them using the shortcode\t( [testimonials] )."
 msgstr "新增、整理及顯示{{testimonialLink}}證言{{/testimonialLink}}。如果你的佈景主題還不支援證言，你可以使用簡碼 \t( [證言] ) 來加以顯示。"
 
-#: _inc/jetpack-strings.php:382
+#: _inc/jetpack-strings.php:406
 msgid "Portfolios"
 msgstr "作品集"
 
-#: _inc/jetpack-strings.php:383
+#: _inc/jetpack-strings.php:407
 msgid "Add, organize, and display {{portfolioLink}}portfolios{{/portfolioLink}}. If your theme doesn’t support portfolios yet, you can display them using the shortcode ( [portfolio] )."
 msgstr "新增、整理及顯示{{portfolioLink}}個人作品集{{/portfolioLink}}。如果你的佈景主題還不支援個人作品集，你可以使用簡碼 ( [portfolios] ) 來加以顯示。"
 
-#: _inc/jetpack-strings.php:376
+#: _inc/jetpack-strings.php:400
 msgctxt "Settings header"
 msgid "Composing"
 msgstr "撰寫"
 
-#: _inc/jetpack-strings.php:347
+#: _inc/jetpack-strings.php:371
 msgid "Note that {{b}}verifying your site with these services is not necessary{{/b}} in order for your site to be indexed by search engines. To use these advanced search engine tools and verify your site with a service, paste the HTML Tag code below. Read the {{support}}full instructions{{/support}} if you are having trouble. Supported verification services: {{google}}Google Search Console{{/google}}, {{bing}}Bing Webmaster Center{{/bing}}, {{pinterest}}Pinterest Site Verification{{/pinterest}}, and {{yandex}}Yandex.Webmaster{{/yandex}}."
 msgstr "請注意，{{b}}不一定要使用這些服務驗證你的網站{{/b}}，才可以讓搜尋引擎將你的網站加入索引。若要使用進階搜尋引擎工具，並以提供的服務驗證你的網站，請在下方貼上 HTML 標籤程式碼。如果遇到任何問題，請閱讀{{support}}完整指示{{/support}}。支援的驗證服務：{{google}}Google Search Console{{/google}}、{{bing}}Bing Webmaster Center{{/bing}}、{{pinterest}}Pinterest Site Verification{{/pinterest}} 及 {{yandex}}Yandex.Webmaster{{/yandex}}。"
 
-#: _inc/jetpack-strings.php:349
+#: _inc/jetpack-strings.php:373
 msgid "Bing"
 msgstr "Bing"
 
-#: _inc/jetpack-strings.php:351
+#: _inc/jetpack-strings.php:375
 msgid "Yandex"
 msgstr "Yandex"
 
-#: _inc/jetpack-strings.php:341
+#: _inc/jetpack-strings.php:365
 msgid "Generate XML sitemaps"
 msgstr "產生 XML 網站地圖"
 
-#: _inc/jetpack-strings.php:342
+#: _inc/jetpack-strings.php:366
 msgid "Your sitemap is automatically sent to all major search engines for indexing."
 msgstr "你的網站地圖已自動傳送至所有主要搜尋引擎進行索引。"
 
-#: _inc/jetpack-strings.php:343
+#: _inc/jetpack-strings.php:367
 msgid "Your site is not currently accessible to search engines. You might have \"Search Engine Visibility\" disabled in your {{a}}Reading Settings{{/a}}."
 msgstr "你的網站目前無法經由搜尋引擎進行存取。你可能已在{{a}}閱讀設定{{/a}}中停用「搜尋引擎可見度」。"
 
-#: _inc/jetpack-strings.php:332
+#: _inc/jetpack-strings.php:356
 msgctxt "Settings header"
 msgid "Site stats"
 msgstr "網站統計資料"
 
-#: _inc/jetpack-strings.php:333
+#: _inc/jetpack-strings.php:357
 msgid "Collecting valuable traffic stats and insights"
 msgstr "收集寶貴的流量統計資料和洞察報告"
 
-#: _inc/jetpack-strings.php:337
+#: _inc/jetpack-strings.php:361
 msgid "The image helps collect stats, but should work when hidden."
 msgstr "圖片有助於蒐集統計資料，但隱藏時應正常運作。"
 
-#: _inc/jetpack-strings.php:338
+#: _inc/jetpack-strings.php:362
 msgid "Count logged in page views from"
 msgstr "計算從下列時間起算的登入頁面瀏覽量："
 
-#: _inc/jetpack-strings.php:339
+#: _inc/jetpack-strings.php:363
 msgid "Allow stats reports to be viewed by"
 msgstr "可查看統計報告的使用者："
 
-#: _inc/jetpack-strings.php:324
+#: _inc/jetpack-strings.php:348
 msgctxt "Settings header"
 msgid "Search engine optimization"
 msgstr "搜尋引擎最佳化"
 
-#: _inc/jetpack-strings.php:326
+#: _inc/jetpack-strings.php:350
 msgid "You can tweak these settings if you'd like more advanced control. Read more about what you can do to {{a}}optimize your site's SEO{{/a}}."
 msgstr "如果你想要進一步控制，可以視需要調整這些設定。閱讀{{a}}最佳化你網站的 SEO{{/a}}深入瞭解相關做法。"
 
-#: _inc/jetpack-strings.php:327
+#: _inc/jetpack-strings.php:351
 msgid "Configure your SEO settings"
 msgstr "調整你的 SEO 設定"
 
-#: _inc/jetpack-strings.php:309
+#: _inc/jetpack-strings.php:333
 msgctxt "A header for a preview area in the configuration screen."
 msgid "Preview"
 msgstr "預覽"
 
 #. translators: It refers to the category where a post was found. Used in an
 #. example preview.
-#: _inc/jetpack-strings.php:319
+#: _inc/jetpack-strings.php:343
 msgid "In \"Upgrade\""
 msgstr "在「升級」中"
 
-#: _inc/jetpack-strings.php:300
+#: _inc/jetpack-strings.php:324
 msgctxt "Settings header"
 msgid "Google Analytics"
 msgstr "Google Analytics (分析)"
 
-#: _inc/jetpack-strings.php:303
+#: _inc/jetpack-strings.php:327
 msgid "Configure your Google Analytics settings"
 msgstr "調整你的 Google Analytics (分析) 設定"
 
-#: _inc/jetpack-strings.php:285
+#: _inc/jetpack-strings.php:309
 msgctxt "Ads header"
 msgid "Ads"
 msgstr "廣告"
 
-#: _inc/jetpack-strings.php:287
+#: _inc/jetpack-strings.php:311
 msgid "Show ads on the first article on your home page or at the end of every page and post. Place additional ads at the top of your site and to any widget area to increase your earnings."
 msgstr "在首頁的第一篇文章或每個頁面及文章的結尾顯示廣告。將其他廣告放在網站頂端及任何小工具區域，以增加你的收入。"
 
-#: _inc/jetpack-strings.php:289
+#: _inc/jetpack-strings.php:313
 msgid "Enable ads and display an ad below each post"
 msgstr "啟用廣告並在每篇文章底下顯示廣告"
 
-#: _inc/jetpack-strings.php:269
+#: _inc/jetpack-strings.php:293
 msgid "No search results found for %(term)s"
 msgstr "找不到「%(term)s」的搜尋結果"
 
-#: _inc/jetpack-strings.php:270
+#: _inc/jetpack-strings.php:294
 msgid "Enter a search term to find settings or close search."
 msgstr "輸入搜尋字詞以尋找設定或關閉搜尋。"
 
-#: _inc/jetpack-strings.php:265
+#: _inc/jetpack-strings.php:288
 msgctxt "Settings header"
 msgid "WordPress.com log in"
 msgstr "WordPress.com 登入"
 
-#: _inc/jetpack-strings.php:267
+#: _inc/jetpack-strings.php:290
 msgid "Match accounts using email addresses"
 msgstr "使用電子郵件地址比對帳號"
 
-#: _inc/jetpack-strings.php:268
+#: _inc/jetpack-strings.php:291
 msgid "Require accounts to use WordPress.com Two-Step Authentication"
 msgstr "需要帳號才能使用 WordPress.com 兩步驟驗證"
 
-#: _inc/jetpack-strings.php:259
+#: _inc/jetpack-strings.php:282
 msgctxt "Settings header"
 msgid "Brute force attack protection"
 msgstr "暴力破解密碼攻擊防護"
 
-#: _inc/jetpack-strings.php:262
+#: _inc/jetpack-strings.php:285
 msgid "Add to whitelist"
 msgstr "新增至允許清單"
 
-#: _inc/jetpack-strings.php:264
+#: _inc/jetpack-strings.php:287
 msgid "You may whitelist an IP address or series of addresses preventing them from ever being blocked by Jetpack. IPv4 and IPv6 are acceptable. To specify a range, enter the low value and high value separated by a dash. Example: 12.12.12.1-12.12.12.100"
 msgstr "你可在允許清單中新增 IP 位址或一系列的位址，以避免這些位址受到 Jetpack 封鎖。可接受 IPv4 和 IPv6。若要指定範圍，請輸入最低值及最高值，並以破折號分隔。範例：12.12.12.1-12.12.12.100"
 
-#: _inc/jetpack-strings.php:247
+#: _inc/jetpack-strings.php:269
 msgid "Your site is backed up and threat-free."
 msgstr "你的網站已備份，並已排除所有威脅。"
 
-#: _inc/jetpack-strings.php:249
+#: _inc/jetpack-strings.php:271
 msgid "You have paid for backups but they're not yet active."
 msgstr "你已購買備份功能，但尚未啟用。"
 
-#: _inc/jetpack-strings.php:251
+#: _inc/jetpack-strings.php:273
 msgid "You have paid for backups and security scanning but they’re not yet active."
 msgstr "你已購買備份及安全掃描功能，但尚未啟用。"
 
-#: _inc/jetpack-strings.php:250 _inc/jetpack-strings.php:252
+#: _inc/jetpack-strings.php:272 _inc/jetpack-strings.php:274
 msgid "Click \"Set Up\" to finish installation."
 msgstr "按一下「設定」以完成安裝。"
 
-#: _inc/jetpack-strings.php:238
+#: _inc/jetpack-strings.php:260
 msgid "Checking site status…"
 msgstr "正在檢查網站狀態..."
 
-#: _inc/jetpack-strings.php:236 _inc/jetpack-strings.php:242
-#: _inc/jetpack-strings.php:253
+#: _inc/jetpack-strings.php:258 _inc/jetpack-strings.php:264
+#: _inc/jetpack-strings.php:275
 msgctxt "Settings header"
 msgid "Backups and security scanning"
 msgstr "備份與安全掃描"
 
-#: _inc/jetpack-strings.php:224
+#: _inc/jetpack-strings.php:246
 msgid "Checking your spam protection…"
 msgstr "正在檢查你的垃圾訊息防護..."
 
-#: _inc/jetpack-strings.php:225
+#: _inc/jetpack-strings.php:247
 msgid "Fetching key…"
 msgstr "正在擷取金鑰..."
 
-#: _inc/jetpack-strings.php:226
+#: _inc/jetpack-strings.php:248
 msgid "Your site needs an Antispam key."
 msgstr "你的網站需要 Antispam 金鑰。"
 
-#: _inc/jetpack-strings.php:227
+#: _inc/jetpack-strings.php:249
 msgid "There's a problem with your Antispam API key. {{a}}Learn more{{/a}}."
 msgstr "你的 Antispam API 金鑰發生問題。{{a}}瞭解更多{{/a}}。"
 
-#: _inc/jetpack-strings.php:228
+#: _inc/jetpack-strings.php:250
 msgid "Your site is not protected from spam."
 msgstr "你的網站未啟用垃圾訊息防護。"
 
-#: _inc/jetpack-strings.php:229
+#: _inc/jetpack-strings.php:251
 msgid "Your Antispam key is valid."
 msgstr "你的 Antispam 金鑰有效。"
 
-#: _inc/jetpack-strings.php:230
+#: _inc/jetpack-strings.php:252
 msgid "Your site is protected from spam."
 msgstr "你的網站已啟用垃圾訊息防護。"
 
-#: _inc/jetpack-strings.php:231
+#: _inc/jetpack-strings.php:253
 msgid "Checking key…"
 msgstr "正在檢查金鑰..."
 
-#: _inc/jetpack-strings.php:232
+#: _inc/jetpack-strings.php:254
 msgctxt "Settings header"
 msgid "Spam filtering"
 msgstr "過濾垃圾訊息"
 
-#: _inc/jetpack-strings.php:234
+#: _inc/jetpack-strings.php:256
 msgid "Your API key"
 msgstr "你的 API 金鑰"
 
-#: _inc/jetpack-strings.php:235
+#: _inc/jetpack-strings.php:257
 msgid "If you don't already have an API key, then {{a}}get your API key here{{/a}}, and you'll be guided through the process of getting one."
 msgstr "如果你還沒有 API 金鑰，則請{{a}}到這裡取得你的 API 金鑰{{/a}}，系統會引導你完成申請程序。"
 
-#: _inc/jetpack-strings.php:279 _inc/jetpack-strings.php:280
+#: _inc/jetpack-strings.php:303 _inc/jetpack-strings.php:304
 msgid "Configure your sharing buttons"
 msgstr "設定你的分享按鈕"
 
-#: _inc/jetpack-strings.php:282
+#: _inc/jetpack-strings.php:306
 msgctxt "Settings header"
 msgid "Sharing buttons"
 msgstr "分享按鈕"
 
-#: _inc/jetpack-strings.php:284
+#: _inc/jetpack-strings.php:308
 msgid "Add sharing buttons to your posts"
 msgstr "將分享按鈕新增至你的文章"
 
-#: _inc/jetpack-strings.php:274
+#: _inc/jetpack-strings.php:298
 msgid "Connect your social media accounts"
 msgstr "連結你的社交媒體帳號"
 
-#: _inc/jetpack-strings.php:275 _inc/jetpack-strings.php:281
-#: _inc/jetpack-strings.php:389 _inc/jetpack-strings.php:402
+#: _inc/jetpack-strings.php:299 _inc/jetpack-strings.php:305
+#: _inc/jetpack-strings.php:413 _inc/jetpack-strings.php:426
 msgid "Connect your user account to WordPress.com to use this feature"
 msgstr "連結你的使用者帳號與 WordPress.com 即可使用這項功能"
 
-#: _inc/jetpack-strings.php:276
+#: _inc/jetpack-strings.php:300
 msgctxt "Settings header"
 msgid "Publicize connections"
 msgstr "Publicize 連結"
 
-#: _inc/jetpack-strings.php:278
+#: _inc/jetpack-strings.php:302
 msgid "Automatically share your posts to social networks"
 msgstr "自動將你的文章分享到社交網站"
 
-#: _inc/jetpack-strings.php:271
+#: _inc/jetpack-strings.php:295
 msgctxt "Settings header"
 msgid "Like buttons"
 msgstr "「讚」按鈕"
 
-#: _inc/jetpack-strings.php:273
+#: _inc/jetpack-strings.php:297
 msgid "Allow readers to show their appreciation of your posts by adding a like button to your content"
 msgstr "在你的內容中新增「讚」按鈕，以便讀者展現對你文章的欣賞之情"
 
-#: _inc/jetpack-strings.php:428
+#: _inc/jetpack-strings.php:235
 msgctxt "A caption for a small button to fix security issues."
 msgid "Threats"
 msgstr "威脅"
 
-#: _inc/jetpack-strings.php:429
+#: _inc/jetpack-strings.php:236
 msgctxt "Short warning message about new threats found."
 msgid "Threats found!"
 msgstr "找到威脅！"
 
-#: _inc/jetpack-strings.php:430
+#: _inc/jetpack-strings.php:237
 msgctxt "A caption for a small button to fix security issues."
 msgid "FIX"
 msgstr "修正"
 
-#: _inc/jetpack-strings.php:431
+#: _inc/jetpack-strings.php:238
 msgctxt "Short warning message about site having no security scan."
 msgid "No scanning"
 msgstr "無掃描"
 
-#: _inc/jetpack-strings.php:432
+#: _inc/jetpack-strings.php:239
 msgctxt "Caption for a button to purchase a paid feature."
 msgid "Upgrade"
 msgstr "升級"
 
-#: _inc/jetpack-strings.php:434
+#: _inc/jetpack-strings.php:241
 msgctxt "Short message informing user that the site is secure."
 msgid "Secure"
 msgstr "安全"
 
-#: _inc/jetpack-strings.php:435
+#: _inc/jetpack-strings.php:242
 msgctxt "Short warning message about an invalid key being used for Akismet."
 msgid "Invalid key"
 msgstr "無效的金鑰"
 
-#: _inc/jetpack-strings.php:438
+#: _inc/jetpack-strings.php:245
 msgctxt "Caption for a button to set up a feature."
 msgid "Set up"
 msgstr "設定"
 
-#: _inc/jetpack-strings.php:60
+#: _inc/jetpack-strings.php:137
 msgid "View your Email Followers"
 msgstr "查看你的電子郵件關注者"
 
-#: _inc/jetpack-strings.php:61
+#: _inc/jetpack-strings.php:138
 msgid "Connect your user account to WordPress.com to view your email followers"
 msgstr "將你的使用者帳號與 WordPress.com 連結，即可電子郵件關注者"
 
-#: _inc/jetpack-strings.php:52 _inc/jetpack-strings.php:392
+#: _inc/jetpack-strings.php:129 _inc/jetpack-strings.php:416
 #: _inc/lib/class.core-rest-api-endpoints.php:1324
-#: modules/widgets/eu-cookie-law/form.php:92
+#: modules/widgets/eu-cookie-law/form.php:210
 msgid "Color scheme"
 msgstr "顏色配置"
 
-#: _inc/jetpack-strings.php:55
+#: _inc/jetpack-strings.php:132
 msgid "Enable Markdown use for comments."
 msgstr "啟用 Markdown 的留言功能。"
 
-#: _inc/jetpack-strings.php:177
+#: _inc/jetpack-strings.php:79
 msgid "Connections"
 msgstr "連結"
 
-#: _inc/jetpack-strings.php:166
+#: _inc/jetpack-strings.php:68
 msgid "Your site is in Development Mode, so it can not be connected to WordPress.com."
 msgstr "你的網站目前為開發模式，因此無法連結 WordPress.com。"
 
-#: _inc/jetpack-strings.php:167
+#: _inc/jetpack-strings.php:69
 msgid "Your site is connected to WordPress.com."
 msgstr "你的網站已與 WordPress.com 連結。"
 
-#: _inc/jetpack-strings.php:168
+#: _inc/jetpack-strings.php:70
 msgid "You are the Jetpack owner."
 msgstr "你是 Jetpack 擁有者。"
 
 #. translators: %(username) is the WordPress user login name.
-#: _inc/jetpack-strings.php:171
+#: _inc/jetpack-strings.php:73
 msgid "Connected as {{span}}%(username)s{{/span}}"
 msgstr "已以 {{span}}%(username)s{{/span}} 的身分連結"
 
-#: _inc/jetpack-strings.php:173
+#: _inc/jetpack-strings.php:75
 msgctxt "Dashboard widget header"
 msgid "Site connection"
 msgstr "網站連結"
 
-#: _inc/jetpack-strings.php:174
+#: _inc/jetpack-strings.php:76
 msgctxt "Dashboard widget header"
 msgid "Account connection"
 msgstr "帳號連結"
@@ -3277,18 +3335,18 @@ msgctxt "Navigation item."
 msgid "Settings"
 msgstr "設定"
 
-#: _inc/jetpack-strings.php:8 _inc/jetpack-strings.php:610
+#: _inc/jetpack-strings.php:8 _inc/jetpack-strings.php:642
 msgctxt "Navigation item."
 msgid "Discussion"
 msgstr "討論"
 
-#: _inc/jetpack-strings.php:10 _inc/jetpack-strings.php:611
+#: _inc/jetpack-strings.php:10 _inc/jetpack-strings.php:643
 msgctxt "Navigation item."
 msgid "Traffic"
 msgstr "流量"
 
-#: _inc/jetpack-strings.php:12 _inc/jetpack-strings.php:609
-#: _inc/jetpack-strings.php:613
+#: _inc/jetpack-strings.php:12 _inc/jetpack-strings.php:641
+#: _inc/jetpack-strings.php:645
 msgctxt "Navigation item."
 msgid "Sharing"
 msgstr "分享"
@@ -3354,7 +3412,7 @@ msgstr "發佈到我的 <strong>Facebook 粉絲專頁</strong>進行宣傳："
 msgid "Publicize to my <strong>Facebook Wall</strong>:"
 msgstr "發佈到我的 <strong>Facebook 塗鴉牆</strong>進行宣傳："
 
-#: modules/contact-form/grunion-contact-form.php:224
+#: modules/contact-form/grunion-contact-form.php:228
 msgid "Export CSV"
 msgstr "匯出 CSV"
 
@@ -3398,23 +3456,23 @@ msgstr "將 Markdown 用於文章。"
 msgid "Track each scroll load (7 posts by default) as a page view in Google Analytics"
 msgstr "在 Google Analytics 追蹤每次捲動的文章載入 (預設為 7 篇文章)，將其視為網頁瀏覽次數"
 
-#: _inc/jetpack-strings.php:541
+#: _inc/jetpack-strings.php:573
 msgid "Currently in {{a}}Development Mode{{/a}} (some features are disabled) because: {{reasons/}}"
 msgstr "目前處於{{a}}開發模式{{/a}} (已停用部分功能)，因為："
 
-#: _inc/jetpack-strings.php:538
+#: _inc/jetpack-strings.php:570
 msgid "{{li}}The jetpack_development_mode filter is active{{/li}}"
 msgstr "{{li}}已啟用 jetpack_development_mode 篩選{{/li}}"
 
-#: _inc/jetpack-strings.php:539
+#: _inc/jetpack-strings.php:571
 msgid "{{li}}The JETPACK_DEV_DEBUG constant is defined{{/li}}"
 msgstr "{{li}}已定義 JETPACK_DEV_DEBUG 常數{{/li}}"
 
-#: _inc/jetpack-strings.php:540
+#: _inc/jetpack-strings.php:572
 msgid "{{li}}Your site URL lacks a dot (e.g. http://localhost){{/li}}"
 msgstr "{{li}}你的網站 URL 少了一個點 (例如：http://localhost){{/li}}"
 
-#: modules/wordads/php/widgets.php:36 modules/wordads/wordads.php:410
+#: modules/wordads/php/widgets.php:36 modules/wordads/wordads.php:415
 msgid "Advertisements"
 msgstr "廣告"
 
@@ -3449,35 +3507,35 @@ msgstr "你必須指定文章 ID"
 msgid "Nothing is in the queue: %s"
 msgstr "佇列中沒有東西：%s"
 
-#: _inc/jetpack-strings.php:302 _inc/jetpack-strings.php:594
+#: _inc/jetpack-strings.php:326 _inc/jetpack-strings.php:625
 msgid "Google Analytics is a free service that complements our {{a}}built-in stats{{/a}} with different insights into your traffic. WordPress.com stats and Google Analytics use different methods to identify and track activity on your site, so they will normally show slightly different totals for your visits, views, etc."
 msgstr "Google Analytics 這項免費服務可使用流量中的不同洞察報告來補充{{a}}內建統計資料{{/a}}。WordPress.com 統計資料與 Google Analytics 會透過不同方法來識別及追蹤你網站上的活動，所以它們顯示的總點閱次數、總瀏覽次數等資料通常會有些微差異。"
 
-#: _inc/jetpack-strings.php:595
+#: _inc/jetpack-strings.php:626
 msgid "Configure Google Analytics settings."
 msgstr "配置 Google Analytics 設定。"
 
-#: _inc/jetpack-strings.php:135
+#: _inc/jetpack-strings.php:224
 msgid "Image of WordPress login screen protected by Jetpack"
 msgstr "WordPress 登入畫面的圖片受 Jetpack 保護"
 
-#: _inc/jetpack-strings.php:103 _inc/lib/class.core-rest-api-endpoints.php:1842
+#: _inc/jetpack-strings.php:192 _inc/lib/class.core-rest-api-endpoints.php:1842
 msgid "Google Analytics"
 msgstr "Google 分析"
 
-#: _inc/jetpack-strings.php:104 modules/module-info.php:665
+#: _inc/jetpack-strings.php:193 modules/module-info.php:665
 msgid "Track website statistics with Google Analytics for a deeper understanding of your website visitors and customers."
 msgstr "你可以使用 Google Analytics 來追蹤網站統計資料，更深入瞭解你的網站的訪客和客戶。"
 
-#: _inc/jetpack-strings.php:105
+#: _inc/jetpack-strings.php:194
 msgid "Configure Google Analytics"
 msgstr "設定 Google Analytics"
 
-#: _inc/jetpack-strings.php:106
+#: _inc/jetpack-strings.php:195
 msgid "Activate Google Analytics"
 msgstr "啟用 Google Analytics"
 
-#: _inc/jetpack-strings.php:441
+#: _inc/jetpack-strings.php:473
 msgid "Download the free apps"
 msgstr "下載免費Apps"
 
@@ -3550,6 +3608,10 @@ msgstr "今天是個大日子。"
 #: modules/widgets/milestone/milestone.php:535
 msgid "The Big Day"
 msgstr "大日子"
+
+#: modules/widgets/eu-cookie-law/form.php:201
+msgid "days"
+msgstr "天"
 
 #: modules/widgets/milestone/milestone.php:44
 msgid "Milestone"
@@ -3765,7 +3827,7 @@ msgstr "全新的 WordPress 應用程式，使得在 Android 中寫作有了全�
 
 #. translators: It refers to the category where a post was found. Used in an
 #. example preview.
-#: _inc/jetpack-strings.php:313 _inc/jetpack-strings.php:316
+#: _inc/jetpack-strings.php:337 _inc/jetpack-strings.php:340
 #: modules/related-posts/jetpack-related-posts.php:846
 #: modules/related-posts/jetpack-related-posts.php:866
 #: modules/related-posts/jetpack-related-posts.php:886
@@ -4029,55 +4091,55 @@ msgstr "網站有獲准使用 WordAds 嗎？"
 msgid "Display an ad unit at the top of each page."
 msgstr "在每個頁面的頂端顯示廣告單元。"
 
-#: _inc/jetpack-strings.php:573
+#: _inc/jetpack-strings.php:604
 msgid "To get started, click on Add Media in your post editor and upload a video; we’ll take care of the rest!"
 msgstr "若要開始使用，請按一下文章編輯器的「新增媒體」並上傳影片，剩下的工作就交給我們處理！"
 
-#: _inc/jetpack-strings.php:308 _inc/jetpack-strings.php:579
+#: _inc/jetpack-strings.php:332 _inc/jetpack-strings.php:610
 msgid "{{span}}You can now also configure related posts in the Customizer. {{ExternalLink}}Try it out!{{/ExternalLink}}{{/span}}"
 msgstr "{{span}}你現在可以在自訂工具中設定相關文章。{{ExternalLink}}試試看！{{/ExternalLink}}{{/span}}"
 
-#: _inc/jetpack-strings.php:585
+#: _inc/jetpack-strings.php:616
 msgid "{{link}}Configure your Monitor notification settings on WordPress.com{{/link}}"
 msgstr "{{link}}設定你在 WordPress.com 的 Monitor 通知設定{{/link}}"
 
-#: _inc/jetpack-strings.php:586 modules/module-info.php:649
+#: _inc/jetpack-strings.php:617 modules/module-info.php:649
 msgid "By default ads are shown at the end of every page, post, or the first article on your front page. You can also add them to the top of your site and to any widget area to increase your earnings!"
 msgstr "預設情況下，廣告會顯示在每個頁面、文章，或首頁第一篇文章的底部。你可以將廣告新增到網站頂端或任何小工具區域，以增加你的收入！"
 
-#: _inc/jetpack-strings.php:587
+#: _inc/jetpack-strings.php:618
 msgid "Display an ad unit at the top of your site."
 msgstr "在網站頂端顯示廣告單元。"
 
-#: _inc/jetpack-strings.php:560
+#: _inc/jetpack-strings.php:592
 msgid "Your server is misconfigured, which means that Jetpack Protect is unable to effectively protect your site."
 msgstr "你的伺服器設定有誤，這代表 Jetpack Protect 無法有效保護你的網站。"
 
-#: _inc/jetpack-strings.php:83
+#: _inc/jetpack-strings.php:172
 msgid "Ads"
 msgstr "廣告"
 
-#: _inc/jetpack-strings.php:84
+#: _inc/jetpack-strings.php:173
 msgid "Earn income by allowing Jetpack to display high quality ads (powered by WordAds)."
 msgstr "允許 Jetpack 顯示高品質廣告 (由 WordAds 提供) 以賺取收入。"
 
-#: _inc/jetpack-strings.php:86
+#: _inc/jetpack-strings.php:175
 msgid "Activate Ads"
 msgstr "啟用廣告"
 
-#: _inc/jetpack-strings.php:95
+#: _inc/jetpack-strings.php:184
 msgid "Video Hosting"
 msgstr "影片託管"
 
-#: _inc/jetpack-strings.php:97
+#: _inc/jetpack-strings.php:186
 msgid "Upload Videos Now"
 msgstr "立即上傳影片"
 
-#: _inc/jetpack-strings.php:85 _inc/jetpack-strings.php:299
+#: _inc/jetpack-strings.php:174 _inc/jetpack-strings.php:323
 msgid "View your earnings"
 msgstr "查看你的收入"
 
-#: _inc/jetpack-strings.php:288
+#: _inc/jetpack-strings.php:312
 msgid "By activating ads, you agree to the Automattic Ads {{link}}Terms of Service{{/link}}."
 msgstr "啟用廣告，即代表你同意 Automattic Ads 的{{link}}服務條款{{/link}}。"
 
@@ -4345,16 +4407,16 @@ msgstr "建立用於下載佈景主題的檔案時發生問題"
 msgid "This theme does not exist"
 msgstr "沒有此佈景主題"
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:687
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:693
 msgid "Invalid SEO title format."
 msgstr "無效的 SEO 標題格式。"
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:671
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:677
 msgid "Invalid SEO meta description value."
 msgstr "無效的 SEO meta 描述值。"
 
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:667
-#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:683
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:673
+#: json-endpoints/class.wpcom-json-api-site-settings-endpoint.php:689
 #: json-endpoints/class.wpcom-json-api-update-post-endpoint.php:710
 #: json-endpoints/class.wpcom-json-api-update-post-v1-1-endpoint.php:785
 #: json-endpoints/class.wpcom-json-api-update-post-v1-2-endpoint.php:756
@@ -4590,55 +4652,55 @@ msgstr "無法刪除同步錯誤選項。"
 msgid "Could not confirm safe mode."
 msgstr "無法確認安全模式。"
 
-#: _inc/jetpack-strings.php:591
+#: _inc/jetpack-strings.php:622
 msgid "Make sure your site is easily found on search engines with SEO tools for your content and social posts."
 msgstr "為你的內容和社交文章使用 SEO 工具，確保搜尋引擎能夠輕易找到你的網站。"
 
-#: _inc/jetpack-strings.php:592
+#: _inc/jetpack-strings.php:623
 msgid "Activate this module to use the advanced SEO tools."
 msgstr "啟用此模組即可使用進階 SEO 工具。"
 
-#: _inc/jetpack-strings.php:593
+#: _inc/jetpack-strings.php:624
 msgid "Configure your SEO settings."
 msgstr "調整你的SEO設定。"
 
-#: _inc/jetpack-strings.php:572
+#: _inc/jetpack-strings.php:603
 msgid "The easiest way to upload ad-free and unbranded videos to your site. You get stats on video playback and shares and the player is lightweight and responsive."
 msgstr "在網站上傳無廣告和無品牌影片最輕鬆的方式。你可獲得影片播放和分享次數的統計資料，而且播放器為輕量型且回應靈敏。"
 
-#: _inc/jetpack-strings.php:536
+#: _inc/jetpack-strings.php:568
 msgid "You are running Jetpack on a staging server."
 msgstr "你正在暫存伺服器上執行 Jetpack。"
 
-#: _inc/jetpack-strings.php:537
+#: _inc/jetpack-strings.php:569
 msgid "More Info"
 msgstr "更多資訊"
 
-#: _inc/jetpack-strings.php:131
+#: _inc/jetpack-strings.php:220
 msgid "How much is your website worth?"
 msgstr "你的網站價值多少？"
 
-#: _inc/jetpack-strings.php:132
+#: _inc/jetpack-strings.php:221
 msgid "For less than the price of a coffee a month you can rest easy knowing your hard work (or livelihood) is backed up."
 msgstr "一個月只要一杯咖啡不到的價錢，你就可以高枕無憂，因為你辛勤努力的成果 (或生財工具) 將能妥善備份。"
 
-#: _inc/jetpack-strings.php:67
+#: _inc/jetpack-strings.php:156
 msgid "Daily backup of all your site data with unlimited space, one-click restores, automated security scanning, and priority support"
 msgstr "透過無限制的空間即時備份所有網站資料、一鍵復原、自動安全性掃描、一鍵排除所有威脅及優先支援服務。"
 
-#: _inc/jetpack-strings.php:99
+#: _inc/jetpack-strings.php:188
 msgid "SEO Tools"
 msgstr "SEO 工具"
 
-#: _inc/jetpack-strings.php:100
+#: _inc/jetpack-strings.php:189
 msgid "Advanced SEO tools to help your site get found when people search for relevant content."
 msgstr "進階 SEO 工具有助於讓你的網站顯示在使用者的相關內容搜尋結果中。"
 
-#: _inc/jetpack-strings.php:101
+#: _inc/jetpack-strings.php:190
 msgid "Configure Site SEO"
 msgstr "設定網站 SEO"
 
-#: _inc/jetpack-strings.php:102
+#: _inc/jetpack-strings.php:191
 msgid "Activate SEO Tools"
 msgstr "啟動網站SEO"
 
@@ -4654,19 +4716,19 @@ msgstr "透過 WordPress.com 登入時發生錯誤，請再試一次，或嘗試
 msgid "Logging in with WordPress.com is not currently available because this site is experiencing connection problems."
 msgstr "目前無法登入 WordPress.com，因為本網站發生連線問題。"
 
-#: _inc/jetpack-strings.php:584
+#: _inc/jetpack-strings.php:615
 msgid "{{a}}Manage Likes visibility from the Sharing Module Settings{{/a}}"
 msgstr "{{a}}從「分享模組設定」管理按讚次數的可見度{{/a}}"
 
-#: _inc/jetpack-strings.php:261
+#: _inc/jetpack-strings.php:284
 msgid "Your current IP: %(ip)s"
 msgstr "你目前的IP：%(ip)s"
 
-#: _inc/jetpack-strings.php:451
+#: _inc/jetpack-strings.php:484
 msgid "This will reset all Jetpack options, are you sure?"
 msgstr "這樣會重設所有的 Jetpack 選項，你確定嗎？"
 
-#: _inc/jetpack-strings.php:695
+#: _inc/jetpack-strings.php:452
 msgid "{{button}}View more stats on WordPress.com {{/button}}"
 msgstr "{{button}}檢視更多 WordPress.com 統計資料{{/button}}"
 
@@ -5402,210 +5464,210 @@ msgstr "開啟 JavaScript 即可使用 Jetpack 的完整功能！"
 msgid "You have JavaScript disabled"
 msgstr "你已停用 JavaScript"
 
-#: _inc/jetpack-strings.php:569
+#: _inc/jetpack-strings.php:601
 #: _inc/lib/admin-pages/class.jetpack-react-page.php:54
 #: class.jetpack-network-sites-list-table.php:59
 #: modules/masterbar/masterbar.php:1001
 msgid "Dashboard"
 msgstr "儀表板"
 
-#: _inc/jetpack-strings.php:604 _inc/jetpack-strings.php:606
+#: _inc/jetpack-strings.php:636 _inc/jetpack-strings.php:638
 msgctxt "Navigation item."
 msgid "At a Glance"
 msgstr "總覽"
 
-#: _inc/jetpack-strings.php:607
+#: _inc/jetpack-strings.php:639
 msgid "Search for a Jetpack feature."
 msgstr "搜尋 Jetpack 功能。"
 
-#: _inc/jetpack-strings.php:588
+#: _inc/jetpack-strings.php:619
 msgid "Upgrade Jetpack and our state-of-the-art security scanner will hunt out malicious files and report them immediately so that you're never unaware of what is happening on your website."
 msgstr "升級 Jetpack，我們的最新安全性掃描程式將找出惡意檔案並立即加以通報，因此你絕對不會發現網站上有任何異狀。"
 
-#: _inc/jetpack-strings.php:589
+#: _inc/jetpack-strings.php:620
 msgid "You can see the information about security scanning in the \"At a Glance\" section."
 msgstr "你可以到「總覽」區段查看有關安全性掃描的資訊。"
 
-#: _inc/jetpack-strings.php:255 _inc/jetpack-strings.php:590
+#: _inc/jetpack-strings.php:277 _inc/jetpack-strings.php:621
 msgid "Configure your Security Scans"
 msgstr "設定安全性掃描"
 
-#: _inc/jetpack-strings.php:596
+#: _inc/jetpack-strings.php:627
 msgid "This module has no configuration options"
 msgstr "此模組沒有設定選項"
 
-#: _inc/jetpack-strings.php:597
+#: _inc/jetpack-strings.php:628
 msgid "Let search engines and visitors know that you are serious about your websites integrity by upgrading Jetpack. Our anti-spam tools will eliminate comment spam, protect your SEO, and make it easier for visitors to stay in touch."
 msgstr "升級 Jetpack，讓搜尋引擎和訪客知道你非常重視網站的完整性。我們的反垃圾郵件工具將減少垃圾迴響、保護你的 SEO，並讓訪客能夠輕鬆保持聯繫。"
 
-#: _inc/jetpack-strings.php:598
+#: _inc/jetpack-strings.php:629
 msgid "Real-time offsite backups with automated restores deliver peace-of-mind, so you can focus on writing great content and increasing traffic while we protect every aspect of your investment. Upgrade today."
 msgstr "即時異地備份與自動還原能夠讓你安心使用；在我們保護你投入心力各個層面的同時，你可以專注於撰寫精彩內容和提高流量。立即升級。"
 
-#: _inc/jetpack-strings.php:599 _inc/jetpack-strings.php:600
+#: _inc/jetpack-strings.php:630 _inc/jetpack-strings.php:631
 msgid "{{link}}Configure your %(module_slug)s Settings {{/link}}"
 msgstr "{{link}}配置你的 %(module_slug)s 設定 {{/link}}"
 
-#: _inc/jetpack-strings.php:574
+#: _inc/jetpack-strings.php:605
 msgid "Subscriber"
 msgstr "訂閱者"
 
-#: _inc/jetpack-strings.php:311 _inc/jetpack-strings.php:575
+#: _inc/jetpack-strings.php:335 _inc/jetpack-strings.php:606
 #: modules/related-posts/jetpack-related-posts.php:841
 msgid "Big iPhone/iPad Update Now Available"
 msgstr "有重大的 iPhone/iPad 更新可供使用"
 
-#: _inc/jetpack-strings.php:314 _inc/jetpack-strings.php:576
+#: _inc/jetpack-strings.php:338 _inc/jetpack-strings.php:607
 #: modules/related-posts/jetpack-related-posts.php:861
 msgid "The WordPress for Android App Gets a Big Facelift"
 msgstr "Android 專用的 WordPress 應用程式已全面翻新"
 
-#: _inc/jetpack-strings.php:317 _inc/jetpack-strings.php:577
+#: _inc/jetpack-strings.php:341 _inc/jetpack-strings.php:608
 msgid "Upgrade Focus: VideoPress For Weddings"
 msgstr "升級重點：婚禮適用的 VideoPress"
 
-#: _inc/jetpack-strings.php:583
+#: _inc/jetpack-strings.php:614
 msgid "WordPress.com Likes are:"
 msgstr "WordPress.com 按讚功能："
 
-#: _inc/jetpack-strings.php:50
+#: _inc/jetpack-strings.php:127
 msgid "Comments headline"
 msgstr "迴響標題"
 
-#: _inc/jetpack-strings.php:51
+#: _inc/jetpack-strings.php:128
 msgid "A few catchy words to motivate your readers to comment."
 msgstr "使用一些吸引人的字詞，鼓勵讀者發表迴響。"
 
-#: _inc/jetpack-strings.php:63
+#: _inc/jetpack-strings.php:140
 msgid "Show a \"follow blog\" option in the comment form"
 msgstr "在迴響表單中顯示「關注網誌」選項"
 
-#: _inc/jetpack-strings.php:64
+#: _inc/jetpack-strings.php:141
 msgid "Show a \"follow comments\" option in the comment form"
 msgstr "在迴響表單中顯示「關注迴響」選項"
 
-#: _inc/jetpack-strings.php:335
+#: _inc/jetpack-strings.php:359
 msgid "Put a chart showing 48 hours of views in the admin bar"
 msgstr "在管理員列中放置一張圖表，顯示 48 小時內的瀏覽次數"
 
-#: _inc/jetpack-strings.php:336
+#: _inc/jetpack-strings.php:360
 msgid "Hide the stats smiley face image"
 msgstr "隱藏統計資料笑臉圖片"
 
-#: _inc/jetpack-strings.php:263
+#: _inc/jetpack-strings.php:286
 msgid "Whitelisted IP addresses"
 msgstr "在允許清單中的 IP 位址"
 
-#: _inc/jetpack-strings.php:391
+#: _inc/jetpack-strings.php:415
 msgid "Show photo metadata (Exif) in carousel, when available"
 msgstr "可用時，在隨選區顯示相片中繼資料 (Exif)"
 
-#: _inc/jetpack-strings.php:417
+#: _inc/jetpack-strings.php:441
 msgid "Show an ad for the WordPress mobile apps in the footer of the mobile theme"
 msgstr "在手機佈景主題的頁尾對 WordPress 行動應用程式顯示一則促銷活動"
 
-#: _inc/jetpack-strings.php:397
+#: _inc/jetpack-strings.php:421
 msgctxt "verb"
 msgid "Copy"
 msgstr "複製"
 
-#: _inc/jetpack-strings.php:398
+#: _inc/jetpack-strings.php:422
 msgid "Copied!"
 msgstr "已複製！"
 
-#: _inc/jetpack-strings.php:399
+#: _inc/jetpack-strings.php:423
 msgid "Highlight and copy the following text to your clipboard:"
 msgstr "將以下文字反白標示，複製貼到你的剪貼簿："
 
-#: _inc/jetpack-strings.php:400
+#: _inc/jetpack-strings.php:424
 msgid "Regenerate address"
 msgstr "重新產生位址"
 
-#: _inc/jetpack-strings.php:354
+#: _inc/jetpack-strings.php:378
 msgid "Automatically proofread content when: "
 msgstr "自動校對內容："
 
-#: _inc/jetpack-strings.php:355
+#: _inc/jetpack-strings.php:379
 msgid "A post or page is first published"
 msgstr "第一次發表文章或網頁時"
 
-#: _inc/jetpack-strings.php:356
+#: _inc/jetpack-strings.php:380
 msgid "A post or page is updated"
 msgstr "文章或網頁更新時"
 
-#: _inc/jetpack-strings.php:357
+#: _inc/jetpack-strings.php:381
 msgid "Automatic Language Detection"
 msgstr "自動語言偵測"
 
-#: _inc/jetpack-strings.php:358
+#: _inc/jetpack-strings.php:382
 msgid "The proofreader supports English, French, German, Portuguese and Spanish."
 msgstr "校對服務支援英文、法文、德文、葡萄牙文和西班牙文。"
 
-#: _inc/jetpack-strings.php:361
+#: _inc/jetpack-strings.php:385
 msgid "Enable proofreading for the following grammar and style rules: "
 msgstr "啟用以下的文法和樣式規則校對功能："
 
-#: _inc/jetpack-strings.php:363 _inc/lib/class.core-rest-api-endpoints.php:1677
+#: _inc/jetpack-strings.php:387 _inc/lib/class.core-rest-api-endpoints.php:1677
 msgid "Clichés"
 msgstr "陳腔濫調"
 
-#: _inc/jetpack-strings.php:373
+#: _inc/jetpack-strings.php:397
 msgid "Add a phrase"
 msgstr "新增字詞"
 
-#: _inc/jetpack-strings.php:565
+#: _inc/jetpack-strings.php:597
 msgid "Jetpack's recommended features include:"
 msgstr "Jetpack 推薦的功能包括："
 
-#: _inc/jetpack-strings.php:566
+#: _inc/jetpack-strings.php:598
 msgid "Features can be activated or deactivated at any time."
 msgstr "你可以隨時啟用或停用功能。"
 
-#: _inc/jetpack-strings.php:546
+#: _inc/jetpack-strings.php:578
 msgid "Cheatin' uh?"
 msgstr "喂！別偷跑喔！"
 
-#: _inc/jetpack-strings.php:547
+#: _inc/jetpack-strings.php:579
 msgid "{{p}}Would you mind telling us why you did not complete the Jetpack connection in this {{a}}2 question survey{{/a}}?{{/p}}{{p}}A Jetpack connection is required for our free security and traffic features to work.{{/p}}"
 msgstr "{{p}}你願意告訴我們為什麼未在這份{{a}}含有 2 個問題的調查{{/a}}中完成 Jetpack 連結嗎？{{/p}}{{p}}我們的免費安全性與流量功能需要 Jetpack 連結才能運作。{{/p}}"
 
-#: _inc/jetpack-strings.php:556
+#: _inc/jetpack-strings.php:588
 msgid "Welcome to {{s}}Jetpack %(jetpack_version)s{{/s}}!"
 msgstr "歡迎使用 {{s}}Jetpack %(jetpack_version)s{{/s}}！"
 
-#: _inc/jetpack-strings.php:557
+#: _inc/jetpack-strings.php:589
 msgid "Your Jetpack is already connected."
 msgstr "你的 Jetpack 已連結。"
 
-#: _inc/jetpack-strings.php:558
+#: _inc/jetpack-strings.php:590
 msgid "You're fueled up and ready to go, Jetpack is now active."
 msgstr "你已準備就緒，Jetpack 現已啟用。"
 
-#: _inc/jetpack-strings.php:559
+#: _inc/jetpack-strings.php:591
 msgid "You're fueled up and ready to go."
 msgstr "你已準備就緒！"
 
-#: _inc/jetpack-strings.php:534
+#: _inc/jetpack-strings.php:566
 msgid "You are currently running a development version of Jetpack."
 msgstr "你目前執行的是開發版本的 Jetpack。"
 
-#: _inc/jetpack-strings.php:535
+#: _inc/jetpack-strings.php:567
 msgid "Submit Beta feedback"
 msgstr "送出測試版意見回饋"
 
-#: _inc/jetpack-strings.php:532
+#: _inc/jetpack-strings.php:564
 msgid "What would you like to see on your Jetpack Dashboard?"
 msgstr "你希望你的 Jetpack 儀表板顯示哪些內容？"
 
-#: _inc/jetpack-strings.php:533
+#: _inc/jetpack-strings.php:565
 msgid "Let us know!"
 msgstr "請讓我們知道！"
 
-#: _inc/jetpack-strings.php:531
+#: _inc/jetpack-strings.php:563
 msgid "Would you tell us why? Just {{a}}answering two simple questions{{/a}} would help us improve Jetpack."
 msgstr "可以告訴我們原因嗎？只要{{a}}回答兩個簡單的問題，就{{/a}}能協助我們改善 Jetpack。"
 
-#: _inc/jetpack-strings.php:467 class.jetpack-connection-banner.php:183
+#: _inc/jetpack-strings.php:501 class.jetpack-connection-banner.php:183
 #: class.jetpack-connection-banner.php:601
 #: class.jetpack-connection-banner.php:627
 msgid "Welcome to Jetpack"
@@ -5615,325 +5677,325 @@ msgstr "歡迎使用 Jetpack"
 msgid "Please connect to or create a WordPress.com account to start using Jetpack. This will enable powerful security, traffic, and customization services."
 msgstr "請連結或建立 WordPress.com 帳號，以開始使用 Jetpack。這樣會啟用強大的安全性、流量和自訂服務。"
 
-#: _inc/jetpack-strings.php:503
+#: _inc/jetpack-strings.php:537
 msgctxt "Header. Noun: Protect is a module of Jetpack."
 msgid "Protect"
 msgstr "保護"
 
-#: _inc/jetpack-strings.php:500
+#: _inc/jetpack-strings.php:534
 msgctxt "Header. Noun: Monitor is a module of Jetpack."
 msgid "Monitor"
 msgstr "監控"
 
-#: _inc/jetpack-strings.php:507
+#: _inc/jetpack-strings.php:541
 msgid "Join the millions of users who rely on Jetpack to enhance and secure their sites. We're passionate about WordPress and here to make your life easier."
 msgstr "和仰賴 Jetpack 的數百萬名使用者一起加強和保護網站安全。我們對 WordPress 充滿熱情，而且很樂意為你提供便利的服務。"
 
-#: _inc/jetpack-strings.php:452
+#: _inc/jetpack-strings.php:485
 msgctxt "Navigation item."
 msgid "Reset Options (dev only)"
 msgstr "重設選項 (僅限開發人員版本)"
 
-#: _inc/jetpack-strings.php:454
+#: _inc/jetpack-strings.php:487
 msgctxt "Navigation item. Noun. Links to a debugger tool for Jetpack."
 msgid "Debug"
 msgstr "偵錯"
 
-#: _inc/jetpack-strings.php:460
+#: _inc/jetpack-strings.php:493
 msgid "WordPress.com Terms of Service"
 msgstr "WordPress.com 服務條款"
 
-#: _inc/jetpack-strings.php:461
+#: _inc/jetpack-strings.php:494
 msgctxt "Shorthand for Terms of Service."
 msgid "Terms"
 msgstr "條款"
 
-#: _inc/jetpack-strings.php:462
+#: _inc/jetpack-strings.php:495
 msgid "Automattic's Privacy Policy"
 msgstr "Automattic 的隱私權保護政策"
 
-#: _inc/jetpack-strings.php:463
+#: _inc/jetpack-strings.php:496
 msgctxt "Shorthand for Privacy Policy."
 msgid "Privacy"
 msgstr "隱私權"
 
-#: _inc/jetpack-strings.php:464
+#: _inc/jetpack-strings.php:497
 msgid "Saving…"
 msgstr "儲存中…"
 
-#: _inc/jetpack-strings.php:465
+#: _inc/jetpack-strings.php:498
 msgid "Save Settings"
 msgstr "儲存設定"
 
-#: _inc/jetpack-strings.php:466
+#: _inc/jetpack-strings.php:483
 msgctxt "Noun. Displayed to screen readers."
 msgid "Settings"
 msgstr "設定"
 
-#: _inc/jetpack-strings.php:443
+#: _inc/jetpack-strings.php:475
 msgid "Unlink me from WordPress.com"
 msgstr "中斷我和 WordPress.com 的連結"
 
-#: _inc/jetpack-strings.php:444
+#: _inc/jetpack-strings.php:476
 msgid "Link to WordPress.com"
 msgstr "連結到 WordPress.com"
 
-#: _inc/jetpack-strings.php:697
+#: _inc/jetpack-strings.php:454
 msgid "Week of %(date)s"
 msgstr "%(date)s 當週"
 
-#: _inc/jetpack-strings.php:698
+#: _inc/jetpack-strings.php:455
 msgid "Views: %(numberOfViews)s"
 msgstr "瀏覽次數：%(numberOfViews)s"
 
-#: _inc/jetpack-strings.php:699
+#: _inc/jetpack-strings.php:456
 msgid "Click to view detailed stats."
 msgstr "按一下可檢視詳細的統計資料。"
 
-#: _inc/jetpack-strings.php:704
+#: _inc/jetpack-strings.php:461
 msgid "Something happened while loading stats. Please try again later or {{a}}view your stats now on WordPress.com{{/a}}"
 msgstr "載入統計資料時發生問題。請稍後再試，或立即到 WordPress.com {{a}}檢視你的統計資料{{/a}}"
 
-#: _inc/jetpack-strings.php:328 _inc/jetpack-strings.php:705
+#: _inc/jetpack-strings.php:352 _inc/jetpack-strings.php:462
 msgid "Jetpack Stats Icon"
 msgstr "Jetpack 統計圖示"
 
-#: _inc/jetpack-strings.php:330 _inc/jetpack-strings.php:707
+#: _inc/jetpack-strings.php:354 _inc/jetpack-strings.php:464
 msgid "{{a}}Activate Site Stats{{/a}} to see detailed stats, likes, followers, subscribers, and more! {{a1}}Learn More{{/a1}}"
 msgstr "{{a}}啟用網站統計{{/a}}可查看詳細的統計資料、讚數、關注者和訂閱者等內容！{{a1}}瞭解詳情{{/a1}}"
 
-#: _inc/jetpack-strings.php:331 _inc/jetpack-strings.php:708
+#: _inc/jetpack-strings.php:355 _inc/jetpack-strings.php:465
 msgid "Activate Site Stats"
 msgstr "啟用網站統計"
 
-#: _inc/jetpack-strings.php:709
+#: _inc/jetpack-strings.php:466
 msgid "Days"
 msgstr "天"
 
-#: _inc/jetpack-strings.php:710
+#: _inc/jetpack-strings.php:467
 msgid "Weeks"
 msgstr "週"
 
-#: _inc/jetpack-strings.php:711
+#: _inc/jetpack-strings.php:468
 msgid "Months"
 msgstr "月"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:686
+#: _inc/jetpack-strings.php:443
 msgid "Views today"
 msgstr "今天的瀏覽次數"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:688
+#: _inc/jetpack-strings.php:445
 msgid "Best overall day"
 msgstr "全天最佳"
 
-#: _inc/jetpack-strings.php:689
+#: _inc/jetpack-strings.php:446
 msgid "%(number)s View"
 msgid_plural "%(number)s Views"
 msgstr[0] "%(number)s 次瀏覽"
 
 #. translators: Referring to a number of page views
-#: _inc/jetpack-strings.php:691
+#: _inc/jetpack-strings.php:448
 msgid "All-time views"
 msgstr "全時段瀏覽次數"
 
 #. translators: Referring to a number of comments
-#: _inc/jetpack-strings.php:693
+#: _inc/jetpack-strings.php:450
 msgid "All-time comments"
 msgstr "全時段迴響次數"
 
-#: _inc/jetpack-strings.php:694
+#: _inc/jetpack-strings.php:451
 msgid "{{button}}View detailed stats{{/button}}"
 msgstr "{{button}}檢視舊版統計{{/button}}"
 
-#: _inc/jetpack-strings.php:202
+#: _inc/jetpack-strings.php:104
 msgid "Security Scanning"
 msgstr "安全性掃描"
 
-#: _inc/jetpack-strings.php:632
+#: _inc/jetpack-strings.php:664
 msgid "Upgrade"
 msgstr "升級"
 
-#: _inc/jetpack-strings.php:437
+#: _inc/jetpack-strings.php:244
 msgid "ACTIVE"
 msgstr "啟用中"
 
-#: _inc/jetpack-strings.php:144
+#: _inc/jetpack-strings.php:233
 msgid "Your site is on Development Mode"
 msgstr "你的網站目前為開發模式"
 
-#: _inc/jetpack-strings.php:145
+#: _inc/jetpack-strings.php:234
 msgid "Once you connect, you can upgrade to a paid plan in order to unlock world-class security, spam protection tools, and priority support."
 msgstr "連結之後，你可以升級為付費方案以使用世界級的安全性、垃圾郵件防護工具以及優先支援服務。"
 
-#: _inc/jetpack-strings.php:80
+#: _inc/jetpack-strings.php:169
 msgid "State-of-the-art spam defense powered by Akismet."
 msgstr "採用 Akismet 提供的最新技術，可阻擋垃圾訊息。"
 
-#: _inc/jetpack-strings.php:81
+#: _inc/jetpack-strings.php:170
 msgid "View your spam stats"
 msgstr "檢視垃圾迴響統計資料"
 
-#: _inc/jetpack-strings.php:82
+#: _inc/jetpack-strings.php:171
 msgid "Configure Akismet"
 msgstr "設定 Akismet"
 
-#: _inc/jetpack-strings.php:74
+#: _inc/jetpack-strings.php:163
 msgid "View your security dashboard"
 msgstr "檢視安全性控制台"
 
-#: _inc/jetpack-strings.php:75
+#: _inc/jetpack-strings.php:164
 msgid "Configure VaultPress"
 msgstr "設定 VaultPress"
 
-#: _inc/jetpack-strings.php:111 _inc/jetpack-strings.php:124
+#: _inc/jetpack-strings.php:200 _inc/jetpack-strings.php:213
 msgid "Compare Plans"
 msgstr "比較方案"
 
-#: _inc/jetpack-strings.php:122
+#: _inc/jetpack-strings.php:211
 msgid "Enjoy priority support"
 msgstr "享用優先支援服務"
 
-#: _inc/jetpack-strings.php:169
+#: _inc/jetpack-strings.php:71
 msgid "The site is in Development Mode, so you can not connect to WordPress.com."
 msgstr "網站目前為開發模式，因此你無法連結 WordPress.com。"
 
-#: _inc/jetpack-strings.php:172
+#: _inc/jetpack-strings.php:74
 msgid "Link your account to WordPress.com to get the most out of Jetpack."
 msgstr "將帳號連結到 WordPress.com 即可更完善地運用 Jetpack 的功能。"
 
-#: _inc/jetpack-strings.php:205 _inc/jetpack-strings.php:244
+#: _inc/jetpack-strings.php:107 _inc/jetpack-strings.php:266
 msgid "Uh oh, %(number)s threat found."
 msgid_plural "Uh oh, %(number)s threats found."
 msgstr[0] "糟糕，找到了 %(number)s 個威脅。"
 
-#: _inc/jetpack-strings.php:206
+#: _inc/jetpack-strings.php:108
 msgid "{{a}}View details at VaultPress.com{{/a}}"
 msgstr "{{a}}到 VaultPress.com 檢視詳細資料{{/a}}"
 
-#: _inc/jetpack-strings.php:207 _inc/jetpack-strings.php:246
+#: _inc/jetpack-strings.php:109 _inc/jetpack-strings.php:268
 msgid "{{a}}Contact Support{{/a}}"
 msgstr "{{a}}聯絡支援團隊{{/a}}"
 
-#: _inc/jetpack-strings.php:208
+#: _inc/jetpack-strings.php:110
 msgid "No threats found, you're good to go!"
 msgstr "沒有找到威脅，你可以開始使用了！"
 
-#: _inc/jetpack-strings.php:210
+#: _inc/jetpack-strings.php:112
 msgid "For automated, comprehensive scanning of security threats, please {{a}}install and activate{{/a}} VaultPress."
 msgstr "如需自動且全面的安全性威脅掃描，請{{a}}安裝並啟用{{/a}} VaultPress。"
 
-#: _inc/jetpack-strings.php:211
+#: _inc/jetpack-strings.php:113
 msgid "For automated, comprehensive scanning of security threats, please {{a}}upgrade your account{{/a}}."
 msgstr "如需自動且全面的安全性威脅掃描，請{{a}}升級帳號{{/a}}。"
 
-#: _inc/jetpack-strings.php:198
+#: _inc/jetpack-strings.php:100
 msgid "Jetpack is actively blocking malicious login attempts. Data will display here soon!"
 msgstr "Jetpack 正在主動阻擋惡意登入嘗試。這裡很快就會顯示資料！"
 
-#: _inc/jetpack-strings.php:199
+#: _inc/jetpack-strings.php:101
 msgid "Total malicious attacks blocked on your site."
 msgstr "你網站阻擋的惡意攻擊總計。"
 
-#: _inc/jetpack-strings.php:201
+#: _inc/jetpack-strings.php:103
 msgid "{{a}}Activate Protect{{/a}} to keep your site protected from malicious sign in attempts."
 msgstr "{{a}}啟用 Protect{{/a}} 可防止你的網站受到惡意登入嘗試的侵擾。"
 
-#: _inc/jetpack-strings.php:189
+#: _inc/jetpack-strings.php:91
 msgid "Plugin Updates"
 msgstr "外掛程式更新"
 
-#: _inc/jetpack-strings.php:195
+#: _inc/jetpack-strings.php:97
 msgid "All plugins are up-to-date. Awesome work!"
 msgstr "所有外掛程式都是最新版本。做得好！"
 
-#: _inc/jetpack-strings.php:186
+#: _inc/jetpack-strings.php:88
 msgid "Jetpack is improving and optimizing your image speed."
 msgstr "Jetpack 正在改善和最佳化你的圖片速度。"
 
-#: _inc/jetpack-strings.php:188
+#: _inc/jetpack-strings.php:90
 msgid "{{a}}Activate{{/a}} to enhance the performance and speed of your images."
 msgstr "{{a}}啟用 Photon{{/a}} 可提升圖片的效能和速度。"
 
-#: _inc/jetpack-strings.php:181
+#: _inc/jetpack-strings.php:83
 msgid "Jetpack is monitoring your site. If we think your site is down, you will receive an email."
 msgstr "Jetpack 正在監控你的網站。如果我們發現你的網站停機，你就會收到一封電子郵件。"
 
-#: _inc/jetpack-strings.php:175 _inc/jetpack-strings.php:652
+#: _inc/jetpack-strings.php:77 _inc/jetpack-strings.php:684
 #: modules/masterbar/masterbar.php:473
 msgid "Security"
 msgstr "安全性"
 
-#: _inc/jetpack-strings.php:176
+#: _inc/jetpack-strings.php:78
 msgid "Manage security on WordPress.com"
 msgstr "管理 WordPress.com 上的安全性"
 
-#: _inc/jetpack-strings.php:178 class.jetpack-connection-banner.php:207
+#: _inc/jetpack-strings.php:80 class.jetpack-connection-banner.php:207
 msgid "Performance"
 msgstr "效能"
 
-#: _inc/jetpack-strings.php:69 _inc/jetpack-strings.php:72
-#: _inc/jetpack-strings.php:158
+#: _inc/jetpack-strings.php:60 _inc/jetpack-strings.php:158
+#: _inc/jetpack-strings.php:161
 msgid "Backups"
 msgstr "備份"
 
-#: _inc/jetpack-strings.php:160
+#: _inc/jetpack-strings.php:62
 msgid "{{a}}View backup details{{/a}}."
 msgstr "{{a}}檢視備份詳細資料{{/a}}。"
 
-#: _inc/jetpack-strings.php:161
+#: _inc/jetpack-strings.php:63
 msgid "To automatically back up your entire site, please {{a}}install and activate{{/a}} VaultPress."
 msgstr "若要自動備份整個網站，請{{a}}安裝並啟用{{/a}} VaultPress。"
 
-#: _inc/jetpack-strings.php:162
+#: _inc/jetpack-strings.php:64
 msgid "To automatically back up your entire site, please {{a}}upgrade your account{{/a}}."
 msgstr "若要自動備份整個網站，請{{a}}升級您的帳號{{/a}}。"
 
-#: _inc/jetpack-strings.php:148 _inc/jetpack-strings.php:164
-#: _inc/jetpack-strings.php:182 _inc/jetpack-strings.php:212
-#: _inc/jetpack-strings.php:239 _inc/jetpack-strings.php:243
+#: _inc/jetpack-strings.php:50 _inc/jetpack-strings.php:66
+#: _inc/jetpack-strings.php:84 _inc/jetpack-strings.php:114
+#: _inc/jetpack-strings.php:261 _inc/jetpack-strings.php:265
 msgid "Unavailable in Dev Mode."
 msgstr "開發模式中無法使用。"
 
-#: _inc/jetpack-strings.php:79 _inc/jetpack-strings.php:149
+#: _inc/jetpack-strings.php:51 _inc/jetpack-strings.php:168
 msgid "Spam Protection"
 msgstr "垃圾訊息防護"
 
-#: _inc/jetpack-strings.php:151 _inc/jetpack-strings.php:163
-#: _inc/jetpack-strings.php:191 _inc/jetpack-strings.php:204
-#: _inc/jetpack-strings.php:209
+#: _inc/jetpack-strings.php:53 _inc/jetpack-strings.php:65
+#: _inc/jetpack-strings.php:93 _inc/jetpack-strings.php:106
+#: _inc/jetpack-strings.php:111
 msgid "Loading…"
 msgstr "載入中…"
 
-#: _inc/jetpack-strings.php:152
+#: _inc/jetpack-strings.php:54
 msgid "For state-of-the-art spam defense, please {{a}}install Akismet{{/a}}."
 msgstr "如需最新的垃圾訊息防護，請{{a}}安裝 Akismet{{/a}}。"
 
-#: _inc/jetpack-strings.php:153
+#: _inc/jetpack-strings.php:55
 msgid "For state-of-the-art spam defense, please {{a}}activate Akismet{{/a}}."
 msgstr "如需最新的垃圾訊息防護，請{{a}}啟用 Akismet{{/a}}。"
 
-#: _inc/jetpack-strings.php:154
+#: _inc/jetpack-strings.php:56
 msgid "Invalid key"
 msgstr "無效金鑰"
 
-#: _inc/jetpack-strings.php:155
+#: _inc/jetpack-strings.php:57
 msgid "Whoops! Your Akismet key is missing or invalid. {{akismetSettings}}Go to Akismet settings to fix{{/akismetSettings}}."
 msgstr "糟糕！你的 Akismet 金鑰遺失或無效。{{akismetSettings}}前往 Akismet 設定以進行修正{{/akismetSettings}}。"
 
-#: _inc/jetpack-strings.php:156
+#: _inc/jetpack-strings.php:58
 msgctxt "Example: \"412 Spam comments blocked\""
 msgid "Spam comments blocked."
 msgstr "垃圾迴響已封鎖。"
 
-#: _inc/jetpack-strings.php:187 _inc/jetpack-strings.php:200
-#: _inc/jetpack-strings.php:216 _inc/jetpack-strings.php:329
-#: _inc/jetpack-strings.php:706
+#: _inc/jetpack-strings.php:89 _inc/jetpack-strings.php:102
+#: _inc/jetpack-strings.php:118 _inc/jetpack-strings.php:353
+#: _inc/jetpack-strings.php:463
 msgid "Unavailable in Dev Mode"
 msgstr "開發模式中無法使用"
 
-#: _inc/jetpack-strings.php:21 _inc/jetpack-strings.php:562
+#: _inc/jetpack-strings.php:21 _inc/jetpack-strings.php:594
 msgid "Activating recommended features…"
 msgstr "正在啟用推薦的功能…"
 
@@ -6030,18 +6092,18 @@ msgstr "總覽"
 msgid "At A Glance"
 msgstr "總覽"
 
-#: _inc/jetpack-strings.php:6 _inc/jetpack-strings.php:605
+#: _inc/jetpack-strings.php:6 _inc/jetpack-strings.php:637
 msgctxt "Navigation item."
 msgid "Plans"
 msgstr "方案"
 
-#: _inc/jetpack-strings.php:9 _inc/jetpack-strings.php:612
+#: _inc/jetpack-strings.php:9 _inc/jetpack-strings.php:644
 msgctxt "Navigation item."
 msgid "Security"
 msgstr "安全性"
 
-#: _inc/jetpack-strings.php:11 _inc/jetpack-strings.php:608
-#: _inc/jetpack-strings.php:614
+#: _inc/jetpack-strings.php:11 _inc/jetpack-strings.php:640
+#: _inc/jetpack-strings.php:646
 msgctxt "Navigation item."
 msgid "Writing"
 msgstr "撰寫"
@@ -6339,7 +6401,7 @@ msgstr "管理外掛程式"
 msgid "Jetpack is not active on this site."
 msgstr "此網站未啟用 Jetpack。"
 
-#: _inc/jetpack-strings.php:488
+#: _inc/jetpack-strings.php:522
 msgid "Track your growth"
 msgstr "追蹤成長的足跡"
 
@@ -6376,7 +6438,7 @@ msgid "High definition on by default"
 msgstr "預設開啟高畫質"
 
 #: modules/videopress/editor-media-view.php:37
-#: modules/widgets/eu-cookie-law/form.php:46
+#: modules/widgets/eu-cookie-law/form.php:173
 msgid "seconds"
 msgstr "秒"
 
@@ -6421,15 +6483,15 @@ msgstr "填寫我的 Wufoo 表格！"
 msgid "<a href=\"%s\" target=\"_blank\">Learn more</a> about these options."
 msgstr "<a href=\"%s\" target=\"_blank\">深入瞭解</a>有關於這些選項的資訊。"
 
-#: _inc/jetpack-strings.php:550
+#: _inc/jetpack-strings.php:582
 msgid "There was an issue connecting your Jetpack. Please click \"Connect to WordPress.com\" again."
 msgstr "連結 Jetpack 時發生問題。請再按一次「連結 WordPress.com」。"
 
-#: _inc/jetpack-strings.php:549
+#: _inc/jetpack-strings.php:581
 msgid "We had an issue connecting Jetpack; deactivate then reactivate the Jetpack plugin, then connect again."
 msgstr "我們在連接 Jetpack 時發生問題。請停用 Jetpack 外掛程式並重新啟用，然後重新連接一次。"
 
-#: _inc/jetpack-strings.php:548
+#: _inc/jetpack-strings.php:580
 msgid "You need to stay logged in to your WordPress blog while you authorize Jetpack."
 msgstr "授權 Jetpack 期間，你必須保持登入自己的 WordPress 網誌。"
 
@@ -6553,11 +6615,11 @@ msgid "Sitemaps"
 msgstr "網站地圖"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2533
+#: modules/contact-form/grunion-contact-form.php:2726
 msgid "%s requires at least one selection"
 msgstr "%s 需要至少選取一個項目"
 
-#: _inc/jetpack-strings.php:555
+#: _inc/jetpack-strings.php:587
 msgid "{{s}}Your Jetpack has a glitch.{{/s}}  We're sorry for the inconvenience. Please try again later, if the issue continues please contact support with this message: %(error_key)s"
 msgstr "{{s}}你的 Jetpack 發生故障。{{/s}}造成不便，敬請見諒。請稍後再試一次，如果持續發生此問題，請聯絡支援團隊並附上這段訊息：%(error_key)s"
 
@@ -6905,10 +6967,10 @@ msgstr "建立連結，即可開始管理 Jetpack 多站台安裝。"
 msgid "Get started with Jetpack Multisite"
 msgstr "開始使用 Jetpack 多站台"
 
-#: _inc/jetpack-strings.php:53 _inc/jetpack-strings.php:56
-#: _inc/jetpack-strings.php:58 _inc/jetpack-strings.php:134
-#: _inc/jetpack-strings.php:413 _inc/jetpack-strings.php:633
-#: _inc/jetpack-strings.php:634 class.jetpack.php:3910
+#: _inc/jetpack-strings.php:130 _inc/jetpack-strings.php:133
+#: _inc/jetpack-strings.php:135 _inc/jetpack-strings.php:223
+#: _inc/jetpack-strings.php:437 _inc/jetpack-strings.php:665
+#: _inc/jetpack-strings.php:666 class.jetpack.php:3910
 msgid "Learn more"
 msgstr "瞭解更多"
 
@@ -7139,7 +7201,7 @@ msgstr "Feed(s) 顯示："
 msgid "Posts & Comments"
 msgstr "文章及迴響"
 
-#: _inc/jetpack-strings.php:292 modules/widgets/rsslinks-widget.php:96
+#: _inc/jetpack-strings.php:316 modules/widgets/rsslinks-widget.php:96
 #: modules/widgets/rsslinks-widget.php:162
 msgid "Posts"
 msgstr "文章"
@@ -7559,7 +7621,7 @@ msgstr "封存頁面"
 msgid "Posts page"
 msgstr "文章列表頁面"
 
-#: _inc/jetpack-strings.php:291
+#: _inc/jetpack-strings.php:315
 #: modules/widget-visibility/widget-conditions.php:96
 msgid "Front page"
 msgstr "首頁頁面"
@@ -8282,7 +8344,7 @@ msgctxt "share to"
 msgid "Pinterest"
 msgstr "Pinterest"
 
-#: _inc/jetpack-strings.php:350 modules/sharedaddy/sharing-sources.php:1476
+#: _inc/jetpack-strings.php:374 modules/sharedaddy/sharing-sources.php:1476
 msgid "Pinterest"
 msgstr "Pinterest"
 
@@ -8329,7 +8391,7 @@ msgctxt "share to"
 msgid "Google"
 msgstr "Google"
 
-#: _inc/jetpack-strings.php:348 modules/sharedaddy/sharing-sources.php:1128
+#: _inc/jetpack-strings.php:372 modules/sharedaddy/sharing-sources.php:1128
 msgid "Google"
 msgstr "Google"
 
@@ -8540,7 +8602,7 @@ msgstr "在「%s」中"
 msgid "Untitled Post"
 msgstr "無標題文章"
 
-#: _inc/jetpack-strings.php:305
+#: _inc/jetpack-strings.php:329
 #: modules/related-posts/jetpack-related-posts.php:423
 msgid "Show related content after posts"
 msgstr "顯示文章之後的相關內容"
@@ -8553,19 +8615,19 @@ msgstr "隱藏文章下方的相關內容"
 msgid "Preview:"
 msgstr "預覽："
 
-#: _inc/jetpack-strings.php:307 _inc/jetpack-strings.php:581
+#: _inc/jetpack-strings.php:331 _inc/jetpack-strings.php:612
 #: _inc/lib/class.core-rest-api-endpoints.php:1647
 #: modules/related-posts/jetpack-related-posts.php:389
 msgid "Use a large and visually striking layout"
 msgstr "使用大型、引人注目的版面形式"
 
-#: _inc/jetpack-strings.php:306 _inc/jetpack-strings.php:580
+#: _inc/jetpack-strings.php:330 _inc/jetpack-strings.php:611
 #: _inc/lib/class.core-rest-api-endpoints.php:1640
 #: modules/related-posts/jetpack-related-posts.php:387
 msgid "Show a \"Related\" header to more clearly separate the related section from posts"
 msgstr "顯示「相關」頁首，以更明確地將相關的區段與文章進行區隔"
 
-#: _inc/jetpack-strings.php:310
+#: _inc/jetpack-strings.php:334
 #: modules/related-posts/class.related-posts-customize.php:154
 #: modules/related-posts/jetpack-related-posts.php:282
 #: modules/related-posts/jetpack-related-posts.php:342
@@ -8879,7 +8941,7 @@ msgstr "更多訊息"
 msgid "Enable Post By Email"
 msgstr "啟用電子郵件發表文章的功能"
 
-#: _inc/jetpack-strings.php:396 _inc/lib/class.core-rest-api-endpoints.php:1487
+#: _inc/jetpack-strings.php:420 _inc/lib/class.core-rest-api-endpoints.php:1487
 #: modules/post-by-email.php:89 modules/subscriptions.php:1039
 msgid "Email Address"
 msgstr "電子郵件位址"
@@ -8901,7 +8963,7 @@ msgstr "最後修改"
 msgid "Title"
 msgstr "標題"
 
-#: _inc/jetpack-strings.php:394
+#: _inc/jetpack-strings.php:418
 msgid "Media"
 msgstr "媒體"
 
@@ -8917,8 +8979,8 @@ msgstr "將會向 %s 傳送電子郵件 (<a href=\"%s\">編輯</a>)"
 msgid "Receive Monitor Email Notifications."
 msgstr "收到監控電子郵件通知。"
 
-#: _inc/jetpack-strings.php:655 _inc/jetpack-strings.php:661
-#: _inc/jetpack-strings.php:670 modules/masterbar/masterbar.php:868
+#: _inc/jetpack-strings.php:687 _inc/jetpack-strings.php:693
+#: _inc/jetpack-strings.php:702 modules/masterbar/masterbar.php:873
 msgid "Themes"
 msgstr "佈景主題"
 
@@ -8976,7 +9038,7 @@ msgstr "更多資訊在使用 「宣傳」功能。"
 msgid "Publicize"
 msgstr "宣傳"
 
-#: _inc/jetpack-strings.php:712 _inc/jetpack-strings.php:713
+#: _inc/jetpack-strings.php:469 _inc/jetpack-strings.php:470
 #: class.jetpack.php:6919 modules/stats.php:415 modules/stats.php:538
 #: modules/stats.php:1032
 msgid "Site Stats"
@@ -9636,8 +9698,8 @@ msgstr "分享按鈕"
 msgid "Settings have been saved"
 msgstr "設定值已經儲存"
 
-#: _inc/jetpack-strings.php:663 _inc/jetpack-strings.php:673
-#: _inc/jetpack-strings.php:682 modules/likes/jetpack-likes-settings.php:164
+#: _inc/jetpack-strings.php:695 _inc/jetpack-strings.php:705
+#: _inc/jetpack-strings.php:714 modules/likes/jetpack-likes-settings.php:164
 #: modules/masterbar/masterbar.php:909 modules/publicize/ui.php:54
 #: modules/sharedaddy/sharedaddy.php:143 modules/sharedaddy/sharing.php:79
 msgid "Sharing"
@@ -9874,7 +9936,7 @@ msgstr "為此網站啟用證言。"
 msgid "Your theme supports Testimonials"
 msgstr "你的佈景主題支援證言"
 
-#: _inc/jetpack-strings.php:379 modules/custom-post-types/testimonial.php:125
+#: _inc/jetpack-strings.php:403 modules/custom-post-types/testimonial.php:125
 #: modules/custom-post-types/testimonial.php:300
 #: modules/custom-post-types/testimonial.php:302
 #: modules/custom-post-types/testimonial.php:467
@@ -10669,8 +10731,8 @@ msgstr "%s 像素"
 
 #: modules/custom-css/custom-css.php:1048
 #: modules/theme-tools/content-options/customizer.php:71
-#: modules/widgets/eu-cookie-law/form.php:66
-#: modules/widgets/eu-cookie-law/form.php:135
+#: modules/widgets/eu-cookie-law/form.php:14
+#: modules/widgets/eu-cookie-law/form.php:51
 msgid "Default"
 msgstr "預設"
 
@@ -10973,116 +11035,116 @@ msgctxt "Label for HTML form \"Name\" field in contact form builder"
 msgid "Name"
 msgstr "姓名"
 
-#: modules/contact-form/grunion-contact-form.php:2674
+#: modules/contact-form/grunion-contact-form.php:2867
 #: modules/contact-form/grunion-editor-view.php:152
 #: modules/minileven/minileven.php:278
 msgid "Yes"
 msgstr "是"
 
-#: modules/contact-form/grunion-contact-form.php:2634
+#: modules/contact-form/grunion-contact-form.php:2827
 #: modules/contact-form/grunion-editor-view.php:91
 msgid "(required)"
 msgstr "(必)"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2540
+#: modules/contact-form/grunion-contact-form.php:2733
 msgid "%s is required"
 msgstr "需要 %s"
 
 #. translators: %s is the name of a form field
-#: modules/contact-form/grunion-contact-form.php:2526
+#: modules/contact-form/grunion-contact-form.php:2719
 msgid "%s requires a valid email address"
 msgstr "%s 需要一個有效的電子郵件地址"
 
-#: modules/contact-form/grunion-contact-form.php:2151
+#: modules/contact-form/grunion-contact-form.php:2344
 msgid "Sent by an unverified visitor to your site."
 msgstr "由一個身份未確認的網站訪客寄出。"
 
-#: modules/contact-form/grunion-contact-form.php:2145
+#: modules/contact-form/grunion-contact-form.php:2338
 msgid "Sent by a verified %s user."
 msgstr "%s 使用者發送的驗證。"
 
-#: modules/contact-form/grunion-contact-form.php:2138
+#: modules/contact-form/grunion-contact-form.php:2331
 msgid "Contact Form URL:"
 msgstr "聯絡表單的 URL:"
 
-#: modules/contact-form/grunion-contact-form.php:2137
+#: modules/contact-form/grunion-contact-form.php:2330
 msgid "IP Address:"
 msgstr "IP 位址:"
 
-#: modules/contact-form/grunion-contact-form.php:2136
+#: modules/contact-form/grunion-contact-form.php:2329
 msgid "Time:"
 msgstr "時間."
 
-#: modules/contact-form/grunion-contact-form.php:1521
+#: modules/contact-form/grunion-contact-form.php:1714
 msgid "go back"
 msgstr "返回"
 
-#: modules/contact-form/grunion-contact-form.php:1503
+#: modules/contact-form/grunion-contact-form.php:1696
 msgid "Error!"
 msgstr "錯誤！"
 
-#: modules/contact-form/grunion-contact-form.php:1395
+#: modules/contact-form/grunion-contact-form.php:1588
 msgid "Subject"
 msgstr "標題"
 
-#: modules/contact-form/grunion-contact-form.php:1361
+#: modules/contact-form/grunion-contact-form.php:1554
 msgctxt "%1$s = blog name, %2$s = post title"
 msgid "%1$s %2$s"
 msgstr "%1$s %2$s"
 
-#: modules/contact-form/grunion-contact-form.php:1358
+#: modules/contact-form/grunion-contact-form.php:1551
 msgctxt "%1$s = blog name"
 msgid "%1$s Sidebar"
 msgstr "%1$s 側邊欄"
 
-#: modules/contact-form/grunion-contact-form.php:719
-#: modules/contact-form/grunion-contact-form.php:1118
+#: modules/contact-form/grunion-contact-form.php:723
+#: modules/contact-form/grunion-contact-form.php:1311
 #: modules/contact-form/grunion-form-view.php:51
 msgid "Contact Form"
 msgstr "聯絡表單"
 
-#: modules/contact-form/grunion-contact-form.php:643
+#: modules/contact-form/grunion-contact-form.php:647
 msgid "Download"
 msgstr "下載"
 
-#: modules/contact-form/grunion-contact-form.php:638
+#: modules/contact-form/grunion-contact-form.php:642
 msgid "All posts"
 msgstr "所有文章"
 
-#: modules/contact-form/grunion-contact-form.php:636
+#: modules/contact-form/grunion-contact-form.php:640
 msgid "Select feedback to download"
 msgstr "選取要下載的回饋意見"
 
-#: modules/contact-form/grunion-contact-form.php:223
-#: modules/contact-form/grunion-contact-form.php:630
+#: modules/contact-form/grunion-contact-form.php:227
+#: modules/contact-form/grunion-contact-form.php:634
 msgid "Export feedback as CSV"
 msgstr "將回饋意見以 CSV 格式匯出"
 
-#: modules/contact-form/grunion-contact-form.php:566
+#: modules/contact-form/grunion-contact-form.php:570
 msgid "Feedback discarded."
 msgstr "回饋意見已捨棄。"
 
-#: modules/contact-form/grunion-contact-form.php:375
-#: modules/contact-form/grunion-contact-form.php:1520
+#: modules/contact-form/grunion-contact-form.php:379
+#: modules/contact-form/grunion-contact-form.php:1713
 msgid "Message Sent"
 msgstr "意見發送"
 
-#: modules/contact-form/grunion-contact-form.php:367
+#: modules/contact-form/grunion-contact-form.php:371
 msgid "An error occurred. Please try again later."
 msgstr "發生錯誤。請稍後再試看看。"
 
-#: modules/contact-form/grunion-contact-form.php:189
+#: modules/contact-form/grunion-contact-form.php:193
 msgid "Spam <span class=\"count\">(%s)</span>"
 msgid_plural "Spam <span class=\"count\">(%s)</span>"
 msgstr[0] "垃圾回應 <span class=\"count\">(%s)</span>"
 
-#: modules/contact-form/grunion-contact-form.php:153
-#: modules/contact-form/grunion-contact-form.php:154
+#: modules/contact-form/grunion-contact-form.php:157
+#: modules/contact-form/grunion-contact-form.php:158
 msgid "No feedback found"
 msgstr "找不到反饋意見"
 
-#: modules/contact-form/grunion-contact-form.php:152
+#: modules/contact-form/grunion-contact-form.php:156
 msgid "Search Feedback"
 msgstr "搜尋反饋意見"
 
@@ -11111,7 +11173,7 @@ msgid "You are not allowed to move this item out of the Trash."
 msgstr "你不可將此項目移出回收桶。"
 
 #: modules/contact-form/admin.php:483
-#: modules/contact-form/grunion-contact-form.php:2075
+#: modules/contact-form/grunion-contact-form.php:2268
 msgctxt "{$date_format} \\a\\t {$time_format}"
 msgid "%1$s \\a\\t %2$s"
 msgstr "%1$s \\a\\t %2$s"
@@ -11150,7 +11212,7 @@ msgstr "日期"
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: modules/contact-form/admin.php:263
-#: modules/contact-form/grunion-contact-form.php:1399
+#: modules/contact-form/grunion-contact-form.php:1592
 #: modules/contact-form/grunion-editor-view.php:87
 msgid "Message"
 msgstr "訊息"
@@ -11238,7 +11300,7 @@ msgstr "配色方案"
 msgid "Greeting Text"
 msgstr "問候語"
 
-#: _inc/jetpack-strings.php:48 modules/comments/admin.php:72
+#: _inc/jetpack-strings.php:125 modules/comments/admin.php:72
 #: modules/masterbar/masterbar.php:761 modules/widgets/rsslinks-widget.php:97
 #: modules/widgets/rsslinks-widget.php:165
 msgid "Comments"
@@ -11250,14 +11312,14 @@ msgid "Transparent"
 msgstr "透明的"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:1334
-#: modules/comments/admin.php:55 modules/widgets/eu-cookie-law/form.php:114
+#: modules/comments/admin.php:55 modules/widgets/eu-cookie-law/form.php:232
 #: modules/widgets/googleplus-badge.php:271
 #: modules/widgets/twitter-timeline.php:501
 msgid "Dark"
 msgstr "深色系"
 
 #: _inc/lib/class.core-rest-api-endpoints.php:1333
-#: modules/comments/admin.php:54 modules/widgets/eu-cookie-law/form.php:103
+#: modules/comments/admin.php:54 modules/widgets/eu-cookie-law/form.php:221
 #: modules/widgets/googleplus-badge.php:270
 #: modules/widgets/twitter-timeline.php:498
 msgid "Light"
@@ -11353,7 +11415,7 @@ msgstr "遺失附件 ID"
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: modules/carousel/jetpack-carousel.php:267
-#: modules/contact-form/grunion-contact-form.php:1391
+#: modules/contact-form/grunion-contact-form.php:1584
 #: modules/contact-form/grunion-editor-view.php:86
 #: modules/contact-form/grunion-editor-view.php:217
 #: modules/contact-form/grunion-form-view.php:202
@@ -11362,7 +11424,7 @@ msgstr "網站"
 
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: class.jetpack-debugger.php:404 modules/carousel/jetpack-carousel.php:263
-#: modules/contact-form/grunion-contact-form.php:1390
+#: modules/contact-form/grunion-contact-form.php:1583
 #: modules/contact-form/grunion-editor-view.php:85
 #: modules/contact-form/grunion-editor-view.php:216
 #: modules/contact-form/grunion-form-view.php:197
@@ -11539,12 +11601,12 @@ msgstr "新增"
 msgid "Identify words and phrases to ignore while proofreading your posts and pages:"
 msgstr "啟用下面的文法和樣式規則寫文章和分頁時校對："
 
-#: _inc/jetpack-strings.php:372
+#: _inc/jetpack-strings.php:396
 #: modules/after-the-deadline/config-unignore.php:131
 msgid "Ignored Phrases"
 msgstr "忽略縮寫"
 
-#: _inc/jetpack-strings.php:359 _inc/lib/class.core-rest-api-endpoints.php:1740
+#: _inc/jetpack-strings.php:383 _inc/lib/class.core-rest-api-endpoints.php:1740
 #: modules/after-the-deadline/config-options.php:93
 msgid "Use automatically detected language to proofread posts and pages"
 msgstr "使用自動檢測語言校對文章和分頁"
@@ -11557,42 +11619,42 @@ msgstr "校對服務支援英文、法文、德文、葡萄牙文和西班牙文
 msgid "Language"
 msgstr "語言"
 
-#: _inc/jetpack-strings.php:371 _inc/lib/class.core-rest-api-endpoints.php:1733
+#: _inc/jetpack-strings.php:395 _inc/lib/class.core-rest-api-endpoints.php:1733
 #: modules/after-the-deadline/config-options.php:81
 msgid "Redundant Phrases"
 msgstr "冗餘短語"
 
-#: _inc/jetpack-strings.php:370 _inc/lib/class.core-rest-api-endpoints.php:1726
+#: _inc/jetpack-strings.php:394 _inc/lib/class.core-rest-api-endpoints.php:1726
 #: modules/after-the-deadline/config-options.php:79
 msgid "Phrases to Avoid"
 msgstr "忽略短語"
 
-#: _inc/jetpack-strings.php:369 _inc/lib/class.core-rest-api-endpoints.php:1719
+#: _inc/jetpack-strings.php:393 _inc/lib/class.core-rest-api-endpoints.php:1719
 #: modules/after-the-deadline/config-options.php:77
 msgid "Passive Voice"
 msgstr "被動語態"
 
-#: _inc/jetpack-strings.php:368 _inc/lib/class.core-rest-api-endpoints.php:1712
+#: _inc/jetpack-strings.php:392 _inc/lib/class.core-rest-api-endpoints.php:1712
 #: modules/after-the-deadline/config-options.php:75
 msgid "Jargon"
 msgstr "特殊用語"
 
-#: _inc/jetpack-strings.php:367 _inc/lib/class.core-rest-api-endpoints.php:1705
+#: _inc/jetpack-strings.php:391 _inc/lib/class.core-rest-api-endpoints.php:1705
 #: modules/after-the-deadline/config-options.php:73
 msgid "Hidden Verbs"
 msgstr "隱藏動詞"
 
-#: _inc/jetpack-strings.php:366 _inc/lib/class.core-rest-api-endpoints.php:1698
+#: _inc/jetpack-strings.php:390 _inc/lib/class.core-rest-api-endpoints.php:1698
 #: modules/after-the-deadline/config-options.php:71
 msgid "Double Negatives"
 msgstr "雙重否定"
 
-#: _inc/jetpack-strings.php:365 _inc/lib/class.core-rest-api-endpoints.php:1691
+#: _inc/jetpack-strings.php:389 _inc/lib/class.core-rest-api-endpoints.php:1691
 #: modules/after-the-deadline/config-options.php:69
 msgid "Diacritical Marks"
 msgstr "變音符號"
 
-#: _inc/jetpack-strings.php:364 _inc/lib/class.core-rest-api-endpoints.php:1684
+#: _inc/jetpack-strings.php:388 _inc/lib/class.core-rest-api-endpoints.php:1684
 #: modules/after-the-deadline/config-options.php:67
 msgid "Complex Phrases"
 msgstr "複雜短語"
@@ -11601,7 +11663,7 @@ msgstr "複雜短語"
 msgid "Clich&eacute;s"
 msgstr "陳詞濫調"
 
-#: _inc/jetpack-strings.php:362 _inc/lib/class.core-rest-api-endpoints.php:1670
+#: _inc/jetpack-strings.php:386 _inc/lib/class.core-rest-api-endpoints.php:1670
 #: modules/after-the-deadline/config-options.php:63
 msgid "Bias Language"
 msgstr "偏差用語"
@@ -11610,7 +11672,7 @@ msgstr "偏差用語"
 msgid "Enable proofreading for the following grammar and style rules when writing posts and pages:"
 msgstr "啟用下面的文法和樣式規則寫文章和分頁時校對："
 
-#: _inc/jetpack-strings.php:360
+#: _inc/jetpack-strings.php:384
 #: modules/after-the-deadline/config-options.php:58
 msgid "English Options"
 msgstr "英文選項"
@@ -11627,7 +11689,7 @@ msgstr "第一次文章/分頁的發佈時"
 msgid "Automatically proofread content when:"
 msgstr "自動校對內容："
 
-#: _inc/jetpack-strings.php:353
+#: _inc/jetpack-strings.php:377
 #: modules/after-the-deadline/config-options.php:48
 msgid "Proofreading"
 msgstr "校對"
@@ -11981,23 +12043,23 @@ msgstr "已為你啟用「管理」！"
 msgid "You are all set! Your site can now be managed from <a href=\"%s\" target=\"_blank\">wordpress.com/sites</a>."
 msgstr "你已準備就緒！你現在可以從 <a href=\"%s\" target=\"_blank\">wordpress.com/sites</a> 管理網站。"
 
-#: _inc/jetpack-strings.php:554
+#: _inc/jetpack-strings.php:586
 msgid "Jetpack could not contact WordPress.com: %(error_key)s.  This usually means something is incorrectly configured on your web host."
 msgstr "Jetpack 無法聯繫 WordPress.com：%(error_key)s。這通常代表著你網路主機的設定不正確。"
 
-#: _inc/jetpack-strings.php:553
+#: _inc/jetpack-strings.php:585
 msgid "WordPress.com is currently having problems and is unable to fuel up your Jetpack.  Please try again later."
 msgstr "WordPress.com目前有問題，無法啟動你Jetpack。請稍後再試。"
 
-#: _inc/jetpack-strings.php:552
+#: _inc/jetpack-strings.php:584
 msgid "{{s}}Your Jetpack has a glitch.{{/s}} Connecting this site with WordPress.com is not possible. This usually means your site is not publicly accessible (localhost)."
 msgstr "{{s}}你的 Jetpack 發生故障。{{/s}}無法將此網站連結到 WordPress.com。這通常代表你的網站並未允許公開存取 (localhost)。"
 
-#: _inc/jetpack-strings.php:551
+#: _inc/jetpack-strings.php:583
 msgid "Your website needs to be publicly accessible to use Jetpack: %(error_key)s"
 msgstr "你的網站必須允許公開存取才能使用 Jetpack：%(error_key)s"
 
-#: _inc/jetpack-strings.php:530
+#: _inc/jetpack-strings.php:562
 msgid "You have successfully disconnected Jetpack"
 msgstr "你已成功與 Jetpack 中斷連結"
 
@@ -12009,7 +12071,7 @@ msgstr "<strong>Jetpack 啟用中！</strong> 每一個網站都應該連結到�
 msgid "<p><a href=\"%1$s\" title=\"Opt in to WordPress.com Site Management\" >Activate Site Management</a> to manage multiple sites from our centralized dashboard at wordpress.com/sites. <a href=\"%2$s\" target=\"_blank\">Learn more</a>.</p><a href=\"%1$s\" class=\"jp-button\">Activate Now</a>"
 msgstr "<p><a href=\"%1$s\" title=\"開始使用 WordPress.com 網站管理功能\" >啟用網站管理</a>以透過 wordpress.com/sites 的集中式儀表板管理多個網站。<a href=\"%2$s\" target=\"_blank\">瞭解更多</a>。</p><a href=\"%1$s\" class=\"jp-button\">立即啟用</a>"
 
-#: _inc/jetpack-strings.php:544 views/admin/must-connect-main-blog.php:11
+#: _inc/jetpack-strings.php:576 views/admin/must-connect-main-blog.php:11
 msgid "Connect to WordPress.com"
 msgstr "連結 WordPress.com"
 
@@ -12049,7 +12111,7 @@ msgstr "在這個頁面，你可以查看的模組內 Jetpack，了解他們的�
 msgid "Jetpack supercharges your self-hosted WordPress site with the awesome cloud power of WordPress.com."
 msgstr "Jetpack 是一個 WordPress 外掛，可以做網站有權使用的雲端服務，這是 WordPress.com 非常優異的服務。"
 
-#. #-#-#-#-#  jetpack-code.pot (Jetpack by WordPress.com 6.1)  #-#-#-#-#
+#. #-#-#-#-#  jetpack-code.pot (Jetpack by WordPress.com 6.1.1)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.jetpack.php:3778 class.jetpack.php:3791 class.jetpack.php:4766
 #: views/admin/network-admin-header.php:5
@@ -12144,7 +12206,7 @@ msgstr "Jetpack 網站"
 msgid "Edit"
 msgstr "編輯"
 
-#: _inc/jetpack-strings.php:240 _inc/jetpack-strings.php:436
+#: _inc/jetpack-strings.php:243 _inc/jetpack-strings.php:262
 #: class.jetpack-network-sites-list-table.php:16
 msgid "Connected"
 msgstr "已連結"
@@ -12161,7 +12223,7 @@ msgstr "網站名稱"
 msgid "No Modules Found"
 msgstr "找不到模組"
 
-#: _inc/jetpack-strings.php:223 _inc/jetpack-strings.php:345
+#: _inc/jetpack-strings.php:292 _inc/jetpack-strings.php:369
 #: class.jetpack-modules-list-table.php:111
 #: class.jetpack-modules-list-table.php:211
 #: class.jetpack-modules-list-table.php:276
@@ -12179,7 +12241,7 @@ msgid "Search Modules…"
 msgstr "搜尋模組…"
 
 #: class.jetpack-debugger.php:422
-#: modules/contact-form/grunion-contact-form.php:1375
+#: modules/contact-form/grunion-contact-form.php:1568
 msgid "Submit &#187;"
 msgstr "送出 &#187;"
 
@@ -12202,7 +12264,7 @@ msgstr "讓我們知道你的名字。"
 #: _inc/lib/core-api/class.jetpack-core-api-module-endpoints.php:1117
 #: class.jetpack-debugger.php:398 class.jetpack-modules-list-table.php:204
 #: modules/carousel/jetpack-carousel.php:265
-#: modules/contact-form/grunion-contact-form.php:1389
+#: modules/contact-form/grunion-contact-form.php:1582
 #: modules/contact-form/grunion-editor-view.php:84
 #: modules/contact-form/grunion-editor-view.php:215
 #: modules/contact-form/grunion-form-view.php:198
@@ -12329,15 +12391,15 @@ msgid "An administrator for this blog must set up the Jetpack connection."
 msgstr "你必須設定連接 Jetpack 的網站管理員。"
 
 #. translators: Don't translate the word yes here.
-#: class.jetpack-cli.php:1078
+#: class.jetpack-cli.php:1246
 msgid "Are you sure? Modifying this option may disrupt your Jetpack connection.  Type \"yes\" to continue."
 msgstr "你確定嗎？修改此選項可能會中斷 Jetpack 連線。輸入「yes」以繼續。"
 
-#: class.jetpack-cli.php:1075
+#: class.jetpack-cli.php:1243
 msgid "Are you sure? This cannot be undone. Type \"yes\" to continue:"
 msgstr "你確定嗎？此動作無法復原。輸入「yes」以繼續："
 
-#: class.jetpack-cli.php:1067
+#: class.jetpack-cli.php:1235
 msgid "Action cancelled. Have a question?"
 msgstr "已取消動作。有任何疑問嗎？"
 
@@ -12539,6 +12601,7 @@ msgid "%s is not a valid command."
 msgstr "%s 不是有效的命令。"
 
 #: class.jetpack-cli.php:36 class.jetpack-cli.php:113 class.jetpack-cli.php:973
+#: class.jetpack-cli.php:1071
 msgid "Jetpack is not currently connected to WordPress.com"
 msgstr "Jetpack 目前未連結至 WordPress.com"
 
@@ -12577,7 +12640,7 @@ msgstr "排序："
 msgid "Inactive"
 msgstr "不啟用"
 
-#: _inc/jetpack-strings.php:449
+#: _inc/jetpack-strings.php:481
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:127
 #: class.jetpack-cli.php:358 modules/vaultpress.php:26
 msgid "Active"
@@ -12593,8 +12656,8 @@ msgstr "全部"
 msgid "View:"
 msgstr "檢視："
 
-#: _inc/jetpack-strings.php:87 _inc/jetpack-strings.php:214
-#: _inc/jetpack-strings.php:218
+#: _inc/jetpack-strings.php:116 _inc/jetpack-strings.php:120
+#: _inc/jetpack-strings.php:176
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:123
 #: modules/masterbar/masterbar.php:313
 #: modules/minileven/theme/pub/minileven/searchform.php:9
@@ -12617,13 +12680,16 @@ msgctxt "The menu item label"
 msgid "Jetpack"
 msgstr "Jetpack"
 
-#: modules/contact-form/grunion-contact-form.php:150
-#: modules/contact-form/grunion-contact-form.php:151
+#: modules/contact-form/grunion-contact-form.php:154
+#: modules/contact-form/grunion-contact-form.php:155
+#: modules/contact-form/grunion-contact-form.php:753
+#: modules/contact-form/grunion-contact-form.php:771
+#: modules/contact-form/grunion-contact-form.php:823
 #: modules/contact-form/grunion-form-view.php:175
 msgid "Feedback"
 msgstr "意見反應"
 
-#: _inc/jetpack-strings.php:570
+#: _inc/jetpack-strings.php:602
 #: _inc/lib/admin-pages/class.jetpack-react-page.php:67
 #: _inc/lib/admin-pages/class.jetpack-settings-page.php:15
 #: class.jetpack-network.php:272 class.jetpack.php:3789 class.jetpack.php:3870
@@ -12632,7 +12698,7 @@ msgstr "意見反應"
 msgid "Settings"
 msgstr "設定"
 
-#: _inc/jetpack-strings.php:459 class.jetpack-network.php:204
+#: _inc/jetpack-strings.php:492 class.jetpack-network.php:204
 #: class.jetpack-network.php:270 class.jetpack.php:3865
 #: modules/publicize/ui.php:105
 msgid "Jetpack"
@@ -12642,14 +12708,14 @@ msgstr "Jetpack"
 msgid "Config"
 msgstr "設定"
 
-#: _inc/footer.php:6 _inc/jetpack-strings.php:542 _inc/jetpack-strings.php:561
+#: _inc/footer.php:6 _inc/jetpack-strings.php:574 _inc/jetpack-strings.php:593
 #: modules/custom-content-types.php:48
 #: modules/custom-post-types/portfolios.php:132
 #: modules/custom-post-types/testimonial.php:160
 msgid "Learn More"
 msgstr "瞭解更多"
 
-#: _inc/jetpack-strings.php:525
+#: _inc/jetpack-strings.php:557
 msgid "Disconnect Jetpack"
 msgstr "中斷與 Jetpack 的連線"
 
@@ -12662,6 +12728,6 @@ msgstr "支援"
 msgid "Debug"
 msgstr "偵錯"
 
-#: _inc/jetpack-strings.php:453
+#: _inc/jetpack-strings.php:486
 msgid "Test your site’s compatibility with Jetpack."
 msgstr "測試你的網站與 Jetpack 的相容性。"

@@ -796,3 +796,83 @@ function forminator_get_model_from_id( $id ) {
 
 	return $form_model;
 }
+
+/**
+ * Update Form Submission retention
+ *
+ * @since 1.0.6
+ *
+ * @param $form_id
+ * @param $retention_number
+ * @param $retention_unit
+ */
+function forminator_update_form_submissions_retention( $form_id, $retention_number, $retention_unit ) {
+	$opt = get_option( 'forminator_form_privacy_settings', array() );
+	if ( is_null( $retention_number ) && is_null( $retention_unit ) ) {
+		//deletion mode
+		unset( $opt[ $form_id ] );
+	} else {
+		$opt[ $form_id ] = array(
+			'submissions_retention_number' => (int) $retention_number,
+			'submissions_retention_unit'   => $retention_unit,
+		);
+	}
+
+	update_option( 'forminator_form_privacy_settings', $opt );
+}
+
+/**
+ * Clone form submission retention
+ *
+ * @since 1.0.6
+ *
+ * @param $old_id
+ * @param $new_id
+ */
+function forminator_clone_form_submissions_retention( $old_id, $new_id ) {
+	$opt = get_option( 'forminator_form_privacy_settings', array() );
+	if ( isset( $opt[ $old_id ] ) ) {
+		$opt[ $new_id ] = $opt[ $old_id ];
+	}
+	update_option( 'forminator_form_privacy_settings', $opt );
+}
+
+/**
+ * Update poll submission retention
+ *
+ * @since 1.0.6
+ *
+ * @param $poll_id
+ * @param $retention_number
+ * @param $retention_unit
+ */
+function forminator_update_poll_ip_address_retention( $poll_id, $retention_number, $retention_unit ) {
+	$opt = get_option( 'forminator_poll_privacy_settings', array() );
+	if ( is_null( $retention_number ) && is_null( $retention_unit ) ) {
+		//deletion mode
+		unset( $opt[ $poll_id ] );
+	} else {
+		$opt[ $poll_id ] = array(
+			'ip_address_retention_number' => (int) $retention_number,
+			'ip_address_retention_unit'   => $retention_unit,
+		);
+	}
+
+	update_option( 'forminator_poll_privacy_settings', $opt );
+}
+
+/**
+ * Clone poll ip retention
+ *
+ * @since 1.0.6
+ *
+ * @param $old_id
+ * @param $new_id
+ */
+function forminator_clone_poll_ip_address_retention( $old_id, $new_id ) {
+	$opt = get_option( 'forminator_poll_privacy_settings', array() );
+	if ( isset( $opt[ $old_id ] ) ) {
+		$opt[ $new_id ] = $opt[ $old_id ];
+	}
+	update_option( 'forminator_poll_privacy_settings', $opt );
+}

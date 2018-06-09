@@ -265,6 +265,8 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"validation"                  => __( "Validation", Forminator::DOMAIN ),
 			"validation_method"           => __( "Validation Method", Forminator::DOMAIN ),
 			"security"                    => __( "Security", Forminator::DOMAIN ),
+			"privacy"                     => __( "Privacy", Forminator::DOMAIN ),
+			"privacy_desc"                => __( "When its enabled, privacy settings here will be used instead of default privacy settings.", Forminator::DOMAIN ),
 			"form_doesnt_expire"          => __( "Form does not expire", Forminator::DOMAIN ),
 			"on_certain_date"             => __( "Expires on certain date", Forminator::DOMAIN ),
 			"expires_submits"             => __( "Expires after x-submits", Forminator::DOMAIN ),
@@ -274,6 +276,7 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"form_submit"                 => __( "On form submit", Forminator::DOMAIN ),
 			"inline"                      => __( "Enable inline validation (as user types)", Forminator::DOMAIN ),
 			"enable_honeypot"             => __( "Enable honeypot protection", Forminator::DOMAIN ),
+			"enable_privacy"              => __( "Enable privacy", Forminator::DOMAIN ),
 			"only_logged"                 => __( "Only logged-in users can submit", Forminator::DOMAIN ),
 			"select_font"                 => __( "Select font", Forminator::DOMAIN ),
 			"subtitle"        		      => __( "Subtitle", Forminator::DOMAIN ),
@@ -390,6 +393,8 @@ class Forminator_Custom_Form_Admin extends Forminator_Admin_Module {
 			"icon_cal"						=> __( "Calendar icon", Forminator::DOMAIN ),
 			"error_bg"						=> __( "Error BG", Forminator::DOMAIN ),
 			"error_color"					=> __( "Error color", Forminator::DOMAIN ),
+			"enable_ip_address_retention"	=> __( "Enable IP Address retention", Forminator::DOMAIN ),
+			"enable_submissions_retention"	=> __( "Enable submissions retention", Forminator::DOMAIN ),
 		);
 
 		$data['autofill'] = array(

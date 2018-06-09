@@ -16,13 +16,6 @@ NestedPages.QuickEditLink = function()
 	plugin.newPostData = ''; // Data after update
 	plugin.form = ''; // The newly created Quick Edit Form
 
-
-	plugin.init = function()
-	{
-		plugin.bindEvents();
-	}
-
-
 	plugin.bindEvents = function()
 	{
 		$(document).on('click', NestedPages.selectors.quickEditButtonLink, function(e){
@@ -172,9 +165,8 @@ NestedPages.QuickEditLink = function()
 	// Update the row after successfully saving quick edit data
 	plugin.updateRow = function()
 	{
-		console.log(plugin.newPostData);
 		var row = $(plugin.form).siblings('.row');
-		$(row).find('.title').html(plugin.newPostData.post_title + ' <i class="np-icon-link"></i>');
+		$(row).find('.title').html(plugin.newPostData.post_title + ' <svg class="link-icon" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0z" fill="none"/><path class="icon" d="M3.9 12c0-1.71 1.39-3.1 3.1-3.1h4V7H7c-2.76 0-5 2.24-5 5s2.24 5 5 5h4v-1.9H7c-1.71 0-3.1-1.39-3.1-3.1zM8 13h8v-2H8v2zm9-6h-4v1.9h4c1.71 0 3.1 1.39 3.1 3.1s-1.39 3.1-3.1 3.1h-4V17h4c2.76 0 5-2.24 5-5s-2.24-5-5-5z"/></svg>');
 		
 		var status = $(row).find('.status');
 		if ( (plugin.newPostData._status !== 'publish') && (plugin.newPostData._status !== 'future') ){
@@ -195,10 +187,10 @@ NestedPages.QuickEditLink = function()
 		var li = $(row).parent('li');
 		if ( (plugin.newPostData.np_status == 'hide') ){
 			$(li).addClass('np-hide');
-			$(row).find('.status').after('<i class="np-icon-eye-blocked"></i>');
+			$(row).find('.status').after('<svg class="row-status-icon status-np-hidden" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0zm0 0h24v24H0z" fill="none"/><path class="icon" d="M12 7c2.76 0 5 2.24 5 5 0 .65-.13 1.26-.36 1.83l2.92 2.92c1.51-1.26 2.7-2.89 3.43-4.75-1.73-4.39-6-7.5-11-7.5-1.4 0-2.74.25-3.98.7l2.16 2.16C10.74 7.13 11.35 7 12 7zM2 4.27l2.28 2.28.46.46C3.08 8.3 1.78 10.02 1 12c1.73 4.39 6 7.5 11 7.5 1.55 0 3.03-.3 4.38-.84l.42.42L19.73 22 21 20.73 3.27 3 2 4.27zM7.53 9.8l1.55 1.55c-.05.21-.08.43-.08.65 0 1.66 1.34 3 3 3 .22 0 .44-.03.65-.08l1.55 1.55c-.67.33-1.41.53-2.2.53-2.76 0-5-2.24-5-5 0-.79.2-1.53.53-2.2zm4.31-.78l3.15 3.15.02-.16c0-1.66-1.34-3-3-3l-.17.01z"/></svg>');
 		} else {
 			$(li).removeClass('np-hide');
-			$(row).find('.np-icon-eye-blocked').remove();
+			$(row).find('.status-np-hidden').remove();
 		}
 
 		var button = $(row).find(NestedPages.selectors.quickEditButtonLink);
@@ -232,7 +224,6 @@ NestedPages.QuickEditLink = function()
 		$(NestedPages.selectors.quickEditLoadingIndicator).hide();
 	}
 
-
-	return plugin.init();
+	return plugin.bindEvents();
 
 }

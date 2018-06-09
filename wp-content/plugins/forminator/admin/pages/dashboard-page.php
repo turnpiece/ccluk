@@ -33,7 +33,7 @@ class Forminator_Dashboard_Page extends Forminator_Admin_Page {
 	 * @since 1.0
 	 */
 	public function dashboard_create_screen() {
-		$modules = forminator_get_modules();
+		$modules = forminator_get_modules();	    	 	 	 	 	 				 	 
 		$this->template('dashboard/create-content', array(
 			'modules' => $modules
 		) );

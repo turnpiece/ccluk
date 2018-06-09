@@ -48,22 +48,28 @@ class SWP_Database_Migration {
         if ( !$this->post_meta_is_migrated() ) {
             $this->update_post_meta();
             $this->update_hidden_post_meta();
-			$this->update_last_migrated();
+						$this->update_last_migrated();
         }
 
+				if ( true === _swp_is_debug('get_user_options') ) :
+				    echo "<pre>";
+						var_export( get_option( 'social_warfare_settings', array() ) );
+						echo "</pre>";
+						wp_die();
+				endif;
 
-		if ( true === _swp_is_debug('migrate_db') ) {
-			$this->migrate();
-		}
+				if ( true === _swp_is_debug('migrate_db') ) {
+					$this->migrate();
+				}
 
         if ( true === _swp_is_debug('initialize_db') ) {
             $this->initialize_db();
         }
 
-		if ( true === _swp_is_debug('migrate_post_meta') ) {
-			$this->update_post_meta();
-			$this->update_hidden_post_meta();
-		}
+				if ( true === _swp_is_debug('migrate_post_meta') ) {
+					$this->update_post_meta();
+					$this->update_hidden_post_meta();
+				}
 
         if ( true === _swp_is_Debug('get_last_migrated') ) {
             $this->get_last_migrated( true );
@@ -112,12 +118,12 @@ class SWP_Database_Migration {
     * @return bool True if the old option still exists; false otherwise.
     */
     public function post_meta_is_migrated() {
-        if( $this->last_migrated === $this->get_last_migrated() ) {
-            return true;
+        if( $this->last_migrated !== $this->get_last_migrated() ) {
+            return false;
         }
 
-         //* Fetch posts with 2.3.5 metadata.
-        $old_metadata = get_posts( ['meta_key' => 'swp_postLocation', 'numberposts' => 1] );
+		     //* Fetch posts with 2.3.5 metadata.
+		    $old_metadata = get_posts( ['meta_key' => 'nc_postLocation', 'numberposts' => 1] );
 
         return count( $old_metadata ) === 0;
     }
@@ -158,7 +164,13 @@ class SWP_Database_Migration {
     public function update_hidden_post_meta() {
         global $wpdb;
 
-        set_time_limit(300);
+        try {
+            set_time_limit(300);
+        } catch (Exception $e) {
+            if ( function_exists( 'error_log' ) ) :
+                error_log($e->getMessage());
+            endif;
+        }
 
         $hidden_map = [
             '_googlePlus_shares'    => '_google_plus_shares',
@@ -230,8 +242,6 @@ class SWP_Database_Migration {
             $q2 = $wpdb->prepare( $query, $new_key, $prefix2 . $old_key );
             $results = $wpdb->query( $q2 );
         }
-
-        $this->update_last_migrated();
 
     }
 
@@ -389,7 +399,7 @@ class SWP_Database_Migration {
             'sideCustomColor'                   => 'single_custom_color',
             'floatBgColor'                      => 'float_background_color',
             'orderOfIconsSelect'                => 'order_of_icons_method',
-			'newOrderOfIcons'                   => 'order_of_icons',
+						'newOrderOfIcons'                   => 'order_of_icons',
         ];
 
         $value_map = [
@@ -446,18 +456,18 @@ class SWP_Database_Migration {
                 $migrations['custom_color'] = $new_value;
                 $migrations['custom_color_outlines'] = $new_value;
 
-				// If the float style source is set to inherit the style from the static buttons.
-                if ( $options['floatStyleSource'] == true ) :
+						// If the float style source is set to inherit the style from the static buttons.
+            if ( $options['floatStyleSource'] == true ) :
                     $migrations['float_custom_color'] = $new_value;
                     $migrations['float_custom_color_outlines'] = $new_value;
                 endif;
             endif;
 
-			// Only if the source is set to not inherit them from the static buttons.
-			if ( $old === 'sideCustomColor' ) :
-				$migrations['float_custom_color'] = $new_value;
-				$migrations['float_custom_color_outlines'] = $new_value;
-			endif;
+						// Only if the source is set to not inherit them from the static buttons.
+						if ( $old === 'sideCustomColor' ) :
+							$migrations['float_custom_color'] = $new_value;
+							$migrations['float_custom_color_outlines'] = $new_value;
+						endif;
 
             if ( array_key_exists( $old, $map) ) :
                 //* We specified an update to the key.

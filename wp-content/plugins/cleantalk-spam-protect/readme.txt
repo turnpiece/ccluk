@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 4.9
-Stable tag: 5.96
+Stable tag: 5.97
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -516,6 +516,14 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.97 June 7 2018 =
+  * Fix: Update system.
+  * Fix: Feedback from public page (admin only).
+  * Fix: Users and comment check: API error.
+  * Fix: Too many negative reports. (Too big ct_data option)
+  * Fix: SpamFireWall: Infinite redirection on the blocking page.
+  * Minor fixes.
+
 = 5.96 May 22 2018 =
   * Fix: Update system.
   * Mod: Reset all counters button in admin bar.
@@ -1593,6 +1601,14 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.97 June 7 2018 =
+  * Fix: Update system.
+  * Fix: Feedback from public page (admin only).
+  * Fix: Users and comment check: API error.
+  * Fix: Too many negative reports. (Too big ct_data option)
+  * Fix: SpamFireWall: Infinite redirection on the blocking page.
+  * Minor fixes.
+
 = 5.96 May 22 2018 =
   * Fix: Update system.
   * Mod: Reset all counters button in admin bar.

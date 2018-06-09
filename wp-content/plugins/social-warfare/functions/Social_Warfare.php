@@ -152,6 +152,7 @@ class Social_Warfare {
          */
         new SWP_Database_Migration();
 
+
         /**
          * The Options Page Class
          *
@@ -224,6 +225,12 @@ class Social_Warfare {
 		 *
 		 */
 		new SWP_User_Profile();
+
+        /**
+         * 
+         * Instantiates all of our notices.
+         */
+        new SWP_Notice_Loader();
 	}
 
 
@@ -258,7 +265,9 @@ class Social_Warfare {
             'Permalink',
             'Plugin_Updater',
             'Database_Migration',
-			'URL_Management'
+			'URL_Management',
+            'Notice',
+            'Notice_Loader'
         ];
         $this->load_files( '/functions/utilities/', $utilities);
 

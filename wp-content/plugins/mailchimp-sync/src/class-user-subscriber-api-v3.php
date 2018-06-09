@@ -172,22 +172,32 @@ class UserSubscriberAPIv3 implements UserSubscriber {
     }
 
     $exists = false;
+    $api = $this->get_api();
 
     // perform the call    
     try {
-      $existing_member_data = $this->get_api()->get_list_member( $this->list_id, $mailchimp_email_address );
+      $existing_member_data = $api->get_list_member( $this->list_id, $mailchimp_email_address );
       $exists = true;
     } catch( \MC4WP_API_Resource_Not_Found_Exception $e ) {
       // OK: subscriber does not exist, no need to unsubscribe
       $exists = false;
-    }
+    } 
 
-    // only unsubscribe users that are fully subscribed
-    if( $exists && $existing_member_data->status === 'subscribed' ) {
-      $args = array( 
-        'status' => 'unsubscribed' 
-      );
-      $member = $this->get_api()->update_list_member( $this->list_id, $mailchimp_email_address, $args );
+    /**
+    * Filters whether subscribers should be deleted or whether their status should be updated to "unsubscribed"
+    */
+    $hard_delete = apply_filters( 'mailchimp_sync_delete_subscribers', false );
+
+    if( $exists ) {
+      if( $hard_delete ) {
+        $api->delete_list_member( $this->list_id, $mailchimp_email_address );
+      } else if( $existing_member_data->status === 'subscribed' ) {
+        // only update status if user is fully subscribed
+        $args = array( 
+          'status' => 'unsubscribed' 
+        );
+        $member = $api->update_list_member( $this->list_id, $mailchimp_email_address, $args );
+     }
     }
 
     $this->users->delete_mailchimp_email_address( $user_id );

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-21 15:07:07+0000\n"
+"PO-Revision-Date: 2018-05-29 07:47:42+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -2862,13 +2862,13 @@ msgstr "Du har valt att radera användaren från alla nätverk och webbplatser."
 msgid "You have chosen to delete the following users from all networks and sites."
 msgstr "Du har valt att radera följande användare från alla nätverk och webbplatser."
 
-#: wp-admin/includes/file.php:18
-msgid "Theme Footer"
-msgstr "Sidfor för tema"
-
 #: wp-admin/includes/file.php:17
 msgid "Theme Header"
 msgstr "Sidhuvud för tema"
+
+#: wp-admin/includes/file.php:18
+msgid "Theme Footer"
+msgstr "Sidfot för tema"
 
 #: wp-admin/includes/class-wp-screen.php:1013
 msgid "Boxes"

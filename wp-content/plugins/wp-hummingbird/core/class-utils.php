@@ -90,15 +90,13 @@ class WP_Hummingbird_Utils {
 		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/admin.min.js', array( 'jquery', 'underscore' ), $ver );
 
 		$i10n = array(
-			'recheckURL' => add_query_arg( array(
-				'view' => 'browser',
-				'run'  => 'true',
-			), self::get_admin_menu_url( 'caching' ) ),
-			'htaccessErrorURL' => add_query_arg( array(
-				'view'           => 'browser',
-				'htaccess-error' => 'true',
-			), self::get_admin_menu_url( 'caching' ) ),
-			'cacheEnabled' => WP_Hummingbird_Module_Server::is_htaccess_written( 'caching' ),
+			'errorCachePurge'        => __( 'There was an error during the cache purge. Check file permissions are 755
+										for /wp-content/wphb-cache or delete directory manually.', 'wphb' ),
+			'successGravatarPurge'   => __( 'Gravatar cache purged.', 'wphb' ),
+			'successPageCachePurge'  => __( 'Page cache purged.', 'wphb' ),
+			'errorRecheckStatus'     => __( 'There was an error re-checking the caching status, please try again later.', 'wphb' ),
+			'successRecheckStatus'   => __( 'Browser caching status updated.', 'wphb' ),
+			'successCloudflarePurge' => __( 'Cloudflare cache successfully purged. Please wait 30 seconds for the purge to complete.', 'wphb' ),
 		);
 		wp_localize_script( 'wphb-admin', 'wphbCachingStrings', $i10n );
 
@@ -145,13 +143,18 @@ class WP_Hummingbird_Utils {
 			'nonces' => array(
 				'HBFetchNonce' => wp_create_nonce( 'wphb-fetch' ),
 			),
+			'urls'   => array(
+				'cachingEnabled' => add_query_arg( 'view', 'caching', self::get_admin_menu_url( 'caching' ) ),
+			),
 			'strings' => array(
-				'errorSettingsUpdate' => __( 'Error updating settings', 'wphb' ),
-				'successUpdate'       => __( 'Settings updated', 'wphb' ),
-				'deleteAll'           => __( 'Delete All', 'wphb' ),
-				'db_delete'           => __( 'Are you sure you wish to delete', 'wphb' ),
-				'db_entries'          => __( 'database entries', 'wphb' ),
-				'db_backup'           => __( 'Make sure you have a current backup just in case.', 'wphb' ),
+				'htaccessUpdated'       => __( 'Your .htaccess file has been updated', 'wphb' ),
+				'htaccessUpdatedFailed' => __( 'There was an error updating the .htaccess file', 'wphb' ),
+				'errorSettingsUpdate'   => __( 'Error updating settings', 'wphb' ),
+				'successUpdate'         => __( 'Settings updated', 'wphb' ),
+				'deleteAll'             => __( 'Delete All', 'wphb' ),
+				'db_delete'             => __( 'Are you sure you wish to delete', 'wphb' ),
+				'db_entries'            => __( 'database entries', 'wphb' ),
+				'db_backup'             => __( 'Make sure you have a current backup just in case.', 'wphb' ),
 			),
 		);
 
@@ -320,7 +323,7 @@ class WP_Hummingbird_Utils {
 	 * @return array|bool
 	 */
 	public static function get_status( $module, $api = false ) {
-		if ( ! in_array( $module, array( 'gzip', 'caching' ) ) ) {
+		if ( ! in_array( $module, array( 'gzip', 'caching' ), true ) ) {
 			return false;
 		}
 
@@ -903,7 +906,7 @@ class WP_Hummingbird_Utils {
 	 *
 	 * @param string $module Module slug.
 	 *
-	 * @return WP_Hummingbird_Module|bool
+	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache
 	 */
 	public static function get_module( $module ) {
 		$modules = self::get_modules();

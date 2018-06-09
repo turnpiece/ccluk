@@ -4,9 +4,8 @@
  *
  * @package Hummingbird
  *
- * @var string $title       Title of the module.
- * @var int    $issues      Number of caching issues.
- * @var string $url         Url to recheck status.
+ * @var string $title   Title of the module.
+ * @var int    $issues  Number of caching issues.
  */
 
 ?>
@@ -17,8 +16,7 @@
 	</div>
 <?php endif; ?>
 <div class="sui-actions-right">
+	<span class="spinner standalone"></span>
 	<span class="wphb-label-notice-inline hide-to-mobile"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></span>
-	<a href="<?php echo esc_url( $url ); ?>" class="sui-button sui-button-ghost" id="recheck-expiry" name="submit">
-		<?php esc_html_e( 'Re-Check Expiry', 'wphb' ); ?>
-	</a>
+	<input type="submit" class="sui-button sui-button-ghost" value="<?php esc_attr_e( 'Re-Check Expiry', 'wphb' ); ?>">
 </div>

@@ -31,7 +31,7 @@ class WP_Hummingbird_Settings {
 	 *
 	 * @var array
 	 */
-	private static $network_modules = array( 'minify', 'page_cache', 'performance' );
+	private static $network_modules = array( 'minify', 'page_cache', 'performance', 'advanced' );
 
 	/**
 	 * Return the plugin instance.
@@ -62,6 +62,7 @@ class WP_Hummingbird_Settings {
 				'enabled'     => false,
 				'use_cdn'     => true,
 				'log'         => false,
+				'file_path'   => '',
 				// Only for multisites. Toggles minification in a subsite
 				// By default is true as if 'minify'-'enabled' is set to false, this option has no meaning.
 				'minify_blog' => true,
@@ -134,17 +135,7 @@ class WP_Hummingbird_Settings {
 			'advanced' => array(
 				'query_string' => false,
 				'emoji'        => false,
-				'prefetch'     => array(
-					'//fonts.googleapis.com',
-					'//fonts.gstatic.com',
-					'//ajax.googleapis.com',
-					'//apis.google.com',
-					'//google-analytics.com',
-					'//www.google-analytics.com',
-					'//ssl.google-analytics.com',
-					'//youtube.com',
-					'//s.gravatar.com',
-				),
+				'prefetch'     => array(),
 				'db_cleanups'  => false,
 			),
 			'rss' => array(
@@ -178,6 +169,7 @@ class WP_Hummingbird_Settings {
 			'minify'      => array( 'minify_blog', 'view', 'block', 'dont_minify', 'combine', 'position', 'defer', 'inline' ),
 			'page_cache'  => array( 'cache_blog' ),
 			'performance' => array( 'dismissed', 'last_score' ),
+			'advanced'    => array( 'query_string', 'emoji', 'prefetch' ),
 		);
 
 		return $options[ $module ];

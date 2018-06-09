@@ -11,6 +11,7 @@
  * @since     1.0.0 | Unknown     | Created
  * @since     2.2.4 | 02 MAY 2017 | Refactored functions & updated docblocking
  * @since     3.0.0 | 05 APR 2018 | Rebuilt into a class-based system.
+ * @since     3.0.9 | 04 JUN 2018 | Removed deprecated API request (share counts)
  *
  */
 class SWP_Google_Plus extends SWP_Social_Network {
@@ -42,34 +43,4 @@ class SWP_Google_Plus extends SWP_Social_Network {
 
 		$this->init_social_network();
 	}
-
-
-	/**
-	 * Generate the API Share Count Request URL
-	 *
-	 * @since  3.0.0 | 07 APR 2018 | Created
-	 * @access public
-	 * @param  string $url The permalink of the page or post for which to fetch share counts
-	 * @return string $request_url The complete URL to be used to access share counts via the API
-	 *
-	 */
-	public function get_api_link( $url ) {
-		return $url;
-	}
-
-
-	/**
-	 * Parse the response to get the share count
-	 *
-	 * @since  3.0.0 | 07 APR 2018 | Created
-	 * @access public
-	 * @param  string $response The raw response returned from the API request
-	 * @return int $total_activity The number of shares reported from the API
-	 *
-	 */
-	public function parse_api_response( $response ) {
-		$response = json_decode( $response, true );
-		return isset( $response[0]['result']['metadata']['globalCounts']['count'] )?intval( $response[0]['result']['metadata']['globalCounts']['count'] ):0;
-	}
-
 }

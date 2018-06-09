@@ -26,7 +26,7 @@ class PostDataFactory
 	public function build($post, $h_taxonomies = null, $f_taxonomies = null)
 	{
 		$this->integrations = new IntegrationFactory;
-		$this->post_data = new \stdClass();
+		$this->post_data = new \WP_Post($post);
 		$this->addPostVars($post);
 		$this->addPostMeta($post);
 		$this->addOriginalLink($post);
@@ -42,6 +42,7 @@ class PostDataFactory
 	public function addPostVars($post)
 	{
 		$this->post_data->id = $post->ID;
+		$this->post_data->ID = $post->ID;
 		$this->post_data->parent_id = $post->post_parent;
 		$this->post_data->title = $post->post_title;
 		$this->post_data->password = $post->post_password;

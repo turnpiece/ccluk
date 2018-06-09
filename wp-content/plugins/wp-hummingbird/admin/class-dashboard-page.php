@@ -400,24 +400,18 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 			}
 		} // End if().
 
-		/**
-		 * Advanced tools
-		 *
-		 * At the moment advanced tools is only for non network installs.
-		 */
-		if ( ! is_multisite() ) {
-			$this->add_meta_box(
-				'dashboard/advanced-tools',
-				__( 'Advanced Tools', 'wphb' ),
-				array( $this, 'dashboard_advanced_metabox' ),
-				null,
-				array( $this, 'dashboard_advanced_metabox_footer' ),
-				'box-dashboard-right',
-				array(
-					'box_footer_class' => 'sui-box-footer sui-pull-up',
-				)
-			);
-		}
+		/* Advanced tools */
+		$this->add_meta_box(
+			'dashboard/advanced-tools',
+			__( 'Advanced Tools', 'wphb' ),
+			array( $this, 'dashboard_advanced_metabox' ),
+			null,
+			array( $this, 'dashboard_advanced_metabox_footer' ),
+			'box-dashboard-right',
+			array(
+				'box_footer_class' => 'sui-box-footer sui-pull-up',
+			)
+		);
 
 		/* Smush */
 		$smush_id = WP_Hummingbird_Utils::is_member() ? 'dashboard-smush' : 'dashboard/smush/no-membership';
@@ -561,40 +555,39 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 
 		/* @var WP_Hummingbird_Module_Cloudflare $cf_module */
 		$cf_module = WP_Hummingbird_Utils::get_module( 'cloudflare' );
-		$cf_server = $cf_module->has_cloudflare();
-		$cf_active = false;
-		$cf_current_human = '';
-		$cf_tooltip = '';
-		$cf_current = '';
+
 		$show_cf_notice = false;
-		if ( $cf_module->is_connected() && $cf_module->is_zone_selected() ) {
-			$cf_active = true;
-			$cf_current = $cf_module->get_caching_expiration();
-			$expiration = $cf_current;
+		$cf_current = $cf_current_human = $cf_tooltip = '';
+		$cf_active  = $cf_module->is_connected() && $cf_module->is_zone_selected();
+		$cf_server = $cf_module->has_cloudflare();
+
+		if ( $cf_active ) {
+			$expiration = $cf_current = $cf_module->get_caching_expiration();
+
 			if ( is_wp_error( $cf_current ) ) {
 				$cf_current = '';
 			}
 
-			$cf_tooltip = 691200 === $cf_current ? __( 'Caching is enabled', 'wphb' ) : __( "Caching is enabled but you aren't using our recommended value", 'wphb' );
-			$cf_current_human = WP_Hummingbird_Utils::human_read_time_diff( $cf_current );
-
 			// Fill the report with values from Cloudflare.
 			$caching_status = array_fill_keys( array_keys( $expires ), $expiration );
+			// Save status.
+			$cf_server = $cf_module->has_cloudflare();
+
+			$cf_tooltip = 691200 === $cf_current ? __( 'Caching is enabled', 'wphb' ) : __( "Caching is enabled but you aren't using our recommended value", 'wphb' );
+			$cf_current_human = WP_Hummingbird_Utils::human_read_time_diff( $cf_current );
 		} elseif ( ! get_site_option( 'wphb-cloudflare-dash-notice' ) && 'dismissed' !== get_site_option( 'wphb-cloudflare-dash-notice' ) ) {
 			$show_cf_notice = true;
 		}
 		$cf_notice = $cf_server ? __( 'Ahoi, we’ve detected you’re using CloudFlare!', 'wphb' ) : __( 'Using CloudFlare?', 'wphb' );
 
 		// Get number of issues for notification box.
+		$issues = 0;
 		if ( ! $cf_active ) {
 			$issues = WP_Hummingbird_Utils::get_number_of_issues( 'caching', $caching_status );
 		} elseif ( 691200 > $expiration ) {
-			count( $caching_status );
 			$issues = count( $caching_status );
 			// Add an issue for the CloudFlare type.
 			$issues++;
-		} else {
-			$issues = 0;
 		}
 		$human_results = array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $caching_status );
 

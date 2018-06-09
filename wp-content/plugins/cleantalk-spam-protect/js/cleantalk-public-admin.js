@@ -38,7 +38,7 @@ jQuery(document).ready(function(){
 		
 		var data = {
 			'action': 'ct_feedback_comment',
-			'security': ctPublic.ct_ajax_nonce,
+			'security': ctPublicAdmin.ct_ajax_nonce,
 			'comment_id': ct_current_button.attr('commentid'),
 			'comment_status': ct_comment_status,
 			'change_status': 1
@@ -82,7 +82,9 @@ jQuery(document).ready(function(){
 				ct_feedback_wrap.data('interval_id', ct_timeout_id);
 			},
 			error: function(jqXHR, textStatus, errorThrown) {
-				
+				console.log(jqXHR);
+				console.log(textStatus);
+				console.log(errorThrown);
 			},
 			timeout: 5000
 		});

@@ -20,9 +20,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 	 *
 	 * @since 1.6.0
 	 */
-	public function init() {
-
-	}
+	public function init() {}
 
 	/**
 	 * Execute module actions
@@ -65,6 +63,24 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 		global $wphb_fs;
 
 		return $wphb_fs->purge( 'gravatar' );
+	}
+
+	/**
+	 * Activate module.
+	 *
+	 * @since 1.9.0
+	 */
+	public function enable() {
+		WP_Hummingbird_Settings::update_setting( 'enabled', true, $this->slug );
+	}
+
+	/**
+	 * Deactivate module.
+	 *
+	 * @since 1.9.0
+	 */
+	public function disable() {
+		WP_Hummingbird_Settings::update_setting( 'enabled', false, $this->slug );
 	}
 
 	/**

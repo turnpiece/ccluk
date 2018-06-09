@@ -763,7 +763,7 @@ class Forminator_Form_Entry_Model {
 		}
 		$table_name 		= Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
 		$table_meta_name 	= Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
-		$cache_key 			= get_class( self );
+		$cache_key 			= 'Forminator_Form_Entry_Model';
 
 		$sql = "DELETE FROM {$table_meta_name} WHERE `entry_id` = %d";
 		$db->query( $db->prepare( $sql, $entry_id ) );
@@ -943,5 +943,124 @@ class Forminator_Form_Entry_Model {
 		}
 
 		return $string_value;
+	}
+
+	/**
+	 * Get entries by email
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param $email
+	 *
+	 * @return array
+	 */
+	public static function get_custom_form_entry_ids_by_email( $email ) {
+		global $wpdb;
+		$meta_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY_META );
+		$sql
+		                 = "SELECT m.entry_id AS entry_id
+							FROM {$meta_table_name} m
+							WHERE (m.meta_key LIKE %s OR m.meta_key LIKE %s)
+							AND m.meta_value = %s
+							GROUP BY m.entry_id";
+
+		$sql       = $wpdb->prepare(
+			$sql,
+			$wpdb->esc_like( 'email-' ) . '%',
+			$wpdb->esc_like( 'text-' ) . '%',
+			$email
+		);
+		$entry_ids = $wpdb->get_col( $sql );
+
+		return $entry_ids;
+	}
+
+	/**
+	 * Get entries older than $date_created
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param $entry_type
+	 * @param $date_created
+	 *
+	 * @return array
+	 */
+	public static function get_older_entry_ids( $entry_type, $date_created ) {
+		global $wpdb;
+		$entry_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
+		$sql
+		                  = "SELECT e.entry_id AS entry_id
+							FROM {$entry_table_name} e
+							WHERE e.entry_type = %s
+							AND e.date_created < %s";
+
+		$sql = $wpdb->prepare(
+			$sql,
+			$entry_type,
+			$date_created
+		);
+
+		$entry_ids = $wpdb->get_col( $sql );
+
+		return $entry_ids;
+	}
+
+	/**
+	 * Get entries older than $date_created of form_id
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param $form_id
+	 * @param $date_created
+	 *
+	 * @return array
+	 */
+	public static function get_older_entry_ids_of_form_id( $form_id, $date_created ) {
+		global $wpdb;
+		$entry_table_name = Forminator_Database_Tables::get_table_name( Forminator_Database_Tables::FORM_ENTRY );
+		$sql
+		                  = "SELECT e.entry_id AS entry_id
+							FROM {$entry_table_name} e
+							WHERE e.form_id = %d
+							AND e.date_created < %s";
+
+		$sql = $wpdb->prepare(
+			$sql,
+			$form_id,
+			$date_created
+		);
+
+		$entry_ids = $wpdb->get_col( $sql );
+
+		return $entry_ids;
+	}
+
+	/**
+	 * Update Meta
+	 *
+	 * @since 1.0.6
+	 *
+	 * @param             $meta_id
+	 * @param string      $meta_key      - the meta key
+	 * @param bool|object $default_value - the default value
+	 *
+	 * @return bool|string
+	 */
+	public function update_meta( $meta_id, $meta_key, $default_value = false ) {
+		global $wpdb;
+		$wpdb->update(
+			$this->table_meta_name,
+			array(
+				'entry_id'   => $this->entry_id,
+				'meta_key'   => $meta_key,
+				'meta_value' => $default_value,
+			),
+			array(
+				'meta_id' => $meta_id,
+			)
+		);
+		$cache_key = get_class( $this );
+		wp_cache_delete( $this->entry_id, $cache_key );
+		$this->get( $this->entry_id );
 	}
 }

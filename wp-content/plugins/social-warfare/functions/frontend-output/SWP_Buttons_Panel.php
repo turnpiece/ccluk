@@ -96,7 +96,7 @@ class SWP_Buttons_Panel {
     public function __construct( $args = array(), $shortcode = false ) {
         global $swp_social_networks, $post;
         $this->networks = $swp_social_networks;
-		$this->args = $args;
+    		$this->args = $args;
 
         //* Access the $post once while we have it. Values may be overwritten.
         $this->post_data = [
@@ -111,9 +111,9 @@ class SWP_Buttons_Panel {
         $this->content = isset( $args['content'] ) ? $args['content'] : '';
         $this->is_shortcode = $shortcode;
         $this->localize_options( $args );
-	    $this->establish_post_id();
+  	    $this->establish_post_id();
 		$this->shares = get_social_warfare_shares( $this->post_data['ID'] );
-	    $this->establish_location();
+  	    $this->establish_location();
 		$this->establish_permalink();
         $this->establish_active_buttons();
 
@@ -158,6 +158,8 @@ class SWP_Buttons_Panel {
 		$this->options[$this->options] = $value;
 		return $this;
 	}
+
+
 	/**
 	 * Set multiple options
 	 *
@@ -173,6 +175,8 @@ class SWP_Buttons_Panel {
 		array_merge( $this->options , $options );
 		return $this;
 	}
+
+
 	/**
 	 * Set the post ID for this buttons panel.
 	 *
@@ -190,11 +194,29 @@ class SWP_Buttons_Panel {
 		if ( isset( $this->args['postID'] ) ) :
 			$this->post_data['ID'] = $this->args['postID'];
         endif;
-		// Current argument.
-		if ( isset( $this->args['post_id'] ) ) :
-			$this->post_data['ID'] = $this->args['post_id'];
+
+    		// Current argument.
+    		if ( isset( $this->args['post_id'] ) ) :
+    			$this->post_data['ID'] = $this->args['post_id'];
+        endif;
+
+        if ( isset ( $this->args['id'] ) ) :
+          $post = get_post( $this->args['id'] );
+          $post_data = [
+              'ID'           => $post->ID,
+              'post_type'    => $post->post_type,
+              'permalink'    => get_the_permalink( $post->ID ),
+              'post_title'   => $post->post_title,
+              'post_status'  => $post->post_status,
+              'post_content' => $post->post_content
+          ];
+
+          $this->post_data = array_merge( $this->post_data, $post_data );
+
         endif;
 	}
+
+
 	/**
 	 * Establish the post content
 	 *
@@ -211,6 +233,8 @@ class SWP_Buttons_Panel {
 			$this->content = $args['content'];
 		endif;
     }
+
+
 	/**
 	 * Establish Location
 	 *
@@ -263,7 +287,6 @@ class SWP_Buttons_Panel {
 		 * for that type from the global options.
 		 *
 		 */
-
 		// If we are on the home page
 		if( is_front_page() ):
             $home = $this->options['location_home'];
@@ -412,6 +435,9 @@ class SWP_Buttons_Panel {
 			endif;
             echo $html;
         endif;
+
+        $this->handle_timestamp();
+
         return $html;
     }
 
@@ -471,7 +497,7 @@ class SWP_Buttons_Panel {
             if( 'off' === $post_setting) :
                 return 'none';
             endif;
-            
+
 			$post_on = true;
 		};
 
@@ -586,8 +612,12 @@ class SWP_Buttons_Panel {
 	        if ( $echo ) :
 	            echo $html;
 	        endif;
+
+            $this->handle_timestamp();
+
 	        return $html;
 		endif;
+
     }
 
 
@@ -735,12 +765,11 @@ class SWP_Buttons_Panel {
     }
 
 
-    //* TODO: This has not been refactored.
     protected function handle_timestamp() {
-        if ( swp_is_cache_fresh( $this->post_data['ID'] ) == false  && isset($this->options['cache_method']) && 'legacy' === $this->options['cache_method'] ) :
-			delete_post_meta( $this->post_data['ID'],'swp_cache_timestamp' );
-			update_post_meta( $this->post_data['ID'],'swp_cache_timestamp',floor( ((date( 'U' ) / 60) / 60) ) );
-		endif;
+        if ( swp_is_cache_fresh( $this->post_data['ID'] ) == false  && isset( $this->options['cache_method'] ) && 'legacy' === $this->options['cache_method'] ) :
+      			delete_post_meta( $this->post_data['ID'], 'swp_cache_timestamp' );
+      			update_post_meta( $this->post_data['ID'], 'swp_cache_timestamp', floor( ( (date( 'U' ) / 60) / 60) ) );
+    		endif;
     }
 
 
@@ -767,9 +796,11 @@ class SWP_Buttons_Panel {
         $this->content = $content;
 
         if ( isset( $this->args['echo']) && true === $this->args['echo'] ) {
-			if( true == _swp_is_debug('buttons_output')):
-				echo 'Echoing, not returning. In SWP_Buttons_Panel on line '.__LINE__;
-			endif;
+
+          	if( true == _swp_is_debug('buttons_output')):
+        				echo 'Echoing, not returning. In SWP_Buttons_Panel on line ' . __LINE__;
+      			endif;
+
             echo $this->content;
         }
 
@@ -801,7 +832,7 @@ class SWP_Buttons_Panel {
             return;
         }
 
-		$this->handle_timestamp();
+        $this->handle_timestamp();
 
         return $this->do_print();
     }

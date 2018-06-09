@@ -388,7 +388,7 @@ function apbct_admin_init(){
 	if($current_version != APBCT_VERSION){
 		if(is_main_site()){
 			require_once('cleantalk-updater.php');
-			$result = ct_run_update_actions($current_version, APBCT_VERSION);
+			$result = apbct_run_update_actions($current_version, APBCT_VERSION);
 			//If update is successfull
 			if($result === true){
 				ct_send_feedback(
@@ -1089,7 +1089,7 @@ function ct_input_apikey() {
 				echo "&nbsp;" .  __("or") . "&nbsp;";
 				echo '<input id="get_key_auto" name="get_apikey_auto" type="submit" class="cleantalk_manual_link" value="' . __('Get access key automatically', 'cleantalk') . '" />';
 			}
-			echo '<input id="ct_admin_timezone" name="ct_admin_timezone" type="hidden" value="null" />';
+			echo '<input type="hidden" id="ct_admin_timezone" name="ct_admin_timezone" value="null" />';
             echo "<br />";
             echo "<br />";
 			

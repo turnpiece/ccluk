@@ -67,6 +67,7 @@ class Forminator_Admin_l10n {
 				"pagination_entries"    => __( "Number of entries per page", Forminator::DOMAIN ),
 				"pagination_listings"   => __( "Pagination Settings", Forminator::DOMAIN ),
 				"uninstall_settings"   	=> __( "Uninstall Settings", Forminator::DOMAIN ),
+				"privacy_settings"   	=> __( "Privacy Settings", Forminator::DOMAIN ),
 				"validate_form_name"    => __( "Form name cannot be empty! Please pick a name for your form.", Forminator::DOMAIN ),
 				"close"                 => __( "Close", Forminator::DOMAIN ),
 				'records'               => __( "Records", Forminator::DOMAIN ),

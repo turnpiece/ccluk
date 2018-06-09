@@ -4,6 +4,27 @@ Tested up to: 4.9.5
 
 Change Log:
 
+= 1.9.0 ( 2018-05-29 ) =
+- New: Page caching dynamic page types
+- New: Define the path where to store optimized assets
+- New: Advanced Tools now available on multisite installs
+- Fix: Asset optimization error during minify process
+- Fix: Remove invalid link to configure browser caching in IIS 6
+- Fix: Hide clear cache notice when setting file change detection to auto
+- Fix: Incorrect link on the Gzip compression and Browser caching modules
+- Fix: Performance report colors, icons and buttons
+- Enhance: Asset Optimization UI
+- Enhance: Asset Optimization re-check expiry button functionality
+- Enhance: Asset Optimization handling of root-relative URLs when using CDN
+- Enhance: Asset Optimization fonts moved to Other section in the file list
+- Enhance: Asset Optimization size handling of compressed assets
+- Enhance: Publish changes notice is now less invasive
+- Enhance: Error handling in Cloudflare module
+- Enhance: Optimize performance on Caching modules
+- Enhance: Prefetch DNS values are empty by default, with the ability to auto paste in recommended defaults
+- Enhance: Clear cache notices will not show on subsites in a multisite network
+- Enhance: Hummingbird will no longer store user selected server type and always show detected server
+
 = 1.8.2 ( 2018-04-24 ) =
 - New: System Information module in Advanced Tools
 - Enhance: Improve caching notices
@@ -374,4 +395,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1524597812-au
+87274-1528550924-au

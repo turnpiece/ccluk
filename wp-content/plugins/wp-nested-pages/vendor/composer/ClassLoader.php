@@ -10,7 +10,7 @@
  * file that was distributed with this source code.
  */
 
-namespace Composer\Autoload;
+namespace NestedPages\Composer\Autoload;
 
 /**
  * ClassLoader implements a PSR-0 class loader

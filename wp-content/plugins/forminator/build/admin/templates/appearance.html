@@ -1,19 +1,19 @@
 <div>
-	
+
 	<script type="text/template" id="appearance-layout-tpl">
-		
+
 		<div id="wpmudev-forminator-content" class="forminator-appearance-content wpmudev-page-wizard"></div>
 
 	</script>
 
 	<script type="text/template" id="appearance-main-tpl">
-		
+
 		<div class="wpmudev-wizard--content">
-			
+
 			<nav class="wpmudev-content--nav">
-				
+
 				<ul class="wpmudev-nav--tabs">
-					
+
 					<li class="wpmudev-tab--item forminator-wizard-appearance"><a href="#forminator-wizard-appearance">
 						<span class="wpmudev-text">{{ Forminator.l10n.appearance.appearance }}</span>
 						<span class="wpmudev-icon-loading"></span>
@@ -27,13 +27,13 @@
 						<span class="wpdui-icon wpdui-icon-check"></span>
 					</a></li>
 					{[ } ]}
-					
+
 					<li class="wpmudev-tab--item forminator-wizard-behaviour"><a href="#forminator-wizard-behaviour">
 						<span class="wpmudev-text">{{ Forminator.l10n.appearance.form_behaviour }}</span>
 						<span class="wpmudev-icon-loading"></span>
 						<span class="wpdui-icon wpdui-icon-check"></span>
 					</a></li>
-					
+
 					<li class="wpmudev-tab--item forminator-wizard-emails"><a href="#forminator-wizard-emails">
 						<span class="wpmudev-text">{{ Forminator.l10n.appearance.form_emails }}</span>
 						<span class="wpmudev-icon-loading"></span>
@@ -47,7 +47,7 @@
 						<span class="wpdui-icon wpdui-icon-check"></span>
 					</a></li>
 					-->
-					
+
 				</ul>
 
 				<select class="wpmudev-select wpmudev-tabs-mobile">
@@ -91,26 +91,26 @@
 	</script>
 
 	<script type="text/template" id="appearance-buttons-tpl">
-		
+
 		<div class="wpmudev-wizard--footer">
-			
+
 			<div class="wpmudev-footer--clear"></div>
-			
+
 			<nav class="wpmudev-footer--nav">
-				
+
 				<div class="wpmudev-nav--left">
-					
+
 					<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-back">{{Forminator.l10n.builder.form_builder}}</button>
 
 				</div>
-				
+
 				<div class="wpmudev-nav--right">
-					
+
 					<button class="wpmudev-button wpmudev-button-blue forminator-save forminator-save-changes" data-nonce="" data-id="">
 						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.save}}</span>
 						<span class="wpmudev-loading"></span>
 					</button>
-					
+
 					<button class="wpmudev-button forminator-save forminator-save-layout">
 						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.publish}}</span>
 						<span class="wpmudev-loading"></span>
@@ -172,7 +172,7 @@
 				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.form_style }}</label>
 			</div>
 			<div class="wpmudev-option--container">
-				
+
 				<div id="appearance-cform-form-styles" class="wpmudev-box-gray">
 
 					<div class="wpmudev-row">
@@ -203,14 +203,14 @@
 					</div>
 
 				</div>
-				
+
 			</div>
 		</div>
 
 		<div class="wpmudev-option">
 			<div class="wpmudev-border"></div>
 		</div>
-		
+
 		<div class="wpmudev-option--divided">
 			<div class="wpmudev-option--name">
 				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.fields_style }}</label>
@@ -311,6 +311,18 @@
 			<div class="wpmudev-option--container appearance-section-form-security"></div>
 		</div>
 
+		<div class="wpmudev-option">
+			<div class="wpmudev-border"></div>
+		</div>
+
+		<div class="wpmudev-option--divided">
+			<div class="wpmudev-option--name">
+				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.privacy}}</label>
+				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.privacy_desc}}</label>
+			</div>
+			<div class="wpmudev-option--container appearance-section-form-privacy"></div>
+		</div>
+
 	</script>
 
 	<script type="text/template" id="appearance-section-emails-tpl">
@@ -341,26 +353,26 @@
 	</script>
 
 	<script type="text/template" id="appearance-section-advanced-tpl">
-		
+
 		<div class="appearance-section-form-advanced"></div>
-		
+
 	</script>
 
 	<script type="text/template" id="appearance-color-grid-tpl">
-		
+
 		<!-- FORM -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.form }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -378,22 +390,22 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 
 		<!-- LABELS -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.labels }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -421,7 +433,7 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 
 		{[ if ( has_section ) { ]}
@@ -429,15 +441,15 @@
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.section }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -460,42 +472,42 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		<!-- INPUT + TEXTAREA -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.input_textarea }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-bg wpmudev-not--material">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
 						<div class="wpmudev-pickers"></div>
 					</div>
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-border wpmudev-not--flat">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
 						<div class="wpmudev-pickers"></div>
 					</div>
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-color">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
 						<div class="wpmudev-pickers"></div>
 					</div>
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-placeholder">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.placeholder }}</label>
 					</div>
@@ -509,7 +521,7 @@
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-filled wpmudev-not--material wpmudev-not--flat">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.filled }}</label>
 					</div>
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-error">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.error }}</label>
 					</div>
@@ -517,23 +529,23 @@
 				</div>
 
 			</div>
-			
+
 		</div>
-		
+
 		{[ if( has_multi_checkbox || has_single_radio || has_gdpr ) { ]}
 		<!-- RADIO + CHECKBOX -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.radio_checkbox }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -559,26 +571,26 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		{[ if( has_single_dropdown || has_dropdowns ) { ]}
 		<!-- SELECT -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.select }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
-				
+
 				<div class="wpmudev-row wpmudev-palettes">
 
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-select-bg wpmudev-not--material">
@@ -604,7 +616,7 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
 
@@ -613,19 +625,19 @@
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.dropdown }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
-					
+
 					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-background">
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
 					</div>
@@ -663,24 +675,24 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		{[ if( has_multi_multiselect ) { ]}
 		<!-- MULTI SELECT -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.multi_select }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -711,24 +723,24 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		{[ if( has_date_datepicker ) { ]}
 		<!-- CALENDAR -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.calendar }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -771,24 +783,24 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		{[ if ( has_upload ) { ]}
 		<!-- BUTTON UPLOAD -->
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.upload }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -802,28 +814,28 @@
 						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
 						<div class="wpmudev-pickers"></div>
 					</div>
-					
+
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
-		
+
 		<!-- BUTTON SUBMIT -->
 		{[ if( ! has_pagination ) { ]}
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.submit }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -841,7 +853,7 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
 
@@ -850,15 +862,15 @@
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.timeline }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -902,7 +914,7 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
 
@@ -911,15 +923,15 @@
 		<div class="wpmudev-multiname wpmudev-palettes">
 
 			<div class="wpmudev-multiname--action">
-				
+
 				<div class="wpmudev-action--text">
 					<p>{{ Forminator.l10n.appearance.pagination_footer }}</p>
 				</div>
-				
+
 				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-				
+
 			</div>
-			
+
 			<div class="wpmudev-multiname--content">
 
 				<div class="wpmudev-row wpmudev-palettes">
@@ -951,7 +963,7 @@
 				</div>
 
 			</div>
-			
+
 		</div>
 		{[ } ]}
 
@@ -975,15 +987,15 @@
 			<div class="wpmudev-multiname {[ if( field_with_autofill.is_active ) { ]} wpmudev-is_active {[ } ]}">
 
 				<div class="wpmudev-multiname--action">
-					
+
 					<div class="wpmudev-action--text">
 						<p>{{ field_with_autofill.label }}</p>
 					</div>
-					
+
 					<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-					
+
 				</div>
-				
+
 				<div class="wpmudev-multiname--content">
 
 					<div class="wpmudev-row">
@@ -1019,7 +1031,7 @@
 					</div>
 
 				</div>
-				
+
 			</div>
 			{[ }) ]}
 		</div>

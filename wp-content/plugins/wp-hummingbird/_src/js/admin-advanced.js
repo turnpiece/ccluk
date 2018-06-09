@@ -73,6 +73,21 @@ import Fetcher from './utils/fetcher';
                 location.hash = $(this).val();
             });
 
+			/**
+			 * Paste default values to url strings option.
+			 *
+			 * @since 1.9.0
+			 */
+			$('#wphb-adv-paste-value').on('click', function(e) {
+            	e.preventDefault();
+            	let url_strings = $('textarea[name="url_strings"]');
+            	if ( '' === url_strings.val() ) {
+					url_strings.val( url_strings.attr('placeholder') );
+				} else {
+					url_strings.val( url_strings.val() + '\n' + url_strings.attr('placeholder') );
+				}
+			});
+
 			return this;
 		},
 

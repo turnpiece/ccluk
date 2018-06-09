@@ -1443,6 +1443,66 @@ class BP_Docs_Tests extends BP_Docs_TestCase {
 	}
 
 	/**
+	 * @ticket 592
+	 */
+	public function test_search_should_match_attachment_filename() {
+		$d1 = $this->factory->doc->create();
+		$d2 = $this->factory->doc->create();
+		$d3 = $this->factory->doc->create();
+
+		// Fake attachments.
+		$a1 = $this->factory->post->create( array(
+			'post_type' => 'attachment',
+			'post_status' => 'inherit',
+			'post_parent' => $d1,
+		) );
+		add_post_meta( $a1, '_wp_attached_file', '/foo/bar/baz.jpg' );
+
+		$a2 = $this->factory->post->create( array(
+			'post_type' => 'attachment',
+			'post_status' => 'inherit',
+			'post_parent' => $d2,
+		) );
+		add_post_meta( $a2, '_wp_attached_file', '/foo/bar/baz.pdf' );
+
+		$a3 = $this->factory->post->create( array(
+			'post_type' => 'attachment',
+			'post_status' => 'inherit',
+			'post_parent' => $d3,
+		) );
+		add_post_meta( $a3, '_wp_attached_file', '/foo/bar/quz.pdf' );
+
+		$q = new BP_Docs_Query( array(
+			'search_terms' => 'baz.pdf',
+		) );
+
+		// Remove access protection for the moment because I'm lazy
+		remove_action( 'pre_get_posts', 'bp_docs_general_access_protection', 28 );
+		$wp_query = $q->get_wp_query();
+		add_action( 'pre_get_posts', 'bp_docs_general_access_protection', 28 );
+
+		$found = wp_list_pluck( $wp_query->posts, 'ID' );
+
+		$this->assertEqualSets( array( $d2 ), $found );
+
+		// Test cache busting.
+		update_post_meta( $a3, '_wp_attached_file', '/foo/bar/baz.pdf' );
+
+		$q = new BP_Docs_Query( array(
+			'search_terms' => 'baz.pdf',
+		) );
+
+		// Remove access protection for the moment because I'm lazy
+		remove_action( 'pre_get_posts', 'bp_docs_general_access_protection', 28 );
+		$wp_query = $q->get_wp_query();
+		add_action( 'pre_get_posts', 'bp_docs_general_access_protection', 28 );
+
+		$found = wp_list_pluck( $wp_query->posts, 'ID' );
+
+		$this->assertEqualSets( array( $d2, $d3 ), $found );
+	}
+
+	/*
 	 * @group BP_Docs_Query
 	 */
 	public function test_doc_update_should_maintain_original_author() {
@@ -1479,5 +1539,4 @@ class BP_Docs_Tests extends BP_Docs_TestCase {
 
 		$this->set_current_user( $old_current_user );
 	}
-
 }

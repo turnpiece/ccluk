@@ -14,7 +14,7 @@
 	<div class="sui-actions-right">
 		<p class="wphb-label-notice-inline hide-to-mobile">
 			<?php esc_html_e( 'Using Cloudflare?', 'wphb' ); ?>
-			<a href="#" id="connect-cloudflare-link">
+			<a href="#" class="connect-cloudflare-link">
 				<?php esc_html_e( 'Connect account', 'wphb' ); ?>
 			</a>
 		</p>

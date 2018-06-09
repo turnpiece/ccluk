@@ -36,12 +36,12 @@ class WP_Hummingbird_Core {
 
 		$this->load_modules();
 
-		if ( WP_Hummingbird_Utils::can_execute_php() && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
-			// Return is user has no proper permissions.
-			if ( ! ( is_super_admin() || is_blog_admin() ) ) {
-				return;
-			}
+		// Return is user has no proper permissions.
+		if ( ! ( is_super_admin() || is_blog_admin() ) ) {
+			return;
+		}
 
+		if ( WP_Hummingbird_Utils::can_execute_php() && current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
 			$minify    = WP_Hummingbird_Settings::get_setting( 'enabled', 'minify' );
 			$pc_module = WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' );
 

@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Forminator Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Forminator Pro 1.0.5\n"
+"Project-Id-Version: Forminator Pro 1.0.6\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/forminator\n"
-"POT-Creation-Date: 2018-05-01 11:08:26+00:00\n"
+"POT-Creation-Date: 2018-06-05 15:59:35+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -17,36 +17,36 @@ msgstr ""
 msgid "Made with %s by WPMU DEV"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:84
+#: admin/classes/class-admin-ajax.php:87
 msgid "Quiz model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:152
+#: admin/classes/class-admin-ajax.php:156
 msgid "Poll model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:203
+#: admin/classes/class-admin-ajax.php:228
 msgid "Form model doesn't exist"
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:603
+#: admin/classes/class-admin-ajax.php:648
 msgid "Not valid module ID provided."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:618
+#: admin/classes/class-admin-ajax.php:663
 msgid "No ID was provided."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:624
+#: admin/classes/class-admin-ajax.php:669
 msgid "Exports cleared."
 msgstr ""
 
-#: admin/classes/class-admin-ajax.php:626
+#: admin/classes/class-admin-ajax.php:671
 msgid "Exports couldn't be cleared."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:32
-#: library/modules/custom-forms/admin/admin-loader.php:309
+#: library/modules/custom-forms/admin/admin-loader.php:312
 msgid "Name your form"
 msgstr ""
 
@@ -249,64 +249,70 @@ msgid "Uninstall Settings"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:70
-#: library/modules/custom-forms/admin/admin-loader.php:311
-msgid "Form name cannot be empty! Please pick a name for your form."
+#: admin/views/settings/widget-privacy.php:29
+msgid "Privacy Settings"
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:71
-msgid "Close"
+#: library/modules/custom-forms/admin/admin-loader.php:314
+msgid "Form name cannot be empty! Please pick a name for your form."
 msgstr ""
 
 #: admin/classes/class-admin-l10n.php:72
+msgid "Close"
+msgstr ""
+
+#: admin/classes/class-admin-l10n.php:73
 #: admin/views/settings/popup/exports-content.php:14
 msgid "Records"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:73 admin/classes/class-admin-l10n.php:88
-#: admin/classes/class-admin-l10n.php:131
+#: admin/classes/class-admin-l10n.php:74 admin/classes/class-admin-l10n.php:89
+#: admin/classes/class-admin-l10n.php:132
 msgid "Delete"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:74
+#: admin/classes/class-admin-l10n.php:75
 msgid "Confirm"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:75
+#: admin/classes/class-admin-l10n.php:76
 msgid "Are you sure?"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:76
+#: admin/classes/class-admin-l10n.php:77
 msgid "Have in mind this action cannot be reverted."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:77
+#: admin/classes/class-admin-l10n.php:78
 msgid "Please confirm that you want to do this action."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:78
+#: admin/classes/class-admin-l10n.php:79
 msgid "Confirm Action"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:79
+#: admin/classes/class-admin-l10n.php:80
 msgid "Please confirm that you want to delete this field"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:80
+#: admin/classes/class-admin-l10n.php:81
 #: library/modules/custom-forms/admin/admin-loader.php:136
 #: library/modules/polls/admin/admin-loader.php:163
 #: library/modules/quizzes/admin/admin-loader.php:243
 msgid "Cancel"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:81
+#: admin/classes/class-admin-l10n.php:82
 msgid "The changes you made may be lost if you navigate away from this page."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:82
+#: admin/classes/class-admin-l10n.php:83
+#: admin/views/settings/popup/edit-privacy-settings.php:128
 msgid "Save Changes"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:85 library/fields/address.php:97
+#: admin/classes/class-admin-l10n.php:86 library/fields/address.php:97
 #: library/fields/address.php:124 library/fields/address.php:151
 #: library/fields/address.php:179 library/fields/address.php:207
 #: library/fields/address.php:234 library/fields/name.php:121
@@ -316,241 +322,241 @@ msgstr ""
 #: library/fields/postdata.php:264 library/fields/postdata.php:294
 #: library/fields/postdata.php:325 library/fields/time.php:126
 #: library/fields/time.php:150
-#: library/modules/custom-forms/admin/admin-loader.php:282
+#: library/modules/custom-forms/admin/admin-loader.php:285
 msgid "Label"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:86
-#: library/modules/custom-forms/admin/admin-loader.php:285
+#: admin/classes/class-admin-l10n.php:87
+#: library/modules/custom-forms/admin/admin-loader.php:288
 msgid "Value"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:87
+#: admin/classes/class-admin-l10n.php:88
 msgid "Add Option"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:89
+#: admin/classes/class-admin-l10n.php:90
 msgid "Pick a field"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:90
+#: admin/classes/class-admin-l10n.php:91
 msgid "This field will be"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:91
+#: admin/classes/class-admin-l10n.php:92
 msgid "if"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:92
+#: admin/classes/class-admin-l10n.php:93
 msgid "Shown"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:93 library/fields/custom.php:124
+#: admin/classes/class-admin-l10n.php:94 library/fields/custom.php:124
 msgid "Hidden"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:96
+#: admin/classes/class-admin-l10n.php:97
 msgid "Poll BG"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:97
+#: admin/classes/class-admin-l10n.php:98
 msgid "Poll border"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:98
+#: admin/classes/class-admin-l10n.php:99
 msgid "Poll shadow"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:99
+#: admin/classes/class-admin-l10n.php:100
 msgid "Title text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:100
+#: admin/classes/class-admin-l10n.php:101
 msgid "Question text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:101
+#: admin/classes/class-admin-l10n.php:102
 msgid "Answer text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:102
+#: admin/classes/class-admin-l10n.php:103
 msgid "Input field bg"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:103
+#: admin/classes/class-admin-l10n.php:104
 msgid "Input field border"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:104
+#: admin/classes/class-admin-l10n.php:105
 msgid "Input field placeholder"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:105
+#: admin/classes/class-admin-l10n.php:106
 msgid "Input field text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:106
-#: library/modules/custom-forms/admin/admin-loader.php:300
+#: admin/classes/class-admin-l10n.php:107
+#: library/modules/custom-forms/admin/admin-loader.php:303
 msgid "Button background"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:107
-#: library/modules/custom-forms/admin/admin-loader.php:301
+#: admin/classes/class-admin-l10n.php:108
+#: library/modules/custom-forms/admin/admin-loader.php:304
 msgid "Button text"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:108
-#: library/modules/custom-forms/admin/admin-loader.php:302
+#: admin/classes/class-admin-l10n.php:109
+#: library/modules/custom-forms/admin/admin-loader.php:305
 msgid "Results link"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:111
+#: admin/classes/class-admin-l10n.php:112
 #: library/modules/quizzes/admin/admin-loader.php:207
 msgid "Browse"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:112
+#: admin/classes/class-admin-l10n.php:113
 #: library/modules/quizzes/admin/admin-loader.php:208
 msgid "Clear"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:113
+#: admin/classes/class-admin-l10n.php:114
 msgid "You don't have any results yet."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:114
+#: admin/classes/class-admin-l10n.php:115
 msgid "Select result"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:115
+#: admin/classes/class-admin-l10n.php:116
 msgid "You don't have any answer yet."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:116
+#: admin/classes/class-admin-l10n.php:117
 msgid "Click browse to add image..."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:117
+#: admin/classes/class-admin-l10n.php:118
 msgid "Click on image container (at left) to add one..."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:118
+#: admin/classes/class-admin-l10n.php:119
 msgid "You don't have any questions yet."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:119
+#: admin/classes/class-admin-l10n.php:120
 msgid "Add Question"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:120
+#: admin/classes/class-admin-l10n.php:121
 msgid "Question title"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:121
+#: admin/classes/class-admin-l10n.php:122
 #: library/modules/quizzes/admin/admin-loader.php:240
 msgid "Answers"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:122
+#: admin/classes/class-admin-l10n.php:123
 msgid "Add Answer"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:123
+#: admin/classes/class-admin-l10n.php:124
 msgid "Add Result"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:124
+#: admin/classes/class-admin-l10n.php:125
 msgid "Delete Result"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:125
+#: admin/classes/class-admin-l10n.php:126
 #: admin/views/custom-form/entries/content.php:220
 #: admin/views/custom-form/entries/content.php:394
 #: admin/views/quiz/entries/content.php:265
 #: admin/views/quiz/entries/content.php:435
 #: library/field-autofill-providers/class-wp-post.php:30
-#: library/modules/custom-forms/admin/admin-loader.php:280
+#: library/modules/custom-forms/admin/admin-loader.php:283
 #: library/modules/polls/admin/admin-loader.php:133
 #: library/modules/quizzes/admin/admin-loader.php:199
 msgid "Title"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:126
+#: admin/classes/class-admin-l10n.php:127
 msgid "Image (optional)"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:127
+#: admin/classes/class-admin-l10n.php:128
 #: library/field-autofill-providers/class-wp-user.php:47
 #: library/fields/date.php:307 library/fields/email.php:114
 #: library/fields/multivalue.php:103 library/fields/number.php:113
 #: library/fields/phone.php:120 library/fields/singlevalue.php:104
 #: library/fields/text.php:139 library/fields/website.php:114
-#: library/modules/custom-forms/admin/admin-loader.php:286
+#: library/modules/custom-forms/admin/admin-loader.php:289
 msgid "Description"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:128
+#: admin/classes/class-admin-l10n.php:129
 msgid "Delete Answer"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:129
+#: admin/classes/class-admin-l10n.php:130
 #: library/modules/quizzes/admin/admin-loader.php:245
 msgid "Correct answer"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:130
+#: admin/classes/class-admin-l10n.php:131
 msgid "You don't have any options yet."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:132
+#: admin/classes/class-admin-l10n.php:133
 msgid "Restricted dates:"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:133
+#: admin/classes/class-admin-l10n.php:134
 msgid "Add"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:134
+#: admin/classes/class-admin-l10n.php:135
 msgid "Pick custom date(s) to restrict:"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:135
+#: admin/classes/class-admin-l10n.php:136
 msgid "Form Data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:136
+#: admin/classes/class-admin-l10n.php:137
 msgid "Required Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:137
+#: admin/classes/class-admin-l10n.php:138
 msgid "Optional Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:138
+#: admin/classes/class-admin-l10n.php:139
 msgid "All Submitted Fields"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:139
+#: admin/classes/class-admin-l10n.php:140
 msgid "Form Name"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:140
+#: admin/classes/class-admin-l10n.php:141
 msgid "Misc Data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:141
+#: admin/classes/class-admin-l10n.php:142
 msgid "Add form data"
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:142
+#: admin/classes/class-admin-l10n.php:143
 msgid "has been saved."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:143
+#: admin/classes/class-admin-l10n.php:144
 msgid "has been published."
 msgstr ""
 
-#: admin/classes/class-admin-l10n.php:144
+#: admin/classes/class-admin-l10n.php:145
 msgid "Error! Form cannot be saved."
 msgstr ""
 
@@ -592,16 +598,20 @@ msgstr ""
 
 #: admin/pages/entries-page.php:52 admin/views/custom-form/list/header.php:3
 #: admin/views/dashboard/widgets/widget-cform.php:19
+#: admin/views/settings/popup/edit-privacy-settings.php:16
+#: admin/views/settings/widget-privacy.php:56
 #: library/modules/custom-forms/admin/admin-loader.php:43
 msgid "Forms"
 msgstr ""
 
 #: admin/pages/entries-page.php:56
 #: admin/views/dashboard/widgets/widget-poll.php:19
-#: admin/views/poll/list/header.php:3 library/class-modules.php:56
+#: admin/views/poll/list/header.php:3
+#: admin/views/settings/popup/edit-privacy-settings.php:79
+#: admin/views/settings/widget-privacy.php:92 library/class-modules.php:56
 #: library/class-shortcode-generator.php:163
 #: library/modules/polls/admin/admin-loader.php:43
-#: library/modules/polls/loader.php:101
+#: library/modules/polls/loader.php:110
 msgid "Polls"
 msgstr ""
 
@@ -890,6 +900,7 @@ msgstr ""
 #: admin/views/settings/widget-entries.php:21
 #: admin/views/settings/widget-listings.php:21
 #: admin/views/settings/widget-paypal.php:24
+#: admin/views/settings/widget-privacy.php:39
 #: admin/views/settings/widget-providers.php:23
 #: admin/views/settings/widget-uninstall.php:21
 msgid "Hide box"
@@ -929,7 +940,7 @@ msgid "View All"
 msgstr ""
 
 #: admin/views/dashboard/widgets/widget-cform.php:127
-#: library/modules/custom-forms/loader.php:117
+#: library/modules/custom-forms/loader.php:126
 msgid ""
 "Custom forms, conditional forms, etc. Choose from our library of forms or "
 "create a new one from scratch."
@@ -952,12 +963,12 @@ msgstr ""
 #: admin/views/poll/list/header.php:5
 #: library/modules/polls/admin/admin-loader.php:44
 #: library/modules/polls/admin/admin-page-new.php:23
-#: library/modules/polls/loader.php:104
+#: library/modules/polls/loader.php:113
 msgid "New Poll"
 msgstr ""
 
 #: admin/views/dashboard/widgets/widget-poll.php:128
-#: library/modules/polls/loader.php:103
+#: library/modules/polls/loader.php:112
 msgid ""
 "Create polls, and collect user data. Choose a visualization style that best "
 "suits your needs."
@@ -1253,19 +1264,80 @@ msgstr ""
 msgid "Secret"
 msgstr ""
 
+#: admin/views/settings/popup/edit-privacy-settings.php:23
+msgid "Account erasure requests"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:26
+msgid "Remove Submissions"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:28
+msgid "Retain Submissions"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:31
+msgid ""
+"When handling an <a href=\"%s\">account erasure request</a>, should form "
+"submission contains requested email address removed or retained ?"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:44
+msgid "Submissions Retention"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:53
+#: admin/views/settings/popup/edit-privacy-settings.php:96
+msgid "Day(s)"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:55
+#: admin/views/settings/popup/edit-privacy-settings.php:98
+msgid "Week(s)"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:57
+#: admin/views/settings/popup/edit-privacy-settings.php:100
+msgid "Month(s)"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:59
+#: admin/views/settings/popup/edit-privacy-settings.php:102
+msgid "Years(s)"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:64
+msgid ""
+"Choose how long to retain form submissions. Leave the following options "
+"blank to retain form submissions forever."
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:87
+msgid "IP address retention"
+msgstr ""
+
+#: admin/views/settings/popup/edit-privacy-settings.php:107
+msgid ""
+"Choose how long to retain IP address before its getting anonymized. \n"
+"\t\t\t\t\t\t\tKeep in mind, that this IP address probably being used to "
+"checking multiple votes.\n"
+"\t\t\t\t\t\t\tLeave the following options blank to retain IP address "
+"forever."
+msgstr ""
+
 #: admin/views/settings/popup/edit-uninstall-content.php:10
 msgid "Delete all data  on uninstall"
 msgstr ""
 
 #: admin/views/settings/popup/edit-uninstall-content.php:13
 #: admin/views/settings/widget-uninstall.php:49
-#: library/modules/custom-forms/admin/admin-loader.php:401
+#: library/modules/custom-forms/admin/admin-loader.php:406
 msgid "Yes"
 msgstr ""
 
 #: admin/views/settings/popup/edit-uninstall-content.php:14
 #: admin/views/settings/widget-uninstall.php:49
-#: library/modules/custom-forms/admin/admin-loader.php:402
+#: library/modules/custom-forms/admin/admin-loader.php:407
 msgid "No"
 msgstr ""
 
@@ -1357,6 +1429,7 @@ msgstr ""
 
 #: admin/views/settings/widget-entries.php:58
 #: admin/views/settings/widget-listings.php:59
+#: admin/views/settings/widget-privacy.php:122
 #: admin/views/settings/widget-uninstall.php:61
 msgid "Edit Settings"
 msgstr ""
@@ -1400,6 +1473,23 @@ msgstr ""
 
 #: admin/views/settings/widget-paypal.php:82
 msgid "Secret:"
+msgstr ""
+
+#: admin/views/settings/widget-privacy.php:11
+#: admin/views/settings/widget-privacy.php:17
+msgid "Forever"
+msgstr ""
+
+#: admin/views/settings/widget-privacy.php:65
+msgid "Account erasure requests :"
+msgstr ""
+
+#: admin/views/settings/widget-privacy.php:74
+msgid "Submissions retention :"
+msgstr ""
+
+#: admin/views/settings/widget-privacy.php:100
+msgid "IP address retention :"
 msgstr ""
 
 #: admin/views/settings/widget-providers.php:13
@@ -1504,11 +1594,12 @@ msgid "Total"
 msgstr ""
 
 #: library/class-export.php:486
+#: library/modules/custom-forms/protection/general-data-protection.php:243
 msgid "Submission date"
 msgstr ""
 
 #: library/class-modules.php:51 library/class-shortcode-generator.php:161
-#: library/modules/custom-forms/loader.php:115
+#: library/modules/custom-forms/loader.php:124
 msgid "Custom Forms"
 msgstr ""
 
@@ -1601,7 +1692,7 @@ msgstr ""
 #: library/fields/postdata.php:234 library/fields/text.php:130
 #: library/fields/time.php:133 library/fields/time.php:157
 #: library/fields/website.php:104
-#: library/modules/custom-forms/admin/admin-loader.php:337
+#: library/modules/custom-forms/admin/admin-loader.php:340
 msgid "Placeholder"
 msgstr ""
 
@@ -2219,17 +2310,17 @@ msgid ""
 msgstr ""
 
 #: library/fields/section.php:51
-#: library/modules/custom-forms/admin/admin-loader.php:335
+#: library/modules/custom-forms/admin/admin-loader.php:338
 msgid "Section"
 msgstr ""
 
 #: library/fields/section.php:67
-#: library/modules/custom-forms/admin/admin-loader.php:379
+#: library/modules/custom-forms/admin/admin-loader.php:382
 msgid "Section title"
 msgstr ""
 
 #: library/fields/section.php:75
-#: library/modules/custom-forms/admin/admin-loader.php:380
+#: library/modules/custom-forms/admin/admin-loader.php:383
 msgid "Section subtitle"
 msgstr ""
 
@@ -2250,8 +2341,8 @@ msgid "Select dropdown"
 msgstr ""
 
 #: library/fields/text.php:61 library/fields/text.php:211
-#: library/modules/custom-forms/admin/admin-loader.php:364
-#: library/modules/custom-forms/admin/admin-loader.php:365
+#: library/modules/custom-forms/admin/admin-loader.php:367
+#: library/modules/custom-forms/admin/admin-loader.php:368
 #: samples/forminator-simple-autofill-plugin/forminator-autofill-simple.php:33
 msgid "Text"
 msgstr ""
@@ -2412,7 +2503,7 @@ msgstr ""
 
 #: library/helpers/helper-core.php:222
 #: library/modules/custom-forms/admin/admin-loader.php:146
-#: library/modules/custom-forms/admin/admin-loader.php:327
+#: library/modules/custom-forms/admin/admin-loader.php:330
 #: library/modules/polls/admin/admin-loader.php:162
 #: library/modules/quizzes/admin/admin-loader.php:242
 msgid "Back"
@@ -2420,7 +2511,7 @@ msgstr ""
 
 #: library/helpers/helper-core.php:223
 #: library/modules/custom-forms/admin/admin-loader.php:145
-#: library/modules/custom-forms/admin/admin-loader.php:328
+#: library/modules/custom-forms/admin/admin-loader.php:331
 msgid "Next"
 msgstr ""
 
@@ -3582,7 +3673,7 @@ msgid "Edit Form"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:44
-#: library/modules/custom-forms/loader.php:118
+#: library/modules/custom-forms/loader.php:127
 msgid "New Custom Form"
 msgstr ""
 
@@ -3619,7 +3710,7 @@ msgid "Form Builder"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:141
-#: library/modules/custom-forms/admin/admin-loader.php:321
+#: library/modules/custom-forms/admin/admin-loader.php:324
 #: library/modules/custom-forms/front/front-render.php:470
 #: library/modules/polls/admin/admin-loader.php:165
 #: library/modules/quizzes/admin/admin-loader.php:247
@@ -3659,8 +3750,8 @@ msgid "Back to Fields"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:152
-#: library/modules/custom-forms/admin/admin-page-view.php:70
-#: library/modules/polls/admin/admin-page-view.php:138
+#: library/modules/custom-forms/admin/admin-page-view.php:71
+#: library/modules/polls/admin/admin-page-view.php:139
 #: library/modules/quizzes/admin/admin-page-view.php:111
 msgid "Clone"
 msgstr ""
@@ -3998,472 +4089,494 @@ msgid "Security"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:268
-msgid "Form does not expire"
+msgid "Privacy"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:269
-msgid "Expires on certain date"
+msgid ""
+"When its enabled, privacy settings here will be used instead of default "
+"privacy settings."
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:270
-msgid "Expires after x-submits"
+msgid "Form does not expire"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:271
-msgid "Show a Thank you message"
+msgid "Expires on certain date"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:272
-msgid "Re-direct user to URL"
+msgid "Expires after x-submits"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:273
-msgid "Server only"
+msgid "Show a Thank you message"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:274
-msgid "On form submit"
+msgid "Re-direct user to URL"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:275
-msgid "Enable inline validation (as user types)"
+msgid "Server only"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:276
-msgid "Enable honeypot protection"
+msgid "On form submit"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:277
-msgid "Only logged-in users can submit"
+msgid "Enable inline validation (as user types)"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:278
-msgid "Select font"
+msgid "Enable honeypot protection"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:279
-msgid "Subtitle"
+msgid "Enable privacy"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:280
+msgid "Only logged-in users can submit"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:281
-msgid "Custom user font"
+msgid "Select font"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:283
-msgid "Labels"
+#: library/modules/custom-forms/admin/admin-loader.php:282
+msgid "Subtitle"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:284
-msgid "Border line"
+msgid "Custom user font"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:286
+msgid "Labels"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:287
-msgid "Send user email"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:288
-msgid "Send admin(s) email"
-msgstr ""
-
-#: library/modules/custom-forms/admin/admin-loader.php:289
-msgid "Recipients"
+msgid "Border line"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:290
-msgid "No Result Found"
+msgid "Send user email"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:291
-msgid "Searching"
+msgid "Send admin(s) email"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:292
-msgid "Add form based data"
+msgid "Recipients"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:293
-msgid "Subject"
+msgid "No Result Found"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:294
-msgid "Body"
+msgid "Searching"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:295
-msgid "Generate PDF using data"
+msgid "Add form based data"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:296
-msgid "Various service integrations (send to Mailchimp etc)"
+msgid "Subject"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:297
-msgid "Static"
+msgid "Body"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:298
-msgid "Hover"
+msgid "Generate PDF using data"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:299
+msgid "Various service integrations (send to Mailchimp etc)"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:300
+msgid "Static"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:301
+msgid "Hover"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:302
 msgid "Active"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:303
+#: library/modules/custom-forms/admin/admin-loader.php:306
 msgid "minute(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:304
+#: library/modules/custom-forms/admin/admin-loader.php:307
 msgid "hour(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:305
+#: library/modules/custom-forms/admin/admin-loader.php:308
 msgid "day(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:306
+#: library/modules/custom-forms/admin/admin-loader.php:309
 msgid "week(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:307
+#: library/modules/custom-forms/admin/admin-loader.php:310
 msgid "month(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:308
+#: library/modules/custom-forms/admin/admin-loader.php:311
 msgid "year(s)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:310
+#: library/modules/custom-forms/admin/admin-loader.php:313
 msgid "Form name"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:312
+#: library/modules/custom-forms/admin/admin-loader.php:315
 msgid ""
 "Pick a name for your form module. This is for you to be able to identify "
 "forms and will not be displayed on your site."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:313
-#: library/modules/custom-forms/admin/admin-loader.php:385
+#: library/modules/custom-forms/admin/admin-loader.php:316
+#: library/modules/custom-forms/admin/admin-loader.php:388
 msgid "None"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:314
+#: library/modules/custom-forms/admin/admin-loader.php:317
 msgid "Progress bar"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:315
+#: library/modules/custom-forms/admin/admin-loader.php:318
 msgid "Pagination Header"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:316
+#: library/modules/custom-forms/admin/admin-loader.php:319
 msgid ""
 "Choose a pre-made style for your form pagination header or do not show it "
 "at all."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:317
+#: library/modules/custom-forms/admin/admin-loader.php:320
 msgid "Navigation Steps"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:318
+#: library/modules/custom-forms/admin/admin-loader.php:321
 msgid ""
 "When this option is selected no header with pagination will show up on your "
 "form."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:319
+#: library/modules/custom-forms/admin/admin-loader.php:322
 msgid ""
 "When this option is selected you will see a progress bar going from 0% on "
 "first page to 100% on last page."
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:320
+#: library/modules/custom-forms/admin/admin-loader.php:323
 msgid "Last step label"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:322
+#: library/modules/custom-forms/admin/admin-loader.php:325
 msgid "Edit last page 'back' button text"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:323
+#: library/modules/custom-forms/admin/admin-loader.php:326
 msgid "« Previous"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:324
+#: library/modules/custom-forms/admin/admin-loader.php:327
 msgid "Submit Button"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:325
+#: library/modules/custom-forms/admin/admin-loader.php:328
 #: library/modules/quizzes/admin/admin-loader.php:255
 msgid "Background"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:326
+#: library/modules/custom-forms/admin/admin-loader.php:329
 msgid "Upload Button"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:329
+#: library/modules/custom-forms/admin/admin-loader.php:332
 msgid "Inputs"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:330
+#: library/modules/custom-forms/admin/admin-loader.php:333
 msgid "Input"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:331
+#: library/modules/custom-forms/admin/admin-loader.php:334
 #: library/modules/quizzes/admin/admin-loader.php:252
 msgid "Border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:332
+#: library/modules/custom-forms/admin/admin-loader.php:335
 msgid "New Form Entry for {form_name}"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:333
+#: library/modules/custom-forms/admin/admin-loader.php:336
 msgid ""
 "You have a new website form submission: \n"
 " {all_fields} \n"
 " This message was sent from {site_url}"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:334
+#: library/modules/custom-forms/admin/admin-loader.php:337
 msgid "Main"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:336
+#: library/modules/custom-forms/admin/admin-loader.php:339
 #: library/render/class-widget.php:93
 msgid "Form"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:338
+#: library/modules/custom-forms/admin/admin-loader.php:341
 msgid "Error"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:339
+#: library/modules/custom-forms/admin/admin-loader.php:342
 msgid "Filled"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:340
+#: library/modules/custom-forms/admin/admin-loader.php:343
 msgid "Input & Textarea"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:341
+#: library/modules/custom-forms/admin/admin-loader.php:344
 msgid "Select"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:342
+#: library/modules/custom-forms/admin/admin-loader.php:345
 msgid "Select Dropdown"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:343
+#: library/modules/custom-forms/admin/admin-loader.php:346
 msgid "Option color"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:344
+#: library/modules/custom-forms/admin/admin-loader.php:347
 msgid "Option BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:345
+#: library/modules/custom-forms/admin/admin-loader.php:348
 msgid "Search value"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:346
+#: library/modules/custom-forms/admin/admin-loader.php:349
 msgid "Search BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:347
+#: library/modules/custom-forms/admin/admin-loader.php:350
 msgid "Search border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:348
+#: library/modules/custom-forms/admin/admin-loader.php:351
 msgid "Icon"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:349
+#: library/modules/custom-forms/admin/admin-loader.php:352
 msgid "Date Calendar"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:350
+#: library/modules/custom-forms/admin/admin-loader.php:353
 #: library/modules/quizzes/admin/admin-loader.php:258
 msgid "Header BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:351
+#: library/modules/custom-forms/admin/admin-loader.php:354
 #: library/modules/quizzes/admin/admin-loader.php:259
 msgid "Content BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:352
+#: library/modules/custom-forms/admin/admin-loader.php:355
 msgid "Nav arrows"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:353
+#: library/modules/custom-forms/admin/admin-loader.php:356
 msgid "Day of week"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:354
+#: library/modules/custom-forms/admin/admin-loader.php:357
 msgid "Days color"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:355
+#: library/modules/custom-forms/admin/admin-loader.php:358
 msgid "Days BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:356
+#: library/modules/custom-forms/admin/admin-loader.php:359
 msgid "Radio & Checkbox"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:357
+#: library/modules/custom-forms/admin/admin-loader.php:360
 msgid "Check / Icon"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:358
+#: library/modules/custom-forms/admin/admin-loader.php:361
 msgid "Multi Select"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:359
+#: library/modules/custom-forms/admin/admin-loader.php:362
 msgid "Item color"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:360
+#: library/modules/custom-forms/admin/admin-loader.php:363
 msgid "Item BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:361
+#: library/modules/custom-forms/admin/admin-loader.php:364
 msgid "Item border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:362
+#: library/modules/custom-forms/admin/admin-loader.php:365
 msgid "Open settings"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:363
+#: library/modules/custom-forms/admin/admin-loader.php:366
 msgid "Pagination Timeline"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:366
+#: library/modules/custom-forms/admin/admin-loader.php:369
 msgid "Text (Current)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:367
+#: library/modules/custom-forms/admin/admin-loader.php:370
 #: library/modules/custom-forms/front/front-render.php:551
 msgid "Step"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:368
+#: library/modules/custom-forms/admin/admin-loader.php:371
 msgid "Step (Current)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:369
+#: library/modules/custom-forms/admin/admin-loader.php:372
 msgid "Dot border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:370
+#: library/modules/custom-forms/admin/admin-loader.php:373
 msgid "Dot border (Current)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:371
+#: library/modules/custom-forms/admin/admin-loader.php:374
 msgid "Dot BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:372
+#: library/modules/custom-forms/admin/admin-loader.php:375
 msgid "Dot BG (Current)"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:373
+#: library/modules/custom-forms/admin/admin-loader.php:376
 msgid "Timeline border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:374
+#: library/modules/custom-forms/admin/admin-loader.php:377
 msgid "Pagination Footer"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:375
+#: library/modules/custom-forms/admin/admin-loader.php:378
 msgid "Back button BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:376
+#: library/modules/custom-forms/admin/admin-loader.php:379
 msgid "Back button value"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:377
+#: library/modules/custom-forms/admin/admin-loader.php:380
 msgid "Next button BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:378
+#: library/modules/custom-forms/admin/admin-loader.php:381
 msgid "Next button value"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:381
+#: library/modules/custom-forms/admin/admin-loader.php:384
 msgid "Notification"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:382
+#: library/modules/custom-forms/admin/admin-loader.php:385
 msgid "Form style"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:383
+#: library/modules/custom-forms/admin/admin-loader.php:386
 msgid "Form padding"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:384
+#: library/modules/custom-forms/admin/admin-loader.php:387
 msgid "Form border"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:386
+#: library/modules/custom-forms/admin/admin-loader.php:389
 msgid "Solid"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:387
+#: library/modules/custom-forms/admin/admin-loader.php:390
 msgid "Dashed"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:388
+#: library/modules/custom-forms/admin/admin-loader.php:391
 msgid "Dotted"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:389
+#: library/modules/custom-forms/admin/admin-loader.php:392
 msgid "Box shadow"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:390
+#: library/modules/custom-forms/admin/admin-loader.php:393
 msgid "Calendar icon"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:391
+#: library/modules/custom-forms/admin/admin-loader.php:394
 msgid "Error BG"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:392
+#: library/modules/custom-forms/admin/admin-loader.php:395
 msgid "Error color"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:396
-msgid "Form Field"
+msgid "Enable IP Address retention"
 msgstr ""
 
 #: library/modules/custom-forms/admin/admin-loader.php:397
+msgid "Enable submissions retention"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:401
+msgid "Form Field"
+msgstr ""
+
+#: library/modules/custom-forms/admin/admin-loader.php:402
 msgid "Autofill Source"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:398
+#: library/modules/custom-forms/admin/admin-loader.php:403
 msgid "Editable"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:399
+#: library/modules/custom-forms/admin/admin-loader.php:404
 msgid "Form does not have fields that can be autofilled"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:400
+#: library/modules/custom-forms/admin/admin-loader.php:405
 msgid "Disable Autofill"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:403
+#: library/modules/custom-forms/admin/admin-loader.php:408
 msgid "Autofill"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-loader.php:404
+#: library/modules/custom-forms/admin/admin-loader.php:409
 msgid "Choose which field should be autofilled"
 msgstr ""
 
@@ -4490,18 +4603,18 @@ msgstr ""
 msgid "Delete Entries"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-page-view.php:141
-#: library/modules/polls/admin/admin-page-view.php:208
+#: library/modules/custom-forms/admin/admin-page-view.php:144
+#: library/modules/polls/admin/admin-page-view.php:211
 #: library/modules/quizzes/admin/admin-page-view.php:226
 msgid "Reset Views"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-page-view.php:142
+#: library/modules/custom-forms/admin/admin-page-view.php:145
 #: library/modules/quizzes/admin/admin-page-view.php:227
 msgid "Permanently Delete Entries"
 msgstr ""
 
-#: library/modules/custom-forms/admin/admin-page-view.php:143
+#: library/modules/custom-forms/admin/admin-page-view.php:146
 msgid "Delete Forms"
 msgstr ""
 
@@ -4597,8 +4710,142 @@ msgstr ""
 msgid "Sa"
 msgstr ""
 
-#: library/modules/custom-forms/loader.php:116
+#: library/modules/custom-forms/loader.php:125
 msgid "Custom Form"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:25
+msgid "Forminator Forms"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:29
+#: library/modules/custom-forms/protection/general-data-protection.php:35
+#: library/modules/custom-forms/protection/general-data-protection.php:180
+msgid "Forminator Form Submissions"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:150
+#: library/modules/custom-forms/protection/general-data-protection.php:237
+msgid "Entry ID"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:154
+msgid "Submission Date"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:249
+msgid "IP Address"
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:422
+msgid "Removed form submission #%s."
+msgstr ""
+
+#: library/modules/custom-forms/protection/general-data-protection.php:426
+msgid "Form submission #%s has been retained."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:2
+msgid "Which forms collect personal data?"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:4
+msgid ""
+"If you use Forminator PRO to create and embed any forms on your website, "
+"you may need to mention it here to properly distinguish it from other forms."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:8
+msgid "What personal data do we collect and why?"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:10
+msgid ""
+"By default Forminator captures the <strong>IP Address</strong> for each "
+"submission to a Form. Other personal data such as your "
+"<strong>name</strong> and <strong>email address</strong> may also be "
+"captured, \n"
+"depending on the Form \n"
+"Fields."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:16
+msgid ""
+"Note: In this section you should include any personal data you collected "
+"and which form captures personal data to give users more relevant "
+"information. You should also include an explanation of why this data is "
+"needed. The explanation must note either the legal basis for your data "
+"collection and retention of the active consent the user has given."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:20
+#: library/modules/custom-forms/protection/policy-text.php:32
+#: library/modules/custom-forms/protection/policy-text.php:37
+#: library/modules/custom-forms/protection/policy-text.php:46
+#: library/modules/polls/protection/policy-text.php:17
+#: library/modules/polls/protection/policy-text.php:28
+#: library/modules/polls/protection/policy-text.php:33
+#: library/modules/polls/protection/policy-text.php:41
+msgid "Suggested text: "
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:21
+msgid ""
+"When visitors or users submit a form, we capture the <strong>IP "
+"Address</strong> for spam protection. We also capture the <strong>email "
+"address</strong> and might capture other personal data included in the Form "
+"fields."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:25
+#: library/modules/polls/protection/policy-text.php:21
+msgid "How long we retain your data"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:27
+msgid ""
+"By default Forminator retains all form submissions "
+"<strong>forever</strong>. You can change this setting in "
+"<strong>Forminator</strong> &raquo; <strong>Settings</strong> &raquo;\n"
+"\t\t<strong>Privacy Settings</strong>"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:33
+msgid "When visitors or users submit a form we retain the data for 30 days."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:35
+#: library/modules/polls/protection/policy-text.php:31
+msgid "Where we send your data"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:38
+msgid ""
+"All collected data might be shown publicly and we send it to our workers or "
+"contractors to perform necessary actions based on the form submission."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:40
+#: library/modules/polls/protection/policy-text.php:36
+msgid "Third Parties"
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:42
+msgid ""
+"If your forms utilize either built-in or external third party services, in "
+"this section you should mention any third parties and its privacy policy."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:47
+msgid ""
+"We use Google Recaptcha for spam protection. Their privacy policy can be "
+"found here : https://policies.google.com/privacy?hl=en."
+msgstr ""
+
+#: library/modules/custom-forms/protection/policy-text.php:48
+msgid ""
+"We use Akismet Spam for spam protection. Their privacy policy can be found "
+"here : https://automattic.com/privacy/."
 msgstr ""
 
 #: library/modules/polls/admin/admin-loader.php:45
@@ -4606,7 +4853,7 @@ msgid "View Poll"
 msgstr ""
 
 #: library/modules/polls/admin/admin-loader.php:121
-#: library/modules/polls/loader.php:102 library/render/class-widget.php:94
+#: library/modules/polls/loader.php:111 library/render/class-widget.php:94
 msgid "Poll"
 msgstr ""
 
@@ -4775,11 +5022,11 @@ msgstr ""
 msgid "Edit Poll"
 msgstr ""
 
-#: library/modules/polls/admin/admin-page-view.php:209
+#: library/modules/polls/admin/admin-page-view.php:212
 msgid "Permanently Delete Votes"
 msgstr ""
 
-#: library/modules/polls/admin/admin-page-view.php:210
+#: library/modules/polls/admin/admin-page-view.php:213
 msgid "Delete Polls"
 msgstr ""
 
@@ -4826,6 +5073,76 @@ msgstr ""
 
 #: library/modules/polls/front/front-render.php:327
 msgid "Poll not found!"
+msgstr ""
+
+#: library/modules/polls/protection/general-data-protection.php:16
+msgid "Forminator Polls"
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:2
+msgid "Which polls are collecting personal data?"
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:4
+msgid ""
+"If you use Forminator PRO to create and embed any polls on your website, "
+"you may need to mention it here to properly distinguish it from other polls."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:8
+msgid "What personal data we collect and why?"
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:10
+msgid ""
+"By default Forminator captures the <strong>IP Address</strong> for each "
+"Poll submission."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:13
+msgid ""
+"In this section you should note what personal data you collected including "
+"which polls are available. You should also explan why this data is needed. "
+"Include the legal basis for your data collection and note the active "
+"consent the user has given."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:18
+msgid ""
+"When visitors or users submit a poll, we capture the <strong>IP "
+"Address</strong> for spam protection and to set voter limitations."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:23
+msgid ""
+"By default Forminator retains all votes and its <strong>IP Address</strong> "
+"<strong>forever</strong>. You can change this setting in "
+"<strong>Forminator</strong> &raquo; <strong>Settings</strong> &raquo;\n"
+"\t\t<strong>Privacy Settings</strong>"
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:29
+msgid ""
+"When visitors or users votes on a poll we retain the <strong>IP "
+"Address</strong> data for 30 days and anonymize it."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:34
+msgid ""
+"All collected data might be shown publicly and we send it to our workers or "
+"contractors to perform necessary actions based on votes."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:38
+msgid ""
+"If your polls utilize either built-in or external third party services, in "
+"this section you should mentions any third parties and its privacy policy."
+msgstr ""
+
+#: library/modules/polls/protection/policy-text.php:42
+msgid ""
+"We use Akismet Spam protection to block spam. Their privacy policy can be "
+"found here : https://automattic.com/privacy/."
 msgstr ""
 
 #: library/modules/quizzes/admin/admin-loader.php:48

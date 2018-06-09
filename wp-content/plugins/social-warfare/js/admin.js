@@ -211,7 +211,31 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
         }
 	}
 
+    function noticeClickHandlers() {
+        jQuery(".swp-notice-cta").on("click", function(e) {
+            e.preventDefault();
+            var parent = jQuery(this).parents(".swp-dismiss-notice");
+
+            jQuery.post({
+                url: ajaxurl,
+                data: {
+                    action: 'dismiss',
+                    key: parent.data("key"),
+                    timeframe: this.dataset.timeframe
+                },
+                success: function(result) {
+                    result = JSON.parse(result)
+                    if (result) {
+                        parent.slideUp(500);
+                    }
+                }
+            });
+        });
+    }
+
 	jQuery( document ).ready( function() {
+        noticeClickHandlers();
+
 		if ( jQuery( '#social_warfare.postbox' ).length ) {
 
 			// Add the CountDown Box for the Social Media Title
@@ -237,6 +261,7 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
 			jQuery( '#social_warfare textarea#swp_customTweet' ).on( 'input', function() {
 				twitterRemaining();
 			});
+
 
 			// Setup an initilazation loop
 			var swpPostInit = setInterval( function() {

@@ -54,9 +54,21 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<textarea class="sui-form-control" name="url_strings"><?php echo esc_html( $prefetch ); ?></textarea>
+		<textarea class="sui-form-control" name="url_strings" placeholder="//fonts.googleapis.com
+//fonts.gstatic.com
+//ajax.googleapis.com
+//apis.google.com
+//google-analytics.com
+//www.google-analytics.com
+//ssl.google-analytics.com
+//youtube.com
+//s.gravatar.com"><?php echo esc_html( $prefetch ); ?></textarea>
 		<span class="sui-description">
 			<?php esc_html_e( 'Add one host entry per line replacing the http:// or https:// with // e.g. //fonts.googleapis.com. We’ve added a few common DNS requests to get you started.', 'wphb' ); ?>
+			<?php printf(
+				'<a href="#" id="wphb-adv-paste-value">%s</a>',
+				esc_html__( 'Paste in recommended defaults.', 'wphb' )
+			); ?>
 		</span>
 	</div>
 </div>

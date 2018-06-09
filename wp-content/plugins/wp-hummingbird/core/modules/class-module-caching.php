@@ -20,6 +20,44 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	public $status;
 
 	/**
+	 * Activate module.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @return bool
+	 */
+	public function enable() {
+		// Enable caching in .htaccess (only for apache servers).
+		$result = WP_Hummingbird_Module_Server::save_htaccess( 'caching' );
+		if ( $result ) {
+			// Clear saved status.
+			WP_Hummingbird_Utils::get_module( 'caching' )->clear_cache();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Deactivate module.
+	 *
+	 * @since 1.9.0
+	 *
+	 * @return bool
+	 */
+	public function disable() {
+		// Disable caching in htaccess (only for apache servers).
+		$result = WP_Hummingbird_Module_Server::unsave_htaccess( 'caching' );
+		if ( $result ) {
+			// Clear saved status.
+			WP_Hummingbird_Utils::get_module( 'caching' )->clear_cache();
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
 	 * Analyze data. Overwrites parent method.
 	 *
 	 * @param bool $check_api If set to true, the api can be checked.
@@ -107,10 +145,8 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 	 * @return bool
 	 */
 	public static function apache_modules_loaded() {
-		//$sapi_name = '';
 		$apache_modules = array();
 		if ( function_exists( 'php_sapi_name' ) ) {
-			//$sapi_name = php_sapi_name();
 			$apache_modules = apache_get_modules();
 		}
 
@@ -141,8 +177,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 		$images_expiration = explode( '/', $options['expiry_images'] );
 		$images_expiration = $images_expiration[0];
 
-		$code = '
-location ~* \.(txt|xml|js)$ {
+		$code = 'location ~* \.(txt|xml|js)$ {
     expires %%ASSETS%%;
 }
 
@@ -189,8 +224,7 @@ location ~* \.(jpg|jpeg|png|gif|swf|webp)$ {
 		$images_expiration = explode( '/', $options['expiry_images'] );
 		$images_expiration = $images_expiration[1];
 
-		$code = '
-<IfModule mod_expires.c>
+		$code = '<IfModule mod_expires.c>
 ExpiresActive On
 ExpiresDefault A0
 

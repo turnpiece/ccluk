@@ -14,6 +14,11 @@ class SWP_CURL {
 
 	public static function fetch_shares_via_curl_multi( $data, $options = array() ) {
 
+		if ( _swp_is_debug( 'is_cache_fresh' ) ) :
+			  $started = time();
+			  echo "Starting multi curl request at : " . $started;
+		endif;
+
 		// array of curl handles
 		$curly = array();
 		// data to be returned
@@ -26,9 +31,7 @@ class SWP_CURL {
 		// then add them to the multi-handle
 		if( is_array( $data ) ):
 			foreach ( $data as $id => $d ) :
-
 				if ( $d !== 0 || $id == 'google_plus' ) :
-
 					$curly[ $id ] = curl_init();
 
 					if ( $id == 'google_plus' ) :
@@ -70,8 +73,12 @@ class SWP_CURL {
 			endforeach;
 		endif;
 
-		  // execute the handles
-		  $running = null;
+		if (_swp_is_debug( 'is_cache_fresh' ) ) :
+			echo "<br>About to execute the multi curl. Current time: " . time();
+		endif;
+
+		// execute the handles
+		$running = null;
 		do {
 			curl_multi_exec( $mh, $running );
 		} while ($running > 0);
@@ -82,16 +89,24 @@ class SWP_CURL {
 			curl_multi_remove_handle( $mh, $c );
 		}
 
-		  // all done
-		  curl_multi_close( $mh );
+		// all done
+		curl_multi_close( $mh );
 
-          if( true == _swp_is_debug('show_share_data') ) :
-              echo "<pre>";
-              var_dump($result);
-              echo "</pre>";
-          endif;
+		if( true == _swp_is_debug('show_share_data') ) :
+		    echo "<pre>";
+		    var_dump($result);
+		    echo "</pre>";
+		endif;
 
-		  return $result;
+		if ( _swp_is_debug( 'is_cache_fresh' ) ) :
+			$done = time();
+			$duration = $done - $started;
+			echo "<br>Finishing the multi curl request at " . $done;
+			echo "<br>Total time for request was " . $duration . " seconds.";
+		endif;
+
+
+	  return $result;
 	}
 
 	public static function file_get_contents_curl( $url ) {
@@ -110,9 +125,11 @@ class SWP_CURL {
 		$cont = @curl_exec( $ch );
 		$curl_errno = curl_errno( $ch );
 		curl_close( $ch );
+
 		if ( $curl_errno > 0 ) {
 			return false;
 		}
+
 		return $cont;
 	}
 }

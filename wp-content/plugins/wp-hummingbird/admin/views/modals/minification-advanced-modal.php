@@ -1,4 +1,3 @@
-
 <div class="dialog sui-dialog sui-dialog-sm" aria-hidden="true" id="wphb-advanced-minification-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>

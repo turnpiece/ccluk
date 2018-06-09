@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Regenerate Thumbnails - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-01-29 15:13:45+0000\n"
+"PO-Revision-Date: 2018-06-07 10:05:43+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -45,7 +45,7 @@ msgstr "Esta herramienta no podrá hacer nada debido a que servidor no es compat
 
 #: regenerate-thumbnails.php:314
 msgid "This tool requires that JavaScript be enabled to work."
-msgstr "Esta herramienta que esté habilitado JavaScript para que funcione."
+msgstr "Esta herramienta necesita que esté habilitado JavaScript para funcionar."
 
 #: regenerate-thumbnails.php:304
 msgid "This plugin requires WordPress 4.7 or newer. You are on version %1$s. Please <a href=\"%2$s\">upgrade</a>."
@@ -81,7 +81,7 @@ msgstr "Regenerada {name}"
 
 #: regenerate-thumbnails.php:260
 msgid "Resume"
-msgstr "Reiniciar"
+msgstr "Continuar"
 
 #: regenerate-thumbnails.php:259
 msgid "Pause"

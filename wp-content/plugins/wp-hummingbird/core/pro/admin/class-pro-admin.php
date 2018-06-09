@@ -1,20 +1,31 @@
 <?php
+/**
+ * Admin class for Pro functions.
+ *
+ * @package Hummingbird
+ */
 
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
 
+/**
+ * Class WP_Hummingbird_Pro_Admin
+ */
 class WP_Hummingbird_Pro_Admin {
 
+	/**
+	 * Init function.
+	 */
 	public function init() {
-		// Dashboard is a little special. There's a bug that prevents to add meta boxes in another way
+		// Dashboard is a little special. There's a bug that prevents to add meta boxes in another way.
 		add_action( 'wphb_admin_do_meta_boxes_wphb' , array( $this, 'register_dashboard_do_meta_boxes' ), 10 );
 	}
 
 	/**
 	 * Register Dashboard Reporting meta box
 	 *
-	 * @param WP_Hummingbird_Dashboard_Page $dashboard_page
+	 * @param WP_Hummingbird_Dashboard_Page $dashboard_page  Dashboard page.
 	 */
 	public function register_dashboard_do_meta_boxes( $dashboard_page ) {
 		/* Reports */
@@ -43,9 +54,6 @@ class WP_Hummingbird_Pro_Admin {
 		$performance_module = WP_Hummingbird_Utils::get_module( 'performance' );
 		$options = $performance_module->get_options();
 
-		$uptime_module = WP_Hummingbird_Utils::get_module( 'uptime' );
-		$uptime_is_active = $uptime_module->is_active();
-
 		$frequency = '';
 		$performance_is_active = false;
 		if ( $options['reports'] ) {
@@ -65,7 +73,28 @@ class WP_Hummingbird_Pro_Admin {
 			}
 		}
 
-		$this->pro_view( 'dashboard/reports/meta-box', compact( 'performance_is_active', 'uptime_is_active', 'frequency' ) );
+		/* @var WP_Hummingbird_Module_Advanced $adv_module */
+		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
+		$options = $adv_module->get_options();
+
+		$db_cleanup = $options['db_cleanups'];
+		$db_frequency = '';
+		if ( $db_cleanup && isset( $options['db_frequency'] ) ) {
+			switch ( $options['db_frequency'] ) {
+				case 1:
+					$db_frequency = __( 'Daily', 'wphb' );
+					break;
+				case 7:
+					$db_frequency = __( 'Weekly', 'wphb' );
+					break;
+				case 30:
+					$db_frequency = __( 'Monthly', 'wphb' );
+					break;
+			}
+		}
+
+		$args = compact( 'performance_is_active', 'frequency', 'db_cleanup', 'db_frequency' );
+		$this->pro_view( 'dashboard/reports/meta-box', $args );
 	}
 	/**
 	 * Reports meta box footer

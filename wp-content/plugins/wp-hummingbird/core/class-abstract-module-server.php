@@ -8,11 +8,30 @@
  */
 abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 
+	/**
+	 * Module slug (used in transient).
+	 *
+	 * @var bool|string $transient_slug
+	 */
 	protected $transient_slug = false;
 
+	/**
+	 * Module status.
+	 *
+	 * @var array $status
+	 */
 	protected $status;
 
+	/**
+	 * Execute the module actions. It must be defined in subclasses. Executed when module is active.
+	 */
 	public function run() {}
+
+	/**
+	 * Initializes the module. Always executed even if the module is deactivated.
+	 *
+	 * Do not use __construct in subclasses, use init() instead
+	 */
 	public function init() {}
 
 	/**
@@ -90,39 +109,27 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	public static function get_server_type() {
 		global $is_apache, $is_IIS, $is_iis7, $is_nginx;
 
-		$type = get_site_option( 'wphb-server-type' );
-		$user_type = get_user_meta( get_current_user_id(), 'wphb-server-type', true );
-		if ( $user_type ) {
-			$type = $user_type;
-		}
+		$type = '';
 
-		if ( ! $type ) {
-			$type = '';
+		if ( $is_apache ) {
+			// It's a common configuration to use nginx in front of Apache.
+			// Let's make sure that this server is Apache.
+			$response = wp_remote_get( home_url() );
 
-			if ( $is_apache ) {
-				// It's a common configuration to use nginx in front of Apache.
-				// Let's make sure that this server is Apache
-				$response = wp_remote_get( home_url() );
-
-				if ( is_wp_error( $response ) ) {
-					// Bad luck
-					$type = 'apache';
-				} else {
-					$server = strtolower( wp_remote_retrieve_header( $response, 'server' ) );
-					// Could be LiteSpeed too
-					$type = strpos( $server, 'nginx' ) !== false ? 'nginx' : 'apache';
-					update_site_option( 'wphb-server-type', $type );
-				}
-			} elseif ( $is_nginx ) {
-				$type = 'nginx';
-				update_site_option( 'wphb-server-type', $type );
-			} elseif ( $is_IIS ) {
-				$type = 'IIS';
-				update_site_option( 'wphb-server-type', $type );
-			} elseif ( $is_iis7 ) {
-				$type = 'IIS 7';
-				update_site_option( 'wphb-server-type', $type );
+			if ( is_wp_error( $response ) ) {
+				// Bad luck.
+				$type = 'apache';
+			} else {
+				$server = strtolower( wp_remote_retrieve_header( $response, 'server' ) );
+				// Could be LiteSpeed too.
+				$type = strpos( $server, 'nginx' ) !== false ? 'nginx' : 'apache';
 			}
+		} elseif ( $is_nginx ) {
+			$type = 'nginx';
+		} elseif ( $is_IIS ) {
+			$type = 'IIS';
+		} elseif ( $is_iis7 ) {
+			$type = 'IIS 7';
 		}
 
 		return apply_filters( 'wphb_get_server_type', $type );
@@ -153,7 +160,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	 * @return string Code snippet
 	 */
 	public static function get_code_snippet( $module, $server_type = '', $expiry_times = array() ) {
-		/** @var WP_Hummingbird_Module_Server $module */
+		/* @var WP_Hummingbird_Module_Server $module */
 		$module = WP_Hummingbird_Utils::get_module( $module );
 		if ( ! $module ) {
 			return '';
@@ -204,7 +211,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	/**
 	 * Add rules .htaccess file.
 	 *
-	 * @param $module
+	 * @param string $module  Gzip or caching module.
 	 *
 	 * @return bool
 	 */
@@ -227,7 +234,7 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 	/**
 	 * Remove rules from .htaccess file.
 	 *
-	 * @param $module
+	 * @param string $module  Module.
 	 *
 	 * @return bool
 	 */

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-23 09:52:38+0000\n"
+"PO-Revision-Date: 2018-05-29 10:54:09+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,102 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fr\n"
 "Project-Id-Version: Plugins - Jetpack by WordPress.com - Stable (latest release)\n"
+
+#: modules/widgets/eu-cookie-law.php:122
+msgid ""
+"Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. \n"
+"To find out more, including how to control cookies, see here:"
+msgstr ""
+"Confidentialité et cookies : ce site utilise des cookies. En continuant à naviguer sur ce site, vous acceptez que nous en utilisions. \n"
+"Pour en savoir plus, y compris sur la façon de contrôler les cookies, reportez-vous à ce qui suit :"
+
+#: modules/widgets/eu-cookie-law.php:120
+msgid "Cookie Policy"
+msgstr "Politique relative aux cookies"
+
+#: modules/widgets/eu-cookie-law.php:74
+msgid "Display a banner for EU Cookie Law and GDPR compliance."
+msgstr "Affichez une bannière indiquant la conformité avec la loi européenne relative aux cookies et le RGPD."
+
+#: modules/widgets/eu-cookie-law.php:72
+msgid "Cookies & Consents Banner"
+msgstr "Bannière en lien avec les cookies et le consentement"
+
+#: modules/widgets/eu-cookie-law/form.php:189
+msgctxt "action"
+msgid "Consent expires after"
+msgstr "Le consentement expire après le"
+
+#: modules/widgets/eu-cookie-law/form.php:179
+msgid "Visitors must provide consent by clicking the dismiss button when Jetpack Ads is turned on."
+msgstr "Les visiteurs doivent donner leur consentement en cliquant sur le bouton Ignorer lorsque Jetpack Ads est activé."
+
+#: modules/widgets/eu-cookie-law/form.php:127
+msgctxt "action"
+msgid "Capture consent & hide the banner"
+msgstr "Obtenir le consentement et masquer la bannière"
+
+#: modules/widgets/eu-cookie-law/form.php:95
+msgid "Link text"
+msgstr "Texte du lien"
+
+#: modules/widgets/eu-cookie-law/form.php:83
+msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to Jetpack Ads</a>."
+msgstr "À des fins de conformité avec le RGPD, veuillez vous assurer que votre politique contient des <a href=\"%s\" target=\"_blank\">informations sur la confidentialité relatives à Jetpack Ads</a>."
+
+#: modules/widgets/eu-cookie-law/form.php:75
+msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
+msgstr "Le lien de politique par défaut ne couvre que les cookies mis en place par Jetpack. Si vous utilisez d'autres extensions, des cookies personnalisés ou des technologies de suivi de tierces, vous devez créer votre propre déclaration relative aux cookies et ajouter un lien vers celle-ci."
+
+#: modules/widgets/eu-cookie-law/form.php:74
+#: modules/widgets/eu-cookie-law/form.php:81
+msgid "Caution:"
+msgstr "Attention :"
+
+#: modules/widgets/eu-cookie-law/form.php:62
+msgid "Custom URL:"
+msgstr "Lien personnalisé :"
+
+#: modules/widgets/eu-cookie-law/form.php:40
+msgid "Privacy Policy Link"
+msgstr "Lien vers la politique de confidentialité"
+
+#. translators: %d: Post ID.
+#: modules/contact-form/grunion-contact-form.php:859
+msgid "Feedback ID %d could not be removed at this time."
+msgstr "Impossible de supprimer l'ID de commentaire %d pour le moment."
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an HTTP
+#. status code.
+#: class.jetpack-cli.php:1114
+msgid "Request to %1$s returned a non-200 response code: %2$d."
+msgstr "La requête envoyée à %1$s a renvoyé un code de réponse autre que 200 : %2$d."
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an error
+#. code, %3$s is an error message.
+#: class.jetpack-cli.php:1104
+msgid "Request to %1$s returned an error: (%2$d) %3$s."
+msgstr "La requête envoyée à %1$s a renvoyé une erreur : (%2$d) %3$s."
+
+#: _inc/jetpack-strings.php:279
+msgid "Keep tabs on your site and receive alerts the moment downtime is detected."
+msgstr "Gardez un œil sur votre site et recevez des alertes dès qu'un temps d'arrêt est détecté."
+
+#: _inc/jetpack-strings.php:153
+msgid "For more information on how specific Jetpack features use data and track activity, please refer to our {{privacyCenterLink}}Privacy Center{{/privacyCenterLink}}."
+msgstr "Pour obtenir plus d'informations sur la façon dont les fonctionnalités spécifiques de Jetpack utilisent les données et l'activité de suivi, veuillez vous reporter à notre {{privacyCenterLink}}Centre de confidentialité{{/privacyCenterLink}}."
+
+#: _inc/jetpack-strings.php:152
+msgid "We use other tracking tools, including some from third parties. {{cookiePolicyLink}}Read about these{{/cookiePolicyLink}} and how to control them."
+msgstr "Nous utilisons d'autres outils de suivi, notamment des outils provenant de tiers. {{cookiePolicyLink}}Découvrez-les{{/cookiePolicyLink}} et apprenez à les contrôler."
+
+#: _inc/jetpack-strings.php:151
+msgid "This information helps us improve our products, make marketing to you more relevant, personalize your WordPress.com experience, and more as detailed in our {{pp}}privacy policy{{/pp}}."
+msgstr "Ces informations nous permettent d'améliorer nos produits, de mieux cibler nos campagnes marketing, de personnaliser votre expérience WordPress.com et plus encore, comme indiqué dans notre {{pp}}politique de confidentialité{{/pp}}."
+
+#: _inc/jetpack-strings.php:150
+msgid "Share information with our analytics tool about your use of services while logged in to your WordPress.com account. {{cookiePolicyLink}}Learn more{{/cookiePolicyLink}}."
+msgstr "Partagez les informations concernant votre utilisation des services avec notre outil d'analyse tout en étant connecté à votre compte WordPress.com. {{cookiePolicyLink}}En savoir plus{{/cookiePolicyLink}}."
 
 #: modules/widgets/social-media-icons.php:48
 msgid "Social Media Icons (Deprecated)"

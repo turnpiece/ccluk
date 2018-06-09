@@ -30,7 +30,7 @@ settings_fields( 'nestedpages-posttypes' );
 							<?php _e('Replace the default top-level item with the nested view link.', 'wp-nested-pages'); ?></p>
 						</div>
 						<div class="field">
-							<label><input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][replace_menu]" value="true" <?php if ( $type->replace_menu ) echo 'checked'; ?> /><?php echo __('Replace Default') . ' ' . esc_html($type->label) . ' ' . __('Menu', 'wp-nested-pages'); ?></label>
+							<label><input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][replace_menu]" value="true" <?php if ( $type->replace_menu ) echo 'checked'; ?> /><?php echo __('Replace Default', 'wp-nested-pages') . ' ' . esc_html($type->label) . ' ' . __('Menu', 'wp-nested-pages'); ?></label>
 						</div><!-- .field -->
 					</div><!-- .row -->
 				</li>
@@ -52,7 +52,7 @@ settings_fields( 'nestedpages-posttypes' );
 							<?php _e('Remove drag and drop sorting from this post type.', 'wp-nested-pages'); ?></p>
 						</div>
 						<div class="field">
-							<label><input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][disable_sorting]" value="true" <?php if ( $type->disable_sorting ) echo 'checked'; ?> /><?php echo __('Disable Sorting') ?></label>
+							<label><input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][disable_sorting]" value="true" <?php if ( $type->disable_sorting ) echo 'checked'; ?> /><?php echo __('Disable Sorting', 'wp-nested-pages') ?></label>
 						</div><!-- .field -->
 					</div><!-- .row -->
 				</li>
@@ -93,7 +93,9 @@ settings_fields( 'nestedpages-posttypes' );
 									?>
 									<input type="search" data-nestedpages-post-search="page" placeholder="<?php _e('Search Pages', 'wp-nested-pages'); ?>" />
 									<div class="np-quickedit-info" style="display:none;" data-nestedpages-no-results><?php _e('No pages were found.', 'wp-nested-pages'); ?></div>
-									<img src="<?php echo NestedPages\Helpers::plugin_url(); ?>/assets/images/spinner.gif" alt="<?php _e('Loading', 'wp-nested-pages'); ?>" style="display:none;" data-nestedpages-loading />
+									<div class="np-default-loading" data-nestedpages-loading>
+										<?php include( NestedPages\Helpers::asset('images/spinner.svg') ); ?>
+									</div>
 									<div class="nestedpages-page-search-results" data-nestedpages-search-results>
 										<ul>
 										<?php foreach($recent_pages as $page) : ?>
@@ -237,7 +239,6 @@ settings_fields( 'nestedpages-posttypes' );
 				</li>
 			<?php endif; ?>
 			<?php 
-			if ( $type->name !== 'page' ) : 
 			$h_taxonomies = $this->post_type_repo->getTaxonomies($type->name, true); 
 			$f_taxonomies = $this->post_type_repo->getTaxonomies($type->name, false);
 			$taxonomies = array_merge($h_taxonomies, $f_taxonomies);
@@ -252,16 +253,54 @@ settings_fields( 'nestedpages-posttypes' );
 						<div class="nestedpages-sort-options-selection">
 							<label>
 								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][author]" value="true" <?php if ( $this->post_type_repo->sortOptionEnabled($type->name, 'author') ) echo 'checked'; ?> />
-								<?php _e('Author') ?>
+								<?php _e('Author', 'wp-nested-pages') ?>
 							</label>
+
 							<label>
-								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][orderby]" value="true" <?php if ( $this->post_type_repo->sortOptionEnabled($type->name, 'orderby') ) echo 'checked'; ?> />
-								<?php _e('Order By') ?>
+								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][orderby][enabled]" value="true" <?php if ( $this->post_type_repo->sortOptionEnabled($type->name, 'orderby') ) echo 'checked'; ?> data-nestedpages-sort-option-checkbox />
+								<?php _e('Order By', 'wp-nested-pages') ?>
 							</label>
+							<div class="sort-options-default" data-nestedpages-sort-option-default>
+								<label><?php _e('Initial Order By:', 'wp-nested-pages'); ?></label>
+								<select name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][orderby][initial]">
+									<?php
+										$options = array(
+											'date' => __('Date', 'wp-nested-pages'),
+											'title' => __('Title', 'wp-nested-pages')
+										);
+										$out = '<option value="">' . __('Default (Menu Order)', 'wp-nested-pages') . '</option>';
+										foreach ( $options as $key => $option ){
+											$out .= '<option value="' . $key . '"';
+											if ( $this->post_type_repo->defaultSortOption($type->name, 'orderby') == $key) $out .= ' selected';
+											$out .= '>' . esc_html($option) . '</option>';
+										}
+										echo $out;
+									?>
+								</select>
+							</div><!-- .sort-options-default -->
+
 							<label>
-								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][order]" value="true" <?php if ( $this->post_type_repo->sortOptionEnabled($type->name, 'order') ) echo 'checked'; ?> />
-								<?php _e('Order') ?>
+								<input type="checkbox" name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][order][enabled]" value="true" <?php if ( $this->post_type_repo->sortOptionEnabled($type->name, 'order') ) echo 'checked'; ?> data-nestedpages-sort-option-checkbox />
+								<?php _e('Order', 'wp-nested-pages') ?>
 							</label>
+							<div class="sort-options-default" data-nestedpages-sort-option-default>
+								<label><?php _e('Initial Order:', 'wp-nested-pages'); ?></label>
+								<select name="nestedpages_posttypes[<?php echo esc_attr($type->name); ?>][sort_options][order][initial]">
+									<?php
+										$options = array(
+											'ASC' => __('Ascending', 'wp-nested-pages'),
+											'DESC' => __('Descending', 'wp-nested-pages')
+										);
+										$out = '';
+										foreach ( $options as $key => $option ){
+											$out .= '<option value="' . $key . '"';
+											if ( $this->post_type_repo->defaultSortOption($type->name, 'initial_order') == $key) $out .= ' selected';
+											$out .= '>' . esc_html($option) . '</option>';
+										}
+										echo $out;
+									?>
+								</select>
+							</div><!-- .sort-options-default -->
 
 							<?php if ( !empty($taxonomies) ) : foreach ( $taxonomies as $tax ) : ?>
 							<label>
@@ -274,7 +313,6 @@ settings_fields( 'nestedpages-posttypes' );
 					</div><!-- .field -->
 				</div><!-- .row -->
 			</li>
-			<?php endif; ?>
 			</ul>
 		</div><!-- .body -->
 	</div><!-- .post-type -->

@@ -51,6 +51,7 @@ function forminator_delete_custom_posts() {
  * Delete custom options
  *
  * @since 1.0.2
+ * @since 1.0.6 Delete privacy options
  */
 function forminator_delete_custom_options() {
 	delete_option( "forminator_pagination_listings" );
@@ -61,6 +62,13 @@ function forminator_delete_custom_options() {
 	delete_option( "forminator_captcha_theme" );
 	delete_option( "forminator_welcome_dismissed" );
 	delete_option( "forminator_version" );
+	delete_option( "forminator_retain_votes_interval_number" );
+	delete_option( "forminator_retain_votes_interval_unit" );
+	delete_option( "forminator_retain_submissions_interval_number" );
+	delete_option( "forminator_retain_submissions_interval_unit" );
+	delete_option( "forminator_enable_erasure_request_erase_form_submissions" );
+	delete_option( "forminator_form_privacy_settings" );
+	delete_option( "forminator_poll_privacy_settings" );
 }
 
 $forminator_uninstall = get_option( "forminator_uninstall_clear_data", false );

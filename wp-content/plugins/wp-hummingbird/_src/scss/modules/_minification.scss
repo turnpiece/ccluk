@@ -30,14 +30,15 @@
 }
 
 .wpmud .checkbox-group input[type="checkbox"] + label {
-    background-color: #FAFAFA;
+    background-color: #fff;
+    border: 1px solid #E6E6E6;
     border-radius: 4px;
     display: flex;
     padding: 0;
     align-items: center;
     justify-content: center;
     text-align: center;
-    width: 107px;
+    width: 50px;
     position: relative;
     transition-property: background, color;
     transition-duration: 0.3s;
@@ -72,7 +73,8 @@
 .wpmud .checkbox-group input[type="checkbox"] + label.toggle-label-background, /* modal */
 .wpmud .checkbox-group input[type="checkbox"]:checked + label {
     box-shadow: none;
-    background-color: #EFFAFF;
+    background-color: #E1F6FF;
+    border-color: #E1F6FF;
 }
 
 .wpmud .checkbox-group input[type="checkbox"] + label > span:not(.toggle),
@@ -91,7 +93,6 @@
 .wpmud .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
     font-size: 14px;
     vertical-align: -2px;
-    margin-right: 8px;
 }
 
 .wpmud .sui-dialog .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
@@ -116,7 +117,8 @@
 }
 
 .wpmud .checkbox-group input[type="checkbox"]:disabled + label {
-    background-color: #FFF;
+    background-color: #F8F8F8;
+    border-color: #F8F8F8;
 }
 
 .wpmud .checkbox-group input[type="checkbox"] + label > [tooltip] {
@@ -212,6 +214,7 @@
     -ms-flex-align: center;
     align-items: center;
     align-content: center;
+    position: relative;
 }
 
 .wpmud .wphb-minification-files-basic .wphb-border-row,
@@ -277,70 +280,111 @@
     width: auto;
 }
 
-.wpmud .wphb-minification-changed-notice a.wphb-notice-dismiss {
-    opacity: 0.5;
-    color: #333333;
-    font-size: 12px;
-    font-weight: bold;
-    margin-left: 33px;
-    text-transform: uppercase;
-}
-
 /* Styles, common for basic and advanced views */
-.wpmud .wphb-minification-file-info {
-    float: left;
-    line-height: 18px;
-    overflow: hidden;
-    position: relative;
-    white-space: nowrap;
-    width: 300px;
-}
-
-.wpmud .wphb-border-row:not(.disabled) .wphb-minification-file-info:after {
-    background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
-    background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
-    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
-    content: '';
-    height: 100%;
-    pointer-events: none;
-    position: absolute;
-    right: 0;
-    top: 0;
-    width: 40px;
-}
-
-.wpmud .wphb-minification-file-info > * {
-    color: #AAAAAA;
-    font-size: 10px;
-    font-weight: 500;
-    line-height: 10px;
-}
-
-.wpmud .wphb-minification-file-info > span:first-child {
-    color: #666666;
-    display: block;
-    font-size: 13px;
-    line-height: 13px;
-}
-
-.wpmud .wphb-minification-file-info > a {
-    max-width: 400px;
-    overflow: hidden;
-}
-
-.wpmud .wphb-minification-file-info > .original-size.crossed-out {
-    text-decoration: line-through;
-}
-
-.wpmud .wphb-minification-file-info > .sui-icon-chevron-down:before,
-.wpmud .wphb-minification-file-info > .compressed-size {
-    color: #1ABC9C;
-}
-
-.wpmud .wphb-minification-file-info > .sui-icon-chevron-down:before {
-    font-size: 8px;
-    position: relative;
-    top: 0;
+.wpmud {
+    .wphb-minification-file-info {
+        float: left;
+        line-height: 18px;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 280px;
+        > {
+             * {
+                color: #AAAAAA;
+                font-size: 10px;
+                font-weight: 500;
+                line-height: 10px;
+            }
+             span:first-child {
+                color: #666666;
+                display: block;
+                font-size: 13px;
+                line-height: 13px;
+            }
+             a {
+                max-width: 400px;
+                overflow: hidden;
+            }
+             .original-size.crossed-out {
+                text-decoration: line-through;
+            }
+             .sui-icon-chevron-down:before {
+                font-size: 8px;
+                position: relative;
+                top: 0;
+            }
+             .sui-icon-chevron-down:before,
+             .compressed-size {
+                color: #1ABC9C;
+            }
+        }
+    }
+    .wphb-border-row:not(.disabled) .wphb-minification-file-info:after {
+        background: -webkit-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
+        background: -o-linear-gradient(left, rgba(255, 255, 255, 0) 0%, #fff 100%);
+        background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, #fff 100%);
+        content: '';
+        height: 100%;
+        pointer-events: none;
+        position: absolute;
+        right: 0;
+        top: 0;
+        width: 40px;
+    }
+    .wphb-minification-files-basic .wphb-border-row .wphb-row-status {
+        &.wphb-row-status-queued,
+        &.wphb-row-status-success {
+            top: 20px;
+        }
+    }
+    .wphb-border-row {
+        .wphb-row-status {
+            position: absolute;
+            height: 20px;
+            width: 20px;
+            border-radius: 50%;
+            background-color: #FFFFFF;
+            box-shadow: 0 2px 7px 0 rgba(0,0,0,0.05);
+            left: -9px;
+            animation: pop 0.3s linear 1;
+            z-index: 1;
+            i {
+                position: absolute;
+                height: 12px;
+                width: 12px;
+                font-size: 12px;
+                line-height: 22px;
+                left: 4px;
+                &:before {
+                    color: #17A8E3;
+                }
+            }
+            &.wphb-row-status-already-compressed {
+                i:before {
+                    color: $color--warning;
+                }
+            }
+            &.wphb-row-status-other {
+                i:before {
+                    color: #AAAAAA;
+                }
+            }
+            &.wphb-row-status-queued {
+                top: 24px;
+                z-index: 0;
+                i:before {
+                    color: #AAAAAA;
+                }
+            }
+            &.wphb-row-status-success {
+                top: 24px;
+                z-index: 0;
+                i:before {
+                    color: $color--success;
+                }
+            }
+        }
+    }
 }
 
 /* Advanced minification section */
@@ -452,6 +496,19 @@
     margin: 0;
 }
 
+.wpmud .box-minification-settings .sui-notice-warning {
+    margin-bottom: 15px;
+    padding: 15px 20px;
+
+    p {
+        font-size: 13px;
+
+        &:first-of-type:before {
+            font-size: 16px;
+        }
+    }
+}
+
 /* Overwrite upsell message */
 .wpmud .wrap-wphb-minification .content-box-two-cols-image-left .wphb-block-entry-content {
     margin-top: 0;
@@ -467,7 +524,7 @@
 // Responsive
 @include bp(desktop-large) {
     .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
-        width: 235px;
+        width: 185px;
     }
 }
 
@@ -523,12 +580,12 @@
         overflow: hidden;
     }
 
-    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
+    .wpmud .wphb-minification-file-info {
         width: 55%;
         min-width: 200px;
     }
 
-    .wpmud .wphb-minification-files-advanced .wphb-minification-file-info > a {
+    .wpmud .wphb-minification-file-info > a {
         max-width: 200px;
     }
 

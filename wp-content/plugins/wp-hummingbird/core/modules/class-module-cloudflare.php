@@ -37,7 +37,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 * @return bool
 	 */
 	public function has_cloudflare( $force = false ) {
-		if ( isset( $_GET['wphb-check-cf'] ) ) {
+		if ( isset( $_GET['wphb-check-cf'] ) ) { // Input var ok.
 			// If we're checking do not try to check again or it will return a timeout.
 			return (bool) WP_Hummingbird_Settings::get_setting( 'connected', $this->slug );
 		}
@@ -371,7 +371,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 		}
 
 		$_zones = $result->result;
-		foreach ( $_zones as $zone ) {
+		foreach ( (array) $_zones as $zone ) {
 			$zones[] = array(
 				'value' => $zone->id,
 				'label' => $zone->name,
@@ -425,6 +425,9 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 			return new WP_Error( 'cf_invalid_value', __( 'Invalid Cloudflare expiration value', 'wphb' ) );
 		}
 
+		$options['cache_expiry'] = $value;
+		$this->update_options( $options );
+
 		return $api->cloudflare->set_caching_expiration( $options['zone'], $value );
 	}
 
@@ -435,6 +438,11 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 	 */
 	public function get_caching_expiration() {
 		$options = $this->get_options();
+
+		if ( isset( $options['cache_expiry'] ) ) {
+			return $options['cache_expiry'];
+		}
+
 		$api = WP_Hummingbird_Utils::get_api();
 		$api->cloudflare->set_auth_email( $options['email'] );
 		$api->cloudflare->set_auth_key( $options['api_key'] );
@@ -464,6 +472,8 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 
 	/**
 	 * Check if Cloudflare is disconnected.
+	 *
+	 * @used-by WP_Hummingbird_Caching_Page::trigger_load_action()
 	 */
 	public function disconnect() {
 		$options = $this->get_options();

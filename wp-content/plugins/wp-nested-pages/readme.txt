@@ -4,7 +4,8 @@ Donate link: http://nestedpages.com/
 Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
 Tested up to: 4.9
-Stable tag: 2.0.3
+Requires PHP: 5.4
+Stable tag: 3.0.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,7 +25,7 @@ Nested Pages provides a drag and drop interface for managing pages & posts in th
 
 For more information visit [nestedpages.com](http://nestedpages.com).
 
-**Important: Nested Pages requires WordPress version 3.8 or higher, and PHP version 5.3.2 or higher.**
+**Important: Nested Pages requires WordPress version 3.8 or higher, and PHP version 5.4 or higher.**
 
 **Languages:**
 
@@ -52,19 +53,19 @@ For more information visit [nestedpages.com](http://nestedpages.com).
 == Frequently Asked Questions ==
 
 = Can I use Nested Pages with other post types? =
-As of Nested Pages version 1.3.0, all post types are supported. To enable the Nested Pages interface for post types, update your settings under Settings > Nested Pages.
+Yes! Visit Settings > Nested Pages > Post Types to enable the interface for any public post type. There are settings available for each post type, allowing customization of the admin to fit your needs.
 
 = Is this plugin compatible with the WPML plugin? =
-Nested Pages is not currently compatible with WPML. 
+Please see the section titled "WMPL Compatibility" for details on using Nested Pages with WPML. In short, ordering and nesting functionality is available, but automatic menu generation across languages is limited. It is advised to use WPML's menu synchronization for this purpose.
 
 = How do I access the WordPress "Pages" screen? =
-Click the “Default link in the page subnav, or on the Nested Pages screen. This item may be optionally hidden under the Nested Pages settings.
+Click the “Default link in the page subnav, or on the Nested Pages screen. This item may be optionally hidden under the Nested Pages "Post Type" settings.
 
 = How do I save the order I create? =
 Post sorting and nesting is saved in the background after changes are made to the structure. If the "manual page order" option is enabled in the plugin options, you'll need to click the "Sync Order" button at the top of the page to save.
 
 = How do I edit in bulk? =
-Bulk quick edits are not currently supported by Nested Pages. To edit in bulk, click on the "Default" link to use the native interface.
+To bulk edit, check the checkbox on the pages/posts you'd like to edit. Once one or more have been selected, a "Bulk Actions" dropdown will appear, allowing you to either move the selected posts to the trash or bulk edit.
 
 = What about custom columns? =
 Custom columns are not currently supported by Nested Pages. To view custom columns, click on the "Default" link to view the native interface. If you are using WordPress SEO by Yoast, a page analysis indicator is shown.
@@ -73,7 +74,10 @@ Custom columns are not currently supported by Nested Pages. To view custom colum
 If you have WordPress SEO by Yoast installed, your page score indicators are shown along with the pages.
 
 = Can I show the thumbnail in the tree view? =
-As of version 1.6, yes. Visit Settings > Nested Pages > Post Types to configure thumbnail settings for each post type. Filters are also available for customizing the images displayed.
+Yes! Visit Settings > Nested Pages > Post Types to configure thumbnail settings for each post type. Filters are also available for customizing the images displayed, as well as specifying a fallback image in the case that the post does not have a thumbnail assigned.
+
+= Nested Pages changes my permalink structure. How do I stop that? =
+Nested Pages uses the same ordering methodology as WordPress core. The plugin offers an enhanced interface to achieve the same results. Parent/Child relationships are used in conjunction with the post menu_order field to nest and order posts/pages. There is currently no option to disable this core feature.
 
 
 == Screenshots ==
@@ -97,6 +101,37 @@ As of version 1.6, yes. Visit Settings > Nested Pages > Post Types to configure 
 9. The Nested Pages interface can be enabled on a per-post-type basis, with customizable options for each type.
 
 == Changelog ==
+
+= 3.0.4 = 
+* Fixes bug introduced in v3.0.3 that prevented selection of privacy page.
+
+= 3.0.3 =
+* Fixes PHP error when performing a search with no results.
+* Fixes WordPress core issue where children of a private post become unnested after editing the post.
+* Fixes bug where updated titles on custom links were not synching with the menu.
+* Fixes bug where an extra trailing slash was being added to asset URLs, resulting in style errors.
+* Adds capability conditional for quick edit functionality
+* Adds filter to hide quick edit button (receives post object as parameter)
+
+= 3.0.2 =
+* Fixes issue where post_row_action error was being thrown due to incorrect object type being passed as parameter.
+
+= 3.0.1 =
+* Breaking Change: PHP Version 5.4.0+ is required to run Nested Pages V3+.
+* Parent field added to bulk edit under hierarchical post types.
+* Fixes HTML Validation where invalid rel attribute error was being thrown on custom link items.
+* Fixes bug where filtering by taxonomy did not work.
+* Adds error handling for existing nav menu with the name “Nested Pages”, preventing WP_Error object from saving in the database which causes a fatal error in some instances.
+* Adds support for custom post states, using the display_post_states filter (Ex: Showing a WooCommerce - Checkout Page designator).
+* Adds support for custom row actions using the post_row_actions and page_row_actions filters.
+* Adds new feature for inserting new posts before/after a selected post.
+* Adds new option to set a default "order by" and "order" parameter for post types, including pages. Visit the post type settings tab in the plugin settings to enable (Note: Sorting/nesting will not be available when viewing the lists in any combination other than menu_order/ascending).
+* Fixes issue where disabling nesting of a post type was not working.
+* Adds template names as CSS classes for custom row styling.
+* Adds enhancements to the user interface.
+* Removes capability to nest a page underneath a link, preventing broken links.
+* Fixes issue where meta values were not being saved during cloning, when the source post contained multiple entries with the same meta_key.
+* Fixes bug where new page modals were not displaying when WPML was installed.
 
 = 2.0.4 = 
 * Fixes PHP warning if a search is performed with only one result when WP_DEBUG is enabled.

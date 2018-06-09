@@ -1,4 +1,4 @@
-<div class="dialog sui-dialog" aria-hidden="true" id="bulk-update-modal">
+<div class="dialog sui-dialog sui-dialog-sm" aria-hidden="true" id="bulk-update-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
 
@@ -15,7 +15,7 @@
 
 			<div class="sui-box-body">
 
-				<p><?php esc_html_e( 'Choose what bulk update actions you wish to apply.', 'wphb' ); ?></p>
+				<p><?php esc_html_e( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ); ?></p>
 
 
 
@@ -54,17 +54,20 @@
 					</label>
 				</div><!-- end checkbox-group -->
 
-				<div class="wphb-progress-state">
-					<span class="wphb-progress-state-text"><?php esc_html_e( 'Note: You still need to set the changes live by clicking Save Changes on the next screen.', 'wphb' ); ?></span>
-				</div><!-- end wphb-progress-state -->
 			</div>
-			<div class="sui-box-footer sui-space-between">
+			<div class="sui-box-footer sui-space-between sui-no-padding-top">
 				<div class="sui-button sui-button-ghost" data-a11y-dialog-hide="bulk-update-modal"><?php esc_html_e( 'Cancel', 'wphb' ); ?></div>
 
-				<a class="save-batch sui-button sui-button-primary" data-a11y-dialog-hide="bulk-update-modal"><?php esc_html_e( 'Apply', 'wphb' ); ?></a>
+				<a class="save-batch sui-button" data-a11y-dialog-hide="bulk-update-modal"><?php esc_html_e( 'Apply', 'wphb' ); ?></a>
 
 			</div>
 
+			<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
+				<img class="wphb-image"
+					 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png'; ?>"
+					 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png'; ?> 2x"
+					 alt="<?php esc_attr_e( 'Hummingbird','wphb' ); ?>">
+			</div>
 		</div>
 
 	</div>
@@ -110,7 +113,6 @@
 		modal.find('label[for="filter-inline"]').removeClass('toggle-label-background');
 
 		// Enable the Publish Changes button.
-		jQuery('.wphb-minification-changed-notice').slideDown('slow');
 		jQuery('input[type=submit]').removeClass('disabled');
 	});
 </script>

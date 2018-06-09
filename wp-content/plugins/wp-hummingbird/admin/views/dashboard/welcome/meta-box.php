@@ -22,8 +22,16 @@
 	<div class="sui-summary-details">
 		<?php
 		if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
-			$error_class = ( 'aplus' === $last_report->data->score_class || 'a' === $last_report->data->score_class || 'b' === $last_report->data->score_class ) ? 'success' : 'warning';
-			$icon_class = ( 'aplus' === $last_report->data->score_class || 'a' === $last_report->data->score_class || 'b' === $last_report->data->score_class ) ? 'check-tick' : 'info';
+			if ( 85 <= $last_report->data->score ) :
+				$error_class = 'success';
+				$icon_class = 'check-tick';
+			elseif ( 65 <= $last_report->data->score ) :
+				$error_class = 'warning';
+				$icon_class = 'warning-alert';
+			else :
+				$error_class = 'error';
+				$icon_class = 'warning-alert';
+			endif;
 			?>
 			<span class="sui-summary-large"><?php echo esc_html( $last_report->data->score ); ?></span>
 			<i class="sui-icon-<?php echo esc_attr( $icon_class ); ?> sui-lg sui-<?php echo esc_attr( $error_class ); ?>"></i>

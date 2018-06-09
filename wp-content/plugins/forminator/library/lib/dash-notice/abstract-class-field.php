@@ -688,7 +688,7 @@ abstract class Forminator_Field {
 		return $data;
 	}
 
-	public function sanitize_value( $value ){
+	public function sanitize_value( $value ) {
 		return htmlspecialchars($value, ENT_COMPAT);
 	}
 

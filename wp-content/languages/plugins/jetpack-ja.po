@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-24 02:12:31+0000\n"
+"PO-Revision-Date: 2018-06-01 02:54:08+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,14 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - Jetpack by WordPress.com - Stable (latest release)\n"
+
+#: modules/widgets/eu-cookie-law.php:122
+msgid ""
+"Privacy & Cookies: This site uses cookies. By continuing to use this website, you agree to their use. \n"
+"To find out more, including how to control cookies, see here:"
+msgstr ""
+"プライバシーと Cookies:このサイトは Cookies を使用しています。このサイトの使用を続けると、Cookie の使用に同意したとみなされます。\n"
+"Cookie の管理方法を含め、詳細についてはこちらをご覧ください:"
 
 #: modules/widgets/eu-cookie-law.php:120
 msgid "Cookie Policy"
@@ -23,6 +31,15 @@ msgstr "EU Cookie 法と GDPR コンプライアンスのバナーを表示し�
 msgid "Cookies & Consents Banner"
 msgstr "Cookie と同意バナー"
 
+#: modules/widgets/eu-cookie-law/form.php:189
+msgctxt "action"
+msgid "Consent expires after"
+msgstr "同意の有効期限"
+
+#: modules/widgets/eu-cookie-law/form.php:179
+msgid "Visitors must provide consent by clicking the dismiss button when Jetpack Ads is turned on."
+msgstr "Jetpack 広告が有効になっている場合、訪問者は非表示ボタンをクリックして同意する必要があります。"
+
 #: modules/widgets/eu-cookie-law/form.php:127
 msgctxt "action"
 msgid "Capture consent & hide the banner"
@@ -31,6 +48,64 @@ msgstr "同意したことを記録してバナーを非表示にする"
 #: modules/widgets/eu-cookie-law/form.php:95
 msgid "Link text"
 msgstr "リンクテキスト"
+
+#: modules/widgets/eu-cookie-law/form.php:83
+msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to Jetpack Ads</a>."
+msgstr "GDPR に準拠するために、ポリシーには必ず <a href=\"%s\" target=\"_blank\">Jetpack 広告に関するプライバシー情報</a>を含めてください。"
+
+#: modules/widgets/eu-cookie-law/form.php:75
+msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
+msgstr "デフォルトのポリシー URL には、Jetpack によって設定される Cookie の情報だけが記載されています。他のプラグイン、カスタム Cookie、またはサードパーティの追跡テクノロジーを実行している場合は、Cookie に関する独自の声明文を作成して、その声明文にリンクする必要があります。"
+
+#: modules/widgets/eu-cookie-law/form.php:74
+#: modules/widgets/eu-cookie-law/form.php:81
+msgid "Caution:"
+msgstr "注意:"
+
+#: modules/widgets/eu-cookie-law/form.php:62
+msgid "Custom URL:"
+msgstr "カスタム URL:"
+
+#: modules/widgets/eu-cookie-law/form.php:40
+msgid "Privacy Policy Link"
+msgstr "個人情報保護方針へのリンク"
+
+#. translators: %d: Post ID.
+#: modules/contact-form/grunion-contact-form.php:859
+msgid "Feedback ID %d could not be removed at this time."
+msgstr "この時点では、フィードバック ID %d を削除できませんでした。"
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an HTTP
+#. status code.
+#: class.jetpack-cli.php:1114
+msgid "Request to %1$s returned a non-200 response code: %2$d."
+msgstr "%1$s に対するリクエストで200以外のレスポンスコードが返されました:%2$d。"
+
+#. translators: %1$s is an endpoint route (ex. /sites/123456), %2$d is an error
+#. code, %3$s is an error message.
+#: class.jetpack-cli.php:1104
+msgid "Request to %1$s returned an error: (%2$d) %3$s."
+msgstr "%1$s に対するリクエストでエラーが返されました:(%2$d) %3$s。"
+
+#: _inc/jetpack-strings.php:279
+msgid "Keep tabs on your site and receive alerts the moment downtime is detected."
+msgstr "サイトを監視し、ダウンした場合はすぐにアラートを送ります。"
+
+#: _inc/jetpack-strings.php:153
+msgid "For more information on how specific Jetpack features use data and track activity, please refer to our {{privacyCenterLink}}Privacy Center{{/privacyCenterLink}}."
+msgstr "特定の Jetpack 機能によるデータの使用方法とアクティビティの追跡方法の詳細については、{{privacyCenterLink}}プライバシーセンター{{/privacyCenterLink}}を参照してください。"
+
+#: _inc/jetpack-strings.php:152
+msgid "We use other tracking tools, including some from third parties. {{cookiePolicyLink}}Read about these{{/cookiePolicyLink}} and how to control them."
+msgstr "サードパーティのものを含め、他の追跡ツールを使用します。それらについての{{cookiePolicyLink}}詳細{{/cookiePolicyLink}}と設定方法についてお読みください。"
+
+#: _inc/jetpack-strings.php:151
+msgid "This information helps us improve our products, make marketing to you more relevant, personalize your WordPress.com experience, and more as detailed in our {{pp}}privacy policy{{/pp}}."
+msgstr "この情報は、製品を改善し、マーケティングをより関連性の高いものとし、WordPress.com の利用をパーソナライズするのに役立ちます。さらに詳しくは、{{pp}}個人情報保護方針{{/pp}}をご覧ください。"
+
+#: _inc/jetpack-strings.php:150
+msgid "Share information with our analytics tool about your use of services while logged in to your WordPress.com account. {{cookiePolicyLink}}Learn more{{/cookiePolicyLink}}."
+msgstr "WordPress.com アカウントへのログイン中のサービス利用の情報を分析ツールと共有してください。{{cookiePolicyLink}}さらに詳しく{{/cookiePolicyLink}}。"
 
 #. translators: %s is UTC offset, e.g. "+1"
 #: sync/class.jetpack-sync-functions.php:385

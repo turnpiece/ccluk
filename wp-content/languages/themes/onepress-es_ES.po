@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-12 12:50:32+0000\n"
+"PO-Revision-Date: 2018-06-01 21:21:00+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -32,6 +32,14 @@ msgstr "No volver a mostrar esto"
 #: inc/dashboard.php:80
 msgid "Install Customify Now"
 msgstr "Instala Customify"
+
+#: inc/dashboard.php:78
+msgid "Customify is both a WordPress Theme and a WordPress Theme Editor. It’s a powerful styling platform that ensures exceptional design control over your website’s looks and feel. The most highlight feature is the <strong>comprehensive Header & Footer builder</strong>."
+msgstr "Customify es tanto un tema de WordPress como un editor de temas de WordPress. Es una plataforma de diseño que asegura un control excepcional sobre la apariencia de tu web. La característica más destacada es su completo <strong>constructor de cabecera y pie</strong>."
+
+#: inc/dashboard.php:77
+msgid "Meet Customify - the improved version of OnePress theme by the same team!"
+msgstr "Descubre Customify - ¡la versión mejorada del tema OnePress realizada por el mismo equipo!"
 
 #: inc/customizer.php:526
 msgid "Transparent Logo Height in Pixel"
@@ -125,6 +133,10 @@ msgstr "Acciones recomendadas"
 msgid "OnePress Plus Available! Take a look"
 msgstr "¡OnePress Plus disponible! Echa un vistazo"
 
+#: inc/customizer.php:3630
+msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Ordenar secciones con arrastrar y soltar</h4><p class=\"customizer-group-heading-message\">¡Mira la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> con un control completo sobre las secciones de la portada!</p><h4 class=\"customizer-group-heading-message\">Apariencia avanzada de las secciones</h4><p class=\"customizer-group-heading-message\">Mira la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> con un control absoluto sobre la apariencia de las secciones, incluyendo, color de fondo, imagen, video, efecto parallax, estilos personalizados y más...</p>"
+
 #: inc/customizer.php:3314
 msgid "Ascending"
 msgstr "Ascendente"
@@ -213,6 +225,10 @@ msgstr "Color del texto rotatorio"
 msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
 msgstr "Somos <span class=\"js-rotating\">OnePress | One Page | Adaptables | Perfección</span>"
 
+#: inc/customizer.php:1486
+msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
+msgstr "¿Quieres añadir un <strong>video de fondo</strong> para la sección hero? Actualiza a la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>."
+
 #: inc/customizer.php:1255
 msgid "Disable Preload Icon"
 msgstr "Desactivar el icono de precarga"
@@ -290,13 +306,25 @@ msgstr "Alineación del contenido"
 msgid "Color"
 msgstr "Color"
 
+#: inc/customizer.php:641
+msgid "The page cover padding bottom in percent (%)."
+msgstr "Relleno inferior de la portada en porcentaje (%)."
+
 #: inc/customizer.php:640
 msgid "Padding Bottom"
 msgstr "Relleno inferior"
 
+#: inc/customizer.php:626
+msgid "The page cover padding top in percent (%)."
+msgstr "Relleno superior de la portada en porcentaje (%)."
+
 #: inc/customizer.php:625
 msgid "Padding Top"
 msgstr "Relleno superior"
+
+#: inc/customizer.php:612
+msgid "Check this box to disable the page title bar on all pages."
+msgstr "Marca esta casilla para desactivar el título de página en todas las páginas."
 
 #: inc/customizer.php:610
 msgid "Disable Page Title bar?"
@@ -306,6 +334,10 @@ msgstr "¿desactivar la barra de título de las páginas?"
 msgid "Page Title Area"
 msgstr "Área del título de página"
 
+#: inc/customizer.php:584
+msgid "Padding left and right for Navigation items (pixels)."
+msgstr "Relleno izquierdo y derecho de los elementos de navegación (píxeles)."
+
 #: inc/customizer.php:583
 msgid "Menu Item Padding"
 msgstr "Margen interior de elementos del menú"
@@ -314,9 +346,21 @@ msgstr "Margen interior de elementos del menú"
 msgid "Navigation"
 msgstr "Navegación"
 
+#: inc/customizer.php:557
+msgid "Transparent Site Tagline Color"
+msgstr "Color del eslogan transparente del sitio"
+
+#: inc/customizer.php:541
+msgid "Transparent Site Title Color"
+msgstr "Color del título transparente del sitio"
+
 #: inc/customizer.php:508
 msgid "Transparent Retina Logo"
 msgstr "Logo retina transparente"
+
+#: inc/customizer.php:490 inc/customizer.php:509
+msgid "Only apply when transparent header option is checked."
+msgstr "Sólo se aplica cuando está seleccionada la opción de cabecera transparente."
 
 #: inc/customizer.php:488
 msgid "Transparent Logo"
@@ -1466,6 +1510,10 @@ msgstr "¿Ocultar el boletín de noticias del pie de página?"
 #: inc/customizer.php:796
 msgid "Social Footer Title"
 msgstr "Título del pie de página social"
+
+#: inc/customizer.php:782
+msgid "The social profiles specified below will be displayed in the footer of your site."
+msgstr "Los perfiles sociales que se especifiquen se mostrarán en el pie de página de tu sitio."
 
 #: inc/customizer.php:769
 msgid "Check this box to hide footer social section."

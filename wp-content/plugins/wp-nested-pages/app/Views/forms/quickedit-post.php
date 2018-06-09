@@ -11,7 +11,7 @@
 
 <form method="get" action="">
 	<div class="form-interior">
-	<h3><?php _e('Quick Edit'); ?><span class="page_id"></span></h3>
+	<h3><?php _e('Quick Edit', 'wp-nested-pages'); ?><span class="page_id"></span></h3>
 
 	<div class="np-quickedit-error" style="clear:both;display:none;"></div>
 
@@ -65,7 +65,7 @@
 		if ( !array_key_exists('author', $this->disabled_standard_fields) ) :
 			$authors_dropdown = '';
 			if ( is_super_admin() || current_user_can( $post_type_object->cap->edit_others_posts ) ) :
-				$users_opt = array(
+				$users_opt = [
 					'hide_if_only_one_author' => false,
 					'who' => 'authors',
 					'name' => 'post_author',
@@ -73,7 +73,7 @@
 					'class'=> 'authors',
 					'multi' => 1,
 					'echo' => 0
-				);
+				];
 
 				if ( $authors = wp_dropdown_users( $users_opt ) ) :
 					$authors_dropdown  = '<div class="form-control np_author"><label>' . __( 'Author' ) . '</label>';
@@ -247,6 +247,8 @@
 		<a accesskey="s" href="#inline-edit" class="button-primary np-save-quickedit alignright">
 			<?php _e( 'Update' ); ?>
 		</a>
-		<span class="np-qe-loading"></span>
+		<div class="np-qe-loading">
+			<?php include( NestedPages\Helpers::asset('images/spinner.svg') ); ?>
+		</div>
 	</div>
 </form>

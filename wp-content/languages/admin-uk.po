@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-06 20:34:06+0000\n"
+"PO-Revision-Date: 2018-06-04 13:23:01+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,49 +26,865 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "Europe/Kiev"
 
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "Неможливо створити папку для експорту."
+
+#. translators: %s: Privacy Policy Guide URL
+#: wp-admin/includes/misc.php:1356
+msgid "The suggested privacy policy text has changed. Please <a href=\"%s\">review the guide</a> and update your privacy policy."
+msgstr "Запропонований текст політики конфіденційності було змінено. Будь ласка  <a href=\"%s\">ознайомтесь з посібником</a> та оновіть вашу політику конфіденційності."
+
+#: wp-admin/privacy.php:214
+msgid "There are no pages."
+msgstr "Немає сторінок."
+
+#: wp-admin/privacy.php:212
+msgid "Or:"
+msgstr "Або:"
+
+#: wp-admin/privacy.php:186
+msgid "Select an existing page:"
+msgstr "Оберіть існуючу сторінку:"
+
+#. translators: %s is the update notification bubble, if updates are available.
+#: wp-admin/menu.php:266
+msgid "Privacy %s"
+msgstr "Приватність %s"
+
+#. translators: %s is the update notification bubble, if updates are available.
+#: wp-admin/menu.php:258
+msgid "Settings %s"
+msgstr "Налаштування %s"
+
+#: wp-admin/includes/class-wp-internal-pointers.php:164
+msgid "Personal Data and Privacy"
+msgstr "Особисті дані та приватність"
+
+#: wp-admin/privacy.php:119
+msgid "After your privacy policy page is set, we suggest that you edit it."
+msgstr "Після встановлення вашої політики конфіденційності, ми радимо вам відредагувати її."
+
+#. translators: accessibility text
+#: wp-admin/includes/misc.php:1542
+msgid "(opens in a new tab)"
+msgstr "(відкривається у новій вкладці)"
+
+#. translators: 1: Privacy Policy guide URL, 2: additional link attributes, 3:
+#. accessibility text
+#: wp-admin/includes/misc.php:1536 wp-admin/privacy.php:149
+msgid "Need help putting together your new Privacy Policy page? <a href=\"%1$s\" %2$s>Check out our guide%3$s</a> for recommendations on what content to include, along with policies suggested by your plugins and theme."
+msgstr "Потрібна допомога у створенні вашої нової сторінки політики конфіденційності? <a href=\"%1$s\" %2$s>Перегляньте наш посібник%3$s</a> із рекомендаціями щодо того, який вміст слід включити, поряд з політикою, запропонованою вашими плагінами та темою."
+
+#: wp-admin/tools.php:15
+msgid "Privacy Policy Guide"
+msgstr "Посібник із політики конфіденційності"
+
+#: wp-admin/includes/misc.php:1736
+msgid "Visitor comments may be checked through an automated spam detection service."
+msgstr "Коментарі відвідувачів можуть бути перевірені за допомогою служби автоматичного виявлення спаму."
+
+#: wp-admin/includes/misc.php:1708
+msgid "In this subsection you should note what analytics package you use, how users can opt out of analytics tracking, and a link to your analytics provider&#8217;s privacy policy, if any."
+msgstr "У цьому підрозділі ви повинні відзначити, який пакет аналізу ви використовуєте, як користувачі можуть відмовитися від відстеження аналітики та посилання на політику конфіденційності постачальника послуг аналітики, якщо така є."
+
+#: wp-admin/includes/misc.php:1684
+msgid "In this subsection you should note what information may be disclosed by users who can upload media files. All uploaded files are usually publicly accessible."
+msgstr "У цьому підрозділі ви повинні зазначити, яка інформація може бути розкрита користувачами, які можуть завантажувати медіа-файли. Усі завантажені файли, як правило, доступні для загального доступу."
+
+#: wp-admin/includes/misc.php:1677
+msgid "In this subsection you should note what information is captured through comments. We have noted the data which WordPress collects by default."
+msgstr "У цьому підрозділі слід зазначити, яка інформація отримана за допомогою коментарів. Ми відзначили дані, які WordPress збирає за замовчуванням."
+
+#: wp-admin/includes/misc.php:1668
+msgid "In this section you should note what personal data you collect from users and site visitors. This may include personal data, such as name, email address, personal account preferences; transactional data, such as purchase information; and technical data, such as information about cookies."
+msgstr "У цьому розділі ви повинні зазначити, які особисті дані ви збираєте від користувачів та відвідувачів сайту. Це може включати особисті дані, такі як ім'я, адреса електронної пошти, налаштування особистого облікового запису; транзакційні дані, такі як інформація про покупку; і технічні дані, такі як інформація про файли cookie."
+
+#: wp-admin/includes/misc.php:1651
+msgid "Suggested text:"
+msgstr "Пропонований текст:"
+
+#: wp-admin/includes/misc.php:1630
+msgid "We have suggested the sections you will need. Under each section heading you will find a short summary of what information you should provide, which will help you to get started. Some sections include suggested policy content, others will have to be completed with information from your theme and plugins."
+msgstr "Ми запропонували розділи, які вам знадобляться. Під заголовком кожного розділу ви знайдете коротку інформацію про те, яку інформацію ви повинні надати, що допоможе вам розпочати роботу. Деякі розділи містять запропонований зміст політики, інші повинні бути заповнені інформацією з вашої теми та плагінів."
+
+#. translators: %s: plugin name
+#: wp-admin/includes/misc.php:1594
+msgid "Source: %s"
+msgstr "Джерело: %s"
+
+#: wp-admin/includes/misc.php:1580
+msgid "Updated %s."
+msgstr "Оновлено %s."
+
+#: wp-admin/includes/misc.php:1573
+msgid "Removed %s."
+msgstr "Видалено %s."
+
+#: wp-admin/includes/misc.php:1562 wp-admin/includes/misc.php:1627
+msgid "Introduction"
+msgstr "Вступ"
+
+#: wp-admin/includes/misc.php:1575
+msgid "You deactivated this plugin on %s and may no longer need this policy."
+msgstr "Ви вимкнули цей плагін на %s і може більше не потребувати цієї політики."
+
+#: wp-admin/includes/user.php:930
+msgid "Invalid request ID when processing eraser data."
+msgstr "Невірний ідентифікатор запиту при обробці даних видалення."
+
+#: wp-admin/includes/user.php:845
+msgid "Add Data Erasure Request"
+msgstr "Додати запит на видалення даних"
+
+#: wp-admin/includes/user.php:1510 wp-admin/includes/user.php:1553
+msgid "Erasing Data..."
+msgstr "Видалення даних…"
+
+#: wp-admin/includes/class-wp-internal-pointers.php:166
+msgid "New <strong>Tools</strong> have been added to help you with personal data export and erasure requests."
+msgstr "Нові <strong>Інструменти</strong> були додані, щоб допомогти вам з запитами на експорт та видалення особистих даних."
+
+#: wp-admin/includes/class-wp-internal-pointers.php:165
+msgid "Personal Data Export and Erasure"
+msgstr "Експорт та видалення особистих даних"
+
+#: wp-admin/includes/class-wp-internal-pointers.php:168
+msgid "Create or select your site&#8217;s privacy policy page under <strong>Settings &gt; Privacy</strong> to keep your users informed and aware."
+msgstr "Створіть або виберіть сторінку політики конфіденційності свого сайту в розділі <strong>Налаштування Приватності</strong>, щоб ваші користувачі були поінформовані та ознайомлені."
+
+#: wp-admin/includes/misc.php:1770
+msgid "If you are a member of a regulated industry, or if you are subject to additional privacy laws, you may be required to disclose that information here."
+msgstr "Якщо ви є членом регульованої галузі або підпадаєте під дію додаткових законів про конфіденційність, можливо вам варто розкрити цю інформацію тут."
+
+#: wp-admin/includes/misc.php:1768
+msgid "Industry regulatory disclosure requirements"
+msgstr "Вимоги до розкриття галузевих нормативних вимог"
+
+#: wp-admin/includes/misc.php:1765
+msgid "If your web site provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
+msgstr "Якщо ваш сайт надає послугу, яка включає в себе автоматичне прийняття рішень - наприклад, дозволяє клієнтам подавати заявку на отримання кредиту або об'єднує їх дані в рекламний профіль - ви повинні зауважити, що це відбувається та включити інформацію про те, як ця інформація використовується, які рішення приймаються з цими агрегованими даними і які права мають користувачі над рішеннями прийнятими без втручання людини."
+
+#: wp-admin/includes/misc.php:1763
+msgid "What automated decision making and/or profiling we do with user data"
+msgstr "Яке автоматичне рішення приймається  і/або профілювання ми робимо з користувацькими даними"
+
+#: wp-admin/includes/misc.php:1760
+msgid "If your web site receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
+msgstr "Якщо ваш сайт отримує дані про користувачів із третьої сторони, у тому числі рекламодавців, ця інформація повинна бути включена в розділ вашої політики конфіденційності щодо обробки даних третьої сторони."
+
+#: wp-admin/includes/misc.php:1758
+msgid "What third parties we receive data from"
+msgstr "Від яких третіх сторін ми отримуємо дані"
+
+#: wp-admin/includes/misc.php:1755
+msgid "In this section you should explain what procedures you have in place to deal with data breaches, either potential or real, such as internal reporting systems, contact mechanisms, or bug bounties."
+msgstr "У цьому розділі ви повинні пояснити, які процедури ви використовуєте для вирішення питання втрати даних, як потенційних так і реальних, таких як внутрішні системи виявлення, механізми контактів чи пошук помилок."
+
+#: wp-admin/includes/misc.php:1753
+msgid "What data breach procedures we have in place"
+msgstr "Які процедури проти втрати даних ми використовуємо"
+
+#: wp-admin/includes/misc.php:1750
+msgid "In this section you should explain what measures you have taken to protect your users&#8217; data. This could include technical measures such as encryption; security measures such as two factor authentication; and measures such as staff training in data protection. If you have carried out a Privacy Impact Assessment, you can mention it here too."
+msgstr "У цьому розділі ви повинні пояснити, які заходи ви зробили для захисту даних ваших користувачів. Це може включати технічні заходи, такі як шифрування; заходи безпеки, такі як двофакторна аутентифікація; та такі заходи, як підготовка персоналу щодо питань захисту даних. Якщо ви провели оцінку впливу на конфіденційність (Privacy Impact Assessment), ви також можете згадати його тут."
+
+#: wp-admin/includes/misc.php:1748
+msgid "How we protect your data"
+msgstr "Як ми захищаємо ваші данні"
+
+#: wp-admin/includes/misc.php:1745
+msgid "If you use your site for commercial purposes and you engage in more complex collection or processing of personal data, you should note the following information in your privacy policy in addition to the information we have already discussed."
+msgstr "Якщо ви використовуєте свій сайт у комерційних цілях, і ви берете участь у більш складному зборі або обробці особистих даних, ви повинні зазначити таку інформацію в своїй політиці конфіденційності, крім інформації яку ми вже обговорювали."
+
+#: wp-admin/includes/misc.php:1743
+msgid "Additional information"
+msgstr "Додаткова інформація"
+
+#: wp-admin/includes/misc.php:1740
+msgid "In this section you should provide a contact method for privacy-specific concerns. If you are required to have a Data Protection Officer, list their name and full contact details here as well."
+msgstr "У цьому розділі ви повинні вказати спосіб контакту з  вами, щодо проблем пов'язаних із конфіденційністю. Якщо вам потрібно мати представника із захисту даних, укажіть її/його їм'я та повну контактну інформацію."
+
+#: wp-admin/includes/misc.php:1738
+msgid "Your contact information"
+msgstr "Ваша контактна інформація"
+
+#: wp-admin/includes/misc.php:1734
+msgid "European data protection law requires data about European residents which is transferred outside the European Union to be safeguarded to the same standards as if the data was in Europe. So in addition to listing where data goes, you should describe how you ensure that these standards are met either by yourself or by your third party providers, whether that is through an agreement such as Privacy Shield, model clauses in your contracts, or binding corporate rules."
+msgstr "Закон про захист даних в ЄС вимагає захисту даних про європейських резидентів, які передаються за межі Європейського Союзу, за такими самими стандартами, що й в Європі. Таким чином, на додаток до списку, де зберігаються дані, ви повинні описати, як ви гарантуєте, що ці стандарти будуть виконані як вами, так і вашими сторонніми постачальниками, незалежно від того, чи це таке угода типу \"Privacy Shield\", чи обумовлювання у ваших контрактах або обов'язкові корпоративні правила."
+
+#: wp-admin/includes/misc.php:1733
+msgid "In this section you should list all transfers of your site data outside the European Union and describe the means by which that data is safeguarded to European data protection standards. This could include your web hosting, cloud storage, or other third party services."
+msgstr "У цьому розділі ви повинні перерахувати всі передачі даних вашого сайту за межі ЄС та описати засоби, за допомогою яких ці дані будуть захищені згідно до європейських стандартів захисту даних. Це може включати веб-хостинг, хмарне сховище та інші сторонні послуги."
+
+#: wp-admin/includes/misc.php:1731
+msgid "Where we send your data"
+msgstr "Куди ми відправляємо ваші данні"
+
+#: wp-admin/includes/misc.php:1729
+msgid "If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes."
+msgstr "Якщо у вас є обліковий запис на цьому сайті або ви залишили коментарі, ви можете подати запит на отримання експортованого файлу особистих даних які ми зберігаємо про вас, включаючи всі дані, які ви надали нам. Ви також можете вимагати, щоб ми стерли будь-які особисті дані, які ми маємо щодо вас. Це не включає будь-які дані, які ми зобов'язані зберігати в адміністративних, правових та цілях безпеки."
+
+#: wp-admin/includes/misc.php:1725
+msgid "What rights you have over your data"
+msgstr "Які права ви маєте відносно своїх даних"
+
+#: wp-admin/includes/misc.php:1727
+msgid "In this section you should explain what rights your users have over their data and how they can invoke those rights."
+msgstr "У цьому розділі ви повинні пояснити, які права мають ваші користувачі щодо своїх даних та як вони можуть скористатися ними."
+
+#: wp-admin/includes/misc.php:1723
+msgid "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information."
+msgstr "Для користувачів, які реєструються на нашому сайті (якщо такі є), ми зберігаємо надану ними персональну інформацію у їхньому профілі користувача. Всі користувачі можуть переглядати, редагувати або видаляти свої особисті дані в будь-який час (за винятком того, що вони не можуть змінити своє ім'я користувача). Адміністратори сайту також можуть переглядати та редагувати цю інформацію."
+
+#: wp-admin/includes/misc.php:1722
+msgid "If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue."
+msgstr "Якщо ви залишаєте коментар, він та його метадані зберігаються протягом невизначеного терміну. Таким чином, ми можемо автоматично визначати та затверджувати кожен наступний коментар замість того, щоб тримати їх у черзі на модерації."
+
+#: wp-admin/includes/misc.php:1720
+msgid "In this section you should explain how long you retain personal data collected or processed by the web site. While it is your responsibility to come up with the schedule of how long you keep each dataset for and why you keep it, that information does need to be listed here. For example, you may want to say that you keep contact form entries for six months, analytics records for a year, and customer purchase records for ten years."
+msgstr "У цьому розділі ви повинні пояснити як довго ви зберігаєте особисті дані, зібрані або оброблені сайтом. Хоча ваша відповідальність полягає в тому, щоб скласти графік того, як довго ви тримаєте кожен набір даних і чому ви це зберігаєте, ця інформація повинна бути вказана тут. Наприклад, ви можете сказати, що ви зберігаєте записи контактних форм протягом 6 місяців, облікові записи аналітики протягом 1 року та записи про покупку клієнтів протягом 10 років."
+
+#: wp-admin/includes/misc.php:1718
+msgid "How long we retain your data"
+msgstr "Як довго ми зберігаємо ваші дані"
+
+#: wp-admin/includes/misc.php:1715
+msgid "By default WordPress does not share any personal data with anyone."
+msgstr "За замовчуванням WordPress нікому не передає ніяких особистих даних."
+
+#: wp-admin/includes/misc.php:1714
+msgid "In this section you should name and list all third party providers with whom you share site data, including partners, cloud-based services, payment processors, and third party service providers, and note what data you share with them and why. Link to their own privacy policies if possible."
+msgstr "У цьому розділі ви повинні назвати та перерахувати всі треті сторони яким ви передаєте дані сайту, у тому числі партнерам, хмарним та платіжним сервісам та стороннім постачальникам послуг, та позначити якими даними ви ділитеся з ними та чому. Надайте, по можливості, посилання на їх політики конфіденційності."
+
+#: wp-admin/includes/misc.php:1712
+msgid "Who we share your data with"
+msgstr "З ким ми ділимося вашими даними"
+
+#: wp-admin/includes/misc.php:1709
+msgid "By default WordPress does not collect any analytics data. However, many web hosting accounts collect some anonymous analytics data. You may also have installed a WordPress plugin that provides analytics services. In that case, add information from that plugin here."
+msgstr "За замовчуванням WordPress не збирає даних аналітики. Однак багато хостерів збирають деякі анонімні дані аналітики. Ви також можете встановити WordPress плагін, який надає послуги аналітики. У цьому випадку додайте сюди інформацію з цього плагіна."
+
+#: wp-admin/includes/misc.php:1706
+msgid "Analytics"
+msgstr "Аналітика"
+
+#: wp-admin/includes/misc.php:1704
+msgid "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracing your interaction with the embedded content if you have an account and are logged in to that website."
+msgstr "Ці сайти можуть збирати дані про вас, використовувати файли cookie, вбудувати додаткові сторонні системи відстеження та стежити за вашою взаємодією з цим вбудованим вмістом, зокрема відстежувати взаємодію з вбудованим вмістом, якщо у вас є обліковий запис і ви увійшли на цей сайт."
+
+#: wp-admin/includes/misc.php:1703
+msgid "Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website."
+msgstr "Статті на цьому сайті можуть містити вбудований вміст (наприклад: відео, зображення, статті тощо). Вбудований вміст з інших сайтів веде себе так само, як би користувач відвідав інший сайт."
+
+#: wp-admin/includes/misc.php:1702
+msgid "Embedded content from other websites"
+msgstr "Вбудований вміст з інших веб-сайтів"
+
+#: wp-admin/includes/misc.php:1700
+msgid "If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day."
+msgstr "Якщо ви редагуєте або публікуєте статтю, у вашому веб-переглядачі буде збережений додатковий файл cookie. Цей файл cookie не містить особистих даних і просто вказує ідентифікатор статті, яку ви щойно редагували. Його термін дії закінчується через 1 день."
+
+#: wp-admin/includes/misc.php:1699
+msgid "When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed."
+msgstr "Коли ви ввійдете в систему, ми також встановимо декілька файлів cookie, щоб зберегти інформацію про ваш логін та налаштування екрана. Cookie-файли для входу зберігаються 2 дні, а файли cookie-файлів налаштувань екрану - 1 рік. Якщо ви виберете &quot;Запам'ятати мене&quot;, ваш логін буде зберігатися протягом 2 тижнів. Якщо ви вийдете зі свого облікового запису, файли cookie логіну будуть видалені."
+
+#: wp-admin/includes/misc.php:1698
+msgid "If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
+msgstr "Якщо у вас є обліковий запис і ви ввійшли на цей сайт, ми встановимо тимчасовий файл cookie, щоб визначити, чи браузер приймає файли cookie. Цей файл cookie не містить особистих даних і видаляється при закритті веб-переглядача."
+
+#: wp-admin/includes/misc.php:1697
+msgid "If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year."
+msgstr "Якщо ви залишаєте коментар на нашому сайті, ви можете ввімкнути збереження свого імені, електронної адреси та сайту в файлах cookie. Це для вашої зручності, так що вам не потрібно буде повторно заповнювати ваші дані, коли ви залишатимете наступний коментар. Ці файли cookie зберігатимуться 1 рік."
+
+#: wp-admin/includes/misc.php:1695
+msgid "In this subsection you should list the cookies your web site uses, including those set by your plugins, social media, and analytics. We have provided the cookies which WordPress installs by default."
+msgstr "У цьому підрозділі ви повинні вказати файли cookie, які використовує ваш сайт, зокрема ті, що встановлені вашими плагінами, соціальними мережами та аналітикою. Ми надаємо список файлів cookie, які WordPress встановлює за замовчуванням."
+
+#: wp-admin/includes/misc.php:1693
+msgid "Cookies"
+msgstr "Cookies"
+
+#: wp-admin/includes/misc.php:1680
+msgid "An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment."
+msgstr "Анонімний рядок, створений за вашою адресою електронної пошти (також називається хеш), може бути наданий службі Gravatar, щоб дізнатись, чи ви його використовуєте. Політика конфіденційності служби Gravatar доступна тут: https://automattic.com/privacy/. Після схвалення вашого коментаря, ваше зображення профілю буде видно для громадськості в контексті вашого коментарю."
+
+#: wp-admin/includes/misc.php:1679
+msgid "When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection."
+msgstr "Коли відвідувачі залишають коментарі на сайті, ми збираємо дані, що відображаються у формі коментарів, а також IP-адреси відвідувачів та рядку агента-браузера користувача, щоб допомогти виявити спам."
+
+#: wp-admin/includes/misc.php:1690
+msgid "By default, WordPress does not include a contact form. If you use a contact form plugin, use this subsection to note what personal data is captured when someone submits a contact form, and how long you keep it. For example, you may note that you keep contact form submissions for a certain period for customer service purposes, but you do not use the information submitted through them for marketing purposes."
+msgstr "За замовчуванням WordPress не містить контактну форму. Якщо ви використовуєте плагін форми контакту, використовуйте цей підрозділ, щоб відзначити, які особисті дані фіксуються, коли хтось відправляє контактну форму та скільки часу ви зберігаєте її. Наприклад, ви можете вказати, що ви зберігаєте данні контактних форм протягом певного періоду з метою обслуговування клієнтів, але ви не використовуєте цю інформацію для маркетингових цілей."
+
+#: wp-admin/includes/misc.php:1688
+msgid "Contact forms"
+msgstr "Контактні форми"
+
+#: wp-admin/includes/misc.php:1686
+msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
+msgstr "Якщо ви завантажуєте зображення на сайт, вам слід уникати завантаження зображень із вбудованими даними про місцезнаходження (EXIF GPS). Відвідувачі сайту можуть завантажувати та витягувати будь-які дані про місцезнаходження із зображень на сайті."
+
+#: wp-admin/includes/misc.php:1672
+msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
+msgstr "За замовчуванням WordPress не збирає жодних особистих даних про відвідувачів, а збирає лише дані, що відображаються на екрані профілю користувача із зареєстрованих користувачів. Однак деякі з ваших плагінів можуть збирати особисті дані. Ви повинні додати відповідну інформацію нижче."
+
+#: wp-admin/includes/misc.php:1671
+msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
+msgstr "Особисті дані не просто створюються взаємодією користувача з вашим сайтом. Особисті дані також генеруються через технічні процеси, такі як контактні форми, коментарі, файли cookie, аналітика та сторонні вставки."
+
+#: wp-admin/includes/misc.php:1670
+msgid "In addition to listing what personal data you collect, you need to note why you collect it. These explanations must note either the legal basis for your data collection and retention or the active consent the user has given."
+msgstr "На додаток до переліку особистих даних які ви збираєте, вам слід зазначити, чому ви їх збираєте. У цих поясненнях слід зазначити як юридичну основу для збору та збереження даних, так і діючу згоду, надану користувачем."
+
+#: wp-admin/includes/misc.php:1669
+msgid "You should also note any collection and retention of sensitive personal data, such as data concerning health."
+msgstr "Ви також повинні відзначити будь-яке збирання та зберігання чутливих особистих даних, таких як дані про здоров'я."
+
+#. translators: %s Site URL
+#: wp-admin/includes/misc.php:1664
+msgid "Our website address is: %s."
+msgstr "Наша адреса сайту: %s."
+
+#: wp-admin/includes/misc.php:1666
+msgid "What personal data we collect and why we collect it"
+msgstr "Які особисті дані ми збираємо та чому ми їх збираємо"
+
+#: wp-admin/includes/misc.php:1661
+msgid "The amount of information you may be required to show will vary depending on your local or national business regulations. You may, for example, be required to display a physical address, a registered address, or your company registration number."
+msgstr "Обсяг інформації, яка може знадобитися для показу, може змінюватися в залежності від місцевих чи національних правил бізнесу. Наприклад, ви можете вимагати відображення фізичної адреси, зареєстрованої адреси або реєстраційного номеру вашої компанії."
+
+#: wp-admin/includes/misc.php:1658
+msgid "Who we are"
+msgstr "Хто ми"
+
+#: wp-admin/includes/misc.php:1660
+msgid "In this section you should note your site URL, as well as the name of the company, organization, or individual behind it, and some accurate contact information."
+msgstr "У цьому розділі ви повинні вказати URL-адресу свого сайту, а також назву компанії, організації чи особу що стоїть за нею, а також точну контактну інформацію."
+
+#: wp-admin/includes/misc.php:1632
+msgid "It is your responsibility to write a comprehensive privacy policy, to make sure it reflects all national and international legal requirements on privacy, and to keep your policy current and accurate."
+msgstr "Ви несете відповідальність за написання всеохоплюючої політики конфіденційності, щоб переконатись, що вона відповідає всім національним та міжнародним законодавчим вимогам щодо конфіденційності, а також щоб ваші правила були актуальними та точними."
+
+#: wp-admin/includes/misc.php:1631
+msgid "Please edit your privacy policy content, making sure to delete the summaries, and adding any information from your theme and plugins. Once you publish your policy page, remember to add it to your navigation menu."
+msgstr "Будь ласка, відредагуйте вміст політики конфіденційності, обов'язково видаліть перелік та додайте будь-яку інформацію з теми та плагінів. Як тільки ви опублікуєте сторінку політики, не забудьте додати її до свого навігаційного меню."
+
+#: wp-admin/includes/misc.php:1628
+msgid "Hello,"
+msgstr "Привіт,"
+
+#: wp-admin/includes/misc.php:1629
+msgid "This text template will help you to create your web site&#8217;s privacy policy."
+msgstr "Цей текстовий шаблон допоможе вам створити політику конфіденційності сайту."
+
+#: wp-admin/privacy.php:111
+msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
+msgstr "Як власнику сайту, вам, можливо, доведеться дотримуватися національних або міжнародних законів про конфіденційність. Наприклад, вам може знадобитися створити та відобразити політику конфіденційності."
+
+#: wp-admin/includes/file.php:1966
+msgctxt "website URL"
+msgid "At URL"
+msgstr "За URL"
+
+#: wp-admin/includes/file.php:1962
+msgctxt "website name"
+msgid "For site"
+msgstr "Для сайту"
+
+#: wp-admin/includes/user.php:1554
+msgid "Erasing Data has failed."
+msgstr "Стирання даних не вдалося."
+
+#: wp-admin/includes/user.php:1511
+msgid "Force Erase has failed."
+msgstr "Примусове стирання не вдалося."
+
+#: wp-admin/includes/file.php:1970
+msgctxt "date/time"
+msgid "On"
+msgstr "О"
+
+#: wp-admin/includes/user.php:1398
+msgid "Download has failed."
+msgstr "Завантаження не вдалося."
+
+#: wp-admin/includes/file.php:1958
+msgctxt "email address"
+msgid "Report generated for"
+msgstr "Згенеровано звіт для"
+
+#: wp-admin/includes/user.php:1441
+msgid "Email could not be sent."
+msgstr "Не вдалося надіслати e-mail."
+
+#. translators: %s: array index
+#: wp-admin/includes/ajax-actions.php:4119
+msgid "Exporter array at index %s does not include a friendly name."
+msgstr "Масив експорту в індексі %s не містить дружньої назви."
+
+#: wp-admin/includes/user.php:820
+msgid "Sorry, you are not allowed to erase data on this site."
+msgstr "Вибачте, вам не дозволено видаляти дані на цьому сайті."
+
+#: wp-admin/includes/user.php:749
+msgid "Sorry, you are not allowed to export personal data on this site."
+msgstr "Вибачте, вам не дозволено експортувати дані на цьому сайті."
+
+#: wp-admin/includes/ajax-actions.php:4280
+msgid "Eraser index is out of range."
+msgstr "Індекс знищувача знаходиться поза межами діапазону."
+
+#: wp-admin/includes/ajax-actions.php:4239
+msgid "Missing eraser index."
+msgstr "Індекс знищувача відсутній."
+
+#. translators: %s: array index
+#: wp-admin/includes/ajax-actions.php:4113
+msgid "Expected an array describing the exporter at index %s."
+msgstr "Очікувався масив, що описує експортера за індексом %s."
+
+#: wp-admin/includes/ajax-actions.php:4099
+msgid "Exporter index out of range."
+msgstr "Індекс експортера виходить за межи."
+
+#: wp-admin/includes/ajax-actions.php:4095
+msgid "Exporter index cannot be negative."
+msgstr "Індекс експортера не може бути від'ємним."
+
+#: wp-admin/includes/ajax-actions.php:4089
+msgid "An exporter has improperly used the registration filter."
+msgstr "Експортер неправильно використовував реєстраційний фільтр."
+
+#: wp-admin/includes/ajax-actions.php:4061
+#: wp-admin/includes/ajax-actions.php:4245
+msgid "Missing page index."
+msgstr "Відсутній індекс сторінки."
+
+#: wp-admin/includes/ajax-actions.php:4056
+msgid "Missing exporter index."
+msgstr "Відсутній індекс експортера."
+
+#: wp-admin/includes/ajax-actions.php:4047
+msgid "Invalid request type."
+msgstr "Невірний тип запиту."
+
+#: wp-admin/includes/ajax-actions.php:4029
+#: wp-admin/includes/ajax-actions.php:4209
+msgid "Missing request ID."
+msgstr "Відсутній ідентифікатор запиту."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4164
+msgid "Expected done (boolean) in response array from exporter: %s."
+msgstr "Очікування завершення (булевий) у масиві відповіді від експортера: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4158
+msgid "Expected data array in response array from exporter: %s."
+msgstr "Очікуваний масив даних у масиві відповіді від експортера: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4152
+msgid "Expected data in response array from exporter: %s."
+msgstr "Очікувані дані в масиві відповіді від експортера: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4146
+msgid "Expected response as an array from exporter: %s."
+msgstr "Очікувана відповідь як масив від експортера: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4131
+msgid "Exporter callback is not a valid callback: %s."
+msgstr "Зворотний виклик експортера є недійсним зворотнім викликом: %s."
+
+#. translators: %s: exporter friendly name
+#: wp-admin/includes/ajax-actions.php:4125
+msgid "Exporter does not include a callback: %s."
+msgstr "Експонент не включає зворотний виклик: %s."
+
+#: wp-admin/privacy.php:221
+msgid "Create New Page"
+msgstr "Створити нову сторінку"
+
+#: wp-admin/privacy.php:202
+msgid "Use This Page"
+msgstr "Використати цю сторінку"
+
+#. translators: 1: URL to edit page, 2: URL to view page
+#: wp-admin/privacy.php:140
+msgid "<a href=\"%1$s\">Edit</a> or <a href=\"%2$s\">view</a> your privacy policy page content."
+msgstr "<a href=\"%1$s\">Редагувати</a> чи <a href=\"%2$s\">переглянути</a> вміст вашої сторінки політики конфіденційності."
+
+#: wp-admin/privacy.php:168
+msgid "Select a Privacy Policy page"
+msgstr "Обрати сторінку політики конфіденційності"
+
+#: wp-admin/privacy.php:166
+msgid "Change your Privacy Policy page"
+msgstr "Змінити свою сторінку політики конфіденційності"
+
+#: wp-admin/privacy.php:120
+msgid "We would also suggest reviewing your privacy policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new suggested information for you to consider adding to your policy."
+msgstr "Ми також пропонуємо переглядати свою політику конфіденційності час від часу, особливо після встановлення або оновлення будь-яких тем або плагінів. Там можуть бути зміни чи запропонована нова інформація, яку ви можливо захочете додати до вашої політики конфіденційності."
+
+#: wp-admin/privacy.php:116
+msgid "However, it is your responsibility to use those resources correctly, to provide the information that your privacy policy requires, and to keep that information current and accurate."
+msgstr "Однак, це ваш обов'язок правильно використовувати ці ресурси, надавати інформацію, яку вимагає ваша політика конфіденційності, і зберігати цю інформацію актуальною та точною."
+
+#: wp-admin/privacy.php:109
+msgid "Privacy Policy page"
+msgstr "Сторінка політики конфіденційності"
+
+#: wp-admin/privacy.php:56
+msgid "Unable to create privacy policy page."
+msgstr "Не вдалося створити сторінку політики конфіденційності."
+
+#. translators: Privacy Policy page slug
+#: wp-admin/includes/upgrade.php:280
+msgid "privacy-policy"
+msgstr "privacy-policy"
+
+#. translators: %s: URL to Customizer -> Menus
+#: wp-admin/privacy.php:30
+msgid "Privacy policy page updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
+msgstr "Сторінка політики конфіденційності успішно оновлена. Не забудьте <a href=\"%s\">оновити ваші меню</a>!"
+
+#: wp-admin/privacy.php:115
+msgid "The new page will include help and suggestions for your privacy policy."
+msgstr "Нова сторінка буде містити довідки та пропозиції щодо вашої політики конфіденційності."
+
+#: wp-admin/privacy.php:112
+msgid "If you already have a privacy policy page, please select it below. If not, please create one."
+msgstr "Якщо у вас вже є сторінка політики конфіденційності, виберіть її нижче. Якщо ні, будь ласка, створіть її."
+
+#. translators: URL to Pages Trash
+#: wp-admin/privacy.php:90
+msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
+msgstr "Наразі вибрана сторінка політики конфіденційності перебуває у кошику. Будь-ласка, створіть або виберіть нову сторінку політики конфіденційності або <a href=\"%s\"> відновіть поточну сторінку</a>."
+
+#: wp-admin/privacy.php:80
+msgid "The currently selected privacy policy page does not exist. Please create or select new page."
+msgstr "Вибрана сторінка політики конфіденційності наразі не існує. Будь-ласка, створіть або виберіть нову сторінку."
+
+#: wp-admin/includes/misc.php:1604
+msgid "Copy suggested policy text from %s."
+msgstr "Скопіювати запропонований текст політики конфіденційності з %s."
+
+#. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-admin/includes/file.php:2069
+msgid ""
+"Howdy,\n"
+"\n"
+"Your request for an export of personal data has been completed. You may\n"
+"download your personal data by clicking on the link below. For privacy\n"
+"and security, we will automatically delete the file on ###EXPIRATION###,\n"
+"so please download it before then.\n"
+"\n"
+"###LINK###\n"
+"\n"
+"This email has been sent to ###EMAIL###.\n"
+"\n"
+"Regards,\n"
+"All at ###SITENAME###\n"
+"###SITEURL###"
+msgstr ""
+"Привіт,\n"
+"\n"
+"Ваш запит на експорт персональних даних виконано. Ви можете \n"
+"завантажитт свої особисті дані, натиснувши на посилання нижче. Для конфіденційності\n"
+"і безпеки, ми автоматично видаляємо файл до ###EXPIRATION###,\n"
+"тому, будь ласка, завантажте його до цього часу.\n"
+"\n"
+"###LINK###\n"
+"\n"
+"Це повідомлення було відправлено на ###EMAIL###.\n"
+"\n"
+"З повагою,\n"
+"Всі з ###SITENAME###\n"
+"###SITEURL###"
+
+#: wp-admin/includes/file.php:2018
+msgid "Unable to add data to export file."
+msgstr "Неможливо додати дані до файлу експорту."
+
+#: wp-admin/includes/user.php:1440
+msgid "Email sent."
+msgstr "Email відправлено."
+
+#: wp-admin/includes/user.php:1439
+msgid "Sending Email..."
+msgstr "Відправлення Email..."
+
+#: wp-admin/includes/user.php:1438
+msgid "Email Data"
+msgstr "Дані Email-у"
+
+#: wp-admin/includes/user.php:1397
+msgid "Download Personal Data Again"
+msgstr "Завантажити особисті дані ще раз"
+
+#: wp-admin/includes/file.php:2117
+msgid "[%s] Personal Data Export"
+msgstr "[%s] Експорт особистих даних"
+
+#: wp-admin/includes/file.php:2169
+msgid "Invalid request ID when merging exporter data."
+msgstr "Невірний ID запиту при з'єднанні даних експорту."
+
+#: wp-admin/includes/file.php:2124
+msgid "Unable to send personal data export email."
+msgstr "Неможливо відправити email повідомлення експорту особистих даних."
+
+#: wp-admin/includes/file.php:1947
+msgid "Personal Data Export"
+msgstr "Експорт персональних даних"
+
+#. translators: %s: user's e-mail address
+#: wp-admin/includes/file.php:1920
+msgid "Personal Data Export for %s"
+msgstr "Експорт персональних даних для %s"
+
+#: wp-admin/includes/file.php:2061
+msgid "Invalid request ID when sending personal data export email."
+msgstr "Невірний ID запиту при відправлені email повідомлення експорту особистих даних."
+
+#: wp-admin/includes/file.php:2037
+msgid "Unable to open export file (archive) for writing."
+msgstr "Неможливо відкрити файл експорту (архів) для запису."
+
+#: wp-admin/includes/file.php:1915
+msgid "Unable to open export file (HTML report) for writing."
+msgstr "Неможливо відкрити файл експорту (HTML звіт) для запису."
+
+#: wp-admin/includes/file.php:1901
+msgid "Unable to protect export folder from browsing."
+msgstr "Неможливо захистити папку експорту від перегляду."
+
+#: wp-admin/includes/file.php:1885
+msgid "Invalid email address when generating export file."
+msgstr "Невірна електронна адреса при створенні файлу експорту."
+
+#: wp-admin/includes/file.php:1879
+msgid "Invalid request ID when generating export file."
+msgstr "Невірний ідентифікатор запиту при створенні файлу експорту."
+
+#: wp-admin/includes/file.php:1872
+msgid "Unable to generate export file. ZipArchive not available."
+msgstr "Неможливо створити файл експорту. ZipArchive недоступний."
+
+#: wp-admin/includes/ajax-actions.php:4052
+msgid "A valid email address must be given."
+msgstr "Потрібна дійсна електронна адреса."
+
+#: wp-admin/includes/ajax-actions.php:4235
+msgid "Invalid email address in request."
+msgstr "Невірна email адреса у запиті."
+
+#: wp-admin/includes/user.php:637 wp-admin/includes/user.php:649
+msgid "Invalid action."
+msgstr "Невірна дія."
+
+#: wp-admin/includes/ajax-actions.php:4034
+#: wp-admin/includes/ajax-actions.php:4215
+#: wp-admin/includes/ajax-actions.php:4229
+msgid "Invalid request ID."
+msgstr "Невірний ID запиту."
+
+#: wp-admin/includes/user.php:1453 wp-admin/includes/user.php:1567
+msgid "Remove request"
+msgstr "Видалити запит"
+
+#: wp-admin/includes/user.php:1396
+msgid "Downloading Data..."
+msgstr "Завантаження даних..."
+
+#: wp-admin/includes/user.php:1395
+msgid "Download Personal Data"
+msgstr "Завантажте персональні дані"
+
+#. translators: %d: number of requests
+#: wp-admin/includes/user.php:1159
+msgid "Re-sent %d request"
+msgid_plural "Re-sent %d requests"
+msgstr[0] "Перешліть %d запит"
+msgstr[1] "Перешліть %d запити"
+msgstr[2] "Перешліть %d запитів"
+
+#. translators: %d: number of requests
+#: wp-admin/includes/user.php:1142
+msgid "Deleted %d request"
+msgid_plural "Deleted %d requests"
+msgstr[0] "Видаліть %d запит"
+msgstr[1] "Видаліть %d запити"
+msgstr[2] "Видаліть %d запитів"
+
+#: wp-admin/includes/user.php:1012
+msgid "Requested"
+msgstr "Запитано"
+
+#: wp-admin/includes/user.php:1010
+msgid "Requester"
+msgstr "Запитуючий"
+
+#: wp-admin/includes/user.php:778 wp-admin/includes/user.php:851
+msgid "Send Request"
+msgstr "Відправити запит"
+
+#: wp-admin/includes/user.php:772
+msgid "Add Data Export Request"
+msgstr "Додати запит на експорт даних"
+
+#: wp-admin/includes/user.php:1509
+msgid "Force Erase Personal Data"
+msgstr "Примусове видалення персональних даних"
+
+#: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
+msgid "Waiting for confirmation"
+msgstr "Очікування підтвердження"
+
+#: wp-admin/includes/user.php:1398 wp-admin/includes/user.php:1441
+#: wp-admin/includes/user.php:1447 wp-admin/includes/user.php:1511
+#: wp-admin/includes/user.php:1554 wp-admin/includes/user.php:1561
+msgid "Retry"
+msgstr "Спробувати знову"
+
+#: wp-admin/includes/user.php:776 wp-admin/includes/user.php:849
+msgid "Username or email address"
+msgstr "Ім'я користувача чи e-mail адреса"
+
+#: wp-admin/includes/user.php:1112
+msgid "Resend email"
+msgstr "Надіслати e-mail ще раз"
+
+#: wp-admin/includes/user.php:564 wp-admin/includes/user.php:688
+msgid "Unable to initiate confirmation request."
+msgstr "Неможливо ініціювати запит на підтвердження."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4379
+msgid "Expected done flag in response array from %1$s eraser (index %2$d)."
+msgstr "Очікується статус виконання у масиві відповіді від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4368
+msgid "Expected messages key to reference an array in response array from %1$s eraser (index %2$d)."
+msgstr "Очікується ключ повідомлення з посиланням на масив у масиві відповіді від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4357
+msgid "Expected messages key in response array from %1$s eraser (index %2$d)."
+msgstr "Очікується ключ повідомлення у масиві відповіді від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4346
+msgid "Expected items_retained key in response array from %1$s eraser (index %2$d)."
+msgstr "Очікується ключ items_retained у масиві відповіді від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4335
+msgid "Expected items_removed key in response array from %1$s eraser (index %2$d)."
+msgstr "Очікується ключ items_removed у масиві відповіді від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: 1: eraser friendly name, 2: array index
+#: wp-admin/includes/ajax-actions.php:4324
+msgid "Did not receive array from %1$s eraser (index %2$d)."
+msgstr "Не отримано масив від функції знищувача %1$s (індекс %2$d)."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4308
+msgid "Eraser array at index %d does not include a friendly name."
+msgstr "Масив функції знищувача за індексом %d не містить імені користувача."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4303
+msgid "Eraser callback at index %d is not a valid callback."
+msgstr "Зворотній виклик функції знищувача за індексом %d помилковий."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4298
+msgid "Eraser array at index %d does not include a callback."
+msgstr "Масив функції знищувача за індексом %d не містить зворотній виклик."
+
+#. translators: %d: array index
+#: wp-admin/includes/ajax-actions.php:4293
+msgid "Expected an array describing the eraser at index %d."
+msgstr "Очікується масив опису функції знищувача за індексом %d."
+
+#: wp-admin/includes/ajax-actions.php:4103
+#: wp-admin/includes/ajax-actions.php:4284
+msgid "Page index cannot be less than one."
+msgstr "Індекс сторінки не може бути менший за одиницю."
+
+#: wp-admin/includes/ajax-actions.php:4276
+msgid "Eraser index cannot be less than one."
+msgstr "Індекс знищувача не може бути меншим за одиницю."
+
+#: wp-admin/includes/user.php:773 wp-admin/includes/user.php:846
+msgid "An email will be sent to the user at this email address asking them to verify the request."
+msgstr "Email буде відправлений користувачеві за цією адресою електронної пошти з проханням перевірити запит."
+
+#: wp-admin/includes/user.php:699
+msgid "Confirmation request initiated successfully."
+msgstr "Запит на підтвердження успішно розпочато."
+
+#: wp-admin/includes/user.php:621
+msgid "Confirmation request sent again successfully."
+msgstr "Запит на підтвердження успішно надіслано."
+
+#: wp-admin/includes/user.php:660
+msgid "Unable to add this request. A valid email address or username must be supplied."
+msgstr "Не вдається додати цей запит. Необхідно надати дійсну електронну адресу чи ім'я користувача."
+
+#: wp-admin/includes/plugin-install.php:595
+msgid "Requires PHP Version:"
+msgstr "Необхідна версія PHP:"
+
 #: wp-admin/customize.php:80
 msgid "This changeset cannot be further modified."
 msgstr "Цей набір змін не може бути змінений."
 
-#: wp-admin/about.php:316
+#: wp-admin/about.php:334
 msgid "Improvements to Roles and Capabilities"
 msgstr "Покращення ролей і можливостей."
 
-#: wp-admin/about.php:317
+#: wp-admin/about.php:335
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Введення нових можливостей дозволяє тонке управління файлами плагінів і перекладів. Додатково, перемикання сайту в режим мережі тепер буде надійно і послідовно оновлювати наявні ролі і можливості."
 
-#: wp-admin/about.php:313
+#: wp-admin/about.php:331
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "WordPress 4.9 включає оновлену версію MediaElement.js, без залежності від jQuery, покращує допоміжні можливості, модернізує інтерфейс і виправляє безліч помилок."
 
-#: wp-admin/about.php:312
+#: wp-admin/about.php:330
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js оновлений до версії 4.2.6"
 
-#: wp-admin/about.php:309
+#: wp-admin/about.php:327
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "Для редагування коду ми включили в ядро бібліотеку CodeMirror, використовуйте її для поліпшення написання або редагування будь-якого коду в ваших плагінах, наприклад полів CSS або JavaScript."
 
-#: wp-admin/about.php:308
+#: wp-admin/about.php:326
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "Редактор CodeMirror доступний для використання у ваших темах і плагінах"
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:302
+#: wp-admin/about.php:320
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "У WordPress 4.9 ми внесли безліч поліпшень в JS API інтерфейсу налаштування, усунуто багато хворих місць і тепер стало працювати так просто як і з PHP API. Також введені нові основні шаблони контролю, контроль дати і часу і сповіщення секції/панелі/глобальні, наприклад. <a href=\"%s\">Подивіться повний список.</a>"
 
-#: wp-admin/about.php:298
+#: wp-admin/about.php:316
 msgid "Customizer JS API Improvements"
 msgstr "Покращення в JS API інтерфейсу налаштування"
 
-#: wp-admin/privacy.php:36
+#: wp-admin/freedoms.php:41
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Ці дані використовуються для загальних покращень WordPress на кшталт допомоги у захисті вашого сайту шляхом пошуку та автоматичного встановлення нових оновлень. Вони також використовуються для розрахунку статистики, такої як на <a href=\"%s\">сторінці статистики WordPress.org</a>."
 
-#: wp-admin/about.php:211
+#: wp-admin/about.php:229
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "При редагуванні тем чи плагінів безпосередньо, WordPress 4.9 ввічливо попередить вас про те, що це небезпечна практика. Він порекомендує вам створити резервну копію файлів перед збереженням, так щоб вони не були переписані подальшим оновленням. Скористайтеся безпечним шляхом, потім самі собі подякуєте. Ваша команда і клієнти будуть вам вдячні."
 
@@ -81,7 +897,7 @@ msgstr "Немає необхідності змінювати CSS тут &mdash
 msgid "Did you know?"
 msgstr "А чи знаєте ви?"
 
-#: wp-admin/credits.php:122
+#: wp-admin/credits.php:121
 msgid "Noteworthy Contributors"
 msgstr "Варті уваги учасники"
 
@@ -145,142 +961,141 @@ msgid "Enter the address here if you <a href=\"%s\">want your site home page to 
 msgstr "Якщо ви хочете, щоб адреса сайту <a href=\"%s\">відрізнялась від директорії встановлення WordPress</a>, введіть адресу тут."
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:291
+#: wp-admin/about.php:309
 msgid "Developer Happiness %s"
 msgstr "Радість розробникам %s"
 
-#: wp-admin/about.php:281
+#: wp-admin/about.php:299
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://uk.wordpress.org/plugins/gutenberg/"
 
-#: wp-admin/about.php:280
+#: wp-admin/about.php:298
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "Команда WordPress працює над новим способом створення та контролю вмісту, і ми хотіли б отримати вашу допомогу. Якщо ви зацікавлені в <a href=\"%s\">тестуванні раннього доступу</a> або хочете долучитись до проекту Gutenberg, ви можете <a href=\"%s\">взяти участь на GitHub</a>."
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:274
+#: wp-admin/about.php:292
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Дайте руку Гутенбергу %s"
 
-#: wp-admin/about.php:249
+#: wp-admin/about.php:267
 msgid "More Reliable Theme Switching"
 msgstr "Надійніше перемикання тем"
 
-#: wp-admin/about.php:241
+#: wp-admin/about.php:259
 msgid "Site Building Improvements"
 msgstr "Покращення побудови сайту"
 
-#: wp-admin/about.php:226
+#: wp-admin/about.php:244
 msgid "The New Gallery Widget"
 msgstr "Новий віджет галереї"
 
-#: wp-admin/about.php:218
+#: wp-admin/about.php:236
 msgid "Even More Widget Updates"
 msgstr "Ще більше оновлень віджетів"
 
-#: wp-admin/about.php:188
+#: wp-admin/about.php:206
 msgid "Coding Enhancements"
 msgstr "Покращення роботи з кодом"
 
-#: wp-admin/about.php:181
+#: wp-admin/about.php:199
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Відволіклися перед тим як зберегти новий дизайн? Не бійтеся, при поверненні WordPress 4.9 ввічливо запитає, чи хочете ви зберегти раніше незбережені зміни."
 
-#: wp-admin/about.php:180
+#: wp-admin/about.php:198
 msgid "A Prompt to Protect Your Work"
 msgstr "Пропозиція захистити вашу роботу"
 
-#: wp-admin/about.php:173
+#: wp-admin/about.php:191
 msgid "Design Locking To Guard Your Changes"
 msgstr "Фіксація дизайну для охорони ваших змін"
 
-#: wp-admin/privacy.php:38
+#: wp-admin/freedoms.php:43
 msgid "We take privacy and transparency very seriously. To learn more about what data we collect, and how we use it, please visit <a href=\"%s\">WordPress.org/about/privacy</a>."
 msgstr "Ми дуже серйозно ставимося до приватності та прозорості збору даних. Щоби дізнатися більше про те, які дані ми збираємо та як ми їх використовуємо, будь ласка, відвідайте <a href=\"%s\">WordPress.org/about/privacy</a>."
 
-#: wp-admin/privacy.php:34
+#: wp-admin/freedoms.php:39
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "Час від часу ваш сайт WordPress може відсилати дані на WordPress.org - що включають, але не обмежуються - версію WordPress, яку ви використовуєте, а також список встановлених плагінів і тем."
 
-#: wp-admin/about.php:257
+#: wp-admin/about.php:275
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Створення нового меню ставило вас в глухий кут? Досить! Ми поліпшили досвід взаємодії інтерфейсу для створення меню. Новий варіант оснащений гідом."
 
-#: wp-admin/about.php:256
+#: wp-admin/about.php:274
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Кращі інструкції створення меню = менше плутанини."
 
-#: wp-admin/about.php:250
+#: wp-admin/about.php:268
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "При перемиканні тем віджети деколи змінюють своє розміщення. Покращення в WordPress 4.9 забезпечують більш постійне розташування меню та віджетів коли ви вирішите що настав час для нової теми. Крім того, ви можете попередньо переглядати встановлені теми, або завантажувати, встановлювати, та попередньо переглядати нові теми належним чином."
 
-#: wp-admin/about.php:234
+#: wp-admin/about.php:252
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Хочете додати медіафайли до текстового віджету? Вбудовувати зображення, відео та аудіо безпосередньо в віджет разом з текстом? Використовуйте просту, але корисну кнопку \"Додати медіафайл\". Вау!"
 
-#: wp-admin/about.php:233
+#: wp-admin/about.php:251
 msgid "Press a Button, Add Media"
 msgstr "Натисніть кнопку, додайте медіафайл"
 
-#: wp-admin/about.php:227
+#: wp-admin/about.php:245
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "Продовження мультимедіа поліпшень початих в WordPress 4.8, тепер можна додати галерею через віджет. Так!"
 
-#: wp-admin/about.php:210
+#: wp-admin/about.php:228
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Увага: попереду потенційна небезпека!"
 
-#: wp-admin/about.php:204
+#: wp-admin/about.php:222
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "Жахливий білий екран. Ви можете уникнути його при редагуванні коду плагінів і тем, тому що WordPress 4.9 попереджатиме вас про збереження коду з помилкою. Зможете краще спати ночами."
 
-#: wp-admin/about.php:203
+#: wp-admin/about.php:221
 msgid "Sandbox for Safety"
 msgstr "Пісочниця для безпеки"
 
-#: wp-admin/about.php:197
+#: wp-admin/about.php:215
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Виникла проблема, але ви не можете знайти що ж пішло не так з написаним вами кодом CSS? З підсвічуванням синтаксису та перевіркою на помилки в редакторі CSS, а також віджетом \"Власний HTML\" що з'явився у WordPress 4.8.1 ви зможете швидко знаходити помилки в коді."
 
-#: wp-admin/about.php:196
+#: wp-admin/about.php:214
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Виділення синтаксису та перевірка на помилки? Так, будь ласка!"
 
-#: wp-admin/about.php:174
+#: wp-admin/about.php:192
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Ви стикалися з ситуацією коли два дизайнери працюючи над одним проектом переписували зміни внесені один одним? WordPress 4.9 пропонує можливість фіксації оформлення (таку ж як і для записів), ваші чорнові зміни в оформленні будуть у безпеці і ніхто не змінить і не перезапише результати вашої роботи."
 
-#: wp-admin/about.php:167
+#: wp-admin/about.php:185
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Потрібно отримати відгук щодо запропонованих змін оформлення сайту? WordPress 4.9 може створити посилання для попереднього перегляду, яке ви можете дати вашій команді та клієнтам для збору відгуків перед тим, як ви застосуєте зміни для сайту. Чи можна говорити про співпрацю&#43;&#43;?"
 
-#: wp-admin/about.php:166
+#: wp-admin/about.php:184
 msgid "Collaborate with Design Preview Links"
 msgstr "Співпрацюйте з посиланнями попереднього перегляду вигляду"
 
-#: wp-admin/about.php:160
+#: wp-admin/about.php:178
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "Все вірно, тепер можна створювати чернетки, планувати зміни на потрібний час і використовувати редакції оформлення сайту точно так, як і для записів."
 
-#: wp-admin/about.php:151
+#: wp-admin/about.php:169
 msgid "Customizer Workflow Improved"
 msgstr "Поліпшення інтерфейсу налаштування"
 
-#: wp-admin/about.php:159
+#: wp-admin/about.php:177
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Чернетки та відкладення змін вигляду сайту"
 
-#: wp-admin/about.php:138
+#: wp-admin/about.php:156
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Зустрічайте покращений робочий процес Налаштовувача з чернетками дизайну, фіксацією, плануванням і посиланнями для попереднього перегляду. Навіть більше, підсвічування синтаксису коду та перевірка на помилки зроблять процес побудови сайту простішим і приємнішим. І наостанок, якщо вам мало перерахованого, є чудовий новий віджет галереї та покращення огляду та перемикання тем."
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:133
+#: wp-admin/about.php:151
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Значні покращення Налаштовувача, перевірка коду на помилки, і не тільки! %s"
 
-#: wp-admin/about.php:23 wp-admin/credits.php:23 wp-admin/freedoms.php:22
-#: wp-admin/privacy.php:22
+#: wp-admin/about.php:23 wp-admin/credits.php:23 wp-admin/freedoms.php:25
 msgid "Thank you for updating to the latest version! WordPress %s will smooth your design workflow and keep you safe from coding errors."
 msgstr "Дякуємо за оновлення до останньої версії! WordPress %s згладить роботу над оформленням і захистить вас від помилок при редагуванні коду."
 
@@ -477,12 +1292,12 @@ msgid "Theme Installation"
 msgstr "Встановлення теми"
 
 #. translators: %s: user's display name
-#: wp-admin/includes/post.php:1603
+#: wp-admin/includes/post.php:1607
 msgid "%s is already editing this post."
 msgstr "%s вже редагує цей запис."
 
 #. translators: %s: user's display name
-#: wp-admin/includes/post.php:1600
+#: wp-admin/includes/post.php:1604
 msgid "%s is already editing this post. Do you want to take over?"
 msgstr "%s вже редагує цей запис. Хочете перехопити?"
 
@@ -490,7 +1305,7 @@ msgstr "%s вже редагує цей запис. Хочете перехоп�
 msgid "Plugin Installation"
 msgstr "Встановлення плагіна"
 
-#: wp-admin/includes/plugin-install.php:594
+#: wp-admin/includes/plugin-install.php:602
 msgid "Active Installations:"
 msgstr "Активні встановлення:"
 
@@ -627,7 +1442,7 @@ msgstr "Новини та заходи WordPress"
 
 #. translators: Date format for upcoming events on the dashboard. Include the
 #. day of the week. See https://secure.php.net/date.
-#: wp-admin/includes/class-wp-community-events.php:410
+#: wp-admin/includes/class-wp-community-events.php:379
 msgid "l, M j, Y"
 msgstr "l, M j, Y"
 
@@ -750,7 +1565,7 @@ msgid "(%s ratings)"
 msgstr "(%s рейтинг)"
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:604
-#: wp-admin/includes/plugin-install.php:598
+#: wp-admin/includes/plugin-install.php:606
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
 msgstr "Менше 10"
@@ -759,8 +1574,8 @@ msgstr "Менше 10"
 msgid "Sorry, you are not allowed to attach files to this post."
 msgstr "На жаль, Вам не дозволено робити прикріплення файлів до цього запису."
 
-#: wp-admin/freedoms.php:47 wp-admin/includes/plugin-install.php:239
-#: wp-admin/includes/plugin-install.php:604 wp-admin/plugin-install.php:82
+#: wp-admin/freedoms.php:61 wp-admin/includes/plugin-install.php:239
+#: wp-admin/includes/plugin-install.php:612 wp-admin/plugin-install.php:82
 #: wp-admin/plugins.php:418
 msgid "https://wordpress.org/plugins/"
 msgstr "https://uk.wordpress.org/plugins/"
@@ -798,7 +1613,7 @@ msgstr "Оригінальний розмір"
 #: wp-admin/plugin-editor.php:137 wp-admin/plugin-install.php:99
 #: wp-admin/plugins.php:436 wp-admin/revision.php:121
 #: wp-admin/theme-editor.php:49 wp-admin/theme-install.php:121
-#: wp-admin/themes.php:119 wp-admin/tools.php:24 wp-admin/update-core.php:586
+#: wp-admin/themes.php:119 wp-admin/tools.php:34 wp-admin/update-core.php:586
 #: wp-admin/upload.php:67 wp-admin/upload.php:213 wp-admin/user-edit.php:62
 #: wp-admin/user-new.php:221 wp-admin/users.php:69 wp-admin/widgets.php:77
 msgid "<a href=\"https://wordpress.org/support/\">Support Forums</a>"
@@ -1145,7 +1960,7 @@ msgctxt "plugin"
 msgid "Active"
 msgstr "Діючий"
 
-#: wp-admin/includes/class-wp-media-list-table.php:479
+#: wp-admin/includes/class-wp-media-list-table.php:487
 msgid "(Private post)"
 msgstr "(Приватний запис)"
 
@@ -1172,6 +1987,10 @@ msgstr "На жаль, вам не дозволено оновлювати пл�
 #: wp-admin/update.php:96 wp-admin/update.php:144
 msgid "Sorry, you are not allowed to install plugins on this site."
 msgstr "На жаль, вам не дозволено встановлювати плагіни на цьому сайті."
+
+#: wp-admin/privacy.php:13
+msgid "Sorry, you are not allowed to manage privacy on this site."
+msgstr "На жаль вам не дозволено керувати приватністю на цьому сайті."
 
 #: wp-admin/includes/ajax-actions.php:3377
 #: wp-admin/includes/ajax-actions.php:3486
@@ -1216,11 +2035,11 @@ msgstr "На жаль, вам не дозволено налаштовувати
 msgid "Sorry, you are not allowed to import content."
 msgstr "На жаль, вам не дозволено імпортувати вміст."
 
-#: wp-admin/credits.php:127
+#: wp-admin/credits.php:126
 msgid "Release Deputy"
 msgstr "Заступник випуску"
 
-#: wp-admin/credits.php:126
+#: wp-admin/credits.php:125
 msgid "Release Design Lead"
 msgstr "Керівник дизайну випуску"
 
@@ -1379,7 +2198,7 @@ msgstr "Ваш пароль бази даних."
 msgid "The name of the database you want to use with WordPress."
 msgstr "Назва бази даних, яку ви хочете використовувати з WordPress."
 
-#: wp-admin/freedoms.php:48 wp-admin/theme-install.php:92
+#: wp-admin/freedoms.php:62 wp-admin/theme-install.php:92
 #: wp-admin/themes.php:92
 msgid "https://wordpress.org/themes/"
 msgstr "https://uk.wordpress.org/themes/"
@@ -1431,7 +2250,7 @@ msgstr "Відхилити вітальну панель"
 msgid "Theme zip file"
 msgstr ".zip файл теми"
 
-#: wp-admin/includes/post.php:1426
+#: wp-admin/includes/post.php:1430
 msgid "Click the image to edit or update"
 msgstr "Натисніть на зображення, щоби редагувати чи оновити"
 
@@ -1439,17 +2258,17 @@ msgstr "Натисніть на зображення, щоби редагува�
 msgid "Attach to existing content"
 msgstr "Прикріпити до існуючого вмісту"
 
-#: wp-admin/includes/plugin-install.php:618
+#: wp-admin/includes/plugin-install.php:626
 msgid "Reviews"
 msgstr "Відгуки"
 
-#: wp-admin/includes/plugin-install.php:619
+#: wp-admin/includes/plugin-install.php:627
 msgid "Read all reviews on WordPress.org or write your own!"
 msgstr "Читати усі відгуки на WordPress.org або написати свій власний!"
 
 #. translators: 1: number of stars (used to determine singular/plural), 2:
 #. number of reviews
-#: wp-admin/includes/plugin-install.php:625
+#: wp-admin/includes/plugin-install.php:633
 msgid "Reviews with %1$d star: %2$s. Opens in a new window."
 msgid_plural "Reviews with %1$d stars: %2$s. Opens in a new window."
 msgstr[0] "Відгуки з %1$d зіркою: %2$s. Відкривається у новому вікні."
@@ -1555,7 +2374,7 @@ msgstr "Наразі виконується інше оновлення."
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:702
+#: wp-admin/includes/class-wp-media-list-table.php:710
 #: wp-admin/includes/class-wp-posts-list-table.php:1254
 msgid "Restore &#8220;%s&#8221; from the Trash"
 msgstr "Відновити &#8220;%s&#8221; із кошика"
@@ -1586,28 +2405,28 @@ msgid "View &#8220;%s&#8221; archive"
 msgstr "Переглянути архів &#8220;%s&#8221;"
 
 #. translators: %s: attachment title
-#: wp-admin/includes/class-wp-media-list-table.php:504
-#: wp-admin/includes/class-wp-media-list-table.php:681
+#: wp-admin/includes/class-wp-media-list-table.php:512
+#: wp-admin/includes/class-wp-media-list-table.php:689
 msgid "Attach &#8220;%s&#8221; to existing content"
 msgstr "Прикріпити &#8220;%s&#8221; до існуючого вмісту"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:653
-#: wp-admin/includes/class-wp-media-list-table.php:710
+#: wp-admin/includes/class-wp-media-list-table.php:661
+#: wp-admin/includes/class-wp-media-list-table.php:718
 #: wp-admin/includes/class-wp-posts-list-table.php:1262
 msgid "Move &#8220;%s&#8221; to the Trash"
 msgstr "Перемістити &#8220;%s&#8221; до кошика"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:663
-#: wp-admin/includes/class-wp-media-list-table.php:721
+#: wp-admin/includes/class-wp-media-list-table.php:671
+#: wp-admin/includes/class-wp-media-list-table.php:729
 #: wp-admin/includes/class-wp-posts-list-table.php:1271
 msgid "Delete &#8220;%s&#8221; permanently"
 msgstr "Видалити &#8220;%s&#8221; остаточно"
 
-#: wp-admin/includes/class-wp-media-list-table.php:128
+#: wp-admin/includes/class-wp-media-list-table.php:135
 msgctxt "attachment filter"
 msgid "Trash"
 msgstr "Кошик"
@@ -1615,14 +2434,14 @@ msgstr "Кошик"
 #. translators: %s: attachment title
 #. translators: %s: post title
 #. translators: %s: taxonomy term name
-#: wp-admin/includes/class-wp-media-list-table.php:372
+#: wp-admin/includes/class-wp-media-list-table.php:380
 #: wp-admin/includes/class-wp-posts-list-table.php:936
 #: wp-admin/includes/class-wp-terms-list-table.php:380
 msgid "&#8220;%s&#8221; (Edit)"
 msgstr "&#8220;%s&#8221; (Редагувати)"
 
 #. translators: %s: title of the post the attachment is attached to
-#: wp-admin/includes/class-wp-media-list-table.php:492
+#: wp-admin/includes/class-wp-media-list-table.php:500
 msgid "Detach from &#8220;%s&#8221;"
 msgstr "Відкріпити від &#8220;%s&#8221;"
 
@@ -1655,7 +2474,7 @@ msgstr "%1$s (%2$s)"
 msgid "The %s importer is invalid or is not installed."
 msgstr "%s імпортер невірний або не встановлений."
 
-#: wp-admin/edit-form-comment.php:86
+#: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
 msgid "Pending"
 msgstr "В очікуванні"
@@ -1704,12 +2523,12 @@ msgid "(Currently set to: %s)"
 msgstr "(Наразі встановлено: %s)"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:444
+#: wp-admin/about.php:462
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "У <strong>версії %s</strong> виправлено одну проблему безпеки."
 
 #. translators: %s: site link
-#: wp-admin/includes/schema.php:1002 wp-admin/includes/upgrade.php:163
+#: wp-admin/includes/schema.php:1005 wp-admin/includes/upgrade.php:163
 msgid "Welcome to %s. This is your first post. Edit or delete it, then start blogging!"
 msgstr "Ласкаво просимо до %s. Це ваш перший запис. Відредагуйте чи видаліть його, та починайте вести блог!"
 
@@ -1726,15 +2545,15 @@ msgstr "Ви можете змінити забраження свого обл�
 msgid "Profile Picture"
 msgstr "Зображення облікового запису"
 
-#: wp-admin/about.php:435
+#: wp-admin/about.php:453
 msgid "Maintenance Releases"
 msgstr "Випуски обслуговування"
 
-#: wp-admin/about.php:438
+#: wp-admin/about.php:456
 msgid "Security Releases"
 msgstr "Випуски безпеки"
 
-#: wp-admin/about.php:34 wp-admin/about.php:441
+#: wp-admin/about.php:34 wp-admin/about.php:459
 msgid "Maintenance and Security Releases"
 msgstr "Випуски обслуговування та безпеки"
 
@@ -1996,11 +2815,11 @@ msgstr "Перемкнути панель: %s"
 msgid "Get Version %s"
 msgstr "Отримати версію %s"
 
-#: wp-admin/includes/post.php:1352
+#: wp-admin/includes/post.php:1356
 msgid "Edit permalink"
 msgstr "Редагувати постійне посилання"
 
-#: wp-admin/includes/post.php:1641
+#: wp-admin/includes/post.php:1645
 msgid "Saving revision&hellip;"
 msgstr "Збереження редакції&hellip;"
 
@@ -2216,7 +3035,7 @@ msgid "You can view posts in a simple title list or with an excerpt using the Sc
 msgstr "Ви можете переглядати записи простим списком заголовків, або з уривками, використовуючи для налаштування вкладку Параметри екрану."
 
 #. translators: %s: comment date
-#: wp-admin/edit-form-comment.php:98
+#: wp-admin/edit-form-comment.php:102
 msgid "Submitted on: %s"
 msgstr "Відправлено %s"
 
@@ -2427,21 +3246,21 @@ msgstr "Попередній перегляд &#8220;%s&#8221;"
 msgid "Last page"
 msgstr "Остання сторінка"
 
-#: wp-admin/edit-form-comment.php:84
+#: wp-admin/edit-form-comment.php:88
 msgid "Comment status"
 msgstr "Статус коментаря"
 
 #. translators: %s: comment link
-#: wp-admin/edit-form-comment.php:137
+#: wp-admin/edit-form-comment.php:141
 msgid "In reply to: %s"
 msgstr "У відповідь на: %s"
 
-#: wp-admin/edit-form-comment.php:104 wp-admin/includes/meta-boxes.php:220
+#: wp-admin/edit-form-comment.php:108 wp-admin/includes/meta-boxes.php:220
 msgid "Date and time"
 msgstr "Дата та час"
 
 #. translators: %s: post link
-#: wp-admin/edit-form-comment.php:122
+#: wp-admin/edit-form-comment.php:126
 msgid "In response to: %s"
 msgstr "У відповідь на: %s"
 
@@ -2585,7 +3404,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Links_Screen\">Документа�
 msgid "<a href=\"https://codex.wordpress.org/Appearance_Header_Screen\">Documentation on Custom Header</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Appearance_Header_Screen\">Документація по довільному заголовку</a>"
 
-#: wp-admin/tools.php:23
+#: wp-admin/tools.php:33
 msgid "<a href=\"https://codex.wordpress.org/Tools_Screen\">Documentation on Tools</a>"
 msgstr "<a href=\"https://codex.wordpress.org/Tools_Screen\">Документація по інструментам</a>"
 
@@ -2767,12 +3586,12 @@ msgid "Plugins updated successfully."
 msgstr "Плагіни оновлено успішно."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:602
-#: wp-admin/includes/plugin-install.php:596
+#: wp-admin/includes/plugin-install.php:604
 msgctxt "Active plugin installations"
 msgid "1+ Million"
 msgstr "Більше мільйона"
 
-#: wp-admin/includes/class-wp-media-list-table.php:493
+#: wp-admin/includes/class-wp-media-list-table.php:501
 msgid "Detach"
 msgstr "Відкріпити"
 
@@ -2989,7 +3808,7 @@ msgid "Site Upload Space Quota"
 msgstr "Обмеження дискового простору сайту"
 
 #. translators: Publish box date format, see https://secure.php.net/date
-#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:93
+#: wp-admin/edit-form-advanced.php:144 wp-admin/edit-form-comment.php:97
 #: wp-admin/includes/meta-boxes.php:181 wp-admin/includes/meta-boxes.php:340
 #: wp-admin/includes/revision.php:207 wp-admin/includes/revision.php:249
 msgid "M j, Y @ H:i"
@@ -3041,7 +3860,7 @@ msgstr "Рекомендовані"
 
 #. translators: New site notification email. 1: New site URL, 2: User login, 3:
 #. User password or password reset link, 4: Login URL
-#: wp-admin/includes/upgrade.php:382
+#: wp-admin/includes/upgrade.php:428
 msgid ""
 "Your new WordPress site has been successfully set up at:\n"
 "\n"
@@ -3177,7 +3996,7 @@ msgstr "Редактор"
 msgid "If you like, you may enter custom structures for your category and tag URLs here. For example, using <code>topics</code> as your category base would make your category links like <code>%s/topics/uncategorized/</code>. If you leave these blank the defaults will be used."
 msgstr "Якщо хочете, тут ви можете задавати користувацьку структуру посилань для своїх категорій та позначок. Наприклад, якщо задати <code>topics</code> як основу для своїх категорій, то посилання ваших категорій виглядатимуть так - <code>%s/topics/uncategorized/</code>. Якщо ви залишите ці поля порожніми, то будуть використовуватися значення за замовчуванням."
 
-#: wp-admin/credits.php:125
+#: wp-admin/credits.php:124
 msgid "Release Lead"
 msgstr "Керівник релізу"
 
@@ -3241,7 +4060,7 @@ msgstr "<strong>Несумісний</strong> з вашою версією WordP
 msgid "<strong>Compatible</strong> with your version of WordPress"
 msgstr "<strong>Сумісний</strong> з вашою версією WordPress"
 
-#: wp-admin/includes/plugin-install.php:632
+#: wp-admin/includes/plugin-install.php:640
 msgid "%d star"
 msgid_plural "%d stars"
 msgstr[0] "%d зірка"
@@ -3284,12 +4103,12 @@ msgctxt "Plugin Installer"
 msgid "Beta Testing"
 msgstr "Бета тестування"
 
-#: wp-admin/includes/plugin-install.php:608
-#: wp-admin/includes/plugin-install.php:662
+#: wp-admin/includes/plugin-install.php:616
+#: wp-admin/includes/plugin-install.php:670
 msgid "Donate to this plugin &#187;"
 msgstr "Пожертвувати цьому плагіну &#187;"
 
-#: wp-admin/includes/plugin-install.php:642
+#: wp-admin/includes/plugin-install.php:650
 msgid "Contributors"
 msgstr "Учасники"
 
@@ -3468,7 +4287,7 @@ msgstr "<strong>Видалити</strong> дозволяє вам видалит
 msgid "<strong>Delete</strong> brings you to the Delete Users screen for confirmation, where you can permanently remove a user from your site and delete their content. You can also delete multiple users at once by using Bulk Actions."
 msgstr "<strong>Видалити</strong> викликає екран з підтвердженням, де можна назавжди видалити з сайту як самого користувача, так і створені ним записи. Можна також видалити відразу декількох користувачів за допомогою меню Дії."
 
-#: wp-admin/credits.php:44 wp-admin/credits.php:107
+#: wp-admin/credits.php:44 wp-admin/credits.php:58
 msgid "https://make.wordpress.org/"
 msgstr "https://make.wordpress.org/"
 
@@ -3484,7 +4303,7 @@ msgstr "Редагувати видимість"
 msgid "Browse revisions"
 msgstr "Оглянути зміни"
 
-#: wp-admin/edit-form-comment.php:102 wp-admin/includes/meta-boxes.php:218
+#: wp-admin/edit-form-comment.php:106 wp-admin/includes/meta-boxes.php:218
 msgid "Edit date and time"
 msgstr "Редагувати дату та час"
 
@@ -4397,7 +5216,7 @@ msgstr "Ви можете:"
 msgid "Menu locations updated."
 msgstr "Області для меню оновлені."
 
-#: wp-admin/includes/post.php:1642
+#: wp-admin/includes/post.php:1646
 msgid "Your latest changes were saved as a revision."
 msgstr "Ваші останні зміни збережені у вигляді редакції."
 
@@ -4631,7 +5450,7 @@ msgid "Default: %s"
 msgstr "За замовчуванням: %s"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:305
+#: wp-admin/includes/class-wp-media-list-table.php:313
 msgctxt "column name"
 msgid "Uploaded to"
 msgstr "Завантажено для"
@@ -4706,7 +5525,7 @@ msgstr "Будь ласка, виберіть варіант."
 msgid "$image needs to be an WP_Image_Editor object"
 msgstr "Змінна $image повинна бути об'єктом типу WP_Image_Editor"
 
-#: wp-admin/includes/dashboard.php:1581
+#: wp-admin/includes/dashboard.php:1581 wp-admin/includes/user.php:1013
 msgid "Next Steps"
 msgstr "Наступні кроки"
 
@@ -4888,7 +5707,7 @@ msgstr "Вибрати коментар"
 #. translators: %s: plugin name
 #. translators: %s: theme name
 #: wp-admin/includes/class-wp-links-list-table.php:168
-#: wp-admin/includes/class-wp-media-list-table.php:347
+#: wp-admin/includes/class-wp-media-list-table.php:355
 #: wp-admin/includes/class-wp-plugins-list-table.php:723
 #: wp-admin/includes/class-wp-posts-list-table.php:831
 #: wp-admin/includes/class-wp-terms-list-table.php:335
@@ -4976,11 +5795,11 @@ msgstr "Ви використовуєте вбудований завантаж�
 msgid "Preview %s"
 msgstr "Попередній перегляд %s"
 
-#: wp-admin/tools.php:17
+#: wp-admin/tools.php:27
 msgid "Categories have hierarchy, meaning that you can nest sub-categories. Tags do not have hierarchy and cannot be nested. Sometimes people start out using one on their posts, then later realize that the other would work better for their content."
 msgstr "У категорій є ієрархія, тобто вони можуть бути вкладеними і містити підкатегорії. У міток ієрархії немає, і вкладеними вони бути не можуть. Іноді власники сайтів починають використовувати один варіант, але потім розуміють, що для їх вмісту інший підійшов би краще."
 
-#: wp-admin/tools.php:18
+#: wp-admin/tools.php:28
 msgid "The Categories and Tags Converter link on this screen will take you to the Import screen, where that Converter is one of the plugins you can install. Once that plugin is installed, the Activate Plugin &amp; Run Importer link will take you to a screen where you can choose to convert tags into categories or vice versa."
 msgstr "Посилання цього розділу \"Перетворювач категорій і позначок\" веде до розділу \"Імпорт\", де цей перетворювач можна встановити. Після встановлення цього плагіна, посилання \"Активувати плагін і запустити імпортер\" приведе вас до розділу, де можна перетворювати позначки на категорії чи навпаки."
 
@@ -5056,8 +5875,8 @@ msgstr "Додайте особливостей для теми «%s»"
 
 #: wp-admin/includes/class-wp-comments-list-table.php:303
 #: wp-admin/includes/class-wp-comments-list-table.php:579
-#: wp-admin/includes/class-wp-media-list-table.php:142
-#: wp-admin/includes/class-wp-media-list-table.php:703
+#: wp-admin/includes/class-wp-media-list-table.php:150
+#: wp-admin/includes/class-wp-media-list-table.php:711
 #: wp-admin/includes/class-wp-posts-list-table.php:394
 #: wp-admin/includes/class-wp-posts-list-table.php:1255
 msgid "Restore"
@@ -5080,7 +5899,7 @@ msgstr "Кількість слів: %s"
 msgid "Edit comment"
 msgstr "Редагувати коментар"
 
-#: wp-admin/about.php:14
+#: wp-admin/about.php:14 wp-admin/includes/file.php:1954
 msgid "About"
 msgstr "Деталі"
 
@@ -5090,15 +5909,17 @@ msgstr "Введіть заголовок"
 
 #: wp-admin/export.php:173 wp-admin/export.php:184 wp-admin/export.php:207
 #: wp-admin/export.php:226 wp-admin/export.php:249
+#: wp-admin/includes/user.php:1092
 msgid "All"
 msgstr "Всі"
 
 #. translators: %s: Time since the last update
-#: wp-admin/includes/class-wp-media-list-table.php:441
+#. translators: human readable timestamp
+#: wp-admin/includes/class-wp-media-list-table.php:449
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:597
 #: wp-admin/includes/class-wp-posts-list-table.php:985
 #: wp-admin/includes/plugin-install.php:580 wp-admin/includes/revision.php:209
-#: wp-admin/includes/revision.php:251
+#: wp-admin/includes/revision.php:251 wp-admin/includes/user.php:1281
 msgid "%s ago"
 msgstr "%s назад"
 
@@ -5158,6 +5979,10 @@ msgstr "Коментарів ще немає."
 #: wp-admin/options-general.php:318 wp-admin/options-general.php:355
 msgid "Preview:"
 msgstr "Попередній перегляд:"
+
+#: wp-admin/includes/misc.php:1565
+msgid "&uarr; Return to Top"
+msgstr "&uarr; Повернутися нагору"
 
 #: wp-admin/includes/plugin-install.php:287
 #: wp-admin/includes/theme-install.php:67
@@ -5487,7 +6312,7 @@ msgstr "Часті питання"
 msgid "You should update your web.config now."
 msgstr "Тепер вам слід оновити web.config"
 
-#: wp-admin/includes/plugin-install.php:606
+#: wp-admin/includes/plugin-install.php:614
 msgid "Plugin Homepage &#187;"
 msgstr "Домашня сторінка плагіну &#187;"
 
@@ -5572,7 +6397,7 @@ msgstr "Показувати панель інструментів при пер
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:453
+#: wp-admin/about.php:471
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "У <strong>версії %1$s</strong> виправлено проблему безпеки та %2$s помилку."
@@ -5580,7 +6405,8 @@ msgstr[1] "У <strong>версії %1$s</strong> виправлено пробл
 msgstr[2] "У <strong>версії %1$s</strong> виправлено проблему безпеки та %2$s помилок."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:57 wp-admin/about.php:75 wp-admin/about.php:449
+#: wp-admin/about.php:39 wp-admin/about.php:75 wp-admin/about.php:93
+#: wp-admin/about.php:467
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "У <strong>версії %1$s</strong> виправлено %2$s помилку."
@@ -5589,15 +6415,16 @@ msgstr[2] "У <strong>версії %1$s</strong> виправлено %2$s по�
 
 #. translators: %s: Codex URL
 #: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
-#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:461
+#: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:140
+#: wp-admin/about.php:479
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Більше інформації можна отримати з <a href=\"%s\">деталей випуску</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:39 wp-admin/about.php:93 wp-admin/about.php:111
-#: wp-admin/about.php:457
+#: wp-admin/about.php:57 wp-admin/about.php:111 wp-admin/about.php:129
+#: wp-admin/about.php:475
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "У <strong>версії %1$s</strong> вирішені кілька проблем з безпекою і виправлена %2$s помилка."
@@ -5608,25 +6435,24 @@ msgstr[2] "У <strong>версії %1$s</strong> вирішені кілька �
 msgid "Welcome to your WordPress Dashboard! This is the screen you will see when you log in to your site, and gives you access to all the site management features of WordPress. You can get help for any screen by clicking the Help tab above the screen title."
 msgstr "Ласкаво просимо до вашої Майстерні WordPress! Це розділ, який ви будете бачити, коли увійдете на свій сайт. Звідси є доступ до всіх елементів керування сайтом. Ви можете отримати допомогу по будь-якому розділу, натиснувши вкладку \"Допомога\" над заголовком розділу."
 
-#: wp-admin/about.php:27 wp-admin/credits.php:28 wp-admin/freedoms.php:27
-#: wp-admin/privacy.php:27
+#: wp-admin/about.php:27 wp-admin/credits.php:28 wp-admin/freedoms.php:30
 msgid "What&#8217;s New"
 msgstr "Що нового"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:446
+#: wp-admin/about.php:464
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "У <strong>версії %s</strong> виправлено декілька проблем безпеки."
 
-#: wp-admin/about.php:440
+#: wp-admin/about.php:458
 msgid "Maintenance and Security Release"
 msgstr "Випуск обслуговування та безпеки"
 
-#: wp-admin/about.php:437
+#: wp-admin/about.php:455
 msgid "Security Release"
 msgstr "Випуск безпеки"
 
-#: wp-admin/about.php:434
+#: wp-admin/about.php:452
 msgid "Maintenance Release"
 msgstr "Випуск обслуговування"
 
@@ -5634,7 +6460,7 @@ msgstr "Випуск обслуговування"
 msgid "This screen allows you to choose your permalink structure. You can choose from common settings or create custom URL structures."
 msgstr "Цей розділ дозволяє вам обирати структуру постійних посилань. Ви можете обрати один із запропонованих варіантів, або створити користувацьку структуру URL."
 
-#: wp-admin/about.php:327
+#: wp-admin/about.php:345
 msgid "Return to Updates"
 msgstr "Повернутися до поновлень"
 
@@ -5718,7 +6544,7 @@ msgstr "Короткий огляд ролей користувачів і їх 
 msgid "Subscribers can read comments/comment/receive newsletters, etc. but cannot create regular site content."
 msgstr "Учасники можуть читати коментарі, коментувати, отримувати розсилки і т.д., але створювати вміст сайту не можуть."
 
-#: wp-admin/tools.php:39
+#: wp-admin/tools.php:60
 msgid "If you want to convert your categories to tags (or vice versa), use the <a href=\"%s\">Categories and Tags Converter</a> available from the Import screen."
 msgstr "Якщо ви хочете перетворити свої категорії у позначки (або навпаки), використовуйте <a href=\"%s\">Перетворювач категорій і позначок</a>, доступний у розділі \"Імпорт\"."
 
@@ -5906,15 +6732,15 @@ msgstr "<strong>Редагувати</strong> веде до розділу ре�
 msgid "Because this is a multisite installation, you may add accounts that already exist on the Network by specifying a username or email, and defining a role. For more options, such as specifying a password, you have to be a Network Administrator and use the hover link under an existing user&#8217;s name to Edit the user profile under Network Admin > All Users."
 msgstr "Оскільки це мережа сайтів, можна додавати існуючі в ній облікові записи, вказавши ім'я користувача або e-mail і вибравши роль. Щоб мати більше можливостей, наприклад призначати пароль, потрібно бути адміністратором мережі і використовувати випадаюче посилання для редагування облікового запису користувача в розділі \"Мережа сайтів\" > \"Всі користувачі\"."
 
-#: wp-admin/credits.php:21 wp-admin/freedoms.php:20 wp-admin/privacy.php:20
+#: wp-admin/credits.php:21 wp-admin/freedoms.php:23
 msgid "Welcome to WordPress %s"
 msgstr "Ласкаво просимо до WordPress %s"
 
-#: wp-admin/about.php:327
+#: wp-admin/about.php:345
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Повернутися до \"Майстерні\" &rarr; \"Оновлення\""
 
-#: wp-admin/about.php:330
+#: wp-admin/about.php:348
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Перейти до \"Майстерні\" &rarr; \"Домашня сторінка\""
 
@@ -5949,7 +6775,7 @@ msgstr ""
 "Клацніть на посилання, щоб прийняти запрошення:\n"
 "%4$s"
 
-#: wp-admin/credits.php:128
+#: wp-admin/credits.php:127
 msgid "Core Developer"
 msgstr "Розробник ядра"
 
@@ -6114,8 +6940,8 @@ msgstr "Всі користувачі"
 msgid "Delete Site"
 msgstr "Видалити сайт"
 
-#: wp-admin/includes/class-wp-media-list-table.php:673
-#: wp-admin/includes/class-wp-media-list-table.php:732
+#: wp-admin/includes/class-wp-media-list-table.php:681
+#: wp-admin/includes/class-wp-media-list-table.php:740
 #: wp-admin/includes/class-wp-posts-list-table.php:1295
 #: wp-admin/includes/class-wp-terms-list-table.php:461
 #: wp-admin/includes/class-wp-users-list-table.php:428
@@ -6193,12 +7019,11 @@ msgid "Add New"
 msgstr "Додати"
 
 #. translators: %s: Plugin version
-#: wp-admin/about.php:24 wp-admin/credits.php:25 wp-admin/freedoms.php:24
+#: wp-admin/about.php:24 wp-admin/credits.php:25 wp-admin/freedoms.php:27
 #: wp-admin/includes/ajax-actions.php:3774
 #: wp-admin/includes/ajax-actions.php:3817
 #: wp-admin/includes/class-wp-plugins-list-table.php:767
 #: wp-admin/includes/update.php:193 wp-admin/includes/update.php:218
-#: wp-admin/privacy.php:24
 msgid "Version %s"
 msgstr "Версія %s"
 
@@ -6222,7 +7047,7 @@ msgstr "Встановити"
 #: wp-admin/plugin-editor.php:134 wp-admin/plugin-install.php:97
 #: wp-admin/plugins.php:434 wp-admin/revision.php:119
 #: wp-admin/theme-editor.php:44 wp-admin/theme-install.php:119
-#: wp-admin/themes.php:117 wp-admin/tools.php:22 wp-admin/update-core.php:584
+#: wp-admin/themes.php:117 wp-admin/tools.php:32 wp-admin/update-core.php:584
 #: wp-admin/upload.php:65 wp-admin/upload.php:211 wp-admin/user-edit.php:60
 #: wp-admin/user-new.php:219 wp-admin/users.php:66 wp-admin/widgets.php:75
 msgid "For more information:"
@@ -6406,7 +7231,7 @@ msgstr "Завантажений файл перевищує значення д
 msgid "The uploaded file exceeds the upload_max_filesize directive in php.ini."
 msgstr "Завантажений файл перевищує директиву upload_max_filesize у файлі php.ini."
 
-#: wp-admin/credits.php:129
+#: wp-admin/credits.php:128
 msgid "External Libraries"
 msgstr "Сторонні бібліотеки"
 
@@ -6418,20 +7243,20 @@ msgstr "Доступні інструменти"
 msgid "Network Setup"
 msgstr "Встановлення мережі"
 
-#: wp-admin/credits.php:59
+#: wp-admin/credits.php:65
 msgctxt "Translate this to be the equivalent of English Translators in your language for the credits page Translators section"
 msgid "Translators"
 msgstr "Перекладачі"
 
-#: wp-admin/freedoms.php:50
+#: wp-admin/freedoms.php:64
 msgid "Every plugin and theme in WordPress.org&#8217;s directory is 100%% GPL or a similarly free and compatible license, so you can feel safe finding <a href=\"%1$s\">plugins</a> and <a href=\"%2$s\">themes</a> there. If you get a plugin or theme from another source, make sure to <a href=\"%3$s\">ask them if it&#8217;s GPL</a> first. If they don&#8217;t respect the WordPress license, we don&#8217;t recommend them."
 msgstr "Кожен плагін і тема в директорії WordPress.org на 100%% сумісні з ліцензією GPL або іншою вільною ліцензією, тому ви можете безпечно знаходити там <a href=\"%1$s\">плагіни</a> та <a href=\"%2$s\">теми</a>. Якщо ви отримали плагін або тему з іншого джерела, спочатку <a href=\"%3$s\">запитайте авторів чи їх ліцензія GPL</a>. Якщо вони не поважають ліцензію WordPress, ми їх не рекомендуємо."
 
-#: wp-admin/freedoms.php:43
+#: wp-admin/freedoms.php:57
 msgid "WordPress grows when people like you tell their friends about it, and the thousands of businesses and services that are built on and around WordPress share that fact with their users. We&#8217;re flattered every time someone spreads the good word, just make sure to <a href=\"%s\">check out our trademark guidelines</a> first."
 msgstr "WordPress розвивається, коли такі люди як ви розповідають про нього своїм друзям, а тисячі комерційних проектів і сервісів, побудованих на WordPress, діляться цим фактом зі своїми користувачами. Нам дуже приємно, коли хтось поширює добре слово, тільки спочатку <a href=\"%s\">перегляньте правила використання нашої торгової марки</a>."
 
-#: wp-admin/freedoms.php:34
+#: wp-admin/freedoms.php:48
 msgid "WordPress is Free and open source software, built by a distributed community of mostly volunteer developers from around the world. WordPress comes with some awesome, worldview-changing rights courtesy of its <a href=\"%s\">license</a>, the GPL."
 msgstr "WordPress це вільне та відкрите програмне забезпечення, створене широкою спільнотою добровільних розробників зі всього світу. WordPress надає стільки прав завдяки своїй <a href=\"%s\">ліцензії</a>, GPL."
 
@@ -6439,16 +7264,16 @@ msgstr "WordPress це вільне та відкрите програмне з�
 msgid "All Comments"
 msgstr "Всі коментарі"
 
-#: wp-admin/credits.php:123
+#: wp-admin/credits.php:122
 msgid "Cofounder, Project Lead"
 msgstr "Співзасновник, керівник проекту"
 
 #: wp-admin/about.php:28 wp-admin/credits.php:13 wp-admin/credits.php:29
-#: wp-admin/freedoms.php:28 wp-admin/privacy.php:28
+#: wp-admin/freedoms.php:31
 msgid "Credits"
 msgstr "Учасники"
 
-#: wp-admin/credits.php:120
+#: wp-admin/credits.php:119
 msgid "Project Leaders"
 msgstr "Керівники проекту"
 
@@ -6462,16 +7287,16 @@ msgctxt "removing-widget"
 msgid "Deactivate"
 msgstr "Вимкнути"
 
-#: wp-admin/credits.php:121
+#: wp-admin/credits.php:120
 msgid "Core Contributors to WordPress %s"
 msgstr "Учасники розробки ядра WordPress %s"
 
-#: wp-admin/credits.php:124
+#: wp-admin/credits.php:123
 msgid "Lead Developer"
 msgstr "Провідний розробник"
 
 #. translators: %s: https://make.wordpress.org/
-#: wp-admin/credits.php:106
+#: wp-admin/credits.php:57
 msgid "Want to see your name in lights on this page? <a href=\"%s\">Get involved in WordPress</a>."
 msgstr "Хочете побачити своє ім'я на цій сторінці? <a href=\"%s\"> Візьміть участь в проекті WordPress </a>."
 
@@ -6484,27 +7309,27 @@ msgid "Your browser is out of date!"
 msgstr "Ваш браузер застарілий!"
 
 #: wp-admin/about.php:29 wp-admin/credits.php:30 wp-admin/freedoms.php:12
-#: wp-admin/freedoms.php:29 wp-admin/privacy.php:29
+#: wp-admin/freedoms.php:32
 msgid "Freedoms"
 msgstr "Свободи"
 
-#: wp-admin/freedoms.php:37
+#: wp-admin/freedoms.php:51
 msgid "You have the freedom to run the program, for any purpose."
 msgstr "Ви маєте свободу використовувати програму, для будь-якої цілі."
 
-#: wp-admin/freedoms.php:38
+#: wp-admin/freedoms.php:52
 msgid "You have access to the source code, the freedom to study how the program works, and the freedom to change it to make it do what you wish."
 msgstr "Ви маєте доступ до вихідного коду, свободу вивчати як програма працює, та свободу змінювати її для досягнення бажаних можливостей."
 
-#: wp-admin/freedoms.php:39
+#: wp-admin/freedoms.php:53
 msgid "You have the freedom to redistribute copies of the original program so you can help your neighbor."
 msgstr "Ви маєте свободу поширювати копії програми, тож ви можете допомогти своєму сусіду."
 
-#: wp-admin/freedoms.php:40
+#: wp-admin/freedoms.php:54
 msgid "You have the freedom to distribute copies of your modified versions to others. By doing this you can give the whole community a chance to benefit from your changes."
 msgstr "Ви маєте свободу поширювати копії змінених вами версій. Завдяки цьому ви можете дати цілій спільноті можливість отримати користь від ваших змін."
 
-#: wp-admin/freedoms.php:52
+#: wp-admin/freedoms.php:66
 msgid "Don&#8217;t you wish all software came with these freedoms? So do we! For more information, check out the <a href=\"https://www.fsf.org/\">Free Software Foundation</a>."
 msgstr "Хіба ви не бажаєте щоби все програмне забезпечення було з цими свободами? Ми так! Для отримання додаткової інформації, перейдіть за цим посиланням: <a href=\"https://www.fsf.org/\">Free Software Foundation</a>."
 
@@ -7328,7 +8153,7 @@ msgstr "Ваша тема підтримує  %s меню. Оберіть мен
 msgid "Your theme does not support navigation menus or widgets."
 msgstr "Поточна тема не підтримує меню або віджети."
 
-#: wp-admin/includes/import.php:175 wp-admin/tools.php:16 wp-admin/tools.php:38
+#: wp-admin/includes/import.php:175 wp-admin/tools.php:26 wp-admin/tools.php:59
 msgid "Categories and Tags Converter"
 msgstr "Конвертер категорій та позначок"
 
@@ -7415,7 +8240,7 @@ msgstr "Власне повідомлення при «замороженому�
 msgid "My Site"
 msgstr "Мій сайт"
 
-#: wp-admin/includes/upgrade.php:398
+#: wp-admin/includes/upgrade.php:444
 msgid "New WordPress Site"
 msgstr "Новий сайт WordPress"
 
@@ -7440,12 +8265,12 @@ msgid "No items."
 msgstr "Немає пунктів."
 
 #. translators: %s: host name
-#: wp-admin/includes/schema.php:1078
+#: wp-admin/includes/schema.php:1081
 msgid "The installer attempted to contact a random hostname (%s) on your domain."
 msgstr "Встановлювач спробував зв’язатися з випадковою адресою (%s) на вашому домені."
 
 #. translators: %s: asterisk symbol (*)
-#: wp-admin/includes/schema.php:1089
+#: wp-admin/includes/schema.php:1092
 msgid "To use a subdomain configuration, you must have a wildcard entry in your DNS. This usually means adding a %s hostname record pointing at your web server in your DNS configuration tool."
 msgstr "Щоби використовувати режим піддоменів, потрібна маска (wildcard) DNS. Зазвичай це означає додавання %s, що вказує на ваш сервер, в налаштуваннях DNS."
 
@@ -7659,28 +8484,28 @@ msgstr "Ціль посилання"
 msgid "Updating Theme %1$s (%2$d/%3$d)"
 msgstr "Оновлення теми %1$s (%2$d/%3$d)"
 
-#: wp-admin/includes/schema.php:892 wp-admin/includes/schema.php:896
+#: wp-admin/includes/schema.php:895 wp-admin/includes/schema.php:899
 msgid "The network already exists."
 msgstr "Мережа вже існує."
 
 #. translators: %s: error message
-#: wp-admin/includes/schema.php:1083
+#: wp-admin/includes/schema.php:1086
 msgid "This resulted in an error message: %s"
 msgstr "Це привело до повідомлення про помилку: %s"
 
-#: wp-admin/includes/schema.php:1093
+#: wp-admin/includes/schema.php:1096
 msgid "You can still use your site but any subdomain you create may not be accessible. If you know your DNS is correct, ignore this message."
 msgstr "Можна використовувати основний сайт, але будь-який створений субдомен буде недоступним. Якщо Ви впевнені, що Ваші налаштування DNS вірні — проігноруйте це повідомлення."
 
-#: wp-admin/includes/schema.php:884
+#: wp-admin/includes/schema.php:887
 msgid "You must provide a domain name."
 msgstr "Вам потрібно вказати доменне ім’я."
 
-#: wp-admin/includes/schema.php:886
+#: wp-admin/includes/schema.php:889
 msgid "You must provide a name for your network of sites."
 msgstr "Вам необхідно вказати назву мережі."
 
-#: wp-admin/includes/schema.php:901
+#: wp-admin/includes/schema.php:904
 msgid "You must provide a valid email address."
 msgstr "Ви мусите надати вірну адресу e-mail."
 
@@ -7743,7 +8568,7 @@ msgstr[0] "Вкраплення <span class=\"count\">(%s)</span>"
 msgstr[1] "Вкраплення <span class=\"count\">(%s)</span>"
 msgstr[2] "Вкраплення <span class=\"count\">(%s)</span>"
 
-#: wp-admin/about.php:330
+#: wp-admin/about.php:348
 msgid "Go to Dashboard"
 msgstr "Перейти до майстерні"
 
@@ -7955,16 +8780,15 @@ msgstr "Бібліотека"
 msgid "Comments %s"
 msgstr "Коментарі %s"
 
-#: wp-admin/menu.php:243 wp-admin/tools.php:12
+#: wp-admin/menu.php:243 wp-admin/tools.php:22
 msgid "Tools"
 msgstr "Інструменти"
 
-#: wp-admin/menu.php:255
+#: wp-admin/menu.php:261
 msgid "Reading"
 msgstr "Читання"
 
-#: wp-admin/about.php:30 wp-admin/credits.php:31 wp-admin/freedoms.php:30
-#: wp-admin/privacy.php:12 wp-admin/privacy.php:30
+#: wp-admin/about.php:30 wp-admin/credits.php:31 wp-admin/freedoms.php:33
 msgid "Privacy"
 msgstr "Приватність"
 
@@ -8083,6 +8907,10 @@ msgstr "Зараз Ви маєте оновити файл .htaccess"
 #: wp-admin/options-permalink.php:193
 msgid "Month and name"
 msgstr "Місяць і назва"
+
+#: wp-admin/privacy.php:101
+msgid "Privacy Settings"
+msgstr "Параметри приватності"
 
 #: wp-admin/options-reading.php:15
 msgid "Reading Settings"
@@ -8306,7 +9134,7 @@ msgstr "Розташування"
 msgid "Save Widget"
 msgstr "Зберегти віджет"
 
-#: wp-admin/includes/misc.php:1056 wp-admin/includes/post.php:1801
+#: wp-admin/includes/misc.php:1056 wp-admin/includes/post.php:1805
 #: wp-admin/widgets.php:342
 msgid "Error while saving."
 msgstr "Помилка при збереженні змін."
@@ -8402,7 +9230,7 @@ msgstr "Ой-ой, такого файла не існує! Перевірте �
 msgid "Permalink structure updated."
 msgstr "Постійні посилання оновлено."
 
-#: wp-admin/menu.php:258
+#: wp-admin/menu.php:264
 msgid "Permalinks"
 msgstr "Постійні посилання"
 
@@ -8480,7 +9308,7 @@ msgstr "першу"
 msgid "last"
 msgstr "останню"
 
-#: wp-admin/menu.php:253
+#: wp-admin/menu.php:259
 msgctxt "settings screen"
 msgid "General"
 msgstr "Загальне"
@@ -8613,7 +9441,7 @@ msgstr "Недіючі віджети"
 msgid "Appearance"
 msgstr "Вигляд"
 
-#: wp-admin/menu.php:254
+#: wp-admin/menu.php:260
 msgid "Writing"
 msgstr "Написання"
 
@@ -8992,10 +9820,6 @@ msgstr "Підтримка мережі сайтів не задіяна."
 msgid "A comment is held for moderation"
 msgstr "Коментар чекає на схвалення"
 
-#: wp-admin/options-discussion.php:160
-msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
-msgstr "Коли коментар містить будь-яке з цих слів у вмісті, назві, посиланні, адресі e-mail, або IP-адресі, він буде затриманий для <a href=\"edit-comments.php?comment_status=moderated\">схвалення</a>. Одне слово чи IP-адреса в одному рядку. Будуть включені внутрішні слова, наприклад слово \"press\" знайдеться у слові \"WordPress\"."
-
 #: wp-admin/options-discussion.php:158
 msgid "Hold a comment in the queue if it contains %s or more links. (A common characteristic of comment spam is a large number of hyperlinks.)"
 msgstr "Затримати коментар для схвалення, якщо він містить %s, або більше посилань. (Поширена особливість коментаря зі спамом в тому, що він містить багато посилань.)"
@@ -9003,6 +9827,10 @@ msgstr "Затримати коментар для схвалення, якщо 
 #: wp-admin/options-discussion.php:152
 msgid "Comment author must have a previously approved comment"
 msgstr "Автор повинен мати раніше схвалений коментар"
+
+#: wp-admin/options-discussion.php:160
+msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+msgstr "Коли коментар містить будь-яке з цих слів у вмісті, назві, посиланні, адресі e-mail, або IP-адресі, він буде затриманий для <a href=\"edit-comments.php?comment_status=moderated\">схвалення</a>. Одне слово чи IP-адреса в одному рядку. Будуть включені внутрішні слова, наприклад слово \"press\" знайдеться у слові \"WordPress\"."
 
 #: wp-admin/includes/theme.php:261
 msgid "Sticky Post"
@@ -9031,7 +9859,7 @@ msgid "<strong><em>Note that password</em></strong> carefully! It is a <em>rando
 msgstr "<strong><em>Запам'ятайте цей пароль!</em></strong> Це <em>випадковий</em> пароль, згенерований спеціально для Вас."
 
 #. translators: Default post slug
-#: wp-admin/includes/upgrade.php:185 wp-admin/includes/upgrade.php:331
+#: wp-admin/includes/upgrade.php:185 wp-admin/includes/upgrade.php:377
 msgctxt "Default post slug"
 msgid "hello-world"
 msgstr "привіт-світ"
@@ -9090,7 +9918,7 @@ msgid "Sorry, you are not allowed to edit this attachment."
 msgstr "На жаль, вам не дозволено редагувати цей додаток."
 
 #: wp-admin/async-upload.php:47 wp-admin/edit-tags.php:156
-#: wp-admin/includes/post.php:1807 wp-admin/media-upload.php:46
+#: wp-admin/includes/post.php:1811 wp-admin/media-upload.php:46
 #: wp-admin/post.php:117 wp-admin/term.php:38
 msgid "Sorry, you are not allowed to edit this item."
 msgstr "На жаль, вам не дозволено редагувати цей елемент."
@@ -9135,8 +9963,8 @@ msgstr "Оберіть частину зображення, що буде вик
 #. translators: %s: taxonomy term name
 #. translators: %s: post title
 #: wp-admin/includes/class-wp-links-list-table.php:185
-#: wp-admin/includes/class-wp-media-list-table.php:643
-#: wp-admin/includes/class-wp-media-list-table.php:692
+#: wp-admin/includes/class-wp-media-list-table.php:651
+#: wp-admin/includes/class-wp-media-list-table.php:700
 #: wp-admin/includes/class-wp-posts-list-table.php:1237
 #: wp-admin/includes/class-wp-terms-list-table.php:436
 #: wp-admin/includes/dashboard.php:578 wp-admin/includes/dashboard.php:866
@@ -9145,13 +9973,13 @@ msgstr "Редагувати &#8220;%s&#8221;"
 
 #. translators: %s: attachment title
 #. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:672
-#: wp-admin/includes/class-wp-media-list-table.php:731
+#: wp-admin/includes/class-wp-media-list-table.php:680
+#: wp-admin/includes/class-wp-media-list-table.php:739
 #: wp-admin/includes/class-wp-posts-list-table.php:1294
 msgid "View &#8220;%s&#8221;"
 msgstr "Переглянути &#8220;%s&#8221;"
 
-#: wp-admin/includes/class-wp-media-list-table.php:439
+#: wp-admin/includes/class-wp-media-list-table.php:447
 msgid "%s from now"
 msgstr "%s від зараз"
 
@@ -9482,7 +10310,7 @@ msgstr "Будь ласка, оберіть файл"
 msgid "The uploaded file could not be moved to %s."
 msgstr "Завантажений файл неможливо перенести в %s."
 
-#: wp-admin/edit-form-comment.php:67 wp-admin/includes/template.php:402
+#: wp-admin/edit-form-comment.php:71 wp-admin/includes/template.php:402
 msgid "Comment"
 msgstr "Коментар"
 
@@ -9596,9 +10424,10 @@ msgstr "Продовжити"
 msgid "Gallery (%s)"
 msgstr "Галерея (%s)"
 
-#: wp-admin/includes/media.php:464 wp-admin/includes/template.php:1627
-#: wp-admin/install.php:80 wp-admin/maint/repair.php:26
-#: wp-admin/setup-config.php:110 wp-admin/upgrade.php:71
+#: wp-admin/includes/media.php:464 wp-admin/includes/misc.php:1791
+#: wp-admin/includes/template.php:1627 wp-admin/install.php:80
+#: wp-admin/maint/repair.php:26 wp-admin/setup-config.php:110
+#: wp-admin/upgrade.php:71
 msgid "WordPress"
 msgstr "WordPress"
 
@@ -9652,7 +10481,7 @@ msgid "Filter &#187;"
 msgstr "Фільтрувати &#187;"
 
 #. translators: %s: Plugin version
-#: wp-admin/includes/plugin-install.php:707
+#: wp-admin/includes/plugin-install.php:715
 msgid "Newer Version (%s) Installed"
 msgstr "Встановлена найновіша версія (%s)"
 
@@ -9665,8 +10494,9 @@ msgstr "Останнє оновлення:"
 msgid "Requires WordPress Version:"
 msgstr "Вимагає WordPress версії: "
 
-#. translators: %s: WordPress version
+#. translators: %s: version number
 #: wp-admin/includes/plugin-install.php:588
+#: wp-admin/includes/plugin-install.php:598
 msgid "%s or higher"
 msgstr "%s або вище"
 
@@ -9674,24 +10504,24 @@ msgstr "%s або вище"
 msgid "Compatible up to:"
 msgstr "Сумісний до:"
 
-#: wp-admin/includes/plugin-install.php:612
+#: wp-admin/includes/plugin-install.php:620
 msgid "Average Rating"
 msgstr "Максимальний рейтинг"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:617
+#: wp-admin/includes/schema.php:620
 msgctxt "User role"
 msgid "Administrator"
 msgstr "Адміністратор"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:619
+#: wp-admin/includes/schema.php:622
 msgctxt "User role"
 msgid "Editor"
 msgstr "Редактор"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:621
+#: wp-admin/includes/schema.php:624
 msgctxt "User role"
 msgid "Author"
 msgstr "Автор"
@@ -9708,13 +10538,13 @@ msgid "Quick Edit"
 msgstr "Швидке редагування"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:275
+#: wp-admin/includes/class-wp-media-list-table.php:283
 msgctxt "column name"
 msgid "File"
 msgstr "Файл"
 
 #. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:310
+#: wp-admin/includes/class-wp-media-list-table.php:318
 msgctxt "column name"
 msgid "Date"
 msgstr "Дата"
@@ -9953,7 +10783,7 @@ msgstr "Помилка файлової системи."
 
 #: wp-admin/includes/class-wp-comments-list-table.php:362
 #: wp-admin/includes/class-wp-links-list-table.php:113
-#: wp-admin/includes/class-wp-media-list-table.php:175
+#: wp-admin/includes/class-wp-media-list-table.php:183
 #: wp-admin/includes/class-wp-posts-list-table.php:484
 msgid "Filter"
 msgstr "Фільтрувати"
@@ -10015,7 +10845,7 @@ msgid "Invalid plugin path."
 msgstr "Неправильний шлях."
 
 #. translators: site tagline
-#: wp-admin/includes/schema.php:530
+#: wp-admin/includes/schema.php:533
 msgid "Just another %s site"
 msgstr "Просто ще один %s сайт"
 
@@ -10028,7 +10858,7 @@ msgstr "Просто ще один сайт на WordPress"
 msgid "Keep this link private"
 msgstr "Тримати це посилання закритим"
 
-#: wp-admin/includes/plugin-install.php:710
+#: wp-admin/includes/plugin-install.php:718
 msgid "Latest Version Installed"
 msgstr "Остання версія встановлена"
 
@@ -10048,7 +10878,7 @@ msgstr "Розміщення завантаженого файлу."
 msgid "Missing a temporary folder."
 msgstr "Відсутня тимчасова тека."
 
-#: wp-admin/edit-form-comment.php:43
+#: wp-admin/edit-form-comment.php:47
 msgid "Name:"
 msgstr "Ім’я:"
 
@@ -10173,7 +11003,7 @@ msgid "Uploads"
 msgstr "Завантаження"
 
 #. translators: user role
-#: wp-admin/includes/schema.php:625
+#: wp-admin/includes/schema.php:628
 msgctxt "User role"
 msgid "Subscriber"
 msgstr "Учасник"
@@ -10214,7 +11044,7 @@ msgstr "rel:"
 msgid "Comment by %s moved to the trash."
 msgstr "Коментар від %s викинуто в смітник."
 
-#: wp-admin/edit-form-comment.php:53
+#: wp-admin/edit-form-comment.php:57
 msgid "URL:"
 msgstr "URL:"
 
@@ -10254,7 +11084,7 @@ msgstr "Елемент видалено."
 msgid "Post updated."
 msgstr "Матеріал оновлено."
 
-#: wp-admin/includes/plugin-install.php:604
+#: wp-admin/includes/plugin-install.php:612
 msgid "WordPress.org Plugin Page &#187;"
 msgstr "Сторінка плагінів WordPress.org &#187;"
 
@@ -10275,11 +11105,11 @@ msgstr[0] "%s коментар відновлено зі спаму"
 msgstr[1] "%s коментарі відновлено зі спаму"
 msgstr[2] "%s коментарів відновлено зі спаму"
 
-#: wp-admin/includes/plugin-install.php:671
+#: wp-admin/includes/plugin-install.php:679
 msgid "<strong>Warning:</strong> This plugin has <strong>not been tested</strong> with your current version of WordPress."
 msgstr "<strong>Увага:</strong> Цей плагін <strong>не тестувався</strong> на сумісність з Вашою версією WordPress."
 
-#: wp-admin/includes/plugin-install.php:673
+#: wp-admin/includes/plugin-install.php:681
 msgid "<strong>Warning:</strong> This plugin has <strong>not been marked as compatible</strong> with your version of WordPress."
 msgstr "<strong>Увага:</strong> Цей плагін позначено як <strong>несумісний</strong> з Вашою версією WordPress."
 
@@ -10320,7 +11150,7 @@ msgstr "Групові дії"
 msgid "Stick this post to the front page"
 msgstr "Прикріпити цей запис до головної сторінки"
 
-#: wp-admin/includes/schema.php:1074
+#: wp-admin/includes/schema.php:1077
 msgid "Warning! Wildcard DNS may not be configured correctly!"
 msgstr "Увага! Можливо, маска DNS невірно налаштована!"
 
@@ -10332,7 +11162,7 @@ msgstr "<a href=\"%s\">Посилання</a> / Додати нове посил
 msgid "Add New Custom Field:"
 msgstr "Додати нове користувацьке поле:"
 
-#: wp-admin/includes/plugin-install.php:702
+#: wp-admin/includes/plugin-install.php:710
 msgid "Install Update Now"
 msgstr "Встановити оновлення"
 
@@ -10391,18 +11221,18 @@ msgstr "Цей формат, який ми називаємо \"WordPress eXtend
 msgid "Connection Information"
 msgstr "Інформація про з’єднання"
 
-#: wp-admin/includes/class-wp-media-list-table.php:433
+#: wp-admin/includes/class-wp-media-list-table.php:441
 #: wp-admin/includes/class-wp-posts-list-table.php:975
 msgid "Unpublished"
 msgstr "Неоприлюднене"
 
-#: wp-admin/includes/class-wp-media-list-table.php:152
-#: wp-admin/includes/class-wp-media-list-table.php:505
-#: wp-admin/includes/class-wp-media-list-table.php:682
+#: wp-admin/includes/class-wp-media-list-table.php:160
+#: wp-admin/includes/class-wp-media-list-table.php:513
+#: wp-admin/includes/class-wp-media-list-table.php:690
 msgid "Attach"
 msgstr "Прикріпити"
 
-#: wp-admin/includes/class-wp-media-list-table.php:497
+#: wp-admin/includes/class-wp-media-list-table.php:505
 msgid "(Unattached)"
 msgstr "(Неприкріплено)"
 
@@ -10480,7 +11310,7 @@ msgstr "Оприлюднити <b>негайно</b>"
 msgid "Publish on: <b>%1$s</b>"
 msgstr "Оприлюднити в: <b>%1$s</b>"
 
-#: wp-admin/edit-form-advanced.php:302 wp-admin/menu.php:256
+#: wp-admin/edit-form-advanced.php:302 wp-admin/menu.php:262
 msgid "Discussion"
 msgstr "Обговорення"
 
@@ -10521,11 +11351,11 @@ msgstr "Слаґ"
 msgid "Popular tags"
 msgstr "Популярні позначки"
 
-#: wp-admin/includes/post.php:1326 wp-admin/includes/post.php:1349
+#: wp-admin/includes/post.php:1330 wp-admin/includes/post.php:1353
 msgid "Permalink:"
 msgstr "Постійне посилання:"
 
-#: wp-admin/includes/post.php:1337
+#: wp-admin/includes/post.php:1341
 msgid "Change Permalinks"
 msgstr "Змінити постійні посилання"
 
@@ -10578,7 +11408,7 @@ msgid "Theme installed successfully."
 msgstr "Тема встановлена успішно."
 
 #. translators: user role
-#: wp-admin/includes/schema.php:623
+#: wp-admin/includes/schema.php:626
 msgctxt "User role"
 msgid "Contributor"
 msgstr "Помічник"
@@ -10648,7 +11478,7 @@ msgstr "Плагін останньої версії."
 msgid "Could not remove the old plugin."
 msgstr "Не вдалося видалити старий плагін."
 
-#: wp-admin/includes/plugin-install.php:614
+#: wp-admin/includes/plugin-install.php:622
 msgid "(based on %s rating)"
 msgid_plural "(based on %s ratings)"
 msgstr[0] "(на основі %s оцінки)"
@@ -10758,7 +11588,7 @@ msgid "Custom field deleted."
 msgstr "Користувацьке поле видалено."
 
 #: wp-admin/includes/class-wp-comments-list-table.php:367
-#: wp-admin/includes/class-wp-media-list-table.php:179
+#: wp-admin/includes/class-wp-media-list-table.php:187
 #: wp-admin/includes/class-wp-posts-list-table.php:489
 msgid "Empty Trash"
 msgstr "Очистити кошик"
@@ -10821,7 +11651,7 @@ msgstr[2] "%s коментарів схвалено"
 msgid "Pings"
 msgstr "Сповіщення"
 
-#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:162
+#: wp-admin/comment.php:119 wp-admin/edit-form-comment.php:166
 #: wp-admin/includes/class-wp-comments-list-table.php:311
 #: wp-admin/includes/class-wp-posts-list-table.php:404
 #: wp-admin/includes/media.php:1514 wp-admin/includes/meta-boxes.php:280
@@ -10900,7 +11730,7 @@ msgstr "Не вдалося повністю видалити плагін(и) %
 msgid "Installation package not available."
 msgstr "Архів недоступний."
 
-#: wp-admin/edit-form-comment.php:47
+#: wp-admin/edit-form-comment.php:51
 msgid "Email:"
 msgstr "Email:"
 
@@ -10932,6 +11762,10 @@ msgstr "Відкладено до: <b>%1$s</b>"
 #: wp-admin/includes/class-wp-posts-list-table.php:995
 msgid "Missed schedule"
 msgstr "Прострочено"
+
+#: wp-admin/includes/user.php:789 wp-admin/includes/user.php:862
+msgid "Search Requests"
+msgstr "Пошукові запити"
 
 #: wp-admin/includes/ajax-actions.php:805
 msgid "Comment %d does not exist"
@@ -10975,8 +11809,9 @@ msgstr "Чернетку збережено о %s."
 msgid "Scheduled"
 msgstr "Відкладено"
 
-#: wp-admin/edit-form-comment.php:76 wp-admin/includes/ajax-actions.php:1833
+#: wp-admin/edit-form-comment.php:80 wp-admin/includes/ajax-actions.php:1833
 #: wp-admin/includes/class-wp-posts-list-table.php:1638
+#: wp-admin/includes/user.php:1011
 msgid "Status"
 msgstr "Статус"
 

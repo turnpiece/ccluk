@@ -8,7 +8,7 @@ class ComposerAutoloaderInit236886854fb2275d6b0b4224182e20cd
 
     public static function loadClassLoader($class)
     {
-        if ('Composer\Autoload\ClassLoader' === $class) {
+        if ('NestedPages\Composer\Autoload\ClassLoader' === $class) {
             require __DIR__ . '/ClassLoader.php';
         }
     }
@@ -20,7 +20,7 @@ class ComposerAutoloaderInit236886854fb2275d6b0b4224182e20cd
         }
 
         spl_autoload_register(array('ComposerAutoloaderInit236886854fb2275d6b0b4224182e20cd', 'loadClassLoader'), true, true);
-        self::$loader = $loader = new \Composer\Autoload\ClassLoader();
+        self::$loader = $loader = new \NestedPages\Composer\Autoload\ClassLoader();
         spl_autoload_unregister(array('ComposerAutoloaderInit236886854fb2275d6b0b4224182e20cd', 'loadClassLoader'));
 
         $map = require __DIR__ . '/autoload_namespaces.php';

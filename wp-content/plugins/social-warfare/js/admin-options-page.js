@@ -73,8 +73,6 @@
     function handleCustomColors(event, selector, customColor, customOutlines) {
         //* Create a notice about the custom colors.
         var colorNotice = '<div id="color-notice"><p><span class="color-dismiss"></span><b>Note:</b> Custom colors will not show up in the preview, but will on your site.</p></div>';
-        var visible = false;
-        var value = event.target.value;
         var visibility = {
             customColor: false,
             customOutlines: false
@@ -96,7 +94,6 @@
         visibility.customOutlines ? customOutlines.slideDown() : customOutlines.slideUp();
 
         if (visibility.customColor || visibility.customOutlines) {
-            console.log(colorNotice);
             $("body").append(colorNotice);
             $(".color-dismiss").on("click", function() {
                 $("#color-notice").fadeOut("slow");
@@ -108,6 +105,38 @@
         }
 
     }
+
+    function createNotice(message, parentElement) {
+        var notice = document.createElement("div");
+        var style = "background-color: #ced3dc; color: #30394f; padding: 5px 10px; font-size: 16px !important;";
+
+        var dismiss = document.createElement("span");
+        dismiss.textContent = "Dismiss this notice";
+
+        dismiss.addEventListener("click", function(e) {
+            jQuery(e.target.parentNode).slideUp();
+        });
+
+        notice.style = style;
+        notice.innerHTML = message;
+        notice.appendChild(dismiss)
+
+        parentElement.appendChild(notice);
+    }
+
+    function createStumbleUponNotice() {
+        var message = '<h3><u>Big news</u></h3>';
+        message += '<p>As of June 30th, 2018, StumbleUpon will no longer exist as a sharing platform.<br/>Instead, they are moving in with Mix.</p>';
+        message += '<p>While this is exciting for Mix, <b>share counts will not be transferred, and Mix is not providing a share button or API.</b>';
+        message += '<br/>You can read more about it <a href="http://help.stumbleupon.com/customer/en/portal/articles/2908172-transitioning-from-stumbleupon-to-mix" target="_blank">here</a>.</p>';
+
+        var parent = document.querySelector(".social_networks_description_wrapper");
+
+        if (typeof parent !== 'undefined') {
+            createNotice(message, parent)
+        }
+    }
+
 
 	/*********************************************************
 		A Function send the array of setting to ajax.php
@@ -289,15 +318,21 @@
 			};
 
 			// Send the POST request
-			$.post( ajaxurl, data, function(response) {
-				// Clear the loading screen
-				clearLoadingScreen();
+			$.post({
+                url: ajaxurl,
+				data: data,
+				success: function(response) {
+					// Clear the loading screen
+					clearLoadingScreen();
 
-				// Reset the default options variable
-				socialWarfarePlugin.defaultOptions = fetchAllOptions();
+					// Reset the default options variable
+					socialWarfarePlugin.defaultOptions = fetchAllOptions();
 
-				saveColorToggle();
+					saveColorToggle();
+				}
+
 			});
+
 		});
 	}
 
@@ -798,6 +833,7 @@
 		getSystemStatus();
 		customUploaderInit();
 		set_ctt_preview();
+        // createStumbleUponNotice();
 	});
 
 

@@ -11,15 +11,15 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 
 	<ul class="subsubsub">
 		<li>
-			<a href="#all" class="np-toggle-publish active"><?php _e('All'); ?></a> |
+			<a href="#all" class="np-toggle-publish active"><?php _e('All', 'wp-nested-pages'); ?></a> |
 		</li>
 
 		<li>
-			<a href="#published" class="np-toggle-publish"><?php _e('Published'); ?></a> |
+			<a href="#published" class="np-toggle-publish"><?php _e('Published', 'wp-nested-pages'); ?></a> |
 		</li>
 
 		<li>
-			<a href="#draft" class="np-toggle-publish"><?php _e('Draft'); ?></a>
+			<a href="#draft" class="np-toggle-publish"><?php _e('Draft', 'wp-nested-pages'); ?></a>
 		</li>
 
 		<li> |
@@ -34,8 +34,8 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 		<?php if ( current_user_can('delete_pages') && $trashedCount > 0) : ?>
 		<li class="np-trash-links">
 			 |
-			<a href="<?php echo esc_url($this->post_type_repo->trashLink($this->post_type->name)); ?>"><?php _e('Trash'); ?> </a>
-			<span class="count">(<a href="#" class="np-empty-trash" data-posttype="<?php echo esc_attr($this->post_type->name); ?>"><?php _e('Empty', 'wp-nested-pages'); ?></a> <?php echo absint($trashedCount); ?>)</span>
+			<a href="<?php echo esc_url($this->post_type_repo->trashLink($this->post_type->name)); ?>"><?php _e('Trash', 'wp-nested-pages'); ?> </a>
+			<span class="count">(<a href="#" class="np-empty-trash" data-posttype="<?php echo esc_attr($this->post_type->name); ?>" data-nestedpages-modal-toggle="np-trash-modal"><?php _e('Empty', 'wp-nested-pages'); ?></a> <?php echo absint($trashedCount); ?>)</span>
 		</li>
 		<?php endif; ?>
 
@@ -43,7 +43,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 		<li>
 			 |
 			<a href="<?php echo NestedPages\Helpers::defaultPagesLink($this->post_type->name); ?>">
-				<?php _e('Default'); ?> <?php _e($this->post_type->labels->name); ?>
+				<?php _e('Default', 'wp-nested-pages'); ?> <?php _e($this->post_type->labels->name); ?>
 			</a>
 		</li>
 		<?php endif; ?>
@@ -55,14 +55,11 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 	?>
 
 	<?php 
-	if ( $this->post_type->name !== 'page' && $this->post_type_repo->hasSortOptions($this->post_type->name) ) : ?>
+	if ( $this->post_type_repo->hasSortOptions($this->post_type->name) ) : ?>
 	<div class="np-tools-primary">
 		<form action="<?php echo admin_url('admin-post.php'); ?>" method="post" class="np-tools-sort">
-			<input type="hidden" name="action" value="npListingSort">
-			<input type="hidden" name="page" value="<?php echo $this->pageURL(); ?>">
-			<input type="hidden" name="post_type" value="<?php echo esc_attr($this->post_type->name); ?>">
 			<?php if ( $this->post_type_repo->sortOptionEnabled($this->post_type->name, 'author') ) : ?>
-			<div class="select first">
+			<div class="select">
 				<select id="np_sortauthor" name="np_author" class="nestedpages-sort">
 					<?php
 						$out = '<option value="all">' . __('All Authors', 'wp-nested-pages') . '</option>';
@@ -77,7 +74,11 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				</select>
 			</div>
 			<?php endif; ?>
-			<?php if ( $this->post_type_repo->sortOptionEnabled($this->post_type->name, 'orderby') ) : ?>
+			<?php 
+			if ( $this->post_type_repo->sortOptionEnabled($this->post_type->name, 'orderby') ) : 
+			$default_order_by = $this->post_type_repo->defaultSortOption($this->post_type->name, 'orderby');
+			if ( isset($_GET['orderby']) ) $default_order_by = false;
+			?>
 			<div class="select">
 				<select id="np_orderby" name="np_orderby" class="nestedpages-sort">
 					<?php
@@ -89,6 +90,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 						$out = '<option value="">' . __('Order By', 'wp-nested-pages') . '</option>';
 						foreach ( $options as $key => $option ){
 							$out .= '<option value="' . $key . '"';
+							if ( $default_order_by && $default_order_by == $key ) $out .= ' selected';
 							if ( isset($_GET['orderby']) && ($_GET['orderby'] == $key) ) $out .= ' selected';
 							$out .= '>' . esc_html($option) . '</option>';
 						}
@@ -97,17 +99,22 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				</select>
 			</div>
 			<?php endif; ?>
-			<?php if ( $this->post_type_repo->sortOptionEnabled($this->post_type->name, 'order') ) : ?>
+			<?php 
+			if ( $this->post_type_repo->sortOptionEnabled($this->post_type->name, 'order') ) : 
+			$default_order = $this->post_type_repo->defaultSortOption($this->post_type->name, 'order');
+			if ( isset($_GET['order']) ) $default_order = false;
+			?>
 			<div class="select">
 				<select id="np_order" name="np_order" class="nestedpages-sort">
 					<?php
-						$options = array(
+						$options = [
 							'ASC' => __('Ascending', 'wp-nested-pages'),
 							'DESC' => __('Descending', 'wp-nested-pages')
-						);
+						];
 						$out = '';
 						foreach ( $options as $key => $option ){
 							$out .= '<option value="' . esc_attr($key) . '"';
+							if ( $default_order && $default_order == $key ) $out .= ' selected';
 							if ( isset($_GET['order']) && ($_GET['order'] == $key) ) $out .= ' selected';
 							$out .= '>' . esc_html($option) . '</option>';
 						}
@@ -137,7 +144,10 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				endforeach;
 			?>
 			<div class="select">
-				<input type="submit" id="nestedpages-sort" class="button" value="Apply">
+				<input type="hidden" name="action" value="npListingSort">
+				<input type="hidden" name="page" value="<?php echo $this->pageURL(); ?>">
+				<input type="hidden" name="post_type" value="<?php echo esc_attr($this->post_type->name); ?>">
+				<input type="submit" id="nestedpages-sort" class="button" value="<?php echo esc_attr__('Apply', 'wp-nested-pages'); ?>">
 			</div>
 		</form>
 	</div>
@@ -147,9 +157,7 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 	<?php if ( $this->post_type->name == 'page' && $this->post_type_repo->categoriesEnabled($this->post_type->name) ) : ?>
 	<div class="np-tools-primary">	
 		<form action="<?php echo admin_url('admin-post.php'); ?>" method="post" class="np-tools-sort">
-			<input type="hidden" name="action" value="npCategoryFilter">
-			<input type="hidden" name="page" value="<?php echo esc_url($this->pageURL()); ?>">
-			<div class="select first">
+			<div class="select">
 				<select id="np_category" name="np_category" class="nestedpages-sort">
 					<?php
 						$tax = get_taxonomy('category');
@@ -165,6 +173,8 @@ if ( $wpml && $current_lang ) $searchLabel .= ' (' . $this->integrations->plugin
 				</select>
 			</div>
 			<div class="select">
+				<input type="hidden" name="action" value="npCategoryFilter">
+				<input type="hidden" name="page" value="<?php echo esc_url($this->pageURL()); ?>">
 				<input type="submit" id="nestedpages-sort" class="button" value="Apply">
 			</div>
 		</form>

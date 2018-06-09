@@ -10,7 +10,7 @@
  */
 
 if ( $external_problem ) : ?>
-	<div class="wphb-gzip-error wphb-notice wphb-notice-error">
+	<div class="sui-notice sui-notice-error">
 		<p><?php esc_html_e( 'Gzip is not working properly:', 'wphb' ); ?></p>
 		<ul>
 			<li>- <?php esc_html_e( 'Your server may not have the "deflate" module enabled (mod_deflate for Apache, ngx_http_gzip_module for NGINX).', 'wphb' ); ?></li>

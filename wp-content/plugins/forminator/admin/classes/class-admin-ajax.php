@@ -61,6 +61,9 @@ class Forminator_Admin_AJAX {
 
 		// Handle search user email
 		add_action( "wp_ajax_forminator_builder_search_emails", array( $this, "search_emails" ) );
+
+		add_action( "wp_ajax_forminator_load_privacy_settings_popup", array( $this, "load_privacy_settings" ) );
+		add_action( "wp_ajax_forminator_save_privacy_settings_popup", array( $this, "save_privacy_settings" ) );
 	}
 
 	/**
@@ -134,6 +137,7 @@ class Forminator_Admin_AJAX {
 	 * Save poll
 	 *
 	 * @since 1.0
+	 * @since 1.0.6 Duplicate privacy override to options
 	 */
 	public function save_poll_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -178,6 +182,26 @@ class Forminator_Admin_AJAX {
 		// Save data
 		$id = $formModel->save();
 
+		// add privacy settings to global option
+		$override_privacy = false;
+		if ( isset( $settings['enable-ip-address-retention'] ) ) {
+			$override_privacy = filter_var( $settings['enable-ip-address-retention'], FILTER_VALIDATE_BOOLEAN );
+		}
+		$retention_number = null;
+		$retention_unit   = null;
+		if ( $override_privacy ) {
+			$retention_number = 0;
+			$retention_unit   = 'days';
+			if ( isset( $settings['ip-address-retention-number'] ) ) {
+				$retention_number = (int) $settings['ip-address-retention-number'];
+			}
+			if ( isset( $settings['ip-address-retention-unit'] ) ) {
+				$retention_unit = $settings['ip-address-retention-unit'];
+			}
+		}
+
+		forminator_update_poll_ip_address_retention( $id, $retention_number, $retention_unit );
+
 		wp_send_json_success( $id );
 	}
 
@@ -185,6 +209,7 @@ class Forminator_Admin_AJAX {
 	 * Save custom form fields & settings
 	 *
 	 * @since 1.0
+	 * @since 1.0.6 Duplicate privacy override to options
 	 */
 	function save_custom_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
@@ -253,6 +278,26 @@ class Forminator_Admin_AJAX {
 
 		// Save data
 		$id = $formModel->save();
+
+		// add privacy settings to global option
+		$override_privacy = false;
+		if ( isset( $settings['enable-submissions-retention'] ) ) {
+			$override_privacy = filter_var( $settings['enable-submissions-retention'], FILTER_VALIDATE_BOOLEAN );
+		}
+		$retention_number = null;
+		$retention_unit   = null;
+		if ( $override_privacy ) {
+			$retention_number = 0;
+			$retention_unit   = 'days';
+			if ( isset( $settings['submissions-retention-number'] ) ) {
+				$retention_number = (int) $settings['submissions-retention-number'];
+			}
+			if ( isset( $settings['submissions-retention-unit'] ) ) {
+				$retention_unit = $settings['submissions-retention-unit'];
+			}
+		}
+
+		forminator_update_form_submissions_retention( $id, $retention_number, $retention_unit );
 
 		wp_send_json_success( $id );
 	}
@@ -667,5 +712,57 @@ class Forminator_Admin_AJAX {
 			}
 		}
 		wp_send_json_success( $data );
+	}
+
+	/**
+	 * Load Privacy Settings
+	 *
+	 * @since 1.0.6
+	 */
+	public function load_privacy_settings() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_popup_privacy_settings" );
+
+		$html = forminator_template( 'settings/popup/edit-privacy-settings' );
+
+		wp_send_json_success( $html );
+	}
+
+	/**
+	 * Save Privacy Settings
+	 *
+	 * @since 1.0.6
+	 */
+	public function save_privacy_settings() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_save_privacy_settings" );
+		$post_data = $_POST;
+
+		// Custom Forms
+		if ( isset( $post_data['erase_form_submissions'] ) ) {
+			$enable_erasure_request_erase_form_submissions = filter_var( $post_data['erase_form_submissions'], FILTER_VALIDATE_BOOLEAN );
+			update_option( 'forminator_enable_erasure_request_erase_form_submissions', $enable_erasure_request_erase_form_submissions );
+		}
+
+		if ( isset( $post_data['submissions_retention_number'] ) ) {
+			$submissions_retention_number = intval( $post_data['submissions_retention_number'] );
+			if ( $submissions_retention_number < 0 ) {
+				$submissions_retention_number = 0;
+			}
+			update_option( 'forminator_retain_submissions_interval_number', $submissions_retention_number );
+		}
+		update_option( 'forminator_retain_submissions_interval_unit', $post_data['submissions_retention_unit'] );
+
+		// Polls
+		if ( isset( $post_data['votes_retention_number'] ) ) {
+			$votes_retention_number = intval( $post_data['votes_retention_number'] );
+			if ( $votes_retention_number < 0 ) {
+				$votes_retention_number = 0;
+			}
+			update_option( 'forminator_retain_votes_interval_number', $votes_retention_number );
+		}
+		update_option( 'forminator_retain_votes_interval_unit', $post_data['votes_retention_unit'] );
+
+		wp_send_json_success();
 	}
 }

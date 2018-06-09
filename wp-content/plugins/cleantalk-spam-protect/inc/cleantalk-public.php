@@ -99,8 +99,8 @@ function apbct_init() {
 
     // Fast Secure contact form
     if(defined('FSCF_VERSION')){
-	add_filter('si_contact_display_after_fields', 'ct_si_contact_display_after_fields');
-	add_filter('si_contact_form_validate', 'ct_si_contact_form_validate');
+		add_filter('si_contact_display_after_fields', 'ct_si_contact_display_after_fields');
+		add_filter('si_contact_form_validate', 'ct_si_contact_form_validate');
     }
 
     // WooCoomerse signups

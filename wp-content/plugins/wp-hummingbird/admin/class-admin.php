@@ -157,7 +157,7 @@ class WP_Hummingbird_Admin {
 			} elseif ( $subsite_page_caching ) {
 				$slug = 'caching';
 			} else {
-				return;
+				$slug = 'advanced';
 			}
 
 			$this->pages['wphb'] = new WP_Hummingbird_Dashboard_Page( "wphb-{$slug}", $hb_title, $hb_title, false, false );
@@ -187,6 +187,8 @@ class WP_Hummingbird_Admin {
 			if ( $subsite_page_caching ) {
 				$this->pages['wphb-caching'] = new WP_Hummingbird_Caching_Page( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), "wphb-{$slug}" );
 			}
+
+			$this->pages['wphb-advanced'] = new WP_Hummingbird_Advanced_Tools_Page( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), "wphb-{$slug}" );
 		} // End if().
 	}
 
@@ -205,6 +207,7 @@ class WP_Hummingbird_Admin {
 		$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), 'wphb' );
 		$this->pages['wphb-caching']     = new WP_Hummingbird_Caching_Page( 'wphb-caching', __( 'Caching', 'wphb' ), __( 'Caching', 'wphb' ), 'wphb' );
 		$this->pages['wphb-gzip']        = new WP_Hummingbird_GZIP_Page( 'wphb-gzip', __( 'Gzip Compression', 'wphb' ), __( 'Gzip Compression', 'wphb' ), 'wphb' );
+		$this->pages['wphb-advanced']    = new WP_Hummingbird_Advanced_Tools_Page( 'wphb-advanced', __( 'Advanced Tools', 'wphb' ), __( 'Advanced Tools', 'wphb' ), 'wphb' );
 		$this->pages['wphb-uptime']      = new WP_Hummingbird_Uptime_Page( 'wphb-uptime', __( 'Uptime', 'wphb' ), __( 'Uptime', 'wphb' ), 'wphb' );
 	}
 

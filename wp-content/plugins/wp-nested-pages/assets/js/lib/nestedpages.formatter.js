@@ -21,11 +21,12 @@ NestedPages.Formatter = function()
 			var row = $(button).parent('.row').parent('li');
 			if ( $(row).children('ol').length > 0 ){ // Row has a child menu
 				
-				var icon = ( $(row).children('ol:visible').length > 0 ) 
-					? NestedPages.cssClasses.iconToggleDown 
-					: NestedPages.cssClasses.iconToggleRight;
-
-				$(button).html('<div class="child-toggle-spacer"></div><a href="#"><i class="' + icon + '"></i></a>');
+				var open = ( $(row).children('ol:visible').length > 0 ) ? true : false;
+				var html = '<div class="child-toggle-spacer"></div>';
+				html += '<a href="#"';
+				if ( open ) html += ' class="open"';
+				html += '><span class="np-icon-arrow"></span></a>';
+				$(button).html(html);
 
 				if ( ($(row).children('ol').children('.np-hide').length > 0) && ($(row).children('ol').children('.np-hide.shown').length === 0) ){
 					$(button).find('a').hide();
@@ -62,7 +63,7 @@ NestedPages.Formatter = function()
 				$(this).find('.row-inner').css('padding-left', padding + 'px');
 				return;
 			}
-			if ( !NestedPages.jsData.sortable ){
+			if ( !NestedPages.jsData.sortable || $(this).hasClass('no-sort') ){
 				$(this).find('.row-inner').css('padding-left', '10px');	
 				return;
 			}

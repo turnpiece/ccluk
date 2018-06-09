@@ -1,6 +1,13 @@
 Changelog
 ===========
 
+### 1.7.4 - May 28, 2018
+
+**Additions**
+
+- Added mailchimp_sync_delete_subscribers filter, will [delete subscribers from the MailChimp list](https://github.com/ibericode/mc4wp-snippets/blob/master/add-ons/user-sync/really-delete-subscribers-from-list.php) if filter returns true (instead of updating their status).
+
+
 ### 1.7.3 - April 30, 2018
 
 **Improvements**

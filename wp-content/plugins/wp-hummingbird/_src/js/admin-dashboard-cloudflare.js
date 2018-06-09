@@ -14,7 +14,7 @@ import Fetcher from './utils/fetcher';
 
             this.renderStep( this.currentStep );
 
-            $('body').on( 'click', '.cloudflare-clear-cache.button', function(e ) {
+            $('body').on( 'click', 'input[type="submit"].cloudflare-clear-cache', function(e ) {
                 e.preventDefault();
                 this.purgeCache.apply( $(e.target), [this] );
             }.bind(this));
@@ -30,12 +30,7 @@ import Fetcher from './utils/fetcher';
             Fetcher.cloudflare.purgeCache()
                 .then( () => {
                     // Show notice
-					const $notice = $('#wphb-notice-cloudflare-purge-cache');
-					window.scrollTo(0, 0);
-					$notice.slideDown();
-					setTimeout(function() {
-						$notice.slideUp();
-					}, 5e3);
+					WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'success', wphbCachingStrings.successCloudflarePurge );
                     // Remove spinner
 					$button.removeAttr( 'disabled' );
 					self.hideSpinner();

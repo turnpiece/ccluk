@@ -71,27 +71,16 @@
 		<?php
 		foreach ( $last_test->rule_result as $rule => $rule_result ) :
 			if ( ! $report_dismissed ) :
-				switch ( $rule_result->impact_score_class ) {
-					case 'aplus':
-					case 'a':
-					case 'b':
-						$impact_score_class = 'success';
-						$impact_icon_class = 'check-tick';
-						break;
-					case 'c':
-					case 'd':
-						$impact_score_class = 'warning';
-						$impact_icon_class = 'warning-alert';
-						break;
-					case 'e':
-					case 'f':
-						$impact_score_class = 'error';
-						$impact_icon_class = 'warning-alert';
-						break;
-					default:
-						$impact_score_class = 'dismissed';
-						$impact_icon_class = 'warning-alert';
-				}
+				if ( 85 <= $rule_result->impact_score ) :
+					$impact_score_class = 'success';
+					$impact_icon_class = 'check-tick';
+				elseif ( 65 <= $rule_result->impact_score ) :
+					$impact_score_class = 'warning';
+					$impact_icon_class = 'warning-alert';
+				else :
+					$impact_score_class = 'error';
+					$impact_icon_class = 'warning-alert';
+				endif;
 			endif;
 			$colspan = '';
 			if ( $is_subsite && 'server' === $rule_result->type ) :
@@ -105,7 +94,7 @@
 					<i class="sui-icon-<?php echo esc_attr( $impact_icon_class ); ?> sui-<?php echo esc_attr( $impact_score_class ); ?>"></i> <?php echo esc_html( $rule_result->label ); ?>
 				</td>
 				<td>
-					<div class="sui-circle-score sui-grade-<?php echo esc_attr( $rule_result->impact_score_class ); ?> sui-tooltip"
+					<div class="sui-circle-score sui-grade-<?php echo esc_attr( $impact_score_class ); ?> sui-tooltip"
 						 data-tooltip="<?php echo esc_html( $rule_result->impact_score ); ?>/100" data-score="<?php echo esc_attr( $rule_result->impact_score ); ?>"></div>
 				</td>
 				<td class="sui-hidden-xs sui-hidden-sm wphb-performance-report-item-type <?php echo esc_attr( $impact_score_class ); ?>" <?php echo esc_attr( $colspan ); ?>>
@@ -126,7 +115,7 @@
 					<td class="sui-hidden-xs sui-hidden-sm sui-hidden-md">
 						<span class="sui-accordion-open-indicator">
 							<?php if ( ! empty( $rule_result->summary ) || ! empty( $rule_result->tip ) ) : ?>
-								<?php if ( 100 !== $rule_result->impact_score && ( ! $is_subsite && 'server' !== $rule_result->type ) && ! $report_dismissed ) : ?>
+								<?php if ( $rule_result->impact_score < 85 && ( ! $is_subsite && 'server' !== $rule_result->type ) && ! $report_dismissed ) : ?>
 									<a class="sui-button sui-button-ghost"><?php esc_html_e( 'Improve', 'wphb' ); ?></a>
 								<?php endif; ?>
 							<i class="sui-icon-chevron-down"></i>

@@ -54,6 +54,7 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 					Forminator_Form_Entry_Model::delete_by_form( $id );
 					$form_view 	= Forminator_Form_Views_Model::get_instance();
 					$form_view->delete_by_form( $id );
+					forminator_update_form_submissions_retention( $id, null, null );
 				}
 				break;
 			case 'clone':
@@ -71,7 +72,8 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 					}
 
 					//save it to create new record
-					$model->save( true );
+					$new_id = $model->save( true );
+					forminator_clone_form_submissions_retention($id, $new_id);
 				}
 				break;
 
@@ -119,6 +121,7 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 								wp_delete_post( $id );
 								Forminator_Form_Entry_Model::delete_by_form( $id );
 								$form_view->delete_by_form( $id );
+								forminator_update_form_submissions_retention( $id, null, null );
 							}
 						}
 					}

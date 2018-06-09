@@ -63,19 +63,6 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			)
 		);
 
-		$this->add_meta_box(
-			'advanced/db-settings',
-			__( 'Settings', 'wphb' ),
-			array( $this, 'db_settings_metabox' ),
-			null,
-			null,
-			'db',
-			array(
-				'box_content_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
-				'box_footer_class'   => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
-			)
-		);
-
 		/**
 		 * System information meta box.
 		 */
@@ -86,6 +73,23 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 			null,
 			null,
 			'system'
+		);
+
+		if ( is_multisite() && ! is_network_admin() ) {
+			return;
+		}
+
+		$this->add_meta_box(
+			'advanced/db-settings',
+			__( 'Settings', 'wphb' ),
+			array( $this, 'db_settings_metabox' ),
+			null,
+			null,
+			'db',
+			array(
+				'box_content_class' => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
+				'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
+			)
 		);
 	}
 
@@ -150,11 +154,10 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		));
 	}
 
-	/**********************
-	 *
+	/**
+	 * *************************
 	 * System Information page meta boxes.
-	 *
-	 *********************/
+	 ***************************/
 
 	/**
 	 * System Information meta box.

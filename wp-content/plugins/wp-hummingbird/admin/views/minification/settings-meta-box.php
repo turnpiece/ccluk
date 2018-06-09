@@ -1,8 +1,38 @@
 <?php
-/* @var WP_Hummingbird_Module_Minify $minify */
-$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+/**
+ * Asset optimization settings meta box.
+ *
+ * @package Hummingbird
+ *
+ * @var bool   $cdn_status  CDN status.
+ * @var string $file_path   Path to store files.
+ * @var bool   $is_member   Member status.
+ * @var bool   $logging     Logging status.
+ */
+
 ?>
-<div class="sui-box-settings-row <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? ' sui-disabled' : ''; ?>">
+
+<?php if ( ! $cdn_status ) : ?>
+<div class="sui-box-settings-row">
+	<div class="sui-box-settings-col-1">
+		<span class="sui-settings-label"><?php esc_html_e( 'File Location', 'wphb' ); ?></span>
+		<span class="sui-description">
+			<?php esc_html_e( 'Choose where Hummingbird should store your modified assets.', 'wphb' ); ?>
+		</span>
+	</div>
+	<div class="sui-box-settings-col-2">
+		<label for="file_path">
+			<input type="text" class="sui-form-control" name="file_path" id="file_path" placeholder="/wp-content/uploads/hummingbird-assets/" value="<?php echo esc_attr( $file_path ); ?>">
+		</label>
+		<span class="sui-description">
+			<?php esc_html_e( 'Leave this blank to use the default folder, or define your own as a relative path.
+			Note: changing the directory will clear out al the generated assets.', 'wphb' ); ?>
+		</span>
+	</div>
+</div>
+<?php endif; ?>
+
+<div class="sui-box-settings-row <?php echo ( ! $is_member ) ? ' sui-disabled' : ''; ?>">
 	<div class="sui-box-settings-col-1">
 		<span class="sui-settings-label"><?php esc_html_e( 'Super-compress my files', 'wphb' ); ?></span>
 		<span class="sui-description">
@@ -10,7 +40,7 @@ $minify = WP_Hummingbird_Utils::get_module( 'minify' );
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">
-		<?php if ( WP_Hummingbird_Utils::is_member() ) : ?>
+		<?php if ( $is_member ) : ?>
 			<span class="sui-tag sui-tag-disabled"><?php esc_html_e( 'Auto-enabled', 'wphb' ); ?></span>
 		<?php else : ?>
 			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable Super-minify my files', 'wphb' ); ?>">
@@ -23,7 +53,7 @@ $minify = WP_Hummingbird_Utils::get_module( 'minify' );
 </div>
 
 <?php if ( ! is_multisite() ) : ?>
-	<div class="sui-box-settings-row <?php echo ( ! WP_Hummingbird_Utils::is_member() ) ? ' sui-disabled' : ''; ?>">
+	<div class="sui-box-settings-row <?php echo ( ! $is_member ) ? ' sui-disabled' : ''; ?>">
 		<div class="sui-box-settings-col-1">
 			<span class="sui-settings-label"><?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?></span>
 			<span class="sui-description">
@@ -32,18 +62,44 @@ $minify = WP_Hummingbird_Utils::get_module( 'minify' );
 		</div>
 		<div class="sui-box-settings-col-2">
 			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable WPMU DEV CDN', 'wphb' ); ?>">
-				<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $minify->get_cdn_status() && WP_Hummingbird_Utils::is_member() ); ?> <?php disabled( ! WP_Hummingbird_Utils::is_member() ); ?>>
+				<input type="checkbox" name="use_cdn" id="use_cdn" <?php checked( $cdn_status && $is_member ); ?> <?php disabled( ! $is_member ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="use_cdn"><?php esc_html_e( 'Host my files on the WPMU DEV CDN', 'wphb' ); ?></label>
 			<span class="sui-description sui-toggle-description">
-				<?php esc_html_e( 'Enabling this setting will serve your CSS, JS and other compatible files from our external CDN, effectively taking the load off your server so that pages load faster for your visitors.', 'wphb' ); ?>
+				<?php esc_html_e( 'Enabling this setting will serve your CSS, JS and other compatible files from
+				our external CDN, effectively taking the load off your server so that pages load faster for
+				your visitors.', 'wphb' ); ?>
 			</span>
 		</div>
 	</div>
 <?php endif; ?>
 
-<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
+<?php if ( $cdn_status ) : ?>
+	<div class="sui-box-settings-row">
+		<div class="sui-box-settings-col-1">
+			<span class="sui-settings-label"><?php esc_html_e( 'File Location', 'wphb' ); ?></span>
+			<span class="sui-description">
+			<?php esc_html_e( 'Choose where Hummingbird should store your modified assets.', 'wphb' ); ?>
+		</span>
+		</div>
+		<div class="sui-box-settings-col-2">
+			<div class="sui-notice sui-notice-warning">
+				<p>
+					<?php esc_html_e( 'This feature is inactive when you’re using the WPMU DEV CDN.', 'wphb' ); ?>
+				</p>
+			</div>
+			<label for="file_path">
+				<input type="text" class="sui-form-control" name="file_path" id="file_path" placeholder="/wp-content/uploads/hummingbird-assets/" disabled>
+			</label>
+			<span class="sui-description">
+			<?php esc_html_e( 'Leave this blank to use the default folder, or define your own as a relative path.', 'wphb' ); ?>
+		</span>
+		</div>
+	</div>
+<?php endif; ?>
+
+<?php if ( ! $is_member ) : ?>
 	<div class="sui-box-settings-row">
 		<div class="content-box content-box-two-cols-image-left">
 			<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
@@ -66,7 +122,6 @@ $minify = WP_Hummingbird_Utils::get_module( 'minify' );
 <?php
 endif;
 
-$options = $minify->get_options();
 if ( ! is_multisite() ) :
 ?>
 	<div class="sui-box-settings-row">
@@ -78,7 +133,7 @@ if ( ! is_multisite() ) :
 		</div>
 		<div class="sui-box-settings-col-2">
 			<label class="sui-toggle sui-tooltip sui-tooltip-top-left" data-tooltip="<?php esc_html_e( 'Enable debug log', 'wphb' ); ?>">
-				<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $options['log'] ); ?>>
+				<input type="checkbox" name="debug_log" id="debug_log" <?php checked( $logging ); ?>>
 				<span class="sui-toggle-slider"></span>
 			</label>
 			<label for="debug_log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-27 07:08:20+0000\n"
+"PO-Revision-Date: 2018-06-04 04:25:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,10 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: zh_TW\n"
 "Project-Id-Version: Plugins - Akismet Anti-Spam - Stable (latest release)\n"
+
+#: views/notice.php:138
+msgid "To help your site be compliant with GDPR and other laws requiring notification of tracking, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, if you or your audience is located in Europe, you need to turn it on."
+msgstr "為了協助這個網站符合 GDPR 及其他須要進行追蹤使用者通知的法律，Akismet 可以在網站的留言表單上向網站訪客顯示相關通知。這項功能預設為停用，但是如果這個網站的主機位於歐洲、或這個網站有來自歐洲的訪客，就必須啟用這項功能。"
 
 #: views/notice.php:139
 msgid " Please <a href=\"%s\">enable</a> or <a href=\"%s\">disable</a> this feature. <a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">More information</a>."
@@ -19,9 +23,9 @@ msgstr "請<a href=\"%s\">啟用</a>或<a href=\"%s\">停用</a>這項功能。<
 msgid "Akismet & Privacy."
 msgstr "Akismet 及隱私權"
 
-#: views/config.php:162 views/notice.php:138
+#: views/config.php:162
 msgid "To help your site be compliant with GDPR and other laws requiring notification of tracking, Akismet can display a notice to your users on your contact form. This feature is disabled by default, however, if you or your audience is located in Europe, you need to turn it on."
-msgstr "為了協助這個網站符合 GDPR 及其他須要進行追蹤使用者通知的法律，Akismet 可以在網站的聯絡表單上向網站訪客顯示相關通知。這項功能預設為停用，但是如果這個網站的主機位於歐洲、或有來自歐洲的網站訪客，就必須啟用這項功能。"
+msgstr "為了協助這個網站符合 GDPR 及其他須要進行追蹤使用者通知的法律，Akismet 可以在網站的留言表單上向網站訪客顯示相關通知。這項功能預設為停用，但是如果這個網站的主機位於歐洲、或這個網站有來自歐洲的訪客，就必須啟用這項功能。"
 
 #: views/config.php:160
 msgid "Do not display privacy notice."
@@ -40,8 +44,8 @@ msgid "Privacy"
 msgstr "隱私權"
 
 #: class.akismet.php:1419
-msgid "This site uses Akismet to reduce spam. <a href=\"%s\">Learn how your comment data is processed</a>."
-msgstr "這個網站採用 Akismet 服務減少垃圾留言。<a href=\"%s\" target=\"_blank\">進一步瞭解我們如何處理網站訪客的留言資料</a>。"
+msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\">Learn how your comment data is processed</a>."
+msgstr "這個網站採用 Akismet 服務減少垃圾留言。<a href=\"%s\" target=\"_blank\">進一步瞭解 Akismet 如何處理網站訪客的留言資料</a>。"
 
 #: class.akismet-admin.php:86
 msgid "We collect information about visitors who comment on Sites that use our Akismet anti-spam service. The information we collect depends on how the User sets up Akismet for the Site, but typically includes the commenter's IP address, user agent, referrer, and Site URL (along with other information directly provided by the commenter such as their name, username, email address, and the comment itself)."
@@ -103,7 +107,7 @@ msgstr "你可以在本頁中為 Akismet 外掛變更設定並查看垃圾留言
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "數以百萬的使用者採用 Akismet，它是<strong>保護網站遠離垃圾留言</strong>的絕佳方式，也為你的網站提供不間斷的保護。使用方式很簡單，啟用 Akismet 外掛後到 Akismet 設定頁，輸入 Akismet 的 API 金鑰後儲存變更。"
 
-#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.6)  #-#-#-#-#
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.7)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:111 class.akismet-admin.php:114
 msgid "Akismet Anti-Spam"
@@ -173,11 +177,11 @@ msgstr "詳細統計資料"
 msgid "Statistics"
 msgstr "統計資料"
 
-#: class.akismet-admin.php:1164
+#: class.akismet-admin.php:1167
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started, just go to <a href=\"admin.php?page=akismet-key-config\">your Akismet Settings page</a> to set up your API key."
 msgstr "數以百萬的使用者採用 Akismet，它是<strong>保護網站遠離垃圾留言</strong>的絕佳方式，也為這個網站提供不間斷的保護。使用方式很簡單，僅需至 <a href=\"admin.php?page=akismet-key-config\">[Akismet 設定] 頁</a>中設定 API 金鑰。"
 
-#: class.akismet-admin.php:1161
+#: class.akismet-admin.php:1164
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. Your site is fully configured and being protected, even while you sleep."
 msgstr "數以百萬的使用者採用 Akismet，它是<strong>保護網站遠離垃圾留言</strong>的絕佳方式，這個網站已完成完整設定並由 Akismet 提供不間斷的保護。"
 
@@ -278,7 +282,7 @@ msgstr "已取消你的 Akismet 方案。"
 
 #: views/notice.php:55
 msgid "We cannot process your payment. Please <a href=\"%s\" target=\"_blank\">update your payment details</a>."
-msgstr "我們無法處理你的付款。請<a href=\"%s\" target=\"_blank\">更新你的付款資訊</a>。"
+msgstr "Akismet 無法處理你的付款。請<a href=\"%s\" target=\"_blank\">更新你的付款資訊</a>。"
 
 #: views/notice.php:54
 msgid "Please update your payment information."
@@ -330,7 +334,7 @@ msgstr "你的 API 金鑰已失效。請輸入新的金鑰或聯絡 support@akis
 
 #: views/notice.php:83 views/notice.php:124 views/notice.php:131
 msgid "Please <a href=\"%s\" target=\"_blank\">contact our support team</a> with any questions."
-msgstr "如有任何問題，請<a href=\"%s\" target=\"_blank\">聯絡我們的支援團隊</a>。"
+msgstr "如有任何問題，請<a href=\"%s\" target=\"_blank\">聯絡 Akismet 的支援團隊</a>。"
 
 #: views/notice.php:81
 msgid "In 2012, Akismet began using subscription plans for all accounts (even free ones). A plan has not been assigned to your account, and we&#8217;d appreciate it if you&#8217;d <a href=\"%s\" target=\"_blank\">sign into your account</a> and choose one."
@@ -796,7 +800,7 @@ msgstr "請向 <a href=\"%s\" target=\"_blank\">Akismet 支援團隊</a>尋求�
 
 #: views/notice.php:70
 msgid "You can help us fight spam and upgrade your account by <a href=\"%s\" target=\"_blank\">contributing a token amount</a>."
-msgstr "只要<a href=\"%s\" target=\"_blank\">支付一筆象徵性的款項</a>，就能協助我們打擊垃圾留言，並將你的帳號予以升級。"
+msgstr "只要<a href=\"%s\" target=\"_blank\">支付一筆象徵性的款項</a>，就能協助 Akismet 打擊垃圾留言，並將你的帳號予以升級。"
 
 #: views/notice.php:74
 msgid "There is a problem with your API key."
@@ -832,7 +836,7 @@ msgstr "已暫停 %s 的約期授權。"
 
 #: views/start.php:49
 msgid "No worries! Get in touch and we&#8217;ll sort this out."
-msgstr "別擔心！請聯繫我們，讓我們將此予以排除。"
+msgstr "別擔心！請聯繫 Akismet，讓我們將此予以排除。"
 
 #: views/start.php:50
 msgid "Contact Akismet support"
