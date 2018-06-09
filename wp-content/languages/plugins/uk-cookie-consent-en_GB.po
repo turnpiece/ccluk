@@ -1,0 +1,145 @@
+# Translation of Stable (latest release) in English (UK)
+# This file is distributed under the same license as the Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-12-02 21:16:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Stable (latest release)\n"
+
+#: uk-cookie-consent.php:148
+msgid "Bar colour"
+msgstr "Bar colour"
+
+#: uk-cookie-consent.php:149
+msgid "Button colour"
+msgstr "Button colour"
+
+#: uk-cookie-consent.php:147
+msgid "Link colour"
+msgstr "Link colour"
+
+#: uk-cookie-consent.php:146
+msgid "Text colour"
+msgstr "Text colour"
+
+#: uk-cookie-consent.php:182
+msgid "More info"
+msgstr "More info"
+
+#: uk-cookie-consent.php:17
+msgid "Cookie Consent"
+msgstr "Cookie Consent"
+
+#. #-#-#-#-#  tmp-uk-cookie-consent.pot (UK Cookie Consent 1.8.2)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: uk-cookie-consent.php:23
+msgid "UK Cookie Consent"
+msgstr "UK Cookie Consent"
+
+#: uk-cookie-consent.php:60
+msgid "Information Commissioner's Office Guidance on Cookies"
+msgstr "Information Commissioner's Office Guidance on Cookies"
+
+#: uk-cookie-consent.php:62
+msgid "Our interpretation of the guidance"
+msgstr "Our interpretation of the guidance"
+
+#: uk-cookie-consent.php:95
+msgid "Your settings"
+msgstr "Your settings"
+
+#: uk-cookie-consent.php:106
+msgid "Your Cookies Policy page is <a href=\"%s\">here</a>. You may wish to create a menu item or other link on your site to this page."
+msgstr "Your Cookies Policy page is <a href=\"%s\">here</a>. You may wish to create a menu item or other link on your site to this page."
+
+#: uk-cookie-consent.php:124
+msgid "Cookie Policy"
+msgstr "Cookie Policy"
+
+#: uk-cookie-consent.php:129
+msgid "This site uses cookies - small text files that are placed on your machine to help the site provide a better user experience. In general, cookies are used to retain user preferences, store information for things like shopping carts, and provide anonymised tracking data to third party applications like Google Analytics. As a rule, cookies will make your browsing experience better. However, you may prefer to disable cookies on this site and on others. The most effective way to do this is to disable cookies in your browser. We suggest consulting the Help section of your browser or taking a look at <a href=\"http://www.aboutcookies.org\">the About Cookies website</a> which offers guidance for all modern browsers"
+msgstr "This site uses cookies - small text files that are placed on your machine to help the site provide a better user experience. In general, cookies are used to retain user preferences, store information for things like shopping baskets, and provide anonymised tracking data to third party applications like Google Analytics. As a rule, cookies will make your browsing experience better. However, you may prefer to disable cookies on this site and on others. The most effective way to do this is to disable cookies in your browser. We suggest consulting the Help section of your browser or taking a look at <a href=\"http://www.aboutcookies.org\">the About Cookies website</a> which offers guidance for all modern browsers"
+
+#: uk-cookie-consent.php:142
+msgid "Notification text"
+msgstr "Notification text"
+
+#: uk-cookie-consent.php:143
+msgid "Accept text"
+msgstr "Accept text"
+
+#: uk-cookie-consent.php:144
+msgid "More info text"
+msgstr "\"More info\" text"
+
+#: uk-cookie-consent.php:145
+msgid "Info page permalink"
+msgstr "Info page permalink"
+
+#: uk-cookie-consent.php:150
+msgid "Notification position"
+msgstr "Notification position"
+
+#: uk-cookie-consent.php:154
+msgid "You can just use these settings as they are or update the text as you wish. We recommend keeping it brief."
+msgstr "You can use these settings as they are or update the text as you wish. We recommend keeping it brief."
+
+#: uk-cookie-consent.php:155
+msgid "The plug-in automatically creates a page called \"Cookie Policy\" and sets the default More Info link to yoursitename.com/cookie-policy."
+msgstr "The plug-in automatically creates a page called \"Cookie Policy\" and sets the default \"More Info\" link to \"yoursitename.com/cookie-policy\"."
+
+#: uk-cookie-consent.php:156
+msgid "If you find the page hasn't been created, hit the Save Changes button on this page."
+msgstr "If you find the page hasn't been created, hit the \"Save Changes\" button on this page."
+
+#: uk-cookie-consent.php:157
+msgid "If you would like to change the permalink, just update the Info page permalink setting, e.g. enter \"?page_id=4\" if you are using the default permalink settings (and 4 is the id of your new Cookie Policy page)."
+msgstr "If you would like to change the permalink, just update the Info page permalink setting, e.g. enter \"?page_id=4\" if you are using the default permalink settings (and 4 is the ID of your new Cookie Policy page)."
+
+#: uk-cookie-consent.php:158
+msgid "For any support queries, please post on the <a href=\"%s\">WordPress forum</a>."
+msgstr "For any support queries, please post on the <a href=\"%s\">WordPress forum</a>."
+
+#: uk-cookie-consent.php:159
+msgid "And if this plug-in has been helpful to you, then <a href=\"%s\">please rate it</a>."
+msgstr "If this plug-in has been helpful to you, then <a href=\"%s\">please rate it</a>."
+
+#: uk-cookie-consent.php:166 uk-cookie-consent.php:353
+msgid "This site uses cookies"
+msgstr "This site uses cookies"
+
+#: uk-cookie-consent.php:174
+msgid "No problem"
+msgstr "No problem"
+
+#: uk-cookie-consent.php:190
+msgid "cookie-policy"
+msgstr "cookie-policy"
+
+#: uk-cookie-consent.php:358
+msgid "Okay, thanks"
+msgstr "Okay, thank you"
+
+#: uk-cookie-consent.php:363
+msgid "Find out more"
+msgstr "Find out more"
+
+#. Plugin URI of the plugin/theme
+msgid "http://catapultdesign.co.uk/plugin/uk-cookie-consent/"
+msgstr "http://catapultdesign.co.uk/plugin/uk-cookie-consent/"
+
+#. Author URI of the plugin/theme
+msgid "http://catapultdesign.co.uk/"
+msgstr "http://catapultdesign.co.uk/"
+
+#. Author of the plugin/theme
+msgid "Catapult"
+msgstr "Catapult"
+
+#. Description of the plugin/theme
+msgid "Simple plug-in to help compliance with the UK interpretation of the EU regulations regarding usage of website cookies. A user to your site is presented with a clear yet unobtrusive notification that the site is using cookies and may then acknowledge and dismiss the notification or click to find out more. The plug-in does not disable cookies on your site or prevent the user from continuing to browse the site - it comes with standard wording on what cookies are and advice on how to disable them in the browser. The plug-in follows the notion of \"implied consent\" as described by the UK's Information Commissioner and makes the assumption that most users who choose not to accept cookies will do so for all websites."
+msgstr "Simple plug-in to help compliance with the UK interpretation of the EU regulations regarding usage of website cookies. A user to your site is presented with a clear yet unobtrusive notification that the site is using cookies and may then acknowledge and dismiss the notification or click to find out more. The plug-in does not disable cookies on your site or prevent the user from continuing to browse the site - it comes with standard wording about what cookies are and advice on how to disable them in the browser. The plug-in follows the notion of \"implied consent\" as described by the UK's Information Commissioner and makes the assumption that most users who choose not to accept cookies will do so for all websites."

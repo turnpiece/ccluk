@@ -1,0 +1,533 @@
+# Translation of Plugins - Cookie Consent - Stable (latest release) in Danish
+# This file is distributed under the same license as the Plugins - Cookie Consent - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-06-14 17:56:07+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: da_DK\n"
+"Project-Id-Version: Plugins - Cookie Consent - Stable (latest release)\n"
+
+#: tracking/class-plugin-usage-tracker.php:820
+msgid "Just Deactivate"
+msgstr "Deaktiver"
+
+#: tracking/class-plugin-usage-tracker.php:820
+msgid "Submit and Deactivate"
+msgstr "Tilmeld og deaktiver"
+
+#: tracking/class-plugin-usage-tracker.php:250
+msgid "We can't detect any plugin information. This is most probably because you have not included the code in the plugin main file."
+msgstr "Vi kan ikke finde nogen information om dit plugin. Dette er sandsynligvis fordi du ikke har indsat koden i hoved filen for dit plugin"
+
+#: admin/class-ctcc-admin.php:729 admin/class-ctcc-admin.php:734
+#: admin/class-ctcc-admin.php:739 admin/class-ctcc-admin.php:744
+msgid "Create your own privacy policy here"
+msgstr "Opret din egen privatlivspolitik her"
+
+#: tracking/class-plugin-usage-tracker.php:622
+msgid "Thank you for installing our plugin. We would like to track its usage on your site. We don't record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional."
+msgstr "Tak fordi du valgte vores plugin. Vi vil gerne spore brugen af dette plugin på din side samt abonnere på vores nyhedsbrev. Vi gemmer ikke nogen følsomme data. kun information om WordPress miljøet og indstillinger for diverse plugins. Disse informationer bruger vi udelukkende til at forbedre vores plugin. Sporing af brugen af dette plugin er frivillig."
+
+#: tracking/class-plugin-usage-tracker.php:625
+msgid "Thank you for installing our plugin. We'd like your permission to track its usage on your site and subscribe you to our newsletter. We won't record any sensitive data, only information regarding the WordPress environment and plugin settings, which we will use to help us make improvements to the plugin. Tracking is completely optional."
+msgstr "Tak fordi du valgte vores plugin. Vi vil gerne bede om din tilladelse til at spore brugen af dette plugin på din side samt abonnere på vores nyhedsbrev. Vi gemmer ikke nogen følsomme data. kun information om WordPress miljøet og indstillinger for diverse plugins. Disse informationer bruger vi udelukkende til at forbedre vores plugin. Sporing af brugen af dette plugin er frivillig."
+
+#: tracking/class-plugin-usage-tracker.php:635
+msgid "Do Not Allow"
+msgstr "Tillad ikke"
+
+#: tracking/class-plugin-usage-tracker.php:634
+msgid "Allow"
+msgstr "Tillad"
+
+#: tracking/class-plugin-usage-tracker.php:671
+msgid "Thank you for opting in to tracking. Would you like to receive occasional news about this plugin, including details of new features and special offers?"
+msgstr "Tak fordi du valgte sporing. Vil du gerne modtage nyheder om dette plugin med nyt om nye funktioner og specielle tilbud?"
+
+#: tracking/class-plugin-usage-tracker.php:678
+msgid "Yes Please"
+msgstr "Ja Tak"
+
+#: tracking/class-plugin-usage-tracker.php:679
+msgid "No Thank You"
+msgstr "Nej Tak"
+
+#: tracking/class-plugin-usage-tracker.php:710
+msgid "Sorry to see you go"
+msgstr "Vi er kede af at se du forlader os"
+
+#: tracking/class-plugin-usage-tracker.php:711
+msgid "Before you deactivate the plugin, would you quickly give us your reason for doing so?"
+msgstr "Før du deaktiverer dette plugin, vil du supplere med oplysninger om hvorfor?"
+
+#: tracking/class-plugin-usage-tracker.php:713
+msgid "Set up is too difficult"
+msgstr "For vanskeligt at sætte op"
+
+#: tracking/class-plugin-usage-tracker.php:714
+msgid "Lack of documentation"
+msgstr "Mangel på dokumentation"
+
+#: tracking/class-plugin-usage-tracker.php:716
+msgid "Found a better plugin"
+msgstr "Fandt et bedre plugin"
+
+#: tracking/class-plugin-usage-tracker.php:715
+msgid "Not the features I wanted"
+msgstr "Havde ikke de egenskaber jeg søgte"
+
+#: tracking/class-plugin-usage-tracker.php:717
+msgid "Installed by mistake"
+msgstr "Installeret ved en fejl"
+
+#: tracking/class-plugin-usage-tracker.php:718
+msgid "Only required temporarily"
+msgstr "Jeg havde kun brug for det midlertidigt"
+
+#: tracking/class-plugin-usage-tracker.php:719
+msgid "Didn't work"
+msgstr "Det virkede ikke"
+
+#: tracking/class-plugin-usage-tracker.php:721
+msgid "Details (optional)"
+msgstr "Detaljer (valgfrit)"
+
+#: tracking/class-plugin-usage-tracker.php:760
+msgid "Submitting form"
+msgstr "Tilmeldingsformular"
+
+#: admin/class-ctcc-admin.php:514
+msgid "If you have the <a href=\"https://wordpress.org/plugins/geoip-detect/\" target=\"_blank\">GeoIP Detect</a> plugin activated, you can specify which areas of the world to exclude from displaying the notification."
+msgstr "Hvis du har <a href=\"https://wordpress.org/plugins/geoip-detect/\" target=\"_blank\">GeoIP Detect</a> plugin aktiveret, kan du specificere hvilke områder/lande hvor du ønsker at ekskludere visningen af notifikationen."
+
+#: admin/class-ctcc-admin.php:512
+msgid "South America"
+msgstr "Sydamerika"
+
+#: admin/class-ctcc-admin.php:511
+msgid "Oceania"
+msgstr "Oceanien"
+
+#: admin/class-ctcc-admin.php:510
+msgid "North America"
+msgstr "Nordamerika"
+
+#: admin/class-ctcc-admin.php:509
+msgid "Europe"
+msgstr "Europa"
+
+#: admin/class-ctcc-admin.php:508
+msgid "Asia"
+msgstr "Asien"
+
+#: admin/class-ctcc-admin.php:507
+msgid "Antarctica"
+msgstr "Antarktisk"
+
+#: admin/class-ctcc-admin.php:506
+msgid "Africa"
+msgstr "Africa"
+
+#: admin/class-ctcc-admin.php:108
+msgid "Exclude Zones"
+msgstr "Ekskluder områder"
+
+#: admin/class-ctcc-metafield.php:44
+msgid "Exclude from cookie notice"
+msgstr "Ekskluder fra cookie besked"
+
+#: admin/class-ctcc-admin.php:743
+msgid "Use this section to set exclusion rules for pages and posts."
+msgstr "Brug denne sektion til at sætte regler for ekskluderinger for sider og blogindlæg."
+
+#: admin/class-ctcc-admin.php:728
+msgid "Basic settings"
+msgstr "Basis indstillinger"
+
+#: admin/class-ctcc-admin.php:723
+msgid "Select this to enable a metafield on pages and posts. Checking the metafield on a page or post will exclude that page from displaying the notification."
+msgstr "Vælg dette for at aktivere et metafelt på sider og blogpost. Ved at checke metafelt på en side eller blogindlæg, vil denne side ikke vise cookie notifikationen"
+
+#: admin/class-ctcc-admin.php:521
+msgid "If you chose Scroll as the close method, enter the distance in pixels the user should scroll before the notification closes"
+msgstr "Hvis du vælger Scroll som lukkemetode, indtast hvor mange pixels brugeren skal scrolle for notifikationen lukker"
+
+#: admin/class-ctcc-admin.php:484
+msgid "On Scroll"
+msgstr "Ved Scroll"
+
+#: admin/class-ctcc-admin.php:124
+msgid "Scroll Height"
+msgstr "Scroll højde"
+
+#: admin/class-ctcc-admin.php:100
+msgid "Selectively Exclude Pages"
+msgstr "Vælg sider at eksludere"
+
+#: public/customizer.php:235
+msgid "Deselect to inherit button styles from the theme."
+msgstr "Fravælg for at benytte knapper fra dit eget tema"
+
+#: admin/class-ctcc-admin.php:716
+msgid "Remove the border from the button"
+msgstr "Fjern kant fra knappen"
+
+#: admin/class-ctcc-admin.php:374 public/customizer.php:234
+msgid "Flat Button"
+msgstr "Flad knap"
+
+#: public/customizer.php:123
+msgid "Deselect to float button to right."
+msgstr "Fravælg for at lade knappen flyde i højre side"
+
+#: admin/class-ctcc-admin.php:667
+msgid "Display the confirmation button with notification text"
+msgstr "Vis knappen til bekræftelse sammen med notifikations teksten "
+
+#: admin/class-ctcc-admin.php:310 public/customizer.php:122
+msgid "Display Button With Text"
+msgstr "Vis knap med tekst"
+
+#: admin/class-ctcc-admin.php:785
+msgid "Reset plugin defaults"
+msgstr "Nulstil plugin til standardindstillinger"
+
+#. Author URI of the plugin/theme
+msgid "http://catapultthemes.com/"
+msgstr "http://catapultthemes.com/"
+
+#. Author of the plugin/theme
+msgid "Catapult_Themes"
+msgstr "Catapult_Themes"
+
+#. Description of the plugin/theme
+msgid "The only cookie consent plugin you'll ever need."
+msgstr "Det eneste plugin til cookie samtykke du nogensinde vil få brug for."
+
+#. Plugin URI of the plugin/theme
+msgid "http://catapultthemes.com/cookie-consent/"
+msgstr "http://catapultthemes.com/cookie-consent/"
+
+#: public/customizer.php:219
+msgid "Background color for your notification bar button."
+msgstr "Baggrundsfarve til din notifikationsbar-knap"
+
+#: public/customizer.php:203
+msgid "Text color for your notification bar button."
+msgstr "Tekstfarve til din knap"
+
+#: public/customizer.php:187
+msgid "Link color for your notification bar."
+msgstr "Link Farve til din notifikationsbar "
+
+#: public/customizer.php:171
+msgid "Background color for your notification bar."
+msgstr "Baggrundsfarve til din notifikationsbar"
+
+#: public/customizer.php:155
+msgid "Text color for your notification bar."
+msgstr "Tekstfarve til din notifikationsbar"
+
+#: public/customizer.php:139
+msgid "Replace confirmation button with 'X' icon."
+msgstr "Udskift bekræftelses knappen med 'X' ikonet."
+
+#: public/customizer.php:107
+msgid "Add drop shadow to the block."
+msgstr "Tilføj skygge til blokken"
+
+#: public/customizer.php:91
+msgid "Round the corners on the block."
+msgstr "Runde hjørner på blokken"
+
+#: public/customizer.php:43
+msgid "Position and placement."
+msgstr "Position og placering"
+
+#: admin/class-ctcc-admin.php:763
+msgid "Styles"
+msgstr "Stilearter"
+
+#: admin/class-ctcc-admin.php:762
+msgid "Content"
+msgstr "Indhold"
+
+#: admin/class-ctcc-admin.php:761
+msgid "General"
+msgstr "Generelt"
+
+#: admin/class-ctcc-admin.php:738
+msgid "Change the styles here if you like - but it's better in the Customizer"
+msgstr "Du kan ændre stilarter her hvis du ønsker - men det er bedre at gøre det i tilpasningsværktøjet"
+
+#: admin/class-ctcc-admin.php:733
+msgid "Update the content displayed to the user"
+msgstr "Opdater inholdet der vises til den besøgende"
+
+#: admin/class-ctcc-admin.php:709
+msgid "The background color on the notification button"
+msgstr "Baggrundsfarve til notifikations knappen"
+
+#: admin/class-ctcc-admin.php:702
+msgid "The text color on the notification button"
+msgstr "Tekstfarve til notifikations knappen"
+
+#: admin/class-ctcc-admin.php:695
+msgid "The link color on the notification"
+msgstr "Link farve til notifikationen"
+
+#: admin/class-ctcc-admin.php:688
+msgid "The background color for the notification"
+msgstr "Baggrundsfarve til notifikationen"
+
+#: admin/class-ctcc-admin.php:681
+msgid "The text color on the notification"
+msgstr "Tekstfarve til notifikationen"
+
+#: admin/class-ctcc-admin.php:674
+msgid "Remove confirmation button and use 'X' icon instead"
+msgstr "Fjern bekræftelses knappen og brug 'X' ikonet i stedet"
+
+#: admin/class-ctcc-admin.php:660
+msgid "Add drop shadow to the block (doesn't apply to the top or bottom bar)"
+msgstr "Tilføj skygge til blokken (virker ikke på bar i top eller bund)"
+
+#: admin/class-ctcc-admin.php:653
+msgid "Round the corners on the block (doesn't apply to the top or bottom bar)"
+msgstr "Afrundede hjørner på blokken (virker ikke på bar i top eller bund)"
+
+#: admin/class-ctcc-admin.php:639
+msgid "You can add an optional wrapper class, eg container, here to align the notification text with the rest of your content"
+msgstr "Du kan tilføje en valgfri wrapper klasse, fx beholder, her for at tilpasse meddelelsens tekst med resten af dit indhold"
+
+#: admin/class-ctcc-admin.php:632
+msgid "Where the notification should appear"
+msgstr "Hvor notifikationen skal vises"
+
+#: admin/class-ctcc-admin.php:630 public/customizer.php:41
+msgid "Bottom Right Block"
+msgstr "Blok nederst til højre"
+
+#: admin/class-ctcc-admin.php:629 public/customizer.php:40
+msgid "Bottom Left Block"
+msgstr "Blok nederst til venstre"
+
+#: admin/class-ctcc-admin.php:628 public/customizer.php:39
+msgid "Top Right Block"
+msgstr "Blok øverst til højre"
+
+#: admin/class-ctcc-admin.php:627 public/customizer.php:38
+msgid "Top Left Block"
+msgstr "Blok øverst til venstre"
+
+#: admin/class-ctcc-admin.php:626 public/customizer.php:37
+msgid "Bottom Bar"
+msgstr "I bunden"
+
+#: admin/class-ctcc-admin.php:625 public/customizer.php:36
+msgid "Top Bar"
+msgstr "I toppen"
+
+#: admin/class-ctcc-admin.php:614
+msgid "Open the More Information page in the same or new tab."
+msgstr "Åben \"Mere information\" siden i samme eller nyt faneblad"
+
+#: admin/class-ctcc-admin.php:612
+msgid "Same Tab"
+msgstr "Samme faneblad"
+
+#: admin/class-ctcc-admin.php:611
+msgid "New Tab"
+msgstr "Nyt faneblad"
+
+#: admin/class-ctcc-admin.php:604
+msgid "You can add an absolute URL here to override the More Info Page setting above. Use this to link to an external website for further information about cookies."
+msgstr "Du kan tilføje en absolut webadresse her for at tilsidesætte indstillingen \"Mere info side\" ovenfor. Brug dette til at linke til en ekstern hjemmeside for yderligere information om cookies."
+
+#: admin/class-ctcc-admin.php:597
+msgid "The page containing further information about your cookie policy"
+msgstr "Siden  der indeholdere mere information om din cookie politik "
+
+#: admin/class-ctcc-admin.php:581
+msgid "The default text to use to link to a page providing further information"
+msgstr "Standardtekst, der skal bruges til at linke til en side, der giver yderligere oplysninger"
+
+#: admin/class-ctcc-admin.php:574
+msgid "The default text to dismiss the notification"
+msgstr "Standardteksten til at afvise meddelelsen"
+
+#: admin/class-ctcc-admin.php:567
+msgid "The default text to indicate that your site uses cookies"
+msgstr "Standardteksten til at angive, at dit websted bruger cookies"
+
+#: admin/class-ctcc-admin.php:560
+msgid "The heading text - only applies if you are not using a top or bottom bar"
+msgstr "Overskrift - bruges kun hvis du ikke placerer din tekst øverst eller nederst på siden"
+
+#: admin/class-ctcc-admin.php:542
+msgid "A version number for the cookie - update this to invalidate the cookie and force all users to view the notification again"
+msgstr "Et versionsnummer til cookien - opdater dette for at ugyldiggøre cookien og tvinge alle brugere til at få vist notifikationen igen"
+
+#: admin/class-ctcc-admin.php:535
+msgid "The number of days that the cookie is set for"
+msgstr "Antal dage cookien er gyldig (hvor længe den husker brugeren)"
+
+#: admin/class-ctcc-admin.php:528
+msgid "If you chose Timer as the close method, enter how many seconds the notification should display for"
+msgstr "Hvis du benytter tidsbestemt visning som lukkemetode, angiv hvor mange sekunder notifikationen skal vises"
+
+#: admin/class-ctcc-admin.php:495
+msgid "Select this to show the notification only on the first page the user visits"
+msgstr "Vælg dette hvis notifikationen kun skal vises på den første side brugeren ser"
+
+#: admin/class-ctcc-admin.php:488
+msgid "How you want the user to close the notification"
+msgstr "Hvordan du ønsker brugeren skal lukke notifikationen"
+
+#: admin/class-ctcc-admin.php:485
+msgid "Timed"
+msgstr "Tidsbestemt"
+
+#: admin/class-ctcc-admin.php:483
+msgid "On Click"
+msgstr "Ved klik"
+
+#: admin/class-ctcc-admin.php:410 admin/class-ctcc-admin.php:420
+msgid "Cookies"
+msgstr "Cookies"
+
+#: admin/class-ctcc-admin.php:358 public/customizer.php:218
+msgid "Button Background"
+msgstr "Baggrund til knap"
+
+#: admin/class-ctcc-admin.php:334 admin/class-ctcc-admin.php:366
+#: public/customizer.php:170
+msgid "Background Color"
+msgstr "Baggrundsfarve"
+
+#: admin/class-ctcc-admin.php:318 public/customizer.php:138
+msgid "Use X Close"
+msgstr "Benyt X lukning"
+
+#: admin/class-ctcc-admin.php:302 public/customizer.php:106
+msgid "Drop Shadow"
+msgstr "Skygge"
+
+#: admin/class-ctcc-admin.php:294 public/customizer.php:90
+msgid "Rounded Corners"
+msgstr "Afrundede hjørner"
+
+#: admin/class-ctcc-admin.php:286
+msgid "Include Stylesheet"
+msgstr "Inkluder stilart"
+
+#: admin/class-ctcc-admin.php:278 public/customizer.php:58
+msgid "Container Class"
+msgstr "Kasse stilart"
+
+#: admin/class-ctcc-admin.php:270 public/customizer.php:34
+msgid "Position"
+msgstr "Position"
+
+#: admin/class-ctcc-admin.php:263
+msgid "Styles settings"
+msgstr "Indstillinger for stilarter"
+
+#: admin/class-ctcc-admin.php:233
+msgid "More Info Target"
+msgstr "Mere info destination"
+
+#: admin/class-ctcc-admin.php:225
+msgid "More Info URL"
+msgstr "Mere info URL/webadresse"
+
+#: admin/class-ctcc-admin.php:217
+msgid "More Info Page"
+msgstr "Mere Info side"
+
+#: admin/class-ctcc-admin.php:193
+msgid "Heading Text"
+msgstr "Overskrift"
+
+#: admin/class-ctcc-admin.php:186
+msgid "Content settings"
+msgstr "Indstillinger for indhold"
+
+#: admin/class-ctcc-admin.php:140
+msgid "Cookie Version"
+msgstr "Cookie Version"
+
+#: admin/class-ctcc-admin.php:132
+msgid "Cookie Expiry"
+msgstr "Cookie udløber"
+
+#: admin/class-ctcc-admin.php:92
+msgid "First Page Only"
+msgstr "Kun på første side"
+
+#: admin/class-ctcc-admin.php:84
+msgid "Close"
+msgstr "Luk"
+
+#: admin/class-ctcc-admin.php:77
+msgid "General settings"
+msgstr "Generelle indstillinger"
+
+#: admin/class-ctcc-admin.php:423
+msgid "Find out more."
+msgstr "Læs mere"
+
+#: admin/class-ctcc-admin.php:422
+msgid "Okay, thanks"
+msgstr "Ok, tak"
+
+#: admin/class-ctcc-admin.php:421
+msgid "This site uses cookies: "
+msgstr "Denne side benytter cookies"
+
+#: admin/class-ctcc-admin.php:116
+msgid "Notification Duration"
+msgstr "Varighed af notifikationen"
+
+#: admin/class-ctcc-admin.php:350 public/customizer.php:202
+msgid "Button Color"
+msgstr "Knap farve"
+
+#: admin/class-ctcc-admin.php:342 public/customizer.php:186
+msgid "Link Color"
+msgstr "Link farve"
+
+#: admin/class-ctcc-admin.php:326 public/customizer.php:154
+msgid "Text Color"
+msgstr "Tekstfarve"
+
+#: admin/class-ctcc-admin.php:209
+msgid "More Info Text"
+msgstr "Mere info tekst"
+
+#: admin/class-ctcc-admin.php:241
+msgid "Accept Text"
+msgstr "Godkend tekst"
+
+#: admin/class-ctcc-admin.php:201
+msgid "Notification Text"
+msgstr "Tekst til notifikationen"
+
+#: uk-cookie-consent.php:58
+msgid "This site uses cookies - small text files that are placed on your machine to help the site provide a better user experience. In general, cookies are used to retain user preferences, store information for things like shopping carts, and provide anonymised tracking data to third party applications like Google Analytics. As a rule, cookies will make your browsing experience better. However, you may prefer to disable cookies on this site and on others. The most effective way to do this is to disable cookies in your browser. We suggest consulting the Help section of your browser or taking a look at <a href=\"http://www.aboutcookies.org\">the About Cookies website</a> which offers guidance for all modern browsers"
+msgstr "Denne side anvender cookies - små tekstfiler der lægges på din maskine for at hjælpe os med at give dig en bedre oplevelse når du besøger os. Generelt bruges cookies til at genkende dig når du besøger os igen og kan hjælpe med fx. at huske indholdet i en indkøbskurv og levere helt anonyme data til 3. parts applikationer som Google Analytics. Cookies vil gøre din browsing oplevelse bedre. Såfremt du ikke ønsker at modtage cookies kan du slå dem fra. Den mest effektive måde at gøre dette, er at slå cookies fra i din browser. Du kan læse mere om den danske lovgivning om cookies hos <a href=\"https://erhvervsstyrelsen.dk/lovgivning-og-vejledning-til-cookiebekendtgoerelsen\">terhvervsstyrelsen</a> "
+
+#: uk-cookie-consent.php:57
+msgid "Cookie Policy"
+msgstr "Cookie politik"
+
+#. #-#-#-#-#  uk-cookie-consent-code.pot (Cookie Consent 2.3.6)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin/class-ctcc-admin.php:68 admin/class-ctcc-admin.php:759
+#: admin/class-ctcc-metafield.php:35 public/customizer.php:17
+msgid "Cookie Consent"
+msgstr "Cookie Consent"
