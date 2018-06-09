@@ -14,9 +14,16 @@
         }
     }
     
-    .entry-content.entry-summary {
-        padding-left: 15px;
-        padding-right: 15px;
+    .entry-content {
+
+        li {
+            @include margin-bottom( 1.3 );
+        }
+
+        &.entry-summary {
+            padding-left: 15px;
+            padding-right: 15px;
+        }
     }
 
     .entry-post-thumbnail {

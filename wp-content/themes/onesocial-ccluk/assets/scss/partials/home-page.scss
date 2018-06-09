@@ -214,7 +214,8 @@ body.page-template-homepage {
 				}
 			}
 
-			&.join {
+			&.join,
+			&.mailchimp {
 
 				.section-content {
 
@@ -231,15 +232,49 @@ body.page-template-homepage {
 						max-width: 450px;
 						@include margin( 1, 1 );
 					}
+					form.mc4wp-form {
+						label {
+							color: $white;
+						}
+						input[type="submit"] {
+							background: $blue;
+						}
+					}
 				}
 			}
 
-			&.green-bg {
-				background-color: $green;
-			}
-
+			&.green-bg,
 			&.blue-bg {
-				background-color: $blue;
+				.section-content {
+					form {
+						label {
+							color: $white;
+						}
+						input[type="submit"] {
+							background: $blue;
+						}
+					}
+					a {
+						color: $white;
+						text-decoration: underline;
+					}
+				}
+
+				&.green-bg {
+					background-color: $green;
+
+					.section-content {
+						form {
+							input[type="submit"] {
+								background: $blue !important;
+							}
+						}
+					}
+				}
+
+				&.blue-bg {
+					background-color: $blue;
+				}
 			}
 		}
 	}

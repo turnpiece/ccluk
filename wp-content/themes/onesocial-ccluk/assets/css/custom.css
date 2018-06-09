@@ -278,6 +278,10 @@ body.is-mobile #main-wrap {
   .single .header-area .sap-post-meta,
   .single-post .header-area .sap-post-meta {
     margin-top: 15px; }
+.single .entry-content li,
+.single-post .entry-content li {
+  margin-bottom: 13px;
+  margin-bottom: 1.3rem; }
 .single .entry-content.entry-summary,
 .single-post .entry-content.entry-summary {
   padding-left: 15px;
@@ -437,6 +441,9 @@ body.page #content .row {
 body.page #secondary .widget_subpages {
   position: fixed;
   width: 290px; }
+  body.page #secondary .widget_subpages h3.widgettitle {
+    font-weight: 600;
+    font-size: 16px; }
   body.page #secondary .widget_subpages ul > li a {
     display: inline-block;
     border-left: 10px solid;
@@ -445,11 +452,6 @@ body.page #secondary .widget_subpages {
     font-size: 15px; }
     body.page #secondary .widget_subpages ul > li a:hover {
       color: #54ae68; }
-  body.page #secondary .widget_subpages ul > li.first-menu-item a {
-    font-size: 16px;
-    font-weight: 500;
-    border-left: 0;
-    padding-left: 0; }
   body.page #secondary .widget_subpages ul > li.widget_subpages_current_page > a {
     color: #54ae68;
     pointer-events: none;
@@ -609,23 +611,36 @@ body.page-template-homepage #main {
     body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-twitterlink,
     body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-tweet-meta {
       font-size: 11px; }
-    body.page-template-homepage #main .section.join .section-content {
+    body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.mailchimp .section-content {
       justify-content: space-around;
       -webkit-align-items: center;
       align-items: center;
       padding: 20px 0px;
       padding: 2rem 0rem; }
-      body.page-template-homepage #main .section.join .section-content .intro {
+      body.page-template-homepage #main .section.join .section-content .intro, body.page-template-homepage #main .section.mailchimp .section-content .intro {
         color: #fff;
         font-size: 24px; }
-      body.page-template-homepage #main .section.join .section-content .list-item {
+      body.page-template-homepage #main .section.join .section-content .list-item, body.page-template-homepage #main .section.mailchimp .section-content .list-item {
         width: auto;
         max-width: 450px;
         margin: 10px 10px;
         margin: 1rem 1rem; }
-    body.page-template-homepage #main .section.green-bg {
+      body.page-template-homepage #main .section.join .section-content form.mc4wp-form label, body.page-template-homepage #main .section.mailchimp .section-content form.mc4wp-form label {
+        color: #fff; }
+      body.page-template-homepage #main .section.join .section-content form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.mailchimp .section-content form.mc4wp-form input[type="submit"] {
+        background: #22a7f0; }
+    body.page-template-homepage #main .section.green-bg .section-content form label, body.page-template-homepage #main .section.blue-bg .section-content form label {
+      color: #fff; }
+    body.page-template-homepage #main .section.green-bg .section-content form input[type="submit"], body.page-template-homepage #main .section.blue-bg .section-content form input[type="submit"] {
+      background: #22a7f0; }
+    body.page-template-homepage #main .section.green-bg .section-content a, body.page-template-homepage #main .section.blue-bg .section-content a {
+      color: #fff;
+      text-decoration: underline; }
+    body.page-template-homepage #main .section.green-bg.green-bg, body.page-template-homepage #main .section.blue-bg.green-bg {
       background-color: #54ae68; }
-    body.page-template-homepage #main .section.blue-bg {
+      body.page-template-homepage #main .section.green-bg.green-bg .section-content form input[type="submit"], body.page-template-homepage #main .section.blue-bg.green-bg .section-content form input[type="submit"] {
+        background: #22a7f0 !important; }
+    body.page-template-homepage #main .section.green-bg.blue-bg, body.page-template-homepage #main .section.blue-bg.blue-bg {
       background-color: #22a7f0; }
 body.page-template-homepage .homepage-section-title > h4 {
   -webkit-border-radius: 5px;

@@ -47,18 +47,6 @@ class CCLUK_Customizer {
 		foreach( $pages as $p ){
 			$option_pages[ $p->ID ] = $p->post_title;
 		}
-	/*
-		$users = get_users( array(
-			'orderby'      => 'display_name',
-			'order'        => 'ASC',
-			'number'       => '',
-		) );
-
-		$option_users[0] = esc_html__( 'Select member', 'onesocial' );
-		foreach( $users as $user ){
-			$option_users[ $user->ID ] = $user->display_name;
-		}
-	*/
 
 		$static_front_page = get_option( 'show_on_front' ) === 'page';
 
@@ -139,6 +127,105 @@ class CCLUK_Customizer {
 				)
 			));
 
+
+		/*------------------------------------------------------------------------*/
+	    /*  Homepage: Newsletter signup
+	    /*------------------------------------------------------------------------*/
+
+	    	$section = 'homepage_mailchimp';
+
+		    $this->customize->add_panel( self::SLUG.'_'.$section ,
+				array(
+					'priority'        => 160,
+					'title'           => esc_html__( 'Homepage: Newsletter', 'onesocial' ),
+					'description'     => esc_html__( 'The newsletter section on the homepage', 'onesocial' ),
+					'active_callback' => array( $this, 'showon_frontpage' )
+				)
+			);
+
+		    $this->standard_settings( self::SLUG.'_'.$section, 'mailchimp' );
+
+			// Title
+			$this->add_setting( 
+				'homepage_mailchimp_title', 
+				'sanitize_text',
+				__('Signup for our Newsletter', 'onesocial')
+			);
+
+			$this->customize->add_control( self::SLUG.'_'.$section.'_title',
+				array(
+					'label' 		=> esc_html__('Section Title', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_settings',
+					'description'   => '',
+				)
+			);
+
+			$this->customize->add_section( self::SLUG.'_'.$section.'_content' ,
+				array(
+					'priority'    => 6,
+					'title'       => esc_html__( 'Section Content', 'onesocial' ),
+					'description' => '',
+					'panel'       => self::SLUG.'_homepage_mailchimp',
+				)
+			);
+
+			$this->add_setting( 
+				'homepage_mailchimp_text', 
+				'sanitize_text', 
+				__( 'If you want to know what we\'re up to, signup for our newsletter.', 'onesocial' )
+			);
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_text',
+				array(
+					'label' 		=> esc_html__('Text', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Text that will go alongside the signup form', 'onesocial' )
+				)
+			));
+
+			$this->add_setting( $section.'_form', 'sanitize_text' );
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_form',
+				array(
+					'label' 		=> esc_html__('Form ID', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Enter a MailChimp form ID', 'onesocial' )
+				)
+			));
+
+			$this->add_setting( 
+				$section.'_privacy_text', 
+				'sanitize_text', 
+				__( 'We respect your privacy.', 'onesocial' ) 
+			);
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_privacy_text',
+				array(
+					'label' 		=> esc_html__('Privacy text', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Text linking to the privacy policy', 'onesocial' ),
+				)
+			));
+
+			// Privacy settings
+			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
+
+			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
+				array(
+					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_settings',
+					'type'          => 'select',
+					'priority'      => 10,
+					'choices'       => $option_pages,
+					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
+				)
+			);
 
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: About
@@ -259,7 +346,6 @@ class CCLUK_Customizer {
 	    /*  Home page: Contact
 	    /*------------------------------------------------------------------------*/
 
-
 		    $this->customize->add_panel( self::SLUG.'_homepage_contact' ,
 				array(
 					'priority'        => 270,
@@ -270,49 +356,7 @@ class CCLUK_Customizer {
 			);
 
 			$this->standard_settings( self::SLUG.'_homepage_contact', 'contact' );
-			/*
-			$this->customize->add_section( self::SLUG.'_homepage_contact_settings' ,
-				array(
-					'priority'    => 3,
-					'title'       => esc_html__( 'Section Settings', 'onesocial' ),
-					'description' => '',
-					'panel'       => self::SLUG.'_homepage_contact',
-				)
-			);
-			/*
-			// Show Content
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_disable',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
-					'default'           => '',
-				)
-			);
 
-			$this->customize->add_control( self::SLUG.'_homepage_contact_disable',
-				array(
-					'type'        => 'checkbox',
-					'label'       => esc_html__('Hide this section?', 'onesocial'),
-					'section'     => self::SLUG.'_homepage_contact_settings',
-					'description' => esc_html__('Check this box to hide this section.', 'onesocial'),
-				)
-			);
-
-			// Section ID
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_id',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => esc_html__('contact', 'onesocial'),
-				)
-			);
-
-			$this->customize->add_control( self::SLUG.'_homepage_contact_id',
-				array(
-					'label'     => esc_html__('Section ID:', 'onesocial'),
-					'section' 		=> self::SLUG.'_homepage_contact_settings',
-					'description'   => esc_html__( 'The section id, we will use this for link anchor.', 'onesocial' )
-				)
-			);
-			*/
 			// Title
 			$this->customize->add_setting( self::SLUG.'_homepage_contact_title',
 				array(
@@ -567,6 +611,20 @@ class CCLUK_Customizer {
 
 	}
 
+	private function add_setting( $id, $callback, $default = '' ) {
+
+		$args = array();
+
+		if (function_exists($callback))
+			$args['sanitize_callback'] = $callback;
+		elseif (method_exists( array( $this, $callback ) ) )
+			$args['sanitize_callback'] = array( $this, $callback );
+
+		if ($default)
+			$args['default'] = $default;
+
+		$this->customize->add_setting( self::SLUG.'_' . $id, $args );
+	}
 
 	/*------------------------------------------------------------------------*/
 	/*  CCLUK Sanitize Functions.
