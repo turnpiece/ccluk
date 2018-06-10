@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-04 14:47:23+0000\n"
+"PO-Revision-Date: 2018-06-09 20:22:55+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1407,11 +1407,11 @@ msgstr "<strong>ERRO</strong>: O tópico que queria mover não foi encontrado"
 
 #: includes/replies/functions.php:1232
 msgid "<strong>ERROR</strong>: The reply you want to move was not found."
-msgstr "<strong>ERRO</strong>: A resposta que queria mover não foi encontrada."
+msgstr "<strong>ERRO</strong>: A resposta que deseja mover não foi encontrada."
 
 #: includes/replies/functions.php:1223
 msgid "<strong>ERROR</strong>: Reply ID to move not found!"
-msgstr "<strong>ERRO</strong>: a ID da resposta a ser movida não foi encontrada!"
+msgstr "<strong>ERRO</strong>: O ID da resposta a ser movida não foi encontrada!"
 
 #: includes/replies/functions.php:616
 msgid "<strong>ERROR</strong>: Your reply cannot be edited at this time."
@@ -1481,7 +1481,7 @@ msgstr "<strong>ERRO</strong>: A ID do fórum precisa ser um número."
 #: includes/topics/functions.php:196 includes/topics/functions.php:210
 #: includes/topics/functions.php:535
 msgid "<strong>ERROR</strong>: Forum ID is missing."
-msgstr "<strong>ERRO</strong>: Falta a ID do fórum"
+msgstr "<strong>ERRO</strong>: Falta o ID do fórum."
 
 #: includes/replies/functions.php:172
 msgid "<strong>ERROR</strong>: Topic does not exist."
@@ -1497,7 +1497,7 @@ msgstr "<strong>ERRO</strong>: A ID do tópico precisa ser um número."
 
 #: includes/replies/functions.php:154
 msgid "<strong>ERROR</strong>: Topic ID is missing."
-msgstr "<strong>ERRO</strong>: Falta a ID do tópico"
+msgstr "<strong>ERRO</strong>: Falta o ID do tópico."
 
 #: includes/replies/functions.php:142
 msgid "<strong>ERROR</strong>: You do not have permission to reply."
