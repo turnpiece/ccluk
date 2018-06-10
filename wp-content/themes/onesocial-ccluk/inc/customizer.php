@@ -163,7 +163,7 @@ class CCLUK_Customizer {
 					'priority'    => 6,
 					'title'       => esc_html__( 'Section Content', 'onesocial' ),
 					'description' => '',
-					'panel'       => self::SLUG.'_homepage_mailchimp',
+					'panel'       => self::SLUG.'_'.$section,
 				)
 			);
 
