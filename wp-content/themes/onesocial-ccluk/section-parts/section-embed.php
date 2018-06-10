@@ -2,8 +2,8 @@
 
 if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
 
-$slug       = 'ccluk_homepage_mailchimp';
-$id         = get_theme_mod( $slug.'_id', esc_html__('mailchimp', 'onesocial') );
+$slug       = 'ccluk_homepage_embed';
+$id         = get_theme_mod( $slug.'_id', esc_html__('embed', 'onesocial') );
 $form       = get_theme_mod( $slug.'_form' );
 $disable    = get_theme_mod( $slug.'_disable' ) == 1 ? true : false;
 $title      = get_theme_mod( $slug.'_title', sprintf( __('Signup to our newsletter', 'onesocial' ), get_bloginfo('name') ) );
@@ -19,10 +19,10 @@ if ( ccluk_is_selective_refresh() ) {
 // Get data
 if (!$disable && $form && $title !== '' ) :
     if ( ! ccluk_is_selective_refresh() ) : ?>
-    <section id="<?php echo esc_attr( $id ) ?>" <?php do_action('ccluk_section_atts', 'mailchimp'); ?> class="section mailchimp site-content green-bg">
+    <section id="<?php echo esc_attr( $id ) ?>" <?php do_action('ccluk_section_atts', 'embed'); ?> class="section embed site-content green-bg">
     <?php endif; ?>
 
-        <?php do_action('ccluk_section_before_inner', 'mailchimp'); ?>
+        <?php do_action('ccluk_section_before_inner', 'embed'); ?>
 
         <div class="section-content">
         <?php if ($text !== '') : ?> 
@@ -44,11 +44,11 @@ if (!$disable && $form && $title !== '' ) :
 
         </div>
 
-        <?php do_action('ccluk_section_after_inner', 'mailchimp'); ?>
+        <?php do_action('ccluk_section_after_inner', 'embed'); ?>
 
     <?php if ( ! ccluk_is_selective_refresh() ) : ?>
     </section>
     <?php endif; ?>
 <?php endif; 
 
-endif; // end of if MailChimp plugin is active
+endif; // end of if embed plugin is active

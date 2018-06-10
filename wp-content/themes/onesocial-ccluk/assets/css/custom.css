@@ -613,33 +613,33 @@ body.page-template-homepage #main {
     body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-twitterlink,
     body.page-template-homepage #main .section.twitter #ctf.ctf-styles .ctf-tweet-meta {
       font-size: 11px; }
-    body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.mailchimp .section-content {
+    body.page-template-homepage #main .section.join .section-content, body.page-template-homepage #main .section.mailchimp .section-content, body.page-template-homepage #main .section.embed .section-content {
       justify-content: space-around;
       -webkit-align-items: center;
       align-items: center;
       padding: 20px 0px;
       padding: 2rem 0rem; }
-      body.page-template-homepage #main .section.join .section-content .intro, body.page-template-homepage #main .section.mailchimp .section-content .intro {
+      body.page-template-homepage #main .section.join .section-content .intro, body.page-template-homepage #main .section.mailchimp .section-content .intro, body.page-template-homepage #main .section.embed .section-content .intro {
         color: #fff;
         font-size: 24px; }
-      body.page-template-homepage #main .section.join .section-content .list-item, body.page-template-homepage #main .section.mailchimp .section-content .list-item {
+      body.page-template-homepage #main .section.join .section-content .list-item, body.page-template-homepage #main .section.mailchimp .section-content .list-item, body.page-template-homepage #main .section.embed .section-content .list-item {
         width: auto;
         max-width: 450px;
         min-width: 350px;
         margin: 10px 10px;
         margin: 1rem 1rem; }
-        body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy {
+        body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy, body.page-template-homepage #main .section.embed .section-content .list-item .privacy-policy {
           font-style: italic;
           font-size: 85%; }
-          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a {
+          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a, body.page-template-homepage #main .section.embed .section-content .list-item .privacy-policy a {
             opacity: 0.85; }
-          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a:hover {
+          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a:hover, body.page-template-homepage #main .section.embed .section-content .list-item .privacy-policy a:hover {
             opacity: 1; }
-        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form label, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form label {
+        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form label, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form label, body.page-template-homepage #main .section.embed .section-content .list-item form.mc4wp-form label {
           display: none; }
-        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input {
+        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input, body.page-template-homepage #main .section.embed .section-content .list-item form.mc4wp-form input {
           width: 100%; }
-          body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"] {
+          body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.embed .section-content .list-item form.mc4wp-form input[type="submit"] {
             width: auto;
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
@@ -650,7 +650,7 @@ body.page-template-homepage #main {
             padding: 1.2rem 2.4rem;
             color: #fff !important;
             float: right; }
-            body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"]:hover {
+            body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.embed .section-content .list-item form.mc4wp-form input[type="submit"]:hover {
               color: #54ae68 !important;
               background-color: #fff !important; }
     body.page-template-homepage #main .section.green-bg .section-content form label, body.page-template-homepage #main .section.blue-bg .section-content form label {

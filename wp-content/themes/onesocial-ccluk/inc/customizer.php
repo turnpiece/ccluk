@@ -134,20 +134,18 @@ class CCLUK_Customizer {
 
 	    	$section = 'homepage_mailchimp';
 
-		    $this->customize->add_panel( self::SLUG.'_'.$section ,
-				array(
-					'priority'        => 160,
-					'title'           => esc_html__( 'Homepage: Newsletter', 'onesocial' ),
-					'description'     => esc_html__( 'The newsletter section on the homepage', 'onesocial' ),
-					'active_callback' => array( $this, 'showon_frontpage' )
-				)
+			$this->add_homepage_panel( 
+				$section, 
+				esc_html__( 'Homepage: Newsletter', 'onesocial' ),
+				esc_html__( 'The newsletter section on the homepage', 'onesocial' ),
+				160
 			);
 
 		    $this->standard_settings( self::SLUG.'_'.$section, 'mailchimp' );
 
 			// Title
 			$this->add_setting( 
-				'homepage_mailchimp_title', 
+				$section.'_title', 
 				'sanitize_text',
 				__('Signup for our Newsletter', 'onesocial')
 			);
@@ -170,7 +168,105 @@ class CCLUK_Customizer {
 			);
 
 			$this->add_setting( 
-				'homepage_mailchimp_text', 
+				$section.'_text', 
+				'sanitize_text', 
+				__( 'If you want to know what we\'re up to, signup for our newsletter.', 'onesocial' )
+			);
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_text',
+				array(
+					'label' 		=> esc_html__('Text', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Text that will go alongside the form', 'onesocial' )
+				)
+			));
+
+			$this->add_setting( $section.'_form', 'sanitize_text' );
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_form',
+				array(
+					'label' 		=> esc_html__('Form ID', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Enter a MailChimp form ID', 'onesocial' )
+				)
+			));
+
+			$this->add_setting( 
+				$section.'_privacy_text', 
+				'sanitize_text', 
+				__( 'We respect your privacy.', 'onesocial' ) 
+			);
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_privacy_text',
+				array(
+					'label' 		=> esc_html__('Privacy text', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
+					'description'   => __( 'Text linking to the privacy policy', 'onesocial' ),
+				)
+			));
+
+			// Privacy settings
+			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
+
+			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
+				array(
+					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_settings',
+					'type'          => 'select',
+					'priority'      => 10,
+					'choices'       => $option_pages,
+					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
+				)
+			);
+
+
+		/*------------------------------------------------------------------------*/
+	    /*  Homepage: Shortcode embed
+	    /*------------------------------------------------------------------------*/
+
+	    	$section = 'homepage_embed';
+
+			$this->add_homepage_panel( 
+				$section, 
+				esc_html__( 'Homepage: Custom form', 'onesocial' ),
+				esc_html__( 'Embed a custom form via a shortcode on the home page', 'onesocial' ),
+				160
+			);
+
+		    $this->standard_settings( self::SLUG.'_'.$section, 'embed' );
+
+			// Title
+			$this->add_setting( 
+				$section.'_title', 
+				'sanitize_text',
+				__('Signup for our Newsletter', 'onesocial')
+			);
+
+			$this->customize->add_control( self::SLUG.'_'.$section.'_title',
+				array(
+					'label' 		=> esc_html__('Section Title', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_settings',
+					'description'   => '',
+				)
+			);
+
+			$this->customize->add_section( self::SLUG.'_'.$section.'_content' ,
+				array(
+					'priority'    => 6,
+					'title'       => esc_html__( 'Section Content', 'onesocial' ),
+					'description' => '',
+					'panel'       => self::SLUG.'_'.$section,
+				)
+			);
+
+			$this->add_setting( 
+				$section.'_text', 
 				'sanitize_text', 
 				__( 'If you want to know what we\'re up to, signup for our newsletter.', 'onesocial' )
 			);
@@ -191,9 +287,9 @@ class CCLUK_Customizer {
 				$this->customize,
 				self::SLUG.'_'.$section.'_form',
 				array(
-					'label' 		=> esc_html__('Form ID', 'onesocial'),
+					'label' 		=> esc_html__('Form shortcode', 'onesocial'),
 					'section' 		=> self::SLUG.'_'.$section.'_content',
-					'description'   => __( 'Enter a MailChimp form ID', 'onesocial' )
+					'description'   => __( 'Enter a shortcode, including the square brackets', 'onesocial' )
 				)
 			));
 
@@ -694,6 +790,22 @@ class CCLUK_Customizer {
 	 */
 	public function preview_js() {
 	    wp_enqueue_script( self::SLUG.'_customizer_liveview', get_stylesheet_directory_uri() . '/assets/js/customizer-liveview.js', array( 'customize-preview', 'customize-selective-refresh' ), false, true );
+	}
+
+	/**
+	 *
+	 * add homepage panel
+	 *
+	 */
+	private function add_homepage_panel( $section, $title, $description, $priority = 100 ) {
+		$this->customize->add_panel( self::SLUG.'_'.$section ,
+			array(
+				'priority'        => $priority,
+				'title'           => $title,
+				'description'     => $description,
+				'active_callback' => array( $this, 'showon_frontpage' )
+			)
+		);
 	}
 
 	/**
