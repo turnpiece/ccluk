@@ -1,0 +1,369 @@
+/**
+ * WPMU Dev HTML helper styles
+ * (Philipp Stracker for WPMU Dev)
+ *
+ * This file is included by the WDev()->html->element() function.
+ *
+ * @since 1.1.0
+ */
+
+/***
+ * GENERAL INPUT FIELDS *
+ ***/
+
+#wpwrap,
+body {
+	.wpmui-input-wrapper.wpmui-loading {
+		& > * {
+			opacity: 0.25;
+			cursor: default;
+		}
+
+		.wpmui-field-input {
+			background-color: #E5E5E5;
+		}
+
+		&:after {
+			top: 5px; /* compensate for the field margin */
+			bottom: 5px; /* compensate for the field margin */
+			background-color: transparent;
+		}
+	}
+
+	.wpmui-field-description {
+		display: block;
+		margin: 10px 4px 10px 0;
+		color: #666;
+		font-size: 0.9em;
+		font-weight: normal;
+	}
+
+	.wpmui-field-input,
+	.wpmui-field-button {
+		margin-top: 6px;
+		margin-bottom: 6px;
+		vertical-align: top;
+		display: inline-block;
+		position: relative;
+	}
+
+	.wpmui-field-input.button,
+	.wpmui-field-input.button-primary,
+	.wpmui-field-button {
+		margin-right: 6px;
+	}
+
+	.wpmui-field-label {
+		display: block;
+		clear: both;
+		margin: 2px 0;
+		font-style: normal;
+		color: #222;
+
+		&.inline-label {
+			display: inline-block;
+			margin: 6px 10px 6px 0;
+		}
+	}
+
+	h3.wpmui-field-label {
+		margin-bottom: 10px;
+	}
+
+	.wpmui-label-before,
+	.wpmui-label-after {
+		display: inline-block;
+		margin: 6px;
+		line-height: 28px;
+		vertical-align: top;
+
+		.wpmui-field-input,
+		.wpmui-field-button {
+			margin-top: 0;
+			margin-bottom: 0;
+		}
+	}
+
+	.wpmui-label-before {
+		margin-left: 0;
+	}
+
+	/* Styles used to display input elements inside Widget Admin */
+	.widget-content .wpmui-wrapper {
+		display: block;
+		margin: 1em 0;
+
+		.wpmui-field-label {
+			margin: 0;
+		}
+
+		.wpmui-field-description {
+			margin: 0;
+		}
+
+		.wpmui-field-input,
+		.wpmui-field-button {
+			margin-top: 4px;
+			margin-bottom: 0;
+		}
+	}
+
+	/* horizontal separator */
+	.wpmui-separator {
+		border-bottom: 1px solid #E5E5E5;
+		margin: 15px 0;
+	}
+
+	/* vertical separator */
+	.wpmui-divider {
+		position: absolute;
+		right: 20px;
+		top: 0;
+		bottom: 0;
+
+		border-right: 1px solid #E5E5E5;
+	}
+
+	.wpmui-hidden {
+		display: none;
+		visibility: hidden;
+	}
+
+	.wpmui-fa {
+		font-family: Fontawesome440 !important;
+	}
+
+	.no-click {
+		cursor: default;
+	}
+}
+
+/***
+ * HTML BLOCK (read only) *
+ ***/
+#wpwrap,
+body {
+	.wpmui-html-text-wrapper {
+		label {
+			cursor: default;
+		}
+	}
+}
+
+/***
+ * CHECKBOX *
+ ***/
+#wpwrap,
+body {
+	.wpmui-field-checkbox {
+		margin: 6px 4px 0 0;
+		position: absolute;
+		left: 0;
+		top: 0;
+	}
+
+	.wpmui-checkbox-wrapper {
+		margin: 6px auto;
+		position: relative;
+		display: inline-block;
+		line-height: 28px;
+
+		.wpmui-checkbox-caption {
+			padding-left: 24px;
+			font-weight: 500;
+		}
+	}
+
+	.wpmui-checkbox-list {
+		border: 1px solid #e5e5e5;
+		padding: 0 5px;
+		background: #FFFFFF;
+
+		max-height: 320px;
+		overflow: auto;
+
+		.wpmui-checkbox-wrapper {
+			margin: 0;
+		}
+
+		.wpmui-no-checkbox .wpmui-checkbox-caption {
+			padding: 0;
+		}
+
+		.wpmui-group {
+			margin-bottom: 10px;
+
+			.wpmui-parent .wpmui-checkbox-caption {
+				font-weight: 600;
+			}
+
+			.wpmui-child {
+				margin-left: 24px;
+			}
+		}
+	}
+}
+
+/***
+ * RADIO SLIDER *
+ ***/
+#wpwrap,
+body {
+	.wpmui-radio-slider-wrapper {
+		clear: both;
+
+		.wpmui-field-label {
+			cursor: default;
+		}
+
+		.wpmui-label-before,
+		.wpmui-label-after {
+			line-height: 18px;
+			margin-top: 3px;
+			margin-bottom: 3px;
+		}
+
+		.wpmui-radio-slider {
+			position: relative;
+			display: inline-block;
+
+			width: 40px;
+			height: 18px;
+			margin: 3px 0;
+
+			border-radius: 10px;
+			background: rgb(176, 176, 176);
+			opacity: .8;
+			overflow: visible;
+			cursor: pointer;
+
+			&:hover {
+				opacity: 1;
+			}
+
+			&[readonly],
+			&[readonly]:hover {
+				opacity: 0.5;
+				cursor: default;
+
+				.wpmui-toggle {
+					opacity: .7;
+				}
+			}
+
+			&.on {
+				background: #6BBB1A; /* rgb( 107, 187, 26 ) */
+
+				.wpmui-toggle {
+					left: 21px;
+				}
+			}
+
+			.wpmui-toggle {
+				position: absolute;
+				display: inline-block;
+
+				left: 0;
+				width: 12px;
+				height: 12px;
+				margin: 3px;
+
+				background:  #F4F4F4;
+				border-radius: 50%;
+				transition: all .2s ease-in-out;
+			}
+		}
+
+		.wpmui-label-before {
+			color: #000;
+		}
+
+		.wpmui-label-after {
+			color: #CCC;
+		}
+
+		&.on {
+			.wpmui-label-before {
+				color: #CCC;
+			}
+
+			.wpmui-label-after {
+				color: #390; /* rgb( 51, 153, 0 ) */
+			}
+		}
+
+		&.reverse-wrapper {
+			.wpmui-radio-slider {
+				background: #6BBB1A; /* rgb( 107, 187, 26 ) */
+			}
+
+			.wpmui-label-before {
+				color: #390; /* rgb( 51, 153, 0 ) */
+			}
+
+			.wpmui-label-after {
+				color: #CCC;
+			}
+
+			&.on {
+				.wpmui-radio-slider {
+					background: #B0B0B0;
+				}
+
+				.wpmui-label-before {
+					color: #CCC;
+				}
+
+				.wpmui-label-after {
+					color: #000;
+				}
+			}
+		}
+
+		&.inp-before-wrapper {
+			position: relative;
+			display: block;
+
+			.wpmui-field-label {
+				margin-left: 50px;
+			}
+
+			.wpmui-radio-slider {
+				position: absolute;
+				left: 0;
+				top: 0;
+			}
+		}
+	}
+}
+
+/***
+ * HTML TABLE *
+ ***/
+
+.wpmui-html-table {
+	width: 100%;
+	clear: both;
+	margin: 10px 0;
+
+	background: #FFF;
+	border: 1px solid #e5e5e5;
+	border-spacing: 0;
+	-webkit-box-shadow: 0 1px 1px rgba(0,0,0,.04);
+	box-shadow: 0 1px 1px rgba(0,0,0,.04);
+
+	td,
+	th {
+		line-height: 24px;
+		padding: 8px 6px;
+		vertical-align: top;
+		font-size: 12px;
+		overflow: hidden;
+		color: #555;
+	}
+
+	thead tr th {
+		border-bottom: 1px solid #e1e1e1;
+		color: #333;
+	}
+}

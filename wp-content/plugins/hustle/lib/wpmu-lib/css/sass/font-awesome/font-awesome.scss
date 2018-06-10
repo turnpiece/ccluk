@@ -1,0 +1,28 @@
+/*!
+ * https://github.com/FortAwesome/Font-Awesome
+ *
+ * Note: This is a branded version with following changes
+ *  1) Renamed files to "fontawesome440" base (i.e. include version number)
+ *     Rename all files in the /fonts folder
+ *     Change font-name in _path.scss from `FontAwesome` to `FontAwesome440`
+ *     Update font-paths in _path.scss
+ *     Update font-name in _mixings.scss and _core.scss
+ *  2) Change class prefix from `fa` to `wpmui-fa`
+ *     Edit variable $fa-css-prefix in _variables.scss
+ *
+ * Font Awesome 4.4.0 by @davegandy - http://fontawesome.io - @fontawesome
+ * License - http://fontawesome.io/license (Font: SIL OFL 1.1, CSS: MIT License)
+ */
+
+@import "variables";
+@import "mixins";
+@import "path";
+@import "core";
+@import "larger";
+@import "fixed-width";
+@import "list";
+@import "bordered-pulled";
+@import "animated";
+@import "rotated-flipped";
+@import "stacked";
+@import "icons";
