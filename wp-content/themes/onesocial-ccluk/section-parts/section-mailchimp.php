@@ -1,6 +1,6 @@
 <?php 
 
-if (defined('MC4WP_VERSION')) :
+if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
 
 $slug       = 'ccluk_homepage_mailchimp';
 $id         = get_theme_mod( $slug.'_id', esc_html__('mailchimp', 'onesocial') );
@@ -37,7 +37,9 @@ if (!$disable && $form && $title !== '' ) :
             </div>
         <?php endif; ?>
         
-        <?php echo do_shortcode('[mc4wp_form id="'.$form.'"]') ?>
+            <div class="form list-item">
+                <?php echo do_shortcode('[mc4wp_form id="'.$form.'"]') ?>
+            </div>
 
         </div>
 

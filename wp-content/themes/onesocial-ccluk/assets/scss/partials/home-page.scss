@@ -230,14 +230,35 @@ body.page-template-homepage {
 					.list-item {
 						width: auto;
 						max-width: 450px;
+						min-width: 350px;
 						@include margin( 1, 1 );
-					}
-					form.mc4wp-form {
-						label {
-							color: $white;
+
+						.privacy-policy {
+							font-style: italic;
+							font-size: 85%;
+
+							a {
+								opacity: 0.85;
+							}
+
+							a:hover {
+								opacity: 1;
+							}
 						}
-						input[type="submit"] {
-							background: $blue;
+
+						form.mc4wp-form {
+							label {
+								display: none;
+							}
+							input {
+								width: 100%;
+
+								&[type="submit"] {
+									width: auto;
+									@include button( $white, $green );
+									float: right;
+								}
+							}
 						}
 					}
 				}
@@ -254,7 +275,7 @@ body.page-template-homepage {
 							background: $blue;
 						}
 					}
-					a {
+					a:not(.cta) {
 						color: $white;
 						text-decoration: underline;
 					}

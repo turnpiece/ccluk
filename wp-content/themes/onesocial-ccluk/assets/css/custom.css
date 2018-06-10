@@ -152,7 +152,8 @@ a.button {
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
   a.button:hover {
-    background-color: #54ae68; }
+    color: #fff !important;
+    background-color: #54ae68 !important; }
 
 a.cta {
   -webkit-border-radius: 10px;
@@ -168,6 +169,7 @@ a.cta {
   font-size: 24px;
   color: #fff;
   text-transform: uppercase;
+  text-decoration: none;
   font-weight: 700;
   text-align: center;
   position: relative; }
@@ -623,17 +625,39 @@ body.page-template-homepage #main {
       body.page-template-homepage #main .section.join .section-content .list-item, body.page-template-homepage #main .section.mailchimp .section-content .list-item {
         width: auto;
         max-width: 450px;
+        min-width: 350px;
         margin: 10px 10px;
         margin: 1rem 1rem; }
-      body.page-template-homepage #main .section.join .section-content form.mc4wp-form label, body.page-template-homepage #main .section.mailchimp .section-content form.mc4wp-form label {
-        color: #fff; }
-      body.page-template-homepage #main .section.join .section-content form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.mailchimp .section-content form.mc4wp-form input[type="submit"] {
-        background: #22a7f0; }
+        body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy {
+          font-style: italic;
+          font-size: 85%; }
+          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a {
+            opacity: 0.85; }
+          body.page-template-homepage #main .section.join .section-content .list-item .privacy-policy a:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item .privacy-policy a:hover {
+            opacity: 1; }
+        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form label, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form label {
+          display: none; }
+        body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input {
+          width: 100%; }
+          body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"], body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"] {
+            width: auto;
+            -webkit-border-radius: 5px;
+            -moz-border-radius: 5px;
+            border-radius: 5px;
+            background-color: #22a7f0;
+            border: none;
+            padding: 12px 24px;
+            padding: 1.2rem 2.4rem;
+            color: #fff !important;
+            float: right; }
+            body.page-template-homepage #main .section.join .section-content .list-item form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.mailchimp .section-content .list-item form.mc4wp-form input[type="submit"]:hover {
+              color: #54ae68 !important;
+              background-color: #fff !important; }
     body.page-template-homepage #main .section.green-bg .section-content form label, body.page-template-homepage #main .section.blue-bg .section-content form label {
       color: #fff; }
     body.page-template-homepage #main .section.green-bg .section-content form input[type="submit"], body.page-template-homepage #main .section.blue-bg .section-content form input[type="submit"] {
       background: #22a7f0; }
-    body.page-template-homepage #main .section.green-bg .section-content a, body.page-template-homepage #main .section.blue-bg .section-content a {
+    body.page-template-homepage #main .section.green-bg .section-content a:not(.cta), body.page-template-homepage #main .section.blue-bg .section-content a:not(.cta) {
       color: #fff;
       text-decoration: underline; }
     body.page-template-homepage #main .section.green-bg.green-bg, body.page-template-homepage #main .section.blue-bg.green-bg {
@@ -652,7 +676,8 @@ body.page-template-homepage .homepage-section-title > h4 {
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
   body.page-template-homepage .homepage-section-title > h4:hover {
-    background-color: #54ae68; }
+    color: #fff !important;
+    background-color: #54ae68 !important; }
 body.page-template-homepage .site {
   padding-top: 0;
   padding-bottom: 0; }
@@ -1215,7 +1240,8 @@ body.buddypress #buddypress #create-group-form input[type="submit"] {
   color: #fff !important; }
   body.buddypress #buddypress #group-settings-form input[type="submit"]:hover,
   body.buddypress #buddypress #create-group-form input[type="submit"]:hover {
-    background-color: #54ae68; }
+    color: #fff !important;
+    background-color: #54ae68 !important; }
 body.buddypress #buddypress .standard-form div.submit input,
 body.buddypress #buddypress #save_as_draft {
   -webkit-border-radius: 5px;
@@ -1228,7 +1254,8 @@ body.buddypress #buddypress #save_as_draft {
   color: #fff !important; }
   body.buddypress #buddypress .standard-form div.submit input:hover,
   body.buddypress #buddypress #save_as_draft:hover {
-    background-color: #54ae68; }
+    color: #fff !important;
+    background-color: #54ae68 !important; }
 body.buddypress #buddypress .standard-form .datebox,
 body.buddypress #buddypress .standard-form input[type=text],
 body.buddypress #buddypress .standard-form input[type=email],
