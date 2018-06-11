@@ -234,7 +234,8 @@ body.page-template-homepage {
 						min-width: 350px;
 						@include margin( 1, 1 );
 
-						.privacy-policy {
+						.privacy-policy,
+						.link-text {
 							font-style: italic;
 							font-size: 85%;
 
@@ -246,18 +247,78 @@ body.page-template-homepage {
 								opacity: 1;
 							}
 						}
+						
+						&.form {
+							form.mc4wp-form {
+								label {
+									display: none;
+								}
+								input {
+									width: 100%;
 
-						form.mc4wp-form {
-							label {
-								display: none;
+									&[type="submit"] {
+										width: auto;
+										@include button( $white, $green );
+										float: right;
+									}
+								}
 							}
-							input {
-								width: 100%;
+						}
+					}
+				}
 
-								&[type="submit"] {
-									width: auto;
+				&.embed {
+					.section-content {
+						.list-item.form {
+							#mc_embed_signup {
+								background: transparent;
+								color: $white;
+								font-family: "Open Sans";
+								font-size: $font-size-std;
+
+								.mc-field-group {
+									width: 100%;
+								}
+
+								h2 {
+									display: none;
+								}
+
+								label, input, .button {
+									font-size: $font-size-std;
+								}
+
+								.button {
 									@include button( $white, $green );
+									height: auto;
+									line-height: 1;
 									float: right;
+								}
+
+								#mc-embedded-subscribe-form {
+									input.mce_inline_error {
+										color: $red;
+									}
+									div.mce_inline_error {
+										@include border-radius(10px);
+										@include margin(1);
+										background-color: $red;
+										color: $white;
+										padding: 10px;
+									}
+								}
+
+								div.response {
+									#mce-success-response {
+										color: $white;
+									}
+									#mce-error-response {
+										@include border-radius(10px);
+										@include margin(1);
+										background-color: $red;
+										color: $white;
+										padding: 10px;
+									}
 								}
 							}
 						}

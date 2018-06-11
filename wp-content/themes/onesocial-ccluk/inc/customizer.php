@@ -131,7 +131,7 @@ class CCLUK_Customizer {
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: Newsletter signup
 	    /*------------------------------------------------------------------------*/
-
+/*
 	    	$section = 'homepage_mailchimp';
 
 			$this->add_homepage_panel( 
@@ -224,7 +224,7 @@ class CCLUK_Customizer {
 					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
 				)
 			);
-
+*/
 
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: Shortcode embed
@@ -234,8 +234,8 @@ class CCLUK_Customizer {
 
 			$this->add_homepage_panel( 
 				$section, 
-				esc_html__( 'Homepage: Custom form', 'onesocial' ),
-				esc_html__( 'Embed a custom form via a shortcode on the home page', 'onesocial' ),
+				esc_html__( 'Homepage: Embed HTML', 'onesocial' ),
+				esc_html__( 'Embed some HTML code such as for a mailing list signup form', 'onesocial' ),
 				160
 			);
 
@@ -244,8 +244,7 @@ class CCLUK_Customizer {
 			// Title
 			$this->add_setting( 
 				$section.'_title', 
-				'sanitize_text',
-				__('Signup for our Newsletter', 'onesocial')
+				'sanitize_text'
 			);
 
 			$this->customize->add_control( self::SLUG.'_'.$section.'_title',
@@ -255,6 +254,18 @@ class CCLUK_Customizer {
 					'description'   => '',
 				)
 			);
+
+function themeslug_sanitize_select( $input, $setting ) {
+
+  // Ensure input is a slug.
+  $input = sanitize_key( $input );
+
+  // Get list of choices from the control associated with the setting.
+  $choices = $setting->manager->get_control( $setting->id )->choices;
+
+  // If the input is a valid key, return it; otherwise, return the default.
+  return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
+}
 
 			$this->customize->add_section( self::SLUG.'_'.$section.'_content' ,
 				array(
@@ -267,8 +278,7 @@ class CCLUK_Customizer {
 
 			$this->add_setting( 
 				$section.'_text', 
-				'sanitize_text', 
-				__( 'If you want to know what we\'re up to, signup for our newsletter.', 'onesocial' )
+				'sanitize_text'
 			);
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
@@ -277,49 +287,48 @@ class CCLUK_Customizer {
 				array(
 					'label' 		=> esc_html__('Text', 'onesocial'),
 					'section' 		=> self::SLUG.'_'.$section.'_content',
-					'description'   => __( 'Text that will go alongside the signup form', 'onesocial' )
+					'description'   => __( 'Text that will go alongside the embedded HTML', 'onesocial' )
 				)
 			));
 
-			$this->add_setting( $section.'_form', 'sanitize_text' );
+			$this->add_setting( $section.'_embed' );
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
-				self::SLUG.'_'.$section.'_form',
+				self::SLUG.'_'.$section.'_embed',
 				array(
-					'label' 		=> esc_html__('Form shortcode', 'onesocial'),
+					'label' 		=> esc_html__('HTML code', 'onesocial'),
 					'section' 		=> self::SLUG.'_'.$section.'_content',
-					'description'   => __( 'Enter a shortcode, including the square brackets', 'onesocial' )
+					'description'   => __( 'Paste in the HTML code for whatever you want to embed', 'onesocial' )
 				)
 			));
 
 			$this->add_setting( 
-				$section.'_privacy_text', 
-				'sanitize_text', 
-				__( 'We respect your privacy.', 'onesocial' ) 
+				$section.'_link_text', 
+				'sanitize_text'
 			);
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
-				self::SLUG.'_'.$section.'_privacy_text',
+				self::SLUG.'_'.$section.'_link_text',
 				array(
 					'label' 		=> esc_html__('Privacy text', 'onesocial'),
 					'section' 		=> self::SLUG.'_'.$section.'_content',
-					'description'   => __( 'Text linking to the privacy policy', 'onesocial' ),
+					'description'   => __( 'Text linking to the page you select below.', 'onesocial' ),
 				)
 			));
 
-			// Privacy settings
-			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
+			// Link settings
+			$this->add_setting( $section.'_link_page', 'sanitize_number' );
 
-			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
+			$this->customize->add_control( self::SLUG.'_'.$section.'_link_page',
 				array(
-					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
-					'section' 		=> self::SLUG.'_'.$section.'_settings',
+					'label'     	=> esc_html__('Page', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section.'_content',
 					'type'          => 'select',
 					'priority'      => 10,
 					'choices'       => $option_pages,
-					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
+					'description'   => esc_html__('Select the page you want to link to. If you\'ve pasted in HTML code for a newsletter signup form then you\'ll need to link to the page your privacy policy is on.', 'onesocial'),
 				)
 			);
 
@@ -329,7 +338,7 @@ class CCLUK_Customizer {
 
 		    $this->customize->add_panel( self::SLUG.'_homepage_about' ,
 				array(
-					'priority'        => 160,
+					'priority'        => 260,
 					'title'           => esc_html__( 'Homepage: About', 'onesocial' ),
 					'description'     => '',
 					'active_callback' => array( $this, 'showon_frontpage' )
@@ -707,14 +716,16 @@ class CCLUK_Customizer {
 
 	}
 
-	private function add_setting( $id, $callback, $default = '' ) {
+	private function add_setting( $id, $callback = null, $default = '' ) {
 
 		$args = array();
 
-		if (function_exists($callback))
-			$args['sanitize_callback'] = $callback;
-		elseif (method_exists( array( $this, $callback ) ) )
-			$args['sanitize_callback'] = array( $this, $callback );
+		if (!is_null($callback)) {
+			if (function_exists($callback))
+				$args['sanitize_callback'] = $callback;
+			elseif (method_exists( array( $this, $callback ) ) )
+				$args['sanitize_callback'] = array( $this, $callback );
+		}
 
 		if ($default)
 			$args['default'] = $default;
@@ -827,7 +838,7 @@ class CCLUK_Customizer {
 				'panel'       => $name,
 			)
 		);
-
+/*
 		// Show Content
 		$this->customize->add_setting( $name.'_disable',
 			array(
@@ -844,6 +855,26 @@ class CCLUK_Customizer {
 				'description' => esc_html__('Check this box to hide this section.', 'onesocial'),
 			)
 		);
+*/
+		$this->customize->add_setting( $name.'_audience', array(
+		  	'capability' => 'edit_theme_options',
+		  	'default' => 'all',
+		  	'sanitize_callback' => array( $this, 'sanitize_text' ),
+		) );
+
+		$this->customize->add_control( $name.'_audience', array(
+		  	'type' => 'radio',
+		  	'section' => $name.'_settings',
+		  	'label' => __( 'Audience', 'onesocial' ),
+		  	'description' => __( 'Who do you want to see this section?' ),
+		  	'choices' => array(
+		    	'all' => __( 'Everyone', 'onesocial' ),
+		    	'logged_in' => __( 'Only logged in users', 'onesocial' ),
+		    	'logged_out' => __( 'Only logged out users', 'onesocial' ),
+		    	'none' => __( 'No one', 'onesocial' )
+		  	),
+		) );
+
 
 		// Section ID
 		$this->customize->add_setting( $name.'_id',

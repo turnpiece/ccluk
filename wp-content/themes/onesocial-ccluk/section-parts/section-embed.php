@@ -1,25 +1,37 @@
 <?php 
 
-if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
+//if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
 
 $slug       = 'ccluk_homepage_embed';
+$audience   = get_theme_mod( $slug.'_audience', 'all' );
+
+if ($audience == 'none' || 
+    $audience == 'logged_in' && !is_user_logged_in() || 
+    $audience == 'logged_out' && is_user_logged_in())
+    return;
+
 $id         = get_theme_mod( $slug.'_id', esc_html__('embed', 'onesocial') );
-$form       = get_theme_mod( $slug.'_form' );
+$embed      = get_theme_mod( $slug.'_embed' );
 $disable    = get_theme_mod( $slug.'_disable' ) == 1 ? true : false;
-$title      = get_theme_mod( $slug.'_title', sprintf( __('Signup to our newsletter', 'onesocial' ), get_bloginfo('name') ) );
+$title      = get_theme_mod( $slug.'_title' );
 $text       = get_theme_mod( $slug.'_text' );
-$privacy_text = get_theme_mod( $slug.'_privacy_text' );
-$privacy_page = get_theme_mod( $slug.'_privacy_page' );
-$page_url   = $page_id ? get_permalink( $page_id ) : wp_registration_url();
+$link_text  = get_theme_mod( $slug.'_link_text' );
+$link_page  = get_theme_mod( $slug.'_link_page' );
 
 if ( ccluk_is_selective_refresh() ) {
     $disable = false;
 }
 
 // Get data
-if (!$disable && $form && $title !== '' ) :
+if (!$disable && $embed) :
     if ( ! ccluk_is_selective_refresh() ) : ?>
     <section id="<?php echo esc_attr( $id ) ?>" <?php do_action('ccluk_section_atts', 'embed'); ?> class="section embed site-content green-bg">
+    <?php endif; ?>
+
+    <?php if ($title !== '') : ?>
+        <div class="section-title">
+            <h4><?php echo $title ?></h4>
+        </div>
     <?php endif; ?>
 
         <?php do_action('ccluk_section_before_inner', 'embed'); ?>
@@ -29,17 +41,16 @@ if (!$disable && $form && $title !== '' ) :
             <div class="intro list-item">
                 <p><?php echo $text ?></p>
 
-            <?php if ($privacy_text && $privacy_page) : ?>
-                <p class="privacy-policy">
-                    <a href="<?php echo get_permalink( $privacy_page ) ?>" title="<?php esc_attr_e( 'Our privacy policy', 'onesocial' ) ?>"><?php echo $privacy_text ?></a>
+            <?php if ($link_text && $link_page) : ?>
+                <p class="link-text">
+                    <a href="<?php echo get_permalink( $link_page ) ?>"><?php echo $link_text ?></a>
                 </p>    
             <?php endif; ?>
             </div>
-        <?php endif; ?>
+        <?php endif; // end of if text ?>
         
             <div class="form list-item">
-                <?php //echo do_shortcode('[mc4wp_form id="'.$form.'"]') ?>
-                <?php echo do_shortcode('[wd_hustle id="signup-to-our-newsletter" type="embedded"]') ?>
+                <?php echo $embed ?>
             </div>
 
         </div>
@@ -51,4 +62,4 @@ if (!$disable && $form && $title !== '' ) :
     <?php endif; ?>
 <?php endif; 
 
-endif; // end of if embed plugin is active
+//endif; // end of if embed plugin is active
