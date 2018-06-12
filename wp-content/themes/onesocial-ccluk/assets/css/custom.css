@@ -441,7 +441,6 @@ body.page #content .row {
   margin-left: 0;
   margin-right: 0; }
 body.page #secondary .widget_subpages {
-  position: fixed;
   width: 290px; }
   body.page #secondary .widget_subpages h3.widgettitle {
     font-weight: 600;
