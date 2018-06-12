@@ -296,28 +296,33 @@ body.page-template-homepage {
 								}
 
 								#mc-embedded-subscribe-form {
+
 									input.mce_inline_error {
 										color: $red;
 									}
 									div.mce_inline_error {
 										@include border-radius(10px);
+										@include padding(1, 2);
 										@include margin(1);
 										background-color: $red;
 										color: $white;
-										padding: 10px;
+										font-size: $font-size-std;
+										font-weight: 400;
 									}
 								}
 
 								div.response {
-									#mce-success-response {
-										color: $white;
+									@include margin(1);
+									@include padding(1, 2);
+									@include border-radius(10px);
+									font-weight: 400;
+									color: $white;
+
+									&#mce-success-response {
+										background-color: $black;
 									}
-									#mce-error-response {
-										@include border-radius(10px);
-										@include margin(1);
+									&#mce-error-response {
 										background-color: $red;
-										color: $white;
-										padding: 10px;
 									}
 								}
 							}
