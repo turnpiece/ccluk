@@ -132,18 +132,16 @@ class Forminator_GdprCheckbox extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		<label for="sample-option-gdpr" class="sui-checkbox">
+			<input type="checkbox" id="sample-option-gdpr" required="required" disabled="disabled">
+			<span aria-hidden="true"></span>
+			{[ if( field.gdpr_description ) { ]}
+				<span class="sui-description">{{ field.gdpr_description }}</span>
 			{[ } ]}
-			<div class="wpmudev-form-field--checkbox">
-				<div class="wpmudev-checkbox--design">
-					<input type="checkbox" id="sample-option-gdpr" required="required" disabled="disabled">
-					<label for="sample-option-gdpr" class="wpdui-icon wpdui-icon-check"></label>
-				</div>
-				<label for="sample-option-gdpr" class="wpmudev-checkbox--label">{{ field.gdpr_description }}</label>
-			</div>
-		</div>';
+		</label>';
 	}
 
 	/**
@@ -159,9 +157,10 @@ class Forminator_GdprCheckbox extends Forminator_Field {
 	public function markup( $field, $settings = array() ) {
 		$this->field = $field;
 		$html        = '';
-		$id          = $name = self::get_property( 'element_id', $field );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
 		$description = self::get_property( 'gdpr_description', $field );
-		$id          = $id . '-field' . '-' . uniqid();
+		$id          = $id . '-field-' . uniqid();
 
 		$html .= '<div class="forminator-checkbox">';
 		$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="true" class="forminator-checkbox--input" data-required="true">', $id, $name );
@@ -217,7 +216,7 @@ class Forminator_GdprCheckbox extends Forminator_Field {
 	public function validate( $field, $data ) {
 		// value of gdpr checkbox is `string` *true*
 		$id = $this->get_id( $field );
-		if ( empty( $data ) || $data !== 'true' ) {
+		if ( empty( $data ) || 'true' !== $data ) {
 			$this->validation_message[ $id ] = apply_filters(
 				'forminator_gdprcheckbox_field_required_validation_message',
 				__( 'This field is required. Please check it.', Forminator::DOMAIN ),

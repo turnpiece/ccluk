@@ -1,0 +1,255 @@
+@include body-class {
+
+	.fui-multi-answer {
+		display: none;
+
+		.fui-answer {
+			width: 100%;
+			margin: $sui-gutter/2 0;
+			padding: $sui-gutter/2;
+			border: 1px solid #EAEAEA;
+			border-radius: 5px;
+			background: $white;
+
+			&:first-of-type {
+				margin-top: 0;
+
+				@include media( max-width, md ) {
+					margin-top: 0;
+				}
+			}
+
+			&:last-of-type {
+				margin-bottom: 0;
+
+				@include media( max-width, md ) {
+					margin-bottom: 0;
+				}
+			}
+
+			@include media( max-width, md ) {
+				margin: $sui-gutter-md/2 0;
+				padding: $sui-gutter-md/2;
+			}
+		}
+
+		.fui-answer-add-indicator {
+			margin: 0;
+			padding: 0;
+			border: 0;
+		}
+
+		.fui-answer-basics,
+		.fui-answer-extras {
+			display: flex;
+			margin-right: -#{$sui-gutter/3};
+			margin-left: -#{$sui-gutter/3};
+
+			.fui-answer-cell,
+			.fui-answer-cell-fit {
+				display: inline-flex;
+				padding: 0 #{$sui-gutter/3};
+
+				&.block {
+					display: block;
+				}
+
+				@include media( max-width, md ) {
+					padding: 0 #{$sui-gutter-md/3};
+				}
+			}
+
+			.fui-answer-cell {
+				flex: 1;
+
+				&-fit {
+					flex: 0 0 auto;
+				}
+			}
+
+			@include media( max-width, md ) {
+				margin-right: -#{$sui-gutter-md/3};
+				margin-left: -#{$sui-gutter-md/3};
+			}
+		}
+
+		.fui-answer-basics {
+
+			.fui-answer-move-indicator {
+				display: block;
+				margin: 5px 0;
+				
+				i {
+					width: 30px;
+					height: 30px;
+					cursor: move;
+					display: flex;
+					flex-direction: column;
+					align-items: center;
+					justify-content: center;
+
+					&:before {
+						display: block;
+					}
+				}
+			}
+
+			.sui-dropdown {
+				margin: 5px 0;
+			}
+
+			.fui-answer-type-text {
+				position: relative;
+
+				.sui-form-control {
+					padding-right: 48px;
+				}
+	
+				.fui-answer-delete {
+					width: 38px;
+					height: 38px;
+					@extend %fui-button-clear;
+					position: absolute;
+					top: 1px;
+					right: 1px;
+					margin: 0 $sui-gutter/3 0 0;
+	
+					i {
+						display: block;
+					}
+	
+					i:before {
+						display: block;
+						color: palette( red, soft );
+						transition: 0.3s ease;
+					}
+	
+					&:hover i:before {
+						color: palette( red, light );
+					}
+
+					@include media( max-width, md ) {
+						margin: 0 $sui-gutter-md/3 0 0;
+					}
+				}
+
+				+ .sui-form-field {
+					margin-top: $sui-gutter/2;
+
+					@include media( max-width, md ) {
+						margin-top: $sui-gutter-md/2;
+					}
+				}
+			}
+
+			.fui-answer-open-indicator {
+				width: 30px;
+				height: 30px;
+				@extend %fui-button-clear;
+
+				i {
+					transition: 0.5s;
+					transform-origin: center;
+				}
+			}
+		}
+
+		.fui-answer-extras {
+			display: none;
+			margin-top: $sui-gutter/2;
+
+			.fui-answer-cell,
+			.fui-answer-cell-fit {
+
+				&:first-child {
+					
+					@include media( max-width, md ) {
+						margin-top: 0;
+					}
+				}
+
+				&:last-child {
+					
+					@include media( max-width, md ) {
+						margin-bottom: 0;
+					}
+				}
+
+				@include media( max-width, md ) {
+					margin-top: $sui-gutter-md/3;
+					margin-bottom: $sui-gutter-md/3;
+				}
+			}
+
+			.fui-answer-cell {
+
+				@include media( max-width, md ) {
+					flex: 0 0 auto;
+				}
+			}
+
+			.fui-answer-delete {
+				width: 30px;
+				height: 30px;
+				cursor: pointer;
+				margin: 0;
+				padding: 0;
+				border: 0;
+				background: transparent;
+	
+				i:before {
+					color: palette( red, soft );
+					transition: 0.3s ease;
+				}
+	
+				&:hover, &:active {
+	
+					i:before {
+						color: palette( red, light );
+					}
+				}
+			}
+
+			@include media( max-width, md ) {
+				align-items: unset;
+				flex-direction: column;
+				margin-top: $sui-gutter-md/2;
+			}
+		}
+
+		.fui-answer-open {
+
+			.fui-answer-basics {
+
+				.fui-answer-open-indicator i {
+					transform: rotate(180deg);
+				}
+			}
+			
+			.fui-answer-extras {
+				display: flex;
+			}
+		}
+
+		&-empty {
+			padding: $sui-gutter;
+			border-radius: 5px;
+			background: #F8F8F8;
+
+			@include media( max-width, md ) {
+				padding: $sui-gutter-md;
+			}
+		}
+	}
+
+	.fui-has-answers {
+
+		.fui-multi-answer {
+			display: block;
+
+			&-empty {
+				display: none;
+			}
+		}
+	}
+}

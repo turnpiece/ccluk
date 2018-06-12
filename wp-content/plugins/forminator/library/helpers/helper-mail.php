@@ -39,3 +39,27 @@ function forminator_set_message_vars( $embed_id, $embed_title, $embed_url, $user
 
 	return $message_vars;
 }
+
+/**
+ * Get global sender email from Global Settings
+ *
+ * @since 1.1
+ * @return string
+ */
+function get_global_sender_email_address() {
+	$global_sender_email = get_option( "forminator_sender_email_address", "noreply@" . wp_parse_url( get_site_url(), PHP_URL_HOST ) );
+
+	return apply_filters( 'forminator_sender_email_address', $global_sender_email );
+}
+
+/**
+ * Get global sender name from Global Settings
+ *
+ * @since 1.1
+ * @return string
+ */
+function get_global_sender_name() {
+	$global_sender_email = get_option( "forminator_sender_name", get_option( 'blogname' ) );
+
+	return apply_filters( 'forminator_sender_name', $global_sender_email );
+}

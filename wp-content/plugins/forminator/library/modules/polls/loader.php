@@ -21,7 +21,7 @@ class Forminator_Polls extends Forminator_Module {
 	 * Return the plugin instance
 	 *
 	 * @since 1.0
-	 * @return Forminator_Module
+	 * @return self
 	 */
 	public static function get_instance() {
 		return self::$instance;
@@ -52,7 +52,7 @@ class Forminator_Polls extends Forminator_Module {
 	 */
 	public function load_admin() {
 		if( is_admin() ) {
-			include_once( dirname(__FILE__) . '/admin/admin-loader.php' );
+			include_once dirname(__FILE__) . '/admin/admin-loader.php';
 
 			new Forminator_Poll_Admin();
 		}
@@ -65,8 +65,8 @@ class Forminator_Polls extends Forminator_Module {
 	 * @since 1.0
 	 */
 	public function load_front() {
-		include_once( dirname(__FILE__) . '/front/front-action.php' );
-		include_once( dirname(__FILE__) . '/front/front-render.php' );
+		include_once dirname(__FILE__) . '/front/front-action.php';
+		include_once dirname(__FILE__) . '/front/front-render.php';
 		new Forminator_Poll_Front_Action();
 		new Forminator_Poll_Front();
 	}

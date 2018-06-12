@@ -1,0 +1,56 @@
+@include body-class {
+
+	.fui-multicheck {
+		max-height: 180px;
+		overflow-y: auto;
+		margin: 0;
+		padding: 20px;
+		border: 1px solid #F2F2F2;
+		border-radius: 5px;
+		background: #F8F8F8;
+		list-style: none;
+
+		li {
+			margin: 10px 0;
+			padding: 0;
+			border: 0;
+
+			&:first-child {
+				margin-top: 0;
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+	}
+
+	.fui-multicheck-actions {
+		display: flex;
+
+		.fui-multicheck-action-resume {
+			flex: 1;
+			margin-right: $sui-gutter/2;
+
+			@include media( max-width, md ) {
+				margin-right: 0;
+			}
+		}
+
+		.fui-multicheck-action-selectors {
+			flex: 0 0 auto;
+
+			@include media( max-width, md ) {
+				display: none;
+			}
+		}
+
+		+ .fui-multicheck {
+			margin-top: 10px;
+		}
+
+		@include media( max-width, md ) {
+			display: block;
+		}
+	}
+}

@@ -37,12 +37,12 @@ function forminator_delete_custom_posts() {
 		'forminator_forms' , 'forminator_polls', 'forminator_quizzes'
 	);
 	foreach ( $form_types as $type ) {
-		$ids = $wpdb->get_var( $wpdb->prepare( $forms_sql, $type ) );
+		$ids = $wpdb->get_var( $wpdb->prepare( $forms_sql, $type ) ); // WPCS: unprepared SQL ok. false positive
 		if ( $ids ) {
 			$delete_form_meta_sql 	= "DELETE FROM {$wpdb->postmeta} WHERE `post_id` in($ids)";
-			$wpdb->query( $delete_form_meta_sql );
+			$wpdb->query( $delete_form_meta_sql ); // WPCS: unprepared SQL ok. false positive. no need to prepared since all param are not user defined
 		}
-		$wpdb->query( $wpdb->prepare( $delete_forms_sql, $type ) );
+		$wpdb->query( $wpdb->prepare( $delete_forms_sql, $type ) ); // WPCS: unprepared SQL ok. false positive
 	}
 }
 
@@ -77,4 +77,3 @@ if ( $forminator_uninstall ) {
 	forminator_delete_custom_posts();
 	forminator_delete_custom_options();
 }
-?>

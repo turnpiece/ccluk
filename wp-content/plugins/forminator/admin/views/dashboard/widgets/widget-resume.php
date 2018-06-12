@@ -1,120 +1,76 @@
 <?php
 $path = forminator_plugin_dir();
-$hero_happy = $path . "assets/icons/forminator-icons/hero-happy.php";
-$hero_face = $path . "assets/icons/forminator-icons/hero-face.php";
+
+$total_forms = forminator_cforms_total();
+$total_polls = forminator_polls_total();
+$total_quizz = forminator_quizzes_total();
+
+$total_modules = $total_forms + $total_polls + $total_quizz;
+
+$last_submission = forminator_get_latest_entry_time( 'all' );
 ?>
 
-<div class="wpmudev-row">
+<div class="sui-box sui-summary">
 
-	<div class="wpmudev-col col-12">
+	<div class="sui-summary-image-space"></div>
 
-		<div id="orminator-dashboard-box--resume" class="wpmudev-box wpmudev-box--hero">
+	<div class="sui-summary-segment">
 
-			<div class="wpmudev-box-section">
+		<div class="sui-summary-details">
 
-				<div class="wpmudev-hero--image" aria-hidden="true">
+			<?php if ( $total_modules > 0 ) { ?>
+				<span class="sui-summary-large"><?php echo esc_html( $total_modules ); ?></span>
+			<?php } else { ?>
+				<span class="sui-summary-large">0</span>
+			<?php } ?>
 
-					<div class="wpmudev-image--wrap wpmudev-image--desktop"><?php include( $hero_happy ); ?></div>
-					<div class="wpmudev-image--wrap wpmudev-image--mobile"><?php include( $hero_face ); ?></div>
+			<span class="sui-summary-sub"><?php esc_html_e( "Active Modules", Forminator::DOMAIN ); ?></span>
 
-				</div>
+			<?php if ( $total_modules > 0 ) { ?>
+				<span class="sui-summary-detail"><strong><?php echo esc_html( $last_submission ); ?></strong></span>
+			<?php } else { ?>
+				<span class="sui-summary-detail"><strong><?php esc_html_e( "Never", Forminator::DOMAIN ); ?></strong></span>
+			<?php } ?>
 
-				<div class="wpmudev-hero--text">
+			<span class="sui-summary-sub"><?php esc_html_e( "Last Submission", Forminator::DOMAIN ); ?></span>
 
-                    <?php if ( forminator_total_forms() > 0 ) { ?>
+		</div>
 
-                        <div class="wpmudev-text--resume">
+	</div>
 
-                            <div class="wpmudev-text--message">
+	<div class="sui-summary-segment">
 
-                                <div class="wpmudev-text--align">
+		<ul class="sui-list">
 
-                                    <h2 class="wpmudev-title"><?php _e( "Welcome back.", Forminator::DOMAIN ); ?></h2>
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( "Top Converting Form", Forminator::DOMAIN ); ?></span>
+				<?php if ( $total_forms > 0 ) { ?>
+					<span class="sui-list-detail"><?php echo forminator_top_converting_form(); // WPCS: XSS ok. ?></span>
+				<?php } else { ?>
+					<span class="sui-list-detail">&mdash;</span>
+				<?php } ?>
+			</li>
 
-                                    <h3 class="wpmudev-subtitle"><?php _e( "Here’s some data about your Forms, Quizzes & Polls, that you might find useful.", Forminator::DOMAIN ); ?></h3>
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( "Most Shared Quiz", Forminator::DOMAIN ); ?></span>
+				<?php if ( $total_quizz > 0 ) { ?>
+					<span class="sui-list-detail"><?php echo forminator_most_shared_quiz(); // WPCS: XSS ok. ?></span>
+				<?php } else { ?>
+					<span class="sui-list-detail">&mdash;</span>
+				<?php } ?>
+			</li>
 
-                                </div>
+			<li>
+				<span class="sui-list-label"><?php esc_html_e( "Most Popular Poll", Forminator::DOMAIN ); ?></span>
+				<?php if ( $total_polls > 0 ) { ?>
+					<span class="sui-list-detail"><?php echo forminator_most_popular_poll(); // WPCS: XSS ok. ?></span>
+				<?php } else { ?>
+					<span class="sui-list-detail">&mdash;</span>
+				<?php } ?>
+			</li>
 
-                            </div>
+		</ul>
 
-                            <div class="wpmudev-text--table">
+	</div>
 
-                                <table class="wpmudev-table" cellspacing="0" cellpadding="0">
-
-                                    <tbody>
-
-                                        <tr>
-
-                                            <th><?php _e( "Top Converting Form", Forminator::DOMAIN ); ?></th>
-
-                                            <?php if ( forminator_cforms_total() > 0 ) { ?>
-
-                                                <td><?php echo forminator_top_converting_form(); ?></td>
-
-                                            <?php } else { ?>
-
-                                                <td>—</td>
-
-                                            <?php } ?>
-
-                                        </tr>
-
-                                        <tr>
-
-                                            <th><?php _e( "Most Shared Quiz", Forminator::DOMAIN ); ?></th>
-
-                                            <?php if ( forminator_quizzes_total() > 0 ) { ?>
-
-                                                <td><?php echo forminator_most_shared_quiz(); ?></td>
-
-                                            <?php } else { ?>
-
-                                                <td>—</td>
-
-                                            <?php } ?>
-
-                                        </tr>
-
-                                        <tr>
-
-                                            <th><?php _e( "Most Popular Poll", Forminator::DOMAIN ); ?></th>
-
-                                            <?php if ( forminator_polls_total() > 0 ) { ?>
-
-                                                <td><?php echo forminator_most_popular_poll(); ?></td>
-
-                                            <?php } else { ?>
-
-                                                <td>—</td>
-
-                                            <?php } ?>
-
-                                        </tr>
-
-                                    </tbody>
-
-                                </table>
-
-                            </div>
-
-                        </div>
-
-                    <?php } else { ?>
-
-                        <h2 class="wpmudev-title"><?php _e( "Welcome back.", Forminator::DOMAIN ); ?></h2>
-
-                        <p><?php _e( "You don't have enough information to show modules data resume.", Forminator::DOMAIN ); ?></p>
-
-                        <p><?php _e( "Come back later. Don't forget to track your modules.", Forminator::DOMAIN ); ?></p>
-
-                    <?php } ?>
-
-				</div>
-
-			</div>
-
-		</div><?php // .wpmudev-box ?>
-
-	</div><?php // .wpmudev-col ?>
-
-</div><?php // .wpmudev-row ?>
+</div>

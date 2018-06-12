@@ -4,13 +4,13 @@
 
             <div class="wpmudev-col col-12 col-md-4">
 
-                <label><?php _e( "Frequency", Forminator::DOMAIN ); ?></label>
+                <label><?php esc_html_e( "Frequency", Forminator::DOMAIN ); ?></label>
 
                 <select class="wpmudev-select">
 
-                    <option><?php _e( "Daily", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Weekly", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Monthly", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Daily", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Weekly", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Monthly", Forminator::DOMAIN ); ?></option>
 
                 </select>
 
@@ -18,17 +18,17 @@
 
             <div class="wpmudev-col col-12 col-md-4">
 
-                <label><?php _e( "Day of the week", Forminator::DOMAIN ); ?></label>
+                <label><?php esc_html_e( "Day of the week", Forminator::DOMAIN ); ?></label>
 
                 <select class="wpmudev-select">
 
-                    <option><?php _e( "Monday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Tuesday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Wednesday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Thursday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Friday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Saturday", Forminator::DOMAIN ); ?></option>
-                    <option><?php _e( "Sunday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Monday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Tuesday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Wednesday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Thursday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Friday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Saturday", Forminator::DOMAIN ); ?></option>
+                    <option><?php esc_html_e( "Sunday", Forminator::DOMAIN ); ?></option>
 
                 </select>
 
@@ -36,7 +36,7 @@
 
             <div class="wpmudev-col col-12 col-md-4">
 
-                <label><?php _e( "Time of the day", Forminator::DOMAIN ); ?></label>
+                <label><?php esc_html_e( "Time of the day", Forminator::DOMAIN ); ?></label>
 
                 <select class="wpmudev-select">
 
@@ -75,17 +75,17 @@
 
             <div class="wpmudev-col col-12">
 
-                <label><?php _e( "Email export data to", Forminator::DOMAIN ); ?></label>
+                <label><?php esc_html_e( "Email export data to", Forminator::DOMAIN ); ?></label>
 
                 <input type="email" class="wpmudev-input"
-                       placeholder="<?php _e( 'admin@website.com', Forminator::DOMAIN ); ?>">
+                       placeholder="<?php esc_html_e( 'admin@website.com', Forminator::DOMAIN ); ?>">
 
-                <label class="wpmudev-helper"><?php _e( "Leave blank if you don't want to receive exports via email.", Forminator::DOMAIN ); ?></label>
+                <label class="wpmudev-helper"><?php esc_html_e( "Leave blank if you don't want to receive exports via email.", Forminator::DOMAIN ); ?></label>
 
             </div>
 
         </div>
-		<?php wp_nonce_field( 'forminator_export_data', '_forminator_nonce' ) ?>
-        <button class="wpmudev-button wpmudev-button-blue" type="submit"><?php _e( "Save changes", Forminator::DOMAIN ) ?></button>
+		<?php wp_nonce_field( 'forminator_export_data', '_forminator_nonce' ); ?>
+        <button class="wpmudev-button wpmudev-button-blue" type="submit"><?php esc_html_e( "Save changes", Forminator::DOMAIN ); ?></button>
     </form>
 </div>

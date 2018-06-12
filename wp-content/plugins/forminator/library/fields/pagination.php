@@ -65,15 +65,15 @@ class Forminator_Pagination extends Forminator_Field {
 	 * @return array
 	 */
 	public function load_settings( $settings = array() ) {
-		return array(
+		return apply_filters( 'forminator_pagination_btn_default_settings', array(
 			array(
-				'id' => 'pagination-step-label',
-				'type' => 'Text',
-				'name' => 'pagination-label',
+				'id'         => 'pagination-step-label',
+				'type'       => 'Text',
+				'name'       => 'pagination-label',
 				'hide_label' => false,
-				'label'	=> __( 'Step label', Forminator::DOMAIN )
-			)
-		);
+				'label'      => __( 'Step label', Forminator::DOMAIN ),
+			),
+		) );
 	}
 
 	/**
@@ -83,10 +83,10 @@ class Forminator_Pagination extends Forminator_Field {
 	 * @return array
 	 */
 	public function defaults() {
-		return array(
+		return apply_filters( 'forminator_pagination_btn_label', array(
 			'btn_left'	=> __( '« Previous Step', Forminator::DOMAIN ),
 			'btn_right'	=> __( 'Next Step »', Forminator::DOMAIN ),
-		);
+		) );
 	}
 
 	/**
@@ -112,17 +112,17 @@ class Forminator_Pagination extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--pagination">
-			<div class="wpmudev-pagination--footer">
-				{[ if( field.btn_left !== "" ) { ]}
-					<button class="wpmudev-button-prev" disabled>{{ encodeHtmlEntity( field.btn_left ) }}</button>
-				{[ } else { ]}
-					<button class="wpmudev-button-prev" disabled>« Previous Step</button>
-				{[ } ]}
+		return '<div class="fui-extended-description">
+			{[ if( field.btn_left !== "" ) { ]}
+				<button class="sui-button" disabled>{{ encodeHtmlEntity( field.btn_left ) }}</button>
+			{[ } else { ]}
+				<button class="sui-button" disabled>« Previous Step</button>
+			{[ } ]}
+			<div class="sui-actions-right">
 				{[ if( field.btn_right !== "" ) { ]}
-					<button class="wpmudev-button-next">{{ encodeHtmlEntity( field.btn_right ) }}</button>
+					<button class="sui-button">{{ encodeHtmlEntity( field.btn_right ) }}</button>
 				{[ } else { ]}
-					<button class="wpmudev-button-next">Next Step »</button>
+					<button class="sui-button">Next Step »</button>
 				{[ } ]}
 			</div>
 		</div>';

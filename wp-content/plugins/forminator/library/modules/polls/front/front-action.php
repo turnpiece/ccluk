@@ -28,9 +28,11 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 	 * Handle submit
 	 *
 	 * @since 1.0
+	 * @since 1.1 Refactor $_POST to use `get_post_data`
 	 */
 	public function handle_submit() {
-		$form_id = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
+		$post_data = $this->get_post_data();
+		$form_id = isset( $post_data['form_id'] ) ? sanitize_text_field( $post_data['form_id'] ) : false;
 		if ( $form_id ) {
 
 			/**
@@ -84,11 +86,13 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 	 * Save entry
 	 *
 	 * @since 1.0
-	 * @return application/json Json response
+	 * @since 1.1 refactor $_POST to `get_post_data`
+	 * @return void /json Json response
 	 */
-	function save_entry() {
+	public function save_entry() {
 		if ( $this->validate_ajax( 'forminator_submit_form', 'POST', 'forminator_nonce' ) ) {
-			$form_id = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
+			$post_data = $this->get_post_data();
+			$form_id = isset( $post_data['form_id'] ) ? sanitize_text_field( $post_data['form_id'] ) : false;
 			if ( $form_id ) {
 
 				/**
@@ -161,9 +165,11 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 			 */
 			$user_can_vote = apply_filters( 'forminator_poll_handle_form_user_can_vote', $user_can_vote, $form_id );
 
+			$post_data = $this->get_post_data();
+
 			if ( $user_can_vote ) {
-				$field_data  = isset( $_POST[ $form_id ] ) ? $_POST[ $form_id ] : false;
-				$extra_field = isset( $_POST[ $form_id . '-extra' ] ) ? $_POST[ $form_id . '-extra' ] : false;
+				$field_data  = isset( $post_data[ $form_id ] ) ? $post_data[ $form_id ] : false;
+				$extra_field = isset( $post_data[ $form_id . '-extra' ] ) ? $post_data[ $form_id . '-extra' ] : false;
 				if ( $field_data && ! empty( $field_data ) ) {
 					$entry             = new Forminator_Form_Entry_Model();
 					$entry->entry_type = $this->entry_type;
@@ -233,9 +239,9 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 						$entry->set_fields( $field_data_array );
 						$setting = $poll->settings;
 
-						if ( isset( $setting['results-behav'] ) && ( 'show_after' == $setting['results-behav'] || 'link_on' == $setting['results-behav'] ) ) {
-							$url       = $_POST['_wp_http_referer'];
-							$render_id = $_POST['render_id'];
+						if ( isset( $setting['results-behav'] ) && ( 'show_after' === $setting['results-behav'] || 'link_on' === $setting['results-behav'] ) ) {
+							$url       = $post_data['_wp_http_referer'];
+							$render_id = $post_data['render_id'];
 							$url       = add_query_arg(
 								array(
 									'saved'     => 'true',
@@ -332,7 +338,7 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 				$color   = array_shift( $chart_colors );
 				$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
 				$entries = 0;
-				if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+				if ( in_array( $slug, array_keys( $map_entries ), true ) ) {
 					$entries = $map_entries[ $slug ];
 				}
 				if ( $number_votes_enabled ) {
@@ -362,7 +368,7 @@ class Forminator_Poll_Front_Action extends Forminator_Front_Action {
 		$response 		= self::$response;
 		if ( !empty( $response ) && is_array( $response ) ) {
 			?>
-			<label class="forminator-label--<?php echo $response['notice']; ?>"><span><?php echo $response['message']; ?></span></label>
+			<label class="forminator-label--<?php echo esc_attr( $response['notice'] ); ?>"><span><?php echo $response['message']; // WPCS: XSS ok. ?></span></label>
 			<?php
 		}
 	}

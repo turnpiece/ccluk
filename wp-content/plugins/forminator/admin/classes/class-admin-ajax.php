@@ -48,6 +48,9 @@ class Forminator_Admin_AJAX {
 		add_action( "wp_ajax_forminator_load_pagination_listings_popup", array( $this, "load_pagination_listings" ) );
 		add_action( "wp_ajax_forminator_save_pagination_listings_popup", array( $this, "save_pagination_listings" ) );
 
+		add_action( "wp_ajax_forminator_load_email_settings_popup", array( $this, "load_email_form" ) );
+		add_action( "wp_ajax_forminator_save_email_settings_popup", array( $this, "save_email_form" ) );
+
 		add_action( "wp_ajax_forminator_load_uninstall_settings_popup", array( $this, "load_uninstall_form" ) );
 		add_action( "wp_ajax_forminator_save_uninstall_settings_popup", array( $this, "save_uninstall_form" ) );
 
@@ -70,27 +73,33 @@ class Forminator_Admin_AJAX {
 	 * Save quizzes
 	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
-	function save_quiz() {
+	public function save_quiz() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
-		$id    = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
-		$id    = intval( $id );
-		$title = isset($_POST['quiz_title']) ? sanitize_text_field( $_POST['quiz_title'] ) : sanitize_text_field( $_POST['formName'] );
 
-		if ( $id == null || $id <= 0 ) {
-			$formModel = new Forminator_Quiz_Form_Model();
+		$submitted_data = $this->get_post_data();
+
+		// TODO: Add nonce verify here, and on js admin too
+		$id    = isset( $submitted_data['formID'] ) ? $submitted_data['formID'] : null;
+		$id    = intval( $id );
+		$title = isset($submitted_data['quiz_title']) ? sanitize_text_field( $submitted_data['quiz_title'] ) : sanitize_text_field( $submitted_data['formName'] );
+
+		if ( is_null($id) || $id <= 0 ) {
+			$form_model = new Forminator_Quiz_Form_Model();
 		} else {
-			$formModel = Forminator_Quiz_Form_Model::model()->load( $id );
-			if ( ! is_object( $formModel ) ) {
+			$form_model = Forminator_Quiz_Form_Model::model()->load( $id );
+			if ( ! is_object( $form_model ) ) {
 				wp_send_json_error( __( "Quiz model doesn't exist", Forminator::DOMAIN ) );
 			}
 			//we need to empty fields cause we will send new data
-			$formModel->clearFields();
+			$form_model->clearFields();
 		}
 
-		$data 		= $_POST['data'];
+		$data 		= $submitted_data['data'];
+		$action     = isset($submitted_data['action']) ? $submitted_data['action'] : '';
 		$msg_count 	= $data['msg_count']; //Backup, we allow html here
 		// Sanitize post data
 		$data 		= forminator_sanitize_field( $data );
@@ -98,37 +107,40 @@ class Forminator_Admin_AJAX {
 		$data['msg_count'] = $msg_count;
 
 		// Detect action
-		$formModel->quiz_type = ( $_POST['action'] == 'forminator_save_quiz_nowrong' ) ? 'nowrong' : 'knowledge';
+		$form_model->quiz_type = 'knowledge';
+		if ('forminator_save_quiz_nowrong' === $action) {
+			$form_model->quiz_type = 'nowrong';
+		}
 
 		// Check if results exist
 		if ( isset( $data['results'] ) && is_array( $data['results'] ) ) {
-			$formModel->results = $data['results'];
+			$form_model->results = $data['results'];
 		}
 
 		// Check if questions exist
 		if ( isset( $data['questions'] ) ) {
 			foreach ( $data['questions'] as &$question ) {
-				$question['type'] = $formModel->quiz_type;
+				$question['type'] = $form_model->quiz_type;
 				$question['slug'] = uniqid();
 			}
 		}
 
-		$formModel->setVarInArray( 'name', 'formName', $_POST );
+		$form_model->setVarInArray( 'name', 'formName', $submitted_data );
 
 		// Handle quiz questions
-		$formModel->questions = array();
+		$form_model->questions = array();
 		if( isset( $data['questions'] ) ) {
-			$formModel->questions = $data['questions'];
+			$form_model->questions = $data['questions'];
 		}
 
 		// Unset data
 		unset( $data['results'] );
 		unset( $data['questions'] );
-		$data['formName']    = $title;
-		$formModel->settings = $data;
+		$data['formName']     = $title;
+		$form_model->settings = $data;
 
 		// Save data
-		$id = $formModel->save();
+		$id = $form_model->save();
 
 		wp_send_json_success( $id );
 	}
@@ -137,50 +149,51 @@ class Forminator_Admin_AJAX {
 	 * Save poll
 	 *
 	 * @since 1.0
-	 * @since 1.0.6 Duplicate privacy override to options
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
 	public function save_poll_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
-		$answers = array();
-		$id      = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
-		$id      = intval( $id );
+		$submitted_data = $this->get_post_data();
+		$answers        = array();
+		$id             = isset( $submitted_data['formID'] ) ? $submitted_data['formID'] : null;
+		$id             = intval( $id );
 
-		if ( $id == null || $id <= 0 ) {
-			$formModel = new Forminator_Poll_Form_Model();
+		if ( is_null($id) || $id <= 0 ) {
+			$form_model = new Forminator_Poll_Form_Model();
 		} else {
-			$formModel = Forminator_Poll_Form_Model::model()->load( $id );
-			if ( ! is_object( $formModel ) ) {
+			$form_model = Forminator_Poll_Form_Model::model()->load( $id );
+			if ( ! is_object( $form_model ) ) {
 				wp_send_json_error( __( "Poll model doesn't exist", Forminator::DOMAIN ) );
 			}
 			//we need to empty fields cause we will send new data
-			$formModel->clearFields();
+			$form_model->clearFields();
 		}
 
-		$formModel->setVarInArray( 'name', 'formName', $_POST );
+		$form_model->setVarInArray( 'name', 'formName', $submitted_data );
 
 		// Check if answers exist
-		if( isset( $_POST['data']['answers'] ) ) {
-			$answers = forminator_sanitize_field( $_POST['data']['answers'] );
+		if( isset( $submitted_data['data']['answers'] ) ) {
+			$answers = forminator_sanitize_field( $submitted_data['data']['answers'] );
 		}
 
 		// Sanitize settings
-		$settings = forminator_sanitize_field( $_POST['data'] );
+		$settings = forminator_sanitize_field( $submitted_data['data'] );
 		unset( $settings['answers'] );
-		$formModel->settings = $settings;
+		$form_model->settings = $settings;
 
 		foreach ( $answers as $answer ) {
-			$fieldModel   = new Forminator_Form_Field_Model();
+			$field_model  = new Forminator_Form_Field_Model();
 			$answer['id'] = $answer['element_id'];
-			$fieldModel->import( $answer );
-			$fieldModel->slug = $answer['element_id'];
-			$formModel->addField( $fieldModel );
+			$field_model->import( $answer );
+			$field_model->slug = $answer['element_id'];
+			$form_model->addField( $field_model );
 		}
 
 		// Save data
-		$id = $formModel->save();
+		$id = $form_model->save();
 
 		// add privacy settings to global option
 		$override_privacy = false;
@@ -209,61 +222,63 @@ class Forminator_Admin_AJAX {
 	 * Save custom form fields & settings
 	 *
 	 * @since 1.0
-	 * @since 1.0.6 Duplicate privacy override to options
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
-	function save_custom_form() {
+	public function save_custom_form() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			return;
 		}
 
+		// TODO: Add nonce verify here, and on js admin too
+		$submitted_data = $this->get_post_data();
 		$fields = array();
-		$id     = isset( $_POST['formID'] ) ? $_POST['formID'] : null;
+		$id     = isset( $submitted_data['formID'] ) ? $submitted_data['formID'] : null;
 		$id     = intval( $id );
 
-		if ( $id == null || $id <= 0 ) {
-			$formModel = new Forminator_Custom_Form_Model();
+		if ( is_null($id) || $id <= 0 ) {
+			$form_model = new Forminator_Custom_Form_Model();
 		} else {
-			$formModel = Forminator_Custom_Form_Model::model()->load( $id );
-			if ( ! is_object( $formModel ) ) {
+			$form_model = Forminator_Custom_Form_Model::model()->load( $id );
+			if ( ! is_object( $form_model ) ) {
 				wp_send_json_error( __( "Form model doesn't exist", Forminator::DOMAIN ) );
 			}
 			//we need to empty fields cause we will send new data
-			$formModel->clearFields();
+			$form_model->clearFields();
 		}
-		$formModel->setVarInArray( 'name', 'formName', $_POST );
+		$form_model->setVarInArray( 'name', 'formName', $submitted_data );
 
 		// Build the fields
-		if( isset( $_POST['data']['wrappers'] ) ) {
-			$fields = $_POST['data']['wrappers'];
-			unset( $_POST['data']['wrappers'] );
+		if( isset( $submitted_data['data']['wrappers'] ) ) {
+			$fields = $submitted_data['data']['wrappers'];
+			unset( $submitted_data['data']['wrappers'] );
 		}
 
 		// Sanitize settings
-		$settings = forminator_sanitize_field( $_POST['data'] );
+		$settings = forminator_sanitize_field( $submitted_data['data'] );
 
 		// Sanitize textarea fields
 
 		// Sanitize custom css
-		if( isset( $_POST['data']['custom_css'] ) ) {
-			$settings['custom_css'] = sanitize_textarea_field( $_POST['data']['custom_css'] );
+		if( isset( $submitted_data['data']['custom_css'] ) ) {
+			$settings['custom_css'] = sanitize_textarea_field( $submitted_data['data']['custom_css'] );
 		}
 
 		// Sanitize thank you message
-		if( isset( $_POST['data']['thankyou-message'] ) ) {
-			$settings['thankyou-message'] = $_POST['data']['thankyou-message'];
+		if( isset( $submitted_data['data']['thankyou-message'] ) ) {
+			$settings['thankyou-message'] = $submitted_data['data']['thankyou-message'];
 		}
 
 		// Sanitize user email message
-		if( isset( $_POST['data']['user-email-editor'] ) ) {
-			$settings['user-email-editor'] = $_POST['data']['user-email-editor'];
+		if( isset( $submitted_data['data']['user-email-editor'] ) ) {
+			$settings['user-email-editor'] = $submitted_data['data']['user-email-editor'];
 		}
 
 		// Sanitize admin email message
-		if( isset( $_POST['data']['admin-email-editor'] ) ) {
-			$settings['admin-email-editor'] = $_POST['data']['admin-email-editor'];
+		if( isset( $submitted_data['data']['admin-email-editor'] ) ) {
+			$settings['admin-email-editor'] = $submitted_data['data']['admin-email-editor'];
 		}
 
-		$formModel->settings = $settings;
+		$form_model->settings = $settings;
 
 		foreach ( $fields as $row ) {
 			foreach ( $row['fields'] as $f ) {
@@ -272,12 +287,12 @@ class Forminator_Admin_AJAX {
 				$field->slug   = $f['element_id'];
 				unset( $f['element_id'] );
 				$field->import( $f );
-				$formModel->addField( $field );
+				$form_model->addField( $field );
 			}
 		}
 
 		// Save data
-		$id = $formModel->save();
+		$id = $form_model->save();
 
 		// add privacy settings to global option
 		$override_privacy = false;
@@ -308,7 +323,7 @@ class Forminator_Admin_AJAX {
 	 * @since 1.0
 	 * @return string JSON
 	 */
-	function load_existing_cfields() {
+	public function load_existing_cfields() {
 		$keys = forminator_get_existing_cfields();
 		$html = '';
 
@@ -324,7 +339,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function dismiss_welcome() {
+	public function dismiss_welcome() {
 		forminator_validate_ajax( "forminator_dismiss_welcome" );
 		update_option( "forminator_welcome_dismissed", true );
 		wp_send_json_success();
@@ -335,32 +350,18 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function load_fonts() {
+	public function load_fonts() {
 		_deprecated_function( 'load_fonts', '1.0.5', 'load_google_fonts' );
-		$active = $html = "";
-		$fonts  = forminator_get_font_families();
-
-		if ( isset( $_POST['active'] ) ) {
-			$active = sanitize_text_field( $_POST['active'] );
-		}
-
-		foreach ( $fonts as $font ) {
-			if ( $active == $font ) {
-				$html .= "<option value='$font' selected='selected'>$font</option>";
-			} else {
-				$html .= "<option value='$font'>$font</option>";
-			}
-		}
-		wp_send_json_success( $html );
+		wp_send_json_error(array());
 	}
 
 
 	/**
-	 * Load google events
+	 * Load google fonts
 	 *
 	 * @since 1.0.5
 	 */
-	function load_google_fonts() {
+	public function load_google_fonts() {
 		$fonts = forminator_get_font_families();
 		wp_send_json_success( $fonts );
 	}
@@ -370,7 +371,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function load_paypal() {
+	public function load_paypal() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_paypal" );
 
@@ -384,13 +385,14 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function save_paypal() {
+	public function save_paypal() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_save_popup_paypal" );
 
-		update_option( "forminator_paypal_api_mode", sanitize_text_field( $_POST['api_mode'] ) );
-		update_option( "forminator_paypal_client_id", sanitize_text_field( $_POST['client_id'] ) );
-		update_option( "forminator_paypal_secret", sanitize_text_field( $_POST['secret'] ) );
+		// TODO: Add nonce verification here and js admin
+		update_option( "forminator_paypal_api_mode", sanitize_text_field( $_POST['api_mode'] ) ); // WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_paypal_client_id", sanitize_text_field( $_POST['client_id'] ) ); // WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_paypal_secret", sanitize_text_field( $_POST['secret'] ) ); // WPCS: CSRF ok by forminator_validate_ajax.
 
 		wp_send_json_success();
 	}
@@ -400,7 +402,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function load_captcha() {
+	public function load_captcha() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_captcha" );
 
@@ -414,14 +416,14 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function save_captcha() {
+	public function save_captcha() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_save_popup_captcha" );
 
-		update_option( "forminator_captcha_key", sanitize_text_field( $_POST['captcha_key'] ) );
-		update_option( "forminator_captcha_secret", sanitize_text_field( $_POST['captcha_secret'] ) );
-		update_option( "forminator_captcha_language", sanitize_text_field( $_POST['captcha_language'] ) );
-		update_option( "forminator_captcha_theme", sanitize_text_field( $_POST['captcha_theme'] ) );
+		update_option( "forminator_captcha_key", sanitize_text_field( $_POST['captcha_key'] ) );// WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_captcha_secret", sanitize_text_field( $_POST['captcha_secret'] ) );// WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_captcha_language", sanitize_text_field( $_POST['captcha_language'] ) );// WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_captcha_theme", sanitize_text_field( $_POST['captcha_theme'] ) );// WPCS: CSRF ok by forminator_validate_ajax.
 		wp_send_json_success();
 	}
 
@@ -430,7 +432,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function load_currency() {
+	public function load_currency() {
 		forminator_validate_ajax( "forminator_popup_currency" );
 
 		$html = forminator_template( 'settings/popup/edit-currency-content' );
@@ -443,11 +445,11 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function save_currency() {
+	public function save_currency() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_save_popup_currency" );
 
-		update_option( "forminator_currency", sanitize_text_field( $_POST['currency'] ) );
+		update_option( "forminator_currency", sanitize_text_field( $_POST['currency'] ) );// WPCS: CSRF ok by forminator_validate_ajax.
 		wp_send_json_success();
 	}
 
@@ -456,7 +458,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function load_pagination_entries() {
+	public function load_pagination_entries() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_pagination_entries" );
 
@@ -470,13 +472,24 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function save_pagination_entries() {
-		// Validate nonce
-		forminator_validate_ajax( "forminator_save_popup_pagination_entries" );
+	 public function save_pagination_entries() {
+ 		// Validate nonce
+ 		forminator_validate_ajax( "forminator_save_popup_pagination_entries" );
 
-		update_option( "forminator_pagination_entries", intval( sanitize_text_field( $_POST['pagination_entries'] ) ) );
-		wp_send_json_success();
-	}
+ 		$pagination = intval( sanitize_text_field( $_POST['pagination_entries'] ) ) ;// WPCS: CSRF ok by forminator_validate_ajax.
+
+ 		if ( 0 < $pagination ) {
+
+ 			update_option( "forminator_pagination_entries", $pagination );
+ 			wp_send_json_success();
+
+ 		} else {
+
+ 			wp_send_json_error( __( "Limit per page can not be less than one.", Forminator::DOMAIN ) );
+
+ 		}
+
+ 	}
 
 
 	/**
@@ -484,7 +497,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function load_pagination_listings() {
+	public function load_pagination_listings() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_pagination_listings" );
 
@@ -498,11 +511,50 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function save_pagination_listings() {
+	public function save_pagination_listings() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_save_popup_pagination_listings" );
 
-		update_option( "forminator_pagination_listings", intval( sanitize_text_field( $_POST['pagination_listings'] ) ) );
+		$pagination = intval( sanitize_text_field( $_POST['pagination_listings'] ) ) ; // WPCS: CSRF ok by forminator_validate_ajax.
+
+ 		if ( 0 < $pagination ) {
+
+ 			update_option( "forminator_pagination_listings", $pagination );
+ 			wp_send_json_success();
+
+ 		} else {
+
+ 			wp_send_json_error( __( "Limit per page can not be less than one.", Forminator::DOMAIN ) );
+
+ 		}
+
+	}
+
+	/**
+	 * Load the email settings form
+	 *
+	 * @since 1.1
+	 */
+	public function load_email_form() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_load_popup_email_settings" );
+
+		$html = forminator_template( 'settings/popup/edit-email-content' );
+
+		wp_send_json_success( $html );
+	}
+
+	/**
+	 * Save email settings data
+	 *
+	 * @since 1.1
+	 */
+	public function save_email_form() {
+		// Validate nonce
+		forminator_validate_ajax( "forminator_save_popup_email_settings" );
+
+		update_option( "forminator_sender_email_address", sanitize_text_field( $_POST['sender_email'] ) ); // WPCS: CSRF ok by forminator_validate_ajax.
+		update_option( "forminator_sender_name", sanitize_text_field( $_POST['sender_name'] ) ); // WPCS: CSRF ok by forminator_validate_ajax.
 		wp_send_json_success();
 	}
 
@@ -511,7 +563,7 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function load_uninstall_form() {
+	public function load_uninstall_form() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_uninstall_form" );
 
@@ -526,11 +578,11 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0.2
 	 */
-	function save_uninstall_form() {
+	public function save_uninstall_form() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_save_popup_uninstall_settings" );
 
-		$delete_uninstall = $_POST['delete_uninstall'];
+		$delete_uninstall = $_POST['delete_uninstall'];// WPCS: CSRF ok by forminator_validate_ajax.
 		$delete_uninstall = filter_var( $delete_uninstall, FILTER_VALIDATE_BOOLEAN );
 
 		update_option( "forminator_uninstall_clear_data", $delete_uninstall );
@@ -542,22 +594,25 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function preview_custom_forms() {
+	public function preview_custom_forms() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_preview_cforms" );
 
 		$preview_data = false;
 		$form_id      = false;
 
-		// Only set form_id if only `id` was sent, if its not sent, let it go
-		// Since form can be preview-ed, even its not already been saved
-		if ( isset( $_POST['id'] ) ) {
+		if ( isset( $_POST['id'] ) ) { // WPCS: CSRF ok by forminator_validate_ajax.
 			$form_id = intval( $_POST['id'] );
 		}
 
+		// Validate ID
+		if ( ! isset( $_POST['id'] ) || empty( $_POST['id'] ) || ! is_numeric( $_POST['id'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
+			wp_send_json_error();
+		}
+
 		// Check if preview data set
-		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {
-			$preview_data = forminator_data_to_model_form( $_POST['data'] );
+		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
+			$preview_data = forminator_data_to_model_form( $_POST['data'] );// WPCS: CSRF ok by forminator_validate_ajax.
 		}
 
 		ob_start();
@@ -574,20 +629,20 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function preview_polls() {
+	public function preview_polls() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_preview_polls" );
 
 		$preview_data = false;
 		$form_id      = false;
 
-		if ( isset( $_POST['id'] ) ) {
+		if ( isset( $_POST['id'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
 			$form_id = intval( $_POST['id'] );
 		}
 
 		// Check if preview data set
-		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {
-			$preview_data = forminator_data_to_model_poll( $_POST['data'] );
+		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
+			$preview_data = forminator_data_to_model_poll( $_POST['data'] );// WPCS: CSRF ok by forminator_validate_ajax.
 		}
 
 		ob_start();
@@ -604,20 +659,20 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function preview_quizzes() {
+	public function preview_quizzes() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_popup_preview_quizzes" );
 
 		$preview_data = false;
 		$form_id      = false;
 
-		if ( isset( $_POST['id'] ) ) {
+		if ( isset( $_POST['id'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
 			$form_id = intval( $_POST['id'] );
 		}
 
 		// Check if preview data set
-		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {
-			$preview_data = forminator_data_to_model_quiz( $_POST['data'] );
+		if ( isset( $_POST['data'] ) && ! empty( $_POST['data'] ) ) {// WPCS: CSRF ok by forminator_validate_ajax.
+			$preview_data = forminator_data_to_model_quiz( $_POST['data'] );// WPCS: CSRF ok by forminator_validate_ajax.
 		}
 
 		ob_start();
@@ -634,15 +689,16 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function load_exports() {
+	public function load_exports() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_load_exports" );
 
-		$form_id = isset( $_POST['id'] ) && $_POST['id'] >= 0 ? $_POST['id'] : false;
-		if( $form_id ){
-			$html = forminator_template( 'settings/popup/exports-content', $args = array(
-				'form_id' => $form_id
-			) );
+		$form_id = isset( $_POST['id'] ) && $_POST['id'] >= 0 ? $_POST['id'] : false;// WPCS: CSRF ok by forminator_validate_ajax.
+		if ( $form_id ) {
+			$args = array(
+				'form_id' => $form_id,
+			);
+			$html = forminator_template( 'settings/popup/exports-content', $args );
 			wp_send_json_success( $html );
 		} else {
 			wp_send_json_error( __( "Not valid module ID provided.", Forminator::DOMAIN ) );
@@ -654,11 +710,12 @@ class Forminator_Admin_AJAX {
 	 *
 	 * @since 1.0
 	 */
-	function clear_exports() {
+	public function clear_exports() {
 		// Validate nonce
 		forminator_validate_ajax( "forminator_clear_exports" );
 
-		$form_id = isset( $_POST['id'] ) && $_POST['id'] >= 0 ? $_POST['id'] : false;
+		$form_id = isset( $_POST['id'] ) && $_POST['id'] >= 0 ? $_POST['id'] : false;// WPCS: CSRF ok by forminator_validate_ajax.
+
 		if ( !$form_id ) {
 			wp_send_json_error( __( "No ID was provided.", Forminator::DOMAIN ) );
 		}
@@ -676,14 +733,18 @@ class Forminator_Admin_AJAX {
 	 * Search Emails
 	 *
 	 * @since 1.0.3
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
-	function search_emails() {
+	public function search_emails() {
 		if ( ! current_user_can( 'manage_options' ) ) {
 			wp_send_json_error( array() );
 		}
 
-		$admin_email  = ( ( isset( $_POST['admin_email'] ) && $_POST['admin_email'] ) ? true : false );
-		$search_email = ( ( isset( $_POST['q'] ) && $_POST['q'] ) ? sanitize_text_field( $_POST['q'] ) : false );
+		$submitted_data = $this->get_post_data();
+
+		//TODO : add ajax validate here and js admin too
+		$admin_email  = ( ( isset( $submitted_data['admin_email'] ) && $submitted_data['admin_email'] ) ? true : false );
+		$search_email = ( ( isset( $submitted_data['q'] ) && $submitted_data['q'] ) ? sanitize_text_field( $submitted_data['q'] ) : false );
 
 		// return admin_email when requested
 		if ( $admin_email ) {
@@ -715,6 +776,44 @@ class Forminator_Admin_AJAX {
 	}
 
 	/**
+	 * Get $_POST data
+	 *
+	 * @since 1.1
+	 *
+	 * @param string $nonce_action action to validate
+	 * @param array  $sanitize_callbacks {
+	 *                                   custom sanitize options, its assoc array
+	 *                                   'field_name_1' => 'function_to_call_1' function will called with `call_user_func_array`,
+	 *                                   'field_name_2' => 'function_to_call_2',
+	 *                                   }
+	 *
+	 * @return array
+	 */
+	protected function get_post_data( $nonce_action = '', $sanitize_callbacks = array() ) {
+		// do nonce / caps check when requested
+		if ( ! empty( $nonce_action ) ) {
+			// it will wp_send_json_error
+			forminator_validate_ajax( $nonce_action );
+		}
+
+		// TODO : mark this as phpcs comply after checking usages of this function
+		$post_data = $_POST;
+
+		// do some sanitize
+		foreach ( $sanitize_callbacks as $field => $sanitize_func ) {
+			if ( isset( $post_data[ $field ] ) ) {
+				if ( is_callable( $sanitize_func ) ) {
+					$post_data[ $field ] = call_user_func_array( array( $sanitize_func ), array( $post_data[ $field ] ) );
+				}
+			}
+		}
+
+		// do some validation
+
+		return $post_data;
+	}
+
+	/*
 	 * Load Privacy Settings
 	 *
 	 * @since 1.0.6

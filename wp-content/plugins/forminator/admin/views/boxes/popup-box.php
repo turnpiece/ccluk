@@ -1,6 +1,6 @@
 <?php $icon_close = forminator_plugin_dir() . "assets/icons/admin-icons/close.php"; ?>
 
-<div id="forminator-modal-<?php echo $template_class; ?>" class="wpmudev-modal <?php echo $template_class; ?>">
+<div id="forminator-modal-<?php echo esc_attr( $template_class ); ?>" class="wpmudev-modal <?php echo esc_attr( $template_class ); ?>">
 
 	<div class="wpmudev-modal-mask" aria-hidden="true"></div>
 
@@ -16,9 +16,9 @@
 
 			<div class="wpmudev-header--action">
 
-				<button class="wpmudev-box--action"><?php include( $icon_close ); ?></button>
+				<button class="wpmudev-box--action"><?php require $icon_close; ?></button>
 
-				<button class="wpmudev-sr-only"><?php _e( "Close modal", Forminator::DOMAIN ); ?></button>
+				<button class="wpmudev-sr-only"><?php esc_html_e( "Close modal", Forminator::DOMAIN ); ?></button>
 
 			</div>
 

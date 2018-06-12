@@ -1,0 +1,84 @@
+@include body-class {
+	
+	%fui-button-clear {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		background: transparent;
+		text-align: center;
+
+		i {
+			display: block;
+
+			&:before {
+				display: block;
+				transition: 0.3s ease;
+			}
+		}
+	}
+
+	.fui-button-preview {
+		width: 100%;
+		max-width: 100%;
+		cursor: pointer;
+		display: flex;
+		align-items: center;
+		padding: 0 8px 0 14px;
+		border: 1px solid $blue;
+		border-radius: 30px;
+		background: $blue;
+		color: $white;
+		font: 400 15px/28px $font;
+		letter-spacing: 0;
+		text-align: left;
+		transition: 0.3s ease;
+
+		span {
+			flex: 1;
+			margin-right: 5px;
+
+			@media (max-width: 1100px) {
+				display: none;
+			}
+		}
+
+		i {
+			display: block;
+			flex: 0 0 auto;
+			font-size: 18px;
+
+			&:before {
+				display: block;
+				color: $white;
+			}
+		}
+		
+		&:hover, &:focus {
+			background: palette( blue, medium );
+		}
+	
+		@media (max-width: 1100px) {
+			width: 40px;
+			height: 40px;
+			flex-direction: column;
+			justify-content: center;
+			position: fixed;
+			z-index: 1;
+			right: 20px;
+			bottom: 20px;
+			padding: 0;
+			border-radius: 80px;
+			box-shadow: 0 3px 5px rgba(0, 0, 0, 0.1);
+		}
+	}
+
+	.fui-button-icon {
+		@extend .sui-button;
+		width: 30px;
+		min-width: unset;
+	}
+}

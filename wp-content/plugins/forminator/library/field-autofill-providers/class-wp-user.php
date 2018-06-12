@@ -2,7 +2,7 @@
 
 class Forminator_WP_User_Autofill_Provider extends Forminator_Autofill_Provider_Abstract {
 	protected $_slug       = 'wp_user';
-	protected $_name       = 'Wordpress User';
+	protected $_name       = 'WordPress User';
 	protected $_short_name = 'WP User';
 
 	/**
@@ -19,7 +19,7 @@ class Forminator_WP_User_Autofill_Provider extends Forminator_Autofill_Provider_
 	 * @return Forminator_Autofill_Provider_Interface|Forminator_WP_User_Autofill_Provider|null
 	 */
 	public static function get_instance() {
-		if ( self::$_instance == null ) {
+		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
 
@@ -101,7 +101,7 @@ class Forminator_WP_User_Autofill_Provider extends Forminator_Autofill_Provider_
 	/**
 	 * Define what field to be hooked and what attribute will be used as auto fill provider
 	 *
-	 * @example [
+	 * @example {
 	 *  'FIELD_TYPE_TO_HOOK' => [
 	 *          'PROVIDER_SLUG.ATTRIBUTE_PROVIDER_KEY'
 	 *              ],
@@ -115,7 +115,7 @@ class Forminator_WP_User_Autofill_Provider extends Forminator_Autofill_Provider_
 	 *              ]
 	 *
 	 *
-	 * ];
+	 * ...}
 	 * @return array
 	 */
 	public function get_attribute_to_hook() {

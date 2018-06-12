@@ -1,0 +1,32 @@
+@include body-class {
+
+	.fui-select-small {
+
+		.dropdown-handle {
+			width: 36px;
+			line-height: 27px;
+		}
+		
+		.select-list-container {
+			padding-right: 36px;
+
+			.list-value,
+			.list-results {
+				font-size: 12px;
+				line-height: 16px;
+			}
+
+			.list-value {
+				padding: 6px 6px 6px 12px;
+			}
+
+			.list-results {
+				top: 31px;
+
+				li {
+					padding: 7px 6px;
+				}
+			}
+		}
+	}
+}

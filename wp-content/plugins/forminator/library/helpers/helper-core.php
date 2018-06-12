@@ -102,13 +102,14 @@ function forminator_admin_enqueue_fonts() {
  * Enqueue admin styles
  *
  * @since 1.0
+ * @since 1.1 Remove forminator-admin css after migrate to shared-ui
  *
  * @param $version
  */
 function forminator_admin_enqueue_styles( $version ) {
 	wp_enqueue_style( 'select2-forminator-css', forminator_plugin_url() . 'assets/css/select2.min.css', array(), "4.0.3" ); // Select2
-	wp_enqueue_style( 'forminator-admin', forminator_plugin_url() . 'assets/css/admin.css', array(), $version );
-	wp_enqueue_style( 'forminator-form-styles', forminator_plugin_url() . 'assets/css/front.css', array(), $version );
+	wp_enqueue_style( 'shared-ui', forminator_plugin_url() . 'assets/css/shared-ui.min.css', array(), $version );
+	wp_enqueue_style( 'forminator-form-styles', forminator_plugin_url() . 'assets/css/front.min.css', array(), $version );
 }
 
 /**
@@ -139,6 +140,20 @@ function forminator_admin_jquery_ui_init() {
 }
 
 /**
+ * Enqueue SUI scripts on admin
+ *
+ * @since 1.1
+ */
+function forminator_sui_scripts() {
+
+	$sanitize_version = str_replace( '.', '-', FORMINATOR_SUI_VERSION );
+	$sui_body_class   = "sui-$sanitize_version";
+
+	wp_enqueue_script( 'shared-ui', forminator_plugin_url() . 'assets/js/shared-ui.min.js', array( 'jquery' ), $sui_body_class, true );
+
+}
+
+/**
  * Enqueue admin scripts
  *
  * @since 1.0
@@ -158,15 +173,17 @@ function forminator_admin_enqueue_scripts( $version, $data = array(), $l10n = ar
 	}
 
 	wp_enqueue_script( 'forminator-admin-layout', forminator_plugin_url() . 'build/admin/layout.js', array( 'jquery' ), $version );
-	wp_register_script( 'forminator-admin',
-	                    forminator_plugin_url() . 'build/main.js',
-	                    array(
-		                    'backbone',
-		                    'underscore',
-		                    'jquery',
-		                    'wp-color-picker',
-	                    ),
-	                    $version );
+	wp_register_script(
+		'forminator-admin',
+		forminator_plugin_url() . 'build/main.js',
+		array(
+			'backbone',
+			'underscore',
+			'jquery',
+			'wp-color-picker',
+		),
+		$version
+	);
 	wp_localize_script( 'forminator-admin', 'forminator_data', $data );
 	wp_localize_script( 'forminator-admin', 'forminator_l10n', $l10n );
 	wp_enqueue_script( 'forminator-admin' );
@@ -180,7 +197,7 @@ function forminator_admin_enqueue_scripts( $version, $data = array(), $l10n = ar
  * @param $version
  */
 function forminator_print_front_styles( $version = '1.0' ) {
-	wp_enqueue_style( 'forminator-form-styles', forminator_plugin_url() . 'assets/css/front.css', array(), $version );
+	wp_enqueue_style( 'forminator-form-styles', forminator_plugin_url() . 'assets/css/front.min.css', array(), $version );
 	wp_enqueue_style( 'select2-forminator-css', forminator_plugin_url() . 'assets/css/select2.min.css', array(), "4.0.3" ); // Select2
 }
 
@@ -201,8 +218,6 @@ function forminator_print_front_scripts( $version = '1.0' ) {
 		wp_localize_script( 'forminator-front-scripts', 'ForminatorFront', forminator_localize_data() );
 	}
 
-
-
 	if ( is_admin() ) {
 		wp_localize_script( 'forminator-front-scripts', 'ForminatorConditions', array() );
 	}
@@ -218,7 +233,8 @@ function forminator_localize_data() {
 		'ajaxUrl' => forminator_ajax_url(),
 		'cform'   => array(
 			'processing'      => __( 'Submitting form, please wait', Forminator::DOMAIN ),
-			'error'           => __( 'An error occured processing the form. Please try again', Forminator::DOMAIN ),
+			'error'           => __( 'An error occurred processing the form. Please try again', Forminator::DOMAIN ),
+			'upload_error'    => __( 'An upload error occured processing the form. Please try again', Forminator::DOMAIN ),
 			'pagination_prev' => __( 'Back', Forminator::DOMAIN ),
 			'pagination_next' => __( 'Next', Forminator::DOMAIN ),
 			'pagination_go'   => __( 'Submit', Forminator::DOMAIN ),
@@ -231,7 +247,7 @@ function forminator_localize_data() {
 		),
 		'poll'    => array(
 			'processing' => __( 'Submitting vote, please wait', Forminator::DOMAIN ),
-			'error'      => __( 'An error occured saving the vote. Please try again', Forminator::DOMAIN ),
+			'error'      => __( 'An error occurred saving the vote. Please try again', Forminator::DOMAIN ),
 		),
 	);
 }
@@ -261,7 +277,7 @@ function forminator_template( $path, $args = array() ) {
 
 		extract( $args );
 
-		include( $file );
+		include $file;
 
 		$content = ob_get_clean();
 	}
@@ -326,19 +342,28 @@ function forminator_has_captcha_settings() {
  */
 function forminator_get_form_id_helper() {
 	$screen = get_current_screen();
-	$ids    = array(
-		'forminator_page_forminator-quiz-view',
-		'forminator_page_forminator-cform-view',
-		'forminator_page_forminator-poll-view',
-		'forminator_page_forminator-entries',
-	);
-	if ( ! in_array( $screen->id, $ids ) ) {
+	$ids    = forminator_get_page_ids_helper();
+
+	if ( ! in_array( $screen->id, $ids, true ) ) {
 		return 0;
 	}
 
-	return isset( $_GET['form_id'] ) ? intval( $_GET['form_id'] ) : 0;
+	return isset( $_GET['form_id'] ) ? intval( $_GET['form_id'] ) : 0; // WPCS: CSRF OK
 }
-
+/**
+ * Get Page IDs
+ *
+ * @since 1.2
+ * @return array
+ */
+function forminator_get_page_ids_helper() {
+	return array(
+		'forminator-pro_page_forminator-quiz-view',
+		'forminator-pro_page_forminator-cform-view',
+		'forminator-pro_page_forminator-poll-view',
+		'forminator-pro_page_forminator-entries',
+	);
+}
 /**
  * Return form type
  *
@@ -347,19 +372,14 @@ function forminator_get_form_id_helper() {
  */
 function forminator_get_form_type_helper() {
 	$screen = get_current_screen();
-	$ids    = array(
-		'forminator_page_forminator-quiz-view',
-		'forminator_page_forminator-cform-view',
-		'forminator_page_forminator-poll-view',
-		'forminator_page_forminator-entries',
-	);
-	if ( ! in_array( $screen->id, $ids ) ) {
+	$ids    = forminator_get_page_ids_helper();
+	if ( ! in_array( $screen->id, $ids, true ) ) {
 		return 0;
 	}
 
 	$form_type = "";
-	$page      = isset( $_GET['page'] ) ? $_GET['page'] : null;
-	if ( $page == null ) {
+	$page      = isset( $_GET['page'] ) ? $_GET['page'] : null; // WPCS: CSRF OK
+	if ( is_null( $page ) ) {
 		return null;
 	}
 
@@ -374,8 +394,8 @@ function forminator_get_form_type_helper() {
 			$form_type = "cform";
 			break;
 		case 'forminator-entries':
-			if ( isset( $_GET['form_type'] ) && $_GET['form_type'] ) {
-				switch ( $_GET['form_type'] ) {
+			if ( isset( $_GET['form_type'] ) && $_GET['form_type'] ) { // WPCS: CSRF OK
+				switch ( $_GET['form_type'] ) { // WPCS: CSRF OK
 					case 'forminator_forms':
 						$form_type = "cform";
 						break;
@@ -434,11 +454,11 @@ function delete_export_logs( $form_id ) {
 		return false;
 	}
 
-	$data = get_option( 'forminator_exporter_log', array() );
+	$data   = get_option( 'forminator_exporter_log', array() );
 	$delete = false;
 
 	if ( isset( $data[ $form_id ] ) ) {
-		unset($data[$form_id]);
+		unset( $data[ $form_id ] );
 		$delete = update_option( 'forminator_exporter_log', $data );
 	}
 
@@ -477,7 +497,7 @@ function forminator_get_export_logs( $form_id ) {
 function forminator_get_current_url() {
 	global $wp;
 
-	return add_query_arg( $wp->query_string, '', home_url( $wp->request ) );
+	return add_query_arg( $_SERVER['QUERY_STRING'], '', trailingslashit( home_url( $wp->request ) ) );
 }
 
 /**
@@ -501,4 +521,36 @@ function forminator_get_day_translated( $day ) {
 	);
 
 	return isset( $days[ $day ] ) ? $days[ $day ] : $day;
+}
+
+/**
+ * Add log of forminator
+ *
+ * By default it will check `WP_DEBUG`,
+ * then will check `filters`
+ *
+ * @since 1.1
+ */
+function forminator_maybe_log() {
+	$enabled = ( defined( 'WP_DEBUG' ) && WP_DEBUG );
+
+	/**
+	 * Filter log enable for forminator
+	 *
+	 * By default it will check `WP_DEBUG`
+	 *
+	 * @since 1.1
+	 *
+	 * @param bool $enabled current enable status
+	 */
+	$enabled = apply_filters( 'forminator_enable_log', $enabled );
+
+	if ( $enabled ) {
+		$args    = func_get_args();
+		$message = wp_json_encode( $args );
+		if ( false !== $message ) {
+			error_log( '[Forminator] ' . $message );// phpcs:ignore WordPress.PHP.DevelopmentFunctions.error_log_error_log
+		}
+
+	}
 }

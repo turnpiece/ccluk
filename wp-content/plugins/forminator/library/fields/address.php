@@ -56,186 +56,179 @@ class Forminator_Address extends Forminator_Field {
      * @since 1.0
 	 * @return array
 	 */
-    public function load_settings( $settings = array() ) {
-        return array(
-            array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
+	public function load_settings( $settings = array() ) {
+		return array(
+			array(
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
-            ),
-
-            array(
-				'id' => 'separator',
-				'type' => 'Separator',
-				'hide_label' => true,
-			),
-
-            array(
-				'id' => 'street-address',
-				'type' => 'MultiName',
-				'name' => 'street_address',
-				'hide_label' => true,
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Street address', Forminator::DOMAIN )
-					)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
-					array(
-						'id' => 'street-address-label',
-						'type' => 'Text',
-						'name' => 'street_address_label',
-						'label' => __( 'Label', Forminator::DOMAIN )
-					),
-					array(
-						'id' => 'street-address-placeholder',
-						'type' => 'Text',
-						'name' => 'street_address_placeholder',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
-					),
-				)
 			),
 
 			array(
-				'id' => 'address-line',
-				'type' => 'MultiName',
-				'name' => 'address_line',
+				'id'         => 'street-address',
+				'type'       => 'MultiName',
+				'name'       => 'street_address',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "true",
-						'label' => __( 'Address Line 2', Forminator::DOMAIN )
-					)
+						'label' => __( 'Street address', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'address-line-label',
-						'type' => 'Text',
-						'name' => 'address_line_label',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'id'    => 'street-address-label',
+						'type'  => 'Text',
+						'name'  => 'street_address_label',
+						'label' => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'address-line-placeholder',
-						'type' => 'Text',
-						'name' => 'address_line_placeholder',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'id'    => 'street-address-placeholder',
+						'type'  => 'Text',
+						'name'  => 'street_address_placeholder',
+						'label' => __( 'Placeholder', Forminator::DOMAIN ),
 					),
-				)
+				),
 			),
 
 			array(
-				'id' => 'address-city',
-				'type' => 'MultiName',
-				'name' => 'address_city',
+				'id'         => 'address-line',
+				'type'       => 'MultiName',
+				'name'       => 'address_line',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "true",
-						'label' => __( 'City', Forminator::DOMAIN )
-					)
+						'label' => __( 'Address Line 2', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'address-city-label',
-						'type' => 'Text',
-						'name' => 'address_city_label',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'id'    => 'address-line-label',
+						'type'  => 'Text',
+						'name'  => 'address_line_label',
+						'label' => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'address-city-placeholder',
-						'type' => 'Text',
-						'name' => 'address_city_placeholder',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'id'    => 'address-line-placeholder',
+						'type'  => 'Text',
+						'name'  => 'address_line_placeholder',
+						'label' => __( 'Placeholder', Forminator::DOMAIN ),
 					),
-				)
+				),
 			),
 
 			array(
-				'id' => 'address-state',
-				'type' => 'MultiName',
-				'name' => 'address_state',
+				'id'         => 'address-city',
+				'type'       => 'MultiName',
+				'name'       => 'address_city',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "true",
-						'label' => __( 'State / Province', Forminator::DOMAIN )
-					)
+						'label' => __( 'City', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'address-state-label',
-						'type' => 'Text',
-						'name' => 'address_state_label',
+						'id'    => 'address-city-label',
+						'type'  => 'Text',
+						'name'  => 'address_city_label',
+						'label' => __( 'Label', Forminator::DOMAIN ),
+					),
+					array(
+						'id'    => 'address-city-placeholder',
+						'type'  => 'Text',
+						'name'  => 'address_city_placeholder',
+						'label' => __( 'Placeholder', Forminator::DOMAIN ),
+					),
+				),
+			),
+
+			array(
+				'id'         => 'address-state',
+				'type'       => 'MultiName',
+				'name'       => 'address_state',
+				'hide_label' => true,
+				'values'     => array(
+					array(
+						'value' => "true",
+						'label' => __( 'State / Province', Forminator::DOMAIN ),
+					),
+				),
+				'fields'     => array(
+					array(
+						'id'        => 'address-state-label',
+						'type'      => 'Text',
+						'name'      => 'address_state_label',
 						'className' => 'text-field',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label'     => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'address-state-placeholder',
-						'type' => 'Text',
-						'name' => 'address_state_placeholder',
+						'id'        => 'address-state-placeholder',
+						'type'      => 'Text',
+						'name'      => 'address_state_placeholder',
 						'className' => 'text-field',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'label'     => __( 'Placeholder', Forminator::DOMAIN ),
 					),
-				)
+				),
 			),
 
 			array(
-				'id' => 'address-zip',
-				'type' => 'MultiName',
-				'name' => 'address_zip',
+				'id'         => 'address-zip',
+				'type'       => 'MultiName',
+				'name'       => 'address_zip',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "true",
-						'label' => __( 'ZIP / Postal Code', Forminator::DOMAIN )
-					)
+						'label' => __( 'ZIP / Postal Code', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'     => array(
 					array(
-						'id' => 'address-zip-label',
-						'type' => 'Text',
-						'name' => 'address_zip_label',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'id'    => 'address-zip-label',
+						'type'  => 'Text',
+						'name'  => 'address_zip_label',
+						'label' => __( 'Label', Forminator::DOMAIN ),
 					),
 					array(
-						'id' => 'address-zip-placeholder',
-						'type' => 'Text',
-						'name' => 'address_zip_placeholder',
-						'label' => __( 'Placeholder', Forminator::DOMAIN )
+						'id'    => 'address-zip-placeholder',
+						'type'  => 'Text',
+						'name'  => 'address_zip_placeholder',
+						'label' => __( 'Placeholder', Forminator::DOMAIN ),
 					),
-				)
+				),
 			),
 
 			array(
-				'id' => 'address-country',
-				'type' => 'MultiName',
-				'name' => 'address_country',
+				'id'         => 'address-country',
+				'type'       => 'MultiName',
+				'name'       => 'address_country',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
 						'value' => "true",
-						'label' => __( 'Country', Forminator::DOMAIN )
-					)
-				),
-				'fields' => array(
-					array(
-						'id' => 'address-country-label',
-						'type' => 'Text',
-						'name' => 'address_country_label',
-						'label' => __( 'Label', Forminator::DOMAIN )
+						'label' => __( 'Country', Forminator::DOMAIN ),
 					),
-				)
+				),
+				'fields'     => array(
+					array(
+						'id'    => 'address-country-label',
+						'type'  => 'Text',
+						'name'  => 'address_country_label',
+						'label' => __( 'Label', Forminator::DOMAIN ),
+					),
+				),
 			),
-        );
+		);
 
 	}
 
@@ -274,11 +267,11 @@ class Forminator_Address extends Forminator_Field {
 	 * @return array
 	 */
 	public function autofill_settings( $settings = array() ) {
-		$street_address_providers = apply_filters( 'forminator_field_' . $this->slug . '_street_address' . '_autofill', array(), $this->slug . '_street_address' );
-		$address_line_providers   = apply_filters( 'forminator_field_' . $this->slug . '_address_line' . '_autofill', array(), $this->slug . '_address_line' );
-		$city_providers           = apply_filters( 'forminator_field_' . $this->slug . '_city' . '_autofill', array(), $this->slug . '_city' );
-		$state_providers          = apply_filters( 'forminator_field_' . $this->slug . '_state' . '_autofill', array(), $this->slug . '_state' );
-		$zip_providers            = apply_filters( 'forminator_field_' . $this->slug . '_zip' . '_autofill', array(), $this->slug . '_zip' );
+		$street_address_providers = apply_filters( 'forminator_field_' . $this->slug . '_street_address_autofill', array(), $this->slug . '_street_address' );
+		$address_line_providers   = apply_filters( 'forminator_field_' . $this->slug . '_address_line_autofill', array(), $this->slug . '_address_line' );
+		$city_providers           = apply_filters( 'forminator_field_' . $this->slug . '_city_autofill', array(), $this->slug . '_city' );
+		$state_providers          = apply_filters( 'forminator_field_' . $this->slug . '_state_autofill', array(), $this->slug . '_state' );
+		$zip_providers            = apply_filters( 'forminator_field_' . $this->slug . '_zip_autofill', array(), $this->slug . '_zip' );
 
 		$autofill_settings = array(
 			'address-street_address' => array(
@@ -309,61 +302,77 @@ class Forminator_Address extends Forminator_Field {
 	 */
 	public function admin_html() {
 		return '{[ if( field.street_address == "true" ) { ]}
-			<div class="wpmudev-form-field--grouped">
-				<div class="wpmudev-form-field--group">
+			<div class="sui-row">
+				<div class="sui-col">
 					{[ if( field.street_address_label !== "" ) { ]}
-						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.street_address_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+						<label class="sui-label">{{ encodeHtmlEntity( field.street_address_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 					{[ } ]}
-					<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.street_address_placeholder ) }}" {{ field.required ? "required" : "" }}>
+					<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.street_address_placeholder ) }}" {{ field.required ? "required" : "" }}>
 				</div>
 			</div>
 		{[ } ]}
 		{[ if( field.address_line == "true" ) { ]}
-			<div class="wpmudev-form-field--grouped">
-				<div class="wpmudev-form-field--group">
+			<div class="sui-row">
+				<div class="sui-col">
 					{[ if( field.address_line_label !== "" ) { ]}
-						<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.address_line_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+						<label class="sui-label">{{ encodeHtmlEntity( field.address_line_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 					{[ } ]}
-					<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.address_line_placeholder ) }}" {{ field.required ? "required" : "" }}>
+					<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.address_line_placeholder ) }}" {{ field.required ? "required" : "" }}>
 				</div>
 			</div>
 		{[ } ]}
 		{[ if( field.address_city == "true" || field.address_state == "true" ) { ]}
-			<div class="wpmudev-form-field--grouped">
+			<div class="sui-row">
 				{[ if( field.address_city == "true" ) { ]}
-					<div class="wpmudev-form-field--group">
+					{[ if( field.address_state == "true" ) { ]}
+					<div class="sui-col-md-6">
+					{[ } else { ]}
+					<div class="sui-col">
+					{[ } ]}
 						{[ if( field.address_city_label !== "" ) { ]}
-							<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.address_city_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+							<label class="sui-label">{{ encodeHtmlEntity( field.address_city_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 						{[ } ]}
-						<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.address_city_placeholder ) }}" {{ field.required ? "required" : "" }}>
+						<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.address_city_placeholder ) }}" {{ field.required ? "required" : "" }}>
 					</div>
 				{[ } ]}
 				{[ if( field.address_state == "true" ) { ]}
-					<div class="wpmudev-form-field--group">
+					{[ if( field.address_city == "true" ) { ]}
+					<div class="sui-col-md-6">
+					{[ } else { ]}
+					<div class="sui-col">
+					{[ } ]}
 						{[ if( field.address_state_label !== "" ) { ]}
-							<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.address_state_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+							<label class="sui-label">{{ encodeHtmlEntity( field.address_state_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 						{[ } ]}
-						<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.address_state_placeholder ) }}" {{ field.required ? "required" : "" }}>
+						<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.address_state_placeholder ) }}" {{ field.required ? "required" : "" }}>
 					</div>
 				{[ } ]}
 			</div>
 		{[ } ]}
 		{[ if( field.address_zip == "true" || field.address_country == "true" ) { ]}
-			<div class="wpmudev-form-field--grouped">
+			<div class="sui-row">
 				{[ if( field.address_zip == "true" ) { ]}
-					<div class="wpmudev-form-field--group">
+					{[ if( field.address_country == "true" ) { ]}
+					<div class="sui-col-md-6">
+					{[ } else { ]}
+					<div class="sui-col">
+					{[ } ]}
 						{[ if( field.address_zip_label !== "" ) { ]}
-							<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.address_zip_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+							<label class="sui-label">{{ encodeHtmlEntity( field.address_zip_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 						{[ } ]}
-						<input type="number" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.address_zip_placeholder ) }}" {{ field.required ? "required" : "" }}>
+						<input type="number" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.address_zip_placeholder ) }}" {{ field.required ? "required" : "" }}>
 					</div>
 				{[ } ]}
 				{[ if( field.address_country == "true" ) { ]}
-					<div class="wpmudev-form-field--group">
+					{[ if( field.address_zip == "true" ) { ]}
+					<div class="sui-col-md-6">
+					{[ } else { ]}
+					<div class="sui-col">
+					{[ } ]}
 						{[ if( field.address_country_label !== "" ) { ]}
-							<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.address_country_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+							<label class="sui-label">{{ encodeHtmlEntity( field.address_country_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 						{[ } ]}
-						<select class="wpmudev-select" style="width: 100%;" {{ field.required ? "required" : "" }}>
+						<select {{ field.required ? "required" : "" }}>
 							{[ _.each( field.options, function( value, key ){ ]}
 								<option>{{ value.label }}</option>
 							{[ }) ]}
@@ -414,11 +423,12 @@ class Forminator_Address extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_address( $field, $slug, $design ) {
-		$cols 		  	= 12;
-		$html        	= '';
-		$id = $name 	= self::get_property( 'element_id', $field );
-		$required		= self::get_property( 'required', $field, false );
-		$enabled		= self::get_property( $slug, $field );
+		$cols     = 12;
+		$html     = '';
+		$id       = self::get_property( 'element_id', $field );
+		$name     = $id;
+		$required = self::get_property( 'required', $field, false );
+		$enabled  = self::get_property( $slug, $field );
 
 		if( ! $enabled ) return '';
 
@@ -426,11 +436,11 @@ class Forminator_Address extends Forminator_Field {
 		 * Create address field
 		 */
 		$address = array(
-			 'type' 		=> 'text',
-			 'class' 		=> 'forminator-input',
-			 'name' 		=> $name . '-' . $slug,
-			 'id'			=> $name  . '-' . $slug,
-			 'placeholder' 	=> $this->sanitize_value( self::get_property( $slug . '_placeholder', $field ) ),
+			'type'        => 'text',
+			'class'       => 'forminator-input',
+			'name'        => $name . '-' . $slug,
+			'id'          => $name . '-' . $slug,
+			'placeholder' => $this->sanitize_value( self::get_property( $slug . '_placeholder', $field ) ),
 		);
 
 		// Address field markup
@@ -456,12 +466,12 @@ class Forminator_Address extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_city_state( $field, $design ) {
-		$cols        = 12;
-		$html        = '';
-		$id = $name  = self::get_property( 'element_id', $field );
-		$required	 = self::get_property( 'required', $field, false );
-		$city 	     = self::get_property( 'address_city', $field, false );
-		$state 	  	 = self::get_property( 'address_state', $field, false );
+		$cols     = 12;
+		$html     = '';
+		$id       = self::get_property( 'element_id', $field );
+		$required = self::get_property( 'required', $field, false );
+		$city     = self::get_property( 'address_city', $field, false );
+		$state    = self::get_property( 'address_state', $field, false );
 
 		 // If both prefix & first name are disabled, return
 		if( ! $city && ! $state ) return '';
@@ -476,11 +486,11 @@ class Forminator_Address extends Forminator_Field {
 			* Create city field
 			*/
 			$city_data = array(
-				'type' 			=> 'text',
-				'class' 		=> 'forminator-input',
-				'name' 			=> $id . '-city',
-				'id' 			=> $id . '-city',
-				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_city_placeholder', $field ) ),
+				'type'        => 'text',
+				'class'       => 'forminator-input',
+				'name'        => $id . '-city',
+				'id'          => $id . '-city',
+				'placeholder' => $this->sanitize_value( self::get_property( 'address_city_placeholder', $field ) ),
 			);
 
 			// City markup
@@ -503,11 +513,11 @@ class Forminator_Address extends Forminator_Field {
 			* Create state field
 			*/
 			$state_data = array(
-				'type' 			=> 'text',
-				'class' 		=> 'forminator-input',
-				'name' 			=> $id . '-state',
-				'id' 			=> $id . '-state',
-				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_state_placeholder', $field ) ),
+				'type'        => 'text',
+				'class'       => 'forminator-input',
+				'name'        => $id . '-state',
+				'id'          => $id . '-state',
+				'placeholder' => $this->sanitize_value( self::get_property( 'address_state_placeholder', $field ) ),
 			);
 
 			if ( ! $city ) {
@@ -537,12 +547,12 @@ class Forminator_Address extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_zip_country( $field, $design ) {
-		$cols           	= 12;
-		$html           	= '';
-		$id = $name     	= self::get_property( 'element_id', $field );
-		$required	 		= self::get_property( 'required', $field, false );
-		$address_zip 	  	= self::get_property( 'address_zip', $field, false );
-		$address_country 	= self::get_property( 'address_country', $field, false );
+		$cols            = 12;
+		$html            = '';
+		$id              = self::get_property( 'element_id', $field );
+		$required        = self::get_property( 'required', $field, false );
+		$address_zip     = self::get_property( 'address_zip', $field, false );
+		$address_country = self::get_property( 'address_country', $field, false );
 
 		 // If both prefix & first name are disabled, return
 		if( ! $address_zip && ! $address_country ) return '';
@@ -557,11 +567,11 @@ class Forminator_Address extends Forminator_Field {
 			* Create first name field
 			*/
 			$zip_data = array(
-				'type' 			=> 'text',
-				'class' 		=> 'forminator-input',
-				'name' 			=> $id . '-zip',
-				'id' 			=> $id . '-zip',
-				'placeholder' 	=> $this->sanitize_value( self::get_property( 'address_zip_placeholder', $field ) ),
+				'type'        => 'text',
+				'class'       => 'forminator-input',
+				'name'        => $id . '-zip',
+				'id'          => $id . '-zip',
+				'placeholder' => $this->sanitize_value( self::get_property( 'address_zip_placeholder', $field ) ),
 			);
 
 			$html .= '<div class="forminator-row forminator-row--inner">';
@@ -583,9 +593,9 @@ class Forminator_Address extends Forminator_Field {
 			 * Create prefix field
 			 */
 			$country_data = array(
-				 'class'	=> 'forminator-select',
-				 'name' 	=> $id . '-country',
-				 'id' 		=> $id . '-country',
+				'class' => 'forminator-select',
+				'name'  => $id . '-country',
+				'id'    => $id . '-country',
 			);
 
 			if ( ! $address_zip ) {
@@ -727,7 +737,7 @@ class Forminator_Address extends Forminator_Field {
 						$zip_error_message    = apply_filters( 'forminator_address_field_zip_validation_message', $zip_required_message, $id, $field );
 						$this->validation_message[ $id . '-zip' ] = $zip_error_message;
 					}
-					if ( $address_country && empty( $country ) && $country !== '0' ) {
+					if ( $address_country && empty( $country ) && '0' !== $country ) {
 						$country_required_message = __( 'This field is required. Please select the country',  Forminator::DOMAIN );
 						$country_error_message    = apply_filters( 'forminator_address_field_country_validation_message', $country_required_message, $id, $field );
 						$this->validation_message[ $id . '-country' ] = $country_error_message;

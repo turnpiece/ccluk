@@ -152,8 +152,46 @@
 			}
 		});
 	};
-	$.validator.addMethod("datedmy", function(value, element) {
-		return this.optional(element) || value.match(/^\d\d?\/\d\d?\/\d\d\d\d$/);
+	$.validator.addMethod("validurl", function(value, element) {
+        var url = $.validator.methods.url.bind(this);
+		return url(value, element) || url('http://' + value, element);
+	});
+	$.validator.addMethod("phone", function(value, element) {
+		return this.optional(element) || !value.match(/[a-z]|[^\w-()+ ]|[-()+ ]{2,}/);
+	});
+	$.validator.addMethod("dateformat", function(value, element, param) {
+		// dateITA method from jQuery Validator additional. Date method is deprecated and doesn't work for all formats
+		var check = false,
+			re = 'yy-mm-dd' !== param ? /^\d{1,2}\/\d{1,2}\/\d{4}$/ : /^\d{4}-\d{1,2}-\d{1,2}$/,
+			adata, gg, mm, aaaa, xdata;
+			
+		if ( re.test( value ) ) {
+			if ( 'dd/mm/yy' === param ) {
+				adata = value.split( "/" );
+				gg = parseInt( adata[ 0 ], 10 );
+				mm = parseInt( adata[ 1 ], 10 );
+				aaaa = parseInt( adata[ 2 ], 10 );
+			} else if ( 'mm/dd/yy' === param ) {
+				adata = value.split( "/" );
+				mm = parseInt( adata[ 0 ], 10 );
+				gg = parseInt( adata[ 1 ], 10 );
+				aaaa = parseInt( adata[ 2 ], 10 );
+			} else {
+				adata = value.split( "-" );
+				aaaa = parseInt( adata[ 0 ], 10 );
+				mm = parseInt( adata[ 1 ], 10 );
+				gg = parseInt( adata[ 2 ], 10 );
+			}
+			xdata = new Date( Date.UTC( aaaa, mm - 1, gg, 12, 0, 0, 0 ) );
+			if ( ( xdata.getUTCFullYear() === aaaa ) && ( xdata.getUTCMonth() === mm - 1 ) && ( xdata.getUTCDate() === gg ) ) {
+				check = true;
+			} else {
+				check = false;
+			}
+		} else {
+			check = false;
+		}
+		return this.optional( element ) || check;
 	});
 	$.validator.addMethod("maxwords", function (value, element, param) {
 		return this.optional(element) || jQuery.trim(value).split(/\s+/).length <= param;

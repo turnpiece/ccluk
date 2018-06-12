@@ -1,138 +1,62 @@
-<?php
-$path = forminator_plugin_dir();
-$icon_minus = $path . "assets/icons/admin-icons/minus.php";
-$icon_polls = $path . "assets/icons/forminator-icons/polls.php";
-?>
+<div class="sui-box">
 
-<div class="wpmudev-box wpmudev-can--hide">
+	<div class="sui-box-header">
 
-    <div class="wpmudev-box-header">
+		<h3 class="sui-box-title"><i class="sui-icon-graph-bar" aria-hidden="true"></i><?php esc_html_e( "Polls", Forminator::DOMAIN ); ?></h3>
 
-        <div class="wpmudev-header--icon">
+	</div>
 
-            <?php include( $icon_polls ); ?>
+	<?php if ( forminator_polls_total() > 0 ) { ?>
 
-        </div>
+		<table class="fui-table fui-table-accordion">
 
-        <div class="wpmudev-header--text">
+			<tbody>
 
-            <h2 class="wpmudev-title"><?php _e( "Polls", Forminator::DOMAIN ); ?></h2>
+				<?php foreach( forminator_polls_modules() as $module ) { ?>
 
-        </div>
+					<tr>
 
-        <div class="wpmudev-header--action">
+						<td class="fui-cell-title"><?php echo forminator_get_form_name( $module['id'], 'poll'); // WPCS: XSS ok. ?></td>
 
-            <button class="wpmudev-box--action">
+						<td class="fui-table-action"><a href="<?php echo admin_url( 'admin.php?page=forminator-poll-wizard&id=' . $module['id'] ); // WPCS: XSS ok. ?>"
+							class="sui-button-icon sui-tooltip sui-tooltip-top-left"
+							data-tooltip="<?php esc_html_e( 'Edit poll settings', Forminator::DOMAIN ); ?>"><i class="sui-icon-widget-settings-config" aria-hidden="true"></i></a>
+						</td>
 
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+					</tr>
 
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
+				<?php } ?>
 
-            </button>
+			</tbody>
+
+		</table>
+
+	<?php } else { ?>
+
+		<div class="sui-box-body">
+
+			<p><?php esc_html_e( "Create polls, and collect user data. Choose a visualization style that best suits your needs.", Forminator::DOMAIN ); ?></p>
+
+			<p><button href="/" class="sui-button sui-button-blue wpmudev-open-modal" data-modal="polls"><?php esc_html_e( "Create Poll", Forminator::DOMAIN ); ?></button></p>
 
 		</div>
 
-    </div>
+	<?php } ?>
 
-    <div class="wpmudev-box-section">
+	<?php if ( forminator_polls_total() > 0 ) { ?>
 
-        <?php if ( forminator_polls_total() > 0 ) { ?>
+		<div class="sui-box-footer">
 
-            <div class="wpmudev-section--table">
+			<div class="fui-action-buttons">
 
-                <table class="wpmudev-table wpmudev-can--edit">
+				<a href="<?php echo forminator_get_admin_link( 'forminator-poll' ); // WPCS: XSS ok. ?>" class="sui-button sui-button-ghost"><i class="sui-icon-eye" aria-hidden="true"></i> <?php esc_html_e( "View All", Forminator::DOMAIN ); ?></a>
 
-                    <thead>
+				<button href="/" class="sui-button sui-button-blue wpmudev-open-modal" data-modal="polls"><?php esc_html_e( "Create Poll", Forminator::DOMAIN ); ?></button>
 
-                        <tr>
+			</div>
 
-                            <th><?php _e( "Name", Forminator::DOMAIN ); ?></th>
+		</div>
 
-                            <td class="wpmudev-row--64"><?php _e( "Views", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--92"><?php _e( "Votes", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--58"><?php _e( "Rate", Forminator::DOMAIN ); ?></td>
-
-                            <td></td>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <?php foreach( forminator_polls_modules() as $module ) { ?>
-
-                            <tr>
-
-                                <th>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_form_name( $module['id'], 'poll'); ?></p>
-
-                                </th>
-
-                                <td class="wpmudev-row--64">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Views:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["views"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--92">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Votes:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["entries"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--58">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Conv. Rate:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_rate( $module ); ?>%</p>
-
-                                </td>
-
-                                <td>
-
-                                    <p class="wpmudev-table--text"><a href="<?php echo admin_url( 'admin.php?page=forminator-poll-wizard&id=' . $module['id'] ) ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "Edit", Forminator::DOMAIN ); ?></a></p>
-
-                                </td>
-
-                            </tr>
-
-                        <?php } ?>
-
-                    </tbody>
-
-                    <tfoot>
-
-                        <tr><td colspan="5">
-                            <div class="wpmudev-table--buttons">
-                                <button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-blue wpmudev-open-modal" data-modal="polls"><?php _e( "New Poll", Forminator::DOMAIN ); ?></button>
-                                <a href="<?php echo forminator_get_admin_link( 'forminator-poll' ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "View All", Forminator::DOMAIN ); ?></a>
-                            </div>
-                        </td></tr>
-
-                </table>
-
-            </div>
-
-        <?php } else { ?>
-
-            <div class="wpmudev-section--text">
-
-                <p><?php _e( "Create polls, and collect user data. Choose a visualization style that best suits your needs.", Forminator::DOMAIN ); ?></p>
-
-                <p><button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost wpmudev-open-modal" data-modal="polls"><?php _e( "Create Poll", Forminator::DOMAIN ); ?></button></p>
-
-            </div>
-
-        <?php } ?>
-
-    </div>
+	<?php } ?>
 
 </div>

@@ -43,7 +43,7 @@ class Forminator_Shortcode_Generator {
 		);
 
 		// Check if current page is hustle wizard page
-		if( in_array( $screen->id, $pages ) ) return true;
+		if( in_array( $screen->id, $pages, true ) ) return true;
 
 		return false;
 	}
@@ -61,7 +61,7 @@ class Forminator_Shortcode_Generator {
 		$html = '';
 
 		// If page different than Post or Page, abort
-		if ( $pagenow !=  'post.php' && $pagenow !=  'post-new.php' && ! $this->is_hustle_wizard() ) {
+		if ( 'post.php' !== $pagenow && 'post-new.php' !== $pagenow && ! $this->is_hustle_wizard() ) {
 			return $content;
 		}
 
@@ -82,7 +82,7 @@ class Forminator_Shortcode_Generator {
 		global $pagenow;
 
 		// If page different than Post or Page, abort
-		if ( $pagenow !=  'post.php' && $pagenow != 'post-new.php' && ! $this->is_hustle_wizard() ) {
+		if ( 'post.php' !== $pagenow && 'post-new.php' !== $pagenow && ! $this->is_hustle_wizard() ) {
 			return $content;
 		}
 
@@ -92,7 +92,7 @@ class Forminator_Shortcode_Generator {
 		wp_enqueue_script( 'jquery-ui-tabs' );
 		wp_enqueue_script( 'select2-forminator', forminator_plugin_url() . 'assets/js/library/select2.full.min.js', array( 'jquery' ), FORMINATOR_VERSION );
 		wp_enqueue_style( 'select2-forminator-css', forminator_plugin_url() . 'assets/css/select2.min.css', array(), "4.0.3" ); // Select2
-		wp_enqueue_style( 'forminator-shortcode-generator-styles', forminator_plugin_url() . 'assets/css/scgen.css', array(), FORMINATOR_VERSION );
+		wp_enqueue_style( 'forminator-shortcode-generator-styles', forminator_plugin_url() . 'assets/css/scgen.min.css', array(), FORMINATOR_VERSION );
 		wp_enqueue_script( 'forminator-shortcode-generator', forminator_plugin_url() . 'build/admin/scgen.min.js', array( 'jquery' ), FORMINATOR_VERSION );
 
 		$this->print_markup();
@@ -119,7 +119,7 @@ class Forminator_Shortcode_Generator {
 			return $content;
 		}
 
-		wp_enqueue_style( 'forminator-shortcode-generator-front-styles', forminator_plugin_url() . 'assets/css/front.css', array(), FORMINATOR_VERSION );
+		wp_enqueue_style( 'forminator-shortcode-generator-front-styles', forminator_plugin_url() . 'assets/css/front.min.css', array(), FORMINATOR_VERSION );
 	}
 
 	/**
@@ -138,7 +138,7 @@ class Forminator_Shortcode_Generator {
 				<div class="wpmudev-box-header">
 
 					<div class="wpmudev-header--text">
-						<h2 class="wpmudev-subtitle"><?php echo __( "Generate form shortcode", Forminator::DOMAIN ); ?></h2>
+						<h2 class="wpmudev-subtitle"><?php echo esc_html__( "Generate form shortcode", Forminator::DOMAIN ); ?></h2>
 					</div>
 
 					<div class="wpmudev-header--action">
@@ -158,21 +158,21 @@ class Forminator_Shortcode_Generator {
 
 							<ul class="wpmudev-tabs--nav">
 
-								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-custom-forms"><?php _e( 'Custom Forms', Forminator::DOMAIN ); ?></a></li>
+								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-custom-forms"><?php esc_html_e( 'Custom Forms', Forminator::DOMAIN ); ?></a></li>
 
-								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-polls"><?php _e( 'Polls', Forminator::DOMAIN ); ?></a></li>
+								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-polls"><?php esc_html_e( 'Polls', Forminator::DOMAIN ); ?></a></li>
 
-								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-quizzes"><?php _e( 'Quizzes', Forminator::DOMAIN ); ?></a></li>
+								<li class="wpmudev-tab"><a class="wpmudev-tab--link" href="#forminator-quizzes"><?php esc_html_e( 'Quizzes', Forminator::DOMAIN ); ?></a></li>
 
 							</ul>
 
 							<div id="forminator-custom-forms" class="wpmudev-tabs--content">
 
-								<?php echo $this->get_forms(); ?>
+								<?php echo $this->get_forms(); // WPCS: XSS ok. ?>
 
 								<div class="wpmudev-tabs--action">
 
-									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-cform"><?php _e( 'Insert Form', Forminator::DOMAIN ); ?></button>
+									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-cform"><?php esc_html_e( 'Insert Form', Forminator::DOMAIN ); ?></button>
 
 								</div>
 
@@ -180,11 +180,11 @@ class Forminator_Shortcode_Generator {
 
 							<div id="forminator-polls" class="wpmudev-tabs--content">
 
-								<?php echo $this->get_polls(); ?>
+								<?php echo $this->get_polls(); // WPCS: XSS ok. ?>
 
 								<div class="wpmudev-tabs--action">
 
-									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-poll"><?php _e( 'Insert Form', Forminator::DOMAIN ); ?></button>
+									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-poll"><?php esc_html_e( 'Insert Form', Forminator::DOMAIN ); ?></button>
 
 								</div>
 
@@ -192,11 +192,11 @@ class Forminator_Shortcode_Generator {
 
 							<div id="forminator-quizzes" class="wpmudev-tabs--content">
 
-								<?php echo $this->get_quizzes(); ?>
+								<?php echo $this->get_quizzes(); // WPCS: XSS ok. ?>
 
 								<div class="wpmudev-tabs--action">
 
-									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-quiz"><?php _e( 'Insert Form', Forminator::DOMAIN ); ?></button>
+									<button class="wpmudev-button wpmudev-button-blue wpmudev-insert-quiz"><?php esc_html_e( 'Insert Form', Forminator::DOMAIN ); ?></button>
 
 								</div>
 

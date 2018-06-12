@@ -1,0 +1,83 @@
+@include body-class {
+
+	.fui-multi-result {
+		display: none;
+		margin: 0;
+		padding: 0;
+		border: 0;
+		list-style: none;
+
+		.fui-result {
+			display: block;
+			margin: 0 0 $sui-gutter;
+			padding: 0 0 $sui-gutter;
+			border: 0;
+			border-bottom: 1px solid #EAEAEA;
+			list-style: none;
+
+			&:last-child {
+				margin: 0;
+				padding: 0;
+				border-bottom: 0;
+
+				@include media( max-width, md ){
+					margin: 0;
+					padding: 0;
+				}
+			}
+
+			@include media( max-width, md ){
+				margin: 0 0 $sui-gutter-md;
+				padding: 0 0 $sui-gutter-md;
+			}
+		}
+
+		.fui-result-input {
+			display: block;
+			position: relative;
+
+			.sui-form-control {
+				padding-right: 48px;
+			}
+
+			.fui-result-delete {
+				width: 38px;
+				height: 38px;
+				@extend %fui-button-clear;
+				position: absolute;
+				top: 1px;
+				right: 1px;
+				margin: 0 $sui-gutter/3 0 0;
+
+				i {
+					display: block;
+				}
+
+				i:before {
+					display: block;
+					color: palette( red, soft );
+					transition: 0.3s ease;
+				}
+
+				&:hover i:before {
+					color: palette( red, light );
+				}
+
+				@include media( max-width, md ) {
+					margin: 0 $sui-gutter-md/3 0 0;
+				}
+			}
+		}
+	}
+
+	.fui-has-results {
+
+		.fui-multi-result-empty {
+			display: none;
+		}
+
+		.fui-multi-result {
+			display: block;
+		}
+	}
+}

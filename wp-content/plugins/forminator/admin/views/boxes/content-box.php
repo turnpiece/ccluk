@@ -1,4 +1,4 @@
-<div id="forminator-content-box-<?php echo $template_class; ?>" class="wpmudev-box">
+<div id="forminator-content-box-<?php echo esc_attr( $template_class ); ?>" class="wpmudev-box">
 	<?php if ( is_callable( $header_callback ) ): ?>
 		<div class="wpmudev-box-header">
 			<?php call_user_func( $header_callback ); ?>
@@ -40,4 +40,4 @@
 			<?php $this->template( $template_id . '-content-footer' ); ?>
 		</div><!-- end content box footer -->
 	<?php endif; ?>
-</div><!-- end content box-<?php echo $template_class; ?> -->
+</div><!-- end content box-<?php echo esc_attr( $template_class ); ?> -->

@@ -143,7 +143,7 @@ function forminator_currency_list() {
  * @since 1.0
  * @param string $currency_code - the currency code
  *
- * @return array
+ * @return string
  */
 function forminator_get_currency( $currency_code ) {
 	$currencies = forminator_currency_list();

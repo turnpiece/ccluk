@@ -1,0 +1,128 @@
+@include body-class {
+
+	.fui-builder {
+
+		// ACTION dragging
+		.fui-form-builder--dragging {
+			position: relative;
+
+			.fui-form-builder--drop-zone {
+				max-width: 100%;
+				max-height: 100%;
+				position: absolute;
+				top: 0;
+				right: 0;
+				bottom: 0;
+				left: 0;
+				border: 2px dashed palette( silver, alt );
+				border-radius: $border-radius;
+				background-color: palette( silver, light );
+				transition: 0.2s ease;
+			}
+		}
+		
+		.forminator-drop-full,
+		.forminator-drop-side-after,
+		.forminator-drop-side-before {
+			
+			&:before {
+				content: " ";
+				position: relative;
+				border-radius: 2px;
+				background: palette( blue, soft );
+			}
+
+			&:after {
+				content: none;
+			}
+
+			&.forminator-drop-use {
+
+				&:before {
+					background: $blue;
+				}
+			}
+		}
+
+		.forminator-drop-full {
+			width: auto !important;
+			height: 0;
+			position: relative;
+			z-index: 2;
+			
+			&:before {
+				height: 4px;
+				display: flex;
+				position: relative;
+				top: -2px;
+			}
+
+		}
+
+		.forminator-drop-side {
+
+			&-before,
+			&-after {
+				width: 0;
+				height: auto !important;
+				display: flex;
+				padding: 0;
+				
+				&:before {
+					width: 4px;
+					height: auto;
+					display: block;
+					position: relative;
+					margin: 0 -2px;
+
+					@include media ( max-width, md ) {
+						width: auto;
+						height: 4px;
+						top: -2px;
+					}
+				}
+
+				@include media( max-width, md ) {
+					width: auto;
+					height: 0 !important;
+					padding: 0 40px;
+				}
+			}
+		}
+
+		.forminator-drop-view {
+			opacity: 0.8;
+			position: absolute;
+			z-index: 99990;
+			border: 2px dotted #88f;
+		}
+
+		.ui-draggable-handle {
+			cursor: move;
+		}
+	}
+
+	> li.draggable-element {
+		min-width: 40px;
+		padding: 10px 15px;
+		border: 1px solid palette( silver, soft );
+		border-radius: 5px;
+		background: $white;
+		box-shadow: 0 3px 5px 0 rgba(0,0,0,0.05);
+		color: $black;
+		font: 400 10px/11px $font;
+		text-align: center;
+		list-style: none;
+		transform: rotateZ(-4deg);
+	}
+	
+	.forminator-buttons {
+		display: flex;
+		margin: 20px 0 0;
+
+		@include media( max-width, md ) {
+			flex-direction: column;
+			justify-content: flex-end;
+		}
+	}
+}

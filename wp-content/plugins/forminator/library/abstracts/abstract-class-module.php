@@ -62,7 +62,7 @@ abstract class Forminator_Module {
 	 *
 	 * @since 1.0
 	 */
-	public abstract function register_cpt();
+	abstract public function register_cpt();
 
 	/**
 	 * Get Module ID

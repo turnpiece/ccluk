@@ -47,111 +47,111 @@ class Forminator_Custom extends Forminator_Field {
 	}
 
 	/**
-	* @param array $settings
-	*
-	* @return array
-	*/
+	 * @param array $settings
+	 *
+	 * @return array
+	 */
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
-				'className' => 'required-field',
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
+				'className'  => 'required-field',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
 			),
 
 			array(
-				'id' => 'separator-1',
-				'type' => 'Separator',
+				'id'         => 'separator-1',
+				'type'       => 'Separator',
 				'hide_label' => true,
 			),
 
 			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
 				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				'className' => 'text-field',
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'className'  => 'text-field',
 			),
 
 			array(
-				'id' => 'field-type',
-				'type' => 'Select',
-				'name' => 'field_type',
-				'className' => 'select-field',
+				'id'           => 'field-type',
+				'type'         => 'Select',
+				'name'         => 'field_type',
+				'className'    => 'select-field',
 				'label_hidden' => false,
-				'label' => __( 'Field type', Forminator::DOMAIN ),
-				'values' => array(
+				'label'        => __( 'Field type', Forminator::DOMAIN ),
+				'values'       => array(
 					array(
 						'value' => "text",
-						'label' => __( 'Single line text', Forminator::DOMAIN )
+						'label' => __( 'Single line text', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "textarea",
-						'label' => __( 'Multi line text', Forminator::DOMAIN )
+						'label' => __( 'Multi line text', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "dropdown",
-						'label' => __( 'Dropdown', Forminator::DOMAIN )
+						'label' => __( 'Dropdown', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "multiselect",
-						'label' => __( 'Multi select', Forminator::DOMAIN )
+						'label' => __( 'Multi select', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "number",
-						'label' => __( 'Number', Forminator::DOMAIN )
+						'label' => __( 'Number', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "checkbox",
-						'label' => __( 'Checkboxes', Forminator::DOMAIN )
+						'label' => __( 'Checkboxes', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "radio",
-						'label' => __( 'Radio buttons', Forminator::DOMAIN )
+						'label' => __( 'Radio buttons', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "hidden",
-						'label' => __( 'Hidden', Forminator::DOMAIN )
-					)
-				)
+						'label' => __( 'Hidden', Forminator::DOMAIN ),
+					),
+				),
 			),
 
 			array(
-				'id' => 'custom-field-name',
-				'type' => 'RadioContainer',
-				'name' => 'custom_field_name',
-				'className' => 'custom-field-name-field',
+				'id'             => 'custom-field-name',
+				'type'           => 'RadioContainer',
+				'name'           => 'custom_field_name',
+				'className'      => 'custom-field-name-field',
 				'containerClass' => 'wpmudev-is_gray',
-				'label' => __( "Custom field name", Forminator::DOMAIN ),
-				'values' => array(
+				'label'          => __( "Custom field name", Forminator::DOMAIN ),
+				'values'         => array(
 					array(
 						'value' => "existing",
-						'label' => __( 'Existing field', Forminator::DOMAIN )
+						'label' => __( 'Existing field', Forminator::DOMAIN ),
 					),
 					array(
 						'value' => "new",
-						'label' => __( 'New field', Forminator::DOMAIN )
-					)
+						'label' => __( 'New field', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+				'fields'         => array(
 					array(
-						'id' => 'existing-field',
-						'type' => 'Select',
-						'name' => 'existing_field',
+						'id'        => 'existing-field',
+						'type'      => 'Select',
+						'name'      => 'existing_field',
 						'className' => 'existing-field',
-						'label' => __( 'Pick existing field', Forminator::DOMAIN ),
-						'tab' => 'existing',
-						'values' => forminator_to_field_array( forminator_get_existing_cfields() )
+						'label'     => __( 'Pick existing field', Forminator::DOMAIN ),
+						'tab'       => 'existing',
+						'values'    => forminator_to_field_array( forminator_get_existing_cfields() ),
 					),
 				),
 			),
@@ -180,16 +180,16 @@ class Forminator_Custom extends Forminator_Field {
 	public function admin_html() {
 		return '<div class="wpmudev-form-field--group">
 			{[ if( field.field_label ) { ]}
-			<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 			{[ } ]}
 			{[ if( field.field_type === "text" ) { ]}
-			<input type="text" class="wpmudev-form-field--text" {{ field.required ? "required" : "" }}>
+			<input type="text" class="sui-form-control" {{ field.required ? "required" : "" }}>
 			{[ } ]}
 			{[ if( field.field_type === "textarea" ) { ]}
-			<textarea class="wpmudev-form-field--textarea" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}></textarea>
+			<textarea class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}></textarea>
 			{[ } ]}
 			{[ if( field.field_type === "dropdown" ) { ]}
-			<select class="wpmudev-form-field--select" style="width: 100%;" {{ field.required ? "required" : "" }}></select>
+			<select {{ field.required ? "required" : "" }}></select>
 			{[ } ]}
 			</div>';
 	}
@@ -204,50 +204,63 @@ class Forminator_Custom extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$required    	= self::get_property( 'required', $field, false );
-		$id = $name  	= self::get_property( 'element_id', $field );
-		$field_type  	= self::get_property( 'field_type', $field );
-		$placeholder 	= self::get_property( 'placeholder', $field );
-		$description 	= self::get_property( 'description', $field );
-		$label 			= self::get_property( 'field_label', $field );
-		$id          	= $id . '-field';
-		$html        	= '';
-		$default_value 	= self::get_property( 'default_value', $field );
+		$required      = self::get_property( 'required', $field, false );
+		$id            = self::get_property( 'element_id', $field );
+		$name          = $id;
+		$field_type    = self::get_property( 'field_type', $field );
+		$placeholder   = self::get_property( 'placeholder', $field );
+		$description   = self::get_property( 'description', $field );
+		$label         = self::get_property( 'field_label', $field );
+		$id            = $id . '-field';
+		$html          = '';
+		$default_value = self::get_property( 'default_value', $field );
+		$post_value    = self::get_post_data( $name, false );
 
 		switch ( $field_type ) {
 			case "text":
-				$html .= sprintf( '<input class="forminator-name--field forminator-input" type="text" data-required="%s" name="%s" placeholder="%s" id="%s" />', $required, $name, $placeholder, $id );
-			break;
-			case "textarea":
-				$field_markup 	= array(
-					'type' 			=> 'textarea',
-					'class' 		=> 'forminator-textarea',
-					'name' 			=> $name,
-					'id' 			=> $id,
-					'placeholder' 	=> $placeholder,
-					'required'		=> $required
+				$html .= sprintf(
+					'<input class="forminator-name--field forminator-input" type="text" data-required="%s" name="%s" placeholder="%s" id="%s" %s/>',
+					$required,
+					$name,
+					$placeholder,
+					$id,
+					( $post_value ? 'value= "' . $post_value . '"' : '' )
 				);
-				$html .= self::create_textarea( $field_markup, $label, $description );
-			break;
+				break;
+			case "textarea":
+				$field_markup = array(
+					'type'        => 'textarea',
+					'class'       => 'forminator-textarea',
+					'name'        => $name,
+					'id'          => $id,
+					'placeholder' => $placeholder,
+					'required'    => $required,
+				);
+				$html         .= self::create_textarea( $field_markup, $label, $description );
+				break;
 			case "dropdown":
-
-			break;
+				break;
 			case "multiselect":
-
-			break;
+				break;
 			case "number":
-				$html .= sprintf( '<input class="forminator-number--field forminator-input" type="number" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" />', $required, $name, $placeholder, $default_value, $id );
-			break;
+				$html .= sprintf(
+					'<input class="forminator-number--field forminator-input" type="number" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" />',
+					$required,
+					$name,
+					$placeholder,
+					( $post_value ? $post_value : $default_value ),
+					$id
+				);
+				break;
 			case "checkbox":
-
-			break;
+				break;
 			case "radio":
-
-			break;
+				break;
 			case "hidden":
 				$html .= sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $default_value );
-			break;
+				break;
 		}
+
 		return apply_filters( 'forminator_field_custom_markup', $html, $id, $required, $field_type, $placeholder );
 	}
 
@@ -267,7 +280,6 @@ class Forminator_Custom extends Forminator_Field {
 			}
 		}
 	}
-
 
 	/**
 	 * Sanitize data

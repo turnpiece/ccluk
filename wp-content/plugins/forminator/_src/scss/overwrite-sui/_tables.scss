@@ -1,0 +1,96 @@
+@include body-class {
+
+	.sui-table {
+
+		th .sui-checkbox {
+
+			.sui-description {
+				color: $table--th-color;
+				font-size: 13px;
+				font-weight: 500;
+			}
+		}
+
+		td {
+			line-height: 22px;
+
+			strong {
+				color: palette( gray, dark );
+				font-weight: 500;
+			}
+
+			@include media( max-width, md ) {
+				padding-top: calc(#{$sui-gutter-md}/2 - 1px);
+				padding-bottom: calc(#{$sui-gutter-md}/2 - 1px);
+			}
+		}
+
+		td.sui-table-image {
+			width: 25px;
+
+			.sui-image,
+			.sui-button-icon {
+				display: block;
+			}
+
+			&:first-child,
+			&:last-child {
+				width: calc( 25px + #{$sui-gutter} );
+
+				@include media( max-width, md ) {
+					width: calc( 25px + #{$sui-gutter-md} );
+				}
+			}
+		}
+
+		td.sui-table-action {
+			width: 35px;
+
+			.sui-image,
+			.sui-button-icon {
+				display: block;
+			}
+
+			&:first-child,
+			&:last-child {
+				width: calc( 35px + #{$sui-gutter} );
+
+				@include media( max-width, md ) {
+					width: calc( 35px + #{$sui-gutter-md} );
+				}
+			}
+		}
+
+		.sui-accordion-item-title {
+			font-size: 13px;
+
+			.sui-checkbox {
+				display: inline-flex;
+				
+				span {
+					margin-top: 0;
+				}
+
+				+ a {
+					margin-left: 6px;
+				}
+			}
+		}
+
+		&.fui-integrations-table {
+
+			td.sui-table-action {
+					
+				&:last-child {
+					width: 55px;
+					padding-right: 20px;
+
+					@include media( max-width, md ) {
+						width: 55px;
+						padding-right: 20px;
+					}
+				}
+			}
+		}
+	}
+}

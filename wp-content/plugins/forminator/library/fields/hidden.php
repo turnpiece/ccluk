@@ -60,28 +60,37 @@ class Forminator_Hidden extends Forminator_Field {
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'main-label',
-				'type' => 'Text',
-				'name' => 'field_label',
+				'id'         => 'main-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
 				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				'className' => 'text-field',
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'className'  => 'text-field',
 			),
 
 			array(
-				'id' => 'separator',
-				'type' => 'Separator',
+				'id'         => 'separator',
+				'type'       => 'Separator',
 				'hide_label' => true,
 			),
 
 			array(
-				'id' => 'default-value',
-				'type' => 'Select',
-				'name' => 'default_value',
+				'id'         => 'default-value',
+				'type'       => 'Select',
+				'name'       => 'default_value',
 				'hide_label' => false,
-				'label'	=> __( 'Default value', Forminator::DOMAIN ),
-				'className' => 'select-field',
-				'values' => forminator_to_field_array( forminator_get_vars() )
+				'label'      => __( 'Default value', Forminator::DOMAIN ),
+				'className'  => 'select-field',
+				'values'     => forminator_to_field_array( forminator_get_vars() ),
+			),
+
+			array(
+				'id'         => 'custom-value',
+				'type'       => 'Text',
+				'name'       => 'custom_value',
+				'hide_label' => false,
+				'label'      => __( 'Custom value', Forminator::DOMAIN ),
+				'className'  => 'custom-value',
 			),
 		);
 	}
@@ -122,12 +131,10 @@ class Forminator_Hidden extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			<input type="hidden" />
-		</div>';
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		<input type="hidden" />';
 	}
 
 	/**
@@ -140,12 +147,13 @@ class Forminator_Hidden extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$id = $name  = self::get_property( 'element_id', $field );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
 		$required    = self::get_property( 'required', $field, false );
 		$placeholder = self::get_property( 'placeholder', $field );
-		$value 		 = $this->get_value( $field );
+		$value       = $this->get_value( $field );
 
-		return sprintf( '<input class="forminator-hidden--field" type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );
+		return sprintf( '<input type="hidden" id="%s" name="%s" value="%s" />', $id, $name, $value );
 	}
 
 	/**
@@ -195,9 +203,12 @@ class Forminator_Hidden extends Forminator_Field {
 			case "user_login":
 				$value = forminator_get_user_data( 'user_login' );
 				break;
+			case "custom_value":
+				$value = self::get_property( 'custom_value', $field );
+				break;
 		}
 
-		return $value;
+		return apply_filters( 'forminator_field_hidden_field_value', $value, $saved_value, $field, $this );
 	}
 
 	/**

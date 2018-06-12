@@ -9,7 +9,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Akismet API: http://akismet.com/development/api/
  */
-class Forminator_Akismet extends Forminator_Spam_Protection{
+class Forminator_Akismet extends Forminator_Spam_Protection {
 
 
 	/**
@@ -27,7 +27,7 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 	 * @since 1.0
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -97,7 +97,7 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 				$current_user 	= wp_get_current_user();
 				if ( !empty( $current_user->user_firstname ) ) {
 					$user_name 	= $current_user->user_firstname . ' ' . $current_user->user_lastname;
-				} else if ( !empty( $current_user->display_name ) ) {
+				} elseif ( !empty( $current_user->display_name ) ) {
 					$user_name 	= $current_user->display_name;
 				} else {
 					$user_name 	= $current_user->user_login;
@@ -108,14 +108,15 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 			}
 			$post_data['content'] = trim( $post_data['content'] );
 
-			if ( $permalink = get_permalink() ) {
+			$permalink = get_permalink();
+			if ( false !== $permalink ) {
 				$post_data['permalink'] = $permalink;
 			}
 
 			$ignore = array( 'HTTP_COOKIE', 'HTTP_COOKIE2', 'PHP_AUTH_PW' );
 
 			foreach ( $_SERVER as $key => $value ) {
-				if ( ! in_array( $key, (array) $ignore ) ) {
+				if ( ! in_array( $key, (array) $ignore, true ) ) {
 					$post_data["$key"] = $value;
 				}
 			}
@@ -143,12 +144,11 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 		if ( is_callable( array( 'Akismet', 'http_post' ) ) ) { // Akismet v3.0+
 			$response = Akismet::http_post( $query, 'comment-check' );
 		} else {
-			$response = akismet_http_post( $query, $akismet_api_host,
-				'/1.1/comment-check', $akismet_api_port );
+			$response = akismet_http_post( $query, $akismet_api_host, '/1.1/comment-check', $akismet_api_port );
 		}
 
 		//Response will always be an array of array( $response['headers'], $response['body'] )
-		if ( 'true' == $response[1] ) {
+		if ( 'true' === $response[1] ) {
 			$is_spam = true;
 		}
 
@@ -171,7 +171,7 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 		$ret = array();
 
 		foreach ( (array) $args as $k => $v ) {
-			$k = urlencode( $k );
+			$k = rawurlencode( $k );
 
 			if ( ! empty( $key ) ) {
 				$k = $key . '%5B' . $k . '%5D';
@@ -186,11 +186,10 @@ class Forminator_Akismet extends Forminator_Spam_Protection{
 			if ( is_array( $v ) || is_object( $v ) ) {
 				array_push( $ret, $this->_build_query( $v, $k ) );
 			} else {
-				array_push( $ret, $k . '=' . urlencode( $v ) );
+				array_push( $ret, $k . '=' . rawurlencode( $v ) );
 			}
 		}
 
 		return implode( $sep, $ret );
 	}
-
 }

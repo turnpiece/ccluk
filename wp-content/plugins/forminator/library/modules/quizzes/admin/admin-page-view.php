@@ -34,7 +34,7 @@ class Forminator_Quizz_Page extends Forminator_Admin_Page {
 	 * @return int
 	 */
 	public function countModules() {
-		$pagenum		   = isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0;
+		$pagenum		   = isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0; // WPCS: CSRF OK
 		$this->page_number = max( 1, $pagenum );
 
 		return Forminator_Quiz_Form_Model::model()->countAll();
@@ -63,7 +63,7 @@ class Forminator_Quizz_Page extends Forminator_Admin_Page {
 	 * @return mixed
 	 */
 	public function getAdminEditUrl( $type, $id ) {
-		if ( $type == 'nowrong' ) {
+		if ( 'nowrong' === $type ) {
 			return admin_url( 'admin.php?page=forminator-nowrong-wizard&id=' . $id );
 		} else {
 			return admin_url( 'admin.php?page=forminator-knowledge-wizard&id=' . $id );
@@ -80,7 +80,7 @@ class Forminator_Quizz_Page extends Forminator_Admin_Page {
 			return;
 		}
 
-		$nonce = $_POST['forminatorNonce'];
+		$nonce = $_POST['forminatorNonce']; // WPCS: CSRF OK
 		if ( ! wp_verify_nonce( $nonce, 'forminatorQuizFormRequest' ) ) {
 			return;
 		}
@@ -185,12 +185,13 @@ class Forminator_Quizz_Page extends Forminator_Admin_Page {
 
 		foreach ( $data['models'] as $model ) {
 			$modules[] = array(
-				"id"      => $model->id,
-				"title"   => $model->name,
-				"entries" => Forminator_Form_Entry_Model::count_entries( $model->id ),
-				"views"   => $form_view->count_views( $model->id ),
-				'type'    => $model->quiz_type,
-				"date"    => date( get_option( 'date_format' ), strtotime( $model->raw->post_date ) )
+				"id"              => $model->id,
+				"title"           => $model->name,
+				"entries"         => Forminator_Form_Entry_Model::count_entries( $model->id ),
+				"last_entry_time" => forminator_get_latest_entry_time_by_form_id( $model->id ),
+				"views"           => $form_view->count_views( $model->id ),
+				'type'            => $model->quiz_type,
+				"date"            => date( get_option( 'date_format' ), strtotime( $model->raw->post_date ) ),
 			);
 		}
 

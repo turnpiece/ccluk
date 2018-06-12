@@ -6,6 +6,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Class Forminator_Poll_Admin
  *
+ * @property Forminator_Polls module
  * @since 1.0
  */
 class Forminator_Poll_Admin extends Forminator_Admin_Module {
@@ -28,10 +29,10 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 	 * @since 1.0
 	 */
 	public function includes() {
-		include_once( dirname(__FILE__) . '/admin-page-new.php' );
-		include_once( dirname(__FILE__) . '/admin-page-view.php' );
-		include_once( dirname(__FILE__) . '/admin-page-entries.php' );
-		include_once( dirname(__FILE__) . '/admin-renderer-entries.php' );
+		include_once dirname( __FILE__ ) . '/admin-page-new.php';
+		include_once dirname( __FILE__ ) . '/admin-page-view.php';
+		include_once dirname( __FILE__ ) . '/admin-page-entries.php';
+		include_once dirname( __FILE__ ) . '/admin-renderer-entries.php';
 	}
 
 	/**
@@ -42,7 +43,7 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 	public function add_menu_pages() {
 		new Forminator_Poll_Page( 'forminator-poll', 'poll/list', __( 'Polls', Forminator::DOMAIN ), __( 'Polls', Forminator::DOMAIN ), 'forminator' );
 		new Forminator_Poll_New_Page( 'forminator-poll-wizard', 'poll/wizard', __( 'New Poll', Forminator::DOMAIN ), __( 'New Poll', Forminator::DOMAIN ), 'forminator' );
-		new Forminator_Poll_View_Page( 'forminator-poll-view', 'poll/entries', __( 'Entries:', Forminator::DOMAIN ), __( 'View Poll', Forminator::DOMAIN ), 'forminator' );
+		new Forminator_Poll_View_Page( 'forminator-poll-view', 'poll/entries', __( 'Submissions:', Forminator::DOMAIN ), __( 'View Poll', Forminator::DOMAIN ), 'forminator' );
 	}
 
 	/**
@@ -70,7 +71,7 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 			if ( ! self::is_edit() ) {
 				$data['currentForm'] = array();
 			} else {
-				$id    = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : null;
+				$id    = isset( $_GET['id'] ) ? intval( $_GET['id'] ) : null; // WPCS: CSRF ok.
 				if ( ! is_null( $id ) ) {
 					$model = Forminator_Poll_Form_Model::model()->load( $id );
 				}
@@ -81,7 +82,7 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 							'title'      => $field->title,
 							'element_id' => $field->element_id,
 						);
-						if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) == true ) {
+						if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) === true ) {
 							$a['use_extra'] = true;
 							$a['extra']     = $field->extra;
 						}
@@ -129,42 +130,54 @@ class Forminator_Poll_Admin extends Forminator_Admin_Module {
 			"details"                        => __( "Details", Forminator::DOMAIN ),
 			"appearance"                     => __( "Appearance", Forminator::DOMAIN ),
 			"preview"                        => __( "Preview", Forminator::DOMAIN ),
-			"details_title"                  => __( "Poll Details", Forminator::DOMAIN ),
+			"details_title"                  => __( "Details", Forminator::DOMAIN ),
 			"poll_title"                     => __( "Title", Forminator::DOMAIN ),
-			"poll_desc"                      => __( "Description (optional)", Forminator::DOMAIN ),
-			"poll_question"                  => __( "Poll question", Forminator::DOMAIN ),
+			"poll_desc"                      => __( "Description", Forminator::DOMAIN ),
+			"poll_question"                  => __( "Question", Forminator::DOMAIN ),
 			"poll_answers"                   => __( "Poll answers", Forminator::DOMAIN ),
 			"poll_button"                    => __( "Button label", Forminator::DOMAIN ),
 			"poll_title_placeholder"         => __( "Enter title", Forminator::DOMAIN ),
 			"poll_desc_placeholder"          => __( "Enter description", Forminator::DOMAIN ),
 			"poll_question_placeholder"      => __( "Enter question title", Forminator::DOMAIN ),
-			"poll_button_placeholder"        => __( "E.g. Vote", Forminator::DOMAIN ),
-			"appearance_title"               => __( "Poll Appearance", Forminator::DOMAIN ),
-			"results_behav"                  => __( "Poll results behaviour", Forminator::DOMAIN ),
-			"results_style"                  => __( "Poll results style", Forminator::DOMAIN ),
-			"votes_count"                    => __( "Poll votes count", Forminator::DOMAIN ),
-			"poll_colors"                    => __( "Colors", Forminator::DOMAIN ),
-			"votes_limit"                    => __( "Vote number limit", Forminator::DOMAIN ),
-			"link_on"                        => __( "Link on poll", Forminator::DOMAIN ),
-			"show_after"                     => __( "Show after voted", Forminator::DOMAIN ),
-			"not_show"                       => __( "Do not show", Forminator::DOMAIN ),
-			"chart_bar"                      => __( "Bar chart", Forminator::DOMAIN ),
-			"chart_pie"                      => __( "Pie chart", Forminator::DOMAIN ),
-			"show_votes"                     => __( "Show number of votes", Forminator::DOMAIN ),
-			"enable_limit"                   => __( "Allow same visitor to vote more than once", Forminator::DOMAIN ),
-			"how_long"                       => __( "How long before user can vote again", Forminator::DOMAIN ),
-			"poll_description"               => __( "Poll description", Forminator::DOMAIN ),
-			"submission"                     => __( "Submission", Forminator::DOMAIN ),
-			"enable_ajax"                    => __( "Enable AJAX", Forminator::DOMAIN ),
-			"validate_form_name"             => __( "Form name cannot be empty! Please pick a name for your poll.", Forminator::DOMAIN ),
-			"validate_form_question"         => __( "Poll question cannot be empty! Please add questions for your poll.", Forminator::DOMAIN ),
-			"validate_form_answers"          => __( "Poll answers cannot be empty! Please add answers to your poll.", Forminator::DOMAIN ),
-			"back"                           => __( "Back", Forminator::DOMAIN ),
-			"cancel"                         => __( "Cancel", Forminator::DOMAIN ),
-			"continue"                       => __( "Continue", Forminator::DOMAIN ),
-			"finish"                         => __( "Finish", Forminator::DOMAIN ),
-			"submission_explain"			 => __( "Enable AJAX to prevent refresh while submitting poll data.", Forminator::DOMAIN ),
-			"votes_explain"					 => __( "Enable this option to display number of votes on Bar Chart results.")
+			"poll_button_placeholder"			=> __( "E.g. Vote", Forminator::DOMAIN ),
+			"appearance_title"					=> __( "Poll Appearance", Forminator::DOMAIN ),
+			"results_behav"						=> __( "Poll results behaviour", Forminator::DOMAIN ),
+			"results_style"						=> __( "Poll results style", Forminator::DOMAIN ),
+			"votes_count"						=> __( "Poll votes count", Forminator::DOMAIN ),
+			"poll_colors"						=> __( "Customize poll colors", Forminator::DOMAIN ),
+			"votes_limit"						=> __( "Vote number limit", Forminator::DOMAIN ),
+			"link_on"							=> __( "Link on poll", Forminator::DOMAIN ),
+			"show_after"						=> __( "Show after voted", Forminator::DOMAIN ),
+			"not_show"							=> __( "Do not show", Forminator::DOMAIN ),
+			"chart_bar"							=> __( "Bar chart", Forminator::DOMAIN ),
+			"chart_pie"							=> __( "Pie chart", Forminator::DOMAIN ),
+			"show_votes"						=> __( "Show number of votes", Forminator::DOMAIN ),
+			"enable_limit"						=> __( "Allow same visitor to vote more than once", Forminator::DOMAIN ),
+			"how_long"							=> __( "How long before user can vote again", Forminator::DOMAIN ),
+			"submission"						=> __( "Submission", Forminator::DOMAIN ),
+			"enable_ajax"						=> __( "Enable AJAX", Forminator::DOMAIN ),
+			"validate_form_name"				=> __( "Form name cannot be empty! Please pick a name for your poll.", Forminator::DOMAIN ),
+			"validate_form_question"			=> __( "Poll question cannot be empty! Please add questions for your poll.", Forminator::DOMAIN ),
+			"validate_form_answers"				=> __( "Poll answers cannot be empty! Please add answers to your poll.", Forminator::DOMAIN ),
+			"back"								=> __( "Back", Forminator::DOMAIN ),
+			"cancel"							=> __( "Cancel", Forminator::DOMAIN ),
+			"continue"							=> __( "Continue", Forminator::DOMAIN ),
+			"finish"							=> __( "Finish", Forminator::DOMAIN ),
+			"submission_explain"				=> __( "Enable AJAX to prevent refresh while submitting poll data.", Forminator::DOMAIN ),
+			"votes_explain"						=> __( "Enable this option to display number of votes on Bar Chart results."),
+			"poll_title_desc"					=> __( "This name won't be displayed on your poll, but will help you to identify it.", Forminator::DOMAIN ),
+			"poll_question_desc"				=> __( "This is the question you will be asking to users.", Forminator::DOMAIN ),
+			"main_styles"						=> __( "Main styles", Forminator::DOMAIN ),
+			"description_color"					=> __( "Description (font color)", Forminator::DOMAIN ),
+			"question_color"					=> __( "Question (font color)", Forminator::DOMAIN ),
+			"answer_color"						=> __( "Answer (font color)", Forminator::DOMAIN ),
+			"input_styles"						=> __( "Input styles", Forminator::DOMAIN ),
+			"button_styles"						=> __( "Button styles", Forminator::DOMAIN ),
+			"results_link"						=> __( "Results link", Forminator::DOMAIN ),
+			"results_link_hover"				=> __( "Results link (hover)", Forminator::DOMAIN ),
+			"results_link_active"				=> __( "Results link (active)", Forminator::DOMAIN ),
+			"privacy"                           => __( "Privacy", Forminator::DOMAIN ),
+			"enable_ip_address_retention"	    => __( "Enable IP Address retention", Forminator::DOMAIN ),
 		);
 
 		return $data;

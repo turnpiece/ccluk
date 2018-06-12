@@ -1,0 +1,61 @@
+@include body-class {
+
+	.fui-chips {
+		display: flex;
+
+		.fui-chips-item {
+			margin-right: 1px;
+
+			input {
+				@extend %sui-screen-reader-text;
+			}
+
+			span, i:before {
+				color: $gray;
+			}
+
+			span {
+				display: block;
+				padding: 9px 16px;
+				background: #F8F8F8;
+				font: 500 13px/22px $font;
+				letter-spacing: 0;
+				text-align: center;
+
+				i {
+					margin-right: 9px;
+				}
+			}
+
+			&:first-child {
+
+				span {
+					border-radius: 4px 0 0 4px;
+				}
+			}
+
+			&:last-child {
+				margin-right: 0;
+				
+				span {
+					border-radius: 0 4px 4px 0;
+				}
+			}
+
+			&.current {
+
+				span, i:before {
+					color: $blue;
+				}
+
+				span {
+					background: palette( blue, soft );
+				}
+			}
+		}
+		
+		@include media( max-width, md ) {
+			flex-direction: column;
+		}
+	}
+}

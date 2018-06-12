@@ -2,73 +2,43 @@
 $modules = get_option( "forminator_uninstall_clear_data", false );
 ?>
 
-<div class="wpmudev-box wpmudev-can--hide">
+<div class="sui-box">
 
-	<div class="wpmudev-box-header">
+	<div class="sui-box-header">
 
-		<div class="wpmudev-header--text">
+		<h3 class="sui-box-title"><?php esc_html_e( "Uninstall Settings", Forminator::DOMAIN ); ?></h3>
 
-			<h2 class="wpmudev-subtitle"><?php _e( "Uninstall Settings", Forminator::DOMAIN ); ?></h2>
+	</div>
 
-		</div>
+	<div class="sui-box-body">
 
-		<div class="wpmudev-header--action">
+		<div class="sui-notice sui-notice-sm sui-notice-warning">
 
-			<button class="wpmudev-box--action">
-
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
-
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
-
-            </button>
+			<p><?php echo sprintf( __( "This option allows you to delete or keep all your data when the plugin is deleted from the %splugins menu%s.", Forminator::DOMAIN ), '<a href="' . get_admin_url( null, 'plugins.php' ) . '">', '</a>' ); // phpcs:ignore ?></p>
 
 		</div>
 
 	</div>
 
-	<div class="wpmudev-box-section">
+	<table class="sui-table sui-accordion fui-table-exports">
 
-		<div class="wpmudev-section--text">
+		<tbody>
 
-			<label class="wpmudev-label--notice"><span><?php echo sprintf( __( "This option allows you to delete or keep all your data when the plugin is deleted from the %splugins menu%s",
-                                                                               Forminator::DOMAIN ), '<a href="' . get_admin_url( null, 'plugins.php' ) . '">', '</a>' ); ?></label>
+			<tr>
 
-		</div>
+				<td><?php esc_html_e( "Delete data on uninstall", Forminator::DOMAIN ); ?></td>
 
-		<div class="wpmudev-section--table">
+				<td><?php echo $modules ? esc_html__( "Yes", Forminator::DOMAIN ) : esc_html__( "No", Forminator::DOMAIN ); ?></td>
 
-			<table class="wpmudev-table">
+			</tr>
 
+		</tbody>
 
-				<tbody>
+	</table>
 
-					<tr>
+	<div class="sui-box-footer">
 
-						<th><p class="wpmudev-table--text"><?php _e( "Delete data  on uninstall :", Forminator::DOMAIN ); ?></p></th>
-
-                        <td><p class="wpmudev-table--text" style="text-align: left"><?php echo $modules ? __( "Yes", Forminator::DOMAIN ) : __( "No", Forminator::DOMAIN ) ; ?></p></td>
-
-                    </tr>
-
-				</tbody>
-
-				<tfoot>
-
-                    <tr>
-
-                        <td colspan="2">
-
-							<button class="wpmudev-button wpmudev-button-sm wpmudev-button-blue wpmudev-open-modal" data-modal="uninstall_settings" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_uninstall_form' ) ?>"><?php _e( "Edit Settings", Forminator::DOMAIN ); ?></button>
-
-						</td>
-
-                    </tr>
-
-                </tfoot>
-
-			</table>
-
-		</div>
+		<button class="sui-button wpmudev-open-modal" data-modal="uninstall_settings" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_uninstall_form' ); // phpcs:ignore ?>"><?php esc_html_e( "Edit Settings", Forminator::DOMAIN ); ?></button>
 
 	</div>
 

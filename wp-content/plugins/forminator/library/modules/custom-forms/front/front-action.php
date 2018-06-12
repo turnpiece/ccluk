@@ -45,7 +45,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * @return Forminator_Front_Action
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -56,10 +56,15 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * Do PayPal backend check
 	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to get_post_data()
+	 *
+	 * @param $payment_id
+	 *
 	 * @return array
 	 */
 	public function handle_paypal( $payment_id ) {
-		$payment_total 	= isset( $_POST['payment_total'] ) ? sanitize_text_field( $_POST['payment_total'] ) : false;
+		$post_data      = $this->get_post_data();
+		$payment_total 	= isset( $post_data['payment_total'] ) ? sanitize_text_field( $post_data['payment_total'] ) : false;
 		$paypal        	= new Forminator_Paypal_Express();
 
 		$result 		= $paypal->paypal_check( $payment_id, $payment_total );
@@ -74,9 +79,12 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * Handle submit
 	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
 	public function handle_submit() {
-		$form_id = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
+		$post_data      = $this->get_post_data();
+
+		$form_id = isset( $post_data['form_id'] ) ? sanitize_text_field( $post_data['form_id'] ) : false; // WPCS: CSRF OK
 
 		if ( $form_id ) {
 			/**
@@ -135,12 +143,15 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * Save entry
 	 *
 	 * @since 1.0
-	 * @return application/json Json response
+	 * @since 1.1 Change $_POST to get_post_data
+	 * @return void
 	 */
-	function save_entry() {
+	public function save_entry() {
+		$post_data = $this->get_post_data();
+
 		if ( $this->validate_ajax( 'forminator_submit_form', 'POST', 'forminator_nonce' ) ) {
-			$form_id    = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
-			$payment_id = isset( $_POST['payment_id'] ) ? sanitize_text_field( $_POST['payment_id'] ) : false;
+			$form_id    = isset( $post_data['form_id'] ) ? sanitize_text_field( $post_data['form_id'] ) : false; // WPCS: CSRF OK
+			$payment_id = isset( $post_data['payment_id'] ) ? sanitize_text_field( $post_data['payment_id'] ) : false; // WPCS: CSRF OK
 
 			if ( $form_id ) {
 
@@ -165,7 +176,6 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 				 * @param int $form_id - the form id
 				 * @param string $type - the submit type. In this case submit
 				 *
-				 * @return array $response
 				 */
 				$response = apply_filters( 'forminator_custom_form_ajax_submit_response', $response, $form_id, 'submit' );
 
@@ -237,16 +247,21 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * Handle form
 	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to `get_post_data`
 	 *
 	 * @param $form_id
 	 *
 	 * @return array|bool
 	 */
 	public function handle_form( $form_id ) {
+		$submitted_data = $this->get_post_data();
+
+		/** @var Forminator_Custom_Form_Model  $custom_form */
 		$custom_form = Forminator_Custom_Form_Model::model()->load( $form_id );
 		if ( is_object( $custom_form ) ) {
-			$setting    = $custom_form->settings;
-			$can_submit = $custom_form->form_is_visible();
+			$setting    		= $this->get_form_settings( $custom_form );
+			$can_submit 		= $custom_form->form_is_visible();
+			$prevent_store 	= isset( $setting['store'] ) && 'true' === $setting['store'] ? true : false;
 
 			if ( isset( $setting['logged-users'] ) && $setting['logged-users'] ) {
 				$can_submit = is_user_logged_in();
@@ -272,19 +287,22 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 				$field_data_array  = array();
 				$fields            = $custom_form->getFields();
 				$field_suffix      = Forminator_Form_Entry_Model::field_suffix();
-				$field_forms       = forminator_fields_toArray();
+				$field_forms       = forminator_fields_to_array();
 				$product_fields    = array();
+
+				// set default response to error message
+				$response = array(
+					'message' => __( "Error saving form", Forminator::DOMAIN ),
+					'errors'  => array(),
+					'success' => false,
+				);
+
 				if ( ! is_null( $fields ) ) {
-					$response = array(
-						'message' => __( "Error saving form", Forminator::DOMAIN ),
-						'errors'  => array(),
-						'success' => false,
-					);
 					$ignored_field_types 	= Forminator_Form_Entry_Model::ignored_fields();
 					foreach ( $fields as $field ) {
 						$field_array 	= $field->toFormattedArray();
 						$field_type 	= $field_array[ "type" ];
-						if ( in_array( $field_type, $ignored_field_types ) ) {
+						if ( in_array( $field_type, $ignored_field_types, true ) ) {
 							continue;
 						}
 						if ( isset( $field->slug ) ) {
@@ -293,28 +311,28 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							$field_data   = array();
 							$field_type   = $field_array["type"];
 							$post_file    = false;
-							if ( ! isset( $_POST[ $field_id ] ) ) {
+							if ( ! isset( $submitted_data[ $field_id ] ) ) {
 								foreach ( $field_suffix as $suffix ) {
 									$mod_field_id = $field_id . '-' . $suffix;
-									if ( isset( $_POST[ $mod_field_id ] ) ) {
-										$field_data[ $suffix ] = $_POST[ $mod_field_id ];
+									if ( isset( $submitted_data[ $mod_field_id ] ) ) {
+										$field_data[ $suffix ] = $submitted_data[ $mod_field_id ];
 									} elseif ( isset( $_FILES[ $mod_field_id ] ) ) {
-										if ( $field_type == "postdata" && $suffix == 'post-image' ) {
+										if ( "postdata" === $field_type && 'post-image' === $suffix ) {
 											$post_file = $mod_field_id;
 										}
 									}
 								}
-								if ( $field_type == "postdata" ) {
+								if ( "postdata" === $field_type ) {
 									$custom_vars = Forminator_Field::get_property( 'custom_vars', $field_array );
 									if ( ! empty( $custom_vars ) ) {
 										foreach ( $custom_vars as $variable ) {
 											$value    = ! empty( $variable['value'] ) ? $variable['value'] : sanitize_title( $variable['label'] );
 											$input_id = $field_id . '-post_meta-' . $value;
 											$label    = $variable['label'];
-											if ( isset( $_POST[ $input_id ] ) ) {
+											if ( isset( $submitted_data[ $input_id ] ) ) {
 												$field_data['post-custom'][] = array(
 													'label' => $label,
-													'value' => $_POST[ $input_id ],
+													'value' => $submitted_data[ $input_id ],
 													'key'   => $value,
 												);
 											}
@@ -322,22 +340,34 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 									}
 								}
 							} else {
-								$field_data = $_POST[ $field_id ];
+								$field_data = $submitted_data[ $field_id ];
 							}
 
 							if ( isset( $field_forms[ $field_type ] ) && ! empty( $field_forms[ $field_type ] ) ) {
 							    /** @var Forminator_Field $form_field_obj */
 								$form_field_obj = $field_forms[ $field_type ];
 
-								if ( $field_type == "upload" ) {
+								if ( "upload" === $field_type ) {
 									$upload_data = $this->handle_file_upload( $field_id );
-									if ( $upload_data ) {
+									if ( isset( $upload_data['success'] ) && $upload_data['success'] ){
 										$field_data['file'] = $upload_data;
+									} else if ( isset( $upload_data['success'] ) && false === $upload_data['success'] ){
+										$response = array(
+											'message' => $upload_data['message'],
+											'errors'  => array(),
+											'success' => false,
+										);
+										return $response;
 									} else {
-										$field_data = '';
+										$response = array(
+											'message' => json_encode($upload_data). __( 'There was an error saving the post data. Please try again', Forminator::DOMAIN ),
+											'errors'  => array(),
+											'success' => false,
+										);
+										return $response;
 									}
 								}
-								if ( $field_type == "postdata" ) {
+								if ( "postdata" === $field_type ) {
 									if ( $post_file ) {
 										$post_image = $form_field_obj->upload_post_image( $field_array, $post_file );
 										if ( is_array( $post_image ) && $post_image['attachment_id'] > 0 ) {
@@ -348,6 +378,9 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 									}
 
 								}
+								if ( 'url' === $field_type ) {
+									$field_data = $form_field_obj->add_scheme_url($field_data);
+								}
 
 								/**
                                  * @since 1.0.5
@@ -355,9 +388,9 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 								 */
 								$form_field_obj->init_autofill( $setting );
 
-								if ( ! empty( $field_data ) ) {
+								if ( ! empty( $field_data ) || '0' === $field_data ) {
 									// Validate data when its available and not hidden on front end
-									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
+									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $submitted_data ) ) {
 
 										/**
                                          * @since 1.0.5
@@ -381,7 +414,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 										$field_data = $form_field_obj->sanitize( $field_array, $field_data );
 
 
-										if ( $field_type == "postdata" && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
+										if ( "postdata" === $field_type && ! $form_field_obj->is_hidden( $field_array, $submitted_data ) ) {
 										    // check if field_data of post values not empty (happen when postdata is not required)
 											$filtered = array_filter( $field_data );
 											if ( ! empty( $filtered ) ) {
@@ -398,7 +431,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
                                             }
 
 										}
-										if ( $field_type == "product" ) {
+										if ( "product" === $field_type ) {
 											$product_fields[] = array(
 												'name'  => $field_id,
 												'value' => $field_data,
@@ -418,7 +451,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 
 								} else {
 									// Validate data when its available and not hidden on front end
-									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $_POST ) ) {
+									if ( $form_field_obj->is_available( $field_array ) && ! $form_field_obj->is_hidden( $field_array, $submitted_data ) ) {
 										/**
 										 * @since 1.0.5
 										 * Mayble re autofill, when autofill not editable, it should return autofill value
@@ -452,7 +485,7 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 				if ( empty( $submit_errors ) ) {
 					if ( isset( $setting['honeypot'] ) && filter_var( $setting['honeypot'], FILTER_VALIDATE_BOOLEAN ) ) {
 						$total_fields = count( $fields ) + 1;
-						if ( isset( $_POST["input_$total_fields"] ) && empty( $_POST["input_$total_fields"] ) ) {
+						if ( isset( $submitted_data["input_$total_fields"] ) && empty( $submitted_data["input_$total_fields"] ) ) {
 							$can_submit = true;
 						} else {
 							$can_submit = false;
@@ -483,15 +516,31 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 						$is_spam        = apply_filters( 'forminator_spam_protection', false, $field_data_array, $form_id, 'custom_form' );
 
 						$entry->is_spam = $is_spam;
-						if ( $entry->save() ) {
+
+						//ADDON on_form_submit
+						$addon_error = $this->attach_addons_on_form_submit( $form_id, $custom_form );
+
+						if ( true !== $addon_error ) {
+							$response = array(
+								'message' => $addon_error,
+								'success' => false,
+								'errors'  => array(),
+							);
+
+							return $response;
+						}
+
+
+						if ( $prevent_store || $entry->save() ) {
+
 							$response = array(
 								'message' => __( "Form entry saved", Forminator::DOMAIN ),
 								'success' => true,
 							);
-							if ( isset( $_POST['product-shipping'] ) && intval( $_POST['product-shipping'] > 0 ) ) {
+							if ( isset( $submitted_data['product-shipping'] ) && intval( $submitted_data['product-shipping'] > 0 ) ) {
 								$field_data_array[] = array(
 									'name'  => 'product_shipping',
-									'value' => $_POST['product-shipping'],
+									'value' => $submitted_data['product-shipping'],
 								);
 							}
 							$field_data_array[] =  array(
@@ -523,23 +572,27 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							 */
 							do_action( 'forminator_custom_form_submit_before_set_fields', $entry, $form_id, $field_data_array );
 
-							$entry->set_fields( $field_data_array );
+							//ADDON add_entry_fields
+							$added_data_array = $this->attach_addons_add_entry_fields( $form_id, $custom_form );
+							$added_data_array = array_merge($field_data_array, $added_data_array);
+
+							$entry->set_fields( $added_data_array );
+
+							//ADDON after_entry_saved
+							$this->attach_addons_after_entry_saved( $form_id, $entry );
+
 							$forminator_mail_sender = new Forminator_CForm_Front_Mail();
-							$forminator_mail_sender->process_mail( $custom_form, $_POST, $entry );
-							if ( isset( $setting['redirect'] ) ) {
-								// Convert to bool
-								$redirect = filter_var( $setting['redirect'], FILTER_VALIDATE_BOOLEAN );
-								if( $redirect ) {
-									if ( isset( $setting['redirect-url'] ) && ! empty( $setting['redirect-url'] ) ) {
-										$response['redirect'] = true;
-										$response['url']      = $setting['redirect-url'];
-									}
+							$forminator_mail_sender->process_mail( $custom_form, $submitted_data, $entry );
+							if ( isset( $setting['submission-behaviour'] ) && 'behaviour-redirect' === $setting['submission-behaviour'] ) {
+								if ( isset( $setting['redirect-url'] ) && ! empty( $setting['redirect-url'] ) ) {
+									$response['redirect'] = true;
+									$response['url']      = $setting['redirect-url'];
 								}
 							}
-							if ( isset( $setting['thankyou'] ) && $setting['thankyou'] ) {
+							if ( isset( $setting['submission-behaviour'] ) && 'behaviour-thankyou' === $setting['submission-behaviour'] ) {
 								if ( isset( $setting['thankyou-message'] ) && ! empty( $setting['thankyou-message'] ) ) {
 									//replace form data vars with value
-									$thankyou_message = forminator_replace_form_data( $setting['thankyou-message'] , $_POST );
+									$thankyou_message = forminator_replace_form_data( $setting['thankyou-message'] , $submitted_data );
 									//replace misc data vars with value
 									$thankyou_message    = forminator_replace_variables( $thankyou_message, $form_id );
 									$response['message'] = $thankyou_message;
@@ -549,12 +602,12 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 							if ( ! empty( $product_fields ) ) {
 								//Process purchase
 
-								$page_id  = $_POST['page_id']; //use page id to get permalink for redirect
+								$page_id  = $submitted_data['page_id']; //use page id to get permalink for redirect
 								$entry_id = $entry->entry_id;
 								$shipping = 0;
 
-								if ( isset( $_POST['product-shipping'] ) ) {
-									$shipping = $_POST['product-shipping'];
+								if ( isset( $submitted_data['product-shipping'] ) ) {
+									$shipping = $submitted_data['product-shipping'];
 								}
 
 								/**
@@ -598,16 +651,22 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 	 * Response message
 	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to `get_post_data`
+	 *
+	 * @param $form_id
+	 * @param $render_id
 	 */
 	public function form_response_message( $form_id, $render_id ) {
-		$post_form_id   = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
-		$post_render_id = isset( $_POST['render_id'] ) ? sanitize_text_field( $_POST['render_id'] ) : '';
+		$submitted_data = $this->get_post_data();
+
+		$post_form_id   = isset( $submitted_data['form_id'] ) ? sanitize_text_field( $submitted_data['form_id'] ) : false;
+		$post_render_id = isset( $submitted_data['render_id'] ) ? sanitize_text_field( $submitted_data['render_id'] ) : '';
 		$response       = self::$response;
 		//only show to related form
-		if ( ! empty( $response ) && is_array( $response ) && $form_id == $post_form_id && $render_id == $post_render_id ) {
+		if ( ! empty( $response ) && is_array( $response ) && $form_id === $post_form_id && $render_id === $post_render_id ) {
 			$label_class = $response['success'] ? 'success' : 'error';
 			?>
-            <label class="forminator-label--<?php echo $label_class; ?>"><span><?php echo $response['message']; ?></span></label>
+            <label class="forminator-label--<?php echo esc_attr( $label_class ); ?>"><span><?php echo $response['message']; // WPCS: XSS ok. ?></span></label>
 			<?php
 		}
 	}
@@ -632,18 +691,188 @@ class Forminator_CForm_Front_Action extends Forminator_Front_Action {
 
 
 	/**
+	 * Add Error message on footer script if available
+	 *
 	 * @since 1.0
+	 * @since 1.1 change $_POST to `get_post_data`
 	 */
 	public function footer_message() {
+		$submitted_data = $this->get_post_data();
+
 		$response  = self::$response;
-		$form_id   = isset( $_POST['form_id'] ) ? sanitize_text_field( $_POST['form_id'] ) : false;
-		$render_id = isset( $_POST['render_id'] ) ? sanitize_text_field( $_POST['render_id'] ) : '';
+		$form_id   = isset( $submitted_data['form_id'] ) ? sanitize_text_field( $submitted_data['form_id'] ) : false;
+		$render_id = isset( $submitted_data['render_id'] ) ? sanitize_text_field( $submitted_data['render_id'] ) : '';
 		$selector  = '#forminator-module-' . $form_id . '[data-forminator-render="' . $render_id . '"]';
 		if ( ! empty( $response ) && is_array( $response ) ) {
 			?>
-            <script type="text/javascript">var ForminatorValidationErrors = <?php echo wp_json_encode( array( 'selector' => $selector, 'errors' => $response['errors'] ) ); ?></script>
+			<script type="text/javascript">var ForminatorValidationErrors =
+				<?php
+				echo wp_json_encode(
+					array(
+						'selector' => $selector,
+						'errors'   => $response['errors'],
+					)
+				);
+				?>
+			</script>
 			<?php
 		}
 
+	}
+
+	/**
+	 * Executor On form submit for attached addons
+	 *
+	 * @see   Forminator_Addon_Form_Hooks_Abstract::on_form_submit()
+	 * @since 1.1
+	 *
+	 * @param                              $form_id
+	 *
+	 * @param Forminator_Custom_Form_Model $custom_form_model
+	 *
+	 * @return bool true on success|string error message from addon otherwise
+	 */
+	private function attach_addons_on_form_submit( $form_id, Forminator_Custom_Form_Model $custom_form_model ) {
+		$allowed_form_fields = forminator_addon_format_form_fields( $custom_form_model );
+		$submitted_data      = forminator_format_submitted_data_for_addon( $_POST, $_FILES, $allowed_form_fields );// WPCS: CSRF ok. its already validated before.
+		//find is_form_connected
+		$connected_addons = forminator_get_addons_instance_connected_with_form( $form_id );
+
+		foreach ( $connected_addons as $connected_addon ) {
+			try {
+				$form_hooks = $connected_addon->get_addon_form_hooks( $form_id );
+				if ( $form_hooks instanceof Forminator_Addon_Form_Hooks_Abstract ) {
+					$addon_return = $form_hooks->on_form_submit( $submitted_data );
+					if ( true !== $addon_return ) {
+						return $form_hooks->get_submit_form_error_message();
+					}
+				}
+			} catch ( Exception $e ) {
+				forminator_addon_maybe_log( $connected_addon->get_slug(), 'failed to attach_addons_on_form_submit', $e->getMessage() );
+			}
+
+		}
+
+		return true;
+	}
+
+	/**
+	 * Executor to add more entry fields for attached addons
+	 *
+	 * @see   Forminator_Addon_Form_Hooks_Abstract::add_entry_fields()
+	 *
+	 * @since 1.1
+	 *
+	 * @param                              $form_id
+	 * @param Forminator_Custom_Form_Model $custom_form_model
+	 *
+	 * @return array added fields to entry
+	 */
+	private function attach_addons_add_entry_fields( $form_id, Forminator_Custom_Form_Model $custom_form_model ) {
+		$additional_fields_data = array();
+		$allowed_form_fields    = forminator_addon_format_form_fields( $custom_form_model );
+		$submitted_data         = forminator_format_submitted_data_for_addon( $_POST, $_FILES, $allowed_form_fields );// WPCS: CSRF ok. its already validated before.
+		//find is_form_connected
+		$connected_addons = forminator_get_addons_instance_connected_with_form( $form_id );
+
+		foreach ( $connected_addons as $connected_addon ) {
+			try {
+				$form_hooks = $connected_addon->get_addon_form_hooks( $form_id );
+				if ( $form_hooks instanceof Forminator_Addon_Form_Hooks_Abstract ) {
+					$addon_fields = $form_hooks->add_entry_fields( $submitted_data );
+					//reformat additional fields
+					$addon_fields           = self::format_addon_additional_fields( $connected_addon, $addon_fields );
+					$additional_fields_data = array_merge( $additional_fields_data, $addon_fields );
+				}
+			} catch ( Exception $e ) {
+				forminator_addon_maybe_log( $connected_addon->get_slug(), 'failed to add_entry_fields', $e->getMessage() );
+			}
+
+		}
+
+		return $additional_fields_data;
+	}
+
+	/**
+	 * Formatting additional fields from addon
+	 * Format used is `forminator_addon_{$slug}_{$field_name}`
+	 *
+	 * @since 1.1
+	 *
+	 * @param Forminator_Addon_Abstract $addon
+	 * @param                           $additional_fields
+	 *
+	 * @return array
+	 */
+	private static function format_addon_additional_fields( Forminator_Addon_Abstract $addon, $additional_fields ) {
+		//to `name` and `value` basis
+		$formatted_additional_fields = array();
+		if ( ! is_array( $additional_fields ) ) {
+			return array();
+		}
+
+		foreach ( $additional_fields as $additional_field ) {
+			if ( ! isset( $additional_field['name'] ) || ! isset( $additional_field['value'] ) ) {
+				continue;
+			}
+			$formatted_additional_fields[] = array(
+				'name'  => 'forminator_addon_' . $addon->get_slug() . '_' . $additional_field['name'],
+				'value' => $additional_field['value'],
+			);
+		}
+
+		return $formatted_additional_fields;
+	}
+
+	/**
+	 * Executor action for attached addons after entry saved on storage
+	 *
+	 * @see   Forminator_Addon_Form_Hooks_Abstract::after_entry_saved()
+	 *
+	 * @since 1.1
+	 *
+	 * @param                             $form_id
+	 * @param Forminator_Form_Entry_Model $entry_model
+	 */
+	private function attach_addons_after_entry_saved( $form_id, Forminator_Form_Entry_Model $entry_model ) {
+		//find is_form_connected
+		$connected_addons = forminator_get_addons_instance_connected_with_form( $form_id );
+
+		foreach ( $connected_addons as $connected_addon ) {
+			try {
+				$form_hooks = $connected_addon->get_addon_form_hooks( $form_id );
+				if ( $form_hooks instanceof Forminator_Addon_Form_Hooks_Abstract ) {
+					$form_hooks->after_entry_saved( $entry_model );// run and forget
+				}
+			} catch ( Exception $e ) {
+				forminator_addon_maybe_log( $connected_addon->get_slug(), 'failed to attach_addons_on_form_submit', $e->getMessage() );
+			}
+
+		}
+	}
+
+	/**
+	 * Return Form Settings
+	 *
+	 * @since 1.1
+	 *
+	 * @param Forminator_Custom_Form_Model $form
+	 *
+	 * @return mixed
+	 */
+	private function get_form_settings( $form ) {
+		// If not using the new "submission-behaviour" setting, set it according to the previous settings
+		if ( ! isset( $form->settings['submission-behaviour'] ) ) {
+			$redirect = ( isset( $form->settings['redirect'] ) && 'true' === $form->settings['redirect'] );
+			$thankyou = ( isset( $form->settings['thankyou'] ) && 'true' === $form->settings['thankyou'] );
+
+			if ( $thankyou || ( ! $thankyou && ! $redirect ) ) {
+				$form->settings['submission-behaviour'] = 'behaviour-thankyou';
+			} elseif ( $redirect ) {
+				$form->settings['submission-behaviour'] = 'behaviour-redirect';
+			}
+		}
+
+		return $form->settings;
 	}
 }

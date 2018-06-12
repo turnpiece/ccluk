@@ -2,41 +2,19 @@
 $path = forminator_plugin_url();
 ?>
 
-<div class="wpmudev-box wpmudev-can--hide">
+<div class="sui-box">
 
-	<div class="wpmudev-box-header">
+	<div class="sui-box-body sui-block-content-center">
 
-		<div class="wpmudev-header--text">
+		<img src="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?>"
+			srcset="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?> 1x, <?php echo $path . 'assets/img/forminator-face@2x.png'; // WPCS: XSS ok. ?> 2x" alt="<?php esc_html_e( 'Forminator', Forminator::DOMAIN ); ?>"
+			class="sui-image sui-image-center fui-image" />
 
-			<h2 class="wpmudev-subtitle"><?php _e( "Documentation", Forminator::DOMAIN ); ?></h2>
+		<h2><?php esc_html_e( "Documentation", Forminator::DOMAIN ); ?></h2>
 
-		</div>
+		<p class="fui-limit-block-600 fui-limit-block-center"><?php esc_html_e( "Check out the docs to get the most out of the tools and features inside Forminator.", Forminator::DOMAIN ); ?></p>
 
-		<div class="wpmudev-header--action">
-
-			<button class="wpmudev-box--action">
-
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
-
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
-
-            </button>
-
-		</div>
-
-	</div>
-
-	<div class="wpmudev-box-section">
-
-		<div class="wpmudev-section--text wpmudev-align--center">
-
-			<img src="<?php echo $path . 'assets/img/forminator.png'; ?>" srcset="<?php echo $path . 'assets/img/forminator.png'; ?> 1x, <?php echo $path . 'assets/img/forminator@2x.png'; ?> 2x" alt="Forminator Docs" />
-
-			<p><?php _e( "Check out the docs to get the most out of the tools and features inside Forminator.", Forminator::DOMAIN ); ?></p>
-
-			<p><a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/" target="_blank" class="wpmudev-button wpmudev-button-blue"><?php _e( "Forminator Docs", Forminator::DOMAIN ); ?></a></p>
-
-		</div>
+		<p class="fui-limit-block-600 fui-limit-block-center"><a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/" target="_blank" class="sui-button sui-button-primary"><?php esc_html_e( "Forminator Docs", Forminator::DOMAIN ); ?></a></p>
 
 	</div>
 

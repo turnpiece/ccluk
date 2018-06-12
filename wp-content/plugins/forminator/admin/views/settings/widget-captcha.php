@@ -1,121 +1,92 @@
 <?php
-$path = forminator_plugin_dir();
+$path = forminator_plugin_url();
 
-$icon_minus = $path . "assets/icons/admin-icons/minus.php";
 $captcha_key     = get_option( "forminator_captcha_key", "" );
 $captcha_secret  = get_option( "forminator_captcha_secret", "" );
 
 $new = true;
 ?>
 
-<div class="wpmudev-box wpmudev-can--hide">
+<div class="sui-box">
 
-    <div class="wpmudev-box-header">
+	<div class="sui-box-header">
 
-        <div class="wpmudev-header--text">
+		<h3 class="sui-box-title"><?php esc_html_e( "Google reCaptcha", Forminator::DOMAIN ); ?></h3>
 
-            <h2 class="wpmudev-subtitle"><?php _e( "Google reCaptcha", Forminator::DOMAIN ); ?></h2>
+	</div>
 
-        </div>
+	<?php if ( forminator_has_captcha_settings() ) { ?>
 
-        <div class="wpmudev-header--action">
+		<div class="sui-box-body">
 
-            <button class="wpmudev-box--action">
+			<div class="sui-notice sui-notice-sm sui-notice-warning">
 
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+				<p><?php esc_html_e( "Please note, these settings are required only if you decide to use the reCaptcha field.", Forminator::DOMAIN ); ?></p>
 
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
+			</div>
 
-            </button>
+			<div class="sui-notice sui-notice-sm sui-notice-info">
+
+				<p><?php esc_html_e('Make sure you register your reCaptcha site type as invisible reCaptcha to support both reCaptcha v2 and invisible reCaptcha', Forminator::DOMAIN); ?></p>
+
+			</div>
 
 		</div>
 
-    </div>
+		<table class="sui-table sui-accordion fui-table-exports">
 
-    <div class="wpmudev-box-section">
-		  <?php if( ! forminator_has_captcha_settings() ) { ?>
-		  <div class="wpmudev-section--text">
+			<tbody>
 
-				<label class="wpmudev-label--notice"><span><?php _e( "Add Google Captcha settings to enable Captcha field.", Forminator::DOMAIN ); ?></label>
+				<tr>
 
-				<p><?php _e( "reCAPTCHA is a free service that protects your site from spam and abuse", Forminator::DOMAIN ); ?></p>
+					<td><?php esc_html_e( "Site Key", Forminator::DOMAIN ); ?></td>
 
-				<p><button class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost wpmudev-open-modal" data-modal="captcha" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_captcha' ) ?>"><?php _e( "Add Credentials", Forminator::DOMAIN ); ?></button></p>
+					<td><?php echo esc_html( $captcha_key ); ?></td>
 
-		  </div>
-		  <?php } else { ?>
-        <div class="wpmudev-section--table">
+				</tr>
 
-            <label class="wpmudev-label--notice">
-                <span><?php _e( "Please note, these settings are required only if you decide to use the reCAPTCHA field.", Forminator::DOMAIN ); ?></span>
-                <br>
-                <span><?php _e('Make sure you register your reCAPTCHA site type as invisible reCAPTCHA to support both reCAPTCHA v2 and invisible  reCAPTCHA', Forminator::DOMAIN)?></span>
-            </label>
+				<tr>
 
-            <table class="wpmudev-table">
+					<td><?php esc_html_e( "Secret Key", Forminator::DOMAIN ); ?></td>
 
-                <thead>
+					<td><?php echo esc_html( $captcha_secret ); ?></td>
 
-                    <tr><th colspan="2"><?php _e( "reCAPTCHA Credentials", Forminator::DOMAIN ); ?></th></tr>
+				</tr>
 
-                </thead>
+			</tbody>
 
-                <tbody>
+		</table>
 
-                    <tr>
+		<div class="sui-box-footer">
 
-                        <th>
+			<button class="sui-button wpmudev-open-modal" data-modal="captcha" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_captcha' ); // WPCS: XSS ok. ?>"><?php esc_html_e( "Edit Credentials", Forminator::DOMAIN ); ?></button>
 
-                            <p class="wpmudev-table--text"><?php _e( "Site Key:", Forminator::DOMAIN ); ?></p>
+		</div>
 
-                        </th>
+	<?php } else { ?>
 
-                        <td>
+		<div class="sui-box-body">
 
-                            <p class="wpmudev-table--text" style="text-align: left"><?php echo $captcha_key; ?></p>
+			<div class="sui-notice sui-notice-warning">
 
-                        </td>
+				<p><?php esc_html_e( "Add Google reCaptcha settings to enable reCaptcha field.", Forminator::DOMAIN ); ?></p>
 
-                    </tr>
+			</div>
 
-                    <tr>
+			<div class="sui-block-content-center">
 
-                        <th>
+				<img src="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?>"
+					srcset="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?> 1x, <?php echo $path . 'assets/img/forminator-face@2x.png'; // WPCS: XSS ok. ?> 2x" alt="<?php esc_html_e( 'Forminator', Forminator::DOMAIN ); ?>"
+					class="sui-image sui-image-center fui-image" />
 
-                            <p class="wpmudev-table--text"><?php _e( "Secret Key:", Forminator::DOMAIN ); ?></p>
+				<p><?php esc_html_e( "reCaptcha is a free service that protects your site from spam and abuse.", Forminator::DOMAIN ); ?></p>
 
-                        </th>
+				<button class="sui-button sui-button-primary wpmudev-open-modal" data-modal="captcha" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_captcha' ); // WPCS: XSS ok. ?>"><?php esc_html_e( "Add Credentials", Forminator::DOMAIN ); ?></button>
 
-                        <td>
+			</div>
 
-                            <p class="wpmudev-table--text" style="text-align: left"><?php echo $captcha_secret; ?></p>
+		</div>
 
-                        </td>
-
-                    </tr>
-
-                </tbody>
-
-                <tfoot>
-
-                    <tr>
-
-                        <td colspan="2">
-
-                            <div class="wpmudev-table--text"><button class="wpmudev-button wpmudev-button-sm wpmudev-button-blue wpmudev-open-modal" data-modal="captcha" data-nonce="<?php echo wp_create_nonce( 'forminator_popup_captcha' ) ?>"><?php _e( "Edit Credentials", Forminator::DOMAIN ); ?></button></div>
-
-                        </td>
-
-                    </tr>
-
-                </tfoot>
-
-            </table>
-
-        </div>
-
-	  <?php } ?>
-
-    </div>
+	<?php } ?>
 
 </div>

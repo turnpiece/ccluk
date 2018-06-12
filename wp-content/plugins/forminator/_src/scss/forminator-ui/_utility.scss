@@ -1,0 +1,66 @@
+@include body-class {
+
+	.fui-image {
+		margin-top: $sui-gutter;
+		margin-bottom: $sui-gutter;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include media( max-width, md ) {
+			margin-top: $sui-gutter-md;
+			margin-bottom: $sui-gutter-md;
+		}
+	}
+
+	.fui-limit-block-600 {
+		max-width: 600px;
+	}
+
+	.fui-limit-block-center {
+		display: block;
+		margin-right: auto;
+		margin-left: auto;
+	}
+
+	.fui-action-buttons {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: space-between;
+
+		.sui-button {
+			flex: 0 0 auto;
+			margin: 0 $sui-gutter/2;
+
+			&:first-child {
+				margin-left: 0;
+
+				@include media( max-width, md ) {
+					margin-top: 0;
+				}
+			}
+
+			&:last-child {
+				margin-right: 0;
+
+				@include media( max-width, md ) {
+					margin-bottom: 0;
+				}
+			}
+
+			@include media( max-width, md ) {
+				margin: $sui-gutter-md 0;
+			}
+		}
+
+		@include media( max-width, md ) {
+			display: block;
+		}
+	}
+}

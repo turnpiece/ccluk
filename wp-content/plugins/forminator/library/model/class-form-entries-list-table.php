@@ -59,7 +59,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 	 * @since 1.0
 	 */
 	public function no_items() {
-		_e( 'No entries found.', Forminator::DOMAIN );
+		esc_html_e( 'No entries found.', Forminator::DOMAIN );
 	}
 
 	/**
@@ -68,13 +68,13 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 	 * @since 1.0
 	 * @return array
 	 */
-	function get_columns() {
+	public function get_columns() {
 		$columns = array(
 			'cb'	=> '<input type="checkbox" />',
 			'date'	=> esc_html__( 'Date added', Forminator::DOMAIN ),
 		);
 
-		if ( !empty( $this->visible_fields ) && !in_array( 'date', $this->visible_fields ) ) {
+		if ( !empty( $this->visible_fields ) && !in_array( 'date', $this->visible_fields, true ) ) {
 			unset( $columns['date'] );
 		}
 
@@ -88,7 +88,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 					}
 					$slug	= isset( $field->slug ) ? $field->slug : sanitize_title( $label );
 					if ( !empty( $this->visible_fields ) ) {
-						if ( in_array( $slug, $this->visible_fields ) ) {
+						if ( in_array( $slug, $this->visible_fields, true ) ) {
 							$columns[ $slug ] = $label;
 						}
 					} else {
@@ -106,7 +106,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 	 *
 	 * @since 1.0
 	 */
-	function prepare_items() {
+	public function prepare_items() {
 		$paged    = $this->get_pagenum();
 		$per_page = 10;
 		$offset   = ( $paged - 1 ) * $per_page;
@@ -140,13 +140,13 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 		$current_url = set_url_scheme( 'http://' . $_SERVER['HTTP_HOST'] . $_SERVER['REQUEST_URI'] );
 		$current_url = remove_query_arg( 'paged', $current_url );
 
-		if ( isset( $_GET['orderby'] ) ) {
-			$current_orderby = $_GET['orderby'];
+		if ( isset( $_GET['orderby'] ) ) { // WPCS: CSRF OK
+			$current_orderby = $_GET['orderby']; // WPCS: CSRF OK
 		} else {
 			$current_orderby = '';
 		}
 
-		if ( isset( $_GET['order'] ) && 'desc' === $_GET['order'] ) {
+		if ( isset( $_GET['order'] ) && 'desc' === $_GET['order'] ) { // WPCS: CSRF OK
 			$current_order = 'desc';
 		} else {
 			$current_order = 'asc';
@@ -162,7 +162,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 		foreach ( $columns as $column_key => $column_display_name ) {
 			$class = array( "column-$column_key" );
 
-			if ( in_array( $column_key, $hidden ) ) {
+			if ( in_array( $column_key, $hidden, true ) ) {
 				$class[] = 'hidden';
 			}
 
@@ -196,7 +196,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 			if ( !empty( $class ) )
 				$class = "class='" . join( ' ', $class ) . "'";
 
-			echo "<$tag $scope $id $class>$column_display_name</$tag>";
+			echo "<$tag $scope $id $class>$column_display_name</$tag>"; // WPCS: XSS ok.
 		}
 	}
 
@@ -239,8 +239,8 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 	public function column_cb( $item ) {
 		?>
 		<div class="wpmudev-checkbox">
-			<input type="checkbox" id="wpf-cform-check_entry_<?php echo $item->entry_id; ?>" name="entry[]" value="<?php echo $item->entry_id; ?>">
-			<label for="wpf-cform-check_entry_<?php echo $item->entry_id; ?>" class=""></label>
+			<input type="checkbox" id="wpf-cform-check_entry_<?php echo esc_attr( $item->entry_id ); ?>" name="entry[]" value="<?php echo esc_attr( $item->entry_id ); ?>">
+			<label for="wpf-cform-check_entry_<?php echo esc_attr( $item->entry_id ); ?>" class=""></label>
 		</div>
 		<?php
 	}
@@ -255,7 +255,7 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 	 */
 	public function column_date( $item ) {
 		?>
-		<p class="wpmudev-cell-content"><?php echo $item->date_created; ?></p>
+		<p class="wpmudev-cell-content"><?php echo esc_attr( $item->date_created ); ?></p>
 		<?php
 	}
 
@@ -277,21 +277,21 @@ class Forminator_Entries_List_Table extends WP_List_Table {
 				$is_product 	= false;
 				foreach ( $data as $key => $value ) {
 					if ( is_array( $value ) ) {
-						if ( $key == 'file' && isset( $value['file_url'] ) ) {
+						if ( 'file' === $key && isset( $value['file_url'] ) ) {
 							$file_name 	= basename( $value['file_url'] );
 							$file_name 	= "<a href='" .$value['file_url'] . "' target='_blank' rel='noreferrer' title='". __( 'View File', Forminator::DOMAIN ) ."'>$file_name</a> ,";
 							$output 	.= $file_name;
 						}
 					} else {
 						if ( !is_int( $key ) ) {
-							if ( $key == 'postdata' ) {
+							if ( 'postdata' === $key ) {
 								$url 	= get_edit_post_link( $value );
 								$name 	= get_the_title( $value );
 								$output .= "<a href='" .$url . "' target='_blank' rel='noreferrer' title='". __( 'Edit Post', Forminator::DOMAIN ) ."'>$name</a> ,";
 							} else {
 								if ( is_string( $key ) ) {
-									if ( $key == 'product-id' || $key == 'product-quantity' ) {
-										if ( $product_cost == 0 ) {
+									if ( 'product-id' === $key || 'product-quantity' === $key ) {
+										if ( 0 === $product_cost ) {
 											$product_cost = $value;
 										} else {
 											$product_cost = $product_cost * $value;

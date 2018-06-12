@@ -1,0 +1,52 @@
+@include body-class {
+
+	.sui-box {
+
+		.sui-box-body {
+
+			.fui-form-intro {
+				display: flex;
+				align-items: center;
+
+				.fui-form-title {
+					flex: 0 0 auto;
+					margin: 0;
+					line-height: 30px;
+
+					+ .fui-form-element-actions {
+						margin-left: $sui-gutter;
+
+						@include media( max-width, md ) {
+							margin-left: $sui-gutter-md;
+						}
+					}
+				}
+
+				@include media( max-width, md ) {
+					display: block;
+				}
+			}
+
+			.sui-box-settings-row {
+
+				.sui-box-settings-col-1 {
+					vertical-align: top;
+				}
+			}
+		}
+
+		.fui-box-buttons {
+			display: flex;
+			align-items: center;
+			justify-content: space-between;
+
+			.sui-button {
+				flex: 0 0 auto;
+			}
+
+			@include media( max-width, md ) {
+				display: block;
+			}
+		}
+	}
+}

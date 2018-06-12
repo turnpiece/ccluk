@@ -1,137 +1,103 @@
 <?php
-$path = forminator_plugin_dir();
-$icon_minus = $path . "assets/icons/admin-icons/minus.php";
-$icon_cform = $path . "assets/icons/forminator-icons/cform.php";
+$path = forminator_plugin_url();
 ?>
 
-<div class="wpmudev-box wpmudev-can--hide">
+<div class="sui-box">
 
-    <div class="wpmudev-box-header">
+	<div class="sui-box-header">
 
-        <div class="wpmudev-header--icon">
+		<h3 class="sui-box-title"><i class="sui-icon-clipboard-notes" aria-hidden="true"></i><?php esc_html_e( "Forms", Forminator::DOMAIN ); ?></h3>
 
-            <?php include( $icon_cform ); ?>
+	</div>
 
-        </div>
+	<?php if ( forminator_cforms_total() > 0 ) { ?>
 
-        <div class="wpmudev-header--text">
+		<div class="sui-box-body"><?php esc_html_e( "Create custom forms for all your needs with as many fields as your like. From contact forms to quote requests and everything in between.", Forminator::DOMAIN ); ?></div>
 
-            <h2 class="wpmudev-title"><?php _e( "Forms", Forminator::DOMAIN ); ?></h2>
+		<table class="fui-table">
 
-        </div>
+			<thead>
 
-        <div class="wpmudev-header--action">
+				<tr>
 
-			<button class="wpmudev-box--action">
+					<th colspan="4"><?php esc_html_e( "Form Name", Forminator::DOMAIN ); ?></th>
 
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+					<th><?php esc_html_e( "Views", Forminator::DOMAIN ); ?></th>
 
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
+					<th><?php esc_html_e( "Entries", Forminator::DOMAIN ); ?></th>
 
-            </button>
+					<th><?php esc_html_e( "Conversion Rate", Forminator::DOMAIN ); ?></th>
+
+					<th class="fui-table-action"></th>
+
+					<th class="fui-table-action"></th>
+
+				</tr>
+
+			</thead>
+
+			<tbody>
+
+				<?php foreach( forminator_cform_modules() as $module ) { ?>
+
+					<tr>
+
+						<td colspan="4" class="fui-cell-title"><?php echo forminator_get_form_name( $module['id'], 'custom_form'); // WPCS: XSS ok. ?></td>
+
+						<td><?php echo esc_html( $module["views"] ); ?></td>
+
+						<td><?php echo esc_html( $module["entries"] ); ?></td>
+
+						<td><?php echo forminator_get_rate( $module ); // WPCS: XSS ok. ?>%</td>
+
+						<td class="fui-table-action"><a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ); // WPCS: XSS ok. ?>"
+							class="sui-button-icon sui-tooltip sui-tooltip-top-left"
+							data-tooltip="<?php esc_html_e( 'Edit form layout', Forminator::DOMAIN ); ?>"><i class="sui-icon-layout" aria-hidden="true"></i></a>
+						</td>
+
+						<td class="fui-table-action"><a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ); // WPCS: XSS ok. ?>#appearance"
+							class="sui-button-icon sui-tooltip sui-tooltip-top-left"
+							data-tooltip="<?php esc_html_e( 'Edit form settings', Forminator::DOMAIN ); ?>"><i class="sui-icon-widget-settings-config" aria-hidden="true"></i></a>
+						</td>
+
+					</tr>
+
+				<?php } ?>
+
+			</tbody>
+
+		</table>
+
+	<?php } else { ?>
+
+		<div class="sui-box-body sui-block-content-center">
+
+			<img src="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?>"
+				srcset="<?php echo $path . 'assets/img/forminator-face.png'; // WPCS: XSS ok. ?> 1x, <?php echo $path . 'assets/img/forminator-face@2x.png'; // WPCS: XSS ok. ?> 2x" alt="<?php esc_html_e( 'Forminator Forms', Forminator::DOMAIN ); ?>"
+				class="sui-image sui-image-center" />
+
+			<p class="fui-limit-block-600 fui-limit-block-center"><?php esc_html_e( "Create custom forms for all your needs with as many fields as your like. From contact forms to quote requests and everything in between.", Forminator::DOMAIN ); ?></p>
+
+			<p><button href="/" class="sui-button sui-button-blue wpmudev-open-modal" data-modal="custom_forms"><?php esc_html_e( "Create Form", Forminator::DOMAIN ); ?></button></p>
 
 		</div>
 
-    </div>
+	<?php } ?>
 
-    <div class="wpmudev-box-section">
+	<?php if ( forminator_cforms_total() > 0 ) { ?>
 
-        <?php if ( forminator_cforms_total() > 0 ) { ?>
+		<div class="sui-box-footer">
 
-            <div class="wpmudev-section--table">
+			<div class="fui-action-buttons">
 
-                <table class="wpmudev-table wpmudev-can--edit">
+				<a href="<?php echo forminator_get_admin_link( 'forminator-cform' ); // WPCS: XSS ok. ?>" class="sui-button sui-button-ghost"><i class="sui-icon-eye" aria-hidden="true"></i> <?php esc_html_e( "View All", Forminator::DOMAIN ); ?></a>
 
-                    <thead>
+				<button class="sui-button sui-button-blue wpmudev-open-modal" data-modal="custom_forms"><?php esc_html_e( "Create Form", Forminator::DOMAIN ); ?></button>
 
-                        <tr>
+			</div>
 
-                            <th><?php _e( "Name", Forminator::DOMAIN ); ?></th>
+		</div>
 
-                            <td class="wpmudev-row--64"><?php _e( "Views", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--92"><?php _e( "Submissions", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--58"><?php _e( "Rate", Forminator::DOMAIN ); ?></td>
-
-                            <td></td>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <?php foreach( forminator_cform_modules() as $module ) { ?>
-                            <tr>
-
-                                <th>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_form_name( $module['id'], 'custom_form'); ?></p>
-
-                                </th>
-
-                                <td class="wpmudev-row--64">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Views:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["views"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--92">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Submissions:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["entries"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--58">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Conv. Rate:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_rate( $module ); ?>%</p>
-
-                                </td>
-
-                                <td>
-
-                                    <p class="wpmudev-table--text"><a href="<?php echo admin_url( 'admin.php?page=forminator-cform-wizard&id=' . $module['id'] ) ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "Edit", Forminator::DOMAIN ); ?></a></p>
-
-                                </td>
-
-                            </tr>
-
-                        <?php } ?>
-
-                    </tbody>
-
-                    <tfoot>
-
-                        <tr><td colspan="5">
-                            <div class="wpmudev-table--buttons">
-                                <button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-blue wpmudev-open-modal" data-modal="custom_forms"><?php _e( "New Form", Forminator::DOMAIN ); ?></button>
-                                <a href="<?php echo forminator_get_admin_link( 'forminator-cform' ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "View All", Forminator::DOMAIN ); ?></a>
-                            </div>
-                        </td></tr>
-
-                </table>
-
-            </div>
-
-        <?php } else { ?>
-
-            <div class="wpmudev-section--text">
-
-                <p><?php _e( "Custom forms, conditional forms, etc. Choose from our library of forms or create a new one from scratch.", Forminator::DOMAIN ); ?></p>
-
-                <p><button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost wpmudev-open-modal" data-modal="custom_forms"><?php _e( "New Form", Forminator::DOMAIN ); ?></button></p>
-
-            </div>
-
-        <?php } ?>
-
-    </div>
+	<?php } ?>
 
 </div>

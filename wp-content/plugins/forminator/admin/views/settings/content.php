@@ -1,51 +1,15 @@
-<section id="wpmudev-section">
+<div class="sui-row">
 
-    <div class="wpmudev-row">
-
-        <div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-listings' ); ?>
-
-		</div>
-
-		<div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-entries' ); ?>
-
-		</div>
-
+	<div class="sui-col-md-6">
+		<?php $this->template( 'settings/widget-pagination' ); ?>
+		<?php $this->template( 'settings/widget-captcha' ); ?>
+		<?php $this->template( 'settings/widget-email' ); ?>
 	</div>
 
-	<div class="wpmudev-row">
+	<div class="sui-col-md-6">
+		<?php $this->template( 'settings/widget-uninstall' ); ?>
+		<?php $this->template( 'settings/widget-privacy' ); ?>
+		<?php $this->template( 'settings/widget-docs' ); ?>
+	</div>
 
-        <div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-captcha' ); ?>
-
-		</div>
-
-		<div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-docs' ); ?>
-
-		</div>
-
-    </div>
-
-	<div class="wpmudev-row">
-
-		<div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-privacy' ); ?>
-
-		</div>
-
-        <div class="wpmudev-col col-12 col-md-6">
-
-			<?php $this->template( 'settings/widget-uninstall' ); ?>
-
-		</div>
-
-    </div>
-
-</section>
+</div>

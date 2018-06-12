@@ -81,20 +81,9 @@ abstract class Forminator_Mail {
 		if ( !empty( $subject ) ) {
 			$this->subject = $subject;
 		}
-		$this->sender_email = $this->get_no_reply_email();
-		$this->sender_name 	= get_option( 'blogname' );
+		$this->sender_email = get_global_sender_email_address();
+		$this->sender_name 	= get_global_sender_name();
 		$this->set_headers();
-	}
-
-	/**
-	 * No reply email
-	 *
-	 * @since 1.0
-	 * @return string
-	 */
-	private function get_no_reply_email() {
-		$no_reply_email = "noreply@" . parse_url( get_site_url(), PHP_URL_HOST );
-		return apply_filters( 'fominator_noreply_email', $no_reply_email );
 	}
 
 	/**

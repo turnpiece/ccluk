@@ -1,0 +1,61 @@
+@include body-class {
+
+	.fui-multi-order {
+		display: block;
+		margin: 1px 0;
+		padding: $sui-gutter/2;
+		border: 1px solid palette( gray, lighter );
+		border-radius: 5px;
+		background: palette( silver, light );
+
+		.fui-item {
+			cursor: move;
+			display: block;
+			margin: $sui-gutter/3 0;
+			color: palette( gray, dark );
+			font: 500 15px/30px $font;
+			letter-spacing: -0.025em;
+
+			i:before {
+				display: block;
+			}
+
+			.fui-item-move-indicator {
+				margin-right: 4px;
+				font-size: 11px;
+				line-height: 18px;
+			}
+
+			&:first-child {
+				margin-top: 0;
+
+				@include media( max-width, md ) {
+					margin-top: 0;
+				}
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+
+				@include media( max-width, md ) {
+					margin-bottom: 0;
+				}
+			}
+
+			@include media( max-width, md ) {
+				margin: $sui-gutter-md/3 0;
+			}
+		}
+
+		@include media( max-width, md ) {
+			padding: $sui-gutter-md/2;
+		}
+	}
+
+	.sui-form-field-error {
+
+		.fui-multi-order {
+			border-bottom: 2px solid palette( red, soft );
+		}
+	}
+}

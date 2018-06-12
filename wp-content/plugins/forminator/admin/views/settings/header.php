@@ -1,11 +1,7 @@
-<div class="wpmudev-header--main">
+<h1 class="sui-header-title"><?php esc_html_e( "Settings", Forminator::DOMAIN ); ?></h1>
 
-	<h1><?php _e( "Settings", Forminator::DOMAIN ); ?></h1>
+<div class="sui-actions-right">
 
-</div>
-
-<div class="wpmudev-header--sub">
-
-	<a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/#chapter-5" target="_blank" class="wpmudev-button wpmudev-button-ghost wpmudev-button-sm"><i class="wpdui-icon wpdui-icon-academy"></i><?php _e( "View Documentation", Forminator::DOMAIN ); ?></a>
+	<a href="https://premium.wpmudev.org/docs/wpmu-dev-plugins/forminator/#chapter-5" target="_blank" class="sui-button sui-button-ghost"><i class="sui-icon-academy"></i> <?php esc_html_e( "View Documentation", Forminator::DOMAIN ); ?></a>
 
 </div>

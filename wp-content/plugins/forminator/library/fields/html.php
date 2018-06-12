@@ -57,21 +57,21 @@ class Forminator_Html extends Forminator_Field {
 	 *
 	 * @return array
 	 */
-	public function load_settings( $settings = array() ){
+	public function load_settings( $settings = array() ) {
 		return array(
 
 			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
+				'id'    => 'field-label',
+				'type'  => 'Text',
+				'name'  => 'field_label',
+				'label' => __( 'Field label', Forminator::DOMAIN ),
 			),
 
 			array(
-				'id' => 'variations',
-				'type' => 'Editor',
-				'name' => 'variations',
-				'label'	=> __( 'Default value', Forminator::DOMAIN ),
+				'id'    => 'variations',
+				'type'  => 'Editor',
+				'name'  => 'variations',
+				'label' => __( 'Default value', Forminator::DOMAIN ),
 			),
 
 		);
@@ -85,7 +85,7 @@ class Forminator_Html extends Forminator_Field {
 	 */
 	public function defaults() {
 		return array(
-			'field_label'  => __( 'HTML', Forminator::DOMAIN )
+			'field_label' => __( 'HTML', Forminator::DOMAIN ),
 		);
 	}
 
@@ -112,16 +112,14 @@ class Forminator_Html extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			{[ if( field.variations !== "" ) { ]}
-				<div class="wpmudev-option--html">{{ field.variations }}</div>
-			{[ } else { ]}
-				<div class="wpmudev-option--html">... add custom html here ...</div>
-			{[ } ]}
-		</div>';
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		{[ if( field.variations !== "" ) { ]}
+			<div class="wpmudev-option--html">{{ field.variations }}</div>
+		{[ } else { ]}
+			<div class="wpmudev-option--html">... add custom html here ...</div>
+		{[ } ]}';
 	}
 
 	/**

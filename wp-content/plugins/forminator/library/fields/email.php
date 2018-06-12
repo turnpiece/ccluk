@@ -61,96 +61,80 @@ class Forminator_Email extends Forminator_Field {
 	 *
 	 * @return array
 	 */
-	 public function load_settings( $settings = array() ) {
-		 return array(
-			 array(
-				 'id' => 'required',
-				 'type' => 'Toggle',
-				 'name' => 'required',
-				 'size' => 12,
-				 'className' => 'required-field',
-				 'hide_label' => true,
-				 'values' => array(
-					 array(
-						 'value' => "true",
-						 'label' => __( 'Required', Forminator::DOMAIN ),
-						 'labelSmall' => "true"
-					 )
-				 )
-			 ),
+	public function load_settings( $settings = array() ) {
+		return array(
+			array(
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
+				'size'       => 12,
+				'className'  => 'required-field',
+				'hide_label' => true,
+				'values'     => array(
+					array(
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+			),
 
-			 array(
-				 'id' => 'separator-1',
-				 'type' => 'Separator',
-				 'name' => 'separator',
-				 'hide_label' => true
-			 ),
+			array(
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
+				'hide_label' => false,
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'size'       => 12,
+				'className'  => 'text-field',
+			),
 
-			 array(
-				 'id' => 'field-label',
-				 'type' => 'Text',
-				 'name' => 'field_label',
-				 'hide_label' => false,
-				 'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				 'size' => 12,
-				 'className' => 'text-field',
-			 ),
+			array(
+				'id'         => 'placeholder',
+				'type'       => 'Text',
+				'name'       => 'placeholder',
+				'hide_label' => false,
+				'label'      => __( 'Placeholder', Forminator::DOMAIN ),
+				'size'       => 12,
+				'className'  => 'text-field',
+			),
 
-			 array(
-				 'id' => 'placeholder',
-				 'type' => 'Text',
-				 'name' => 'placeholder',
-				 'hide_label' => false,
-				 'label'	=> __( 'Placeholder', Forminator::DOMAIN ),
-				 'size' => 12,
-				 'className' => 'text-field',
-			 ),
+			array(
+				'id'         => 'description',
+				'type'       => 'Text',
+				'name'       => 'description',
+				'hide_label' => false,
+				'label'      => __( 'Description', Forminator::DOMAIN ),
+				'size'       => 12,
+				'className'  => 'text-field',
+			),
 
-			 array(
-				 'id' => 'description',
-				 'type' => 'Text',
-				 'name' => 'description',
-				 'hide_label' => false,
-				 'label'	=> __( 'Description', Forminator::DOMAIN ),
-				 'size' => 12,
-				 'className' => 'text-field',
-			 ),
-
-			 array(
-				 'id' => 'separator-2',
-				 'type' => 'Separator',
-				 'name' => 'separator',
-				 'hide_label' => true,
-				 'size' => 12,
-				 'className' => 'separator-field',
-			 ),
-
-			 array(
-				 'id' => 'validation',
-				 'type' => 'ToggleContainer',
-				 'name' => 'validation',
-				 'hide_label' => true,
-				 'has_content' => true,
-				 'values' => array(
-					 array(
-						 'value' => "true",
-						 'label' => __( 'Enable validation', Forminator::DOMAIN ),
-						 'labelSmall' => "true"
-					 )
-				 ),
-				 'fields' => array(
-					 array(
-						 'id' => 'validation-text',
-						 'type' => 'Text',
-						 'name' => 'validation_text',
-						 'size' => 12,
-						 'className' => 'text-field',
-						 'label' => __( 'Custom validation error message', Forminator::DOMAIN )
-					 )
-				 )
-			 ),
-		 );
-	 }
+			array(
+				'id'          => 'validation',
+				'type'        => 'ToggleContainer',
+				'name'        => 'validation',
+				'hide_label'  => true,
+				'has_content' => true,
+				'values'      => array(
+					array(
+						'value'      => "true",
+						'label'      => __( 'Enable validation', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+				'fields'      => array(
+					array(
+						'id'        => 'validation-text',
+						'type'      => 'Text',
+						'name'      => 'validation_text',
+						'size'      => 12,
+						'className' => 'text-field',
+						'label'     => __( 'Custom validation error message', Forminator::DOMAIN ),
+					),
+				),
+			),
+		);
+	}
 
 	/**
 	 * Field defaults
@@ -194,27 +178,16 @@ class Forminator_Email extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			<input type="{{ field.type }}" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
-			{[ if( field.description || field.use_limit ) { ]}
-			<div class="wpmudev-group--info">
-				{[ if( field.description ) { ]}
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
-				{[ } ]}
-				{[ if( field.use_limit && field.limit ) { ]}
-				<span class="wpmudev-info--limit">0 / {{ field.limit }}</span>
-				{[ } ]}
-			</div>
-			{[ } ]}
-			{[ if( ( field.validation == "true" ) && field.validation_text ) { ]}
-			<div class="wpmudev-group--validation">
-				<p>{{ encodeHtmlEntity( field.validation_text ) }}</p>
-			</div>
-			{[ } ]}
-		</div>';
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		<input type="{{ field.type }}" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+		{[ if( ( field.validation == "true" ) && field.validation_text ) { ]}
+			<span class="sui-error-message">{{ encodeHtmlEntity( field.validation_text ) }}</span>
+		{[ } ]}
+		{[ if( field.description ) { ]}
+			<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
+		{[ } ]}';
     }
 
 	/**
@@ -232,28 +205,29 @@ class Forminator_Email extends Forminator_Field {
 
 		$this->init_autofill($settings);
 
-		$id				= $name = self::get_property( 'element_id', $field );
-		$design			= $this->get_form_style( $settings );
-		$ariaid			= $id;
-		$id				= $id . '-field';
-		$required		= self::get_property( 'required', $field, false );
-		$placeholder	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$value			= self::get_property( 'value', $field );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
+		$design      = $this->get_form_style( $settings );
+		$ariaid      = $id;
+		$id          = $id . '-field';
+		$required    = self::get_property( 'required', $field, false );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$value       = self::get_property( 'value', $field );
 
 		$html = '';
 
-		if ( $design === 'material' ) {
+		if ( 'material' === $design ) {
 			$html .= '<div class="forminator-input--wrap">';
 		}
 
-		$email_attr       = array(
-			'id'				=> $id,
-			'name'				=> $name,
-			'placeholder'		=> $placeholder,
-			'data-required'		=> $required,
-			'class'				=> 'forminator-email--field forminator-input',
-			'type'				=> 'email',
-			'aria-labelledby'	=> 'forminator-label-' . $ariaid
+		$email_attr = array(
+			'id'              => $id,
+			'name'            => $name,
+			'placeholder'     => $placeholder,
+			'data-required'   => $required,
+			'class'           => 'forminator-email--field forminator-input',
+			'type'            => 'email',
+			'aria-labelledby' => 'forminator-label-' . $ariaid,
 		);
 
 		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
@@ -262,7 +236,7 @@ class Forminator_Email extends Forminator_Field {
 
 		$html .= self::create_input($email_attr);
 
-		if ( $design === 'material' ) {
+		if ( 'material' === $design ) {
 			$html .= '</div>';
 		}
 

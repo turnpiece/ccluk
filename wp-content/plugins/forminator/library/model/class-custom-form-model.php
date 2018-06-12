@@ -16,7 +16,7 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 	 * @since 1.0
 	 * @return Forminator_Custom_Form_Model
 	 */
-	public static function model( $class_name = __CLASS__ ) {
+	public static function model( $class_name = __CLASS__ ) { // phpcs:ignore
 		return parent::model( $class_name );
 	}
 
@@ -30,7 +30,7 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 	 */
 	public function getField( $id ) {
 		foreach ( $this->getFields() as $field ) {
-			if ( $field->slug == $id ) {
+			if ( $field->slug === $id ) {
 				return $field->toArray();
 			}
 		}
@@ -48,13 +48,13 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 	 * @return bool|Forminator_Custom_Form_Model
 	 */
 	public function load_preview( $id, $data ) {
-		$formModel = $this->load( $id, true );
+		$form_model = $this->load( $id, true );
 
 		// If bool, abort
-		if( is_bool( $formModel ) ) return false;
+		if( is_bool( $form_model ) ) return false;
 
-		$formModel->clearFields();
-		$formModel->setVarInArray( 'name', 'formName', $data );
+		$form_model->clearFields();
+		$form_model->setVarInArray( 'name', 'formName', $data );
 
 		//build the field
 		$fields = array();
@@ -66,7 +66,7 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 		//build the settings
 		if( isset( $data['settings'] ) ) {
 			$settings            = $data['settings'];
-			$formModel->settings = $settings;
+			$form_model->settings = $settings;
 		}
 
 		if( !empty( $fields ) ) {
@@ -76,12 +76,12 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 					$field->formID = $row['wrapper_id'];
 					$field->slug   = $f['element_id'];
 					$field->import( $f );
-					$formModel->addField( $field );
+					$form_model->addField( $field );
 				}
 			}
 		}
 
-		return $formModel;
+		return $form_model;
 	}
 
 	/**
@@ -101,7 +101,7 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 		}
 		if ( $can_show ) {
 			if( isset( $form_settings[ 'form-expire' ] ) ) {
-				if ( $form_settings[ 'form-expire' ] == 'submits' ) {
+				if ( 'submits' === $form_settings[ 'form-expire' ] ) {
 					if ( isset( $form_settings[ 'expire_submits' ] ) && !empty( $form_settings[ 'expire_submits' ] ) ) {
 						$submits 		= intval( $form_settings[ 'expire_submits' ] );
 						$total_entries 	= Forminator_Form_Entry_Model::count_entries( $this->id );
@@ -109,7 +109,7 @@ class Forminator_Custom_Form_Model extends Forminator_Base_Form_Model {
 							$can_show = false;
 						}
 					}
-				} else if ( $form_settings[ 'form-expire' ] == 'date' ) {
+				} elseif ( 'date' === $form_settings[ 'form-expire' ] ) {
 					if ( isset( $form_settings[ 'expire_date' ] ) && !empty( $form_settings[ 'expire_date' ] ) ) {
 						$expire_date 	=  strtotime( $form_settings[ 'expire_date' ] );
 						$current_date 	=  strtotime( "now" );

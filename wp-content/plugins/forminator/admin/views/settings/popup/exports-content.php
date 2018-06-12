@@ -9,9 +9,9 @@ if ( !empty($export_logs) ) :
 
 		<tr>
 
-			<th class="forminator-export--name"><?php _e( "Date", Forminator::DOMAIN );?></th>
+			<th class="forminator-export--name"><?php esc_html_e( "Date", Forminator::DOMAIN ); ?></th>
 
-			<th class="forminator-export--fields"><?php _e( "Records", Forminator::DOMAIN );?></th>
+			<th class="forminator-export--fields"><?php esc_html_e( "Records", Forminator::DOMAIN ); ?></th>
 
 			<th class="forminator-export--file"></th>
 
@@ -30,13 +30,14 @@ if ( !empty($export_logs) ) :
 				$html .= '<td>' . $export['count'] . '</td>';
 				$html .= '</tr>';
 			}
-			echo $html;
+
+			echo $html // WPCS: XSS ok.;
 			?>
 		</tbody>
 
 	</table>
 
-	<button class="wpmudev-button wpmudev-button-clear-exports wpmudev-button-sm wpmudev-button-ghost" data-nonce="<?php echo wp_create_nonce( 'forminator_clear_exports' ) ?>" data-form-id="<?php echo $form_id ?>"><?php _e( "Clear All", Forminator::DOMAIN );?>
+	<button class="wpmudev-button wpmudev-button-clear-exports wpmudev-button-sm wpmudev-button-ghost" data-nonce="<?php echo wp_create_nonce( 'forminator_clear_exports' ); // WPCS: XSS ok. ?>" data-form-id="<?php echo esc_attr( $form_id ); ?>"><?php esc_html_e( "Clear All", Forminator::DOMAIN ); ?>
 	</button>
 <?php else : ?>
 	<p>Your list of exports is empty. <br/>Go back and export your entries to see them appear here.</p>

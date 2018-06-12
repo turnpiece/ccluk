@@ -57,7 +57,7 @@ class Forminator_Geo {
 	 * @return bool
 	 */
 	private static function _cloudflare_ip_in_range( $ip, $range ) {
-		if ( strpos( $range, '/' ) == false ) {
+		if ( strpos( $range, '/' ) === false ) {
 			$range .= '/32';
 		}
 
@@ -68,7 +68,7 @@ class Forminator_Geo {
 		$wildcard_decimal = pow( 2, ( 32 - $netmask ) ) - 1;
 		$netmask_decimal  = ~$wildcard_decimal;
 
-		return ( ( $ip_decimal & $netmask_decimal ) == ( $range_decimal & $netmask_decimal ) );
+		return ( ( $ip_decimal & $netmask_decimal ) === ( $range_decimal & $netmask_decimal ) );
 	}
 
 	/**

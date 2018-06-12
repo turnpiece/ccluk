@@ -58,7 +58,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	 * @since 1.0
 	 */
 	public function before_render() {
-		if ( isset( $_REQUEST['form_id'] ) ) {
+		if ( isset( $_REQUEST['form_id'] ) ) { // WPCS: CSRF OK
 			$this->form_id  = sanitize_text_field( $_REQUEST['form_id'] );
 			$this->model 	= Forminator_Poll_Form_Model::model()->load( $this->form_id );
 			if ( is_object( $this->model ) ) {
@@ -86,7 +86,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 			return;
 		}
 
-		$nonce = $_POST['forminatorEntryNonce'];
+		$nonce = $_POST['forminatorEntryNonce']; // WPCS: CSRF OK
 		if ( ! wp_verify_nonce( $nonce, 'forminatorPollEntries' ) ) {
 			return;
 		}
@@ -152,7 +152,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	 */
 	public function checked_field( $slug ) {
 		if ( !empty( $this->visible_fields ) && is_array( $this->visible_fields ) ) {
-			if ( in_array( $slug, $this->visible_fields ) ) {
+			if ( in_array( $slug, $this->visible_fields, true ) ) {
 				return checked( $slug, $slug );
 			} else {
 				return '';
@@ -225,7 +225,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	 * @return string
 	 */
 	public function fields_header() {
-		printf( __( "Showing %s of %s fields", Forminator::DOMAIN ), $this->checked_fields, $this->total_fields );
+		echo esc_html( sprintf( __( 'Showing %$1s of %$2s fields', Forminator::DOMAIN ), $this->checked_fields, $this->total_fields ) );
 	}
 
 	/**
@@ -266,14 +266,14 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 	 * Map Custom Votes
 	 *
 	 * @since   1.0.5
-	 * @example [
+	 * @example {
 	 *  'ELEMENT_ID' => [
 	 *      'EXTRA_VALUE' => COUNT
 	 *  ],
 	 * 'answer-2' => [
 	 *      'skip it' => 9
 	 *  ]
-	 * ]
+	 * }
 	 *
 	 * @return array
 	 */
@@ -289,7 +289,7 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 			$fields = $this->model->getFields();
 
 			foreach ( (array) $fields as $field ) {
-				if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) == true ) {
+				if ( filter_var( $field->use_extra, FILTER_VALIDATE_BOOLEAN ) === true ) {
 					$fields_with_extra_enabled[] = $field->slug;
 				}
 			}
@@ -333,11 +333,11 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 				"use strict";
 				jQuery('document').ready(function () {
 					google.charts.load('current', {packages: ['corechart', 'bar']});
-					google.charts.setOnLoadCallback(drawPollResults_<?php echo $this->model->id; ?>);
+					google.charts.setOnLoadCallback(drawPollResults_<?php echo esc_attr( $this->model->id ); ?>);
 
-					function drawPollResults_<?php echo $this->model->id; ?>() {
+					function drawPollResults_<?php echo esc_attr( $this->model->id ); ?>() {
 						var data = google.visualization.arrayToDataTable([
-							['<?php _e( 'Question', Forminator::DOMAIN ); ?>', '<?php _e( 'Results', Forminator::DOMAIN ); ?>', {role: 'style'}, {role: 'annotation'}],
+							['<?php esc_html_e( 'Question', Forminator::DOMAIN ); ?>', '<?php esc_html_e( 'Results', Forminator::DOMAIN ); ?>', {role: 'style'}, {role: 'annotation'}],
 							<?php
 							$fields_array = $this->model->getFieldsAsArray();
 							$map_entries = Forminator_Form_Entry_Model::map_polls_entries( $this->model->id, $fields_array );
@@ -353,20 +353,20 @@ class Forminator_Poll_View_Page extends Forminator_Admin_Page {
 									$color   = array_shift( $chart_colors );
 									$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
 									$entries = 0;
-									if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+									if ( in_array( $slug, array_keys( $map_entries ), true ) ) {
 										$entries = $map_entries[ $slug ];
 									}
 									$style      = 'color: ' . $color;
 									$annotation = $entries . ' vote(s)';
 
-									echo "['$label', $entries, '$style', '$annotation'],";
+									echo "['$label', $entries, '$style', '$annotation'],"; // WPCS: XSS ok.
 								}
 							}
 							?>
 						]);
 
 						var options = <?php echo wp_json_encode( Forminator_Poll_Front::get_default_chart_options( $this->model ) ); ?>;
-						<?php if ( 'pie' == $chart_design ) { ?>
+						<?php if ( 'pie' === $chart_design ) { ?>
 						var chart = new google.visualization.PieChart(document.getElementById('forminator-chart-poll'));
 						<?php } else { ?>
 						var chart = new google.visualization.BarChart(document.getElementById('forminator-chart-poll'));

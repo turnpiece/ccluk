@@ -65,89 +65,68 @@ class Forminator_Website extends Forminator_Field {
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
-				'size' => 12,
-				'className' => 'required-field',
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
+				'className'  => 'required-field',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
-			),
-
-			array(
-				'id' => 'separator-1',
-				'type' => 'Separator',
-				'hide_label' => true
-			),
-
-			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
-				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				'size' => 12,
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'placeholder',
-				'type' => 'Text',
-				'name' => 'placeholder',
-				'hide_label' => false,
-				'label'	=> __( 'Placeholder', Forminator::DOMAIN ),
-				'size' => 12,
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'description',
-				'type' => 'Text',
-				'name' => 'description',
-				'hide_label' => false,
-				'label'	=> __( 'Description', Forminator::DOMAIN ),
-				'size' => 12,
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'separator-2',
-				'type' => 'Separator',
-				'name' => 'separator',
-				'hide_label' => true,
-				'size' => 12,
-				'className' => 'separator-field',
-			),
-
-			array(
-				'id' => 'validation',
-				'type' => 'ToggleContainer',
-				'name' => 'validation',
-				'hide_label' => true,
-				'has_content' => true,
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Enable validation', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+					),
 				),
-				'fields' => array(
+			),
+
+			array(
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
+				'hide_label' => false,
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'placeholder',
+				'type'       => 'Text',
+				'name'       => 'placeholder',
+				'hide_label' => false,
+				'label'      => __( 'Placeholder', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'description',
+				'type'       => 'Text',
+				'name'       => 'description',
+				'hide_label' => false,
+				'label'      => __( 'Description', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'          => 'validation',
+				'type'        => 'ToggleContainer',
+				'name'        => 'validation',
+				'hide_label'  => true,
+				'has_content' => true,
+				'values'      => array(
 					array(
-						'id' => 'validation-text',
-						'type' => 'Text',
-						'name' => 'validation_text',
-						'size' => 12,
+						'value'      => "true",
+						'label'      => __( 'Enable validation', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+				'fields'      => array(
+					array(
+						'id'        => 'validation-text',
+						'type'      => 'Text',
+						'name'      => 'validation_text',
 						'className' => 'select-field',
-						'label' => __( 'Custom validation error message', Forminator::DOMAIN )
-					)
-				)
+						'label'     => __( 'Custom validation error message', Forminator::DOMAIN ),
+					),
+				),
 			),
 		);
 	}
@@ -195,18 +174,14 @@ class Forminator_Website extends Forminator_Field {
 	public function admin_html() {
 		return '<div class="wpmudev-form-field--group">
 			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+				<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 			{[ } ]}
-			<input type="{{ field.type }}" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+			<input type="{{ field.type }}" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+			{[ if( field.validation_text ) { ]}
+				<span class="sui-error-message">{{ encodeHtmlEntity( field.validation_text ) }}</span>
+			{[ } ]}
 			{[ if( field.description ) { ]}
-			<div class="wpmudev-group--info">
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
-			</div>
-			{[ } ]}
-			{[ if( ( field.validation == "true" ) && field.validation_text ) { ]}
-			<div class="wpmudev-group--validation">
-				<p>{{ encodeHtmlEntity( field.validation_text ) }}</p>
-			</div>
+				<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
 			{[ } ]}
 		</div>';
 	}
@@ -221,17 +196,46 @@ class Forminator_Website extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field	= $field;
-		$id = $name		= self::get_property( 'element_id', $field );
-		$ariaid			= $id;
-		$id				= $id . '-field';
-		$required		= $this->get_property( 'required', $field, false );
-		$placeholder	= $this->sanitize_value( $this->get_property( 'placeholder', $field ) );
-		$value			= $this->get_property( 'value', $field );
+		$this->field = $field;
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
+		$ariaid      = $id;
+		$id          = $id . '-field';
+		$required    = $this->get_property( 'required', $field, false );
+		$placeholder = $this->sanitize_value( $this->get_property( 'placeholder', $field ) );
+		$value       = self::get_post_data( $name, $this->get_property( 'value', $field ) );
 
-		$html = sprintf( '<input class="forminator-website--field forminator-input" type="url" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" aria-labelledby="%s"/>', $required, $name, $placeholder, $value, $id, $ariaid );
+		$html = sprintf(
+			'<input class="forminator-website--field forminator-input" type="url" data-required="%s" name="%s" placeholder="%s" value="%s" id="%s" aria-labelledby="%s"/>',
+			$required,
+			$name,
+			$placeholder,
+			$value,
+			$id,
+			$ariaid
+		);
 
 		return apply_filters( 'forminator_field_website_markup', $html, $id, $required, $placeholder, $value );
+	}
+
+	/**
+	 * Return string with scheme part if needed
+	 *
+	 * @since 1.1
+	 * @return string
+	 */
+	public function add_scheme_url( $url ) {
+		if ( empty( $url ) ) {
+			return $url;
+		}
+		$parts = wp_parse_url( $url );
+		if ( false !== $parts ) {
+			if ( ! isset( $parts['scheme'] ) ) {
+				$url = 'http://' . $url;
+			}
+		}
+
+		return $url;
 	}
 
 	/**
@@ -248,7 +252,8 @@ class Forminator_Website extends Forminator_Field {
 			$rules .= '"required": true,';
 		}
 
-		$rules .= '"url": true,';
+		$rules .= '"validurl": true,';
+		$rules .= '"url": false,';
 		$rules .= '},' . "\n";
 
 		return $rules;
@@ -299,8 +304,8 @@ class Forminator_Website extends Forminator_Field {
 				$field,
 				$custom_error
 			);
-			$messages .= 'url: "' . $error_message . '",' . "\n";
 		}
+		$messages .= 'validurl: "' . $error_message . '",' . "\n";
 		$messages .= '},' . "\n";
 
 		$messages = apply_filters(
@@ -322,11 +327,12 @@ class Forminator_Website extends Forminator_Field {
 	 * @param array|string $data
 	 */
 	public function validate( $field, $data ) {
+		$id           = self::get_property( 'element_id', $field );
+		$custom_error = self::get_property( 'validation', $field );
+		$error        = self::get_property( 'validation_text', $field );
+		$error        = htmlentities( $error );
+
 		if ( $this->is_required( $field ) ) {
-			$id           = self::get_property( 'element_id', $field );
-			$custom_error = self::get_property( 'validation', $field );
-			$error        = self::get_property( 'validation_text', $field );
-			$error        = htmlentities( $error );
 
 			if ( empty( $data ) ) {
 				if( isset( $custom_error ) && $custom_error && $error ) {
@@ -340,20 +346,19 @@ class Forminator_Website extends Forminator_Field {
 						$custom_error
 					);
 				}
+			}
+		}
+		if ( !empty( $data ) && !filter_var( $data, FILTER_VALIDATE_URL ) ) {
+			if( isset( $custom_error ) && $custom_error && $error ) {
+				$this->validation_message[ $id ] = $error;
 			} else {
-				if ( !filter_var( $data, FILTER_VALIDATE_URL ) ) {
-					if( isset( $custom_error ) && $custom_error && $error ) {
-						$this->validation_message[ $id ] = $error;
-					} else {
-						$this->validation_message[ $id ] = apply_filters(
-							'forminator_website_field_custom_validation_message',
-							__( 'Please enter a valid Website URL (e.g. https://premium.wpmudev.org/).', Forminator::DOMAIN ),
-							$id,
-							$field,
-							$custom_error
-						);
-					}
-				}
+				$this->validation_message[ $id ] = apply_filters(
+					'forminator_website_field_custom_validation_message',
+					__( 'Please enter a valid Website URL (e.g. https://premium.wpmudev.org/).', Forminator::DOMAIN ),
+					$id,
+					$field,
+					$custom_error
+				);
 			}
 		}
 	}

@@ -2,27 +2,15 @@
 	
 	<script type="text/template" id="builder-sidebar-tpl">
 		
-		<div class="wpmudev-sidebar--header">
-			
-			<div class="wpmudev-header--main">
-				
-				<div class="wpmudev-header--text">
-					
-					<h2 class="wpmudev-title">{{Forminator.l10n.builder.click_drag_label}}</h2>
-				
-				</div>
-				
-				<div class="wpmudev-header--action">
+		<div class="fui-sidebar-header">
 
-					<button class="wpmudev-action--button forminator-sidebar-close">
-						
-						<span class="wpmudev-icon--close"></span>
+			<h2 class="wpmudev-title">{{Forminator.l10n.builder.click_drag_label}}</h2>
 
-						<span class="wpmudev-sr-only">{{ Forminator.l10n.options.close }}</span>
-						
-					</button>
-				
-				</div>
+			<div class="sui-actions-right">
+
+				<button class="sui-button sui-button-ghost forminator-sidebar-close" aria-label="{{ Forminator.l10n.options.close }}">
+					<i class="sui-icon-close" aria-hidden="true"></i>
+				</button>
 
 			</div>
 		
@@ -60,25 +48,15 @@
 
 	<script type="text/template" id="builder-sidebar-settings-tpl">
 
-		<div class="wpmudev-sidebar--wrap">
+		<div class="fui-sidebar-wrapper">
 
-			<div class="wpmudev-sidebar--header">
+			<div class="fui-sidebar-header">
 
-				<div class="wpmudev-header--breadcrumbs">
-					
-					<span class="wpmudev-breadcrumb wpmudev-breadcrumb--back">« <a href="#">{{ Forminator.l10n.builder.back_to_fields }}</a></span>
+				<h2 class="wpmudev-title"><i class="sui-icon-widget-settings-config" aria-hidden="true"></i> {{ field_settings.name }}</h2>
 
-				</div>
+				<div class="sui-actions-right wpmudev-breadcrumb--back">
 
-				<div class="wpmudev-header--main">
-
-					<div class="wpmudev-header--icon" aria-hidden="true">
-						<span class="wpdui-icon wpdui-icon-widget-settings-config"></span>
-					</div>
-					
-					<div class="wpmudev-header--text">
-						<h2 class="wpmudev-title">{{ field_settings.name }}</h2>
-					</div>
+					<a href="#" role="button" class="sui-button sui-button-ghost">{{ Forminator.l10n.builder.back }}</a>
 
 				</div>
 
@@ -100,13 +78,13 @@
 
 			</div>
 
-			<div class="wpmudev-sidebar--footer">
+			<div class="fui-sidebar-footer">
 
 				<div class="wpmudev-footer--buttons">
 					
-					<button class="wpmudev-button wpmudev-button-ghost wpmudev-clone-field">{{ Forminator.l10n.builder.clone }}</button>
+					<button class="sui-button sui-button-ghost wpmudev-clone-field">{{ Forminator.l10n.builder.clone }}</button>
 					
-					<button class="wpmudev-button wpmudev-button-blue wpmudev-done-field">{{ Forminator.l10n.conditions.done }}</button>
+					<button class="sui-button sui-button-primary wpmudev-done-field">{{ Forminator.l10n.conditions.done }}</button>
 
 				</div>
 
@@ -119,44 +97,63 @@
 	</script>
 
 	<script type="text/template" id="builder-sidebar-conditions-popup-tpl">
-		<div class="wpmudev-conditions--rule">
+		
+		<div class="sui-box-body">
+			
+			<div class="sui-form-field fui-conditions--init">
 
-			<select class="wpmudev-select wpmudev-condition--actions" name="condition">
-				<option value="show" {[ if( "show" === data.condition_action ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.show}}</option>
-				<option value="hide" {[ if( "hide" === data.condition_action ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.hide}}</option>
-			</select>
+				<select class="wpmudev-select wpmudev-condition--actions" name="condition">
+					<option value="show" {[ if( "show" === data.condition_action ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.show}}</option>
+					<option value="hide" {[ if( "hide" === data.condition_action ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.hide}}</option>
+				</select>
 
-			<span class="wpmudev-rule--text">{{Forminator.l10n.conditions.show_field_if}}</span>
+				<span class="sui-description">{{Forminator.l10n.conditions.show_field_if}}</span>
 
-			<select class="wpmudev-select wpmudev-condition--rules" name="rules">
-				<option value="any" {[ if( "any" === data.condition_rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.any}}</option>
-				<option value="all" {[ if( "all" === data.condition_rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.all}}</option>
-			</select>
+				<select class="wpmudev-select wpmudev-condition--rules" name="rules">
+					<option value="any" {[ if( "any" === data.condition_rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.any}}</option>
+					<option value="all" {[ if( "all" === data.condition_rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.all}}</option>
+				</select>
 
-			<span class="wpmudev-rule--text">{{Forminator.l10n.conditions.following_match}}:</span>
+				<span class="sui-description">{{Forminator.l10n.conditions.following_match}}:</span>
 
+			</div>
+
+			<div class="sui-form-field fui-conditions--list">
+				
+				<ul class="fui-conditions--rules"></ul>
+
+				<button class="sui-button sui-button-ghost fui-add-condition">{{Forminator.l10n.conditions.add_condition}}</button>
+
+			</div>
+			
 		</div>
 
-		<div class="wpmudev-conditions--list">
-			<div class="wpmudev-list--rules"></div>
-			<div class="wpmudev-list--add"><button class="wpmudev-button wpmudev-button-sm">{{Forminator.l10n.conditions.add_condition}}</button></div>
+		<div class="sui-box-footer">
+			
+			<button class="sui-button forminator-popup-cancel" data-a11y-dialog-hide="forminator-popup">Cancel</button>
+			
+			<div class="sui-actions-right">
+				
+				<button class="sui-button sui-button-primary wpmudev-action-done">{{Forminator.l10n.conditions.done}}</button>
+				
+			</div>
+			
 		</div>
-
-		<div class="wpmudev-conditions--done">
-			<button class="wpmudev-button wpmudev-action-done wpmudev-button-blue">{{Forminator.l10n.conditions.done}}</button>
-		</div>
+		
 	</script>
-	<script type="text/template" id="builder-sidebar-conditions-rule-tpl">
-		<div class="wpmudev-rule--new" data-index="{{ index }}">
 
-			<select class="wpmudev-select wpmudev-conditions--field" name="fields">
+	<script type="text/template" id="builder-sidebar-conditions-rule-tpl">
+
+		<li class="fui-conditions--rule" data-index="{{ index }}">
+
+			<select class="fui-conditions--field" name="fields">
 				<option value="">{{ Forminator.l10n.sidebar.pick_field }}</option>
 				{[ _.each( fields, function( value, key ){ ]}
 					<option value="{{ value.element_id }}" {[ if( value.element_id === condition.element_id ) { ]}selected="selected"{[ } ]}>{{ value.label }}</option>
 				{[ }) ]}
 			</select>
 
-			<select class="wpmudev-select wpmudev-conditions--action">
+			<select class="fui-conditions--action">
 				<option value="is" {[ if( "is" === condition.rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.is}}</option>
 				<option value="is_not" {[ if( "is_not" === condition.rule ) { ]}selected="selected"{[ } ]}>{{Forminator.l10n.conditions.is_not}}</option>
 				{[ if( field && field.isNumber ) { ]}
@@ -170,17 +167,20 @@
 				{[ } ]}
 			</select>
 
-			<div class="wpmudev-conditions--values-wrapper">
-				<select class="wpmudev-select wpmudev-conditions--values"></select>
-			</div>
-			<div class="wpmudev-conditions--input-wrapper">
-				<input type="text" name="rule_input" class="wpmudev-text wpmudev-conditions--input">
+			<div class="fui-conditions--wrap-values">
+				<select class="fui-conditions--values"></select>
 			</div>
 
-			<div class="wpmudev-rule--delete">
-				<button class="wpmudev-delete-action wpmudev-delete-condition"><span class="wpdui-icon wpdui-icon-trash"></span></button>
+			<div class="fui-conditions--wrap-input">
+				<input type="text" name="rule_input" class="sui-form-control fui-conditions--input">
 			</div>
 
-		</div>
+			<div class="fui-conditions--wrap-delete sui-tooltip" data-tooltip="{{ Forminator.l10n.conditions.delete_condition }}">
+				<button class="sui-button-icon fui-conditions--delete"><i class="sui-icon-trash" aria-hidden="true"></i></button>
+			</div>
+
+		</li>
+
 	</script>
+	
 </div>

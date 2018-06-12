@@ -1,0 +1,16 @@
+@include body-class {
+
+	.fui-summary-alt {
+		background-image: url('../../assets/images/forminator-summary-alt@2x.png');
+		background-size: 128px 128px;
+
+		.sui-summary-image-space {
+			max-width: 128px;
+			min-height: 128px;
+		}
+
+		.sui-summary-segment {
+			width: calc(100% / 2 - 66px);
+		}
+	}
+}

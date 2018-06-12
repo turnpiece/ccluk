@@ -75,7 +75,7 @@ class Forminator_Entries_Page extends Forminator_Admin_Page {
 			'form_id'   => 0,
 		);
 
-		$this->screen_params = array_merge( $screen_params, $_REQUEST );
+		$this->screen_params = array_merge( $screen_params, $_REQUEST );//WPCS CSRF ok.
 	}
 
 	/**
@@ -164,7 +164,7 @@ class Forminator_Entries_Page extends Forminator_Admin_Page {
 			if ( ! $form_model instanceof Forminator_Base_Form_Model ) {
 				return null;
 			}
-			if ( $form_model->getPostType() != $this->get_current_form_type() ) {
+			if ( $form_model->getPostType() !== $this->get_current_form_type() ) {
 				return null;
 			}
 
@@ -193,9 +193,10 @@ class Forminator_Entries_Page extends Forminator_Admin_Page {
 	 * @return string
 	 */
 	public function render_form_switcher() {
-		$html  = '<select class="wpmudev-select" name="form_id" data-allow-search="1" data-minimum-results-for-search="0" onchange="submit()">';
+		$html  = '<select name="form_id" data-allow-search="1" data-minimum-results-for-search="0" onchange="submit()">';
 
 		$empty_option = '';
+
 		if ( $this->get_current_form_type() === Forminator_Custom_Form_Model::model()->getPostType() ) {
 			$empty_option = __( 'Choose Form', Forminator::DOMAIN );
 		} elseif ( $this->get_current_form_type() === Forminator_Poll_Form_Model::model()->getPostType() ) {
@@ -205,6 +206,7 @@ class Forminator_Entries_Page extends Forminator_Admin_Page {
 		}
 
 		$html  .= '<option value="" ' . selected( 0, $this->get_current_form_id(), false ) . '>' . $empty_option . '</option>';
+
 		$forms = $this->get_forms();
 
 		foreach ( $forms as $form ) {

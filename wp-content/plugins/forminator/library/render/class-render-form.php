@@ -64,7 +64,7 @@ abstract class Forminator_Render_Form {
 	 *
 	 * @return mixed
 	 */
-	abstract function display( $id, $ajax = false );
+	abstract public function display( $id, $ajax = false );
 
 	/**
 	 * Generate render_id for current form
@@ -191,7 +191,7 @@ abstract class Forminator_Render_Form {
 		}
 
 		if ( $render ) {
-			echo apply_filters( 'forminator_render_form_markup', $html, $form_fields, $form_type, $form_settings, $form_design, $render_id );
+			echo apply_filters( 'forminator_render_form_markup', $html, $form_fields, $form_type, $form_settings, $form_design, $render_id ); // WPCS: XSS ok.
 		} else {
 			/** @noinspection PhpInconsistentReturnPointsInspection */
 			return apply_filters( 'forminator_render_form_markup', $html, $form_fields, $form_type, $form_settings, $form_design, $render_id );
@@ -276,8 +276,9 @@ abstract class Forminator_Render_Form {
 			$html .= sprintf( '<input type="hidden" name="render_id" value="%s">', self::$render_ids[ $form_id ] );
 		}
 		$html .= sprintf( '<input type="hidden" name="action" value="%s">', "forminator_submit_form_" . $form_type );
+
 		if ( $render ) {
-			echo apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce );
+			echo apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce ); // WPCS: XSS ok.
 		} else {
 			/** @noinspection PhpInconsistentReturnPointsInspection */
 			return apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce );
@@ -297,11 +298,9 @@ abstract class Forminator_Render_Form {
 		$html   .= '<div class="forminator-field">';
 
 		if( $this->get_form_design() !== 'material' ) {
-			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button">%s</button>',
-		                    $button );
+			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button">%s</button>', $button );
 		} else {
-			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>',
-		                    $button );
+			$html   .= sprintf( '<button id="forminator-submit" class="forminator-button"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">%s</span></button>', $button );
 		}
 		$html   .= '</div>';
 		$html   .= '</div>';
@@ -361,7 +360,7 @@ abstract class Forminator_Render_Form {
 		}
 
 		if ( $render ) {
-			echo $html;
+			echo $html; // WPCS: XSS ok.
 		} else {
 			/** @noinspection PhpInconsistentReturnPointsInspection */
 			return apply_filters( 'forminator_render_fields_markup', $html, $fields );

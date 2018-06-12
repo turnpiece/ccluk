@@ -1,20 +1,19 @@
 === Cookie Consent ===
 Contributors: Catapult_Themes, husobj, jraczynski
 Donate Link: https://www.paypal.me/catapultthemes
-Tags: cookie law, cookies, eu cookie law, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
+Tags: cookie law, cookies, gdpr, eu privacy directive, cookie compliance, cookie law, cookie notice, cookie notification, wpml, geo ip
 Requires at least: 4.3
 Tested up to: 4.9.6
-Stable tag: 2.3.10
+Stable tag: 2.3.11
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 The only cookie consent plugin you'll ever need.
 
 == Description ==
-
-> <strong>Cookie Consent and GDPR</strong><br>Please refer to this [support ticket regarding this plugin and GDPR](https://wordpress.org/support/topic/cookie-consent-and-gdpr/). Note that I'm not qualified to tell you whether this plugin meets your GDPR requirements - you'll need to decide that for yourself.<br><br>
-> <strong>The wording below was written when this plugin was first released and refers to an earlier EU directive regarding cookies. It does not refer to GDPR in any way.</strong><br>
-
 Cookie Consent is one of the simplest and most popular cookie notification plugins out there. It's been actively developed and supported since 2012 and has over 100 5 star reviews.
+
+> <strong>New in 2.3.0:</strong><br>Geo IP support - choose which continents to display notifications (requires GeoIP Detect plugin to be installed)<br>
+> <strong>New in 2.2.0:</strong><br>Easily select pages or posts where the cookie notification doesn't display. You now have complete control over which pages display a notification and which don't.<br>Close on scroll - optionally choose scrolling as closure method.
 
 = Simple set up =
 One of the most popular aspects of the plugin is its simplicity of use - simply install and activate the plugin to automatically add the cookie consent notification bar. There is no need to configure it. On activation, the plugin creates and populates a page on your site with information about your cookie policy and automatically links to the page from the notification bar. So if you're using the default settings, it's a matter of seconds to get up and running.
@@ -71,6 +70,10 @@ You will find more details of the regulations on the [Information Commissioner's
 5. Example settings page
 
 == Changelog ==
+
+= 2.3.11 =
+* Added: activation notice
+* Fixed: removed additional body margin for hidden bar
 
 = 2.3.10 =
 * Fixed: fixed security vulnerability identified by James Boughey

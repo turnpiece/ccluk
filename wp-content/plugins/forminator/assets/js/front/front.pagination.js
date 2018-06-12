@@ -30,6 +30,9 @@
 		this.totalSteps = 0;
 		this.step = 0;
 		this.hashStep = false;
+		this.next_button = window.ForminatorFront.cform.pagination_next;
+		this.prev_button = window.ForminatorFront.cform.pagination_prev;
+		this.form_id = 0;
 
 		// jQuery has an extend method which merges the contents of two or
 		// more objects, storing the result in the first object. The first object
@@ -44,6 +47,20 @@
 	// Avoid Plugin.prototype conflicts
 	$.extend(ForminatorFrontPagination.prototype, {
 		init: function () {
+
+			if (this.$el.find('input[name=form_id]').length > 0) {
+				this.form_id = this.$el.find('input[name=form_id]').val();
+			}
+
+			if (this.form_id && typeof window.Forminator_Cform_Paginations === 'object' && typeof window.Forminator_Cform_Paginations[this.form_id] === 'object') {
+				if (window.Forminator_Cform_Paginations[this.form_id]['pagination-footer-button']) {
+					this.prev_button = window.Forminator_Cform_Paginations[this.form_id]['pagination-footer-button-text'];
+				}
+				if (window.Forminator_Cform_Paginations[this.form_id]['pagination-right-button']) {
+					this.next_button = window.Forminator_Cform_Paginations[this.form_id]['pagination-right-button-text'];
+				}
+			}
+
 			this.totalSteps = this.settings.totalSteps;
 			this.step = this.settings.step;
 
@@ -54,6 +71,7 @@
 			}
 
 			this.render_navigation();
+			this.render_bar_navigation();
 			this.render_footer_navigation();
 			this.init_events();
 			this.update_buttons();
@@ -109,23 +127,50 @@
 		},
 
 		render_footer_navigation: function() {
-
 			if ( this.$el.hasClass('forminator-design--material') ) {
-				
+
 				this.$el.append( '<div class="forminator-pagination--footer">' +
-					'<button class="forminator-button forminator-pagination-prev"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_prev + '</span></button>' +
-					'<button class="forminator-button forminator-pagination-next"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + window.ForminatorFront.cform.pagination_next + '</span></button>' +
+					'<button class="forminator-button forminator-pagination-prev"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + this.prev_button + '</span></button>' +
+					'<button class="forminator-button forminator-pagination-next"><span class="forminator-button--mask" aria-label="hidden"></span><span class="forminator-button--text">' + this.next_button + '</span></button>' +
 				'</div>' );
 
 			} else {
-				
+
 				this.$el.append( '<div class="forminator-pagination--footer">' +
-					'<button class="forminator-button forminator-pagination-prev">' + window.ForminatorFront.cform.pagination_prev + '</button>' +
-					'<button class="forminator-button forminator-pagination-next">' + window.ForminatorFront.cform.pagination_next + '</button>' +
+					'<button class="forminator-button forminator-pagination-prev">' + this.prev_button + '</button>' +
+					'<button class="forminator-button forminator-pagination-next">' +this.next_button + '</button>' +
 				'</div>' );
 
 			}
 
+		},
+
+		render_bar_navigation: function () {
+			var $navigation = this.$el.find('.forminator-pagination--bar');
+
+			if (!$navigation.length) return;
+
+			$navigation.html( '<div class="forminator-bar--text">0%</div>' +
+			'<div class="forminator-bar--progress">' +
+				'<span style="width: 0%"></span>' +
+			'</div>' +
+			'<div class="forminator-bar--text">100%</div>' );
+
+			this.calculate_bar_percentage();
+		},
+
+		calculate_bar_percentage: function () {
+			var total     = this.totalSteps,
+				current   = this.step,
+				$progress = this.$el
+			;
+
+			if ( !$progress.length ) return;
+
+			var percentage = Math.round( (current / total) * 100 );
+
+			//$progress.find( '.forminator-bar--text' ).html( percentage + '%' );
+			$progress.find( '.forminator-bar--progress span' ).css( 'width', percentage + '%' );
 		},
 
 		render_navigation: function () {
@@ -144,7 +189,7 @@
 						label = $step.data('label'),
 						step = $step.data('step') - 1
 					;
-	
+
 					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
 						'<span class="forminator-step-text">' + label + '</span>' +
 						'</li>'
@@ -156,7 +201,7 @@
 						label = $step.data('label'),
 						step = steps.length
 					;
-	
+
 					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
 						'<span class="forminator-step-text">' + label + '</span>' +
 						'</li>'
@@ -170,7 +215,7 @@
 						label = $step.data('label'),
 						step = $step.data('step') - 1
 					;
-	
+
 					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
 						'<span class="forminator-step-text">' + label + '</span>' +
 						'<span class="forminator-step-dot" aria-label="hidden"></span>' +
@@ -183,7 +228,7 @@
 						label = $step.data('label'),
 						step = steps.length
 					;
-	
+
 					$navigation.append('<li class="forminator-nav-step forminator-nav-step-' + step + '">' +
 						'<span class="forminator-step-text">' + label + '</span>' +
 						'<span class="forminator-step-dot" aria-label="hidden"></span>' +
@@ -280,10 +325,15 @@
 
 			if (this.step === (this.totalSteps - 1)) {
 				var submit_button_text = this.$el.find('.forminator-pagination-submit').html();
-				this.$el.find('.forminator-pagination-next .forminator-button--text').html(submit_button_text);
+				if ( this.$el.hasClass('forminator-design--material') ) {
+					this.$el.find('.forminator-pagination-next .forminator-button--text').html(submit_button_text);
+				} else {
+					this.$el.find('.forminator-pagination-next').html(submit_button_text);
+				}
+
 			} else {
 				// noinspection Annotator
-				this.$el.find('.forminator-pagination-next .forminator-button--text').html(window.ForminatorFront.cform.pagination_next);
+				this.$el.find('.forminator-pagination-next .forminator-button--text').html(this.next_button);
 			}
 		},
 
@@ -311,6 +361,8 @@
 			// Update navigation
 			this.$el.find('.forminator-step-current').removeClass('forminator-step-current');
 			this.$el.find('.forminator-nav-step-' + this.step).addClass('forminator-step-current');
+
+			this.calculate_bar_percentage();
 		}
 	});
 

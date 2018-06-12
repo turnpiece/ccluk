@@ -44,7 +44,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 			$user_email 	= $current_user->user_email;
 			if ( !empty( $current_user->user_firstname ) ) {
 				$user_name 	= $current_user->user_firstname . ' ' . $current_user->user_lastname;
-			} else if ( !empty( $current_user->display_name ) ) {
+			} elseif ( !empty( $current_user->display_name ) ) {
 				$user_name 	= $current_user->display_name;
 			} else {
 				$user_name 	= $current_user->display_name;
@@ -106,7 +106,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 
 		//Process Email
 		if ( $this->send_admin_mail( $setting ) || $this->send_user_mail( $setting ) ) {
-			$this->init( $_POST );
+			$this->init( $_POST ); // WPCS: CSRF OK
 			//Process admin mail
 			if ( $this->send_admin_mail( $setting ) ) {
 				$recipents = $this->get_admin_email_recipents($setting);
@@ -247,7 +247,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 *
 	 * @return bool|string
 	 */
-	private function get_user_email_data( $data, $custom_form ) {
+	public function get_user_email_data( $data, $custom_form ) {
 		// Get form fields
 		$fields = $custom_form->getFields();
 		if ( ! is_null( $fields ) ) {
@@ -256,7 +256,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 				$field_type  = $field_array["type"];
 
 				// Check if field is email
-				if( $field_type == "email" ) {
+				if( "email" === $field_type ) {
 					$field_id = $field_array['element_id'];
 					if( isset( $data[$field_id] ) && !empty( $data[$field_id] ) ) {
 						return apply_filters(
@@ -284,7 +284,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 *
 	 * @return bool
 	 */
-	private function get_user_email( $data, $custom_form ) {
+	public function get_user_email( $data, $custom_form ) {
 		$email = false;
 		$data_email = $this->get_user_email_data( $data, $custom_form );
 
@@ -309,7 +309,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 *
 	 * @return bool
 	 */
-	private function send_admin_mail( $setting ) {
+	public function send_admin_mail( $setting ) {
 		if ( isset( $setting['use-admin-email'] ) && !empty( $setting['use-admin-email'] ) ) {
 			if ( filter_var( $setting['use-admin-email'] , FILTER_VALIDATE_BOOLEAN ) ) {
 				if ( isset( $setting['admin-email-title'] ) &&  isset( $setting['admin-email-editor'] ) ) {
@@ -330,7 +330,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 *
 	 * @return array
 	 */
-	private function get_admin_email_recipents( $setting ) {
+	public function get_admin_email_recipents( $setting ) {
 		$email = array();
 		// backward compatibility for version < 1.0.3
 		// when `admin-email-recipients` not exist use admin email
@@ -355,7 +355,7 @@ class Forminator_CForm_Front_Mail extends Forminator_Mail {
 	 *
 	 * @return bool
 	 */
-	private function send_user_mail( $setting ) {
+	public function send_user_mail( $setting ) {
 		if ( isset( $setting['use-user-email'] ) && !empty( $setting['use-user-email'] ) ) {
 			if ( filter_var( $setting['use-user-email'] , FILTER_VALIDATE_BOOLEAN ) ) {
 				if ( isset( $setting['user-email-title'] ) &&  isset( $setting['user-email-editor'] ) ) {

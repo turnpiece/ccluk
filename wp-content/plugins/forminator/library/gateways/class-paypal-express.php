@@ -83,7 +83,9 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 	 * @since 1.0
 	 */
 	public function gateway_footer_scripts() {
-		?><script src="https://www.paypalobjects.com/api/checkout.js"></script> <?php
+		?>
+		<script src="https://www.paypalobjects.com/api/checkout.js"></script>
+		<?php
 	}
 
 	/**
@@ -96,10 +98,10 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 		<script>
 			paypal.Button.render({
 
-				env: '<?php echo ( $this->api_mode === 'live' ) ? "production" : "sandbox"; ?>',
+				env: '<?php echo ( 'live' === $this->api_mode ) ? "production" : "sandbox"; ?>',
 				client: {
-					sandbox:    '<?php echo $this->client_id; ?>',
-					production: '<?php echo $this->client_id; ?>'
+					sandbox:    '<?php echo esc_attr( $this->client_id ); ?>',
+					production: '<?php echo esc_attr( $this->client_id ); ?>'
 				},
 
 				// Show the buyer a 'Pay Now' button in the checkout flow
@@ -115,7 +117,7 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 								{
 									amount: {
 										total: jQuery('.forminator-custom-form-<?php echo $paypal_form_id; ?>').find("input[name='<?php echo $this->_total_field; ?>']").val(),
-										currency: '<?php echo $this->currency ?>'
+										currency: '<?php echo $this->currency; ?>'
 									}
 								}
 							]
@@ -145,7 +147,7 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 								$target_message.html('');
 								if (response.data.success === true) {
 									$target_message.html('<label class="forminator-label--success"><span>' + ForminatorFront.cform.gateway.paid + '</span></label>');
-									jQuery('.forminator-custom-form-<?php echo $paypal_form_id ?>').trigger('submit');
+									jQuery('.forminator-custom-form-<?php echo esc_attr( $paypal_form_id ); ?>').trigger('submit');
 								} else {
 									$target_message.html('<label class="forminator-label--error"><span>' + ForminatorFront.cform.gateway.error + '</span></label>');
 								}
@@ -157,7 +159,7 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 						});
 					});
 				}
-			}, '#paypal-button-container-<?php echo $paypal_form_id ?>');
+			}, '#paypal-button-container-<?php echo esc_attr( $paypal_form_id ); ?>');
 
 		</script>
 		<?php
@@ -167,47 +169,49 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 	 * Make PayPal call
 	 *
 	 * @since 1.0
-	 * @param $paymentID
+	 * @param $payment_id
 	 * @param $payment_total
 	 *
 	 * @return bool
 	 */
-	public function paypal_check($paymentID, $payment_total){
-		if ( $this->api_mode === 'live' ) {
+	public function paypal_check( $payment_id, $payment_total ) {
+		if ( 'live' === $this->api_mode ) {
 			$paypal_base_url = "https://api.paypal.com/v1/";
 		} else {
 			$paypal_base_url = "https://api.sandbox.paypal.com/v1/";
 		}
 
 		$ch       = curl_init();
-		$clientId = $this->client_id;
+		$client_id = $this->client_id;
 		$secret   = $this->secret;
 		curl_setopt($ch, CURLOPT_URL, $paypal_base_url .'oauth2/token');
 		curl_setopt($ch, CURLOPT_HEADER, false);
 		curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
 		curl_setopt($ch, CURLOPT_POST, true);
 		curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
-		curl_setopt($ch, CURLOPT_USERPWD, $clientId . ":" . $secret);
+		curl_setopt($ch, CURLOPT_USERPWD, $client_id . ":" . $secret);
 		curl_setopt($ch, CURLOPT_POSTFIELDS, "grant_type=client_credentials");
 		$result      = curl_exec($ch);
-		$accessToken = null;
+		$access_token = null;
 
 
 		if( empty( $result ) ) {
 			return false;
 		} else {
-			$json        = json_decode( $result );
-			$accessToken = $json->access_token;
-			$curl        = curl_init($paypal_base_url . 'payments/payment/' . $paymentID);
+			$json         = json_decode( $result );
+			$access_token = $json->access_token;
+			$curl         = curl_init($paypal_base_url . 'payments/payment/' . $payment_id);
 			curl_setopt($curl, CURLOPT_POST, false);
 			curl_setopt($curl, CURLOPT_SSL_VERIFYPEER, false);
 			curl_setopt($curl, CURLOPT_HEADER, false);
 			curl_setopt($curl, CURLOPT_RETURNTRANSFER, true);
-			curl_setopt($curl, CURLOPT_HTTPHEADER, array(
-				'Authorization: Bearer ' . $accessToken,
+			curl_setopt(
+                $curl, CURLOPT_HTTPHEADER, array(
+				'Authorization: Bearer ' . $access_token,
 				'Accept: application/json',
 				'Content-Type: application/xml'
-			));
+			)
+                );
 			$response = curl_exec($curl);
 			$result   = json_decode($response);
 			$state    = $result->state;
@@ -221,10 +225,9 @@ class Forminator_PayPal_Express extends Forminator_Payment_Gateway {
 			$front_price = $payment_total;
 			$front_currency = $this->currency;
 
-			if ( $state === 'approved' && $currency === $front_currency && $front_price ==  $subtotal ){
+			if ( 'approved' === $state && $currency === $front_currency && $front_price ===  $subtotal ){
 				return true;
-			}
-			else{
+			} else{
 				return false;
 			}
 		}

@@ -4,6 +4,42 @@ Author: Cvetan Cvetanov (Incsub)
 Change Log:
 ----------------------------------------------------------------------
 
+1.1.0 - 2018-05-11
+----------------------------------------------------------------------
+- Add: New user interface
+- Add: MailChimp integration
+- Add: Zapier integration
+- Add: Option to prevent storing entries in database
+- Add: Dropdown type for time field
+- Add: Date to Quiz and Poll exports
+- Add: Allow defining a Sender email and Sender name per form, overriding global setting
+- Add: File size limite for upload field
+- Add: Form support 4 fields in one row
+- Add: Percentage pagination
+- Improvement: If logged-in user set him as author of the post field
+- Improvement: Poll string "No votes yet" instead of "View results" if nobody voted
+- Improvement: Quiz share text contains results
+- Fix: Form is not submitted if wrong upload type
+- Fix: When number field is required entering 0 returns error
+- Fix: Phone field: 2 placeholders appear if user turned on standard form validation
+- Fix: Hyperlinks doesnt work on thank you message
+- Fix: Disabling AJAX submission breaks form on submission
+- Fix: Form field data lost when validation fails on non-ajax submission
+- Fix: URL field not accepting URLs without protocols
+- Fix: Address -> Country tag missing in emails variables
+- Fix: Phone field allowing letters when 'validation' is disabled
+- Fix: Date formats not being validated correctly
+- Fix: Hidden field -> embed URL query string gets ignored
+- Fix: Form can be submitted with spaces only
+- Fix: Radio not marked as checked on click
+- Fix: JS error on field clone
+- Fix: When poll renamed, submission not shown
+- Fix: Multiple styling issues
+- Fix: Typos
+- Compatibility: WP Mail SMTP plugin
+- Compatibility: Popup Maker plugin
+- Other minor enhancements/fixes
+
 1.0.6 - 2018-06-05
 ----------------------------------------------------------------------
 - Add: GDPR personal data erase and export.
@@ -98,4 +134,4 @@ Change Log:
 - First public release
 
 
-87274-1528550891-au
+87274-1528838340-au

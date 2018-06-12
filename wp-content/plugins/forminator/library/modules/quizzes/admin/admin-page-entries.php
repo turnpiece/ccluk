@@ -65,7 +65,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 * @since 1.0
 	 */
 	public function before_render() {
-		if ( isset( $_REQUEST['form_id'] ) ) {
+		if ( isset( $_REQUEST['form_id'] ) ) { // WPCS: CSRF OK
 			$this->form_id = sanitize_text_field( $_REQUEST['form_id'] );
 			$this->model   = Forminator_Quiz_Form_Model::model()->load( $this->form_id );
 			if ( is_object( $this->model ) ) {
@@ -93,7 +93,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 			return;
 		}
 
-		$nonce = $_POST['forminatorEntryNonce'];
+		$nonce = $_POST['forminatorEntryNonce']; // WPCS: CSRF OK
 		if ( wp_verify_nonce( $nonce, 'forminatorQuizEntries' ) ) {
 			if ( isset( $_POST['field'] ) ) {
 				$this->visible_fields = $_POST['field'];
@@ -107,7 +107,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 			if ( isset( $_POST['entries-action'] ) || isset( $_POST['entries-action-bottom'] ) ) {
 				if ( isset( $_POST['entries-action'] ) && ! empty( $_POST['entries-action'] ) ) {
 					$action = $_POST['entries-action'];
-				} else if ( isset( $_POST['entries-action-bottom'] ) ) {
+				} elseif ( isset( $_POST['entries-action-bottom'] ) ) {
 					$action = $_POST['entries-action-bottom'];
 				}
 
@@ -120,7 +120,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 							wp_redirect( $url );
 							exit;
 						}
-					break;
+						break;
 				}
 			}
 		}
@@ -181,7 +181,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 */
 	public function checked_field( $slug ) {
 		if ( ! empty( $this->visible_fields ) && is_array( $this->visible_fields ) ) {
-			if ( in_array( $slug, $this->visible_fields ) ) {
+			if ( in_array( $slug, $this->visible_fields, true ) ) {
 				return checked( $slug, $slug );
 			} else {
 				return '';
@@ -212,7 +212,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 * @return string
 	 */
 	public function fields_header() {
-		printf( __( "Showing %s of %s fields", Forminator::DOMAIN ), $this->checked_fields, $this->total_fields );
+		echo esc_html( sprintf( __( 'Showing %$1s of %$2s fields', Forminator::DOMAIN ), $this->checked_fields, $this->total_fields ) );
 	}
 
 	/**
@@ -235,7 +235,7 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 * @return int
 	 */
 	public function get_paged() {
-		$paged = isset( $_GET['paged'] ) ? $_GET['paged'] : 1;
+		$paged = isset( $_GET['paged'] ) ? $_GET['paged'] : 1; // WPCS: CSRF OK
 
 		return intval( $paged );
 	}
@@ -277,20 +277,29 @@ class Forminator_Quizz_View_Page extends Forminator_Admin_Page {
 	 * @since 1.0
 	 * @param string $position
 	 */
-	public function bulk_actions( $position = 'top' ) {
-		?>
-		<div class="wpmudev-action--bulk">
+	public function bulk_actions( $position = 'top' ) { ?>
 
-			<select class="wpmudev-select" name="<?php echo ( $position == 'top' ) ? 'entries-action' : 'entries-action-bottom'; ?>">
+		<div class="fui-bulk-actions">
 
-				<option value=""><?php _e( "Bulk Actions", Forminator::DOMAIN ); ?></option>
-				<option value="delete-all"><?php _e( "Delete Entries", Forminator::DOMAIN ); ?></option>
-
+			<select class="fui-select-small" name="<?php echo ( 'top' === $position ) ? 'entries-action' : 'entries-action-bottom'; ?>">
+				<option value=""><?php esc_html_e( "Bulk Actions", Forminator::DOMAIN ); ?></option>
+				<option value="delete-all"><?php esc_html_e( "Delete Entries", Forminator::DOMAIN ); ?></option>
 			</select>
 
-			<button class="wpmudev-button wpmudev-button-ghost"><?php _e( "Apply", Forminator::DOMAIN ); ?></button>
+			<button class="sui-button"><?php esc_html_e( "Apply", Forminator::DOMAIN ); ?></button>
 
 		</div>
-		<?php
+
+	<?php
+	}
+
+	/**
+	 * Pagination
+	 *
+	 * @since 1.1
+	 */
+	public function paginate() {
+		$count = $this->get_total_entries();
+		forminator_list_pagination( $count, 'entries' );
 	}
 }

@@ -63,7 +63,7 @@ class Forminator_Custom_Form extends Forminator_Module {
 	 */
 	public function load_admin() {
 		if( is_admin() ) {
-			include_once( dirname(__FILE__) . '/admin/admin-loader.php' );
+			include_once dirname(__FILE__) . '/admin/admin-loader.php';
 
 			new Forminator_Custom_Form_Admin();
 		}
@@ -76,9 +76,9 @@ class Forminator_Custom_Form extends Forminator_Module {
 	 */
 	public function load_front() {
 
-		include_once( dirname(__FILE__) . '/front/front-action.php' );
-		include_once( dirname(__FILE__) . '/front/front-render.php' );
-		include_once( dirname(__FILE__) . '/front/front-mail.php' );
+		include_once dirname(__FILE__) . '/front/front-action.php';
+		include_once dirname(__FILE__) . '/front/front-render.php';
+		include_once dirname(__FILE__) . '/front/front-mail.php';
 
 		Forminator_CForm_Front_Action::get_instance();
 		new Forminator_CForm_Front();

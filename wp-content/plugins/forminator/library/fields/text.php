@@ -87,14 +87,6 @@ class Forminator_Text extends Forminator_Field {
 			),
 
 			array(
-				'id'         => 'separator-1',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'className'  => 'separator-field',
-			),
-
-			array(
 				'id'            => 'input-type',
 				'type'          => 'Radio',
 				'name'          => 'input_type',
@@ -138,14 +130,6 @@ class Forminator_Text extends Forminator_Field {
 				'hide_label' => false,
 				'label'      => __( 'Description', Forminator::DOMAIN ),
 				'className'  => 'text-field',
-			),
-
-			array(
-				'id'         => 'separator-2',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'className'  => 'separator-field',
 			),
 
 			array(
@@ -209,6 +193,7 @@ class Forminator_Text extends Forminator_Field {
 			'limit'       => 180,
 			'limit_type'  => 'characters',
 			'field_label' => __( 'Text', Forminator::DOMAIN ),
+			'placeholder' => __( 'E.g. text placeholder', Forminator::DOMAIN ),
 		);
 	}
 
@@ -240,26 +225,32 @@ class Forminator_Text extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		{[ if( field.input_type === "paragraph" ) { ]}
+			<textarea class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}></textarea>
+		{[ } else { ]}
+			<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+		{[ } ]}
+		{[ if( field.description && ( field.text_limit && field.limit ) ) { ]}
+			<div class="fui-extended-description">
+		{[ } ]}
+			{[ if( field.description ) { ]}
+				<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
 			{[ } ]}
-			{[ if( field.input_type === "paragraph" ) { ]}
-				<textarea class="wpmudev-textarea" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}></textarea>
-			{[ } else { ]}
-				<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+			{[ if( field.description && ( field.text_limit && field.limit ) ) { ]}
+				<div class="sui-actions-right">
 			{[ } ]}
-			{[ if( field.description || field.text_limit ) { ]}
-			<div class="wpmudev-group--info">
-				{[ if( field.description ) { ]}
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
-				{[ } ]}
-				{[ if( field.text_limit && field.limit ) { ]}
-				<span class="wpmudev-info--limit">0 / {{ field.limit }}</span>
-				{[ } ]}
+			{[ if( field.text_limit && field.limit ) { ]}
+				<span class="sui-description">0 / {{ field.limit }}</span>
+			{[ } ]}
+			{[ if( field.description && ( field.text_limit && field.limit ) ) { ]}
+				</div>
+			{[ } ]}
+		{[ if( field.description && ( field.text_limit && field.limit ) ) { ]}
 			</div>
-			{[ } ]}
-		</div>';
+		{[ } ]}';
 	}
 
 	/**
@@ -276,32 +267,33 @@ class Forminator_Text extends Forminator_Field {
 		$this->field         = $field;
 		$this->form_settings = $settings;
 
-		$this->init_autofill($settings);
+		$this->init_autofill( $settings );
 
-		$id				= $name = self::get_property( 'element_id', $field );
-		$ariaid			= $id;
-		$id				= $id . '-field';
-		$required		= self::get_property( 'required', $field, false );
-		$placeholder	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$field_type		= self::get_property( 'input_type', $field );
-		$design			= $this->get_form_style( $settings );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
+		$ariaid      = $id;
+		$id          = $id . '-field';
+		$required    = self::get_property( 'required', $field, false );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$field_type  = trim( self::get_property( 'input_type', $field ) );
+		$design      = $this->get_form_style( $settings );
 
 		$html = '';
 
 		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
 
-		if ( $field_type == "paragraph" ) {
+		if ( "paragraph" === $field_type ) {
 
-			if ( $design === 'material' ) {
+			if ( 'material' === $design ) {
 				$html .= '<div class="forminator-textarea--wrap">';
 			}
 
 			$textarea = array(
-				'class'				=> 'forminator-textarea',
-				'name'				=> $name,
-				'placeholder'		=> $placeholder,
-				'id'				=> $id,
-				'aria-labelledby'	=> 'forminator-label-' . $ariaid
+				'class'           => 'forminator-textarea',
+				'name'            => $name,
+				'placeholder'     => $placeholder,
+				'id'              => $id,
+				'aria-labelledby' => 'forminator-label-' . $ariaid,
 			);
 
 			if ( isset( $autofill_markup['value'] ) ) {
@@ -310,32 +302,32 @@ class Forminator_Text extends Forminator_Field {
 			}
 			$textarea = array_merge( $textarea, $autofill_markup );
 
-			$html     .= self::create_textarea( $textarea );
+			$html .= self::create_textarea( $textarea );
 
-			if ( $design === 'material' ) {
+			if ( 'material' === $design ) {
 				$html .= '</div>';
 			}
 
 		} else {
 
-			if ( $design === 'material' ) {
+			if ( 'material' === $design ) {
 				$html .= '<div class="forminator-input--wrap">';
 			}
 
 			$input_text = array(
-				'class'				=> 'forminator-input forminator-name--field',
-				'name'				=> $name,
-				'placeholder'		=> $placeholder,
-				'id'				=> $id,
-				'data-required'		=> $required,
-				'aria-labelledby'	=> 'forminator-label-' . $ariaid
+				'class'           => 'forminator-input forminator-name--field',
+				'name'            => $name,
+				'placeholder'     => $placeholder,
+				'id'              => $id,
+				'data-required'   => $required,
+				'aria-labelledby' => 'forminator-label-' . $ariaid,
 			);
 
 			$input_text = array_merge( $input_text, $autofill_markup );
 
 			$html .= self::create_input( $input_text );
 
-			if ( $design === 'material' ) {
+			if ( 'material' === $design ) {
 				$html .= '</div>';
 			}
 
@@ -367,7 +359,7 @@ class Forminator_Text extends Forminator_Field {
 			}
 
 			if( $has_limit ) {
-				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
+				if ( isset( $field['limit_type'] ) && 'characters' === trim($field['limit_type']) ) {
 					$rules .= '"maxlength": ' . $field['limit'] . ',';
 				} else {
 					$rules .= '"maxwords": ' . $field['limit'] . ',';
@@ -406,7 +398,7 @@ class Forminator_Text extends Forminator_Field {
 			}
 
 			if( $has_limit ) {
-				if ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters' ) {
+				if ( isset( $field['limit_type'] ) && 'characters' === trim($field['limit_type']) ) {
 					$max_length_error = apply_filters(
 						'forminator_text_field_characters_validation_message',
 						__( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN ),
@@ -457,14 +449,14 @@ class Forminator_Text extends Forminator_Field {
 			}
 		}
 		if ( $this->has_limit( $field ) ) {
-			if ( ( isset( $field['limit_type'] ) && $field['limit_type'] == 'characters') && (strlen( $data ) > $field['limit'] ) ) {
+			if ( ( isset( $field['limit_type'] ) && 'characters' === trim( $field['limit_type']) ) && ( strlen( $data ) > $field['limit'] ) ) {
 				$this->validation_message[ $id ] = apply_filters(
 					'forminator_text_field_characters_validation_message',
 					__( 'You exceeded the allowed amount of characters. Please check again', Forminator::DOMAIN ),
 					$id,
 					$field
 				);
-			} elseif ( ( isset( $field['limit_type'] ) && $field['limit_type'] == 'words') && (str_word_count($data) > $field['limit'] ) ) {
+			} elseif ( ( isset( $field['limit_type'] ) && 'words' === trim($field['limit_type']) ) && ( str_word_count( $data) > $field['limit'] ) ) {
 				$this->validation_message[ $id ] = apply_filters(
 					'forminator_text_field_words_validation_message',
 					__( 'You exceeded the allowed amount of words. Please check again', Forminator::DOMAIN ),

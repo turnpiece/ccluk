@@ -6,7 +6,7 @@
 class Forminator_Form_Field_Model {
 	/**
 	 * This should be unique
-	 * @var
+	 * @var string
 	 */
 	public $slug;
 
@@ -61,7 +61,7 @@ class Forminator_Form_Field_Model {
 	 * @return string
 	 */
 	public function toJSON() {
-		return json_encode( $this->toArray() );
+		return wp_json_encode( $this->toArray() );
 	}
 
 	/**

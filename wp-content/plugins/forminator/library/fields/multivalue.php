@@ -196,36 +196,30 @@ class Forminator_MultiValue extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			{[ if( field.value_type === "multiselect" ) { ]}
-				<div class="wpmudev-form-field--multiselect">
-					{[ _.each( field.options, function( value, key ){ ]}
-					<div class="wpmudev-item">
-						<input type="checkbox" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }}>
-						<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</label>
-					</div>
-					{[ }) ]}
-				</div>
-			{[ } else { ]}
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		{[ if( field.value_type === "multiselect" ) { ]}
+			<div class="sui-multi-checkbox">
 				{[ _.each( field.options, function( value, key ){ ]}
-				<div class="wpmudev-form-field--checkbox">
-					<div class="wpmudev-checkbox--design">
-						<input type="checkbox" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }}>
-						<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpdui-icon wpdui-icon-check"></label>
-					</div>
-					<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpmudev-checkbox--label">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</label>
-				</div>
+				<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}">
+					<input type="checkbox" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }} disabled="disabled">
+					<span>{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</span>
+				</label>
 				{[ }) ]}
-			{[ } ]}
-			{[ if( field.description ) { ]}
-			<div class="wpmudev-group--info">
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
 			</div>
-			{[ } ]}
-		</div>';
+		{[ } else { ]}
+			{[ _.each( field.options, function( value, key ){ ]}
+			<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="sui-checkbox">
+				<input type="checkbox" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }} disabled="disabled">
+				<span aria-hidden="true"></span>
+				<span class="sui-description">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</span>
+			</label>
+			{[ }) ]}
+		{[ } ]}
+		{[ if( field.description ) { ]}
+		<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
+		{[ } ]}';
 	}
 
 	/**
@@ -239,19 +233,21 @@ class Forminator_MultiValue extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-		$this->field	= $field;
-		$i				= 1;
-		$html			= '';
-		$id				= $name = self::get_property( 'element_id', $field );
-		$ariaid			= $id;
-		$id				= $id . '-field';
-		$uniq_id		= uniqid();
-		$name			= $name . '[]';
-		$required		= self::get_property( 'required', $field, false );
-		$options		= self::get_property( 'options', $field, array() );
-		$value_type		= isset( $field['value_type'] ) ? $field['value_type'] : "multiselect";
+		$this->field = $field;
+		$i           = 1;
+		$html        = '';
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
+		$ariaid      = $id;
+		$id          = $id . '-field';
+		$uniq_id     = uniqid();
+		$post_value  = self::get_post_data( $name, array() );
+		$name        = $name . '[]';
+		$required    = self::get_property( 'required', $field, false );
+		$options     = self::get_property( 'options', $field, array() );
+		$value_type  = trim(isset( $field['value_type'] ) ? $field['value_type'] : "multiselect");
 
-		if ( $value_type == "multiselect" ) {
+		if ( "multiselect" === $value_type ) {
 
 			$html .= '<ul class="forminator-multiselect">';
 
@@ -259,17 +255,19 @@ class Forminator_MultiValue extends Forminator_Field {
 
 					$value    = $option['value'] ? $option['value'] : $option['label'];
 					$input_id = $id . '-' . $i;
+					//possible $post_value has different var type, so we omit strict
+					$selected = in_array( $value, $post_value ) ? 'checked="checked"' : '';// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 
-					if ( $this->get_form_style( $settings ) == 'clean' ) {
+					if ( trim($this->get_form_style( $settings )) === 'clean' ) {
 
 						$html .= '<li class="forminator-multiselect--item">';
-						$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s"> %s', $input_id . '-' . $uniq_id, $name, $value, $option['label'] );
+						$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" %s> %s', $input_id . '-' . $uniq_id, $name, $value, $selected, $option['label'] );
 						$html .= '</li>';
 
 					} else {
 
 						$html     .= sprintf( '<li class="forminator-multiselect--item">' );
-						$html     .= sprintf( '<input id="%s" name="%s" type="checkbox" value="%s">', $input_id . '-' . $uniq_id, $name, $value );
+						$html     .= sprintf( '<input id="%s" name="%s" type="checkbox" value="%s" %s>', $input_id . '-' . $uniq_id, $name, $value, $selected );
 						$html     .= sprintf( '<label for="%s">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
 						$html     .= sprintf( '</li>' );
 
@@ -286,17 +284,19 @@ class Forminator_MultiValue extends Forminator_Field {
 
 				$value    = $option['value'] ? $option['value'] : $option['label'];
 				$input_id = $id . '-' . $i;
+				//possible $post_value has different variable type
+				$selected = in_array( $value, $post_value ) ? 'checked="checked"' : '';// phpcs:ignore WordPress.PHP.StrictInArray.MissingTrueStrict
 
-				if ( $this->get_form_style( $settings ) == 'clean' ) {
+				if ( trim($this->get_form_style( $settings )) === 'clean' ) {
 
 					$html .= '<label class="forminator-checkbox">';
-					$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s"> %s', $input_id . '-' . $uniq_id, $name, $value, $option['label'] );
+					$html .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" %s> %s', $input_id . '-' . $uniq_id, $name, $value, $selected, $option['label'] );
 					$html .= '</label>';
 
 				} else {
 
 					$html     .= '<div class="forminator-checkbox">';
-					$html     .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" class="forminator-checkbox--input">', $input_id . '-' . $uniq_id, $name, $value );
+					$html     .= sprintf( '<input id="%s" type="checkbox" name="%s" value="%s" class="forminator-checkbox--input" %s>', $input_id . '-' . $uniq_id, $name, $value, $selected );
 					$html     .= sprintf( '<label for="%s" class="forminator-checkbox--design wpdui-icon wpdui-icon-check" aria-hidden="true"></label>', $input_id . '-' . $uniq_id );
 					$html     .= sprintf( '<label for="%s" class="forminator-checkbox--label">%s</label>', $input_id . '-' . $uniq_id, $option['label'] );
 					$html     .= '</div>';

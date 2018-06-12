@@ -32,7 +32,7 @@ class Forminator_Modules {
 	 */
 	private function includes() {
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-module.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-module.php';
 	}
 
 	/**

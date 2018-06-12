@@ -2,6 +2,8 @@
 main.js
 ----------------
 library/require.js
+text.js
+text!admin/templates/popups.html
 admin/utils.js
 admin/models/base-model.js
 admin/models/condition-model.js
@@ -12,6 +14,8 @@ admin/models/wrapper-model.js
 admin/models/wrappers-collection.js
 admin/models/autofill-model.js
 admin/models/autofills-collection.js
+admin/models/addon-model.js
+admin/models/addons-collection.js
 admin/models/builder-model.js
 admin/models/answer-model.js
 admin/models/answers-collection.js
@@ -26,7 +30,6 @@ admin/models/quiz-model.js
 admin/models/login-register-model.js
 admin/models.js
 admin/dashboard.js
-text.js
 text!tpl/dashboard.html
 admin/popup/templates.js
 admin/popup/login.js
@@ -36,6 +39,9 @@ admin/popup/new-form.js
 admin/popup/ajax.js
 admin/popup/delete.js
 admin/popups.js
+text!tpl/popups.html
+admin/addons/view.js
+admin/addons/addons.js
 admin/settings/setting.js
 admin/settings/text.js
 admin/settings/multi-setting.js
@@ -93,6 +99,7 @@ admin/builder/appearance/behaviour-settings.js
 admin/builder/appearance/email-settings.js
 admin/builder/appearance/advanced-settings.js
 admin/builder/appearance/pagination-settings.js
+admin/builder/appearance/integrations-settings.js
 text!admin/templates/appearance.html
 admin/builder/appearance.js
 text!tpl/polls.html
@@ -116,4 +123,4 @@ admin/application.js
 admin/setup.js
 
 
-87274-1528550891-au
+87274-1528838340-au

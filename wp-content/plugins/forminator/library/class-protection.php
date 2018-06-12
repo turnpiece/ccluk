@@ -19,7 +19,7 @@ class Forminator_Protection {
 	 * @return Forminator_Protection
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -44,7 +44,7 @@ class Forminator_Protection {
 	 */
 	private function include_in_built() {
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/protection/class-akismet.php' );
+		include_once forminator_plugin_dir() . 'library/protection/class-akismet.php';
 	}
 
 	/**

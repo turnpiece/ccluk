@@ -40,8 +40,8 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 * @return Forminator_Poll_Front
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
-			self::$instance = new self;
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -107,23 +107,23 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		if ( is_object( $this->model ) ) {
 			$this->generate_render_id( $id );
 
-			$isSameForm   = false;
-			$isSameRender = false;
-			if ( isset( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] == $this->model->id ) {
-				$isSameForm = true;
+			$is_same_form   = false;
+			$is_same_render = false;
+			if ( isset( $_REQUEST['form_id'] ) && (int) $_REQUEST['form_id'] === (int) $this->model->id ) { // WPCS: CSRF OK
+				$is_same_form = true;
 			}
 
-			if ( isset( $_REQUEST['render_id'] ) && $_REQUEST['render_id'] == self::$render_ids[ $this->model->id ] ) {
-				$isSameRender = true;
+			if ( isset( $_REQUEST['render_id'] ) && (int) $_REQUEST['render_id'] === (int) self::$render_ids[ $this->model->id ] ) { // WPCS: CSRF OK
+				$is_same_render = true;
 			}
 
-			if ( isset( $_REQUEST['saved'] ) && $isSameForm && $isSameRender && $this->show_results() ) {
+			if ( isset( $_REQUEST['saved'] ) && $is_same_form && $is_same_render && $this->show_results() ) { // WPCS: CSRF OK
 				$this->track_views = false;
 				$this->render_success();
-			} elseif ( isset( $_REQUEST['results'] ) && $isSameForm && $isSameRender && $this->show_link() ) {
+			} elseif ( isset( $_REQUEST['results'] ) && $is_same_form && $is_same_render && $this->show_link() ) { // WPCS: CSRF OK
 				$this->track_views = false;
 				$this->render_success();
-			} elseif ( ! $this->is_admin && ( ! $this->model->current_user_can_vote() && ( $this->show_results() || $this->show_link() ) ) ) {
+			} elseif ( ! $this->is_admin && ( ! $this->model->current_user_can_vote() && ( $this->show_results() || $this->show_link() ) ) ) { // WPCS: CSRF OK
 				$this->track_views = false;
 				$this->render_success();
 			} else {
@@ -205,20 +205,20 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		$html = '<div class="forminator-poll-response-message">';
 		ob_start();
 		do_action( 'forminator_poll_post_message' ); //prints html, so we need to capture this
-		if ( isset( $_REQUEST['saved'] ) && ! isset( $_REQUEST['results'] ) ) {
-			if ( isset( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] == $this->model->id
-			     && isset( $_REQUEST['render_id'] )
-			     && $_REQUEST['render_id'] == self::$render_ids[ $this->model->id ] ) {
+		if ( isset( $_REQUEST['saved'] ) && ! isset( $_REQUEST['results'] ) ) { // WPCS: CSRF OK
+			if ( isset( $_REQUEST['form_id'] ) && $_REQUEST['form_id'] === $this->model->id // WPCS: CSRF OK
+			     && isset( $_REQUEST['render_id'] )  // WPCS: CSRF OK
+			     && $_REQUEST['render_id'] === self::$render_ids[ $this->model->id ] ) { // WPCS: CSRF OK
 				$this->track_views = false;
 				?>
-                <label class="forminator-label--success"><span><?php _e( "Your vote has been saved", Forminator::DOMAIN ); ?></span></label>
+                <label class="forminator-label--success"><span><?php esc_html_e( "Your vote has been saved", Forminator::DOMAIN ); ?></span></label>
 				<?php
 			}
 		} else {
 			if ( ! $this->is_admin && ! $this->model->current_user_can_vote() ) {
 				$this->track_views = false;
 				?>
-                <label class="forminator-label--info"><span><?php _e( "You have already voted for this poll", Forminator::DOMAIN ); ?></span></label>
+                <label class="forminator-label--info"><span><?php esc_html_e( "You have already voted for this poll", Forminator::DOMAIN ); ?></span></label>
 				<?php
 			}
 		}
@@ -263,9 +263,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$button = $this->get_submit_button_text();
 			$html   = '<div class="forminator-poll--actions">';
 			$html   .= sprintf( '<button class="forminator-button">%s</button>', $button );
-			if ( isset( $_REQUEST['saved'] ) || $this->show_link() ) {
+			if ( isset( $_REQUEST['saved'] ) || $this->show_link() ) { // WPCS: CSRF OK
 				$url = '';
-				if ( isset( $_REQUEST['saved'] ) ) {
+				if ( isset( $_REQUEST['saved'] ) ) { // WPCS: CSRF OK
 					$this->track_views = false;
 					$url               = remove_query_arg( array( 'saved', 'form_id', 'render_id' ) );
 				}
@@ -274,7 +274,13 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				if ( $this->is_admin ) {
 					$url = '#';
 				} else {
-					$url = add_query_arg( array( 'results' => 'true', 'form_id' => $this->model->id, 'render_id' => self::$render_ids[ $this->model->id ] ), $url );
+					$url = add_query_arg(
+						array(
+									'results' => 'true',
+									'form_id' => $this->model->id,
+									'render_id' => self::$render_ids[ $this->model->id ]
+						),
+					$url );
 				}
 				if ( 0 === Forminator_Form_Entry_Model::count_entries($this->model->id) ) {
 					$html .= sprintf( '<span class="forminator-button forminator-button-ghost">%s</span>', __( 'No votes yet', Forminator::DOMAIN ) );
@@ -289,7 +295,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$html = '<div class="forminator-poll--actions">';
 			if ( $this->show_link() ) {
 				$url = '';
-				if ( isset( $_REQUEST['saved'] ) ) {
+				if ( isset( $_REQUEST['saved'] ) ) { // WPCS: CSRF OK
 					$this->track_views = false;
 					$url               = remove_query_arg( array( 'saved', 'form_id', 'render_id' ) );
 				}
@@ -297,7 +303,13 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				if ( $this->is_admin ) {
 					$url = '#';
 				} else {
-					$url = add_query_arg( array( 'results' => 'true', 'form_id' => $this->model->id, 'render_id' => self::$render_ids[ $this->model->id ] ), $url );
+					$url = add_query_arg(
+						array(
+							'results' => 'true',
+							'form_id' => $this->model->id,
+							'render_id' => self::$render_ids[ $this->model->id ]
+						),
+					$url );
 				}
 				$html .= sprintf( '<a href="%s" class="forminator-button forminator-button-ghost">%s</a>', esc_url( $url ), __( 'View results', Forminator::DOMAIN ) );
 			}
@@ -437,7 +449,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		}
 
 		if ( $render ) {
-			echo $html;
+			echo $html; // phpcs:ignore
 		} else {
 			return apply_filters( 'forminator_render_fields_markup', $html, $wrappers, $this );
 		}
@@ -666,7 +678,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 */
 	private function show_results() {
 		$show_results = $this->get_show_results();
-		if ( $show_results == 'show_after' ) {
+		if ( 'show_after' === $show_results ) {
 			return true;
 		}
 
@@ -681,7 +693,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 */
 	private function show_link() {
 		$show_results = $this->get_show_results();
-		if ( $show_results == 'link_on' ) {
+		if ( 'link_on' === $show_results ) {
 			return true;
 		}
 
@@ -701,18 +713,15 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$chart_container = 'forminator_chart_poll_' . uniqid() . '_' . $this->model->id;
 			ob_start();
 			?>
-            <form class="forminator-poll forminator-poll-<?php echo $this->model->id;?>
-            <?php echo $this->get_form_design_class();?>
-            <?php echo $this->get_fields_type_class();?>
-            <?php echo $this->form_extra_classes();?>" method="GET" action="<?php echo
-            esc_url( $return_url ); ?>"
-                  data-forminator-render="<?php echo
-            self::$render_ids[
-                    $this->model->id ] ?>">
-				<?php echo $this->render_form_header(); ?>
-                <div id="<?php echo $chart_container; ?>" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>
+            <form class="forminator-poll forminator-poll-<?php echo esc_attr( $this->model->id ); ?>
+            <?php echo $this->get_form_design_class(); // WPCS: XSS ok. ?>
+            <?php echo $this->get_fields_type_class(); // WPCS: XSS ok. ?>
+            <?php echo $this->form_extra_classes(); // WPCS: XSS ok. ?>" method="GET" action="<?php echo esc_url( $return_url ); ?>"
+                  data-forminator-render="<?php echo esc_attr( self::$render_ids[ $this->model->id ] ); ?>">
+				<?php echo $this->render_form_header(); // WPCS: XSS ok. ?>
+                <div id="<?php echo esc_attr( $chart_container ); ?>" class="forminator-poll--chart" style="width: 100%; height: 300px;"></div>
                 <div class="forminator-poll--actions">
-                    <button class="forminator-button"><?php _e( 'Back To poll', Forminator::DOMAIN ); ?></button>
+                    <button class="forminator-button"><?php esc_html_e( 'Back To poll', Forminator::DOMAIN ); ?></button>
                 </div>
             </form>
 			<?php
@@ -725,7 +734,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 			$html = ob_get_clean();
 
 			if ( $render ) {
-				echo apply_filters( 'forminator_render_form_success_markup', $html, $this->model );
+				echo apply_filters( 'forminator_render_form_success_markup', $html, $this->model ); // WPCS: XSS ok.
 			} else {
 				return apply_filters( 'forminator_render_form_success_markup', $html, $this->model );
 			}
@@ -755,12 +764,12 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		}
 
 		if ( isset( $form_settings['show-votes-count'] ) && $form_settings['show-votes-count'] ) {
-			if ( $chart_design == 'pie' ) {
+			if ( 'pie' === $chart_design ) {
 				$pie_tooltip_text = 'both';
 			}
 		}
 
-		if ( $chart_design != 'pie' ) {
+		if ( 'pie' !== $chart_design ) {
 			$chart_options = array(
 				'annotations'     => array(
 					'textStyle' => array(
@@ -831,7 +840,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 	 *
 	 * @since 1.0
 	 */
-	public function success_footer_script($model, $container_id) {
+	public function success_footer_script( $model, $container_id ) {
 		if ( ! is_object( $model ) ) {
 			return '';
 		}
@@ -855,11 +864,11 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				"use strict";
 				jQuery('document').ready(function () {
 					google.charts.load('current', {packages: ['corechart', 'bar']});
-					google.charts.setOnLoadCallback(drawPollResults_<?php echo $container_id; ?>);
+					google.charts.setOnLoadCallback(drawPollResults_<?php echo esc_attr( $container_id ); ?>);
 
-					function drawPollResults_<?php echo $container_id; ?>() {
+					function drawPollResults_<?php echo esc_attr( $container_id ); ?>() {
 						var data = google.visualization.arrayToDataTable([
-							['<?php _e( 'Question', Forminator::DOMAIN ) ?>', '<?php _e( 'Results', Forminator::DOMAIN ) ?>', {role: 'style'}, {role: 'annotation'}],
+							['<?php esc_html_e( 'Question', Forminator::DOMAIN ); ?>', '<?php esc_html_e( 'Results', Forminator::DOMAIN ); ?>', {role: 'style'}, {role: 'annotation'}],
 							<?php
 							$fields_array = $model->getFieldsAsArray();
 							$map_entries = Forminator_Form_Entry_Model::map_polls_entries( $model->id, $fields_array );
@@ -876,7 +885,7 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 									$color   = array_shift( $chart_colors );
 									$slug    = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
 									$entries = 0;
-									if ( in_array( $slug, array_keys( $map_entries ) ) ) {
+									if ( in_array( $slug, array_keys( $map_entries ), true ) ) {
 										$entries = $map_entries[ $slug ];
 									}
 									if ( $number_votes_enabled ) {
@@ -887,17 +896,17 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 									$html .= "['$label', $entries, '$style', '$annotation'],";
 								}
 
-								echo substr( $html, 0, - 1 );
+								echo substr( $html, 0, - 1 ); // WPCS: XSS ok.
 							}
 							?>
 						]);
 
-						var options = <?php echo wp_json_encode( self::get_default_chart_options( $model ) ) ?>;
+						var options = <?php echo wp_json_encode( self::get_default_chart_options( $model ) ); ?>;
 
-						<?php if ( $chart_design == 'pie' ) {    ?>
-						var chart = new google.visualization.PieChart(document.getElementById('<?php echo $container_id; ?>'));
+						<?php if ( 'pie' === $chart_design ) { ?>
+						var chart = new google.visualization.PieChart(document.getElementById('<?php echo esc_attr( $container_id ); ?>'));
 						<?php } else { ?>
-						var chart = new google.visualization.BarChart(document.getElementById('<?php echo $container_id; ?>'));
+						var chart = new google.visualization.BarChart(document.getElementById('<?php echo esc_attr( $container_id ); ?>'));
 						<?php } ?>
 
 						chart.draw(data, options);
@@ -942,9 +951,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 		$properties = array();
 		if ( ! empty( self::$forms_properties ) ) {
 			// avoid same custom style printed
-			$styleRendered = array();
+			$style_rendered = array();
 			foreach ( self::$forms_properties as $form_properties ) {
-				if ( ! in_array( $form_properties['id'], $styleRendered ) ) {
+				if ( ! in_array( $form_properties['id'], $style_rendered, true ) ) {
 					$properties[] = $form_properties;
 				}
 			}
@@ -985,8 +994,8 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 
 				if ( isset( $properties['formID'] ) && strlen( $trimmed_styles ) > 0 ) {
 					?>
-                    <style type="text/css" id="forminator-poll-styles-<?php echo $properties['formID']; ?>">
-	                    <?php echo $trimmed_styles; ?>
+					<style type="text/css" id="forminator-poll-styles-<?php echo esc_attr( $properties['formID'] ); ?>">
+						<?php echo $trimmed_styles;// wpcs XSS ok. unescaped expected for printed css. ?>
                     </style>
 					<?php
 				}
@@ -996,7 +1005,9 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 
 
 	/**
+	 * Initiate `forminatorFront` front javascript for rendered form(s)
 	 *
+	 * @since 1.0
 	 */
 	public function forminator_render_front_scripts() {
 		?>
@@ -1006,14 +1017,15 @@ class Forminator_Poll_Front extends Forminator_Render_Form {
 				if ( ! empty( self::$forms_properties ) ) {
 				foreach ( self::$forms_properties as $form_properties ) {
 				?>
-				jQuery('#forminator-module-<?php echo $form_properties['id'] ?>[data-forminator-render="<?php echo $form_properties['render_id']; ?>"]').forminatorFront({
-					form_type: '<?php echo $this->get_form_type(); ?>',
-					chart_design: '<?php echo $form_properties['chart_design']; ?>',
+				jQuery('#forminator-module-<?php echo esc_attr( $form_properties['id'] ); ?>[data-forminator-render="<?php echo esc_attr( $form_properties['render_id'] ); ?>"]').forminatorFront({
+					form_type: '<?php echo $this->get_form_type(); // WPCS: XSS ok. ?>',
+					chart_design: '<?php echo $form_properties['chart_design']; // WPCS: XSS ok. ?>',
 					chart_options: <?php echo wp_json_encode($form_properties['chart_options']); ?>,
 				});
 				<?php
 				}
-				}?>
+				}
+				?>
 			});
         </script>
 		<?php

@@ -1,488 +1,313 @@
 <?php
-$entries    = $this->get_table();
-$form_type  = $this->get_form_type();
-$count      = $this->get_total_entries();
-$per_page   = $this->get_per_page();
-$total_page = ceil( $count / $per_page );
+$path		= forminator_plugin_url();
+$entries	= $this->get_table();
+$form_type	= $this->get_form_type();
+$count		= $this->get_total_entries();
+$per_page	= $this->get_per_page();
+$total_page	= ceil( $count / $per_page );
 ?>
-<section id="wpmudev-section">
 
-    <div class="wpmudev-row">
+<?php if ( $count > 0 ) : ?>
 
-        <div class="wpmudev-col col-12 col-sm-6">
+	<form method="post" class="sui-box">
 
-            <div id="forminator-entries--display_settings" class="wpmudev-box wpmudev-can--hide">
+		<?php wp_nonce_field( 'forminator_quiz_bulk_action', 'forminatorEntryNonce' ); ?>
 
-                <div class="wpmudev-box-header">
+		<input type="hidden" name="form_id" value="<?php echo esc_attr( $this->form_id ); ?>"/>
 
-                    <div class="wpmudev-header--text">
+		<div class="sui-box-body">
 
-                        <h2 class="wpmudev-subtitle"><?php _e( "Results Display Settings", Forminator::DOMAIN ); ?></h2>
+			<div class="fui-form-actions">
 
-                    </div>
+				<?php $this->bulk_actions(); ?>
 
-                    <div class="wpmudev-header--action">
+				<div class="sui-pagination-wrap">
 
-                        <button class="wpmudev-box--action">
+					<span class="sui-pagination-results"><?php if ( 1 === $count ) { printf( __( '%s result', Forminator::DOMAIN ), $count ); } else { printf( __( '%s results', Forminator::DOMAIN ), $count ); } // phpcs:ignore ?></span>
 
-                            <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+					<?php $this->paginate(); ?>
 
-                            <span class="wpmudev-sr-only"><?php _e( "Open Entries Display Settings", Forminator::DOMAIN ); ?></span>
+				</div>
 
-                        </button>
+			</div>
 
-                    </div>
+		</div>
 
-                </div>
+		<table class="sui-table sui-accordion fui-table-listings">
 
-                <div class="wpmudev-box-section">
+			<thead>
 
-                    <form method="POST">
+				<tr>
 
-						<?php wp_nonce_field( 'forminatorQuizEntries', 'forminatorEntryNonce' ); ?>
+					<th><label class="sui-checkbox">
+						<input id="wpf-cform-check_all" type="checkbox">
+						<span></span>
+						<div class="sui-description"><?php esc_html_e( "ID", Forminator::DOMAIN ); ?></div>
+					</label></th>
 
-                        <div class="wpmudev-section--multicheck">
+					<th colspan="5"><?php esc_html_e( "Date Submitted", Forminator::DOMAIN ); ?></th>
 
-                            <div class="wpmudev-multicheck--header">
+				</tr>
 
-                                <label><?php $this->fields_header(); ?></label>
+			</thead>
 
-                                <p><?php printf( __( "Select <a class='wpmudev-check-all' href='%s'>All</a> | <a class='wpmudev-uncheck-all' href='%s'>None</a>" ), "#", "#" ); ?></p>
+			<tbody>
 
-                            </div>
+				<?php
+				$first_item 	= $count;
+				$page_number 	= $this->get_paged();
 
-                            <ul class="wpmudev-multicheck">
+				if ( $page_number > 1 ) {
+					$first_item = $count - ( ( $page_number - 1 ) * $per_page );
+				}
 
-                                <li class="wpmudev-multicheck--item">
+				foreach ( $entries as $entry ) :
+					?>
 
-                                    <div class="wpmudev-checkbox">
+					<tr class="sui-accordion-item">
 
-                                        <input type="checkbox" id="date-enable" name="field[]"
-                                               value="date" <?php $this->checked_field( 'date' ); ?>>
-                                        <label for="date-enable" class="wpdui-icon wpdui-icon-check"></label>
+						<td><label class="sui-checkbox">
+							<input name="ids[]" value="<?php echo esc_attr( $entry->entry_id ); ?>" type="checkbox" id="quiz-answer-<?php echo esc_attr( $entry->entry_id ); ?>">
+							<span></span>
+							<div class="sui-description"><?php echo esc_attr( $first_item ); ?></div>
+						</label></td>
 
-                                    </div>
+						<td colspan="5"><?php echo date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $entry->date_created_sql ) ); // WPCS: XSS ok. ?>
+							<span class="sui-accordion-open-indicator">
+								<i class="sui-icon-chevron-down"></i>
+							</span>
+						</td>
 
-                                    <label for="date-enable"
-                                           class="wpmudev-item--label"><?php _e( "Date added", Forminator::DOMAIN ); ?></label>
+					</tr>
 
-                                </li>
+					<tr class="sui-accordion-item-content">
+
+						<td colspan="6">
+
+							<div class="sui-box">
+
+								<div class="sui-box-body">
+
+									<h2><?php echo forminator_get_form_name( $this->form_id, 'quiz'); // WPCS: XSS ok. ?></h2>
+
+								</div>
 
 								<?php
-								foreach ( $this->get_fields() as $field ) {
-									$label = $field->__get( 'main_label' );
-									if ( ! $label ) {
-										$label = $field->__get( 'field_label' );
-										if ( ! $label ) {
-											$label = $field->title;
-										}
-									}
-									$slug = isset( $field->slug ) ? $field->slug : sanitize_title( $label );
+								if ( 'knowledge' === $form_type ) {
+
+									$meta	= $entry->meta_data['entry']['value'];
+									$total	= 0;
+									$right	= 0;
 									?>
-                                    <li class='wpmudev-multicheck--item'>
-                                        <div class='wpmudev-checkbox'>
-                                            <input type='checkbox' id='<?php echo $slug; ?>-enable'
-                                                   name="field[]" <?php $this->checked_field( $slug ); ?>
-                                                   value="<?php echo $slug; ?>">
-                                            <label for='<?php echo $slug; ?>'
-                                                   class='wpdui-icon wpdui-icon-check'></label>
-                                        </div>
-                                        <label for='<?php echo $slug; ?>-enable'
-                                               class='wpmudev-item--label'><?php echo $label; ?></label>
-                                    </li>
-									<?php
-								}
-								?>
 
-                            </ul>
+									<table class="sui-table fui-table-dashboard">
 
-                            <button class="wpmudev-button"><?php _e( "Update Table", Forminator::DOMAIN ); ?></button>
+										<thead>
 
-                        </div>
+											<tr>
 
-                    </form>
+												<th><?php esc_html_e( "Question", Forminator::DOMAIN ); ?></th>
 
-                </div>
+												<th><?php esc_html_e( "Answer", Forminator::DOMAIN ); ?></th>
 
-            </div>
+											</tr>
 
-        </div>
+										</thead>
 
-        <div class="wpmudev-col col-12 col-sm-6">
+										<tbody>
 
-            <div id="forminator-entries--export" class="wpmudev-box wpmudev-can--hide">
+											<?php
+											foreach ( $meta as $answer ) :
 
-                <div class="wpmudev-box-header">
+												$total ++;
 
-                    <div class="wpmudev-header--text">
+												if ( $answer['isCorrect'] ) {
+													$right ++;
+												}
 
-                        <h2 class="wpmudev-subtitle"><?php _e( "Export Entries", Forminator::DOMAIN ); ?></h2>
+												$user_answer = $answer['answer'];
+												?>
 
-                    </div>
+												<tr>
 
-                    <div class="wpmudev-header--action">
+													<td><?php echo esc_html( $answer['question'] ); ?></td>
 
-                        <button class="wpmudev-box--action">
+													<td>
+														<?php
+														if ( $answer['isCorrect'] ) {
 
-                            <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+														echo '<span class="sui-tag sui-tag-success">' . $user_answer . '</span>'; // WPCS: XSS ok.
 
-                            <span class="wpmudev-sr-only"><?php _e( "Open Export Entries", Forminator::DOMAIN ); ?></span>
+													} else {
 
-                        </button>
+														echo '<span class="sui-tag sui-tag-error">' . $user_answer . '</span>'; // WPCS: XSS ok.
 
-                    </div>
+													}
+													?>
+													</td>
 
-                </div>
+												</tr>
 
-                <div class="wpmudev-box-section">
+											<?php endforeach; ?>
 
-                    <div class="wpmudev-section--text">
+										</tbody>
 
-						<?php $path = forminator_plugin_dir(); ?>
+									</table>
 
-						<div id="forminator-export--buttons">
+									<div class="sui-box-footer">
 
-                            <form class="wpmudev-export--form" method="post">
-                                <button class="wpmudev-button"><?php _e( "Export Entries", Forminator::DOMAIN ); ?></button>
-                                <input type="hidden" name="forminator_export" value="1">
-                                <input type="hidden" name="form_id" value="<?php echo $this->form_id ?>">
-                                <input type="hidden" name="form_type" value="quiz">
-								<?php wp_nonce_field( 'forminator_export', '_forminator_nonce' ) ?>
-                            </form>
-							<!--
-                            <div class="wpmudev-export--prev">
-                                <button class="wpmudev-button wpmudev-button-ghost wpmudev-open-modal"
-                                        data-modal="exports" data-nonce="<?php echo wp_create_nonce( 'forminator_load_exports' ) ?>"
-										data-form-id="<?php echo $_GET['form_id'] ?>"><?php _e( "Previous Exports", Forminator::DOMAIN ); ?></button>
-                            </div>
-                            -->
-                        </div>
+										<p><?php echo sprintf( __( "You got <strong>%s / %s</strong> correct answers.", Forminator::DOMAIN ), $right, $total ); // phpcs:ignore ?></p>
 
-                        <div id="forminator-export--schedule">
+									</div>
 
-                            <label><?php _e( "Scheduled exports", Forminator::DOMAIN ); ?></label>
+								<?php
+								} else {
 
-							<?php
-							$schedule_day       = forminator_get_exporter_info( 'day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-							$schedule_month_day = forminator_get_exporter_info( 'month_day', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-							$schedule_time      = forminator_get_exporter_info( 'hour', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-							$schedule_timeframe = forminator_get_exporter_info( 'interval', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-							$email              = forminator_get_exporter_info( 'email', forminator_get_form_id_helper() . forminator_get_form_type_helper() );
-							$enabled			= ( forminator_get_exporter_info( 'enabled', forminator_get_form_id_helper() . forminator_get_form_type_helper() ) === 'true' );
-	                       ?>
+									$meta = $entry->meta_data['entry']['value'][0]['value'];
+									?>
 
-                            <label class="wpmudev-label--info">
-								<?php if ( ! $enabled || empty( $email ) ): ?>
-                                    <span><?php _e( "Scheduled export is not enabled", Forminator::DOMAIN ) ?></span>
-								<?php else: ?>
-			                        <?php if (  $schedule_timeframe == 'weekly' ): ?>
-                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> on <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ucfirst( $schedule_day ), $schedule_time ); ?>
-			                        <?php elseif ( $schedule_timeframe == 'monthly' ): ?>
-                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> every <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), ( $schedule_month_day ? $schedule_month_day : 1 ), $schedule_time ); ?>
-			                        <?php else: ?>
-                                        <span><?php printf( __( "Export schedule: <strong>%s</strong> at <strong>%s</strong>", Forminator::DOMAIN ), ucfirst( $schedule_timeframe ), $schedule_time ); ?>
-                                    <?php endif; ?>
-									<br/><?php _e( "To be sent by email.", Forminator::DOMAIN ); ?></span>
-								<?php endif; ?>
-                                <a href="/"
-                                   class="wpmudev-button wpmudev-button-ghost wpmudev-button-sm wpmudev-open-modal"
-                                   data-modal="exports-schedule"><?php _e( "Edit", Forminator::DOMAIN ); ?></a>
+									<?php if ( isset( $meta['answers'] ) && is_array( $meta['answers'] ) ) : ?>
 
-                            </label>
+										<table class="sui-table fui-table-dashboard">
 
-                        </div>
+											<thead>
 
-                    </div>
+												<tr>
 
-                </div>
+													<th><?php esc_html_e( "Question", Forminator::DOMAIN ); ?></th>
 
-            </div>
+													<th><?php esc_html_e( "Answer", Forminator::DOMAIN ); ?></th>
 
-        </div>
+												</tr>
 
-    </div>
+											</thead>
 
-    <div class="wpmudev-row--border"></div>
-    <form method="post">
-		<?php wp_nonce_field( 'forminator_quiz_bulk_action', 'forminatorEntryNonce' ) ?>
-        <input type="hidden" name="form_id" value="<?php echo $this->form_id ?>"/>
-        <div class="wpmudev-row">
-            <div class="wpmudev-col col-12">
+											<tbody>
 
-                <div class="wpmudev-actions">
-                    <?php $this->bulk_actions(); ?>
+												<?php foreach ( $meta['answers'] as $answer ) : ?>
 
-                    <div class="wpmudev-action--page">
+													<tr>
 
-						<?php if ( count( $entries ) > 0 ) : ?>
-							<div class="wpmudev-page--resume"><p><?php if ( $count == 1 ) {
-										printf( __( "%s result", Forminator::DOMAIN ), $count );
-									} else {
-										printf( __( "%s results", Forminator::DOMAIN ), $count );
-									} ?></p></div>
+														<td><?php echo $answer['question']; // WPCS: XSS ok. ?></td>
 
-							<ul class="wpmudev-pagination">
+														<td><?php echo $answer['answer']; // WPCS: XSS ok. ?></td>
 
-								<li class="wpmudev-pagination--item wpmudev-pagination--prev <?php echo $this->get_paged() == 1 ? 'wpmudev-is_disabled' : null ?>">
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . ( $this->get_paged() - 1 ) ) ?>">
-										<span class="wpdui-icon wpdui-icon-arrow-left-carats"></span>
-										<span class="wpmudev-sr-only"><?php _e( 'Previous page', Forminator::DOMAIN ); ?></span>
-									</a></li>
-								<?php for ( $i = 1; $i <= $total_page; $i ++ ): ?>
-									<li class="wpmudev-pagination--item <?php echo( $this->get_paged() == $i ? ' wpmudev-is_active' : '' ) ?>">
-										<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . $i ) ?>"><?php echo $i ?></a>
-									</li>
-								<?php endfor; ?>
+													</tr>
 
-								<li class="wpmudev-pagination--item wpmudev-pagination--next <?php echo $this->get_paged() == $total_page ? 'wpmudev-is_disabled' : null ?>">
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . ( $this->get_paged() + 1 ) ) ?>">
-										<span class="wpdui-icon wpdui-icon-arrow-right-carats"></span>
-										<span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
-									</a></li>
+												<?php endforeach; ?>
 
-							</ul>
-						<?php endif; ?>
+											</tbody>
 
-                    </div>
+										</table>
 
-                </div>
+									<?php endif; ?>
 
-                <div id="forminator-cform-table" class="wpmudev-entries">
+									<div class="sui-box-footer">
 
-                    <div class="wpmudev-entries--header">
+										<p><?php printf( __( "<strong>Quiz Result:</strong> %s", Forminator::DOMAIN ), $meta['result']['title'] ); // WPCS: XSS ok. ?></p>
 
-                        <div class="wpmudev-entries--check">
+									</div>
 
-                            <div class="wpmudev-checkbox">
-                                <input type="checkbox" id="forminator-entries-all"/>
-                                <label for="forminator-entries-all" class="wpdui-icon wpdui-icon-check"></label>
-                            </div>
+								<?php } ?>
 
-                        </div>
+							</div>
 
-                        <div class="wpmudev-entries--text">
+						</td>
 
-                            <p class="wpmudev-entries--title"><?php _e( 'Title', Forminator::DOMAIN ); ?></p>
+					</tr>
 
-                            <p class="wpmudev-entries--subtitle"><?php _e( 'Date', Forminator::DOMAIN ); ?></p>
+				<?php
+					$first_item--;
 
-                        </div>
+				endforeach;
+				?>
 
-                        <div class="wpmudev-entries--action" aria-hidden="true"></div>
+			</tbody>
 
-                    </div>
+		</table>
 
-                    <div class="wpmudev-entries--section">
+		<div class="sui-box-footer">
 
-						<?php if ( count( $entries ) == 0 ) : ?>
+			<div class="fui-form-actions">
 
-                            <div class="wpmudev-entries--empty">
+				<?php $this->bulk_actions( 'bottom' ); ?>
 
-                                <p><?php _e( 'No results were found.', Forminator::DOMAIN ); ?></p>
+				<div class="sui-pagination-wrap">
 
-                            </div>
+					<span class="sui-pagination-results"><?php if ( 1 === $count ) { printf( __( '%s result', Forminator::DOMAIN ), $count ); } else { printf( __( '%s results', Forminator::DOMAIN ), $count ); } // phpcs:ignore ?></span>
 
-						<?php else : ?>
+					<?php $this->paginate(); ?>
 
-							<?php
-							$first_item 	= $count;
-							$page_number 	= $this->get_paged();
-							if ( $page_number > 1 ) {
-								$first_item = $count - ( ( $page_number - 1 ) * $per_page );
-							}
-							foreach ( $entries as $entry ) : ?>
+				</div>
 
-                                <div id="forminator-entry-<?php echo $entry->entry_id; ?>"
-                                     class="wpmudev-entries--result">
+			</div>
 
-                                    <div class="wpmudev-result--header wpmudev-open-entry" data-entry="entry-<?php echo $entry->entry_id ?>">
+		</div>
 
-                                        <div class="wpmudev-result--check">
+	</form>
 
-                                            <div class="wpmudev-checkbox">
+	<div class="sui-box">
 
-                                                <input name="ids[]" value="<?php echo $entry->entry_id ?>"
-                                                       type="checkbox"
-                                                       id="quiz-answer-<?php echo $entry->entry_id ?>"/>
+		<div class="sui-box-header">
 
-                                                <label for="quiz-answer-<?php echo $entry->entry_id ?>"
-                                                       class="wpdui-icon wpdui-icon-check" aria-hidden="true"></label>
+			<h2 class="sui-box-title"><?php esc_html_e( "Export Settings", Forminator::DOMAIN ); ?></h2>
 
-                                            </div>
+		</div>
 
-                                        </div>
+		<div class="sui-box-body">
 
-                                        <div class="wpmudev-result--text">
+			<p><?php esc_html_e( "You can do manual exports or schedule automatic exports and receive them on your mailbox.", Forminator::DOMAIN ); ?></p>
 
-                                            <p class="wpmudev-result--title"><?php printf( __( 'Result #%s', Forminator::DOMAIN ), $first_item ); ?></p>
+		</div>
 
-                                            <p class="wpmudev-result--subtitle"><?php echo date( get_option( 'date_format' ) . ' ' . get_option( 'time_format' ), strtotime( $entry->date_created_sql ) ); ?></p>
+		<table class="sui-table sui-accordion fui-table-exports">
 
-                                        </div>
+			<tbody>
 
-                                        <div class="wpmudev-result--action">
+				<tr>
 
-                                            <button class="wpmudev-button-action wpmudev-open-entry" data-entry="entry-<?php echo $entry->entry_id ?>">
+					<td><?php esc_html_e( "Manual Exports", Forminator::DOMAIN ); ?></td>
 
-                                                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+					<td><form class="wpmudev-export--form" method="post">
+						<input type="hidden" name="forminator_export" value="1">
+						<input type="hidden" name="form_id" value="<?php echo esc_attr( $this->form_id ); ?>">
+						<input type="hidden" name="form_type" value="quiz">
+						<?php wp_nonce_field( 'forminator_export', '_forminator_nonce' ); ?>
+						<button class="sui-button sui-button-primary"><?php esc_html_e( "Download", Forminator::DOMAIN ); ?></button>
+					</form></td>
 
-                                                <span class="wpmudev-sr-only"><?php _e( 'Open result details', Forminator::DOMAIN ); ?></span>
+				</tr>
 
-                                            </button>
+				<tr>
 
-                                        </div>
+					<td><?php esc_html_e( "Scheduled Exports", Forminator::DOMAIN ); ?></td>
 
-                                    </div>
+					<td><a href="/" class="sui-button wpmudev-open-modal" data-modal="exports-schedule"><?php esc_html_e( "Edit", Forminator::DOMAIN ); ?></a></td>
 
-                                    <div class="wpmudev-result--section">
+			</tbody>
 
-                                        <div class="wpmudev-box">
+		</table>
 
-                                            <div class="wpmudev-box-section">
+	</div>
 
-                                                <div class="wpmudev-section--text">
+	<?php
+	else :
+	?>
 
-													<?php
-													if ( $form_type == 'knowledge' ) {
+	<div class="sui-box">
 
-														$meta = $entry->meta_data['entry']['value']; ?>
+		<div class="sui-box-body sui-block-content-center">
 
-                                                        <ol class="wpmudev-results--list">
+			<img src="<?php echo $path . 'assets/img/forminator-submissions.png'; // WPCS: XSS ok. ?>"
+				srcset="<?php echo $path . 'assets/img/forminator-submissions.png'; // WPCS: XSS ok. ?> 1x, <?php echo $path . 'assets/img/forminator-submissions@2x.png'; // WPCS: XSS ok. ?> 2x" alt="<?php esc_html_e( 'Forminator', Forminator::DOMAIN ); ?>"
+				class="sui-image sui-image-center fui-image" />
 
-															<?php
-															$total = 0;
-															$right = 0;
+			<h2><?php echo forminator_get_form_name( $this->form_id, 'quiz'); // WPCS: XSS ok. ?></h2>
 
-															foreach ( $meta as $answer ) {
+			<p class="fui-limit-block-600 fui-limit-block-center"><?php esc_html_e( "You haven’t received any submissions for this quiz yet. When you do, you’ll be able to view all the data here.", Forminator::DOMAIN ); ?></p>
 
-																$total ++;
+		</div>
 
-																if ( $answer['isCorrect'] ) {
-																	$right ++;
-																} ?>
+	</div>
 
-                                                                <li>
-
-                                                                    <p class="wpmudev-results--question"><?php echo $answer['question'] ?></p>
-
-                                                                    <p class="wpmudev-results--answer">
-																		<?php if ( $answer['isCorrect'] ) { ?><i
-                                                                                class="wpdui-icon wpdui-icon-check"></i><?php } else { ?>
-                                                                            <i class="wpdui-icon wpdui-icon-close"></i><?php } ?>
-                                                                        <span><?php echo $answer['answer'] ?></span>
-                                                                    </p>
-
-                                                                </li>
-
-															<?php } ?>
-
-                                                        </ol>
-
-                                                        <p class="wpmudev-results--summary"><?php echo sprintf( __( 'You got %s/%s correct', Forminator::DOMAIN ), $right, $total );?></p>
-
-													<?php } else {
-
-														$meta = $entry->meta_data['entry']['value'][0]['value']; ?>
-
-                                                        <ul class="wpmudev-results--list">
-															<?php if ( isset( $meta['answers'] ) && is_array( $meta['answers'] ) ) :?>
-																<?php foreach ( $meta['answers'] as $answer ) : ?>
-
-																	<li>
-																		<p class="wpmudev-results--question"><?php echo $answer['question'] ?></p>
-																		<p class="wpmudev-results--answer"><?php echo $answer['answer'] ?></p>
-																	</li>
-
-																<?php endforeach; ?>
-															<?php endif; ?>
-                                                        </ul>
-
-                                                        <p class="wpmudev-results--summary"><?php echo $meta['result']['title'] ?></p>
-
-													<?php } ?>
-
-                                                </div>
-
-                                            </div>
-
-                                        </div>
-
-                                    </div>
-
-                                </div>
-
-							<?php
-							$first_item--;
-							endforeach; ?>
-
-						<?php endif; ?>
-
-                    </div>
-
-                    <div class="wpmudev-entries--footer">
-
-                        <div class="wpmudev-entries--check">
-
-                            <div class="wpmudev-checkbox">
-                                <input type="checkbox" id="forminator-entries-all"/>
-                                <label for="forminator-entries-all" class="wpdui-icon wpdui-icon-check"></label>
-                            </div>
-
-                        </div>
-
-                        <div class="wpmudev-entries--text">
-
-                            <p class="wpmudev-entries--title"><?php _e( 'Title', Forminator::DOMAIN ); ?></p>
-
-                            <p class="wpmudev-entries--subtitle"><?php _e( 'Date', Forminator::DOMAIN ); ?></p>
-
-                        </div>
-
-                    </div>
-
-                </div>
-
-                <div class="wpmudev-actions">
-
-					<?php $this->bulk_actions( 'bottom' ); ?>
-
-                    <div class="wpmudev-action--page">
-
-						<?php if ( count( $entries ) > 0 ) : ?>
-							<div class="wpmudev-page--resume"><p><?php
-									if ( $count == 1 ) {
-										printf( __( "%s result", Forminator::DOMAIN ), $count );
-									} else {
-										printf( __( "%s results", Forminator::DOMAIN ), $count );
-									} ?></p></div>
-
-							<ul class="wpmudev-pagination">
-
-								<li class="wpmudev-pagination--item wpmudev-pagination--prev <?php echo $this->get_paged() == 1 ? 'wpmudev-is_disabled' : null ?>">
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . ( $this->get_paged() - 1 ) ) ?>">
-										<span class="wpdui-icon wpdui-icon-arrow-left-carats"></span>
-										<span class="wpmudev-sr-only"><?php _e( 'Previous page', Forminator::DOMAIN ); ?></span>
-									</a></li>
-								<?php for ( $i = 1; $i <= $total_page; $i ++ ): ?>
-									<li class="wpmudev-pagination--item <?php echo( $this->get_paged() == $i ? ' wpmudev-is_active' : '' ) ?>">
-										<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . $i ) ?>"><?php echo $i ?></a>
-									</li>
-								<?php endfor; ?>
-
-								<li class="wpmudev-pagination--item wpmudev-pagination--next <?php echo $this->get_paged() == $total_page ? 'wpmudev-is_disabled' : null ?>">
-									<a href="<?php echo admin_url( 'admin.php?page=forminator-quiz-view&form_id=' . $this->form_id . '&paged=' . ( $this->get_paged() + 1 ) ) ?>">
-										<span class="wpdui-icon wpdui-icon-arrow-right-carats"></span>
-										<span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
-									</a></li>
-
-							</ul>
-						<?php endif; ?>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-    </form>
+<?php endif; ?>

@@ -96,7 +96,7 @@ interface Forminator_Autofill_Provider_Interface {
 	 *
 	 * @since   1.0.5
 	 *
-	 * @example [
+	 * @example {
 	 *  'FIELD_TYPE_TO_HOOK' => [
 	 *          'PROVIDER_SLUG.ATTRIBUTE_PROVIDER_KEY'
 	 *              ],
@@ -110,7 +110,7 @@ interface Forminator_Autofill_Provider_Interface {
 	 *              ]
 	 *
 	 *
-	 * ];
+	 * ...}
 	 * @return array
 	 */
 	public function get_attribute_to_hook();

@@ -2,118 +2,103 @@
 
 	<script type="text/template" id="appearance-layout-tpl">
 
-		<div id="wpmudev-forminator-content" class="forminator-appearance-content wpmudev-page-wizard"></div>
+		<div class="forminator-appearance-content sui-row-with-sidenav"></div>
 
 	</script>
 
 	<script type="text/template" id="appearance-main-tpl">
 
-		<div class="wpmudev-wizard--content">
+		<nav class="sui-sidenav">
 
-			<nav class="wpmudev-content--nav">
+			<ul class="sui-vertical-tabs sui-sidenav-hide-md">
 
-				<ul class="wpmudev-nav--tabs">
+				<li class="sui-vertical-tab forminator-wizard-appearance" data-tab-id="forminator-wizard-appearance">
+					<a href="#forminator-wizard-appearance" role="button">{{ Forminator.l10n.tab_appearance.appearance }}</a>
+				</li>
 
-					<li class="wpmudev-tab--item forminator-wizard-appearance"><a href="#forminator-wizard-appearance">
-						<span class="wpmudev-text">{{ Forminator.l10n.appearance.appearance }}</span>
-						<span class="wpmudev-icon-loading"></span>
-						<span class="wpdui-icon wpdui-icon-check"></span>
-					</a></li>
+				{[ if( has_pagination ) { ]}
+				<li class="sui-vertical-tab forminator-wizard-pagination" data-tab-id="forminator-wizard-pagination">
+					<a href="#forminator-wizard-pagination" role="button">{{ Forminator.l10n.tab_pagination.pagination }}</a>
+				</li>
+				{[ } ]}
 
+				<li class="sui-vertical-tab forminator-wizard-behaviour" data-tab-id="forminator-wizard-behaviour">
+					<a href="#forminator-wizard-behaviour" role="button">{{ Forminator.l10n.tab_behaviour.behaviour }}</a>
+				</li>
+
+				<li class="sui-vertical-tab forminator-wizard-emails" data-tab-id="forminator-wizard-emails">
+					<a href="#forminator-wizard-emails" role="button">{{ Forminator.l10n.tab_emails.emails }}</a>
+				</li>
+
+				{[ if( addons_enabled ) { ]}
+				<li class="sui-vertical-tab forminator-wizard-integrations" data-tab-id="forminator-wizard-integrations">
+					<a href="#forminator-wizard-integrations" role="button">{{ Forminator.l10n.tab_integrations.integrations }}</a>
+				</li>
+				{[ } ]}
+			</ul>
+
+			<div class="sui-sidenav-hide-lg">
+
+				<select>
+					<option value="forminator-wizard-appearance">{{ Forminator.l10n.tab_appearance.appearance }}</option>
 					{[ if( has_pagination ) { ]}
-					<li class="wpmudev-tab--item forminator-wizard-pagination"><a href="#forminator-wizard-pagination">
-						<span class="wpmudev-text">{{ Forminator.l10n.appearance.form_pagination }}</span>
-						<span class="wpmudev-icon-loading"></span>
-						<span class="wpdui-icon wpdui-icon-check"></span>
-					</a></li>
+					<option value="forminator-wizard-pagination">{{ Forminator.l10n.tab_pagination.pagination }}</option>
 					{[ } ]}
-
-					<li class="wpmudev-tab--item forminator-wizard-behaviour"><a href="#forminator-wizard-behaviour">
-						<span class="wpmudev-text">{{ Forminator.l10n.appearance.form_behaviour }}</span>
-						<span class="wpmudev-icon-loading"></span>
-						<span class="wpdui-icon wpdui-icon-check"></span>
-					</a></li>
-
-					<li class="wpmudev-tab--item forminator-wizard-emails"><a href="#forminator-wizard-emails">
-						<span class="wpmudev-text">{{ Forminator.l10n.appearance.form_emails }}</span>
-						<span class="wpmudev-icon-loading"></span>
-						<span class="wpdui-icon wpdui-icon-check"></span>
-					</a></li>
-
-					<!-- Disable until integrations are done
-					<li class="wpmudev-tab--item forminator-wizard-advanced"><a href="#forminator-wizard-advanced">
-						<span class="wpmudev-text">{{ Forminator.l10n.appearance.advanced }}</span>
-						<span class="wpmudev-icon-loading"></span>
-						<span class="wpdui-icon wpdui-icon-check"></span>
-					</a></li>
-					-->
-
-				</ul>
-
-				<select class="wpmudev-select wpmudev-tabs-mobile">
-					<option value="forminator-wizard-appearance">{{ Forminator.l10n.appearance.appearance }}</option>
-					{[ if( has_pagination ) { ]}
-					<option value="forminator-wizard-pagination">{{ Forminator.l10n.appearance.form_pagination }}</option>
+					<option value="forminator-wizard-behaviour">{{ Forminator.l10n.tab_behaviour.behaviour }}</option>
+					<option value="forminator-wizard-emails">{{ Forminator.l10n.tab_emails.emails }}</option>
+					{[ if( addons_enabled ) { ]}
+					<option value="forminator-wizard-integrations">{{ Forminator.l10n.tab_integrations.integrations }}</option>
 					{[ } ]}
-					<option value="forminator-wizard-behaviour">{{ Forminator.l10n.appearance.form_behaviour }}</option>
-					<option value="forminator-wizard-emails">{{ Forminator.l10n.appearance.form_emails }}</option>
-					<!-- Disable until integrations are done
-					<option value="forminator-wizard-advanced">{{ Forminator.l10n.appearance.advanced }}</option>
-					-->
 				</select>
 
-				<div class="wpmudev-preview-anchor" aria-hidden="true"></div>
-
-				<div class="wpmudev-preview" aria-hidden="true" data-modal="preview_cforms" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.custom_form.preview_nonce }}">
-
-					<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100" preserveAspectRatio="none" class="wpmudev-icon wpmudev-i_preview"><path fill-rule="evenodd" d="M75 100C25 100 0 50 0 50S25 0 75 0s75 50 75 50-25 50-75 50zm0-25c13.807 0 25-11.193 25-25S88.807 25 75 25 50 36.193 50 50s11.193 25 25 25z"/></svg>
-
-					<span class="wpmudev-preview--text">{{ Forminator.l10n.appearance.preview_form }}</span>
-
-				</div>
-
-			</nav>
-
-			<div class="wpmudev-content--settings">
-				<div id="forminator-wizard-appearance" class="wpmudev-settings--box" style="display: block;"></div>
-				{[ if( has_pagination ) { ]}
-				<div id="forminator-wizard-pagination" class="wpmudev-settings--box"></div>
-				{[ } ]}
-				<div id="forminator-wizard-behaviour" class="wpmudev-settings--box"></div>
-				<div id="forminator-wizard-emails" class="wpmudev-settings--box"></div>
-				<!-- Disable until integrations are done
-				<div id="forminator-wizard-advanced" class="wpmudev-settings--box"></div>
-				-->
 			</div>
 
-		</div>
+			<div class="fui-button-preview-anchor" aria-hidden="true"></div>
+
+			<button class="fui-button-preview" aria-hidden="true" data-modal="preview_cforms" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.custom_form.preview_nonce }}">
+				<span>{{ Forminator.l10n.commons.preview }}</span>
+				<i class="sui-icon-eye" aria-hidden="true"></i>
+			</button>
+
+		</nav>
+
+		<div id="forminator-wizard-appearance" class="wpmudev-settings--box" style="display: block;"></div>
+		{[ if( has_pagination ) { ]}
+		<div id="forminator-wizard-pagination" class="wpmudev-settings--box" style="display: none;"></div>
+		{[ } ]}
+		<div id="forminator-wizard-behaviour" class="wpmudev-settings--box" style="display: none;"></div>
+		<div id="forminator-wizard-emails" class="wpmudev-settings--box" style="display: none;"></div>
+		<div id="forminator-wizard-advanced" class="wpmudev-settings--box" style="display: none;"></div>
+		{[ if( addons_enabled ) { ]}
+		<div id="forminator-wizard-integrations" class="wpmudev-settings--box" style="display: none;"></div>
+		{[ } ]}
 
 	</script>
 
 	<script type="text/template" id="appearance-buttons-tpl">
 
-		<div class="wpmudev-wizard--footer">
+		<div class="sui-box">
 
-			<div class="wpmudev-footer--clear"></div>
+			<nav class="sui-box-footer">
 
-			<nav class="wpmudev-footer--nav">
+				<button class="sui-button wpmudev-button-back" id="forminator-cform-builder">{{Forminator.l10n.builder.form_builder}}</button>
+				<button id="forminator-appearance-back" class="sui-button" style="display: none;">{{Forminator.l10n.quizzes.back}}</button>
 
-				<div class="wpmudev-nav--left">
+				<div class="sui-actions-right">
 
-					<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-back">{{Forminator.l10n.builder.form_builder}}</button>
-
-				</div>
-
-				<div class="wpmudev-nav--right">
-
-					<button class="wpmudev-button wpmudev-button-blue forminator-save forminator-save-changes" data-nonce="" data-id="">
-						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.save}}</span>
-						<span class="wpmudev-loading"></span>
+					<button id="forminator-appearance-save" class="sui-button sui-button-primary forminator-save forminator-save-changes">
+						<span class="sui-loading-text">{{Forminator.l10n.builder.save}}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</button>
 
-					<button class="wpmudev-button forminator-save forminator-save-layout">
-						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.publish}}</span>
-						<span class="wpmudev-loading"></span>
+					<button id="forminator-appearance-next" class="sui-button forminator-loading">
+						<span class="sui-loading-text">{{Forminator.l10n.builder.continue}}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+					</button>
+
+					<button class="sui-button sui-button-primary forminator-save forminator-save-layout" id="forminator-appearance-publish">
+						<span class="sui-loading-text">{{Forminator.l10n.builder.publish}}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 					</button>
 
 				</div>
@@ -126,228 +111,213 @@
 
 	<script type="text/template" id="appearance-section-appearance-tpl">
 
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.form_name_main }}</label>
-				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.form_name_main_desc }}</label>
-			</div>
-			<div class="wpmudev-option--container">
-				<div class="appearance-section-form-name"></div>
-				<label id="forminator-validate-name" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.appearance.form_name_validation }}</span></label>
-			</div>
+		<div class="sui-box-header">
+			<h2 class="sui-box-title">{{ Forminator.l10n.tab_appearance.appearance }}</h2>
 		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
+		<div class="sui-box-body">
 
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.design_colors }}</label>
-				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.design_colors_desc }}</label>
-			</div>
-			<div class="wpmudev-option--container">
-				<div class="appearance-section-form-design"></div>
-				<div class="appearance-section-customize-colors"></div>
-			</div>
-		</div>
-
-		<div id="appearance-cform-typo-border" class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div id="appearance-cform-typo-styles" class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.typography }}</label>
-			</div>
-			<div class="wpmudev-option--container appearance-section-customize-fonts"></div>
-		</div>
-
-		<div id="appearance-cform-form-border" class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div id="appearance-cform-form-customize" class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.form_style }}</label>
-			</div>
-			<div class="wpmudev-option--container">
-
-				<div id="appearance-cform-form-styles" class="wpmudev-box-gray">
-
-					<div class="wpmudev-row">
-						<div class="wpmudev-col col-12">
-							<label class="wpmudev-label--section">{{ Forminator.l10n.appearance.form_padding }}</label>
-						</div>
-					</div>
-
-					<div class="wpmudev-row">
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-padding-top"></div>
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-padding-right"></div>
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-padding-bottom"></div>
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-padding-left"></div>
-					</div>
-
-					<div class="wpmudev-row--border"></div>
-
-					<div class="wpmudev-row">
-						<div class="wpmudev-col col-12">
-							<label class="wpmudev-label--section">{{ Forminator.l10n.appearance.form_border }}</label>
-						</div>
-					</div>
-
-					<div class="wpmudev-row">
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-border-radius"></div>
-						<div class="wpmudev-col col-12 col-sm-6 col-lg-3 cform-appearance-form-border-width"></div>
-						<div class="wpmudev-col col-12 col-lg-6 cform-appearance-form-border-style"></div>
-					</div>
-
+			<!-- Form Name -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.form_name }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.form_name_description }}</span>
 				</div>
-
+				<div id="forminator-formwiz-form-name" class="sui-box-settings-col-2"></div>
 			</div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.fields_style }}</label>
+			<!-- Form Design -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.form_design }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.form_design_description }}</span>
+				</div>
+				<div id="forminator-formwiz-form-design" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-fields-style"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.custom_text }}</label>
-				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.custom_text_desc }}</label>
+			<!-- Typography -->
+			<div id="appearance-cform-typography" class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.typography }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.typography_description }}</span>
+				</div>
+				<div id="forminator-formwiz-typography" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-custom-submit"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{ Forminator.l10n.appearance.custom_css }}</label>
-				<label class="wpmudev-name--alt">{{ Forminator.l10n.appearance.custom_css_desc }}</label>
+			<!-- Form Style -->
+			<div id="appearance-cform-form-style" class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.form_style }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.form_style_description }}</span>
+				</div>
+				<div id="forminator-formwiz-form-style" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-custom-style"></div>
+
+			<!-- Fields Style -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.fields_style }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.fields_style_description }}</span>
+				</div>
+				<div id="forminator-formwiz-fields-style" class="sui-box-settings-col-2"></div>
+			</div>
+
+			<!-- Custom Text -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.custom_text }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.custom_text_description }}</span>
+				</div>
+				<div id="forminator-formwiz-custom-text" class="sui-box-settings-col-2"></div>
+			</div>
+
+			<!-- Custom CSS -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_appearance.custom_css }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_appearance.custom_css_description }}</span>
+				</div>
+				<div id="forminator-formwiz-custom-css" class="sui-box-settings-col-2"></div>
+			</div>
+
 		</div>
 
 	</script>
 
 	<script type="text/template" id="appearance-section-behaviour-tpl">
 
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.form_lifespan}}</label>
+		<div class="sui-box-header">
+			<h2 class="sui-box-title">{{ Forminator.l10n.tab_behaviour.behaviour }}</h2>
+		</div>
+
+		<div class="sui-box-body">
+
+			<!-- Form Lifespan -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.form_lifespan }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_behaviour.form_lifespan_description }}</span>
+				</div>
+				<div id="forminator-formwiz-form-lifespan" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-lifespan"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<!--Autofill-->
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.autofill.autofill_feature}}</label>
-				<label class="wpmudev-name--alt">{{Forminator.l10n.autofill.autofill_desc}}</label>
+			<!-- Autofill -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.autofill }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_behaviour.autofill_description }}</span>
+				</div>
+				<div id="forminator-formwiz-autofill" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-autofill"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.submission_behaviour}}</label>
-				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.submission_behaviour_desc}}</label>
+			<!-- Submission Behaviour -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.submission_behaviour }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_behaviour.submission_behaviour_description }}</span>
+				</div>
+				<div id="forminator-formwiz-submission-behaviour" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-after-submit"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.submission_method}}</label>
+			<!-- Database Storage -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.database_storage }}</span>
+				</div>
+				<div id="forminator-formwiz-database-storage" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-submission"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.validation_method}}</label>
+			<!-- Submission Method -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.submission_method }}</span>
+				</div>
+				<div id="forminator-formwiz-submission-method" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-validation"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.security}}</label>
+			<!-- Validation Method -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.validation_method }}</span>
+				</div>
+				<div id="forminator-formwiz-validation-method" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-security"></div>
-		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
-		</div>
-
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.privacy}}</label>
-				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.privacy_desc}}</label>
+			<!-- Security -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.security }}</span>
+				</div>
+				<div id="forminator-formwiz-security" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container appearance-section-form-privacy"></div>
+
+			<!-- Privacy -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_behaviour.privacy }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_behaviour.privacy_description }}</span>
+				</div>
+				<div id="forminator-formwiz-privacy" class="sui-box-settings-col-2"></div>
+			</div>
+
 		</div>
 
 	</script>
 
 	<script type="text/template" id="appearance-section-emails-tpl">
 
-		<div class="wpmudev-option">
-			<div class="appearance-section-form-user-email"></div>
+		<div class="sui-box-header">
+			<h2 class="sui-box-title">{{ Forminator.l10n.tab_emails.emails }}</h2>
 		</div>
 
-		<div class="wpmudev-option">
-			<div class="wpmudev-border"></div>
+		<div class="sui-box-body">
+
+			<!-- To User -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_emails.to_user }}</span>
+				</div>
+				<div id="forminator-formwiz-user-email" class="sui-box-settings-col-2"></div>
+			</div>
+
+			<!-- To Admin(s) -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_emails.to_admins }}</span>
+				</div>
+				<div id="forminator-formwiz-admins-email" class="sui-box-settings-col-2"></div>
+			</div>
+
 		</div>
 
-		<div class="wpmudev-option">
-			<div class="appearance-section-form-user-admin-email"></div>
-		</div>
 	</script>
 
 	<script type="text/template" id="appearance-section-pagination-tpl">
 
-		<div class="wpmudev-option--divided">
-			<div class="wpmudev-option--name">
-				<label class="wpmudev-name--main">{{Forminator.l10n.appearance.pagination_header}}</label>
-				<label class="wpmudev-name--alt">{{Forminator.l10n.appearance.pagination_header_desc}}</label>
+		<div class="sui-box-header">
+			<h2 class="sui-box-title">{{ Forminator.l10n.tab_pagination.pagination }}</h2>
+		</div>
+
+		<div class="sui-box-body">
+
+			<!-- Header -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_pagination.header }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_pagination.header_description }}</span>
+				</div>
+				<div id="forminator-formwiz-pagination-header" class="sui-box-settings-col-2"></div>
 			</div>
-			<div class="wpmudev-option--container pagination-settings-header"></div>
+
+			<!-- Footer -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_pagination.footer }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_pagination.footer_description }}</span>
+				</div>
+				<div id="forminator-formwiz-pagination-footer" class="sui-box-settings-col-2"></div>
+			</div>
+
 		</div>
 
 	</script>
@@ -358,684 +328,300 @@
 
 	</script>
 
+	<script type="text/template" id="appearance-section-integrations-tpl">
+
+		<div class="sui-box-header">
+			<h2 class="sui-box-title">{{ Forminator.l10n.tab_integrations.integrations }}</h2>
+		</div>
+
+		<div class="sui-box-body">
+
+			<!-- Applications -->
+			<div class="sui-box-settings-row">
+				<div class="sui-box-settings-col-1">
+					<span class="sui-settings-label">{{ Forminator.l10n.tab_integrations.applications }}</span>
+					<span class="sui-description">{{ Forminator.l10n.tab_integrations.applications_description }}</span>
+				</div>
+				<div id="forminator-formwiz-applications" class="sui-box-settings-col-2"></div>
+			</div>
+
+		</div>
+
+	</script>
+
 	<script type="text/template" id="appearance-color-grid-tpl">
 
 		<!-- FORM -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.form }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.form }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-form-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-picker"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-form-border">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-						<div class="wpmudev-picker"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-form" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 
 		<!-- LABELS -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.fields_label }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.labels }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-main-label">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.main }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-asterisk-label">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.asterisk }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-helper-label">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.description }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-validation-background wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.error_bg }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-validation-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.error_color }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-labels" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 
 		{[ if ( has_section ) { ]}
 		<!-- SECTION -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.section }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.section }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-title">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.title }}</label>
-						<div class="wpmudev-picker"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-subtitle">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.subtitle }}</label>
-						<div class="wpmudev-picker"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-4 color-grid-section-border-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-						<div class="wpmudev-picker"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-section" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		<!-- INPUT + TEXTAREA -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.input_textarea }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.input_textarea }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-bg wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-border wpmudev-not--flat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-placeholder">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.placeholder }}</label>
-					</div>
-
-					{[ if( has_date_datepicker ) { ]}
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-icon">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.icon_cal }}</label>
-					</div>
-					{[ } ]}
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-filled wpmudev-not--material wpmudev-not--flat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.filled }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-input-error">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.error }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-input" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 
 		{[ if( has_multi_checkbox || has_single_radio || has_gdpr ) { ]}
 		<!-- RADIO + CHECKBOX -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.radio_checkbox }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.radio_checkbox }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-radio-background wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-radio-border wpmudev-not--flat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-radio-icon">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.check_icon }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-radio-label">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.label }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-radio" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		{[ if( has_single_dropdown || has_dropdowns ) { ]}
 		<!-- SELECT -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.select }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.select }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-select-bg wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-select-border wpmudev-not--flat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-select-value">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-select-icon">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.icon }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-select" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		{[ if( has_single_dropdown || has_dropdowns ) { ]}
 		<!-- SELECT DROPDOWN -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.select_dropdown }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.dropdown }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-shadow wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.shadow }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-option-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.option_bg }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-option-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.option_color }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-search-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.search_background }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-search-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.search_border }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-dropdown-search-value">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.search_value }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-dropdown" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		{[ if( has_multi_multiselect ) { ]}
 		<!-- MULTI SELECT -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.multi_select }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.multi_select }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-multiselect-background wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-multiselect-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-multiselect-item-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.item_color }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-multiselect-item-background wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.item_bg }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-multiselect-item-border wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.item_border }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-multi_select" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		{[ if( has_date_datepicker ) { ]}
-		<!-- CALENDAR -->
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<!-- DATE CALENDAR -->
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.date_calendar }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-calendar" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.calendar }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-background wpmudev-not--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-header wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.header_bg }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-content wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.content_bg }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-arrows">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.nav_arrows }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-dweek">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.dweek }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-days-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.days_color }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-calendar-days-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.days_background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
 		{[ } ]}
 
 		{[ if ( has_upload ) { ]}
 		<!-- BUTTON UPLOAD -->
-		<div class="wpmudev-multiname wpmudev-palettes">
 
-			<div class="wpmudev-multiname--action">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.upload_button }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.upload }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-upload-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-upload-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-upload" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		<!-- BUTTON SUBMIT -->
 		{[ if( ! has_pagination ) { ]}
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.submit_button }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.submit }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-submit-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-submit-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-submit" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		<!-- PAGINATION TIMELINE -->
 		{[ if( has_pagination ) { ]}
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.pagination_timeline }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.timeline }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.dot_background }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-background-current">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.dot_background_current }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.dot_border }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-border-current wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.dot_border_current }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-step wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.timeline_step }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-dot-step-current wpmudev-only--material">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.timeline_step_current }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-text">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.timeline_text }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-text-current">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.timeline_text_current }}</label>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-timeline-border">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.timeline_border }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-timeline" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 		<!-- PAGINATION BUTTON -->
 		{[ if( has_pagination ) { ]}
-		<div class="wpmudev-multiname wpmudev-palettes">
+		<tr class="sui-accordion-item">
+			<td>{{ Forminator.l10n.tab_appearance.pagination_footer }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
 
-			<div class="wpmudev-multiname--action">
-
-				<div class="wpmudev-action--text">
-					<p>{{ Forminator.l10n.appearance.pagination_footer }}</p>
-				</div>
-
-				<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-			</div>
-
-			<div class="wpmudev-multiname--content">
-
-				<div class="wpmudev-row wpmudev-palettes">
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-previous-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.prev_background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-previous-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.prev_value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-next-background">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.next_background }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-next-color">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.next_value }}</label>
-						<div class="wpmudev-pickers"></div>
-					</div>
-
-					<div class="wpmudev-col col-12 col-sm-6 color-grid-pagination-border wpmudev-not--matflat">
-						<label class="wpmudev-label">{{ Forminator.l10n.appearance.border }}</label>
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		<tr class="sui-accordion-item-content">
+			<td><div class="sui-box">
+				<div id="forminator-formwiz-color-pagination_footer" class="sui-box-body"></div>
+			</div></td>
+		</tr>
 		{[ } ]}
 
 	</script>
 
 	<!-- Autofill -->
 	<script type="text/template" id="appearance-autofills-tpl">
-
-		{[ if (_.isEmpty(fields_with_autofill)) { ]}
-		<div class="wpmudev-row">
-			<div class="wpmudev-col col-12">
-				<label class="wpmudev-label">
-					{{ Forminator.l10n.autofill.no_autofill_fields_available }}
-				</label>
-			</div>
-		</div>
+		{[ if (_.isEmpty(fields_with_autofill) ) { ]}
+		<tr>
+			<td>
+				<div class="sui-notice sui-notice-error">
+					<p>{{ Forminator.l10n.autofill.no_autofill_fields_available }}</p>
+				</div>
+			</td>
+		</tr>
 		{[ } ]}
 
-		<div class="forminator-fields-autofill">
-			{[ _.each( fields_with_autofill, function( field_with_autofill, key ) { ]}
-			<div class="wpmudev-multiname {[ if( field_with_autofill.is_active ) { ]} wpmudev-is_active {[ } ]}">
+		{[ _.each( fields_with_autofill, function( field_with_autofill, key ) { ]}
+		<tr class="sui-accordion-item {[ if( field_with_autofill.is_active ) { ]} sui-accordion-item--open {[ } ]}">
+			<td>{{ field_with_autofill.label }}
+				<span class="sui-accordion-open-indicator">
+					<i class="sui-icon-chevron-down"></i>
+				</span>
+			</td>
+		</tr>
+		<tr class="sui-accordion-item-content {[ if( field_with_autofill.is_active ) { ]} sui-accordion-item--open {[ } ]}">
+			<td>
+				<div class="sui-box">
+					<div class="sui-box-body">
+						<div class="sui-row forminator-fields-autofill">
+							<div class="sui-col-md-8">
+								<label class="sui-label" for="forminator-autofill-provider-{{ field_with_autofill.element_id }}">{{ Forminator.l10n.autofill.source }}</label>
+								<select class="forminator-autofill-provider" data-element="{{ field_with_autofill.element_id }}" id="forminator-autofill-provider-{{ field_with_autofill.element_id }}">
+									<option value="">{{ Forminator.l10n.autofill.disable_autofill }}</option>
+									{[ _.each( field_with_autofill.autofill_providers, function( autofill_provider, provider_group_key ) { ]}
+									<optgroup label="{{autofill_provider.name}}">
+										{[ _.each( autofill_provider.attributes, function( attribute, attribute_key ) { ]}
+										<option value="{{attribute_key}}" {[ if( field_with_autofill.selected_provider.provider=== attribute_key ) { ]} selected="selected" {[ } ]}>{{attribute.name}}</option>
+										{[ }) ]}
+									</optgroup>
 
-				<div class="wpmudev-multiname--action">
-
-					<div class="wpmudev-action--text">
-						<p>{{ field_with_autofill.label }}</p>
-					</div>
-
-					<button class="wpmudev-action--button wpmudev-toggle-field"><span class="wpmudev-icon--plus" aria-hidden="true"></span><span class="wpmudev-text">{{ Forminator.l10n.appearance.open_field }}</span></button>
-
-				</div>
-
-				<div class="wpmudev-multiname--content">
-
-					<div class="wpmudev-row">
-
-						<div class="wpmudev-col col-12 col-sm-8">
-
-							<label class="wpmudev-label">{{ Forminator.l10n.autofill.source }}</label>
-
-							<select class="wpmudev-select forminator-autofill-provider" data-element="{{ field_with_autofill.element_id }}">
-								<option value="">{{ Forminator.l10n.autofill.disable_autofill }}</option>
-								{[ _.each( field_with_autofill.autofill_providers, function( autofill_provider, provider_group_key ) { ]}
-								<optgroup label="{{autofill_provider.name}}">
-									{[ _.each( autofill_provider.attributes, function( attribute, attribute_key ) { ]}
-									<option value="{{attribute_key}}" {[ if( field_with_autofill.selected_provider.provider === attribute_key ) { ]} selected="selected" {[ } ]}>{{attribute.name}}</option>
 									{[ }) ]}
-								</optgroup>
-								{[ }) ]}
-							</select>
-
+								</select>
+							</div>
+							<div class="sui-col-md-4">
+								<label class="sui-label" for="forminator-autofill-is-editable-{{ field_with_autofill.element_id }}">{{ Forminator.l10n.autofill.editable }}</label>
+								<select class="forminator-autofill-is-editable" data-element="{{ field_with_autofill.element_id }}" id="forminator-autofill-is-editable-{{ field_with_autofill.element_id }}">
+									<option value="no" {[ if( field_with_autofill.selected_provider.is_editable=== "no" ) { ]}selected="selected" {[ } ]}>{{Forminator.l10n.autofill.editable_no}}</option>
+									<option value="yes" {[ if( field_with_autofill.selected_provider.is_editable=== "yes" ) { ]}selected="selected" {[ } ]}>{{Forminator.l10n.autofill.editable_yes}}</option>
+								</select>
+							</div>
 						</div>
-
-						<div class="wpmudev-col col-12 col-sm-4">
-
-							<label class="wpmudev-label">{{ Forminator.l10n.autofill.editable }}</label>
-
-							<select class="wpmudev-select forminator-autofill-is-editable" data-element="{{ field_with_autofill.element_id }}">
-								<option value="no" {[ if( field_with_autofill.selected_provider.is_editable === "no" ) { ]}selected="selected" {[ } ]}>{{Forminator.l10n.autofill.editable_no}}</option>
-								<option value="yes" {[ if( field_with_autofill.selected_provider.is_editable === "yes" ) { ]}selected="selected" {[ } ]}>{{Forminator.l10n.autofill.editable_yes}}</option>
-							</select>
-
-						</div>
-
 					</div>
-
 				</div>
-
-			</div>
-			{[ }) ]}
-		</div>
-
+			</td>
+		</tr>
+		{[ }) ]}
 	</script>
 
 </div>

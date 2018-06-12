@@ -50,7 +50,7 @@ class Forminator_Core {
 	 * @return Forminator
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -87,6 +87,9 @@ class Forminator_Core {
 		// HACK: Add settings and entries page at the end of the list
 		if ( is_admin() ) {
 			$this->admin->add_entries_page();
+			if ( Forminator::is_addons_feature_enabled() ) {
+				$this->admin->add_integrations_page();
+			}
 			$this->admin->add_settings_page();
 		}
 
@@ -108,99 +111,101 @@ class Forminator_Core {
 	private function includes() {
 		// Abstracts
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-field.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-field.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-form-template.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-form-result.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-front-action.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-form-template.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-mail.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-front-action.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-payment-gateway.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-mail.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/abstracts/abstract-class-spam-protection.php' );
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-payment-gateway.php';
+		/* @noinspection PhpIncludeInspection */
+		include_once forminator_plugin_dir() . 'library/abstracts/abstract-class-spam-protection.php';
 
 		// Classes
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-loader.php' );
+		include_once forminator_plugin_dir() . 'library/class-loader.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-modules.php' );
+		include_once forminator_plugin_dir() . 'library/class-modules.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-form-fields.php' );
+		include_once forminator_plugin_dir() . 'library/class-form-fields.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-database-tables.php' );
+		include_once forminator_plugin_dir() . 'library/class-database-tables.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-upgrade.php' );
+		include_once forminator_plugin_dir() . 'library/class-upgrade.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-geo.php' );
+		include_once forminator_plugin_dir() . 'library/class-geo.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-protection.php' );
+		include_once forminator_plugin_dir() . 'library/class-protection.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-shortcode-generator.php' );
+		include_once forminator_plugin_dir() . 'library/class-shortcode-generator.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/class-export.php' );
+		include_once forminator_plugin_dir() . 'library/class-export.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/render/class-render-form.php' );
+		include_once forminator_plugin_dir() . 'library/render/class-render-form.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/gateways/class-paypal-express.php' );
+		include_once forminator_plugin_dir() . 'library/gateways/class-paypal-express.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/render/class-widget.php' );
+		include_once forminator_plugin_dir() . 'library/render/class-widget.php';
 
 		//Models
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-form-entry-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-form-entry-model.php';
 
 		// Helpers
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-core.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-core.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-modules.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-modules.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-forms.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-forms.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-fields.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-fields.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-google-fonts.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-google-fonts.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-mail.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-mail.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-currency.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-currency.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/helpers/helper-autofill.php' );
+		include_once forminator_plugin_dir() . 'library/helpers/helper-autofill.php';
 
 		//Model
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-base-form-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-base-form-model.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-custom-form-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-custom-form-model.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-form-field-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-form-field-model.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-poll-form-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-poll-form-model.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-quiz-form-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-quiz-form-model.php';
 		/* @noinspection PhpIncludeInspection */
-		include_once( forminator_plugin_dir() . 'library/model/class-form-views-model.php' );
+		include_once forminator_plugin_dir() . 'library/model/class-form-views-model.php';
 		if ( is_admin() ) {
 			/* @noinspection PhpIncludeInspection */
-			include_once( forminator_plugin_dir() . 'admin/abstracts/class-admin-page.php' );
+			include_once forminator_plugin_dir() . 'admin/abstracts/class-admin-page.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( forminator_plugin_dir() . 'admin/abstracts/class-admin-module.php' );
+			include_once forminator_plugin_dir() . 'admin/abstracts/class-admin-module.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( forminator_plugin_dir() . 'admin/classes/class-admin.php' );
+			include_once forminator_plugin_dir() . 'admin/classes/class-admin.php';
 			/* @noinspection PhpIncludeInspection */
 			if ( ! class_exists( 'WP_List_Table' ) ) {
 				/* @noinspection PhpIncludeInspection */
-				require_once( ABSPATH . 'wp-admin/includes/class-wp-screen.php' );//added
+				require_once ABSPATH . 'wp-admin/includes/class-wp-screen.php';//added
 				/* @noinspection PhpIncludeInspection */
-				require_once( ABSPATH . 'wp-admin/includes/screen.php' );//added
+				require_once ABSPATH . 'wp-admin/includes/screen.php';//added
 				/* @noinspection PhpIncludeInspection */
-				require_once( ABSPATH . 'wp-admin/includes/class-wp-list-table.php' );
+				require_once ABSPATH . 'wp-admin/includes/class-wp-list-table.php';
 				/* @noinspection PhpIncludeInspection */
-				require_once( ABSPATH . 'wp-admin/includes/template.php' );
+				require_once ABSPATH . 'wp-admin/includes/template.php';
 			}
 			/* @noinspection PhpIncludeInspection */
-			include_once( forminator_plugin_dir() . "library/model/class-form-entries-list-table.php" );
+			include_once forminator_plugin_dir() . 'library/model/class-form-entries-list-table.php';
 		}
 	}
 
@@ -252,8 +257,8 @@ class Forminator_Core {
 				$value = maybe_unserialize( $value[0] );
 				?>
                 <tr>
-                    <th><?php echo $value['label']; ?></th>
-                    <td><?php echo $value['value']; ?></td>
+                    <th><?php echo esc_html( $value['label'] ); ?></th>
+                    <td><?php echo esc_html( $value['value'] ); ?></td>
                 </tr>
 				<?php
 			}

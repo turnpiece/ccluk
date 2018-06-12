@@ -27,7 +27,7 @@ class Forminator_Form_Views_Model {
 	 * @return Forminator_Form_Views_Model
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
+		if ( is_null( self::$instance ) ) {
 			self::$instance = new self();
 		}
 
@@ -54,7 +54,7 @@ class Forminator_Form_Views_Model {
 	public function save_view( $form_id, $page_id, $ip ) {
 		global $wpdb;
 		$sql 		= "SELECT `view_id` FROM {$this->table_name} WHERE `form_id` = %d AND `page_id` = %d AND `ip` = %s AND `date_created` BETWEEN DATE_SUB(utc_timestamp(), INTERVAL 1 DAY) AND utc_timestamp()";
-		$view_id 	= $wpdb->get_var( $wpdb->prepare( $sql, $form_id, $page_id, $ip ) );
+		$view_id 	= $wpdb->get_var( $wpdb->prepare( $sql, $form_id, $page_id, $ip ) ); // WPCS: unprepared SQL ok. false positive
 		if ( $view_id ) {
 			$this->_update( $view_id, $wpdb );
 		} else {
@@ -123,7 +123,7 @@ class Forminator_Form_Views_Model {
 	public function delete_by_form( $form_id ) {
 		global $wpdb;
 		$sql = "DELETE FROM {$this->table_name} WHERE `form_id` = %d";
-		$wpdb->query( $wpdb->prepare( $sql, $form_id ) );
+		$wpdb->query( $wpdb->prepare( $sql, $form_id ) ); // WPCS: unprepared SQL ok. false positive
 	}
 
 	/**
@@ -172,7 +172,7 @@ class Forminator_Form_Views_Model {
 		global $wpdb;
 		$date_query = $this->_generate_date_query( $wpdb, $starting_date, $ending_date );
 		$sql 		= "SELECT SUM(`count`) FROM {$this->table_name} WHERE `form_id` = %d $date_query";
-		$counts 	= $wpdb->get_var( $wpdb->prepare( $sql, $form_id ) );
+		$counts 	= $wpdb->get_var( $wpdb->prepare( $sql, $form_id ) ); // WPCS: unprepared SQL ok. false positive
 
 		if ( $counts ) {
 			return $counts;
@@ -191,7 +191,7 @@ class Forminator_Form_Views_Model {
 	 *
 	 * @return string $date_query
 	 */
-	private function _generate_date_query( $wpdb, $starting_date = null, $ending_date = null, $prefix='', $clause = 'AND' ) {
+	private function _generate_date_query( $wpdb, $starting_date = null, $ending_date = null, $prefix = '', $clause = 'AND' ) {
 		$date_query = "";
 		if ( !is_null( $starting_date ) && !is_null( $ending_date ) && !empty( $starting_date ) && !empty( $ending_date ) ) {
 			$date_query = $wpdb->prepare( "$clause DATE_FORMAT($prefix`date_created`, '%d-%m-%Y') >= ? AND DATE_FORMAT($prefix`date_created`, '%d-%m-%Y') <= ?", $starting_date, $ending_date );
@@ -226,7 +226,7 @@ class Forminator_Form_Views_Model {
 			$sql_entries = "SELECT e.form_id, COUNT(1) AS entries FROM $entry_table_name e LEFT JOIN  {$wpdb->posts} p ON (p.`ID` = e.`form_id`) WHERE p.post_type = %s GROUP BY e.`form_id`";
 			$sql         = "SELECT v.form_id, ROUND( (( s.entries *100 )/ v.views), 1 ) AS conversion FROM ($sql_views) v LEFT JOIN ($sql_entries) s ON (s.form_id = v.form_id) WHERE v.views > 0 ORDER BY conversion DESC LIMIT 0, 1";
 
-			$sql = $wpdb->prepare( $sql, $form_type, $form_type );
+			$sql = $wpdb->prepare( $sql, $form_type, $form_type ); // WPCS: unprepared SQL ok. false positive
 		} else {
 			$date_query  = $this->_generate_date_query( $wpdb, $starting_date, $ending_date, 'd.', 'WHERE' );
 			$sql_views   = "SELECT d.form_id, SUM(d.`count`) AS views FROM {$this->table_name} d $date_query GROUP BY d.`form_id`";
@@ -260,7 +260,7 @@ class Forminator_Form_Views_Model {
 		if ( !is_null( $form_type ) && !empty( $form_type ) ) {
 			$date_query = $this->_generate_date_query( $wpdb, $starting_date, $ending_date, 'd.' );
 			$sql 		= "SELECT d.`form_id`, SUM(d.`count`) as views FROM  {$this->table_name} d LEFT JOIN {$wpdb->posts} p ON (p.`ID` = d.`form_id`) WHERE p.post_type = %s $date_query GROUP BY d.`form_id` ORDER BY views DESC LIMIT 0,1";
-			$sql 		= $wpdb->prepare( $sql, $form_type );
+			$sql 		= $wpdb->prepare( $sql, $form_type ); // WPCS: unprepared SQL ok. false positive
 		} else {
 			$date_query = $this->_generate_date_query( $wpdb, $starting_date, $ending_date, 'd.', 'WHERE' );
 			$sql 		= "SELECT d.`form_id`, SUM(d.`count`) as views FROM  {$this->table_name} d $date_query GROUP BY d.`form_id` ORDER BY views DESC LIMIT 0,1";

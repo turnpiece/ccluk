@@ -32,7 +32,7 @@ class Forminator_Autofill_Loader {
 	 * In case we want disable addons that have bad pattern or behaviour or still in pipeline
 	 *
 	 * @since   1.0.5
-	 * @example ['BANNED_PROVIDER_SLUG']
+	 * @example {['BANNED_PROVIDER_SLUG','BANNED_PROVIDER_SLUG_2']}
 	 *
 	 * @var array
 	 */
@@ -73,7 +73,7 @@ class Forminator_Autofill_Loader {
 	private $autofill_providers_names = array();
 
 	public static function get_instance() {
-		if ( self::$_instance == null ) {
+		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
 
@@ -103,7 +103,7 @@ class Forminator_Autofill_Loader {
 			return false;
 		}
 
-		if ( in_array( $autofill_instance->get_slug(), $this->_banned_providers ) ) {
+		if ( in_array( $autofill_instance->get_slug(), $this->_banned_providers, true ) ) {
 			// debug purpose only
 //			error_log( 'Autofill Provider for ' . $autofill_instance->get_slug() . ' is banned' );
 			return false;
@@ -111,6 +111,8 @@ class Forminator_Autofill_Loader {
 
 		$this->autofill_providers[ $autofill_instance->get_slug() ]        = $autofill_instance;
 		$this->autofill_providers_groups[ $autofill_instance->get_slug() ] = $autofill_instance->get_name();
+
+		return true;
 	}
 
 	/**
@@ -118,10 +120,10 @@ class Forminator_Autofill_Loader {
 	 *
 	 * @since   1.0.5
 	 *
-	 * @example [
+	 * @example {
 	 * 'simple'.'simple_text' => 'Simple Text',
 	 * 'PROVIDER_SLUG'.'ATTRIBUTE_SLUG' => 'ATTRIBUTE NICE NAME',
-	 * ]
+	 * }
 	 *
 	 */
 	private function try_build_autofill_providers_names() {
@@ -164,7 +166,7 @@ class Forminator_Autofill_Loader {
 	 * @since 1.0.5
 	 *
 	 * @example
-	 * [
+	 * {
 	 *  `SLUG` => [
 	 *                  'name' => `NAME`,
 	 *                  'attributes' => [
@@ -172,7 +174,7 @@ class Forminator_Autofill_Loader {
 	 *                      [`SLUG.ATTRIBUTE` => [name : TRANSLATE_ATTRIBUTE]`,
 	 *                  ]
 	 *              ]
-	 * ]
+	 * ...}
 	 *
 	 * @param $slug_attributes
 	 *
@@ -207,7 +209,7 @@ class Forminator_Autofill_Loader {
 			$new_attribute = false;
 			if ( isset( $this->autofill_providers_names[ $slug_attribute ] ) && ! empty( $this->autofill_providers_names[ $slug_attribute ] ) ) {
 				$new_attribute = array(
-					'name' => $provider_short_name . ' - ' . $this->autofill_providers_names[ $slug_attribute ],
+					'name' => $this->autofill_providers_names[ $slug_attribute ],
 				);
 			}
 
@@ -215,7 +217,7 @@ class Forminator_Autofill_Loader {
 				continue;
 			}
 
-			if ( ! in_array( $slug, array_keys( $grouped_autofill_providers ) ) ) {
+			if ( ! in_array( $slug, array_keys( $grouped_autofill_providers ), true ) ) {
 				$grouped_autofill_providers[ $slug ] = array(
 					'name'       => $this->autofill_providers_groups[ $slug ],
 					'attributes' => array(),
@@ -258,13 +260,13 @@ class Forminator_Autofill_Loader {
 		if ( ! $provider ) {
 			return null;
 		}
-		if ( in_array( $provider->get_slug(), $this->_banned_providers ) ) {
+		if ( in_array( $provider->get_slug(), $this->_banned_providers, true ) ) {
 			// debug purpose only
 //			error_log( 'Autofill Provider for ' . $autofill_instance->get_slug() . ' is banned' );
 
 			return null;
 		}
-		if ( ! in_array( $provider->get_slug(), self::$inited_providers ) ) {
+		if ( ! in_array( $provider->get_slug(), self::$inited_providers, true ) ) {
 			$provider->init();
 			self::$inited_providers[] = $provider->get_slug();
 

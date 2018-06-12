@@ -1,0 +1,22 @@
+@include body-class {
+
+	.sui-row-with-sidenav {
+
+		.sui-sidenav {
+
+			.sui-vertical-tabs {
+
+				.sui-vertical-tab {
+					
+					&:not(.done):not(.current) i {
+						display: none;
+					}
+
+					&.done i:before {
+						color: $green;
+					}
+				}
+			}
+		}
+	}
+}

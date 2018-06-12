@@ -65,24 +65,24 @@ class Forminator_Captcha extends Forminator_Field {
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
 				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN )
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
 			),
 			array(
-				'id' => 'invisible-captcha',
-				'type' => 'Toggle',
-				'name' => 'invisible_captcha',
+				'id'         => 'invisible-captcha',
+				'type'       => 'Toggle',
+				'name'       => 'invisible_captcha',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Invisible reCAPTCHA', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
+						'value'      => "true",
+						'label'      => __( 'Invisible reCAPTCHA', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
 			),
 		);
 	}
@@ -123,14 +123,12 @@ class Forminator_Captcha extends Forminator_Field {
 	 */
 	public function admin_html() {
 		$path = forminator_plugin_url() . 'assets/img/google-recaptcha.png';
-		$retinа = forminator_plugin_url() . 'assets/img/google-recaptcha@2x.png';
+		$retina = forminator_plugin_url() . 'assets/img/google-recaptcha@2x.png';
 
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			<figure class="wpmudev-captcha"><img src="' . $path . '" srcset="' . $path . ' 1x, ' . $retinа . ', 2x" /></figure>
-		</div>';
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		<img src="' . $path . '" srcset="' . $path . ' 1x, ' . $retina . ', 2x" class="sui-image">';
 	}
 
 	public function is_invisible_recaptcha( $field ) {
@@ -173,7 +171,7 @@ class Forminator_Captcha extends Forminator_Field {
 	 *
 	 * @return bool
 	 */
-	public function is_available($field) {
+	public function is_available( $field ) {
 		$key = get_option( "forminator_captcha_key", false );
 
 		if ( ! $key ) {

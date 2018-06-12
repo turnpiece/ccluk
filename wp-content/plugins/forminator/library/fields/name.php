@@ -75,23 +75,13 @@ class Forminator_Name extends Forminator_Field {
 			),
 
 			array(
-				'id'         => 'separator-1',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'size'       => 12,
-				'className'  => 'separator-field',
-			),
-
-			array(
-				'id'          => 'multiple-name',
-				'type'        => 'ToggleContainer',
-				'name'        => 'multiple_name',
-				'size'        => 12,
-				'className'   => 'toggle-container',
-				'hide_label'  => true,
-				'hasOpposite' => '#single-name-field-label, #single-name-placeholder, #single-name-description',
-				'values'      => array(
+				'id'			=> 'multiple-name',
+				'type'			=> 'ToggleContainer',
+				'name'			=> 'multiple_name',
+				'clean'			=> true,
+				'hide_label'	=> true,
+				'hasOpposite'	=> '#single-name-field-label, #single-name-placeholder, #single-name-description',
+				'values'		=> array(
 					array(
 						'value' => "true",
 						'label' => __( 'Use multiple name fields', Forminator::DOMAIN ),
@@ -247,15 +237,6 @@ class Forminator_Name extends Forminator_Field {
 			),
 
 			array(
-				'id'         => 'separator-3',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'size'       => 12,
-				'className'  => 'separator-field',
-			),
-
-			array(
 				'id'         => 'single-name-field-label',
 				'type'       => 'Text',
 				'name'       => 'field_label',
@@ -327,10 +308,10 @@ class Forminator_Name extends Forminator_Field {
 		$name_providers = apply_filters( 'forminator_field_' . $this->slug . '_autofill', array(), $this->slug );
 
 		//multi name
-		$prefix_providers = apply_filters( 'forminator_field_' . $this->slug . '_prefix' . '_autofill', array(), $this->slug . '_prefix' );
-		$fname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_first_name' . '_autofill', array(), $this->slug . '_first_name' );
-		$mname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_middle_name' . '_autofill', array(), $this->slug . '_middle_name' );
-		$lname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_last_name' . '_autofill', array(), $this->slug . '_last_name' );
+		$prefix_providers = apply_filters( 'forminator_field_' . $this->slug . '_prefix_autofill', array(), $this->slug . '_prefix' );
+		$fname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_first_name_autofill', array(), $this->slug . '_first_name' );
+		$mname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_middle_name_autofill', array(), $this->slug . '_middle_name' );
+		$lname_providers  = apply_filters( 'forminator_field_' . $this->slug . '_last_name_autofill', array(), $this->slug . '_last_name' );
 
 		$autofill_settings = array(
 			'name'             => array(
@@ -362,82 +343,86 @@ class Forminator_Name extends Forminator_Field {
 	public function admin_html() {
 		return '{[ if( field.multiple_name === "true" || field.multiple_name === true ) { ]}
 			{[ if( field.prefix || field.fname ) { ]}
-				<div class="wpmudev-form-field--grouped">
+				<div class="sui-row">
 					{[ if( field.prefix ) { ]}
-						<div class="wpmudev-form-field--group">
+						{[ if( field.fname ) { ]}
+						<div class="sui-col-md-6">
+						{[ } else { ]}
+						<div class="sui-col">
+						{[ } ]}
 							{[ if( field.prefix_label !== "" ) { ]}
-								<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.prefix_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+								<label class="sui-label">{{ encodeHtmlEntity( field.prefix_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 							{[ } ]}
-							<select class="wpmudev-select" style="width: 100%;" {{ field.required ? "required" : "" }}>
+							<select>
 								<option>Mr</option>
 								<option>Mrs</option>
 								<option>Ms</option>
 								<option>Miss</option>
 							</select>
 							{[ if( field.prefix_description !== "" ) { ]}
-							<div class="wpmudev-group--info">
-								<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.prefix_description ) }}</span>
-							</div>
+								<span class="sui-description">{{ encodeHtmlEntity( field.prefix_description ) }}</span>
 							{[ } ]}
 						</div>
 					{[ } ]}
 					{[ if( field.fname ) { ]}
-						<div class="wpmudev-form-field--group">
+						{[ if( field.prefix ) { ]}
+						<div class="sui-col-md-6">
+						{[ } else { ]}
+						<div class="sui-col">
+						{[ } ]}
 							{[ if( field.fname_label !== "" ) { ]}
-								<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.fname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+								<label class="sui-label">{{ encodeHtmlEntity( field.fname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 							{[ } ]}
-							<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.fname_placeholder ) }}" {{ field.required ? "required" : "" }}>
+							<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.fname_placeholder ) }}" {{ field.required ? "required" : "" }}>
 							{[ if( field.fname_description !== "" ) { ]}
-							<div class="wpmudev-group--info">
-								<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.fname_description ) }}</span>
-							</div>
+								<span class="sui-description">{{ encodeHtmlEntity( field.fname_description ) }}</span>
 							{[ } ]}
 						</div>
 					{[ } ]}
 				</div>
 			{[ } ]}
 			{[ if( field.mname || field.lname ) { ]}
-				<div class="wpmudev-form-field--grouped">
+				<div class="sui-row">
 					{[ if( field.mname ) { ]}
-						<div class="wpmudev-form-field--group">
+						{[ if( field.lname ) { ]}
+						<div class="sui-col-md-6">
+						{[ } else { ]}
+						<div class="sui-col">
+						{[ } ]}
 							{[ if( field.mname_label !== "" ) { ]}
-								<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.mname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+								<label class="sui-label">{{ encodeHtmlEntity( field.mname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 							{[ } ]}
-							<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.mname_placeholder ) }}" {{ field.required ? "required" : "" }}>
+							<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.mname_placeholder ) }}" {{ field.required ? "required" : "" }}>
 							{[ if( field.mname_description !== "" ) { ]}
-							<div class="wpmudev-group--info">
-								<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.mname_description ) }}</span>
-							</div>
+								<span class="sui-description">{{ encodeHtmlEntity( field.mname_description ) }}</span>
 							{[ } ]}
 						</div>
 					{[ } ]}
 					{[ if( field.lname ) { ]}
-						<div class="wpmudev-form-field--group">
+						{[ if( field.mname ) { ]}
+						<div class="sui-col-md-6">
+						{[ } else { ]}
+						<div class="sui-col">
+						{[ } ]}
 							{[ if( field.lname_label !== "" ) { ]}
-								<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.lname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+								<label class="sui-label">{{ encodeHtmlEntity( field.lname_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 							{[ } ]}
-							<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.lname_placeholder ) }}" {{ field.required ? "required" : "" }}>
+							<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.lname_placeholder ) }}" {{ field.required ? "required" : "" }}>
 							{[ if( field.lname_description !== "" ) { ]}
-							<div class="wpmudev-group--info">
-								<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.lname_description ) }}</span>
-							</div>
+								<span class="sui-description">{{ encodeHtmlEntity( field.lname_description ) }}</span>
 							{[ } ]}
 						</div>
 					{[ } ]}
 				</div>
 			{[ } ]}
 		{[ } else { ]}
-			<div class="wpmudev-form-field--group">
-				{[ if( field.field_label !== "" ) { ]}
-					<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-				{[ } ]}
-				<input type="text" class="wpmudev-input" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
-				{[ if( field.description !== "" ) { ]}
-				<div class="wpmudev-group--info">
-					<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
-				</div>
-				{[ } ]}
-			</div>
+			{[ if( field.field_label !== "" ) { ]}
+				<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+			{[ } ]}
+			<input type="text" class="sui-form-control" placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+			{[ if( field.description !== "" ) { ]}
+				<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
+			{[ } ]}
 		{[ } ]}';
 	}
 
@@ -451,17 +436,18 @@ class Forminator_Name extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_simple( $field, $design ) {
-		$id				= $name = self::get_property( 'element_id', $field );
-		$required		= self::get_property( 'required', $field, false );
-		$placeholder	= $this->sanitize_value( self::get_property( 'placeholder', $field ) );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
+		$required    = self::get_property( 'required', $field, false );
+		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
 
-		$name_attr       = array(
-			'type'				=> 'text',
-			'class'				=> 'forminator-name--field forminator-input',
-			'name'				=> $name,
-			'id'				=> $id,
-			'placeholder'		=> $placeholder,
-			'aria-labelledby'	=> 'forminator-label-' . $id,
+		$name_attr = array(
+			'type'            => 'text',
+			'class'           => 'forminator-name--field forminator-input',
+			'name'            => $name,
+			'id'              => $id,
+			'placeholder'     => $placeholder,
+			'aria-labelledby' => 'forminator-label-' . $id,
 		);
 
 		$autofill_markup = $this->get_element_autofill_markup_attr( $id, $this->form_settings );
@@ -477,13 +463,15 @@ class Forminator_Name extends Forminator_Field {
 	 * @since 1.0
 	 *
 	 * @param $field
+	 * @param $design
 	 *
 	 * @return string
 	 */
 	public function get_multi_first_row( $field, $design ) {
 		$cols     = 12;
 		$html     = '';
-		$id       = $name = self::get_property( 'element_id', $field );
+		$id       = self::get_property( 'element_id', $field );
+		$name     = $id;
 		$required = self::get_property( 'required', $field, false );
 		$prefix   = self::get_property( 'prefix', $field, false );
 		$fname    = self::get_property( 'fname', $field, false );
@@ -532,11 +520,13 @@ class Forminator_Name extends Forminator_Field {
 				}
 				$html .= self::create_simple_select( $prefix_data, $options, self::get_property( 'prefix_placeholder', $field ), self::get_property( 'prefix_description', $field ) );
 			} else {
-				$html .= self::create_select( $prefix_data,
-				                              self::get_property( 'prefix_label', $field ),
-				                              $options,
-				                              self::get_property( 'prefix_placeholder', $field ),
-				                              self::get_property( 'prefix_description', $field ) );
+				$html .= self::create_select(
+					$prefix_data,
+					self::get_property( 'prefix_label', $field ),
+					$options,
+					self::get_property( 'prefix_placeholder', $field ),
+					self::get_property( 'prefix_description', $field )
+				);
 			}
 
 			$html .= '</div>';
@@ -552,12 +542,12 @@ class Forminator_Name extends Forminator_Field {
 			 * Create first name field
 			 */
 			$first_name = array(
-				'type'				=> 'text',
-				'class'				=> 'forminator-input',
-				'name'				=> $id . '-first-name',
-				'id'				=> $id . '-first-name',
-				'placeholder'		=> $this->sanitize_value( self::get_property( 'fname_placeholder', $field ) ),
-				'aria-labelledby'	=> 'forminator-label-' . $id . '-first-name'
+				'type'            => 'text',
+				'class'           => 'forminator-input',
+				'name'            => $id . '-first-name',
+				'id'              => $id . '-first-name',
+				'placeholder'     => $this->sanitize_value( self::get_property( 'fname_placeholder', $field ) ),
+				'aria-labelledby' => 'forminator-label-' . $id . '-first-name',
 			);
 
 			$autofill_markup = $this->get_element_autofill_markup_attr( $first_name['id'], $this->form_settings );
@@ -594,7 +584,8 @@ class Forminator_Name extends Forminator_Field {
 	public function get_multi_second_row( $field, $design ) {
 		$cols     = 12;
 		$html     = '';
-		$id       = $name = self::get_property( 'element_id', $field );
+		$id       = self::get_property( 'element_id', $field );
+		$name     = $id;
 		$required = self::get_property( 'required', $field, false );
 		$mname    = self::get_property( 'mname', $field, false );
 		$lname    = self::get_property( 'lname', $field, false );
@@ -614,12 +605,12 @@ class Forminator_Name extends Forminator_Field {
 			 * Create middle name field
 			 */
 			$middle_name = array(
-				'type'				=> 'text',
-				'class'				=> 'forminator-input',
-				'name'				=> $id . '-middle-name',
-				'id'				=> $id . '-middle-name',
-				'placeholder'		=> $this->sanitize_value( self::get_property( 'mname_placeholder', $field ) ),
-				'aria-labelledby'	=> 'forminator-label-' . $id . '-middle-name'
+				'type'            => 'text',
+				'class'           => 'forminator-input',
+				'name'            => $id . '-middle-name',
+				'id'              => $id . '-middle-name',
+				'placeholder'     => $this->sanitize_value( self::get_property( 'mname_placeholder', $field ) ),
+				'aria-labelledby' => 'forminator-label-' . $id . '-middle-name',
 			);
 
 			$html .= '<div class="forminator-row forminator-row--inner">';
@@ -641,12 +632,12 @@ class Forminator_Name extends Forminator_Field {
 			 * Create last name field
 			 */
 			$last_name = array(
-				'type'				=> 'text',
-				'class'				=> 'forminator-input',
-				'name'				=> $id . '-last-name',
-				'id'				=> $id . '-last-name',
-				'placeholder'		=> $this->sanitize_value( self::get_property( 'lname_placeholder', $field ) ),
-				'aria-labelledby'	=> 'forminator-label-' . $id . '-last-name'
+				'type'            => 'text',
+				'class'           => 'forminator-input',
+				'name'            => $id . '-last-name',
+				'id'              => $id . '-last-name',
+				'placeholder'     => $this->sanitize_value( self::get_property( 'lname_placeholder', $field ) ),
+				'aria-labelledby' => 'forminator-label-' . $id . '-last-name',
 			);
 
 			$autofill_markup = $this->get_element_autofill_markup_attr( $id . '-last-name', $this->form_settings );

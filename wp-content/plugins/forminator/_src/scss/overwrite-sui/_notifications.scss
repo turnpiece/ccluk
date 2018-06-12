@@ -1,0 +1,18 @@
+@include body-class {
+
+	.sui-notice {
+		margin: $sui-gutter/2 0;
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include media( max-width, md ) {
+			margin: $sui-gutter-md/2 0;
+		}
+	}
+}

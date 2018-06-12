@@ -1,60 +1,27 @@
-<?php
-$path = forminator_plugin_dir();
+<div class="sui-box">
 
-$icon_close = $path . "assets/icons/admin-icons/close.php";
-$hero_happy = $path . "assets/icons/forminator-icons/hero-happy.php";
-$hero_face = $path . "assets/icons/forminator-icons/hero-face.php";
-?>
+	<div class="sui-box-header">
 
-<div class="wpmudev-row">
+		<h2 class="sui-box-title"><?php esc_html_e( "Welcome to Forminator", Forminator::DOMAIN ); ?></h2>
 
-	<div class="wpmudev-col col-12">
+		<div class="sui-actions-right">
 
-		<div id="forminator-dashboard-box--welcome" class="wpmudev-box wpmudev-box--hero wpmudev-can--close" data-nonce="<?php echo wp_create_nonce('forminator_dismiss_welcome'); ?>">
+			<button class="sui-button"><?php esc_html_e( "Close", Forminator::DOMAIN ); ?></button>
 
-			<div class="wpmudev-box-header">
+		</div>
 
-				<div class="wpmudev-header--text">
+	</div>
 
-					<h2 class="wpmudev-title"><?php _e( "Welcome to Forminator", Forminator::DOMAIN ); ?></h2>
+	<div class="sui-box-body">
 
-				</div>
+		<h3 class="sui-box-title"><?php esc_html_e( "Are you ready to take your forms to the next level?", Forminator::DOMAIN ); ?></h3>
 
-				<div class="wpmudev-header--action">
+		<p><?php esc_html_e( "With Forminator you can create forms, quizzes and polls to use anywhere on your website.", Forminator::DOMAIN ); ?></p>
 
-					<button class="wpmudev-box--action wpmudev-action-close" aria-hidden="true"><span class="wpmudev-icon--close"></span></button>
+		<p><?php esc_html_e( "Pick what kind of form type you want to create below to get started.", Forminator::DOMAIN ); ?></p>
 
-					<button class="wpmudev-sr-only"><?php _e( "Close box", Forminator::DOMAIN ); ?></button>
+		<p><button class="sui-button sui-button-primary wpmudev-open-modal" data-modal="custom_forms"><?php esc_html_e( "Create New Form", Forminator::DOMAIN ); ?></button></p>
 
-				</div>
+	</div>
 
-			</div>
-
-			<div class="wpmudev-box-section">
-
-				<div class="wpmudev-hero--image" aria-hidden="true">
-
-					<div class="wpmudev-image--wrap wpmudev-image--desktop"><?php include( $hero_happy ); ?></div>
-					<div class="wpmudev-image--wrap wpmudev-image--mobile"><?php include( $hero_face ); ?></div>
-
-				</div>
-
-				<div class="wpmudev-hero--text">
-
-					<h2 class="wpmudev-title"><?php _e( "Are you ready to take your forms to the next level?", Forminator::DOMAIN ); ?></h2>
-
-					<p><?php _e( "With Forminator you can create forms, quizzes and polls to use anywhere on your website.", Forminator::DOMAIN ); ?></p>
-
-					<p><?php _e( "Pick what kind of form type you want to create below to get started.", Forminator::DOMAIN ); ?></p>
-
-					<p><button class="wpmudev-button wpmudev-button-blue wpmudev-open-modal" data-modal="custom_forms"><?php _e( "Create New Form", Forminator::DOMAIN ); ?></button></p>
-
-				</div>
-
-			</div>
-
-		</div><?php // .wpmudev-box ?>
-
-	</div><?php // .wpmudev-col ?>
-
-</div><?php // .wpmudev-row ?>
+</div>

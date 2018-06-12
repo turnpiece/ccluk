@@ -1,1 +1,1 @@
-!function(t){formintorjs.define(["admin/settings/text"],function(t){return t.extend({multiple:!1,className:"wpmudev-option",get_field_html:function(){return'<div class="wpmudev-option--half"></div>'}})})}(jQuery);
+!function(e){formintorjs.define(["admin/settings/text"],function(e){return e.extend({multiple:!1,className:"sui-form-field",get_field_html:function(){return'<div class="fui-row-double"></div>'}})})}(jQuery);

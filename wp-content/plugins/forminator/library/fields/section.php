@@ -58,39 +58,39 @@ class Forminator_Section extends Forminator_Field {
 	 * @return array
 	 */
     public function load_settings( $settings = array() ) {
-        return array(
-            array(
-				'id' => 'section-title',
-				'type' => 'Text',
-				'name' => 'section_title',
-				'hide_label' => false,
-				'label'	=> __( 'Section title', Forminator::DOMAIN )
-            ),
+	    return array(
+		    array(
+			    'id'         => 'section-title',
+			    'type'       => 'Text',
+			    'name'       => 'section_title',
+			    'hide_label' => false,
+			    'label'      => __( 'Section title', Forminator::DOMAIN ),
+		    ),
 
-            array(
-				'id' => 'section-subtitle',
-				'type' => 'Text',
-				'name' => 'section_subtitle',
-				'hide_label' => false,
-				'label'	=> __( 'Section subtitle', Forminator::DOMAIN )
-            ),
+		    array(
+			    'id'         => 'section-subtitle',
+			    'type'       => 'Text',
+			    'name'       => 'section_subtitle',
+			    'hide_label' => false,
+			    'label'      => __( 'Section subtitle', Forminator::DOMAIN ),
+		    ),
 
-            array(
-				'id' => 'section-border',
-				'type' => 'Toggle',
-				'name' => 'section_border',
-				'hide_label' => true,
-				//'default_value' => "false",
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Section with border', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
-			),
-        );
-	}
+		    array(
+			    'id'         => 'section-border',
+			    'type'       => 'Toggle',
+			    'name'       => 'section_border',
+			    'hide_label' => true,
+			    //'default_value' => "false",
+			    'values'     => array(
+				    array(
+					    'value'      => "true",
+					    'label'      => __( 'Section with border', Forminator::DOMAIN ),
+					    'labelSmall' => "true",
+				    ),
+			    ),
+		    ),
+	    );
+    }
 
 	/**
 	 * Field defaults
@@ -100,8 +100,8 @@ class Forminator_Section extends Forminator_Field {
 	 */
 	public function defaults() {
 		return array(
-            'section_title'     => __( 'Form Section', Forminator::DOMAIN ),
-            'section_border'    => "false"
+			'section_title'  => __( 'Form Section', Forminator::DOMAIN ),
+			'section_border' => "false",
 		);
 	}
 
@@ -129,13 +129,13 @@ class Forminator_Section extends Forminator_Field {
 	 */
 	public function admin_html() {
         return '{[ if( field.section_title !== "" || field.section_subtitle !== "" ) { ]}
-            <div class="wpmudev-form-field--group">
-                <label class="wpmudev-group--section_title">{{ encodeHtmlEntity( field.section_title ) }}</label>
-                <label class="wpmudev-group--section_subtitle">{{ encodeHtmlEntity( field.section_subtitle ) }}</label>
-                {[ if( field.section_border == "true" ) { ]}
-                <hr />
-                {[ } ]}
-            </div>
+			{[ if( field.section_title !== "" ) { ]}
+				<h3>{{ encodeHtmlEntity( field.section_title ) }}</h3>
+			{[ } ]}
+			{[ if( field.section_subtitle !== "" ) { ]}
+				<h4>{{ encodeHtmlEntity( field.section_subtitle ) }}</h4>
+			{[ } ]}
+			{[ if( field.section_border == "true" ) { ]}<hr />{[ } ]}
         {[ } ]}';
     }
 
@@ -149,28 +149,29 @@ class Forminator_Section extends Forminator_Field {
 	 * @return mixed
 	 */
 	public function markup( $field, $settings = array() ) {
-        $this->field = $field;
-		$id = $name  = self::get_property( 'element_id', $field );
+		$this->field = $field;
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
 		$id          = $id . '-field';
-        $required    = self::get_property( 'required', $field, false );
-        $title       = self::get_property( 'section_title', $field );
-        $subtitle    = self::get_property( 'section_subtitle', $field );
-        $type        = self::get_property( 'section_type', $field );
-        $border	     = self::get_property( 'section_border', $field, false );
-		$border 	 = filter_var( $border, FILTER_VALIDATE_BOOLEAN );
+		$required    = self::get_property( 'required', $field, false );
+		$title       = self::get_property( 'section_title', $field );
+		$subtitle    = self::get_property( 'section_subtitle', $field );
+		$type        = self::get_property( 'section_type', $field );
+		$border      = self::get_property( 'section_border', $field, false );
+		$border      = filter_var( $border, FILTER_VALIDATE_BOOLEAN );
 
-        $html = '<div class="forminator-break">';
+		$html = '<div class="forminator-break">';
 
 		if ( ! empty( $title ) ) {
 			$title = $this->sanitize_output( $title );
-			$html .= sprintf( '<h2 class="forminator-title">%s</h2>', $title );
+			$html  .= sprintf( '<h2 class="forminator-title">%s</h2>', $title );
 		} else {
 			$html .= '';
-        }
+		}
 
-        if ( ! empty( $subtitle ) ) {
+		if ( ! empty( $subtitle ) ) {
 			$subtitle = $this->sanitize_output( $subtitle );
-			$html .= sprintf( '<h3 class="forminator-subtitle">%s</h3>', $subtitle );
+			$html     .= sprintf( '<h3 class="forminator-subtitle">%s</h3>', $subtitle );
 		} else {
 			$html .= '';
 		}
@@ -188,6 +189,9 @@ class Forminator_Section extends Forminator_Field {
 	 * Return sanitized form data
 	 *
 	 * @since 1.0
+	 *
+	 * @param $content
+	 *
 	 * @return mixed
 	 */
 	public function sanitize_output( $content ) {

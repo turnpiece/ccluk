@@ -24,7 +24,7 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 	 * @since 1.0
 	 * @return self
 	 */
-	public static function model( $class_name = __CLASS__ ) {
+	public static function model( $class_name = __CLASS__ ) { // phpcs:ignore
 		return parent::model( $class_name );
 	}
 
@@ -39,15 +39,15 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 	 * @return bool|Forminator_Base_Form_Model
 	 */
 	public function load_preview( $id, $data ) {
-		$formModel = $this->load( $id, true );
+		$form_model = $this->load( $id, true );
 
 		// If bool, abort
-		if ( is_bool( $formModel ) ) {
+		if ( is_bool( $form_model ) ) {
 			return false;
 		}
 
-		$formModel->clearFields();
-		$formModel->setVarInArray( 'name', 'formName', $data );
+		$form_model->clearFields();
+		$form_model->setVarInArray( 'name', 'formName', $data );
 
 		//build the field
 		$fields = array();
@@ -59,7 +59,7 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 		//build the settings
 		if ( isset( $data['settings'] ) ) {
 			$settings            = $data['settings'];
-			$formModel->settings = $settings;
+			$form_model->settings = $settings;
 		}
 
 		// Set fields
@@ -68,12 +68,12 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 			$field->formID = isset( $f['wrapper_id'] ) ? $f['wrapper_id'] : $f['title'];
 			$field->slug   = isset( $f['element_id'] ) ? $f['element_id'] : $f['title'];
 			$field->import( $f );
-			$formModel->addField( $field );
+			$form_model->addField( $field );
 		}
 
-		$formModel->check_access = false;
+		$form_model->check_access = false;
 
-		return $formModel;
+		return $form_model;
 	}
 
 	/**
@@ -92,7 +92,7 @@ class Forminator_Poll_Form_Model extends Forminator_Base_Form_Model {
 			$settings = $this->settings;
 			$user_ip  = Forminator_Geo::get_user_ip();
 			if ( isset( $settings['enable-votes-limit'] ) ) {
-				if ( ! empty( $settings['enable-votes-limit'] ) && $settings['enable-votes-limit'] == 'true' ) {
+				if ( ! empty( $settings['enable-votes-limit'] ) && 'true' === $settings['enable-votes-limit'] ) {
 					if ( isset( $settings['vote_limit_input'] ) ) {
 						$duration           = $settings['vote_limit_input'];
 						$vote_limit_options = 'm';

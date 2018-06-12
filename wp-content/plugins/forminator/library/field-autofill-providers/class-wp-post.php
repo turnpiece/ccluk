@@ -3,7 +3,7 @@
 class Forminator_WP_Post_Autofill_Provider extends Forminator_Autofill_Provider_Abstract {
 
 	protected $_slug       = 'wp_post';
-	protected $_name       = 'Wordpress Post';
+	protected $_name       = 'WordPress Post';
 	protected $_short_name = 'WP Post';
 
 	/**
@@ -84,7 +84,7 @@ class Forminator_WP_Post_Autofill_Provider extends Forminator_Autofill_Provider_
 	 * @return Forminator_Autofill_Provider_Interface|Forminator_WP_Post_Autofill_Provider|null
 	 */
 	public static function get_instance() {
-		if ( self::$_instance == null ) {
+		if ( is_null( self::$_instance ) ) {
 			self::$_instance = new self();
 		}
 
@@ -107,8 +107,7 @@ class Forminator_WP_Post_Autofill_Provider extends Forminator_Autofill_Provider_
 					$post_object = get_post( $post_id );
 					// make sure its wp_post
 					if ( $post_object instanceof WP_Post ) {
-						// set global $post as $post_object retrieved from `get_post` for next usage
-						$post = $post_object;
+						$this->wp_post = $post_object;
 					}
 				}
 			}

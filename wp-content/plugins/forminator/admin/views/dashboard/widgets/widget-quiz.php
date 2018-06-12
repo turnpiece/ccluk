@@ -1,138 +1,63 @@
-<?php
-$path = forminator_plugin_dir();
-$icon_minus = $path . "assets/icons/admin-icons/minus.php";
-$icon_quizzes = $path . "assets/icons/forminator-icons/quizzes.php";
-?>
+<div class="sui-box">
 
-<div class="wpmudev-box wpmudev-can--hide">
+	<div class="sui-box-header">
 
-    <div class="wpmudev-box-header">
+		<h3 class="sui-box-title"><i class="sui-icon-academy" aria-hidden="true"></i><?php esc_html_e( "Quizzes", Forminator::DOMAIN ); ?></h3>
 
-        <div class="wpmudev-header--icon">
+	</div>
 
-            <?php include( $icon_quizzes ); ?>
+	<?php if ( forminator_quizzes_total() > 0 ) { ?>
 
-        </div>
+		<table class="fui-table fui-table-accordion">
 
-        <div class="wpmudev-header--text">
+			<tbody>
 
-            <h2 class="wpmudev-title"><?php _e( "Quizzes", Forminator::DOMAIN ); ?></h2>
+				<?php foreach( forminator_quizzes_modules() as $module ) { ?>
 
-        </div>
+					<tr>
 
-        <div class="wpmudev-header--action">
+						<td class="fui-cell-title"><?php echo forminator_get_form_name( $module['id'], 'quiz'); // WPCS: XSS ok. ?></td>
 
-			<button class="wpmudev-box--action">
+						<td class="fui-table-action">
+							<a href="<?php echo forminator_quiz_get_edit_url( $module, $module['id'] ); // WPCS: XSS ok. ?>"
+								class="sui-button-icon sui-tooltip sui-tooltip-top-left"
+								data-tooltip="<?php esc_html_e( 'Edit quiz settings', Forminator::DOMAIN ); ?>"><i class="sui-icon-widget-settings-config" aria-hidden="true"></i></a>
+						</td>
 
-                <span class="wpmudev-icon--plus" aria-hidden="true"></span>
+					</tr>
 
-                <span class="wpmudev-sr-only"><?php _e( "Hide box", Forminator::DOMAIN ); ?></span>
+				<?php } ?>
 
-            </button>
+			</tbody>
+
+		</table>
+
+	<?php } else { ?>
+
+		<div class="sui-box-body">
+
+			<p><?php esc_html_e( "Create fun quizzes for your users to take and share on social media. A great way to drive more traffic to your site.", Forminator::DOMAIN ); ?></p>
+
+			<p><button class="sui-button sui-button-blue wpmudev-open-modal" data-modal="quizzes"><?php esc_html_e( "Create Quiz", Forminator::DOMAIN ); ?></button></p>
 
 		</div>
 
-    </div>
+	<?php } ?>
 
-    <div class="wpmudev-box-section">
+	<?php if ( forminator_quizzes_total() > 0 ) { ?>
 
-        <?php if ( forminator_quizzes_total() > 0 ) { ?>
+		<div class="sui-box-footer">
 
-            <div class="wpmudev-section--table">
+			<div class="fui-action-buttons">
 
-                <table class="wpmudev-table wpmudev-can--edit">
+				<a href="<?php echo forminator_get_admin_link( 'forminator-quiz' ); // WPCS: XSS ok. ?>" class="sui-button sui-button-ghost"><i class="sui-icon-eye" aria-hidden="true"></i> <?php esc_html_e( "View All", Forminator::DOMAIN ); ?></a>
 
-                    <thead>
+				<button href="/" class="sui-button sui-button-blue wpmudev-open-modal" data-modal="quizzes"><?php esc_html_e( "Create Quiz", Forminator::DOMAIN ); ?></button>
 
-                        <tr>
+			</div>
 
-                            <th><?php _e( "Name", Forminator::DOMAIN ); ?></th>
+		</div>
 
-                            <td class="wpmudev-row--64"><?php _e( "Views", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--92"><?php _e( "Entries", Forminator::DOMAIN ); ?></td>
-
-                            <td class="wpmudev-row--58"><?php _e( "Rate", Forminator::DOMAIN ); ?></td>
-
-                            <td></td>
-
-                        </tr>
-
-                    </thead>
-
-                    <tbody>
-
-                        <?php foreach( forminator_quizzes_modules() as $module ) { ?>
-
-                            <tr>
-
-                                <th>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_form_name( $module['id'], 'quiz'); ?></p>
-
-                                </th>
-
-                                <td class="wpmudev-row--64">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Views:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["views"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--92">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Submissions:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo $module["entries"]; ?></p>
-
-                                </td>
-
-                                <td class="wpmudev-row--58">
-
-                                    <p class="wpmudev-table--title"><?php _e( "Conv. Rate:", Forminator::DOMAIN ); ?></p>
-
-                                    <p class="wpmudev-table--text"><?php echo forminator_get_rate( $module ); ?>%</p>
-
-                                </td>
-
-                                <td>
-
-                                    <p class="wpmudev-table--text"><a href="<?php echo forminator_quiz_get_edit_url( $module, $module['id'] ) ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "Edit", Forminator::DOMAIN ); ?></a></p>
-
-                                </td>
-
-                            </tr>
-
-                        <?php } ?>
-
-                    </tbody>
-
-                    <tfoot>
-
-                        <tr><td colspan="5">
-                            <div class="wpmudev-table--buttons">
-                                <button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-blue wpmudev-open-modal" data-modal="quizzes"><?php _e( "New Quiz", Forminator::DOMAIN ); ?></button>
-                                <a href="<?php echo forminator_get_admin_link( 'forminator-quiz' ); ?>" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost"><?php _e( "View All", Forminator::DOMAIN ); ?></a>
-                            </div>
-                        </td></tr>
-
-                </table>
-
-            </div>
-
-        <?php } else { ?>
-
-            <div class="wpmudev-section--text">
-
-                <p><?php _e( "Create fun quizzes for your users to take and share on social media. A great way to drive more traffic to your site.", Forminator::DOMAIN ); ?></p>
-
-                <p><button href="/" class="wpmudev-button wpmudev-button-sm wpmudev-button-ghost wpmudev-open-modal" data-modal="quizzes"><?php _e( "Create Quiz", Forminator::DOMAIN ); ?></button></p>
-
-            </div>
-
-        <?php } ?>
-
-    </div>
+	<?php } ?>
 
 </div>

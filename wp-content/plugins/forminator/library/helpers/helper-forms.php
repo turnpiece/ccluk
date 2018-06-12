@@ -41,7 +41,7 @@ function forminator_get_form( $id ) {
  */
 function forminator_local_timestamp( $timestamp = null ) {
 	// If no timestamp, get it current
-	if ( $timestamp == null ) {
+	if ( is_null( $timestamp ) ) {
 		$timestamp = time();
 	}
 
@@ -93,7 +93,7 @@ function forminator_get_post_data( $property, $default = '' ) {
 				// make sure its wp_post
 				if ( $post_object instanceof WP_Post ) {
 					// set global $post as $post_object retrieved from `get_post` for next usage
-					$post = $post_object;
+					$post = $post_object; // phpcs:ignore
 				}
 			}
 		}
@@ -114,13 +114,7 @@ function forminator_get_post_data( $property, $default = '' ) {
  * @return int
  */
 function forminator_cforms_total() {
-	$data = forminator_custom_forms();
-
-	if ( isset( $data['totalRecords'] ) ) {
-		return $data['totalRecords'];
-	}
-
-	return null;
+	return Forminator_Custom_Form_Model::model()->countAll();
 }
 
 /**
@@ -166,7 +160,7 @@ function forminator_cform_modules( $limit = 4 ) {
  * @return mixed
  */
 function forminator_get_rate( $module ) {
-	if ( $module["views"] == 0 ) {
+	if ( 0 === $module["views"] ) {
 		$rate = 0;
 	} else {
 		$rate = round( ( $module["entries"] * 100 ) / $module["views"], 1 );
@@ -182,13 +176,7 @@ function forminator_get_rate( $module ) {
  * @return int
  */
 function forminator_polls_total() {
-	$data = forminator_polls_forms();
-
-	if ( isset( $data['totalRecords'] ) ) {
-		return $data['totalRecords'];
-	}
-
-	return null;
+	return Forminator_Poll_Form_Model::model()->countAll();
 }
 
 /**
@@ -237,13 +225,7 @@ function forminator_polls_modules( $limit = 4 ) {
  * @return int
  */
 function forminator_quizzes_total() {
-	$data = forminator_quizzes_forms();
-
-	if ( isset( $data['totalRecords'] ) ) {
-		return $data['totalRecords'];
-	}
-
-	return null;
+	return Forminator_Quiz_Form_Model::model()->countAll();
 }
 
 /**
@@ -297,7 +279,7 @@ function forminator_quizzes_modules( $limit = 4 ) {
  * @return mixed
  */
 function forminator_quiz_get_edit_url( $module, $id ) {
-	if ( isset( $module['type'] ) && $module['type'] == 'nowrong' ) {
+	if ( isset( $module['type'] ) && 'nowrong' === $module['type'] ) {
 		return admin_url( 'admin.php?page=forminator-nowrong-wizard&id=' . $id );
 	} else {
 		return admin_url( 'admin.php?page=forminator-knowledge-wizard&id=' . $id );
@@ -331,11 +313,11 @@ function forminator_total_forms() {
  * @return mixed
  */
 function forminator_get_form_name( $id, $type = "custom_form" ) {
-	if ( $type == "custom_form" ) {
+	if ( "custom_form" === $type ) {
 		$model = Forminator_Custom_Form_Model::model()->load( $id );
-	} elseif ( $type == "poll" ) {
+	} elseif ( "poll" === $type ) {
 		$model = Forminator_Poll_Form_Model::model()->load( $id );
-	} elseif ( $type == "quiz" ) {
+	} elseif ( "quiz" === $type ) {
 		$model = Forminator_Quiz_Form_Model::model()->load( $id );
 	}
 
@@ -408,7 +390,7 @@ function forminator_most_popular_poll() {
  * @return int
  */
 function forminator_form_view_per_page( $type = 'listings' ) {
-	if ( $type == 'entries' ) {
+	if ( 'entries' === $type ) {
 		$per_page = get_option( "forminator_pagination_entries", 10 );
 	} else {
 		$per_page = get_option( "forminator_pagination_listings", 10 );
@@ -523,16 +505,16 @@ function forminator_data_to_model_quiz( $data ) {
  *
  * @since 1.0
  *
- * @param            $cssString
+ * @param            $css_string
  * @param            $prefix
  * @param bool|false $as_array
  * @param bool|true  $separate_prefix
  *
  * @return array|string
  */
-function forminator_prepare_css( $cssString, $prefix, $as_array = false, $separate_prefix = true, $wildcard = '' ) {
+function forminator_prepare_css( $css_string, $prefix, $as_array = false, $separate_prefix = true, $wildcard = '' ) {
 	$css_array = array(); // master array to hold all values
-	$elements  = explode( '}', $cssString );
+	$elements  = explode( '}', $css_string );
 	// Output is the final processed CSS string.
 	$output          = "";
 	$prepared        = "";
@@ -596,7 +578,7 @@ function forminator_prepare_css( $cssString, $prefix, $as_array = false, $separa
 		// loop through each style and split apart the key from the value
 		$count = count( $a_styles );
 		for ( $a = 0; $a < $count; $a ++ ) {
-			if ( trim( $a_styles[ $a ] ) != '' ) {
+			if ( trim( $a_styles[ $a ] ) !== '' ) {
 				$a_key_value = explode( ':', $a_styles[ $a ] );
 				// build the master css array
 				if ( count( $a_key_value ) > 2 ) {
@@ -663,7 +645,7 @@ function forminator_prepare_css( $cssString, $prefix, $as_array = false, $separa
  * @return string
  */
 function forminator_list_pagination( $total, $type = 'listings' ) {
-	$pagenum     = isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0;
+	$pagenum     = isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0; // WPCS: CSRF OK
 	$page_number = max( 1, $pagenum );
 	$per_page    = forminator_form_view_per_page( $type );
 	if ( $total > $per_page ) {
@@ -673,62 +655,59 @@ function forminator_list_pagination( $total, $type = 'listings' ) {
 		$current_url   = remove_query_arg( $removable_query_args, $current_url );
 		$current       = $page_number + 1;
 		$total_pages   = ceil( $total / $per_page );
-		$disable_first = $disable_last = $disable_prev = $disable_next = false;
+		$disable_first = false;
+		$disable_last  = false;
+		$disable_prev  = false;
+		$disable_next  = false;
 		$mid_size      = 2;
 		$end_size      = 1;
 
-		if ( $page_number == 1 ) {
+		if ( 1 === $page_number ) {
 			$disable_first = true;
 			$disable_prev  = true;
 		}
 
-		if ( $page_number == 2 ) {
+		if ( 2 === $page_number ) {
 			$disable_first = true;
 		}
 
-		if ( $page_number == $total_pages ) {
+		if ( $page_number === $total_pages ) {
 			$disable_last = true;
 			$disable_next = true;
 		}
 
-		if ( $page_number == $total_pages - 1 ) {
+		if ( $page_number === $total_pages - 1 ) {
 			$disable_last = true;
 		}
 		?>
-        <ul class="wpmudev-pagination">
+        <ul class="sui-pagination">
 
-			<?php if ( ! $disable_first ):
-
+			<?php
+				if ( ! $disable_first ):
 				$prev_url = esc_url( add_query_arg( 'paged', min( $total_pages, $page_number - 1 ), $current_url ) );
 				$first_url = esc_url( add_query_arg( 'paged', min( 1, $total_pages ), $current_url ) );
 				?>
-
-				<li class="wpmudev-pagination--item wpmudev-pagination--prev">
-					<a href="<?php echo $first_url ?>">
-                        <span class="wpdui-icon wpdui-icon-arrow-skip-start"></span>
-                        <span class="wpmudev-sr-only"><?php _e( 'First page', Forminator::DOMAIN ); ?></span>
-                    </a>
+				<li class="wpmudev-pagination--prev">
+					<a href="<?php echo esc_attr( $first_url ); ?>"><i class="sui-icon-arrow-skip-start" aria-hidden="true"></i></a>
 				</li>
-                <li class="wpmudev-pagination--item wpmudev-pagination--prev">
-					<a href="<?php echo $prev_url ?>">
-                        <span class="wpdui-icon wpdui-icon-arrow-left-carats"></span>
-                        <span class="wpmudev-sr-only"><?php _e( 'Previous page', Forminator::DOMAIN ); ?></span>
-                    </a>
+                <li class="wpmudev-pagination--prev">
+					<a href="<?php echo esc_attr( $prev_url ); ?>"><i class="sui-icon-chevron-left" aria-hidden="true"></i></a>
 				</li>
-			<?php endif;
+			<?php
+			endif;
 
 			$dots    = false;
 			for ( $i = 1; $i <= $total_pages; $i ++ ) :
-				$class = ( $page_number == $i ) ? 'wpmudev-is_active' : '';
+				$class = ( $page_number === $i ) ? 'sui-active' : '';
 				$url = esc_url( add_query_arg( 'paged', ( $i ), $current_url ) );
 				if ( ( $i <= $end_size || ( $current && $i >= $current - $mid_size && $i <= $current + $mid_size ) || $i > $total_pages - $end_size ) ) {
 					?>
-                    <li class="wpmudev-pagination--item <?php echo $class; ?>"><a href="<?php echo $url; ?>"><?php echo( $i ); ?></a></li>
+                    <li class="<?php echo esc_attr( $class ); ?>"><a href="<?php echo esc_attr( $url ); ?>"><?php echo esc_html( $i ); ?></a></li>
 					<?php
 					$dots = true;
 				} elseif ( $dots ) {
 					?>
-                    <li class="wpmudev-pagination--item wpmudev-pagination--dots"><span><?php _e( '&hellip;' ); ?></span></li>
+                    <li class="sui-pagination-dots"><span><?php esc_html_e( '&hellip;' ); ?></span></li>
 					<?php
 					$dots = false;
 				}
@@ -737,22 +716,17 @@ function forminator_list_pagination( $total, $type = 'listings' ) {
 
 			<?php endfor; ?>
 
-			<?php if ( ! $disable_last ):
+			<?php
+			if ( ! $disable_last ):
 
 				$next_url = esc_url( add_query_arg( 'paged', min( $total_pages, $page_number + 1 ), $current_url ) );
-				$last_url = esc_url( add_query_arg( 'paged', max( $total_pages, $page_number - 1 ), $current_url ) ); ?>
-
-                <li class="wpmudev-pagination--item wpmudev-pagination--next">
-					<a href="<?php echo $next_url; ?>">
-                        <span class="wpdui-icon wpdui-icon-arrow-right-carats"></span>
-                        <span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
-                    </a>
+				$last_url = esc_url( add_query_arg( 'paged', max( $total_pages, $page_number - 1 ), $current_url ) );
+				?>
+                <li class="wpmudev-pagination--next">
+					<a href="<?php echo esc_attr( $next_url ); ?>"><i class="sui-icon-chevron-right" aria-hidden="true"></i></a>
 				</li>
-				<li class="wpmudev-pagination--item wpmudev-pagination--next">
-					<a href="<?php echo $last_url; ?>">
-                        <span class="wpdui-icon wpdui-icon-arrow-skip-end"></span>
-                        <span class="wpmudev-sr-only"><?php _e( 'Next page', Forminator::DOMAIN ); ?></span>
-                    </a>
+				<li class="wpmudev-pagination--next">
+					<a href="<?php echo esc_attr( $last_url ); ?>"><i class="sui-icon-arrow-skip-end" aria-hidden="true"></i></a>
 				</li>
 			<?php endif; ?>
         </ul>
@@ -795,6 +769,72 @@ function forminator_get_model_from_id( $id ) {
 	}
 
 	return $form_model;
+}
+
+/**
+ * Get Latest entry based on $entry_type
+ * [custom-forms, quizzes, poll]
+ * will return null if there is no entry
+ *
+ * @param $entry_type
+ *
+ * @return Forminator_Form_Entry_Model|null
+ */
+function forminator_get_latest_entry( $entry_type ) {
+	$latest_entry = Forminator_Form_Entry_Model::get_latest_entry( $entry_type );
+
+	return $latest_entry;
+}
+
+/**
+ * Get Time of latest entry created based on $entry_type
+ * [custom-forms, quizzes, poll]
+ *
+ * @param $entry_type
+ *
+ * @return string
+ */
+function forminator_get_latest_entry_time( $entry_type ) {
+	$latest_entry = forminator_get_latest_entry( $entry_type );
+	if ( $latest_entry instanceof Forminator_Form_Entry_Model ) {
+		$last_entry_time = mysql2date( 'U', $latest_entry->date_created );
+		$time_diff       = human_time_diff( current_time( 'timestamp' ), $last_entry_time );
+		$last_entry_time = sprintf( __( '%s ago', Forminator::DOMAIN ), $time_diff );
+
+		return $last_entry_time;
+	} else {
+		return __( 'Never', Forminator::DOMAIN );
+	}
+}
+
+/**
+ * Get Latest entry based on $form_id
+ * will return null if there is no entry
+ *
+ * @param $form_id
+ *
+ * @return Forminator_Form_Entry_Model|null
+ */
+function forminator_get_latest_entry_by_form_id( $form_id ) {
+	$latest_entry = Forminator_Form_Entry_Model::get_latest_entry_by_form_id( $form_id );
+
+	return $latest_entry;
+}
+
+/**
+ * Get Time of latest entry created based on $form_id
+ *
+ * @param $form_id
+ *
+ * @return string
+ */
+function forminator_get_latest_entry_time_by_form_id( $form_id ) {
+	$latest_entry = forminator_get_latest_entry_by_form_id( $form_id );
+	if ( $latest_entry instanceof Forminator_Form_Entry_Model ) {
+		return $latest_entry->time_created;
+	} else {
+		return esc_html__( 'None', Forminator::DOMAIN );
+	}
 }
 
 /**

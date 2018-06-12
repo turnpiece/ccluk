@@ -1,0 +1,88 @@
+@include body-class {
+
+	.fui-form-actions {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: space-between;
+		margin: $sui-gutter 0;
+
+		.fui-bulk-actions {
+			display: flex;
+			align-items: center;
+
+			.sui-button {
+				margin-left: 15px;
+
+				@include media( max-width, md ) {
+					margin-left: 0;
+					margin-top: 15px;
+				}
+			}
+			
+			@include media( max-width, md ) {
+				display: block;
+				margin-bottom: $sui-gutter-md;
+			}
+		}
+
+		&:first-child {
+			margin-top: 0;
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+		}
+
+		@include media( max-width, md ) {
+			display: block;
+			margin: $sui-gutter-md 0;
+		}
+	}
+
+	.fui-form-element-actions {
+		display: flex;
+		flex: 1;
+		align-items: center;
+		justify-content: flex-end;
+
+		> form,
+		> .sui-button {
+			margin: 0 10px;
+
+			&:first-child {
+				margin-left: 0;
+			}
+
+			&:last-child {
+				margin-right: 0;
+			}
+		}
+	}
+
+	.fui-select-actions {
+		display: flex;
+
+		.select-container {
+			flex: 0 0 auto;
+			margin-right: 10px;
+
+			&:last-child {
+				margin-right: 0;
+
+				@include media( max-width, md ) {
+					margin-bottom: 0;
+				}
+			}
+
+			@include media( max-width, md ) {
+				margin-bottom: 10px;
+				margin-right: 0;
+			}
+		}
+
+		@include media( max-width, md ) {
+			display: block;
+		}
+	}
+}

@@ -58,7 +58,7 @@ abstract class Forminator_Autofill_Provider_Abstract implements Forminator_Autof
 			return '';
 		}
 
-		if ( in_array( $attribute, array_keys( $this->attributes_map ) ) ) {
+		if ( in_array( $attribute, array_keys( $this->attributes_map ), true ) ) {
 			$getter = $this->attributes_map[ $attribute ]['value_getter'];
 			if ( is_callable( $getter ) ) {
 				return call_user_func( $getter );
@@ -151,7 +151,7 @@ abstract class Forminator_Autofill_Provider_Abstract implements Forminator_Autof
 
 		foreach ( $hookable_attributes[ $field_slug ] as $hookable_attribute ) {
 			// Dedupe
-			if ( in_array( $hookable_attribute, $providers ) ) {
+			if ( in_array( $hookable_attribute, $providers, true ) ) {
 				continue;
 			}
 			array_push( $providers, $hookable_attribute );

@@ -26,6 +26,15 @@ html.has-cookie-bar.cookie-bar-top-bar {
 .ctcc-exclude-SA.geoip-continent-SA #catapult-cookie-bar {
 	display: none;
 }
+.ctcc-exclude-AF.geoip-continent-AF,
+.ctcc-exclude-AN.geoip-continent-AN,
+.ctcc-exclude-AS.geoip-continent-AS,
+.ctcc-exclude-EU.geoip-continent-EU,
+.ctcc-exclude-NA.geoip-continent-NA,
+.ctcc-exclude-OC.geoip-continent-OC,
+.ctcc-exclude-SA.geoip-continent-SA {
+	margin-top: 0 !important;
+}
 #catapult-cookie-bar.rounded-corners {
 	border-radius: 3px;
 }

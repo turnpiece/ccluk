@@ -19,7 +19,7 @@ class Forminator_Widget extends WP_Widget {
 		parent::__construct(
 			'forminator_widget',
 			__( "Forminator Widget", Forminator::DOMAIN ),
-			array( 'description' => __( 'Forminator Widget', Forminator::DOMAIN ), )
+			array( 'description' => __( 'Forminator Widget', Forminator::DOMAIN ) )
 		);
 	}
 
@@ -31,30 +31,31 @@ class Forminator_Widget extends WP_Widget {
 	 * @param array $instance
 	 */
 	public function widget( $args, $instance ) {
-		// Extract variables
-		extract( $args );
-		extract( $instance );
 
 		// Print widget before markup
-		echo $before_widget;
+		if( isset( $args['before_widget'] ) && !empty( $args['before_widget'] ) ) {
+			echo $args['before_widget']; // WPCS: XSS ok.
+		}
 
 		// Make sure $form_type is set
-		if( ! isset( $form_type ) ) return;
+		if( ! isset( $instance['form_type'] ) ) return;
 
-		if( $form_type == "form" && ! empty( $form_id ) ) {
-			forminator_form( $form_id, false );
+		if( "form" === $instance['form_type'] && ( isset( $instance['form_id'] ) && ! empty( $instance['form_id'] ) ) ) {
+			forminator_form( $instance['form_id'], false );
 		}
 
-		if( $form_type == "poll" && ! empty( $form_id ) ) {
-			forminator_poll( $poll_id, false );
+		if( "poll" === $instance['form_type'] && ( isset( $instance['poll_id'] ) && ! empty( $instance['poll_id'] ) ) ) {
+			forminator_poll( $instance['poll_id'], false );
 		}
 
-		if( $form_type == "quiz" && ! empty( $form_id ) ) {
-			forminator_quiz( $quiz_id, false );
+		if( "quiz" === $instance['form_type'] && ( isset( $instance['quiz_id'] ) && ! empty( $instance['quiz_id'] ) ) ) {
+			forminator_quiz( $instance['quiz_id'], false );
 		}
 
 		// Print widget after markup
-		echo $after_widget;
+		if( isset( $args['after_widget'] ) && !empty( $args['after_widget'] ) ) {
+			echo $args['after_widget']; // WPCS: XSS ok.
+		}
 	}
 
 	/**
@@ -86,21 +87,21 @@ class Forminator_Widget extends WP_Widget {
 		}
 		?>
 		<p>
-			<label for="<?php echo $this->get_field_id( 'form_type' ); ?>">
-				<?php _e( "Form Type", Forminator::DOMAIN ); ?>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'form_type' ) ); ?>">
+				<?php esc_html_e( "Form Type", Forminator::DOMAIN ); ?>
 			</label>
-			<select class="widefat forminator-form-type" id="<?php echo $this->get_field_id( 'form_type' ); ?>" name="<?php echo $this->get_field_name( 'form_type' ); ?>">
-				<option value="form" <?php selected( 'form', $form_type ); ?> <?php echo $form_type; ?>><?php _e( "Form", Forminator::DOMAIN ); ?></option>
-				<option value="poll" <?php selected( 'poll', $form_type ); ?>><?php _e( "Poll", Forminator::DOMAIN ); ?></option>
-				<option value="quiz" <?php selected( 'quiz', $form_type ); ?>><?php _e( "Quiz", Forminator::DOMAIN ); ?></option>
+			<select class="widefat forminator-form-type" id="<?php echo esc_attr( $this->get_field_id( 'form_type' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'form_type' ) ); ?>">
+				<option value="form" <?php selected( 'form', $form_type ); ?>><?php esc_html_e( "Form", Forminator::DOMAIN ); ?></option>
+				<option value="poll" <?php selected( 'poll', $form_type ); ?>><?php esc_html_e( "Poll", Forminator::DOMAIN ); ?></option>
+				<option value="quiz" <?php selected( 'quiz', $form_type ); ?>><?php esc_html_e( "Quiz", Forminator::DOMAIN ); ?></option>
 			</select>
 		</p>
 
 		<p id="forminator-wrapper-form" class="forminator-form-wrapper">
-			<label for="<?php echo $this->get_field_id( 'form_id' ); ?>">
-				<?php _e( "Select Form", Forminator::DOMAIN ); ?>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'form_id' ) ); ?>">
+				<?php esc_html_e( "Select Form", Forminator::DOMAIN ); ?>
 			</label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'form_id' ); ?>" name="<?php echo $this->get_field_name( 'form_id' ); ?>">
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'form_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'form_id' ) ); ?>">
 				<?php
 				$modules = forminator_cform_modules( 999 );
 				foreach( $modules as $module ) {
@@ -108,17 +109,17 @@ class Forminator_Widget extends WP_Widget {
 					if ( strlen( $title ) > 25 ) {
 						$title = substr( $title, 0, 25 ) . '...';
 					}
-					echo '<option value="' . $module['id'] . '" '. selected( $module['id'], $form_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>';
+					echo '<option value="' . $module['id'] . '" '. selected( $module['id'], $form_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>'; // WPCS: XSS ok.
 				}
 				?>
 			</select>
 		</p>
 
 		<p id="forminator-wrapper-poll" class="forminator-form-wrapper">
-			<label for="<?php echo $this->get_field_id( 'poll_id' ); ?>">
-				<?php _e( "Select Poll", Forminator::DOMAIN ); ?>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'poll_id' ) ); ?>">
+				<?php esc_html_e( "Select Poll", Forminator::DOMAIN ); ?>
 			</label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'poll_id' ); ?>" name="<?php echo $this->get_field_name( 'poll_id' ); ?>">
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'poll_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'poll_id' ) ); ?>">
 				<?php
 				$modules = forminator_polls_modules( 999 );
 				foreach( $modules as $module ) {
@@ -126,17 +127,17 @@ class Forminator_Widget extends WP_Widget {
 					if ( strlen( $title ) > 25 ) {
 						$title = substr( $title, 0, 25 ) . '...';
 					}
-					echo  '<option value="' . $module['id'] . '" '. selected( $module['id'], $poll_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>';
+					echo  '<option value="' . $module['id'] . '" '. selected( $module['id'], $poll_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>'; // WPCS: XSS ok.
 				}
 				?>
 			</select>
 		</p>
 
 		<p id="forminator-wrapper-quiz" class="forminator-form-wrapper">
-			<label for="<?php echo $this->get_field_id( 'quiz_id' ); ?>">
-				<?php _e( "Select Quiz", Forminator::DOMAIN ); ?>
+			<label for="<?php echo esc_attr( $this->get_field_id( 'quiz_id' ) ); ?>">
+				<?php esc_html_e( "Select Quiz", Forminator::DOMAIN ); ?>
 			</label>
-			<select class="widefat" id="<?php echo $this->get_field_id( 'quiz_id' ); ?>" name="<?php echo $this->get_field_name( 'quiz_id' ); ?>">
+			<select class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'quiz_id' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'quiz_id' ) ); ?>">
 				<?php
 				$modules = forminator_quizzes_modules( 999 );
 				foreach( $modules as $module ) {
@@ -144,7 +145,7 @@ class Forminator_Widget extends WP_Widget {
 					if ( strlen( $title ) > 25 ) {
 						$title = substr( $title, 0, 25 ) . '...';
 					}
-					echo '<option value="' . $module['id'] . '" '. selected( $module['id'], $quiz_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>';
+					echo '<option value="' . $module['id'] . '" '. selected( $module['id'], $quiz_id, false ) .'>' . $title . ' - ID: ' . $module['id'] . '</option>'; // WPCS: XSS ok.
 				}
 				?>
 			</select>
@@ -153,7 +154,7 @@ class Forminator_Widget extends WP_Widget {
 		<script type="text/javascript">
 			jQuery(document).ready(function(){
 				jQuery(".forminator-form-type").change(function(){
-					var value = $(this).val(),
+					var value = jQuery(this).val(),
 						$widget = jQuery(this).closest('.widget-content')
 					;
 
@@ -178,10 +179,22 @@ class Forminator_Widget extends WP_Widget {
 	 */
 	public function update( $new_instance, $old_instance ) {
 		$instance = array();
-		$instance['form_type']     = $new_instance['form_type'];
-		$instance['form_id']       = $new_instance['form_id'];
-		$instance['poll_id']       = $new_instance['poll_id'];
-		$instance['quiz_id']       = $new_instance['quiz_id'];
+
+		if( isset( $new_instance['form_type'] ) ) {
+			$instance['form_type'] = $new_instance['form_type'];
+		}
+
+		if( isset( $new_instance['form_id'] ) ) {
+			$instance['form_id'] = $new_instance['form_id'];
+		}
+
+		if( isset( $new_instance['poll_id'] ) ) {
+			$instance['poll_id'] = $new_instance['poll_id'];
+		}
+
+		if( isset( $new_instance['quiz_id'] ) ) {
+			$instance['quiz_id'] = $new_instance['quiz_id'];
+		}
 
 		return $instance;
 	}

@@ -65,89 +65,89 @@ class Forminator_Number extends Forminator_Field {
 	public function load_settings( $settings = array() ) {
 		return array(
 			array(
-				'id' => 'required',
-				'type' => 'Toggle',
-				'name' => 'required',
+				'id'         => 'required',
+				'type'       => 'Toggle',
+				'name'       => 'required',
 				'hide_label' => true,
-				'values' => array(
+				'values'     => array(
 					array(
-						'value' => "true",
-						'label' => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
-				)
-			),
-
-			array(
-				'id' => 'separator-1',
-				'type' => 'Separator',
-				'name' => 'separator',
-				'hide_label' => true,
-				'size' => 12,
-				'className' => 'separator-field',
-			),
-
-			array(
-				'id' => 'field-label',
-				'type' => 'Text',
-				'name' => 'field_label',
-				'hide_label' => false,
-				'label'	=> __( 'Field label', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'field-placeholder',
-				'type' => 'Text',
-				'name' => 'placeholder',
-				'hide_label' => false,
-				'label'	=> __( 'Placeholder', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'field-description',
-				'type' => 'Text',
-				'name' => 'description',
-				'hide_label' => false,
-				'label'	=> __( 'Description', Forminator::DOMAIN ),
-				'className' => 'text-field',
-			),
-
-			array(
-				'id' => 'number-limit',
-				'type' => 'ToggleContainer',
-				'name' => 'number_limit',
-				'hide_label' => true,
-				'has_content' => true,
-				'containerClass' => 'wpmudev-has_cols',
-				'values' => array(
-					array(
-						'value' => "true",
-						'label' => __( 'Limit input', Forminator::DOMAIN ),
-						'labelSmall' => "true"
-					)
+						'value'      => "true",
+						'label'      => __( 'Required', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
 				),
-				'fields' => array(
+			),
+
+			array(
+				'id'         => 'separator-1',
+				'type'       => 'Separator',
+				'name'       => 'separator',
+				'hide_label' => true,
+				'size'       => 12,
+				'className'  => 'separator-field',
+			),
+
+			array(
+				'id'         => 'field-label',
+				'type'       => 'Text',
+				'name'       => 'field_label',
+				'hide_label' => false,
+				'label'      => __( 'Field label', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'field-placeholder',
+				'type'       => 'Text',
+				'name'       => 'placeholder',
+				'hide_label' => false,
+				'label'      => __( 'Placeholder', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'         => 'field-description',
+				'type'       => 'Text',
+				'name'       => 'description',
+				'hide_label' => false,
+				'label'      => __( 'Description', Forminator::DOMAIN ),
+				'className'  => 'text-field',
+			),
+
+			array(
+				'id'             => 'number-limit',
+				'type'           => 'ToggleContainer',
+				'name'           => 'number_limit',
+				'hide_label'     => true,
+				'has_content'    => true,
+				'containerClass' => 'wpmudev-has_cols',
+				'values'         => array(
 					array(
-						'id' => 'field-limit-min',
-						'type' => 'Number',
-						'name' => 'limit_min',
+						'value'      => "true",
+						'label'      => __( 'Limit input', Forminator::DOMAIN ),
+						'labelSmall' => "true",
+					),
+				),
+				'fields'         => array(
+					array(
+						'id'        => 'field-limit-min',
+						'type'      => 'Number',
+						'name'      => 'limit_min',
 						'className' => 'number-field',
-						'max' => '#number-limit input#field-limit-max',
-						'label' => __( 'Min', Forminator::DOMAIN )
+						'max'       => '#number-limit input#field-limit-max',
+						'label'     => __( 'Min', Forminator::DOMAIN ),
 					),
 
 					array(
-						'id' => 'field-limit-max',
-						'type' => 'Number',
-						'name' => 'limit_max',
+						'id'        => 'field-limit-max',
+						'type'      => 'Number',
+						'name'      => 'limit_max',
 						'className' => 'number-field',
-						'min' => '#number-limit input#field-limit-min',
-						'label' => __( 'Max', Forminator::DOMAIN )
+						'min'       => '#number-limit input#field-limit-min',
+						'label'     => __( 'Max', Forminator::DOMAIN ),
 					),
 
-				)
+				),
 			),
 		);
 	}
@@ -195,17 +195,13 @@ class Forminator_Number extends Forminator_Field {
 	 * @return string
 	 */
 	public function admin_html() {
-		return '<div class="wpmudev-form-field--group">
-			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
-			{[ } ]}
-			<input type="{{ field.type }}" class="wpmudev-input" {[ if( field.number_limit ) { ]} min="{{ field.limit_min }}" max="{{ field.limit_max }}" {[ } ]} placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
-			{[ if( field.description ) { ]}
-			<div class="wpmudev-group--info">
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
-			</div>
-			{[ } ]}
-		</div>';
+		return '{[ if( field.field_label !== "" ) { ]}
+			<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+		{[ } ]}
+		<input type="{{ field.type }}" class="sui-form-control" {[ if( field.number_limit ) { ]} min="{{ field.limit_min }}" max="{{ field.limit_max }}" {[ } ]} placeholder="{{ encodeHtmlEntity( field.placeholder ) }}" {{ field.required ? "required" : "" }}>
+		{[ if( field.description ) { ]}
+			<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
+		{[ } ]}';
 	}
 
 	/**
@@ -221,18 +217,19 @@ class Forminator_Number extends Forminator_Field {
 		$this->field         = $field;
 		$this->form_settings = $settings;
 
-		$this->init_autofill($settings);
+		$this->init_autofill( $settings );
 
 		$min         = 0;
 		$max         = '';
-		$id          = $name = self::get_property( 'element_id', $field );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
 		$id          = $id . '-field';
 		$required    = self::get_property( 'required', $field, false );
 		$placeholder = $this->sanitize_value( self::get_property( 'placeholder', $field ) );
-		$value       = self::get_property( 'value', $field );
+		$value       = self::get_post_data( $name, self::get_property( 'value', $field ) );
 		$limit       = self::get_property( 'number_limit', $field, false );
 
-		if( $limit ) {
+		if ( $limit ) {
 			$min = self::get_property( 'limit_min', $field, '' );
 			$max = self::get_property( 'limit_max', $field, '' );
 		}
@@ -248,7 +245,7 @@ class Forminator_Number extends Forminator_Field {
 
 		);
 
-		if ( ! empty( $max ) || $max === '0' ) {
+		if ( ! empty( $max ) || '0' === $max ) {
 			$number_attr['max'] = $max;
 		}
 		$autofill_markup = $this->get_element_autofill_markup_attr( self::get_property( 'element_id', $field ), $this->form_settings );
@@ -301,7 +298,10 @@ class Forminator_Number extends Forminator_Field {
 	 * @return string
 	 */
 	public function get_validation_messages() {
-		$field = $this->field;
+		$field  = $this->field;
+		$min 	= self::get_property( 'limit_min', $field, false );
+		$max 	= self::get_property( 'limit_max', $field, false );
+		$limit 	= self::get_property( 'number_limit', $field, false );
 
 		$messages = '"' . $this->get_id( $field)  .'": {' . "\n";
 
@@ -320,6 +320,26 @@ class Forminator_Number extends Forminator_Field {
 			$field
 		);
 		$messages .= 'digits: "' . $digit_validation_message . '",' . "\n";
+
+		if( $limit ) {
+			if ( $min ) {
+				$min_validation_message = apply_filters(
+					'forminator_field_number_min_validation_message',
+					__( "Please enter a value greater than or equal to {0}.", Forminator::DOMAIN ),
+					$field
+				);
+				$messages .= 'min: "' . $min_validation_message . '",' . "\n";
+			}
+			if ( $max ) {
+				$max_validation_message = apply_filters(
+					'forminator_field_number_max_validation_message',
+					__( "Please enter a value less than or equal to {0}.", Forminator::DOMAIN ),
+					$field
+				);
+				$messages .= 'max: "' . $max_validation_message . '",' . "\n";
+			}
+		}
+
 		$messages .= '},' . "\n";
 
 		return apply_filters( 'forminator_field_number_validation_message', $messages, $field );
@@ -340,7 +360,7 @@ class Forminator_Number extends Forminator_Field {
 
 		if ( $this->is_required( $field ) ) {
 
-			if ( empty( $data ) ) {
+			if ( empty( $data ) && '0' !== $data ) {
 				$this->validation_message[ $id ] = apply_filters(
 					'forminator_field_number_required_field_validation_message',
 					__( 'This field is required. Please input a number', Forminator::DOMAIN ),
@@ -369,7 +389,7 @@ class Forminator_Number extends Forminator_Field {
 				$this->validation_message[ $id ] = sprintf(
 					apply_filters(
 						'forminator_field_number_max_min_validation_message',
-						__( 'The number shoud be less than %d and greater than %d', Forminator::DOMAIN ),
+						__( 'The number should be less than %1$d and greater than %2$d', Forminator::DOMAIN ),
 						$id,
 						$field,
 						$data

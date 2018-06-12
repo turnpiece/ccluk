@@ -138,18 +138,19 @@
 
 							var $label_class = data.success ? 'success' : 'error';
 							if (typeof data.message !== "undefined") {
-								$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.message + '</span></label>');
+								$target_message.html('<div class="forminator-label--' + $label_class + '"><span>' + data.message + '</span></div>');
 								self.focus_to_element($target_message, $label_class === 'success');
 
 							} else {
 								if (typeof data.data !== "undefined") {
 									$label_class = data.data.success ? 'success' : 'error';
-									$target_message.html('<label class="forminator-label--' + $label_class + '"><span>' + data.data.message + '</span></label>');
+									$target_message.html('<div class="forminator-label--' + $label_class + '"><span>' + data.data.message + '</span></div>');
 									self.focus_to_element($target_message, $label_class === 'success');
 								}
 							}
 
 							if (!data.data.success && data.data.errors.length) {
+								$this.trigger('forminator:form:submit:failed', formData);
 								self.show_messages(data.data.errors);
 							}
 
@@ -168,6 +169,8 @@
 										$(this).val(null).trigger("change");
 									});
 
+									$this.trigger('forminator:form:submit:success', formData);
+
 									// restart condition after form reset to ensure values of input already reset-ed too
 									$this.trigger('forminator.front.condition.restart');
 								}
@@ -177,11 +180,14 @@
 								}
 							}
 						},
-						error: function () {
+						error: function (err) {
 							$this.find('button').removeAttr('disabled');
 							$target_message.html('');
-							$target_message.html('<label class="forminator-label--notice"><span>' + window.ForminatorFront.cform.error + '</span></label>');
+							var $message = err.status === 400 ? window.ForminatorFront.cform.upload_error : window.ForminatorFront.cform.error;
+							$target_message.html('<label class="forminator-label--notice"><span>' + $message + '</span></label>');
 							self.focus_to_element($target_message);
+
+							$this.trigger('forminator:form:submit:failed', formData);
 						}
 					});
 					return false;
@@ -219,6 +225,13 @@
 							if (data.data.type === 'nowrong') {
 								self.$el.find('.quiz-form-button-holder').html(data.data.result)
 							} else if (data.data.type === 'knowledge') {
+								var url = window.location.href.split('/');
+								if (-1===url.indexOf('entries')) {
+									window.history.pushState('forminator', 'Forminator', 'entries/' + data.data.entry + '/');
+								} else {
+									url[url.indexOf('entries')+1] = data.data.entry;
+									window.history.pushState('forminator', 'Forminator', url.join('/') );
+								}
 								if (self.$el.find('.quiz-form-button-holder').size() > 0) {
 									self.$el.find('.quiz-form-button-holder').html(data.data.finalText);
 								}
@@ -406,7 +419,7 @@
 							self.$el.trigger('forminator.front.pagination.focus.input',[element]);
 							self.focus_to_element(element);
 						}
-						
+
 						if ($(element).hasClass('forminator-input-time')) {
 							var $time_field_holder = $(element).closest('.forminator-field:not(.forminator-field--inner)'),
 								$time_error_holder = $time_field_holder.children('.forminator-label--validation');
@@ -417,7 +430,7 @@
 							}
 							$time_error_holder.text(message);
 						}
-						
+
 						var $field_holder = $(element).closest('.forminator-field--inner');
 
 						if ($field_holder.length === 0) {

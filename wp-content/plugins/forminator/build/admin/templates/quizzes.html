@@ -1,128 +1,114 @@
 <div>
 
 	<script type="text/template" id="quiz-layout-tpl">
-		<div id="wpmudev-forminator-content" class="wpmudev-page-wizard forminator-quizzes-content"></div>
+		
+		<div class="forminator-quizzes-content sui-row-with-sidenav"></div>
+
 	</script>
 
 	<script type="text/template" id="quiz-main-tpl">
 
-		<div class="wpmudev-wizard--content">
+		<nav class="sui-sidenav">
 
-			<nav class="wpmudev-content--nav">
-
-				<ul class="wpmudev-nav--tabs">
-					
-					{[ if( type === "knowledge") { ]}
-						<li class="wpmudev-tab--item" data-tab-id="0"><a href="#forminator-quiz-details">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.details }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="1"><a href="#forminator-quiz-questions">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.questions }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="2"><a href="#forminator-quiz-settings">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.settings }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="3"><a href="#forminator-quiz-appearance">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.appearance }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-					{[ } else { ]}
-						<li class="wpmudev-tab--item" data-tab-id="0"><a href="#forminator-quiz-details">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.details }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="1"><a href="#forminator-quiz-results">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.results }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="2"><a href="#forminator-quiz-questions">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.questions }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-
-						<li class="wpmudev-tab--item" data-tab-id="3"><a href="#forminator-quiz-appearance">
-							<span class="wpmudev-text">{{ Forminator.l10n.quizzes.appearance }}</span>
-							<span class="wpmudev-icon-loading"></span>
-							<span class="wpdui-icon wpdui-icon-check"></span>
-						</a></li>
-					{[ } ]}
-
-				</ul>
-
-				<div class="wpmudev-preview-anchor" aria-hidden="true"></div>
-
-				<div class="wpmudev-preview" aria-hidden="true" data-modal="preview_quizzes" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.quizzes.preview_nonce }}">
-
-					<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100" preserveAspectRatio="none" class="wpmudev-icon wpmudev-i_preview"><path fill-rule="evenodd" d="M75 100C25 100 0 50 0 50S25 0 75 0s75 50 75 50-25 50-75 50zm0-25c13.807 0 25-11.193 25-25S88.807 25 75 25 50 36.193 50 50s11.193 25 25 25z"/></svg>
-
-					<span class="wpmudev-preview--text">{{ Forminator.l10n.quizzes.preview }}</span>
-
-				</div>
-
-			</nav>
-
-			<div class="wpmudev-content--settings">
+			<ul class="sui-vertical-tabs sui-sidenav-hide-md">
+				
 				{[ if( type === "knowledge") { ]}
-					<div id="forminator-quiz-details" class="wpmudev-settings--box wpmudev-tab-content-0" style="display: block;"></div>
-					<div id="forminator-quiz-questions" class="wpmudev-settings--box wpmudev-tab-content-1" style="display: none;"></div>
-					<div id="forminator-quiz-settings" class="wpmudev-settings--box wpmudev-tab-content-2" style="display: none;"></div>
-					<div id="forminator-quiz-appearance" class="wpmudev-settings--box wpmudev-tab-content-3" style="display: none;"></div>
-				{[ } else { ]}
-					<div id="forminator-quiz-details" class="wpmudev-settings--box wpmudev-tab-content-0" style="display: block;"></div>
-					<div id="forminator-quiz-results" class="wpmudev-settings--box wpmudev-tab-content-1" style="display: none;"></div>
-					<div id="forminator-quiz-questions" class="wpmudev-settings--box wpmudev-tab-content-2" style="display: none;"></div>
-					<div id="forminator-quiz-appearance" class="wpmudev-settings--box wpmudev-tab-content-3" style="display: none;"></div>
-				{[ } ]}
-			</div>
+					<li class="sui-vertical-tab" data-tab-id="0">
+						<a href="#forminator-quiz-details" role="button">{{ Forminator.l10n.quizzes.details }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
 
-		</div>
+					<li class="sui-vertical-tab" data-tab-id="1">
+						<a href="#forminator-quiz-questions">{{ Forminator.l10n.quizzes.questions }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+
+					<li class="sui-vertical-tab" data-tab-id="2">
+						<a href="#forminator-quiz-settings">{{ Forminator.l10n.quizzes.settings }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+
+					<li class="sui-vertical-tab" data-tab-id="3">
+						<a href="#forminator-quiz-appearance">{{ Forminator.l10n.quizzes.appearance }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+				{[ } else { ]}
+					<li class="sui-vertical-tab" data-tab-id="0">
+						<a href="#forminator-quiz-details">{{ Forminator.l10n.quizzes.details }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+
+					<li class="sui-vertical-tab" data-tab-id="1">
+						<a href="#forminator-quiz-results">{{ Forminator.l10n.quizzes.results }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+
+					<li class="sui-vertical-tab" data-tab-id="2">
+						<a href="#forminator-quiz-questions">{{ Forminator.l10n.quizzes.questions }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+
+					<li class="sui-vertical-tab" data-tab-id="3">
+						<a href="#forminator-quiz-appearance">{{ Forminator.l10n.quizzes.appearance }}</a>
+						<i class="sui-icon-check-tick" aria-hidden="true"></i>
+					</li>
+				{[ } ]}
+
+			</ul>
+
+			<div class="fui-button-preview-anchor" aria-hidden="true"></div>
+
+			<button class="fui-button-preview" aria-hidden="true" data-modal="preview_quizzes" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.quizzes.preview_nonce }}">
+				<span>{{ Forminator.l10n.quizzes.preview }}</span>
+				<i class="sui-icon-eye" aria-hidden="true"></i>
+			</button>
+
+		</nav>
+
+		{[ if( type === "knowledge") { ]}
+			<div id="forminator-quiz-details" class="wpmudev-settings--box wpmudev-tab-content-0" style="display: block;"></div>
+			<div id="forminator-quiz-questions" class="wpmudev-settings--box wpmudev-tab-content-1" style="display: none;"></div>
+			<div id="forminator-quiz-settings" class="wpmudev-settings--box wpmudev-tab-content-2" style="display: none;"></div>
+			<div id="forminator-quiz-appearance" class="wpmudev-settings--box wpmudev-tab-content-3" style="display: none;"></div>
+		{[ } else { ]}
+			<div id="forminator-quiz-details" class="wpmudev-settings--box wpmudev-tab-content-0" style="display: block;"></div>
+			<div id="forminator-quiz-results" class="wpmudev-settings--box wpmudev-tab-content-1" style="display: none;"></div>
+			<div id="forminator-quiz-questions" class="wpmudev-settings--box wpmudev-tab-content-2" style="display: none;"></div>
+			<div id="forminator-quiz-appearance" class="wpmudev-settings--box wpmudev-tab-content-3" style="display: none;"></div>
+		{[ } ]}
 
 	</script>
 
 	<script type="text/template" id="quiz-buttons-tpl">
 
-		<div class="wpmudev-wizard--footer">
+		<div class="sui-box">
 
-			<div class="wpmudev-footer--clear"></div>
+			<div class="sui-box-footer">
 
-			<nav class="wpmudev-footer--nav">
+				<button id="forminator-polls-cancel" class="sui-button">{{ Forminator.l10n.quizzes.cancel }}</button>
+				
+				<button id="forminator-polls-back" class="sui-button" style="display: none;">{{ Forminator.l10n.quizzes.back }}</button>
+				
+				<div class="sui-actions-right">
+					
+					<button class="sui-button sui-button-primary forminator-loading forminator-save" data-nonce="" data-id="">
+						<span class="sui-loading-text">{{ Forminator.l10n.builder.save }}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+					</button>
 
-				<div class="wpmudev-nav--left">
-					<button id="forminator-polls-cancel" class="wpmudev-button">{{Forminator.l10n.quizzes.cancel}}</button>
-					<button id="forminator-polls-back" class="wpmudev-button" style="display: none;">{{Forminator.l10n.quizzes.back}}</button>
+					<button id="forminator-polls-next" class="sui-button forminator-loading">
+						<span class="sui-loading-text">{{ Forminator.l10n.quizzes.continue }}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+					</button>
+					
+					<button id="forminator-polls-finish" class="sui-button forminator-loading" style="display: none;">
+						<span class="sui-loading-text">{{ Forminator.l10n.quizzes.finish }}</span>
+						<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
+					</button>
+
 				</div>
 
-				<div class="wpmudev-nav--right">
-					<button class="wpmudev-button wpmudev-button-blue forminator-loading forminator-save" data-nonce="" data-id="">
-						<span class="wpmudev-loading-text">{{Forminator.l10n.builder.save}}</span>
-						<span class="wpmudev-loading"></span>
-					</button>
-					<button id="forminator-polls-next" class="wpmudev-button forminator-loading">
-						<span class="wpmudev-loading-text">{{Forminator.l10n.quizzes.continue}}</span>
-						<span class="wpmudev-loading"></span>
-					</button>
-					<button id="forminator-polls-finish" class="wpmudev-button forminator-loading" style="display: none;">
-						<span class="wpmudev-loading-text">{{Forminator.l10n.quizzes.finish}}</span>
-						<span class="wpmudev-loading"></span>
-					</button>
-				</div>
-
-			</nav>
+			</div>
 
 		</div>
 
@@ -132,89 +118,25 @@
 
 		{[ if( type === "knowledge") { ]}
 
-			<div class="wpmudev-heading">
-				<label class="wpmudev-heading--title">{{Forminator.l10n.quizzes.settings}}</label>
+			<div class="sui-box-header">
+				
+				<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.settings }}</h3>
+				
 			</div>
 
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.results_behav}}</label>
-					<label class="wpmudev-name--alt">{{Forminator.l10n.quizzes.rb_description}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--results-behav" class="wpmudev-option--container"></div>
-			</div>
-
-			<div class="forminator-quizwiz-wrap--separator"></div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.phrasing}}</label>
-					<label class="wpmudev-name--alt">{{Forminator.l10n.quizzes.phrasing_desc}}</label>
-				</div>
-				<div class="wpmudev-option--container">
-					<div id="forminator-quizwiz-wrap--msg-correct"></div>
-					<div id="forminator-quizwiz-wrap--msg-incorrect"></div>
-				</div>
-			</div>
-
-			<div class="forminator-quizwiz-wrap--separator"></div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.msg_count}}</label>
-					<label class="wpmudev-name--alt">{{Forminator.l10n.quizzes.msg_count_desc}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--msg-count" class="wpmudev-option--container">
-					<label class="wpmudev-label--info" style="margin: 0 0 15px;"><span>{{Forminator.l10n.quizzes.msg_count_info}}</span></label>
-				</div>
-			</div>
-
-			<div class="forminator-quizwiz-wrap--separator"></div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.share}}</label>
-				</div>
-				<div class="wpmudev-option--container">
-					<div id="wpmudev-quizwiz-wrap--social">
-						<div class="wpmudev-social--item wpmudev-social--facebook">
-							<div id="wpmudev-quizwiz-wrap--facebook"></div>
-							<div class="wpmudev-item--icon wpmudev-facebook">
-								<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140" preserveAspectRatio="none" class="wpmudev-i_facebook"><g fill="none" fill-rule="evenodd"><path fill="none" d="M0 0h140v140H0z"/><path class="wpmudev-icon-path" d="M53.937 140V66.316H39.2V44.21h14.737V29.475C53.937 9.962 61.173 0 83.41 0h18.422v22.105H90.78c-8.696 0-11.054 4.82-11.054 11.053V44.21h22.106l-3.685 22.106h-18.42V140h-25.79z"/></g></svg>
-							</div>
-						</div>
-						<div class="wpmudev-social--item wpmudev-social--twitter">
-							<div id="wpmudev-quizwiz-wrap--twitter"></div>
-							<div class="wpmudev-item--icon wpmudev-twitter">
-								<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140" preserveAspectRatio="none" class="wpmudev-i_twitter"><g fill="none" fill-rule="evenodd"><path fill="none" d="M0 0h140v140H0z"/><path class="wpmudev-icon-path" d="M140 27.243c-5.147 2.265-10.682 3.78-16.504 4.456 5.937-3.493 10.5-9.044 12.625-15.633-5.558 3.23-11.686 5.61-18.24 6.844-5.215-5.484-12.676-8.91-20.937-8.91C81.065 14 68.21 26.642 68.21 42.298c0 2.19.238 4.34.732 6.416C45.066 47.536 23.9 36.26 9.726 19.147c-2.446 4.2-3.88 9.06-3.88 14.24 0 9.81 5.066 18.48 12.792 23.53-4.728-.14-9.142-1.41-13.013-3.517-.04.107-.04.24-.04.37 0 13.705 9.93 25.11 23.076 27.714-2.413.642-4.94.996-7.56.996-1.87 0-2.907-.61-4.628-.947 3.648 11.242 12.14 18.704 24.707 18.95-9.793 7.578-19.462 12.355-32.944 12.355-2.314 0-6.004.255-8.236 0 12.7 8.02 27.788 13.185 44.037 13.185 52.816 0 81.715-43.09 81.715-80.463 0-1.236-.008-2.447-.074-3.65 5.6-4.002 10.468-8.992 14.322-14.667z"/></g></svg>
-							</div>
-						</div>
-						<div class="wpmudev-social--item wpmudev-social--google">
-							<div id="wpmudev-quizwiz-wrap--google"></div>
-							<div class="wpmudev-item--icon wpmudev-google">
-								<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140" preserveAspectRatio="none" class="wpmudev-i_google"><g fill="none" fill-rule="evenodd"><path fill="none" d="M0 0h140v140H0z"/><path class="wpmudev-icon-path" d="M.118 65.574C.5 42.667 21.56 22.606 44.468 23.37c10.975-.51 21.293 4.267 29.7 10.975-3.588 4.077-7.304 8.004-11.273 11.677-10.106-6.984-24.478-8.98-34.584-.913-14.455 9.998-15.114 33.606-1.208 44.368 13.523 12.272 39.083 6.18 42.82-12.61-8.47-.127-16.963 0-25.433-.276-.023-5.053-.044-10.105-.023-15.157 14.16-.042 28.32-.065 42.502.042.848 11.89-.723 24.542-8.026 34.37-11.06 15.562-33.266 20.105-50.59 13.44-17.387-6.625-29.7-24.99-28.236-43.713zm114.47-16.9h12.632c.02 4.226.042 8.472.085 12.696 4.225.044 8.47.044 12.695.086v12.632c-4.224.042-8.45.063-12.695.106-.043 4.245-.064 8.47-.085 12.695h-12.653c-.042-4.226-.042-8.45-.085-12.675l-12.695-.127V61.456c4.225-.042 8.45-.063 12.695-.086.022-4.245.064-8.47.106-12.695z"/></g></svg>
-							</div>
-						</div>
-						<div class="wpmudev-social--item wpmudev-social--linkedin">
-							<div id="wpmudev-quizwiz-wrap--linkedin"></div>
-							<div class="wpmudev-item--icon wpmudev-linkedin">
-								<svg xmlns="http://www.w3.org/2000/svg" width="140" height="140" viewBox="0 0 140 140" preserveAspectRatio="none" class="wpmudev-i_linkedin"><g fill="none" fill-rule="evenodd"><path fill="none" d="M0 0h140v140H0z"/><path class="wpmudev-icon-path" d="M29.368 140H.878V47.412h28.49V140zm0-125.406c0 8.106-5.667 14.597-14.77 14.597h-.17C5.668 29.19 0 22.7 0 14.595 0 6.31 5.837 0 14.77 0c8.93 0 14.428 6.31 14.598 14.594zM75.846 140H47.21s.413-84.283 0-93.146h28.633l-.206 12.383c4.11-6.446 11.512-15.916 28.376-15.916C124.58 43.32 140 56.823 140 85.837V140h-28.68V87.248c0-12.696-7.095-19.145-18.407-19.145-8.635 0-13.778 5.842-16.038 11.486-.826 2.012-1.03 4.835-1.03 7.658V140z"/></g></svg>
-							</div>
-						</div>
-					</div>
-					<label class="wpmudev-label--info"><span>{{Forminator.l10n.quizzes.smartcrawl}}</span></label>
-				</div>
-			</div>
+			<div id="forminator-knowledge-settings" class="sui-box-body"></div>
 
 		{[ } else { ]}
-
-			<div class="wpmudev-heading">
-				<label class="wpmudev-heading--title">{{Forminator.l10n.quizzes.results}}</label>
+			
+			<div class="sui-box-header">
+				
+				<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.results }}</h3>
+				
 			</div>
 
-			<div id="forminator-quizwiz-wrap--results">
-				<label id="forminator-validate-results" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.quizzes.validate_form_result }}</span></label>
-			</div>
+			<div id="forminator-quizwiz-wrap--results" class="sui-box-body"></div>
+
+			<!-- <label id="forminator-validate-results" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.quizzes.validate_form_result }}</span></label> -->
 
 		{[ } ]}
 
@@ -222,665 +144,410 @@
 
 	<script type="text/template" id="quiz-section-details-tpl">
 
-		<div class="wpmudev-heading">
-			<label class="wpmudev-heading--title">{{Forminator.l10n.quizzes.details}}</label>
+		<div class="sui-box-header">
+			
+			<h3 class="sui-box-title">{{Forminator.l10n.quizzes.details}}</h3>
+					
 		</div>
 
-		<div class="wpmudev-box-body">
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main wpmudev-has_icon">{{Forminator.l10n.quizzes.quiz_title}} <span class="wpdui-icon wpdui-icon-asterisk"></span></label>
-				</div>
-				<div id="forminator-quizwiz-wrap--title" class="wpmudev-option--container">
-					<label id="forminator-validate-name" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.quizzes.validate_form_name }}</span></label>
-				</div>
-			</div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.feat_image}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--feat-image" class="wpmudev-option--container"></div>
-			</div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.description}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--description" class="wpmudev-option--container"></div>
-			</div>
-
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.visual_style}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--visual-style" class="wpmudev-option--container"></div>
-			</div>
-
-		</div>
+		<div id="forminator-quiz-edit-details" class="sui-box-body"></div>
 
 	</script>
 
 	<script type="text/template" id="quiz-section-questions-tpl">
 
-		<div class="wpmudev-heading">
-			<label class="wpmudev-heading--title">{{Forminator.l10n.quizzes.questions_title}}</label>
-		</div>
-
-		<div id="forminator-quizwiz-wrap--multiquestion">
-			<label id="forminator-validate-questions" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.polls.validate_form_question }}</span></label>
-		</div>
-
 		{[ if( type === "nowrong") { ]}
 
-			<div class="wpmudev-heading">
-				<label class="wpmudev-heading--title">{{Forminator.l10n.quizzes.order}}</label>
+			<div class="sui-box-header">
+				
+				<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.questions_title }}</h3>
+						
 			</div>
 
-			<div class="wpmudev-option--divided">
-				<div class="wpmudev-option--name">
-					<label class="wpmudev-name--main">{{Forminator.l10n.quizzes.order_label}}</label>
-					<label class="wpmudev-name--alt">{{Forminator.l10n.quizzes.order_alt}}</label>
-				</div>
-				<div id="forminator-quizwiz-wrap--order" class="wpmudev-option--container"></div>
+			<div id="forminator-quizwiz-wrap--multiquestion" class="sui-box-body"></div>
+
+			<div id="forminator-quizwiz-wrap--order" class="sui-box-body"></div>
+
+		{[ } else { ]}
+			
+			<div class="sui-box-header">
+				
+				<h3 class="sui-box-title">{{Forminator.l10n.quizzes.questions_title}}</h3>
+						
 			</div>
 
+			<div id="forminator-quizwiz-wrap--multiquestion" class="sui-box-body"></div>
+			
 		{[ } ]}
 
 	</script>
 
 	<script type="text/template" id="quiz-section-appearance-nowrong-tpl">
 		
-		<div class="wpmudev-heading">
+		<div class="sui-box-header">
 			
-			<label class="wpmudev-heading--title">{{ Forminator.l10n.quizzes.appearance }}</label>
-
+			<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.appearance }}</h3>
+			
 		</div>
 
-		<div class="wpmudev-box-body">
+		<table class="sui-table sui-accordion fui-table-listings">
 
-			<div class="wpmudev-option--divided">
+			<tbody>
+				
+				<!-- Title -->
+				<tr class="sui-accordion-item">
 
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.title_desc }}</label>
+					<td><strong>{{ Forminator.l10n.quizzes.title }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-				</div>
+				</tr>
 
-				<div id="forminator-nowrong-wrap--title-settings" class="wpmudev-option--container"></div>
+				<tr class="sui-accordion-item-content">
 
-			</div>
+					<td id="forminator-nowrong-wrap--title-settings"></td>
 
-			<div class="wpmudev-option">
+				</tr>
 
-				<div class="wpmudev-border"></div>
+				<!-- Description -->
+				<tr class="sui-accordion-item">
 
-			</div>
+					<td><strong>{{ Forminator.l10n.quizzes.description }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			<div class="wpmudev-option--divided">
+				</tr>
 
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.description }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.desc_desc }}</label>
+				<tr class="sui-accordion-item-content">
 
-				</div>
+					<td id="forminator-nowrong-wrap--description-settings"></td>
 
-				<div id="forminator-nowrong-wrap--description-settings" class="wpmudev-option--container"></div>
+				</tr>
+				
+				<!-- Feature Image -->
+				<tr class="sui-accordion-item">
 
-			</div>
+					<td><strong>{{ Forminator.l10n.quizzes.feat_image }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			<div class="wpmudev-option">
+				</tr>
 
-				<div class="wpmudev-border"></div>
+				<tr class="sui-accordion-item-content">
 
-			</div>
+					<td id="forminator-nowrong-wrap--image-settings"></td>
 
-			<div class="wpmudev-option--divided">
+				</tr>
+				
+				<!-- Question -->
+				<tr class="sui-accordion-item">
 
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.feat_image }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.image_desc }}</label>
+					<td><strong>{{ Forminator.l10n.quizzes.questions_title }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-				</div>
+				</tr>
 
-				<div id="forminator-nowrong-wrap--image-settings" class="wpmudev-option--container"></div>
+				<tr class="sui-accordion-item-content">
 
-			</div>
+					<td id="forminator-nowrong-wrap--question-settings"></td>
 
-			<div class="wpmudev-option">
+				</tr>
+				
+				<!-- Answer -->
+				<tr class="sui-accordion-item">
 
-				<div class="wpmudev-border"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.answer }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option--divided">
+				<tr class="sui-accordion-item-content">
 
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.questions_title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.question_desc }}</label>
+					<td id="forminator-nowrong-wrap--answer-settings"></td>
 
-				</div>
+				</tr>
 
-				<div id="forminator-nowrong-wrap--question-settings" class="wpmudev-option--container"></div>
+				<!-- Submit -->
+				<tr class="sui-accordion-item">
 
-			</div>
+					<td><strong>{{ Forminator.l10n.quizzes.submit }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			<div class="wpmudev-option">
+				</tr>
 
-				<div class="wpmudev-border"></div>
+				<tr class="sui-accordion-item-content">
 
-			</div>
+					<td id="forminator-nowrong-wrap--submit-settings"></td>
 
-			<div class="wpmudev-option--divided">
+				</tr>
 
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.answer }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.answer_desc }}</label>
+				<!-- Result -->
+				<tr class="sui-accordion-item">
 
-				</div>
+					<td><strong>{{ Forminator.l10n.quizzes.result_appearance }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-				<div id="forminator-nowrong-wrap--answer-settings" class="wpmudev-option--container"></div>
+				</tr>
 
-			</div>
+				<tr class="sui-accordion-item-content">
 
-			<div class="wpmudev-option">
+					<td><div class="sui-box">
 
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.submit }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.submit_desc }}</label>
-
-				</div>
-
-				<div id="forminator-nowrong-wrap--submit-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-		</div>
-
-		<div class="wpmudev-heading">
-
-			<label class="wpmudev-heading--title">{{ Forminator.l10n.quizzes.result_appearance }}</label>
-
-		</div>
-
-		<div class="wpmudev-box-body">
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.background }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.background_desc }}</label>
-
-				</div>
-
-				<div id="forminator-nowrong-result-wrap--background" class="wpmudev-option--container">
-
-					<div class="wpmudev-box-gray">
-
-						<div class="wpmudev-row wpmudev-palettes">
-
-							<div id="forminator-nowrong-result-wrap--bg-main" class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.bg_main }}</label>
-
-							</div>
-
-							<div id="forminator-nowrong-result-wrap--bg-head" class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.bg_header }}</label>
-
-							</div>
-
-							<div id="forminator-nowrong-result-wrap--bg-body" class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.bg_content }}</label>
-
-							</div>
+						<div class="sui-box-header">
+							
+							<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.result_appearance }}</h3>
 
 						</div>
 
-					</div>
+						<div id="forminator-nowrong-result-box-options" class="sui-box-body"></div>
 
-				</div>
+					</div></td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
+			</tbody>
 
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.border }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.border_desc }}</label>
-
-				</div>
-
-				<div class="wpmudev-option--container">
-
-					<div class="wpmudev-box-gray">
-
-						<div id="forminator-nowrong-result-wrap--border">
-
-							<div class="wpmudev-option wpmudev-palettes">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.color }}</label>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.quiz_title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.quiz_title_desc }}</label>
-
-				</div>
-
-				<div class="wpmudev-option--container">
-
-					<div id="forminator-nowrong-result-wrap--quiz" class="wpmudev-box-gray">
-
-						<div class="wpmudev-row wpmudev-palettes">
-
-							<div class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.color }}</label>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.retake_button }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.retake_button_desc }}</label>
-
-				</div>
-
-				<div class="wpmudev-option--container">
-
-					<div id="forminator-nowrong-result-wrap--retake" class="wpmudev-box-gray">
-
-						<div class="wpmudev-row wpmudev-palettes">
-
-							<div class="wpmudev-col col-12 col-sm-6">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.background }}</label>
-								
-								<div id="forminator-nowrong-result-wrap--retake-background" class="wpmudev-pickers"></div>
-
-							</div>
-
-							<div class="wpmudev-col col-12 col-sm-6">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.font_color }}</label>
-								
-								<div id="forminator-nowrong-result-wrap--retake-color" class="wpmudev-pickers"></div>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.result_title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.result_title_desc }}</label>
-
-				</div>
-
-				<div class="wpmudev-option--container">
-
-					<div id="forminator-nowrong-result-wrap--title" class="wpmudev-box-gray">
-
-						<div class="wpmudev-row wpmudev-palettes">
-
-							<div class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.color }}</label>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided wpmudev-palettes">
-
-				<div class="wpmudev-option--name">
-					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.result_description }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.result_description_desc }}</label>
-
-				</div>
-
-				<div class="wpmudev-option--container">
-
-					<div id="forminator-nowrong-result-wrap--description" class="wpmudev-box-gray">
-
-						<div class="wpmudev-row wpmudev-palettes">
-
-							<div class="wpmudev-col col-12 col-md-4">
-
-								<label class="wpmudev-label">{{ Forminator.l10n.quizzes.color }}</label>
-
-							</div>
-
-						</div>
-
-					</div>
-
-				</div>
-
-			</div>
-
-		</div>
+		</table>
 		
 	</script>
 
 	<script type="text/template" id="quiz-section-appearance-knowledge-tpl">
-		
-		<div class="wpmudev-heading">
+
+		<div class="sui-box-header">
 			
-			<label class="wpmudev-heading--title">{{ Forminator.l10n.quizzes.appearance }}</label>
-
+			<h3 class="sui-box-title">{{ Forminator.l10n.quizzes.appearance }}</h3>
+			
 		</div>
 
-		<div class="wpmudev-box-body">
+		<table class="sui-table sui-accordion fui-table-listings">
 
-			<div class="wpmudev-option--divided">
+			<tbody>
 
-				<div class="wpmudev-option--name">
+				<!-- Title -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.title }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
+
+					<td id="forminator-knowledge-wrap--title-settings"></td>
+
+				</tr>
+
+				<!-- Description -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.description }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.title_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--title-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--description-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.description }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.desc_desc }}</label>
+				</tr>
 
-				</div>
+				<!-- Feature Image -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--description-settings" class="wpmudev-option--container"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.feat_image }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.feat_image }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.image_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--image-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--image-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.questions_title }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.question_desc }}</label>
+				</tr>
 
-				</div>
+				<!-- Question -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--question-settings" class="wpmudev-option--container"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.questions_title }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.answer }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.answer_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--answer-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--question-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.correct_answer }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.correct_answer_desc }}</label>
+				</tr>
 
-				</div>
+				<!-- Answer -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--aright-settings" class="wpmudev-option--container"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.answer }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.wrong_answer }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.wrong_answer_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--awrong-settings" class="wpmudev-option--container wpmudev-palettes"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--answer-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.phrasing }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.phrasing_desc_alt }}</label>
+				</tr>
 
-				</div>
+				<!-- Correct Answer -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--phrasing-settings" class="wpmudev-option--container wpmudev-palettes"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.correct_answer }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.submit }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.submit_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--submit-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--aright-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.summary }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.summary_desc }}</label>
+				</tr>
 
-				</div>
+				<!-- Wrong Answer -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--summary-settings" class="wpmudev-option--container"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.wrong_answer }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+				<tr class="sui-accordion-item-content">
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.sshare }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.sshare_desc }}</label>
-
-				</div>
-
-				<div id="forminator-knowledge-wrap--sshare-settings" class="wpmudev-option--container"></div>
-
-			</div>
-
-			<div class="wpmudev-option">
-
-				<div class="wpmudev-border"></div>
-
-			</div>
-
-			<div class="wpmudev-option--divided">
-
-				<div class="wpmudev-option--name">
+					<td id="forminator-knowledge-wrap--awrong-settings"></td>
 					
-					<label class="wpmudev-name--main">{{ Forminator.l10n.quizzes.social }}</label>
-					<label class="wpmudev-name--alt">{{ Forminator.l10n.quizzes.social_desc }}</label>
+				</tr>
 
-				</div>
+				<!-- Phrasing -->
+				<tr class="sui-accordion-item">
 
-				<div id="forminator-knowledge-wrap--social-settings" class="wpmudev-option--container"></div>
+					<td><strong>{{ Forminator.l10n.quizzes.phrasing }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
 
-			</div>
+				</tr>
 
-		</div>
+				<tr class="sui-accordion-item-content">
+					
+					<td id="forminator-knowledge-wrap--phrasing-settings"></td>
+					
+				</tr>
+
+				<!-- Submit -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.submit }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
+					
+					<td id="forminator-knowledge-wrap--submit-settings"></td>
+					
+				</tr>
+
+				<!-- Summary -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.summary }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
+					
+					<td id="forminator-knowledge-wrap--summary-settings"></td>
+					
+				</tr>
+
+				<!-- Social Sharing -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.sshare }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
+					
+					<td id="forminator-knowledge-wrap--sshare-settings"></td>
+					
+				</tr>
+
+				<!-- Social Media -->
+				<tr class="sui-accordion-item">
+
+					<td><strong>{{ Forminator.l10n.quizzes.social }}</strong>
+						<span class="sui-accordion-open-indicator">
+							<i class="sui-icon-chevron-down"></i>
+						</span>
+					</td>
+
+				</tr>
+
+				<tr class="sui-accordion-item-content">
+					
+					<td id="forminator-knowledge-wrap--social-settings"></td>
+					
+				</tr>
+
+			</tbody>
+
+		</table>
 
 	</script>
 

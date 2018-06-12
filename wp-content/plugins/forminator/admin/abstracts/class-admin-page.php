@@ -40,11 +40,13 @@ abstract class Forminator_Admin_Page {
 
 	/**
 	 * @since 1.0
-	 * @param string $page_slug   Page slug.
-	 * @param string $page_title  Page title.
-	 * @param string $menu_title  Menu title.
-	 * @param bool   $parent      Parent or not.
-	 * @param bool   $render      Render the page.
+	 *
+	 * @param string $page_slug  Page slug.
+	 * @param string $folder
+	 * @param string $page_title Page title.
+	 * @param string $menu_title Menu title.
+	 * @param bool   $parent     Parent or not.
+	 * @param bool   $render     Render the page.
 	 */
 	public function __construct(
 			$page_slug,
@@ -89,9 +91,14 @@ abstract class Forminator_Admin_Page {
 	/**
 	 * Use that method instead of __construct
 	 *
+	 * @todo  : deperecate this, since its not correct way to execute action on page,
+	 * instead this function will executed everywhere on all pages,
+	 *        unless you are really wanna do that?!
+	 *
 	 * @since 1.0
 	 */
-	public function init() {}
+	public function init() {
+	}
 
 	/**
 	 * Hooks before content render
@@ -145,6 +152,7 @@ abstract class Forminator_Admin_Page {
 	 */
 	public function add_page_hooks() {
 		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+		add_filter( 'admin_body_class', array( $this, 'admin_body_classes' ) );
 		add_action( 'init', array( $this, 'init_scripts' ) );
 	}
 
@@ -158,6 +166,9 @@ abstract class Forminator_Admin_Page {
 		// Load jquery ui
 		forminator_admin_jquery_ui();
 
+		// Load shared-ui scripts
+		forminator_sui_scripts();
+
 		// Load admin fonts
 		forminator_admin_enqueue_fonts( FORMINATOR_VERSION );
 
@@ -165,7 +176,7 @@ abstract class Forminator_Admin_Page {
 		forminator_admin_enqueue_styles( FORMINATOR_VERSION );
 
 		$forminator_data = new Forminator_Admin_Data();
-		$forminator_l10n = new Forminator_Admin_l10n();
+		$forminator_l10n = new Forminator_Admin_L10n();
 
 		// Load admin scripts
 		forminator_admin_enqueue_scripts(
@@ -195,33 +206,41 @@ abstract class Forminator_Admin_Page {
 	 * @since 1.0
 	 */
 	protected function render_header() { ?>
-		<header id="wpmudev-header">
+		<header class="sui-header">
 			<?php
-			if($this->template_exists( $this->folder . '/header' )) {
+			if ( $this->template_exists( $this->folder . '/header' ) ) {
 				$this->template( $this->folder . '/header' );
-			} else { ?>
-				<h1><?php echo esc_html( get_admin_page_title() ); ?></h1>
+			} else {
+			?>
+				<h1 class="sui-header-title"><?php echo esc_html( get_admin_page_title() ); ?></h1>
 			<?php } ?>
 
 		</header>
-	<?php }
+		<?php
+	}
 
 	/**
 	 * Render page footer
 	 *
 	 * @since 1.0
 	 */
-	protected function render_footer() { ?>
-		<footer id="wpmudev-footer">
-			<?php
-			if($this->template_exists($this->folder . '/footer')) {
-				$this->template( $this->folder . '/footer' );
-			} else { ?>
-			<p><?php printf( __( 'Made with %s by WPMU DEV', Forminator::DOMAIN ), '<span class="wpdui-icon wpdui-icon-heart"></span>' ); ?></p>
-			<?php } ?>
-		</footer>
+	protected function render_footer() {
+		?>
 
-	<?php }
+		<?php
+		if ( $this->template_exists( $this->folder . '/footer' ) ) {
+			$this->template( $this->folder . '/footer' );
+		}
+		?>
+
+		<div class="sui-footer">
+
+			<div class="sui-footer"><?php printf( esc_html__( 'Made with %s by WPMU DEV', Forminator::DOMAIN ), '<i class="sui-icon-heart"></i>' ); ?></div>
+
+		</div>
+
+		<?php
+	}
 
 	/**
 	 * Render page container
@@ -230,7 +249,7 @@ abstract class Forminator_Admin_Page {
 	 */
 	public function render() {
 		?>
-		<main id="wpmudev-main" class="wpmudev-ui <?php echo 'wpmudev-forminator-' . $this->page_slug; ?>">
+		<main class="sui-wrap <?php echo esc_attr( 'wpmudev-forminator-' . $this->page_slug ); ?>">
 			<?php
 			$this->render_header();
 
@@ -272,17 +291,18 @@ abstract class Forminator_Admin_Page {
 				$args['template_id'] = $args['id'];
 			}
 
+			// todo: refactor this function
 			extract( $args );
 
-			include( $file );
+			include $file ;
 
 			$content = ob_get_clean();
 		}
 
-		if ( ! $echo )
-			return $content;
+		if ( $echo )
+			echo $content;// WPCS: XSS ok.
 
-		echo $content;
+		return $content;
 	}
 
 	/**
@@ -301,12 +321,14 @@ abstract class Forminator_Admin_Page {
 	 * Add a box to the page
 	 *
 	 * @since 1.0
-	 * @param $box_id
-	 * @param $title
+	 *
+	 * @param        $box_id
+	 * @param        $title
+	 * @param        $class
 	 * @param string $header_callback
 	 * @param string $main_callback
 	 * @param string $footer_callback
-	 * @param array $args
+	 * @param array  $args
 	 */
 	public function add_box(
 		$box_id,
@@ -323,13 +345,14 @@ abstract class Forminator_Admin_Page {
 			$this->content_boxes[ $this->page_slug ] = array();
 		}
 
-		$box = array('id' => $box_id,
-			'title' => $title,
-			'class' => $class,
+		$box = array(
+			'id'              => $box_id,
+			'title'           => $title,
+			'class'           => $class,
 			'header_callback' => $header_callback,
-			'main_callback' => $main_callback,
+			'main_callback'   => $main_callback,
 			'footer_callback' => $footer_callback,
-			'args' => $args
+			'args'            => $args,
 		);
 
 		$box = apply_filters(
@@ -412,5 +435,42 @@ abstract class Forminator_Admin_Page {
 		);
 
 		$this->template( 'boxes/popup-box', $args );
+	}
+
+	/**
+	 * Generates the admin body class required for WPMU DEV Shared UI
+	 *
+	 * @since 1.0.2
+	 * @return string $sui_body_class
+	 */
+	public function get_sui_body_class() {
+		$sanitize_version = str_replace( '.', '-', FORMINATOR_SUI_VERSION );
+		$sui_body_class = "sui-$sanitize_version";
+
+		return $sui_body_class;
+	}
+
+	/**
+	 * Add admin body classes
+	 *
+	 * @since 1.0.2
+	 * @param string $classes
+	 * @return string $classes
+	 */
+	public function admin_body_classes( $classes ) {
+
+		$screen = get_current_screen();
+
+		$classes = '';
+
+		// Do nothing if not a forminator page
+		if ( strpos( $screen->base, '_page_forminator' ) === false ) {
+			return $classes;
+		}
+
+		$classes .= $this->get_sui_body_class();
+
+		return $classes;
+
 	}
 }

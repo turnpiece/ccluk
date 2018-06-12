@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Forminator Pro
- * Version: 1.0.6
+ * Version: 1.1.0
  * Plugin URI:  https://premium.wpmudev.org/project/forminator/
  * Description: Capture user information (as detailed as you like), engage users with interactive polls that show real-time results and graphs, “no wrong answer” Facebook-style quizzes and knowledge tests.
  * Author: WPMU DEV
@@ -9,7 +9,7 @@
  * Text Domain: forminator
  * Domain Path: /languages/
  * WDP ID: 2097296
-*/
+ */
 /*
 Copyright 2009-2018 Incsub (http://incsub.com)
 Author – Cvetan Cvetanov (cvetanov)
@@ -34,7 +34,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 if ( ! defined( 'FORMINATOR_VERSION' ) ) {
-	define( 'FORMINATOR_VERSION', '1.0.6' );
+	define( 'FORMINATOR_VERSION', '1.1.0' );
+}
+
+if ( ! defined( 'FORMINATOR_SUI_VERSION' ) ) {
+	define( 'FORMINATOR_SUI_VERSION', '2.2.2' );
 }
 
 /**
@@ -62,13 +66,18 @@ if ( ! class_exists( 'Forminator' ) ) {
 		public $forminator;
 
 		/**
+		 * @var Forminator_Addon_Loader
+		 */
+		private $forminator_addon_loader;
+
+		/**
 		 * Return the plugin instance
 		 *
 		 * @since 1.0
 		 * @return Forminator
 		 */
 		public static function get_instance() {
-			if ( self::$instance == null ) {
+			if ( is_null( self::$instance ) ) {
 				self::$instance = new self();
 			}
 
@@ -85,6 +94,85 @@ if ( ! class_exists( 'Forminator' ) ) {
 			$this->include_vendors();
 			$this->init();
 			$this->load_textdomain();
+
+			if ( self::is_addons_feature_enabled() ) {
+				$this->init_addons();
+			}
+		}
+
+		/**
+		 * Return status of Addon feature
+		 *
+		 * If this function return false, then addon functionality will be disabled
+		 *
+		 * @since 1.1
+		 *
+		 * @return bool
+		 */
+		public static function is_addons_feature_enabled() {
+			// force enable addon on entire planet
+			$enabled = true;
+
+			/**
+			 * Filter the status of addons feature
+			 *
+			 * @since 1.1
+			 *
+			 * @param bool $enabled current status of addons feature
+			 */
+			$enabled = apply_filters( 'forminator_is_addons_feature_enabled', $enabled );
+
+			return $enabled;
+		}
+
+		/**
+		 * Initiate Addons Helper and Register internal Addons
+		 *
+		 * This function will also trigger action `forminator_addons_loaded`
+		 *
+		 * @since 1.1
+		 */
+		public function init_addons() {
+
+			/**
+			 * Triggered before load and registering internal addons
+			 *
+			 * Only triggered when addons feature is enabled @see Forminator::is_addons_feature_enabled()
+			 * Keep in mind that @see Forminator_Addon_Loader not yet instantiated
+			 *
+			 * @since 1.1
+			 */
+			do_action( 'forminator_before_load_addons' );
+
+			include_once forminator_plugin_dir() . 'library/helpers/helper-addon.php';
+			$this->forminator_addon_loader = Forminator_Addon_Loader::get_instance();
+			$this->load_forminator_addons();
+
+			/**
+			 * Triggered after internal addons of forminator loaded
+			 *
+			 * This action will be used by external addon to register
+			 * Registering addon will use @see Forminator_Addon_Loader::register()
+			 *
+			 * @since 1.1
+			 */
+			do_action( 'forminator_addons_loaded' );
+		}
+
+		/**
+		 * Load internal addons
+		 *
+		 * Load pre-packaged addons
+		 *
+		 * @since 1.1
+		 */
+		public function load_forminator_addons() {
+			$addons_directory = forminator_addons_dir();
+			if ( file_exists( $addons_directory . '/class-addon-autoload.php' ) ) {
+				include_once $addons_directory . '/class-addon-autoload.php';
+				$autoloader = new Forminator_Addon_Autoload();
+				$autoloader->load();
+			}
 		}
 
 		/**
@@ -95,7 +183,8 @@ if ( ! class_exists( 'Forminator' ) ) {
 		private function includes() {
 			// Core files.
 			/* @noinspection PhpIncludeInspection */
-			include_once( forminator_plugin_dir() . 'library/class-core.php' );
+			include_once forminator_plugin_dir() . 'library/class-core.php';
+			include_once forminator_plugin_dir() . 'library/class-addon-loader.php';
 		}
 
 		/**
@@ -150,10 +239,10 @@ if ( ! class_exists( 'Forminator' ) ) {
 						'forminator_page_forminator-knowledge-wizard-network',
 						'forminator_page_forminator-quiz-view',
 						'forminator_page_forminator-quiz-view-network',
-					)
+					),
 				);
 				/** @noinspection PhpIncludeInspection */
-				include_once( forminator_plugin_dir() . 'library/lib/dash-notice/wpmudev-dash-notification.php' );
+				include_once forminator_plugin_dir() . 'library/lib/dash-notice/wpmudev-dash-notification.php';
 			}
 		}
 
@@ -202,5 +291,17 @@ if ( ! function_exists( 'forminator_plugin_dir' ) ) {
 	 */
 	function forminator_plugin_dir() {
 		return trailingslashit( plugin_dir_path( __FILE__ ) );
+	}
+}
+
+if ( ! function_exists( 'forminator_addons_dir' ) ) {
+	/**
+	 * Return plugin path
+	 *
+	 * @since 1.0.5
+	 * @return string
+	 */
+	function forminator_addons_dir() {
+		return trailingslashit( forminator_plugin_dir() . 'addons' );
 	}
 }

@@ -1,0 +1,102 @@
+@include body-class {
+
+	.wp-picker-container {
+		display: block;
+		position: relative;
+
+		.wp-color-result {
+			width: 30px;
+			height: 30px;
+			position: absolute;
+			z-index: 1;
+			top: 5px;
+			left: 5px;
+			margin: 0;
+			padding: 0;
+			border: 1px solid $form--input-border-color;
+			border-radius: $form--input-border-radius;
+			box-shadow: none;
+
+			.wp-color-result-text {
+				@extend %sui-screen-reader-text;
+			}
+		}
+
+		.wp-picker-input-wrap {
+			display: block;
+			position: relative;
+
+			label {
+				display: block;
+			}
+
+			.wp-color-picker {
+				@extend .sui-form-control;
+				margin: 0;
+				padding-left: 40px;
+				padding-right: 90px;
+			}
+
+			.wp-picker-clear {
+				@extend .sui-button;
+				position: absolute;
+				top: 5px;
+				right: 5px;
+				
+				&, &:hover, &:active {
+					outline: none;
+					box-shadow: none;
+				}
+			}
+
+			&.hidden {
+				display: block;
+			}
+		}
+
+		.wp-picker-holder {
+			display: block;
+			margin: $sui-gutter/2 0 0;
+
+			.iris-picker {
+				width: auto !important;
+				height: auto !important;
+				padding: 10px;
+				padding-bottom: 10px !important;
+				border: 1px solid $form--input-border-color;
+				border-radius: $form--input-border-radius;
+				background-color: $form--input-bg-color;
+
+				.iris-square {
+					float: none;
+				}
+			}
+
+			.iris-border {
+				
+				.iris-picker-inner {
+					display: flex;
+					position: relative;
+					top: auto;
+					right: auto;
+					bottom: auto;
+					left: auto;
+				}
+			}
+			
+			@include media( max-width, md ) {
+				margin: $sui-gutter-md/2 0 0;
+			}
+		}
+
+		&.wp-picker-active {
+
+			.wp-picker-holder {
+	
+				.iris-picker {
+					display: inline-flex !important;
+				}
+			}
+		}
+	}
+}

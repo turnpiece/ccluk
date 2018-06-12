@@ -20,7 +20,7 @@ class Forminator_Autofill_Simple extends Forminator_Autofill_Provider_Abstract {
 	 * @return Forminator_Autofill_Provider_Interface|Forminator_Autofill_Simple|null
 	 */
 	public static function get_instance() {
-		if ( self::$_instance == null ) {
+		if ( is_null(self::$_instance) ) {
 			self::$_instance = new self();
 		}
 

@@ -20,8 +20,9 @@ class Forminator_Database_Tables {
 
 	/**
      * Current tables
+	 *
      */
-	static $tables = array();
+	private static $tables = array();
 
 	/**
      * Get all the used table names
@@ -49,7 +50,7 @@ class Forminator_Database_Tables {
 	 * @since 1.0
      * @param string $name - the name of the table
      *
-     * @return string/bool
+     * @return string|bool
      */
     public static function get_table_name( $name ) {
         if ( empty( self::$tables ) ) {
@@ -133,16 +134,18 @@ class Forminator_Database_Tables {
 	/**
 	 * Delete custom tables
 	 *
+	 * @deprecated on 1.1 use forminator_drop_custom_tables on uninstall.php
 	 * @since 1.0
 	 */
 	public static function uninstall_database_tables() {
+		_deprecated_function(__METHOD__, '1.1', 'forminator_drop_custom_tables');
 		global $wpdb;
 		$tables = self::table_names( $wpdb );
 		$wpdb->hide_errors();
 
         foreach ( $tables as $name => $table_name ){
-            if ( ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) == $table_name )) {
-                $wpdb->query( "DROP TABLE {$table_name}" );
+            if ( ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) === $table_name ) ) {
+	            $wpdb->query( $wpdb->prepare( "DROP TABLE %s" , $table_name) );
             }
         }
 	}

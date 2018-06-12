@@ -61,12 +61,12 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	public function getRightAnswerForQuestion( $slug ) {
 		if( !empty( $this->questions ) ) {
 			foreach ( $this->questions as $question ) {
-				if ( $question['slug'] == $slug ) {
+				if ( $question['slug'] === $slug ) {
 					$answers = $question['answers'];
 					$picked  = null;
 					$index   = - 1;
 					foreach ( $answers as $k => $answer ) {
-						if ( isset( $answer['toggle'] ) && filter_var( $answer['toggle'], FILTER_VALIDATE_BOOLEAN ) == true ) {
+						if ( isset( $answer['toggle'] ) && filter_var( $answer['toggle'], FILTER_VALIDATE_BOOLEAN ) === true ) {
 							$picked = $answer;
 							$index  = $k;
 							break;
@@ -92,7 +92,7 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	public function getQuestion( $slug ) {
 		if( !empty( $this->questions ) ) {
 			foreach ( $this->questions as $question ) {
-				if ( $question['slug'] == $slug ) {
+				if ( $question['slug'] === $slug ) {
 					return $question;
 				}
 			}
@@ -113,7 +113,7 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	public function getAnswer( $slug, $index ) {
 		if( !empty( $this->questions ) ) {
 			foreach ( $this->questions as $question ) {
-				if ( $question['slug'] == $slug ) {
+				if ( $question['slug'] === $slug ) {
 					$answers = $question['answers'];
 
 					return $answers[ $index ];
@@ -185,7 +185,7 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	public function getResult( $slug ) {
 		if( !empty( $this->results ) ) {
 			foreach ( $this->results as $result ) {
-				if ( $result['slug'] == $slug ) {
+				if ( $result['slug'] === $slug ) {
 					return $result;
 				}
 			}
@@ -204,13 +204,13 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	 * @return bool|Forminator_Base_Form_Model
 	 */
 	public function load_preview( $id, $data ) {
-		$formModel = $this->load( $id, true );
+		$form_model = $this->load( $id, true );
 
 		// If bool, abort
-		if( is_bool( $formModel ) ) return false;
+		if( is_bool( $form_model ) ) return false;
 
-		$formModel->clearFields();
-		$formModel->setVarInArray( 'name', 'formName', $data );
+		$form_model->clearFields();
+		$form_model->setVarInArray( 'name', 'formName', $data );
 
 		//build the field
 		$questions = array();
@@ -219,15 +219,15 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 			unset( $data['questions'] );
 		}
 
-		$formModel->questions = $questions;
+		$form_model->questions = $questions;
 
 		//build the settings
 		if( isset( $data['settings'] ) && isset( $data['settings']['formID']) ) {
 			$settings            = $data['settings'];
-			$formModel->settings = $settings;
+			$form_model->settings = $settings;
 		}
 
-		return $formModel;
+		return $form_model;
 	}
 
 	/**
@@ -236,7 +236,7 @@ class Forminator_Quiz_Form_Model extends Forminator_Base_Form_Model {
 	 *
 	 * @return Forminator_Base_Form_Model
 	 */
-	public static function model( $class_name = __CLASS__ ) {
+	public static function model( $class_name = __CLASS__ ) { // phpcs:ignore
 		return parent::model( $class_name );
 	}
 }

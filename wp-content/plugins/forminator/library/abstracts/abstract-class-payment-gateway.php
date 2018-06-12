@@ -54,17 +54,19 @@ abstract class Forminator_Payment_Gateway {
 	 *
 	 * @since 1.0
 	 */
-	public abstract function init_settings();
+	abstract public function init_settings();
 
 	/**
 	 * Handle Purchase
 	 *
 	 * @since 1.0
-	 * @param array $response - the response array
+	 *
+	 * @param array $response       - the response array
 	 * @param array $product_fields - the product fields
-	 * @param int $entry_id - the entry id ( reference for callback)
-	 * @param int $page_id - the page id. Used to generate a return url
-	 * @param int $shipping - the shipping cost
+	 * @param       $field_data_array
+	 * @param int   $entry_id       - the entry id ( reference for callback)
+	 * @param int   $page_id        - the page id. Used to generate a return url
+	 * @param int   $shipping       - the shipping cost
 	 *
 	 * @return array $response
 	 */

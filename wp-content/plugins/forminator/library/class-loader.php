@@ -53,7 +53,7 @@ class Forminator_Loader {
 	 */
 	public function is_php( $file ) {
 		$check = substr( $file, - 4 );
-		if ( $check == '.php' ) {
+		if ( '.php' === $check ) {
 			return true;
 		}
 

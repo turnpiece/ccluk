@@ -1,1 +1,0 @@
-<p>Please, refer to <strong>Hustle</strong> plugin to know how to configure this.</p>

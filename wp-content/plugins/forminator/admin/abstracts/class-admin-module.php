@@ -43,7 +43,7 @@ abstract class Forminator_Admin_Module {
 		add_action( 'admin_head', array( $this, "hide_menu_pages" ) );
 		add_filter( 'forminator_data', array( $this, "add_js_defaults" ) );
 		add_filter( 'forminator_l10n', array( $this, "add_l10n_strings" ) );
-		add_filter( 'parent_file', array( $this, 'highlight_admin_parent') );
+		add_filter( 'submenu_file', array( $this, "admin_submenu_file" ), 10, 2 );
 	}
 
 	/**
@@ -115,7 +115,9 @@ abstract class Forminator_Admin_Module {
 	 * @return bool
 	 */
 	public function is_admin_home() {
-		return  (bool) isset( $_GET['page'] ) && ( $_GET['page'] == $this->page );
+		global $plugin_page;
+
+		return $this->page === $plugin_page;
 	}
 
 	/**
@@ -125,22 +127,47 @@ abstract class Forminator_Admin_Module {
 	 * @return bool
 	 */
 	public function is_admin_wizard() {
-		return  (bool) isset( $_GET['page'] ) && ( $_GET['page'] == $this->page_edit );
+		global $plugin_page;
+
+		return $this->page_edit === $plugin_page;
 	}
 
 	/**
 	 * Highlight parent page in sidebar
 	 *
-	 * @since 1.0
+	 * @deprecated 1.1 No longer used because this function override prohibited WordPress global of $plugin_page
+	 * @since      1.0
+	 *
+	 * @param $file
+	 *
 	 * @return mixed
 	 */
 	public function highlight_admin_parent( $file ) {
+		_deprecated_function( __METHOD__, '1.1', null );
+		return $file;
+	}
+
+	/**
+	 * Highlight submenu on admin page
+	 *
+	 * @since 1.1
+	 *
+	 * @param $submenu_file
+	 * @param $parent_file
+	 *
+	 * @return string
+	 */
+	public function admin_submenu_file( $submenu_file, $parent_file ) {
 		global $plugin_page;
 
-		if ( $this->page_edit == $plugin_page || $this->page_entries == $plugin_page ) {
-			$plugin_page = $this->page;
+		if ( 'forminator' !== $parent_file ) {
+			return $submenu_file;
 		}
 
-		return $file;
+		if ( $this->page_edit === $plugin_page || $this->page_entries === $plugin_page ) {
+			$submenu_file = $this->page;
+		}
+
+		return $submenu_file;
 	}
 }

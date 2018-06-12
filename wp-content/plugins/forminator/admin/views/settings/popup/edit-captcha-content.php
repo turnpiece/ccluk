@@ -1,73 +1,50 @@
 <?php
-$captcha_key       = get_option( "forminator_captcha_key", "" );
-$captcha_secret    = get_option( "forminator_captcha_secret", "" );
-$captcha_language  = get_option( "forminator_captcha_language", "" );
-$captcha_theme		 = get_option( "forminator_captcha_theme", "" );
+$captcha_key      = get_option( "forminator_captcha_key", "" );
+$captcha_secret   = get_option( "forminator_captcha_secret", "" );
+$captcha_language = get_option( "forminator_captcha_language", "" );
+$captcha_theme    = get_option( "forminator_captcha_theme", "" );
+$nonce            = wp_create_nonce( 'forminator_save_popup_captcha' );
 ?>
-<div class="wpmudev-hidden-popup wpmudev-popup-form" style="display: none">
 
-	<div class="wpmudev-row">
+<div class="sui-box-body wpmudev-popup-form">
 
-	    <div class="wpmudev-col col-12">
-
-	        <label><?php _e( "Site Key", Forminator::DOMAIN ); ?></label>
-
-	        <input class="wpmudev-input" name="captcha_key" value="<?php echo $captcha_key; ?>">
-
-			<div style="padding-bottom: 10px; margin-top: -15px;"><?php _e( "Get reCaptcha API credentials by registering", Forminator::DOMAIN ); ?> <a href="https://www.google.com/recaptcha/intro/index.html" target="_blank"><?php _e( "here.", Forminator::DOMAIN ); ?></a></div>
-
-		</div>
-
+	<div class="sui-form-field">
+		<label for="captcha_key" class="sui-label"><?php esc_html_e( "Site Key", Forminator::DOMAIN ); ?></label>
+		<input id="captcha_key" class="sui-form-control" name="captcha_key" value="<?php echo esc_attr( $captcha_key ); ?>">
+		<span class="sui-description">
+			<?php esc_html_e( "Get reCaptcha API credentials by registering", Forminator::DOMAIN ); ?>
+			<a href="https://www.google.com/recaptcha/intro/index.html" target="_blank"><?php esc_html_e( "here.", Forminator::DOMAIN ); ?></a>
+		</span>
 	</div>
 
-	<div class="wpmudev-row">
-
-	    <div class="wpmudev-col col-12">
-
-	        <label><?php _e( "Secret Key", Forminator::DOMAIN ); ?></label>
-
-	        <input class="wpmudev-input" name="captcha_secret" value="<?php echo $captcha_secret; ?>">
-
-	    </div>
-
+	<div class="sui-form-field">
+		<label for="captcha_secret" class="sui-label"><?php esc_html_e( "Secret Key", Forminator::DOMAIN ); ?></label>
+		<input id="captcha_secret" class="sui-form-control" name="captcha_secret" value="<?php echo esc_attr( $captcha_secret ); ?>">
 	</div>
 
-	<div class="wpmudev-row">
-
-	    <div class="wpmudev-col col-12">
-
-	        <label><?php _e( "Language", Forminator::DOMAIN ); ?></label>
-
-	        <input class="wpmudev-input" name="captcha_language" value="<?php echo $captcha_language; ?>">
-
-			<div style="padding-bottom: 10px; margin-top: -15px;"><?php _e( "Find your language code", Forminator::DOMAIN ); ?> <a href="https://developers.google.com/recaptcha/docs/language" target="_blank"><?php _e( "here.", Forminator::DOMAIN ); ?></a></div>
-
-		</div>
-
+	<div class="sui-form-field">
+		<label for="captcha_language" class="sui-label"><?php esc_html_e( "Language", Forminator::DOMAIN ); ?></label>
+		<input id="captcha_language" class="sui-form-control" name="captcha_language" value="<?php echo esc_attr( $captcha_language ); ?>">
+		<span class="sui-description">
+			<?php esc_html_e( "Find your language code", Forminator::DOMAIN ); ?>
+			<a href="https://developers.google.com/recaptcha/docs/language" target="_blank"><?php esc_html_e( "here.", Forminator::DOMAIN ); ?></a>
+		</span>
 	</div>
 
-	<div class="wpmudev-row">
-
-	    <div class="wpmudev-col col-12">
-
-	        <label><?php _e( "Theme", Forminator::DOMAIN ); ?></label>
-
-			  <select name="captcha_theme" class="wpmudev-select">
-				  <option value="light" <?php if( $captcha_theme == "ligh" ) echo 'selected="selected"'; ?>>Light</option>
-				  <option value="dark" <?php if( $captcha_theme == "dark" ) echo 'selected="selected"'; ?>>Dark</option>
-			  </select>
-	    </div>
-
+	<div class="sui-form-field">
+		<label for="captcha_theme" class="sui-label"><?php esc_html_e( "Theme", Forminator::DOMAIN ); ?></label>
+		<select name="captcha_theme" class="wpmudev-select" id="captcha_theme">
+			<option value="light" <?php if( "ligh" === $captcha_theme ) echo 'selected="selected"'; ?>>Light</option>
+			<option value="dark" <?php if( "dark" === $captcha_theme ) echo 'selected="selected"'; ?>>Dark</option>
+		</select>
 	</div>
+</div>
 
-	<div class="wpmudev-row">
-
-		 <div class="wpmudev-col col-12">
-
-			  <button class="wpmudev-button wpmudev-action-done wpmudev-button-blue" data-nonce="<?php echo wp_create_nonce( 'forminator_save_popup_captcha' ) ?>"><?php _e( "Done", Forminator::DOMAIN ); ?> </button>
-
-		 </div>
-
+<div class="sui-box-footer">
+	<button class="sui-button forminator-popup-cancel" data-a11y-dialog-hide="forminator-popup"><?php esc_html_e( 'Cancel', Forminator::DOMAIN ); ?></button>
+	<div class="sui-actions-right">
+		<button class="sui-button sui-button-primary wpmudev-action-done" data-nonce="<?php echo esc_attr( $nonce ); ?>">
+			<?php esc_html_e( "Save", Forminator::DOMAIN ); ?>
+		</button>
 	</div>
-
 </div>

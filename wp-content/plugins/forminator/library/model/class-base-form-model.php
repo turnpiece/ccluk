@@ -20,9 +20,9 @@ abstract class Forminator_Base_Form_Model {
 	public $name;
 
 	/**
-	 * @var
+	 * @var string
 	 */
-	public $clientID;
+	public $client_id;
 
 	/**
 	 * Contain fields of this form
@@ -58,40 +58,40 @@ abstract class Forminator_Base_Form_Model {
 		//todo use save_post for saving the form and update_post_meta for saving fields
 		//prepare the data
 		$maps     = array_merge( $this->getDefaultMaps(), $this->getMaps() );
-		$postData = array();
-		$metaData = array();
+		$post_data = array();
+		$meta_data = array();
 
 		if( !empty( $maps ) ) {
 			foreach ( $maps as $map ) {
 				$attribute = $map['property'];
-				if ( $map['type'] == 'post' ) {
-					$postData[ $map['field'] ] = $this->$attribute;
+				if ( 'post' === $map['type'] ) {
+					$post_data[ $map['field'] ] = $this->$attribute;
 				} else {
-					if ( $map['field'] == 'fields' ) {
-						$metaData[ $map['field'] ] = $this->getFieldsAsArray();
+					if ( 'fields' === $map['field'] ) {
+						$meta_data[ $map['field'] ] = $this->getFieldsAsArray();
 					} else {
-						$metaData[ $map['field'] ] = $this->$attribute;
+						$meta_data[ $map['field'] ] = $this->$attribute;
 					}
 				}
 			}
 		}
 
-		$postData['post_type']   = $this->post_type;
-		$postData['post_status'] = 'publish';
+		$post_data['post_type']   = $this->post_type;
+		$post_data['post_status'] = 'publish';
 
 		//storing
-		if ( $this->id == null ) {
-			$id = wp_insert_post( $postData );
+		if ( is_null( $this->id ) ) {
+			$id = wp_insert_post( $post_data );
 		} else {
-			$id = wp_update_post( $postData );
+			$id = wp_update_post( $post_data );
 		}
 
 		// If cloned we have to update the fromID
 		if( $clone ) {
-			$metaData['settings']['formID'] = $id;
+			$meta_data['settings']['formID'] = $id;
 		}
 
-		update_post_meta( $id, self::META_KEY, $metaData );
+		update_post_meta( $id, self::META_KEY, $meta_data );
 
 		return $id;
 	}
@@ -228,12 +228,12 @@ abstract class Forminator_Base_Form_Model {
 	 *
 	 * @return Forminator_Base_Form_Model[]
 	 */
-	public function getAll( $currentPage = 1 ) {
+	public function getAll( $current_page = 1 ) {
 		$args   = array(
 			'post_type'      => $this->post_type,
 			'post_status'    => 'publish',
 			'posts_per_page' => forminator_form_view_per_page(),
-			'paged'          => $currentPage
+			'paged'          => $current_page
 		);
 		$query  = new WP_Query( $args );
 		$models = array();
@@ -281,20 +281,20 @@ abstract class Forminator_Base_Form_Model {
 	 * @return mixed
 	 */
 	private function _load( $post ) {
-		if ( $this->post_type == $post->post_type ) {
+		if ( $this->post_type === $post->post_type ) {
 			$class  = get_class( $this );
-			$object = new $class;
+			$object = new $class();
 			$meta   = get_post_meta( $post->ID, self::META_KEY, true );
 			$maps   = array_merge( $this->getDefaultMaps(), $this->getMaps() );
 
 			if( !empty( $maps ) ) {
 				foreach ( $maps as $map ) {
 					$attribute = $map['property'];
-					if ( $map['type'] == 'post' ) {
+					if ( 'post' === $map['type'] ) {
 						$att                = $map['field'];
 						$object->$attribute = $post->$att;
 					} else {
-						if ( $map['field'] == 'fields' ) {
+						if ( 'fields' === $map['field'] ) {
 							foreach ( $meta['fields'] as $fieldData ) {
 								$field         = new Forminator_Form_Field_Model();
 								$field->formID = $post->ID;
@@ -410,7 +410,7 @@ abstract class Forminator_Base_Form_Model {
 			'data'     => $data
 		);
 
-		return json_encode( $ret );
+		return wp_json_encode( $ret );
 	}
 
 	/**
@@ -443,8 +443,8 @@ abstract class Forminator_Base_Form_Model {
 			),
 			array(
 				'type'     => 'meta',
-				'property' => 'clientID',
-				'field'    => 'clientID'
+				'property' => 'client_id',
+				'field'    => 'client_id'
 			),
 		);
 	}
@@ -468,7 +468,7 @@ abstract class Forminator_Base_Form_Model {
 	 * @return mixed
 	 */
 	public static function model( $class_name = __CLASS__ ) {
-		$class = new $class_name;
+		$class = new $class_name();
 
 		return $class;
 	}

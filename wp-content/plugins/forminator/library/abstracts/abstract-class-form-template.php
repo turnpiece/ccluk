@@ -8,6 +8,8 @@ if ( ! defined( 'ABSPATH' ) ) {
  *
  * Abstract class for modules
  *
+ * @property array fields
+ * @property array settings
  * @since 1.0
  */
 

@@ -1,54 +1,64 @@
-<?php /**@var Forminator_Entries_Page $this */ ?>
-<section id="wpmudev-section">
+<?php
+$path  = forminator_plugin_url();
+$count = Forminator_Form_Entry_Model::count_all_entries();
+?>
 
-    <div class="wpmudev-row">
+<?php if ( $count > 0 ) { ?>
 
-		<div class="wpmudev-col col-12">
+	<div class="sui-box">
 
-			<div id="wpmudev-choose-entries" class="wpmudev-box">
+		<div class="sui-box-header">
 
-				<div class="wpmudev-box-section">
+			<h2 class="sui-box-title"><i class="sui-icon-filter" aria-hidden="true"></i> <?php esc_html_e( "Filter your modules", Forminator::DOMAIN ); ?></h2>
 
-					<div class="wpmudev-section--text">
+		</div>
 
-						<p class="wpmudev-subtitle"><?php _e( "Choose your entries:", Forminator::DOMAIN ); ?></p>
+		<div class="sui-box-body">
 
-						<form method="get" name="bulk-action-form" style="width:100%">
+			<p><?php esc_html_e( 'Choose the module you want to display and submissions you have for it will show up here.', Forminator::DOMAIN ); ?></p>
 
-							<input type="hidden" name="page" value="forminator-entries">
+			<form method="get" name="bulk-action-form" class="fui-select-actions">
 
-							<div class="wpmudev-actions">
+				<input type="hidden" name="page" value="forminator-entries">
 
-								<div class="wpmudev-action--bulk">
+				<select name="form_type" onchange="submit()">
 
-									<select class="wpmudev-select" name="form_type" onchange="submit()">
+					<?php foreach ( $this->get_form_types() as $post_type => $name ) { ?>
 
-										<?php foreach ( $this->get_form_types() as $post_type => $name ) { ?>
+						<option value="<?php echo esc_attr( $post_type ); ?>" <?php echo selected( $post_type, $this->get_current_form_type() ); ?>><?php echo esc_html( $name ); ?></option>
 
-											<option value="<?php echo $post_type ?>" <?php echo selected( $post_type, $this->get_current_form_type() ) ?>><?php echo $name ?></option>
+					<?php } ?>
 
-										<?php } ?>
+				</select>
 
-									</select>
+				<?php echo $this->render_form_switcher(); // phpcs:ignore ?>
 
-									<?php echo $this->render_form_switcher() ?>
-
-								</div>
-
-							</div>
-
-						</form>
-
-					</div>
-
-				</div>
-
-			</div>
+			</form>
 
 		</div>
 
 	</div>
 
-</section>
+	<?php echo $this->render_entries(); // phpcs:ignore ?>
 
-<?php echo $this->render_entries() ?>
+<?php } else { ?>
+
+	<div class="sui-box">
+
+		<div class="sui-box-body sui-block-content-center">
+
+			<img src="<?php echo $path . 'assets/img/forminator-submissions.png'; // WPCS: XSS ok. ?>"
+				srcset="<?php echo $path . 'assets/img/forminator-submissions.png'; // WPCS: XSS ok. ?> 1x, <?php echo $path . 'assets/img/forminator-submissions@2x.png'; // WPCS: XSS ok. ?> 2x" alt="<?php esc_html_e( 'Forminator', Forminator::DOMAIN ); ?>"
+				class="sui-image sui-image-center fui-image" />
+
+			<h2><?php esc_html_e( "Submissions", Forminator::DOMAIN ); ?></h2>
+
+			<p class="fui-limit-block-600 fui-limit-block-center"><?php esc_html_e( "You haven’t received any form, poll or quiz submissions yet. When you do, you’ll be able to view all the data here.", Forminator::DOMAIN ); ?></p>
+
+		</div>
+
+	</div>
+
+<?php
+}
+?>

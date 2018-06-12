@@ -23,7 +23,7 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 	 * @since 1.0
 	 */
 	public function init() {
-		$pagenum				= isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0;
+		$pagenum				= isset( $_REQUEST['paged'] ) ? absint( $_REQUEST['paged'] ) : 0; // WPCS: CSRF OK
 		$this->page_number 		= max( 1, $pagenum );
 		$this->processRequest();
 	}
@@ -38,7 +38,7 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 			return;
 		}
 
-		$nonce = $_POST['forminatorNonce'];
+		$nonce = $_POST['forminatorNonce']; // WPCS: CSRF OK
 		if ( ! wp_verify_nonce( $nonce, 'forminatorCustomFormRequest' ) ) {
 			return;
 		}
@@ -174,11 +174,12 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 
 		foreach ( $data['models'] as $model ) {
 			$modules[] = array(
-				"id"      => $model->id,
-				"title"   => $model->name,
-				"entries" => Forminator_Form_Entry_Model::count_entries( $model->id ),
-				"views"   => $form_view->count_views( $model->id ),
-				"date"    => date( get_option( 'date_format' ), strtotime( $model->raw->post_date ) )
+				"id"              => $model->id,
+				"title"           => $model->name,
+				"entries"         => Forminator_Form_Entry_Model::count_entries( $model->id ),
+				"last_entry_time" => forminator_get_latest_entry_time_by_form_id($model->id),
+				"views"           => $form_view->count_views( $model->id ),
+				"date"            => date( get_option( 'date_format' ), strtotime( $model->raw->post_date ) ),
 			);
 		}
 
@@ -194,7 +195,7 @@ class Forminator_CForm_Page extends Forminator_Admin_Page {
 	 * @return float|int
 	 */
 	public function getRate( $module ) {
-		if ( $module["views"] == 0 ) {
+		if ( 0 === $module["views"] ) {
 			$rate = 0;
 		} else {
 			$rate = round( ( $module["entries"] * 100 ) / $module["views"], 1 );

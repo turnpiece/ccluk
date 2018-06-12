@@ -2,11 +2,11 @@
 	
 	<script type="text/template" id="builder-layout-tpl">
 
-		<div id="wpmudev-form-builder" class="wpmudev-form-builder"></div>
+		<div id="forminator-form-builder" class="sui-box"></div>
 
-		<aside id="wpmudev-sidebar" class="wpmudev-sidebar wpmudev-is_active" role="complementary">
+		<aside id="forminator-form-elements" class="fui-builder-sidebar fui-active" role="complementary">
 
-			<div class="wpmudev-sidebar--wrap wpmudev-show"></div>
+			<div class="fui-sidebar-wrapper fui-show"></div>
 
 		</aside>
 
@@ -14,69 +14,64 @@
 
 	<script type="text/template" id="builder-main-tpl">
 
-		<button class="wpmudev-builder-preview wpmudev-button wpmudev-button-sm wpmudev-button-ghost" aria-hidden="true" data-modal="preview_cforms" style="display: none;" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.custom_form.preview_nonce }}">{{ Forminator.l10n.appearance.preview_form }}</button>
+		<div class="sui-box-header">
 
-		<div id="forminator-wizard-name" class="wpmudev-box">
+			<h2 class="sui-box-title">{{ Forminator.l10n.builder.build_your_form }}</h2>
 
-			<div class="wpmudev-box-section">
-
-				<div class="wpmudev-section--text">
-
-					<label class="wpmudev-label--bold">{{ Forminator.l10n.appearance.form_name }}</label>
-
-					<div  class="wpmudev-builder--form-name"></div>
-
-					<label id="forminator-validate-name" class="wpmudev-label--notice" style="display: none;"><span>{{ Forminator.l10n.appearance.form_name_validation }}</span></label>
-
-				</div>
-
+			<div class="sui-actions-right">
+				
+				<button class="sui-button sui-button-primary wpmudev-builder-preview" aria-hidden="true" data-modal="preview_cforms" data-form-id="{{ Forminator.Data.currentForm.formID }}" data-nonce="{{ Forminator.Data.modules.custom_form.preview_nonce }}">{{ Forminator.l10n.appearance.preview_form }}</button>
+				
 			</div>
 
 		</div>
 
-		<div class="wpmudev-builder">
-			 
-			<div class="wpmudev-builder--section">
-				 
-				<div class="wpmudev-builder--form">
-				</div>
+		<div class="sui-box-body">
 
-				<div class="wpmudev-builder--shadow">
+			<!-- Form Name -->
+			<div class="fui-box-gray">
+				<div class="sui-box-settings-row">
+					<div class="sui-box-settings-col-1">
+						<span class="sui-settings-label">{{ Forminator.l10n.builder.form_name }}</span>
+						<span class="sui-description">{{ Forminator.l10n.builder.form_name_description }}</span>
+					</div>
+					<div id="forminator-builder-form-name" class="sui-box-settings-col-2"></div>
 				</div>
-
 			</div>
 
+			<!-- Builder -->
+			<div class="fui-builder">
+				
+				<div class="fui-form-builder"></div>
+				
+				<div class="fui-form-builder-shadow"></div>
+				
+			</div>
+			
 		</div>
 
 	</script>
 
 	<script type="text/template" id="builder-buttons-tpl">
 		
-		<div class="wpmudev-builder--footer builder-buttons">
+		<div class="sui-box-footer">
 
-			<button class="wpmudev-button wpmudev-button-circle forminator-add-new-field">
-				<span class="wpmudev-icon--plus"></span>
-				<span class="wpmudev-sr-only">{{ Forminator.l10n.builder.new_field }}</span>
-			</button>
+			<button class="sui-button wpmudev-button-cancel">{{ Forminator.l10n.builder.cancel }}</button>
 
-			<div class="wpmudev-footer--left">
+			<div class="sui-actions-right">
 
-				<button class="wpmudev-button wpmudev-button-ghost wpmudev-button-cancel">{{Forminator.l10n.builder.cancel}}</button>
-
-			</div>
-
-			<div class="wpmudev-footer--right">
-
-				<button class="wpmudev-button forminator-save forminator-save-changes">
-					<span class="wpmudev-loading-text">{{ Forminator.l10n.builder.save }}</span>
-					<span class="wpmudev-loading"></span>
+				<button class="sui-button sui-button-ghost forminator-add-new-field">{{ Forminator.l10n.builder.add_new_field }}</button>
+				
+				<button class="sui-button sui-button-primary forminator-save forminator-save-changes">
+					<span class="sui-loading-text">{{ Forminator.l10n.builder.save }}</span>
+					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
-
-				<button class="wpmudev-button wpmudev-button-blue forminator-save forminator-save-layout">
-					<span class="wpmudev-loading-text">{{ Forminator.l10n.builder.form_settings }}</span>
-					<span class="wpmudev-loading"></span>
+				
+				<button class="sui-button forminator-save forminator-save-layout">
+					<span class="sui-loading-text">{{ Forminator.l10n.builder.form_settings }}</span>
+					<i class="sui-icon-loader sui-loading" aria-hidden="true"></i>
 				</button>
-
+				
 			</div>
 			
 		</div>
@@ -84,10 +79,8 @@
 	</script>
 
 	<script type="text/template" id="builder-main-no-fields-tpl">
-		<div class="wpmudev-form--placeholder">
-			<div class="wpmudev-form--empty">
-				<p>{{Forminator.l10n.builder.no_fields}}</p>
-			</div>
+		<div class="fui-form-builder--empty">
+			<p>{{ Forminator.l10n.builder.no_fields }}</p>
 		</div>
 	</script>
 </div>

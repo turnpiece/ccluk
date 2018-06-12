@@ -1,0 +1,772 @@
+@include body-class {
+
+	.fui-builder-page {
+
+		.sui-header,
+		#wpmudev-section,
+		.sui-footer {
+
+			@media (min-width: 783px) {
+				margin-right: calc(30px + #{$sui-gutter});
+			}
+
+			@media (min-width: 1201px) {
+				margin-right: calc(320px + #{$sui-gutter});
+			}
+		}
+
+		.sui-box-footer {
+
+			.sui-actions-right {
+
+				.forminator-add-new-field {
+					display: none;
+
+					@media ( max-width: 782px ) {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+
+	.fui-builder {
+		margin: $sui-gutter 0;
+
+		.fui-form-builder,
+        .fui-form-builder-shadow {
+			display: block;
+
+			// Empty message
+			.fui-form-builder--empty {
+				min-height: 60px;
+				display: block;
+				margin: 0;
+				padding: $sui-gutter;
+				border: 2px dashed palette( silver, alt );
+				border-radius: $border-radius;
+
+                p {
+                    text-align: center;
+                }
+			}
+
+			// Builder grid
+			// The grid is based on 12 columns per row
+			.fui-form-builder--row {
+				display: flex;
+				position: relative;
+				margin: 0 0 10px;
+                padding: #{$sui-gutter/2} 0;
+                border: 1px dashed palette( silver, alt );
+                border-radius: $border-radius;
+				background: $white;
+				transition: 0.3s ease;
+
+				.fui-form-builder--col {
+					display: block;
+					flex: 0 0 auto;
+					padding: 0 #{$sui-gutter/2};
+
+					@include media( max-width, md ) {
+						padding: #{$sui-gutter/2};
+					}
+				}
+				
+				// 4 columns
+				.fui-form-builder--col-3 {
+					max-width: 25%;
+					flex-basis: 25%;
+
+					.sui-col-md-4,
+					.sui-col-md-6 {
+						width: 100%;
+						max-width: 100%;
+						flex-basis: 100%;
+						margin-bottom: #{$sui-gutter/2};
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+					
+					@include media( max-width, md ) {
+						max-width: 100%;
+						flex-basis: 100%;
+					}
+				}
+				
+				// 3 columns
+				.fui-form-builder--col-4 {
+					max-width: 33.33%;
+					flex-basis: 33.33%;
+
+					.sui-col-md-4,
+					.sui-col-md-6 {
+						width: 100%;
+						max-width: 100%;
+						flex-basis: 100%;
+						margin-bottom: #{$sui-gutter/2};
+
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+					
+					@include media( max-width, md ) {
+						max-width: 100%;
+						flex-basis: 100%;
+					}
+				}
+				
+				// 2 columns
+				.fui-form-builder--col-6 {
+					max-width: 50%;
+					flex-basis: 50%;
+					
+					@include media( max-width, md ) {
+						max-width: 100%;
+						flex-basis: 100%;
+					}
+				}
+
+				// 12 column
+				.fui-form-builder--col-12 {
+					max-width: 100%;
+					flex-basis: 100%;
+				}
+
+				&:hover {
+					border-color: palette( silver, medium );
+				}
+				
+				@include media( max-width, md ) {
+                	padding: #{$sui-gutter/2} 0;
+				}
+			}
+
+			// Multi choices
+			// Simulate checked option for this field
+			.sui-multi-checkbox {
+
+				label:nth-child(2) {
+
+					input + span {
+						background-color: $blue;
+						color: $white;
+					}
+				}
+			}
+		}
+
+		.fui-form-builder {
+			position: relative;
+		}
+
+		.fui-form-builder-shadow {
+			display: none;
+		}
+
+		&:first-child {
+			margin-top: 0;
+
+			@include media( max-width, md ) {
+				margin-top: 0;
+			}
+		}
+
+		&:last-child {
+			margin-bottom: 0;
+
+			@include media( max-width, md ) {
+				margin-bottom: 0;
+			}
+		}
+
+		@include media( max-width, md ) {
+			margin: $sui-gutter-md 0;
+		}
+	}
+
+	.fui-builder-sidebar {
+		width: 100%;
+		height: auto;
+		pointer-events: none;
+		display: none;
+		flex-direction: column;
+		position: fixed;
+		z-index: 2;
+		top: 0;
+		bottom: 0;
+		left: 0;
+
+		* {
+			box-sizing: border-box;
+			font-variant-ligatures: none;
+			-webkit-font-variant-ligatures: none;
+			text-rendering: optimizeLegibility;
+			-moz-osx-font-smoothing: grayscale;
+			font-smoothing: antialiased;
+			-webkit-font-smoothing: antialiased;
+			text-shadow: rgba(0, 0, 0, .01) 0 0 1px;
+		}
+
+		.fui-sidebar-wrapper {
+			max-height: 100%;
+			opacity: 0;
+			pointer-events: auto;
+			display: flex;
+			flex: 1 1 auto;
+			flex-direction: column;
+			background: $white;
+			animation-duration: 1s;
+			animation-fill-mode: both;
+			transform-origin: center;
+			transform-style: preserve-3d;
+	
+			// ANIMATE show
+			&.fui-show {
+				opacity: 1;
+				animation-name: slideInUp;
+	
+				@media (min-width: 783px) {
+					animation-name: slideInRight;
+				}
+				
+				// IE10+ CSS styles go here
+				@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+					height: 100vh;
+				}
+			}
+	
+			// ANIMATE hide
+			&.fui-hide {
+				opacity: 1;
+				animation-name: slideOutUp;
+				
+				@media (min-width: 783px) {
+					animation-name: slideOutRight;
+				}
+			}
+	
+			@media (min-width: 783px) {
+				box-shadow: -3px 0 10px 0 rgba(0,0,0,0.05);
+			}
+		}
+
+		.fui-sidebar-header {
+			@extend .sui-box-header;
+			padding: $sui-gutter;
+			border-bottom: 0;
+
+			.wpmudev-title {
+				@extend .sui-box-title;
+			}
+
+			.forminator-sidebar-close {
+				min-width: 40px;
+
+				@media (min-width: 783px) {
+					display: none;
+				}
+			}
+
+			@include media( max-width, md ) {
+				padding: $sui-gutter-md;
+			}
+		}
+
+		.wpmudev-sidebar--section {
+			overflow: hidden;
+			display: flex;
+			flex-direction: column;
+			flex: 1 1 auto;
+			margin: 0;
+			padding: 0;
+			border: 0;
+			background: transparent;
+	
+			.wpmudev-sidebar--menu {
+				display: flex;
+				flex: 0 0 auto;
+				margin: 0;
+				padding: 0 $sui-gutter;
+				border: 0;
+				box-shadow: inset 0 -1px 0 0 rgba(0,0,0,0.1);
+	
+				.wpmudev-menu--item {
+					display: block;
+					flex: 0 0 auto;
+					float: none;
+					margin: 0;
+					padding: 0;
+					border: 0;
+					border-radius: 0;
+					background: transparent;
+	
+					&:before {
+						display: none;
+					}
+	
+					a {
+						float: none;
+						display: block;
+						font: 500 12px/21px $font;
+	
+						&, &:visited {
+							border-bottom: 3px solid transparent;
+							color: rgba(0,0,0,0.4);
+						}
+	
+						&:hover, &:active, &:focus {
+							border-bottom-color: rgba(0,0,0,0.4);
+							outline: none;
+							box-shadow: none;
+						}
+					}
+	
+					&.ui-state-active {
+						
+						a {
+							pointer-events: none;
+							
+							&, &:visited {
+								border-bottom-color: $black;
+								color: $black;
+							}
+						}
+	
+						&:active, &:focus {
+							outline: none;
+							box-shadow: none;
+						}
+					}
+	
+					&:not(:last-child) {
+						margin-right: 20px;
+					}
+				}
+
+				@include media( max-width, md ) {
+					padding: 0 $sui-gutter-md;
+				}
+			}
+	
+			.wpmudev-sidebar--content {
+				overflow-x: hidden;
+				overflow-y: auto;
+				flex: 1 1 auto;
+				padding: 0;
+	
+				.wpmudev-list--options {
+					display: flex;
+					flex-wrap: wrap;
+					margin: -10px;
+					padding: $sui-gutter;
+
+					li {
+						max-width: calc(50% - 20px);
+						overflow: hidden;
+						cursor: pointer;
+						flex: 0 0 auto;
+						flex-basis: calc(50% - 20px);
+						margin: 10px;
+						padding: 8px 4px 7px;
+						border: 1px solid palette( silver, alt );
+						border-radius: $border-radius;
+						background: $white;
+						color: $black;
+						font: 500 10px/13px $font;
+						text-align: center;
+						text-overflow: ellipsis;
+						white-space: nowrap;
+
+						&:last-child {
+
+							@media ( max-width: 782px ) {
+								margin: 0;
+							}
+						}
+
+						@media ( max-width: 782px ) {
+							max-width: 100%;
+							display: block;
+							margin: 0 0 10px;
+							line-height: 23px;
+						}
+					}
+
+					@media ( max-width: 782px ) {
+						display: block;
+						margin: 0;
+					}
+
+					@include media( max-width, md ) {
+						padding: $sui-gutter-md;
+					}
+				}
+	
+				.wpmudev-option {
+					display: block;
+					padding: 12px 20px 13px;
+	
+					.wpmudev-option {
+						padding: 7px 0 8px;
+	
+						.wpmudev-option {
+							padding: 0 !important;
+						}
+	
+						&:first-child {
+							padding-top: 0;
+						}
+	
+						&:last-child {
+							padding-bottom: 0;
+						}
+					}
+	
+					.wpmudev-option--half {
+						display: flex;
+	
+						.wpmudev-option {
+							margin: 0 10px;
+							padding: 0 !important;
+	
+							&:first-child {
+								margin-left: 0;
+							}
+	
+							&:last-child {
+								margin-right: 0;
+							}
+						}
+					}
+	
+					&:first-child {
+						padding-top: 20px;
+					}
+	
+					&:last-child {
+						padding-bottom: 20px;
+					}
+				}
+				
+				.wpmudev-radio-tab-week {
+	
+					.wpmudev-option {
+						margin-bottom: 10px;
+	
+						&:last-child {
+							margin-bottom: 0;
+						}
+					}
+				}
+	
+				.wpmudev-option--border {
+					display: block;
+					margin: 7px 0 8px;
+				}
+	
+				&:only-child {
+					border-top: 1px solid rgba(0,0,0,0.1);
+				}
+			}
+		}
+
+		.wpmudev-options--wrap {
+			padding: $sui-gutter;
+
+			@include media( max-width, md ) {
+				padding: $sui-gutter-md;
+			}
+		}
+
+		.fui-row-double {
+			display: flex;
+			margin: 0 -#{$sui-gutter/4};
+			
+			.sui-form-field {
+				flex: 1;
+				margin: 0;
+				padding: 0 $sui-gutter/4;
+			}
+		}
+
+		.fui-sidebar-footer {
+			display: block;
+			flex: 0 0 auto;
+			padding: 20px;
+			border-top: 1px solid rgba(0,0,0,0.1);
+			background: palette( silver, light );
+	
+			.wpmudev-footer--buttons {
+				display: flex;
+				flex-direction: column-reverse;
+	
+				.sui-button {
+					width: 100%;
+					margin: 5px 0;
+		
+					&:first-child {
+						margin-bottom: 0;
+	
+						@media (min-width: 783px) {
+							margin-left: 0;
+						}
+					}
+		
+					&:last-child {
+						margin-top: 0;
+	
+						@media (min-width: 783px) {
+							margin-right: 0;
+						}
+					}
+	
+					@media (min-width: 783px) {
+						width: auto;
+						flex: 1;
+						margin: 0 10px;
+					}
+				}
+	
+				@media (min-width: 783px) {
+					//flex-wrap: wrap;
+					flex-direction: row;
+				}
+			}
+	
+			.wpmudev-footer--link {
+				margin: 15px 0;
+				font-size: 14px;
+				line-height: 18px;
+				text-align: center;
+	
+				a {
+					color: palette( red, soft );
+					border-bottom-color: palette( red, soft );
+	
+					&:hover, &:active, &:focus {
+						color: palette( red, light );
+						border-bottom-color: palette( red, light );
+					}
+				}
+	
+				&:first-child {
+					margin-top: 0;
+				}
+	
+				&:last-child {
+					margin-bottom: 0;
+				}
+			}
+		}
+
+		&.fui-active {
+			display: flex;
+		}
+	
+		&:hover {
+	
+			@media (min-width: 783px) {
+				right: 0;
+			}
+		}
+
+		@media (min-width: 783px) {
+			max-width: 320px;
+			//z-index: 2;
+			right: -260px;
+			left: auto;
+			padding-top: 32px;
+			transition: 0.3s right linear;
+		}
+	
+		@media (min-width: 1201px) {
+			right: 0;
+		}
+	}
+
+	.fui-form-field {
+		padding: #{$sui-gutter/2};
+		border: 1px solid palette( silver, alt );
+		border-radius: $border-radius;
+		background: $white;
+		transition: 0.3s ease;
+
+		* {
+			pointer-events: none;
+		}
+
+		h3, h4 {
+			margin: 0;
+			padding: 0;
+		}
+
+		hr {
+			margin-bottom: 0;
+		}
+
+		.sui-row {
+			margin-bottom: #{$sui-gutter/2};
+
+			.sui-col-md-6 {
+
+				&:last-child {
+
+					@include media( max-width, md ) {
+						margin-bottom: 0;
+					}
+				}
+
+				@include media( max-width, md ) {
+					margin-bottom: #{$sui-gutter/2};
+				}
+			}
+
+			&:last-child {
+				margin-bottom: 0;
+			}
+		}
+
+		.fui-extended-description {
+			display: flex;
+		}
+
+		&:hover, &.fui-active {
+			border-color: $blue;
+		}
+	}
+
+	.fui-conditions {
+		margin-top: #{$sui-gutter/2};
+
+		.fui-conditions--init {
+			display: flex;
+			align-items: center;
+
+			.select-container {
+				flex: 1;
+
+				@include media( max-width, md ) {
+					flex: 0 0 auto;
+				}
+			}
+
+			.sui-description {
+				flex: 0 0 auto;
+				margin: 0 5px;
+				color: palette( gray, light );
+
+				&:last-child {
+					margin-right: 0;
+
+					@include media( max-width, md ) {
+						margin-bottom: 0;
+					}
+				}
+
+				@include media( max-width, md ) {
+					margin: 5px 0;
+				}
+			}
+
+			@include media( max-width, md ) {
+				flex-direction: column;
+				align-items: unset;
+			}
+		}
+
+		.fui-conditions--list {
+			padding: #{$sui-gutter/2};
+			border-radius: $border-radius;
+			background-color: palette( silver, default );
+
+			.fui-conditions--rules {
+				margin: 0;
+			}
+
+			@include media( max-width, md ) {
+				padding: #{$sui-gutter/2};
+			}
+		}
+
+		.fui-conditions--rules {
+
+			.fui-conditions--rule {
+				display: flex;
+				align-items: center;
+				margin: 0 -5px #{$sui-gutter/2};
+
+				.fui-conditions--field,
+				.fui-conditions--action,
+				.fui-conditions--wrap-input,
+				.fui-conditions--wrap-values {
+					flex: 1;
+					margin: 0 5px;
+
+					&:first-child {
+						
+						@include media( max-width, md ) {
+							margin-top: 0;
+						}
+					}
+
+					&:last-child {
+						
+						@include media( max-width, md ) {
+							margin-bottom: 0;
+						}
+					}
+
+					@include media( max-width, md ) {
+						flex: 0 0 auto;
+						margin: 5px 0;
+					}
+				}
+
+				.fui-conditions--wrap-delete {
+					flex: 0 0 auto;
+				}
+
+				@include media( max-width, md ) {
+					margin: 0 0 $sui-gutter-md/2;
+				}
+			}
+		}
+
+		.sui-description {
+			margin: 0;
+			color: palette( gray, dark );
+
+			i {
+				margin-right: 6px;
+
+				&:before {
+					color: palette( yellow, default );
+				}
+			}
+		}
+
+		@include media( max-width, md ) {
+			margin-top: $sui-gutter-md/2;
+		}
+	}
+
+	.sui-box-header + .fui-conditions {
+		margin: 0;
+	}
+
+	.fui-flex-end {
+		align-self: flex-end;
+	}
+}
+
+// IE10+ CSS styles go here
+#wpbody-content {
+
+	@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+		width: 95%;
+	}
+}

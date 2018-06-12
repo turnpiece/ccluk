@@ -65,25 +65,14 @@ class Forminator_SingleValue extends Forminator_Field {
 				'id'         => 'required',
 				'type'       => 'Toggle',
 				'name'       => 'required',
-				'size'       => 12,
 				'className'  => 'required-field',
 				'hide_label' => true,
 				'values'     => array(
 					array(
 						'value'      => "true",
 						'label'      => __( 'Required', Forminator::DOMAIN ),
-						'labelSmall' => "true",
 					),
 				),
-			),
-
-			array(
-				'id'         => 'separator-1',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'size'       => 12,
-				'className'  => 'separator-field',
 			),
 
 			array(
@@ -92,7 +81,6 @@ class Forminator_SingleValue extends Forminator_Field {
 				'name'       => 'field_label',
 				'hide_label' => false,
 				'label'      => __( 'Field label', Forminator::DOMAIN ),
-				'size'       => 12,
 				'className'  => 'text-field',
 			),
 
@@ -102,17 +90,7 @@ class Forminator_SingleValue extends Forminator_Field {
 				'name'       => 'description',
 				'hide_label' => false,
 				'label'      => __( 'Description', Forminator::DOMAIN ),
-				'size'       => 12,
 				'className'  => 'text-field',
-			),
-
-			array(
-				'id'         => 'separator-2',
-				'type'       => 'Separator',
-				'name'       => 'separator',
-				'hide_label' => true,
-				'size'       => 12,
-				'className'  => 'separator-field',
 			),
 
 			array(
@@ -120,7 +98,6 @@ class Forminator_SingleValue extends Forminator_Field {
 				'type'          => 'Radio',
 				'name'          => 'value_type',
 				'label'         => __( "Choice input type", Forminator::DOMAIN ),
-				'size'          => 12,
 				'className'     => 'radio-field',
 				'default_value' => "select",
 				'values'        => array(
@@ -140,7 +117,6 @@ class Forminator_SingleValue extends Forminator_Field {
 				'type'      => 'MultiValue',
 				'name'      => 'options',
 				'label'     => __( "Choices", Forminator::DOMAIN ),
-				'size'      => 12,
 				'className' => 'multivalue-field',
 			),
 		);
@@ -199,10 +175,10 @@ class Forminator_SingleValue extends Forminator_Field {
 	public function admin_html() {
 		return '<div class="wpmudev-form-field--group">
 			{[ if( field.field_label !== "" ) { ]}
-				<label class="wpmudev-group--label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
+				<label class="sui-label">{{ encodeHtmlEntity( field.field_label ) }}{[ if( field.required == "true" ) { ]} *{[ } ]}</label>
 			{[ } ]}
 			{[ if( field.value_type === "select" ) { ]}
-				<select class="wpmudev-select" style="width: 100%;" {{ field.required ? "required" : "" }}>
+				<select {{ field.required ? "required" : "" }}>
 					{[ _.each( field.options, function( value, key ){ ]}
 					<option>{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</option>
 					{[ }) ]}
@@ -210,18 +186,16 @@ class Forminator_SingleValue extends Forminator_Field {
 			{[ } ]}
 			{[ if( field.value_type === "radio" ) { ]}
 				{[ _.each( field.options, function( value, key ){ ]}
-				<div class="wpmudev-form-field--radio">
-					<div class="wpmudev-radio--design">
-						<input type="radio" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }}>
-						<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpdui-icon wpdui-icon-check"></label>
-					</div>
-					<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="wpmudev-radio--label">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</label>
-				</div>
+				<label for="sample-option-{{ encodeHtmlEntity( field.value ) }}" class="sui-radio">
+					<input type="radio" id="sample-option-{{ encodeHtmlEntity( field.value ) }}" {{ field.required ? "required" : "" }}>
+					<span aria-hidden="true"></span>
+					<span class="sui-description">{{ encodeHtmlEntity( value.label.replace(/&quot;/g, "\\"") ) }}</span>
+				</label>
 				{[ }) ]}
 			{[ } ]}
 			{[ if( field.description ) { ]}
 			<div class="wpmudev-group--info">
-				<span class="wpmudev-info--text">{{ encodeHtmlEntity( field.description ) }}</span>
+				<span class="sui-description">{{ encodeHtmlEntity( field.description ) }}</span>
 			</div>
 			{[ } ]}
 		</div>';
@@ -241,20 +215,23 @@ class Forminator_SingleValue extends Forminator_Field {
 		$this->field = $field;
 		$i           = 1;
 		$html        = '';
-		$id          = $name = self::get_property( 'element_id', $field );
+		$id          = self::get_property( 'element_id', $field );
+		$name        = $id;
 		$id          = $id . '-field';
 		$required    = self::get_property( 'required', $field, false );
 		$options     = self::get_property( 'options', $field, array() );
-		$value_type  = $field['value_type'] ? $field['value_type'] : "multiselect";
+		$value_type  = trim( $field['value_type'] ? $field['value_type'] : "multiselect" );
+		$post_value  = self::get_post_data( $name, false );
 
-		if ( $value_type == "select" ) {
+		if ( "select" === $value_type ) {
 
 			$html = sprintf( '<select class="forminator-select--field forminator-select" id="%s" data-required="%s" name="%s">', $id, $required, $name );
 
-				foreach ( $options as $option ) {
-					$value = $option['value'] ? $option['value'] : $option['label'];
-					$html  .= sprintf( '<option value="%s">%s</option>', $value, $option['label'] );
-				}
+			foreach ( $options as $option ) {
+				$value    = $option['value'] ? $option['value'] : $option['label'];
+				$selected = $value === $post_value ? 'selected="selected"' : '';
+				$html     .= sprintf( '<option value="%s" %s>%s</option>', $value, $selected, $option['label'] );
+			}
 
 			$html .= sprintf( '</select>' );
 
@@ -266,18 +243,19 @@ class Forminator_SingleValue extends Forminator_Field {
 
 				$input_id = $id . '-' . $i . '-' . $uniq_id;
 				$value    = $option['value'] ? $option['value'] : $option['label'];
+				$selected = $value === $post_value ? 'checked="checked"' : '';
 
-				if ( $this->get_form_style( $settings ) == 'clean' ) {
+				if ( trim( $this->get_form_style( $settings ) ) === 'clean' ) {
 
-					$html	.= sprintf( '<label class="forminator-radio"><input id="%s" name="%s" type="radio" value="%s"> %s</label>', $input_id, $name, $value, $option['label'] );
+					$html .= sprintf( '<label class="forminator-radio"><input id="%s" name="%s" type="radio" value="%s" %s> %s</label>', $input_id, $name, $value, $selected, $option['label'] );
 
 				} else {
 
-					$html     .= '<div class="forminator-radio">';
-					$html     .= sprintf( '<input id="%s" name="%s" type="radio" value="%s" class="forminator-radio--input">', $input_id, $name, $value );
-					$html     .= sprintf( '<label for="%s" class="forminator-radio--design" aria-hidden="true"></label>', $input_id );
-					$html     .= sprintf( '<label for="%s" class="forminator-radio--label">%s</label>', $input_id, $option['label'] );
-					$html     .= '</div>';
+					$html .= '<div class="forminator-radio">';
+					$html .= sprintf( '<input id="%s" name="%s" type="radio" value="%s" class="forminator-radio--input" %s>', $input_id, $name, $value, $selected );
+					$html .= sprintf( '<label for="%s" class="forminator-radio--design" aria-hidden="true"></label>', $input_id );
+					$html .= sprintf( '<label for="%s" class="forminator-radio--label">%s</label>', $input_id, $option['label'] );
+					$html .= '</div>';
 
 				}
 

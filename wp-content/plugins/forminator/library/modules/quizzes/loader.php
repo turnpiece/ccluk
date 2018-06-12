@@ -42,7 +42,7 @@ class Forminator_Quizzes extends Forminator_Module {
 	 */
 	public function load_admin() {
 		if ( is_admin() ) {
-			include_once( dirname(__FILE__) . '/admin/admin-loader.php' );
+			include_once dirname(__FILE__) . '/admin/admin-loader.php';
 
 			new Forminator_Quizz_Admin();
 		}
@@ -54,10 +54,12 @@ class Forminator_Quizzes extends Forminator_Module {
 	 * @since 1.0
 	 */
 	public function load_front() {
-		include_once( dirname(__FILE__) . '/front/front-render.php' );
-		include_once( dirname(__FILE__) . '/front/front-action.php' );
+		include_once dirname(__FILE__) . '/front/front-result.php';
+		include_once dirname(__FILE__) . '/front/front-render.php';
+		include_once dirname(__FILE__) . '/front/front-action.php';
 		new Forminator_QForm_Front();
 		new Forminator_Quizz_Front_Action();
+		new Forminator_QForm_Result();
 	}
 
 	/**

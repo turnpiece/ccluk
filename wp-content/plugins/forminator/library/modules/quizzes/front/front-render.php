@@ -27,8 +27,8 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return Forminator_QForm_Front
 	 */
 	public static function get_instance() {
-		if ( self::$instance == null ) {
-			self::$instance = new self;
+		if ( is_null( self::$instance ) ) {
+			self::$instance = new self();
 		}
 
 		return self::$instance;
@@ -75,6 +75,8 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @since 1.0
 	 *
 	 * @param $id
+	 * @param bool $ajax
+	 * @param bool $data
 	 */
 	public function display( $id, $ajax = false, $data = false ) {
 		if ( $data && ! empty( $data ) ) {
@@ -89,7 +91,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 
 			// If this module haven't been saved, the preview will be of the wrong module
 			if ( ! isset( $data['settings']['quiz_title'] ) || $data['settings']['quiz_title'] !== $this->model->settings['quiz_title'] ) {
-				echo $this->message_save_to_preview();
+				echo $this->message_save_to_preview(); // WPCS: XSS ok.
 				return;
 			}
 		} else {
@@ -155,7 +157,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		}
 
 		if ( $render ) {
-			echo $html;
+			echo $html; // WPCS: XSS ok.
 		} else {
 			return apply_filters( 'forminator_render_fields_markup', $html, $fields );
 		}
@@ -172,7 +174,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function render_field( $field ) {
-		if ( isset( $field['type'] ) && $field['type'] == 'knowledge' ) {
+		if ( isset( $field['type'] ) && 'knowledge' === $field['type'] ) {
 			$html = $this->_render_knowledge( $field );
 		} else {
 			$html = $this->_render_nowrong( $field );
@@ -201,7 +203,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		}
 		?>
         <div class="forminator-quiz--question">
-            <p class="forminator-question--title"><?php echo $field['title'] ?></p>
+            <p class="forminator-question--title"><?php echo esc_html( $field['title'] ); ?></p>
             <div class="forminator-question--answers">
 				<?php if ( isset ( $field['answers'] ) ): ?>
 					<?php foreach ( $field['answers'] as $key => $answer ): ?>
@@ -210,24 +212,24 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 
                             <div class="forminator-answer">
 
-                                <input type="radio" name="answers[<?php echo $field_slug ?>]"
-                                       value="<?php echo $key ?>"
-                                       id="<?php echo $field_slug . '-' . $key . $uniq_id ?>"
-                                       class="forminator-answer--input" title="<?php echo $answer['title'] ?>"/>
+                                <input type="radio" name="answers[<?php echo esc_attr( $field_slug ); ?>]"
+                                       value="<?php echo esc_attr( $key ); ?>"
+                                       id="<?php echo $field_slug . '-' . $key . $uniq_id; // WPCS: XSS ok. ?>"
+                                       class="forminator-answer--input" title="<?php echo esc_html( $answer['title'] ); ?>"/>
 
-                                <label class="forminator-answer--design" for="<?php echo $field_slug . '-' . $key . $uniq_id ?>"
+                                <label class="forminator-answer--design" for="<?php echo $field_slug . '-' . $key . $uniq_id; // WPCS: XSS ok. ?>"
                                        aria-hidden="true">
 
 									<?php if ( isset( $answer['image'] ) && ! empty( $answer['image'] ) ) : ?>
 
                                         <span class="forminator-answer--image"
-                                              style="background-image: url('<?php echo $answer['image'] ?>');"></span>
+                                              style="background-image: url('<?php echo esc_attr( $answer['image'] ); ?>');"></span>
 
 									<?php endif; ?>
 
                                     <span class="forminator-answer--text">
 									<span class="forminator-answer--check"><i class="wpdui-icon wpdui-icon-check"></i></span>
-									<span class="forminator-answer--name"><?php echo $answer['title'] ?></span>
+									<span class="forminator-answer--name"><?php echo esc_html( $answer['title'] ); ?></span>
 								</span>
 
                                 </label>
@@ -256,30 +258,30 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 */
 	private function _render_knowledge( $field ) {
 		ob_start();
-		$class   = ( isset( $this->model->settings['results_behav'] ) && $this->model->settings['results_behav'] == 'end' ) ? '' : 'forminator-submit-rightaway';
+		$class   = ( isset( $this->model->settings['results_behav'] ) && 'end' === $this->model->settings['results_behav'] ) ? '' : 'forminator-submit-rightaway';
 		$uniq_id = '-' . uniqid();
 
 		?>
-        <div class="forminator-quiz--question" id="<?php echo $field['slug'] ?>">
-            <p class="forminator-question--title"><?php echo $field['title'] ?></p>
+        <div class="forminator-quiz--question" id="<?php echo esc_html( $field['slug'] ); ?>">
+            <p class="forminator-question--title"><?php echo esc_html( $field['title'] ); ?></p>
             <div class="forminator-question--answers">
 				<?php if( isset( $field['answers'] ) ): ?>
 					<?php foreach ( $field['answers'] as $k => $answer ): ?>
-						<?php $eID = $field['slug'] . '-' . $k . $uniq_id ?>
+						<?php $e_id = $field['slug'] . '-' . $k . $uniq_id; ?>
 						<div class="forminator-answer--wrap">
 							<div class="forminator-answer">
-								<input type="radio" name="answers[<?php echo $field['slug'] ?>]" value="<?php echo $k ?>"
-									   id="<?php echo $eID ?>"
-									   class="forminator-answer--input <?php echo $class ?>"
-									   title="<?php echo $answer['title'] ?>"/>
+								<input type="radio" name="answers[<?php echo esc_attr( $field['slug'] ); ?>]" value="<?php echo esc_attr( $k ); ?>"
+									   id="<?php echo esc_attr( $e_id ); ?>"
+									   class="forminator-answer--input <?php echo esc_attr( $class ); ?>"
+									   title="<?php echo esc_html( $answer['title'] ); ?>"/>
 
-								<label class="forminator-answer--design" for="<?php echo $eID ?>" aria-hidden="true">
+								<label class="forminator-answer--design" for="<?php echo esc_attr( $e_id ); ?>" aria-hidden="true">
 									<?php if ( isset( $answer['image'] ) && ! empty( $answer['image'] ) ): ?>
 										<span class="forminator-answer--image"
-											  style="background-image: url('<?php echo $answer['image'] ?>');"></span>
+											  style="background-image: url('<?php echo esc_attr( $answer['image'] ); ?>');"></span>
 									<?php endif; ?>
 									<span class="forminator-answer--text">
-									 <span class="forminator-answer--name"><?php echo $answer['title'] ?></span>
+									 <span class="forminator-answer--name"><?php echo esc_html( $answer['title'] ); ?></span>
 								</span>
 								</label>
 							</div>
@@ -302,7 +304,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function message_required() {
-		return __( "Form ID attribute is required!", Forminator::DOMAIN );
+		return esc_html__( "Form ID attribute is required!", Forminator::DOMAIN );
 	}
 
 	/**
@@ -312,7 +314,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function message_save_to_preview() {
-		return __( "Please, save the quiz in order to preview it.", Forminator::DOMAIN );
+		return esc_html__( "Please, save the quiz in order to preview it.", Forminator::DOMAIN );
 	}
 
 	/**
@@ -322,7 +324,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return mixed
 	 */
 	public function message_not_found() {
-		return __( "Form ID not found!", Forminator::DOMAIN );
+		return esc_html__( "Form ID not found!", Forminator::DOMAIN );
 	}
 
 	/**
@@ -371,14 +373,14 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		ob_start();
 		?>
         <div class="forminator-quiz--header">
-            <p class="forminator-quiz--title"><?php echo forminator_get_form_name( $this->model->id, $this->get_form_type() ) ?></p>
+            <p class="forminator-quiz--title"><?php echo esc_html( forminator_get_form_name( $this->model->id, $this->get_form_type() ) ); ?></p>
 			<?php if ( isset( $this->model->settings['quiz_feat_image'] ) && ! empty( $this->model->settings['quiz_feat_image'] ) ): ?>
                 <figure class="forminator-quiz--image">
-                    <img src="<?php echo $this->model->settings['quiz_feat_image'] ?>">
+                    <img src="<?php echo esc_html( $this->model->settings['quiz_feat_image'] ); ?>">
                 </figure>
 			<?php endif; ?>
 			<?php if ( isset( $this->model->settings['quiz_description'] ) && ! empty( $this->model->settings['quiz_description'] ) ): ?>
-                <p class="forminator-quiz--description"><?php echo $this->model->settings['quiz_description'] ?></p>
+                <p class="forminator-quiz--description"><?php echo esc_html( $this->model->settings['quiz_description'] ); ?></p>
 			<?php endif; ?>
         </div>
 		<?php
@@ -400,8 +402,8 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		$post_id = $this->get_post_id();
 
 		$html = '<div class="quiz-form-button-holder">';
-		if ( $this->model->quiz_type == 'nowrong' || ( isset( $this->model->settings['results_behav'] ) && $this->model->settings['results_behav'] == 'end' ) ) {
-			$html .= sprintf( '<button class="forminator-button">%s</button>', __( "Ready to send", Forminator::DOMAIN ) );
+		if ( 'nowrong' === $this->model->quiz_type || ( isset( $this->model->settings['results_behav'] ) && 'end' === $this->model->settings['results_behav'] ) ) {
+			$html .= sprintf( '<button class="forminator-button">%s</button>', esc_html__( "Ready to send", Forminator::DOMAIN ) );
 		}
 		$html .= '</div>';
 		$html .= $nonce;
@@ -409,7 +411,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		$html .= sprintf( '<input type="hidden" name="page_id" value="%s">', $post_id );
 		$html .= '<input type="hidden" name="action" value="forminator_submit_quizzes">';
 		if ( $render ) {
-			echo apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce );
+			echo apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce ); // WPCS: XSS ok.
 		} else {
 			return apply_filters( 'forminator_render_form_submit_markup', $html, $form_id, $post_id, $nonce );
 		}
@@ -422,7 +424,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 	 * @return bool|string
 	 */
 	public function styles_template_path() {
-		if ( isset( $this->model->quiz_type ) && $this->model->quiz_type == 'knowledge' ) {
+		if ( isset( $this->model->quiz_type ) && 'knowledge' === $this->model->quiz_type ) {
 			return realpath( forminator_plugin_dir() . '/assets/js/front/templates/quiz-knowledge-styles.html' );
 		} else {
 			return realpath( forminator_plugin_dir() . '/assets/js/front/templates/quiz-nowrong-styles.html' );
@@ -438,9 +440,9 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 		$properties = array();
 		if ( ! empty( self::$forms_properties ) ) {
 			// avoid same custom style printed
-			$styleRendered = array();
+			$style_rendered = array();
 			foreach ( self::$forms_properties as $form_properties ) {
-				if ( ! in_array( $form_properties['id'], $styleRendered ) ) {
+				if ( ! in_array( $form_properties['id'], $style_rendered, true ) ) {
 					$properties[] = $form_properties;
 				}
 			}
@@ -490,7 +492,7 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 				$trimmed_styles = trim( $styles );
 
 				if ( isset( $properties['formID'] ) && strlen( trim( $trimmed_styles ) ) > 0 ) {
-					echo '<style type="text/css" id="forminator-quiz-styles-' . $properties['formID'] . '">' . $trimmed_styles . '</style>';
+					echo '<style type="text/css" id="forminator-quiz-styles-' . esc_attr( $properties['formID'] ) . '">' . esc_html( $trimmed_styles ) . '</style>';
 				}
 			}
 		}
@@ -508,12 +510,13 @@ class Forminator_QForm_Front extends Forminator_Render_Form {
 				if ( ! empty( self::$forms_properties ) ) {
 				foreach ( self::$forms_properties as $form_properties ) {
 				?>
-				jQuery('#forminator-module-<?php echo $form_properties['id']; ?>[data-forminator-render="<?php echo $form_properties['render_id']; ?>"]').forminatorFront({
-					form_type: '<?php echo $this->get_form_type(); ?>',
+				jQuery('#forminator-module-<?php echo esc_attr( $form_properties['id'] ); ?>[data-forminator-render="<?php echo esc_attr( $form_properties['render_id'] ); ?>"]').forminatorFront({
+					form_type: '<?php echo $this->get_form_type(); // WPCS: XSS ok. ?>',
 				});
 				<?php
 				}
-				}?>
+				}
+				?>
 			});
         </script>
 		<?php
