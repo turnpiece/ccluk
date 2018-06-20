@@ -5,140 +5,140 @@
 @import "../common/variables";
 @import "../common/mixins";
 
+/**
+ * Empty files meta box.
+ */
+.wpmud .box-minification-empty-files {
+    .sui-dialog {
+        text-align: left; /* overwrite for sui-block-content-center */
+    }
+}
+
+/* Modal window */
+.wpmud .sui-dialog .checkbox-group {
+    justify-content: flex-start;
+    width: 100%;
+    height: 52px;
+
+    input[type="checkbox"] + label {
+        padding: 10px 10px;
+        width: 70px;
+        height: 50px;
+
+        & > [class^="hb-"]:before {
+            margin-right: 0;
+        }
+    }
+}
+
+/* Overwrite for advanced view */
+.wpmud .wphb-minification-advanced-group input[type="checkbox"] + label > [class^="hb-"]:before {
+    margin-right: 0;
+}
+
 /* Checkbox groups */
 .wpmud .checkbox-group {
     border-radius: 41px;
     display: flex;
     justify-content: flex-end;
     height: 40px;
-}
-.wpmud .sui-dialog .checkbox-group {
-    justify-content: flex-start;
-}
 
-/* We do not use display: none, because screen readers don't see the element */
-.wpmud .checkbox-group input[type="checkbox"] {
-    border: 0;
-    clip: rect(0 0 0 0);
-    height: 1px;
-    margin: -1px;
-    overflow: hidden;
-    padding: 0;
-    position: absolute;
-    width: 1px;
-    display: block;
-}
+    & > span {
+        color: #AAAAAA;
+        font-size: 12px;
+        line-height: 40px;
+    }
 
-.wpmud .checkbox-group input[type="checkbox"] + label {
-    background-color: #fff;
-    border: 1px solid #E6E6E6;
-    border-radius: 4px;
-    display: flex;
-    padding: 0;
-    align-items: center;
-    justify-content: center;
-    text-align: center;
-    width: 50px;
-    position: relative;
-    transition-property: background, color;
-    transition-duration: 0.3s;
-    color: transparent !important;
-    margin-bottom: 0;
-    margin-left: 5px;
-}
+    /* We do not use display: none, because screen readers don't see the element */
+    input[type="checkbox"] {
+        border: 0;
+        clip: rect(0 0 0 0);
+        height: 1px;
+        margin: -1px;
+        overflow: hidden;
+        padding: 0;
+        position: absolute;
+        width: 1px;
+        display: block;
+    }
 
-/* Overwrite for advanced view */
-.wpmud .wphb-minification-advanced-group input[type="checkbox"] + label {
-    width: 50px;
-}
+    input[type="checkbox"] + label.toggle-label-background, /* modal */
+    input[type="checkbox"]:checked + label {
+        box-shadow: none;
+        background-color: #E1F6FF;
+        border-color: #E1F6FF;
+    }
 
-/* Modal window */
-.wpmud .sui-dialog .checkbox-group {
-    width: 100%;
-    height: 52px;
-}
+    input[type="checkbox"] + label {
+        background-color: #fff;
+        border: 1px solid #E6E6E6;
+        border-radius: 4px;
+        display: flex;
+        padding: 0;
+        align-items: center;
+        justify-content: center;
+        text-align: center;
+        width: 50px;
+        position: relative;
+        transition-property: background, color;
+        transition-duration: 0.3s;
+        color: transparent !important;
+        margin-bottom: 0;
+        margin-left: 5px;
 
-.wpmud .sui-dialog .checkbox-group input[type="checkbox"] + label {
-    padding: 10px 10px;
-    width: 70px;
-    height: 50px;
-}
+        & > span:not(.toggle),
+        & > i {
+            color: #888888;
+            padding: 0;
+            font-size: 12px;
+        }
 
-.wpmud .sui-dialog .wphb-progress-state {
-    text-align: left;
-    margin-top: 0;
-}
+        & > [class^="hb-"]:before {
+            font-size: 14px;
+            vertical-align: -2px;
+        }
 
-/* Checkbox group */
-.wpmud .checkbox-group input[type="checkbox"] + label.toggle-label-background, /* modal */
-.wpmud .checkbox-group input[type="checkbox"]:checked + label {
-    box-shadow: none;
-    background-color: #E1F6FF;
-    border-color: #E1F6FF;
-}
+        & > [tooltip] {
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            right: 0;
+            z-index: 9;
+        }
 
-.wpmud .checkbox-group input[type="checkbox"] + label > span:not(.toggle),
-.wpmud .checkbox-group input[type="checkbox"] + label > i {
-    color: #888888;
-    padding: 0;
-    font-size: 12px;
-}
+        &.toggle-label-background > span:not(.toggle) /* modal */ {
+            color: #17A8E3;
+        }
+    }
 
-.wpmud .checkbox-group > span {
-    color: #AAAAAA;
-    font-size: 12px;
-    line-height: 40px;
-}
+    input[type="checkbox"]:checked + label {
+        & > span:not(.toggle),
+        & > i {
+            color: #17A8E3;
+        }
+    }
 
-.wpmud .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
-    font-size: 14px;
-    vertical-align: -2px;
-}
+    input[type="checkbox"]:disabled + label {
+        background-color: #F8F8F8;
+        border-color: #F8F8F8;
 
-.wpmud .sui-dialog .checkbox-group input[type="checkbox"] + label > [class^="hb-"]:before {
-    margin-right: 0;
-}
+        & > span:not(.toggle),
+        & > i {
+            color: #DDD;
+        }
+    }
 
-/* Overwrite for advanced view */
-.wpmud .wphb-minification-advanced-group input[type="checkbox"] + label > [class^="hb-"]:before,
-.wpmud .wphb-modal input[type="checkbox"] + label > [class^="hb-"]:before {
-    margin-right: 0;
-}
+    label [class^="hb-"] {
+        display: block;
+        padding: 10px 0 4px;
 
-.wpmud .checkbox-group input[type="checkbox"] + label.toggle-label-background > span:not(.toggle), /* modal */
-.wpmud .checkbox-group input[type="checkbox"]:checked + label > span:not(.toggle),
-.wpmud .checkbox-group input[type="checkbox"]:checked + label > i {
-    color: #17A8E3;
+    }
 }
 
-.wpmud .checkbox-group input[type="checkbox"]:disabled + label > span:not(.toggle),
-.wpmud .checkbox-group input[type="checkbox"]:disabled + label > i {
-    color: #DDD;
-}
-
-.wpmud .checkbox-group input[type="checkbox"]:disabled + label {
-    background-color: #F8F8F8;
-    border-color: #F8F8F8;
-}
-
-.wpmud .checkbox-group input[type="checkbox"] + label > [tooltip] {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    right: 0;
-    z-index: 9;
-}
-
-.wpmud .checkbox-group label [class^="hb-"] {
-    display: block;
-    padding: 10px 0 4px;
-
-}
-
-/* Notice in header to enable advanced mode */
-.wpmud .wrap-wphb-minification > .row > .wphb-notice {
-    margin-bottom: 30px;
+.wpmud .sui-notice-warning .wphb-switch-button {
+    color: #333333;
+    text-decoration: underline;
 }
 
 /* Asset Optimization meta box */
@@ -147,26 +147,7 @@
     padding-bottom: 1px;
 }
 
-.wpmud .box-minification-enqueued-files .box-title .buttons > div {
-    display: inline-block;
-    vertical-align: top;
-}
-
-/* Switch type button */
-.wpmud .box-minification-enqueued-files .box-title .buttons {
-    margin-right: 45px !important;
-}
-
-.wpmud .box-minification-enqueued-files .box-title .wphb-switch-button {
-    border-left: 1px solid #E6E6E6;
-    display: block;
-    height: 60px;
-    left: 100%;
-    margin-left: -30px;
-    position: relative;
-    width: 60px;
-}
-
+/* Switch type button in meta box header */
 .wpmud .box-minification-enqueued-files .sui-box-header .wphb-heading-divider {
     border-left: 1px solid #E6E6E6;
     height: 62px;
@@ -185,14 +166,17 @@
 }
 
 .wpmud .box-minification-enqueued-files .sui-box-header .wphb-switch-button > i {
-    color: #AAAAAA;
     font-size: 20px;
     margin-left: 20px;
     position: absolute;
     top: 18px;
+
+    &:before {
+        color: #AAAAAA;
+    }
 }
 
-.wpmud .box-minification-enqueued-files .box-title-advanced .wphb-switch-button > i {
+.wpmud .box-minification-enqueued-files .box-title-advanced .wphb-switch-button > i:before {
     color: #17A8E3;
 }
 
@@ -274,48 +258,44 @@
     margin: 10px 30px;
 }
 
-/* Notices */
-.wpmud .wphb-minification-files .wphb-notice {
-    margin: 0 30px 30px;
-    width: auto;
-}
-
 /* Styles, common for basic and advanced views */
 .wpmud {
     .wphb-minification-file-info {
         float: left;
         line-height: 18px;
-        overflow: hidden;
         white-space: nowrap;
         width: 280px;
         > {
-             * {
+            * {
                 color: #AAAAAA;
                 font-size: 10px;
                 font-weight: 500;
                 line-height: 10px;
             }
-             span:first-child {
+            span:first-child {
                 color: #666666;
                 display: block;
                 font-size: 13px;
                 line-height: 13px;
             }
-             a {
-                max-width: 400px;
+            a {
+                max-width: 200px;
                 overflow: hidden;
+                display: inline-flex;
             }
-             .original-size.crossed-out {
-                text-decoration: line-through;
-            }
-             .sui-icon-chevron-down:before {
-                font-size: 8px;
-                position: relative;
-                top: 0;
-            }
-             .sui-icon-chevron-down:before,
-             .compressed-size {
-                color: #1ABC9C;
+            span {
+                .original-size.crossed-out {
+                    text-decoration: line-through;
+                }
+                .sui-icon-chevron-down:before {
+                    font-size: 8px;
+                    position: relative;
+                    top: 0;
+                }
+                .sui-icon-chevron-down:before,
+                .compressed-size {
+                    color: #1ABC9C;
+                }
             }
         }
     }
@@ -454,6 +434,7 @@
     font: 500 13px/30px $font;
     text-transform: none;
     margin-right: 21px;
+    margin-left: 0;
 }
 
 .wpmud .wphb-minification-filter .select-list-container {
@@ -466,7 +447,6 @@
     display: none;
 }
 
-.wpmud .box-content.disabled,
 .wpmud .wphb-border-row.disabled {
     background-color: #F2F2F2;
 }
@@ -509,22 +489,13 @@
     }
 }
 
-/* Overwrite upsell message */
-.wpmud .wrap-wphb-minification .content-box-two-cols-image-left .wphb-block-entry-content {
-    margin-top: 0;
-}
-
-/* Tools */
-.wpmud .box-minification-tools {
-    .box-footer .spinner {
-        margin: 6px 10px 0;
-    }
-}
-
 // Responsive
 @include bp(desktop-large) {
     .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
         width: 185px;
+        > a {
+            max-width: 100px;
+        }
     }
 }
 
@@ -536,14 +507,13 @@
 
     .wpmud .wphb-minification-files-advanced .wphb-minification-file-info {
         width: 130px;
+        > a {
+            max-width: 180px;
+        }
     }
 
     .wpmud .wphb-minification-files-advanced .wphb-minification-exclude {
         margin-left: 15px;
-    }
-
-    .wpmud .box-minification-enqueued-files .box-footer .button {
-        margin-top: 15px;
     }
 }
 
@@ -627,13 +597,6 @@
 
     .wpmud .wphb-minification-file-info {
         width: 185px;
-    }
-
-    .wpmud .box-minification-enqueued-files .box-footer .status-text {
-        display: block;
-        max-width: 100%;
-        text-align: left;
-        padding-left: 0;
     }
 }
 

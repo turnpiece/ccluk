@@ -1,4 +1,3 @@
-import Clipboard from './utils/clipboard';
 import Fetcher from './utils/fetcher';
 
 ( function( $ ) {
@@ -18,7 +17,7 @@ import Fetcher from './utils/fetcher';
 				pageCachingForm = $('form[id="page-caching-form"]'),
 				rssForm         = $('form[id="rss-caching-settings"]'),
 				gravatarDiv     = $('div[id="wphb-box-caching-gravatar"]'),
-				cachingHeader   = $('.box-caching-summary .sui-box-header'),
+				cachingHeader   = $('.box-caching-status .sui-box-header'),
 				expiryForm      = $('form[id="expiry-settings"]'),
 				settingsForm    = $('form[id="other-caching-settings"]');
 
@@ -26,17 +25,17 @@ import Fetcher from './utils/fetcher';
             self.serverSelector = $('#wphb-server-type');
             self.selectedServer = self.serverSelector.val();
 
-            // Init clipboard module.
-			new Clipboard('.wphb-code-snippet .button');
-
 			/** @var {array} wphbCachingStrings */
             if ( wphbCachingStrings ) {
 				self.strings = wphbCachingStrings;
 			}
 
-            if ( hash ) {
-            	// TODO: this will give out an error for any hash
-				$('html, body').animate({ scrollTop: $(hash).offset().top }, 'slow');
+            if ( hash && $(hash).length ) {
+                setTimeout(function () {
+					$('html, body').animate({ scrollTop: $(hash).offset().top }, 'slow');
+                }, 300);
+			} else if ( '#connect-cloudflare' === hash ) {
+                self.setCloudflare();
 			}
 
 			/**
@@ -71,9 +70,9 @@ import Fetcher from './utils/fetcher';
             $(window).trigger( 'resize' );
 
 			// Init code snippets.
-			self.snippets.apache    = $('#wphb-code-snippet-apache').find('pre').first();
-			self.snippets.LiteSpeed = $('#wphb-code-snippet-litespeed').find('pre').first();
-			self.snippets.nginx     = $('#wphb-code-snippet-nginx').find('pre').first();
+			self.snippets.apache    = $('.apache-instructions').find('pre.sui-code-snippet');
+			self.snippets.LiteSpeed = $('.litespeed-instructions').find('pre.sui-code-snippet');
+			self.snippets.nginx     = $('#wphb-server-instructions-nginx').find('pre.sui-code-snippet');
 
 			// Server type changed.
 			self.serverSelector.change( function() {
@@ -92,12 +91,12 @@ import Fetcher from './utils/fetcher';
 			let expirySettingsForm = $('.sui-box-settings-row');
 			expiryInput.change( function() {
 				if ( 'all' === this.value ) {
-					expirySettingsForm.find( "[data-type='expiry-single']" ).hide();
-					expirySettingsForm.find( "[data-type='expiry-all']" ).show();
+					expirySettingsForm.find( "[data-type='expiry-single']" ).addClass( 'sui-hidden' );
+					expirySettingsForm.find( "[data-type='expiry-all']" ).removeClass( 'sui-hidden' );
 				}
 				else if ( 'single' === this.value ) {
-					expirySettingsForm.find( "[data-type='expiry-all']" ).hide();
-					expirySettingsForm.find( "[data-type='expiry-single']" ).show();
+					expirySettingsForm.find( "[data-type='expiry-all']" ).addClass( 'sui-hidden' );
+					expirySettingsForm.find( "[data-type='expiry-single']" ).removeClass( 'sui-hidden' );
 					self.selectedExpiryType = 'single';
 				}
 
@@ -128,6 +127,7 @@ import Fetcher from './utils/fetcher';
 
 						if ( 'undefined' !== typeof response && response.success ) {
 							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'success', self.strings.successRecheckStatus );
+							self.reloadExpiryTags( response.expiry_values );
 						}
 						else {
 							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', self.strings.errorRecheckStatus );
@@ -141,24 +141,33 @@ import Fetcher from './utils/fetcher';
 
 				const button = $('.update-htaccess');
 				const spinner = $('.wphb-expiry-changes .spinner');
+				const notice = $('#wphb-expiry-change-notice');
 
 				button.addClass('disabled');
 				spinner.addClass('visible');
 
 				let expiry_times = self.getExpiryTimes( self.selectedExpiryType );
 				Fetcher.caching.setExpiration( expiry_times );
-				Fetcher.caching.updateHtaccess()
-					.then( ( response ) => {
-						button.removeClass('disabled');
-						spinner.removeClass('visible');
 
-						if ( 'undefined' !== typeof response && response.success ) {
-							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'success', wphb.strings.htaccessUpdated );
-						}
-						else {
-							WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', self.strings.htaccessUpdatedFailed );
-						}
-					});
+                // Set timeout to allow new expiry values to be saved.
+                setTimeout(
+                    function()
+                    {
+                        Fetcher.caching.updateHtaccess()
+                            .then( ( response ) => {
+                                button.removeClass('disabled');
+                                spinner.removeClass('visible');
+                                notice.slideUp('slow');
+
+                                if ( 'undefined' !== typeof response && response.success ) {
+                                    WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'success', wphb.strings.htaccessUpdated );
+                                }
+                                else {
+                                    WPHB_Admin.notices.show( 'wphb-ajax-update-notice', true, 'error', self.strings.htaccessUpdatedFailed );
+                                }
+                            });
+                    }, 1000);
+
 			});
 
 			// View code clicked (when rules already in .htaccess and expiry values are updated).
@@ -177,9 +186,18 @@ import Fetcher from './utils/fetcher';
 
 			// Activate button clicked.
 			$('.activate-button').on('click', function(e) {
-				// Update expiration times.
-				let expiry_times = self.getExpiryTimes( self.selectedExpiryType );
-				Fetcher.caching.setExpiration( expiry_times );
+                e.preventDefault();
+                $(this).addClass('sui-button-onload');
+                // Update expiration times.
+                let expiry_times = self.getExpiryTimes( self.selectedExpiryType );
+                Fetcher.caching.setExpiration( expiry_times );
+                let redirect = $(this).attr('href');
+                // Set timeout to allow new expiry values to be saved.
+                setTimeout(
+                    function()
+                    {
+                        window.location = redirect;
+                    }, 1000);
 			});
 
 			/**
@@ -187,14 +205,10 @@ import Fetcher from './utils/fetcher';
 			 */
 
 			// Connect Cloudflare link clicked.
-			$('#wphb-box-caching-settings .connect-cloudflare-link, #wphb-box-caching-summary .connect-cloudflare-link').on('click', function(e) {
+			$('.connect-cloudflare-link').on('click', function(e) {
                 e.preventDefault();
-				$('#wphb-server-type').val('cloudflare').trigger('sui:change');
-				self.hideCurrentInstructions();
-                self.setServer('cloudflare');
-				self.showServerInstructions('cloudflare');
-				self.selectedServer = 'cloudflare';
-				$('html, body').animate({ scrollTop: $('#cloudflare-steps').offset().top }, 'slow');
+                window.location.hash = 'connect-cloudflare';
+				self.setCloudflare();
             });
 
 			// "# of your cache types don’t meet the recommended expiry period" notice clicked.
@@ -207,7 +221,7 @@ import Fetcher from './utils/fetcher';
 			$('#dismiss-cf-notice').on( 'click', function(e) {
 				e.preventDefault();
 				Fetcher.notice.dismissCloudflareDash();
-				('.cf-dash-notice').slideUp().parent().addClass('no-background-image');
+				$('.cf-dash-notice').slideUp().parent().addClass('no-background-image');
 			});
 
 			/**
@@ -320,25 +334,44 @@ import Fetcher from './utils/fetcher';
             Fetcher.caching.setServer( value );
         },
 
+		setCloudflare: function() {
+			$('#wphb-server-type').val('cloudflare').trigger('sui:change');
+			this.hideCurrentInstructions();
+			this.setServer('cloudflare');
+			this.showServerInstructions('cloudflare');
+			this.selectedServer = 'cloudflare';
+
+			setTimeout(function () {
+				$('html, body').animate({ scrollTop: $('#cloudflare-steps').offset().top }, 'slow');
+			}, 300);
+		},
+
+        reloadExpiryTags: function( expiry_values ) {
+            for (let k in expiry_values){
+                if (expiry_values.hasOwnProperty(k)) {
+                    $('#wphb-caching-expiry-' + k).text(expiry_values[k]);
+                }
+            }
+        },
+
         hideCurrentInstructions: function() {
             if ( this.serverInstructions[ this.selectedServer ] ) {
-                this.serverInstructions[ this.selectedServer ].hide();
+                this.serverInstructions[ this.selectedServer ].addClass( 'sui-hidden' );
             }
         },
 
         showServerInstructions: function( server ) {
             if ( typeof this.serverInstructions[ server ] !== 'undefined' ) {
                 let serverTab = this.serverInstructions[ server ];
-				serverTab.show();
+				serverTab.removeClass( 'sui-hidden' );
                 // Show tab.
 				serverTab.find('.sui-tab:first-child > label').trigger('click');
             }
 
             if ( 'apache' === server || 'LiteSpeed' === server ) {
-                $( '.enable-cache-wrap-' + server ).show();
-            }
-            else {
-                $( '#enable-cache-wrap' ).hide();
+                $( '.enable-cache-wrap-' + server ).removeClass( 'sui-hidden' );
+            } else {
+                $( '#enable-cache-wrap' ).addClass( 'sui-hidden' );
             }
         },
 

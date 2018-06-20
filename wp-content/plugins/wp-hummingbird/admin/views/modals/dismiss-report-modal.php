@@ -1,4 +1,4 @@
-<div class="dialog sui-dialog" aria-hidden="true" id="dismiss-report-modal">
+<div class="dialog sui-dialog sui-dialog-sm" aria-hidden="true" id="dismiss-report-modal">
 
 	<div class="sui-dialog-overlay" tabindex="-1" data-a11y-dialog-hide></div>
 
@@ -7,10 +7,10 @@
 		<div class="sui-box" role="document">
 
 			<div class="sui-box-header">
-				<h3 class="sui-box-title" id="dismissReport"><?php esc_html_e( 'Ignore Warnings', 'wphb' ); ?></h3>
-				<div class="sui-actions-right">
-					<button data-a11y-dialog-hide class="sui-dialog-close" aria-label="Close this dialog window"></button>
-				</div>
+				<h3 class="sui-box-title" id="dismissReport">
+					<?php esc_html_e( 'Are you sure?', 'wphb' ); ?>
+				</h3>
+				<button data-a11y-dialog-hide="" class="sui-dialog-close" aria-label="<?php esc_attr_e( 'Close this dialog window', 'wphb' ); ?>"></button>
 			</div>
 
 			<div class="sui-box-body">

@@ -1,4 +1,9 @@
 <?php
+/**
+ * Hummingbird admin class.
+ *
+ * @package Hummingbird
+ */
 
 /**
  * Class WP_Hummingbird_Admin
@@ -48,19 +53,10 @@ class WP_Hummingbird_Admin {
 		add_filter( 'network_admin_plugin_action_links_' . $plugin_name . '/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
 		add_filter( 'plugin_action_links_' . $plugin_name . '/wp-hummingbird.php', array( $this, 'add_plugin_action_links' ) );
 
-		add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_icon_styles' ) );
-
 		/**
 		 * Triggered when Hummingbird Admin is loaded
 		 */
 		do_action( 'wphb_admin_loaded' );
-	}
-
-	/**
-	 * Enqueue icon for menu.
-	 */
-	public function enqueue_icon_styles() {
-		wp_enqueue_style( 'wphb-fonts', WPHB_DIR_URL . 'admin/assets/css/wphb-font.css', array() );
 	}
 
 	/**
@@ -144,10 +140,7 @@ class WP_Hummingbird_Admin {
 			/* @var WP_Hummingbird_Module_Page_Cache $page_cache_module */
 			$page_cache_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
 			$options = $page_cache_module->get_options();
-			$subsite_page_caching = false;
-			if ( 'blog-admins' === $options['enabled'] ) {
-				$subsite_page_caching = true;
-			}
+			$subsite_page_caching = $options['enabled'];
 
 			// Temp until we do the dashboard in 1.8 or 1.9.
 			if ( $subsite_tests ) {
@@ -164,7 +157,7 @@ class WP_Hummingbird_Admin {
 
 			if ( $subsite_tests ) {
 				$this->pages['wphb-performance'] = new WP_Hummingbird_Performance_Report_Page( 'wphb-performance', __( 'Performance Test', 'wphb' ), __( 'Performance Test', 'wphb' ), "wphb-{$slug}" );
-			} elseif ( isset( $_GET['page'] ) && 'wphb-performance' === $_GET['page'] ) {
+			} elseif ( isset( $_GET['page'] ) && 'wphb-performance' === $_GET['page'] ) { // Input var ok.
 				// Subsite performance reporting is off, and is a network, let's redirect to network admin.
 				$url = network_admin_url( 'admin.php?page=wphb-performance' );
 				$url = add_query_arg( 'view', 'settings', $url );
@@ -175,7 +168,7 @@ class WP_Hummingbird_Admin {
 			if ( WP_Hummingbird_Utils::can_execute_php() ) {
 				if ( ( 'super-admins' === $minify && is_super_admin() ) || ( true === $minify ) ) {
 					$this->pages['wphb-minification'] = new WP_Hummingbird_Minification_Page( 'wphb-minification', __( 'Asset Optimization', 'wphb' ), __( 'Asset Optimization', 'wphb' ), "wphb-{$slug}" );
-				} elseif ( isset( $_GET['page'] ) && 'wphb-minification' === $_GET['page'] ) {
+				} elseif ( isset( $_GET['page'] ) && 'wphb-minification' === $_GET['page'] ) { // Input var ok.
 					// Asset optimization is off, and is a network, let's redirect to network admin.
 					$url = network_admin_url( 'admin.php?page=wphb#wphb-box-dashboard-minification-network-module' );
 					$url = add_query_arg( 'minify-instructions', 'true', $url );
@@ -267,9 +260,8 @@ class WP_Hummingbird_Admin {
 		?>
 		<script>
 			jQuery( document ).ready( function() {
-				var module = window.WPHB_Admin.getModule( 'minification' );
-				module.scanner.scan();
-				module.minificationStarted = true;
+				window.WPHB_Admin.getModule( 'minification' ).scanner.scan();
+				window.WPHB_Admin.getModule( 'minification' ).minificationStarted = true;
 			});
 		</script>
 		<?php
@@ -318,8 +310,7 @@ class WP_Hummingbird_Admin {
 		?>
 		<script>
 			jQuery( document ).ready( function() {
-				var module = window.WPHB_Admin.getModule( 'performance' );
-				module.performanceTest( '<?php echo esc_url( $redirect ); ?>' );
+				window.WPHB_Admin.getModule( 'performance' ).performanceTest( '<?php echo esc_url( $redirect ); ?>' );
 			});
 		</script>
 		<?php
@@ -359,8 +350,7 @@ class WP_Hummingbird_Admin {
 		<script>
 			window.onload = function () {
 				if ( window.WPHB_Admin ) {
-					var module = window.WPHB_Admin.getModule('dashboard');
-					module.startQuickSetup();
+					window.WPHB_Admin.getModule('dashboard').startQuickSetup();
 				}
 			};
 		</script>

@@ -52,13 +52,15 @@
             }
         }
 
-        .hb-wpmudev-icon-info {
-            color: #ddd;
+        .sui-icon-info {
             font-size: 16px;
             margin-left: 10px;
 
-            &:hover { color: #aaa; }
-            &:before { vertical-align: middle; }
+            &:hover:before { color: #aaa; }
+            &:before {
+                color: #ddd;
+                vertical-align: middle;
+            }
         }
 
         .wphb-db-row-delete {
@@ -74,7 +76,7 @@
             &:hover {
                 background-color: #f5f5f5;
 
-                .hb-fi-trash {
+                .sui-icon-trash:before {
                     color: #FF6D6D;
                 }
             }
@@ -84,10 +86,10 @@
             margin-top: 1px;
         }
 
-        .hb-fi-trash {
+        .sui-icon-trash:before {
             color: #888;
             font-size: 12px;
-            top: 5px;
+            margin-top: 8px;
         }
     }
 
@@ -117,12 +119,6 @@
 
     .wphb-db-cleanup-no-membership {
         padding-top: 0;
-
-        .wphb-block-entry-content {
-            @include bp(desktop-large) {
-                margin-top: 30px;
-            }
-        }
     }
 }
 

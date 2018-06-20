@@ -305,17 +305,20 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 	private function delete( $sql, $type ) {
 		global $wpdb;
 
+		$entries = $wpdb->get_col( $sql ); // Db call ok; no-cache ok.
+
 		if ( 'revisions' === $type || 'drafts' === $type || 'trash' === $type ) {
 			$func = 'wp_delete_post';
 		} elseif ( 'spam' === $type || 'trash_comment' === $type ) {
 			$func = 'wp_delete_comment';
+		} elseif ( 'expired_transients' === $type && function_exists( 'delete_expired_transients' ) ) {
+			delete_expired_transients();
+			return count( $entries );
 		} else {
 			$func = 'delete_option';
 		}
 
 		$items = 0;
-
-		$entries = $wpdb->get_col( $sql ); // Db call ok; no-cache ok.
 		foreach ( $entries as $entry ) {
 			if ( 'delete_option' === $func ) {
 				// No option to force delete in delete_option function.

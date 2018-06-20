@@ -73,8 +73,8 @@
 
 			</div>
 			<img class="wphb-image wphb-image-center wphb-modal-image-bottom"
-				 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary.png'; ?>"
-				 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary@2x.png'; ?> 2x"
+				 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary.png' ); ?>"
+				 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hb-graphic-minify-summary@2x.png' ); ?> 2x"
 				 alt="<?php esc_attr_e( 'Reduce your page load time!', 'wphb' ); ?>">
 		</div>
 

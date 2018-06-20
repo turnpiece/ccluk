@@ -37,9 +37,8 @@ import Scanner from './minification/Scanner';
             if (this.$checkFilesButton.length) {
                 this.$checkFilesButton.click(function (e) {
                     e.preventDefault();
-                    let el = document.getElementById('check-files-modal');
-                    let dialog = new A11yDialog(el);
-                    dialog.show();
+
+                    SUI.dialogs['check-files-modal'].show();
 
                     $(this).attr('disabled', true);
                     self.updateProgressBar(self.scanner.getProgress());
@@ -59,14 +58,14 @@ import Scanner from './minification/Scanner';
             });
 
             // Track changes done to minification files.
-            $(':input.toggle-checkbox').on('change', function () {
+            $(':input.toggle-checkbox, :input[id*="wphb-minification-include"]').on('change', function () {
                 let row = $(this).closest('.wphb-border-row');
                 let row_status = row.find('span.wphb-row-status-changed');
                 $(this).toggleClass('changed');
                 if (row.find('.changed').length !== 0) {
-                    row_status.removeClass('hidden');
+                    row_status.removeClass('sui-hidden');
                 } else {
-                    row_status.addClass('hidden');
+                    row_status.addClass('sui-hidden');
                 }
                 let changed = $('.wphb-minification-files').find('input.changed');
                 if ( changed.length !== 0 ) {
@@ -94,18 +93,14 @@ import Scanner from './minification/Scanner';
             switchButtons.on('click', function (e) {
                 e.preventDefault();
 
-                let el = document.getElementById('wphb-advanced-minification-modal');
-                let dialog = new A11yDialog(el);
-                dialog.show();
+                SUI.dialogs['wphb-advanced-minification-modal'].show();
             });
 
             // Switch back to basic mode
             $('.box-title-advanced > a').on('click', function (e) {
                 e.preventDefault();
 
-                let el = document.getElementById('wphb-basic-minification-modal');
-                let dialog = new A11yDialog(el);
-                dialog.show();
+                SUI.dialogs['wphb-basic-minification-modal'].show();
             });
 
             // Filter action button on Asset Optimization page

@@ -8,7 +8,7 @@
  */
 
 ?>
-<h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
+<h3 class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( ! WP_Hummingbird_Utils::is_member() && WP_Hummingbird_Utils::is_dash_logged_in() ) : ?>
 	<div class="sui-actions-right">
 		<a class="sui-button sui-button-green" href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_smush_header_upsell_link' ); ?>" target="_blank">

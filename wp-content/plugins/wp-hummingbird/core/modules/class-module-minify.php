@@ -99,9 +99,37 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		// Process the queue through WP Cron.
 		add_action( 'wphb_minify_process_queue', array( $this, 'process_queue' ) );
 
+		// Process rtl tags.
+		add_filter( 'style_loader_tag', array( $this, 'remove_rtl_suffix' ), 9999 );
+
 		if ( ( is_multisite() && is_network_admin() ) || ! is_multisite() ) {
 			add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_critical_css' ), 5 );
 		}
+	}
+
+	/**
+	 * Parse <link> tag and remove the -rtl prefix.
+	 *
+	 * @since 1.9.1
+	 *
+	 * @param string $tag  <link> tag.
+	 *
+	 * @return string
+	 */
+	public function remove_rtl_suffix( $tag ) {
+		// Only process for rtl files.
+		if ( ! is_rtl() || is_null( $tag ) ) {
+			return $tag;
+		}
+
+		/**
+		 * TODO: -rtl prefix can contain a suffix.
+		 *
+		 * @see WP_Styles::do_item()
+		 */
+		$tag = str_replace( '-rtl', '', $tag );
+
+		return $tag;
 	}
 
 	/**
@@ -870,6 +898,8 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			$options['dont_minify'] = $default_options['minify']['dont_minify'];
 			$options['combine']     = $default_options['minify']['combine'];
 			$options['position']    = $default_options['minify']['position'];
+			$options['defer']       = $default_options['minify']['defer'];
+			$options['inline']      = $default_options['minify']['inline'];
 			$this->update_options( $options );
 		}
 
@@ -978,6 +1008,69 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		}
 
 		return $collection;
+	}
+
+	/**
+	 * Backup current settings.
+	 */
+	public function backup_settings() {
+		$options = $this->get_options();
+		$options['backed_up_settings']['block']       = $options['block'];
+		$options['backed_up_settings']['dont_minify'] = $options['dont_minify'];
+		$options['backed_up_settings']['combine']     = $options['combine'];
+		$options['backed_up_settings']['position']    = $options['position'];
+		$options['backed_up_settings']['defer']       = $options['defer'];
+		$options['backed_up_settings']['inline']      = $options['inline'];
+		$this->update_options( $options );
+	}
+
+	/**
+	 * Merge backed up settings that were saved before the scan.
+	 */
+	public function merge_backed_up_settings() {
+		$options = $this->get_options();
+		if ( ! isset( $options['backed_up_settings'] ) ) {
+			return;
+		}
+		$current_handles = WP_Hummingbird_Sources_Collector::get_handles();
+		$backed_up_settings = $options['backed_up_settings'];
+		$file_settings = self::get_file_settings_types();
+
+		foreach ( $file_settings as $file_setting ) {
+			if ( 'position' !== $file_setting ) {
+				$options[ $file_setting ]['scripts'] = array_intersect( $backed_up_settings[ $file_setting ]['scripts'], $current_handles );
+				$options[ $file_setting ]['styles']  = array_intersect( $backed_up_settings[ $file_setting ]['styles'], $current_handles );
+			} else {
+				$options[ $file_setting ]['scripts'] = array_intersect_key( $backed_up_settings[ $file_setting ]['scripts'], array_flip( $current_handles ) );
+				$options[ $file_setting ]['styles'] = array_intersect_key( $backed_up_settings[ $file_setting ]['styles'], array_flip( $current_handles ) );
+			}
+		}
+
+		// Remove backed up settings so this doesn't run again until a new file check.
+		unset( $options['backed_up_settings'] );
+
+		$this->update_options( $options );
+	}
+
+	/**
+	 * Array of Asset Optimization file settings types.
+	 *
+	 * @access private
+	 *
+	 * @return array
+	 */
+	private static function get_file_settings_types() {
+
+		$settings = array(
+			'block',
+			'dont_minify',
+			'combine',
+			'position',
+			'defer',
+			'inline',
+		);
+
+		return $settings;
 	}
 
 	/**

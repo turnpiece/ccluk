@@ -9,7 +9,7 @@
     $at1x_path: "#{$path}.#{$ext}";
     $at2x_path: "#{$path}@2x.#{$ext}";
 
-    background: url("#{$at1x_path}") $repeat $pos;
+    background: #fff url("#{$at1x_path}") $repeat $pos;
     background-size: $w $h;
 
     @media only screen and (-webkit-min-device-pixel-ratio: 2),
@@ -22,35 +22,8 @@
     }
 }
 
-// Base at-root
-@mixin optional-at-root($sel) {
-    @at-root #{if(not &, $sel, selector-append(&, $sel))} {
-        @content;
-    }
-}
-
-// Form Input Placeholder
-@mixin form-placeholder {
-    @include optional-at-root('&::-webkit-input-placeholder') {
-        @content;
-    }
-
-    @include optional-at-root('&:-moz-placeholder') {
-        @content;
-    }
-
-    @include optional-at-root('&::-moz-placeholder') {
-        @content;
-    }
-
-    @include optional-at-root('&:-ms-input-placeholder') {
-        @content;
-    }
-}
-
 // Breakpoints
 @mixin bp($point) {
-
     // Phone: < 480px
     @if $point == phone {
         @media only screen and (max-width: $phone) {
@@ -106,5 +79,4 @@
             @content;
         }
     }
-
 }

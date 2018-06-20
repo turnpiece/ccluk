@@ -105,7 +105,7 @@ class WP_Hummingbird_Pro_AJAX {
 		$user = get_user_by( 'email', $email );
 		if ( ! ( $user instanceof WP_User ) ) {
 			$data = array(
-				'avatar'  => WP_Hummingbird_Utils::get_avatar_url( get_avatar( 0, 30 ) ),
+				'avatar'  => WP_Hummingbird_Utils::get_avatar_url( get_avatar( $email, 30 ) ),
 				'name'    => $name,
 				'user_id' => 0,
 				'email'   => $email,

@@ -211,4 +211,58 @@ class WP_Hummingbird_Hub_Endpoints {
 		WP_Hummingbird_Module_Performance::refresh_report();
 	}
 
+	/**
+	 * Enable modules from the Hub.
+	 *
+	 * @since 1.9.1
+	 * @param array  $params  Parameters.
+	 * @param string $action  Action.
+	 *
+	 * @return void|WP_Error
+	 */
+	public function action_enable( $params, $action ) {
+		$module = WP_Hummingbird_Utils::get_module( $params['module'] );
+
+		if ( ! $module ) {
+			wp_send_json_error( array(
+				'message' => __( 'Hummingbird module doesn\'t exist.', 'wphb' ),
+			));
+		}
+		if ( method_exists( $module, 'enable' ) ) {
+			call_user_func( array( $module, 'enable' ) );
+		} else {
+			wp_send_json_error( array(
+				'message' => __( 'Enabling this module remotely is not possible.', 'wphb' ),
+			));
+		}
+		wp_send_json_success();
+	}
+
+	/**
+	 * Disable modules from the Hub.
+	 *
+	 * @since 1.9.1
+	 * @param array  $params  Parameters.
+	 * @param string $action  Action.
+	 *
+	 * @return void|WP_Error
+	 */
+	public function action_disable( $params, $action ) {
+		$module = WP_Hummingbird_Utils::get_module( $params['module'] );
+
+		if ( ! $module ) {
+			wp_send_json_error( array(
+				'message' => __( 'Hummingbird module doesn\'t exist.', 'wphb' ),
+			));
+		}
+		if ( method_exists( $module, 'disable' ) ) {
+			call_user_func( array( $module, 'disable' ) );
+		} else {
+			wp_send_json_error( array(
+				'message' => __( 'Disabling this module remotely is not possible.', 'wphb' ),
+			));
+		}
+		wp_send_json_success();
+	}
+
 }

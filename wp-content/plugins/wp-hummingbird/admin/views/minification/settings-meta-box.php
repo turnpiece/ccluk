@@ -100,25 +100,21 @@
 <?php endif; ?>
 
 <?php if ( ! $is_member ) : ?>
-	<div class="sui-box-settings-row">
-		<div class="content-box content-box-two-cols-image-left">
-			<div class="wphb-block-entry-image wphb-block-entry-image-bottom">
-				<img class="wphb-image"
-					 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify.png'; ?>"
-					 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify@2x.png'; ?> 2x"
-					 alt="<?php esc_attr_e( 'WP Smush free installed', 'wphb' ); ?>">
-			</div>
-			<div class="wphb-block-entry-content wphb-upsell-free-message">
-				<p>
-					<?php printf(
-						/* translators: %s: upsell modal href link */
-						__( "With our pro version of Hummingbird you can super-compress your files and then host them on our blazing fast CDN. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins, themes & 24/7 WP support.  <a href='%s' target='_blank'>Try Pro for FREE today!</a>", 'wphb' ),
-						WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_assetoptimization_settings_upsell_link' )
-					); ?>
-				</p>
-			</div>
-		</div><!-- end content-box -->
-	</div><!-- end settings-form -->
+	<div class="sui-box-settings-row sui-upsell-row">
+		<img class="sui-image sui-upsell-image"
+			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify.png' ); ?>"
+			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/hummingbird-upsell-minify@2x.png' ); ?> 2x"
+			 alt="<?php esc_attr_e( 'WP Smush free installed', 'wphb' ); ?>">
+		<div class="sui-upsell-notice">
+			<p>
+				<?php printf(
+					/* translators: %s: upsell modal href link */
+					__( "With our pro version of Hummingbird you can super-compress your files and then host them on our blazing fast CDN. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins & 24/7 WP support.  <a href='%s' target='_blank'>Try Pro for FREE today!</a>", 'wphb' ),
+					WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_assetoptimization_settings_upsell_link' )
+				); ?>
+			</p>
+		</div>
+	</div><!-- end sui-upsell-row -->
 <?php
 endif;
 

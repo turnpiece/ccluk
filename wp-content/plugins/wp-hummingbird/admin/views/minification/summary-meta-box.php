@@ -3,10 +3,10 @@
 <div class="sui-summary-segment">
 	<div class="sui-summary-details">
 		<span class="sui-summary-large">
-			<?php if ( ! $percentage ) : ?>
+			<?php if ( ! $percentage || '0.0' === $percentage ) : ?>
 				-
 			<?php else : ?>
-				<?php echo intval( $percentage ); ?>%
+				<?php echo esc_html( $percentage ); ?>%
 			<?php endif; ?>
 		</span>
 		<span class="sui-summary-sub"><?php esc_html_e( 'Compression savings', 'wphb' ); ?></span>

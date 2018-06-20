@@ -242,14 +242,18 @@ class WP_Hummingbird_Admin_Notices {
 		self::$displayed_notices[] = $id;
 
 		?>
-		<div class="sui-notice<?php echo $notice_top ? ' sui-notice-top ' : ' '; ?>sui-notice-<?php echo esc_attr( $class ); ?>" <?php if ( $can_dismiss ) : ?>
+		<div class="<?php echo $notice_top ? 'sui-notice-top ' : 'sui-notice '; ?>sui-notice-<?php echo esc_attr( $class ); ?> sui-can-dismiss" <?php if ( $can_dismiss ) : ?>
 			id="wphb-dismissable"
 			data-id="<?php echo esc_attr( $id ); ?>"<?php endif; ?>>
-
-			<p><?php echo $message; ?></p>
-
+			<div class="sui-notice-content">
+				<p><?php echo $message; ?></p>
+			</div>
 			<span class="sui-notice-dismiss">
-				<a href="#"><?php esc_html_e( 'Dismiss', 'wphb' ); ?></a>
+				<?php if ( $notice_top ) : ?>
+					<a role="button" href="#" aria-label="<?php esc_html_e( 'Dismiss', 'wphb' ); ?>" class="sui-icon-check"></a>
+				<?php else : ?>
+					<a role="button" href="#"><?php esc_html_e( 'Dismiss', 'wphb' ); ?></a>
+				<?php endif; ?>
 			</span>
 		</div>
 
@@ -388,10 +392,10 @@ class WP_Hummingbird_Admin_Notices {
 			);
 
 			$text = __( "We've noticed you've made changes to your website. If you’ve installed new plugins or themes,
-			we recommend you re-do Hummingbird's Asset Optimization configuration to ensure those new files are added
-			correctly. <i>Note: This will wipe your existing asset optimization settings</i>. <!--<a href='#'>Learn more</a>.-->", 'wphb' );
+			we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added
+			correctly. <!--<a href='#'>Learn more</a>.-->", 'wphb' );
 
-			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="sui-button sui-button-primary button button-primary" style="margin-right:10px">' . __( 'Reset Asset Optimization', 'wphb' ) . '</a>';
+			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="sui-button sui-button-primary button button-primary" style="margin-right:10px">' . __( 'Re-check Asset Optimization', 'wphb' ) . '</a>';
 		} elseif ( $caching_active ) {
 			if ( ! is_multisite() || 'blog-admins' === $caching_active ) {
 				// Clear cache button link.

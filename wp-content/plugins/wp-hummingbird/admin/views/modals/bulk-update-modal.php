@@ -17,8 +17,6 @@
 
 				<p><?php esc_html_e( 'Choose what bulk update actions you’d like to apply to the selected files. You still have to publish your changes before they will be set live.', 'wphb' ); ?></p>
 
-
-
 				<div class="checkbox-group">
 					<input type="checkbox" class="toggle-checkbox filter-toggles filter-minify" name="filter-minify" id="filter-minify" aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
 					<label for="filter-minify" class="toggle-label sui-tooltip" data-tooltip="<?php esc_attr_e( 'Compress', 'wphb' ); ?>" aria-hidden="true">
@@ -55,7 +53,7 @@
 				</div><!-- end checkbox-group -->
 
 			</div>
-			<div class="sui-box-footer sui-space-between sui-no-padding-top">
+			<div class="sui-box-footer sui-no-padding-top">
 				<div class="sui-button sui-button-ghost" data-a11y-dialog-hide="bulk-update-modal"><?php esc_html_e( 'Cancel', 'wphb' ); ?></div>
 
 				<a class="save-batch sui-button" data-a11y-dialog-hide="bulk-update-modal"><?php esc_html_e( 'Apply', 'wphb' ); ?></a>
@@ -64,8 +62,8 @@
 
 			<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
 				<img class="wphb-image"
-					 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png'; ?>"
-					 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png'; ?> 2x"
+					 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@1x.png' ); ?>"
+					 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/graphic-minify-modal-warning@2x.png' ); ?> 2x"
 					 alt="<?php esc_attr_e( 'Hummingbird','wphb' ); ?>">
 			</div>
 		</div>

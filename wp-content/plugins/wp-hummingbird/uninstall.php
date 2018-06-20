@@ -77,7 +77,7 @@ wp_clear_scheduled_hook( 'wphb_performance_scan' );
 
 if ( ! class_exists( 'WP_Hummingbird_Filesystem' ) ) {
 	/* @noinspection PhpIncludeInspection */
-	include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';	   			 	 		  		   		
+	include_once plugin_dir_path( __FILE__ ) . '/core/class-filesystem.php';
 }
 $fs = WP_Hummingbird_Filesystem::instance();
 if ( ! is_wp_error( $fs->status ) ) {

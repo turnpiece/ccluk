@@ -1,7 +1,5 @@
-<div class="row">
-	<?php $this->do_meta_boxes( 'box-gzip-top' ); ?>
-	<?php $this->do_meta_boxes( 'box-gzip-bottom' ); ?>
-</div>
+<?php $this->do_meta_boxes( 'box-gzip-top' ); ?>
+<?php $this->do_meta_boxes( 'box-gzip-bottom' ); ?>
 
 <script>
 	jQuery(document).ready( function() {

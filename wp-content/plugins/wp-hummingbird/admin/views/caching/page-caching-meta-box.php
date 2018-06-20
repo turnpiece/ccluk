@@ -18,11 +18,11 @@
 	<p><?php esc_html_e( 'Hummingbird stores static HTML copies of your pages and posts to decrease page load time.', 'wphb' ); ?></p>
 
 	<?php if ( is_wp_error( $error ) ) : ?>
-		<div class="wphb-caching-error wphb-notice wphb-notice-error">
+		<div class="wphb-caching-error sui-notice sui-notice-error">
 			<p><?php echo $error->get_error_message(); ?></p>
 		</div>
 	<?php else : ?>
-		<div class="wphb-caching-success wphb-notice wphb-notice-success">
+		<div class="wphb-caching-success sui-notice sui-notice-success">
 			<p><?php esc_html_e( 'Page caching is currently active.', 'wphb' ); ?></p>
 		</div>
 	<?php endif; ?>
@@ -46,7 +46,7 @@
 	</div>
 	<div class="sui-box-settings-col-2">
 
-		<div class="wphb-dash-table three-columns sui-margin-bottom">
+		<div class="wphb-dash-table three-columns">
 			<?php foreach ( $pages as $page_type => $page_name ) : ?>
 				<div class="wphb-dash-table-row">
 					<div><?php echo esc_html( $page_name ); ?></div>
@@ -230,7 +230,7 @@
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2 wphb-deactivate-pc">
-		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost button-large">
+		<a href="<?php echo esc_url( $deactivate_url ); ?>" class="sui-button sui-button-ghost">
 			<?php esc_html_e( 'Deactivate', 'wphb' ); ?>
 		</a>
 		<span class="sui-description">

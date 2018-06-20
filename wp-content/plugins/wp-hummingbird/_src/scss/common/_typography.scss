@@ -35,71 +35,6 @@
 /**
  Icons (start)
  */
-.hb-fi-filter {
-    &:before {
-        content: "\7a";
-    }
-}
-.hb-fi-wand {
-    &:before {
-        content: "\5a";
-    }
-}
-
-.hb-fi-settings-slider-control {
-    &:before {
-        content: "\7b";
-    }
-}
-
-.hb-icon-audit {
-    &:before {
-        content: "\e900";
-    }
-}
-
-.hb-wpmudev-icon-cross {
-    &:before {
-        content: "\e901";
-    }
-}
-
-.hb-wpmudev-icon-info {
-    &:before {
-        content: "\e902";
-    }
-}
-
-.hb-wpmudev-icon-tick {
-    &:before {
-        content: "\e903";
-    }
-}
-
-.hb-wpmudev-icon-warning {
-    &:before {
-        content: "\e904";
-    }
-}
-
-.hb-icon-cache {
-    &:before {
-        content: "\e905";
-    }
-}
-
-.hb-icon-cloudflare {
-    &:before {
-        content: "\e906";
-    }
-}
-
-.hb-icon-gzip {
-    &:before {
-        content: "\e907";
-    }
-}
-
 .hb-icon-minify-combine {
     &:before {
         content: "\e908";
@@ -124,110 +59,11 @@
     }
 }
 
-.hb-icon-performancetest {
-    &:before {
-        content: "\e90c";
-    }
-}
-
-.hb-icon-reports {
-    &:before {
-        content: "\e90d";
-    }
-}
-
-.hb-icon-restore {
-    &:before {
-        content: "\e90e";
-    }
-}
-
-.hb-icon-smush {
-    &:before {
-        content: "\e90f";
-    }
-}
-
 .hb-icon-minify-inline {
     &:before {
         content: "\e910";
     }
 }
-
-.hb-wpmudev-icon-eye {
-    &:before {
-        content: "\e911";
-    }
-}
-
-.hb-wpmudev-icon-wrench-tool {
-    &:before {
-        content: "\e912";
-    }
-}
-
-.hb-wpmudev-icon-profile-male {
-    &:before {
-        content: "\e913";
-    }
-}
-
-.hb-wpmudev-icon-page {
-    &:before {
-        content: "\e914";
-    }
-}
-
-.hb-wpmudev-icon-academy {
-    &:before {
-        content: "\e915";
-    }
-}
-
-.hb-fi-plugin-2 {
-    &:before {
-        content: "\4f";
-    }
-}
-
-.hb-fi-arrow-right {
-    &:before {
-        content: "\af";
-    }
-}
-
-.hb-fi-trash:before {
-    content: "\51";
-}
-/**
- Icons (end)
- */
-
-.wpmud .wphb-icon {
-    position: relative;
-}
-
-.wpmud .wphb-icon-left {
-    display: block;
-    float: left;
-}
-
-.wpmud .wphb-dash-icon {
-    font-size: 12px;
-    padding-right: 2px;
-}
-
-.wpmud .cf-dismiss {
-    display: block;
-    margin-top: 6px;
-}
-
-.wpmud .wphb-cf-notice .cf-dismiss a {
-    text-transform: uppercase;
-    text-decoration: none;
-    color: #888;
-}
-
 
 /* Caching and Advanced */
 .wpmud .box-advanced-general h4,

@@ -15,6 +15,8 @@
 </a>
 <?php if ( $cf_active ) : ?>
 	<div class="sui-actions-right">
-		<span class="status-text alignright dash-cloudflare-connected-status"><?php esc_html_e( 'CloudFlare is connected', 'wphb' ); ?></span>
+		<span class="status-text">
+			<?php esc_html_e( 'CloudFlare is connected', 'wphb' ); ?>
+		</span>
 	</div>
 <?php endif; ?>

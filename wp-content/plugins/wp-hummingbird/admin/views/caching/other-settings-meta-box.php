@@ -15,7 +15,7 @@
 		<span class="sui-settings-label"><?php esc_html_e( 'Admin Cache Control', 'wphb' ); ?></span>
 		<span class="sui-description">
 			<?php esc_html_e( 'This feature adds a Clear Cache button to the WordPress Admin Top
-			bar area for select user roles.', 'wphb' ); ?>
+			bar area for admin users.', 'wphb' ); ?>
 		</span>
 	</div>
 	<div class="sui-box-settings-col-2">

@@ -2,9 +2,6 @@
  * MODULES: DASHBOARD
  */
 
-@import "../common/variables";
-@import "../common/mixins";
-
 /* Images */
 .wpmud div[class^="box-dashboard-"] .sui-box-title:before {
     font-family: $font--icons;
@@ -15,38 +12,41 @@
     line-height: 30px;
 }
 
-.wpmud div[class^="box-dashboard-performance"] .sui-box-title:before {
-    content: '\e90c';
+/* Meta boxes on the left */
+.wpmud div[class^="box-dashboard-performance"] .sui-box-title {
+    @include icon(before, 'hummingbird');
 }
-.wpmud div[class^="box-dashboard-minification"] .sui-box-title:before {
-    content: '\e90b';
+.wpmud div[class^="box-dashboard-caching-page"] .sui-box-title {
+    @include icon(before, 'page');
 }
-.wpmud div[class^="box-dashboard-browser"] .sui-box-title:before {
-    content: '\e905';
+.wpmud div[class^="box-dashboard-browser"] .sui-box-title {
+    @include icon(before, 'refresh2');
 }
-.wpmud div[class^="box-dashboard-gzip"] .sui-box-title:before {
-    content: '\e907';
+.wpmud div[class^="box-dashboard-cloudflare"] .sui-box-title {
+    @include icon(before, 'cloudflare');
 }
-.wpmud div[class^="box-dashboard-uptime"] .sui-box-title:before {
-    content: '\e900';
+.wpmud div[class^="box-dashboard-caching-gravatar"] .sui-box-title {
+    @include icon(before, 'profile-male');
 }
-.wpmud div[class^="box-dashboard-smush"] .sui-box-title:before {
-    content: '\e90f';
+.wpmud div[class^="box-dashboard-smush"] .sui-box-title {
+    @include icon(before, 'smush');
 }
-.wpmud div[class^="box-dashboard-cloudflare"] .sui-box-title:before {
-    content: '\e906';
+
+/* Meta boxes on the right */
+.wpmud div[class^="box-dashboard-gzip"] .sui-box-title {
+    @include icon(before, 'zip');
 }
-.wpmud div[class^="box-dashboard-reports"] .sui-box-title:before {
-    content: '\e90d';
+.wpmud div[class^="box-dashboard-minification"] .sui-box-title {
+    @include icon(before, 'arrows-in');
 }
-.wpmud div[class^="box-dashboard-caching-gravatar"] .sui-box-title:before {
-    content: '\e913';
+.wpmud div[class^="box-dashboard-advanced-tools"] .sui-box-title {
+    @include icon(before, 'wand-magic');
 }
-.wpmud div[class^="box-dashboard-caching-page"] .sui-box-title:before {
-    content: '\e914';
+.wpmud div[class^="box-dashboard-uptime"] .sui-box-title {
+    @include icon(before, 'uptime');
 }
-.wpmud div[class^="box-dashboard-advanced-tools"] .sui-box-title:before {
-    content: '\5a';
+.wpmud div[class^="box-dashboard-reports"] .sui-box-title {
+    @include icon(before, 'graph-bar');
 }
 
 .wpmud div[class^="box-dashboard-"] .sui-box-footer .sui-button i {
@@ -54,89 +54,21 @@
 }
 
 /* Dashboard background images */
-
 .wpmud .box-dashboard-welcome.sui-summary {
-    background-image: url("#{$image--path}/hb-graphic-dash-top@2x.png");
-}
-.wpmud .box-dashboard-reports-no-membership,
-.wpmud .box-dashboard-uptime-no-membership,
-.wpmud .box-dashboard-smush-no-membership .sui-box-body,
-.wpmud .box-dashboard-browser-caching-module .sui-box-body,
-.wpmud .box-reporting-summary .wphb-reporting-no-membership,
-.wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
-    background: #fff no-repeat 30px 100%;
-    padding-bottom: 30px !important;
-}
+    @include background-2x( "#{$image--path}/hb-graphic-dash-top", 'png', 192px, 172px, 30px 100% );
 
-.wpmud .box-dashboard-reports-no-membership .sui-box-body,
-.wpmud .box-dashboard-uptime-no-membership .sui-box-body {
-    padding: 30px 30px 0 !important;
-}
-
-.wpmud .box-dashboard-reports-no-membership {
-    background-image: url("#{$image--path}/hb-graphic-upsell-reports.png");
-}
-.wpmud .box-dashboard-uptime-no-membership {
-    background-image: url("#{$image--path}/hb-graphic-upsell-uptime.png");
-}
-.wpmud .box-dashboard-smush-no-membership .sui-box-body {
-    background-image: url("#{$image--path}/smush-share-widget.png");
-}
-.wpmud .box-dashboard-browser-caching-module .sui-box-body {
-    background-image: url("#{$image--path}/graphic-hb-cf-sell@2x.png");
-    background-size: 107px 148px;
-}
-.wpmud .box-reporting-summary .wphb-reporting-no-membership {
-    background-image: url("#{$image--path}/hummingbird-upsell-minify.png");
-    background-size: 118px 126px;
-}
-.wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
-    background-image: url("#{$image--path}/hb-graphic-db-upsell@1x.png");
-    background-size: 100px 126px;
-}
-
-.wpmud .box-dashboard-browser-caching-module .sui-box-body.no-background-image {
-    background-image: none;
-}
-
-@media only screen and (-webkit-min-device-pixel-ratio: 2),
-only screen and (min--moz-device-pixel-ratio: 2),
-only screen and (-o-min-device-pixel-ratio: 2/1),
-only screen and (min-device-pixel-ratio: 2),
-only screen and (min-resolution: 192dpi),
-only screen and (min-resolution: 2dppx) {
-    .wpmud .box-dashboard-reports-no-membership,
-    .wpmud .box-dashboard-uptime-no-membership,
-    .wpmud .box-dashboard-smush-no-membership .sui-box-body {
-        background-size: 107px 148px;
-    }
-    .wpmud .box-dashboard-reports-no-membership {
-        background-image: url("#{$image--path}/hb-graphic-upsell-reports@2x.png");
-    }
-    .wpmud .box-dashboard-uptime-no-membership {
-        background-image: url("#{$image--path}/hb-graphic-upsell-uptime@2x.png");
-    }
-    .wpmud .box-dashboard-smush-no-membership .sui-box-body {
-        background-image: url("#{$image--path}/smush-share-widget@2x.png");
-    }
-    .wpmud .box-reporting-summary .wphb-reporting-no-membership {
-        background-image: url("#{$image--path}/hummingbird-upsell-minify@2x.png");
-    }
-    .wpmud .box-advanced-db-settings .wphb-db-cleanup-no-membership {
-        background-image: url("#{$image--path}/hb-graphic-db-upsell@2x.png");
+    .sui-button-green {
+        border-radius: 20px;
     }
 }
 
 /* Dashboard tables */
-.wpmud .wphb-dash-table-header {
-    color: #333333;
-    font-size: 13px;
-    font-weight: bold;
-    line-height: 30px;
-    display: flex;
-}
 .wpmud .box-dashboard-performance-module {
     .sui-accordion {
+        &:after {
+            margin-bottom: 0;
+        }
+
         &.sui-table {
             th {
                 @media (max-width: 783px) {
@@ -144,6 +76,7 @@ only screen and (min-resolution: 2dppx) {
                 }
             }
         }
+
         th {
             color: #333333;
             font-size: 13px;
@@ -152,17 +85,20 @@ only screen and (min-resolution: 2dppx) {
             padding-top: 0;
             padding-bottom: 0;
         }
+
         .sui-accordion-item {
             &:hover {
                 cursor: default;
                 background-color: transparent;
             }
+
             .sui-button {
                 @media (max-width: 783px) {
                     margin-right: 20px;
                 }
             }
         }
+
         td.sui-accordion-item-title {
             font-size: 13px;
             color: #333333;
@@ -173,65 +109,14 @@ only screen and (min-resolution: 2dppx) {
                 font-size: 16px;
             }
         }
-        &:after {
-            margin-bottom: 0;
-        }
     }
 }
 
 .wpmud .wphb-border-frame .wphb-caching-summary-item-type,
-.wpmud .wphb-border-frame .wphb-gzip-summary-item-type,
-.wpmud .wphb-dash-table-row > div:first-child {
+.wpmud .wphb-border-frame .wphb-gzip-summary-item-type {
     display: flex;
     align-items: center;
     align-content: center;
-}
-
-.wpmud .wphb-dash-table-row {
-    display: flex;
-    align-items: center;
-    align-content: center;
-    justify-content: space-between;
-    height: 60px;
-    border-top: 1px solid #E6E6E6;
-}
-
-.wpmud .wphb-dash-table-row:last-child {
-    margin-bottom: -10px;
-}
-
-.wpmud .wphb-dash-table-header > span:first-child,
-.wpmud .wphb-dash-table-row > div:first-child {
-    flex-basis: 50% !important;
-    text-align: left;
-}
-
-.wpmud .wphb-dash-table-row > div:first-child {
-    font-size: 13px;
-    color: #333333;
-    font-weight: 500;
-    line-height: 16px;
-}
-
-.wpmud .wphb-dash-table-header > span,
-.wpmud .wphb-dash-table-row > div {
-    text-align: center;
-}
-
-.wpmud .wphb-dash-table-header > span:last-child,
-.wpmud .wphb-dash-table-row > div:last-child {
-    text-align: right;
-}
-
-/* Three column and two column layouts */
-.wpmud .wphb-dash-table.two-columns > .wphb-dash-table-header > span,
-.wpmud .wphb-dash-table.two-columns > .wphb-dash-table-row > div {
-    flex-basis: 50%;
-}
-
-.wpmud .wphb-dash-table.three-columns > .wphb-dash-table-header > span,
-.wpmud .wphb-dash-table.three-columns > .wphb-dash-table-row > div {
-    flex-basis: 25%;
 }
 
 /* Status text on dashboard meta boxes */
@@ -242,88 +127,20 @@ only screen and (min-resolution: 2dppx) {
     margin-top: 5px;
 }
 
+/* Dashboard Asset Optimization */
+.wpmud .box-dashboard-minification-network-module .wphb-dash-ao-upsell {
+    background-color: rgba(242,242,242,0.5);
+    margin: 0 -30px;
+    padding: 20px 30px;
 
-/* Dashbard: Cloudflare */
-#wphb-box-dashboard-cloudflare .wphb-block-entry .wphb-block-entry-content {
-    padding-top: 0;
-}
-
-.wpmud .wphb-dashboard-caching-cloudflare-box p {
-    margin-top: 30px;
-    margin-bottom: 20px;
-}
-
-.wpmud #wphb-box-dashboard-cloudflare .cloudflare-step form label {
-    text-align: left;
-    font-weight: 400;
-    padding-left: 0;
-    padding-right: 0;
-}
-
-.wpmud span.dash-cloudflare-connected-status:before {
-    color: #17A8E3;
-    content: '\e903';
-    font-size: 16px;
-    margin-right: 8px;
-}
-
-/* Dashboard: Asset Optimization */
-.wpmud .box-dashboard-welcome .dev-list > li:last-child .list-detail,
-.wpmud .box-dashboard-uptime .wphb-dash-table-row > div:last-child,
-.wpmud .box-dashboard-minification-module .wphb-dash-table-row > div:last-child {
-    font-size: 18px;
-    font-family: $font--alt;
-    color: #666666;
+    .sui-button-green {
+        border-radius: 20px;
+        float: right;
+    }
 }
 
 .wpmud .box-dashboard-minification-module .wphb-pills {
     font-weight: bold;
-}
-
-.wpmud .wphb-cf-notice p,
-.wpmud .wphb-upsell-free-message p {
-    position: relative;
-    border-radius: 4px;
-    background-color: #E1F6FF;
-    padding: 20px 30px;
-    margin-left: -140px;
-    color: #333333;
-    font-size: 13px;
-    line-height: 22px;
-}
-
-.wpmud .wphb-upsell-free-message p:after {
-    position: absolute;
-    top: 43%;
-    left: 0;
-    margin-left: -7px;
-    content: '';
-    width: 0;
-    height: 0;
-    border-top: 7px solid transparent;
-    border-bottom: 7px solid transparent;
-    border-right: 7px solid #E1F6FF;
-}
-
-.wpmud .wphb-cf-notice a,
-.wpmud .wphb-upsell-free-message a {
-    color: #333333;
-    text-decoration: underline;
-    font-weight: 500;
-}
-
-/* Dashboard Smush */
-.wpmud .box-dashboard-caching-gravatar-module .wphb-notice,
-.wpmud .box-dashboard-smush .content .wphb-notice,
-.wpmud .box-dashboard-caching-page-module .content .wphb-notice,
-.wpmud .box-dashboard-browser-caching-module .content .wphb-notice,
-.wpmud .box-dashboard-gzip-module .content .wphb-notice,
-.wpmud .box-dashboard-smush-no-membership .content .wphb-notice {
-    margin-top: 20px !important;
-}
-
-.wpmud .box-dashboard-smush-no-membership .content-box-two-cols-image-left .wphb-block-entry-content {
-    margin-top: 45px;
 }
 
 /* Dashboard Reports */
@@ -340,328 +157,122 @@ only screen and (min-resolution: 2dppx) {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-}
 
-.wpmud .wrap-wp-hummingbird .report-status:hover {
-    background-color: #f2f2f2;
-    cursor: pointer;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status i {
-    color: #666666;
-    font-size: 24px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status strong {
-    font-family: $font--alt;
-    color: #666666;
-    font-weight: bold;
-    margin-top: 10px;
-    font-size: 13px;
-    line-height: 20px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status .corner {
-    position: absolute;
-    top: 0;
-    right: 0;
-    color: #1ABC9C;
-    font-weight: bold;
-    font-family: $font--alt;
-    padding-right: 6px;
-    padding-top: 10px;
-    text-transform: uppercase;
-    font-size: 13px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status.with-corner.grey .corner i {
-    color: #888888;
-    font-size: 16px;
-    margin-right: 4px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status.with-corner:before {
-    content: '';
-    position: absolute;
-    top: 0;
-    right: 0;
-    border: solid transparent;
-    border-top-right-radius: 7px;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status.with-corner:before {
-    border-width: 30px;
-    border-right-color: #D1F1EA;
-    border-top-color: #D1F1EA;
-}
-
-.wpmud .wrap-wp-hummingbird .report-status.with-corner.grey:before {
-    border-right-color: #E6E6E6;
-    border-top-color: #E6E6E6;
-}
-
-/* Dashboard Advanced Tools */
-.wpmud .box-dashboard-advanced-tools .wphb-dash-table {
-    span {
-        color: #888;
-        font-size: 13px;
-        vertical-align: top;
+    &:hover {
+        background-color: #f2f2f2;
+        cursor: pointer;
     }
 
-    span.no-issues:before {
-        font-family: $font--icons;
-        font-size: 16px;
-        margin-right: 5px;
-        color: #1abc9c;
-        content: "\E903";
+    &.with-corner {
+        &:before {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            border: 30px solid #D1F1EA;
+            border-top-right-radius: 7px;
+            border-bottom-color: transparent;
+            border-left-color: transparent;
+        }
+
+        &.grey {
+            &:before {
+                border-right-color: #E6E6E6;
+                border-top-color: #E6E6E6;
+            }
+
+            .corner i {
+                color: #888888;
+                font-size: 16px;
+                margin-right: 4px;
+            }
+        }
+    }
+
+    i:before {
+        color: #666666;
+        font-size: 24px;
+    }
+
+    strong {
+        font-family: $font--alt;
+        color: #666666;
+        font-weight: bold;
+        margin-top: 10px;
+        font-size: 13px;
+        line-height: 20px;
+    }
+
+    .corner {
+        position: absolute;
+        top: 0;
+        right: 0;
+        color: #1ABC9C;
+        font-weight: bold;
+        font-family: $font--alt;
+        padding-right: 6px;
+        padding-top: 10px;
+        text-transform: uppercase;
+        font-size: 13px;
     }
 }
 
 /* Up-sell meta boxes in the footer */
-.wpmud #wphb-cross-sell-footer > div {
-    width: 100%;
-    text-align: center;
-    border-bottom: 1px solid #E6E6E6;
-    line-height: 0.1em;
-    margin: 10px 0 40px;
-}
-
-.wpmud #wphb-cross-sell-footer > div > span {
-    color: #9A9A9A;
-    background-color: #F4F4F4;
-    padding: 0 30px;
-    font-size: 16px;
-    top: 8px;
-}
-
-.wpmud #wphb-cross-sell-footer h3,
-.wpmud .wphb-cross-sell-bottom h3 {
-    color: #333333;
-    font-size: 22px;
-    font-weight: bold;
-    line-height: 30px;
-    text-transform: none;
-}
-
-.wpmud .wphb-cross-sell-modules .wphb-content {
-    text-align: center;
-    border-radius: 0 0 5px 5px;
-    background-color: #fff;
-    box-shadow: 0 2px 0 0 #EAEAEA;
-    padding: 30px;
-}
-
-.wpmud .wphb-cross-sell-modules .wphb-content h3 {
-    color: #333333;
-    font-size: 18px;
-    font-weight: bold;
-    line-height: 30px;
-    text-transform: none;
-    margin-top: 0;
-    min-height: 60px;
-}
-
-.wpmud .wphb-cross-sell-modules .wphb-content p {
-    color: #888888;
-    font-size: 13px;
-    line-height: 20px;
-    margin-bottom: 30px;
-}
-
 .wpmud .wphb-cross-smush,
 .wpmud .wphb-cross-defender,
 .wpmud .wphb-cross-crawl {
     min-height: 150px;
     border-radius: 5px 5px 0 0;
+    background-size: cover;
+
+    & > span {
+        width: 56px;
+        height: 56px;
+        display: block;
+        border: 3px solid #fff;
+        border-radius: 50%;
+        position: relative;
+        top: 80px;
+        left: 15px;
+        box-shadow: 0 1px 10px 0 rgba(0,0,0,0.25);
+    }
 }
 
 .wpmud .wphb-cross-smush {
     background: url("#{$image--path}/plugins-smush.jpg") center;
-    background-size: cover;
+
+    & > span {
+        @include background-2x( "#{$image--path}/plugins-smush-icon", 'png', 50px, 50px, center center, no-repeat );
+    }
 }
 
 .wpmud .wphb-cross-defender {
     background: url("#{$image--path}/plugins-defender.jpg") center;
-    background-size: cover;
+
+    & > span {
+        @include background-2x( "#{$image--path}/plugins-defender-icon", 'png', 50px, 50px, center center, no-repeat );
+    }
 }
 
 .wpmud .wphb-cross-crawl {
     background: url("#{$image--path}/plugins-crawl.jpg") center;
-    background-size: cover;
-}
 
-.wpmud .wphb-cross-smush > span,
-.wpmud .wphb-cross-defender > span,
-.wpmud .wphb-cross-crawl > span {
-    width: 56px;
-    height: 56px;
-    display: block;
-    border: 3px solid #fff;
-    border-radius: 50%;
-    position: relative;
-    top: 80px;
-    left: 15px;
-    box-shadow: 0 1px 10px 0 rgba(0,0,0,0.25);
-}
-
-.wpmud .wphb-cross-smush > span {
-    @include background-2x( "#{$image--path}/plugins-smush-icon", 'png', 50px, 50px, center center, no-repeat );
-}
-
-.wpmud .wphb-cross-defender > span {
-    @include background-2x( "#{$image--path}/plugins-defender-icon", 'png', 50px, 50px, center center, no-repeat );
-}
-
-.wpmud .wphb-cross-crawl > span {
-    @include background-2x( "#{$image--path}/plugins-crawl-icon", 'png', 50px, 50px, center center, no-repeat );
-}
-
-.wpmud .wphb-cross-sell-modules a:not(.disabled):after {
-    font-family: $font--icons;
-    content: '\af';
-    margin-left: 5px;
-}
-
-.wpmud .wphb-cross-sell-modules .col-third:nth-child(3) a.disabled {
-    border-radius: 13px !important;
-    background-color: #F2F2F2;
-}
-
-.wpmud .wphb-cross-sell-bottom {
-    text-align: center;
-    margin-top: 50px;
-}
-
-.wpmud .wphb-cross-sell-bottom p {
-    max-width: 500px;
-    margin: 20px auto 30px;
-}
-
-.wpmud .wphb-cross-sell-bottom img {
-    margin: 30px auto 0;
-}
-
-@media screen and (min-width: 1550px) {
-    .wpmud .box-dashboard-reports-no-membership .wphb-block-entry .row {
-        padding-bottom: 20px;
-    }
-    .wpmud .box-dashboard-uptime-no-membership .content p {
-        padding-bottom: 20px;
-    }
-    .wpmud .box-dashboard-smush-no-membership .buttons {
-        padding-bottom: 20px;
+    & > span {
+        @include background-2x( "#{$image--path}/plugins-crawl-icon", 'png', 50px, 50px, center center, no-repeat );
     }
 }
-
-@media only screen and (min-width: 1545px) {
-    .wpmud .wphb-cross-sell-modules > .col-third h3 {
-        height: auto;
-    }
-}
-
-@include bp(desktop-large) {
-    .wpmud .box-dashboard-smush-no-membership .content-box-two-cols-image-left .wphb-block-entry-content {
-        margin-top: 65px;
-    }
-}
-
-@include bp(desktop) {
-    .wpmud .box-dashboard-uptime-no-membership .wphb-block-entry-image,
-    .wpmud .box-dashboard-reports-no-membership .wphb-block-entry-image {
-        display: none;
-    }
-
-    .wpmud .wphb-cf-notice p,
-    .wpmud .wphb-upsell-free-message p {
-        margin-left: auto;
-        margin-top: 30px;
-    }
-
-    .wpmud .wphb-cf-notice p:after,
-    .wpmud .wphb-upsell-free-message p:after {
-        display: none;
-    }
-}
-
-@include bp(desktop-small) {
-    .box-dashboard-browser-caching-module .box-content {
-        background-image: none;
-    }
-
-    /* Upsell footer */
-    .wpmud .row.wphb-cross-sell-modules .col-third {
-        display: flex;
-        width: 100%;
-        padding: 0 0 30px;
-        margin-top: 0;
-    }
-
-    .wpmud .wphb-cross-sell-modules .col-third:last-child {
-        padding: 0;
-    }
-
-    .wpmud .wphb-cross-sell-modules div[class^="wphb-cross"] {
-        width: 30%;
-        border-radius: 5px 0 0 5px;
-        box-shadow: 0 2px 0 0 #EAEAEA;
-    }
-
-    .wpmud .wphb-cross-sell-modules div[class^="wphb-cross"] > span {
-        top: 60%;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content {
-        width: 70%;
-        text-align: left;
-        border-radius: 0 5px 5px 0;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content h3 {
-        min-height: auto;
-        text-align: left;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content p {
-        margin-bottom: 10px;
-    }
-}
-
-@include bp(tablet) {
-    .wpmud .box-dashboard-performance-module .box-content .with-padding {
-        padding: 30px;
-    }
-}
-
 
 @include bp(phone) {
     .wpmud .box-dashboard-minification-module .wphb-pills {
         display: block;
     }
 
-    .wpmud .box-dashboard-performance-module .wphb-score-result-label {
-        margin-left: 3px;
-        margin-right: 5px;
-    }
-
     .wpmud .box-dashboard-performance-module .sui-accordion .sui-button-ghost {
         padding: 5px 6px 7px !important;
     }
 
-    .wpmud .box-dashboard-performance-module .box-content .with-padding {
-        padding: 15px 20px;
-    }
-
-    .wpmud .box-dashboard-performance-module .wphb-dash-table-header,
-    .wpmud .box-dashboard-performance-module .wphb-dash-table-row {
-        padding: 0 20px;
-    }
-
     .wpmud .box-dashboard-smush .buttons {
         margin-top: 15px;
-    }
-
-    .wpmud .wphb-score.wphb-score-have-label {
-        width: 65px;
     }
 
     .wpmud .sui-box .status-text {
@@ -670,48 +281,5 @@ only screen and (min-resolution: 2dppx) {
         padding-left: 10px;
         word-wrap: break-word;
         max-width: 175px;
-    }
-
-    /* notices */
-    .wpmud .wphb-cf-notice p,
-    .wpmud .wphb-upsell-free-message p {
-        padding: 15px 20px;
-        margin-top: 15px;
-    }
-
-    /* upsell footer */
-    .wpmud .row.wphb-cross-sell-modules .col-third {
-        display: block;
-        padding: 0 0 15px;
-    }
-
-    .wpmud .wphb-cross-sell-modules div[class^="wphb-cross"],
-    .wpmud .wphb-cross-sell-modules .wphb-content {
-        width: 100%;
-    }
-
-    .wpmud .wphb-cross-sell-modules div[class^="wphb-cross"] {
-        min-height: 100px;
-        height: 100px;
-        border-radius: 5px 5px 0 0;
-        box-shadow: none;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content {
-        border-radius: 0 0 5px 5px;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content,
-    .wpmud .wphb-cross-sell-modules .wphb-content h3 {
-        text-align: center;
-    }
-
-    .wpmud .wphb-cross-sell-modules .wphb-content p {
-        margin-bottom: 20px;
-    }
-
-    .wpmud .wphb-cross-sell-modules div[class^="wphb-cross"] > span {
-        top: 60px;
-        left: calc( 50% - 28px ); /* half of width ( width is 50px ) + one border ( 3px ) */
     }
 }

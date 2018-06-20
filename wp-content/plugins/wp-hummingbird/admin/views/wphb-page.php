@@ -1,5 +1,11 @@
+<?php
+/**
+ * Dashboard page
+ *
+ * @package Hummingbird
+ */
 
-<?php $this->do_meta_boxes( 'main' ); ?>
+$this->do_meta_boxes( 'main' ); ?>
 
 <div class="sui-row">
 	<div class="sui-col-lg-6"><?php $this->do_meta_boxes( 'box-dashboard-left' ); ?></div>
@@ -60,8 +66,8 @@
 		</a>
 
 		<img class="wphb-image"
-			 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team.png'; ?>"
-			 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png'; ?> 2x"
+			 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team.png' ); ?>"
+			 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png' ); ?> 2x"
 			 alt="<?php esc_attr_e( 'Try pro features for free!', 'wphb' ); ?>">
 	</div>
 

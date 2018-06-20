@@ -80,7 +80,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	 * @used-by WP_Hummingbird_Module_Page_Cache::toggle_service()
 	 */
 	private function activate() {
-		if ( $this->check_wp_settings() ) {
+		if ( $this->check_wp_settings( true ) ) {
 			$this->init_filesystem();
 			$this->write_wp_config();
 		}
@@ -338,14 +338,18 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	/**
 	 * Check if WP_CACHE is set.
 	 *
-	 * @since   1.7.0
+	 * @since 1.7.0
+	 *
 	 * @access  private
 	 * @used-by WP_Hummingbird_Module_Page_Cache::activate()
-	 * @return  bool
+	 *
+	 * @param bool $activate  Skip the WP_CACHE check on activation, will be checked in init_filesystem() method.
+	 *
+	 * @return bool
 	 */
-	private function check_wp_settings() {
+	private function check_wp_settings( $activate = false ) {
 		// WP_CACHE is already defined.
-		if ( defined( 'WP_CACHE' ) && WP_CACHE ) {
+		if ( $activate || ( defined( 'WP_CACHE' ) && WP_CACHE ) ) {
 			return true;
 		} else {
 			// Only add an error, do not return false, or page caching will not be activated.
@@ -756,8 +760,6 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			return;
 		}
 
-		$this->write_wp_config( true );
-
 		// Remove advanced-cache.php.
 		$adv_cache_file = dirname( get_theme_root() ) . '/advanced-cache.php';
 
@@ -768,9 +770,16 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 
 		// Remove only Hummingbird file.
 		if ( false !== strpos( file_get_contents( $adv_cache_file ), 'WPHB_ADVANCED_CACHE' ) ) {
-			unlink( $adv_cache_file );
-			self::log( 'Page cache deactivation: advanced-cache.php file removed.' );
+			$msg = 'Page cache deactivation: error removing advanced-cache.php file.';
+			if ( unlink( $adv_cache_file ) ) {
+				self::log( 'Page cache deactivation: advanced-cache.php file removed.' );
+			}
+
+			self::log( $msg );
 		}
+
+		// Reset cached pages count to 0.
+		WP_Hummingbird_Settings::update_setting( 'pages_cached', 0, 'page_cache' );
 	}
 
 	/**
@@ -1000,6 +1009,10 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			}
 
 			$this->write_file( $wphb_cache_file, $content );
+
+			// Update cached pages count.
+			$count = WP_Hummingbird_Settings::get_setting( 'pages_cached', 'page_cache' );
+			WP_Hummingbird_Settings::update_setting( 'pages_cached', ++$count, 'page_cache' );
 		}
 
 		return $buffer;
@@ -1120,6 +1133,9 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 
 		// Purge cache directory.
 		if ( 'cache' === $directory ) {
+			// Reset cached pages count.
+			WP_Hummingbird_Settings::update_setting( 'pages_cached', 0, 'page_cache' );
+
 			self::log( 'Cache direcotry purged' );
 			return $wphb_fs->purge( 'cache' );
 		}
@@ -1139,6 +1155,10 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		if ( empty( $full_path ) || ! is_dir( $full_path ) ) {
 			return true;
 		}
+
+		// Decrease cached pages count by 1.
+		$count = WP_Hummingbird_Settings::get_setting( 'pages_cached', 'page_cache' );
+		WP_Hummingbird_Settings::update_setting( 'pages_cached', --$count, 'page_cache' );
 
 		return $wphb_fs->purge( 'cache/' . $directory );
 	}
@@ -1499,6 +1519,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		if ( $value ) {
 			$this->activate();
 		} else {
+			$this->write_wp_config( true );
 			$this->cleanup();
 		}
 	}

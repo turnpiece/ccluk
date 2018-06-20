@@ -67,6 +67,8 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_cloudflare_set_expiry', array( $this, 'cloudflare_set_expiry' ) );
 		// Cloudflare purge cache.
 		add_action( 'wp_ajax_wphb_cloudflare_purge_cache', array( $this, 'cloudflare_purge_cache' ) );
+		// Cloudflare recheck zones.
+		add_action( 'wp_ajax_wphb_cloudflare_recheck_zones', array( $this, 'cloudflare_recheck_zones' ) );
 
 		/* GRAVATAR CACHING */
 
@@ -223,7 +225,10 @@ class WP_Hummingbird_Admin_AJAX {
 		}
 
 		// Remove quick setup.
-		WP_Hummingbird_Utils::remove_quick_setup();
+		$quick_setup = get_option( 'wphb-quick-setup' );
+		if ( ! isset( $quick_setup['finished'] ) ) {
+			WP_Hummingbird_Utils::remove_quick_setup();
+		}
 
 		if ( WP_Hummingbird_Module_Performance::stopped_report() ) {
 			wp_send_json_success( array(
@@ -476,10 +481,13 @@ class WP_Hummingbird_Admin_AJAX {
 			die();
 		}
 
-		WP_Hummingbird_Utils::get_status( 'caching', true );
+		$status = WP_Hummingbird_Utils::get_status( 'caching', true );
+
+		$expiry_values = array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $status );
 
 		wp_send_json_success( array(
-			'success' => true,
+			'success'       => true,
+			'expiry_values' => $expiry_values,
 		));
 	}
 
@@ -535,7 +543,6 @@ class WP_Hummingbird_Admin_AJAX {
 		 * }
 		 */
 		do_action( 'wphb_caching_set_expiration', array(
-			'type'         => $type,
 			'expiry_times' => $sanitized_expiry_times,
 		));
 
@@ -785,6 +792,31 @@ class WP_Hummingbird_Admin_AJAX {
 		$cf->clear_cache();
 
 		wp_send_json_success();
+	}
+
+	/**
+	 * Recheck Cloudflare zones.
+	 */
+	public function cloudflare_recheck_zones() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) ) {
+			die();
+		}
+
+		/* @var WP_Hummingbird_Module_Cloudflare $cf */
+		$cf = WP_Hummingbird_Utils::get_module( 'cloudflare' );
+		$zones = $cf->get_zones_list();
+		foreach ( $zones as $zone ) {
+			if ( strpos( get_site_url(), $zone['label'] ) ) {
+				wp_send_json_success( array(
+					'zones' => $zones,
+				));
+			}
+		}
+		wp_send_json_error( array(
+			'message' => __( 'Zone not found matching this domain. Please check your CloudFlare account.', 'wphb' ),
+		));
 	}
 
 	/**

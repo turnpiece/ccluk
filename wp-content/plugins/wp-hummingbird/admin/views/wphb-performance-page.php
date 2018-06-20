@@ -7,10 +7,9 @@
  * @var array|wp_error $report  Report, set in render_inner_content().
  */
 
-?>
-<?php if ( $this->has_meta_boxes( 'summary' ) ) : ?>
-	<?php $this->do_meta_boxes( 'summary' ); ?>
-<?php endif; ?>
+if ( $this->has_meta_boxes( 'summary' ) ) {
+	$this->do_meta_boxes( 'summary' );
+} ?>
 
 <div class="sui-row-with-sidenav">
 	<?php if ( $report ) : ?>

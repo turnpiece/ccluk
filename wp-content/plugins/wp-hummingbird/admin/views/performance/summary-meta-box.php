@@ -1,9 +1,25 @@
-<?php if ( $error ) : ?>
+<?php
+/**
+ * Performance summary meta box.
+ *
+ * @package Hummingbird
+ *
+ * @var bool     $error             Was there an error during performance scan.
+ * @var string   $error_text        Error text.
+ * @var string   $error_details     Error details.
+ * @var string   $retry_url         Url to start a new performance scan.
+ * @var bool     $report_dismissed  If performance report is dismissed.
+ * @var bool     $can_run_test      If there is no cool down period and user can run a new test.
+ * @var stdClass $last_test         Last test details.
+ * @var bool     $is_subsite        Is this a subsite.
+ */
+
+if ( $error ) : ?>
 	<div class="sui-box-body">
 		<div class="sui-notice sui-notice-error wphb-notice-box">
 			<p><?php echo $error_text; ?></p>
 			<div id="wphb-error-details">
-				<p><code style="background:white;"><?php echo $error_details; ?></code></p>
+				<p><code><?php echo $error_details; ?></code></p>
 			</div>
 			<div class="sui-notice-buttons">
 				<a href="<?php echo esc_url( $retry_url ); ?>" class="sui-button sui-button-primary button-notice"><?php esc_html_e( 'Try again', 'wphb' ); ?></a>
@@ -49,8 +65,16 @@
 						<a href="<?php echo esc_url( $retry_url ); ?>"  class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>
 					<?php
 					else :
-						/* translators: %d: number of minutes. */
-						$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $can_run_test ) );
+						$tooltip = sprintf(
+							/* translators: %d: number of minutes. */
+							_n(
+								'Hummingbird is just catching her breath - you can run another test in %d minute',
+								'Hummingbird is just catching her breath - you can run another test in %d minutes',
+								$can_run_test,
+								'wphb'
+							),
+							number_format_i18n( $can_run_test )
+						);
 						?>
 						<span class="sui-tooltip sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
 							<a href="<?php echo esc_url( $retry_url ); ?>" disabled class="sui-button sui-button-primary"><?php esc_html_e( 'Run Test', 'wphb' ); ?></a>

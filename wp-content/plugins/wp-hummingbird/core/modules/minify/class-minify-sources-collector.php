@@ -94,6 +94,25 @@ class WP_Hummingbird_Sources_Collector {
 	}
 
 	/**
+	 * Get handles from both styles and scripts.
+	 *
+	 * @return array
+	 */
+	public static function get_handles() {
+		$styles  = get_option( self::$styles_option, array() );
+		$scripts = get_option( self::$scripts_option, array() );
+		$handles = array();
+		foreach ( $styles as $style ) {
+			$handles[] = $style['handle'];
+		}
+		foreach ( $scripts as $script ) {
+			$handles[] = $script['handle'];
+		}
+
+		return $handles;
+	}
+
+	/**
 	 * Remove asset from collection.
 	 *
 	 * @param string $handle  Asset handle.

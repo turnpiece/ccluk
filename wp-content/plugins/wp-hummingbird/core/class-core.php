@@ -201,16 +201,16 @@ class WP_Hummingbird_Core {
 
 			if ( ! is_main_network() || ! is_main_site() ) {
 				$purge_url = add_query_arg( array(
-					'type' => 'pc-purge-subsite',
-					'run'  => 'true',
+					'action'  => 'clear_cache',
+					'module'  => 'page_cache',
 				), $pc_link );
 			} else {
 				$purge_url = add_query_arg( array(
-					'type' => 'pc-purge',
-					'run'  => 'true',
+					'action'  => 'clear_cache',
+					'module'  => 'page_cache',
 				), $pc_link );
 			}
-			$purge_url = wp_nonce_url( $purge_url, 'wphb-run-caching' );
+			$purge_url = wp_nonce_url( $purge_url, 'wphb-caching-actions' );
 
 			$admin_bar->add_menu( $menu_args );
 			$admin_bar->add_menu( array(

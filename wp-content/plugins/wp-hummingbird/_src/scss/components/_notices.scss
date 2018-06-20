@@ -35,25 +35,17 @@
     width: 100%;
 }
 
-
-.wpmud  .wrap-wp-hummingbird >  .wphb-notice.wphb-dash-settings-updated {
-    position: fixed !important;
-    top: 30px;
-    margin-left: -210px;
-}
-
-.wpmud .wphb-notice.notice p {
-    font-size: 14px;
-    line-height: 1.5;
-    margin: 10px 0;
-}
-
 .wpmud .wphb-notice {
+    &.notice p {
+        font-size: 14px;
+        line-height: 1.5;
+        margin: 10px 0;
+    }
+
     p {
         color: #333;
     }
 }
-
 
 .wpmud .wphb-notice:not(.notice) p,
 .wpmud .wphb-notice:not(.notice) span,
@@ -63,20 +55,8 @@
     padding: 0 0 0 30px;
 }
 
-.wpmud .wphb-notice:not(.notice) span.spinner.standalone {
-    margin-top: 10px;
-}
-
 .wpmud .wphb-notice:not(.notice) p:last-of-type {
     margin: 0;
-}
-
-.wpmud .wphb-notice .wphb-icon,
-.wpmud .wphb-notice .wphb-icon .wdv-icon {
-    font-size: 22px;
-    height: 22px;
-    line-height: 22px;
-    width: 22px;
 }
 
 .wpmud .wphb-notice.can-close .close {
@@ -89,101 +69,6 @@
     opacity: 0.5;
     text-transform: uppercase;
 }
-
-.wpmud .wphb-block-entry-third span.status-ok:before,
-.wpmud span.dash-cloudflare-connected-status:before,
-.wpmud .wphb-notice-error.can-close p:before,
-.wpmud .wphb-notice-success.can-close p:before,
-.wpmud .wphb-notice-success p:first-child:before,
-.wpmud .wphb-notice-error p:first-child:before,
-.wpmud .wphb-notice-warning p:first-child:before,
-.wpmud .wphb-notice-grey p:before,
-.wpmud .wphb-notice-grey-info p:before,
-.wpmud .wphb-notice-blue p:first-child:before,
-.wpmud .wphb-notice-blue-info p:first-child:before {
-    font-family: $font--icons;
-    font-size: 20px;
-    vertical-align: middle;
-    line-height: 20px;
-    top: -2px;
-    position: relative;
-    margin-left: -30px;
-    margin-right: 10px;
-}
-
-.wpmud .wphb-notice-success {
-    background-color: #D1F1EA;
-}
-
-.wpmud .wphb-notice-error {
-    background-color: #FFE5E9;
-}
-
-.wpmud .wphb-notice-warning {
-    background-color: #FFF5D5;
-    color: #333333;
-}
-
-.wpmud .wphb-notice-blue,
-.wpmud .wphb-notice-blue-info {
-    background-color: #E1F6FF;
-    margin-top: 30px;
-}
-
-.wpmud .wphb-notice-grey,
-.wpmud .wphb-notice-grey-info {
-    background-color: #F2F2F2;
-    margin-top: 10px;
-}
-
-.wpmud .cloudflare-step .wphb-notice-blue {
-    margin-top: 0;
-}
-
-.wpmud .wphb-block-entry-third span.status-ok:before,
-.wpmud .wphb-notice-success p:before {
-    content: '\e903';
-    color: #1ABC9C;
-}
-
-.wpmud .wphb-block-entry-third span.status-ok:before {
-    margin-right: 0;
-    line-height: 20px;
-}
-
-.wpmud .wphb-notice-error p:before {
-    content: '\e904';
-    color: #FF7F83;
-}
-
-.wpmud .wphb-notice-warning p:before {
-    content: '\e902';
-    color: #FECF2F;
-    font-size: 18px;
-    line-height: 18px;
-}
-
-.wpmud .wphb-notice-blue p:before {
-    content: '\e903';
-    color: #17A8E3;
-}
-
-.wpmud .wphb-notice-blue-info p:before {
-    content: '\e902';
-    color: #17A8E3;
-}
-
-.wpmud .wphb-notice-grey p:before,
-.wpmud .wphb-notice-grey-info p:before {
-    content: '\e902';
-    color: #888888;
-}
-
-.wpmud .dev-overlay .wphb-notice-warning p {
-    font-size: 14px;
-    line-height: 22px;
-}
-
 
 .wpmud .wphb-heading-status-green {
     color: #1ABC9C;

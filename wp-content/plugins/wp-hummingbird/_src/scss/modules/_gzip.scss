@@ -2,57 +2,49 @@
  * MODULES: GZIP COMPRESSION
  */
 
-.wpmud #wphb-code-snippet {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.wpmud .wphb-gzip-error {
-    text-align: left;
-}
-
-.wpmud .wphb-gzip-error p:first-child {
-    margin: 0 0 10px 0;
-}
-
-.wpmud .wphb-gzip-error a,
 .wpmud #configure-gzip-link {
+    color: #333333;
     text-decoration: underline;
 }
 
-.wpmud .box-gzip-settings .inline-label {
-    color: #888888 !important;
-    font-size: 13px;
-    font-weight: 500;
-    padding-left: 0 !important;
+.wpmud .box-gzip-summary {
+    .wphb-caching-summary-item-type {
+        font-size: 13px;
+        font-weight: 500;
+        color: #333;
+    }
 }
 
-.wpmud .box-gzip-settings .select-container {
-    max-width: 240px;
-}
+.wpmud .box-gzip-settings {
+    .sui-box-settings-col-1 {
+        vertical-align: top;
+    }
 
-.wpmud .box-gzip-settings .wphb-notice-blue {
-    margin-top: 0;
-    margin-bottom: 30px;
-    padding: 15px 20px;
-}
+    .select-container {
+        max-width: 240px;
+    }
 
-.wpmud .box-gzip-settings .wphb-notice-blue p {
-    font-size: 13px;
-}
+    .wphb-server-instructions p,
+    .wphb-server-instructions .wphb-listing li {
+        color: #888888;
+        font-size: 13px;
+        line-height: 22px;
+    }
 
-.wpmud .box-gzip-settings .wphb-notice-blue p:before {
-    font-size: 16px;
-}
+    .wphb-server-instructions .wphb-listing li {
+        margin-top: 0;
+    }
 
-.wpmud .box-gzip-settings .wphb-notice.htaccess-warning {
-    margin-top: 30px;
-    margin-bottom: 0 !important;
-    padding: 15px 20px;
-}
+    .sui-code-snippet {
+        margin-top: 1em;
+    }
 
-.wpmud .box-gzip-settings .wphb-notice.htaccess-warning a {
-    text-decoration: underline;
+    .wphb-server-instructions p {
+        font-size: 13px;
+        color: #888888;
+        letter-spacing: -0.25px;
+        line-height: 22px;
+    }
 }
 
 @media screen and (min-width: 960px) {

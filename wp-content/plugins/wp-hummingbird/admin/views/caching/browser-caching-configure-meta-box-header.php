@@ -12,7 +12,7 @@
 <h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 <?php if ( ! $cf_active ) : ?>
 	<div class="sui-actions-right">
-		<p class="wphb-label-notice-inline hide-to-mobile">
+		<p class="wphb-label-notice-inline sui-hidden-xs sui-hidden-sm">
 			<?php esc_html_e( 'Using Cloudflare?', 'wphb' ); ?>
 			<a href="#" class="connect-cloudflare-link">
 				<?php esc_html_e( 'Connect account', 'wphb' ); ?>

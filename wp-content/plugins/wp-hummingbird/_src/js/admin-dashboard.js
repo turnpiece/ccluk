@@ -77,9 +77,7 @@ import Fetcher from './utils/fetcher';
 		 */
 		startQuickSetup: function () {
             // Show quick setup modal
-            let el = document.getElementById('wphb-quick-setup-modal');
-            let dialog = new A11yDialog(el);
-            dialog.show();
+            SUI.dialogs['wphb-quick-setup-modal'].show();
 
         },
 
@@ -98,9 +96,7 @@ import Fetcher from './utils/fetcher';
 		 */
 		runPerformanceTest: function() {
 			// Show performance test modal
-            let el = document.getElementById('run-performance-test-modal');
-            let dialog = new A11yDialog(el);
-            dialog.show();
+            SUI.dialogs['run-performance-test-modal'].show();
 
 			// Run performance test
 			const module = window.WPHB_Admin.getModule('performance');

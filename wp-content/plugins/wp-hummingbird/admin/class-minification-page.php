@@ -30,6 +30,13 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			$minify_module->scanner->finish_scan();
 		}
 
+		$options = $minify_module->get_options();
+		// If backed up settings exist apply to the files that are still present.
+		if ( isset( $options['backed_up_settings'] ) && ! $minify_module->scanner->is_scanning() ) {
+			$minify_module->merge_backed_up_settings();
+
+		}
+
 		$redirect = false;
 		$redirect_url = WP_Hummingbird_Utils::get_admin_menu_url( 'minification' );
 
@@ -39,6 +46,9 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			if ( isset( $_GET['recheck-files'] ) ) { // Input var ok.
 				delete_option( 'wphb-notice-cache-cleaned-show' );
 			}
+
+			// We want to backup the current settings.
+			$minify_module->backup_settings();
 
 			$minify_module->clear_cache();
 			// Activate minification if is not.
@@ -155,7 +165,7 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 			);
 		}
 		?>
-		<div class="sui-notice sui-notice-success sui-notice-top hidden" id="wphb-notice-minification-advanced-settings-updated">
+		<div class="sui-notice-top sui-notice-success sui-hidden" id="wphb-notice-minification-advanced-settings-updated">
 			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 
@@ -180,7 +190,10 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 				null,
 				null,
 				null,
-				'box-enqueued-files-empty'
+				'box-enqueued-files-empty',
+				array(
+					'box_content_class' => 'sui-box-body sui-block-content-center',
+				)
 			);
 
 			return;
@@ -284,13 +297,13 @@ class WP_Hummingbird_Minification_Page extends WP_Hummingbird_Admin_Page {
 		$compressed_size_scripts = array_sum( @wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
 		$compressed_size = $compressed_size_scripts + $compressed_size_styles;
 
-		if ( (int) $original_size <= 0 ) {
+		if ( (float) $original_size <= 0 ) {
 			$percentage = 0;
 		} else {
 			$percentage = 100 - (int) $compressed_size * 100 / (int) $original_size;
 		}
-		$percentage = number_format_i18n( $percentage, 2 );
-		$compressed_size = number_format( (int) $original_size - (int) $compressed_size, 1 );
+		$percentage = number_format_i18n( $percentage, 1 );
+		$compressed_size = number_format( (float) $original_size - (float) $compressed_size, 0 );
 
 		$use_cdn = $minify_module->get_cdn_status();
 		$is_member = WP_Hummingbird_Utils::is_member();

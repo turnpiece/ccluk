@@ -49,21 +49,17 @@ abstract class WP_Hummingbird_Module_Server extends WP_Hummingbird_Module {
 
 		$transient = 'wphb-' . $this->transient_slug . '-data';
 
-		if ( $force ) {
+		$this->status = get_site_option( $transient );
+
+		if ( $force || ! $this->status || $check_api ) {
 			$this->clear_cache();
 
-			if ( $check_api ) {
-				$this->status = $this->analize_data( true );
-			} else {
-				$this->status = $this->analize_data();
-			}
+			$this->status = $this->analize_data( $check_api );
 
 			update_site_option( $transient, $this->status );
 
 			return $this->status;
 		}
-
-		$this->status = get_site_option( $transient );
 
 		return $this->status;
 	}

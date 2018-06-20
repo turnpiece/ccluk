@@ -24,7 +24,7 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 	 */
 	public function render_header() {
 		?>
-		<div class="sui-notice sui-notice-top hidden" id="wphb-notice-advanced-tools">
+		<div class="sui-notice-top sui-notice-success sui-hidden" id="wphb-notice-advanced-tools">
 			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 		<?php
@@ -82,13 +82,13 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		$this->add_meta_box(
 			'advanced/db-settings',
 			__( 'Settings', 'wphb' ),
-			array( $this, 'db_settings_metabox' ),
+			null,
 			null,
 			null,
 			'db',
 			array(
-				'box_content_class' => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
-				'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-db-cleanup-no-membership',
+				'box_content_class' => 'sui-box-body sui-upsell-items',
+				'box_footer_class'  => 'sui-box-footer wphb-db-cleanup-no-membership',
 			)
 		);
 	}
@@ -132,26 +132,6 @@ class WP_Hummingbird_Advanced_Tools_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		$this->view( 'advanced/db-meta-box', compact( 'fields' ) );
-	}
-
-	/**
-	 * Database cleanup settings meta box.
-	 */
-	public function db_settings_metabox() {
-		/* @var WP_Hummingbird_Module_Advanced $adv_module */
-		$adv_module = WP_Hummingbird_Utils::get_module( 'advanced' );
-		$options = $adv_module->get_options();
-
-		$fields = WP_Hummingbird_Module_Advanced::get_db_fields();
-		foreach ( $fields as $type => $field ) {
-			$fields[ $type ]['checked'] = isset( $options['db_tables'][ $type ] ) ? $options['db_tables'][ $type ] : false;
-		}
-
-		$this->view( 'advanced/db-settings-meta-box', array(
-			'fields'    => $fields,
-			'schedule'  => $options['db_cleanups'],
-			'frequency' => $options['db_frequency'],
-		));
 	}
 
 	/**

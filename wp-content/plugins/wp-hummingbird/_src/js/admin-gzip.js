@@ -1,5 +1,4 @@
 import Fetcher from './utils/fetcher';
-import Clipboard from './utils/clipboard';
 
 (function($) {
     WPHB_Admin.gzip = {
@@ -18,8 +17,6 @@ import Clipboard from './utils/clipboard';
                 troubleshootingLink = $("#troubleshooting-link"),
                 troubleshootingLinkLiteSpeed = $("#troubleshooting-link-litespeed");
 
-            new Clipboard('.wphb-code-snippet .button');
-            
             instructionsList.each(function() {
                 self.$serverInstructions[$(this).data("server")] = $(this);
             });

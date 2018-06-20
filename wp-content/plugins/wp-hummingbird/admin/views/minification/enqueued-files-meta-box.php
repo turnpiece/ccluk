@@ -48,7 +48,7 @@
 			</div>
 			<div class="sui-actions-right">
 				<a href="#" class="sui-button sui-button-icon sui-button-ghost" id="wphb-minification-filter-button">
-					<i class="sui-icon-filter sui-md" aria-hidden="true"></i>
+					<i class="sui-icon-filter sui-md sui-fw" aria-hidden="true"></i>
 				</a>
 			</div>
 
@@ -56,7 +56,7 @@
 
 
 		</div>
-		<div class="wphb-minification-filter sui-border-frame hidden">
+		<div class="wphb-minification-filter sui-border-frame sui-hidden">
 			<div class="wphb-minification-filter-block" id="wphb-minification-filter-block-search">
 				<h3 class="wphb-block-title"><?php esc_html_e( 'Filter', 'wphb' ); ?></h3>
 

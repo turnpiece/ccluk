@@ -5,436 +5,182 @@
 @import "../common/variables";
 @import "../common/mixins";
 
-.wpmud .wphb-caching-error {
-    text-align: left;
+/**
+ * Common styles for caching meta boxes
+ */
+.wpmud .wrap-wphb-caching {
+    .wphb-caching-error {
+        text-align: left;
+
+        a {
+            text-decoration: underline;
+        }
+    }
+
+
+    /* Expiration table */
+    .wphb-border-frame {
+        .table-header .wphb-caching-summary-heading-type {
+            flex-basis: 85px;
+        }
+
+        .table-row {
+            .wphb-gzip-summary-item-type,
+            .wphb-caching-summary-item-type {
+                flex-basis: 100px;
+            }
+
+            .wphb-caching-summary-item-expiry,
+            .wphb-caching-summary-item-status {
+                flex-basis: 80px;
+            }
+
+            .wphb-caching-summary-item-type {
+                font-size: 13px;
+                font-weight: 500;
+                color: #333333;
+            }
+        }
+    }
 }
 
-.wpmud .wphb-caching-error a {
-    text-decoration: underline;
+/**
+ * Summary meta box
+ */
+.wpmud .box-caching-summary {
+    @include background-2x( "#{$image--path}/graphic-caching-top", 'png', 192px, 172px, 30px 100% );
 }
 
-.wpmud .wrap-wphb-caching .wphb-spinner {
-    float: none;
-    background-size: 15px 15px;
+/**
+ * Page caching meta box
+ */
+.wpmud .box-caching-page-caching {
+    /* Two column layouts: used in page types table */
+    .wphb-dash-table.three-columns > .wphb-dash-table-row > div {
+        flex-basis: 25%;
+    }
+
+    .wphb-dash-table-row {
+        display: flex;
+        align-items: center;
+        align-content: center;
+        justify-content: space-between;
+        height: 60px;
+        border-top: 1px solid #E6E6E6;
+
+        &:first-child {
+            border-top: 0;
+        }
+
+        &:last-child {
+            margin-bottom: -10px;
+        }
+
+        > div {
+            text-align: center;
+
+            &:first-child {
+                display: flex;
+                align-items: center;
+                align-content: center;
+                flex-basis: 50% !important;
+                text-align: left;
+                font-size: 13px;
+                color: #333333;
+                font-weight: 500;
+                line-height: 16px;
+            }
+
+            &:last-child {
+                text-align: right;
+            }
+        }
+    }
 }
 
-.wpmud .wphb-caching-cloudflare-box > p {
-    margin: 0 0 20px 0;
-}
-
-.wpmud .box-caching-enable .buttons {
-    margin-top: -20px;
-}
-
-.wpmud .caching-table {
-    margin: 30px 0 0;
-}
-
-.wpmud .wphb-caching-summary-heading,
-.wpmud .box-gzip-summary .list-label {
-    text-transform: none !important;
-    color: #333333;
-    font-size: 13px;
-}
-
-.wpmud #cloudflare-how-to-title,
-.wpmud #cloudflare-how-to {
-    text-align: left;
-}
-
-.wpmud #cloudflare-how-to a {
-    font-weight: 500;
-    text-decoration: underline;
-    color: inherit;
-}
-
-.wpmud #cloudflare-info {
-    clear: both;
-}
-
-.wpmud #cloudflare-info.wphb-notice {
-    margin-top: 30px;
-}
-
-.wpmud .cloudflare-submit {
-    margin-bottom: 0;
-}
-
-.wpmud #cloudflare-zone .clear {
-    padding: 0;
-}
-
-.wpmud #cloudflare-zone label {
-    margin-bottom: 13px;
-}
-
-.wpmud #cloudflare-zone .cloudflare-submit {
-    margin-top: 22px;
-}
-
-.wpmud #cloudflare-steps .wphb-notice-success {
-    margin-top: 0;
-}
-
-.wpmud .cloudflare-clear-cache-tooltip[tooltip]:after {
-    margin-left: -137px;
-}
-
-.wpmud .cloudflare-step {
-    margin-top: 30px;
-}
-
-.wpmud .cloudflare-step form label input {
-    margin-top: 5px;
-    background-color: #F8F8F8;
-}
-
-.wpmud .cloudflare-step form label input::-webkit-input-placeholder,
-.wpmud .cloudflare-step form label input::-moz-placeholder,
-.wpmud .cloudflare-step form label input:-moz-placeholder, /* Firefox 19+ */
-.wpmud .cloudflare-step form label input:-ms-input-placeholder /* Firefox 18- */ {
-    color: #AAAAAA;
-}
-
-.wpmud .cloudflare-step > p:first-child {
-    text-align: left;
-}
-
-.wpmud .cloudflare-spinner {
-    display: inline-block;
-    float: right;
-}
-
-.wpmud .cloudflare-step p.cloudflare-submit,
-.wpmud #cloudflare-how-to-title {
-    position: relative;
-    margin-top: 11px;
-}
-
-.wpmud .cloudflare-step p.cloudflare-submit input[type="submit"] {
-    display: inline-block;
-    margin-top: 0;
-}
-
-.wpmud #cloudflare-how-to {
-    clear: both;
-    margin-left: 0;
-    margin-bottom: 0;
-    list-style-position: inside;
-}
-
-.wpmud .cloudflare-step > p {
-    margin-bottom: 30px;
-}
-
-.wpmud .cloudflare-step p.cloudflare-submit {
-    float: right;
-}
-
-.wpmud .cloudflare-step hr {
-    margin-top: 20px;
-    margin-bottom: 20px;
-}
-
-.wpmud .cloudflare-step p.cloudflare-clear-cache-text {
-    text-align: left;
-}
-
-.wpmud #cloudflare-how-to-title {
-    float: left;
-    line-height: 15px;
-    padding-top: 7px;
-    font-size: 13px;
-}
-
-.wpmud .cloudflare-step .cloudflare-data {
-    text-align: left;
-    margin-top: 30px;
-    margin-bottom: 0;
-}
-
-.wpmud .cloudflare-data > span {
-    display: inline-block;
-    margin-right: 20px;
-}
-
-.wpmud .box-caching-summary .sui-box-body {
-    background: no-repeat 30px 100%;
-}
-
-.wpmud .box-caching-summary .sui-box-body {
-    background-image: url("#{$image--path}/graphic-hb-cf-sell@2x.png");
-    background-size: 107px 148px;
-}
-
-.wpmud .box-caching-summary .sui-box-body.no-background-image {
-    background-image: none;
-}
-
-.wpmud .box-caching-settings .select-container.server-type {
-    max-width: 240px;
-}
-
-.wpmud.wphb-notice {
-    margin-top: 30px;
-}
-
-.wpmud .box-caching-settings .wphb-expiry-select-box label {
-    margin-top: 0;
-}
-
-.wpmud .wphb-expiry-select-box .wphb-expiry-select {
-    max-width: 240px;
-}
-
-@media screen and (max-width: 1200px) and (min-width: 783px) {
-    .wpmud #cloudflare-how-to-title {
-        float: none;
+/**
+ * Browser caching meta box
+ */
+.wpmud .box-caching-status {
+    .cf-dash-notice .sui-upsell-notice span a {
         display: block;
-        text-align: center;
-        margin-bottom: 0;
+        margin-top: 6px;
+        text-transform: uppercase;
+        text-decoration: none;
+        color: #888;
     }
-    .wpmud .cloudflare-step p.cloudflare-submit {
-        float: none;
-        position: relative;
-    }
-    .wpmud .cloudflare-step p.cloudflare-submit .cloudflare-spinner {
-        position: absolute;
-        right: 0;
-        top: 10px;
+
+    .wphb-caching-summary-item-expiry .sui-tag {
+        color: #333333;
     }
 }
 
-.wpmud .wphb-server-instructions .wphb-notice,
-.wpmud .box-caching-summary .wphb-notice,
-.wpmud .box-gzip-summary .wphb-notice {
-    margin-bottom: 30px !important;
-}
+.wpmud .box-caching-settings {
+    .sui-box-settings-col-1 {
+        vertical-align: top;
+    }
 
-.wpmud .wphb-caching-active.wphb-notice.wphb-notice-blue {
-    margin-bottom: 0 !important;
-}
+    .cloudflare-submit {
+        .cloudflare-how-to-title {
+            font-size: 13px;
+        }
 
-.wpmud .wphb-caching-success.wphb-notice.wphb-notice-success {
-    margin-top: 30px;
-}
+        margin-top: 30px;
+        padding-bottom: 30px;
+        .sui-button {
+            float: right;
+        }
+    }
 
-.wpmud .wphb-server-instructions .wphb-block-content pre {
-    max-height: 240px;
-}
+    .wphb-block-content-blue {
+        background-color: #e0f6ff;
+        border-radius: 5px;
+        padding: 20px 30px;
+        margin-left: 0;
+        font-size: 13px;
+        line-height: 22px;
+    }
 
-.wpmud .wphb-server-instructions .wphb-notice.wphb-notice-blue p {
-    font-size: 13px;
-    line-height: 22px;
-    color: #333;
-}
-
-.wpmud .wphb-server-instructions .wphb-notice.wphb-notice-blue p:before {
-    font-size: 16px;
-    line-height: 16px;
-}
-
-.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning {
-    margin-top: 30px;
-}
-
-.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning p {
-    font-size: 13px;
-    line-height: 22px;
-}
-
-.wpmud .wphb-expiry-changes.wphb-notice.wphb-notice-warning p:before {
-    font-size: 16px;
-    line-height: 16px;
-}
-
-.wpmud .wphb-cf-detected-notice.wphb-notice.wphb-notice-grey p {
-    font-size: 13px;
-    line-height: 22px;
-}
-
-.wpmud .wphb-cf-detected-notice.wphb-notice.wphb-notice-grey p:before {
-    font-size: 16px;
-    line-height: 16px;
-}
-
-.wpmud .wphb-expiry-changes .update-htaccess {
-    margin-top: 10px;
-}
-
-.wpmud .button.notice-button {
-    margin-top: 10px;
-}
-
-.wpmud .wphb-cloudflare.wphb-notice-warning p {
-    color: #333;
-}
-
-/* Expiration table */
-.wpmud .wphb-border-frame .table-header .wphb-caching-summary-heading-type {
-    flex-basis: 85px;
-}
-
-.wpmud .wphb-border-frame .table-row .wphb-gzip-summary-item-type,
-.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-type {
-    flex-basis: 100px;
-}
-
-.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-expiry,
-.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-status {
-    flex-basis: 80px;
-}
-
-.wpmud .wphb-border-frame .table-row .wphb-caching-summary-item-type {
-    font-size: 13px;
-    font-weight: 500;
-    color: #333333;
-}
-
-.wpmud .box-caching-settings label,
-.wpmud .box-gzip-settings label {
-    margin-top: 15px;
-    margin-bottom: 5px;
-    padding: 0;
-}
-
-.wpmud .box-caching-settings label,
-.wpmud .box-gzip-settings label,
-.wpmud .box-caching-settings .wphb-border-frame > label,
-.wpmud .box-gzip-settings .wphb-border-frame > label {
-    color: #888888;
-    font-size: 13px;
-    font-weight: 500;
-    line-height: 22px;
-}
-
-.wpmud .wphb-caching-cloudflare-settings .wphb-expiry-select {
-    width: 85%;
-}
-
-.wrap-wphb-caching .cloudflare-step label:first-child {
-    margin-top: 0;
-}
-
-/* Server select tabs (automatic/manual) */
-.wpmud .wrap-wphb-gzip .tabs,
-.wpmud .wrap-wphb-caching .tabs,
-.wpmud .wrap-wphb-gzip .tabs .tab label,
-.wpmud .wrap-wphb-caching .tabs .tab label,
-.wpmud .wrap-wphb-gzip .tabs .tab .content,
-.wpmud .wrap-wphb-caching .tabs .tab .content {
-    border: 0;
-}
-
-.wpmud .wrap-wphb-gzip .tabs .tab .content,
-.wpmud .wrap-wphb-caching .tabs .tab .content {
-    border-top: 2px solid #E6E6E6;
-    top: 38px;
-}
-
-.wpmud .wrap-wphb-gzip .tabs .tab label,
-.wpmud .wrap-wphb-caching .tabs .tab label {
-    font-size: 15px;
-    text-transform: capitalize;
-    color: #888888;
-    padding: 0 10px;
-    line-height: 1.5em;
-    height: 40px;
-}
-
-.wpmud .wphb-server-instructions p,
-.wpmud .wphb-server-instructions .wphb-listing li {
-    color: #888888;
-    font-size: 13px;
-    line-height: 22px;
-}
-
-.wpmud .wphb-server-instructions .wphb-listing li {
-    margin-top: 0;
-}
-
-.wpmud .wphb-server-instructions .tabs {
-    margin: 0;
-}
-
-.wpmud .wphb-server-instructions .tabs .tab .content {
-    padding: 20px 0 0;
-}
-
-.wpmud .wphb-server-instructions .tabs .tab > .active {
-    color: #333333;
-    border-bottom: 2px solid #333333;
-    z-index: 10;
-}
-
-/* Page caching */
-.wpmud .box-page-caching .box-footer {
-    border-top: 1px solid #E6E6E6;
-    padding: 50px 30px;
-}
-
-.wpmud .box-page-caching .sui-box-body .sui-box-settings-row:first-of-type {
-    padding-bottom: inherit;
-    border-bottom: 1px solid #e6e6e6;;
-}
-
-.wpmud .box-page-caching h4 {
-    color: #666666;
-    font-size: 15px;
-    font-weight: 500;
-    text-align: left;
-    text-transform: none;
-}
-
-.wpmud .box-page-caching textarea {
-    height: 180px;
-    max-width: 490px;
-    color: #333333;
-    border: 1px solid #E6E6E6;
-    border-radius: 4px;
-    background-color: #F8F8F8;
-    margin-top: 20px;
-}
-
-.wpmud .box-page-caching .col-two-third .with-bottom-border {
-    margin-bottom: 30px;
-}
-
-/* Page caching: page types table */
-.wpmud .box-page-caching .wphb-dash-table .sub {
-    width: 75px;
-}
-
-.wpmud .box-page-caching .wphb-dash-table .wphb-dash-table-row:first-child {
-    border-top: 0;
-}
-
-.wpmud .box-page-caching .wphb-dash-table .wphb-dash-table-row:last-child {
-    border-bottom: 0;
-}
-
-@include bp(tablet) {
-    .wpmud .box-page-caching .sui-box-settings-col-2.wphb-deactivate-pc {
-        padding-top: 0;
+    .cloudflare-step .sui-notice-warning .sui-button {
+        color: #fff;
     }
 }
 
-/* Gravatar caching */
-.wpmud .box-page-caching .wphb-notice,
-.wpmud .box-caching-gravatar .wphb-notice {
-    margin-top: 20px;
+/**
+ * Browser caching configure meta box
+ */
+.wpmud .box-caching-settings {
+    .select-container.server-type,
+    .wphb-expiry-select-box .wphb-expiry-select {
+        max-width: 240px;
+    }
+
+    .sui-border-frame .sui-form-field {
+        margin-bottom: 10px;
+    }
+
+    .wphb-expiry-changes .update-htaccess {
+        margin-top: 10px;
+    }
+
+    .wphb-server-instructions p,
+    .wphb-server-instructions .wphb-listing li {
+        color: #888888;
+        font-size: 13px;
+        line-height: 22px;
+    }
+    .wphb-server-instructions .sui-notice p {
+        color: #333;
+    }
+
+    .wphb-server-instructions .wphb-listing li {
+        margin-top: 0;
+    }
 }
 
-.wpmud .box-page-caching .sui-box-settings-row .sui-button-ghost {
-    margin: 10px 0;
-}
-
-/* Settings */
-.wpmud .box-caching-other-settings .spinner {
-    margin: 2px 10px 0 0;
-}
-
-/* Rss caching */
+/**
+ * RSS caching meta box
+ */
 .wpmud .box-caching-rss {
     .sui-box-footer .spinner {
         margin: 2px 10px 0;
@@ -454,31 +200,9 @@
     }
 }
 
-@include bp(desktop-large) {
-    .wpmud .wrap-wphb-caching .row {
-        display: block;
-        table-layout: inherit;
-    }
-}
-
-@include bp(phone-large) {
-    .wpmud .box-caching-summary .box-content > .box-content {
-        background-image: none;
-    }
-}
-
-@include bp(phone) {
-    .wpmud .wphb-caching-success.wphb-notice.wphb-notice-success {
-        margin-top: 10px;
-    }
-
-    .wpmud .wphb-server-instructions .wphb-notice,
-    .wpmud .box-caching-summary .wphb-notice,
-    .wpmud .box-gzip-summary .wphb-notice {
-        margin-bottom: 10px !important;
-    }
-
-    .wpmud .box-caching-summary .content-box-two-cols-image-left .wphb-block-entry-content {
-        margin: 0;
-    }
+/**
+ * Settings meta box
+ */
+.wpmud .box-caching-other-settings .spinner {
+    margin: 2px 10px 0 0;
 }

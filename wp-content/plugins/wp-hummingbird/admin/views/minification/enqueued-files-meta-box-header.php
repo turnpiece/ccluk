@@ -10,11 +10,11 @@
 <h3  class="sui-box-title"><?php echo esc_html( $title ); ?></h3>
 
 <div class="sui-actions-right">
-	<p class="wphb-label-notice-inline hide-to-mobile">
+	<span class="wphb-label-notice-inline sui-hidden-xs sui-hidden-sm">
 		<?php _e( 'Not seeing all your files in this list?', 'wphb' ); ?>
-	</p>
+	</span>
 
-	<div class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php esc_attr_e( 'Added/removed plugins or themes? Update your file list to include new files, and remove old ones. Note: This will reset your current optimization configuration', 'wphb' ); ?>">
+	<div class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php esc_attr_e( 'Added/removed plugins or themes? Update your file list to include new files, and remove old ones', 'wphb' ); ?>">
 		<input type="submit" class="sui-button sui-button-ghost" name="recheck-files" value="<?php esc_attr_e( 'Re-Check Files', 'wphb' ); ?>">
 	</div>
 
@@ -33,5 +33,5 @@ if ( 'advanced' === $type ) {
 
 <span class="wphb-heading-divider"></span>
 <a href="#" class="wphb-switch-button sui-tooltip sui-tooltip-top-left" data-tooltip="<?php echo esc_attr( $tooltip ); ?>">
-	<i class="hb-fi-settings-slider-control"></i>
+	<i class="sui-icon-settings-slider-control" aria-hidden="true"></i>
 </a>

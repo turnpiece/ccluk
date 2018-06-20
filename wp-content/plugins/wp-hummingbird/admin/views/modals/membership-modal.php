@@ -8,8 +8,9 @@
 		<div class="sui-box sui-no-margin-bottom" role="document">
 
 			<div class="sui-box-header">
-				<h3 class="sui-box-title"
-					id="upgradeMembership"><?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?></h3>
+				<h3 class="sui-box-title" id="upgradeMembership">
+					<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
+				</h3>
 				<div class="sui-actions-right">
 					<button data-a11y-dialog-hide class="sui-dialog-close"
 							aria-label="Close this dialog window"></button>
@@ -26,7 +27,7 @@
 					</li>
 					<li>
 						<strong><?php esc_html_e( 'Enhanced Asset Optimization', 'wphb' ); ?></strong>
-						<p><?php esc_html_e( 'Compress your minified files up to 2x more than regular optimization and reduce your page load speed even further.', 'wphb' ); ?></p>
+						<p><?php esc_html_e( 'Compress your minified files up to 2x more than regular optimization and reduce your page load time even further.', 'wphb' ); ?></p>
 					</li>
 					<li>
 						<strong><?php esc_html_e( 'WPMU DEV CDN', 'wphb' ); ?></strong>
@@ -38,11 +39,11 @@
 					</li>
 				</ul>
 
-				<p class="wphb-block-content-center"><?php esc_html_e( 'Get all of this, plus heaps more as part of a WPMU DEV membership.', 'wphb' ); ?></p>
+				<p class="sui-block-content-center"><?php esc_html_e( 'Get all of this, plus heaps more as part of a WPMU DEV membership.', 'wphb' ); ?></p>
 
-				<div class="wphb-block-content-center">
+				<div class="sui-block-content-center">
 					<a target="_blank"
-					   href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ); ?>"
+					   href="<?php echo esc_url( WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_footer_upgrade_button' ) ); ?>"
 					   class="sui-button sui-button-green sui-button-lg">
 						<?php esc_html_e( 'Upgrade Membership', 'wphb' ); ?>
 					</a>
@@ -50,8 +51,8 @@
 
 				<div class="wphb-modal-image wphb-modal-image-bottom dev-man">
 					<img class="wphb-image wphb-image-center"
-						 src="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team.png'; ?>"
-						 srcset="<?php echo WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png'; ?> 2x"
+						 src="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team.png' ); ?>"
+						 srcset="<?php echo esc_url( WPHB_DIR_URL . 'admin/assets/image/dev-team@2x.png' ); ?> 2x"
 						 alt="<?php esc_attr_e( 'Hummingbird', 'wphb' ); ?>">
 				</div>
 

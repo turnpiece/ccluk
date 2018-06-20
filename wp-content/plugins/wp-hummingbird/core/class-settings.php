@@ -103,10 +103,11 @@ class WP_Hummingbird_Settings {
 				'enabled'    => false,
 				// Only for multisites. Toggles page caching in a subsite
 				// By default is true as if 'page_cache'-'enabled' is set to false, this option has no meaning.
-				'cache_blog' => true,
-				'control'    => false,
+				'cache_blog'   => true,
+				'control'      => false,
 				// Accepts: 'manual', 'auto' and 'none'.
-				'detection'  => 'manual',
+				'detection'    => 'manual',
+				'pages_cached' => 0,
 			),
 			'caching' => array(
 				// Always enabled, so no 'enabled' option.

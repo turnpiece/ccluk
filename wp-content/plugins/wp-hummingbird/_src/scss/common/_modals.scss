@@ -2,41 +2,7 @@
  * COMMON: MODALS
  */
 
-.wpmud .dev-overlay .title .close {
-    color: #888888;
-    font-size: 34px;
-}
-
-.wpmud .wphb-modal * {
-    -webkit-box-sizing: border-box;
-    box-sizing: border-box;
-    font-family: $font;
-}
-
-.wpmud .wphb-modal .wphb-dialog-content > * {
-    margin-bottom: 30px;
-}
-
-.wpmud .wphb-modal .wphb-dialog-content > *:last-child {
-    margin-bottom: 0;
-}
-
-.wpmud .wphb-modal .wphb-dialog-content .wphb-modal-image-bottom {
-    margin-bottom: -30px;
-}
-
-.wpmud .wphb-modal .wphb-progress-state {
-    margin-top: -20px;
-}
-
-.wpmud .wphb-modal .wphb-dialog-footer {
-    border-top: 1px solid #EAEAEA;
-    margin: 30px -30px;
-    padding: 30px 30px 0;
-}
-
-.wpmud .wphb-progress-modal .wphb-progress,
-.wpmud .wphb-progress-modal .wphb-block-test {
+.wpmud .wphb-progress-modal .wphb-progress {
     max-width: 100%;
 }
 
@@ -73,60 +39,6 @@
 .wphb-cdn-block > p {
     color: #888888 !important;
     padding: 0 30px 0 76px;
-}
-
-.wpmud .wphb-modal.wphb-quick-setup-modal .wphb-block-test,
-.wpmud.hummingbird_page_wphb-minification .wphb-modal .wphb-block-test,
-.wpmud.toplevel_page_wphb-minification .wphb-modal .wphb-block-test {
-    display: flex;
-    align-content: center;
-    align-items: center;
-    height: auto;
-    padding: 20px 30px;
-    margin-bottom: 30px;
-}
-
-.wpmud.hummingbird_page_wphb-minification .wphb-modal .wphb-block-test {
-    margin-bottom: 10px;
-}
-
-.wpmud .wphb-modal.wphb-quick-setup-modal .wphb-block-test > p {
-    font-size: 13px;
-    line-height: 22px;
-    margin-right: 14px;
-    margin-bottom: 0;
-}
-
-.wpmud .wphb-modal.wphb-quick-setup-modal .wphb-block-test > .button {
-    flex-basis: 260px; /* IE compatibility */
-}
-
-.wpmud.hummingbird_page_wphb-minification .wphb-modal .wphb-block-test > label {
-    margin: 0;
-}
-
-.wpmud .dev-overlay.dismiss-report .box {
-    width: 400px;
-    margin-left: -250px;
-}
-
-.wpmud .dev-overlay.dismiss-report .title {
-    margin-bottom: 30px;
-}
-
-.wpmud .dev-overlay.dismiss-report .title h3 {
-    font-size: 15px;
-    text-transform: none;
-}
-
-.wpmud .dev-overlay.dismiss-report .wphb-dialog-content > p {
-    color: #888888;
-    font-size: 13px;
-    line-height: 22px;
-}
-
-.wpmud .dev-overlay.dismiss-report .wphb-dialog-footer {
-    border: none;
 }
 
 /* Asset Optimization switch mode notice */

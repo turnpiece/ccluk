@@ -20,7 +20,7 @@
 		<div class="settings-form dash-form">
 			<span class="dash-form-title"><?php esc_html_e( 'Subsite Settings', 'wphb' ); ?></span>
 
-			<div class="sui-notice sui-notice-success wphb-dash-settings-updated" id="wphb-notice-pc-settings-updated" style="display: none">
+			<div class="sui-notice sui-notice-success sui-hidden" id="wphb-notice-pc-settings-updated">
 				<p><?php esc_html_e( 'Settings Updated', 'wphb' ); ?></p>
 			</div>
 			<label class="sui-toggle">

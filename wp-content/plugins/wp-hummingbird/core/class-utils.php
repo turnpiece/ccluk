@@ -87,10 +87,10 @@ class WP_Hummingbird_Utils {
 	 * @param int $ver Current version number of scripts.
 	 */
 	public static function enqueue_admin_scripts( $ver ) {
-		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/admin.min.js', array( 'jquery', 'underscore' ), $ver );
+		wp_enqueue_script( 'wphb-admin', WPHB_DIR_URL . 'admin/assets/js/app.min.js', array( 'jquery', 'underscore' ), $ver );
 
 		$i10n = array(
-			'errorCachePurge'        => __( 'There was an error during the cache purge. Check file permissions are 755
+			'errorCachePurge'        => __( 'There was an error during the cache purge. Check folder permissions are 755
 										for /wp-content/wphb-cache or delete directory manually.', 'wphb' ),
 			'successGravatarPurge'   => __( 'Gravatar cache purged.', 'wphb' ),
 			'successPageCachePurge'  => __( 'Page cache purged.', 'wphb' ),
@@ -318,7 +318,7 @@ class WP_Hummingbird_Utils {
 	 * Get gzip or caching status data.
 	 *
 	 * @param string $module  Accepts: 'caching', 'gzip'.
-	 * @param bool   $api     Query API.
+	 * @param bool   $api     Query API (if needed).
 	 *
 	 * @return array|bool
 	 */
@@ -336,7 +336,7 @@ class WP_Hummingbird_Utils {
 			return $mod->status;
 		}
 
-		$mod->get_analysis_data( true );
+		$mod->get_analysis_data();
 		return $mod->status;
 	}
 
@@ -906,7 +906,7 @@ class WP_Hummingbird_Utils {
 	 *
 	 * @param string $module Module slug.
 	 *
-	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache
+	 * @return bool|WP_Hummingbird_Module|WP_Hummingbird_Module_Page_Cache|WP_Hummingbird_Module_GZip
 	 */
 	public static function get_module( $module ) {
 		$modules = self::get_modules();
@@ -1067,6 +1067,9 @@ class WP_Hummingbird_Utils {
 		$quick_setup = get_option( 'wphb-quick-setup' );
 		$quick_setup['finished'] = true;
 		update_option( 'wphb-quick-setup', $quick_setup );
+		wp_send_json_success( array(
+			'finished' => false,
+		));
 	}
 
 }

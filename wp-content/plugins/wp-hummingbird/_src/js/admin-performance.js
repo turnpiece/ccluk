@@ -13,35 +13,18 @@ import Fetcher from './utils/fetcher';
             let self = this;
             let body = $('body');
 
-            if (wphbPerformanceStrings)
-                this.strings = wphbPerformanceStrings;
+			/** @var {array} wphbPerformanceStrings */
+            if (wphbPerformanceStrings) {
+				this.strings = wphbPerformanceStrings;
+            }
 
             this.$runTestButton = $('#run-performance-test');
-
-            let performanceReportTable = $(".performance-report-table");
-
-            performanceReportTable.off('click', 'button');
-            performanceReportTable.on('click', '.wphb-performance-report-item-cta .additional-content-opener' && 'tr.wphb-performance-report-item:not(.wphb-table-score-disabled)', function (e) {
-                e.preventDefault();
-
-                let getParentPerformanceItem = $(this).closest(".wphb-performance-report-item"),
-                    getNextAdditionalContentRow = getParentPerformanceItem.nextUntil(".wphb-performance-report-item");
-
-                getNextAdditionalContentRow.toggleClass("wphb-performance-report-item-additional-content-opened");
-
-                if (getNextAdditionalContentRow.hasClass("wphb-performance-report-item-additional-content-opened")) {
-                    getParentPerformanceItem.addClass("wphb-performance-report-item-opened");
-                } else {
-                    getParentPerformanceItem.removeClass("wphb-performance-report-item-opened");
-                }
-            });
 
             if (this.$runTestButton.length) {
                 this.$runTestButton.click(function (e) {
                     e.preventDefault();
-                    let el = document.getElementById('run-performance-test-modal');
-                    let dialog = new A11yDialog(el);
-                    dialog.show();
+
+                    SUI.dialogs['run-performance-test-modal'].show();
                     $(this).attr('disabled', true);
                     self.performanceTest(self.strings.finishedTestURLsLink);
                 });
@@ -130,6 +113,7 @@ import Fetcher from './utils/fetcher';
                     });
                 return false;
             });
+
             // Save performance test settings
             body.on('submit', '.settings-frm', function (e) {
                 e.preventDefault();

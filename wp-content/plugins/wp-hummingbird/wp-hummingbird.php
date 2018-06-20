@@ -1,15 +1,17 @@
 <?php
 /**
 Plugin Name: Hummingbird Pro
-Version: 1.9.0
+Version:     1.9.1
 Plugin URI:  https://premium.wpmudev.org/project/wp-hummingbird/
 Description: Hummingbird zips through your site finding new ways to make it load faster, from file compression and minification to browser caching – because when it comes to pagespeed, every millisecond counts.
-Author: WPMU DEV
-Author URI: http://premium.wpmudev.org
-Network: true
+Author:      WPMU DEV
+Author URI:  http://premium.wpmudev.org
+Network:     true
 Text Domain: wphb
 Domain Path: /languages
-WDP ID: 1081721
+WDP ID:      1081721
+
+@package Hummingbird
  */
 
 /*
@@ -32,7 +34,7 @@ Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA 02111-1307 USA
 */
 
 if ( ! defined( 'WPHB_VERSION' ) ) {
-	define( 'WPHB_VERSION', '1.9.0' );
+	define( 'WPHB_VERSION', '1.9.1' );
 }
 
 if ( ! defined( 'WPHB_DIR_PATH' ) ) {

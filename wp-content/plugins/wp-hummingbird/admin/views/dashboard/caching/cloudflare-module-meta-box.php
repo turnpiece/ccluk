@@ -22,7 +22,7 @@
 		<p>
 			<?php
 			printf(
-			/* translators: %s: Number of issues */
+				/* translators: %s: Number of issues */
 				__( '%1$s of your cache types don’t meet the recommended expiry period of 8+ days. Configure browser caching <a href="%2$s" id="configure-link">here</a>.', 'wphb' ),
 				absint( $issues ),
 				esc_attr( $configure_caching_url )

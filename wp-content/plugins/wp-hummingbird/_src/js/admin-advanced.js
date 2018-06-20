@@ -104,9 +104,7 @@ import Fetcher from './utils/fetcher';
 			modal.find( 'p' ).html( dialog );
 			modal.find( '.wphb-delete-db-row' ).attr( 'data-type', type );
 
-            let el = document.getElementById('wphb-database-cleanup-modal');
-            let dia = new A11yDialog(el);
-            dia.show();
+            SUI.dialogs["wphb-database-cleanup-modal"].show();
 		},
 
 		/**
@@ -115,9 +113,7 @@ import Fetcher from './utils/fetcher';
 		 * @param type Data type to delete from db (See data-type element for each row in the code).
 		 */
 		confirmDelete: function ( type ) {
-            let el = document.getElementById('wphb-database-cleanup-modal');
-            let dialog = new A11yDialog(el);
-            dialog.hide();
+            SUI.dialogs["wphb-database-cleanup-modal"].hide();
 
 			let row;
 			let footer = $('.box-advanced-db .sui-box-footer');

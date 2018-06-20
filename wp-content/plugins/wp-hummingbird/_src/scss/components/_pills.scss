@@ -121,10 +121,6 @@
 }
 
 @include bp(phone-large) {
-    .wpmud .dev-box .box-title .wphb-pills {
-        margin: 4px 0 0 10px;
-    }
-
     .wphb-pills {
         margin: 0 0 0 10px;
     }

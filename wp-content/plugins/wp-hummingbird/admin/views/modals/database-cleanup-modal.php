@@ -7,14 +7,16 @@
 		<div class="sui-box" role="document">
 
 			<div class="sui-box-header">
-				<h3 class="sui-box-title" id="databaseCleanup"><?php esc_html_e( 'Are you sure?', 'wphb' ); ?></h3>
+				<h3 class="sui-box-title" id="databaseCleanup">
+					<?php esc_html_e( 'Are you sure?', 'wphb' ); ?>
+				</h3>
 			</div>
 
 			<div class="sui-box-body">
 
 				<p></p>
 
-				<div class="wphb-block-content-center">
+				<div class="sui-block-content-center">
 					<a class="sui-button sui-button-ghost" data-a11y-dialog-hide>
 						<?php esc_html_e( 'Cancel', 'wphb' ); ?>
 					</a>

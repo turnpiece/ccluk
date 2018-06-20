@@ -17,6 +17,6 @@
 <?php endif; ?>
 <div class="sui-actions-right">
 	<span class="spinner standalone"></span>
-	<span class="wphb-label-notice-inline hide-to-mobile"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></span>
+	<span class="wphb-label-notice-inline sui-hidden-xs sui-hidden-sm"><?php esc_html_e( 'Made changes?', 'wphb' ); ?></span>
 	<input type="submit" class="sui-button sui-button-ghost" value="<?php esc_attr_e( 'Re-Check Expiry', 'wphb' ); ?>">
 </div>

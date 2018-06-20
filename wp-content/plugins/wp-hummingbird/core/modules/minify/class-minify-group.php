@@ -426,7 +426,10 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return float Original size in Kb
 	 */
 	public function get_handle_original_size( $handle ) {
-		return $this->handle_original_sizes[ $handle ];
+		if ( isset( $this->handle_original_sizes[ $handle ] ) ) {
+			return $this->handle_original_sizes[ $handle ];
+		}
+		return 0;
 	}
 
 	/**
@@ -447,7 +450,10 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return float Compressed size in Kb
 	 */
 	public function get_handle_compressed_size( $handle ) {
-		return $this->handle_compressed_sizes[ $handle ];
+		if ( isset( $this->handle_compressed_sizes[ $handle ] ) ) {
+			return $this->handle_compressed_sizes[ $handle ];
+		}
+		return 0;
 	}
 
 	/**
@@ -504,7 +510,7 @@ class WP_Hummingbird_Module_Minify_Group {
 	/**
 	 * Removes handle/s but returns a new instance of
 	 * WP_Hummingbird_Module_Minifynew_Group with the same parameters
-	 * but pnly with the specified handles
+	 * but only with the specified handles
 	 *
 	 * @param array|string $handles  One or more handles to remove from the group.
 	 *
@@ -682,6 +688,24 @@ class WP_Hummingbird_Module_Minify_Group {
 	 * @return string
 	 */
 	public function get_handle_url( $handle ) {
+		// RTL compatibility.
+		if ( 'styles' === $this->type ) {
+			// We don't use global $wp_styles, because it is not there during cron.
+			$wp_styles = wp_styles();
+
+			if ( isset( $wp_styles->text_direction ) && 'rtl' === $wp_styles->text_direction && isset( $this->extra['rtl'] ) && $this->extra['rtl'] ) {
+				if ( is_bool( $this->extra['rtl'] ) || 'replace' === $this->extra['rtl'] ) {
+					$suffix   = isset( $this->extra['suffix'] ) ? $this->extra['suffix'] : '';
+					$file_path = str_replace( "{$suffix}.css", "-rtl{$suffix}.css", $wp_styles->_css_href( $this->handle_urls[ $handle ], $this->handle_versions[ $handle ], "$handle-rtl" ) );
+				} else {
+					$file_path = $this->_css_href( $this->extra['rtl'], $this->handle_versions[ $handle ], "$handle-rtl" );
+				}
+
+				return $file_path;
+			}
+		}
+
+
 		return $this->handle_urls[ $handle ];
 	}
 
@@ -862,6 +886,7 @@ class WP_Hummingbird_Module_Minify_Group {
 		$hash .= $this->type;
 		$hash .= implode( '-', $handles_versions );
 		$this->hash = self::hash( $hash );
+
 		if ( $this->file_id ) {
 			update_post_meta( $this->file_id, '_hash', $this->hash );
 		}
@@ -1128,7 +1153,20 @@ class WP_Hummingbird_Module_Minify_Group {
 				// Upload contents to filesystem
 				// Any user can upload this as is made during front request.
 				add_filter( 'upload_mimes', array( 'WP_Hummingbird_Module_Minify_Group', '_upload_mimes' ) , 999 );
-				$filename = $group->hash . '.' . ( 'scripts' === $group->type ? 'js' : 'css' );
+
+				$suffix = '';
+				if ( 'styles' === $group->type ) {
+					// We don't use global $wp_styles, because it is not there during cron.
+					$wp_styles = wp_styles();
+
+					if ( isset( $wp_styles->text_direction ) && 'rtl' === $wp_styles->text_direction && isset( $group->extra['rtl'] ) && $group->extra['rtl'] ) {
+						if ( is_bool( $group->extra['rtl'] ) || 'replace' === $group->extra['rtl'] ) {
+							$suffix   = isset( $group->extra['suffix'] ) ? "-rtl{$group->extra['suffix']}" : '-rtl';
+						}
+					}
+				}
+
+				$filename = $group->hash . $suffix . '.' . ( 'scripts' === $group->type ? 'js' : 'css' );
 				do_action( 'wp_hummingbird_before_upload_minify_group', $filename, $file['response'] );
 				$upload = WP_Hummingbird_Filesystem::handle_file_upload( $filename, $file['response'] );
 				do_action( 'wp_hummingbird_after_upload_minify_group', $filename, $file['response'], $upload );
@@ -1141,12 +1179,14 @@ class WP_Hummingbird_Module_Minify_Group {
 					return false;
 				}
 
-				update_post_meta( $group->file_id, '_url', $upload['url'] );
+				$url = empty( $suffix ) ? $upload['url'] : str_replace( $suffix, '', $upload['url'] );
+
+				update_post_meta( $group->file_id, '_url', $url );
 				update_post_meta( $group->file_id, '_path', $upload['file'] );
 			} else {
 				// Just save URL.
 				update_post_meta( $group->file_id, '_url', $file['response'] );
-			}
+			} // End if().
 
 			update_post_meta( $group->file_id, '_expires', $expire_on );
 
@@ -1811,6 +1851,6 @@ class WP_Hummingbird_Module_Minify_Group {
 
 		// Not local.
 		return false;
-
 	}
+
 }

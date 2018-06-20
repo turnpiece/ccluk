@@ -20,6 +20,37 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 	public $status;
 
 	/**
+	 * Check for Gzip issues.
+	 *
+	 * @return bool|WP_Error  Return error message, if gzip is enabled, but not for all types.
+	 */
+	public function check_gzip_issues() {
+		// Apache, but htaccess not yet written.
+		$htaccess_writable = self::is_htaccess_writable();
+
+		if ( $htaccess_writable && ! self::is_htaccess_written( $this->transient_slug ) ) {
+			return false;
+		}
+
+		$status = $this->get_analysis_data();
+
+		if ( 3 !== count( $status ) || in_array( false, $status, true ) ) {
+			// There must be another plugin/server config that is setting its own gzip stuff.
+			$error_message  = '<ul><li>- ' . esc_html__( 'Your server may not have the "deflate" module enabled (mod_deflate for
+				Apache, ngx_http_gzip_module for NGINX).', 'wphb' ) . '</li>';
+			$error_message .= '<li>- ' . esc_html__( 'Contact your host. If deflate is enabled, ask why all .htaccess or
+				nginx.conf compression rules are not being applied.', 'wphb' ) . '</li></ul>';
+			$error_message .= '<p>' . sprintf(
+				/* translators: %s: support link */
+				__( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ),
+				WP_Hummingbird_Utils::get_link( 'support' )
+			) . '</p>';
+
+			return new WP_Error( 'gzip-external-problem', $error_message );
+		}
+	}
+
+	/**
 	 * Analyze data. Overwrites parent method.
 	 *
 	 * @param bool $check_api If set to true, the api can be checked.
@@ -28,10 +59,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 	 */
 	public function analize_data( $check_api = false ) {
 		$files = array(
-			// Would be nice to user get_home_url(), but website is not accessible during plugin activation
-			// and curl times out.
-			//'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
-			'HTML'       => WPHB_DIR_URL . 'core/modules/dummy/dummy-php.php',
+			'HTML'       => add_query_arg( 'avoid-minify', 'true', get_home_url() ),
 			'JavaScript' => WPHB_DIR_URL . 'core/modules/dummy/dummy-js.js',
 			'CSS'        => WPHB_DIR_URL . 'core/modules/dummy/dummy-style.css',
 		);
@@ -60,7 +88,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 			}
 		}
 
-		// Will only trigger on 're-check status' button click.
+		// Will only trigger on 're-check status' button click and there are some false values.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = WP_Hummingbird_Utils::get_api();
@@ -90,8 +118,7 @@ class WP_Hummingbird_Module_GZip extends WP_Hummingbird_Module_Server {
 	 * @return string
 	 */
 	public function get_nginx_code() {
-		return '
-# Enable Gzip compression
+		return '# Enable Gzip compression
 gzip          on;
 
 # Compression level (1-9)
@@ -135,8 +162,7 @@ gzip_disable  "MSIE [1-6]\.(?!.*SV1)";';
 	 * @return string
 	 */
 	public function get_apache_code() {
-		return '
-<IfModule mod_deflate.c>
+		return '<IfModule mod_deflate.c>
 	SetOutputFilter DEFLATE
     <IfModule mod_setenvif.c>
         <IfModule mod_headers.c>
@@ -185,7 +211,6 @@ gzip_disable  "MSIE [1-6]\.(?!.*SV1)";';
     <IfModule mod_mime.c>
         AddEncoding gzip              svgz
     </IfModule>
-
 </IfModule>';
 	}
 

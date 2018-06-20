@@ -4,20 +4,15 @@
  *
  * @package Hummingbird
  *
- * @var bool  $external_problem  Caching is enabled elsewhere or modules not installed.
- * @var array $status            Gzip caching status.
- * @var int   $inactive_types    Number of inactive types.
+ * @var bool|WP_Error  $external_problem  Caching is enabled elsewhere or modules not installed.
+ * @var array          $status            Gzip caching status.
+ * @var int            $inactive_types    Number of inactive types.
  */
 
-if ( $external_problem ) : ?>
+if ( $external_problem && is_wp_error( $external_problem ) ) : ?>
 	<div class="sui-notice sui-notice-error">
 		<p><?php esc_html_e( 'Gzip is not working properly:', 'wphb' ); ?></p>
-		<ul>
-			<li>- <?php esc_html_e( 'Your server may not have the "deflate" module enabled (mod_deflate for Apache, ngx_http_gzip_module for NGINX).', 'wphb' ); ?></li>
-			<li>- <?php esc_html_e( 'Contact your host. If deflate is enabled, ask why all .htaccess or nginx.conf compression rules are not being applied.', 'wphb' ); ?></li>
-		</ul>
-		<?php /* translators: %s: support link */ ?>
-		<p><?php printf( __( 'If re-checking and restarting does not resolve, please check with your host or <a href="%s" target="_blank">open a support ticket with us</a>.', 'wphb' ), WP_Hummingbird_Utils::get_link( 'support' ) ); ?></p>
+		<?php echo $external_problem->get_error_message(); ?>
 	</div>
 <?php endif; ?>
 

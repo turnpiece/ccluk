@@ -10,6 +10,6 @@ class WP_Hummingbird_API_Exception extends Exception {
 			}
 		}
 
-		parent::__construct( $message, $code );
+		parent::__construct( $message, $code );	   			 	 		  		   		
 	}
 }

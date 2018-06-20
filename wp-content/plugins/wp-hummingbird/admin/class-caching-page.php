@@ -86,6 +86,20 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			/**
 			 * Main site
 			 */
+			$this->add_meta_box(
+				'caching/summary',
+				null,
+				array( $this, 'caching_summary' ),
+				null,
+				null,
+				'summary',
+				array(
+					'box_class' => 'sui-box sui-summary',
+					'box_content_class' => false,
+				)
+			);
+
+
 			if ( WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active() ) {
 				$this->add_meta_box(
 					'caching/page-caching',
@@ -114,7 +128,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					array( $this, 'page_caching_disabled_metabox' ),
 					null,
 					null,
-					'main'
+					'main',
+					array(
+						'box_content_class' => 'sui-box-body sui-block-content-center',
+					)
 				);
 			}
 		} elseif ( is_super_admin() || 'blog-admins' === WP_Hummingbird_Settings::get_setting( 'enabled', 'page_cache' ) ) {
@@ -126,7 +143,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					'page-caching',
 					__( 'Page Caching', 'wphb' ),
 					array( $this, 'page_caching_subsite_metabox' ),
-					null,
+					array( $this, 'page_caching_subsite_metabox_header' ),
 					null,
 					'main'
 				);
@@ -137,7 +154,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 					array( $this, 'page_caching_disabled_metabox' ),
 					null,
 					null,
-					'main'
+					'main',
+					array(
+						'box_content_class' => 'sui-box-body sui-block-content-center',
+					)
 				);
 			}
 		} // End if().
@@ -153,15 +173,12 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 		if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
 			$this->add_meta_box(
-				'caching-summary',
+				'caching-status',
 				__( 'Browser Caching', 'wphb' ),
 				array( $this, 'caching_summary_metabox' ),
 				array( $this, 'caching_summary_metabox_header' ),
 				null,
-				'caching',
-				array(
-					'box_content_class' => 'sui-box-body no-background-image',
-				)
+				'caching'
 			);
 
 			$this->add_meta_box(
@@ -194,7 +211,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'caching_gravatar_disabled_metabox' ),
 				null,
 				null,
-				'gravatar'
+				'gravatar',
+				array(
+					'box_content_class' => 'sui-box-body sui-block-content-center',
+				)
 			);
 		}
 
@@ -404,7 +424,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		 */
 		$cf_notice = get_site_option( 'wphb-cloudflare-dash-notice' );
 		if ( ! $cf_notice && 'dismissed' !== $cf_notice ) {
-			$this->meta_boxes[ $this->get_slug() ]['caching']['caching-summary']['args']['box_content_class'] = 'sui-box-body';
+			$this->meta_boxes[ $this->get_slug() ]['caching']['caching-status']['args']['box_content_class'] = 'sui-box-body sui-upsell-items';
 		}
 
 		// Get latest local report.
@@ -481,6 +501,31 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 
 	/**
 	 * *************************
+	 * CACHING SUMMARY
+	 *
+	 * @since 1.9.1
+	 ***************************/
+
+	/**
+	 * Caching summary meta box.
+	 */
+	public function caching_summary() {
+		global $wpdb;
+
+		$pages = $wpdb->get_var( "SELECT COUNT(*) FROM {$wpdb->posts} WHERE ( post_type = 'page' OR post_type = 'post' ) AND post_status = 'publish'" ); // db call ok; no-cache ok.
+
+		$this->view( 'caching/summary-meta-box', array(
+			'pc_active' => WP_Hummingbird_Utils::get_module( 'page_cache' )->is_active(),
+			'pages'     => (int) $pages,
+			'cached'    => WP_Hummingbird_Settings::get_setting( 'pages_cached', 'page_cache' ),
+			'issues'    => $this->issues,
+			'gravatar'  => WP_Hummingbird_Utils::get_module( 'gravatar' )->is_active(),
+			'rss'       => WP_Hummingbird_Settings::get_setting( 'duration', 'rss' ),
+		) );
+	}
+
+	/**
+	 * *************************
 	 * PAGE CACHING
 	 *
 	 * @since 1.7.0
@@ -541,12 +586,31 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 	 * @since 1.8.0
 	 */
 	public function page_caching_subsite_metabox() {
+		/* @var WP_Hummingbird_Module_Page_Cache $page_cache_module */
+		$page_cache_module = WP_Hummingbird_Utils::get_module( 'page_cache' );
+		$options = $page_cache_module->get_options();
+		$can_deactivate = false;
+		if ( 'blog-admins' === $options['enabled'] ) {
+			$can_deactivate = true;
+		}
 		$this->view( 'caching/page-caching-subsite-meta-box', array(
 			'error'          => WP_Hummingbird_Utils::get_module( 'page_cache' )->error,
+			'can_deactivate' => $can_deactivate,
 			'deactivate_url' => wp_nonce_url( add_query_arg( array(
 				'action' => 'disable',
 				'module' => 'page_cache',
 			)), 'wphb-caching-actions' ),
+		));
+	}
+
+	/**
+	 * Page caching subsite meta box header.
+	 *
+	 * @since 1.8.0
+	 */
+	public function page_caching_subsite_metabox_header() {
+		$this->view( 'caching/page-caching-meta-box-header', array(
+			'title'      => __( 'Page Caching', 'wphb' ),
 		));
 	}
 
@@ -665,6 +729,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 			'labels'              => $labels,
 			'human_results'       => array_map( array( 'WP_Hummingbird_Utils', 'human_read_time_diff' ), $this->report ),
 			'expires'             => $this->expires,
+			'different_expiry'    => ( 1 >= count( array_unique( array_values( $this->expires ) ) ) ) ? true : false,
 			'server_type'         => $server_type,
 			'snippets'            => $snippets,
 			'htaccess_written'    => $this->htaccess_written,

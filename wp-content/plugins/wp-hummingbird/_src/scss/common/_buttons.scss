@@ -2,106 +2,36 @@
  * COMMON: BUTTONS
  */
 
-@import "variables";
-@import "mixins";
+.wpmud .wrap-wp-hummingbird {
+    .report-status .sui-tag {
+        margin-top: 10px;
+    }
 
-/* Box-content with buttons */
-.wpmud .box-content .buttons {
-    margin-top: 30px;
+    .wpdui-btn {
+        font: 500 12px/16px $font !important;
+        padding: 7px 16px;
+        height: 30px;
+        background-color: #888;
+        color: #FFFFFF;
+        border-radius: 3px;
+        -moz-border-radius: 3px;
+        transition: all .3s ease;
+        -webkit-transition: all .3s ease;
+        text-shadow: none !important;
+    }
 }
 
-.wpmud .box-content .buttons.buttons-on-left {
-    text-align: left;
-}
-
-.wpmud .box-content .buttons.buttons-on-right {
-    text-align: right;
-}
-
-/* Box-footer with buttons */
-.wpmud .box-footer .buttons.buttons-on-left {
-    text-align: left;
-}
-
-.wpmud .box-footer .buttons.buttons-on-right {
-    text-align: right;
-}
-
-.wpmud .wphb-notice:not(.notice) .buttons {
-    margin: 10px 30px 0;
-}
-
-
-
-
-.wpmud .wrap-wp-hummingbird .report-status .sui-tag {
-    margin-top: 10px;
-}
-
-.wpmud .wrap-wphb-performance .scan-settings .buttons {
-    margin-top: 30px;
-}
-
-.wpmud .wrap-wphb-performance .add-recipient > button {
-    background-color: #888888 !important;
-    border-radius: 0 4px 4px 0 !important;
-}
-
-.wpmud .wrap-wphb-gzip #enable-cache-wrap .button,
-.wpmud .wrap-wphb-caching #enable-cache-wrap .button {
-    margin-top: 30px;
-}
-
-.wpmud .wphb-code-snippet .button {
-    position: absolute;
-    left: 100%;
-    margin-left: -90px !important;
-    margin-top: 15px !important;
-}
-
-.wpmud .box-caching-gravatar .button-large {
-    margin: 0 !important;
-}
-
-.wrap-wp-hummingbird .button-cta-green:hover {
-    box-shadow: none;
-}
-
-.wphb-scan-progress .wphb-scan-cancel-button {
-    float: right;
-    margin-top: -13px;
-}
-
-.wphb-scan-progress .wphb-scan-cancel-button > a {
-    font-size: 12px;
-    color: #AAAAAA;
-    text-transform: uppercase;
-}
-
-/* Buttons */
-
-.wpmud .wrap-wp-hummingbird .wpdui-btn {
-    font: 500 12px/16px $font !important;
-    padding: 7px 16px;
-    height: 30px;
-    background-color: #888;
-    color: #FFFFFF;
-    border-radius: 3px;
-    -moz-border-radius: 3px;
-    transition: all .3s ease;
-    -webkit-transition: all .3s ease;
-    text-shadow: none !important;
-}
 .wpmud .report-status button.sui-button-upsell {
     margin-top: 10px !important;
     text-transform: uppercase;
-
     height: 30px;
     line-height: 16px;
     padding: 0 16px;
-    &:not(:disabled){
+
+    &:not(:disabled) {
         background-color: #d1f1ea !important;
         color: #1abc9c !important;
+
         &:hover,
         &:focus {
             background-color: #d1f1ea !important;
@@ -110,8 +40,6 @@
         }
     }
 
-
-
     i {
         color: #1abc9c;
         font-size: 16px;
@@ -119,86 +47,6 @@
         line-height: 16px;
         top: 2px;
     }
-}
-
-.wpmud .wrap-wp-hummingbird {
-    .wphb-notice {
-        &.notice {
-            .sui-button.button {
-                &:hover,
-                &:focus {
-                    color: white;
-                }
-            }
-        }
-    }
-}
-
-.wpmud .wrap-wp-hummingbird button.button-large:not(.wph-button):not(#collapse-button),
-.wpmud .wrap-wp-hummingbird button.button-large,
-.wpmud .wrap-wp-hummingbird .button.button-large {
-    font: 500 15px/20px $font !important;
-    height: 40px !important;
-    padding: 11px 20px 9px;
-}
-
-.wpmud .wrap-wp-hummingbird button.button-ghost:not(.wph-button):not(#collapse-button),
-.wpmud .wrap-wp-hummingbird .button-ghost,
-.wpmud .wphb-modal .button-ghost {
-    padding: 5px 16px 7px !important;
-    background-color: transparent !important;
-    border: 2px solid #DDDDDD;
-    color: #888888 !important;
-}
-
-.wpmud .wrap-wp-hummingbird button.button-ghost:hover:not(.wph-button):not(#collapse-button),
-.wpmud .wrap-wp-hummingbird .button-ghost:hover:not(:focus):not(:active),
-.wpmud .wrap-wp-hummingbird .button-ghost:active,
-.wpmud .wrap-wp-hummingbird .button-ghost.active,
-.wpmud .wrap-wp-hummingbird .button-ghost:hover:enabled,
-.wpmud .wrap-wp-hummingbird .button-ghost:focus,
-.wpmud .wrap-wp-hummingbird .button-grey:hover {
-    background-color: #7B7B7B !important;
-    border-color: #7B7B7B;
-    color: #FFFFFF !important;
-}
-
-.wpmud .wrap-wp-hummingbird button.button-ghost.button-large:not(.wph-button):not(#collapse-button),
-.wpmud .wrap-wp-hummingbird .button-ghost.button-large,
-.wpmud .wphb-modal .button-ghost.button-large {
-    padding: 9px 20px 9px !important;
-}
-
-.wpmud .wphb-modal .button-content-cta {
-    box-shadow: none;
-    background-color: #1ABC9C !important;
-    color: #FFFFFF;
-}
-
-.wpmud .wrap-wp-hummingbird .button-content-cta {
-    box-shadow: none;
-    background-color: #1ABC9C;
-    color: #FFFFFF;
-}
-
-.wpmud .wrap-wp-hummingbird .button-content-cta:hover:not(:focus):not(:active),
-.wpmud .wphb-modal .button-content-cta:hover:not(:focus):not(:active),
-.wpmud .wrap-wp-hummingbird .button-content-cta:active,
-.wpmud .wrap-wp-hummingbird .button-content-cta:focus {
-    background: #0DAF8F !important;
-    border-color: #0DAF8F;
-}
-
-.wpmud .wrap-wp-hummingbird .button-content-cta.button-ghost {
-    background: transparent;
-    color: #1ABC9C !important;
-    border-color: #1ABC9C;
-    border-radius: 20px;
-}
-
-.wpmud .wrap-wp-hummingbird .button-content-cta.button-ghost:active {
-    color: #FFFFFF !important;
-    border-color: #0DAF8F;
 }
 
 .wpmud .wrap-wp-hummingbird .button-notice {
@@ -214,13 +62,3 @@
     color: #FFFFFF !important;
 }
 
-.wpmud .wrap-wp-hummingbird .button-grey {
-    background-color: #888888 !important;
-    color: #FFFFFF !important;
-}
-
-@include bp(phone) {
-    .wpmud .box-content .buttons {
-        margin-top: 0;
-    }
-}

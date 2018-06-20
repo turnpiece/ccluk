@@ -15,7 +15,7 @@
 		<p>
 			<?php
 			printf(
-			/* translators: %s: Number of inactive types */
+				/* translators: %s: Number of inactive types */
 				__( '%s of your compression types are inactive.', 'wphb' ), absint( $inactive_types ) );
 			?>
 		</p>
@@ -58,8 +58,8 @@
 			<span class="sui-list-detail">
 				<span class="sui-tag sui-tag-<?php echo esc_attr( $result_status_color ); ?> sui-tooltip sui-tooltip-top-left"
 					  data-tooltip="<?php printf( /* translators: %1$s: compressions status; %2$s: compression type */
-					      esc_html__( 'Gzip compression is %1$s for %2$s', 'wphb' ),
-					      esc_html( strtolower( $result_status ) ), esc_html( $type ) ); ?>">
+						  esc_html__( 'Gzip compression is %1$s for %2$s', 'wphb' ),
+						  esc_html( strtolower( $result_status ) ), esc_html( $type ) ); ?>">
 					<?php echo esc_html( $result_status ); ?>
 				</span>
 			</span>

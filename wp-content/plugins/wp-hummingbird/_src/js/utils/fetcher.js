@@ -190,6 +190,14 @@ function Fetcher() {
 			purgeCache: () => {
                 const action = actionPrefix + 'cloudflare_purge_cache';
                 return request( action, {}, 'POST' );
+            },
+
+			/**
+             * Recheck Cloudflare zones.
+			 */
+			recheckZones: () => {
+                const action = actionPrefix + 'cloudflare_recheck_zones';
+                return request( action, {}, 'POST' );
             }
         },
 

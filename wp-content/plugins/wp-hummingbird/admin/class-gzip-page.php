@@ -36,7 +36,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 		}
 
 		if ( isset( $_GET['gzip-disabled'] ) ) { // Input var ok.
-			$this->admin_notices->show( 'updated', __( 'Gzip disabled. Your .htaccess file has been updated', 'wphb' ), 'error' );
+			$this->admin_notices->show( 'updated', __( 'Gzip disabled. Your .htaccess file has been updated', 'wphb' ), 'success' );
 		}
 
 		parent::render_header();
@@ -127,7 +127,7 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 			__( 'Configure', 'wphb' ),
 			array( $this, 'gzip_configure_metabox' ),
 			null,
-			null ,
+			null,
 			'box-gzip-bottom'
 		);
 	}
@@ -150,16 +150,11 @@ class WP_Hummingbird_GZIP_Page extends WP_Hummingbird_Admin_Page {
 	 * Render gzip summary metabox.
 	 */
 	public function gzip_summary_metabox() {
-		$external_problem = false;
-		if ( $this->htaccess_written && ( 3 !== count( $this->status ) || in_array( false, $this->status, true ) ) ) {
-			// There must be another plugin/server config that is setting its own gzip stuff.
-			$external_problem = true;
-		}
 		$inactive_types = WP_Hummingbird_Utils::get_number_of_issues( 'gzip', $this->status );
 
 		$this->view( 'gzip/summary-meta-box', array(
 			'status'           => $this->status,
-			'external_problem' => $external_problem,
+			'external_problem' => WP_Hummingbird_Utils::get_module( 'gzip' )->check_gzip_issues(),
 			'inactive_types'   => $inactive_types,
 		));
 	}

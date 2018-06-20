@@ -2,9 +2,9 @@
 # This file is distributed under the same license as the Hummingbird Pro package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Hummingbird Pro 1.9.0\n"
+"Project-Id-Version: Hummingbird Pro 1.9.1\n"
 "Report-Msgid-Bugs-To: https://wpmudev.org\n"
-"POT-Creation-Date: 2018-05-29 08:13:00+00:00\n"
+"POT-Creation-Date: 2018-06-19 14:28:14+00:00\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -13,45 +13,49 @@ msgstr ""
 "Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
 "X-Generator: grunt-wp-i18n1.0.2\n"
 
-#: admin/abstract-class-admin-page.php:324 admin/class-caching-page.php:352
-#: admin/class-dashboard-page.php:171 admin/class-performance-page.php:91
-#: admin/class-uptime-page.php:74
+#: admin/abstract-class-admin-page.php:321 admin/class-caching-page.php:372
+#: admin/class-dashboard-page.php:171 admin/class-performance-page.php:99
+#: admin/class-uptime-page.php:73
 msgid "View Documentation"
 msgstr ""
 
-#: admin/abstract-class-admin-page.php:338 admin/class-advanced-page.php:28
-#: admin/class-minification-page.php:159 admin/class-performance-page.php:69
-#: core/class-utils.php:153 core/modules/class-module-minify.php:1145
+#: admin/abstract-class-admin-page.php:335 admin/class-advanced-page.php:28
+#: admin/class-minification-page.php:169 admin/class-performance-page.php:69
+#: core/class-utils.php:153 core/modules/class-module-minify.php:1238
 msgid "Settings updated"
 msgstr ""
 
-#: admin/abstract-class-admin-page.php:342 admin/class-dashboard-page.php:158
+#: admin/abstract-class-admin-page.php:339 admin/class-dashboard-page.php:158
 #: admin/views/dashboard/caching/page-caching-module-meta-box.php:24
 msgid "Settings Updated"
 msgstr ""
 
-#: admin/abstract-class-admin-page.php:353
+#: admin/abstract-class-admin-page.php:350
 #. translators: %s - icon
 msgid "Made with %s by WPMU DEV"
 msgstr ""
 
-#: admin/class-admin-ajax.php:703
+#: admin/class-admin-ajax.php:710
 msgid "Please, select a Cloudflare zone. Normally, this is your website"
 msgstr ""
 
-#: admin/class-admin-ajax.php:719
+#: admin/class-admin-ajax.php:726
 msgid "The selected zone is not valid"
 msgstr ""
 
-#: admin/class-admin-ajax.php:1079
+#: admin/class-admin-ajax.php:818
+msgid "Zone not found matching this domain. Please check your CloudFlare account."
+msgstr ""
+
+#: admin/class-admin-ajax.php:1111
 msgid "Invalid type specified."
 msgstr ""
 
-#: admin/class-admin-ajax.php:1089
+#: admin/class-admin-ajax.php:1121
 msgid "Error deleting data."
 msgstr ""
 
-#: admin/class-admin-ajax.php:1095
+#: admin/class-admin-ajax.php:1127
 #. translators: %d: number of database entries
 msgid "<strong>%d database entries</strong> were deleted successfully."
 msgstr ""
@@ -60,90 +64,90 @@ msgstr ""
 msgid "Dismiss this notice."
 msgstr ""
 
-#: admin/class-admin-notices.php:252
-#: admin/views/caching/browser-caching-meta-box.php:186
-#: admin/views/dashboard/caching/module-meta-box.php:110
+#: admin/class-admin-notices.php:253 admin/class-admin-notices.php:255
+#: admin/views/caching/browser-caching-meta-box.php:191
+#: admin/views/dashboard/caching/module-meta-box.php:116
 msgid "Dismiss"
 msgstr ""
 
-#: admin/class-admin-notices.php:294
+#: admin/class-admin-notices.php:298
 #. translators: %s: Upgrade URL
 msgid ""
 "Awww yeah! You’ve got access to Hummingbird Pro! Let’s upgrade your free "
 "version so you can start using premium features. <a href=\"%s\">Upgrade</a>"
 msgstr ""
 
-#: admin/class-admin-notices.php:313
+#: admin/class-admin-notices.php:317
 msgid ""
 "We noticed you’re running both the free and pro versions of Hummingbird. No "
 "biggie! We’ve deactivated the free version for you. Enjoy the pro features!"
 msgstr ""
 
-#: admin/class-admin-notices.php:340
+#: admin/class-admin-notices.php:344
 msgid ""
 "We've spent countless hours developing Hummingbird and making it free for "
 "you to use. We would really appreciate it if you dropped us a quick rating!"
 msgstr ""
 
-#: admin/class-admin-notices.php:341
+#: admin/class-admin-notices.php:345
 msgid "Rate Hummingbird"
 msgstr ""
 
-#: admin/class-admin-notices.php:369
+#: admin/class-admin-notices.php:373
 msgid ""
 "We've noticed you've made changes to your website. We recommend you clear "
 "Hummingbird's page cache to avoid any issues."
 msgstr ""
 
-#: admin/class-admin-notices.php:390
+#: admin/class-admin-notices.php:394
 msgid ""
 "We've noticed you've made changes to your website. If you’ve installed new "
 "plugins or themes,\n"
-"\t\t\twe recommend you re-do Hummingbird's Asset Optimization configuration "
-"to ensure those new files are added\n"
-"\t\t\tcorrectly. <i>Note: This will wipe your existing asset optimization "
-"settings</i>. <!--<a href='#'>Learn more</a>.-->"
+"\t\t\twe recommend you re-check Hummingbird's Asset Optimization "
+"configuration to ensure those new files are added\n"
+"\t\t\tcorrectly. <!--<a href='#'>Learn more</a>.-->"
 msgstr ""
 
-#: admin/class-admin-notices.php:394
-msgid "Reset Asset Optimization"
+#: admin/class-admin-notices.php:398
+msgid "Re-check Asset Optimization"
 msgstr ""
 
-#: admin/class-admin-notices.php:413 admin/class-dashboard-page.php:166
-#: admin/views/caching/browser-caching-configure-meta-box.php:470
+#: admin/class-admin-notices.php:417 admin/class-dashboard-page.php:166
+#: admin/views/caching/browser-caching-configure-meta-box.php:476
 msgid "Clear Cache"
 msgstr ""
 
-#: admin/class-admin-notices.php:417
+#: admin/class-admin-notices.php:421
 msgid "Adjust notification settings"
 msgstr ""
 
-#: admin/class-admin.php:81
+#: admin/class-admin.php:77
 msgid "Go to Hummingbird Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:81 admin/class-advanced-page.php:84
-#: admin/class-caching-page.php:104 admin/class-caching-page.php:238
-#: admin/class-minification-page.php:103 admin/class-minification-page.php:241
-#: admin/class-performance-page.php:120 admin/class-performance-page.php:206
-#: admin/class-uptime-page.php:30 admin/class-uptime-page.php:165
+#: admin/class-admin.php:77 admin/class-advanced-page.php:84
+#: admin/class-caching-page.php:118 admin/class-caching-page.php:258
+#: admin/class-minification-page.php:113 admin/class-minification-page.php:254
+#: admin/class-performance-page.php:128 admin/class-performance-page.php:213
+#: admin/class-uptime-page.php:30 admin/class-uptime-page.php:169
 #: admin/views/caching/page-caching-meta-box.php:93
+#: core/pro/admin/class-pro-admin.php:68
 msgid "Settings"
 msgstr ""
 
-#: admin/class-admin.php:85
+#: admin/class-admin.php:81
 msgid "View Hummingbird Documentation"
 msgstr ""
 
-#: admin/class-admin.php:85
+#: admin/class-admin.php:81
 msgid "Docs"
 msgstr ""
 
-#: admin/class-admin.php:89
+#: admin/class-admin.php:85
 msgid "Upgrade to Hummingbird Pro"
 msgstr ""
 
-#: admin/class-admin.php:89
+#: admin/class-admin.php:85 admin/class-uptime-page.php:105
 msgid "Upgrade"
 msgstr ""
 
@@ -151,52 +155,53 @@ msgstr ""
 msgid "Hummingbird Pro"
 msgstr ""
 
-#: admin/class-admin.php:121 admin/class-admin.php:202
-#: admin/views/modals/bulk-update-modal.php:69
-#: admin/views/modals/membership-modal.php:55
-#: admin/views/modals/minification-advanced-modal.php:29
-#: admin/views/modals/minification-basic-modal.php:29
+#: admin/class-admin.php:117 admin/class-admin.php:195
+#: admin/views/modals/bulk-update-modal.php:67
+#: admin/views/modals/membership-modal.php:56
+#: admin/views/modals/minification-advanced-modal.php:33
+#: admin/views/modals/minification-basic-modal.php:31
 msgid "Hummingbird"
 msgstr ""
 
-#: admin/class-admin.php:126 admin/class-admin.php:206
+#: admin/class-admin.php:122 admin/class-admin.php:199
 msgid "Dashboard"
 msgstr ""
 
-#: admin/class-admin.php:127 admin/class-admin.php:166
-#: admin/class-admin.php:207 admin/class-dashboard-page.php:1006
-#: admin/views/dashboard/reports/no-membership-meta-box.php:22
-#: core/pro/admin/views/dashboard/reports/meta-box.php:27
+#: admin/class-admin.php:123 admin/class-admin.php:159
+#: admin/class-admin.php:200 admin/class-dashboard-page.php:1014
+#: admin/views/dashboard/reports/no-membership-meta-box.php:20
+#: core/pro/admin/views/dashboard/reports/meta-box.php:24
 msgid "Performance Test"
 msgstr ""
 
-#: admin/class-admin.php:128 admin/class-admin.php:188
-#: admin/class-admin.php:208 core/class-core.php:93
+#: admin/class-admin.php:124 admin/class-admin.php:181
+#: admin/class-admin.php:201 core/class-core.php:93
 msgid "Caching"
 msgstr ""
 
-#: admin/class-admin.php:129 admin/class-admin.php:209
+#: admin/class-admin.php:125 admin/class-admin.php:202
 msgid "Gzip Compression"
 msgstr ""
 
-#: admin/class-admin.php:132 admin/class-admin.php:177
-#: admin/class-dashboard-page.php:361 admin/class-dashboard-page.php:371
-#: admin/class-dashboard-page.php:385 admin/class-dashboard-page.php:394
+#: admin/class-admin.php:128 admin/class-admin.php:170
+#: admin/class-dashboard-page.php:360 admin/class-dashboard-page.php:370
+#: admin/class-dashboard-page.php:384 admin/class-dashboard-page.php:393
 #: core/class-utils.php:928
 msgid "Asset Optimization"
 msgstr ""
 
-#: admin/class-admin.php:135 admin/class-admin.php:191
-#: admin/class-admin.php:210 admin/class-dashboard-page.php:406
+#: admin/class-admin.php:131 admin/class-admin.php:184
+#: admin/class-admin.php:203 admin/class-dashboard-page.php:405
 #: core/class-core.php:100
 msgid "Advanced Tools"
 msgstr ""
 
-#: admin/class-admin.php:136 admin/class-admin.php:211
-#: admin/class-dashboard-page.php:444 admin/class-dashboard-page.php:453
-#: admin/class-dashboard-page.php:462 admin/class-uptime-page.php:106
-#: admin/class-uptime-page.php:116 admin/views/uptime/downtime-meta-box.php:19
-#: admin/views/uptime/meta-box.php:59 core/class-core.php:95
+#: admin/class-admin.php:132 admin/class-admin.php:204
+#: admin/class-dashboard-page.php:449 admin/class-dashboard-page.php:458
+#: admin/class-dashboard-page.php:467 admin/class-uptime-page.php:117
+#: admin/views/uptime/downtime-meta-box.php:23
+#: admin/views/uptime/meta-box.php:63 admin/views/wphb-uptime-page.php:14
+#: core/class-core.php:95
 msgid "Uptime"
 msgstr ""
 
@@ -206,8 +211,8 @@ msgstr ""
 
 #: admin/class-advanced-page.php:17 admin/class-advanced-page.php:56
 #: admin/views/dashboard/advanced/module-meta-box.php:20
-#: admin/views/dashboard/reports/no-membership-meta-box.php:33
-#: core/pro/admin/views/dashboard/reports/meta-box.php:40
+#: admin/views/dashboard/reports/no-membership-meta-box.php:31
+#: core/pro/admin/views/dashboard/reports/meta-box.php:37
 #: core/pro/class-pro.php:133
 msgid "Database Cleanup"
 msgstr ""
@@ -216,22 +221,24 @@ msgstr ""
 msgid "System Information"
 msgstr ""
 
-#: admin/class-caching-page.php:92 admin/class-caching-page.php:113
-#: admin/class-caching-page.php:127 admin/class-caching-page.php:136
-#: admin/class-caching-page.php:234 admin/class-dashboard-page.php:295
-#: admin/views/caching/disabled-page-caching-meta-box.php:18
+#: admin/class-caching-page.php:106 admin/class-caching-page.php:127
+#: admin/class-caching-page.php:144 admin/class-caching-page.php:153
+#: admin/class-caching-page.php:254 admin/class-caching-page.php:613
+#: admin/class-dashboard-page.php:295
+#: admin/views/caching/disabled-page-caching-meta-box.php:15
 #: core/class-core.php:99
 msgid "Page Caching"
 msgstr ""
 
-#: admin/class-caching-page.php:157 admin/class-caching-page.php:235
-#: admin/class-caching-page.php:573 admin/class-dashboard-page.php:317
-#: admin/class-dashboard-page.php:620
-#: admin/views/dashboard/welcome/meta-box.php:74
+#: admin/class-caching-page.php:177 admin/class-caching-page.php:255
+#: admin/class-caching-page.php:637 admin/class-dashboard-page.php:316
+#: admin/class-dashboard-page.php:628
+#: admin/views/caching/summary-meta-box.php:45
+#: admin/views/dashboard/welcome/meta-box.php:67
 msgid "Browser Caching"
 msgstr ""
 
-#: admin/class-caching-page.php:169 admin/class-caching-page.php:617
+#: admin/class-caching-page.php:186 admin/class-caching-page.php:681
 #: admin/class-gzip-page.php:127
 #: admin/views/dashboard/advanced/module-meta-box-footer.php:15
 #: admin/views/dashboard/caching/gravatar-module-meta-box-footer.php:14
@@ -244,44 +251,46 @@ msgstr ""
 msgid "Configure"
 msgstr ""
 
-#: admin/class-caching-page.php:184 admin/class-caching-page.php:193
-#: admin/class-caching-page.php:236 admin/class-dashboard-page.php:337
-#: admin/views/caching/disabled-gravatar-meta-box.php:18 core/class-core.php:98
+#: admin/class-caching-page.php:201 admin/class-caching-page.php:210
+#: admin/class-caching-page.php:256 admin/class-dashboard-page.php:336
+#: admin/views/caching/disabled-gravatar-meta-box.php:15
+#: admin/views/caching/summary-meta-box.php:56 core/class-core.php:98
 msgid "Gravatar Caching"
 msgstr ""
 
-#: admin/class-caching-page.php:208 admin/class-caching-page.php:217
-#: admin/class-caching-page.php:237 core/class-core.php:101
+#: admin/class-caching-page.php:228 admin/class-caching-page.php:237
+#: admin/class-caching-page.php:257 admin/views/caching/summary-meta-box.php:66
+#: core/class-core.php:101
 msgid "RSS Caching"
 msgstr ""
 
-#: admin/class-caching-page.php:340
+#: admin/class-caching-page.php:360
 msgid "Browser cache enabled. Your .htaccess file has been updated"
 msgstr ""
 
-#: admin/class-caching-page.php:342
+#: admin/class-caching-page.php:362
 msgid "Browser cache disabled. Your .htaccess file has been updated"
 msgstr ""
 
-#: admin/class-caching-page.php:344
+#: admin/class-caching-page.php:364
 msgid "Page cache purged"
 msgstr ""
 
-#: admin/class-caching-page.php:596 admin/class-dashboard-page.php:581
+#: admin/class-caching-page.php:660 admin/class-dashboard-page.php:589
 msgid "Ahoi, we’ve detected you’re using CloudFlare!"
 msgstr ""
 
-#: admin/class-caching-page.php:596 admin/class-dashboard-page.php:581
+#: admin/class-caching-page.php:660 admin/class-dashboard-page.php:589
 msgid "Using CloudFlare?"
 msgstr ""
 
-#: admin/class-dashboard-page.php:133 admin/class-minification-page.php:145
+#: admin/class-dashboard-page.php:133 admin/class-minification-page.php:155
 msgid ""
 "Your cache has been successfully cleared. Your assets will regenerate the "
 "next time someone visits your website."
 msgstr ""
 
-#: admin/class-dashboard-page.php:137 admin/class-minification-page.php:153
+#: admin/class-dashboard-page.php:137 admin/class-minification-page.php:163
 msgid ""
 "Your local and Cloudflare caches have been successfully cleared. Your "
 "assets will regenerate the next time someone visits your website."
@@ -306,45 +315,45 @@ msgstr ""
 msgid "Performance Report"
 msgstr ""
 
-#: admin/class-dashboard-page.php:347 admin/class-dashboard-page.php:928
-#: admin/views/dashboard/welcome/meta-box.php:92
+#: admin/class-dashboard-page.php:346 admin/class-dashboard-page.php:936
+#: admin/views/dashboard/welcome/meta-box.php:85
 msgid "GZIP Compression"
 msgstr ""
 
-#: admin/class-dashboard-page.php:424 admin/class-dashboard-page.php:1097
+#: admin/class-dashboard-page.php:423 admin/class-dashboard-page.php:1105
 msgid "Image Optimization"
 msgstr ""
 
-#: admin/class-dashboard-page.php:435 admin/class-dashboard-page.php:736
+#: admin/class-dashboard-page.php:437 admin/class-dashboard-page.php:744
 msgid "Uptime Monitoring"
 msgstr ""
 
-#: admin/class-dashboard-page.php:477 admin/class-performance-page.php:119
-#: admin/class-performance-page.php:122 core/pro/class-pro.php:132
+#: admin/class-dashboard-page.php:482 admin/class-performance-page.php:127
+#: admin/class-performance-page.php:130 core/pro/class-pro.php:132
 msgid "Reporting"
 msgstr ""
 
-#: admin/class-dashboard-page.php:529
+#: admin/class-dashboard-page.php:537
 #. Translators: %s: username
 msgid "Welcome %s"
 msgstr ""
 
-#: admin/class-dashboard-page.php:576
-#: admin/views/caching/browser-caching-meta-box.php:81
+#: admin/class-dashboard-page.php:584
+#: admin/views/caching/browser-caching-meta-box.php:86
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:52
-#: admin/views/dashboard/caching/module-meta-box.php:50
+#: admin/views/dashboard/caching/module-meta-box.php:51
 msgid "Caching is enabled"
 msgstr ""
 
-#: admin/class-dashboard-page.php:576
-#: admin/views/caching/browser-caching-meta-box.php:85
+#: admin/class-dashboard-page.php:584
+#: admin/views/caching/browser-caching-meta-box.php:90
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:56
-#: admin/views/dashboard/caching/module-meta-box.php:54
+#: admin/views/dashboard/caching/module-meta-box.php:55
 msgid "Caching is enabled but you aren't using our recommended value"
 msgstr ""
 
-#: admin/class-dashboard-page.php:1120 admin/class-performance-page.php:191
-#: admin/class-performance-page.php:392 core/pro/admin/class-pro-admin.php:35
+#: admin/class-dashboard-page.php:1128 admin/class-performance-page.php:199
+#: core/pro/admin/class-pro-admin.php:49 core/pro/admin/class-pro-admin.php:87
 msgid "Reports"
 msgstr ""
 
@@ -362,26 +371,26 @@ msgstr ""
 msgid "Gzip disabled. Your .htaccess file has been updated"
 msgstr ""
 
-#: admin/class-gzip-page.php:120 admin/class-gzip-page.php:176
+#: admin/class-gzip-page.php:120 admin/class-gzip-page.php:171
 msgid "Summary"
 msgstr ""
 
-#: admin/class-minification-page.php:101 admin/class-minification-page.php:213
-#: admin/class-minification-page.php:393
+#: admin/class-minification-page.php:111 admin/class-minification-page.php:226
+#: admin/class-minification-page.php:406
 msgid "Assets"
 msgstr ""
 
-#: admin/class-minification-page.php:102 admin/class-minification-page.php:229
+#: admin/class-minification-page.php:112 admin/class-minification-page.php:242
 msgid "Tools"
 msgstr ""
 
-#: admin/class-minification-page.php:136
+#: admin/class-minification-page.php:146
 msgid ""
 "<strong>Your changes have been published.</strong> Note: Files queued for "
 "compression will generate once someone visits your homepage."
 msgstr ""
 
-#: admin/class-minification-page.php:179 admin/class-uptime-page.php:126
+#: admin/class-minification-page.php:189 admin/class-uptime-page.php:127
 msgid "Get Started"
 msgstr ""
 
@@ -389,67 +398,71 @@ msgstr ""
 msgid "You have successfully ignored this performance test."
 msgstr ""
 
-#: admin/class-performance-page.php:76 admin/class-performance-page.php:85
+#: admin/class-performance-page.php:76 admin/class-performance-page.php:93
 msgid "New Test"
 msgstr ""
 
-#: admin/class-performance-page.php:81
-#: admin/views/dashboard/performance/module-meta-box-header.php:21
-#: admin/views/performance/summary-meta-box.php:53
+#: admin/class-performance-page.php:82
+#: admin/views/dashboard/performance/module-meta-box-header.php:23
+#: admin/views/performance/summary-meta-box.php:70
 #. translators: %d: number of minutes.
 msgid ""
 "Hummingbird is just catching her breath - you can run another test in %d "
+"minute"
+msgid_plural ""
+"Hummingbird is just catching her breath - you can run another test in %d "
 "minutes"
-msgstr ""
+msgstr[0] ""
+msgstr[1] ""
 
-#: admin/class-performance-page.php:116 admin/class-performance-page.php:178
-#: admin/class-performance-page.php:313
+#: admin/class-performance-page.php:124 admin/class-performance-page.php:186
+#: admin/class-performance-page.php:323
 msgid "Improvements"
 msgstr ""
 
-#: admin/class-performance-page.php:216
+#: admin/class-performance-page.php:223
 msgid "Performance test"
 msgstr ""
 
-#: admin/class-uptime-page.php:28 admin/class-uptime-page.php:147
-#: admin/views/uptime/meta-box.php:58
+#: admin/class-uptime-page.php:28 admin/class-uptime-page.php:151
+#: admin/views/uptime/meta-box.php:62
 msgid "Response Time"
 msgstr ""
 
-#: admin/class-uptime-page.php:29 admin/class-uptime-page.php:156
+#: admin/class-uptime-page.php:29 admin/class-uptime-page.php:160
 #: admin/views/dashboard/uptime/module-meta-box.php:23
-#: admin/views/uptime/downtime-meta-box.php:20
-#: admin/views/uptime/meta-box.php:60
+#: admin/views/uptime/downtime-meta-box.php:24
+#: admin/views/uptime/meta-box.php:64
 #: admin/views/uptime/summary-meta-box.php:51
 msgid "Downtime"
 msgstr ""
 
-#: admin/class-uptime-page.php:51
+#: admin/class-uptime-page.php:50
 msgid "Reporting period"
 msgstr ""
 
-#: admin/class-uptime-page.php:270
+#: admin/class-uptime-page.php:274
 msgid "Last 1 day"
 msgstr ""
 
-#: admin/class-uptime-page.php:271
+#: admin/class-uptime-page.php:275
 msgid "Last 7 days"
 msgstr ""
 
-#: admin/class-uptime-page.php:272
+#: admin/class-uptime-page.php:276
 msgid "Last 30 days"
 msgstr ""
 
-#: admin/class-uptime-page.php:434 core/class-utils.php:447
+#: admin/class-uptime-page.php:438 core/class-utils.php:447
 #: core/class-utils.php:478
 msgid "1 day"
 msgstr ""
 
-#: admin/class-uptime-page.php:435
+#: admin/class-uptime-page.php:439
 msgid "7 days"
 msgstr ""
 
-#: admin/class-uptime-page.php:436
+#: admin/class-uptime-page.php:440
 msgid "30 days"
 msgstr ""
 
@@ -468,7 +481,7 @@ msgid "Entries"
 msgstr ""
 
 #: admin/views/advanced/db-meta-box.php:41
-#: admin/views/modals/database-cleanup-modal.php:23
+#: admin/views/modals/database-cleanup-modal.php:25
 msgid "Delete entries"
 msgstr ""
 
@@ -480,7 +493,41 @@ msgstr ""
 msgid "Delete All"
 msgstr ""
 
-#: admin/views/advanced/db-settings-meta-box-footer.php:13
+#: admin/views/advanced/db-settings-meta-box-header.php:14
+msgid "Unlock automatic scheduled database cleanups with a WPMU DEV Membership"
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box-header.php:18
+#: admin/views/dashboard/smush/meta-box-header.php:15
+#: admin/views/performance/reporting-meta-box-header.php:16
+#: admin/views/uptime/no-membership-meta-box.php:23
+msgid "Upgrade to Pro"
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box.php:13
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:17
+msgid "Schedule Cleanups"
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box.php:15
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:19
+msgid ""
+"Schedule Hummingbird to automatically clean your database daily, weekly or "
+"monthly."
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box.php:19
+#: admin/views/advanced/db-settings-meta-box.php:23
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:23
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:27
+msgid "Enabled scheduled cleanups"
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box.php:31
+msgid "Scheduled automated database cleanup"
+msgstr ""
+
+#: admin/views/advanced/db-settings-meta-box.php:35
 msgid ""
 "<p>Regular cleanups of your database ensures you’re regularly removing "
 "extra bloat which can slow down your host server. Upgrade to Hummingbird "
@@ -488,66 +535,10 @@ msgid ""
 "href=\"%s\" target=\"_blank\">Learn More</a>.</p>"
 msgstr ""
 
-#: admin/views/advanced/db-settings-meta-box-footer.php:21
 #: admin/views/advanced/general-meta-box-footer.php:12
 #: admin/views/minification/tools-meta-box-footer.php:12
+#: core/pro/admin/views/advanced/db-settings-meta-box-footer.php:13
 msgid "Save changes"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box-header.php:13
-msgid "Unlock automatic scheduled database cleanups with a WPMU DEV Membership"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box-header.php:14
-#: admin/views/dashboard/smush/meta-box-header.php:15
-#: admin/views/performance/reporting-meta-box-header.php:5
-#: admin/views/uptime/no-membership-meta-box.php:22
-msgid "Upgrade to Pro"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:16
-msgid "Schedule Cleanups"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:18
-msgid ""
-"Schedule Hummingbird to automatically clean your database daily, weekly or "
-"monthly."
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:22
-#: admin/views/advanced/db-settings-meta-box.php:26
-msgid "Enabled scheduled cleanups"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:30
-#: admin/views/performance/reporting-meta-box.php:22
-msgid "Frequency"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:33
-#: admin/views/performance/reporting-meta-box.php:25
-#: core/class-hub-endpoints.php:183 core/pro/admin/class-pro-admin.php:65
-#: core/pro/admin/class-pro-admin.php:85
-msgid "Daily"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:36
-#: admin/views/performance/reporting-meta-box.php:28
-#: core/class-hub-endpoints.php:186 core/pro/admin/class-pro-admin.php:68
-#: core/pro/admin/class-pro-admin.php:88
-msgid "Weekly"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:39
-#: admin/views/performance/reporting-meta-box.php:31
-#: core/class-hub-endpoints.php:189 core/pro/admin/class-pro-admin.php:71
-#: core/pro/admin/class-pro-admin.php:91
-msgid "Monthly"
-msgstr ""
-
-#: admin/views/advanced/db-settings-meta-box.php:44
-msgid "Included Tables"
 msgstr ""
 
 #: admin/views/advanced/general-meta-box.php:13
@@ -641,16 +632,19 @@ msgid "Connect account"
 msgstr ""
 
 #: admin/views/caching/browser-caching-configure-meta-box.php:31
-#: admin/views/caching/browser-caching-configure-meta-box.php:38
-#: admin/views/gzip/configure-meta-box.php:24
-#: admin/views/gzip/configure-meta-box.php:30
-msgid "Server type"
+msgid "Server Type"
 msgstr ""
 
 #: admin/views/caching/browser-caching-configure-meta-box.php:33
 msgid ""
 "Choose your server type so Hummingbird can give you the\n"
 "\t\t\trules to apply caching."
+msgstr ""
+
+#: admin/views/caching/browser-caching-configure-meta-box.php:38
+#: admin/views/gzip/configure-meta-box.php:24
+#: admin/views/gzip/configure-meta-box.php:31
+msgid "Server type"
 msgstr ""
 
 #: admin/views/caching/browser-caching-configure-meta-box.php:46
@@ -693,68 +687,69 @@ msgstr ""
 msgid "Individual file types"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:92
-#: admin/views/caching/browser-caching-configure-meta-box.php:115
+#: admin/views/caching/browser-caching-configure-meta-box.php:93
+#: admin/views/caching/browser-caching-configure-meta-box.php:123
 msgid "JavaScript, CSS, Media, Images"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:128
-msgid ""
-"Note: You need to connect your CloudFlare account below for your selected "
-"expiry time to take effect."
-msgstr ""
-
-#: admin/views/caching/browser-caching-configure-meta-box.php:135
-msgid ""
-"You’ve made changes to your browser cache settings. You need to save "
-"changes for the new settings to take effect."
-msgstr ""
-
 #: admin/views/caching/browser-caching-configure-meta-box.php:137
+msgid ""
+"Note: You need to connect your CloudFlare account below for your\n"
+"\t\t\t\t\t\t\t\tselected expiry time to take effect."
+msgstr ""
+
+#: admin/views/caching/browser-caching-configure-meta-box.php:145
+msgid ""
+"You’ve made changes to your browser cache settings. You need to\n"
+"\t\t\t\t\t\t\t\tsave changes for the new settings to take effect."
+msgstr ""
+
+#: admin/views/caching/browser-caching-configure-meta-box.php:148
 msgid "Save Changes"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:139
+#: admin/views/caching/browser-caching-configure-meta-box.php:151
 msgid ""
-"You’ve made changes to your browser cache settings. You need to update your "
-".htaccess file with the newly generated code below."
+"You’ve made changes to your browser cache settings. You need\n"
+"\t\t\t\t\t\t\t\tto update your .htaccess file with the newly generated code "
+"below."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:140
+#: admin/views/caching/browser-caching-configure-meta-box.php:155
 msgid "View code"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:142
+#: admin/views/caching/browser-caching-configure-meta-box.php:158
 msgid ""
-"You’ve made changes to your browser cache settings. You need to update your "
-".htaccess for the new settings to take effect."
+"You’ve made changes to your browser cache settings. You need to\n"
+"\t\t\t\t\t\t\t\tupdate your .htaccess for the new settings to take effect."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:144
+#: admin/views/caching/browser-caching-configure-meta-box.php:161
 msgid "Update .htaccess"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:146
+#: admin/views/caching/browser-caching-configure-meta-box.php:164
 msgid "Code snippet updated."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:160
+#: admin/views/caching/browser-caching-configure-meta-box.php:178
 msgid "Setup"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:162
+#: admin/views/caching/browser-caching-configure-meta-box.php:180
 msgid "Follow the instructions provided to enable browser caching."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:174
-#: admin/views/caching/browser-caching-configure-meta-box.php:241
+#: admin/views/caching/browser-caching-configure-meta-box.php:192
+#: admin/views/caching/browser-caching-configure-meta-box.php:257
 #: admin/views/caching/other-settings-meta-box.php:51
-#: admin/views/gzip/configure-meta-box.php:50
-#: admin/views/gzip/configure-meta-box.php:116
+#: admin/views/gzip/configure-meta-box.php:53
+#: admin/views/gzip/configure-meta-box.php:111
 msgid "Automatic"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:179
+#: admin/views/caching/browser-caching-configure-meta-box.php:197
 msgid ""
 "Hummingbird can automatically apply browser caching for Apache\n"
 "\t\t\t\t\t\t\tservers by writing your .htaccess file. Alternately, switch "
@@ -762,236 +757,237 @@ msgid ""
 "\t\t\t\t\t\t\trules yourself."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:186
-#: admin/views/caching/browser-caching-configure-meta-box.php:251
-#: admin/views/caching/browser-caching-configure-meta-box.php:305
-#: admin/views/caching/browser-caching-configure-meta-box.php:333
+#: admin/views/caching/browser-caching-configure-meta-box.php:204
+#: admin/views/caching/browser-caching-configure-meta-box.php:267
+#: admin/views/caching/browser-caching-configure-meta-box.php:315
+#: admin/views/caching/browser-caching-configure-meta-box.php:339
 msgid "Your browser caching is already enabled and working well"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:190
-#: admin/views/caching/browser-caching-configure-meta-box.php:255
-#: admin/views/caching/browser-caching-configure-meta-box.php:309
-#: admin/views/caching/browser-caching-configure-meta-box.php:337
+#: admin/views/caching/browser-caching-configure-meta-box.php:208
+#: admin/views/caching/browser-caching-configure-meta-box.php:271
+#: admin/views/caching/browser-caching-configure-meta-box.php:319
+#: admin/views/caching/browser-caching-configure-meta-box.php:343
 msgid "Automatic browser caching is active."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:198
-#: admin/views/caching/browser-caching-configure-meta-box.php:263
-#: admin/views/caching/browser-caching-configure-meta-box.php:451
-#: admin/views/caching/browser-caching-configure-meta-box.php:468
+#: admin/views/caching/browser-caching-configure-meta-box.php:216
+#: admin/views/caching/browser-caching-configure-meta-box.php:279
+#: admin/views/caching/browser-caching-configure-meta-box.php:458
+#: admin/views/caching/browser-caching-configure-meta-box.php:474
 #: admin/views/caching/gravatar-meta-box.php:44
 #: admin/views/caching/gravatar-meta-box.php:51
 #: admin/views/caching/page-caching-meta-box.php:227
 #: admin/views/caching/page-caching-meta-box.php:234
-#: admin/views/caching/page-caching-subsite-meta-box.php:48
-#: admin/views/caching/page-caching-subsite-meta-box.php:55
-#: admin/views/gzip/configure-meta-box.php:60
-#: admin/views/gzip/configure-meta-box.php:126
-#: admin/views/gzip/configure-meta-box.php:213
-#: admin/views/minification/settings-meta-box.php:161
-#: admin/views/minification/settings-meta-box.php:168
+#: admin/views/caching/page-caching-subsite-meta-box.php:50
+#: admin/views/caching/page-caching-subsite-meta-box.php:57
+#: admin/views/gzip/configure-meta-box.php:63
+#: admin/views/gzip/configure-meta-box.php:121
+#: admin/views/gzip/configure-meta-box.php:193
+#: admin/views/minification/settings-meta-box.php:157
+#: admin/views/minification/settings-meta-box.php:164
 #: admin/views/uptime/settings-meta-box.php:13
 #: admin/views/uptime/settings-meta-box.php:20
 msgid "Deactivate"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:202
-#: admin/views/caching/browser-caching-configure-meta-box.php:267
-#: admin/views/caching/disabled-gravatar-meta-box.php:24
-#: admin/views/caching/disabled-page-caching-meta-box.php:25
+#: admin/views/caching/browser-caching-configure-meta-box.php:220
+#: admin/views/caching/browser-caching-configure-meta-box.php:283
+#: admin/views/caching/disabled-gravatar-meta-box.php:23
+#: admin/views/caching/disabled-page-caching-meta-box.php:24
 #: admin/views/dashboard/caching/gravatar-module-meta-box.php:23
 #: admin/views/dashboard/caching/page-caching-module-meta-box.php:39
 #: admin/views/dashboard/minification/disabled-meta-box.php:14
-#: admin/views/dashboard/uptime/disabled-meta-box.php:15
-#: admin/views/uptime/disabled-meta-box.php:23
+#: admin/views/dashboard/uptime/disabled-meta-box.php:14
+#: admin/views/minification/empty-files-meta-box.php:26
+#: admin/views/uptime/disabled-meta-box.php:26
 msgid "Activate"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:210
-#: admin/views/caching/browser-caching-configure-meta-box.php:275
-#: admin/views/gzip/configure-meta-box.php:75
-#: admin/views/gzip/configure-meta-box.php:141
+#: admin/views/caching/browser-caching-configure-meta-box.php:229
+#: admin/views/caching/browser-caching-configure-meta-box.php:292
+#: admin/views/gzip/configure-meta-box.php:78
+#: admin/views/gzip/configure-meta-box.php:136
 msgid "Manual"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:214
+#: admin/views/caching/browser-caching-configure-meta-box.php:233
 msgid "Follow the steps below to add browser caching to your Apache server."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:217
-#: admin/views/caching/browser-caching-configure-meta-box.php:282
+#: admin/views/caching/browser-caching-configure-meta-box.php:237
+#: admin/views/caching/browser-caching-configure-meta-box.php:298
 msgid "Copy the generated code into your .htaccess file & save your changes."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:218
+#: admin/views/caching/browser-caching-configure-meta-box.php:238
 msgid "Restart Apache."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:219
-#: admin/views/caching/browser-caching-configure-meta-box.php:284
-#: admin/views/caching/browser-caching-configure-meta-box.php:318
+#: admin/views/caching/browser-caching-configure-meta-box.php:239
+#: admin/views/caching/browser-caching-configure-meta-box.php:300
+#: admin/views/caching/browser-caching-configure-meta-box.php:328
 msgid "Re-check expiry status."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:228
-#: admin/views/caching/browser-caching-configure-meta-box.php:293
+#: admin/views/caching/browser-caching-configure-meta-box.php:245
+#: admin/views/caching/browser-caching-configure-meta-box.php:304
 msgid ""
 "If adding the rules to your .htaccess doesn’t work and you have access to "
 "vhosts.conf or httpd.conf try to find the line that starts with <Directory> "
 "- add the code above into that section and save the file."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:229
-#: admin/views/caching/browser-caching-configure-meta-box.php:294
-#: admin/views/gzip/configure-meta-box.php:104
+#: admin/views/caching/browser-caching-configure-meta-box.php:246
+#: admin/views/caching/browser-caching-configure-meta-box.php:305
+#: admin/views/gzip/configure-meta-box.php:100
 msgid ""
 "If you don't know where those files are, or you aren't able to reload "
 "Apache, you would need to consult with your hosting provider or a system "
 "administrator who has access to change the configuration of your server"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:246
-#: admin/views/gzip/configure-meta-box.php:120
+#: admin/views/caching/browser-caching-configure-meta-box.php:262
+#: admin/views/gzip/configure-meta-box.php:115
 msgid ""
 "Hummingbird can automatically apply browser caching for LiteSpeed servers "
 "by writing your .htaccess file. Alternately, switch to Manual to apply "
 "these rules yourself."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:279
+#: admin/views/caching/browser-caching-configure-meta-box.php:295
 msgid "Follow the steps below to add browser caching to your LiteSpeed server."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:283
+#: admin/views/caching/browser-caching-configure-meta-box.php:299
 msgid "Restart LiteSpeed."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:312
+#: admin/views/caching/browser-caching-configure-meta-box.php:322
 msgid "Follow the steps below to add browser caching to your NGINX server."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:315
-#: admin/views/gzip/configure-meta-box.php:182
+#: admin/views/caching/browser-caching-configure-meta-box.php:325
+#: admin/views/gzip/configure-meta-box.php:169
 msgid ""
 "Copy the generated code into your nginx.conf usually located at "
 "/etc/nginx/nginx.conf or /usr/local/nginx/conf/nginx.conf"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:316
-#: admin/views/gzip/configure-meta-box.php:183
+#: admin/views/caching/browser-caching-configure-meta-box.php:326
+#: admin/views/gzip/configure-meta-box.php:170
 msgid "Add the code above to the http or inside server section in the file."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:317
+#: admin/views/caching/browser-caching-configure-meta-box.php:327
 msgid "Restart NGINX."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:325
+#: admin/views/caching/browser-caching-configure-meta-box.php:331
 msgid ""
 "Note: If you do not have access to your NGINX config files you will need to "
 "contact your hosting provider to make these changes."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:344
-#: admin/views/gzip/configure-meta-box.php:204
+#: admin/views/caching/browser-caching-configure-meta-box.php:350
+#: admin/views/gzip/configure-meta-box.php:185
 #. translators: %s: Link to TechNet
 msgid ""
 "For IIS 7 servers and above, <a href=\"%s\" target=\"_blank\">visit "
 "Microsoft TechNet</a>"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:353
+#: admin/views/caching/browser-caching-configure-meta-box.php:359
 msgid ""
 "Hummingbird can control your Cloudflare Browser Cache settings from here. "
 "Simply add your Cloudflare API details and configure away."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:387
+#: admin/views/caching/browser-caching-configure-meta-box.php:393
 msgid "Cloudflare account email"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:388
+#: admin/views/caching/browser-caching-configure-meta-box.php:394
 msgid "Enter email address"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:392
+#: admin/views/caching/browser-caching-configure-meta-box.php:398
 msgid "Cloudflare Global API Key"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:393
+#: admin/views/caching/browser-caching-configure-meta-box.php:399
 msgid "Enter your 37 digit API key"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:399
+#: admin/views/caching/browser-caching-configure-meta-box.php:403
 msgid "Need help getting your API Key?"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:402
+#: admin/views/caching/browser-caching-configure-meta-box.php:408
 msgid "<a target=\"_blank\" href=\"%s\">Log in</a> to your Cloudflare account."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:403
+#: admin/views/caching/browser-caching-configure-meta-box.php:409
 msgid "Go to My Settings."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:404
+#: admin/views/caching/browser-caching-configure-meta-box.php:410
 msgid "Scroll down to API Key."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:405
+#: admin/views/caching/browser-caching-configure-meta-box.php:411
 msgid "Click 'View API Key' button and copy your API identifier."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:415
+#: admin/views/caching/browser-caching-configure-meta-box.php:421
 msgid ""
 "It appears you have no active zones available. Double check your domain has "
 "been added to Cloudflare and try again."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:417
+#: admin/views/caching/browser-caching-configure-meta-box.php:423
 msgid "Re-Check"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:430
+#: admin/views/caching/browser-caching-configure-meta-box.php:435
 msgid "Select the domain that matches this website"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:432
+#: admin/views/caching/browser-caching-configure-meta-box.php:437
 msgid "Select domain"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:439
+#: admin/views/caching/browser-caching-configure-meta-box.php:443
 msgid "Enable Cloudflare"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:444
+#: admin/views/caching/browser-caching-configure-meta-box.php:448
 msgid ""
 "CloudFlare is connected, but it appears you don’t have any active zones for "
 "this domain."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:445
+#: admin/views/caching/browser-caching-configure-meta-box.php:449
 msgid ""
 "Double check your domain has been added to Cloudflare and tap re-check when "
 "ready."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:448
+#: admin/views/caching/browser-caching-configure-meta-box.php:453
 msgid "Re-check"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:463
+#: admin/views/caching/browser-caching-configure-meta-box.php:469
 msgid "Cloudflare is connected for this domain."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:464
+#: admin/views/caching/browser-caching-configure-meta-box.php:470
 msgid ""
 "Adjust your expiry settings and save your settings to update your "
 "Cloudflare cache settings."
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:469
+#: admin/views/caching/browser-caching-configure-meta-box.php:475
 msgid "Clear all assets cached by CloudFlare"
 msgstr ""
 
@@ -1003,22 +999,22 @@ msgstr ""
 msgid "Re-Check Expiry"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:23
+#: admin/views/caching/browser-caching-meta-box.php:24
 msgid "Browser Caching is not working properly:"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:25
+#: admin/views/caching/browser-caching-meta-box.php:26
 msgid ""
 "Your server may not have the \"expires\" module enabled (mod_expires for "
 "Apache, ngx_http_headers_module for NGINX)"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:26
+#: admin/views/caching/browser-caching-meta-box.php:27
 msgid "Another plugin may be interfering with the configuration"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:32
-#: admin/views/gzip/summary-meta-box.php:20
+#: admin/views/caching/browser-caching-meta-box.php:33
+#: core/modules/class-module-gzip.php:45
 #. translators: %s: Support link
 #. translators: %s: support link
 msgid ""
@@ -1026,76 +1022,81 @@ msgid ""
 "or <a href=\"%s\" target=\"_blank\">open a support ticket with us</a>."
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:39
+#: admin/views/caching/browser-caching-meta-box.php:40
 msgid ""
 "Store temporary data on your visitors devices so that they don’t have to "
 "download assets twice if they don’t have to. This results in a much faster "
 "second time round page load speed."
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:47
+#: admin/views/caching/browser-caching-meta-box.php:48
 #. translators: %s: Number of issues
 msgid ""
 "%s of your cache types don’t meet the recommended expiry period of 8+ days. "
 "Configure browser caching <a href=\"#\" id=\"configure-link\">here</a>."
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:53
+#: admin/views/caching/browser-caching-meta-box.php:54
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:35
-#: admin/views/dashboard/caching/module-meta-box.php:35
+#: admin/views/dashboard/caching/module-meta-box.php:36
 msgid ""
 "All of your cache types meet the recommended expiry period of 8+ days. "
 "Great work!"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:60
-#: admin/views/dashboard/caching/cloudflare-module-meta-box.php:41
-#: admin/views/dashboard/caching/module-meta-box.php:41
-#: admin/views/dashboard/gzip/module-meta-box.php:31
-msgid "File Type"
+#: admin/views/caching/browser-caching-meta-box.php:61
+#: admin/views/gzip/summary-meta-box.php:42
+msgid "File type"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:63
-msgid "Recommended Expiry"
+#: admin/views/caching/browser-caching-meta-box.php:64
+msgid "Recommended expiry"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:66
-msgid "Current Expiry"
+#: admin/views/caching/browser-caching-meta-box.php:67
+#: admin/views/dashboard/caching/cloudflare-module-meta-box.php:42
+#: admin/views/dashboard/caching/module-meta-box.php:43
+msgid "Current expiry"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:73
+#: admin/views/caching/browser-caching-meta-box.php:74
 #. translators: %s: Recommended expiration value
 msgid ""
 "The recommended value for this file type is at least %s. The longer the "
 "better!"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:88
+#: admin/views/caching/browser-caching-meta-box.php:78
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:58
-#: admin/views/dashboard/caching/module-meta-box.php:56
+#: admin/views/dashboard/caching/module-meta-box.php:57
 #: admin/views/minification/summary-meta-box.php:53
 msgid "Disabled"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:90
+#: admin/views/caching/browser-caching-meta-box.php:80
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:60
-#: admin/views/dashboard/caching/module-meta-box.php:58
+#: admin/views/dashboard/caching/module-meta-box.php:59
 msgid "Caching is disabled"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:148 core/class-core.php:97
+#: admin/views/caching/browser-caching-meta-box.php:149 core/class-core.php:97
 msgid "Cloudflare"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:172
+#: admin/views/caching/browser-caching-meta-box.php:171
+#: admin/views/dashboard/caching/module-meta-box.php:103
+msgid "Connect your account to Cloudflare"
+msgstr ""
+
+#: admin/views/caching/browser-caching-meta-box.php:177
 msgid "Connect your account"
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:175
+#: admin/views/caching/browser-caching-meta-box.php:180
 msgid "to control your settings via Hummingbird."
 msgstr ""
 
-#: admin/views/caching/browser-caching-meta-box.php:180
+#: admin/views/caching/browser-caching-meta-box.php:185
 #. translators: %s: CloudFlare information link
 msgid ""
 "CloudFlare is a Content Delivery Network (CDN) that sends traffic through "
@@ -1104,20 +1105,21 @@ msgid ""
 "we recommend using it. <a href=\"%s\" target=\"_blank\">Learn more.</a>"
 msgstr ""
 
-#: admin/views/caching/disabled-gravatar-meta-box.php:20
-#: admin/views/caching/gravatar-meta-box.php:13
+#: admin/views/caching/disabled-gravatar-meta-box.php:18
 msgid ""
 "Gravatar Caching stores local copies of avatars used in comments and in "
-"your theme. You can control how often you want the cache purged depending "
-"on how your website is set up."
+"your theme. You<br>\n"
+"\t\tcan control how often you want the cache purged depending on how your "
+"website is set up."
 msgstr ""
 
-#: admin/views/caching/disabled-page-caching-meta-box.php:21
+#: admin/views/caching/disabled-page-caching-meta-box.php:18
 msgid ""
 "Page caching stores static HTML copies of your pages and posts. These "
-"static files are then served to visitors, reducing the processing load on "
-"the server and dramatically speeding up your page load time. It’s probably "
-"the best performance feature ever."
+"static files are then<br>\n"
+"\t\tserved to visitors, reducing the processing load on the server and "
+"dramatically speeding up<br>\n"
+"\t\tyour page load time. It’s probably the best performance feature ever."
 msgstr ""
 
 #: admin/views/caching/gravatar-meta-box-header.php:14
@@ -1127,8 +1129,15 @@ msgstr ""
 #: admin/views/caching/gravatar-meta-box-header.php:15
 #: admin/views/caching/page-caching-meta-box-header.php:15
 #: admin/views/minification/enqueued-files-meta-box-header.php:22
-#: core/modules/class-module-page-cache.php:1442
+#: core/modules/class-module-page-cache.php:1462
 msgid "Clear cache"
+msgstr ""
+
+#: admin/views/caching/gravatar-meta-box.php:13
+msgid ""
+"Gravatar Caching stores local copies of avatars used in comments and in "
+"your theme. You can control how often you want the cache purged depending "
+"on how your website is set up."
 msgstr ""
 
 #: admin/views/caching/gravatar-meta-box.php:21
@@ -1166,7 +1175,7 @@ msgstr ""
 #: admin/views/caching/other-settings-meta-box.php:17
 msgid ""
 "This feature adds a Clear Cache button to the WordPress Admin Top\n"
-"\t\t\tbar area for select user roles."
+"\t\t\tbar area for admin users."
 msgstr ""
 
 #: admin/views/caching/other-settings-meta-box.php:26
@@ -1214,14 +1223,14 @@ msgid "Clear all locally cached static pages"
 msgstr ""
 
 #: admin/views/caching/page-caching-meta-box.php:18
-#: admin/views/caching/page-caching-subsite-meta-box.php:13
+#: admin/views/caching/page-caching-subsite-meta-box.php:14
 msgid ""
 "Hummingbird stores static HTML copies of your pages and posts to decrease "
 "page load time."
 msgstr ""
 
 #: admin/views/caching/page-caching-meta-box.php:26
-#: admin/views/caching/page-caching-subsite-meta-box.php:21
+#: admin/views/caching/page-caching-subsite-meta-box.php:22
 #: admin/views/dashboard/caching/page-caching-module-meta-box.php:16
 msgid "Page caching is currently active."
 msgstr ""
@@ -1307,9 +1316,9 @@ msgid ""
 msgstr ""
 
 #: admin/views/caching/page-caching-meta-box.php:148
-#: admin/views/dashboard/minification/network-module-meta-box.php:58
+#: admin/views/dashboard/minification/network-module-meta-box.php:81
+#: admin/views/minification/settings-meta-box.php:131
 #: admin/views/minification/settings-meta-box.php:135
-#: admin/views/minification/settings-meta-box.php:139
 msgid "Enable debug log"
 msgstr ""
 
@@ -1324,7 +1333,7 @@ msgid "Download Logs"
 msgstr ""
 
 #: admin/views/caching/page-caching-meta-box.php:162
-#: admin/views/dashboard/minification/network-module-meta-box.php:63
+#: admin/views/dashboard/minification/network-module-meta-box.php:87
 #. translators: %s: File location
 #. translators: %s: Logs location
 msgid "Location: %s"
@@ -1400,15 +1409,15 @@ msgid ""
 "caching plugin activate."
 msgstr ""
 
-#: admin/views/caching/page-caching-subsite-meta-box.php:28
+#: admin/views/caching/page-caching-subsite-meta-box.php:29
 msgid "Cache Control"
 msgstr ""
 
-#: admin/views/caching/page-caching-subsite-meta-box.php:30
+#: admin/views/caching/page-caching-subsite-meta-box.php:31
 msgid "By default your subsite inherits your network admin’s cache settings."
 msgstr ""
 
-#: admin/views/caching/page-caching-subsite-meta-box.php:38
+#: admin/views/caching/page-caching-subsite-meta-box.php:39
 #. translators: %s: code snippet.
 msgid ""
 "For any pages/post/post types/taxonomies you don’t want to cache, use the "
@@ -1416,13 +1425,13 @@ msgid ""
 "pages or templates."
 msgstr ""
 
-#: admin/views/caching/page-caching-subsite-meta-box.php:50
+#: admin/views/caching/page-caching-subsite-meta-box.php:52
 msgid ""
 "You can deactivate page caching at any time. Remember this may result in "
 "slower page loads unless you have another caching plugin activate."
 msgstr ""
 
-#: admin/views/caching/page-caching-subsite-meta-box.php:58
+#: admin/views/caching/page-caching-subsite-meta-box.php:60
 msgid ""
 "Note: Deactivating won’t lose any of your website data, only the cached "
 "pages will be removed and won’t be served to your visitors any longer."
@@ -1432,8 +1441,8 @@ msgstr ""
 #: admin/views/caching/rss-meta-box.php:14
 msgid ""
 "By default, WordPress will cache your RSS feeds to reduce the load on\n"
-"\tyour server – which is great feature. Hummingbird gives you control over "
-"the expiry time, or\n"
+"\tyour server – which is a great feature. Hummingbird gives you control "
+"over the expiry time, or\n"
 "\tyou can disable it all together."
 msgstr ""
 
@@ -1472,11 +1481,27 @@ msgid "Disable caching"
 msgstr ""
 
 #: admin/views/caching/rss-meta-box.php:50
-msgid "If don't want your RSS feed cached, you can disable it here."
+msgid "If you don't want your RSS Feed cached, you can disable it here."
 msgstr ""
 
 #: admin/views/caching/rss-meta-box.php:55
 msgid "Disable Caching"
+msgstr ""
+
+#: admin/views/caching/summary-meta-box.php:28
+msgid "Pages cached"
+msgstr ""
+
+#: admin/views/caching/summary-meta-box.php:36
+msgid "Cached hits in the last 30 days"
+msgstr ""
+
+#: admin/views/caching/summary-meta-box.php:61
+#: admin/views/dashboard/gzip/module-meta-box.php:35
+#: admin/views/gzip/summary-meta-box.php:50
+#: core/pro/admin/views/dashboard/reports/meta-box.php:26
+#: core/pro/admin/views/dashboard/reports/meta-box.php:39
+msgid "Inactive"
 msgstr ""
 
 #: admin/views/dashboard/advanced/module-meta-box.php:14
@@ -1496,14 +1521,14 @@ msgid "Up to date"
 msgstr ""
 
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:19
-#: admin/views/dashboard/caching/module-meta-box.php:19
+#: admin/views/dashboard/caching/module-meta-box.php:20
 msgid ""
 "Store temporary data on your visitors devices so that they don’t have to "
 "download assets twice if they don’t have to."
 msgstr ""
 
 #: admin/views/dashboard/caching/cloudflare-module-meta-box.php:26
-#: admin/views/dashboard/caching/module-meta-box.php:26
+#: admin/views/dashboard/caching/module-meta-box.php:27
 #. translators: %s: Number of issues
 msgid ""
 "%1$s of your cache types don’t meet the recommended expiry period of 8+ "
@@ -1511,9 +1536,10 @@ msgid ""
 "id=\"configure-link\">here</a>."
 msgstr ""
 
-#: admin/views/dashboard/caching/cloudflare-module-meta-box.php:42
+#: admin/views/dashboard/caching/cloudflare-module-meta-box.php:41
 #: admin/views/dashboard/caching/module-meta-box.php:42
-msgid "Current expiry"
+#: admin/views/dashboard/gzip/module-meta-box.php:31
+msgid "File Type"
 msgstr ""
 
 #: admin/views/dashboard/caching/gravatar-module-meta-box.php:13
@@ -1526,11 +1552,11 @@ msgstr ""
 msgid "Gravatar caching is currently active."
 msgstr ""
 
-#: admin/views/dashboard/caching/module-meta-box-footer.php:18
+#: admin/views/dashboard/caching/module-meta-box-footer.php:19
 msgid "CloudFlare is connected"
 msgstr ""
 
-#: admin/views/dashboard/caching/module-meta-box.php:105
+#: admin/views/dashboard/caching/module-meta-box.php:111
 #. translators: %s: Connect CloudFlare link
 msgid ""
 " <a href=\"%s\">Connect your account</a> to control your settings via "
@@ -1563,7 +1589,7 @@ msgid "%s of your compression types are inactive."
 msgstr ""
 
 #: admin/views/dashboard/gzip/module-meta-box.php:25
-#: admin/views/gzip/summary-meta-box.php:39
+#: admin/views/gzip/summary-meta-box.php:34
 msgid "GZip compression is currently active. Good job!"
 msgstr ""
 
@@ -1571,20 +1597,13 @@ msgstr ""
 msgid "Status"
 msgstr ""
 
-#: admin/views/dashboard/gzip/module-meta-box.php:35
-#: admin/views/gzip/summary-meta-box.php:55
-#: core/pro/admin/views/dashboard/reports/meta-box.php:29
-#: core/pro/admin/views/dashboard/reports/meta-box.php:42
-msgid "Inactive"
-msgstr ""
-
 #: admin/views/dashboard/gzip/module-meta-box.php:38
-#: admin/views/gzip/summary-meta-box.php:58
+#: admin/views/gzip/summary-meta-box.php:53
 msgid "Active"
 msgstr ""
 
 #: admin/views/dashboard/gzip/module-meta-box.php:61
-#: admin/views/gzip/summary-meta-box.php:82
+#: admin/views/gzip/summary-meta-box.php:77
 #. translators: %1$s: compressions status; %2$s: compression type
 msgid "Gzip compression is %1$s for %2$s"
 msgstr ""
@@ -1597,9 +1616,10 @@ msgid ""
 msgstr ""
 
 #: admin/views/dashboard/minification/disabled-meta-box.php:11
+#: admin/views/dashboard/minification/module-meta-box.php:16
 msgid ""
 "Compress, combine and position your assets to dramatically improve your "
-"pageload speed."
+"page load speed."
 msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box-footer.php:19
@@ -1608,12 +1628,6 @@ msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box-footer.php:19
 msgid "WPMU DEV CDN is disabled"
-msgstr ""
-
-#: admin/views/dashboard/minification/module-meta-box.php:16
-msgid ""
-"Compress, combine and position your assets to dramatically improve your "
-"page load speed."
 msgstr ""
 
 #: admin/views/dashboard/minification/module-meta-box.php:20
@@ -1647,55 +1661,68 @@ msgstr ""
 
 #: admin/views/dashboard/minification/network-module-meta-box.php:14
 msgid ""
-"Asset optimization can be a bit daunting to configure for beginners, and "
-"has the potential to break the frontend of a site. You can choose here who "
-"can configure Asset Optimization options on subsites in your Multisite "
-"install."
+"Compress, combine and position your assets to dramatically improve your "
+"pageload speed. Choose which user roles can configure Asset Optimization."
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:17
+#: admin/views/dashboard/minification/network-module-meta-box.php:18
+msgid "Asset Optimization is active and configurable by Blog Admins only."
+msgstr ""
+
+#: admin/views/dashboard/minification/network-module-meta-box.php:20
+msgid "Asset Optimization is active and configurable by Super Admins only."
+msgstr ""
+
+#: admin/views/dashboard/minification/network-module-meta-box.php:29
 msgid "Asset optimization settings updated"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:22
+#: admin/views/dashboard/minification/network-module-meta-box.php:34
 msgid ""
 "Please, activate minification first. A new menu will appear in every site "
 "on your Network."
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:26
-msgid "Select users that can minify in this network"
+#: admin/views/dashboard/minification/network-module-meta-box.php:40
+msgid "User Role Access"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:28
+#: admin/views/dashboard/minification/network-module-meta-box.php:43
 msgid "Deactivate completely"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:29
-msgid "Blog Admins can configure"
+#: admin/views/dashboard/minification/network-module-meta-box.php:44
+msgid "Blog Admins can configure Asset Optimization"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:30
-msgid "Only Super Admins can configure"
+#: admin/views/dashboard/minification/network-module-meta-box.php:45
+msgid "Only Super Admins can configure Asset Optimization"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:36
+#: admin/views/dashboard/minification/network-module-meta-box.php:50
 #: admin/views/minification/settings-meta-box.php:58
 #: admin/views/minification/settings-meta-box.php:64
 #: admin/views/minification/summary-meta-box.php:31
 msgid "Enable WPMU DEV CDN"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:37
+#: admin/views/dashboard/minification/network-module-meta-box.php:51
 msgid "Enable minification to use the WPMU DEV CDN"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:50
-#: admin/views/modals/check-files-modal.php:65
-msgid "Store my files on the WPMU DEV CDN"
+#: admin/views/dashboard/minification/network-module-meta-box.php:63
+#: admin/views/dashboard/minification/network-module-meta-box.php:67
+#: admin/views/minification/settings-meta-box.php:68
+msgid "Host my files on the WPMU DEV CDN"
 msgstr ""
 
-#: admin/views/dashboard/minification/network-module-meta-box.php:54
+#: admin/views/dashboard/minification/network-module-meta-box.php:69
+#: admin/views/dashboard/welcome/meta-box.php:99
+#: admin/views/minification/summary-meta-box.php:42
+msgid "Pro Feature"
+msgstr ""
+
+#: admin/views/dashboard/minification/network-module-meta-box.php:77
 msgid ""
 "Turn on the debug log to get insight into any issues you’re having across "
 "your subsites."
@@ -1708,23 +1735,23 @@ msgid ""
 msgstr ""
 
 #: admin/views/dashboard/performance/disabled-meta-box.php:14
-#: admin/views/dashboard/performance/module-meta-box-header.php:17
-#: admin/views/dashboard/performance/module-meta-box-header.php:23
-#: admin/views/performance/summary-meta-box.php:49
-#: admin/views/performance/summary-meta-box.php:56
+#: admin/views/dashboard/performance/module-meta-box-header.php:18
+#: admin/views/dashboard/performance/module-meta-box-header.php:34
+#: admin/views/performance/summary-meta-box.php:65
+#: admin/views/performance/summary-meta-box.php:80
 msgid "Run Test"
 msgstr ""
 
 #: admin/views/dashboard/performance/module-error-meta-box.php:17
 #: admin/views/dashboard/uptime/error-meta-box.php:16
-#: admin/views/performance/summary-meta-box.php:9
-#: admin/views/uptime/meta-box.php:18 admin/views/wphb-uptime-page.php:18
+#: admin/views/performance/summary-meta-box.php:25
+#: admin/views/uptime/meta-box.php:18 admin/views/wphb-uptime-page.php:20
 msgid "Try again"
 msgstr ""
 
 #: admin/views/dashboard/performance/module-error-meta-box.php:20
 #: admin/views/dashboard/uptime/error-meta-box.php:19
-#: admin/views/performance/summary-meta-box.php:10
+#: admin/views/performance/summary-meta-box.php:26
 #: admin/views/uptime/meta-box.php:19
 msgid "Support"
 msgstr ""
@@ -1762,20 +1789,8 @@ msgid "Score /100"
 msgstr ""
 
 #: admin/views/dashboard/performance/module-meta-box.php:49
-#: admin/views/performance/summary-meta-box.php:119
+#: admin/views/performance/summary-meta-box.php:143
 msgid "Improve"
-msgstr ""
-
-#: admin/views/dashboard/performance/running-test-meta-box.php:13
-#: admin/views/modals/check-files-modal.php:24
-#: admin/views/modals/check-performance-modal.php:15
-msgid ""
-"Hummingbird is running a test to measure your website performance, please "
-"wait."
-msgstr ""
-
-#: admin/views/dashboard/performance/running-test-meta-box.php:28
-msgid "Analyzing your site..."
 msgstr ""
 
 #: admin/views/dashboard/reports/meta-box-header.php:15
@@ -1784,29 +1799,33 @@ msgstr ""
 msgid "Upgrade to PRO"
 msgstr ""
 
-#: admin/views/dashboard/reports/no-membership-meta-box.php:15
+#: admin/views/dashboard/reports/no-membership-meta-box.php:13
 msgid ""
 "Get tailored performance reports delivered to your inbox so you don’t have "
 "to worry about checking in."
 msgstr ""
 
-#: admin/views/dashboard/reports/no-membership-meta-box.php:24
-#: admin/views/dashboard/reports/no-membership-meta-box.php:36
+#: admin/views/dashboard/reports/no-membership-meta-box.php:22
+#: admin/views/dashboard/reports/no-membership-meta-box.php:34
 msgid "Pro"
 msgstr ""
 
-#: admin/views/dashboard/reports/no-membership-meta-box.php:34
+#: admin/views/dashboard/reports/no-membership-meta-box.php:32
 msgid "Coming soon"
 msgstr ""
 
-#: admin/views/dashboard/reports/no-membership-meta-box.php:47
+#: admin/views/dashboard/reports/no-membership-meta-box.php:46
+msgid "Scheduled automated reports"
+msgstr ""
+
+#: admin/views/dashboard/reports/no-membership-meta-box.php:51
 msgid ""
 "Schedule automated performance tests and receive email reports direct to "
 "your inbox. Get reporting as part of a full WPMU DEV membership. <a "
-"data-a11y-dialog-show=\"%s\">Try Pro for FREE today!</a>"
+"href=\"%s\" target=\"_blank\">Try Pro for FREE today!</a>"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:21
+#: admin/views/dashboard/smush/meta-box.php:19
 msgid ""
 "Automatically compress and optimize your images with our super popular "
 "Smush plugin."
@@ -1820,47 +1839,51 @@ msgstr ""
 msgid "Install Smush"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:36
+#: admin/views/dashboard/smush/meta-box.php:37
 msgid ""
 "WP Smush is installed but not activated! Activate and set up now to reduce "
 "page load time."
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:40
+#: admin/views/dashboard/smush/meta-box.php:41
 msgid "Activate Smush Pro"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:44
+#: admin/views/dashboard/smush/meta-box.php:45
 msgid "Activate Smush"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:51
+#: admin/views/dashboard/smush/meta-box.php:53
 msgid ""
 "WP Smush is installed but no images have been smushed yet. Get in there and "
 "smush away!"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:56
+#: admin/views/dashboard/smush/meta-box.php:58
 #. translators: %s: uncompressed images
 msgid "There are %s images that need smushing!"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:60
+#: admin/views/dashboard/smush/meta-box.php:62
 msgid ""
 "WP Smush is installed. So far you've saved %s of space. That's a total "
 "savings of %s. Nice one!"
 msgstr ""
 
-#: admin/views/dashboard/smush/meta-box.php:70
+#: admin/views/dashboard/smush/meta-box.php:74
+msgid "Get WP Smush Pro"
+msgstr ""
+
+#: admin/views/dashboard/smush/meta-box.php:79
 msgid ""
 "Did you know WP Smush Pro delivers up to 2x better compression, allows you "
 "to smush your originals and removes any bulk smushing limits? <a "
-"href=\"%s\" rel=\"dialog\">Try it absolutely FREE</a>"
+"href=\"%s\" target=\"_blank\">Try it absolutely FREE</a>"
 msgstr ""
 
 #: admin/views/dashboard/uptime/disabled-meta-box.php:11
 #: admin/views/dashboard/uptime/module-meta-box.php:11
-#: admin/views/dashboard/uptime/no-membership-meta-box.php:13
+#: admin/views/dashboard/uptime/no-membership-meta-box.php:10
 msgid ""
 "Monitor your website and get notified if/when it’s inaccessible. We’ll also "
 "watch your server response time."
@@ -1891,11 +1914,15 @@ msgid "Calculating..."
 msgstr ""
 
 #: admin/views/dashboard/uptime/module-meta-box.php:35
-#: admin/views/dashboard/welcome/meta-box.php:102
+#: admin/views/dashboard/welcome/meta-box.php:95
 msgid "Last Down"
 msgstr ""
 
-#: admin/views/dashboard/uptime/no-membership-meta-box.php:19
+#: admin/views/dashboard/uptime/no-membership-meta-box.php:17
+msgid "Try Pro for FREE"
+msgstr ""
+
+#: admin/views/dashboard/uptime/no-membership-meta-box.php:22
 msgid ""
 "Performance improvements hardly matter if your website isn’t accessible. "
 "Monitor your uptime and downtime with WPMU DEV’s Uptime Monitoring website "
@@ -1903,36 +1930,31 @@ msgid ""
 "today!</a>"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:54
+#: admin/views/dashboard/welcome/meta-box.php:47
 #: admin/views/performance/module-resume-meta-box.php:34
 msgid "Current performance score"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:64
+#: admin/views/dashboard/welcome/meta-box.php:57
 #: admin/views/performance/module-resume-meta-box.php:45
 msgid "Running scan..."
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:66
+#: admin/views/dashboard/welcome/meta-box.php:59
 #: admin/views/performance/module-resume-meta-box.php:47
 msgid "Never"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:68
+#: admin/views/dashboard/welcome/meta-box.php:61
 #: admin/views/performance/module-resume-meta-box.php:50
 msgid "Last test"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:106
-#: admin/views/minification/summary-meta-box.php:42
-msgid "Pro Feature"
-msgstr ""
-
-#: admin/views/dashboard/welcome/meta-box.php:110
+#: admin/views/dashboard/welcome/meta-box.php:103
 msgid "Uptime Inactive"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:113
+#: admin/views/dashboard/welcome/meta-box.php:106
 #: admin/views/uptime/summary-meta-box.php:70
 msgid "Website is reported down"
 msgstr ""
@@ -1943,22 +1965,22 @@ msgid ""
 "hosting provider."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:40
+#: admin/views/gzip/configure-meta-box.php:42
 msgid "Enable compression"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:42
+#: admin/views/gzip/configure-meta-box.php:44
 msgid "Follow the instructions to activate GZip compression for this website."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:54
+#: admin/views/gzip/configure-meta-box.php:57
 msgid ""
 "Hummingbird can automatically apply GZip compression for Apache servers by "
 "writing your .htaccess file. Alternately, switch to Manual to apply these "
 "rules yourself."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:64
+#: admin/views/gzip/configure-meta-box.php:67
 msgid ""
 "We tried applying the .htaccess rules automatically but we weren’t able to. "
 "Make sure your file permissions on your .htaccess file are set to 644, or "
@@ -1966,49 +1988,49 @@ msgid ""
 "mode</a> and apply the rules yourself."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:67
-#: admin/views/gzip/configure-meta-box.php:133
+#: admin/views/gzip/configure-meta-box.php:70
+#: admin/views/gzip/configure-meta-box.php:128
 msgid "Apply Rules"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:79
-#: admin/views/gzip/configure-meta-box.php:145
+#: admin/views/gzip/configure-meta-box.php:81
+#: admin/views/gzip/configure-meta-box.php:139
 msgid ""
 "If you are unable to get the automated method working you can copy the "
 "generated code below into your .htaccess file to activate GZip compression."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:82
-#: admin/views/gzip/configure-meta-box.php:148
+#: admin/views/gzip/configure-meta-box.php:84
+#: admin/views/gzip/configure-meta-box.php:142
 msgid "Copy & paste the generated code below into your .htaccess file"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:87
+#: admin/views/gzip/configure-meta-box.php:89
 #. translators: %s: Link to recheck GZip status
 msgid ""
 "Next, <a href=\"%s\">re-check your GZip status</a> to see if it worked. <a "
 "href=\"#\" id=\"troubleshooting-link\">Still having issues?</a>"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:100
-#: admin/views/gzip/configure-meta-box.php:165
+#: admin/views/gzip/configure-meta-box.php:96
+#: admin/views/gzip/configure-meta-box.php:153
 msgid ""
 "If .htaccess does not work, and you have access to vhosts.conf or "
 "httpd.conf try this:"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:102
-#: admin/views/gzip/configure-meta-box.php:167
+#: admin/views/gzip/configure-meta-box.php:98
+#: admin/views/gzip/configure-meta-box.php:155
 msgid ""
 "Look for your site in the file and find the line that starts with "
 "<Directory> - add the code above into that section and save the file."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:103
+#: admin/views/gzip/configure-meta-box.php:99
 msgid "Reload Apache."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:130
+#: admin/views/gzip/configure-meta-box.php:125
 msgid ""
 "We tried applying the .htaccess rules automatically but we weren’t able to. "
 "Make sure your file permissions on your .htaccess file are set to 644, or "
@@ -2016,39 +2038,39 @@ msgid ""
 "manual mode</a> and apply the rules yourself."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:152
+#: admin/views/gzip/configure-meta-box.php:146
 #. translators: %s: Link to recheck GZip status
 msgid ""
 "Next, <a href=\"%s\">re-check your GZip status</a> to see if it worked. <a "
 "href=\"#\" id=\"troubleshooting-link-litespeed\">Still having issues?</a>"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:168
+#: admin/views/gzip/configure-meta-box.php:156
 msgid "Reload LiteSpeed."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:169
+#: admin/views/gzip/configure-meta-box.php:157
 msgid ""
 "If you don't know where those files are, or you aren't able to reload "
 "LiteSpeed, you would need to consult with your hosting provider or a system "
 "administrator who has access to change the configuration of your server"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:179
+#: admin/views/gzip/configure-meta-box.php:166
 msgid "For NGINX servers:"
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:184
+#: admin/views/gzip/configure-meta-box.php:171
 msgid "Reload NGINX."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:187
+#: admin/views/gzip/configure-meta-box.php:174
 msgid ""
 "If you do not have access to your NGINX config files you will need to "
 "contact your hosting provider to make these changes."
 msgstr ""
 
-#: admin/views/gzip/configure-meta-box.php:211
+#: admin/views/gzip/configure-meta-box.php:191
 msgid "Automatic .htaccess rules have been applied."
 msgstr ""
 
@@ -2060,26 +2082,14 @@ msgstr ""
 msgid "Gzip is not working properly:"
 msgstr ""
 
-#: admin/views/gzip/summary-meta-box.php:16
-msgid ""
-"Your server may not have the \"deflate\" module enabled (mod_deflate for "
-"Apache, ngx_http_gzip_module for NGINX)."
-msgstr ""
-
-#: admin/views/gzip/summary-meta-box.php:17
-msgid ""
-"Contact your host. If deflate is enabled, ask why all .htaccess or "
-"nginx.conf compression rules are not being applied."
-msgstr ""
-
-#: admin/views/gzip/summary-meta-box.php:25
+#: admin/views/gzip/summary-meta-box.php:20
 msgid ""
 "Gzip compresses your web pages and style sheets before sending them over to "
 "the browser. This drastically reduces transfer time since the files are "
 "much smaller."
 msgstr ""
 
-#: admin/views/gzip/summary-meta-box.php:32
+#: admin/views/gzip/summary-meta-box.php:27
 #. translators: %d: Number of inactive types
 msgid ""
 "%d of your compression types are inactive. <a href=\"#\" "
@@ -2087,11 +2097,7 @@ msgid ""
 "below."
 msgstr ""
 
-#: admin/views/gzip/summary-meta-box.php:47
-msgid "File type"
-msgstr ""
-
-#: admin/views/gzip/summary-meta-box.php:50
+#: admin/views/gzip/summary-meta-box.php:45
 msgid "Current status"
 msgstr ""
 
@@ -2102,125 +2108,117 @@ msgid ""
 "compression for this file to avoid issues"
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:39
-#: admin/views/minification/basic-files-rows.php:40
+#: admin/views/minification/advanced-files-rows.php:37
+#: admin/views/minification/basic-files-rows.php:38
 msgid "This file has no linked URL, it will not be combined/minified"
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:43
-#: admin/views/minification/basic-files-rows.php:44
+#: admin/views/minification/advanced-files-rows.php:41
+#: admin/views/minification/basic-files-rows.php:42
 msgid "You need to publish your changes for your new settings to take effect"
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:48
+#: admin/views/minification/advanced-files-rows.php:46
 msgid "Select file"
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:64
-#: admin/views/minification/basic-files-rows.php:55
+#: admin/views/minification/advanced-files-rows.php:62
+#: admin/views/minification/basic-files-rows.php:53
 msgid "Filesize Unknown"
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:79
-#: admin/views/minification/basic-files-rows.php:70
+#: admin/views/minification/advanced-files-rows.php:83
+#: admin/views/minification/basic-files-rows.php:74
 msgid ""
 "This file is queued for compression. It will get optimized when someone "
 "visits a page that requires it."
 msgstr ""
 
-#: admin/views/minification/advanced-files-rows.php:93
-#: admin/views/minification/advanced-files-rows.php:106
-#: admin/views/minification/basic-files-rows.php:99
-#: admin/views/modals/bulk-update-modal.php:23
-#: admin/views/modals/bulk-update-modal.php:24
-msgid "Compress"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:95
-msgid "This file can’t be compressed"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:99
-msgid "This file has already been compressed"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:111
-#: admin/views/minification/advanced-files-rows.php:120
-#: admin/views/modals/bulk-update-modal.php:29
-#: admin/views/modals/bulk-update-modal.php:36
-msgid "Combine"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:113
-msgid "This file can’t be combined"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:127
-#: admin/views/modals/bulk-update-modal.php:41
-msgid "Footer"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:128
-#: admin/views/modals/bulk-update-modal.php:42
-msgid "Move to Footer"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:135
-#: admin/views/modals/bulk-update-modal.php:46
-msgid "Defer"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:136
-msgid "Force load this file after the page has loaded"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:143
-#: admin/views/modals/bulk-update-modal.php:52
-msgid "Inline CSS"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:150
-msgid "Include file"
-msgstr ""
-
-#: admin/views/minification/advanced-files-rows.php:150
-msgid "Exclude file"
-msgstr ""
-
-#: admin/views/minification/basic-files-rows.php:84
+#: admin/views/minification/advanced-files-rows.php:98
+#: admin/views/minification/basic-files-rows.php:88
 msgid "This file type cannot be compressed and will be left alone"
 msgstr ""
 
-#: admin/views/minification/basic-files-rows.php:86
+#: admin/views/minification/advanced-files-rows.php:100
+#: admin/views/minification/basic-files-rows.php:90
 msgid "This file is already compressed"
 msgstr ""
 
-#: admin/views/minification/basic-files-rows.php:88
-msgid "Compression is on for this file, which aims to reduce it’s file size"
+#: admin/views/minification/advanced-files-rows.php:102
+#: admin/views/minification/basic-files-rows.php:92
+msgid "Compression is on for this file, which aims to reduce its size"
 msgstr ""
 
-#: admin/views/minification/basic-files-rows.php:90
-msgid "Compression is off for this file. Turn it on to reduce it’s file size"
+#: admin/views/minification/advanced-files-rows.php:104
+#: admin/views/minification/basic-files-rows.php:94
+msgid "Compression is off for this file. Turn it on to reduce its size"
 msgstr ""
 
-#: admin/views/minification/empty-files-meta-box.php:7
+#: admin/views/minification/advanced-files-rows.php:112
+#: admin/views/minification/basic-files-rows.php:103
+#: admin/views/modals/bulk-update-modal.php:21
+#: admin/views/modals/bulk-update-modal.php:22
+msgid "Compress"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:117
+#: admin/views/minification/advanced-files-rows.php:126
+#: admin/views/modals/bulk-update-modal.php:27
+#: admin/views/modals/bulk-update-modal.php:34
+msgid "Combine"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:119
+msgid "This file can’t be combined"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:133
+#: admin/views/modals/bulk-update-modal.php:39
+msgid "Footer"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:134
+#: admin/views/modals/bulk-update-modal.php:40
+msgid "Move to Footer"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:141
+#: admin/views/modals/bulk-update-modal.php:44
+msgid "Defer"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:142
+msgid "Force load this file after the page has loaded"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:149
+#: admin/views/modals/bulk-update-modal.php:50
+msgid "Inline CSS"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:156
+msgid "Include file"
+msgstr ""
+
+#: admin/views/minification/advanced-files-rows.php:156
+msgid "Exclude file"
+msgstr ""
+
+#: admin/views/minification/empty-files-meta-box.php:12
 #: admin/views/modals/check-files-modal.php:78
 #: admin/views/modals/check-performance-modal.php:35
-#: admin/views/modals/quick-setup-modal.php:32
+#: admin/views/modals/quick-setup-modal.php:41
 msgid "Reduce your page load time!"
 msgstr ""
 
-#: admin/views/minification/empty-files-meta-box.php:13
+#: admin/views/minification/empty-files-meta-box.php:18
 #. translators: %s: username
 msgid ""
-"Hummingbird's asset optimization engine can combine and minify the files "
-"your website outputs when a <br> user visits your website. The less "
-"requests your visitors have to make to your server, the <br> better. Let's "
-"check to see what we can optimise, %s!"
-msgstr ""
-
-#: admin/views/minification/empty-files-meta-box.php:20
-msgid "Activate Asset Optimization"
+"Hummingbird's Asset Optimization engine can combine and minify the files "
+"your website outputs when a <br> user\n"
+"\t\t\tvisits your website. The less requests your visitors have to make to "
+"your server, the <br> better. Let's\n"
+"\t\t\tcheck to see what we can optimise, %s!"
 msgstr ""
 
 #: admin/views/minification/enqueued-files-meta-box-footer.php:12
@@ -2240,8 +2238,7 @@ msgstr ""
 #: admin/views/minification/enqueued-files-meta-box-header.php:17
 msgid ""
 "Added/removed plugins or themes? Update your file list to include new "
-"files, and remove old ones. Note: This will reset your current optimization "
-"configuration"
+"files, and remove old ones"
 msgstr ""
 
 #: admin/views/minification/enqueued-files-meta-box-header.php:18
@@ -2253,7 +2250,7 @@ msgid "Clears all local or hosted assets and recompresses files that need it"
 msgstr ""
 
 #: admin/views/minification/enqueued-files-meta-box-header.php:28
-#: admin/views/modals/minification-basic-modal.php:21
+#: admin/views/modals/minification-basic-modal.php:22
 msgid "Switch to basic mode"
 msgstr ""
 
@@ -2362,10 +2359,6 @@ msgstr ""
 msgid "Host your files on WPMU DEV’s secure and hyper fast CDN."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:68
-msgid "Host my files on the WPMU DEV CDN"
-msgstr ""
-
 #: admin/views/minification/settings-meta-box.php:70
 msgid ""
 "Enabling this setting will serve your CSS, JS and other compatible files "
@@ -2385,50 +2378,50 @@ msgid ""
 "relative path."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:109
+#: admin/views/minification/settings-meta-box.php:107
 msgid "WP Smush free installed"
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:115
+#: admin/views/minification/settings-meta-box.php:112
 #. translators: %s: upsell modal href link
 msgid ""
 "With our pro version of Hummingbird you can super-compress your files and "
 "then host them on our blazing fast CDN. You'll get Hummingbird Pro plus "
-"100+ WPMU DEV plugins, themes & 24/7 WP support.  <a href='%s' "
-"target='_blank'>Try Pro for FREE today!</a>"
+"100+ WPMU DEV plugins & 24/7 WP support.  <a href='%s' target='_blank'>Try "
+"Pro for FREE today!</a>"
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:129
+#: admin/views/minification/settings-meta-box.php:125
 msgid "Debug"
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:131
+#: admin/views/minification/settings-meta-box.php:127
 msgid "Turn on the debug log to get insight into any issues you’re having."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:146
+#: admin/views/minification/settings-meta-box.php:142
 msgid "Reset to defaults"
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:148
+#: admin/views/minification/settings-meta-box.php:144
 msgid "Use this button to wipe any existing settings and return to defaults."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:153
+#: admin/views/minification/settings-meta-box.php:149
 msgid "Reset"
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:155
+#: admin/views/minification/settings-meta-box.php:151
 msgid "Note: This will clear all your settings and run a new file check."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:163
+#: admin/views/minification/settings-meta-box.php:159
 msgid ""
 "No longer need Asset Optimization? This will completely deactivate this "
 "feature."
 msgstr ""
 
-#: admin/views/minification/settings-meta-box.php:170
+#: admin/views/minification/settings-meta-box.php:166
 msgid ""
 "Note: This will not remove any files, they will just go back to their "
 "original, unoptimized state."
@@ -2449,7 +2442,7 @@ msgstr ""
 #: admin/views/minification/summary-meta-box.php:29
 #: admin/views/minification/summary-meta-box.php:39
 #: admin/views/minification/summary-meta-box.php:49
-#: admin/views/modals/membership-modal.php:32
+#: admin/views/modals/membership-modal.php:33
 msgid "WPMU DEV CDN"
 msgstr ""
 
@@ -2484,7 +2477,8 @@ msgstr ""
 #: admin/views/minification/tools-meta-box.php:26
 msgid ""
 "Add critical layout and styling CSS here.\n"
-"\t\t\t\tWe will insertinto <style> tags in your <head> section of each page."
+"\t\t\t\tWe will insert into <style> tags in your <head> section of each "
+"page."
 msgstr ""
 
 #: admin/views/minification/tools-meta-box.php:30
@@ -2507,25 +2501,25 @@ msgid ""
 "You still have to publish your changes before they will be set live."
 msgstr ""
 
-#: admin/views/modals/bulk-update-modal.php:32
+#: admin/views/modals/bulk-update-modal.php:30
 msgid "Files can't be combined"
 msgstr ""
 
-#: admin/views/modals/bulk-update-modal.php:47
+#: admin/views/modals/bulk-update-modal.php:45
 msgid "Defer JavaScript"
 msgstr ""
 
-#: admin/views/modals/bulk-update-modal.php:51
+#: admin/views/modals/bulk-update-modal.php:49
 msgid "Inline"
 msgstr ""
 
-#: admin/views/modals/bulk-update-modal.php:59
-#: admin/views/modals/database-cleanup-modal.php:19
+#: admin/views/modals/bulk-update-modal.php:57
+#: admin/views/modals/database-cleanup-modal.php:21
 #: admin/views/modals/dismiss-report-modal.php:21
 msgid "Cancel"
 msgstr ""
 
-#: admin/views/modals/bulk-update-modal.php:61
+#: admin/views/modals/bulk-update-modal.php:59
 msgid "Apply"
 msgstr ""
 
@@ -2535,6 +2529,13 @@ msgstr ""
 
 #: admin/views/modals/check-files-modal.php:12
 msgid "File check in progress..."
+msgstr ""
+
+#: admin/views/modals/check-files-modal.php:24
+#: admin/views/modals/check-performance-modal.php:15
+msgid ""
+"Hummingbird is running a test to measure your website performance, please "
+"wait."
 msgstr ""
 
 #: admin/views/modals/check-files-modal.php:41
@@ -2548,6 +2549,10 @@ msgid ""
 "compression and\n"
 "\t\t\t\t\t\ta CDN to store your assets on? Get it as part of a WPMU DEV "
 "membership. <a href=\"%s\" target=\"_blank\">Learn more.</a>"
+msgstr ""
+
+#: admin/views/modals/check-files-modal.php:65
+msgid "Store my files on the WPMU DEV CDN"
 msgstr ""
 
 #: admin/views/modals/check-files-modal.php:67
@@ -2564,14 +2569,14 @@ msgstr ""
 msgid "Performance test in progress..."
 msgstr ""
 
-#: admin/views/modals/database-cleanup-modal.php:10
+#: admin/views/modals/database-cleanup-modal.php:11
+#: admin/views/modals/dismiss-report-modal.php:11
 #: admin/views/modals/minification-basic-modal.php:11
 msgid "Are you sure?"
 msgstr ""
 
-#: admin/views/modals/dismiss-report-modal.php:10
-#: admin/views/performance/summary-meta-box-header.php:5
-msgid "Ignore Warnings"
+#: admin/views/modals/dismiss-report-modal.php:13
+msgid "Close this dialog window"
 msgstr ""
 
 #: admin/views/modals/dismiss-report-modal.php:17
@@ -2585,73 +2590,73 @@ msgid "Confirm"
 msgstr ""
 
 #: admin/views/modals/membership-modal.php:12
-#: admin/views/modals/membership-modal.php:47
+#: admin/views/modals/membership-modal.php:48
 msgid "Upgrade Membership"
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:20
+#: admin/views/modals/membership-modal.php:21
 msgid "Here's what you'll get by upgrading to Hummingbird Pro."
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:24
+#: admin/views/modals/membership-modal.php:25
 msgid "Automation"
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:25
+#: admin/views/modals/membership-modal.php:26
 msgid ""
 "Schedule Hummingbird to run regular performance tests daily, weekly or "
 "monthly and get email reports delivered straight to your inbox."
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:28
+#: admin/views/modals/membership-modal.php:29
 msgid "Enhanced Asset Optimization"
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:29
+#: admin/views/modals/membership-modal.php:30
 msgid ""
 "Compress your minified files up to 2x more than regular optimization and "
-"reduce your page load speed even further."
+"reduce your page load time even further."
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:33
+#: admin/views/modals/membership-modal.php:34
 msgid ""
 "By default we minify your files via our API and send them back to your "
 "server. Pro users can host their files on WPMU DEV’s secure and hyper fast "
 "CDN, which will mean less load on your server and a fast visitor experience."
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:36
+#: admin/views/modals/membership-modal.php:37
 msgid "Smush Pro"
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:37
+#: admin/views/modals/membership-modal.php:38
 msgid ""
 "A membership for Hummingbird Pro also gets you the award winning Smush Pro "
 "with unlimited advanced lossy compression that’ll give image heavy websites "
 "a speed boost."
 msgstr ""
 
-#: admin/views/modals/membership-modal.php:41
+#: admin/views/modals/membership-modal.php:42
 msgid "Get all of this, plus heaps more as part of a WPMU DEV membership."
 msgstr ""
 
-#: admin/views/modals/minification-advanced-modal.php:10
+#: admin/views/modals/minification-advanced-modal.php:11
 msgid "Just be careful!"
 msgstr ""
 
-#: admin/views/modals/minification-advanced-modal.php:16
+#: admin/views/modals/minification-advanced-modal.php:18
 msgid ""
 "Advanced mode gives you full control over your files but can easily break "
 "your website if configured incorrectly."
 msgstr ""
 
-#: admin/views/modals/minification-advanced-modal.php:18
+#: admin/views/modals/minification-advanced-modal.php:20
 msgid ""
 "<strong>We recommend you make one tweak at a time</strong> and check the "
 "frontend of your website each change to avoid any mishaps. "
 msgstr ""
 
-#: admin/views/modals/minification-advanced-modal.php:21
+#: admin/views/modals/minification-advanced-modal.php:24
 msgid "Got It"
 msgstr ""
 
@@ -2665,15 +2670,15 @@ msgstr ""
 msgid "Go back"
 msgstr ""
 
-#: admin/views/modals/quick-setup-modal.php:11
+#: admin/views/modals/quick-setup-modal.php:18
 msgid "Quick Setup"
 msgstr ""
 
-#: admin/views/modals/quick-setup-modal.php:13
+#: admin/views/modals/quick-setup-modal.php:20
 msgid "Skip"
 msgstr ""
 
-#: admin/views/modals/quick-setup-modal.php:18
+#: admin/views/modals/quick-setup-modal.php:25
 msgid ""
 "Welcome to Hummingbird, the hottest Performance plugin for WordPress! We "
 "recommend running a quick performance test before you start tweaking "
@@ -2681,26 +2686,30 @@ msgid ""
 "customizing."
 msgstr ""
 
-#: admin/views/modals/quick-setup-modal.php:21
+#: admin/views/modals/quick-setup-modal.php:29
 msgid ""
 "This is only a performance test. Once you know what to fix you can get "
 "started in the next steps."
 msgstr ""
 
-#: admin/views/modals/quick-setup-modal.php:24
-#: admin/views/performance/empty-summary-meta-box.php:12
-msgid "Test my website"
+#: admin/views/modals/quick-setup-modal.php:32
+msgid "Run Performance Test"
 msgstr ""
 
-#: admin/views/performance/empty-summary-meta-box.php:7
+#: admin/views/performance/empty-summary-meta-box.php:13
 msgid "Let's see what we can improve!"
 msgstr ""
 
-#: admin/views/performance/empty-summary-meta-box.php:9
+#: admin/views/performance/empty-summary-meta-box.php:16
 msgid ""
-"For us to know what to improve we need to test your website. All testing is "
-"done in the background via our <br> secure servers. Once complete, we'll "
-"give you a list of things to improve, and how to do it."
+"For us to know what to improve we need to test your website. All testing is\n"
+"\t\t\tdone in the background via our secure servers. Once complete, we'll "
+"give you a list of things to\n"
+"\t\t\timprove, and how to do it."
+msgstr ""
+
+#: admin/views/performance/empty-summary-meta-box.php:22
+msgid "Test my website"
 msgstr ""
 
 #: admin/views/performance/module-resume-meta-box.php:56
@@ -2720,65 +2729,92 @@ msgstr ""
 msgid "Recommendations"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box-footer.php:5
-msgid ""
-"<p>Schedule automated performance tests and receive email reports direct to "
-"your inbox. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins, themes & "
-"24/7 WP support. <a href=\"%s\" target=\"_blank\">Try Pro for FREE "
-"today!</a></p>"
-msgstr ""
-
-#: admin/views/performance/reporting-meta-box-footer.php:13
-#: admin/views/performance/settings-meta-box-footer.php:4
-msgid "Update Settings"
-msgstr ""
-
-#: admin/views/performance/reporting-meta-box.php:4
+#: admin/views/performance/reporting-meta-box.php:13
+#: core/pro/admin/views/performance/reporting-meta-box.php:20
 msgid "Schedule Scans"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:6
+#: admin/views/performance/reporting-meta-box.php:16
+#: core/pro/admin/views/performance/reporting-meta-box.php:23
 msgid ""
 "Configure Hummingbird to automatically and regularly test your website and "
 "email you reports."
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:16
+#: admin/views/performance/reporting-meta-box.php:26
+#: core/pro/admin/views/performance/reporting-meta-box.php:32
 msgid "Run regular scans & reports"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:19
+#: admin/views/performance/reporting-meta-box.php:30
 msgid "Schedule"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:36
+#: admin/views/performance/reporting-meta-box.php:34
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:31
+#: core/pro/admin/views/performance/reporting-meta-box.php:35
+msgid "Frequency"
+msgstr ""
+
+#: admin/views/performance/reporting-meta-box.php:37
+#: core/class-hub-endpoints.php:186 core/pro/admin/class-pro-admin.php:157
+#: core/pro/admin/class-pro-admin.php:177
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:37
+#: core/pro/admin/views/performance/reporting-meta-box.php:41
+msgid "Weekly"
+msgstr ""
+
+#: admin/views/performance/reporting-meta-box.php:42
+#: core/pro/admin/views/performance/reporting-meta-box.php:50
 msgid "Day of the week"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:45
+#: admin/views/performance/reporting-meta-box.php:54
+#: core/pro/admin/views/performance/reporting-meta-box.php:62
 msgid "Time of day"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:60
+#: admin/views/performance/reporting-meta-box.php:71
+#: core/pro/admin/views/performance/reporting-meta-box.php:79
 msgid "Email Recipients"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:62
+#: admin/views/performance/reporting-meta-box.php:74
+#: core/pro/admin/views/performance/reporting-meta-box.php:82
 msgid ""
 "Choose which of your website’s users will receive the test results in their "
 "inbox."
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:100
+#: admin/views/performance/reporting-meta-box.php:82
+#: core/pro/admin/views/performance/reporting-meta-box.php:115
 msgid "First Name"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:108
+#: admin/views/performance/reporting-meta-box.php:89
+#: core/pro/admin/views/performance/reporting-meta-box.php:122
 msgid "Empty email"
 msgstr ""
 
-#: admin/views/performance/reporting-meta-box.php:109
+#: admin/views/performance/reporting-meta-box.php:90
+#: core/pro/admin/views/performance/reporting-meta-box.php:123
 msgid "Email Address"
+msgstr ""
+
+#: admin/views/performance/reporting-meta-box.php:107
+msgid "Scheduled automated performance tests"
+msgstr ""
+
+#: admin/views/performance/reporting-meta-box.php:112
+msgid ""
+"Schedule automated performance tests and receive email reports direct to "
+"your inbox. You'll get Hummingbird Pro plus 100+ WPMU DEV plugins & 24/7 WP "
+"support. <a href=\"%s\" target=\"_blank\">Try Pro for FREE today!</a>"
+msgstr ""
+
+#: admin/views/performance/settings-meta-box-footer.php:4
+#: core/pro/admin/views/performance/reporting-meta-box-footer.php:12
+msgid "Update Settings"
 msgstr ""
 
 #: admin/views/performance/settings-meta-box.php:4
@@ -2796,102 +2832,112 @@ msgstr ""
 msgid "Allow subsite admins to run performance tests"
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:46
+#: admin/views/performance/summary-meta-box-header.php:5
+msgid "Ignore Warnings"
+msgstr ""
+
+#: admin/views/performance/summary-meta-box.php:62
 msgid ""
 "You have chosen to ignore this performance test. Run a new test to see new "
 "recommendations."
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:66
+#: admin/views/performance/summary-meta-box.php:90
 msgid ""
 "Here are your latest performance test results. Action as many fixes as "
 "possible, however you can always ignore warnings if you are unable to fix "
 "them."
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:103
+#: admin/views/performance/summary-meta-box.php:127
 msgid "This improvement is controlled by the network admin for this site."
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:105
+#: admin/views/performance/summary-meta-box.php:129
 msgid "This can’t be improved at the subsite level."
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:132
+#: admin/views/performance/summary-meta-box.php:156
 msgid "Overview"
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:137
+#: admin/views/performance/summary-meta-box.php:161
 msgid "Benchmarks"
 msgstr ""
 
-#: admin/views/performance/summary-meta-box.php:163
+#: admin/views/performance/summary-meta-box.php:187
 msgid "How to improve"
 msgstr ""
 
-#: admin/views/uptime/disabled-meta-box.php:17
-#: admin/views/uptime/no-membership-meta-box.php:16
+#: admin/views/uptime/disabled-meta-box.php:16
+#: admin/views/uptime/no-membership-meta-box.php:13
 msgid "Monitor your website"
 msgstr ""
 
 #: admin/views/uptime/disabled-meta-box.php:20
 msgid ""
 "Uptime monitors your server response time and lets you know when your "
-"website is down or too slow for your visitors. Activate Uptime and make "
-"sure your website is always online."
+"website is down or<br>\n"
+"\t\ttoo slow for your visitors. Activate Uptime and make sure your website "
+"is always online."
 msgstr ""
 
-#: admin/views/uptime/downtime-meta-box.php:12
+#: admin/views/uptime/downtime-meta-box.php:13
 msgid ""
 "Here’s a snapshot of when your site went down, which means visitors "
-"couldn’t view your website."
+"couldn’t\n"
+"\tview your website."
 msgstr ""
 
-#: admin/views/uptime/downtime-meta-box.php:21
-#: admin/views/uptime/meta-box.php:61
-#: core/modules/class-module-advanced.php:508
-#: core/modules/class-module-advanced.php:517
+#: admin/views/uptime/downtime-meta-box.php:25
+#: admin/views/uptime/meta-box.php:65
+#: core/modules/class-module-advanced.php:511
+#: core/modules/class-module-advanced.php:520
 msgid "Unknown"
 msgstr ""
 
-#: admin/views/uptime/downtime-meta-box.php:37
+#: admin/views/uptime/downtime-meta-box.php:38
 msgid "Logs"
 msgstr ""
 
-#: admin/views/uptime/downtime-meta-box.php:44
+#: admin/views/uptime/downtime-meta-box.php:43
 msgid "No downtime has been reported during the reporting period."
 msgstr ""
 
-#: admin/views/uptime/downtime-meta-box.php:63
+#: admin/views/uptime/downtime-meta-box.php:62
 msgid "Spacer image"
 msgstr ""
 
-#: admin/views/uptime/meta-box.php:32
+#: admin/views/uptime/meta-box.php:31
 msgid ""
 "Uptime monitors your server response time and lets you know when your "
-"website is down or<br> too slow for your visitors. This service is "
-"currently under maintenance as we build a brand<br> new monitoring service. "
-"Check back soon!"
+"website is down<br>\n"
+"\t\t\tor too slow for your visitors. This service is currently under "
+"maintenance as we build a<br>\n"
+"\t\t\tbrand new monitoring service. Check back soon!"
 msgstr ""
 
-#: admin/views/uptime/meta-box.php:40
+#: admin/views/uptime/meta-box.php:38
 msgid ""
-"Server response time is the amount of time it takes for a web server to "
-"respond to a request from a browser. The longer it takes, the longer your "
-"visitors wait for the page to start loading."
+"Server response time is the amount of time it takes for a web server to\n"
+"\t\trespond to a request from a browser. The longer it takes, the longer "
+"your visitors wait for the page\n"
+"\t\tto start loading."
 msgstr ""
 
-#: admin/views/uptime/meta-box.php:43
+#: admin/views/uptime/meta-box.php:45
 msgid ""
-"We don’t have any data feeding in yet. It can take an hour or two for this "
-"graph to populate with data so feel free to check back soon!"
+"We don’t have any data feeding in yet. It can take an hour or two\n"
+"\t\t\t\tfor this graph to populate with data so feel free to check back "
+"soon!"
 msgstr ""
 
-#: admin/views/uptime/no-membership-meta-box.php:19
+#: admin/views/uptime/no-membership-meta-box.php:17
 msgid ""
 "Uptime monitors your server response time and lets you know when your "
-"website is down or too slow for your visitors. Get Uptime monitoring as "
-"part of a WPMU DEV membership."
+"website is down or<br>\n"
+"\t\t\ttoo slow for your visitors. Get Uptime monitoring as part of a WPMU "
+"DEV membership."
 msgstr ""
 
 #: admin/views/uptime/settings-meta-box.php:15
@@ -2916,74 +2962,74 @@ msgstr ""
 msgid "Up Since"
 msgstr ""
 
-#: admin/views/wphb-minification-page.php:12
+#: admin/views/wphb-minification-page.php:15
 #. translators: %d: number of files, %d: number of files optimized
 msgid ""
 "<strong>Hummingbird found %1$d files and has automatically optimized %2$d "
 "of them!</strong>"
 msgstr ""
 
-#: admin/views/wphb-minification-page.php:18
+#: admin/views/wphb-minification-page.php:21
 msgid ""
 "If you wish to have more control, <a href=\"#\" "
 "class=\"wphb-switch-button\">switch to advanced mode</a>."
 msgstr ""
 
-#: admin/views/wphb-page.php:12
+#: admin/views/wphb-page.php:18
 msgid "Check out our other free wordpress.org plugins!"
 msgstr ""
 
-#: admin/views/wphb-page.php:19
+#: admin/views/wphb-page.php:25
 msgid "Smush Image Compression and Optimization"
 msgstr ""
 
-#: admin/views/wphb-page.php:20
+#: admin/views/wphb-page.php:26
 msgid ""
 "Resize, optimize and compress all of your images with the incredibly "
 "powerful and award-winning, 100% free WordPress image optimizer."
 msgstr ""
 
-#: admin/views/wphb-page.php:22 admin/views/wphb-page.php:35
-#: admin/views/wphb-page.php:48
+#: admin/views/wphb-page.php:28 admin/views/wphb-page.php:41
+#: admin/views/wphb-page.php:54
 msgid "View features"
 msgstr ""
 
-#: admin/views/wphb-page.php:32
+#: admin/views/wphb-page.php:38
 msgid "Defender Security, Monitoring, and Hack Protection"
 msgstr ""
 
-#: admin/views/wphb-page.php:33
+#: admin/views/wphb-page.php:39
 msgid ""
 "Security Tweaks & Recommendations, File & Malware Scanning, Login & 404 "
 "Lockout Protection, Two-Factor Authentication & more."
 msgstr ""
 
-#: admin/views/wphb-page.php:45
+#: admin/views/wphb-page.php:51
 msgid "SmartCrawl Search Engine Optimization"
 msgstr ""
 
-#: admin/views/wphb-page.php:46
+#: admin/views/wphb-page.php:52
 msgid ""
 "Customize Titles & Meta Data, OpenGraph, Twitter & Pinterest Support, "
 "Auto-Keyword Linking, SEO & Readability Analysis, Sitemaps, URL Crawler & "
 "more."
 msgstr ""
 
-#: admin/views/wphb-page.php:55
+#: admin/views/wphb-page.php:61
 msgid "WPMU DEV - Your WordPress Toolkit"
 msgstr ""
 
-#: admin/views/wphb-page.php:56
+#: admin/views/wphb-page.php:62
 msgid ""
 "Pretty much everything you need for developing and managing WordPress based "
 "websites, and then some."
 msgstr ""
 
-#: admin/views/wphb-page.php:59
+#: admin/views/wphb-page.php:65
 msgid "Learn more"
 msgstr ""
 
-#: admin/views/wphb-page.php:65
+#: admin/views/wphb-page.php:71
 msgid "Try pro features for free!"
 msgstr ""
 
@@ -3060,17 +3106,17 @@ msgid "Error uploading file %s."
 msgstr ""
 
 #: core/class-filesystem.php:467
-#: core/modules/minify/class-minify-group.php:1174
+#: core/modules/minify/class-minify-group.php:1214
 msgid "Empty filename"
 msgstr ""
 
 #: core/class-filesystem.php:474
-#: core/modules/minify/class-minify-group.php:1181
+#: core/modules/minify/class-minify-group.php:1221
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr ""
 
 #: core/class-filesystem.php:533
-#: core/modules/minify/class-minify-group.php:1240
+#: core/modules/minify/class-minify-group.php:1280
 #. translators: %s: directory path
 msgid ""
 "Unable to create directory %s. Is its parent directory writable by the "
@@ -3078,14 +3124,40 @@ msgid ""
 msgstr ""
 
 #: core/class-filesystem.php:543
-#: core/modules/minify/class-minify-group.php:1250
+#: core/modules/minify/class-minify-group.php:1290
 #. translators: %s: file name with path
 msgid "Could not write file %s"
 msgstr ""
 
+#: core/class-hub-endpoints.php:183 core/pro/admin/class-pro-admin.php:154
+#: core/pro/admin/class-pro-admin.php:174
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:34
+#: core/pro/admin/views/performance/reporting-meta-box.php:38
+msgid "Daily"
+msgstr ""
+
+#: core/class-hub-endpoints.php:189 core/pro/admin/class-pro-admin.php:160
+#: core/pro/admin/class-pro-admin.php:180
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:40
+#: core/pro/admin/views/performance/reporting-meta-box.php:44
+msgid "Monthly"
+msgstr ""
+
+#: core/class-hub-endpoints.php:228 core/class-hub-endpoints.php:255
+msgid "Hummingbird module doesn't exist."
+msgstr ""
+
+#: core/class-hub-endpoints.php:235
+msgid "Enabling this module remotely is not possible."
+msgstr ""
+
+#: core/class-hub-endpoints.php:262
+msgid "Disabling this module remotely is not possible."
+msgstr ""
+
 #: core/class-utils.php:93
 msgid ""
-"There was an error during the cache purge. Check file permissions are 755\n"
+"There was an error during the cache purge. Check folder permissions are 755\n"
 "\t\t\t\t\t\t\t\t\t\tfor /wp-content/wphb-cache or delete directory manually."
 msgstr ""
 
@@ -3371,63 +3443,63 @@ msgid ""
 "regenerating transients."
 msgstr ""
 
-#: core/modules/class-module-advanced.php:432
+#: core/modules/class-module-advanced.php:435
 msgid "Version"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:466
+#: core/modules/class-module-advanced.php:469
 msgid "Error Reporting"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:469
+#: core/modules/class-module-advanced.php:472
 msgid "Extensions"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:616
+#: core/modules/class-module-advanced.php:619
 msgid "Software Name"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:617
+#: core/modules/class-module-advanced.php:620
 msgid "Software Version"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:618
+#: core/modules/class-module-advanced.php:621
 msgid "Server IP"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:619
+#: core/modules/class-module-advanced.php:622
 msgid "Server Hostname"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:620
+#: core/modules/class-module-advanced.php:623
 msgid "Server Admin"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:621
+#: core/modules/class-module-advanced.php:624
 msgid "Server local time"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:622
+#: core/modules/class-module-advanced.php:625
 msgid "Operating System"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:623
+#: core/modules/class-module-advanced.php:626
 msgid "OS Hostname"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:624
+#: core/modules/class-module-advanced.php:627
 msgid "OS Version"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:640
+#: core/modules/class-module-advanced.php:643
 msgid "undefined"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:647
+#: core/modules/class-module-advanced.php:650
 msgid "FALSE"
 msgstr ""
 
-#: core/modules/class-module-advanced.php:649
+#: core/modules/class-module-advanced.php:652
 msgid "TRUE"
 msgstr ""
 
@@ -3439,11 +3511,23 @@ msgstr ""
 msgid "Error fetching Gravatar. Gravatar not found."
 msgstr ""
 
-#: core/modules/class-module-minify.php:1119
+#: core/modules/class-module-gzip.php:39
+msgid ""
+"Your server may not have the \"deflate\" module enabled (mod_deflate for\n"
+"\t\t\t\tApache, ngx_http_gzip_module for NGINX)."
+msgstr ""
+
+#: core/modules/class-module-gzip.php:41
+msgid ""
+"Contact your host. If deflate is enabled, ask why all .htaccess or\n"
+"\t\t\t\tnginx.conf compression rules are not being applied."
+msgstr ""
+
+#: core/modules/class-module-minify.php:1212
 msgid "Unsupported content"
 msgstr ""
 
-#: core/modules/class-module-minify.php:1128
+#: core/modules/class-module-minify.php:1221
 msgid "Error saving file"
 msgstr ""
 
@@ -3466,57 +3550,57 @@ msgid ""
 "take a few minutes.."
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:354
+#: core/modules/class-module-page-cache.php:358
 msgid ""
 "Hummingbird could not locate the WP_CACHE constant in wp-config.php file "
 "for WordPress. Please make sure the following line is added to the file: "
 "<br><code>define('WP_CACHE', true);</code>"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:364
+#: core/modules/class-module-page-cache.php:368
 msgid ""
 "Hummingbird could not locate the wp-config.php file for WordPress. Please "
 "make sure the following line is added to the file: "
 "<br><code>define('WP_CACHE', true);</code>"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:374
+#: core/modules/class-module-page-cache.php:378
 msgid ""
 "Hummingbird could not write to the wp-config.php file. Please add the "
 "following line to the file manually: <br><code>define('WP_CACHE', "
 "true);</code>"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:400
+#: core/modules/class-module-page-cache.php:404
 msgid "Frontpage"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:401
+#: core/modules/class-module-page-cache.php:405
 msgid "Blog"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:402
+#: core/modules/class-module-page-cache.php:406
 msgid "Pages"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:403
+#: core/modules/class-module-page-cache.php:407
 msgid "Posts"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:404
+#: core/modules/class-module-page-cache.php:408
 msgid "Archives"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:405
+#: core/modules/class-module-page-cache.php:409
 msgid "Categories"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:406
+#: core/modules/class-module-page-cache.php:410
 msgid "Tags"
 msgstr ""
 
-#: core/modules/class-module-page-cache.php:1362
-#: core/modules/class-module-page-cache.php:1458
+#: core/modules/class-module-page-cache.php:1382
+#: core/modules/class-module-page-cache.php:1478
 msgid "Cache for post has been cleared."
 msgstr ""
 
@@ -3532,31 +3616,35 @@ msgstr ""
 msgid "You need to be a WPMU DEV Member"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:925
+#: core/modules/minify/class-minify-group.php:950
 msgid "This file has not a linked URL, it will not be combined/minified"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:938
+#: core/modules/minify/class-minify-group.php:963
 msgid "This file included in your output can't be minified or combined"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:986
+#: core/modules/minify/class-minify-group.php:1011
 msgid "It looks like this file is empty"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:1016
+#: core/modules/minify/class-minify-group.php:1041
 msgid "@import directive is not allowed in stylesheets"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:1032
+#: core/modules/minify/class-minify-group.php:1057
 msgid "Hummingbird could not parse the content of this file"
 msgstr ""
 
-#: core/modules/minify/class-minify-group.php:1067
+#: core/modules/minify/class-minify-group.php:1092
 msgid "Minify callback does not exist"
 msgstr ""
 
-#: core/pro/admin/views/dashboard/reports/meta-box.php:19
+#: core/pro/admin/views/advanced/db-settings-meta-box.php:45
+msgid "Included Tables"
+msgstr ""
+
+#: core/pro/admin/views/dashboard/reports/meta-box.php:16
 msgid ""
 "Automate your workflow with daily, weekly or monthly reports sent directly "
 "to your inbox."
@@ -3647,12 +3735,12 @@ msgstr ""
 msgid "http://premium.wpmudev.org"
 msgstr ""
 
-#: admin/views/caching/browser-caching-configure-meta-box.php:397
+#: admin/views/caching/browser-caching-configure-meta-box.php:404
 msgctxt "Connect to Cloudflare button text"
 msgid "Connect"
 msgstr ""
 
-#: admin/views/dashboard/welcome/meta-box.php:60
+#: admin/views/dashboard/welcome/meta-box.php:53
 #: admin/views/performance/module-resume-meta-box.php:41
 msgctxt "Time of the last performance report"
 msgid "at %s"

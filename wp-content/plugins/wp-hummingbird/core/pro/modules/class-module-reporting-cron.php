@@ -159,11 +159,11 @@ class WP_Hummingbird_Module_Reporting_Cron extends WP_Hummingbird_Module {
 			}
 
 			// Check to see it the email has been sent already.
-			$last_sent_report = $options['last_sent'];
-			$to_utc = self::get_scheduled_scan_time( false );
+			$last_sent_report = (int) $options['last_sent'];
+			$to_utc = (int) self::get_scheduled_scan_time( false );
 
 			// Schedule next test.
-			if ( $time_difference < 300 && $last_report && ( $to_utc - time() - $last_sent_report ) > 0 ) {
+			if ( $time_difference < 300 && isset( $last_report ) && ( $to_utc - time() - $last_sent_report ) > 0 ) {
 				// Get the recipient list.
 				$recipients = $options['recipients'];
 				// Send the report.

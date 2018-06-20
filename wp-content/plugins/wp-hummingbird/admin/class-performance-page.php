@@ -65,7 +65,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 			$this->admin_notices->show( 'updated', __( 'You have successfully ignored this performance test.', 'wphb' ), 'success' );
 		}
 		?>
-		<div class="sui-notice sui-notice-top sui-notice-success" style="display: none" id="wphb-notice-performance-report-settings-updated">
+		<div class="sui-notice-top sui-notice-success sui-hidden" id="wphb-notice-performance-report-settings-updated">
 			<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 		</div>
 		<div class="sui-header">
@@ -77,8 +77,16 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 					</a>
 					<?php
 				else :
-					/* translators: %d: number of minutes. */
-					$tooltip = sprintf( __( 'Hummingbird is just catching her breath - you can run another test in %d minutes', 'wphb' ), esc_attr( $this->can_run_test ) );
+					$tooltip = sprintf(
+						/* translators: %d: number of minutes. */
+						_n(
+							'Hummingbird is just catching her breath - you can run another test in %d minute',
+							'Hummingbird is just catching her breath - you can run another test in %d minutes',
+							$this->can_run_test,
+							'wphb'
+						),
+						number_format_i18n( $this->can_run_test )
+					);
 					?>
 					<span class="sui-tooltip sui-tooltip-bottom sui-tooltip-constrained" disabled="disabled" data-tooltip="<?php echo esc_attr( $tooltip ); ?>" aria-hidden="true">
 						<a href="#" class="sui-button wphb-disabled-test" disabled="disabled" aria-hidden="true">
@@ -187,15 +195,14 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 
 			if ( is_multisite() && is_network_admin() || ! is_multisite() ) {
 				$this->add_meta_box(
-					'reporting-summary',
+					'performance/reporting',
 					__( 'Reports', 'wphb' ),
-					array( $this, 'reporting_metabox' ),
-					array( $this, 'reporting_metabox_header' ),
-					array( $this, 'reporting_metabox_footer' ),
+					null,
+					null,
+					null,
 					'reports',
 					array(
-						'box_content_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-body' : 'sui-box-body sui-upsell-items',
-						'box_footer_class'  => WP_Hummingbird_Utils::is_member() ? 'sui-box-footer' : 'sui-box-footer wphb-reporting-no-membership',
+						'box_content_class' => 'sui-box-body sui-upsell-items',
 					)
 				);
 			}
@@ -217,7 +224,10 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 				array( $this, 'performance_empty_metabox' ),
 				null,
 				null,
-				'main'
+				'main',
+				array(
+					'box_content_class' => 'sui-box-body sui-block-content-center',
+				)
 			);
 		} // End if().
 	}
@@ -329,80 +339,6 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 	}
 
 	/**
-	 * Reporting meta box.
-	 *
-	 * @since 1.4.5
-	 */
-	public function reporting_metabox() {
-		/* @var WP_Hummingbird_Module_Performance $perf_module */
-		$perf_module = WP_Hummingbird_Utils::get_module( 'performance' );
-		$options = $perf_module->get_options();
-
-		$week_days = array(
-			'Monday',
-			'Tuesday',
-			'Wednesday',
-			'Thursday',
-			'Friday',
-			'Saturday',
-			'Sunday',
-		);
-
-		$notification = false;
-		$frequency = 7;
-		$send_day = $week_days[ array_rand( $week_days, 1 ) ];
-		$send_time = mt_rand( 0, 23 ) . ':00';
-		$recipients = array();
-
-		if ( WP_Hummingbird_Utils::is_member() ) {
-			if ( isset( $options['reports'] ) ) {
-				$notification = $options['reports'];
-			}
-
-			if ( isset( $options['frequency'] ) ) {
-				$frequency = $options['frequency'];
-			}
-
-			if ( isset( $options['day'] ) ) {
-				$send_day = $options['day'];
-			}
-
-			if ( isset( $options['time'] ) ) {
-				// Remove the minutes from the hour to not confuse the user.
-				$send_time = explode( ':', $options['time'] );
-				$send_time[1] = '00';
-				$send_time = implode( ':', $send_time );
-			}
-
-			if ( isset( $options['recipients'] ) ) {
-				$recipients = $options['recipients'];
-			}
-		}
-
-		$args = compact( 'notification', 'frequency', 'send_day', 'send_time', 'recipients' );
-		$this->view( 'performance/reporting-meta-box', $args );
-	}
-
-	/**
-	 * Reporting meta box header.
-	 *
-	 * @since 1.5.0
-	 */
-	public function reporting_metabox_header() {
-		$title = __( 'Reports', 'wphb' );
-		$this->view( 'performance/reporting-meta-box-header', compact( 'title' ) );
-	}
-
-	/**
-	 * Reporting meta box footer.
-	 *
-	 * @since 1.5.0
-	 */
-	public function reporting_metabox_footer() {
-		$this->view( 'performance/reporting-meta-box-footer', array() );
-	}
-
-	/**
 	 * Settings meta box.
 	 *
 	 * @since 1.7.1
@@ -456,11 +392,11 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 			}
 		}
 		if ( $this->dismissed ) {
-			echo ' <i class="hb-wpmudev-icon-info dismissed"></i>';
+			echo ' <i class="sui-icon-info" aria-hidden="true"></i>';
 		} elseif ( ! $this->has_error ) {
 			echo ' <span class="sui-tag sui-tag-' . esc_attr( $class ) . '">' . esc_html( WP_Hummingbird_Utils::get_number_of_issues( 'performance', $this->report ) ) . '</span>';
 		} else {
-			echo ' <i class="hide-on-mobile hb-wpmudev-icon-warning sui-warning"></i>';
+			echo ' <i class="sui-icon-warning-alert sui-warning" aria-hidden="true"></i>';
 		}
 	}
 

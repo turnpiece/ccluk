@@ -1,3 +1,11 @@
+/**
+ * Import plugin styles.
+ */
+import '../scss/app.scss';
+
+/**
+ * Various scripts for modules.
+ */
 require('./admin-main.js');
 require('./admin-performance.js');
 require('./admin-gzip.js');

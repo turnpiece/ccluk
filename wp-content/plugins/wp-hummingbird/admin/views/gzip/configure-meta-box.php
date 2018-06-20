@@ -27,7 +27,9 @@
 		</span>
 	</div><!-- end sui-box-settings-col-1 -->
 	<div class="sui-box-settings-col-2">
-		<label for="wphb-server-type" class="inline-label"><?php esc_html_e( 'Server type', 'wphb' ); ?></label>
+		<label for="wphb-server-type" class="sui-label">
+			<?php esc_html_e( 'Server type', 'wphb' ); ?>
+		</label>
 		<?php
 		WP_Hummingbird_Utils::get_servers_dropdown( array(
 			'selected' => $gzip_server_type,
@@ -42,9 +44,10 @@
 			<?php esc_html_e( 'Follow the instructions to activate GZip compression for this website.', 'wphb' ); ?>
 		</span>
 	</div><!-- end sui-box-settings-col-1 -->
+
 	<div class="sui-box-settings-col-2">
 	<?php if ( ! ( $htaccess_written && $full_enabled ) ) : ?>
-		<div id="wphb-server-instructions-apache" class="wphb-server-instructions hidden" data-server="apache">
+		<div id="wphb-server-instructions-apache" class="wphb-server-instructions" data-server="apache" style="display: none;">
 			<div class="sui-tabs">
 				<div class="sui-tab">
 					<label for="apache-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
@@ -74,43 +77,35 @@
 				<div class="sui-tab">
 					<label for="apache-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
 					<input type="radio" name="apache-config-type" id="apache-config-manual">
-					<div class="sui-tab-content">
-						<div class="apache-instructions">
-							<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
+					<div class="sui-tab-content apache-instructions">
+						<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
-							<ol class="wphb-listing wphb-listing-ordered">
-								<li><?php esc_html_e( 'Copy & paste the generated code below into your .htaccess file', 'wphb' ); ?></li>
-								<li>
-									<?php
-									printf(
-										/* translators: %s: Link to recheck GZip status */
-									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
-									?>
-								</li>
-							</ol>
+						<ol class="wphb-listing wphb-listing-ordered">
+							<li><?php esc_html_e( 'Copy & paste the generated code below into your .htaccess file', 'wphb' ); ?></li>
+							<li>
+								<?php
+								printf(
+									/* translators: %s: Link to recheck GZip status */
+								__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+								?>
+							</li>
+						</ol>
 
-							<div id="wphb-code-snippet">
-								<div id="wphb-code-snippet-apache" class="wphb-code-snippet">
-									<div class="wphb-block-content">
-										<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
-									</div>
-								</div>
-							</div>
-							<p id="troubleshooting-gzip"><strong>Troubleshooting</strong></p>
-							<p><?php esc_html_e( 'If .htaccess does not work, and you have access to vhosts.conf or httpd.conf try this:', 'wphb' ); ?></p>
-							<ol class="wphb-listing wphb-listing-ordered">
-								<li><?php esc_html_e( 'Look for your site in the file and find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></li>
-								<li><?php esc_html_e( 'Reload Apache.', 'wphb' ); ?></li>
-								<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
-							</ol>
-							<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-						</div><!-- end apache-instructions -->
-					</div><!-- end content -->
+						<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['apache'] ); ?></pre>
+						<p id="troubleshooting-gzip"><strong>Troubleshooting</strong></p>
+						<p><?php esc_html_e( 'If .htaccess does not work, and you have access to vhosts.conf or httpd.conf try this:', 'wphb' ); ?></p>
+						<ol class="wphb-listing wphb-listing-ordered">
+							<li><?php esc_html_e( 'Look for your site in the file and find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></li>
+							<li><?php esc_html_e( 'Reload Apache.', 'wphb' ); ?></li>
+							<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload Apache, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
+						</ol>
+						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
+					</div><!-- end apache-instructions -->
 				</div><!-- end tab -->
 			</div><!-- end tabs -->
 		</div><!-- end wphb-server-instructions -->
 
-		<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions hidden" data-server="LiteSpeed">
+		<div id="wphb-server-instructions-litespeed" class="wphb-server-instructions" data-server="LiteSpeed" style="display: none;">
 			<div class="sui-tabs">
 				<div class="sui-tab">
 					<label for="litespeed-config-auto" class="active"><?php esc_html_e( 'Automatic', 'wphb' ); ?></label>
@@ -140,42 +135,34 @@
 				<div class="sui-tab">
 					<label for="litespeed-config-manual"><?php esc_html_e( 'Manual', 'wphb' ); ?></label>
 					<input type="radio" name="litespeed-config-type" id="litespeed-config-manual">
-					<div class="sui-tab-content">
-						<div class="litespeed-instructions">
-							<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
+					<div class="sui-tab-content litespeed-instructions">
+						<p><?php esc_html_e( 'If you are unable to get the automated method working you can copy the generated code below into your .htaccess file to activate GZip compression.', 'wphb' ); ?></p>
 
-							<ol class="wphb-listing wphb-listing-ordered">
-								<li><?php esc_html_e( 'Copy & paste the generated code below into your .htaccess file', 'wphb' ); ?></li>
-								<li>
-									<?php
-									printf( /* translators: %s: Link to recheck GZip status */
-									__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
-									?>
-								</li>
-							</ol>
+						<ol class="wphb-listing wphb-listing-ordered">
+							<li><?php esc_html_e( 'Copy & paste the generated code below into your .htaccess file', 'wphb' ); ?></li>
+							<li>
+								<?php
+								printf( /* translators: %s: Link to recheck GZip status */
+								__( 'Next, <a href="%s">re-check your GZip status</a> to see if it worked. <a href="#" id="troubleshooting-link-litespeed">Still having issues?</a>', 'wphb' ), esc_url( $recheck_url ) );
+								?>
+							</li>
+						</ol>
 
-							<div id="wphb-code-snippet">
-								<div id="wphb-code-snippet-litespeed" class="wphb-code-snippet">
-									<div class="wphb-block-content">
-										<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
-									</div>
-								</div>
-							</div>
-							<p id="troubleshooting-gzip-litespeed"><strong>Troubleshooting</strong></p>
-							<p><?php esc_html_e( 'If .htaccess does not work, and you have access to vhosts.conf or httpd.conf try this:', 'wphb' ); ?></p>
-							<ol class="wphb-listing wphb-listing-ordered">
-								<li><?php esc_html_e( 'Look for your site in the file and find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></li>
-								<li><?php esc_html_e( 'Reload LiteSpeed.', 'wphb' ); ?></li>
-								<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload LiteSpeed, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
-							</ol>
-							<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
-						</div><!-- end litespeed-instructions -->
-					</div><!-- end content -->
+						<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['litespeed'] ); ?></pre>
+						<p id="troubleshooting-gzip-litespeed"><strong>Troubleshooting</strong></p>
+						<p><?php esc_html_e( 'If .htaccess does not work, and you have access to vhosts.conf or httpd.conf try this:', 'wphb' ); ?></p>
+						<ol class="wphb-listing wphb-listing-ordered">
+							<li><?php esc_html_e( 'Look for your site in the file and find the line that starts with <Directory> - add the code above into that section and save the file.', 'wphb' ); ?></li>
+							<li><?php esc_html_e( 'Reload LiteSpeed.', 'wphb' ); ?></li>
+							<li><?php esc_html_e( 'If you don\'t know where those files are, or you aren\'t able to reload LiteSpeed, you would need to consult with your hosting provider or a system administrator who has access to change the configuration of your server', 'wphb' ); ?></li>
+						</ol>
+						<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
+					</div><!-- end litespeed-instructions -->
 				</div><!-- end tab -->
 			</div><!-- end tabs -->
 		</div><!-- end wphb-server-instructions -->
 
-		<div id="wphb-server-instructions-nginx" class="wphb-server-instructions hidden" data-server="nginx">
+		<div id="wphb-server-instructions-nginx" class="wphb-server-instructions" data-server="nginx" style="display: none;">
 			<p><?php esc_html_e( 'For NGINX servers:', 'wphb' ); ?></p>
 
 			<ol class="wphb-listing wphb-listing-ordered">
@@ -187,16 +174,10 @@
 			<p><?php esc_html_e( 'If you do not have access to your NGINX config files you will need to contact your hosting provider to make these changes.', 'wphb' ); ?></p>
 			<p><?php WP_Hummingbird_Utils::_still_having_trouble_link(); ?></p>
 
-			<div id="wphb-code-snippet">
-				<div id="wphb-code-snippet-nginx" class="wphb-code-snippet">
-					<div class="wphb-block-content">
-						<pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
-					</div>
-				</div>
-			</div>
+            <pre class="sui-code-snippet"><?php echo htmlentities2( $snippets['nginx'] ); ?></pre>
 		</div>
 
-		<div id="wphb-server-instructions-iis" class="wphb-server-instructions hidden" data-server="iis">
+		<div id="wphb-server-instructions-iis" class="wphb-server-instructions" data-server="iis" style="display: none;">
 			<p>
 				<?php
 				printf(
@@ -205,7 +186,6 @@
 				?>
 			</p>
 		</div>
-
 	<?php elseif ( $htaccess_written && $full_enabled ) : ?>
 		<div class="sui-notice sui-notice-info">
 			<p><?php esc_html_e( 'Automatic .htaccess rules have been applied.', 'wphb' ); ?></p>

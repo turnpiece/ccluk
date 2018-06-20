@@ -120,7 +120,7 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 			}
 		} // End foreach().
 
-		// If tests fail for some reason, we fallback to an API check.
+		// Will only trigger on 're-check status' button click and there are some false values.
 		if ( $try_api && $check_api ) {
 			// Get the API results.
 			$api = WP_Hummingbird_Utils::get_api();

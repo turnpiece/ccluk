@@ -11,13 +11,21 @@ import Fetcher from './utils/fetcher';
             this.$infoBox = $( '#cloudflare-info' );
             this.$spinner = $( '.cloudflare-spinner' );
             this.$deactivateButton = $('.cloudflare-deactivate.button');
+            this.$body = $('body');
 
             this.renderStep( this.currentStep );
 
-            $('body').on( 'click', 'input[type="submit"].cloudflare-clear-cache', function(e ) {
+            this.$body.on( 'click', 'input[type="submit"].cloudflare-clear-cache', function(e ) {
                 e.preventDefault();
                 this.purgeCache.apply( $(e.target), [this] );
             }.bind(this));
+
+            this.$body.on( 'click', '#cf-recheck-zones', function(e ) {
+                e.preventDefault();
+                $('#cf-recheck-zones').addClass('sui-button-onload');
+                this.updateZones.apply( $(e.target), [this] );
+            }.bind(this));
+
 
         },
 
@@ -65,13 +73,13 @@ import Fetcher from './utils/fetcher';
 
             $howToInstructions.hide();
 
-            $('#cloudflare-how-to-title > a').click( function( e ) {
+            $('a.cloudflare-how-to-title').click( function( e ) {
                 e.preventDefault();
                 $howToInstructions.toggle();
             });
 
             this.$stepsContainer.find( 'select' ).each( function() {
-				suiSelect( this );
+				SUI.suiSelect( this );
             });
 
             if ( 'final' === this.currentStep ) {
@@ -86,10 +94,30 @@ import Fetcher from './utils/fetcher';
             this.$infoBox.removeClass();
         },
 
-        showInfoBox: function( message ) {
-            this.$infoBox.addClass( 'wphb-notice' );
-            this.$infoBox.addClass( 'wphb-notice-error' );
-            this.$infoBox.html( message + '' );
+        updateZones: function( self ) {
+            self.hideInfoBox();
+            Fetcher.cloudflare.recheckZones()
+                .then( ( response ) => {
+                    self.data.zones = response.zones;
+                    self.renderStep(self.currentStep);
+                    $('#cf-recheck-zones').removeClass('sui-button-onload');
+
+                }).catch( ( error ) => {
+                    self.showInfoBox( error, 'warning' );
+                    $('#cf-recheck-zones').removeClass('sui-button-onload');
+            });
+        },
+
+        showInfoBox: function( message, notice_class = 'error' ) {
+            this.$infoBox.addClass( 'sui-notice' );
+            this.$infoBox.addClass( 'sui-notice-' + notice_class );
+            this.$infoBox.addClass( 'sui-notice-sm' );
+            this.$infoBox.html( '<p>' + message + ' </p>' );
+        },
+
+        hideInfoBox: function() {
+            this.$infoBox.removeClass();
+            this.$infoBox.html( '' );
         },
 
         showSpinner: function() {

@@ -20,35 +20,28 @@
 </div>
 <div class="sui-summary-segment">
 	<div class="sui-summary-details">
-		<?php
-		if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
-			if ( 85 <= $last_report->data->score ) :
+		<?php if ( $last_report && ! is_wp_error( $last_report ) && ! $report_dismissed ) :
+			if ( 85 <= $last_report->data->score ) {
 				$error_class = 'success';
-				$icon_class = 'check-tick';
-			elseif ( 65 <= $last_report->data->score ) :
+				$icon_class  = 'check-tick';
+			} elseif ( 65 <= $last_report->data->score ) {
 				$error_class = 'warning';
-				$icon_class = 'warning-alert';
-			else :
+				$icon_class  = 'warning-alert';
+			} else {
 				$error_class = 'error';
-				$icon_class = 'warning-alert';
-			endif;
-			?>
+				$icon_class  = 'warning-alert';
+			} ?>
 			<span class="sui-summary-large"><?php echo esc_html( $last_report->data->score ); ?></span>
 			<i class="sui-icon-<?php echo esc_attr( $icon_class ); ?> sui-lg sui-<?php echo esc_attr( $error_class ); ?>"></i>
 			<span class='sui-summary-percent'>/100</span>
-			<?php
-		elseif ( $is_doing_report ) :
-			?>
-			<span class="wphb-scan-progress-text"></span>
-			<?php
-		elseif ( $report_dismissed ) :
+		<?php elseif ( $is_doing_report ) : ?>
+			<div class="sui-progress-text sui-icon-loader sui-loading">
+		<?php elseif ( $report_dismissed ) :
 			?>
 			<span class="sui-summary-large"><?php echo esc_html( $last_report->data->score ); ?></span>
 			<i class="sui-icon-info sui-lg"></i>
 			<span class='sui-summary-percent'>/100</span>
-			<?php
-		else :
-			?>
+		<?php else : ?>
 			&mdash;
 		<?php endif; ?>
 		<span class="sui-summary-sub"><?php esc_html_e( 'Current performance score', 'wphb' ); ?></span>
@@ -102,7 +95,7 @@
 			<span class="sui-list-label"><?php esc_html_e( 'Last Down', 'wphb' ); ?></span>
 			<span class="sui-list-detail">
 					<?php if ( ! WP_Hummingbird_Utils::is_member() ) : ?>
-						<a class="sui-button button-content-cta button-ghost"  href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_summary_pro_tag' ); ?>" target="_blank">
+						<a class="sui-button sui-button-ghost sui-button-green"  href="<?php echo WP_Hummingbird_Utils::get_link( 'plugin', 'hummingbird_dash_summary_pro_tag' ); ?>" target="_blank">
 							<?php esc_html_e( 'Pro Feature', 'wphb' ); ?>
 						</a>
 					<?php elseif ( is_wp_error( $uptime_report ) || ( ! $uptime_active ) ) : ?>
