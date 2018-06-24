@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-08 21:03:54+0000\n"
+"PO-Revision-Date: 2018-06-21 02:40:58+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -18,6 +18,10 @@ msgid ""
 msgstr ""
 "Privacidade e cookies: Esse site utiliza cookies. Ao continuar a usar este site, você concorda com seu uso. \n"
 "Para saber mais, inclusive sobre como controlar os cookies, consulte aqui:"
+
+#: modules/widgets/eu-cookie-law.php:120
+msgid "Cookie Policy"
+msgstr "Política de cookies"
 
 #: modules/widgets/eu-cookie-law.php:74
 msgid "Display a banner for EU Cookie Law and GDPR compliance."
@@ -41,6 +45,10 @@ msgctxt "action"
 msgid "Capture consent & hide the banner"
 msgstr "Capture o consentimento e esconda o banner"
 
+#: modules/widgets/eu-cookie-law/form.php:95
+msgid "Link text"
+msgstr "Texto do link"
+
 #: modules/widgets/eu-cookie-law/form.php:83
 msgid "For GDPR compliance, please make sure your policy contains <a href=\"%s\" target=\"_blank\">privacy information relating to Jetpack Ads</a>."
 msgstr "Para conformidade com o GDPR, garanta que sua política contenha <a href=\"%s\" target=\"_blank\">informações de privacidade relativas aos anúncios do Jetpack</a>."
@@ -48,6 +56,15 @@ msgstr "Para conformidade com o GDPR, garanta que sua política contenha <a href
 #: modules/widgets/eu-cookie-law/form.php:75
 msgid "The default policy URL only covers cookies set by Jetpack. If you’re running other plugins, custom cookies, or third-party tracking technologies, you should create and link to your own cookie statement."
 msgstr "A URL da política padrão somente cobre cookies definidos pelo Jetpack. Se você está executando outros plugins, cookies personalizados ou tecnologias de rastreamento de terceiros, você deve criar e vincular a sua própria declaração de cookies."
+
+#: modules/widgets/eu-cookie-law/form.php:74
+#: modules/widgets/eu-cookie-law/form.php:81
+msgid "Caution:"
+msgstr "Cuidado:"
+
+#: modules/widgets/eu-cookie-law/form.php:62
+msgid "Custom URL:"
+msgstr "URL personalizado:"
 
 #: modules/widgets/eu-cookie-law/form.php:40
 msgid "Privacy Policy Link"
@@ -745,15 +762,37 @@ msgstr "Mais antigos primeiro"
 msgid "Newest first"
 msgstr "Mais recentes primeiro"
 
+#: modules/widgets/search.php:167
+msgid "Relevance"
+msgstr "Relevância"
+
+#: modules/widgets/search.php:167
+msgid "Relevance (recommended)"
+msgstr "Relevância (recomendado)"
+
+#: modules/search/class.jetpack-search-template-tags.php:109
+msgid "< Clear Filters"
+msgstr "< Limpar filtros"
+
 #: modules/search/class.jetpack-search-helpers.php:223
 msgctxt "label for filtering posts"
 msgid "Post Types"
 msgstr "Tipos de publicação"
 
+#: modules/search/class.jetpack-search-helpers.php:202
+msgctxt "label for filtering posts"
+msgid "Month"
+msgstr "Mês"
+
 #: modules/search/class.jetpack-search-helpers.php:201
 msgctxt "label for filtering posts"
 msgid "Month Updated"
 msgstr "Mês de atualização"
+
+#: modules/search/class.jetpack-search-helpers.php:196
+msgctxt "label for filtering posts"
+msgid "Year"
+msgstr "Ano"
 
 #: modules/search/class.jetpack-search-helpers.php:195
 msgctxt "label for filtering posts"
@@ -1172,6 +1211,18 @@ msgstr "ocorrência de cache"
 msgid "Jetpack Search"
 msgstr "Pesquisa do Jetpack"
 
+#: modules/widgets/search.php:765 modules/widgets/social-icons.php:323
+msgid "Remove"
+msgstr "Excluir"
+
+#: modules/widgets/search.php:723
+msgid "Choose an interval:"
+msgstr "Escolha um intervalo:"
+
+#: modules/widgets/search.php:715
+msgid "Modified GMT"
+msgstr "GMT modificada"
+
 #: modules/widgets/search.php:712
 msgid "Modified"
 msgstr "Modificado"
@@ -1200,6 +1251,10 @@ msgstr "Taxonomia"
 msgid "Filter Type:"
 msgstr "Tipo de filtro:"
 
+#: modules/widgets/search.php:523
+msgid "Show search box"
+msgstr "Exibir campo de busca"
+
 #: modules/protect/blocked-login-page.php:600
 msgid "%s Back"
 msgstr "%s Voltar"
@@ -1212,9 +1267,27 @@ msgstr "Enviar e-mail"
 msgid "Your email"
 msgstr "Seu e-mail"
 
+#: _inc/jetpack-strings.php:491
+msgid "Jetpack version %(version)s"
+msgstr "Versão do Jetpack %(version)s"
+
 #: _inc/jetpack-strings.php:157
 msgid "Real-time backup of all your site data with unlimited space, one-click restores, automated security scanning, and priority support"
 msgstr "Backup em tempo real de todos os dados do seu site com espaço ilimitado, restaurações com apenas um clique, verificação de segurança automatizada e suporte prioritário"
+
+#: _inc/jetpack-strings.php:179
+msgid "Activate Search"
+msgstr "Ativar busca"
+
+#: _inc/jetpack-strings.php:154
+msgid "Please correct the issue below and try again."
+msgid_plural "Please correct the issues listed below and try again."
+msgstr[0] "Corrija o problema abaixo e tente de novo. "
+msgstr[1] "Corrija os problemas abaixo e tente de novo. "
+
+#: _inc/jetpack-strings.php:67
+msgid "Your site is being backed up in real-time."
+msgstr "O backup do seu site está sendo feito em tempo real."
 
 #: modules/protect/blocked-login-page.php:272
 msgid "Jetpack has locked your site's login page."
@@ -1282,6 +1355,10 @@ msgstr "O seu plano Jetpack Premium está melhorando!"
 #: _inc/jetpack-strings.php:691
 msgid "Your Jetpack Personal plan is powering up!"
 msgstr "O seu plano Jetpack Personal está melhorando!"
+
+#: _inc/jetpack-strings.php:490
+msgid "Jetpack version"
+msgstr "Versão do Jetpack"
 
 #: _inc/jetpack-strings.php:48
 msgid "{{a}}View your site's activity{{/a}} in a single feed."
@@ -8294,7 +8371,7 @@ msgstr "Seu endereço de e-mail"
 
 #: modules/sharedaddy/sharing-sources.php:510
 msgid "Your Name"
-msgstr "Seu Nome"
+msgstr "Seu nome"
 
 #: modules/sharedaddy/sharing-sources.php:502
 msgid "Send to Email Address"
@@ -9727,7 +9804,7 @@ msgstr "Depoimento"
 
 #: modules/custom-post-types/testimonial.php:298
 msgid "Customer Testimonials"
-msgstr "Testimônios de usuários"
+msgstr "Depoimentos de usuários"
 
 #. translators: %1$s is replaced with an input field for numbers
 #: modules/custom-post-types/testimonial.php:168

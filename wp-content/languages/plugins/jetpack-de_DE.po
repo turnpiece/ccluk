@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Jetpack by WordPress.com - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-04 08:54:09+0000\n"
+"PO-Revision-Date: 2018-06-19 12:18:25+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -650,10 +650,6 @@ msgstr "Ersetzt die Standardsuche durch eine von Elasticsearch unterstützte Suc
 msgid "Automatic defense against hacks, malware, spam, data loss, and downtime with automated backups, unlimited storage, and malware scanning."
 msgstr "Automatischer Schutz vor Hackern, Malware, Spam, Datenverlust und Ausfallzeiten dank automatischer Backups, unbegrenztem Speicherplatz und Malwareüberprüfung."
 
-#: _inc/jetpack-strings.php:209
-msgid "Always-on Security"
-msgstr "Ununterbrochene Sicherheit"
-
 #: _inc/jetpack-strings.php:208
 msgid "Reach more people and earn money with automated social media scheduling, better search results, SEO preview tools, PayPal payments, and an ad program."
 msgstr "Erreiche mehr Personen und verdiene Geld mit automatisierter Social-Media-Planung, verbesserten Suchergebnissen, SEO-Vorschauwerkzeugen, PayPal-Zahlungen sowie einem Anzeigenprogramm."
@@ -665,6 +661,10 @@ msgstr "Sichere dir unbegrenzten Zugriff auf Hunderte professionelle Themes, ein
 #: _inc/jetpack-strings.php:203
 msgid "A superior search experience powered by Elasticsearch providing your users with faster and more relevant search results. Previously only available to WordPress.com VIP customers and trusted by industry-leading brands."
 msgstr "Durch ein überragendes Sucherlebnis, bereitgestellt von Elasticsearch, profitieren deine Benutzer von schnelleren und relevanteren Suchergebnissen. Genießt das Vertrauen von branchenführenden Marken; zuvor ausschließlich für WordPress.com-VIP-Kunden verfügbar."
+
+#: _inc/jetpack-strings.php:209
+msgid "Always-on Security"
+msgstr "Dauerhafte Sicherheit"
 
 #: _inc/jetpack-strings.php:202
 msgid "Unlimited access to hundreds of premium WordPress themes with dedicated support directly from the theme authors."

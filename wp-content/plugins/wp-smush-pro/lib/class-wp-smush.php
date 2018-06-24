@@ -1448,7 +1448,7 @@ if ( ! class_exists( 'WpSmush' ) ) {
 		 */
 		function skip_reason( $msg_id ) {
 			$count           = count( get_intermediate_image_sizes() );
-			$smush_orgnl_txt = sprintf( esc_html__( "When you upload an image to WordPress it automatically creates %s thumbnail sizes that are commonly used in your pages. WordPress also stores the original full-size image, but because these are not usually embedded on your site we don’t Smush them. Pro users can override this.", 'wp_smushit' ), $count );
+			$smush_orgnl_txt = sprintf( esc_html__( "When you upload an image to WordPress it automatically creates %s thumbnail sizes that are commonly used in your pages. WordPress also stores the original full-size image, but because these are not usually embedded on your site we don’t Smush them. Pro users can override this.", 'wp-smushit' ), $count );
 			$skip_msg        = array(
 				'large_size' => $smush_orgnl_txt,
 				'size_limit' => esc_html__( "Image couldn't be smushed as it exceeded the 1Mb size limit, Pro users can smush images with size up to 32Mb.", "wp-smushit" )

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-23 08:59:20+0000\n"
+"PO-Revision-Date: 2018-06-18 13:54:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -155,7 +155,7 @@ msgstr "[%1$s] Bevestig actie: %2$s"
 
 #: wp-includes/user.php:3214
 msgid "Erase Personal Data"
-msgstr "Persoonlijke gegevens wissen"
+msgstr "Verwijder persoonlijke gegevens"
 
 #: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
@@ -339,15 +339,15 @@ msgstr "Er is een fout opgetreden tijdens het zoeken naar en verwijderen van per
 
 #: wp-includes/script-loader.php:667
 msgid "Personal data was found for this user but some of the personal data found was not erased."
-msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar sommige gevonden gegevens zijn niet gewist."
+msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar sommige gevonden gegevens zijn niet verwijderd."
 
 #: wp-includes/script-loader.php:666
 msgid "Personal data was found for this user but was not erased."
-msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar zijn niet gewist."
+msgstr "Persoonlijke gegevens zijn gevonden voor deze gebruiker, maar zijn niet verwijderd."
 
 #: wp-includes/script-loader.php:665
 msgid "All of the personal data found for this user was erased."
-msgstr "Alle gevonden persoonlijke gegevens voor deze gebruiker zijn gewist."
+msgstr "Alle gevonden persoonlijke gegevens voor deze gebruiker zijn verwijderd."
 
 #: wp-includes/script-loader.php:664
 msgid "No personal data was found for this user."
@@ -1747,7 +1747,7 @@ msgstr[1] "Videowidgets (%d)"
 #. translators: %s: URL to media library
 #: wp-includes/widgets/class-wp-widget-media-video.php:37
 msgid "We can&#8217;t find that video. Check your <a href=\"%s\">media library</a> and make sure it wasn&#8217;t deleted."
-msgstr "We kunnen deze video niet vinden. Controleer je <a href=\"%s\">mediabibliotheek</a> en zorg ervoor dat het bestand aanwezig is."
+msgstr "We kunnen deze video niet vinden. Controleer je <a href=\"%s\">mediabibliotheek</a> en ga na of het bestand niet verwijderd is."
 
 #: wp-includes/widgets/class-wp-widget-media-video.php:34
 msgctxt "label for button in the video widget; should preferably not be longer than ~13 characters long"
@@ -2239,7 +2239,7 @@ msgstr "Login-naam voor de gebruiker."
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:747
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:780
 msgid "The user cannot be deleted."
-msgstr "Niet mogelijk deze gebruiker te verwijderen."
+msgstr "De gebruiker kan niet worden verwijderd."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:502
 msgid "Error creating new user."
@@ -2907,7 +2907,7 @@ msgstr "Niet mogelijk om metawaarde bij te werken in de database."
 
 #: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:184
 msgid "Could not delete meta value from database."
-msgstr "Niet mogelijk metawaarde te verwijderen uit de database."
+msgstr "Kon metawaarde niet verwijderen uit de database."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1374
 msgid "Limit result set to users matching at least one specific role provided. Accepts csv list or single role."
@@ -11566,7 +11566,7 @@ msgstr "Voer de URL van de RSS-feed hier in:"
 
 #: wp-includes/widgets.php:1430
 msgid "Untitled"
-msgstr "Zonder titel"
+msgstr "Naamloos"
 
 #. translators: comments widget: 1: comment author, 2: post link
 #: wp-includes/widgets/class-wp-widget-recent-comments.php:115

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-18 14:35:39+0000\n"
+"PO-Revision-Date: 2018-06-19 12:12:30+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -25,6 +25,10 @@ msgstr "Europe/Oslo"
 msgctxt "start of week"
 msgid "1"
 msgstr "1"
+
+#: wp-admin/includes/file.php:1893
+msgid "Unable to create export folder."
+msgstr "Kunne ikke opprette eksportmappe."
 
 #. translators: %s: Privacy Policy Guide URL
 #: wp-admin/includes/misc.php:1356

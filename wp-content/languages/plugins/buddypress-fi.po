@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-01 16:01:50+0000\n"
+"PO-Revision-Date: 2018-06-14 16:37:22+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,395 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: fi\n"
 "Project-Id-Version: Plugins - BuddyPress - Stable (latest release)\n"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:153
+msgid "Sending group invitations. Please wait."
+msgstr "Lähetetään ryhmäkutsuja. Odota ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:154
+msgid "Cancel invitation %s"
+msgstr "Peruuta kutsu %s"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:301
+#: bp-templates/bp-nouveau/includes/groups/functions.php:307
+#: bp-templates/bp-nouveau/includes/groups/functions.php:327
+#: bp-templates/bp-nouveau/includes/groups/functions.php:338
+msgctxt "Group invitations menu title"
+msgid "Invite"
+msgstr "Kutsu"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:414
+#: bp-templates/bp-nouveau/includes/groups/functions.php:442
+msgctxt "Group invitations main menu title"
+msgid "Group Invites"
+msgstr "Ryhmäkutsut"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:820
+msgid "Use tab styling for primary navigation."
+msgstr "Käytä välilehtimuotoilua ensisijaisen navigoinnin yhteydessä."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:826
+msgid "Use tab styling for secondary navigation."
+msgstr "Käytä välilehtimuotoilua toissijaisen navigoinnin yhteydessä."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:845
+msgctxt "Customizer control label"
+msgid "Groups"
+msgstr "Ryhmät"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1199
+msgid "Group Administrator promotions"
+msgstr "Ryhmän ylläpitäjän ylennys"
+
+#: bp-templates/bp-nouveau/includes/members/template-tags.php:289
+msgctxt "button"
+msgid "Accept"
+msgstr "Hyväksy"
+
+#: bp-templates/bp-nouveau/includes/members/template-tags.php:305
+msgctxt "button"
+msgid "Reject"
+msgstr "Hylkää"
+
+#: bp-templates/bp-nouveau/includes/notifications/functions.php:210
+msgctxt "link"
+msgid "Mark Unread"
+msgstr "Merkitse lukemattomaksi"
+
+#: bp-templates/bp-nouveau/includes/notifications/functions.php:227
+msgctxt "link"
+msgid "Mark Read"
+msgstr "Merkitse luetuksi"
+
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:110
+msgctxt "button"
+msgid "Mark read"
+msgstr "Merkitse luetuksi"
+
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:112
+msgctxt "button"
+msgid "Mark unread"
+msgstr "Merkitse lukemattomaksi "
+
+#. translators: Do not translate placeholders. 2 = form field name, 3 =
+#. "(required)".
+#: bp-templates/bp-nouveau/includes/template-tags.php:2253
+msgid "<label for=\"%1$s\">%2$s %3$s</label>"
+msgstr "<label for=\"%1$s\">%2$s %3$s</label>"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:77
+msgid "Your profile photo will be used on your profile and throughout the site. To change your profile photo, create an account with <a href=\"https://gravatar.com\">Gravatar</a> using the same email address as you used to register with this site."
+msgstr "Profiilikuvaasi käytetään profiilissasi läpi koko sivuston. Jos haluat muuttaa profiilikuvaasi, luo tili <a href=\"https://gravatar.com\">Gravatar:iin</a> käyttäen samaa sähköpostiosoitetta kuin käytit tällä sivustolla rekisteröitymiseen."
+
+#. translators: %s = profile field group name
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/edit.php:34
+msgid "Editing \"%s\" Profile Group"
+msgstr "Muokataan \"%s\" profiilin ryhmää"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/settings/capabilities.php:19
+msgid "This member is a spammer."
+msgstr "Tämä jäsen on roskapostittaja."
+
+#: bp-templates/bp-nouveau/includes/activity/ajax.php:455
+msgid "No activites were found."
+msgstr "Toimintaa ei löytynyt."
+
+#: bp-templates/bp-nouveau/includes/activity/ajax.php:582
+msgid "There was a problem marking this activity as spam. Please try again."
+msgstr "Ilmeni ongelma merkittäessä tätä toimintaa roskapostiksi. Yritä uudelleen ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:476
+msgid "There are no more pending invitations for the group."
+msgstr "Ryhmälle ei ole enää odottavia kutsuja."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:456
+msgid "The member is already a member of the group."
+msgstr "Jäsen on jo ryhmän jäsen."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:447
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:467
+msgid "Group invitation could not be removed."
+msgstr "Ryhmäkutsua ei voitu poistaa."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:430
+msgid "Invitations sent."
+msgstr "Kutsut lähetetty."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:299
+msgid "No pending group invitations found."
+msgstr "Ei odotettavia ryhmäkutsuja."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1331
+msgctxt "button"
+msgid "Post"
+msgstr "Julkaisu"
+
+#: bp-templates/bp-nouveau/includes/functions.php:923
+msgid "Member registration is currently not allowed."
+msgstr "Jäsenrekisteröintiä ei tällä hetkellä sallita."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:52
+msgid "Member navigation"
+msgstr "Jäsenen navigaatio"
+
+#: bp-templates/bp-nouveau/includes/customizer.php:46
+msgid "Member front page"
+msgstr "Jäsenen etusivu"
+
+#: bp-templates/bp-nouveau/includes/classes.php:195
+msgid "(BuddyPress) Primary navigation"
+msgstr "(BuddyPress) ensisijainen navigaatio"
+
+#: bp-templates/bp-nouveau/includes/blogs/functions.php:168
+msgid "Sites loop:"
+msgstr "Sivustojen luuppi:"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:831
+msgctxt "link"
+msgid "Spam"
+msgstr "Roskaposti"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:804
+#: bp-templates/bp-nouveau/includes/notifications/functions.php:244
+msgctxt "link"
+msgid "Delete"
+msgstr "Poista"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:790
+msgctxt "link"
+msgid "Reply"
+msgstr "Vastaa"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:502
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:507
+msgctxt "button"
+msgid "Spam"
+msgstr "Roskaposti"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:456
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:457
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:114
+msgctxt "button"
+msgid "Delete"
+msgstr "Poista"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:347
+msgctxt "link"
+msgid "Comment"
+msgstr "Kommentti"
+
+#: bp-templates/bp-nouveau/includes/activity/template-tags.php:342
+msgctxt "button"
+msgid "Comment"
+msgstr "Kommentti"
+
+#: bp-templates/bp-nouveau/includes/activity/ajax.php:631
+msgid "This activity has been marked as spam and is no longer visible."
+msgstr "Tämä toiminto on merkitty roskapostiksi eikä ole enää nähtävillä."
+
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:25
+msgctxt "button"
+msgid "Change"
+msgstr "Muuta"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:86
+msgid "Cancel invitation"
+msgstr "Peruuta kutsu"
+
+#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:45
+#: bp-templates/bp-nouveau/buddypress/groups/single/request-membership.php:30
+msgctxt "button"
+msgid "Send Request"
+msgstr "Lähetä pyyntö"
+
+#: bp-templates/bp-nouveau/buddypress/activity/comment-form.php:19
+msgctxt "heading"
+msgid "Comment"
+msgstr "Kommentti"
+
+#: bp-templates/bp-nouveau/buddypress/activity/activity-loop.php:28
+msgctxt "button"
+msgid "Load More"
+msgstr "Lataa lisää"
+
+#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:18
+msgid "Group membership request form"
+msgstr "Ryhmän jäsenyyden pyyntölomake"
+
+#. translators:  %s =group name
+#. translators: %s = group name
+#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:25
+#: bp-templates/bp-nouveau/buddypress/groups/single/request-membership.php:17
+msgid "You are requesting to become a member of the group \"%s\"."
+msgstr "Olet pyytänyt liittyä jäseneksi ryhmään \"%s\"."
+
+#: bp-templates/bp-nouveau/buddypress/activity/comment-form.php:29
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:120
+msgctxt "button"
+msgid "Cancel"
+msgstr "Peruuta"
+
+#: bp-templates/bp-nouveau/buddypress/activity/post-form.php:17
+msgctxt "heading"
+msgid "Post Update"
+msgstr "Lähetä päivitys"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/camera.php:22
+msgctxt "button"
+msgid "Capture"
+msgstr "Kaappaa"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/camera.php:23
+msgctxt "button"
+msgid "Save"
+msgstr "Tallenna"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/crop.php:21
+msgctxt "button"
+msgid "Crop Image"
+msgstr "Rajaa kuva"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/index.php:35
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:36
+msgid "If you'd like to delete your current profile photo, use the delete profile photo button."
+msgstr "Jos haluat poistaa nykyisen profiilikuvasi, käytä poista profiilikuva painiketta."
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:24
+msgid "If you'd like to delete your current cover image, use the delete Cover Image button."
+msgstr "Jos haluat poistaa nykyisen kansikuvasi, käytä poista kansikuva painiketta."
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:27
+msgctxt "button"
+msgid "Delete My Cover Image"
+msgstr "Poista kansikuvani"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:34
+msgctxt "button"
+msgid "Delete Group Cover Image"
+msgstr "Poista ryhmän kansikuva"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/activity/form.php:42
+msgctxt "button"
+msgid "Remove item"
+msgstr "Poista kohde"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/uploader.php:25
+msgid "Select your file"
+msgstr "Valitse tiedostosi"
+
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/uploader.php:27
+msgctxt "button"
+msgid "Select your file"
+msgstr "Valitse tiedostosi"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/item-nav.php:10
+msgid "Member menu"
+msgstr "Jäsenen valikko"
+
+#: bp-templates/bp-nouveau/buddypress/members/register.php:91
+msgid "Yes, i'd like to create a new site"
+msgstr "Kyllä, haluan luoda uuden sivuston"
+
+#: bp-templates/bp-nouveau/buddypress/members/register.php:89
+msgid "Site Details"
+msgstr "Sivuston tiedot"
+
+#: bp-templates/bp-nouveau/buddypress/members/activate.php:45
+msgctxt "button"
+msgid "Activate"
+msgstr "Ota käyttöön"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/parts/header-item-actions.php:16
+msgid "Group Administrators"
+msgstr "Ryhmän pääkäyttäjät"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/parts/header-item-actions.php:13
+msgid "Group Leadership"
+msgstr "Ryhmän johtaja"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:54
+msgid "Only people who are invited can join the group."
+msgstr "Vain kutsutut henkilöt voivat liittyä ryhmään."
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:44
+msgid "Only people who request membership and are accepted can join the group."
+msgstr "Vain kutsun pyytäneet henkilöt voivat liittyä ryhmään."
+
+#: bp-templates/bp-nouveau/buddypress/common/notices/template-notices.php:15
+#: bp-templates/bp-nouveau/buddypress/members/single/default-front.php:16
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:36
+msgctxt "button"
+msgid "Close"
+msgstr "Sulje"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:349
+msgctxt "button"
+msgid "Send Reply"
+msgstr "Lähetä vastaus"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:126
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:128
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:121
+msgctxt "button"
+msgid "Apply"
+msgstr "Käytä"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:48
+msgctxt "form reset button"
+msgid "Reset"
+msgstr "Palauta perustilaan"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:150
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:151
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:88
+msgctxt "link"
+msgid "Next page"
+msgstr "Seuraava sivu"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:143
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:145
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:81
+msgctxt "link"
+msgid "Previous page"
+msgstr "Edellinen sivu"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:134
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:103
+#: bp-templates/bp-nouveau/buddypress/common/search/search-form.php:19
+#: bp-templates/bp-nouveau/includes/messages/functions.php:149
+msgctxt "button"
+msgid "Search"
+msgstr "Etsi"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:130
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:100
+msgctxt "search placeholder text"
+msgid "Search"
+msgstr "Etsi"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:129
+msgctxt "heading"
+msgid "Search Members"
+msgstr "Etsi jäseniä"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:121
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:47
+msgctxt "button"
+msgid "Send"
+msgstr "Lähetä"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:90
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:99
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:101
+msgctxt "button"
+msgid "Cancel invitation"
+msgstr "Peruuta kutsu"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:86
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:92
+msgctxt "button"
+msgid "Invite"
+msgstr "Kutsu"
 
 #: class-buddypress.php:748
 msgid "BuddyPress Nouveau"
@@ -35,24 +424,7 @@ msgstr "Vuosi"
 msgid "Day"
 msgstr "Päivä"
 
-#: bp-templates/bp-nouveau/includes/template-tags.php:2249
-msgctxt "signup required field"
-msgid "(required)"
-msgstr "(vaadittu)"
-
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:86
-msgid "Older First"
-msgstr "Vanhin ensiksi"
-
-#: bp-templates/bp-nouveau/includes/notifications/functions.php:219
-msgid "Mark Read"
-msgstr "Merkitse luetuksi"
-
-#: bp-templates/bp-nouveau/includes/notifications/functions.php:207
-msgid "Mark Unread"
-msgstr "Merkitse lukemattomaksi"
-
-#: bp-templates/bp-nouveau/includes/messages/functions.php:442
+#: bp-templates/bp-nouveau/includes/messages/functions.php:436
 msgid "New private messages"
 msgstr "Uudet yksityisviestit"
 
@@ -64,16 +436,16 @@ msgstr "Lisää sisältöä viestiisi."
 msgid "Please add a subject to your message."
 msgstr "Lisää aihe viestiisi."
 
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:671
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:746
 msgid "Sitewide notice dismissed"
 msgstr "Sivustonlaajuinen ilmoitus hylättiin"
 
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:637
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:712
 msgid "There was a problem dismissing the notice. Please try again."
 msgstr "Ilmeni ongelma ilmoituksen hylkäämisessä. Yritä uudelleen."
 
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:602
-msgid "Message(s) marked as read."
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:677
+msgid "Messages marked as read."
 msgstr "Viesti(t) merkitty luetuksi."
 
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:119
@@ -85,11 +457,11 @@ msgstr "Kuukausi"
 msgid "Please add at least one recipient."
 msgstr "Lisää vähintään yksi vastaanottaja."
 
-#: cli/components/activity.php:968
+#: cli/components/activity.php:970
 msgid "%s updated their profile"
 msgstr "%s päivittivät profiilinsa"
 
-#: bp-templates/bp-nouveau/includes/messages/functions.php:263
+#: bp-templates/bp-nouveau/includes/messages/functions.php:257
 msgid "New sitewide notice"
 msgstr "Uusi sivustonlaajuinen ilmoitus"
 
@@ -110,43 +482,31 @@ msgid "Click on the message title to preview it in the Active conversation box b
 msgstr "Napsauta viestin otsikkoa saadaksesi esikatselutilan siitä alla olevaan aktiivisen keskustelun ikkunaan."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:108
-msgid "Unstarring message(s). Please wait."
+msgid "Unstarring messages. Please wait."
 msgstr "Poistetaan viesti(e)n merkintä. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:107
-msgid "Starring message(s). Please wait."
+msgid "Starring messages. Please wait."
 msgstr "Lisätään viesti(e)n merkintä. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:106
-msgid "Deleting message(s). Please wait."
+msgid "Deleting messages. Please wait."
 msgstr "Poistetaan viesti(t). Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:105
-msgid "Marking message(s) as unread. Please wait."
+msgid "Marking messages as unread. Please wait."
 msgstr "Merkitään viesti(t) lukematon tilaan. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:104
-msgid "Marking message(s) as read. Please wait."
+msgid "Marking messages as read. Please wait."
 msgstr "Merkitään viesti(t) luetuksi tilaan. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:102
 msgid "Loading messages. Please wait."
 msgstr "Ladataan viestejä. Odota ole hyvä."
 
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:600
-msgid "Message(s) marked as unread."
-msgstr "Viesti(t) merkitty lukemattomaksi."
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:582
-msgid "There was a problem marking your message(s) as unread. Please try again."
-msgstr "Ilmeni ongelma merkittäessä viestiä/viestejä lukemattomaksi. Yritä uudestaan."
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:576
-msgid "There was a problem marking your message(s) as read. Please try again."
-msgstr "Ilmeni ongelma merkittäessä viestiä/viestejä luetuksi. Yritä uudelleen."
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:203
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:345
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:223
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:398
 msgid "Unauthorized request."
 msgstr "Luvaton pyyntö."
 
@@ -171,73 +531,29 @@ msgstr "(BuddyPress) vimpaimet"
 msgid "Groups default front page"
 msgstr "Ryhmien oletusetusivu"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1210
-msgid "Group invites"
-msgstr "Ryhmäkutsut"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1195
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1194
 msgid "Rejected Group membership requests"
 msgstr "Hylätyt ryhmän jäsenyyshakemukset"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1190
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1189
 msgid "Accepted Group membership requests"
 msgstr "Hyväksytyt ryhmän jäsenyyshakemukset"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1185
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1184
 msgid "Pending Group membership requests"
 msgstr "Odottavat ryhmän jäsenyyshakemukset"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:502
+#: bp-templates/bp-nouveau/includes/groups/functions.php:501
 msgid "All Groups"
 msgstr "Kaikki ryhmät"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:475
+#: bp-templates/bp-nouveau/includes/groups/functions.php:474
 msgid "You are not allowed to perform this action."
 msgstr "Et voi suorittaa tätä toimintoa."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:473
+#: bp-templates/bp-nouveau/includes/groups/functions.php:472
 msgid "Group invites preferences saved."
 msgstr "Ryhmäkutsujen mieltymykset tallennettu."
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:443
-msgctxt "My Account Settings sub nav"
-msgid "Group Invites"
-msgstr "Ryhmäkutsut"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:415
-msgctxt "My Group Invites settings screen nav"
-msgid "Group Invites"
-msgstr "Ryhmäkutsut"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:302
-#: bp-templates/bp-nouveau/includes/groups/functions.php:308
-msgctxt "Group screen nav"
-msgid "Invite"
-msgstr "Kutsu"
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:461
-msgid "Message(s) deleted"
-msgstr "Viesti(t) poistettu"
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:438
-msgid "There was a problem deleting your message(s). Please try again."
-msgstr "Viestin/viestien poistossa ilmeni ongelma. Yritä uudelleen."
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:555
-msgid "Message(s) successfully unstarred."
-msgstr "Viesti(e)n merkintä poistettu onnistuneesti. "
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:553
-msgid "Message(s) successfully starred."
-msgstr "Viesti(e)n merkintä lisätty onnistuneesti. "
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:479
-msgid "There was a problem unstarring your message(s). Please try agian."
-msgstr "Ilmeni ongelma poistettaessa viesti(e)n merkintää. Yritä uudelleen."
-
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:477
-msgid "There was a problem starring your message(s). Please try again."
-msgstr "Ilmeni ongelma lisättäessä viesti(e)n merkintää. Yritä uudelleen."
 
 #: bp-templates/bp-nouveau/includes/messages/ajax.php:43
 msgid "Your message could not be sent. Please try again."
@@ -247,25 +563,17 @@ msgstr "Viestiäsi ei voitu lähettää. Yritä uudelleen."
 msgid "Edit your bio"
 msgstr "Muokkaa tietojasi"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:853
+#: bp-templates/bp-nouveau/includes/groups/functions.php:852
 msgid "Group > Members"
 msgstr "Ryhmä > Jäsenet"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:690
+#: bp-templates/bp-nouveau/includes/groups/functions.php:689
 msgid "Configure the default front page for groups."
 msgstr "Määritä oletusarvoinen etusivu ryhmille."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:687
+#: bp-templates/bp-nouveau/includes/groups/functions.php:686
 msgid "Group front page"
 msgstr "Ryhmän etusivu"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:154
-msgid "Disinvite %s"
-msgstr "Poista kutsu %s"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:153
-msgid "Sending the invites. Please wait."
-msgstr "Kutsuja lähetetään. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/groups/functions.php:150
 msgid "Loading members. Please wait."
@@ -275,45 +583,85 @@ msgstr "Ladataan jäseniä. Odota ole hyvä."
 msgid "Use the \"Send\" button to send your invite or the \"Cancel\" button to abort."
 msgstr "Käytä ”Lähetä” painiketta kutsun lähetykseen taikka ”Peruuta” painiketta keskeyttääksesi."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:797
+#: bp-templates/bp-nouveau/includes/groups/functions.php:796
 msgid "Enable custom front pages for groups."
 msgstr "Salli ryhmille mukautetut etusivut."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:693
+#: bp-templates/bp-nouveau/includes/groups/functions.php:692
 msgid "Group navigation"
 msgstr "Ryhmänavigaatio"
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:815
+#: bp-templates/bp-nouveau/includes/groups/functions.php:814
 msgid "Display the group navigation vertically."
 msgstr "Näytä ryhmänavigaatio pystysuunnassa."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:833
+#: bp-templates/bp-nouveau/includes/groups/functions.php:832
 msgid "Use tab styling for the group creation process."
 msgstr "Käytä välilehtimuotoilua ryhmän luomisprosessin."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:860
+#: bp-templates/bp-nouveau/includes/groups/functions.php:859
 msgid "Use column navigation for the Groups directory."
 msgstr "Käytä sarake-navigointia ryhmähakemistoon."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1200
-msgid "Group Admin promotions"
-msgstr "Ylennykset ryhmän pääkäyttäjäksi"
-
-#: bp-templates/bp-nouveau/includes/groups/functions.php:1205
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1204
 msgid "Group Moderator promotions"
 msgstr "Ylennykset ryhmän valvojaksi "
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:696
-msgid "Customize the navigation menu for groups. See your changes by navigating to a group in the live-preview window.."
+#: bp-templates/bp-nouveau/includes/groups/functions.php:695
+msgid "Customize the navigation menu for groups. See your changes by navigating to a group in the live-preview window."
 msgstr "Mukauta ryhmien navigointivalikkoa. Katso muutokset siirtymällä ryhmään live-esikatseluikkunaan.."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:866
+#: bp-templates/bp-nouveau/includes/groups/functions.php:865
 msgid "Use tab styling for Groups directory navigation."
 msgstr "Käytä välilehtimuotoilua ryhmien hakemistojen navigaatioon."
 
-#: bp-templates/bp-nouveau/includes/groups/functions.php:840
+#: bp-templates/bp-nouveau/includes/groups/functions.php:839
 msgid "Reorder the primary navigation for a group."
 msgstr "Järjestä ryhmän ensisijainen navigaatio uudelleen."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:657
+msgid "There was a problem marking your messages as unread. Please try again."
+msgstr "Ilmeni ongelma merkittäessä viestejä lukemattomiksi. Yritä uudestaan ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:651
+msgid "There was a problem marking your messages as read. Please try again."
+msgstr "Ilmeni ongelma merkittäessä viestejä luetuiksi. Yritä uudelleen ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:536
+msgid "Messages deleted"
+msgstr "Viestit poistettu"
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:513
+msgid "There was a problem deleting your messages. Please try again."
+msgstr "Viestien poistossa ilmeni ongelma. Yritä uudelleen ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:630
+msgid "Messages successfully unstarred."
+msgstr "Viestien merkintä poistettu onnistuneesti. "
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:628
+msgid "Messages successfully starred."
+msgstr "Viestien merkintä lisätty onnistuneesti. "
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:554
+msgid "There was a problem unstarring your messages. Please try agian."
+msgstr "Ilmeni ongelma poistettaessa viestien merkintää. Yritä uudelleen ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:552
+msgid "There was a problem starring your messages. Please try again."
+msgstr "Ilmeni ongelma lisättäessä viestien merkintää. Yritä uudelleen ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:808
+msgid "Display the group description in the body of the group's front page."
+msgstr "Näytä ryhmän kuvaus ryhmän etusivun sisältöosassa."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:802
+msgid "Enable widget region for group homepages. When enabled, the site admin can add widgets to group pages via the Widgets panel."
+msgstr "Mahdollista vimpaimet option käyttö ryhmien kotisivuilla. Kun tämä asetus on otettu käyttöön, sivuston ylläpitäjä voi lisätä vimpaimia ryhmän sivuille vimpaimet-paneelin kautta."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:152
+msgid "Group invitations cleared. Please use one of the available tabs to select members to invite."
+msgstr "Ryhmäkutsut poistettiin. Valitse kutsuttavat jäsenet jollakin käytettävissä olevista välilehdistä."
 
 #: bp-templates/bp-nouveau/includes/groups/classes.php:280
 msgctxt "My Group screen nav"
@@ -331,97 +679,61 @@ msgid "Home (Activity)"
 msgstr "Kotisivu (toiminta)"
 
 #: bp-templates/bp-nouveau/includes/groups/classes.php:242
-#: bp-templates/bp-nouveau/includes/groups/functions.php:328
-#: bp-templates/bp-nouveau/includes/groups/functions.php:339
 msgctxt "My Group screen nav"
 msgid "Invite"
 msgstr "Kutsu"
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:466
-msgid "No more pending invites for the group."
-msgstr "Ei enää vireillä olevia kutsuja ryhmälle."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:420
-msgid "Invites sent."
-msgstr "Kutsut lähetetty."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:368
-msgid "You are not allowed to send invites for this group."
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:370
+msgid "You are not allowed to send invitations for this group."
 msgstr "Et voi lähettää kutsuja tälle ryhmälle."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:323
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:325
 msgid "You have no friends!"
 msgstr "Sinulla ei ole ystäviä!"
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:297
-msgid "No pending invites found."
-msgstr "Odottavia kutsuja ei löytynyt."
 
 #: bp-templates/bp-nouveau/includes/groups/functions.php:123
 msgid "Pending Invites"
 msgstr "Odottavat kutsut"
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:457
-msgid "Invite could not be removed successfully."
-msgstr "Kutsua ei voitu poistaa onnistuneesti."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:446
-msgid "Too late! The user is already a member of the group."
-msgstr "Liian myöhäistä! Käyttäjä on jo ryhmän jäsen."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:437
-msgid "Invites could not be removed. Please try again."
-msgstr "Kutsuja ei voitu poistaa. Yritä uudelleen."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:407
-msgid "Invites failed for %s user."
-msgid_plural "Invites failed for %s users."
-msgstr[0] "Kutsut epäonnistuivat  %s käyttäjälle."
-msgstr[1] "Kutsut epäonnistuivat  %s käyttäjille."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:352
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:354
 msgid "Invites could not be sent. Please try again."
 msgstr "Kutsuja ei voitu lähettää. Yritä uudelleen."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:317
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:319
 msgid "All your friends are already members of this group, or have already received an invite to join this group, or have requested to join it."
 msgstr "Kaikki ystäväsi ovat jo tämän ryhmän jäseniä tai ovat joko saaneet kutsun liittyä ryhmään tai ovat pyytäneet liittyä siihen."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:311
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:313
 msgid "No members were found. Try another filter."
 msgstr "Yhtään jäsentä ei löytynyt. Kokeile toista suodatinta."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:304
-msgid "You can view all the group's pending invites from this screen."
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:306
+msgid "You can view the group's pending invitations from this screen."
 msgstr "Voit katsoa kaikkia ryhmän odottavia kutsuja tästä ruudusta."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:290
-msgid "Select friends to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" nav item to continue."
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:292
+msgid "Select friends to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" navigation item to continue."
 msgstr "Valitse kutsuttavat ystävät napsauttamalla + näppäintä. Kun olet tehnyt valintasi, käytä \"Lähetä kutsut\" valikkokohtaa jatkaaksesi."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:285
-msgid "Select members to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" nav item to continue."
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:287
+msgid "Select members to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" navigation item to continue."
 msgstr "Valitse kutsuttavat jäsenet napsauttamalla + näppäintä. Kun olet tehnyt valintasi, käytä \"Lähetä kutsut\" valikkokohtaa jatkaaksesi."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:211
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:213
 msgid "Error leaving group."
 msgstr "Virhe ryhmästä poistumisessa."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:190
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:192
 msgid "Error requesting membership."
 msgstr "Virhe jäsenyyttä pyydettäessä."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:169
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:171
 msgid "Error joining this group."
 msgstr "Virhe tähän ryhmään liittymisessä."
 
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:123
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:125
 msgid "Group invite accepted."
 msgstr "Ryhmään liittyminen hyväksytty."
-
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:104
-msgid "Group invite could not be accepted."
-msgstr "Ryhmään liittymistä ei hyväksytty."
 
 #: bp-templates/bp-nouveau/includes/groups/ajax.php:80
 msgid "You are already a member of the group."
@@ -431,30 +743,16 @@ msgstr "Olet jo ryhmän jäsen."
 msgid "You cannot join this group."
 msgstr "Et voi liittyä tähän ryhmään."
 
-#: bp-templates/bp-nouveau/includes/functions.php:1179
-msgctxt "signup field label"
-msgid "Site Title%s"
-msgstr "Sivuston otsikko%s"
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:104
+msgid "Group invitation could not be accepted."
+msgstr "Ryhmään liittymistä ei voitu hyväksyä."
 
-#: bp-templates/bp-nouveau/includes/functions.php:1171
-msgctxt "signup field label"
-msgid "Site URL%s"
-msgstr "Sivuston URL%s"
-
-#: bp-templates/bp-nouveau/includes/functions.php:1161
-msgctxt "signup field label"
-msgid "Confirm Password%s"
-msgstr "Vahvista salasana%s"
-
-#: bp-templates/bp-nouveau/includes/functions.php:1153
-msgctxt "signup field label"
-msgid "Choose a Password%s"
-msgstr "Valitse salasana%s"
-
-#: bp-templates/bp-nouveau/includes/functions.php:1145
-msgctxt "signup field label"
-msgid "Email Address%s"
-msgstr "Sähköpostiosoite%s"
+#. translators: count of users affected
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:411
+msgid "Invitation failed for %s user."
+msgid_plural "Invitation failed for %s users."
+msgstr[0] "Kutsu epäonnistui %s käyttäjälle."
+msgstr[1] "Kutsut epäonnistuivat  %s käyttäjille."
 
 #: bp-templates/bp-nouveau/includes/functions.php:1057
 msgid "Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only."
@@ -476,20 +774,12 @@ msgstr "Ladataan päivityksiä. Odota ole hyvä."
 msgid "Loading notifications. Please wait."
 msgstr "Ladataan ilmoituksia. Odota ole hyvä."
 
-#: bp-templates/bp-nouveau/includes/functions.php:1049
-msgid "Loading the user's groups. Please wait."
-msgstr "Ladataan käyttäjän ryhmiä. Odota ole hyvä."
-
-#: bp-templates/bp-nouveau/includes/functions.php:1045
-msgid "Loading the user's friends. Please wait."
-msgstr "Ladataan käyttäjän ystäviä. Odota ole hyvä."
-
 #: bp-templates/bp-nouveau/includes/functions.php:1041
-msgid "Loading the user's blogs. Please wait."
+msgid "Loading the member's blogs. Please wait."
 msgstr "Ladataan käyttäjän blogeja. Odota ole hyvä."
 
 #: bp-templates/bp-nouveau/includes/functions.php:1037
-msgid "Loading the user's updates. Please wait."
+msgid "Loading the member's updates. Please wait."
 msgstr "Ladataan käyttäjän päivityksiä. Odota ole hyvä. "
 
 #: bp-templates/bp-nouveau/includes/functions.php:1033
@@ -581,24 +871,35 @@ msgid "Pending friendship requests"
 msgstr "Odottavat ystäväkutsut"
 
 #: bp-templates/bp-nouveau/includes/functions.php:319
-msgid "BuddyPress User's Home"
+msgid "BuddyPress Member's Home"
 msgstr "BuddyPress:in käyttäjän kotisivu"
-
-#: bp-templates/bp-nouveau/includes/functions.php:1137
-msgctxt "signup field label"
-msgid "Username%s"
-msgstr "Käyttäjätunnus%s"
 
 #: bp-templates/bp-nouveau/includes/functions.php:1061
 msgid "Currently only your friends can invite you to groups. Uncheck the box to allow any member to send invites."
 msgstr "Tällä hetkellä vain ystäväsi voivat kutsua sinut ryhmiin. Poista valinta ruudusta, jotta kaikki jäsenet voivat lähettää kutsuja."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1049
+msgid "Loading the member's groups. Please wait."
+msgstr "Ladataan käyttän ryhmiä. Odota ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1045
+msgid "Loading the member's friends. Please wait."
+msgstr "Ladataan käyttäjän ystäviä. Odota ole hyvä."
+
+#: bp-templates/bp-nouveau/includes/functions.php:321
+msgid "Add widgets here to appear in the front page of each member of your community."
+msgstr "Lisää vimpaimet tänne käytettäväksi yhteisön jokaisen jäsenen kotisivulla."
+
+#: bp-templates/bp-nouveau/includes/functions.php:333
+msgid "Add widgets here to appear in the front page of each group of your community."
+msgstr "Lisää vimpaimet tänne käytettäväksi yhteisön jokaisen ryhmän kotisivulla."
 
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:130
 msgid "Friendship accepted."
 msgstr "Ystävyys hyväksyttiin."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:232
-msgid "Display the biographical info from the user's WordPress profile."
+msgid "Display the biographical info from the member's WordPress profile."
 msgstr "Näytä biografiset tiedot käyttäjän WordPress-profiilista."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:226
@@ -627,7 +928,7 @@ msgstr "Ystävyys hylättiin."
 
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:68
 #: bp-templates/bp-nouveau/includes/groups/ajax.php:47
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:257
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:259
 msgid "There was a problem performing this action. Please try again."
 msgstr "Ilmeni ongelma tämän toiminnon suorittamisessa. Yritä uudelleen ole hyvä."
 
@@ -636,18 +937,12 @@ msgid "Member > Friends"
 msgstr "Jäsen > Ystävät"
 
 #: bp-templates/bp-nouveau/includes/customizer.php:244
-#: bp-templates/bp-nouveau/includes/groups/functions.php:821
 msgid "Use tab styling for primary nav."
 msgstr "Käytä välilehtityyliä ensisijaiselle valikolle."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:250
-#: bp-templates/bp-nouveau/includes/groups/functions.php:827
 msgid "Use tab styling for secondary nav."
 msgstr "Käytä välilehtityyliä toissijaiselle valikolle."
-
-#: bp-templates/bp-nouveau/includes/customizer.php:46
-msgid "User front page"
-msgstr "Käyttäjän etusivu"
 
 #: bp-templates/bp-nouveau/includes/customizer.php:43
 msgid "Configure general BuddyPress appearance options."
@@ -657,11 +952,7 @@ msgstr "Määritä yleiset BuddyPress-ulkonäköasetukset."
 msgid "General BP Settings"
 msgstr "Yleiset BP-asetukset"
 
-#: bp-templates/bp-nouveau/includes/classes.php:200
-msgid "(BuddyPress) Primary nav"
-msgstr "(BuddyPress) Ensisijainen valikko"
-
-#: bp-templates/bp-nouveau/includes/classes.php:318
+#: bp-templates/bp-nouveau/includes/classes.php:313
 msgid "Include navigation title"
 msgstr "Sisällytä navigaatio otsikko"
 
@@ -681,16 +972,12 @@ msgstr "Aseta käytettävien sarakkeiden määrä BuddyPress-loopeille."
 msgid "Loop layouts"
 msgstr "Luuppien ulkoasut."
 
-#: bp-templates/bp-nouveau/includes/customizer.php:52
-msgid "User navigation"
-msgstr "Käyttäjänavigaatio"
-
 #: bp-templates/bp-nouveau/includes/customizer.php:277
 msgid "Use column navigation for the Members directory."
 msgstr "Käytä sarake-navigaatiota jäsenhakemistoon."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:238
-msgid "Display the user navigation vertically."
+msgid "Display the member navigation vertically."
 msgstr "Näytä käyttäjänavigaatio pystysuuntaisena."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:257
@@ -701,6 +988,47 @@ msgstr "Järjestä käyttäjän ensisijainen navigaatio uudelleen."
 msgid "Use tab styling for Members directory navigation."
 msgstr "Käytä välilehtimuotoilua Jäsenluettelonavigaatioon."
 
+#: bp-templates/bp-nouveau/includes/customizer.php:27
+msgctxt "Customizer Panel"
+msgid "BuddyPress Nouveau"
+msgstr "BuddyPress Nouveau"
+
+#: bp-templates/bp-nouveau/includes/customizer.php:26
+msgid "Customize the appearance of BuddyPress Nouveau Template pack."
+msgstr "Muokkaa BuddyPress Nouveau -mallipaketin ulkoasua."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:67
+msgid "Select the layout style for directory content &amp; navigation."
+msgstr "Valitse ulkoasun tyyli hakemiston sisällölle &amp; navigaatiolle."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:49
+msgid "Configure the default front page for members."
+msgstr "Määritä oletuskotisivu jäsenille."
+
+#: bp-templates/bp-nouveau/includes/blogs/functions.php:181
+msgid "Use tab styling for Sites directory navigation."
+msgstr "Käytä välilehti muotoilua sivustohakemistojen navigointiin."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:55
+msgid "Customize the navigation menu for members. In the preview window, navigate to a user to preview your changes."
+msgstr "Mukauta jäsenten navigointivalikko. Voit esikatsella muutokset siirtymällä esikatselussa kohtaan käyttäjä."
+
+#: bp-templates/bp-nouveau/includes/customizer-controls.php:40
+msgid "Customizing the Groups navigation order needs you create at least one group first."
+msgstr "Ryhmien selausjärjestyksen mukauttaminen edellyttää, että luot ensin vähintään yhden ryhmän."
+
+#: bp-templates/bp-nouveau/includes/customizer-controls.php:65
+msgid "Drag each possible member navigation items that are listed below into the order you prefer."
+msgstr "Vedä alla luetellut jäsenien navigointielementit haluamaasi järjestykseen."
+
+#: bp-templates/bp-nouveau/includes/customizer-controls.php:58
+msgid "Drag each possible group navigation items that are listed below into the order you prefer, in some groups some of these navigation items might not be active."
+msgstr "Vedä alla luetellut ryhmien navigointielementit haluamaasi järjestykseen. joissakin ryhmissä jotkut näistä navigointielementeistä eivät välttämättä ole aktiivisia."
+
+#: bp-templates/bp-nouveau/includes/classes.php:189
+msgid "Displays BuddyPress primary nav in the sidebar of your site. Make sure to use it as the first widget of the sidebar and only once."
+msgstr "Näyttää BuddyPress:in ensisijaisen navigoinnin sivuston sivupalkissa. Varmista, että käytät sitä sivupalkin ensimmäisenä vimpaimena ja vain kerran."
+
 #: bp-templates/bp-nouveau/includes/blogs/functions.php:23
 msgid "All Sites"
 msgstr "Kaikki sivustot"
@@ -710,7 +1038,7 @@ msgid "Type:"
 msgstr "Tyyppi:"
 
 #: bp-templates/bp-nouveau/includes/activity/widgets.php:188
-msgid "Max amount to display:"
+msgid "Maximum amount to display:"
 msgstr "Suurin määrä näytettäväksi:"
 
 #: bp-templates/bp-nouveau/includes/activity/widgets.php:62
@@ -722,16 +1050,12 @@ msgstr "Viimeisimmät päivitykset"
 msgid "(BuddyPress) Latest Activities"
 msgstr "(BuddyPress) Viimeisimmät päivitykset"
 
-#: bp-templates/bp-nouveau/includes/activity/widgets.php:35
-msgid "Display the latest updates of your community having the type(s) of your choice."
-msgstr "Näytä yhteisön viimeisimmät päivitykset, joissa on haluamasi tyyppi/tyypit."
-
-#: bp-templates/bp-nouveau/includes/activity/functions.php:484
+#: bp-templates/bp-nouveau/includes/activity/functions.php:490
 msgid "New mentions"
 msgstr "Uusia mainintoja"
 
-#: bp-templates/bp-nouveau/includes/activity/functions.php:247
-#: bp-templates/bp-nouveau/includes/groups/functions.php:518
+#: bp-templates/bp-nouveau/includes/activity/functions.php:253
+#: bp-templates/bp-nouveau/includes/groups/functions.php:517
 msgid "My Groups"
 msgstr "Omat ryhmäni"
 
@@ -775,11 +1099,7 @@ msgstr "Profiilin näkyvyysasetukset"
 msgid "Settings menu"
 msgstr "Asetusvalikko"
 
-#: bp-templates/bp-nouveau/includes/activity/ajax.php:455
-msgid "No items were found."
-msgstr "Kohteita ei löytynyt."
-
-#: bp-templates/bp-nouveau/includes/activity/functions.php:193
+#: bp-templates/bp-nouveau/includes/activity/functions.php:199
 #: bp-templates/bp-nouveau/includes/groups/functions.php:118
 #: bp-templates/bp-nouveau/includes/members/functions.php:49
 msgid "All Members"
@@ -789,7 +1109,7 @@ msgstr "Kaikki jäsenet"
 msgid "Email Notifications"
 msgstr "Sähköposti-ilmoitukset"
 
-#: bp-templates/bp-nouveau/includes/activity/functions.php:143
+#: bp-templates/bp-nouveau/includes/activity/functions.php:147
 msgid "Start typing the group name..."
 msgstr "Aloita kirjoittamalla ryhmän nimi..."
 
@@ -819,13 +1139,37 @@ msgstr "Profiili-valikko"
 msgid "<a href=\"%1$s\">%2$s</a> replied <a href=\"%3$s\" class=\"activity-time-since\"><time class=\"time-since\" datetime=\"%4$s\" data-bp-timestamp=\"%5$d\">%6$s</time></a>"
 msgstr "<a href=\"%1$s\">%2$s</a> vastasi <a href=\"%3$s\" class=\"activity-time-since\"><time class=\"time-since\" datetime=\"%4$s\" data-bp-timestamp=\"%5$d\">%6$s</time></a>"
 
-#: bp-templates/bp-nouveau/includes/activity/functions.php:516
+#: bp-templates/bp-nouveau/includes/activity/functions.php:522
 msgid "Use column navigation for the Activity directory."
 msgstr "Käytä sarake-navigaatiota toimintahakemistossa."
 
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/item-nav.php:10
-msgid "User menu"
-msgstr "Käyttäjävalikko"
+#: bp-templates/bp-nouveau/includes/activity/widgets.php:35
+msgid "Display the latest updates of your community having the types of your choice."
+msgstr "Näytä yhteisön viimeisimmät päivitykset haluamisilla tyypeillä."
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:146
+msgid "Post in: Group"
+msgstr "Julkaisu: ryhmä"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:137
+msgid "Post in: Profile"
+msgstr "Julkaisu: profiili"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:528
+msgid "Use tab styling for Activity directory navigation."
+msgstr "Käytä välilehti muotoilua toimintohakemistojen navigointiin."
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:500
+msgid "New update comment replies"
+msgstr "Uusi päivitys kommenttien vastauksissa"
+
+#: bp-templates/bp-nouveau/includes/activity/functions.php:495
+msgid "New update replies"
+msgstr "Uusi päivitys vastauksissa"
+
+#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:18
+msgid "Your profile photo will be used on your profile and throughout the site. If there is a <a href=\"https://gravatar.com\">Gravatar</a> associated with your account email we will use that, or you can upload an image from your computer."
+msgstr "Profiilikuvaasi käytetään profiilissasi ja koko sivustossa. Jos tilisi sähköpostiosoitteeseen liittyy <a href=\"https://gravatar.com\">Gravatar</a> kuva, käytetään silloin sitä taikka voit ladata kuvan tietokoneeltasi."
 
 #: bp-templates/bp-nouveau/buddypress/members/single/messages.php:9
 msgid "Messages menu"
@@ -839,12 +1183,13 @@ msgstr "Ryhmävalikko"
 msgid "Friends menu"
 msgstr "Ystävävalikko"
 
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:30
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:31
 msgid "Who is allowed to see this field?"
 msgstr "Kuka saa nähdä tämän kentän?"
 
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:20
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:43
+#. translators: field visibility level, e.g. "...seen by: everyone".
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:21
+#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:44
 msgid "This field may be seen by: %s"
 msgstr "Tämän kentän voi nähdä: %s"
 
@@ -856,28 +1201,32 @@ msgstr "Ystävyyspyynnöt"
 msgid "Notifications menu"
 msgstr "Ilmoitus-valikko"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:194
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:195
+#: bp-templates/bp-nouveau/buddypress/members/single/default-front.php:19
+msgid "You can set the preferences of the %1$s or add %2$s to it."
+msgstr "Voit asettaa %1$s asetukset tai lisätä %2$s siihen."
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:204
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:205
 msgid "Unstar Conversation"
 msgstr "Poista keskustelun tähditys"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:205
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:206
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:215
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:216
 msgid "View full conversation and reply."
 msgstr "Näytä koko keskustelu ja vastaa."
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:198
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:199
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:208
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:209
 msgid "Star Conversation"
 msgstr "Tähditä keskustelu"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:259
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:260
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:282
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:283
 msgid "Unstar Message"
 msgstr "Poista viestin tähditys"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:263
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:264
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:286
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:287
 msgid "Star Message"
 msgstr "Tähditä viesti"
 
@@ -890,11 +1239,11 @@ msgstr "Hakemiston valikko"
 msgid "Close this notice"
 msgstr "Sulje tämä ilmoitus"
 
-#: bp-templates/bp-nouveau/buddypress/groups/create.php:10
+#: bp-templates/bp-nouveau/buddypress/groups/create.php:11
 msgid "Create A New Group"
 msgstr "Luo uusi ryhmä"
 
-#: bp-templates/bp-nouveau/buddypress/groups/create.php:26
+#: bp-templates/bp-nouveau/buddypress/groups/create.php:27
 msgid "Group creation menu"
 msgstr "Ryhmän luomisvalikko"
 
@@ -910,36 +1259,20 @@ msgstr "Hallitse ryhmän jäseniä"
 msgid "Sites menu"
 msgstr "Sivustojen valikko"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:78
-msgid "Next"
-msgstr "Seuraava"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:38
-msgid "Send"
-msgstr "Lähetä"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:39
-msgid "Reset"
-msgstr "Palauta perustilaan"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:71
-msgid "Prev"
-msgstr "Edellinen"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:103
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:113
 msgid "All Messages"
 msgstr "Kaikki viestit"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:168
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:178
 msgid "Active conversation:"
 msgstr "Aktiivinen keskustelu:"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:107
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:117
 msgid "Select bulk action"
 msgstr "Valitse massatoiminto"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:174
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:223
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:184
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:247
 msgid "Participants:"
 msgstr "Osanottajat:"
 
@@ -967,13 +1300,61 @@ msgstr "Toiminta-valikko"
 msgid "Group menu"
 msgstr "Ryhmä-valikko"
 
-#: bp-templates/bp-nouveau/buddypress/groups/single/parts/header-item-actions.php:13
-msgid "Leadership"
-msgstr "Johtajuus"
-
 #: bp-templates/bp-nouveau/buddypress/groups/single/admin/manage-members.php:14
 msgid "Manage your group members; promote to moderators, admins or demote or ban."
 msgstr "Hallinnoi ryhmän jäseniä esim. ylennä valvojiksi, ylläpitäjiksi tai aseta estoja taikka kieltoja."
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:19
+msgid "Change Group Settings"
+msgstr "Muuta ryhmän asetukset"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:13
+msgid "Select Group Settings"
+msgstr "Valitse ryhmän asetukset"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-cover-image.php:13
+msgid "Upload Cover Image"
+msgstr "Lataa kansikuva"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-avatar.php:28
+msgid "Edit or update your avatar image for this group."
+msgstr "Muokkaa tai päivitä tämän ryhmän avatar -kuvaa."
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-avatar.php:19
+msgid "Change Group Avatar"
+msgstr "Vaihda ryhmän avatar"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-avatar.php:13
+msgid "Upload Group Avatar"
+msgstr "Lataa ryhmän avatar"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/edit-details.php:19
+msgid "Edit Group Name &amp; Description"
+msgstr "Muokkaa ryhmän nimeä &amp; kuvausta"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/edit-details.php:13
+msgid "Enter Group Name &amp; Description"
+msgstr "Kirjoita ryhmän nimi &amp; kuvaus"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/activity.php:12
+msgid "Group Activities"
+msgstr "Ryhmän toiminnat"
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:136
+msgid "Select message:"
+msgstr "Valitse viesti:"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/default-front.php:21
+msgid "You can set your preferences for the %1$s or add %2$s to it."
+msgstr "Voit asettaa %1$s asetuksesi tai lisätä %2$s niihin."
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/default-front.php:16
+msgid "Manage the Groups default front page"
+msgstr "Hallinnoi ryhmien oletuskotisivua"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-avatar.php:26
+msgid "Add an image to use as a profile photo for this group. The image will be shown on the main group page, and in search results."
+msgstr "Lisää kuva käytettäväksi profiilikuvana tässä ryhmässä. Kuva näkyy ryhmien pääsivulla ja hakutuloksissa."
 
 #: bp-messages/classes/class-bp-messages-notices-admin.php:197
 msgid "Manage notices shown at front end of your site to all logged-in users."
@@ -1041,10 +1422,6 @@ msgstr "Jäsentä ei löytynyt annetulla ID:llä."
 msgid "Deactivate Notice"
 msgstr "Deaktivoi ilmoitus"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/activity/form.php:42
-msgid "Remove item"
-msgstr "Poista kohde"
-
 #: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:29
 msgid "Group invitations menu"
 msgstr "Ryhmäkutsujen valikko"
@@ -1070,17 +1447,7 @@ msgstr "Kutsu on lähetetty."
 msgid "Optional: add a message to your invite."
 msgstr "Valinnainen: lisää viesti kutsuusi."
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:120
-msgctxt "Cancel invitation"
-msgid "Cancel"
-msgstr "Peruuta"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:121
-msgctxt "Send invitation"
-msgid "Send"
-msgstr "Lähetä"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:27
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:36
 msgid "Send @Username"
 msgstr "Lähetä @käyttäjänimi"
 
@@ -1100,15 +1467,79 @@ msgstr "Sivuston ilmoitukset"
 msgid "Site Notices"
 msgstr "Sivuston ilmoitukset"
 
-#: bp-core/classes/class-bp-admin.php:662
+#: bp-core/classes/class-bp-admin.php:680
 msgid "Built by <a href=\"%s\">%s volunteer</a>."
 msgid_plural "Built by <a href=\"%s\">%s volunteers</a>."
 msgstr[0] "Rakennettu <a href=\"%s\">%s vapaaehtoisen</a> voimin."
 msgstr[1] "Rakennettu <a href=\"%s\">%s vapaaehtoisten</a> voimin."
 
-#: bp-core/classes/class-bp-admin.php:652
+#: bp-core/classes/class-bp-admin.php:670
 msgid "Thank you for using BuddyPress! 😊"
 msgstr "Kiitos, että käytät BuddyPress:iä! 😊"
+
+#: bp-core/classes/class-bp-admin.php:935
+msgid "Project Founder"
+msgstr "Projektin perustaja"
+
+#: bp-core/classes/class-bp-admin.php:930
+msgid "Contributor Emeriti"
+msgstr "Entinen avustaja"
+
+#: bp-core/classes/class-bp-admin.php:916
+msgid "With our thanks to these Open Source projects"
+msgstr "Kiitollisina näille Open Source -hankkeille"
+
+#: bp-core/classes/class-bp-admin.php:753
+msgid "Release Lead"
+msgstr "Julkaisun johdossa"
+
+#: bp-core/classes/class-bp-admin.php:736
+msgid "Meet the contributors behind BuddyPress:"
+msgstr "Tapaa BuddyPress:in avustajat:"
+
+#: bp-core/classes/class-bp-admin.php:665
+msgid " How are you using BuddyPress? Receiving your feedback and suggestions for future versions of BuddyPress genuinely motivates and encourages our contributors. Please <a href=\"%s\">share your feedback</a> about this version of BuddyPress on our website. "
+msgstr "Kuinka käytät BuddyPress:iä? Palaute ja ehdotukset tulevien BuddyPress:in versioiden suhteen motivoi ja rohkaisee avustajiamme. <a href=\"%s\">Jaa palautetta</a> tästä BuddyPress-versiosta verkkosivustollamme."
+
+#: bp-core/classes/class-bp-admin.php:655
+msgid "To read the full list of features, fixes, and changes in this version of BuddyPress, <a href=\"%s\">visit Trac</a>."
+msgstr "Lukeaksesi koko listan muutoksista ja korjauksista n BuddyPress:in tässä versiossa, käy <a href=\"%s\">Trac</a> sivuilla."
+
+#: bp-core/classes/class-bp-admin.php:645
+msgid "Most notably, the <a href=\"%s\">Legacy Forums component has been removed</a> after 9 years of service. If your site was using Legacy Forums, you need to <a href=\"%s\">migrate to the bbPress plugin</a>."
+msgstr "Erityisesti <a href=\"%s\">sisäänrakennettu vanha  foorumit -komponentti on poistettu</a> 9 vuoden palveluksen jälkeen. Jos sivustosi on käyttänyt sisäänrakennettuja vanhoja foorumeita, sinun täytyy <a href=\"%s\">siirtyä bbPress-laajennukseen</a>."
+
+#: bp-core/classes/class-bp-admin.php:641
+msgid "With every BuddyPress version, we strive to make performance improvements alongside new features and fixes; this version is no exception. Memory use has been optimised &mdash; within active components, we now only load each individual code file when it's needed, not before."
+msgstr "Jokaisessa BuddyPress:in versiossa pyrimme parantamaan suorituskykyä uusien ominaisuuksien ja korjausten ohessa. Tämäkään versio ei ole poikkeus. Muistin käyttö on optimoitu &mdash; aktiivisten komponenttien käytössä. Lataamme jokaisen yksittäisen ohjelmakoodin vain silloin, kun sitä tarvitaan, ei etukäteen."
+
+#: bp-core/classes/class-bp-admin.php:638
+msgid "A new telephone number field type has been added to the Extended Profiles component, with support for all international number formats. With a modern web browser, your members can use this field type to touch-to-dial a number directly."
+msgstr "Laajennettuihin profiileihin on lisätty uutena kenttätyyppinä puhelinnumero, joka tukee kaikkia kansainvälisiä numeroformaatteja. Kaikilla moderneilla selaimilla jäsenet voivat käyttää tätä kenttätyyppiä kosketa-ja-soita ominaisuudella suoraan."
+
+#: bp-core/classes/class-bp-admin.php:630
+msgid "Explore the new management interface at <a href=\"%s\">Users &gt; Site Notices</a>."
+msgstr "Tutki uutta hallintaliittymää osoitteessa <a href=\"%s\">Käyttäjät &gt; Sivustoilmoitukset</a>."
+
+#: bp-core/classes/class-bp-admin.php:624
+msgid "Site Notices are a feature within the Private Messaging component that allows community managers to share important messages with all members of their community. With Nouveau, the management interface for Site Notices has been removed from the front-end theme templates."
+msgstr "Sivuston ilmoitukset on yksityinen viestintä komponentin ominaisuus, jonka avulla yhteisön hallinnoijat voivat jakaa tärkeitä viestejä kaikkien yhteisönsä jäsenten kanssa. Nouveau teeman kanssa sivuston ilmoitukset -hallinta-rajapinta on poistettu frontend puolelta."
+
+#: bp-core/classes/class-bp-admin.php:617
+msgid "<a href=\"%s\">WP-CLI</a> is the command-line interface for WordPress. You can update plugins, configure multisite installs, and much more, without using a web browser. With this version of BuddyPress, you can now manage your BuddyPress content from WP-CLI."
+msgstr "<a href=\"%s\">WP-CLI</a> on WordPress:in komentorivirajapinta. Voit päivittää lisäosia, määrittää multisite asennukset ja paljon muuta ilman verkkoselaimen käyttöä. Tällä BuddyPress:in versiolla voit hallita BuddyPress sisältöäsi WP-CLI komennoilla."
+
+#: bp-core/classes/class-bp-admin.php:605
+msgid "Nouveau is fully compatible with WordPress. Existing BuddyPress themes have been written for our legacy template pack, and until they are updated, resolve any compatibility issues by choosing the legacy template pack option in <a href=\"%s\">Settings &gt; BuddyPress</a>."
+msgstr "Nouveau teema on täysin yhteensopiva WordPress:in kanssa. Nykyiset BuddyPress-teemat on kirjoitettu vanhalle mallipaketillemme ja niiden päivittämiseen asti voit ratkaista kaikki yhteensopivuusongelmat valitsemalla vanhan mallipaketin vaihtoehdon kohdassa <a href=\"%s\">Asetukset &gt; BuddyPress</a>."
+
+#: bp-core/classes/class-bp-admin.php:601
+msgid "Nouveau provides vertical and horizontal layout options for BuddyPress navigation, and for the component directories, you can choose between a grid layout, and a classic flat list."
+msgstr "Nouveau teema tarjoaa pystysuorat ja horisontaaliset asettelutavat BuddyPress:in navigointiin ja komponenttien hakemistoihin voit valita joko grid tyylin taikka klassisen tasaisen listan."
+
+#: bp-core/classes/class-bp-admin.php:596
+msgid "A bold reimagining of our legacy templates, Nouveau is our celebration of <a href=\"%s\">10 years of BuddyPress</a>! Nouveau delivers modern markup with fresh JavaScript-powered templates, and full integration with WordPress' Customizer, allowing more out-of-the-box control of your BuddyPress content than ever before."
+msgstr "Vanhojen templatepohjien rohkeana muutoksena syntynyt Nouveau teema on meidän lahjamme <a href=\"%s\">Buddypress 10 vuotta</a>! Nouveau teema tarjoaa nykyaikaisen HTML koodin uusilla JavaScript-pohjaisilla mallipohjilla. Nouveau teema on täydellisesti integroitu WordPress:in Customizer ominaisuuteen mikä mahdollistaa BuddyPress sisällön entistä tarkemman hallinnan kuin koskaan ennen."
 
 #. translators: accessibility text
 #: bp-core/admin/bp-core-admin-components.php:171
@@ -1142,6 +1573,18 @@ msgstr "Hei, BuddyPress!"
 #: bp-core/admin/bp-core-admin-settings.php:115
 msgid "Allow activity stream commenting on posts and comments"
 msgstr "Salli toimintasyötekommentointi viesteissä ja kommenteissa"
+
+#: bp-core/admin/bp-core-admin-functions.php:848
+msgid "Are these emails not written in your site's language? Go to <a href=\"%s\">BuddyPress Tools and try the \"reinstall emails\"</a> tool."
+msgstr "Eivätkö nämä sähköpostit ole kirjoitettu sivustosi kielellä? Siirry <a href=\"%s\">BuddyPress työkalut ja kokeile \"korjaa sähköpostit\"</a> työkalua."
+
+#: bp-activity/bp-activity-admin.php:235
+msgid "<strong>Link</strong> - Used by some types of activity (blog posts and comments) to store a link back to the original content."
+msgstr "<strong>Linkki</strong> - Käytetään tiettyjen toimintojen (blogien julkaisut ja kommentit) kanssa tehdäksesi paluulinkin alkuperäiseen sisältöön."
+
+#: bp-activity/bp-activity-admin.php:802
+msgid "Activity generated by posts and comments uses the link field for a permalink back to the content item."
+msgstr "Toiminta, jota julkaisut ja kommentit tuottavat, käyttävät linkki kenttää tehdäkseen osoiterakenteen mukaisen kestolinkin sisältöön."
 
 #. Description of the plugin/theme
 msgid "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
@@ -1362,13 +1805,13 @@ msgstr "Ryhmän tiedot"
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:153
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:61
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:65
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:67
 msgid "Group Types"
 msgstr "Ryhmien tyypit"
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:155
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:63
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:67
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:69
 msgid "Select the types this group should be a part of."
 msgstr "Valitse tyypit joita tämän ryhmän pitäisi edustaa."
 
@@ -1414,11 +1857,6 @@ msgstr "Ryhmien jäseniä ei löytynyt."
 msgid "Manage Membership Requests"
 msgstr "Hallitse ystäväpyyntöjä"
 
-#. translators: accessibility text
-#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:20
-msgid "Request form"
-msgstr "Pyyntölomake"
-
 #: bp-templates/bp-legacy/buddypress/groups/single/send-invites.php:21
 msgid "Send invites"
 msgstr "Lähetä kutsuja"
@@ -1444,6 +1882,7 @@ msgstr "Ystävät"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/groups/invites.php:21
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1209
 msgid "Group invitations"
 msgstr "Ryhmäkutsut"
 
@@ -1629,71 +2068,71 @@ msgstr "Ryhmän ensisijainen navigaatio"
 msgid "Group secondary navigation"
 msgstr "Ryhmän toissijainen navigaatio"
 
-#: bp-core/classes/class-bp-admin.php:739
+#: bp-core/classes/class-bp-admin.php:757
 msgid "BuddyPress Team"
 msgstr "BuddyPress tiimi"
 
-#: bp-core/classes/class-bp-admin.php:774
-#: bp-core/classes/class-bp-admin.php:779
-#: bp-core/classes/class-bp-admin.php:784
-#: bp-core/classes/class-bp-admin.php:809
+#: bp-core/classes/class-bp-admin.php:792
+#: bp-core/classes/class-bp-admin.php:797
+#: bp-core/classes/class-bp-admin.php:802
+#: bp-core/classes/class-bp-admin.php:827
 msgid "Community Support"
 msgstr "Yhteisön tuki"
 
-#: bp-core/bp-core-functions.php:3512 bp-core/bp-core-functions.php:3520
+#: bp-core/bp-core-functions.php:3509 bp-core/bp-core-functions.php:3517
 msgid "You will no longer receive emails when someone replies to an update or comment you posted."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun joku vastaa päivitykseen tai kommenttiin jonka lähetit."
 
-#: bp-core/bp-core-functions.php:3528 bp-core/bp-core-functions.php:3536
+#: bp-core/bp-core-functions.php:3525 bp-core/bp-core-functions.php:3533
 msgid "You will no longer receive emails when someone mentions you in an update."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun joku mainitsee sinut päivityksessä."
 
-#: bp-core/bp-core-functions.php:3554
+#: bp-core/bp-core-functions.php:3551
 msgid "You will no longer receive emails when someone sends you a friend request."
 msgstr "Sinulle ei enää lähetetä sähköposteja, Kun joku lähettää sinulle kaveripyynnön."
 
-#: bp-core/bp-core-functions.php:3562
+#: bp-core/bp-core-functions.php:3559
 msgid "You will no longer receive emails when someone accepts your friendship request."
 msgstr "Et enää vastaanota sähköposteja, kun joku hyväksyy ystäväpyyntösi."
 
-#: bp-core/bp-core-functions.php:3570
+#: bp-core/bp-core-functions.php:3567
 msgid "You will no longer receive emails when one of your groups is updated."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun jokin ryhmistäsi päivitetään."
 
-#: bp-core/bp-core-functions.php:3578
+#: bp-core/bp-core-functions.php:3575
 msgid "You will no longer receive emails when you are invited to join a group."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun sinua pyydetään liittymään ryhmään."
 
-#: bp-core/bp-core-functions.php:3586
+#: bp-core/bp-core-functions.php:3583
 msgid "You will no longer receive emails when you have been promoted in a group."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun sinut on ylennetty ryhmässä."
 
-#: bp-core/bp-core-functions.php:3594
+#: bp-core/bp-core-functions.php:3591
 msgid "You will no longer receive emails when someone requests to be a member of your group."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun joku pyytää olla jäsen ryhmässäsi."
 
-#: bp-core/bp-core-functions.php:3602
+#: bp-core/bp-core-functions.php:3599
 msgid "You will no longer receive emails when someone sends you a message."
 msgstr "Sinulle ei enää lähetetä sähköposteja, kun joku lähettää sinulle viestin."
 
-#: bp-core/bp-core-functions.php:3615 bp-core/bp-core-functions.php:3623
+#: bp-core/bp-core-functions.php:3612 bp-core/bp-core-functions.php:3620
 msgid "You will no longer receive emails when your request to join a group has been accepted or denied."
 msgstr "Et enää vastaanota sähköposteja, kun pyyntösi liittyä ryhmään on joko hyväksytty tai hylätty."
 
-#: bp-core/bp-core-functions.php:3668 bp-core/bp-core-functions.php:3674
-#: bp-core/bp-core-functions.php:3679
+#: bp-core/bp-core-functions.php:3665 bp-core/bp-core-functions.php:3671
+#: bp-core/bp-core-functions.php:3676
 msgid "Something has gone wrong."
 msgstr "Jotain meni pieleen."
 
-#: bp-core/bp-core-functions.php:3669 bp-core/bp-core-functions.php:3675
+#: bp-core/bp-core-functions.php:3666 bp-core/bp-core-functions.php:3672
 msgid "Please log in and go to your settings to unsubscribe from notification emails."
 msgstr "Kirjaudu sisään ja siirry asetuksiin peruuttaaksesi ilmoitussähköpostiviestit."
 
-#: bp-core/bp-core-functions.php:3680
+#: bp-core/bp-core-functions.php:3677
 msgid "Please go to your notifications settings to unsubscribe from emails."
 msgstr "Mene ilmoitusasetuksiisi peruuttaaksesi sähköposteja."
 
-#: bp-core/bp-core-functions.php:3708
+#: bp-core/bp-core-functions.php:3705
 msgid "You can change this or any other email notification preferences in your email settings."
 msgstr "Voit muuttaa joko tätä taikka mitä tahansa muuta sähköposti-ilmoitusten asetusta sähköpostiasetuksistasi."
 
@@ -1744,11 +2183,11 @@ msgstr "Ystävät %s"
 msgid "Select group type"
 msgstr "Valitse ryhmätyyppi"
 
-#: bp-groups/bp-groups-functions.php:2282
+#: bp-groups/bp-groups-functions.php:2309
 msgid "Group type already exists."
 msgstr "Ryhmätyyppi on jo olemassa."
 
-#: bp-groups/bp-groups-functions.php:2309
+#: bp-groups/bp-groups-functions.php:2336
 msgid "You may not register a group type with this name."
 msgstr "Et voi rekisteröidä ryhmätyyppiä tällä nimellä."
 
@@ -1855,7 +2294,7 @@ msgstr "bp_nav ja  bp_options_nav \"global\" arvoja ei tulisi käyttää suoraan
 msgid "These globals should not be used directly and are deprecated. Please use the BuddyPress nav functions instead."
 msgstr "Näitä ”global” arvoja ei tulisi käyttää suoraan ja ovat vanhentuneita. Käytä BuddyPress:in valikkofunktioita sen sijaan."
 
-#: bp-core/classes/class-bp-admin.php:953
+#: bp-core/classes/class-bp-admin.php:971
 msgctxt "Email post type"
 msgid "Situations"
 msgstr "Tilanteet"
@@ -2314,92 +2753,92 @@ msgstr "Mukauta BuddyPress:in lähettämien sähköpostiviestien ulkoasua."
 msgid "Emails have been successfully reinstalled."
 msgstr "Sähköpostit on onnistuneesti asennettu uudelleen… Valmis!"
 
-#: bp-core/bp-core-functions.php:3559
+#: bp-core/bp-core-functions.php:3556
 msgid "Recipient has had a friend request accepted by a member."
 msgstr "Vastaanottajalla on ollut jäsenen hyväksymä ystäväpyyntö."
 
-#: bp-core/bp-core-functions.php:3567
+#: bp-core/bp-core-functions.php:3564
 msgid "A group's details were updated."
 msgstr "Ryhmän tiedot päivitettiin."
 
-#: bp-core/bp-core-functions.php:3575
+#: bp-core/bp-core-functions.php:3572
 msgid "A member has sent a group invitation to the recipient."
 msgstr "Jäsen on lähettänyt vastaanottajalle ryhmäkutsun."
 
-#: bp-core/bp-core-functions.php:3583
+#: bp-core/bp-core-functions.php:3580
 msgid "Recipient's status within a group has changed."
 msgstr "Vastaanottajan tila ryhmässä on muuttunut."
 
-#: bp-core/bp-core-functions.php:3591
+#: bp-core/bp-core-functions.php:3588
 msgid "A member has requested permission to join a group."
 msgstr "Jäsen on pyytänyt lupaa ryhmään liittymiseksi."
 
-#: bp-core/bp-core-functions.php:3599
+#: bp-core/bp-core-functions.php:3596
 msgid "Recipient has received a private message."
 msgstr "Vastaanottaja on saanut yksityisviestin."
 
-#: bp-core/bp-core-functions.php:3607
+#: bp-core/bp-core-functions.php:3604
 msgid "Recipient has changed their email address."
 msgstr "Vastaanottajan on muuttanut heidän sähköpostiosoitteensa."
 
-#: bp-core/bp-core-functions.php:3612
+#: bp-core/bp-core-functions.php:3609
 msgid "Recipient had requested to join a group, which was accepted."
 msgstr "Vastaanottaja oli pyytänyt ryhmään liitymistä, joka hyväksyttiin."
 
-#: bp-core/bp-core-functions.php:3620
+#: bp-core/bp-core-functions.php:3617
 msgid "Recipient had requested to join a group, which was rejected."
 msgstr "Vastaanottaja oli pyytänyt ryhmään liitymistä, joka hylättiin."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3472
+#: bp-core/bp-core-functions.php:3469
 msgid "[{{{site.name}}}] Membership request for group \"{{group.name}}\" accepted"
 msgstr "[{{{site.name}}}] Jäsenpyyntö ryhmään \"{{group.name}}\" hyväksytty"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3474
+#: bp-core/bp-core-functions.php:3471
 msgid "Your membership request for the group &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot; has been accepted."
 msgstr "Jäsenyyspyyntösi ryhmälle &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot; on hyväksytty."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3480
+#: bp-core/bp-core-functions.php:3477
 msgid "[{{{site.name}}}] Membership request for group \"{{group.name}}\" rejected"
 msgstr "[{{{site.name}}}] Jäsenpyyntö ryhmään \"{{group.name}}\" hylätty"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3482
+#: bp-core/bp-core-functions.php:3479
 msgid "Your membership request for the group &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot; has been rejected."
 msgstr "Jäsenyyspyyntösi ryhmälle &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot; on hylätty."
 
-#: bp-core/bp-core-functions.php:3509
+#: bp-core/bp-core-functions.php:3506
 msgid "A member has replied to an activity update that the recipient posted."
 msgstr "Jäsen on vastannut vastaanottajan toimintapäivitykseen."
 
-#: bp-core/bp-core-functions.php:3517
+#: bp-core/bp-core-functions.php:3514
 msgid "A member has replied to a comment on an activity update that the recipient posted."
 msgstr "Jäsen on vastannut lähettämäsi toimintapäivityksen kommenttiin."
 
-#: bp-core/bp-core-functions.php:3525
+#: bp-core/bp-core-functions.php:3522
 msgid "Recipient was mentioned in an activity update."
 msgstr "Vastaanottaja oli mainittu toimintapäivityksessä."
 
-#: bp-core/bp-core-functions.php:3533
+#: bp-core/bp-core-functions.php:3530
 msgid "Recipient was mentioned in a group activity update."
 msgstr "Vastaanottaja mainittiin ryhmän toimintapäivityksessä."
 
-#: bp-core/bp-core-functions.php:3541
+#: bp-core/bp-core-functions.php:3538
 msgid "Recipient has registered for an account."
 msgstr "Vastaanottaja on rekisteröinyt tilin."
 
-#: bp-core/bp-core-functions.php:3546
+#: bp-core/bp-core-functions.php:3543
 msgid "Recipient has registered for an account and site."
 msgstr "Vastaanottaja on rekisteröinyt tilin ja sivuston."
 
-#: bp-core/bp-core-functions.php:3551
+#: bp-core/bp-core-functions.php:3548
 msgid "A member has sent a friend request to the recipient."
 msgstr "Jäsen on lähettänyt vastaanottajalle ystäväpyynnön."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3468
+#: bp-core/bp-core-functions.php:3465
 msgid ""
 "You recently changed the email address associated with your account on {{site.name}} to {{user.email}}. If this is correct, go to the following link to confirm the change: {{{verify.url}}}\n"
 "\n"
@@ -2410,7 +2849,7 @@ msgstr ""
 "Mikäli muutit mielesi taikka olet saanut tämän viestin erehdyksessä, voit turvallisesti ohittaa ja tuhota tämän viestin."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3476
+#: bp-core/bp-core-functions.php:3473
 msgid ""
 "Your membership request for the group \"{{group.name}}\" has been accepted.\n"
 "\n"
@@ -2421,7 +2860,7 @@ msgstr ""
 "Tarkastellaksesi ryhmää, vieraile: {{{group.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3484
+#: bp-core/bp-core-functions.php:3481
 msgid ""
 "Your membership request for the group \"{{group.name}}\" has been rejected.\n"
 "\n"
@@ -2432,7 +2871,7 @@ msgstr ""
 "Pyytääksesi jäsenyyttä uudelleen, vieraile: {{{group.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3466
+#: bp-core/bp-core-functions.php:3463
 msgid ""
 "You recently changed the email address associated with your account on {{site.name}} to {{user.email}}. If this is correct, <a href=\"{{{verify.url}}}\">go here to confirm the change</a>.\n"
 "\n"
@@ -2443,7 +2882,7 @@ msgstr ""
 "Mikäli muutit mielesi taikka olet saanut tämän viestin erehdyksessä, voit turvallisesti ohittaa ja tuhota tämän viestin."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3458
+#: bp-core/bp-core-functions.php:3455
 msgid ""
 "{{sender.name}} sent you a new message: &quot;{{usersubject}}&quot;\n"
 "\n"
@@ -2458,12 +2897,12 @@ msgstr ""
 "<a href=\"{{{message.url}}}\">Siirry keskusteluun</a> vastataksesi tai seurataksesi keskustelua."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3464
+#: bp-core/bp-core-functions.php:3461
 msgid "[{{{site.name}}}] Verify your new email address"
 msgstr "[{{{site.name}}}] Vahvista uusi sähköpostiosoitteesi"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3460
+#: bp-core/bp-core-functions.php:3457
 msgid ""
 "{{sender.name}} sent you a new message: \"{{usersubject}}\"\n"
 "\n"
@@ -2478,12 +2917,12 @@ msgstr ""
 "Siirry keskusteluun vastataksesi tai seurataksesi keskustelua: {{{message.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3456
+#: bp-core/bp-core-functions.php:3453
 msgid "[{{{site.name}}}] New message from {{sender.name}}"
 msgstr "[{{{site.name}}}] Uusi viesti jäseneltä {{sender.name}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3452
+#: bp-core/bp-core-functions.php:3449
 msgid ""
 "{{requesting-user.name}} wants to join the group \"{{group.name}}\". As you are the administrator of this group, you must either accept or reject the membership request.\n"
 "\n"
@@ -2498,7 +2937,7 @@ msgstr ""
 "Tarkastellaksesi {{requesting-user.name}} profiilia, vieraile: {{{profile.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3450
+#: bp-core/bp-core-functions.php:3447
 msgid ""
 "<a href=\"{{{profile.url}}}\">{{requesting-user.name}}</a> wants to join the group &quot;{{group.name}}&quot;. As you are an administrator of this group, you must either accept or reject the membership request.\n"
 "\n"
@@ -2509,22 +2948,22 @@ msgstr ""
 "<a href=\"{{{group-requests.url}}}\">Siirry tänne hallitaksesi tätä</a> ja kaikkia muita vireillä olevia pyyntöjä."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3440
+#: bp-core/bp-core-functions.php:3437
 msgid "[{{{site.name}}}] You have been promoted in the group: \"{{group.name}}\""
 msgstr "[{{{site.name}}}] Sinut on ylennetty ryhmässä: \"{{group.name}}\""
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3442
+#: bp-core/bp-core-functions.php:3439
 msgid "You have been promoted to <b>{{promoted_to}}</b> in the group &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot;."
 msgstr "Sinut on ylennetty <b>{{promoted_to}}</b> ryhmässä &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot;."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3448
+#: bp-core/bp-core-functions.php:3445
 msgid "[{{{site.name}}}] Membership request for group: {{group.name}}"
 msgstr "[{{{site.name}}}] Jäsenpyyntö ryhmään: {{group.name}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3436
+#: bp-core/bp-core-functions.php:3433
 msgid ""
 "{{inviter.name}} has invited you to join the group: \"{{group.name}}\".\n"
 "\n"
@@ -2541,7 +2980,7 @@ msgstr ""
 "Katsellaksesi {{inviter.name}} profiilia, käy osoitteessa: {{{inviter.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3444
+#: bp-core/bp-core-functions.php:3441
 msgid ""
 "You have been promoted to {{promoted_to}} in the group: \"{{group.name}}\".\n"
 "\n"
@@ -2552,7 +2991,7 @@ msgstr ""
 "Vieraillaksesi ryhmässä, mene osoitteeseen: {{{group.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3434
+#: bp-core/bp-core-functions.php:3431
 msgid ""
 "<a href=\"{{{inviter.url}}}\">{{inviter.name}}</a> has invited you to join the group: &quot;{{group.name}}&quot;.\n"
 "<a href=\"{{{invites.url}}}\">Go here to accept your invitation</a> or <a href=\"{{{group.url}}}\">visit the group</a> to learn more."
@@ -2561,12 +3000,12 @@ msgstr ""
 "<a href=\"{{{invites.url}}}\">Siirry tänne hyväksyäksesi kutsun</a> taikka <a href=\"{{{group.url}}}\">vieraile ryhmässä</a> saadaksesi lisätietoja."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3424
+#: bp-core/bp-core-functions.php:3421
 msgid "[{{{site.name}}}] Group details updated"
 msgstr "[{{{site.name}}}] Ryhmän tiedot päivitetty."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3426
+#: bp-core/bp-core-functions.php:3423
 msgid ""
 "Group details for the group &quot;<a href=\"{{{group.url}}}\">{{group.name}}</a>&quot; were updated:\n"
 "<blockquote>{{changed_text}}</blockquote>"
@@ -2575,12 +3014,12 @@ msgstr ""
 "<blockquote>{{changed_text}}</blockquote>"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3432
+#: bp-core/bp-core-functions.php:3429
 msgid "[{{{site.name}}}] You have an invitation to the group: \"{{group.name}}\""
 msgstr "[{{{site.name}}}] Sinulla on kutsu ryhmään: \"{{group.name}}\""
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3428
+#: bp-core/bp-core-functions.php:3425
 msgid ""
 "Group details for the group \"{{group.name}}\" were updated:\n"
 "\n"
@@ -2595,7 +3034,7 @@ msgstr ""
 "Katsoaksesi ryjmää, vieraile: {{{group.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3412
+#: bp-core/bp-core-functions.php:3409
 msgid ""
 "{{initiator.name}} wants to add you as a friend.\n"
 "\n"
@@ -2610,17 +3049,17 @@ msgstr ""
 "Katsellaksesi profiilia {{initiator.name}}, käy osoitteessa: {{{initiator.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3416
+#: bp-core/bp-core-functions.php:3413
 msgid "[{{{site.name}}}] {{friend.name}} accepted your friendship request"
 msgstr "[{{{site.name}}}] {{friend.name}} hyväksyi ystäväpyyntösi"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3418
+#: bp-core/bp-core-functions.php:3415
 msgid "<a href=\"{{{friendship.url}}}\">{{friend.name}}</a> accepted your friend request."
 msgstr "<a href=\"{{{friendship.url}}}\">{{friend.name}}</a> hyväksyi ystäväpyyntösi."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3420
+#: bp-core/bp-core-functions.php:3417
 msgid ""
 "{{friend.name}} accepted your friend request.\n"
 "\n"
@@ -2631,7 +3070,7 @@ msgstr ""
 "Tietääksesi enemmän, vieraile profiilissa: {{{friendship.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3410
+#: bp-core/bp-core-functions.php:3407
 msgid ""
 "<a href=\"{{{initiator.url}}}\">{{initiator.name}}</a> wants to add you as a friend.\n"
 "\n"
@@ -2642,12 +3081,12 @@ msgstr ""
 "Hyväksyäksesi pyynnön ja hallitaksesi kaikkia vireillä olevia pyyntöjä, vieraile: <a href=\"{{{friend-requests.url}}}\">{{{friend-requests.url}}}</a>"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3408
+#: bp-core/bp-core-functions.php:3405
 msgid "[{{{site.name}}}] New friendship request from {{initiator.name}}"
 msgstr "[{{{site.name}}}] Uusi ystäväpyyntö jäseneltä {{initiator.name}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3399
+#: bp-core/bp-core-functions.php:3396
 msgid ""
 "Thanks for registering!\n"
 "\n"
@@ -2662,7 +3101,7 @@ msgstr ""
 "Aktivoinnin jälkeen voit käydä sivustolla osoitteessa <a href=\"{{{user-site.url}}}\">{{{user-site.url}}}</a>."
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3401
+#: bp-core/bp-core-functions.php:3398
 msgid ""
 "Thanks for registering!\n"
 "\n"
@@ -2719,7 +3158,7 @@ msgstr ""
 "Viimeistelläksesi tilisi aktivoinnin, mene seuraavaan linkkiin: {{{activate.url}}}"
 
 #. translators: do not remove {} brackets or translate its contents.
-#: bp-core/bp-core-functions.php:3397
+#: bp-core/bp-core-functions.php:3394
 msgid "[{{{site.name}}}] Activate {{{user-site.url}}}"
 msgstr "[{{{site.name}}}] Aktivoi {{{user-site.url}}}"
 
@@ -2998,12 +3437,11 @@ msgid "URL"
 msgstr "Linkki"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/cover-images/index.php:30
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:27
+#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:31
 msgid "If you'd like to remove the existing group cover image but not upload a new one, please use the delete group cover image button."
 msgstr "Jos haluat poistaa ryhmän olemassa olevan kansikuvan mutta et halua ladata uutta, käytä ”Poista ryhmän kansikuva” painiketta."
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/cover-images/index.php:31
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:28
 msgid "Delete Group Cover Image"
 msgstr "Poista ryhmän kansikuva"
 
@@ -3051,12 +3489,11 @@ msgstr "Valitse tämä viesti"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/members/single/messages/single.php:125
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:315
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:343
 msgid "Reply to Message"
 msgstr "Vastaa viestiin"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/cover-images/index.php:28
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:25
 msgid "Delete My Cover Image"
 msgstr "Poista kansikuvani"
 
@@ -3070,12 +3507,11 @@ msgstr "Omat suosikit %s"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/activity/post-form.php:39
-#: bp-templates/bp-nouveau/includes/activity/functions.php:160
+#: bp-templates/bp-nouveau/includes/activity/functions.php:164
 msgid "Post what's new"
 msgstr "Lähetä mitä uutta tapahtunut"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/cover-images/index.php:27
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/cover-images/index.php:24
 msgid "If you'd like to delete your current cover image but not upload a new one, please use the delete Cover Image button."
 msgstr "Jos haluat poistaa nykyisen kansikuvasi, mutta et ladata uutta, käytä \"poista kansikuva\" painiketta."
 
@@ -3097,9 +3533,6 @@ msgstr "Omat kaverit %s"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/activity/entry.php:126
-#: bp-templates/bp-nouveau/buddypress/activity/comment-form.php:18
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:342
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:347
 msgid "Comment"
 msgstr "Kommentti"
 
@@ -3715,9 +4148,9 @@ msgstr "Ilmeni ongelma julkaistaessa päivitystäsi, yritä uudelleen."
 msgid "We're sorry, but we can't find the page that you're looking for. Perhaps searching will help."
 msgstr "Valitettavasti hakemaasi sivua ei löytynyt. Ehkä haku auttaa?"
 
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.0.0)  #-#-#-#-#
+#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.1.0)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.0.0)  #-#-#-#-#
+#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.1.0)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://buddypress.org/"
 msgstr "https://buddypress.org/"
@@ -4103,7 +4536,7 @@ msgctxt "xProfile admin page title"
 msgid "Profile Fields"
 msgstr "Profiili kentät"
 
-#: bp-xprofile/bp-xprofile-activity.php:63 cli/components/activity.php:960
+#: bp-xprofile/bp-xprofile-activity.php:63 cli/components/activity.php:962
 msgid "%s changed their profile picture"
 msgstr "%s muutti profiilikuvansa"
 
@@ -4246,7 +4679,7 @@ msgstr "Hylätty"
 #: bp-templates/bp-legacy/buddypress-functions.php:298
 #: bp-templates/bp-nouveau/buddypress-functions.php:417
 #: bp-templates/bp-nouveau/includes/activity/ajax.php:113
-#: bp-templates/bp-nouveau/includes/activity/functions.php:221
+#: bp-templates/bp-nouveau/includes/activity/functions.php:227
 #: bp-themes/bp-default/functions.php:173
 msgid "My Favorites"
 msgstr "Omat suosikit"
@@ -4323,7 +4756,6 @@ msgid "Deleting this account will delete all of the content it has created. It w
 msgstr "Tämän käyttäjätunnuksen poistaminen hävittää kaiken tunnuksen luoman sisällön. Tietojen palauttaminen ei ole mahdollista."
 
 #: bp-templates/bp-legacy/buddypress/members/single/settings/capabilities.php:26
-#: bp-templates/bp-nouveau/buddypress/members/single/settings/capabilities.php:19
 #: bp-themes/bp-default/members/single/settings/capabilities.php:57
 msgid "This user is a spammer."
 msgstr "Tämä käyttäjä on roskapostittaja."
@@ -4343,20 +4775,17 @@ msgstr "Jäsenen %s profiili"
 
 #: bp-groups/classes/class-bp-groups-list-table.php:788
 #: bp-members/classes/class-bp-members-admin.php:2236
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:24
 #: bp-themes/bp-default/members/single/profile/edit.php:127
 #: bp-xprofile/classes/class-bp-xprofile-user-admin.php:388
 msgid "Change"
 msgstr "Muuta"
 
 #: bp-templates/bp-legacy/buddypress/members/single/profile/edit.php:27
-#: bp-templates/bp-nouveau/buddypress/members/single/profile/edit.php:30
 #: bp-themes/bp-default/members/single/profile/edit.php:10
 msgid "Editing '%s' Profile Group"
 msgstr "Muokataan profiiliryhmää '%s'"
 
 #: bp-templates/bp-legacy/buddypress/members/single/profile/change-avatar.php:85
-#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:77
 msgid "Your profile photo will be used on your profile and throughout the site. To change your profile photo, please create an account with <a href=\"https://gravatar.com\">Gravatar</a> using the same email address as you used to register with this site."
 msgstr "Profiilikuvaasi käytetään profiilissasi ja läpi koko sivuston. Vaihtaaksesi profiilikuvasi, ole hyvä ja luo tili täällä <a href=\"https://gravatar.com\">Gravatar</a> käyttämällä samaa sähköpostiosoitetta jolla rekisteröidyit tälle sivustolle."
 
@@ -4417,21 +4846,20 @@ msgid "You have no notifications."
 msgstr "Sinulle ei ole ilmoituksia."
 
 #: bp-templates/bp-legacy/buddypress/members/single/messages/single.php:139
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:321
 #: bp-themes/bp-default/members/single/messages/single.php:91
 msgid "Send Reply"
 msgstr "Lähetä vastaus"
 
 #: bp-templates/bp-legacy/buddypress/members/single/messages/single.php:102
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:304
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:332
 #: bp-themes/bp-default/members/single/messages/single.php:75
 msgid "Send a Reply"
 msgstr "Vastaa"
 
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:187
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:188
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:236
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:237
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:197
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:198
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:259
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:260
 msgid "Delete conversation."
 msgstr "Poista keskustelu."
 
@@ -4466,8 +4894,8 @@ msgid "Sent:"
 msgstr "Lähetetty:"
 
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:195
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:218
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:351
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:247
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:404
 #: bp-themes/bp-default/members/single/messages/messages-loop.php:69
 msgid "Sorry, no messages were found."
 msgstr "Valitettavasti yhtään viestiä ei löytynyt."
@@ -4478,7 +4906,7 @@ msgid "Unread"
 msgstr "Lukematon"
 
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:112
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:143
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:153
 #: bp-themes/bp-default/members/single/messages/messages-loop.php:37
 msgid "To:"
 msgstr "Vastaanottaja:"
@@ -4489,7 +4917,7 @@ msgid "View Message"
 msgstr "Näytä viesti"
 
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:105
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:133
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:143
 #: bp-themes/bp-default/members/single/messages/messages-loop.php:32
 msgid "From:"
 msgstr "Lähettäjä:"
@@ -4518,7 +4946,7 @@ msgstr "Viesti"
 #: bp-messages/classes/class-bp-messages-notices-admin.php:206
 #: bp-templates/bp-legacy/buddypress/members/single/messages/compose.php:39
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:65
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:30
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:39
 #: bp-themes/bp-default/members/single/messages/compose.php:17
 msgid "Subject"
 msgstr "Aihe"
@@ -4540,7 +4968,6 @@ msgid "You have no outstanding group invites."
 msgstr "Ei ryhmäkutsuja."
 
 #: bp-templates/bp-legacy/buddypress/members/single/groups/invites.php:35
-#: bp-templates/bp-nouveau/buddypress/members/single/groups/invites.php:36
 msgctxt "Group member count"
 msgid "%d member"
 msgid_plural "%d members"
@@ -4572,6 +4999,7 @@ msgid "You have successfully created your account! To begin using this site you 
 msgstr "Tilisi on luotu onnistuneesti! Aloittaaksesi sivuston käytön sinun tulee aktivoida tilisi sähköpostiosoitteeseesi lähettämämme linkistä."
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:296
+#: bp-templates/bp-nouveau/includes/functions.php:1179
 #: bp-themes/bp-default/registration/register.php:232
 msgid "Site Title"
 msgstr "Sivuston otsikko"
@@ -4582,7 +5010,6 @@ msgid "Blog URL"
 msgstr "Blogin URL-osoite"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:276
-#: bp-templates/bp-nouveau/buddypress/members/register.php:91
 #: bp-themes/bp-default/registration/register.php:219
 msgid "Yes, I'd like to create a new site"
 msgstr "Kyllä, haluan perustaa uuden sivuston"
@@ -4596,7 +5023,6 @@ msgid "Who can see this field?"
 msgstr "Kuka voi nähdä tämän kentän?"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:274
-#: bp-templates/bp-nouveau/buddypress/members/register.php:89
 #: bp-themes/bp-default/registration/register.php:217
 msgid "Blog Details"
 msgstr "Blogin tiedot"
@@ -4622,16 +5048,19 @@ msgid "Profile Details"
 msgstr "Profiilin tiedot"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:119
+#: bp-templates/bp-nouveau/includes/functions.php:1161
 #: bp-themes/bp-default/registration/register.php:49
 msgid "Confirm Password"
 msgstr "Vahvista salasana"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:107
+#: bp-templates/bp-nouveau/includes/functions.php:1153
 #: bp-themes/bp-default/registration/register.php:45
 msgid "Choose a Password"
 msgstr "Valitse salasana"
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:96
+#: bp-templates/bp-nouveau/includes/functions.php:1145
 #: bp-themes/bp-default/registration/register.php:41
 msgid "Email Address"
 msgstr "Sähköpostiosoite"
@@ -4642,6 +5071,7 @@ msgstr "Sähköpostiosoite"
 #: bp-templates/bp-legacy/buddypress/members/register.php:119
 #: bp-templates/bp-legacy/buddypress/members/register.php:280
 #: bp-templates/bp-legacy/buddypress/members/register.php:296
+#: bp-templates/bp-nouveau/includes/template-tags.php:2259
 #: bp-themes/bp-default/members/single/profile/edit.php:26
 #: bp-themes/bp-default/members/single/profile/edit.php:33
 #: bp-themes/bp-default/members/single/profile/edit.php:40
@@ -4680,7 +5110,6 @@ msgid "Registering for this site is easy. Just fill in the fields below, and we'
 msgstr "Tälle sivustolle rekisteröityminen on helppoa, täytä vain alla oleva lomake ja saat tunnukset hetkessä. "
 
 #: bp-templates/bp-legacy/buddypress/members/register.php:46
-#: bp-templates/bp-nouveau/includes/functions.php:923
 #: bp-themes/bp-default/registration/register.php:16
 msgid "User registration is currently not allowed."
 msgstr "Käyttäjät eivät voi rekisteröityä tällä hetkellä."
@@ -4694,19 +5123,19 @@ msgid "Newest Registered"
 msgstr "Uusimmat rekisteröityneet"
 
 #: bp-templates/bp-legacy/buddypress/members/activate.php:56
-#: bp-templates/bp-nouveau/buddypress/members/activate.php:31
+#: bp-templates/bp-nouveau/buddypress/members/activate.php:41
 #: bp-themes/bp-default/registration/activate.php:34
 msgid "Activation Key:"
 msgstr "Aktivointiavain:"
 
 #: bp-templates/bp-legacy/buddypress/members/activate.php:52
-#: bp-templates/bp-nouveau/buddypress/members/activate.php:27
+#: bp-templates/bp-nouveau/buddypress/members/activate.php:37
 #: bp-themes/bp-default/registration/activate.php:30
 msgid "Please provide a valid activation key."
 msgstr "Anna kelvollinen aktivointiavain."
 
 #: bp-templates/bp-legacy/buddypress/members/activate.php:47
-#: bp-templates/bp-nouveau/buddypress/members/activate.php:22
+#: bp-templates/bp-nouveau/buddypress/members/activate.php:27
 #: bp-themes/bp-default/registration/activate.php:25
 msgid "Your account was activated successfully! You can now <a href=\"%s\">log in</a> with the username and password you provided when you signed up."
 msgstr "Tilisi aktivoitiin onnistuneesti! Voit nyt <a href=\"%s\">kirjautua sisään</a> käyttäen valitsemaasi käyttäjänimeä ja salasanaa."
@@ -4716,7 +5145,7 @@ msgid "All of your friends already belong to this group."
 msgstr "Kaikki ystäväsi kuuluvat jo tähän ryhmään."
 
 #: bp-templates/bp-legacy/buddypress/members/activate.php:45
-#: bp-templates/bp-nouveau/buddypress/members/activate.php:20
+#: bp-templates/bp-nouveau/buddypress/members/activate.php:21
 #: bp-themes/bp-default/registration/activate.php:23
 msgid "Your account was activated successfully! Your account details have been sent to you in a separate email."
 msgstr "Tilisi on aktivoitu onnistuneesti! Tilisi tiedot on lähetetty sinulle sähköpostitse."
@@ -4746,7 +5175,6 @@ msgstr "Ei vireellä olevia ystäväpyyntöjä."
 #: bp-templates/bp-legacy/buddypress/members/single/groups/invites.php:52
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:737
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:793
-#: bp-templates/bp-nouveau/includes/members/template-tags.php:305
 #: bp-themes/bp-default/groups/single/admin.php:322
 #: bp-themes/bp-default/members/single/friends/requests.php:38
 #: bp-themes/bp-default/members/single/groups/invites.php:24
@@ -4758,27 +5186,21 @@ msgstr "Hylkää"
 #: bp-templates/bp-legacy/buddypress/members/single/groups/invites.php:51
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:710
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:766
-#: bp-templates/bp-nouveau/includes/members/template-tags.php:289
 #: bp-themes/bp-default/groups/single/admin.php:320
 #: bp-themes/bp-default/members/single/friends/requests.php:37
 #: bp-themes/bp-default/members/single/groups/invites.php:23
 msgid "Accept"
 msgstr "Hyväksy"
 
-#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:38
-#: bp-templates/bp-nouveau/buddypress/groups/single/request-membership.php:20
 #: bp-themes/bp-default/groups/single/request-membership.php:12
 msgid "Send Request"
 msgstr "Lähetä pyyntö"
 
-#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:26
-#: bp-templates/bp-nouveau/buddypress/groups/single/request-membership.php:15
+#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:33
 #: bp-themes/bp-default/groups/single/request-membership.php:7
 msgid "Comments (optional)"
 msgstr "Kommentit (vapaaehtoinen)"
 
-#: bp-templates/bp-legacy/buddypress/groups/single/request-membership.php:23
-#: bp-templates/bp-nouveau/buddypress/groups/single/request-membership.php:12
 #: bp-themes/bp-default/groups/single/request-membership.php:4
 msgid "You are requesting to become a member of the group '%s'."
 msgstr "Pyydät, että pääsisit jäseneksi ryhmään '%s'."
@@ -4800,7 +5222,6 @@ msgstr "Ryhmän moderoinnit"
 
 #: bp-templates/bp-legacy/buddypress/groups/single/cover-image-header.php:75
 #: bp-templates/bp-legacy/buddypress/groups/single/group-header.php:23
-#: bp-templates/bp-nouveau/buddypress/groups/single/parts/header-item-actions.php:16
 #: bp-themes/bp-default/groups/single/group-header.php:11
 msgid "Group Admins"
 msgstr "Ryhmän ylläpitäjät"
@@ -4912,8 +5333,9 @@ msgstr "Poista käyttäjän esto"
 msgid "Remove Ban"
 msgstr "Poista esto"
 
+#. translators: indicates a user is banned from a group, e.g. "Mike (banned)".
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/manage-members.php:248
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/manage-members.php:98
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/manage-members.php:102
 #: bp-themes/bp-default/groups/single/admin.php:260
 msgid "(banned)"
 msgstr "(estetty)"
@@ -4930,7 +5352,7 @@ msgstr "Ilmoita ryhmän jäsenille muutoksista sähköpostitse"
 
 #: bp-templates/bp-legacy/buddypress/groups/index.php:98
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:24
-#: bp-templates/bp-nouveau/includes/groups/functions.php:588
+#: bp-templates/bp-nouveau/includes/groups/functions.php:587
 #: bp-themes/bp-default/groups/index.php:59
 #: bp-themes/bp-default/members/single/groups.php:24
 msgid "Newly Created"
@@ -4938,7 +5360,7 @@ msgstr "Äskettäin luodut"
 
 #: bp-templates/bp-legacy/buddypress/groups/index.php:97
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:23
-#: bp-templates/bp-nouveau/includes/groups/functions.php:587
+#: bp-templates/bp-nouveau/includes/groups/functions.php:586
 #: bp-themes/bp-default/groups/index.php:58
 #: bp-themes/bp-default/members/single/groups.php:23
 msgid "Most Members"
@@ -5051,7 +5473,7 @@ msgstr "Kuuluuko tällä ryhmällä olla foorumi?"
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:177
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:85
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:88
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:90
 #: bp-themes/bp-default/groups/create.php:89
 #: bp-themes/bp-default/groups/single/admin.php:92
 msgid "Group Invitations"
@@ -5059,7 +5481,7 @@ msgstr "Ryhmäkutsut"
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:179
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:87
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:90
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:92
 #: bp-themes/bp-default/groups/create.php:91
 #: bp-themes/bp-default/groups/single/admin.php:94
 msgid "Which members of this group are allowed to invite others?"
@@ -5075,7 +5497,6 @@ msgstr "Tätä ryhmää ei näytetä ryhmäluettelossa eikä hakutuloksissa."
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:140
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:48
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:54
 #: bp-themes/bp-default/groups/create.php:82
 #: bp-themes/bp-default/groups/single/admin.php:83
 msgid "Only users who are invited can join the group."
@@ -5104,7 +5525,6 @@ msgstr "Ryhmän sisältö ja toiminta näkyvillä vain ryhmän jäsenille."
 
 #: bp-templates/bp-legacy/buddypress/groups/create.php:132
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:40
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:44
 #: bp-themes/bp-default/groups/create.php:73
 #: bp-themes/bp-default/groups/single/admin.php:73
 msgid "Only users who request membership and are accepted can join the group."
@@ -5254,7 +5674,7 @@ msgstr "Kestolinkki tähän artikkeliin"
 #: bp-templates/bp-legacy/buddypress/members/single/friends.php:22
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:22
 #: bp-templates/bp-nouveau/includes/blogs/functions.php:106
-#: bp-templates/bp-nouveau/includes/groups/functions.php:586
+#: bp-templates/bp-nouveau/includes/groups/functions.php:585
 #: bp-templates/bp-nouveau/includes/members/functions.php:97
 #: bp-themes/bp-default/blogs/index.php:55
 #: bp-themes/bp-default/forums/index.php:62
@@ -5295,12 +5715,10 @@ msgstr "Pudota tiedosto tähän"
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/uploader.php:28
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/uploader.php:29
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/uploader.php:23
 msgid "Select your File"
 msgstr "Valitse tiedostosi"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/uploader.php:25
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/uploader.php:22
 msgctxt "Uploader: Drop your file here - or - Select your File"
 msgid "or"
 msgstr "taikka"
@@ -5343,8 +5761,6 @@ msgstr "Poista Profiilikuvani"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/avatars/index.php:38
 #: bp-templates/bp-legacy/buddypress/members/single/profile/change-avatar.php:45
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/index.php:35
-#: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:36
 msgid "If you'd like to delete your current profile photo but not upload a new one, please use the delete profile photo button."
 msgstr "Jos haluat poistaa nykyisen profiilikuvasi ilman uuden lataamista, käytä poista profiilikuva -painiketta."
 
@@ -5352,7 +5768,6 @@ msgstr "Jos haluat poistaa nykyisen profiilikuvasi ilman uuden lataamista, käyt
 #: bp-templates/bp-legacy/buddypress/groups/create.php:267
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-avatar.php:58
 #: bp-templates/bp-legacy/buddypress/members/single/profile/change-avatar.php:61
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/crop.php:21
 #: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-avatar.php:106
 #: bp-templates/bp-nouveau/buddypress/members/single/profile/change-avatar.php:52
 #: bp-themes/bp-default/groups/create.php:172
@@ -5363,7 +5778,6 @@ msgstr "Rajaa kuva"
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/avatars/camera.php:26
 #: bp-templates/bp-legacy/buddypress/members/single/settings/capabilities.php:30
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/camera.php:23
 #: bp-templates/bp-nouveau/includes/functions.php:1268
 #: bp-templates/bp-nouveau/includes/functions.php:1320
 #: bp-themes/bp-default/members/single/settings/capabilities.php:61
@@ -5378,26 +5792,25 @@ msgid "Your browser does not support this feature."
 msgstr "Selaimesi ei tue tätä ominaisuutta."
 
 #: bp-templates/bp-legacy/buddypress/assets/_attachments/avatars/camera.php:25
-#: bp-templates/bp-nouveau/buddypress/assets/_attachments/avatars/camera.php:22
 msgid "Capture"
 msgstr "Kaappaus"
 
 #. translators: accessibility text
 #: bp-templates/bp-legacy/buddypress/activity/post-form.php:55
 #: bp-templates/bp-legacy/buddypress/activity/post-form.php:59
-#: bp-templates/bp-nouveau/includes/activity/functions.php:161
+#: bp-templates/bp-nouveau/includes/activity/functions.php:165
 #: bp-themes/bp-default/activity/post-form.php:42
 msgid "Post in"
 msgstr "Lähetä"
 
 #: bp-templates/bp-legacy/buddypress/activity/post-form.php:32
-#: bp-templates/bp-nouveau/includes/activity/functions.php:159
+#: bp-templates/bp-nouveau/includes/activity/functions.php:163
 #: bp-themes/bp-default/activity/post-form.php:25
 msgid "What's new, %s?"
 msgstr "Mitä uutta,%s?"
 
 #: bp-templates/bp-legacy/buddypress/activity/post-form.php:48
-#: bp-templates/bp-nouveau/buddypress/activity/post-form.php:18
+#: bp-templates/bp-nouveau/includes/activity/functions.php:166
 #: bp-themes/bp-default/activity/post-form.php:35
 msgid "Post Update"
 msgstr "Lähetä päivitys"
@@ -5455,7 +5868,7 @@ msgstr[0] "%s uusi"
 msgstr[1] "%s uutta"
 
 #: bp-templates/bp-legacy/buddypress/activity/index.php:137
-#: bp-templates/bp-nouveau/includes/activity/functions.php:267
+#: bp-templates/bp-nouveau/includes/activity/functions.php:273
 #: bp-themes/bp-default/activity/index.php:79
 msgid "Mentions"
 msgstr "Viittaukset"
@@ -5555,7 +5968,6 @@ msgid "Sorry, there was no activity found. Please try a different filter."
 msgstr "Valitettavasti toimintaa ei löytynyt. Ole hyvä ja yritä eri suodattimella."
 
 #: bp-templates/bp-legacy/buddypress/activity/activity-loop.php:34
-#: bp-templates/bp-nouveau/buddypress/activity/activity-loop.php:28
 #: bp-themes/bp-default/activity/activity-loop.php:41
 msgid "Load More"
 msgstr "Lataa lisää"
@@ -5643,6 +6055,7 @@ msgid "Newest First"
 msgstr "Uusimmat ensin"
 
 #: bp-notifications/bp-notifications-template.php:1004
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:86
 msgid "Oldest First"
 msgstr "Vanhimmat ensin"
 
@@ -5785,20 +6198,18 @@ msgstr "Aktiivinen parhaillaan"
 
 #: bp-messages/bp-messages-template.php:1038
 #: bp-notifications/bp-notifications-template.php:1032
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:113
 msgid "Mark unread"
 msgstr "Merkitse lukemattomaksi"
 
 #: bp-messages/bp-messages-template.php:1037
 #: bp-notifications/bp-notifications-template.php:1030
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:111
 msgid "Mark read"
 msgstr "Merkitse luetuksi"
 
 #. translators: accessibility text
 #: bp-messages/bp-messages-template.php:1033
 #: bp-notifications/bp-notifications-template.php:1024
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:104
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:103
 msgid "Select Bulk Action"
 msgstr "Valitse massatoiminto"
 
@@ -5845,7 +6256,7 @@ msgstr "Valitse:"
 
 #. translators: accessibility text
 #: bp-messages/bp-messages-template.php:856
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:88
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:98
 msgid "Search Messages"
 msgstr "Etsi viestejä"
 
@@ -5887,7 +6298,7 @@ msgstr "Poista merkintä \"tärkeä\""
 
 #: bp-messages/bp-messages-star.php:107
 #: bp-templates/bp-legacy/buddypress-functions.php:332
-#: bp-templates/bp-nouveau/includes/messages/functions.php:123
+#: bp-templates/bp-nouveau/includes/messages/functions.php:124
 msgid "Unstar"
 msgstr "Poista ”tärkeä” merkintä"
 
@@ -5895,25 +6306,25 @@ msgstr "Poista ”tärkeä” merkintä"
 #: bp-messages/bp-messages-star.php:108
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:82
 #: bp-templates/bp-legacy/buddypress-functions.php:333
-#: bp-templates/bp-nouveau/includes/messages/functions.php:124
+#: bp-templates/bp-nouveau/includes/messages/functions.php:125
 msgid "Star"
 msgstr "Tärkeä"
 
 #: bp-messages/bp-messages-star.php:110
 #: bp-templates/bp-legacy/buddypress-functions.php:335
-#: bp-templates/bp-nouveau/includes/messages/functions.php:126
+#: bp-templates/bp-nouveau/includes/messages/functions.php:127
 msgid "Not starred"
 msgstr "Ei merkitty tärkeäksi"
 
 #: bp-messages/bp-messages-star.php:111
 #: bp-templates/bp-legacy/buddypress-functions.php:336
-#: bp-templates/bp-nouveau/includes/messages/functions.php:127
+#: bp-templates/bp-nouveau/includes/messages/functions.php:128
 msgid "Remove all starred messages in this thread"
 msgstr "Poista kaikki tärkeäksi merkityt tässsä ketjusssa"
 
 #: bp-messages/bp-messages-star.php:112
 #: bp-templates/bp-legacy/buddypress-functions.php:337
-#: bp-templates/bp-nouveau/includes/messages/functions.php:128
+#: bp-templates/bp-nouveau/includes/messages/functions.php:129
 msgid "Star the first message in this thread"
 msgstr "Merkitse ketjun ensimmäinen viesti tärkeäksi"
 
@@ -5981,7 +6392,7 @@ msgstr "Lähetetyt"
 #: bp-messages/classes/class-bp-messages-component.php:250
 #: bp-messages/classes/class-bp-messages-component.php:357
 #: bp-templates/bp-legacy/buddypress-functions.php:334
-#: bp-templates/bp-nouveau/includes/messages/functions.php:125
+#: bp-templates/bp-nouveau/includes/messages/functions.php:126
 msgid "Starred"
 msgstr "Merkitty tärkeäksi"
 
@@ -6022,6 +6433,7 @@ msgid "There was an error deleting messages."
 msgstr "Ilmeni virhe poistettaessa viestejä."
 
 #: bp-messages/actions/bulk-manage.php:68
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:675
 msgid "Messages marked as unread."
 msgstr "Viestit merkittiin lukemattomiksi."
 
@@ -6065,7 +6477,7 @@ msgid "There was a problem sending your reply. Please try again."
 msgstr "Ilmeni ongelma vastauksen lähettämisessä. Yritä uudelleen."
 
 #: bp-messages/actions/view.php:41
-#: bp-templates/bp-nouveau/includes/messages/ajax.php:190
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:210
 msgid "Your reply was sent successfully"
 msgstr "Vastaus lähetettiin onnistuneesti."
 
@@ -6208,7 +6620,7 @@ msgstr "Tarkasta sähköpostisi tilisi aktivoimiseksi!"
 msgid "Your account is now active!"
 msgstr "Tilisi on nyt aktiivinen!"
 
-#: bp-members/screens/register.php:98
+#: bp-members/screens/register.php:103
 msgid "This is a required field"
 msgstr "Tämä on pakollinen kenttä."
 
@@ -6646,7 +7058,7 @@ msgstr "Profiili päivitetty."
 msgid "Profile photo was deleted."
 msgstr "Profiilikuva poistettiin."
 
-#: bp-members/bp-members-activity.php:50 cli/components/activity.php:964
+#: bp-members/bp-members-activity.php:50 cli/components/activity.php:966
 msgid "%s became a registered member"
 msgstr "%s rekisteröityi sivustolle"
 
@@ -6827,7 +7239,7 @@ msgstr "Ryhmäkuva"
 #: bp-templates/bp-legacy/buddypress/members/single/friends.php:24
 #: bp-templates/bp-legacy/buddypress/members/single/groups.php:25
 #: bp-templates/bp-nouveau/includes/blogs/functions.php:108
-#: bp-templates/bp-nouveau/includes/groups/functions.php:589
+#: bp-templates/bp-nouveau/includes/groups/functions.php:588
 #: bp-templates/bp-nouveau/includes/members/functions.php:102
 #: bp-templates/bp-nouveau/includes/members/functions.php:120
 #: bp-themes/bp-default/blogs/index.php:57
@@ -6966,7 +7378,9 @@ msgid_plural "Viewing %1$s - %2$s of %3$s groups"
 msgstr[0] "Näytetään %1$s - %2$s / %3$s ryhmästä"
 msgstr[1] "Näytetään %1$s - %2$s / %3$s ryhmistä"
 
+#. translators: %s = number of members
 #: bp-groups/bp-groups-template.php:2014
+#: bp-templates/bp-nouveau/buddypress/members/single/groups/invites.php:40
 msgid "%s member"
 msgid_plural "%s members"
 msgstr[0] "%s jäsen"
@@ -7156,13 +7570,13 @@ msgstr "Ilmeni virhe ryhmäkutsun hyväksymisessä. Yritä uudelleen."
 msgid "Group invites sent."
 msgstr "Ryhmäkutsut  lähetetty."
 
-#: bp-groups/screens/user/invites.php:53
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:146
+#: bp-groups/screens/user/invites.php:55
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:148
 msgid "Group invite rejected"
 msgstr "Ryhmäkutsu hylättiin."
 
-#: bp-groups/screens/user/invites.php:51
-#: bp-templates/bp-nouveau/includes/groups/ajax.php:138
+#: bp-groups/screens/user/invites.php:53
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:140
 msgid "Group invite could not be rejected"
 msgstr "Ryhmäkutsua ei voitu hylätä."
 
@@ -7360,7 +7774,7 @@ msgctxt "Group screen page <title>"
 msgid "User Groups"
 msgstr "Käyttäjäryhmät"
 
-#: bp-groups/bp-groups-functions.php:1288 cli/components/activity.php:752
+#: bp-groups/bp-groups-functions.php:1315 cli/components/activity.php:752
 msgid "%1$s posted an update in the group %2$s"
 msgstr "%1$s kirjoitti päivityksen ryhmään %2$s"
 
@@ -7528,7 +7942,7 @@ msgstr "Anna pilkulla erotettu lista käyttäjien kirjautumisista."
 #: bp-groups/bp-groups-admin.php:849
 #: bp-templates/bp-legacy/buddypress/groups/create.php:187
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:95
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:104
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:106
 #: bp-themes/bp-default/groups/create.php:106
 #: bp-themes/bp-default/groups/single/admin.php:109
 msgid "Group admins only"
@@ -7537,7 +7951,7 @@ msgstr "Vain ryhmän hallinnoijat"
 #: bp-groups/bp-groups-admin.php:847
 #: bp-templates/bp-legacy/buddypress/groups/create.php:183
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:91
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:94
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:96
 #: bp-themes/bp-default/groups/create.php:96
 #: bp-themes/bp-default/groups/single/admin.php:99
 msgid "All group members"
@@ -7546,7 +7960,7 @@ msgstr "Kaikki ryhmän jäsenet"
 #: bp-groups/bp-groups-admin.php:848
 #: bp-templates/bp-legacy/buddypress/groups/create.php:185
 #: bp-templates/bp-legacy/buddypress/groups/single/admin/group-settings.php:93
-#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:99
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:101
 #: bp-themes/bp-default/groups/create.php:101
 #: bp-themes/bp-default/groups/single/admin.php:104
 msgid "Group admins and mods only"
@@ -7587,7 +8001,6 @@ msgstr "Hae kaikista ryhmistä"
 #: bp-groups/bp-groups-admin.php:769 bp-groups/bp-groups-admin.php:784
 #: bp-groups/classes/class-bp-groups-widget.php:75
 #: bp-groups/classes/class-bp-groups-widget.php:204
-#: bp-templates/bp-nouveau/includes/groups/functions.php:846
 msgid "Groups"
 msgstr "Ryhmät"
 
@@ -7746,12 +8159,12 @@ msgstr "%1$s päivitti tietoja ryhmälle %2$s"
 msgid "%1$s changed the name of the group %2$s from \"%3$s\" to \"%4$s\""
 msgstr "%1$s muutti ryhmän %2$s nimen arvosta \"%3$s\" arvoon \"%4$s\" "
 
-#: bp-groups/bp-groups-activity.php:109 bp-groups/bp-groups-activity.php:482
-#: cli/components/activity.php:940
+#: bp-groups/bp-groups-activity.php:109 bp-groups/bp-groups-activity.php:457
+#: cli/components/activity.php:942
 msgid "%1$s joined the group %2$s"
 msgstr "%1$s liittyi ryhmään %2$s"
 
-#: bp-groups/bp-groups-activity.php:81 cli/components/activity.php:917
+#: bp-groups/bp-groups-activity.php:81 cli/components/activity.php:918
 msgid "%1$s created the group %2$s"
 msgstr "%1$s loi ryhmän %2$s."
 
@@ -7821,16 +8234,16 @@ msgstr "Liityit ryhmään!"
 msgid "There was an error joining the group."
 msgstr "Ilmeni virhe liittyessä ryhmään."
 
-#: bp-groups/actions/create.php:272
+#: bp-groups/actions/create.php:274
 msgid "There was an error saving the group profile photo, please try uploading again."
 msgstr "Ryhmän profiilikuvan tallennuksessa esiintyi virhe, ole hyvä ja kokeile latausta uudelleen."
 
-#: bp-groups/actions/create.php:231
+#: bp-groups/actions/create.php:233
 #: bp-groups/screens/single/send-invites.php:97
 msgid "There was an error removing the invite"
 msgstr "Tapahtui virhe kutsua poistettaessa"
 
-#: bp-groups/actions/create.php:227
+#: bp-groups/actions/create.php:229
 #: bp-groups/screens/single/send-invites.php:86
 msgid "Invite successfully removed"
 msgstr "Kutsu poistettu onnistuneesti"
@@ -7974,7 +8387,7 @@ msgid "%s's Friends"
 msgstr "Jäsenen %s ystävät"
 
 #: bp-friends/bp-friends-template.php:84
-#: bp-templates/bp-nouveau/includes/activity/functions.php:234
+#: bp-templates/bp-nouveau/includes/activity/functions.php:240
 #: bp-templates/bp-nouveau/includes/groups/functions.php:139
 #: bp-templates/bp-nouveau/includes/members/functions.php:62
 msgid "My Friends"
@@ -8140,6 +8553,10 @@ msgstr "Poistettu käyttäjä"
 msgid "New Topic"
 msgstr "Uusi aihe"
 
+#: bp-templates/bp-nouveau/includes/functions.php:1171
+msgid "Site URL"
+msgstr "Sivuston URL-osoite"
+
 #: bp-themes/bp-default/archive.php:37 bp-themes/bp-default/index.php:41
 #: bp-themes/bp-default/search.php:38 bp-themes/bp-default/single.php:33
 msgid "Tags: "
@@ -8162,16 +8579,6 @@ msgstr "Kirjaudu sisään"
 #: bp-groups/bp-groups-admin.php:985
 msgid "Remove"
 msgstr "Poista"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:150
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:151
-msgid "Next page"
-msgstr "Seuraava sivu"
-
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:143
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:145
-msgid "Previous page"
-msgstr "Edellinen sivu"
 
 #: bp-groups/bp-groups-admin.php:979
 #: bp-members/classes/class-bp-members-admin.php:819
@@ -8249,9 +8656,6 @@ msgstr "Tuoreus"
 #: bp-templates/bp-legacy/buddypress/members/register.php:205
 #: bp-templates/bp-legacy/buddypress/members/single/profile/edit.php:75
 #: bp-templates/bp-legacy/buddypress-functions.php:294
-#: bp-templates/bp-nouveau/buddypress/common/notices/template-notices.php:15
-#: bp-templates/bp-nouveau/buddypress/members/single/default-front.php:16
-#: bp-templates/bp-nouveau/buddypress/members/single/parts/profile-visibility.php:35
 #: bp-templates/bp-nouveau/buddypress-functions.php:413
 #: bp-themes/bp-default/functions.php:180
 #: bp-themes/bp-default/members/single/profile/edit.php:137
@@ -8270,14 +8674,11 @@ msgstr "&laquo;"
 
 #: bp-messages/bp-messages-template.php:1049
 #: bp-notifications/bp-notifications-template.php:1036
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:118
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:122
 msgid "Apply"
 msgstr "Käytä"
 
 #: bp-messages/bp-messages-template.php:1036
 #: bp-notifications/bp-notifications-template.php:1027
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:108
 msgid "Bulk Actions"
 msgstr "Massatoiminnot"
 
@@ -8304,7 +8705,6 @@ msgid "Topic"
 msgstr "Aihe"
 
 #: bp-templates/bp-legacy/buddypress/activity/entry.php:130
-#: bp-templates/bp-nouveau/buddypress/activity/comment-form.php:21
 #: bp-themes/bp-default/activity/entry.php:104
 msgid "Post"
 msgstr "Lähetä"
@@ -8645,7 +9045,7 @@ msgid "The group profile photo was deleted successfully!"
 msgstr "Ryhmän profiilikuva poistettiin onnistuneesti!"
 
 #: bp-core/classes/class-bp-attachment-avatar.php:397
-#: bp-groups/actions/create.php:285
+#: bp-groups/actions/create.php:287
 msgid "The group profile photo was uploaded successfully."
 msgstr "Ryhmän profiilikuva ladattiin onnistuneesti."
 
@@ -8722,6 +9122,7 @@ msgstr "Salasana"
 #: bp-members/classes/class-bp-members-list-table.php:150
 #: bp-members/classes/class-bp-members-ms-list-table.php:137
 #: bp-templates/bp-legacy/buddypress/members/register.php:85
+#: bp-templates/bp-nouveau/includes/functions.php:1137
 #: bp-themes/bp-default/registration/register.php:37
 #: bp-themes/bp-default/sidebar.php:44
 msgid "Username"
@@ -8900,7 +9301,7 @@ msgid "Page %s"
 msgstr "Sivu %s"
 
 #: bp-core/bp-core-template.php:3127 bp-groups/bp-groups-template.php:3394
-#: bp-templates/bp-nouveau/includes/groups/functions.php:531
+#: bp-templates/bp-nouveau/includes/groups/functions.php:530
 #: bp-themes/bp-default/groups/create.php:18
 #: bp-themes/bp-default/groups/index.php:21
 msgid "Create a Group"
@@ -8952,6 +9353,7 @@ msgstr "Erilliset yhteisöroolit eivät ole enään käytössä. Käytä  käytt
 msgid "You do not have access to this page."
 msgstr "Sinulla ei ole käyttöoikeuksia tälle sivulle."
 
+#. translators: %s = member name
 #: bp-core/bp-core-template.php:199 bp-core/bp-core-template.php:218
 #: bp-core/classes/class-bp-core-user.php:169
 #: bp-core/classes/class-bp-core-user.php:170
@@ -8959,7 +9361,7 @@ msgstr "Sinulla ei ole käyttöoikeuksia tälle sivulle."
 #: bp-groups/classes/class-bp-groups-invite-template.php:234
 #: bp-groups/classes/class-bp-groups-invite-template.php:235
 #: bp-groups/classes/class-bp-groups-invite-template.php:236
-#: bp-templates/bp-nouveau/includes/activity/functions.php:87
+#: bp-templates/bp-nouveau/includes/activity/functions.php:90
 msgid "Profile photo of %s"
 msgstr "Profiilikuva käyttäjästä %s"
 
@@ -9140,7 +9542,7 @@ msgstr[0] "<strong>Versio %1$s</strong> paikkasi tietoturva-aukon ja korjasi %2$
 msgstr[1] "<strong>Versio %1$s</strong> paikkasi tietoturva-aukon ja korjasi %2$s bugia."
 
 #. translators: 1: BuddyPress version number, 2: plural number of bugs.
-#: bp-core/bp-core-admin.php:37
+#: bp-core/bp-core-admin.php:37 bp-core/classes/class-bp-admin.php:579
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "<strong>Versio %1$s</strong> käsitteli %2$s bugin."
@@ -9165,50 +9567,50 @@ msgid_plural "Security Releases"
 msgstr[0] "Tietoturvapäivitys"
 msgstr[1] "Tietoturvapäivitykset"
 
-#: bp-core/bp-core-admin.php:25
+#: bp-core/bp-core-admin.php:25 bp-core/classes/class-bp-admin.php:574
 msgid "Maintenance Release"
 msgid_plural "Maintenance Releases"
 msgstr[0] "Huoltopäivitys"
 msgstr[1] "Huoltopäivitykset"
 
 #: bp-core/admin/bp-core-admin-functions.php:434
-#: bp-core/classes/class-bp-admin.php:716
+#: bp-core/classes/class-bp-admin.php:734
 msgid "Credits"
 msgstr "Kiitokset"
 
-#: bp-core/classes/class-bp-admin.php:837
+#: bp-core/classes/class-bp-admin.php:855
 msgid "Contributors to BuddyPress %s"
 msgstr "BuddyPress %s avustajat"
 
-#: bp-core/classes/class-bp-admin.php:813
+#: bp-core/classes/class-bp-admin.php:831
 msgid "Recent Rockstars"
 msgstr "Tuoreet rokkistarat"
 
-#: bp-core/classes/class-bp-admin.php:759
+#: bp-core/classes/class-bp-admin.php:777
 msgid "Navigator"
 msgstr "Navigaattori"
 
-#: bp-core/classes/class-bp-admin.php:744
-#: bp-core/classes/class-bp-admin.php:749
-#: bp-core/classes/class-bp-admin.php:754
-#: bp-core/classes/class-bp-admin.php:764
-#: bp-core/classes/class-bp-admin.php:769
-#: bp-core/classes/class-bp-admin.php:789
-#: bp-core/classes/class-bp-admin.php:794
-#: bp-core/classes/class-bp-admin.php:799
-#: bp-core/classes/class-bp-admin.php:804
+#: bp-core/classes/class-bp-admin.php:762
+#: bp-core/classes/class-bp-admin.php:767
+#: bp-core/classes/class-bp-admin.php:772
+#: bp-core/classes/class-bp-admin.php:782
+#: bp-core/classes/class-bp-admin.php:787
+#: bp-core/classes/class-bp-admin.php:807
+#: bp-core/classes/class-bp-admin.php:812
+#: bp-core/classes/class-bp-admin.php:817
+#: bp-core/classes/class-bp-admin.php:822
 msgid "Core Developer"
 msgstr "Pääkehittäjä"
 
-#: bp-core/classes/class-bp-admin.php:725
+#: bp-core/classes/class-bp-admin.php:743
 msgid "Project Lead"
 msgstr "Projektin johto"
 
-#: bp-core/classes/class-bp-admin.php:730
+#: bp-core/classes/class-bp-admin.php:748
 msgid "Lead Developer"
 msgstr "Johtava kehittäjä"
 
-#: bp-core/classes/class-bp-admin.php:720
+#: bp-core/classes/class-bp-admin.php:738
 msgid "Project Leaders"
 msgstr "Projektin vetäjät"
 
@@ -9270,7 +9672,7 @@ msgstr "Käytetävissä olevat työkalut"
 #: bp-core/admin/bp-core-admin-components.php:24
 #: bp-core/admin/bp-core-admin-settings.php:267
 #: bp-core/admin/bp-core-admin-slugs.php:24
-#: bp-core/classes/class-bp-admin.php:714
+#: bp-core/classes/class-bp-admin.php:732
 msgid "BuddyPress Settings"
 msgstr "BuddyPressin asetukset"
 
@@ -9467,7 +9869,7 @@ msgstr "<em>Kirjauduttu</em> linkit ovat suhteessa nykyiseen käyttäjään, ja 
 msgid "Logged-In"
 msgstr "Kirjauduttu"
 
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.0.0)  #-#-#-#-#
+#. #-#-#-#-#  buddypress-code.pot (BuddyPress 3.1.0)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: bp-core/admin/bp-core-admin-functions.php:740
 #: bp-core/classes/class-bp-admin.php:207
@@ -9535,7 +9937,6 @@ msgstr "Rekisteröidy"
 #: bp-members/classes/class-bp-members-ms-list-table.php:308
 #: bp-messages/bp-messages-template.php:1276
 #: bp-templates/bp-legacy/buddypress/members/activate.php:60
-#: bp-templates/bp-nouveau/buddypress/members/activate.php:35
 #: bp-themes/bp-default/registration/activate.php:38
 msgid "Activate"
 msgstr "Ota käyttöön"
@@ -9753,12 +10154,6 @@ msgstr "Vieraile sivustolla"
 #: bp-members/bp-members-template.php:1273
 #: bp-messages/bp-messages-template.php:859
 #: bp-templates/bp-legacy/buddypress/common/search/dir-search-form.php:15
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:130
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:134
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:90
-#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:93
-#: bp-templates/bp-nouveau/buddypress/common/search/search-form.php:19
-#: bp-templates/bp-nouveau/includes/messages/functions.php:148
 #: bp-themes/bp-default/header.php:30 bp-themes/bp-default/searchform.php:5
 msgid "Search"
 msgstr "Etsi"
@@ -9779,7 +10174,7 @@ msgstr "Sivustot jäseneltä %s"
 msgid "Congratulations! You have successfully registered a new site."
 msgstr "Onnittelut! Olet juuri rekisteröinyt uuden sivuston."
 
-#: bp-templates/bp-nouveau/includes/template-tags.php:2268
+#: bp-templates/bp-nouveau/includes/template-tags.php:2272
 #: bp-themes/bp-default/registration/register.php:236
 msgid "I would like my site to appear in search engines, and in public listings around this network."
 msgstr "Haluan sivustoni näkyvän myös hakukoneissa ja julkisissa verkkolistauksissa."
@@ -9836,6 +10231,7 @@ msgstr "Viimeisin artikkeli: %s"
 msgid "Never active"
 msgstr "Ei koskaan aktiivinen"
 
+#. translators: %s = last activity timestamp (e.g. "active 1 hour ago")
 #: bp-blogs/bp-blogs-template.php:624
 #: bp-core/classes/class-bp-core-user.php:172
 #: bp-groups/bp-groups-widgets.php:72
@@ -9846,9 +10242,9 @@ msgstr "Ei koskaan aktiivinen"
 #: bp-templates/bp-legacy/buddypress/groups/groups-loop.php:67
 #: bp-templates/bp-legacy/buddypress/groups/single/cover-image-header.php:63
 #: bp-templates/bp-legacy/buddypress/groups/single/group-header.php:72
-#: bp-templates/bp-nouveau/buddypress/groups/groups-loop.php:47
-#: bp-templates/bp-nouveau/buddypress/groups/single/cover-image-header.php:30
-#: bp-templates/bp-nouveau/buddypress/groups/single/group-header.php:26
+#: bp-templates/bp-nouveau/buddypress/groups/groups-loop.php:51
+#: bp-templates/bp-nouveau/buddypress/groups/single/cover-image-header.php:31
+#: bp-templates/bp-nouveau/buddypress/groups/single/group-header.php:31
 #: bp-themes/bp-default/groups/groups-loop.php:47
 #: bp-themes/bp-default/groups/single/group-header.php:42
 msgid "active %s"
@@ -10022,11 +10418,6 @@ msgstr "Näytä"
 #: bp-templates/bp-legacy/buddypress/activity/comment.php:46
 #: bp-templates/bp-legacy/buddypress/members/single/messages/messages-loop.php:148
 #: bp-templates/bp-legacy/buddypress/members/single/messages/single.php:45
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:456
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:457
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:811
-#: bp-templates/bp-nouveau/includes/notifications/functions.php:231
-#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:115
 #: bp-themes/bp-default/activity/comment.php:46
 #: bp-themes/bp-default/members/single/messages/messages-loop.php:51
 #: bp-themes/bp-default/members/single/messages/single.php:24
@@ -10082,7 +10473,7 @@ msgstr "&larr;"
 
 #: bp-activity/classes/class-bp-activity-activity.php:365
 #: bp-activity/classes/class-bp-activity-template.php:144
-#: bp-groups/bp-groups-functions.php:245 bp-groups/bp-groups-functions.php:668
+#: bp-groups/bp-groups-functions.php:245 bp-groups/bp-groups-functions.php:695
 #: bp-groups/classes/class-bp-groups-group-members-template.php:99
 #: bp-groups/classes/class-bp-groups-group.php:1051
 #: bp-groups/classes/class-bp-groups-invite-template.php:84
@@ -10268,7 +10659,7 @@ msgstr "Toiminta sivustonlaajuisesti"
 msgid "Activity Streams"
 msgstr "Toimintasyötteet"
 
-#: bp-activity/bp-activity-functions.php:3218
+#: bp-activity/bp-activity-functions.php:3227
 msgid "Thumbnail"
 msgstr "Pikkukuva"
 
@@ -10461,7 +10852,6 @@ msgstr "Toimintoja ei löytynyt."
 #: bp-activity/bp-activity-admin.php:1049
 #: bp-activity/classes/class-bp-activity-list-table.php:593
 #: bp-templates/bp-legacy/buddypress/activity/comment.php:40
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:797
 #: bp-themes/bp-default/activity/comment.php:40
 #: bp-themes/bp-default/groups/single/forum/edit.php:10
 msgid "Reply"
@@ -10470,7 +10860,7 @@ msgstr "Vastaus"
 #: bp-activity/bp-activity-admin.php:1048 bp-groups/bp-groups-admin.php:722
 #: bp-members/classes/class-bp-members-admin.php:2188
 #: bp-templates/bp-legacy/buddypress/activity/entry.php:130
-#: bp-templates/bp-nouveau/buddypress/activity/comment-form.php:21
+#: bp-templates/bp-nouveau/includes/activity/functions.php:167
 #: bp-themes/bp-default/forums/index.php:134
 #: bp-xprofile/classes/class-bp-xprofile-field.php:1355
 #: bp-xprofile/classes/class-bp-xprofile-group.php:831
@@ -10587,9 +10977,6 @@ msgstr "M j, Y @ G:i"
 #: bp-activity/classes/class-bp-akismet.php:205
 #: bp-activity/classes/class-bp-akismet.php:234
 #: bp-core/admin/bp-core-admin-functions.php:1015
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:502
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:507
-#: bp-templates/bp-nouveau/includes/activity/template-tags.php:838
 msgid "Spam"
 msgstr "Roskaa"
 
@@ -10857,7 +11244,6 @@ msgid "Please enter some content to post."
 msgstr "Ole hyvä ja lisää hieman sisältöä artikkeliisi."
 
 #: bp-activity/actions/spam.php:59
-#: bp-templates/bp-nouveau/includes/activity/ajax.php:631
 msgid "The activity item has been marked as spam and is no longer visible."
 msgstr "Toimintakohde on merkattu roskapostiksi eikä sen vuoksi ole näytettävissä."
 

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-30 12:22:32+0000\n"
+"PO-Revision-Date: 2018-06-14 09:22:07+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -57,13 +57,13 @@ msgstr "Privacy %s"
 msgid "Settings %s"
 msgstr "Instellingen %s"
 
-#: wp-admin/privacy.php:119
-msgid "After your privacy policy page is set, we suggest that you edit it."
-msgstr "Nadat je privacybeleids pagina is vastgesteld, stellen we voor dat je deze aanpast."
-
 #: wp-admin/includes/class-wp-internal-pointers.php:164
 msgid "Personal Data and Privacy"
 msgstr "Persoonlijke gegevens en privacy"
+
+#: wp-admin/privacy.php:119
+msgid "After your privacy policy page is set, we suggest that you edit it."
+msgstr "Nadat je privacybeleidspagina is ingesteld, stellen we voor dat je deze aanpast."
 
 #. translators: accessibility text
 #: wp-admin/includes/misc.php:1542
@@ -151,7 +151,7 @@ msgstr "Nieuwe <strong>hulpmiddelen</strong> zijn toegevoegd om je te helpen met
 
 #: wp-admin/includes/class-wp-internal-pointers.php:168
 msgid "Create or select your site&#8217;s privacy policy page under <strong>Settings &gt; Privacy</strong> to keep your users informed and aware."
-msgstr "Maak of selecteer de privacybeleids pagina van je site via <strong>Instellingen &gt; Privacy</strong> om je gebruikers te informeren en bewust te maken."
+msgstr "Maak of selecteer de privacybeleidspagina van je site via <strong>Instellingen &gt; Privacy</strong> om je gebruikers te informeren en bewust te maken."
 
 #: wp-admin/includes/misc.php:1770
 msgid "If you are a member of a regulated industry, or if you are subject to additional privacy laws, you may be required to disclose that information here."
@@ -368,7 +368,7 @@ msgstr "Het is jouw verantwoordelijkheid om een uitgebreid privacybeleid te schr
 
 #: wp-admin/includes/misc.php:1631
 msgid "Please edit your privacy policy content, making sure to delete the summaries, and adding any information from your theme and plugins. Once you publish your policy page, remember to add it to your navigation menu."
-msgstr "Bewerk de inhoud van jouw privacybeleid, verwijder de beschrijvingen en voeg informatie van jouw thema en plugins toe. Zodra je je privacybeleids pagina gepubliceerd hebt, voeg deze dan ook toe aan het navigatiemenu."
+msgstr "Bewerk de inhoud van je privacybeleid, verwijder de beschrijvingen en voeg informatie van je thema en plugins toe. Zodra je je privacybeleidspagina gepubliceerd hebt, vergeet dan niet om deze ook toe te voegen aan je navigatiemenu."
 
 #: wp-admin/includes/misc.php:1628
 msgid "Hello,"
@@ -512,43 +512,30 @@ msgstr "Gebruik deze pagina"
 msgid "Create New Page"
 msgstr "Maak een nieuwe pagina"
 
+#: wp-admin/privacy.php:120
+msgid "We would also suggest reviewing your privacy policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new suggested information for you to consider adding to your policy."
+msgstr "We bevelen ook aan om van tijd tot tijd je privacybeleid opnieuw te beoordelen, vooral na een update. Er kunnen wijzigingen zijn of nieuwe suggesties die je zou kunnen toevoegen aan je beleid."
+
 #: wp-admin/privacy.php:168
 msgid "Select a Privacy Policy page"
-msgstr "Selecteer een Privacybeleids pagina"
+msgstr "Selecteer een privacybeleidspagina"
 
 #: wp-admin/privacy.php:166
 msgid "Change your Privacy Policy page"
-msgstr "Wijzig je Privacybeleids pagina "
+msgstr "Wijzig je privacybeleidspagina"
 
 #. translators: 1: URL to edit page, 2: URL to view page
 #: wp-admin/privacy.php:140
 msgid "<a href=\"%1$s\">Edit</a> or <a href=\"%2$s\">view</a> your privacy policy page content."
-msgstr "<a href=\"%1$s\">Bewerk</a> of <a href=\"%2$s\">bekijk</a> de inhoud van je privacybeleids pagina."
-
-#: wp-admin/privacy.php:120
-msgid "We would also suggest reviewing your privacy policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new suggested information for you to consider adding to your policy."
-msgstr "We bevelen ook aan om van tijd tot tijd je privacybeleid opnieuw te beoordelen, vooral na een update. Er kunnen wijzigingen zijn of nieuwe suggesties die je zou kunnen toevoegen aan je beleid."
+msgstr "<a href=\"%1$s\">Bewerk</a> of <a href=\"%2$s\">bekijk</a> de inhoud van je privacybeleidspagina."
 
 #: wp-admin/privacy.php:116
 msgid "However, it is your responsibility to use those resources correctly, to provide the information that your privacy policy requires, and to keep that information current and accurate."
 msgstr "Maar het is jouw verantwoordelijkheid om de gegevensbron op de juiste manier te gebruiken, om de informatie te verschaffen volgens je privacybeleid en om de informatie actueel en accuraat te houden."
 
-#: wp-admin/privacy.php:56
-msgid "Unable to create privacy policy page."
-msgstr "Het is helaas niet gelukt een Privacybeleids pagina aan te maken."
-
 #: wp-admin/privacy.php:115
 msgid "The new page will include help and suggestions for your privacy policy."
 msgstr "De nieuwe pagina bevat hulp en suggesties voor je privacybeleid."
-
-#: wp-admin/privacy.php:109
-msgid "Privacy Policy page"
-msgstr "Privacybeleids pagina"
-
-#. translators: URL to Pages Trash
-#: wp-admin/privacy.php:90
-msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
-msgstr "De huidig geselecteerde privacybeleids pagina bevindt zich in de prullenmand. Maak of selecteer een nieuwe privacybeleids pagina of <a href=\"%s\">zet de huidige pagina terug</a>."
 
 #. translators: Privacy Policy page slug
 #: wp-admin/includes/upgrade.php:280
@@ -567,6 +554,19 @@ msgstr "De huidig geselecteerde privacybeleidpagina bestaat niet. Maak of select
 #: wp-admin/privacy.php:30
 msgid "Privacy policy page updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
 msgstr "Privacybeleidtekst is succesvol bijgewerkt. Denk je er aan <a href=\"%s\">om je menu's bij te werken</a>?"
+
+#: wp-admin/privacy.php:109
+msgid "Privacy Policy page"
+msgstr "Privacybeleidspagina"
+
+#: wp-admin/privacy.php:56
+msgid "Unable to create privacy policy page."
+msgstr "Het is helaas niet gelukt een privacybeleidspagina aan te maken."
+
+#. translators: URL to Pages Trash
+#: wp-admin/privacy.php:90
+msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
+msgstr "De huidig geselecteerde privacybeleidspagina bevindt zich in de prullenmand. Maak of selecteer een nieuwe privacybeleidspagina of <a href=\"%s\">zet de huidige pagina terug</a>."
 
 #: wp-admin/includes/misc.php:1604
 msgid "Copy suggested policy text from %s."
@@ -622,10 +622,6 @@ msgstr "E-mail data"
 msgid "Download Personal Data Again"
 msgstr "Download persoonlijke data opnieuw"
 
-#: wp-admin/includes/file.php:2117
-msgid "[%s] Personal Data Export"
-msgstr "[%s] Persoonlijke Data Export"
-
 #: wp-admin/includes/user.php:1440
 msgid "Email sent."
 msgstr "E-mail verstuurd."
@@ -636,16 +632,11 @@ msgstr "Ongeldig request ID tijdens het samenvoegen van export data."
 
 #: wp-admin/includes/file.php:2124
 msgid "Unable to send personal data export email."
-msgstr "Het is niet gelukt om persoonlijke data export e-mail te versturen."
+msgstr "Het is niet gelukt om de geëxporteerde persoonlijke gegevens via e-mail te versturen."
 
-#: wp-admin/includes/file.php:1947
-msgid "Personal Data Export"
-msgstr "Exporteer persoonlijke data"
-
-#. translators: %s: user's e-mail address
-#: wp-admin/includes/file.php:1920
-msgid "Personal Data Export for %s"
-msgstr "Exporteer persoonlijke data voor %s"
+#: wp-admin/includes/file.php:2117
+msgid "[%s] Personal Data Export"
+msgstr "[%s] Exporteer persoonlijke gegevens"
 
 #: wp-admin/includes/ajax-actions.php:4052
 msgid "A valid email address must be given."
@@ -678,6 +669,15 @@ msgstr "Het is niet gelukt om de export map te beschermen tegen bezoekers."
 #: wp-admin/includes/file.php:2037
 msgid "Unable to open export file (archive) for writing."
 msgstr "Het is niet gelukt om het exportbestand (archief) te openen om weg te schrijven."
+
+#: wp-admin/includes/file.php:1947
+msgid "Personal Data Export"
+msgstr "Exporteer persoonlijke gegevens"
+
+#. translators: %s: user's e-mail address
+#: wp-admin/includes/file.php:1920
+msgid "Personal Data Export for %s"
+msgstr "Exporteer persoonlijke gegevens voor %s"
 
 #: wp-admin/includes/user.php:1421 wp-admin/includes/user.php:1535
 msgid "Waiting for confirmation"
@@ -6620,13 +6620,13 @@ msgstr "Veel mensen maken gebruik van de sneltoetsen om de reacties sneller te m
 msgid "You can also perform the same types of actions, including narrowing the list by using the filters, acting on a page using the action links that appear when you hover over a row, or using the Bulk Actions menu to edit the metadata for multiple pages at once."
 msgstr "Je kunt ook hetzelfde soort acties uitvoeren, inclusief het verkleinen van de lijst met behulp van de filters, die op een pagina met de actielinks  worden weergegeven. Je kunt dit doen d.m.v. het hoveren over een rij, of met behulp van het Actiesmenu om de metadata van meerdere pagina&#39;s tegelijk te bewerken."
 
-#: wp-admin/upload.php:201
-msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
-msgstr "Hoveren over een rij toont actielinks: Bewerken, Permanent verwijderen en Bekijken. Klikken op Bewerken of klikken op de mediabestandsnaam toont een eenvoudig scherm om de individuele bestandsmetadata te bewerken. Klikken op Definitief verwijderen zal het bestand uit de mediabibliotheek verwijderen (en ook van elk bericht/pagina waar het aan is toegevoegd). Bekijken brengt je naar de schermpagina van het bestand."
-
 #: wp-admin/index.php:46
 msgid "Links in the Toolbar at the top of the screen connect your dashboard and the front end of your site, and provide access to your profile and helpful WordPress information."
 msgstr "De links in de toolbar aan de bovenkant van het scherm verbinden je Dashboard en de voorkant van je site en geven je toegang tot je profiel en handige WordPress informatie."
+
+#: wp-admin/upload.php:201
+msgid "Hovering over a row reveals action links: Edit, Delete Permanently, and View. Clicking Edit or on the media file&#8217;s name displays a simple screen to edit that individual file&#8217;s metadata. Clicking Delete Permanently will delete the file from the media library (as well as from any posts to which it is currently attached). View will take you to the display page for that file."
+msgstr "Hoveren over een rij toont actielinks: Bewerken, Permanent verwijderen en Bekijken. Klikken op Bewerken of klikken op de mediabestandsnaam toont een eenvoudig scherm om de individuele bestandsmetadata te bewerken. Klikken op Definitief verwijderen zal het bestand uit de mediabibliotheek verwijderen (en ook van elk bericht/pagina waar het aan is toegevoegd). Bekijken brengt je naar de schermpagina van het bestand."
 
 #: wp-admin/edit-form-advanced.php:396 wp-admin/edit.php:237
 msgid "Pages are similar to posts in that they have a title, body text, and associated metadata, but they are different in that they are not part of the chronological blog stream, kind of like permanent posts. Pages are not categorized or tagged, but can have a hierarchy. You can nest pages under other pages by making one the &#8220;Parent&#8221; of the other, creating a group of pages."
@@ -6895,6 +6895,16 @@ msgstr "Deactiveren"
 msgid "By %s"
 msgstr "Door %s"
 
+#: wp-admin/my-sites.php:54 wp-admin/options-head.php:15
+#: wp-admin/options.php:235
+msgid "Settings saved."
+msgstr "Instellingen opgeslagen."
+
+#: wp-admin/includes/dashboard.php:431 wp-admin/includes/dashboard.php:433
+#: wp-admin/users.php:510
+msgid "Search Users"
+msgstr "Gebruikers zoeken"
+
 #: wp-admin/comment.php:50 wp-admin/custom-background.php:96
 #: wp-admin/custom-header.php:122 wp-admin/edit-comments.php:184
 #: wp-admin/edit-form-advanced.php:391 wp-admin/edit-form-advanced.php:406
@@ -6914,16 +6924,6 @@ msgstr "Door %s"
 #: wp-admin/user-new.php:219 wp-admin/users.php:66 wp-admin/widgets.php:75
 msgid "For more information:"
 msgstr "Voor meer informatie:"
-
-#: wp-admin/my-sites.php:54 wp-admin/options-head.php:15
-#: wp-admin/options.php:235
-msgid "Settings saved."
-msgstr "Instellingen opgeslagen."
-
-#: wp-admin/includes/dashboard.php:431 wp-admin/includes/dashboard.php:433
-#: wp-admin/users.php:510
-msgid "Search Users"
-msgstr "Gebruikers zoeken"
 
 #: wp-admin/user-new.php:295 wp-admin/user-new.php:328
 #: wp-admin/user-new.php:386
@@ -9676,10 +9676,6 @@ msgstr "Schrijvers van reacties moeten naam en e-mailadres opgeven"
 msgid "Admin Color Scheme"
 msgstr "Kleurenschema beheren"
 
-#: wp-admin/options-discussion.php:160
-msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
-msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail of IP-adres, wordt het in de <a href=\"edit-comments.php?comment_status=moderated\">moderatiewachtrij</a> opgehouden. E&#233;n woord of IP-adres per regel. Het houdt ook rekening met woorden in woorden. &#8220;press&#8221; wordt ook gevonden binnen &#8220;WordPress&#8221;."
-
 #: wp-admin/options-discussion.php:169
 msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be put in the trash. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
 msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail- of IP-adres, wordt het verplaatst naar de prullenbak. E&#233;n woord of IP-adres per regel. Er wordt gezocht in woorden, &#8220;press&#8221; zal worden gevonden in &#8220;WordPress&#8221;. "
@@ -9687,6 +9683,10 @@ msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de i
 #: wp-admin/media-upload.php:38
 msgid "Invalid item ID."
 msgstr "Ongeldig item-ID."
+
+#: wp-admin/options-discussion.php:160
+msgid "When a comment contains any of these words in its content, name, URL, email, or IP address, it will be held in the <a href=\"edit-comments.php?comment_status=moderated\">moderation queue</a>. One word or IP address per line. It will match inside words, so &#8220;press&#8221; will match &#8220;WordPress&#8221;."
+msgstr "Wanneer een reactie &#233;&#233;n of meer van deze woorden bevat in de inhoud, naam, URL, e-mail of IP-adres, wordt het in de <a href=\"edit-comments.php?comment_status=moderated\">moderatiewachtrij</a> opgehouden. E&#233;n woord of IP-adres per regel. Het houdt ook rekening met woorden in woorden. &#8220;press&#8221; wordt ook gevonden binnen &#8220;WordPress&#8221;."
 
 #: wp-admin/includes/theme.php:267
 msgid "One Column"
@@ -10202,10 +10202,6 @@ msgstr "Terug naar de thema installatiehulp."
 msgid "Return to Themes page"
 msgstr "Terug naar de thema&#39;s pagina"
 
-#: wp-admin/includes/file.php:859
-msgid "The uploaded file could not be moved to %s."
-msgstr "Het ge&uuml;ploade bestand kan niet verplaatst worden naar %s."
-
 #: wp-admin/includes/dashboard.php:42
 msgid "Right Now"
 msgstr "Op dit moment"
@@ -10288,14 +10284,6 @@ msgstr "my-hacks.php (ondersteuning verouderde hacks)"
 #: wp-admin/includes/file.php:58
 msgid ".htaccess (for rewrite rules )"
 msgstr ".htaccess (voor rewrite regels)"
-
-#: wp-admin/includes/file.php:752
-msgid "The uploaded file was only partially uploaded."
-msgstr "Het ge&uuml;ploade bestand is slechts gedeeltelijk ge&uuml;pload."
-
-#: wp-admin/includes/file.php:753
-msgid "No file was uploaded."
-msgstr "Geen bestand ge&uuml;pload."
 
 #: wp-admin/includes/file.php:755
 msgid "Missing a temporary folder."
@@ -11705,6 +11693,18 @@ msgstr "Achtergrond bijgewerkt. <a href=\"%s\">De site bekijken</a> om het resul
 #: wp-admin/includes/user.php:789 wp-admin/includes/user.php:862
 msgid "Search Requests"
 msgstr "Zoek aanvragen"
+
+#: wp-admin/includes/file.php:752
+msgid "The uploaded file was only partially uploaded."
+msgstr "Het geüploade bestand is slechts gedeeltelijk geüpload."
+
+#: wp-admin/includes/file.php:753
+msgid "No file was uploaded."
+msgstr "Geen bestand geüpload."
+
+#: wp-admin/includes/file.php:859
+msgid "The uploaded file could not be moved to %s."
+msgstr "Het geüploade bestand kan niet verplaatst worden naar %s."
 
 #: wp-admin/includes/media.php:2456 wp-admin/includes/nav-menu.php:361
 #: wp-admin/includes/nav-menu.php:649

@@ -218,7 +218,6 @@ if ( ! class_exists( 'WpSmushitAdmin' ) ) {
 			 */
 			add_action( 'wp_ajax_hide_api_message', array( $this, 'hide_api_message' ) );
 
-			//Filter Attachment information, to append smush status
 			add_filter('wp_prepare_attachment_for_js', array( $this, 'smush_send_status' ), 99, 3 );
 
 			//Send smush stats

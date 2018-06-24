@@ -178,7 +178,7 @@ if ( ! class_exists( 'WpSmushS3' ) ) {
 				$message = sprintf( __( "We can see you have WP Offload S3 installed with the <strong>Remove Files From Server</strong> option activated. If you want to optimize your S3 images you'll need to enable the <a href='%s'><strong>Amazon S3 Support</strong></a> feature in Smush's settings.", 'wp-smushit' ), $settings_link );
 			} else {
 				// If not a premium user.
-				$message = sprintf( __( "We can see you have WP Offload S3 installed with the <strong>Remove Files From Server</strong> option activated. If you want to optimize your S3 images you'll need to <a href='%s'><strong>upgrade to Smush Pro</strong></a>", 'wp-smushit' ), esc_url( 'https://premium.wpmudev.org/project/wp-smush-pro' ) );
+				$message = sprintf( __( "We can see you have WP Offload S3 installed with the <strong>Remove Files From Server</strong> option activated. If you want to optimize your S3 images you'll need to <a href='%s'><strong>upgrade to Smush Pro</strong></a>", 'wp-smushit' ), esc_url( 'https://premium.wpmudev.org/project/wp-smush-pro' ) );				 	          			 
 			}
 
 			echo '<div class="wp-smush-notice wp-smush-s3support-alert notice"><span class="notice-message">' . $message . '</span><i class="icon-fi-close"></i></div>';
@@ -349,7 +349,7 @@ if ( ! class_exists( 'WpSmushS3' ) ) {
 
 			$s3client = $as3cf->get_s3client( $region );
 
-			$file_exists = $s3client->doesObjectExist( $bucket, $s3_object['key'] );
+			$file_exists = $s3client->does_object_exist( $bucket, $s3_object['key'] );
 
 			return $file_exists;
 		}

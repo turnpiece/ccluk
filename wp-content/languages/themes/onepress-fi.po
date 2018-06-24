@@ -1,19 +1,19 @@
-# Translation of Themes - OnePress in Russian
+# Translation of Themes - OnePress in Finnish
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-13 09:50:14+0000\n"
+"PO-Revision-Date: 2018-06-21 12:24:02+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
-"Language: ru\n"
+"Language: fi\n"
 "Project-Id-Version: Themes - OnePress\n"
 
 #. Description of the plugin/theme
 msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
-msgstr "OnePress это очень креативная и гибкая одностраничная тема для WordPress, которая отлично подойдет для бизнес-сайтов, портфолио, страниц агентств, фрилансеров,витрины товаров, фрилансеров и всем кто ценит хороший дизайн. Тема имеет элегантный и класический вид, хороший пример использования WordPress Bootstrap 4 совместима с последними WooCommerce. ( Просмотр: http://www.famethemes.com/preview/?theme=OnePress)"
+msgstr "OnePress on erinomainen ketterä yhden sivun WordPress-teema, joka sopii erinomaisesti yrityskäyttöön, portfolioksi, digitoimiston sivuksi, tuotesivuksi, freelancereille tai jokaiselle hyvää suunnittelua arvostavalle. Teema on elegantti ja klassinen, sekä hyvä esimerkki Bootstrap 4 WordPress -pohjaisesta teemasta ja lisäksi yhteensopiva WooCommercen uusimman version kanssa. (Esikatselulinkki : http://www.famethemes.com/preview/?theme=OnePress)"
 
 #. #-#-#-#-#  onepress.pot (OnePress 2.0.9)  #-#-#-#-#
 #. Theme Name of the plugin/theme
@@ -23,19 +23,19 @@ msgstr "OnePress"
 
 #: inc/dashboard.php:394
 msgid "Create a support ticket"
-msgstr "Создать запрос в поддержку"
+msgstr "Luo tukitiketti"
 
 #: inc/customizer.php:526
 msgid "Transparent Logo Height in Pixel"
-msgstr "Высота прозрачного лого в пикселях"
+msgstr "Läpinäkyvän logon korkeus pikseleissä"
 
 #: inc/customizer.php:1717
 msgid "Open Button #2 In New Window"
-msgstr "Открыть кнопку  #2 в новом окне"
+msgstr "Avaa nappi #2 uuteen ikkunaan"
 
 #: inc/customizer.php:1651
 msgid "Open Button #1 In New Window"
-msgstr "Открыть кнопку  #1 в новом окне"
+msgstr "Avaa nappi #1 uuteen ikkunaan"
 
 #: functions.php:102
 msgid "Pirate Forms"
@@ -43,115 +43,115 @@ msgstr "Pirate Forms"
 
 #: inc/metabox.php:173
 msgid "Apply header cover settings for single product."
-msgstr "Применить настройки обложки шапки для страницы товара."
+msgstr "Lisää ylätunnisteen kansikuva-asetus yksittäiselle tuotteelle."
 
 #: inc/dashboard.php:517
 msgid "Keep %s updated"
-msgstr "Обновлять %s"
+msgstr "Pidä %s päivitettynä"
 
 #: inc/dashboard.php:438
 msgid "Your settings were copied."
-msgstr "Ваши настройки скопированы."
+msgstr "Asetuksesi kopioitiin."
 
 #: inc/metabox.php:164
 msgid "Hide footer."
-msgstr "Спрятать футер."
+msgstr "Piilota alatunniste."
 
 #: inc/metabox.php:153
 msgid "Display page excerpt as header cover description."
-msgstr "Показать отрывок страницы, как описание обложки шапки."
+msgstr "Näytä sivun ote yläosan kansikuvan kuvauksessa."
 
 #: inc/metabox.php:147
 msgid "Display featured image as header cover."
-msgstr "Показать изображение записи, как обложку шапки."
+msgstr "Käytä artikkelikuvaa ylätunnisteen kansikuvana."
 
 #: inc/metabox.php:141
 msgid "Hide page title area."
-msgstr "Скрыть блок заголовка страницы."
+msgstr "Piilota sivun otsikkoalue."
 
 #: inc/metabox.php:136
 msgid "Hide header."
-msgstr "Скрыть шапку."
+msgstr "Piilota ylätunniste."
 
 #: inc/metabox.php:159
 msgid "Hide breadcrumb."
-msgstr "Скрыть хлебные крошки."
+msgstr "Piilota murupolku."
 
 #: inc/customizer.php:391
 msgid "Only set if display site tagline."
-msgstr "Установить только если показывается подзаголовок сайта."
+msgstr "Käytä vain jos näytetään sivuston kuvausriviä."
 
 #: inc/customizer.php:389
 msgid "Site Tagline Color"
-msgstr "Цвет подзаголовка сайта"
+msgstr "Sivuston kuvausrivin väri"
 
 #. Template Name of the plugin/theme
 msgid "Full Width - Contained Content"
-msgstr "Полноя ширина - Контент ограничен"
+msgstr "Kokoleveä - Rajattuleveyksinen sisältö"
 
 #. Template Name of the plugin/theme
 msgid "Full Width - Stretched Content"
-msgstr "Полноя ширина - Контент растянут"
+msgstr "Kokoleveä - Venytetty sisältöalue"
 
 #: inc/sanitize.php:240
 msgid "Upgrade to %1s to unlock this feature."
-msgstr "Обновиться до %1s для разблокировки этой возможности."
+msgstr "Päivitä versioon %1s saadaksesi tämä toiminto käyttöön."
 
 #: inc/metabox.php:38
 msgid "Page Settings"
-msgstr "Настройки страницы"
+msgstr "Sivun asetukset"
 
 #: inc/dashboard.php:718
 msgid "Get OnePress Plus now!"
-msgstr "Получить OnePress Plus сейчас!"
+msgstr "Hanki OnePress Plus nyt!"
 
 #: inc/dashboard.php:364
 msgid "Free vs PLUS"
-msgstr "Бесплатно против PLUS"
+msgstr "Ilmainen vs PLUS"
 
 #: inc/dashboard.php:362
 msgid "Recommended Actions"
-msgstr "Рекомендованные действия"
+msgstr "Suositellut toimenpiteet"
 
 #: inc/customizer.php:3640
 msgid "OnePress Plus Available! Take a look"
-msgstr "Доступна OnePress Plus! Ознакомьтесь"
+msgstr "OnePress Plus saatavilla! Katso lisää"
 
 #: inc/customizer.php:3630
 msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
-msgstr "<h4 class=\"customizer-group-heading-message\">Порядок секций с помощью перетаскивания</h4><p class=\"customizer-group-heading-message\">Попробуйте <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версия для полного контроля над ПОРЯДКОМ СЕКЦИЙ главной страници!</p><h4 class=\"customizer-group-heading-message\">Расширеная настройка разделов</h4><p class=\"customizer-group-heading-message\">Попробуйте <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версию для полного контроля над настройкой разделов, которые включают цвет фона, изображения, видео, эфект паралакса, пользовательские стили и многое другое ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Raahaa &amp; Pudota - tilaus-alue</h4><p class=\"customizer-group-heading-message\">Tsekkaa <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> versio, jotta saat täyden kontrollin etusivun tilaukset-alueen järjestyksestä.</p><h4 class=\"customizer-group-heading-message\">Kehittyneet alueiden tyylittelyt</h4><p class=\"customizer-group-heading-message\">Tsekkaa <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> versio, jotta saat täyden kontrollin alueiden tyylittelyyn, joka mahdollistaa seuraavien muokkaamisen: taustaväri, kuva, video, parallax-efekti, mukautetut tyylit ja paljon muuta ...</p>"
 
 #: inc/customizer.php:3314
 msgid "Ascending"
-msgstr "По возрастанию"
+msgstr "Nouseva"
 
 #: inc/customizer.php:3313
 msgid "Descending"
-msgstr "По убыванию"
+msgstr "Laskeva"
 
 #: inc/customizer.php:3309
 msgid "Order"
-msgstr "Порядок"
+msgstr "Järjestys"
 
 #: inc/customizer.php:3294
 msgid "Random order"
-msgstr "Случайный порядок"
+msgstr "Satunnainen järjestys"
 
 #: inc/customizer.php:3293
 msgid "Order by Page Order"
-msgstr "Упорядочить по порядку страницы"
+msgstr "Järjestä sivun järjestyksen mukaan"
 
 #: inc/customizer.php:3292
 msgid "Comment Count"
-msgstr "Количество комментариев"
+msgstr "Kommenttien määrä"
 
 #: inc/customizer.php:3291
 msgid "Date"
-msgstr "Дата"
+msgstr "Päivämäärä"
 
 #: inc/customizer.php:3289
 msgid "Author"
-msgstr "Автор"
+msgstr "Tekijä"
 
 #: inc/customizer.php:3288
 msgid "ID"
@@ -159,15 +159,15 @@ msgstr "ID"
 
 #: inc/customizer.php:3287
 msgid "Default"
-msgstr "По умолчанию"
+msgstr "Oletus"
 
 #: inc/customizer.php:3283
 msgid "Order By"
-msgstr "Упорядочить по"
+msgstr "Järjestä"
 
 #: inc/customizer.php:3267
 msgid "Category to show"
-msgstr "Категория для отображения"
+msgstr "Näytettävä kategoria"
 
 #: inc/customizer.php:2799
 msgid "1x"
@@ -191,256 +191,256 @@ msgstr "5x"
 
 #: inc/customizer.php:2790
 msgid "Icon Size"
-msgstr "Размер иконки"
+msgstr "Kuvakkeen koko"
 
 #: inc/customizer.php:2288
 msgid "Layout Settings"
-msgstr "Настройки разметки"
+msgstr "Layoutin asetukset"
 
 #: inc/customizer.php:1568
 msgid "Rotating Text Background"
-msgstr "Фон вращающегося текста"
+msgstr "Kääntyvän tekstin tausta"
 
 #: inc/customizer.php:1553
 msgid "Rotating Text Color"
-msgstr "Цвет вращающегося текста"
+msgstr "Kääntyvän tekstin väri"
 
 #: inc/customizer.php:1529
 msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
-msgstr "Мы <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
+msgstr "Olemme <span class=\"js-rotating\">OnePress | Yhden sivun | Responsiivinen | Täydellinen</span>"
 
 #: inc/customizer.php:1486
 msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
-msgstr "Хочешь добавить <strong>видео на фон</strong> для блока героев? Обновитесь до <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> версии."
+msgstr "Haluatko lisätä<strong>taustavideon</strong> pyörimään yläosan alueeseen? Päivitä <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>-versioon."
 
 #: inc/customizer.php:1255
 msgid "Disable Preload Icon"
-msgstr "Отключить иконку предварительной загрузки"
+msgstr "Ota esilatauksen kuvake pois käytöstä"
 
 #: inc/customizer.php:1080
 msgid "Footer Copyright"
-msgstr "Копирайт в футере"
+msgstr "Alaosan Copyright"
 
 #: inc/customizer.php:1067 inc/customizer.php:1134
 msgid "Link Hover Color"
-msgstr "Цвет ссылки при наведении"
+msgstr "Linkin hover-väri"
 
 #: inc/customizer.php:1051 inc/customizer.php:1121
 msgid "Link Color"
-msgstr "Цвет ссылки"
+msgstr "Linkin väri"
 
 #: inc/customizer.php:1034
 msgid "Widget Title Color"
-msgstr "Цвет заголовка виджета"
+msgstr "Vimpaimen otsakkeen väri"
 
 #: inc/customizer.php:985
 msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
-msgstr "Введите числа, их сумма должна быть меньше или равна 12, разделенная символом \"+\""
+msgstr "Anna kokonaisia numeroita joiden summa täytyy olla pienempi tai yhtä suuri kuin 12 jä välissä \"+\"-merkki"
 
 #: inc/customizer.php:983
 msgid "Custom footer %s columns width"
-msgstr "Пользовательский футер, ширина %s колонок"
+msgstr "Mukautettu alatunniste %s palstojen pituus"
 
 #: inc/customizer.php:983
 msgid "Custom footer 1 column width"
-msgstr "Пользовательский футер, ширина 1 колонки"
+msgstr "Mukautetun alatunnisteen 1 palstojen pituus"
 
 #: inc/customizer.php:959
 msgid "Disable footer widgets"
-msgstr "Отключить виджеты футера"
+msgstr "Ota alatunnisteen vimpaimet pois käytöstä"
 
 #: inc/customizer.php:953
 msgid "Number footer columns to display."
-msgstr "Колличество столбцов футера для показа."
+msgstr "Kuinka monta alatunnisteen palstaa näytetään."
 
 #: inc/customizer.php:933
 msgid "Footer Widgets"
-msgstr "Виджеты футера"
+msgstr "Alaosan vimpaimet"
 
 #: inc/customizer.php:918 inc/customizer.php:1001 inc/customizer.php:1108
 msgid "Text Color"
-msgstr "Цвет текста"
+msgstr "Tekstin väri"
 
 #: inc/customizer.php:822 inc/customizer.php:2334 inc/customizer.php:2530
 #: inc/customizer.php:2743 inc/customizer.php:2931 inc/customizer.php:3109
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
-msgstr "Обновить до <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> для возможности добавлять больше элементов и разблокировать другие премиальные возможности!"
+msgstr "Päivitä <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>saan jotta saat enemmän kohteita ja muita premium-ominaisuuksia käyttöön!"
 
 #: inc/customizer.php:750
 msgid "Footer Socials"
-msgstr "Социальные иконки в футере"
+msgstr "Alatunnisteen sosiaaliset"
 
 #: inc/customizer.php:696
 msgid "Right"
-msgstr "Справа"
+msgstr "Oikea"
 
 #: inc/customizer.php:695
 msgid "Left"
-msgstr "Слева"
+msgstr "Vasen"
 
 #: inc/customizer.php:694
 msgid "Center"
-msgstr "По центру"
+msgstr "Keskitetty"
 
 #: inc/customizer.php:690
 msgid "Content Align"
-msgstr "Положение контента"
+msgstr "Sisällön kohdistus"
 
 #: inc/customizer.php:657
 msgid "Color"
-msgstr "Цвет"
+msgstr "Väri"
 
 #: inc/customizer.php:641
 msgid "The page cover padding bottom in percent (%)."
-msgstr "Покрытие нижней части страницы в процентах (%)."
+msgstr "Sivun kansikuvan padding bottom prosenteissa (%)."
 
 #: inc/customizer.php:640
 msgid "Padding Bottom"
-msgstr "Отступ снизу"
+msgstr "Alaosan padding"
 
 #: inc/customizer.php:626
 msgid "The page cover padding top in percent (%)."
-msgstr "Покрытие верхней части страницы в процентах (%)."
+msgstr "Sivun kansikuvan padding top prosenteissa (%)."
 
 #: inc/customizer.php:625
 msgid "Padding Top"
-msgstr "Отступ сверху"
+msgstr "Yläpuolen padding"
 
 #: inc/customizer.php:612
 msgid "Check this box to disable the page title bar on all pages."
-msgstr "Отметьте для скрытия блока заголовка страницы на всех страницах."
+msgstr "Ruksaa tämä boksi ottaaksesi sivun otsikkopalkin pois käytöstä kaikilta sivuilta."
 
 #: inc/customizer.php:610
 msgid "Disable Page Title bar?"
-msgstr "Скрыть блок заголовка страницы?"
+msgstr "Otetaanko sivun otsikkopalkki pois käytöstä?"
 
 #: inc/customizer.php:594
 msgid "Page Title Area"
-msgstr "Зона заголовка страницы"
+msgstr "Sivuston otsikkopalkki"
 
 #: inc/customizer.php:584
 msgid "Padding left and right for Navigation items (pixels)."
-msgstr "Отступы слева и справа для элементов навигаци (пиксели)."
+msgstr "Vasemman ja oikeanpuoleinen padding-väli valikon kohteille (pikseleissä)."
 
 #: inc/customizer.php:583
 msgid "Menu Item Padding"
-msgstr "Отступ елемента меню"
+msgstr "Valikon kohteen padding"
 
 #: inc/customizer.php:569
 msgid "Navigation"
-msgstr "Навигация"
+msgstr "Valikko"
 
 #: inc/customizer.php:557
 msgid "Transparent Site Tagline Color"
-msgstr "Прозрачный цвет подзаголовка сайта"
+msgstr "Läpinäkyvän sivuston kuvausrivin väri"
 
 #: inc/customizer.php:541
 msgid "Transparent Site Title Color"
-msgstr "Прозрачный цвет заголовка сайта"
+msgstr "Läpinäkyvän sivuston otsikon väri"
 
 #: inc/customizer.php:508
 msgid "Transparent Retina Logo"
-msgstr "Прозрачный логотип Retina"
+msgstr "Läpinäkyvä Retina Logo"
 
 #: inc/customizer.php:490 inc/customizer.php:509
 msgid "Only apply when transparent header option is checked."
-msgstr "Применяется только при установленной прозрачной опции заголовка."
+msgstr "Ota käyttöön vain kun läpinäkyvä ylätunnisteasetus on valittu."
 
 #: inc/customizer.php:488
 msgid "Transparent Logo"
-msgstr "Прозрачный логотип"
+msgstr "Läpinäkyvä Logo"
 
 #: inc/customizer.php:294
 msgid "Below Hero Slider"
-msgstr "Под Hero Slider"
+msgstr "Yläosan alapuolella oleva slider"
 
 #: inc/customizer.php:293
 msgid "Top"
-msgstr "Сверху"
+msgstr "Ylhäällä"
 
 #: inc/customizer.php:290
 msgid "Header Position"
-msgstr "Положения заголовка"
+msgstr "Ylätunnisteen sijainti"
 
 #: inc/customizer.php:272
 msgid "Contained"
-msgstr "Ограниченно"
+msgstr "Rajattu"
 
 #: inc/customizer.php:268
 msgid "Header Width"
-msgstr "Ширина заголовка"
+msgstr "Ylätunnisteen leveys"
 
 #: inc/customizer.php:218
 msgid "Check this if you want to disable default google fonts in theme."
-msgstr "Отметьте если вы хотите отключить шрифты гугл по-умолчании в теме."
+msgstr "Ruksaa tämä jos haluat ottaa pois käytöstä oletus Google-fontit teemasta."
 
 #: inc/customizer.php:216
 msgid "Disable Google Fonts"
-msgstr "Отключить шрифты Google"
+msgstr "Ota Google Fontit pois käytöstä"
 
 #: inc/customizer.php:119
 msgid "Logo Height In Pixel"
-msgstr "Высота логотипа в пикселях"
+msgstr "Logon korkeus pikseleissä"
 
 #: inc/customizer.php:101
 msgid "Retina Logo"
-msgstr "Логотип Retina"
+msgstr "Retina Logo"
 
 #: inc/customizer-controls.php:632
 msgid "All"
-msgstr "Все"
+msgstr "Kaikki"
 
 #: functions.php:165
 msgid "Footer %s"
-msgstr "Футер %s"
+msgstr "Alatunniste %s"
 
 #: comments.php:32
 msgid "One thought on &ldquo;%2$s&rdquo;"
-msgstr "Один комментарий к &ldquo;%2$s&rdquo;"
+msgstr "Yksi kommentti artikkeliin &ldquo;%2$s&rdquo;"
 
 #: inc/customizer.php:741
 msgid "Check this box to show single post meta such as post date, author, category,..."
-msgstr "Установите этот флажок, чтобы показывать на отдельные сообщения, такие метаданные как дата публикации, автор, категория, ..."
+msgstr "Valitse tämä näyttääksesi yksittäisen postauksen metatiedot kuten päivämäärä, tekijä, kategoria,..."
 
 #: inc/customizer.php:739
 msgid "Show single post meta"
-msgstr "Показывать метаописание записи"
+msgstr "Näytä yksittäisen postauksen meta"
 
 #: inc/customizer.php:726
 msgid "Check this box to show post thumbnail on single post."
-msgstr "Установите этот флажок, чтобы показать миниатюру записи для одиночной записи."
+msgstr "Valitse tämä näyttääksesi artikkelin pikkukuva yksittäisessä artikkelissa."
 
 #: inc/customizer.php:724
 msgid "Show single post thumbnail"
-msgstr "Показать миниатюру одиночной записи"
+msgstr "Näytä yksittäisen artikkelin pikkukuva"
 
 #: inc/customizer.php:709
 msgid "Single Post"
-msgstr "Одиночная запись"
+msgstr "Yksittäinen artikkeli"
 
 #: inc/customizer.php:1378
 msgid "The amount of time in between slides, expressed as the number of milliseconds."
-msgstr "Количество времени между слайдами, выраженное как количество миллисекунд."
+msgstr "Aika liuskojen välissä millisekuntteina"
 
 #: inc/customizer.php:1377
 msgid "Slider duration speed"
-msgstr "Скорость работы слайдера"
+msgstr "Liuskojen nopeus/kesto"
 
 #: inc/customizer.php:1361
 msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
-msgstr "Это скорость, с которой изображение будет исчезать. Целые числа в миллисекундах."
+msgstr "Tämä on nopeus jossa kuva häivyttyy sisäänpäin. Desimaalit sallitaan millisekunteissa."
 
 #: inc/customizer.php:1360
 msgid "Slider animation speed"
-msgstr "Скорость анимации слайдера"
+msgstr "Sliderin animaation nopeus"
 
 #: inc/customizer.php:1342
 msgid "Text animation speed"
-msgstr "Скорость текстовой анимации"
+msgstr "Tekstin animaation nopeus"
 
 #: inc/dashboard.php:416
 msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
-msgstr "Дочерняя тема использует собственное имя для настройки темы, хотите ли вы скопировать данные настройки из родительской темы в эту дочернюю тему?"
+msgstr "Lapsiteema käyttää teeman oman asetuksen nimeä, haluatko kopioida asetukset pääteemasta lapsiteemaan?"
 
 #: inc/customizer.php:3697
 msgid "Font Awesome"
@@ -448,107 +448,107 @@ msgstr "Font Awesome"
 
 #: inc/customizer.php:3693
 msgid "Search"
-msgstr "Поиск"
+msgstr "Haku"
 
 #: inc/dashboard.php:796
 msgid "Are you sure want to copy ?"
-msgstr "Вы действительно хотите скопировать?"
+msgstr "Oletko varma että haluat kopioida ?"
 
 #: inc/dashboard.php:455
 msgid "Recommend Plugins"
-msgstr "Рекомендованные плагины"
+msgstr "Suositellut lisäosat"
 
 #: inc/dashboard.php:435
 msgid "Copy now"
-msgstr "Скопировать сейчас"
+msgstr "Kopioi nyt"
 
 #: inc/dashboard.php:427
 msgid "To Theme"
-msgstr "К теме"
+msgstr "Teemaan"
 
 #: inc/dashboard.php:421
 msgid "From Theme"
-msgstr "От темы"
+msgstr "Teemasta"
 
 #: inc/dashboard.php:414
 msgid "You're using %1$s theme, It's a child theme of OnePress"
-msgstr "Вы используете тему %1$s, это дочерняя тема OnePress"
+msgstr "Käyätt teemaa %1$s, joka on OnePressin lapsiteema"
 
 #: inc/dashboard.php:269
 msgid "Details"
-msgstr "Детали"
+msgstr "Yksityiskohdat"
 
 #: inc/dashboard.php:197
 msgid "Import Demo Data"
-msgstr "Импорт демо-данных"
+msgstr "Tuo Demo-data"
 
 #: inc/dashboard.php:197
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
-msgstr "Сэкономьте время, импортируя наши демо-данные, ваш сайт будет настроен и готов к настройке в считанные минуты. %s"
+msgstr "Säästä aikaa tuodaksesi meidän demon data, sivusi tulee olemaan käyttövalmis ja mukauttamiseen menee vain minuutteja. %s"
 
 #: inc/customizer.php:2170
 msgid "Read More Text"
-msgstr "Читать дальше"
+msgstr "Lue lisää teksti"
 
 #: inc/customizer.php:2165 section-parts/section-gallery.php:38
 msgid "View More"
-msgstr "Просмотреть больше"
+msgstr "Näytä lisää"
 
 #: inc/customizer.php:2155
 msgid "Read More Link"
-msgstr "Ссылка Читать дальше"
+msgstr "Lue lisää linkki"
 
 #: inc/customizer.php:166
 msgid "No sidebar"
-msgstr "Без боковой панели"
+msgstr "Ei sivupalkkia"
 
 #: inc/customizer.php:165
 msgid "Left sidebar"
-msgstr "Левая боковая панель"
+msgstr "Vasen sivupalkki"
 
 #: inc/customizer.php:164
 msgid "Right sidebar"
-msgstr "Правая боковая панель"
+msgstr "Oikea sivupalkki"
 
 #: inc/customizer.php:161
 msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
-msgstr "Макет сайта, применяется для всех страниц, исключая домашнюю страницу и настраиваемые шаблоны страниц."
+msgstr "Sivuston asettelu, laita päälle kaikille sivuille, jätä huomiotta etusivu ja mukautetut sivupohjat."
 
 #: inc/customizer.php:160
 msgid "Site Layout"
-msgstr "Макет сайта"
+msgstr "Sivuston asettelu"
 
 #: functions.php:106
 msgid "Famethemes Demo Importer"
-msgstr "Famethemes импорт демо материалов"
+msgstr "Fametheems Demo tuontiohjelma"
 
 #: functions.php:154
 msgid "WooCommerce Sidebar"
-msgstr "Боковая панель WooCommerce"
+msgstr "WooCommercen sivupalkki"
 
 #: inc/customizer.php:2296 inc/customizer.php:2708
 msgid "1 Column"
-msgstr "1 колонка"
+msgstr "1 palsta"
 
 #: inc/customizer.php:2139
 msgid "Enable Lightbox"
-msgstr "Включить Лайтбокс"
+msgstr "Ota käyttöön Lightbox"
 
 #: inc/customizer.php:2125
 msgid "Number items"
-msgstr "Номер элемента"
+msgstr "Numerokohteet"
 
 #: inc/customizer.php:2100
 msgid "Layout columns"
-msgstr "Разметка колонок"
+msgstr "Asettelun palstat"
 
 #: inc/customizer.php:2084
 msgid "Row Height"
-msgstr "Высота рядка"
+msgstr "Rivin korkeus"
 
 #: inc/customizer.php:2068
 msgid "Item Spacing"
-msgstr "Расстояние между элементами"
+msgstr "Kohteen välistys"
 
 #: inc/customizer.php:2054
 msgid "Masonry"
@@ -556,560 +556,555 @@ msgstr "Masonry"
 
 #: inc/customizer.php:2053
 msgid "Justified"
-msgstr "по ширине"
+msgstr "Tasattu"
 
 #: inc/customizer.php:2052
 msgid "Slider"
-msgstr "Слайдер"
+msgstr "Slider"
 
 #: inc/customizer.php:2051
 msgid "Carousel"
-msgstr "Карусель"
+msgstr "Karuselli"
 
 #: inc/customizer.php:2050
 msgid "Grid"
-msgstr "Сетка"
+msgstr "Grid"
 
 #: inc/customizer.php:2045
 msgid "Display"
-msgstr "Отобразить"
+msgstr "Näytä"
 
 #: inc/customizer.php:2030
 msgid "Default, inside container"
-msgstr "По умолчанию внутри контейнера"
+msgstr "Oletus, containerin sisässä"
 
 #: inc/customizer.php:950 inc/customizer.php:2025
 msgid "Layout"
-msgstr "Разметка"
+msgstr "Asettelu"
 
 #: inc/customizer.php:2011
 msgid "Select a page which have content contain [gallery] shortcode."
-msgstr "Выберите страницу которая имеет короткий код [gallery] в содержании."
+msgstr "Valitse sivu jonka sisältö sisältää [gallery]-lyhytkoodin."
 
 #: inc/customizer.php:2006
 msgid "Select Gallery Page"
-msgstr "Выберите страницу галереи"
+msgstr "Valitse galleriasivu"
 
 #: inc/customizer.php:1989
 msgid "Page"
-msgstr "Старница"
+msgstr "Sivu"
 
 #: inc/customizer.php:1984
 msgid "Select Gallery Source"
-msgstr "Выберите источник галереи"
+msgstr "Valitse gallerian lähde"
 
 #: inc/customizer.php:1923 section-parts/section-gallery.php:4
 msgid "Gallery"
-msgstr "Галерея"
+msgstr "Galleria"
 
 #: inc/customizer.php:1908 section-parts/section-gallery.php:2
 msgid "gallery"
-msgstr "gallery"
+msgstr "galleria"
 
 #: inc/customizer.php:1873
 msgid "Section: Gallery"
-msgstr "Раздел: Галерея"
+msgstr "Alue: Galleria"
 
 #: inc/customizer.php:345
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
-msgstr "Прокрутка вверх, при нажатии на логотип или название сайта, применяется только на первой странице."
+msgstr "Rullaa ylös kun klikataan sivuston logoa tai otsikkoa, ota käyttöön vain etusivulla."
 
 #: inc/dashboard.php:776
 msgid "FameThemes Demo Importer"
-msgstr "FameThemes импорт демо"
+msgstr "FameThemes Demo tuontiohjelma"
 
 #: inc/dashboard.php:775
 msgid "Hey."
-msgstr "Привет."
+msgstr "Hei."
 
 #: inc/dashboard.php:773
 msgid "%1$s you will need to install and activate the %2$s plugin first."
-msgstr "%1$s вам необходимо установить и активировать плагин %2$s."
+msgstr "%1$s sinun pitää asentaa ja aktivoida %2$s lisäosa ensin."
 
 #: inc/dashboard.php:249 inc/dashboard.php:757
 msgid "Active Now"
-msgstr "Активировать сейчас"
+msgstr "Aktiivinen nyt"
 
 #: inc/dashboard.php:227 inc/dashboard.php:735
 msgid "Install Now"
-msgstr "Установить сейчас"
+msgstr "Asenna nyt"
 
 #: inc/dashboard.php:366
 msgid "One Click Demo Import"
-msgstr "Импорт демо одним кликом"
+msgstr "One Click Demo tuontiohjelma"
 
 #: inc/customizer.php:1694
 msgid "Button #2 style"
-msgstr "Стиль кнопки #2"
+msgstr "Napin #2 tyyli"
 
 #: inc/customizer.php:3341
 msgid "More News Button Text"
-msgstr "Текст кнопки Больше новостей"
+msgstr "Lisää uutisia napin teksti"
 
 #: inc/customizer.php:3330
 msgid "It should be your blog page link."
-msgstr "Это должна быть ссылка на страницу вашего блога."
+msgstr "Sen pitäisi olla sinun blogin sivun linkki."
 
 #: inc/customizer.php:1639 inc/customizer.php:1705
 msgid "Danger"
-msgstr "Опасность"
+msgstr "Vaara"
 
 #: inc/customizer.php:1638 inc/customizer.php:1704
 msgid "Warning"
-msgstr "Предупреждение"
+msgstr "Varoitus"
 
 #: inc/customizer.php:1637 inc/customizer.php:1703
 msgid "Info"
-msgstr "Информация"
+msgstr "Info"
 
 #: inc/customizer.php:1636 inc/customizer.php:1702
 msgid "Success"
-msgstr "Успех"
+msgstr "Onnistui"
 
 #: inc/customizer.php:1635 inc/customizer.php:1701
 msgid "Primary"
-msgstr "Главная"
+msgstr "Ensisijainen"
 
 #: inc/customizer.php:1634 inc/customizer.php:1700
 msgid "Button"
-msgstr "Кнопка"
+msgstr "Nappi"
 
 #: inc/customizer.php:1633 inc/customizer.php:1699
 msgid "Button Secondary"
-msgstr "Вспомогательная кнопка"
+msgstr "Toissijainen nappi"
 
 #: inc/customizer.php:1632 inc/customizer.php:1698
 msgid "Button Primary"
-msgstr "Конпка Главная"
+msgstr "Ensisijainen nappi"
 
 #: inc/customizer.php:1628
 msgid "Button #1 style"
-msgstr "Стиль кнопки #1"
+msgstr "Napin #1 tyyli"
 
 #: inc/customizer.php:1287
 msgid "The hero content padding bottom in percent (%)."
-msgstr "Отступ снизу от Избранного содержимого в процентах (%)."
+msgstr "Yläosan sisällön padding bottom prosenteissa (%)."
 
 #: inc/customizer.php:1271
 msgid "The hero content padding top in percent (%)."
-msgstr "Отступ сверху от Избранного содержимого в процентах (%)."
+msgstr "Yläosan padding top prosenteissa (%)."
 
 #: inc/customizer.php:1343
 msgid "The delay between the changing of each phrase in milliseconds."
-msgstr "Задержка между изменением каждой фразы в миллисекундах."
+msgstr "Aikaviive jokaisen lauseen välissä millisekunteissa."
 
 #: inc/customizer.php:891
 msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
-msgstr ""
-"Форма подписки использует сервис MailChimp, перейдите по ссылке <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">на руководство</a>, чтобы узнать как получить MailChimp ссылку для действия.\n"
-"К примеру: <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
+msgstr "Uutiskirje käyttää MailChimpia, seuraa <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">tätä ohjetta</a> katsoaksesi miten saat MailChimp Action URLin. Esimerkki: <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 
 #: inc/customizer.php:81
 msgid "Hide site tagline"
-msgstr "Скрыть строку тега сайта"
+msgstr "Piilota sivuston kuvausrivi"
 
 #: inc/customizer.php:66
 msgid "Hide site title"
-msgstr "Скрыть заголовок сайта"
+msgstr "Piilota sivuston otsikko"
 
 #: inc/customizer.php:2541 inc/customizer.php:2750
 msgid "image"
-msgstr "Изображение"
+msgstr "Kuva"
 
 #: inc/customizer.php:1323
 msgid "Text animation"
-msgstr "Анимация текста"
+msgstr "Tekstin animointi"
 
 #: inc/dashboard.php:163
 msgid "OnePress Theme %s"
-msgstr "Тема OnePress %s"
+msgstr "OnePress Teema %s"
 
 #: inc/dashboard.php:161
 msgid "%1$s action required"
 msgid_plural "%1$s actions required"
-msgstr[0] "%1$s необходимо действие"
-msgstr[1] "%1$s необходимо действий"
-msgstr[2] "%1$s необходимо действий"
+msgstr[0] "%1$s toiminto vaaditaan"
+msgstr[1] "%1$s toimintoa vaaditaan"
 
 #: inc/customizer.php:1148 inc/customizer.php:1166
 msgid "Custom CSS"
-msgstr "Свои CSS стили"
+msgstr "Mukautettu CSS"
 
 #: section-parts/section-features.php:5
 msgid "Why choose Us"
-msgstr "Почему стоит выбрать нас"
+msgstr "Miksi valita meidät"
 
 #: inc/customizer.php:2700
 msgid "Services Layout Settings"
-msgstr "Настройка макета Сервис"
+msgstr "Palveluiden asettelun asetus"
 
 #: inc/customizer.php:2559 inc/customizer.php:3117
 msgid "Custom Link"
-msgstr "Произвольная ссылка"
+msgstr "Oma linkki"
 
 #: inc/customizer.php:2555
 msgid "Description"
-msgstr "описание"
+msgstr "Kuvaus/ tiivistelmä"
 
 #: inc/customizer.php:2524
 msgid "Features content"
-msgstr "Функцции содержания"
+msgstr "Esittelyssä sisältö"
 
 #: inc/customizer.php:2488
 msgid "Features Layout Setting"
-msgstr "Настройка возможностей макета"
+msgstr "Ominaisuuksien asettelun asetus"
 
 #: inc/customizer.php:2435 section-parts/section-features.php:4
 msgid "Features"
-msgstr "Возможности:"
+msgstr "piirteet"
 
 #: inc/customizer.php:2420 section-parts/section-features.php:2
 msgid "features"
-msgstr "features"
+msgstr "ominaisuudet"
 
 #: inc/customizer.php:2385
 msgid "Section: Features"
-msgstr "Раздел: Особенности"
+msgstr "Osio: Ominaisuudet"
 
 #: inc/customizer.php:1960 inc/customizer.php:2271 inc/customizer.php:2472
 #: inc/customizer.php:2683 inc/customizer.php:2896 inc/customizer.php:3052
 #: inc/customizer.php:3222 inc/customizer.php:3440
 msgid "Section Description"
-msgstr "Описание раздела"
+msgstr "Osion kuvaus"
 
 #: inc/customizer.php:1756 inc/customizer.php:2550 inc/customizer.php:2759
 msgid "Image"
-msgstr "Изображение"
+msgstr "Kuva"
 
 #: inc/customizer.php:1738
 msgid "Content Text"
-msgstr "Содержание"
+msgstr "Sisällön teksti"
 
 #: inc/customizer.php:1518
 msgid "Layout 2"
-msgstr "Макет 2"
+msgstr "Asettelu 2"
 
 #: inc/customizer.php:1517
 msgid "Layout 1"
-msgstr "Макет 1"
+msgstr "Asettelu 1"
 
 #: inc/customizer.php:1512
 msgid "Display Layout"
-msgstr "Показать макет"
+msgstr "Näytön asettelu"
 
 #: inc/customizer.php:833
 msgid "URL"
-msgstr "Сайт"
+msgstr "Linkki"
 
 #: inc/customizer.php:829 inc/customizer.php:2540 inc/customizer.php:2545
 #: inc/customizer.php:2749 inc/customizer.php:2754
 msgid "Icon"
-msgstr "Икона РС"
+msgstr "Kuvake"
 
 #: inc/customizer.php:825
 msgid "Social network"
-msgstr "Социальная сеть"
+msgstr "Sosiaalinen verkosto"
 
 #: inc/customizer.php:816
 msgid "Socials"
-msgstr "Социальные"
+msgstr "Sosiaaliset"
 
 #: inc/customizer.php:471
 msgid "Apply for front page template only."
-msgstr "Применить только для шаблона главной страницы."
+msgstr "Ota käyttöön ainoastaan etusivun pohjaan."
 
 #: inc/customizer.php:469
 msgid "Header Transparent"
-msgstr "Прозрачный заголовок"
+msgstr "Yläosan läpinäkyvyys"
 
 #: inc/template-tags.php:1628
 msgid "Subscribe"
-msgstr "Подписаться"
+msgstr "Liity"
 
 #: inc/template-tags.php:1627
 msgid "Enter your e-mail address"
-msgstr "Введите адрес вашей электронной почты"
+msgstr "Syötä sähköpostiosoitteesi"
 
 #: inc/dashboard.php:392
 msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
-msgstr "Поддержка WordPress темы %s,  осуществляется через FameThemes систему тикетов поддержки."
+msgstr "Tukea %s WordPress teemalle saa FameThemes tikettijärjestelmän kautta."
 
 #: inc/dashboard.php:386
 msgid "OnePress Documentation"
-msgstr "Документация OnePress"
+msgstr "OnePress Dokumentaatio"
 
 #: inc/customizer.php:2295 inc/customizer.php:2495 inc/customizer.php:2707
 #: inc/customizer.php:3075
 msgid "2 Columns"
-msgstr "2 колонки"
+msgstr "2 palstaa"
 
 #: inc/customizer.php:2294 inc/customizer.php:2494 inc/customizer.php:2706
 #: inc/customizer.php:3074
 msgid "3 Columns"
-msgstr "3 колонки"
+msgstr "3 palstaa"
 
 #: inc/customizer.php:2293 inc/customizer.php:2493 inc/customizer.php:2705
 #: inc/customizer.php:3073
 msgid "4 Columns"
-msgstr "4 колонки"
+msgstr "4 palstaa"
 
 #: inc/customizer.php:3068
 msgid "Team Layout Settings"
-msgstr "Настройка макета команда"
+msgstr "Tiimin asettelun asetukset"
 
 #: inc/customizer.php:2371 inc/customizer.php:2584
 msgid "Page Excerpt"
-msgstr "Отрывок страницы"
+msgstr "Sivun tiivistelmä"
 
 #: inc/customizer.php:2370 inc/customizer.php:2583
 msgid "Full Page Content"
-msgstr "Содержимое полной страницы"
+msgstr "Koko sivun sisältö"
 
 #: inc/customizer.php:2365 inc/customizer.php:2578
 msgid "Item content source"
-msgstr "Источник содержимого элемента"
+msgstr "Kohteen sisällön lähde"
 
 #: inc/customizer.php:2328
 msgid "About content page"
-msgstr "Содержимое страницы Про нас"
+msgstr "Tietoa sisältösivusta"
 
 #: inc/customizer.php:1468
 msgid "Enable parallax effect (apply for first BG image only)"
-msgstr "Включить эффект параллакса (применять только для первого изображения BG)"
+msgstr "Ota käyttöön parallax-efekti (lisää ainoastaan ensimmäiselle taustakuvalle)"
 
 #: inc/customizer.php:330
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
-msgstr "Если вы используете логотип, и ваш логотип слишком высок, установите этот флажок для автоматического вертикального выравнивания меню."
+msgstr "Jos käytät logoa ja logosi on liian korkea, ruksaa tämä boksi. Toiminto keskittää valikon pystysuunnassa automaattisesti."
 
 #: inc/customizer.php:328
 msgid "Center vertical align for menu"
-msgstr "Вертикальное выравнивание по центру для меню"
+msgstr "Keskitä valikko pystysuunnassa"
 
 #: inc/customizer.php:450
 msgid "Responsive Menu Button Color"
-msgstr "Цвет кнопки адаптивного меню"
+msgstr "Responsiivisen valikon napin väri"
 
 #: inc/customizer.php:435
 msgid "Menu Link Hover/Active BG Color"
-msgstr "Цвет меню при наведении курсора/активный цвет BG"
+msgstr "Valikon linkin hover/aktiivinen taustaväri"
 
 #: inc/customizer.php:419
 msgid "Menu Link Hover/Active Color"
-msgstr "Цвет меню при наведении курсора/активный цвет "
+msgstr "Valikon linkin hover/aktiivinen väri"
 
 #: inc/customizer.php:404
 msgid "Menu Link Color"
-msgstr "Цвет ссылки меню"
+msgstr "Valikon linkin väri"
 
 #: inc/customizer.php:377
 msgid "Only set if you don't use an image logo."
-msgstr "Только если вы не используете изображение как логотип."
+msgstr "Aseta vain jos et käytä kuvalogoa."
 
 #: inc/customizer.php:375
 msgid "Site Title Color"
-msgstr "Цвет названия сайта"
+msgstr "Sivuston otsikon väri"
 
 #: inc/customizer.php:359 inc/customizer.php:1017
 msgid "Background Color"
-msgstr "Цвет фона"
+msgstr "Taustaväri - Oko tämän lisäosan käännös tehty Google käätäjällä?"
 
 #: inc/customizer.php:250
 msgid "Header"
-msgstr "Header"
+msgstr "Ylätunniste (header)"
 
 #: inc/customizer.php:237
 msgid "Primary Color"
-msgstr "Основной цвет"
+msgstr "Pääväri"
 
 #: inc/customizer.php:228
 msgid "Site Colors"
-msgstr "Цвета сайта"
+msgstr "Sivuston värit"
 
 #: inc/customizer.php:3112
 msgid "User media"
-msgstr "Медиа пользователя"
+msgstr "Käyttäjän media"
 
 #: inc/customizer.php:1861
 msgid "Background image"
-msgstr "Фоновое изображение"
+msgstr "Taustakuva"
 
 #: inc/customizer.php:1846
 msgid "Paste Youtube or Vimeo url here"
-msgstr "Вставьте сюда ссылкуYoutube или Vimeo"
+msgstr "Liitä YouTube tai Vimeo URL tähän"
 
 #: inc/customizer.php:1844
 msgid "Video url"
-msgstr "Ссылка видео"
+msgstr "Videon linkki"
 
 #: inc/customizer.php:1829
 msgid "Section heading"
-msgstr "Заголовок раздела"
+msgstr "Alueen otsake"
 
 #: inc/customizer.php:1225 inc/customizer.php:1813 inc/customizer.php:1915
 #: inc/customizer.php:2226 inc/customizer.php:2427 inc/customizer.php:2851
 #: inc/customizer.php:3177 inc/customizer.php:3395
 msgid "The section id, we will use this for link anchor."
-msgstr "Идентификатор раздела, мы будем использовать его для привязки ссылок."
+msgstr "Alueen tunniste (id), käytämme tätä linkin ankkurina."
 
 #: inc/customizer.php:1771
 msgid "Section: Video Lightbox"
-msgstr "Раздел: Видео Лайтбокс"
+msgstr "Alue: Video Lightbox"
 
 #: inc/dashboard.php:518
 msgid "Hooray! There are no required actions for you right now."
-msgstr "Ура! На данный момент вам ничего не надо делать."
+msgstr "Jippii! Sinulle ei ole enää yhtään vaadittua toimenpidettä tällä tietoa."
 
 #: inc/dashboard.php:508
 msgid "Change homepage page template"
-msgstr "Изменить шаблон главной страницы"
+msgstr "Vaihda kotisivun sivupohja"
 
 #: inc/dashboard.php:494
 msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
-msgstr "Чтобы изменить содержимое раздела главной страницы, вам необходимо установить шаблон «Главная страница» для вашей домашней страницы."
+msgstr "Vaihtaaksesi kotisivun alueiden sisältöjä, sinun täytyy asettaa sivupohja \"Etusivu\" kotisivullesi."
 
 #: inc/dashboard.php:491
 msgid "Set your homepage page template to \"Frontpage\"."
-msgstr "Установите шаблон домашней страницы для «Главная страница»."
+msgstr "Aseta kotisivusi sivupohja \"Etusivuksi\"."
 
 #: inc/dashboard.php:477 inc/dashboard.php:501
 msgid "Setup front page displays"
-msgstr "Настройка отображения главной страницы"
+msgstr "Aseta etusivun näkymät"
 
 #: inc/dashboard.php:474
 msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
-msgstr "Чтобы ваш сайт отображался как одностраничный, пожалуйста, перейдите на вкладку «Настройщик» -&gt; Статическая главная страница и переключить «Отображение главной страницы» на «Статическая страница»."
+msgstr "Jotta saat yhden sivun lookin verkkosivuillesi, mene kohtaan Mukauta -&gt; Staattinen Etusivu ja vaihda \"Etusivun näkymät\" kohtaan \"Staattinen sivu\""
 
 #: inc/dashboard.php:472
 msgid "Switch \"Front page displays\" to \"A static page\""
-msgstr "Переключить «Отображение главной страницы» на «Статическая страница»"
+msgstr "Vaihda \"Etusivun näkymät\" kohtaan \"Staattinen sivu\""
 
 #: inc/dashboard.php:465 inc/dashboard.php:484
 msgid "Dismiss"
-msgstr "Пропустить"
+msgstr "Piilota tämä huomautus."
 
 #: inc/dashboard.php:354
 msgid "Welcome to OnePress - Version %1s"
-msgstr "Добро пожаловать в OnePress - Версия %1s"
+msgstr "Tervetuloa käyttämään OnePressiä - Versio %1s"
 
 #: inc/dashboard.php:188
 msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
-msgstr "Добро пожаловать! Спасибо, что выбрали %1$s! Что бы воспользоваться всеми возможностями нашей темы, пожалуйста, посетите нашу <a href=\"%2$s\">Страницу приветствия</a>"
+msgstr "Tervetuloa! Kiitos kun valitsit teeman %1$s! Jotta saisit täyden hyödyn teemastamme, vieraile <a href=\"%2$s\">Tervetuloa-sivulla</a>"
 
 #: inc/dashboard.php:165
 msgid "OnePress Theme"
-msgstr "Тема OnePress "
+msgstr "OnePress-teema"
 
 #: inc/dashboard.php:168
 msgid "OnePress Dashboard"
-msgstr "Панель управления OnePress"
+msgstr "OnePress ohjausnäkymä"
 
 #: inc/customizer.php:675 inc/customizer.php:1449
 msgid "Background Overlay Color"
-msgstr ""
-"Цвет наложения фона\n"
-"  "
+msgstr "Taustan peitteen väri"
 
 #: inc/customizer.php:3614
 msgid "Section Order & Styling"
-msgstr "Порядок и Дизайн раздела"
+msgstr "Alueen järjestys & tyylittely"
 
 #: inc/customizer.php:312
 msgid "Check this box to disable sticky header when scroll."
-msgstr "Установите этот флажок, чтобы отключить липкий заголовок при прокрутке."
+msgstr "Ruksaa tämä boksi ottaaksesi pois käytöstä kiinteän ylätunnisteen rullatessa."
 
 #: inc/customizer.php:310
 msgid "Disable Sticky Header?"
-msgstr "Отключить липкий заголовок?"
+msgstr "Ota pois käytöstä kiinteä ylätunniste?"
 
 #. Template Name of the plugin/theme
 msgid "Left Sidebar"
-msgstr "Боковая панель слева"
+msgstr "Vasen sivupalkki"
 
 #: inc/customizer.php:271 inc/customizer.php:2031
 msgid "Full Width"
-msgstr "Полной ширины"
+msgstr "Täysi leveys"
 
 #. Template Name of the plugin/theme
 msgid "Frontpage"
-msgstr "Главная страница"
+msgstr "Etusivu"
 
 #: template-parts/content-none.php:27
 msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
-msgstr "Запрошенную информацию найти не удалось. Возможно, будет полезен поиск по сайту."
+msgstr "Emme valitettavasti löytäneet etsimääsi. Ehkä hakutoiminnosta on apua."
 
 #: template-parts/content-none.php:22
 msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
-msgstr "Простите, но по вашему запросу ничего не найдено. Пожалуйста, попробуйте поискать что нибудь другое."
+msgstr "Pahoittelut mutta mitään ei löytynyt hakuehdoillasi. Kokeile uudelleen joillakin toisilla hakusanoilla."
 
 #: template-parts/content-none.php:18
 msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
-msgstr "Готовы опубликовать свою первую запись? <a href=\"%1$s\">Начните отсюда</a>."
+msgstr "Oletko valmis julkaisemaan ensimmäisen kirjoituksesi? <a href=\"%1$s\">Aloita tästä</a>."
 
 #: template-parts/content-none.php:14
 msgid "Nothing Found"
-msgstr "Не найдено"
+msgstr "Ei löytynyt"
 
 #: template-parts/content-list.php:38 template-parts/content-page.php:21
 #: template-parts/content-single.php:35 template-parts/content.php:39
 msgid "Pages:"
-msgstr "Страница:"
+msgstr "Sivut:"
 
 #: section-parts/section-hero.php:88
 msgid "#services"
-msgstr "#services"
+msgstr "#palvelut"
 
 #: section-parts/section-contact.php:48
 msgid "You can install %1$s plugin and go to Customizer &rarr; Section: Contact &rarr; Section Content to show a working contact form here."
-msgstr "Вы можете установить плагин %1$s и перейти к Настройщик &rarr; Раздел: Контакты &rarr; Раздел Содержание, чтобы показать здесь рабочую контактную форму."
+msgstr "Voit asentaa %1$s lisäosan ja mennä Mukautin &rarr; Alue: Ota yhteyttä &rarr; Alueen Sisältö näyttääksesi toimivan yhteystietolomakkeen tässä."
 
 #: search.php:16
 msgid "Search Results for: %s"
-msgstr "Результаты поиска: %s"
+msgstr "Hakutulokset: %s"
 
 #: inc/template-tags.php:467
 msgid "Your comment is awaiting moderation."
-msgstr "Ваш комментарий ожидает проверки."
+msgstr "Kommenttisi on arvioitavana."
 
 #: inc/template-tags.php:462
 msgid "Edit"
-msgstr "Правка"
+msgstr "Muuta"
 
 #. translators: 1: date, 2: time
 #: inc/template-tags.php:461
 msgid "Reply"
-msgstr "Ответ"
+msgstr "Vastaus"
 
 #: inc/template-tags.php:453
 msgid "Post author"
-msgstr "Автор записи"
+msgstr "Artikkelin kirjoittaja"
 
 #: inc/template-tags.php:434
 msgid "(Edit)"
-msgstr "(Изменить)"
+msgstr "(Muokkaa)"
 
 #: inc/template-tags.php:434
 msgid "Pingback:"
-msgstr "Пингбэк:"
+msgstr "Paluuviite:"
 
 #: inc/template-tags.php:364
 msgid "% Comments"
-msgstr "% Комментариев"
+msgstr "% kommenttia"
 
 #: inc/template-tags.php:364
 msgid "1 Comment"
-msgstr "1 Комментарий"
+msgstr "Yksi kommentti"
 
 #: inc/template-tags.php:364
 msgid "Leave a comment"
-msgstr "Прокомментировать"
+msgstr "Kirjoita kommentti"
 
 #: inc/template-tags.php:358
 msgid "Tagged %1$s"
-msgstr "Отмечено %1$s"
+msgstr "Avainsanat %1$s"
 
 #: inc/template-tags.php:352
 msgid "Posted in %1$s"
-msgstr "Опубликовано в рубрике %1$s"
+msgstr "Kategoriassa %1$s"
 
 #. translators: used between list items, there is a space after the comma
 #: inc/template-tags.php:350 inc/template-tags.php:356
@@ -1119,197 +1114,197 @@ msgstr ", "
 #: inc/template-tags.php:332
 msgctxt "post author"
 msgid "by %s"
-msgstr "автором %s"
+msgstr "kirjoittaja %s"
 
 #: inc/template-tags.php:327
 msgctxt "post date"
 msgid "Posted on %s"
-msgstr "Опубликовано %s"
+msgstr "Kirjoitettu %s"
 
 #: inc/dashboard.php:391
 msgid "Having Trouble, Need Support?"
-msgstr "Проблемы, нужна в поддержка?"
+msgstr "Onko haasteita, tarvitsetko tukea?"
 
 #: inc/dashboard.php:384
 msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
-msgstr "Нужна помощь в установке и настройке %s? Пожалуйста, ознакомьтесь с нашими инструкциями. "
+msgstr "Tarvitsetko apua %s asentamiseen ja konfigurointiin? Ole hyvä ja tutki dokumentaatiomme ohjeita."
 
 #: inc/dashboard.php:383
 msgid "Theme Documentation"
-msgstr "Документация к теме"
+msgstr "Teeman dokumentaatio"
 
 #: inc/dashboard.php:379
 msgid "Start Customize"
-msgstr "Начать настройку"
+msgstr "Aloita mukauttaminen"
 
 #: inc/dashboard.php:377
 msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
-msgstr "%s поддерживает Настройщик тем для всех параметров темы. Нажмите «Настройщик», чтобы начать настройку своего сайта."
+msgstr "%s tukee Mukautinta kaikille asetuksille. Klikkaa \"Mukauta\" aloittaaksesi sivustosi mukauttamisen."
 
 #: inc/dashboard.php:376
 msgid "Theme Customizer"
-msgstr "Настройки темы"
+msgstr "Teeman muokkain"
 
 #: inc/dashboard.php:355
 msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
-msgstr "OnePress это творческая и гибкая ОДНОСТРАНИЧНАЯ WordPress тема, хорошо подходящая для бизнеса, портфолио, цифрового агентства, витрины продуктов, сайтов фрилансеров."
+msgstr "OnePress on luova ja joustava WordPress yhden sivun teema joka sopii hyvin bisnes-, portfolio-, mainostoimisto-, tuote-esittely tai freelancersaittitarkoituksiin."
 
 #: inc/customizer.php:3595
 msgid "Fax"
-msgstr "Факс "
+msgstr "Fax"
 
 #: inc/customizer.php:3580
 msgid "Email"
-msgstr "Емейл"
+msgstr "Emali"
 
 #: inc/customizer.php:3565
 msgid "Phone"
-msgstr "Телефон"
+msgstr "Puhelin"
 
 #: inc/customizer.php:3550
 msgid "Address"
-msgstr "Адрес"
+msgstr "Osoite"
 
 #: inc/customizer.php:3535
 msgid "Contact Box Title"
-msgstr "Заголовок Контактного блока"
+msgstr "Ota yhteyttä -laatikon otsikko"
 
 #: inc/customizer.php:3511
 msgid "Contact Text"
-msgstr "Тест контактной информации"
+msgstr "Ota yhteyttä -teksti"
 
 #: inc/customizer.php:3496
 msgid "Check this box to hide contact form."
-msgstr "Установите этот флажок, чтобы скрыть контактную форму."
+msgstr "Valitse tämä piilottaaksesi yhteydenottolomakkeen."
 
 #: inc/customizer.php:3494
 msgid "Hide contact form completely."
-msgstr "Полностью скрыть контактную форму."
+msgstr "Piilota yhteydenottolomake kokonaan."
 
 #: inc/customizer.php:3478
 msgid "Contact Form Shortcode."
-msgstr "Шорткод Contact Form."
+msgstr "Yhteydenottolomakkeen lyhytkoodi"
 
 #: inc/customizer.php:3403 section-parts/section-contact.php:4
 msgid "Get in touch"
-msgstr "Контактная информация"
+msgstr "Ota yhteyttä"
 
 #: inc/customizer.php:3388 section-parts/section-contact.php:2
 msgid "contact"
-msgstr "знакомый"
+msgstr "yhteyshenkilö"
 
 #: inc/customizer.php:3353
 msgid "Section: Contact"
-msgstr "Раздел: Контакт"
+msgstr "Alue: Yhteystiedot"
 
 #: inc/customizer.php:3336 section-parts/section-news.php:8
 msgid "Read Our Blog"
-msgstr "Читайте наш блог"
+msgstr "Lue blogiamme"
 
 #: inc/customizer.php:3328
 msgid "More News button link"
-msgstr "Больше новостей ссылка кнопки"
+msgstr "Lisää uutisia napin linkki"
 
 #: inc/customizer.php:3250
 msgid "Number of post to show"
-msgstr "Количество сообщений для показа"
+msgstr "Näytettävien artikkeleiden määrä"
 
 #: inc/customizer.php:3185 section-parts/section-news.php:4
 msgid "Latest News"
-msgstr "Свежие новости"
+msgstr "Viimeisimmät Uutiset"
 
 #: inc/customizer.php:3170 section-parts/section-news.php:2
 msgid "news"
-msgstr "news"
+msgstr "uutiset"
 
 #: inc/customizer.php:3135
 msgid "Section: News"
-msgstr "Раздел: Новости"
+msgstr "Alue: Uutiset"
 
 #: inc/customizer.php:3103
 msgid "Team members"
-msgstr "Члены команды"
+msgstr "Tiimin jäsenet"
 
 #: inc/customizer.php:3015 section-parts/section-team.php:4
 msgid "Our Team"
-msgstr "Наша команда"
+msgstr "Tiimimme"
 
 #: inc/customizer.php:3000 section-parts/section-team.php:2
 msgid "team"
-msgstr "team"
+msgstr "tiimi"
 
 #: inc/customizer.php:2966
 msgid "Section: Team"
-msgstr "Раздел: Команда"
+msgstr "Alue: Tiimi"
 
 #: inc/customizer.php:2950
 msgid "After number"
-msgstr "После цифр"
+msgstr "Numero jälkeen"
 
 #: inc/customizer.php:2945
 msgid "Before number"
-msgstr "Перед числом"
+msgstr "Numero ennen"
 
 #: inc/customizer.php:2940
 msgid "Number"
-msgstr "Число"
+msgstr "Numero"
 
 #: inc/customizer.php:2937
 msgid "Your counter label"
-msgstr "Метка вашего счетчика"
+msgstr "Laskurisi nimike"
 
 #: inc/customizer.php:2533 inc/customizer.php:2934 inc/customizer.php:3290
 msgid "Title"
-msgstr "Заголовок страницы"
+msgstr "Nimi"
 
 #: inc/customizer.php:2925
 msgid "Counter content"
-msgstr "Содержимое счетчика"
+msgstr "Laskurin sisältö"
 
 #: inc/customizer.php:2859 section-parts/section-counter.php:4
 msgid "Our Numbers"
-msgstr "Наши Цифры"
+msgstr "Numeromme"
 
 #: inc/customizer.php:2844 section-parts/section-counter.php:2
 msgid "counter"
-msgstr "счетчик"
+msgstr "laskuri"
 
 #: inc/customizer.php:2810
 msgid "Section: Counter"
-msgstr "Раздел: Счетчик"
+msgstr "Alue: Laskuri"
 
 #: inc/customizer.php:2537 inc/customizer.php:2746
 msgid "Custom icon"
-msgstr "Пользовательская иконка"
+msgstr "Mukautettu kuvake"
 
 #: inc/customizer.php:2737
 msgid "Service content"
-msgstr "Содержимое Услуги"
+msgstr "Palvelun sisältö"
 
 #: inc/customizer.php:2646 section-parts/section-hero.php:87
 #: section-parts/section-services.php:4
 msgid "Our Services"
-msgstr "Наши сервисы"
+msgstr "Palvelumme"
 
 #: inc/customizer.php:2631 section-parts/section-services.php:2
 msgid "services"
-msgstr "services"
+msgstr "palvelut"
 
 #: inc/customizer.php:2596
 msgid "Section: Services"
-msgstr "Раздел: Услуги"
+msgstr "Alue: Palvelut"
 
 #: inc/customizer.php:2346 inc/customizer.php:2770
 msgid "Link to single page"
-msgstr "Ссылка на отдельную страницу"
+msgstr "Linkki yksittäiselle sivulle"
 
 #: inc/customizer.php:2342
 msgid "Hide item title"
-msgstr "Скрыть заголовок элемента"
+msgstr "Piilota kohteen otsikko"
 
 #: inc/customizer.php:2337 inc/customizer.php:2765
 msgid "Select a page"
-msgstr "Выберите страницу"
+msgstr "Valitse sivu"
 
 #: inc/customizer.php:820 inc/customizer.php:2332 inc/customizer.php:2528
 #: inc/customizer.php:2741 inc/customizer.php:2929 inc/customizer.php:3107
@@ -1320,16 +1315,13 @@ msgstr "[live_title]"
 #: inc/customizer.php:2717 inc/customizer.php:2905 inc/customizer.php:3083
 #: inc/customizer.php:3450
 msgid "Section Content"
-msgstr ""
-"Содержание\n"
-" \n"
-"раздела"
+msgstr "Alueen sisältö"
 
 #: inc/customizer.php:1943 inc/customizer.php:2254 inc/customizer.php:2455
 #: inc/customizer.php:2666 inc/customizer.php:2879 inc/customizer.php:3035
 #: inc/customizer.php:3205 inc/customizer.php:3423
 msgid "Section Subtitle"
-msgstr "Раздел подзаголовка"
+msgstr "Alueen alaotsikko"
 
 #: inc/customizer.php:1938 inc/customizer.php:2249 inc/customizer.php:2450
 #: inc/customizer.php:2661 inc/customizer.php:2874 inc/customizer.php:3030
@@ -1339,107 +1331,106 @@ msgstr "Раздел подзаголовка"
 #: section-parts/section-news.php:5 section-parts/section-services.php:5
 #: section-parts/section-team.php:5
 msgid "Section subtitle"
-msgstr "Подзаголовок раздела"
+msgstr "Alueen alaotsikko"
 
 #: inc/customizer.php:1928 inc/customizer.php:2239 inc/customizer.php:2440
 #: inc/customizer.php:2651 inc/customizer.php:2864 inc/customizer.php:3020
 #: inc/customizer.php:3190 inc/customizer.php:3408
 msgid "Section Title"
-msgstr ""
-"Название\n"
-" \n"
-"раздела"
+msgstr "Alueen otsikko"
 
 #: inc/customizer.php:2219 section-parts/section-about.php:2
 msgid "about"
-msgstr "Информация"
+msgstr "Tietoa"
 
 #: inc/customizer.php:1780 inc/customizer.php:1882 inc/customizer.php:2193
 #: inc/customizer.php:2394 inc/customizer.php:2605 inc/customizer.php:2819
 #: inc/customizer.php:2975 inc/customizer.php:3144 inc/customizer.php:3362
 msgid "Section Settings"
-msgstr "Раздел Настройки"
+msgstr "Alueen asetukset"
 
 #: inc/customizer.php:2184
 msgid "Section: About"
-msgstr "Раздел: О нас"
+msgstr "Alue: Tietoa"
 
 #: inc/customizer.php:1680
 msgid "Button #2 Link"
-msgstr "Ссылка Кнопка #2"
+msgstr "Napin #2 Linkki"
 
 #: inc/customizer.php:1675 section-parts/section-hero.php:90
 msgid "#contact"
-msgstr "#контакт"
+msgstr "#yhteys"
 
 #: inc/customizer.php:1666
 msgid "Button #2 Text"
-msgstr "Текст Кнопка #2"
+msgstr "Napin #2 Teksti"
 
 #: inc/customizer.php:1661 section-parts/section-hero.php:89
 msgid "Get Started"
-msgstr "Начать работу"
+msgstr "Hanki Aloitetut"
 
 #: inc/customizer.php:1615
 msgid "Button #1 Link"
-msgstr "Ссылка Кнопка #1"
+msgstr "Napin #2 Linkki"
 
 #: inc/customizer.php:1610
 msgid "#about"
-msgstr "#о нас"
+msgstr "#tietoa"
 
 #: inc/customizer.php:1601
 msgid "Button #1 Text"
-msgstr "Текст Кнопка #1"
+msgstr "Napin #1 Teksti"
 
 #: inc/customizer.php:1596 inc/customizer.php:2234
 #: section-parts/section-about.php:4
 msgid "About Us"
-msgstr "О нас"
+msgstr "Tietoa meistä"
 
 #: inc/customizer.php:1588
 msgid "You can use text rotate slider in this textarea too."
-msgstr "Вы также можете использовать слайдер поворота текста в этом текстовом поле."
+msgstr "VOit käyttää tekstin pyöritys-vetovalintaa myös tässä tekstialueessa."
 
 #: inc/customizer.php:1585
 msgid "Small Text"
-msgstr "Маленький текст"
+msgstr "Pieni teksti"
 
 #: inc/customizer.php:1538
 msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation."
-msgstr "Руководство Вращающийся Текст: поместить свой вращающийся текст, разделяя его знаком \"|\" в <span class=\"js-rotating\">...</span>, перейдите в Вид->Настройки темы->Секция: Главный -> Настройки Главный для контроля анимации поворота."
+msgstr ""
+"Tekstin pyörittämisohje: Laita pyöritettävät tekstit erikseen erotettuna \"|\" -merkillä: \n"
+" <span class=\"js-rotating\">...</span>, mene Mukauta -> Teeman Asetukset -> Alue: Yläosa -> Yläosan alue animaatioksi."
 
 #: inc/customizer.php:1536
 msgid "Large Text"
-msgstr "Большой текст"
+msgstr "Iso teksti"
 
 #: inc/customizer.php:1496
 msgid "Hero Content Layout"
-msgstr "Макет содержания Главный"
+msgstr "Yläosan sisällön asettelu"
 
 #: inc/customizer.php:1423
 msgid "Background Image"
-msgstr "Фон"
+msgstr "Taustakuva"
 
 #: inc/customizer.php:904 inc/customizer.php:1094 inc/customizer.php:1418
 msgid "Background"
-msgstr "Фон блоков"
+msgstr "Tausta"
 
 #: inc/customizer.php:1414
 msgid "Background Images"
-msgstr "Фоновые рисунки"
+msgstr "Taustakuvat"
 
 #: inc/customizer.php:1388
 msgid "Hero Background Media"
-msgstr "Фоновая изображение Главное"
+msgstr "Yläosan alueen taustan media"
 
 #: inc/customizer.php:1285
 msgid "Padding Bottom:"
-msgstr "Отступ снизу:"
+msgstr "Padding Bottom:"
 
 #: inc/customizer.php:1269
 msgid "Padding Top:"
-msgstr "Отступ сверху:"
+msgstr "Padding Top:"
 
 #: inc/customizer.php:1264 inc/customizer.php:1280
 msgid "10"
@@ -1447,269 +1438,257 @@ msgstr "10"
 
 #: inc/customizer.php:1241
 msgid "Check this box to make hero section full screen."
-msgstr "Установите этот флажок, чтобы вывести главный раздел в полный экран."
+msgstr "Valitse tämä laatikko tehdäksesi yläosan alueesta kokoruudun alue."
 
 #: inc/customizer.php:1239
 msgid "Make hero section full screen"
-msgstr "Вывести главный раздел в полный экран"
+msgstr "Tee yläosan alueesta kokoruudun korkuinen ja leveyksinen"
 
 #: inc/customizer.php:1223 inc/customizer.php:1811 inc/customizer.php:1913
 #: inc/customizer.php:2224 inc/customizer.php:2425 inc/customizer.php:2636
 #: inc/customizer.php:2849 inc/customizer.php:3005 inc/customizer.php:3175
 #: inc/customizer.php:3393
 msgid "Section ID:"
-msgstr "ID раздела: "
+msgstr "Alueen tunniste (ID):"
 
 #: inc/customizer.php:1218 section-parts/section-hero.php:2
 msgid "hero"
-msgstr "главный"
+msgstr "hero"
 
 #: inc/customizer.php:1211 inc/customizer.php:1798 inc/customizer.php:1900
 #: inc/customizer.php:2211 inc/customizer.php:2412 inc/customizer.php:2623
 #: inc/customizer.php:2836 inc/customizer.php:2993 inc/customizer.php:3162
 #: inc/customizer.php:3380
 msgid "Check this box to hide this section."
-msgstr "Установите флажок, чтобы скрыть этот раздел."
+msgstr "Valitse tämä piilottaaksesi tämän alueen."
 
 #: inc/customizer.php:1209 inc/customizer.php:1796 inc/customizer.php:1898
 #: inc/customizer.php:2209 inc/customizer.php:2410 inc/customizer.php:2621
 #: inc/customizer.php:2834 inc/customizer.php:2991 inc/customizer.php:3160
 #: inc/customizer.php:3378
 msgid "Hide this section?"
-msgstr "Скрыть этот раздел?"
+msgstr "Piilota tämä alue?"
 
 #: inc/customizer.php:1193
 msgid "Hero Settings"
-msgstr "Настройки Избранное"
+msgstr "Yläosan asetukset"
 
 #: inc/customizer.php:1183
 msgid "Section: Hero"
-msgstr "Раздел: Избранное"
+msgstr "Alue: Yläosa"
 
 #: inc/customizer.php:889
 msgid "MailChimp Action URL"
-msgstr "MailChimp ссылка действия"
+msgstr "MailChimp Action URL"
 
 #: inc/customizer.php:873
 msgid "Newsletter Form Title"
-msgstr "Заголовок формы рассылки"
+msgstr "Uutiskirjeen lomakkeen otsikko"
 
 #: inc/customizer.php:859
 msgid "Check this box to hide footer newsletter form."
-msgstr "Установите флажок, чтобы скрыть футер рассылки."
+msgstr "Valitse tämä piilottaaksesi alatunnisteen uutiskirjelomake."
 
 #: inc/customizer.php:857
 msgid "Hide Footer Newsletter?"
-msgstr "Скрыть футер рассылки?"
+msgstr "Piilota alatunnisteen uutiskirje?"
 
 #: inc/customizer.php:796
 msgid "Social Footer Title"
-msgstr "Заголовок футера социальных ссылок"
+msgstr "Sosiaalinen alatunnisteen otsikko"
 
 #: inc/customizer.php:782
 msgid "The social profiles specified below will be displayed in the footer of your site."
-msgstr "Выбранные профили социальных сетей будут отображены в футере вашего сайта."
+msgstr "Alla määritetyt sosiaalisten median profiilit näytetään sivustosi alatunnisteessa."
 
 #: inc/customizer.php:769
 msgid "Check this box to hide footer social section."
-msgstr "Установите этот флажок, чтобы скрыть раздел социальные сети."
+msgstr "Valitse tämä piilottaaksesi sosiaaliset alatunnisteesta."
 
 #: inc/customizer.php:767
 msgid "Hide Footer Social?"
-msgstr "Скрыть футер с социальными сетями?"
+msgstr "Piilotetaanko sosiaaliset alatunnisteesta?"
 
 #: inc/customizer.php:201
 msgid "Check this box to hide footer back to top button."
-msgstr "Установите этот флажок, чтобы скрыть футер до верхней кнопки."
+msgstr "Valitse tämä piilottaaksesi takaisin ylös napin."
 
 #: inc/customizer.php:199
 msgid "Hide footer back to top?"
-msgstr "Скрыть футер сверху?"
+msgstr "Piilota takaisin ylös -nappi?"
 
 #: inc/customizer.php:184
 msgid "Check this box to disable all element animation when scroll."
-msgstr "Установите этот флажок, чтобы отключить всю анимацию элементов при прокрутке."
+msgstr "Valitse tämä piilottaaksesi kaikki elementtien animaatiot kun rullataan."
 
 #: inc/customizer.php:182
 msgid "Disable animation effect?"
-msgstr "Отключить эффект анимации?"
+msgstr "Poista animaatiot käytöstä?"
 
 #: inc/customizer.php:143
 msgid "Global"
-msgstr "Глобальный"
+msgstr "Kaikenkattava (globaali)"
 
 #: inc/customizer.php:133
 msgid "Theme Options"
-msgstr "Настройки темы"
+msgstr "Teeman asetukset"
 
 #: inc/customizer.php:46
 msgid "Select member"
-msgstr "Выбрать участника"
+msgstr "Valitse jäsen"
 
 #: inc/customizer.php:35
 msgid "Select page"
-msgstr "Выберите страницу"
+msgstr "Valitse sivu"
 
 #: inc/customizer-controls.php:588
 msgid "Close"
-msgstr "Время закрытия"
+msgstr "Kiinni"
 
 #: inc/customizer-controls.php:553
 msgid "Change"
-msgstr "Выбрать"
+msgstr "Vaihda"
 
 #: inc/customizer-controls.php:553
 msgid "Add"
-msgstr "Добавить"
+msgstr "Lisää"
 
 #: inc/customizer-controls.php:552 inc/customizer-controls.php:574
 #: inc/customizer-controls.php:586
 msgid "Remove"
-msgstr "Удален"
+msgstr "Poista"
 
 #: inc/customizer-controls.php:321 inc/customizer-controls.php:436
 msgid "Item"
-msgstr "Товар"
+msgstr "Tuote"
 
 #: inc/customizer-controls.php:421
 msgid "Add an item"
-msgstr "Добавить элемент"
+msgstr "Lisää kohde"
 
 #: inc/template-tags.php:229
 msgid "Menu"
-msgstr "Меню"
+msgstr "Valikko"
 
 #: header.php:25
 msgid "Skip to content"
-msgstr "Перейти к содержимому"
+msgstr "Siirry sisältöön"
 
 #: functions.php:391
 msgid "Please contact the administrator of this site for help."
-msgstr "Пожалуйста, свяжитесь с администратором сайта для помощи."
+msgstr "Ota yhteyttä sivuston ylläpitäjään saadaksesi apua."
 
 #: functions.php:390
 msgid "All plugins installed and activated successfully. %1$s"
-msgstr "Всеплагины установлены и активированны успешно. %1$s"
+msgstr "Kaikki lisäosat asennettu ja aktivoitu onnistuneesti. %1$s"
 
 #: functions.php:389
 msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
-msgstr "Плагин не активирован. Для данной темы необходима более новая версия %s. Пожалуйста, обновите плагин."
+msgstr "Lisäosaa ei aktivoitu. %s:n uudempi versio tarvitaan tätä teemaa varten. Ole hyvä ja päivitä lisäosa."
 
 #: functions.php:388
 msgid "No action taken. Plugin %1$s was already active."
-msgstr "Никакие действия не применялись. Плагин %1$s был уже активирован."
+msgstr "Toimenpiteitä ei tehty. Lisäosa %1$s on jo valmiiksi aktiivinen."
 
 #: functions.php:387
 msgid "The following plugin was activated successfully:"
-msgstr "Этот плагин был успешно активирован:"
+msgstr "Seuraava lisäosa on aktivoitu onnistuneesti:"
 
 #: functions.php:386
 msgid "Plugin activated successfully."
-msgstr "Плагин успешно активирован."
+msgstr "Lisäosa aktivoitu onnistuneesti."
 
 #: functions.php:385
 msgid "Return to Required Plugins Installer"
-msgstr "Вернуться к установщику необходимых плагинов"
+msgstr "Palaa vaadittujen lisäosien asennukseen"
 
 #: functions.php:384
 msgid "Begin activating plugin"
 msgid_plural "Begin activating plugins"
-msgstr[0] "Начать активацию плагина"
-msgstr[1] "Начать активацию плагинов"
-msgstr[2] "Начать активацию плагинов"
+msgstr[0] "Aloita lisäosan aktivointi"
+msgstr[1] "Aloita lisäosien aktivointi"
 
 #: functions.php:383
 msgid "Begin updating plugin"
 msgid_plural "Begin updating plugins"
-msgstr[0] "Начать обновлени плагина"
-msgstr[1] "Начать обновление плагинов"
-msgstr[2] "Начать обновление плагинов"
+msgstr[0] "Aloita lisäosan päivitys"
+msgstr[1] "Aloita lisäosien päivitys"
 
 #: functions.php:382
 msgid "Begin installing plugin"
 msgid_plural "Begin installing plugins"
-msgstr[0] "Начать установку плагина"
-msgstr[1] "Начать установку плагинов"
-msgstr[2] "Начать установку плагинов"
+msgstr[0] "Aloita lisäosan asennus"
+msgstr[1] "Aloita lisäosien asennus"
 
 #: functions.php:381
 msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
-msgstr[0] "Простите, но у вас нет прав на активацию %1$s плагина."
-msgstr[1] "Простите, но у вас нет прав на активацию %1$s плагинов."
-msgstr[2] "Простите, но у вас нет прав на активацию %1$s плагинов."
+msgstr[0] "Olen pahoillani, mutta sinulla ei ole käyttöoikeuksia lisäosan %1$s käyttämiseen."
+msgstr[1] "Olen pahoillani, mutta sinulla ei ole käyttöoikeuksia lisäosien %1$s käyttämiseen."
 
 #: functions.php:380
 msgid "The following recommended plugin is currently inactive: %1$s."
 msgid_plural "The following recommended plugins are currently inactive: %1$s."
-msgstr[0] "Следующий рекомендованный плагин на текущий момент неактивен: %1$s."
-msgstr[1] "Следующие рекомендованные плагины на текущий момент неактивны: %1$s."
-msgstr[2] "Следующие рекомендованные плагины на текущий момент неактивны: %1$s."
+msgstr[0] "Seuraava suositeltu lisäosa on tällä hetkellä pois käytöstä: %1$s."
+msgstr[1] "Seuraavat suositellut lisäosat ovat tällä hetkellä pois käytöstä: %1$s."
 
 #: functions.php:379
 msgid "The following required plugin is currently inactive: %1$s."
 msgid_plural "The following required plugins are currently inactive: %1$s."
-msgstr[0] "Следующий необходимый плагин на текущий момент неактивен: %1$s."
-msgstr[1] "Следующие необходимые плагины на текущий момент неактивны: %1$s."
-msgstr[2] "Следующие необходимые плагины на текущий момент неактивны: %1$s."
+msgstr[0] "Seuraava vaadittu lisäosa on tällä hetkellä pois päältä: %1$s."
+msgstr[1] "Seuraavat vaaditut lisäosat ovat tällä hetkellä pois päältä: %1$s."
 
 #: functions.php:378
 msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
-msgstr[0] "Простите, но у вас нет прав на обновление %1$s плагина"
-msgstr[1] "Простите, но у вас нет прав на обновление %1$s плагинов"
-msgstr[2] "Простите, но у вас нет прав на обновление %1$s плагинов"
+msgstr[0] "Olen pahoillani, mutta sinulla ei ole käyttöoikeuksia lisäosan %1$s päivittämiseen."
+msgstr[1] "Olen pahoillani, mutta sinulla ei ole käyttöoikeuksia lisäosien %1$s päivittämiseen."
 
 #: functions.php:377
 msgid "There is an update available for: %1$s."
 msgid_plural "There are updates available for the following plugins: %1$s."
-msgstr[0] "Есть обновление для: %1$s."
-msgstr[1] "Есть обновления для: %1$s."
-msgstr[2] "Есть обновления для: %1$s."
+msgstr[0] "Päivitys saatavilla lisäosalle: %1$s."
+msgstr[1] "Päivitys saatavilla lisäosille: %1$s."
 
 #: functions.php:376
 msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
 msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
-msgstr[0] "Следующий плагин необходимо обновить до текущей версии для максимальной совместимости с этой темой: %1$s."
-msgstr[1] "Следующие плагины необходимо обновить до текущей версии для максимальной совместимости с этой темой: %1$s."
-msgstr[2] "Следующие плагины необходимо обновить до текущей версии для максимальной совместимости с этой темой: %1$s."
+msgstr[0] "Seuraava lisäosa täytyy päivittää jotta se on täysin yhteensopiva teeman kanssa: %1$s."
+msgstr[1] "Seuraavat lisäosat täytyy päivittää jotta ne ovat täysin yhteensopivia teeman kanssa: %1$s."
 
 #: functions.php:375
 msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
 msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
-msgstr[0] "Простите, но у вас нет прав на установку %1$s плагина."
-msgstr[1] "Простите, но у вас нет прав на установку %1$s плагинов."
-msgstr[2] "Простите, но у вас нет прав на установку %1$s плагинов."
+msgstr[0] "Sinulla ei ole vaadittavia käyttöoikeuksia, jotta voit asentaa lisäosan %1$s."
+msgstr[1] "Sinulla ei ole vaadittavia käyttöoikeuksia, jotta voit asentaa lisäosat %1$s."
 
 #: functions.php:374
 msgid "This theme recommends the following plugin: %1$s."
 msgid_plural "This theme recommends the following plugins: %1$s."
-msgstr[0] "Эта тема рекомендует к установке следующий плагин: %1$s."
-msgstr[1] "Эта тема рекомендует к установке следующие плагины: %1$s."
-msgstr[2] "Эта тема рекомендует к установке следующие плагины: %1$s."
+msgstr[0] "Tämä teema suosittelee seuraavan lisäosan käyttämistä: %1$s."
+msgstr[1] "Tämä teema suosittelee seuraavien lisäosien käyttämistä: %1$s."
 
 #: functions.php:373
 msgid "This theme requires the following plugin: %1$s."
 msgid_plural "This theme requires the following plugins: %1$s."
-msgstr[0] "Эта тема требует следующий плагин: %1$s."
-msgstr[1] "Эта тема требует следующие плагины: %1$s."
-msgstr[2] "Эта тема требует следующие плагины: %1$s."
+msgstr[0] "Tämän teeman käyttö edellyttää lisäosan %1$s käyttämistä."
+msgstr[1] "Tämän teeman käyttö edellyttää lisäosien %1$s käyttämistä."
 
 #: functions.php:372
 msgid "Something went wrong with the plugin API."
-msgstr "Что-то пошло не так с API плагинов."
+msgstr "Jotain meni pieleen lisäosan rajapinnan kanssa."
 
 #: functions.php:371
 msgid "Installing Plugin: %s"
-msgstr "Установка плагина: %s"
+msgstr "Asennetaan lisäosaa: %s"
 
 #: functions.php:370
 msgid "Install Plugins"
-msgstr "Установить плагины"
+msgstr "Asenna lisäosia"
 
 #: functions.php:369
 msgid "Install Required Plugins"
-msgstr "Установка необходимых плагинов"
+msgstr "Asenna vaaditut lisäosat"
 
 #. Translators: If there are characters in your language that are not supported
 #. by Raleway, translate this to 'off'. Do not translate into your own
@@ -1729,73 +1708,72 @@ msgstr "on"
 
 #: functions.php:143
 msgid "Sidebar"
-msgstr "Боковая панель"
+msgstr "Sivupalkki"
 
 #: functions.php:59
 msgid "Primary Menu"
-msgstr "Основное меню"
+msgstr "Ensisijainen valikko"
 
 #: inc/template-tags.php:1357
 msgid "%1$s theme by %2$s"
-msgstr "Тема %1$s от %2$s"
+msgstr "%1$s teeman luonut %2$s"
 
 #: inc/template-tags.php:1355
 msgid "Copyright %1$s %2$s %3$s"
-msgstr "Авторские права %1$s %2$s %3$s"
+msgstr "Copyright %1$s %2$s %3$s"
 
 #: footer.php:44
 msgid "Back To Top"
-msgstr "Вернуться наверх"
+msgstr "Takaisin ylös"
 
 #: inc/customizer.php:867 inc/template-tags.php:1618
 msgid "Join our Newsletter"
-msgstr "Подписаться на рассылку"
+msgstr "Tilaa uutiskirjeemme"
 
 #: inc/customizer.php:790 inc/template-tags.php:1637
 msgid "Keep Updated"
-msgstr "Будьте в курсе наших новинок"
+msgstr "Pysy ajan tasalla"
 
 #: comments.php:91
 msgid "Comments are closed."
-msgstr "Комментарии запрещены."
+msgstr "Kommentit on suljettu."
 
 #: comments.php:59 comments.php:79
 msgid "Newer Comments"
-msgstr "Следующие комментарии"
+msgstr "Uudemmat kommentit"
 
 #: comments.php:58 comments.php:78
 msgid "Older Comments"
-msgstr "Предыдущие комментарии"
+msgstr "Vanhemmat kommentit"
 
 #: comments.php:55 comments.php:75
 msgid "Comment navigation"
-msgstr "Навигация по комментариям"
+msgstr "Kommenttien selaus"
 
 #. translators: 1: number of comments, 2: post title
 #: comments.php:37
 msgctxt "comments title"
 msgid "%1$s thought on &ldquo;%2$s&rdquo;"
 msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
-msgstr[0] "%1$s комментарий &ldquo;%2$s&rdquo;"
-msgstr[1] "%1$s комментария &ldquo;%2$s&rdquo;"
-msgstr[2] "%1$s комментариев &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s vastaus artikkeliin &ldquo;%2$s&rdquo;"
+msgstr[1] "%1$s vastausta artikkeliin &ldquo;%2$s&rdquo;"
 
 #. translators: %1$s: smiley
 #: 404.php:51
 msgid "Try looking in the monthly archives. %1$s"
-msgstr "Загляните в архивы по месяцам %1$s"
+msgstr "Kokeile jos löytäisit etsimäsi arkistosta. %1$s"
 
 #: 404.php:34
 msgid "Most Used Categories"
-msgstr "Часто используемые рубрики"
+msgstr "Suosituimmat kategoriat"
 
 #: 404.php:26
 msgid "It looks like nothing was found at this location. Maybe try one of the links below or a search?"
-msgstr "По данному адресу ничего не найдено. Попробуйте воспользоваться одной из ссылок ниже или поиском."
+msgstr "Näyttää siltä, että mitään ei löytynyt tästä osoitteesta. Koita navigoida alla olevista linkeistä tai etsiä haluamaasi."
 
 #: 404.php:15
 msgid "Oops! That page can&rsquo;t be found."
-msgstr "Ой! Страница не найдена."
+msgstr "Hups! Etsimääsi sivua ei löytynyt."
 
 #. Author URI of the plugin/theme
 msgid "http://www.famethemes.com"

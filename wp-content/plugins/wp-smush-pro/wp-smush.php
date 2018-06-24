@@ -1,37 +1,51 @@
 <?php
-/*
-Plugin Name: Smush Pro
-Plugin URI: http://premium.wpmudev.org/projects/wp-smush-pro/
-Description: Reduce image file sizes, improve performance and boost your SEO using the <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
-Author: WPMU DEV
-Version: 2.7.9.1
-Author URI: https://premium.wpmudev.org/
-Text Domain: wp-smushit
-WDP ID: 912164
-*/
-
-/*
-  Copyright 2009-2017 Incsub (http://incsub.com)
-  Author - Aaron Edwards, Sam Najian, Umesh Kumar
-  This program is free software; you can redistribute it and/or modify
-  it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
-  the Free Software Foundation.
-
-  This program is distributed in the hope that it will be useful,
-  but WITHOUT ANY WARRANTY; without even the implied warranty of
-  MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-  GNU General Public License for more details.
-
-  You should have received a copy of the GNU General Public License
-  along with this program; if not, write to the Free Software
-  Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+/**
+ * WP Smush plugin
+ *
+ * Reduce image file sizes, improve performance and boost your SEO using the
+ * <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
+ *
+ * @link              http://premium.wpmudev.org/projects/wp-smush-pro/
+ * @since             1.0.0
+ * @package           WP_Smush
+ *
+ * @wordpress-plugin
+ * Plugin Name:       Smush Pro
+ * Plugin URI:        http://premium.wpmudev.org/projects/wp-smush-pro/
+ * Description:       Reduce image file sizes, improve performance and boost your SEO using the free <a href="https://premium.wpmudev.org/">WPMU DEV</a> WordPress Smush API.
+ * Version:           2.7.9.2
+ * Author:            WPMU DEV
+ * Author URI:        https://premium.wpmudev.org/
+ * License:           GPLv2
+ * License URI:       https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain:       wp-smushit
+ * Domain Path:       /languages
+ * WDP ID:            912164
  */
+
+/*
+Copyright 2007-2018 Incsub (http://incsub.com)
+Author - Aaron Edwards, Sam Najian, Umesh Kumar
+
+This program is free software; you can redistribute it and/or modify
+it under the terms of the GNU General Public License (Version 2 - GPLv2) as published by
+the Free Software Foundation.
+
+This program is distributed in the hope that it will be useful,
+but WITHOUT ANY WARRANTY; without even the implied warranty of
+MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+GNU General Public License for more details.
+
+You should have received a copy of the GNU General Public License
+along with this program; if not, write to the Free Software
+Foundation, Inc., 59 Temple Place, Suite 330, Boston, MA  02111-1307  USA
+*/
 
 /**
  * Constants
  */
 $prefix  = 'WP_SMUSH_';
-$version = '2.7.9.1';
+$version = '2.7.9.2';
 
 //Deactivate the .org version, if pro version is active
 add_action( 'admin_init', 'deactivate_smush_org' );

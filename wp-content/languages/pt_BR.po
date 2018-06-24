@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-24 11:40:24+0000\n"
+"PO-Revision-Date: 2018-06-12 18:06:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11262,27 +11262,27 @@ msgstr "junho"
 #. translators: month name
 #: wp-includes/class-wp-locale.php:160 wp-includes/class-wp-locale.php:188
 msgid "May"
-msgstr "Maio"
+msgstr "maio"
 
 #. translators: month name
 #: wp-includes/class-wp-locale.php:159 wp-includes/class-wp-locale.php:187
 msgid "April"
-msgstr "Abril"
+msgstr "abril"
 
 #. translators: month name
 #: wp-includes/class-wp-locale.php:158 wp-includes/class-wp-locale.php:186
 msgid "March"
-msgstr "Março"
+msgstr "março"
 
 #. translators: month name
 #: wp-includes/class-wp-locale.php:157 wp-includes/class-wp-locale.php:185
 msgid "February"
-msgstr "Fevereiro"
+msgstr "fevereiro"
 
 #. translators: month name
 #: wp-includes/class-wp-locale.php:156 wp-includes/class-wp-locale.php:184
 msgid "January"
-msgstr "Janeiro"
+msgstr "janeiro"
 
 #: wp-includes/class-http.php:970 wp-includes/class-wp-http-curl.php:232
 #: wp-includes/class-wp-http-curl.php:271

@@ -1,13 +1,18 @@
 Plugin Name: WP Smush Pro
-Author: Umesh Kumar
+Author: WPMU DEV
+Tested up to: 4.9.6
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+= 2.7.9.2 =
+
+* Fixed: Critical Error: Ajax returns Error 500 on media library in WP Offload S3
+
 = 2.7.9.1 =
 
-* Fixed: Conflict with Page Builder / front-end editor
+* Fixed: Conflict with front-end editors
 
 = 2.7.9 =
 
@@ -34,12 +39,10 @@ Change Log:
 * Integrations:
     * Updated WP Offload S3 integration to smush images with Cloudfront enabled
 
+
 = 2.7.8 =
 
-* Fixed:
-    * Plugin conflict causing JS error which disables text editor in some cases
-
-= 2.7.7 =
+* Includes changes from update 2.7.7 and a fix for JS errors in custom posts screen disabling post editor tabs
 
 * Updates:
     * Minor UI Changes ( Accessibility Fixes )
@@ -49,15 +52,17 @@ Change Log:
     * Skip button doesn't skips images
     * Show updated smush status in Media Grid attachment modal
     * Font issue in WordPress backend for Ubuntu systems
-    * Fatal Error: get_current_network() function undefined
+    * Fatal Error: get_current_network
+    * Async Smush not working for subdirectory sites
+    * File backups were not being created for Auto Smush if Async smush is disabled
 
 = 2.7.6 =
 
-* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez(@neorichi) for responsible disclosure.
+* Security: Fixed path traversal vulnerability. Thanks Ricardo SГЎnchez(@neorichi) for responsible disclosure.
 
 = 2.7.5 =
 
-* Update:
+* Updated:
     * UI/UX has been updated for Bulk Smush page
 
 * Fixed:
@@ -65,8 +70,6 @@ Change Log:
     * S3 config error if AWS keys are defined in wp-config.php
     * NextGen smush page not working properly
     * Do not redirect to settings page on activation if WP CLI is installed
-    * Fixed a bunch of Notices/Errors
-
 
 = 2.7.4.1 =
 
@@ -75,33 +78,34 @@ Change Log:
 
 = 2.7.4 =
 
-    * Update: Minor UI changes
-    * Fixed: Images not being resized when image is uploaded via Mobile App
-    * Fixed: Notices and Warnings
-    * Fixed: S3 offload Integration - Original Image not being deleted in some cases
+* Update: Minor UI changes
+* Fixed:
+    * Images not being resized when image is uploaded via Mobile App
+    * Notices and Warnings
+    * S3 offload Integration - Original Image not being deleted in some cases
 
 = 2.7.3.1 =
 
-    * Fixed: Pro user unable to login to WPMU DEV Dashboard plugin when Smush is active, Error: "Your key is invalid."
-    * Updated: S3 Integration, return URL for any error, 'as3cf_get_attached_file'
+* Fixed: Pro user unable to login to WPMU DEV Dashboard plugin when Smush is active, Error: "Your key is invalid."
+* Updated: S3 Integration, return URL for any error, 'as3cf_get_attached_file'
 
 = 2.7.3 =
 
-    * Fixed:
-        * Manual Smush not working
-        * Bulk Smush not working for specific sites
+* Fixed:
+    * Manual Smush not working
+    * Bulk Smush broken for few sites
 
 = 2.7.2 =
 
-    * Updated:
-        * Use JS for stats calculation while using Bulk Smush, to reduce the Ajax time
-    * Fixed:
-        * Some Images would keep appearing in the re-smush list, if "Resize original images" is enabled
-        * Enable buttons in settings redirects to network smush settings page in a subsite if networkwide settings are enabled
+* Updated:
+    * Use JS for stats calculation while using Bulk Smush, to reduce the Ajax time
+* Fixed:
+    * Some Images would keep appearing in the re-smush list, if "Resize original images" is enabled
+    * Enable buttons in settings redirects to network smush settings page in a subsite if networkwide settings are enabled
 
 = 2.7.1 =
 
-    * Fixed: Progress bar not being updated
+* Fixed: Progress bar not updating
 
 = 2.7 =
 
@@ -119,7 +123,6 @@ Change Log:
     * Site Ground Staging - Disable Async smush for staging sites, admin URL for async request is incorrect because of the Apache module
     * Image appearing in Re-Smush list even after smushing, if resize settings are kept on.
     * Performance: Updated query for smushed images count
-
 * Added:
     * WP S3 Offload - Plugin Compatibility for Remove files from server feature ( Pro Version )
     * WP RSS Aggregator compatibility for Auto Smush
@@ -418,4 +421,4 @@ Change Log:
 - First release
 
 
-87274-1527448859-au
+87274-1529857379-au

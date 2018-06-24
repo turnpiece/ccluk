@@ -690,7 +690,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
 				</div><?php
 				if( !$hide_pagespeed ) {?>
                     <div class="wp-smush-pagespeed-recommendation<?php echo $all_done ? '' : ' hidden' ?>">
-                        <span class="smush-recommendation-title roboto-medium"><?php esc_html_e("Still having trouble with PageSpeed tests? Give these a go…", "wp-smsuhit"); ?></span>
+                        <span class="smush-recommendation-title roboto-medium"><?php esc_html_e("Still having trouble with PageSpeed tests? Give these a go…", 'wp-smushit'); ?></span>
                         <ol class="smush-recommendation-list"><?php
                          if( !$WpSmush->validate_install() ) { ?>
                             <li class="smush-recommendation-lossy"><?php printf( esc_html__("Upgrade to Smush Pro for advanced lossy compression. %sTry pro free%s.", "wp-smushit"), '<a href="' . $upgrade_url .'" target="_blank">', '</a>' ); ?></li><?php
@@ -773,7 +773,7 @@ if ( ! class_exists( 'WpSmushBulkUi' ) ) {
 				</div>
 			</div>
 			<div class="wp-smush-count tc">
-                <?php printf( esc_html__( "%s%d%s of your media attachments have been smushed." ), '<span class="wp-smush-images-percent">', $smushed_pc, '</span>%' ); ?>
+                <?php printf( esc_html__( "%s%d%s of your media attachments have been smushed.", 'wp-smushit' ), '<span class="wp-smush-images-percent">', $smushed_pc, '</span>%' ); ?>
             </div>
             <div class="smush-cancel-button-wrapper">
                 <button type="button"
