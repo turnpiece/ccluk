@@ -20,6 +20,9 @@ add_image_size( 'ccluk-feature', 580, 387, true );
  */
 require get_stylesheet_directory() . '/inc/customizer.php';
 
+// load any widgets
+require get_stylesheet_directory() . '/inc/widgets/newsletter-signup.php';
+
 // BP custom text
 load_plugin_textdomain( 'buddypress', FALSE, get_stylesheet_directory() . '/languages/buddypress-en_GB.mo' );
 
@@ -684,3 +687,16 @@ function ccluk_admin_assets() {
     wp_enqueue_style( 'ccluk-main-admin-css', get_stylesheet_directory_uri() . '/assets/css/admin.css', array(), $onesocial_version, 'all' );
 }
 add_action( 'admin_enqueue_scripts', 'ccluk_admin_assets' );
+
+// homepage sections
+add_action( 'ccluk_section_before_inner', function( $arg ) {
+
+    switch( $arg ) {
+
+        case 'newsletter' :
+            echo '<span class="section-title icon">@</span>';
+            break;
+
+    }
+}, 10, 1 );
+

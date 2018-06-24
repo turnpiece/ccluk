@@ -1,15 +1,21 @@
 <?php 
 
-if (defined('MC4WP_VERSION') && !is_user_logged_in()) :
-
-$slug       = 'ccluk_homepage_mailchimp';
-$id         = get_theme_mod( $slug.'_id', esc_html__('mailchimp', 'onesocial') );
-$form       = get_theme_mod( $slug.'_form' );
+$slug       = 'ccluk_homepage_newsletter';
+$audience   = get_theme_mod( $slug.'_audience', 'all' );
 $disable    = get_theme_mod( $slug.'_disable' ) == 1 ? true : false;
-$title      = get_theme_mod( $slug.'_title', sprintf( __('Signup to our newsletter', 'onesocial' ), get_bloginfo('name') ) );
+
+if ($disable || 
+    $audience == 'none' || 
+    $audience == 'logged_in' && !is_user_logged_in() || 
+    $audience == 'logged_out' && is_user_logged_in())
+    return;
+
+$id         = get_theme_mod( $slug.'_id', esc_html__('newsletter', 'onesocial') );
+$form       = get_theme_mod( 'ccluk_newsletter_signup_form' );
+//$title      = get_theme_mod( $slug.'_title', sprintf( __('Signup for our newsletter', 'onesocial' ), get_bloginfo('name') ) );
 $text       = get_theme_mod( $slug.'_text' );
 $privacy_text = get_theme_mod( $slug.'_privacy_text' );
-$privacy_page = get_theme_mod( $slug.'_privacy_page' );
+$privacy_page = get_theme_mod( 'ccluk_newsletter_privacy_page' );
 $page_url   = $page_id ? get_permalink( $page_id ) : wp_registration_url();
 
 if ( ccluk_is_selective_refresh() ) {
@@ -17,12 +23,12 @@ if ( ccluk_is_selective_refresh() ) {
 }
 
 // Get data
-if (!$disable && $form && $title !== '' ) :
+if ($form) :
     if ( ! ccluk_is_selective_refresh() ) : ?>
-    <section id="<?php echo esc_attr( $id ) ?>" <?php do_action('ccluk_section_atts', 'mailchimp'); ?> class="section mailchimp site-content green-bg">
+    <section id="<?php echo esc_attr( $id ) ?>" <?php do_action('ccluk_section_atts', 'newsletter'); ?> class="section newsletter site-content green-bg">
     <?php endif; ?>
 
-        <?php do_action('ccluk_section_before_inner', 'mailchimp'); ?>
+        <?php do_action('ccluk_section_before_inner', 'newsletter'); ?>
 
         <div class="section-content">
         <?php if ($text !== '') : ?> 
@@ -38,17 +44,14 @@ if (!$disable && $form && $title !== '' ) :
         <?php endif; ?>
         
             <div class="form list-item">
-                <?php //echo do_shortcode('[mc4wp_form id="'.$form.'"]') ?>
-                <?php echo do_shortcode('[wd_hustle id="signup-to-our-newsletter" type="embedded"]') ?>
+                <?php echo $form ?>
             </div>
 
         </div>
 
-        <?php do_action('ccluk_section_after_inner', 'mailchimp'); ?>
+        <?php do_action('ccluk_section_after_inner', 'newsletter'); ?>
 
     <?php if ( ! ccluk_is_selective_refresh() ) : ?>
     </section>
     <?php endif; ?>
 <?php endif; 
-
-endif; // end of if MailChimp plugin is active

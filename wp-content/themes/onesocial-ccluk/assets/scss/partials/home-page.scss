@@ -80,7 +80,7 @@ body.page-template-homepage {
 					background-color: $green;
 					padding: 15px 30px;
 					margin: 10px 30px;
-					font-size: 24px;
+					font-size: $font-size-mid;
 					color: $white;
 					text-transform: uppercase;
 					border-radius: 10px;
@@ -92,6 +92,11 @@ body.page-template-homepage {
 					&:hover {
 						background-color: $green;
 					}
+				}
+
+				&.icon {
+					display: block;
+					font-size: $font-size-vlg;
 				}
 			}
 
@@ -215,14 +220,14 @@ body.page-template-homepage {
 			}
 
 			&.join,
-			&.mailchimp,
+			&.newsletter,
 			&.embed {
 
 				.section-content {
 
 					justify-content: space-around;
-					@include align-items( center );
-					@include padding( 2, 0 );
+					@include align-items( start );
+					@include padding( 1, 0 );
 
 					.intro {
 						color: $white;
@@ -267,62 +272,65 @@ body.page-template-homepage {
 					}
 				}
 
-				&.embed {
+				&.embed,
+				&.newsletter {
 					.section-content {
-						.list-item.form {
-							#mc_embed_signup {
-								background: transparent;
-								color: $white;
-								font-family: "Open Sans";
-								font-size: $font-size-std;
-
-								.mc-field-group {
-									width: 100%;
-								}
-
-								h2 {
-									display: none;
-								}
-
-								label, input, .button {
-									font-size: $font-size-std;
-								}
-
-								.button {
-									@include button( $white, $green );
-									height: auto;
-									line-height: 1;
-									float: right;
-								}
-
-								#mc-embedded-subscribe-form {
-
-									input.mce_inline_error {
-										color: $red;
-									}
-									div.mce_inline_error {
-										@include border-radius(10px);
-										@include padding(1, 2);
-										@include margin(1);
-										background-color: $red;
-										color: $white;
-										font-size: $font-size-std;
-										font-weight: 400;
-									}
-								}
-
-								div.response {
-									@include margin(1);
-									@include padding(1, 2);
-									@include border-radius(10px);
-									font-weight: 400;
+						.list-item {
+							&.form {
+								#mc_embed_signup {
+									background: transparent;
 									color: $white;
+									font-family: "Open Sans";
+									font-size: $font-size-std;
 
-									&#mce-success-response {
-										background-color: $black;
+									.mc-field-group {
+										width: 100%;
 									}
-									&#mce-error-response {
-										background-color: $red;
+
+									h2 {
+										display: none;
+									}
+
+									label, input, .button {
+										font-size: $font-size-std;
+									}
+
+									.button {
+										@include button( $white, $green );
+										height: auto;
+										line-height: 1;
+										float: right;
+									}
+
+									#mc-embedded-subscribe-form {
+
+										input.mce_inline_error {
+											color: $red;
+										}
+										div.mce_inline_error {
+											@include border-radius(10px);
+											@include padding(1, 2);
+											@include margin(1);
+											background-color: $red;
+											color: $white;
+											font-size: $font-size-std;
+											font-weight: 400;
+										}
+									}
+
+									div.response {
+										@include margin(1);
+										@include padding(1, 2);
+										@include border-radius(10px);
+										font-weight: 400;
+										color: $white;
+
+										&#mce-success-response {
+											background-color: $black;
+										}
+										&#mce-error-response {
+											background-color: $red;
+										}
 									}
 								}
 							}
@@ -333,6 +341,10 @@ body.page-template-homepage {
 
 			&.green-bg,
 			&.blue-bg {
+				.section-title {
+					color: $white;
+				}
+
 				.section-content {
 					form {
 						label {

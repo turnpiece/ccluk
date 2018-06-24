@@ -29,7 +29,7 @@ if ( ! has_action( 'ccluk_frontpage_section_parts' ) ) {
 	$sections = apply_filters( 'ccluk_frontpage_sections_order', array(
         'about',
         'news',
-        'embed',
+        'newsletter',
         'campaign',
         'posts',
         'join',

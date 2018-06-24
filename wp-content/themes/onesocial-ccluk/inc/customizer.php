@@ -131,8 +131,8 @@ class CCLUK_Customizer {
 		/*------------------------------------------------------------------------*/
 	    /*  Homepage: Newsletter signup
 	    /*------------------------------------------------------------------------*/
-/*
-	    	$section = 'homepage_mailchimp';
+
+	    	$section = 'homepage_newsletter';
 
 			$this->add_homepage_panel( 
 				$section, 
@@ -141,8 +141,8 @@ class CCLUK_Customizer {
 				160
 			);
 
-		    $this->standard_settings( self::SLUG.'_'.$section, 'mailchimp' );
-
+		    $this->standard_settings( self::SLUG.'_'.$section, 'newsletter' );
+/*
 			// Title
 			$this->add_setting( 
 				$section.'_title', 
@@ -157,7 +157,7 @@ class CCLUK_Customizer {
 					'description'   => '',
 				)
 			);
-
+*/
 			$this->customize->add_section( self::SLUG.'_'.$section.'_content' ,
 				array(
 					'priority'    => 6,
@@ -183,18 +183,6 @@ class CCLUK_Customizer {
 				)
 			));
 
-			$this->add_setting( $section.'_form', 'sanitize_text' );
-
-			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
-				$this->customize,
-				self::SLUG.'_'.$section.'_form',
-				array(
-					'label' 		=> esc_html__('Form ID', 'onesocial'),
-					'section' 		=> self::SLUG.'_'.$section.'_content',
-					'description'   => __( 'Enter a MailChimp form ID', 'onesocial' )
-				)
-			));
-
 			$this->add_setting( 
 				$section.'_privacy_text', 
 				'sanitize_text', 
@@ -211,23 +199,9 @@ class CCLUK_Customizer {
 				)
 			));
 
-			// Privacy settings
-			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
-
-			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
-				array(
-					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
-					'section' 		=> self::SLUG.'_'.$section.'_settings',
-					'type'          => 'select',
-					'priority'      => 10,
-					'choices'       => $option_pages,
-					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
-				)
-			);
-*/
 
 		/*------------------------------------------------------------------------*/
-	    /*  Homepage: Shortcode embed
+	    /*  Homepage: HTML embed
 	    /*------------------------------------------------------------------------*/
 
 	    	$section = 'homepage_embed';
@@ -254,18 +228,6 @@ class CCLUK_Customizer {
 					'description'   => '',
 				)
 			);
-
-function themeslug_sanitize_select( $input, $setting ) {
-
-  // Ensure input is a slug.
-  $input = sanitize_key( $input );
-
-  // Get list of choices from the control associated with the setting.
-  $choices = $setting->manager->get_control( $setting->id )->choices;
-
-  // If the input is a valid key, return it; otherwise, return the default.
-  return ( array_key_exists( $input, $choices ) ? $input : $setting->default );
-}
 
 			$this->customize->add_section( self::SLUG.'_'.$section.'_content' ,
 				array(
@@ -364,12 +326,8 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Source page settings
-			$this->customize->add_setting( self::SLUG.'_homepage_about_source_page',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_number' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_about_source_page', array( $this, 'sanitize_number' ) );
+
 			$this->customize->add_control( self::SLUG.'_homepage_about_source_page',
 				array(
 					'label'     	=> esc_html__('Title Link', 'onesocial'),
@@ -390,12 +348,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 				)
 			);
 
-			$this->customize->add_setting( self::SLUG.'_homepage_about_intro',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_about_intro', array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
@@ -410,12 +363,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			// Boxes
 			for ( $box = 1; $box <= 2; $box++ ) :
 
-			$this->customize->add_setting( self::SLUG.'_homepage_about_box_'.$box,
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_about_box_'.$box, array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
@@ -429,12 +377,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 
 			endfor;
 
-			$this->customize->add_setting( self::SLUG.'_homepage_about_footer',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_about_footer', array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
@@ -454,7 +397,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 		    $this->customize->add_panel( self::SLUG.'_homepage_contact' ,
 				array(
 					'priority'        => 270,
-					'title'           => esc_html__( 'Home page: Contact', 'onesocial' ),
+					'title'           => esc_html__( 'Homepage: Contact', 'onesocial' ),
 					'description'     => '',
 					'active_callback' => array( $this, 'showon_frontpage' )
 				)
@@ -463,11 +406,10 @@ function themeslug_sanitize_select( $input, $setting ) {
 			$this->standard_settings( self::SLUG.'_homepage_contact', 'contact' );
 
 			// Title
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_title',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text_field' ),
-					'default'           => esc_html__('Get in touch', 'onesocial'),
-				)
+			$this->add_setting( 
+				'homepage_contact_title',
+				array( $this, 'sanitize_text_field' ),
+				esc_html__('Get in touch', 'onesocial')
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_title',
@@ -479,12 +421,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Sub Title
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_subtitle',
-				array(
-					'sanitize_callback' => 'sanitize_text_field',
-					'default'           => esc_html__('Section subtitle', 'onesocial'),
-				)
-			);
+			$this->add_setting( 'homepage_contact_subtitle', 'sanitize_text_field', esc_html__('Section subtitle', 'onesocial') );
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_subtitle',
 				array(
@@ -495,12 +432,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 	        // Description
-	        $this->customize->add_setting( self::SLUG.'_homepage_contact_desc',
-	            array(
-	                'sanitize_callback' => array( $this, 'sanitize_text' ),
-	                'default'           => '',
-	            )
-	        );
+	        $this->add_setting( 'homepage_contact_desc', array( $this, 'sanitize_text' ) );
 
 	        $this->customize->add_control( new CCLUK_Editor_Custom_Control(
 	            $this->customize,
@@ -522,11 +454,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact form 7 guide.
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7_guide',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' )
-				)
-			);
+			$this->add_setting( 'homepage_contact_cf7_guide', array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, self::SLUG.'_homepage_contact_cf7_guide',
 				array(
@@ -537,12 +465,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			));
 
 			// Contact Form 7 Shortcode
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_contact_cf7', array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_cf7',
 				array(
@@ -553,12 +476,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Show CF7
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_cf7_disable',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_checkbox' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_contact_cf7_disable', array( $this, 'sanitize_checkbox' ) );
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_cf7_disable',
 				array(
@@ -570,12 +488,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact Text
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_text',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
-			);
+			$this->add_setting( 'homepage_contact_text', array( $this, 'sanitize_text' ) );
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
 				$this->customize,
@@ -588,7 +501,7 @@ function themeslug_sanitize_select( $input, $setting ) {
 			));
 
 			// hr
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_text_hr', array( 'sanitize_callback' => array( $this, 'sanitize_text' ) ) );
+			$this->add_setting( 'homepage_contact_text_hr', array( $this, 'sanitize_text' ) );
 			$this->customize->add_control( new CCLUK_Misc_Control( $this->customize, self::SLUG.'_homepage_contact_text_hr',
 				array(
 					'section'     => self::SLUG.'_homepage_contact_content',
@@ -597,11 +510,9 @@ function themeslug_sanitize_select( $input, $setting ) {
 			));
 
 			// Address Box
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_address_title',
-				array(
-					'sanitize_callback' => 'sanitize_text_field',
-					'default'           => '',
-				)
+			$this->add_setting( 
+				'homepage_contact_address_title',
+				'sanitize_text_field'
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_address_title',
@@ -613,11 +524,9 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact Text
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_address',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
+			$this->add_setting( 
+				'homepage_contact_address',
+				array( $this, 'sanitize_text' )
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_address',
@@ -629,11 +538,9 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact Phone
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_phone',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
+			$this->add_setting( 
+				'homepage_contact_phone',
+				array( $this, 'sanitize_text' )
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_phone',
@@ -645,11 +552,9 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact Email
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_email',
-				array(
-					'sanitize_callback' => 'sanitize_email',
-					'default'           => '',
-				)
+			$this->add_setting( 
+				'homepage_contact_email',
+				'sanitize_email'
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_email',
@@ -661,11 +566,9 @@ function themeslug_sanitize_select( $input, $setting ) {
 			);
 
 			// Contact Fax
-			$this->customize->add_setting( self::SLUG.'_homepage_contact_fax',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => '',
-				)
+			$this->add_setting( 
+				'homepage_contact_fax',
+				array( $this, 'sanitize_text' )
 			);
 
 			$this->customize->add_control( self::SLUG.'_homepage_contact_fax',
@@ -691,11 +594,10 @@ function themeslug_sanitize_select( $input, $setting ) {
 				)
 			);
 
-			$this->customize->add_setting( self::SLUG.'_join_intro',
-				array(
-					'sanitize_callback' => array( $this, 'sanitize_text' ),
-					'default'           => sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') )
-				)
+			$this->add_setting(
+				'join_intro',
+				array( $this, 'sanitize_text' ),
+				sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') )
 			);
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
@@ -713,6 +615,49 @@ function themeslug_sanitize_select( $input, $setting ) {
 			 * Hook to add other customize
 			 */
 			do_action( self::SLUG.'_customize_after_register', $this->customize );
+
+
+
+
+		/*------------------------------------------------------------------------*/
+	    /*  Newsletter
+	    /*------------------------------------------------------------------------*/
+
+	    	$section = 'newsletter';
+
+			$this->customize->add_section( self::SLUG.'_'.$section ,
+				array(
+					'priority'    => 9,
+					'title'       => esc_html__( 'Newsletter', 'onesocial' ),
+					'description' => '',
+				)
+			);
+
+			$this->add_setting( $section.'_signup_form' );
+
+			$this->customize->add_control( new CCLUK_Editor_Custom_Control(
+				$this->customize,
+				self::SLUG.'_'.$section.'_signup_form',
+				array(
+					'label' 		=> esc_html__('HTML code', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section,
+					'description'   => __( 'Paste in the HTML code for whatever you want to embed', 'onesocial' )
+				)
+			));
+
+			// Privacy settings
+			$this->add_setting( $section.'_privacy_page', 'sanitize_number' );
+
+			$this->customize->add_control( self::SLUG.'_'.$section.'_privacy_page',
+				array(
+					'label'     	=> esc_html__('Privacy Policy', 'onesocial'),
+					'section' 		=> self::SLUG.'_'.$section,
+					'type'          => 'select',
+					'priority'      => 10,
+					'choices'       => $option_pages,
+					'description'   => esc_html__('Select the privacy policy page.', 'onesocial'),
+				)
+			);
 
 	}
 
