@@ -1,1 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><g fill="none" fill-rule="evenodd" class="wpmudev-icon wpmudev-i_floating"><rect width="18" height="18" fill="#5A6773" rx="3"/><path fill="#2ECC71" d="M0 3h3c.552 0 1 .448 1 1v10c0 .552-.448 1-1 1H0V3z"/></g></svg>

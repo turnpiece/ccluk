@@ -1,1 +1,0 @@
-!function(e){formintorjs.define(["admin/settings/text"],function(e){return e.extend({multiple:!1,className:"sui-form-field",get_field_html:function(){return'<div class="fui-row-double"></div>'}})})}(jQuery);

@@ -1,1 +1,0 @@
-!function(n){formintorjs.define([],function(){return Backbone.Model.extend({toJSON:function(){var n=_.clone(this.attributes);for(var o in n)(n[o]instanceof Backbone.Model||n[o]instanceof Backbone.Collection)&&(n[o]=n[o].toJSON());return n}})})}(jQuery);

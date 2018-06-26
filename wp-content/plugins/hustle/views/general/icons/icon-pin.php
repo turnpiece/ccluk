@@ -1,1 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="10" height="15" viewBox="0 0 10 15" preserveAspectRatio="none" class="hustle-icon hustle-i_pin"><path fill-rule="evenodd" d="M5 0c2.442 0 5 1 5 4.5S6.178 12.904 5 15C3.805 12.904 0 8 0 4.5S2.54 0 5 0zm0 6.5c1.1 0 2-.9 2-2s-.9-2-2-2-2 .9-2 2 .9 2 2 2z"/></svg>

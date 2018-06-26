@@ -1,1 +1,0 @@
-!function(e){formintorjs.define(["admin/models/autofill-model"],function(e){return Backbone.Collection.extend({model:e})})}(jQuery);

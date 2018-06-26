@@ -1,1 +1,0 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="150" height="100" viewBox="0 0 150 100" preserveAspectRatio="none" class="wpmudev-icon wpmudev-i_preview"><path fill-rule="evenodd" d="M75 100C25 100 0 50 0 50S25 0 75 0s75 50 75 50-25 50-75 50zm0-25c13.807 0 25-11.193 25-25S88.807 25 75 25 50 36.193 50 50s11.193 25 25 25z"/></svg>

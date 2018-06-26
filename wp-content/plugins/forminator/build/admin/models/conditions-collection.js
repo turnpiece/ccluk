@@ -1,1 +1,0 @@
-!function(n){formintorjs.define(["admin/models/condition-model"],function(n){return Backbone.Collection.extend({model:n,get_by_name:function(n){n=n.toLowerCase();var e=!1;return this.each(function(t){t.get("name").toLowerCase()==n&&(e=t)}),e},model_index:function(n){return this.indexOf(n)},get_by_index:function(n){return this.at(n)}})})}(jQuery);

@@ -1,1 +1,0 @@
-!function(e){formintorjs.define(["text!admin/templates/fields.html"],function(){return Backbone.View.extend({className:"fui-form-builder--row",initialize:function(e){return this.render()},render:function(){}})})}(jQuery);

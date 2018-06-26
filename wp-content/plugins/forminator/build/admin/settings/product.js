@@ -1,1 +1,0 @@
-!function(e){formintorjs.define(["admin/settings/toggle-container"],function(e){return e.extend({multiple:!1,className:"wpmudev-option",get_field_html:function(){return'<div class="wpmudev-product"></div>'}})})}(jQuery);
