@@ -29,6 +29,9 @@ class CCLUK_Newletter_Signup extends WP_Widget {
     );
  
     public function widget( $args, $instance ) {
+
+        if ($this->signup_form == '')
+            return;
  
         echo $args['before_widget'];
  
@@ -65,13 +68,18 @@ class CCLUK_Newletter_Signup extends WP_Widget {
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'title' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'title' ) ); ?>" type="text" value="<?php echo esc_attr( $title ); ?>">
         </p>
         <p>
+            <label for="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>"><?php esc_attr_e( 'Text:', 'onesocial' ); ?></label>
             <textarea class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'text' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'text' ) ); ?>" type="text" cols="30" rows="10"><?php echo esc_attr( $text ); ?></textarea>
         </p>
         <p>
             <label for="<?php echo esc_attr( $this->get_field_id( 'privacy' ) ); ?>"><?php esc_attr_e( 'Privacy notice:', 'onesocial' ); ?></label>
             <input class="widefat" id="<?php echo esc_attr( $this->get_field_id( 'privacy' ) ); ?>" name="<?php echo esc_attr( $this->get_field_name( 'privacy' ) ); ?>" type="text" value="<?php echo esc_attr( $privacy ); ?>">
         </p>
-        <?php
+        <?php if ($signup_form == '') : ?>
+        <p class="warning">
+            <?php _e( 'WARNING: This widget will not show until you set the signup form in Appearance > Customise > Newsletter.', 'onesocial' ) ?>
+        </p>
+        <?php endif;
  
     }
  

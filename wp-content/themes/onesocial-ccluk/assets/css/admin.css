@@ -150,3 +150,8 @@
     display: none;
     background-color:  red;
 }
+
+.widget-inside .warning {
+    color: #f8800c;
+    font-weight: bold;
+}

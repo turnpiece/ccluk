@@ -57,10 +57,10 @@ a,
   font-size: 15px; }
 .widget-area .widget h3.widgettitle {
   font-weight: 700; }
-.widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form {
+.widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form, .widget-area .widget.widget_custom_html #mc_embed_signup form {
   padding: 15px 0px;
   padding: 1.5rem 0rem; }
-  .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form .button {
+  .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button {
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
@@ -71,7 +71,7 @@ a,
     color: #fff !important;
     height: auto;
     line-height: 1; }
-    .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form .button:hover {
+    .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button:hover, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button:hover {
       color: #fff !important;
       background-color: #54ae68 !important; }
 

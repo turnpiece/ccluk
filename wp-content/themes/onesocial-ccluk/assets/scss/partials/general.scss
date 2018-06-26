@@ -62,11 +62,12 @@ a,
             font-weight: 700;
         }
 
-        &.widget_ccluk-newsletter-signup {
+        &.widget_ccluk-newsletter-signup,
+        &.widget_custom_html {
             #mc_embed_signup form {
                 @include padding( 1.5, 0 );
 
-                .button {
+                #mc-embedded-subscribe.button {
                     @include button();
                     height: auto;
                     line-height: 1;

@@ -9,7 +9,7 @@ if ( ! function_exists( 'ccluk_admin_scripts' ) ) :
      */
     function ccluk_admin_scripts( $hook ) {
         if ( $hook === 'widgets.php' || $hook === 'appearance_page_ft_onepress'  ) {
-            wp_enqueue_style( 'ccluk-admin-css', get_template_directory_uri() . '/assets/css/admin.css' );
+            //wp_enqueue_style( 'ccluk-admin-css', get_template_directory_uri() . '/assets/css/admin.css' );
             // Add recommend plugin css
             wp_enqueue_style( 'plugin-install' );
             wp_enqueue_script( 'plugin-install' );
