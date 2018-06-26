@@ -74,6 +74,8 @@ a,
     .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button:hover, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button:hover {
       color: #fff !important;
       background-color: #54ae68 !important; }
+  .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form div.response, .widget-area .widget.widget_custom_html #mc_embed_signup form div.response {
+    line-height: 1.5; }
 
 .dir-header {
   border-bottom: 1px solid #54ae68; }
