@@ -5,7 +5,7 @@ Tags: pages, admin, nested, tree view, page tree, sort, quick edit, structure
 Requires at least: 3.8
 Tested up to: 4.9
 Requires PHP: 5.4
-Stable tag: 3.0.3
+Stable tag: 3.0.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -101,6 +101,10 @@ Nested Pages uses the same ordering methodology as WordPress core. The plugin of
 9. The Nested Pages interface can be enabled on a per-post-type basis, with customizable options for each type.
 
 == Changelog ==
+
+= 3.0.5 = 
+* Adds actions for sorting update. Single post: nestedpages_post_order_updated($post_id, $parent, $order). All posts: nestedpages_posts_order_updated($posts, $parent).
+* Adds filter to disable sorting per post: nestedpages_post_sortable($sortable, $post, $post_type).
 
 = 3.0.4 = 
 * Fixes bug introduced in v3.0.3 that prevented selection of privacy page.

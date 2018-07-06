@@ -13,7 +13,6 @@ class ComposerStaticInitac12fbc37b8877d941c44128ae72b91f
     public static $classMap = array (
         'MC4WP\\Sync\\Admin\\FlashMessages' => __DIR__ . '/../..' . '/src/admin/class-flash-messages.php',
         'MC4WP\\Sync\\Admin\\Manager' => __DIR__ . '/../..' . '/src/admin/class-manager.php',
-        'MC4WP\\Sync\\Admin\\StatusIndicator' => __DIR__ . '/../..' . '/src/admin/class-status-indicator.php',
         'MC4WP\\Sync\\AjaxListener' => __DIR__ . '/../..' . '/src/admin/class-ajax-listener.php',
         'MC4WP\\Sync\\CLI\\Command' => __DIR__ . '/../..' . '/src/cli/class-command.php',
         'MC4WP\\Sync\\Observer' => __DIR__ . '/../..' . '/src/class-observer.php',

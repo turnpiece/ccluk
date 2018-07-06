@@ -59,9 +59,6 @@ class Manager {
 		add_filter( 'mc4wp_admin_menu_items', array( $this, 'add_menu_items' ) );
 		add_action( 'mc4wp_admin_process_user_sync_queue', array( $this, 'process_queue' ) );
 		add_action( 'admin_footer_text', array( $this, 'footer_text' ), 11 );
-
-		// for BC with MailChimp for WP < 3.0
-		add_filter( 'mc4wp_menu_items', array( $this, 'add_menu_items' ) );
 	}
 
 	
@@ -115,7 +112,6 @@ class Manager {
 	 * @return array
 	 */
 	public function add_menu_items( $items ) {
-
 		$item = array(
 			'title' => __( 'MailChimp User Sync', 'mailchimp-sync' ),
 			'text' => __( 'User Sync', 'mailchimp-sync' ),
@@ -124,7 +120,6 @@ class Manager {
 		);
 
 		$items[] = $item;
-
 		return $items;
 	}
 
@@ -183,15 +178,9 @@ class Manager {
 		$lists = $this->get_mailchimp_lists();
 		$queue = $this->queue;
 
-		if( $this->options['list'] !== '' ) {
-			$status_indicator = new StatusIndicator( $this->users );
-			$status_indicator->check();
-
-			if( isset( $lists[ $this->options['list'] ] ) )  {
-				$selected_list = $lists[ $this->options['list'] ];
-				$available_mailchimp_fields = array_diff_key( $selected_list->merge_vars, array( 'EMAIL' ) );
-			}
-
+		if( $this->options['list'] !== '' && isset( $lists[ $this->options['list'] ] ) ) {
+			$selected_list = $lists[ $this->options['list'] ];
+			$available_mailchimp_fields = array_diff_key( $selected_list->merge_vars, array( 'EMAIL' ) );
 		}
 
 		$this->options['field_mappers'] = array_values( $this->options['field_mappers'] );

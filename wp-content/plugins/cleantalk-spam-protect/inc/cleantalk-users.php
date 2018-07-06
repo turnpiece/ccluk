@@ -534,7 +534,7 @@ function ct_ajax_insert_users()
 	
 	//* INSERTION
 	global $wpdb;
-	$to_insert = 10;
+	$to_insert = 100;
 	$result = $wpdb->get_results("SELECT network FROM `".$wpdb->base_prefix."cleantalk_sfw` LIMIT $to_insert;", ARRAY_A);
 	
 	if($result){

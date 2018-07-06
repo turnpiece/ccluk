@@ -56,6 +56,7 @@ class Observer {
     }
 
     public function on_updated_user_meta( $meta_id, $user_id, $meta_key  ) {
+
         //  Don't act on our own keys or hidden meta keys.
         if( strpos( $meta_key, 'mailchimp' ) === 0 || strpos( $meta_key, 'mc4wp_' ) === 0 || strpos( $meta_key, '_' ) === 0 ) {
             return;
@@ -67,7 +68,7 @@ class Observer {
          * @see https://wordpress.org/plugins/user-last-login/
          * @see https://wordpress.org/plugins/wp-last-login/
          */
-        if( in_array( $meta_key, array( 'wp-last-login' ) ) ) {
+        if( in_array( $meta_key, array( 'wp-last-login', 'wp_yoast_notifications' ) ) ) {
             return;
         }
 

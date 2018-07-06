@@ -29,7 +29,5 @@ function apbct_gdpr__form_append_notice(){
 }
 
 jQuery(document).ready(function(){
-	
 	apbct_gdpr__form_append_notice();
-	
 });

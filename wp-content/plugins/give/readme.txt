@@ -5,7 +5,7 @@ Tags: donation, donations, donation plugin, wordpress donation plugin, givewp, g
 Requires at least: 4.8
 Tested up to: 4.9
 Requires PHP: 5.3
-Stable tag: 2.1.6
+Stable tag: 2.1.7
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -208,6 +208,9 @@ Use Give for donations, and let WooCommerce or WP eCommerce or the like handle y
 
 == Changelog ==
 
+= 2.1.7: July 5th, 2018 =
+* Fix: We have moved "babel-polyfill" to Give Core for better browser compatiblity so our various add-ons can use it and it's not enqueued multiple times which can cause errors. [#3433](https://github.com/WordImpress/Give/issues/3433)
+
 = 2.1.6: June 20th, 2018 =
 * Fix: DB Update incorrectly appears on fresh installs. [#3390](https://github.com/wordimpress/give/issues/3390)
 * Fix: Ensure the level title in the exported CSV reads custom on custom donations. [#3380](https://github.com/wordimpress/give/issues/3380)
@@ -262,7 +265,7 @@ Use Give for donations, and let WooCommerce or WP eCommerce or the like handle y
 * Fix: Give's API was not respecting the date range parameters passed to it. Now it does so you can filter the API by date ranges as expected. [#3191](https://github.com/WordImpress/Give/issues/3191)
 * Fix: This version contains a database cleanup routine to delete donation payment meta that is not attached to any payment. For instance, if you deleted a payment the metadata associated with it still remained prior to this version. With this upgrade the orphaned data will be removed. [#3205](https://github.com/WordImpress/Give/issues/3205)
 * Fix: Resolved PHP notices when exporting donor in lower PHP versions. (#3222)[https://github.com/WordImpress/Give/issues/3222], [#3218](https://github.com/WordImpress/Give/issues/3218)
-* Fix: We've updated the donation form's <form> tag ID so it's unique per form for better W3C compatibility and to ensure Stripe elements works as expected with multiple forms on a single page. [#3139](https://github.com/WordImpress/Give/issues/3139)
+* Fix: We've updated the donation form's form HTML tag ID so it's unique per form for better W3C compatibility and to ensure Stripe elements works as expected with multiple forms on a single page. [#3139](https://github.com/WordImpress/Give/issues/3139)
 * Fix: Several typos on the welcome guide were corrected. [#3230](https://github.com/WordImpress/Give/issues/3230)
 * Fix: Inline plugin upgrade notices were not displaying properly in previous versions. [#2789](https://github.com/WordImpress/Give/issues/2789)
 * Tweak: Improved the logic of verifying min/max amount for the Currency Switcher add-on. [#3203](https://github.com/WordImpress/Give/issues/3203)

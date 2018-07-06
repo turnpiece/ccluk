@@ -3,7 +3,7 @@
 Plugin Name: MailChimp User Sync
 Plugin URI: https://mc4wp.com/#utm_source=wp-plugin&utm_medium=mailchimp-sync&utm_campaign=plugins-page
 Description: Synchronize your WordPress Users with a MailChimp list.
-Version: 1.7.4
+Version: 1.7.5
 Author: ibericode
 Author URI: https://ibericode.com/
 Text Domain: mailchimp-sync
@@ -49,7 +49,7 @@ function _load_mailchimp_sync() {
 
 	define( 'MAILCHIMP_SYNC_FILE', __FILE__ );
 	define( 'MAILCHIMP_SYNC_DIR', __DIR__ );
-	define( 'MAILCHIMP_SYNC_VERSION', '1.7.4' );
+	define( 'MAILCHIMP_SYNC_VERSION', '1.7.5' );
 
 	// Test whether dependencies were met
 	$ready = include dirname( __FILE__ )  .'/dependencies.php';
@@ -94,3 +94,26 @@ function mc4wp_sync_clear_schedule() {
 	wp_clear_scheduled_hook( 'mailchimp_user_sync_run' );
 }
 
+
+/**
+ * This code hooks into the MailChimp User Sync webhook listener.
+ *
+ * When a request comes in that is not an unsubscribe request and for which no user exists yet, a new user will be created.
+ */
+add_filter( 'mailchimp_sync_webhook_user', function( $user, $data ) {
+
+	// have user already? use that.
+	if( $user instanceof \WP_User ) {
+		return $user;
+	}
+	// do not run when someone unsubscribed through MailChimp
+	if( $_REQUEST['type'] === 'unsubscribe' ) {
+		return $user;
+	}
+	// No user yet and this is not an unsubscribe request, let's create a new one!
+	$user_id = wp_create_user( $data['email'], wp_generate_password(), $data['email'] );
+	// send notification to user
+	wp_new_user_notification( $user_id );
+	// return complete user object
+	return get_userdata( $user_id );
+}, 10, 2 );

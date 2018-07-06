@@ -70,7 +70,8 @@ class Users {
 	}
 
 	/**
-	 *
+    * Counts all users matching the given role
+    *
 	 * @return int
 	 */
 	public function count() {
@@ -89,12 +90,6 @@ class Users {
 		if( is_multisite() ) {
 			$sql .= " RIGHT JOIN {$wpdb->usermeta} um4 ON um4.user_id = u.ID AND um4.meta_key = %s";
 			$params[] = $prefix . 'capabilities';
-		}
-
-		$sql .= ' WHERE 1=1';
-		if( $this->user_control ) {
-			$sql .= " AND NOT EXISTS( SELECT * FROM {$wpdb->usermeta} um3 WHERE um3.user_id = u.ID AND um3.meta_key = %s AND um3.meta_value = '0' )";
-			$params[] = $this->get_meta_key_for_optin_status();
 		}
 
 		// now get number of users with meta key
@@ -151,40 +146,6 @@ class Users {
 		}
 
 		return $users[0];
-	}
-
-	/**
-	 * TODO: Run filter on result
-	 *
-	 * @return int
-	 */
-	public function count_subscribers() {
-		global $wpdb;
-		
-		$sql = "SELECT COUNT(u.ID) FROM $wpdb->users u INNER JOIN $wpdb->usermeta um1 ON um1.user_id = u.ID AND um1.meta_key = %s";
-		$params = array( $this->meta_key );
-		$prefix = is_multisite() ? $wpdb->get_blog_prefix( get_current_blog_id() ) : $wpdb->prefix;
-	
-		if( ! empty( $this->role ) ) {
-			$sql .= " INNER JOIN $wpdb->usermeta um2 ON um2.user_id = u.ID AND um2.meta_key = %s AND um2.meta_value LIKE %s";
-			$params[] = $prefix . 'capabilities';
-			$params[] = '%%' . $this->role . '%%';
-		} 
-
-		if( is_multisite() ) {
-			$sql .= " RIGHT JOIN {$wpdb->usermeta} um4 ON um4.user_id = u.ID AND um4.meta_key = %s";
-			$params[] = $prefix . 'capabilities';
-		}
-
-		$sql .= ' WHERE 1=1';
-		if( $this->user_control ) {
-			$sql .= " AND NOT EXISTS( SELECT * FROM {$wpdb->usermeta} um3 WHERE um3.user_id = u.ID AND um3.meta_key = %s AND um3.meta_value = '0' )";
-			$params[] = $this->get_meta_key_for_optin_status();
-		}
-
-		$query = $wpdb->prepare( $sql, $params );
-		$subscriber_count = $wpdb->get_var( $query );
-		return (int) $subscriber_count;
 	}
 
     /**

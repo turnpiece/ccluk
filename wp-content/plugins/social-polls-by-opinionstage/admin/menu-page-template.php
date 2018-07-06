@@ -136,7 +136,7 @@ opinionstage_enqueue_js_asset('menu-page');
 							<div class="os-icon icon-os-icon-story"></div>
 						</div>
 						<div class="opinionstage-section-cell opinionstage-description-cell">
-							<div class="title">Story</div>
+							<div class="title">Story Article</div>
 							<div class="example">Create an article using interactive elements</div>
 						</div>
 						<div class="opinionstage-section-cell opinionstage-btn-cell">

@@ -8,7 +8,6 @@ $baseDir = dirname($vendorDir);
 return array(
     'MC4WP\\Sync\\Admin\\FlashMessages' => $baseDir . '/src/admin/class-flash-messages.php',
     'MC4WP\\Sync\\Admin\\Manager' => $baseDir . '/src/admin/class-manager.php',
-    'MC4WP\\Sync\\Admin\\StatusIndicator' => $baseDir . '/src/admin/class-status-indicator.php',
     'MC4WP\\Sync\\AjaxListener' => $baseDir . '/src/admin/class-ajax-listener.php',
     'MC4WP\\Sync\\CLI\\Command' => $baseDir . '/src/cli/class-command.php',
     'MC4WP\\Sync\\Observer' => $baseDir . '/src/class-observer.php',

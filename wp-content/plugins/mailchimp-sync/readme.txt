@@ -4,7 +4,7 @@ Donate link: https://mc4wp.com/#utm_source=wp-plugin-repo&utm_medium=mailchimp-s
 Tags: mailchimp,users,sync,mailchimp list,synchronize,zapier,woocommerce,mc4wp
 Requires at least: 4.1
 Tested up to: 4.9.6
-Stable tag: 1.7.4
+Stable tag: 1.7.5
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 Requires PHP: 5.3
@@ -125,6 +125,18 @@ Not by default, but you can enable this by [configuring a webhook in your MailCh
 2. Status overview
 
 == Changelog ==
+
+
+### 1.7.5 - July 4, 2018
+
+**Improvements**
+
+- Get rid of status indicator on settings page as it's not important nor accurate.
+
+**Additions**
+
+- Add button to settings page to immediately process all pending background jobs.
+
 
 
 ### 1.7.4 - May 28, 2018

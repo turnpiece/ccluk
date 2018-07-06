@@ -2011,6 +2011,7 @@ function ct_contact_form_validate() {
 		isset($_POST['gform_submit']) || //Gravity form
 		(isset($_POST['wc_reset_password'], $_POST['_wpnonce'], $_POST['_wp_http_referer'])) || //WooCommerce recovery password form
 		(isset($_POST['woocommerce-login-nonce'], $_POST['login'], $_POST['password'], $_POST['_wp_http_referer'])) || //WooCommerce login form
+		strpos($_SERVER['REQUEST_URI'], 'wc-ajax=get_refreshed_fragments') !== false ||
 		(isset($_POST['ccf_form']) && intval($_POST['ccf_form']) == 1) ||
 		(isset($_POST['contact_tags']) && strpos($_POST['contact_tags'], 'MBR:') !== false) ||
 		(strpos($_SERVER['REQUEST_URI'], 'bizuno.php') && !empty($_POST['bizPass'])) ||
@@ -2336,13 +2337,17 @@ function ct_enqueue_scripts_public($hook){
 	
 	if(!empty($ct_options['registrations_test']) || !empty($ct_options['comments_test']) || !empty($ct_options['contact_forms_test']) || !empty($ct_options['general_contact_forms_test']) || !empty($ct_options['wc_checkout_test']) || !empty($ct_options['check_external']) || !empty($ct_options['check_internal']) || !empty($ct_options['bp_private_messages']) || !empty($ct_options['general_postdata_test'])){
 		
-		wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery'), APBCT_VERSION);
-		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array('jquery'), APBCT_VERSION, 'in_footer');
+		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array(''), APBCT_VERSION, 'in_footer');
 		
-		wp_localize_script('ct_public_gdpr', 'ctPublic', array(
-			'gdpr_forms'   => isset($ct_options['gdpr_forms_id']) ? explode(', ', $ct_options['gdpr_forms_id']) : array(),
-			'gdpr_text'  => isset($ct_options['gdpr_text'])       ? $ct_options['gdpr_text']                    : __('By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.', 'cleantalk'),
-		));
+		if(shortcode_exists( 'cleantalk_gdpr_form')){
+			
+			wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery'), APBCT_VERSION);
+		
+			wp_localize_script('ct_public_gdpr', 'ctPublic', array(
+				'gdpr_forms'   => isset($ct_options['gdpr_forms_id']) ? explode(', ', $ct_options['gdpr_forms_id']) : array(),
+				'gdpr_text'  => isset($ct_options['gdpr_text'])       ? $ct_options['gdpr_text']                    : __('By using this form you agree with the storage and processing of your data by using the Privacy Policy on this website.', 'cleantalk'),
+			));
+		}
 		
 	}
 	
