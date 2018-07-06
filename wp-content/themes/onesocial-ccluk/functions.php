@@ -582,6 +582,18 @@ function boss_generate_option_css() {
 /* Add Action */
 add_action( 'wp_head', 'boss_generate_option_css', 200 );
 
+function ccluk_login_styles() { ?>
+    <style type="text/css">
+        .login #loginform input[type=text], 
+        .login #loginform input[type=password] {
+            font-size: 21px;
+            border-bottom: 1px solid #54ae68;
+        }
+    </style>
+<?php }
+
+add_action( 'login_enqueue_scripts', 'ccluk_login_styles' );
+
 // create news post type
 function ccluk_create_news_post_type() {
     register_post_type( 'ccluk_news',
