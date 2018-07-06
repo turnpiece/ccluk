@@ -242,9 +242,9 @@ msgstr "Social Links Menu"
 msgid "Comments are closed."
 msgstr "Comments are closed."
 
-#. #-#-#-#-#  twentyseventeen.pot (Twenty Seventeen 1.5)  #-#-#-#-#
+#. #-#-#-#-#  twentyseventeen.pot (Twenty Seventeen 1.6)  #-#-#-#-#
 #. Author URI of the plugin/theme
-#: template-parts/footer/site-info.php:13
+#: template-parts/footer/site-info.php:18
 msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
@@ -272,7 +272,7 @@ msgstr "Previous page"
 msgid "Dark"
 msgstr "Dark"
 
-#: template-parts/footer/site-info.php:13
+#: template-parts/footer/site-info.php:19
 msgid "Proudly powered by %s"
 msgstr "Proudly powered by %s"
 

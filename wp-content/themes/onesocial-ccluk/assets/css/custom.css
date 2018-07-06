@@ -850,6 +850,9 @@ body.page-template-homepage .slick-slide img {
           line-height: 1; }
     .register div#register-page .register-section#profile-details-section .field-visibility-settings-toggle {
       display: none; }
+    .register div#register-page .register-section#profile-details-section .field-visibility-settings-notoggle {
+      font-size: 15px;
+      color: #54ae68; }
   .register div#register-page .mc4wp-checkbox {
     text-align: center; }
     .register div#register-page .mc4wp-checkbox label strong {

@@ -75,6 +75,11 @@
                 .field-visibility-settings-toggle{
                     display: none;
                 }
+
+                .field-visibility-settings-notoggle {
+                    font-size: $font-size-sm;
+                    color: $green;
+                }
             }
         }
 
