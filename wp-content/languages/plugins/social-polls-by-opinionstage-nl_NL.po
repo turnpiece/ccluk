@@ -1,0 +1,57 @@
+# Translation of Plugins - Poll, Survey, Quiz, Slideshow &amp; Form Builder - Development (trunk) in Dutch
+# This file is distributed under the same license as the Plugins - Poll, Survey, Quiz, Slideshow &amp; Form Builder - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2017-07-09 17:02:20+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: nl\n"
+"Project-Id-Version: Plugins - Poll, Survey, Quiz, Slideshow &amp; Form Builder - Development (trunk)\n"
+
+#. Author of the plugin/theme
+msgid "OpinionStage.com"
+msgstr "OpinionStage.com"
+
+#. Description of the plugin/theme
+msgid "Adds a highly engaging social polling system to your site. Easily add polls to any post/page or to your sites sidebar."
+msgstr "Voegt een hoog interactief sociaal stemsysteem toe aan je site. Gemakkelijk een stemsysteem aan een bericht, pagina of sidebar toevoegen. "
+
+#. #-#-#-#-#  tmp-social-polls-by-opinionstage.pot (Polls by OpinionStage
+#. 13.0.0)  #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  tmp-social-polls-by-opinionstage.pot (Polls by OpinionStage
+#. 13.0.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "http://www.opinionstage.com"
+msgstr "http://www.opinionstage.com"
+
+#. Plugin Name of the plugin/theme
+msgid "Polls by OpinionStage"
+msgstr "Stemsysteem van de makers van OpinionStage"
+
+#: opinionstage-widget.php:102
+msgid "Title"
+msgstr "Titel"
+
+#: opinionstage-widget.php:12
+msgid "Opinion Stage Sidebar Widget"
+msgstr "Opinion Stage Sidebar Widget"
+
+#: opinionstage-widget.php:8
+msgid "Adds a highly engaging polls to your widget section."
+msgstr "Voegt een hoog interactief stemsysteem toe aan je widgets."
+
+#: opinionstage-utility-functions.php:19
+msgid "Note: There is a poll embedded within this post, please visit the site to participate in this post's poll."
+msgstr "Let op: Er is staat een poll in dit bericht, ga naar onze website om hier aan deel te nemen."
+
+#: opinionstage-functions.php:42
+msgid "Insert poll"
+msgstr "Poll ingeven"
+
+#: opinionstage-functions.php:41
+msgid "poll"
+msgstr "poll"
