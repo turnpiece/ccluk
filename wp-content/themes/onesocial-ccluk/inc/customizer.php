@@ -597,7 +597,7 @@ class CCLUK_Customizer {
 			$this->add_setting(
 				'join_intro',
 				array( $this, 'sanitize_text' ),
-				sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') )
+				sprintf( __( 'Join %s and become part of a global movement lobbying for effective action on climate change.', 'onesocial' ), get_bloginfo('name') )
 			);
 
 			$this->customize->add_control( new CCLUK_Editor_Custom_Control(

@@ -24,7 +24,10 @@ require get_stylesheet_directory() . '/inc/customizer.php';
 require get_stylesheet_directory() . '/inc/widgets/newsletter-signup.php';
 
 // BP custom text
-load_plugin_textdomain( 'buddypress', FALSE, get_stylesheet_directory() . '/languages/buddypress-en_GB.mo' );
+add_action( 'plugins_loaded', function() {
+    load_plugin_textdomain( 'buddypress', FALSE, basename( dirname( __FILE__ ) ) . '/languages' );
+} );
+
 
 // Category archives to include news posts
 function ccluk_show_cpt_archives( $query ) {
