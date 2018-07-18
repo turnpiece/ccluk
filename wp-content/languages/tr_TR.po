@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-29 02:35:04+0000\n"
+"PO-Revision-Date: 2018-07-06 10:57:12+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -149,7 +149,7 @@ msgstr "[%s] Eylem onaylandı"
 
 #. translators: Privacy data request subject. 1: Site name, 2: Name of the
 #. action
-#: wp-includes/user.php:3320
+#: wp-includes/user.php:3317
 msgid "[%1$s] Confirm Action: %2$s"
 msgstr "[%1$s] Eylemi onayla: %2$s"
 
@@ -229,11 +229,11 @@ msgstr "Kişisel veri aktarım dosyası oluşturulmadı."
 msgid "User action confirmed."
 msgstr "İşlem onaylandı."
 
-#: wp-includes/user.php:3396
+#: wp-includes/user.php:3393
 msgid "This link has expired."
 msgstr "Bu bağlantının süresi doldu."
 
-#: wp-includes/user.php:3248 wp-includes/user.php:3392 wp-login.php:844
+#: wp-includes/user.php:3248 wp-includes/user.php:3389 wp-login.php:844
 msgid "Invalid request."
 msgstr "Geçersiz istek."
 
@@ -267,12 +267,12 @@ msgid "User Requests"
 msgstr "Kullanıcı talepleri"
 
 #. translators: deleted long text
-#: wp-includes/functions.php:5921
+#: wp-includes/functions.php:5956
 msgid "This content was deleted by the author."
 msgstr "Bu içerik yazar tarafından silindi."
 
 #. translators: deleted text
-#: wp-includes/functions.php:5917
+#: wp-includes/functions.php:5952
 msgid "[deleted]"
 msgstr "[silinmiş]"
 
@@ -285,16 +285,16 @@ msgstr "Yorum %d kişisel veri içeriyor, bu nedenle anonim hale getirilemez."
 msgid "Action has been confirmed."
 msgstr "Eylem onaylandı."
 
-#: wp-includes/user.php:3434
+#: wp-includes/user.php:3431
 msgid "The confirmation email has expired."
 msgstr "Doğrulama e-postası zaman aşımına uğradı."
 
-#: wp-includes/user.php:3416
+#: wp-includes/user.php:3413
 msgid "Invalid action"
 msgstr "Geçersiz eylem"
 
-#. translators: Do not translate DESCRIPTION, CONFIRM_URL, EMAIL, SITENAME,
-#. SITEURL: those are placeholders.
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
+#. those are placeholders.
 #: wp-includes/user.php:3264
 msgid ""
 "Howdy,\n"
@@ -308,8 +308,6 @@ msgid ""
 "\n"
 "You can safely ignore and delete this email if you do not want to\n"
 "take this action.\n"
-"\n"
-"This email has been sent to ###EMAIL###.\n"
 "\n"
 "Regards,\n"
 "All at ###SITENAME###\n"
@@ -437,7 +435,7 @@ msgstr "Benim"
 msgid "Whether or not the post type can be viewed."
 msgstr "Yazı türünün görüntülenip görüntülenmeyeceği."
 
-#: wp-includes/functions.php:2608
+#: wp-includes/functions.php:2621
 msgid "The link you followed has expired."
 msgstr "Takip ettiğiniz bağlantının süresi doldu."
 
@@ -447,7 +445,7 @@ msgid "You need a higher level of permission."
 msgstr "Bu işlem için daha üst seviye izne sahip olmalısınız."
 
 #: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2618
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2631
 #: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
 #: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
 msgid "Something went wrong."
@@ -1120,14 +1118,14 @@ msgstr "%s:"
 #. author's hostname
 #. translators: 1: Comment author name, 2: comment author's IP address, 3:
 #. comment author's hostname
-#: wp-includes/pluggable.php:1494 wp-includes/pluggable.php:1654
+#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1657
 msgid "Author: %1$s (IP address: %2$s, %3$s)"
 msgstr "Yazar: %1$s (IP adresi: %2$s, %3$s)"
 
 #. translators: 1: Trackback/pingback website name, 2: website IP address, 3:
 #. website hostname
-#: wp-includes/pluggable.php:1473 wp-includes/pluggable.php:1484
-#: wp-includes/pluggable.php:1634 wp-includes/pluggable.php:1644
+#: wp-includes/pluggable.php:1476 wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1637 wp-includes/pluggable.php:1647
 msgid "Website: %1$s (IP address: %2$s, %3$s)"
 msgstr "Web sitesi: %1$s (IP adresi: %2$s, %3$s)"
 
@@ -1216,13 +1214,13 @@ msgstr "Temizlik nonce kontrolü başarısız oldu. Lütfen tekrar deneyin."
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5780
+#: wp-includes/functions.php:5815
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Yönetici e-posta değişikliği bildirimi"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5765
+#: wp-includes/functions.php:5800
 msgid ""
 "Hi,\n"
 "\n"
@@ -1248,7 +1246,7 @@ msgstr ""
 "###SITENAME### ahalisi\n"
 "###SITEURL###"
 
-#: wp-includes/functions.php:5701
+#: wp-includes/functions.php:5736
 msgid "Only UUID V4 is supported at this time."
 msgstr "Şu an için sadece UUID V4 desteklenmektedir."
 
@@ -2033,7 +2031,7 @@ msgstr ""
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "Önerilen görsel boyutları %1$s x %2$s piksel."
 
-#: wp-includes/functions.php:2140 wp-includes/script-loader.php:291
+#: wp-includes/functions.php:2153 wp-includes/script-loader.php:291
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "Üzgünüm, güvenlik nedenleriyle bu dosya tipine izin verilmiyor."
 
@@ -4350,12 +4348,12 @@ msgid "Sorry, you are not allowed to preview drafts."
 msgstr "Üzgünüm, taslakları ön izlemenize izin verilmiyor."
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1760
+#: wp-includes/pluggable.php:1763
 msgid "[%s] Password Changed"
 msgstr "Parola değiştirildi [%s]"
 
 #. translators: %s: user name
-#: wp-includes/pluggable.php:1752
+#: wp-includes/pluggable.php:1755
 msgid "Password changed for user: %s"
 msgstr "%s kullanıcısı için parola değiştirildi"
 
@@ -4567,13 +4565,13 @@ msgstr "<strong>HATA</strong>: Geçersiz kullanıcı adı, e-posta adresi ya da 
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "%1$s %2$s %3$s %4$s beslemesi"
 
-#: wp-includes/functions.php:5314
+#: wp-includes/functions.php:5327
 msgid "Close dialog"
 msgstr "Pencereyi kapat"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3902
+#: wp-includes/functions.php:3915
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "%2$s içindeki %1$s oluşturucu yordam %3$s sürümünden bu yana <strong>desteklenmiyor</strong>! Yerine %4$s kullanın."
 
@@ -4711,12 +4709,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "<a href=\"%s\" target=\"_blank\">Hata raporu</a> sayfasını okuyun. Oradaki bazı rehberler neyin yanlış gittiğini anlamanıza yardımcı olabilir."
 
-#: wp-includes/functions.php:4145
+#: wp-includes/functions.php:4158
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4144
+#: wp-includes/functions.php:4157
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Daha fazla bilgi için lütfen <a href=\"%s\">WordPress hata ayıklama</a> adresine bakın."
 
@@ -5510,7 +5508,7 @@ msgstr "Parola sıfırlama bağlantısı geçersiz görünüyor. Lütfen aşağ�
 msgid "WordPress database error:"
 msgstr "WordPress veritabanı hatası:"
 
-#: wp-includes/pluggable.php:1895
+#: wp-includes/pluggable.php:1898
 msgid "To set your password, visit the following address:"
 msgstr "Parolanızı belirlemek için, şu adresi ziyaret edin:"
 
@@ -5524,7 +5522,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "Geliştirme deposundaki %s dizini RTL için kullanılmalıdır."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3906
+#: wp-includes/functions.php:3919
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Çağrılan %1$s yordamı %2$s sürümünden bu yana <strong>geçerliliğini yitirmiş</strong>! Lütfen bunun yerine %3$s kullanın."
 
@@ -6390,27 +6388,27 @@ msgid "Trash"
 msgstr "Çöp"
 
 #. translators: 1: Trackback/pingback/comment author URL
-#: wp-includes/pluggable.php:1474 wp-includes/pluggable.php:1485
-#: wp-includes/pluggable.php:1496 wp-includes/pluggable.php:1636
-#: wp-includes/pluggable.php:1646 wp-includes/pluggable.php:1658
+#: wp-includes/pluggable.php:1477 wp-includes/pluggable.php:1488
+#: wp-includes/pluggable.php:1499 wp-includes/pluggable.php:1639
+#: wp-includes/pluggable.php:1649 wp-includes/pluggable.php:1661
 msgid "URL: %s"
 msgstr "Adres: %s"
 
 #. translators: 1: Comment text
-#: wp-includes/pluggable.php:1475 wp-includes/pluggable.php:1486
-#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1660
+#: wp-includes/pluggable.php:1478 wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1500 wp-includes/pluggable.php:1663
 msgid "Comment: %s"
 msgstr "Yorumlar: %s"
 
-#: wp-includes/pluggable.php:1476
+#: wp-includes/pluggable.php:1479
 msgid "You can see all trackbacks on this post here:"
 msgstr "Bu yazıya yapılmış tüm geri izlemeleri burada görebilirsiniz:"
 
-#: wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1490
 msgid "You can see all pingbacks on this post here:"
 msgstr "Bu yazıya yapılmış geri bildirimlerin hepsini burada görebilirsiniz:"
 
-#: wp-includes/pluggable.php:1498
+#: wp-includes/pluggable.php:1501
 msgid "You can see all comments on this post here:"
 msgstr "Bu yazıya yapılmış tüm yorumları buradan görebilirsiniz:"
 
@@ -7984,7 +7982,7 @@ msgstr "%2$s %1$s %3$s @ %4$s:%5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "Oturumunuzun süresi dolmuş. Bu sayfadan tekrar giriş yapabilir ya da giriş sayfasına gidebilirsiniz."
 
-#: wp-includes/functions.php:5331
+#: wp-includes/functions.php:5344
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Giriş sayfası yeni bir pencerede açılacaktır. Giriş yaptıktan sonra pencereyi kapatıp bu sayfaya dönebilirsiniz."
 
@@ -8009,7 +8007,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "Ara &hellip;"
 
-#: wp-includes/functions.php:5329 wp-includes/script-loader.php:569
+#: wp-includes/functions.php:5342 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "Oturum süresi doldu"
 
@@ -9012,12 +9010,12 @@ msgstr "Belgeler"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3779 wp-includes/ms-load.php:455
+#: wp-includes/functions.php:3792 wp-includes/ms-load.php:455
 #: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Veritabanı bağlantısı kurulurken hata oluştu"
 
-#: wp-includes/functions.php:3775
+#: wp-includes/functions.php:3788
 msgid "Database Error"
 msgstr "Veritabanı hatası"
 
@@ -9096,7 +9094,7 @@ msgstr "Kategoriyi görüntüle"
 msgid "View Tag"
 msgstr "Etiketi görüntüle"
 
-#: wp-includes/pluggable.php:1080 wp-includes/pluggable.php:1123
+#: wp-includes/pluggable.php:1083 wp-includes/pluggable.php:1126
 msgid "You should specify a nonce action to be verified by using the first parameter."
 msgstr "Doğrulama için ilk parametreyi kullanarak bir nonce aksiyonu belirtmelisiniz."
 
@@ -9194,17 +9192,17 @@ msgid "The user is already active."
 msgstr "Bu kullanıcı zaten aktif."
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4141
+#: wp-includes/functions.php:4154
 msgid "(This message was added in version %s.)"
 msgstr "(Bu mesaj %s sürümünde eklendi.)"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4148
+#: wp-includes/functions.php:4161
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s <strong>hatalı</strong> çağırıldı. %2$s %3$s"
 
-#: wp-includes/pluggable.php:1504
+#: wp-includes/pluggable.php:1507
 msgid "Permalink: %s"
 msgstr "Kalıcı bağlantı: %s"
 
@@ -9654,7 +9652,7 @@ msgid "Sorry, you must be able to edit posts on this site in order to view tags.
 msgstr "Üzgünüm, etiketleri görüntülemek için bu sitede yazıları düzenleme yetkinizin olması gerekiyor."
 
 #. translators: %s: site title
-#: wp-includes/pluggable.php:1828
+#: wp-includes/pluggable.php:1831
 msgid "New user registration on your site %s:"
 msgstr "%s siteniz için yeni kullanıcı kaydı:"
 
@@ -9923,26 +9921,26 @@ msgid "File canceled."
 msgstr "Dosya iptal edildi."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1651
+#: wp-includes/pluggable.php:1654
 msgid "A new comment on the post \"%s\" is waiting for your approval"
 msgstr "\"%s\" yazınızda bir yorum onayınızı bekliyor"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1641
+#: wp-includes/pluggable.php:1644
 msgid "A new pingback on the post \"%s\" is waiting for your approval"
 msgstr "\"%s\" yazınızda bir geri bildirim onayınızı bekliyor"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1631
+#: wp-includes/pluggable.php:1634
 msgid "A new trackback on the post \"%s\" is waiting for your approval"
 msgstr "\"%s\" yazınızda bir geri izleme onayınızı bekliyor"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1482
+#: wp-includes/pluggable.php:1485
 msgid "New pingback on your post \"%s\""
 msgstr "\"%s\" yazınızda yeni geri bildirim"
 
-#: wp-includes/pluggable.php:1492
+#: wp-includes/pluggable.php:1495
 msgid "New comment on your post \"%s\""
 msgstr "\"%s\" yazınızda yeni yorum"
 
@@ -9955,7 +9953,7 @@ msgid "If you are the owner of this network please check that MySQL is running p
 msgstr "Eğer bu ağın sahibi sizseniz lütfen MySQL sunucusunun düzgün çalıştığından ve tablolarınızın hatasız olduğundan emin olun."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1471
+#: wp-includes/pluggable.php:1474
 msgid "New trackback on your post \"%s\""
 msgstr "\"%s\" yazınızda yeni geri izleme"
 
@@ -10334,8 +10332,8 @@ msgstr "<strong>HATA</strong>: Lütfen e-posta adresinizi girin."
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289 wp-includes/user.php:3400
-#: wp-includes/user.php:3412 wp-includes/user.php:3430 wp-login.php:853
+#: wp-includes/user.php:2289 wp-includes/user.php:3397
+#: wp-includes/user.php:3409 wp-includes/user.php:3427 wp-login.php:853
 msgid "Invalid key"
 msgstr "Geçersiz anahtar"
 
@@ -10378,7 +10376,7 @@ msgstr "<strong>HATA</strong>: WordPress %1$s için MySQL %2$s ve üstü sürüm
 msgid "Sidebar %d"
 msgstr "Kenar çubuğu %d"
 
-#: wp-includes/functions.php:5330 wp-includes/user.php:285
+#: wp-includes/functions.php:5343 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Lütfen tekrar giriş yapın."
 
@@ -10675,74 +10673,74 @@ msgid "Protected: %s"
 msgstr "Korumalı: %s"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1903
+#: wp-includes/pluggable.php:1906
 msgid "[%s] Your username and password info"
 msgstr "[%s] Kullanıcı adı ve parola bilginiz"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1837
+#: wp-includes/pluggable.php:1840
 msgid "[%s] New User Registration"
 msgstr "[%s] Yeni kullanıcı kaydı"
 
 #. translators: %s: user login
-#: wp-includes/pluggable.php:1830 wp-includes/pluggable.php:1894
+#: wp-includes/pluggable.php:1833 wp-includes/pluggable.php:1897
 #: wp-login.php:365
 msgid "Username: %s"
 msgstr "Kullanıcı adı: %s"
 
 #. translators: Comment moderation notification email subject. 1: Site name, 2:
 #. Post title
-#: wp-includes/pluggable.php:1684
+#: wp-includes/pluggable.php:1687
 msgid "[%1$s] Please moderate: \"%2$s\""
 msgstr "[%1$s] Lütfen denetleyin: \"%2$s\""
 
 #. translators: Comment moderation. 1: Number of comments awaiting approval
-#: wp-includes/pluggable.php:1679
+#: wp-includes/pluggable.php:1682
 msgid "Currently %s comment is waiting for approval. Please visit the moderation panel:"
 msgid_plural "Currently %s comments are waiting for approval. Please visit the moderation panel:"
 msgstr[0] "Şu an için %s tane yorum onay için bekliyor. Lütfen denetleme panosunu ziyaret edin:"
 msgstr[1] "Şu an için %s tane yorum onay için bekliyor. Lütfen denetleme panosunu ziyaret edin:"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1665
+#: wp-includes/pluggable.php:1668
 msgid "Approve it: %s"
 msgstr "Onayla: %s"
 
-#: wp-includes/pluggable.php:1647
+#: wp-includes/pluggable.php:1650
 msgid "Pingback excerpt: "
 msgstr "Geri bildirim özeti:"
 
-#: wp-includes/pluggable.php:1637
+#: wp-includes/pluggable.php:1640
 msgid "Trackback excerpt: "
 msgstr "Geri izleme özeti:"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1512 wp-includes/pluggable.php:1676
+#: wp-includes/pluggable.php:1515 wp-includes/pluggable.php:1679
 msgid "Spam it: %s"
 msgstr "İstenmeyen: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1510 wp-includes/pluggable.php:1672
+#: wp-includes/pluggable.php:1513 wp-includes/pluggable.php:1675
 msgid "Delete it: %s"
 msgstr "Sil: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1508 wp-includes/pluggable.php:1669
+#: wp-includes/pluggable.php:1511 wp-includes/pluggable.php:1672
 msgid "Trash it: %s"
 msgstr "Çöpe at: %s"
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1492
 msgid "[%1$s] Pingback: \"%2$s\""
 msgstr "[%1$s] Geri bildirim: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1478
+#: wp-includes/pluggable.php:1481
 msgid "[%1$s] Trackback: \"%2$s\""
 msgstr "[%1$s] Geri izleme: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1500
+#: wp-includes/pluggable.php:1503
 msgid "[%1$s] Comment: \"%2$s\""
 msgstr "[%1$s] Yorum: \"%2$s\""
 
@@ -11386,34 +11384,34 @@ msgstr "Çıkış"
 msgid "Log in"
 msgstr "Giriş"
 
-#: wp-includes/functions.php:4724
+#: wp-includes/functions.php:4737
 msgid "Manual Offsets"
 msgstr "Manuel zaman farkları"
 
-#: wp-includes/functions.php:4716 wp-includes/functions.php:4720
+#: wp-includes/functions.php:4729 wp-includes/functions.php:4733
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4671
+#: wp-includes/functions.php:4684
 msgid "Select a city"
 msgstr "Şehir seçin"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4035
+#: wp-includes/functions.php:4048
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%2$s versionundan beri %1$s çağrıldığı parametre ile <strong>geçerliliğini yitirmiş</strong> ve alternatifi yok!"
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4032
+#: wp-includes/functions.php:4045
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%2$s versionundan beri %1$s çağrıldığı parametre ile <strong>geçerliliğini yitirmiş</strong>! %3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3843 wp-includes/functions.php:3971
-#: wp-includes/functions.php:4094
+#: wp-includes/functions.php:3856 wp-includes/functions.php:3984
+#: wp-includes/functions.php:4107
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s %2$s sürümünden beri<strong>kullanılmayacak</strong> ve şu an için alternatifi yok."
 
@@ -11422,43 +11420,43 @@ msgstr "%1$s %2$s sürümünden beri<strong>kullanılmayacak</strong> ve şu an 
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3840 wp-includes/functions.php:3968
-#: wp-includes/functions.php:4091
+#: wp-includes/functions.php:3853 wp-includes/functions.php:3981
+#: wp-includes/functions.php:4104
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s %2$s sürümünden beri<strong>kullanılmayacak</strong>! Yerine %3$s kullanın."
 
-#: wp-includes/functions.php:2750 wp-load.php:92
+#: wp-includes/functions.php:2763 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Hata"
 
-#: wp-includes/functions.php:2738
+#: wp-includes/functions.php:2751
 msgid "&laquo; Back"
 msgstr "&laquo; Geri"
 
-#: wp-includes/functions.php:2613 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2626 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Lütfen tekrar deneyin."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2604
+#: wp-includes/functions.php:2617
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Gerçekten <a href=\"%s\">çıkış yapmak</a> istiyor musunuz?"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2597
+#: wp-includes/functions.php:2610
 msgid "You are attempting to log out of %s"
 msgstr "%s sisteminden çıkış yapıyorsunuz"
 
-#: wp-includes/functions.php:2182
+#: wp-includes/functions.php:2195
 msgid "Could not write file %s"
 msgstr "Dosya yazılamıyor %s"
 
-#: wp-includes/functions.php:2136
+#: wp-includes/functions.php:2149
 msgid "Empty filename"
 msgstr "Boş dosya ismi"
 
 #. translators: %s: directory path
-#: wp-includes/functions.php:1905 wp-includes/functions.php:2174
+#: wp-includes/functions.php:1918 wp-includes/functions.php:2187
 msgid "Unable to create directory %s. Is its parent directory writable by the server?"
 msgstr "%s dizini oluşturulamıyor. Bir üst dizin sunucu tarafından yazılabilir mi?"
 
@@ -11847,7 +11845,7 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "Bilinmeyen bir sebepten dolayı bu yazı düzenlenemedi."
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3716
+#: wp-includes/functions.php:3729
 msgid "Widgets"
 msgstr "Bileşenler"
 
@@ -12073,8 +12071,8 @@ msgstr "Sayfalar"
 
 #. translators: 1: Comment author URL
 #. translators: %s: user email address
-#: wp-includes/pluggable.php:1495 wp-includes/pluggable.php:1656
-#: wp-includes/pluggable.php:1832
+#: wp-includes/pluggable.php:1498 wp-includes/pluggable.php:1659
+#: wp-includes/pluggable.php:1835
 msgid "Email: %s"
 msgstr "E-posta: %s"
 

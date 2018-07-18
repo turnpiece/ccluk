@@ -3,7 +3,7 @@ Contributors: holas84, dustinwstout, webinator, warfareplugins, nutsandboltsmedi
 Tags: sharing buttons, social media share, floating share buttons, facebook share, google plus share, linkedin share, pin it, pinterest save, stumbleupon button, tweet button, twitter share, click to tweet, social sharing buttons, social share, social sharing, social media sharing, wordpress social sharing plugin, social sharing plugin, share buttons, share counts
 Requires at least: 3.5.1
 Tested up to: 4.9
-Stable tag: 3.0.9
+Stable tag: 3.1.1
 License: GNU General Public License v2.0 or later
 
 The most beautiful, responsive, lightning fast social share buttons built to boost shares and drive more traffic without slowing down your site.
@@ -192,6 +192,32 @@ We have a growing archive of <a href="https://warfareplugins.com/support/" rel="
 > Robert Ryan, Professional Web Designer
 
 == Changelog ==
+
+= 3.1.1 (12 JUl 2018) =
+* Fixed Javascript "minWidth" is undefined.
+* Fixed which buttons are displayed when using Dynamic Sorting.
+* Fixed "Undefined Index: post_id" error. 
+* Changed default "Float Before Content" from "ON" to "OFF".
+* Removed excess printing of "Float Before Content" variable.
+
+= 3.1.0 (09 JUl 2018) =
+* Fixed incompatibility with Yoast update
+* Fixed side floating button fade effect.
+* Fixed the shares icon CSS in the side floating buttons.
+* Added option for post-specific share recovery
+* Added option to show/hide buttons before content.
+* Added "noopener noreferrer" to outbound links.
+* Added two Pinterest image selectors.
+* Added the Pinterest character counter.
+* Added Google Tag Manager compatibility for Click/Event Tracking
+* Removed the StumbleUpon button.
+* Updated references of http to https where possible.
+* Updated the Facebook share count system.
+* Updated notifications to read from WarfarePlugins server.
+* Major update to the metadata caching system.
+* Major updates on floating buttons and mobile buttons.
+* Updated the plugin update processes.
+* Ensures all custom post types are showing in the "Position Share Buttons" display section.
 
 = 3.0.9 (08 JUN 2018) =
 * Fix for slow page loads on some sites.

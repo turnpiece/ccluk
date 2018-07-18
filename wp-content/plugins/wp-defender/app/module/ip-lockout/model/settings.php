@@ -65,7 +65,13 @@ class Settings extends \Hammer\WP\Settings {
 
 			//default is weekly
 			$this->report_day  = strtolower( date( 'l' ) );
-			$this->report_time = ltrim( date( 'H', current_time( 'timestamp' ) ) . ':0', '0' );
+			$hour      = date( 'H', current_time( 'timestamp' ) );
+			if ( $hour == '00' ) {
+				$hour = 0;
+			} else {
+				$hour = ltrim( $hour, '0' );
+			}
+			$this->report_time = $hour . ':0';
 		}
 		parent::__construct( $id, $isMulti );
 	}

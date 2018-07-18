@@ -58,7 +58,7 @@ class Hide_Error_Service extends Rule_Service implements IRule_Service {
 		//check if can write
 		if ( ! is_writeable( $config_path ) ) {
 			return new \WP_Error( Error_Code::NOT_WRITEABLE,
-				sprintf( __( "The file %s is not writeable", wp_defender()->domain ), $config_path ) );
+				sprintf( __( "The file %s is not writable", wp_defender()->domain ), $config_path ) );
 		}
 		$config = file( $config_path );
 		if ( ( $info = $this->findWPDebugLine( $config ) ) === - 1 ) {

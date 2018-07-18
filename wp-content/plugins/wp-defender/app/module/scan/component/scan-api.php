@@ -432,6 +432,9 @@ class Scan_Api extends Component {
 				}
 			}
 		}
+		if ( php_sapi_name() == "cli" ) {
+			echo $total . PHP_EOL;
+		}
 
 		if ( $total > 0 ) {
 			return round( ( $currentIndex / $total ) * 100, 2 );

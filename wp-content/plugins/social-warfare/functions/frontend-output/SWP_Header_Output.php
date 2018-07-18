@@ -48,9 +48,9 @@ class SWP_Header_Output {
     }
 
     private function init() {
-        add_action( 'wp_head'           , array($this, 'add_header_output'), 1 );
-        add_filter( 'swp_header_html'   , array($this, 'output_font_css'), 20 );
-        add_action( 'admin_head'        , array($this, 'output_font_css'), 20 );
+        add_action( 'wp_head'           , array( $this, 'add_header_output' ), 1 );
+        add_filter( 'swp_header_html'   , array( $this, 'output_font_css' ), 20 );
+        add_action( 'admin_head'        , array( $this, 'output_font_css' ), 20 );
     }
 
 
@@ -71,6 +71,7 @@ class SWP_Header_Output {
     	// Get the global options and the post ID
     	$info['postID'] = get_the_ID();
     	$info['html_output'] = '';
+
 
     	/**
     	 * Create and return the values to be used in the header meta tags
@@ -113,6 +114,7 @@ class SWP_Header_Output {
     	endif;
     }
 
+
     /**
      * Output the CSS to include the icon font.
      *
@@ -138,6 +140,10 @@ class SWP_Header_Output {
 		if ( true === is_admin() ) {
 			echo $style;
 		} else {
+            if ( empty( $info['html_output'] ) ) :
+                $info['html_output'] = '';
+            endif;
+
 			$info['html_output'] .= $style;
 		}
 

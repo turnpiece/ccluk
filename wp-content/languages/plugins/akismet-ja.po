@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-26 15:35:12+0000\n"
+"PO-Revision-Date: 2018-06-28 01:27:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,6 +11,14 @@ msgstr ""
 "Language: ja_JP\n"
 "Project-Id-Version: Plugins - Akismet Anti-Spam - Stable (latest release)\n"
 
+#: views/notice.php:138
+msgid "To help your site with transparency under privacy laws like the GDPR, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, you can turn it on below."
+msgstr "GDPR のようなプライバシー法におけるサイトの透明性維持を助けるため、Akismet はコメントフォームの下にユーザーへの通知を表示できます。この機能はデフォルトでは無効になっていますが、以下で有効化できます。"
+
+#: views/config.php:162
+msgid "To help your site with transparency under privacy laws like the GDPR, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, you can turn it on above."
+msgstr "GDPR のようなプライバシー法におけるサイトの透明性維持を助けるため、Akismet はコメントフォームの下にユーザーへの通知を表示できます。この機能はデフォルトでは無効になっていますが、上で有効化できます。"
+
 #: views/notice.php:139
 msgid " Please <a href=\"%s\">enable</a> or <a href=\"%s\">disable</a> this feature. <a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">More information</a>."
 msgstr "この機能を<a href=\"%s\">有効化</a>または<a href=\"%s\">無効化</a>してください。<a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">さらに詳しく</a>。"
@@ -18,10 +26,6 @@ msgstr "この機能を<a href=\"%s\">有効化</a>または<a href=\"%s\">無�
 #: views/notice.php:137
 msgid "Akismet & Privacy."
 msgstr "Akismet とプライバシーについて"
-
-#: views/config.php:162 views/notice.php:138
-msgid "To help your site be compliant with GDPR and other laws requiring notification of tracking, Akismet can display a notice to your users on your contact form. This feature is disabled by default, however, if you or your audience is located in Europe, you need to turn it on."
-msgstr "このサイトの GDPR およびトラッキングの通知を必須とするその他の法律への準拠をお手伝いするため、Akismet はお問い合わせフォームにユーザーへの通知を表示できます。この機能はデフォルトでは無効になっていますが、あなたや読者がヨーロッパにいる場合は有効化する必要があります。"
 
 #: views/config.php:160
 msgid "Do not display privacy notice."
@@ -40,8 +44,12 @@ msgid "Privacy"
 msgstr "プライバシー"
 
 #: class.akismet.php:1419
-msgid "This site uses Akismet to reduce spam. <a href=\"%s\">Learn how your comment data is processed</a>."
-msgstr "このサイトはスパムを低減するために Akismet を使っています。<a href=\"%s\">コメントデータがどう処理されているか知りたい方はこちらをお読みください</a>。"
+msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
+msgstr "このサイトはスパムを低減するために Akismet を使っています。<a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">コメントデータの処理方法の詳細はこちらをご覧ください</a>。"
+
+#: class.akismet-admin.php:86
+msgid "We collect information about visitors who comment on Sites that use our Akismet anti-spam service. The information we collect depends on how the User sets up Akismet for the Site, but typically includes the commenter's IP address, user agent, referrer, and Site URL (along with other information directly provided by the commenter such as their name, username, email address, and the comment itself)."
+msgstr "このサイトでは Akismet アンチスパムサービスを通じて、サイトにコメントする訪問者に関する情報を収集します。収集する情報はユーザーの Akismet 設定によって異なりますが、通常、コメント投稿者の IP アドレス、ユーザーエージェント、リファラー、サイト URL (さらにコメント投稿者が直接提供するその他の情報。例えば氏名、ユーザー名、メールアドレス、コメント本文など) 。"
 
 #: class.akismet.php:226
 msgid "Comment discarded."
@@ -99,7 +107,7 @@ msgstr "このページで、Akismet の設定を更新し、スパム統計情�
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "何百万もの利用実績がある Akismet は<strong>あなたのブログをスパムから保護する</strong>最良の方法といえるでしょう。あなたが眠りについている時間でさえ、Akismet は常時サイトを守り続けます。始めるのは簡単。Akismet プラグインを有効化したら設定ページで API キーを設定するだけです。"
 
-#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.5)  #-#-#-#-#
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.8)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:111 class.akismet-admin.php:114
 msgid "Akismet Anti-Spam"
@@ -169,11 +177,11 @@ msgstr "詳しい統計情報"
 msgid "Statistics"
 msgstr "統計情報"
 
-#: class.akismet-admin.php:1161
+#: class.akismet-admin.php:1167
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started, just go to <a href=\"admin.php?page=akismet-key-config\">your Akismet Settings page</a> to set up your API key."
 msgstr "何百万もの利用実績がある Akismet は<strong>あなたのブログをスパムから保護する</strong>最良の方法といえるでしょう。あなたが眠りについている時間でさえ、Akismet は常時サイトを守り続けます。始めるには、<a href=\"admin.php?page=akismet-key-config\">Akismet 設定ページ</a>に移動してあなたの API キーを設定しましょう。"
 
-#: class.akismet-admin.php:1158
+#: class.akismet-admin.php:1164
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. Your site is fully configured and being protected, even while you sleep."
 msgstr "何百万もの利用実績がある Akismet は<strong>あなたのブログをスパムから保護する</strong>最良の方法といえるでしょう。このサイトでの設定は完了しており Akismet が常時保護しています。"
 

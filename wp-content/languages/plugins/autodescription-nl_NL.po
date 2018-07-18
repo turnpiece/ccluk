@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - The SEO Framework - Development (trunk) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-26 22:27:14+0000\n"
+"PO-Revision-Date: 2018-07-17 07:50:58+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -536,10 +536,6 @@ msgstr "Aanwezigheid"
 msgid "Site Structure Options"
 msgstr "Site Structuur Opties"
 
-#: inc/views/metaboxes/sitemaps-metabox.php:125
-msgid "A robots.txt file has been detected in the root folder of your website; therefore no settings are able to alter its output."
-msgstr "Een robots.txt bestand is gedetecteerd in de hoofdmap van jouw website; hierdoor zijn geen instellingen is staat om de uitvoer te veranderen."
-
 #: inc/views/metaboxes/schema-metabox.php:106
 msgid "Authorized Presence Options"
 msgstr "Geautoriseerde Aanwezigheid Instellingen"
@@ -765,6 +761,10 @@ msgstr "Beschrijvingsgeneratie kan veel vereisen van de server wanneer het de pa
 #: inc/views/metaboxes/general-metabox.php:246
 msgid "Schema.org output generally makes multiple calls to the database."
 msgstr "Schema.org uitvoer maakt over het algemeen meerdere verzoeken naar de database."
+
+#: inc/views/metaboxes/sitemaps-metabox.php:125
+msgid "A robots.txt file has been detected in the root folder of your website; therefore no settings are able to alter its output."
+msgstr "Een robots.txt bestand is gedetecteerd in de hoofdmap van jouw website; hierdoor zijn geen instellingen in staat om de uitvoer te veranderen."
 
 #. translators: 1: Title, 2: on, 3: Blogname
 #: inc/classes/generate-description.class.php:863

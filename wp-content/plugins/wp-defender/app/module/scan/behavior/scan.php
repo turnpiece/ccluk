@@ -195,8 +195,8 @@ class Scan extends Behavior {
 		ob_start();
 		?>
         <div class="line">
-			<?php _e( "Scan your website for file changes, vulnerabilities and injected code and get and
-        get notified about anything suspicious.", wp_defender()->domain ) ?>
+			<?php _e( "Scan your website for file changes, vulnerabilities and injected code and get
+        notified about anything suspicious.", wp_defender()->domain ) ?>
         </div>
         <form id="start-a-scan" method="post" class="scan-frm">
 			<?php

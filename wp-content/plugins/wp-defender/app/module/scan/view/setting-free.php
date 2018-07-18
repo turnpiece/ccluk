@@ -56,7 +56,7 @@
                 <div class="clear"></div>
                 <div class="presale-text">
                     <div>
-			            <?php printf( __( "Defenders scans through every line of code on your website, searching for anything suspicious. This feature is included when you join WPMU DEV, along with 100+ plugins and themes, 24/7 support and lots of handy site management tools.  – <a href=\"%s\" target='_blank' role='button'>Try it all FREE today!
+			            <?php printf( __( "Defender scans through every line of code on your website, searching for anything suspicious. This feature is included when you join WPMU DEV, along with 100+ plugins, 24/7 support and lots of handy site management tools. – <a href=\"%s\" target='_blank' role='button'>Try it all FREE today!
                         </a>", wp_defender()->domain ), \WP_Defender\Behavior\Utils::instance()->campaignURL('defender_filescanning_settings_upsell_link') ) ?>
                     </div>
                 </div>

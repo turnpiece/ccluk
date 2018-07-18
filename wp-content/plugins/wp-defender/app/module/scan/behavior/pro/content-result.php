@@ -87,6 +87,7 @@ class Content_Result extends \Hammer\Base\Behavior {
                         </div>
                         <div class="mline"><?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
                         </div>
+<!--                        <button id="next_issue">--><?php //_e( "Show Issues", wp_defender()->domain ) ?><!--</button>-->
                         <div class="mline source-code">
                             <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
                                  height="18"/>
@@ -167,19 +168,18 @@ class Content_Result extends \Hammer\Base\Behavior {
 
 				$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
 				$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
-				$content = implode( PHP_EOL, $content );
 			}
 		}
+		$content = implode( PHP_EOL, $content );
 
 		if ( function_exists( 'mb_convert_encoding' ) ) {
 			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
 		}
-
 		$entities = htmlentities( $content, null, 'UTF-8', false );
 		$entities = str_replace( '[[del]]', '<del>', $entities );
 		$entities = str_replace( '[[/del]]', '</del>', $entities );
 
-		return '<pre><code class="html">' . $entities . '</code></pre>';
+		return '<pre class="inner-sourcecode"><code class="html">' . $entities . '</code></pre>';
 	}
 
 	public function purge() {

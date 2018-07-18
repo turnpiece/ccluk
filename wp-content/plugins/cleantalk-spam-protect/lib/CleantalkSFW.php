@@ -59,7 +59,7 @@ class CleantalkSFW extends CleantalkHelper
 	*/
 	static public function ip_get($ips_input = array('real', 'remote_addr', 'x_forwarded_for', 'x_real_ip', 'cloud_flare'), $v4_only = true){
 		
-		$result = parent::ip_get($ips_input, $v4_only);
+		$result = (array)parent::ip_get($ips_input, $v4_only);
 		
 		$result = !empty($result) ? $result : array();
 		
@@ -228,10 +228,10 @@ class CleantalkSFW extends CleantalkHelper
 		
 		// Headers
 		if(headers_sent() === false){
-			header("Cache-Control: no-store, no-cache, must-revalidate");
-			header("Pragma: no-cache");
-			header("Last-Modified: " . gmdate("D, d M Y H:i:s") . "GMT");
-			header("Expires: 0");
+			header('Expires: '.date(DATE_RFC822, mktime(0, 0, 0, 1, 1, 1971)));
+			header('Cache-Control: no-store, no-cache, must-revalidate');
+			header('Cache-Control: post-check=0, pre-check=0', FALSE);
+			header('Pragma: no-cache');
 			header("HTTP/1.0 403 Forbidden");
 			$sfw_die_page = str_replace('{GENERATED}', "", $sfw_die_page);
 		}else{

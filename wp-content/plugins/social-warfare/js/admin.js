@@ -168,6 +168,23 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
 		jQuery( '#social_warfare .swp_og_description .counterNumber' ).html( remaining );
 	}
 
+    // Function for SM Description Counting
+	function swpPinterestRemaining() {
+		var pinterestDescription = jQuery( '#social_warfare textarea#swp_pinterest_description' ).val();
+        if (!pinterestDescription) {
+            pinterestDescription = '';
+        }
+		var remaining = 500 - pinterestDescription.length;
+		if ( pinterestDescription.length > 0 && remaining >= 0 ) {
+			jQuery( '#social_warfare .swp_pinterest_descriptionWrapper .swp_CountDown' ).removeClass( 'swp_red' ).addClass( 'swp_blue' );
+		} else if ( pinterestDescription.length > 0 && remaining < 0 ) {
+			jQuery( '#social_warfare .swp_pinterest_descriptionWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).addClass( 'swp_red' );
+		} else {
+			jQuery( '#social_warfare .swp_pinterest_descriptionWrapper .swp_CountDown' ).removeClass( 'swp_blue' ).removeClass( 'swp_red' );
+		}
+		jQuery( '#social_warfare .swp_pinterest_descriptionWrapper .counterNumber' ).html( remaining );
+    }
+
 	// Function for Twitter Box Counting
 	function twitterRemaining() {
 		var smTwitter = jQuery( '#social_warfare textarea#swp_custom_tweet' ).val();
@@ -214,6 +231,10 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
     function noticeClickHandlers() {
         jQuery(".swp-notice-cta").on("click", function(e) {
             e.preventDefault();
+            if (typeof e.target.href == 'string') {
+                window.open(e.target.href);
+            }
+
             var parent = jQuery(this).parents(".swp-dismiss-notice");
 
             jQuery.post({
@@ -247,6 +268,9 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
 			// Add the CountDown Box for the Twitter Box
 			jQuery( '#social_warfare #swp_customTweet' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">118</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
 
+            // Add the CountDown Box for the Pinterest Box
+			jQuery( '#social_warfare #swp_pinterest_description' ).parent().prepend( '<div class="swp_CountDown"><span class="counterNumber">140</span> ' + swp_localize_admin.swp_characters_remaining + '</div>' );
+
 			smTitleRemaining();
 			jQuery( '#social_warfare textarea#swp_og_title' ).on( 'input', function() {
 				smTitleRemaining();
@@ -262,6 +286,10 @@ if (window.location.href.indexOf("widgets.php") > -1 ) {
 				twitterRemaining();
 			});
 
+            swpPinterestRemaining();
+			jQuery( '#social_warfare textarea#swp_pinterest_description' ).on( 'input', function() {
+				swpPinterestRemaining();
+            });
 
 			// Setup an initilazation loop
 			var swpPostInit = setInterval( function() {

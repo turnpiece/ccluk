@@ -14,7 +14,7 @@
 						<?php _e( "Blacklist", wp_defender()->domain ) ?>
                     </label>
                     <span class="sub">
-						<?php _e( "Any IP addresses you list here will be completely blocked from accessing our website, including admins.", wp_defender()->domain ) ?>
+						<?php _e( "Any IP addresses you list here will be completely blocked from accessing your website, including admins.", wp_defender()->domain ) ?>
 					</span>
                 </div>
                 <div class="column">

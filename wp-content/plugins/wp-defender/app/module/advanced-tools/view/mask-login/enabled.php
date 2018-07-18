@@ -6,7 +6,7 @@
     </div>
     <div class="box-content issues-box-content">
         <form method="post" id="ad-mask-settings-frm" class="advanced-settings-frm">
-            <p class="line"><?php _e( "Change your default wp-admin and wp-content login URL.", wp_defender()->domain ) ?></p>
+            <p class="line"><?php _e( "Change your default WordPress login URL to hide your login area from hackers and bots.", wp_defender()->domain ) ?></p>
 			<?php if ( isset( wp_defender()->global['compatibility'] ) ): ?>
                 <div class="well well-error with-cap">
                     <i class="def-icon icon-warning icon-yellow "></i>
@@ -32,7 +32,7 @@
                 <div class="column is-one-third">
                     <label><?php _e( "Masking URLs", wp_defender()->domain ) ?></label>
                     <span class="sub">
-                        <?php _e( "Choose the new URL slug where users of your website will now navigate to to log in, register or administrate.", wp_defender()->domain ) ?>
+                        <?php _e( "Choose the new URL slug where users of your website will now navigate to log in or register.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="column">
@@ -46,7 +46,7 @@
                 <div class="column is-one-third">
                     <label><?php _e( "Redirect traffic", wp_defender()->domain ) ?></label>
                     <span class="sub">
-                        <?php _e( "With this feature you can send visitors and bots who try to visit the default Wordpress login URLs to a separate URL to avoid 404s.", wp_defender()->domain ) ?>
+                        <?php _e( "With this feature you can send visitors and bots who try to visit the default WordPress login URLs to a separate URL to avoid 404s.", wp_defender()->domain ) ?>
                     </span>
                 </div>
                 <div class="column">

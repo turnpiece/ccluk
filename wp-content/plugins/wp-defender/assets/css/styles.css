@@ -1468,15 +1468,17 @@
   .wp-defender .report-status.with-corner.feature-disabled:after {
     border-right-color: #E6E6E6;
     border-top-color: #E6E6E6; }
-  .wp-defender .report-status.feature-disabled .corner {
-    color: #666;
-    font-size: 18px;
-    cursor: pointer; }
-    .wp-defender .report-status.feature-disabled .corner i:before {
-      font-size: 16px;
+  .wp-defender .report-status.feature-disabled {
+    left: 0; }
+    .wp-defender .report-status.feature-disabled .corner {
       color: #666;
-      width: 16px;
-      height: 16px; }
+      font-size: 18px;
+      cursor: pointer; }
+      .wp-defender .report-status.feature-disabled .corner i:before {
+        font-size: 16px;
+        color: #666;
+        width: 16px;
+        height: 16px; }
   .wp-defender .well {
     width: 100%;
     background: #F9F9F9;
@@ -2106,7 +2108,7 @@
         display: block;
         font-size: 13px;
         color: #888; }
-    .wp-defender .wdf-scanning table tbody tr td:nth-child(3), .wp-defender .wdf-scanning table tbody tr td.item-issue, .wp-defender .wdf-scanning table tbody tr td.col_fixed_date, .wp-defender .scan-dialog table tbody tr td:nth-child(3), .wp-defender .scan-dialog table tbody tr td.item-issue, .wp-defender .scan-dialog table tbody tr td.col_fixed_date {
+    .wp-defender .wdf-scanning table tbody tr td:nth-child(3), .wp-defender .wdf-scanning table tbody tr td.item-issue, .wp-defender .wdf-scanning table tbody tr td.col_fixed_date, .wp-defender .scan-dialog table tbody tr td:nth-child(3), .wp-defender .scan-dialog table tbody tr td.item-issue, .wp-defender .scan-dialog table tbody tr td.col_fixed_date {	   			 	 		  		  	 	
       font-size: 13px;
       vertical-align: middle; }
     .wp-defender .wdf-scanning table tbody tr td:nth-child(4), .wp-defender .wdf-scanning table tbody tr td.item-action, .wp-defender .scan-dialog table tbody tr td:nth-child(4), .wp-defender .scan-dialog table tbody tr td.item-action {
@@ -2175,6 +2177,8 @@
       margin-right: 18px; }
     .wp-defender .wdf-scanning .inner-nav li a span.def-tag, .wp-defender .scan-dialog .inner-nav li a span.def-tag {
       color: white; }
+  .wp-defender .wdf-scanning .inner-sourcecode, .wp-defender .scan-dialog .inner-sourcecode {
+    position: relative; }
   .wp-defender .auditing .row > .col-third {
     width: 25%; }
   .wp-defender .auditing .row > .col-two-third {
@@ -2576,4 +2580,4 @@
   margin: 0; }
 
 
-/* 87274-1527448782-au */
+/* 87274-1531945792-au */

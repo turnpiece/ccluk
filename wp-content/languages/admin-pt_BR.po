@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-24 11:43:38+0000\n"
+"PO-Revision-Date: 2018-07-05 22:28:16+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -26,24 +26,38 @@ msgctxt "default GMT offset or timezone string"
 msgid "0"
 msgstr "America/Sao_Paulo"
 
+#: wp-admin/privacy.php:25
+msgid "Privacy policy page updated successfully."
+msgstr "Página de política de privacidade atualizada."
+
+#. translators: %s: admin_init
+#: wp-admin/includes/plugin.php:1937
+msgid "The suggested privacy policy content should be added by using the %s (or later) action. Please see the inline documentation."
+msgstr "O conteúdo sugerido para a página de política de privacidade deve ser adicionada usando o gancho %s (ou um gancho adicionado mais tarde).. Veja a documentação para mais informações."
+
+#. translators: %s: admin_init
+#: wp-admin/includes/plugin.php:1926
+msgid "The suggested privacy policy content should be added only in wp-admin by using the %s (or later) action."
+msgstr "O conteúdo sugerido para a página de política de privacidade deve ser adicionada apenas no wp-admin usando o gancho %s (ou um gancho adicionado mais tarde)."
+
 #: wp-admin/includes/file.php:1893
 msgid "Unable to create export folder."
 msgstr "Não foi possível criar a pasta de exportações."
 
 #. translators: %s: Privacy Policy Guide URL
-#: wp-admin/includes/misc.php:1356
+#: wp-admin/includes/misc.php:1364
 msgid "The suggested privacy policy text has changed. Please <a href=\"%s\">review the guide</a> and update your privacy policy."
 msgstr "O texto de sugestão para política de privacidade foi alterado. <a href=\"%s\">Revise este guia</a> e atualize a sua política de privacidade."
 
-#: wp-admin/privacy.php:186
+#: wp-admin/privacy.php:205
 msgid "Select an existing page:"
 msgstr "Selecione uma página existente:"
 
-#: wp-admin/privacy.php:212
+#: wp-admin/privacy.php:231
 msgid "Or:"
 msgstr "Ou:"
 
-#: wp-admin/privacy.php:214
+#: wp-admin/privacy.php:233
 msgid "There are no pages."
 msgstr "Não há nenhuma página."
 
@@ -61,18 +75,18 @@ msgstr "Configurações %s"
 msgid "Personal Data and Privacy"
 msgstr "Dados pessoais e privacidade"
 
-#: wp-admin/privacy.php:119
+#: wp-admin/privacy.php:138
 msgid "After your privacy policy page is set, we suggest that you edit it."
 msgstr "Depois que a sua página de política de privacidade estiver definida, sugerimos que você a edite."
 
 #. translators: accessibility text
-#: wp-admin/includes/misc.php:1542
+#: wp-admin/includes/misc.php:1550
 msgid "(opens in a new tab)"
 msgstr "(abre em uma nova aba)"
 
 #. translators: 1: Privacy Policy guide URL, 2: additional link attributes, 3:
 #. accessibility text
-#: wp-admin/includes/misc.php:1536 wp-admin/privacy.php:149
+#: wp-admin/includes/misc.php:1544 wp-admin/privacy.php:168
 msgid "Need help putting together your new Privacy Policy page? <a href=\"%1$s\" %2$s>Check out our guide%3$s</a> for recommendations on what content to include, along with policies suggested by your plugins and theme."
 msgstr "Precisa de ajuda para criar sua nova página de Política de Privacidade? <a href=\"%1$s\" %2$s>Consulte o nosso guia%3$s</a> para recomendações sobre o conteúdo que deve ser incluído, juntamente com as políticas sugeridas para os seus plugins e tema."
 
@@ -80,52 +94,52 @@ msgstr "Precisa de ajuda para criar sua nova página de Política de Privacidade
 msgid "Privacy Policy Guide"
 msgstr "Guia de políticas de privacidade"
 
-#: wp-admin/includes/misc.php:1736
+#: wp-admin/includes/misc.php:1744
 msgid "Visitor comments may be checked through an automated spam detection service."
 msgstr "Comentários de visitantes podem ser marcados por um serviço automático de detecção de spam."
 
-#: wp-admin/includes/misc.php:1708
+#: wp-admin/includes/misc.php:1716
 msgid "In this subsection you should note what analytics package you use, how users can opt out of analytics tracking, and a link to your analytics provider&#8217;s privacy policy, if any."
 msgstr "Nesta subseção você deve descrever qual o serviço de analises que o seu site utiliza, como os usuários podem optar por não serem rastreados, e um link para a página de política de privacidade do seu provedor de analises, se houver."
 
-#: wp-admin/includes/misc.php:1684
+#: wp-admin/includes/misc.php:1692
 msgid "In this subsection you should note what information may be disclosed by users who can upload media files. All uploaded files are usually publicly accessible."
 msgstr "Nesta subseção você deve descrever que informações podem ser divulgadas quando um usuário envia arquivos de mídia. Todos os arquivos de mídia enviados geralmente são públicos."
 
-#: wp-admin/includes/misc.php:1677
+#: wp-admin/includes/misc.php:1685
 msgid "In this subsection you should note what information is captured through comments. We have noted the data which WordPress collects by default."
 msgstr "Nesta subseção você deve descrever quais informações são coletadas dos comentários. Nós já descrevemos quais dados o WordPress coleta por padrão."
 
-#: wp-admin/includes/misc.php:1668
+#: wp-admin/includes/misc.php:1676
 msgid "In this section you should note what personal data you collect from users and site visitors. This may include personal data, such as name, email address, personal account preferences; transactional data, such as purchase information; and technical data, such as information about cookies."
 msgstr "Nesta seção você deve descrever quais dados pessoais são coletados de usuários e visitantes em seu site. Isso pode incluir dados pessoais, como nome, endereço de e-mail, preferencias pessoais e dados de transações, tais como informações de compras, também dados técnicos, como informações sobre cookies."
 
-#: wp-admin/includes/misc.php:1651
+#: wp-admin/includes/misc.php:1659
 msgid "Suggested text:"
 msgstr "Texto sugerido:"
 
-#: wp-admin/includes/misc.php:1630
+#: wp-admin/includes/misc.php:1638
 msgid "We have suggested the sections you will need. Under each section heading you will find a short summary of what information you should provide, which will help you to get started. Some sections include suggested policy content, others will have to be completed with information from your theme and plugins."
 msgstr "Sugerimos as seções que você vai precisar. Abaixo do cabeçalho de cada seção você encontrará um resumo de quais informações você deve fornecer, o qual deve ajudá-lo iniciar.Algumas sessões incluem sugestões de conteúdo sobre política de privacidade, outros deveram ser completados com informações do seu tema e plugins."
 
 #. translators: %s: plugin name
-#: wp-admin/includes/misc.php:1594
+#: wp-admin/includes/misc.php:1602
 msgid "Source: %s"
 msgstr "Origem: %s"
 
-#: wp-admin/includes/misc.php:1562 wp-admin/includes/misc.php:1627
+#: wp-admin/includes/misc.php:1570 wp-admin/includes/misc.php:1635
 msgid "Introduction"
 msgstr "Introdução"
 
-#: wp-admin/includes/misc.php:1580
+#: wp-admin/includes/misc.php:1588
 msgid "Updated %s."
 msgstr "Atualizado em %s."
 
-#: wp-admin/includes/misc.php:1575
+#: wp-admin/includes/misc.php:1583
 msgid "You deactivated this plugin on %s and may no longer need this policy."
 msgstr "Você desativou este plugin em %s e pode não precisar mais dessa política."
 
-#: wp-admin/includes/misc.php:1573
+#: wp-admin/includes/misc.php:1581
 msgid "Removed %s."
 msgstr "Removido em %s."
 
@@ -153,232 +167,232 @@ msgstr "Exportação e remoção de dados pessoais"
 msgid "Create or select your site&#8217;s privacy policy page under <strong>Settings &gt; Privacy</strong> to keep your users informed and aware."
 msgstr "Crie ou selecione uma página de politica de privacidade para o seu site em  <strong>Configurações &gt; Privacidade</strong> para manter os usuários informados e avisados."
 
-#: wp-admin/includes/misc.php:1770
+#: wp-admin/includes/misc.php:1778
 msgid "If you are a member of a regulated industry, or if you are subject to additional privacy laws, you may be required to disclose that information here."
 msgstr "Se você é um membro de uma indústria regulamentada, ou se você está sujeito a leis de privacidade adicionais, você pode ser obrigado a divulgar essas informações aqui."
 
-#: wp-admin/includes/misc.php:1768
+#: wp-admin/includes/misc.php:1776
 msgid "Industry regulatory disclosure requirements"
 msgstr "Requisitos obrigatórios de divulgação para sua categoria profissional"
 
-#: wp-admin/includes/misc.php:1765
+#: wp-admin/includes/misc.php:1773
 msgid "If your web site provides a service which includes automated decision making - for example, allowing customers to apply for credit, or aggregating their data into an advertising profile - you must note that this is taking place, and include information about how that information is used, what decisions are made with that aggregated data, and what rights users have over decisions made without human intervention."
 msgstr "Se o seu site oferecer um serviço que inclua tomada de decisão automatizada, por exemplo, permitir a clientes solicitar crédito ou agregar seus dados em um perfil publicitário, você deve observar que isto está acontecendo, e incluir informações sobre como aquela informação é usada, que decisões são tomadas com os dados agregados e o que direitos os usuários têm sobre as decisões tomadas sem intervenção humana."
 
-#: wp-admin/includes/misc.php:1763
+#: wp-admin/includes/misc.php:1771
 msgid "What automated decision making and/or profiling we do with user data"
 msgstr "Quais tomadas de decisão ou análises de perfil automatizadas fazemos com os dados de usuários"
 
-#: wp-admin/includes/misc.php:1760
+#: wp-admin/includes/misc.php:1768
 msgid "If your web site receives data about users from third parties, including advertisers, this information must be included within the section of your privacy policy dealing with third party data."
 msgstr "Caso o seu site receba dados de terceiros sobre usuários, incluindo anunciantes, esta informação deve ser incluída dentro da seção da sua política de privacidade que trata de dados de terceiros."
 
-#: wp-admin/includes/misc.php:1758
+#: wp-admin/includes/misc.php:1766
 msgid "What third parties we receive data from"
 msgstr "De quais terceiros nós recebemos dados"
 
-#: wp-admin/includes/misc.php:1755
+#: wp-admin/includes/misc.php:1763
 msgid "In this section you should explain what procedures you have in place to deal with data breaches, either potential or real, such as internal reporting systems, contact mechanisms, or bug bounties."
 msgstr "Nesta seção você deve explicar que procedimentos são usados para lidar com violações de dados, potenciais ou verdadeiras, como sistemas de informação internos, mecanismos de contato ou caçadas de erros."
 
-#: wp-admin/includes/misc.php:1753
+#: wp-admin/includes/misc.php:1761
 msgid "What data breach procedures we have in place"
 msgstr "Quais são nossos procedimentos contra violação de dados"
 
-#: wp-admin/includes/misc.php:1750
+#: wp-admin/includes/misc.php:1758
 msgid "In this section you should explain what measures you have taken to protect your users&#8217; data. This could include technical measures such as encryption; security measures such as two factor authentication; and measures such as staff training in data protection. If you have carried out a Privacy Impact Assessment, you can mention it here too."
 msgstr "Nesta seção você deve explicar quais medidas foram tomadas para proteger os dados de seus usuários. Isso pode incluir medidas técnicas como encriptação; medidas de segurança como autenticação em dois passos; e medidas como treinamento de pessoal em proteção de dados. Se você tiver feito uma Avaliação do impacto de privacidade, pode mencioná-la aqui também."
 
-#: wp-admin/includes/misc.php:1748
+#: wp-admin/includes/misc.php:1756
 msgid "How we protect your data"
 msgstr "Como protegemos seus dados"
 
-#: wp-admin/includes/misc.php:1745
+#: wp-admin/includes/misc.php:1753
 msgid "If you use your site for commercial purposes and you engage in more complex collection or processing of personal data, you should note the following information in your privacy policy in addition to the information we have already discussed."
 msgstr "Caso o seu site tem fins comerciais e atua em processos mais complexos de coleta ou processamento de dados pessoais, você deve também salientar essa informação em sua política de privacidade, juntamente com toda a informação já discutida."
 
-#: wp-admin/includes/misc.php:1743
+#: wp-admin/includes/misc.php:1751
 msgid "Additional information"
 msgstr "Informações adicionais"
 
-#: wp-admin/includes/misc.php:1740
+#: wp-admin/includes/misc.php:1748
 msgid "In this section you should provide a contact method for privacy-specific concerns. If you are required to have a Data Protection Officer, list their name and full contact details here as well."
 msgstr "Nesta seção, você deve fornecer um meio de contato para questões específicas sobre privacidade. Se você é obrigado a ter um profissional responsável pela proteção de dados, liste seu nome e detalhes completos de contato aqui também."
 
-#: wp-admin/includes/misc.php:1738
+#: wp-admin/includes/misc.php:1746
 msgid "Your contact information"
 msgstr "Suas informações de contato"
 
-#: wp-admin/includes/misc.php:1734
+#: wp-admin/includes/misc.php:1742
 msgid "European data protection law requires data about European residents which is transferred outside the European Union to be safeguarded to the same standards as if the data was in Europe. So in addition to listing where data goes, you should describe how you ensure that these standards are met either by yourself or by your third party providers, whether that is through an agreement such as Privacy Shield, model clauses in your contracts, or binding corporate rules."
 msgstr "A lei de proteção de dados europeia exige que os dados de residentes europeus que sejam transferidos para fora da União Europeia tenham o mesmo nível de proteção como se os dados estivessem na Europa. Assim, além de listar para onde os dados vão, é preciso descrever como você garante que estes padrões estejam sendo seguidos, opr você ou pelos seus provedores terceiros, seja por meio de um acordo como o Escudo de Privacidade, cláusulas modelo nos seus contratos ou normas corporativas vinculatórias."
 
-#: wp-admin/includes/misc.php:1733
+#: wp-admin/includes/misc.php:1741
 msgid "In this section you should list all transfers of your site data outside the European Union and describe the means by which that data is safeguarded to European data protection standards. This could include your web hosting, cloud storage, or other third party services."
 msgstr "Nesta seção você deve listar todas as transferências dos dados do seu site para fora da União Europeia e descrever os meios pelos quais estes dados são protegidos segundo os padrões de proteção de dados europeus. Isto pode incluir a sua hospedagem de sites, armazenamento de nuvem ou outros serviços de terceiros."
 
-#: wp-admin/includes/misc.php:1731
+#: wp-admin/includes/misc.php:1739
 msgid "Where we send your data"
 msgstr "Para onde enviamos seus dados"
 
-#: wp-admin/includes/misc.php:1729
+#: wp-admin/includes/misc.php:1737
 msgid "If you have an account on this site, or have left comments, you can request to receive an exported file of the personal data we hold about you, including any data you have provided to us. You can also request that we erase any personal data we hold about you. This does not include any data we are obliged to keep for administrative, legal, or security purposes."
 msgstr "Se você tiver uma conta neste site ou se tiver deixado comentários, pode solicitar um arquivo exportado dos dados pessoais que mantemos sobre você, inclusive quaisquer dados que nos tenha fornecido. Também pode solicitar que removamos qualquer dado pessoal que mantemos sobre você. Isto não inclui nenhuns dados que somos obrigados a manter para propósitos administrativos, legais ou de segurança."
 
-#: wp-admin/includes/misc.php:1725
+#: wp-admin/includes/misc.php:1733
 msgid "What rights you have over your data"
 msgstr "Quais os seus direitos sobre seus dados"
 
-#: wp-admin/includes/misc.php:1727
+#: wp-admin/includes/misc.php:1735
 msgid "In this section you should explain what rights your users have over their data and how they can invoke those rights."
 msgstr "Nesta seção você deve explicar quais direitos os seus usuários têm sobre os seus dados e como podem requerer estes direitos."
 
-#: wp-admin/includes/misc.php:1723
+#: wp-admin/includes/misc.php:1731
 msgid "For users that register on our website (if any), we also store the personal information they provide in their user profile. All users can see, edit, or delete their personal information at any time (except they cannot change their username). Website administrators can also see and edit that information."
 msgstr "Para usuários que se registram no nosso site (se houver), também guardamos as informações pessoais que fornecem no seu perfil de usuário. Todos os usuários podem ver, editar ou excluir suas informações pessoais a qualquer momento (só não é possível alterar o seu username). Os administradores de sites também podem ver e editar estas informações."
 
-#: wp-admin/includes/misc.php:1722
+#: wp-admin/includes/misc.php:1730
 msgid "If you leave a comment, the comment and its metadata are retained indefinitely. This is so we can recognize and approve any follow-up comments automatically instead of holding them in a moderation queue."
 msgstr "Se você deixar um comentário, o comentário e os seus metadados são conservados indefinidamente. Fazemos isso para que seja possível reconhecer e aprovar automaticamente qualquer comentário posterior ao invés de retê-lo para moderação."
 
-#: wp-admin/includes/misc.php:1720
+#: wp-admin/includes/misc.php:1728
 msgid "In this section you should explain how long you retain personal data collected or processed by the web site. While it is your responsibility to come up with the schedule of how long you keep each dataset for and why you keep it, that information does need to be listed here. For example, you may want to say that you keep contact form entries for six months, analytics records for a year, and customer purchase records for ten years."
 msgstr "Nesta seção você deve explicar por quanto tempo ficam armazenados os dados pessoais coletados ou processados pelo site. Como é sua responsabilidade divulgar por que e por quanto tempo cada conjunto de dados é armazenado, esta informação precisa ser listada aqui. Por exemplo, você pode querer dizer que mantém os dados enviados pelo formulário de contato por seis meses, registros para análises por um ano e registros de compras dos consumidores por dez anos."
 
-#: wp-admin/includes/misc.php:1718
+#: wp-admin/includes/misc.php:1726
 msgid "How long we retain your data"
 msgstr "Por quanto tempo mantemos os seus dados"
 
-#: wp-admin/includes/misc.php:1715
+#: wp-admin/includes/misc.php:1723
 msgid "By default WordPress does not share any personal data with anyone."
 msgstr "Por padrão, o WordPress não compartilha quaisquer dados pessoais."
 
-#: wp-admin/includes/misc.php:1714
+#: wp-admin/includes/misc.php:1722
 msgid "In this section you should name and list all third party providers with whom you share site data, including partners, cloud-based services, payment processors, and third party service providers, and note what data you share with them and why. Link to their own privacy policies if possible."
 msgstr "Nesta seção você deve listar todos os provedores terceirizados com quem você compartilha dados do site, incluindo parceiros, serviços baseados na nuvem, processadores de pagamento e provedores de serviços terceirizados, além de explicar quais dados você compartilha com eles e por que. Aponte para suas próprias políticas de privacidade se possível."
 
-#: wp-admin/includes/misc.php:1712
+#: wp-admin/includes/misc.php:1720
 msgid "Who we share your data with"
 msgstr "Com quem partilhamos seus dados"
 
-#: wp-admin/includes/misc.php:1709
+#: wp-admin/includes/misc.php:1717
 msgid "By default WordPress does not collect any analytics data. However, many web hosting accounts collect some anonymous analytics data. You may also have installed a WordPress plugin that provides analytics services. In that case, add information from that plugin here."
 msgstr "Por padrão, o WordPress não coleta nenhum dado para análise. Entretanto, muitos serviços de hospedagem coletam alguns dados anônimos para análise. Você também pode ter instalado um plugin do WordPress que fornece serviços de análise. Neste caso, adicione as informações do plugin aqui."
 
-#: wp-admin/includes/misc.php:1706
+#: wp-admin/includes/misc.php:1714
 msgid "Analytics"
 msgstr "Análises"
 
-#: wp-admin/includes/misc.php:1704
-msgid "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracing your interaction with the embedded content if you have an account and are logged in to that website."
-msgstr "Estes sites podem coletar dados sobre você, usar cookies, incorporar rastreamento adicionar de terceiros e monitorar sua interação com este conteúdo incorporado, incluindo sua interação com o conteúdo incorporado se você tem uma conta e está conectado com o site."
+#: wp-admin/includes/misc.php:1712
+msgid "These websites may collect data about you, use cookies, embed additional third-party tracking, and monitor your interaction with that embedded content, including tracking your interaction with the embedded content if you have an account and are logged in to that website."
+msgstr "Estes sites podem coletar dados sobre você, usar cookies, incorporar rastreamento adicional de terceiros e monitorar sua interação com este conteúdo incorporado, incluindo sua interação com o conteúdo incorporado se você tem uma conta e está conectado com o site."
 
-#: wp-admin/includes/misc.php:1703
+#: wp-admin/includes/misc.php:1711
 msgid "Articles on this site may include embedded content (e.g. videos, images, articles, etc.). Embedded content from other websites behaves in the exact same way as if the visitor has visited the other website."
 msgstr "Artigos neste site podem incluir conteúdo incorporado como, por exemplo, vídeos, imagens, artigos, etc. Conteúdos incorporados de outros sites se comportam exatamente da mesma forma como se o visitante estivesse visitando o outro site."
 
-#: wp-admin/includes/misc.php:1702
+#: wp-admin/includes/misc.php:1710
 msgid "Embedded content from other websites"
 msgstr "Mídia incorporada de outros sites"
 
-#: wp-admin/includes/misc.php:1700
+#: wp-admin/includes/misc.php:1708
 msgid "If you edit or publish an article, an additional cookie will be saved in your browser. This cookie includes no personal data and simply indicates the post ID of the article you just edited. It expires after 1 day."
 msgstr "Se você editar ou publicar um artigo, um cookie adicional será salvo no seu navegador. Este cookie não inclui nenhum dado pessoal e simplesmente indica o ID do post referente ao artigo que você acabou de editar. Ele expira depois de 1 dia."
 
-#: wp-admin/includes/misc.php:1699
+#: wp-admin/includes/misc.php:1707
 msgid "When you log in, we will also set up several cookies to save your login information and your screen display choices. Login cookies last for two days, and screen options cookies last for a year. If you select &quot;Remember Me&quot;, your login will persist for two weeks. If you log out of your account, the login cookies will be removed."
 msgstr "Quando você acessa sua conta no site, também criamos vários cookies para salvar os dados da sua conta e suas escolhas de exibição de tela. Cookies de login são mantidos por dois dias e cookies de opções de tela por um ano. Se você selecionar &quot;Lembrar-me&quot;, seu acesso será mantido por duas semanas. Se você se desconectar da sua conta, os cookies de login serão removidos."
 
-#: wp-admin/includes/misc.php:1698
+#: wp-admin/includes/misc.php:1706
 msgid "If you have an account and you log in to this site, we will set a temporary cookie to determine if your browser accepts cookies. This cookie contains no personal data and is discarded when you close your browser."
 msgstr "Se você tem uma conta e acessa este site, um cookie temporário será criado para determinar se seu navegador aceita cookies. Ele não contém nenhum dado pessoal e será descartado quando você fechar seu navegador."
 
-#: wp-admin/includes/misc.php:1697
+#: wp-admin/includes/misc.php:1705
 msgid "If you leave a comment on our site you may opt-in to saving your name, email address and website in cookies. These are for your convenience so that you do not have to fill in your details again when you leave another comment. These cookies will last for one year."
 msgstr "Ao deixar um comentário no site, você poderá optar por salvar seu nome, e-mail e site nos cookies. Isso visa seu conforto, assim você não precisará preencher seus  dados novamente quando fizer outro comentário. Estes cookies duram um ano."
 
-#: wp-admin/includes/misc.php:1695
+#: wp-admin/includes/misc.php:1703
 msgid "In this subsection you should list the cookies your web site uses, including those set by your plugins, social media, and analytics. We have provided the cookies which WordPress installs by default."
 msgstr "Nesta subseção você deve listar os cookies que seu site utiliza, inclusive aqueles gerados por plugins, mídias sociais e para análises. Já incluímos os cookies que o WordPress cria por padrão."
 
-#: wp-admin/includes/misc.php:1693
+#: wp-admin/includes/misc.php:1701
 msgid "Cookies"
 msgstr "Cookies"
 
-#: wp-admin/includes/misc.php:1680
+#: wp-admin/includes/misc.php:1688
 msgid "An anonymized string created from your email address (also called a hash) may be provided to the Gravatar service to see if you are using it. The Gravatar service privacy policy is available here: https://automattic.com/privacy/. After approval of your comment, your profile picture is visible to the public in the context of your comment."
 msgstr "Uma sequência anonimizada de caracteres criada a partir do seu e-mail (também chamada de hash) poderá ser enviada para o Gravatar para verificar se você usa o serviço. A política de privacidade do Gravatar está disponível aqui: https://automattic.com/privacy/. Depois da aprovação do seu comentário, a foto do seu perfil fica visível publicamente junto de seu comentário."
 
-#: wp-admin/includes/misc.php:1679
+#: wp-admin/includes/misc.php:1687
 msgid "When visitors leave comments on the site we collect the data shown in the comments form, and also the visitor&#8217;s IP address and browser user agent string to help spam detection."
 msgstr "Quando os visitantes deixam comentários no site, coletamos os dados mostrados no formulário de comentários, além do endereço de IP e de dados do navegador do visitante, para auxiliar na detecção de spam."
 
-#: wp-admin/includes/misc.php:1690
+#: wp-admin/includes/misc.php:1698
 msgid "By default, WordPress does not include a contact form. If you use a contact form plugin, use this subsection to note what personal data is captured when someone submits a contact form, and how long you keep it. For example, you may note that you keep contact form submissions for a certain period for customer service purposes, but you do not use the information submitted through them for marketing purposes."
 msgstr "Por padrão, o WordPress não inclui um formulário de contato. Se você usa um plugin de formulários de contato, use essa subseção para explicar quais são os dados pessoais coletados quando alguém envia informações por um formulário de contato e por quanto tempo você mantém essas informações. Por exemplo, você pode informar que mantém os dados enviados pelo formulário por algum tempo visando o atendimento ao consumidor, mas que não usa essas informações para fins de marketing."
 
-#: wp-admin/includes/misc.php:1688
+#: wp-admin/includes/misc.php:1696
 msgid "Contact forms"
 msgstr "Formulários de contato"
 
-#: wp-admin/includes/misc.php:1686
+#: wp-admin/includes/misc.php:1694
 msgid "If you upload images to the website, you should avoid uploading images with embedded location data (EXIF GPS) included. Visitors to the website can download and extract any location data from images on the website."
 msgstr "Se você envia imagens para o site, evite enviar as que contenham dados de localização incorporados (EXIF GPS). Visitantes podem baixar estas imagens do site e extrair delas seus dados de localização."
 
-#: wp-admin/includes/misc.php:1672
+#: wp-admin/includes/misc.php:1680
 msgid "By default WordPress does not collect any personal data about visitors, and only collects the data shown on the User Profile screen from registered users. However some of your plugins may collect personal data. You should add the relevant information below."
 msgstr "Por padrão o WordPress não coleta dados pessoais sobre visitantes, e apenas coleta os dados mostrados na tela de perfil dos usuários cadastrados. Porém, se algum dos seus plugins também coletar dados pessoais, adicione essa informação abaixo."
 
-#: wp-admin/includes/misc.php:1671
+#: wp-admin/includes/misc.php:1679
 msgid "Personal data is not just created by a user&#8217;s interactions with your site. Personal data is also generated from technical processes such as contact forms, comments, cookies, analytics, and third party embeds."
 msgstr "Dados pessoais não são criados apenas pela interação do usuário com o seu site. Eles também são gerados por processos técnicos, como formulários de contato, cookies, dados para análises e mídias de terceiros incorporadas."
 
-#: wp-admin/includes/misc.php:1670
+#: wp-admin/includes/misc.php:1678
 msgid "In addition to listing what personal data you collect, you need to note why you collect it. These explanations must note either the legal basis for your data collection and retention or the active consent the user has given."
 msgstr "Além de listar quais dados pessoais você coleta, você deve explicar por que os coleta. Essas explicações devem justificar as bases legais para a coleta e retenção dos dados ou o consentimento expresso fornecido pelo usuário."
 
-#: wp-admin/includes/misc.php:1669
+#: wp-admin/includes/misc.php:1677
 msgid "You should also note any collection and retention of sensitive personal data, such as data concerning health."
 msgstr "Você também deve justificar qualquer coleta e retenção de dados pessoais sensíveis, como dados referentes a saúde."
 
-#: wp-admin/includes/misc.php:1666
+#: wp-admin/includes/misc.php:1674
 msgid "What personal data we collect and why we collect it"
 msgstr "Quais dados pessoais coletamos e porque"
 
 #. translators: %s Site URL
-#: wp-admin/includes/misc.php:1664
+#: wp-admin/includes/misc.php:1672
 msgid "Our website address is: %s."
 msgstr "O endereço do nosso site é: %s."
 
-#: wp-admin/includes/misc.php:1661
+#: wp-admin/includes/misc.php:1669
 msgid "The amount of information you may be required to show will vary depending on your local or national business regulations. You may, for example, be required to display a physical address, a registered address, or your company registration number."
 msgstr "O volume de informações que você pode ser obrigado a fornecer varia de acordo com sua localização ou regras comerciais específicas. Você pode, por exemplo, ser obrigado a fornecer um endereço físico, um endereço comercial ou o número de cadastro da sua empresa."
 
-#: wp-admin/includes/misc.php:1660
+#: wp-admin/includes/misc.php:1668
 msgid "In this section you should note your site URL, as well as the name of the company, organization, or individual behind it, and some accurate contact information."
 msgstr "Nesta seção você deve explicitar o URL do seu site, assim como o nome da empresa, organização ou indivíduo responsável, e também informações de contato detalhadas."
 
-#: wp-admin/includes/misc.php:1658
+#: wp-admin/includes/misc.php:1666
 msgid "Who we are"
 msgstr "Quem somos"
 
-#: wp-admin/includes/misc.php:1632
+#: wp-admin/includes/misc.php:1640
 msgid "It is your responsibility to write a comprehensive privacy policy, to make sure it reflects all national and international legal requirements on privacy, and to keep your policy current and accurate."
 msgstr "É sua responsabilidade redigir uma política de privacidade abrangente, ter certeza de que ela cumpre os requisitos legais nacionais e internacionais sobre privacidade, assim como mantê-la sempre atualizada."
 
-#: wp-admin/includes/misc.php:1631
+#: wp-admin/includes/misc.php:1639
 msgid "Please edit your privacy policy content, making sure to delete the summaries, and adding any information from your theme and plugins. Once you publish your policy page, remember to add it to your navigation menu."
 msgstr "Edite o conteúdo de sua política de privacidade, garantindo que os resumos e notas sejam excluídos, e adicionando toda a informação referente ao seu tema e aos seus plugins. Após publicar a sua página de política de privacidade, lembre-se de adicioná-la ao seu menu de navegação."
 
-#: wp-admin/includes/misc.php:1628
+#: wp-admin/includes/misc.php:1636
 msgid "Hello,"
 msgstr "Olá,"
 
-#: wp-admin/includes/misc.php:1629
+#: wp-admin/includes/misc.php:1637
 msgid "This text template will help you to create your web site&#8217;s privacy policy."
 msgstr "Este modelo de texto ajudará você criar a página de política de privacidade do seu site."
 
-#: wp-admin/privacy.php:111
+#: wp-admin/privacy.php:130
 msgid "As a website owner, you may need to follow national or international privacy laws. For example, you may need to create and display a privacy policy."
 msgstr "Como proprietário de um site, você pode ter de seguir a legislação nacional ou internacional de privacidade. Por exemplo, você pode ter de criar e exibir uma política de privacidade."
 
@@ -504,62 +518,62 @@ msgstr "Esperado response como array do exportador: %s."
 msgid "Expected an array describing the exporter at index %s."
 msgstr "Esperado um array descrevendo o exportador no índice %s."
 
-#: wp-admin/privacy.php:221
+#: wp-admin/privacy.php:240
 msgid "Create New Page"
 msgstr "Criar nova página"
 
-#: wp-admin/privacy.php:166
+#: wp-admin/privacy.php:185
 msgid "Change your Privacy Policy page"
 msgstr "Alterar sua página de política de privacidade"
 
-#: wp-admin/privacy.php:202
+#: wp-admin/privacy.php:221
 msgid "Use This Page"
 msgstr "Utilize esta página"
 
-#: wp-admin/privacy.php:168
+#: wp-admin/privacy.php:187
 msgid "Select a Privacy Policy page"
 msgstr "Selecionar uma página de política de privacidade"
 
 #. translators: 1: URL to edit page, 2: URL to view page
-#: wp-admin/privacy.php:140
+#: wp-admin/privacy.php:159
 msgid "<a href=\"%1$s\">Edit</a> or <a href=\"%2$s\">view</a> your privacy policy page content."
 msgstr "<a href=\"%1$s\">Editar</a> ou <a href=\"%2$s\">ver</a> o conteúdo da sua página de política de privacidade."
 
-#: wp-admin/privacy.php:120
+#: wp-admin/privacy.php:139
 msgid "We would also suggest reviewing your privacy policy from time to time, especially after installing or updating any themes or plugins. There may be changes or new suggested information for you to consider adding to your policy."
 msgstr "Também sugerimos que você revise sua política de privacidade de tempos em tempos, especialmente depois de instalar ou atualizar quaisquer temas ou plugins. Podem haver alterações ou novas informações sugeridas para você considerar incluir em sua política."
 
-#: wp-admin/privacy.php:116
+#: wp-admin/privacy.php:135
 msgid "However, it is your responsibility to use those resources correctly, to provide the information that your privacy policy requires, and to keep that information current and accurate."
 msgstr "No entanto, é sua responsabilidade usar esses recursos corretamente, para fornecer as informações que sua política de privacidade exige e manter essas informações atuais e precisas."
 
-#: wp-admin/privacy.php:112
+#: wp-admin/privacy.php:131
 msgid "If you already have a privacy policy page, please select it below. If not, please create one."
 msgstr "Se você já possui uma página de política de privacidade, selecione-a abaixo. Se não, crie uma."
 
-#: wp-admin/privacy.php:109
+#: wp-admin/privacy.php:128
 msgid "Privacy Policy page"
 msgstr "Página de política de privacidade"
 
 #. translators: URL to Pages Trash
-#: wp-admin/privacy.php:90
+#: wp-admin/privacy.php:109
 msgid "The currently selected privacy policy page is in the trash. Please create or select new privacy policy page or <a href=\"%s\">restore the current page</a>."
 msgstr "A página de política de privacidade atual está na lixeira. Crie ou selecione uma nova página de política de privacidade ou <a href=\"%s\">restaure a página atual</a>."
 
-#: wp-admin/privacy.php:56
+#: wp-admin/privacy.php:75
 msgid "Unable to create privacy policy page."
 msgstr "Não foi possível criar a página de política de privacidade."
 
-#: wp-admin/privacy.php:80
+#: wp-admin/privacy.php:99
 msgid "The currently selected privacy policy page does not exist. Please create or select new page."
 msgstr "A página de política de privacidade selecionada atualmente não existe. Crie ou selecione uma nova página."
 
 #. translators: %s: URL to Customizer -> Menus
-#: wp-admin/privacy.php:30
+#: wp-admin/privacy.php:42
 msgid "Privacy policy page updated successfully. Remember to <a href=\"%s\">update your menus</a>!"
 msgstr "Página de política de privacidade atualizada. Lembre-se de <a href=\"%s\">atualizar seus menus</a>!"
 
-#: wp-admin/privacy.php:115
+#: wp-admin/privacy.php:134
 msgid "The new page will include help and suggestions for your privacy policy."
 msgstr "A nova página incluirá ajuda e sugestões para a sua política de privacidade."
 
@@ -568,12 +582,12 @@ msgstr "A nova página incluirá ajuda e sugestões para a sua política de priv
 msgid "privacy-policy"
 msgstr "politica-de-privacidade"
 
-#: wp-admin/includes/misc.php:1604
+#: wp-admin/includes/misc.php:1612
 msgid "Copy suggested policy text from %s."
 msgstr "Copiar o texto sugerido de política a partir de %s."
 
-#. translators: Do not translate EXPIRATION, LINK, EMAIL, SITENAME, SITEURL:
-#. those are placeholders.
+#. translators: Do not translate EXPIRATION, LINK, SITENAME, SITEURL: those are
+#. placeholders.
 #: wp-admin/includes/file.php:2069
 msgid ""
 "Howdy,\n"
@@ -585,22 +599,15 @@ msgid ""
 "\n"
 "###LINK###\n"
 "\n"
-"This email has been sent to ###EMAIL###.\n"
-"\n"
 "Regards,\n"
 "All at ###SITENAME###\n"
 "###SITEURL###"
 msgstr ""
 "Olá,\n"
 "\n"
-"Sua solicitação para exportação de dados pessoais foi concluída. Você pode\n"
-"baixar seus dados pessoais clicando no link abaixo. Por questões de privacidade\n"
-"e segurança, vamos excluir automaticamente o arquivo em ###EXPIRATION###,\n"
-"por isso baixe-o antes desta data.\n"
+"Sua solicitação para exportação de dados pessoais foi concluída. Você pode baixar seus dados pessoais clicando no link abaixo. Por questões de privacidade e segurança, vamos excluir automaticamente o arquivo em ###EXPIRATION###, por isso baixe-o antes desta data.\n"
 "\n"
 "###LINK###\n"
-"\n"
-"Este e-mail foi enviado para ###EMAIL###.\n"
 "\n"
 "Atenciosamente,\n"
 "Equipe do site ###SITENAME###\n"
@@ -622,7 +629,7 @@ msgstr "Enviando e-mail..."
 msgid "Download Personal Data Again"
 msgstr "Baixar dados pessoais novamente"
 
-#: wp-admin/includes/file.php:2124
+#: wp-admin/includes/file.php:2121
 msgid "Unable to send personal data export email."
 msgstr "Não foi possível enviar o e-mail de exportação dos dados pessoais."
 
@@ -630,11 +637,11 @@ msgstr "Não foi possível enviar o e-mail de exportação dos dados pessoais."
 msgid "Email Data"
 msgstr "Dados do e-mail"
 
-#: wp-admin/includes/file.php:2117
+#: wp-admin/includes/file.php:2114
 msgid "[%s] Personal Data Export"
 msgstr "[%s] Exportação de dados pessoais"
 
-#: wp-admin/includes/file.php:2169
+#: wp-admin/includes/file.php:2166
 msgid "Invalid request ID when merging exporter data."
 msgstr "ID inválido de solicitação quando mesclando com os dados de exportação."
 
@@ -844,37 +851,37 @@ msgstr "Requer a versão do PHP:"
 msgid "This changeset cannot be further modified."
 msgstr "Este conjunto de alterações não pode mais ser modificado."
 
-#: wp-admin/about.php:334
+#: wp-admin/about.php:352
 msgid "Improvements to Roles and Capabilities"
 msgstr "Melhorias nas funções e capacidades"
 
-#: wp-admin/about.php:335
+#: wp-admin/about.php:353
 msgid "New capabilities have been introduced that allow granular management of plugins and translation files. In addition, the site switching process in multisite has been fine-tuned to update the available roles and capabilities in a more reliable and coherent way."
 msgstr "Novas capacidades foram introduzidas para permitir maior granularidade no gerenciamento de plugins e arquivos de tradução. Além disso, o processo para tornar o site um multisite recebeu um ajuste fino para atualizar as funções e capacidades disponíveis de um modo mais confiável e coerente."
 
-#: wp-admin/about.php:331
+#: wp-admin/about.php:349
 msgid "WordPress 4.9 includes an upgraded version of MediaElement.js, which removes dependencies on jQuery, improves accessibility, modernizes the UI, and fixes many bugs."
 msgstr "O WordPress 4.9 inclui uma versão atualizada do MediaElement.js, que remove dependências do jQuery, melhora a acessibilidade, torna a interface gráfica mais moderna e corrige vários erros."
 
-#: wp-admin/about.php:330
+#: wp-admin/about.php:348
 msgid "MediaElement.js upgraded to 4.2.6"
 msgstr "MediaElement.js atualizado para 4.2.6"
 
-#: wp-admin/about.php:327
+#: wp-admin/about.php:345
 msgid "We&#8217;ve introduced a new code editing library, CodeMirror, for use within core. Use it to improve any code writing or editing experiences within your plugins, like CSS or JavaScript include fields."
 msgstr "Introduzimos uma nova biblioteca de edição de código, o CodeMirror, a ser usada pelos arquivos básicos. Ela melhorará as experiências de criação e edição de código dos seus plugins, em campos que incluam CSS ou JavaScript, por exemplo."
 
 #. translators: %s:
 #. https://make.wordpress.org/core/2017/11/01/improvements-to-the-customize-js-api-in-4-9/
-#: wp-admin/about.php:320
+#: wp-admin/about.php:338
 msgid "We&#8217;ve made numerous improvements to the Customizer JS API in WordPress 4.9, eliminating many pain points and making it just as easy to work with as the PHP API. There are also new base control templates, a date/time control, and section/panel/global notifications to name a few. <a href=\"%s\">Check out the full list.</a>"
 msgstr "Fizemos várias melhorias na API JS do Personalizar no WordPress 4.9, eliminando vários problemas e dificuldades e tornando-a tão fácil de trabalhar quanto a API PHP. Também há novos modelos básicos de controles, um controle de data e hora e novas notificações de seção, de painel ou globais, só pra mencionar algumas. <a href=\"%s\">Veja a lista completa.</a>"
 
-#: wp-admin/about.php:326
+#: wp-admin/about.php:344
 msgid "CodeMirror available for use in your themes and plugins"
 msgstr "CodeMirror disponível para usar nos seus temas e plugins"
 
-#: wp-admin/about.php:316
+#: wp-admin/about.php:334
 msgid "Customizer JS API Improvements"
 msgstr "Melhorias na API JS do Personalizar"
 
@@ -882,7 +889,7 @@ msgstr "Melhorias na API JS do Personalizar"
 msgid "This data is used to provide general enhancements to WordPress, which includes helping to protect your site by finding and automatically installing new updates. It is also used to calculate statistics, such as those shown on the <a href=\"%s\">WordPress.org stats page</a>."
 msgstr "Estes dados são usados para fornecer melhorias no WordPress, que incluem ajuda na proteção do seu site, encontrando e instalando atualizações automaticamente. Eles também são usados para calcular estatísticas, como aquelas mostradas <a href=\"%s\">na página de estatísticas do WordPress.org</a>."
 
-#: wp-admin/about.php:229
+#: wp-admin/about.php:247
 msgid "When you edit themes and plugins directly, WordPress 4.9 will politely warn you that this is a dangerous practice. It will recommend that you backup your files before saving, so they don&#8217;t get overwritten by the next update. Take the safe route: your future self will thank you. Your team and customers will thank you."
 msgstr "Ao editar temas e plugins diretamente, o WordPress 4.9 vai avisá-lo educadamente de que isto é uma prática perigosa. Ele recomendará que você faça um backup dos seus arquivos antes de salvar, evitando perdê-los caso eles sejam sobrescritos na próxima atualização. Tome o caminho seguro: no futuro você vai agradecer. Sua equipe e clientes também."
 
@@ -958,53 +965,53 @@ msgstr "https://codex.wordpress.org/pt-br:WordPress_em_Diret%C3%B3rio_Pr%C3%B3pr
 msgid "Enter the address here if you <a href=\"%s\">want your site home page to be different from your WordPress installation directory</a>."
 msgstr "Digite o endereço aqui se <a href=\"%s\">deseja que a página inicial do seu site seja diferente do diretório de instalação do WordPress</a>."
 
-#: wp-admin/about.php:298
+#: wp-admin/about.php:316
 msgid "WordPress is working on a new way to create and control your content and we&#8217;d love to have your help. Interested in being an <a href=\"%s\">early tester</a> or getting involved with the Gutenberg project? <a href=\"%s\">Contribute on GitHub</a>."
 msgstr "O WordPress está trabalhando em uma nova forma de criar e controlar seu conteúdo e nós adoraríamos contar com a sua ajuda. Interessado em <a href=\"%s\">testar antes</a> ou se envolver com o projeto Gutenberg? <a href=\"%s\">Contribua no GitHub</a>."
 
 #. translators: %s: smiling face with smiling eyes emoji
-#: wp-admin/about.php:309
+#: wp-admin/about.php:327
 msgid "Developer Happiness %s"
 msgstr "Alegria para os desenvolvedores %s"
 
-#: wp-admin/about.php:299
+#: wp-admin/about.php:317
 msgid "https://wordpress.org/plugins/gutenberg/"
 msgstr "https://br.wordpress.org/plugins/gutenberg/"
 
 #. translators: %s: handshake emoji
-#: wp-admin/about.php:292
+#: wp-admin/about.php:310
 msgid "Lend a Hand with Gutenberg %s"
 msgstr "Dê uma mãozinha com o Gutenberg %s"
 
-#: wp-admin/about.php:267
+#: wp-admin/about.php:285
 msgid "More Reliable Theme Switching"
 msgstr "Troca de tema mais confiável"
 
-#: wp-admin/about.php:259
+#: wp-admin/about.php:277
 msgid "Site Building Improvements"
 msgstr "Melhorias na construção do seu site"
 
-#: wp-admin/about.php:244
+#: wp-admin/about.php:262
 msgid "The New Gallery Widget"
 msgstr "Novo widget de galeria"
 
-#: wp-admin/about.php:236
+#: wp-admin/about.php:254
 msgid "Even More Widget Updates"
 msgstr "Mais atualizações nos widgets"
 
-#: wp-admin/about.php:199
+#: wp-admin/about.php:217
 msgid "Were you lured away from your desk before you saved your new draft design? Fear not, when you return, WordPress 4.9 will politely ask whether or not you&#8217;d like to save your unsaved changes."
 msgstr "Teve que sair da sua mesa antes de salvar o rascunho das suas alterações de design? Não tema, quando você voltar o WordPress 4.9 gentilmente perguntará se você gostaria ou não de salvar suas mudanças."
 
-#: wp-admin/about.php:206
+#: wp-admin/about.php:224
 msgid "Coding Enhancements"
 msgstr "Melhorias na edição de código"
 
-#: wp-admin/about.php:198
+#: wp-admin/about.php:216
 msgid "A Prompt to Protect Your Work"
 msgstr "Uma pergunta para proteger o seu trabalho"
 
-#: wp-admin/about.php:191
+#: wp-admin/about.php:209
 msgid "Design Locking To Guard Your Changes"
 msgstr "Travamento do design para proteger suas mudanças"
 
@@ -1016,75 +1023,75 @@ msgstr "Levamos privacidade e transparência muito a sério. Para saber mais sob
 msgid "From time to time, your WordPress site may send data to WordPress.org &#8212; including, but not limited to &#8212; the version of WordPress you are using, and a list of installed plugins and themes."
 msgstr "Periodicamente, seu site WordPress pode enviar dados para o WordPress.org,  incluindo, mas não se limitando à, versão do WordPress que está sendo usada e a lista de plugins e temas instalados."
 
-#: wp-admin/about.php:275
+#: wp-admin/about.php:293
 msgid "Were you confused by the steps to create a new menu? Perhaps no longer! We&#8217;ve ironed out the UX for a smoother menu creation process. Newly updated copy will guide you."
 msgstr "Você ficava confuso com o processo de criação de um novo menu? Isso vai mudar! Melhoramos a experiência do usuário para tornar este processo mais tranquilo. Com a nossa versão novinha em folha, você fará isso com mais graça e elegância."
 
-#: wp-admin/about.php:274
+#: wp-admin/about.php:292
 msgid "Better Menu Instructions = Less Confusion"
 msgstr "Melhores instruções no menu geram menos confusão"
 
-#: wp-admin/about.php:268
+#: wp-admin/about.php:286
 msgid "When you switch themes, widgets sometimes think they can just up and move location. Improvements in WordPress 4.9 offer more persistent menu and widget placement when you decide it&#8217;s time for a new theme. Additionally, you can preview installed themes or download, install, and preview new themes right. Nothing says handy like being able to preview before you deploy. "
 msgstr "Ao trocar de tema, os widgets algumas vezes pensam que podem sair por aí, trocando de localização. Melhorias no WordPress 4.9 oferecem um posicionamento de menus e widgets mais persistente quando você decidir que é hora de usar um novo tema. Além disso, você pode visualizar temas instalados ou baixar, instalar e visualizar novos temas do jeito certo. Nada é tão útil quanto poder visualizar as mudanças antes de implementá-las."
 
-#: wp-admin/about.php:252
+#: wp-admin/about.php:270
 msgid "Want to add media to your text widget? Embed images, video, and audio directly into the widget along with your text, with our simple but useful Add Media button. Woo!"
 msgstr "Quer adicionar mídia ao seu widget de texto? Incorpore imagens, vídeo e áudio diretamente no widget junto ao seu texto com o nosso não tão bonito, mas extremamente útil, botão de Adicionar mídia. Oba!"
 
-#: wp-admin/about.php:251
+#: wp-admin/about.php:269
 msgid "Press a Button, Add Media"
 msgstr "Adicione mídia só apertando um botão"
 
-#: wp-admin/about.php:245
+#: wp-admin/about.php:263
 msgid "An incremental improvement to the media changes hatched in WordPress 4.8, you can now add a gallery via widget. Yes!"
 msgstr "Continuando as mudanças nas mídias iniciadas no WordPress 4.8, agora você pode adicionar uma galeria através de um widget. Isso aí!"
 
-#: wp-admin/about.php:228
+#: wp-admin/about.php:246
 msgid "Warning: Potential Danger Ahead!"
 msgstr "Alerta: perigo à frente!"
 
-#: wp-admin/about.php:222
+#: wp-admin/about.php:240
 msgid "The dreaded white screen. You&#8217;ll avoid it when working on themes and plugin code because WordPress 4.9 will warn you about saving an error. You&#8217;ll sleep better at night."
 msgstr "A temida tela branca. Você poderá evitá-la quando estiver trabalhando no código de temas e plugins, porque o WordPress 4.9 avisará que você está prestes a salvar um erro. Você dormirá mais tranquilo à noite."
 
-#: wp-admin/about.php:221
+#: wp-admin/about.php:239
 msgid "Sandbox for Safety"
 msgstr "Área de testes para segurança"
 
-#: wp-admin/about.php:215
+#: wp-admin/about.php:233
 msgid "You&#8217;ve got a display problem but can&#8217;t quite figure out exactly what went wrong in the CSS you lovingly wrote. With syntax highlighting and error checking for CSS editing and the Custom HTML widget introduced in WordPress 4.8.1, you&#8217;ll pinpoint coding errors quickly. Practically guaranteed to help you scan code more easily and suss out and fix code errors quickly."
 msgstr "Você acabou com um problema de exibição, mas não faz ideia do que exatamente está errado no CSS que você escreveu com tanto carinho. Com o destaque de sintaxe e verificação de erros na edição de CSS e no widget de HTML personalizado apresentado no WordPress 4.8, você identificará os erros bem rapidinho. Com certeza  isso vai ajudar a examinar o código com mais facilidade e a corrigir os erros mais rapidamente."
 
-#: wp-admin/about.php:214
+#: wp-admin/about.php:232
 msgid "Syntax Highlighting and Error Checking? Yes, Please!"
 msgstr "Destaque de sintaxe e verificação de erros? Sim, por favor!"
 
-#: wp-admin/about.php:192
+#: wp-admin/about.php:210
 msgid "Ever encounter a scenario where two designers walk into a project and designer A overrides designer B&#8217;s beautiful changes? WordPress 4.9&#8217;s design lock feature (similar to post locking) secures your draft design so that no one can make changes to it or erase all your hard work."
 msgstr "Já se imaginou em um cenário onde dois designers estão no mesmo projeto e o designer A sobrescreve as lindas mudanças do designer B? O recurso de travamento de design do WordPress 4.9 (parecido com o travamento de posts) protege o rascunho do seu design para que ninguém possa alterar ou apagar o seu árduo trabalho."
 
-#: wp-admin/about.php:185
+#: wp-admin/about.php:203
 msgid "Need to get some feedback on proposed site design changes? WordPress 4.9 gives you a preview link you can send to your team and customers so that you can collect and integrate feedback before you schedule the changes to go live. Can we say collaboration&#43;&#43;?"
 msgstr "Precisa que outras pessoas avaliem as mudanças de design que você está propondo? O WordPress 4.9 fornece um link de visualização que você pode enviar para a sua equipe e clientes de modo que seja possível coletar e aplicar as modificações propostas antes que você agende a publicação das alterações. Será que podemos dizer que incrementamos a colaboração?"
 
-#: wp-admin/about.php:178
+#: wp-admin/about.php:196
 msgid "Yes, you read that right. Just like you can draft and revise posts and schedule them to go live on the date and time you choose, you can now tinker with your site&#8217;s design and schedule those design changes to go live as you please."
 msgstr "É isso aí, você leu certo. Do mesmo modo que você pode guardar rascunhos, revisar e agendar posts para que eles sejam publicados na data e hora que você escolher, agora é possível alterar o design do seu site como você quiser e agendar a publicação dessas mudanças para a hora que achar melhor."
 
-#: wp-admin/about.php:184
+#: wp-admin/about.php:202
 msgid "Collaborate with Design Preview Links"
 msgstr "Colaboração com links para visualização de design"
 
-#: wp-admin/about.php:177
+#: wp-admin/about.php:195
 msgid "Draft and Schedule Site Design Customizations"
 msgstr "Rascunhos e agendamento de personalizações de design do site"
 
-#: wp-admin/about.php:169
+#: wp-admin/about.php:187
 msgid "Customizer Workflow Improved"
 msgstr "Fluxo de trabalho do Personalizar melhorado"
 
-#: wp-admin/about.php:156
+#: wp-admin/about.php:174
 msgid "Welcome to an improved Customizer workflow with design drafts, locking, scheduling, and preview links. What&#8217;s more, code syntax highlighting and error checking will make for a clean and smooth site building experience. Finally, if all that wasn&#8217;t pretty great, we&#8217;ve got a great new Gallery widget and improvements to theme browsing and switching."
 msgstr "Dê as boas-vindas a um fluxo de trabalho melhorado no Personalizar com rascunho de design, travamento, agendamento e links de visualização. Além disso, temos destaque de sintaxe de código e verificação de erros para que a experiência de construção do seu site seja mais simples e tranquila. Finalmente, se todo o resto já não fosse bom o bastante, temos um novo widget de galeria e melhorias na navegação e troca de temas."
 
@@ -1093,7 +1100,7 @@ msgid "Thank you for updating to the latest version! WordPress %s will smooth yo
 msgstr "Agradecemos por atualizar para a versão mais recente! O WordPress %s vai melhorar o seu fluxo de alterações de design e manterá você a salvo de erros de código."
 
 #. translators: %s: party popper emoji
-#: wp-admin/about.php:151
+#: wp-admin/about.php:169
 msgid "Major Customizer Improvements, Code Error Checking, and More! %s"
 msgstr "Grandes melhorias no Personalizar, verificação por erros de código e mais! %s"
 
@@ -1139,7 +1146,7 @@ msgstr "Este rascunho foi criado a partir das suas <a href=\"%s\">personalizaç�
 msgid "Theme Files"
 msgstr "Arquivos do tema"
 
-#: wp-admin/includes/misc.php:324 wp-admin/includes/misc.php:413
+#: wp-admin/includes/misc.php:332 wp-admin/includes/misc.php:421
 msgid "folder"
 msgstr "pasta"
 
@@ -2514,7 +2521,7 @@ msgid "(Currently set to: %s)"
 msgstr "(Atualmente definido como: %s) "
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:462
+#: wp-admin/about.php:480
 msgid "<strong>Version %s</strong> addressed one security issue."
 msgstr "A <strong>versão %s</strong> resolveu um problema de segurança."
 
@@ -2536,15 +2543,15 @@ msgstr "Você pode trocar sua foto de perfil no <a href=\"%s\">Gravatar</a>."
 msgid "Profile Picture"
 msgstr "Foto do perfil"
 
-#: wp-admin/about.php:453
+#: wp-admin/about.php:471
 msgid "Maintenance Releases"
 msgstr "Versões de manutenção"
 
-#: wp-admin/about.php:34 wp-admin/about.php:459
+#: wp-admin/about.php:34 wp-admin/about.php:477
 msgid "Maintenance and Security Releases"
 msgstr "Versões de segurança e manutenção"
 
-#: wp-admin/about.php:456
+#: wp-admin/about.php:474
 msgid "Security Releases"
 msgstr "Atualizações de segurança"
 
@@ -3741,7 +3748,7 @@ msgstr "Tamanho em megabytes"
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-admin/includes/misc.php:1163
+#: wp-admin/includes/misc.php:1171
 msgid ""
 "Howdy ###USERNAME###,\n"
 "\n"
@@ -5289,7 +5296,7 @@ msgstr "Restaurar backup."
 msgid "Draft created on %1$s at %2$s"
 msgstr "Rascunho criado em %1$s às %2$s "
 
-#: wp-admin/includes/misc.php:962
+#: wp-admin/includes/misc.php:970
 msgid "%s has taken over and is currently editing."
 msgstr "%s assumiu controle e está editando agora."
 
@@ -5350,7 +5357,7 @@ msgid "For PHP files, you can use the Documentation dropdown to select from func
 msgstr "Para arquivos PHP, você pode usar a lista suspensa de Documentação para funções reconhecidas naquele arquivo. Procurar o levará para uma página com referências sobre aquela função em particular."
 
 #: wp-admin/includes/class-wp-posts-list-table.php:904
-#: wp-admin/includes/misc.php:923
+#: wp-admin/includes/misc.php:931
 msgid "%s is currently editing"
 msgstr "%s está editando agora"
 
@@ -5943,7 +5950,7 @@ msgstr "URL do link"
 msgid "Preview:"
 msgstr "Visualizar:"
 
-#: wp-admin/includes/misc.php:1565
+#: wp-admin/includes/misc.php:1573
 msgid "&uarr; Return to Top"
 msgstr "&uarr; Voltar para o topo"
 
@@ -6131,7 +6138,7 @@ msgstr "Você tentou acessar o painel \"%1$s\", mas no momento você não tem pr
 msgid "Sorry, you must delete files before you can upload any more."
 msgstr "Antes você deve excluir arquivos para poder enviar mais."
 
-#: wp-admin/includes/misc.php:1210
+#: wp-admin/includes/misc.php:1218
 msgid "[%s] New Admin Email Address"
 msgstr "[%s] Novo endereço de e-mail do administrador"
 
@@ -6361,13 +6368,13 @@ msgstr "Mostrar a barra de ferramentas ao ver site"
 #. translators: %s: Codex URL
 #: wp-admin/about.php:50 wp-admin/about.php:68 wp-admin/about.php:86
 #: wp-admin/about.php:104 wp-admin/about.php:122 wp-admin/about.php:140
-#: wp-admin/about.php:479
+#: wp-admin/about.php:158 wp-admin/about.php:497
 msgid "For more information, see <a href=\"%s\">the release notes</a>."
 msgstr "Para mais informações, veja <a href=\"%s\">as notas de lançamento</a>."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
-#: wp-admin/about.php:39 wp-admin/about.php:75 wp-admin/about.php:93
-#: wp-admin/about.php:467
+#: wp-admin/about.php:57 wp-admin/about.php:93 wp-admin/about.php:111
+#: wp-admin/about.php:485
 msgid "<strong>Version %1$s</strong> addressed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu %2$s bug."
@@ -6375,7 +6382,7 @@ msgstr[1] "A <strong>versão %1$s</strong> corrigiu %2$s bugs."
 
 #. translators: 1: WordPress version number, 2: plural number of bugs. Singular
 #. security issue.
-#: wp-admin/about.php:471
+#: wp-admin/about.php:489
 msgid "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed a security issue and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e %2$s bug."
@@ -6384,8 +6391,8 @@ msgstr[1] "A <strong>versão %1$s</strong> corrigiu um problema de segurança e 
 #. translators: 1: WordPress version number, 2: plural number of bugs.
 #. translators: 1: WordPress version number, 2: plural number of bugs. More
 #. than one security issue.
-#: wp-admin/about.php:57 wp-admin/about.php:111 wp-admin/about.php:129
-#: wp-admin/about.php:475
+#: wp-admin/about.php:39 wp-admin/about.php:75 wp-admin/about.php:129
+#: wp-admin/about.php:147 wp-admin/about.php:493
 msgid "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bug."
 msgid_plural "<strong>Version %1$s</strong> addressed some security issues and fixed %2$s bugs."
 msgstr[0] "A <strong>versão %1$s</strong> corrigiu alguns problemas de segurança e %2$s bug."
@@ -6400,19 +6407,19 @@ msgid "What&#8217;s New"
 msgstr "O que há de novo"
 
 #. translators: %s: WordPress version number
-#: wp-admin/about.php:464
+#: wp-admin/about.php:482
 msgid "<strong>Version %s</strong> addressed some security issues."
 msgstr "A <strong>versão %s</strong> corrigiu alguns problemas de segurança."
 
-#: wp-admin/about.php:452
+#: wp-admin/about.php:470
 msgid "Maintenance Release"
 msgstr "Versão de manutenção"
 
-#: wp-admin/about.php:455
+#: wp-admin/about.php:473
 msgid "Security Release"
 msgstr "Versão de segurança"
 
-#: wp-admin/about.php:458
+#: wp-admin/about.php:476
 msgid "Maintenance and Security Release"
 msgstr "Versão de segurança e manutenção"
 
@@ -6424,7 +6431,7 @@ msgstr "Esta tela permite que você escolha a estrutura padrão para seu links p
 msgid "Welcome to WordPress %1$s. <a href=\"%2$s\">Learn more</a>."
 msgstr "Bem-vindo ao WordPress%1$s. <a href=\"%2$s\">Saiba mais</a>."
 
-#: wp-admin/about.php:345
+#: wp-admin/about.php:363
 msgid "Return to Updates"
 msgstr "Voltar às atualizações"
 
@@ -6696,11 +6703,11 @@ msgstr "Porque esta é uma instalação multisite, você pode adicionar contas q
 msgid "Welcome to WordPress %s"
 msgstr "Boas-vindas ao WordPress %s"
 
-#: wp-admin/about.php:345
+#: wp-admin/about.php:363
 msgid "Return to Dashboard &rarr; Updates"
 msgstr "Voltar ao Painel &rarr; Atualizações"
 
-#: wp-admin/about.php:348
+#: wp-admin/about.php:366
 msgid "Go to Dashboard &rarr; Home"
 msgstr "Ir para Painel &rarr; Início"
 
@@ -8540,7 +8547,7 @@ msgid_plural "Must-Use <span class=\"count\">(%s)</span>"
 msgstr[0] "Indispensável <span class=\"count\">(%s)</span>"
 msgstr[1] "Indispensáveis<span class=\"count\">(%s)</span>"
 
-#: wp-admin/about.php:348
+#: wp-admin/about.php:366
 msgid "Go to Dashboard"
 msgstr "Ir para o painel"
 
@@ -8951,7 +8958,7 @@ msgstr "Opcional"
 msgid "Tag base"
 msgstr "Base das tags"
 
-#: wp-admin/privacy.php:101
+#: wp-admin/privacy.php:120
 msgid "Privacy Settings"
 msgstr "Configurações de Privacidade"
 
@@ -9240,7 +9247,7 @@ msgstr "Editor visual"
 msgid "Disable the visual editor when writing"
 msgstr "Desativar o editor visual ao escrever"
 
-#: wp-admin/includes/misc.php:833 wp-admin/user-edit.php:272
+#: wp-admin/includes/misc.php:841 wp-admin/user-edit.php:272
 msgid "Admin Color Scheme"
 msgstr "Paleta de cores do painel"
 
@@ -9339,7 +9346,7 @@ msgstr "Posição"
 msgid "Save Widget"
 msgstr "Salvar widget"
 
-#: wp-admin/includes/misc.php:1056 wp-admin/includes/post.php:1805
+#: wp-admin/includes/misc.php:1064 wp-admin/includes/post.php:1805
 #: wp-admin/widgets.php:342
 msgid "Error while saving."
 msgstr "Erro ao salvar."
@@ -10572,7 +10579,7 @@ msgstr "De um URL"
 msgid "Gallery (%s)"
 msgstr "Galeria (%s)"
 
-#: wp-admin/includes/media.php:464 wp-admin/includes/misc.php:1791
+#: wp-admin/includes/media.php:464 wp-admin/includes/misc.php:1799
 #: wp-admin/includes/template.php:1627 wp-admin/install.php:80
 #: wp-admin/maint/repair.php:26 wp-admin/setup-config.php:110
 #: wp-admin/upgrade.php:71
@@ -11716,7 +11723,7 @@ msgid "&raquo;"
 msgstr "&raquo;"
 
 #. translators: draft saved date format, see https://secure.php.net/date
-#: wp-admin/includes/misc.php:1059
+#: wp-admin/includes/misc.php:1067
 msgid "g:i:s a"
 msgstr "G:i:s"
 
@@ -11743,7 +11750,7 @@ msgid "You are about to mark the following comment as spam:"
 msgstr "Você está prestes a marcar o seguinte comentário como spam:"
 
 #. translators: %s: date and time
-#: wp-admin/includes/misc.php:1061
+#: wp-admin/includes/misc.php:1069
 msgid "Draft saved at %s."
 msgstr "Rascunho salvo às %s."
 

@@ -103,7 +103,7 @@ class Result_Table extends \WP_List_Table {
 	 */
 	function prepare_items() {
 		$model        = Scan_Api::getLastScan();
-		$itemsPerPage = 20;
+		$itemsPerPage = 100;
 		$totalItems   = $model->countAll( $this->type );
 
 		$this->set_pagination_args( array(
@@ -197,7 +197,7 @@ class Result_Table extends \WP_List_Table {
                     <select name="bulk" class="bulk-action">
 						<?php if ( $this->type != Result_Item::STATUS_IGNORED ): ?>
                             <option value="ignore"><?php _e( "Ignore", wp_defender()->domain ) ?></option>
-<!--                            <option value="resolve">--><?php //_e( "Resolve", wp_defender()->domain ) ?><!--</option>-->
+                            <!--                            <option value="resolve">--><?php //_e( "Resolve", wp_defender()->domain ) ?><!--</option>-->
                             <!--                            <option value="delete">--><?php //_e( "Delete", wp_defender()->domain ) ?><!--</option>-->
 						<?php endif; ?>
 						<?php if ( $this->type == Result_Item::STATUS_IGNORED ): ?>

@@ -31,6 +31,14 @@ class Audit_API extends Component {
 		$data['order']    = $order;
 		$data['nopaging'] = $nopaging;
 		$data['timezone'] = get_option( 'gmt_offset' );
+		//if timezone is 9.5 mean we will convert it manually to UTC before submit
+		if ( $data['timezone'] == '9.5' ) {
+			$dateFrom          = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_from'] ), false );
+			$dateTo            = Utils::instance()->formatDateTime( Utils::instance()->localToUtc( $data['date_to'] ), false );
+			$data['date_from'] = $dateFrom;
+			$data['date_to']   = $dateTo;
+			$data['timezone']  = '0';
+		}
 		$response = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
 			'method'  => 'GET',
 			'timeout' => 20,
@@ -39,6 +47,7 @@ class Audit_API extends Component {
 				'apikey' => Utils::instance()->getAPIKey()
 			)
 		), true );
+
 		//todo need to remove in some next versions
 		if ( is_wp_error( $response ) ) {
 			return $response;
@@ -67,14 +76,49 @@ class Audit_API extends Component {
 		$data             = $filter;
 		$data['site_url'] = network_site_url();
 		$data['timezone'] = get_option( 'gmt_offset' );
-		$response         = Utils::instance()->devCall( 'http://' . self::$end_point . '/logs/summary', $data, array(
-			'method'  => 'GET',
-			'timeout' => 20,
-			//'sslverify' => false,
-			'headers' => array(
-				'apikey' => Utils::instance()->getAPIKey()
-			)
-		), true );
+		if ( $data['timezone'] == '9.5' ) {
+			//little case for 9.5 timezone
+			$dateFrom          = Utils::instance()->formatDateTime( Utils::instance()->localToUtc(
+				date( 'Y-m-d', strtotime( '-24 hours', current_time( 'timestamp' ) ) )
+			), false );
+			$dateTo            = Utils::instance()->formatDateTime( Utils::instance()->localToUtc(
+				date( 'Y-m-d', current_time( 'timestamp' ) )
+			), false );
+			$data['date_from'] = $dateFrom;
+			$data['date_to']   = $dateTo;
+			$data['timezone']  = '0';
+			$response          = Utils::instance()->devCall( 'https://' . self::$end_point . '/logs', $data, array(
+				'method'  => 'GET',
+				'timeout' => 20,
+				//'sslverify' => false,
+				'headers' => array(
+					'apikey' => Utils::instance()->getAPIKey()
+				)
+			), true );
+
+			if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
+				$body = wp_remote_retrieve_body( $response );
+				$tmp  = json_decode( $body, true );
+				if ( isset( $tmp['message'] ) ) {
+					return new \WP_Error( Error_Code::API_ERROR, $tmp['message'] );
+				}
+				$results = array(
+					'count' => $tmp['total_items']
+				);
+
+				return $results;
+			}
+
+		} else {
+			$response = Utils::instance()->devCall( 'http://' . self::$end_point . '/logs/summary', $data, array(
+				'method'  => 'GET',
+				'timeout' => 20,
+				//'sslverify' => false,
+				'headers' => array(
+					'apikey' => Utils::instance()->getAPIKey()
+				)
+			), true );
+		}
 
 		if ( wp_remote_retrieve_response_code( $response ) == 200 ) {
 			$body    = wp_remote_retrieve_body( $response );

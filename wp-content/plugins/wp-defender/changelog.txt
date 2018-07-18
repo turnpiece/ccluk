@@ -4,6 +4,14 @@ Tested up to: 4.7.4
 
 Change Log:
 
+1.9.1 - 2018-09-07
+----------------------------------------------------------------------
+- Fix: Mask Login Area description text is misleading
+- Fix: wp-admin link of sub-sites in networks link to wrong admin URL
+- Fix: Prevent Information Disclosure & Prevent PHP Execution show false error message when first applied
+- Fix: Dashboard reporting section mis-alignment
+- Other minor enhancements and fixes
+
 1.9 - 2018-24-05
 ----------------------------------------------------------------------
 - New: Ability to edit default two-factor authentication email notifications
@@ -245,4 +253,4 @@ Fixed: Scanning was sometimes slow or getting stuck
 - First release
 
 
-87274-1527448782-au
+87274-1531945792-au

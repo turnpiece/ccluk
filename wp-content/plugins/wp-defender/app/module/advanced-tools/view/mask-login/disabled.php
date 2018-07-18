@@ -7,7 +7,7 @@
 	<div class="box-content issues-box-content tc">
 		<img src="<?php echo wp_defender()->getPluginUrl() . 'assets/img/2factor-disabled.svg' ?>"/>
 		<p>
-			<?php _e( "Change the location of WordPress’s default wp-admin and wp-login URLs to make it harder for automated bots to find, and more convenient for your users.", wp_defender()->domain ) ?>
+			<?php _e( 'Change the location of WordPress’s default login area, making it harder for automated bots to find and also more convenient for your users.', wp_defender()->domain ) ?>
 		</p>
 		<form method="post" id="advanced-settings-frm" class="advanced-settings-frm">
 

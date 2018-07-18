@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailChimp for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-28 18:24:29+0000\n"
+"PO-Revision-Date: 2018-07-12 19:32:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,18 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - MailChimp for WordPress - Stable (latest release)\n"
+
+#: includes/forms/class-admin.php:59
+msgid "Agree to terms"
+msgstr "Agree to terms"
+
+#: includes/forms/class-admin.php:58
+msgid "I have read and agree to the terms & conditions"
+msgstr "I have read and agree to the terms & conditions"
+
+#: includes/forms/class-admin.php:60
+msgid "Link to your terms & conditions page"
+msgstr "Link to your terms & conditions page"
 
 #: includes/integrations/views/integration-settings.php:85
 #: includes/integrations/views/integration-settings.php:142
@@ -37,42 +49,42 @@ msgstr "Form code"
 msgid "Add-ons"
 msgstr "Add-ons"
 
+#: includes/views/parts/lists-overview.php:86
+msgid "Interest Categories"
+msgstr "Interest Categories"
+
 #: includes/views/parts/lists-overview.php:92
 msgid "Interests"
 msgstr "Interests"
 
-#: includes/views/parts/lists-overview.php:86
-msgid "Interest Categories"
-msgstr "Interest Categories"
+#: includes/views/parts/lists-overview.php:52
+msgid "Merge Fields"
+msgstr "Merge Fields"
+
+#: includes/views/parts/lists-overview.php:57
+msgid "Tag"
+msgstr "Tag"
 
 #: includes/views/parts/lists-overview.php:58
 #: includes/views/parts/lists-overview.php:91
 msgid "Type"
 msgstr "Type"
 
-#: includes/views/parts/lists-overview.php:57
-msgid "Tag"
-msgstr "Tag"
-
-#: includes/views/parts/lists-overview.php:52
-msgid "Merge Fields"
-msgstr "Merge Fields"
-
 #: includes/forms/views/tabs/form-settings.php:127
 msgid "Your \"subscribed\" message will not show when redirecting to another page, so make sure to let your visitors know they were successfully subscribed."
 msgstr "Your \"subscribed\" message will not show when redirecting to another page, so make sure to let your visitors know they were successfully subscribed."
 
-#: includes/views/parts/admin-sidebar.php:42
-msgid "Super flexible forms using native HTML. Just like with MailChimp for WordPress forms but for other purposes, like a contact form."
-msgstr "Super flexible forms using native HTML. Just like with MailChimp for WordPress forms but for other purposes, like a contact form."
+#: includes/views/parts/admin-sidebar.php:29
+msgid "Other plugins by ibericode"
+msgstr "Other plugins by ibericode"
 
 #: includes/views/parts/admin-sidebar.php:36
 msgid "Pop-ups or boxes that slide-in with a newsletter sign-up form. A sure-fire way to grow your email lists."
 msgstr "Pop-ups or boxes that slide-in with a newsletter sign-up form. A sure-fire way to grow your email lists."
 
-#: includes/views/parts/admin-sidebar.php:29
-msgid "Other plugins by ibericode"
-msgstr "Other plugins by ibericode"
+#: includes/views/parts/admin-sidebar.php:42
+msgid "Super flexible forms using native HTML. Just like with MailChimp for WordPress forms but for other purposes, like a contact form."
+msgstr "Super flexible forms using native HTML. Just like with MailChimp for WordPress forms but for other purposes, like a contact form."
 
 #: integrations/gravity-forms/class-gravity-forms.php:99
 msgid "Select a MailChimp list"
@@ -86,21 +98,9 @@ msgstr "To integrate with Gravity Forms, add the \"MailChimp\" field to <a href=
 msgid "Leave this field empty if you're human:"
 msgstr "Leave this field empty if you're human:"
 
-#: integrations/wpforms/class-field.php:198
-msgid "Showing the first 20 choices.<br> All %d choices will be displayed when viewing the form."
-msgstr "Showing the first 20 choices.<br> All %d choices will be displayed when viewing the form."
-
 #: integrations/wpforms/class-field.php:181
 msgid "(empty)"
 msgstr "(empty)"
-
-#: integrations/wpforms/class-field.php:137
-msgid "Sign-up checkbox"
-msgstr "Sign-up checkbox"
-
-#: integrations/wpforms/class-field.php:126
-msgid "Set your sign-up label text and whether it should be pre-checked."
-msgstr "Set your sign-up label text and whether it should be pre-checked."
 
 #: integrations/gravity-forms/class-gravity-forms.php:96
 #: integrations/wpforms/class-field.php:98
@@ -111,6 +111,18 @@ msgstr "MailChimp list"
 msgid "Select the MailChimp list to subscribe to."
 msgstr "Select the MailChimp list to subscribe to."
 
+#: integrations/wpforms/class-field.php:126
+msgid "Set your sign-up label text and whether it should be pre-checked."
+msgstr "Set your sign-up label text and whether it should be pre-checked."
+
+#: integrations/wpforms/class-field.php:198
+msgid "Showing the first 20 choices.<br> All %d choices will be displayed when viewing the form."
+msgstr "Showing the first 20 choices.<br> All %d choices will be displayed when viewing the form."
+
+#: integrations/wpforms/class-field.php:137
+msgid "Sign-up checkbox"
+msgstr "Sign-up checkbox"
+
 #: integrations/wpforms/class-field.php:35
 msgid "Sign-up to our newsletter?"
 msgstr "Sign-up to our newsletter?"
@@ -119,7 +131,7 @@ msgstr "Sign-up to our newsletter?"
 msgid "Use this integration by adding the \"MailChimp\" field to <a href=\"%s\">your WPForms forms</a>."
 msgstr "Use this integration by adding the \"MailChimp\" field to <a href=\"%s\">your WPForms forms</a>."
 
-#: includes/admin/class-admin.php:424
+#: includes/admin/class-admin.php:426
 msgid "Looks like your server is blocked by MailChimp's firewall. Please contact MailChimp support and include the following reference number: %s"
 msgstr "Looks like your server is blocked by MailChimp's firewall. Please contact MailChimp support and include the following reference number: %s"
 
@@ -159,11 +171,11 @@ msgstr "Logging"
 msgid "Miscellaneous settings"
 msgstr "Miscellaneous settings"
 
-#: includes/forms/class-admin.php:92
+#: includes/forms/class-admin.php:95
 msgid "Value"
 msgstr "Value"
 
-#: includes/forms/class-admin.php:66
+#: includes/forms/class-admin.php:69
 msgid "Field type"
 msgstr "Field type"
 
@@ -207,15 +219,15 @@ msgstr "Done! MailChimp lists renewed."
 msgid "Fetching MailChimp lists"
 msgstr "Fetching MailChimp lists"
 
-#: includes/admin/class-admin.php:432
+#: includes/admin/class-admin.php:434
 msgid "MailChimp returned the following error:"
 msgstr "MailChimp returned the following error:"
 
-#: includes/admin/class-admin.php:427
+#: includes/admin/class-admin.php:429
 msgid "Here's some info on solving common connectivity issues."
 msgstr "Here's some info on solving common connectivity issues."
 
-#: includes/admin/class-admin.php:421
+#: includes/admin/class-admin.php:423
 msgid "Error connecting to MailChimp:"
 msgstr "Error connecting to MailChimp:"
 
@@ -261,19 +273,19 @@ msgstr "Updated"
 msgid "Data from a cookie."
 msgstr "Data from a cookie."
 
-#: includes/forms/class-admin.php:77
+#: includes/forms/class-admin.php:80
 msgid "List fields"
 msgstr "List fields"
 
-#: includes/forms/class-admin.php:73
+#: includes/forms/class-admin.php:76
 msgid "Interest categories"
 msgstr "Interest categories"
 
-#: includes/forms/class-admin.php:70
+#: includes/forms/class-admin.php:73
 msgid "Form fields"
 msgstr "Form fields"
 
-#: includes/forms/class-admin.php:62
+#: includes/forms/class-admin.php:65
 msgid "Choose a field to add to the form"
 msgstr "Choose a field to add to the form"
 
@@ -289,19 +301,19 @@ msgstr "Please ensure %s has the proper <a href=\"%s\">file permissions</a>."
 msgid "Log file is not writable."
 msgstr "Log file is not writable."
 
-#: includes/forms/class-admin.php:85
+#: includes/forms/class-admin.php:88
 msgid "Remove"
 msgstr "Remove"
 
-#: includes/forms/class-admin.php:84
+#: includes/forms/class-admin.php:87
 msgid "Preselect"
 msgstr "Preselect"
 
-#: includes/forms/class-admin.php:81
+#: includes/forms/class-admin.php:84
 msgid "Optional"
 msgstr "Optional"
 
-#: includes/admin/class-admin.php:501
+#: includes/admin/class-admin.php:503
 msgid "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
 msgstr "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
 
@@ -333,7 +345,7 @@ msgstr "When offering a list choice, this is the text that shows when no lists w
 msgid "No list selected"
 msgstr "No list selected"
 
-#: includes/forms/class-admin.php:429
+#: includes/forms/class-admin.php:444
 msgid "Select the form to show"
 msgstr "Select the form to show"
 
@@ -341,13 +353,17 @@ msgstr "Select the form to show"
 msgid "Right now, the plugin is configured to only log errors and warnings."
 msgstr "Right now, the plugin is configured to only log errors and warnings."
 
-#: includes/forms/class-admin.php:83
+#: includes/forms/class-admin.php:86
 msgid "Text to show when field has no value."
 msgstr "Text to show when field has no value."
 
-#: includes/forms/class-admin.php:93
+#: includes/forms/class-admin.php:96
 msgid "Text to prefill this field with."
 msgstr "Text to prefill this field with."
+
+#: includes/views/other-settings.php:99
+msgid "Debug Log"
+msgstr "Debug Log"
 
 #: includes/views/other-settings.php:133
 msgid "Empty Log"
@@ -361,15 +377,11 @@ msgstr "Nothing here. Which means there are no errors!"
 msgid "Filter.."
 msgstr "Filter.."
 
-#: includes/views/other-settings.php:99
-msgid "Debug Log"
-msgstr "Debug Log"
-
-#: includes/forms/class-admin.php:71
+#: includes/forms/class-admin.php:74
 msgid "This field is marked as required in MailChimp."
 msgstr "This field is marked as required in MailChimp."
 
-#: includes/admin/class-admin.php:471
+#: includes/admin/class-admin.php:473
 msgid "Log successfully emptied."
 msgstr "Log successfully emptied."
 
@@ -450,89 +462,93 @@ msgstr "Click on the name of an integration to edit all settings specific to tha
 msgid "The table below shows all available integrations."
 msgstr "The table below shows all available integrations."
 
-#: includes/forms/class-admin.php:107 includes/forms/views/edit-form.php:26
-msgid "Form"
-msgstr "Form"
-
-#: includes/forms/class-admin.php:94
-msgid "ZIP"
-msgstr "ZIP"
-
-#: includes/forms/class-admin.php:88
+#: includes/forms/class-admin.php:91
 msgid "State"
 msgstr "State"
 
-#: includes/forms/class-admin.php:87
+#: includes/forms/class-admin.php:97
+msgid "ZIP"
+msgstr "ZIP"
+
+#: includes/forms/class-admin.php:110 includes/forms/views/edit-form.php:26
+msgid "Form"
+msgstr "Form"
+
+#: includes/forms/class-admin.php:90
 msgid "Street Address"
 msgstr "Street Address"
 
-#: includes/forms/class-admin.php:86
+#: includes/forms/class-admin.php:89
 msgid "Radio buttons"
 msgstr "Radio buttons"
 
-#: includes/forms/class-admin.php:80
+#: includes/forms/class-admin.php:83
 msgid "No available fields. Did you select a MailChimp list in the form settings?"
 msgstr "No available fields. Did you select a MailChimp list in the form settings?"
-
-#: includes/forms/class-admin.php:79
-msgid "Max"
-msgstr "Max"
-
-#: includes/forms/class-admin.php:78
-msgid "Min"
-msgstr "Min"
-
-#: includes/forms/class-admin.php:74
-msgid "Is this field required?"
-msgstr "Is this field required?"
-
-#: includes/forms/class-admin.php:69
-msgid "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
-msgstr "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
-
-#: includes/forms/class-admin.php:68
-msgid "Form action"
-msgstr "Form action"
-
-#: includes/forms/class-admin.php:67
-msgid "Field label"
-msgstr "Field label"
-
-#: includes/forms/class-admin.php:65
-msgid "Dropdown"
-msgstr "Dropdown"
 
 #: integrations/ninja-forms-2/class-ninja-forms.php:67
 msgid "Default Value"
 msgstr "Default Value"
 
-#: includes/forms/class-admin.php:76
+#: includes/forms/class-admin.php:68
+msgid "Dropdown"
+msgstr "Dropdown"
+
+#: includes/forms/class-admin.php:81
+msgid "Min"
+msgstr "Min"
+
+#: includes/forms/class-admin.php:82
+msgid "Max"
+msgstr "Max"
+
+#: includes/forms/class-admin.php:71
+msgid "Form action"
+msgstr "Form action"
+
+#: includes/forms/class-admin.php:77
+msgid "Is this field required?"
+msgstr "Is this field required?"
+
+#: includes/forms/class-admin.php:72
+msgid "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
+msgstr "This field will allow your visitors to choose whether they would like to subscribe or unsubscribe"
+
+#: includes/forms/class-admin.php:70
+msgid "Field label"
+msgstr "Field label"
+
+#: includes/forms/class-admin.php:79
 msgid "This field will allow your visitors to choose a list to subscribe to."
 msgstr "This field will allow your visitors to choose a list to subscribe to."
 
-#: includes/forms/class-admin.php:64
+#: includes/forms/class-admin.php:67
 msgid "Country"
 msgstr "Country"
 
-#: includes/forms/class-admin.php:63
+#: includes/forms/class-admin.php:66
 msgid "Close"
 msgstr "Close"
 
-#: includes/forms/class-admin.php:61
+#: includes/forms/class-admin.php:64
 msgid "Choice type"
 msgstr "Choice type"
 
-#: includes/forms/class-admin.php:60
+#: includes/forms/class-admin.php:63
 msgid "Choices"
 msgstr "Choices"
 
-#: includes/forms/class-admin.php:58
+#: includes/forms/class-admin.php:61
 msgid "City"
 msgstr "City"
 
 #. Description of the plugin/theme
 msgid "MailChimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site."
 msgstr "MailChimp for WordPress by ibericode. Adds various highly effective sign-up methods to your site."
+
+#: includes/views/parts/lists-overview.php:26
+msgid "Subscribers"
+msgstr "Subscribers"
 
 #: integrations/woocommerce/class-woocommerce.php:124
 msgid "Order #%d"
@@ -549,10 +565,6 @@ msgstr "To integrate with Contact Form 7, configure the settings below and then 
 #: includes/views/parts/lists-overview.php:48
 msgid "Edit this list in MailChimp"
 msgstr "Edit this list in MailChimp"
-
-#: includes/views/parts/lists-overview.php:26
-msgid "Subscribers"
-msgstr "Subscribers"
 
 #: includes/views/parts/lists-overview.php:25
 msgid "ID"
@@ -596,6 +608,14 @@ msgstr "Description"
 msgid "Name"
 msgstr "Name"
 
+#: includes/integrations/class-admin.php:79
+#: includes/integrations/class-admin.php:80
+#: includes/integrations/views/integration-settings.php:10
+#: includes/integrations/views/integrations.php:59
+#: includes/integrations/views/integrations.php:67
+msgid "Integrations"
+msgstr "Integrations"
+
 #: includes/integrations/views/integration-settings.php:28
 msgid "Please ensure you <a href=\"%s\">configure the plugin to send all required fields</a> or <a href=\"%s\">log into your MailChimp account</a> and make sure only the email & name fields are marked as required fields for the selected list(s)."
 msgstr "Please ensure you <a href=\"%s\">configure the plugin to send all required fields</a> or <a href=\"%s\">log into your MailChimp account</a> and make sure only the email & name fields are marked as required fields for the selected list(s)."
@@ -623,14 +643,6 @@ msgstr "Enabled?"
 #: includes/integrations/views/integration-settings.php:20
 msgid "%s integration"
 msgstr "%s integration"
-
-#: includes/integrations/class-admin.php:79
-#: includes/integrations/class-admin.php:80
-#: includes/integrations/views/integration-settings.php:10
-#: includes/integrations/views/integrations.php:59
-#: includes/integrations/views/integrations.php:67
-msgid "Integrations"
-msgstr "Integrations"
 
 #: includes/forms/views/tabs/form-settings.php:94
 msgid "Form behaviour"
@@ -660,6 +672,10 @@ msgstr "Use double opt-in?"
 msgid "MailChimp specific settings"
 msgstr "MailChimp specific settings"
 
+#: includes/forms/views/tabs/form-appearance.php:6
+msgid "Basic"
+msgstr "Basic"
+
 #: includes/forms/views/tabs/form-messages.php:6
 msgid "Form Messages"
 msgstr "Form Messages"
@@ -687,10 +703,6 @@ msgstr "Form Appearance"
 #: includes/forms/views/tabs/form-appearance.php:7
 msgid "Form Themes"
 msgstr "Form Themes"
-
-#: includes/forms/views/tabs/form-appearance.php:6
-msgid "Basic"
-msgstr "Basic"
 
 #: includes/forms/views/tabs/form-appearance.php:5
 msgid "Inherit from %s theme"
@@ -828,15 +840,15 @@ msgstr "Data from the URL or a submitted form."
 msgid "Form preview"
 msgstr "Form preview"
 
-#: includes/forms/class-admin.php:367
+#: includes/forms/class-admin.php:381
 msgid "Go back"
 msgstr "Go back"
 
-#: includes/forms/class-admin.php:365
+#: includes/forms/class-admin.php:379
 msgid "Form not found."
 msgstr "Form not found."
 
-#: includes/forms/class-admin.php:147 includes/forms/class-admin.php:271
+#: includes/forms/class-admin.php:150 includes/forms/class-admin.php:274
 msgid "<strong>Success!</strong> Form successfully saved."
 msgstr "<strong>Success!</strong> Form successfully saved."
 
@@ -868,13 +880,13 @@ msgstr "Documentation"
 msgid "Please select at least one list."
 msgstr "Please select at least one list."
 
-#: includes/views/general-settings.php:55
-msgid "The API key for connecting with your MailChimp account."
-msgstr "The API key for connecting with your MailChimp account."
-
 #: includes/views/general-settings.php:38
 msgid "Status"
 msgstr "Status"
+
+#: includes/views/general-settings.php:55
+msgid "The API key for connecting with your MailChimp account."
+msgstr "The API key for connecting with your MailChimp account."
 
 #: includes/api/class-api.php:84
 msgid "Read more about common connectivity issues."
@@ -920,21 +932,92 @@ msgstr "MailChimp for WordPress is in need of translations. Is the plugin not tr
 msgid "Add to form"
 msgstr "Add to form"
 
-#: includes/forms/class-admin.php:91
+#: includes/forms/class-widget.php:80
+msgid "Title:"
+msgstr "Title:"
+
+#: includes/admin/class-admin-texts.php:62 includes/forms/views/edit-form.php:6
+msgid "Settings"
+msgstr "Settings"
+
+#: includes/admin/class-admin.php:343
+#: integrations/gravity-forms/class-field.php:39
+#: integrations/ninja-forms/class-action.php:20
+#: integrations/ninja-forms-2/class-ninja-forms.php:32
+msgid "MailChimp"
+msgstr "MailChimp"
+
+#: includes/forms/views/tabs/form-settings.php:45
+#: includes/forms/views/tabs/form-settings.php:60
+#: includes/forms/views/tabs/form-settings.php:76
+#: includes/forms/views/tabs/form-settings.php:112
+#: includes/integrations/views/integration-settings.php:65
+#: includes/integrations/views/integration-settings.php:79
+#: includes/integrations/views/integration-settings.php:138
+#: includes/integrations/views/integration-settings.php:154
+#: includes/integrations/views/integration-settings.php:170
+#: includes/integrations/views/integration-settings.php:189
+#: includes/integrations/views/integration-settings.php:208
+#: includes/views/other-settings.php:25
+#: integrations/contact-form-7/class-contact-form-7.php:75
+#: integrations/gravity-forms/class-gravity-forms.php:111
+#: integrations/wpforms/class-field.php:269
+msgid "No"
+msgstr "No"
+
+#: includes/forms/views/tabs/form-settings.php:41
+#: includes/forms/views/tabs/form-settings.php:56
+#: includes/forms/views/tabs/form-settings.php:72
+#: includes/forms/views/tabs/form-settings.php:108
+#: includes/integrations/views/integration-settings.php:64
+#: includes/integrations/views/integration-settings.php:78
+#: includes/integrations/views/integration-settings.php:137
+#: includes/integrations/views/integration-settings.php:153
+#: includes/integrations/views/integration-settings.php:166
+#: includes/integrations/views/integration-settings.php:185
+#: includes/integrations/views/integration-settings.php:204
+#: includes/views/other-settings.php:21
+#: integrations/contact-form-7/class-contact-form-7.php:75
+#: integrations/gravity-forms/class-gravity-forms.php:110
+#: integrations/wpforms/class-field.php:269
+msgid "Yes"
+msgstr "Yes"
+
+#: config/default-form-content.php:3
+msgid "Email address"
+msgstr "Email address"
+
+#: includes/views/general-settings.php:51
+msgid "API Key"
+msgstr "API Key"
+
+#: includes/forms/views/tabs/form-settings.php:1
+msgid "Form Settings"
+msgstr "Form Settings"
+
+#: includes/admin/class-ads.php:132
+msgid "Email Address"
+msgstr "Email Address"
+
+#: includes/forms/class-widget.php:26
+msgid "Newsletter"
+msgstr "Newsletter"
+
+#: includes/forms/class-admin.php:93
+msgid "Submit button"
+msgstr "Submit button"
+
+#: includes/forms/class-admin.php:94
 msgid "Wrap in paragraph tags?"
 msgstr "Wrap in paragraph tags?"
 
-#: includes/forms/class-admin.php:82
+#: includes/forms/class-admin.php:85
 msgid "Placeholder"
 msgstr "Placeholder"
 
-#: includes/forms/class-admin.php:75
+#: includes/forms/class-admin.php:78
 msgid "List choice"
 msgstr "List choice"
-
-#: includes/forms/class-admin.php:90
-msgid "Submit button"
-msgstr "Submit button"
 
 #: includes/forms/class-form-tags.php:71
 #: includes/integrations/class-integration-tags.php:45
@@ -1153,10 +1236,6 @@ msgstr "Get your API key here."
 msgid "Your MailChimp API key"
 msgstr "Your MailChimp API key"
 
-#: includes/views/general-settings.php:51
-msgid "API Key"
-msgstr "API Key"
-
 #: includes/views/general-settings.php:44
 msgid "NOT CONNECTED"
 msgstr "NOT CONNECTED"
@@ -1168,46 +1247,6 @@ msgstr "CONNECTED"
 #. Plugin Name of the plugin/theme
 msgid "MailChimp for WordPress"
 msgstr "MailChimp for WordPress"
-
-#: includes/admin/class-ads.php:132
-msgid "Email Address"
-msgstr "Email Address"
-
-#: includes/forms/views/tabs/form-settings.php:45
-#: includes/forms/views/tabs/form-settings.php:60
-#: includes/forms/views/tabs/form-settings.php:76
-#: includes/forms/views/tabs/form-settings.php:112
-#: includes/integrations/views/integration-settings.php:65
-#: includes/integrations/views/integration-settings.php:79
-#: includes/integrations/views/integration-settings.php:138
-#: includes/integrations/views/integration-settings.php:154
-#: includes/integrations/views/integration-settings.php:170
-#: includes/integrations/views/integration-settings.php:189
-#: includes/integrations/views/integration-settings.php:208
-#: includes/views/other-settings.php:25
-#: integrations/contact-form-7/class-contact-form-7.php:75
-#: integrations/gravity-forms/class-gravity-forms.php:111
-#: integrations/wpforms/class-field.php:269
-msgid "No"
-msgstr "No"
-
-#: includes/forms/views/tabs/form-settings.php:41
-#: includes/forms/views/tabs/form-settings.php:56
-#: includes/forms/views/tabs/form-settings.php:72
-#: includes/forms/views/tabs/form-settings.php:108
-#: includes/integrations/views/integration-settings.php:64
-#: includes/integrations/views/integration-settings.php:78
-#: includes/integrations/views/integration-settings.php:137
-#: includes/integrations/views/integration-settings.php:153
-#: includes/integrations/views/integration-settings.php:166
-#: includes/integrations/views/integration-settings.php:185
-#: includes/integrations/views/integration-settings.php:204
-#: includes/views/other-settings.php:21
-#: integrations/contact-form-7/class-contact-form-7.php:75
-#: integrations/gravity-forms/class-gravity-forms.php:110
-#: integrations/wpforms/class-field.php:269
-msgid "Yes"
-msgstr "Yes"
 
 #: config/default-form-messages.php:17
 msgid "Given email address is not subscribed."
@@ -1253,57 +1292,30 @@ msgstr "Your email address"
 msgid "You can edit your sign-up form in the <a href=\"%s\">MailChimp for WordPress form settings</a>."
 msgstr "You can edit your sign-up form in the <a href=\"%s\">MailChimp for WordPress form settings</a>."
 
-#: includes/forms/class-widget.php:80
-msgid "Title:"
-msgstr "Title:"
-
-#: includes/forms/class-widget.php:26
-msgid "Newsletter"
-msgstr "Newsletter"
-
 #: includes/forms/class-widget.php:32
 msgid "Displays your MailChimp for WordPress sign-up form"
 msgstr "Displays your MailChimp for WordPress sign-up form"
 
-#: includes/forms/class-admin.php:425 includes/forms/class-widget.php:30
+#: includes/forms/class-admin.php:440 includes/forms/class-widget.php:30
 msgid "MailChimp Sign-Up Form"
 msgstr "MailChimp Sign-Up Form"
 
-#: config/default-form-content.php:3
-msgid "Email address"
-msgstr "Email address"
-
-#: includes/admin/class-ads.php:143 includes/forms/class-admin.php:89
+#: includes/admin/class-ads.php:143 includes/forms/class-admin.php:92
 msgid "Subscribe"
 msgstr "Subscribe"
 
-#: includes/forms/class-admin.php:72
+#: includes/forms/class-admin.php:75
 msgid "Initial value"
 msgstr "Initial value"
 
-#: includes/forms/class-admin.php:106 includes/forms/views/edit-form.php:24
+#: includes/forms/class-admin.php:109 includes/forms/views/edit-form.php:24
 msgid "Forms"
 msgstr "Forms"
 
-#: includes/forms/views/tabs/form-settings.php:1
-msgid "Form Settings"
-msgstr "Form Settings"
-
-#: includes/forms/class-admin.php:59
+#: includes/forms/class-admin.php:62
 msgid "Checkboxes"
 msgstr "Checkboxes"
-
-#: includes/admin/class-admin.php:343
-#: integrations/gravity-forms/class-field.php:39
-#: integrations/ninja-forms/class-action.php:20
-#: integrations/ninja-forms-2/class-ninja-forms.php:32
-msgid "MailChimp"
-msgstr "MailChimp"
 
 #: includes/admin/class-admin.php:342 includes/views/general-settings.php:31
 msgid "MailChimp API Settings"
 msgstr "MailChimp API Settings"
-
-#: includes/admin/class-admin-texts.php:62 includes/forms/views/edit-form.php:6
-msgid "Settings"
-msgstr "Settings"

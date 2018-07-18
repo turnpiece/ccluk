@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-22 19:04:05+0000\n"
+"PO-Revision-Date: 2018-07-04 18:18:06+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -155,7 +155,7 @@ msgstr "[%1$s] Bekreft handling: %2$s"
 
 #: wp-includes/user.php:3214
 msgid "Erase Personal Data"
-msgstr "Slette personlige data"
+msgstr "Slett personopplysninger"
 
 #: wp-includes/comment-template.php:2208
 msgid "Save my name, email, and website in this browser for the next time I comment."
@@ -219,7 +219,7 @@ msgstr "Personvernerklæring"
 
 #: wp-includes/script-loader.php:670
 msgid "An error occurred while attempting to export personal data."
-msgstr "Det oppstod en feil under forsøk på å eksportere persondata."
+msgstr "Det oppstod en feil under forsøk på å eksportere personopplysninger."
 
 #: wp-includes/script-loader.php:669
 msgid "No personal data export file was generated."
@@ -287,7 +287,7 @@ msgstr "Handling har blitt bekreftet."
 
 #: wp-includes/user.php:3434
 msgid "The confirmation email has expired."
-msgstr "Bekreftelseseposten er utgått."
+msgstr "E-postmeldingen med bekreftelsen er utløpt."
 
 #: wp-includes/user.php:3416
 msgid "Invalid action"
@@ -5613,7 +5613,7 @@ msgid ""
 msgstr ""
 "Hei ###USERNAME###,\n"
 "\n"
-"Denne meldingen bekrefter at e-postadressen din har blitt endret på ###SITENAME### til ###NEW_EMAIL###.\n"
+"Denne meldingen bekrefter at e-postadressen din på ###SITENAME### har blitt endret til ###NEW_EMAIL###.\n"
 "\n"
 "Hvis du ikke endret e-postadressen, vennligst kontakt nettstedsadministratoren på\n"
 "###ADMIN_EMAIL###\n"
@@ -8260,7 +8260,7 @@ msgstr ""
 "\n"
 "%s\n"
 "\n"
-"Etter at du aktiverer, mottar du *en til e-post* med din innlogging."
+"Etter at du aktiverer, mottar du *en ny e-postmelding* med din innlogging."
 
 #. translators: New user notification email. 1: User login, 2: User IP address,
 #. 3: Settings screen URL
@@ -9549,7 +9549,7 @@ msgstr "Beklager, nye registreringer er ikke tillatt nå."
 
 #: wp-signup.php:242
 msgid "We send your registration email to this address. (Double-check your email address before continuing.)"
-msgstr "Vi sender en e-post med din registrering til denne adressen. (Vennligst dobbelsjekk e-postadressen før du fortsetter.)"
+msgstr "Vi sender en e-post med din registrering til denne adressen. (Vennligst dobbeltsjekk e-postadressen før du fortsetter)."
 
 #: wp-includes/post.php:1445
 msgctxt "post type singular name"

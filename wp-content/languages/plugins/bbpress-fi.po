@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-02-06 14:33:09+0000\n"
+"PO-Revision-Date: 2018-06-26 20:31:34+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -43,7 +43,7 @@ msgstr "Ylläpitäjä"
 
 #. Author of the plugin/theme
 msgid "The bbPress Community"
-msgstr "bbPress yhteisö"
+msgstr "Yhteisö bbPress:ille"
 
 #. Plugin Name of the plugin/theme
 msgid "bbPress"
@@ -58,7 +58,7 @@ msgstr "http://bbpress.org"
 
 #. Description of the plugin/theme
 msgid "bbPress is forum software with a twist from the creators of WordPress."
-msgstr "bbPress on keskustelupalstasovellus WordPressin kehittäjiltä."
+msgstr "bbPress on foorumisovellus WordPressin kehittäjiltä."
 
 #: includes/admin/tools.php:1148
 msgid "No reply positions to recalculate!"
@@ -466,10 +466,6 @@ msgstr "Epäonnistui!"
 msgid "Complete!"
 msgstr "Valmis!"
 
-#: includes/users/functions.php:1223
-msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that forum!"
-msgstr "<strong>VIRHE</strong>: Keskustelualueen tilauksen peruminen ei onnistunut."
-
 #: includes/users/functions.php:1170
 msgid "<strong>ERROR</strong>: No forum was found! Which forum are you subscribing/unsubscribing to?"
 msgstr "<strong>VIRHE</strong>: Keskustelualuetta ei löytynyt! Mistä keskustelualueesta oli kysymys?"
@@ -631,18 +627,6 @@ msgstr "Valmis! %s käyttäjää päivitetty."
 #: includes/admin/tools.php:743
 msgid "Removing trashed forums from user subscriptions&hellip; %s"
 msgstr "Poistetaan roskakorissa olevia foorumeita käyttäjien suosikeista&hellip; %s"
-
-#: templates/default/bbpress/loop-search-topic.php:26
-msgid "Topic: "
-msgstr "Aihe:"
-
-#: templates/default/bbpress/loop-search-topic.php:33
-msgid "in group forum "
-msgstr "ryhmäfoorumissa"
-
-#: templates/default/bbpress/loop-search-topic.php:37
-msgid "in forum "
-msgstr "foorumissa"
 
 #: templates/default/bbpress/form-reply-move.php:33
 msgid "If you choose an existing topic, replies will be ordered by the time and date they were created."
@@ -913,10 +897,6 @@ msgstr "Kopioi suosikit uuteen aiheeseen"
 msgid "Topic Status:"
 msgstr "Aiheen tila:"
 
-#: templates/default/bbpress/loop-search-forum.php:26
-msgid "Forum: "
-msgstr "Foorumi:"
-
 #: templates/default/bbpress/user-favorites.php:28
 msgid "This user has no favorite topics."
 msgstr "Tällä käyttäjällä ei ole suosikkiaiheita."
@@ -1018,10 +998,6 @@ msgstr "Voit suodattaa aihelistaa aiheiden tilan perusteella käyttämällä yl�
 msgid "You can refine the list to show only topics from a specific month by using the dropdown menus above the topics list. Click the Filter button after making your selection. You also can refine the list by clicking on the topic creator in the topics list."
 msgstr "Voit suodattaa listausta näyttämään aiheet tietyn kuukauden perusteella yläreunassa sijaitsevien alasvetovalikoiden avulla. Klikkaa suodata-nappia tehtyäsi valinnat. Voit myös suodattaa aiheita klikkaamalla aiheen kirjoittaja -linkkiä."
 
-#: includes/admin/topics.php:157
-msgid "<strong>Edit</strong> takes you to the editing screen for that topic. You can also reach that screen by clicking on the topic title."
-msgstr "<strong>Muokkaa</strong> avaa muokkausnäkymän kyseiselle aiheelle. Pääset samaan näkymään klikkaamalla aiheen otsikkoa. "
-
 #: includes/admin/topics.php:158
 msgid "<strong>Trash</strong> removes your topic from this list and places it in the trash, from which you can permanently delete it."
 msgstr "<strong>Poista</strong> poistaa aiheesi tältä listalta ja siirtää sen roskakoriin, josta voit poistaa sen lopullisesti."
@@ -1037,10 +1013,6 @@ msgstr "<strong>Sulje</strong> merkitsee valitun aiheen &#8217;suljetuksi&#8217;
 #: includes/admin/topics.php:162
 msgid "<strong>Stick</strong> will keep the selected topic &#8217;pinned&#8217; to the top the parent forum topic list."
 msgstr "<strong>Kiinnitä</strong> pitää valitun aiheen kiinnitettynä ylätason foorumiaihelistan alussa."
-
-#: includes/admin/topics.php:163
-msgid "<strong>Stick <em>(to front)</em></strong> will keep the selected topic &#8217;pinned&#8217; to the top of ALL forums and be visable in any forums topics list."
-msgstr "<strong>Kiinnitä <em>(alkuun)</em></strong> pitää valitun aiheen kiinnitettynä KAIKKIEN foorumien alkuun ja näyttää sen kaikissa foorumin aihelistoissa. "
 
 #: includes/admin/topics.php:222
 msgid "<strong>Forum</strong> dropdown determines the parent forum that the topic belongs to. Select the forum or category from the dropdown, or leave the default (No Forum) to post the topic without an assigned forum."
@@ -1208,10 +1180,6 @@ msgstr "Akismet on varmistanut, ettei tämä ole roskapostia"
 msgid "No recorded history. Akismet has not checked this post."
 msgstr "Ei tallennettua historiaa. Akismet ei ole tarkastanut tätä viestiä."
 
-#: includes/common/template.php:2555
-msgid "Forum Edit: %s"
-msgstr "Muokkaa keskustelupalstaa: %s"
-
 #: includes/common/template.php:2570
 msgid "Topic Tag Edit: %s"
 msgstr "Muokkaa aiheen tageja: %s"
@@ -1220,41 +1188,9 @@ msgstr "Muokkaa aiheen tageja: %s"
 msgid "<strong>ERROR</strong>: Topic ID must be a number."
 msgstr "<strong>VIRHE</strong>: Aiheen ID tulee olla numero."
 
-#: includes/replies/functions.php:195 includes/topics/functions.php:200
-msgid "<strong>ERROR</strong>: Forum ID must be a number."
-msgstr "<strong>VIRHE</strong>: Keskustelupalstan ID:n tulee olla numero."
-
-#: includes/replies/functions.php:209 includes/topics/functions.php:214
-msgid "<strong>ERROR</strong>: Forum ID cannot be a negative number."
-msgstr "<strong>VIRHE</strong>: Keskustelupalstan ID ei voi olla negatiivinen numero."
-
-#: includes/replies/functions.php:213 includes/topics/functions.php:218
-msgid "<strong>ERROR</strong>: Forum does not exist."
-msgstr "<strong>VIRHE</strong>: Keskustelupalstaa ei ole olemassa."
-
-#: includes/replies/functions.php:234 includes/replies/functions.php:575
-msgid "<strong>ERROR</strong>: This forum has been closed to new replies."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on suljettu uusilta viesteiltä."
-
-#: includes/replies/functions.php:227 includes/replies/functions.php:568
-msgid "<strong>ERROR</strong>: This forum is a category. No replies can be created in this forum."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on merkitty kategoriaksi. Siihen ei voi luoda viestejä."
-
 #: templates/default/bbpress/feedback-no-search.php:13
 msgid "Oh bother! No search results were found here!"
 msgstr "Voi sentään! Haku ei löytänyt täältä mitään!"
-
-#: includes/common/widgets.php:384
-msgid "The bbPress forum search form."
-msgstr "bbPress keskustelupalstan hakulomake."
-
-#: includes/common/widgets.php:948
-msgid "Some statistics from your forum."
-msgstr "Joitain tilastoja keskustelupalstastasi."
-
-#: includes/replies/functions.php:1223
-msgid "<strong>ERROR</strong>: Reply ID to move not found!"
-msgstr "<strong>VIRHE</strong>: Siirrettävän vastauksen ID:tä ei löytynyt."
 
 #: includes/replies/template.php:2170
 msgid "Move this reply"
@@ -1293,10 +1229,6 @@ msgstr "Etsi:"
 #: templates/default/bbpress/loop-search-forum.php:16
 msgid "Last updated %s"
 msgstr "Päivitetty %s"
-
-#: templates/default/bbpress/loop-search-reply.php:24
-msgid "In reply to: "
-msgstr "Vastaus viestiin:"
 
 #: templates/default/bbpress-functions.php:248
 #: templates/default/bbpress-functions.php:257
@@ -1352,11 +1284,6 @@ msgstr "Vastauksia: %s"
 #: templates/default/bbpress/form-user-edit.php:133
 msgid "Your password should be at least ten characters long. Use upper and lower case letters, numbers, and symbols to make it even stronger."
 msgstr "Salasanasi pitäisi olla ainakin kymmenen merkkiä pitkä. Vahva salasana sisältää pieniä ja isoja kirjaimia, numeroita ja erikoismerkkejä."
-
-#: includes/admin/users.php:87 includes/admin/users.php:218
-#: templates/default/bbpress/form-user-roles.php:20
-msgid "Forum Role"
-msgstr "Foorumin säännöt."
 
 #: includes/admin/users.php:144
 msgid "Change"
@@ -1537,10 +1464,6 @@ msgstr "Tällä alueella on %1$s ja %2$s, ja siihen kirjoitti viimeksi %3$s %4$s
 msgid "This reply was modified %1$s by %2$s. Reason: %3$s"
 msgstr "Tätä vastausta muokkasi %1$s %2$s. Syy: %3$s"
 
-#: includes/replies/template.php:806
-msgid "This reply was modified %1$s by %2$s."
-msgstr "tätä vastausta muokkasi %1$s %2$s."
-
 #: includes/topics/template.php:991
 msgid "This topic was modified %1$s by %2$s. Reason: %3$s"
 msgstr "Tätä aihetta muokkasi %1$s %2$s. Syy: %3$s"
@@ -1565,11 +1488,6 @@ msgstr "Tilatut aiheet"
 #: includes/admin/tools.php:417
 msgid "Group Forums"
 msgstr "Ryhmä foorumit"
-
-#: includes/extend/buddypress/groups.php:279
-#: includes/extend/buddypress/groups.php:480
-msgid "Create a discussion forum to allow members of this group to communicate in a structured, bulletin-board style fashion."
-msgstr "Luo keskustelualue salliaksesi tämän ryhmän jäsenten keskustella jäsennellyllä, ilmoitustaulu tyyppisesti."
 
 #: includes/extend/buddypress/groups.php:283
 #: includes/extend/buddypress/groups.php:483
@@ -1678,6 +1596,10 @@ msgstr "<strong>Title</strong> - Syötä aiheelle otsikko. Kun olet syöttänyt 
 msgid "<strong>Topic Editor</strong> - Enter the text for your topic. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your topic text. You can insert media files by clicking the icons above the topic editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular topic editor."
 msgstr "<strong>Aiheen editori</strong> - Lisää teksti aiheellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen aihe-editoriin."
 
+#: includes/admin/topics.php:210
+msgid "<strong>Publish</strong> - You can set the terms of publishing your topic in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a topic or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a topic to be published in the future or backdate a topic."
+msgstr "<strong>Julkaise</strong> - Voit määrittää julkaisemisen ehdot aiheellesi Julkaisulaatikossa. Tilalle, Näkyvyydelle ja Julkaisemiselle (välittömästi), klikkaa Muokkaa linkkiä näyttääksesi enemmän asetuksia. Näkyvyys sisältää aiheen salasana-suojauksen tai voit määrittää sen pysymään päällimäisenä blogissasi aina (liima). Julkaise (välittömästi) antaa sinun määrittää ajan tulevaisuudesta tai menneisyydestä, jolloin voit ajoittaa aiheen julkaisun tulevaisuudessa tai vanhaksi merkityn aiheen."
+
 #: includes/admin/topics.php:213
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your topic without inserting it. This is usually useful only if your theme makes use of the featured image as a topic thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan aiheeseen ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi aiheen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -1689,10 +1611,6 @@ msgstr "Valitse ominaisuudet, jotka aiheella pitäisi olla:"
 #: includes/admin/topics.php:223
 msgid "<strong>Topic Type</strong> dropdown indicates the sticky status of the topic. Selecting the super sticky option would stick the topic to the front of your forums, i.e. the topic index, sticky option would stick the topic to its respective forum. Selecting normal would not stick the topic anywhere."
 msgstr "<strong>Aiheen tyyppi</strong> pudotusvalikko näyttää onko aiheella liimat. Valitsemalla superliima valinnan aihe liimataan keskustelualueelle, esim. aihehakemistoon, liima valinta laittaa aiheen omalle keskustelualueelleen. Valitsemalla normaalin aihetta ei liimata mihinkään."
-
-#: includes/admin/topics.php:210
-msgid "<strong>Publish</strong> - You can set the terms of publishing your topic in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a topic or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a topic to be published in the future or backdate a topic."
-msgstr "<strong>Julkaise</strong> - Voit määrittää julkaisemisen ehdot aiheellesi Julkaisulaatikossa. Tilalle, Näkyvyydelle ja Julkaisemiselle (välittömästi), klikkaa Muokkaa linkkiä näyttääksesi enemmän asetuksia. Näkyvyys sisältää aiheen salasana-suojauksen tai voit määrittää sen pysymään päällimäisenä blogissasi aina (liima). Julkaise (välittömästi) antaa sinun määrittää ajan tulevaisuudesta tai menneisyydestä, jolloin voit ajoittaa aiheen julkaisun tulevaisuudessa tai vanhaksi merkityn aiheen."
 
 #: includes/core/update.php:186
 msgid "General"
@@ -1725,10 +1643,6 @@ msgstr "(bbPress) Kirjautumis Vehje"
 #: includes/common/widgets.php:243
 msgid "A list of registered optional topic views."
 msgstr "Lista rekisteröidyistä valinnaisista aihe näkymistä."
-
-#: includes/common/widgets.php:246
-msgid "(bbPress) Topic Views List"
-msgstr "(bbPress) Lista aiheen näkymistä."
 
 #: includes/forums/template.php:1238 includes/forums/template.php:1976
 msgid "%s topic"
@@ -1878,10 +1792,6 @@ msgstr "Viemällä hiiren aihelistan rivin päälle näet toimintolinkit joiden 
 msgid "Topic Attributes"
 msgstr "Aiheen attribuutit"
 
-#: includes/admin/topics.php:485
-msgid "The topic was not found!"
-msgstr "Aihetta ei löytynyt"
-
 #: includes/admin/topics.php:575
 msgid "There was a problem opening the topic \"%1$s\"."
 msgstr "Aiheen \"%1$s\" avaaminen ei onnistunut."
@@ -1954,10 +1864,6 @@ msgstr "Aihe päivitetty. <a href=\"%s\">Näytä ohje</a>"
 #: includes/admin/topics.php:933
 msgid "Topic restored to revision from %s"
 msgstr "Aihe palautettiin revisioon hetkeltä %s"
-
-#: includes/admin/topics.php:937
-msgid "Topic created. <a href=\"%s\">View topic</a>"
-msgstr "Aihe luotu. <a href=\"%s\">Näytä aihe</a> "
 
 #: includes/admin/topics.php:943
 msgid "Topic submitted. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
@@ -2121,11 +2027,6 @@ msgstr "Näytä käyttäjän %s profiili"
 #: templates/default/bbpress/form-topic.php:168
 msgid "Notify me of follow-up replies via email"
 msgstr "Ilmoita vastauksista sähköpostilla"
-
-#: templates/default/bbpress/form-reply.php:93
-#: templates/default/bbpress/form-topic.php:164
-msgid "Notify the author of follow-up replies via email"
-msgstr "Ilmoita julkaisijalle uusista viesteistä sähköpostitse."
 
 #: templates/default/bbpress/form-topic.php:133
 msgid "Topic Type:"
@@ -2482,14 +2383,6 @@ msgstr "<strong>VIRHE</strong>: Muokkauspyynnön kohteena olevaa vastausta ei l�
 msgid "<strong>ERROR</strong>: You do not have permission to edit that reply."
 msgstr "<strong>VIRHE</strong>: Sinulla ei ole oikeuksia muokata tätä vastausta."
 
-#: includes/replies/functions.php:240 includes/replies/functions.php:581
-msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new replies in it."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on yksityinen. Sinulla ei ole palstaan luku- tai kirjoitusoikeuksia."
-
-#: includes/replies/functions.php:246 includes/replies/functions.php:587
-msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new replies in it."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on piilotettu. Sinulla ei ole palstaan luku- tai kirjoitusoikeuksia."
-
 #: includes/replies/functions.php:1530
 msgid "<strong>ERROR:</strong> You do not have the permission to do that!"
 msgstr "<strong>VIRHE:</strong> Sinulla ei ole oikeuksia tehdä tätä!"
@@ -2571,10 +2464,6 @@ msgstr "<strong>VIRHE</strong>: Ongelma keskustelun suosikiksi lisäämisen kans
 msgid "<strong>ERROR</strong>: No topic was found! Which topic are you subscribing/unsubscribing to?"
 msgstr "<strong>VIRHE</strong>: Keskustelua ei löytynyt! Minkä keskustelun pyrit tilaamaan tai poistamaan tilatuista?"
 
-#: includes/users/functions.php:1329
-msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that topic!"
-msgstr "<strong>VIRHE</strong>:  Aiheen seuraamisen keskeytys epäonnistui."
-
 #: includes/users/functions.php:1331
 msgid "<strong>ERROR</strong>: There was a problem subscribing to that topic!"
 msgstr "<strong>VIRHE</strong>: Ongelma keskustelun tilaamisen kanssa!"
@@ -2594,18 +2483,6 @@ msgstr "<strong>VIRHE</strong>: Aiheesi ei voi olla tyhjä."
 #: includes/topics/functions.php:232
 msgid "<strong>ERROR</strong>: This forum is a category. No topics can be created in this forum."
 msgstr "<strong>ERROR</strong>: Tämä foorumi on ryhmä. Tähän foorumiin ei voi perustaa aihealueita."
-
-#: includes/topics/functions.php:239 includes/topics/functions.php:557
-msgid "<strong>ERROR</strong>: This forum has been closed to new topics."
-msgstr "<strong>VIRHE</strong>: Tälle keskustelupalstalle ei voi luoda uusia aiheita."
-
-#: includes/topics/functions.php:245 includes/topics/functions.php:563
-msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new topics in it."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on yksityinen etkä kykene lukemaan tai aloittamaan uusia keskusteluja täällä."
-
-#: includes/topics/functions.php:251 includes/topics/functions.php:569
-msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new topics in it."
-msgstr "<strong>VIRHE</strong>: Tämä keskustelupalsta on piilotettu etkä kykene lukemaan tai aloittamaan uusia keskusteluja täällä."
 
 #: includes/topics/functions.php:265
 msgid "<strong>ERROR</strong>: Duplicate topic detected; it looks as though you&#8217;ve already said that!"
@@ -2667,10 +2544,6 @@ msgstr "<strong>VIRHE</strong>: Sinun täytyy valita oikea jakamisvalinta."
 #: includes/replies/functions.php:1275 includes/topics/functions.php:1483
 msgid "<strong>ERROR</strong>: Destination topic ID not found!"
 msgstr "<strong>VIRHE</strong>: Kohde aiheen ID:tä ei löytynyt!"
-
-#: includes/topics/functions.php:1492
-msgid "<strong>ERROR</strong>: The topic you want to split to was not found!"
-msgstr "<strong>VIRHE</strong>: Keskustelua johon halusit jakautua ei löytynyt."
 
 #: includes/replies/functions.php:1290 includes/topics/functions.php:1496
 msgid "<strong>ERROR</strong>: You do not have the permissions to edit the destination topic!"
@@ -2855,6 +2728,133 @@ msgstr "Käyttäjän %s aloittamat aiheet"
 #: templates/default/bbpress/user-details.php:41
 msgid "%s's Replies Created"
 msgstr "Käyttäjän %s vastaukset"
+
+#: includes/users/functions.php:1223
+msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that forum!"
+msgstr "<strong>VIRHE</strong>: Keskustelualueen tilauksen peruminen ei onnistunut!"
+
+#: templates/default/bbpress/loop-search-topic.php:26
+msgid "Topic: "
+msgstr "Aihe: "
+
+#: templates/default/bbpress/loop-search-topic.php:33
+msgid "in group forum "
+msgstr "ryhmäfoorumissa "
+
+#: templates/default/bbpress/loop-search-topic.php:37
+msgid "in forum "
+msgstr "foorumissa "
+
+#: templates/default/bbpress/loop-search-forum.php:26
+msgid "Forum: "
+msgstr "Foorumi: "
+
+#: includes/admin/topics.php:157
+msgid "<strong>Edit</strong> takes you to the editing screen for that topic. You can also reach that screen by clicking on the topic title."
+msgstr "<strong>Muokkaa</strong> avaa muokkausnäkymän kyseiselle aiheelle. Pääset samaan näkymään klikkaamalla aiheen otsikkoa."
+
+#: includes/admin/topics.php:163
+msgid "<strong>Stick <em>(to front)</em></strong> will keep the selected topic &#8217;pinned&#8217; to the top of ALL forums and be visable in any forums topics list."
+msgstr "<strong>Kiinnitä <em>(alkuun)</em></strong> pitää valitun aiheen kiinnitettynä KAIKKIEN foorumien alkuun ja näyttää sen kaikissa foorumin aihelistoissa."
+
+#: includes/common/template.php:2555
+msgid "Forum Edit: %s"
+msgstr "Muokkaa foorumia: %s"
+
+#: includes/replies/functions.php:195 includes/topics/functions.php:200
+msgid "<strong>ERROR</strong>: Forum ID must be a number."
+msgstr "<strong>VIRHE</strong>: Foorumin ID:n tulee olla numero."
+
+#: includes/replies/functions.php:209 includes/topics/functions.php:214
+msgid "<strong>ERROR</strong>: Forum ID cannot be a negative number."
+msgstr "<strong>VIRHE</strong>: Foorumin ID ei voi olla negatiivinen numero."
+
+#: includes/replies/functions.php:213 includes/topics/functions.php:218
+msgid "<strong>ERROR</strong>: Forum does not exist."
+msgstr "<strong>VIRHE</strong>: Foorumia ei ole olemassa."
+
+#: includes/replies/functions.php:234 includes/replies/functions.php:575
+msgid "<strong>ERROR</strong>: This forum has been closed to new replies."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on suljettu uusilta viesteiltä."
+
+#: includes/replies/functions.php:227 includes/replies/functions.php:568
+msgid "<strong>ERROR</strong>: This forum is a category. No replies can be created in this forum."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on merkitty kategoriaksi. Siihen ei voi luoda vastauksia."
+
+#: includes/common/widgets.php:384
+msgid "The bbPress forum search form."
+msgstr "Hakulomake bbPress foorumille."
+
+#: includes/common/widgets.php:948
+msgid "Some statistics from your forum."
+msgstr "Joitain tilastoja foorumiltasi."
+
+#: includes/replies/functions.php:1223
+msgid "<strong>ERROR</strong>: Reply ID to move not found!"
+msgstr "<strong>VIRHE</strong>: Siirrettävän vastauksen ID:tä ei löytynyt!"
+
+#: templates/default/bbpress/loop-search-reply.php:24
+msgid "In reply to: "
+msgstr "Vastauksena viestiin: "
+
+#: includes/admin/users.php:87 includes/admin/users.php:218
+#: templates/default/bbpress/form-user-roles.php:20
+msgid "Forum Role"
+msgstr "Foorumin rooli"
+
+#: includes/replies/template.php:806
+msgid "This reply was modified %1$s by %2$s."
+msgstr "Tätä vastausta muokkasi %1$s %2$s."
+
+#: includes/common/widgets.php:246
+msgid "(bbPress) Topic Views List"
+msgstr "(bbPress) Lista aiheen näkymistä"
+
+#: includes/admin/topics.php:485
+msgid "The topic was not found!"
+msgstr "Aihetta ei löytynyt!"
+
+#: includes/admin/topics.php:937
+msgid "Topic created. <a href=\"%s\">View topic</a>"
+msgstr "Aihe luotu. <a href=\"%s\">Näytä aihe</a>"
+
+#: templates/default/bbpress/form-reply.php:93
+#: templates/default/bbpress/form-topic.php:164
+msgid "Notify the author of follow-up replies via email"
+msgstr "Ilmoita julkaisijalle uusista viesteistä sähköpostitse"
+
+#: includes/replies/functions.php:240 includes/replies/functions.php:581
+msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new replies in it."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on yksityinen ja sinulla ei ole oikeuksia lukea tai kirjoittaa vastauksia siihen."
+
+#: includes/replies/functions.php:246 includes/replies/functions.php:587
+msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new replies in it."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on piilotettu ja sinulla ei ole oikeuksia lukea tai kirjoittaa vastauksia siihen."
+
+#: includes/users/functions.php:1329
+msgid "<strong>ERROR</strong>: There was a problem unsubscribing from that topic!"
+msgstr "<strong>VIRHE</strong>:  Aiheen seuraamisen keskeytys epäonnistui!"
+
+#: includes/topics/functions.php:239 includes/topics/functions.php:557
+msgid "<strong>ERROR</strong>: This forum has been closed to new topics."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on suljettu uusilta aiheilta."
+
+#: includes/topics/functions.php:245 includes/topics/functions.php:563
+msgid "<strong>ERROR</strong>: This forum is private and you do not have the capability to read or create new topics in it."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on yksityinen etkä omaa oikeuksia lukemaan tai aloittamaan uusia aiheita täällä."
+
+#: includes/topics/functions.php:251 includes/topics/functions.php:569
+msgid "<strong>ERROR</strong>: This forum is hidden and you do not have the capability to read or create new topics in it."
+msgstr "<strong>VIRHE</strong>: Tämä foorumi on piilotettu etkä omaa oikeuksia lukemaan tai aloittamaan uusia aiheita täällä."
+
+#: includes/topics/functions.php:1492
+msgid "<strong>ERROR</strong>: The topic you want to split to was not found!"
+msgstr "<strong>VIRHE</strong>: Keskustelua johon halusit jakautua ei löytynyt!"
+
+#: includes/extend/buddypress/groups.php:279
+#: includes/extend/buddypress/groups.php:480
+msgid "Create a discussion forum to allow members of this group to communicate in a structured, bulletin-board style fashion."
+msgstr "Luo keskustelufoorumi, jossa tämän ryhmän jäsenet voivat keskustella perinteisen keskustelupalstan tapaan."
 
 #: bbpress.php:595
 msgctxt "post"
@@ -3476,25 +3476,17 @@ msgstr "Tyylien ja scriptien parempi hallittavuus pohjavalikoimassa."
 msgid "Thank you for updating! bbPress %s is bundled up and ready to weather the storm of users in your community!"
 msgstr "Kiitos päivittämisestä! bbPress %s on valmiina ottamaan vastaan yhteisösi käyttäjät!"
 
-#: includes/admin/settings.php:99
-msgid "Throttle posting every"
-msgstr "Pienin aikaväli viestien välillä:"
-
 #: includes/admin/admin.php:887
 msgid "Converter Specialist"
 msgstr "Converter Specialist"
 
-#: includes/admin/admin.php:905
-msgid "Core Contributors to bbPress 2.5"
-msgstr "bbPress 2.5:n avustavat kehittäjät"
+#: includes/admin/settings.php:893
+msgid "Prefix all forum content with the Forum Root slug (Recommended)"
+msgstr "Käytä kaiken foorumisisällön edessä foorumin juuripolkua (suositeltavaa)."
 
 #: includes/admin/admin.php:809
 msgid "We&#8217;re all abuzz about the hive of new importers, AEF, Drupal, FluxBB, Kunena Forums for Joomla, MyBB, Phorum, PHPFox, PHPWind, PunBB, SMF, Xenforo and XMB. Existing importers are now sweeter than honey with improved importing stickies, topic tags, forum categories and the sting is now gone if you need to remove imported users."
 msgstr "Olemme innoissamme uusista tuontityökaluista: AEF, Drupal, FluxBB, Kunena Forums (Joomla), MyBB, Phorum, PHPFox, PHPWind, PunBB, SMF, Xenforo ja XMB. Nykyiset tuontityökalut ovat myös kehittyneet mm seuraavien ominaisuuksien osalta: kiinnitetyt keskustelut, avainsanat ja kategoriat. Tuotujen käyttäjien poistaminen on myös aiempaa helpompaa."
-
-#: includes/admin/settings.php:893
-msgid "Prefix all forum content with the Forum Root slug (Recommended)"
-msgstr "Käytä kaiken foorumisisällön edessä foorumin juuripolkua (suositeltavaa)."
 
 #: includes/admin/admin.php:639
 msgctxt "admin color scheme"
@@ -3574,37 +3566,9 @@ msgstr "Ei kiinnitettäviä mitä kiinnittää"
 msgid "Calculating topic stickies (%1$s - %2$s)"
 msgstr "Lasketaan kiinnitettyjä aiheita (%1$s - %2$s)"
 
-#: includes/admin/admin.php:545
-msgid "About bbPress"
-msgstr "bbPressistä"
-
-#: includes/admin/settings.php:613
-msgid "Allow forum wide search"
-msgstr "Salli etsintä koko keskustelupalstan sisällöstä"
-
-#: includes/admin/settings.php:24
-msgid "Forum User Settings"
-msgstr "Keskustelupalstan käyttäjän asetukset"
-
-#: includes/admin/settings.php:29
-msgid "Forum Features"
-msgstr "Keskustelupalstan ominaisuudet"
-
 #: includes/admin/settings.php:174
 msgid "Post Formatting"
 msgstr "Viestin muotoilu"
-
-#: includes/admin/settings.php:450
-msgid "Setting time limits and other user posting capabilities"
-msgstr "Aikarajat ja muut käyttäjän viestioikeudet "
-
-#: includes/admin/settings.php:549
-msgid "Forum features that can be toggled on and off"
-msgstr "Keskustelupalstan valinnaiset ominaisuudet"
-
-#: includes/admin/settings.php:685
-msgid "Add toolbar & buttons to textareas to help with HTML formatting"
-msgstr "Lisää työkalupalkki & painikkeet tekstikenttään HTML-muotoilun helpottamiseksi  "
 
 #: includes/admin/settings.php:533
 msgid "Automatically give registered visitors the %s forum role"
@@ -3687,10 +3651,6 @@ msgstr "Aloita uusi muunnos alusta"
 #: includes/admin/settings.php:1565
 msgid "Topic-Tags allow users to filter topics between forums. This is enabled by default."
 msgstr "Aiheen merkinnät antavat käyttäjien suodattaa aiheet keskustelualueiden välillä. Tämä on päällä oletusarvona."
-
-#: includes/admin/tools.php:163
-msgid "Recalculate private and hidden forums"
-msgstr "Yksityisten ja piilotettujen keskustelualueiden uudelleenlaskenta."
 
 #: includes/admin/admin.php:784 includes/admin/admin.php:861
 msgid "Credits"
@@ -3963,11 +3923,6 @@ msgstr "Tämä ruutu antaa sinulle pääsyn kaikkiin vastauksiisi. Voit kustomoi
 msgid "Screen Content"
 msgstr "Ruudun sisältö"
 
-#: includes/admin/forums.php:131 includes/admin/replies.php:142
-#: includes/admin/topics.php:142
-msgid "You can customize the display of this screen&#8217;s contents in a number of ways:"
-msgstr "Voit kustomoida tämän ruudun sisältöä monella tavalla: "
-
 #: includes/admin/replies.php:144
 msgid "You can hide/display columns based on your needs and decide how many replies to list per screen using the Screen Options tab."
 msgstr "Voit piilottaa/näyttää pylväitä riippuen tarpeestasi ja päättää monta vastausta listataan ruudulle kerrallaan käyttämällä Ruudun Asetukset välilehteä."
@@ -4005,6 +3960,10 @@ msgstr "Kustomoidaan tätä näyttöä"
 msgid "<strong>Title</strong> - Enter a title for your forum. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
 msgstr "<strong>Title</strong> - Syötä otsikko keskustelualueellesi. Otsikon syöttämisen jälkeen näet pysyvän linkin alapuolella, jota voit muuttaa."
 
+#: includes/admin/forums.php:192
+msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
+msgstr "<strong>Keskustelualueen editori</strong> - Lisää teksti keskustelualueellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen keskustelualue-editoriin."
+
 #: includes/admin/forums.php:198
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your forum without inserting it. This is usually useful only if your theme makes use of the featured image as a forum thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan keskustelualueelle ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi keskustelualueen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -4012,6 +3971,10 @@ msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan ke
 #: includes/admin/forums.php:205
 msgid "Select the attributes that your forum should have:"
 msgstr "Valitse ominaisuudet jotka keskustelualueellasi tulee olla:"
+
+#: includes/admin/forums.php:195
+msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
+msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
 
 #: includes/admin/forums.php:207
 msgid "<strong>Type</strong> indicates if the forum is a category or forum. Categories generally contain other forums."
@@ -4024,14 +3987,6 @@ msgstr "<strong>Näkyvyys</strong> antaa sinun valita keskustelualueiden näkyvy
 #: includes/admin/forums.php:211
 msgid "<strong>Order</strong> allows you to order your forums numerically."
 msgstr "<strong>Järjestys</strong> Antaa sinun järjestää keskustelualueet numeerisesti."
-
-#: includes/admin/forums.php:192
-msgid "<strong>Forum Editor</strong> - Enter the text for your forum. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your forum text. You can insert media files by clicking the icons above the forum editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular forum editor."
-msgstr "<strong>Keskustelualueen editori</strong> - Lisää teksti keskustelualueellesi. Tähän on kaksi eri muokkaustilaa: Visuaalinen ja HTML. Valitse tila klikkaamalla oikeaa välilehteä. Visuaalinen tila antaa sinulle WYSIWYG editorin. Klikkaa viimeistä ikonia rivillä saadaksesi toisen rivin kontrollit. HTML tila antaa sinun syöttää raakaa HTML keskustelualueen tekstin kanssa. Voit lisätä mediatiedostoja klikkaamalla ikoneita keskustelualue-editorin yläpuolelta ja seuraamalla ohjeita. Voit myös käyttää häiriötekijätöntä kirjoitusruutua klikkaamalla Täysiruutu ikonia visuaalisessa tilassa (toiseksi viimeinen ikoni ylimmällä rivillä) tai klikkaamalla Täysiruutu ikonia HTML tilassa (viimeinen ikoni rivillä). Kun olet Täysiruutu tilassa saat napit näkyviin viemällä hiiren sivun yläosaan. Poistu Täysiruutu tilasta tavalliseen keskustelualue-editoriin."
-
-#: includes/admin/forums.php:195
-msgid "<strong>Publish</strong> - You can set the terms of publishing your forum in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a forum or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a forum to be published in the future or backdate a forum."
-msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
 
 #: includes/admin/forums.php:217 includes/admin/replies.php:229
 #: includes/admin/topics.php:229
@@ -4058,6 +4013,10 @@ msgstr "Käytettäessä Massaeditoria, voit muuttaa metadataa (kategoriat, kirjo
 msgid "<strong>Title</strong> - Enter a title for your reply. After you enter a title, you&#8217;ll see the permalink below, which you can edit."
 msgstr "<strong>Otsikko</strong> - Syötä otsikko vastauksellesi. Syötettyäsi vastauksen näet pysyvän linkin, jota voit muokata."
 
+#: includes/admin/replies.php:206
+msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
+msgstr "<strong>Reply Editor</strong> - Syötä vastauksen teksti. Tähän on kaksi eri moodia: Visuaalinen tai HTML. Valitse moodi klikkaamalla sen omaa välilehteä. Visuaalinen moodissa on WYSIWYG editori. Klikkaa viimeistä kuvaketta rivillä saadaksesi esiin toisen rivin kontrolleja. HTML moodi antaa sinun syöttää raakaa HTML koodia vastauksen tekstin kanssa. Voit liittää mediatiedostoja klikkaamalla kuvakkeita vastauseditorin yläpuolella. Voit mennä häiriöttömään kirjoitusruutuun klikkaamalla Täysiruutu nappia Visuaalisessa moodissa (toiseksi viimeinen kuvake ylimällä rivillä) tai Täysiruutu nappia HTML moodissa (viimeinen nappia rivillä). Kun olet täysiruutu tilassa saat napit näkyviin viemällä hiiren ruudun yläosaan. Poistu Täysiruutu tilasta takaisin normaaliin vastauseditoriin."
+
 #: includes/admin/replies.php:212
 msgid "<strong>Featured Image</strong> - This allows you to associate an image with your reply without inserting it. This is usually useful only if your theme makes use of the featured image as a reply thumbnail on the home page, a custom header, etc."
 msgstr "<strong>Artikkelikuva</strong> - Tämä sallii sinun yhdistää kuvan vastaukseen ilman että lisäät sitä. Tämä on yleensä hyödyllinen vain jos teema käyttää artikkelikuvaa hyödyksi vastauksen esikatselukuvana etusivulla, kustomoitu otsikko, jne."
@@ -4069,6 +4028,10 @@ msgstr "Valitse ominaisuudet jotka vastauksellasi pitäisi olla:"
 #: includes/admin/replies.php:221
 msgid "<strong>Forum</strong> dropdown determines the parent forum that the reply belongs to. Select the forum, or leave the default (Use Forum of Topic) to post the reply in forum of the topic."
 msgstr "<strong>Keskustelualue</strong> pudotusvalikko määrittää isännän vastaukselle. Valitse keskustelualue tai jätä oletusarvo (käytä aiheen keskustelualuetta) lähettääksesi vastauksen aiheen keskustelualueelle."
+
+#: includes/admin/replies.php:209
+msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
+msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
 
 #: includes/admin/replies.php:222
 msgid "<strong>Topic</strong> determines the parent topic that the reply belongs to."
@@ -4082,14 +4045,6 @@ msgstr "Sallii käyttäjien merkitä aihe suosikiksi"
 msgid "How your forum content is displayed within your existing theme."
 msgstr "Näyttää miltä keskustelualueesi sisältö näyttää olemassa olevassa teemassa."
 
-#: includes/admin/replies.php:206
-msgid "<strong>Reply Editor</strong> - Enter the text for your reply. There are two modes of editing: Visual and HTML. Choose the mode by clicking on the appropriate tab. Visual mode gives you a WYSIWYG editor. Click the last icon in the row to get a second row of controls. The HTML mode allows you to enter raw HTML along with your reply text. You can insert media files by clicking the icons above the reply editor and following the directions. You can go to the distraction-free writing screen via the Fullscreen icon in Visual mode (second to last in the top row) or the Fullscreen button in HTML mode (last in the row). Once there, you can make buttons visible by hovering over the top area. Exit Fullscreen back to the regular reply editor."
-msgstr "<strong>Reply Editor</strong> - Syötä vastauksen teksti. Tähän on kaksi eri moodia: Visuaalinen tai HTML. Valitse moodi klikkaamalla sen omaa välilehteä. Visuaalinen moodissa on WYSIWYG editori. Klikkaa viimeistä kuvaketta rivillä saadaksesi esiin toisen rivin kontrolleja. HTML moodi antaa sinun syöttää raakaa HTML koodia vastauksen tekstin kanssa. Voit liittää mediatiedostoja klikkaamalla kuvakkeita vastauseditorin yläpuolella. Voit mennä häiriöttömään kirjoitusruutuun klikkaamalla Täysiruutu nappia Visuaalisessa moodissa (toiseksi viimeinen kuvake ylimällä rivillä) tai Täysiruutu nappia HTML moodissa (viimeinen nappia rivillä). Kun olet täysiruutu tilassa saat napit näkyviin viemällä hiiren ruudun yläosaan. Poistu Täysiruutu tilasta takaisin normaaliin vastauseditoriin."
-
-#: includes/admin/replies.php:209
-msgid "<strong>Publish</strong> - You can set the terms of publishing your reply in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a reply or making it stay at the top of your blog indefinitely (sticky). Publish (immediately) allows you to set a future or past date and time, so you can schedule a reply to be published in the future or backdate a reply."
-msgstr "<strong>Julkaise</strong> - Voit määrätä julkaisemisen ehdot Julkaisulaatikosta. Tilalle, näkyvyydelle ja julkaisulle (välitön), klikkaa Editointi linkkiä nähdäksesi useampia asetuksia. Näkyvyys sisältää valinnat keskustelualueen salasanalla suojaamiseen tai pitämiseen sen blogin yläpäässä ikuisesti (liimat). Julkaiseminen (välitön) antaa sinun asettaa ajan koska alue julkaistaan."
-
 #: includes/admin/settings.php:728
 msgid "will serve all bbPress templates"
 msgstr "palvelee kaikkia bbPressin sabluunoita"
@@ -4101,10 +4056,6 @@ msgstr "Sivulla näytettävien aiheiden ja vastausten määrä"
 #: includes/admin/settings.php:810
 msgid "How many topics and replies to show per RSS page"
 msgstr "RSS-sivulla näytettävien aiheiden ja vastausten määrä"
-
-#: includes/admin/settings.php:1161
-msgid "Forum settings for BuddyPress"
-msgstr "Keskustelualueen asetukset BuddyPressissä."
 
 #: includes/admin/settings.php:1177
 msgid "Allow BuddyPress Groups to have their own forums"
@@ -4202,11 +4153,6 @@ msgstr "Poista roskaposti"
 msgid "Revisions"
 msgstr "Päivitykset"
 
-#: includes/admin/replies.php:651 includes/admin/replies.php:666
-#: includes/admin/topics.php:687
-msgid "No Forum"
-msgstr "Ei keskustelupalstaa"
-
 #: includes/admin/settings.php:1703
 msgid "Forums base"
 msgstr "Foorumin pohja"
@@ -4262,12 +4208,6 @@ msgstr "Aiheet, joissa ei ole vastauksia"
 msgctxt "post"
 msgid "Spam"
 msgstr "Roskaposti"
-
-#: includes/admin/metaboxes.php:379 includes/admin/metaboxes.php:433
-#: includes/extend/buddypress/groups.php:1042 includes/topics/template.php:61
-#: templates/default/bbpress/form-topic.php:114
-msgid "Forum:"
-msgstr "Foorumi"
 
 #: includes/admin/replies.php:738 includes/admin/topics.php:809
 #: includes/replies/template.php:2105 includes/topics/template.php:2872
@@ -4401,30 +4341,10 @@ msgstr "Voit säätää listan näyttämään keskustelualueet tietyltä kuukaud
 msgid "Hovering over a row in the forums list will display action links that allow you to manage your forum. You can perform the following actions:"
 msgstr "Näet hallintalinkit kun viet hiiren keskustelualuelistan rivin päälle. Voit suorittaa seuraavia toimintoja:"
 
-#: includes/admin/forums.php:203 includes/admin/forums.php:243
-msgid "Forum Attributes"
-msgstr "Keskustelupalstan ominaisuudet"
-
-#: includes/admin/forums.php:529
-msgid "Forum updated. <a href=\"%s\">View forum</a>"
-msgstr "Keskustelupalsta päivitetty. <a href=\"%s\">Näytä palsta</a>"
-
-#: includes/admin/forums.php:538
-msgid "Forum updated."
-msgstr "Keskustelupalsta päivitetty."
-
 #. translators: %s: date and time of the revision
 #: includes/admin/forums.php:543
 msgid "Forum restored to revision from %s"
 msgstr "Keskustelualue palautettu versioon ajalta %s"
-
-#: includes/admin/forums.php:547
-msgid "Forum created. <a href=\"%s\">View forum</a>"
-msgstr "Keskustelupalsta luotu. <a href=\"%s\">Näytä keskustelupalsta</a>"
-
-#: includes/admin/forums.php:550
-msgid "Forum saved."
-msgstr "Keskustelupalsta tallennettu."
 
 #: includes/admin/forums.php:553
 msgid "Forum submitted. <a target=\"_blank\" href=\"%s\">Preview forum</a>"
@@ -4503,10 +4423,6 @@ msgstr "Kaikilla keskustelupalstoilla"
 msgid "Reply updated. <a href=\"%s\">View topic</a>"
 msgstr "Vastaus päivitetty. <a href=\"%s\">Katso aihe</a>"
 
-#: includes/admin/replies.php:867
-msgid "Reply created. <a href=\"%s\">View topic</a>"
-msgstr "Vastaus luotu. <a href=\"%s\">Näytä aihe</a> "
-
 #: includes/admin/replies.php:873
 msgid "Reply submitted. <a target=\"_blank\" href=\"%s\">Preview topic</a>"
 msgstr "Vastaus lähetetty. <a target=\"_blank\" href=\"%s\">Aiheen esikatselu</a>"
@@ -4555,6 +4471,98 @@ msgid_plural "Replies"
 msgstr[0] "Vastaus"
 msgstr[1] "Vastaukset"
 
+#: includes/admin/replies.php:193
+msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "Otsikkokenttä ja iso vastauseditori on kiinnitetty paikalleen, mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä ruudun valinnat -välilehteä piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi yhden tai kahden palstan asettelun tälle ruudulle."
+
+#: includes/admin/forums.php:179
+msgid "The title field and the big forum editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
+msgstr "Otsikkokenttä ja iso keskustelualueen muokkauseditori on lukittu paikalleen,mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä näyttöasetukset -välilehteä  piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi joko yhden tai kahden sarakkeen asettelun tälle  ruudulle."
+
+#: includes/admin/settings.php:99
+msgid "Throttle posting every"
+msgstr "Pienin aikaväli viestien välillä"
+
+#: includes/admin/admin.php:905
+msgid "Core Contributors to bbPress 2.5"
+msgstr "Keskeiset tekijät bbPress 2.5:lle"
+
+#: includes/admin/admin.php:545
+msgid "About bbPress"
+msgstr "Tietoa bbPress:istä"
+
+#: includes/admin/settings.php:613
+msgid "Allow forum wide search"
+msgstr "Salli hakutoiminto koko foorumin sisällöstä"
+
+#: includes/admin/settings.php:24
+msgid "Forum User Settings"
+msgstr "Foorumin käyttäjäasetukset"
+
+#: includes/admin/settings.php:29
+msgid "Forum Features"
+msgstr "Foorumin ominaisuudet"
+
+#: includes/admin/settings.php:450
+msgid "Setting time limits and other user posting capabilities"
+msgstr "Aikarajat ja muut käyttäjän viestioikeudet"
+
+#: includes/admin/settings.php:549
+msgid "Forum features that can be toggled on and off"
+msgstr "Foorumin ominaisuudet, joita voi kytkeä päälle taikka pois"
+
+#: includes/admin/settings.php:685
+msgid "Add toolbar & buttons to textareas to help with HTML formatting"
+msgstr "Lisää työkalupalkki & painikkeet tekstikenttään HTML-muotoilun helpottamiseksi"
+
+#: includes/admin/tools.php:163
+msgid "Recalculate private and hidden forums"
+msgstr "Yksityisten ja piilotettujen keskustelualueiden uudelleenlaskenta"
+
+#: includes/admin/forums.php:131 includes/admin/replies.php:142
+#: includes/admin/topics.php:142
+msgid "You can customize the display of this screen&#8217;s contents in a number of ways:"
+msgstr "Voit kustomoida tämän ruudun sisältöä monella tavalla:"
+
+#: includes/admin/settings.php:1161
+msgid "Forum settings for BuddyPress"
+msgstr "Foorumin asetukset BuddyPress:issä"
+
+#: includes/admin/replies.php:651 includes/admin/replies.php:666
+#: includes/admin/topics.php:687
+msgid "No Forum"
+msgstr "Ei Foorumia"
+
+#: includes/admin/metaboxes.php:379 includes/admin/metaboxes.php:433
+#: includes/extend/buddypress/groups.php:1042 includes/topics/template.php:61
+#: templates/default/bbpress/form-topic.php:114
+msgid "Forum:"
+msgstr "Foorumi:"
+
+#: includes/admin/forums.php:203 includes/admin/forums.php:243
+msgid "Forum Attributes"
+msgstr "Foorumin ominaisuudet"
+
+#: includes/admin/forums.php:529
+msgid "Forum updated. <a href=\"%s\">View forum</a>"
+msgstr "Foorumi päivitetty. <a href=\"%s\">Näytä foorumi</a>"
+
+#: includes/admin/forums.php:538
+msgid "Forum updated."
+msgstr "Foorumi päivitetty."
+
+#: includes/admin/forums.php:547
+msgid "Forum created. <a href=\"%s\">View forum</a>"
+msgstr "Foorumi luotu. <a href=\"%s\">Katso foorumia</a>"
+
+#: includes/admin/forums.php:550
+msgid "Forum saved."
+msgstr "Foorumi tallennettu."
+
+#: includes/admin/replies.php:867
+msgid "Reply created. <a href=\"%s\">View topic</a>"
+msgstr "Vastaus luotu. <a href=\"%s\">Näytä aihe</a>"
+
 #: includes/admin/metaboxes.php:67 includes/admin/metaboxes.php:458
 #: includes/admin/replies.php:571 includes/admin/settings.php:301
 #: includes/topics/template.php:49
@@ -4564,12 +4572,4 @@ msgstr[1] "Vastaukset"
 msgid "Topic"
 msgid_plural "Topics"
 msgstr[0] "Aihe"
-msgstr[1] ""
-
-#: includes/admin/replies.php:193
-msgid "The title field and the big reply editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
-msgstr "Otsikkokenttä ja iso vastauseditori on kiinnitetty paikalleen, mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä ruudun valinnat -välilehteä piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi yhden tai kahden palstan asettelun tälle ruudulle."
-
-#: includes/admin/forums.php:179
-msgid "The title field and the big forum editing Area are fixed in place, but you can reposition all the other boxes using drag and drop, and can minimize or expand them by clicking the title bar of each box. Use the Screen Options tab to unhide more boxes (Excerpt, Send Trackbacks, Custom Fields, Discussion, Slug, Author) or to choose a 1- or 2-column layout for this screen."
-msgstr "Otsikkokenttä ja iso keskustelualueen muokkauseditori on lukittu paikalleen,mutta voit siirtää kaikkia muita laatikoita vetämällä ja pudottamalla, sekä pienentää että laajentaa niitä napsauttamalla jokaisen laatikon otsikkopalkkia. Käytä näyttöasetukset -välilehteä  piilottaaksesi muita laatikoita (lyhennelmä, lähetä seurausviestejä, lisäkentät, keskustelu, osoite, kirjoittaja) taikka valitaksesi joko yhden tai kahden sarakkeen asettelun tälle  ruudulle."
+msgstr[1] "Aiheet"

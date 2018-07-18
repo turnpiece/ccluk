@@ -3,15 +3,15 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.98
+  Version: 5.99.1
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
 
 $cleantalk_executed = false;
 
-define('APBCT_VERSION', '5.98');
-define('APBCT_AGENT',   'wordpress-598');
+define('APBCT_VERSION', '5.99.1');
+define('APBCT_AGENT',   'wordpress-5991');
 
 define('CLEANTALK_REMOTE_CALL_SLEEP', 10); // Minimum time between remote call
 define('APBCT_CASERT_PATH', file_exists(ABSPATH . WPINC . '/certificates/ca-bundle.crt') 
@@ -172,7 +172,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		
 	   	$is_sfw_check = true;
 		$sfw = new CleantalkSFW();
-		$sfw->ip_array = CleantalkSFW::ip_get();
+		$sfw->ip_array = (array)CleantalkSFW::ip_get(array('real'), true);
 		
 		foreach($sfw->ip_array as $ct_cur_ip){
 	    	if(isset($_COOKIE['ct_sfw_pass_key']) && $_COOKIE['ct_sfw_pass_key'] == md5($ct_cur_ip.$ct_options['apikey'])){
@@ -695,6 +695,9 @@ function apbct_cookies_test()
 	if(isset($_COOKIE['apbct_cookies_test'])){
 		
 		$cookie_test = json_decode(stripslashes($_COOKIE['apbct_cookies_test']), true);
+		
+		if(!is_array($cookie_test))
+			return 0;
 		
 		$check_srting = $ct_options['apikey'];
 		foreach($cookie_test['cookies_names'] as $cookie_name){

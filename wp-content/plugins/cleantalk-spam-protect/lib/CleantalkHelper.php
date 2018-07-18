@@ -17,6 +17,8 @@ class CleantalkHelper
 				'162.158.0.0/15',
 				'172.64.0.0/13',
 				'173.245.48.0/20',
+				'185.93.231.18/20', // User fix
+				'185.220.101.46/20', // User fix
 				'188.114.96.0/20',
 				'190.93.240.0/20',
 				'197.234.240.0/22',
@@ -101,9 +103,11 @@ class CleantalkHelper
 			// Private networks. Looking for X-Forwarded-For and X-Real-Ip
 			}elseif(self::ip_mask_match($ips['real'], self::$private_networks)){
 				if(isset($headers['X-Forwarded-For'])){
-					$ips['real'] = $headers['X-Forwarded-For'];
+					$tmp = explode(",", trim($headers['X-Forwarded-For']));
+					$ips['real']= trim($tmp[0]);
 				}elseif(isset($headers['X-Real-Ip'])){
-					$ips['real'] = $headers['X-Real-Ip'];
+					$tmp = explode(",", trim($headers['X-Real-Ip']));
+					$ips['real']= trim($tmp[0]);
 				}
 			}
 		}

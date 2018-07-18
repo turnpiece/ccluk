@@ -14,6 +14,22 @@ jQuery(function ($) {
             Defender.showNotification('error', data.data.message);
         }
     });
+    var current_issue = null;
+    $('body').on('click', '#next_issue', function () {
+        var parent = $(this).parent().find('.inner-sourcecode').first();
+        if (current_issue === null) {
+            current_issue = parent.find('del').first();
+        } else {
+            current_issue = current_issue.next('del').first();
+        }
+        console.log(parent);
+        if (current_issue.size() > 0) {
+            var pos = current_issue.position();
+            console.log(current_issue.offset());
+            console.log(current_issue.position());
+            parent.scrollTop(pos.top);
+        }
+    })
     //processing scan
     if ($('#scanning').size() > 0) {
         $('body').addClass('wpmud');
@@ -121,6 +137,7 @@ jQuery(function ($) {
         }
 
         if (data.success == true) {
+            current_issue = null;
             var parent = form.closest('.source-code');
             parent.html(data.data.html);
 

@@ -41,6 +41,8 @@ class Mask_Login extends Controller {
 				$this->add_filter( 'wp_redirect', 'filterWPRedirect', 10, 2 );
 				$this->add_filter( 'site_url', 'filterSiteUrl', 9999, 4 );
 				$this->add_filter( 'network_site_url', 'filterNetworkSiteUrl', 9999, 3 );
+//				$this->add_filter( 'network_admin_url', 'filterAdminUrl', 9999, 2 );
+//				$this->add_filter( 'admin_url', 'filterAdminUrl', 9999, 2 );
 				remove_action( 'template_redirect', 'wp_redirect_admin_locations' );
 			} else {
 				if ( $isJetpackSSO ) {
@@ -71,18 +73,45 @@ class Mask_Login extends Controller {
 		}
 	}
 
+	/**
+	 * @param $url
+	 * @param $path
+	 * @param $scheme
+	 *
+	 * @return string
+	 */
 	public function filterNetworkSiteUrl( $url, $path, $scheme ) {
 		return $this->alterLoginUrl( $url, $scheme );
 	}
 
+	/**
+	 * @param $url
+	 * @param $path
+	 * @param $scheme
+	 * @param $blog_id
+	 *
+	 * @return string
+	 */
 	public function filterSiteUrl( $url, $path, $scheme, $blog_id ) {
 		return $this->alterLoginUrl( $url, $scheme );
 	}
 
+	/**
+	 * @param $location
+	 * @param $status
+	 *
+	 * @return string
+	 */
 	public function filterWPRedirect( $location, $status ) {
 		return $this->alterLoginUrl( $location );
 	}
 
+	/**
+	 * @param $currentUrl
+	 * @param null $scheme
+	 *
+	 * @return string
+	 */
 	private function alterLoginUrl( $currentUrl, $scheme = null ) {
 		if ( strpos( $currentUrl, 'wp-login.php' ) !== false ) {
 			//this is URL go to old wp-login.php
@@ -94,7 +123,40 @@ class Mask_Login extends Controller {
 			} else {
 				return Mask_Api::getNewLoginUrl();
 			}
+		} else {
+			//this case when admin map a domain into subsite, we need to update the new domain/masked-login into the list
+			if ( ! function_exists( 'get_current_screen' ) ) {
+				require_once( ABSPATH . 'wp-admin/includes/screen.php' );
+			}
+			$screen = get_current_screen();
+			if ( ! is_object( $screen ) ) {
+				return $currentUrl;
+			}
+			if ( $screen->id == 'sites-network' ) {
+				//case URLs inside sites list, need to check those with custom domain cause when redirect, it will require re-loggin
+				$requestPath = Mask_Api::getRequestPath( $currentUrl );
+				if ( $requestPath == '/wp-admin' ) {
+					$currentDomain = $_SERVER['HTTP_HOST'];
+					$subDomain     = parse_url( $currentUrl, PHP_URL_HOST );
+					if ( stristr( $subDomain, $currentDomain ) === false ) {
+						return Mask_Api::getNewLoginUrl( $subDomain );
+					}
+				}
+			}
 		}
+
+		return $currentUrl;
+	}
+
+	/**
+	 * Filter admin URL when sync with HUB
+	 *
+	 * @param $currentUrl
+	 * @param null $scheme
+	 *
+	 * @return mixed
+	 */
+	public function filterAdminUrl( $currentUrl, $scheme = null ) {
 
 		return $currentUrl;
 	}
@@ -109,14 +171,12 @@ class Mask_Login extends Controller {
 			//we need to allow ajax access for other tasks
 			return;
 		}
-
 		if ( is_user_logged_in() ) {
 			return;
 		}
 
 		$this->_maybeLock();
 	}
-
 
 	private function _handleRequestToLoginPage() {
 		$this->_maybeLock();

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-20 09:40:29+0000\n"
+"PO-Revision-Date: 2018-07-06 08:46:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -149,7 +149,7 @@ msgstr "[%s] Handlingen er bekræftet"
 
 #. translators: Privacy data request subject. 1: Site name, 2: Name of the
 #. action
-#: wp-includes/user.php:3320
+#: wp-includes/user.php:3317
 msgid "[%1$s] Confirm Action: %2$s"
 msgstr "[%1$s] Bekræft handlingen: %2$s"
 
@@ -229,11 +229,11 @@ msgstr "Kunne ikke gemme eksportfil med persondata."
 msgid "User action confirmed."
 msgstr "Brugerhandling bekræftet."
 
-#: wp-includes/user.php:3396
+#: wp-includes/user.php:3393
 msgid "This link has expired."
 msgstr "Dette link er udløbet."
 
-#: wp-includes/user.php:3248 wp-includes/user.php:3392 wp-login.php:844
+#: wp-includes/user.php:3248 wp-includes/user.php:3389 wp-login.php:844
 msgid "Invalid request."
 msgstr "Ugyldig forespørgsel."
 
@@ -267,12 +267,12 @@ msgid "User Requests"
 msgstr "Brugeranmodninger"
 
 #. translators: deleted long text
-#: wp-includes/functions.php:5921
+#: wp-includes/functions.php:5956
 msgid "This content was deleted by the author."
 msgstr "Dette indhold blev slettet af forfatteren."
 
 #. translators: deleted text
-#: wp-includes/functions.php:5917
+#: wp-includes/functions.php:5952
 msgid "[deleted]"
 msgstr "[slettet]"
 
@@ -285,16 +285,16 @@ msgstr "Kommentar %d indeholder persondata, men kunne ikke anonymiseres."
 msgid "Action has been confirmed."
 msgstr "Handlingen er bekræftet."
 
-#: wp-includes/user.php:3434
+#: wp-includes/user.php:3431
 msgid "The confirmation email has expired."
 msgstr "Bekræftelses-mailen er udløbet."
 
-#: wp-includes/user.php:3416
+#: wp-includes/user.php:3413
 msgid "Invalid action"
 msgstr "Ugyldig handling"
 
-#. translators: Do not translate DESCRIPTION, CONFIRM_URL, EMAIL, SITENAME,
-#. SITEURL: those are placeholders.
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
+#. those are placeholders.
 #: wp-includes/user.php:3264
 msgid ""
 "Howdy,\n"
@@ -309,27 +309,24 @@ msgid ""
 "You can safely ignore and delete this email if you do not want to\n"
 "take this action.\n"
 "\n"
-"This email has been sent to ###EMAIL###.\n"
-"\n"
 "Regards,\n"
 "All at ###SITENAME###\n"
 "###SITEURL###"
 msgstr ""
-"Hej,\n"
+"Hejsa,\n"
 "\n"
-"Vi har modtaget en anmodning om at udføre den følgende handling på din konto:\n"
+"Der er kommet en forespørgsel om at foretage sig følgende på din konto:\n"
 "\n"
 "     ###DESCRIPTION###\n"
 "\n"
-"For at bekræfte dette, klik venligst på det følgende link:\n"
+"For at bekræfte dette så klik på dette link:\n"
 "###CONFIRM_URL###\n"
 "\n"
-"Du kan roligt ignorere og slette denne email, hvis du ikke ønsker at udføre denne handling.\n"
-"\n"
-"Denne email er blevet sendt til ###EMAIL###.\n"
+"Du kan uden problemer godt ignore og slette denne e-mail, hvis du ikke ønsker\n"
+"at foretage dig noget.\n"
 "\n"
 "Med venlig hilsen,\n"
-"Alle på ###SITENAME###\n"
+"Alle hos ###SITENAME###\n"
 "###SITEURL###"
 
 #: wp-includes/script-loader.php:668
@@ -437,7 +434,7 @@ msgstr "Mine"
 msgid "Whether or not the post type can be viewed."
 msgstr "Om denne indholdstype er synlig eller ej."
 
-#: wp-includes/functions.php:2608
+#: wp-includes/functions.php:2621
 msgid "The link you followed has expired."
 msgstr "Det link, du fulgte, er udløbet."
 
@@ -447,7 +444,7 @@ msgid "You need a higher level of permission."
 msgstr "Du har brug for et højere adgangsniveau."
 
 #: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2618
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2631
 #: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
 #: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
 msgid "Something went wrong."
@@ -1121,14 +1118,14 @@ msgstr "%s:"
 #. author's hostname
 #. translators: 1: Comment author name, 2: comment author's IP address, 3:
 #. comment author's hostname
-#: wp-includes/pluggable.php:1494 wp-includes/pluggable.php:1654
+#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1657
 msgid "Author: %1$s (IP address: %2$s, %3$s)"
 msgstr "Forfatter: %1$s (IP-adresse: %2$s, %3$s)"
 
 #. translators: 1: Trackback/pingback website name, 2: website IP address, 3:
 #. website hostname
-#: wp-includes/pluggable.php:1473 wp-includes/pluggable.php:1484
-#: wp-includes/pluggable.php:1634 wp-includes/pluggable.php:1644
+#: wp-includes/pluggable.php:1476 wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1637 wp-includes/pluggable.php:1647
 msgid "Website: %1$s (IP address: %2$s, %3$s)"
 msgstr "Websted: %1$s (IP-adresse: %2$s, %3$s)"
 
@@ -1214,13 +1211,13 @@ msgstr "Scrape af nonce-tjek fejlede. Prøv venligst igen."
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5780
+#: wp-includes/functions.php:5815
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Besked om ændring af administrators e-mail"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5765
+#: wp-includes/functions.php:5800
 msgid ""
 "Hi,\n"
 "\n"
@@ -1246,7 +1243,7 @@ msgstr ""
 " Alle fra ###SITENAME###\n"
 " ###SITEURL###"
 
-#: wp-includes/functions.php:5701
+#: wp-includes/functions.php:5736
 msgid "Only UUID V4 is supported at this time."
 msgstr "Kun UUID V4 er understøttet på nuværende tidspunkt."
 
@@ -2031,7 +2028,7 @@ msgstr ""
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "Foreslåede billeddimensioner: %1$s x %2$s pixels."
 
-#: wp-includes/functions.php:2140 wp-includes/script-loader.php:291
+#: wp-includes/functions.php:2153 wp-includes/script-loader.php:291
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "Beklager, denne filtype er ikke tilladt af sikkerhedsmæssige årsager."
 
@@ -4348,12 +4345,12 @@ msgid "Sorry, you are not allowed to preview drafts."
 msgstr "Du har desværre ikke tilladelse til at forhåndsvise kladder."
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1760
+#: wp-includes/pluggable.php:1763
 msgid "[%s] Password Changed"
 msgstr "[%s] Adgangskode ændret"
 
 #. translators: %s: user name
-#: wp-includes/pluggable.php:1752
+#: wp-includes/pluggable.php:1755
 msgid "Password changed for user: %s"
 msgstr "Adgangskode ændret for bruger: %s"
 
@@ -4565,13 +4562,13 @@ msgstr "<strong>FEJL</strong>: Ugyldigt brugernavn, e-mailadresse eller forkert 
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "%1$s %2$s %3$s %4$s Feed"
 
-#: wp-includes/functions.php:5314
+#: wp-includes/functions.php:5327
 msgid "Close dialog"
 msgstr "Luk dialog"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3902
+#: wp-includes/functions.php:3915
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Den kaldte constructor-metode for %1$s i %2$s er <strong>forældet</strong> siden version %3$s! Brug i stedet %4$s."
 
@@ -4709,12 +4706,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "Læs <a href=\"%s\" target=\"_blank\">fejlrapporteringssiden</a>.Nogle af retningslinjerne der kan måske hjælpe dig med at finde ud, hvad der er galt."
 
-#: wp-includes/functions.php:4145
+#: wp-includes/functions.php:4158
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4144
+#: wp-includes/functions.php:4157
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Se venligst <a href=\"%s\">Fejlfinding i WordPress</a> for mere information."
 
@@ -5508,7 +5505,7 @@ msgstr "Dit link til at gendanne din adgangskode ser ud til at være ugyldigt. B
 msgid "WordPress database error:"
 msgstr "WordPress databasefejl:"
 
-#: wp-includes/pluggable.php:1895
+#: wp-includes/pluggable.php:1898
 msgid "To set your password, visit the following address:"
 msgstr "For at indstille din adgangskode, så besøg følgende adresse:"
 
@@ -5522,7 +5519,7 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "Mappen %s af develop-repository'en skal bruges til RTL."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3906
+#: wp-includes/functions.php:3919
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Den kaldte constructor-metode for %1$s er <strong>forældet</strong> siden version %2$s! Brug %3$s."
 
@@ -6390,27 +6387,27 @@ msgid "Trash"
 msgstr "Papirkurv"
 
 #. translators: 1: Trackback/pingback/comment author URL
-#: wp-includes/pluggable.php:1474 wp-includes/pluggable.php:1485
-#: wp-includes/pluggable.php:1496 wp-includes/pluggable.php:1636
-#: wp-includes/pluggable.php:1646 wp-includes/pluggable.php:1658
+#: wp-includes/pluggable.php:1477 wp-includes/pluggable.php:1488
+#: wp-includes/pluggable.php:1499 wp-includes/pluggable.php:1639
+#: wp-includes/pluggable.php:1649 wp-includes/pluggable.php:1661
 msgid "URL: %s"
 msgstr "URL: %s"
 
 #. translators: 1: Comment text
-#: wp-includes/pluggable.php:1475 wp-includes/pluggable.php:1486
-#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1660
+#: wp-includes/pluggable.php:1478 wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1500 wp-includes/pluggable.php:1663
 msgid "Comment: %s"
 msgstr "Kommentar: %s"
 
-#: wp-includes/pluggable.php:1476
+#: wp-includes/pluggable.php:1479
 msgid "You can see all trackbacks on this post here:"
 msgstr "Du kan se alle trackbacks til indlægget her:"
 
-#: wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1490
 msgid "You can see all pingbacks on this post here:"
 msgstr "Du kan se alle pingbacks til indlægget her:"
 
-#: wp-includes/pluggable.php:1498
+#: wp-includes/pluggable.php:1501
 msgid "You can see all comments on this post here:"
 msgstr "Du kan se alle kommentarer til indlægget her:"
 
@@ -7984,7 +7981,7 @@ msgstr "%1$s %2$s, %3$s @ %4$s:%5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "Din session er udløbet. Du kan logge ind igen fra denne side eller gå til login-siden."
 
-#: wp-includes/functions.php:5331
+#: wp-includes/functions.php:5344
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Login-siden vil åbne i et nyt vindue. Når du er logget ind, kan du lukke det og gå tilbage til denne side."
 
@@ -8009,7 +8006,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "Søg &hellip;"
 
-#: wp-includes/functions.php:5329 wp-includes/script-loader.php:569
+#: wp-includes/functions.php:5342 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "Session udløbet"
 
@@ -9012,12 +9009,12 @@ msgstr "Dokumentation"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3779 wp-includes/ms-load.php:455
+#: wp-includes/functions.php:3792 wp-includes/ms-load.php:455
 #: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Fejl ved etablering af databaseforbindelse"
 
-#: wp-includes/functions.php:3775
+#: wp-includes/functions.php:3788
 msgid "Database Error"
 msgstr "Databasefejl"
 
@@ -9096,7 +9093,7 @@ msgstr "Vis kategori"
 msgid "View Tag"
 msgstr "Vis tag"
 
-#: wp-includes/pluggable.php:1080 wp-includes/pluggable.php:1123
+#: wp-includes/pluggable.php:1083 wp-includes/pluggable.php:1126
 msgid "You should specify a nonce action to be verified by using the first parameter."
 msgstr "Du skal angive en nonce-handling, der skal verificeres gennem den første parameter."
 
@@ -9194,17 +9191,17 @@ msgid "The user is already active."
 msgstr "Brugeren er allerede aktiv."
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4141
+#: wp-includes/functions.php:4154
 msgid "(This message was added in version %s.)"
 msgstr "(denne meddelelse blev tilføjet i version %s)."
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4148
+#: wp-includes/functions.php:4161
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s er kaldt <strong>forkert</strong>. %2$s %3$s"
 
-#: wp-includes/pluggable.php:1504
+#: wp-includes/pluggable.php:1507
 msgid "Permalink: %s"
 msgstr "Permalink: %s"
 
@@ -9654,7 +9651,7 @@ msgid "Sorry, you must be able to edit posts on this site in order to view tags.
 msgstr "Du skal desværre kunne redigere indlæg på dette websted for at kunne se tags."
 
 #. translators: %s: site title
-#: wp-includes/pluggable.php:1828
+#: wp-includes/pluggable.php:1831
 msgid "New user registration on your site %s:"
 msgstr "Ny brugerregistrering på dit websted %s:"
 
@@ -9923,26 +9920,26 @@ msgid "File canceled."
 msgstr "Fil annulleret."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1651
+#: wp-includes/pluggable.php:1654
 msgid "A new comment on the post \"%s\" is waiting for your approval"
 msgstr "En ny kommentar til dit indlæg \"%s\" afventer din godkendelse"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1641
+#: wp-includes/pluggable.php:1644
 msgid "A new pingback on the post \"%s\" is waiting for your approval"
 msgstr "Et nyt pingback til dit indlæg \"%s\" afventer din godkendelse"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1631
+#: wp-includes/pluggable.php:1634
 msgid "A new trackback on the post \"%s\" is waiting for your approval"
 msgstr "Et nyt trackback til dit indlæg \"%s\" afventer din godkendelse"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1482
+#: wp-includes/pluggable.php:1485
 msgid "New pingback on your post \"%s\""
 msgstr "Nyt pingback til dit indlæg \"%s\""
 
-#: wp-includes/pluggable.php:1492
+#: wp-includes/pluggable.php:1495
 msgid "New comment on your post \"%s\""
 msgstr "Ny kommentar til dit indlæg \"%s\""
 
@@ -9955,7 +9952,7 @@ msgid "If you are the owner of this network please check that MySQL is running p
 msgstr "Hvis du er ejeren af dette netværk, så tjek venligst om MySQL kører ordentligt og alle tabeller er uden fejl."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1471
+#: wp-includes/pluggable.php:1474
 msgid "New trackback on your post \"%s\""
 msgstr "Nyt trackback til dit indlæg \"%s\""
 
@@ -10334,8 +10331,8 @@ msgstr "<strong>FEJL</strong>: Indtast venligst din e-mailadresse."
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289 wp-includes/user.php:3400
-#: wp-includes/user.php:3412 wp-includes/user.php:3430 wp-login.php:853
+#: wp-includes/user.php:2289 wp-includes/user.php:3397
+#: wp-includes/user.php:3409 wp-includes/user.php:3427 wp-login.php:853
 msgid "Invalid key"
 msgstr "Ugyldig nøgle"
 
@@ -10378,7 +10375,7 @@ msgstr "<strong>FEJL</strong>: WordPress %1$s kræver MySQL %2$s eller nyere"
 msgid "Sidebar %d"
 msgstr "Sidebar %d"
 
-#: wp-includes/functions.php:5330 wp-includes/user.php:285
+#: wp-includes/functions.php:5343 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Log venligst ind igen."
 
@@ -10675,74 +10672,74 @@ msgid "Protected: %s"
 msgstr "Beskyttet: %s"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1903
+#: wp-includes/pluggable.php:1906
 msgid "[%s] Your username and password info"
 msgstr "[%s] Dit brugernavn og din adgangskode"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1837
+#: wp-includes/pluggable.php:1840
 msgid "[%s] New User Registration"
 msgstr "[%s] Ny brugerregistrering"
 
 #. translators: %s: user login
-#: wp-includes/pluggable.php:1830 wp-includes/pluggable.php:1894
+#: wp-includes/pluggable.php:1833 wp-includes/pluggable.php:1897
 #: wp-login.php:365
 msgid "Username: %s"
 msgstr "Brugernavn: %s"
 
 #. translators: Comment moderation notification email subject. 1: Site name, 2:
 #. Post title
-#: wp-includes/pluggable.php:1684
+#: wp-includes/pluggable.php:1687
 msgid "[%1$s] Please moderate: \"%2$s\""
 msgstr "[%1$s] Bedøm venligst: \"%2$s\""
 
 #. translators: Comment moderation. 1: Number of comments awaiting approval
-#: wp-includes/pluggable.php:1679
+#: wp-includes/pluggable.php:1682
 msgid "Currently %s comment is waiting for approval. Please visit the moderation panel:"
 msgid_plural "Currently %s comments are waiting for approval. Please visit the moderation panel:"
 msgstr[0] "Der er i øjeblikket %s kommentar, der venter på godkendelse. Besøg venligst bedømmelsessiden:"
 msgstr[1] "Der er i øjeblikket %s kommentarer, der venter på godkendelse. Besøg venligst bedømmelsessiden:"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1665
+#: wp-includes/pluggable.php:1668
 msgid "Approve it: %s"
 msgstr "Godkend den: %s"
 
-#: wp-includes/pluggable.php:1647
+#: wp-includes/pluggable.php:1650
 msgid "Pingback excerpt: "
 msgstr "Pingback uddrag: "
 
-#: wp-includes/pluggable.php:1637
+#: wp-includes/pluggable.php:1640
 msgid "Trackback excerpt: "
 msgstr "Trackback uddrag: "
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1512 wp-includes/pluggable.php:1676
+#: wp-includes/pluggable.php:1515 wp-includes/pluggable.php:1679
 msgid "Spam it: %s"
 msgstr "Spam den: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1510 wp-includes/pluggable.php:1672
+#: wp-includes/pluggable.php:1513 wp-includes/pluggable.php:1675
 msgid "Delete it: %s"
 msgstr "Slet den: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1508 wp-includes/pluggable.php:1669
+#: wp-includes/pluggable.php:1511 wp-includes/pluggable.php:1672
 msgid "Trash it: %s"
 msgstr "Smid i papirkurv: %s"
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1492
 msgid "[%1$s] Pingback: \"%2$s\""
 msgstr "[%1$s] Pingback: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1478
+#: wp-includes/pluggable.php:1481
 msgid "[%1$s] Trackback: \"%2$s\""
 msgstr "[%1$s] Trackback: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1500
+#: wp-includes/pluggable.php:1503
 msgid "[%1$s] Comment: \"%2$s\""
 msgstr "[%1$s] Kommentar: \"%2$s\""
 
@@ -11386,34 +11383,34 @@ msgstr "Log ud"
 msgid "Log in"
 msgstr "Log ind"
 
-#: wp-includes/functions.php:4724
+#: wp-includes/functions.php:4737
 msgid "Manual Offsets"
 msgstr "Manuelle forskydninger"
 
-#: wp-includes/functions.php:4716 wp-includes/functions.php:4720
+#: wp-includes/functions.php:4729 wp-includes/functions.php:4733
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4671
+#: wp-includes/functions.php:4684
 msgid "Select a city"
 msgstr "Vælg en by"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4035
+#: wp-includes/functions.php:4048
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s blev kaldt med en parameter der er blevet <strong>forældet</strong> siden version %2$s uden noget alternativ."
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4032
+#: wp-includes/functions.php:4045
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%1$s blev kaldt med et argument der har været <strong>forældet</strong> siden version %2$s! %3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3843 wp-includes/functions.php:3971
-#: wp-includes/functions.php:4094
+#: wp-includes/functions.php:3856 wp-includes/functions.php:3984
+#: wp-includes/functions.php:4107
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s har været <strong>forældet</strong> siden version %2$s, og der er ingen alternativer."
 
@@ -11422,43 +11419,43 @@ msgstr "%1$s har været <strong>forældet</strong> siden version %2$s, og der er
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3840 wp-includes/functions.php:3968
-#: wp-includes/functions.php:4091
+#: wp-includes/functions.php:3853 wp-includes/functions.php:3981
+#: wp-includes/functions.php:4104
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s har været <strong>forældet</strong> siden version %2$s! Brug %3$s i stedet."
 
-#: wp-includes/functions.php:2750 wp-load.php:92
+#: wp-includes/functions.php:2763 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Fejl"
 
-#: wp-includes/functions.php:2738
+#: wp-includes/functions.php:2751
 msgid "&laquo; Back"
 msgstr "&laquo; Tilbage"
 
-#: wp-includes/functions.php:2613 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2626 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Prøv venligst igen."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2604
+#: wp-includes/functions.php:2617
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Vil du virkelig <a href=\"%s\">logge ud</a>?"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2597
+#: wp-includes/functions.php:2610
 msgid "You are attempting to log out of %s"
 msgstr "Du prøver at logge ud af %s"
 
-#: wp-includes/functions.php:2182
+#: wp-includes/functions.php:2195
 msgid "Could not write file %s"
 msgstr "Kunne ikke gemme filen %s"
 
-#: wp-includes/functions.php:2136
+#: wp-includes/functions.php:2149
 msgid "Empty filename"
 msgstr "Intet filnavn"
 
 #. translators: %s: directory path
-#: wp-includes/functions.php:1905 wp-includes/functions.php:2174
+#: wp-includes/functions.php:1918 wp-includes/functions.php:2187
 msgid "Unable to create directory %s. Is its parent directory writable by the server?"
 msgstr "Kan ikke oprette mappen %s. Er modermappen skrivbar for serveren?"
 
@@ -11847,7 +11844,7 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "Af en eller anden mærkelig, men meget irriterende grund, kunne indlægget ikke redigeres."
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3716
+#: wp-includes/functions.php:3729
 msgid "Widgets"
 msgstr "Widgets"
 
@@ -12073,8 +12070,8 @@ msgstr "Sider"
 
 #. translators: 1: Comment author URL
 #. translators: %s: user email address
-#: wp-includes/pluggable.php:1495 wp-includes/pluggable.php:1656
-#: wp-includes/pluggable.php:1832
+#: wp-includes/pluggable.php:1498 wp-includes/pluggable.php:1659
+#: wp-includes/pluggable.php:1835
 msgid "Email: %s"
 msgstr "E-mail: %s"
 

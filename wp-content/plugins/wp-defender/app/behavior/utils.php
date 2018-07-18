@@ -8,7 +8,9 @@ namespace WP_Defender\Behavior;
 use Hammer\Base\Behavior;
 use Hammer\Helper\Log_Helper;
 use Hammer\Helper\WP_Helper;
+use WP_Defender\Module\Advanced_Tools\Component\Mask_Api;
 use WP_Defender\Module\Advanced_Tools\Model\Auth_Settings;
+use WP_Defender\Module\Advanced_Tools\Model\Mask_Settings;
 use WP_Defender\Module\Hardener\Model\Settings;
 use WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api;
 use WP_Defender\Module\Scan\Component\Scan_Api;
@@ -43,13 +45,11 @@ class Utils extends Behavior {
 			$post_vars['timeout']        = 30;
 			$post_vars['httpversion']    = '1.1';
 
-			$headers = isset( $post_vars['headers'] ) ? $post_vars['headers'] : array();
-
+			$post_vars            = array_merge( $post_vars, $requestArgs );
+			$headers              = isset( $post_vars['headers'] ) ? $post_vars['headers'] : array();
 			$post_vars['headers'] = array_merge( $headers, array(
 				'Authorization' => 'Basic ' . $api_key
 			) );
-
-			$post_vars = array_merge( $post_vars, $requestArgs );
 
 			$response = wp_remote_request( $endPoint,
 				apply_filters( 'wd_wpmudev_call_request_args',
@@ -820,6 +820,10 @@ class Utils extends Behavior {
 							'active'  => Auth_Settings::instance()->enabled,
 							'enabled' => ! empty( Auth_Settings::instance()->userRoles ),
 						),
+						'mask_login'         => array(
+							'activate'   => Mask_Settings::instance()->isEnabled(),
+							'masked_url' => Mask_Api::getNewLoginUrl()
+						)
 					),
 					'reports'               => array(
 						'file_scanning' => array(

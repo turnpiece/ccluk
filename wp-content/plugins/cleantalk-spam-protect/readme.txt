@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 4.9
-Stable tag: 5.98
+Stable tag: 5.99.1
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -516,6 +516,14 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.99.1 July 17 2018 =
+  * IP detection fixed and improved.
+  
+= 5.99 July 10 2018 =
+  * Fix: WooCommerce false positives.
+  * Fix: SpamFireWall IP detection.
+  * Minor fixes.
+
 = 5.98 June 27 2018 =
   * Fix: WooCommerce: Theme exclusion.
   * Fix: Public GDPR JS code.
@@ -1606,6 +1614,14 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.99.1 July 17 2018 =
+  * IP detection fixed and improved.
+
+= 5.99 July 10 2018 =
+  * Fix: WooCommerce false positives.
+  * Fix: SpamFireWall IP detection.
+  * Minor fixes.
+
 = 5.98 June 27 2018 =
   * Fix: WooCommerce: Exclusion.
   * Fix: Public GDPR JS code.

@@ -11,34 +11,49 @@
 class SWP_Script {
 
 	/**
-	 * The magic method used to instatiate our class and queue up
-	 * all of the add_action and add_filter functions.
+	 * The magic method used to instatiate our class and queue up all of the
+	 * add_action and add_filter functions as well as fix a known compatibility
+	 * issue with LightSpeed cache.
 	 *
 	 * @since  1.0.0
+	 * @since  3.1.0 | 18 JUNE 2018 | Created add_hooks() and fix_compatability().
 	 * @access public
 	 * @param  none
 	 * @return none
+	 *
 	 */
     public function __construct() {
+		$this->add_hooks();
+		$this->fix_litespeed_compatibility();
+    }
+
+
+	/**
+	 * Add this classes methods to the appropiate hooks.
+	 *
+	 * @since  3.1.0 | 18 JUNE 2018 | Created
+	 * @param  void
+	 * @return void
+	 *
+	 */
+	public function add_hooks() {
+
+		// Queue up our footer hook function
+        add_filter( 'swp_footer_scripts', array( $this, 'nonce' ) );
+        add_filter( 'swp_footer_scripts', array( $this, 'frame_buster' ) );
+        add_filter( 'swp_footer_scripts', array( $this, 'float_before_content' ) );
 
         // Queue up our footer hook function
-        add_filter( 'swp_footer_scripts' , array($this, 'nonce') );
-        add_filter( 'swp_footer_scripts' , array($this, 'frame_buster' ) );
-
-        // Queue up our footer hook function
-        add_filter( 'swp_footer_scripts' , array($this, 'click_tracking' ) );
+        add_filter( 'swp_footer_scripts', array( $this, 'click_tracking' ) );
 
 		// Queue up the Social Warfare scripts and styles
-        add_action( 'wp_enqueue_scripts', array($this, 'enqueue_scripts') );
-        add_action( 'admin_enqueue_scripts', array($this, 'enqueue_admin_scripts') );
+        add_action( 'wp_enqueue_scripts', array( $this, 'enqueue_scripts' ) );
+        add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_admin_scripts' ) );
 
         // Queue up our hook function
-        add_action( 'wp_footer' , array($this, 'footer_functions') , 99 );
+        add_action( 'wp_footer' , array( $this, 'footer_functions' ) , 99 );
 
-        if ( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) :
-        	LiteSpeed_Cache_API::hook_tpl_esi('swp_esi', array($this, 'hook_esi') );
-        endif;
-    }
+	}
 
 
     /**
@@ -68,6 +83,7 @@ class SWP_Script {
      * @since  1.0.0
      * @access public
      * @global $swp_user_options
+     * @param  void
      * @return void
      */
     public function enqueue_scripts() {
@@ -132,12 +148,14 @@ class SWP_Script {
 
     /**
      * Queue up our javscript for options and whatnot
+     *
      * @since 1.4.0
      * @param Void
      * @return Void. Echo results directly to the screen.
      *
      */
     public function footer_functions() {
+
     	global $swp_user_options;
 
     	// Fetch a few variables.
@@ -167,6 +185,8 @@ class SWP_Script {
      *
      */
     public function click_tracking( $info ) {
+
+		// Output the JS variable for click tracking if it is turned on.
     	if ( isset( $info['swp_user_options']['click_tracking'] ) && true === $info['swp_user_options']['click_tracking'] ) {
     		$info['footer_output'] .= 'var swpClickTracking = true;';
     	} else {
@@ -175,6 +195,42 @@ class SWP_Script {
 
     	return $info;
     }
+
+
+	/**
+     * The Frame Buster Option
+     *
+     * @since  1.4.0
+     * @access public
+     * @param  array $info An array of footer script information.
+     * @return array $info A modified array of footer script information.
+     *
+     */
+    public function frame_buster( $info ) {
+
+    	global $swp_user_options;
+
+    	if ( true === $swp_user_options['frame_buster'] ) :
+    		$info['footer_output'] .= PHP_EOL . 'function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "' . get_permalink() . '";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};';
+    	endif;
+
+    	return $info;
+    }
+
+
+	/**
+	 * A method to fix compatibility with LiteSpeed Cache plugin.
+	 *
+	 * @since  3.1.0 | 18 JUN 2018 | Created
+	 * @param  void
+	 * @return void
+	 *
+	 */
+	public function fix_litespeed_compatibility() {
+		if ( method_exists( 'LiteSpeed_Cache_API', 'esi_enabled' ) && LiteSpeed_Cache_API::esi_enabled() ) :
+        	LiteSpeed_Cache_API::hook_tpl_esi( 'swp_esi', array( $this, 'hook_esi' ) );
+        endif;
+	}
 
 
     /**
@@ -204,12 +260,30 @@ class SWP_Script {
     }
 
 
+    /**
+     * Echoes selected admin settings from the database to javascript.
+     *
+     * @since  3.1.0 | 27 JUN 2018 | Created the method.
+     * @access public
+     * @return void
+     *
+     */
+    public function float_before_content( $vars ) {
+        global $swp_user_options;
+        $float_before_content = $swp_user_options['float_before_content'];
+
+        $vars['footer_output'] = "var swpFloatBeforeContent = " . json_encode($float_before_content) . ";";
+
+        return $vars;
+    }
+
+
 	/**
 	 * Add LiteSpeed ESI hook for nonce cache
 	 *
 	 * @access public
-	 * @param  None
-	 * @return None
+	 * @param  void
+	 * @return void
 	 *
 	 */
 	public function hook_esi() {
@@ -217,24 +291,4 @@ class SWP_Script {
 		exit;
 	}
 
-
-    /**
-     * The Frame Buster Option
-     *
-     * @since  1.4.0
-     * @access public
-     * @param  array $info An array of footer script information.
-     * @return array $info A modified array of footer script information.
-     *
-     */
-    public function frame_buster( $info ) {
-
-    	global $swp_user_options;
-
-    	if ( true === $swp_user_options['frame_buster'] ) :
-    		$info['footer_output'] .= PHP_EOL . 'function parentIsEvil() { var html = null; try { var doc = top.location.pathname; } catch(err){ }; if(typeof doc === "undefined") { return true } else { return false }; }; if (parentIsEvil()) { top.location = self.location.href; };var url = "' . get_permalink() . '";if(url.indexOf("stfi.re") != -1) { var canonical = ""; var links = document.getElementsByTagName("link"); for (var i = 0; i < links.length; i ++) { if (links[i].getAttribute("rel") === "canonical") { canonical = links[i].getAttribute("href")}}; canonical = canonical.replace("?sfr=1", "");top.location = canonical; console.log(canonical);};';
-    	endif;
-
-    	return $info;
-    }
 }

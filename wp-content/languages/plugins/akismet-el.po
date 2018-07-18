@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-22 18:34:21+0000\n"
+"PO-Revision-Date: 2018-07-13 10:04:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -10,6 +10,14 @@ msgstr ""
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: el_GR\n"
 "Project-Id-Version: Plugins - Akismet Anti-Spam - Stable (latest release)\n"
+
+#: views/notice.php:138
+msgid "To help your site with transparency under privacy laws like the GDPR, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, you can turn it on below."
+msgstr "Για να βοηθήσετε τον ιστότοπό σας με τη διαφάνεια σύμφωνα με τους νόμους περί απορρήτου όπως το GDPR, το Akismet μπορεί να προβάλλει ειδοποίηση στους χρήστες σας κάτω από τις φόρμες σχολίων. Αυτή η λειτουργία είναι απενεργοποιημένη από προεπιλογή, ωστόσο, μπορείτε να την ενεργοποιήσετε παρακάτω."
+
+#: views/config.php:162
+msgid "To help your site with transparency under privacy laws like the GDPR, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, you can turn it on above."
+msgstr "Για να βοηθήσετε τον ιστότοπό σας με τη διαφάνεια σύμφωνα με τους νόμους περί απορρήτου όπως το GDPR, το Akismet μπορεί να προβάλλει ειδοποίηση στους χρήστες σας κάτω από τις φόρμες σχολίων. Αυτή η λειτουργία είναι απενεργοποιημένη από προεπιλογή, ωστόσο, μπορείτε να την ενεργοποιήσετε παρακάτω."
 
 #: views/notice.php:139
 msgid " Please <a href=\"%s\">enable</a> or <a href=\"%s\">disable</a> this feature. <a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">More information</a>."
@@ -37,11 +45,11 @@ msgstr "Ιδιωτικότητα"
 
 #: class.akismet.php:1419
 msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
-msgstr "Αυτός ο ιστότοπος χρησιμοποιεί το Akismet για να μειώσει τα ανεπιθύμητα σχόλια. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Μάθετε επεξεργάζονται τα δεδομένα των σχολίων</a>."
+msgstr "Αυτός ο ιστότοπος χρησιμοποιεί το Akismet για να μειώσει τα ανεπιθύμητα σχόλια. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Μάθετε πώς υφίστανται επεξεργασία τα δεδομένα των σχολίων σας</a>."
 
 #: class.akismet-admin.php:86
 msgid "We collect information about visitors who comment on Sites that use our Akismet anti-spam service. The information we collect depends on how the User sets up Akismet for the Site, but typically includes the commenter's IP address, user agent, referrer, and Site URL (along with other information directly provided by the commenter such as their name, username, email address, and the comment itself)."
-msgstr "Συλλέγουμε πληροφορίες σχετικά με τους χρήστες που κάνουν σχόλια στην ιστοσελίδα που χρησιμοποιεί την υπηρεσία Akismet για την εξάλειψης των spam. Οι πληροφορίες που συλλέγουμε εξαρτάτε από το πως οι διαχειριστές έχουν ρυθμίσει το Akismet σε αυτή την ιστοσελίδα, αλλά τυπικά συλλέγουμε τις διευθύνσεις IP των επισκεπτών, το όνομα του περιηγητή, την πηγή από την οποία βρέθηκαν στις σελίδες μας, και την διεύθυνση της ιστοσελίδας ( μαζί με άλλες πληροφορίες που παρέχονται κατευθείαν από τον σχολιαστή, όπως το όνομα, όνομα χρήστη, την διεύθυνση ηλεκτρονικού ταχυδρομείου, και το σχόλιο που κάνει ο επισκέπτης )."
+msgstr "Συλλέγουμε πληροφορίες σχετικά με τους επισκέπτες που σχολιάζουν σε ιστότοπους που χρησιμοποιούν την υπηρεσία anti-spam Akismet. Οι πληροφορίες που συλλέγουμε εξαρτώνται από τον τρόπο με τον οποίο ο χρήστης θέτει σε λειτουργία το Akismet για τον ιστότοπο, αλλά περιλαμβάνουν συνήθως τη διεύθυνση IP του σχολιαστή, τον user agent, τη διεύθυνση παραπομπής και τη διεύθυνση ιστοτόπου (μαζί με άλλες πληροφορίες που παρέχονται απευθείας από τον σχολιαστή όπως το όνομα, η διεύθυνση και το ίδιο το σχόλιο)."
 
 #: class.akismet.php:226
 msgid "Comment discarded."

@@ -162,6 +162,7 @@
 													<?php
 													$item     = new StdClass();
 													$item->ip = $row['ip'];
+													$item->id = null;
 													echo \WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::getLogsActionsText( $item );
 													?>
                                                 </div>

@@ -8,11 +8,17 @@
  * is a collection of "section" objects each of which will contain a collection of related
  * options to display on the options page in a group.
  *
- * @since  3.0.0   | Created | 02 MAR 2017
- * @access public
+ * @package   SocialWarfare\Functions\Social-Networks
+ * @copyright Copyright (c) 2018, Warfare Plugins, LLC
+ * @license   GPL-3.0+
+ * @since     3.0.0  | 02 MAR 2017 | Created
+ * @since     3.1.0 | 14 JUN 2018 | Updated to use set_key() method.
+ * @access    public
  *
  */
 class SWP_Options_Page_Tab extends SWP_Abstract {
+
+
 	/**
 	* Sections
 	*
@@ -25,13 +31,19 @@ class SWP_Options_Page_Tab extends SWP_Abstract {
 	*/
 	public $sections;
 
+
     /**
     * Links
     * This is the link used by Javscript to switch tabs.
     *
+    * Note: This is not an href or external link. This is just a key used by jQuery
+	* to select the proper tab.
+	*
     * @var string $link
+    *
     */
     public $link;
+
 
 	/**
 	* The magic method used to instantiate this class.
@@ -39,26 +51,28 @@ class SWP_Options_Page_Tab extends SWP_Abstract {
 	* This method instantiates this class by settings the "sections" property to
 	* an object so the the "options" objects can easily be added to it later on.
 	*
-	* @since  3.0.0 | 3 MAR 2018 | Created
+	* @since  3.0.0  | 3 MAR 2018 | Created
+	* @since  3.1.0 | 14 JUN 2018 | Update to use set_key() method.
+	* @param  str $name The name of this tab.
+	* @param  str $key  The unique key for this tab.
+	*
 	*/
 	public function __construct( $name, $key ) {
 		$this->sections = new stdClass();
 
         $this->set_name( $name );
         $this->set_link( $key );
-        if ( isset( $key ) ) :
-            $this->key = $key;
-        else:
-            $this->key = $this->name_to_key( $name );
-        endif;
+		$this->set_key( $key );
+
 	}
 
 
     /**
     * Pushes one SWP_Options_Page_Section object into $this array of sections.
     *
-    * @param SWP_Options_Page_Section $section The section to add to the array.
-    * @return SWP_Options_Page_Tab $this The calling option, for method chaining.
+    * @since  3.0.0 | 01 MAR 2018 | Created
+    * @param  object $section SWP_Options_Page_Section - The section to add to the array.
+    * @return object $this Allows for method chaining.
     *
     */
     public function add_section( $section ) {
@@ -67,7 +81,6 @@ class SWP_Options_Page_Tab extends SWP_Abstract {
         endif;
 
         $key = $section->key;
-
         $this->sections->$key = $section;
 
         return $this;
@@ -76,8 +89,9 @@ class SWP_Options_Page_Tab extends SWP_Abstract {
     /**
     * Adds multiple SWP_Options_Page_Section objects into $this array of sections.
     *
-    * @param array $sections An array of SWP_Options_Page_Section.
-    * @return SWP_Options_Page_Tab $this The calling option, for method chaining.
+    * @since  3.0.0 | 01 MAR 2018 | Created
+    * @param  array $sections An array of SWP_Options_Page_Section objects.
+    * @return object $this The calling option, for method chaining.
     *
     */
     public function add_sections( $sections ) {
@@ -96,14 +110,16 @@ class SWP_Options_Page_Tab extends SWP_Abstract {
         return $this;
     }
 
+
     /**
     * Sets the Javascript for switching tabs on the Admin page.
     *
-    * Notice: This is not an href or external link. This is just a key used by jQuery
+    * Note: This is not an href or external link. This is just a key used by jQuery
     * to select the proper tab.
     *
-    * @param string $link The key correlatign to the tab. Must match the javascript target.
-    * @return SWP_Options_Page_Tab $this The calling option, for method chaining.
+    * @since  3.0.0 | 01 MAR 2018 | Created
+    * @param  string $link The key correlatign to the tab. Must match the javascript target.
+    * @return object $this The calling option, for method chaining.
     *
     */
     public function set_link( $link ) {

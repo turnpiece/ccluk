@@ -1,6 +1,6 @@
 <dialog class="dev-team" id="pro-feature" title="<?php _e( "Defender Pro Features", wp_defender()->domain ) ?>">
     <div class="wp-defender">
-        <p class=""><?php _e( "Here’s what you’ll get by upgrading to Defender Pro;", wp_defender()->domain ) ?></p>
+        <p class=""><?php _e( "Here’s what you’ll get by upgrading to Defender Pro:", wp_defender()->domain ) ?></p>
         <div class="well well-blank with-cap">
             <i class="def-icon icon-tick fill-blue" aria-hidden="true"></i>
             <strong><?php _e( "Automatic Full File Scans & Notifications", wp_defender()->domain ) ?></strong>
@@ -33,7 +33,7 @@
         </div>
         <div class="tc">
             <a class="button button-green mline" href="https://premium.wpmudev.org/project/wp-defender/?utm_source=defender&utm_medium=plugin&utm_campaign=defender_modal_upgrade"><?php _e( "Get Defender Pro for Free", wp_defender()->domain ) ?></a>
-            <p class="is-marginless"><?php _e( "As part part of a WPMU DEV free trial.", wp_defender()->domain ) ?></p>
+            <p class="is-marginless"><?php _e( "As part of a WPMU DEV free trial.", wp_defender()->domain ) ?></p>
         </div>
     </div>
 </dialog>

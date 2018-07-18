@@ -76,7 +76,7 @@ class AT_Widget extends Behavior {
                     </strong>
                     <span>
 						<?php
-						_e( "Change the location of WordPress’s default wp-admin and wp-login URLs.", wp_defender()->domain )
+						_e( 'Change the location of WordPress’s default login area.', wp_defender()->domain )
 						?>
                     </span>
 					<?php

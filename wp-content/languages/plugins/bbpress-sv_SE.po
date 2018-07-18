@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - bbPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-03-16 09:40:07+0000\n"
+"PO-Revision-Date: 2018-07-10 23:22:31+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -1062,7 +1062,7 @@ msgstr "Förkasta"
 #: includes/topics/functions.php:1967
 msgctxt "Spam the topic"
 msgid "Spam"
-msgstr "Skräppost"
+msgstr "Markera som skräppost"
 
 #: includes/topics/functions.php:1966
 msgctxt "Close the topic"
@@ -2233,7 +2233,7 @@ msgstr "Kastade: %s"
 
 #: includes/common/functions.php:513 includes/common/functions.php:545
 msgid "Spammed: %s"
-msgstr "Skräppost: %s"
+msgstr "Markerat som skräppost: %s"
 
 #: includes/common/functions.php:512 includes/common/functions.php:544
 msgid "Private: %s"

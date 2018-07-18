@@ -99,39 +99,43 @@ class Content_Scan extends Behavior {
 		}
 
 		$scanError           = array();
-		$patterns            = file_get_contents( __DIR__ . '/pattern.json' );
+		$patterns            = file_get_contents( __DIR__ . '/signs.json' );
 		$patterns            = json_decode( $patterns, true );
 		$content             = file_get_contents( $file );
 		$smallestStartOffset = 0;
 		$maxEndOffset        = 0;
 		$isInit              = true;
+		$debugLine           = "File: {$file}" . PHP_EOL;
+		$start               = microtime( true );
 		foreach ( $patterns as $pattern ) {
 			if ( preg_match( '/' . $pattern[1] . '/m', $content, $matches, PREG_OFFSET_CAPTURE ) ) {
-				if ( $pattern[0] == 'enMaliciousThreatType' ) {
-					$startOffset = $matches[0][1];
-					$endOffset   = strlen( $matches[0][0] ) + $matches[0][1];
-					if ( $isInit == true ) {
-						$smallestStartOffset = $startOffset;
-						$maxEndOffset        = $endOffset;
-						$isInit              = false;
-					} else {
-						if ( $startOffset >= $smallestStartOffset && $endOffset <= $maxEndOffset ) {
-							//this is is ide the current, just move on
-							continue;
-						}
+				$startOffset = $matches[0][1];
+				$endOffset   = strlen( $matches[0][0] ) + $matches[0][1];
+				if ( $isInit == true ) {
+					$smallestStartOffset = $startOffset;
+					$maxEndOffset        = $endOffset;
+					$isInit              = false;
+				} else {
+					if ( $startOffset >= $smallestStartOffset && $endOffset <= $maxEndOffset ) {
+						//this is is ide the current, just move on
+						continue;
 					}
-					$scanError[] = array(
-						'lineFrom'   => 0,
-						'lineTo'     => 0,
-						'columnFrom' => 0,
-						'columnTo'   => 0,
-						'offsetFrom' => $startOffset,
-						'offsetTo'   => $endOffset,
-						'name'       => $pattern[2]
-					);
 				}
+				$scanError[] = array(
+					'lineFrom'   => 0,
+					'lineTo'     => 0,
+					'columnFrom' => 0,
+					'columnTo'   => 0,
+					'offsetFrom' => $startOffset,
+					'offsetTo'   => $endOffset,
+					'name'       => $pattern[2],
+					'type'       => $pattern[0],
+					'pattern'    => $pattern[1]
+				);
 			}
 		}
+		$debugLine .= "Process Time:" . ( microtime( true ) - $start ) . PHP_EOL;
+		//echo $debugLine;
 		$scanError = array_filter( $scanError );
 		//need to recheck the offset, if it is inside another offset, then remove
 		if ( count( $scanError ) ) {

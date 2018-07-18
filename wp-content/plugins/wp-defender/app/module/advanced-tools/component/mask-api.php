@@ -23,8 +23,7 @@ class Mask_Api extends Component {
 		if ( empty( $requestUri ) ) {
 			$requestUri = $_SERVER['REQUEST_URI'];
 		}
-		//todo fix the case subfolder
-		$prefix      = parse_url( network_site_url(), PHP_URL_PATH );
+		$prefix = parse_url( self::site_url(), PHP_URL_PATH );;
 		$requestPath = parse_url( $requestUri, PHP_URL_PATH );
 		//clean it a bit
 		if ( Utils::instance()->isActivatedSingle() == false
@@ -32,6 +31,7 @@ class Mask_Api extends Component {
 		     && constant( 'SUBDOMAIN_INSTALL' ) == false
 		     && get_current_blog_id() != 1
 		) {
+			$prefix = parse_url( self::network_site_url(), PHP_URL_PATH );
 			//get the prefix
 			$siteInfo = get_blog_details();
 			$path     = $siteInfo->path;
@@ -52,6 +52,56 @@ class Mask_Api extends Component {
 	}
 
 	/**
+	 * A clone of network_site_url but remove the filter
+	 *
+	 * @param string $path
+	 * @param null $scheme
+	 *
+	 * @return string
+	 */
+	private static function site_url( $path = '', $scheme = null ) {
+		if ( empty( $blog_id ) || ! is_multisite() ) {
+			$url = get_option( 'siteurl' );
+		} else {
+			switch_to_blog( $blog_id );
+			$url = get_option( 'siteurl' );
+			restore_current_blog();
+		}
+
+		$url = set_url_scheme( $url, $scheme );
+
+		if ( $path && is_string( $path ) ) {
+			$url .= '/' . ltrim( $path, '/' );
+		}
+
+		return $url;
+	}
+
+	/**
+	 * A clone of network_site_url but remove the filter
+	 *
+	 * @param string $path
+	 * @param null $scheme
+	 *
+	 * @return string
+	 */
+	private static function network_site_url( $path = '', $scheme = null ) {
+		$current_network = get_network();
+
+		if ( 'relative' == $scheme ) {
+			$url = $current_network->path;
+		} else {
+			$url = set_url_scheme( 'http://' . $current_network->domain . $current_network->path, $scheme );
+		}
+
+		if ( $path && is_string( $path ) ) {
+			$url .= ltrim( $path, '/' );
+		}
+
+		return $url;
+	}
+
+	/**
 	 * @return string
 	 */
 	public static function getRedirectUrl() {
@@ -63,10 +113,13 @@ class Mask_Api extends Component {
 	/**
 	 * @return string
 	 */
-	public static function getNewLoginUrl() {
+	public static function getNewLoginUrl( $domain = null ) {
 		$settings = Mask_Settings::instance();
+		if ( $domain == null ) {
+			$domain = site_url();
+		}
 
-		return untrailingslashit( site_url() ) . '/' . ltrim( $settings->maskUrl, '/' );
+		return untrailingslashit( $domain . '/' . ltrim( $settings->maskUrl, '/' ) );
 	}
 
 	/**

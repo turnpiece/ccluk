@@ -222,11 +222,12 @@ class Main extends Controller {
 					'message' => Login_Protection_Api::getLogsActionsText( $log )
 				) );
 			} else {
-				$item = new \StdClass();
+				$item     = new \StdClass();
 				$item->ip = $ip;
+				$item->id = null;
 				wp_send_json_success( array(
 					'message' => sprintf( __( "IP %s has been added to your blacklist. You can control your blacklist in <a href=\"%s\">IP Lockouts.</a>", wp_defender()->domain ), $ip, network_admin_url( 'admin.php?page=wdf-ip-lockout&view=blacklist' ) ),
-					'buttons' => Login_Protection_Api::getLogsActionsText($item )
+					'buttons' => Login_Protection_Api::getLogsActionsText( $item )
 				) );
 			}
 		} else {

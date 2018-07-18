@@ -2029,8 +2029,9 @@ function ct_contact_form_validate() {
 	// Skip the test if it's WooCommerce and the checkout test unset
 	if(strpos($_SERVER['REQUEST_URI'], 'wc-ajax=checkout') !== false || 
 	   strpos($_SERVER['REQUEST_URI'], 'wc-ajax=update_order_review') !== false ||
-	   (isset($_POST['_wp_http_referer']) && strpos($_SERVER['REQUEST_URI'], 'wc-ajax=update_order_review') !== false))
-	{
+	   (isset($_POST['_wp_http_referer']) && strpos($_SERVER['REQUEST_URI'], 'wc-ajax=update_order_review') !== false) ||
+	   !empty($_POST['woocommerce_checkout_place_order'])
+	){
 		$post_info['comment_type'] = 'order';
 		if($ct_options['wc_checkout_test'] == 0){
 			return null;

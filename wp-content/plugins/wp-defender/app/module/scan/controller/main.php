@@ -209,7 +209,7 @@ class Main extends \WP_Defender\Controller {
 				if ( $ids ) {
 					$this->submitStatsToDev();
 					wp_send_json_success( array(
-						'message' => _n( "The suspicious files has been successfully deleted.",
+						'message' => _n( "The suspicious file has been successfully deleted.",
 							"The suspicious files have been successfully deleted.",
 							count( $items ), wp_defender()->domain )
 					) );
@@ -232,7 +232,7 @@ class Main extends \WP_Defender\Controller {
 				if ( $ids ) {
 					$this->submitStatsToDev();
 					wp_send_json_success( array(
-						'message' => _n( "The suspicious files has been successfully resolved.",
+						'message' => _n( "The suspicious file has been successfully resolved.",
 							"The suspicious files have been successfully resolved.",
 							count( $items ), wp_defender()->domain )
 					) );

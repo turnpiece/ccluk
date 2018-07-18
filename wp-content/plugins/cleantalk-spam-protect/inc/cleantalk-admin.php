@@ -352,6 +352,14 @@ function ct_account_status_check(){
 			$ct_data['auto_update_app']            = isset($result['auto_update_app'])        ? $result['auto_update_app']          : 0;
 		}
 		
+		if (isset($result['service_id']))
+			$ct_data['service_id'] = (int)$result['service_id'];
+		
+		if (isset($result['moderate']) && $result['moderate'] == 1)
+			$ct_data['moderate'] = 1;
+		else
+			$ct_data['moderate'] = 0;
+		
 		if (isset($result['license_trial'])){
 			$ct_data['license_trial'] = $result['license_trial'];
 		}
@@ -637,7 +645,7 @@ function ct_input_daily_counter() {
 	echo "<input type='radio' class='ct-depends-of-show-adminbar' id='cleantalk_daily_counter1' name='cleantalk_settings[daily_counter]' value='1' ".($value=='1'?'checked':'').($value2=='0'?' disabled':'')." /><label for='cleantalk_daily_counter1'> ".__('Yes')."</label>";
 	echo '&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;';
 	echo "<input type='radio' class='ct-depends-of-show-adminbar' id='cleantalk_daily_counter0' name='cleantalk_settings[daily_counter]' value='0' ".($value=='0'?'checked':'').($value2=='0'?' disabled':'')." /><label for='cleantalk_daily_counter0'> ".__('No')."</label>";
-	ct_add_descriptions_to_fields(sprintf(__('Display daily requests counter in the admin bar. Counter displays number of requests of the past 24 hours.', 'cleantalk'),  $ct_options['all_time_counter']));
+	ct_add_descriptions_to_fields(__('Display daily requests counter in the admin bar. Counter displays number of requests of the past 24 hours.', 'cleantalk'));
 }
 
 function ct_input_sfw_counter() {
@@ -664,7 +672,7 @@ function ct_send_connection_reports() {
 	$value = $value=(isset($ct_options['send_connection_reports']) ? @intval($ct_options['send_connection_reports']) : 0);
 	echo "<div id='cleantalk_anchor3' style='display:none'></div>";
 	echo "<input type='checkbox' id='connection_reports1' name='cleantalk_settings[send_connection_reports]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='connection_reports1'> " . __('Send connection reports', 'cleantalk') . "</label>";
-	ct_add_descriptions_to_fields(sprintf(__("Checking this box you allow plugin to send the information about your connection. The option in a beta state.", 'cleantalk'),  $ct_options['spam_firewall']));
+	ct_add_descriptions_to_fields(__("Checking this box you allow plugin to send the information about your connection. The option in a beta state.", 'cleantalk'));
 	echo "<script>
 		jQuery(document).ready(function(){
 			jQuery('#cleantalk_anchor3').parent().parent().children().first().hide();
@@ -683,8 +691,8 @@ function ct_async_js() {
 
 	$value = $value=(isset($ct_options['async_js']) ? @intval($ct_options['async_js']) : 0);
 	echo "<div id='cleantalk_anchor4' style='display:none'></div>";
-	echo "<input type='checkbox' id='connection_reports1' name='cleantalk_settings[async_js]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='connection_reports1'> " . __('Async script loading', 'cleantalk') . "</label>";
-	ct_add_descriptions_to_fields(sprintf(__('Use async loading for CleanTalk\'s scripts. Warning: This could reduce filtration quality.', 'cleantalk'),  $ct_options['spam_firewall']));
+	echo "<input type='checkbox' id='async_js' name='cleantalk_settings[async_js]' value='1' " . ($value == '1' ? 'checked' : '') . " /><label for='async_js'> " . __('Async script loading', 'cleantalk') . "</label>";
+	ct_add_descriptions_to_fields(__('Use async loading for CleanTalk\'s scripts. Warning: This could reduce filtration quality.', 'cleantalk'));
 	echo "<script>
 		jQuery(document).ready(function(){
 			jQuery('#cleantalk_anchor4').parent().parent().children().first().hide();
@@ -724,8 +732,8 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 	global $ct_options, $ct_data;
 	
 	$ct_options = ct_get_options();
-		
-	if (current_user_can('activate_plugins') && $ct_options['show_adminbar'] == 1 && ct_valid_key($ct_options['apikey']) !== false) {
+	
+	if (current_user_can('activate_plugins') && $ct_options['show_adminbar'] == 1 && (ct_valid_key($ct_options['apikey']) !== false || (defined('CLEANTALK_SHOW_ADMIN_BAR_FORCE') && CLEANTALK_SHOW_ADMIN_BAR_FORCE))) {
         $ct_data=ct_get_data();
         		
 		//Reset or create user counter
@@ -774,9 +782,22 @@ function ct_add_admin_menu( $wp_admin_bar ) {
 			$sfw_counter_str='<span style="color: white;" title="'.__('All / Blocked events. Access attempts regitred by SpamFireWall counted since the last plugin activation.', 'cleantalk').'"><span style="color: white;"> | SpamFireWall: ' .$sfw_counter['all']. '</span> / <span style="color: red;">' .$sfw_counter['blocked']. '</span></span>';
 		}
 		
+		$show_some = $ct_data['show_ct_notice_trial'] == 1 && isset($ct_data['moderate'],$ct_data['service_id']) && $ct_data['moderate']== 0 && $ct_data['service_id']%2 == 0
+			? true
+			: false;
+		$user_token = (isset($ct_data['user_token']) && $ct_data['user_token'] != '' ? "&user_token={$ct_data['user_token']}" : "");
+		
 		$args = array(
 			'id'	=> 'ct_parent_node',
-			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'images/logo_small1.png" alt=""  height="" style="margin-top:9px; float: left;" /><div style="margin: auto 7px;" class="ab-item alignright"><div class="ab-label" id="ct_stats"><span style="color: white;" title="'.__('Allowed / Blocked submissions. The number of submissions is being counted since ', 'cleantalk').' '.$user_counter['since'].'">'.$user_counter_str.'</span>	'.$daily_counter_str.$all_time_counter_str.$sfw_counter_str.'</div></div>' //You could change widget string here by simply deleting variables
+			'title' => '<img src="' . plugin_dir_url(__FILE__) . 'images/logo_small1.png" alt=""  height="" style="margin-top:9px; float: left;" />'
+				.'<div style="margin: auto 7px;" class="ab-item alignright">'
+					.'<div class="ab-label" id="ct_stats">'
+						.($show_some
+							? "<span><a style='color: red;' href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20trial$user_token&cp_mode=antispam\" target=\"_blank\">Renew Anti-Spam</a></span>"
+							: '<span style="color: white;" title="'.__('Allowed / Blocked submissions. The number of submissions is being counted since ', 'cleantalk').' '.$user_counter['since'].'">'.$user_counter_str.'</span>	'.$daily_counter_str.$all_time_counter_str.$sfw_counter_str	
+						)
+					.'</div>'
+				.'</div>' //You could change widget string here by simply deleting variables
 		);
 		$wp_admin_bar->add_node( $args );
 	
@@ -1782,8 +1803,14 @@ function cleantalk_admin_notice_message(){
 			$show_notice = false;
 		}
 		
+		$test = isset($ct_data['service_id'], $ct_data['moderate']) && $ct_data['service_id']%2 == 0 && $ct_data['moderate'] == 0
+			? true
+			: false;
+		
 		//"Trial period ends" notice from apbct_admin_init().api_method__notice_paid_till()
 		if ($show_notice && $show_ct_notice_trial == 1) {
+			if($test){				
+				if(isset($_GET['page']) && in_array($_GET['page'], array('cleantalk','ct_check_users','ct_check_spam'))){
 			echo '<div class="error">
 				<h3>' . sprintf(__("%s trial period ends, please upgrade to %s!", 'cleantalk'), 
 					"<a href='{$settings_link}'>$ct_plugin_name</a>", 
@@ -1791,6 +1818,16 @@ function cleantalk_admin_notice_message(){
 				'</h3>
 			</div>';
 			$show_notice = false;
+				}
+			}else{
+				echo '<div class="error">
+					<h3>' . sprintf(__("%s trial period ends, please upgrade to %s!", 'cleantalk'), 
+						"<a href='{$settings_link}'>$ct_plugin_name</a>", 
+						"<a href=\"http://cleantalk.org/my/bill/recharge?utm_source=wp-backend&utm_medium=cpc&utm_campaign=WP%20backend%20trial$user_token&cp_mode=antispam\" target=\"_blank\"><b>premium version</b></a>") .
+					'</h3>
+				</div>';
+				$show_notice = false;
+			}
 		}
 		
 		//Renew notice from apbct_admin_init().api_method__notice_paid_till()

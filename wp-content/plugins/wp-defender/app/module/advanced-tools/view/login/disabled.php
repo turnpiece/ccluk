@@ -16,6 +16,13 @@
 						?>
                     </div>
 				<?php endif; ?>
+				<?php
+				$user  = wp_get_current_user();
+				$email = '';
+				if ( is_object( $user ) ) {
+					$email = $user->user_email;
+				}
+				?>
                 <div id="def2">
                     <div class="destroy-sessions">
                         <button type="button" class="button" id="show2AuthActivator">
@@ -47,7 +54,7 @@
                         <p><strong><?php _e( "2. Scan the barcode", wp_defender()->domain ) ?></strong></p>
                         <p><?php _e( "Open the Google Authenticator app you just downloaded, tap the “+” symbol and then use your phone’s camera to scan the barcode below.", wp_defender()->domain ) ?></p>
                         <img class="barcode"
-                             src="<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( get_site_url(), $secretKey, 149, 149, get_site_url() ) ?>"/>
+                             src="<?php echo \WP_Defender\Module\Advanced_Tools\Component\Auth_API::generateQRCode( urlencode( get_bloginfo( 'name' ) ) . ':' . $email, $secretKey, 149, 149, urlencode( get_bloginfo( 'name' ) ) ) ?>"/>
                         <div class="line"></div>
                         <p><strong><?php _e( "3. Enter passcode", wp_defender()->domain ) ?></strong></p>
                         <p>
@@ -79,7 +86,7 @@
             $('#def2qr').hide();
             $('#def2').show();
         })
-        $("input#otpCode").keydown(function(event) {
+        $("input#otpCode").keydown(function (event) {
             if (event.keyCode == 13) {
                 event.preventDefault();
 

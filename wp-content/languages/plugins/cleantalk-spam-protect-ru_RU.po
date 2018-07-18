@@ -1,15 +1,15 @@
-# Translation of Plugins - Spam protection, AntiSpam, FireWall, Cleaner by CleanTalk - Stable (latest release) in Russian
-# This file is distributed under the same license as the Plugins - Spam protection, AntiSpam, FireWall, Cleaner by CleanTalk - Stable (latest release) package.
+# Translation of Plugins - Spam protection, AntiSpam, FireWall by CleanTalk - Stable (latest release) in Russian
+# This file is distributed under the same license as the Plugins - Spam protection, AntiSpam, FireWall by CleanTalk - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2017-11-15 07:09:59+0000\n"
+"PO-Revision-Date: 2018-06-27 08:37:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n%10==1 && n%100!=11 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2);\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: ru\n"
-"Project-Id-Version: Plugins - Spam protection, AntiSpam, FireWall, Cleaner by CleanTalk - Stable (latest release)\n"
+"Project-Id-Version: Plugins - Spam protection, AntiSpam, FireWall by CleanTalk - Stable (latest release)\n"
 
 #. Author of the plugin/theme
 msgid "СleanTalk <welcome@cleantalk.org>"
@@ -26,7 +26,7 @@ msgstr "Максимальная эффективность, проверка в
 #. #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "http://cleantalk.org"
-msgstr "http://cleantalk.org"
+msgstr "https://cleantalk.org/"
 
 #: cleantalk.php:364
 msgid "blocked by"
@@ -81,7 +81,7 @@ msgstr "Роль"
 #: cleantalk-users.php:107
 msgctxt "column name"
 msgid "E-mail"
-msgstr "E-mail"
+msgstr "Почта"
 
 #: cleantalk-users.php:106
 msgctxt "column name"

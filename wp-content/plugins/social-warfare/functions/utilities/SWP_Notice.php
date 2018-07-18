@@ -35,6 +35,7 @@ class SWP_Notice {
         $this->init();
         $this->set_message( $message );
         $this->actions = array();
+        $this->no_cta = false;
 
 		// Add hooks to display our admin notices in the dashbaord and on our settings page.
         add_action( 'admin_notices', array( $this, 'print_HTML' ) );
@@ -255,24 +256,24 @@ class SWP_Notice {
     * @since  3.0.9 | 07 JUN 2018 | Created
     * @access public
     * @param  string $action Optional. The message to be displayed. Default "Thanks, I understand."
-    * @param  string $link Optional. The outbound link.
+    * @param  string $href Optional. The outbound href.
     * @param  string $class Optional. The CSS classname to assign to the CTA.
     * @param  string $timeframe
     * @return $this Allows for method chaining.
     *
     */
-    public function add_cta( $action = '', $link = '', $class = '' , $timeframe = 0 )  {
+    public function add_cta( $action = '', $href = '', $class = '' , $timeframe = 0 )  {
         if ( '' === $action ) :
             $action = "Thanks, I understand.";
         endif;
 
-        if ( !empty( $link ) ) :
-            $link = ' href="' . $link . '" target="_blank"';
+        if ( !empty( $href ) && '' !== $href ) :
+            $href = ' href="' . $href . '" target="_blank"';
         endif;
 
         $cta              = array();
         $cta['action']    = $action;
-        $cta['link']      = $link;
+        $cta['href']      = $href;
         $cta['class']     = $class;
 		$cta['timeframe'] = $timeframe;
 
@@ -295,7 +296,7 @@ class SWP_Notice {
 	 *
 	 */
     public function render_HTML() {
-        if ( empty( $this->actions) ) :
+        if ( empty( $this->actions) && false === $this->no_cta) :
             $this->add_cta();
         endif;
 
@@ -304,7 +305,7 @@ class SWP_Notice {
             $html .= '<div class="swp-actions">';
 
                 foreach( $this->actions as $cta) {
-                    $html .= '<a class="swp-notice-cta ' . $cta['class'] . '" ' . $cta['link'] . ' data-timeframe="'.$cta['timeframe'].'">';
+                    $html .= '<a class="swp-notice-cta ' . $cta['class'] . '" ' . $cta['href'] . ' data-timeframe="'.$cta['timeframe'].'">';
                         $html .= $cta['action'];
                     $html .= "</a>";
                 }
@@ -381,4 +382,24 @@ class SWP_Notice {
     private function is_date( $string ) {
         return DateTime::createFromFormat( 'Y-m-d h:i:s', $string ) !== false;
     }
+
+
+    /**
+     * Prevents a CTA from being displayed on the notice.
+     *
+     * In cases where we require the user to take action, we need them
+     * to follow the directions in the message before removing the notice.
+     *
+     * @since  3.1.0 | 05 JUL 2018 | Created the method.
+     * @return SWP_Notice $this, for method chaining.
+     *
+     */
+     public function remove_cta() {
+         //* Force the ctas to an empty array so render can still loop over it.
+         $this->actions = array();
+
+         $this->no_cta = true;
+
+         return $this;
+     }
 }

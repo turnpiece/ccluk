@@ -27,8 +27,8 @@ class Audit_Free extends Behavior {
                 </div>
                 <div class="presale-text">
                     <div>
-						<?php printf( __( "Audit logging is a pro feature included in a WPMU DEV membership along with 100+ plugins &
-                        themes, 24/7 support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try it all absolutely FREE</a>", wp_defender()->domain ), Utils::instance()->campaignURL('defender_dash_auditlogging_upsell_link') ) ?>
+						<?php printf( __( "Audit logging is a pro feature included in a WPMU DEV membership along with 100+ plugins,
+                        24/7 support and lots of handy site management tools – <a target='_blank' href=\"%s\">Try it all absolutely FREE</a>", wp_defender()->domain ), Utils::instance()->campaignURL('defender_dash_auditlogging_upsell_link') ) ?>
                         </a>
                     </div>
                 </div>
