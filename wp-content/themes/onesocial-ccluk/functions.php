@@ -31,7 +31,7 @@ add_action( 'plugins_loaded', function() {
 
 // Category archives to include news posts
 function ccluk_show_cpt_archives( $query ) {
-    if( is_category() || is_tag() && empty( $query->query_vars['suppress_filters'] ) ) {
+    if( ( is_category() || is_tag() ) && empty( $query->query_vars['suppress_filters'] ) ) {
         $query->set( 
             'post_type', 
             array(
