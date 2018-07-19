@@ -64,8 +64,11 @@ a,
     -webkit-border-radius: 5px;
     -moz-border-radius: 5px;
     border-radius: 5px;
+    background-image: none;
     background-color: #22a7f0;
     border: none;
+    text-shadow: none;
+    box-shadow: none;
     padding: 12px 24px;
     padding: 1.2rem 2.4rem;
     color: #fff !important;
@@ -169,8 +172,11 @@ a.button {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-image: none;
   background-color: #22a7f0;
   border: none;
+  text-shadow: none;
+  box-shadow: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
@@ -441,7 +447,7 @@ body.page #primary article > .entry-header {
   margin: 1.2rem 0rem;
   border-bottom: 1px solid #54ae68; }
   body.page #primary article > .entry-header h1.entry-title {
-    font-size: 35px;
+    font-size: 36px;
     padding-bottom: 15px;
     color: #54ae68; }
   body.page #primary article > .entry-header a > .entry-title {
@@ -675,8 +681,11 @@ body.page-template-homepage #main {
             -webkit-border-radius: 5px;
             -moz-border-radius: 5px;
             border-radius: 5px;
+            background-image: none;
             background-color: #22a7f0;
             border: none;
+            text-shadow: none;
+            box-shadow: none;
             padding: 12px 24px;
             padding: 1.2rem 2.4rem;
             color: #fff !important;
@@ -699,8 +708,11 @@ body.page-template-homepage #main {
         -webkit-border-radius: 5px;
         -moz-border-radius: 5px;
         border-radius: 5px;
+        background-image: none;
         background-color: #22a7f0;
         border: none;
+        text-shadow: none;
+        box-shadow: none;
         padding: 12px 24px;
         padding: 1.2rem 2.4rem;
         color: #fff !important;
@@ -757,8 +769,11 @@ body.page-template-homepage .homepage-section-title > h4 {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-image: none;
   background-color: #22a7f0;
   border: none;
+  text-shadow: none;
+  box-shadow: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
@@ -1324,8 +1339,11 @@ body.buddypress #buddypress #create-group-form input[type="submit"] {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-image: none;
   background-color: #22a7f0;
   border: none;
+  text-shadow: none;
+  box-shadow: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
@@ -1338,8 +1356,11 @@ body.buddypress #buddypress #save_as_draft {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
+  background-image: none;
   background-color: #22a7f0;
   border: none;
+  text-shadow: none;
+  box-shadow: none;
   padding: 12px 24px;
   padding: 1.2rem 2.4rem;
   color: #fff !important; }
@@ -1514,6 +1535,77 @@ body.buddypress.calendar #buddypress #item-body .bp-widget {
   #bbpress-forums .bbp-forum-data .last-activity {
     font-size: 15px;
     color: #54ae68; }
+
+.single-incsub_event .entry-header {
+  margin: 12px 0px;
+  margin: 1.2rem 0rem;
+  border-bottom: 1px solid #54ae68; }
+  .single-incsub_event .entry-header h1.entry-title {
+    font-size: 36px;
+    padding-bottom: 15px;
+    color: #54ae68; }
+  .single-incsub_event .entry-header a > .entry-title {
+    color: #22a7f0; }
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit,
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit,
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit,
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit,
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit,
+.single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-image: none;
+  background-color: #22a7f0;
+  border: none;
+  text-shadow: none;
+  box-shadow: none;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  color: #fff !important;
+  padding: 3px 6px;
+  padding: 0.3rem 0.6rem; }
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit:hover,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit:hover,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit:hover,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit:hover,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit:hover,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit:hover {
+    color: #fff !important;
+    background-color: #54ae68 !important; }
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-yes-submit.current,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-maybe-submit.current,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons a.wpmudevevents-no-submit.current,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-yes-submit.current,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-maybe-submit.current,
+  .single-incsub_event #wpmudevevents-wrapper div.wpmudevevents-buttons input.wpmudevevents-no-submit.current {
+    background-color: #54ae68; }
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-hide-rsvps,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-load-rsvps,
+.single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps a.wpmudevevents-login_link-cancel {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-image: none;
+  background-color: #22a7f0;
+  border: none;
+  text-shadow: none;
+  box-shadow: none;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  color: #fff !important;
+  padding: 3px 6px;
+  padding: 0.3rem 0.6rem; }
+  .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-hide-rsvps:hover,
+  .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps #wpmudevevents-load-rsvps:hover,
+  .single-incsub_event #wpmudevevents-wrapper #wpmudevevents-rsvps a.wpmudevevents-login_link-cancel:hover {
+    color: #fff !important;
+    background-color: #54ae68 !important; }
+.single-incsub_event #wpmudevevents-wrapper div.message {
+  border: none; }
+  .single-incsub_event #wpmudevevents-wrapper div.message.success {
+    color: #fff;
+    background-color: #54ae68; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
