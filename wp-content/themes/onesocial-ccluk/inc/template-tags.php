@@ -50,38 +50,6 @@ function ccluk_site_logo(){
     echo '<div class="site-brand-inner '.esc_attr( join( ' ', $classes ) ).'">'.$html.'</div>';
 }
 
-add_action( 'ccluk_site_start', 'ccluk_site_header' );
-if ( ! function_exists( 'ccluk_site_header' ) ) {
-    /**
-     * Display site header
-     */
-    function ccluk_site_header(){
-        ?>
-        <header id="masthead" class="site-header" role="banner">
-            <div class="container">
-                <div class="site-branding">
-                <?php
-                ccluk_site_logo();
-                ?>
-                </div>
-                <!-- .site-branding -->
-
-                <div class="header-right-wrapper">
-                    <a href="#0" id="nav-toggle"><?php _e('Menu', 'onesocial'); ?><span></span></a>
-                    <nav id="site-navigation" class="main-navigation" role="navigation">
-                        <ul class="ccluk-menu">
-                            <?php wp_nav_menu(array('theme_location' => 'primary', 'container' => '', 'items_wrap' => '%3$s')); ?>
-                        </ul>
-                    </nav>
-                    <!-- #site-navigation -->
-                </div>
-            </div>
-        </header><!-- #masthead -->
-        <?php
-    }
-}
-
-
 if ( ! function_exists( 'ccluk_posted_on' ) ) {
     /**
      * Prints HTML with meta information for the current post-date/time and author.
