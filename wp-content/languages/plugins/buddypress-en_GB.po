@@ -2,14 +2,17 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-04-03 18:38:30+0000\n"
+"PO-Revision-Date: 2018-07-26 20:09+0100\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: GlotPress/2.4.0-alpha\n"
+"X-Generator: Poedit 2.1.1\n"
 "Language: en_GB\n"
 "Project-Id-Version: Plugins - BuddyPress - Stable (latest release)\n"
+"POT-Creation-Date: \n"
+"Last-Translator: \n"
+"Language-Team: \n"
 
 #. Description of the plugin/theme
 msgid "BuddyPress adds community features to WordPress. Member Profiles, Activity Streams, Direct Messaging, Notifications, and more!"
@@ -2408,7 +2411,7 @@ msgstr "No posts found. Try a different search?"
 
 #: bp-themes/bp-default/sidebar.php:37
 msgid "Please <a href=\"%s\" title=\"Create an account\">create an account</a> to get started."
-msgstr "Please <a href=\"%s\" title=\"Create an account\">create an account</a> to get started."
+msgstr "Please <a href=\"%s\" title=\"Create an account\">join Citizens’ Climate Lobby</a> to get started."
 
 #: bp-themes/bp-default/sidebar.php:65
 msgid "Forum Topic Tags"
@@ -2733,9 +2736,7 @@ msgstr "There was an error posting that reply, please try again."
 msgid "The BuddyPress Community"
 msgstr "The BuddyPress Community"
 
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 2.9.4)  #-#-#-#-#
 #. Plugin URI of the plugin/theme
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 2.9.4)  #-#-#-#-#
 #. Author URI of the plugin/theme
 msgid "https://buddypress.org/"
 msgstr "https://buddypress.org/"
@@ -8185,7 +8186,7 @@ msgstr "Activate your Account"
 #: bp-members/classes/class-bp-registration-theme-compat.php:100
 #: bp-themes/bp-default/registration/register.php:23
 msgid "Create an Account"
-msgstr "Create an Account"
+msgstr "Join Citizens’ Climate Lobby"
 
 #: bp-core/bp-core-template.php:3186
 msgctxt "component directory title"
@@ -8888,7 +8889,6 @@ msgstr "Logged-Out"
 msgid "Logged-In"
 msgstr "Logged-In"
 
-#. #-#-#-#-#  buddypress-code.pot (BuddyPress 2.9.4)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: bp-core/admin/bp-core-admin-functions.php:758
 #: bp-core/classes/class-bp-admin.php:222

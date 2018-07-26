@@ -64,7 +64,7 @@
 
 			</div>
 
-			<p><?php echo get_theme_mod( 'ccluk_join_intro', sprintf( __( 'Joining %s is easy. Just fill in the fields below, and we\'ll get a new account set up for you in no time.', 'onesocial' ), get_bloginfo('name') ) ) ?></p>
+			<p><?php echo get_theme_mod( 'ccluk_join_intro', sprintf( __( 'Join %s and become part of a growing movement lobbying for effective action on climate change. Just fill in the fields below.', 'onesocial' ), get_bloginfo('name') ) ) ?></p>
 
 			<?php
 
