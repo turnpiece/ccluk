@@ -1,10 +1,28 @@
 Plugin Name: WP Smush Pro
 Author: WPMU DEV
-Tested up to: 4.9.6
+Tested up to: 4.9.7
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+= 2.8.0 =
+
+* New: High-power API cluster for Smush Pro users
+* New: Updated and improved UI/UX
+* New: Stats meta box
+* Enhance: Smush will have it's own section in the GDPR policy, instead of appending to the end of the policy text
+* Enhance: Compatibility with AJAX Thumbnail Rebuild and ACF plugins
+* Enhance: Add support for image/x-png and image/x-citrix-jpeg mime types
+* Fixed: File size not updated inside the attachment details modal during Smush/restore of an image
+* Fixed: Directory Smush using mobile
+* Fixed: Smush progress during feature image upload
+* Fixed: Image width and height converted to string in async request
+* Fixed: Warnings on PHP 5.2
+* Fixed: Warnings on PHP 7.1
+* Fixed: Fixed wrong method name in S3 offload class. Thanks Tedy Warsitha
+* Fixed: Issues when editing image attributes in the media library
+* Fixed: Missing translation strings
 
 = 2.7.9.2 =
 
@@ -58,7 +76,7 @@ Change Log:
 
 = 2.7.6 =
 
-* Security: Fixed path traversal vulnerability. Thanks Ricardo SГЎnchez(@neorichi) for responsible disclosure.
+* Security: Fixed path traversal vulnerability. Thanks Ricardo Sánchez(@neorichi) for responsible disclosure.
 
 = 2.7.5 =
 
@@ -421,4 +439,4 @@ Change Log:
 - First release
 
 
-87274-1529857379-au
+87274-1532632755-au

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-31 07:56:21+0000\n"
+"PO-Revision-Date: 2018-07-25 10:42:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -11,10 +11,6 @@ msgstr ""
 "Language: it\n"
 "Project-Id-Version: Plugins - Akismet Anti-Spam - Stable (latest release)\n"
 
-#: views/notice.php:138
-msgid "To help your site be compliant with GDPR and other laws requiring notification of tracking, Akismet can display a notice to your users under your comment forms. This feature is disabled by default, however, if you or your audience is located in Europe, you need to turn it on."
-msgstr "Per aiutarti ad essere in linea con la GDPR e altre regolamentazioni che richiedono notifiche e tracciatura di dati, Akismet può visualizzare un avviso per i tuoi utenti sotto il tuo form per i commenti. Questa opzione non disattivata per default, tuttavia hai bisogno di attivarla se i tuoi lettori si trovano in Europa. "
-
 #: views/notice.php:139
 msgid " Please <a href=\"%s\">enable</a> or <a href=\"%s\">disable</a> this feature. <a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">More information</a>."
 msgstr "<a href=\"%s\">enable</a> or <a href=\"%s\">Disattiva</a> questa opzione. <a href=\"%s\" id=\"akismet-privacy-notice-control-notice-info-link\" target=\"_blank\">Leggi di più</a>."
@@ -22,10 +18,6 @@ msgstr "<a href=\"%s\">enable</a> or <a href=\"%s\">Disattiva</a> questa opzione
 #: views/notice.php:137
 msgid "Akismet & Privacy."
 msgstr "Akismet & Privacy."
-
-#: views/config.php:162
-msgid "To help your site be compliant with GDPR and other laws requiring notification of tracking, Akismet can display a notice to your users on your contact form. This feature is disabled by default, however, if you or your audience is located in Europe, you need to turn it on."
-msgstr "Per aiutarti ad essere in linea con la GDPR e altre regolamentazioni che richiedono notifiche e tracciatura di dati, Akismet può visualizzare un avviso per i tuoi utenti sotto il tuo form per i contatti. Questa opzione non disattivata per default, tuttavia hai bisogno di attivarla se i tuoi lettori si trovano in Europa."
 
 #: views/config.php:160
 msgid "Do not display privacy notice."
@@ -44,8 +36,8 @@ msgid "Privacy"
 msgstr "Privacy"
 
 #: class.akismet.php:1419
-msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\">Learn how your comment data is processed</a>."
-msgstr "Questo sito usa Akismet per ridurre lo spam. <a href=\"%s\">Scopri come i tuoi dati vengono elaborati</a>."
+msgid "This site uses Akismet to reduce spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Learn how your comment data is processed</a>."
+msgstr "Questo sito usa Akismet per ridurre lo spam. <a href=\"%s\" target=\"_blank\" rel=\"nofollow noopener\">Scopri come i tuoi dati vengono elaborati</a>."
 
 #: class.akismet-admin.php:86
 msgid "We collect information about visitors who comment on Sites that use our Akismet anti-spam service. The information we collect depends on how the User sets up Akismet for the Site, but typically includes the commenter's IP address, user agent, referrer, and Site URL (along with other information directly provided by the commenter such as their name, username, email address, and the comment itself)."
@@ -107,7 +99,7 @@ msgstr "In questa pagina, puoi aggiornare le tue impostazioni di Akismet e veder
 msgid "Used by millions, Akismet is quite possibly the best way in the world to <strong>protect your blog from spam</strong>. It keeps your site protected even while you sleep. To get started: activate the Akismet plugin and then go to your Akismet Settings page to set up your API key."
 msgstr "Usato da milioni di persone, Akismet è probabilmente il miglior modo al mondo per <strong>proteggere il tuo blog dallo spam</strong>. Protegge il tuo sito anche mentre dormi. Per iniziare: attiva il plugin e poi vai alla pagina delle Impostazioni di Akismet per impostare la tua chiave API."
 
-#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.7)  #-#-#-#-#
+#. #-#-#-#-#  akismet-code.pot (Akismet Anti-Spam 4.0.8)  #-#-#-#-#
 #. Plugin Name of the plugin/theme
 #: class.akismet-admin.php:111 class.akismet-admin.php:114
 msgid "Akismet Anti-Spam"

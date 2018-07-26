@@ -1,0 +1,129 @@
+/* ****************************************************************************
+ * MODULE: VARIABLES
+ */
+
+@font-face {
+  font-family: 'wpmudev-plugin-icons';
+  src: url(../fonts/wpmudev-plugin-icons.eot);
+  src: url(../fonts/wpmudev-plugin-icons.eot) format("embedded-opentype"), url(../fonts/wpmudev-plugin-icons.ttf) format("truetype"), url(../fonts/wpmudev-plugin-icons.woff) format("woff"), url(../fonts/wpmudev-plugin-icons.woff2) format("woff2"), url(../fonts/wpmudev-plugin-icons.svg) format("svg");				 	          			 
+  font-weight: 400;
+  font-style: normal;
+}
+
+.smush-detected-img {
+  border: 5px solid #FECF2F;
+  border-radius: 5px;
+}
+
+.smush-resize-box {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  -ms-flex-line-pack: center;
+      align-content: center;
+  -ms-flex-pack: justify;
+      justify-content: space-between;
+  padding: 10px;
+  box-shadow: 0 5px 25px 0 rgba(0, 0, 0, 0.15);
+  margin: 20px auto;
+  border-radius: 30px;
+  cursor: pointer;
+  width: 250px;
+}
+
+.smush-resize-box .smush-front-icons {
+  margin: 0 10px;
+  line-height: 12px;
+}
+
+.smush-resize-box .smush-front-icons:before {
+  font-family: 'wpmudev-plugin-icons', sans-serif !important;
+  speak: none;
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 400;
+  font-variant: normal;
+  text-transform: none;
+  text-rendering: auto;
+  color: #AAA;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.smush-resize-box .smush-front-icons.smush-front-icon-arrows-in:before {
+  content: '\2264';
+}
+
+.smush-resize-box .smush-tag {
+  background-color: #fecf2f;
+  color: #333;
+  border-radius: 15px;
+  min-width: 39px;
+  height: 26px;
+  font-size: 10px;
+  line-height: 26px;
+  text-align: center;
+  font-weight: 500;
+  padding: 0 15px;
+}
+
+.smush-resize-box .smush-tag.smush-tag-success {
+  background-color: #1abc9c;
+  color: #fff;
+}
+
+.smush-resize-box.smush-tooltip {
+  position: relative;
+}
+
+.smush-resize-box.smush-tooltip:before,
+.smush-resize-box.smush-tooltip:after {
+  content: "";
+  opacity: 0;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+  pointer-events: none;
+  position: absolute;
+  z-index: 1;
+  transition: margin .2s, opacity .2s;
+}
+
+.smush-resize-box.smush-tooltip:before {
+  border: 5px solid transparent;
+  bottom: 100%;
+  left: 50%;
+  border-top-color: #000000;
+  transform: translateX(-50%);
+}
+
+.smush-resize-box.smush-tooltip:after {
+  content: attr(data-tooltip);
+  min-width: 40px;
+  padding: 8px 12px;
+  border-radius: 4px;
+  background: #000000;
+  box-sizing: border-box;
+  color: #FFFFFF;
+  font: 400 12px/18px "Roboto", Arial, sans-serif;
+  text-transform: none;
+  text-align: center;
+  white-space: nowrap;
+  bottom: 100%;
+  left: 50%;
+  margin: 0 0 10px;
+  transform: translateX(-50%);
+}
+
+.smush-resize-box.smush-tooltip:hover:before,
+.smush-resize-box.smush-tooltip:hover:after {
+  opacity: 1;
+}
+
+.smush-resize-box.smush-tooltip.smush-tooltip-constrained:after {
+  min-width: 240px;
+  white-space: normal;
+}
+
+
+/* 87274-1532632755-au */

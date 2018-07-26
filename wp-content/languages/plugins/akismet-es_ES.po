@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - Akismet Anti-Spam - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-19 18:40:31+0000\n"
+"PO-Revision-Date: 2018-07-18 21:53:33+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -324,7 +324,7 @@ msgstr "Akismet filtra el spam para que puedas centrarte en cosas más important
 
 #: views/notice.php:129
 msgid "To continue your service, <a href=\"%s\" target=\"_blank\">upgrade to an Enterprise subscription</a>, which covers an unlimited number of sites."
-msgstr "Para continuar con su servicio, <a href=\"%s\" target=\"_blank\">actualize a una suscripción  Enterprise</a>, que cubre a un número ilimitado de sitios. "
+msgstr "Para continuar con tu servicio, <a href=\"%s\" target=\"_blank\">actualiza a una suscripción Enterprise</a>, que cubre un número ilimitado de sitios. "
 
 #: views/notice.php:122
 msgid "Your Pro subscription allows the use of Akismet on only one site. Please <a href=\"%s\" target=\"_blank\">purchase additional Pro subscriptions</a> or upgrade to an Enterprise subscription that allows the use of Akismet on unlimited sites."
@@ -540,8 +540,8 @@ msgstr[1] "<a href=\"%1$s\">Akismet</a> ha protegido tu sitio de <a href=\"%2$s\
 #: class.akismet-admin.php:352
 msgid "<a href=\"%1$s\">Akismet</a> has protected your site from %2$s spam comment already. "
 msgid_plural "<a href=\"%1$s\">Akismet</a> has protected your site from %2$s spam comments already. "
-msgstr[0] "<a href=\"%1$s\">Akismet</a> ha protegido su sitio de %2$s comentario de spam hasta ahora."
-msgstr[1] "<a href=\"%1$s\">Akismet</a> ha protegido su sitio de %2$s comentarios de spam hasta ahora."
+msgstr[0] "<a href=\"%1$s\">Akismet</a> ha protegido tu sitio de %2$s comentario de spam hasta ahora. "
+msgstr[1] "<a href=\"%1$s\">Akismet</a> ha protegido tu sitio de %2$s comentarios de spam hasta ahora. "
 
 #: class.akismet-admin.php:358
 msgid "<a href=\"%s\">Akismet</a> blocks spam from getting to your blog. "
@@ -829,7 +829,7 @@ msgstr "La clave que has introducido no es válida. Por favor compruébala."
 
 #: views/notice.php:120
 msgid "You&#8217;re using your Akismet key on more sites than your Pro subscription allows."
-msgstr "Estás utilizando tu clave de Akismet en más sitios de los que te permite su suscripción Pro."
+msgstr "Estás utilizando tu clave de Akismet en más sitios de los que permite tu suscripción Pro."
 
 #: views/notice.php:127
 msgid "You&#8217;re using Akismet on far too many sites for your Pro subscription."
