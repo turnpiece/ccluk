@@ -5,14 +5,24 @@ body.single-give_forms {
 		max-width: $content_w;
 
 		#content {
-
-			input[type=submit].give-btn {
-				@include button();
+			.header-area {
+				max-width: $content_w;
+				@include centred-margin();
+				
+				> .entry-header {
+					@include page-header();
+				}
 			}
 		}
 	}
 
 	#secondary {
 		display: none;
+	}
+}
+
+.give-donation-submit {
+	input[type=submit].give-btn {
+		@include button();
 	}
 }

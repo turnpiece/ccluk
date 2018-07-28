@@ -1656,23 +1656,38 @@ body.buddypress.calendar #buddypress #item-body .bp-widget {
 /* styles for GIve donation pages */
 body.single-give_forms #main {
   max-width: 750px; }
-  body.single-give_forms #main #content input[type=submit].give-btn {
-    -webkit-border-radius: 5px;
-    -moz-border-radius: 5px;
-    border-radius: 5px;
-    background-image: none;
-    background-color: #22a7f0;
-    border: none;
-    text-shadow: none;
-    box-shadow: none;
-    padding: 12px 24px;
-    padding: 1.2rem 2.4rem;
-    color: #fff !important; }
-    body.single-give_forms #main #content input[type=submit].give-btn:hover {
-      color: #fff !important;
-      background-color: #54ae68 !important; }
+  body.single-give_forms #main #content .header-area {
+    max-width: 750px;
+    margin: 15px auto;
+    margin: 1.5rem auto; }
+    body.single-give_forms #main #content .header-area > .entry-header {
+      margin: 12px 0px;
+      margin: 1.2rem 0rem;
+      border-bottom: 1px solid #54ae68; }
+      body.single-give_forms #main #content .header-area > .entry-header h1.entry-title {
+        font-size: 36px;
+        padding-bottom: 15px;
+        color: #54ae68; }
+      body.single-give_forms #main #content .header-area > .entry-header a > .entry-title {
+        color: #22a7f0; }
 body.single-give_forms #secondary {
   display: none; }
+
+.give-donation-submit input[type=submit].give-btn {
+  -webkit-border-radius: 5px;
+  -moz-border-radius: 5px;
+  border-radius: 5px;
+  background-image: none;
+  background-color: #22a7f0;
+  border: none;
+  text-shadow: none;
+  box-shadow: none;
+  padding: 12px 24px;
+  padding: 1.2rem 2.4rem;
+  color: #fff !important; }
+  .give-donation-submit input[type=submit].give-btn:hover {
+    color: #fff !important;
+    background-color: #54ae68 !important; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
