@@ -20,7 +20,13 @@ body.page {
 		}
 	}
 
-	&.page-template-page-nosidebar {
+	#secondary, 
+	.default-page+#secondary,
+	&.page-template #secondary {
+		@include margin-top( 9.4 );
+   	}
+
+   	&.page-template-page-nosidebar {
 		#main {
 			max-width: $content_w;
 
@@ -30,13 +36,11 @@ body.page {
 				}
 			}
 		}
-	}
 
-	#secondary, 
-	.default-page+#secondary,
-	&.page-template #secondary {
-		@include margin-top( 9.4 );
-   	}
+		#secondary {
+			display: none;
+		}
+	}
 
 	#content {
 		.row {

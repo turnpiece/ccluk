@@ -298,27 +298,34 @@ body.is-mobile #main-wrap {
   #masthead .main-navigation .nav-menu.horizontal-responsive-menu {
     width: 120%; } }
 .single .header-area,
-.single-post .header-area {
+.single-post .header-area,
+.single-give_forms .header-area {
   position: relative; }
   .single .header-area .entry-header,
   .single .header-area .sap-post-meta,
   .single-post .header-area .entry-header,
-  .single-post .header-area .sap-post-meta {
+  .single-post .header-area .sap-post-meta,
+  .single-give_forms .header-area .entry-header,
+  .single-give_forms .header-area .sap-post-meta {
     padding-left: 15px;
     padding-right: 15px; }
   .single .header-area .sap-post-meta,
-  .single-post .header-area .sap-post-meta {
+  .single-post .header-area .sap-post-meta,
+  .single-give_forms .header-area .sap-post-meta {
     margin-top: 15px; }
 .single .entry-content li,
-.single-post .entry-content li {
+.single-post .entry-content li,
+.single-give_forms .entry-content li {
   margin-bottom: 13px;
   margin-bottom: 1.3rem; }
 .single .entry-content.entry-summary,
-.single-post .entry-content.entry-summary {
+.single-post .entry-content.entry-summary,
+.single-give_forms .entry-content.entry-summary {
   padding-left: 15px;
   padding-right: 15px; }
 .single .entry-post-thumbnail,
-.single-post .entry-post-thumbnail {
+.single-post .entry-post-thumbnail,
+.single-give_forms .entry-post-thumbnail {
   max-width: 1200px;
   height: auto;
   max-height: 800px;
@@ -329,7 +336,10 @@ body.is-mobile #main-wrap {
 .single .entry-header.not-image,
 .single-post .entry-header,
 .single-post .entry-header.has-image,
-.single-post .entry-header.not-image {
+.single-post .entry-header.not-image,
+.single-give_forms .entry-header,
+.single-give_forms .entry-header.has-image,
+.single-give_forms .entry-header.not-image {
   position: static;
   margin: 0 auto;
   text-align: left;
@@ -339,7 +349,10 @@ body.is-mobile #main-wrap {
   .single .entry-header.not-image h1,
   .single-post .entry-header h1,
   .single-post .entry-header.has-image h1,
-  .single-post .entry-header.not-image h1 {
+  .single-post .entry-header.not-image h1,
+  .single-give_forms .entry-header h1,
+  .single-give_forms .entry-header.has-image h1,
+  .single-give_forms .entry-header.not-image h1 {
     color: #000;
     text-shadow: none;
     padding: 5px 0px;
@@ -353,35 +366,50 @@ body.is-mobile #main-wrap {
   .single .entry-header.not-image .post-author-info,
   .single-post .entry-header .post-author-info,
   .single-post .entry-header.has-image .post-author-info,
-  .single-post .entry-header.not-image .post-author-info {
+  .single-post .entry-header.not-image .post-author-info,
+  .single-give_forms .entry-header .post-author-info,
+  .single-give_forms .entry-header.has-image .post-author-info,
+  .single-give_forms .entry-header.not-image .post-author-info {
     border-top: none; }
     .single .entry-header .post-author-info .details,
     .single .entry-header.has-image .post-author-info .details,
     .single .entry-header.not-image .post-author-info .details,
     .single-post .entry-header .post-author-info .details,
     .single-post .entry-header.has-image .post-author-info .details,
-    .single-post .entry-header.not-image .post-author-info .details {
+    .single-post .entry-header.not-image .post-author-info .details,
+    .single-give_forms .entry-header .post-author-info .details,
+    .single-give_forms .entry-header.has-image .post-author-info .details,
+    .single-give_forms .entry-header.not-image .post-author-info .details {
       padding-top: 20px; }
     .single .entry-header .post-author-info .authors-avatar,
     .single .entry-header.has-image .post-author-info .authors-avatar,
     .single .entry-header.not-image .post-author-info .authors-avatar,
     .single-post .entry-header .post-author-info .authors-avatar,
     .single-post .entry-header.has-image .post-author-info .authors-avatar,
-    .single-post .entry-header.not-image .post-author-info .authors-avatar {
+    .single-post .entry-header.not-image .post-author-info .authors-avatar,
+    .single-give_forms .entry-header .post-author-info .authors-avatar,
+    .single-give_forms .entry-header.has-image .post-author-info .authors-avatar,
+    .single-give_forms .entry-header.not-image .post-author-info .authors-avatar {
       padding: 0 0 15px; }
     .single .entry-header .post-author-info .author-follow,
     .single .entry-header.has-image .post-author-info .author-follow,
     .single .entry-header.not-image .post-author-info .author-follow,
     .single-post .entry-header .post-author-info .author-follow,
     .single-post .entry-header.has-image .post-author-info .author-follow,
-    .single-post .entry-header.not-image .post-author-info .author-follow {
+    .single-post .entry-header.not-image .post-author-info .author-follow,
+    .single-give_forms .entry-header .post-author-info .author-follow,
+    .single-give_forms .entry-header.has-image .post-author-info .author-follow,
+    .single-give_forms .entry-header.not-image .post-author-info .author-follow {
       top: 20px; }
     .single .entry-header .post-author-info .entry-meta,
     .single .entry-header.has-image .post-author-info .entry-meta,
     .single .entry-header.not-image .post-author-info .entry-meta,
     .single-post .entry-header .post-author-info .entry-meta,
     .single-post .entry-header.has-image .post-author-info .entry-meta,
-    .single-post .entry-header.not-image .post-author-info .entry-meta {
+    .single-post .entry-header.not-image .post-author-info .entry-meta,
+    .single-give_forms .entry-header .post-author-info .entry-meta,
+    .single-give_forms .entry-header.has-image .post-author-info .entry-meta,
+    .single-give_forms .entry-header.not-image .post-author-info .entry-meta {
       font-size: 16px;
       padding-top: 0; }
     .single .entry-header .post-author-info .entry-meta a,
@@ -395,48 +423,65 @@ body.is-mobile #main-wrap {
     .single-post .entry-header.has-image .post-author-info .entry-meta a,
     .single-post .entry-header.has-image .post-author-info .author-name a,
     .single-post .entry-header.not-image .post-author-info .entry-meta a,
-    .single-post .entry-header.not-image .post-author-info .author-name a {
+    .single-post .entry-header.not-image .post-author-info .author-name a,
+    .single-give_forms .entry-header .post-author-info .entry-meta a,
+    .single-give_forms .entry-header .post-author-info .author-name a,
+    .single-give_forms .entry-header.has-image .post-author-info .entry-meta a,
+    .single-give_forms .entry-header.has-image .post-author-info .author-name a,
+    .single-give_forms .entry-header.not-image .post-author-info .entry-meta a,
+    .single-give_forms .entry-header.not-image .post-author-info .author-name a {
       color: #54ae68; }
 .single .entry-tags h3,
-.single-post .entry-tags h3 {
+.single-post .entry-tags h3,
+.single-give_forms .entry-tags h3 {
   margin-bottom: 12px;
   margin-bottom: 1.2rem; }
 .single .entry-tags a,
-.single-post .entry-tags a {
+.single-post .entry-tags a,
+.single-give_forms .entry-tags a {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
   background-color: #22a7f0;
   color: #fff; }
   .single .entry-tags a:hover,
-  .single-post .entry-tags a:hover {
+  .single-post .entry-tags a:hover,
+  .single-give_forms .entry-tags a:hover {
     background-color: #54ae68; }
 .single .comments-area #respond form input[type=text],
 .single .comments-area #respond form input[type=email],
 .single .comments-area #respond form textarea,
 .single-post .comments-area #respond form input[type=text],
 .single-post .comments-area #respond form input[type=email],
-.single-post .comments-area #respond form textarea {
+.single-post .comments-area #respond form textarea,
+.single-give_forms .comments-area #respond form input[type=text],
+.single-give_forms .comments-area #respond form input[type=email],
+.single-give_forms .comments-area #respond form textarea {
   border: 1px solid #54ae68;
   padding: 10px 10px;
   padding: 1rem 1rem; }
 .single .comments-area #respond form p,
-.single-post .comments-area #respond form p {
+.single-post .comments-area #respond form p,
+.single-give_forms .comments-area #respond form p {
   text-align: right; }
   .single .comments-area #respond form p input[type=submit],
-  .single-post .comments-area #respond form p input[type=submit] {
+  .single-post .comments-area #respond form p input[type=submit],
+  .single-give_forms .comments-area #respond form p input[type=submit] {
     margin-top: 5px;
     float: right; }
 .single .comments-area article,
-.single-post .comments-area article {
+.single-post .comments-area article,
+.single-give_forms .comments-area article {
   padding: 25px 0px;
   padding: 2.5rem 0rem; }
   .single .comments-area article header,
-  .single-post .comments-area article header {
+  .single-post .comments-area article header,
+  .single-give_forms .comments-area article header {
     margin-bottom: 6px;
     margin-bottom: 0.6rem; }
   .single .comments-area article .comment-content p,
-  .single-post .comments-area article .comment-content p {
+  .single-post .comments-area article .comment-content p,
+  .single-give_forms .comments-area article .comment-content p {
     line-height: 1.5;
     margin-bottom: 10px;
     margin-bottom: 1rem; }
@@ -458,14 +503,16 @@ body.page #primary article.has-post-thumbnail > .entry-header {
   body.page #primary article.has-post-thumbnail > .entry-header img {
     margin: 12px 0px;
     margin: 1.2rem 0rem; }
-body.page.page-template-page-nosidebar #main {
-  max-width: 750px; }
-  body.page.page-template-page-nosidebar #main #primary article > .entry-header {
-    text-align: center; }
 body.page #secondary,
 body.page .default-page + #secondary, body.page.page-template #secondary {
   margin-top: 94px;
   margin-top: 9.4rem; }
+body.page.page-template-page-nosidebar #main {
+  max-width: 750px; }
+  body.page.page-template-page-nosidebar #main #primary article > .entry-header {
+    text-align: center; }
+body.page.page-template-page-nosidebar #secondary {
+  display: none; }
 body.page #content .row {
   margin-left: 0;
   margin-right: 0; }
@@ -1605,6 +1652,27 @@ body.buddypress.calendar #buddypress #item-body .bp-widget {
   .single-incsub_event #wpmudevevents-wrapper div.message.success {
     color: #fff;
     background-color: #54ae68; }
+
+/* styles for GIve donation pages */
+body.single-give_forms #main {
+  max-width: 750px; }
+  body.single-give_forms #main #content input[type=submit].give-btn {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-image: none;
+    background-color: #22a7f0;
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+    padding: 12px 24px;
+    padding: 1.2rem 2.4rem;
+    color: #fff !important; }
+    body.single-give_forms #main #content input[type=submit].give-btn:hover {
+      color: #fff !important;
+      background-color: #54ae68 !important; }
+body.single-give_forms #secondary {
+  display: none; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)

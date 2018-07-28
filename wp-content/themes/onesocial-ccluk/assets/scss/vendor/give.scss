@@ -1,0 +1,18 @@
+/* styles for GIve donation pages */
+
+body.single-give_forms {
+	#main {
+		max-width: $content_w;
+
+		#content {
+
+			input[type=submit].give-btn {
+				@include button();
+			}
+		}
+	}
+
+	#secondary {
+		display: none;
+	}
+}
