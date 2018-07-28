@@ -45,6 +45,16 @@ body {
 	a.cta {
 		@include padding-right( 6.8 );
 	}
+
+	.entry-content {
+		blockquote {
+			img {
+				margin-left: 0;
+				margin-right: 0;
+				width: 100%;
+			}
+		}
+	}
 }
 
 #buddypress .dir-form div.item-list-tabs ul li a span, 

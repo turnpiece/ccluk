@@ -1656,6 +1656,10 @@ MAXIMUM width of 480 pixels (phones)
     body a.cta {
       padding-right: 68px;
       padding-right: 6.8rem; }
+    body .entry-content blockquote img {
+      margin-left: 0;
+      margin-right: 0;
+      width: 100%; }
 
   #buddypress .dir-form div.item-list-tabs ul li a span,
   #buddypress div#subnav.item-list-tabs ul li a span,
