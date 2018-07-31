@@ -21,8 +21,9 @@ body.single-give_forms {
 	}
 }
 
-.give-donation-submit {
-	input[type=submit].give-btn {
+.give-form {
+	.give-donation-submit input[type=submit].give-btn,
+	button.give-btn {
 		@include button();
 	}
 }

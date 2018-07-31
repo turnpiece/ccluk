@@ -32,6 +32,15 @@ Custom stylesheet.
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
 
+/*--------------------------------------------------------------
+MAXIMUM width of 1024 pixels (tablets)
+--------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+
+	@import "partials/max-width-1024px";
+
+}
+
 
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
@@ -51,7 +60,6 @@ MAXIMUM width of 480 pixels (phones)
 	@import "partials/max-width-480px";
 
 }
-
 
 
 /*--------------------------------------------------------------
@@ -92,6 +100,7 @@ MINIMUM width of 1025 pixels (desktops)
 	@import "partials/min-width-1025px";
 
 }
+
 
 /*--------------------------------------------------------------
 MINIMUM width of 1025 pixels (large desktops)

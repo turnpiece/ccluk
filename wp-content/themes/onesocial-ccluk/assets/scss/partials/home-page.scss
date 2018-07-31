@@ -279,7 +279,7 @@ body.page-template-homepage {
 								#mc_embed_signup {
 									background: transparent;
 									color: $white;
-									font-family: "Open Sans";
+									font-family: $font-default;
 									font-size: $font-size-std;
 
 									.mc-field-group {
@@ -296,6 +296,7 @@ body.page-template-homepage {
 
 									.button {
 										@include button( $white, $green );
+										font-family: $font-default;
 										height: auto;
 										line-height: 1;
 										float: right;

@@ -70,6 +70,7 @@ a,
 
                     #mc-embedded-subscribe.button {
                         @include button();
+                        font-family: $font-default;
                         height: auto;
                         line-height: 1;
                     }

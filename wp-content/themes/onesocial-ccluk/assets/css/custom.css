@@ -69,9 +69,10 @@ a,
     border: none;
     text-shadow: none;
     box-shadow: none;
-    padding: 12px 24px;
-    padding: 1.2rem 2.4rem;
+    padding: 10px 16px;
+    padding: 1rem 1.6rem;
     color: #fff !important;
+    font-family: "Open Sans";
     height: auto;
     line-height: 1; }
     .widget-area .widget.widget_ccluk-newsletter-signup #mc_embed_signup form #mc-embedded-subscribe.button:hover, .widget-area .widget.widget_custom_html #mc_embed_signup form #mc-embedded-subscribe.button:hover {
@@ -177,8 +178,8 @@ a.button {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important; }
   a.button:hover {
     color: #fff !important;
@@ -732,8 +733,8 @@ body.page-template-homepage #main {
             border: none;
             text-shadow: none;
             box-shadow: none;
-            padding: 12px 24px;
-            padding: 1.2rem 2.4rem;
+            padding: 10px 16px;
+            padding: 1rem 1.6rem;
             color: #fff !important;
             float: right; }
             body.page-template-homepage #main .section.join .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.newsletter .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover, body.page-template-homepage #main .section.embed .section-content .list-item.form form.mc4wp-form input[type="submit"]:hover {
@@ -759,9 +760,10 @@ body.page-template-homepage #main {
         border: none;
         text-shadow: none;
         box-shadow: none;
-        padding: 12px 24px;
-        padding: 1.2rem 2.4rem;
+        padding: 10px 16px;
+        padding: 1rem 1.6rem;
         color: #fff !important;
+        font-family: "Open Sans";
         height: auto;
         line-height: 1;
         float: right; }
@@ -820,8 +822,8 @@ body.page-template-homepage .homepage-section-title > h4 {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important; }
   body.page-template-homepage .homepage-section-title > h4:hover {
     color: #fff !important;
@@ -1390,8 +1392,8 @@ body.buddypress #buddypress #create-group-form input[type="submit"] {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important; }
   body.buddypress #buddypress #group-settings-form input[type="submit"]:hover,
   body.buddypress #buddypress #create-group-form input[type="submit"]:hover {
@@ -1407,8 +1409,8 @@ body.buddypress #buddypress #save_as_draft {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important; }
   body.buddypress #buddypress .standard-form div.submit input:hover,
   body.buddypress #buddypress #save_as_draft:hover {
@@ -1606,8 +1608,8 @@ body.buddypress.calendar #buddypress #item-body .bp-widget {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important;
   padding: 3px 6px;
   padding: 0.3rem 0.6rem; }
@@ -1637,8 +1639,8 @@ body.buddypress.calendar #buddypress #item-body .bp-widget {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important;
   padding: 3px 6px;
   padding: 0.3rem 0.6rem; }
@@ -1673,7 +1675,8 @@ body.single-give_forms #main {
 body.single-give_forms #secondary {
   display: none; }
 
-.give-donation-submit input[type=submit].give-btn {
+.give-form .give-donation-submit input[type=submit].give-btn,
+.give-form button.give-btn {
   -webkit-border-radius: 5px;
   -moz-border-radius: 5px;
   border-radius: 5px;
@@ -1682,16 +1685,33 @@ body.single-give_forms #secondary {
   border: none;
   text-shadow: none;
   box-shadow: none;
-  padding: 12px 24px;
-  padding: 1.2rem 2.4rem;
+  padding: 10px 16px;
+  padding: 1rem 1.6rem;
   color: #fff !important; }
-  .give-donation-submit input[type=submit].give-btn:hover {
+  .give-form .give-donation-submit input[type=submit].give-btn:hover,
+  .give-form button.give-btn:hover {
     color: #fff !important;
     background-color: #54ae68 !important; }
 
 /*--------------------------------------------------------------
 Responsive media queries (mobile styles)
 --------------------------------------------------------------*/
+/*--------------------------------------------------------------
+MAXIMUM width of 1024 pixels (tablets)
+--------------------------------------------------------------*/
+@media screen and (max-width: 1024px) {
+  body.page #secondary.widget-area {
+    margin: 20px auto;
+    margin: 2rem auto;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: flex-start; }
+    body.page #secondary.widget-area .widget {
+      width: 320px;
+      padding: 0 15px;
+      border-bottom: none; } }
 /*--------------------------------------------------------------
 MAXIMUM width of 520 pixels (large phones and smaller)
 --------------------------------------------------------------*/

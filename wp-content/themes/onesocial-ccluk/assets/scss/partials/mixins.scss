@@ -106,7 +106,7 @@
   border: none;
   text-shadow: none;
   box-shadow: none;
-  @include padding( 1.2, 2.4 );
+  @include padding( 1, 1.6 );
   color: $white !important;
   &:hover {
     color: $hover_color !important;
