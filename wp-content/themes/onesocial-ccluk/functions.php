@@ -715,3 +715,34 @@ add_action( 'ccluk_section_before_inner', function( $arg ) {
     }
 }, 10, 1 );
 
+
+// Fix for deprecation BP function called by OneSocial theme
+
+if (!function_exists('bp_is_user_forums')) :
+
+    function bp_is_user_forums() {
+        return false;
+    }
+
+endif;
+
+
+// Customize user menu
+// remove forums, groups and friends tabs
+function ccluk_remove_forums_from_profile()
+{
+    bp_core_remove_nav_item('forums');
+}
+add_action('bp_forums_setup_nav','ccluk_remove_forums_from_profile');
+
+function ccluk_remove_groups_from_profile()
+{
+    bp_core_remove_nav_item('groups');
+}
+add_action('bp_groups_setup_nav','ccluk_remove_groups_from_profile');
+
+function ccluk_remove_friends_from_profile()
+{
+    bp_core_remove_nav_item('friends');
+}
+add_action('bp_friends_setup_nav','ccluk_remove_friends_from_profile');
