@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-12 04:10:47+0000\n"
+"PO-Revision-Date: 2018-07-30 15:52:32+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -36,25 +36,61 @@ msgstr "."
 msgid "number_format_decimal_point"
 msgstr ","
 
-#: wp-includes/user.php:3128
+#. translators: 1: Site name. 2: Name of the confirmed action.
+#: wp-includes/user.php:2978
+msgid "[%1$s] Action Confirmed: %2$s"
+msgstr "[%1$s] Yêu cầu xác nhận: %2$s"
+
+#. translators: %s: taxonomy name
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2222
+msgid "The current user can create terms in the %s taxonomy."
+msgstr "Người dùng hiện tại này có thể tạo các terms trong taxonomy %s."
+
+#. translators: %s: taxonomy name
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2220
+msgid "The current user can assign terms in the %s taxonomy."
+msgstr "Người dùng hiện tại này có thể set các terms trong taxonomy %s."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2201
+msgid "The current user can change the author on this post."
+msgstr "Người dùng hiện tại này có thể đổi tác giả của bài viết."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2185
+msgid "The current user can sticky this post."
+msgstr "Người dùng hiện tại này có thể đính bài viết nổi bật."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2168
+msgid "The current user can publish this post."
+msgstr "Người dùng hiện tại có thể xuất bản bài viết này."
+
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:809
+msgid "You have used your space quota. Please delete files before uploading."
+msgstr "Bạn đã sử dụng hết dung lượng của mình. Vui lòng xoá file trước khi tải lên."
+
+#. translators: %s: required disk space in kilobytes
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:800
+msgid "Not enough space to upload. %s KB needed."
+msgstr "Không đủ dung lượng để tải lên. Cần tối thiểu %s KB."
+
+#: wp-includes/user.php:3169
 msgid "The site administrator has been notified. You will receive an email confirmation when they erase your data."
 msgstr "Người quản trị website đã nhận được thông báo. Bạn sẽ nhận được email một khi dữ liệu bạn yêu cầu được xoá."
 
-#: wp-includes/user.php:3127
+#: wp-includes/user.php:3168
 msgid "Thanks for confirming your erasure request."
 msgstr "Cảm ơn vì đã xác nhận yêu cầu xoá của bạn."
 
-#: wp-includes/user.php:3125
+#: wp-includes/user.php:3166
 msgid "The site administrator has been notified. You will receive a link to download your export via email when they fulfill your request."
 msgstr "Người quản trị website đã nhận được thông báo. Bạn sẽ nhận được liên kết tải về dữ liệu qua email một khi họ xác nhận yêu cầu."
 
-#: wp-includes/user.php:3124
+#: wp-includes/user.php:3165
 msgid "Thanks for confirming your export request."
 msgstr "Cảm ơn vì đã xác nhận yêu cầu xuất dữ liệu."
 
 #. translators: Do not translate SITENAME, SITEURL, PRIVACY_POLICY_URL; those
 #. are placeholders.
-#: wp-includes/user.php:3052
+#: wp-includes/user.php:3093
 msgid ""
 "Howdy,\n"
 "\n"
@@ -81,7 +117,7 @@ msgstr ""
 "###SITEURL###"
 
 #. translators: Do not translate SITENAME, SITEURL; those are placeholders.
-#: wp-includes/user.php:3039
+#: wp-includes/user.php:3080
 msgid ""
 "Howdy,\n"
 "\n"
@@ -103,14 +139,14 @@ msgstr ""
 "###SITENAME###\n"
 "###SITEURL###"
 
-#. translators: %s Site name.
-#: wp-includes/user.php:3015
+#. translators: %s: Site name.
+#: wp-includes/user.php:3053
 msgid "[%s] Erasure Request Fulfilled"
 msgstr "[%s] Yêu cầu xoá dữ liệu đã xong"
 
 #. translators: Do not translate SITENAME, USER_EMAIL, DESCRIPTION, MANAGE_URL,
 #. SITEURL; those are placeholders.
-#: wp-includes/user.php:2933
+#: wp-includes/user.php:2924
 msgid ""
 "Howdy,\n"
 "\n"
@@ -142,80 +178,71 @@ msgstr ""
 "###SITENAME###\n"
 "###SITEURL###"
 
-#. translators: %s Site name.
-#: wp-includes/user.php:2900
-msgid "[%s] Action Confirmed"
-msgstr "[%s] Thao tác được xác nhận"
-
 #. translators: Privacy data request subject. 1: Site name, 2: Name of the
 #. action
-#: wp-includes/user.php:3320
+#: wp-includes/user.php:3357
 msgid "[%1$s] Confirm Action: %2$s"
 msgstr "[%1$s] Xác nhận hoạt động: %2$s"
 
-#: wp-includes/user.php:3214
+#: wp-includes/user.php:3255
 msgid "Erase Personal Data"
 msgstr "Xóa dữ liệu cá nhân"
 
-#: wp-includes/comment-template.php:2208
+#: wp-includes/comment-template.php:2211
 msgid "Save my name, email, and website in this browser for the next time I comment."
 msgstr "Lưu tên của tôi, email, và trang web trong trình duyệt này cho lần bình luận kế tiếp của tôi."
 
-#: wp-includes/user.php:2802
+#: wp-includes/user.php:2798
 msgid "User Description"
 msgstr "Giới thiệu bản thân"
 
-#: wp-includes/user.php:2801
+#: wp-includes/user.php:2797
 msgid "User Last Name"
 msgstr "Họ người dùng"
 
-#: wp-includes/user.php:2800
+#: wp-includes/user.php:2796
 msgid "User First Name"
 msgstr "Tên người dùng"
 
-#: wp-includes/user.php:2799
+#: wp-includes/user.php:2795
 msgid "User Nickname"
 msgstr "Nickname người dùng"
 
-#: wp-includes/user.php:2798
+#: wp-includes/user.php:2794
 msgid "User Display Name"
 msgstr "Tên hiển thị người dùng"
 
-#: wp-includes/user.php:2797
+#: wp-includes/user.php:2793
 msgid "User Registration Date"
 msgstr "Ngày đăng ký"
 
-#: wp-includes/user.php:2796
+#: wp-includes/user.php:2792
 msgid "User URL"
 msgstr "URL người dùng"
 
-#: wp-includes/user.php:2795
+#: wp-includes/user.php:2791
 msgid "User Email"
 msgstr "Email người dùng"
 
-#: wp-includes/user.php:2794
+#: wp-includes/user.php:2790
 msgid "User Nice Name"
 msgstr "Tên người dùng đẹp"
 
-#: wp-includes/user.php:2793
+#: wp-includes/user.php:2789
 msgid "User Login Name"
 msgstr "Tên đăng nhập người dùng"
 
-#: wp-includes/user.php:2792
+#: wp-includes/user.php:2788
 msgid "User ID"
 msgstr "ID người dùng"
 
-#: wp-includes/user.php:2760
+#: wp-includes/user.php:2756
 msgid "WordPress User"
 msgstr "Người dùng WordPress"
 
 #: wp-includes/media.php:3969
 msgid "WordPress Media"
 msgstr "WordPress Media"
-
-#: wp-includes/link-template.php:4166
-msgid "Privacy Policy"
-msgstr "Chính sách bảo mật"
 
 #: wp-includes/script-loader.php:670
 msgid "An error occurred while attempting to export personal data."
@@ -225,36 +252,36 @@ msgstr "Đã xảy ra lỗi trong khi cố gắng xuất dữ liệu cá nhân."
 msgid "No personal data export file was generated."
 msgstr "Không có tệp xuất dữ liệu cá nhân nào được tạo."
 
-#: wp-login.php:875
+#: wp-login.php:876
 msgid "User action confirmed."
 msgstr "Đã xác nhận hành động của người dùng."
 
-#: wp-includes/user.php:3396
+#: wp-includes/user.php:3433
 msgid "This link has expired."
 msgstr "Liên kết này đã hết hạn."
 
-#: wp-includes/user.php:3248 wp-includes/user.php:3392 wp-login.php:844
+#: wp-includes/user.php:3289 wp-includes/user.php:3429 wp-login.php:845
 msgid "Invalid request."
 msgstr "Yêu cầu không hợp lệ."
 
 #. translators: %s: action name
-#: wp-includes/user.php:3218
+#: wp-includes/user.php:3259
 msgid "Confirm the \"%s\" action"
 msgstr "Xác nhận hành động \"%s\""
 
-#: wp-includes/user.php:3211
+#: wp-includes/user.php:3252
 msgid "Export Personal Data"
 msgstr "Xuất dữ liệu cá nhân"
 
-#: wp-includes/user.php:3183
+#: wp-includes/user.php:3224
 msgid "A request for this email address already exists."
 msgstr "Một yêu cầu cho địa chỉ email này đã tồn tại."
 
-#: wp-includes/user.php:3167
+#: wp-includes/user.php:3208
 msgid "Invalid action name."
 msgstr "Tên hành động không hợp lệ"
 
-#: wp-includes/user.php:3120
+#: wp-includes/user.php:3161
 msgid "The site administrator has been notified and will fulfill your request as soon as possible."
 msgstr "Quản trị viên của trang web đã được thông báo và sẽ đáp ứng yêu cầu của bạn sớm nhất có thể."
 
@@ -267,35 +294,35 @@ msgid "User Requests"
 msgstr "Yêu cầu người dùng"
 
 #. translators: deleted long text
-#: wp-includes/functions.php:5921
+#: wp-includes/functions.php:5962
 msgid "This content was deleted by the author."
 msgstr "Nội dung đã được xóa bởi tác giả."
 
 #. translators: deleted text
-#: wp-includes/functions.php:5917
+#: wp-includes/functions.php:5958
 msgid "[deleted]"
 msgstr "[đã xoá]"
 
 #. translators: %d: Comment ID
-#: wp-includes/comment.php:3358
+#: wp-includes/comment.php:3359
 msgid "Comment %d contains personal data but could not be anonymized."
 msgstr "Nhận xét %d bao gồm dữ liệu cá nhân nhưng không thể ẩn danh."
 
-#: wp-includes/user.php:3119
+#: wp-includes/user.php:3160
 msgid "Action has been confirmed."
 msgstr "Hành động đã được xác nhận."
 
-#: wp-includes/user.php:3434
+#: wp-includes/user.php:3471
 msgid "The confirmation email has expired."
 msgstr "Email xác nhận đã hết hạn."
 
-#: wp-includes/user.php:3416
+#: wp-includes/user.php:3453
 msgid "Invalid action"
 msgstr "Hành động không hợp lệ"
 
-#. translators: Do not translate DESCRIPTION, CONFIRM_URL, EMAIL, SITENAME,
-#. SITEURL: those are placeholders.
-#: wp-includes/user.php:3264
+#. translators: Do not translate DESCRIPTION, CONFIRM_URL, SITENAME, SITEURL:
+#. those are placeholders.
+#: wp-includes/user.php:3306
 msgid ""
 "Howdy,\n"
 "\n"
@@ -309,26 +336,22 @@ msgid ""
 "You can safely ignore and delete this email if you do not want to\n"
 "take this action.\n"
 "\n"
-"This email has been sent to ###EMAIL###.\n"
-"\n"
 "Regards,\n"
 "All at ###SITENAME###\n"
 "###SITEURL###"
 msgstr ""
 "Xin chào,\n"
 "\n"
-"Một yêu cầu về dữ liệu sau đã được gán cho tài khoản của bạn:\n"
+"Yêu cầu sau đã được gửi đến và cần xác nhận bằng tài khoản của bạn:\n"
 "\n"
 "     ###DESCRIPTION###\n"
 "\n"
-"Để xác nhận yêu cầu này, vui lòng nhấp chuột vào liên kết dưới đây:\n"
+"Để xác nhận, vui lòng nhấp chuột vào liên kết sau:\n"
 "###CONFIRM_URL###\n"
 "\n"
-"Bạn có thể bỏ qua email này nếu bạn không muốn thực hiện hành động này.\n"
+"Bạn có thể bỏ qua email này nếu bạn không muốn thực hiện.\n"
 "\n"
-"Email này được gửi tới ###EMAIL###.\n"
-"\n"
-"Xin cảm ơn,\n"
+"Trân trọng,\n"
 "###SITENAME###\n"
 "###SITEURL###"
 
@@ -433,11 +456,11 @@ msgctxt "media items"
 msgid "Mine"
 msgstr "Của bạn"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:228
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:259
 msgid "Whether or not the post type can be viewed."
 msgstr "Có thể xem loại bài đăng hay không."
 
-#: wp-includes/functions.php:2608
+#: wp-includes/functions.php:2621
 msgid "The link you followed has expired."
 msgstr "Liên kết bạn theo dõi đã hết hạn."
 
@@ -447,7 +470,7 @@ msgid "You need a higher level of permission."
 msgstr "Bạn cần quyền cao hơn."
 
 #: wp-includes/class-wp-customize-manager.php:450
-#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2618
+#: wp-includes/class-wp-xmlrpc-server.php:3689 wp-includes/functions.php:2631
 #: wp-includes/script-loader.php:133 wp-includes/script-loader.php:565
 #: wp-includes/script-loader.php:645 wp-includes/script-loader.php:850
 msgid "Something went wrong."
@@ -652,13 +675,13 @@ msgid "Your theme can display menus in one location. Select which menu you would
 msgstr "Giao diện của bạn có thể hiển thị menu ở một vị trí. Chọn menu bạn muốn sử dụng."
 
 #. translators: %s: site name
-#: wp-login.php:363
+#: wp-login.php:364
 msgid "Site Name: %s"
 msgstr "Tên trang: %s"
 
 #. translators: Login screen title. 1: Login screen name, 2: Network or site
 #. name
-#: wp-login.php:61
+#: wp-login.php:62
 msgid "%1$s &lsaquo; %2$s &#8212; WordPress"
 msgstr "%1$s &lsaquo; %2$s &#8212; WordPress"
 
@@ -701,17 +724,17 @@ msgid "Use the Custom HTML widget to add arbitrary HTML code to your widget area
 msgstr "Sử dụng Widget HTML để thêm các đoạn mã HTML riêng vào widget của bạn."
 
 #. translators: %s: New email address
-#: wp-includes/user.php:2731
+#: wp-includes/user.php:2727
 msgid "Your email address has not been updated yet. Please check your inbox at %s for a confirmation email."
 msgstr "Địa chỉ email của bạn hiện chưa được cập nhật. Vui lòng tìm email xác nhận tại %s"
 
-#: wp-includes/user.php:2712
+#: wp-includes/user.php:2708
 msgid "[%s] New Email Address"
 msgstr "[%s] Địa chỉ email mới"
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
-#: wp-includes/user.php:2667
+#: wp-includes/user.php:2663
 msgid ""
 "Howdy ###USERNAME###,\n"
 "\n"
@@ -1119,14 +1142,14 @@ msgstr "%s:"
 #. author's hostname
 #. translators: 1: Comment author name, 2: comment author's IP address, 3:
 #. comment author's hostname
-#: wp-includes/pluggable.php:1494 wp-includes/pluggable.php:1654
+#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1657
 msgid "Author: %1$s (IP address: %2$s, %3$s)"
 msgstr "Tác giả: %1$s (Địa chỉ IP: %2$s, %3$s)"
 
 #. translators: 1: Trackback/pingback website name, 2: website IP address, 3:
 #. website hostname
-#: wp-includes/pluggable.php:1473 wp-includes/pluggable.php:1484
-#: wp-includes/pluggable.php:1634 wp-includes/pluggable.php:1644
+#: wp-includes/pluggable.php:1476 wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1637 wp-includes/pluggable.php:1647
 msgid "Website: %1$s (IP address: %2$s, %3$s)"
 msgstr "Website: %1$s (Địa chỉ IP: %2$s, %3$s)"
 
@@ -1212,13 +1235,13 @@ msgstr "Kiểm tra scrape nonce không thành công. Vui lòng thử lại."
 
 #. translators: Site admin email change notification email subject. %s: Site
 #. title
-#: wp-includes/functions.php:5780
+#: wp-includes/functions.php:5821
 msgid "[%s] Notice of Admin Email Change"
 msgstr "[%s] Thông báo về thay đổi email quản trị"
 
 #. translators: Do not translate OLD_EMAIL, NEW_EMAIL, SITENAME, SITEURL: those
 #. are placeholders.
-#: wp-includes/functions.php:5765
+#: wp-includes/functions.php:5806
 msgid ""
 "Hi,\n"
 "\n"
@@ -1243,7 +1266,7 @@ msgstr ""
 "###SITENAME###\n"
 "###SITEURL###"
 
-#: wp-includes/functions.php:5701
+#: wp-includes/functions.php:5742
 msgid "Only UUID V4 is supported at this time."
 msgstr "Chỉ UUID V4 được hỗ trợ ở thời điểm này."
 
@@ -1374,7 +1397,7 @@ msgstr "Các cấp độ thành viên đã bị ngừng phát triển. Thay vào
 msgid "The theme defines itself as its parent theme. Please check the %s header."
 msgstr "Giao diện tự xác định là giao diện cha. Hãy kiểm tra thông tin %s."
 
-#: wp-includes/class-wp-editor.php:182 wp-includes/class-wp-editor.php:1263
+#: wp-includes/class-wp-editor.php:182 wp-includes/class-wp-editor.php:1261
 msgctxt "Name for the Visual editor tab"
 msgid "Visual"
 msgstr "Trực quan"
@@ -1930,7 +1953,7 @@ msgstr "%1$s phải lớn hơn %2$d"
 msgid "Limit result set to users with one or more specific slugs."
 msgstr "Giới hạn kết quả cho những người dùng có một hoặc nhiều slugs cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:972
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:975
 msgid "Limit result set to terms with one or more specific slugs."
 msgstr "Giới hạn kết quả cho những terms với một hoặc nhiều slugs cụ thể."
 
@@ -1942,7 +1965,7 @@ msgstr "Số trang mà bạn yêu cầu lớn hơn số trang có sẵn."
 msgid "You need to define an include parameter to order by include."
 msgstr "Bạn cần định nghĩa một tham số include để có thể sắp xếp bởi include."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:252
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:283
 msgid "All features, supported by the post type."
 msgstr "Tất cả tính năng, được hỗ trợ bởi post type."
 
@@ -2021,7 +2044,7 @@ msgstr ""
 msgid "Suggested image dimensions: %1$s by %2$s pixels."
 msgstr "Kích thước ảnh để nghị: %1$s x %2$s pixels."
 
-#: wp-includes/functions.php:2140 wp-includes/script-loader.php:291
+#: wp-includes/functions.php:2153 wp-includes/script-loader.php:291
 msgid "Sorry, this file type is not permitted for security reasons."
 msgstr "Rất tiếc, định dạng tập tin này không được cho phép vì lý do bảo mật."
 
@@ -2053,43 +2076,43 @@ msgstr "Định dạng oEmbed để sử dụng."
 msgid "The URL of the resource for which to fetch oEmbed data."
 msgstr "URL của tài nguyên để lấy dữ liệu oEmbed."
 
-#: wp-includes/class-wp-editor.php:1148
+#: wp-includes/class-wp-editor.php:1146
 msgctxt "Short for blue in RGB"
 msgid "B"
 msgstr "B"
 
-#: wp-includes/class-wp-editor.php:1147
+#: wp-includes/class-wp-editor.php:1145
 msgctxt "Short for green in RGB"
 msgid "G"
 msgstr "G"
 
-#: wp-includes/class-wp-editor.php:1146
+#: wp-includes/class-wp-editor.php:1144
 msgctxt "Short for red in RGB"
 msgid "R"
 msgstr "R"
 
-#: wp-includes/class-wp-editor.php:1104
+#: wp-includes/class-wp-editor.php:1102
 msgid "Insert/edit media"
 msgstr "Chèn /sửa tập tin đa phương tiện"
 
-#: wp-includes/class-wp-editor.php:1101
+#: wp-includes/class-wp-editor.php:1099
 msgid "Insert/edit code sample"
 msgstr "Chèn / chỉnh sửa code mẫu"
 
-#: wp-includes/class-wp-editor.php:1100
+#: wp-includes/class-wp-editor.php:1098
 msgid "Table of Contents"
 msgstr "Mục lục"
 
-#: wp-includes/class-wp-editor.php:1098
+#: wp-includes/class-wp-editor.php:1096
 msgid "Date/time"
 msgstr "Ngày/giờ"
 
-#: wp-includes/class-wp-editor.php:1074
+#: wp-includes/class-wp-editor.php:1072
 msgctxt "Id for link anchor (TinyMCE)"
 msgid "Id"
 msgstr "Id"
 
-#: wp-includes/class-wp-editor.php:1073
+#: wp-includes/class-wp-editor.php:1071
 msgid "Id should start with a letter, followed only by letters, numbers, dashes, dots, colons or underscores."
 msgstr "ID phải bắt đầu bằng một chữ cái, chỉ theo sau bởi các chữ cái, số, dấu gạch ngang, dấu chấm, dấu hai chấm hoặc dấu gạch dưới."
 
@@ -2123,7 +2146,7 @@ msgid "This address is used for admin purposes, like new user notification."
 msgstr "Địa chỉ này được dùng cho các mục đích liên quan đến quản trị viên, ví dụ như thông báo có người dùng mới."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:95
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:823
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:826
 msgid "Unique identifier for the term."
 msgstr "Mã xác nhận cho thuật ngữ"
 
@@ -2132,7 +2155,7 @@ msgid "Required to be true, as terms do not support trashing."
 msgstr "Yêu cầu phải đúng, các thuật ngữ không thể bị xóa"
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:266
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:305
 msgid "An alphanumeric identifier for the taxonomy."
 msgstr "Chữ và số xác nhận để phân loại"
 
@@ -2140,41 +2163,41 @@ msgstr "Chữ và số xác nhận để phân loại"
 msgid "Required to be true, as revisions do not support trashing."
 msgstr "Yêu cầu phải đúng, các bản duyệt lại không thể bị xóa"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:267
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:298
 msgid "REST base route for the post type."
 msgstr "REST base route cho loại bài viết."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:246
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:277
 msgid "An alphanumeric identifier for the post type."
 msgstr "Chữ và số xác nhận cho loại bài viết"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:234
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:265
 msgid "Human-readable labels for the post type for various contexts."
 msgstr "Nhãn hiệu cho các loại bài viết con người có thể đọc hiểu"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:222
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:253
 msgid "Whether or not the post type should have children."
 msgstr "Thể loại bài viết có nên có thể loại con"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:216
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:247
 msgid "A human-readable description of the post type."
 msgstr "Một mô tả có thể đọc được của post type."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:210
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:241
 msgid "All capabilities used by the post type."
 msgstr "Các khả năng được sử dụng bởi post type."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:51
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:284
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:305
 msgid "An alphanumeric identifier for the status."
 msgstr "Chữ và số xác nhận của trạng thái"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1337
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1381
 msgid "Limit response to comments published before a given ISO8601 compliant date."
 msgstr "Giới hạn những bình luận đăng trước ngày tiêu chuẩn ISO8601"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1308
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1352
 msgid "Limit response to comments published after a given ISO8601 compliant date."
 msgstr "Giới hạn những bình luận đăng sau ngày tiêu chuẩn ISO8601"
 
@@ -2231,25 +2254,25 @@ msgstr "Người dùng này không thể bị xóa."
 msgid "Error creating new user."
 msgstr "Lỗi khi tạo người dùng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:877
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:880
 msgid "The parent term ID."
 msgstr "ID của term cha."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:847
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:850
 msgid "HTML title for the term."
 msgstr "Tiêu đề HTML cho term."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:840
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:843
 msgid "URL of the term."
 msgstr "URL của term."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:600
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:603
 msgid "The term cannot be deleted."
 msgstr "Term không thể bị xóa"
 
 #: wp-includes/class-wp-xmlrpc-server.php:2068
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:397
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:502
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:400
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:505
 msgid "Cannot set parent term, taxonomy is not hierarchical."
 msgstr "Không thể thiết lập term cha vì taxonomy này không phân cấp."
 
@@ -2257,15 +2280,15 @@ msgstr "Không thể thiết lập term cha vì taxonomy này không phân cấp
 msgid "Term does not exist."
 msgstr "Term không tồn tại."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:260
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:299
 msgid "The title for the taxonomy."
 msgstr "Tiêu đề của phân loại"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:278
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:317
 msgid "Types associated with the taxonomy."
 msgstr "Các kiểu bài viết (post type) được liên kết với taxonomy."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:240
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:271
 msgid "The title for the post type."
 msgstr "Tiêu đề của thể loại bài viết"
 
@@ -2273,7 +2296,7 @@ msgstr "Tiêu đề của thể loại bài viết"
 msgid "Cannot view post type."
 msgstr "Không thể xem loại bài viết"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:248
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:269
 msgid "The title for the status."
 msgstr "Tiêu đề của trạng thái."
 
@@ -2286,23 +2309,23 @@ msgstr "Không thể xem trạng thái."
 msgid "Invalid status."
 msgstr "Trạng thái không hợp lệ."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:463
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:486
 msgid "URL to the original attachment file."
 msgstr "Link tới tập tin đính kèm gốc."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:443
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:466
 msgid "The attachment MIME type."
 msgstr "Định dạng tập tin đính kèm."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:435
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:458
 msgid "Attachment type."
 msgstr "Loại đính kèm."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:412
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:435
 msgid "The attachment description."
 msgstr "Miêu tả của tập tin đính kèm."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:389
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:412
 msgid "The attachment caption."
 msgstr "Chú thích của tập tin đính kèm."
 
@@ -2347,7 +2370,7 @@ msgid "Invalid slug."
 msgstr "Slug không hợp lệ."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:623
-#: wp-includes/rest-api.php:1157 wp-includes/user.php:3163
+#: wp-includes/rest-api.php:1157 wp-includes/user.php:3204
 msgid "Invalid email address."
 msgstr "Email không hợp lệ"
 
@@ -2360,11 +2383,11 @@ msgstr "Bình luận không hợp lệ"
 msgid "Invalid JSONP callback function."
 msgstr "Hàm callback JSONP không hợp lệ."
 
-#: wp-includes/post.php:3546
+#: wp-includes/post.php:3579
 msgid "Invalid page template."
 msgstr "Giao diện trang mẫu không hợp lệ."
 
-#: wp-includes/post.php:3266 wp-includes/rest-api.php:1151
+#: wp-includes/post.php:3299 wp-includes/rest-api.php:1151
 #: wp-includes/script-loader.php:606
 msgid "Invalid date."
 msgstr "Ngày tháng không hợp lệ"
@@ -2449,7 +2472,7 @@ msgstr "Rất tiếc, bạn không được phép lọc người dùng theo vai 
 msgid "Sorry, you are not allowed to delete this comment."
 msgstr "Rất tiếc, bạn không được phép xóa bình luận này."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:380
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:383
 msgid "Sorry, you are not allowed to create new terms."
 msgstr "Xin lỗi, bạn không được phép để tạo term mới."
 
@@ -2524,9 +2547,9 @@ msgid "About This Site"
 msgstr "Giới thiệu về website"
 
 #. translators: %s: custom field key
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:176
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:211
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:282
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:187
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:222
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:293
 msgid "Sorry, you are not allowed to edit the %s custom field."
 msgstr "Xin lỗi, bạn không được phép chỉnh sửa trường tuỳ biến %s."
 
@@ -2698,7 +2721,7 @@ msgstr "Xem trước tài liệu"
 msgid "Header Media"
 msgstr "Header Media"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:287
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:326
 msgid "REST base route for the taxonomy."
 msgstr "REST base route cho taxonomy."
 
@@ -2712,19 +2735,19 @@ msgctxt "default site language"
 msgid "Site Default"
 msgstr "Trang web mặc định"
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:426
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:449
 msgid "HTML description for the object, transformed for display."
 msgstr "Mô tả HTML cho đối tượng, được chuyển đổi để hiển thị."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:421
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:444
 msgid "Description for the object, as it exists in the database."
 msgstr "Mô tả cho đối tượng như đã được tồn tại trong cơ sở dữ liệu."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:403
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:426
 msgid "HTML caption for the attachment, transformed for display."
 msgstr "Tiêu đề HTML cho tập tin đính kèm, được chuyển đổi để hiển thị."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:398
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:421
 msgid "Caption for the attachment, as it exists in the database."
 msgstr "Tiêu đề cho tập tin đính kèm, vì nó tồn tại trong database."
 
@@ -2746,7 +2769,7 @@ msgid "Users do not support trashing. Set '%s' to delete."
 msgstr "Users do not support trashing. Set '%s' to delete."
 
 #. translators: %s: force=true
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:590
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:593
 msgid "Terms do not support trashing. Set '%s' to delete."
 msgstr "Terms do not support trashing. Set '%s' to delete."
 
@@ -2774,11 +2797,11 @@ msgid "Invalid JSON body passed."
 msgstr "Body JSON không hợp lệ."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2227
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2422
 msgid "Limit result set to all items except those that have the specified term assigned in the %s taxonomy."
 msgstr "Giới hạn kết quả cho tất cả các mục ngoại trừ term gán trong taxonomy %s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2201
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2396
 msgid "Limit result set to posts assigned one or more statuses."
 msgstr "Giới hạn kết quả cho các bài viết được gán một hoặc nhiều trạng thái."
 
@@ -2787,11 +2810,11 @@ msgstr "Giới hạn kết quả cho các bài viết được gán một hoặc
 msgid "Comment field exceeds maximum length allowed."
 msgstr "Trường bình luận có độ dài quá tối đa cho phép."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:258
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-types-controller.php:289
 msgid "Taxonomies associated with post type."
 msgstr "Các taxonomy được gắn với loại bài viết."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2191
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2386
 msgid "Limit result set to posts with one or more specific slugs."
 msgstr "Giới hạn kết quả thiết lập cho bài viết với một hoặc nhiều đường dẫn cụ thể."
 
@@ -2881,17 +2904,17 @@ msgstr "%1$s không phải là loại của %2$s."
 msgid "%1$s is not one of %2$s."
 msgstr "%1$s không phải là một trong %2$s."
 
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:379
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:398
 msgid "Meta fields."
 msgstr "Các trường meta."
 
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:246
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:256
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:302
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:257
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:267
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:313
 msgid "Could not update meta value in database."
 msgstr "Không thể cập nhật giá trị meta trong cơ sở dữ liệu."
 
-#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:184
+#: wp-includes/rest-api/fields/class-wp-rest-meta-fields.php:195
 msgid "Could not delete meta value from database."
 msgstr "Không thể xóa giá trị meta từ cơ sở dữ liệu."
 
@@ -2948,35 +2971,35 @@ msgstr "Không thể tạo mới một user đã tồn tại."
 msgid "You are not currently logged in."
 msgstr "Bạn hiện chưa đăng nhập."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:966
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:969
 msgid "Limit result set to terms assigned to a specific post."
 msgstr "Giới hạn kết quả cho các term được gán cho một bài viết cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:960
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:963
 msgid "Limit result set to terms assigned to a specific parent."
 msgstr "Giới hạn kết quả cho các term được gán cho term cha cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:953
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:956
 msgid "Whether to hide terms not assigned to any posts."
 msgstr "Ẩn hay không các term được không được gán cho bất kỳ bài viết nào."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:937
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:940
 msgid "Sort collection by term attribute."
 msgstr "Sắp xếp bộ sưu tập theo thuộc tính của term."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:864
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:867
 msgid "Type attribution for the term."
 msgstr "Loại thuộc tính của tài nguyên."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:856
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:859
 msgid "An alphanumeric identifier for the term unique to its type."
 msgstr "Một alphanumeric identifier cho term duy nhất tới loại của nó."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:835
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:838
 msgid "HTML description of the term."
 msgstr "Mô tả HTML cho tài nguyên."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:829
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:832
 msgid "Number of published posts for the term."
 msgstr "Số bài viết được xuất bản cho tài nguyên."
 
@@ -2990,11 +3013,11 @@ msgstr "Định danh duy nhất cho các tài nguyên."
 msgid "Required to be true, as users do not support trashing."
 msgstr "Bắt buộc là true, vì người sử dụng không hỗ trợ đưa vào thùng rác."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:308
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:347
 msgid "Limit results to taxonomies associated with a specific post type."
 msgstr "Giới hạn kết quả cho các taxonomy được gán cho một loại bài viết cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:272
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:311
 msgid "Whether or not the term cloud should be displayed."
 msgstr "Có hay không đám mây term được hiển thị."
 
@@ -3006,165 +3029,165 @@ msgstr "Thuộc tính %s có chứa giá trị không hợp lệ, và không th�
 msgid "Invalid revision ID."
 msgstr "ID bản thảo không hợp lệ."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2292
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2487
 msgid "Status is forbidden."
 msgstr "Tình trạng bị cấm."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2238
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2433
 msgid "Limit result set to items that are sticky."
 msgstr "Giới hạn kết quả gồm những bài viết được sticky."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2217
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2412
 msgid "Limit result set to all items that have the specified term assigned in the %s taxonomy."
 msgstr "Giới hạn kết quả gồm tất cả bài viết có term thuộc taxonomy %s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2181
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2376
 msgid "Limit result set to all items except those of a particular parent ID."
 msgstr "Giới hạn kết quả trừ những bài viết không thuộc về một ID cha cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2173
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2368
 msgid "Limit result set to items with particular parent IDs."
 msgstr "Giới hạn kết quả cho những bài viết thuộc về những ID cha cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1361
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2136
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:921
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1405
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2331
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:924
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1338
 msgid "Offset the result set by a specific number of items."
 msgstr "Offset kết quả được thiết lập bởi một số lượng cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2130
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2325
 msgid "Limit result set to posts with a specific menu_order value."
 msgstr "Giới hạn kết quả cho bài viết có giá trị menu_order cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2095
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2290
 msgid "Ensure result set excludes posts assigned to specific authors."
 msgstr "Đảm bảo rằng kết quả đã loại bỏ những bài viết của các tác giả cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2087
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2282
 msgid "Limit result set to posts assigned to specific authors."
 msgstr "Giới hạn kết quả là các bài viết của các tác giả cụ thể."
 
 #. translators: %s: taxonomy name
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2055
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2134
 msgid "The terms assigned to the object in the %s taxonomy."
 msgstr "Các term được gán cho một đối tượng của taxonomy %s."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2042
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2121
 msgid "The theme file to use to display the object."
 msgstr "Các tập tin của giao diện sử dụng để hiển thị các đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1819
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1898
 msgid "A password to protect access to the content and excerpt."
 msgstr "Mật khẩu để bảo mật truy cập đến nội dung và tóm tắt."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2035
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2114
 msgid "Whether or not the object should be treated as sticky."
 msgstr "Có xem đối tượng là sticky hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2019
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2098
 msgid "The format for the object."
 msgstr "Định dạng cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2008
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2087
 msgid "The order of the object in relation to other object of its type."
 msgstr "Thứ tự của đối tượng trong sự tương quan với đối tượng khác cùng loại."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1999
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2078
 msgid "Whether or not the object can be pinged."
 msgstr "Liệu đối tượng có thể được ping hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1993
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2072
 msgid "Whether or not comments are open on the object."
 msgstr "Bình luận được mở cho đối tượng hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1985
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2064
 msgid "The ID of the featured media for the object."
 msgstr "ID của ảnh đại diện cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1974
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2053
 msgid "Whether the excerpt is protected with a password."
 msgstr "Có hay không trích đoạn được bảo vệ bởi mật khẩu."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1968
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2047
 msgid "HTML excerpt for the object, transformed for display."
 msgstr "Trích đoạn HTML của đối tượng, được chuyển đổi cho việc hiển thị."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1963
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2042
 msgid "Excerpt for the object, as it exists in the database."
 msgstr "Tóm tắt cho đối tượng, như nó tồn tại trong cơ sở dữ liệu."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1954
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2033
 msgid "The excerpt for the object."
 msgstr "Đoạn trích cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1946
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:461
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2025
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:460
 msgid "The ID for the author of the object."
 msgstr "ID cho tác giả của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1935
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2014
 msgid "Whether the content is protected with a password."
 msgstr "Có hay không nội dung được bảo vệ bởi mật khẩu. "
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1904
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1983
 msgid "HTML title for the object, transformed for display."
 msgstr "Tiêu đề HTML của đối tượng, được chuyển đổi để hiển thị. "
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1899
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1978
 msgid "Title for the object, as it exists in the database."
 msgstr "Tiêu đề cho đối tượng, khi nó tồn tại trong cơ sở dữ liệu."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1890
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1969
 msgid "The title for the object."
 msgstr "Tiêu đề cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1813
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1892
 msgid "Type of Post for the object."
 msgstr "Loại bài viết cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1807
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1886
 msgid "A named status for the object."
 msgstr "Một trạng thái định danh cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1799
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:505
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1878
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:504
 msgid "An alphanumeric identifier for the object unique to its type."
 msgstr "Một ID bằng chữ và số cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1792
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:494
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1871
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:493
 msgid "The date the object was last modified, as GMT."
 msgstr "Ngày gần nhất mà đối tượng được chỉnh sửa, theo giờ GMT."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1785
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:488
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1864
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:487
 msgid "The date the object was last modified, in the site's timezone."
 msgstr "Ngày gần nhất mà đối tượng được chỉnh sửa, tính theo múi giờ của website."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1764
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1843
 msgid "GUID for the object, transformed for display."
 msgstr "GUID của đối tượng, được chuyển đổi để hiển thị."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1758
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:478
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1837
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:477
 msgid "GUID for the object, as it exists in the database."
 msgstr "GUID của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1752
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1831
 msgid "The globally unique identifier for the object."
 msgstr "ID toàn cục của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1226
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1746
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:472
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1270
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1825
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:471
 msgid "The date the object was published, as GMT."
 msgstr "Ngày đối tượng được xuất bản, theo giờ GMT."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1220
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1740
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:466
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1264
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1819
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:465
 msgid "The date the object was published, in the site's timezone."
 msgstr "Ngày đối tượng được xuất bản, theo múi giờ của trang web."
 
@@ -3215,24 +3238,24 @@ msgstr "Mật khẩu bài viết không đúng."
 msgid "You need to define a search term to order by relevance."
 msgstr "Bạn cần cung cấp một từ khoá tìm kiếm để có thể sắp xếp bởi độ liên quan."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1434
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1478
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:82
 msgid "The password for the post if it is password protected."
 msgstr "Mật khẩu của bài viết đó nếu nó được bảo vệ."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:254
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:293
 msgid "Human-readable labels for the taxonomy for various contexts."
 msgstr "Nhãn của taxonomy cho nhiều trường hợp khác nhau."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:248
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:287
 msgid "Whether or not the taxonomy should have children."
 msgstr "Taxonomy có taxonomy con hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:242
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:281
 msgid "A human-readable description of the taxonomy."
 msgstr "Mô tả của taxonomy."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:236
+#: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:275
 msgid "All capabilities used by the taxonomy."
 msgstr "Tất cả các quyền được taxonomy sử dụng."
 
@@ -3240,23 +3263,23 @@ msgstr "Tất cả các quyền được taxonomy sử dụng."
 msgid "An alphanumeric identifier for the user."
 msgstr "Một ID bằng chữ và số cho thành viên."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:278
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:299
 msgid "Whether to include posts in the edit listing for their post type."
 msgstr "Có hiện thị bài viết trong danh sách bài viết hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:272
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:293
 msgid "Whether posts with this status should be publicly-queryable."
 msgstr "Những bài viết có status này có được public query hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:266
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:287
 msgid "Whether posts of this status should be shown in the front end of the site."
 msgstr "Những bài viết có trạng thái này có được hiện thị ở front end của website hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:260
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:281
 msgid "Whether posts with this status should be protected."
 msgstr "Những bài viết có trạng thái này có được bảo vệ hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:254
+#: wp-includes/rest-api/endpoints/class-wp-rest-post-statuses-controller.php:275
 msgid "Whether posts with this status should be private."
 msgstr "Những bài viết có trạng thái này có riêng tư hay không."
 
@@ -3292,157 +3315,157 @@ msgstr "Trang hiện tại của bộ sưu tập."
 msgid "Method '%s' not implemented. Must be overridden in subclass."
 msgstr "Phương thức '%s' chưa được triển khai. Phải ghi đè trong subclass."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1427
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1471
 msgid "Limit result set to comments assigned a specific type. Requires authorization."
 msgstr "Giới hạn kết quả là các bình luận theo một loại cụ thể. Yêu cầu xác thực tài khoản."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1419
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1463
 msgid "Limit result set to comments assigned a specific status. Requires authorization."
 msgstr "Giới hạn kết quả là các bình luận có một trạng thái cụ thể. Yêu cầu xác thực tài khoản."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1410
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1454
 msgid "Limit result set to comments assigned to specific post IDs."
 msgstr "Giới hạn kết quả chỉ gồm những bình luận của một số bài viết nhất định."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1401
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1445
 msgid "Ensure result set excludes specific parent IDs."
 msgstr "Đảm bảo rằng kết quả đã loại bỏ những IDs cha được chọn."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1392
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1436
 msgid "Limit result set to comments of specific parent IDs."
 msgstr "Đảm bảo rằng kết quả đã loại bỏ những bình luận có IDs cha cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1376
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2148
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1420
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2343
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1351
 msgid "Sort collection by object attribute."
 msgstr "Sắp xếp danh sách bằng thuộc tính của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1366
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2141
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:927
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1410
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2336
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:930
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1344
 msgid "Order sort attribute ascending or descending."
 msgstr "Sắp xếp thuộc tính tăng dần hoặc giảm dần."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1352
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2120
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:911
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1396
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2315
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:914
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1329
 msgid "Limit result set to specific IDs."
 msgstr "Giới hạn kết quả chỉ những ID cố định."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1343
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2111
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:902
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1387
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2306
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:905
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1320
 msgid "Ensure result set excludes specific IDs."
 msgstr "Chắc chắn kết quả loại trừ những ID cố định."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2105
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2300
 msgid "Limit response to posts published before a given ISO8601 compliant date."
 msgstr "Giới hạn response chỉ bao gồm những bài viết được xuất bản trước một ngày tháng (định dạng ISO8601) cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1331
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1375
 msgid "Limit result set to that from a specific author email. Requires authorization."
 msgstr "Giới hạn kết quả từ một tác giả có email cụ thể. Yêu cầu xác thực tài khoản."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1322
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1366
 msgid "Ensure result set excludes comments assigned to specific user IDs. Requires authorization."
 msgstr "Đảm bảo rằng kết quả đã loại bỏ những bình luận của một số người dùng nhất định. Yêu cầu xác thực tài khoản."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1314
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1358
 msgid "Limit result set to comments assigned to specific user IDs. Requires authorization."
 msgstr "Giới hạn kết quả chỉ gồm những bình luận của một số người dùng cụ thể. Yêu cầu xác thực tài khoản."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2080
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2275
 msgid "Limit response to posts published after a given ISO8601 compliant date."
 msgstr "Giới hạn response trả về chỉ gồm bài viết xuất bản sau một ngày (định dạng ISO8601) cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1282
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1326
 msgid "Avatar URLs for the object author."
 msgstr "Địa chỉ ảnh Avatar cho đối tượng tác giả."
 
 #. translators: %d: avatar image size in pixels
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1274
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1318
 #: wp-includes/rest-api/endpoints/class-wp-rest-users-controller.php:1286
 msgid "Avatar URL with image size of %d pixels."
 msgstr "Đường dẫn tới ảnh đại diện cỡ %d pixels."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1259
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1303
 msgid "Type of Comment for the object."
 msgstr "Loại hình chú thích cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1251
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1295
 msgid "State of the object."
 msgstr "Trạng thái của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1245
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1289
 msgid "The ID of the associated post object."
 msgstr "ID của đối tượng bài viết liên quan."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1239
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1830
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1283
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1909
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:71
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:87
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:500
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:499
 msgid "The ID for the parent of the object."
 msgstr "ID cha của đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1232
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1778
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1276
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1857
 msgid "URL to the object."
 msgstr "Đường dẫn đến đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1212
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1929
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1256
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2008
 msgid "HTML content for the object, transformed for display."
 msgstr "Nội dung HTML của object, đã được chuyển đổi sẵn sàng để hiển thị."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1207
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1924
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1251
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:2003
 msgid "Content for the object, as it exists in the database."
 msgstr "Nội dung của đối tượng, như nó tồn tại trong database."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1198
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1915
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1242
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1994
 msgid "The content for the object."
 msgstr "Nội dung cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1190
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1234
 msgid "User agent for the object author."
 msgstr "User agent cho đối tượng tác giả."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1184
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1228
 msgid "URL for the object author."
 msgstr "URL cho đối tượng tác giả."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1176
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1220
 msgid "Display name for the object author."
 msgstr "Hiển thị tên cho đối tượng tác giả."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1170
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1214
 msgid "IP address for the object author."
 msgstr "Địa chỉ IP cho đối tượng tác giả."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1160
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1204
 msgid "Email address for the object author."
 msgstr "Địa chỉ email cho đối tượng tác giả."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1155
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1199
 msgid "The ID of the user object, if author was a user."
 msgstr "ID của đối tượng người dùng, nếu tác giả là một người dùng."
 
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:65
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1149
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1193
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:89
-#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1772
+#: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:1851
 #: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:91
-#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:483
+#: wp-includes/rest-api/endpoints/class-wp-rest-revisions-controller.php:482
 msgid "Unique identifier for the object."
 msgstr "ID cho đối tượng."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1078
+#: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:1122
 msgid "Invalid comment author ID."
 msgstr "ID của tác giả bình luận không hợp lệ."
 
@@ -3489,49 +3512,49 @@ msgstr "Tham số truy vấn không được phép: %s"
 msgid "Whether to bypass trash and force deletion."
 msgstr "Có xoá vĩnh viễn hay không."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:646
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:674
 msgid "Limit result set to attachments of a particular MIME type."
 msgstr "Giới hạn kết quả chỉ gồm attachments có kiểu MIME cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:639
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:667
 msgid "Limit result set to attachments of a particular media type."
 msgstr "Giới hạn kết quả chỉ gồm attachments có kiểu MIME cụ thể."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:525
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:548
 msgid "Could not open file handle."
 msgstr "Không thể mở file."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:509
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:692
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:532
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:720
 msgid "Content hash did not match expected."
 msgstr "Giá trị hash không khớp như mong đợi."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:500
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:523
 msgid "Invalid Content-Disposition supplied. Content-Disposition needs to be formatted as `attachment; filename=\"image.png\"` or similar."
 msgstr "Content-Disposition không hợp lệ. Content-Disposition cần được định dạng như sau: `attachment; filename=\"image.png\"` hoặc tương tự."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:494
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:517
 msgid "No Content-Disposition supplied."
 msgstr "Content-Disposition không được cung cấp."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:490
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:513
 msgid "No Content-Type supplied."
 msgstr "Chưa bổ sung Content-Type."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:486
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:682
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:509
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:710
 msgid "No data supplied."
 msgstr "Dữ liệu không được cung cấp."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:457
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:480
 msgid "The ID for the associated post of the attachment."
 msgstr "ID của bài viết được được đính với tập tin đính kèm."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:450
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:473
 msgid "Details about the media file, specific to its type."
 msgstr "Chi tiết của tập tin media, đặc biệt cho kiểu tập tin."
 
-#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:380
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:403
 msgid "Alternative text to display when attachment is not displayed."
 msgstr "Chữ hiện thị thay thế khi tập tin đính kèm không thể hiển thị."
 
@@ -3706,7 +3729,7 @@ msgctxt "previous set of posts"
 msgid "Previous"
 msgstr "Trước"
 
-#: wp-includes/general-template.php:396 wp-login.php:589 wp-login.php:1026
+#: wp-includes/general-template.php:396 wp-login.php:590 wp-login.php:1027
 msgid "Username or Email Address"
 msgstr "Tên người dùng hoặc Địa chỉ Email"
 
@@ -3794,13 +3817,13 @@ msgid "Sorry, you are not allowed to assign this term."
 msgstr "Xin lỗi. Bạn không có quyền gán term này."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2152
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:565
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:568
 msgid "Sorry, you are not allowed to delete this term."
 msgstr "Xin lỗi, bạn không có quyền xóa term này."
 
 #: wp-includes/class-wp-xmlrpc-server.php:2056
 #: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:340
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:480
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:483
 msgid "Sorry, you are not allowed to edit this term."
 msgstr "Xin lỗi. Bạn không đuợc thép sửa đổi term này."
 
@@ -4031,7 +4054,7 @@ msgstr "Chào, %s"
 msgid "Edit selected menu"
 msgstr "Sửa menu đã chọn"
 
-#: wp-includes/class-wp-editor.php:1281
+#: wp-includes/class-wp-editor.php:1279
 msgid "Warning: the link has been inserted but may have errors. Please test it."
 msgstr "Cảnh báo: liên kết đã được chèn nhưng có thể có lỗi. Vui lòng kiểm tra nó."
 
@@ -4039,7 +4062,7 @@ msgstr "Cảnh báo: liên kết đã được chèn nhưng có thể có lỗi.
 msgid "Search Results"
 msgstr "Kết quả tìm kiếm"
 
-#: wp-includes/class-wp-editor.php:1236
+#: wp-includes/class-wp-editor.php:1234
 msgid "Rich Text Area. Press Control-Option-H for help."
 msgstr "Vùng Rich Text. Nhấn Control-Option-H để được trợ giúp."
 
@@ -4083,7 +4106,7 @@ msgstr "Tạm dừng"
 msgid "Play"
 msgstr "Chạy"
 
-#: wp-includes/taxonomy.php:2022 wp-includes/taxonomy.php:2648
+#: wp-includes/taxonomy.php:2055 wp-includes/taxonomy.php:2681
 msgid "A name is required for this term."
 msgstr "Yêu cầu nhập tên cho điều kiện này."
 
@@ -4243,7 +4266,7 @@ msgid "Sorry, you are not allowed to delete this post."
 msgstr "Xin lỗi, bạn không được phép xóa bài viết này."
 
 #. translators: %s: site title
-#: wp-login.php:253
+#: wp-login.php:254
 msgctxt "site"
 msgid "&larr; Back to %s"
 msgstr "&larr; Quay lại %s"
@@ -4317,7 +4340,7 @@ msgstr ""
 "Bạn có chắc chắn muốn làm điều này?\n"
 "Những bình luận mà bạn thay đổi sẽ bị mất."
 
-#: wp-includes/script-loader.php:507 wp-login.php:705
+#: wp-includes/script-loader.php:507 wp-login.php:706
 msgid "Confirm use of weak password"
 msgstr "Chấp nhận sử dụng mật khẩu yếu."
 
@@ -4336,12 +4359,12 @@ msgid "Sorry, you are not allowed to preview drafts."
 msgstr "Xin lỗi, bạn không có quyền xem bản nháp."
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1760
+#: wp-includes/pluggable.php:1763
 msgid "[%s] Password Changed"
 msgstr "[%s] Mật khẩu đã thay đổi"
 
 #. translators: %s: user name
-#: wp-includes/pluggable.php:1752
+#: wp-includes/pluggable.php:1755
 msgid "Password changed for user: %s"
 msgstr "Mật khẩu của tài khoản %s đã được thay đổi. "
 
@@ -4393,7 +4416,7 @@ msgstr "Xin lỗi, bạn không có quyền tùy biến trang này."
 msgid "Do not pass %1$s tags to %2$s."
 msgstr "Không vượt qua %1$s thẻ cho %2$s."
 
-#: wp-includes/class-wp-editor.php:1262
+#: wp-includes/class-wp-editor.php:1260
 msgid "Link options"
 msgstr "Tùy chọn link"
 
@@ -4435,13 +4458,13 @@ msgid "1 result found. Use up and down arrow keys to navigate."
 msgstr "Đã tìm thấy 1 kết quả. Hãy dùng phím lên và xuống để di chuyển."
 
 #. translators: %s: user name
-#: wp-includes/comment-template.php:2236
+#: wp-includes/comment-template.php:2244
 msgid "Logged in as %s. Edit your profile."
 msgstr "Đăng nhập như %s. Sửa đổi thông tin của bạn."
 
 #. translators: 1: edit user link, 2: accessibility text, 3: user name, 4:
 #. logout URL
-#: wp-includes/comment-template.php:2233
+#: wp-includes/comment-template.php:2241
 msgid "<a href=\"%1$s\" aria-label=\"%2$s\">Logged in as %3$s</a>. <a href=\"%4$s\">Log out?</a>"
 msgstr "<a href=\"%1$s\" aria-label=\"%2$s\">Đã đăng nhập bằng tài khoản %3$s</a>. <a href=\"%4$s\">Đăng xuất?</a>"
 
@@ -4457,11 +4480,11 @@ msgstr "Hằng số %1$s <strong>bị từ chối</strong>. Sử dụng hằng s
 msgid "Removing %1$s manually will cause PHP warnings. Use the %2$s filter instead."
 msgstr "Loại bỏ %1$s một cách thủ công sẽ dẫn đến các cảnh báo PHP. Dùng %2$s để thay thế bộ lọc."
 
-#: wp-includes/class-wp-editor.php:1289
+#: wp-includes/class-wp-editor.php:1287
 msgid "The next group of formatting shortcuts are applied as you type or when you insert them around plain text in the same paragraph. Press Escape or the Undo button to undo."
 msgstr "Các nhóm tiếp theo của các phím tắt định dạng được áp dụng khi bạn gõ hoặc khi bạn chèn chúng xung quanh văn bản thô trong cùng một đoạn. Nhấn Escape hoặc nút Undo để quay lại."
 
-#: wp-login.php:980
+#: wp-login.php:981
 msgid "Your session has expired. Please log in to continue where you left off."
 msgstr "Phiên đăng nhập của bạn đã hết hạn. Xin vui lòng đăng nhập để quay lại trang vừa rồi."
 
@@ -4536,7 +4559,7 @@ msgstr "Lên kế hoạch"
 #: wp-includes/post.php:229
 msgctxt "post status"
 msgid "Published"
-msgstr "Đã đăng"
+msgstr "Đã xuất bản"
 
 #: wp-includes/post-template.php:1611
 msgctxt "post password form"
@@ -4553,13 +4576,13 @@ msgstr "<strong>LỖI</strong>: Tên người dùng, đia chị email không h�
 msgid "%1$s %2$s %3$s %4$s Feed"
 msgstr "Nguồn cấp %1$s %2$s %3$s %4$s"
 
-#: wp-includes/functions.php:5314
+#: wp-includes/functions.php:5333
 msgid "Close dialog"
 msgstr "Đóng hộp thoại"
 
 #. translators: 1: PHP class name, 2: PHP parent class name, 3: version number,
 #. 4: __construct() method
-#: wp-includes/functions.php:3902
+#: wp-includes/functions.php:3915
 msgid "The called constructor method for %1$s in %2$s is <strong>deprecated</strong> since version %3$s! Use %4$s instead."
 msgstr "Việc gọi phương thức khởi tạo cho %1$s in %2$s là <strong>không được phép</strong> từ phiên bản %3$s! đã được thay thế bằng %4$s"
 
@@ -4634,7 +4657,7 @@ msgstr "Template bị thiếu. Giao diện độc lập cần có một tệp te
 msgid "Invalid object type"
 msgstr "Kiểu đối tượng không hợp lệ"
 
-#: wp-includes/class-wp-editor.php:1260
+#: wp-includes/class-wp-editor.php:1258
 msgid "Paste URL or type to search"
 msgstr "Dán URL hoặc gõ để tìm kiếm"
 
@@ -4697,12 +4720,12 @@ msgstr "https://codex.wordpress.org/Debugging_a_WordPress_Network"
 msgid "Read the <a href=\"%s\" target=\"_blank\">bug report</a> page. Some of the guidelines there may help you figure out what went wrong."
 msgstr "Hãy xem qua <a href=\"%s\" target=\"_blank\">trang báo cáo lỗi</a>. Các hướng dẫn trong có đó thể giúp bạn tìm ra cách giải quyết cho những vấn đề hiện tại. "
 
-#: wp-includes/functions.php:4145
+#: wp-includes/functions.php:4158
 msgid "https://codex.wordpress.org/Debugging_in_WordPress"
 msgstr "https://codex.wordpress.org/Debugging_in_WordPress"
 
 #. translators: %s: Codex URL
-#: wp-includes/functions.php:4144
+#: wp-includes/functions.php:4157
 msgid "Please see <a href=\"%s\">Debugging in WordPress</a> for more information."
 msgstr "Vui lòng xem <a href=\"%s\">Hướng dẫn Debug trong WordPress</a> để biết thêm thông tin."
 
@@ -5348,7 +5371,7 @@ msgstr "Hãy sử dụng %2$s thay cho %1$s (sẽ sớm bị loại bỏ)"
 msgid "Clear Results"
 msgstr "Xoá các Kết quả"
 
-#: wp-includes/class-wp-editor.php:1287
+#: wp-includes/class-wp-editor.php:1285
 msgid "The following formatting shortcuts are replaced when pressing Enter. Press Escape or the Undo button to undo."
 msgstr "Các phím tắt định dạng sau đây được thay thế khi nhấn Enter. Nhấn Escape hoặc nút Undo để trở lại."
 
@@ -5418,7 +5441,7 @@ msgstr "Là một biểu tượng trình duyệt"
 msgid "No items"
 msgstr "Không có mục nào"
 
-#: wp-login.php:821
+#: wp-login.php:822
 msgid "Registration confirmation will be emailed to you."
 msgstr "Email xác nhận sẽ được gửi tới hộp thư của bạn."
 
@@ -5479,15 +5502,15 @@ msgstr "Nhận dạng Site"
 msgid "Add to menu: %1$s (%2$s)"
 msgstr "Thêm vào menu: %1$s (%2$s)"
 
-#: wp-includes/class-wp-editor.php:1285
+#: wp-includes/class-wp-editor.php:1283
 msgid "When starting a new paragraph with one of these formatting shortcuts followed by a space, the formatting will be applied automatically. Press Backspace or Escape to undo."
 msgstr "Khi bắt đầu 1 đoạn mới với 1 trong những mẫu này được theo sau bởi 1 dấu space, định dạng sẽ được áp dụng tự động. Nhấn phím Backspace hoặc Escape để hoàn nguyên."
 
-#: wp-login.php:556
+#: wp-login.php:557
 msgid "Your password reset link has expired. Please request a new link below."
 msgstr "Liên kết đặt lại mật khẩu của bạn đã hết hạn. Hãy yêu cầu 1 liên kết mới bên dưới."
 
-#: wp-login.php:554
+#: wp-login.php:555
 msgid "Your password reset link appears to be invalid. Please request a new link below."
 msgstr "Liên kết đặt lại mật khẩu của bạn không hợp lệ. Hãy yêu cầu 1 liên kết mới bên dưới."
 
@@ -5495,7 +5518,7 @@ msgstr "Liên kết đặt lại mật khẩu của bạn không hợp lệ. Hã
 msgid "WordPress database error:"
 msgstr "Lỗi cơ sở dữ liệu WordPress:"
 
-#: wp-includes/pluggable.php:1895
+#: wp-includes/pluggable.php:1898
 msgid "To set your password, visit the following address:"
 msgstr "Để đặt mật khẩu của bạn, truy cập địa chỉ sau:"
 
@@ -5509,11 +5532,11 @@ msgid "The %s directory of the develop repository must be used for RTL."
 msgstr "Thư mục %s của các kho lưu trữ phát triển phải được sử dụng cho RTL."
 
 #. translators: 1: PHP class name, 2: version number, 3: __construct() method
-#: wp-includes/functions.php:3906
+#: wp-includes/functions.php:3919
 msgid "The called constructor method for %1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "Phương thức khởi tạo được gọi cho %1$s bị <strong>phản đối</strong> kể từ phiên bản %2$s! Sử dụng %3$s thay thế."
 
-#: wp-includes/class-wp-editor.php:1021
+#: wp-includes/class-wp-editor.php:1019
 msgctxt "HTML tag"
 msgid "Preformatted"
 msgstr "Được định dạng trước"
@@ -5754,31 +5777,31 @@ msgstr "Nội dung:"
 msgid "Allow link notifications from other blogs (pingbacks and trackbacks) on new articles"
 msgstr "Cho phép liên kết các thông báo từ các blog khác (pingbacks và trackbacks) trên các bài viết mới"
 
-#: wp-includes/class-wp-editor.php:1278
+#: wp-includes/class-wp-editor.php:1276
 msgid "Ctrl + letter:"
 msgstr "Ctrl + kí tự:"
 
-#: wp-includes/class-wp-editor.php:1277
+#: wp-includes/class-wp-editor.php:1275
 msgid "Cmd + letter:"
 msgstr "Cmd + kí tự:"
 
-#: wp-includes/class-wp-editor.php:1276
+#: wp-includes/class-wp-editor.php:1274
 msgid "Shift + Alt + letter:"
 msgstr "Shift + Alt + kí tự:"
 
-#: wp-includes/class-wp-editor.php:1275
+#: wp-includes/class-wp-editor.php:1273
 msgid "Ctrl + Alt + letter:"
 msgstr "Ctrl + Alt + kí tự:"
 
-#: wp-includes/class-wp-editor.php:1271
+#: wp-includes/class-wp-editor.php:1269
 msgid "Inline toolbar (when an image, link or preview is selected)"
 msgstr "Thanh công cụ Inline (khi một hình ảnh, liên kết hoặc xem trước được chọn)"
 
-#: wp-includes/class-wp-editor.php:1269
+#: wp-includes/class-wp-editor.php:1267
 msgid "Additional shortcuts,"
 msgstr "Phím tắt bổ sung,"
 
-#: wp-includes/class-wp-editor.php:1268
+#: wp-includes/class-wp-editor.php:1266
 msgid "Default shortcuts,"
 msgstr "Phím tắt mặc định,"
 
@@ -5976,7 +5999,7 @@ msgstr "Lớp CSS"
 msgid "Title Attribute"
 msgstr "Thuộc Tính Tiêu Đề"
 
-#: wp-includes/class-wp-editor.php:1717
+#: wp-includes/class-wp-editor.php:1715
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:100
 #: wp-includes/media-template.php:1008
 #: wp-includes/widgets/class-wp-widget-media-image.php:136
@@ -6013,7 +6036,7 @@ msgstr "Lỗi XML: %1$s tại dòng thứ %2$s"
 msgid "User Dashboard: %s"
 msgstr "Bảng điều khiển người dùng: %s"
 
-#: wp-login.php:920 wp-login.php:925
+#: wp-login.php:921 wp-login.php:926
 msgid "https://codex.wordpress.org/Cookies"
 msgstr "https://codex.wordpress.org/Cookies"
 
@@ -6105,7 +6128,7 @@ msgstr "Cài đặt đã hoàn thành."
 msgid "Taxonomy names must be between 1 and 32 characters in length."
 msgstr "Độ dài của tên taxonomy phải ở trong khoảng từ 1 đến 32."
 
-#: wp-includes/taxonomy.php:3562
+#: wp-includes/taxonomy.php:3595
 msgid "Could not split shared term."
 msgstr "Không thể chia shared term."
 
@@ -6210,7 +6233,7 @@ msgid "F j, Y @ H:i:s"
 msgstr "Ngày j F, Y @ H:i:s"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1115
-#: wp-includes/class-wp-editor.php:1712 wp-includes/media-template.php:820
+#: wp-includes/class-wp-editor.php:1710 wp-includes/media-template.php:820
 msgid "Link Text"
 msgstr "Đường dẫn bằng chữ"
 
@@ -6277,7 +6300,7 @@ msgstr "Xem trước"
 msgid "No categories found."
 msgstr "Không tìm thấy mục nào."
 
-#: wp-includes/class-wp-editor.php:1256 wp-includes/script-loader.php:99
+#: wp-includes/class-wp-editor.php:1254 wp-includes/script-loader.php:99
 msgid "Distraction-free writing mode"
 msgstr "Chế độ viết chống xao nhãng"
 
@@ -6294,27 +6317,27 @@ msgstr "Widget đã dịch chuyển lên"
 msgid "Widget moved down"
 msgstr "Widget đã dịch chuyển xuống"
 
-#: wp-includes/class-wp-editor.php:1235
+#: wp-includes/class-wp-editor.php:1233
 msgid "Rich Text Area. Press Alt-Shift-H for help."
 msgstr "Khó khăn khi sử dụng? Hãy nhấn Alt-Shift-H để giúp đỡ"
 
-#: wp-includes/class-wp-editor.php:1270
+#: wp-includes/class-wp-editor.php:1268
 msgid "Focus shortcuts:"
 msgstr "Các phím tắt tập trung:"
 
-#: wp-includes/class-wp-editor.php:1272
+#: wp-includes/class-wp-editor.php:1270
 msgid "Editor menu (when enabled)"
 msgstr "Menu trình soạn thảo (khi được kích hoạt)"
 
-#: wp-includes/class-wp-editor.php:1273
+#: wp-includes/class-wp-editor.php:1271
 msgid "Editor toolbar"
 msgstr "Thanh công cụ soạn thảo"
 
-#: wp-includes/class-wp-editor.php:1283
+#: wp-includes/class-wp-editor.php:1281
 msgid "To move focus to other buttons use Tab or the arrow keys. To return focus to the editor press Escape or use one of the buttons."
 msgstr "Để đặt trọng tâm vào các nút khác, hãy sử dụng phím Tab hoặc các phím mũi tên. Để đặt lại vào trọng tâm vào khung soạn thảo, sử dụng phím ESC."
 
-#: wp-includes/class-wp-editor.php:1274
+#: wp-includes/class-wp-editor.php:1272
 msgid "Elements path"
 msgstr "Đường dẫn "
 
@@ -6323,7 +6346,7 @@ msgstr "Đường dẫn "
 msgid "The following values do not describe a valid date: month %1$s, day %2$s."
 msgstr "Các giá trị sau không có ngày hợp lệ: tháng %1$s, ngày %2$s."
 
-#: wp-includes/taxonomy.php:2111
+#: wp-includes/taxonomy.php:2144
 msgid "A term with the name provided already exists in this taxonomy."
 msgstr "Tên này đã tồn tại rồi, không dùng được"
 
@@ -6374,27 +6397,27 @@ msgid "Trash"
 msgstr "Thùng rác"
 
 #. translators: 1: Trackback/pingback/comment author URL
-#: wp-includes/pluggable.php:1474 wp-includes/pluggable.php:1485
-#: wp-includes/pluggable.php:1496 wp-includes/pluggable.php:1636
-#: wp-includes/pluggable.php:1646 wp-includes/pluggable.php:1658
+#: wp-includes/pluggable.php:1477 wp-includes/pluggable.php:1488
+#: wp-includes/pluggable.php:1499 wp-includes/pluggable.php:1639
+#: wp-includes/pluggable.php:1649 wp-includes/pluggable.php:1661
 msgid "URL: %s"
 msgstr "Đường dẫn: %s"
 
 #. translators: 1: Comment text
-#: wp-includes/pluggable.php:1475 wp-includes/pluggable.php:1486
-#: wp-includes/pluggable.php:1497 wp-includes/pluggable.php:1660
+#: wp-includes/pluggable.php:1478 wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1500 wp-includes/pluggable.php:1663
 msgid "Comment: %s"
 msgstr "Bình luận: %s"
 
-#: wp-includes/pluggable.php:1476
+#: wp-includes/pluggable.php:1479
 msgid "You can see all trackbacks on this post here:"
 msgstr "Bạn có thể thấy tất cả pingbacks của bài viết này tại đây:"
 
-#: wp-includes/pluggable.php:1487
+#: wp-includes/pluggable.php:1490
 msgid "You can see all pingbacks on this post here:"
 msgstr "Bạn có thể thấy tất cả pingbacks của bài viết này tại đây:"
 
-#: wp-includes/pluggable.php:1498
+#: wp-includes/pluggable.php:1501
 msgid "You can see all comments on this post here:"
 msgstr "Bạn có thể thấy tất cả bình luận tại đây:"
 
@@ -6403,20 +6426,20 @@ msgctxt "verb"
 msgid "Trash"
 msgstr "Xóa tạm"
 
-#: wp-includes/class-wp-editor.php:1166
+#: wp-includes/class-wp-editor.php:1164
 msgid "Add to Dictionary"
 msgstr "Thêm vào từ điển"
 
-#: wp-includes/class-wp-editor.php:1174
+#: wp-includes/class-wp-editor.php:1172
 msgid "Border color"
 msgstr "Màu viền"
 
-#: wp-includes/class-wp-editor.php:1203
+#: wp-includes/class-wp-editor.php:1201
 msgctxt "horizontal table cell alignment"
 msgid "H Align"
 msgstr "Căn ngang"
 
-#: wp-includes/class-wp-editor.php:1208
+#: wp-includes/class-wp-editor.php:1206
 msgctxt "vertical table cell alignment"
 msgid "V Align"
 msgstr "Căn dọc"
@@ -6528,7 +6551,7 @@ msgstr "%1$s: %2$s"
 msgid "Archives: %s"
 msgstr "Lưu trữ: %s"
 
-#: wp-includes/class-wp-editor.php:1257
+#: wp-includes/class-wp-editor.php:1255
 msgid "No alignment"
 msgstr "Không căn lề"
 
@@ -6554,24 +6577,24 @@ msgstr "Chọn ảnh"
 msgid "No image selected"
 msgstr "Không có ảnh nào được chọn"
 
-#: wp-includes/class-wp-editor.php:1143
+#: wp-includes/class-wp-editor.php:1141
 msgid "Custom color"
 msgstr "Màu tùy chỉnh"
 
-#: wp-includes/class-wp-editor.php:1142
+#: wp-includes/class-wp-editor.php:1140
 msgid "Color"
 msgstr "Màu sắc"
 
-#: wp-includes/class-wp-editor.php:1144
+#: wp-includes/class-wp-editor.php:1142
 msgctxt "label for custom color"
 msgid "Custom..."
 msgstr "Tùy chỉnh..."
 
-#: wp-includes/class-wp-editor.php:1145
+#: wp-includes/class-wp-editor.php:1143
 msgid "No color"
 msgstr "Không màu"
 
-#: wp-includes/class-wp-editor.php:1059
+#: wp-includes/class-wp-editor.php:1057
 msgctxt "list style"
 msgid "Default"
 msgstr "Mặc định"
@@ -6591,7 +6614,7 @@ msgctxt "add new from admin bar"
 msgid "Post"
 msgstr "Bài viết"
 
-#: wp-includes/class-wp-editor.php:1249
+#: wp-includes/class-wp-editor.php:1247
 msgctxt "TinyMCE menu"
 msgid "Format"
 msgstr "Định dạng"
@@ -6606,7 +6629,7 @@ msgctxt "add new media"
 msgid "Add New"
 msgstr "Thêm mới"
 
-#: wp-login.php:994
+#: wp-login.php:995
 msgid "<strong>You have successfully updated WordPress!</strong> Please log back in to see what&#8217;s new."
 msgstr "<strong>Bạn đã cập nhật WordPress thành công!</strong>Vui lòng đăng nhập lại để xem những tính năng mới."
 
@@ -6648,7 +6671,7 @@ msgstr "Chọn nhiều"
 
 #. translators: %s: taxonomy label, %l: list of terms formatted as per
 #. $term_template
-#: wp-includes/taxonomy.php:4066
+#: wp-includes/taxonomy.php:4099
 msgid "%s: %l."
 msgstr "%s: %l."
 
@@ -6758,15 +6781,15 @@ msgstr "Đóng trình tải lên"
 msgid "Close media panel"
 msgstr "Đóng bảng điều khiển Media"
 
-#: wp-includes/class-wp-editor.php:1738
+#: wp-includes/class-wp-editor.php:1736
 msgid "Search or use up and down arrow keys to select an item."
 msgstr "Tìm hoặc sử dụng phím mũi tên lên và xuống để chọn một mục. "
 
-#: wp-includes/class-wp-editor.php:1255
+#: wp-includes/class-wp-editor.php:1253
 msgid "Read more..."
 msgstr "Xem chi tiết..."
 
-#: wp-includes/class-wp-editor.php:1240
+#: wp-includes/class-wp-editor.php:1238
 msgid "Your browser does not support direct access to the clipboard. Please use keyboard shortcuts or your browser&#8217;s edit menu instead."
 msgstr "Trình duyệt của bạn không hỗ trợ truy cập trực tiếp vào clipboard. Vui lòng sử dụng các phím tắt hoặc menu chỉnh sửa của trình duyệt để thay thế."
 
@@ -6797,26 +6820,26 @@ msgstr "(WordPress không thể thiết lập kết nối an toàn tới WordPre
 msgid "Shift-click to edit this widget."
 msgstr "Giữ phím Shift và nhấp chuột để chỉnh sửa widget này."
 
-#: wp-includes/class-wp-editor.php:1022
+#: wp-includes/class-wp-editor.php:1020
 msgctxt "HTML tag"
 msgid "Address"
 msgstr "Địa chỉ"
 
-#: wp-includes/class-wp-editor.php:1233
+#: wp-includes/class-wp-editor.php:1231
 msgid "If you&#8217;re looking to paste rich content from Microsoft Word, try turning this option off. The editor will clean up text pasted from Word automatically."
 msgstr "Nếu bạn đang muốn dán nội dung từ Microsoft Word, hãy tắt lựa chọn này đi. Trình chỉnh sửa văn bản sẽ tự động xóa văn bản được dán từ Word."
 
-#: wp-includes/class-wp-editor.php:1267
+#: wp-includes/class-wp-editor.php:1265
 msgid "Keyboard Shortcuts"
 msgstr "Phím tắt"
 
 #. translators: 1: Browser cookie documentation URL
-#: wp-login.php:924
+#: wp-login.php:925
 msgid "<strong>ERROR</strong>: Cookies are blocked or not supported by your browser. You must <a href=\"%s\">enable cookies</a> to use WordPress."
 msgstr "<strong>LỖI</strong>: Cookies bị chặn hoặc không được hỗ trợ bởi trình duyệt của bạn. Bạn phải <a href=\"%s\">kích hoạt cookies</a> để sử dụng WordPress."
 
 #. translators: 1: Browser cookie documentation URL, 2: Support forums URL
-#: wp-login.php:919
+#: wp-login.php:920
 msgid "<strong>ERROR</strong>: Cookies are blocked due to unexpected output. For help, please see <a href=\"%1$s\">this documentation</a> or try the <a href=\"%2$s\">support forums</a>."
 msgstr "<strong>ERROR</strong>: Cookies bị chặn do xuất ra bất ngờ. Để được trợ giúp, vui lòng xem <a href=\"%1$s\">tài liệu này</a> hoặc thử <a href=\"%2$s\">các diễn đàn trợ giúp</a>."
 
@@ -6890,19 +6913,19 @@ msgstr "Tùy chọn nâng cao"
 msgid "Custom Size"
 msgstr "Tùy chỉnh kích thước"
 
-#: wp-includes/class-wp-editor.php:1197
+#: wp-includes/class-wp-editor.php:1195
 msgid "Split table cell"
 msgstr "Chia ô trong bảng"
 
-#: wp-includes/class-wp-editor.php:1035
+#: wp-includes/class-wp-editor.php:1033
 msgid "Font Sizes"
 msgstr "Kích cỡ chữ"
 
-#: wp-includes/class-wp-editor.php:1034
+#: wp-includes/class-wp-editor.php:1032
 msgid "Font Family"
 msgstr "Phông chữ"
 
-#: wp-includes/class-wp-editor.php:1207
+#: wp-includes/class-wp-editor.php:1205
 msgctxt "table cell alignment attribute"
 msgid "None"
 msgstr "Không căn"
@@ -6924,7 +6947,7 @@ msgstr "Hiển thị danh sách video"
 msgid "Link CSS Class"
 msgstr "Liên kết lớp CSS"
 
-#: wp-includes/class-wp-editor.php:1007
+#: wp-includes/class-wp-editor.php:1005
 msgctxt "TinyMCE"
 msgid "Headings"
 msgstr "Tiêu đề"
@@ -6972,233 +6995,233 @@ msgstr "Cắt&hellip"
 msgid "Move to another area&hellip;"
 msgstr "Di chuyển tới vùng khác&hellip;"
 
-#: wp-includes/class-wp-editor.php:1248
+#: wp-includes/class-wp-editor.php:1246
 msgctxt "TinyMCE menu"
 msgid "Table"
 msgstr "Bảng"
 
-#: wp-includes/class-wp-editor.php:1247
+#: wp-includes/class-wp-editor.php:1245
 msgctxt "TinyMCE menu"
 msgid "View"
 msgstr "Xem"
 
-#: wp-includes/class-wp-editor.php:1246
+#: wp-includes/class-wp-editor.php:1244
 msgctxt "TinyMCE menu"
 msgid "Tools"
 msgstr "Các công cụ"
 
-#: wp-includes/class-wp-editor.php:1245
+#: wp-includes/class-wp-editor.php:1243
 msgctxt "TinyMCE menu"
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
-#: wp-includes/class-wp-editor.php:1244
+#: wp-includes/class-wp-editor.php:1242
 msgctxt "TinyMCE menu"
 msgid "File"
 msgstr "Tệp tin"
 
-#: wp-includes/class-wp-editor.php:1243
+#: wp-includes/class-wp-editor.php:1241
 msgctxt "TinyMCE menu"
 msgid "Insert"
 msgstr "Chèn"
 
 #. translators: word count
-#: wp-includes/class-wp-editor.php:1230
+#: wp-includes/class-wp-editor.php:1228
 msgid "Words: %s"
 msgstr "Các từ: %s"
 
-#: wp-includes/class-wp-editor.php:1226
+#: wp-includes/class-wp-editor.php:1224
 msgctxt "editor button"
 msgid "Show blocks"
 msgstr "Hiển thị các khối"
 
-#: wp-includes/class-wp-editor.php:1222
+#: wp-includes/class-wp-editor.php:1220
 msgctxt "TinyMCE"
 msgid "Templates"
 msgstr "Các mẫu"
 
-#: wp-includes/class-wp-editor.php:1221
+#: wp-includes/class-wp-editor.php:1219
 msgctxt "TinyMCE"
 msgid "Insert template"
 msgstr "Chèn mẫu"
 
-#: wp-includes/class-wp-editor.php:1184
+#: wp-includes/class-wp-editor.php:1182
 msgctxt "table footer"
 msgid "Footer"
 msgstr "Phần cuối"
 
-#: wp-includes/class-wp-editor.php:1183
+#: wp-includes/class-wp-editor.php:1181
 msgctxt "table body"
 msgid "Body"
 msgstr "Phần thân"
 
-#: wp-includes/class-wp-editor.php:1182
+#: wp-includes/class-wp-editor.php:1180
 msgctxt "table header"
 msgid "Header"
 msgstr "Tiêu đề"
 
-#: wp-includes/class-wp-editor.php:1180
+#: wp-includes/class-wp-editor.php:1178
 msgctxt "table cell"
 msgid "Cell"
 msgstr "Ô phần tử"
 
-#: wp-includes/class-wp-editor.php:1179
+#: wp-includes/class-wp-editor.php:1177
 msgctxt "table columns"
 msgid "Cols"
 msgstr "Các cột"
 
-#: wp-includes/class-wp-editor.php:1165
+#: wp-includes/class-wp-editor.php:1163
 msgctxt "spellcheck"
 msgid "Ignore"
 msgstr "Bỏ qua"
 
-#: wp-includes/class-wp-editor.php:1164
+#: wp-includes/class-wp-editor.php:1162
 msgctxt "spellcheck"
 msgid "Ignore all"
 msgstr "Bỏ qua tất cả"
 
-#: wp-includes/class-wp-editor.php:1163
+#: wp-includes/class-wp-editor.php:1161
 msgctxt "spellcheck"
 msgid "Finish"
 msgstr "Kết thúc"
 
-#: wp-includes/class-wp-editor.php:1160
+#: wp-includes/class-wp-editor.php:1158
 msgctxt "find/replace"
 msgid "Replace all"
 msgstr "Thay thế tất cả"
 
-#: wp-includes/class-wp-editor.php:1159
+#: wp-includes/class-wp-editor.php:1157
 msgctxt "find/replace"
 msgid "Find"
 msgstr "Tìm"
 
-#: wp-includes/class-wp-editor.php:1158
+#: wp-includes/class-wp-editor.php:1156
 msgctxt "find/replace"
 msgid "Replace with"
 msgstr "Thay thế bằng"
 
-#: wp-includes/class-wp-editor.php:1156
+#: wp-includes/class-wp-editor.php:1154
 msgctxt "find/replace"
 msgid "Whole words"
 msgstr "Toàn bộ từ"
 
 #. translators: previous
-#: wp-includes/class-wp-editor.php:1155
+#: wp-includes/class-wp-editor.php:1153
 msgctxt "find/replace"
 msgid "Prev"
 msgstr "Trước"
 
-#: wp-includes/class-wp-editor.php:1153
+#: wp-includes/class-wp-editor.php:1151
 msgctxt "find/replace"
 msgid "Next"
 msgstr "Tiếp theo"
 
-#: wp-includes/class-wp-editor.php:1152
+#: wp-includes/class-wp-editor.php:1150
 msgctxt "find/replace"
 msgid "Replace"
 msgstr "Thay thế"
 
-#: wp-includes/class-wp-editor.php:1114
+#: wp-includes/class-wp-editor.php:1112
 msgctxt "editor button"
 msgid "Left to right"
 msgstr "Trái sang phải"
 
-#: wp-includes/class-wp-editor.php:1113
+#: wp-includes/class-wp-editor.php:1111
 msgctxt "editor button"
 msgid "Right to left"
 msgstr "Phải sang trái"
 
-#: wp-includes/class-wp-editor.php:1071
+#: wp-includes/class-wp-editor.php:1069
 msgctxt "Link anchors (TinyMCE)"
 msgid "Anchors"
 msgstr "Anchors"
 
-#: wp-includes/class-wp-editor.php:1070
+#: wp-includes/class-wp-editor.php:1068
 msgctxt "Link anchor (TinyMCE)"
 msgid "Anchor"
 msgstr "Anchor"
 
-#: wp-includes/class-wp-editor.php:1069
+#: wp-includes/class-wp-editor.php:1067
 msgctxt "Name of link anchor (TinyMCE)"
 msgid "Name"
 msgstr "Tên"
 
-#: wp-includes/class-wp-editor.php:1066
+#: wp-includes/class-wp-editor.php:1064
 msgctxt "list style"
 msgid "Lower Roman"
 msgstr "Roman thường"
 
-#: wp-includes/class-wp-editor.php:1065
+#: wp-includes/class-wp-editor.php:1063
 msgctxt "list style"
 msgid "Upper Roman"
 msgstr "Roman in hoa"
 
-#: wp-includes/class-wp-editor.php:1064
+#: wp-includes/class-wp-editor.php:1062
 msgctxt "list style"
 msgid "Upper Alpha"
 msgstr "Kiểu chữ Alpha hoa"
 
-#: wp-includes/class-wp-editor.php:1063
+#: wp-includes/class-wp-editor.php:1061
 msgctxt "list style"
 msgid "Lower Alpha"
 msgstr "Kiểu chữ Alpha thường"
 
-#: wp-includes/class-wp-editor.php:1062
+#: wp-includes/class-wp-editor.php:1060
 msgctxt "list style"
 msgid "Lower Greek"
 msgstr "Kiểu chữ Greek thường"
 
-#: wp-includes/class-wp-editor.php:1061
+#: wp-includes/class-wp-editor.php:1059
 msgctxt "list style"
 msgid "Disc"
 msgstr "Đĩa"
 
-#: wp-includes/class-wp-editor.php:1060
+#: wp-includes/class-wp-editor.php:1058
 msgctxt "list style"
 msgid "Circle"
 msgstr "Vòng tròn"
 
-#: wp-includes/class-wp-editor.php:1058
+#: wp-includes/class-wp-editor.php:1056
 msgctxt "list style"
 msgid "Square"
 msgstr "Vuông"
 
-#: wp-includes/class-wp-editor.php:1056 wp-includes/script-loader.php:112
+#: wp-includes/class-wp-editor.php:1054 wp-includes/script-loader.php:112
 msgid "Bulleted list"
 msgstr "Danh sách liệt kê được đánh số"
 
-#: wp-includes/class-wp-editor.php:1024
+#: wp-includes/class-wp-editor.php:1022
 msgctxt "HTML elements"
 msgid "Inline"
 msgstr "Thuộc cùng một dòng"
 
-#: wp-includes/class-wp-editor.php:1020
+#: wp-includes/class-wp-editor.php:1018
 msgctxt "HTML tag"
 msgid "Pre"
 msgstr "Trước"
 
-#: wp-includes/class-wp-editor.php:1019
+#: wp-includes/class-wp-editor.php:1017
 msgctxt "HTML tag"
 msgid "Div"
 msgstr "Div"
 
 #. translators: block tags
-#: wp-includes/class-wp-editor.php:1016
+#: wp-includes/class-wp-editor.php:1014
 msgctxt "TinyMCE"
 msgid "Blocks"
 msgstr "Khối"
 
-#: wp-includes/class-wp-editor.php:1178
+#: wp-includes/class-wp-editor.php:1176
 msgctxt "table column"
 msgid "Column"
 msgstr "Cột"
 
-#: wp-includes/class-wp-editor.php:1219
+#: wp-includes/class-wp-editor.php:1217
 msgctxt "table cell scope attribute"
 msgid "Scope"
 msgstr "Phạm vi"
 
-#: wp-includes/class-wp-editor.php:1005
+#: wp-includes/class-wp-editor.php:1003
 msgctxt "TinyMCE"
 msgid "Formats"
 msgstr "Định dạng"
@@ -7398,55 +7421,55 @@ msgstr "Đã xảy ra lỗi xảy ra, có thể là do WordPress.org hoặc do c
 msgid "Image Details"
 msgstr "Chi tiết hình ảnh"
 
-#: wp-includes/class-wp-editor.php:1253 wp-includes/script-loader.php:120
+#: wp-includes/class-wp-editor.php:1251 wp-includes/script-loader.php:120
 msgid "Insert Read More tag"
 msgstr "Chèn thẻ Đọc Thêm"
 
-#: wp-includes/class-wp-editor.php:1227
+#: wp-includes/class-wp-editor.php:1225
 msgid "Show invisible characters"
 msgstr "Hiển thị các ký tự ẩn"
 
-#: wp-includes/class-wp-editor.php:1225
+#: wp-includes/class-wp-editor.php:1223
 msgid "Text color"
 msgstr "Màu chữ văn bản"
 
-#: wp-includes/class-wp-editor.php:1224
+#: wp-includes/class-wp-editor.php:1222
 msgid "Background color"
 msgstr "Màu nền"
 
-#: wp-includes/class-wp-editor.php:1193
+#: wp-includes/class-wp-editor.php:1191
 msgid "Delete column"
 msgstr "Xóa cột"
 
-#: wp-includes/class-wp-editor.php:1213
+#: wp-includes/class-wp-editor.php:1211
 msgid "Row group"
 msgstr "Nhóm dòng"
 
-#: wp-includes/class-wp-editor.php:1216
+#: wp-includes/class-wp-editor.php:1214
 msgid "Cell type"
 msgstr "Kiểu ô"
 
-#: wp-includes/class-wp-editor.php:1181
+#: wp-includes/class-wp-editor.php:1179
 msgid "Header cell"
 msgstr "Ô tiêu đề"
 
-#: wp-includes/class-wp-editor.php:1169
+#: wp-includes/class-wp-editor.php:1167
 msgid "Insert table"
 msgstr "Chèn bảng"
 
-#: wp-includes/class-wp-editor.php:1215
+#: wp-includes/class-wp-editor.php:1213
 msgid "Row type"
 msgstr "Kiểu dòng"
 
-#: wp-includes/class-wp-editor.php:1218
+#: wp-includes/class-wp-editor.php:1216
 msgid "Cell spacing"
 msgstr "Khoảng cách viền ô"
 
-#: wp-includes/class-wp-editor.php:1217
+#: wp-includes/class-wp-editor.php:1215
 msgid "Cell padding"
 msgstr "Khoảng cách trong ô"
 
-#: wp-includes/class-wp-editor.php:1177
+#: wp-includes/class-wp-editor.php:1175
 msgid "Rows"
 msgstr "Dòng"
 
@@ -7454,11 +7477,11 @@ msgstr "Dòng"
 msgid "Finnish"
 msgstr "Tiếng Phần Lan"
 
-#: wp-includes/class-wp-editor.php:1161
+#: wp-includes/class-wp-editor.php:1159
 msgid "Match case"
 msgstr "Tùy chọn tương ứng"
 
-#: wp-includes/class-wp-editor.php:1157
+#: wp-includes/class-wp-editor.php:1155
 msgid "Find and replace"
 msgstr "Tìm và thay thế"
 
@@ -7466,107 +7489,107 @@ msgstr "Tìm và thay thế"
 msgid "Replace"
 msgstr "Thay thế"
 
-#: wp-includes/class-wp-editor.php:1118
+#: wp-includes/class-wp-editor.php:1116
 msgid "Paste as text"
 msgstr "Dán như văn bản"
 
-#: wp-includes/class-wp-editor.php:1117
+#: wp-includes/class-wp-editor.php:1115
 msgid "Page break"
 msgstr "Ngắt trang"
 
-#: wp-includes/class-wp-editor.php:1116
+#: wp-includes/class-wp-editor.php:1114
 msgid "Nonbreaking space"
 msgstr "Không giãn dòng"
 
-#: wp-includes/class-wp-editor.php:1109
+#: wp-includes/class-wp-editor.php:1107
 msgid "Embed"
 msgstr "Nhúng"
 
-#: wp-includes/class-wp-editor.php:1108
+#: wp-includes/class-wp-editor.php:1106
 msgid "Insert video"
 msgstr "Chèn video"
 
-#: wp-includes/class-wp-editor.php:1107
+#: wp-includes/class-wp-editor.php:1105
 msgid "Paste your embed code below:"
 msgstr "Dán mã nhúng của bạn dưới đây:"
 
-#: wp-includes/class-wp-editor.php:1134
+#: wp-includes/class-wp-editor.php:1132
 msgid "New window"
 msgstr "Cửa sổ mới"
 
-#: wp-includes/class-wp-editor.php:1135
+#: wp-includes/class-wp-editor.php:1133
 msgid "Text to display"
 msgstr "Chữ để hiển thị"
 
-#: wp-includes/class-wp-editor.php:1099
+#: wp-includes/class-wp-editor.php:1097
 msgid "Insert date/time"
 msgstr "Thêm ngày/giờ"
 
-#: wp-includes/class-wp-editor.php:1123
+#: wp-includes/class-wp-editor.php:1121
 msgid "Horizontal line"
 msgstr "Đường ngang"
 
-#: wp-includes/class-wp-editor.php:1081
+#: wp-includes/class-wp-editor.php:1079
 msgid "Encoding"
 msgstr "Mã hóa"
 
-#: wp-includes/class-wp-editor.php:1078
+#: wp-includes/class-wp-editor.php:1076
 msgid "Robots"
 msgstr "Robots"
 
-#: wp-includes/class-wp-editor.php:1115
+#: wp-includes/class-wp-editor.php:1113
 msgid "Emoticons"
 msgstr "Biểu tượng cảm xúc"
 
-#: wp-includes/class-wp-editor.php:1033
+#: wp-includes/class-wp-editor.php:1031
 msgid "Source code"
 msgstr "Mã nguồn"
 
-#: wp-includes/class-wp-editor.php:1112
+#: wp-includes/class-wp-editor.php:1110
 msgid "Special character"
 msgstr "Ký tự đặc biệt"
 
-#: wp-includes/class-wp-editor.php:1125
+#: wp-includes/class-wp-editor.php:1123
 msgid "Restore last draft"
 msgstr "Khôi phục lại bản nháp cuối"
 
-#: wp-includes/class-wp-editor.php:1054
+#: wp-includes/class-wp-editor.php:1052
 msgid "Visual aids"
 msgstr "Hình minh họa"
 
-#: wp-includes/class-wp-editor.php:1039
+#: wp-includes/class-wp-editor.php:1037
 msgid "Align left"
 msgstr "Căn lề trái"
 
-#: wp-includes/class-wp-editor.php:1040
+#: wp-includes/class-wp-editor.php:1038
 msgid "Justify"
 msgstr "Căn 2 lề"
 
-#: wp-includes/class-wp-editor.php:1232
+#: wp-includes/class-wp-editor.php:1230
 msgid "Paste is now in plain text mode. Contents will now be pasted as plain text until you toggle this option off."
 msgstr "Dán nội dung hiện tại đang trong chế độ văn bản đơn giản. Nội dung sẽ được dán như văn bản trơn cho đến khi bạn thay đổi tùy chọn này."
 
-#: wp-includes/class-wp-editor.php:1042
+#: wp-includes/class-wp-editor.php:1040
 msgid "Decrease indent"
 msgstr "Giảm khoảng cách thụt đầu dòng"
 
-#: wp-includes/class-wp-editor.php:1037
+#: wp-includes/class-wp-editor.php:1035
 msgid "Align center"
 msgstr "Căn giữa"
 
-#: wp-includes/class-wp-editor.php:1029
+#: wp-includes/class-wp-editor.php:1027
 msgid "Clear formatting"
 msgstr "Xóa định dạng"
 
-#: wp-includes/class-wp-editor.php:1041
+#: wp-includes/class-wp-editor.php:1039
 msgid "Increase indent"
 msgstr "Tăng khoảng cách thụt đầu dòng"
 
-#: wp-includes/class-wp-editor.php:1057 wp-includes/script-loader.php:114
+#: wp-includes/class-wp-editor.php:1055 wp-includes/script-loader.php:114
 msgid "Numbered list"
 msgstr "Danh sách được đánh số"
 
-#: wp-includes/class-wp-editor.php:1038
+#: wp-includes/class-wp-editor.php:1036
 msgid "Align right"
 msgstr "Căn lề phải"
 
@@ -7640,40 +7663,40 @@ msgstr "https://wordpress.org/support/forum/requests-and-feedback"
 #: wp-includes/admin-bar.php:164 wp-includes/update.php:153
 #: wp-includes/update.php:345 wp-includes/update.php:527
 #: wp-includes/wp-db.php:1062 wp-includes/wp-db.php:1595
-#: wp-includes/wp-db.php:1753 wp-login.php:920
+#: wp-includes/wp-db.php:1753 wp-login.php:921
 msgid "https://wordpress.org/support/"
 msgstr "https://wordpress.org/support/"
 
 #: wp-includes/admin-bar.php:148
-#: wp-includes/widgets/class-wp-widget-meta.php:72 wp-login.php:116
+#: wp-includes/widgets/class-wp-widget-meta.php:72 wp-login.php:117
 msgid "https://wordpress.org/"
 msgstr "https://wordpress.org/"
 
-#: wp-includes/class-wp-editor.php:1080
+#: wp-includes/class-wp-editor.php:1078
 msgid "Keywords"
 msgstr "Từ khóa"
 
-#: wp-includes/class-wp-editor.php:1106
+#: wp-includes/class-wp-editor.php:1104
 msgid "Alternative source"
 msgstr "Nguồn thay thế"
 
-#: wp-includes/class-wp-editor.php:1095
+#: wp-includes/class-wp-editor.php:1093
 msgid "Style"
 msgstr "Style"
 
-#: wp-includes/class-wp-editor.php:1097 wp-includes/script-loader.php:111
+#: wp-includes/class-wp-editor.php:1095 wp-includes/script-loader.php:111
 msgid "Insert image"
 msgstr "Chèn ảnh"
 
-#: wp-includes/class-wp-editor.php:1252
+#: wp-includes/class-wp-editor.php:1250
 msgid "Toolbar Toggle"
 msgstr "Hiện hoặc ẩn thanh công cụ"
 
-#: wp-includes/class-wp-editor.php:1214
+#: wp-includes/class-wp-editor.php:1212
 msgid "Column group"
 msgstr "Nhóm cột"
 
-#: wp-includes/class-wp-editor.php:1151
+#: wp-includes/class-wp-editor.php:1149
 msgid "Could not find the specified string."
 msgstr "Không thể tìm thấy chuỗi quy định."
 
@@ -7753,7 +7776,7 @@ msgstr "bật"
 #: wp-includes/update.php:152 wp-includes/update.php:344
 #: wp-includes/update.php:526
 msgid "An unexpected error occurred. Something may be wrong with WordPress.org or this server&#8217;s configuration. If you continue to have problems, please try the <a href=\"%s\">support forums</a>."
-msgstr "Đã sẩy ra một lỗi bất ngờ. Có vấn đề với WordPress.org hoặc cấu hình máy chủ này. Nếu bạn tiếp tục gặp lỗi, hãy vào <a href=\"http://wordpress.org/support/\">diễn đàn hỗ trợ</a>."
+msgstr "Đã xảy ra lỗi không mong muốn. Có thể có sự cố với WordPress.org hoặc cấu hình của máy chủ. Nếu bạn tiếp tục gặp sự cố, vui lòng thử hỏi trong <a href=\"%s\">diễn đàn hỗ trợ</a>."
 
 #. translators: To add an additional Open Sans character subset specific to
 #. your language, translate this to 'greek', 'cyrillic' or 'vietnamese'. Do not
@@ -7938,7 +7961,7 @@ msgstr "Trình duyệt trên thiết bị của bạn không hỗ trợ tải t�
 msgid "<strong>ERROR</strong>: Couldn&#8217;t register you&hellip; please contact the <a href=\"mailto:%s\">webmaster</a> !"
 msgstr "<strong>LỖI</strong>: Đăng ký không thành công&hellip; hãy liên hệ <a href=\"mailto:%s\">quản trị viên</a> để được trợ giúp !"
 
-#: wp-login.php:401
+#: wp-login.php:402
 msgid "Possible reason: your host may have disabled the mail() function."
 msgstr "Dự đoán nguyên nhân: có thể máy chủ đã tắt hàm mail()."
 
@@ -7965,7 +7988,7 @@ msgstr "%2$s %1$s %3$s @ %4$s : %5$s"
 msgid "Your session has expired. You can log in again from this page or go to the login page."
 msgstr "Phiên làm việc của bạn đã hết hạn. Hãy đăng nhập lại tại đây hoặc tại trang đăng nhập."
 
-#: wp-includes/functions.php:5331
+#: wp-includes/functions.php:5350
 msgid "The login page will open in a new window. After logging in you can close it and return to this page."
 msgstr "Trang đăng nhập sẽ được mở trong một cửa sổ mới. Sau khi đăng nhập, bạn có thể đóng cửa sổ và quay lại trang hiện tại."
 
@@ -7990,7 +8013,7 @@ msgctxt "placeholder"
 msgid "Search &hellip;"
 msgstr "Tìm kiếm &hellip;"
 
-#: wp-includes/functions.php:5329 wp-includes/script-loader.php:569
+#: wp-includes/functions.php:5348 wp-includes/script-loader.php:569
 msgid "Session expired"
 msgstr "Phiên làm việc đã hết hạn"
 
@@ -8091,35 +8114,35 @@ msgstr "Đang tải lên"
 msgid "No editor could be selected."
 msgstr "Không có người viết nào được chọn."
 
-#: wp-includes/post.php:2379
+#: wp-includes/post.php:2412
 msgid "Video <span class=\"count\">(%s)</span>"
 msgid_plural "Video <span class=\"count\">(%s)</span>"
 msgstr[0] "Video <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2379
+#: wp-includes/post.php:2412
 msgid "Manage Video"
 msgstr "Quản lý Video"
 
-#: wp-includes/post.php:2379
+#: wp-includes/post.php:2412
 #: wp-includes/widgets/class-wp-widget-media-video.php:25
 msgid "Video"
 msgstr "Video"
 
-#: wp-includes/post.php:2378
+#: wp-includes/post.php:2411
 msgid "Audio <span class=\"count\">(%s)</span>"
 msgid_plural "Audio <span class=\"count\">(%s)</span>"
 msgstr[0] "Audio <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2378
+#: wp-includes/post.php:2411
 msgid "Manage Audio"
 msgstr "Quản lý Audio"
 
-#: wp-includes/post.php:2377
+#: wp-includes/post.php:2410
 msgid "Image <span class=\"count\">(%s)</span>"
 msgid_plural "Images <span class=\"count\">(%s)</span>"
 msgstr[0] "Hình ảnh <span class=\"count\">(%s)</span>"
 
-#: wp-includes/post.php:2377
+#: wp-includes/post.php:2410
 msgid "Manage Images"
 msgstr "Quản lý hình ảnh"
 
@@ -8131,7 +8154,7 @@ msgstr "Đã tải lên vào trang này"
 msgid "Insert into page"
 msgstr "Chèn vào trang"
 
-#: wp-includes/post.php:2378
+#: wp-includes/post.php:2411
 #: wp-includes/widgets/class-wp-widget-media-audio.php:25
 msgid "Audio"
 msgstr "Audio"
@@ -8356,7 +8379,7 @@ msgctxt "Display name based on first name and last name"
 msgid "%1$s %2$s"
 msgstr "%2$s %1$s"
 
-#: wp-includes/taxonomy.php:2356
+#: wp-includes/taxonomy.php:2389
 msgid "Could not insert term relationship into the database."
 msgstr "Không thể lưu quan hệ phân loại vào cơ sở dữ liệu."
 
@@ -8439,7 +8462,7 @@ msgstr "XML-RPC bị vô hiệu hóa trên trang web này."
 msgid "Incorrect username or password."
 msgstr "Tên người dùng hoặc mật khẩu không đúng."
 
-#: wp-includes/class-wp-editor.php:184 wp-includes/class-wp-editor.php:1264
+#: wp-includes/class-wp-editor.php:184 wp-includes/class-wp-editor.php:1262
 msgctxt "Name for the Text editor tab (formerly HTML)"
 msgid "Text"
 msgstr "Văn bản"
@@ -8564,7 +8587,7 @@ msgstr "Tệp tin cho phép"
 
 #: wp-includes/class-wp-customize-manager.php:4940
 #: wp-includes/class-wp-customize-widgets.php:753
-#: wp-includes/class-wp-editor.php:1258
+#: wp-includes/class-wp-editor.php:1256
 #: wp-includes/customize/class-wp-customize-media-control.php:226
 #: wp-includes/customize/class-wp-customize-media-control.php:236
 #: wp-includes/customize/class-wp-customize-media-control.php:246
@@ -8595,7 +8618,7 @@ msgstr "Xin lỗi, chỉnh sửa mục thất bại."
 #: wp-includes/class-wp-xmlrpc-server.php:1501
 #: wp-includes/class-wp-xmlrpc-server.php:2053
 #: wp-includes/class-wp-xmlrpc-server.php:2149
-#: wp-includes/class-wp-xmlrpc-server.php:2221 wp-includes/taxonomy.php:2019
+#: wp-includes/class-wp-xmlrpc-server.php:2221 wp-includes/taxonomy.php:2052
 msgid "Invalid term ID."
 msgstr "ID term không hợp lệ."
 
@@ -8605,9 +8628,9 @@ msgstr "Bạn không được phép chỉnh sửa phân loại này."
 
 #: wp-includes/class-wp-xmlrpc-server.php:1973
 #: wp-includes/class-wp-xmlrpc-server.php:2077
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:403
-#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:508
-#: wp-includes/taxonomy.php:2028 wp-includes/taxonomy.php:2652
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:406
+#: wp-includes/rest-api/endpoints/class-wp-rest-terms-controller.php:511
+#: wp-includes/taxonomy.php:2061 wp-includes/taxonomy.php:2685
 msgid "Parent term does not exist."
 msgstr "Term cha không tồn tại."
 
@@ -8630,9 +8653,9 @@ msgstr "Xin lỗi, bạn không có quyền tạo các term trong phân loại n
 #: wp-includes/rest-api/endpoints/class-wp-rest-taxonomies-controller.php:163
 #: wp-includes/taxonomy.php:420 wp-includes/taxonomy.php:652
 #: wp-includes/taxonomy.php:752 wp-includes/taxonomy.php:931
-#: wp-includes/taxonomy.php:1090 wp-includes/taxonomy.php:1868
-#: wp-includes/taxonomy.php:2004 wp-includes/taxonomy.php:2267
-#: wp-includes/taxonomy.php:2410 wp-includes/taxonomy.php:2611
+#: wp-includes/taxonomy.php:1090 wp-includes/taxonomy.php:1901
+#: wp-includes/taxonomy.php:2037 wp-includes/taxonomy.php:2300
+#: wp-includes/taxonomy.php:2443 wp-includes/taxonomy.php:2644
 msgid "Invalid taxonomy."
 msgstr "Phân loại không hợp lệ."
 
@@ -8736,7 +8759,7 @@ msgstr "Xin lỗi, bạn không được phép chỉnh sửa bài viết này."
 msgid "Edit Site"
 msgstr "Sửa trang web"
 
-#: wp-includes/post.php:4011 wp-includes/script-loader.php:683
+#: wp-includes/post.php:4044 wp-includes/script-loader.php:683
 #: wp-includes/script-loader.php:755
 msgctxt "tag delimiter"
 msgid ","
@@ -8988,12 +9011,12 @@ msgstr "Tài liệu"
 msgid "&hellip;"
 msgstr "&hellip;"
 
-#: wp-includes/functions.php:3779 wp-includes/ms-load.php:455
+#: wp-includes/functions.php:3792 wp-includes/ms-load.php:455
 #: wp-includes/wp-db.php:1577
 msgid "Error establishing a database connection"
 msgstr "Lỗi kết nối tới cơ sở dữ liệu"
 
-#: wp-includes/functions.php:3775
+#: wp-includes/functions.php:3788
 msgid "Database Error"
 msgstr "Lỗi cơ sở dữ liệu"
 
@@ -9071,7 +9094,7 @@ msgstr "Xem chuyên mục"
 msgid "View Tag"
 msgstr "Xem thẻ"
 
-#: wp-includes/pluggable.php:1080 wp-includes/pluggable.php:1123
+#: wp-includes/pluggable.php:1083 wp-includes/pluggable.php:1126
 msgid "You should specify a nonce action to be verified by using the first parameter."
 msgstr "Bạn nên sử dụng tham số đầu tiên để định nghĩa mã bảo mật nhằm xác minh lại hành động."
 
@@ -9093,7 +9116,7 @@ msgstr "Tất cả các trang"
 msgid "All Posts"
 msgstr "Tất cả bài viết"
 
-#: wp-includes/class-wp-editor.php:1130
+#: wp-includes/class-wp-editor.php:1128
 msgid "Link"
 msgstr "Liên kết"
 
@@ -9123,7 +9146,7 @@ msgstr "Thanh công cụ"
 msgid "Preload"
 msgstr "Tải trước"
 
-#: wp-includes/class-wp-editor.php:1105
+#: wp-includes/class-wp-editor.php:1103
 msgid "Poster"
 msgstr "Áp phích"
 
@@ -9140,11 +9163,11 @@ msgctxt "post format"
 msgid "Format"
 msgstr "Định dạng"
 
-#: wp-includes/class-wp-editor.php:1720
+#: wp-includes/class-wp-editor.php:1718
 msgid "Or link to existing content"
 msgstr "Hoặc liên kết đến nội dung đã tồn tại"
 
-#: wp-includes/class-wp-editor.php:1706
+#: wp-includes/class-wp-editor.php:1704
 msgid "Enter the destination URL"
 msgstr "Nhập địa chỉ đích"
 
@@ -9169,17 +9192,17 @@ msgid "The user is already active."
 msgstr "Tài khoản người dùng đã được kích hoạt."
 
 #. translators: %s: version number
-#: wp-includes/functions.php:4141
+#: wp-includes/functions.php:4154
 msgid "(This message was added in version %s.)"
 msgstr "(Thông điệp này đã được thêm vào trong phiên bản %s.)"
 
 #. translators: Developer debugging message. 1: PHP function name, 2:
 #. Explanatory message, 3: Version information message
-#: wp-includes/functions.php:4148
+#: wp-includes/functions.php:4161
 msgid "%1$s was called <strong>incorrectly</strong>. %2$s %3$s"
 msgstr "%1$s được gọi là <strong>không chính xác</strong>. %2$s %3$s"
 
-#: wp-includes/pluggable.php:1504
+#: wp-includes/pluggable.php:1507
 msgid "Permalink: %s"
 msgstr "Đường dẫn tĩnh: %s"
 
@@ -9207,7 +9230,7 @@ msgstr "Audio"
 msgid "Invalid post format."
 msgstr "Định dạng bài không hợp lệ"
 
-#: wp-includes/class-wp-editor.php:1737
+#: wp-includes/class-wp-editor.php:1735
 msgid "No search term specified. Showing recent items."
 msgstr "Thiếu từ khóa tìm kiếm. Hiển thị các bài viết mới nhất."
 
@@ -9215,7 +9238,7 @@ msgstr "Thiếu từ khóa tìm kiếm. Hiển thị các bài viết mới nh�
 msgid "Only a static class method or function can be used in an uninstall hook."
 msgstr "Điểm nối gỡ bỏ cài đặt chỉ hỗ trợ thực thi phương thức tĩnh của một lớp hoặc một hàm độc lập."
 
-#: wp-includes/post.php:3013
+#: wp-includes/post.php:3046
 msgid "Passing an integer number of posts is deprecated. Pass an array of arguments instead."
 msgstr "Tham số đầu vào là số lượng bài viết đã không còn được hỗ trợ. Hãy truyền tham số đầu vào là một mảng chứa các thông số liên quan."
 
@@ -9290,7 +9313,7 @@ msgstr "Định danh nội dung đính kèm không hợp lệ."
 msgid "This file no longer needs to be included."
 msgstr "Tập tin này không còn cần thiết."
 
-#: wp-login.php:577
+#: wp-login.php:578
 msgid "Please enter your username or email address. You will receive a link to create a new password via email."
 msgstr "Vui lòng nhập tên người dùng hoặc email. Bạn sẽ nhận được email có chứa đường dẫn URL để tạo mật khẩu mới."
 
@@ -9327,43 +9350,43 @@ msgstr "Chiều rộng ảnh kích thước trung bình"
 msgid "Large size image height"
 msgstr "Chiều cao ảnh kích thước lớn"
 
-#: wp-login.php:682
+#: wp-login.php:683
 msgid "Enter your new password below."
 msgstr "Nhập mật khẩu mới của bạn dưới đây."
 
-#: wp-login.php:366
+#: wp-login.php:367
 msgid "If this was a mistake, just ignore this email and nothing will happen."
 msgstr "Nếu thấy đây là việc không cần thiết, bạn có thể bỏ qua email này và không thay đổi gì hết."
 
-#: wp-login.php:361
+#: wp-login.php:362
 msgid "Someone has requested a password reset for the following account:"
 msgstr "Một ai đó vừa yêu cầu đặt lại mật khẩu cho tài khoản sau:"
 
-#: wp-login.php:674
+#: wp-login.php:675
 msgid "Your password has been reset."
 msgstr "Mật khẩu của bạn đã được đặt lại."
 
-#: wp-login.php:674
+#: wp-login.php:675
 msgid "Password Reset"
 msgstr "Đặt lại mật khẩu"
 
-#: wp-login.php:659
+#: wp-login.php:660
 msgid "The passwords do not match."
 msgstr "Các mật khẩu không khớp."
 
-#: wp-login.php:682 wp-login.php:729
+#: wp-login.php:683 wp-login.php:730
 msgid "Reset Password"
 msgstr "Thiết lập lại mật khẩu"
 
-#: wp-login.php:367
+#: wp-login.php:368
 msgid "To reset your password, visit the following address:"
 msgstr "Để thiết lập lại mật khẩu của bạn, hãy truy cập vào địa chỉ sau đây:"
 
-#: wp-login.php:711
+#: wp-login.php:712
 msgid "Confirm new password"
 msgstr "Xác nhận mật khẩu mới"
 
-#: wp-login.php:690
+#: wp-login.php:691
 msgid "New password"
 msgstr "Mật khẩu mới"
 
@@ -9373,7 +9396,7 @@ msgstr "Quản lý phản hồi"
 
 #: wp-includes/admin-bar.php:278
 msgid "Edit My Profile"
-msgstr "Chỉnh sửa Hồ sơ của tôi"
+msgstr "Chỉnh sửa hồ sơ của tôi"
 
 #: wp-includes/post-formats.php:68
 msgid "Invalid post."
@@ -9384,7 +9407,7 @@ msgid "Blavatar"
 msgstr "Blavatar"
 
 #. translators: %s: taxonomy name
-#: wp-includes/post.php:3479
+#: wp-includes/post.php:3512
 msgid "Invalid taxonomy: %s."
 msgstr "Taxonomy không hợp lệ: %s."
 
@@ -9412,7 +9435,7 @@ msgstr " \t Thêm mục liên kết "
 msgid "New Link Category Name"
 msgstr "Mục liên kết mới"
 
-#: wp-includes/user.php:2838
+#: wp-includes/user.php:2834
 msgid "User"
 msgstr "Người dùng"
 
@@ -9575,7 +9598,7 @@ msgstr "<strong>Giá trị của các hằng số VHOST và SUBDOMAIN_INSTALL kh
 msgid "<strong>ERROR</strong>: This username is invalid because it uses illegal characters. Please enter a valid username."
 msgstr "<strong>LỖI</strong>: Tên người dùng này không được chấp nhận vì có chứa các ký tự bị cấm. Hãy điền tên người dùng hợp lệ."
 
-#: wp-includes/comment-template.php:2211
+#: wp-includes/comment-template.php:2219
 msgid "Required fields are marked %s"
 msgstr "Các trường bắt buộc được đánh dấu %s"
 
@@ -9629,7 +9652,7 @@ msgid "Sorry, you must be able to edit posts on this site in order to view tags.
 msgstr "Rất tiếc, bạn cần được cấp quyền sửa bài viết trước khi xem các thẻ."
 
 #. translators: %s: site title
-#: wp-includes/pluggable.php:1828
+#: wp-includes/pluggable.php:1831
 msgid "New user registration on your site %s:"
 msgstr "Có người dùng mới đăng ký trên website của bạn %s:"
 
@@ -9725,7 +9748,7 @@ msgstr "Địa chỉ WordPress bạn nhập không hợp lệ, hãy nhập lại
 msgid "The email address entered did not appear to be a valid email address. Please enter a valid email address."
 msgstr "Địa chỉ email bạn nhập không đúng, hãy nhập lại địa chỉ email hợp lệ."
 
-#: wp-includes/taxonomy.php:2108
+#: wp-includes/taxonomy.php:2141
 msgid "A term with the name provided already exists with this parent."
 msgstr "Thẻ này đã được sử dụng."
 
@@ -9737,7 +9760,7 @@ msgstr "Gặp lỗi khi thêm trang web. Quay lại <a href=\"%s\">trang chủ</
 msgid "This file is too big. Files must be less than %d KB in size."
 msgstr "Tập tin này quá lớn. Bạn được phép tải tập tin không quá %d KB."
 
-#: wp-includes/comment-template.php:2240
+#: wp-includes/comment-template.php:2248
 msgid "Your email address will not be published."
 msgstr "Email của bạn sẽ không được hiển thị công khai."
 
@@ -9896,26 +9919,26 @@ msgid "File canceled."
 msgstr "Tập tin bị hủy bỏ."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1651
+#: wp-includes/pluggable.php:1654
 msgid "A new comment on the post \"%s\" is waiting for your approval"
 msgstr "Có một bình luận mới trong bài \"%s\" đang chờ phê duyệt của bạn"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1641
+#: wp-includes/pluggable.php:1644
 msgid "A new pingback on the post \"%s\" is waiting for your approval"
 msgstr "Một pingback mới về bài \"%s\" đang chờ phê duyệt của bạn"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1631
+#: wp-includes/pluggable.php:1634
 msgid "A new trackback on the post \"%s\" is waiting for your approval"
 msgstr "Có một trackback mới về bài \"%s\" đang chờ phê duyệt của bạn"
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1482
+#: wp-includes/pluggable.php:1485
 msgid "New pingback on your post \"%s\""
 msgstr "Có pingback mới về bài đăng của bạn \"%s\""
 
-#: wp-includes/pluggable.php:1492
+#: wp-includes/pluggable.php:1495
 msgid "New comment on your post \"%s\""
 msgstr "Có một bình luận mới về bài viết của bạn \"%s\""
 
@@ -9928,7 +9951,7 @@ msgid "If you are the owner of this network please check that MySQL is running p
 msgstr "Nếu bạn là chủ sở hữu của mạng lưới này xin vui lòng kiểm tra xem MySQL có chạy bình thường hay không và tất cả các bảng không bị lỗi."
 
 #. translators: 1: Post title
-#: wp-includes/pluggable.php:1471
+#: wp-includes/pluggable.php:1474
 msgid "New trackback on your post \"%s\""
 msgstr "Có trackback mới về bài đăng của bạn \"%s\""
 
@@ -10114,8 +10137,8 @@ msgstr "Phản hồi của tác giả phải cung cấp tên và email."
 #: wp-includes/class-wp-xmlrpc-server.php:5585
 #: wp-includes/class-wp-xmlrpc-server.php:6098
 #: wp-includes/class-wp-xmlrpc-server.php:6152
-#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3147
-#: wp-includes/post.php:3681
+#: wp-includes/class-wp-xmlrpc-server.php:6271 wp-includes/post.php:3180
+#: wp-includes/post.php:3714
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:326
 #: wp-includes/rest-api/endpoints/class-wp-rest-comments-controller.php:688
 #: wp-includes/rest-api/endpoints/class-wp-rest-posts-controller.php:369
@@ -10247,40 +10270,40 @@ msgstr "Không có thư mới."
 msgid "Slow down cowboy, no need to check for new mails so often!"
 msgstr "Từ từ thôi bạn :-)"
 
-#: wp-login.php:992
+#: wp-login.php:993
 msgid "Registration complete. Please check your email."
 msgstr "Đăng kí hoàn tất. Hãy kiểm tra email của bạn."
 
-#: wp-login.php:990
+#: wp-login.php:991
 msgid "Check your email for your new password."
 msgstr "Kiểm tra email của bạn để biết mật khẩu mới."
 
-#: wp-login.php:988
+#: wp-login.php:989
 msgid "Check your email for the confirmation link."
 msgstr "Kiểm tra email của bạn để lấy đường dẫn xác nhận đăng kí."
 
-#: wp-login.php:986
+#: wp-login.php:987
 msgid "User registration is currently not allowed."
 msgstr "Hệ thống đăng kí hiện đang không được mở."
 
-#: wp-login.php:984
+#: wp-login.php:985
 msgid "You are now logged out."
 msgstr "Bạn đã đăng xuất thành công."
 
-#: wp-login.php:943
+#: wp-login.php:944
 msgid "You have logged in successfully."
 msgstr "Bạn đã đăng nhập thành công."
 
 #: wp-includes/user.php:149 wp-includes/user.php:175 wp-includes/user.php:227
-#: wp-includes/user.php:247 wp-login.php:830 wp-login.php:1068
+#: wp-includes/user.php:247 wp-login.php:831 wp-login.php:1069
 msgid "Lost your password?"
 msgstr "Bạn quên mật khẩu?"
 
-#: wp-login.php:802
+#: wp-login.php:803
 msgid "Register For This Site"
 msgstr "Đăng kí tại trang này"
 
-#: wp-login.php:802
+#: wp-login.php:803
 msgid "Registration Form"
 msgstr "Form đăng kí"
 
@@ -10288,11 +10311,11 @@ msgstr "Form đăng kí"
 msgid "&larr; Back to Tags"
 msgstr "&larr; Quay lại Thẻ"
 
-#: wp-login.php:600
+#: wp-login.php:601
 msgid "Get New Password"
 msgstr "Lấy mật khẩu mới"
 
-#: wp-login.php:577
+#: wp-login.php:578
 msgid "Lost Password"
 msgstr "Quên mật khẩu"
 
@@ -10307,17 +10330,17 @@ msgstr "<strong>Lỗi</strong>: Hãy nhập email của bạn."
 #: wp-includes/user.php:2227 wp-includes/user.php:2230
 #: wp-includes/user.php:2234 wp-includes/user.php:2259
 #: wp-includes/user.php:2268 wp-includes/user.php:2272
-#: wp-includes/user.php:2289 wp-includes/user.php:3400
-#: wp-includes/user.php:3412 wp-includes/user.php:3430 wp-login.php:853
+#: wp-includes/user.php:2289 wp-includes/user.php:3437
+#: wp-includes/user.php:3449 wp-includes/user.php:3467 wp-login.php:854
 msgid "Invalid key"
 msgstr "Key không đúng"
 
-#: wp-login.php:401
+#: wp-login.php:402
 msgid "The email could not be sent."
 msgstr "Không gửi được email."
 
 #. translators: Password reset email subject. %s: Site name
-#: wp-login.php:371
+#: wp-login.php:372
 msgid "[%s] Password Reset"
 msgstr "[%s] Thiết lập lại mật khẩu"
 
@@ -10325,19 +10348,19 @@ msgstr "[%s] Thiết lập lại mật khẩu"
 msgid "Password reset is not allowed for this user"
 msgstr "Chức năng tạo mật khẩu mới không được bật cho thành viên này"
 
-#: wp-login.php:338
+#: wp-login.php:339
 msgid "<strong>ERROR</strong>: Invalid username or email."
 msgstr "<strong>Lỗi</strong>: Tên người dùng hoặc email không hợp lệ."
 
-#: wp-login.php:317
+#: wp-login.php:318
 msgid "<strong>ERROR</strong>: There is no user registered with that email address."
 msgstr "<strong>LỖI</strong>: Không có người dùng nào đăng ký với địa chỉ email này."
 
-#: wp-login.php:313
+#: wp-login.php:314
 msgid "<strong>ERROR</strong>: Enter a username or email address."
 msgstr "<strong>LỖI</strong>: Điền tên người dùng hoặc email của bạn."
 
-#: wp-login.php:117
+#: wp-login.php:118
 msgid "Powered by WordPress"
 msgstr "Xây dựng bằng WordPress"
 
@@ -10351,7 +10374,7 @@ msgstr "<strong>LỖI</strong>: WordPress %1$s yêu cầu MySQL %2$s hoặc là 
 msgid "Sidebar %d"
 msgstr "Sidebar %d"
 
-#: wp-includes/functions.php:5330 wp-includes/user.php:285
+#: wp-includes/functions.php:5349 wp-includes/user.php:285
 msgid "Please log in again."
 msgstr "Hãy đăng nhập lại."
 
@@ -10375,21 +10398,21 @@ msgstr "Không tìm thấy file style."
 msgid "The parent theme is missing. Please install the \"%s\" parent theme."
 msgstr "Giao diện cha bị thiếu. Vui lòng cài đặt giao diện \"%s\" trước để sử dụng giao diện này."
 
-#: wp-includes/taxonomy.php:4137
+#: wp-includes/taxonomy.php:4170
 msgid "Invalid object ID."
 msgstr "ID của đối tượng không hợp lệ."
 
 #. translators: 1: Taxonomy term slug
-#: wp-includes/taxonomy.php:2710
+#: wp-includes/taxonomy.php:2743
 msgid "The slug &#8220;%s&#8221; is already in use by another term."
 msgstr "Slug &#8220;%s&#8221; đã sử dụng bởi một mục khác."
 
-#: wp-includes/taxonomy.php:2132
+#: wp-includes/taxonomy.php:2165
 msgid "Could not insert term into the database."
 msgstr "Không thể chèn mục vào cơ sở dữ liệu."
 
-#: wp-includes/taxonomy.php:748 wp-includes/taxonomy.php:2624
-#: wp-includes/taxonomy.php:3925
+#: wp-includes/taxonomy.php:748 wp-includes/taxonomy.php:2657
+#: wp-includes/taxonomy.php:3958
 msgid "Empty Term."
 msgstr "Không tìm thấy mục nào."
 
@@ -10502,7 +10525,7 @@ msgstr "Tính năng này yêu cầu bật frame. Bạn có thể đã tắt tín
 msgid "of"
 msgstr "của"
 
-#: wp-includes/class-wp-editor.php:1086 wp-includes/script-loader.php:275
+#: wp-includes/class-wp-editor.php:1084 wp-includes/script-loader.php:275
 #: wp-includes/widgets/class-wp-widget-media-image.php:25
 msgid "Image"
 msgstr "Ảnh"
@@ -10559,15 +10582,15 @@ msgstr "Không thể tạo tài khoản với tên đăng nhập bỏ trống."
 msgid "Cannot create a revision of a revision"
 msgstr "Không thể tạo phiên bản mới cho phiên bản"
 
-#: wp-includes/post.php:3448
+#: wp-includes/post.php:3481
 msgid "Could not insert post into the database"
 msgstr "Không thể thêm bài viết vào cơ sở dữ liệu"
 
-#: wp-includes/post.php:3433
+#: wp-includes/post.php:3466
 msgid "Could not update post in the database"
 msgstr "Không thể cập nhật bài viết trong cơ sở dữ liệu"
 
-#: wp-includes/post.php:3194
+#: wp-includes/post.php:3227
 msgid "Content, title, and excerpt are empty."
 msgstr "Nội dung, tiêu đề và trích dẫn đều trống rỗng."
 
@@ -10599,7 +10622,7 @@ msgstr[0] "Đã lên lịch <span class=\"count\">(%s)</span>"
 #: wp-includes/post.php:232
 msgid "Published <span class=\"count\">(%s)</span>"
 msgid_plural "Published <span class=\"count\">(%s)</span>"
-msgstr[0] "Đã đăng <span class=\"count\">(%s)</span>"
+msgstr[0] "Đã xuất bản <span class=\"count\">(%s)</span>"
 
 #: wp-includes/post.php:96
 msgid "Revision"
@@ -10642,79 +10665,84 @@ msgid "Protected: %s"
 msgstr "Bảo vệ: %s"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1903
+#: wp-includes/pluggable.php:1906
 msgid "[%s] Your username and password info"
 msgstr "[%s] Tên người dùng và mật khẩu của bạn"
 
 #. translators: Password change notification email subject. %s: Site title
-#: wp-includes/pluggable.php:1837
+#: wp-includes/pluggable.php:1840
 msgid "[%s] New User Registration"
 msgstr "[%s] Thành viên mới đăng ký"
 
 #. translators: %s: user login
-#: wp-includes/pluggable.php:1830 wp-includes/pluggable.php:1894
-#: wp-login.php:365
+#: wp-includes/pluggable.php:1833 wp-includes/pluggable.php:1897
+#: wp-login.php:366
 msgid "Username: %s"
 msgstr "Tên người dùng: %s"
 
 #. translators: Comment moderation notification email subject. 1: Site name, 2:
 #. Post title
-#: wp-includes/pluggable.php:1684
+#: wp-includes/pluggable.php:1687
 msgid "[%1$s] Please moderate: \"%2$s\""
 msgstr "[%1$s] Hãy xét duyệt: \"%2$s\""
 
 #. translators: Comment moderation. 1: Number of comments awaiting approval
-#: wp-includes/pluggable.php:1679
+#: wp-includes/pluggable.php:1682
 msgid "Currently %s comment is waiting for approval. Please visit the moderation panel:"
 msgid_plural "Currently %s comments are waiting for approval. Please visit the moderation panel:"
 msgstr[0] "Hiện có %s đang chờ được thông qua. Hãy vào trang xét duyệt:"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1665
+#: wp-includes/pluggable.php:1668
 msgid "Approve it: %s"
 msgstr "Chấp thuận: %s"
 
-#: wp-includes/pluggable.php:1647
+#: wp-includes/pluggable.php:1650
 msgid "Pingback excerpt: "
 msgstr "Pingback trích dẫn:"
 
-#: wp-includes/pluggable.php:1637
+#: wp-includes/pluggable.php:1640
 msgid "Trackback excerpt: "
 msgstr "Trackback trích dẫn:"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1512 wp-includes/pluggable.php:1676
+#: wp-includes/pluggable.php:1515 wp-includes/pluggable.php:1679
 msgid "Spam it: %s"
 msgstr "Spam: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1510 wp-includes/pluggable.php:1672
+#: wp-includes/pluggable.php:1513 wp-includes/pluggable.php:1675
 msgid "Delete it: %s"
 msgstr "Xóa: %s"
 
 #. translators: Comment moderation. 1: Comment action URL
-#: wp-includes/pluggable.php:1508 wp-includes/pluggable.php:1669
+#: wp-includes/pluggable.php:1511 wp-includes/pluggable.php:1672
 msgid "Trash it: %s"
 msgstr "Bỏ vào thùng rác: %s"
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1489
+#: wp-includes/pluggable.php:1492
 msgid "[%1$s] Pingback: \"%2$s\""
 msgstr "[%1$s] Pingback: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1478
+#: wp-includes/pluggable.php:1481
 msgid "[%1$s] Trackback: \"%2$s\""
 msgstr "[%1$s] Trackback: \"%2$s\""
 
 #. translators: 1: blog name, 2: post title
-#: wp-includes/pluggable.php:1500
+#: wp-includes/pluggable.php:1503
 msgid "[%1$s] Comment: \"%2$s\""
 msgstr "[%1$s] Phản hồi: \"%2$s\""
 
 #: wp-includes/ms-load.php:476
 msgid "What do I do now?"
 msgstr "Tôi cần phải làm gì bây giờ?"
+
+#. translators: %s: maximum allowed file size in kilobytes
+#: wp-includes/rest-api/endpoints/class-wp-rest-attachments-controller.php:805
+msgid "This file is too big. Files must be less than %s KB in size."
+msgstr "File này quá lớn. File phải có dung lượng nhỏ hơn %s Kb."
 
 #. translators: New user notification email subject. 1: Network name, 2: New
 #. user login
@@ -10812,7 +10840,7 @@ msgstr "Bài trước"
 msgid "Comments Feed"
 msgstr "Dòng tin RSS của phản hồi"
 
-#: wp-includes/class-wp-editor.php:1254
+#: wp-includes/class-wp-editor.php:1252
 msgid "Insert Page Break tag"
 msgstr "Thêm thẻ ngắt trang"
 
@@ -10821,27 +10849,27 @@ msgstr "Thêm thẻ ngắt trang"
 msgid "Fill Screen"
 msgstr "Cả màn hình"
 
-#: wp-includes/class-wp-editor.php:1127
+#: wp-includes/class-wp-editor.php:1125
 msgid "Remove link"
 msgstr "Xóa đường dẫn"
 
-#: wp-includes/class-wp-editor.php:1131 wp-includes/script-loader.php:104
+#: wp-includes/class-wp-editor.php:1129 wp-includes/script-loader.php:104
 msgid "Insert link"
 msgstr "Thêm đường dẫn"
 
-#: wp-includes/class-wp-editor.php:1162
+#: wp-includes/class-wp-editor.php:1160
 msgid "Check Spelling"
 msgstr "Kiểm tra chính tả"
 
-#: wp-includes/class-wp-editor.php:1047
+#: wp-includes/class-wp-editor.php:1045
 msgid "Select all"
 msgstr "Chọn tất cả"
 
-#: wp-includes/class-wp-editor.php:1280 wp-includes/script-loader.php:563
+#: wp-includes/class-wp-editor.php:1278 wp-includes/script-loader.php:563
 msgid "Action"
 msgstr "Tác vụ"
 
-#: wp-includes/class-wp-editor.php:1279
+#: wp-includes/class-wp-editor.php:1277
 msgid "Letter"
 msgstr "Letter"
 
@@ -10850,7 +10878,7 @@ msgstr "Letter"
 msgid "Link Rel"
 msgstr "Đường dẫn"
 
-#: wp-includes/class-wp-editor.php:1090
+#: wp-includes/class-wp-editor.php:1088
 msgid "Source"
 msgstr "Nguồn"
 
@@ -10878,7 +10906,7 @@ msgstr "Trên bên trái"
 msgid "Mute"
 msgstr "Tắt tiếng"
 
-#: wp-includes/class-wp-editor.php:1122 wp-includes/script-loader.php:366
+#: wp-includes/class-wp-editor.php:1120 wp-includes/script-loader.php:366
 msgid "Fullscreen"
 msgstr "Toàn màn hình"
 
@@ -10896,218 +10924,218 @@ msgstr "Cân dòng"
 msgid "Loop"
 msgstr "Lặp lại"
 
-#: wp-includes/class-wp-editor.php:1092
+#: wp-includes/class-wp-editor.php:1090
 msgid "Constrain proportions"
 msgstr "Giữ tỉ lệ gốc"
 
-#: wp-includes/class-wp-editor.php:1088
+#: wp-includes/class-wp-editor.php:1086
 msgid "General"
 msgstr "Tổng quan"
 
-#: wp-includes/class-wp-editor.php:1140
+#: wp-includes/class-wp-editor.php:1138
 msgid "The URL you entered seems to be an external link. Do you want to add the required http:// prefix?"
 msgstr "Đường dẫn bạn vừa nhập có thể là một liên kết tới trang khác. Bạn có muốn thêm tiền tố http:// không?"
 
-#: wp-includes/class-wp-editor.php:1138
+#: wp-includes/class-wp-editor.php:1136
 msgid "The URL you entered seems to be an email address. Do you want to add the required mailto: prefix?"
 msgstr "Đường dẫn bạn vừa nhập có thể là một địa chỉ email, bạn có muốn thêm tiền tố mailto: không?"
 
-#: wp-includes/class-wp-editor.php:1211
+#: wp-includes/class-wp-editor.php:1209
 #: wp-includes/customize/class-wp-customize-background-position-control.php:53
 msgid "Bottom"
 msgstr "Dưới"
 
-#: wp-includes/class-wp-editor.php:1210
+#: wp-includes/class-wp-editor.php:1208
 msgid "Middle"
 msgstr "Giữa"
 
-#: wp-includes/class-wp-editor.php:1209
+#: wp-includes/class-wp-editor.php:1207
 #: wp-includes/customize/class-wp-customize-background-position-control.php:43
 msgid "Top"
 msgstr "Trên"
 
-#: wp-includes/class-wp-editor.php:1124
+#: wp-includes/class-wp-editor.php:1122
 msgid "Horizontal space"
 msgstr "Khoảng trống chiều ngang"
 
-#: wp-includes/class-wp-editor.php:1093
+#: wp-includes/class-wp-editor.php:1091
 msgid "Vertical space"
 msgstr "Khoảng trống chiều dọc"
 
-#: wp-includes/class-wp-editor.php:1096
+#: wp-includes/class-wp-editor.php:1094
 msgid "Dimensions"
 msgstr "Kích thước"
 
-#: wp-includes/class-wp-editor.php:1091
+#: wp-includes/class-wp-editor.php:1089
 msgid "Border"
 msgstr "Viền"
 
-#: wp-includes/class-wp-editor.php:1094
+#: wp-includes/class-wp-editor.php:1092
 msgid "Image description"
 msgstr "Mô tả về ảnh"
 
-#: wp-includes/class-wp-editor.php:1004
+#: wp-includes/class-wp-editor.php:1002
 msgid "New document"
 msgstr "Văn bản mới"
 
-#: wp-includes/class-wp-editor.php:1046
+#: wp-includes/class-wp-editor.php:1044
 msgid "Paste"
 msgstr "Dán"
 
 #: wp-includes/class-wp-customize-manager.php:4202
-#: wp-includes/class-wp-editor.php:1045
+#: wp-includes/class-wp-editor.php:1043
 msgid "Copy"
 msgstr "Sao chép"
 
-#: wp-includes/class-wp-editor.php:1044
+#: wp-includes/class-wp-editor.php:1042
 msgid "Cut"
 msgstr "Cắt"
 
-#: wp-includes/class-wp-editor.php:1028
+#: wp-includes/class-wp-editor.php:1026
 msgid "Superscript"
 msgstr "Chữ nhỏ ở trên"
 
-#: wp-includes/class-wp-editor.php:1027
+#: wp-includes/class-wp-editor.php:1025
 msgid "Subscript"
 msgstr "Chữ nhỏ ở dưới"
 
-#: wp-includes/class-wp-editor.php:1026
+#: wp-includes/class-wp-editor.php:1024
 msgid "Strikethrough"
 msgstr "Gạch giữa từ"
 
-#: wp-includes/class-wp-editor.php:1025
+#: wp-includes/class-wp-editor.php:1023
 msgid "Underline"
 msgstr "Gạch chân"
 
-#: wp-includes/class-wp-editor.php:1031 wp-includes/script-loader.php:102
+#: wp-includes/class-wp-editor.php:1029 wp-includes/script-loader.php:102
 msgid "Italic"
 msgstr "Nghiêng"
 
-#: wp-includes/class-wp-editor.php:1030 wp-includes/script-loader.php:100
+#: wp-includes/class-wp-editor.php:1028 wp-includes/script-loader.php:100
 msgid "Bold"
 msgstr "Đậm"
 
-#: wp-includes/class-wp-editor.php:1032 wp-includes/script-loader.php:118
+#: wp-includes/class-wp-editor.php:1030 wp-includes/script-loader.php:118
 msgid "Code"
 msgstr "Mã"
 
-#: wp-includes/class-wp-editor.php:1018 wp-includes/script-loader.php:105
+#: wp-includes/class-wp-editor.php:1016 wp-includes/script-loader.php:105
 msgid "Blockquote"
 msgstr "Trích dẫn"
 
-#: wp-includes/class-wp-editor.php:1013
+#: wp-includes/class-wp-editor.php:1011
 msgid "Heading 6"
 msgstr "Tiêu đề 6"
 
-#: wp-includes/class-wp-editor.php:1012
+#: wp-includes/class-wp-editor.php:1010
 msgid "Heading 5"
 msgstr "Tiêu đề 5"
 
-#: wp-includes/class-wp-editor.php:1011
+#: wp-includes/class-wp-editor.php:1009
 msgid "Heading 4"
 msgstr "Tiêu đề 4"
 
-#: wp-includes/class-wp-editor.php:1010
+#: wp-includes/class-wp-editor.php:1008
 msgid "Heading 3"
 msgstr "Tiêu đề 3"
 
-#: wp-includes/class-wp-editor.php:1009
+#: wp-includes/class-wp-editor.php:1007
 msgid "Heading 2"
 msgstr "Tiêu đề 2"
 
-#: wp-includes/class-wp-editor.php:1008
+#: wp-includes/class-wp-editor.php:1006
 msgid "Heading 1"
 msgstr "Tiêu đề 1"
 
-#: wp-includes/class-wp-editor.php:1017
+#: wp-includes/class-wp-editor.php:1015
 msgid "Paragraph"
 msgstr "Đoạn"
 
-#: wp-includes/class-wp-editor.php:1102
+#: wp-includes/class-wp-editor.php:1100
 msgid "Language"
 msgstr "Ngôn ngữ"
 
-#: wp-includes/class-wp-editor.php:1077
+#: wp-includes/class-wp-editor.php:1075
 msgid "Document properties"
 msgstr "Thuộc tính tài liệu"
 
-#: wp-includes/class-wp-editor.php:1238 wp-includes/script-loader.php:477
+#: wp-includes/class-wp-editor.php:1236 wp-includes/script-loader.php:477
 #: wp-includes/script-loader.php:559 wp-includes/script-loader.php:712
 #: wp-includes/script-loader.php:735 wp-includes/script-loader.php:899
 #: wp-includes/theme.php:2962
 msgid "The changes you made will be lost if you navigate away from this page."
 msgstr "Các thay đổi bạn vừa thực hiện sẽ bị mất nếu bạn đi khỏi trang này khi chưa lưu bài."
 
-#: wp-includes/class-wp-editor.php:1176
+#: wp-includes/class-wp-editor.php:1174
 msgid "Row"
 msgstr "Dòng"
 
-#: wp-includes/class-wp-editor.php:1170
+#: wp-includes/class-wp-editor.php:1168
 msgid "Delete table"
 msgstr "Xóa bảng"
 
-#: wp-includes/class-wp-editor.php:1195
+#: wp-includes/class-wp-editor.php:1193
 msgid "Copy table row"
 msgstr "Sao chép dòng"
 
-#: wp-includes/class-wp-editor.php:1194
+#: wp-includes/class-wp-editor.php:1192
 msgid "Cut table row"
 msgstr "Cắt dòng"
 
-#: wp-includes/class-wp-editor.php:1191
+#: wp-includes/class-wp-editor.php:1189
 msgid "Paste table row after"
 msgstr "Dán vào sau dòng"
 
-#: wp-includes/class-wp-editor.php:1190
+#: wp-includes/class-wp-editor.php:1188
 msgid "Paste table row before"
 msgstr "Dán vào trước dòng"
 
-#: wp-includes/class-wp-editor.php:1171
+#: wp-includes/class-wp-editor.php:1169
 msgid "Table properties"
 msgstr "Tùy chọn hiển thị bảng"
 
-#: wp-includes/class-wp-editor.php:1173
+#: wp-includes/class-wp-editor.php:1171
 msgid "Table cell properties"
 msgstr "Sao chép dòng"
 
-#: wp-includes/class-wp-editor.php:1172
+#: wp-includes/class-wp-editor.php:1170
 msgid "Table row properties"
 msgstr "Sao chép dòng"
 
-#: wp-includes/class-wp-editor.php:1196
+#: wp-includes/class-wp-editor.php:1194
 msgid "Merge table cells"
 msgstr "Gộp cột"
 
-#: wp-includes/class-wp-editor.php:1189
+#: wp-includes/class-wp-editor.php:1187
 msgid "Insert column after"
 msgstr "Thêm cột vào sau"
 
-#: wp-includes/class-wp-editor.php:1188
+#: wp-includes/class-wp-editor.php:1186
 msgid "Insert column before"
 msgstr "Thêm cột vào trước"
 
-#: wp-includes/class-wp-editor.php:1192
+#: wp-includes/class-wp-editor.php:1190
 msgid "Delete row"
 msgstr "Xóa dòng"
 
-#: wp-includes/class-wp-editor.php:1187
+#: wp-includes/class-wp-editor.php:1185
 msgid "Insert row after"
 msgstr "Thêm dòng vào sau"
 
-#: wp-includes/class-wp-editor.php:1186
+#: wp-includes/class-wp-editor.php:1184
 msgid "Insert row before"
 msgstr "Thêm dòng vào trước"
 
-#: wp-includes/class-wp-editor.php:1126 wp-includes/class-wp-editor.php:1132
-#: wp-includes/class-wp-editor.php:1702 wp-includes/script-loader.php:523
+#: wp-includes/class-wp-editor.php:1124 wp-includes/class-wp-editor.php:1130
+#: wp-includes/class-wp-editor.php:1700 wp-includes/script-loader.php:523
 msgid "Insert/edit link"
 msgstr "Thêm/Sửa đường dẫn"
 
-#: wp-includes/class-wp-editor.php:1087
+#: wp-includes/class-wp-editor.php:1085
 msgid "Insert/edit image"
 msgstr "Thêm/Sửa ảnh"
 
-#: wp-includes/class-wp-editor.php:1120
+#: wp-includes/class-wp-editor.php:1118
 msgid "Print"
 msgstr "In"
 
@@ -11334,12 +11362,12 @@ msgstr "Kết quả tìm kiếm %1$s %2$s"
 msgid "Site Admin"
 msgstr "Quản lý"
 
-#: wp-includes/general-template.php:527 wp-login.php:607 wp-login.php:736
-#: wp-login.php:824 wp-login.php:1060
+#: wp-includes/general-template.php:527 wp-login.php:608 wp-login.php:737
+#: wp-login.php:825 wp-login.php:1061
 msgid "Register"
 msgstr "Đăng kí"
 
-#: wp-includes/general-template.php:398 wp-login.php:1041
+#: wp-includes/general-template.php:398 wp-login.php:1042
 msgid "Remember Me"
 msgstr "Tự động đăng nhập"
 
@@ -11347,39 +11375,39 @@ msgstr "Tự động đăng nhập"
 msgid "Log out"
 msgstr "Đăng xuất"
 
-#: wp-includes/general-template.php:260 wp-login.php:604 wp-login.php:674
-#: wp-login.php:733 wp-login.php:828
+#: wp-includes/general-template.php:260 wp-login.php:605 wp-login.php:675
+#: wp-login.php:734 wp-login.php:829
 msgid "Log in"
 msgstr "Đăng nhập"
 
-#: wp-includes/functions.php:4724
+#: wp-includes/functions.php:4737
 msgid "Manual Offsets"
 msgstr "Chỉnh vị trí bằng tay"
 
-#: wp-includes/functions.php:4716 wp-includes/functions.php:4720
+#: wp-includes/functions.php:4729 wp-includes/functions.php:4733
 msgid "UTC"
 msgstr "UTC"
 
-#: wp-includes/functions.php:4671
+#: wp-includes/functions.php:4684
 msgid "Select a city"
 msgstr "Chọn thành phố"
 
 #. translators: 1: PHP function name, 2: version number
-#: wp-includes/functions.php:4035
+#: wp-includes/functions.php:4048
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s đã gọi đến một tham số đã được <strong>loại bỏ</strong> kể từ phiên bản %2$s mà không có lựa chọn phụ nào cả."
 
 #. translators: 1: PHP function name, 2: version number, 3: optional message
 #. regarding the change
-#: wp-includes/functions.php:4032
+#: wp-includes/functions.php:4045
 msgid "%1$s was called with an argument that is <strong>deprecated</strong> since version %2$s! %3$s"
 msgstr "%1$s được gọi với một tham số đã bị <strong>loại bỏ</strong> kể từ phiên bản %2$s! %3$s"
 
 #. translators: 1: PHP function name, 2: version number
 #. translators: 1: PHP file name, 2: version number
 #. translators: 1: WordPress hook name, 2: version number
-#: wp-includes/functions.php:3843 wp-includes/functions.php:3971
-#: wp-includes/functions.php:4094
+#: wp-includes/functions.php:3856 wp-includes/functions.php:3984
+#: wp-includes/functions.php:4107
 msgid "%1$s is <strong>deprecated</strong> since version %2$s with no alternative available."
 msgstr "%1$s is <strong>deprecated</strong> since version %2$s! Hiện không có giải pháp thay thế."
 
@@ -11388,43 +11416,43 @@ msgstr "%1$s is <strong>deprecated</strong> since version %2$s! Hiện không c�
 #. translators: 1: PHP file name, 2: version number, 3: alternative file name
 #. translators: 1: WordPress hook name, 2: version number, 3: alternative hook
 #. name
-#: wp-includes/functions.php:3840 wp-includes/functions.php:3968
-#: wp-includes/functions.php:4091
+#: wp-includes/functions.php:3853 wp-includes/functions.php:3981
+#: wp-includes/functions.php:4104
 msgid "%1$s is <strong>deprecated</strong> since version %2$s! Use %3$s instead."
 msgstr "%1$s đã bị <strong>loại bỏ</strong> từ phiên bản %2$s! Hãy sử dụng %3$s."
 
-#: wp-includes/functions.php:2750 wp-load.php:92
+#: wp-includes/functions.php:2763 wp-load.php:92
 msgid "WordPress &rsaquo; Error"
 msgstr "WordPress &rsaquo; Lỗi"
 
-#: wp-includes/functions.php:2738
+#: wp-includes/functions.php:2751
 msgid "&laquo; Back"
 msgstr "&laquo; Quay lại"
 
-#: wp-includes/functions.php:2613 wp-includes/ms-functions.php:2047
+#: wp-includes/functions.php:2626 wp-includes/ms-functions.php:2047
 msgid "Please try again."
 msgstr "Xin vui lòng thử lại."
 
 #. translators: %s: logout URL
-#: wp-includes/functions.php:2604
+#: wp-includes/functions.php:2617
 msgid "Do you really want to <a href=\"%s\">log out</a>?"
 msgstr "Bạn có thực sự muốn <a href='%s'>đăng xuất</a> không?"
 
 #. translators: %s: site name
-#: wp-includes/functions.php:2597
+#: wp-includes/functions.php:2610
 msgid "You are attempting to log out of %s"
 msgstr "Bạn đang đăng xuất khỏi %s"
 
-#: wp-includes/functions.php:2182
+#: wp-includes/functions.php:2195
 msgid "Could not write file %s"
 msgstr "Không thể ghi tập tin %s"
 
-#: wp-includes/functions.php:2136
+#: wp-includes/functions.php:2149
 msgid "Empty filename"
 msgstr "Tên tập tin rỗng"
 
 #. translators: %s: directory path
-#: wp-includes/functions.php:1905 wp-includes/functions.php:2174
+#: wp-includes/functions.php:1918 wp-includes/functions.php:2187
 msgid "Unable to create directory %s. Is its parent directory writable by the server?"
 msgstr "Không thể tạo thư mục %s. Máy chủ có cho phép ghi chép trong thư mục mẹ không?"
 
@@ -11651,19 +11679,19 @@ msgstr "Phản hồi giống nhau! Hình như bạn đã gửi phản hồi này
 msgid "Unapproved"
 msgstr "Chưa được chấp thuận"
 
-#: wp-includes/comment-template.php:2255
+#: wp-includes/comment-template.php:2263
 msgid "Post Comment"
 msgstr "Phản hồi"
 
-#: wp-includes/comment-template.php:2254
+#: wp-includes/comment-template.php:2262
 msgid "Cancel reply"
 msgstr "Hủy"
 
-#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2249
+#: wp-includes/comment-template.php:1874 wp-includes/comment-template.php:2257
 msgid "Leave a Reply to %s"
 msgstr "Trả lời %s"
 
-#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2248
+#: wp-includes/comment-template.php:1873 wp-includes/comment-template.php:2256
 msgid "Leave a Reply"
 msgstr "Trả lời"
 
@@ -11756,7 +11784,7 @@ msgid "Tags: "
 msgstr "Thẻ:"
 
 #. translators: %s: login URL
-#: wp-includes/comment-template.php:2227
+#: wp-includes/comment-template.php:2235
 msgid "You must be <a href=\"%s\">logged in</a> to post a comment."
 msgstr "Bạn phải <a href=\"%s\">đăng nhập</a> để gửi phản hồi."
 
@@ -11810,11 +11838,11 @@ msgid "For some strange yet very annoying reason, this post could not be edited.
 msgstr "Gặp phải lỗi lạ, bạn không thể chỉnh sửa bài viết này được."
 
 #: wp-includes/admin-bar.php:830 wp-includes/class-wp-customize-widgets.php:412
-#: wp-includes/functions.php:3716
+#: wp-includes/functions.php:3729
 msgid "Widgets"
 msgstr "Widget"
 
-#: wp-includes/comment-template.php:2205
+#: wp-includes/comment-template.php:2204
 msgid "Website"
 msgstr "Trang web"
 
@@ -11853,7 +11881,7 @@ msgstr "Plugin:"
 msgid "Default"
 msgstr "Mặc định"
 
-#: wp-includes/class-wp-editor.php:1199 wp-includes/media-template.php:965
+#: wp-includes/class-wp-editor.php:1197 wp-includes/media-template.php:965
 #: wp-includes/widgets/class-wp-widget-media-image.php:76
 msgid "Height"
 msgstr "Cao"
@@ -11870,7 +11898,7 @@ msgstr "Định dạng ngày tháng"
 msgid "Allow people to post comments on new articles"
 msgstr "Cho phép mọi người gửi phản hồi cho bài viết mới"
 
-#: wp-includes/comment-template.php:2203 wp-login.php:810
+#: wp-includes/comment-template.php:2202 wp-login.php:811
 msgid "Email"
 msgstr "Email"
 
@@ -11913,11 +11941,11 @@ msgstr "Có"
 msgid "Edit Category"
 msgstr "Chỉnh sửa chuyên mục"
 
-#: wp-includes/general-template.php:399 wp-login.php:1011 wp-login.php:1043
+#: wp-includes/general-template.php:399 wp-login.php:1012 wp-login.php:1044
 msgid "Log In"
 msgstr "Đăng nhập"
 
-#: wp-login.php:700
+#: wp-login.php:701
 msgid "Strength indicator"
 msgstr "Độ bảo mật"
 
@@ -11939,7 +11967,7 @@ msgstr "<strong>Lỗi</strong>: Thư điện tử này đã được sử dụng
 msgid "<strong>ERROR</strong>: Please enter a username."
 msgstr "<strong>LỖI</strong>: Xin điền tên người dùng."
 
-#: wp-includes/class-wp-editor.php:1200 wp-includes/media-template.php:965
+#: wp-includes/class-wp-editor.php:1198 wp-includes/media-template.php:965
 #: wp-includes/widgets/class-wp-widget-media-image.php:70
 msgid "Width"
 msgstr "Rộng"
@@ -12022,7 +12050,7 @@ msgid "Select"
 msgstr "Chọn"
 
 #: wp-includes/class-wp-customize-manager.php:5301
-#: wp-includes/class-wp-editor.php:1053 wp-includes/class-wp-editor.php:1703
+#: wp-includes/class-wp-editor.php:1051 wp-includes/class-wp-editor.php:1701
 #: wp-includes/script-loader.php:277 wp-includes/script-loader.php:371
 #: wp-includes/script-loader.php:562 wp-includes/script-loader.php:1137
 msgid "Close"
@@ -12036,8 +12064,8 @@ msgstr "Trang"
 
 #. translators: 1: Comment author URL
 #. translators: %s: user email address
-#: wp-includes/pluggable.php:1495 wp-includes/pluggable.php:1656
-#: wp-includes/pluggable.php:1832
+#: wp-includes/pluggable.php:1498 wp-includes/pluggable.php:1659
+#: wp-includes/pluggable.php:1835
 msgid "Email: %s"
 msgstr "Email: %s"
 
@@ -12053,12 +12081,12 @@ msgstr "Liên kết"
 msgid "View Page"
 msgstr "Xem trang"
 
-#: wp-includes/post.php:2377
+#: wp-includes/post.php:2410
 msgid "Images"
 msgstr "Hình ảnh"
 
 #: wp-includes/admin-bar.php:904 wp-includes/admin-bar.php:905
-#: wp-includes/class-wp-editor.php:1724 wp-includes/media.php:3496
+#: wp-includes/class-wp-editor.php:1722 wp-includes/media.php:3496
 msgid "Search"
 msgstr "Tìm kiếm"
 
@@ -12100,7 +12128,7 @@ msgstr "Đăng, dán"
 msgid "Private"
 msgstr "Riêng tư"
 
-#: wp-includes/class-wp-editor.php:1051 wp-includes/script-loader.php:692
+#: wp-includes/class-wp-editor.php:1049 wp-includes/script-loader.php:692
 msgid "OK"
 msgstr "Ok"
 
@@ -12116,7 +12144,7 @@ msgstr "Lưu vào danh sách chờ duyệt"
 msgid "Image URL"
 msgstr "Đường dẫn của ảnh"
 
-#: wp-includes/class-wp-editor.php:1103 wp-includes/media.php:4022
+#: wp-includes/class-wp-editor.php:1101 wp-includes/media.php:4022
 msgid "Media"
 msgstr "Thư viện"
 
@@ -12125,14 +12153,14 @@ msgstr "Thư viện"
 msgid "Edit Image"
 msgstr "Sửa ảnh"
 
-#: wp-includes/class-wp-editor.php:1201 wp-includes/media-template.php:398
+#: wp-includes/class-wp-editor.php:1199 wp-includes/media-template.php:398
 #: wp-includes/media-template.php:579 wp-includes/media-template.php:837
 #: wp-includes/media-template.php:902
 #: wp-includes/widgets/class-wp-widget-media-image.php:83
 msgid "Caption"
 msgstr "Chú thích"
 
-#: wp-includes/class-wp-editor.php:1202 wp-includes/media-template.php:612
+#: wp-includes/class-wp-editor.php:1200 wp-includes/media-template.php:612
 msgid "Alignment"
 msgstr "Căn chỉnh"
 
@@ -12152,21 +12180,21 @@ msgstr "Kích thước đầy đủ"
 msgid "Medium"
 msgstr "Trung bình"
 
-#: wp-includes/class-wp-editor.php:1206
+#: wp-includes/class-wp-editor.php:1204
 #: wp-includes/customize/class-wp-customize-background-position-control.php:49
 #: wp-includes/media-template.php:626 wp-includes/media-template.php:857
 #: wp-includes/media-template.php:923
 msgid "Right"
 msgstr "Phải"
 
-#: wp-includes/class-wp-editor.php:1205
+#: wp-includes/class-wp-editor.php:1203
 #: wp-includes/customize/class-wp-customize-background-position-control.php:48
 #: wp-includes/media-template.php:623 wp-includes/media-template.php:854
 #: wp-includes/media-template.php:920
 msgid "Center"
 msgstr "Chính giữa"
 
-#: wp-includes/class-wp-editor.php:1204
+#: wp-includes/class-wp-editor.php:1202
 #: wp-includes/customize/class-wp-customize-background-position-control.php:47
 #: wp-includes/media-template.php:620 wp-includes/media-template.php:851
 #: wp-includes/media-template.php:917
@@ -12200,15 +12228,15 @@ msgstr "Tập tin &#8220;%s&#8221; không tồn tại?"
 msgid "Thumbnail"
 msgstr "Ảnh thu nhỏ"
 
-#: wp-includes/class-wp-editor.php:1049
+#: wp-includes/class-wp-editor.php:1047
 msgid "Redo"
 msgstr "Làm lại bước vừa rồi"
 
-#: wp-includes/general-template.php:397 wp-login.php:1030
+#: wp-includes/general-template.php:397 wp-login.php:1031
 msgid "Password"
 msgstr "Mật khẩu"
 
-#: wp-login.php:806
+#: wp-login.php:807
 msgid "Username"
 msgstr "Tên người dùng"
 
@@ -12260,7 +12288,7 @@ msgstr "Thẻ"
 msgid "Content"
 msgstr "Nội dung"
 
-#: wp-includes/class-wp-editor.php:1052 wp-includes/class-wp-editor.php:1749
+#: wp-includes/class-wp-editor.php:1050 wp-includes/class-wp-editor.php:1747
 #: wp-includes/media.php:3498 wp-includes/script-loader.php:510
 #: wp-includes/script-loader.php:561 wp-includes/script-loader.php:693
 msgid "Cancel"
@@ -12276,7 +12304,7 @@ msgid "Recent Comments"
 msgstr "Phản hồi gần đây"
 
 #: wp-includes/class-wp-customize-manager.php:4156
-#: wp-includes/class-wp-editor.php:1119 wp-includes/media-template.php:1247
+#: wp-includes/class-wp-editor.php:1117 wp-includes/media-template.php:1247
 msgid "Preview"
 msgstr "Xem thử"
 
@@ -12284,8 +12312,9 @@ msgstr "Xem thử"
 msgid "RSS"
 msgstr "Dòng thông tin - RSS"
 
+#. translators: Name of a comment's author after being anonymized.
 #: wp-includes/class-wp-theme.php:732 wp-includes/comment-template.php:31
-#: wp-includes/comment.php:3327
+#: wp-includes/comment.php:3328
 msgid "Anonymous"
 msgstr "Khách"
 
@@ -12325,21 +12354,21 @@ msgstr "Sửa thẻ"
 msgid "None"
 msgstr "Trống"
 
-#: wp-includes/class-wp-editor.php:1082
+#: wp-includes/class-wp-editor.php:1080
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:123
 #: wp-includes/media-template.php:408 wp-includes/media-template.php:589
 msgid "Description"
 msgstr "Mô tả"
 
-#: wp-includes/comment-template.php:2201
+#: wp-includes/comment-template.php:2200
 msgid "Name"
 msgstr "Tên"
 
-#: wp-includes/class-wp-editor.php:1089
+#: wp-includes/class-wp-editor.php:1087
 msgid "Advanced"
 msgstr "Nâng cao"
 
-#: wp-includes/class-wp-editor.php:1133
+#: wp-includes/class-wp-editor.php:1131
 msgid "Target"
 msgstr "Mục tiêu"
 
@@ -12350,11 +12379,11 @@ msgstr "Mục tiêu"
 msgid "Categories"
 msgstr "Chuyên mục"
 
-#: wp-includes/class-wp-editor.php:1121 wp-includes/script-loader.php:733
+#: wp-includes/class-wp-editor.php:1119 wp-includes/script-loader.php:733
 msgid "Save"
 msgstr "Lưu thay đổi"
 
-#: wp-includes/class-wp-editor.php:1752 wp-includes/script-loader.php:525
+#: wp-includes/class-wp-editor.php:1750 wp-includes/script-loader.php:525
 msgid "Add Link"
 msgstr "Thêm liên kết"
 
@@ -12385,18 +12414,18 @@ msgstr "Tóm tắt"
 #: wp-includes/class-wp-customize-manager.php:4617
 #: wp-includes/script-loader.php:549 wp-includes/script-loader.php:701
 msgid "Publish"
-msgstr "Đăng bài viết"
+msgstr "Lưu thay đổi"
 
 #: wp-includes/comment.php:3258 wp-includes/script-loader.php:656
 msgid "Comments"
 msgstr "Bình luận"
 
 #: wp-includes/class-wp-customize-widgets.php:751
-#: wp-includes/class-wp-editor.php:1261 wp-includes/media.php:3538
+#: wp-includes/class-wp-editor.php:1259 wp-includes/media.php:3538
 msgid "Apply"
 msgstr "Áp dụng"
 
-#: wp-includes/class-wp-editor.php:1048
+#: wp-includes/class-wp-editor.php:1046
 msgid "Undo"
 msgstr "Lùi lại"
 
@@ -12407,7 +12436,7 @@ msgstr "Kết quả tìm kiếm cho &#8220;%s&#8221;"
 
 #: wp-includes/class-walker-comment.php:236
 #: wp-includes/class-walker-comment.php:340
-#: wp-includes/class-wp-editor.php:1259
+#: wp-includes/class-wp-editor.php:1257
 msgid "Edit"
 msgstr "Chỉnh sửa"
 
@@ -12419,13 +12448,13 @@ msgstr "Không"
 msgid "Are you sure you want to do this?"
 msgstr "Bạn chắc chắn muốn làm việc này không?"
 
-#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2223
+#: wp-includes/comment-template.php:1082 wp-includes/comment-template.php:2231
 msgctxt "noun"
 msgid "Comment"
 msgstr "Bình luận"
 
 #: wp-includes/class-wp-customize-nav-menus.php:1111
-#: wp-includes/class-wp-editor.php:1136 wp-includes/class-wp-editor.php:1708
+#: wp-includes/class-wp-editor.php:1134 wp-includes/class-wp-editor.php:1706
 #: wp-includes/customize/class-wp-customize-nav-menu-item-control.php:86
 #: wp-includes/media-template.php:376 wp-includes/media-template.php:557
 #: wp-includes/media.php:3494 wp-includes/media.php:4017
@@ -12433,7 +12462,7 @@ msgstr "Bình luận"
 msgid "URL"
 msgstr "URL"
 
-#: wp-includes/class-wp-editor.php:1083 wp-includes/theme-compat/sidebar.php:27
+#: wp-includes/class-wp-editor.php:1081 wp-includes/theme-compat/sidebar.php:27
 msgid "Author"
 msgstr "Tác giả"
 
@@ -12446,7 +12475,7 @@ msgstr "Đăng xuất"
 msgid "Visit Site"
 msgstr "Xem trang"
 
-#: wp-includes/class-wp-editor.php:1642
+#: wp-includes/class-wp-editor.php:1640
 msgid "Y/m/d"
 msgstr "d/m/Y"
 
@@ -12461,9 +12490,9 @@ msgstr "Chờ duyệt"
 #: wp-includes/post.php:749 wp-includes/post.php:769
 #: wp-includes/script-loader.php:550 wp-includes/script-loader.php:711
 msgid "Published"
-msgstr "Đã đăng"
+msgstr "Đã xuất bản"
 
-#: wp-includes/class-wp-editor.php:1079 wp-includes/media-template.php:382
+#: wp-includes/class-wp-editor.php:1077 wp-includes/media-template.php:382
 #: wp-includes/media-template.php:563 wp-includes/revision.php:34
 msgid "Title"
 msgstr "Tiêu đề"

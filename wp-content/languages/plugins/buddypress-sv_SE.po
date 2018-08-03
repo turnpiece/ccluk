@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-22 22:41:47+0000\n"
+"PO-Revision-Date: 2018-08-02 19:51:57+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -347,6 +347,13 @@ msgstr "Endast personer som är inbjudna kan gå med i gruppen."
 #: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-settings.php:44
 msgid "Only people who request membership and are accepted can join the group."
 msgstr "Endast personer som begär medlemskap och accepteras kan gå med i gruppen."
+
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:126
+#: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:128
+#: bp-templates/bp-nouveau/includes/notifications/template-tags.php:121
+msgctxt "button"
+msgid "Apply"
+msgstr "Tillämpa"
 
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:119
 #: bp-xprofile/classes/class-bp-xprofile-field-type-datebox.php:308
@@ -1024,6 +1031,10 @@ msgstr "Ta bort stjärnmärkning på meddelande"
 #: bp-templates/bp-nouveau/buddypress/common/js-templates/messages/index.php:205
 msgid "Unstar Conversation"
 msgstr "Ta bort stjärnmärkning på konversation"
+
+#: bp-templates/bp-nouveau/buddypress/groups/single/admin/group-cover-image.php:13
+msgid "Upload Cover Image"
+msgstr "Ladda upp omslagsbild"
 
 #: bp-messages/classes/class-bp-messages-notices-list-table.php:78
 msgctxt "Admin Notices column header"

@@ -531,25 +531,44 @@ function give_get_donor_address( $donor_id = null, $args = array() ) {
  *
  * Sends the new user notification email when a user registers within the donation form
  *
- * @param int   $user_id   User ID.
- * @param array $user_data An Array of User Data.
+ * @param int   $donation_id   Donation ID.
+ * @param array $donation_data An Array of Donation Data.
  *
  * @access public
  * @since  1.0
  *
  * @return void
  */
-function give_new_user_notification( $user_id = 0, $user_data = array() ) {
+function give_new_user_notification( $donation_id = 0, $donation_data = array() ) {
 	// Bailout.
-	if ( empty( $user_id ) || empty( $user_data ) ) {
+	if (
+		empty( $donation_id )
+		|| empty( $donation_data )
+		|| ! isset( $_POST['give_create_account'] )
+		|| 'on' !== give_clean( $_POST['give_create_account'] )
+	) {
 		return;
 	}
 
-	do_action( 'give_new-donor-register_email_notification', $user_id, $user_data );
-	do_action( 'give_donor-register_email_notification', $user_id, $user_data );
+	// For backward compatibility
+	$user = get_user_by( 'ID', $donation_data['user_info']['id'] );
+
+	$donation_data['user_info'] = array_merge(
+		$donation_data['user_info'],
+		array(
+			'user_id'    => $donation_data['user_info']['id'],
+			'user_first' => $donation_data['user_info']['first_name'],
+			'user_last'  => $donation_data['user_info']['last_name'],
+			'user_email' => $donation_data['user_info']['email'],
+			'user_login' => $user->user_login,
+		)
+	);
+
+	do_action( 'give_new-donor-register_email_notification', $donation_data['user_info']['id'], $donation_data['user_info'], $donation_id );
+	do_action( 'give_donor-register_email_notification', $donation_data['user_info']['id'], $donation_data['user_info'], $donation_id );
 }
 
-add_action( 'give_insert_user', 'give_new_user_notification', 10, 2 );
+add_action( 'give_insert_payment', 'give_new_user_notification', 10, 2 );
 
 
 /**
@@ -572,26 +591,32 @@ function give_get_donor_name_by( $id = 0, $from = 'donation' ) {
 		return '';
 	}
 
-	$name = '';
+	$name         = '';
+	$title_prefix = '';
 
 	switch ( $from ) {
 
 		case 'donation':
+			$title_prefix  = give_get_meta( $id, '_give_payment_donor_title_prefix', true );
 			$first_name    = give_get_meta( $id, '_give_donor_billing_first_name', true );
 			$last_name     = give_get_meta( $id, '_give_donor_billing_last_name', true );
 
-			$name = trim( "{$first_name} {$last_name}" );
+			$name = "{$first_name} {$last_name}";
 
 			break;
 
 		case 'donor':
-			$name = Give()->donors->get_column( 'name', $id );
+			$name         = Give()->donors->get_column( 'name', $id );
+			$title_prefix = Give()->donor_meta->get_meta( $id, '_give_donor_title_prefix', true );
 
 			break;
 
 	}
 
-	return trim( $name );
+	// If title prefix is set then prepend it to name.
+	$name = give_get_donor_name_with_title_prefixes( $title_prefix, $name );
+
+	return $name;
 
 }
 

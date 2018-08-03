@@ -204,7 +204,6 @@ if ( ! class_exists( 'Give_Offline_Donation_Instruction_Email' ) ) :
 
 			Give()->emails->__set( 'from_name', $from_name );
 			Give()->emails->__set( 'from_email', $from_email );
-			Give()->emails->__set( 'heading', $this->get_email_header() );
 			Give()->emails->__set( 'headers', apply_filters( 'give_receipt_headers', Give()->emails->get_headers(), $this->payment->ID, $this->payment->payment_meta ) );
 		}
 
@@ -253,7 +252,7 @@ if ( ! class_exists( 'Give_Offline_Donation_Instruction_Email' ) ) :
 				|| $notification_status !== $update_options["{$this->config['id']}_notification"]
 			) {
 				$update_options["{$this->config['id']}_notification"] = $notification_status;
-				update_option( $option_name, $update_options );
+				update_option( $option_name, $update_options, false );
 			}
 		}
 

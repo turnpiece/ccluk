@@ -1027,6 +1027,9 @@ function _give_get_prefill_form_field_values( $form_id ) {
 			// Last name.
 			'give_last'       => $donor_data->last_name,
 
+			// Title Prefix.
+			'give_title'      => $donor->get_meta( '_give_donor_title_prefix', true ),
+
 			// Company name.
 			'company_name'    => $company_name,
 
@@ -1099,7 +1102,8 @@ function give_get_form_donor_count( $form_id, $args = array() ) {
 			)
 		);
 
-		$donation_meta_table = Give()->payment_meta->table_name;
+		$donation_meta_table  = Give()->payment_meta->table_name;
+		$donation_id_col_name = Give()->payment_meta->get_meta_type() . '_id';
 
 		$distinct = $args['unique'] ? 'DISTINCT meta_value' : 'meta_value';
 
@@ -1108,11 +1112,11 @@ function give_get_form_donor_count( $form_id, $args = array() ) {
 			SELECT COUNT({$distinct})
 			FROM {$donation_meta_table}
 			WHERE meta_key=%s
-			AND payment_id IN(
-				SELECT payment_id
+			AND {$donation_id_col_name} IN(
+				SELECT {$donation_id_col_name}
 				FROM {$donation_meta_table} as pm
 				INNER JOIN {$wpdb->posts} as p
-				ON pm.payment_id=p.ID
+				ON pm.{$donation_id_col_name}=p.ID
 				WHERE pm.meta_key=%s
 				AND pm.meta_value=%s
 				AND p.post_status=%s
@@ -1134,8 +1138,6 @@ function give_get_form_donor_count( $form_id, $args = array() ) {
 	 * @since 2.1.0
 	 */
 	$donor_count = apply_filters( 'give_get_form_donor_count', $donor_count, $form_id, $args );
-
-	Give_Cache::set_db_query( $cache_key, $donor_count );
 
 	return $donor_count;
 }
@@ -1233,4 +1235,259 @@ function give_admin_form_goal_stats( $form_id ) {
 
 
 	return $html;
+}
+
+/**
+ * Get the default donation form's level id.
+ *
+ * @since 2.2.0
+ *
+ * @param integer $form_id Donation Form ID.
+ *
+ * @return null | array
+ */
+function give_form_get_default_level( $form_id ) {
+	$default_level = null;
+
+	// If donation form has variable prices.
+	if ( give_has_variable_prices( $form_id ) ) {
+		/**
+		 * Filter the variable pricing
+		 *
+		 *
+		 * @since      1.0
+		 * @deprecated 2.2 Use give_get_donation_levels filter instead of give_form_variable_prices.
+		 *                 Check Give_Donate_Form::get_prices().
+		 *
+		 * @param array $prices Array of variable prices.
+		 * @param int   $form   Form ID.
+		 */
+		$prices = apply_filters( 'give_form_variable_prices', give_get_variable_prices( $form_id ), $form_id );
+
+		// Go through each of the level and get the default level id.
+		foreach ( $prices as $level ) {
+			if (
+				isset( $level['_give_default'] )
+				&& $level['_give_default'] === 'default'
+			) {
+				$default_level = $level;
+			}
+		}
+	}
+
+	/**
+	 * Filter the default donation level id.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param array   $default_level Default level price data.
+	 * @param integer $form_id       Donation form ID.
+	 */
+	return apply_filters( 'give_form_get_default_level', $default_level, $form_id );
+}
+
+/**
+ * Get the default level id.
+ *
+ * @since 2.2.0
+ *
+ * @param array|integer   $price_or_level_id Price level data.
+ * @param boolean|integer $form_id           Donation Form ID.
+ *
+ * @return boolean
+ */
+function give_is_default_level_id( $price_or_level_id, $form_id = 0 ) {
+	$is_default = false;
+
+	if (
+		! empty( $form_id )
+		&& is_numeric( $price_or_level_id )
+	) {
+		// Get default level id.
+		$form_price_data = give_form_get_default_level( $form_id );
+
+		$is_default = ! is_null( $form_price_data ) && ( $price_or_level_id === absint( $form_price_data['_give_id']['level_id'] ) );
+	}
+
+	$is_default = false === $is_default && is_array( $price_or_level_id ) ?
+		( isset( $price_or_level_id['_give_default'] ) && $price_or_level_id['_give_default'] === 'default' )
+		: $is_default;
+
+	/**
+	 * Allow developers to modify the default level id checks.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param bool          $is_default        True if it is default price level id otherwise false.
+	 * @param array|integer $price_or_level_id Price Data.
+	 */
+	return apply_filters( 'give_is_default_level_id', $is_default, $price_or_level_id );
+}
+
+
+/**
+ * Get Name Title Prefixes (a.k.a. Salutation) value.
+ *
+ * @param int $form_id Donation Form ID.
+ *
+ * @since 2.2.0
+ *
+ * @return mixed
+ */
+function give_get_name_title_prefixes( $form_id = 0 ) {
+
+	$name_title_prefix = give_is_name_title_prefix_enabled( $form_id );
+	$title_prefixes    = give_get_option( 'title_prefixes', give_get_default_title_prefixes() );
+
+	// If form id exists, then fetch form specific title prefixes.
+	if ( intval( $form_id ) > 0 && $name_title_prefix ) {
+
+		$form_title_prefix = give_get_meta( $form_id, '_give_name_title_prefix', true );
+		if ( 'global' !== $form_title_prefix ) {
+			$form_title_prefixes = give_get_meta( $form_id, '_give_title_prefixes', true, give_get_default_title_prefixes() );
+
+			// Check whether the form based title prefixes exists or not.
+			if ( is_array( $form_title_prefixes ) && count( $form_title_prefixes ) > 0 ) {
+				$title_prefixes = $form_title_prefixes;
+			}
+		}
+	}
+
+	return $title_prefixes;
+}
+
+/**
+ * Check whether the name title prefix is enabled or not.
+ *
+ * @param int    $form_id Donation Form ID.
+ * @param string $status  Status to set status based on option value.
+ *
+ * @since 2.2.0
+ *
+ * @return bool
+ */
+function give_is_name_title_prefix_enabled( $form_id = 0, $status = '' ) {
+	if ( empty( $status ) ) {
+		$status = array( 'required', 'optional' );
+	} else {
+		$status = array( $status );
+	}
+
+	$title_prefix_status = give_is_setting_enabled( give_get_option( 'name_title_prefix' ), $status );
+
+	if ( intval( $form_id ) > 0 ) {
+		$form_title_prefix = give_get_meta( $form_id, '_give_name_title_prefix', true );
+
+		if ( 'disabled' === $form_title_prefix ) {
+			$title_prefix_status = false;
+		} elseif ( in_array( $form_title_prefix, $status, true ) ) {
+			$title_prefix_status = give_is_setting_enabled( $form_title_prefix, $status );
+		}
+	}
+
+	return $title_prefix_status;
+
+}
+
+/**
+ * Get Donor Name with Title Prefix
+ *
+ * @param int|Give_Donor $donor Donor Information.
+ *
+ * @since 2.2.0
+ *
+ * @return object
+ */
+function give_get_name_with_title_prefixes( $donor ) {
+
+	// Prepare Give_Donor object, if $donor is numeric.
+	if ( is_numeric( $donor ) ) {
+		$donor = new Give_Donor( $donor );
+	}
+
+	$title_prefix = Give()->donor_meta->get_meta( $donor->id, '_give_donor_title_prefix', true );
+
+	// Update Donor name, if non empty title prefix.
+	if ( ! empty( $title_prefix ) ) {
+		$donor->name = give_get_donor_name_with_title_prefixes( $title_prefix, $donor->name );
+	}
+
+	return $donor;
+}
+
+/**
+ * This function will generate donor name with title prefix if it is required.
+ *
+ * @param string $title_prefix Title Prefix of Donor
+ * @param string $name         Donor Name.
+ *
+ * @since 2.2.0
+ *
+ * @return string
+ */
+function give_get_donor_name_with_title_prefixes( $title_prefix, $name ) {
+
+	$donor_name = $name;
+
+	if ( ! empty( $title_prefix ) && ! empty( $name ) ) {
+		$donor_name = "{$title_prefix} {$name}";
+	}
+
+	return trim( $donor_name );
+}
+
+/**
+ * This function will fetch the default list of title prefixes.
+ *
+ * @since 2.2.0
+ *
+ * @return array
+ */
+function give_get_default_title_prefixes() {
+	/**
+	 * Filter the data
+	 * Set default title prefixes.
+	 *
+	 * @since 2.2.0
+	 */
+	return apply_filters(
+		'give_get_default_title_prefixes',
+		array(
+			'Mr.'  => __( 'Mr.', 'give' ),
+			'Mrs.' => __( 'Mrs.', 'give' ),
+			'Ms.'  => __( 'Ms.', 'give' ),
+		)
+	);
+}
+
+/**
+ * This function will check whether the name title prefix field is required or not.
+ *
+ * @param int $form_id Donation Form ID.
+ *
+ * @since 2.2.0
+ *
+ * @return bool
+ */
+function give_is_name_title_prefix_required( $form_id = 0 ) {
+
+	// Bail out, if name title prefix is not enabled.
+	if ( ! give_is_name_title_prefix_enabled( $form_id ) ) {
+		return false;
+	}
+
+	$status      = array( 'optional' );
+	$is_optional = give_is_setting_enabled( give_get_option( 'name_title_prefix' ), $status );
+
+	if ( intval( $form_id ) > 0 ) {
+		$form_title_prefix = give_get_meta( $form_id, '_give_name_title_prefix', true );
+
+		if ( 'required' === $form_title_prefix ) {
+			$is_optional = false;
+		} elseif ( 'optional' === $form_title_prefix ) {
+			$is_optional = true;
+		}
+	}
+
+	return ( ! $is_optional );
 }

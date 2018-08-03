@@ -79,6 +79,10 @@ function give_get_field_callback( $field ) {
 			$func_name = "{$func_name_prefix}_donation_limit";
 			break;
 
+		case 'chosen':
+			$func_name = "{$func_name_prefix}_chosen_input";
+			break;
+
 		default:
 
 			if (
@@ -195,7 +199,7 @@ function give_render_field( $field ) {
 		case 'donation_limit':
 			$field['type']  = 'donation_limit';
 			break;
-	}
+	} // End switch().
 
 	// CMB2 compatibility: Add support to define field description by desc & description param.
 	// We encourage you to use description param.
@@ -282,6 +286,89 @@ function give_text_input( $field ) {
 	<?php
 	echo give_get_field_description( $field );
 	echo '</p>';
+}
+
+/**
+ * Output a chosen input box.
+ * Note: only for internal use.
+ *
+ * @param array $field         {
+ *                              Optional. Array of text input field arguments.
+ *
+ * @type string $id            Field ID. Default ''.
+ * @type string $style         CSS style for input field. Default ''.
+ * @type string $wrapper_class CSS class to use for wrapper of input field. Default ''.
+ * @type string $value         Value of input field. Default ''.
+ * @type string $name          Name of input field. Default ''.
+ * @type string $type          Type of input field. Default 'text'.
+ * @type string $before_field  Text/HTML to add before input field. Default ''.
+ * @type string $after_field   Text/HTML to add after input field. Default ''.
+ * @type string $data_type     Define data type for value of input to filter it properly. Default ''.
+ * @type string $description   Description of input field. Default ''.
+ * @type array  $attributes    List of attributes of input field. Default array().
+ *                                               for example: 'attributes' => array( 'placeholder' => '*****', 'class'
+ *                                               => '****' )
+ * }
+ *
+ * @since 2.1
+ *
+ * @return void
+ */
+function give_chosen_input( $field ) {
+	global $thepostid, $post;
+
+	$thepostid              = empty( $thepostid ) ? $post->ID : $thepostid;
+	$field['style']         = isset( $field['style'] ) ? $field['style'] : '';
+	$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
+	$field['before_field']  = '';
+	$field['after_field']   = '';
+	$placeholder            = isset( $field['placeholder'] ) ? 'data-placeholder="' . $field['placeholder'] . '"' : '';
+	$data_type              = ! empty( $field['data_type'] ) ? $field['data_type'] : '';
+	$type                   = '';
+	$allow_new_values       = '';
+	$field['value']         = give_get_field_value( $field, $thepostid );
+	$field['value']         = is_array( $field['value'] ) ?
+		array_fill_keys( array_filter( $field['value'] ), 'selected' ) :
+		$field['value'];
+	$title_prefixes_value   = ( is_array( $field['value'] ) && count( $field['value'] ) > 0 ) ?
+		array_merge( $field['options'], $field['value'] ) :
+		$field['options'];
+
+	// Set attributes based on multiselect datatype.
+	if ( 'multiselect' === $data_type ) {
+		$type = 'multiple';
+		$allow_new_values = 'data-allows-new-values="true"';
+	}
+
+	?>
+	<p class="give-field-wrap <?php echo esc_attr( $field['id'] ); ?>_field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+		<label for="<?php echo esc_attr( give_get_field_name( $field ) ); ?>">
+			<?php echo wp_kses_post( $field['name'] ); ?>
+		</label>
+		<?php echo esc_attr( $field['before_field'] ); ?>
+		<select
+				class="give-select-chosen give-chosen-settings"
+				style="<?php echo esc_attr( $field['style'] ); ?>"
+				name="<?php echo esc_attr( give_get_field_name( $field ) ); ?>[]"
+				id="<?php echo esc_attr( $field['id'] ); ?>"
+			<?php echo "{$type} {$allow_new_values} {$placeholder}"; ?>
+		>
+			<?php
+			if ( is_array( $title_prefixes_value ) && count( $title_prefixes_value ) > 0 ) {
+				foreach ( $title_prefixes_value as $key => $value ) {
+					echo sprintf(
+						'<option %1$s value="%2$s">%2$s</option>',
+						( 'selected' === $value ) ? 'selected="selected"' : '',
+						esc_attr( $key )
+					);
+				}
+			}
+			?>
+		</select>
+		<?php echo esc_attr( $field['after_field'] ); ?>
+		<?php echo give_get_field_description( $field ); ?>
+	</p>
+	<?php
 }
 
 /**
@@ -488,21 +575,22 @@ function give_textarea_input( $field ) {
 	$field['style']         = isset( $field['style'] ) ? $field['style'] : '';
 	$field['wrapper_class'] = isset( $field['wrapper_class'] ) ? $field['wrapper_class'] : '';
 	$field['value']         = give_get_field_value( $field, $thepostid );
-
+	$default_attributes = array(
+		'cols' => 20,
+		'rows' => 10
+	);
 	?>
-	<p class="give-field-wrap <?php echo esc_attr( $field['id'] ); ?>_field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
-	<label for="<?php echo give_get_field_name( $field ); ?>"><?php echo wp_kses_post( $field['name'] ); ?></label>
-	<textarea
-			style="<?php echo esc_attr( $field['style'] ); ?>"
-			name="<?php echo give_get_field_name( $field ); ?>"
-			id="<?php echo esc_attr( $field['id'] ); ?>"
-			rows="10"
-			cols="20"
-		<?php echo give_get_custom_attributes( $field ); ?>
-	><?php echo esc_textarea( $field['value'] ); ?></textarea>
-	<?php
-	echo give_get_field_description( $field );
-	echo '</p>';
+	<div class="give-field-wrap <?php echo esc_attr( $field['id'] ); ?>_field <?php echo esc_attr( $field['wrapper_class'] ); ?>">
+		<label for="<?php echo give_get_field_name( $field ); ?>"><?php echo wp_kses_post( $field['name'] ); ?></label>
+		<textarea
+				style="<?php echo esc_attr( $field['style'] ); ?>"
+				name="<?php echo give_get_field_name( $field ); ?>"
+				id="<?php echo esc_attr( $field['id'] ); ?>"
+			<?php echo give_get_attribute_str( $field, $default_attributes ); ?>
+		><?php echo esc_textarea( $field['value'] ); ?></textarea>
+		<?php
+		echo give_get_field_description( $field );
+	echo '</div>';
 }
 
 /**

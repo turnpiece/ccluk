@@ -85,7 +85,7 @@ add_action( 'give_admin_donation_email', 'give_admin_email_notice' );
 function give_get_default_donation_notification_email() {
 
 	$default_email_body = __( 'Hi there,', 'give' ) . "\n\n";
-	$default_email_body .= __( 'This email is to inform you that a new donation has been made on your website:', 'give' ) . ' <a href="' . get_bloginfo( 'url' ) . '" target="_blank">' . get_bloginfo( 'url' ) . '</a>' . ".\n\n";
+	$default_email_body .= __( 'This email is to inform you that a new donation has been made on your website:', 'give' ) . ' {site_url}' . ".\n\n";
 	$default_email_body .= '<strong>' . __( 'Donor:', 'give' ) . '</strong> {name}' . "\n";
 	$default_email_body .= '<strong>' . __( 'Donation:', 'give' ) . '</strong> {donation}' . "\n";
 	$default_email_body .= '<strong>' . __( 'Amount:', 'give' ) . '</strong> {amount}' . "\n";
@@ -129,8 +129,8 @@ function give_get_default_donation_receipt_email() {
  *
  * @since 1.0
  *
- * @param $user_info
- * @param $payment Give_Payment|bool for getting the names.
+ * @param array             $user_info List of User Information.
+ * @param Give_Payment|bool $payment   Payment Object.
  *
  * @return array $email_names
  */
@@ -158,7 +158,6 @@ function give_get_email_names( $user_info, $payment = false ) {
 			$email_names['username'] = $payment->email;
 
 		}
-
 	} else {
 
 		// Support for old serialized data.
@@ -175,7 +174,6 @@ function give_get_email_names( $user_info, $payment = false ) {
 			} else {
 				$user_info = maybe_unserialize( $user_info );
 			}
-
 		}
 
 		if ( isset( $user_info['id'] ) && $user_info['id'] > 0 && isset( $user_info['first_name'] ) ) {
@@ -191,7 +189,16 @@ function give_get_email_names( $user_info, $payment = false ) {
 			$email_names['name']     = $user_info['email'];
 			$email_names['username'] = $user_info['email'];
 		}
+	} // End if().
 
+	// Set title prefix to name, if non empty.
+	if ( ! empty( $user_info['title'] ) && ! empty( $user_info['last_name'] ) ) {
+		$email_names['name'] = give_get_donor_name_with_title_prefixes( $user_info['title'], $user_info['last_name'] );
+	}
+
+	// Set title prefix to fullname, if non empty.
+	if ( ! empty( $user_info['title'] ) && ! empty( $email_names['fullname'] ) ) {
+		$email_names['fullname'] = give_get_donor_name_with_title_prefixes( $user_info['title'], $email_names['fullname'] );
 	}
 
 	return $email_names;

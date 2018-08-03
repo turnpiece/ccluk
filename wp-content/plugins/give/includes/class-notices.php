@@ -57,7 +57,7 @@ class Give_Notices {
 		add_action( 'give_dismiss_notices', array( $this, 'dismiss_notices' ) );
 
 		add_action( 'give_frontend_notices', array( $this, 'render_frontend_notices' ), 999 );
-		add_action( 'give_pre_form', array( $this, 'render_frontend_notices' ), 11 );
+		add_action( 'give_pre_form_output', array( $this, 'render_frontend_form_notices' ), 10, 1 );
 		add_action( 'give_ajax_donation_errors', array( $this, 'render_frontend_notices' ) );
 
 		/**
@@ -285,6 +285,27 @@ class Give_Notices {
 	}
 
 	/**
+	 * Renders notices for different actions depending on
+	 * the type of form display option.
+	 *
+	 * @since 2.2
+	 * @access public
+	 *
+	 * @param int $form_id Form ID.
+	 *
+	 * @return void
+	 */
+	public function render_frontend_form_notices( $form_id ) {
+		$display_option = give_get_meta( $form_id, '_give_payment_display', true );
+
+		if ( 'modal' === $display_option ) {
+			add_action( 'give_payment_mode_top', array( $this, 'render_frontend_notices' ) );
+		} else {
+			add_action( 'give_pre_form', array( $this, 'render_frontend_notices' ), 11 );
+		}
+	}
+
+	/**
 	 * Print notice js.
 	 *
 	 * @since  1.8.9
@@ -413,9 +434,9 @@ class Give_Notices {
 		/**
 		 * Fire the action when notice dismissed
 		 *
-		 * @since 2.0
+		 * @since 2.2.0
 		 */
-		do_action( 'give_dismiss_notices', $_post );
+		do_action( 'give_notice_dismissed', $_post );
 
 		wp_send_json_success();
 	}

@@ -36,7 +36,6 @@ if ( ! class_exists( 'Give_Donor_Register_Email' ) ) :
 				'label'                 => __( 'User Registration Information', 'give' ),
 				'description'           => __( 'Sent to the donor when they register for an account on the site.', 'give' ),
 				'notification_status'   => 'enabled',
-				'email_tag_contex'      => 'donor',
 				'form_metabox_setting'  => false,
 				'recipient_group_name'  => __( 'Donor', 'give' ),
 				'email_tag_context'     => array( 'donor', 'general' ),
@@ -94,15 +93,6 @@ if ( ! class_exists( 'Give_Donor_Register_Email' ) ) :
 		}
 
 		/**
-		 * Setup email data
-		 *
-		 * @since 2.0
-		 */
-		public function setup_email_data() {
-			Give()->emails->__set( 'heading', $this->get_email_header() );
-		}
-
-		/**
 		 * Setup and send new donor register notifications.
 		 *
 		 * @since  2.0
@@ -116,7 +106,8 @@ if ( ! class_exists( 'Give_Donor_Register_Email' ) ) :
 		public function setup_email_notification( $user_id, $user_data ) {
 			$this->setup_email_data();
 
-			$this->recipient_email = $user_data['user_email'];
+			$this->recipient_email = $user_data['email'];
+
 			$this->send_email_notification( array(
 				'user_id' => $user_id,
 			) );

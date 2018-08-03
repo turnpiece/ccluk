@@ -280,17 +280,64 @@ class Give_MetaBox_Form_Data {
 							'type' => 'default_gateway',
 						),
 						array(
+							'name'    => __( 'Name Title Prefix', 'give' ),
+							'desc'    => __( 'Do you want to add a name title prefix dropdown field before the donor\'s first name field? This will display a dropdown with options such as Mrs, Miss, Ms, Sir, and Dr for donor to choose from.', 'give' ),
+							'id'      => $prefix . 'name_title_prefix',
+							'type'    => 'radio_inline',
+							'options' => array(
+								'global' => __( 'Global Option', 'give' ),
+								'required' => __( 'Required', 'give' ),
+								'optional' => __( 'Optional', 'give' ),
+								'disabled' => __( 'Disabled', 'give' ),
+							),
+							'default' => 'global',
+						),
+						array(
+							'name'          => __( 'Title Prefixes', 'give' ),
+							'desc'          => __( 'Add or remove salutations from the dropdown using the field above.', 'give' ),
+							'id'            => $prefix . 'title_prefixes',
+							'type'          => 'chosen',
+							'data_type'     => 'multiselect',
+							'style'         => 'width: 100%',
+							'wrapper_class' => 'give-hidden give-title-prefixes-wrap',
+							'options'       => give_get_default_title_prefixes(),
+						),
+						array(
 							'name'    => __( 'Company Donations', 'give' ),
 							'desc'    => __( 'Do you want a Company field to appear after First Name and Last Name?', 'give' ),
 							'id'      => $prefix . 'company_field',
 							'type'    => 'radio_inline',
 							'default' => 'global',
 							'options' => array(
-								'global' => __( 'Global Option', 'give' ),
+								'global'   => __( 'Global Option', 'give' ),
 								'required' => __( 'Required', 'give' ),
 								'optional' => __( 'Optional', 'give' ),
 								'disabled' => __( 'Disabled', 'give' ),
 
+							),
+						),
+						array(
+							'name'    => __( 'Anonymous Donations', 'give' ),
+							'desc'    => __( 'Do you want to provide donors the ability mark himself/herself anonymous while giving. This will prevent their information from appearing publicly on your website but you will still receive their information for your records in the admin panel.', 'give' ),
+							'id'      => "{$prefix}anonymous_donation",
+							'type'    => 'radio_inline',
+							'default' => 'global',
+							'options' => array(
+								'global'   => __( 'Global Option', 'give' ),
+								'enabled'  => __( 'Enabled', 'give' ),
+								'disabled' => __( 'Disabled', 'give' ),
+							),
+						),
+						array(
+							'name'    => __( 'Donor Comment', 'give' ),
+							'desc'    => __( 'Would you like donors to give option to add his/her thought while donaitng.', 'give' ),
+							'id'      => "{$prefix}donor_comment",
+							'type'    => 'radio_inline',
+							'default' => 'global',
+							'options' => array(
+								'global'   => __( 'Global Option', 'give' ),
+								'enabled'  => __( 'Enabled', 'give' ),
+								'disabled' => __( 'Disabled', 'give' ),
 							),
 						),
 						array(
@@ -529,10 +576,10 @@ class Give_MetaBox_Form_Data {
 						'id'            => $prefix . 'agree_label',
 						'name'          => __( 'Agreement Label', 'give' ),
 						'desc'          => __( 'The label shown next to the agree to terms check box. Add your own to customize or leave blank to use the default text placeholder.', 'give' ),
-						'type'          => 'text',
-						'size'          => 'regular',
+						'type'          => 'textarea',
 						'attributes'    => array(
 							'placeholder' => __( 'Agree to Terms?', 'give' ),
+							'rows'        => 1
 						),
 						'wrapper_class' => 'give-hidden',
 					),
@@ -701,7 +748,8 @@ class Give_MetaBox_Form_Data {
 						$is_active = $active_tab === $form_data_tab['id'] ? true : false;
 						?>
 						<li class="<?php echo "{$form_data_tab['id']}_tab" . ( $is_active ? ' active' : '' ) . ( $this->has_sub_tab( $form_data_tab ) ? ' has-sub-fields' : '' ); ?>">
-							<a href="#<?php echo $form_data_tab['id']; ?>" data-tab-id="<?php echo $form_data_tab['id']; ?>">
+							<a href="#<?php echo $form_data_tab['id']; ?>"
+							   data-tab-id="<?php echo $form_data_tab['id']; ?>">
 								<?php if ( ! empty( $form_data_tab['icon-html'] ) ) : ?>
 									<?php echo $form_data_tab['icon-html']; ?>
 								<?php else : ?>
@@ -713,7 +761,8 @@ class Give_MetaBox_Form_Data {
 								<ul class="give-metabox-sub-tabs give-hidden">
 									<?php foreach ( $form_data_tab['sub-fields'] as $sub_tab ) : ?>
 										<li class="<?php echo "{$sub_tab['id']}_tab"; ?>">
-											<a href="#<?php echo $sub_tab['id']; ?>" data-tab-id="<?php echo $sub_tab['id']; ?>">
+											<a href="#<?php echo $sub_tab['id']; ?>"
+											   data-tab-id="<?php echo $sub_tab['id']; ?>">
 												<?php if ( ! empty( $sub_tab['icon-html'] ) ) : ?>
 													<?php echo $sub_tab['icon-html']; ?>
 												<?php else : ?>
@@ -735,7 +784,8 @@ class Give_MetaBox_Form_Data {
 					// Determine if current panel is active.
 					$is_active = $active_tab === $setting['id'] ? true : false;
 					?>
-					<div id="<?php echo $setting['id']; ?>" class="panel give_options_panel<?php echo( $is_active ? ' active' : '' ); ?>">
+					<div id="<?php echo $setting['id']; ?>"
+						 class="panel give_options_panel<?php echo( $is_active ? ' active' : '' ); ?>">
 						<?php if ( ! empty( $setting['fields'] ) ) : ?>
 							<?php foreach ( $setting['fields'] as $field ) : ?>
 								<?php give_render_field( $field ); ?>
@@ -872,8 +922,8 @@ class Give_MetaBox_Form_Data {
 
 				// Set default value for checkbox fields.
 				if (
-					! isset( $_POST[ $form_meta_key ] )
-					&& ( 'checkbox' === $this->get_field_type( $form_meta_key ) )
+					! isset( $_POST[ $form_meta_key ] ) &&
+					in_array( $this->get_field_type( $form_meta_key ), array( 'checkbox', 'chosen' ) )
 				) {
 					$_POST[ $form_meta_key ] = '';
 				}
@@ -1240,7 +1290,11 @@ class Give_MetaBox_Form_Data {
 				if ( ! empty( $setting_field['data_type'] ) && 'price' === $setting_field['data_type'] ) {
 					$meta_value = $meta_value ?
 						give_sanitize_amount_for_db( $meta_value ) :
-						( in_array( $setting_field['id'], array( '_give_set_price', '_give_custom_amount_minimum', '_give_set_goal' ) ) ?
+						( in_array( $setting_field['id'], array(
+							'_give_set_price',
+							'_give_custom_amount_minimum',
+							'_give_set_goal'
+						) ) ?
 							give_sanitize_amount_for_db( '1.00' ) :
 							0 );
 				}

@@ -2338,7 +2338,7 @@ function ct_enqueue_scripts_public($hook){
 	
 	if(!empty($ct_options['registrations_test']) || !empty($ct_options['comments_test']) || !empty($ct_options['contact_forms_test']) || !empty($ct_options['general_contact_forms_test']) || !empty($ct_options['wc_checkout_test']) || !empty($ct_options['check_external']) || !empty($ct_options['check_internal']) || !empty($ct_options['bp_private_messages']) || !empty($ct_options['general_postdata_test'])){
 		
-		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array(''), APBCT_VERSION, 'in_footer');
+		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array(), APBCT_VERSION, 'in_footer');
 		
 		if(shortcode_exists( 'cleantalk_gdpr_form')){
 			

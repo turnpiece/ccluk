@@ -16,6 +16,7 @@ function give_export_donations_get_custom_fields() {
 	global $wpdb;
 	$post_type = 'give_payment';
 	$responses = array();
+	$donationmeta_table_key = Give()->payment_meta->get_meta_type() . '_id';
 
 	$form_id = isset( $_POST['form_id'] ) ? intval( $_POST['form_id'] ) : '';
 
@@ -32,16 +33,16 @@ function give_export_donations_get_custom_fields() {
 
 	$query_and = sprintf(
 		"AND $wpdb->posts.ID IN (%s) 
-		AND $wpdb->paymentmeta.meta_key != '' 
-		AND $wpdb->paymentmeta.meta_key NOT RegExp '(^[_0-9].+$)'",
+		AND $wpdb->donationmeta.meta_key != '' 
+		AND $wpdb->donationmeta.meta_key NOT RegExp '(^[_0-9].+$)'",
 		$donation_list
 	);
 
 	$query = "
-        SELECT DISTINCT($wpdb->paymentmeta.meta_key) 
+        SELECT DISTINCT($wpdb->donationmeta.meta_key) 
         FROM $wpdb->posts 
-        LEFT JOIN $wpdb->paymentmeta 
-        ON $wpdb->posts.ID = $wpdb->paymentmeta.payment_id
+        LEFT JOIN $wpdb->donationmeta 
+        ON $wpdb->posts.ID = {$wpdb->donationmeta}.{$donationmeta_table_key}
         WHERE $wpdb->posts.post_type = '%s'
     " . $query_and;
 
@@ -53,16 +54,16 @@ function give_export_donations_get_custom_fields() {
 
 	$query_and = sprintf(
 		"AND $wpdb->posts.ID IN (%s) 
-		AND $wpdb->paymentmeta.meta_key != '' 
-		AND $wpdb->paymentmeta.meta_key NOT RegExp '^[^_]'",
+		AND $wpdb->donationmeta.meta_key != '' 
+		AND $wpdb->donationmeta.meta_key NOT RegExp '^[^_]'",
 		$donation_list
 	);
 
 	$query = "
-        SELECT DISTINCT($wpdb->paymentmeta.meta_key) 
+        SELECT DISTINCT($wpdb->donationmeta.meta_key) 
         FROM $wpdb->posts 
-        LEFT JOIN $wpdb->paymentmeta 
-        ON $wpdb->posts.ID = $wpdb->paymentmeta.payment_id 
+        LEFT JOIN $wpdb->donationmeta 
+        ON $wpdb->posts.ID = {$wpdb->donationmeta}.{$donationmeta_table_key} 
         WHERE $wpdb->posts.post_type = '%s'
     " . $query_and;
 
@@ -81,6 +82,7 @@ function give_export_donations_get_custom_fields() {
 	$ignore_hidden_keys = apply_filters( 'give_export_donations_ignore_hidden_keys', array(
 		'_give_payment_meta',
 		'_give_payment_gateway',
+		'_give_payment_mode',
 		'_give_payment_form_title',
 		'_give_payment_form_id',
 		'_give_payment_price_id',
@@ -106,6 +108,7 @@ function give_export_donations_get_custom_fields() {
 		'_give_payment_currency',
 		'_give_payment_import_id',
 		'_give_payment_donor_ip',
+		'_give_payment_donor_title_prefix',
 	),
 		$form_id
 	);
@@ -321,6 +324,14 @@ function give_export_donation_standard_fields() {
 								</label>
 							</li>
 
+							<li>
+								<label for="give-export-payment-mode">
+									<input type="checkbox" checked
+									       name="give_give_donations_export_option[payment_mode]"
+									       id="give-export-payment-mode"><?php _e( 'Payment Mode', 'give' ); ?>
+								</label>
+							</li>
+
 							<?php
 							/*
 							 * Action to add extra columns in standard payment fields
@@ -392,6 +403,14 @@ function give_export_donation_standard_fields() {
 								<span>
 									<?php _e( 'Donor Fields', 'give' ); ?>
 								</span>
+							</li>
+
+							<li class="give-export-option-start">
+								<label for="give-export-title-prefix">
+									<input type="checkbox" checked
+											name="give_give_donations_export_option[title_prefix]"
+											id="give-export-title-prefix"><?php esc_html_e( 'Donor\'s Title Prefix', 'give' ); ?>
+								</label>
 							</li>
 
 							<li class="give-export-option-start">

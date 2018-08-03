@@ -170,11 +170,11 @@ function give_get_ip() {
 	$ip = apply_filters( 'give_get_ip', $ip );
 
 	// Filter empty values.
-	if( false !== strpos( $ip, ',' ) ) {
+	if ( false !== strpos( $ip, ',' ) ) {
 		$ip = give_clean( explode( ',', $ip ) );
 		$ip = array_filter( $ip );
 		$ip = implode( ',', $ip );
-	} else{
+	} else {
 		$ip = give_clean( $ip );
 	}
 
@@ -249,7 +249,6 @@ function give_payment_gateway_item_title( $payment_data ) {
 	$item_name = isset( $payment_data['post_data']['give-form-title'] ) ? $payment_data['post_data']['give-form-title'] : '';
 	$price_id  = isset( $payment_data['post_data']['give-price-id'] ) ? $payment_data['post_data']['give-price-id'] : '';
 
-
 	// Verify has variable prices.
 	if ( give_has_variable_prices( $form_id ) && ! empty( $price_id ) ) {
 
@@ -261,10 +260,7 @@ function give_payment_gateway_item_title( $payment_data ) {
 		 * 1. It's not a custom amount
 		 * 2. The level field has actual text and isn't the amount (which is already displayed on the receipt).
 		 */
-		if (
-			'custom' !== $price_id
-			&& ! empty( $item_price_level_text )
-		) {
+		if ( 'custom' !== $price_id && ! empty( $item_price_level_text ) ) {
 			// Matches a donation level - append level text.
 			$item_name .= ' - ' . $item_price_level_text;
 		}
@@ -515,17 +511,11 @@ function _give_deprecated_function( $function, $version, $replacement = null, $b
  * @return string $post_id
  */
 function give_get_admin_post_id() {
-	$post_id = isset( $_REQUEST['post'] )
-		? absint( $_REQUEST['post'] )
-		: null;
+	$post_id = isset( $_REQUEST['post'] ) ? absint( $_REQUEST['post'] ) : null;
 
-	$post_id = ! empty( $post_id )
-		? $post_id
-		: ( isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : null );
+	$post_id = ! empty( $post_id ) ? $post_id : ( isset( $_REQUEST['post_id'] ) ? absint( $_REQUEST['post_id'] ) : null );
 
-	$post_id = ! empty( $post_id )
-		? $post_id
-		: ( isset( $_REQUEST['post_ID'] ) ? absint( $_REQUEST['post_ID'] ) : null );
+	$post_id = ! empty( $post_id ) ? $post_id : ( isset( $_REQUEST['post_ID'] ) ? absint( $_REQUEST['post_ID'] ) : null );
 
 	return $post_id;
 }
@@ -574,7 +564,6 @@ function give_is_func_disabled( $function ) {
 	return in_array( $function, $disabled );
 }
 
-
 /**
  * Give Newsletter
  *
@@ -588,36 +577,36 @@ function give_get_newsletter() {
 	<div class="give-newsletter-form-wrap">
 
 		<form action="//givewp.us3.list-manage.com/subscribe/post?u=3ccb75d68bda4381e2f45794c&amp;id=12a081aa13"
-		      method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
-		      target="_blank" novalidate>
+			  method="post" id="mc-embedded-subscribe-form" name="mc-embedded-subscribe-form" class="validate"
+			  target="_blank">
 			<div class="give-newsletter-confirmation">
-				<p><?php esc_html_e( 'Thanks for Subscribing!', 'give' ); ?> :)</p>
+				<p><?php esc_html_e( 'To complete your subscription, click the confirmation link in your email. Thank you!', 'give' ); ?></p>
 			</div>
 
 			<table class="form-table give-newsletter-form">
 				<tr valign="middle">
 					<td>
 						<label for="mce-EMAIL"
-						       class="screen-reader-text"><?php esc_html_e( 'Email Address (required)', 'give' ); ?></label>
+							   class="screen-reader-text"><?php esc_html_e( 'Email Address (required)', 'give' ); ?></label>
 						<input type="email" name="EMAIL" id="mce-EMAIL"
-						       placeholder="<?php esc_attr_e( 'Email Address (required)', 'give' ); ?>"
-						       class="required email" value="">
+							   placeholder="<?php esc_attr_e( 'Email Address (required)', 'give' ); ?>"
+							   class="required email" value="" required>
 					</td>
 					<td>
 						<label for="mce-FNAME"
-						       class="screen-reader-text"><?php esc_html_e( 'First Name', 'give' ); ?></label>
+							   class="screen-reader-text"><?php esc_html_e( 'First Name', 'give' ); ?></label>
 						<input type="text" name="FNAME" id="mce-FNAME"
-						       placeholder="<?php esc_attr_e( 'First Name', 'give' ); ?>" class="" value="">
+							   placeholder="<?php esc_attr_e( 'First Name', 'give' ); ?>" class="" value="" required>
 					</td>
 					<td>
 						<label for="mce-LNAME"
-						       class="screen-reader-text"><?php esc_html_e( 'Last Name', 'give' ); ?></label>
+							   class="screen-reader-text"><?php esc_html_e( 'Last Name', 'give' ); ?></label>
 						<input type="text" name="LNAME" id="mce-LNAME"
-						       placeholder="<?php esc_attr_e( 'Last Name', 'give' ); ?>" class="" value="">
+							   placeholder="<?php esc_attr_e( 'Last Name', 'give' ); ?>" class="" value="">
 					</td>
 					<td>
 						<input type="submit" name="subscribe" id="mc-embedded-subscribe" class="button"
-						       value="<?php esc_attr_e( 'Subscribe', 'give' ); ?>">
+							   value="<?php esc_attr_e( 'Subscribe', 'give' ); ?>">
 					</td>
 				</tr>
 			</table>
@@ -630,29 +619,33 @@ function give_get_newsletter() {
 	</div>
 
 	<script type='text/javascript' src='//s3.amazonaws.com/downloads.mailchimp.com/js/mc-validate.js'></script>
-	<script type='text/javascript'>(function( $ ) {
-			window.fnames = new Array();
-			window.ftypes = new Array();
-			fnames[ 0 ] = 'EMAIL';
-			ftypes[ 0 ] = 'email';
-			fnames[ 1 ] = 'FNAME';
-			ftypes[ 1 ] = 'text';
-			fnames[ 2 ] = 'LNAME';
-			ftypes[ 2 ] = 'text';
+	<script type='text/javascript'>(
+			function ( $ ) {
+				window.fnames = new Array();
+				window.ftypes = new Array();
+				fnames[0] = 'EMAIL';
+				ftypes[0] = 'email';
+				fnames[1] = 'FNAME';
+				ftypes[1] = 'text';
+				fnames[2] = 'LNAME';
+				ftypes[2] = 'text';
 
-			//Successful submission
-			$( 'form[name="mc-embedded-subscribe-form"]' ).on( 'submit', function() {
+				$( 'form[name="mc-embedded-subscribe-form"]' ).removeAttr( 'novalidate' );
 
-				var email_field = $( this ).find( '#mce-EMAIL' ).val();
-				if ( ! email_field ) {
-					return false;
-				}
-				$( this ).find( '.give-newsletter-confirmation' ).show().delay( 5000 ).slideUp();
-				$( this ).find( '.give-newsletter-form' ).hide();
+				//Successful submission
+				$( 'form[name="mc-embedded-subscribe-form"]' ).on( 'submit', function () {
 
-			} );
+					var email_field = $( this ).find( '#mce-EMAIL' ).val();
+					if ( ! email_field ) {
+						return false;
+					}
+					$( this ).find( '.give-newsletter-confirmation' ).show().delay( 5000 ).slideUp();
+					$( this ).find( '.give-newsletter-form' ).hide();
 
-		}( jQuery ));
+				} );
+
+			}( jQuery )
+		);
 		var $mcj = jQuery.noConflict( true );
 
 
@@ -719,17 +712,10 @@ function give_donation_metabox_menu() {
 	$screen = get_current_screen();
 
 	// Proceed, if current screen is navigation menus.
-	if (
-		'nav-menus' === $screen->id &&
-		give_is_setting_enabled( give_get_option( 'forms_singular' ) ) &&
-		! get_user_option( 'give_is_donation_forms_menu_updated' )
-	) {
+	if ( 'nav-menus' === $screen->id && give_is_setting_enabled( give_get_option( 'forms_singular' ) ) && ! get_user_option( 'give_is_donation_forms_menu_updated' ) ) {
 
 		// Return false, if it fails to retrieve hidden meta box list and is not admin.
-		if (
-			! is_admin() ||
-			( ! $hidden_meta_boxes = get_user_option( 'metaboxhidden_nav-menus' ) )
-		) {
+		if ( ! is_admin() || ( ! $hidden_meta_boxes = get_user_option( 'metaboxhidden_nav-menus' ) ) ) {
 			return false;
 		}
 
@@ -800,23 +786,13 @@ if ( ! function_exists( 'array_column' ) ) {
 			return null;
 		}
 
-		if ( ! is_int( $params[1] )
-		     && ! is_float( $params[1] )
-		     && ! is_string( $params[1] )
-		     && $params[1] !== null
-		     && ! ( is_object( $params[1] ) && method_exists( $params[1], '__toString' ) )
-		) {
+		if ( ! is_int( $params[1] ) && ! is_float( $params[1] ) && ! is_string( $params[1] ) && $params[1] !== null && ! ( is_object( $params[1] ) && method_exists( $params[1], '__toString' ) ) ) {
 			trigger_error( esc_html__( 'array_column(): The column key should be either a string or an integer.', 'give' ), E_USER_WARNING );
 
 			return false;
 		}
 
-		if ( isset( $params[2] )
-		     && ! is_int( $params[2] )
-		     && ! is_float( $params[2] )
-		     && ! is_string( $params[2] )
-		     && ! ( is_object( $params[2] ) && method_exists( $params[2], '__toString' ) )
-		) {
+		if ( isset( $params[2] ) && ! is_int( $params[2] ) && ! is_float( $params[2] ) && ! is_string( $params[2] ) && ! ( is_object( $params[2] ) && method_exists( $params[2], '__toString' ) ) ) {
 			trigger_error( esc_html__( 'array_column(): The index key should be either a string or an integer.', 'give' ), E_USER_WARNING );
 
 			return false;
@@ -1013,10 +989,7 @@ function give_get_plugins() {
 function give_is_terms_enabled( $form_id ) {
 	$form_option = give_get_meta( $form_id, '_give_terms_option', true );
 
-	if (
-		give_is_setting_enabled( $form_option, 'global' )
-		&& give_is_setting_enabled( give_get_option( 'terms' ) )
-	) {
+	if ( give_is_setting_enabled( $form_option, 'global' ) && give_is_setting_enabled( give_get_option( 'terms' ) ) ) {
 		return true;
 
 	} elseif ( give_is_setting_enabled( $form_option ) ) {
@@ -1099,18 +1072,9 @@ function give_get_meta( $id, $meta_key = '', $single = false, $default = false )
 	 *
 	 * @since 1.8.8
 	 */
-	$meta_value = apply_filters(
-		'give_get_meta',
-		get_post_meta( $id, $meta_key, $single ),
-		$id,
-		$meta_key,
-		$default
-	);
+	$meta_value = apply_filters( 'give_get_meta', get_post_meta( $id, $meta_key, $single ), $id, $meta_key, $default );
 
-	if (
-		( empty( $meta_key ) || empty( $meta_value ) )
-		&& $default
-	) {
+	if ( ( empty( $meta_key ) || empty( $meta_value ) ) && $default ) {
 		$meta_value = $default;
 	}
 
@@ -1184,7 +1148,6 @@ function give_has_upgrade_completed( $upgrade_action = '' ) {
 		return true;
 	}
 
-
 	$completed_upgrades = give_get_completed_upgrades();
 
 	return in_array( $upgrade_action, $completed_upgrades );
@@ -1235,7 +1198,7 @@ function give_set_upgrade_complete( $upgrade_action = '' ) {
 	 */
 	do_action( 'give_set_upgrade_completed', $upgrade_action, $completed_upgrades );
 
-	return update_option( 'give_completed_upgrades', $completed_upgrades, 'no' );
+	return update_option( 'give_completed_upgrades', $completed_upgrades, false );
 }
 
 /**
@@ -1277,8 +1240,8 @@ function __give_v20_bc_table_details( $type ) {
 			break;
 
 		case 'payment':
-			$table['name']         = $wpdb->paymentmeta;
-			$table['column']['id'] = 'payment_id';
+			$table['name']         = $wpdb->donationmeta;
+			$table['column']['id'] = Give()->payment_meta->get_meta_type() . '_id';
 	}
 
 	// Backward compatibility.
@@ -1286,7 +1249,6 @@ function __give_v20_bc_table_details( $type ) {
 		$table['name']         = $wpdb->postmeta;
 		$table['column']['id'] = 'post_id';
 	}
-
 
 	return $table;
 }
@@ -1305,11 +1267,11 @@ function give_remove_pages_from_search( $query ) {
 		$transaction_failed = give_get_option( 'failure_page', 0 );
 		$success_page       = give_get_option( 'success_page', 0 );
 
-		$args               = apply_filters(
+		$args = apply_filters(
 			'give_remove_pages_from_search', array(
-			$transaction_failed,
-			$success_page,
-		), $query
+				$transaction_failed,
+				$success_page,
+			), $query
 		);
 		$query->set( 'post__not_in', $args );
 	}
@@ -1583,11 +1545,20 @@ function give_recount_form_income_donation( $form_id = 0 ) {
  * @since 1.8.17
  *
  * @param array $attributes
+ * @param array $default_attributes
  *
  * @return string
  */
-function give_get_attribute_str( $attributes ) {
+function give_get_attribute_str( $attributes, $default_attributes = array() ) {
 	$attribute_str = '';
+
+	if ( isset( $attributes['attributes'] ) ) {
+		$attributes = $attributes['attributes'];
+	}
+
+	if ( ! empty( $default_attributes ) ) {
+		$attributes = wp_parse_args( $attributes, $default_attributes );
+	}
 
 	if ( empty( $attributes ) ) {
 		return $attribute_str;
@@ -1660,14 +1631,12 @@ function give_donation_history_table_end() {
 			<div class="give-security-wrap">
 				<div class="give-security-column give-security-description-wrap">
 					<?php
-					echo sprintf(
-						__( 'For security reasons, please confirm your email address (%s) to view your complete donation history.', 'give' ),
-						$email
-					);
+					echo sprintf( __( 'For security reasons, please confirm your email address (%s) to view your complete donation history.', 'give' ), $email );
 					?>
 				</div>
 				<div class="give-security-column give-security-button-wrap">
-					<a href="#" data-email="<?php echo $email; ?>" id="give-confirm-email-btn" class="give-confirm-email-btn give-btn">
+					<a href="#" data-email="<?php echo $email; ?>" id="give-confirm-email-btn"
+					   class="give-confirm-email-btn give-btn">
 						<?php _e( 'Confirm Email', 'give' ); ?>
 					</a>
 					<span><?php _e( 'Email Sent!', 'give' ); ?></span>
@@ -1684,6 +1653,7 @@ function give_donation_history_table_end() {
  * Wrapper for _doing_it_wrong.
  *
  * @since  1.8.18
+ *
  * @param  string $function
  * @param  string $message
  * @param  string $version
@@ -1693,7 +1663,7 @@ function give_donation_history_table_end() {
 function give_doing_it_wrong( $function, $message, $version ) {
 	$message .= "\nBacktrace:" . wp_debug_backtrace_summary();
 
-	_doing_it_wrong( $function, $message , $version );
+	_doing_it_wrong( $function, $message, $version );
 }
 
 
@@ -1702,7 +1672,7 @@ function give_doing_it_wrong( $function, $message, $version ) {
  *
  * @since 1.8.18
  */
-function give_ignore_user_abort(){
+function give_ignore_user_abort() {
 	ignore_user_abort( true );
 
 	if ( ! give_is_func_disabled( 'set_time_limit' ) && ! ini_get( 'safe_mode' ) ) {
@@ -1720,26 +1690,26 @@ function give_ignore_user_abort(){
  *
  * @return int
  */
-function give_get_total_post_type_count( $post_type = '', $args = array() ){
+function give_get_total_post_type_count( $post_type = '', $args = array() ) {
 	global $wpdb;
 	$where = '';
 
-	if( ! $post_type ) {
+	if ( ! $post_type ) {
 		return 0;
 	}
 
 	// Bulit where query
-	if( ! empty( $post_type ) ) {
-		$where.=' WHERE';
+	if ( ! empty( $post_type ) ) {
+		$where .= ' WHERE';
 
-		if( is_array( $post_type ) ) {
+		if ( is_array( $post_type ) ) {
 			$where .= " post_type='" . implode( "' OR post_type='", $post_type ) . "'";
-		}else{
+		} else {
 			$where .= " post_type='{$post_type}'";
 		}
 	}
 
-	$result = $wpdb->get_var("SELECT count(ID) FROM {$wpdb->posts}{$where}");
+	$result = $wpdb->get_var( "SELECT count(ID) FROM {$wpdb->posts}{$where}" );
 
 	return absint( $result );
 }
@@ -1747,7 +1717,8 @@ function give_get_total_post_type_count( $post_type = '', $args = array() ){
 /**
  * Define a constant if it is not already defined.
  *
- * @since 2.0.5
+ * @since  2.0.5
+ *
  * @param string $name  Constant name.
  * @param string $value Value.
  *
@@ -1783,9 +1754,8 @@ function give_time_do_tags( $string, $timestamp = 0 ) {
 			'{H}',
 			'{HH}',
 			'{N}',
-			'{S}'
-		),
-		array(
+			'{S}',
+		), array(
 			date( 'j', $current_time ),
 			date( 'd', $current_time ),
 			date( 'n', $current_time ),
@@ -1794,9 +1764,8 @@ function give_time_do_tags( $string, $timestamp = 0 ) {
 			date( 'Y', $current_time ),
 			date( 'G', $current_time ),
 			date( 'H', $current_time ),
-			date( 's', $current_time )
-		),
-		$string
+			date( 's', $current_time ),
+		), $string
 	);
 
 	/**
@@ -1811,31 +1780,92 @@ function give_time_do_tags( $string, $timestamp = 0 ) {
 /**
  * Check if Company field enabled or not for form or globally.
  *
- * @since 2.1.0
+ * @since 2.1
  *
  * @param $form_id
  *
  * @return bool
  */
 function give_is_company_field_enabled( $form_id ) {
-	$form_setting_val           = give_get_meta( $form_id, '_give_company_field', true );
+	$form_setting_val   = give_get_meta( $form_id, '_give_company_field', true );
 	$global_setting_val = give_get_option( 'company_field' );
 
 	if ( ! empty( $form_setting_val ) ) {
-		if( give_is_setting_enabled( $form_setting_val, array( 'required', 'optional' ) ) ) {
+		if ( give_is_setting_enabled( $form_setting_val, array( 'required', 'optional' ) ) ) {
 			return true;
-		} elseif ( 'global' === $form_setting_val && give_is_setting_enabled( $global_setting_val, array( 'required', 'optional' ) ) ) {
+		} elseif ( 'global' === $form_setting_val && give_is_setting_enabled(
+			$global_setting_val, array(
+				'required',
+				'optional',
+			)
+		) ) {
 			return true;
-		} else{
+		} else {
 			return false;
 		}
-
 	} elseif ( give_is_setting_enabled( $global_setting_val, array( 'required', 'optional' ) ) ) {
 		return true;
 
 	} else {
 		return false;
 	}
+}
+
+/**
+ * Check if anonymous donation field enabled or not for form or globally.
+ *
+ * @since 2.1
+ *
+ * @param $form_id
+ *
+ * @return bool
+ */
+function give_is_anonymous_donation_field_enabled( $form_id ) {
+	$form_setting_val   = give_get_meta( $form_id, '_give_anonymous_donation', true, 'global' );
+	$global_setting_val = give_get_option( 'anonymous_donation', 'disabled' );
+
+	if ( ! empty( $form_setting_val ) ) {
+		if ( give_is_setting_enabled( $form_setting_val ) ) {
+			return true;
+		} elseif ( 'global' === $form_setting_val && give_is_setting_enabled( $global_setting_val ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	} elseif ( give_is_setting_enabled( $global_setting_val ) ) {
+		return true;
+	}
+
+	return false;
+}
+
+/**
+ * Check if donor comment field enabled or not for form or globally.
+ *
+ * @since 2.1
+ *
+ * @param $form_id
+ *
+ * @return bool
+ */
+function give_is_donor_comment_field_enabled( $form_id ) {
+	$form_setting_val   = give_get_meta( $form_id, '_give_donor_comment', true, 'global' );
+	$global_setting_val = give_get_option( 'donor_comment', 'disabled' );
+
+	if ( ! empty( $form_setting_val ) ) {
+		if ( give_is_setting_enabled( $form_setting_val ) ) {
+			return true;
+		} elseif ( 'global' === $form_setting_val && give_is_setting_enabled( $global_setting_val ) ) {
+			return true;
+		} else {
+			return false;
+		}
+	} elseif ( give_is_setting_enabled( $global_setting_val ) ) {
+		return true;
+	}
+
+	return false;
+
 }
 
 /**
@@ -1854,7 +1884,7 @@ function __give_get_active_license_info( $license_id ) {
 	$data        = array();
 
 	if ( ! isset( $GLOBALS['give_active_licenses_info'] ) ) {
-		$GLOBALS['give_active_licenses_info']  = array();
+		$GLOBALS['give_active_licenses_info'] = array();
 
 		$licenses_info = $wpdb->get_results(
 			"
@@ -1906,7 +1936,7 @@ function __give_get_active_by_user_meta( $banner_addon_name ) {
 
 		// Get the meta of activation banner by user.
 		$activation_banners = $wpdb->get_results(
-				"
+			"
 					SELECT option_name, option_value
 					FROM {$wpdb->options}
 					WHERE option_name LIKE '%_active_by_user%'
@@ -1937,7 +1967,7 @@ function __give_get_active_by_user_meta( $banner_addon_name ) {
  *
  * @return int
  */
-function give_get_nonce_life(){
+function give_get_nonce_life() {
 	/**
 	 * Filters the lifespan of nonces in seconds.
 	 *
@@ -1953,7 +1983,7 @@ function give_get_nonce_life(){
  *
  * @param  string $action
  * @param  string $name
- * @param bool    $referer
+ * @param bool   $referer
  *
  * @return string
  */
@@ -1992,7 +2022,7 @@ function give_goal_progress_stats( $form ) {
 	$total_goal = apply_filters( 'give_goal_amount_target_output', round( give_maybe_sanitize_amount( $form->goal ) ), $form->ID, $form );
 
 	switch ( $goal_format ) {
-		case  'donation':
+		case 'donation':
 			/**
 			 * Filter the form donations.
 			 *
@@ -2014,7 +2044,7 @@ function give_goal_progress_stats( $form ) {
 			 */
 			$actual = $donors = apply_filters( 'give_goal_donors_target_output', give_get_form_donor_count( $form->ID ), $form->ID, $form );
 			break;
-		default :
+		default:
 			/**
 			 * Filter the form income.
 			 *
@@ -2024,11 +2054,11 @@ function give_goal_progress_stats( $form ) {
 			break;
 	}
 
-	$progress = round( ( $actual / $total_goal ) * 100, 2 );
+	$progress = $total_goal ? round( ( $actual / $total_goal ) * 100, 2 ) : 0;
 
 	$stats_array = array(
 		'raw_actual' => $actual,
-		'raw_goal'   => $total_goal
+		'raw_goal'   => $total_goal,
 	);
 
 	/**
@@ -2041,23 +2071,23 @@ function give_goal_progress_stats( $form ) {
 	// Define Actual Goal based on the goal format.
 	if ( 'percentage' === $goal_format ) {
 		$actual = "{$actual}%";
-	} else if ( 'amount' === $goal_format ) {
+	} elseif ( 'amount' === $goal_format ) {
 		$actual = give_currency_filter( give_format_amount( $actual ) );
 	}
 
 	// Define Total Goal based on the goal format.
 	if ( 'percentage' === $goal_format ) {
 		$total_goal = '';
-	} else if ( 'amount' === $goal_format ) {
+	} elseif ( 'amount' === $goal_format ) {
 		$total_goal = give_currency_filter( give_format_amount( $total_goal ) );
 	}
 
 	$stats_array = array_merge(
 		array(
-			'progress'       => $progress,
-			'actual'         => $actual,
-			'goal'           => $total_goal,
-			'format'         => $goal_format,
+			'progress' => $progress,
+			'actual'   => $actual,
+			'goal'     => $total_goal,
+			'format'   => $goal_format,
 		),
 		$stats_array
 	);
@@ -2068,7 +2098,6 @@ function give_goal_progress_stats( $form ) {
 	 * @since 2.1
 	 */
 	return apply_filters( 'give_goal_progress_stats', $stats_array );
-
 }
 
 /**
@@ -2111,5 +2140,151 @@ function give_get_user_agent() {
 	$user_agent = ! empty( $_SERVER['HTTP_USER_AGENT'] ) ? give_clean( $_SERVER['HTTP_USER_AGENT'] ) : ''; // WPCS: input var ok.
 
 	return $user_agent;
+}
 
+/**
+ * Set a cookie - wrapper for setcookie using WP constants.
+ *
+ * @since 2.2.0
+ *
+ * @param  string  $name   Name of the cookie being set.
+ * @param  string  $value  Value of the cookie.
+ * @param  integer $expire Expiry of the cookie.
+ * @param  bool    $secure Whether the cookie should be served only over https.
+ */
+function give_setcookie( $name, $value, $expire = 0, $secure = false ) {
+	if ( ! headers_sent() ) {
+		setcookie(
+			$name, $value, $expire, COOKIEPATH ? COOKIEPATH : '/', COOKIE_DOMAIN, $secure,
+			apply_filters( 'give_cookie_httponly', false, $name, $value, $expire, $secure )
+		);
+	}
+}
+
+/**
+ * Get formatted billing address.
+ *
+ * @since 2.2.0
+ *
+ * @param array $address
+ *
+ * @return string Formatted address.
+ */
+function give_get_formatted_address( $address = array() ) {
+	$formatted_address = '';
+
+	/**
+	 * Address format.
+	 *
+	 * @since 2.2.0
+	 */
+	$address_format = apply_filters( 'give_address_format_template', "{street_address}\n{city}, {state} {postal_code}\n{country}" );
+	preg_match_all( '/{([A-z0-9\-\_\ ]+)}/s', $address_format, $matches );
+
+	if ( ! empty( $matches ) && ! empty( $address ) ) {
+		$address_values = array();
+
+		foreach ( $matches[1] as $address_tag ) {
+			$address_values[ $address_tag ] = '';
+
+			if ( isset( $address[ $address_tag ] ) ) {
+				$address_values[ $address_tag ] = $address[ $address_tag ];
+			}
+		}
+
+		$formatted_address = str_ireplace( $matches[0], $address_values, $address_format );
+	}
+
+	/**
+	 * Give get formatted address.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param string $formatted_address Formatted address.
+	 * @param string $address_format    Format of the address.
+	 */
+	$formatted_address = apply_filters( 'give_get_formatted_address', $formatted_address, $address_format, $address );
+
+	return $formatted_address;
+}
+
+/**
+ * Converts a PHP date format for use in JavaScript.
+ *
+ * @since 2.2.0
+ *
+ * @param string $php_format The PHP date format.
+ *
+ * @return string The JS date format.
+ */
+function give_convert_php_date_format_to_js( $php_format ) {
+	$js_format = $php_format;
+
+	switch ( $php_format ) {
+		case 'F j, Y':
+			$js_format = 'MM dd, yy';
+			break;
+		case 'Y-m-d':
+			$js_format = 'yy-mm-dd';
+			break;
+		case 'm/d/Y':
+			$js_format = 'mm/dd/yy';
+			break;
+		case 'd/m/Y':
+			$js_format = 'dd/mm/yy';
+			break;
+	}
+
+	/**
+	 * Filters the date format for use in JavaScript.
+	 *
+	 * @since 2.2.0
+	 *
+	 * @param string $js_format  The JS date format.
+	 * @param string $php_format The PHP date format.
+	 */
+	$js_format = apply_filters( 'give_js_date_format', $js_format, $php_format );
+
+	return $js_format;
+}
+
+/**
+ * Get localized date format for use in JavaScript.
+ *
+ * @since 2.2.0
+ *
+ * @return string.
+ */
+function give_get_localized_date_format_to_js() {
+
+	return give_convert_php_date_format_to_js( get_option( 'date_format' ) );
+}
+
+/**
+ * Get safe url for assets
+ * Note: this function will return url without http protocol
+ *
+ * @since 2.2.0
+ *
+ * @param string $url URL
+ *
+ * @return string
+ */
+function give_get_safe_asset_url( $url ) {
+
+	// Bailout, if empty URL passed.
+	if ( empty( $url ) ) {
+		return $url;
+	}
+
+	$schema        = parse_url( $url, PHP_URL_SCHEME );
+	$schema_length = strlen( $schema ) + 1;
+	$url           = substr( $url, $schema_length );
+
+	/**
+	 * Fire the filter
+	 *
+	 * @since 2.2.0
+	 */
+	return apply_filters( 'give_get_safe_asset_url', $url );
 }

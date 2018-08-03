@@ -149,7 +149,7 @@ class Give_Cache {
 		if ( $enabled && ! in_array( 'give', $settings, true ) ) {
 			?>
 			<div class="error">
-				<p><?php echo wp_kses_post( sprintf( __( 'In order for <strong>database caching</strong> to work with Give you must add %1$s to the "Ignored Query Strings" option in <a href="%2$s">W3 Total Cache settings</a>.', 'give' ), '<code>give</code>', esc_url( admin_url( 'admin.php?page=w3tc_dbcache' ) ) ) ); ?></p>
+				<p><?php echo wp_kses_post( sprintf( __( 'In order for <strong>database caching</strong> to work with Give you must add %1$s to the "Ignored query stems" option in <a href="%2$s">W3 Total Cache settings</a>.', 'give' ), '<code>give</code>', esc_url( admin_url( 'admin.php?page=w3tc_dbcache#dbcache_reject_sql' ) ) ) ); ?></p>
 			</div>
 			<?php
 		}
@@ -258,7 +258,7 @@ class Give_Cache {
 				: null,
 		);
 
-		$result = update_option( $cache_key, $option_value, 'no' );
+		$result = update_option( $cache_key, $option_value, false );
 
 		return $result;
 	}
@@ -720,14 +720,16 @@ class Give_Cache {
 	 *
 	 * @since  2.0
 	 * @access public
+	 *
+	 * @param bool $force Delte cache forcefully.
+	 *
+	 * @return bool
 	 */
-	public static function flush_cache() {
+	public static function flush_cache( $force = false ) {
 		if (
-			( Give_Admin_Settings::is_saving_settings()
-		       && isset( $_POST['cache'] )
-		       && give_is_setting_enabled( give_clean( $_POST['cache'] ) )
-		     )
-			|| ( wp_doing_ajax() && 'give_cache_flush' === give_clean( $_GET['action'] ) )
+			$force
+			|| ( Give_Admin_Settings::is_saving_settings() && isset( $_POST['cache'] ) && give_is_setting_enabled( give_clean( $_POST['cache'] ) ) )
+			|| ( wp_doing_ajax() &&  isset( $_GET['action'] ) && 'give_cache_flush' === give_clean( $_GET['action'] ) )
 		) {
 			self::$instance->get_incrementer( true );
 			self::$instance->get_incrementer( true, 'give-cache-incrementer' );

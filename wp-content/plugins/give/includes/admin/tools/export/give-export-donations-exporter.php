@@ -176,6 +176,9 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 				case 'seq_id':
 					$cols['seq_id'] = __( 'Donation Number', 'give' );
 					break;
+				case 'title_prefix':
+					$cols['title_prefix'] = __( 'Title Prefix', 'give' );
+					break;
 				case 'first_name':
 					$cols['first_name'] = __( 'First Name', 'give' );
 					break;
@@ -210,6 +213,8 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 					break;
 				case 'payment_gateway':
 					$cols['payment_gateway'] = __( 'Payment Gateway', 'give' );
+				case 'payment_mode':
+					$cols['payment_mode'] = __( 'Payment Mode', 'give' );
 					break;
 				case 'form_id':
 					$cols['form_id'] = __( 'Form ID', 'give' );
@@ -320,13 +325,17 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 				$payment_meta = $payment->payment_meta;
 				$address      = $payment->address;
 
-				// Set columns
+				// Set columns.
 				if ( ! empty( $columns['donation_id'] ) ) {
 					$data[ $i ]['donation_id'] = $payment->ID;
 				}
 
 				if ( ! empty( $columns['seq_id'] ) ) {
 					$data[ $i ]['seq_id'] = Give()->seq_donation_number->get_serial_code( $payment->ID );
+				}
+
+				if ( ! empty( $columns['title_prefix'] ) ) {
+					$data[ $i ]['title_prefix'] = ! empty( $payment->title_prefix ) ? $payment->title_prefix : '';
 				}
 
 				if ( ! empty( $columns['first_name'] ) ) {
@@ -373,6 +382,10 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 
 				if ( ! empty( $columns['payment_gateway'] ) ) {
 					$data[ $i ]['payment_gateway'] = $payment->gateway;
+				}
+
+				if ( ! empty( $columns['payment_mode'] ) ) {
+					$data[ $i ]['payment_mode'] = $payment->mode;
 				}
 
 				if ( ! empty( $columns['form_id'] ) ) {
@@ -443,6 +456,7 @@ class Give_Export_Donations_CSV extends Give_Batch_Export {
 					'address_country',
 					'donation_total',
 					'payment_gateway',
+					'payment_mode',
 					'form_id',
 					'form_title',
 					'form_level_id',

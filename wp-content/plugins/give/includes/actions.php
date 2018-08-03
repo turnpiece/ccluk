@@ -25,11 +25,13 @@ if ( ! defined( 'ABSPATH' ) ) {
  */
 function give_get_actions() {
 
-	$_get_action = ! empty( $_GET['give_action'] ) ? $_GET['give_action'] : null;
+	$get_data = give_clean( $_GET ); // WPCS: input var ok, sanitization ok, CSRF ok.
 
-	// Add backward compatibility to give-action param ( $_GET )
+	$_get_action = ! empty( $get_data['give_action'] ) ? $get_data['give_action'] : null;
+
+	// Add backward compatibility to give-action param ( $_GET ).
 	if ( empty( $_get_action ) ) {
-		$_get_action = ! empty( $_GET['give-action'] ) ? $_GET['give-action'] : null;
+		$_get_action = ! empty( $get_data['give-action'] ) ? $get_data['give-action'] : null;
 	}
 
 	if ( isset( $_get_action ) ) {
@@ -40,7 +42,7 @@ function give_get_actions() {
 		 *
 		 * @param array $_GET Array of HTTP GET variables.
 		 */
-		do_action( "give_{$_get_action}", $_GET );
+		do_action( "give_{$_get_action}", $get_data );
 	}
 
 }
@@ -58,11 +60,13 @@ add_action( 'init', 'give_get_actions' );
  */
 function give_post_actions() {
 
-	$_post_action = ! empty( $_POST['give_action'] ) ? $_POST['give_action'] : null;
+	$post_data = give_clean( $_POST ); // WPCS: input var ok, sanitization ok, CSRF ok.
+
+	$_post_action = ! empty( $post_data['give_action'] ) ? $post_data['give_action'] : null;
 
 	// Add backward compatibility to give-action param ( $_POST ).
 	if ( empty( $_post_action ) ) {
-		$_post_action = ! empty( $_POST['give-action'] ) ? $_POST['give-action'] : null;
+		$_post_action = ! empty( $post_data['give-action'] ) ? $post_data['give-action'] : null;
 	}
 
 	if ( isset( $_post_action ) ) {
@@ -73,7 +77,7 @@ function give_post_actions() {
 		 *
 		 * @param array $_POST Array of HTTP POST variables.
 		 */
-		do_action( "give_{$_post_action}", $_POST );
+		do_action( "give_{$_post_action}", $post_data );
 	}
 
 }
@@ -114,58 +118,6 @@ function give_connect_donor_to_wpuser( $user_id, $user_data ) {
 }
 
 add_action( 'give_insert_user', 'give_connect_donor_to_wpuser', 10, 2 );
-
-
-/**
- * Setup site home url check
- *
- * Note: if location of site changes then run cron to validate licenses
- *
- * @since   1.7
- * @updated 1.8.15 - Resolved issue with endless looping because of URL mismatches.
- * @return void
- */
-function give_validate_license_when_site_migrated() {
-	// Store current site address if not already stored.
-	$home_url_parts              = parse_url( home_url() );
-	$home_url                    = isset( $home_url_parts['host'] ) ? $home_url_parts['host'] : false;
-	$home_url                    .= isset( $home_url_parts['path'] ) ? $home_url_parts['path'] : '';
-	$site_address_before_migrate = get_option( 'give_site_address_before_migrate' );
-
-	// Need $home_url to proceed.
-	if ( ! $home_url ) {
-		return;
-	}
-
-	// Save site address.
-	if ( ! $site_address_before_migrate ) {
-		// Update site address.
-		update_option( 'give_site_address_before_migrate', $home_url );
-
-		return;
-	}
-
-	// Backwards compat. for before when we were storing URL scheme.
-	if ( strpos( $site_address_before_migrate, 'http' ) ) {
-		$site_address_before_migrate = parse_url( $site_address_before_migrate );
-		$site_address_before_migrate = isset( $site_address_before_migrate['host'] ) ? $site_address_before_migrate['host'] : false;
-
-		// Add path for multisite installs.
-		$site_address_before_migrate .= isset( $site_address_before_migrate['path'] ) ? $site_address_before_migrate['path'] : '';
-	}
-
-	// If the two URLs don't match run CRON.
-	if ( $home_url !== $site_address_before_migrate ) {
-		// Immediately run cron.
-		wp_schedule_single_event( time(), 'give_validate_license_when_site_migrated' );
-
-		// Update site address.
-		update_option( 'give_site_address_before_migrate', $home_url );
-	}
-
-}
-
-add_action( 'admin_init', 'give_validate_license_when_site_migrated' );
 
 
 /**

@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - MailChimp for WordPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-05-27 18:27:15+0000\n"
+"PO-Revision-Date: 2018-07-29 08:11:35+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -131,7 +131,7 @@ msgstr "¿Quieres suscribirte a nuestro boletín?"
 msgid "Use this integration by adding the \"MailChimp\" field to <a href=\"%s\">your WPForms forms</a>."
 msgstr "Utiliza esta integración añadiendo el campo \"MailChimp\" a <a href=\"%s\">tus formularios de WPForms</a>."
 
-#: includes/admin/class-admin.php:424
+#: includes/admin/class-admin.php:426
 msgid "Looks like your server is blocked by MailChimp's firewall. Please contact MailChimp support and include the following reference number: %s"
 msgstr "Parece que tu servidor está bloqueado por el cortafuegos de MailChimp. Por favor, contacta con el soporte de MailChimp e incluye el siguiente número de referencia: %s"
 
@@ -219,15 +219,15 @@ msgstr "¡Listo! La lista de MailChimp ha sido actualizada."
 msgid "Fetching MailChimp lists"
 msgstr "Obteniendo las listas de MailChimp"
 
-#: includes/admin/class-admin.php:432
+#: includes/admin/class-admin.php:434
 msgid "MailChimp returned the following error:"
 msgstr "MailChimp devolvió el siguiente error:"
 
-#: includes/admin/class-admin.php:427
+#: includes/admin/class-admin.php:429
 msgid "Here's some info on solving common connectivity issues."
 msgstr "Aquí tienes algo de información sobre cómo resolver problemas de conectividad."
 
-#: includes/admin/class-admin.php:421
+#: includes/admin/class-admin.php:423
 msgid "Error connecting to MailChimp:"
 msgstr "Error al conectar con MailChimp:"
 
@@ -313,7 +313,7 @@ msgstr "Preselección"
 msgid "Optional"
 msgstr "Opcional"
 
-#: includes/admin/class-admin.php:501
+#: includes/admin/class-admin.php:503
 msgid "To get started with MailChimp for WordPress, please <a href=\"%s\">enter your MailChimp API key on the settings page of the plugin</a>."
 msgstr "Para empezar con MailChimp para WordPress, por favor, <a href=\"%s\">introduce tu clave API de MailChimp en la página de ajustes del plugin</a>."
 
@@ -345,7 +345,7 @@ msgstr "Cuando ofreces elegir una lista este es el texto que se muestra cuando n
 msgid "No list selected"
 msgstr "Ninguna lista seleccionada"
 
-#: includes/forms/class-admin.php:439
+#: includes/forms/class-admin.php:444
 msgid "Select the form to show"
 msgstr "Elige el formulario a mostrar"
 
@@ -381,7 +381,7 @@ msgstr "Log de depuración"
 msgid "This field is marked as required in MailChimp."
 msgstr "Este campo está marcado como obligatorio en MailChimp."
 
-#: includes/admin/class-admin.php:471
+#: includes/admin/class-admin.php:473
 msgid "Log successfully emptied."
 msgstr "Registro vaciado con éxito."
 
@@ -840,11 +840,11 @@ msgstr "Datos de la URL o del formulario enviado."
 msgid "Form preview"
 msgstr "Vista previa del formulario"
 
-#: includes/forms/class-admin.php:376
+#: includes/forms/class-admin.php:381
 msgid "Go back"
 msgstr "Ir atrás"
 
-#: includes/forms/class-admin.php:374
+#: includes/forms/class-admin.php:379
 msgid "Form not found."
 msgstr "Formulario no encontrado"
 
@@ -1179,7 +1179,7 @@ msgstr "CONECTADO"
 
 #. Plugin Name of the plugin/theme
 msgid "MailChimp for WordPress"
-msgstr "MailChimp para WordPress"
+msgstr "MailChimp for WordPress"
 
 #: includes/admin/class-ads.php:132
 msgid "Email Address"
@@ -1277,7 +1277,7 @@ msgstr "Newsletter"
 msgid "Displays your MailChimp for WordPress sign-up form"
 msgstr "Muestra tu formulario de suscripción de MailChimp para WordPress"
 
-#: includes/forms/class-admin.php:435 includes/forms/class-widget.php:30
+#: includes/forms/class-admin.php:440 includes/forms/class-widget.php:30
 msgid "MailChimp Sign-Up Form"
 msgstr "Formulario de suscripción de MailChimp"
 

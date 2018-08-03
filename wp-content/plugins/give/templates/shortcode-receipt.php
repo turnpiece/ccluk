@@ -27,6 +27,9 @@ $status       = $payment->post_status;
 $status_label = give_get_payment_status( $payment, true );
 $company_name = give_get_payment_meta( $donation_id, '_give_donation_company', true );
 
+// Update donor name, if title prefix is set.
+$full_name    = give_get_donor_name_with_title_prefixes( $user['title'], "{$user['first_name']} {$user['last_name']}" );
+
 /**
  * Generate Donation Receipt Arguments.
  *
@@ -37,7 +40,7 @@ $company_name = give_get_payment_meta( $donation_id, '_give_donation_company', t
  */
 $give_receipt_args['donation_receipt']['donor'] = array(
 	'name'    => __( 'Donor', 'give' ),
-	'value'   => $user['first_name'] . ' ' . $user['last_name'],
+	'value'   => $full_name,
 	'display' => $give_receipt_args['donor'],
 );
 
