@@ -5,7 +5,7 @@
  * Add your own functions in this file.
  */
 
-define( 'CCLUK_DEBUGGING', false );
+define( 'CCLUK_DEBUGGING', true );
 
 /**
  * Add image size for posts
@@ -92,6 +92,16 @@ function ccluk_theme_setup()
         });
     }
 
+    if (onesocial_get_option( 'boss_layout_switcher' )) {
+        global $onesocial_options;
+
+        $onesocial_options[ 'boss_layout_switcher' ] = 0;
+
+        update_option( 'onesocial_options', $onesocial_options );
+    }
+
+    // disable public messaging
+    add_filter('bp_get_send_public_message_button', '__return_false');
 }
 add_action( 'after_setup_theme', 'ccluk_theme_setup' );
 
@@ -746,3 +756,18 @@ function ccluk_remove_friends_from_profile()
     bp_core_remove_nav_item('friends');
 }
 add_action('bp_friends_setup_nav','ccluk_remove_friends_from_profile');
+
+// add messages to nav
+add_action( 'bp_setup_nav', function() {
+    bp_core_new_nav_item( 
+        array( 
+            'name' => __('Messages', 'buddypress'), 
+            'slug' => $bp->messages->slug, 
+            'position' => 50, 
+            'show_for_displayed_user' => false, 
+            'screen_function' => 'messages_screen_inbox', 
+            'default_subnav_slug' => 'inbox', 
+            'item_css_id' => $bp->messages->id 
+        )
+    );
+});

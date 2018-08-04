@@ -20,11 +20,13 @@ body.page {
 		}
 	}
 
-	#secondary, 
-	.default-page+#secondary,
-	&.page-template #secondary {
-		@include margin-top( 9.4 );
-   	}
+	&.page-sidebar-active {
+		#secondary, 
+		.default-page+#secondary,
+		&.page-template #secondary {
+			@include margin-top( 5 );
+	   	}
+	}
 
    	&.page-template-page-nosidebar {
 		#main {

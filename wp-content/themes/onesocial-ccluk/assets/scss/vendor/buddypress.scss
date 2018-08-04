@@ -113,6 +113,12 @@ body.buddypress {
 		#activity-filter-select {
 			display: none !important;
 		}
+
+		#secondary {
+			margin-top: 0;
+		}
+
+
 	}
 
 	#main {
@@ -248,6 +254,77 @@ body.buddypress {
 							.buddyboss-select {
 								@include padding( 0, .4 );
 							}
+						}
+					}
+				}
+			}
+		}
+	}
+
+	#main {
+		#buddypress {
+			.btn-group.social {
+				a {
+					color: $blue;
+				}
+				.generic-button {
+
+					display: block;
+					text-align: left;
+
+					a{
+						background-color: transparent !important;
+						border: none !important;
+						font-size: $font-size-sm;
+
+					    &:before {
+					    	content: "d";
+					    	font-family: "onesocial";
+					    	text-transform: none;
+					    	font-size: inherit;
+					    	padding-right: 15px;
+					    	border: none !important;
+					    	color: $blue;
+					    }
+
+					    &:hover {
+					    	color: $green;
+					    	box-shadow: none;
+
+					    	&:before {
+					    		color: $green;
+					    	}
+					    }
+					}
+
+					&.not_friends,
+					&.not-following {
+						a:after {
+							background-color: #333;
+		    				content: "q";
+		    				font-size: 6px;
+		    				padding-right: 15px;
+						}
+					}
+				}
+			}
+			.item-header-mobile {
+				position: relative;
+				min-height: 150px;
+
+				#item-header-avatar {
+					position: absolute;
+					left: 0;
+					top: 0;
+				}
+
+				#item-header-content {
+					margin-left: 200px;
+					text-align: left;
+
+					.btn-group-social {
+						.generic-button a {
+							padding-left: 0;
 						}
 					}
 				}
