@@ -1509,6 +1509,8 @@ body.buddypress {
   body.buddypress.activity #main .entry-header,
   body.buddypress.activity #main #buddypress > div[role=navigation].item-list-tabs {
     text-align: center; }
+  body.buddypress.activity #buddypress div#subnav.item-list-tabs {
+    display: none; }
   body.buddypress .bp-user a.button.sap-new-post-btn {
     font-size: 15px; }
     body.buddypress .bp-user a.button.sap-new-post-btn:hover {

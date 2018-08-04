@@ -197,6 +197,12 @@ body.buddypress {
 				text-align: center;
 			}
 		}
+
+		#buddypress {
+			div#subnav.item-list-tabs {
+				display: none;
+			}
+		}
 	}
 /*
 	.bp-legacy {
