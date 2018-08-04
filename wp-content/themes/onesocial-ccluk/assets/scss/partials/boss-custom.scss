@@ -47,7 +47,8 @@ a.button {
 }
 
 #buddypress {
-  #group-create-nav .group-create, div#item-nav .item-list-tabs ul li .bb-menu-button {
+  #group-create-nav .group-create, 
+  div#item-nav .item-list-tabs ul li .bb-menu-button {
     background-color: $green;
   }
 }
@@ -138,24 +139,6 @@ li {
   }
 }
 
-#buddypress {
-  div {
-    &#subnav.item-list-tabs ul li.feed a {
-      &:hover, &:before {
-        color: $green;
-      }
-    }
-    &.messages-options-nav .buddyboss-select-inner:after {
-      color: $green;
-    }
-  }
-  table#message-threads {
-    input[type="checkbox"]:checked + strong:after, tr td.thread-info p a:hover {
-      color: $green;
-    }
-  }
-}
-
 .info-group {
   .members-list-filter li a {
     &:hover, &.selected {
@@ -243,7 +226,11 @@ li {
   }
 }
 
-.entry-meta a.read-more, .settings #buddypress div#subnav.item-list-tabs ul li.current a, .bb-user-notifications .avatar + a, #main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover, #main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
+.entry-meta a.read-more, 
+.settings #buddypress div#subnav.item-list-tabs ul li.current a, 
+.bb-user-notifications .avatar + a, 
+#main #buddypress .bb-member-quick-link-wrapper .action .generic-button a:hover, 
+#main-wrap #page #main #buddypress div.item-list-tabs li.hideshow ul a:hover {
   color: $green;
 }
 
@@ -463,7 +450,7 @@ input {
 }
 
 .bp-user.messages.is-desktop #buddypress div#subnav.item-list-tabs ul li#compose-personal-li {
-  border-color: $green;
+  border: none;
 }
 
 .is-desktop #buddypress div#group-create-tabs ul li {
@@ -514,26 +501,18 @@ input {
       color: $green;
     }
   }
-  #buddypress {
-    div {
-      &#subnav.item-list-tabs ul li a span, &:not(#item-nav) > .item-list-tabs ul li a span {
-        background-color: $green;
-      }
-    }
-    > div[role="navigation"].item-list-tabs ul li a span, .dir-form div.item-list-tabs ul li a span {
-      background-color: $green;
-    }
-  }
 }
 
 .bp-legacy div#item-body div.item-list-tabs ul li a span {
-  background-color: $green;
+  color: $green;
 }
 
 .is-desktop {
   #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover a:before, &.selected a:before, &.current a:before {
-      background-color: $green;
+    &:hover a:before, 
+    &.selected a:before, 
+    &.current a:before {
+      color: $green;
     }
   }
   .header-button:hover {

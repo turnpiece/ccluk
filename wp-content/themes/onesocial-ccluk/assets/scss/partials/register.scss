@@ -38,8 +38,7 @@
         .register-section {
 
             label, legend {
-                font-size: 18px;
-                color: $green;
+                @include form-label();
             }
 
             h2 {

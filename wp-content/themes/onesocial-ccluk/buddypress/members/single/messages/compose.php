@@ -2,7 +2,11 @@
 
 	<?php do_action( 'bp_before_messages_compose_content' ); ?>
 
-	<?php bp_message_get_recipient_tabs(); ?>
+	<ul class="first acfb-holder">
+      	<li>
+			<?php bp_message_get_recipient_tabs(); ?>
+		</li>
+	</ul>
 
 	<label for="subject"><?php _e( 'Subject', 'onesocial' ); ?></label>
 	<input type="text" name="subject" id="subject" value="<?php bp_messages_subject_value(); ?>" />

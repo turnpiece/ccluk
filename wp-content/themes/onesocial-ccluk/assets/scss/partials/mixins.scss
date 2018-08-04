@@ -161,3 +161,13 @@
   padding-bottom: 15px;
   color: $green;
 }
+
+@mixin form-label() {
+  font-size: 18px;
+  color: $green;
+}
+
+@mixin form-input() {
+  padding: 12px;
+  height: auto;
+}

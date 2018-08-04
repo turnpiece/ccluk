@@ -118,7 +118,66 @@ body.buddypress {
 			margin-top: 0;
 		}
 
+		#send_message_form.standard-form {
+			ul.acfb-holder {
+				li.friend-tab {
+					background-color: transparent;
+					border: none;
 
+					img.avatar {
+						margin-right: 5px;
+					}
+				}
+			}
+
+			label, 
+			legend {
+                @include form-label();
+            }
+
+            input[type="text"] {
+            	@include form-input();
+            }
+
+            input[type="text"],
+            textarea {
+            	margin-bottom: 20px;
+            }
+
+            label[for=subject] {
+            	margin-top: 10px;
+            }
+		}
+
+	    div {
+	      &#subnav.item-list-tabs ul li a span, 
+	      &:not(#item-nav) > .item-list-tabs ul li a span {
+	        color: $green;
+	      }
+	    }
+
+	    > div[role="navigation"].item-list-tabs ul li a span, 
+	    .dir-form div.item-list-tabs ul li a span {
+	    	color: $green;
+	    }
+
+		div {
+		    &#subnav.item-list-tabs ul li.feed a {
+		      &:hover, &:before {
+		        color: $green;
+		      }
+		    }
+		    &.messages-options-nav .buddyboss-select-inner:after {
+		      color: $green;
+		    }
+		}
+
+		table#message-threads {
+		    input[type="checkbox"]:checked + strong:after, 
+		    tr td.thread-info p a:hover {
+		      color: $green;
+		    }
+		}
 	}
 
 	#main {
@@ -139,13 +198,13 @@ body.buddypress {
 			}
 		}
 	}
-
+/*
 	.bp-legacy {
 		div#item-body div.item-list-tabs {
 			@include bp-item-list-tabs();
 		}
 	}
-	
+*/
 	.bp-user a.button.sap-new-post-btn{
 		font-size: $font-size-sm;
 		&:hover {
@@ -162,6 +221,23 @@ body.buddypress {
 			>div[role=navigation] {
 				&.item-list-tabs {
 					@include bp-item-list-tabs();
+				}
+			}
+
+			.messages-container {
+				div#subnav.item-list-tabs {
+					ul {
+						li {
+							a {
+								border: none;
+
+								&:hover {
+									color: $green;
+									background-color: transparent;
+								}
+							}
+						}
+					}
 				}
 			}
 
