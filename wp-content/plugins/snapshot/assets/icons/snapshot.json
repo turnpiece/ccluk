@@ -1,0 +1,171 @@
+{
+  "IcoMoonType": "selection",
+  "icons": [
+    {
+      "icon": {
+        "paths": [
+          "M236.227 317.287c-54.040-54.040-141.656-54.040-195.697 0s-54.040 141.656 0 195.697l512.983 512.983 789.74-789.74c54.040-54.040 54.040-141.656 0-195.697s-141.656-54.040-195.697 0l-594.044 594.044-317.287-317.287z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 1384,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "check"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 79,
+        "id": 13,
+        "name": "check",
+        "prevSize": 32,
+        "code": 59648
+      },
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 0
+    },
+    {
+      "icon": {
+        "paths": [
+          "M623.445 128.659c0 31.373-12.2 58.678-36.601 81.917l-301.525 301.525 301.525 301.525c24.401 23.239 36.601 50.545 36.601 81.917s-12.2 58.678-36.601 81.917c-23.239 24.401-50.545 36.601-81.917 36.601s-58.678-12.2-81.917-36.601l-357.298-357.298c-12.781-11.62-25.272-25.853-37.473-42.702s-18.301-38.635-18.301-65.359c0-26.725 6.1-48.802 18.301-66.231s24.691-31.372 37.473-41.83l357.298-357.298c23.239-24.401 50.545-36.601 81.917-36.601s58.678 12.2 81.917 36.601c24.401 23.239 36.601 50.545 36.601 81.917z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 643,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "arrow-left"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 76,
+        "id": 12,
+        "name": "arrow-left",
+        "prevSize": 32,
+        "code": 59649
+      },
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 1
+    },
+    {
+      "icon": {
+        "paths": [
+          "M9.938 128.659c0 31.373 12.2 58.678 36.601 81.917l301.525 301.525-301.525 301.525c-24.401 23.239-36.601 50.545-36.601 81.917s12.2 58.678 36.601 81.917c23.239 24.401 50.545 36.601 81.917 36.601s58.678-12.2 81.917-36.601l357.298-357.298c12.781-11.62 25.272-25.853 37.473-42.702s18.301-38.635 18.301-65.359c0-26.725-6.1-48.802-18.301-66.231s-24.691-31.372-37.473-41.83l-357.298-357.298c-23.239-24.401-50.545-36.601-81.917-36.601s-58.678 12.2-81.917 36.601c-24.401 23.239-36.601 50.545-36.601 81.917z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 643,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "arrow-right"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 78,
+        "id": 11,
+        "name": "arrow-right",
+        "prevSize": 32,
+        "code": 59650
+      },
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 2
+    },
+    {
+      "icon": {
+        "paths": [
+          "M613.508 517.547l390.414-390.414-111.547-111.547-390.414 390.414-390.414-390.414-111.547 111.547 390.414 390.414-390.414 390.414 111.547 111.547 390.414-390.414 390.414 390.414 111.547-111.547-390.414-390.414z"
+        ],
+        "attrs": [
+          {}
+        ],
+        "width": 1004,
+        "isMulticolor": false,
+        "isMulticolor2": false,
+        "grid": 0,
+        "tags": [
+          "close"
+        ]
+      },
+      "attrs": [
+        {}
+      ],
+      "properties": {
+        "order": 80,
+        "id": 14,
+        "name": "close",
+        "prevSize": 32,
+        "code": 59651
+      },
+      "setIdx": 0,
+      "setId": 1,
+      "iconIdx": 3
+    }
+  ],
+  "height": 1024,
+  "metadata": {
+    "name": "snapshot"
+  },
+  "preferences": {
+    "showGlyphs": true,
+    "showCodes": true,
+    "showQuickUse": true,
+    "showQuickUse2": true,
+    "showSVGs": true,
+    "fontPref": {
+      "prefix": "i-",
+      "metadata": {
+        "fontFamily": "snapshot",
+        "majorVersion": 1,
+        "minorVersion": 0
+      },
+      "metrics": {
+        "emSize": 1024,
+        "baseline": 6.25,
+        "whitespace": 50
+      },
+      "embed": false,
+      "ie7": true,
+      "noie8": false,
+      "includeMetadata": true,
+      "cssVars": true,
+      "cssVarsFormat": "scss",
+      "showSelector": true,
+      "selector": "i",
+      "classSelector": ".icon",
+      "showMetrics": true,
+      "showMetadata": false,
+      "showVersion": false
+    },
+    "imagePref": {
+      "prefix": "icon-",
+      "png": true,
+      "useClassSelector": true,
+      "color": 0,
+      "bgColor": 16777215,
+      "classSelector": ".icon"
+    },
+    "historySize": 100,
+    "gridSize": 16
+  }
+}

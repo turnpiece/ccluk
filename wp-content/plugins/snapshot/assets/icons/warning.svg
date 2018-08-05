@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="16px" height="50px" viewBox="0 0 16 50" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <!-- Generator: Sketch 42 (36781) - http://www.bohemiancoding.com/sketch -->
+    <title>icon-20px-warning-red</title>
+    <desc>Created with Sketch.</desc>
+    <defs></defs>
+    <g id="Page-1" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="icon-20px-warning-red" fill="#000000">
+            <rect id="wpmudev-icon-warning" x="3" y="0" width="10" height="30" rx="5"></rect>
+            <rect id="Oval" x="0.5" y="35" width="15" height="15" rx="7.5"></rect>
+        </g>
+    </g>
+</svg>
