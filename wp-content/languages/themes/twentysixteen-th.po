@@ -1,0 +1,328 @@
+# Translation of Twenty Sixteen in Thai
+# This file is distributed under the same license as the Twenty Sixteen package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2015-11-24 06:45:04+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/1.0-alpha-1100\n"
+"Project-Id-Version: Twenty Sixteen\n"
+
+#. Theme Name of the plugin/theme
+msgid "Twenty Sixteen"
+msgstr "Twenty Sixteen"
+
+#. Description of the plugin/theme
+msgid "Twenty Sixteen is a modernized take on an ever-popular WordPress layout — the horizontal masthead with an optional right sidebar that works perfectly for blogs and websites. It has custom color options with beautiful default color schemes, a harmonious fluid grid using a mobile-first approach, and impeccable polish in every detail. Twenty Sixteen will make your WordPress look beautiful everywhere."
+msgstr "Twenty Sixteen นั้นทันสมัยและใช้รูปแบบที่ได้รับความนิยมที่สุด — เส้นแบ่งแนวนอนพร้อมด้วยตัวเลือกด้านข้างทางขวา ที่ทำงานเข้ากับดีกับบล็อกหรือเว็บไซต์  มันยังมีตัวเลือกที่ปรับแต่งสีที่นำเอาเฉดสีสวย  ๆ มาเป็นค่าเริ่มต้นให้ใช้งาน   ตารางที่กลมกลืนไหลลื่นที่ถูกสร้างให้เหมาะสมกับการใช้งานบนอุปกรณ์มือถือก่อน   และยังกลั่นกรองในทุก ๆ รายละเอียด Twenty Sixteen จะทำให้เวิร์ดเพรสของคุณดูสวยงามทุกที่กับทุกอุปกรณ์"
+
+#. translators: %s: Name of current post
+#: image.php:84 template-parts/content-page.php:37
+#: template-parts/content-search.php:28 template-parts/content-search.php:43
+#: template-parts/content-single.php:45 template-parts/content.php:49
+msgid "Edit<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "แก้ไข<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#. translators: %s: Name of current post
+#: inc/template-tags.php:184 template-parts/content.php:28
+msgid "Continue reading<span class=\"screen-reader-text\"> \"%s\"</span>"
+msgstr "อ่านเพิ่มเติม<span class=\"screen-reader-text\"> \"%s\"</span>"
+
+#: inc/customizer.php:246
+msgid "Red"
+msgstr "สีแดง"
+
+#. translators: %s: post title
+#: comments.php:31
+msgctxt "comments title"
+msgid "One thought on &ldquo;%s&rdquo;"
+msgstr "หนึ่งความเห็นบน &ldquo;%s&rdquo;"
+
+#: searchform.php:16
+msgctxt "submit button"
+msgid "Search"
+msgstr "ค้นหา"
+
+#: searchform.php:14
+msgctxt "placeholder"
+msgid "Search &hellip;"
+msgstr "ค้นหา &hellip;"
+
+#: searchform.php:13 searchform.php:14
+msgctxt "label"
+msgid "Search for:"
+msgstr "ค้นหา:"
+
+#: footer.php:17
+msgid "Footer Primary Menu"
+msgstr "ส่วนล่างเมนูหลัก"
+
+#: footer.php:28
+msgid "Footer Social Links Menu"
+msgstr "ส่วนล่างเมนูลิงก์โซเชียล"
+
+#: functions.php:144
+msgid "Add widgets here to appear in your sidebar."
+msgstr "เพื่อวิดเจ็ตที่นี่เพื่อให้แสดงในด้านข้างของคุณ"
+
+#: template-parts/content.php:14
+msgid "Featured"
+msgstr "ลักษณะพิเศษ"
+
+#: template-parts/content-none.php:28
+msgid "It seems we can&rsquo;t find what you&rsquo;re looking for. Perhaps searching can help."
+msgstr "ดูเหมือนว่าเราไม่สามารถค้นหาสิ่งที่คุณกำลังมองหาอยู่  บางทีการค้นหาอาจช่วยคุณได้"
+
+#: template-parts/content-none.php:23
+msgid "Sorry, but nothing matched your search terms. Please try again with some different keywords."
+msgstr "ขอโทษครับ  แต่ไม่มีสิ่งใดตรงกับเงื่อนไขการค้นหาของคุณ  กรุณาลองใหม่อีกครั้งด้วยคำที่ต่างออกไป"
+
+#: template-parts/content-none.php:19
+msgid "Ready to publish your first post? <a href=\"%1$s\">Get started here</a>."
+msgstr "พร้อมที่จะเผยแพร่เรื่องแรกของคุณหรือไม่? <a href=\"%1$s\">เริ่มต้นได้ที่นี่</a>"
+
+#: template-parts/content-none.php:13
+msgid "Nothing Found"
+msgstr "ไม่พบสิ่งใด"
+
+#: template-parts/biography.php:33
+msgid "View all posts by %s"
+msgstr "ดูเรื่องทั้งหมดโดย %s"
+
+#: template-parts/biography.php:28
+msgid "Author:"
+msgstr "ผู้เขียน:"
+
+#: single.php:38
+msgid "Previous post:"
+msgstr "เรื่องก่อนหน้า:"
+
+#: single.php:35
+msgid "Next post:"
+msgstr "เรื่องต่อไป:"
+
+#: single.php:37
+msgid "Previous"
+msgstr "ก่อนหน้า"
+
+#: single.php:34
+msgid "Next"
+msgstr "ถัดไป"
+
+#: search.php:18
+msgid "Search Results for: %s"
+msgstr "ผลลัพท์การค้นหาสำหรับ: %s"
+
+#: inc/template-tags.php:106
+msgctxt "Used before tag names."
+msgid "Tags"
+msgstr "ป้ายกำกับ"
+
+#: inc/template-tags.php:98
+msgctxt "Used before category names."
+msgid "Categories"
+msgstr "หมวดหมู่"
+
+#: inc/template-tags.php:95 inc/template-tags.php:103
+msgctxt "Used between list items, there is a space after the comma."
+msgid ", "
+msgstr ", "
+
+#: inc/template-tags.php:79
+msgctxt "Used before publish date."
+msgid "Posted on"
+msgstr "เขียนเมื่อ"
+
+#: inc/template-tags.php:38
+msgctxt "Used before post format."
+msgid "Format"
+msgstr "รูปแบบเรื่อง"
+
+#: inc/template-tags.php:50
+msgid "Leave a comment<span class=\"screen-reader-text\"> on %s</span>"
+msgstr "เขียนความเห็น<span class=\"screen-reader-text\"> บน %s</span>"
+
+#: inc/template-tags.php:25
+msgctxt "Used before post author name."
+msgid "Author"
+msgstr "ผู้เขียน"
+
+#: inc/customizer.php:256
+msgid "Yellow"
+msgstr "สีเหลือง"
+
+#: inc/customizer.php:236
+msgid "Gray"
+msgstr "สีเทา"
+
+#: inc/customizer.php:226
+msgid "Dark"
+msgstr "มืด"
+
+#: inc/customizer.php:216
+msgid "Default"
+msgstr "ค่าเริ่มต้น"
+
+#: inc/customizer.php:171
+msgid "Secondary Text Color"
+msgstr "สีตัวอักษรรอง"
+
+#: inc/customizer.php:159
+msgid "Main Text Color"
+msgstr "สีตัวอักษรหลัก"
+
+#: inc/customizer.php:147
+msgid "Link Color"
+msgstr "ลิงก์สี"
+
+#: inc/customizer.php:132
+msgid "Page Background Color"
+msgstr "สีเบื้องหลังหน้า"
+
+#: image.php:102 single.php:29
+msgctxt "Parent post link"
+msgid "<span class=\"meta-nav\">Published in</span><span class=\"post-title\">%title</span>"
+msgstr "<span class=\"meta-nav\">เผยแพร่แล้วใน</span><span class=\"post-title\">%title</span>"
+
+#: inc/customizer.php:117
+msgid "Base Color Scheme"
+msgstr "สีหลัก"
+
+#: inc/back-compat.php:41 inc/back-compat.php:53 inc/back-compat.php:68
+msgid "Twenty Sixteen requires at least WordPress version 4.4. You are running version %s. Please upgrade and try again."
+msgstr "Twenty Sixteen ต้องใช้กับเวิร์ดเพรสรุ่น 4.4 ขึ้นไป  คุณกำลังใช้งานรุ่น %s โปรดอัปเกรดและลองใหม่อีกครั้ง"
+
+#: image.php:73
+msgctxt "Used before full size attachment link."
+msgid "Full size"
+msgstr "ขนาดใหญ่สุด"
+
+#: image.php:56 template-parts/content-page.php:23
+#: template-parts/content-single.php:25 template-parts/content.php:33
+msgid "Pages:"
+msgstr "หน้า:"
+
+#: image.php:25
+msgid "Next Image"
+msgstr "รูปต่อไป"
+
+#: image.php:24
+msgid "Previous Image"
+msgstr "รูปก่อนหน้า"
+
+#: header.php:45
+msgid "Menu"
+msgstr "เมนู"
+
+#: header.php:27
+msgid "Skip to content"
+msgstr "ข้ามไปยังบทความ"
+
+#: functions.php:270
+msgid "expand child menu"
+msgstr "ขยายเมนูย่อย"
+
+#: functions.php:271
+msgid "collapse child menu"
+msgstr "หดเมนูย่อย"
+
+#. translators: If there are characters in your language that are not supported
+#. by Inconsolata, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:199
+msgctxt "Inconsolata font: on or off"
+msgid "on"
+msgstr "เปิด"
+
+#: functions.php:152
+msgid "Content Bottom 1"
+msgstr "ปุ่มบทความ 1"
+
+#. translators: If there are characters in your language that are not supported
+#. by Montserrat, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:194
+msgctxt "Montserrat font: on or off"
+msgid "on"
+msgstr "เปิด"
+
+#. translators: If there are characters in your language that are not supported
+#. by Merriweather, translate this to 'off'. Do not translate into your own
+#. language.
+#: functions.php:189
+msgctxt "Merriweather font: on or off"
+msgid "on"
+msgstr "เปิด"
+
+#: functions.php:162
+msgid "Content Bottom 2"
+msgstr "ปุ่มบทความ 2"
+
+#: functions.php:154 functions.php:164
+msgid "Appears at the bottom of the content on posts and pages."
+msgstr "ปรากฎที่ด้านล่างของบทความบนเรื่องและหน้า"
+
+#: functions.php:142
+msgid "Sidebar"
+msgstr "ด้านข้าง"
+
+#: functions.php:78 header.php:60
+msgid "Social Links Menu"
+msgstr "เมนูลิงก์โซเชียล"
+
+#: functions.php:77 header.php:49
+msgid "Primary Menu"
+msgstr "เมนูหลัก"
+
+#: footer.php:51
+msgid "Proudly powered by %s"
+msgstr "ภูมิใจนำเสนอโดย %s"
+
+#: comments.php:69
+msgid "Comments are closed."
+msgstr "การแสดงความเห็นถูกปิด"
+
+#. translators: 1: number of comments, 2: post title
+#: comments.php:35
+msgctxt "comments title"
+msgid "%1$s thought on &ldquo;%2$s&rdquo;"
+msgid_plural "%1$s thoughts on &ldquo;%2$s&rdquo;"
+msgstr[0] "%1$s ความเห็นบน &ldquo;%2$s&rdquo;"
+
+#: archive.php:51 image.php:60 index.php:48 search.php:39
+#: template-parts/content-page.php:27 template-parts/content-single.php:29
+#: template-parts/content.php:37
+msgid "Page"
+msgstr "หน้า"
+
+#: archive.php:50 index.php:47 search.php:38
+msgid "Next page"
+msgstr "หน้าต่อไป"
+
+#: archive.php:49 index.php:46 search.php:37
+msgid "Previous page"
+msgstr "หน้าก่อนหน้า"
+
+#: 404.php:21
+msgid "It looks like nothing was found at this location. Maybe try a search?"
+msgstr "ดูเหมือนว่าไม่พบสิ่งใดบนที่อยู่นั้น  บางทีคุณอยากลองใช้การค้นหา?"
+
+#: 404.php:17
+msgid "Oops! That page can&rsquo;t be found."
+msgstr "ขอโทษครับ  ไม่พบหน้านั้น"
+
+#. Author of the plugin/theme
+msgid "the WordPress team"
+msgstr "ทีมเวิร์ดเพรส"
+
+#. Theme URI of the plugin/theme
+msgid "https://wordpress.org/themes/twentysixteen/"
+msgstr "https://wordpress.org/themes/twentysixteen/"
+
+#. #-#-#-#-#  twentysixteen.pot (Twenty Sixteen 1.0)  #-#-#-#-#
+#. Author URI of the plugin/theme
+#: footer.php:51
+msgid "https://wordpress.org/"
+msgstr "https://wordpress.org/"
