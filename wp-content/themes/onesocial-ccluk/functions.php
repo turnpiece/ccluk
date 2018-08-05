@@ -771,3 +771,42 @@ add_action( 'bp_setup_nav', function() {
         )
     );
 });
+
+// remove submenu links from adminbar
+function ccluk_remove_admin_bar_links() {
+    if ( is_admin() ) { //nothing to do on admin
+        return;
+    }
+    global $wp_admin_bar;
+
+    $rm_items = array(
+        'forums',
+        'friends',
+        'groups',
+        'notifications-read',
+        'notifications-unread',
+        'settings-general',
+        'settings-notifications',
+        'settings-profile',
+        'settings-delete-account',
+        'messages-inbox',
+        'messages-starred',
+        'messages-sentbox',
+        'messages-compose',
+        'messages-notices',
+        'xprofile-public',
+        'xprofile-edit',
+        'xprofile-change-avatar',
+        'activity-personal',
+        'activity-friends',
+        'activity-groups',
+        'activity-favorites',
+        'activity-mentions'
+    );
+
+    foreach( $rm_items as $item )
+        $wp_admin_bar->remove_menu( 'my-account-'.$item );
+
+    error_log( print_r( $wp_admin_bar, true ) );
+}
+add_action( 'wp_before_admin_bar_render', 'ccluk_remove_admin_bar_links' );

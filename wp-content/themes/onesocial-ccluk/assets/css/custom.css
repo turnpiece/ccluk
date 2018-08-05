@@ -1503,6 +1503,23 @@ body.buddypress {
   body.buddypress #buddypress table#message-threads input[type="checkbox"]:checked + strong:after,
   body.buddypress #buddypress table#message-threads tr td.thread-info p a:hover {
     color: #54ae68; }
+  body.buddypress #buddypress .notifications-options-nav #notification-bulk-manage {
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+    background-image: none;
+    background-color: #22a7f0;
+    border: none;
+    text-shadow: none;
+    box-shadow: none;
+    padding: 10px 16px;
+    padding: 1rem 1.6rem;
+    color: #fff !important;
+    padding: 3.5px 10px;
+    padding: 0.35rem 1rem; }
+    body.buddypress #buddypress .notifications-options-nav #notification-bulk-manage:hover {
+      color: #fff !important;
+      background-color: #54ae68 !important; }
   body.buddypress #main #buddypress .groups-members-search input[type=text] {
     padding: 6px 12px;
     padding: 0.6rem 1.2rem; }

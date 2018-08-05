@@ -114,6 +114,11 @@
   }
 }
 
+@mixin button-small( $hover_bg: $green, $hover_color: $white ) {
+  @include button( $hover_bg, $hover_color );
+  @include padding( .35, 1 );
+}
+
 @mixin cta() {
   @include border-radius( 10px );
   background-color: $blue;

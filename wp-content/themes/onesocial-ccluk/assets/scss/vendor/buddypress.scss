@@ -178,6 +178,10 @@ body.buddypress {
 		      color: $green;
 		    }
 		}
+
+		.notifications-options-nav #notification-bulk-manage {
+			@include button-small();
+		}
 	}
 
 	#main {
