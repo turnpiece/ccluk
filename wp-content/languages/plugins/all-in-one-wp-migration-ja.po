@@ -1,0 +1,627 @@
+# Translation of Plugins - All-in-One WP Migration - Stable (latest release) in Japanese
+# This file is distributed under the same license as the Plugins - All-in-One WP Migration - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-07-31 07:57:52+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ja_JP\n"
+"Project-Id-Version: Plugins - All-in-One WP Migration - Stable (latest release)\n"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:94
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:104
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:227
+msgid "You will need to create this folder and grant it read/write/execute permissions (0777) for the All in One WP Migration plugin to function properly."
+msgstr "このフォルダーを作成し、読込 / 書込 / 実行パーミッション (0777) を付与し、All in One WP Migration プラグインが機能を実行できるようにしてください。"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:93
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:103
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:226
+msgid "All in One WP Migration is not able to create <strong>%s</strong> folder."
+msgstr "All in One WP Migration は <strong>%s</strong> フォルダーを作成することができません。"
+
+#: lib/view/common/leave-feedback.php:62 lib/view/common/report-problem.php:42
+msgid "I agree that by filling in the contact form with my data, I authorize All-in-One WP Migration to use my <strong>email</strong> to reply to my requests for information. <a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">Privacy policy</a>"
+msgstr "お問い合わせフォームに情報を入力することで、All-in-One WP Migration が自分の<strong>メールアドレス</strong>を利用して返信することに同意します。<a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">プライバシーポリシー</a>"
+
+#: lib/model/export/class-ai1wm-export-config.php:104
+msgid "Done preparing configuration file."
+msgstr "設定ファイルの準備ができました。"
+
+#: lib/model/export/class-ai1wm-export-config.php:32
+msgid "Preparing configuration file..."
+msgstr "設定ファイルを準備しています..."
+
+#: lib/model/export/class-ai1wm-export-config-file.php:69
+msgid "Done archiving configuration file."
+msgstr "設定ファイルのアーカイブを完了しました。"
+
+#: lib/model/export/class-ai1wm-export-config-file.php:57
+#: lib/model/export/class-ai1wm-export-config-file.php:92
+msgid "Archiving configuration file...<br />%d%% complete"
+msgstr "設定ファイルをアーカイブしています...<br />%d%% 完了"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:243
+msgid "Example: wp ai1wm restore migration-wp-20170913-095743-931.wpress"
+msgstr "例: wp ai1wm restore migration-wp-20170913-095743-931.wpress"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:242
+msgid "A valid backup name must be provided in order to proceed with the restore process."
+msgstr "復元処理を続行するには、有効なバックアップファイル名を指定する必要があります。"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:220
+msgid "WPI CLI is not supported in Multisite mode. Please use web interface to restore a backup."
+msgstr "WPI CLI はマルチサイトモードではサポートされていません。 Web インターフェースを使用してバックアップを復元してください。"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:205
+msgid "Backup location: %s"
+msgstr "バックアップ場所: %s"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:204
+msgid "Backup complete."
+msgstr "バックアップが完了しました。"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:124
+msgid " ago"
+msgstr "前"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:116
+msgid "Date created"
+msgstr "作成日"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:115
+msgid "Backup name"
+msgstr "バックアップ名"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:87
+msgid "WPI CLI is not supported in Multisite mode. Please use web interface to create a backup."
+msgstr "WPI CLI はマルチサイトモードではサポートされていません。 Web インターフェースを使用してバックアップを作成してください。"
+
+#: functions.php:59 functions.php:78
+msgid "Invalid archive path"
+msgstr "不正なアーカイブパスです"
+
+#: functions.php:54 functions.php:73
+msgid "Unable to locate archive path"
+msgstr "アーカイブパスを見つけることができません"
+
+#: functions.php:34
+msgid "Unable to locate storage path"
+msgstr "ストレージパスを見つけることができません"
+
+#: lib/view/backups/index.php:68
+msgid "2GB+"
+msgstr "2GB 以上"
+
+#: lib/model/import/class-ai1wm-import-validate.php:132
+msgid "Done unpacking archive."
+msgstr "アーカイブを展開しました。"
+
+#: lib/model/import/class-ai1wm-import-validate.php:66
+#: lib/model/import/class-ai1wm-import-validate.php:152
+msgid "Unpacking archive...<br />%d%% complete"
+msgstr "アーカイブを展開中...<br />%d%% 完了"
+
+#: lib/model/export/class-ai1wm-export-database-file.php:74
+msgid "Done archiving database."
+msgstr "データベースをアーカイブしました。"
+
+#: lib/model/export/class-ai1wm-export-database-file.php:62
+#: lib/model/export/class-ai1wm-export-database-file.php:97
+msgid "Archiving database...<br />%d%% complete"
+msgstr "データベースをアーカイブ中...<br />%d%% 完了"
+
+#: functions.php:1301
+msgid "Unable to authenticate the secret key."
+msgstr "秘密鍵を認証できません。"
+
+#: lib/model/import/class-ai1wm-import-database.php:74
+#: lib/model/import/class-ai1wm-import-database.php:728
+msgid "Restoring database...<br />%d%% complete"
+msgstr "データベースの復元中...<br />%d%%完了"
+
+#: lib/model/export/class-ai1wm-export-database.php:61
+#: lib/model/export/class-ai1wm-export-database.php:154
+msgid "Exporting database...<br />%d%% complete"
+msgstr "データベースのエクスポート中...<br />%d%%完了"
+
+#: lib/model/export/class-ai1wm-export-compatibility.php:31
+#: lib/model/import/class-ai1wm-import-compatibility.php:31
+msgid "Checking extensions compatibility..."
+msgstr "拡張機能の互換性を確認しています..."
+
+#: lib/model/import/class-ai1wm-import-database.php:708
+msgid "Done restoring database."
+msgstr "データベースを復元しました。"
+
+#: lib/controller/class-ai1wm-main-controller.php:790
+msgid "Monthly"
+msgstr "毎月"
+
+#: lib/controller/class-ai1wm-main-controller.php:786
+msgid "Weekly"
+msgstr "毎週"
+
+#: functions.php:1104
+msgid "Unable to read file: %s"
+msgstr "ファイルを読み込めません: %s"
+
+#: functions.php:1086
+msgid "Out of disk space."
+msgstr "ディスク領域が不足しています。"
+
+#: lib/view/export/advanced-settings.php:73
+msgid "Do <strong>not</strong> export must-use plugins (files)"
+msgstr "必須プラグインをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/model/import/class-ai1wm-import-mu-plugins.php:50
+msgid "Done activating mu-plugins."
+msgstr "mu-plugins を有効化しました。"
+
+#: lib/model/import/class-ai1wm-import-mu-plugins.php:31
+msgid "Activating mu-plugins..."
+msgstr "mu-plugins を有効化しています..."
+
+#: lib/view/import/index.php:41
+msgid "Use the box below to upload a wpress file."
+msgstr "以下のボックスから wpress 形式のファイルをアップロードしてください。"
+
+#: lib/view/export/advanced-settings.php:64
+msgid "Do <strong>not</strong> export inactive themes (files)"
+msgstr "無効化したテーマをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/view/export/advanced-settings.php:110
+msgid "Do <strong>not</strong> replace email domain (sql)"
+msgstr "メールアドレスのドメインを置換<strong>しない</strong> (SQL) "
+
+#: lib/view/export/advanced-settings.php:88
+msgid "Do <strong>not</strong> export inactive plugins (files)"
+msgstr "無効化したプラグインをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/model/import/class-ai1wm-import-upload.php:100
+msgid "Unrecognized error %s during upload."
+msgstr "アップロード中の認識できないエラー %s。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:94
+msgid "A PHP extension stopped the file upload."
+msgstr "PHP拡張モジュールがファイルのアップロードを停止しました。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:89
+msgid "Failed to write file to disk."
+msgstr "ファイルをディスクに書き込めませんでした。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:84
+msgid "Missing a temporary folder."
+msgstr "一時フォルダが見つかりません。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:79
+msgid "The file is too large, retrying with smaller size."
+msgstr "ファイルサイズが大きすぎます。ファイルサイズを小さくして再度実行してください。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:66
+msgid "Unable to upload the file because %s"
+msgstr "ファイルをアップロードできません。理由: %s"
+
+#: lib/model/import/class-ai1wm-import-upload.php:45
+msgid "Missing tmp_name in upload file."
+msgstr "アップロードファイルに tmp_name がありません。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:38
+msgid "Missing error key in upload file."
+msgstr "アップロードファイルにエラーキーがありません。"
+
+#: lib/model/import/class-ai1wm-import-upload.php:31
+msgid "Missing upload file."
+msgstr "アップロードファイルがありません。"
+
+#: functions.php:1083
+msgid "Unable to write to: %s"
+msgstr "%s に書き込めません"
+
+#: functions.php:1064
+msgid "Unable to open %s with mode %s"
+msgstr "%s を %s モードで開くことができません"
+
+#: lib/view/export/advanced-settings.php:65
+#: lib/view/export/advanced-settings.php:89
+#: lib/view/export/advanced-settings.php:96
+msgid "new"
+msgstr "New"
+
+#: lib/view/export/advanced-settings.php:95
+msgid "Do <strong>not</strong> export cache (files)"
+msgstr "キャッシュをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:124
+msgid "Done preparing blogs."
+msgstr "ブログの準備を完了しました。"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:113
+msgid "Unable to import <strong>WordPress Network</strong> into WordPress <strong>Single</strong> site."
+msgstr "<strong>WordPress ネットワーク</strong>を WordPress <strong>シングル</strong>サイトへインポートできません。"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:108
+msgid "At least <strong>one WordPress</strong> site should be presented in the archive."
+msgstr "アーカイブ内に少なくとも<strong>1サイトの WordPress</strong> が必要です。"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:103
+msgid "The archive should contain <strong>Single WordPress</strong> site! Please revisit your export settings."
+msgstr "アーカイブは<strong>シングルサイトの WordPress</strong> を含む必要があります。エクスポート設定を再設定してください。"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:31
+msgid "Preparing blogs..."
+msgstr "ブログを準備中..."
+
+#: lib/model/export/class-ai1wm-export-resolve.php:37
+#: lib/model/import/class-ai1wm-import-resolve.php:37
+msgid "Done resolving URL address."
+msgstr "URL アドレスを解決しました。"
+
+#: lib/model/export/class-ai1wm-export-resolve.php:31
+#: lib/model/import/class-ai1wm-import-resolve.php:31
+msgid "Resolving URL address..."
+msgstr "URL アドレスを解決中..."
+
+#: lib/model/class-ai1wm-report.php:46
+msgid "Please accept report term conditions."
+msgstr "報告条件に同意してください。"
+
+#: lib/model/class-ai1wm-feedback.php:64 lib/model/class-ai1wm-report.php:60
+msgid "Something went wrong: %s"
+msgstr "問題が発生しました: %s"
+
+#: lib/model/class-ai1wm-feedback.php:49
+msgid "Please accept feedback term conditions."
+msgstr "フィードバック条件に同意してください。"
+
+#: lib/model/class-ai1wm-feedback.php:47 lib/model/class-ai1wm-report.php:44
+msgid "Please enter comments in the text area."
+msgstr "テキストエリアにコメントを入力してください。"
+
+#: lib/model/class-ai1wm-feedback.php:45 lib/model/class-ai1wm-report.php:42
+msgid "Your email is not valid."
+msgstr "メールアドレスが無効です。"
+
+#: lib/model/class-ai1wm-feedback.php:43
+msgid "Feedback type is invalid."
+msgstr "フィードバックの種類が無効です。"
+
+#: lib/view/updater/modal.php:51
+msgid "There is an update available. To update, you must enter your"
+msgstr "利用可能なアップデートがあります。 更新するには、購入 ID を入力する必要があります。"
+
+#: lib/view/updater/modal.php:44
+msgid "Discard"
+msgstr "削除"
+
+#: lib/view/updater/modal.php:42
+msgid "Save"
+msgstr "保存"
+
+#: lib/view/updater/modal.php:38
+msgid "here"
+msgstr "こちら"
+
+#: lib/view/updater/modal.php:37
+msgid "Don't have a Purchase ID? You can find your Purchase ID"
+msgstr "購入 ID がない場合は入手してください。"
+
+#: lib/view/updater/modal.php:33 lib/view/updater/modal.php:52
+msgid "Purchase ID"
+msgstr "購入 ID"
+
+#: lib/view/updater/modal.php:30
+msgid "To update your plugin/extension to the latest version, please fill your Purchase ID below."
+msgstr "プラグインとエクステンションを最新バージョンに更新するには、以下の購入 ID を入力してください。"
+
+#: lib/view/updater/modal.php:29
+msgid "Enter your Purchase ID"
+msgstr "購入 ID (Purchase ID) を入力します。"
+
+#: lib/view/updater/check.php:27
+msgid "Check for updates"
+msgstr "アップデートを確認"
+
+#: lib/view/main/get-support.php:27
+msgid "Get Support"
+msgstr "サポートに連絡"
+
+#. Author of the plugin/theme
+msgid "ServMask"
+msgstr "ServMask"
+
+#. Description of the plugin/theme
+msgid "Migration tool for all your blog data. Import or Export your blog content with a single click."
+msgstr "すべてのブログデータを移行するツール。1クリックでブログコンテンツをインポートまたはエクスポートします。"
+
+#. #-#-#-#-#  all-in-one-wp-migration-code.pot (All-in-One WP Migration 6.73) 
+#. #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  all-in-one-wp-migration-code.pot (All-in-One WP Migration 6.73) 
+#. #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "https://servmask.com/"
+msgstr "https://servmask.com/"
+
+#. Plugin Name of the plugin/theme
+msgid "All-in-One WP Migration"
+msgstr "All-in-One WP Migration"
+
+#: lib/view/import/index.php:33
+msgid "Import Site"
+msgstr "サイトのインポート"
+
+#: lib/view/import/import-buttons.php:71
+msgid "Unlimited"
+msgstr "無制限"
+
+#: lib/view/import/import-buttons.php:67
+msgid "Get unlimited"
+msgstr "無制限版の購入"
+
+#: lib/view/import/import-buttons.php:61
+msgid "Maximum upload file size:"
+msgstr "最大アップロードファイルサイズ:"
+
+#: lib/view/import/import-buttons.php:40
+msgid "Import From"
+msgstr "インポート元"
+
+#: lib/view/import/import-buttons.php:36
+msgid "Drag & Drop to upload"
+msgstr "ドラッグ & ドロップでアップロード"
+
+#: lib/view/export/index.php:33
+msgid "Export Site"
+msgstr "サイトをエクスポート"
+
+#: lib/view/export/help-section.php:47
+msgid "Once the file is successfully downloaded on your computer, you can import it to any of your WordPress sites."
+msgstr "ファイルがお使いのコンピューターに正常にダウンロードでき次第、お好みの WordPress サイトにインポートできます。"
+
+#: lib/view/export/help-section.php:43
+msgid "Press \"Export\" button and the site archive file will pop up in your browser."
+msgstr "「エクスポート」ボタンを押すと、サイトのアーカイブファイルがブラウザにポップアップ表示されます。"
+
+#: lib/view/export/help-section.php:39
+msgid "In the advanced settings section you can configure more precisely the way of exporting."
+msgstr "「高度な設定」セクションで、エクスポート方法をより詳細に設定できます。"
+
+#: lib/view/export/help-section.php:33
+msgid "Quick hints"
+msgstr "クイックヒント"
+
+#: lib/view/export/help-section.php:29
+msgid "You can then use the import functionality provided by this plugin to import the zipped file onto any other WordPress sites that you have administrator access to."
+msgstr "このプラグインのインポート機能を使用して、管理者権限のある他の WordPress サイトに ZIP ファイルをインポートできます。"
+
+#: lib/view/export/help-section.php:28
+msgid "This screen allows you to export database, media files, themes and plugins as one zipped file."
+msgstr "この画面では、データベース、メディアファイル、テーマ、およびプラグインを1つの圧縮ファイルとしてエクスポートできます。"
+
+#: lib/view/export/find-replace.php:48
+msgid "Add"
+msgstr "追加"
+
+#: lib/view/export/find-replace.php:35
+msgid "in the database"
+msgstr "データベース内"
+
+#: lib/view/export/find-replace.php:34
+msgid "<another-text>"
+msgstr "<別の文字列>"
+
+#: lib/view/export/find-replace.php:33 lib/view/export/find-replace.php:41
+msgid "Replace with"
+msgstr "置換"
+
+#: lib/view/export/find-replace.php:32
+msgid "<text>"
+msgstr "<文字列>"
+
+#: lib/view/export/find-replace.php:31 lib/view/export/find-replace.php:40
+msgid "Find"
+msgstr "検索"
+
+#: lib/view/export/export-buttons.php:31
+msgid "Export To"
+msgstr "エクスポート先"
+
+#: lib/view/export/button-file.php:27 lib/view/import/button-file.php:28
+msgid "File"
+msgstr "ファイル"
+
+#: lib/view/export/advanced-settings.php:104
+msgid "Do <strong>not</strong> export database (sql)"
+msgstr "データベースをエクスポート<strong>しない</strong> (SQL)"
+
+#: lib/view/export/advanced-settings.php:80
+msgid "Do <strong>not</strong> export plugins (files)"
+msgstr "プラグインをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/view/export/advanced-settings.php:56
+msgid "Do <strong>not</strong> export themes (files)"
+msgstr "テーマをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/view/export/advanced-settings.php:50
+msgid "Do <strong>not</strong> export media library (files)"
+msgstr "メディアライブラリをエクスポート<strong>しない</strong> (ファイル)"
+
+#: lib/view/export/advanced-settings.php:44
+msgid "Do <strong>not</strong> export post revisions"
+msgstr "投稿リビジョンをエクスポート<strong>しない</strong>"
+
+#: lib/view/export/advanced-settings.php:38
+msgid "Do <strong>not</strong> export spam comments"
+msgstr "スパムコメントをエクスポート<strong>しない</strong>"
+
+#: lib/view/export/advanced-settings.php:32
+msgid "(click to expand)"
+msgstr "(クリックして展開)"
+
+#: lib/view/export/advanced-settings.php:31
+msgid "Advanced options"
+msgstr "高度なオプション"
+
+#: lib/view/common/share-buttons.php:63
+msgid "Tweet"
+msgstr "ツイート"
+
+#: lib/view/common/report-problem.php:37
+msgid "Please describe your problem here.."
+msgstr "問題点をお書きください。"
+
+#: lib/view/common/report-problem.php:30
+msgid "Report issue"
+msgstr "問題を報告"
+
+#: lib/view/common/leave-feedback.php:67 lib/view/common/report-problem.php:47
+msgid "Cancel"
+msgstr "キャンセル"
+
+#: lib/view/common/leave-feedback.php:70 lib/view/common/report-problem.php:50
+msgid "Send"
+msgstr "送信"
+
+#: lib/view/common/leave-feedback.php:57
+msgid "Leave plugin developers any feedback here.."
+msgstr "プラグイン作者へのフィードバックはこちら"
+
+#: lib/view/common/leave-feedback.php:54 lib/view/common/report-problem.php:34
+msgid "Enter your email address.."
+msgstr "メールアドレスを入力"
+
+#: lib/view/common/leave-feedback.php:47
+msgid "I need help with this plugin"
+msgstr "プラグインの利用に手助けが必要"
+
+#: lib/view/common/leave-feedback.php:40
+msgid "I have ideas to improve this plugin"
+msgstr "プラグインの改善点がある"
+
+#: lib/view/common/leave-feedback.php:33
+msgid "I would like to review this plugin"
+msgstr "プラグインをレビューする"
+
+#: lib/view/backups/index.php:133 lib/view/export/index.php:64
+#: lib/view/import/index.php:63
+msgid "Leave Feedback"
+msgstr "フィードバックをお寄せください"
+
+#: lib/view/backups/index.php:99
+msgid "Create backup"
+msgstr "バックアップを作成"
+
+#: lib/view/backups/index.php:94
+msgid "There are no backups available at this time, why not create a new one?"
+msgstr "現在利用可能なバックアップはありません。新しいバックアップを作成しましょう。"
+
+#: lib/view/backups/index.php:84
+msgid "Delete"
+msgstr "削除"
+
+#: lib/view/backups/index.php:80
+msgid "Restore"
+msgstr "復元"
+
+#: lib/view/backups/index.php:76
+msgid "Download"
+msgstr "ダウンロード"
+
+#: lib/view/backups/index.php:64
+msgid "ago"
+msgstr "前"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:117
+#: lib/view/backups/index.php:47
+msgid "Size"
+msgstr "サイズ"
+
+#: lib/view/backups/index.php:46
+msgid "Date"
+msgstr "日時"
+
+#: lib/view/backups/index.php:45
+msgid "Name"
+msgstr "名前"
+
+#: functions.php:1138
+msgid "Unable to get current pointer position of %s"
+msgstr "%sの現在の指定位置を取得できません"
+
+#: functions.php:1121
+msgid "Unable to seek to offset %d on %s"
+msgstr "%dをオフセットすることができません (%s)"
+
+#: lib/model/import/class-ai1wm-import-done.php:191
+msgid "Your data has been imported successfully!"
+msgstr "データを正常にインポートしました。"
+
+#: lib/model/import/class-ai1wm-import-content.php:79
+#: lib/model/import/class-ai1wm-import-content.php:171
+msgid "Restoring %d files...<br />%d%% complete"
+msgstr "%dファイルを復元中...<br />%d%% 完了"
+
+#: lib/model/export/class-ai1wm-export-download.php:31
+msgid "Renaming exported file..."
+msgstr "エクスポート済みファイルの名前を変更中..."
+
+#: lib/model/export/class-ai1wm-export-database.php:131
+msgid "Done exporting database."
+msgstr "データベースをエクスポートしました。"
+
+#: lib/model/export/class-ai1wm-export-content.php:76
+#: lib/model/export/class-ai1wm-export-content.php:115
+msgid "Archiving %d files...<br />%d%% complete"
+msgstr "%dファイルをアーカイブ中...<br />%d%%完了"
+
+#: lib/model/export/class-ai1wm-export-enumerate.php:140
+#: lib/model/import/class-ai1wm-import-enumerate.php:46
+msgid "Done retrieving a list of all WordPress files."
+msgstr "すべての WordPress ファイル一覧を取得しました。"
+
+#: lib/model/export/class-ai1wm-export-enumerate.php:45
+#: lib/model/import/class-ai1wm-import-enumerate.php:31
+msgid "Retrieving a list of all WordPress files..."
+msgstr "すべての WordPress ファイル一覧を取得中..."
+
+#: lib/model/export/class-ai1wm-export-archive.php:38
+msgid "Done creating an empty archive."
+msgstr "空のアーカイブを作成しました。"
+
+#: lib/model/export/class-ai1wm-export-archive.php:31
+msgid "Creating an empty archive..."
+msgstr "空のアーカイブを作成中..."
+
+#: lib/controller/class-ai1wm-main-controller.php:408
+#: lib/controller/class-ai1wm-main-controller.php:409
+#: lib/view/backups/index.php:33
+msgid "Backups"
+msgstr "バックアップ"
+
+#: lib/controller/class-ai1wm-main-controller.php:398
+#: lib/controller/class-ai1wm-main-controller.php:399
+msgid "Import"
+msgstr "インポート"
+
+#: lib/controller/class-ai1wm-main-controller.php:388
+#: lib/controller/class-ai1wm-main-controller.php:389
+msgid "Export"
+msgstr "エクスポート"
+
+#: lib/view/main/multisite-notice.php:38
+msgid "Get multisite"
+msgstr "マルチサイトを取得"
+
+#: lib/controller/class-ai1wm-import-controller.php:88
+#: lib/controller/class-ai1wm-import-controller.php:89
+msgid "Unable to import"
+msgstr "インポートできません"
+
+#: lib/controller/class-ai1wm-export-controller.php:84
+#: lib/controller/class-ai1wm-export-controller.php:85
+msgid "Unable to export"
+msgstr "エクスポートできません"

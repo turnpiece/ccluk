@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-24 19:26:40+0000\n"
+"PO-Revision-Date: 2018-08-05 13:55:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -38,13 +38,13 @@ msgctxt "personal data group label"
 msgid "About"
 msgstr "Про нас"
 
-#: wp-admin/includes/dashboard.php:1755
-msgid "https://wordpress.org/plugins/classic-editor"
-msgstr "https://wordpress.org/plugins/classic-editor"
-
 #: wp-admin/includes/dashboard.php:1724
 msgid "https://wordpress.org/gutenberg/"
-msgstr "https://wordpress.org/gutenberg/"
+msgstr "https://uk.wordpress.org/gutenberg/"
+
+#: wp-admin/includes/dashboard.php:1755
+msgid "https://wordpress.org/plugins/classic-editor"
+msgstr "https://uk.wordpress.org/plugins/classic-editor"
 
 #: wp-admin/includes/class-wp-internal-pointers.php:167
 #: wp-admin/includes/upgrade.php:278 wp-admin/privacy.php:63
@@ -66,7 +66,7 @@ msgstr "Новий редактор буде активовано за замо�
 
 #: wp-admin/includes/dashboard.php:1747
 msgid "Not quite ready?"
-msgstr "Не зовсім готові?"
+msgstr "Ще не готові?"
 
 #. translators: Link to https://wordpress.org/gutenberg/
 #: wp-admin/includes/dashboard.php:1723
@@ -112,10 +112,6 @@ msgstr "Активувати Gutenberg"
 msgid "Install Gutenberg"
 msgstr "Встановити Gutenberg"
 
-#: wp-admin/includes/dashboard.php:1698
-msgid "Test the new editor today."
-msgstr "Перевірте новий редактор сьогодні."
-
 #: wp-admin/includes/dashboard.php:1692
 msgid "Screenshot from the Gutenberg interface"
 msgstr "Знімки екрану з інтерфейсу Гутенберга"
@@ -127,6 +123,10 @@ msgstr "Скеруйте свої слова, медіа та макет у но
 #: wp-admin/includes/dashboard.php:1682
 msgid "A new, modern publishing experience is coming soon."
 msgstr "Незабаром з'явиться новий сучасний видавничий досвід."
+
+#: wp-admin/includes/dashboard.php:1698
+msgid "Test the new editor today."
+msgstr "Спробуйте новий редактор!"
 
 #. translators: 1: URL to edit page, 2: URL to preview page
 #: wp-admin/privacy.php:163
@@ -173,13 +173,13 @@ msgstr "Запропонований текст політики конфіде�
 msgid "There are no pages."
 msgstr "Немає сторінок."
 
-#: wp-admin/privacy.php:236
-msgid "Or:"
-msgstr "Або:"
-
 #: wp-admin/privacy.php:210
 msgid "Select an existing page:"
 msgstr "Оберіть існуючу сторінку:"
+
+#: wp-admin/privacy.php:236
+msgid "Or:"
+msgstr "або:"
 
 #. translators: %s is the update notification bubble, if updates are available.
 #: wp-admin/menu.php:266

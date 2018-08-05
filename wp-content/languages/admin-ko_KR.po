@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the WordPress - 4.9.x - Development - Administration package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-27 09:33:52+0000\n"
+"PO-Revision-Date: 2018-08-04 12:57:46+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -885,17 +885,9 @@ msgstr "확인 요청 실행 성공."
 msgid "Unable to add this request. A valid email address or username must be supplied."
 msgstr "이 요청을 추가할 수 없음. 유효한 이메일 주소 또는 사용자명이 제공돼야 합니다."
 
-#: wp-admin/includes/user.php:637 wp-admin/includes/user.php:649
-msgid "Invalid action."
-msgstr "유효하지 않음 작업."
-
 #: wp-admin/includes/user.php:621
 msgid "Confirmation request sent again successfully."
 msgstr "확인 요청 재발송 성공."
-
-#: wp-admin/includes/user.php:564 wp-admin/includes/user.php:688
-msgid "Unable to initiate confirmation request."
-msgstr "확인 요청 실행할 수 없음."
 
 #: wp-admin/includes/ajax-actions.php:4047
 #: wp-admin/includes/ajax-actions.php:4228
@@ -965,6 +957,14 @@ msgstr "제거 인덱스는 1보다 작을 수 없습니다."
 #: wp-admin/includes/ajax-actions.php:4248
 msgid "Invalid email address in request."
 msgstr "요청에 유효하지 않은 이메일 주소."
+
+#: wp-admin/includes/user.php:637 wp-admin/includes/user.php:649
+msgid "Invalid action."
+msgstr "유효하지 않은 작업."
+
+#: wp-admin/includes/user.php:564 wp-admin/includes/user.php:688
+msgid "Unable to initiate confirmation request."
+msgstr "확인 요청을 실행할 수 없음."
 
 #: wp-admin/includes/plugin-install.php:595
 msgid "Requires PHP Version:"
@@ -1380,11 +1380,6 @@ msgid "%s added to permalink structure"
 msgstr "%s 고유주소 구조에 추가됨"
 
 #. translators: %s: permalink structure tag
-#: wp-admin/options-permalink.php:236
-msgid "%s (A sanitized version of the author name.)"
-msgstr "%s (글쓴이 이름의 sanitized 버전.)"
-
-#. translators: %s: permalink structure tag
 #: wp-admin/options-permalink.php:232
 msgid "%s (The sanitized post title (slug).)"
 msgstr "%s (sanitized 글 타이틀 (슬러그).)"
@@ -1423,6 +1418,11 @@ msgstr "%s (년의 월, 예: 05.)"
 #: wp-admin/options-permalink.php:234
 msgid "%s (Category slug. Nested sub-categories appear as nested directories in the URL.)"
 msgstr "%s (카테고리 슬러그. 내재된(Nested) 서브 카테고리는 URL에서 내재된 디렉토리로 나타납니다)"
+
+#. translators: %s: permalink structure tag
+#: wp-admin/options-permalink.php:236
+msgid "%s (A sanitized version of the author name.)"
+msgstr "%s (글쓴이 이름의 정화된 버전.)"
 
 #. translators: %s: permalink structure tag
 #: wp-admin/options-permalink.php:218
@@ -1630,7 +1630,7 @@ msgstr "패널 감추기"
 
 #: wp-admin/theme-install.php:65
 msgid "Expand Sidebar"
-msgstr "사이드바 확대"
+msgstr "사이드바 펼치기"
 
 #: wp-admin/nav-menus.php:814
 msgid "Display location"
@@ -1714,7 +1714,7 @@ msgstr "죄송합니다. 이 글에 파일을 첨부할 권한이 없습니다."
 #: wp-admin/includes/plugin-install.php:606
 msgctxt "Active plugin installations"
 msgid "Less Than 10"
-msgstr "10 미만"
+msgstr "10개 미만"
 
 #: wp-admin/freedoms.php:61 wp-admin/includes/plugin-install.php:239
 #: wp-admin/includes/plugin-install.php:612 wp-admin/plugin-install.php:82
@@ -2233,25 +2233,11 @@ msgid "%s media file moved to the trash."
 msgid_plural "%s media files moved to the trash."
 msgstr[0] "%s개의 미디어 파일이 휴지통으로 이동됩니다."
 
-#: wp-admin/upload.php:250
-msgid "Media file attached."
-msgstr "미디어 파일 첨부됨."
-
 #. translators: %s: number of media files
 #: wp-admin/upload.php:253
 msgid "%s media file attached."
 msgid_plural "%s media files attached."
 msgstr[0] "%s개의 미디어 파일 첨부됨."
-
-#: wp-admin/upload.php:261
-msgid "Media file detached."
-msgstr "미디어 파일 해제됨."
-
-#. translators: %s: number of media files
-#: wp-admin/upload.php:264
-msgid "%s media file detached."
-msgid_plural "%s media files detached."
-msgstr[0] "%s개의 미디어파일 해제됨."
 
 #. translators: %s: number of media files
 #: wp-admin/upload.php:275
@@ -2259,10 +2245,24 @@ msgid "%s media file permanently deleted."
 msgid_plural "%s media files permanently deleted."
 msgstr[0] "%s개의 미디어 파일이 영구 삭제됨."
 
+#. translators: %s: number of media files
+#: wp-admin/upload.php:264
+msgid "%s media file detached."
+msgid_plural "%s media files detached."
+msgstr[0] "%s개의 미디어 파일이 분리됨."
+
+#: wp-admin/upload.php:261
+msgid "Media file detached."
+msgstr "미디어 파일이 분리됨."
+
+#: wp-admin/upload.php:250
+msgid "Media file attached."
+msgstr "미디어 파일이 첨부됨."
+
 #: wp-admin/edit-form-advanced.php:174 wp-admin/media.php:95
 #: wp-admin/upload.php:244 wp-admin/upload.php:304
 msgid "Media file updated."
-msgstr "미디어 파일 업데이트됨."
+msgstr "미디어 파일이 업데이트 됨."
 
 #. translators: 1: theme name, 2: version number
 #. translators: 1: plugin name, 2: version number
@@ -2276,7 +2276,7 @@ msgstr "미디어 파일 업데이트됨."
 #: wp-admin/includes/update.php:530 wp-admin/includes/update.php:541
 #: wp-admin/includes/update.php:552 wp-admin/update-core.php:296
 msgid "View %1$s version %2$s details"
-msgstr "%1$s 버전 %2$s 상세 보기"
+msgstr "%1$s 버전 %2$s 세부사항"
 
 #. translators: 1: relative date, 2: time
 #: wp-admin/includes/dashboard.php:875
@@ -2288,10 +2288,6 @@ msgstr "%1$s, %2$s"
 msgid "<strong>Publish</strong> &mdash; You can set the terms of publishing your post in the Publish box. For Status, Visibility, and Publish (immediately), click on the Edit link to reveal more options. Visibility includes options for password-protecting a post or making it stay at the top of your blog indefinitely (sticky). The Password protected option allows you to set an arbitrary password for each post. The Private option hides the post from everyone except editors and administrators. Publish (immediately) allows you to set a future or past date and time, so you can schedule a post to be published in the future or backdate a post."
 msgstr "<strong>공개하기</strong> &mdash; 공개하기 박스에서 자신의 글을 공개할 수 있는 조건을 설정할 수 있습니다. 상태, 가시성, 공개 (즉시)의 경우 추가 옵션을 보기 위해 편집 링크를 클릭하세요. 가시성은 글의 비밀번호 보호 옵션과 글 목록의 최상단으로 올릴 수 있는 붙박이 기능이 있습니다. 비공개 옵션은 편집자와 관리자를 제외한 모든 사람으로부터 글을 숨길 수 있읍니다. 공개 (즉시)는 미래 또는 과거의 날짜와 시간을 설정할 수 있으며 글을 미래로 예약하거나 과거의 날짜로 변경해 발행할 수 있습니다."
 
-#: wp-admin/user-edit.php:199
-msgid "Error while saving the new email address. Please try again."
-msgstr "새 이메일 주소 저장중 에러. 다시 해주세요."
-
 #. translators: %s: new email
 #: wp-admin/user-edit.php:470
 msgid "There is a pending change of your email to %s."
@@ -2301,6 +2297,10 @@ msgstr "이메일을 %s로 변경하는 것이 대기중입니다."
 #: wp-admin/user-new.php:265
 msgid "User has been added to your site. <a href=\"%s\">Edit user</a>"
 msgstr "사용자가 사이트에 추가됐습니다. <a href=\"%s\">사용자 편집하기</a>"
+
+#: wp-admin/user-edit.php:199
+msgid "Error while saving the new email address. Please try again."
+msgstr "새 이메일 주소 저장 중 오류 발생. 다시 해주세요."
 
 #: wp-admin/upload.php:194
 msgid "You can narrow the list by file type/status or by date using the dropdown menus above the media table."
@@ -2326,10 +2326,6 @@ msgstr "워드프레스에 사용할 데이터베이스 이름."
 msgid "Your database username."
 msgstr "데이터베이스 사용자명."
 
-#: wp-admin/setup-config.php:209
-msgid "Your database password."
-msgstr "데이터베이스 비밀번호."
-
 #: wp-admin/freedoms.php:62 wp-admin/theme-install.php:92
 #: wp-admin/themes.php:92
 msgid "https://wordpress.org/themes/"
@@ -2338,6 +2334,10 @@ msgstr "https://wordpress.org/themes/"
 #: wp-admin/users.php:174
 msgid "Sorry, you are not allowed to delete that user."
 msgstr "죄송합니다. 해당 사용자를 삭제할 권한이 없습니다."
+
+#: wp-admin/setup-config.php:209
+msgid "Your database password."
+msgstr "데이터베이스 암호."
 
 #. translators: 1: plugin name, 2: plugin author
 #: wp-admin/plugins.php:338
@@ -2417,14 +2417,6 @@ msgstr "이미지 크기 변경 도움말."
 msgid "New dimensions:"
 msgstr "새로운 크기:"
 
-#: wp-admin/includes/image-edit.php:62
-msgid "scale width"
-msgstr "폭 크기변경"
-
-#: wp-admin/includes/image-edit.php:66
-msgid "scale height"
-msgstr "높이 크기변경"
-
 #: wp-admin/includes/image-edit.php:102
 msgid "Image Crop Help"
 msgstr "이미지 자르기 도움말"
@@ -2449,6 +2441,14 @@ msgstr "선택 높이"
 msgid "Thumbnail Settings Help"
 msgstr "썸네일 설정 도움말"
 
+#: wp-admin/includes/image-edit.php:66
+msgid "scale height"
+msgstr "높이 크기 변경"
+
+#: wp-admin/includes/image-edit.php:62
+msgid "scale width"
+msgstr "폭 크기 변경"
+
 #. translators: 1: type of comment, 2: post link, 3: notification if the
 #. comment is pending
 #: wp-admin/includes/dashboard.php:739
@@ -2472,24 +2472,24 @@ msgstr "택소노미 템플릿"
 msgid "Date Template"
 msgstr "날짜 템플릿"
 
-#: wp-admin/includes/file.php:35
-msgid "Singular Template"
-msgstr "싱글 템플릿"
-
 #: wp-admin/includes/file.php:37
 msgid "Single Page"
-msgstr "싱글 페이지"
+msgstr "단일 페이지"
+
+#: wp-admin/includes/file.php:35
+msgid "Singular Template"
+msgstr "단일 템플릿"
+
+#: wp-admin/includes/dashboard.php:656
+msgid "View this comment"
+msgstr "이 댓글 보기"
 
 #. translators: %s: number of comments in moderation
 #: wp-admin/includes/dashboard.php:295
 msgctxt "comments"
 msgid "%s comment in moderation"
 msgid_plural "%s comments in moderation"
-msgstr[0] "%s 댓글이 검토중입니다"
-
-#: wp-admin/includes/dashboard.php:656
-msgid "View this comment"
-msgstr "이 댓글 보기"
+msgstr[0] "%s개의 댓글이 검토중입니다"
 
 #. translators: %s: taxonomy term name
 #: wp-admin/includes/class-wp-terms-list-table.php:460
@@ -2505,35 +2505,6 @@ msgstr "다른 업데이트가 현재 진행중입니다."
 msgid "Update progress"
 msgstr "업데이트 진행"
 
-#. translators: %s: attachment title
-#: wp-admin/includes/class-wp-media-list-table.php:512
-#: wp-admin/includes/class-wp-media-list-table.php:689
-msgid "Attach &#8220;%s&#8221; to existing content"
-msgstr "&#8220;%s&#8221;를 기존의 콘텐츠에 첨부하기"
-
-#. translators: %s: attachment title
-#. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:661
-#: wp-admin/includes/class-wp-media-list-table.php:718
-#: wp-admin/includes/class-wp-posts-list-table.php:1262
-msgid "Move &#8220;%s&#8221; to the Trash"
-msgstr "&#8220;%s&#8221;를 휴지통으로 이동"
-
-#. translators: %s: attachment title
-#. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:671
-#: wp-admin/includes/class-wp-media-list-table.php:729
-#: wp-admin/includes/class-wp-posts-list-table.php:1271
-msgid "Delete &#8220;%s&#8221; permanently"
-msgstr "&#8220;%s&#8221;를 영구히 삭제"
-
-#. translators: %s: attachment title
-#. translators: %s: post title
-#: wp-admin/includes/class-wp-media-list-table.php:710
-#: wp-admin/includes/class-wp-posts-list-table.php:1254
-msgid "Restore &#8220;%s&#8221; from the Trash"
-msgstr "&#8220;%s&#8221;를 휴지통으로부터 복구"
-
 #: wp-admin/includes/class-wp-plugins-list-table.php:332
 msgid "No plugins found for &#8220;%s&#8221;."
 msgstr "&#8220;%s&#8221;의 플러그인을 찾을 수 없습니다."
@@ -2542,22 +2513,46 @@ msgstr "&#8220;%s&#8221;의 플러그인을 찾을 수 없습니다."
 msgid "Search for plugins in the WordPress Plugin Directory."
 msgstr "워드프레스 플러그인 저장소에서 플러그인 검색."
 
-#. translators: %s: post title
-#. translators: %s: taxonomy term name
-#: wp-admin/includes/class-wp-posts-list-table.php:1243
-#: wp-admin/includes/class-wp-terms-list-table.php:442
-msgid "Quick edit &#8220;%s&#8221; inline"
-msgstr "&#8220;%s&#8221;를 인라인으로 빠른 편집"
-
 #. translators: %s: taxonomy term name
 #: wp-admin/includes/class-wp-terms-list-table.php:451
 msgid "Delete &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221; 삭제"
 
-#: wp-admin/includes/class-wp-comments-list-table.php:589
-#: wp-admin/includes/dashboard.php:646
-msgid "Edit this comment"
-msgstr "이 댓글 편집"
+#. translators: %s: attachment title
+#. translators: %s: post title
+#: wp-admin/includes/class-wp-media-list-table.php:671
+#: wp-admin/includes/class-wp-media-list-table.php:729
+#: wp-admin/includes/class-wp-posts-list-table.php:1271
+msgid "Delete &#8220;%s&#8221; permanently"
+msgstr "&#8220;%s&#8221;을(를) 영구적으로 삭제"
+
+#. translators: %s: post title
+#. translators: %s: taxonomy term name
+#: wp-admin/includes/class-wp-posts-list-table.php:1243
+#: wp-admin/includes/class-wp-terms-list-table.php:442
+msgid "Quick edit &#8220;%s&#8221; inline"
+msgstr "&#8220;%s&#8221;을(를) 인라인으로 빠른 편집"
+
+#. translators: %s: attachment title
+#. translators: %s: post title
+#: wp-admin/includes/class-wp-media-list-table.php:661
+#: wp-admin/includes/class-wp-media-list-table.php:718
+#: wp-admin/includes/class-wp-posts-list-table.php:1262
+msgid "Move &#8220;%s&#8221; to the Trash"
+msgstr "&#8220;%s&#8221;을(를) 휴지통으로 이동"
+
+#. translators: %s: attachment title
+#: wp-admin/includes/class-wp-media-list-table.php:512
+#: wp-admin/includes/class-wp-media-list-table.php:689
+msgid "Attach &#8220;%s&#8221; to existing content"
+msgstr "&#8220;%s&#8221;을(를) 기존의 콘텐츠에 첨부하기"
+
+#. translators: %s: attachment title
+#. translators: %s: post title
+#: wp-admin/includes/class-wp-media-list-table.php:710
+#: wp-admin/includes/class-wp-posts-list-table.php:1254
+msgid "Restore &#8220;%s&#8221; from the Trash"
+msgstr "&#8220;%s&#8221;을(를) 휴지통에서 복구"
 
 #: wp-admin/includes/class-wp-comments-list-table.php:593
 msgid "Quick edit this comment inline"
@@ -2587,20 +2582,25 @@ msgstr "&#8220;%s&#8221; (편집)"
 msgid "Detach from &#8220;%s&#8221;"
 msgstr "&#8220;%s&#8221;로부터 제거"
 
+#: wp-admin/includes/class-wp-comments-list-table.php:589
+#: wp-admin/includes/dashboard.php:646
+msgid "Edit this comment"
+msgstr "이 댓글을 편집"
+
 #: wp-admin/includes/class-wp-comments-list-table.php:575
 msgid "Restore this comment from the spam"
 msgstr "이 댓글을 스팸으로부터 복구"
-
-#. translators: %s: importer slug
-#: wp-admin/import.php:64
-msgid "The %s importer is invalid or is not installed."
-msgstr "%s 가져오기가 유효하지 않으며 설치되지 않았습니다."
 
 #. translators: 1: user_login, 2: user_email
 #: wp-admin/includes/ajax-actions.php:291
 msgctxt "user autocomplete result"
 msgid "%1$s (%2$s)"
 msgstr "%1$s (%2$s)"
+
+#. translators: %s: importer slug
+#: wp-admin/import.php:64
+msgid "The %s importer is invalid or is not installed."
+msgstr "%s 가져오기가 유효하지 않거나 설치되지 않았습니다."
 
 #: wp-admin/edit-form-comment.php:90
 msgctxt "comment status"
@@ -2627,14 +2627,14 @@ msgid "Images should be at least %s tall."
 msgstr "이미지는 최소한 높이가 %s여야 합니다."
 
 #. translators: %s: size in pixels
-#: wp-admin/custom-header.php:550
-msgid "Suggested width is %s."
-msgstr "제안된 폭은 %s입니다."
-
-#. translators: %s: size in pixels
 #: wp-admin/custom-header.php:560
 msgid "Suggested height is %s."
-msgstr "제안된 높이는 %s입니다."
+msgstr "제안 높이는 %s입니다."
+
+#. translators: %s: size in pixels
+#: wp-admin/custom-header.php:550
+msgid "Suggested width is %s."
+msgstr "제안 폭은 %s입니다."
 
 #: wp-admin/user-new.php:480
 msgid "Send User Notification"
@@ -2726,7 +2726,7 @@ msgstr "어떠한 이유로 이러한 자동 파일 생성이 작동하지 않�
 #. translators: %s: wp-config.php
 #: wp-admin/setup-config.php:163
 msgid "We&#8217;re going to use this information to create a %s file."
-msgstr "해당 정보를 %s 파일을 생성하는데 사용합니다."
+msgstr "해당 정보는 %s 파일을 생성하는데 사용합니다."
 
 #. translators: %s: wp-content/uploads
 #: wp-admin/options-media.php:114
@@ -2869,13 +2869,13 @@ msgstr "미디어 아이템 목록"
 msgid "Themes list"
 msgstr "테마 목록"
 
-#: wp-admin/themes.php:366
-msgid "Install Parent Theme"
-msgstr "부모테마 설치하기"
-
 #: wp-admin/theme-install.php:157
 msgid "Filter themes list"
 msgstr "테마 목록 필터"
+
+#: wp-admin/themes.php:366
+msgid "Install Parent Theme"
+msgstr "부모 테마 설치하기"
 
 #: wp-admin/plugins.php:505
 msgid "The selected plugin has been <strong>deleted</strong>."
@@ -2884,26 +2884,6 @@ msgstr "선택된 플러그인은 <strong>삭제</strong>  되었습니다."
 #: wp-admin/plugins.php:522
 msgid "All selected plugins are up to date."
 msgstr "선택된 모든 플러그인은 최신입니다."
-
-#. translators: %s: plugin file name
-#: wp-admin/plugin-editor.php:193
-msgid "Editing %s (active)"
-msgstr "%s 수정중(활성)"
-
-#. translators: %s: plugin file name
-#: wp-admin/plugin-editor.php:196
-msgid "Browsing %s (active)"
-msgstr "%s 탐색중(활성)"
-
-#. translators: %s: plugin file name
-#: wp-admin/plugin-editor.php:201
-msgid "Editing %s (inactive)"
-msgstr "%s 수정중(비활성)"
-
-#. translators: %s: plugin file name
-#: wp-admin/plugin-editor.php:204
-msgid "Browsing %s (inactive)"
-msgstr "%s 탐색중(비활성)"
 
 #: wp-admin/plugin-install.php:104 wp-admin/plugins.php:447
 msgid "Plugins list navigation"
@@ -2917,6 +2897,26 @@ msgstr "플러그인 목록"
 msgid "Filter plugins list"
 msgstr "플러그인 목록 필터"
 
+#. translators: %s: plugin file name
+#: wp-admin/plugin-editor.php:204
+msgid "Browsing %s (inactive)"
+msgstr "%s 탐색 중 (비활성)"
+
+#. translators: %s: plugin file name
+#: wp-admin/plugin-editor.php:201
+msgid "Editing %s (inactive)"
+msgstr "%s 수정 중 (비활성)"
+
+#. translators: %s: plugin file name
+#: wp-admin/plugin-editor.php:196
+msgid "Browsing %s (active)"
+msgstr "%s 탐색 중 (활성)"
+
+#. translators: %s: plugin file name
+#: wp-admin/plugin-editor.php:193
+msgid "Editing %s (active)"
+msgstr "%s 수정 중 (활성)"
+
 #: wp-admin/options-permalink.php:350
 msgid "<a href=\"https://codex.wordpress.org/Nginx\">Documentation on Nginx configuration</a>."
 msgstr "<a href=\"https://codex.wordpress.org/Nginx\">Nginx 설정 문서</a>."
@@ -2924,7 +2924,7 @@ msgstr "<a href=\"https://codex.wordpress.org/Nginx\">Nginx 설정 문서</a>."
 #. translators: %s: local time
 #: wp-admin/options-general.php:224
 msgid "Local time is %s."
-msgstr "지역시간 %s"
+msgstr "현지 시간은 %s입니다."
 
 #: wp-admin/my-sites.php:66
 msgctxt "site"
@@ -2954,7 +2954,7 @@ msgstr "고유주소 편집"
 
 #: wp-admin/includes/post.php:1645
 msgid "Saving revision&hellip;"
-msgstr "리비전 저장중&hellip;"
+msgstr "리비전 저장 중&hellip;"
 
 #: wp-admin/includes/ms.php:808
 msgid "Select a user"
@@ -3027,10 +3027,6 @@ msgstr "아이템 목록"
 msgid "Additional settings"
 msgstr "추가적인 구성"
 
-#: wp-admin/includes/class-wp-screen.php:1235
-msgid "View Mode"
-msgstr "모드 보기"
-
 #: wp-admin/includes/class-wp-screen.php:1013
 msgid "Boxes"
 msgstr "박스"
@@ -3066,6 +3062,10 @@ msgstr "모든 임시 글 보기"
 #: wp-admin/includes/dashboard.php:710
 msgid "From %1$s %2$s"
 msgstr "%1$s %2$s"
+
+#: wp-admin/includes/class-wp-screen.php:1235
+msgid "View Mode"
+msgstr "보기 모드"
 
 #. translators: %s: the new user
 #: wp-admin/includes/ajax-actions.php:1409
@@ -3245,11 +3245,11 @@ msgstr "현재 테마는 사용자 정의 헤더 이미지 업로드를 지원�
 
 #: wp-admin/includes/user.php:479
 msgid "You&rsquo;re using the auto-generated password for your account. Would you like to change it?"
-msgstr "자동생성된 비밀번호를 이용하여 로그인하였습니다. 지금 바꾸시겠습니까?"
+msgstr "자동 생성된 암호를 이용하여 로그인하였습니다. 지금 바꾸시겠습니까?"
 
 #: wp-admin/users.php:365
 msgid "You have specified this user for removal:"
-msgstr "삭제할 사용자를 지정하십시요:"
+msgstr "이 사용자를 삭제 대상으로 지정하였습니다:"
 
 #. translators: 1: User's display name.
 #: wp-admin/user-edit.php:638
@@ -3268,10 +3268,6 @@ msgstr "사용자 관리"
 msgid "Cancel password change"
 msgstr "패스워드 변경 취소"
 
-#: wp-admin/user-edit.php:575
-msgid "Generate Password"
-msgstr "비밀번호 생성"
-
 #: wp-admin/user-edit.php:614 wp-admin/user-edit.php:624
 msgid "Log Out Everywhere Else"
 msgstr "현 위치를 제외하고 모두 로그아웃"
@@ -3280,6 +3276,10 @@ msgstr "현 위치를 제외하고 모두 로그아웃"
 #: wp-admin/user-edit.php:632
 msgid "Sessions"
 msgstr "세션들"
+
+#: wp-admin/user-edit.php:575
+msgid "Generate Password"
+msgstr "암호 생성"
 
 #. translators: The non-breaking space prevents 1Password from thinking the
 #. text "log in" should trigger a password save prompt.
@@ -3655,10 +3655,6 @@ msgstr "사이트 <a href=\"https://codex.wordpress.org/Glossary#Character_set\"
 msgid "example: www.wordpress.org"
 msgstr "예: www.wordpress.org"
 
-#: wp-admin/theme-install.php:62 wp-admin/themes.php:141
-msgid "Number of Themes found: %d"
-msgstr "검색된 테마 수: %d"
-
 #: wp-admin/theme-install.php:94
 msgid "You can Search for themes by keyword, author, or tag, or can get more specific and search by criteria listed in the feature filter."
 msgstr "테마는 키워드, 글쓴이 또는 태그로 검색할 수 있으며 특성 필터 목록의 범위로 더욱 특정해 검색할 수 있습니다."
@@ -3671,25 +3667,29 @@ msgstr "또는 특성, 인기, 최근의 테마를 둘러볼 수 있습니다. �
 msgid "The search for installed themes will search for terms in their name, description, author, or tag."
 msgstr "설치된 테마의 검색은 해당 테마의 이름, 설명, 글쓴이 또는 태그로 용어를 검색합니다."
 
-#: wp-admin/options-general.php:314
-msgid "enter a custom date format in the following field"
-msgstr "다음 란에 사용자 정의 날짜 포맷을 입력하세요"
-
-#: wp-admin/options-general.php:351
-msgid "enter a custom time format in the following field"
-msgstr "다음 란에 사용자 정의 시간 포맷을 입력하세요"
+#: wp-admin/theme-install.php:62 wp-admin/themes.php:141
+msgid "Number of Themes found: %d"
+msgstr "검색된 테마 개수: %d"
 
 #: wp-admin/options-general.php:315
 msgid "Custom date format:"
-msgstr "사용자 정의 날짜 포맷:"
+msgstr "사용자 정의 날짜 형식:"
 
 #: wp-admin/options-general.php:352
 msgid "Custom time format:"
-msgstr "사용자 정의 시간 포맷:"
+msgstr "사용자 정의 시간 형식:"
+
+#: wp-admin/options-general.php:351
+msgid "enter a custom time format in the following field"
+msgstr "다음 란에 사용자 정의 시간 형식을 입력하세요"
+
+#: wp-admin/options-general.php:314
+msgid "enter a custom date format in the following field"
+msgstr "다음 칸에 사용자 정의 날짜 형식을 입력하세요"
 
 #: wp-admin/includes/class-plugin-upgrader.php:56
 msgid "Plugins updated successfully."
-msgstr "플러그인 업데이트 성공."
+msgstr "플러그인이 성공적으로 업데이트 됨."
 
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:602
 #: wp-admin/includes/plugin-install.php:604
@@ -3699,7 +3699,7 @@ msgstr "1+ 백만"
 
 #: wp-admin/includes/class-wp-media-list-table.php:501
 msgid "Detach"
-msgstr "제외"
+msgstr "분리"
 
 #: wp-admin/menu-header.php:255
 msgid "Main menu"
@@ -3748,10 +3748,6 @@ msgstr "1개의 글이 업데이트 되지 않았습니다. 다른 사람이 편
 msgid "<span>Active:</span> %s"
 msgstr "<span>활성:</span> %s"
 
-#: wp-admin/includes/class-wp-screen.php:1146
-msgid "Number of items per page:"
-msgstr "페이지당 아이템 수:"
-
 #: wp-admin/includes/file.php:31 wp-admin/includes/template.php:1774
 msgid "Posts Page"
 msgstr "글 페이지"
@@ -3763,6 +3759,17 @@ msgstr "현재 최근 글을 보여주는 페이지를 편집하고 있습니다
 #: wp-admin/includes/theme.php:639 wp-admin/themes.php:446
 msgid "Close details dialog"
 msgstr "상세 대화 상자 닫기"
+
+#: wp-admin/nav-menus.php:547
+msgid "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
+msgstr "사용자 정의 링크를 추가하려면, <strong>사용자 정의 링크 섹션을 확장하고 URL과 링크 텍스트를 입력한 다음 메뉴에 추가를 클릭하세요</strong>"
+
+#. translators: date and time format for exact current time, mainly about
+#. timezones, see https://secure.php.net/date
+#: wp-admin/options-general.php:21
+msgctxt "timezone date format"
+msgid "Y-m-d H:i:s"
+msgstr "Y-m-d H:i:s"
 
 #. translators: Do not translate USERNAME, URL_DELETE, SITE_NAME: those are
 #. placeholders.
@@ -3802,24 +3809,9 @@ msgstr ""
 " 웹마스터\n"
 " ###SITE_NAME###"
 
-#: wp-admin/nav-menus.php:547
-msgid "To add a custom link, <strong>expand the Custom Links section, enter a URL and link text, and click Add to Menu</strong>"
-msgstr "사용자 정의 링크를 추가하려면, <strong>사용자 정의 링크 섹션을 확장하고 URL과 링크 텍스트를 입력한 다음 메뉴에 추가를 클릭하세요</strong>"
-
-#. translators: date and time format for exact current time, mainly about
-#. timezones, see https://secure.php.net/date
-#: wp-admin/options-general.php:21
-msgctxt "timezone date format"
-msgid "Y-m-d H:i:s"
-msgstr "Y-m-d H:i:s"
-
 #: wp-admin/user-edit.php:49
 msgid "You can log out of other devices, such as your phone or a public computer, by clicking the Log Out Everywhere Else button."
 msgstr "다른 모든 세션에서 로그아웃 버튼을 클릭해 휴대폰이나 공용 컴퓨터와 같은 다른 기기에서 로그아웃 할 수 있습니다."
-
-#: wp-admin/update-core.php:431
-msgid "New translations are available."
-msgstr "새로운 번역이 가능합니다."
 
 #: wp-admin/theme-install.php:332
 msgid "This theme has not been rated yet."
@@ -3828,6 +3820,14 @@ msgstr "이 테마는 아직 평가되지 않았습니다."
 #: wp-admin/includes/template.php:1770
 msgid "Front Page"
 msgstr "전면 페이지"
+
+#: wp-admin/includes/class-wp-screen.php:1146
+msgid "Number of items per page:"
+msgstr "페이지당 아이템 개수:"
+
+#: wp-admin/update-core.php:431
+msgid "New translations are available."
+msgstr "새로운 번역이 사용 가능합니다."
 
 #: wp-admin/includes/ms.php:356
 msgid "Site Upload Space Quota"
@@ -3841,6 +3841,14 @@ msgstr "크기(메가 바이트)"
 msgctxt "revision date short format"
 msgid "j M @ H:i"
 msgstr "M j @ H:i"
+
+#: wp-admin/includes/class-wp-automatic-updater.php:846
+msgid ""
+"UPDATE LOG\n"
+"=========="
+msgstr ""
+"업데이트 기록\n"
+" =========="
 
 #: wp-admin/includes/class-wp-automatic-updater.php:828
 msgid ""
@@ -3865,14 +3873,6 @@ msgstr ""
 " * 또는 버그 보고서를 작성하기를 원할 경우: https://core.trac.wordpress.org/\n"
 " \n"
 " 감사합니다! -- 워드프레스 팀"
-
-#: wp-admin/includes/class-wp-automatic-updater.php:846
-msgid ""
-"UPDATE LOG\n"
-"=========="
-msgstr ""
-"업데이트 기록\n"
-" =========="
 
 #. translators: Do not translate USERNAME, ADMIN_URL, EMAIL, SITENAME, SITEURL:
 #. those are placeholders.
@@ -4056,10 +4056,6 @@ msgstr "이제 다른 모든 곳에서 로그아웃 됐습니다."
 msgid "%s has been logged out."
 msgstr "%s님이 로그아웃 됐습니다."
 
-#: wp-admin/includes/ajax-actions.php:3214
-msgid "Could not log out user sessions. Please try again."
-msgstr "사용자 세션을 로그아웃 할 수 없습니다. 다시 해보세요."
-
 #: wp-admin/includes/ajax-actions.php:3108
 msgid "This preview is unavailable in the editor."
 msgstr "이 미리보기는 편집기에서 가능하지 않습니다."
@@ -4071,6 +4067,10 @@ msgstr "글 편집기 위에 있는 아이콘을 클릭하고 지시에 따라 �
 #: wp-admin/edit-form-advanced.php:376
 msgid "<strong>Post editor</strong> &mdash; Enter the text for your post. There are two modes of editing: Visual and Text. Choose the mode by clicking on the appropriate tab."
 msgstr "<strong>글 편집기</strong> &mdash; 글 작성 시 텍스트를 입력합니다. 두 가지 편집이 있습니다: 비주얼 및 텍스트. 해당 탭을 클릭해서 모드를 선택합니다."
+
+#: wp-admin/includes/ajax-actions.php:3214
+msgid "Could not log out user sessions. Please try again."
+msgstr "사용자 세션을 로그아웃 할 수 없습니다. 다시 시도해주세요."
 
 #: wp-admin/includes/class-wp-screen.php:1032
 msgctxt "Welcome panel"
@@ -4166,7 +4166,7 @@ msgstr "사용중인 워드프레스 버전과 <strong>호환됨</strong>"
 #: wp-admin/includes/plugin-install.php:640
 msgid "%d star"
 msgid_plural "%d stars"
-msgstr[0] "%d 별 평점"
+msgstr[0] "별 %d 개 평점"
 
 #: wp-admin/includes/class-wp-list-table.php:434
 msgid "Select bulk action"
@@ -4223,21 +4223,6 @@ msgctxt "Plugin installer group title"
 msgid "Tools"
 msgstr "도구"
 
-#. translators: 1: Plugin name and version.
-#: wp-admin/includes/class-wp-plugin-install-list-table.php:496
-msgid "Install %s now"
-msgstr "%s 지금 설치하기"
-
-#. translators: 1: Plugin name and version
-#. translators: %s: theme name
-#. translators: %s: plugin name
-#. translators: %s: theme name
-#: wp-admin/includes/class-wp-plugin-install-list-table.php:503
-#: wp-admin/includes/theme.php:214 wp-admin/includes/update.php:413
-#: wp-admin/includes/update.php:558
-msgid "Update %s now"
-msgstr "%s 지금 업데이트"
-
 #: wp-admin/includes/class-wp-plugin-install-list-table.php:545
 msgid "More Details"
 msgstr "더 많은 상세"
@@ -4245,11 +4230,6 @@ msgstr "더 많은 상세"
 #: wp-admin/includes/class-wp-plugins-list-table.php:782
 msgid "View details"
 msgstr "상세 보기"
-
-#: wp-admin/includes/class-wp-terms-list-table.php:185
-msgctxt "Number/count of items"
-msgid "Count"
-msgstr "카운트"
 
 #: wp-admin/includes/class-wp-theme-install-list-table.php:67
 msgctxt "themes"
@@ -4273,6 +4253,26 @@ msgstr "기여자"
 #: wp-admin/includes/ajax-actions.php:3079
 msgid "%s failed to embed."
 msgstr "%s을(를) 임베드하는데 실패했습니다."
+
+#: wp-admin/includes/class-wp-terms-list-table.php:185
+msgctxt "Number/count of items"
+msgid "Count"
+msgstr "개수"
+
+#. translators: 1: Plugin name and version
+#. translators: %s: theme name
+#. translators: %s: plugin name
+#. translators: %s: theme name
+#: wp-admin/includes/class-wp-plugin-install-list-table.php:503
+#: wp-admin/includes/theme.php:214 wp-admin/includes/update.php:413
+#: wp-admin/includes/update.php:558
+msgid "Update %s now"
+msgstr "지금 %s 업데이트"
+
+#. translators: 1: Plugin name and version.
+#: wp-admin/includes/class-wp-plugin-install-list-table.php:496
+msgid "Install %s now"
+msgstr "지금 %s 설치하기"
 
 #: wp-admin/includes/class-wp-automatic-updater.php:694
 msgid "If you reach out to us, we'll also ensure you'll never have this problem again."
@@ -4534,13 +4534,13 @@ msgstr "실시간 미리보기를 하려면 현재의 테마에 사용자 정의
 msgid "The current theme is displayed highlighted as the first theme."
 msgstr "현재 사용 중인 테마는 첫 번째 테마로 하이라이트 되어 표시됩니다."
 
-#: wp-admin/themes.php:107
-msgid "When previewing on smaller monitors, you can use the collapse icon at the bottom of the left-hand pane. This will hide the pane, giving you more room to preview your site in the new theme. To bring the pane back, click on the collapse icon again."
-msgstr "작은 모니터에서 미리보기 할 경우 좌측 사아드바 하단의 숨기기 아이콘을 사용할 수 있습니다. 클릭하면 사이드바를 숨기고 사이트에서 새 테마를 미리보기 할 수 있는 영역을 확대합니다. 사이드바 창을 되돌리려면 숨기기 아이콘을 다시 클릭하면 됩니다."
-
 #: wp-admin/themes.php:105
 msgid "Tap or hover on any theme then click the Live Preview button to see a live preview of that theme and change theme options in a separate, full-screen view. You can also find a Live Preview button at the bottom of the theme details screen. Any installed theme can be previewed and customized in this way."
 msgstr "테마를 실시간 미리보기 위해 어떤 테마든 마우스를 올리거나 탭하고 실시간 미리보기를 클릭해서 분리된 전체 화면 보기에서 테마 옵션을 변경할 수 있습니다. 또한 테마 상세 화면의 하단에 실시간 미리보기 버튼이 있습니다. 설치된 어떤 테마든 이런 방법으로 미리보고 사용자 정의 할 수 있습니다."
+
+#: wp-admin/themes.php:107
+msgid "When previewing on smaller monitors, you can use the collapse icon at the bottom of the left-hand pane. This will hide the pane, giving you more room to preview your site in the new theme. To bring the pane back, click on the collapse icon again."
+msgstr "작은 모니터에서 미리보기 할 경우 좌측 사아드바 하단의 숨기기 아이콘을 사용할 수 있습니다. 클릭하면 사이드바를 숨기고 사이트에서 새 테마를 미리보기 할 수 있는 영역을 확대합니다. 사이드바 창을 되돌리려면 숨기기 아이콘을 다시 클릭하면 됩니다."
 
 #: wp-admin/themes.php:106
 msgid "The theme being previewed is fully interactive &mdash; navigate to different pages to see how the theme handles posts, archives, and other page templates. The settings may differ depending on what theme features the theme being previewed supports. To accept the new settings and activate the theme all in one step, click the Publish &amp; Activate button above the menu."
@@ -4890,11 +4890,6 @@ msgstr "새로운 사용자를 만들고 이 사이트에 추가하기."
 msgid "Upgrading to a newer version of the same theme will override changes made here. To avoid this, consider creating a <a href=\"%s\">child theme</a> instead."
 msgstr "같은 테마의 새 버전으로 업그레이드는 여기서 만들어진 변경사항을 덮어쓰기 합니다. 이를 피하려면 대신 <a href=\"%s\">자식테마</a>사용을 검토해보세요."
 
-#. translators: 1: folder to locate, 2: folder to start searching from
-#: wp-admin/includes/class-wp-filesystem-base.php:243
-msgid "Looking for %1$s in %2$s"
-msgstr "%2$s에서 %1$s를 검색합니다 "
-
 #: wp-admin/includes/class-core-upgrader.php:37
 msgid "Attempting to roll back to previous version."
 msgstr "이전 버전으로 복귀합니다."
@@ -4961,6 +4956,11 @@ msgstr "테마가 기본적으로 메뉴를 지원하지 않습니다. 하지만
 msgid "Menus can be displayed in locations defined by your theme, even used in sidebars by adding a &#8220;Navigation Menu&#8221; widget on the <a href=\"%1$s\">Widgets</a> screen. If your theme does not support the navigation menus feature (the default themes, %2$s and %3$s, do), you can learn about adding this support by following the Documentation link to the side."
 msgstr "메뉴는 테마에서 정의된 위치에 표시될 수 있습니다. &#8220;내비게이션 메뉴&#8221; 위젯을 <a href=\"%1$s\">위젯</a> 화면에 추가하면 사이드바에서도 사용할 수 있습니다. 테마가 내비게이션 메뉴 기능을 지원하지 않으면 (기본 테마인 %2$s, %3$s는 지원함) 우측에 있는 문서 링크를 따라가면 이러한 지원을 추가하는 방법을 배울 수 있습니다. "
 
+#. translators: 1: folder to locate, 2: folder to start searching from
+#: wp-admin/includes/class-wp-filesystem-base.php:243
+msgid "Looking for %1$s in %2$s"
+msgstr "%2$s에서 %1$s을(를) 검색합니다 "
+
 #: wp-admin/includes/edit-tag-messages.php:24
 msgid "Category added."
 msgstr "카테고리가 추가됐습니다."
@@ -5009,50 +5009,50 @@ msgstr "태그가 업데이트 되지 않았습니다. "
 msgid "Tags deleted."
 msgstr "태그가 삭제됐습니다."
 
-#: wp-admin/edit.php:275
-msgid "%s post not updated, somebody is editing it."
-msgid_plural "%s posts not updated, somebody is editing them."
-msgstr[0] "%s 글이 업데이트 되지 않았습니다. 누군가 해당 글을 편집하고 있습니다."
-
-#: wp-admin/edit.php:276
-msgid "%s post permanently deleted."
-msgid_plural "%s posts permanently deleted."
-msgstr[0] "%s 글이 영구적으로 삭제됐습니다."
-
-#: wp-admin/edit.php:277
-msgid "%s post moved to the Trash."
-msgid_plural "%s posts moved to the Trash."
-msgstr[0] "%s 글이 휴지통으로 이동했습니다."
-
-#: wp-admin/edit.php:278
-msgid "%s post restored from the Trash."
-msgid_plural "%s posts restored from the Trash."
-msgstr[0] "%s 글이 휴지통에서 복구됐습니다."
-
-#: wp-admin/edit.php:281
-msgid "%s page updated."
-msgid_plural "%s pages updated."
-msgstr[0] "%s 페이지가 업데이트 됐습니다."
-
-#: wp-admin/edit.php:283
-msgid "%s page not updated, somebody is editing it."
-msgid_plural "%s pages not updated, somebody is editing them."
-msgstr[0] "%s 페이지가 업데이트 되지 않았습니다. 누군가 편집하고 있습니다."
-
-#: wp-admin/edit.php:284
-msgid "%s page permanently deleted."
-msgid_plural "%s pages permanently deleted."
-msgstr[0] "%s 페이지가 영구적으로 삭제됐습니다."
+#: wp-admin/edit.php:286
+msgid "%s page restored from the Trash."
+msgid_plural "%s pages restored from the Trash."
+msgstr[0] "%s개의 페이지가 휴지통에서 복구됐습니다."
 
 #: wp-admin/edit.php:285
 msgid "%s page moved to the Trash."
 msgid_plural "%s pages moved to the Trash."
-msgstr[0] "%s 페이지가 휴지통으로 이동됐습니다."
+msgstr[0] "%s개의 페이지가 휴지통으로 이동됐습니다."
 
-#: wp-admin/edit.php:286
-msgid "%s page restored from the Trash."
-msgid_plural "%s pages restored from the Trash."
-msgstr[0] "%s 페이지가 휴지통에서 복구됐습니다."
+#: wp-admin/edit.php:284
+msgid "%s page permanently deleted."
+msgid_plural "%s pages permanently deleted."
+msgstr[0] "%s개의 페이지가 영구적으로 삭제됐습니다."
+
+#: wp-admin/edit.php:283
+msgid "%s page not updated, somebody is editing it."
+msgid_plural "%s pages not updated, somebody is editing them."
+msgstr[0] "%s개의 페이지가 업데이트 되지 않았습니다. 누군가 편집하고 있습니다."
+
+#: wp-admin/edit.php:281
+msgid "%s page updated."
+msgid_plural "%s pages updated."
+msgstr[0] "%s개의 페이지가 업데이트 됐습니다."
+
+#: wp-admin/edit.php:278
+msgid "%s post restored from the Trash."
+msgid_plural "%s posts restored from the Trash."
+msgstr[0] "%s개의 글이 휴지통에서 복구됐습니다."
+
+#: wp-admin/edit.php:277
+msgid "%s post moved to the Trash."
+msgid_plural "%s posts moved to the Trash."
+msgstr[0] "%s개의 글이 휴지통으로 이동했습니다."
+
+#: wp-admin/edit.php:276
+msgid "%s post permanently deleted."
+msgid_plural "%s posts permanently deleted."
+msgstr[0] "%s개의 글이 영구적으로 삭제됐습니다."
+
+#: wp-admin/edit.php:275
+msgid "%s post not updated, somebody is editing it."
+msgid_plural "%s posts not updated, somebody is editing them."
+msgstr[0] "%s개의 글이 업데이트 되지 않았습니다. 누군가 해당 글을 편집하고 있습니다."
 
 #: wp-admin/revision.php:110
 msgid "Compare two different revisions by <strong>selecting the &#8220;Compare any two revisions&#8221; box</strong> to the side."
@@ -5250,10 +5250,6 @@ msgstr "오디오 포맷:"
 msgid "Audio Codec:"
 msgstr "오디오 코덱:"
 
-#: wp-admin/includes/post.php:1646
-msgid "Your latest changes were saved as a revision."
-msgstr "최근 변경이 리비전으로 저장됐습니다."
-
 #: wp-admin/nav-menus.php:523 wp-admin/themes.php:73
 msgid "From this screen you can:"
 msgstr "이 화면에서 할 수 있는 것:"
@@ -5351,6 +5347,10 @@ msgstr "각 내비게이션 메뉴는 페이지, 카테고리, 사용자 URL 또
 #: wp-admin/nav-menus.php:560
 msgid "To add a new menu instead of assigning an existing one, <strong>click the &#8217;Use new menu&#8217; link</strong>. Your new menu will be automatically assigned to that theme location"
 msgstr "기존 메뉴를 배정하는 대신에 새 메뉴를 추가하려면, <strong>&#8217;새 메뉴 사용하기&#8217; 링크를 클릭하세요</strong>. 새 메뉴가 자동으로 해당 테마 위치에 배정됩니다."
+
+#: wp-admin/includes/post.php:1646
+msgid "Your latest changes were saved as a revision."
+msgstr "최근 변경사항이 새 리비전으로 저장됐습니다."
 
 #: wp-admin/includes/revision.php:383
 msgid "Restore This Revision"
@@ -6647,7 +6647,7 @@ msgstr "컨텐트를 몇가지 다른 방법으로 작성할 수 있습니다; �
 
 #: wp-admin/themes.php:90
 msgid "Installing themes on Multisite can only be done from the Network Admin section."
-msgstr "다중사이트에서의 태마 설치는 네트워크 관리 부분에서만 가능합니다."
+msgstr "다중사이트에서의 테마 설치는 네트워크 관리 부분에서만 가능합니다."
 
 #: wp-admin/options-general.php:30
 msgid "If you want site visitors to be able to register themselves, as opposed to by the site administrator, check the membership box. A default user role can be set for all new users, whether self-registered or registered by the site admin."
@@ -6866,11 +6866,11 @@ msgstr "이곳에 파일을 놓으세요."
 
 #: wp-admin/includes/plugin-install.php:267
 msgid "%s plugin"
-msgstr "%s 플러그인"
+msgstr "%s개의 플러그인"
 
 #: wp-admin/includes/plugin-install.php:267
 msgid "%s plugins"
-msgstr "%s 플러그인들"
+msgstr "%s개의 플러그인"
 
 #. translators: 1: table name, 2: error message,
 #: wp-admin/maint/repair.php:139
@@ -7023,6 +7023,10 @@ msgstr "지우기 확인"
 msgid "Deactivate"
 msgstr "비활성화"
 
+#: wp-admin/menu.php:248 wp-admin/ms-delete-site.php:30
+msgid "Delete Site"
+msgstr "사이트 삭제"
+
 #: wp-admin/edit-tag-form.php:264
 #: wp-admin/includes/class-wp-links-list-table.php:82
 #: wp-admin/includes/class-wp-links-list-table.php:318
@@ -7040,10 +7044,6 @@ msgstr "비활성화"
 #: wp-admin/themes.php:499 wp-admin/widgets.php:320
 msgid "Delete"
 msgstr "삭제"
-
-#: wp-admin/menu.php:248 wp-admin/ms-delete-site.php:30
-msgid "Delete Site"
-msgstr "사이트 삭제"
 
 #: wp-admin/comment.php:50 wp-admin/custom-background.php:96
 #: wp-admin/custom-header.php:122 wp-admin/edit-comments.php:184
@@ -8405,18 +8405,6 @@ msgstr "휴지통으로 이동 중에 문제가 생겼습니다."
 msgid "Error in restoring from Trash."
 msgstr "휴지통에서 복원 중에 문제가 생겼습니다."
 
-#. translators: %s: number of comments restored from the Trash
-#: wp-admin/edit-comments.php:278
-msgid "%s comment restored from the Trash"
-msgid_plural "%s comments restored from the Trash"
-msgstr[0] "%1$s 댓글이 휴지통에서 복원되었습니다."
-
-#. translators: %s: number of comments moved to the Trash
-#: wp-admin/edit-comments.php:273
-msgid "%s comment moved to the Trash."
-msgid_plural "%s comments moved to the Trash."
-msgstr[0] "%s 댓글을 휴지통으로 이동했습니다."
-
 #: wp-admin/edit.php:125 wp-admin/post.php:238 wp-admin/upload.php:149
 msgid "Sorry, you are not allowed to restore this item from the Trash."
 msgstr "죄송합니다. 휴지통에서 이 아이템을 복구할 권한이 없습니다."
@@ -8424,6 +8412,18 @@ msgstr "죄송합니다. 휴지통에서 이 아이템을 복구할 권한이 �
 #: wp-admin/edit.php:106 wp-admin/post.php:215 wp-admin/upload.php:137
 msgid "Sorry, you are not allowed to move this item to the Trash."
 msgstr "죄송합니다. 휴지통에서 이 아이템을 이동할 권한이 없습니다."
+
+#. translators: %s: number of comments moved to the Trash
+#: wp-admin/edit-comments.php:273
+msgid "%s comment moved to the Trash."
+msgid_plural "%s comments moved to the Trash."
+msgstr[0] "%s개의 댓글을 휴지통으로 이동했습니다."
+
+#. translators: %s: number of comments restored from the Trash
+#: wp-admin/edit-comments.php:278
+msgid "%s comment restored from the Trash"
+msgid_plural "%s comments restored from the Trash"
+msgstr[0] "%s개의 댓글이 휴지통에서 복원되었습니다."
 
 #: wp-admin/update-core.php:357
 msgid "The following themes have new versions available. Check the ones you want to update and then click &#8220;Update Themes&#8221;."
@@ -8572,7 +8572,7 @@ msgstr "%1$s 의 업데이트 실패함."
 
 #: wp-admin/includes/class-bulk-plugin-upgrader-skin.php:23
 msgid "Updating Plugin %1$s (%2$d/%3$d)"
-msgstr "플러그인 업데이트중 %1$s (%2$d/%3$d)"
+msgstr "플러그인 %1$s 업데이트 중 (%2$d/%3$d)"
 
 #: wp-admin/includes/upgrade.php:86
 msgid "User already exists. Password inherited."
@@ -8731,10 +8731,6 @@ msgstr "휴지통 보기"
 #: wp-admin/includes/class-wp-screen.php:875
 msgid "Screen Options"
 msgstr "화면 옵션"
-
-#: wp-admin/includes/update.php:282
-msgid "Latest"
-msgstr "최근"
 
 #: wp-admin/install.php:73
 msgid "WordPress &rsaquo; Installation"
@@ -9043,22 +9039,6 @@ msgstr "이름"
 msgid "Last Name"
 msgstr "성"
 
-#: wp-admin/user-edit.php:416
-msgid "Nickname"
-msgstr "닉네임:"
-
-#: wp-admin/user-edit.php:457
-msgid "Contact Info"
-msgstr "연락처"
-
-#: wp-admin/user-edit.php:515
-msgid "About Yourself"
-msgstr "자신에 대하여"
-
-#: wp-admin/user-edit.php:515
-msgid "About the user"
-msgstr "사용자에 대하여"
-
 #: wp-admin/user-edit.php:519
 msgid "Biographical Info"
 msgstr "개인 정보"
@@ -9110,10 +9090,6 @@ msgstr "쿼리 %s개"
 msgid "<strong><em>Note that password</em></strong> carefully! It is a <em>random</em> password that was generated just for you."
 msgstr "<strong><em>비밀번호를 잘 기억해두세요.</em></strong> 이 비밀번호는 <em>임의</em>로 만든 것입니다."
 
-#: wp-admin/includes/user.php:149
-msgid "<strong>ERROR</strong>: Passwords may not contain the character \"\\\"."
-msgstr "<strong>에러</strong>: 비밀번호는 \"\\\"문자가 들어갈 수 없습니다."
-
 #: wp-admin/includes/user.php:175
 msgid "<strong>ERROR</strong>: Please enter an email address."
 msgstr "<strong>에러</strong>: 이메일 주소를 넣으세요."
@@ -9145,10 +9121,6 @@ msgstr "%s 일보다 오래된 글의 댓글 닫기"
 #: wp-admin/options-discussion.php:153 wp-admin/options-discussion.php:154
 msgid "Before a comment appears"
 msgstr "댓글이 보이기 전에"
-
-#: wp-admin/options-reading.php:93
-msgid "Blog pages show at most"
-msgstr "페이지당 보여줄 글의 수"
 
 #: wp-admin/themes.php:320
 msgid "Broken Themes"
@@ -9202,10 +9174,6 @@ msgstr "이 옵션은 선택사항이며 기본적으로 비어있습니다."
 #: wp-admin/options-writing.php:65
 msgid "Convert emoticons like <code>:-)</code> and <code>:-P</code> to graphics on display"
 msgstr "<code>:-)</code>나 <code>:-P</code> 같은 이모티콘을 그래픽으로 나타내기"
-
-#: wp-admin/includes/theme.php:75
-msgid "Could not fully remove the theme %s."
-msgstr "테마 %s를 완전히 지울 수 없습니다."
 
 #: wp-admin/options-media.php:62
 msgid "Crop thumbnail to exact dimensions (normally thumbnails are proportional)"
@@ -9649,12 +9617,6 @@ msgstr "워드프레스 &rsaquo; 데이터베이스 복구"
 msgid "WordPress should correct invalidly nested XHTML automatically"
 msgstr "워드프레스는 바르지 않은 XHTML을 자동으로 바로 잡습니다."
 
-#. translators: 1: WordPress version number, 2: WordPress updates admin screen
-#. URL
-#: wp-admin/includes/update.php:211
-msgid "You are using a development version (%1$s). Cool! Please <a href=\"%2$s\">stay updated</a>."
-msgstr "현재 개발버전(%1$s)를 사용하고 있습니다. 멋지네요! <a href=\"%2$s\">계속 업데이트 유지하세요.</a>."
-
 #: wp-admin/media.php:63
 msgid "You can&#8217;t edit this attachment because it is in the Trash. Please move it out of the Trash and try again."
 msgstr "이 첨부파일이 휴지통에 있어서 편집할 수 없습니다. 휴지통에서 꺼내서 재시도해보시기 바랍니다."
@@ -9670,26 +9632,6 @@ msgstr "워드프레스 데이터베이스는 이미 최신 버전입니다."
 #: wp-admin/user-new.php:105
 msgid "[%s] Joining confirmation"
 msgstr "[%s] 가입 확인"
-
-#. translators: add new file
-#: wp-admin/media.php:112 wp-admin/menu.php:56 wp-admin/upload.php:80
-#: wp-admin/upload.php:230
-msgctxt "file"
-msgid "Add New"
-msgstr "파일 올리기"
-
-#. translators: add new links
-#: wp-admin/edit-link-form.php:77 wp-admin/link-manager.php:86
-#: wp-admin/menu.php:69
-msgctxt "link"
-msgid "Add New"
-msgstr "링크 만들기"
-
-#. translators: add new plugin
-#: wp-admin/menu.php:212 wp-admin/plugins.php:532
-msgctxt "plugin"
-msgid "Add New"
-msgstr "플러그인 추가하기"
 
 #: wp-admin/menu.php:259
 msgctxt "settings screen"
@@ -9717,18 +9659,9 @@ msgstr "글"
 msgid "View post"
 msgstr "글 보기"
 
-#: wp-admin/link-manager.php:101
-msgid "%s link deleted."
-msgid_plural "%s links deleted"
-msgstr[0] "%s개의 링크를 지웠습니다."
-
 #: wp-admin/menu.php:160
 msgid "Appearance"
 msgstr "외모"
-
-#: wp-admin/options-discussion.php:135
-msgid "Comments should be displayed with the %s comments at the top of each page"
-msgstr "각 페이지 상단에 %s 댓글이 나타나도록 합니다."
 
 #: wp-admin/options-discussion.php:174 wp-admin/options-discussion.php:175
 msgid "Comment Blacklist"
@@ -9969,6 +9902,73 @@ msgstr "개인정보 설정"
 #: wp-admin/about.php:31 wp-admin/credits.php:31 wp-admin/freedoms.php:33
 msgid "Privacy"
 msgstr "개인정보"
+
+#: wp-admin/user-edit.php:515
+msgid "About the user"
+msgstr "사용자 정보"
+
+#: wp-admin/user-edit.php:515
+msgid "About Yourself"
+msgstr "내 정보"
+
+#: wp-admin/user-edit.php:457
+msgid "Contact Info"
+msgstr "연락처 정보"
+
+#: wp-admin/user-edit.php:416
+msgid "Nickname"
+msgstr "별칭:"
+
+#: wp-admin/options-reading.php:93
+msgid "Blog pages show at most"
+msgstr "페이지 당 보여줄 글의 개수"
+
+#: wp-admin/options-discussion.php:135
+msgid "Comments should be displayed with the %s comments at the top of each page"
+msgstr "각 페이지 상단에 %s개의 댓글이 나타나도록 합니다."
+
+#. translators: add new plugin
+#: wp-admin/menu.php:212 wp-admin/plugins.php:532
+msgctxt "plugin"
+msgid "Add New"
+msgstr "새로 추가"
+
+#. translators: add new file
+#: wp-admin/media.php:112 wp-admin/menu.php:56 wp-admin/upload.php:80
+#: wp-admin/upload.php:230
+msgctxt "file"
+msgid "Add New"
+msgstr "새로 추가"
+
+#: wp-admin/link-manager.php:101
+msgid "%s link deleted."
+msgid_plural "%s links deleted"
+msgstr[0] "%s개의 링크를 삭제했습니다."
+
+#. translators: add new links
+#: wp-admin/edit-link-form.php:77 wp-admin/link-manager.php:86
+#: wp-admin/menu.php:69
+msgctxt "link"
+msgid "Add New"
+msgstr "새로 추가"
+
+#: wp-admin/includes/user.php:149
+msgid "<strong>ERROR</strong>: Passwords may not contain the character \"\\\"."
+msgstr "<strong>에러</strong>: 암호에 \"\\\" 문자를 포함할 수 없습니다."
+
+#. translators: 1: WordPress version number, 2: WordPress updates admin screen
+#. URL
+#: wp-admin/includes/update.php:211
+msgid "You are using a development version (%1$s). Cool! Please <a href=\"%2$s\">stay updated</a>."
+msgstr "현재 개발 버전(%1$s)을(를) 사용 중입니다. 멋지네요! <a href=\"%2$s\">최신 상태를 유지하세요.</a>."
+
+#: wp-admin/includes/update.php:282
+msgid "Latest"
+msgstr "최신"
+
+#: wp-admin/includes/theme.php:75
+msgid "Could not fully remove the theme %s."
+msgstr "테마 %s을(를) 완전히 제거할 수 없습니다."
 
 #: wp-admin/custom-background.php:321 wp-admin/custom-header.php:575
 #: wp-admin/includes/class-wp-theme-install-list-table.php:63
@@ -10351,10 +10351,6 @@ msgstr "내림차순"
 msgid "Image File"
 msgstr "이미지 파일"
 
-#: wp-admin/includes/media.php:2288
-msgid "Order images by:"
-msgstr "이미지 정렬:"
-
 #: wp-admin/includes/media.php:2293
 msgid "Menu order"
 msgstr "메뉴 순서"
@@ -10399,17 +10395,6 @@ msgstr "상태:"
 #: wp-admin/includes/meta-boxes.php:135
 msgid "Visibility:"
 msgstr "가시성:"
-
-#. translators: Post date information. 1: Date on which the post is currently
-#. scheduled to be published
-#: wp-admin/includes/meta-boxes.php:185
-msgid "Scheduled for: <b>%1$s</b>"
-msgstr "예약된 글: <b>%1$s</b>"
-
-#. translators: Post date information. 1: Date on which the post was published
-#: wp-admin/includes/meta-boxes.php:188
-msgid "Published on: <b>%1$s</b>"
-msgstr "공개된 글: <b>%1$s</b>"
 
 #: wp-admin/includes/meta-boxes.php:190 wp-admin/includes/meta-boxes.php:200
 msgid "Publish <b>immediately</b>"
@@ -10625,17 +10610,6 @@ msgstr "만난 적 있는 사이"
 #: wp-admin/includes/plugin-install.php:598
 msgid "%s or higher"
 msgstr "%s 또는 이상"
-
-#: wp-admin/includes/class-wp-posts-list-table.php:1446
-#: wp-admin/includes/class-wp-posts-list-table.php:1526
-#: wp-admin/includes/class-wp-posts-list-table.php:1563
-#: wp-admin/includes/class-wp-posts-list-table.php:1600
-#: wp-admin/includes/class-wp-posts-list-table.php:1609
-#: wp-admin/includes/class-wp-posts-list-table.php:1641
-#: wp-admin/includes/class-wp-posts-list-table.php:1662
-#: wp-admin/includes/class-wp-posts-list-table.php:1690
-msgid "&mdash; No Change &mdash;"
-msgstr "&mdash; 변경없음 &mdash;"
 
 #. translators: Between password field and private checkbox on post quick edit
 #. interface
@@ -10880,11 +10854,6 @@ msgstr "모든 변경 사항을 취소하고 원본 이미지로 복구합니다
 msgid "Discussion"
 msgstr "토론"
 
-#: wp-admin/includes/class-wp-posts-list-table.php:1602
-#: wp-admin/includes/class-wp-posts-list-table.php:1611
-msgid "Do not allow"
-msgstr "허용안함"
-
 #: wp-admin/export.php:290
 msgid "Download Export File"
 msgstr "내보내기 파일 다운로드"
@@ -11038,16 +11007,6 @@ msgstr "아이템 업데이트됨."
 #: wp-admin/includes/edit-tag-messages.php:19
 msgid "Items deleted."
 msgstr "아이템 삭제됨."
-
-#. translators: site tagline
-#: wp-admin/includes/schema.php:536
-msgid "Just another %s site"
-msgstr "다른 워드프레스 %s 사이트"
-
-#. translators: site tagline
-#: wp-admin/includes/schema.php:398
-msgid "Just another WordPress site"
-msgstr "다른 워드프레스 사이트"
 
 #: wp-admin/includes/meta-boxes.php:949
 msgid "Keep this link private"
@@ -11280,10 +11239,6 @@ msgstr "SSH2 비밀번호가 필요합니다."
 msgid "Save Changes"
 msgstr "변경 사항 저장"
 
-#: wp-admin/includes/image-edit.php:49
-msgid "Scale Image"
-msgstr "이미지 비례"
-
 #: wp-admin/edit-comments.php:309
 msgid "Search Comments"
 msgstr "댓글 검색"
@@ -11495,12 +11450,6 @@ msgstr "동료"
 msgctxt "column name"
 msgid "Comment"
 msgstr "댓글"
-
-#. translators: column name
-#: wp-admin/includes/class-wp-media-list-table.php:318
-msgctxt "column name"
-msgid "Date"
-msgstr "일자"
 
 #. translators: column name
 #: wp-admin/includes/class-wp-media-list-table.php:283
@@ -11784,6 +11733,57 @@ msgstr "플러그인 %s을(를) 완전히 제거할 수 없습니다."
 #: wp-admin/includes/class-theme-upgrader.php:63
 msgid "Installation package not available."
 msgstr "설치 패키지 가능하지 않음."
+
+#: wp-admin/includes/class-wp-posts-list-table.php:1446
+#: wp-admin/includes/class-wp-posts-list-table.php:1526
+#: wp-admin/includes/class-wp-posts-list-table.php:1563
+#: wp-admin/includes/class-wp-posts-list-table.php:1600
+#: wp-admin/includes/class-wp-posts-list-table.php:1609
+#: wp-admin/includes/class-wp-posts-list-table.php:1641
+#: wp-admin/includes/class-wp-posts-list-table.php:1662
+#: wp-admin/includes/class-wp-posts-list-table.php:1690
+msgid "&mdash; No Change &mdash;"
+msgstr "&mdash; 변경사항 없음 &mdash;"
+
+#: wp-admin/includes/class-wp-posts-list-table.php:1602
+#: wp-admin/includes/class-wp-posts-list-table.php:1611
+msgid "Do not allow"
+msgstr "허용 안함"
+
+#. translators: column name
+#: wp-admin/includes/class-wp-media-list-table.php:318
+msgctxt "column name"
+msgid "Date"
+msgstr "날짜"
+
+#. translators: site tagline
+#: wp-admin/includes/schema.php:536
+msgid "Just another %s site"
+msgstr "또다른 %s 사이트"
+
+#. translators: site tagline
+#: wp-admin/includes/schema.php:398
+msgid "Just another WordPress site"
+msgstr "또다른 워드프레스 사이트"
+
+#. translators: Post date information. 1: Date on which the post was published
+#: wp-admin/includes/meta-boxes.php:188
+msgid "Published on: <b>%1$s</b>"
+msgstr "공개 날짜: <b>%1$s</b>"
+
+#. translators: Post date information. 1: Date on which the post is currently
+#. scheduled to be published
+#: wp-admin/includes/meta-boxes.php:185
+msgid "Scheduled for: <b>%1$s</b>"
+msgstr "공개 예정 날짜: <b>%1$s</b>"
+
+#: wp-admin/includes/media.php:2288
+msgid "Order images by:"
+msgstr "이미지 정렬 기준:"
+
+#: wp-admin/includes/image-edit.php:49
+msgid "Scale Image"
+msgstr "이미지 크기 조정"
 
 #: wp-admin/includes/media.php:2456 wp-admin/includes/nav-menu.php:361
 #: wp-admin/includes/nav-menu.php:649
