@@ -367,7 +367,7 @@ body.buddypress {
 					    	content: "d";
 					    	font-family: "onesocial";
 					    	text-transform: none;
-					    	font-size: inherit;
+					    	font-size: $font-size-sm;
 					    	padding-right: 15px;
 					    	border: none !important;
 					    	color: $blue;
@@ -381,16 +381,6 @@ body.buddypress {
 					    		color: $green;
 					    	}
 					    }
-					}
-
-					&.not_friends,
-					&.not-following {
-						a:after {
-							background-color: #333;
-		    				content: "q";
-		    				font-size: 6px;
-		    				padding-right: 15px;
-						}
 					}
 				}
 			}
