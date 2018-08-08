@@ -1618,7 +1618,7 @@ body.buddypress {
         content: "d";
         font-family: "onesocial";
         text-transform: none;
-        font-size: inherit;
+        font-size: 15px;
         padding-right: 15px;
         border: none !important;
         color: #22a7f0; }
@@ -1639,6 +1639,8 @@ body.buddypress {
       text-align: left; }
       body.buddypress #main #buddypress .item-header-mobile #item-header-content .btn-group-social .generic-button a {
         padding-left: 0; }
+  body.buddypress.members #buddypress #members-directory-form.dir-form div.item-list-tabs ul li a span {
+    color: #fff; }
 
 #bbpress-forums div.bbp-the-content-wrapper textarea.bbp-the-content {
   font-size: 16px; }
