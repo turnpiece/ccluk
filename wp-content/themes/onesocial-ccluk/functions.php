@@ -766,6 +766,9 @@ add_action('bp_friends_setup_nav','ccluk_remove_friends_from_profile');
 
 // add messages to nav
 add_action( 'bp_setup_nav', function() {
+
+    $bp = buddypress();
+
     bp_core_new_nav_item( 
         array( 
             'name' => __('Messages', 'buddypress'), 

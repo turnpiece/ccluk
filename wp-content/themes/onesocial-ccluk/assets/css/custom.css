@@ -268,8 +268,8 @@ Mobile Menu
     #mobile-right-panel li.current-menu-item a {
       color: #54ae68; }
 #mobile-right-panel .sub-menu li a {
-  font-weight: 100;
-  background: #000;
+  font-weight: 400;
+  background: rgba(0, 0, 0, 0.9);
   padding-left: 40px; }
 #mobile-right-panel .submenu-btn {
   color: #22a7f0; }
@@ -624,8 +624,8 @@ body.page-template-homepage #main {
             max-width: 580px; }
           body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
             max-width: 540px;
-            padding: 20px 30px;
-            padding: 2rem 3rem; }
+            padding: 0px 30px;
+            padding: 0rem 3rem; }
             body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
               margin: 10px 0px;
               margin: 1rem 0rem;
@@ -1521,6 +1521,12 @@ body.buddypress {
     body.buddypress #buddypress .notifications-options-nav #notification-bulk-manage:hover {
       color: #fff !important;
       background-color: #54ae68 !important; }
+  body.buddypress #buddypress ul.item-list:not(.bb-group-members) li img.avatar {
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%; }
+  body.buddypress #buddypress div#item-header .user-nicename {
+    padding-left: 15px; }
   body.buddypress #main #buddypress .groups-members-search input[type=text] {
     padding: 6px 12px;
     padding: 0.6rem 1.2rem; }
@@ -1610,11 +1616,14 @@ body.buddypress {
     color: #22a7f0; }
   body.buddypress #main #buddypress .btn-group.social .generic-button {
     display: block;
-    text-align: left; }
+    text-align: left;
+    margin-bottom: 0; }
     body.buddypress #main #buddypress .btn-group.social .generic-button a {
       background-color: transparent !important;
       border: none !important;
-      font-size: 15px; }
+      font-size: 15px;
+      font-weight: 700;
+      text-align: left; }
       body.buddypress #main #buddypress .btn-group.social .generic-button a:before {
         content: "d";
         font-family: "onesocial";
@@ -1876,7 +1885,11 @@ MINIMUM width of 481 pixels (phones and larger)
 
   #buddypress .activity-list .activity-content .activity-inner,
   #buddypress .activity-list .activity-content blockquote {
-    margin-top: 12px; } }
+    margin-top: 12px; }
+
+  .bp-user #item-header,
+  .groups div#item-header-avatar {
+    text-align: left; } }
 /*--------------------------------------------------------------
 MINIMUM width of 721 pixels (tablets and larger)
 --------------------------------------------------------------*/
@@ -1926,8 +1939,7 @@ MINIMUM width of 1025 pixels (large desktops)
       width: 580px;
       text-align: right; }
     body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content {
-      width: 540px;
-      padding-top: 0; }
+      width: 540px; }
       body.page-template-homepage #main .section.feature .section-content article .list-item.entry-content .entry-title {
         font-size: 50px; } }
 
