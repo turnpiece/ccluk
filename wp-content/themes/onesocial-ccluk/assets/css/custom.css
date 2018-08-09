@@ -269,7 +269,8 @@ Mobile Menu
       color: #54ae68; }
 #mobile-right-panel .sub-menu li a {
   font-weight: 100;
-  background: rgba(0, 0, 0, 0.9); }
+  background: #000;
+  padding-left: 40px; }
 #mobile-right-panel .submenu-btn {
   color: #22a7f0; }
   #mobile-right-panel .submenu-btn:hover {
