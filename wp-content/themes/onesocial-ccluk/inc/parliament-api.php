@@ -6,6 +6,8 @@ class CCLUK_Parliament_API {
 	const TWFY_API_KEY = 'EuoStzCe22iZBfnZboAf3cBM';
 
 	const COUNTRIES_URL = 'https://cdn.rawgit.com/everypolitician/everypolitician-data/master/countries.json';
+
+	const CONTACT_TYPES = array( 'phone', 'email', 'twitter', 'facebook' );
 	
 	function __construct() {
 
@@ -51,16 +53,78 @@ class CCLUK_Parliament_API {
 	 * get MP by postcode
 	 *
 	 * @param string $postcode
+	 * @param boolean $contact
 	 * @return array
 	 *
 	 */
-	public function getMP( $postcode ) {
+	public function getMP( $postcode, $contact = true ) {
 
 		$url= self::TWFY_API_BASE_URL . 'getMP?postcode=' . urlencode( $postcode ) . '&output=js&key=' . self::TWFY_API_KEY ;
 
 		$data = $this->getData( $url );
 
+		if ($contact)
+			$data['contact'] = $this->getContactDetails( $data );
 
+		return $data;
+	}
+
+	private function getContactDetails( $data ) {
+		$commons = $this->getCommons();
+
+		if (!empty($commons['legislatures'])) {
+
+			if (!empty($commons['legislatures']['popolo_url'])) {
+
+				$popolo = $this->getData( $commons['legislatures']['popolo_url'] );
+
+				if (!empty($popolo['persons'])) {
+					foreach( $popolo['persons'] as $person ) {
+						if (!empty($person['name']) && !empty($data['full_name']) && trim($data['full_name']) == trim($person['name']) ||
+							!empty($data['given_name']) && !empty($person['given_name']) && 
+							$data['given_name'] == $person['given_name'] && 
+							!empty($data['family_name']) && 
+							(!empty($person['family_name']) && $person['family_name'] == $data['family_name'] ||
+							 !empty($person['sort_name']) && $data['family_name'] == trim( preg_replace("/,\s+.*/", '', $person['sort_name']) ) )
+						) {
+
+							$contact = array();
+
+							if ($details = $person['contact_details']) {
+
+								foreach( $details as $detail ) {
+									if ( in_array( $detail['type'], self::CONTACT_TYPES ) )
+										$contact[$type] = $detail['value'];
+									}	
+								}
+							}
+
+							return $contact;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	private function getCommonsTerm() {
+
+		$commons = $this->getCommons();
+
+		// get the current term
+		foreach ( $commons['legislative_periods'] as $term ) {
+			if (empty($term['end_data']))
+				return $term;
+		}
+	}
+
+	private function getCommons() {
+		// get UK data
+		$country = $this->getCountry();
+
+		foreach ( $country['legislatures'] as $leg )
+			if ($leg['slug'] == 'Commons')
+				return $leg;
 
 	}
 
@@ -71,7 +135,7 @@ class CCLUK_Parliament_API {
 		foreach ( $countries as $country )
 			 if ($country['slug'] == 'UK')
 			 	return $country;
-			 
+
 	}
 
 	public function displayMP() {
