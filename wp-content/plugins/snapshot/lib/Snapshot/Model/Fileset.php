@@ -119,9 +119,11 @@ abstract class Snapshot_Model_Fileset {
 	/**
 	 * Fetches the list of excluded paths
 	 *
+	 * @param bool    $format Optional format parameter - (bool)true for find, (bool)false for zip.
+	 *
 	 * @return array
 	 */
-	public static function get_excluded_paths () {
+	public static function get_excluded_paths ( $format = false ) {
 		$config = WPMUDEVSnapshot::instance()->config_data['config'];
 		$exclusion = !empty($config['filesIgnore']) ? $config['filesIgnore'] : array();
 		$exclusion = !empty($exclusion) && is_array($exclusion)
@@ -131,6 +133,23 @@ abstract class Snapshot_Model_Fileset {
 
 		// Always include backup base folder
 		$exclusion[] = WPMUDEVSnapshot::instance()->get_setting('backupBaseFolderFull');
+
+		if ( $format ) {
+			// Check for unreadable files
+			$unreadable_files = self::get_unreadable_files();
+
+			//Add warning to log for excluded unreadable files
+			if ( ! empty( $unreadable_files ) ) {
+				$uf_string = implode( ', ', $unreadable_files );
+				Snapshot_Helper_Log::warn( "Excluding unreadable files: {$uf_string}" );
+			}
+
+			//Check if any of the unreadable files not in there already
+			$files_to_add = array_diff( $unreadable_files, $exclusion );
+			if ( ! empty( $files_to_add ) ) {
+				$exclusion = array_merge( $exclusion, $files_to_add );
+			}
+		}
 
 		return $exclusion;
 	}
@@ -168,6 +187,54 @@ abstract class Snapshot_Model_Fileset {
 	protected function _get_site_root () {
 		$base_path = apply_filters('snapshot_home_path', get_home_path());
 		return trailingslashit(wp_normalize_path($base_path));
+	}
+
+	/**
+	 * Get a list of unreadable
+	 *
+	 * @return array List of unreadable paths or empty array
+	 */
+	public static function get_unreadable_files() {
+		$unreadable_files = array();
+
+		//Get the Root Directory to check for unreadable files
+		$base_path = apply_filters('snapshot_home_path', get_home_path());
+		$root = trailingslashit(wp_normalize_path($base_path));
+
+		if ( empty( $root ) ) {
+			return $unreadable_files;
+		}
+		//Check if find command is available
+		$find_path = Snapshot_Helper_System::get_command( 'find' );
+
+		$command = "cd {$root} && {$find_path} . ! -readable -print";
+		// phpcs:ignore
+		$status = exec($command, $output, $status);
+
+		//If only status has a return value, possible error
+		if ( ! empty( $status ) && empty( $output ) ) {
+			$msg = join( "\n", $output );
+			Snapshot_Helper_Log::error( "Error running find command to check unreadable files: [{$msg}]" );
+
+			return $unreadable_files;
+		}
+
+		//Process $output to get valid paths
+		if( !empty( $output ) && is_array( $output ) ){
+			foreach ( $output as $p ) {
+				if( empty( $p ) ) {
+					continue;
+				}
+				$path = realpath( path_join( $root, $p ) );
+				if( file_exists( $path ) ) {
+					$unreadable_files[] = $path;
+				}
+			}
+		}
+
+		//if both status and output are empty, no files found exit
+		return $unreadable_files;
+
 	}
 
 

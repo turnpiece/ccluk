@@ -94,20 +94,17 @@
 						<div id="wps-log-resume" class="wpmud-box-gray">
 
 							<div class="log-memory">
-								<p><strong><?php esc_html_e( 'Memory limit', SNAPSHOT_I18N_DOMAIN ); ?>
-										:</strong><span class="number"><?php echo esc_html( ini_get( 'memory_limit' ) ); ?></span>
+								<p><strong><?php esc_html_e( 'Memory limit:', SNAPSHOT_I18N_DOMAIN ); ?></strong><span class="number"><?php echo esc_html( ini_get( 'memory_limit' ) ); ?></span>
 								</p>
 							</div>
 
 							<div class="log-usage">
-								<p><strong><?php esc_html_e( 'Usage', SNAPSHOT_I18N_DOMAIN ); ?>
-										:</strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_usage( true ) ) ); ?></span>
+								<p><strong><?php esc_html_e( 'Usage:', SNAPSHOT_I18N_DOMAIN ); ?></strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_usage( true ) ) ); ?></span>
 								</p>
 							</div>
 
 							<div class="log-peak">
-								<p><strong><?php esc_html_e( 'Peak', SNAPSHOT_I18N_DOMAIN ); ?>
-										:</strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_peak_usage( true ) ) ); ?></span>
+								<p><strong><?php esc_html_e( 'Peak:', SNAPSHOT_I18N_DOMAIN ); ?></strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_peak_usage( true ) ) ); ?></span>
 								</p>
 							</div>
 

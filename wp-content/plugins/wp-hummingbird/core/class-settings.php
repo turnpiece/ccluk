@@ -72,7 +72,7 @@ class WP_Hummingbird_Settings {
 					'scripts' => array(),
 					'styles'  => array(),
 				),
-				'dont_minify' => array(
+				'minify' => array(
 					'scripts' => array(),
 					'styles'  => array(),
 				),
@@ -167,7 +167,7 @@ class WP_Hummingbird_Settings {
 		}
 
 		$options = array(
-			'minify'      => array( 'minify_blog', 'view', 'block', 'dont_minify', 'combine', 'position', 'defer', 'inline' ),
+			'minify'      => array( 'minify_blog', 'view', 'block', 'minify', 'combine', 'position', 'defer', 'inline' ),
 			'page_cache'  => array( 'cache_blog' ),
 			'performance' => array( 'dismissed', 'last_score' ),
 			'advanced'    => array( 'query_string', 'emoji', 'prefetch' ),

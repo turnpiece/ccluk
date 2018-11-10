@@ -22,15 +22,6 @@ abstract class WP_Hummingbird_Module {
 	protected $name = '';
 
 	/**
-	 * Logger
-	 *
-	 * @var WP_Hummingbird_Logger instance.
-	 *
-	 * @since 1.7.2
-	 */
-	public $logger;
-
-	/**
 	 * WP_Hummingbird_Module constructor.
 	 *
 	 * @param string $slug  Module slug.
@@ -39,7 +30,6 @@ abstract class WP_Hummingbird_Module {
 	public function __construct( $slug, $name ) {
 		$this->slug = $slug;
 		$this->name = $name;
-		$this->logger = new WP_Hummingbird_Logger( $this->slug );
 		$this->init();
 	}
 
@@ -168,6 +158,17 @@ abstract class WP_Hummingbird_Module {
 	 */
 	public function update_options( $options ) {
 		WP_Hummingbird_Settings::update_settings( $options, $this->get_slug() );
+	}
+
+	/**
+	 * Log via the logger.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param mixed $msg  Message to log.
+	 */
+	public function log( $msg ) {
+		WP_Hummingbird::get_instance()->core->logger->log( $msg, $this->get_slug() );
 	}
 
 }

@@ -244,7 +244,7 @@
 		<div class="form-col">
 			<input type="text" name="snapshot-destination[directory]" id="snapshot-destination-directory" placeholder="i.e. static/files" value="<?php if ( isset( $item['directory'] ) ) echo esc_attr( $item['directory'] ); ?>"/>
 
-			<p><small><?php esc_html_e( "If directory is blank the snapshot file will be stored at the bucket root. If the directory is provided it will be created inside the bucket. This is a global setting and will be used by all snapshot configurations using this destination. You can also define a director used by a specific snapshot.", SNAPSHOT_I18N_DOMAIN ); ?></small></p>
+			<p><small><?php esc_html_e( "If directory is blank the snapshot file will be stored at the bucket root. If the directory is provided it will be created inside the bucket. This is a global setting and will be used by all snapshot configurations using this destination. You can also define a directory used by a specific snapshot.", SNAPSHOT_I18N_DOMAIN ); ?></small></p>
 
 			<button id="snapshot-destination-test-connection" class="button button-gray"><?php esc_html_e( "Test Connection", SNAPSHOT_I18N_DOMAIN ); ?></button>
 			<div id="snapshot-ajax-destination-test-result" style="display:none"></div>

@@ -199,10 +199,10 @@ class Core_Result extends Behavior {
                                         <span><?php _e( "This will permanently remove the selected file/folder. Are you sure you want to continue?", wp_defender()->domain ) ?></span>
                                         <div>
                                             <button type="submit" class="button button-small button-grey">
-		                                        <?php _e( "Yes", wp_defender()->domain ) ?>
+												<?php _e( "Yes", wp_defender()->domain ) ?>
                                             </button>
                                             <button type="button" class="button button-small button-secondary">
-		                                        <?php _e( "No", wp_defender()->domain ) ?>
+												<?php _e( "No", wp_defender()->domain ) ?>
                                             </button>
                                         </div>
                                     </div>
@@ -345,7 +345,10 @@ class Core_Result extends Behavior {
 
 		$left_lines  = explode( "\n", $left_string );
 		$right_lines = explode( "\n", $right_string );
-		$text_diff   = new \Text_Diff( $left_lines, $right_lines );
+		$text_diff   = new \Text_Diff( 'auto', array(
+			$right_lines,
+			$left_lines
+		) );
 		$renderer    = new \Text_Diff_Renderer_inline();
 
 		return $renderer->render( $text_diff );

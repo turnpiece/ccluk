@@ -403,7 +403,7 @@ class Main extends Controller {
 			$this->add_action( 'wd_login_lockout', 'lockoutLoginNotification', 10, 3 );
 		}
 		if ( $settings->ip_lockout_notification ) {
-			$this->add_action( 'wd_404_lockout', 'lockout404Notification', 10, 2 );
+			$this->add_action( 'wd_404_lockout', 'lockout404Notification', 10, 3 );
 		}
 	}
 
@@ -426,7 +426,7 @@ class Main extends Controller {
 	 * @param $model
 	 * @param $uri
 	 */
-	public function lockout404Notification( $model, $uri ) {
+	public function lockout404Notification( $model, $uri, $isBlacklisted ) {
 		$settings = Settings::instance();
 		if ( ! Login_Protection_Api::maybeSendNotification( '404', $model, $settings ) ) {
 			return;
@@ -434,7 +434,7 @@ class Main extends Controller {
 		foreach ( $settings->receipts as $user_id ) {
 			$user = get_user_by( 'id', $user_id );
 			if ( is_object( $user ) ) {
-				$content        = $this->renderPartial( 'emails/404-lockout', array(
+				$content        = $this->renderPartial( $isBlacklisted == true ? 'emails/404-ban' : 'emails/404-lockout', array(
 					'admin' => $user->display_name,
 					'ip'    => $model->ip,
 					'uri'   => $uri

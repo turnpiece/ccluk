@@ -58,6 +58,7 @@
     border-radius: 40px;
 }
 #ctf .ctf-author-avatar {
+    clear: both;
     margin: 3px 6px 0 -53px;
 }
 #ctf .ctf-author-name {

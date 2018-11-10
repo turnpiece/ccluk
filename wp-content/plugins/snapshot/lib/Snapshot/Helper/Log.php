@@ -220,16 +220,7 @@ class Snapshot_Helper_Log {
 		$level_name = $this->_get_level_name($level);
 
 		$line = "[{$section}][{$timestamp}][{$level_name}] {$msg}\n";
-		// return !!file_put_contents($log_file, $line, FILE_APPEND|LOCK_EX);
-
-		global $wp_filesystem;
-
-		if( Snapshot_Helper_Utility::connect_fs() ) {
-			return !!$wp_filesystem->put_contents( $log_file, $wp_filesystem->get_contents( $log_file ) . $line, FS_CHMOD_FILE );
-		} else {
-			return new WP_Error( "filesystem_error", "Cannot initialize filesystem" );
-		}
-
+		return !!file_put_contents($log_file, $line, FILE_APPEND|LOCK_EX); // phpcs:ignore
 	}
 
 	/**

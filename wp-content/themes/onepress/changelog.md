@@ -1,6 +1,28 @@
 ====================================================================
 CHANGELOG
 ====================================================================
+# 2.2.0
+* NEW: Front page sections manager.
+* NEW: Support WPForm plugin.
+* NEW: Support Gutenberg.
+* NEW: Sections navigation label color settings.
+* NEW: Support inverse dots color even section not enable.
+* FIXED: Remove deprecated jQuery function #319.
+* IMPROVED: Theme customize api.
+* IMPROVED: Misc control issue.
+* IMPROVED: Theme style.
+
+# 2.1.0
+* NEW: Sections navigation.
+* NEW: Disable disable archive prefix option. See in Customizer -> Theme Options -> Blog Pots.
+* NEW: Item content source for Service section.
+* NEW: Hide post categories of News section. See in Customizer -> Section News.
+* NEW: Custom excerpt length. See in Customizer -> Section News.
+* IMPROVED: Improved More Posts button link in News section. 
+* IMPROVED: Re-Structure customize configs.
+* IMPROVED: Re-Structure customize controls.
+
+
 # 2.0.9
 * IMPROVED: Add alt title for gallery images.
 * FIXED: Issue hero image resize not properly.
@@ -45,7 +67,7 @@ CHANGELOG
 * FIXED: Jetpack's CDN for all images compatible.
 * FIXED: Hero parallax issue.
 * FIXED: Site title & tagline color.
-  
+
 ## 2.0.2
 * NEW: Option to enable page header cover.
 * NEW: Option to display page excerpt as header cover description.

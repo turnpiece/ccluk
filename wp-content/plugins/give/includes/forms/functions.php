@@ -118,10 +118,7 @@ function give_get_success_page_uri() {
  * @return bool True if on the Success page, false otherwise.
  */
 function give_is_success_page() {
-	$give_options    = give_get_settings();
-	$is_success_page = isset( $give_options['success_page'] ) ? is_page( $give_options['success_page'] ) : false;
-
-	return apply_filters( 'give_is_success_page', $is_success_page );
+	return apply_filters( 'give_is_success_page', is_page( give_get_success_page_uri() ) );
 }
 
 /**
@@ -1491,3 +1488,33 @@ function give_is_name_title_prefix_required( $form_id = 0 ) {
 
 	return ( ! $is_optional );
 }
+
+/**
+ * Deletes form meta when the form is permanently deleted from the trash.
+ *
+ * @since 2.3.0
+ *
+ * @param integer $id Donation Form ID which needs to be deleted.
+ *
+ * @return void
+ */
+function give_handle_form_meta_on_delete( $id ) {
+
+	global $wpdb;
+
+	$form     = get_post( $id );
+	$get_data = give_clean( $_GET );
+
+	if (
+		'give_forms' === $form->post_type &&
+		'trash' === $form->post_status &&
+		(
+			( isset( $get_data['action'] ) && 'delete' === $get_data['action'] ) ||
+			! empty( $get_data['delete_all'] )
+		)
+	) {
+		$wpdb->query( $wpdb->prepare( "DELETE FROM {$wpdb->formmeta} WHERE form_id = '%d'", $form->ID ) );
+	}
+}
+
+add_action( 'before_delete_post', 'give_handle_form_meta_on_delete', 10, 1 );

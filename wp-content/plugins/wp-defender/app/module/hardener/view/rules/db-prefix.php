@@ -1,5 +1,5 @@
 <div class="rule closed" id="db_prefix">
-    <div class="rule-title">
+    <div class="rule-title" role="link" tabindex="0">
 		<?php if ( $controller->check() == false ): ?>
             <i class="def-icon icon-warning" aria-hidden="true"></i>
 		<?php else: ?>

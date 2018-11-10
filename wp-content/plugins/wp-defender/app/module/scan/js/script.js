@@ -16,19 +16,22 @@ jQuery(function ($) {
     });
     var current_issue = null;
     $('body').on('click', '#next_issue', function () {
-        var parent = $(this).parent().find('.inner-sourcecode').first();
+        var parent = $(this).parent().parent().find('.inner-sourcecode').first();
+        var issues = parent.find('del');
+        if (issues.size() == 0) {
+            return;
+        }
         if (current_issue === null) {
-            current_issue = parent.find('del').first();
+            current_issue = 0;
         } else {
-            current_issue = current_issue.next('del').first();
+            current_issue = current_issue + 1;
+            if (issues[current_issue] === undefined) {
+                current_issue = 0;
+            }
         }
-        console.log(parent);
-        if (current_issue.size() > 0) {
-            var pos = current_issue.position();
-            console.log(current_issue.offset());
-            console.log(current_issue.position());
-            parent.scrollTop(pos.top);
-        }
+        console.log($(issues[current_issue]).text());
+        var pos = $(issues[current_issue]).position();
+        parent.scrollTop(pos.top);
     })
     //processing scan
     if ($('#scanning').size() > 0) {

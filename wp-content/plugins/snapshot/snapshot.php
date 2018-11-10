@@ -1,7 +1,7 @@
 <?php
 /*
 Plugin Name: Snapshot Pro
-Version: 3.1.9
+Version: 3.1.9.2
 Description: This plugin allows you to take quick on-demand backup snapshots of your working WordPress database. You can select from the default WordPress tables as well as custom plugin tables within the database structure. All snapshots are logged, and you can restore the snapshot as needed.
 Author: WPMU DEV
 Author URI: https://premium.wpmudev.org/
@@ -38,7 +38,7 @@ WDP ID: 257
  *
  */
 
-define('SNAPSHOT_VERSION', '3.1.9');
+define('SNAPSHOT_VERSION', '3.1.9.2');
 
 if ( ! defined( 'SNAPSHOT_I18N_DOMAIN' ) ) {
 	define( 'SNAPSHOT_I18N_DOMAIN', 'snapshot' );
@@ -165,6 +165,8 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			add_action( 'admin_head', array( $this, 'enqueue_shared_ui' ) );
 			add_action( 'admin_enqueue_scripts', array( $this, 'enqueue_icon_admin_style' ) );
+
+			add_action( 'admin_enqueue_scripts', array( 'Snapshot_Helper_UI', 'activation_pointers' ) );
 
 			/* Setup the tetdomain for i18n language handling see http://codex.wordpress.org/Function_Reference/load_plugin_textdomain */
 			load_plugin_textdomain( SNAPSHOT_I18N_DOMAIN, false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
@@ -5144,11 +5146,11 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 				// phpcs:ignore
 				$restoreFile = trailingslashit( $this->_session->data['restoreFolder'] ) . esc_attr( $_POST['snapshot_table'] ) . ".sql";
 				if ( file_exists( $restoreFile ) ) {
-					global $wp_filesystem;
+					$fp = fopen( $restoreFile, 'r' ); // phpcs:ignore
 
-					if( Snapshot_Helper_Utility::connect_fs() ) {
-						$backup_file_content_temp = $wp_filesystem->get_contents( $restoreFile );
-						$backup_file_content = substr( $backup_file_content_temp, $_POST['table_data']['ftell_before'], $table_data['ftell_after'] - $table_data['ftell_before'] ); // phpcs:ignore
+					if ( $fp ) {
+						fseek( $fp, $_POST['table_data']['ftell_before'] ); // phpcs:ignore
+						$backup_file_content = fread( $fp, $table_data['ftell_after'] - $table_data['ftell_before'] ); // phpcs:ignore
 
 						// phpcs:ignore
 						$source_table_name = $_POST['snapshot_table'];
@@ -5171,11 +5173,6 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 							}
 						}
 						unset( $backup_db );
-					} else {
-						$error_status['errorStatus'] = true;
-						$error_status['errorText'] = "Cannot initialize filesystem";
-
-						return $error_status;
 					}
 
 					//if ($table_data['rows_total'] == ($table_data['rows_start']+$table_data['rows_end'])) {
@@ -6532,10 +6529,18 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 			$_POST['snapshot-destination'] = $destination_info;
 			$location_redirect_url = '';
 
+			// If there are form errors, abort updating the config_data and continuing.
 			if ( count( $destination_type_object->form_errors ) ) {
 				$this->form_errors = $destination_type_object->form_errors;
 
-				return;
+				// If the only form error is about access_token, give the user the chance to fix that.
+				if ( isset( $destination_type_object->form_errors['access_token'] ) ) {
+					if ( 1 !== count( $destination_type_object->form_errors ) ) {
+						return;
+					}
+				} else {
+					return;
+				}
 			}
 
 			$this->config_data['destinations'][ $destination_key ] = $destination_info;
@@ -8182,9 +8187,7 @@ if ( ! class_exists( 'WPMUDEVSnapshot' ) ) {
 
 			if ( ! $network_activation ) {
 				if ( preg_match( '/' . preg_quote( basename( __FILE__ ), '/' ) . '$/', $plugin ) ) {
-					$dashboard_url = 'admin.php?page=snapshot_pro_dashboard';
-					wp_safe_redirect( $dashboard_url );
-					exit;
+					return true;
 				}
 			}
 		}

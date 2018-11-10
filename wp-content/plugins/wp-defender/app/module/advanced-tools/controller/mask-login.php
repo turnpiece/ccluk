@@ -44,6 +44,11 @@ class Mask_Login extends Controller {
 //				$this->add_filter( 'network_admin_url', 'filterAdminUrl', 9999, 2 );
 //				$this->add_filter( 'admin_url', 'filterAdminUrl', 9999, 2 );
 				remove_action( 'template_redirect', 'wp_redirect_admin_locations' );
+				//if prosite is activate and useremail is not defined, we need to update the
+				//email to match the new login URL
+				if ( is_plugin_active_for_network( 'pro-sites/pro-sites.php' ) ) {
+					$this->add_filter( 'update_welcome_email', 'updateWelcomeEmailPrositeCase', 10, 6 );
+				}
 			} else {
 				if ( $isJetpackSSO ) {
 					wp_defender()->global['compatibility'][] = __( "We’ve detected a conflict with Jetpack’s Wordpress.com Log In feature. Please disable it and return to this page to continue setup.", wp_defender()->domain );
@@ -67,10 +72,27 @@ class Mask_Login extends Controller {
 		} elseif ( substr( $requestPath, 0, 9 ) == '/wp-admin' ) {
 			//this one try to login to wp-admin, redirect or lock it
 			$this->_handleRequestToAdmin();
-		} elseif ( $requestPath == '/wp-login.php' ) {
+		} elseif ( $requestPath == '/wp-login.php' || $requestPath == '/login' ) {
 			//this one want to login, redirect or lock
 			$this->_handleRequestToLoginPage();
 		}
+	}
+
+	/**
+	 * @param $welcome_email
+	 * @param $blog_id
+	 * @param $user_id
+	 * @param $password
+	 * @param $title
+	 * @param $meta
+	 *
+	 * @return mixed
+	 */
+	public function updateWelcomeEmailPrositeCase( $welcome_email, $blog_id, $user_id, $password, $title, $meta ) {
+		$url           = get_blogaddress_by_id( $blog_id );
+		$welcome_email = str_replace( $url . 'wp-login.php', Mask_Api::getNewLoginUrl( rtrim( '/', $url ) ), $welcome_email );
+
+		return $welcome_email;
 	}
 
 	/**
@@ -142,6 +164,14 @@ class Mask_Login extends Controller {
 						return Mask_Api::getNewLoginUrl( $subDomain );
 					}
 				}
+			} elseif ( $screen->id == 'my-sites' ) {
+				//case inside my sites page, sometime the login session does not share between sites and we get block
+				//we will add an OTP key for redirect to wp-admin without get block
+				$otp = Mask_Api::createOTPKey();
+
+				return add_query_arg( array(
+					'otp' => $otp
+				), $currentUrl );
 			}
 		}
 
@@ -172,6 +202,11 @@ class Mask_Login extends Controller {
 			return;
 		}
 		if ( is_user_logged_in() ) {
+			return;
+		}
+
+		if ( ( $key = HTTP_Helper::retrieve_get( 'otp', false ) ) !== false
+		     && Mask_Api::verifyOTP( $key ) ) {
 			return;
 		}
 
@@ -246,7 +281,6 @@ class Mask_Login extends Controller {
 		}
 		$setting->import( $data );
 		$setting->save();
-
 		$res           = array(
 			'message' => __( "Your settings have been updated.", wp_defender()->domain )
 		);

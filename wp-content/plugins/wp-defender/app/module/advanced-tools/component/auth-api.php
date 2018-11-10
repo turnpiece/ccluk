@@ -176,6 +176,42 @@ class Auth_API extends Component {
 	}
 
 	/**
+	 * @param null $user
+	 *
+	 * @return bool
+	 */
+	public static function isForcedRole( $user = null ) {
+		if ( $user == null ) {
+			$user = wp_get_current_user();
+		}
+		if ( ! $user instanceof \WP_User ) {
+			return false;
+		}
+		$settings = Auth_Settings::instance();
+		if ( 0 === count( $user->roles ) ) {
+			//this mean user just added but have no roles, we dnt force them
+			return false;
+		}
+
+		if ( Utils::instance()->isActivatedSingle() ) {
+			$isForced = array_intersect( $settings->forceAuthRoles, $user->roles );
+
+			return count( $isForced ) > 0;
+		} else {
+			$blogs     = get_blogs_of_user( $user->ID );
+			$userRoles = array();
+			foreach ( $blogs as $blog ) {
+				//get user roles for this blog
+				$u         = new \WP_User( $user->ID, '', $blog->userblog_id );
+				$userRoles = array_merge( $u->roles, $userRoles );
+			}
+			$isForced = array_intersect( $settings->forceAuthRoles, $userRoles );
+
+			return count( $isForced ) > 0;
+		}
+	}
+
+	/**
 	 * @return bool|mixed|string
 	 */
 	public static function createSecretForCurrentUser() {
@@ -276,7 +312,7 @@ class Auth_API extends Component {
 			if ( $isConflict === 0 ) {
 				//no data, init
 				global $wpdb;
-				$sql   = "SELECT blog_id FROM `{$wpdb->prefix}blogs`";
+				$sql   = "SELECT blog_id FROM `{$wpdb->base_prefix}blogs`";
 				$blogs = $wpdb->get_col( $sql );
 				foreach ( $blogs as $id ) {
 					$options = get_blog_option( $id, 'jetpack_active_modules', array() );

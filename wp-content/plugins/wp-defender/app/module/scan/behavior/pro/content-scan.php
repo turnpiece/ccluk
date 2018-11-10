@@ -23,12 +23,14 @@ class Content_Scan extends Behavior {
 	protected $tries = null;
 	protected $tokens = array();
 	protected $patterns = array();
+	protected $skipTo = null;
+	protected $content = null;
 
 	public function processItemInternal( $args, $current ) {
-		$start          = microtime( true );
-		$this->model    = $args['model'];
+		set_time_limit( - 1 );
+		$start       = microtime( true );
+		$this->model = $args['model'];
 		$this->patterns = $args['patterns'];
-
 		$this->populateChecksums();
 		$this->populateTries();
 		if ( ( $oid = Scan_Api::isIgnored( $current ) ) !== false ) {
@@ -41,7 +43,9 @@ class Content_Scan extends Behavior {
 		}
 		//Log_Helper::logger( 'process file ' . $current );
 		try {
-			$ret = $this->_scan_a_file( $current );
+			//echo 'start ' . \WP_Defender\Behavior\Utils::instance()->makeReadable( memory_get_peak_usage( true ) ) . PHP_EOL;
+			$ret = $this->scanAFile( $current );
+			//echo 'end ' . \WP_Defender\Behavior\Utils::instance()->makeReadable( memory_get_peak_usage( true ) ) . PHP_EOL;
 		} catch ( \Exception $e ) {
 			$ret = false;
 		}
@@ -70,7 +74,7 @@ class Content_Scan extends Behavior {
 		return false;
 	}
 
-	public function _scan_a_file2( $file ) {
+	public function scanAFile( $file ) {
 		if ( ! file_exists( $file ) ) {
 			return false;
 		}
@@ -78,7 +82,6 @@ class Content_Scan extends Behavior {
 			//this one is good and still same, no need to do
 			//return true;
 		}
-
 		//this file has changed, unset the old one
 		unset( $this->oldChecksum[ $checksum ] );
 		$this->tries[] = $file;
@@ -97,53 +100,54 @@ class Content_Scan extends Behavior {
 				$cache->set( Content_Scan::FILES_TRIED, $this->tries );
 			}
 		}
-
-		$scanError           = array();
-		$patterns            = file_get_contents( __DIR__ . '/signs.json' );
-		$patterns            = json_decode( $patterns, true );
-		$content             = file_get_contents( $file );
-		$smallestStartOffset = 0;
-		$maxEndOffset        = 0;
-		$isInit              = true;
-		$debugLine           = "File: {$file}" . PHP_EOL;
-		$start               = microtime( true );
-		foreach ( $patterns as $pattern ) {
-			if ( preg_match( '/' . $pattern[1] . '/m', $content, $matches, PREG_OFFSET_CAPTURE ) ) {
-				$startOffset = $matches[0][1];
-				$endOffset   = strlen( $matches[0][0] ) + $matches[0][1];
-				if ( $isInit == true ) {
-					$smallestStartOffset = $startOffset;
-					$maxEndOffset        = $endOffset;
-					$isInit              = false;
-				} else {
-					if ( $startOffset >= $smallestStartOffset && $endOffset <= $maxEndOffset ) {
-						//this is is ide the current, just move on
-						continue;
-					}
-				}
-				$scanError[] = array(
-					'lineFrom'   => 0,
-					'lineTo'     => 0,
-					'columnFrom' => 0,
-					'columnTo'   => 0,
-					'offsetFrom' => $startOffset,
-					'offsetTo'   => $endOffset,
-					'name'       => $pattern[2],
-					'type'       => $pattern[0],
-					'pattern'    => $pattern[1]
-				);
+		if ( ! class_exists( '\WP_Defender\Vendor\PHP_CodeSniffer_Tokenizers_PHP' ) ) {
+			$this->loadDependency();
+		}
+		if ( ! defined( 'PHP_CODESNIFFER_VERBOSITY' ) ) {
+			define( 'PHP_CODESNIFFER_VERBOSITY', 0 );
+		}
+		$tokenizer = new \WP_Defender\Vendor\PHP_CodeSniffer_Tokenizers_PHP();
+		$content   = file_get_contents( $file );
+		//set position to 0
+		$this->content = $content;
+		//file_put_contents( __DIR__ . '/test1', $file . PHP_EOL, FILE_APPEND );
+		$this->tokens                       = \PHP_CodeSniffer_File::tokenizeString( $content, $tokenizer, PHP_EOL, 0, 'iso-8859-1' );
+		Scan\Component\Token_Utils::$tokens = $this->tokens;
+		$scanError                          = array();
+		//file_put_contents( __DIR__ . '/test', $file . PHP_EOL, FILE_APPEND );
+		//file_put_contents( __DIR__ . '/a/' . pathinfo( $file, PATHINFO_FILENAME ), var_export( $this->tokens, true ) );
+		foreach ( $this->tokens as $i => $token ) {
+			if ( $this->skipTo != null && $i < $this->skipTo ) {
+				continue;
+			}
+			$results = array(
+				'asserts' => $this->checkAssert( $i, $token ),
+				'crypto'         => $this->checkCrypto( $i, $token ),
+				'callback '      => $this->checkCallBackFuncs( $i, $token ),
+				'createFunc'     => $this->checkCreateFuncs( $i, $token ),
+				//'xss'            => $this->checkXSS( $i, $token ),
+				'variableFunc'   => $this->checkVariableFunc( $i, $token ),
+				'concatVariable' => $this->checkConcatVariable( $i, $token ),
+			);
+			/**
+			 * todo
+			 * we need a function to check variables is suspicous or not
+			 * trace the source of variable function
+			 */
+			//array_push( $scanError, $asserts, $callback, $xss, $crypto, $variableFunc );
+			foreach ( $results as $found ) {
+				$scanError = array_merge( $scanError, $found );
 			}
 		}
-		$debugLine .= "Process Time:" . ( microtime( true ) - $start ) . PHP_EOL;
-		//echo $debugLine;
+
 		$scanError = array_filter( $scanError );
-		//need to recheck the offset, if it is inside another offset, then remove
 		if ( count( $scanError ) ) {
+			//var_dump( $scanError );
 			$item           = new Scan\Model\Result_Item();
 			$item->type     = 'content';
 			$item->raw      = array(
 				'file' => $file,
-				'meta' => array_merge( $scanError )
+				'meta' => $scanError
 			);
 			$item->parentId = $this->model->id;
 			$item->status   = Scan\Model\Result_Item::STATUS_ISSUE;
@@ -153,12 +157,307 @@ class Content_Scan extends Behavior {
 			$this->oldChecksum[ $checksum ] = $file;
 			$altCache->set( self::CONTENT_CHECKSUM, $this->oldChecksum );
 		}
-		$content      = null;
-		$this->tokens = null;
-		unset( $tokens );
+		$content                            = null;
+		$this->tokens                       = null;
+		Scan\Component\Token_Utils::$tokens = null;
+		$this->skipTo                       = null;
+		$this->content                      = null;
 		unset( $content );
 
+		//unset( $this->tokens );
+
 		return true;
+	}
+
+	private function checkConcatVariable( $i, $token ) {
+		$res = array();
+		if ( $token['code'] == T_OPEN_SQUARE_BRACKET ) {
+			//get the closer
+			$closer = $token['bracket_closer'];
+			//usually inside only have 1 token, if it take more then we need to check
+			if ( $closer - $i <= 3 ) {
+				return $res;
+			}
+			//need to take a look
+			$params   = Scan\Component\Token_Utils::findParams( $i, $closer );
+			$pAlazyer = $this->analyzeParams( $params );
+			if ( $pAlazyer['concat'] > 4 ) {
+				$content = Scan\Component\Token_Utils::getTokensAsString( $i - 1, $closer - $i + 1 );
+				$offset  = $this->getCodeOffset( $content );
+				$res[]   = array(
+					'type'   => 'concat',
+					'text'   => __( "Suspicous concat", wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . $content ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'info'
+				);
+			}
+		}
+
+		//prevent false positive
+		if ( count( $res ) > 2 ) {
+			return $res;
+		}
+
+		return array();
+	}
+
+	private function checkCreateFuncs( $i, $token ) {
+		$res = array();
+		if ( in_array( $token['content'], Scan\Component\Token_Utils::getCreateFuncs() ) ) {
+			//we found a callback situation
+			$opener  = Scan\Component\Token_Utils::findNext( T_OPEN_PARENTHESIS, $i, $i + 5 );
+			$content = Scan\Component\Token_Utils::getTokensAsString( $opener, $this->tokens[ $opener ]['parenthesis_closer'] - $opener + 1 );
+			$content = $token['content'] . $content;
+			$offset  = $this->getCodeOffset( $content );
+			$params  = Scan\Component\Token_Utils::findParams( $opener + 1, $this->tokens[ $opener ]['parenthesis_closer'] - 1 );
+			//check if the params is suspicious
+			$pAnalyze = $this->analyzeParams( $params );
+			if ( $pAnalyze['longStrings'] && $pAnalyze['crypto'] ) {
+				$res[] = array(
+					'type'   => 'createFunc',
+					'text'   => __( "Create function function " . $token['content'] . ' detected', wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . $content ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'info'
+				);
+			}
+
+		}
+
+		return $res;
+	}
+
+	/**
+	 * @param $i
+	 * @param $token
+	 *
+	 * @return array
+	 */
+	private function checkVariableFunc( $i, $token ) {
+		$res = array();
+		if ( $token['code'] == T_VARIABLE ) {
+			$next = isset( $this->tokens[ $i + 1 ] ) ? $this->tokens[ $i + 1 ] : null;
+			if ( is_null( $next ) ) {
+				return array();
+			}
+
+			if ( $next['code'] != T_OPEN_PARENTHESIS ) {
+				return array();
+			}
+			//next of the variable is a (, we need to check what is the funciton of this variable
+			for ( $index = $i - 1; $index > 0; $index -- ) {
+				if ( $this->tokens[ $index ]['code'] == T_VARIABLE
+				     && $this->tokens[ $index ]['content'] == '$a' ) {
+					//first get the equal
+					//todo skip the whitespace
+					$equal = Scan\Component\Token_Utils::findNext( T_EQUAL, $index + 1, $index + 5 );
+					if ( $equal ) {
+						//found the equal, next find the function
+						$function = Scan\Component\Token_Utils::findNext( T_STRING, $equal + 1, $equal + 6 );
+						if ( $function && in_array( $this->tokens[ $function ]['content'],
+								array_merge( Scan\Component\Token_Utils::getCryptoFunctions(), array(
+									'eval',
+									'assert',
+									'strrev',
+									'mb_strrev'
+								) ) ) ) {
+							$content = $token['content'] . Scan\Component\Token_Utils::getTokensAsString( $i + 1, $next['parenthesis_closer'] + 1 - $i );
+							$offset  = $this->getCodeOffset( $content );
+							$res[]   = array(
+								'type'   => 'variable function',
+								'text'   => __( "Suspicious variable function call", wp_defender()->domain ),
+								//'content' => addslashes( $token['content'] . Scan\Component\Token_Utils::getTokensAsString( $i + 1, $closer + 1 - $i ) ),
+								'offset' => $offset,
+								'length' => strlen( $content ),
+								'level'  => 'warning'
+							);
+						}
+					}
+				}
+			}
+		}
+
+		return $res;
+	}
+
+	/**
+	 * @param $i
+	 * @param $token
+	 *
+	 * @return array|bool
+	 */
+	private function checkXSS( $i, $token ) {
+		$res = array();
+		if ( in_array( $token['code'], array( T_ECHO, T_PRINT, T_EXIT, T_OPEN_TAG_WITH_ECHO ) ) ) {
+			//check the params inside those function
+			//find the closer
+			//find the next tag
+			$next = $this->tokens[ $i + 1 ];
+
+			if ( $token['code'] == T_OPEN_TAG_WITH_ECHO ) {
+				//this start with <?=
+				$closer = Scan\Component\Token_Utils::findNext( T_CLOSE_TAG, $i );
+			} elseif ( $next['code'] == T_OPEN_PARENTHESIS ) {
+				$closer = $next['parenthesis_closer'];
+			} else {
+				//just find next semicolon
+				$closer = Scan\Component\Token_Utils::findNext( array(
+					T_SEMICOLON,
+					//paranoid mode
+					T_CLOSE_CURLY_BRACKET,
+					//
+					T_CLOSE_TAG
+				), $i + 1 );
+			}
+
+			if ( ! $closer ) {
+				return false;
+			}
+			//next we need to find all the params inside
+			$params = Scan\Component\Token_Utils::findParams( $i + 2, $closer );
+			//todo we will need a function to check if those param having issue
+			$isUserInput = false;
+			foreach ( $params as $param ) {
+				if ( Scan\Component\Token_Utils::isUserInput( $param ) ) {
+					$isUserInput = true;
+					break;
+				}
+			}
+			$content = $token['content'] . Scan\Component\Token_Utils::getTokensAsString( $i + 1, $closer + 1 - $i );
+			$offset  = $this->getCodeOffset( $content );
+			if ( $isUserInput ) {
+				$res[] = array(
+					'type'   => 'xss',
+					'text'   => __( "Possible XSS detected", wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . Scan\Component\Token_Utils::getTokensAsString( $i + 1, $closer + 1 - $i ) ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'warning'
+				);
+			}
+		}
+
+		return $res;
+	}
+
+	private function checkCrypto( $index, $token ) {
+		$res = array();
+		if ( $token['code'] == T_STRING && in_array( $token['content'], Scan\Component\Token_Utils::getCryptoFunctions() ) ) {
+			$opener = Scan\Component\Token_Utils::findNext( T_OPEN_PARENTHESIS, $index, $index + 5 );
+			if ( $opener == null ) {
+				return array();
+			}
+			$content = Scan\Component\Token_Utils::getTokensAsString( $opener, $this->tokens[ $opener ]['parenthesis_closer'] - $opener + 1 );
+			$params  = Scan\Component\Token_Utils::findParams( $opener + 1, $this->tokens[ $opener ]['parenthesis_closer'] - 1 );
+			$content = $token['content'] . $content;
+			$offset  = $this->getCodeOffset( $content );
+			//check if the params is suspicious
+			$pAnalyze = $this->analyzeParams( $params );
+			if ( $pAnalyze['crypto'] && (
+					$pAnalyze['longStrings'] >= 1 ||
+					$pAnalyze['concat'] >= 7
+				) ) {
+				//skip to the closer
+				$this->skipTo = $this->tokens[ $opener ]['parenthesis_closer'] + 1;
+
+				$res[] = array(
+					'type'   => 'crypto',
+					'text'   => __( "Crypto function " . $token['content'] . ' detected, with some suspicious parameters', wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . $content ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'info'
+				);
+			}
+		}
+
+		return $res;
+	}
+
+	/**
+	 * Collect info when assert or eval using
+	 *
+	 * @param $index
+	 * @param $token
+	 *
+	 * @return array|bool
+	 */
+	private function checkAssert( $index, $token ) {
+		$res = array();
+		if ( $token['content'] == 'assert' || $token['content'] == 'eval' ) {
+			$opener  = Scan\Component\Token_Utils::findNext( T_OPEN_PARENTHESIS, $index, $index + 5 );
+			$content = Scan\Component\Token_Utils::getTokensAsString( $opener, $this->tokens[ $opener ]['parenthesis_closer'] - $opener + 1 );
+			$content = $token['content'] . $content;
+			$offset  = $this->getCodeOffset( $content );
+			$params  = Scan\Component\Token_Utils::findParams( $opener + 1, $this->tokens[ $opener ]['parenthesis_closer'] - 1 );
+			//check if the params is suspicious
+			$pAnalyze = $this->analyzeParams( $params );
+			if (
+				$pAnalyze['crypto'] > 1 ||
+				$pAnalyze['longStrings'] > 1
+				//$pAnalyze['concat'] > 5
+			) {
+				//skip to the closer
+				$this->skipTo = $this->tokens[ $opener ]['parenthesis_closer'] + 1;
+				$res[]        = array(
+					'type'   => 'eval',
+					'text'   => __( "Eval function found, with suspicious parameters.", wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . $content ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'info'
+				);
+
+			}
+		}
+
+		return $res;
+	}
+
+	/**
+	 * @param $index
+	 * @param $token
+	 *
+	 * @return array|\bool
+	 */
+	public function checkCallBackFuncs( $index, $token ) {
+		$res = array();
+		if ( in_array( $token['content'], Scan\Component\Token_Utils::getCallbackFunctions() ) ) {
+			//we found a callback situation
+			$opener  = Scan\Component\Token_Utils::findNext( T_OPEN_PARENTHESIS, $index, $index + 5 );
+			$content = Scan\Component\Token_Utils::getTokensAsString( $opener, $this->tokens[ $opener ]['parenthesis_closer'] - $opener + 1 );
+			$content = $token['content'] . $content;
+			$offset  = $this->getCodeOffset( $content );
+			$params  = Scan\Component\Token_Utils::findParams( $opener + 1, $this->tokens[ $opener ]['parenthesis_closer'] - 1 );
+			//check if the params is suspicious
+			$pAnalyze = $this->analyzeParams( $params );
+			if ( $pAnalyze['longStrings'] && $pAnalyze['crypto'] ) {
+				$res[] = array(
+					'type'   => 'callback',
+					'text'   => __( "Callback function " . $token['content'] . ' detected', wp_defender()->domain ),
+					//'content' => addslashes( $token['content'] . $content ),
+					'offset' => $offset,
+					'length' => strlen( $content ),
+					'level'  => 'info'
+				);
+			}
+
+		}
+
+		return $res;
+	}
+
+	/**
+	 *
+	 * @param $content
+	 *
+	 * @return bool|int
+	 */
+	private function getCodeOffset( $content ) {
+		return strpos( $this->content, $content );
 	}
 
 	public function _scan_a_file( $file ) {
@@ -247,6 +546,52 @@ class Content_Scan extends Behavior {
 		unset( $content );
 
 		return true;
+	}
+
+	/**
+	 * This will get the parameters from function and check
+	 *
+	 * @param $tokens
+	 * @param $scenario
+	 *
+	 * @return array
+	 */
+	private function analyzeParams( $tokens ) {
+		$arr         = new \ArrayObject( $tokens );
+		$it          = $arr->getIterator();
+		$crypto      = 0;
+		$longStrings = 0;
+		$concat      = 0;
+		while ( $it->valid() ) {
+			$curr = $it->current();
+			switch ( $curr['code'] ) {
+				case T_STRING:
+					$func = $curr['content'];
+					if ( preg_match( $this->getFunctionScanPattern(), $func ) ) {
+						$crypto ++;
+					}
+//					if ( in_array( $curr['content'], Scan\Component\Token_Utils::getsuspiciousFunctions() ) ) {
+//						$crypto ++;
+//					}
+					break;
+				case T_STRING_CONCAT:
+					$concat ++;
+					break;
+				case T_CONSTANT_ENCAPSED_STRING:
+					if ( strlen( $curr['content'] ) > 100 || ( isset( $tokens[ $it->key() + 1 ] ) && $tokens[ $it->key() + 1 ]['code'] == T_CONSTANT_ENCAPSED_STRING ) ) {
+						//larger than 100 chars, just add
+						$longStrings ++;
+					}
+					break;
+			}
+			$it->next();
+		}
+
+		return array(
+			'longStrings' => $longStrings,
+			'crypto'      => $crypto,
+			'concat'      => $concat
+		);
 	}
 
 	/**
@@ -429,7 +774,6 @@ class Content_Scan extends Behavior {
 	 */
 	private function getPatterns( $key ) {
 		$pattern = $this->patterns;
-
 		return isset( $pattern[ $key ] ) ? $pattern[ $key ] : false;
 	}
 
@@ -445,80 +789,14 @@ class Content_Scan extends Behavior {
 		return $pattern;
 	}
 
-	/**
-	 * @param $start
-	 * @param $length
-	 *
-	 * @return string
-	 * code borrow from @PHP_CodeSniffer_File
-	 */
-	private function getTokensAsString( $start, $length ) {
-		$str = '';
-		$end = ( $start + $length );
-
-		for ( $i = $start; $i < $end; $i ++ ) {
-			$str .= $this->tokens[ $i ]['content'];
-		}
-
-		return $str;
-
-	}
-
-	/**
-	 * @param $token
-	 * @param $from
-	 * @param $end
-	 *
-	 * @return bool|int|string
-	 */
-	private function findNext( $token, $from, $end = null ) {
-		if ( $end == null ) {
-			$end = count( $this->tokens ) - 1;
-		}
-
-		if ( ! is_array( $token ) ) {
-			$token = array( $token );
-		}
-
-		for ( $i = $from; $i < $end; $i ++ ) {
-			if ( ! isset( $this->tokens[ $i ] ) ) {
-				return false;
-			}
-
-			if ( $this->tokens[ $i ]['code'] == T_SEMICOLON ) {
-				return false;
-			}
-
-			if ( in_array( $this->tokens[ $i ]['code'], $token ) ) {
-				return $i;
-			}
-		}
-	}
-
 	private function loadDependency() {
 		$ds         = DIRECTORY_SEPARATOR;
 		$vendorPath = wp_defender()->getPluginPath() . 'vendor' . $ds . 'php_codesniffer' . $ds . 'CodeSniffer';
+		include_once $vendorPath . $ds . 'Exception.php';
 		include_once $vendorPath . $ds . 'Tokens.php';
 		include_once $vendorPath . $ds . 'File.php';
 		include_once $vendorPath . $ds . 'Tokenizers' . $ds . 'Comment.php';
 		include_once $vendorPath . $ds . 'Tokenizers' . $ds . 'PHP.php';
-	}
-
-	/**
-	 * @param $token
-	 * @param $from
-	 * @param null $end
-	 *
-	 * @return bool
-	 */
-	private function findPrevious( $token, $from, $end = null ) {
-		for ( $i = $from; $i >= $end; $i -- ) {
-			if ( isset( $this->tokens[ $i ] ) && $this->tokens[ $i ]['code'] == $token ) {
-				return $i;
-			}
-		}
-
-		return false;
 	}
 
 	/**

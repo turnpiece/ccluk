@@ -2,8 +2,8 @@
 Contributors: safronik 
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
-Tested up to: 4.9
-Stable tag: 5.100
+Tested up to: 5.0
+Stable tag: 5.108.1
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -29,6 +29,9 @@ No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bo
 1. Compatible with General Data Protection Regulation (GDPR) (EU). 
 
 = Public reviews =
+> CleanTalk - Cloud-Based Anti-Spam Service to Keep Your Site Bot-Free.
+> <a href="https://newswatchtv.com/2018/07/18/cleantalk-newswatch-review/" rarget="_blank">NewsWatch Review</a>.
+
 > Using CleanTalk on WPLift was a great test as we receive huge amounts of spam.
 > *Oliver Dale, <a href="http://wplift.com/wordpress-anti-spam-plugin" target="_blank">WPLift.com</a>.*
 
@@ -44,7 +47,7 @@ CleanTalk is a free anti spam plugin which work with the premium Cloud AntiSpam 
 = AntiSpam protection for comments =
 Native spam protection for WordPress, JetPack comments and any other comment plugins. The plugin moves spam comments to SPAM folder or you can set the option to ban spam comments silently. You can also enable the option in the plugin settings to auto-delete comments from SPAM folder.
 
-= Spam bot registrations filter =
+= Spam bots registrations filter =
 Filters spam bots on registration forms of WordPress, BuddyPress, bbPress, S2Member, WooCommerce, Profile builder, Login with AJAX and any other registration plugins.
 
 = Protection from contact form spam =
@@ -200,6 +203,17 @@ With the help of anti-spam by CleanTalk you can check existing comments and user
 CleanTalk has an advanced option "Spam FireWall". This option allows you to block the most active spam bots before they get access to your website. It unloads you website pages when an attempt attack was made, so your web server won't run unnecessary scripts on these pages. Also it prevents any scanning of website pages by spam bots. Subsequently Spam FireWall significantly reduces your webserver load. Spam FireWall can mitigate HTTP/HTTPS DDoS attacks. When an intruder makes GET requests to attack your website, Spam FireWall will block requests from bad IP addresses. Your website gives the intruder a special page with a description of DDoS rejection instead of the website pages. Spam FireWall can help to reduce the CPU usage of your server because of this reason. 
 
 "CleanTalk team has been developing a cloud spam protection system for five years and has created a truly reliable anti-spam service designed for you to guarantee your safety".
+
+= White Label Mode =
+
+To switch the plugin work in the white-label mode you must insert this code to your wp-config.php: 
+
+	define('APBCT_WHITELABLE',     true);
+	define('APBCT_HOSTER_API_KEY', 'YOUR_HOSTER_API_KEY');
+	
+Where YOUR_HOSTER_API_KEY is a key from CleanTalk's hoster panel.
+
+The plugin will do everything rest.
 
 = Auto-Update CleanTalk AntiSpam =
 
@@ -516,6 +530,80 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.108.1 November 8 2018 =
+  * Fix: Errors with integration class.
+
+= 5.108 November 7 2018 =
+  * Fix: White label mode.
+  * Fix: SpamFireWall now can be disabled.
+  * Fix: Layout.
+  * Integration: WPForms.
+  * Add: Message about block for all no integrated AJAX forms.
+  * Add: Displaying account name near api key.
+
+= 5.107 October 29 2018 =
+  * Fix: Ninja Forms integration.
+  * Fix: Cookie usage.
+  * Add: Capturing AJAX responses from non integrated forms.
+  * Spam protection improved.
+  * Minor fixes.
+
+= 5.106 October 11 2018 =
+  * Spam filtration improved.
+  * New: White Label mode.
+  * Modification: Warning message about test on SpamFireWall die page.
+  * Integration: WP Maintenance Mode.
+  * Fix: S2Member.
+  * Fix: JavaScript attachments reconsidered.
+  * Fix: Admin banners layout.
+  * Fix: Minor layout fixes.
+
+= 5.105 September 26 2018 =
+  * Integration: Now bloking spam for QAEngine questions.
+  * Fix: Async http__request call.
+  * Fix: Unnecessary get_antispam_report_breif method call.
+  * Layout: Hide "Do you like Cleantlak?" when key is not ok.
+  * Layout: Minor fixes.
+
+= 5.104 September 18 2018 =
+  * Fix: Error when saving settings.
+  * Fix: Trying update anti spam plugin for the first installation.
+  * Fix: Update system.
+  * Fix: Errors output.
+  * Fix: Plugin's settings under WPMS.
+  * Fix: SpamFireWall update.
+  * Fix: The server change system repaired.
+  * Mod: Cron saving tasks improved.
+
+= 5.103.1 September 14 2018 =
+  * Fix: Error when saving settings.
+  * Fix: Error when getting key automatically.
+
+= 5.103 September 13 2018 =
+  * Fix: Gravity Forms response message.
+  * Fix: SpamFireWall redirect to 404 page.
+  * Major anti-spam plugin improvement.
+  * Recombined setting page.
+  * Added error notification.
+  * Mod: S2 Members integration.
+  * Mod: Improved remote calls.
+
+= 5.102 August 29 2018 =
+  * Fix: Users and comments check.
+  * Fix: Update from 5.70 or previous versions.
+  * Fix: GDPR public JS-script.
+  * Fix: Dashboard widget JS scripts attachment.
+  * Fix: WooCommerce "Place order" action.
+  * Mod: Notification logic altered.
+  * Mod: Users check table now has 'Signed up' column.
+  * Minor fixes.
+
+= 5.101 August 10 2018 =
+  * Fix: Set cookie only for non-dashboard pages.
+  * Fix: Dashboard widget JS error.
+  * Fix: JavaScript error for some environment.
+  * Mod: Antispam protection accelerated for some pages.
+  
 = 5.100 July 30 2018 =
   * Fix: JavaScript dependencies.
 
@@ -1617,6 +1705,80 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.108.1 November 8 2018 =
+  * Fix: Errors with integration class.
+
+= 5.108 November 7 2018 =
+  * Fix: White label mode.
+  * Fix: SpamFireWall now can be disabled.
+  * Fix: Layout.
+  * Integration: WPForms.
+  * Add: Message about block for all no integrated AJAX forms.
+  * Add: Displaying account name near api key.
+
+= 5.107 October 29 2018 =
+  * Fix: Ninja Forms integration.
+  * Fix: Cookie usage.
+  * Add: Capturing AJAX responses from non integrated forms.
+  * Spam protection improved.
+  * Minor fixes.
+
+= 5.106 October 11 2018 =
+  * Spam filtration improved.
+  * New: White Label mode.
+  * Modification: Warning message about test on SpamFireWall die page.
+  * Integration: WP Maintenance Mode.
+  * Fix: S2Member.
+  * Fix: JavaScript attachments reconsidered.
+  * Fix: Admin banners layout.
+  * Fix: Minor layout fixes.
+
+= 5.105 September 26 2018 =
+  * Integration: Now bloking spam for QAEngine questions.
+  * Fix: Async http__request call.
+  * Fix: Unnecessary get_antispam_report_breif method call.
+  * Layout: Hide "Do you like Cleantlak?" when key is not ok.
+  * Layout: Minor fixes.
+
+= 5.104 September 18 2018 =
+  * Fix: Error when saving settings.
+  * Fix: Trying update plugin plugin for the first installation.
+  * Fix: Update system.
+  * Fix: Errors output.
+  * Fix: Plugin's settings under WPMS.
+  * Fix: SpamFireWall update.
+  * Fix: The server change system repaired.
+  * Mod: Cron saving tasks improved.
+
+= 5.103.1 September 14 2018 =
+  * Fix: Error when saving settings.
+  * Fix: Error when getting key automatically.
+
+= 5.103 September 13 2018 =
+  * Fix: Gravity Forms response message.
+  * Fix: SpamFireWall redirect to 404 page.
+  * Major anti-spam plugin improvement.
+  * Recombined setting page.
+  * Added error notification.
+  * Mod: S2 Members integration.
+  * Mod: Improved remote calls.
+
+= 5.102 August 29 2018 =
+  * Fix: Users and comments check.
+  * Fix: Update from 5.70 or previous versions.
+  * Fix: GDPR public JS-script.
+  * Fix: Dashboard widget JS scripts attachment.
+  * Fix: WooCommerce "Place order" action.
+  * Mod: Notification logic altered.
+  * Mod: Users check table now has 'Signed up' column.
+  * Minor fixes.
+
+= 5.101 August 10 2018 =
+  * Fix: Set cookie only for non-dashboard pages.
+  * Fix: Dashboard widget JS error.
+  * Fix: JavaScript error for some environment.
+  * Mod: Antispam protection accelerated for some pages.
+
 = 5.100 July 30 2018 =
   * Fix: JavaScript dependencies.
 

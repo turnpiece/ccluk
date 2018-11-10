@@ -456,7 +456,7 @@ $warning = $requirements_test['warning'];
 											) {
 												?>
                                                 <p
-														class="snapshot-error"><?php esc_html_e( "Restore Note: The archive you are about to restore includes the .htaccess and/or the wp-config.php files. Normally you do not want to restore these files unless your site is broken. To restore either of these files you must select them from the'include selected files' section below.", SNAPSHOT_I18N_DOMAIN ); ?></p>
+														class="snapshot-error"><?php esc_html_e( "Restore Note: The archive you are about to restore includes the .htaccess and/or the wp-config.php files. Normally you do not want to restore these files unless your site is broken. To restore either of these files you must select them from the 'include selected files' section below.", SNAPSHOT_I18N_DOMAIN ); ?></p>
 												<?php
 											}
 										}

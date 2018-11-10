@@ -1,5 +1,10 @@
 <?php
 /**
+ * @package The_SEO_Framework
+ * @subpackage The_SEO_Framework\TSFEM\Suggestion
+ */
+
+/**
  * The SEO Framework plugin
  * Copyright (C) 2018 Sybre Waaijer, CyberWire (https://cyberwire.nl/)
  *
@@ -16,7 +21,7 @@
  * along with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-defined( 'THE_SEO_FRAMEWORK_PLUGIN_BASENAME' ) or die;
+defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * This file holds functions for installing TSFEM.
@@ -57,13 +62,13 @@ function the_seo_framework_load_extension_manager_suggestion() {
 	if ( ! empty( $plugin ) ) return;
 
 	/** @source https://github.com/sybrew/The-SEO-Framework-Extension-Manager/blob/34674828a9e79bf72584e23aaa4a82ea1f154229/bootstrap/envtest.php#L51-L62 */
-	$_req = array(
-		'php' => array(
+	$_req = [
+		'php' => [
 			'5.5' => 50521,
 			'5.6' => 50605,
-		),
+		],
 		'wp' => '37965',
-	);
+	];
 	$envtest = false;
 
 	   ! defined( 'PHP_VERSION_ID' ) || PHP_VERSION_ID < $_req['php']['5.5'] and $envtest = 1
@@ -95,14 +100,14 @@ function the_seo_framework_suggest_extension_manager() {
 	 * @uses Spaghetti.
 	 * @see WP Core class Plugin_Installer_Skin
 	 */
-	$url = add_query_arg( array(
+	$url = add_query_arg( [
 		'tab'       => 'plugin-information',
 		'plugin'    => $plugin_slug,
 		'from'      => 'plugins',
 		'TB_iframe' => 'true',
 		'width'     => 600,
 		'height'    => 550,
-	), network_admin_url( 'plugin-install.php' ) );
+	], network_admin_url( 'plugin-install.php' ) );
 	$tsfem_details_link = sprintf(
 		'<a href="%1$s" id=tsf-tsfem-tb class="thickbox open-plugin-details-modal" aria-label="%2$s">%3$s</a>',
 		esc_url( $url ),
@@ -129,11 +134,11 @@ function the_seo_framework_suggest_extension_manager() {
 	 * Therefore, leaving the incompleteness undiscovered internally.
 	 * @TODO Open core track ticket.
 	 */
-	$url = wp_nonce_url( add_query_arg( array(
+	$url = wp_nonce_url( add_query_arg( [
 		'action' => 'install-plugin',
 		'plugin' => $plugin_slug,
 		'from'   => 'plugins',
-	), self_admin_url( 'update.php' ) ), 'install-plugin_' . $plugin_slug );
+	], self_admin_url( 'update.php' ) ), 'install-plugin_' . $plugin_slug );
 	$action = sprintf(
 		'<a href="%1$s" id=tsf-tsfem-install class="install-now button button-small" data-slug="%2$s" data-name="%3$s" aria-label="%4$s">%5$s</a>',
 		esc_url( $url ),
@@ -154,21 +159,22 @@ function the_seo_framework_suggest_extension_manager() {
  * Loads scripts for TSFEM "Shiny Updates" implementation for WP 4.6 and later.
  *
  * @since 3.0.6
+ * @since 3.1.0 No longer checks WP version, the requirements of this plugin is equal.
  * @access private
  */
 function the_seo_framework_enqueue_installer_scripts() {
 
-	$deps = array(
+	$deps = [
 		'plugin-install',
 		'updates',
-	);
+	];
 	$scriptname = 'tsfinstaller';
 	$suffix = the_seo_framework()->script_debug ? '' : '.min';
 
-	$strings = array(
-		'slug' => 'the-seo-framework-extension-manager',
-		'canEnhance' => the_seo_framework()->wp_version( '4.6' ),
-	);
+	$strings = [
+		'slug'       => 'the-seo-framework-extension-manager',
+		'canEnhance' => true || the_seo_framework()->wp_version( '4.6' ),
+	];
 
 	wp_register_script( $scriptname, THE_SEO_FRAMEWORK_DIR_URL . "lib/js/installer/{$scriptname}{$suffix}.js", $deps, THE_SEO_FRAMEWORK_VERSION, true );
 	wp_localize_script( $scriptname, "{$scriptname}L10n", $strings );

@@ -127,6 +127,29 @@ function give_process_donation_form() {
 		'0.00';
 	$purchase_key = strtolower( md5( $user['user_email'] . date( 'Y-m-d H:i:s' ) . $auth_key . uniqid( 'give', true ) ) );
 
+	/**
+	 * Update donation Purchase key.
+	 *
+	 * Use this filter to update default donation purchase key
+	 * and add prefix in Invoice.
+	 *
+	 * @since 2.2.4
+	 *
+	 * @param string $purchase_key
+	 * @param string $gateway
+	 * @param string $purchase_key
+	 *
+	 * @return string $purchase_key
+	 */
+	$purchase_key = apply_filters(
+		'give_donation_purchase_key',
+		$purchase_key,
+		$valid_data['gateway'],
+		// Use this purchase key value if you want to generate custom donation purchase key
+		// because donation purchase key editable by filters and you may get unedited donation purchase key.
+		$purchase_key
+	);
+
 	// Setup donation information.
 	$donation_data = array(
 		'price'         => $price,
@@ -302,9 +325,9 @@ function give_donation_form_validate_fields() {
 
 	// Check spam detect.
 	if (
-		isset( $post_data['action'] ) &&
-		give_is_setting_enabled( give_get_option( 'akismet_spam_protection' ) ) &&
-		give_is_spam_donation()
+		isset( $post_data['action'] )
+		&& give_is_setting_enabled( give_get_option( 'akismet_spam_protection' ) )
+		&& give_is_spam_donation()
 	) {
 		give_set_error( 'spam_donation', __( 'This donation has been flagged as spam. Please try again.', 'give' ) );
 	}
@@ -590,13 +613,16 @@ function give_get_required_fields( $form_id ) {
 		// Check if billing country already exists.
 		if ( $country ) {
 
-			// Get the country list that does not required any states init.
-			$states_country = give_states_not_required_country_list();
-
 			// Check if states is empty or not.
-			if ( array_key_exists( $country, $states_country ) ) {
+			if ( array_key_exists( $country, give_states_not_required_country_list() ) ) {
 				// If states is empty remove the required fields of state in billing cart.
 				unset( $required_fields['card_state'] );
+			}
+
+			// Check if city is empty or not.
+			if ( array_key_exists( $country, give_city_not_required_country_list() ) ) {
+				// If states is empty remove the required fields of city in billing cart.
+				unset( $required_fields['card_city'] );
 			}
 		}
 	} // End if().
@@ -812,8 +838,14 @@ function give_donation_form_validate_user_login() {
 		return $valid_user_data;
 	}
 
-	// Get the user by login.
-	$user_data = get_user_by( 'login', strip_tags( $post_data['give_user_login'] ) );
+	$give_user_login = strip_tags( $post_data['give_user_login'] );
+	if ( is_email( $give_user_login ) ) {
+		// Get the user data by email.
+		$user_data = get_user_by( 'email', $give_user_login );
+	} else {
+		// Get the user data by login.
+		$user_data = get_user_by( 'login', $give_user_login );
+	}
 
 	// Check if user exists.
 	if ( $user_data ) {

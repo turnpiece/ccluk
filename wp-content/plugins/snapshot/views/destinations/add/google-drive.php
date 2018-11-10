@@ -193,7 +193,7 @@ $item = array_merge(
 					</button>
 				</div>
 
-				<p><small><?php esc_html_e( 'When your create your new credentials, add this as the redirect URL.', SNAPSHOT_I18N_DOMAIN ); ?></small></p>
+				<p><small><?php esc_html_e( 'When you create your new credentials, add this as the redirect URL.', SNAPSHOT_I18N_DOMAIN ); ?></small></p>
 			</div>
 
 		</div>
@@ -259,6 +259,9 @@ $item = array_merge(
 
 				if ( ! $auth_error ) {
 					$auth_url = $item_object->getAuthorizationUrl();
+					$auth_url = add_query_arg(
+						array( 'supportsTeamDrives' => true ), $auth_url
+					);
 					if ( $auth_url ) {
                     ?>
 

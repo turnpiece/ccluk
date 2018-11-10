@@ -293,7 +293,7 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		 * - Both action and module vars are defined;
 		 * - Action is available as a methods in a selected module.
 		 *
-		 * Currently used actions: enable, disable, disconnect, download_logs.
+		 * Currently used actions: enable, disable, disconnect.
 		 * Currently supported modules: page_cache, caching, cloudflare, gravatar, rss.
 		 */
 		if ( isset( $_GET['action'] ) && isset( $_GET['module'] ) ) { // Input var ok.
@@ -558,6 +558,10 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 		}
 		$settings['custom_post_types'] = $custom_post_types;
 
+		$log = WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php';
+		if ( ! file_exists( $log ) ) {
+			$log = false;
+		}
 
 		$this->view( 'caching/page-caching-meta-box', array(
 			'error'              => $module->error,
@@ -569,10 +573,11 @@ class WP_Hummingbird_Caching_Page extends WP_Hummingbird_Admin_Page {
 				'public'   => true,
 				'_builtin' => false,
 			), 'objects','and' ),
+			'logs_link'          => $log,
 			'download_url'       => wp_nonce_url( add_query_arg( array(
-				'action' => 'download_logs',
-				'module' => 'page_cache',
-			)), 'wphb-caching-actions' ),
+				'logs'   => 'download',
+				'module' => $module->get_slug(),
+			)), 'wphb-log-action' ),
 			'deactivate_url'     => wp_nonce_url( add_query_arg( array(
 				'action' => 'disable',
 				'module' => 'page_cache',

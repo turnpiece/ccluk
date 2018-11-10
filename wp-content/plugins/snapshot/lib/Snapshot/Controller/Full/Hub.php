@@ -351,6 +351,11 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 
 		if (!empty($status) && !is_wp_error($status)) {
 			Snapshot_Helper_Log::info("Reschedule params are all valid", "Remote");
+
+			// If the crons are temporarily enabled by Automate, make them permanently enabled.
+			if ( $this->_model->get_config( 'temporarily_enable_cron', false ) ){
+				$this->_model->set_config('temporarily_enable_cron', false);
+			}
 		} else {
 			Snapshot_Helper_Log::warn("Invalid reschedule parameters passed from service", "Remote");
 		}
@@ -524,6 +529,9 @@ class Snapshot_Controller_Full_Hub extends Snapshot_Controller_Full {
 		if ($this->_model->get_config('disable_cron', false)) {
 			Snapshot_Helper_Log::info("Scheduled backups disabled, re-enabling", "Remote");
 			$this->_model->set_config('disable_cron', false);
+
+			// We have enabled cron temporarily, since it was not enabled at the start of automate.
+			$this->_model->set_config('temporarily_enable_cron', true);
 		}
 
 		if (!empty($via_automate)) {

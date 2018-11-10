@@ -1,5 +1,6 @@
 <?php
 /**
+ *
  * @package WP_Smush
  * @subpackage CDN
  * @version 2.8.0
@@ -51,7 +52,7 @@ if ( ! class_exists( 'WpSmushCDN' ) ) {
 			add_action( 'smush_cdn_settings_ui', array( $this, 'ui' ) );
 
 			// Add cdn url to dns prefetch.
-			add_filter( 'wp_resource_hints', array ( $this, 'dns_prefetch' ), 99, 2 );
+			add_filter( 'wp_resource_hints', array( $this, 'dns_prefetch' ), 99, 2 );
 		}
 
 		/**
@@ -71,7 +72,7 @@ if ( ! class_exists( 'WpSmushCDN' ) ) {
 			// This is member's custom cdn path.
 			$this->cdn_base = trailingslashit( "https://{$user_id}.smushcdn.com/{$site_id}" );
 
-			//$this->cdn_base = trailingslashit( "http://localhost" );
+			// $this->cdn_base = trailingslashit( "http://localhost" );
 		}
 
 		/**
@@ -114,7 +115,7 @@ if ( ! class_exists( 'WpSmushCDN' ) ) {
 		 * Generate CDN url from given image url.
 		 *
 		 * @param string $src Image url.
-		 * @param array $args Query parameters.
+		 * @param array  $args Query parameters.
 		 *
 		 * @return string
 		 */
@@ -281,7 +282,7 @@ if ( ! class_exists( 'WpSmushCDN' ) ) {
 		/**
 		 * Add CDN url to header for better speed.
 		 *
-		 * @param array $urls URLs to print for resource hints.
+		 * @param array  $urls URLs to print for resource hints.
 		 * @param string $relation_type The relation type the URLs are printed.
 		 *
 		 * @return array

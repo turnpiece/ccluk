@@ -285,6 +285,17 @@ class WP_Hummingbird_Module_Advanced extends WP_Hummingbird_Module {
 			$items = $this->delete( $sql[ $type ], $type );
 		}
 
+		/**
+		 * Fires after the database cleanup task.
+		 *
+		 * @since 1.9.2
+		 *
+		 * @param string $type   Data type that was cleared from the database. Can return following values: all,
+		 *                       revisions, drafts, trash, spam, trash_comment, expired_transients, transients.
+		 * @param int    $items  Number of items that was cleared from the database for the selected data type.
+		 */
+		do_action( 'wphb_delete_db_data', $type, $items );
+
 		return array(
 			'items' => $items,
 			'left'  => self::get_db_count( 'all' ), // Check for any non-deleted items.

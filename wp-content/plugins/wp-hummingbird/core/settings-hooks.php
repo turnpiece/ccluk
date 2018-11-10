@@ -14,12 +14,12 @@ function wphb_filter_resource_block( $value, $handle, $type ) {
 add_filter( 'wphb_minify_resource', 'wphb_filter_resource_minify', 10, 3 );
 function wphb_filter_resource_minify( $value, $handle, $type ) {
 	$options = WP_Hummingbird_Settings::get_settings( 'minify' );
-	$dont_minify = $options['dont_minify'][ $type ];
-	if ( in_array( $handle, $dont_minify ) ) {
-		return false;
+	$minify  = $options['minify'][ $type ];
+	if ( ! in_array( $handle, $minify ) ) {
+		return $value;
 	}
 
-	return $value;
+	return true;
 }
 
 add_filter( 'wphb_combine_resource', 'wphb_filter_resource_combine', 10, 3 );

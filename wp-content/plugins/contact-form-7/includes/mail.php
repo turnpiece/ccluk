@@ -174,6 +174,11 @@ class WPCF7_Mail {
 
 			$path = path_join( WP_CONTENT_DIR, $line );
 
+			if ( ! wpcf7_is_file_path_in_content_dir( $path ) ) {
+				// $path is out of WP_CONTENT_DIR
+				continue;
+			}
+
 			if ( is_readable( $path ) && is_file( $path ) ) {
 				$attachments[] = $path;
 			}

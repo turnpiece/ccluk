@@ -39,8 +39,8 @@
 				</label>
 			</li>
 			<li>
-				<label for="ai1wm-no-revisions">
-					<input type="checkbox" id="ai1wm-no-revisions" name="options[no_revisions]" />
+				<label for="ai1wm-no-post-revisions">
+					<input type="checkbox" id="ai1wm-no-post-revisions" name="options[no_post_revisions]" />
 					<?php _e( 'Do <strong>not</strong> export post revisions', AI1WM_PLUGIN_NAME ); ?>
 				</label>
 			</li>
@@ -57,15 +57,7 @@
 				</label>
 			</li>
 
-			<?php if ( apply_filters( 'ai1wm_max_file_size', AI1WM_MAX_FILE_SIZE ) === 0 ) : ?>
-				<li>
-					<label for="ai1wm-no-inactive-themes">
-						<input type="checkbox" id="ai1wm-no-inactive-themes" name="options[no_inactive_themes]" />
-						<?php _e( 'Do <strong>not</strong> export inactive themes (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
-					</label>
-				</li>
-			<?php endif; ?>
+			<?php do_action( 'ai1wm_export_inactive_themes' ); ?>
 
 			<li>
 				<label for="ai1wm-no-muplugins">
@@ -81,22 +73,9 @@
 				</label>
 			</li>
 
-			<?php if ( apply_filters( 'ai1wm_max_file_size', AI1WM_MAX_FILE_SIZE ) === 0 ) : ?>
-				<li>
-					<label for="ai1wm-no-inactive-plugins">
-						<input type="checkbox" id="ai1wm-no-inactive-plugins" name="options[no_inactive_plugins]" />
-						<?php _e( 'Do <strong>not</strong> export inactive plugins (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
-					</label>
-				</li>
-				<li>
-					<label for="ai1wm-no-cache">
-						<input type="checkbox" id="ai1wm-no-cache" name="options[no_cache]" />
-						<?php _e( 'Do <strong>not</strong> export cache (files)', AI1WM_PLUGIN_NAME ); ?>
-						<small style="color: red;"><?php _e( 'new', AI1WM_PLUGIN_NAME ); ?></small>
-					</label>
-				</li>
-			<?php endif; ?>
+			<?php do_action( 'ai1wm_export_inactive_plugins' ); ?>
+
+			<?php do_action( 'ai1wm_export_cache_files' ); ?>
 
 			<li>
 				<label for="ai1wm-no-database">

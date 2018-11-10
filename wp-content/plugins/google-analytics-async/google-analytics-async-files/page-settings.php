@@ -111,7 +111,7 @@
 						<th scope="row"><?php _e( 'IP Anonymization', $this->text_domain ); ?></th>
 						<td>
 							<label><input type="radio" name="anonymize_ip" value="1" <?php if ( !empty( $this->current_settings['track_settings']['anonymize_ip'] ) ) echo 'checked="checked"'; ?> /> <?php _e( 'Enable', $this->text_domain ) ?></label>
-							<label style="margin-left: 10px;"><input type="checkbox" name="anonymize_ip_force" value="1" <?php if ( !empty( $this->current_settings['track_settings']['anonymize_ip_force'] ) ) echo 'checked="checked"'; ?> /> <?php _e( 'Force on sub-sites tracking', $this->text_domain ) ?></label>
+							<label style="margin-left: 10px;"><input type="hidden" name="anonymize_ip_force" value="0"><input type="checkbox" name="anonymize_ip_force" value="1" <?php if ( !empty( $this->current_settings['track_settings']['anonymize_ip_force'] ) ) echo 'checked="checked"'; ?> /> <?php _e( 'Force on sub-sites tracking', $this->text_domain ) ?></label>
 							<br />
 							<label><input type="radio" name="anonymize_ip" value="0" <?php if ( empty( $this->current_settings['track_settings']['anonymize_ip'] ) ) echo 'checked="checked"'; ?> /> <?php _e( 'Disable', $this->text_domain ) ?></label>
 							<p class="description"><?php _e( 'When enabled, the IP address of the visitor will be anonymized. You can read more about it <a href="https://support.google.com/analytics/answer/2763052?hl=en">here</a>. It is also possible to force IP Anonymization for all sub-sites tracking configurations.', $this->text_domain );?>

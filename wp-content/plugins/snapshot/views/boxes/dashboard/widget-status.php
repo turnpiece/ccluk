@@ -29,7 +29,7 @@ if ( ! empty( $latest_backup ) && $latest_backup ) {
 		$backup_status['content'] = __( 'Your last backup was created less than a week ago. Excellent work!', SNAPSHOT_I18N_DOMAIN );
 	} else {
 		$backup_status['title'] = __( 'Getting Older', SNAPSHOT_I18N_DOMAIN );
-		$backup_status['content'] = __( 'Your last backup was over a week ago. Make sure you\'re backing up regulary!', SNAPSHOT_I18N_DOMAIN );
+		$backup_status['content'] = __( 'Your last backup was over a week ago. Make sure you\'re backing up regularly!', SNAPSHOT_I18N_DOMAIN );
 	}
 	$backup_status['date'] = sprintf( _x( '%s ago', '%s = human-readable time difference', SNAPSHOT_I18N_DOMAIN ), human_time_diff( $latest_backup['timestamp'] ) );
 	$backup_status['size'] = size_format( $latest_backup['file_size'] );

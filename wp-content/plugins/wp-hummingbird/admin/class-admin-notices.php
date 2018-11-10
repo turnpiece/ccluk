@@ -395,7 +395,7 @@ class WP_Hummingbird_Admin_Notices {
 			we recommend you re-check Hummingbird's Asset Optimization configuration to ensure those new files are added
 			correctly. <!--<a href='#'>Learn more</a>.-->", 'wphb' );
 
-			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="sui-button sui-button-primary button button-primary" style="margin-right:10px">' . __( 'Re-check Asset Optimization', 'wphb' ) . '</a>';
+			$additional .= '<a href="' . esc_url( $recheck_file_url ) . '" class="button button-primary" style="margin-right:10px">' . __( 'Re-check Asset Optimization', 'wphb' ) . '</a>';
 		} elseif ( $caching_active ) {
 			if ( ! is_multisite() || 'blog-admins' === $caching_active ) {
 				// Clear cache button link.
@@ -414,7 +414,7 @@ class WP_Hummingbird_Admin_Notices {
 			return;
 		}
 
-		$additional .= '<a href="' . esc_url( $clear_cache_url ) . '" class="sui-button sui-button-ghost button">' . __( 'Clear Cache', 'wphb' ) . '</a>';
+		$additional .= '<a href="' . esc_url( $clear_cache_url ) . '" class="button">' . __( 'Clear Cache', 'wphb' ) . '</a>';
 		if ( $caching_active ) {
 			$adjust_settings_url = WP_Hummingbird_Utils::get_admin_menu_url( 'caching' ) . '&view=settings';
 			if ( ! is_multisite() || ( is_multisite() && is_network_admin() ) ) {

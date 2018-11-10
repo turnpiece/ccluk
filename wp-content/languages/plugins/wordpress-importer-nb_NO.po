@@ -1,0 +1,206 @@
+# Translation of Plugins - WordPress Importer - Stable (latest release) in Norwegian (Bokmål)
+# This file is distributed under the same license as the Plugins - WordPress Importer - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-11-07 23:27:18+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: nb_NO\n"
+"Project-Id-Version: Plugins - WordPress Importer - Stable (latest release)\n"
+
+#: parsers.php:43
+msgid "Details are shown above. The importer will now try again with a different parser..."
+msgstr "Detaljer er vist ovenfor. Importprogrammet vil nå prøve med en annen tolker..."
+
+#: parsers.php:42 parsers.php:72 parsers.php:80
+msgid "There was an error when reading this WXR file"
+msgstr "Det oppsto en feil ved lesing av denne WXR-filen"
+
+#: parsers.php:84 parsers.php:89 parsers.php:306 parsers.php:502
+msgid "This does not appear to be a WXR file, missing/invalid WXR version number"
+msgstr "Dette ser ikke ut til å være en WXR-fil, mangler/ugyldig versjonsnummer for WXR"
+
+#: wordpress-importer.php:132 wordpress-importer.php:141
+#: wordpress-importer.php:192 wordpress-importer.php:196
+#: wordpress-importer.php:205
+msgid "Sorry, there has been an error."
+msgstr "Beklager, en feil oppstod."
+
+#: wordpress-importer.php:133
+msgid "The file does not exist, please try again."
+msgstr "Denne filen finnes ikke, vennligst prøv igjen."
+
+#: wordpress-importer.php:176
+msgid "All done."
+msgstr "Alt ferdig."
+
+#: wordpress-importer.php:177
+msgid "Remember to update the passwords and roles of imported users."
+msgstr "Husk å oppdatere passordene og rollene til importerte brukere."
+
+#: wordpress-importer.php:176
+msgid "Have fun!"
+msgstr "Ha det gøy!"
+
+#: wordpress-importer.php:197
+msgid "The export file could not be found at <code>%s</code>. It is likely that this was caused by a permissions problem."
+msgstr "Eksportfilen kunne ikke finnes på <code>%s</code>. Det er sannsynlig at dette skyldes et problem med rettigheter."
+
+#: wordpress-importer.php:213
+msgid "This WXR file (version %s) may not be supported by this version of the importer. Please consider updating."
+msgstr "Denne WXR-filen (versjon %s) støttes kanskje ikke av denne versjonen av importprogrammet. Vennligst vurder å oppgradere."
+
+#: wordpress-importer.php:238
+msgid "Failed to import author %s. Their posts will be attributed to the current user."
+msgstr "Mislyktes i å importere forfatter %s. Dennes innlegg vil bli tilordnet inneværende bruker."
+
+#: wordpress-importer.php:264
+msgid "Assign Authors"
+msgstr "Tildel forfattere"
+
+#: wordpress-importer.php:267
+msgid "If a new user is created by WordPress, a new password will be randomly generated and the new user&#8217;s role will be set as %s. Manually changing the new user&#8217;s details will be necessary."
+msgstr "Hvis en ny bruker er opprettet av WordPress vil et nytt passord bli generert tilfeldig og den nye brukerens rolle vil bli satt til %s. Det vil være nødvendig manuelt å endre den nye brukerens detaljer."
+
+#: wordpress-importer.php:277
+msgid "Import Attachments"
+msgstr "Importer vedlegg"
+
+#: wordpress-importer.php:280
+msgid "Download and import file attachments"
+msgstr "Last ned og importer filvedlegg"
+
+#: wordpress-importer.php:284
+msgid "Submit"
+msgstr "Send"
+
+#: wordpress-importer.php:297
+msgid "Import author:"
+msgstr "Importer forfatter:"
+
+#: wordpress-importer.php:311
+msgid "as a new user:"
+msgstr "som en ny bruker:"
+
+#: wordpress-importer.php:308
+msgid "or create new user with login name:"
+msgstr "eller opprett en ny bruker med brukernavn:"
+
+#: wordpress-importer.php:319
+msgid "assign posts to an existing user:"
+msgstr "tildel innlegg til en eksisterende bruker:"
+
+#: wordpress-importer.php:322
+msgid "- Select -"
+msgstr "- Velg -"
+
+#: wordpress-importer.php:321
+msgid "or assign posts to an existing user:"
+msgstr "eller tilordne innlegg til en eksisterende bruker:"
+
+#: wordpress-importer.php:372
+msgid "Failed to create new user for %s. Their posts will be attributed to the current user."
+msgstr "Mislyktes i å lage ny bruker for %s. Dennes innlegg vil bli til tilordnet inneværende bruker."
+
+#: wordpress-importer.php:467
+msgid "Failed to import post tag %s"
+msgstr "Mislyktes i å importere stikkord %s"
+
+#: wordpress-importer.php:424
+msgid "Failed to import category %s"
+msgstr "Mislyktes i å importere kategori %s"
+
+#: wordpress-importer.php:516 wordpress-importer.php:738
+msgid "Failed to import %s %s"
+msgstr "Mislyktes i å importere %s %s"
+
+#: wordpress-importer.php:605
+msgid "Failed to import &#8220;%s&#8221;: Invalid post type %s"
+msgstr "Mislyktes i å importere &#8220;%s&#8221;: Ugyldig innholdstype %s"
+
+#: wordpress-importer.php:870
+msgid "Menu item skipped due to missing menu slug"
+msgstr "Meny-element hoppet over på grunn av manglende fragment"
+
+#: wordpress-importer.php:704
+msgid "Failed to import %s &#8220;%s&#8221;"
+msgstr "Mislyktes å importere %s &#8220;%s&#8221;"
+
+#: wordpress-importer.php:642
+msgid "%s &#8220;%s&#8221; already exists."
+msgstr "%s &#8220;%s&#8221; eksisterer allerede."
+
+#: wordpress-importer.php:877
+msgid "Menu item skipped due to invalid menu slug: %s"
+msgstr "Meny-element hoppet over på grunn av ugyldig fragment: %s"
+
+#: wordpress-importer.php:940
+msgid "Fetching attachments is not enabled"
+msgstr "Henting av vedlegg er ikke mulig"
+
+#: wordpress-importer.php:953
+msgid "Invalid file type"
+msgstr "Ugyldig filtype"
+
+#: wordpress-importer.php:1003
+msgid "Remote server did not respond"
+msgstr "Den fjerne serveren svarte ikke"
+
+#: wordpress-importer.php:1018
+msgid "Remote file is incorrect size"
+msgstr "Den fjerne filen har feil størrelse"
+
+#: wordpress-importer.php:1011
+msgid "Remote server returned error response %1$d %2$s"
+msgstr "Den fjerne serveren returnerte feil-respons %1$d %2$s"
+
+#: wordpress-importer.php:1029
+msgid "Remote file is too large, limit is %s"
+msgstr "Den fjerne filen er for stor, grensen er %s"
+
+#: wordpress-importer.php:1023
+msgid "Zero size file downloaded"
+msgstr "Lastet ned fil med null størrelse"
+
+#: wordpress-importer.php:1136
+msgid "A new version of this importer is available. Please update to version %s to ensure compatibility with newer export files."
+msgstr "En ny versjon av dette importprogrammet er tilgjengelig. Vennligst oppdater til versjon %s for å sikre kompatibilitet med nyere eksportfiler."
+
+#: wordpress-importer.php:1129
+msgid "Import WordPress"
+msgstr "Importer WordPress"
+
+#: wordpress-importer.php:1151
+msgid "Howdy! Upload your WordPress eXtended RSS (WXR) file and we&#8217;ll import the posts, pages, comments, custom fields, categories, and tags into this site."
+msgstr "Hei! Last opp din WordPress eXtended RSS-fil (WXR) og vi vil importere innlegg, sider, kommentarer, tilpassede felt, katgorier og stikkord til dette nettstedet."
+
+#: wordpress-importer.php:1152
+msgid "Choose a WXR (.xml) file to upload, then click Upload file and import."
+msgstr "Velg en WXR-fil (.xml) å laste opp, og klikk Last opp fil og importer."
+
+#: wordpress-importer.php:1226
+msgid "Import <strong>posts, pages, comments, custom fields, categories, and tags</strong> from a WordPress export file."
+msgstr "Importer <strong>innlegg, kommentarer, tilpassede felt, kategorier og stikkord</strong> fra en eksportfil for WordPress."
+
+#. Plugin URI of the plugin/theme
+msgid "https://wordpress.org/plugins/wordpress-importer/"
+msgstr "https://nb.wordpress.org/plugins/wordpress-importer/"
+
+#. Plugin Name of the plugin/theme
+msgid "WordPress Importer"
+msgstr "WordPress import"
+
+#. Description of the plugin/theme
+msgid "Import posts, pages, comments, custom fields, categories, tags and more from a WordPress export file."
+msgstr "Importer innlegg, sider, kommentarer, tilpassede felt, kategorier, stikkord og mer fra en eksportfil for WordPress.."
+
+#. Author of the plugin/theme
+msgid "wordpressdotorg"
+msgstr "wordpressdotorg"
+
+#. Author URI of the plugin/theme
+msgid "https://wordpress.org/"
+msgstr "https://nb.wordpress.org/"

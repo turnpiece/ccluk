@@ -8,28 +8,35 @@
     border: 1px solid #E6E6E6;
     border-radius: 5px;
     margin: 10px 0 0 !important;
+
+    .table-header,
+    .table-row {
+        display: flex;
+        justify-content: space-between;
+        padding: 15px 80px 15px 30px;
+    }
+
+    .table-header {
+        color: #333333;
+        font-size: 13px;
+        font-weight: bold;
+        border-bottom: 1px solid #E6E6E6;
+    }
+
+    .table-row {
+        border-bottom: 1px solid #E6E6E6;
+
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
 }
 
-.wpmud .wphb-border-frame .table-header,
-.wpmud .wphb-border-frame .table-row {
-    display: flex;
-    justify-content: space-between;
-    padding: 15px 80px 15px 30px;
-}
-
-.wpmud .wphb-border-frame .table-header {
-    color: #333333;
-    font-size: 13px;
-    font-weight: bold;
-    border-bottom: 1px solid #E6E6E6;
-}
-
-.wpmud .wphb-border-frame .table-row {
-    border-bottom: 1px solid #E6E6E6;
-}
-
-.wpmud .wphb-border-frame .table-row:last-child {
-    border-bottom: 0;
+// Logging box
+.sui-border-frame {
+    .wphb-logging-buttons {
+        margin: 10px 0;
+    }
 }
 
 @include bp(tablet) {

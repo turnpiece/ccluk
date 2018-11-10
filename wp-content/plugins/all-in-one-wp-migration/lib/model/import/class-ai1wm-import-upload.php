@@ -74,9 +74,9 @@ class Ai1wm_Import_Upload {
 			case UPLOAD_ERR_FORM_SIZE:
 			case UPLOAD_ERR_PARTIAL:
 			case UPLOAD_ERR_NO_FILE:
-				// File is too large, reduce the size and try again
+				// File is too large
 				throw new Ai1wm_Import_Retry_Exception(
-					__( 'The file is too large, retrying with smaller size.', AI1WM_PLUGIN_NAME ),
+					__( 'The file is too large for this server.', AI1WM_PLUGIN_NAME ),
 					413
 				);
 			case UPLOAD_ERR_NO_TMP_DIR:

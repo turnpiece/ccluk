@@ -1,8 +1,25 @@
 Plugin Name: Hummingbird Pro
 Author: Ignacio Cruz, Ricardo Freitas, Anton Vanyukov
-Tested up to: 4.9.6
+Tested up to: 4.9.8
 
 Change Log:
+
+= 1.9.2 ( 2018-08-15 ) =
+- New: Asset Optimization ability to regenerate single files
+- New: Auto clear out logs that are older than 30 days
+- New: Action hooks: wphb_get_performance_report, wphb_clear_page_cache and wphb_delete_db_data
+- New: REST API endpoints for gzip compression, browser caching and clearing caches
+- New: GDPR policy text
+- Enhance: Improve support for Bedrock installations
+- Enhance: Improve tooltips on Asset Optimization page
+- Enhance: Improve UI in Asset Optimization module
+- Enhance: Log file control for Asset Optimization and Page Caching modules
+- Fix: Errors in Asset Optimization module on WordPress versions 4.6 and lower
+- Fix: Messages in Asset Optimization dashboard module in network admin
+- Fix: PHP warnings after ignoring performance reports
+- Fix: Incorrect stats calculations in Asset Optimization module, when there are assets bigger than 1 Mb in size
+- Fix: Asset optimization scans getting stuck on some installs
+- Fix: Compatibility with WordPress 4.6
 
 = 1.9.1 ( 2018-06-19 ) =
 - New: Icons for modules on Dashboard page
@@ -161,7 +178,7 @@ Change Log:
 - Enhance: Improve page caching descriptions
 
 = 1.7.0.1 ( 2017-11-02 ) =
--Fix: White screen when trying to clear cache after plugin/theme update on multisite install
+- Fix: White screen when trying to clear cache after plugin/theme update on multisite install
 
 = 1.7.0 ( 2017-11-02 ) =
 - New: Page caching
@@ -416,4 +433,4 @@ Enhance: Search by extension in minification page
 - First release
 
 
-87274-1529518463-au
+87274-1541874312-au

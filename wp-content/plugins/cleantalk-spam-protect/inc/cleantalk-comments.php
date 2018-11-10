@@ -15,7 +15,29 @@ function ct_add_comments_menu(){
 }
 
 function ct_show_checkspam_page(){
-    global $ct_plugin_name;
+	
+	global $apbct;
+	
+	?>
+		<div class="wrap">
+			<h2><img src="<?php echo $apbct->logo__small__colored; ?>" /> <?php echo $apbct->plugin_name; ?></h2>
+			<a style="color: gray; margin-left: 23px;" href="<?php echo $apbct->settings_link; ?>"><?php _e('Plugin Settings', 'cleantalk'); ?></a>
+			<br />
+	<?php
+	
+	// If access key is unset in 
+	if(!apbct_api_key__is_correct()){
+		if($apbct->moderate_ip == 1){
+			echo '<h3>'
+				.sprintf(
+					__('Antispam hosting tariff does not allow you to use this feature. To do so, you need to enter an Access Key in the %splugin settings%s.', 'cleantalk'),
+					'<a href="' . (is_network_admin() ? 'settings.php?page=cleantalk' : 'options-general.php?page=cleantalk').'">',
+					'</a>'
+				)
+			.'</h3>';
+		}
+		return;
+	}	
 	
 	// Getting total spam comments
 	$args_spam = array(
@@ -30,9 +52,6 @@ function ct_show_checkspam_page(){
 	$cnt_spam = get_comments($args_spam);
 	
 ?>
-	<div class="wrap">
-		<h2><img src="<?php echo plugin_dir_url(__FILE__) ?>/images/logo_color.png" /> <?php echo $ct_plugin_name; ?></h2><br />
-		
 	<!-- AJAX error message --> 
 		<div id="ct_error_message" style="display:none">
 			<h3>
@@ -70,7 +89,7 @@ function ct_show_checkspam_page(){
 				<input class="ct_date" type="text" id="ct_date_range_till" value="<?php echo isset($_GET['till']) ? $_GET['till'] : ''; ?>" disabled readonly />
 			</div>
 			<br>
-			<?php ct_input_get_premium(); ?>
+			<?php apbct_admin__badge__get_premium(); ?>
 		</div>
 		
 		<!-- Cooling notice --> 
@@ -159,9 +178,11 @@ function ct_show_checkspam_page(){
 									// Outputs email if exists
 									if($email)
 										echo "<a href='mailto:$email'>$email</a>"
-										."<a href='https://cleantalk.org/blacklists/$email ' target='_blank'>"
-											."&nbsp;<img src='".plugin_dir_url(__FILE__)."images/new_window.gif' border='0' style='float:none'/>"
-										."</a>";
+										.(!$apbct->white_label 
+											? "<a href='https://cleantalk.org/blacklists/$email' target='_blank'>"
+												."&nbsp;<img src='".plugin_dir_url(__FILE__)."images/new_window.gif' border='0' style='float:none' />"
+											  ."</a>"
+											: '');
 									else
 										echo "No email";
 									echo "<br/>";
@@ -169,9 +190,11 @@ function ct_show_checkspam_page(){
 									// Outputs IP if exists
 									if($ip)
 										echo "<a href='edit-comments.php?s=$ip&mode=detail'>$ip </a>"
-										."<a href='https://cleantalk.org/blacklists/$ip ' target='_blank'>"
+										.(!$apbct->white_label 
+											?"<a href='https://cleantalk.org/blacklists/$ip ' target='_blank'>"
 											."&nbsp;<img src='".plugin_dir_url(__FILE__)."images/new_window.gif' border='0' style='float:none'/>"
-										."</a>";
+											  ."</a>"
+											: '');
 									else
 										echo "No IP adress";
 								echo "</td>";
@@ -260,9 +283,7 @@ function ct_ajax_check_comments(){
 	
 	check_ajax_referer( 'ct_secret_nonce', 'security' );
 	
-	global $wpdb, $ct_options, $ct_ip_penalty_days;
-	
-	$ct_options = ct_get_options();
+	global $wpdb, $apbct;
 	
 	if(isset($_POST['from'], $_POST['till'])){
 		$from_date = date('Y-m-d', intval(strtotime($_POST['from'])));
@@ -382,7 +403,7 @@ function ct_ajax_check_comments(){
 			die();
 		}
 		
-		$result = CleantalkHelper::api_method__spam_check_cms($ct_options['apikey'], $data, !empty($_POST['accurate_check']) ? $curr_date : null);
+		$result = CleantalkAPI::method__spam_check_cms($apbct->api_key, $data, !empty($_POST['accurate_check']) ? $curr_date : null);
 		
 		if(empty($result['error'])){
 			
@@ -631,7 +652,7 @@ function ct_comment_check_approve_comment(){
 
 	$id=$_POST['id'];
 	$comment = get_comment($id, 'ARRAY_A');
-	$comment['comment_content'] = ct_unmark_red($comment['comment_content']);
+	$comment['comment_content'] = apbct_comment__unmark_red($comment['comment_content']);
 	$comment['comment_approved'] = 1;
 	update_comment_meta($id, 'ct_marked_as_spam', 0);
 	wp_update_comment($comment);

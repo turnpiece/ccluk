@@ -17,15 +17,18 @@ import Fetcher from './utils/fetcher';
                 Fetcher.dashboard.toggleMinification( value )
                     .then( () => {
                         // If disabled, uncheck CDN checkbox and disable it.
-                        const CDNcheckbox = $('input[name="use_cdn"]');
-                        const CDNtooltip  = $('span[id="cdn_tooltip"]');
+                        const CDNcheckbox    = $('input[name="use_cdn"]');
+                        const CDNtooltip     = $('span[id="cdn_tooltip"]');
+                        const enabledNotice  = $('#wphb-notice-minification-enabled');
                         if ( 'false' === value ) {
                             CDNcheckbox.prop( 'checked', false );
                             CDNcheckbox.prop( 'disabled', true );
                             CDNtooltip.attr( 'tooltip', $('input[id="cdn_disabled_tooltip"]').val() );
+                            enabledNotice.addClass( 'sui-hidden' );
                         } else {
                             CDNcheckbox.prop( 'disabled', false );
                             CDNtooltip.attr( 'tooltip', $('input[id="cdn_enabled_tooltip"]').val() );
+                            enabledNotice.addClass( 'sui-hidden' );
                         }
 						WPHB_Admin.notices.show( 'wphb-notice-minification-settings-updated' );
                     });

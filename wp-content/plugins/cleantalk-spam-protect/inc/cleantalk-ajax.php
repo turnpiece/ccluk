@@ -122,14 +122,7 @@ $cleantalk_hooked_actions[]='tevolution_submit_from_preview';
 $cleantalk_hooked_actions[]='submit_form_recaptcha_validation';
 
 /**hooks for cm answers pro */
-add_action( 'template_redirect', 'ct_ajax_hook',1 );
-
-/* hooks for ninja forms ajax*/
-add_action( 'wp_ajax_nopriv_ninja_forms_ajax_submit', 'ct_ajax_hook',1  );
-add_action( 'wp_ajax_ninja_forms_ajax_submit', 'ct_ajax_hook',1  );
-
-add_action( 'ninja_forms_process', 'ct_ajax_hook',1  );
-$cleantalk_hooked_actions[]='ninja_forms_ajax_submit';
+add_action( 'wp', 'ct_ajax_hook',1 );
 
 /* hooks for contact forms by web settler ajax*/
 add_action( 'wp_ajax_nopriv_smuzform-storage', 'ct_ajax_hook',1  );
@@ -248,20 +241,12 @@ function ct_mc4wp_ajax_hook( array $errors )
 function ct_ajax_hook($message_obj = false, $additional = false)
 {	
 	require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-public.php');
-	global $ct_checkjs_register_form, $bp, $ct_signup_done, $ct_negative_comment, $ct_options, $ct_data, $current_user;
-
-	$ct_options = ct_get_options();
-    $ct_data = ct_get_data();
-	$sender_email = null;
-    $message = '';
-    $sender_nickname = null;
-    $contact = true;
-    $subject = '';
+	global $apbct;
 	
     //
     // Skip test if Custom contact forms is disabled.
     //
-    if (intval($ct_options['general_contact_forms_test'])==0 ) {
+    if (!$apbct->settings['general_contact_forms_test']) {
         return false;
     }
 
@@ -269,7 +254,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
     // Go out because we call it on backend.
     //
     if(	(ct_is_user_enable() === false || (function_exists('get_current_user_id') && get_current_user_id() != 0)) &&
-		(strval(current_action()) != 'et_pre_insert_answer' && isset($message_obj['author']) && intval($message_obj['author']) == 0) //QAEngine Theme fix
+		(strval(current_action()) != 'et_pre_insert_answer' && (isset($message_obj['author']) && intval($message_obj['author']) == 0) || (isset($message_obj['post_author']) && intval($message_obj['post_author']) == 0)) //QAEngine Theme fix
     ){
 		return false;
     }
@@ -280,7 +265,8 @@ function ct_ajax_hook($message_obj = false, $additional = false)
     $skip_post = array(
         'gmaps_display_info_window',  // Geo My WP pop-up windows.
         'gmw_ps_display_info_window',  // Geo My WP pop-up windows.
-        'the_champ_user_auth',  // Super Socializer 
+        'the_champ_user_auth',  // Super Socializer
+        'simbatfa-init-otp', //Two-Factor Auth 
     );
 	
 	$checkjs = apbct_js_test('ct_checkjs', $_COOKIE, true);
@@ -296,8 +282,10 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		$sender_nickname = '';
 	
 	//QAEngine Theme answers
-    if( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['author'], $message_obj['post_content']) ){
+    if( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['post_content']) ){
 		$curr_user = get_user_by('id', $message_obj['author']);
+		if (!$curr_user)
+			$curr_user = get_user_by('id', $message_obj['post_author']);			
 		$ct_post_temp['comment'] = $message_obj['post_content'];
         $ct_post_temp['email'] = $curr_user->data->user_email;
 		$ct_post_temp['name'] = $curr_user->data->user_login;
@@ -356,14 +344,6 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 			if(strpos($key, 'oje') !== false)
 				return; 
 		} unset($key ,$value);
-	}
-	
-	//Ninja Forms xml fix
-	if (isset($_POST['action']) && $_POST['action'] === 'nf_ajax_submit'){
-		foreach ($message as $key => $value){
-			if (strpos($value, '<xml>') !== false)
-				unset($message[$key]);
-		}
 	}
 	
 	$base_call_result = apbct_base_call(
@@ -467,19 +447,6 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 			print $ct_result->comment;
 			die();
 		}
-		else if(isset($_POST['action']) && $_POST['action']=='ninja_forms_ajax_submit')
-		{
-			print '{"form_id":'.$_POST['_form_id'].',"errors":false,"success":{"success_msg-Success":"'.$ct_result->comment.'"}}';
-			die();
-		}
-		else if(isset($_POST['action']) && $_POST['action']=='nf_ajax_submit')
-		{
-			$nf_data = json_decode($_POST['formData'], true);
-			// print '{data:{{"form_id":'.$nf_data['id'].',"errors":false,"success":{"success_msg-Success":"'.$ct_result->comment.'"}}}}'; \\Old version
-			print '{"data":{"form_id":"'.$nf_data['id'].'","settings":{},"extra":[],"fields":{},"processed_actions":[],"actions":{"success_message": "<font style=\"color: red\">'.$ct_result->comment.'</font><br><br>"}},"errors":[],"debug":[]}';				
-			die();
-		}
-		
 		// WooWaitList
 		// http://codecanyon.net/item/woowaitlist-woocommerce-back-in-stock-notifier/7103373
 		else if(isset($_POST['action']) && $_POST['action']=='wew_save_to_db_callback')
@@ -554,8 +521,8 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 			return 'ct_mc4wp_response';
 		}
 		// QAEngine Theme answers
-		elseif ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['author'], $message_obj['post_content']) ){
-			return new WP_Error('Spam comment', $ct_result->comment);
+		elseif ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['post_content']) ){
+			throw new Exception($ct_result->comment);
 		}
 		//Convertplug. Strpos because action value dynamically changes and depends on mailing service 
 		elseif (isset($_POST['action']) && strpos($_POST['action'], '_add_subscriber') !== false){
@@ -637,7 +604,7 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 			die(json_encode($result));
 		}
 		//ConvertPro
-		elseif(isset($_POST['action']) && $_POST['action']='cp_v2_notify_admin' || $_POST['action']=='cpro_notify_via_email')
+		elseif(isset($_POST['action']) && $_POST['action'] == 'cp_v2_notify_admin' || $_POST['action'] == 'cpro_notify_via_email')
 		{
 			$result = Array(
 				'success' => false,
@@ -648,14 +615,13 @@ function ct_ajax_hook($message_obj = false, $additional = false)
 		}		
 		else
 		{
-			print $ct_result->comment;
-			die();
+			die(json_encode(array('apbct' => array('blocked' => true, 'comment' => $ct_result->comment,))));
 		}
 	}
 	//Allow == 1
 	else{
 		//QAEngine Theme answers
-		if ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['author'], $message_obj['post_content']) ){
+		if ( !empty($message_obj) && isset($message_obj['post_type'], $message_obj['post_content']) ){
 			return $message_obj;
 		}
 	}

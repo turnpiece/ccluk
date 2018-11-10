@@ -127,7 +127,7 @@
             var tablesArray = [];
             var filesArray = [];
 
-            var snapshot_item_data = $('input:radio[name="snapshot-restore-file"]').val();
+            var snapshot_item_data = $('input:radio[name="snapshot-restore-file"]:checked').val();
 
             function snapshot_restore_tables_proc(action, idx) {
                 var table_name, data;

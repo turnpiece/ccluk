@@ -344,6 +344,9 @@ if ( ! function_exists( 'onepress_entry_footer' ) ) {
      */
     function onepress_entry_footer()
     {
+
+        ob_start();
+
         // Hide category and tag text for pages.
         if ('post' === get_post_type()) {
             /* translators: used between list items, there is a space after the comma */
@@ -363,6 +366,16 @@ if ( ! function_exists( 'onepress_entry_footer' ) ) {
             echo '<span class="comments-link">';
             comments_popup_link(esc_html__('Leave a comment', 'onepress'), esc_html__('1 Comment', 'onepress'), esc_html__('% Comments', 'onepress'));
             echo '</span>';
+        }
+
+        $content = ob_get_contents();
+        ob_clean();
+        ob_end_flush();
+
+        if ( $content ){
+	         echo '<footer class="entry-footer">';
+	        echo $content; // // WPCS: XSS OK.
+	        echo '</footer><!-- .entry-footer -->';
         }
 
     }
@@ -605,7 +618,11 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
                     color: #<?php echo $primary; ?>;
                 }
                 input[type="reset"], input[type="submit"], input[type="submit"], input[type="reset"]:hover, input[type="submit"]:hover, input[type="submit"]:hover .nav-links a:hover, .btn-theme-primary, .btn-theme-primary-outline:hover, .section-testimonials .card-theme-primary,
-				.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce button.button.alt, .pirate-forms-submit-button, .pirate-forms-submit-button:hover
+				.woocommerce #respond input#submit, .woocommerce a.button, .woocommerce button.button, .woocommerce input.button, .woocommerce button.button.alt,
+                .pirate-forms-submit-button, .pirate-forms-submit-button:hover, input[type="reset"], input[type="submit"], input[type="submit"], .pirate-forms-submit-button,
+                .contact-form div.wpforms-container-full .wpforms-form .wpforms-submit,
+                .contact-form div.wpforms-container-full .wpforms-form .wpforms-submit:hover
+
                 {
                     background: #<?php echo $primary; ?>;
                 }
@@ -896,25 +913,39 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
                 margin: -<?php echo intval( $gallery_spacing / 2 ); ?>px;
             }
         <?php
+        $content_width = absint( get_theme_mod( 'single_layout_content_width' ) ); //
+        if ( $content_width > 0 ) {
+	        $value = $content_width.'px';
+            echo '.single-post .site-main { max-width: '.$value.'; margin-left: auto; margin-right: auto; }';
+
+        }
+        ?>
+        <?php
 
         $css = ob_get_clean();
 
         if ( trim( $css ) == "" ) {
             return ;
         }
-        $css = preg_replace(
-            array(
-                // Remove comment(s)
-                '#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')|\/\*(?!\!)(?>.*?\*\/)|^\s*|\s*$#s',
-                // Remove unused white-space(s)
-                '#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\'|\/\*(?>.*?\*\/))|\s*+;\s*+(})\s*+|\s*+([*$~^|]?+=|[{};,>~+]|\s*+-(?![0-9\.])|!important\b)\s*+|([[(:])\s++|\s++([])])|\s++(:)\s*+(?!(?>[^{}"\']++|"(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')*+{)|^\s++|\s++\z|(\s)\s+#si',
-            ),
-            array(
-                '$1',
-                '$1$2$3$4$5$6$7',
-            ),
-            $css
-        );
+
+		$css = apply_filters( 'onepress_custom_css', $css ) ;
+        
+        if ( ! is_customize_preview() ) {
+
+	        $css = preg_replace(
+		        array(
+			        // Remove comment(s)
+			        '#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')|\/\*(?!\!)(?>.*?\*\/)|^\s*|\s*$#s',
+			        // Remove unused white-space(s)
+			        '#("(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\'|\/\*(?>.*?\*\/))|\s*+;\s*+(})\s*+|\s*+([*$~^|]?+=|[{};,>~+]|\s*+-(?![0-9\.])|!important\b)\s*+|([[(:])\s++|\s++([])])|\s++(:)\s*+(?!(?>[^{}"\']++|"(?:[^"\\\]++|\\\.)*+"|\'(?:[^\'\\\\]++|\\\.)*+\')*+{)|^\s++|\s++\z|(\s)\s+#si',
+		        ),
+		        array(
+			        '$1',
+			        '$1$2$3$4$5$6$7',
+		        ),
+		        $css
+	        );
+        }
 
 
         if ( ! function_exists( 'wp_get_custom_css' ) ) {  // Back-compat for WordPress < 4.7.
@@ -924,7 +955,7 @@ if ( ! function_exists( 'onepress_custom_inline_style' ) ) {
             }
         }
 
-       return apply_filters( 'onepress_custom_css', $css ) ;
+       return $css ;
 	}
 
 }

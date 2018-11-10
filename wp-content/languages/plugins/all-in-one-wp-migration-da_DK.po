@@ -1,0 +1,743 @@
+# Translation of Plugins - All-in-One WP Migration - Stable (latest release) in Danish
+# This file is distributed under the same license as the Plugins - All-in-One WP Migration - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-09-17 09:00:23+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=n != 1;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: da_DK\n"
+"Project-Id-Version: Plugins - All-in-One WP Migration - Stable (latest release)\n"
+
+#: lib/controller/class-ai1wm-main-controller.php:597
+msgid "Preparing to export..."
+msgstr "Gør klar til eksport..."
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:124
+#: lib/view/backups/index.php:64
+msgid "%s ago"
+msgstr "%s siden"
+
+#: lib/controller/class-ai1wm-main-controller.php:847
+msgid "Your purchase ID is invalid, please <a href=\"mailto:support@servmask.com\">contact us</a>"
+msgstr "Dit købsID er ugyldigt <a href=\"mailto:support@servmask.com\">kontakt os venligst</a>"
+
+#: lib/controller/class-ai1wm-main-controller.php:806
+msgid "Are you sure you want to delete this file?"
+msgstr "Er du sikker på, du vil slette denne fil?"
+
+#: lib/controller/class-ai1wm-main-controller.php:703
+msgid "We are sorry, there seems to be a problem while uploading your file. Follow <a href=\"https://www.youtube.com/watch?v=mRp7qTFYKgs\" target=\"_blank\">this guide</a> to resolve it."
+msgstr "Vi beklager, der synes at være et problem med at uploade din fil. Følg <a href=\"https://www.youtube.com/watch?v=mRp7qTFYKgs\" target=\"_blank\">denne vejledning</a> for at løse det."
+
+#: lib/controller/class-ai1wm-main-controller.php:698
+#: lib/controller/class-ai1wm-main-controller.php:801
+msgid "Please do not close this browser window or your import will fail"
+msgstr "Vær venlig ikke at lukke dette vindue, da din import så vil mislykkedes"
+
+#: lib/controller/class-ai1wm-main-controller.php:697
+#: lib/controller/class-ai1wm-main-controller.php:800
+msgid "Continue"
+msgstr "Fortsæt"
+
+#: lib/controller/class-ai1wm-main-controller.php:696
+#: lib/controller/class-ai1wm-main-controller.php:799
+msgid "Proceed"
+msgstr "Fortsæt"
+
+#: lib/controller/class-ai1wm-main-controller.php:695
+#: lib/controller/class-ai1wm-main-controller.php:798
+msgid "Stop import"
+msgstr "Stop import"
+
+#: lib/controller/class-ai1wm-main-controller.php:693
+#: lib/controller/class-ai1wm-main-controller.php:796
+msgid "Please wait, stopping the import..."
+msgstr "Vent venligst, stopper importen..."
+
+#: lib/controller/class-ai1wm-main-controller.php:692
+#: lib/controller/class-ai1wm-main-controller.php:795
+msgid "Unable to stop the import. Refresh the page and try again"
+msgstr "Kunne ikke stoppe importen. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:691
+#: lib/controller/class-ai1wm-main-controller.php:794
+msgid "Unable to prepare blogs on import. Refresh the page and try again"
+msgstr "Kunne ikke klargøre blogs til import. Genindlæs siden og prøv igen."
+
+#: lib/controller/class-ai1wm-main-controller.php:690
+#: lib/controller/class-ai1wm-main-controller.php:793
+msgid "Unable to confirm the import. Refresh the page and try again"
+msgstr "Kunne ikke bekræfte importen. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:689
+#: lib/controller/class-ai1wm-main-controller.php:792
+msgid "Unable to start the import. Refresh the page and try again"
+msgstr "Kunne ikke starte importen. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:686
+#: lib/controller/class-ai1wm-main-controller.php:789
+msgid "You are about to stop importing your website, are you sure?"
+msgstr "Du er i gang med at stoppe importen af webstedet. Er du sikker?"
+
+#: lib/controller/class-ai1wm-main-controller.php:608
+#: lib/controller/class-ai1wm-main-controller.php:702
+#: lib/controller/class-ai1wm-main-controller.php:805
+msgid "Thanks for submitting your request!"
+msgstr "Tak fordi du sendte din anmodning!"
+
+#: lib/controller/class-ai1wm-main-controller.php:607
+#: lib/controller/class-ai1wm-main-controller.php:701
+#: lib/controller/class-ai1wm-main-controller.php:804
+msgid "Thanks for submitting your feedback!"
+msgstr "Tak fordi du sendte din feedback!"
+
+#: lib/controller/class-ai1wm-main-controller.php:606
+#: lib/controller/class-ai1wm-main-controller.php:700
+#: lib/controller/class-ai1wm-main-controller.php:803
+msgid "How may we help you?"
+msgstr "Hvordan kan vi hjælpe dig?"
+
+#: lib/controller/class-ai1wm-main-controller.php:605
+#: lib/controller/class-ai1wm-main-controller.php:699
+#: lib/controller/class-ai1wm-main-controller.php:802
+msgid "Leave plugin developers any feedback here"
+msgstr "Giv plugin-udviklere alle typer af feedback her"
+
+#: lib/controller/class-ai1wm-main-controller.php:604
+msgid "Stop export"
+msgstr "Stop eksport"
+
+#: lib/controller/class-ai1wm-main-controller.php:603
+#: lib/controller/class-ai1wm-main-controller.php:694
+#: lib/controller/class-ai1wm-main-controller.php:797
+msgid "Close"
+msgstr "Luk"
+
+#: lib/controller/class-ai1wm-main-controller.php:602
+msgid "Please wait, stopping the export..."
+msgstr "Vent venligst, stopper eksporten..."
+
+#: lib/controller/class-ai1wm-main-controller.php:601
+msgid "Unable to stop the export. Refresh the page and try again"
+msgstr "Kunne ikke stoppe eksporten. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:600
+msgid "Unable to run the export. Refresh the page and try again"
+msgstr "Kunne ikke starte eksporten. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:599
+msgid "Unable to start the export. Refresh the page and try again"
+msgstr "Kunne ikke starte eksporten. Genindlæs siden og prøv igen"
+
+#: lib/controller/class-ai1wm-main-controller.php:596
+msgid "You are about to stop exporting your website, are you sure?"
+msgstr "Du er i gang med at stoppe eksporten af webstedet. Er du sikker?"
+
+#: functions.php:1379
+msgid "Unable to authenticate the secret key. <a href=\"https://help.servmask.com/knowledgebase/invalid-secret-key/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke bekræfte den hemmelige nøgle. <a href=\"https://help.servmask.com/knowledgebase/invalid-secret-key/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1216
+msgid "Unable to get current pointer position of %s. <a href=\"https://help.servmask.com/knowledgebase/php-32bit/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke få nuværende markørplacering %s. <a href=\"https://help.servmask.com/knowledgebase/php-32bit/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1199
+msgid "Unable to seek to offset %d on %s. <a href=\"https://help.servmask.com/knowledgebase/php-32bit/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke søge offset %d på %s. <a href=\"https://help.servmask.com/knowledgebase/php-32bit/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1182
+msgid "Unable to read file: %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke læse filen: %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1163
+msgid "Out of disk space. Unable to write to: %s. <a href=\"https://help.servmask.com/knowledgebase/out-of-disk-space/\" target=\"_blank\">Technical details</a>"
+msgstr "Ikke mere diskplads. Kunne ikke skrive til: %s. <a href=\"https://help.servmask.com/knowledgebase/out-of-disk-space/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1159
+msgid "Unable to write to: %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke skrive til: %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:1140
+msgid "Unable to open %s with mode %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke åbne %s med tilstand %s. <a href=\"https://help.servmask.com/knowledgebase/invalid-file-permissions/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:59 functions.php:78
+msgid "Invalid archive path. <a href=\"https://help.servmask.com/knowledgebase/invalid-archive-path/\" target=\"_blank\">Technical details</a>"
+msgstr "Ugyldig arkivsti. <a href=\"https://help.servmask.com/knowledgebase/invalid-archive-path/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:54 functions.php:73
+msgid "Unable to locate archive path. <a href=\"https://help.servmask.com/knowledgebase/invalid-archive-path/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke finde arkivsti. <a href=\"https://help.servmask.com/knowledgebase/invalid-archive-path/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: functions.php:34
+msgid "Unable to locate storage path. <a href=\"https://help.servmask.com/knowledgebase/invalid-storage-path/\" target=\"_blank\">Technical details</a>"
+msgstr "Kunne ikke finde lagersti. <a href=\"https://help.servmask.com/knowledgebase/invalid-storage-path/\" target=\"_blank\">Tekniske detaljer</a>"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:94
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:104
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:229
+msgid "You will need to create this folder and grant it read/write/execute permissions (0777) for the All in One WP Migration plugin to function properly."
+msgstr "Du skal oprette denne mappe og give den read/write/execute tilladelser (0777) for at All in One WP migration pluginet kan fungere ordentligt."
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:93
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:103
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:228
+msgid "All in One WP Migration is not able to create <strong>%s</strong> folder."
+msgstr "All in One WP Migration kunne ikke oprette <strong>%s</strong> mappen."
+
+#: lib/view/common/leave-feedback.php:62 lib/view/common/report-problem.php:42
+msgid "I agree that by filling in the contact form with my data, I authorize All-in-One WP Migration to use my <strong>email</strong> to reply to my requests for information. <a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">Privacy policy</a>"
+msgstr "Jeg går med til at ved at udfylde denne kontaktformular med mine data, så giver jeg tilladelse til, at All-in-One WP Migration bruger min <strong>e-mail</strong> til at svare på mine anmodninger om information. <a href=\"https://www.iubenda.com/privacy-policy/946881\" target=\"_blank\">Privatlivspolitik</a>"
+
+#: lib/model/export/class-ai1wm-export-config.php:154
+msgid "Done preparing configuration file."
+msgstr "Færdig med at klargøre konfigurationsfilen."
+
+#: lib/model/export/class-ai1wm-export-config.php:32
+msgid "Preparing configuration file..."
+msgstr "Klargører konfigurationsfilen..."
+
+#: lib/model/export/class-ai1wm-export-config-file.php:69
+msgid "Done archiving configuration file."
+msgstr "Færdig med at arkivere konfigurationsfilen."
+
+#: lib/model/export/class-ai1wm-export-config-file.php:57
+#: lib/model/export/class-ai1wm-export-config-file.php:92
+msgid "Archiving configuration file...<br />%d%% complete"
+msgstr "Arkiverer konfigurationsfilen...<br />%d%% færdig"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:245
+msgid "Example: wp ai1wm restore migration-wp-20170913-095743-931.wpress"
+msgstr "Eksempel: wp ai1wm restore migration-wp-20170913-095743-931.wpress"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:244
+msgid "A valid backup name must be provided in order to proceed with the restore process."
+msgstr "Et gyldigt backupnavn skal gives for at forsætte med gendannelsesprocessen."
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:222
+msgid "WPI CLI is not supported in Multisite mode. Please use web interface to restore a backup."
+msgstr "WPI CLI understøttes ikke i Multisite tilstand. Brug venligst et web interface for at gendanne en backup."
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:207
+msgid "Backup location: %s"
+msgstr "Backup placering: %s"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:206
+msgid "Backup complete."
+msgstr "Backup færdig."
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:116
+msgid "Date created"
+msgstr "Oprettet på dato"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:115
+msgid "Backup name"
+msgstr "Backup navn"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:87
+msgid "WPI CLI is not supported in Multisite mode. Please use web interface to create a backup."
+msgstr "WPI CLI understøttes ikke i Multisite tilstand. Brug venligst et web interface for at lave en backup."
+
+#: lib/view/backups/index.php:68
+msgid "2GB+"
+msgstr "2GB+"
+
+#: lib/model/import/class-ai1wm-import-validate.php:132
+msgid "Done unpacking archive."
+msgstr "Færdig med at udpakke arkivet."
+
+#: lib/model/import/class-ai1wm-import-validate.php:66
+#: lib/model/import/class-ai1wm-import-validate.php:152
+msgid "Unpacking archive...<br />%d%% complete"
+msgstr "Pakker arkiv ud...<br />%d%% færdig"
+
+#: lib/model/export/class-ai1wm-export-database-file.php:74
+msgid "Done archiving database."
+msgstr "Færdig med at arkivere databasen."
+
+#: lib/model/export/class-ai1wm-export-database-file.php:62
+#: lib/model/export/class-ai1wm-export-database-file.php:97
+msgid "Archiving database...<br />%d%% complete"
+msgstr "Arkiverer databasen...<br />%d%% færdig"
+
+#: lib/model/import/class-ai1wm-import-database.php:74
+#: lib/model/import/class-ai1wm-import-database.php:798
+msgid "Restoring database...<br />%d%% complete"
+msgstr "Gendanner databasen...<br />%d%% færdig"
+
+#: lib/model/export/class-ai1wm-export-database.php:61
+#: lib/model/export/class-ai1wm-export-database.php:162
+msgid "Exporting database...<br />%d%% complete"
+msgstr "Eksporterer databasen...<br />%d%% færdig"
+
+#: lib/model/export/class-ai1wm-export-compatibility.php:31
+#: lib/model/import/class-ai1wm-import-compatibility.php:31
+msgid "Checking extensions compatibility..."
+msgstr "Undersøger om udvidelser er forenelige"
+
+#: lib/model/import/class-ai1wm-import-database.php:778
+msgid "Done restoring database."
+msgstr "Færdig med at gendanne databasen."
+
+#: lib/controller/class-ai1wm-main-controller.php:687
+#: lib/controller/class-ai1wm-main-controller.php:790
+msgid "Preparing to import..."
+msgstr "Gør klar til import..."
+
+#: lib/controller/class-ai1wm-main-controller.php:935
+msgid "Monthly"
+msgstr "Månedlig"
+
+#: lib/controller/class-ai1wm-main-controller.php:931
+msgid "Weekly"
+msgstr "Ugentlig"
+
+#: lib/view/export/advanced-settings.php:73
+msgid "Do <strong>not</strong> export must-use plugins (files)"
+msgstr "Eksporter <strong>ikke</strong> krævede plugins (filer)"
+
+#: lib/model/import/class-ai1wm-import-mu-plugins.php:50
+msgid "Done activating mu-plugins."
+msgstr "Færdig med at aktivere mu-plugins."
+
+#: lib/model/import/class-ai1wm-import-mu-plugins.php:31
+msgid "Activating mu-plugins..."
+msgstr "Aktiverer mu-plugins..."
+
+#: lib/view/import/index.php:41
+msgid "Use the box below to upload a wpress file."
+msgstr "Brug boksen herunder til at uploade en wpress fil."
+
+#: lib/view/export/advanced-settings.php:64
+msgid "Do <strong>not</strong> export inactive themes (files)"
+msgstr "Eksporter <strong>ikke</strong> inaktive temaer (filer)"
+
+#: lib/view/export/advanced-settings.php:110
+msgid "Do <strong>not</strong> replace email domain (sql)"
+msgstr "Erstat <strong>ikke</strong> e-mail domæne (sql)"
+
+#: lib/view/export/advanced-settings.php:88
+msgid "Do <strong>not</strong> export inactive plugins (files)"
+msgstr "Eksporter <strong>ikke</strong> inaktive plugins (filer)"
+
+#: lib/model/import/class-ai1wm-import-upload.php:100
+msgid "Unrecognized error %s during upload."
+msgstr "Ukendt fejl %s under upload."
+
+#: lib/model/import/class-ai1wm-import-upload.php:94
+msgid "A PHP extension stopped the file upload."
+msgstr "En PHP udvidelse stoppede fil-upload."
+
+#: lib/model/import/class-ai1wm-import-upload.php:89
+msgid "Failed to write file to disk."
+msgstr "Kunne ikke skrive til disken."
+
+#: lib/model/import/class-ai1wm-import-upload.php:84
+msgid "Missing a temporary folder."
+msgstr "Der mangler en midlertidig mappe."
+
+#: lib/model/import/class-ai1wm-import-upload.php:79
+msgid "The file is too large, retrying with smaller size."
+msgstr "Filen er for stor, prøver med en mindre størrelse."
+
+#: lib/model/import/class-ai1wm-import-upload.php:66
+msgid "Unable to upload the file because %s"
+msgstr "Kunne ikke uploade filen fordi %s"
+
+#: lib/model/import/class-ai1wm-import-upload.php:45
+msgid "Missing tmp_name in upload file."
+msgstr "Mangler tmp_name i upload-filen."
+
+#: lib/model/import/class-ai1wm-import-upload.php:38
+msgid "Missing error key in upload file."
+msgstr "Mangler error key i upload-filen."
+
+#: lib/model/import/class-ai1wm-import-upload.php:31
+msgid "Missing upload file."
+msgstr "Mangler upload-filen."
+
+#: lib/view/export/advanced-settings.php:65
+#: lib/view/export/advanced-settings.php:89
+#: lib/view/export/advanced-settings.php:96
+msgid "new"
+msgstr "ny"
+
+#: lib/view/export/advanced-settings.php:95
+msgid "Do <strong>not</strong> export cache (files)"
+msgstr "Eksporter <strong>ikke</strong> cache (filer)"
+
+#: lib/model/import/class-ai1wm-import-blogs.php:124
+msgid "Done preparing blogs."
+msgstr "Færdig med at klargøre blogs."
+
+#: lib/model/import/class-ai1wm-import-blogs.php:113
+msgid "Unable to import <strong>WordPress Network</strong> into WordPress <strong>Single</strong> site."
+msgstr "Kunne ikke importere <strong>WordPress netværket</strong> ind i et WordPress <strong>enkeltstående</strong> websted."
+
+#: lib/model/import/class-ai1wm-import-blogs.php:108
+msgid "At least <strong>one WordPress</strong> site should be presented in the archive."
+msgstr "Mindst <strong>et WordPress</strong> websted skal optræde i arkivet."
+
+#: lib/model/import/class-ai1wm-import-blogs.php:103
+msgid "The archive should contain <strong>Single WordPress</strong> site! Please revisit your export settings."
+msgstr "Arkivet skal indeholde et <strong>enkeltstående WordPress</strong> websted! Undersøg venligst dine eksportindstillinger igen."
+
+#: lib/model/import/class-ai1wm-import-blogs.php:31
+msgid "Preparing blogs..."
+msgstr "Klargører blogs..."
+
+#: lib/model/class-ai1wm-report.php:46
+msgid "Please accept report term conditions."
+msgstr "Accepter venligst betingelserne for rapporterne."
+
+#: lib/model/class-ai1wm-feedback.php:64 lib/model/class-ai1wm-report.php:60
+msgid "Something went wrong: %s"
+msgstr "Noget gik galt: %s"
+
+#: lib/model/class-ai1wm-feedback.php:49
+msgid "Please accept feedback term conditions."
+msgstr "Accepter venligst betingelserne for feedback."
+
+#: lib/model/class-ai1wm-feedback.php:47 lib/model/class-ai1wm-report.php:44
+msgid "Please enter comments in the text area."
+msgstr "Skriv venligst kommentarer i tekstfeltet."
+
+#: lib/model/class-ai1wm-feedback.php:45 lib/model/class-ai1wm-report.php:42
+msgid "Your email is not valid."
+msgstr "Din e-mail er ikke gyldig."
+
+#: lib/model/class-ai1wm-feedback.php:43
+msgid "Feedback type is not valid."
+msgstr "Feedback-typen er ikke gyldig."
+
+#: lib/view/updater/modal.php:51
+msgid "There is an update available. To update, you must enter your"
+msgstr "Der er en opdatering tilgængelig. For at opdatere skal du skrive dit"
+
+#: lib/view/updater/modal.php:44
+msgid "Discard"
+msgstr "Kasser"
+
+#: lib/view/updater/modal.php:42
+msgid "Save"
+msgstr "Spara"
+
+#: lib/view/updater/modal.php:38
+msgid "here"
+msgstr "her"
+
+#: lib/view/updater/modal.php:37
+msgid "Don't have a Purchase ID? You can find your Purchase ID"
+msgstr "Du har ikke et købsID? Du kan finde dit købsID"
+
+#: lib/view/updater/modal.php:33 lib/view/updater/modal.php:52
+msgid "Purchase ID"
+msgstr "KøbsID"
+
+#: lib/view/updater/modal.php:30
+msgid "To update your plugin/extension to the latest version, please fill your Purchase ID below."
+msgstr "For at opdatere dit plugin/udvidelse til seneste version, så indtast dit købsID herunder."
+
+#: lib/view/updater/modal.php:29
+msgid "Enter your Purchase ID"
+msgstr "Indtast dit købsID"
+
+#: lib/controller/class-ai1wm-main-controller.php:846
+#: lib/view/updater/check.php:27
+msgid "Check for updates"
+msgstr "Søg efter opdateringer"
+
+#: lib/view/main/get-support.php:27
+msgid "Get Support"
+msgstr "Få support"
+
+#. Author of the plugin/theme
+msgid "ServMask"
+msgstr "ServMask"
+
+#. Description of the plugin/theme
+msgid "Migration tool for all your blog data. Import or Export your blog content with a single click."
+msgstr "Migreringsværktøj til alle dine blogdata. Import og eksporter din blogs indhold med et enkelt klik."
+
+#. #-#-#-#-#  all-in-one-wp-migration-code.pot (All-in-One WP Migration 6.77) 
+#. #-#-#-#-#
+#. Plugin URI of the plugin/theme
+#. #-#-#-#-#  all-in-one-wp-migration-code.pot (All-in-One WP Migration 6.77) 
+#. #-#-#-#-#
+#. Author URI of the plugin/theme
+msgid "https://servmask.com/"
+msgstr "https://servmask.com/"
+
+#. Plugin Name of the plugin/theme
+msgid "All-in-One WP Migration"
+msgstr "All-in-One WP Migration"
+
+#: lib/view/import/index.php:33
+msgid "Import Site"
+msgstr "Importer websted"
+
+#: lib/view/import/import-buttons.php:71
+msgid "Unlimited"
+msgstr "Ubegrænset"
+
+#: lib/view/import/import-buttons.php:67
+msgid "Get unlimited"
+msgstr "Få ubegrænset"
+
+#: lib/view/import/import-buttons.php:61
+msgid "Maximum upload file size:"
+msgstr "Maksimum upload filstørrelse:"
+
+#: lib/view/import/import-buttons.php:40
+msgid "Import From"
+msgstr "Importer fra"
+
+#: lib/view/import/import-buttons.php:36
+msgid "Drag & Drop to upload"
+msgstr "Træk & slip for at uploade"
+
+#: lib/view/export/index.php:33
+msgid "Export Site"
+msgstr "Eksporter websted"
+
+#: lib/view/export/help-section.php:47
+msgid "Once the file is successfully downloaded on your computer, you can import it to any of your WordPress sites."
+msgstr "Når filen er hentet uden problemer til din computer, så du kan importere det til enhver af dine WordPress-sider."
+
+#: lib/view/export/help-section.php:43
+msgid "Press \"Export\" button and the site archive file will pop up in your browser."
+msgstr "Tryk \"Eksport\" knappen og webstedets arkiv vil dukke op i din browser."
+
+#: lib/view/export/help-section.php:39
+msgid "In the advanced settings section you can configure more precisely the way of exporting."
+msgstr "I sektionen med avancerede indstillinger kan du indstille mere præcist, hvad du vil eksportere."
+
+#: lib/view/export/help-section.php:33
+msgid "Quick hints"
+msgstr "Hurtige tip"
+
+#: lib/view/export/help-section.php:29
+msgid "You can then use the import functionality provided by this plugin to import the zipped file onto any other WordPress sites that you have administrator access to."
+msgstr "Du kan så bruge importfunktionaliteten som dette plugin tilbyder, til at importere den zippede fil ind i ethvert af dine WordPress websteder, som du har adgang til."
+
+#: lib/view/export/help-section.php:28
+msgid "This screen allows you to export database, media files, themes and plugins as one zipped file."
+msgstr "Dette skrærmbillede giver dig mulighed for at eksportere databasen, mediefiler, temaer og plugins i en enkelt zippet fil."
+
+#: lib/view/export/find-replace.php:48
+msgid "Add"
+msgstr "Tilføj"
+
+#: lib/view/export/find-replace.php:35
+msgid "in the database"
+msgstr "i databasen"
+
+#: lib/view/export/find-replace.php:34
+msgid "<another-text>"
+msgstr "<another-text>"
+
+#: lib/view/export/find-replace.php:33 lib/view/export/find-replace.php:41
+msgid "Replace with"
+msgstr "Erstat med"
+
+#: lib/view/export/find-replace.php:32
+msgid "<text>"
+msgstr "<text>"
+
+#: lib/view/export/find-replace.php:31 lib/view/export/find-replace.php:40
+msgid "Find"
+msgstr "Find"
+
+#: lib/view/export/export-buttons.php:31
+msgid "Export To"
+msgstr "Eksporter til"
+
+#: lib/view/export/button-file.php:27 lib/view/import/button-file.php:28
+msgid "File"
+msgstr "Fil"
+
+#: lib/view/export/advanced-settings.php:104
+msgid "Do <strong>not</strong> export database (sql)"
+msgstr "Eksporter <strong>ikke</strong> databasen (sql)"
+
+#: lib/view/export/advanced-settings.php:80
+msgid "Do <strong>not</strong> export plugins (files)"
+msgstr "Eksporter <strong>ikke</strong> plugins (filer)"
+
+#: lib/view/export/advanced-settings.php:56
+msgid "Do <strong>not</strong> export themes (files)"
+msgstr "Eksporter <strong>ikke</strong> temaer (filer)"
+
+#: lib/view/export/advanced-settings.php:50
+msgid "Do <strong>not</strong> export media library (files)"
+msgstr "Eksporter <strong>ikke</strong> mediebibliotek (filer)"
+
+#: lib/view/export/advanced-settings.php:44
+msgid "Do <strong>not</strong> export post revisions"
+msgstr "Eksporter <strong>ikke</strong> indlægsrevisioner"
+
+#: lib/view/export/advanced-settings.php:38
+msgid "Do <strong>not</strong> export spam comments"
+msgstr "Eksporter <strong>ikke</strong> spamkommentarer"
+
+#: lib/view/export/advanced-settings.php:32
+msgid "(click to expand)"
+msgstr "(klik for at udvide)"
+
+#: lib/view/export/advanced-settings.php:31
+msgid "Advanced options"
+msgstr "Avancerede indstillinger"
+
+#: lib/view/common/share-buttons.php:63
+msgid "Tweet"
+msgstr "Tweet"
+
+#: lib/view/common/report-problem.php:37
+msgid "Please describe your problem here.."
+msgstr "Forklar venligst dit problem her..."
+
+#: lib/view/common/report-problem.php:30
+msgid "Report issue"
+msgstr "Rapporter problem"
+
+#: lib/view/common/leave-feedback.php:67 lib/view/common/report-problem.php:47
+msgid "Cancel"
+msgstr "Annullér"
+
+#: lib/view/common/leave-feedback.php:70 lib/view/common/report-problem.php:50
+msgid "Send"
+msgstr "Send"
+
+#: lib/view/common/leave-feedback.php:57
+msgid "Leave plugin developers any feedback here.."
+msgstr "Giv plugin-udviklere feedback her..."
+
+#: lib/view/common/leave-feedback.php:54 lib/view/common/report-problem.php:34
+msgid "Enter your email address.."
+msgstr "Indtast din e-mailadresse..."
+
+#: lib/view/common/leave-feedback.php:47
+msgid "I need help with this plugin"
+msgstr "Jeg behøver hjælp med dette plugin"
+
+#: lib/view/common/leave-feedback.php:40
+msgid "I have ideas to improve this plugin"
+msgstr "Jeg har ideer til forbedringer af dette plugin"
+
+#: lib/view/common/leave-feedback.php:33
+msgid "I would like to review this plugin"
+msgstr "Jeg vil gerne bedømme dette plugin"
+
+#: lib/view/backups/index.php:133 lib/view/export/index.php:64
+#: lib/view/import/index.php:63
+msgid "Leave Feedback"
+msgstr "Giv feedback"
+
+#: lib/view/backups/index.php:99
+msgid "Create backup"
+msgstr "Opret backup"
+
+#: lib/view/backups/index.php:94
+msgid "There are no backups available at this time, why not create a new one?"
+msgstr "Der er ingen backups tilgængelige i øjeblikket, hvorfor laver du ikke en ny?"
+
+#: lib/view/backups/index.php:84
+msgid "Delete"
+msgstr "Slet"
+
+#: lib/view/backups/index.php:80
+msgid "Restore"
+msgstr "Gendan"
+
+#: lib/view/backups/index.php:76
+msgid "Download"
+msgstr "Download"
+
+#: lib/vendor/servmask/command/class-ai1wm-wp-cli-command.php:117
+#: lib/view/backups/index.php:47
+msgid "Size"
+msgstr "Størrelse"
+
+#: lib/view/backups/index.php:46
+msgid "Date"
+msgstr "Dato"
+
+#: lib/view/backups/index.php:45
+msgid "Name"
+msgstr "Navn"
+
+#: lib/model/import/class-ai1wm-import-done.php:191
+msgid "Your data has been imported successfully!"
+msgstr "Dine data er blevet eksporteret uden problemer!"
+
+#: lib/model/import/class-ai1wm-import-content.php:79
+#: lib/model/import/class-ai1wm-import-content.php:171
+msgid "Restoring %d files...<br />%d%% complete"
+msgstr "Gendanner %d filer...<br />%d%% færdig"
+
+#: lib/model/export/class-ai1wm-export-download.php:31
+msgid "Renaming exported file..."
+msgstr "Omdøber eksporterede fil..."
+
+#: lib/model/export/class-ai1wm-export-database.php:139
+msgid "Done exporting database."
+msgstr "Færdig med at eksportere databasen."
+
+#: lib/model/export/class-ai1wm-export-content.php:76
+#: lib/model/export/class-ai1wm-export-content.php:115
+msgid "Archiving %d files...<br />%d%% complete"
+msgstr "Arkiverer %d filer...<br />%d%% færdig"
+
+#: lib/model/export/class-ai1wm-export-enumerate.php:133
+#: lib/model/import/class-ai1wm-import-enumerate.php:46
+msgid "Done retrieving a list of all WordPress files."
+msgstr "Færdig med at hente en liste over alle WordPress-filer."
+
+#: lib/model/export/class-ai1wm-export-enumerate.php:45
+#: lib/model/import/class-ai1wm-import-enumerate.php:31
+msgid "Retrieving a list of all WordPress files..."
+msgstr "Henter en liste over alle WordPress-filer..."
+
+#: lib/model/export/class-ai1wm-export-archive.php:38
+msgid "Done creating an empty archive."
+msgstr "Færdig med at oprette et tomt arkiv."
+
+#: lib/model/export/class-ai1wm-export-archive.php:31
+msgid "Creating an empty archive..."
+msgstr "Opretter et tomt arkiv..."
+
+#: lib/controller/class-ai1wm-main-controller.php:491
+#: lib/controller/class-ai1wm-main-controller.php:492
+#: lib/view/backups/index.php:33
+msgid "Backups"
+msgstr "Backups"
+
+#: lib/controller/class-ai1wm-main-controller.php:481
+#: lib/controller/class-ai1wm-main-controller.php:482
+msgid "Import"
+msgstr "Importer"
+
+#: lib/controller/class-ai1wm-main-controller.php:471
+#: lib/controller/class-ai1wm-main-controller.php:472
+msgid "Export"
+msgstr "Eksporter"
+
+#: lib/view/main/multisite-notice.php:38
+msgid "Get multisite"
+msgstr "Hent multisite"
+
+#: lib/controller/class-ai1wm-import-controller.php:88
+#: lib/controller/class-ai1wm-import-controller.php:89
+#: lib/controller/class-ai1wm-main-controller.php:688
+#: lib/controller/class-ai1wm-main-controller.php:791
+msgid "Unable to import"
+msgstr "Kunne ikke importere"
+
+#: lib/controller/class-ai1wm-export-controller.php:84
+#: lib/controller/class-ai1wm-export-controller.php:85
+#: lib/controller/class-ai1wm-main-controller.php:598
+msgid "Unable to export"
+msgstr "Kunne ikke eksportere"

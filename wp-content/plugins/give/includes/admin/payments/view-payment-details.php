@@ -174,10 +174,10 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 										</div>
 
 										<div class="give-admin-box-inside">
-											<?php $localized_date_format = give_get_localized_date_format_to_js(); ?>
+											<?php $date_format = give_date_format(); ?>
 											<p>
 												<label for="give-payment-date" class="strong"><?php _e( 'Date:', 'give' ); ?></label>&nbsp;
-												<input type="text" id="give-payment-date" name="give-payment-date" value="<?php echo esc_attr( date( get_option( 'date_format' ), $payment_date ) ); ?>" class="medium-text give_datepicker" placeholder="<?php printf( esc_attr( $localized_date_format ) ); ?>"/>
+												<input type="text" id="give-payment-date" name="give-payment-date" value="<?php echo esc_attr( date( $date_format, $payment_date ) ); ?>" autocomplete="off" class="medium-text give_datepicker" placeholder="<?php _e( 'Date', 'give' ); ?>"/>
 											</p>
 										</div>
 
@@ -206,7 +206,7 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 											<p>
 												<label for="give-payment-total" class="strong"><?php _e( 'Total Donation:', 'give' ); ?></label>&nbsp;
 												<?php echo give_currency_symbol( $payment->currency ); ?>
-												&nbsp;<input id="give-payment-total" name="give-payment-total" type="text" class="small-text give-price-field" value="<?php echo esc_attr( give_format_decimal( give_donation_amount( $payment_id ), false, false ) ); ?>"/>
+												&nbsp;<input id="give-payment-total" name="give-payment-total" type="text" class="small-text give-price-field" value="<?php echo esc_attr( give_format_decimal( array( 'donation_id' => $payment_id ) ) ); ?>"/>
 											</p>
 										</div>
 
@@ -402,11 +402,11 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 											<p>
 												<strong><?php _e( 'Donation Form ID:', 'give' ); ?></strong><br>
 												<?php
-												if ( $payment_meta['form_id'] ) :
+												if ( $payment->form_id ) :
 													printf(
 														'<a href="%1$s">%2$s</a>',
-														admin_url( 'post.php?action=edit&post=' . $payment_meta['form_id'] ),
-														$payment_meta['form_id']
+														admin_url( 'post.php?action=edit&post=' . $payment->form_id ),
+														$payment->form_id
 													);
 												endif;
 												?>
@@ -416,7 +416,7 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 												<?php
 												echo Give()->html->forms_dropdown(
 													array(
-														'selected' => $payment_meta['form_id'],
+														'selected' => $payment->form_id,
 														'name' => 'give-payment-form-select',
 														'id'   => 'give-payment-form-select',
 														'chosen' => true,
@@ -435,25 +435,25 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 												<strong><?php _e( 'Donation Level:', 'give' ); ?></strong><br>
 												<span class="give-donation-level">
 													<?php
-													$var_prices = give_has_variable_prices( $payment_meta['form_id'] );
+													$var_prices = give_has_variable_prices( $payment->form_id );
 													if ( empty( $var_prices ) ) {
 														_e( 'n/a', 'give' );
 													} else {
 														$prices_atts = array();
-														if ( $variable_prices = give_get_variable_prices( $payment_meta['form_id'] ) ) {
+														if ( $variable_prices = give_get_variable_prices( $payment->form_id ) ) {
 															foreach ( $variable_prices as $variable_price ) {
 																$prices_atts[ $variable_price['_give_id']['level_id'] ] = give_format_amount( $variable_price['_give_amount'], array( 'sanitize' => false ) );
 															}
 														}
 														// Variable price dropdown options.
 														$variable_price_dropdown_option = array(
-															'id'               => $payment_meta['form_id'],
+															'id'               => $payment->form_id,
 															'name'             => 'give-variable-price',
 															'chosen'           => true,
 															'show_option_all'  => '',
-															'show_option_none' => ( '' === get_post_meta( $payment_id, '_give_payment_price_id', true ) ? __( 'None', 'give' ) : '' ),
+															'show_option_none' => ( '' === $payment->price_id ? __( 'None', 'give' ) : '' ),
 															'select_atts'      => 'data-prices=' . esc_attr( wp_json_encode( $prices_atts ) ),
-															'selected'         => $payment_meta['price_id'],
+															'selected'         => $payment->price_id,
 														);
 														// Render variable prices select tag html.
 														give_get_form_variable_price_dropdown( $variable_price_dropdown_option, true );
@@ -872,7 +872,14 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 									<textarea name="give-payment-note" id="give-payment-note" class="large-text"></textarea>
 
 									<div class="give-clearfix">
-										<button id="give-add-payment-note" class="button button-secondary button-small" data-payment-id="<?php echo absint( $payment_id ); ?>"><?php _e( 'Add Note', 'give' ); ?></button>
+										<p>
+											<label for="donation_note_type" class="screen-reader-text"><?php _e( 'Note type', 'give' ); ?></label>
+											<select name="donation_note_type" id="donation_note_type">
+												<option value=""><?php _e( 'Private note', 'give' ); ?></option>
+												<option value="donor"><?php _e( 'Note to donor', 'give' ); ?></option>
+											</select>
+											<button id="give-add-payment-note" class="button button-secondary button-small" data-payment-id="<?php echo absint( $payment_id ); ?>"><?php _e( 'Add Note', 'give' ); ?></button>
+										</p>
 									</div>
 
 								</div>
@@ -903,13 +910,17 @@ $base_url       = admin_url( 'edit.php?post_type=give_forms&page=give-payment-hi
 
 												echo sprintf(
 													'<input type="hidden" name="give_comment_id" value="%s">',
-													$donor_comment instanceof WP_Comment ? $donor_comment->comment_ID : 0
+													$donor_comment instanceof WP_Comment // Backward compatibility.
+														|| $donor_comment instanceof stdClass
+															? $donor_comment->comment_ID : 0
 												);
 
 												echo sprintf(
 													'<textarea name="give_comment" id="give_comment" placeholder="%s" class="large-text">%s</textarea>',
 													__( 'Add a comment', 'give' ),
-													$donor_comment instanceof WP_Comment ? $donor_comment->comment_content : ''
+													$donor_comment instanceof WP_Comment // Backward compatibility.
+													|| $donor_comment instanceof stdClass
+														? $donor_comment->comment_content : ''
 												);
 												?>
 											</p>

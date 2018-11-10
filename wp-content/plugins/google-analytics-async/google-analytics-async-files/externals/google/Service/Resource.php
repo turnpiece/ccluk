@@ -160,7 +160,7 @@ class GAPGoogle_Service_Resource
                 'parameter' => $paramName
             )
         );
-        throw new GAPGoogle_Exception("($name) missing required param: '$paramName'");
+        throw new GAPGoogle_Exception("($name) missing required param: '$paramName'");	 	 	 	 	   			 	
       }
       if (isset($parameters[$paramName])) {
         $value = $parameters[$paramName];

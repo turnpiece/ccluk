@@ -4,7 +4,7 @@ Donate link: http://teleogistic.net/donate
 Tags: buddypress, docs, wiki, documents, collaboration
 Requires at least: 3.3
 Tested up to: 4.9
-Stable tag: 2.1.0
+Stable tag: 2.1.1
 
 Adds collaborative Docs to BuddyPress.
 
@@ -32,6 +32,12 @@ This plugin is in active development. For feature requests and bug reports, visi
 1. Sit back and watch the jack roll in.
 
 == Changelog ==
+
+= 2.1.1 =
+* Improved behavior of "anyone can comment" setting.
+* Fixed regression in Docs 2.1.0 that broke compatibility with PHP 5.3 and PHP 5.4.
+* Fixed bug that could cause access settings to be rendered incorrectly in some cases where `bp_docs_get_current_doc()` is filtered by a plugin.
+* Fixed regression in BuddyPress that prevented access to author-only documents in some cases.
 
 = 2.1.0 =
 * Improved support for BuddyPress 3.0 and the Nouveau template pack.

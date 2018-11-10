@@ -182,7 +182,7 @@
 
 							<div class="wps-cta">
 
-								<div class="wps-cta-text"><?php echo wp_kses_post( __( 'Fully automated managed backups are included in a WPMU DEV membership along with 100+ plugins & themes, 24/7 support and lots of handy site management tools  – <strong>Try it all absolutely FREE</strong>' , SNAPSHOT_I18N_DOMAIN ) ); ?></div>
+								<div class="wps-cta-text"><?php echo wp_kses_post( __( 'Fully automated managed backups are included in a WPMU DEV membership along with 100+ plugins & themes, 24/7 support and lots of handy site management tools  – <strong><a href="https://premium.wpmudev.org/project/snapshot/" target="_blank" class="snapshot-try-free">Try it all absolutely FREE</a></strong>' , SNAPSHOT_I18N_DOMAIN ) ); ?></div>
 
 							</div>
 

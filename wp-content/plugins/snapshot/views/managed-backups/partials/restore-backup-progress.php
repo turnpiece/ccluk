@@ -75,19 +75,19 @@
 
 									<div class="log-memory">
 
-										<p><strong><?php esc_html_e('Memory limit', SNAPSHOT_I18N_DOMAIN); ?>:</strong><span class="number"><?php echo esc_html( ini_get( 'memory_limit' ) ); ?></span></p>
+										<p><strong><?php esc_html_e('Memory limit:', SNAPSHOT_I18N_DOMAIN); ?></strong><span class="number"><?php echo esc_html( ini_get( 'memory_limit' ) ); ?></span></p>
 
 									</div>
 
 									<div class="log-usage">
 
-										<p><strong><?php esc_html_e('Usage', SNAPSHOT_I18N_DOMAIN); ?>:</strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_usage( true ) ) ); ?></span></p>
+										<p><strong><?php esc_html_e('Usage:', SNAPSHOT_I18N_DOMAIN); ?></strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_usage( true ) ) ); ?></span></p>
 
 									</div>
 
 									<div class="log-peak">
 
-										<p><strong><?php esc_html_e('Peak', SNAPSHOT_I18N_DOMAIN); ?>:</strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_peak_usage( true ) ) ); ?></span></p>
+										<p><strong><?php esc_html_e('Peak:', SNAPSHOT_I18N_DOMAIN); ?></strong><span class="number"><?php echo esc_html( Snapshot_Helper_Utility::size_format( memory_get_peak_usage( true ) ) ); ?></span></p>
 
 									</div>
 
@@ -114,23 +114,25 @@
 											<td class="wps-log-process"><?php esc_html_e('Snapshot determining tables/files to restore', SNAPSHOT_I18N_DOMAIN); ?></td>
 
 											<td class="wps-log-progress">
+												<div class="wps-log-progress-elements">
 
-												<a class="snapshot-button-abort button button-small button-outline button-gray"><?php esc_html_e('Cancel', SNAPSHOT_I18N_DOMAIN); ?></a>
+													<a class="snapshot-button-abort button button-small button-outline button-gray"><?php esc_html_e( 'Cancel', SNAPSHOT_I18N_DOMAIN ); ?></a>
+													<span class="wps-spinner hidden"></span>
+													<div class="wps-loading-status">
 
-												<div class="wps-loading-status wps-spinner">
+														<p class="wps-loading-number">0%</p>
 
-													<p class="wps-loading-number">0%</p>
+														<div class="wps-loading-bar">
 
-													<div class="wps-loading-bar">
+															<div class="wps-loader">
 
-														<div class="wps-loader">
+																<span style="width: 0%"></span>
 
-															<span style="width: 0%"></span>
+															</div>
 
 														</div>
 
 													</div>
-
 												</div>
 
 											</td>

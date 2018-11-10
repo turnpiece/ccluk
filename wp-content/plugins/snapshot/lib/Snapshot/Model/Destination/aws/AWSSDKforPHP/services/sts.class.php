@@ -147,7 +147,7 @@ class AmazonSTS extends CFRuntime
 		if (!$opt) $opt = array();
 		$opt['Name'] = $name;
 
-		return $this->authenticate('GetFederationToken', $opt);	 	 	 	 				 	 		
+		return $this->authenticate('GetFederationToken', $opt);
 	}
 
 	/**

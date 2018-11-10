@@ -25,7 +25,11 @@ jQuery(function ($) {
             return;
         }
         if (data.success == true) {
-            location.reload();
+            setTimeout(function () {
+                location.reload();
+            }, 1000)
+            $('.scan-progress-text span').text('100%');
+            $('.scan-progress-bar span').css('width', '100%');
             Defender.showNotification('success', data.data.message);
         } else {
             var progress = data.data.progress;
@@ -115,6 +119,9 @@ jQuery(function ($) {
     $('body').on('click', '.lockout-nav', function (e) {
         e.preventDefault();
         var query = WDIP.buildFilterQuery();
+        if (order !== false && orderby !== false) {
+            query += '&order=' + order + '&orderby=' + orderby;
+        }
         query += '&paged=' + $(this).data('paged');
         WDIP.ajaxPull(query, function () {
 
@@ -164,18 +171,27 @@ jQuery(function ($) {
     $('#bulk-select').on('click', function () {
         $('.single-select').prop('checked', $(this).prop('checked'))
     })
-
+    var order = false;
+    var orderby = false;
     $('#lockout-logs-sort').change(function () {
         var value = $(this).val();
+        var query = WDIP.buildFilterQuery();
         if (value === 'latest') {
-            query = 'orderby=id&order=desc'
+            query += '&orderby=id&order=desc'
+            order = 'desc';
+            orderby = 'id';
         } else if (value === 'oldest') {
-            query = 'orderby=id&order=asc'
+            query += '&orderby=id&order=asc'
+            order = 'asc';
+            orderby = 'id';
         } else if (value === 'ip') {
-            query = 'orderby=ip&order=asc'
+            query += '&orderby=ip&order=asc'
+            order = 'asc';
+            orderby = 'ip';
         }
-        console.log(query);
-        WDIP.ajaxPull(query);
+        WDIP.ajaxPull(query, function () {
+
+        });
     })
 });
 

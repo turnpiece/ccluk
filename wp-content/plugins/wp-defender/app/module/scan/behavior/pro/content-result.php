@@ -87,7 +87,11 @@ class Content_Result extends \Hammer\Base\Behavior {
                         </div>
                         <div class="mline"><?php printf( __( " There’s some suspicious looking code in the file %s. If you know the code is harmless you can ignore this warning. Otherwise, you can choose to delete this file. Before deleting any files from your site directory, we recommend backing up your website.", wp_defender()->domain ), $this->getSubtitle() ) ?>
                         </div>
-<!--                        <button id="next_issue">--><?php //_e( "Show Issues", wp_defender()->domain ) ?><!--</button>-->
+                        <div>
+                            <strong><?php printf( __( "Found %s issues.", wp_defender()->domain ), count( $raw['meta'] ) ) ?></strong>
+                            <button class="button button-small button-secondary"
+                                    id="next_issue"><?php _e( "Show", wp_defender()->domain ) ?></button>
+                        </div>
                         <div class="mline source-code">
                             <img src="<?php echo wp_defender()->getPluginUrl() ?>assets/img/loading.gif" width="18"
                                  height="18"/>
@@ -147,31 +151,62 @@ class Content_Result extends \Hammer\Base\Behavior {
 		return ob_get_clean();
 	}
 
+	public function getSrcCode() {
+		$raw = $this->getRaw();
+		//do a dry check first
+		$useOldFunc = true;
+		foreach ( $raw['meta'] as $meta ) {
+			if ( isset( $meta['offset'] ) ) {
+				$useOldFunc = false;
+				break;
+			}
+		}
+
+		if ( $useOldFunc ) {
+			return $this->_getSrcCode();
+		}
+
+		$content         = file_get_contents( $raw['file'] );
+		$originalContent = $content;
+		foreach ( $raw['meta'] as $meta ) {
+			//cause this will changing after we inject new dell so just find it by the content
+			$c       = substr( $originalContent, $meta['offset'] - 1, $meta['length'] );
+			$start   = strpos( $content, $c );
+			$openTag = '[[del tooltip="' . esc_attr( $meta['text'] ) . '"]]';
+			$end     = $start + strlen( $c ) + strlen( $openTag );
+			$content = substr_replace( $content, $openTag, $start, 0 );
+			$content = substr_replace( $content, '[[/del]]', $end, 0 );
+		}
+
+		if ( function_exists( 'mb_convert_encoding' ) ) {
+			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
+		}
+		$entities = htmlentities( $content, null, 'UTF-8', false );
+		$entities = preg_replace( '/\[\[del\s*(tooltip=".*\n?"|)\]\]/', '<del $1>', $entities );
+		$entities = str_replace( '[[/del]]', '</del>', $entities );
+
+		return '<pre class="inner-sourcecode"><code class="html">' . $entities . '</code></pre>';
+	}
+
 	/**
 	 * @return string
 	 */
-	public function getSrcCode() {
+	public function _getSrcCode() {
 		$raw        = $this->getRaw();
 		$contentRaw = file_get_contents( $raw['file'] );
 		$content    = explode( PHP_EOL, $contentRaw );
 		foreach ( $raw['meta'] as $meta ) {
-			if ( isset( $meta['offsetFrom'] ) ) {
-				$content = substr_replace( $contentRaw, '[[del]]', $meta['offsetFrom'], 0 );
-				$content = substr_replace( $content, '[[/del]]', $meta['offsetTo'] + 1, 0 );
-			} else {
-				$line = $meta['lineFrom'];
-				if ( ! isset( $content[ $line - 1 ] ) ) {
-					continue;
-				}
-				$colFrom = $meta['columnFrom'];
-				$colTo   = $meta['columnTo'];
-
-				$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
-				$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
+			$line = $meta['lineFrom'];
+			if ( ! isset( $content[ $line - 1 ] ) ) {
+				continue;
 			}
+			$colFrom = $meta['columnFrom'];
+			$colTo   = $meta['columnTo'];
+
+			$content[ $line - 1 ]           = substr_replace( $content[ $line - 1 ], '[[del]]', $colFrom - 1, 0 );
+			$content[ $meta['lineTo'] - 1 ] = substr_replace( $content[ $meta['lineTo'] - 1 ], '[[/del]]', $colTo + 1, 0 );
 		}
 		$content = implode( PHP_EOL, $content );
-
 		if ( function_exists( 'mb_convert_encoding' ) ) {
 			$content = mb_convert_encoding( $content, 'UTF-8', 'ASCII' );
 		}

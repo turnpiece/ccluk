@@ -6,6 +6,9 @@ Contributors: Ivan Shaovchev, Andrey Shipilov
 
 == Changelog ==
 
+= 3.1.7.2 =
+* Fixed undefined index notice issue
+
 = 3.1.7.1 =
 * Fixed backward compatibility
 
@@ -189,4 +192,4 @@ Contributors: Ivan Shaovchev, Andrey Shipilov
 
 
 
-87274-1527448822-au
+87274-1541874300-au

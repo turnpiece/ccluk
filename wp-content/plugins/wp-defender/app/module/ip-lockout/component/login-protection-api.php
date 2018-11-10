@@ -156,10 +156,12 @@ class Login_Protection_Api extends Component {
 			$lock_log->log        = sprintf( esc_html__( "Lockout occurred:  Too many 404 requests for %s", wp_defender()->domain ), $uri );
 			$lock_log->save();
 			//if fail2ban, we will add that IP to blacklist
+			$isBlacklist = false;
 			if ( $settings->detect_404_lockout_ban ) {
 				$settings->addIpToList( $model->ip, 'blacklist' );
+				$isBlacklist = true;
 			}
-			do_action( 'wd_404_lockout', $model, $uri );
+			do_action( 'wd_404_lockout', $model, $uri, $isBlacklist );
 		}
 	}
 

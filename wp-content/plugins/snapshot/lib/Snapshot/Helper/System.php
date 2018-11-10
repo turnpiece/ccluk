@@ -197,4 +197,36 @@ class Snapshot_Helper_System {
 		return array_pop($raw);
 	}
 
+	/**
+	 * Returns system information
+	 *
+	 * @param string $info_type Type of system information
+	 *
+	 * @return string|bool System information, or false on failure
+	 */
+	public static function get_system_info ($info_type) {
+		$uname_path = self::get_command( 'uname' );
+
+		if ( ! empty( $uname_path ) ) {
+			$command = $uname_path . ' -' . $info_type;
+			// We have checked if system commands are available before this point.
+			// phpcs:ignore
+			exec($command, $output, $status);
+
+			if ( ! empty($status)) {
+				return 'unknown';
+			}
+
+			if ( is_array( $output) && ! empty( $output ) ) {
+				reset( $output );
+				return current( $output );
+			} else {
+				return 'unknown';
+			}
+
+		} else {
+			return 'unknown';
+		}
+	}
+
 }

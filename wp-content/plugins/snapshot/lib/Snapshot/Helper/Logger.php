@@ -26,10 +26,15 @@ if ( ! class_exists( 'Snapshot_Helper_Logger' ) ) {
 			$this->__construct( $backupLogFolderFull, $item_key, $data_item_key );
 		}
 
-		public function __destruct() {}
+		public function __destruct() {
+			if ( $this->log_fp ) {
+				fclose( $this->log_fp ); // phpcs:ignore
+			}
+		}
 
 		public function start_logger() {
 			$this->logFileFull = $this->logFolder . "/" . $this->item_key . "_" . $this->data_item_key . ".log";
+			$this->log_fp      = fopen( $this->logFileFull, 'a' ); // phpcs:ignore
 		}
 
 		public function get_log_filename() {
@@ -37,14 +42,9 @@ if ( ! class_exists( 'Snapshot_Helper_Logger' ) ) {
 		}
 
 		public function log_message( $message ) {
-			global $wp_filesystem;
-
-			if( Snapshot_Helper_Utility::connect_fs() ) {
-				if ( $this->logFileFull ) {
-					$wp_filesystem->put_contents($this->logFileFull, $wp_filesystem->get_contents( $this->logFileFull ) . Snapshot_Helper_Utility::show_date_time( time(), 'Y-m-d H:i:s' ) . ": " . $message . "\r\n", FS_CHMOD_FILE);
-				}
-			} else {
-				return new WP_Error("filesystem_error", "Cannot initialize filesystem");
+			if ( $this->log_fp ) {
+				fwrite( $this->log_fp, Snapshot_Helper_Utility::show_date_time( time(), 'Y-m-d H:i:s' ) . ": " . $message . "\r\n" ); // phpcs:ignore
+				fflush( $this->log_fp );
 			}
 		}
 

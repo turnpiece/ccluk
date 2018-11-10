@@ -860,12 +860,13 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * Clear the module cache.
 	 *
 	 * @param bool $reset_settings If set to true will set Asset Optimization settings to default (that includes files positions).
+	 * @return bool
 	 */
 	public function clear_cache( $reset_settings = true ) {
 		global $wpdb;
 
 		if ( ! WP_Hummingbird_Utils::can_execute_php() ) {
-			return;
+			return false;
 		}
 
 		// Clear all the cached groups data.
@@ -894,12 +895,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 			// Reset the minification settings.
 			$options = $this->get_options();
 			$default_options = WP_Hummingbird_Settings::get_default_settings();
-			$options['block']       = $default_options['minify']['block'];
-			$options['dont_minify'] = $default_options['minify']['dont_minify'];
-			$options['combine']     = $default_options['minify']['combine'];
-			$options['position']    = $default_options['minify']['position'];
-			$options['defer']       = $default_options['minify']['defer'];
-			$options['inline']      = $default_options['minify']['inline'];
+			$options['block']    = $default_options['minify']['block'];
+			$options['minify']   = $default_options['minify']['minify'];
+			$options['combine']  = $default_options['minify']['combine'];
+			$options['position'] = $default_options['minify']['position'];
+			$options['defer']    = $default_options['minify']['defer'];
+			$options['inline']   = $default_options['minify']['inline'];
 			$this->update_options( $options );
 		}
 
@@ -909,6 +910,7 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		$this->scanner->reset_scan();
 
 		WP_Hummingbird_Minification_Errors_Controller::clear_errors();
+		return true;
 	}
 
 	/**
@@ -926,12 +928,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 		// Reset the minification settings.
 		$options = $this->get_options();
 		$default_options = WP_Hummingbird_Settings::get_default_settings();
-		$options['block']       = $default_options['minify']['block'];
+		$options['block']      = $default_options['minify']['block'];
 		if ( $reset_minify ) {
-			$options['dont_minify'] = $default_options['minify']['dont_minify'];
+			$options['minify'] = $default_options['minify']['minify'];
 		}
-		$options['combine']     = $default_options['minify']['combine'];
-		$options['position']    = $default_options['minify']['position'];
+		$options['combine']    = $default_options['minify']['combine'];
+		$options['position']   = $default_options['minify']['position'];
 		$this->update_options( $options );
 
 		// Clear the pending process queue.
@@ -971,6 +973,22 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * *************************
 	 * HELPER FUNCTIONS
 	 ***************************/
+
+	/**
+	 * Clear cache for selected file.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param string $handle  Handle.
+	 * @param string $type    Type.
+	 */
+	public function clear_file( $handle, $type ) {
+		$groups = WP_Hummingbird_Module_Minify_Group::get_groups_from_handle( $handle, $type );
+
+		foreach ( $groups as $group ) {
+			wp_delete_post( $group->file_id );
+		}
+	}
 
 	/**
 	 * Clear minified group files
@@ -1015,12 +1033,12 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 */
 	public function backup_settings() {
 		$options = $this->get_options();
-		$options['backed_up_settings']['block']       = $options['block'];
-		$options['backed_up_settings']['dont_minify'] = $options['dont_minify'];
-		$options['backed_up_settings']['combine']     = $options['combine'];
-		$options['backed_up_settings']['position']    = $options['position'];
-		$options['backed_up_settings']['defer']       = $options['defer'];
-		$options['backed_up_settings']['inline']      = $options['inline'];
+		$options['backed_up_settings']['block']    = $options['block'];
+		$options['backed_up_settings']['minify']   = $options['minify'];
+		$options['backed_up_settings']['combine']  = $options['combine'];
+		$options['backed_up_settings']['position'] = $options['position'];
+		$options['backed_up_settings']['defer']    = $options['defer'];
+		$options['backed_up_settings']['inline']   = $options['inline'];
 		$this->update_options( $options );
 	}
 
@@ -1060,10 +1078,9 @@ class WP_Hummingbird_Module_Minify extends WP_Hummingbird_Module {
 	 * @return array
 	 */
 	private static function get_file_settings_types() {
-
 		$settings = array(
 			'block',
-			'dont_minify',
+			'minify',
 			'combine',
 			'position',
 			'defer',

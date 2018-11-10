@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Plugins - BuddyPress - Stable (latest release) package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-07-14 23:00:47+0000\n"
+"PO-Revision-Date: 2018-08-20 16:00:11+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -345,7 +345,7 @@ msgstr "\"%s\" grubunun üyesi olmayı talep ediyorsunuz."
 #: bp-templates/bp-nouveau/buddypress/common/js-templates/invites/index.php:120
 msgctxt "button"
 msgid "Cancel"
-msgstr "İptal"
+msgstr "Vazgeç"
 
 #: bp-templates/bp-nouveau/buddypress/activity/post-form.php:17
 msgctxt "heading"
@@ -439,7 +439,7 @@ msgstr "Yeni özel mesajlar"
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:257
 msgid "New sitewide notice"
-msgstr "Yeni site bildirimi"
+msgstr "Yeni site geneli bildirimi"
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:115
 msgid "(and %d others)"
@@ -449,9 +449,21 @@ msgstr "(ve diğer %d)"
 msgid "(and 1 other)"
 msgstr "(ve diğer 1)"
 
+#: bp-templates/bp-nouveau/includes/messages/functions.php:112
+msgid "Use the select box to define your bulk action and click on the &#10003; button to apply."
+msgstr "Toplu eyleminizi tanımlamak için seçim kutusunu kullanın ve uygulamak için &#10003; düğmesine basın."
+
 #: bp-templates/bp-nouveau/includes/messages/functions.php:111
 msgid "Click on the message title to preview it in the Active conversation box below."
 msgstr "Aşağıdaki etkin sohbet kutusunda önizlemek için mesaj başlığına tıklayın."
+
+#: bp-templates/bp-nouveau/includes/messages/functions.php:108
+msgid "Unstarring messages. Please wait."
+msgstr "Mesajlardan yıldızlar kaldırılıyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/messages/functions.php:107
+msgid "Starring messages. Please wait."
+msgstr "Mesajlara yıldız ekleniyor. Lütfen bekleyin."
 
 #: bp-templates/bp-nouveau/includes/messages/functions.php:106
 msgid "Deleting messages. Please wait."
@@ -481,6 +493,14 @@ msgstr "Lütfen mesajınıza bir konu ekleyin."
 msgid "Please add at least one recipient."
 msgstr "Lütfen en az bir alıcı ekleyin."
 
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:746
+msgid "Sitewide notice dismissed"
+msgstr "Site geneli bildirim göz ardı edildi"
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:712
+msgid "There was a problem dismissing the notice. Please try again."
+msgstr "Bildirim göz ardı edilirken sorun oluştu. Lütfen tekrar deneyin."
+
 #: bp-templates/bp-nouveau/includes/messages/ajax.php:677
 msgid "Messages marked as read."
 msgstr "Mesajlar okundu olarak işaretlendi."
@@ -493,9 +513,29 @@ msgstr "Mesajlarınız okunmadı olarak işaretlenirken bir sorun oluştu. Lütf
 msgid "There was a problem marking your messages as read. Please try again."
 msgstr "Mesajlarınızı okundu olarak işaretlerken bir sorun oluştu. Lütfen tekrar deneyin."
 
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:630
+msgid "Messages successfully unstarred."
+msgstr "Yıldızlar mesajlardan başarıyla kaldırıldı."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:628
+msgid "Messages successfully starred."
+msgstr "Yıldızlar mesajlara başarıyla eklendi."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:554
+msgid "There was a problem unstarring your messages. Please try agian."
+msgstr "Mesajlarınızdan yıldız kaldırılırken sorun oluştu. Lütfen tekrar deneyin."
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:552
+msgid "There was a problem starring your messages. Please try again."
+msgstr "Mesajlarınıza yıldız eklenirken hata oluştu. Lütfen tekrar deneyin."
+
 #: bp-templates/bp-nouveau/includes/messages/ajax.php:536
 msgid "Messages deleted"
 msgstr "Mesajlar silindi"
+
+#: bp-templates/bp-nouveau/includes/messages/ajax.php:513
+msgid "There was a problem deleting your messages. Please try again."
+msgstr "Mesajlarınız silinirken bir sorun oluştu. Lütfen tekrar deneyin."
 
 #: bp-templates/bp-nouveau/includes/messages/ajax.php:223
 #: bp-templates/bp-nouveau/includes/messages/ajax.php:398
@@ -518,6 +558,10 @@ msgstr "Mesajınız gönderilemedi. Lütfen tekrar deneyin."
 msgid "Edit your bio"
 msgstr "Biyografinizi düzenleyin"
 
+#: bp-templates/bp-nouveau/includes/members/template-tags.php:693
+msgid "Members default front page"
+msgstr "Üyeler varsayılan ön sayfası"
+
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:1300
 #: bp-templates/bp-nouveau/includes/members/template-tags.php:711
 msgid "(BuddyPress) Widgets"
@@ -526,6 +570,10 @@ msgstr "(BuddyPress) Bileşenleri"
 #: bp-templates/bp-nouveau/includes/groups/template-tags.php:1282
 msgid "Groups default front page"
 msgstr "Gruplar varsayılan ön sayfası"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:1204
+msgid "Group Moderator promotions"
+msgstr "Grup görevlisi terfileri"
 
 #: bp-templates/bp-nouveau/includes/groups/functions.php:1194
 msgid "Rejected Group membership requests"
@@ -539,13 +587,53 @@ msgstr "Kabul edilen grup üyelik istekleri"
 msgid "Pending Group membership requests"
 msgstr "Bekleyen grup üyelik istekleri"
 
+#: bp-templates/bp-nouveau/includes/groups/functions.php:865
+msgid "Use tab styling for Groups directory navigation."
+msgstr "Grup dizin dolaşımı için sekme biçimlendirmesini kullan."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:859
+msgid "Use column navigation for the Groups directory."
+msgstr "Grup dizini için sütun dolaşımını kullan."
+
 #: bp-templates/bp-nouveau/includes/groups/functions.php:852
 msgid "Group > Members"
 msgstr "Grup > Üyeler"
 
+#: bp-templates/bp-nouveau/includes/groups/functions.php:839
+msgid "Reorder the primary navigation for a group."
+msgstr "Grup için birincil dolaşımı yeniden sırala."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:832
+msgid "Use tab styling for the group creation process."
+msgstr "Grup oluşturma işlemi için sekme biçimlendirmesini kullan."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:814
+msgid "Display the group navigation vertically."
+msgstr "Grup dolaşımını dikey olarak göster."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:808
+msgid "Display the group description in the body of the group's front page."
+msgstr "Grup ön sayfasının gövde kısmında grup açıklamasını göster. "
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:802
+msgid "Enable widget region for group homepages. When enabled, the site admin can add widgets to group pages via the Widgets panel."
+msgstr "Grup anasayfaları için bileşen alanını etkinleştir. Etkinleştirildiğinde, site yöneticisi Bileşenler paneliyle grup sayfalarına bileşen ekleyebilir."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:796
+msgid "Enable custom front pages for groups."
+msgstr "Gruplar için özel ön sayfayı etkinleştir."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:695
+msgid "Customize the navigation menu for groups. See your changes by navigating to a group in the live-preview window."
+msgstr "Gruplar için dolaşım menüsünü özelleştirin. Canlı önizleme penceresinde bir gruba gidip değişikliklerinizi görün."
+
 #: bp-templates/bp-nouveau/includes/groups/functions.php:692
 msgid "Group navigation"
 msgstr "Grup dolaşımı"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:689
+msgid "Configure the default front page for groups."
+msgstr "Gruplar için varsayılan ön sayfayı yapılandır."
 
 #: bp-templates/bp-nouveau/includes/groups/functions.php:686
 msgid "Group front page"
@@ -554,6 +642,22 @@ msgstr "Grup ön sayfası"
 #: bp-templates/bp-nouveau/includes/groups/functions.php:501
 msgid "All Groups"
 msgstr "Tüm gruplar"
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:474
+msgid "You are not allowed to perform this action."
+msgstr "Bu eylemi gerçekleştirme izniniz yok."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:472
+msgid "Group invites preferences saved."
+msgstr "Grup davet tercihleri kaydedildi."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:152
+msgid "Group invitations cleared. Please use one of the available tabs to select members to invite."
+msgstr "Grup davetleri temizlendi. Davet edilecek üyeleri seçmek için lütfen kullanılabilir sekmelerden birini kullanın."
+
+#: bp-templates/bp-nouveau/includes/groups/functions.php:151
+msgid "Use the \"Send\" button to send your invite or the \"Cancel\" button to abort."
+msgstr "Davetlerinizi göndermek için \"Gönder\" düğmesini veya iptal etmek için \"Vazgeç\" düğmesini kullanın."
 
 #: bp-templates/bp-nouveau/includes/groups/functions.php:150
 msgid "Loading members. Please wait."
@@ -583,9 +687,64 @@ msgctxt "My Group screen nav"
 msgid "Invite"
 msgstr "Davet et"
 
+#. translators: count of users affected
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:411
+msgid "Invitation failed for %s user."
+msgid_plural "Invitation failed for %s users."
+msgstr[0] "%s kullanıcı için davet başarısız oldu."
+msgstr[1] "%s kullanıcı için davet başarısız oldu."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:370
+msgid "You are not allowed to send invitations for this group."
+msgstr "Bu grup için davet göndermenize izin verilmiyor."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:354
+msgid "Invites could not be sent. Please try again."
+msgstr "Davetler gönderilemiyor. Lütfen tekrar deneyin."
+
 #: bp-templates/bp-nouveau/includes/groups/ajax.php:325
 msgid "You have no friends!"
 msgstr "Hiç arkadaşınız yok!"
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:319
+msgid "All your friends are already members of this group, or have already received an invite to join this group, or have requested to join it."
+msgstr "Tüm arkadaşlarınız zaten bu grubun üyeleridir veya bu gruba katılmaya davet edilmiş veya katılmayı talep etmişlerdir."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:313
+msgid "No members were found. Try another filter."
+msgstr "Üye bulunamadı. Başka bir filtre deneyin."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:306
+msgid "You can view the group's pending invitations from this screen."
+msgstr "Grubun bekleyen davetlerini bu ekrandan görüntüleyebilirsiniz."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:292
+msgid "Select friends to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" navigation item to continue."
+msgstr "+ Düğmesini tıklayarak davet etmek için arkadaşlarınızı seçin. Seçiminizi yaptıktan sonra devam etmek için \"Davet gönder\" dolaşım öğesini kullanın."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:287
+msgid "Select members to invite by clicking the + button. Once you've made your selection, use the \"Send Invites\" navigation item to continue."
+msgstr "+ Düğmesini tıklayarak davet etmek için üyeleri seçin. Seçiminizi yaptıktan sonra devam etmek için \"Davet gönder\" dolaşım öğesini kullanın."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:213
+msgid "Error leaving group."
+msgstr "Gruptan ayrılma hatası."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:192
+msgid "Error requesting membership."
+msgstr "Üyelik isteme hatası."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:171
+msgid "Error joining this group."
+msgstr "Bu gruba katılma hatası."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:125
+msgid "Group invite accepted."
+msgstr "Grup daveti kabul edildi."
+
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:104
+msgid "Group invitation could not be accepted."
+msgstr "Grup daveti kabul edilemiyor."
 
 #: bp-templates/bp-nouveau/includes/groups/ajax.php:80
 msgid "You are already a member of the group."
@@ -595,13 +754,109 @@ msgstr "Zaten bu grubun bir üyesisiniz."
 msgid "You cannot join this group."
 msgstr "Bu gruba katılamazsınız."
 
+#: bp-templates/bp-nouveau/includes/functions.php:1097
+msgid "Loading your groups. Please wait."
+msgstr "Gruplarınız yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1095
+msgid "Loading your friends. Please wait."
+msgstr "Arkadaşlarınız yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1093
+msgid "Loading your blogs. Please wait."
+msgstr "Bloglarınız yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1091
+msgid "Loading your updates. Please wait."
+msgstr "Güncellemeleriniz yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1061
+msgid "Currently only your friends can invite you to groups. Uncheck the box to allow any member to send invites."
+msgstr "Şu anda sadece arkadaşlarınız sizi gruplara davet edebilir. Herhangi bir üyenin davet göndermesine izin vermek için kutunun işaretini kaldırın."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1057
+msgid "Currently every member of the community can invite you to join their groups. If you are not comfortable with it, you can always restrict group invites to your friends only."
+msgstr "Şu anda topluluğun her üyesi sizi gruplarına katılmaya davet edebilir. Bununla ilgili rahat değilseniz, grup davetlerini yalnızca arkadaşlarınızla kısıtlayabilirsiniz."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1053
+msgid "Loading notifications. Please wait."
+msgstr "Bildirimler yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1049
+msgid "Loading the member's groups. Please wait."
+msgstr "Üye grupları yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1045
+msgid "Loading the member's friends. Please wait."
+msgstr "Üyenin arkadaşları yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1041
+msgid "Loading the member's blogs. Please wait."
+msgstr "Üyenin blogları yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1037
+msgid "Loading the member's updates. Please wait."
+msgstr "Üyenin güncellemeleri yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1033
+msgid "Deleting this account will delete all of the content it has created. It will be completely unrecoverable."
+msgstr "Bu hesabı silmek, oluşturduğu tüm içeriği silecektir. Tamamen kurtarılamaz olacaktır."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1029
+msgid "%s did not save any profile information yet."
+msgstr "%s henüz hiç bir profil bilgisi kaydetmedi."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1009
+msgid "Loading the members of your community. Please wait."
+msgstr "Topluluğunuzun üyeleri yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:1001
+msgid "WARNING: Deleting this group will completely remove ALL content associated with it. There is no way back. Please be careful with this option."
+msgstr "UYARI: Bu grubu silmek, onunla ilişkili TÜM içeriği tamamen kaldırır. Geri dönüş yok. Lütfen bu seçeneğe dikkat edin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:997
+msgid "Loading the members who requested to join the group. Please wait."
+msgstr "Gruba katılmak isteyen üyeler yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:985
+msgid "Sorry, there was no member of that name found in this group."
+msgstr "Üzgünüm, bu grupta bu isimde bir üye bulunamadı."
+
+#: bp-templates/bp-nouveau/includes/functions.php:981
+msgid "Sorry, there were no group members found."
+msgstr "Üzgünüm, hiç bir grup üyesi bulunamadı."
+
+#: bp-templates/bp-nouveau/includes/functions.php:977
+msgid "Requesting the group members. Please wait."
+msgstr "Grup üyeleri isteniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:973
+msgid "Loading the group updates. Please wait."
+msgstr "Grup güncellemeleriniz yükleniyor. Lütfen bekleyin."
+
 #: bp-templates/bp-nouveau/includes/functions.php:969
 msgid "Sorry, there were no groups found."
 msgstr "Üzgünüm, grup bulunamadı."
 
+#: bp-templates/bp-nouveau/includes/functions.php:965
+msgid "Loading the groups of the community. Please wait."
+msgstr "Topluluğun grupları yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:961
+msgid "Loading the sites of the network. Please wait."
+msgstr "Ağın siteleri yükleniyor. Lütfen bekleyin."
+
 #: bp-templates/bp-nouveau/includes/functions.php:957
 msgid "Site registration is currently disabled."
 msgstr "Site kaydına şu an izin verilmiyor."
+
+#: bp-templates/bp-nouveau/includes/functions.php:945
+msgid "Loading the update. Please wait."
+msgstr "Güncelleme yükleniyor. Lütfen bekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:941
+msgid "Loading the community updates. Please wait."
+msgstr "Toplululuk güncellemeleri yükleniyor. Lütfen bekleyin."
 
 #: bp-templates/bp-nouveau/includes/functions.php:692
 msgid "Four columns"
@@ -619,9 +874,63 @@ msgstr "İki sütun"
 msgid "One column"
 msgstr "Tek sütun"
 
+#: bp-templates/bp-nouveau/includes/functions.php:333
+msgid "Add widgets here to appear in the front page of each group of your community."
+msgstr "Topluluğunuzun her grubunun ön sayfasında görünmesi için bileşenleri buraya ekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:331
+msgid "BuddyPress Group's Home"
+msgstr "BuddyPress grup ana sayfası"
+
+#: bp-templates/bp-nouveau/includes/functions.php:321
+msgid "Add widgets here to appear in the front page of each member of your community."
+msgstr "Topluluğunuzun her üyesinin ön sayfasında görünmesi için bileşenleri buraya ekleyin."
+
+#: bp-templates/bp-nouveau/includes/functions.php:319
+msgid "BuddyPress Member's Home"
+msgstr "BuddyPress üye ana sayfası"
+
+#: bp-templates/bp-nouveau/includes/friends/loader.php:106
+msgid "Pending friendship requests"
+msgstr "Bekleyen arkadaşlık istekleri"
+
+#: bp-templates/bp-nouveau/includes/friends/loader.php:101
+msgid "Accepted friendship requests"
+msgstr "Kabul edilen arkadaşlık istekleri"
+
+#: bp-templates/bp-nouveau/includes/friends/ajax.php:180
+msgid "Friendship cancelled."
+msgstr "Arkadaşlık iptal edildi."
+
+#: bp-templates/bp-nouveau/includes/friends/ajax.php:167
+msgid "Friendship could not be cancelled."
+msgstr "Arkadaşlık iptal edilemedi."
+
+#: bp-templates/bp-nouveau/includes/friends/ajax.php:154
+msgid "Friendship rejected."
+msgstr "Arkadaşlık reddedildi."
+
 #: bp-templates/bp-nouveau/includes/friends/ajax.php:130
 msgid "Friendship accepted."
 msgstr "Arkadaşlık kabul edildi."
+
+#: bp-templates/bp-nouveau/includes/friends/ajax.php:68
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:47
+#: bp-templates/bp-nouveau/includes/groups/ajax.php:259
+msgid "There was a problem performing this action. Please try again."
+msgstr "Bu eylemi gerçekleştirirken bir sorun oluştu. Lütfen tekrar deneyin."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:283
+msgid "Use tab styling for Members directory navigation."
+msgstr "Üyeler dizin dolaşımı için sekme biçimlendirmesini kullan."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:277
+msgid "Use column navigation for the Members directory."
+msgstr "Üyeler dizini için sütun dolaşımını kullan."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:270
+msgid "Member > Friends"
+msgstr "Üyeler > Arkadaşlar"
 
 #: bp-templates/bp-nouveau/includes/customizer.php:257
 msgid "Reorder the primary navigation for a user."
@@ -650,6 +959,34 @@ msgstr "Üye profilleri için varsayılan ön sayfayı etkinleştir."
 #: bp-templates/bp-nouveau/includes/customizer.php:220
 msgid "Use the round style for member and group avatars."
 msgstr "Üye ve grup avatarları için yuvarlak stil kullan."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:67
+msgid "Select the layout style for directory content &amp; navigation."
+msgstr "Dizin içeriği ve dolaşımı için yerleşim biçimini seçin."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:64
+msgid "Directory layouts"
+msgstr "Dizin yerleşimleri"
+
+#: bp-templates/bp-nouveau/includes/customizer.php:61
+msgid "Set the number of columns to use for BuddyPress loops."
+msgstr "BuddyPress döngüleri için sütun sayısını belirleyin."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:58
+msgid "Loop layouts"
+msgstr "Döngü yerleşimleri"
+
+#: bp-templates/bp-nouveau/includes/customizer.php:55
+msgid "Customize the navigation menu for members. In the preview window, navigate to a user to preview your changes."
+msgstr "Üyeler için dolaşım menüsünü özelleştirin. Canlı önizleme penceresinde bir üyeye gidip değişikliklerinizi görün."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:49
+msgid "Configure the default front page for members."
+msgstr "Üyeler için varsayılan ön sayfayı yapılandır."
+
+#: bp-templates/bp-nouveau/includes/customizer.php:43
+msgid "Configure general BuddyPress appearance options."
+msgstr "Genel BuddyPress görünüm seçeneklerini yapılandır."
 
 #: bp-templates/bp-nouveau/includes/customizer.php:40
 msgid "General BP Settings"
@@ -5836,11 +6173,11 @@ msgstr "%s alıcı"
 
 #: bp-messages/classes/class-bp-messages-sitewide-notices-widget.php:29
 msgid "Display Sitewide Notices posted by the site administrator"
-msgstr "Site yöneticisi tarafından yazılan site çapındaki bildirimleri göster"
+msgstr "Site yöneticisi tarafından yazılan site geneli bildirimlerini göster"
 
 #: bp-messages/classes/class-bp-messages-sitewide-notices-widget.php:26
 msgid "(BuddyPress) Sitewide Notices"
-msgstr "(BuddyPress) Site çapında bildirimler"
+msgstr "(BuddyPress) Site geneli bildirimleri"
 
 #: bp-messages/bp-messages-template.php:2049
 #: bp-themes/bp-default/_inc/ajax.php:865
@@ -10528,7 +10865,7 @@ msgstr "Yanıtla"
 #: bp-xprofile/classes/class-bp-xprofile-field.php:1355
 #: bp-xprofile/classes/class-bp-xprofile-group.php:831
 msgid "Cancel"
-msgstr "İptal"
+msgstr "Vazgeç"
 
 #: bp-activity/bp-activity-admin.php:1040
 msgid "Reply to Activity"

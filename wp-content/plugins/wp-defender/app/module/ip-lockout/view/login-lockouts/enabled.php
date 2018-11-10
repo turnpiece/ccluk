@@ -1,7 +1,7 @@
 <div class="dev-box">
     <form method="post" id="settings-frm" class="ip-frm">
         <div class="box-title">
-            <h3><?php _e( "Login Protection", wp_defender()->domain ) ?></h3>
+            <h3 role="checkbox"><label for="toggle_login_protect" role="checkbox" aria-checked="true"><?php _e( "Login Protection", wp_defender()->domain ) ?></label></h3>
             <div class="side float-r">
                 <div>
                     <span tooltip="<?php esc_attr_e( "Deactivate Login Protection", wp_defender()->domain ) ?>"

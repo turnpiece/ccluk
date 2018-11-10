@@ -21,15 +21,6 @@ import Scanner from './minification/Scanner';
             // Init files scanner
             this.scanner = new Scanner(wphb.minification.get.totalSteps, wphb.minification.get.currentScanStep);
             this.scanner.onFinishStep = this.updateProgressBar;
-            this.scanner.onFinish = (response) => {
-                this.updateProgressBar(100);
-
-                Fetcher.minification
-                    .toggleCDN($('input#enable_cdn').is(':checked'))
-                    .then(() => {
-                        window.location.href = getLink('minification');
-                    });
-            };
 
             // Check files button
             this.$checkFilesButton = $('#check-files');
@@ -89,7 +80,7 @@ import Scanner from './minification/Scanner';
             });
 
             // Show warning before switching to advanced view
-            let switchButtons = $('.box-title-basic > a.wphb-switch-button, #wphb-dismissable a.wphb-switch-button');
+            let switchButtons = $('.box-title-basic > a.wphb-switch-button');
             switchButtons.on('click', function (e) {
                 e.preventDefault();
 
@@ -142,10 +133,51 @@ import Scanner from './minification/Scanner';
                     });
             });
 
+            // Exclude file buttons.
+            let excludeButtons = $('.wphb-minification-exclude > :input.toggle-checkbox');
+            excludeButtons.on('change', function () {
+                let row = $(this).closest('.wphb-border-row');
+                row.toggleClass('disabled');
+                let label =  $("label[for='" + $(this).attr('id') + "']");
+                if ( label.hasClass('fileIncluded') ) {
+                    label.attr('data-tooltip', wphb.strings.includeFile);
+                    label.removeClass('fileIncluded');
+                } else {
+                    label.attr('data-tooltip', wphb.strings.excludeFile);
+                    label.addClass('fileIncluded');
+                }
+
+            });
+
+			/**
+             * Regenerate individual file.
+             *
+             * @since 1.9.2
+			 */
+			$('.wphb-compressed .wphb-filename-extension').on( 'click', function () {
+                let row = $(this).closest('.wphb-border-row');
+
+                row.find('.fileinfo-group').removeClass('wphb-compressed');
+
+				row.find('.wphb-row-status')
+                    .removeClass('sui-hidden wphb-row-status-changed')
+                    .addClass('wphb-row-status-queued sui-tooltip-constrained')
+                    .attr('data-tooltip', wphb.strings.queuedTooltip)
+                    .find('i').attr('class', 'sui-icon-loader sui-loading');
+
+				Fetcher.minification.resetAsset( row.attr('data-filter') );
+			});
+
             $("input[type=checkbox][name=debug_log]").change(function () {
-                Fetcher.minification.toggleLog($(this).is(':checked'))
+                const enabled = $(this).is(':checked');
+                Fetcher.minification.toggleLog(enabled)
                     .then(() => {
                         WPHB_Admin.notices.show('wphb-notice-minification-advanced-settings-updated', true);
+                        if ( enabled ) {
+							$('.wphb-logging-box').show();
+                        } else {
+							$('.wphb-logging-box').hide();
+                        }
                     });
             });
 
@@ -315,6 +347,21 @@ import Scanner from './minification/Scanner';
                     window.location.href = getLink('minification');
                 });
         },
+
+        /**
+         * Go to the Asset Optimization files page.
+         *
+         * @since 1.9.2
+         */
+		goToSettings: function() {
+			SUI.dialogs['wphb-assets-modal'].hide();
+
+			Fetcher.minification
+				.toggleCDN($('input#enable_cdn').is(':checked'))
+				.then(() => {
+					window.location.href = getLink('minification');
+				});
+        }
 
     }; // End WPHB_Admin.minification
 

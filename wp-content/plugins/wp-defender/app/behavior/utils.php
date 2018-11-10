@@ -50,7 +50,6 @@ class Utils extends Behavior {
 			$post_vars['headers'] = array_merge( $headers, array(
 				'Authorization' => 'Basic ' . $api_key
 			) );
-
 			$response = wp_remote_request( $endPoint,
 				apply_filters( 'wd_wpmudev_call_request_args',
 					$post_vars ) );
@@ -502,6 +501,7 @@ class Utils extends Behavior {
 		}
 		$client_real = isset( $_SERVER['HTTP_X_REAL_IP'] ) ? $_SERVER['HTTP_X_REAL_IP'] : null;
 		$ret         = $remote;
+
 		if ( filter_var( $client, FILTER_VALIDATE_IP ) ) {
 			$ret = $client;
 		} elseif ( filter_var( $client_real, FILTER_VALIDATE_IP ) ) {

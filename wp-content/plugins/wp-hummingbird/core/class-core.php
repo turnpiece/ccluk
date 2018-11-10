@@ -20,6 +20,21 @@ class WP_Hummingbird_Core {
 	public $hub_endpoints;
 
 	/**
+	 * Hummingbird REST endpoints
+	 *
+	 * @var WP_Hummingbird_REST_Endpoints
+	 */
+	public $rest_endpoints;
+
+	/**
+	 * Hummingbird logs
+	 *
+	 * @since 1.9.2
+	 * @var WP_Hummingbird_Logger
+	 */
+	public $logger;
+
+	/**
 	 * Saves the modules object instances
 	 *
 	 * @var array
@@ -63,7 +78,11 @@ class WP_Hummingbird_Core {
 		/* @noinspection PhpIncludeInspection */
 		include_once WPHB_DIR_PATH . 'core/class-hub-endpoints.php';
 		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/class-rest-endpoints.php';
+		/* @noinspection PhpIncludeInspection */
 		include_once WPHB_DIR_PATH . 'core/class-logger.php';
+		/* @noinspection PhpIncludeInspection */
+		include_once WPHB_DIR_PATH . 'core/class-gdpr.php';
 	}
 
 	/**
@@ -72,12 +91,22 @@ class WP_Hummingbird_Core {
 	 * @since 1.7.2
 	 */
 	private function init() {
+		// Init GDPR policy.
+		WP_Hummingbird_GDPR::get_instance();
+
 		// Init the API.
 		$this->api = new WP_Hummingbird_API();
 
 		// Init Hub endpoints.
 		$this->hub_endpoints = new WP_Hummingbird_Hub_Endpoints();
 		$this->hub_endpoints->init();
+
+		// Init Hummingbird REST endpoints.
+		$this->rest_endpoints = new WP_Hummingbird_REST_Endpoints();
+		$this->rest_endpoints->init();
+
+		// Init logger.
+		$this->logger = WP_Hummingbird_Logger::get_instance();
 	}
 
 	/**
@@ -88,17 +117,17 @@ class WP_Hummingbird_Core {
 		 * Filters the modules slugs list
 		 */
 		$modules = apply_filters( 'wp_hummingbird_modules', array(
-			'minify'       => __( 'Minify', 'wphb' ),
-			'gzip'         => __( 'Gzip', 'wphb' ),
-			'caching'      => __( 'Caching', 'wphb' ),
-			'performance'  => __( 'Performance', 'wphb' ),
-			'uptime'       => __( 'Uptime', 'wphb' ),
-			'smush'        => __( 'Smush', 'wphb' ),
-			'cloudflare'   => __( 'Cloudflare', 'wphb' ),
-			'gravatar'     => __( 'Gravatar Caching', 'wphb' ),
-			'page_cache'   => __( 'Page Caching', 'wphb' ),
-			'advanced'     => __( 'Advanced Tools', 'wphb' ),
-			'rss'          => __( 'RSS Caching', 'wphb' ),
+			'minify'      => __( 'Minify', 'wphb' ),
+			'gzip'        => __( 'Gzip', 'wphb' ),
+			'caching'     => __( 'Caching', 'wphb' ),
+			'performance' => __( 'Performance', 'wphb' ),
+			'uptime'      => __( 'Uptime', 'wphb' ),
+			'smush'       => __( 'Smush', 'wphb' ),
+			'cloudflare'  => __( 'Cloudflare', 'wphb' ),
+			'gravatar'    => __( 'Gravatar Caching', 'wphb' ),
+			'page_cache'  => __( 'Page Caching', 'wphb' ),
+			'advanced'    => __( 'Advanced Tools', 'wphb' ),
+			'rss'         => __( 'RSS Caching', 'wphb' ),
 		) );
 
 		// Do not load minification for PHP less than 5.3.
@@ -146,6 +175,7 @@ class WP_Hummingbird_Core {
 			}
 
 			$this->modules[ $module ] = $module_obj;
+			$this->logger->register_module( $module );
 		}
 	}
 

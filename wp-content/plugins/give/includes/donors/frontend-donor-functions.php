@@ -80,25 +80,28 @@ function give_validate_gravatar( $id_or_email ) {
 		$email = $id_or_email;
 	}
 
-	$hashkey = md5( strtolower( trim( $email ) ) );
-	$uri     = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
 
-	$data = wp_cache_get( $hashkey );
-	if ( false === $data ) {
+	$hashkey   = md5( strtolower( trim( $email ) ) );
+	$cache_key = 'give_valid_gravatars';
+	$data      = get_transient( $cache_key );
+	$data      = ! empty( $data ) ? $data : array();
+
+
+	if ( ! array_key_exists( $hashkey, $data ) ) {
+		$uri = 'http://www.gravatar.com/avatar/' . $hashkey . '?d=404';
+
 		$response = wp_remote_head( $uri );
-		if ( is_wp_error( $response ) ) {
-			$data = 'not200';
-		} else {
-			$data = $response['response']['code'];
-		}
-		wp_cache_set( $hashkey, $data, $group = '', $expire = 60 * 5 );
 
+		$data[ $hashkey ] = 0;
+
+		if ( ! is_wp_error( $response ) ) {
+			$data[ $hashkey ] = absint( '200' == $response['response']['code'] );
+		}
+
+		set_transient( $cache_key, $data, DAY_IN_SECONDS );
 	}
-	if ( $data == '200' ) {
-		return true;
-	} else {
-		return false;
-	}
+
+	return (bool) $data[ $hashkey ];
 }
 
 
@@ -115,17 +118,34 @@ function give_validate_gravatar( $id_or_email ) {
  * @return int The new note ID
  */
 function give_insert_donor_donation_comment( $donation_id, $donor, $note, $comment_args = array() ) {
-	$comment_args = wp_parse_args(
-		$comment_args,
+	// Backward compatibility.
+	if( ! give_has_upgrade_completed('v230_move_donation_note' ) ) {
+		$comment_args = wp_parse_args(
+			$comment_args,
+			array(
+				'comment_approved' => 0,
+				'comment_parent'   => give_get_payment_form_id( $donation_id )
+			)
+		);
+
+		$comment_id = Give_Comment::add( $donation_id, $note, 'payment', $comment_args );
+
+		update_comment_meta( $comment_id, '_give_donor_id', $donor );
+
+		return $comment_id;
+	}
+
+	$comment_id = Give_Comment::add(
 		array(
-			'comment_approved' => 0,
-			'comment_parent'   => give_get_payment_form_id( $donation_id )
+			'comment_ID'      => isset( $comment_args['comment_ID'] ) ? absint( $comment_args['comment_ID'] ) : 0,
+			'comment_parent'  => $donation_id,
+			'comment_content' => $note,
+			'comment_type'    => 'donor_donation',
 		)
 	);
 
-	$comment_id = Give_Comment::add( $donation_id, $note, 'payment', $comment_args );
-
-	update_comment_meta( $comment_id, '_give_donor_id', $donor );
+	Give()->comment->db_meta->update_meta( $comment_id, '_give_donor_id', $donor );
+	Give()->comment->db_meta->update_meta( $comment_id, '_give_form_id', give_get_payment_form_id( $donation_id ) );
 
 	return $comment_id;
 }
@@ -145,20 +165,34 @@ function give_insert_donor_donation_comment( $donation_id, $donor, $note, $comme
  * @return WP_Comment|array
  */
 function give_get_donor_donation_comment( $donation_id, $donor_id, $search = '' ) {
-	$comments = Give_Comment::get(
-		$donation_id,
-		'payment',
-		array(
-			'number'     => 1,
-			'meta_query' => array(
-				array(
-					'key'   => '_give_donor_id',
-					'value' => $donor_id
+	// Backward compatibility.
+	if( ! give_has_upgrade_completed('v230_move_donation_note' ) ) {
+
+		$comments = Give_Comment::get(
+			$donation_id,
+			'payment',
+			array(
+				'number'     => 1,
+				'meta_query' => array(
+					array(
+						'key'   => '_give_donor_id',
+						'value' => $donor_id
+					)
 				)
-			)
-		),
-		$search
-	);
+			),
+			$search
+		);
+
+		$comment = ! empty( $comments ) ? current( $comments ) : array();
+
+		return $comment;
+	}
+
+	$comments = Give()->comment->db->get_comments( array(
+		'number'         => 1,
+		'comment_parent' => $donation_id,
+		'comment_type'   => 'donor_donation',
+	) );
 
 	return ( ! empty( $comments ) ? current( $comments ) : array() );
 }
@@ -182,30 +216,6 @@ function give_get_donor_donation_comment_id( $donation_id, $donor_id, $search = 
 	$comment_id = $comment instanceof WP_Comment ? $comment->comment_ID : 0;
 
 	return $comment_id;
-}
-
-/**
- * Retrieve all donor comment attached to a donation
- *
- * Note: currently donor can only add one comment per donation
- *
- * @param int    $donor_id The donor ID to retrieve comment for.
- * @param array  $comment_args
- * @param string $search   Search for comment that contain a search term.
- *
- * @since 2.2.0
- *
- * @return array
- */
-function give_get_donor_donation_comments( $donor_id, $comment_args = array(), $search = '' ) {
-	$comments = Give_Comment::get(
-		$donor_id,
-		'payment',
-		$comment_args,
-		$search
-	);
-
-	return ( ! empty( $comments ) ? $comments : array() );
 }
 
 
@@ -239,42 +249,33 @@ function give_get_donor_donation_comment_html( $comment, $payment_id = 0 ) {
 
 }
 
-
 /**
- * Get donor latest comment
+ * Retrieves a name initials (first name and last name).
  *
- * @since 2.2.0
+ * @since   2.3.0
  *
- * @param int $donor_id
- * @param int $form_id
+ * @param array $args
  *
- * @return WP_Comment/array
+ * @return string
  */
-function give_get_donor_latest_comment( $donor_id, $form_id = 0 ) {
-	$comment_args = array(
-		'post_id'    => 0,
-		'orderby'    => 'comment_ID',
-		'order'      => 'DESC',
-		'number'     => 1,
-		'meta_query' => array(
-			'related' => 'AND',
-			array(
-				'key'   => '_give_donor_id',
-				'value' => $donor_id
-			),
-			array(
-				'key'   => '_give_anonymous_donation',
-				'value' => 0
-			)
+function give_get_name_initial( $args ) {
+	$args = wp_parse_args(
+		$args,
+		array(
+			'firstname' => '',
+			'lastname'  => '',
 		)
 	);
 
-	// Get donor donation comment for specific form.
-	if ( $form_id ) {
-		$comment_args['parent'] = $form_id;
-	}
+	$first_name_initial = mb_substr( $args['firstname'], 0, 1, 'utf-8' );
+	$last_name_initial  = mb_substr( $args['lastname'], 0, 1, 'utf-8' );
 
-	$comment = current( give_get_donor_donation_comments( $donor_id, $comment_args ) );
+	$name_initial = trim( $first_name_initial . $last_name_initial );
 
-	return $comment;
+	/**
+	 * Filter the name initial
+	 *
+	 * @since 2.3.0
+	 */
+	return apply_filters( 'give_get_name_initial', $name_initial, $args );
 }

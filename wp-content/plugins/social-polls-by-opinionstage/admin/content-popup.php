@@ -12,13 +12,18 @@ function opinionstage_content_popup_add_editor_button() {
 }
 
 function opinionstage_content_popup_js() {
-	opinionstage_register_javascript_asset(
-		'content-popup',
-		'content-popup.js',
-		array('jquery')
-	);
 
-	opinionstage_enqueue_js_asset('content-popup');
+	// asset loader hotfix TODO: improve this loader machanism 
+	if ( !(isset($_REQUEST['page']) && ($_REQUEST['page'] == OPINIONSTAGE_MENU_SLUG ||  $_REQUEST['page'] == OPINIONSTAGE_PLACEMENT_SLUG || $_REQUEST['page'] == OPINIONSTAGE_GETTING_STARTED_SLUG)) ) {
+		opinionstage_register_javascript_asset(
+			'content-popup',
+			'content-popup.js',
+			array('jquery')
+		);
+
+		opinionstage_enqueue_js_asset('content-popup');
+	}
+	
 }
 
 function opinionstage_content_popup_html() {

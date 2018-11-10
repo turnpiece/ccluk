@@ -1,4 +1,12 @@
 jQuery(function ($) {
+    $('body').on('change', '.toggle-checkbox', function (e) {
+        if ($(this).prop('checked') == true) {
+            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',true);
+        } else {
+            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',false);
+        }
+    });
+
     //blacklist helper
     if ($('.blacklist-widget').size() > 0) {
         $('.blacklist-widget').submit(function () {

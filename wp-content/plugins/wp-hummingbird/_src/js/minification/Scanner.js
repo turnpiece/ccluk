@@ -34,7 +34,16 @@ const MinificationScanner = ( totalSteps, currentStep ) => {
         },
         // Overridable functions
         onFinishStep: function( progress ) {},
-        onFinish: function( response ) {},
+        onFinish: function( response ) {
+			WPHB_Admin.minification.updateProgressBar( 100 );
+
+			if ( 'undefined' !== typeof response.assets_msg ) {
+				jQuery('.wphb-assets-modal').find('#assetsFound').html( response.assets_msg );
+			}
+
+			SUI.dialogs['check-files-modal'].hide();
+			SUI.dialogs['wphb-assets-modal'].show();
+        },
     };
 
     /**
@@ -55,9 +64,10 @@ const MinificationScanner = ( totalSteps, currentStep ) => {
                 });
         }
         else {
-            Fetcher.minification
-                .finishCheck()
-                .then( obj.onFinish );
+            Fetcher.minification.finishCheck()
+                .then( ( response ) => {
+					obj.onFinish( response );
+                });
         }
     };
 

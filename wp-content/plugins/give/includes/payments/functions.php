@@ -577,7 +577,6 @@ function give_get_payment_status_keys() {
 function give_get_earnings_by_date( $day = null, $month_num, $year = null, $hour = null ) {
 	// This is getting deprecated soon. Use Give_Payment_Stats with the get_earnings() method instead.
 	global $wpdb;
-	$meta_table = __give_v20_bc_table_details( 'payment' );
 
 	$args = array(
 		'post_type'              => 'give_payment',
@@ -608,9 +607,13 @@ function give_get_earnings_by_date( $day = null, $month_num, $year = null, $hour
 	if ( false === $earnings ) {
 		$donations = get_posts( $args );
 		$earnings  = 0;
+
+		$donation_table     = Give()->payment_meta->table_name;
+		$donation_table_col = Give()->payment_meta->get_meta_type() . '_id';
+
 		if ( $donations ) {
 			$donations      = implode( ',', $donations );
-			$earning_totals = $wpdb->get_var( "SELECT SUM(meta_value) FROM $wpdb->postmeta WHERE meta_key = '_give_payment_total' AND post_id IN ({$donations})" );
+			$earning_totals = $wpdb->get_var( "SELECT SUM(meta_value) FROM {$donation_table} WHERE meta_key = '_give_payment_total' AND {$donation_table_col} IN ({$donations})" );
 
 			/**
 			 * Filter The earnings by dates.
@@ -1408,7 +1411,11 @@ function give_delete_payment_note( $comment_id = 0, $payment_id = 0 ) {
 function give_get_payment_note_html( $note, $payment_id = 0 ) {
 
 	if ( is_numeric( $note ) ) {
-		$note = get_comment( $note );
+		if ( ! give_has_upgrade_completed( 'v230_move_donor_note' ) ) {
+			$note = get_comment( $note );
+		} else{
+			$note = Give()->comment->db->get( $note );
+		}
 	}
 
 	if ( ! empty( $note->user_id ) ) {
@@ -1433,7 +1440,7 @@ function give_get_payment_note_html( $note, $payment_id = 0 ) {
 	$note_html  = '<div class="give-payment-note" id="give-payment-note-' . $note->comment_ID . '">';
 	$note_html .= '<p>';
 	$note_html .= '<strong>' . $user . '</strong>&nbsp;&ndash;&nbsp;<span style="color:#aaa;font-style:italic;">' . date_i18n( $date_format, strtotime( $note->comment_date ) ) . '</span><br/>';
-	$note_html .= $note->comment_content;
+	$note_html .= nl2br( $note->comment_content );
 	$note_html .= '&nbsp;&ndash;&nbsp;<a href="' . esc_url( $delete_note_url ) . '" class="give-delete-payment-note" data-note-id="' . absint( $note->comment_ID ) . '" data-payment-id="' . absint( $payment_id ) . '" aria-label="' . __( 'Delete this donation note.', 'give' ) . '">' . __( 'Delete', 'give' ) . '</a>';
 	$note_html .= '</p>';
 	$note_html .= '</div>';

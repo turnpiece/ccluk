@@ -5,6 +5,7 @@
 
 namespace WP_Defender\Module\Advanced_Tools\Component;
 
+use Hammer\Helper\HTTP_Helper;
 use Hammer\WP\Component;
 use WP_Defender\Behavior\Utils;
 use WP_Defender\Component\Error_Code;
@@ -159,5 +160,40 @@ class Mask_Api extends Component {
 		}
 
 		return true;
+	}
+
+	/**
+	 * @return null|string
+	 */
+	public static function createOTPKey() {
+		if ( ! is_user_logged_in() ) {
+			return null;
+		}
+
+		$secret = Auth_API::getUserSecret();
+		$otp    = uniqid();
+		$key    = md5( $otp . $secret );
+		set_site_transient( $key, $otp, 300 );
+
+		return $otp;
+	}
+
+	/**
+	 * @param $otp
+	 *
+	 * @return bool
+	 */
+	public static function verifyOTP( $otp ) {
+		$key    = HTTP_Helper::retrieve_get( 'otp' );
+		$secret = Auth_API::getUserSecret();
+		$key    = md5( $key . $secret );
+		$check  = get_site_transient( $key );
+		if ( $check == $otp ) {
+			delete_site_transient( $key );
+
+			return true;
+		}
+
+		return false;
 	}
 }

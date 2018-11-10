@@ -547,6 +547,12 @@ class WP_Hummingbird_Uptime_Page extends WP_Hummingbird_Admin_Page {
 			$end_time = time();
 			$first = true;
 			$event_arr = array_reverse( $stats->events );
+
+			// If no downtime events and uptime has not just been enabled for the first time return Website Available.
+			if ( empty( $stats->events ) && ! empty( $stats->chart_json ) ) {
+				$data[] = array( 'Downtime', 'Up', 'Website Available', date( 'D M d Y H:i:s O', time() - $time_increment ), date( 'D M d Y H:i:s O', time() ) );
+				return wp_json_encode( $data );
+			}
 			foreach ( $event_arr as $event ) {
 				if ( ! empty( $event->down ) && ! empty( $event->up ) ) {
 					if ( ! $first ) {

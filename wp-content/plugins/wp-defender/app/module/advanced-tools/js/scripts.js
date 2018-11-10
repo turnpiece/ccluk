@@ -28,6 +28,16 @@ jQuery(function ($) {
             $(this).closest('.column').find('.well').addClass('is-hidden')
         }
     });
+
+    $('body').on('change', '.toggle-checkbox', function (e) {
+        console.log( $(this).attr('id') );
+        if ($(this).prop('checked') == true) {
+            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',true);
+        } else {
+            $('label[for="'+$(this).attr('id')+'"]').attr('aria-checked',false);
+        }
+    });
+
     $('body').on('change', '#customGraphic', function (e) {
         if ($(this).prop('checked') == true) {
             $(this).closest('.column').find('.well').removeClass('is-hidden')

@@ -113,11 +113,24 @@ function __aws_sdk_ua_callback()
 
 /*%******************************************************************************************%*/
 // INTERMEDIARY CONSTANTS
+if ( Snapshot_Helper_System::is_available( 'php_uname' ) ){
+	$os_info = php_uname('s');
+	$version_info = php_uname('r');
+	$type_info = php_uname('m');
+} else if ( Snapshot_Helper_System::is_available( 'exec' ) ){
+	$os_info = Snapshot_Helper_System::get_system_info( 's' );
+	$version_info = Snapshot_Helper_System::get_system_info( 'r' );
+	$type_info = Snapshot_Helper_System::get_system_info( 'p' );
+} else {
+	$os_info = 'unknown';
+	$version_info = 'unknown';
+	$type_info = 'unknown';
+}
 
 define('CFRUNTIME_NAME', 'aws-sdk-php');
 define('CFRUNTIME_VERSION', 'Panther');
 define('CFRUNTIME_BUILD', '20120926163000');
-define('CFRUNTIME_USERAGENT', CFRUNTIME_NAME . '/' . CFRUNTIME_VERSION . ' PHP/' . PHP_VERSION . ' ' . str_replace(' ', '_', php_uname('s')) . '/' . str_replace(' ', '_', php_uname('r')) . ' Arch/' . php_uname('m') . ' SAPI/' . php_sapi_name() . ' Integer/' . PHP_INT_MAX . ' Build/' . CFRUNTIME_BUILD . __aws_sdk_ua_callback());
+define('CFRUNTIME_USERAGENT', CFRUNTIME_NAME . '/' . CFRUNTIME_VERSION . ' PHP/' . PHP_VERSION . ' ' . str_replace(' ', '_', $os_info) . '/' . str_replace(' ', '_', $version_info) . ' Arch/' . $type_info . ' SAPI/' . php_sapi_name() . ' Integer/' . PHP_INT_MAX . ' Build/' . CFRUNTIME_BUILD . __aws_sdk_ua_callback());
 
 
 /*%******************************************************************************************%*/

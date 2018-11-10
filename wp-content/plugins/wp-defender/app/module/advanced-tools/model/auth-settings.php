@@ -15,6 +15,7 @@ class Auth_Settings extends \Hammer\WP\Settings {
 	public $forceAuth = false;
 	public $forceAuthMess = "You are required to setup two-factor authentication to use this site.";
 	public $userRoles = array();
+	public $forceAuthRoles = array();
 	public $customGraphic = 0;
 	public $customGraphicURL = '';
 	public $isConflict = array();
@@ -112,6 +113,7 @@ Copy and paste the passcode into the input field on the login screen to complete
 
 Regards,
 Administrator';
-			return $content;
+
+		return $content;
 	}
 }

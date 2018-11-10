@@ -63,7 +63,7 @@ class WP_Hummingbird_Module_Cloudflare extends WP_Hummingbird_Module {
 			}
 
 			// Only write if value changes.
-			if ( $is_cloudflare_db !== $is_cloudflare ) {
+			if ( $is_cloudflare_db !== $is_cloudflare || is_wp_error( $head ) ) {
 				WP_Hummingbird_Settings::update_setting( 'connected', $is_cloudflare, $this->slug );
 			}
 		}

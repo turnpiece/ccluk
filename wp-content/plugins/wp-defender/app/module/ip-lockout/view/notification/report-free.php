@@ -29,7 +29,7 @@
                                        id="toggle_report"/>
                                 <label class="toggle-label" for="toggle_report"></label>
                                 </span>
-                    <label>
+                    <label for="toggle_report" role="checkbox" aria-checked="true">
 						<?php esc_html_e( "Send regular email report", wp_defender()->domain ) ?>
                     </label>
                     <div class="clear mline"></div>

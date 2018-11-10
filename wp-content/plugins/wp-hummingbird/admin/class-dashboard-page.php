@@ -567,7 +567,7 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 		$show_cf_notice = false;
 		$cf_current = $cf_current_human = $cf_tooltip = '';
 		$cf_active  = $cf_module->is_connected() && $cf_module->is_zone_selected();
-		$cf_server = $cf_module->has_cloudflare();
+		$cf_server  = $cf_module->has_cloudflare();
 
 		if ( $cf_active ) {
 			$expiration = $cf_current = $cf_module->get_caching_expiration();
@@ -810,13 +810,13 @@ class WP_Hummingbird_Dashboard_Page extends WP_Hummingbird_Admin_Page {
 
 		$enqueued_files = count( $collection['scripts'] ) + count( $collection['styles'] );
 
-		$original_size_styles = array_sum( @wp_list_pluck( $collection['styles'], 'original_size' ) );
-		$original_size_scripts = array_sum( @wp_list_pluck( $collection['scripts'], 'original_size' ) );
+		$original_size_styles = WP_Hummingbird_Utils::calculate_sum( @wp_list_pluck( $collection['styles'], 'original_size' ) );
+		$original_size_scripts = WP_Hummingbird_Utils::calculate_sum( @wp_list_pluck( $collection['scripts'], 'original_size' ) );
 
 		$original_size = $original_size_scripts + $original_size_styles;
 
-		$compressed_size_styles = array_sum( @wp_list_pluck( $collection['styles'], 'compressed_size' ) );
-		$compressed_size_scripts = array_sum( @wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
+		$compressed_size_styles = WP_Hummingbird_Utils::calculate_sum( @wp_list_pluck( $collection['styles'], 'compressed_size' ) );
+		$compressed_size_scripts = WP_Hummingbird_Utils::calculate_sum( @wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
 		$compressed_size = $compressed_size_scripts + $compressed_size_styles;
 
 		if ( ( $original_size_scripts + $original_size_styles ) <= 0 ) {

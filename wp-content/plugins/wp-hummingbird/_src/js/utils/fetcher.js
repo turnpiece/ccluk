@@ -295,7 +295,10 @@ function Fetcher() {
              */
             finishCheck: () => {
                 const action = actionPrefix + 'minification_finish_scan';
-                return request( action, {}, 'POST' );
+                return request( action, {}, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
             },
 
 			/**
@@ -328,6 +331,20 @@ function Fetcher() {
 			 */
 			updateAssetPath: ( value ) => {
 				const action = actionPrefix + 'minification_update_asset_path';
+				return request( action, { value }, 'POST' );
+			},
+
+			/**
+			 * Reset individual file.
+			 *
+			 * @since 1.9.2
+			 *
+			 * @param {string} value
+			 *
+			 * @returns {*}
+			 */
+			resetAsset: ( value ) => {
+				const action = actionPrefix + 'minification_reset_asset';
 				return request( action, { value }, 'POST' );
 			}
         },
@@ -419,6 +436,26 @@ function Fetcher() {
 			scheduleCleanup: () => {
 				const action = actionPrefixPro + 'advanced_db_schedule';
 				return request( action, {}, 'POST' );
+			}
+		},
+
+		/**
+		 * Logger module actions.
+		 *
+		 * @since 1.9.2
+		 */
+		logger: {
+			/**
+			 * Clear logs.
+			 *
+			 * @param {string} module  Module slug.
+			 */
+			clear: ( module ) => {
+				const action = actionPrefix + 'logger_clear';
+				return request( action, { module }, 'POST' )
+					.then( ( response ) => {
+						return response;
+					});
 			}
 		}
     };

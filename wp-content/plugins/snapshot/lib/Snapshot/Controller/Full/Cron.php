@@ -240,7 +240,14 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 		add_action($finish_action, array($this, 'finish_backup'));
 
 		// Cron respawning action hooks
-		add_action('wp_ajax_nopriv_snapshot-full_backup-respawn_cron', array($this, 'json_respawn_cron'));
+		$action_pfx = defined( 'WPE_APIKEY' )
+			? 'wp_ajax'
+			: 'wp_ajax_nopriv'
+		;
+		add_action(
+			$action_pfx . '_snapshot-full_backup-respawn_cron',
+			array( $this, 'json_respawn_cron' )
+		);
 	}
 
 	/**
@@ -448,6 +455,9 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 			Snapshot_Helper_Log::note("Rescheduling backup finalization", "Cron");
 			$this->_schedule_immediate_backup_finish();
 		} else {
+			// Revert the temporary cron enabling.
+			$this->_restore_previous_cron_config();
+
 			Snapshot_Controller_Full_Hub::get()->clear_flag();
 			$this->_unschedule_backup_processing(); // Just for good measure, we're done here
 			Snapshot_Helper_Log::info("Backup finished", "Cron");
@@ -562,10 +572,13 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 			$admin_url = trailingslashit( admin_url() );
 		}
 
+		$timeout = defined( 'SNAPSHOT_SELF_PING_TIMEOUT' ) && SNAPSHOT_SELF_PING_TIMEOUT
+			? (float) SNAPSHOT_SELF_PING_TIMEOUT
+			: 0.01;
 		$params = array(
 			'url' => $admin_url . 'admin-ajax.php?action=snapshot-full_backup-respawn_cron&doing_wp_cron=1',
 			'args' => array(
-				'timeout'   => 0.01,
+				'timeout'   => $timeout,
 				'blocking'  => false,
 				'sslverify' => false,
 				'body' => array(
@@ -593,7 +606,12 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 
 		if ($this->_model->get_config('disable_cron', false)) die;
 		if (!defined('DISABLE_WP_CRON')) define('DISABLE_WP_CRON', true); // No. Bad cron. Not happening.
-		check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
+		if ( ! defined( 'WPE_APIKEY' ) ) {
+			check_ajax_referer( 'snapshot-ajax-nonce', 'security' );
+		} else if ( ! is_user_logged_in() ) {
+			Snapshot_Helper_Log::warn('Anonymous user request blocked', 'Cron');
+			return false;
+		}
 		$data = stripslashes_deep($_POST);
 		$type = empty($data['job']) || !in_array($data['job'], $this->get_known_job_actions(), true)
 			? self::BACKUP_KICKSTART_ACTION
@@ -878,7 +896,6 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 	 */
 	public function get_auth_cookies () {
 		if (!defined('WPE_APIKEY')) return array(); // Not WPEngine
-		if (is_user_logged_in()) return array(); // Already authenticated
 
 		$user_id = false;
 		$user = $user_id;
@@ -981,4 +998,30 @@ class Snapshot_Controller_Full_Cron extends Snapshot_Controller_Full {
 		// The scheduling will also disperse the start time within the hour.
 		$this->_schedule_backup_starting();
 	}
+
+	/**
+	 * Restore cron configuration as it was before Automate kicked in.
+	 *
+	 * @since 3.1.9.2-beta.1
+	 *
+	 */
+	private function _restore_previous_cron_config () {
+		$is_automated = Snapshot_Controller_Full_Hub::get()->is_doing_automated_backup();
+		if ( $is_automated ){
+			if ( $this->_model->get_config('temporarily_enable_cron', false) ) {
+				// Deactivate schedules again.
+				$this->_model->set_config( 'frequency', false );
+				$this->_model->set_config( 'schedule_time', false );
+				$this->_model->set_config( 'disable_cron', true );
+				self::get()->stop();
+
+				// Let the service know
+				$this->_model->update_remote_schedule();
+
+				// Toggle back the configuration as it was before the automated backup.
+				$this->_model->set_config('temporarily_enable_cron', false);
+			}
+		}
+	}
+
 }

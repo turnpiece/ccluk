@@ -339,3 +339,56 @@
 #opinionstage-content .opinionstage-onoffswitch-checkbox:checked + .opinionstage-onoffswitch-label .opinionstage-onoffswitch-switch {
   right: 3px;
 }
+/* Getting started */
+.gettingStartedSection {
+    width: 100%;
+    max-width: 950px;
+    margin: 0px auto;
+    text-align: center;
+    margin-top: 50px;
+    background: #fff;
+    padding: 30px 0px;
+}
+.gettingStartedSection p {
+    width: fit-content;
+    margin: 0px auto;
+    font-size: 14px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+.gettingStartedSection .Video-Section {
+    display: block;
+    width: 100%;
+    max-width: 1024px;
+    margin: 0px auto;
+}
+.Video-Section .iframe-new {
+    display: block;
+    width: 100%;
+    max-width: 700px;
+    margin: 0 auto;
+    margin-bottom: 30px;
+}
+h1.gettingStartedHeading {
+    letter-spacing: 1px;
+    width: 100%;
+    max-width: fit-content;
+    margin: 0px auto;
+    font-size: 30px;
+    line-height: 35px;
+}
+#opinionstage-content a.gettingStartedCreate.button {
+    color: #ffffff;
+    background: #0085ba;
+    box-shadow: 0px 0px 0px 0px;
+    padding: 13px 37px;
+    display: block;
+    height: auto;
+    width: 100%;
+    max-width: fit-content;
+    margin: 0px auto;
+    font-size: 14px;
+    letter-spacing: 1px;
+    margin-top: 50px;
+    margin-bottom: 20px;
+}

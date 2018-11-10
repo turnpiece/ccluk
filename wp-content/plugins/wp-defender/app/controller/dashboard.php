@@ -37,6 +37,93 @@ class Dashboard extends Controller {
 		$this->add_filter( 'wdp_register_hub_action', 'addMyEndpoint' );
 		add_filter( 'custom_menu_order', '__return_true' );
 		$this->add_filter( 'menu_order', 'menuOrder' );
+		// Add pointer script.
+		$this->add_action( 'admin_enqueue_scripts', 'admin_pointers_header' );
+	}
+
+	/**
+	 * Pointer header.
+	 */
+	public function admin_pointers_header() {
+		if ( $this->admin_pointers_check() ) {
+			$this->add_action( 'admin_print_footer_scripts', 'admin_pointers_footer' );
+			wp_enqueue_script( 'wp-pointer' );
+			wp_enqueue_style( 'wp-pointer' );
+		}
+	}
+
+	/**
+	 * Admin pointers check.
+	 */
+	function admin_pointers_check() {
+		$currentScreen = get_current_screen();
+		if ( strpos( $currentScreen->id, 'defender' ) !== false ) {
+			return;
+		}
+		$admin_pointers = $this->admin_pointers();
+		foreach ( $admin_pointers as $pointer => $array ) {
+			if ( $array['active'] ) {
+				return true;
+			}
+		}
+	}
+
+	/**
+	 * Pointer scripts.
+	 */
+	function admin_pointers_footer() {
+		$admin_pointers = $this->admin_pointers();
+		?>
+        <script type="text/javascript">
+            /* <![CDATA[ */
+            (function ($) {
+				<?php
+				foreach ( $admin_pointers as $pointer => $array ) {
+				if ( $array['active'] ) {
+				?>
+                $('<?php echo $array['anchor_id']; ?>').pointer({
+                    content: '<?php echo $array['content']; ?>',
+                    position: {
+                        edge: '<?php echo $array['edge']; ?>',
+                        align: '<?php echo $array['align']; ?>'
+                    },
+                    close: function () {
+                        $.post(ajaxurl, {
+                            pointer: '<?php echo $pointer; ?>',
+                            action: 'dismiss-wp-pointer'
+                        });
+                    }
+                }).pointer('open');
+				<?php
+				}
+				}
+				?>
+            })(jQuery);
+            /* ]]> */
+        </script>
+		<?php
+	}
+
+	/**
+	 * Admin pointers.
+	 */
+	function admin_pointers() {
+		$dismissed = explode( ',', (string) get_user_meta( get_current_user_id(), 'dismissed_wp_pointers', true ) );
+		$version   = \str_replace( '.', '_', wp_defender()->version );
+		$prefix    = 'defneder_admin_pointers' . $version . '_' . ( wp_defender()->isFree ? '_free' : null );
+
+		$new_pointer_content = '<h3>' . __( 'Get Secure', wp_defender()->domain ) . '</h3>';
+		$new_pointer_content .= '<p>' . __( 'Enable security tweaks, activate monitoring and start protecting your login are and files here.', wp_defender()->domain ) . '</p>';
+
+		return array(
+			$prefix . 'menu' => array(
+				'content'   => $new_pointer_content,
+				'anchor_id' => '#toplevel_page_wp-defender',
+				'edge'      => 'top',
+				'align'     => 'left',
+				'active'    => ( ! in_array( $prefix . 'menu', $dismissed ) ),
+			),
+		);
 	}
 
 	public function skipActivator() {
@@ -323,7 +410,7 @@ class Dashboard extends Controller {
 		$cap        = is_multisite() ? 'manage_network_options' : 'manage_options';
 		$menu_title = wp_defender()->isFree ? esc_html__( "Defender", wp_defender()->domain ) : esc_html__( "Defender Pro", wp_defender()->domain );
 		//$menu_title = sprintf( $menu_title, $indicator );
-		add_menu_page( esc_html__( "Defender Pro", wp_defender()->domain ), $menu_title, $cap, 'wp-defender', array(
+		add_menu_page( $menu_title, $menu_title, $cap, 'wp-defender', array(
 			&$this,
 			'actionIndex'
 		), $this->get_menu_icon() );

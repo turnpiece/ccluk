@@ -109,7 +109,7 @@ class GAPGoogle_Auth_AppIdentity extends GAPGoogle_Auth_Abstract
       return $request;
     }
 
-    $this->client->getLogger()->debug('App Identity authentication');	 	 	 	 	   			 	
+    $this->client->getLogger()->debug('App Identity authentication');
 
     // Add the OAuth2 header to the request
     $request->setRequestHeaders(

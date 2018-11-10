@@ -4,7 +4,7 @@
  */
 namespace The_SEO_Framework;
 
-defined( 'ABSPATH' ) or die;
+defined( 'THE_SEO_FRAMEWORK_PRESENT' ) or die;
 
 /**
  * The SEO Framework plugin
@@ -33,19 +33,13 @@ defined( 'ABSPATH' ) or die;
 class Sanitize extends Admin_Pages {
 
 	/**
-	 * Constructor, load parent constructor
-	 */
-	protected function __construct() {
-		parent::__construct();
-	}
-
-	/**
 	 * Checks the SEO Settings page nonce. Returns false if nonce can't be found.
 	 * Performs wp_die() when nonce verification fails.
 	 *
 	 * Never run a sensitive function when it's returning false. This means no nonce can be verified.
 	 *
 	 * @since 2.7.0
+	 * @since 3.1.0 Removed settings field existence check.
 	 * @securitycheck 3.0.0 OK.
 	 * @staticvar bool $verified.
 	 *
@@ -58,10 +52,6 @@ class Sanitize extends Admin_Pages {
 		if ( isset( $validated ) )
 			return $validated;
 
-		//* If this page doesn't store settings, no need to sanitize them
-		if ( ! $this->settings_field )
-			return $validated = false;
-
 		/**
 		 * If this page doesn't parse the site options,
 		 * There's no need to filter them on each request.
@@ -69,7 +59,9 @@ class Sanitize extends Admin_Pages {
 		 *
 		 * @since 2.2.9
 		 */
-		if ( empty( $_POST ) || ! isset( $_POST[ THE_SEO_FRAMEWORK_SITE_OPTIONS ] ) || ! is_array( $_POST[ THE_SEO_FRAMEWORK_SITE_OPTIONS ] ) )
+		if ( empty( $_POST )
+		|| ! isset( $_POST[ $this->settings_field ] )
+		|| ! is_array( $_POST[ $this->settings_field ] ) ) // CSRF ok: This is just a performance check.
 			return $validated = false;
 
 		//* This is also handled in /wp-admin/options.php. Nevertheless, one might register outside of scope.
@@ -83,6 +75,7 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 2.8.0
 	 * @since 3.0.6 Now updates db version, too.
+	 * @since 3.1.0 Now always flushes the cache, even before the options are updated.
 	 *
 	 * @return void Early if nonce failed.
 	 */
@@ -92,17 +85,17 @@ class Sanitize extends Admin_Pages {
 		if ( false === $this->verify_seo_settings_nonce() )
 			return;
 
-		//* Update hidden options.
-		//* @TODO remove this and use a better upgrade handler.
-		$this->update_hidden_options_to_default();
-
 		//* Initialize sanitation filters parsed on each option update.
 		$this->init_sanitizer_filters();
 
+		//* Delete main cache now. For when the options don't change.
+		$this->delete_main_cache();
+
 		//* Flush transients after options have changed.
-		\add_action( "update_option_{$this->settings_field}", array( $this, 'delete_main_cache' ) );
-		\add_action( "update_option_{$this->settings_field}", array( $this, 'reinitialize_rewrite' ), 11 );
-		\add_action( "update_option_{$this->settings_field}", array( $this, 'update_db_version' ), 12 );
+		\add_action( "update_option_{$this->settings_field}", [ $this, 'delete_main_cache' ] );
+		\add_action( "update_option_{$this->settings_field}", [ $this, 'reinitialize_rewrite' ], 11 );
+		\add_action( "update_option_{$this->settings_field}", [ $this, 'update_db_version' ], 12 );
+		\add_action( "update_option_{$this->settings_field}", [ $this, '_set_backward_compatibility' ], 13 );
 	}
 
 	/**
@@ -118,104 +111,142 @@ class Sanitize extends Admin_Pages {
 	}
 
 	/**
+	 * Maintains backward compatibility for the options of < 3.1.
+	 *
+	 * @since 3.1.0
+	 * @TODO  3.3.0 Remove or empty this.
+	 * @access private
+	 * @staticvar bool $running Prevents loops.
+	 */
+	public function _set_backward_compatibility() {
+		static $running = false;
+		if ( $running ) return;
+		$running = true;
+
+		db_3101:
+		//= title_seperator backward compat.
+		$this->update_option( 'title_seperator', $this->get_option( 'title_separator', false ) );
+
+		//= Media robots backward compat.
+		foreach ( [ 'noindex', 'nofollow', 'noarchive' ] as $r ) :
+			$_option = $this->get_option( $this->get_robots_post_type_option_id( $r ), false );
+			$_media_option = ! empty( $_option['attachment'] ) ? $_option['attachment'] : 0;
+
+			$this->update_option( "attachment_$r", $_media_option );
+		endforeach;
+
+		end:;
+
+		$running = false;
+	}
+
+	/**
 	 * Register each of the settings with a sanitization filter type.
 	 *
 	 * @since 2.8.0
-	 * @uses method add_option_filter() Assign filter to array of settings.
+	 * @since 3.1.0 Added caching, preventing duplicate registrations.
+	 * @staticvar bool $init
+	 * @uses $this->add_option_filter() Assign filter to array of settings.
 	 */
 	public function init_sanitizer_filters() {
+
+		static $init = false;
+		if ( $init ) return;
 
 		$this->add_option_filter(
 			's_title_separator',
 			$this->settings_field,
-			array(
-				'title_seperator', // NOTE: Typo
-			)
+			[
+				'title_separator',
+			]
 		);
 
 		$this->add_option_filter(
 			's_description_separator',
 			$this->settings_field,
-			array(
+			[
 				'description_separator',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_description',
 			$this->settings_field,
-			array()
+			[]
 		);
 
 		$this->add_option_filter(
 			's_description_raw',
 			$this->settings_field,
-			array(
+			[
 				'homepage_description',
-			)
+				'homepage_og_description',
+				'homepage_twitter_description',
+			]
 		);
 
 		$this->add_option_filter(
 			's_title',
 			$this->settings_field,
-			array(
+			[
 				'knowledge_name',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_title_raw',
 			$this->settings_field,
-			array(
+			[
 				'homepage_title',
 				'homepage_title_tagline',
-			)
+				'homepage_og_title',
+				'homepage_twitter_title',
+			]
 		);
 
 		$this->add_option_filter(
 			's_knowledge_type',
 			$this->settings_field,
-			array(
+			[
 				'knowledge_type',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_left_right',
 			$this->settings_field,
-			array(
+			[
 				'title_location',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_left_right_home',
 			$this->settings_field,
-			array(
+			[
 				'home_title_location',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_alter_query_type',
 			$this->settings_field,
-			array(
+			[
 				'alter_archive_query_type',
 				'alter_search_query_type',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_one_zero',
 			$this->settings_field,
-			array(
+			[
 				'alter_search_query',
 				'alter_archive_query',
 
 				'display_pixel_counter',
 				'display_character_counter',
 
-				'cache_meta_description',
 				'cache_meta_schema',
 				'cache_sitemap',
 				'cache_object',
@@ -225,11 +256,11 @@ class Sanitize extends Admin_Pages {
 
 				'title_rem_additions',
 				'title_rem_prefixes',
+				'title_strip_tags',
 
+				'auto_description',
 				'description_additions',
 				'description_blogname',
-
-				'noydir',
 
 				'category_noindex',
 				'tag_noindex',
@@ -273,14 +304,11 @@ class Sanitize extends Admin_Pages {
 				'og_tags',
 				'facebook_tags',
 				'twitter_tags',
-			//	'googleplus_tags',
 
 				'knowledge_output',
 
 				'post_publish_time',
 				'post_modify_time',
-
-				'noydir',
 
 				'knowledge_logo',
 
@@ -297,34 +325,53 @@ class Sanitize extends Admin_Pages {
 				'sitemaps_output',
 				'sitemaps_robots',
 				'sitemaps_modified',
+				'sitemaps_priority',
 				'sitemap_styles',
 				'sitemap_logo',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_absint',
 			$this->settings_field,
-			array(
+			[
 				'social_image_fb_id',
 				'homepage_social_image_id',
 				'knowledge_logo_id',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_numeric_string',
 			$this->settings_field,
-			array(
+			[
 				'timestamps_format',
-			)
+			]
+		);
+
+		$this->add_option_filter(
+			's_disabled_post_types',
+			$this->settings_field,
+			[
+				'disabled_post_types',
+			]
+		);
+
+		$this->add_option_filter(
+			's_post_types',
+			$this->settings_field,
+			[
+				$this->get_robots_post_type_option_id( 'noindex' ),
+				$this->get_robots_post_type_option_id( 'nofollow' ),
+				$this->get_robots_post_type_option_id( 'noarchive' ),
+			]
 		);
 
 		/*
 		$this->add_option_filter(
 			's_no_html',
 			$this->settings_field,
-			array()
+			[]
 		);
 		*/
 
@@ -335,20 +382,20 @@ class Sanitize extends Admin_Pages {
 		$this->add_option_filter(
 			's_no_html_space',
 			$this->settings_field,
-			array(
+			[
 				'facebook_appid',
 
 				'google_verification',
 				'bing_verification',
 				'yandex_verification',
 				'pint_verification',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_url',
 			$this->settings_field,
-			array(
+			[
 				'knowledge_facebook',
 				'knowledge_twitter',
 				'knowledge_gplus',
@@ -358,62 +405,72 @@ class Sanitize extends Admin_Pages {
 				'knowledge_pinterest',
 				'knowledge_soundcloud',
 				'knowledge_tumblr',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_url_query',
 			$this->settings_field,
-			array(
+			[
 				'knowledge_linkedin',
 				'social_image_fb_url',
 				'homepage_social_image_url',
 				'knowledge_logo_url',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_facebook_profile',
 			$this->settings_field,
-			array(
+			[
 				'facebook_publisher',
 				'facebook_author',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_twitter_name',
 			$this->settings_field,
-			array(
+			[
 				'twitter_site',
 				'twitter_creator',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_twitter_card',
 			$this->settings_field,
-			array(
+			[
 				'twitter_card',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_canonical_scheme',
 			$this->settings_field,
-			array(
+			[
 				'canonical_scheme',
-			)
+			]
 		);
 
 		$this->add_option_filter(
 			's_color_hex',
 			$this->settings_field,
-			array(
+			[
 				'sitemap_color_main',
 				'sitemap_color_accent',
-			)
+			]
 		);
+
+		$this->add_option_filter(
+			's_min_max_sitemap',
+			$this->settings_field,
+			[
+				'sitemap_query_limit',
+			]
+		);
+
+		$init = true;
 	}
 
 	/**
@@ -429,14 +486,14 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @param string $filter Sanitization filter type
 	 * @param string $option Option key
-	 * @param array|string $suboption Optional. Suboption key
+	 * @param array|string $suboption Optional. Suboption key(s).
 	 * @return boolean Returns true when complete
 	 */
 	public function add_option_filter( $filter, $option, $suboption = null ) {
 
 		$this->set_option_filter( $filter, $option, $suboption );
 
-		\add_filter( 'sanitize_option_' . $option, array( $this, 'sanitize' ), 10, 2 );
+		\add_filter( 'sanitize_option_' . $option, [ $this, 'sanitize' ], 10, 2 );
 
 		return true;
 	}
@@ -453,13 +510,13 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @param string $filter Sanitization filter type
 	 * @param string $option Option key
-	 * @param array|string $suboption Optional. Suboption key
+	 * @param array|string $suboption Optional. Suboption key(s).
 	 * @param bool $get Whether to retrieve cache.
 	 * @return array When $get is true, it will return the option filters.
 	 */
 	protected function set_option_filter( $filter, $option, $suboption = null, $get = false ) {
 
-		static $options = array();
+		static $options = [];
 
 		if ( $get )
 			return $options;
@@ -509,7 +566,7 @@ class Sanitize extends Admin_Pages {
 			return $this->do_filter( $filters[ $option ], $new_value, \get_option( $option ) );
 		} elseif ( is_array( $filters[ $option ] ) ) {
 			//* Array of suboption values to loop through
-			$old_value = \get_option( $option );
+			$old_value = \get_option( $option, [] );
 			foreach ( $filters[ $option ] as $suboption => $filter ) {
 				$old_value[ $suboption ] = isset( $old_value[ $suboption ] ) ? $old_value[ $suboption ] : '';
 				$new_value[ $suboption ] = isset( $new_value[ $suboption ] ) ? $new_value[ $suboption ] : '';
@@ -559,36 +616,37 @@ class Sanitize extends Admin_Pages {
 	 */
 	protected function get_available_filters() {
 
-		$default_filters = array(
-			's_left_right'            => array( $this, 's_left_right' ),
-			's_left_right_home'       => array( $this, 's_left_right_home' ),
-			's_title_separator'       => array( $this, 's_title_separator' ),
-			's_description_separator' => array( $this, 's_description_separator' ),
-			's_description'           => array( $this, 's_description' ),
-			's_description_raw'       => array( $this, 's_description_raw' ),
-			's_title'                 => array( $this, 's_title' ),
-			's_title_raw'             => array( $this, 's_title_raw' ),
-			's_knowledge_type'        => array( $this, 's_knowledge_type' ),
-			's_alter_query_type'      => array( $this, 's_alter_query_type' ),
-			's_one_zero'              => array( $this, 's_one_zero' ),
-			's_numeric_string'        => array( $this, 's_numeric_string' ),
-			's_no_html'               => array( $this, 's_no_html' ),
-			's_no_html_space'         => array( $this, 's_no_html_space' ),
-			's_absint'                => array( $this, 's_absint' ),
-			's_safe_html'             => array( $this, 's_safe_html' ),
-			's_url'                   => array( $this, 's_url' ),
-			's_url_query'             => array( $this, 's_url_query' ),
-			's_facebook_profile'      => array( $this, 's_facebook_profile' ),
-			's_twitter_name'          => array( $this, 's_twitter_name' ),
-			's_twitter_card'          => array( $this, 's_twitter_card' ),
-			's_canonical_scheme'      => array( $this, 's_canonical_scheme' ),
-		);
+		$default_filters = [
+			's_left_right'            => [ $this, 's_left_right' ],
+			's_left_right_home'       => [ $this, 's_left_right_home' ],
+			's_title_separator'       => [ $this, 's_title_separator' ],
+			's_description_separator' => [ $this, 's_description_separator' ],
+			's_description'           => [ $this, 's_description' ],
+			's_description_raw'       => [ $this, 's_description_raw' ],
+			's_title'                 => [ $this, 's_title' ],
+			's_title_raw'             => [ $this, 's_title_raw' ],
+			's_knowledge_type'        => [ $this, 's_knowledge_type' ],
+			's_alter_query_type'      => [ $this, 's_alter_query_type' ],
+			's_one_zero'              => [ $this, 's_one_zero' ],
+			's_disabled_post_types'   => [ $this, 's_disabled_post_types' ],
+			's_post_types'            => [ $this, 's_post_types' ],
+			's_numeric_string'        => [ $this, 's_numeric_string' ],
+			's_no_html'               => [ $this, 's_no_html' ],
+			's_no_html_space'         => [ $this, 's_no_html_space' ],
+			's_absint'                => [ $this, 's_absint' ],
+			's_safe_html'             => [ $this, 's_safe_html' ],
+			's_url'                   => [ $this, 's_url' ],
+			's_url_query'             => [ $this, 's_url_query' ],
+			's_facebook_profile'      => [ $this, 's_facebook_profile' ],
+			's_twitter_name'          => [ $this, 's_twitter_name' ],
+			's_twitter_card'          => [ $this, 's_twitter_card' ],
+			's_canonical_scheme'      => [ $this, 's_canonical_scheme' ],
+			's_min_max_sitemap'       => [ $this, 's_min_max_sitemap' ],
+		];
 
 		/**
-		 * Applies filters the_seo_framework_available_sanitizer_filters
-		 *
 		 * @since 2.2.2
-		 * @param array $default_filters Array with keys of sanitization types,
+		 * @param array $default_filters Array with keys of sanitization types
 		 *              and values of the filter function name as a callback
 		 */
 		return (array) \apply_filters( 'the_seo_framework_available_sanitizer_filters', $default_filters );
@@ -611,11 +669,11 @@ class Sanitize extends Admin_Pages {
 		if ( $key )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'title_seperator' ); // NOTE: Typo
+		$previous = $this->get_option( 'title_separator' );
 
 		//* Fallback to default if empty.
 		if ( empty( $previous ) )
-			$previous = $this->get_default_option( 'title_seperator' ); // NOTE: Typo
+			$previous = $this->get_default_option( 'title_separator' );
 
 		return (string) $previous;
 	}
@@ -639,7 +697,7 @@ class Sanitize extends Admin_Pages {
 		if ( $key )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'description_separator' );
+		$previous = $this->get_option( 'description_separator' );
 
 		//* Fallback to default if empty.
 		if ( empty( $previous ) )
@@ -712,25 +770,13 @@ class Sanitize extends Admin_Pages {
 	 * Converts multilines to single lines.
 	 *
 	 * @since 2.8.2
+	 * @since 3.1.0 Simplified method.
 	 *
 	 * @param string $new_value The input value with possible multiline.
 	 * @return string The input string without multiple lines.
 	 */
 	public function s_singleline( $new_value ) {
-
-		$new_value = str_replace( array( "\r\n", "\r", "\n" ), "\n", $new_value );
-
-		$lines = explode( "\n", $new_value );
-		$new_lines = array();
-
-		//* Remove line breaks
-		foreach ( $lines as $i => $line ) {
-			//* Don't add empty lines or paragraphs
-			if ( $line && '&nbsp;' !== $line )
-				$new_lines[] = trim( $line ) . ' ';
-		}
-
-		return trim( implode( $new_lines ) );
+		return trim( preg_replace( '/[\p{Zl}\p{Zp}\r\n]+/u', ' ', $new_value ) );
 	}
 
 	/**
@@ -738,21 +784,14 @@ class Sanitize extends Admin_Pages {
 	 *
 	 * @since 2.8.2
 	 * @since 2.9.4 Now no longer fails when first two characters are spaces.
-	 * @see $this->s_nsbp() For converting other spaces prior to using this method.
+	 * @since 3.1.0 1. Now also catches non-breaking spaces.
+	 *              2. Now uses a regex pattern.
 	 *
 	 * @param string $new_value The input value with possible multispaces.
 	 * @return string The input string without duplicated spaces.
 	 */
 	public function s_dupe_space( $new_value ) {
-
-		$i = 0;
-		//* Run twice at most, to catch uneven multiple spaces.
-		do {
-			$new_value = str_replace( '  ', ' ', $new_value );
-			$i++;
-		} while ( $i <= 2 && false !== strpos( $new_value, '  ' ) );
-
-		return $new_value;
+		return preg_replace( '/\p{Zs}{2,}/u', ' ', $new_value );
 	}
 
 	/**
@@ -772,23 +811,22 @@ class Sanitize extends Admin_Pages {
 	 * Sanitizes input excerpt.
 	 *
 	 * @since 2.8.0
-	 * @since 2.8.2 : 1. Added allow_shortcodes parameter.
-	 *                2. Added escape parameter
+	 * @since 2.8.2 : 1. Added $allow_shortcodes parameter.
+	 *                2. Added $escape parameter.
 	 *
-	 * @param string $excerpt the Excerpt.
-	 * @param bool $allow_shortcodes Whether to maintain shortcodes from excerpt.
-	 * @param bool $escape Whether to escape the excerpt.
+	 * @param string $excerpt          The excerpt.
+	 * @param bool   $allow_shortcodes Whether to maintain shortcodes from excerpt.
+	 * @param bool   $escape           Whether to escape the excerpt.
 	 * @return string The escaped Excerpt.
 	 */
 	public function s_excerpt( $excerpt = '', $allow_shortcodes = true, $escape = true ) {
 
 		//* No need to parse an empty excerpt.
-		if ( '' === $excerpt )
-			return '';
+		if ( '' === $excerpt ) return '';
 
 		/**
-		 * Applies filters 'the_seo_framework_allow_excerpt_shortcode_tags' : boolean
 		 * @since 2.6.6.1
+		 * @param bool $allow_shortcodes Whether to allow shortcodes.
 		 */
 		if ( $allow_shortcodes && \apply_filters( 'the_seo_framework_allow_excerpt_shortcode_tags', false ) ) {
 			$excerpt = \wp_strip_all_tags( $excerpt );
@@ -808,8 +846,8 @@ class Sanitize extends Admin_Pages {
 	 * @since 2.8.2
 	 * @see $this->s_excerpt - This is basically a copy without sanitation.
 	 *
-	 * @param string $excerpt the Excerpt.
-	 * @param bool $allow_shortcodes Whether to maintain shortcodes from excerpt.
+	 * @param string $excerpt          The excerpt.
+	 * @param bool   $allow_shortcodes Whether to maintain shortcodes from excerpt.
 	 * @return string The unescaped Excerpt.
 	 */
 	public function s_excerpt_raw( $excerpt = '', $allow_shortcodes = true ) {
@@ -822,7 +860,7 @@ class Sanitize extends Admin_Pages {
 	 * @since 2.5.2
 	 *
 	 * @param string $title The title to escape and beautify.
-	 * @param bool $trim Whether to trim the title from whitespaces.
+	 * @param bool   $trim  Whether to trim the title from whitespaces.
 	 * @return string Escaped and beautified title.
 	 */
 	public function escape_title( $title = '', $trim = true ) {
@@ -886,7 +924,7 @@ class Sanitize extends Admin_Pages {
 		if ( 'person' === $new_value || 'organization' === $new_value )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'knowledge_type' );
+		$previous = $this->get_option( 'knowledge_type' );
 
 		return (string) $previous;
 	}
@@ -905,7 +943,7 @@ class Sanitize extends Admin_Pages {
 		if ( 'left' === $new_value || 'right' === $new_value )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'title_location' );
+		$previous = $this->get_option( 'title_location' );
 
 		//* Fallback if previous is also empty.
 		if ( empty( $previous ) )
@@ -928,7 +966,7 @@ class Sanitize extends Admin_Pages {
 		if ( 'left' === $new_value || 'right' === $new_value )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'home_title_location' );
+		$previous = $this->get_option( 'home_title_location' );
 
 		//* Fallback if previous is also empty.
 		if ( empty( $previous ) )
@@ -952,7 +990,7 @@ class Sanitize extends Admin_Pages {
 				return (string) $new_value;
 				break;
 
-			default :
+			default:
 				return 'in_query';
 				break;
 		}
@@ -967,10 +1005,50 @@ class Sanitize extends Admin_Pages {
 	 * @since 2.8.0 Method is now public.
 	 *
 	 * @param mixed $new_value Should ideally be a 1 or 0 integer passed in.
-	 * @return integer 1 or 0.
+	 * @return int 1 or 0.
 	 */
 	public function s_one_zero( $new_value ) {
 		return (int) (bool) $new_value;
+	}
+
+	/**
+	 * Sanitizes disabled post type entries.
+	 *
+	 * Filters out default post types.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $new_value Should ideally be an array with post type name indexes, and 1 or 0 passed in.
+	 * @return array
+	 */
+	public function s_disabled_post_types( $new_values ) {
+
+		if ( ! is_array( $new_values ) ) return [];
+
+		foreach ( $this->get_forced_supported_post_types() as $forced ) {
+			unset( $new_values[ $forced ] );
+		}
+
+		return $this->s_post_types( $new_values );
+	}
+
+	/**
+	 * Sanitizes generic post type entries.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param mixed $new_value Should ideally be an array with post type name indexes, and 1 or 0 passed in.
+	 * @return array
+	 */
+	public function s_post_types( $new_values ) {
+
+		if ( ! is_array( $new_values ) ) return [];
+
+		foreach ( $new_values as $index => $value ) {
+			$new_values[ $index ] = $this->s_one_zero( $value );
+		}
+
+		return $new_values;
 	}
 
 	/**
@@ -1111,7 +1189,7 @@ class Sanitize extends Admin_Pages {
 		if ( '@' !== substr( $profile, 0, 1 ) )
 			$profile = '@' . $profile;
 
-		return str_replace( array( ' ', "\t" ), '', $profile );
+		return str_replace( [ ' ', "\t" ], '', $profile );
 	}
 
 	/**
@@ -1171,7 +1249,7 @@ class Sanitize extends Admin_Pages {
 		if ( $key )
 			return (string) $new_value;
 
-		$previous = $this->get_field_value( 'twitter_card' );
+		$previous = $this->get_option( 'twitter_card' );
 
 		if ( empty( $previous ) )
 			$previous = $this->get_default_option( 'twitter_card' );
@@ -1220,13 +1298,12 @@ class Sanitize extends Admin_Pages {
 
 			//* URL pattern excluding path.
 			$pattern = '/'
-			         . '((((http)(s)?)?)\:)?' // 1: maybe http: https:
-			         . '(\/\/)?'              // 2: maybe slash slash
-			         . '((www.)?)'            // 3: maybe www.
-			         . '(.*\.[a-zA-Z0-9]*)'   // 4: any legal domain with tld
-			         . '(?:\/)?'              // 5: maybe trailing slash
-			         . '/'
-			         ;
+					 . '((((http)(s)?)?)\:)?' // 1: maybe http: https:
+					 . '(\/\/)?'              // 2: maybe slash slash
+					 . '((www.)?)'            // 3: maybe www.
+					 . '(.*\.[a-zA-Z0-9]*)'   // 4: any legal domain with tld
+					 . '(?:\/)?'              // 5: maybe trailing slash
+					 . '/';
 
 			//* If link is relative, make it full again
 			if ( ! preg_match( $pattern, $url ) ) {
@@ -1235,20 +1312,20 @@ class Sanitize extends Admin_Pages {
 				$path = $url;
 
 				/**
-				 * Applies filters 'the_seo_framework_sanitize_redirect_url' : array
+				 * Filters arguments for sanitation of the redirection URL.
 				 *
 				 * @since 2.8.0
 				 *
 				 * @param array : { 'url' => The full URL built from $path, 'scheme' => The preferred scheme }
 				 * @param string $path the URL path.
 				 */
-				$custom_sanitize = (array) \apply_filters( 'the_seo_framework_sanitize_redirect_args', array(), $path );
+				$custom_sanitize = (array) \apply_filters( 'the_seo_framework_sanitize_redirect_args', [], $path );
 
 				if ( $custom_sanitize ) {
-					$url = $custom_sanitize['url'];
+					$url    = $custom_sanitize['url'];
 					$scheme = $custom_sanitize['scheme'];
 				} else {
-					$url = \trailingslashit( $this->get_homepage_permalink() ) . ltrim( $path, ' /' );
+					$url    = \trailingslashit( $this->get_homepage_permalink() ) . ltrim( $path, ' /' );
 					$scheme = $this->is_ssl() ? 'https' : 'http';
 				}
 
@@ -1260,11 +1337,9 @@ class Sanitize extends Admin_Pages {
 		endif;
 
 		/**
-		 * Applies filters 'the_seo_framework_301_noqueries'
-		 *
 		 * @since 2.5.0
 		 * @since 3.0.6 Now false by default.
-		 * @param bool $noqueries
+		 * @param bool $noqueries Whether to remove query arguments from URLs.
 		 */
 		$noqueries = (bool) \apply_filters( 'the_seo_framework_301_noqueries', false );
 
@@ -1318,12 +1393,13 @@ class Sanitize extends Admin_Pages {
 	 * Replaces non-break spaces with regular spaces.
 	 *
 	 * @since 2.8.2
+	 * @since 3.1.0 Now catches all non-breaking characters.
 	 *
 	 * @param string $new_value String with potentially unwanted nbsp values.
-	 * @return string A spacy string.
+	 * @return string A spacey string.
 	 */
 	public function s_nbsp( $new_value ) {
-		return str_replace( array( '%c2%a0', '&nbsp;' ), ' ', $new_value );
+		return str_replace( [ '&nbsp;', '&#160;', '&#xA0;', "\xc2\xa0" ], ' ', $new_value );
 	}
 
 	/**
@@ -1348,15 +1424,87 @@ class Sanitize extends Admin_Pages {
 	 */
 	public function s_canonical_scheme( $new_value ) {
 
-		$values = array(
+		$accepted_values = [
 			'automatic',
 			'https',
 			'http',
-		);
+		];
 
-		if ( in_array( $new_value, $values, true ) )
+		if ( in_array( $new_value, $accepted_values, true ) )
 			return (string) $new_value;
 
 		return 'automatic';
+	}
+
+	/**
+	 * Sanitizes sitemap's min/max post value.
+	 *
+	 * @since 3.1.0
+	 *
+	 * @param int $new_value Integer with potentially unwanted values.
+	 * @return int A limited integer 1<=R<=50000.
+	 */
+	public function s_min_max_sitemap( $new_value ) {
+
+		$new_value = $this->s_absint( $new_value );
+
+		if ( ! $new_value ) {
+			// We assume something's wrong. Return default value.
+			$new_value = $this->get_default_option( 'sitemap_query_limit' );
+		} elseif ( $new_value < 1 ) {
+			$new_value = 1;
+		} elseif ( $new_value > 50000 ) {
+			$new_value = 50000;
+		}
+
+		return $new_value;
+	}
+
+	/**
+	 * Sanitizeses ID. Mainly removing spaces and coding characters.
+	 *
+	 * Unlike sanitize_key(), it doesn't alter the case nor applies filters.
+	 * It also maintains the '@' character.
+	 *
+	 * @see WordPress Core sanitize_key()
+	 * @since 3.1.0
+	 *
+	 * @param string $id The unsanitized ID.
+	 * @return string The sanitized ID.
+	 */
+	public function sanitize_field_id( $id ) {
+		return preg_replace( '/[^a-zA-Z0-9_\-@]/', '', $id );
+	}
+
+	/**
+	 * Strips all URLs that are placed on new lines. These are prone to be embeds.
+	 *
+	 * This might leave stray line feeds.
+	 * @see $this->s_singleline();
+	 *
+	 * @since 3.1.0
+	 * @see \WP_Embed::autoembed()
+	 *
+	 * @param string $content The content to look for embed.
+	 * @return string $content Without single-lined URLs.
+	 */
+	public function strip_newline_urls( $content ) {
+		return preg_replace( '/^(?!\r|\n)\s*?(https?:\/\/[^\s<>"]+)(\s*)$/mi', '', $content );
+	}
+
+	/**
+	 * Strips all URLs that are placed in paragraphs on their own. These are prone to be embeds.
+	 *
+	 * This might leave stray line feeds.
+	 * @see $this->s_singleline();
+	 *
+	 * @since 3.1.0
+	 * @see \WP_Embed::autoembed()
+	 *
+	 * @param string $content The content to look for embed.
+	 * @return string $content Without the paragraphs containing simple URLs.
+	 */
+	public function strip_paragraph_urls( $content ) {
+		return preg_replace( '/(<p(?: [^>]*)?>\s*)(https?:\/\/[^\s<>"]+)(\s*<\/p>)/i', '', $content );
 	}
 }

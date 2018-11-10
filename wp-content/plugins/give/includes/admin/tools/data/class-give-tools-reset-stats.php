@@ -113,21 +113,41 @@ class Give_Tools_Reset_Stats extends Give_Batch_Export {
 
 				switch ( $type ) {
 					case 'customers':
-						$sql[]           = "DELETE FROM $wpdb->donors WHERE id IN ($ids)";
-						$table_name      = $wpdb->donors;
-						$meta_table_name = $wpdb->donormeta;
-						$sql[]           = "DELETE FROM $table_name WHERE id IN ($ids)";
-						$sql[]           = "DELETE FROM $meta_table_name WHERE donor_id IN ($ids)";
+
+						// Delete all the Give related donor and its meta.
+						$sql[] = "DELETE FROM {$wpdb->donors}";
+						$sql[] = "DELETE FROM {$wpdb->donormeta}";
 						break;
 					case 'forms':
 						$sql[] = "UPDATE {$meta_table['name']} SET meta_value = 0 WHERE meta_key = '_give_form_sales' AND {$meta_table['column']['id']} IN ($ids)";
 						$sql[] = "UPDATE {$meta_table['name']} SET meta_value = 0.00 WHERE meta_key = '_give_form_earnings' AND {$meta_table['column']['id']} IN ($ids)";
 						break;
 					case 'other':
-						$sql[] = "DELETE FROM $wpdb->posts WHERE id IN ($ids)";
-						$sql[] = "DELETE FROM $wpdb->postmeta WHERE post_id IN ($ids)";
-						$sql[] = "DELETE FROM $wpdb->comments WHERE comment_post_ID IN ($ids)";
-						$sql[] = "DELETE FROM $wpdb->commentmeta WHERE comment_id NOT IN (SELECT comment_ID FROM $wpdb->comments)";
+
+						// Delete main entries of forms and donations exists in posts table.
+						$sql[] = "DELETE FROM {$wpdb->posts} WHERE id IN ($ids)";
+
+						// Delete all the meta rows of form exists in form meta table.
+						$sql[] = "DELETE FROM {$wpdb->formmeta}";
+
+						// Delete all the meta rows of donation exists in donation meta table.
+						$sql[] = "DELETE FROM {$wpdb->prefix}give_donationmeta";
+
+						// Delete all the Give related sequential ordering entries for donations.
+						$sql[] = "DELETE FROM {$wpdb->prefix}give_sequential_ordering WHERE payment_id IN ($ids)";
+
+						// Delete all the Give related comments and its meta.
+						$sql[] = "DELETE FROM {$wpdb->give_comments}";
+						$sql[] = "DELETE FROM {$wpdb->give_commentmeta}";
+
+						// Delete all the Give related logs and its meta.
+						$sql[] = "DELETE FROM {$wpdb->prefix}give_logs";
+						$sql[] = "DELETE FROM {$wpdb->logmeta}";
+
+						// Delete all the Give sessions data.
+						$sql[] = "DELETE FROM {$wpdb->prefix}give_sessions";
+
+						// Delete Give related categories and tags data from taxonomy tables.
 						$sql[] = $wpdb->prepare(
 							"
 							DELETE FROM $wpdb->terms
@@ -141,6 +161,7 @@ class Give_Tools_Reset_Stats extends Give_Batch_Export {
 							",
 							array( 'give_forms_category', 'give_forms_tag' )
 						);
+
 						$sql[] = $wpdb->prepare(
 							"
 							DELETE FROM $wpdb->term_taxonomy
@@ -149,6 +170,7 @@ class Give_Tools_Reset_Stats extends Give_Batch_Export {
 							",
 							array( 'give_forms_category', 'give_forms_tag' )
 						);
+
 						break;
 				}
 
@@ -159,7 +181,7 @@ class Give_Tools_Reset_Stats extends Give_Batch_Export {
 				}
 			}
 
-			if ( ! empty( $sql ) ) {
+			if ( is_array( $sql ) && count( $sql ) > 0 ) {
 				foreach ( $sql as $query ) {
 					$wpdb->query( $query );
 				}
@@ -382,6 +404,21 @@ class Give_Tools_Reset_Stats extends Give_Batch_Export {
 		$wpdb->delete( $wpdb->options, array(
 			'option_name' => $key,
 		) );
+	}
+
+	/**
+	 * Unset the properties specific to the donors export.
+	 *
+	 * @since 2.3.0
+	 *
+	 * @param array $request
+	 * @param Give_Batch_Export $export
+	 */
+	public function unset_properties( $request, $export ) {
+		if ( $export->done ) {
+			// Delete all the donation ids.
+			$this->delete_data( 'give_temp_reset_ids' );
+		}
 	}
 
 }

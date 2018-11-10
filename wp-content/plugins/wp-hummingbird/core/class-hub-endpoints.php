@@ -16,7 +16,7 @@ class WP_Hummingbird_Hub_Endpoints {
 	 *
 	 * @var array
 	 */
-	private $endpoints = array( 'get', 'performance' );
+	private $endpoints = array( 'get', 'performance', 'enable', 'disable' );
 
 	/**
 	 * Hub Endpoints Initialize
@@ -128,12 +128,12 @@ class WP_Hummingbird_Hub_Endpoints {
 		} elseif ( ! $module->is_active() ) {
 			$result['minify'] = new WP_Error( 'minify-disabled', 'Asset Optimization module not activated' );
 		} else {
-			$original_size_styles  = array_sum( wp_list_pluck( $collection['styles'], 'original_size' ) );
-			$original_size_scripts = array_sum( wp_list_pluck( $collection['scripts'], 'original_size' ) );
+			$original_size_styles  = WP_Hummingbird_Utils::calculate_sum( wp_list_pluck( $collection['styles'], 'original_size' ) );
+			$original_size_scripts = WP_Hummingbird_Utils::calculate_sum( wp_list_pluck( $collection['scripts'], 'original_size' ) );
 			$original_size = $original_size_scripts + $original_size_styles;
 
-			$compressed_size_styles  = array_sum( wp_list_pluck( $collection['styles'], 'compressed_size' ) );
-			$compressed_size_scripts = array_sum( wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
+			$compressed_size_styles  = WP_Hummingbird_Utils::calculate_sum( wp_list_pluck( $collection['styles'], 'compressed_size' ) );
+			$compressed_size_scripts = WP_Hummingbird_Utils::calculate_sum( wp_list_pluck( $collection['scripts'], 'compressed_size' ) );
 			$compressed_size = $compressed_size_scripts + $compressed_size_styles;
 
 			if ( ( $original_size_scripts + $original_size_styles ) <= 0 ) {

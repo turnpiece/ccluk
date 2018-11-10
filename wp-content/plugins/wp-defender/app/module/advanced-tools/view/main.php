@@ -58,7 +58,9 @@
                             <li>
                                 <div>
                                     <span class="list-label">
-                                        <?php echo $detail['name'] ?>
+                                        <label for="toggle_<?php echo esc_attr( $role ) ?>_role" role="checkbox" aria-checked="<?php echo in_array( $role, $enabledRoles ) ? 'true' : 'false' ?>">
+                                            <?php echo $detail['name'] ?>
+                                        </label>
                                     </span>
                                     <div class="list-detail">
                                     <span class="toggle">
@@ -112,6 +114,20 @@
                     <span class="form-help"><?php _e( "Note: Users will be forced to set up two-factor when they next login.", wp_defender()->domain ) ?></span>
                     <div class="well well-white <?php echo $settings->forceAuth == false ? 'is-hidden' : null ?>">
                         <p>
+                            <span class="form-help"><strong><?php _e( "User Roles", wp_defender()->domain ) ?></strong></span>
+                        </p>
+                        <ul>
+							<?php
+							$forceAuthRoles = $settings->forceAuthRoles;
+                            foreach ( $allRoles as $role => $detail ):
+								?>
+                                <li>
+                                    <input id="forceAuth<?php echo esc_attr($role) ?>" type="checkbox" name="forceAuthRoles[]" value="<?php echo esc_attr( $role ) ?>" <?php echo in_array( $role, $forceAuthRoles ) ? 'checked="checked"' : null ?> />
+                                    <label for="forceAuth<?php echo esc_attr($role) ?>"><?php echo $detail['name'] ?></label>
+                                </li>
+							<?php endforeach; ?>
+                        </ul>
+                        <p>
                             <span class="form-help"><strong><?php _e( "Custom warning message", wp_defender()->domain ) ?></strong></span>
                         </p>
                         <textarea name="forceAuthMess"><?php echo $settings->forceAuthMess ?></textarea>
@@ -160,13 +176,14 @@
                     </span>
                 </div>
                 <div class="column">
-                  <div class="well well-white">
-                    <div class="box-title">
-                        <strong><?php _e( 'Email', wp_defender()->domain );?></strong>
+                    <div class="well well-white">
+                        <div class="box-title">
+                            <strong><?php _e( 'Email', wp_defender()->domain ); ?></strong>
+                        </div>
+                        <div class="line"><?php _e( 'Lost phone one time password', wp_defender()->domain ); ?></div>
+                        <span class="pull-right"><span class="span-icon icon-edit change-one-time-pass-email"
+                                                       tooltip="Edit"></span></span>
                     </div>
-                    <div class="line"><?php _e( 'Lost phone one time password', wp_defender()->domain );?></div>
-                    <span class="pull-right"><span class="span-icon icon-edit change-one-time-pass-email" tooltip="Edit"></span></span>
-                  </div>
                 </div>
             </div>
             <div class="columns">

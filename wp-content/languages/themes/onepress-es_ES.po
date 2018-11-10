@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the Themes - OnePress package.
 msgid ""
 msgstr ""
-"PO-Revision-Date: 2018-06-01 21:21:00+0000\n"
+"PO-Revision-Date: 2018-10-16 08:50:24+0000\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
@@ -12,60 +12,242 @@ msgstr ""
 "Project-Id-Version: Themes - OnePress\n"
 
 #. Description of the plugin/theme
-msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : http://www.famethemes.com/preview/?theme=OnePress)"
-msgstr "OnePress es un excepcional tema de WordPress de única página creativo y flexible muy apto para sitios de negocios, portafolios, agencia digital, muestrario de productos, autónomos y cualquier que aprecie el buen diseño. Es un diseño clásico y elegante en general, un buen ejemplo de tema de WordPress en Bootstrap 4 con compatibilidad con WooCommerce. (Vista previa en vivo: http://www.famethemes.com/preview/?theme=OnePress)"
+msgid "OnePress is an outstanding creative and flexible WordPress one page theme well suited for business website, portfolio, digital agency, product showcase, freelancers and everyone else who appreciate good design. The theme overall is an elegant and classic one, a fine example of Bootstrap 4 WordPress theme which compatibility with latest version of WooCommerce. (Live preview : https://demos.famethemes.com/onepress)"
+msgstr "OnePress es un excepcional tema de WordPress de única página creativo y flexible muy apto para sitios de negocios, portafolios, agencia digital, muestrario de productos, autónomos y cualquier que aprecie el buen diseño. Es un diseño clásico y elegante en general, un buen ejemplo de tema de WordPress en Bootstrap 4 con compatibilidad con WooCommerce. (Vista previa en vivo: https://demos.famethemes.com/onepress)"
 
-#. #-#-#-#-#  onepress.pot (OnePress 2.0.8)  #-#-#-#-#
 #. Theme Name of the plugin/theme
-#: inc/dashboard.php:424
 msgid "OnePress"
 msgstr "OnePress"
 
-#: inc/dashboard.php:457
+#: inc/customize-configs/options-single.php:46
+msgid "Enter content max width number, e.g : 800"
+msgstr "Introduce el número del ancho máximo para el contenido, p.ej.: 800"
+
+#: inc/customize-configs/options-single.php:45
+msgid "Single Content Max Width"
+msgstr "Ancho máximo para el contenido de entrada simple"
+
+#: inc/customize-configs/options-single.php:30
+msgid "Right Sidebar"
+msgstr "Barra lateral derecha"
+
+#: inc/customize-configs/options-single.php:28
+msgid "No Sidebar"
+msgstr "Sin barra lateral"
+
+#: inc/customize-configs/options-single.php:24
+msgid "Single Layout Sidebar"
+msgstr "Barra lateral para estructura simple"
+
+#: inc/customize-configs/options-blog-posts.php:26
+msgid "Disable archive prefix"
+msgstr "Desactivar prefijo del archivo"
+
+#: inc/class-sections-navigation.php:138
+msgid "Label Color"
+msgstr "Color de la etiqueta"
+
+#: inc/class-sections-navigation.php:125
+msgid "Label Background"
+msgstr "Fondo de la etiqueta"
+
+#: inc/class-config.php:88
+msgid "Testimonials"
+msgstr "Recomendaciones"
+
+#: inc/class-config.php:87
+msgid "Section: Testimonials"
+msgstr "Sección: Testimonios"
+
+#: inc/class-config.php:82
+msgid "Highlight Projects"
+msgstr "Proyectos destacados"
+
+#: inc/class-config.php:81
+msgid "Section: Projects"
+msgstr "Sección: Proyectos"
+
+#: inc/class-config.php:76
+msgid "Pricing Table"
+msgstr "Tabla de precios"
+
+#: inc/class-config.php:75
+msgid "Section: Pricing"
+msgstr "Sección: Precios"
+
+#: inc/class-config.php:70
+msgid "Map"
+msgstr "Mapa"
+
+#: inc/class-config.php:69
+msgid "Section: Map"
+msgstr "Sección: Mapa"
+
+#: inc/class-config.php:63
+msgid "Section: Call to Action"
+msgstr "Sección: Llamada a la acción"
+
+#: inc/class-config.php:58
+msgid "Our Clients"
+msgstr "Nuestros clientes"
+
+#: inc/class-config.php:57
+msgid "Section: Clients"
+msgstr "Sección: Clientes"
+
+#: inc/class-config.php:50
+msgid "Section: Slider"
+msgstr "Sección: Carrusel"
+
+#: inc/admin/dashboard.php:239
+msgid "Demo Import"
+msgstr "Importar demo"
+
+#: inc/admin/dashboard.php:234
+msgid "Overview"
+msgstr "Vistazo rápido"
+
+#: inc/admin/dashboard.php:172
+msgid "Disable (or enable) unused sections to improve Customizer loading speed. Your section settings is still saved."
+msgstr "Desactiva (o activa) las secciones que no uses para mejorar la velocidad de carga de Customizer. Los ajustes de tu sección se han guardado."
+
+#: inc/admin/dashboard.php:171
+msgid "Customizer Section Manager"
+msgstr "Gestor de secciones de Customizer"
+
+#: inc/admin/dashboard.php:166
+msgid "Settings saved"
+msgstr "Ajustes guardados"
+
+#: inc/admin/dashboard.php:147
+msgid "Plus Feature"
+msgstr "Característica adicional"
+
+#: functions.php:102
+msgid "Contact Form by WPForms"
+msgstr "Contact Form de WPForms"
+
+#: inc/extras.php:386
+msgctxt "daily archives date format"
+msgid "F j, Y"
+msgstr "j \\d\\e F, Y"
+
+#: inc/extras.php:384
+msgctxt "monthly archives date format"
+msgid "F Y"
+msgstr "F Y"
+
+#: inc/extras.php:382
+msgctxt "yearly archives date format"
+msgid "Y"
+msgstr "Y"
+
+#: inc/customizer.php:26
+msgid "<h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
+msgstr "<h4 class=\"customizer-group-heading-message\">Estilo avanzado de las secciones</h4><p class=\"customizer-group-heading-message\">La versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> ofrece control completo sobre el diseño de las secciones incluyendo color, imagen, video, efecto parallax, estilo personalizado y más...</p>"
+
+#: inc/customize-configs/section-news.php:283
+msgid "Custom More News link"
+msgstr "Enlace Más noticias personalizado"
+
+#: inc/customize-configs/section-news.php:265
+msgid "More News Page"
+msgstr "Página Más noticias"
+
+#: inc/customize-configs/section-news.php:150
+msgid "Full content"
+msgstr "Contenido completo"
+
+#: inc/customize-configs/section-news.php:149
+msgid "Strip excerpt by more tag"
+msgstr "Cortar el extracto por la etiqueta more"
+
+#: inc/customize-configs/section-news.php:148
+msgid "Use excerpt metabox"
+msgstr "Usar la metabox de extracto"
+
+#: inc/customize-configs/section-news.php:147
+msgid "Custom"
+msgstr "Personalizado"
+
+#: inc/customize-configs/section-news.php:143
+#: inc/customize-configs/section-news.php:167
+msgid "Custom excerpt length"
+msgstr "Longitud de extracto personalizada"
+
+#: inc/customize-configs/section-news.php:125
+msgid "Hide post categories"
+msgstr "Ocultar categorías de la publicación"
+
+#: inc/customize-configs/options-sections-navigation.php:9
+msgid "Sections Navigation"
+msgstr "Navegación de secciones"
+
+#: inc/customize-configs/options-blog-posts.php:28
+msgid "Check this to disable archive prefix on category, date, tag page."
+msgstr "Marca esto para quitar el prefijo de archivo de las páginas de categoría, fecha y etiqueta."
+
+#: inc/customize-configs/options-blog-posts.php:11
+msgid "Blog Posts"
+msgstr "Entradas de blog"
+
+#: inc/class-sections-navigation.php:208
+msgid "Custom navigation label"
+msgstr "Etiqueta de navegación personalizada"
+
+#: inc/class-sections-navigation.php:192
+msgid "Inverse dots color"
+msgstr "Invertir el color de los puntos"
+
+#: inc/class-sections-navigation.php:112
+msgid "Dots inverse color"
+msgstr "Color de los puntos invertido"
+
+#: inc/class-sections-navigation.php:98
+msgid "Dots color"
+msgstr "Color de los puntos"
+
+#: inc/class-sections-navigation.php:84
+msgid "By default navigation label is section title."
+msgstr "Por defecto la etiqueta de navegación es el título de la sección."
+
+#: inc/class-sections-navigation.php:83
+msgid "Enable navigation labels"
+msgstr "Activar las etiquetas de navegación"
+
+#: inc/class-sections-navigation.php:69 inc/class-sections-navigation.php:177
+msgid "Enable in section navigation"
+msgstr "Activar en la navegación de secciones"
+
+#: inc/class-config.php:111
+msgid "Home"
+msgstr "Inicio"
+
+#: inc/admin/dashboard.php:272
 msgid "Create a support ticket"
 msgstr "Crear un ticket de soporte"
 
-#: inc/dashboard.php:81
-msgid "Don't show this again"
-msgstr "No volver a mostrar esto"
-
-#: inc/dashboard.php:80
-msgid "Install Customify Now"
-msgstr "Instala Customify"
-
-#: inc/dashboard.php:78
-msgid "Customify is both a WordPress Theme and a WordPress Theme Editor. It’s a powerful styling platform that ensures exceptional design control over your website’s looks and feel. The most highlight feature is the <strong>comprehensive Header & Footer builder</strong>."
-msgstr "Customify es tanto un tema de WordPress como un editor de temas de WordPress. Es una plataforma de diseño que asegura un control excepcional sobre la apariencia de tu web. La característica más destacada es su completo <strong>constructor de cabecera y pie</strong>."
-
-#: inc/dashboard.php:77
-msgid "Meet Customify - the improved version of OnePress theme by the same team!"
-msgstr "Descubre Customify - ¡la versión mejorada del tema OnePress realizada por el mismo equipo!"
-
-#: inc/customizer.php:526
+#: inc/customize-configs/options-header.php:282
 msgid "Transparent Logo Height in Pixel"
 msgstr "Altura en píxeles del logo transparente"
 
-#: inc/customizer.php:1717
+#: inc/customize-configs/section-hero.php:542
 msgid "Open Button #2 In New Window"
 msgstr "Abrir botón #2 en una ventana nueva"
 
-#: inc/customizer.php:1651
+#: inc/customize-configs/section-hero.php:476
 msgid "Open Button #1 In New Window"
 msgstr "Abrir botón #1 en una ventana nueva"
-
-#: functions.php:102
-msgid "Pirate Forms"
-msgstr "Pirate Forms"
 
 #: inc/metabox.php:173
 msgid "Apply header cover settings for single product."
 msgstr "Aplicar ajustes de portada para producto único."
 
-#: inc/dashboard.php:581
+#: inc/admin/dashboard.php:393
 msgid "Keep %s updated"
 msgstr "Mantener %s actualizado"
 
-#: inc/dashboard.php:502
+#: inc/admin/dashboard.php:314
 msgid "Your settings were copied."
 msgstr "Tus ajustes fueron copiados."
 
@@ -93,11 +275,11 @@ msgstr "Ocultar cabecera."
 msgid "Hide breadcrumb."
 msgstr "Ocultar migas de pan."
 
-#: inc/customizer.php:391
+#: inc/customize-configs/options-header.php:147
 msgid "Only set if display site tagline."
 msgstr "Establécelo únicamente si muestras la descripción corta del sitio."
 
-#: inc/customizer.php:389
+#: inc/customize-configs/options-header.php:145
 msgid "Site Tagline Color"
 msgstr "Color de la descripción corta"
 
@@ -109,7 +291,7 @@ msgstr "Ancho completo - Contenido limitado"
 msgid "Full Width - Stretched Content"
 msgstr "Ancho completo - Contenido extendido"
 
-#: inc/sanitize.php:240
+#: inc/sanitize.php:252
 msgid "Upgrade to %1s to unlock this feature."
 msgstr "Actualizar a %1s para desbloquear esta característica."
 
@@ -117,296 +299,306 @@ msgstr "Actualizar a %1s para desbloquear esta característica."
 msgid "Page Settings"
 msgstr "Ajustes de página"
 
-#: inc/dashboard.php:782
+#: inc/admin/dashboard.php:594
 msgid "Get OnePress Plus now!"
 msgstr "¡Obtener OnePress Plus ahora!"
 
-#: inc/dashboard.php:427
+#: inc/admin/dashboard.php:237
 msgid "Free vs PLUS"
 msgstr "Gratis vs PLUS"
 
-#: inc/dashboard.php:425
+#: inc/admin/dashboard.php:235
 msgid "Recommended Actions"
 msgstr "Acciones recomendadas"
 
-#: inc/customizer.php:3640
+#: inc/customize-configs/section-upsell.php:38
 msgid "OnePress Plus Available! Take a look"
 msgstr "¡OnePress Plus disponible! Echa un vistazo"
 
-#: inc/customizer.php:3630
+#: inc/customize-configs/section-upsell.php:28
 msgid "<h4 class=\"customizer-group-heading-message\">Drag &amp; Drop Section Orders</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the frontpage SECTIONS ORDER!</p><h4 class=\"customizer-group-heading-message\">Advanced Section Styling</h4><p class=\"customizer-group-heading-message\">Check out the <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version for full control over the section styling which includes background color, image, video, parallax effect, custom style and more ...</p>"
 msgstr "<h4 class=\"customizer-group-heading-message\">Ordenar secciones con arrastrar y soltar</h4><p class=\"customizer-group-heading-message\">¡Mira la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> con un control completo sobre las secciones de la portada!</p><h4 class=\"customizer-group-heading-message\">Apariencia avanzada de las secciones</h4><p class=\"customizer-group-heading-message\">Mira la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> con un control absoluto sobre la apariencia de las secciones, incluyendo, color de fondo, imagen, video, efecto parallax, estilos personalizados y más...</p>"
 
-#: inc/customizer.php:3314
+#: inc/customize-configs/section-news.php:247
 msgid "Ascending"
 msgstr "Ascendente"
 
-#: inc/customizer.php:3313
+#: inc/customize-configs/section-news.php:246
 msgid "Descending"
 msgstr "Descendente"
 
-#: inc/customizer.php:3309
+#: inc/customize-configs/section-news.php:242
 msgid "Order"
 msgstr "Orden "
 
-#: inc/customizer.php:3294
+#: inc/customize-configs/section-news.php:227
 msgid "Random order"
 msgstr "Orden aleatorio"
 
-#: inc/customizer.php:3293
+#: inc/customize-configs/section-news.php:226
 msgid "Order by Page Order"
 msgstr "Ordenar por orden de página"
 
-#: inc/customizer.php:3292
+#: inc/customize-configs/section-news.php:225
 msgid "Comment Count"
 msgstr "Número de comentarios"
 
-#: inc/customizer.php:3291
+#: inc/customize-configs/section-news.php:224
 msgid "Date"
 msgstr "Fecha"
 
-#: inc/customizer.php:3289
+#: inc/customize-configs/section-news.php:222
 msgid "Author"
 msgstr "Autor"
 
-#: inc/customizer.php:3288
+#: inc/customize-configs/section-news.php:221
 msgid "ID"
 msgstr "ID"
 
-#: inc/customizer.php:3287
+#: inc/customize-configs/options-single.php:27
+#: inc/customize-configs/section-news.php:220
 msgid "Default"
 msgstr "Predeterminado"
 
-#: inc/customizer.php:3283
+#: inc/customize-configs/section-news.php:216
 msgid "Order By"
 msgstr "Ordenar por"
 
-#: inc/customizer.php:3267
+#: inc/customize-configs/section-news.php:200
 msgid "Category to show"
 msgstr "Categoría que mostrar"
 
-#: inc/customizer.php:2799
+#: inc/customize-configs/section-services.php:214
 msgid "1x"
 msgstr "1x"
 
-#: inc/customizer.php:2798
+#: inc/customize-configs/section-services.php:213
 msgid "2x"
 msgstr "2x"
 
-#: inc/customizer.php:2797
+#: inc/customize-configs/section-services.php:212
 msgid "3x"
 msgstr "3x"
 
-#: inc/customizer.php:2796
+#: inc/customize-configs/section-services.php:211
 msgid "4x"
 msgstr "4x"
 
-#: inc/customizer.php:2795
+#: inc/customize-configs/section-services.php:210
 msgid "5x"
 msgstr "5x"
 
-#: inc/customizer.php:2790
+#: inc/customize-configs/section-services.php:205
 msgid "Icon Size"
 msgstr "Tamaño de icono"
 
-#: inc/customizer.php:2288
+#: inc/customize-configs/section-about.php:112
 msgid "Layout Settings"
 msgstr "Ajustes de estructura"
 
-#: inc/customizer.php:1568
+#: inc/customize-configs/section-hero.php:393
 msgid "Rotating Text Background"
 msgstr "Fondo del texto rotatorio"
 
-#: inc/customizer.php:1553
+#: inc/customize-configs/section-hero.php:378
 msgid "Rotating Text Color"
 msgstr "Color del texto rotatorio"
 
-#: inc/customizer.php:1529
+#: inc/customize-configs/section-hero.php:354
 msgid "We are <span class=\"js-rotating\">OnePress | One Page | Responsive | Perfection</span>"
 msgstr "Somos <span class=\"js-rotating\">OnePress | One Page | Adaptables | Perfección</span>"
 
-#: inc/customizer.php:1486
+#: inc/customize-configs/section-hero.php:311
 msgid "Want to add <strong>background video</strong> for hero section? Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> version."
 msgstr "¿Quieres añadir un <strong>video de fondo</strong> para la sección hero? Actualiza a la versión <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a>."
 
-#: inc/customizer.php:1255
+#: inc/customize-configs/section-hero.php:81
 msgid "Disable Preload Icon"
 msgstr "Desactivar el icono de precarga"
 
-#: inc/customizer.php:1080
+#: inc/customize-configs/options-footer.php:332
 msgid "Footer Copyright"
 msgstr "Copyright del pie"
 
-#: inc/customizer.php:1067 inc/customizer.php:1134
+#: inc/customize-configs/options-footer.php:320
+#: inc/customize-configs/options-footer.php:386
 msgid "Link Hover Color"
 msgstr "Color de enlace al pasar"
 
-#: inc/customizer.php:1051 inc/customizer.php:1121
+#: inc/customize-configs/options-footer.php:304
+#: inc/customize-configs/options-footer.php:373
 msgid "Link Color"
 msgstr "Color de enlace"
 
-#: inc/customizer.php:1034
+#: inc/customize-configs/options-footer.php:287
 msgid "Widget Title Color"
 msgstr "Color de título de widget"
 
-#: inc/customizer.php:985
+#: inc/customize-configs/options-footer.php:238
 msgid "Enter int numbers and sum of them must smaller or equal 12, separated by \"+\""
 msgstr "Introduce números enteros que sumen 12 o menos, separados por \"+\""
 
-#: inc/customizer.php:983
+#: inc/customize-configs/options-footer.php:236
 msgid "Custom footer %s columns width"
 msgstr "Ancho personalizado de columna de pie %s"
 
-#: inc/customizer.php:983
+#: inc/customize-configs/options-footer.php:236
 msgid "Custom footer 1 column width"
 msgstr "Ancho personalizado de columna de pie 1"
 
-#: inc/customizer.php:959
+#: inc/customize-configs/options-footer.php:212
 msgid "Disable footer widgets"
 msgstr "Desactivar widgets del pie"
 
-#: inc/customizer.php:953
+#: inc/customize-configs/options-footer.php:206
 msgid "Number footer columns to display."
 msgstr "Número de columnas que mostrar en el pie."
 
-#: inc/customizer.php:933
+#: inc/customize-configs/options-footer.php:186
 msgid "Footer Widgets"
 msgstr "Widgets del pie"
 
-#: inc/customizer.php:918 inc/customizer.php:1001 inc/customizer.php:1108
+#: inc/customize-configs/options-footer.php:174
+#: inc/customize-configs/options-footer.php:254
+#: inc/customize-configs/options-footer.php:360
 msgid "Text Color"
 msgstr "Color de texto"
 
-#: inc/customizer.php:822 inc/customizer.php:2334 inc/customizer.php:2530
-#: inc/customizer.php:2743 inc/customizer.php:2931 inc/customizer.php:3109
+#: inc/customize-configs/options-footer.php:78
+#: inc/customize-configs/section-about.php:159
+#: inc/customize-configs/section-counter.php:131
+#: inc/customize-configs/section-features.php:156
+#: inc/customize-configs/section-services.php:158
+#: inc/customize-configs/section-team.php:153
 msgid "Upgrade to <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> to be able to add more items and unlock other premium features!"
 msgstr "¡Mejora a <a target=\"_blank\" href=\"https://www.famethemes.com/plugins/onepress-plus/?utm_source=theme_customizer&utm_medium=text_link&utm_campaign=onepress_customizer#get-started\">OnePress Plus</a> para poder añadir más elementos y desbloquear funciones premium!"
 
-#: inc/customizer.php:750
+#: inc/customize-configs/options-footer.php:6
 msgid "Footer Socials"
 msgstr "Sociales del pie"
 
-#: inc/customizer.php:696
+#: inc/customize-configs/options-page.php:110
 msgid "Right"
 msgstr "Derecha"
 
-#: inc/customizer.php:695
+#: inc/customize-configs/options-page.php:109
 msgid "Left"
 msgstr "Izquierda"
 
-#: inc/customizer.php:694
+#: inc/customize-configs/options-page.php:108
 msgid "Center"
 msgstr "Centro"
 
-#: inc/customizer.php:690
+#: inc/customize-configs/options-page.php:104
 msgid "Content Align"
 msgstr "Alineación del contenido"
 
-#: inc/customizer.php:657
+#: inc/customize-configs/options-page.php:71
 msgid "Color"
 msgstr "Color"
 
-#: inc/customizer.php:641
+#: inc/customize-configs/options-page.php:55
 msgid "The page cover padding bottom in percent (%)."
 msgstr "Relleno inferior de la portada en porcentaje (%)."
 
-#: inc/customizer.php:640
+#: inc/customize-configs/options-page.php:54
 msgid "Padding Bottom"
 msgstr "Relleno inferior"
 
-#: inc/customizer.php:626
+#: inc/customize-configs/options-page.php:40
 msgid "The page cover padding top in percent (%)."
 msgstr "Relleno superior de la portada en porcentaje (%)."
 
-#: inc/customizer.php:625
+#: inc/customize-configs/options-page.php:39
 msgid "Padding Top"
 msgstr "Relleno superior"
 
-#: inc/customizer.php:612
+#: inc/customize-configs/options-page.php:26
 msgid "Check this box to disable the page title bar on all pages."
 msgstr "Marca esta casilla para desactivar el título de página en todas las páginas."
 
-#: inc/customizer.php:610
+#: inc/customize-configs/options-page.php:24
 msgid "Disable Page Title bar?"
 msgstr "¿desactivar la barra de título de las páginas?"
 
-#: inc/customizer.php:594
+#: inc/customize-configs/options-page.php:8
 msgid "Page Title Area"
 msgstr "Área del título de página"
 
-#: inc/customizer.php:584
+#: inc/customize-configs/options-navigation.php:22
 msgid "Padding left and right for Navigation items (pixels)."
 msgstr "Relleno izquierdo y derecho de los elementos de navegación (píxeles)."
 
-#: inc/customizer.php:583
+#: inc/customize-configs/options-navigation.php:21
 msgid "Menu Item Padding"
 msgstr "Margen interior de elementos del menú"
 
-#: inc/customizer.php:569
+#: inc/customize-configs/options-navigation.php:7
 msgid "Navigation"
 msgstr "Navegación"
 
-#: inc/customizer.php:557
+#: inc/customize-configs/options-header.php:313
 msgid "Transparent Site Tagline Color"
 msgstr "Color del eslogan transparente del sitio"
 
-#: inc/customizer.php:541
+#: inc/customize-configs/options-header.php:297
 msgid "Transparent Site Title Color"
 msgstr "Color del título transparente del sitio"
 
-#: inc/customizer.php:508
+#: inc/customize-configs/options-header.php:264
 msgid "Transparent Retina Logo"
 msgstr "Logo retina transparente"
 
-#: inc/customizer.php:490 inc/customizer.php:509
+#: inc/customize-configs/options-header.php:246
+#: inc/customize-configs/options-header.php:265
 msgid "Only apply when transparent header option is checked."
 msgstr "Sólo se aplica cuando está seleccionada la opción de cabecera transparente."
 
-#: inc/customizer.php:488
+#: inc/customize-configs/options-header.php:244
 msgid "Transparent Logo"
 msgstr "Logo transparente"
 
-#: inc/customizer.php:294
+#: inc/customize-configs/options-header.php:51
 msgid "Below Hero Slider"
 msgstr "Carrusel bajo el hero"
 
-#: inc/customizer.php:293
+#: inc/customize-configs/options-header.php:50
 msgid "Top"
 msgstr "Arriba"
 
-#: inc/customizer.php:290
+#: inc/customize-configs/options-header.php:47
 msgid "Header Position"
 msgstr "Posición de la cabecera"
 
-#: inc/customizer.php:272
+#: inc/customize-configs/options-header.php:29
 msgid "Contained"
 msgstr "Limitado"
 
-#: inc/customizer.php:268
+#: inc/customize-configs/options-header.php:25
 msgid "Header Width"
 msgstr "Ancho de la cabecera"
 
-#: inc/customizer.php:218
+#: inc/customize-configs/options-global.php:83
 msgid "Check this if you want to disable default google fonts in theme."
 msgstr "Marca esto si quieres desactivar las fuentes de Google predeterminadas del tema."
 
-#: inc/customizer.php:216
+#: inc/customize-configs/options-global.php:81
 msgid "Disable Google Fonts"
 msgstr "Desactivar Google Fonts"
 
-#: inc/customizer.php:119
+#: inc/customize-configs/site-identity.php:70
 msgid "Logo Height In Pixel"
 msgstr "Altura del logo en pixels"
 
-#: inc/customizer.php:101
+#: inc/customize-configs/site-identity.php:52
 msgid "Retina Logo"
 msgstr "Logo retina"
 
-#: inc/customizer-controls.php:632
+#: inc/customize-controls/control-category.php:28
 msgid "All"
 msgstr "Todo"
 
-#: functions.php:165
+#: functions.php:183
 msgid "Footer %s"
 msgstr "%s del pie"
 
@@ -414,123 +606,124 @@ msgstr "%s del pie"
 msgid "One thought on &ldquo;%2$s&rdquo;"
 msgstr "Un comentario en &ldquo;%2$s&rdquo;"
 
-#: inc/customizer.php:741
+#: inc/customize-configs/options-single.php:79
 msgid "Check this box to show single post meta such as post date, author, category,..."
 msgstr "Marca esta casilla para mostrar los metadatos de la entrada como la fecha de la entrada, autor, categoría,..."
 
-#: inc/customizer.php:739
+#: inc/customize-configs/options-single.php:77
 msgid "Show single post meta"
 msgstr "Mostrar metadatos de la entrada"
 
-#: inc/customizer.php:726
+#: inc/customize-configs/options-single.php:64
 msgid "Check this box to show post thumbnail on single post."
 msgstr "Marca esta casilla para mostrar la miniatura en la entrada simple."
 
-#: inc/customizer.php:724
+#: inc/customize-configs/options-single.php:62
 msgid "Show single post thumbnail"
 msgstr "Mostrar miniatura de la entrada"
 
-#: inc/customizer.php:709
+#: inc/customize-configs/options-single.php:8
 msgid "Single Post"
 msgstr "Entrada simple"
 
-#: inc/customizer.php:1378
+#: inc/customize-configs/section-hero.php:203
 msgid "The amount of time in between slides, expressed as the number of milliseconds."
 msgstr "Total de tiempo entre diapositivas, expresado en milisegundos."
 
-#: inc/customizer.php:1377
+#: inc/customize-configs/section-hero.php:202
 msgid "Slider duration speed"
 msgstr "Velocidad de la diapositiva"
 
-#: inc/customizer.php:1361
+#: inc/customize-configs/section-hero.php:186
 msgid "This is the speed at which the image will fade in. Integers in milliseconds are accepted."
 msgstr "Esta es la velocida a la que la imágen se desvanecerá. Se aceptan los números como milisegundos."
 
-#: inc/customizer.php:1360
+#: inc/customize-configs/section-hero.php:185
 msgid "Slider animation speed"
 msgstr "Velocidad de animación de la diapositiva"
 
-#: inc/customizer.php:1342
+#: inc/customize-configs/section-hero.php:167
 msgid "Text animation speed"
 msgstr "Velocidad de animación del texto"
 
-#: inc/dashboard.php:479
+#: inc/admin/dashboard.php:292
 msgid "Child theme uses it's own theme setting name, would you like to copy setting data from parent theme to this child theme?"
 msgstr "El tema hijo utiliza su propio ajustes de tema, ¿te gustaría copiar los datos de ajustes del tema padre para este tema hijo?"
 
-#: inc/customizer.php:3697
+#: inc/customizer.php:197
 msgid "Font Awesome"
 msgstr "Font Awesome"
 
-#: inc/customizer.php:3693
+#: inc/customizer.php:193
 msgid "Search"
 msgstr "Buscar"
 
-#: inc/dashboard.php:860
+#: inc/admin/dashboard.php:672
 msgid "Are you sure want to copy ?"
 msgstr "¿Estás seguro de que quieres copiar?"
 
-#: inc/dashboard.php:519
+#: inc/admin/dashboard.php:331
 msgid "Recommend Plugins"
 msgstr "Plugins recomendados"
 
-#: inc/dashboard.php:499
+#: inc/admin/dashboard.php:311
 msgid "Copy now"
 msgstr "Copiar ahora"
 
-#: inc/dashboard.php:491
+#: inc/admin/dashboard.php:303
 msgid "To Theme"
 msgstr "Al tema"
 
-#: inc/dashboard.php:485
+#: inc/admin/dashboard.php:297
 msgid "From Theme"
 msgstr "Desde el tema"
 
-#: inc/dashboard.php:477
+#: inc/admin/dashboard.php:290
 msgid "You're using %1$s theme, It's a child theme of OnePress"
 msgstr "Estás utilizando el tema %1$s, es un tema hijo de OnePress"
 
-#: inc/dashboard.php:331
+#: inc/admin/dashboard.php:740
 msgid "Details"
 msgstr "Detalles"
 
-#: inc/dashboard.php:259
+#: inc/admin/dashboard.php:118
 msgid "Import Demo Data"
 msgstr "Importar datos de la demo"
 
-#: inc/dashboard.php:259
+#: inc/admin/dashboard.php:118
 msgid "Save time by import our demo data, your website will be set up and ready to customize in minutes. %s"
 msgstr "Ahorra tiempo importando los datos de nuestra demo, tu sitio web estará configurado y listo para ser personalizado en minutos. %s"
 
-#: inc/customizer.php:2170
+#: inc/customize-configs/section-gallery.php:309
 msgid "Read More Text"
 msgstr "Texto leer más"
 
-#: inc/customizer.php:2165 section-parts/section-gallery.php:38
+#: inc/customize-configs/section-gallery.php:304
+#: section-parts/section-gallery.php:38
 msgid "View More"
 msgstr "Ver más"
 
-#: inc/customizer.php:2155
+#: inc/customize-configs/section-gallery.php:294
 msgid "Read More Link"
 msgstr "Enlace leer más"
 
-#: inc/customizer.php:166
+#: inc/customize-configs/options-global.php:31
 msgid "No sidebar"
 msgstr "Sin barra lateral"
 
-#: inc/customizer.php:165
+#: inc/customize-configs/options-global.php:30
 msgid "Left sidebar"
 msgstr "Barra lateral izquierda"
 
-#: inc/customizer.php:164
+#: inc/customize-configs/options-global.php:29
 msgid "Right sidebar"
 msgstr "Barra lateral derecha"
 
-#: inc/customizer.php:161
+#: inc/customize-configs/options-global.php:26
 msgid "Site Layout, apply for all pages, exclude home page and custom page templates."
 msgstr "Plantilla de sitio, aplicar a todas las páginas, excluyendo las plantillas de páginas personalizadas y de inicio."
 
-#: inc/customizer.php:160
+#: inc/customize-configs/options-global.php:25
 msgid "Site Layout"
 msgstr "Plantilla de sitio"
 
@@ -538,213 +731,222 @@ msgstr "Plantilla de sitio"
 msgid "Famethemes Demo Importer"
 msgstr "Importador de demos de Famethemes"
 
-#: functions.php:154
+#: functions.php:172
 msgid "WooCommerce Sidebar"
 msgstr "Barra lateral de WooCommerce"
 
-#: inc/customizer.php:2296 inc/customizer.php:2708
+#: inc/customize-configs/section-about.php:120
+#: inc/customize-configs/section-services.php:120
 msgid "1 Column"
 msgstr "1 columna"
 
-#: inc/customizer.php:2139
+#: inc/customize-configs/section-gallery.php:278
 msgid "Enable Lightbox"
 msgstr "Habilitar Lightbox"
 
-#: inc/customizer.php:2125
+#: inc/customize-configs/section-gallery.php:264
 msgid "Number items"
 msgstr "Número de elementos"
 
-#: inc/customizer.php:2100
+#: inc/customize-configs/section-gallery.php:239
 msgid "Layout columns"
 msgstr "Diseño en columnas"
 
-#: inc/customizer.php:2084
+#: inc/customize-configs/section-gallery.php:223
 msgid "Row Height"
 msgstr "Altura de la fila"
 
-#: inc/customizer.php:2068
+#: inc/customize-configs/section-gallery.php:207
 msgid "Item Spacing"
 msgstr "Espaciado del elemento"
 
-#: inc/customizer.php:2054
+#: inc/customize-configs/section-gallery.php:193
 msgid "Masonry"
 msgstr "Masonry"
 
-#: inc/customizer.php:2053
+#: inc/customize-configs/section-gallery.php:192
 msgid "Justified"
 msgstr "Justificada"
 
-#: inc/customizer.php:2052
+#: inc/class-config.php:51 inc/customize-configs/section-gallery.php:191
 msgid "Slider"
 msgstr "Deslizador"
 
-#: inc/customizer.php:2051
+#: inc/customize-configs/section-gallery.php:190
 msgid "Carousel"
 msgstr "Carrusel"
 
-#: inc/customizer.php:2050
+#: inc/customize-configs/section-gallery.php:189
 msgid "Grid"
 msgstr "Rejilla"
 
-#: inc/customizer.php:2045
+#: inc/customize-configs/section-gallery.php:184
 msgid "Display"
 msgstr "Presentación"
 
-#: inc/customizer.php:2030
+#: inc/customize-configs/section-gallery.php:169
 msgid "Default, inside container"
 msgstr "Por defecto, dentro del contenedor"
 
-#: inc/customizer.php:950 inc/customizer.php:2025
+#: inc/customize-configs/options-footer.php:203
+#: inc/customize-configs/section-gallery.php:164
 msgid "Layout"
 msgstr "Diseño"
 
-#: inc/customizer.php:2011
+#: inc/customize-configs/section-gallery.php:150
 msgid "Select a page which have content contain [gallery] shortcode."
 msgstr "Selecciona una página cuyo contenido tenga el código abreviado [gallery]"
 
-#: inc/customizer.php:2006
+#: inc/customize-configs/section-gallery.php:145
 msgid "Select Gallery Page"
 msgstr "Selecciona la página para la galería"
 
-#: inc/customizer.php:1989
+#: inc/customize-configs/section-gallery.php:128
 msgid "Page"
 msgstr "Página"
 
-#: inc/customizer.php:1984
+#: inc/customize-configs/section-gallery.php:123
 msgid "Select Gallery Source"
 msgstr "Seleccion el origen de la galería"
 
-#: inc/customizer.php:1923 section-parts/section-gallery.php:4
+#: inc/class-config.php:142 inc/customize-configs/section-gallery.php:58
+#: section-parts/section-gallery.php:4
 msgid "Gallery"
 msgstr "Galería"
 
-#: inc/customizer.php:1908 section-parts/section-gallery.php:2
+#: inc/customize-configs/section-gallery.php:43
+#: section-parts/section-gallery.php:2
 msgid "gallery"
 msgstr "galería"
 
-#: inc/customizer.php:1873
+#: inc/class-config.php:141 inc/customize-configs/section-gallery.php:8
 msgid "Section: Gallery"
 msgstr "Sección: Galería"
 
-#: inc/customizer.php:345
+#: inc/customize-configs/options-header.php:101
 msgid "Scroll to top when click to the site logo or site title, only apply on front page."
 msgstr "Desplazar hasta arriba cuando haga clic en el logo o el título del sitio, aplicable únicamente a la página de portada."
 
-#: inc/dashboard.php:840
+#: inc/admin/dashboard.php:652
 msgid "FameThemes Demo Importer"
 msgstr "Importador demo FameThemes"
 
-#: inc/dashboard.php:839
+#: inc/admin/dashboard.php:651
 msgid "Hey."
 msgstr "Eh."
 
-#: inc/dashboard.php:837
+#: inc/admin/dashboard.php:649
 msgid "%1$s you will need to install and activate the %2$s plugin first."
 msgstr "%1$s necesitarás instalar y activar primero el plugin %2$s."
 
-#: inc/dashboard.php:311 inc/dashboard.php:821
+#: inc/admin/dashboard.php:633 inc/admin/dashboard.php:720
 msgid "Active Now"
 msgstr "Activar ahora"
 
-#: inc/dashboard.php:289 inc/dashboard.php:799
+#: inc/admin/dashboard.php:611 inc/admin/dashboard.php:698
 msgid "Install Now"
 msgstr "Instalar ahora"
 
-#: inc/dashboard.php:429
-msgid "One Click Demo Import"
-msgstr "Importar demo en un clic"
-
-#: inc/customizer.php:1694
+#: inc/customize-configs/section-hero.php:519
 msgid "Button #2 style"
 msgstr "Estilo del botón #2"
 
-#: inc/customizer.php:3341
+#: inc/customize-configs/section-news.php:297
 msgid "More News Button Text"
 msgstr "Texto del botón más noticias"
 
-#: inc/customizer.php:3330
+#: inc/customize-configs/section-news.php:268
 msgid "It should be your blog page link."
 msgstr "Debe ser el enlace a tu página del blog."
 
-#: inc/customizer.php:1639 inc/customizer.php:1705
+#: inc/customize-configs/section-hero.php:464
+#: inc/customize-configs/section-hero.php:530
 msgid "Danger"
 msgstr "Peligro"
 
-#: inc/customizer.php:1638 inc/customizer.php:1704
+#: inc/customize-configs/section-hero.php:463
+#: inc/customize-configs/section-hero.php:529
 msgid "Warning"
 msgstr "Advertencia"
 
-#: inc/customizer.php:1637 inc/customizer.php:1703
+#: inc/customize-configs/section-hero.php:462
+#: inc/customize-configs/section-hero.php:528
 msgid "Info"
 msgstr "Información"
 
-#: inc/customizer.php:1636 inc/customizer.php:1702
+#: inc/customize-configs/section-hero.php:461
+#: inc/customize-configs/section-hero.php:527
 msgid "Success"
 msgstr "Satisfactorio"
 
-#: inc/customizer.php:1635 inc/customizer.php:1701
+#: inc/customize-configs/section-hero.php:460
+#: inc/customize-configs/section-hero.php:526
 msgid "Primary"
 msgstr "Principal"
 
-#: inc/customizer.php:1634 inc/customizer.php:1700
+#: inc/customize-configs/section-hero.php:459
+#: inc/customize-configs/section-hero.php:525
 msgid "Button"
 msgstr "Botón"
 
-#: inc/customizer.php:1633 inc/customizer.php:1699
+#: inc/customize-configs/section-hero.php:458
+#: inc/customize-configs/section-hero.php:524
 msgid "Button Secondary"
 msgstr "Botón secundario"
 
-#: inc/customizer.php:1632 inc/customizer.php:1698
+#: inc/customize-configs/section-hero.php:457
+#: inc/customize-configs/section-hero.php:523
 msgid "Button Primary"
 msgstr "Botón principal"
 
-#: inc/customizer.php:1628
+#: inc/customize-configs/section-hero.php:453
 msgid "Button #1 style"
 msgstr "Estilo del botón #1"
 
-#: inc/customizer.php:1287
+#: inc/customize-configs/section-hero.php:113
 msgid "The hero content padding bottom in percent (%)."
 msgstr "El espacio de relleno inferior del contenido Hero en porcentaje (%)."
 
-#: inc/customizer.php:1271
+#: inc/customize-configs/section-hero.php:97
 msgid "The hero content padding top in percent (%)."
 msgstr "El espacio de relleno superior del contenido Hero en porcentaje (%). "
 
-#: inc/customizer.php:1343
+#: inc/customize-configs/section-hero.php:168
 msgid "The delay between the changing of each phrase in milliseconds."
 msgstr "El retardo en milisegundos entre cambios de cada frase."
 
-#: inc/customizer.php:891
+#: inc/customize-configs/options-footer.php:147
 msgid "The newsletter form use MailChimp, please follow <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">this guide</a> to know how to get MailChimp Action URL. Example <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 msgstr "El formulario del boletín de noticias utiliza MailChimp, sigue esta <a target=\"_blank\" href=\"http://goo.gl/uRVIst\">guía</a> para saber cómo obtener la URL de acción de MailChimp. Por ejemplo <i>//famethemes.us8.list-manage.com/subscribe/post?u=521c400d049a59a4b9c0550c2&amp;id=83187e0006</i>"
 
-#: inc/customizer.php:81
+#: inc/customize-configs/site-identity.php:32
 msgid "Hide site tagline"
 msgstr "Ocultar descripción del sitio"
 
-#: inc/customizer.php:66
+#: inc/customize-configs/site-identity.php:17
 msgid "Hide site title"
 msgstr "Ocultar título del sitio"
 
-#: inc/customizer.php:2541 inc/customizer.php:2750
+#: inc/customize-configs/section-features.php:167
+#: inc/customize-configs/section-services.php:165
 msgid "image"
 msgstr "Imagen"
 
-#: inc/customizer.php:1323
+#: inc/customize-configs/section-hero.php:148
 msgid "Text animation"
 msgstr "Animación del texto"
 
-#: inc/dashboard.php:225
+#: inc/admin/dashboard.php:87
 msgid "OnePress Theme %s"
 msgstr "Tema OnePress %s"
 
-#: inc/dashboard.php:223
+#: inc/admin/dashboard.php:85
 msgid "%1$s action required"
 msgid_plural "%1$s actions required"
 msgstr[0] "Requiere %1$s acción"
 msgstr[1] "Requiere %1$s acciones"
 
-#: inc/customizer.php:1148 inc/customizer.php:1166
+#: inc/customize-configs/options.php:24 inc/customize-configs/options.php:42
 msgid "Custom CSS"
 msgstr "CSS personalizado"
 
@@ -752,291 +954,327 @@ msgstr "CSS personalizado"
 msgid "Why choose Us"
 msgstr "Por qué elegirnos"
 
-#: inc/customizer.php:2700
+#: inc/customize-configs/section-services.php:112
 msgid "Services Layout Settings"
 msgstr "Ajustes de disposición de los servicios"
 
-#: inc/customizer.php:2559 inc/customizer.php:3117
+#: inc/customize-configs/section-features.php:185
+#: inc/customize-configs/section-news.php:267
+#: inc/customize-configs/section-team.php:161
 msgid "Custom Link"
 msgstr "Enlace personalizado"
 
-#: inc/customizer.php:2555
+#: inc/customize-configs/section-features.php:181
 msgid "Description"
 msgstr "Decripción"
 
-#: inc/customizer.php:2524
+#: inc/customize-configs/section-features.php:150
 msgid "Features content"
 msgstr "Contenido funcionalidades"
 
-#: inc/customizer.php:2488
+#: inc/customize-configs/section-features.php:111
 msgid "Features Layout Setting"
 msgstr "Configuración diseño de funcionalidades"
 
-#: inc/customizer.php:2435 section-parts/section-features.php:4
+#: inc/class-config.php:136 inc/customize-configs/section-features.php:58
+#: section-parts/section-features.php:4
 msgid "Features"
 msgstr "Funcionalidades"
 
-#: inc/customizer.php:2420 section-parts/section-features.php:2
+#: inc/customize-configs/section-features.php:43
+#: section-parts/section-features.php:2
 msgid "features"
 msgstr "funcionalidades"
 
-#: inc/customizer.php:2385
+#: inc/class-config.php:135 inc/customize-configs/section-features.php:8
 msgid "Section: Features"
 msgstr "Sección: Funcionalidades"
 
-#: inc/customizer.php:1960 inc/customizer.php:2271 inc/customizer.php:2472
-#: inc/customizer.php:2683 inc/customizer.php:2896 inc/customizer.php:3052
-#: inc/customizer.php:3222 inc/customizer.php:3440
+#: inc/customize-configs/section-about.php:95
+#: inc/customize-configs/section-contact.php:95
+#: inc/customize-configs/section-counter.php:94
+#: inc/customize-configs/section-features.php:95
+#: inc/customize-configs/section-gallery.php:95
+#: inc/customize-configs/section-news.php:95
+#: inc/customize-configs/section-services.php:95
+#: inc/customize-configs/section-team.php:94
 msgid "Section Description"
 msgstr "Descripción de la sección"
 
-#: inc/customizer.php:1756 inc/customizer.php:2550 inc/customizer.php:2759
+#: inc/customize-configs/section-features.php:176
+#: inc/customize-configs/section-hero.php:581
+#: inc/customize-configs/section-services.php:174
 msgid "Image"
 msgstr "Image"
 
-#: inc/customizer.php:1738
+#: inc/customize-configs/section-hero.php:563
 msgid "Content Text"
 msgstr "Texto del contenido"
 
-#: inc/customizer.php:1518
+#: inc/customize-configs/section-hero.php:343
 msgid "Layout 2"
 msgstr "Plantilla 2"
 
-#: inc/customizer.php:1517
+#: inc/customize-configs/section-hero.php:342
 msgid "Layout 1"
 msgstr "Plantilla 1"
 
-#: inc/customizer.php:1512
+#: inc/customize-configs/section-hero.php:337
 msgid "Display Layout"
 msgstr "Diseño de presentación"
 
-#: inc/customizer.php:833
+#: inc/customize-configs/options-footer.php:89
 msgid "URL"
 msgstr "URL"
 
-#: inc/customizer.php:829 inc/customizer.php:2540 inc/customizer.php:2545
-#: inc/customizer.php:2749 inc/customizer.php:2754
+#: inc/customize-configs/options-footer.php:85
+#: inc/customize-configs/section-features.php:166
+#: inc/customize-configs/section-features.php:171
+#: inc/customize-configs/section-services.php:164
+#: inc/customize-configs/section-services.php:169
 msgid "Icon"
 msgstr "Ícono"
 
-#: inc/customizer.php:825
+#: inc/customize-configs/options-footer.php:81
 msgid "Social network"
 msgstr "Red social"
 
-#: inc/customizer.php:816
+#: inc/customize-configs/options-footer.php:72
 msgid "Socials"
 msgstr "Redes Sociales"
 
-#: inc/customizer.php:471
+#: inc/customize-configs/options-header.php:227
 msgid "Apply for front page template only."
 msgstr "Aplicable únicamente a la plantilla de portada."
 
-#: inc/customizer.php:469
+#: inc/customize-configs/options-header.php:225
 msgid "Header Transparent"
 msgstr "Cabecera transparente"
 
-#: inc/template-tags.php:1616
+#: inc/template-tags.php:1659
 msgid "Subscribe"
 msgstr "Suscribirme"
 
-#: inc/template-tags.php:1615
+#: inc/template-tags.php:1658
 msgid "Enter your e-mail address"
 msgstr "Introduce tu correo electrónico"
 
-#: inc/dashboard.php:455
+#: inc/admin/dashboard.php:270
 msgid "Support for %s WordPress theme is conducted through FameThemes support ticket system."
 msgstr "El soporte para el tema de WordPress %s es dirigido a través del sistema de tickets de soporte de FameThemes."
 
-#: inc/dashboard.php:449
+#: inc/admin/dashboard.php:264
 msgid "OnePress Documentation"
 msgstr "Documentación de OnePress"
 
-#: inc/customizer.php:2295 inc/customizer.php:2495 inc/customizer.php:2707
-#: inc/customizer.php:3075
+#: inc/customize-configs/section-about.php:119
+#: inc/customize-configs/section-features.php:118
+#: inc/customize-configs/section-services.php:119
+#: inc/customize-configs/section-team.php:117
 msgid "2 Columns"
 msgstr "2 columnas"
 
-#: inc/customizer.php:2294 inc/customizer.php:2494 inc/customizer.php:2706
-#: inc/customizer.php:3074
+#: inc/customize-configs/section-about.php:118
+#: inc/customize-configs/section-features.php:117
+#: inc/customize-configs/section-services.php:118
+#: inc/customize-configs/section-team.php:116
 msgid "3 Columns"
 msgstr "3 Columnas"
 
-#: inc/customizer.php:2293 inc/customizer.php:2493 inc/customizer.php:2705
-#: inc/customizer.php:3073
+#: inc/customize-configs/section-about.php:117
+#: inc/customize-configs/section-features.php:116
+#: inc/customize-configs/section-services.php:117
+#: inc/customize-configs/section-team.php:115
 msgid "4 Columns"
 msgstr "4 Columnas"
 
-#: inc/customizer.php:3068
+#: inc/customize-configs/section-team.php:110
 msgid "Team Layout Settings"
 msgstr "Ajustes de disposición del equipo"
 
-#: inc/customizer.php:2371 inc/customizer.php:2584
+#: inc/customize-configs/section-about.php:196
+#: inc/customize-configs/section-features.php:210
+#: inc/customize-configs/section-services.php:235
 msgid "Page Excerpt"
 msgstr "Extracto Página"
 
-#: inc/customizer.php:2370 inc/customizer.php:2583
+#: inc/customize-configs/section-about.php:195
+#: inc/customize-configs/section-features.php:209
+#: inc/customize-configs/section-services.php:234
 msgid "Full Page Content"
 msgstr "Contenido a página completa"
 
-#: inc/customizer.php:2365 inc/customizer.php:2578
+#: inc/customize-configs/section-about.php:190
+#: inc/customize-configs/section-features.php:204
+#: inc/customize-configs/section-services.php:229
 msgid "Item content source"
 msgstr "Fuente del contenido del elemento "
 
-#: inc/customizer.php:2328
+#: inc/customize-configs/section-about.php:153
 msgid "About content page"
 msgstr "Páginas del contenido de Acerca de"
 
-#: inc/customizer.php:1468
+#: inc/customize-configs/section-hero.php:293
 msgid "Enable parallax effect (apply for first BG image only)"
 msgstr "Habilitar efecto parallax (aplicar únicamente a la primera imagen de fondo)"
 
-#: inc/customizer.php:330
+#: inc/customize-configs/options-header.php:86
 msgid "If you use logo and your logo is too tall, check this box to auto vertical align menu."
 msgstr "Si utilizas logotipo y este es muy alto, marca esta opción para auto alinear verticalmente el menú."
 
-#: inc/customizer.php:328
+#: inc/customize-configs/options-header.php:84
 msgid "Center vertical align for menu"
 msgstr "Alineado central vertical para el menú"
 
-#: inc/customizer.php:450
+#: inc/customize-configs/options-header.php:206
 msgid "Responsive Menu Button Color"
 msgstr "Color del botón adaptable de menú"
 
-#: inc/customizer.php:435
+#: inc/customize-configs/options-header.php:191
 msgid "Menu Link Hover/Active BG Color"
 msgstr "Color de fondo del enlace de menú al pasar el ratón/activo"
 
-#: inc/customizer.php:419
+#: inc/customize-configs/options-header.php:175
 msgid "Menu Link Hover/Active Color"
 msgstr "Color del enlace de menú al pasar el ratón/activo"
 
-#: inc/customizer.php:404
+#: inc/customize-configs/options-header.php:160
 msgid "Menu Link Color"
 msgstr "Color del enlace en menú"
 
-#: inc/customizer.php:377
+#: inc/customize-configs/options-header.php:133
 msgid "Only set if you don't use an image logo."
 msgstr "Establecelo únicamente si no utilizas una imagen de logotipo"
 
-#: inc/customizer.php:375
+#: inc/customize-configs/options-header.php:131
 msgid "Site Title Color"
 msgstr "Color del título del sitio"
 
-#: inc/customizer.php:359 inc/customizer.php:1017
+#: inc/customize-configs/options-footer.php:270
+#: inc/customize-configs/options-header.php:115
 msgid "Background Color"
 msgstr "Color del fondo"
 
-#: inc/customizer.php:250
+#: inc/customize-configs/options-header.php:7
 msgid "Header"
 msgstr "Encabezado"
 
-#: inc/customizer.php:237
+#: inc/customize-configs/options-colors.php:20
 msgid "Primary Color"
 msgstr "Color Primario"
 
-#: inc/customizer.php:228
+#: inc/customize-configs/options-colors.php:7
 msgid "Site Colors"
 msgstr "Colores del sitio"
 
-#: inc/customizer.php:3112
+#: inc/customize-configs/section-team.php:156
 msgid "User media"
 msgstr "Multimedia usuario"
 
-#: inc/customizer.php:1861
+#: inc/customize-configs/section-videolightbox.php:98
 msgid "Background image"
 msgstr "Imagen de fondo"
 
-#: inc/customizer.php:1846
+#: inc/customize-configs/section-videolightbox.php:83
 msgid "Paste Youtube or Vimeo url here"
 msgstr "Pega aquí la url de Youtube o Vimeo"
 
-#: inc/customizer.php:1844
+#: inc/customize-configs/section-videolightbox.php:81
 msgid "Video url"
 msgstr "Url del video"
 
-#: inc/customizer.php:1829
+#: inc/customize-configs/section-videolightbox.php:66
 msgid "Section heading"
 msgstr "Título de la sección"
 
-#: inc/customizer.php:1225 inc/customizer.php:1813 inc/customizer.php:1915
-#: inc/customizer.php:2226 inc/customizer.php:2427 inc/customizer.php:2851
-#: inc/customizer.php:3177 inc/customizer.php:3395
+#: inc/customize-configs/section-about.php:50
+#: inc/customize-configs/section-contact.php:50
+#: inc/customize-configs/section-counter.php:49
+#: inc/customize-configs/section-features.php:50
+#: inc/customize-configs/section-gallery.php:50
+#: inc/customize-configs/section-hero.php:51
+#: inc/customize-configs/section-news.php:50
+#: inc/customize-configs/section-videolightbox.php:50
 msgid "The section id, we will use this for link anchor."
 msgstr "El id de la sección, lo utilizaremos para el anclaje del enlace"
 
-#: inc/customizer.php:1771
+#: inc/class-config.php:165 inc/customize-configs/section-videolightbox.php:8
 msgid "Section: Video Lightbox"
 msgstr "Sección: Video Lightbox"
 
-#: inc/dashboard.php:582
+#: inc/admin/dashboard.php:394
 msgid "Hooray! There are no required actions for you right now."
 msgstr "¡Hurra! En este momento no es necesaria ninguna medida."
 
-#: inc/dashboard.php:572
+#: inc/admin/dashboard.php:384
 msgid "Change homepage page template"
 msgstr "Cambia la plantilla de la página de inicio"
 
-#: inc/dashboard.php:558
+#: inc/admin/dashboard.php:370
 msgid "In order to change homepage section contents, you will need to set template \"Frontpage\" for your homepage."
 msgstr "En caso de querer cambiar el contenido de las secciones de la página de inicio, necesitarás establecer para tu página de inicio la plantilla \"Portada\"."
 
-#: inc/dashboard.php:555
+#: inc/admin/dashboard.php:367
 msgid "Set your homepage page template to \"Frontpage\"."
 msgstr "Establece la plantilla de tu página de inicio a \"Portada\"."
 
-#: inc/dashboard.php:541 inc/dashboard.php:565
+#: inc/admin/dashboard.php:353 inc/admin/dashboard.php:377
 msgid "Setup front page displays"
 msgstr "Establece el diseño de la página frontal"
 
-#: inc/dashboard.php:538
+#: inc/admin/dashboard.php:350
 msgid "In order to have the one page look for your website, please go to Customize -&gt; Static Front Page and switch \"Front page displays\" to \"A static page\"."
 msgstr "En caso de querer un aspecto de página única para tu sitio, por favor, ve a Personalizar -&gt Portada estática y cambia \"Página frontal muestra\" a \"Una página estática\"."
 
-#: inc/dashboard.php:536
+#: inc/admin/dashboard.php:348
 msgid "Switch \"Front page displays\" to \"A static page\""
 msgstr "Cambia \"Diseño de portada\" a \"Una página estática\""
 
-#: inc/dashboard.php:529 inc/dashboard.php:548
+#: inc/admin/dashboard.php:341 inc/admin/dashboard.php:360
 msgid "Dismiss"
 msgstr "Cerrar"
 
-#: inc/dashboard.php:416
+#: inc/admin/dashboard.php:227
 msgid "Welcome to OnePress - Version %1s"
 msgstr "Bienvenido a OnePress - Versión %1s"
 
-#: inc/dashboard.php:250
+#: inc/admin/dashboard.php:109
 msgid "Welcome! Thank you for choosing %1$s! To fully take advantage of the best our theme can offer please make sure you visit our <a href=\"%2$s\">Welcome page</a>"
 msgstr "¡Bienvenido! ¡Gracias por elegir %1$s! Para aprovechar al máximo lo mejor que nuestro tema puede ofrecer, por favor, asegúrate de visitar nuestra <a href=\"%2$s\">Página de bienvenida</a>"
 
-#: inc/dashboard.php:227
+#: inc/admin/dashboard.php:89
 msgid "OnePress Theme"
 msgstr "Tema OnePress"
 
-#: inc/dashboard.php:230
+#: inc/admin/dashboard.php:92
 msgid "OnePress Dashboard"
 msgstr "Escritorio OnePress"
 
-#: inc/customizer.php:675 inc/customizer.php:1449
+#: inc/customize-configs/options-page.php:89
+#: inc/customize-configs/section-hero.php:274
 msgid "Background Overlay Color"
 msgstr "Color superpuesto del fondo"
 
-#: inc/customizer.php:3614
+#: inc/customize-configs/section-upsell.php:13
 msgid "Section Order & Styling"
 msgstr "Sección Orden y estilos"
 
-#: inc/customizer.php:312
+#: inc/customize-configs/options-header.php:69
 msgid "Check this box to disable sticky header when scroll."
 msgstr "Marca esta opción para deshabilitar la cabecera fija cuando desplazas."
 
-#: inc/customizer.php:310
+#: inc/customize-configs/options-header.php:67
 msgid "Disable Sticky Header?"
 msgstr "¿Deshabilitar la cabecera fija?"
 
+#. #-#-#-#-#  onepress.pot (OnePress 2.2.0)  #-#-#-#-#
 #. Template Name of the plugin/theme
+#: inc/customize-configs/options-single.php:29
 msgid "Left Sidebar"
 msgstr "Barra lateral izquierda"
 
-#: inc/customizer.php:271 inc/customizer.php:2031
+#: inc/customize-configs/options-header.php:28
+#: inc/customize-configs/section-gallery.php:170
 msgid "Full Width"
 msgstr "Anchura Completa"
 
@@ -1060,7 +1298,7 @@ msgstr "¿Preparado para publicar tu primera entrada? <a href=\"%1$s\">Comienza 
 msgid "Nothing Found"
 msgstr "No se encontró nada"
 
-#: template-parts/content-list.php:38 template-parts/content-page.php:21
+#: template-parts/content-list.php:65 template-parts/content-page.php:21
 #: template-parts/content-single.php:35 template-parts/content.php:39
 msgid "Pages:"
 msgstr "Páginas:"
@@ -1077,53 +1315,53 @@ msgstr "Puedes instalar el plugin %1$s e ir a Personalizar &rarr; Sección: Cont
 msgid "Search Results for: %s"
 msgstr "Buscar el resultado para: %s"
 
-#: inc/template-tags.php:467
+#: inc/template-tags.php:480
 msgid "Your comment is awaiting moderation."
 msgstr "Su comentario se ha enviado al moderador."
 
-#: inc/template-tags.php:462
+#: inc/template-tags.php:475
 msgid "Edit"
 msgstr "corregir"
 
 #. translators: 1: date, 2: time
-#: inc/template-tags.php:461
+#: inc/template-tags.php:474
 msgid "Reply"
 msgstr "Contestar"
 
-#: inc/template-tags.php:453
+#: inc/template-tags.php:466
 msgid "Post author"
 msgstr "Autor del artículo"
 
-#: inc/template-tags.php:434
+#: inc/template-tags.php:447
 msgid "(Edit)"
 msgstr "(Edit)"
 
-#: inc/template-tags.php:434
+#: inc/template-tags.php:447
 msgid "Pingback:"
 msgstr "Pingback: "
 
-#: inc/template-tags.php:364
+#: inc/template-tags.php:367
 msgid "% Comments"
 msgstr "% comentarios"
 
-#: inc/template-tags.php:364
+#: inc/template-tags.php:367
 msgid "1 Comment"
 msgstr "1 comentario"
 
-#: inc/template-tags.php:364
+#: inc/template-tags.php:367
 msgid "Leave a comment"
 msgstr "Deje su comentario"
 
-#: inc/template-tags.php:358
+#: inc/template-tags.php:361
 msgid "Tagged %1$s"
 msgstr "Etiquetado con %1$s"
 
-#: inc/template-tags.php:352
+#: inc/template-tags.php:355
 msgid "Posted in %1$s"
 msgstr "Publicado el %1$s"
 
 #. translators: used between list items, there is a space after the comma
-#: inc/template-tags.php:350 inc/template-tags.php:356
+#: inc/template-tags.php:353 inc/template-tags.php:359
 msgid ", "
 msgstr ", "
 
@@ -1137,446 +1375,505 @@ msgctxt "post date"
 msgid "Posted on %s"
 msgstr "Públicado en %s"
 
-#: inc/dashboard.php:454
+#: inc/admin/dashboard.php:269
 msgid "Having Trouble, Need Support?"
 msgstr "Estás en problemas, ¿necesitas soporte?"
 
-#: inc/dashboard.php:447
+#: inc/admin/dashboard.php:262
 msgid "Need any help to setup and configure %s? Please have a look at our documentations instructions."
 msgstr "¿Necesitas alguna ayuda para configurar %s? Echa un vistazo por favor a nuestras documentaciones de instrucciones."
 
-#: inc/dashboard.php:446
+#: inc/admin/dashboard.php:261
 msgid "Theme Documentation"
 msgstr "Documentación del Tema"
 
-#: inc/dashboard.php:442
+#: inc/admin/dashboard.php:257
 msgid "Start Customize"
 msgstr "Comenzar a personalizar"
 
-#: inc/dashboard.php:440
+#: inc/admin/dashboard.php:255
 msgid "%s supports the Theme Customizer for all theme settings. Click \"Customize\" to start customize your site."
 msgstr "%s soporta el personalizador de temas para todos los parámetros del mismo. Haz clic en \"Personalizar\" para personalizar tu sitio."
 
-#: inc/dashboard.php:439
+#: inc/admin/dashboard.php:254
 msgid "Theme Customizer"
 msgstr "Personalizador del tema"
 
-#: inc/dashboard.php:417
+#: inc/admin/dashboard.php:228
 msgid "OnePress is a creative and flexible WordPress ONE PAGE theme well suited for business, portfolio, digital agency, product showcase, freelancers websites."
 msgstr "OnePress es un tema de WordPress de única página creativo y flexible, muy apropiado para negocios, portafolios, agencia digital, muestrario de producto, y sitios web de autónomos."
 
-#: inc/customizer.php:3595
+#: inc/customize-configs/section-contact.php:253
 msgid "Fax"
 msgstr "El Fax"
 
-#: inc/customizer.php:3580
+#: inc/customize-configs/section-contact.php:238
 msgid "Email"
 msgstr "Correo electronico"
 
-#: inc/customizer.php:3565
+#: inc/customize-configs/section-contact.php:223
 msgid "Phone"
 msgstr "Telefono"
 
-#: inc/customizer.php:3550
+#: inc/customize-configs/section-contact.php:208
 msgid "Address"
 msgstr "Sustantivo"
 
-#: inc/customizer.php:3535
+#: inc/customize-configs/section-contact.php:193
 msgid "Contact Box Title"
 msgstr "Titulo del área de contacto"
 
-#: inc/customizer.php:3511
+#: inc/customize-configs/section-contact.php:169
 msgid "Contact Text"
 msgstr "Texto de contacto"
 
-#: inc/customizer.php:3496
+#: inc/customize-configs/section-contact.php:154
 msgid "Check this box to hide contact form."
 msgstr "Marca esta opción para ocultar el formulario de contacto."
 
-#: inc/customizer.php:3494
+#: inc/customize-configs/section-contact.php:152
 msgid "Hide contact form completely."
 msgstr "Ocultar el formulario de contacto completamente."
 
-#: inc/customizer.php:3478
+#: inc/customize-configs/section-contact.php:136
 msgid "Contact Form Shortcode."
 msgstr "Shortcode del formulario de contacto."
 
-#: inc/customizer.php:3403 section-parts/section-contact.php:4
+#: inc/class-config.php:123 inc/customize-configs/section-contact.php:58
+#: section-parts/section-contact.php:4
 msgid "Get in touch"
 msgstr "Contáctenos"
 
-#: inc/customizer.php:3388 section-parts/section-contact.php:2
+#: inc/customize-configs/section-contact.php:43
+#: section-parts/section-contact.php:2
 msgid "contact"
 msgstr "contacto"
 
-#: inc/customizer.php:3353
+#: inc/class-config.php:122 inc/customize-configs/section-contact.php:8
 msgid "Section: Contact"
 msgstr "Sección: Contacto"
 
-#: inc/customizer.php:3336 section-parts/section-news.php:8
+#: inc/customize-configs/section-news.php:292 section-parts/section-news.php:17
 msgid "Read Our Blog"
 msgstr "Lee nuestro blog"
 
-#: inc/customizer.php:3328
-msgid "More News button link"
-msgstr "Enlace del botón Más noticias"
-
-#: inc/customizer.php:3250
+#: inc/customize-configs/section-news.php:183
 msgid "Number of post to show"
 msgstr "Número de entradas a mostrar"
 
-#: inc/customizer.php:3185 section-parts/section-news.php:4
+#: inc/class-config.php:148 inc/customize-configs/section-news.php:58
+#: section-parts/section-news.php:12
 msgid "Latest News"
 msgstr "Últimas noticias"
 
-#: inc/customizer.php:3170 section-parts/section-news.php:2
+#: inc/customize-configs/section-news.php:43 section-parts/section-news.php:2
 msgid "news"
 msgstr "noticias"
 
-#: inc/customizer.php:3135
+#: inc/class-config.php:147 inc/customize-configs/section-news.php:8
 msgid "Section: News"
 msgstr "Sección: Noticias"
 
-#: inc/customizer.php:3103
+#: inc/customize-configs/section-team.php:147
 msgid "Team members"
 msgstr "Miembros del equipo"
 
-#: inc/customizer.php:3015 section-parts/section-team.php:4
+#: inc/class-config.php:160 inc/customize-configs/section-team.php:57
+#: section-parts/section-team.php:4
 msgid "Our Team"
 msgstr "Nuestro equipo"
 
-#: inc/customizer.php:3000 section-parts/section-team.php:2
+#: inc/customize-configs/section-team.php:42 section-parts/section-team.php:2
 msgid "team"
 msgstr "equipo"
 
-#: inc/customizer.php:2966
+#: inc/class-config.php:159 inc/customize-configs/section-team.php:8
 msgid "Section: Team"
 msgstr "Sección: Equipo"
 
-#: inc/customizer.php:2950
+#: inc/customize-configs/section-counter.php:150
 msgid "After number"
 msgstr "Después del número"
 
-#: inc/customizer.php:2945
+#: inc/customize-configs/section-counter.php:145
 msgid "Before number"
 msgstr "Antes del número"
 
-#: inc/customizer.php:2940
+#: inc/customize-configs/section-counter.php:140
 msgid "Number"
 msgstr "Número"
 
-#: inc/customizer.php:2937
+#: inc/customize-configs/section-counter.php:137
 msgid "Your counter label"
 msgstr "Etiqueta de tu contador"
 
-#: inc/customizer.php:2533 inc/customizer.php:2934 inc/customizer.php:3290
+#: inc/customize-configs/section-counter.php:134
+#: inc/customize-configs/section-features.php:159
+#: inc/customize-configs/section-news.php:223
 msgid "Title"
 msgstr "Título"
 
-#: inc/customizer.php:2925
+#: inc/customize-configs/section-counter.php:125
 msgid "Counter content"
 msgstr "Contenido del contador"
 
-#: inc/customizer.php:2859 section-parts/section-counter.php:4
+#: inc/class-config.php:130 inc/customize-configs/section-counter.php:57
+#: section-parts/section-counter.php:4
 msgid "Our Numbers"
 msgstr "Nuestros números"
 
-#: inc/customizer.php:2844 section-parts/section-counter.php:2
+#: inc/customize-configs/section-counter.php:42
+#: section-parts/section-counter.php:2
 msgid "counter"
 msgstr "contador"
 
-#: inc/customizer.php:2810
+#: inc/class-config.php:129 inc/customize-configs/section-counter.php:8
 msgid "Section: Counter"
 msgstr "Sección: Contadores"
 
-#: inc/customizer.php:2537 inc/customizer.php:2746
+#: inc/customize-configs/section-features.php:163
+#: inc/customize-configs/section-services.php:161
 msgid "Custom icon"
 msgstr "Icono personalizado"
 
-#: inc/customizer.php:2737
+#: inc/customize-configs/section-services.php:152
 msgid "Service content"
 msgstr "Contenido de servicios"
 
-#: inc/customizer.php:2646 section-parts/section-hero.php:87
-#: section-parts/section-services.php:4
+#: inc/class-config.php:154 inc/customize-configs/section-services.php:58
+#: section-parts/section-hero.php:87 section-parts/section-services.php:4
 msgid "Our Services"
 msgstr "Nuestros servicios"
 
-#: inc/customizer.php:2631 section-parts/section-services.php:2
+#: inc/customize-configs/section-services.php:43
+#: section-parts/section-services.php:2
 msgid "services"
 msgstr "Servicios"
 
-#: inc/customizer.php:2596
+#: inc/class-config.php:153 inc/customize-configs/section-services.php:8
 msgid "Section: Services"
 msgstr "Sección: Servicios"
 
-#: inc/customizer.php:2346 inc/customizer.php:2770
+#: inc/customize-configs/section-about.php:171
+#: inc/customize-configs/section-services.php:185
 msgid "Link to single page"
 msgstr "Enlace a página única"
 
-#: inc/customizer.php:2342
+#: inc/customize-configs/section-about.php:167
 msgid "Hide item title"
 msgstr "Ocultar título del elemento"
 
-#: inc/customizer.php:2337 inc/customizer.php:2765
+#: inc/customize-configs/section-about.php:162
+#: inc/customize-configs/section-services.php:180
 msgid "Select a page"
 msgstr "Selecciona una página"
 
-#: inc/customizer.php:820 inc/customizer.php:2332 inc/customizer.php:2528
-#: inc/customizer.php:2741 inc/customizer.php:2929 inc/customizer.php:3107
+#: inc/customize-configs/options-footer.php:76
+#: inc/customize-configs/section-about.php:157
+#: inc/customize-configs/section-counter.php:129
+#: inc/customize-configs/section-features.php:154
+#: inc/customize-configs/section-services.php:156
+#: inc/customize-configs/section-team.php:151
 msgid "[live_title]"
 msgstr "[live_title]"
 
-#: inc/customizer.php:1969 inc/customizer.php:2307 inc/customizer.php:2504
-#: inc/customizer.php:2717 inc/customizer.php:2905 inc/customizer.php:3083
-#: inc/customizer.php:3450
+#: inc/customize-configs/section-about.php:132
+#: inc/customize-configs/section-contact.php:108
+#: inc/customize-configs/section-counter.php:105
+#: inc/customize-configs/section-features.php:130
+#: inc/customize-configs/section-gallery.php:108
+#: inc/customize-configs/section-services.php:132
+#: inc/customize-configs/section-team.php:127
 msgid "Section Content"
 msgstr "Contenido de la sección"
 
-#: inc/customizer.php:1943 inc/customizer.php:2254 inc/customizer.php:2455
-#: inc/customizer.php:2666 inc/customizer.php:2879 inc/customizer.php:3035
-#: inc/customizer.php:3205 inc/customizer.php:3423
+#: inc/customize-configs/section-about.php:78
+#: inc/customize-configs/section-contact.php:78
+#: inc/customize-configs/section-counter.php:77
+#: inc/customize-configs/section-features.php:78
+#: inc/customize-configs/section-gallery.php:78
+#: inc/customize-configs/section-news.php:78
+#: inc/customize-configs/section-services.php:78
+#: inc/customize-configs/section-team.php:77
 msgid "Section Subtitle"
 msgstr "Subtítulo de la sección"
 
-#: inc/customizer.php:1938 inc/customizer.php:2249 inc/customizer.php:2450
-#: inc/customizer.php:2661 inc/customizer.php:2874 inc/customizer.php:3030
-#: inc/customizer.php:3200 inc/customizer.php:3418
-#: section-parts/section-about.php:5 section-parts/section-contact.php:5
-#: section-parts/section-counter.php:5 section-parts/section-gallery.php:5
-#: section-parts/section-news.php:5 section-parts/section-services.php:5
-#: section-parts/section-team.php:5
+#: inc/customize-configs/section-about.php:73
+#: inc/customize-configs/section-contact.php:73
+#: inc/customize-configs/section-counter.php:72
+#: inc/customize-configs/section-features.php:73
+#: inc/customize-configs/section-gallery.php:73
+#: inc/customize-configs/section-news.php:73
+#: inc/customize-configs/section-services.php:73
+#: inc/customize-configs/section-team.php:72 section-parts/section-about.php:5
+#: section-parts/section-contact.php:5 section-parts/section-counter.php:5
+#: section-parts/section-gallery.php:5 section-parts/section-news.php:13
+#: section-parts/section-services.php:5 section-parts/section-team.php:5
 msgid "Section subtitle"
 msgstr "Subtítulo de la sección"
 
-#: inc/customizer.php:1928 inc/customizer.php:2239 inc/customizer.php:2440
-#: inc/customizer.php:2651 inc/customizer.php:2864 inc/customizer.php:3020
-#: inc/customizer.php:3190 inc/customizer.php:3408
+#: inc/customize-configs/section-about.php:63
+#: inc/customize-configs/section-contact.php:63
+#: inc/customize-configs/section-counter.php:62
+#: inc/customize-configs/section-features.php:63
+#: inc/customize-configs/section-gallery.php:63
+#: inc/customize-configs/section-news.php:63
+#: inc/customize-configs/section-services.php:63
+#: inc/customize-configs/section-team.php:62
 msgid "Section Title"
 msgstr "Título de la sección"
 
-#: inc/customizer.php:2219 section-parts/section-about.php:2
+#: inc/customize-configs/section-about.php:43 section-parts/section-about.php:2
 msgid "about"
 msgstr "Acerca de"
 
-#: inc/customizer.php:1780 inc/customizer.php:1882 inc/customizer.php:2193
-#: inc/customizer.php:2394 inc/customizer.php:2605 inc/customizer.php:2819
-#: inc/customizer.php:2975 inc/customizer.php:3144 inc/customizer.php:3362
+#: inc/customize-configs/section-about.php:17
+#: inc/customize-configs/section-contact.php:17
+#: inc/customize-configs/section-counter.php:17
+#: inc/customize-configs/section-features.php:17
+#: inc/customize-configs/section-gallery.php:17
+#: inc/customize-configs/section-news.php:17
+#: inc/customize-configs/section-services.php:17
+#: inc/customize-configs/section-team.php:17
+#: inc/customize-configs/section-videolightbox.php:17
 msgid "Section Settings"
 msgstr "Parámetros de la sección"
 
-#: inc/customizer.php:2184
+#: inc/class-config.php:116 inc/customize-configs/section-about.php:8
 msgid "Section: About"
 msgstr "Sección: Acerca de"
 
-#: inc/customizer.php:1680
+#: inc/customize-configs/section-hero.php:505
 msgid "Button #2 Link"
 msgstr "Enlace botón #2"
 
-#: inc/customizer.php:1675 section-parts/section-hero.php:90
+#: inc/customize-configs/section-hero.php:500 section-parts/section-hero.php:90
 msgid "#contact"
 msgstr "#contacto"
 
-#: inc/customizer.php:1666
+#: inc/customize-configs/section-hero.php:491
 msgid "Button #2 Text"
 msgstr "Texto del botón #2"
 
-#: inc/customizer.php:1661 section-parts/section-hero.php:89
+#: inc/customize-configs/section-hero.php:486 section-parts/section-hero.php:89
 msgid "Get Started"
 msgstr "Comencemos"
 
-#: inc/customizer.php:1615
+#: inc/customize-configs/section-hero.php:440
 msgid "Button #1 Link"
 msgstr "Enlace botón #1"
 
-#: inc/customizer.php:1610
+#: inc/customize-configs/section-hero.php:435
 msgid "#about"
 msgstr "#acerca de"
 
-#: inc/customizer.php:1601
+#: inc/customize-configs/section-hero.php:426
 msgid "Button #1 Text"
 msgstr "Texto botón #1"
 
-#: inc/customizer.php:1596 inc/customizer.php:2234
-#: section-parts/section-about.php:4
+#: inc/class-config.php:117 inc/customize-configs/section-about.php:58
+#: inc/customize-configs/section-hero.php:421 section-parts/section-about.php:4
 msgid "About Us"
 msgstr "Sobre nosotros"
 
-#: inc/customizer.php:1588
+#: inc/customize-configs/section-hero.php:413
 msgid "You can use text rotate slider in this textarea too."
 msgstr "También puedes utilizar en esta área de texto el deslizador de texto rotativo."
 
-#: inc/customizer.php:1585
+#: inc/customize-configs/section-hero.php:410
 msgid "Small Text"
 msgstr "Texto pequeño"
 
-#: inc/customizer.php:1538
+#: inc/customize-configs/section-hero.php:363
 msgid "Text Rotating Guide: Put your rotate texts separate by \"|\" into <span class=\"js-rotating\">...</span>, go to Customizer -> Theme Options -> Section: Hero -> Hero Settings to control rotate animation."
 msgstr "Guía del texto rotativo: coloca tus textos rotativos separados por \" | \" dentro de <span class=\"js-rotating\">...</span>, para controlar la animación rotativa entra en Personalizar -> Opciones del tema -> Sección: Hero ->  Ajustes de Hero"
 
-#: inc/customizer.php:1536
+#: inc/customize-configs/section-hero.php:361
 msgid "Large Text"
 msgstr "Texto grande"
 
-#: inc/customizer.php:1496
+#: inc/customize-configs/section-hero.php:321
 msgid "Hero Content Layout"
 msgstr "Diseño del contenido Hero"
 
-#: inc/customizer.php:1423
+#: inc/customize-configs/section-hero.php:248
 msgid "Background Image"
 msgstr "Imagen de fondo"
 
-#: inc/customizer.php:904 inc/customizer.php:1094 inc/customizer.php:1418
+#: inc/customize-configs/options-footer.php:160
+#: inc/customize-configs/options-footer.php:346
+#: inc/customize-configs/section-hero.php:243
 msgid "Background"
 msgstr "Fondo"
 
-#: inc/customizer.php:1414
+#: inc/customize-configs/section-hero.php:239
 msgid "Background Images"
 msgstr "Imágenes de fondo"
 
-#: inc/customizer.php:1388
+#: inc/customize-configs/section-hero.php:213
 msgid "Hero Background Media"
 msgstr "Multimedia del fondo de Hero"
 
-#: inc/customizer.php:1285
+#: inc/customize-configs/section-hero.php:111
 msgid "Padding Bottom:"
 msgstr "Espacio de relleno inferior:"
 
-#: inc/customizer.php:1269
+#: inc/customize-configs/section-hero.php:95
 msgid "Padding Top:"
 msgstr "Espacio de relleno superior:"
 
-#: inc/customizer.php:1264 inc/customizer.php:1280
+#: inc/customize-configs/section-hero.php:90
+#: inc/customize-configs/section-hero.php:106
 msgid "10"
 msgstr "10"
 
-#: inc/customizer.php:1241
+#: inc/customize-configs/section-hero.php:67
 msgid "Check this box to make hero section full screen."
 msgstr "Marca esta opción para hacer la sección Hero a pantalla completa."
 
-#: inc/customizer.php:1239
+#: inc/customize-configs/section-hero.php:65
 msgid "Make hero section full screen"
 msgstr "Hacer la sección Hero a pantalla completa"
 
-#: inc/customizer.php:1223 inc/customizer.php:1811 inc/customizer.php:1913
-#: inc/customizer.php:2224 inc/customizer.php:2425 inc/customizer.php:2636
-#: inc/customizer.php:2849 inc/customizer.php:3005 inc/customizer.php:3175
-#: inc/customizer.php:3393
+#: inc/customize-configs/section-about.php:48
+#: inc/customize-configs/section-contact.php:48
+#: inc/customize-configs/section-counter.php:47
+#: inc/customize-configs/section-features.php:48
+#: inc/customize-configs/section-gallery.php:48
+#: inc/customize-configs/section-hero.php:49
+#: inc/customize-configs/section-news.php:48
+#: inc/customize-configs/section-services.php:48
+#: inc/customize-configs/section-team.php:47
+#: inc/customize-configs/section-videolightbox.php:48
 msgid "Section ID:"
 msgstr "ID de la sección:"
 
-#: inc/customizer.php:1218 section-parts/section-hero.php:2
+#: inc/customize-configs/section-hero.php:44 section-parts/section-hero.php:2
 msgid "hero"
 msgstr "hero"
 
-#: inc/customizer.php:1211 inc/customizer.php:1798 inc/customizer.php:1900
-#: inc/customizer.php:2211 inc/customizer.php:2412 inc/customizer.php:2623
-#: inc/customizer.php:2836 inc/customizer.php:2993 inc/customizer.php:3162
-#: inc/customizer.php:3380
+#: inc/customize-configs/section-about.php:35
+#: inc/customize-configs/section-contact.php:35
+#: inc/customize-configs/section-counter.php:34
+#: inc/customize-configs/section-features.php:35
+#: inc/customize-configs/section-gallery.php:35
+#: inc/customize-configs/section-hero.php:37
+#: inc/customize-configs/section-news.php:35
+#: inc/customize-configs/section-services.php:35
+#: inc/customize-configs/section-team.php:35
+#: inc/customize-configs/section-videolightbox.php:35
 msgid "Check this box to hide this section."
 msgstr "Marca esta opción para ocultar esta sección."
 
-#: inc/customizer.php:1209 inc/customizer.php:1796 inc/customizer.php:1898
-#: inc/customizer.php:2209 inc/customizer.php:2410 inc/customizer.php:2621
-#: inc/customizer.php:2834 inc/customizer.php:2991 inc/customizer.php:3160
-#: inc/customizer.php:3378
+#: inc/customize-configs/section-about.php:33
+#: inc/customize-configs/section-contact.php:33
+#: inc/customize-configs/section-counter.php:32
+#: inc/customize-configs/section-features.php:33
+#: inc/customize-configs/section-gallery.php:33
+#: inc/customize-configs/section-hero.php:35
+#: inc/customize-configs/section-news.php:33
+#: inc/customize-configs/section-services.php:33
+#: inc/customize-configs/section-team.php:33
+#: inc/customize-configs/section-videolightbox.php:33
 msgid "Hide this section?"
 msgstr "¿Ocultar esta sección?"
 
-#: inc/customizer.php:1193
+#: inc/customize-configs/section-hero.php:19
 msgid "Hero Settings"
 msgstr "Ajustes de Hero"
 
-#: inc/customizer.php:1183
+#: inc/class-config.php:110 inc/customize-configs/section-hero.php:9
 msgid "Section: Hero"
 msgstr "Sección: Hero"
 
-#: inc/customizer.php:889
+#: inc/customize-configs/options-footer.php:145
 msgid "MailChimp Action URL"
 msgstr "URL de acción de MailChimp"
 
-#: inc/customizer.php:873
+#: inc/customize-configs/options-footer.php:129
 msgid "Newsletter Form Title"
 msgstr "Título del formulario boletín de noticias"
 
-#: inc/customizer.php:859
+#: inc/customize-configs/options-footer.php:115
 msgid "Check this box to hide footer newsletter form."
 msgstr "Marca esta opción para ocultar el formulario de boletín de noticias del pie de página."
 
-#: inc/customizer.php:857
+#: inc/customize-configs/options-footer.php:113
 msgid "Hide Footer Newsletter?"
 msgstr "¿Ocultar el boletín de noticias del pie de página?"
 
-#: inc/customizer.php:796
+#: inc/customize-configs/options-footer.php:52
 msgid "Social Footer Title"
 msgstr "Título del pie de página social"
 
-#: inc/customizer.php:782
+#: inc/customize-configs/options-footer.php:38
 msgid "The social profiles specified below will be displayed in the footer of your site."
 msgstr "Los perfiles sociales que se especifiquen se mostrarán en el pie de página de tu sitio."
 
-#: inc/customizer.php:769
+#: inc/customize-configs/options-footer.php:25
 msgid "Check this box to hide footer social section."
 msgstr "Marca esta opción para ocultar la sección de perfiles sociales del pie de página."
 
-#: inc/customizer.php:767
+#: inc/customize-configs/options-footer.php:23
 msgid "Hide Footer Social?"
 msgstr "¿Ocultar perfiles sociales del pie de página?"
 
-#: inc/customizer.php:201
+#: inc/customize-configs/options-global.php:66
 msgid "Check this box to hide footer back to top button."
 msgstr "Marca esta opción para ocultar el botón de volver arriba en el pie de página."
 
-#: inc/customizer.php:199
+#: inc/customize-configs/options-global.php:64
 msgid "Hide footer back to top?"
 msgstr "¿Ocultar volver arriba en el pie de página?"
 
-#: inc/customizer.php:184
+#: inc/customize-configs/options-global.php:49
 msgid "Check this box to disable all element animation when scroll."
 msgstr "Marca esta opción para deshabilitar la animación de todos los elementos durante el desplazamiento."
 
-#: inc/customizer.php:182
+#: inc/customize-configs/options-global.php:47
 msgid "Disable animation effect?"
 msgstr "¿Deshabilitar el efecto de animación?"
 
-#: inc/customizer.php:143
+#: inc/customize-configs/options-global.php:7
 msgid "Global"
 msgstr "Global"
 
-#: inc/customizer.php:133
+#: inc/customize-configs/options.php:11
 msgid "Theme Options"
 msgstr "Opciones de Tema"
 
-#: inc/customizer.php:46
+#: inc/customizer.php:71
 msgid "Select member"
 msgstr "Selecciona un usuario"
 
-#: inc/customizer.php:35
+#: inc/customizer.php:60
 msgid "Select page"
 msgstr "Selecciona una página"
 
-#: inc/customizer-controls.php:588
+#: inc/customize-controls/control-repeater.php:357
 msgid "Close"
 msgstr "Cerrado"
 
-#: inc/customizer-controls.php:553
+#: inc/customize-controls/control-repeater.php:322
 msgid "Change"
 msgstr "Cambio"
 
-#: inc/customizer-controls.php:553
+#: inc/customize-controls/control-repeater.php:322
 msgid "Add"
 msgstr "Adicionar"
 
-#: inc/customizer-controls.php:552 inc/customizer-controls.php:574
-#: inc/customizer-controls.php:586
+#: inc/customize-controls/control-repeater.php:321
+#: inc/customize-controls/control-repeater.php:343
+#: inc/customize-controls/control-repeater.php:355
 msgid "Remove"
 msgstr "Quitar"
 
-#: inc/customizer-controls.php:321 inc/customizer-controls.php:436
+#: inc/customize-controls/control-repeater.php:76
+#: inc/customize-controls/control-repeater.php:205
 msgid "Item"
 msgstr "Articulo"
 
-#: inc/customizer-controls.php:421
+#: inc/customize-controls/control-repeater.php:190
 msgid "Add an item"
 msgstr "Añade un elemento"
 
@@ -1588,126 +1885,10 @@ msgstr "Menú"
 msgid "Skip to content"
 msgstr "Saltar contenido"
 
-#: functions.php:391
-msgid "Please contact the administrator of this site for help."
-msgstr "Por favor, contacta con al administrador de este sitio."
-
-#: functions.php:390
-msgid "All plugins installed and activated successfully. %1$s"
-msgstr "Todos los plugin instalados y activados correctamente. %1$s"
-
-#: functions.php:389
-msgid "Plugin not activated. A higher version of %s is needed for this theme. Please update the plugin."
-msgstr "Plugin desactivado. Necesitas una versión superior de %s para este tema. Por favor, actualiza el plugin."
-
-#: functions.php:388
-msgid "No action taken. Plugin %1$s was already active."
-msgstr "No se realizó ninguna acción. El plugin %1$s ya estaba activado."
-
-#: functions.php:387
-msgid "The following plugin was activated successfully:"
-msgstr "El siguiente plugin se ha activado correctamente:"
-
-#: functions.php:386
-msgid "Plugin activated successfully."
-msgstr "Plugin activado correctamente."
-
-#: functions.php:385
-msgid "Return to Required Plugins Installer"
-msgstr "Volver al instalador de Plugins"
-
-#: functions.php:384
-msgid "Begin activating plugin"
-msgid_plural "Begin activating plugins"
-msgstr[0] "Comenzar a activar plugin"
-msgstr[1] "Comenzar a activar plugins"
-
-#: functions.php:383
-msgid "Begin updating plugin"
-msgid_plural "Begin updating plugins"
-msgstr[0] "Comenzar la actualización del plugin"
-msgstr[1] "Comenzar la actualización de los plugins"
-
-#: functions.php:382
-msgid "Begin installing plugin"
-msgid_plural "Begin installing plugins"
-msgstr[0] "Comenzar a instalar el plugin"
-msgstr[1] "Comenzar a instalar plugins"
-
-#: functions.php:381
-msgid "Sorry, but you do not have the correct permissions to activate the %1$s plugin."
-msgid_plural "Sorry, but you do not have the correct permissions to activate the %1$s plugins."
-msgstr[0] "Lo siento pero no tienes suficientes permisos para activar el plugin %1$s."
-msgstr[1] "Lo siento pero no tienes suficientes permisos para activar los plugins %1$s."
-
-#: functions.php:380
-msgid "The following recommended plugin is currently inactive: %1$s."
-msgid_plural "The following recommended plugins are currently inactive: %1$s."
-msgstr[0] "El siguiente plugin recomendado está actualmente inactivo: %1$s."
-msgstr[1] "Los siguientes plugins recomendados están actualmente inactivos: %1$s."
-
-#: functions.php:379
-msgid "The following required plugin is currently inactive: %1$s."
-msgid_plural "The following required plugins are currently inactive: %1$s."
-msgstr[0] "El siguiente plugin requerido está actualmente inactivo: %1$s."
-msgstr[1] "Los siguientes plugins requeridos están actualmente inactivos: %1$s."
-
-#: functions.php:378
-msgid "Sorry, but you do not have the correct permissions to update the %1$s plugin."
-msgid_plural "Sorry, but you do not have the correct permissions to update the %1$s plugins."
-msgstr[0] "Lo siento pero no tienes suficientes permisos para actualizar el plugin %1$s."
-msgstr[1] "Lo siento pero no tienes suficientes permisos para actualizar los plugins %1$s."
-
-#: functions.php:377
-msgid "There is an update available for: %1$s."
-msgid_plural "There are updates available for the following plugins: %1$s."
-msgstr[0] "Hay una actualización disponible para: %1$s."
-msgstr[1] "Hay actualizaciones disponibles para los siguientes plugins: %1$s."
-
-#: functions.php:376
-msgid "The following plugin needs to be updated to its latest version to ensure maximum compatibility with this theme: %1$s."
-msgid_plural "The following plugins need to be updated to their latest version to ensure maximum compatibility with this theme: %1$s."
-msgstr[0] "El siguiente plugin debe actualizarse a la versión más reciente para asegurar la máxima compatibilidad con este tema: %1$s."
-msgstr[1] "Los siguientes plugins necesitan actualizarse a la versión más reciente para asegurar la máxima compatibilidad con este tema: %1$s."
-
-#: functions.php:375
-msgid "Sorry, but you do not have the correct permissions to install the %1$s plugin."
-msgid_plural "Sorry, but you do not have the correct permissions to install the %1$s plugins."
-msgstr[0] "Lo siento pero no tienes suficientes permisos para instalar el plugin %1$s."
-msgstr[1] "Lo siento pero no tienes suficientes permisos para instalar los plugins %1$s."
-
-#: functions.php:374
-msgid "This theme recommends the following plugin: %1$s."
-msgid_plural "This theme recommends the following plugins: %1$s."
-msgstr[0] "Este tema recomienda utilizar el plugin: %1$s."
-msgstr[1] "Este tema recomienda utilizar los plugins: %1$s."
-
-#: functions.php:373
-msgid "This theme requires the following plugin: %1$s."
-msgid_plural "This theme requires the following plugins: %1$s."
-msgstr[0] "Este tema requiere el siguiente plugin: %1$s."
-msgstr[1] "Este tema requiere los siguientes plugins: %1$s."
-
-#: functions.php:372
-msgid "Something went wrong with the plugin API."
-msgstr "Algo salió mal con la API del plugin."
-
-#: functions.php:371
-msgid "Installing Plugin: %s"
-msgstr "Instalando plugin: %s"
-
-#: functions.php:370
-msgid "Install Plugins"
-msgstr "Instalar plugins"
-
-#: functions.php:369
-msgid "Install Required Plugins"
-msgstr "Requiere instalar plugins"
-
 #. Translators: If there are characters in your language that are not supported
 #. by Raleway, translate this to 'off'. Do not translate into your own
 #. language.
-#: functions.php:289
+#: functions.php:308
 msgctxt "Raleway font: on or off"
 msgid "on"
 msgstr "on"
@@ -1715,12 +1896,12 @@ msgstr "on"
 #. Translators: If there are characters in your language that are not supported
 #. by Open Sans, translate this to 'off'. Do not translate into your own
 #. language.
-#: functions.php:283
+#: functions.php:302
 msgctxt "Open Sans font: on or off"
 msgid "on"
 msgstr "el"
 
-#: functions.php:143
+#: functions.php:161
 msgid "Sidebar"
 msgstr "Barra lateral"
 
@@ -1728,11 +1909,11 @@ msgstr "Barra lateral"
 msgid "Primary Menu"
 msgstr "Menú primario"
 
-#: inc/template-tags.php:1345
+#: inc/template-tags.php:1388
 msgid "%1$s theme by %2$s"
 msgstr "Tema %1$s hecho por %2$s"
 
-#: inc/template-tags.php:1343
+#: inc/template-tags.php:1386
 msgid "Copyright %1$s %2$s %3$s"
 msgstr "Copyright %1$s %2$s %3$s"
 
@@ -1740,11 +1921,11 @@ msgstr "Copyright %1$s %2$s %3$s"
 msgid "Back To Top"
 msgstr "Volver arriba"
 
-#: inc/customizer.php:867 inc/template-tags.php:1606
+#: inc/customize-configs/options-footer.php:123 inc/template-tags.php:1649
 msgid "Join our Newsletter"
 msgstr "Únete a nuestro boletín de noticias"
 
-#: inc/customizer.php:790 inc/template-tags.php:1625
+#: inc/customize-configs/options-footer.php:46 inc/template-tags.php:1668
 msgid "Keep Updated"
 msgstr "Mantente actualizado"
 

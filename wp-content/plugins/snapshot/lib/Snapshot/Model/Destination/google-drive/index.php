@@ -381,6 +381,8 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 				// Call the API with the media upload, defer so it doesn't immediately return.
 				$this->client->setDefer( true );
 				$request = $this->connection->files->insert( $file );
+				//Add Support for Team Drive
+				$request->setQueryParam('supportsTeamDrives', 'true' );
 				if ( is_object( $request ) ) {
 					// Create a media file upload to represent our upload process.
 					$media = new Google_0814_Http_MediaFileUpload(
@@ -398,31 +400,23 @@ if ( ! class_exists( 'SnapshotDestinationGoogleDrive' ) && version_compare( phpv
 					// Upload the various chunks. $status will be false until the process is
 					// complete.
 					$status = false;
+					$handle = fopen( $filename, "rb" ); // phpcs:ignore
 					$chunk_int = 0;
 					$chunk_parts_sum = 0;
 
-					global $wp_filesystem;
+					while ( ! $status && ! feof( $handle ) ) {
+						$chunk = fread( $handle, $chunkSizeBytes ); // phpcs:ignore
+						$status = $media->nextChunk( $chunk );
+						$chunk_int++;
+						$chunk_parts_sum += strlen( $chunk );
+						//echo "[". $chunk_int ."] [". number_format(($chunk_parts_sum/$filename_size)*100, 4) ."%] status[". $status ."]<br />";
 
-					if( Snapshot_Helper_Utility::connect_fs() ) {
-						$file = $wp_filesystem->get_contents( $filename );
+						$this->snapshot_logger->log_message( "progeess: " . number_format( ( $chunk_parts_sum / $filename_size ) * 100, 2 ) . "%" );
 
-						$splitFile = str_split($file, $chunkSizeBytes);
-						foreach($splitFile as $buffer) {
-							if ( $status )
-								break;
-
-							$chunk = $buffer;
-							$status = $media->nextChunk( $chunk );
-							$chunk_int++;
-							$chunk_parts_sum += strlen( $chunk );
-
-							$this->snapshot_logger->log_message( "progeess: " . number_format( ( $chunk_parts_sum / $filename_size ) * 100, 2 ) . "%" );
-
-							$this->progress_of_files( array( 'file_offset' => $chunk_parts_sum ) );
-						}
-					} else {
-						return false;
+						$this->progress_of_files( array( 'file_offset' => $chunk_parts_sum ) );
 					}
+
+					fclose( $handle ); // phpcs:ignore
 
 					$httpResultCode = $media->getHttpResultCode();
 					if ( ( 200 === $httpResultCode ) && ( false !== $status ) ) {

@@ -27,6 +27,13 @@ class WP_Hummingbird_Admin {
 	public $admin_notices;
 
 	/**
+	 * Whether we show the quick setup modal.
+	 *
+	 * @var bool
+	 */
+	public $show_quick_setup;
+
+	/**
 	 * WP_Hummingbird_Admin constructor.
 	 */
 	public function __construct() {
@@ -43,7 +50,9 @@ class WP_Hummingbird_Admin {
 
 		add_action( 'admin_footer', array( $this, 'maybe_check_files' ) );
 		add_action( 'admin_footer', array( $this, 'maybe_check_report' ) );
-		add_action( 'admin_footer', array( $this, 'maybe_show_quick_setup' ) );
+
+		// Check DB to see if quick setup modal is needed and store in public var.
+		$this->show_quick_setup = $this->maybe_show_quick_setup();
 
 		// Make sure plugin name is correct for adding plugin action links.
 		$plugin_name = 'wp-hummingbird';
@@ -324,37 +333,16 @@ class WP_Hummingbird_Admin {
 	public function maybe_show_quick_setup() {
 		// Only if in admin or user is logged in.
 		if ( ! is_admin() || ! is_user_logged_in() ) {
-			return;
-		}
-
-		// Only run on HB pages.
-		if ( ! preg_match( '/^(toplevel|hummingbird)(-pro)*_page_wphb/', get_current_screen()->id ) ) {
-			return;
+			return false;
 		}
 
 		// If setup has already ran - exit.
 		$quick_setup = get_option( 'wphb-quick-setup' );
 		if ( true === $quick_setup['finished'] ) {
-			return;
+			return false;
 		}
 
-		$enqueued = wp_script_is( 'wphb-admin', 'enqueued' );
-
-		if ( ! $enqueued ) {
-			WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
-		}
-
-		WP_Hummingbird_Utils::get_modal( 'quick-setup' );
-		WP_Hummingbird_Utils::get_modal( 'check-performance' );
-		?>
-		<script>
-			window.onload = function () {
-				if ( window.WPHB_Admin ) {
-					window.WPHB_Admin.getModule('dashboard').startQuickSetup();
-				}
-			};
-		</script>
-		<?php
+		return true;
 	}
 
 }

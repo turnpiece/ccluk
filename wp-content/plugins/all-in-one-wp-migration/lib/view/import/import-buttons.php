@@ -33,7 +33,7 @@
 				<div id="ai1wm-import-init">
 					<p>
 						<i class="ai1wm-icon-cloud-upload"></i><br />
-						<?php _e( 'Drag & Drop to upload', AI1WM_PLUGIN_NAME ); ?>
+						<?php _e( 'Drag & Drop a backup to import it', AI1WM_PLUGIN_NAME ); ?>
 					</p>
 					<div class="ai1wm-button-group ai1wm-button-import ai1wm-expandable">
 						<div class="ai1wm-button-main">
@@ -57,20 +57,8 @@
 		</div>
 	</div>
 
-	<p>
-		<?php _e( 'Maximum upload file size:' ); ?>
-		<?php if ( ( $max_file_size = apply_filters( 'ai1wm_max_file_size', AI1WM_MAX_FILE_SIZE ) ) ) : ?>
-			<span class="ai1wm-max-upload-size"><?php echo size_format( $max_file_size ); ?></span>
-			<span class="ai1wm-unlimited-import">
-				<a href="https://servmask.com/products/unlimited-extension" target="_blank" class="ai1wm-label">
-					<i class="ai1wm-icon-notification"></i>
-					<?php _e( 'Get unlimited', AI1WM_PLUGIN_NAME ); ?>
-				</a>
-			</span>
-		<?php else : ?>
-			<span class="ai1wm-max-upload-size"><?php _e( 'Unlimited', AI1WM_PLUGIN_NAME ); ?></span>
-		<?php endif; ?>
-	</p>
+	<p style="margin: 0;"><?php echo apply_filters( 'ai1wm_pro', '' ); ?></p>
+
 <?php else : ?>
 	<div class="ai1wm-message ai1wm-red-message">
 		<?php

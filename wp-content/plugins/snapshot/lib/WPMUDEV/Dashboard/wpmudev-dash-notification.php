@@ -243,10 +243,10 @@ if ( ! class_exists( 'WPMUDEV_Dashboard_Notice4' ) ) {
 				<a href="<?php echo $this->auto_install_url(); ?>"
 				   class="wdpun-button wdpun-button-small"><?php _e( 'Install Plugin', 'wpmudev' ); ?></a>
 
-				<button class="wdpun-button wdpun-button-notice-dismiss"
+				<a class="wdpun-button wdpun-button-notice-dismiss"
 				        data-msg="<?php _e( 'Saving...', 'wpmudev' ); ?>">
 					<?php _e( 'Dismiss', 'wpmudev' ); ?>
-				</button>
+				</a>
 			</div><!-- end wdpun-notice-cta -->
 
 			</div><!-- end notice wdpun-notice -->
@@ -284,10 +284,10 @@ if ( ! class_exists( 'WPMUDEV_Dashboard_Notice4' ) ) {
 				<a href="<?php echo $this->activate_url(); ?>"
 				   class="wdpun-button wdpun-button-small"><?php _e( 'Activate WPMU DEV Dashboard', 'wpmudev' ); ?></a>
 
-				<button class="wdpun-button wdpun-button-notice-dismiss"
+				<a class="wdpun-button wdpun-button-notice-dismiss"
 				        data-msg="<?php _e( 'Saving...', 'wpmudev' ); ?>">
 					<?php _e( 'Dismiss', 'wpmudev' ); ?>
-				</button>
+				</a>
 			</div><!-- end wdpun-notice-cta -->
 
 			</div><!-- end notice wdpun-notice -->

@@ -5,6 +5,32 @@ Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
 
+
+3.1.9.2
+----------------------------------------------------------------------
+- Fix: WP Engine Hub-initiated managed backups
+- Fix: Backups Aren't Completing
+- Improvement: Remove activation redirection to plugin dashboard
+- Fix: Snapshot hosting issue
+- Fix: Automate re-enables scheduled backups
+- Fix: Cloud Storage Used becomes 0 after creating the backup
+- Fix: Error finalizing automatic backup in Managed Backups Log
+- Fix: Restore Full Log has some items that are not positioned properly
+- Fix: Big snapshot name breaks Dashboard
+- Improvement: Add Day header
+- Fix: Google Drive setup, blue button has no label
+- Fix: Resell links not working
+- Fix: Snapshot translation typos
+
+3.1.9.1
+----------------------------------------------------------------------
+- Fix: Larger backups at Google Drive don't complete
+- Fix: Restoring from older snapshot versions fails
+- Fix: Can't edit/update Destination settings
+- Fix: Dashboard Destinations list not aligned correctly
+
+- Add: Snapshot is not working with Google Team Drives
+
 3.1.9
 ----------------------------------------------------------------------
 - Add: Specify the backup type (Managed, Automate, Local)
@@ -508,4 +534,4 @@ http://premium.wpmudev.org/forums/topic/need-to-turn-off-zlib-compression-for-it
 - Initial stable release
 
 
-87274-1533486097-ai
+87274-1541874373-au

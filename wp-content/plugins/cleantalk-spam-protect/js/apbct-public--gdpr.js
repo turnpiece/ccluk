@@ -1,4 +1,4 @@
-function apbct_gdpr__form_append_notice(){
+jQuery(document).ready(function(){
 	
 	if(!ctPublic.gdpr_forms) return;
 	
@@ -17,17 +17,16 @@ function apbct_gdpr__form_append_notice(){
 			// Formidable
 			else if(jQuery('.frm_forms')[0] && jQuery('.frm_forms').first().attr('id').indexOf('frm_form_'+item) !== -1)
 				elem = jQuery('.frm_forms').first().children('form');
+			// WPForms
+			else if(jQuery('.wpforms-form')[0] && jQuery('.wpforms-form').first().attr('id').indexOf('wpforms-form-'+item) !== -1)
+				elem = jQuery('.wpforms-form');
 		}
 		
 		// Adding notice
-		if(elem.is('form') || elem.attr('role') == 'form'){
-			elem.append('<input id="apbct_gdpr_'+i+'" type="checkbox" required="required " style="margin-right: 10px;">')
-				.append('<lable for="apbct_gdpr_'+i+'">'+ctPublic.gdpr_text+'</lable>');
+		if(elem.is('form') || elem.attr('role') === 'form'){
+			elem.append('<input id="apbct_gdpr_'+i+'" type="checkbox" required="required " style="display: inline; margin-right: 10px;">')
+				.append('<label style="display: inline;" for="apbct_gdpr_'+i+'">'+ctPublic.gdpr_text+'</label>');
 		}
 	});
 	
-}
-
-jQuery(document).ready(function(){
-	apbct_gdpr__form_append_notice();
 });

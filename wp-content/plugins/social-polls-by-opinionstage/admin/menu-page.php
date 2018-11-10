@@ -5,56 +5,46 @@ defined( 'ABSPATH' ) or die();
 require_once( plugin_dir_path( __FILE__ ).'../includes/opinionstage-client-session.php' );
 
 add_action( 'admin_menu', 'opinionstage_register_menu_page' );
-add_action( 'wp_ajax_opinionstage_ajax_toggle_flyout', 'opinionstage_ajax_toggle_flyout' );
-add_action( 'wp_ajax_opinionstage_ajax_toggle_article_placement', 'opinionstage_ajax_toggle_article_placement' );
-add_action( 'wp_ajax_opinionstage_ajax_toggle_sidebar_placement', 'opinionstage_ajax_toggle_sidebar_placement' );
 
 function opinionstage_register_menu_page() {
 	if (function_exists('add_menu_page')) {
 
 		add_menu_page(
-			__('Poll, Survey, Slider, Quiz, Form & Story', OPINIONSTAGE_TEXT_DOMAIN),
-			__('Poll, Survey, Slider, Quiz, Form & Story', OPINIONSTAGE_TEXT_DOMAIN),
+			__('Opinion Stage', OPINIONSTAGE_TEXT_DOMAIN),
+			__('Opinion Stage', OPINIONSTAGE_TEXT_DOMAIN),
 			'edit_posts',
 			OPINIONSTAGE_MENU_SLUG,
 			'opinionstage_menu_page',
 			plugins_url('admin/images/os.png', plugin_dir_path( __FILE__ )),
 			'25.234323221'
 		);
+		add_submenu_page(OPINIONSTAGE_MENU_SLUG, 'Create...', 'Create...', 'edit_posts', OPINIONSTAGE_MENU_SLUG);
+		add_submenu_page(OPINIONSTAGE_MENU_SLUG, 'Placements', 'Placements', 'edit_posts', OPINIONSTAGE_PLACEMENT_SLUG , 'opinionstage_my_placements' );
+		add_submenu_page(OPINIONSTAGE_MENU_SLUG, 'Getting Started', 'Getting Started', 'edit_posts', OPINIONSTAGE_GETTING_STARTED_SLUG,'opinionstage_getting_started' );
+		add_submenu_page(OPINIONSTAGE_MENU_SLUG, 'Help Center', 'Help Center', 'edit_posts', 'https://help.opinionstage.com/?utm_campaign=WPMainPI&utm_medium=linkhelpcenter&utm_source=wordpress&o=wp35e8' );
+		add_submenu_page(OPINIONSTAGE_MENU_SLUG, 'Live Examples', 'Live Examples', 'edit_posts', 'https://www.opinionstage.com/discover?utm_campaign=WPMainPI&utm_medium=linkexamples&utm_source=wordpress&o=wp35e8' );
 	}
 }
 
 function opinionstage_menu_page() {
 	$os_options = (array) get_option(OPINIONSTAGE_OPTIONS_KEY);
-
 	$os_client_logged_in = opinionstage_user_logged_in();
 
-	opinionstage_register_css_asset( 'menu-page', 'menu-page.css' );
-	opinionstage_register_css_asset( 'icon-font', 'icon-font.css' );
-	opinionstage_register_javascript_asset( 'menu-page', 'menu-page.js', array('jquery') );
-
-	require( plugin_dir_path( __FILE__ ).'menu-page-template.php' );
+	require( plugin_dir_path( __FILE__ ).'create-page-template.php' );
 }
 
-// Toggle the flyout placement activation flag
-function opinionstage_ajax_toggle_flyout() {
+function opinionstage_my_placements(){
 	$os_options = (array) get_option(OPINIONSTAGE_OPTIONS_KEY);
-	$os_options['fly_out_active'] = $_POST['activate'];
+	$os_client_logged_in = opinionstage_user_logged_in();
 
-	update_option(OPINIONSTAGE_OPTIONS_KEY, $os_options);
+    require( plugin_dir_path( __FILE__ ).'/views/placement-page-template.php' );
 }
-// Toggle the article placement activation flag
-function opinionstage_ajax_toggle_article_placement() {
-	$os_options = (array) get_option(OPINIONSTAGE_OPTIONS_KEY);
-	$os_options['article_placement_active'] = $_POST['activate'];
 
-	update_option(OPINIONSTAGE_OPTIONS_KEY, $os_options);
-}
-// Toggle the sidebar placement activation flag
-function opinionstage_ajax_toggle_sidebar_placement() {
-	$os_options = (array) get_option(OPINIONSTAGE_OPTIONS_KEY);
-	$os_options['sidebar_placement_active'] = $_POST['activate'];
+function opinionstage_getting_started(){
+    $os_options = (array) get_option(OPINIONSTAGE_OPTIONS_KEY);
+	$os_client_logged_in = opinionstage_user_logged_in();
 
-	update_option(OPINIONSTAGE_OPTIONS_KEY, $os_options);
+    require( plugin_dir_path( __FILE__ ).'/views/getting-started-page-template.php' );
 }
+
 ?>

@@ -16,6 +16,28 @@ import Fetcher from './utils/fetcher';
 					Fetcher.notice.dismiss(notice_id);
 				});
             }
+
+			/**
+			 * Clear log button clicked.
+			 *
+			 * @since 1.9.2
+			 */
+			$('.wphb-logging-buttons').on('click', '.wphb-logs-clear', function (e) {
+				e.preventDefault();
+
+				Fetcher.logger.clear( $(this).attr('data-module') )
+					.then((response) => {
+						if ( 'undefined' === typeof response.success ) {
+							return;
+						}
+
+						if ( response.success ) {
+							WPHB_Admin.notices.show('wphb-ajax-update-notice', true, 'success', response.message );
+						} else {
+							WPHB_Admin.notices.show('wphb-ajax-update-notice', true, 'error', response.message );
+						}
+					});
+			});
         },
         initModule: function( module ) {
             if ( this.hasOwnProperty( module ) ) {

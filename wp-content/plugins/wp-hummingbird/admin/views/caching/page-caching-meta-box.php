@@ -9,6 +9,7 @@
  * @var string        $deactivate_url      Deactivate URL.
  * @var string        $download_url        Download logs URL.
  * @var bool|WP_Error $error               Error if present.
+ * @var bool|string   $logs_link           Link to the log file.
  * @var array         $pages               A list of page types.
  * @var array         $settings            Settings array.
  */
@@ -147,26 +148,27 @@
 		</label>
 		<label for="debug-log"><?php esc_html_e( 'Enable debug log', 'wphb' ); ?></label>
 		<span class="sui-description sui-toggle-description">
-			<?php
-			esc_html_e( 'If you’re having issues with page caching, turn on the debug log to get insight into what’s going on.', 'wphb' );
-			if ( $settings['settings']['debug_log'] ) {
-				if ( file_exists( WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php' ) ) {
-					?>
-					<div class="clear"></div>
-					<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" id="wphb-pc-log-button"><?php esc_html_e( 'Download Logs', 'wphb' ); ?></a>
-					<div class="clear"></div>
+			<?php esc_html_e( 'If you’re having issues with page caching, turn on the debug log to get insight into what’s going on.', 'wphb' ); ?>
+		</span>
+		<div class="sui-description sui-toggle-description sui-border-frame with-padding wphb-logging-box <?php echo $settings['settings']['debug_log'] ? '' : 'sui-hidden'; ?>">
+			<?php esc_html_e( 'Debug logging is active. Logs are stored for 30 days, you can download the
+				log file below.', 'wphb' ); ?>
 
-					<?php
-					printf(
-						/* translators: %s: File location */
-						esc_html__( 'Location: %s', 'wphb' ),
-						esc_url( get_home_url() . '/wp-content/wphb-logs/page-caching-log.php' )
-					);
-				}
-			}
-			?>
-	</span>
+			<div class="wphb-logging-buttons">
+				<a href="<?php echo esc_url( $download_url ); ?>" class="sui-button sui-button-ghost" <?php disabled( ! $logs_link, true ); ?>>
+					<i class="sui-icon-download" aria-hidden="true"></i>
+					<?php esc_html_e( 'Download Logs', 'wphb' ); ?>
+				</a>
+				<a href="#" class="sui-button sui-button-ghost sui-button-red wphb-logs-clear" data-module="page_cache" <?php disabled( ! $logs_link, true ); ?>>
+					<i class="sui-icon-trash" aria-hidden="true"></i>
+					<?php esc_html_e( 'Clear', 'wphb' ); ?>
+				</a>
+			</div>
 
+			<?php if ( $logs_link ) : ?>
+				<a href="<?php echo esc_url( $logs_link ) ?>" target="_blank"><?php echo esc_url( $logs_link ) ?></a>
+			<?php endif; ?>
+		</div>
 	</div><!-- end sui-box-settings-col-2 -->
 </div><!-- end row -->
 

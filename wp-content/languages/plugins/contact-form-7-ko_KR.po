@@ -1,0 +1,1423 @@
+# Translation of Plugins - Contact Form 7 - Stable (latest release) in Korean
+# This file is distributed under the same license as the Plugins - Contact Form 7 - Stable (latest release) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-09-01 12:24:29+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: ko_KR\n"
+"Project-Id-Version: Plugins - Contact Form 7 - Stable (latest release)\n"
+
+#: modules/acceptance.php:251
+msgid "Make this checkbox optional"
+msgstr "확인상자를 선택으로 설정"
+
+#: admin/edit-contact-form.php:192
+msgid "Professional Services"
+msgstr "전문 서비스"
+
+#: admin/edit-contact-form.php:191
+msgid "https://contactform7.com/custom-development/"
+msgstr "https://contactform7.com/custom-development/"
+
+#: admin/edit-contact-form.php:188
+msgid "Support Forums"
+msgstr "지원 포럼"
+
+#: admin/edit-contact-form.php:187
+msgid "https://wordpress.org/support/plugin/contact-form-7/"
+msgstr "https://wordpress.org/support/plugin/contact-form-7/"
+
+#. translators: 1: FAQ, 2: Docs ("FAQ & Docs")
+#: admin/edit-contact-form.php:176
+msgid "%1$s &#38; %2$s"
+msgstr "%1$s &#38; %2$s"
+
+#: admin/edit-contact-form.php:172
+msgid "Here are some available options to help solve your problems."
+msgstr "여기 문제 해결을 위해 사용 가능한 일부 옵션이 있습니다."
+
+#: admin/edit-contact-form.php:170
+msgid "Do you need help?"
+msgstr "도움이 필요하세요?"
+
+#: modules/acceptance.php:242
+msgid "Condition"
+msgstr "조건"
+
+#. translators: 1: 'Consented' or 'Not consented', 2: conditions
+#: modules/acceptance.php:201
+msgctxt "mail output for acceptance checkboxes"
+msgid "%1$s: %2$s"
+msgstr "%1$s: %2$s"
+
+#: modules/acceptance.php:185
+msgid "Not consented"
+msgstr "동의 거부"
+
+#: modules/acceptance.php:183
+msgid "Consented"
+msgstr "동의함"
+
+#: includes/submission.php:205
+msgid "Sending mail has been aborted."
+msgstr "메시지 발송이 중단됨"
+
+#: admin/includes/editor.php:211
+msgid "You can edit messages used in various situations here. For details, see %s."
+msgstr "여기서 다양한 상황에서 사용되는 메시지를 편집할 수 있습니다. %s에서 상세내용을 확인하세요. "
+
+#: admin/includes/editor.php:210
+msgid "Editing Messages"
+msgstr "메시지 편집"
+
+#: admin/includes/editor.php:209
+msgid "https://contactform7.com/editing-messages/"
+msgstr "https://contactform7.com/editing-messages/"
+
+#: admin/includes/editor.php:130
+msgid "You can edit the mail template here. For details, see %s."
+msgstr "여기서 메일 템플릿을 편집할 수 있습니다. %s에서 상세내용을 확인하세요."
+
+#: admin/includes/editor.php:57
+msgid "You can edit the form template here. For details, see %s."
+msgstr "여기서 양식 템플릿을 편집할 수 있습니다. %s에서 상세내용을 확인하세요."
+
+#: admin/includes/editor.php:56
+msgid "Editing Form Template"
+msgstr "양식 템플릿 편집하기"
+
+#: admin/includes/editor.php:55
+msgid "https://contactform7.com/editing-form-template/"
+msgstr "https://contactform7.com/editing-form-template/"
+
+#. translators: screen reader text
+#: admin/edit-contact-form.php:210
+msgid "(left and right arrow)"
+msgstr "(왼쪽 및 오른쪽 화살표)"
+
+#. translators: 1: ◀ ▶ dashicon, 2: screen reader text for the dashicon
+#: admin/edit-contact-form.php:205
+msgid "%1$s %2$s keys switch panels"
+msgstr "%1$s %2$s 키로 탭 패널 전환"
+
+#. translators: screen reader text
+#: admin/admin.php:327
+msgid "(configuration error)"
+msgstr "(설정 오류)"
+
+#: admin/admin.php:320
+msgid "How to resolve?"
+msgstr "해결 방법?"
+
+#: admin/includes/welcome-panel.php:37
+msgid "Your donation will help encourage and support the plugin&#8217;s continued development and better user support."
+msgstr "귀하의 기부가 플러그인의 지속적인 개발과 더나은 사용자 지원을 촉진 및 지원합니다."
+
+#: admin/includes/welcome-panel.php:35
+msgid "making a donation"
+msgstr "기부하기"
+
+#. translators: %s: link labeled 'making a donation'
+#: admin/includes/welcome-panel.php:35
+msgid "If you enjoy using Contact Form 7 and find it useful, please consider %s."
+msgstr "Contact Form 7이 유횽하다 생각하시면 %s를 고려해주세요."
+
+#: admin/includes/welcome-panel.php:33
+msgid "It is hard to continue development and support for this plugin without contributions from users like you."
+msgstr "귀하같은 사용자의 참여가 없다면 이 플러그인의 지속적인 개발 및 지원이 어렵습니다."
+
+#: includes/contact-form.php:296 includes/contact-form.php:709
+msgid "This contact form is available only for logged in users."
+msgstr "연락처 양식은 오직 로그인한 사용자만 사용 가능합니다."
+
+#: includes/config-validator.php:146
+msgid "Deprecated settings are used."
+msgstr "더 이상 사용하지 않는 설정이 사용되었습니다."
+
+#. translators: %s: link labeled 'Really Simple CAPTCHA'
+#: modules/really-simple-captcha.php:36
+msgid "To use CAPTCHA, you need %s plugin installed."
+msgstr "CAPTCHA를 사용하려면 %s 플러그인을 설치해야 합니다."
+
+#: includes/rest-api.php:261
+msgid "There was an error deleting the contact form."
+msgstr "연락처 양식을 삭제하는 도중 오류가 발생했습니다."
+
+#: includes/rest-api.php:177 includes/rest-api.php:204
+#: includes/rest-api.php:253
+msgid "You are not allowed to access the requested contact form."
+msgstr "요청한 연락처 양식에 접근할 권한이 없습니다."
+
+#: includes/rest-api.php:171 includes/rest-api.php:198
+#: includes/rest-api.php:247 includes/rest-api.php:276
+#: includes/rest-api.php:316
+msgid "The requested contact form was not found."
+msgstr "요청한 연락처 양식을 발견하지 못했습니다."
+
+#: includes/rest-api.php:127
+msgid "You are not allowed to create a contact form."
+msgstr "연락처 양식을 생성할 권한이 없습니다."
+
+#: includes/rest-api.php:121
+msgid "Cannot create existing contact form."
+msgstr "기존 연락처 양식을 생성할 수 없습니다."
+
+#: includes/rest-api.php:64
+msgid "You are not allowed to access contact forms."
+msgstr "연락처 양식에 접근할 권한이 없습니다."
+
+#: includes/config-validator.php:563
+msgid "Attachment file does not exist at %path%."
+msgstr "첨부파일이 %path%에 존재하지 않습니다."
+
+#: includes/config-validator.php:482
+msgid "Invalid mailbox syntax is used in the %name% field."
+msgstr "%name% 필드에서 유효하지 않은 메일함 구문이 사용되었습니다."
+
+#. translators: %names%: a list of form control names
+#: includes/config-validator.php:393
+msgid "Unavailable names (%names%) are used for form controls."
+msgstr "양식 제어에서 사용 불가능한 이름(%names%)이 사용되었습니다."
+
+#: includes/config-validator.php:144
+msgid "There are invalid mail header fields."
+msgstr "유효하지 않은 메일 헤더 필드가 있습니다."
+
+#: includes/config-validator.php:140
+msgid "HTML tags are used in a message."
+msgstr "메시지에 HTML 태그가 사용되었습니다."
+
+#: includes/config-validator.php:138
+msgid "Sender email address does not belong to the site domain."
+msgstr "보내는 사람의 이메일 주소가 사이트 도메인에 속하지 않습니다."
+
+#: includes/config-validator.php:136
+msgid "Invalid mailbox syntax is used."
+msgstr "유효하지 않은 메일함 구문이 사용되었습니다."
+
+#: includes/config-validator.php:134
+msgid "There is a possible empty field."
+msgstr "비어있는 필드가 있을 가능성이 있습니다."
+
+#. translators: %s: number of errors detected
+#: admin/includes/class-contact-forms-list-table.php:132
+msgid "%s configuration error detected"
+msgid_plural "%s configuration errors detected"
+msgstr[0] "%s개의 설정 오류가 탐지됨"
+
+#: admin/admin.php:324
+msgid "%d configuration errors detected in this tab panel"
+msgstr "이 탭 패널에서 %d개의 설정 오류가 탐지됨"
+
+#: admin/admin.php:323
+msgid "1 configuration error detected in this tab panel"
+msgstr "이 탭 패널에서 1개의 설정 오류가 탐지됨"
+
+#: admin/admin.php:322
+msgid "%d configuration errors detected"
+msgstr "%d개의 설정 오류가 탐지됨"
+
+#: admin/admin.php:321
+msgid "1 configuration error detected"
+msgstr "1개의 설정 오류가 탐지됨"
+
+#: admin/admin.php:510 includes/rest-api.php:138 includes/rest-api.php:214
+msgid "There was an error saving the contact form."
+msgstr "연락처 양식을 저장하는 도중 오류가 발생했습니다."
+
+#: includes/functions.php:365
+msgid "%1$s is <strong>deprecated</strong> since Contact Form 7 version %2$s! Use %3$s instead."
+msgstr "%1$s은(는) Contact Form 7 버전 %2$s부터 <strong>더 이상 사용하지 않습니다</strong>. %3$s을(를) 대신 사용하세요."
+
+#: admin/includes/welcome-panel.php:45
+msgid "Flamingo"
+msgstr "플라밍고"
+
+#. translators: %s: link labeled 'Flamingo'
+#: admin/includes/welcome-panel.php:45
+msgid "Install a message storage plugin before this happens to you. %s saves all messages through contact forms into the database. Flamingo is a free WordPress plugin created by the same author as Contact Form 7."
+msgstr "이런 일이 발생하기 전에 메시지 저장 플러그인을 설치하세요. %s는 연락처 양식으로 작성된 모든 메시지를 데이터베이스로 저장합니다. 플라밍고는 Contact Form 7과 동일한 개발자가 만든 무료 워드프레스 플러그입니다."
+
+#: admin/includes/welcome-panel.php:43
+msgid "Contact Form 7 doesn&#8217;t store submitted messages anywhere. Therefore, you may lose important messages forever if your mail server has issues or you make a mistake in mail configuration."
+msgstr "Contact Form 7은 제출된 메시지를 어디에도 저장하지 않습니다. 따라서 메일 서버에 문제가 있거나 메일 설정에 실수가 있을 경우, 중요한 메시지를 영구적으로 분실할 수도 있습니다."
+
+#: admin/includes/welcome-panel.php:41
+msgid "Before you cry over spilt mail&#8230;"
+msgstr "메일 분할로 슬퍼하기 전에&#8230;"
+
+#: admin/includes/welcome-panel.php:26
+msgid "comment blacklist"
+msgstr "차단목록 표기"
+
+#: admin/includes/welcome-panel.php:26
+msgid "https://contactform7.com/comment-blacklist/"
+msgstr "https://contactform7.com/comment-blacklist/"
+
+#. translators: links labeled 1: 'Akismet', 2: 'reCAPTCHA', 3: 'comment
+#. blacklist'
+#: admin/includes/welcome-panel.php:26
+msgid "Contact Form 7 supports spam-filtering with %1$s. Intelligent %2$s blocks annoying spambots. Plus, using %3$s, you can block messages containing specified keywords or those sent from specified IP addresses."
+msgstr "Contact Form 7은 %1$s를 통한 스팸 필터링을 지원합니다. 똑똑한 %2$s는 성가신 스팸봇을 차단합니다. 이에 더해,  %3$s를 사용하면 특정 키워드를 포함한 메시지 또는 특정 IP 주소에서 발송된 메시지를 차단할 수 있습니다."
+
+#: admin/includes/welcome-panel.php:24
+msgid "Spammers target everything; your contact forms aren&#8217;t an exception. Before you get spammed, protect your contact forms with the powerful anti-spam features Contact Form 7 provides."
+msgstr "스팸 발송자에게는 모든 것이 스팸 대상입니다:  귀하의 연락처 양식도 예외는 아닙니다. 스팸 대상이 되기 전에 Contact Form 7이 제공하는 강력한 스팸 방지 기능으로 연락처 양식을 보호하세요."
+
+#: admin/includes/welcome-panel.php:22
+msgid "Getting spammed? You have protection."
+msgstr "스팸 대상이십니까? 보호할 방법이 있습니다."
+
+#: includes/config-validator.php:142
+msgid "Multiple form controls are in a single label element."
+msgstr "다중 양식 제어는 단일 라벨 요소로 되어있습니다."
+
+#: admin/admin.php:429
+msgid "FAQ about Configuration Validator"
+msgstr "설정 검증 도구에 관한 FAQ"
+
+#: admin/admin.php:429
+msgid "https://contactform7.com/configuration-validator-faq/"
+msgstr "https://contactform7.com/configuration-validator-faq/"
+
+#: modules/text.php:191
+msgid "The telephone number is invalid."
+msgstr "전화번호가 유효하지 않습니다."
+
+#: modules/text.php:184
+msgid "The URL is invalid."
+msgstr "URL이 유효하지 않습니다."
+
+#: modules/text.php:177
+msgid "The e-mail address entered is invalid."
+msgstr "입력된 이메일 주소가 유효하지 않습니다."
+
+#: modules/quiz.php:163
+msgid "The answer to the quiz is incorrect."
+msgstr "퀴즈 답변이 올바르지 않습니다."
+
+#: modules/number.php:131
+msgid "The number is larger than the maximum allowed."
+msgstr "숫자가 허용된 최대치보다 큽니다."
+
+#: modules/number.php:126
+msgid "The number is smaller than the minimum allowed."
+msgstr "숫자가 허용된 최소치보다 작습니다."
+
+#: modules/number.php:121
+msgid "The number format is invalid."
+msgstr "숫자 형식이 유효하지 않습니다."
+
+#: modules/file.php:195
+msgid "There was an error uploading the file."
+msgstr "파일을 업로드하는 도중 오류가 발생했습니다."
+
+#: modules/file.php:190
+msgid "The file is too big."
+msgstr "파일이 너무 큽니다."
+
+#: modules/file.php:185
+msgid "You are not allowed to upload files of this type."
+msgstr "이 유형의 파일을 업로드할 권한이 없습니다."
+
+#: modules/file.php:180
+msgid "There was an unknown error uploading the file."
+msgstr "파일을 업로드하는 도중 알 수 없는 오류가 발생했습니다."
+
+#: modules/date.php:128
+msgid "The date is after the latest one allowed."
+msgstr "날짜가 허용된 최신 날짜보다 나중입니다."
+
+#: modules/date.php:123
+msgid "The date is before the earliest one allowed."
+msgstr "날짜가 허용된 과거 날짜보다 이전입니다."
+
+#: modules/date.php:118
+msgid "The date format is incorrect."
+msgstr "날짜 형식이 올바르지 않습니다."
+
+#: includes/contact-form-template.php:195
+msgid "The field is too short."
+msgstr "내용이 너무 짧습니다."
+
+#: includes/contact-form-template.php:188
+msgid "The field is too long."
+msgstr "내용이 너무 깁니다."
+
+#: includes/contact-form-template.php:181
+msgid "The field is required."
+msgstr "필수 입력 필드입니다."
+
+#: includes/contact-form-template.php:174
+msgid "You must accept the terms and conditions before sending your message."
+msgstr "메시지를 보내기 전에 먼저 조건에 동의하셔야 합니다."
+
+#: includes/contact-form-template.php:160
+msgid "One or more fields have an error. Please check and try again."
+msgstr "하나 이상의 필드에 오류가 있습니다. 재확인 후 다시 시도하세요."
+
+#: includes/contact-form-template.php:153
+#: includes/contact-form-template.php:167
+msgid "There was an error trying to send your message. Please try again later."
+msgstr "메시지를 보내는 도중 오류가 발생했습니다. 나중에 다시 시도해주세요."
+
+#: includes/contact-form-template.php:146
+msgid "Thank you for your message. It has been sent."
+msgstr "메시지를 보내주셔서 감사합니다. 발송이 완료되었습니다."
+
+#. translators: 1: blog name, 2: [your-subject]
+#: includes/contact-form-template.php:52 includes/contact-form-template.php:86
+msgctxt "mail subject"
+msgid "%1$s \"%2$s\""
+msgstr "%1$s \"%2$s\""
+
+#: admin/admin.php:634
+msgid "Misconfiguration leads to mail delivery failure or other troubles. Validate your contact forms now."
+msgstr "잘못된 설정은 메일 전송 실패 또는 기타 문제로 이어집니다. 지금 연락처 양식을 검증하세요."
+
+#: admin/admin.php:631
+msgid "Validate Contact Form 7 Configuration"
+msgstr "Contact Form 7 설정 검증"
+
+#: includes/config-validator.php:18
+msgid "https://contactform7.com/configuration-errors/"
+msgstr "https://contactform7.com/configuration-errors/"
+
+#: admin/admin.php:533
+msgid "Configuration validation completed. No invalid contact form was found."
+msgstr "설정 검증이 완료되었습니다. 유효하지 않은 연락처 양식이 발견되지 않았습니다."
+
+#. translators: %s: number of contact forms
+#: admin/admin.php:525
+msgid "Configuration validation completed. %s invalid contact form was found."
+msgid_plural "Configuration validation completed. %s invalid contact forms were found."
+msgstr[0] "설정 검증이 완료되었습니다. %s개의 유효하지 않은 연락처 양식이 발견되었습니다."
+
+#: admin/admin.php:421
+msgid "Validate Configuration"
+msgstr "설정 검증"
+
+#. translators: %s: number of contact forms
+#: admin/admin.php:412
+msgid "Validate %s Contact Form Now"
+msgid_plural "Validate %s Contact Forms Now"
+msgstr[0] "지금 %s개의 연락처 양식을 검증하기"
+
+#: admin/admin.php:212
+msgid "You are not allowed to validate configuration."
+msgstr "설정을 검증할 권한이 없습니다."
+
+#: includes/controller.php:64
+msgid "Please verify that you are not a robot."
+msgstr "로봇이 아님을 증명하세요."
+
+#: modules/recaptcha.php:467
+msgid "Compact"
+msgstr "컴팩트"
+
+#: modules/recaptcha.php:465
+msgid "Normal"
+msgstr "보통"
+
+#: modules/recaptcha.php:461 modules/recaptcha.php:464
+msgid "Size"
+msgstr "크기"
+
+#: modules/recaptcha.php:479
+msgid "Dark"
+msgstr "어두움"
+
+#: modules/recaptcha.php:477
+msgid "Light"
+msgstr "밝음"
+
+#: modules/recaptcha.php:473 modules/recaptcha.php:476
+msgid "Theme"
+msgstr "테마"
+
+#: modules/recaptcha.php:449
+msgid "Generate a form-tag for a reCAPTCHA widget. For more details, see %s."
+msgstr "reCAPTCHA 위젯에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/recaptcha.php:441
+msgid "To use reCAPTCHA, first you need to install an API key pair. For more details, see %s."
+msgstr "reCAPTCHA를 사용하려면 먼저 API 키 조합을 설치해야 합니다. %s에서 상세내용을 확인하세요."
+
+#: admin/includes/welcome-panel.php:26 modules/recaptcha.php:189
+#: modules/recaptcha.php:441 modules/recaptcha.php:451
+msgid "https://contactform7.com/recaptcha/"
+msgstr "https://contactform7.com/recaptcha/"
+
+#: modules/recaptcha.php:189
+msgid "For more details, see %s."
+msgstr "%s에서 상세내용을 확인하세요."
+
+#: modules/recaptcha.php:187
+msgid "Configure Keys"
+msgstr "키 설정"
+
+#: modules/recaptcha.php:185
+msgid "To use reCAPTCHA, you need to install an API key pair."
+msgstr "reCAPTCHA를 사용하려면 API 키 조합을 설치해야 합니다."
+
+#: modules/recaptcha.php:180
+msgid "Reset Keys"
+msgstr "재설정 키"
+
+#: modules/recaptcha.php:174 modules/recaptcha.php:205
+msgid "Secret Key"
+msgstr "비밀 키"
+
+#: modules/recaptcha.php:170 modules/recaptcha.php:201
+msgid "Site Key"
+msgstr "사이트 키"
+
+#: modules/recaptcha.php:155
+msgid "reCAPTCHA is a free service to protect your website from spam and abuse."
+msgstr "reCAPTCHA는 스팸 및 공격으로부터 웹사이트를 보호하는 무료 서비스입니다."
+
+#: modules/recaptcha.php:149
+msgid "Settings saved."
+msgstr "설정이 저장됨."
+
+#: modules/recaptcha.php:144
+msgid "Invalid key values."
+msgstr "유효하지 않은 키 값"
+
+#: modules/recaptcha.php:143
+msgid "ERROR"
+msgstr "오류"
+
+#: admin/includes/welcome-panel.php:26 modules/recaptcha.php:23
+#: modules/recaptcha.php:189 modules/recaptcha.php:428
+#: modules/recaptcha.php:441 modules/recaptcha.php:451
+msgid "reCAPTCHA"
+msgstr "reCAPTCHA"
+
+#: modules/really-simple-captcha.php:243
+msgid "CAPTCHA (Really Simple CAPTCHA)"
+msgstr "CAPTCHA (초간략 CAPTCHA)"
+
+#. Author URI of the plugin/theme
+msgid "https://ideasilo.wordpress.com/"
+msgstr "https://ideasilo.wordpress.com/"
+
+#. Author of the plugin/theme
+msgid "Takayuki Miyoshi"
+msgstr "Takayuki Miyoshi"
+
+#. Description of the plugin/theme
+msgid "Just another contact form plugin. Simple but flexible."
+msgstr "간단하지만 유연한 또 하나의 연락처 양식 플러그인."
+
+#. Plugin URI of the plugin/theme
+msgid "https://contactform7.com/"
+msgstr "https://contactform7.com/"
+
+#. translators: title of your first contact form. %d: number fixed to '1'
+#: settings.php:143
+msgid "Contact form %d"
+msgstr "연락처 양식 %d"
+
+#: modules/textarea.php:134
+msgid "Generate a form-tag for a multi-line text input field. For more details, see %s."
+msgstr "다중 줄 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/textarea.php:126
+msgid "text area"
+msgstr "텍스트 영역"
+
+#: modules/text.php:283
+msgid "This field requires author's URL"
+msgstr "이 필드에는 작성자의 URL이 필요합니다."
+
+#: modules/text.php:278
+msgid "This field requires author's email address"
+msgstr "이 필드에는 작성자의 이메일 주소가 필요합니다."
+
+#: modules/text.php:273
+msgid "This field requires author's name"
+msgstr "이 필드에는 작성자의 이름이 필요합니다."
+
+#: admin/includes/welcome-panel.php:26 modules/text.php:265
+#: modules/text.php:268
+msgid "Akismet"
+msgstr "Akismet"
+
+#: modules/text.php:233 modules/textarea.php:136
+msgid "Text Fields"
+msgstr "텍스트 필드"
+
+#: modules/text.php:233 modules/textarea.php:136
+msgid "https://contactform7.com/text-fields/"
+msgstr "https://contactform7.com/text-fields/"
+
+#: modules/text.php:230
+msgid "Generate a form-tag for a single-line telephone number input field. For more details, see %s."
+msgstr "단일 줄 숫자 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/text.php:228
+msgid "Generate a form-tag for a single-line URL input field. For more details, see %s."
+msgstr "단일 줄 URL 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/text.php:226
+msgid "Generate a form-tag for a single-line email address input field. For more details, see %s."
+msgstr "단일 줄 이메일 주소 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/text.php:224
+msgid "Generate a form-tag for a single-line plain text input field. For more details, see %s."
+msgstr "단일 줄 일반 텍스트 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/text.php:211
+msgid "tel"
+msgstr "전화"
+
+#: modules/text.php:209
+msgid "URL"
+msgstr "URL"
+
+#: modules/text.php:207
+msgid "email"
+msgstr "이메일"
+
+#: modules/text.php:205
+msgid "text"
+msgstr "텍스트"
+
+#: modules/text.php:189
+msgid "Telephone number that the sender entered is invalid"
+msgstr "보내는 사람이 입력한 전화번호가 유효하지 않음"
+
+#: modules/text.php:182
+msgid "URL that the sender entered is invalid"
+msgstr "보내는 사람이 입력한 URL이 유효하지 않음"
+
+#: modules/text.php:175
+msgid "Email address that the sender entered is invalid"
+msgstr "보내는 사람이 입력한 이메일 주소가 유효하지 않음"
+
+#: modules/submit.php:65
+msgid "Label"
+msgstr "라벨"
+
+#: modules/submit.php:55
+msgid "Submit Button"
+msgstr "제출 버튼"
+
+#: modules/submit.php:55
+msgid "https://contactform7.com/submit-button/"
+msgstr "https://contactform7.com/submit-button/"
+
+#: modules/submit.php:53
+msgid "Generate a form-tag for a submit button. For more details, see %s."
+msgstr "제출 버튼에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/submit.php:46
+msgid "submit"
+msgstr "제출"
+
+#: modules/select.php:193
+msgid "Insert a blank item as the first option"
+msgstr "첫 번째 옵션으로 빈 항목을 삽입"
+
+#: modules/select.php:192
+msgid "Allow multiple selections"
+msgstr "다중 선택 허용"
+
+#: modules/select.php:159
+msgid "Generate a form-tag for a drop-down menu. For more details, see %s."
+msgstr "드롭다운 메뉴에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/select.php:152
+msgid "drop-down menu"
+msgstr "드롭다운 메뉴"
+
+#: modules/quiz.php:207
+msgid "One pipe-separated question-answer pair (e.g. The capital of Brazil?|Rio) per line."
+msgstr "한 줄 당 막대로 분리된 질문-답변 조합 (예: 브라질의 수도는?|리오)."
+
+#: modules/quiz.php:202 modules/quiz.php:205
+msgid "Questions and answers"
+msgstr "질문 및 답변"
+
+#: modules/quiz.php:187
+msgid "Quiz"
+msgstr "퀴즈"
+
+#: modules/quiz.php:187
+msgid "https://contactform7.com/quiz/"
+msgstr "https://contactform7.com/quiz/"
+
+#: modules/quiz.php:185
+msgid "Generate a form-tag for a question-answer pair. For more details, see %s."
+msgstr "질의-응답 조합에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/quiz.php:177
+msgid "quiz"
+msgstr "퀴즈"
+
+#: modules/quiz.php:161
+msgid "Sender doesn't enter the correct answer to the quiz"
+msgstr "보내는 사람이 퀴즈에 대한 올바른 답을 입력하지 않음"
+
+#: modules/number.php:169
+msgid "Slider"
+msgstr "슬라이더"
+
+#: modules/number.php:168
+msgid "Spinbox"
+msgstr "스핀박스"
+
+#: modules/number.php:153
+msgid "Number Fields"
+msgstr "숫자 필드"
+
+#: modules/number.php:153
+msgid "https://contactform7.com/number-fields/"
+msgstr "https://contactform7.com/number-fields/"
+
+#: modules/number.php:151
+msgid "Generate a form-tag for a field for numeric value input. For more details, see %s."
+msgstr "숫자 값 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/number.php:143
+msgid "number"
+msgstr "숫자"
+
+#: modules/number.php:130
+msgid "Number is larger than maximum limit"
+msgstr "숫자가 최대 허용치보다 큼"
+
+#: modules/number.php:125
+msgid "Number is smaller than minimum limit"
+msgstr "숫자가 최소 허용치보다 작음"
+
+#: modules/number.php:120
+msgid "Number format that the sender entered is invalid"
+msgstr "보내는 사람이 입력한 숫자 양식이 유효하지 않음"
+
+#: modules/file.php:301
+msgid "This contact form contains file uploading fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
+msgstr "이 연락처 양식은 파일 업로드 필드를 포함하고 있지만, 파일의 임시 폴더(%s)가 존재하지 않거나 쓰기가 불가능합니다. 폴더를 생성하거나 권한을 수동으로 변경할 수 있습니다."
+
+#: modules/file.php:275
+msgid "To attach the file uploaded through this field to mail, you need to insert the corresponding mail-tag (%s) into the File Attachments field on the Mail tab."
+msgstr "이 필드를 통해 업로드된 파일을 메일에 첨부파려면, 해당하는 메일-태그(%s)를 메일 탭의 파일 첨부 필드에 삽입해야 합니다."
+
+#: modules/file.php:247
+msgid "Acceptable file types"
+msgstr "허용 파일 유형"
+
+#: modules/file.php:242
+msgid "File size limit (bytes)"
+msgstr "파일 크기 제한 (바이트)"
+
+#: modules/file.php:217
+msgid "File Uploading and Attachment"
+msgstr "파일 업로드 및 첨부파일"
+
+#: modules/file.php:217
+msgid "https://contactform7.com/file-uploading-and-attachment/"
+msgstr "https://contactform7.com/file-uploading-and-attachment/"
+
+#: modules/file.php:215
+msgid "Generate a form-tag for a file uploading field. For more details, see %s."
+msgstr "파일 업로드 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/file.php:207
+msgid "file"
+msgstr "파일"
+
+#: modules/file.php:194
+msgid "Uploading a file fails for PHP error"
+msgstr "PHP 오류로 파일 업로드에 실패함"
+
+#: modules/file.php:189
+msgid "Uploaded file is too large"
+msgstr "업로드된 파일이 너무 큼"
+
+#: modules/file.php:184
+msgid "Uploaded file is not allowed for file type"
+msgstr "업로드된 파일이 허용된 파일 유형이 아님"
+
+#: modules/file.php:179
+msgid "Uploading a file fails for any reason"
+msgstr "알 수 없는 사유로 파일 업로드에 실패함"
+
+#: modules/date.php:191 modules/number.php:199
+msgid "Max"
+msgstr "최대"
+
+#: modules/date.php:186 modules/number.php:194
+msgid "Min"
+msgstr "최소"
+
+#: modules/date.php:181 modules/date.php:184 modules/number.php:189
+#: modules/number.php:192
+msgid "Range"
+msgstr "범위"
+
+#: modules/date.php:177 modules/number.php:185 modules/text.php:260
+#: modules/textarea.php:163
+msgid "Use this text as the placeholder of the field"
+msgstr "이 텍스트를 필드의 위치고정자로 사용"
+
+#: modules/date.php:175 modules/number.php:183 modules/text.php:258
+#: modules/textarea.php:161
+msgid "Default value"
+msgstr "기본 값"
+
+#: modules/date.php:150
+msgid "Date Field"
+msgstr "날짜 필드"
+
+#: modules/date.php:150
+msgid "https://contactform7.com/date-field/"
+msgstr "https://contactform7.com/date-field/"
+
+#: modules/date.php:148
+msgid "Generate a form-tag for a date input field. For more details, see %s."
+msgstr "날짜 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/date.php:140
+msgid "date"
+msgstr "날짜"
+
+#: modules/date.php:127
+msgid "Date is later than maximum limit"
+msgstr "날짜가 최대 허용치보다 나중임"
+
+#: modules/date.php:122
+msgid "Date is earlier than minimum limit"
+msgstr "날짜가 최소 허용치보다 이전임"
+
+#: modules/date.php:117
+msgid "Date format that the sender entered is invalid"
+msgstr "보내는 사람이 입력한 날짜 형식이 유효하지 않음"
+
+#: modules/checkbox.php:341 modules/date.php:221 modules/number.php:229
+#: modules/select.php:222 modules/text.php:316 modules/textarea.php:190
+msgid "To use the value input through this field in a mail field, you need to insert the corresponding mail-tag (%s) into the field on the Mail tab."
+msgstr "메일 필드에서 이 필드에 입력한 값을 사용하려면, 해당하는 메일-태그(%s)를 메일 탭의 파일 첨부 필드에 삽입해야 합니다."
+
+#: modules/checkbox.php:311
+msgid "Make checkboxes exclusive"
+msgstr "확인상자를 필수로 설정"
+
+#: modules/checkbox.php:309
+msgid "Wrap each item with label element"
+msgstr "각 항목을 라벨 요소로 싸기"
+
+#: modules/checkbox.php:308
+msgid "Put a label first, a checkbox last"
+msgstr "먼저 라벨을 적용하고, 확인상자를 마지막에 삽입"
+
+#: modules/checkbox.php:307 modules/select.php:191
+msgid "One option per line."
+msgstr "행 당 하나의 옵션"
+
+#: modules/checkbox.php:290 modules/date.php:164 modules/file.php:231
+#: modules/number.php:172 modules/select.php:175 modules/text.php:247
+#: modules/textarea.php:150
+msgid "Required field"
+msgstr "필수 입력 필드"
+
+#: modules/checkbox.php:286 modules/checkbox.php:289 modules/date.php:160
+#: modules/date.php:163 modules/file.php:227 modules/file.php:230
+#: modules/number.php:163 modules/number.php:166 modules/select.php:171
+#: modules/select.php:174 modules/text.php:243 modules/text.php:246
+#: modules/textarea.php:146 modules/textarea.php:149
+msgid "Field type"
+msgstr "필드 유형"
+
+#: modules/checkbox.php:275 modules/select.php:161
+msgid "Checkboxes, Radio Buttons and Menus"
+msgstr "확인상자, 라디오 버튼 및 메뉴"
+
+#: modules/checkbox.php:275 modules/select.php:161
+msgid "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
+msgstr "https://contactform7.com/checkboxes-radio-buttons-and-menus/"
+
+#: modules/checkbox.php:272
+msgid "Generate a form-tag for a group of radio buttons. For more details, see %s."
+msgstr "라디오 버튼 그룹에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/checkbox.php:270
+msgid "Generate a form-tag for a group of checkboxes. For more details, see %s."
+msgstr "확인상자 그룹에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/checkbox.php:257
+msgid "radio buttons"
+msgstr "라디오 버튼"
+
+#: modules/checkbox.php:255
+msgid "checkboxes"
+msgstr "확인상자"
+
+#: modules/really-simple-captcha.php:360
+msgid "This contact form contains CAPTCHA fields, but the necessary libraries (GD and FreeType) are not available on your server."
+msgstr "이 연락처 양식에는 CAPTCHA 필드가 포함되었지만, 필요한 라이브러리(GD 및 FreeType)가 서버에 존재하지 않습니다."
+
+#: modules/really-simple-captcha.php:353
+msgid "This contact form contains CAPTCHA fields, but the temporary folder for the files (%s) does not exist or is not writable. You can create the folder or change its permission manually."
+msgstr "이 연락처 양식에는 CAPTCHA 필드가 포함되었지만, 파일의 임시 저장 폴더(%s)가 존재하지 않거나 쓰기가 불가능합니다. 수동으로 폴더를 생성하거나 권한을 변경할 수 있습니다."
+
+#: modules/really-simple-captcha.php:302
+msgid "Input field settings"
+msgstr "입력 필드 설정"
+
+#: modules/really-simple-captcha.php:287
+msgid "Image settings"
+msgstr "이미지 설정"
+
+#: modules/really-simple-captcha.php:270
+msgid "https://contactform7.com/captcha/"
+msgstr "https://contactform7.com/captcha/"
+
+#: modules/really-simple-captcha.php:268
+msgid "Generate form-tags for a CAPTCHA image and corresponding response input field. For more details, see %s."
+msgstr "CAPTCHA 이미지 및 답변 입력 필드에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#. translators: %s: link labeled 'Really Simple CAPTCHA'
+#: modules/really-simple-captcha.php:257
+msgid "To use CAPTCHA, you first need to install and activate %s plugin."
+msgstr "CAPTCHA를 사용하려면 먼저 %s 플러그인을 설치 및 활성화해야 합니다."
+
+#: modules/really-simple-captcha.php:270 modules/recaptcha.php:223
+msgid "CAPTCHA"
+msgstr "CAPTCHA"
+
+#: modules/really-simple-captcha.php:224
+msgid "Your entered code is incorrect."
+msgstr "입력한 코드가 올바르지 않습니다."
+
+#: modules/really-simple-captcha.php:222
+msgid "The code that sender entered does not match the CAPTCHA"
+msgstr "보내는 사람이 입력한 코드가 CAPTCHA와 일치하지 않음"
+
+#: modules/acceptance.php:275 modules/checkbox.php:336 modules/date.php:216
+#: modules/file.php:270 modules/number.php:224 modules/quiz.php:231
+#: modules/really-simple-captcha.php:322 modules/recaptcha.php:503
+#: modules/select.php:217 modules/submit.php:88 modules/text.php:311
+#: modules/textarea.php:185
+msgid "Insert Tag"
+msgstr "태그 삽입"
+
+#: modules/acceptance.php:262 modules/checkbox.php:323 modules/date.php:204
+#: modules/file.php:257 modules/number.php:212 modules/quiz.php:218
+#: modules/really-simple-captcha.php:295 modules/really-simple-captcha.php:310
+#: modules/recaptcha.php:490 modules/select.php:204 modules/submit.php:75
+#: modules/text.php:298 modules/textarea.php:172
+msgid "Class attribute"
+msgstr "클래스 속성"
+
+#: modules/acceptance.php:257 modules/checkbox.php:318 modules/date.php:199
+#: modules/file.php:252 modules/number.php:207 modules/quiz.php:213
+#: modules/really-simple-captcha.php:290 modules/really-simple-captcha.php:305
+#: modules/recaptcha.php:485 modules/select.php:199 modules/submit.php:70
+#: modules/text.php:293 modules/textarea.php:167
+msgid "Id attribute"
+msgstr "ID 속성"
+
+#: modules/acceptance.php:247 modules/acceptance.php:250
+#: modules/checkbox.php:302 modules/checkbox.php:305 modules/select.php:186
+#: modules/select.php:189
+msgid "Options"
+msgstr "옵션"
+
+#: modules/acceptance.php:237 modules/checkbox.php:297 modules/date.php:170
+#: modules/file.php:237 modules/number.php:178 modules/quiz.php:197
+#: modules/really-simple-captcha.php:280 modules/select.php:181
+#: modules/text.php:253 modules/textarea.php:156
+msgid "Name"
+msgstr "이름"
+
+#: modules/acceptance.php:227
+msgid "Acceptance Checkbox"
+msgstr "동의 확인상자"
+
+#: modules/acceptance.php:227
+msgid "https://contactform7.com/acceptance-checkbox/"
+msgstr "https://contactform7.com/acceptance-checkbox/"
+
+#: modules/acceptance.php:225
+msgid "Generate a form-tag for an acceptance checkbox. For more details, see %s."
+msgstr "동의 확인상자에 양식-태그를 생성합니다. 추가 상세 내용은 %s을(를) 참조하세요."
+
+#: modules/acceptance.php:217
+msgid "acceptance"
+msgstr "동의"
+
+#: includes/contact-form.php:158
+msgid "<code>%1$s</code> property of a <code>WPCF7_ContactForm</code> object is <strong>no longer accessible</strong>. Use <code>%2$s</code> method instead."
+msgstr "<code>WPCF7_ContactForm</code> 오브젝트의 <code>%1$s</code> 속성은 <strong>더 이상 접근이 불가능합니다</strong>. 대신 <code>%2$s</code> 메소드를 사용하세요."
+
+#: includes/contact-form.php:84 includes/contact-form.php:234
+msgid "Untitled"
+msgstr "제목 없음"
+
+#: includes/contact-form.php:32
+msgid "Contact Form"
+msgstr "연락처 양식"
+
+#: includes/contact-form-template.php:193
+msgid "There is a field with input that is shorter than the minimum allowed length"
+msgstr "최소 허용된 길이보다 짧은 입력내용이 있는 필드가 있음"
+
+#: includes/contact-form-template.php:186
+msgid "There is a field with input that is longer than the maximum allowed length"
+msgstr "최대 허용된 길이보다 긴 입력내용이 있는 필드가 있음"
+
+#: includes/contact-form-template.php:179
+msgid "There is a field that the sender must fill in"
+msgstr "보내는 사람이 입력해야 하는 필드가 있음"
+
+#: includes/contact-form-template.php:172
+msgid "There are terms that the sender must accept"
+msgstr "보내는 사람이 동의해야 하는 조건이 있음"
+
+#: includes/contact-form-template.php:165
+msgid "Submission was referred to as spam"
+msgstr "제출 내용이 스팸으로 간주됨"
+
+#: includes/contact-form-template.php:158
+msgid "Validation errors occurred"
+msgstr "검증 오류가 발생함"
+
+#: includes/contact-form-template.php:151
+msgid "Sender's message failed to send"
+msgstr "보내는 사람의 메시지를 발송하는데 실패함"
+
+#: includes/contact-form-template.php:144
+msgid "Sender's message was sent successfully"
+msgstr "보내는 사람의 메시지를 성공적으로 발송함"
+
+#. translators: 1: blog name, 2: blog URL
+#: includes/contact-form-template.php:67 includes/contact-form-template.php:96
+msgid "This e-mail was sent from a contact form on %1$s (%2$s)"
+msgstr "%1$s(%2$s)의 연락처 양식에서 발송된 이메일입니다."
+
+#: includes/contact-form-template.php:62 includes/contact-form-template.php:91
+msgid "Message Body:"
+msgstr "메시지 본문:"
+
+#. translators: %s: [your-subject]
+#: includes/contact-form-template.php:60
+msgid "Subject: %s"
+msgstr "제목: %s"
+
+#. translators: %s: [your-name] <[your-email]>
+#: includes/contact-form-template.php:57
+msgid "From: %s"
+msgstr "보내는 사람: %s"
+
+#: includes/contact-form-template.php:42 modules/submit.php:26
+msgid "Send"
+msgstr "보내기"
+
+#: includes/contact-form-template.php:41
+msgid "Your Message"
+msgstr "메시지"
+
+#: includes/contact-form-template.php:39
+msgid "Your Email"
+msgstr "이메일"
+
+#: includes/contact-form-template.php:37
+msgid "(required)"
+msgstr "(필수)"
+
+#: includes/contact-form-template.php:38
+msgid "Your Name"
+msgstr "이름"
+
+#. translators: %s: title of form-tag like 'email' or 'checkboxes'
+#: admin/includes/tag-generator.php:45
+msgid "Form-tag Generator: %s"
+msgstr "양식-태그 생성 도구: %s"
+
+#: admin/includes/help-tabs.php:91
+msgid "For more information:"
+msgstr "추가 정보:"
+
+#: admin/includes/help-tabs.php:83
+msgid "Any information you provide will not be shared with service providers without your authorization."
+msgstr "모든 정보는 귀하의 동의 없이 서비스 제공자와 공유되지 않습니다."
+
+#: admin/includes/help-tabs.php:82
+msgid "You may need to first sign up for an account with the service that you plan to use. When you do so, you would need to authorize Contact Form 7 to access the service with your account."
+msgstr "사용 계획이 있는 서비스 계정에 먼저 가입해야 할 수도 있습니다. 이 때, 귀하의 계정으로 서비스에 접근하기 위해 Contact Form 7을 인증해야 합니다."
+
+#: admin/includes/help-tabs.php:81
+msgid "On this screen, you can manage services that are available through Contact Form 7. Using API will allow you to collaborate with any services that are available."
+msgstr "이 화면에서는 Contact Form 7을 통해 사용 가능한 서비스를 관리할 수 있습니다. API를 사용하면 사용 가능한 모든 서비스와 협업할 수 있습니다."
+
+#: admin/includes/help-tabs.php:79
+msgid "There are also special mail-tags that have specific names, but don&#8217;t have corresponding form-tags. They are used to represent meta information of form submissions like the submitter&#8217;s IP address or the URL of the page."
+msgstr "특정 이름의 특수 메일-태그가 존재하긴 하나, 해당 양식-태그는 없습니다. 이들은 IP 주소 또는 페이지 URL과 같은 양식 제출에 대한 메타 정보를 나타내는데 사용됩니다."
+
+#: admin/includes/help-tabs.php:78
+msgid "A mail-tag is also a short code enclosed in square brackets that you can use in every Mail and Mail (2) field. A mail-tag represents a user input value through an input field of a corresponding form-tag."
+msgstr "메일-태그는 모든 메일 및 메일 (2)에서 사용 가능한 네모 괄호 안에 담긴 단축코드입니다. 메일-태그는 대응하는 양식-태그의 입력 필드를 통해 사용자가 입력한 값을 나타냅니다."
+
+#: admin/includes/help-tabs.php:76
+msgid "While form-tags have a comparatively complex syntax, you don&#8217;t need to know the syntax to add form-tags because you can use the straightforward tag generator (<strong>Generate Tag</strong> button on this screen)."
+msgstr "양식-태그는 비교적 복잡한 구문으로 되어 있지만, 간단한 태그 생성 도구(이 화면의 <strong>태그 생성</strong> 버튼)를 사용할 수 있기 때문에 양식-태그를 추가하기 위해 구문을 알 필요는 없습니다."
+
+#: admin/includes/help-tabs.php:75
+msgid "A form-tag is a short code enclosed in square brackets used in a form content. A form-tag generally represents an input field, and its components can be separated into four parts: type, name, options, and values. Contact Form 7 supports several types of form-tags including text fields, number fields, date fields, checkboxes, radio buttons, menus, file-uploading fields, CAPTCHAs, and quiz fields."
+msgstr "양식-태그는 폼 내용에서 사용되는 네모 괄호 안에 담긴 단축코드입니다. 메일-태그는 일반적으로 입력 필드를 나타내며, 구성요소는 다음 4부분으로 나뉩니다: 유형, 이름, 옵션 및 값. Contact Form 7은 텍스트 필드, 날짜 필드, 확인상자, 라디오 버튼, 메뉴, 파일 업로드 필드, CAPTCHA, 퀴즈 필드 등의 여러 유형의 양식-태그를 지원합니다."
+
+#: admin/includes/help-tabs.php:73
+msgid "<strong>Additional Settings</strong> provides a place where you can customize the behavior of this contact form by adding code snippets."
+msgstr "<strong>추가 설정</strong>은 코드 스니펫을 추가하여 이 연락처 양식의 행동에 대한 사용자 정의가 가능한 영역입니다."
+
+#: admin/includes/help-tabs.php:72
+msgid "In <strong>Messages</strong>, you can edit various types of messages used for this contact form. These messages are relatively short messages, like a validation error message you see when you leave a required field blank."
+msgstr "<strong>메시지</strong>에서는 이 연락처 양식에서 사용되는 다양한 유형의 메시지를 편집할 수 있습니다. 이 메시지는 필수 입력 필드를 비워놨을 때 나타나는 검증 오류 메시지 등의 상대적으로 짧은 메시지입니다."
+
+#: admin/includes/help-tabs.php:71
+msgid "<strong>Mail (2)</strong> is an additional mail template that works similar to Mail. Mail (2) is different in that it is sent only when Mail has been sent successfully."
+msgstr "<strong>메일 (2)</strong>는 메일과 유사하게 작동하는 추가적인 메일 템플릿입니다. 메일 (2)는 메일이 성공적으로 발송되었을 때만 발송된다는 점이 다릅니다."
+
+#: admin/includes/help-tabs.php:70
+msgid "<strong>Mail</strong> manages a mail template (headers and message body) that this contact form will send when users submit it. You can use Contact Form 7&#8217;s mail-tags here."
+msgstr "<strong>메일</strong>은 사용자가 제출할 때 이 연락처 양식을 보낼 메일 템플릿(헤더 및 메시지 본문)을 관리합니다. 여기서 Contact Form 7의 양식-태그를 사용할 수 있습니다."
+
+#: admin/includes/help-tabs.php:69
+msgid "<strong>Form</strong> is a content of HTML form. You can use arbitrary HTML, which is allowed inside a form element. You can also use Contact Form 7&#8217;s form-tags here."
+msgstr "<strong>양식</strong>은 HTML 양식의 내용입니다. 양식 요소에 허용된 임의적인 HTML을 사용할 수 있습니다. 여기에 Contact Form 7의 양식-태그를 사용할 수도 있습니다."
+
+#: admin/includes/help-tabs.php:68
+msgid "<strong>Title</strong> is the title of a contact form. This title is only used for labeling a contact form, and can be edited."
+msgstr "<strong>제목</strong>은 연락처 양식의 제목입니다. 이 제목은 연락처 양식을 칭할 때 사용하며, 편집 또한 가능합니다."
+
+#: admin/includes/help-tabs.php:67
+msgid "On this screen, you can edit a contact form. A contact form is comprised of the following components:"
+msgstr "이 화면에서는, 연락처 양식을 편집할 수 있습니다. 연락처 양식은 다음 요소로 구성되어 있습니다:"
+
+#: admin/includes/help-tabs.php:65
+msgid "<strong>Duplicate</strong> - Clones that contact form. A cloned contact form inherits all content from the original, but has a different ID."
+msgstr "<strong>복제</strong> - 연락처 양식을 복제합니다. 복제된 연락처 양식은 원본으로부터 모든 내용을 물려받지만, 다른 ID를 갖고 있습니다."
+
+#: admin/includes/help-tabs.php:64
+msgid "<strong>Edit</strong> - Navigates to the editing screen for that contact form. You can also reach that screen by clicking on the contact form title."
+msgstr "<strong>편집</strong> - 해당 연락처 양식의 편집 화면으로 이동됩니다. 연락처 양식 제목을 클릭하여 해당 화면으로 이동할 수도 있습니다."
+
+#: admin/includes/help-tabs.php:63
+msgid "Hovering over a row in the contact forms list will display action links that allow you to manage your contact form. You can perform the following actions:"
+msgstr "연락처 양식 목록의 행 위로 호버하면 연락처 양식을 관리할 수 있는 동작 링크를 표시합니다. 다음 동작을 수행할 수 있습니다:"
+
+#: admin/includes/help-tabs.php:61
+msgid "On this screen, you can manage contact forms provided by Contact Form 7. You can manage an unlimited number of contact forms. Each contact form has a unique ID and Contact Form 7 shortcode ([contact-form-7 ...]). To insert a contact form into a post or a text widget, insert the shortcode into the target."
+msgstr "이 화면에서는 Contact Form 7에서 제공된 연락처 양식을 관리할 수 있습니다. 연락처 양식을 무제한으로 관리할 수 있습니다. 각 연락처 양식은 유일한 ID 및 Contact Form 7 단축코드([contact-form-7 ...])를 보유하고 있습니다. 연락처 양식을 글 또는 텍스트 위젯에 삽입하려면, 적용 대상에 단축코드를 삽입하세요."
+
+#: admin/includes/help-tabs.php:40
+msgid "Mail-tags"
+msgstr "메일-태그"
+
+#: admin/includes/help-tabs.php:35
+msgid "Form-tags"
+msgstr "양식-태그"
+
+#: admin/includes/help-tabs.php:21
+msgid "Available Actions"
+msgstr "사용 가능한 동작"
+
+#: admin/includes/help-tabs.php:16 admin/includes/help-tabs.php:30
+#: admin/includes/help-tabs.php:49
+msgid "Overview"
+msgstr "개요"
+
+#: admin/includes/editor.php:248
+msgid "You can add customization code snippets here. For details, see %s."
+msgstr "여기서 사용자 지정 코드 스니펫을 추가할 수 있습니다. %s에서 상세내용을 확인하세요."
+
+#: admin/includes/editor.php:246
+msgid "https://contactform7.com/additional-settings/"
+msgstr "https://contactform7.com/additional-settings/"
+
+#: admin/includes/editor.php:194
+msgid "File Attachments"
+msgstr "첨부파일"
+
+#: admin/includes/editor.php:188
+msgid "Use HTML content type"
+msgstr "HTML 본문 유형 사용"
+
+#: admin/includes/editor.php:186
+msgid "Exclude lines with blank mail-tags from output"
+msgstr "빈 메일 태그가 있는 라인을 제외하고 출력"
+
+#: admin/includes/editor.php:181
+msgid "Message Body"
+msgstr "메시지 본문"
+
+#: admin/includes/editor.php:172
+msgid "Additional Headers"
+msgstr "추가 헤더"
+
+#: admin/includes/editor.php:163 includes/contact-form-template.php:40
+msgid "Subject"
+msgstr "제목"
+
+#: admin/includes/editor.php:154
+msgid "From"
+msgstr "보내는 사람"
+
+#: admin/includes/editor.php:145
+msgid "To"
+msgstr "받는 사람"
+
+#: admin/includes/editor.php:135
+msgid "In the following fields, you can use these mail-tags:"
+msgstr "다음 필드에서 아래 메일-태그를 사용할 수 있습니다:"
+
+#: admin/includes/editor.php:119
+msgid "Mail (2) is an additional mail template often used as an autoresponder."
+msgstr "메일 (2)는 흔히 자동 응답으로 사용되는 추가적인 메일 템플릿입니다."
+
+#: admin/includes/editor.php:85
+msgid "Use Mail (2)"
+msgstr "메일 (2) 사용"
+
+#: admin/includes/editor.php:84
+msgid "Mail (2)"
+msgstr "메일 (2)"
+
+#: admin/includes/class-contact-forms-list-table.php:217
+msgid "Y/m/d"
+msgstr "Y/m/d"
+
+#. translators: %s: time since the creation of the contact form
+#: admin/includes/class-contact-forms-list-table.php:215
+msgid "%s ago"
+msgstr "%s 전에"
+
+#: admin/includes/class-contact-forms-list-table.php:204
+msgid "Y/m/d g:i:s A"
+msgstr "Y/m/d g:i:s A"
+
+#. translators: %s: title of contact form
+#: admin/includes/class-contact-forms-list-table.php:117
+msgid "Edit &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221; 편집"
+
+#: admin/includes/class-contact-forms-list-table.php:146
+msgid "Edit"
+msgstr "편집"
+
+#: admin/includes/class-contact-forms-list-table.php:15
+msgid "Date"
+msgstr "날짜"
+
+#: admin/includes/class-contact-forms-list-table.php:14
+msgid "Author"
+msgstr "작성자"
+
+#: admin/includes/class-contact-forms-list-table.php:13
+msgid "Shortcode"
+msgstr "단축코드"
+
+#: admin/includes/class-contact-forms-list-table.php:12
+msgid "Title"
+msgstr "제목"
+
+#: admin/edit-contact-form.php:247 admin/includes/editor.php:247
+#: admin/includes/editor.php:252
+msgid "Additional Settings"
+msgstr "추가 설정"
+
+#. translators: %d: number of additional settings
+#: admin/edit-contact-form.php:245
+msgid "Additional Settings (%d)"
+msgstr "추가 설정 (%d)"
+
+#: admin/edit-contact-form.php:231 admin/includes/editor.php:222
+msgid "Messages"
+msgstr "메시지"
+
+#: admin/edit-contact-form.php:227 admin/includes/editor.php:93
+msgid "Mail"
+msgstr "메일"
+
+#: admin/edit-contact-form.php:223 admin/includes/editor.php:61
+msgid "Form"
+msgstr "양식"
+
+#: admin/includes/help-tabs.php:94
+msgid "Support"
+msgstr "지원"
+
+#: admin/includes/help-tabs.php:94
+msgid "https://contactform7.com/support/"
+msgstr "https://contactform7.com/support/"
+
+#: admin/edit-contact-form.php:179 admin/includes/help-tabs.php:93
+msgid "FAQ"
+msgstr "FAQ"
+
+#: admin/edit-contact-form.php:178 admin/includes/help-tabs.php:93
+msgid "https://contactform7.com/faq/"
+msgstr "https://contactform7.com/faq/"
+
+#: admin/edit-contact-form.php:183 admin/includes/help-tabs.php:92
+msgid "Docs"
+msgstr "문서"
+
+#: admin/edit-contact-form.php:182 admin/includes/help-tabs.php:92
+msgid "https://contactform7.com/docs/"
+msgstr "https://contactform7.com/docs/"
+
+#: admin/edit-contact-form.php:154
+msgid ""
+"You are about to delete this contact form.\n"
+"  'Cancel' to stop, 'OK' to delete."
+msgstr "이 연락처 양식을 삭제하려고 합니다. 중지하려면 '취소'를, 삭제하려면 '삭제'를 선택하세요."
+
+#: admin/edit-contact-form.php:154
+#: admin/includes/class-contact-forms-list-table.php:92
+msgid "Delete"
+msgstr "삭제"
+
+#: admin/edit-contact-form.php:139
+#: admin/includes/class-contact-forms-list-table.php:156
+msgid "Duplicate"
+msgstr "복제"
+
+#: admin/edit-contact-form.php:125
+msgid "Status"
+msgstr "상태"
+
+#: admin/edit-contact-form.php:111
+msgid "You can also use this old-style shortcode:"
+msgstr "이 예전 스타일의 단축코드를 사용할 수 있습니다."
+
+#: admin/edit-contact-form.php:104
+msgid "Copy this shortcode and paste it into your post, page, or text widget content:"
+msgstr "단축코드를 복사하여 글, 페이지 또는 텍스트 위젯 본문에 붙여넣으세요:"
+
+#: admin/edit-contact-form.php:81
+msgid "Enter title here"
+msgstr "여기에 제목을 입력"
+
+#: admin/edit-contact-form.php:26 admin/edit-contact-form.php:132
+#: modules/recaptcha.php:211
+msgid "Save"
+msgstr "저장"
+
+#: admin/admin.php:594
+msgid "You are not allowed to edit this contact form."
+msgstr "연락처 양식을 편집할 권한이 없습니다."
+
+#: admin/includes/welcome-panel.php:45
+msgid "https://contactform7.com/save-submitted-messages-with-flamingo/"
+msgstr "https://contactform7.com/save-submitted-messages-with-flamingo/"
+
+#: admin/includes/welcome-panel.php:26
+msgid "https://contactform7.com/spam-filtering-with-akismet/"
+msgstr "https://contactform7.com/spam-filtering-with-akismet/"
+
+#: admin/includes/editor.php:129
+msgid "Setting Up Mail"
+msgstr "메일 설정"
+
+#: admin/includes/editor.php:128
+msgid "https://contactform7.com/setting-up-mail/"
+msgstr "https://contactform7.com/setting-up-mail/"
+
+#: admin/includes/welcome-panel.php:35
+msgid "https://contactform7.com/donate/"
+msgstr "https://contactform7.com/donate/"
+
+#: admin/includes/welcome-panel.php:31
+msgid "Contact Form 7 needs your support."
+msgstr "Contact Form 7은 귀하의 지원이 필요합니다."
+
+#: admin/includes/welcome-panel.php:16
+msgid "Dismiss"
+msgstr "무시"
+
+#. translators: 1: version of Contact Form 7, 2: version of WordPress, 3: URL
+#: admin/admin.php:575
+msgid "<strong>Contact Form 7 %1$s requires WordPress %2$s or higher.</strong> Please <a href=\"%3$s\">update WordPress</a> first."
+msgstr "<strong>Contact Form 7 %1$s은 워드프레스 %2$s  이상이 필요합니다.</strong> 먼저 <a href=\"%3$s\">워드프레스 업데이트</a>를 실행새주세요."
+
+#: admin/admin.php:555
+msgid "Settings"
+msgstr "설정"
+
+#: admin/admin.php:501
+msgid "Contact form deleted."
+msgstr "연락처 양식이 삭제됨."
+
+#: admin/admin.php:499
+msgid "Contact form saved."
+msgstr "연락처 양식이 저장됨."
+
+#: admin/admin.php:497
+msgid "Contact form created."
+msgstr "연락처 양식이 생성됨."
+
+#: admin/admin.php:398
+msgid "Search Contact Forms"
+msgstr "연락처 양식 검색"
+
+#. translators: %s: search keywords
+#: admin/admin.php:385
+msgid "Search results for &#8220;%s&#8221;"
+msgstr "&#8220;%s&#8221;에 대한 검색 결과"
+
+#: admin/admin.php:313
+msgid "The changes you made will be lost if you navigate away from this page."
+msgstr "이 화면을 벗어나면 변경사항을 잃게 됩니다."
+
+#: admin/admin.php:189
+msgid "Error in deleting."
+msgstr "삭제 도중 오류 발생."
+
+#: admin/admin.php:185
+msgid "You are not allowed to delete this item."
+msgstr "연락처 양식을 삭제할 권한이 없습니다."
+
+#: admin/admin.php:79 admin/admin.php:143
+msgid "You are not allowed to edit this item."
+msgstr "이 항목을 편집할 권한이 없습니다."
+
+#: admin/admin.php:48
+msgid "Integration"
+msgstr "통합"
+
+#: admin/admin.php:47 admin/admin.php:467
+msgid "Integration with Other Services"
+msgstr "타 서비스와 통합"
+
+#: admin/admin.php:37 admin/admin.php:379 admin/edit-contact-form.php:46
+msgid "Add New"
+msgstr "새로 추가"
+
+#: admin/admin.php:36 admin/edit-contact-form.php:36
+msgid "Add New Contact Form"
+msgstr "새로운 연락처 양식 추가"
+
+#: admin/admin.php:29 admin/admin.php:372 includes/contact-form.php:31
+msgid "Contact Forms"
+msgstr "연락처 양식"
+
+#: admin/admin.php:28 admin/edit-contact-form.php:38
+msgid "Edit Contact Form"
+msgstr "연락처 양식 편집"
+
+#: admin/admin.php:22
+msgid "Contact"
+msgstr "연락처"
+
+#. #-#-#-#-#  contact-form-7-code.pot (Contact Form 7 5.0.5)  #-#-#-#-#
+#. Plugin Name of the plugin/theme
+#: admin/admin.php:21 modules/flamingo.php:170
+msgid "Contact Form 7"
+msgstr "Contact Form 7"

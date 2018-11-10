@@ -1,9 +1,9 @@
 === WordPress Social Sharing Plugin - Social Warfare ===
 Contributors: holas84, dustinwstout, webinator, warfareplugins, nutsandboltsmedia, cdegraff1, ckmahoney
-Tags: sharing buttons, social media share, floating share buttons, facebook share, google plus share, linkedin share, pin it, pinterest save, stumbleupon button, tweet button, twitter share, click to tweet, social sharing buttons, social share, social sharing, social media sharing, wordpress social sharing plugin, social sharing plugin, share buttons, share counts
+Tags: sharing buttons, social media share, floating share buttons, facebook share, google plus share, linkedin share, pin it, pinterest save, mix button, tweet button, twitter share, click to tweet, social sharing buttons, social share, social sharing, social media sharing, wordpress social sharing plugin, social sharing plugin, share buttons, share counts
 Requires at least: 3.5.1
 Tested up to: 4.9
-Stable tag: 3.1.1
+Stable tag: 3.3.3
 License: GNU General Public License v2.0 or later
 
 The most beautiful, responsive, lightning fast social share buttons built to boost shares and drive more traffic without slowing down your site.
@@ -193,10 +193,60 @@ We have a growing archive of <a href="https://warfareplugins.com/support/" rel="
 
 == Changelog ==
 
+= 3.3.3 (19 SEP 2018)
+* Fixed the social_warfare() function so it now outputs buttons as it did before.
+* Fixed a call to undefined function regarding mb_convert_encoding().
+* Fixed an "undefined index" error in the javascript.
+* Fixed a bug that would sometimes make Yoast's og:description disappear.
+* Fixed a "return value in write context" PHP error.
+* Fixed Bitly authentication, link generation, and link usage with the buttons.
+
+= 3.3.2 (14 SEP 2018) =
+* Fixed a line of code that caused the 'social_warfare()' function to disappear.
+
+= 3.3.1 (11 SEP 2018) =
+* Fixed the URL for post editor placeholder images.
+* Fixed the Twitter Count toggle.
+* Added backward compatability for swp_kilomega().
+* Added compatability for mb_convert_encoding().
+
+= 3.3.0 (11 SEP 2018) =
+* Added CSS to hide buttons on print views.
+* Added Mix to the Social Networks.
+* Added "url" paramter to the shortcode.
+* Fixed plugin compatability issue with BuddyPress.
+* Fixed the decimal separator for share counts.
+* Updated the option-getting mechanism (`global $swp_user_options` is now deprecated).
+* Updated the sidebar in the Social Warfare settings page.
+* Updated the plugin file structure and organization.
+
+= 3.2.1 (16 AUG 2018) =
+* Fixed a minor DOMDocument warning that was appearing when data-pin-description was ON
+
+= 3.2.0 (13 AUG 2018) =
+* Shoutout to our Warfare Community beta testers- thank you so much!
+* Created shortcode for Pinterest Image.
+* Created Custom Pinterst Description on a per-image basis.
+* Fixed the Total Shares icon/counts not displaying.
+* Fixed many JS related issues on floating and mobile buttons.
+* Fixed an issue where some buttons did not display on some posts (after 'post_updated' fires).
+* Fixed the total shares missing counts from LinkedIn and Google Plus.
+* Fixed floating buttons not showing until bottom of content.
+* Fixed where posts were receiving false share counts from Facebook.
+* Fixed the update process for addons (like Pro) so it should now receive dashboard notifications.
+* Fixed sharing on Pinterest when images use relative paths instead of absolute paths.
+* Fixed hidden Pinterest image from covering content "below".
+* Changed the cursor from cursor to pointer for Total Shares hover state.
+* Added option to add data-pin-description to all images in a post.
+* Added !important tags for our Custom Color option.
+* Added check for whether or not to fetch share counts (based on Button Count and Total Count settings).
+* Updated the visibility of Mobile Float Location option.
+* Replaced New Share Counts with Twitcount.
+
 = 3.1.1 (12 JUl 2018) =
 * Fixed Javascript "minWidth" is undefined.
 * Fixed which buttons are displayed when using Dynamic Sorting.
-* Fixed "Undefined Index: post_id" error. 
+* Fixed "Undefined Index: post_id" error.
 * Changed default "Float Before Content" from "ON" to "OFF".
 * Removed excess printing of "Float Before Content" variable.
 

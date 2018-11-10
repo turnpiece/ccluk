@@ -59,6 +59,11 @@ abstract class WP_Hummingbird_API_Request {
 	 */
 	private $get_args = array();
 
+	/**
+	 * Logger instance.
+	 *
+	 * @var WP_Hummingbird_Logger
+	 */
 	private $logger;
 
 	/**
@@ -69,7 +74,8 @@ abstract class WP_Hummingbird_API_Request {
 	 * @throws WP_Hummingbird_API_Exception
 	 */
 	public function __construct( $service ) {
-		$this->logger = new WP_Hummingbird_Logger( 'api' );
+		$this->logger = WP_Hummingbird_Logger::get_instance();
+		$this->logger->register_module( 'api' );
 
 		if ( ! $service instanceof WP_Hummingbird_API_Service ) {
 			throw new WP_Hummingbird_API_Exception( __( 'Wrong Service. $service must be an instance of WP_Hummingbird_API_Service', 'wphb' ), 404 );
@@ -244,9 +250,9 @@ abstract class WP_Hummingbird_API_Request {
 			$args['blocking'] = false;
 		}
 
-		$this->logger->log( "WPHB API: Sending request to {$url}" );
-		$this->logger->log( 'WPHB API: Arguments:' );
-		$this->logger->log( $args );
+		$this->logger->log( "WPHB API: Sending request to {$url}", 'api' );
+		$this->logger->log( 'WPHB API: Arguments:', 'api' );
+		$this->logger->log( $args, 'api' );
 
 		switch ( strtolower( $method ) ) {
 			case 'patch':
@@ -271,8 +277,8 @@ abstract class WP_Hummingbird_API_Request {
 				break;
 		}
 
-		$this->logger->log( 'WPHB API: Response:' );
-		$this->logger->log( $response );
+		$this->logger->log( 'WPHB API: Response:', 'api' );
+		$this->logger->log( $response, 'api' );
 
 		return $response;
 	}

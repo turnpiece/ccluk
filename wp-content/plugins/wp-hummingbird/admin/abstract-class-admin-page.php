@@ -165,7 +165,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 * @return String
 	 */
 	public function admin_body_class( $classes ) {
-		$classes .= ' sui-2-2-4 wpmud ';
+		$classes .= ' sui-2-2-9 wpmud ';
 
 		return $classes;
 	}
@@ -192,7 +192,7 @@ abstract class WP_Hummingbird_Admin_Page {
 		// Scripts.
 		WP_Hummingbird_Utils::enqueue_admin_scripts( WPHB_VERSION );
 		wp_enqueue_script(
-			'wpmudev-sui',
+			'wphb-wpmudev-sui',
 			WPHB_DIR_URL . 'admin/assets/js/shared-ui.min.js',
 			array( 'jquery' ),
 			WPHB_VERSION,
@@ -330,7 +330,7 @@ abstract class WP_Hummingbird_Admin_Page {
 	 */
 	public function render() {
 		?>
-		<div class="sui-wrap wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
+		<div class="sui-wrap wrap-wp-hummingbird wrap-wp-hummingbird-page <?php echo 'wrap-' . esc_attr( $this->slug ); ?>">
 			<div class="sui-notice-top sui-notice-success sui-hidden" id="wphb-ajax-update-notice">
 				<p><?php esc_html_e( 'Settings updated', 'wphb' ); ?></p>
 			</div>
@@ -352,6 +352,22 @@ abstract class WP_Hummingbird_Admin_Page {
 					);
 				?>
 			</div>
+			<?php
+			$hummingbird = WP_Hummingbird::get_instance();
+			if ( $hummingbird->admin->show_quick_setup ) :
+				WP_Hummingbird_Utils::get_modal( 'quick-setup' );
+				WP_Hummingbird_Utils::get_modal( 'check-performance' );
+			?>
+				<script>
+					window.onload = function () {
+						if ( window.WPHB_Admin ) {
+							window.WPHB_Admin.getModule('dashboard').startQuickSetup();
+						}
+					};
+				</script>
+			<?php
+			endif;
+			?>
 		</div><!-- end container -->
 
 		<script>

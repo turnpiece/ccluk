@@ -29,7 +29,7 @@
 	 id="wphb-file-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 	 data-filter="<?php echo esc_attr( $item['handle'] . ' ' . $ext ); ?>"
 	 data-filter-secondary="<?php echo esc_attr( $filter ); echo 'OTHER' === $ext ? 'other' : ''?>">
-	<?php if ( ! $compressed ) : ?>
+	<?php if ( $processed && ! $compressed ) : ?>
 		<span class="wphb-row-status wphb-row-status-already-compressed sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
 			  data-tooltip="<?php esc_attr_e( 'This file has already been compressed – we recommend you turn off compression for this file to avoid issues', 'wphb' ); ?>"><i
 				class="sui-icon-warning-alert" aria-hidden="true"></i></span>
@@ -41,9 +41,13 @@
 	<span class="wphb-row-status wphb-row-status-changed sui-tooltip sui-tooltip-top-right sui-hidden"
 		  data-tooltip="<?php esc_attr_e( 'You need to publish your changes for your new settings to take effect', 'wphb' ); ?>"><i
 			class="sui-icon-update" aria-hidden="true"></i></span>
-	<div class="fileinfo-group">
-		<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( strtolower( $ext ) ); ?>">
-			<?php echo esc_html( substr( $ext, 0, 3 ) ); ?>
+
+	<div class="fileinfo-group <?php echo $compressed ? 'wphb-compressed' : ''; ?>">
+		<span class="sui-tooltip sui-tooltip-constrained"
+			  data-tooltip="<?php esc_attr_e( 'If you’ve made changes to this file, you can recompress it without resetting your file structure.', 'wphb' ); ?>">
+			<span class="wphb-filename-extension wphb-filename-extension-<?php echo esc_attr( strtolower( $ext ) ); ?>">
+				<?php echo esc_html( substr( $ext, 0, 3 ) ); ?>
+			</span>
 		</span>
 
 		<div class="wphb-minification-file-info">
@@ -53,21 +57,17 @@
 				<span><?php esc_html_e( 'Filesize Unknown', 'wphb' ); ?> &mdash;</span>
 			<?php elseif ( $minified_file || $original_size === $compressed_size ) : ?>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
-			<?php elseif ( $processed ) : ?>
-				<?php if ( $compressed ) : ?>
-					<?php
-					$size_diff = $original_size - $compressed_size;
-					?>
-					<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php echo esc_html( 'This assets file size has been reduced by ' ) . esc_attr( $size_diff ); ?>KB">
-						<span class="original-size crossed-out"><?php echo esc_html( $original_size ); ?>KB</span>
-						<i class="sui-icon-chevron-down" aria-hidden="true"></i>
-						<span class="compressed-size"><?php echo esc_html( $compressed_size ); ?>KB</span>
-					</span>
-					<span> &mdash;</span>
-				<?php else : ?>
-					<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
-				<?php endif; ?>
-			<?php elseif ( in_array( $item['handle'], $options['dont_minify'][ $type ], true ) ) : ?>
+			<?php elseif ( $processed && $compressed ) : ?>
+				<?php $size_diff = (float) $original_size - (float) $compressed_size; ?>
+				<span class="sui-tooltip sui-tooltip-constrained" data-tooltip="<?php echo esc_html( 'This assets file size has been reduced by ' ) . esc_attr( $size_diff ); ?>KB">
+					<span class="original-size crossed-out"><?php echo esc_html( $original_size ); ?>KB</span>
+					<i class="sui-icon-chevron-down" aria-hidden="true"></i>
+					<span class="compressed-size"><?php echo esc_html( $compressed_size ); ?>KB</span>
+				</span>
+				<span> &mdash;</span>
+			<?php elseif ( $processed && ! $compressed ) : ?>
+				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
+			<?php elseif ( ! in_array( $item['handle'], $options['minify'][ $type ], true ) ) : ?>
 				<span class="original-size"><?php echo esc_html( $original_size ); ?>KB &mdash;</span>
 			<?php else : ?>
 				<span class="wphb-row-status wphb-row-status-queued sui-tooltip sui-tooltip-top-right sui-tooltip-constrained"
@@ -89,17 +89,16 @@
 		} elseif ( $minified_file ) {
 			$tooltip = __( 'This file is already compressed', 'wphb' );
 		} else {
-			$tooltip = __( 'Compression is on for this file, which aims to reduce its size', 'wphb' );
-			if ( in_array( $item['handle'], $options['dont_minify'][ $type ], true ) ) {
-				$tooltip = __( 'Compression is off for this file. Turn it on to reduce its size', 'wphb' );
+			$tooltip = __( 'Compression is off for this file. Turn it on to reduce its size', 'wphb' );
+			if ( in_array( $item['handle'], $options['minify'][ $type ], true ) ) {
+				$tooltip = __( 'Compression is on for this file, which aims to reduce its size', 'wphb' );
 			}
 		}
 		?>
 
 		<input type="checkbox" <?php disabled( in_array( 'minify', $disable_switchers, true ) || $disabled || $minified_file ); ?>
-			   id="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
-			   class="toggle-checkbox toggle-minify"
-			   name="<?php echo esc_attr( $base_name ); ?>[minify]" <?php checked( in_array( $item['handle'], $options['dont_minify'][ $type ], true ), false ); ?>
+			   class="toggle-checkbox toggle-minify" name="<?php echo esc_attr( $base_name ); ?>[minify]"
+			   id="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>" <?php checked( in_array( $item['handle'], $options['minify'][ $type ], true ) ); ?>
 			   aria-label="<?php esc_attr_e( 'Compress', 'wphb' ); ?>">
 		<label for="wphb-minification-minify-<?php echo esc_attr( $ext . '-' . $item['handle'] ); ?>"
 			   class="toggle-label sui-tooltip sui-tooltip-top-left sui-tooltip-constrained"

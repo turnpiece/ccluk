@@ -74,14 +74,15 @@ class Ai1wm_Updater {
 		// Get extension updates
 		foreach ( $updates as $slug => $update ) {
 			if ( isset( $extensions[ $slug ] ) && ( $extension = $extensions[ $slug ] ) ) {
-				if ( get_option( $extension['key'] ) ) {
+				if ( ( $purchase_id = get_option( $extension['key'] ) ) ) {
 					if ( version_compare( $extension['version'], $update['version'], '<' ) ) {
 
-						// Get Site URL
-						$url = urlencode( get_site_url() );
-
-						// Get Purchase ID
-						$key = get_option( $extension['key'] );
+						// Get download URL
+						if ( $update['slug'] === 'file-extension' ) {
+							$download_url = add_query_arg( array( 'siteurl' => get_site_url() ), sprintf( '%s', $update['download_link'] ) );
+						} else {
+							$download_url = add_query_arg( array( 'siteurl' => get_site_url() ), sprintf( '%s/%s', $update['download_link'], $purchase_id ) );
+						}
 
 						// Set plugin details
 						$transient->response[ $extension['basename'] ] = (object) array(
@@ -89,7 +90,7 @@ class Ai1wm_Updater {
 							'new_version' => $update['version'],
 							'url'         => $update['homepage'],
 							'plugin'      => $extension['basename'],
-							'package'     => sprintf( '%s/%s?siteurl=%s', $update['download_link'], $key, $url ),
+							'package'     => $download_url,
 							'tested'      => $wp_version,
 							'icons'       => $update['icons'],
 						);
@@ -122,22 +123,22 @@ class Ai1wm_Updater {
 				if ( ( $response = json_decode( $response['body'], true ) ) ) {
 					// Slug is mandatory
 					if ( ! isset( $response['slug'] ) ) {
-						return;
+						continue;
 					}
 
 					// Version is mandatory
 					if ( ! isset( $response['version'] ) ) {
-						return;
+						continue;
 					}
 
 					// Homepage is mandatory
 					if ( ! isset( $response['homepage'] ) ) {
-						return;
+						continue;
 					}
 
 					// Download link is mandatory
 					if ( ! isset( $response['download_link'] ) ) {
-						return;
+						continue;
 					}
 
 					$updates[ $slug ] = $response;
@@ -157,30 +158,32 @@ class Ai1wm_Updater {
 	 * @return array
 	 */
 	public static function plugin_row_meta( $links, $file ) {
-		$modal = 0;
+		$modal_index = 0;
 
 		// Add link for each extension
 		foreach ( Ai1wm_Extensions::get() as $slug => $extension ) {
-			$modal++;
+			$modal_index++;
 
 			// Get plugin details
 			if ( $file === $extension['basename'] ) {
-				$url = add_query_arg( array( 'ai1wm_updater' => 1 ), network_admin_url( 'plugins.php' ) );
+
+				// Get updater URL
+				$updater_url = add_query_arg( array( 'ai1wm_updater' => 1 ), network_admin_url( 'plugins.php' ) );
 
 				// Check Purchase ID
 				if ( get_option( $extension['key'] ) ) {
 
 					// Add "Check for updates" link
 					$links[] = Ai1wm_Template::get_content( 'updater/check', array(
-						'url' => wp_nonce_url( $url, 'ai1wm_updater_nonce' ),
+						'url' => $updater_url,
 					) );
 
 				} else {
 
 					// Add modal
 					$links[] = Ai1wm_Template::get_content( 'updater/modal', array(
-						'url'   => wp_nonce_url( $url, 'ai1wm_updater_nonce' ),
-						'modal' => $modal,
+						'url'   => $updater_url,
+						'modal' => $modal_index,
 					) );
 
 				}

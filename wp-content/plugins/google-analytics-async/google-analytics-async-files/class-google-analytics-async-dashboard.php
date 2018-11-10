@@ -71,6 +71,7 @@ class Google_Analytics_Async_Dashboard {
 		    $this->stats_source = 'site';
 	    }
         elseif(
+            isset($network_settings['google_login']['logged_in']) &&
 	        $network_settings['google_login']['logged_in']
 	        && ! empty( $network_settings['track_settings']['google_analytics_account_id'] )
         ) {

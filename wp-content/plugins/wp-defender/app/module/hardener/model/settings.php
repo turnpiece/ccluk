@@ -11,6 +11,7 @@ use WP_Defender\Module\Hardener\Component\Change_Admin;
 use WP_Defender\Module\Hardener\Component\DB_Prefix;
 use WP_Defender\Module\Hardener\Component\Disable_File_Editor;
 use WP_Defender\Module\Hardener\Component\Disable_Trackback;
+use WP_Defender\Module\Hardener\Component\Disable_Xml_Rpc;
 use WP_Defender\Module\Hardener\Component\Hide_Error;
 use WP_Defender\Module\Hardener\Component\Login_Duration;
 use WP_Defender\Module\Hardener\Component\PHP_Version;
@@ -264,7 +265,8 @@ class Settings extends \Hammer\WP\Settings {
 			Security_Key::$slug        => $init == true ? new Security_Key() : Security_Key::getClassName(),
 			Protect_Information::$slug => $init == true ? new Protect_Information() : Protect_Information::getClassName(),
 			Prevent_Php::$slug         => $init == true ? new Prevent_Php() : Prevent_Php::getClassName(),
-			Login_Duration::$slug      => $init == true ? new Login_Duration() : Login_Duration::getClassName()
+			Login_Duration::$slug      => $init == true ? new Login_Duration() : Login_Duration::getClassName(),
+			Disable_Xml_Rpc::$slug     => $init == true ? new Disable_Xml_Rpc() : Disable_Xml_Rpc::getClassName(),
 		);
 	}
 

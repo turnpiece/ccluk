@@ -1,5 +1,5 @@
-# Translation of WordPress - 4.9.x - Development - Continents & Cities in Greek
-# This file is distributed under the same license as the WordPress - 4.9.x - Development - Continents & Cities package.
+# Translation of WordPress - 4.9.x - Continents & Cities in Greek
+# This file is distributed under the same license as the WordPress - 4.9.x - Continents & Cities package.
 msgid ""
 msgstr ""
 "PO-Revision-Date: 2018-08-01 14:07:25+0000\n"
@@ -9,155 +9,7 @@ msgstr ""
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Generator: GlotPress/2.4.0-alpha\n"
 "Language: el_GR\n"
-"Project-Id-Version: WordPress - 4.9.x - Development - Continents & Cities\n"
-
-#: wp-admin/includes/continents-cities.php:478
-msgid "Saratov"
-msgstr "Σάρατοφ"
-
-#: wp-admin/includes/continents-cities.php:353
-msgid "Yangon"
-msgstr "Γιανγκόν"
-
-#: wp-admin/includes/continents-cities.php:287
-msgid "Famagusta"
-msgstr "Φαμαγκούστα"
-
-#: wp-admin/includes/continents-cities.php:266
-msgid "Atyrau"
-msgstr "Ατυράου"
-
-#: wp-admin/includes/continents-cities.php:204
-msgid "Punta Arenas"
-msgstr "Πούντα Αρένας"
-
-#: wp-admin/includes/continents-cities.php:93
-msgid "Bahia Banderas"
-msgstr "Μπαχία Μπαντέρας"
-
-#: wp-admin/includes/continents-cities.php:114
-msgid "Creston"
-msgstr "Κρέστον"
-
-#: wp-admin/includes/continents-cities.php:127
-msgid "Fort Nelson"
-msgstr "Φορτ Νέλσο"
-
-#: wp-admin/includes/continents-cities.php:161
-msgid "Kralendijk"
-msgstr "Κράλεντικ"
-
-#: wp-admin/includes/continents-cities.php:172
-msgid "Matamoros"
-msgstr "Ματαμόρος"
-
-#: wp-admin/includes/continents-cities.php:177
-msgid "Metlakatla"
-msgstr "Μετλακάτλα"
-
-#: wp-admin/includes/continents-cities.php:191
-msgid "Beulah"
-msgstr "Μπιούλα"
-
-#: wp-admin/includes/continents-cities.php:194
-msgid "Ojinaga"
-msgstr "Ογινάγκα"
-
-#: wp-admin/includes/continents-cities.php:212
-msgid "Santa Isabel"
-msgstr "Σάντα Ίζαμπελ"
-
-#: wp-admin/includes/continents-cities.php:213
-msgid "Santarem"
-msgstr "Σανταρέμ"
-
-#: wp-admin/includes/continents-cities.php:219
-msgid "Sitka"
-msgstr "Σίτκα"
-
-#: wp-admin/includes/continents-cities.php:244
-msgid "Macquarie"
-msgstr "Μακουάρι"
-
-#: wp-admin/includes/continents-cities.php:251
-msgid "Troll"
-msgstr "Τρολ"
-
-#: wp-admin/includes/continents-cities.php:271
-msgid "Barnaul"
-msgstr "Μπαρναούλ"
-
-#: wp-admin/includes/continents-cities.php:276
-msgid "Chita"
-msgstr "Τσίτα"
-
-#: wp-admin/includes/continents-cities.php:290
-msgid "Hebron"
-msgstr "Χεβρώνα"
-
-#: wp-admin/includes/continents-cities.php:303
-msgid "Kathmandu"
-msgstr "Κατμαντού"
-
-#: wp-admin/includes/continents-cities.php:318
-msgid "Novokuznetsk"
-msgstr "Νοβοκουζίνετσκ"
-
-#: wp-admin/includes/continents-cities.php:344
-msgid "Tomsk"
-msgstr "Τομσκ"
-
-#: wp-admin/includes/continents-cities.php:349
-msgid "Ust-Nera"
-msgstr "Ουστ-Νερά"
-
-#: wp-admin/includes/continents-cities.php:436
-msgid "Astrakhan"
-msgstr "Αστραχάν"
-
-#: wp-admin/includes/continents-cities.php:445
-msgid "Busingen"
-msgstr "Μπίσινγκεν"
-
-#: wp-admin/includes/continents-cities.php:457
-msgid "Kirov"
-msgstr "Κίροφ"
-
-#: wp-admin/includes/continents-cities.php:486
-msgid "Ulyanovsk"
-msgstr "Ουλιάνοφσκ"
-
-#: wp-admin/includes/continents-cities.php:514
-msgid "Bougainville"
-msgstr "Μπουγκαινβίλ"
-
-#: wp-admin/includes/continents-cities.php:516
-msgid "Chuuk"
-msgstr "Τσούουκ"
-
-#: wp-admin/includes/continents-cities.php:542
-msgid "Pohnpei"
-msgstr "Πονπέι"
-
-#: wp-admin/includes/continents-cities.php:166
-msgid "Lower Princes"
-msgstr "Λόουερ Πρίνσιζ"
-
-#: wp-admin/includes/continents-cities.php:305
-msgid "Khandyga"
-msgstr "Κανντίγα"
-
-#: wp-admin/includes/continents-cities.php:335
-msgid "Srednekolymsk"
-msgstr "Σρεντνεκόλυμσκ"
-
-#: wp-admin/includes/continents-cities.php:39
-msgid "Juba"
-msgstr "Τζούμπα"
-
-#: wp-admin/includes/continents-cities.php:83
-msgid "Salta"
-msgstr "Σάλτα"
+"Project-Id-Version: WordPress - 4.9.x - Continents & Cities\n"
 
 #: wp-admin/includes/continents-cities.php:163
 msgid "Lima"
@@ -1374,14 +1226,6 @@ msgstr "Πάνγκο Πάνγκο"
 msgid "Palau"
 msgstr "Παλάου"
 
-#: wp-admin/includes/continents-cities.php:149
-msgid "Vincennes"
-msgstr "Βανσέν"
-
-#: wp-admin/includes/continents-cities.php:150
-msgid "Winamac"
-msgstr "Γουϊνάμεκ"
-
 #: wp-admin/includes/continents-cities.php:217
 msgid "Scoresbysund"
 msgstr "Σκόρμπις Σαντ"
@@ -1597,6 +1441,134 @@ msgstr "Νησιά Γουάλις"
 #: wp-admin/includes/continents-cities.php:554
 msgid "Yap"
 msgstr "Γιαπ"
+
+#: wp-admin/includes/continents-cities.php:161
+msgid "Kralendijk"
+msgstr "Κράλεντικ"
+
+#: wp-admin/includes/continents-cities.php:172
+msgid "Matamoros"
+msgstr "Ματαμόρος"
+
+#: wp-admin/includes/continents-cities.php:177
+msgid "Metlakatla"
+msgstr "Μετλακάτλα"
+
+#: wp-admin/includes/continents-cities.php:191
+msgid "Beulah"
+msgstr "Μπιούλα"
+
+#: wp-admin/includes/continents-cities.php:194
+msgid "Ojinaga"
+msgstr "Ογινάγκα"
+
+#: wp-admin/includes/continents-cities.php:212
+msgid "Santa Isabel"
+msgstr "Σάντα Ίζαμπελ"
+
+#: wp-admin/includes/continents-cities.php:213
+msgid "Santarem"
+msgstr "Σανταρέμ"
+
+#: wp-admin/includes/continents-cities.php:219
+msgid "Sitka"
+msgstr "Σίτκα"
+
+#: wp-admin/includes/continents-cities.php:244
+msgid "Macquarie"
+msgstr "Μακουάρι"
+
+#: wp-admin/includes/continents-cities.php:251
+msgid "Troll"
+msgstr "Τρολ"
+
+#: wp-admin/includes/continents-cities.php:271
+msgid "Barnaul"
+msgstr "Μπαρναούλ"
+
+#: wp-admin/includes/continents-cities.php:276
+msgid "Chita"
+msgstr "Τσίτα"
+
+#: wp-admin/includes/continents-cities.php:290
+msgid "Hebron"
+msgstr "Χεβρώνα"
+
+#: wp-admin/includes/continents-cities.php:303
+msgid "Kathmandu"
+msgstr "Κατμαντού"
+
+#: wp-admin/includes/continents-cities.php:318
+msgid "Novokuznetsk"
+msgstr "Νοβοκουζίνετσκ"
+
+#: wp-admin/includes/continents-cities.php:344
+msgid "Tomsk"
+msgstr "Τομσκ"
+
+#: wp-admin/includes/continents-cities.php:349
+msgid "Ust-Nera"
+msgstr "Ουστ-Νερά"
+
+#: wp-admin/includes/continents-cities.php:436
+msgid "Astrakhan"
+msgstr "Αστραχάν"
+
+#: wp-admin/includes/continents-cities.php:445
+msgid "Busingen"
+msgstr "Μπίσινγκεν"
+
+#: wp-admin/includes/continents-cities.php:457
+msgid "Kirov"
+msgstr "Κίροφ"
+
+#: wp-admin/includes/continents-cities.php:486
+msgid "Ulyanovsk"
+msgstr "Ουλιάνοφσκ"
+
+#: wp-admin/includes/continents-cities.php:514
+msgid "Bougainville"
+msgstr "Μπουγκαινβίλ"
+
+#: wp-admin/includes/continents-cities.php:516
+msgid "Chuuk"
+msgstr "Τσούουκ"
+
+#: wp-admin/includes/continents-cities.php:542
+msgid "Pohnpei"
+msgstr "Πονπέι"
+
+#: wp-admin/includes/continents-cities.php:166
+msgid "Lower Princes"
+msgstr "Λόουερ Πρίνσιζ"
+
+#: wp-admin/includes/continents-cities.php:305
+msgid "Khandyga"
+msgstr "Κανντίγα"
+
+#: wp-admin/includes/continents-cities.php:335
+msgid "Srednekolymsk"
+msgstr "Σρεντνεκόλυμσκ"
+
+#: wp-admin/includes/continents-cities.php:478
+msgid "Saratov"
+msgstr "Σάρατοφ"
+
+#: wp-admin/includes/continents-cities.php:353
+msgid "Yangon"
+msgstr "Γιανγκόν"
+
+#: wp-admin/includes/continents-cities.php:287
+msgid "Famagusta"
+msgstr "Φαμαγκούστα"
+
+#: wp-admin/includes/continents-cities.php:266
+msgid "Atyrau"
+msgstr "Ατυράου"
+
+#: wp-admin/includes/continents-cities.php:204
+msgid "Punta Arenas"
+msgstr "Πούντα Αρένας"
 
 #: wp-admin/includes/continents-cities.php:143
 #: wp-admin/includes/continents-cities.php:151
@@ -1927,6 +1899,14 @@ msgstr "Σαν Χουάν"
 msgid "Dawson"
 msgstr "Ντώσον Σίτυ"
 
+#: wp-admin/includes/continents-cities.php:149
+msgid "Vincennes"
+msgstr "Βανσέν"
+
+#: wp-admin/includes/continents-cities.php:150
+msgid "Winamac"
+msgstr "Γουϊνάμεκ"
+
 #: wp-admin/includes/continents-cities.php:79
 #: wp-admin/includes/continents-cities.php:155
 msgid "Jujuy"
@@ -2115,3 +2095,23 @@ msgstr "Χάπι Βάλεϊ-Γκουζ Μπέι"
 #: wp-admin/includes/continents-cities.php:133
 msgid "Grand Turk"
 msgstr "Γκραντ Τερκ"
+
+#: wp-admin/includes/continents-cities.php:93
+msgid "Bahia Banderas"
+msgstr "Μπαχία Μπαντέρας"
+
+#: wp-admin/includes/continents-cities.php:114
+msgid "Creston"
+msgstr "Κρέστον"
+
+#: wp-admin/includes/continents-cities.php:127
+msgid "Fort Nelson"
+msgstr "Φορτ Νέλσο"
+
+#: wp-admin/includes/continents-cities.php:39
+msgid "Juba"
+msgstr "Τζούμπα"
+
+#: wp-admin/includes/continents-cities.php:83
+msgid "Salta"
+msgstr "Σάλτα"

@@ -78,8 +78,6 @@ function apbct_update_to_5_70_0(){
 	}
 	
 	// Deleting usless data
-	unset($ct_data['db_refreshed'], $ct_data['last_sfw_send'], $ct_data['next_account_status_check']);
-	update_option('cleantalk_data', $ct_data);
 	delete_option('cleantalk_sends_reports_till');
 	delete_option('cleantalk_activation_timestamp');
 	
@@ -104,12 +102,10 @@ function apbct_update_to_5_74_0(){
 
 function apbct_update_to_5_97_0(){
 	
-	global $ct_data;
+	global $apbct;
 	
-	$ct_data = ct_get_data();
+	if(count($apbct->data['connection_reports']['negative_report']) >= 20)
+		$apbct->data['connection_reports']['negative_report'] = array_slice($apbct->data['connection_reports']['negative_report'], -20, 20);
 	
-	if(count($ct_data['connection_reports']['negative_report']) >= 20)
-		$ct_data['connection_reports']['negative_report'] = array_slice($ct_data['connection_reports']['negative_report'], -20, 20);
-	
-	update_option('cleantalk_data', $ct_data);
+	$apbct->saveData();
 }

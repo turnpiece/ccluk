@@ -364,6 +364,7 @@ class Snapshot_Controller_Full {
 
 		// Reset cache so we're up to date with the backup sizes
 		Snapshot_Helper_Log::info("Reset API cache");
+
 		$api = Snapshot_Model_Full_Remote_Api::get();
 		$api->clean_up_api();
 		$api->connect();

@@ -16,7 +16,7 @@
 
 				<p><?php esc_html_e('Try Snapshot Pro along with 100+ WPMU DEV plugins, themes & 24/7 WP support for free today.', SNAPSHOT_I18N_DOMAIN); ?></p>
 
-				<a href="" target="_blank" class="button button-green"><?php esc_html_e( "Find out more", SNAPSHOT_I18N_DOMAIN ); ?></a>
+				<a href="https://premium.wpmudev.org/project/snapshot/" target="_blank" class="button button-green"><?php esc_html_e( "Find out more", SNAPSHOT_I18N_DOMAIN ); ?></a>
 
 			</div>
 

@@ -217,7 +217,7 @@ function give_ajax_get_states_field() {
 	$states_label = give_get_states_label();
 
 	$default_state = '';
-	if ( $country === give_get_country() ) {
+	if ( give_get_country() === $country ) {
 		$default_state = give_get_state();
 	}
 
@@ -263,6 +263,7 @@ function give_ajax_get_states_field() {
 			$states_require = false;
 		}
 	}
+
 	$response = array(
 		'success'        => true,
 		'states_found'   => $states_found,
@@ -271,6 +272,7 @@ function give_ajax_get_states_field() {
 		'states_require' => $states_require,
 		'data'           => $data,
 		'default_state'  => $default_state,
+		'city_require'   => ! array_key_exists( $country, give_city_not_required_country_list() ),
 	);
 	wp_send_json( $response );
 }
@@ -297,6 +299,9 @@ function give_ajax_form_search() {
 		'cache_results'          => false,
 		'no_found_rows'          => true,
 		'post_status'            => 'publish',
+		'orderby'                => 'title',
+		'order'                  => 'ASC',
+		'posts_per_page'         => empty( $search ) ? 30 : -1,
 	);
 
 	/**
@@ -756,11 +761,11 @@ add_action( 'wp_ajax_nopriv_give_confirm_email_for_donations_access', 'give_conf
  * @since 2.2.0
  */
 function __give_get_receipt(){
-	if( ! isset( $_POST['shortcode_atts'] ) ) {
+	if( ! isset( $_GET['shortcode_atts'] ) ) {
 		give_die();
 	}
 
-	$atts = urldecode_deep( give_clean( $_POST['shortcode_atts'] ) );
+	$atts = urldecode_deep( give_clean( $_GET['shortcode_atts'] ) );
 	$data = give_receipt_shortcode( $atts );
 
 	wp_send_json( $data );

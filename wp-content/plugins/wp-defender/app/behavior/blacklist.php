@@ -58,8 +58,8 @@ class Blacklist extends Behavior {
                 <h3><?php _e( "BLACKLIST MONITOR", wp_defender()->domain ) ?></h3>
                 <a href="#pro-feature" rel="dialog"
                    class="button button-small button-pre"
-				   tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
-				   <?php _e( "PRO FEATURE", wp_defender()->domain ) ?></a>
+                   tooltip="<?php esc_attr_e( "Try Defender Pro free today", wp_defender()->domain ) ?>">
+					<?php _e( "PRO FEATURE", wp_defender()->domain ) ?></a>
             </div>
             <div class="box-content">
                 <div class="line">
@@ -242,7 +242,6 @@ class Blacklist extends Behavior {
 		$response_code = wp_remote_retrieve_response_code( $result );
 		$body          = wp_remote_retrieve_body( $result );
 		$body          = json_decode( $body, true );
-
 		if ( $response_code == 412 ) {
 			//this mean disable
 			return - 1;

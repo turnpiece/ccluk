@@ -6,7 +6,7 @@
         <form method="post" id="settings-frm" class="audit-frm">
             <div class="columns">
                 <div class="column is-one-third">
-                    <label for="login_protection_login_attempt">
+                    <label for="toggle_audit_logging" role="checkbox" aria-checked="true">
 						<?php esc_html_e( "Deactivate", wp_defender()->domain ) ?>
                     </label>
                     <span class="sub">

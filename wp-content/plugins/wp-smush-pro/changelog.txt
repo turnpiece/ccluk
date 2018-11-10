@@ -1,10 +1,54 @@
 Plugin Name: WP Smush Pro
 Author: WPMU DEV
-Tested up to: 4.9.7
+Tested up to: 4.9.8
 
 Change Log:
 ----------------------------------------------------------------------
 ----------------------------------------------------------------------
+
+= 2.9.1 =
+
+* Fix: Errors during update from Free to Pro
+
+= 2.9.0 =
+
+* New: Incorrect image size detection
+* New: Pointers for new installs
+* New: Show a list of errors (if present) after bulk Smush
+* Enhance: Remove activation redirection
+* Fix: Compatibility with Enhanced Media Library
+* Fix: Layout inconsistencies
+* Fix: Remove duplicate queries
+* Fix: User profile languages not properly applying to Smush
+* Fix: Translation strings
+* Fix: Smush full sized images when image dimensions are smaller than the largest thumbnail
+* Fix: Directory Smush will not get stuck when an image encounters an error during compression
+* Fix: Support for the latest Gutenberg version
+* Fix: Allow blog admins in network installs to manage site Smush options
+* Fix: Stats not showing after Smushing in media library
+
+= 2.8.2 =
+
+Fix: Compatibility issues with latest WP Offload Media (WP Offload S3) update
+
+= 2.8.1 =
+
+* New: Directory Smush UI/UX
+* New: Directory Smush updated library
+* New: Directory Smush ability to select multiple directories
+* New: Directory Smush ability to deselect certain images in directories
+* New: Integration with Gutenberg image block
+* Enhance: Bulk Smush UI
+* Enhance: Update GDPR policy text
+* Enhance: Do not auto resize animated GIF images to preserve animation
+* Enhance: Performance improvements, remove duplicate queries
+* Fixed: Stats reset for Smushed directories when selecting Super-smush option
+* Fixed: Pro status cached bug
+* Fixed: Quick setup modal missing image dimensions for image resize option
+
+= 2.8.0.1 =
+
+* Fixed: Smush causing media uploads to not function properly (in rare conditions)
 
 = 2.8.0 =
 
@@ -439,4 +483,4 @@ Change Log:
 - First release
 
 
-87274-1532632755-au
+87274-1541874356-au

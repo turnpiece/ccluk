@@ -2,17 +2,7 @@
  * COMMON: MODALS
  */
 
-.wpmud .wphb-progress-modal .wphb-progress {
-    max-width: 100%;
-}
-
-.wpmud .wphb-progress-modal .wphb-dialog-content p {
-    color: #666666;
-}
-
-.wpmud .wphb-progress-modal .wphb-notice-box p {
-    color: #333333;
-    font-size: 13px;
+#wphb-quick-setup-modal .sui-description {
     line-height: 22px;
 }
 
@@ -39,6 +29,11 @@
 .wphb-cdn-block > p {
     color: #888888 !important;
     padding: 0 30px 0 76px;
+}
+
+/* Asset Optimization assets found modal */
+.wpmud .wphb-assets-modal .sui-notice-warning {
+    text-align: left;
 }
 
 /* Asset Optimization switch mode notice */

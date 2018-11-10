@@ -30,13 +30,13 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 			/* @noinspection PhpIncludeInspection */
 			include_once WPHB_DIR_PATH . 'core/class-utils.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'core/class-settings.php' );
+			include_once WPHB_DIR_PATH . 'core/class-settings.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'core/class-abstract-module.php' );
+			include_once WPHB_DIR_PATH . 'core/class-abstract-module.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'core/modules/class-module-uptime.php' );
+			include_once WPHB_DIR_PATH . 'core/modules/class-module-uptime.php';
 			/* @noinspection PhpIncludeInspection */
-			include_once( WPHB_DIR_PATH . 'core/modules/class-module-cloudflare.php' );
+			include_once WPHB_DIR_PATH . 'core/modules/class-module-cloudflare.php';
 
 			update_site_option( 'wphb_version', WPHB_VERSION );
 
@@ -142,6 +142,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 					self::upgrade_1_9_0();
 				}
 
+				if ( version_compare( $version, '1.9.2', '<' ) ) {
+					self::upgrade_1_9_2();
+				}
+
 				update_site_option( 'wphb_version', WPHB_VERSION );
 			} // End if().
 		}
@@ -159,6 +163,10 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 
 			if ( version_compare( $version, '1.8.0', '<' ) ) {
 				self::upgrade_1_8();
+			}
+
+			if ( version_compare( $version, '1.9.2', '<' ) ) {
+				self::upgrade_1_9_2();
 			}
 
 			update_option( 'wphb_version', WPHB_VERSION );
@@ -435,6 +443,52 @@ if ( ! class_exists( 'WP_Hummingbird_Installer' ) ) {
 		private static function upgrade_1_9_0() {
 			delete_site_option( 'wphb-server-type' );
 			delete_metadata( 'user', '', 'wphb-server-type', '', true );
+		}
+
+		/**
+		 * Upgrade to 1.9.2
+		 *
+		 * Change the default behavior of AO - do not compress assets by default.
+		 */
+		private static function upgrade_1_9_2() {
+			/**
+			 * Do not compress assets by default.
+			 */
+			$settings = WP_Hummingbird_Settings::get_settings( 'minify' );
+
+			if ( ! isset( $settings['dont_minify'] ) ) {
+				return;
+			}
+
+			$dont_minify = $settings['dont_minify'];
+			unset( $settings['dont_minify'] );
+
+			$collection = WP_Hummingbird_Utils::get_module( 'minify' )->get_resources_collection();
+			$options['minify'] = array(
+				'styles'  => array(),
+				'scripts' => array(),
+			);
+
+			foreach ( $dont_minify as $type => $handles ) {
+				$settings['minify'][ $type ] = array();
+				$type_collection = wp_list_pluck( $collection[ $type ], 'handle' );
+				foreach ( $type_collection as $type_handle ) {
+					if ( ! in_array( $type_handle, $handles ) ) {
+						$options['minify'][ $type ][] = $type_handle;
+					}
+				}
+			}
+
+			WP_Hummingbird_Settings::update_settings( $settings, 'minify' );
+
+			/**
+			 * Log class has changed. Clear out old log files.
+			 */
+			if ( ! class_exists( 'WP_Hummingbird_Logger' ) ) {
+				/* @noinspection PhpIncludeInspection */
+				include_once WPHB_DIR_PATH . 'core/class-logger.php';
+			}
+			WP_Hummingbird_Logger::cleanup();
 		}
 
 	}

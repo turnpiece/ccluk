@@ -106,6 +106,8 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_minification_save_critical_css', array( $this, 'minification_save_critical_css' ) );
 		// Update custom asset path.
 		add_action( 'wp_ajax_wphb_minification_update_asset_path', array( $this, 'minification_update_asset_path' ) );
+		// Reset individual file.
+		add_action( 'wp_ajax_wphb_minification_reset_asset', array( $this, 'minification_reset_asset' ) );
 
 		/**
 		 * ADVANCED TOOLS AJAX ACTIONS
@@ -115,6 +117,11 @@ class WP_Hummingbird_Admin_AJAX {
 		add_action( 'wp_ajax_wphb_advanced_db_delete_data', array( $this, 'advanced_db_delete_data' ) );
 		// Save settings in advanced tools module.
 		add_action( 'wp_ajax_wphb_advanced_save_settings', array( $this, 'advanced_save_settings' ) );
+
+		/**
+		 * LOGGER MODULE AJAX ACTIONS
+		 */
+		add_action( 'wp_ajax_wphb_logger_clear', array( $this, 'logger_clear' ) );
 	}
 
 	/**
@@ -430,7 +437,11 @@ class WP_Hummingbird_Admin_AJAX {
 			die();
 		}
 
-		$post_value = rest_sanitize_boolean( wp_unslash( $_POST['value'] ) ); // Input var okay.
+		if ( function_exists( 'rest_sanitize_boolean' ) ) {
+			$post_value = rest_sanitize_boolean( wp_unslash( $_POST['value'] ) ); // Input var okay.
+		} else {
+			$post_value = WP_Hummingbird_Utils::sanitize_bool( wp_unslash( $_POST['value'] ) ); // Input var okay.
+		}
 
 		$value = true;
 		if ( $post_value ) {
@@ -1029,7 +1040,13 @@ class WP_Hummingbird_Admin_AJAX {
 	public function minification_finish_scan() {
 		delete_transient( 'wphb-minification-files-scanning' );
 		update_option( 'wphb-minification-files-scanned', true );
-		wp_send_json_success();
+		wp_send_json_success( array(
+			'assets_msg' => sprintf(
+				/* translators: %s - number of assets */
+				esc_html__( '%s assets found!', 'wphb' ),
+				WP_Hummingbird_Utils::minified_files_count()
+			),
+		) );
 	}
 
 	/**
@@ -1085,6 +1102,47 @@ class WP_Hummingbird_Admin_AJAX {
 		) );
 	}
 
+	/**
+	 * Reset individual file.
+	 *
+	 * @since 1.9.2
+	 */
+	public function minification_reset_asset() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['value'] ) ) { // Input var ok.
+			die();
+		}
+
+		$files = explode( ' ', sanitize_text_field( wp_unslash( $_POST['value'] ) ) ); // Input var ok.
+
+		$type = $handle = '';
+		foreach ( $files as $item ) {
+			if ( 'css' === strtolower( $item ) ) {
+				$type = 'styles';
+				continue;
+			}
+
+			if ( 'js' === strtolower( $item ) ) {
+				$type = 'scripts';
+				continue;
+			}
+
+			$handle = $item;
+		}
+
+		if ( ! $handle || ! $type ) {
+			wp_send_json_error( array(
+				'message' => __( 'Error removing asset file.', 'wphb' ),
+			));
+		}
+
+		WP_Hummingbird_Utils::get_module( 'minify' )->clear_file( $handle, $type );
+
+		wp_send_json_success( array(
+			'success' => true,
+		) );
+	}
 
 	/**
 	 * *************************
@@ -1184,6 +1242,49 @@ class WP_Hummingbird_Admin_AJAX {
 		wp_send_json_success( array(
 			'success' => true,
 		));
+	}
+
+	/**
+	 * *************************
+	 * LOGGER MODULE AJAX ACTIONS
+	 ***************************/
+
+	/**
+	 * Clear logs.
+	 *
+	 * @since 1.9.2
+	 */
+	public function logger_clear() {
+		check_ajax_referer( 'wphb-fetch', 'nonce' );
+
+		if ( ! current_user_can( WP_Hummingbird_Utils::get_admin_capability() ) || ! isset( $_POST['module'] ) ) { // Input var okay.
+			die();
+		}
+
+		$slug = sanitize_text_field( wp_unslash( $_POST['module'] ) ); // Input var ok.
+
+		$module = WP_Hummingbird_Utils::get_module( $slug );
+
+		if ( ! $module ) {
+			wp_send_json_success( array(
+				'success' => false,
+				'message' => __( 'Module not found', 'wphb' ),
+			) );
+		}
+
+		$status = WP_Hummingbird::get_instance()->core->logger->clear( $slug );
+
+		if ( ! $status ) {
+			wp_send_json_success( array(
+				'success' => false,
+				'message' => __( 'Log file not found or empty', 'wphb' ),
+			) );
+		}
+
+		wp_send_json_success( array(
+			'success' => true,
+			'message' => __( 'Log file purged', 'wphb' ),
+		) );
 	}
 
 }

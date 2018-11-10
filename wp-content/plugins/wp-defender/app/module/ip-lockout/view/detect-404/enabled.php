@@ -1,7 +1,7 @@
 <div class="dev-box">
     <form method="post" id="settings-frm" class="ip-frm">
         <div class="box-title">
-            <h3><?php esc_html_e( "404 DETECTION", wp_defender()->domain ) ?></h3>
+            <h3 role="checkbox"><label for="toggle_404_detection" role="checkbox" aria-checked="true"><?php esc_html_e( "404 DETECTION", wp_defender()->domain ) ?></label></h3>
             <div class="side float-r">
                 <div>
                     <span tooltip="<?php esc_attr_e( "Deactivate 404 Detection", wp_defender()->domain ) ?>" class="toggle">

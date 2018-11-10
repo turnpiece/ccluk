@@ -837,7 +837,7 @@ class Snapshot_Helper_Backup {
 	 * @return array
 	 */
 	public function get_system_exclusion_paths( $source, $format = false ) {
-		$raw_exclusions = Snapshot_Model_Fileset::get_excluded_paths();
+		$raw_exclusions = Snapshot_Model_Fileset::get_excluded_paths( $format );
 		$exclusions = array();
 
 		foreach ( $raw_exclusions as $excl ) {
@@ -849,8 +849,9 @@ class Snapshot_Helper_Backup {
 			if ( empty( $excl ) ) {
 				continue;
 			}
+			$excl = is_file( path_join( $source->get_root(), $excl ) ) ? $excl : trailingslashit( $excl );
 			$exclusions[] = $format
-				? '-not \( -path \'*' . escapeshellcmd( trailingslashit( $excl ) ) . '*\' -prune \)'
+				? '-not \( -path \'*' . escapeshellcmd( $excl ) . '*\' -prune \)'
 				: '-x ' . escapeshellarg( '*' . trailingslashit( $excl ) . '*' );
 		}
 		return $exclusions;

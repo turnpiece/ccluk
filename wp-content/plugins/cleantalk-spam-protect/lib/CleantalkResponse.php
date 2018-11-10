@@ -112,7 +112,12 @@ class CleantalkResponse {
      * @var int  
      */
     public $account_status = -1;
-
+	
+	/**
+	 * @var array Contains codes returned from server
+	 */
+	public $codes = array();
+	
     /**
      * Create server response
      *
@@ -146,10 +151,10 @@ class CleantalkResponse {
             $this->inactive = (isset($obj->inactive)) ? $obj->inactive : 0;
             $this->account_status = (isset($obj->account_status)) ? $obj->account_status : -1;
 			$this->received = (isset($obj->received)) ? $obj->received : -1;
+			$this->codes = (isset($obj->codes)) ? explode(' ', $obj->codes) : array();
 
             if ($this->errno !== 0 && $this->errstr !== null && $this->comment === null)
                 $this->comment = '*** ' . $this->errstr . ' Antispam service cleantalk.org ***'; 
         }
     }
-
 }

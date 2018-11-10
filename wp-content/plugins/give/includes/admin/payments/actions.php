@@ -40,7 +40,7 @@ function give_update_payment_details( $data ) {
 	$payment = new Give_Payment( $payment_id );
 
 	$status = $data['give-payment-status'];
-	$date   = sanitize_text_field( $data['give-payment-date'] );
+	$date   = DateTime::createFromFormat( get_option( 'date_format' ), sanitize_text_field( $data['give-payment-date'] ) );
 	$hour   = sanitize_text_field( $data['give-payment-time-hour'] );
 
 	// Restrict to our high and low.
@@ -63,7 +63,7 @@ function give_update_payment_details( $data ) {
 
 	$curr_total = $payment->total;
 	$new_total  = give_maybe_sanitize_amount( ( ! empty( $data['give-payment-total'] ) ? $data['give-payment-total'] : 0 ) );
-	$date       = date( 'Y-m-d', strtotime( $date ) ) . ' ' . $hour . ':' . $minute . ':00';
+	$date       = $date->format('Y-m-d' ) . ' ' . $hour . ':' . $minute . ':00';
 
 	$curr_donor_id = sanitize_text_field( $data['give-current-donor'] );
 	$new_donor_id  = sanitize_text_field( $data['donor-id'] );
@@ -306,17 +306,11 @@ function give_update_payment_details( $data ) {
 		$payment->update_payment_setup( $payment->ID );
 	}
 
-	$comment_id            = isset( $data['give_comment_id'] ) ? absint( $data['give_comment_id'] ) : 0;
-	$is_anonymous_donation = give_is_anonymous_donation_field_enabled( $payment->form_id );
+	$comment_id                   = isset( $data['give_comment_id'] ) ? absint( $data['give_comment_id'] ) : 0;
+	$has_anonymous_setting_field = give_is_anonymous_donation_field_enabled( $payment->form_id );
 
-	if ( $is_anonymous_donation ) {
+	if ( $has_anonymous_setting_field ) {
 		give_update_meta( $payment->ID, '_give_anonymous_donation', $payment->anonymous );
-		Give()->donor_meta->update_meta( $payment->donor_id, '_give_anonymous_donor', $payment->anonymous );
-
-		// Update comment meta if admin is not updating comment.
-		if( $comment_id ) {
-			update_comment_meta( $comment_id, '_give_anonymous_donation', $payment->anonymous );
-		}
 	}
 
 	// Update comment.
@@ -327,12 +321,9 @@ function give_update_payment_details( $data ) {
 		if ( empty( $data['give_comment'] ) ) {
 			// Delete comment if empty
 			Give_Comment::delete( $comment_id, $payment_id, 'payment' );
+			$comment_id = 0;
 
 		} else {
-
-			// Update/Insert comment.
-			$is_update_comment_meta = ! $comment_id;
-
 			$comment_args = array(
 				'comment_author_email' => $payment->email
 			);
@@ -347,17 +338,7 @@ function give_update_payment_details( $data ) {
 				$data['give_comment'],
 				$comment_args
 			);
-
-			if ( $is_update_comment_meta ) {
-				update_comment_meta( $comment_id, '_give_anonymous_donation', $is_anonymous_donation );
-			}
 		}
-
-		$donor_has_comment = empty( $data['give_comment'] )
-			? ( $latest_comment = give_get_donor_latest_comment( $payment->donor_id ) && empty( $latest_comment ) ? '0' : '1' )
-			: '1';
-
-		Give()->donor_meta->update_meta( $payment->donor_id, '_give_has_comment', $donor_has_comment );
 	}
 
 	/**
@@ -406,23 +387,48 @@ add_action( 'give_delete_payment', 'give_trigger_donation_delete' );
  * AJAX Store Donation Note
  */
 function give_ajax_store_payment_note() {
-
 	$payment_id = absint( $_POST['payment_id'] );
 	$note       = wp_kses( $_POST['note'], array() );
+	$note_type  = give_clean( $_POST['type'] );
 
 	if ( ! current_user_can( 'edit_give_payments', $payment_id ) ) {
 		wp_die( __( 'You do not have permission to edit payments.', 'give' ), __( 'Error', 'give' ), array( 'response' => 403 ) );
 	}
 
-	if ( empty( $payment_id ) ) {
+	if ( empty( $payment_id ) || empty( $note ) ) {
 		die( '-1' );
 	}
 
-	if ( empty( $note ) ) {
-		die( '-1' );
+	if ( ! give_has_upgrade_completed( 'v230_move_donor_note' ) ) {
+		// Backward compatibility.
+		$note_id = give_insert_payment_note( $payment_id, $note );
+	} else {
+		$note_id = Give()->comment->db->add(
+			array(
+				'comment_parent'  => $payment_id,
+				'user_id'         => get_current_user_id(),
+				'comment_content' => $note,
+				'comment_type'    => 'donation',
+			)
+		);
 	}
 
-	$note_id = give_insert_payment_note( $payment_id, $note );
+	if( $note_id && $note_type ) {
+
+		if( ! give_has_upgrade_completed('v230_move_donor_note' ) ) {
+			add_comment_meta( $note_id, 'note_type', $note_type, true );
+		} else{
+			Give()->comment->db_meta->update_meta( $note_id, 'note_type', $note_type );
+		}
+
+		/**
+		 * Fire the action
+		 *
+		 * @since 2.3.0
+		 */
+		do_action( 'give_donor-note_email_notification', $note_id, $payment_id );
+	}
+
 	die( give_get_payment_note_html( $note_id ) );
 }
 

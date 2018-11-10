@@ -152,7 +152,19 @@ class WP_Hummingbird_Module_Performance extends WP_Hummingbird_Module {
 				)
 			);
 		}
+
 		WP_Hummingbird_Settings::update( 'wphb-last-report', $results );
+
+		/**
+		 * Fires after getting the latest report.
+		 *
+		 * @since 1.9.2
+		 *
+		 * @see https://developers.google.com/speed/docs/insights/v4/reference/pagespeedapi/runpagespeed
+		 *
+		 * @param object $report  Object with report data.
+		 */
+		do_action( 'wphb_get_performance_report', $results->data );
 	}
 
 	/**

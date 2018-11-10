@@ -6,40 +6,40 @@ defined('ABSPATH') OR exit;
 
 
 /**
-* Cache_Enabler
-*
-* @since 1.0.0
-*/
+ * Cache_Enabler
+ *
+ * @since 1.0.0
+ */
 
 final class Cache_Enabler {
 
 
     /**
-    * plugin options
-    *
-    * @since  1.0.0
-    * @var    array
-    */
+     * plugin options
+     *
+     * @since  1.0.0
+     * @var    array
+     */
 
     public static $options;
 
 
     /**
-    * disk cache object
-    *
-    * @since  1.0.0
-    * @var    object
-    */
+     * disk cache object
+     *
+     * @since  1.0.0
+     * @var    object
+     */
 
     private static $disk;
 
 
     /**
-    * minify default settings
-    *
-    * @since  1.0.0
-    * @var    integer
-    */
+     * minify default settings
+     *
+     * @since  1.0.0
+     * @var    integer
+     */
 
     const MINIFY_DISABLED = 0;
     const MINIFY_HTML_ONLY = 1;
@@ -47,11 +47,11 @@ final class Cache_Enabler {
 
 
     /**
-    * constructor wrapper
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * constructor wrapper
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function instance()
     {
@@ -60,14 +60,14 @@ final class Cache_Enabler {
 
 
     /**
-    * constructor
-    *
-    * @since   1.0.0
-    * @change  1.2.0
-    *
-    * @param   void
-    * @return  void
-    */
+     * constructor
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     *
+     * @param   void
+     * @return  void
+     */
 
     public function __construct()
     {
@@ -115,9 +115,18 @@ final class Cache_Enabler {
         );
         add_action(
             'wp_trash_post',
+            function( $post_id ) {
+                if ( get_post_status ( $post_id ) == 'publish' ) {
+                    self::clear_total_cache();
+                }
+                self::check_future_posts();
+            }
+        );
+        add_action(
+            'save_post',
             array(
                 __CLASS__,
-                'clear_total_cache'
+                'check_future_posts'
             )
         );
         add_action(
@@ -126,6 +135,50 @@ final class Cache_Enabler {
                 __CLASS__,
                 'clear_total_cache'
             )
+        );
+        add_action(
+            'upgrader_process_complete',
+            array(
+                __CLASS__,
+                'on_upgrade_hook'
+            ), 10, 2);
+
+        // act on woocommerce actions
+        add_action(
+            'woocommerce_product_set_stock',
+            array(
+                __CLASS__,
+                'woocommerce_product_set_stock',
+            ),
+            10,
+            1
+        );
+        add_action(
+            'woocommerce_product_set_stock_status',
+            array(
+                __CLASS__,
+                'woocommerce_product_set_stock_status',
+            ),
+            10,
+            1
+        );
+        add_action(
+            'woocommerce_variation_set_stock',
+            array(
+                __CLASS__,
+                'woocommerce_product_set_stock',
+            ),
+            10,
+            1
+        );
+        add_action(
+            'woocommerce_variation_set_stock_status',
+            array(
+                __CLASS__,
+                'woocommerce_product_set_stock_status',
+            ),
+            10,
+            1
         );
 
         // add admin clear link
@@ -144,6 +197,15 @@ final class Cache_Enabler {
                 'process_clear_request'
             )
         );
+        if ( !is_admin() ) {
+            add_action(
+                'admin_bar_menu',
+                array(
+                    __CLASS__,
+                    'register_textdomain'
+                )
+            );
+        }
 
         // admin
         if ( is_admin() ) {
@@ -290,11 +352,11 @@ final class Cache_Enabler {
 
 
     /**
-    * deactivation hook
-    *
-    * @since   1.0.0
-    * @change  1.1.1
-    */
+     * deactivation hook
+     *
+     * @since   1.0.0
+     * @change  1.1.1
+     */
 
     public static function on_deactivation() {
         self::clear_total_cache(true);
@@ -310,11 +372,11 @@ final class Cache_Enabler {
 
 
     /**
-    * activation hook
-    *
-    * @since   1.0.0
-    * @change  1.1.1
-    */
+     * activation hook
+     *
+     * @since   1.0.0
+     * @change  1.1.1
+     */
 
     public static function on_activation() {
 
@@ -347,11 +409,47 @@ final class Cache_Enabler {
 
 
     /**
-    * install on multisite setup
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * upgrade hook actions
+     *
+     * @since 1.2.3
+     */
+
+    public static function on_upgrade_hook( $obj, $options ) {
+        // clear cache on other plugins being upgraded
+        if ( self::$options['clear_on_upgrade'] ) {
+            self::clear_total_cache();
+        }
+
+        // check if we got upgraded ourselves
+        if ( $options['action'] == 'update' && $options['type'] == 'plugin' && array_key_exists('plugins', $options) ) {
+            foreach ( (array)$options['plugins'] as $each_plugin ) {
+                if ( preg_match("/^cache-enabler\//", $each_plugin) ) {
+                    // we got updated!
+                    self::on_upgrade();
+                }
+            }
+        }
+    }
+
+
+    /**
+     * upgrade actions
+     *
+     * @since 1.2.3
+     */
+
+    public static function on_upgrade() {
+        // copy advanced cache file which might have changed
+        copy(CE_DIR . '/advanced-cache.php', WP_CONTENT_DIR . '/advanced-cache.php');
+    }
+
+
+    /**
+     * install on multisite setup
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function install_later($id) {
 
@@ -372,11 +470,11 @@ final class Cache_Enabler {
 
 
     /**
-    * installation options
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * installation options
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     private static function _install_backend() {
 
@@ -391,11 +489,11 @@ final class Cache_Enabler {
 
 
     /**
-    * installation WP_CACHE (advanced cache)
-    *
-    * @since   1.1.1
-    * @change  1.1.1
-    */
+     * installation WP_CACHE (advanced cache)
+     *
+     * @since   1.1.1
+     * @change  1.1.1
+     */
 
     private static function _set_wp_cache($wp_cache_value = true) {
         $wp_config_file = ABSPATH . 'wp-config.php';
@@ -438,11 +536,11 @@ final class Cache_Enabler {
 
 
     /**
-    * uninstall per multisite blog
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * uninstall per multisite blog
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function on_uninstall() {
         global $wpdb;
@@ -470,11 +568,11 @@ final class Cache_Enabler {
 
 
     /**
-    * uninstall for multisite and network
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * uninstall for multisite and network
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function uninstall_later($id) {
 
@@ -495,11 +593,11 @@ final class Cache_Enabler {
 
 
     /**
-    * uninstall
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * uninstall
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     private static function _uninstall_backend() {
 
@@ -512,13 +610,13 @@ final class Cache_Enabler {
 
 
     /**
-    * get blog ids
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  array  blog ids array
-    */
+     * get blog ids
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  array  blog ids array
+     */
 
     private static function _get_blog_ids() {
         global $wpdb;
@@ -528,11 +626,11 @@ final class Cache_Enabler {
 
 
     /**
-    * set default vars
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * set default vars
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     private static function _set_default_vars() {
 
@@ -547,13 +645,13 @@ final class Cache_Enabler {
 
 
     /**
-    * get options
-    *
-    * @since   1.0.0
-    * @change  1.2.1
-    *
-    * @return  array  options array
-    */
+     * get options
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     *
+     * @return  array  options array
+     */
 
     private static function _get_options() {
 
@@ -570,49 +668,53 @@ final class Cache_Enabler {
         return wp_parse_args(
             get_option('cache-enabler'),
             array(
-                'expires'        => 0,
-                'new_post'        => 0,
-                'new_comment'     => 0,
-                'compress'         => 0,
-                'webp'            => 0,
-                'excl_ids'         => '',
-                'minify_html'     => self::MINIFY_DISABLED,
+                'expires'           => 0,
+                'new_post'          => 0,
+                'new_comment'       => 0,
+                'compress'          => 0,
+                'webp'              => 0,
+                'clear_on_upgrade'  => 0,
+                'excl_ids'          => '',
+                'excl_regexp'       => '',
+                'excl_cookies'      => '',
+                'incl_attributes'   => '',
+                'minify_html'       => self::MINIFY_DISABLED,
             )
         );
     }
 
 
     /**
-    * warning if no custom permlinks
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  array  options array
-    */
+     * warning if no custom permlinks
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  array  options array
+     */
 
     public static function warning_is_permalink() {
 
-        if ( !Cache_Enabler_Disk::is_permalink() AND current_user_can('manage_options') ) { ?>
+        if ( !Cache_Enabler_Disk::is_permalink() && current_user_can('manage_options') ) { ?>
 
             <div class="error">
                 <p><?php printf( __('The <b>%s</b> plugin requires a custom permalink structure to start caching properly. Please go to <a href="%s">Permalink</a> to enable it.', 'cache-enabler'), 'Cache Enabler', admin_url( 'options-permalink.php' ) ); ?></p>
             </div>
 
-        <?php
+            <?php
         }
     }
 
 
     /**
-    * add action links
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   array  $data  existing links
-    * @return  array  $data  appended links
-    */
+     * add action links
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   array  $data  existing links
+     * @return  array  $data  appended links
+     */
 
     public static function action_links($data) {
 
@@ -640,15 +742,15 @@ final class Cache_Enabler {
 
 
     /**
-    * cache enabler meta links
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   array   $input  existing links
-    * @param   string  $page   page
-    * @return  array   $data   appended links
-    */
+     * cache enabler meta links
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   array   $input  existing links
+     * @param   string  $page   page
+     * @return  array   $data   appended links
+     */
 
     public static function row_meta($input, $page) {
 
@@ -667,14 +769,14 @@ final class Cache_Enabler {
 
 
     /**
-    * add dashboard cache size count
-    *
-    * @since   1.0.0
-    * @change  1.1.0
-    *
-    * @param   array  $items  initial array with dashboard items
-    * @return  array  $items  merged array with dashboard items
-    */
+     * add dashboard cache size count
+     *
+     * @since   1.0.0
+     * @change  1.1.0
+     *
+     * @param   array  $items  initial array with dashboard items
+     * @return  array  $items  merged array with dashboard items
+     */
 
     public static function add_dashboard_count( $items = array() ) {
 
@@ -705,25 +807,25 @@ final class Cache_Enabler {
 
 
     /**
-    * get cache size
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   integer  $size  cache size (bytes)
-    */
+     * get cache size
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   integer  $size  cache size (bytes)
+     */
 
     public static function get_cache_size() {
 
         if ( ! $size = get_transient('cache_size') ) {
 
-            $size = (int) self::$disk->cache_size(CE_CACHE_DIR);
+            $size = is_object( self::$disk ) ? (int) self::$disk->cache_size(CE_CACHE_DIR) : 0;
 
             // set transient
             set_transient(
-              'cache_size',
-              $size,
-              60 * 15
+                'cache_size',
+                $size,
+                60 * 15
             );
         }
 
@@ -732,15 +834,15 @@ final class Cache_Enabler {
 
 
     /**
-    * add admin links
-    *
-    * @since   1.0.0
-    * @change  1.1.0
-    *
-    * @hook    mixed
-    *
-    * @param   object  menu properties
-    */
+     * add admin links
+     *
+     * @since   1.0.0
+     * @change  1.1.0
+     *
+     * @hook    mixed
+     *
+     * @param   object  menu properties
+     */
 
     public static function add_admin_links($wp_admin_bar) {
 
@@ -776,13 +878,13 @@ final class Cache_Enabler {
 
 
     /**
-    * process clear request
-    *
-    * @since   1.0.0
-    * @change  1.1.0
-    *
-    * @param   array  $data  array of metadata
-    */
+     * process clear request
+     *
+     * @since   1.0.0
+     * @change  1.1.0
+     *
+     * @param   array  $data  array of metadata
+     */
 
     public static function process_clear_request($data) {
 
@@ -894,13 +996,13 @@ final class Cache_Enabler {
 
 
     /**
-    * notification after clear cache
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @hook    mixed  user_can_clear_cache
-    */
+     * notification after clear cache
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @hook    mixed  user_can_clear_cache
+     */
 
     public static function clear_notice() {
 
@@ -917,14 +1019,14 @@ final class Cache_Enabler {
 
 
     /**
-    * clear cache if post comment
-    *
-    * @since   1.2.0
-    * @change  1.2.0
-    *
-    * @param   integer  $id  id of the comment
-    * @param   mixed  $approved  approval status
-    */
+     * clear cache if post comment
+     *
+     * @since   1.2.0
+     * @change  1.2.0
+     *
+     * @param   integer  $id  id of the comment
+     * @param   mixed  $approved  approval status
+     */
 
     public static function comment_post($id, $approved) {
 
@@ -942,13 +1044,13 @@ final class Cache_Enabler {
 
 
     /**
-    * clear cache if edit comment
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   integer  $id  id of the comment
-    */
+     * clear cache if edit comment
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   integer  $id  id of the comment
+     */
 
     public static function edit_comment($id) {
 
@@ -964,15 +1066,15 @@ final class Cache_Enabler {
 
 
     /**
-    * clear cache if new comment
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   mixed  $approved  approval status
-    * @param   array  $comment
-    * @return  mixed  $approved  approval status
-    */
+     * clear cache if new comment
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   mixed  $approved  approval status
+     * @param   array  $comment
+     * @return  mixed  $approved  approval status
+     */
 
     public static function new_comment($approved, $comment) {
 
@@ -990,15 +1092,15 @@ final class Cache_Enabler {
 
 
     /**
-    * clear cache if comment changes
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   string  $after_status
-    * @param   string  $before_status
-    * @param   object  $comment
-    */
+     * clear cache if comment changes
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   string  $after_status
+     * @param   string  $before_status
+     * @param   object  $comment
+     */
 
     public static function change_comment($after_status, $before_status, $comment) {
 
@@ -1014,14 +1116,14 @@ final class Cache_Enabler {
 
 
     /**
-    * register publish hooks for custom post types
-    *
-    * @since   1.0.0
-    * @since   1.0.0
-    *
-    * @param   void
-    * @return  void
-    */
+     * register publish hooks for custom post types
+     *
+     * @since   1.0.0
+     * @since   1.2.3
+     *
+     * @param   void
+     * @return  void
+     */
 
     public static function register_publish_hooks() {
 
@@ -1048,23 +1150,27 @@ final class Cache_Enabler {
             );
             add_action(
                 'publish_future_' .$post_type,
-                array(
-                    __CLASS__,
-                    'clear_total_cache'
-                )
+                function( $post_id ) {
+                    // clear complete cache if option enabled
+                    if ( self::$options['new_post'] ) {
+                        self::clear_total_cache();
+                    } else {
+                        self::clear_home_page_cache();
+                    }
+                }
             );
         }
     }
 
 
     /**
-    * delete post type cache on post updates
-    *
-    * @since   1.0.0
-    * @change  1.0.7
-    *
-    * @param   integer  $post_ID  Post ID
-    */
+     * delete post type cache on post updates
+     *
+     * @since   1.0.0
+     * @change  1.0.7
+     *
+     * @param   integer  $post_ID  Post ID
+     */
 
     public static function publish_post_types($post_ID, $post) {
 
@@ -1120,13 +1226,13 @@ final class Cache_Enabler {
 
 
     /**
-    * clear page cache by post id
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   integer  $post_ID  Post ID
-    */
+     * clear page cache by post id
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   integer  $post_ID  Post ID
+     */
 
     public static function clear_page_cache_by_post_id($post_ID) {
 
@@ -1143,13 +1249,13 @@ final class Cache_Enabler {
 
 
     /**
-    * clear page cache by url
-    *
-    * @since   1.0.0
-    * @change  1.2.3
-    *
-    * @param  string  $url  url of a page
-    */
+     * clear page cache by url
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     *
+     * @param  string  $url  url of a page
+     */
 
     public static function clear_page_cache_by_url($url) {
 
@@ -1172,12 +1278,12 @@ final class Cache_Enabler {
 
 
     /**
-    * clear home page cache
-    *
-    * @since   1.0.7
-    * @change  1.2.3
-    *
-    */
+     * clear home page cache
+     *
+     * @since   1.0.7
+     * @change  1.2.3
+     *
+     */
 
     public static function clear_home_page_cache() {
 
@@ -1194,42 +1300,27 @@ final class Cache_Enabler {
 
 
     /**
-    * explode on comma
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   string  $input  input string
-    * @return  array           array of strings
-    */
-
-    private static function _preg_split($input) {
-        return (array)preg_split('/,/', $input, -1, PREG_SPLIT_NO_EMPTY);
-    }
-
-
-    /**
-    * check if index.php
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  boolean  true if index.php
-    */
+     * check if index.php
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  boolean  true if index.php
+     */
 
     private static function _is_index() {
-        return basename($_SERVER['SCRIPT_NAME']) != 'index.php';
+        return strtolower(basename($_SERVER['SCRIPT_NAME'])) != 'index.php';
     }
 
 
     /**
-    * check if mobile
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  boolean  true if mobile
-    */
+     * check if mobile
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  boolean  true if mobile
+     */
 
     private static function _is_mobile() {
         return ( strpos(TEMPLATEPATH, 'wptouch') OR strpos(TEMPLATEPATH, 'carrington') OR strpos(TEMPLATEPATH, 'jetpack') OR strpos(TEMPLATEPATH, 'handheld') );
@@ -1237,13 +1328,13 @@ final class Cache_Enabler {
 
 
     /**
-    * check if logged in
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  boolean  true if logged in or cookie set
-    */
+     * check if logged in
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  boolean  true if logged in or cookie set
+     */
 
     private static function _is_logged_in() {
 
@@ -1258,8 +1349,15 @@ final class Cache_Enabler {
         }
 
         // check cookie values
+        $options = self::$options;
+        if ( !empty($options['excl_cookies']) ) {
+            $cookies_regex = $options['excl_cookies'];
+        } else {
+            $cookies_regex = '/^(wp-postpass|wordpress_logged_in|comment_author)_/';
+        }
+
         foreach ( $_COOKIE as $k => $v) {
-            if ( preg_match('/^(wp-postpass|wordpress_logged_in|comment_author)_/', $k) ) {
+            if ( preg_match($cookies_regex, $k) ) {
                 return true;
             }
         }
@@ -1267,15 +1365,39 @@ final class Cache_Enabler {
 
 
     /**
-    * check to bypass the cache
-    *
-    * @since   1.0.0
-    * @change  1.0.7
-    *
-    * @return  boolean  true if exception
-    *
-    * @hook    boolean  bypass cache
-    */
+     * check if there are post to be published in the future
+     *
+     * @since   1.2.3
+     *
+     * @return  void
+     *
+     */
+
+    public static function check_future_posts() {
+
+        $future_posts = new WP_Query(array('post_status' => array('future')));
+
+        if ( $future_posts->have_posts() ) {
+            $post_dates = array_column($future_posts->get_posts(), "post_date");
+            sort($post_dates);
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "cache_timeout" => strtotime($post_dates[0])));
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array("cache_timeout"));
+        }
+    }
+
+
+    /**
+     * check to bypass the cache
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     *
+     * @return  boolean  true if exception
+     *
+     * @hook    boolean  bypass cache
+     */
 
     private static function _bypass_cache() {
 
@@ -1319,7 +1441,16 @@ final class Cache_Enabler {
 
         // if post id excluded
         if ( $options['excl_ids'] && is_singular() ) {
-            if ( in_array( $GLOBALS['wp_query']->get_queried_object_id(), self::_preg_split($options['excl_ids']) ) ) {
+            if ( in_array( $GLOBALS['wp_query']->get_queried_object_id(), (array)explode(',', $options['excl_ids']) ) ) {
+                return true;
+            }
+        }
+
+        // if post path excluded
+        if ( !empty($options['excl_regexp']) ) {
+            $url_path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+
+            if ( preg_match($options['excl_regexp'], $url_path) ) {
                 return true;
             }
         }
@@ -1329,16 +1460,16 @@ final class Cache_Enabler {
 
 
     /**
-    * minify html
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   string  $data  minify request data
-    * @return  string  $data  minify response data
-    *
-    * @hook    array   cache_minify_ignore_tags
-    */
+     * minify html
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   string  $data  minify request data
+     * @return  string  $data  minify response data
+     *
+     * @hook    array   cache_minify_ignore_tags
+     */
 
     private static function _minify_cache($data) {
 
@@ -1397,13 +1528,15 @@ final class Cache_Enabler {
 
 
     /**
-    * clear complete cache
-    *
-    * @since   1.0.0
-    * @change  1.2.3
-    */
+     * clear complete cache
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     */
 
     public static function clear_total_cache() {
+        // we need this here to update advanced-cache.php for the 1.2.3 upgrade
+        self::on_upgrade();
 
         // clear disk cache
         Cache_Enabler_Disk::clear_cache();
@@ -1417,14 +1550,29 @@ final class Cache_Enabler {
 
 
     /**
-    * set cache
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @param   string  $data  content of a page
-    * @return  string  $data  content of a page
-    */
+     * Act on WooCommerce stock changes
+     *
+     * @since 1.3.0
+     */
+
+    public static function woocommerce_product_set_stock($product) {
+        self::woocommerce_product_set_stock_status($product->get_id());
+    }
+
+    public static function woocommerce_product_set_stock_status($product_id) {
+        self::clear_total_cache();
+    }
+
+
+    /**
+     * set cache
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @param   string  $data  content of a page
+     * @return  string  $data  content of a page
+     */
 
     public static function set_cache($data) {
 
@@ -1432,6 +1580,8 @@ final class Cache_Enabler {
         if ( empty($data) ) {
             return '';
         }
+
+        $data = apply_filters('cache_enabler_before_store', $data);
 
         // store as asset
         call_user_func(
@@ -1447,11 +1597,11 @@ final class Cache_Enabler {
 
 
     /**
-    * handle cache
-    *
-    * @since   1.0.0
-    * @change  1.0.1
-    */
+     * handle cache
+     *
+     * @since   1.0.0
+     * @change  1.0.1
+     */
 
     public static function handle_cache() {
 
@@ -1488,6 +1638,11 @@ final class Cache_Enabler {
             return;
         }
 
+        // check if we are missing a trailing slash
+        if ( self::missing_trailing_slash() ) {
+            return;
+        }
+
         // return cached asset
         call_user_func(
             array(
@@ -1499,11 +1654,11 @@ final class Cache_Enabler {
 
 
     /**
-    * add clear option dropdown on post publish widget
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * add clear option dropdown on post publish widget
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function add_clear_dropdown() {
 
@@ -1530,8 +1685,8 @@ final class Cache_Enabler {
         // init variables
         $dropdown_options = '';
         $available_options = array(
-            esc_html__('Completely', 'cache-enabler'),
-            esc_html__('Page specific', 'cache-enabler')
+            esc_html__('Page specific', 'cache-enabler'),
+            esc_html__('Completely', 'cache-enabler')
         );
 
         // set dropdown options
@@ -1572,16 +1727,16 @@ final class Cache_Enabler {
 
 
     /**
-    * enqueue scripts
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * enqueue scripts
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function add_admin_resources($hook) {
 
         // hook check
-        if ( $hook !== 'index.php' AND $hook !== 'post.php' ) {
+        if ( $hook !== 'index.php' && $hook !== 'post.php' ) {
             return;
         }
 
@@ -1599,20 +1754,20 @@ final class Cache_Enabler {
                     $plugin_data['Version'],
                     true
                 );
-            break;
+                break;
 
             default:
-            break;
+                break;
         }
     }
 
 
     /**
-    * add settings page
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * add settings page
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function add_settings_page() {
 
@@ -1630,13 +1785,13 @@ final class Cache_Enabler {
 
 
     /**
-    * minify caching dropdown
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    *
-    * @return  array    Key => value array
-    */
+     * minify caching dropdown
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     *
+     * @return  array    Key => value array
+     */
 
     private static function _minify_select() {
 
@@ -1649,11 +1804,11 @@ final class Cache_Enabler {
 
 
     /**
-    * Check plugin requirements
-    *
-    * @since   1.1.0
-    * @change  1.1.0
-    */
+     * Check plugin requirements
+     *
+     * @since   1.1.0
+     * @change  1.1.0
+     */
 
     public static function requirements_check() {
 
@@ -1692,7 +1847,7 @@ final class Cache_Enabler {
         }
 
         // autoptimize minification check
-        if ( defined('AUTOPTIMIZE_PLUGIN_DIR') && $options['minify_html'] ) {
+        if ( defined('AUTOPTIMIZE_PLUGIN_DIR') && $options['minify_html'] && get_option('autoptimize_html', '') != '' ) {
             show_message(
                 sprintf(
                     '<div class="error"><p>%s</p></div>',
@@ -1708,11 +1863,11 @@ final class Cache_Enabler {
 
 
     /**
-    * register textdomain
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * register textdomain
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function register_textdomain() {
 
@@ -1723,13 +1878,42 @@ final class Cache_Enabler {
         );
     }
 
+    /**
+     * missing training slash
+     *
+     * we only have to really check that in advanced-cache.php
+     *
+     * @since 1.2.3
+     *
+     * @return boolean  true if we need to redirct, otherwise false
+     */
+
+    public static function missing_trailing_slash() {
+        if ( ($permalink_structure = get_option('permalink_structure')) &&
+            preg_match("/\/$/", $permalink_structure) ) {
+
+            // record permalink structure for advanced-cache
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "permalink_trailing_slash" => true
+            ));
+
+            if ( ! preg_match("/\/(|\?.*)$/", $_SERVER["REQUEST_URI"]) ) {
+                return true;
+            }
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array(
+                "permalink_trailing_slash"));
+        }
+
+        return false;
+    }
 
     /**
-    * register settings
-    *
-    * @since   1.0.0
-    * @change  1.0.0
-    */
+     * register settings
+     *
+     * @since   1.0.0
+     * @change  1.0.0
+     */
 
     public static function register_settings() {
 
@@ -1745,14 +1929,40 @@ final class Cache_Enabler {
 
 
     /**
-    * validate settings
-    *
-    * @since   1.0.0
-    * @change  1.0.9
-    *
-    * @param   array  $data  array form data
-    * @return  array         array form data valid
-    */
+     * validate regexps
+     *
+     * @since   1.2.3
+     *
+     * @param   string  $re   string containing regexps
+     * @return  string        string containing regexps or emty string if input invalid
+     */
+
+    public static function validate_regexps($re) {
+        if ( $re != '' ) {
+
+            if ( ! preg_match('/^\/.*\/$/', $re) ) {
+                $re = '/'.$re.'/';
+            }
+
+            if ( @preg_match($re, null) === false ) {
+                return '';
+            }
+
+            return sanitize_text_field($re);
+        }
+
+        return '';
+    }
+
+    /**
+     * validate settings
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     *
+     * @param   array  $data  array form data
+     * @return  array         array form data valid
+     */
 
     public static function validate_settings($data) {
 
@@ -1764,36 +1974,75 @@ final class Cache_Enabler {
         // clear complete cache
         self::clear_total_cache(true);
 
+        // ignore result, but call for settings recording
+        self::missing_trailing_slash();
+
+        // record expiry time value for advanced-cache.php
+        if ( $data['expires'] > 0 ){
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "expires" => $data['expires']));
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array("expires"));
+        }
+
+        // path bypass regexp
+        if ( strlen($data["excl_regexp"]) > 0 ) {
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "excl_regexp" => $data["excl_regexp"]));
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array("excl_regexp"));
+        }
+
+        // custom cookie exceptions
+        if ( strlen($data["excl_cookies"]) > 0 ) {
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "excl_cookies" => $data["excl_cookies"]));
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array("excl_cookies"));
+        }
+
+        // custom GET attribute exceptions
+        if ( strlen($data["incl_attributes"]) > 0 ) {
+            Cache_Enabler_Disk::record_advcache_settings(array(
+                "incl_attributes" => $data["incl_attributes"]));
+        } else {
+            Cache_Enabler_Disk::delete_advcache_settings(array("incl_attributes"));
+        }
+
         return array(
-            'expires'        => (int)$data['expires'],
-            'new_post'     => (int)(!empty($data['new_post'])),
-            'new_comment'     => (int)(!empty($data['new_comment'])),
-            'webp'            => (int)(!empty($data['webp'])),
-            'compress'        => (int)(!empty($data['compress'])),
-            'excl_ids'         => (string)sanitize_text_field(@$data['excl_ids']),
-            'minify_html'     => (int)$data['minify_html']
+            'expires'           => (int)$data['expires'],
+            'new_post'          => (int)(!empty($data['new_post'])),
+            'new_comment'       => (int)(!empty($data['new_comment'])),
+            'webp'              => (int)(!empty($data['webp'])),
+            'clear_on_upgrade'  => (int)(!empty($data['clear_on_upgrade'])),
+            'compress'          => (int)(!empty($data['compress'])),
+            'excl_ids'          => (string)sanitize_text_field(@$data['excl_ids']),
+            'excl_regexp'       => (string)self::validate_regexps(@$data['excl_regexp']),
+            'excl_cookies'      => (string)self::validate_regexps(@$data['excl_cookies']),
+            'incl_attributes'   => (string)self::validate_regexps(@$data['incl_attributes']),
+            'minify_html'       => (int)$data['minify_html']
         );
     }
 
 
     /**
-    * settings page
-    *
-    * @since   1.0.0
-    * @change  1.2.2
-    */
+     * settings page
+     *
+     * @since   1.0.0
+     * @change  1.2.3
+     */
 
     public static function settings_page() {
 
         // wp cache check
         if ( !defined('WP_CACHE') || !WP_CACHE ) {
             echo sprintf(
-                    '<div class="notice notice-warning"><p>%s</p></div>',
-                    sprintf(
-                        __("%s is not set in %s.", 'cache-enabler'),
-                        "<code>define('WP_CACHE', true);</code>",
-                        "wp-config.php"
-                    )
+                '<div class="notice notice-warning"><p>%s</p></div>',
+                sprintf(
+                    __("%s is not set in %s.", 'cache-enabler'),
+                    "<code>define('WP_CACHE', true);</code>",
+                    "wp-config.php"
+                )
             );
         }
 
@@ -1860,6 +2109,13 @@ final class Cache_Enabler {
                                     <input type="checkbox" name="cache-enabler[webp]" id="cache_webp" value="1" <?php checked('1', $options['webp']); ?> />
                                     <?php _e("Create an additional cached version for WebP image support. Convert your images to WebP with <a href=\"https://optimus.io/en/\" target=\"_blank\">Optimus</a>.", "cache-enabler") ?>
                                 </label>
+
+                                <br />
+
+                                <label for="cache_clear_on_upgrade">
+                                    <input type="checkbox" name="cache-enabler[clear_on_upgrade]" id="cache_clear_on_upgrade" value="1" <?php checked('1', $options['clear_on_upgrade']); ?> />
+                                    <?php _e("Clear the complete cache if any plugin has been upgraded.", "cache-enabler") ?>
+                                </label>
                             </fieldset>
                         </td>
                     </tr>
@@ -1872,7 +2128,48 @@ final class Cache_Enabler {
                             <fieldset>
                                 <label for="cache_excl_ids">
                                     <input type="text" name="cache-enabler[excl_ids]" id="cache_excl_ids" value="<?php echo esc_attr($options['excl_ids']) ?>" />
-                                    <p class="description"><?php _e("Post or Pages IDs separated by a <code>,</code> that should not be cached.", "cache-enabler"); ?></p>
+                                    <p class="description">
+                                        <?php echo sprintf(__("Post or Pages IDs separated by a %s that should not be cached.", "cache-enabler"), "<code>,</code>"); ?>
+                                    </p>
+                                </label>
+
+                                <br />
+
+                                <label for="cache_excl_regexp">
+                                    <input type="text" name="cache-enabler[excl_regexp]" id="cache_excl_regexp" value="<?php echo esc_attr($options['excl_regexp']) ?>" />
+                                    <p class="description">
+                                        <?php _e("Regexp matching page paths that should not be cached.", "cache-enabler"); ?><br>
+                                        <?php _e("Example:", "cache-enabler"); ?> <code>/(^\/$|\/robot\/$|^\/2018\/.*\/test\/)/</code>
+                                    </p>
+                                </label>
+
+                                <br />
+
+                                <label for="cache_excl_cookies">
+                                    <input type="text" name="cache-enabler[excl_cookies]" id="cache_excl_cookies" value="<?php echo esc_attr($options['excl_cookies']) ?>" />
+                                    <p class="description">
+                                        <?php _e("Regexp matching cookies that should cause the cache to be bypassed.", "cache-enabler"); ?><br>
+                                        <?php _e("Example:", "cache-enabler"); ?> <code>/^(wp-postpass|wordpress_logged_in|comment_author|(woocommerce_items_in_cart|wp_woocommerce_session)_?)/</code><br>
+                                        <?php _e("Default if unset:", "cache-enabler"); ?> <code>/^(wp-postpass|wordpress_logged_in|comment_author)_/</code>
+                                    </p>
+                                </label>
+                            </fieldset>
+                        </td>
+                    </tr>
+
+                    <tr valign="top">
+                        <th scope="row">
+                            <?php _e("Cache Inclusions", "cache-enabler") ?>
+                        </th>
+                        <td>
+                            <fieldset>
+                                <label for="cache_incl_attributes">
+                                    <input type="text" name="cache-enabler[incl_attributes]" id="cache_incl_attributes" value="<?php echo esc_attr($options['incl_attributes']) ?>" />
+                                    <p class="description">
+                                        <?php _e("Regexp matching campaign tracking GET attributes that should not cause the cache to be bypassed.", "cache-enabler"); ?><br>
+                                        <?php _e("Example:", "cache-enabler"); ?> <code>/^pk_(source|medium|campaign|kwd|content)$/</code><br>
+                                        <?php _e("Default if unset:", "cache-enabler"); ?> <code>/^utm_(source|medium|campaign|term|content)$/</code>
+                                    </p>
                                 </label>
                             </fieldset>
                         </td>

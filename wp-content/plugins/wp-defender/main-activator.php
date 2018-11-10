@@ -9,7 +9,7 @@ class WD_Main_Activator {
 	public function __construct( WP_Defender $wp_defender ) {
 		add_action( 'init', array( &$this, 'init' ), 9 );
 		add_action( 'wp_loaded', array( &$this, 'maybeShowUpgradedNotice' ), 9 );
-		add_action( 'activated_plugin', array( &$this, 'redirectToDefender' ) );
+		//add_action( 'activated_plugin', array( &$this, 'redirectToDefender' ) );
 	}
 
 	/**
@@ -35,6 +35,18 @@ class WD_Main_Activator {
 			\WP_Defender\Module\IP_Lockout\Component\Login_Protection_Api::alterTableFor171();
 			update_site_option( 'wd_db_version', "1.7.1" );
 		}
+
+		if ( version_compare( $db_ver, '2.0', '<' ) ) {
+			$activeScan = \WP_Defender\Module\Scan\Component\Scan_Api::getActiveScan();
+			if ( is_object( $activeScan ) ) {
+				//remove the current scan and start a new one
+				$activeScan->delete();
+				\WP_Defender\Module\Scan\Component\Scan_Api::flushCache();
+			}
+			//force to start new one
+			\WP_Defender\Module\Scan\Component\Scan_Api::createScan();
+			update_site_option( 'wd_db_version', "2.0" );
+		}
 		add_filter( 'plugin_action_links_' . plugin_basename( wp_defender()->plugin_slug ), array(
 			&$this,
 			'addSettingsLink'
@@ -52,6 +64,7 @@ class WD_Main_Activator {
 			\Hammer\Base\Container::instance()->set( 'audit', new \WP_Defender\Module\Audit() );
 			\Hammer\Base\Container::instance()->set( 'lockout', new \WP_Defender\Module\IP_Lockout() );
 			\Hammer\Base\Container::instance()->set( 'advanced_tool', new \WP_Defender\Module\Advanced_Tools() );
+			\Hammer\Base\Container::instance()->set( 'gdpr', new \WP_Defender\Controller\GDPR() );
 			//no need to set debug
 			new \WP_Defender\Controller\Debug();
 		}
@@ -65,8 +78,12 @@ class WD_Main_Activator {
 			//seem like a bulk action, do nothing
 			return;
 		}
+		//activate inside dashboard plugin
+		if ( isset( $_POST['action'] ) && $_POST['action'] == 'wdp-project-activate' ) {
+			return;
+		}
 		if ( $plugin == wp_defender()->plugin_slug ) {
-			exit( wp_redirect( network_admin_url( 'admin.php?page=wp-defender' ) ) );
+			// exit( wp_redirect( network_admin_url( 'admin.php?page=wp-defender' ) ) );
 		}
 	}
 

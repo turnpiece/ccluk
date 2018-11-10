@@ -51,6 +51,18 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		$this->check_plugin_compatibility();
 		$this->check_minification_queue();
 
+		/**
+		 * Trigger a cache clear.
+		 *
+		 * If post ID is set, will try to clear cache for that page or post with all the related
+		 * taxonomies (tags, category and author pages).
+		 *
+		 * @since 1.9.2
+		 *
+		 * @param int $post_id  Post ID.
+		 */
+		add_action( 'wphb_clear_page_cache', array( $this, 'clear_cache_action' ) );
+
 		// Post status transitions.
 		add_action( 'edit_post', array( $this, 'post_edit' ), 0 );
 		add_action( 'transition_post_status',  array( $this, 'post_status_change' ), 10, 3 );
@@ -251,11 +263,11 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	private static function load_config() {
 		global $wphb_cache_config;
 
-		self::log( 'Loading config file.' );
+		self::log_msg( 'Loading config file.' );
 
 		$config_file = WP_CONTENT_DIR . '/wphb-cache/wphb-cache.php';
 		if ( ! file_exists( $config_file ) ) {
-			self::log( 'Config file does not exist. Loading defaults.' );
+			self::log_msg( 'Config file does not exist. Loading defaults.' );
 			// This is only a fallback so we don't error out. Config file will be written as soon as user logs in.
 			$settings = self::get_default_settings();
 		} else {
@@ -301,7 +313,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		if ( file_exists( $config_file ) ) {
 			$settings = json_decode( file_get_contents( $config_file ), true );
 		} else {
-			self::log( 'Config file not found at: ' . $config_file );
+			self::log_msg( 'Config file not found at: ' . $config_file );
 			$settings = self::get_default_settings();
 
 			$this->write_file( $config_file, json_encode( $settings ) );
@@ -471,7 +483,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		}
 
 		$wphb_cache_file = str_replace( '//', '/', $wphb_cache_config->cache_dir . $http_host . $request_uri . $hash . $ext );
-		self::log( 'Caching to file: ' . $wphb_cache_file );
+		self::log_msg( 'Caching to file: ' . $wphb_cache_file );
 	}
 
 	/**
@@ -486,21 +498,21 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		static $cookie_value = '';
 
 		if ( ! empty( $cookie_value ) ) {
-			self::log( 'Cookie cached: ' . $cookie_value );
+			self::log_msg( 'Cookie cached: ' . $cookie_value );
 			return $cookie_value;
 		}
 
 		foreach ( (array) $_COOKIE as $key => $value ) { // Input var ok.
 			// Check password protected post, comment author, logged in user.
 			if ( preg_match( '/^wp-postpass_|^comment_author_|^wordpress_logged_in_/', $key ) ) {
-				self::log( 'Found cookie: ' . $key );
+				self::log_msg( 'Found cookie: ' . $key );
 				$cookie_value .= $_COOKIE[ $key ] . ','; // Input var ok.
 			}
 		}
 
 		if ( ! empty( $cookie_value ) ) {
 			$cookie_value = md5( $cookie_value );
-			self::log( 'Cookie hashed value: ' . $cookie_value );
+			self::log_msg( 'Cookie hashed value: ' . $cookie_value );
 		}
 
 		return $cookie_value;
@@ -658,7 +670,6 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	 * save_settings()
 	 * disable()
 	 * write_wp_config()
-	 * download_logs()
 	 ***************************/
 
 	/**
@@ -718,7 +729,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 
 		$config_file = $wphb_fs->basedir . 'wphb-cache.php';
 
-		self::log( 'Writing configuration to: ' . $config_file );
+		self::log_msg( 'Writing configuration to: ' . $config_file );
 		$this->write_file( $config_file, json_encode( $settings ) );
 
 		$this->clear_cache();
@@ -750,9 +761,9 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		}
 
 		if ( $wphb_fs->purge( $dir ) ) {
-			self::log( 'Page cache deactivation: successfully purged cache folder.' );
+			self::log_msg( 'Page cache deactivation: successfully purged cache folder.' );
 		} else {
-			self::log( 'Page cache deactivation: error purging cache folder.' );
+			self::log_msg( 'Page cache deactivation: error purging cache folder.' );
 		}
 
 		// Do not disable page caching completely on MU if disabling only for subsite.
@@ -772,10 +783,10 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		if ( false !== strpos( file_get_contents( $adv_cache_file ), 'WPHB_ADVANCED_CACHE' ) ) {
 			$msg = 'Page cache deactivation: error removing advanced-cache.php file.';
 			if ( unlink( $adv_cache_file ) ) {
-				self::log( 'Page cache deactivation: advanced-cache.php file removed.' );
+				self::log_msg( 'Page cache deactivation: advanced-cache.php file removed.' );
 			}
 
-			self::log( $msg );
+			self::log_msg( $msg );
 		}
 
 		// Reset cached pages count to 0.
@@ -795,13 +806,13 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		$config_file = ABSPATH . 'wp-config.php';
 
 		if ( ! file_exists( $config_file ) ) {
-			self::log( 'Failed to locate wp-config.php file.' );
+			self::log_msg( 'Failed to locate wp-config.php file.' );
 			return false;
 		}
 
 		$fp = fopen( $config_file, 'r+' );
 		if ( ! $fp ) {
-			self::log( 'Failed to open wp-config.php for writing.' );
+			self::log_msg( 'Failed to open wp-config.php for writing.' );
 			return false;
 		}
 
@@ -820,13 +831,13 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			if ( preg_match( "/define\(\s*\'WP_CACHE/i", $line ) ) {
 				$found_code = true;
 				if ( ! $uninstall ) {
-					self::log( "Added define('WP_CACHE', true) to wp-config.php file." );
+					self::log_msg( "Added define('WP_CACHE', true) to wp-config.php file." );
 					$new_file[] = "define('WP_CACHE', true); // Added by WP Hummingbird";
 				} else {
-					self::log( "Removed define('WP_CACHE', true) from wp-config.php file." );
+					self::log_msg( "Removed define('WP_CACHE', true) from wp-config.php file." );
 				}
 			} elseif ( ! $found_code && ! $uninstall && preg_match( "/\/\*\ That\'s all, stop editing! Happy blogging.\ \*\//i", $line ) ) {
-				self::log( "Added define('WP_CACHE', true) to wp-config.php file." );
+				self::log_msg( "Added define('WP_CACHE', true) to wp-config.php file." );
 				$new_file[] = "define('WP_CACHE', true); // Added by WP Hummingbird";
 				$new_file[] = $line;
 			} else {
@@ -847,30 +858,6 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		fclose( $fp );
 
 		return (bool) $bytes;
-	}
-
-	/**
-	 * Download logs.
-	 *
-	 * @since 1.9.0  Moved from WP_Hummingbird_Caching_Page.
-	 * @used-by WP_Hummingbird_Caching_Page::trigger_load_action()
-	 */
-	public function download_logs() {
-		$content = file_get_contents( WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php' );
-		/* Remove <?php die(); ?> from file */
-		$content = substr( $content, 15 );
-
-		header( 'Content-Description: Page caching log download' );
-		header( 'Content-Type: text/plain' );
-		header( 'Content-Disposition: attachment; filename=page-caching.log' );
-		header( 'Content-Transfer-Encoding: binary' );
-		header( 'Content-Length: ' . strlen( $content ) );
-		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
-		header( 'Expires: 0' );
-		header( 'Pragma: public' );
-
-		echo $content;
-		exit;
 	}
 
 	/**
@@ -902,41 +889,41 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		self::load_config();
 
 		if ( ( defined( 'DOING_CRON' ) && DOING_CRON ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) ) {
-			self::log( 'Page not cached because of active cron or ajax request.' );
+			self::log_msg( 'Page not cached because of active cron or ajax request.' );
 			return false;
 		} elseif ( is_admin() ) {
-			self::log( 'Do not cache admin pages.' );
+			self::log_msg( 'Do not cache admin pages.' );
 			return false;
 		} elseif ( self::logged_in_user() && ! $wphb_cache_config->cache_logged_in ) {
-			self::log( 'Do not cache pages for logged in users.' );
+			self::log_msg( 'Do not cache pages for logged in users.' );
 			return false;
 		} elseif ( isset( $_SERVER['REQUEST_METHOD'] ) && 'GET' !== $_SERVER['REQUEST_METHOD'] ) { // Input var okay.
-			self::log( "Skipping page. Used {$_SERVER['REQUEST_METHOD']} method. Only GET allowed." ); // Input var ok.
+			self::log_msg( "Skipping page. Used {$_SERVER['REQUEST_METHOD']} method. Only GET allowed." ); // Input var ok.
 			return false;
 		} elseif ( isset( $_GET['preview'] ) ) { // Input var okay.
-			self::log( 'Do not cache preview post pages.' );
+			self::log_msg( 'Do not cache preview post pages.' );
 			return false;
 		} elseif ( false === empty( $_GET ) && ! $wphb_cache_config->cache_with_get_params ) { // Input var ok.
-			self::log( 'Skipping page with GET params.' );
+			self::log_msg( 'Skipping page with GET params.' );
 			return false;
 		} elseif ( preg_match( '/^\/wp.*php$/', strtok( $request_uri, '?' ) ) ) {
 			// Remove string parameters and do not cache any /wp-login.php or /wp-admin/*.php pages.
 			// TODO: Maybe improve regex, as it takes a bit more than needed.
-			self::log( 'Do not cache wp-admin pages.' );
+			self::log_msg( 'Do not cache wp-admin pages.' );
 			return false;
 		} elseif ( self::skip_url( $request_uri ) ) {
-			self::log( 'Do not cache page. URL exclusion rule match: ' . $request_uri );
+			self::log_msg( 'Do not cache page. URL exclusion rule match: ' . $request_uri );
 			return false;
 		} elseif ( self::skip_user_agent() ) {
-			self::log( 'Do not cache page. User-Agent is empty or excluded in settings.' );
+			self::log_msg( 'Do not cache page. User-Agent is empty or excluded in settings.' );
 			return false;
 		} elseif ( ! isset( $_SERVER['HTTP_HOST'] ) ) { // Input var ok.
-			self::log( 'Page can not be cached, no HTTP_HOST set.' );
+			self::log_msg( 'Page can not be cached, no HTTP_HOST set.' );
 			return false;
 		} // End if().
 
 		// TODO Check for object cache?
-		self::log( 'Request passed should_cache_request check. Ready to cache.' );
+		self::log_msg( 'Request passed should_cache_request check. Ready to cache.' );
 
 		return true;
 	}
@@ -958,40 +945,40 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 
 		if ( empty( $buffer ) ) {
 			$cache_page = false;
-			self::log( 'Empty buffer. Exiting.' );
+			self::log_msg( 'Empty buffer. Exiting.' );
 		}
 
 		// TODO: add search.
 		if ( defined( 'DONOTCACHEPAGE' ) && DONOTCACHEPAGE ) {
 			$cache_page = false;
-			self::log( 'Page not cached because DONOTCACHEPAGE is defined.' );
+			self::log_msg( 'Page not cached because DONOTCACHEPAGE is defined.' );
 		} elseif ( is_feed() ) {
 			$cache_page = false;
-			self::log( 'Do not cache feeds.' );
+			self::log_msg( 'Do not cache feeds.' );
 		} elseif ( self::skip_page_type() ) {
 			$cache_page = false;
-			self::log( 'Do not cache page. Skipped in settings.' );
+			self::log_msg( 'Do not cache page. Skipped in settings.' );
 		} elseif ( ! preg_match( '/(<\/html>|<\/rss>|<\/feed>|<\/urlset|<\?xml)/i', $buffer ) ) {
 			$cache_page = false;
-			self::log( 'HTML corrupt. Page not cached.' );
+			self::log_msg( 'HTML corrupt. Page not cached.' );
 		} elseif ( self::skip_subsite() ) {
 			$cache_page = false;
-			self::log( 'Do not cache page. Subsite caching disabled in settings.' );
+			self::log_msg( 'Do not cache page. Subsite caching disabled in settings.' );
 		}
 
 		// Handle 404 pages.
 		if ( is_404() ) {
 			if ( ! $wphb_cache_config->cache_404 ) {
 				$cache_page = false;
-				self::log( 'Do not cache 404 pages.' );
+				self::log_msg( 'Do not cache 404 pages.' );
 			} else {
 				$is_404 = true;
-				self::log( '404 page found. Caching for 404 enabled. Page will be cached.' );
+				self::log_msg( '404 page found. Caching for 404 enabled. Page will be cached.' );
 			}
 		}
 
 		if ( ! $cache_page ) {
-			self::log( 'Page not cached. Sending buffer to user.' );
+			self::log_msg( 'Page not cached. Sending buffer to user.' );
 			return $buffer;
 		}
 
@@ -1001,7 +988,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		$content .= '<!-- Hummingbird cache file was created in ' . $time_to_create . ' seconds, on ' . date( 'd-m-y G:i:s', current_time( 'timestamp' ) ) . ' -->';
 
 		if ( $wphb_cache_file ) {
-			self::log( 'Saving page to cache file: ' . $wphb_cache_file );
+			self::log_msg( 'Saving page to cache file: ' . $wphb_cache_file );
 
 			// If this is php file (caching for logged-in users, add die() on top.
 			if ( preg_match( '/\.php/', basename( $wphb_cache_file ) ) && ! $is_404 ) {
@@ -1136,7 +1123,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			// Reset cached pages count.
 			WP_Hummingbird_Settings::update_setting( 'pages_cached', 0, 'page_cache' );
 
-			self::log( 'Cache direcotry purged' );
+			self::log_msg( 'Cache direcotry purged' );
 			return $wphb_fs->purge( 'cache' );
 		}
 
@@ -1182,7 +1169,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		}
 
 		$this->clear_cache( $permalink );
-		self::log( 'Cache has been purged for post id: ' . $post_id );
+		self::log_msg( 'Cache has been purged for post id: ' . $post_id );
 
 		// Clear categories and tags pages if cached.
 		$meta_array = array(
@@ -1205,7 +1192,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 			foreach ( $metas as $meta ) {
 				$meta_link = str_replace( get_option( 'home' ), '', get_category_link( $meta->term_id ) );
 				$this->clear_cache( $meta_link );
-				self::log( "Cache has been purged for {$meta_name}: {$meta->name}" );
+				self::log_msg( "Cache has been purged for {$meta_name}: {$meta->name}" );
 			}
 		}
 
@@ -1218,7 +1205,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		$author_link = str_replace( get_option( 'home' ), '', get_author_posts_url( $post->post_author ) );
 		if ( $author_link ) {
 			$this->clear_cache( $author_link );
-			self::log( "Cache has been purged for author page: $author_link" );
+			self::log_msg( "Cache has been purged for author page: $author_link" );
 		}
 	}
 
@@ -1234,6 +1221,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	 * log()
 	 * clear_cache_button()
 	 * clear_cache_message()
+	 * clear_cache_action()
 	 ***************************/
 
 	/**
@@ -1262,7 +1250,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		 * 2. Check if the files are there?
 		 */
 		if ( file_exists( $wphb_cache_file ) ) {
-			self::log( 'Cached file found. Serving to user.' );
+			self::log_msg( 'Cached file found. Serving to user.' );
 
 			self::send_headers();
 
@@ -1296,13 +1284,13 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 		 * 2. Check if the files are there?
 		 */
 		if ( file_exists( $wphb_cache_file ) ) {
-			self::log( 'Cached file found. Serving to user.' );
+			self::log_msg( 'Cached file found. Serving to user.' );
 
 			self::send_headers();
 
 			self::send_file( $wphb_cache_file );
 		} else {
-			self::log( 'Cached file not found. Passing to ob_start.' );
+			self::log_msg( 'Cached file not found. Passing to ob_start.' );
 			// Write the file and send headers.
 			$this->start_time = microtime( true );
 			// TODO: Add support for caching headers.
@@ -1411,7 +1399,7 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	 * @since 1.7.0
 	 * @param mixed  $message  Error/notice message.
 	 */
-	public static function log( $message ) {
+	public static function log_msg( $message ) {
 		// If wphb-logs dir does not exist and unable to create it - exit.
 		if ( ! is_dir( WP_CONTENT_DIR . '/wphb-logs/' ) ) {
 			if ( ! mkdir( WP_CONTENT_DIR . '/wphb-logs/' ) ) {
@@ -1477,6 +1465,26 @@ class WP_Hummingbird_Module_Page_Cache extends WP_Hummingbird_Module {
 	public function clear_cache_message( $messages ) {
 		$messages['post'][4] = __( 'Cache for post has been cleared.', 'wphb' );
 		return $messages;
+	}
+
+	/**
+	 * Trigger a cache clear.
+	 *
+	 * If post ID is set, will try to clear cache for that page or post with all the related
+	 * taxonomies (tags, category and author pages).
+	 *
+	 * @since 1.9.2
+	 *
+	 * @used-by wphb_clear_page_cache action.
+	 *
+	 * @param int|bool $post_id  Post ID.
+	 */
+	public function clear_cache_action( $post_id = false ) {
+		if ( $post_id ) {
+			$this->purge_post_cache( (int) $post_id );
+		} else {
+			$this->clear_cache();
+		}
 	}
 
 	/**

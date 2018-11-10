@@ -3,12 +3,11 @@
  * Plugin Name: Give - Donation Plugin
  * Plugin URI: https://givewp.com
  * Description: The most robust, flexible, and intuitive way to accept donations on WordPress.
- * Author: WordImpress
+ * Author: GiveWP
  * Author URI: https://wordimpress.com
- * Version: 2.2.2
+ * Version: 2.3.0
  * Text Domain: give
  * Domain Path: /languages
- * GitHub Plugin URI: https://github.com/WordImpress/Give
  *
  * Give is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -414,32 +413,32 @@ if ( ! class_exists( 'Give' ) ) :
 		 */
 		private function setup_constants() {
 
-			// Plugin version
+			// Plugin version.
 			if ( ! defined( 'GIVE_VERSION' ) ) {
-				define( 'GIVE_VERSION', '2.2.2' );
+				define( 'GIVE_VERSION', '2.3.0' );
 			}
 
-			// Plugin Root File
+			// Plugin Root File.
 			if ( ! defined( 'GIVE_PLUGIN_FILE' ) ) {
 				define( 'GIVE_PLUGIN_FILE', __FILE__ );
 			}
 
-			// Plugin Folder Path
+			// Plugin Folder Path.
 			if ( ! defined( 'GIVE_PLUGIN_DIR' ) ) {
 				define( 'GIVE_PLUGIN_DIR', plugin_dir_path( GIVE_PLUGIN_FILE ) );
 			}
 
-			// Plugin Folder URL
+			// Plugin Folder URL.
 			if ( ! defined( 'GIVE_PLUGIN_URL' ) ) {
 				define( 'GIVE_PLUGIN_URL', plugin_dir_url( GIVE_PLUGIN_FILE ) );
 			}
 
-			// Plugin Basename aka: "give/give.php"
+			// Plugin Basename aka: "give/give.php".
 			if ( ! defined( 'GIVE_PLUGIN_BASENAME' ) ) {
 				define( 'GIVE_PLUGIN_BASENAME', plugin_basename( GIVE_PLUGIN_FILE ) );
 			}
 
-			// Make sure CAL_GREGORIAN is defined
+			// Make sure CAL_GREGORIAN is defined.
 			if ( ! defined( 'CAL_GREGORIAN' ) ) {
 				define( 'CAL_GREGORIAN', 1 );
 			}
@@ -455,6 +454,16 @@ if ( ! class_exists( 'Give' ) ) :
 		 */
 		private function includes() {
 			global $give_options;
+
+			/**
+			 * Composer's autoload.php.
+			 */
+			if ( file_exists( GIVE_PLUGIN_DIR . 'vendor/autoload.php' ) ) {
+				require_once GIVE_PLUGIN_DIR . 'vendor/autoload.php';
+			} else {
+				// Load autoloader.
+				require_once GIVE_PLUGIN_DIR . 'includes/libraries/tcpdf/tcpdf.php';
+			}
 
 			/**
 			 * Load libraries.
@@ -495,6 +504,8 @@ if ( ! class_exists( 'Give' ) ) :
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-donate-form.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-meta.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-comments.php';
+			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-comments-meta.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-donors.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-donor-meta.php';
 			require_once GIVE_PLUGIN_DIR . 'includes/class-give-db-form-meta.php';

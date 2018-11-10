@@ -294,7 +294,7 @@ class WP_Hummingbird_Performance_Report_Page extends WP_Hummingbird_Admin_Page {
 		if ( $last_report && ! is_wp_error( $last_report ) ) {
 			$last_report = $last_report->data;
 
-			if ( $last_report->last_score ) {
+			if ( $last_report->last_score && isset( $last_report->score ) ) {
 				$improvement = $last_report->score - $last_report->last_score['score'];
 				$last_score = $last_report->last_score['score'];
 			}

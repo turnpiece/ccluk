@@ -626,7 +626,7 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 				<ul class="give-email-tags-wrap">
 					<?php foreach ( $email_tags as $email_tag ) : ?>
 						<li class="give_<?php echo $email_tag['tag']; ?>_tag">
-							<code>{<?php echo $email_tag['tag']; ?>}</code> - <?php echo $email_tag['description']; ?>
+							<code>{<?php echo $email_tag['tag']; ?>}</code> - <?php echo $email_tag['desc']; ?>
 						</li>
 					<?php endforeach; ?>
 				</ul>
@@ -752,6 +752,15 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 		 * @return bool
 		 */
 		public function send_email_notification( $email_tag_args = array() ) {
+			/**
+			 * Fire the filter
+			 *
+			 * @since 2.2.3
+			 */
+			if ( apply_filters( 'give_is_stop_email_notification', false, $this ) ) {
+				return false;
+			}
+
 			// Add email content type email tags.
 			$email_tag_args['email_content_type'] = $this->config['content_type'];
 
@@ -905,6 +914,7 @@ if ( ! class_exists( 'Give_Email_Notification' ) ) :
 					),
 					'admin_email'             => give_email_admin_email(),
 					'offline_mailing_address' => give_email_offline_mailing_address(),
+					'donor_comment'           => $payment_id ? give_email_donor_comment( array( 'payment_id' => $payment_id ) ) : esc_html__( 'Sample Donor Comment', 'give' ),
 				)
 			);
 

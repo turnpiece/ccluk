@@ -30,7 +30,7 @@ class WP_Smush_Common {
 	 */
 	private function __construct() {
 		// AJAX Thumbnail Rebuild integration.
-		add_filter( 'wp_smush_media_image', array( $this, 'skip_images' ), 10, 2 );				 	          			 
+		add_filter( 'wp_smush_media_image', array( $this, 'skip_images' ), 10, 2 );
 	}
 
 	/**
@@ -45,7 +45,7 @@ class WP_Smush_Common {
 			return self::$_instance;
 		}
 
-		return new self;
+		return new self();
 	}
 
 	/**

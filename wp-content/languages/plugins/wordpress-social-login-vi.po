@@ -1,0 +1,98 @@
+# Translation of Plugins - WordPress Social Login - Development (trunk) in Vietnamese
+# This file is distributed under the same license as the Plugins - WordPress Social Login - Development (trunk) package.
+msgid ""
+msgstr ""
+"PO-Revision-Date: 2018-10-23 05:19:39+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Generator: GlotPress/2.4.0-alpha\n"
+"Language: vi_VN\n"
+"Project-Id-Version: Plugins - WordPress Social Login - Development (trunk)\n"
+
+#. Author URI of the plugin/theme
+msgid "https://github.com/miled"
+msgstr "https://github.com/miled"
+
+#. Author of the plugin/theme
+msgid "Miled"
+msgstr "Miled"
+
+#. Description of the plugin/theme
+msgid "Allow your visitors to comment and login with social networks such as Twitter, Facebook, Google, Yahoo and more."
+msgstr "Cho phép người dùng có thể phản hồi và đăng nhập với Twitter, Facebook, Google, Yahoo và nhiều dịch vụ khác."
+
+#. Plugin URI of the plugin/theme
+msgid "http://miled.github.io/wordpress-social-login/"
+msgstr "http://miled.github.io/wordpress-social-login/"
+
+#. Plugin Name of the plugin/theme
+msgid "WordPress Social Login"
+msgstr "WordPress Social Login"
+
+#: wp-social-login.php:155
+msgid "Settings"
+msgstr "Thiết lập"
+
+#: wp-social-login.php:113
+msgid "This plugin requires WordPress 3.0 or newer. Please update your WordPress installation to activate this plugin."
+msgstr "Phiên bản này yêu cầu tối thiểu phiên bản WordPress 3.0 hoặc mới hơn. Vui lòng cập nhật phiên bản mới nhất của WordPress để tiếp tục sử dụng."
+
+#: includes/settings/wsl.compatibilities.php:249
+msgid "%1$s is <strong>deprecated</strong> since WordPress Social Login %2$s! For more information, check WSL Developer API - Migration."
+msgstr "%1$s đã bị <strong>huỷ bỏ</strong> từ phiên bản WordPress Social Login %2$s! Để biết thêm thông tin, xem WSL Developer API - Migration."
+
+#: includes/services/wsl.mail.notification.php:47
+msgid "[%s] New User Registration"
+msgstr "[%s] Người dùng mới đăng ký"
+
+#: includes/services/wsl.mail.notification.php:42
+msgid "Email: %s"
+msgstr "Email: %s"
+
+#: includes/services/wsl.mail.notification.php:41
+msgid "Profile: %s"
+msgstr "Hồ sơ: %s"
+
+#: includes/services/wsl.mail.notification.php:40
+msgid "Provider: %s"
+msgstr "Nhà cung cấp: %s"
+
+#: includes/services/wsl.mail.notification.php:39
+msgid "Username: %s"
+msgstr "Tên truy cập: %s"
+
+#: includes/services/wsl.mail.notification.php:38
+msgid "New user registration on your site: %s"
+msgstr "Thành viên vừa đăng ký trên web của bạn: %s"
+
+#: includes/admin/wsl.admin.ui.php:303
+msgid "These requirements are usually met by default by most \"modern\" web hosting providers, however some complications may occur with <b>shared hosting</b> and, or <b>custom wordpress installations</b>"
+msgstr "Những yêu cầu này thường được đặt mặc định bởi những nhà cung cấp hosting \"hiện đại\", tuy nhiên một số vấn đề có thể xảy ra với <b>host chia sẻ</b> và, hoặc <b>những cấu hình bên trong wordpress</b>"
+
+#: includes/admin/wsl.admin.ui.php:299
+msgid "Your server failed the requirements check for this plugin"
+msgstr "Máy chủ của bạn không thể kiểm tra tính năng này"
+
+#: includes/admin/wsl.admin.ui.php:298
+msgid "Despite the efforts, put into <b>WordPress Social Login</b> in terms of reliability, portability, and maintenance by the plugin <a href=\"http://profiles.wordpress.org/miled/\" target=\"_blank\">author</a> and <a href=\"https://github.com/hybridauth/WordPress-Social-Login/graphs/contributors\" target=\"_blank\">contributors</a>"
+msgstr "Không ngừng hoàn thiện <b>WordPress Social Login</b> luôn đảm bảo về độ tin cậy, tính di động, và nâng cao chất lượng bởi sự đóng góp tích cực của <a href=\"http://profiles.wordpress.org/miled/\" target=\"_blank\">tác giả</a> và <a href=\"https://github.com/hybridauth/WordPress-Social-Login/graphs/contributors\" target=\"_blank\">người hợp tác</a>"
+
+#: includes/admin/wsl.admin.ui.php:293
+msgid "WordPress Social Login - FAIL!"
+msgstr "WordPress Social Login - LỖI!"
+
+#: includes/admin/components/tools/wsl.components.tools.actions.job.php:676
+msgid "There was an error querying Twitter's servers"
+msgstr "Lỗi kết nối đến máy chủ Twitter"
+
+#: includes/admin/components/contacts/wsl.components.contacts.list.php:139
+#: includes/admin/components/users/wsl.components.users.list.php:198
+msgid "&raquo;"
+msgstr "&raquo;"
+
+#: includes/admin/components/contacts/wsl.components.contacts.list.php:138
+#: includes/admin/components/users/wsl.components.users.list.php:197
+msgid "&laquo;"
+msgstr "&laquo;"

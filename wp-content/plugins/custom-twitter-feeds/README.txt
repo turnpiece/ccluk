@@ -5,7 +5,7 @@ Support Website: http://smashballoon/custom-twitter-feeds/
 Tags: Twitter, Twitter feed, Tweets, Twitter widget, Custom Twitter Feed
 Requires at least: 3.0
 Tested up to: 4.9
-Stable tag: 1.2.9
+Stable tag: 1.2.10
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -237,8 +237,13 @@ Not many developers love providing support, but we're a rare breed here at Smash
 7. To display a feed just copy and paste the shortcode into a widget or page
 
 == Changelog ==
+= 1.2.10 =
+* Tweak: Updated the Twitter login button URL
+* Fix: Avatar would appear to the right of Tweets or not at all in some versions of Firefox
+* Fix: Minor bug fixes
+
 = 1.2.9 =
-* Fix: Fixed a PHP warning which appeared under rare circumstances
+* Fix: Fixed PHP warning caused by trying to count a boolean in certain circumstances
 * Fix: AJAX load more not working when AJAX themes being used
 
 = 1.2.8 =

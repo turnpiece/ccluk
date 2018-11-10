@@ -19,14 +19,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 class WP_Hummingbird_Logger {
 
 	/**
-	 * Log filename.
+	 * Plugin instance
+	 *
+	 * @since 1.9.2
+	 *
+	 * @var null|WP_Hummingbird_Logger
+	 */
+	private static $instance = null;
+
+	/**
+	 * Registered log files.
 	 *
 	 * @since  1.7.2
 	 *
 	 * @access private
-	 * @var    string $file
+	 * @var    array $files
 	 */
-	private $file;
+	private $files = array();
 
 	/**
 	 * Log directory.
@@ -39,13 +48,13 @@ class WP_Hummingbird_Logger {
 	private $log_dir;
 
 	/**
-	 * Module slug. Module to log for.
+	 * Registered modules.
 	 *
-	 * @since  1.7.2
+	 * @since  1.9.2
 	 * @access private
-	 * @var    string $module
+	 * @var    array $modules
 	 */
-	private $module = '';
+	private $modules = array();
 
 	/**
 	 * Logger status.
@@ -58,22 +67,54 @@ class WP_Hummingbird_Logger {
 	private $status = false;
 
 	/**
+	 * Return the plugin instance
+	 *
+	 * @return WP_Hummingbird_Logger
+	 */
+	public static function get_instance() {
+		if ( ! self::$instance ) {
+			self::$instance = new self();
+		}
+
+		return self::$instance;
+	}
+
+	/**
 	 * WP_Hummingbird_Logger constructor.
 	 *
 	 * @since  1.7.2
 	 *
 	 * @access private
-	 * @param  string $module  Module slug.
 	 */
-	public function __construct( $module ) {
-		$this->module = $module;
-
+	private function __construct() {
 		if ( ! defined( 'WP_CONTENT_DIR' ) ) {
 			define( 'WP_CONTENT_DIR', ABSPATH . 'wp-content' );
 		}
 
 		$this->create_log_dir();
-		$this->prepare_file();
+
+		add_action( 'wp_loaded', array( $this, 'process_actions' ) );
+
+		// Add cron schedule to clean out outdated logs.
+		add_action( 'wphb_clear_logs', array( $this, 'clear_logs' ) );
+		add_action( 'admin_init', array( $this, 'check_cron_schedule' ) );
+	}
+
+	/**
+	 * Register module.
+	 *
+	 * @since  1.9.2
+	 *
+	 * @param  string $module  Module slug.
+	 */
+	public function register_module( $module ) {
+		if ( in_array( $module, $this->modules, true ) ) {
+			return;
+		}
+
+		$this->modules[] = $module;
+
+		$this->prepare_file( $module );
 	}
 
 	/**
@@ -82,16 +123,18 @@ class WP_Hummingbird_Logger {
 	 * @since  1.7.2
 	 *
 	 * @access private
+	 *
+	 * @param  string $module  Module slug.
 	 */
-	private function prepare_file() {
-		$this->file = $this->module . '-debug.log';
+	private function prepare_file( $module ) {
+		$file = $module . '-debug.log';
 
 		// Only the minification module has a per/site configuration.
-		if ( 'minify' === $this->module ) {
-			$this->file = $this->get_domain_prefix() . $this->file;
+		if ( 'minify' === $module ) {
+			$file = $this->get_domain_prefix() . $file;
 		}
 
-		$this->file = $this->log_dir . $this->file;
+		$this->files[ $module ] = $this->log_dir . $file;
 	}
 
 	/**
@@ -134,7 +177,7 @@ class WP_Hummingbird_Logger {
 		}
 
 		if ( ! @mkdir( $this->log_dir ) ) {
-			$error = error_get_last();
+			$error        = error_get_last();
 			$this->status = new WP_Error( 'log-dir-error', $error['message'] );
 		}
 	}
@@ -148,10 +191,11 @@ class WP_Hummingbird_Logger {
 	 *
 	 * @param  string $mode     Accepts any mode from the list: http://php.net/manual/en/function.fopen.php.
 	 * @param  string $message  String to write to file.
+	 * @param  string $module   Module slug.
 	 */
-	private function write_file( $mode, $message = '' ) {
+	private function write_file( $mode, $message = '', $module ) {
 		try {
-			$fp = fopen( $this->file, $mode );
+			$fp = fopen( $this->files[ $module ], $mode );
 			flock( $fp, LOCK_EX );
 			fwrite( $fp, $message );
 			flock( $fp, LOCK_UN );
@@ -205,25 +249,27 @@ class WP_Hummingbird_Logger {
 	 *
 	 * @since  1.7.2
 	 *
+	 * @param string $module  Module to log for.
+	 *
 	 * @return bool
 	 */
-	private function should_log() {
+	private function should_log( $module ) {
 		// Don't log if there's an error.
 		if ( is_wp_error( $this->status ) ) {
 			return false;
 		}
 
-		// No module has been set.
-		if ( empty( $this->module ) ) {
+		// See if the module is registered to log.
+		if ( ! in_array( $module, $this->modules, true ) ) {
 			return false;
 		}
 
 		$do_log = false;
-		switch ( $this->module ) {
+		switch ( $module ) {
 			case 'minify':
 				// Log for minification only if debug is enabled.
 				/* @var WP_Hummingbird_Module_Minify $minify */
-				$minify = WP_Hummingbird_Utils::get_module( 'minify' );
+				$minify  = WP_Hummingbird_Utils::get_module( 'minify' );
 				$options = $minify->get_options();
 
 				if ( $options['log'] ) {
@@ -246,10 +292,11 @@ class WP_Hummingbird_Logger {
 	 *
 	 * @since 1.7.2
 	 *
-	 * @param mixed $message  Data to write to log.
+	 * @param mixed  $message  Data to write to log.
+	 * @param string $module   Module slug.
 	 */
-	public function log( $message ) {
-		if ( ! $this->should_log() ) {
+	public function log( $message, $module ) {
+		if ( ! $this->should_log( $module ) ) {
 			return;
 		}
 
@@ -257,8 +304,188 @@ class WP_Hummingbird_Logger {
 			$message = print_r( $message, true );
 		}
 
-		$message = '[' . date( 'H:i:s' ) . '] ' . $message . PHP_EOL;
+		$message = '[' . date( 'c' ) . '] ' . $message . PHP_EOL;
 
-		$this->write_file( 'a', $message );
+		$this->write_file( 'a', $message, $module );
 	}
+
+	/**
+	 * Getter method for $file.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param string $module  Module slug.
+	 *
+	 * @return string
+	 */
+	public function get_file( $module ) {
+		return $this->files[ $module ];
+	}
+
+	/**
+	 * Process logger actions.
+	 *
+	 * Accepts module name (slug) and action. So far only 'downloadr' actions is supported.
+	 *
+	 * @since 1.9.2
+	 */
+	public function process_actions() {
+		if ( ! isset( $_GET['logs'] ) || ! isset( $_GET['module'] ) || ! check_admin_referer( 'wphb-log-action' ) ) { // Input var ok.
+			return;
+		}
+
+		$action = sanitize_text_field( wp_unslash( $_GET['logs'] ) );   // Input var ok.
+		$module = sanitize_text_field( wp_unslash( $_GET['module'] ) ); // Input var ok.
+
+		// Not called by a registered module.
+		if ( ! in_array( $module, $this->modules, true ) ) {
+			return;
+		}
+
+		if ( method_exists( $this, $action ) ) {
+			call_user_func( array( $this, $action ), $module );
+		}
+	}
+
+	/**
+	 * Download logs.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param string $module  Module slug.
+	 */
+	private function download( $module ) {
+		if ( 'page_cache' === $module ) {
+			$content = file_get_contents( WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php' );
+			/* Remove <?php die(); ?> from file */
+			$content = substr( $content, 15 );
+		} else {
+			$content = file_get_contents( $this->files[ $module ] );
+		}
+
+		// No file - exit.
+		if ( ! $content ) {
+			return;
+		}
+
+		header( 'Content-Description: Hummingbird log download' );
+		header( 'Content-Type: text/plain' );
+		header( "Content-Disposition: attachment; filename={$module}.log" );
+		header( 'Content-Transfer-Encoding: binary' );
+		header( 'Content-Length: ' . strlen( $content ) );
+		header( 'Cache-Control: must-revalidate, post-check=0, pre-check=0' );
+		header( 'Expires: 0' );
+		header( 'Pragma: public' );
+
+		echo $content;
+		exit;
+	}
+
+	/**
+	 * Clear log file.
+	 *
+	 * @since 1.9.2
+	 *
+	 * @param string $module  Module slug.
+	 *
+	 * @return bool
+	 */
+	public function clear( $module ) {
+		if ( 'page_cache' === $module ) {
+			$file = WP_CONTENT_DIR . '/wphb-logs/page-caching-log.php';
+		} else {
+			$file = $this->files[ $module ];
+		}
+
+		if ( file_exists( $file ) ) {
+			wp_delete_file( $file );
+			return true;
+		}
+
+		return false;
+	}
+
+	/**
+	 * Check if the logger cron is scheduled to run.
+	 *
+	 * @since 1.9.2
+	 */
+	public function check_cron_schedule() {
+		if ( ! wp_next_scheduled( 'wphb_clear_logs' ) ) {
+			wp_schedule_event( time() + HOUR_IN_SECONDS, 'daily', 'wphb_clear_logs' );
+		}
+	}
+
+	/**
+	 * Clear out lines that are older than 30 days.
+	 *
+	 * @since 1.9.2
+	 */
+	public function clear_logs() {
+		$now = date( 'c' );
+
+		foreach ( $this->modules as $slug ) {
+			$file = $this->get_file( $slug );
+
+			if ( ! file_exists( $file ) ) {
+				continue;
+			}
+
+			$content         = file( $file );
+			$size_of_content = count( $content );
+
+			$delete = false;
+			foreach ( $content as $i => $line ) {
+				// If the line does not start with '[' (it's probably not a new entry).
+				$first_char = substr( $line, 0, 1 );
+				if ( '[' !== $first_char ) {
+					// If not marked for delete - skip.
+					if ( ! $delete ) {
+						continue;
+					}
+
+					// Delete.
+					unset( $content[ $i ] );
+				}
+
+				/**
+				 * Get the date from entry. Items can be an array it two cases - if there's a valid date, or if the line
+				 * contained something like [header] in the start. Cannot make assumptions just on the fact it's an array.
+				 */
+				preg_match( '/\[(.*)\]/', $line, $items );
+
+				// If, for some reason, can't get the date, or it's not the size of an ISO 8601 date.
+				if ( ! isset( $items[1] ) || 25 !== strlen( $items[1] ) ) {
+					// If not marked for delete - skip.
+					if ( ! $delete ) {
+						continue;
+					}
+
+					// Delete.
+					unset( $content[ $i ] );
+				}
+
+				// It looks like it's a valid date string, compare with today.
+				$more_than_day = round( ( strtotime( $now ) - strtotime( $items[1] ) ) / MONTH_IN_SECONDS );
+
+				// We don't need to continue on, because if this entry is not older than 30 days, the next one will not be as well.
+				if ( ! $more_than_day ) {
+					break;
+				}
+
+				$delete = true;
+				unset( $content[ $i ] );
+			}
+
+			// Nothing changed - do nothing.
+			if ( count( $content ) === $size_of_content ) {
+				continue;
+			}
+
+			// Glue back together and write back to file.
+			$content = implode( '', $content );
+			$this->write_file( 'w', $content, $slug );
+		}
+	}
+
 }

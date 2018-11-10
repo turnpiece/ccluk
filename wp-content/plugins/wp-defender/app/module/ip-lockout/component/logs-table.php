@@ -273,7 +273,11 @@ class Logs_Table extends \WP_List_Table {
                         <div class="column is-4">
                             <p><strong><?php _e( "Type", wp_defender()->domain ) ?></strong></p>
                             <p>
-                                <a href=""><?php echo $item->type == '404_error' ? __( "404 error", wp_defender()->domain ) : __( "Login failed", wp_defender()->domain ) ?></a>
+                                <a href=""><?php echo in_array( $item->type, array(
+										Log_Model::ERROR_404,
+										Log_Model::ERROR_404_IGNORE,
+										Log_Model::LOCKOUT_404
+									) ) ? __( "404 error", wp_defender()->domain ) : __( "Login failed", wp_defender()->domain ) ?></a>
                             </p>
                         </div>
                     </div>

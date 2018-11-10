@@ -3,13 +3,13 @@
 Plugin Name: Custom Twitter Feeds
 Plugin URI: http://smashballoon.com/custom-twitter-feeds
 Description: Customizable Twitter feeds for your website
-Version: 1.2.9
+Version: 1.2.10
 Author: Smash Balloon
 Author URI: http://smashballoon.com/
 Text Domain: custom-twitter-feeds
 */
 /*
-Copyright 2017  Smash Balloon LLC (email : hey@smashballoon.com)
+Copyright 2018 Smash Balloon LLC (email : hey@smashballoon.com)
 This program is free software; you can redistribute it and/or modify
 it under the terms of the GNU General Public License as published by
 the Free Software Foundation; either version 2 of the License, or
@@ -24,10 +24,10 @@ Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA  02110-1301  USA
 */
 
 define( 'CTF_URL', plugin_dir_path( __FILE__ )  );
-define( 'CTF_VERSION', '1.2.9' );
+define( 'CTF_VERSION', '1.2.10' );
 define( 'CTF_TITLE', 'Custom Twitter Feeds' );
 define( 'CTF_JS_URL', plugins_url( '/js/ctf-scripts.js?ver=' . CTF_VERSION , __FILE__ ) );
-define( 'OAUTH_PROCESSOR_URL', 'https://smashballoon.com/ctf-at-retriever/?return_uri=' );
+define( 'OAUTH_PROCESSOR_URL', 'https://api.smashballoon.com/twitter-login.php?return_uri=' );
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 

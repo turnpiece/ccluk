@@ -106,7 +106,7 @@ $custom_directory = $use_folder;
 
 							<textarea name="filesIgnore" id="filesIgnore" placeholder="<?php esc_html_e('Enter file URLs to be excluded, one per line.', SNAPSHOT_I18N_DOMAIN); ?>"><?php if ( ( isset( WPMUDEVSnapshot::instance()->config_data['config']['filesIgnore'] ) ) && ( is_array( WPMUDEVSnapshot::instance()->config_data['config']['filesIgnore'] ) ) && ( count( WPMUDEVSnapshot::instance()->config_data['config']['filesIgnore'] ) ) ) echo wp_kses_post( implode( "\n", WPMUDEVSnapshot::instance()->config_data['config']['filesIgnore'] ) ); ?></textarea>
 
-							<p><small><?php echo wp_kses_post( __('The exclude feature uses pattern matching so you can easily select files to exclude from your backups. Example: to exclude the Twenty Ten theme, you can use twentyten, theme/twentyten or public/wp-content/theme/twentyten. <strong>The local folder is excluded from Snapshot backups by default.</strong>', SNAPSHOT_I18N_DOMAIN) ); ?></small></p>
+							<p><small><?php echo wp_kses_post( __('The exclude feature uses pattern matching so you can easily select files to exclude from your backups. Example: to exclude the Twenty Ten theme, you can use twentyten, themes/twentyten or public/wp-content/themes/twentyten. <strong>The local folder or any unreadable files are excluded from Snapshot backups by default.</strong>', SNAPSHOT_I18N_DOMAIN) ); ?></small></p>
 
 						</div>
 
@@ -123,7 +123,7 @@ $custom_directory = $use_folder;
 					),
 					E_WARNING => array(
 						'label_log' => __( 'Warnings', SNAPSHOT_I18N_DOMAIN ),
-						'description' => __( 'Run-time warnings (non-fatal errors). Executeion of the script is not halted.', SNAPSHOT_I18N_DOMAIN ),
+						'description' => __( 'Run-time warnings (non-fatal errors). Execution of the script is not halted.', SNAPSHOT_I18N_DOMAIN ),
 						'label_stop' => __( 'Stop the backup process if a warning occurs', SNAPSHOT_I18N_DOMAIN )
 					),
 					E_NOTICE  => array(

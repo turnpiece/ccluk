@@ -6,7 +6,7 @@
         <form method="post" class="audit-frm audit-settings">
             <div class="columns">
                 <div class="column is-one-third">
-                    <strong><?php _e( "Audit report", wp_defender()->domain ) ?></strong>
+                    <label for="chk1" role="checkbox" aria-checked="<?php echo $setting->notification ? 'true':'false';?>"><strong><?php _e( "Audit report", wp_defender()->domain ) ?></strong></label>
                     <span class="sub">
                         <?php _e( "Defender can automatically send an email report summarising your website events so that you can keep track of logs without having to check back here.", wp_defender()->domain ) ?>
                     </span>

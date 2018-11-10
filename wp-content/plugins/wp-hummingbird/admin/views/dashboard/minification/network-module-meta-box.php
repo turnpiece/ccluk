@@ -20,7 +20,7 @@ if ( $enabled ) :
 		$msg = __( 'Asset Optimization is active and configurable by Super Admins only.', 'wphb' );
 	}
 	?>
-	<div class="sui-notice sui-notice-success">
+	<div class="sui-notice sui-notice-success" id="wphb-notice-minification-enabled">
 		<p><?php echo esc_html( $msg ); ?></p>
 	</div>
 <?php endif; ?>

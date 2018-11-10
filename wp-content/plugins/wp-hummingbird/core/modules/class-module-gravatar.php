@@ -238,7 +238,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 			$file_write = $this->get_remote_avatar( $id_or_email, $img['size'] );
 			// If error creating file - log and return original image.
 			if ( is_wp_error( $file_write ) ) {
-				$this->logger->log( $file_write->get_error_message() );
+				$this->log( $file_write->get_error_message() );
 				$this->error = $file_write;
 				return $image;
 			}
@@ -308,7 +308,7 @@ class WP_Hummingbird_Module_Gravatar extends WP_Hummingbird_Module {
 
 			// If error creating file - log and return original image.
 			if ( is_wp_error( $file_write ) ) {
-				$this->logger->log( $file_write->get_error_message() );
+				$this->log( $file_write->get_error_message() );
 				$this->error = $file_write;
 				return $args;
 			}

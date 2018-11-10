@@ -93,14 +93,14 @@ class WP_Hummingbird_Module_Caching extends WP_Hummingbird_Module_Server {
 
 			$result = wp_remote_head( $file, $args );
 
-			$this->logger->log( '----- analyzing headers for ' . $file );
-			$this->logger->log( 'args: ' );
+			$this->log( '----- analyzing headers for ' . $file );
+			$this->log( 'args: ' );
 			if ( isset( $args['cookies'] ) ) {
 				unset( $args['cookies'] );
 			}
-			$this->logger->log( $args );
-			$this->logger->log( 'result: ' );
-			$this->logger->log( $result );
+			$this->log( $args );
+			$this->log( 'result: ' );
+			$this->log( $result );
 
 			$cache_control = wp_remote_retrieve_header( $result, 'cache-control' );
 			$results[ $type ] = false;

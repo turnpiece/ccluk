@@ -1134,7 +1134,7 @@ class CtfFeed
         }
 
         if ( $feed_options['creditctf'] ) {
-            $ctf_feed_html .= '<div class="ctf-credit-link"><a href="https://smashballoon.com/custom-twitter-feeds" target="_blank"><i class="fa fa-twitter" aria-hidden="true"></i>Custom Twitter Feeds Plugin</a></div>';
+            $ctf_feed_html .= '<div class="ctf-credit-link"><a href="https://smashballoon.com/custom-twitter-feeds" target="_blank"><i class="fa fab fa-twitter" aria-hidden="true"></i>Custom Twitter Feeds Plugin</a></div>';
         }
 
         $ctf_feed_html .= '</div>'; // closing div tag for #ctf
@@ -1181,7 +1181,7 @@ class CtfFeed
                 $ctf_header_html .= '<span class="ctf-verified"><i class="fa fa-check-circle" aria-hidden="true"></i></span>';
             }
 
-            $ctf_header_html .= '<span class="ctf-header-follow"><i class="fa fa-twitter" aria-hidden="true"></i>Follow</span>';
+            $ctf_header_html .= '<span class="ctf-header-follow"><i class="fa fab fa-twitter " aria-hidden="true"></i>Follow</span>';
             $ctf_header_html .= '</p>';
 
             if ( $feed_options['showbio'] && !empty($tweet_set[0]['user']['description']) ) {
@@ -1190,7 +1190,7 @@ class CtfFeed
 
             $ctf_header_html .= '</div>';
             $ctf_header_html .= '<div class="ctf-header-img">';
-            $ctf_header_html .= '<div class="ctf-header-img-hover"><i class="fa fa-twitter" aria-hidden="true"></i></div>';
+            $ctf_header_html .= '<div class="ctf-header-img-hover"><i class="fa fab fa-twitter" aria-hidden="true"></i></div>';
             $ctf_header_html .= '<img src="' . $tweet_set[0]['user']['profile_image_url_https'] . '" alt="' . $tweet_set[0]['user']['name'] . '" width="48" height="48">';
             $ctf_header_html .= '</div>';
             $ctf_header_html .= '</a>';
@@ -1212,7 +1212,7 @@ class CtfFeed
             $ctf_header_html .= '</div>';
             $ctf_header_html .= '<div class="ctf-header-img">';
             $ctf_header_html .= '<div class="ctf-header-generic-icon">';
-            $ctf_header_html .= '<i class="fa fa-twitter" aria-hidden="true"></i>';
+            $ctf_header_html .= '<i class="fa fab fa-twitter" aria-hidden="true"></i>';
             $ctf_header_html .= '</div>';
             $ctf_header_html .= '</div>';
             $ctf_header_html .= '</a>';
