@@ -23,7 +23,7 @@
                     $( '.search-content-inner' ).append( $( this ) );
                 } );
             } else {
-                $( response ).find( 'article.type-post' ).each( function () {
+                $( response ).find( '.article-outher' ).each( function () {
                     $( '#content' ).append( $( this ) );
                 } );
             }
