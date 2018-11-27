@@ -1235,7 +1235,7 @@ input[type="radio"] + span:before, input[type="radio"] + label:before, input[typ
 .settings.bp-user.is-desktop #buddypress div#subnav.item-list-tabs ul li:hover a, .settings.bp-user.is-desktop #buddypress div:not(#item-nav) > .item-list-tabs ul li:hover a {
   color: #54ae68; }
 
-.is-desktop #buddypress div#item-nav .item-list-tabs ul li:hover > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.selected > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.current > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li a span, .is-desktop #buddypress div#item-nav .item-list-tabs ul li:hover a:after, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.selected a:after, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.current a:after {
+.is-desktop #buddypress div#item-nav .item-list-tabs ul li:hover > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.selected > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.current > a, .is-desktop #buddypress div#item-nav .item-list-tabs ul li:hover a:after, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.selected a:after, .is-desktop #buddypress div#item-nav .item-list-tabs ul li.current a:after {
   color: #54ae68; }
 .is-desktop .buddyboss-select-inner span {
   color: #54ae68; }
@@ -1494,8 +1494,7 @@ body.buddypress {
     margin-top: 10px; }
   body.buddypress #buddypress div#subnav.item-list-tabs ul li a span, body.buddypress #buddypress div:not(#item-nav) > .item-list-tabs ul li a span {
     color: #54ae68; }
-  body.buddypress #buddypress > div[role="navigation"].item-list-tabs ul li a span,
-  body.buddypress #buddypress .dir-form div.item-list-tabs ul li a span {
+  body.buddypress #buddypress > div[role="navigation"].item-list-tabs ul li a span {
     color: #54ae68; }
   body.buddypress #buddypress div#subnav.item-list-tabs ul li.feed a:hover, body.buddypress #buddypress div#subnav.item-list-tabs ul li.feed a:before {
     color: #54ae68; }

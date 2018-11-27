@@ -479,7 +479,12 @@ input {
 
 .is-desktop {
   #buddypress div#item-nav .item-list-tabs ul li {
-    &:hover > a, &.selected > a, &.current > a, a span, &:hover a:after, &.selected a:after, &.current a:after {
+    &:hover > a, 
+    &.selected > a, 
+    &.current > a,
+    &:hover a:after, 
+    &.selected a:after, 
+    &.current a:after {
       color: $green;
     }
   }

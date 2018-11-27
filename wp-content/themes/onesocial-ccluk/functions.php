@@ -150,8 +150,8 @@ function boss_generate_option_css() {
     return;
 
   $accent_color  = onesocial_get_option( 'accent_color' );
+  $body_text_color = onesocial_get_option( 'body_text_color' );
   $body_font_size = onesocial_options[boss_body_font_family][font-size];
-
 
   ?>
   <style>
@@ -444,7 +444,7 @@ function boss_generate_option_css() {
     .is-desktop .header-notifications a#user-messages span.count:before,
     .is-desktop .header-notifications a span.pending-count:before,
     .is-desktop .header-notifications .pop a:hover {
-      color: <?php echo $accent_color; ?>;
+      color: <?php echo $body_text_color ?>;
     }
 
     .is-desktop #buddypress div#subnav.item-list-tabs ul li a span,
@@ -463,7 +463,7 @@ function boss_generate_option_css() {
 
     /* Body Text color */
     body, .forgetme:hover, .joinbutton:hover, .siginbutton:hover {
-      color: <?php echo onesocial_get_option( 'body_text_color' ); ?>;
+      color: <?php echo $body_text_color; ?>;
     }
 
     /* Heading Text color */
