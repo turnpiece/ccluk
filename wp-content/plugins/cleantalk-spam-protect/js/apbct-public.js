@@ -49,8 +49,8 @@ var ctFunctionMouseMove = function output(event){
 	if(ctMouseEventTimerFlag === true){
 		
 		ctMouseData.push([
-			Math.round(event.pageY),
-			Math.round(event.pageX),
+			Math.round(event.clientY),
+			Math.round(event.clientX),
 			Math.round(new Date().getTime() - ctTimeMs)
 		]);
 		
@@ -155,7 +155,7 @@ apbct_attach_event_handler(window, "DOMContentLoaded", apbct_ready);
 
 // Capturing responses and output block message for unknown AJAX forms
 jQuery(document).ajaxComplete(function(event, xhr, settings) {
-	if(xhr.responseText.indexOf('"apbct') !== -1){
+	if(xhr.responseText && xhr.responseText.indexOf('"apbct') !== -1){
 		var response = JSON.parse(xhr.responseText);
 		if(typeof response.apbct !== 'undefined'){
 			var response = response.apbct;

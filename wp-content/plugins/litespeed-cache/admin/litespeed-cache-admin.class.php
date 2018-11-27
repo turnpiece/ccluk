@@ -182,8 +182,7 @@ class LiteSpeed_Cache_Admin
 
 			// Save network settings
 			case LiteSpeed_Cache::ACTION_SAVE_SETTINGS_NETWORK:
-				$options = LiteSpeed_Cache_Admin_Settings::get_instance()->validate_network_settings() ;// todo: use wp network setting saving
-				// LiteSpeed_Cache_Admin_Report::get_instance()->generate_environment_report($options) ; // As we don't save env report, no need this anymore
+				LiteSpeed_Cache_Admin_Settings::get_instance()->validate_network_settings( $_POST[ LiteSpeed_Cache_Config::OPTION_NAME ] ) ;// todo: use wp network setting saving
 				break ;
 
 			default:
@@ -240,9 +239,13 @@ class LiteSpeed_Cache_Admin
 	 * @param string $input The input string to clean.
 	 * @return string The cleaned up input.
 	 */
-	public static function cleanup_text($input)
+	public static function cleanup_text( $input )
 	{
-		return stripslashes(trim($input)) ;
+		if ( is_array( $input ) ) {
+			return array_map( 'LiteSpeed_Cache_Admin::cleanup_text', $input ) ;
+		}
+
+		return stripslashes( trim( $input ) ) ;
 	}
 
 	/**

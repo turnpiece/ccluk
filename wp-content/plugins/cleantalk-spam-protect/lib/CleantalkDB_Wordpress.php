@@ -13,7 +13,7 @@
 class CleantalkDB_Wordpress
 {	
 	
-	public $table_prefix;
+	public $prefix;
 	public $result = array();
 	
 	private $db;
@@ -22,9 +22,9 @@ class CleantalkDB_Wordpress
 	
 	public function __construct()
 	{
-		global $wpdb;
+		global $wpdb, $apbct;
 		$this->db = $wpdb;
-		$this->table_prefix = $wpdb->base_prefix;
+		$this->prefix = $apbct->db_prefix;
 	}
 	
 	public function query($query, $straight_query = false)

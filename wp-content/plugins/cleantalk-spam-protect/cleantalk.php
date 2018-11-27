@@ -3,7 +3,7 @@
   Plugin Name: Anti-Spam by CleanTalk
   Plugin URI: http://cleantalk.org
   Description: Max power, all-in-one, no Captcha, premium anti-spam plugin. No comment spam, no registration spam, no contact spam, protects any WordPress forms.
-  Version: 5.108.1
+  Version: 5.109
   Author: СleanTalk <welcome@cleantalk.org>
   Author URI: http://cleantalk.org
 */
@@ -20,7 +20,6 @@ define('APBCT_URL_PATH',         plugins_url('', __FILE__));          //HTTP pat
 define('APBCT_DIR_PATH',         plugin_dir_path(__FILE__));          //System path. Plugin root folder with '/'.
 define('APBCT_PLUGIN_BASE_NAME', plugin_basename(__FILE__));          //Plugin base name.
 define('APBCT_CASERT_PATH',      file_exists(ABSPATH.WPINC.'/certificates/ca-bundle.crt') ? ABSPATH.WPINC.'/certificates/ca-bundle.crt' : ''); // SSL Serttificate path
-
 // API params
 define('CLEANTALK_AGENT',        'wordpress-'.str_replace('.', '', $plugin_info['Version']));
 define('CLEANTALK_API_URL',      'https://api.cleantalk.org');      //Api URL
@@ -35,19 +34,11 @@ define('APBCT_DEBUG',            'cleantalk_debug');            //Option name wi
 // Different params
 define('APBCT_REMOTE_CALL_SLEEP', 10); // Minimum time between remote call
 
-// Database parameters
-global $wpdb;
-define('APBCT_TBL_FIREWALL_DATA', $wpdb->base_prefix . 'cleantalk_sfw');      // Table with firewall data.
-define('APBCT_TBL_FIREWALL_LOG',  $wpdb->base_prefix . 'cleantalk_sfw_logs'); // Table with firewall logs.
-define('APBCT_TBL_SESSIONS',      $wpdb->base_prefix . 'cleantalk_sessions'); // Table with session data.
-define('APBCT_SELECT_LIMIT',   5000); // Select limit for logs.
-define('APBCT_WRITE_LIMIT',    5000); // Write limit for firewall data.
-
 if(!defined('CLEANTALK_PLUGIN_DIR')){
 	
     define('CLEANTALK_PLUGIN_DIR', plugin_dir_path(__FILE__));
     
-    require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkDB_Wordpress.php');      // State class
+    require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkDB_Wordpress.php'); // Database class
 	
 	require_once( CLEANTALK_PLUGIN_DIR . 'lib/cleantalk-php-patch.php'); // Pathces fpr different functions which not exists
 	require_once( CLEANTALK_PLUGIN_DIR . 'lib/CleantalkHelper.php');     // Helper class. Different useful functions
@@ -63,10 +54,12 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	global $apbct;
 	$apbct = new CleantalkState('cleantalk', array('settings', 'data', 'debug', 'errors'), is_multisite());
 	
+	$apbct->white_label = defined('APBCT_WHITELABEL') && APBCT_WHITELABEL == true ? true : false;
+	
 	// Customize CleantalkState
 	// Account status
-	$apbct->plugin_name = APBCT_NAME;
 	$apbct->base_name = 'cleantalk-spam-protect/cleantalk.php';
+	$apbct->plugin_name = defined('APBCT_WHITELABEL_NAME') ? APBCT_WHITELABEL_NAME : APBCT_NAME; // For test purposes
 	
 	$apbct->logo                 = plugin_dir_url(__FILE__) . '/inc/images/logo.png';
 	$apbct->logo__small          = plugin_dir_url(__FILE__) . '/inc/images/logo_small.png';
@@ -75,38 +68,30 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	$apbct->key_is_ok          = !empty($apbct->data['key_is_ok']) ? $apbct->data['key_is_ok'] : 0;
 	$apbct->key_is_ok          = isset($apbct->data['testing_failed']) && $apbct->data['testing_failed'] == 0 ? 1 : $apbct->key_is_ok;
 	
-	$apbct->data['user_counter']['since']       = isset($apbct->data['user_counter']['since']) ? $apbct->data['user_counter']['since'] : date('d M');
+	$apbct->data['user_counter']['since']       = isset($apbct->data['user_counter']['since'])       ? $apbct->data['user_counter']['since'] : date('d M');
 	$apbct->data['connection_reports']['since'] = isset($apbct->data['connection_reports']['since']) ? $apbct->data['user_counter']['since'] : date('d M');
-		
-	// START OF White label reassignments
-	$apbct->white_label = defined('APBCT_WHITELABLE') && APBCT_WHITELABLE == true ? true : false;
 	
-	if($apbct->white_label){ 		
-		
-		// New plugin name
-		// $apbct->plugin_name = $apcbt->data['white_label_data']['plugin_name'];
-		 $apbct->plugin_name = defined('APBCT_WHITELABEL_NAME') ? APBCT_WHITELABEL_NAME : $apbct->plugin_name; // For test purposes
-		
-		// Logotypes
-		// $apbct->logo                 = $apcbt->data['white_label_data']['logo']
-		// $apbct->logo__small          = $apcbt->data['white_label_data']['logo__small']
-		// $apbct->logo__small__colored = $apcbt->data['white_label_data']['logo__small__colored']
-		
-		// $apbct->settings_link = 'admin.php?page=apbct_menu';
-		
-		$apbct->settings_link = is_network_admin() 
-			? 'settings.php?page=cleantalk'
-			: 'options-general.php?page=cleantalk'; 
-		
-	}else{
+	$apbct->settings_link = is_network_admin() ? 'settings.php?page=cleantalk' : 'options-general.php?page=cleantalk'; 
+	
+	if(!$apbct->white_label){
 		require_once( CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-widget.php');
 		$apbct->settings['apikey'] = defined('CLEANTALK_ACCESS_KEY') ? CLEANTALK_ACCESS_KEY : $apbct->settings['apikey'];
 		
-		$apbct->settings_link = is_network_admin() 
-			? 'settings.php?page=cleantalk'
-			: 'options-general.php?page=cleantalk'; 
 	}
-	// END OF White label
+	
+	/** @todo HARDCODE FIX */
+	if($apbct->plugin_version === '1.0.0')
+		$apbct->plugin_version = '5.100';
+	
+	// Database prefix
+	global $wpdb;
+	$apbct->db_prefix = !$apbct->white_label && defined('CLEANTALK_ACCESS_KEY') ? $wpdb->base_prefix : $wpdb->prefix;
+	// Database constants
+	define('APBCT_TBL_FIREWALL_DATA', $apbct->db_prefix . 'cleantalk_sfw');      // Table with firewall data.
+	define('APBCT_TBL_FIREWALL_LOG',  $apbct->db_prefix . 'cleantalk_sfw_logs'); // Table with firewall logs.
+	define('APBCT_TBL_SESSIONS',      $apbct->db_prefix . 'cleantalk_sessions'); // Table with session data.
+	define('APBCT_SELECT_LIMIT',      5000); // Select limit for logs.
+	define('APBCT_WRITE_LIMIT',       5000); // Write limit for firewall data.
 	
 	// Self cron
 	if(!defined('DOING_CRON') || (defined('DOING_CRON') && DOING_CRON !== true)){
@@ -160,7 +145,6 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 	$cleantalk_hooked_actions[]='nf_ajax_submit';
 	$cleantalk_hooked_actions[]='ninja_forms_process'; // Depricated ?
 	
-	
 	if(!is_admin() && !defined('DOING_AJAX')){
 		
 		// Remote calls
@@ -186,6 +170,10 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     // Redirect admin to plugin settings.
     if(!defined('WP_ALLOW_MULTISITE') || defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE == false)
     	add_action('admin_init', 'apbct_plugin_redirect');
+	
+	// Deleting SFW tables when deleting websites
+	if(defined('WP_ALLOW_MULTISITE') && WP_ALLOW_MULTISITE === true)
+		add_action( 'delete_blog', 'apbct_sfw__delete_tables', 10, 2 );
        
     // After plugin loaded - to load locale as described in manual
     add_action('plugins_loaded', 'apbct_plugin_loaded' );
@@ -197,9 +185,6 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
 		add_action( 'wp_ajax_nopriv_ct_get_cookie', 'ct_get_cookie',1 );
 		add_action( 'wp_ajax_ct_get_cookie', 'ct_get_cookie',1 );
 	}
-    	
-	if($apbct->settings['show_link'] == 1)
-		add_action('comment_form_after', 'ct_show_comment_link');
 
 	if(is_admin() || is_network_admin()){
 		require_once(CLEANTALK_PLUGIN_DIR . 'inc/cleantalk-comments.php');
@@ -338,7 +323,7 @@ if(!defined('CLEANTALK_PLUGIN_DIR')){
     }
 	
 	// Short code for GDPR
-	add_shortcode('cleantalk_gdpr_form', 'apbct_shrotcode_hadler__GDPR_public_notice__form');
+	add_shortcode('cleantalk_gdpr_form', 'apbct_shrotcode_handler__GDPR_public_notice__form');
 	
 }
 
@@ -475,55 +460,86 @@ function apbct_sfw__check()
 /**
  * On activation, set a time, frequency and name of an action hook to be scheduled.
  */
-function apbct_activation() {
+function apbct_activation( $network ) {
 	
 	global $wpdb;
 	
-	$wpdb->query("CREATE TABLE IF NOT EXISTS `".$wpdb->base_prefix."cleantalk_sfw` (
+	$sfw_data_query = 'CREATE TABLE IF NOT EXISTS `%s` (
 		`network` int(11) unsigned NOT NULL,
 		`mask` int(11) unsigned NOT NULL,
 		INDEX (  `network` ,  `mask` )
-		) ENGINE = MYISAM ;"
-	);
-		
-	$wpdb->query("CREATE TABLE IF NOT EXISTS `".$wpdb->base_prefix."cleantalk_sfw_logs` (
+		) ENGINE = MYISAM ;';
+	
+	$sfw_log_query = 'CREATE TABLE IF NOT EXISTS `%s` (
 		`ip` VARCHAR(15) NOT NULL,
 		`all_entries` INT NOT NULL,
 		`blocked_entries` INT NOT NULL,
 		`entries_timestamp` INT NOT NULL,
 		PRIMARY KEY (`ip`)) 
-		ENGINE = MYISAM;"
-	);
+		ENGINE = MYISAM;';
 	
-	// Cron tasks
-	CleantalkCron::addTask('check_account_status', 'ct_account_status_check',  3600,  time()+1800); // Checks account status
-	CleantalkCron::addTask('delete_spam_comments', 'ct_delete_spam_comments',  3600,  time()+3500); // Formerly ct_hourly_event_hook()
-	CleantalkCron::addTask('send_feedback',        'ct_send_feedback',         3600,  time()+3500); // Formerly ct_hourly_event_hook()
-	CleantalkCron::addTask('sfw_update',           'ct_sfw_update',            86400, time()+43200);// SFW update
-	CleantalkCron::addTask('send_sfw_logs',        'ct_sfw_send_logs',         3600,  time()+1800); // SFW send logs
-	CleantalkCron::addTask('get_brief_data',       'cleantalk_get_brief_data', 86400, time()+3500); // Get data for dashboard widget
-	CleantalkCron::addTask('send_connection_report','ct_mail_send_connection_report', 86400, time()+3500); // Send connection report to welcome@cleantalk.org
+	if($network && !defined('CLEANTALK_ACCESS_KEY')){
+		$initial_blog  = get_current_blog_id();
+		$blogs = array_keys($wpdb->get_results('SELECT blog_id FROM '. $wpdb->blogs, OBJECT_K));
+		foreach ($blogs as $blog) {
+			switch_to_blog($blog);
+			$wpdb->query(sprintf($sfw_data_query, $wpdb->prefix . 'cleantalk_sfw'));       // Table for SpamFireWall data
+			$wpdb->query(sprintf($sfw_log_query,  $wpdb->prefix . 'cleantalk_sfw_logs'));  // Table for SpamFireWall logs
+			// Cron tasks
+			CleantalkCron::addTask('check_account_status',  'ct_account_status_check',        3600,  time()+1800); // Checks account status
+			CleantalkCron::addTask('delete_spam_comments',  'ct_delete_spam_comments',        3600,  time()+3500); // Formerly ct_hourly_event_hook()
+			CleantalkCron::addTask('send_feedback',         'ct_send_feedback',               3600,  time()+3500); // Formerly ct_hourly_event_hook()
+			CleantalkCron::addTask('sfw_update',            'ct_sfw_update',                  86400, time()+300);  // SFW update
+			CleantalkCron::addTask('send_sfw_logs',         'ct_sfw_send_logs',               3600,  time()+1800); // SFW send logs
+			CleantalkCron::addTask('get_brief_data',        'cleantalk_get_brief_data',       86400, time()+3500); // Get data for dashboard widget
+			CleantalkCron::addTask('send_connection_report','ct_mail_send_connection_report', 86400, time()+3500); // Send connection report to welcome@cleantalk.org
+		}
+		switch_to_blog($initial_blog);
+	}else{
+		
+		// Cron tasks
+		CleantalkCron::addTask('check_account_status',  'ct_account_status_check',        3600,  time()+1800); // Checks account status
+		CleantalkCron::addTask('delete_spam_comments',  'ct_delete_spam_comments',        3600,  time()+3500); // Formerly ct_hourly_event_hook()
+		CleantalkCron::addTask('send_feedback',         'ct_send_feedback',               3600,  time()+3500); // Formerly ct_hourly_event_hook()
+		CleantalkCron::addTask('sfw_update',            'ct_sfw_update',                  86400, time()+43200);  // SFW update
+		CleantalkCron::addTask('send_sfw_logs',         'ct_sfw_send_logs',               3600,  time()+1800); // SFW send logs
+		CleantalkCron::addTask('get_brief_data',        'cleantalk_get_brief_data',       86400, time()+3500); // Get data for dashboard widget
+		CleantalkCron::addTask('send_connection_report','ct_mail_send_connection_report', 86400, time()+3500); // Send connection report to welcome@cleantalk.org
+		
+		$wpdb->query(sprintf($sfw_data_query, APBCT_TBL_FIREWALL_DATA)); // Table for SpamFireWall data
+		$wpdb->query(sprintf($sfw_log_query,  APBCT_TBL_FIREWALL_LOG));  // Table for SpamFireWall logs
+		ct_sfw_update(); // Updating SFW
+	}
 	
 	// Additional options
 	add_option('ct_plugin_do_activation_redirect', true);
-	
-	// Updating SFW
-	ct_sfw_update();
 }
 
 /**
  * On deactivation, clear schedule.
  */
-function apbct_deactivation() {
+function apbct_deactivation( $network ) {
 	
 	global $wpdb;
 
-	// Deleting SFW tables
-	$wpdb->query("DROP TABLE IF EXISTS `".$wpdb->base_prefix."cleantalk_sfw`;");
-	$wpdb->query("DROP TABLE IF EXISTS `".$wpdb->base_prefix."cleantalk_sfw_logs`;");
-
-	// Deleting cron entries
-	delete_option('cleantalk_cron'); 
+	if($network){
+		$initial_blog  = get_current_blog_id();
+		$blogs = array_keys($wpdb->get_results('SELECT blog_id FROM '. $wpdb->blogs, OBJECT_K));
+		foreach ($blogs as $blog) {
+			switch_to_blog($blog);
+			$wpdb->query('DROP TABLE IF EXISTS `'. $wpdb->prefix.'cleantalk_sfw`;');       // Deleting SFW data
+			$wpdb->query('DROP TABLE IF EXISTS `'. $wpdb->prefix.'cleantalk_sfw_logs`;');  // Deleting SFW logs
+			// Deleting cron entries
+			delete_option('cleantalk_cron');
+		}
+		switch_to_blog($initial_blog);
+	}else{
+		$wpdb->query('DROP TABLE IF EXISTS `'. APBCT_TBL_FIREWALL_DATA .'`;');     // Deleting SFW data
+		$wpdb->query('DROP TABLE IF EXISTS `'. APBCT_TBL_FIREWALL_LOG  .'`;');  // Deleting SFW logs
+		// Deleting cron entries
+		delete_option('cleantalk_cron');
+	}
+	
 }
 
 /**
@@ -586,14 +602,6 @@ function ct_get_cookie()
 	die();
 }
 
-function ct_show_comment_link(){
-	
-	print "<div style='font-size:10pt;'><a href='https://cleantalk.org/wordpress-anti-spam-plugin' target='_blank'>".__( 'WordPress spam', 'cleantalk' )."</a> ".__( 'blocked by', 'cleantalk' )." CleanTalk.</div>";
-	
-}
-
-add_action( 'right_now_content_table_end', 'my_add_counts_to_dashboard' );
-
 function ct_sfw_update(){
 	
 	global $apbct;
@@ -602,7 +610,7 @@ function ct_sfw_update(){
 		
 		include_once(CLEANTALK_PLUGIN_DIR . "lib/CleantalkSFW_Base.php");
 		include_once(CLEANTALK_PLUGIN_DIR . "lib/CleantalkSFW.php");
-	
+		
 		$sfw = new CleantalkSFW();
 		$result = $sfw->sfw_update($apbct->api_key);
 		unset($sfw);
@@ -953,4 +961,17 @@ function apbct_log($message = 'empty', $func = null, $params = array())
 	if($settings) $debug[date("H:i:s", microtime(true))."_ACTION_".strval(current_action())."_FUNCTION_".strval($func).'_settings'] = $apbct->settings;
 	
 	update_option(APBCT_DEBUG, $debug);
+}
+
+function apbct_sfw__delete_tables( $blog_id, $drop ) {
+	
+	global $wpdb;
+	
+    $initial_blog  = get_current_blog_id();
+	
+	switch_to_blog($blog_id);
+	$wpdb->query('DROP TABLE IF EXISTS `'. $wpdb->prefix.'cleantalk_sfw`;');       // Deleting SFW data
+	$wpdb->query('DROP TABLE IF EXISTS `'. $wpdb->prefix.'cleantalk_sfw_logs`;');  // Deleting SFW logs
+	
+	switch_to_blog($initial_blog);
 }

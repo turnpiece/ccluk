@@ -1563,11 +1563,9 @@ function ct_grunion_contact_form_field_html($r, $field_label) {
  * Test for JetPack contact form 
  */
 function ct_contact_form_is_spam($form) {
-    global $ct_checkjs_jpcf, $apbct;
     
-    
-    
-
+	global $ct_checkjs_jpcf, $apbct;
+	
     if ($apbct->settings['contact_forms_test'] == 0) {
         return null;
     }
@@ -1696,7 +1694,9 @@ function apbct_form__contactForm7__testSpam($param) {
 		$apbct->settings['contact_forms_test'] == 0 ||
 		$param == false && WPCF7_VERSION < '3.0.0'  ||
 		$param === true && WPCF7_VERSION >= '3.0.0' ||
-		$apbct->settings['protect_logged_in'] != 1 && is_user_logged_in() // Skip processing for logged in users.
+		$apbct->settings['protect_logged_in'] != 1 && is_user_logged_in() || // Skip processing for logged in users.
+		check_url_exclusions() ||
+		check_ip_exclusions()
 	){
 		return $param;
 	}
@@ -2676,7 +2676,7 @@ function ct_enqueue_scripts_public($hook){
 		wp_enqueue_script('ct_public',      APBCT_URL_PATH.'/js/apbct-public.js',       array('jquery'), APBCT_VERSION, false /*in header*/);
 		
 		// GDPR script
-		if(shortcode_exists( 'cleantalk_gdpr_form')){
+		if(shortcode_exists('cleantalk_gdpr_form')){
 			
 			wp_enqueue_script('ct_public_gdpr', APBCT_URL_PATH.'/js/apbct-public--gdpr.js', array('jquery', 'ct_public'), APBCT_VERSION, false /*in header*/);
 		
@@ -2846,7 +2846,7 @@ function ct_comments_output($curr_comment, $param2, $wp_list_comments_args){
  *
  * attrs = array()
  */
-function apbct_shrotcode_hadler__GDPR_public_notice__form( $attrs ){
+function apbct_shrotcode_handler__GDPR_public_notice__form( $attrs ){
 	
 	$out = '';
 	
@@ -2859,4 +2859,3 @@ function apbct_shrotcode_hadler__GDPR_public_notice__form( $attrs ){
 	$out = '<script>'.$out.'</script>';
 	return $out;
 }
-?>

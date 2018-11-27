@@ -1251,7 +1251,7 @@ class LiteSpeed_Cache_Img_Optm
 					'src'	=> $v->src,
 					'srcpath_md5'	=> $v->srcpath_md5,
 					'src_md5'	=> $v->src_md5,
-					'server'	=> $v->server,
+					'server_info'	=> $v->server_info,
 				) ;
 			}
 		}
@@ -1434,6 +1434,7 @@ class LiteSpeed_Cache_Img_Optm
 
 		// Clear credit info
 		delete_option( self::DB_IMG_OPTM_SUMMARY ) ;
+		delete_option( LiteSpeed_Cache_Config::ITEM_IMG_OPTM_NEED_PULL ) ;
 
 		exit( 'ok' ) ;
 	}

@@ -1004,7 +1004,7 @@ abstract class Ai1wm_Database {
 		// Replace first occurance at a specified position
 		if ( $position !== false ) {
 			for ( $i = 0; $i < count( $search ); $i++ ) {
-				$current = stripos( $input, $search[ $i ] );
+				$current = stripos( $input, $search[ $i ], $position );
 				if ( $current === $position ) {
 					$input = substr_replace( $input, $replace[ $i ], $current, strlen( $search[ $i ] ) );
 				}
@@ -1032,7 +1032,7 @@ abstract class Ai1wm_Database {
 		// Replace first occurance at a specified position
 		if ( $position !== false ) {
 			for ( $i = 0; $i < count( $search ); $i++ ) {
-				$current = stripos( $input, $search[ $i ] );
+				$current = stripos( $input, $search[ $i ], $position );
 				if ( $current === $position ) {
 					$input = substr_replace( $input, $replace[ $i ], $current, strlen( $search[ $i ] ) );
 				}

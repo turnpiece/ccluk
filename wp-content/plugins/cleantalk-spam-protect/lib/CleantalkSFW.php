@@ -19,8 +19,8 @@ class CleantalkSFW extends CleantalkSFW_Base
 		$this->db = new CleantalkDB_Wordpress();
 
 		// Use default tables if not specified
-		$this->data_table = defined('APBCT_TBL_FIREWALL_DATA') ? APBCT_TBL_FIREWALL_DATA : $this->db->table_prefix . 'cleantalk_sfw';
-		$this->log_table  = defined('APBCT_TBL_FIREWALL_LOG')  ? APBCT_TBL_FIREWALL_LOG  : $this->db->table_prefix . 'cleantalk_sfw_logs';
+		$this->data_table = defined('APBCT_TBL_FIREWALL_DATA') ? APBCT_TBL_FIREWALL_DATA : $this->db->prefix . 'cleantalk_sfw';
+		$this->log_table  = defined('APBCT_TBL_FIREWALL_LOG')  ? APBCT_TBL_FIREWALL_LOG  : $this->db->prefix . 'cleantalk_sfw_logs';
 	}
 	
 	/*

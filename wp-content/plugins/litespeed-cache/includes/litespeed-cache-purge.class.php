@@ -927,6 +927,7 @@ class LiteSpeed_Cache_Purge
 
 		// for archive of categories|tags|custom tax
 		global $post ;
+		$original_post = $post ;
 		$post = get_post($post_id) ;
 		$post_type = $post->post_type ;
 
@@ -1011,6 +1012,9 @@ class LiteSpeed_Cache_Purge
 		if ( $config->purge_by_post(LiteSpeed_Cache_Config::PURGE_YEAR) ) {
 			$purge_tags[] = LiteSpeed_Cache_Tag::TYPE_ARCHIVE_DATE . date('Y', $date) ;
 		}
+
+		// Set back to original post as $post_id might affecting the global $post value
+		$post = $original_post ;
 
 		return array_unique($purge_tags) ;
 	}

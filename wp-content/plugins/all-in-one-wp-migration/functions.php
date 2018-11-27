@@ -391,7 +391,7 @@ function ai1wm_archive_bucket( $blog_id = null ) {
 	// Add domain
 	if ( ( $domain = explode( '.', parse_url( get_site_url( $blog_id ), PHP_URL_HOST ) ) ) ) {
 		foreach ( $domain as $subdomain ) {
-			if ( $subdomain ) {
+			if ( $subdomain = strtolower( preg_replace( '/[^A-Za-z0-9\-]/', '', $subdomain ) ) ) {
 				$name[] = $subdomain;
 			}
 		}
@@ -400,7 +400,7 @@ function ai1wm_archive_bucket( $blog_id = null ) {
 	// Add path
 	if ( ( $path = explode( '/', parse_url( get_site_url( $blog_id ), PHP_URL_PATH ) ) ) ) {
 		foreach ( $path as $directory ) {
-			if ( $directory ) {
+			if ( $directory = strtolower( preg_replace( '/[^A-Za-z0-9\-]/', '', $directory ) ) ) {
 				$name[] = $directory;
 			}
 		}
@@ -421,7 +421,7 @@ function ai1wm_archive_vault( $blog_id = null ) {
 	// Add domain
 	if ( ( $domain = explode( '.', parse_url( get_site_url( $blog_id ), PHP_URL_HOST ) ) ) ) {
 		foreach ( $domain as $subdomain ) {
-			if ( $subdomain ) {
+			if ( $subdomain = strtolower( preg_replace( '/[^A-Za-z0-9\-]/', '', $subdomain ) ) ) {
 				$name[] = $subdomain;
 			}
 		}
@@ -430,7 +430,7 @@ function ai1wm_archive_vault( $blog_id = null ) {
 	// Add path
 	if ( ( $path = explode( '/', parse_url( get_site_url( $blog_id ), PHP_URL_PATH ) ) ) ) {
 		foreach ( $path as $directory ) {
-			if ( $directory ) {
+			if ( $directory = strtolower( preg_replace( '/[^A-Za-z0-9\-]/', '', $directory ) ) ) {
 				$name[] = $directory;
 			}
 		}

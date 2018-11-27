@@ -543,7 +543,7 @@ function ct_ajax_insert_comments(){
 	$to_insert = 100;
 	$time = current_time('timestamp')-(730*86400);
 	
-	$result = $wpdb->get_results("SELECT network FROM `".$wpdb->base_prefix."cleantalk_sfw` LIMIT $to_insert;", ARRAY_A);
+	$result = $wpdb->get_results('SELECT network FROM `'. APBCT_TBL_FIREWALL_DATA .'` LIMIT '. $to_insert .';', ARRAY_A);
 	
 	if($result){
 		$ip = array();

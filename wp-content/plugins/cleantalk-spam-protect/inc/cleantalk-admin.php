@@ -134,7 +134,7 @@ function apbct_admin__init(){
 	global $apbct;
 	
 	// Update logic	
-	if($apbct->plugin_version != '1.0.0' && $apbct->plugin_version != APBCT_VERSION){
+	if($apbct->plugin_version != APBCT_VERSION){
 		if(is_main_site()){
 			require_once('cleantalk-updater.php');
 			$result = apbct_run_update_actions($apbct->plugin_version, APBCT_VERSION);
@@ -144,6 +144,10 @@ function apbct_admin__init(){
 				$apbct->data['plugin_version'] = APBCT_VERSION;
 				$apbct->saveData();
 			}
+		// Update version for side blogs
+		}else{
+			$apbct->data['plugin_version'] = APBCT_VERSION;
+			$apbct->saveData();
 		}
 	}
 	

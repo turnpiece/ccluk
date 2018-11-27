@@ -3,7 +3,7 @@ Contributors: LiteSpeedTech
 Tags: caching, optimize, performance, pagespeed, seo, speed, image optimize, compress, object cache, redis, memcached, database cleaner
 Requires at least: 4.0
 Tested up to: 4.9.8
-Stable tag: 2.7
+Stable tag: 2.7.3
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl.html
 
@@ -276,13 +276,39 @@ Click on the `Advanced View` link at the top of the page, and several more tabs 
 
 == Changelog ==
 
+= 2.7.3 - Nov 26 2018 =
+* <strong>Optm</strong>: Improved page render speed with Web Font Loader JS library for Load Google Fonts Asynchronously.
+* <strong>Optm</strong>: Directly used JS library files in plugin folder instead of short links `/min/`.
+* <strong>Optm</strong>: Handled exceptions in JS optimization when meeting badly formatted JS.
+* <strong>3rd</strong>: Added Adobe Lightroom support for NextGen Gallery.
+* <strong>3rd</strong>: Improved Postman app support for POST JSON requests.
+* <strong>IAPI</strong>: <strong>US3 server IP changed to 68.183.60.185</strong>.
+
+= 2.7.2 - Nov 19 2018 =
+* 🌱: Auto Upgrade feature.
+* <strong>CDN</strong>: Bypass CDN for cron to avoid WP jQuery deregister warning.
+
+= 2.7.1 - Nov 15 2018 =
+* 🌱<strong>CLI</strong>: Ability to set CDN mapping by `set_option litespeed-cache-cdn_mapping[url][0] https://url`.
+* 🌱<strong>CDN</strong>: Ability to customize default CDN mapping data in default.ini.
+* 🌱<strong>API</strong>: Default.ini now supports both text-area items and on/off options.
+* <strong>Vary</strong>: Refactored Vary and related API.
+* <strong>Vary</strong>: New hook to manipulate vary cookies value.
+* <strong>Core</strong>: Activation now can generate Object Cache file.
+* <strong>Core</strong>: Unified Object Cache/rewrite rules generation process across activation/import/reset/CLI.
+* <strong>Core</strong>: Always hook activation to make activation available through the front end.
+* 🐞<strong>IAPI</strong>: Fixed a bug where environment report gave incorrect image optimization data.
+* 🐞<strong>OLS</strong>: Fixed a bug where login cookie kept showing a warning on OpenLiteSpeed.
+* 🐞<strong>Core</strong>: Fixed a bug where Import/Activation/CLI was missing CDN mapping settings.
+* <strong>API</strong>: <strong>Filters `litespeed_cache_media_lazy_img_excludes/litespeed_optm_js_defer_exc` passed-in parameter is changed from string to array.</strong>
+
 = 2.7 - Nov 2 2018 =
 * 🌱: Separate Purge log for better debugging.
 * <strong>3rd</strong>: Now fully compatible with WPML.
 * <strong>IAPI</strong>: Sped up Image Optimization workflow.
 * <strong>GUI</strong>: Current IP now shows in Debug settings.
 * <strong>GUI</strong>: Space separated placeholder queue list for better look.
-* <strong>EU3 server IP Changed to 165.227.131.98</strong>.
+* <strong>IAPI</strong>: <strong>EU3 server IP changed to 165.227.131.98</strong>.
 
 = 2.6.4.1 - Oct 25 2018 =
 * 🔥🐞<strong>Media</strong>: Fixed a bug where the wrong table was used in the Image Optimization process.

@@ -37,7 +37,10 @@ class LiteSpeed_Cache_Config extends LiteSpeed_Cache_Const
 			$options = $this->construct_multisite_options() ;
 		}
 		else {
-			$options = get_option( self::OPTION_NAME, $this->get_default_options() ) ;
+			$options = get_option( self::OPTION_NAME ) ;
+			if ( ! $options ) {
+				$options = $this->get_default_options() ;
+			}
 
 			// Check advanced_cache set
 			$this->_define_adv_cache( $options ) ;
@@ -147,7 +150,10 @@ class LiteSpeed_Cache_Config extends LiteSpeed_Cache_Const
 
 		$this->_define_adv_cache( $site_options ) ;
 
-		$options = get_option( self::OPTION_NAME, $this->get_default_options() ) ;
+		$options = get_option( self::OPTION_NAME ) ;
+		if ( ! $options ) {
+			$options = $this->get_default_options() ;
+		}
 
 		/**
 		 * In case this is called outside the admin page
@@ -397,7 +403,11 @@ class LiteSpeed_Cache_Config extends LiteSpeed_Cache_Const
 	 */
 	public function get_item( $k, $return_string = false )
 	{
-		$val = get_option( $k, $this->default_item( $k ) ) ;
+		$val = get_option( $k ) ;
+		// Separately call default_item() to improve performance
+		if ( ! $val ) {
+			$val = $this->default_item( $k ) ;
+		}
 
 		if ( ! $return_string && ! is_array( $val ) ) {
 			$val = $val ? explode( "\n", $val ) : array() ;
@@ -463,6 +473,33 @@ class LiteSpeed_Cache_Config extends LiteSpeed_Cache_Const
 				$options['purge_' . $purge_opt] = self::VAL_ON ;
 			}
 		}
+
+		// Convert CDN settings
+		$mapping_fields = array(
+			LiteSpeed_Cache_Config::ITEM_CDN_MAPPING_URL,
+			LiteSpeed_Cache_Config::ITEM_CDN_MAPPING_INC_IMG,
+			LiteSpeed_Cache_Config::ITEM_CDN_MAPPING_INC_CSS,
+			LiteSpeed_Cache_Config::ITEM_CDN_MAPPING_INC_JS,
+			LiteSpeed_Cache_Config::ITEM_CDN_MAPPING_FILETYPE
+		) ;
+		$cdn_mapping = array() ;
+		if ( isset( $options[ self::ITEM_CDN_MAPPING ] ) && is_array( $options[ self::ITEM_CDN_MAPPING ] ) ) {
+			foreach ( $options[ self::ITEM_CDN_MAPPING ] as $k => $v ) {// $k is numeric
+				foreach ( $mapping_fields as $v2 ) {
+					if ( empty( $cdn_mapping[ $v2 ] ) ) {
+						$cdn_mapping[ $v2 ] = array() ;
+					}
+					$cdn_mapping[ $v2 ][ $k ] = ! empty( $v[ $v2 ] ) ? $v[ $v2 ] : false ;
+				}
+			}
+		}
+		if ( empty( $cdn_mapping ) ) {
+			// At least it has one item same as in setting page
+			foreach ( $mapping_fields as $v2 ) {
+				$cdn_mapping[ $v2 ] = array( 0 => false ) ;
+			}
+		}
+		$options[ self::ITEM_CDN_MAPPING ] = $cdn_mapping ;
 
 		return $options ;
 	}
@@ -661,47 +698,7 @@ class LiteSpeed_Cache_Config extends LiteSpeed_Cache_Const
 	 */
 	public function plugin_activation( $count )
 	{
-		$errors = array() ;
 
-		$res = add_option( self::OPTION_NAME, $this->get_default_options() ) ;
-
-		defined( 'LSCWP_LOG' ) && LiteSpeed_Cache_Log::debug( "[Cfg] plugin_activation update option = " . var_export( $res, true ) ) ;
-
-		$disable_lscache = false ;
-
-		if ( is_multisite() ) {
-
-			if ( ! is_network_admin() ) {
-				if ( $count === 1 ) {
-					// Only itself is activated, set .htaccess with only CacheLookUp
-					LiteSpeed_Cache_Admin_Rules::get_instance()->insert_ls_wrapper() ;
-				}
-				return ;
-			}
-
-			$options = $this->get_site_options() ;
-
-			if ( ! $options[ self::NETWORK_OPID_ENABLED ] ) {
-				// NOTE: Network admin still need to make a lscache wrapper to avoid subblogs cache not work
-				$disable_lscache = true ;
-			}
-
-		}
-		else {
-			$options = $this->get_options() ;
-			if ( ! $options[ self::OPID_ENABLED_RADIO ] ) {
-				$disable_lscache = true ;
-			}
-		}
-
-		$res = LiteSpeed_Cache_Admin_Rules::get_instance()->update( $options, $disable_lscache ) ;
-
-        if ( $res !== true ) {
-        	if ( ! is_array( $res ) ) {
-        		exit( $res ) ;
-        	}
-			exit( implode( "\n", $res ) ) ;
-        }
 
 	}
 

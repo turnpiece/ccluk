@@ -62,7 +62,6 @@ class CleantalkState
         'user_token'              => '', //user token for auto login into spam statistics
         'collect_details'         => 0, // Collect details about browser of the visitor. 
         'send_connection_reports' => 0, //Send connection reports to Cleantalk servers
-		'show_link'               => 0,
 		'async_js'                => 0,
 		'debug_ajax'              => 0,
 		
@@ -78,8 +77,7 @@ class CleantalkState
 	public $def_data = array(
 		
 		// Plugin data
-		'start_version'      => APBCT_VERSION,
-		'plugin_version'     => '1.0.0',
+		'plugin_version'     => APBCT_VERSION,
         'user_token'         => '', // User token 
         'js_keys'            => array(), // Keys to do JavaScript antispam test 
         'js_keys_store_days' => 14, // JavaScript keys store days - 8 days now

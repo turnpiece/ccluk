@@ -812,5 +812,3 @@ function apbct_api_key__is_correct($api_key = null)
 	$api_key = $api_key !== null ? $api_key : $apbct->api_key;
     return $api_key && preg_match('/^[a-z\d]{3,15}$/', $api_key) ? true : false;
 }
-
-?>

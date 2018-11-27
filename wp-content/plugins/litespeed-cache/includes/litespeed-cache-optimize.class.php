@@ -18,8 +18,8 @@ class LiteSpeed_Cache_Optimize
 	private static $_instance ;
 
 	const DIR_MIN = '/min' ;
-	const CSS_ASYNC_LIB = '/min/css_async.js' ;
-	const CSS_ASYNC_LIB_FILE = 'js/css_async.min.js' ;
+	const LIB_FILE_CSS_ASYNC = 'js/css_async.min.js' ;
+	const LIB_FILE_WEBFONTLOADER = 'js/webfontloader.min.js' ;
 
 	private $content ;
 	private $http2_headers = array() ;
@@ -38,12 +38,13 @@ class LiteSpeed_Cache_Optimize
 	private $cfg_ggfonts_async ;
 	private $cfg_optm_max_size ;
 	private $cfg_ttl ;
+	private $cfg_ggfonts_rm ;
 
 	private $dns_prefetch ;
+	private $_ggfonts_urls = array() ;
 
 	private $html_foot = '' ; // The html info append to <body>
 	private $html_head = '' ; // The html info prepend to <body>
-	private $css_to_be_removed = array() ;
 
 	private $minify_cache ;
 	private $minify_minify ;
@@ -90,10 +91,7 @@ class LiteSpeed_Cache_Optimize
 		 * @since 1.5
 		 */
 		if ( $this->cfg_js_defer ) {
-			$this->cfg_js_defer_exc = apply_filters( 'litespeed_optm_js_defer_exc', get_option( LiteSpeed_Cache_Config::ITEM_OPTM_JS_DEFER_EXC ) ) ;
-			if ( $this->cfg_js_defer_exc ) {
-				$this->cfg_js_defer_exc = explode( "\n", $this->cfg_js_defer_exc ) ;
-			}
+			$this->cfg_js_defer_exc = apply_filters( 'litespeed_optm_js_defer_exc', LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_OPTM_JS_DEFER_EXC ) ) ;
 		}
 
 		/**
@@ -160,33 +158,6 @@ class LiteSpeed_Cache_Optimize
 		$this->cfg_js_minify = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_JS_MINIFY ) ;
 		$this->cfg_js_combine = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_JS_COMBINE ) ;
 		$this->cfg_ttl = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTIMIZE_TTL ) ;
-
-		// This request is for js/css_async.js
-		if ( strpos( $_SERVER[ 'REQUEST_URI' ], self::CSS_ASYNC_LIB ) !== false ) {
-			LiteSpeed_Cache_Log::debug( '[Optm] start serving static file' ) ;
-
-			$content = Litespeed_File::read( LSCWP_DIR . self::CSS_ASYNC_LIB_FILE ) ;
-
-			$static_file = LSCWP_CONTENT_DIR . '/cache/js/css_async.js' ;
-
-			// Save to cache folder to enable directly usage by .htacess
-			if ( ! file_exists( $static_file ) ) {
-				Litespeed_File::save( $static_file, $content, true ) ;
-				LiteSpeed_Cache_Log::debug( '[Optm] save css_async lib to ' . $static_file ) ;
-			}
-
-			LiteSpeed_Cache_Control::set_cacheable() ;
-			LiteSpeed_Cache_Control::set_public_forced( 'OPTM: css async js' ) ;
-			LiteSpeed_Cache_Control::set_no_vary() ;
-			LiteSpeed_Cache_Control::set_custom_ttl( 8640000 ) ;
-			LiteSpeed_Cache_Tag::add( LiteSpeed_Cache_Tag::TYPE_MIN . '_CSS_ASYNC' ) ;
-
-			header( 'Content-Length: ' . strlen( $content ) ) ;
-			header( 'Content-Type: application/x-javascript; charset=utf-8' ) ;
-
-			echo $content ;
-			exit ;
-		}
 
 		// If not turn on min files
 		if ( ! $this->cfg_css_minify && ! $this->cfg_css_combine && ! $this->cfg_js_minify && ! $this->cfg_js_combine ) {
@@ -359,6 +330,7 @@ class LiteSpeed_Cache_Optimize
 		$this->cfg_ggfonts_async = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTM_GGFONTS_ASYNC ) ;
 		$this->cfg_ttl = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTIMIZE_TTL ) ;
 		$this->cfg_optm_max_size = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTM_MAX_SIZE ) * 1000000 ;
+		$this->cfg_ggfonts_rm = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTM_GGFONTS_RM ) ;
 
 		if ( ! LiteSpeed_Cache_Router::can_optm() ) {
 			LiteSpeed_Cache_Log::debug( '[Optm] bypass: admin/feed/preview' ) ;
@@ -368,12 +340,7 @@ class LiteSpeed_Cache_Optimize
 		do_action( 'litespeed_optm' ) ;
 
 		// Parse css from content
-		$ggfonts_rm = LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPID_OPTM_GGFONTS_RM ) ;
-		if ( $this->cfg_css_minify || $this->cfg_css_combine || $this->cfg_http2_css || $ggfonts_rm || $this->cfg_css_async || $this->cfg_ggfonts_async ) {
-			// To remove google fonts
-			if ( $ggfonts_rm ) {
-				$this->css_to_be_removed[] = 'fonts.googleapis.com' ;
-			}
+		if ( $this->cfg_css_minify || $this->cfg_css_combine || $this->cfg_http2_css || $this->cfg_ggfonts_rm || $this->cfg_css_async || $this->cfg_ggfonts_async ) {
 			list( $src_list, $html_list ) = $this->_handle_css() ;
 		}
 
@@ -455,23 +422,6 @@ class LiteSpeed_Cache_Optimize
 			// Replace async css
 			$this->content = str_replace( $html_list, $html_list_async, $this->content ) ;
 
-		}
-
-		// Handle google fonts async
-		if ( ! $this->cfg_css_async && $this->cfg_ggfonts_async ) {
-			foreach ( $html_list as $k => $v ) {
-				if ( strpos( $src_list[ $k ], 'fonts.googleapis.com' ) === false ) {
-					unset( $html_list[ $k ] ) ;
-					continue ;
-				}
-
-				LiteSpeed_Cache_Log::debug( '[Optm] google fonts async loading: ' . $src_list[ $k ] ) ;
-			}
-			// async html
-			$html_list_async = $this->_async_css_list( $html_list ) ;
-
-			// Replace async css
-			$this->content = str_replace( $html_list, $html_list_async, $this->content ) ;
 		}
 
 		// Parse js from buffer as needed
@@ -597,21 +547,23 @@ class LiteSpeed_Cache_Optimize
 
 
 		// Append async compatibility lib to head
-		if ( $this->cfg_css_async || $this->cfg_ggfonts_async ) {
+		if ( $this->cfg_css_async ) {
 			// Inline css async lib
 			if ( LiteSpeed_Cache::config( LiteSpeed_Cache_Config::OPT_OPTM_CSS_ASYNC_INLINE ) ) {
-				$this->html_head .= '<script id="litespeed-css-async-lib" type="text/javascript">' . Litespeed_File::read( LSCWP_DIR . self::CSS_ASYNC_LIB_FILE ) . '</script>' ;
+				$this->html_head .= '<script id="litespeed-css-async-lib" type="text/javascript">' . Litespeed_File::read( LSCWP_DIR . self::LIB_FILE_CSS_ASYNC ) . '</script>' ;
 			}
 			else {
-				$css_async_lib_url = LiteSpeed_Cache_Utility::get_permalink_url( self::CSS_ASYNC_LIB ) ;
+				$css_async_lib_url = LSWCP_PLUGIN_URL . self::LIB_FILE_CSS_ASYNC ;
 				$this->html_head .= "<script id='litespeed-css-async-lib' src='" . $css_async_lib_url . "' " . ( $this->cfg_js_defer ? 'defer' : '' ) . "></script>" ;// Don't exclude it from defer for now
 				$this->append_http2( $css_async_lib_url, 'js' ) ; // async lib will be http/2 pushed always
 			}
 		}
 
-		if ( $this->cfg_ggfonts_async ) {
-			$this->html_head .= '<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />' ;
-		}
+		/**
+		 * Handle google fonts async
+		 * This will result in a JS snippet in head, so need to put it in the end to avoid being replaced by JS parser
+		 */
+		$this->_async_ggfonts() ;
 
 		// Replace html head part
 		$this->html_head = apply_filters( 'litespeed_optm_html_head', $this->html_head ) ;
@@ -643,6 +595,69 @@ class LiteSpeed_Cache_Optimize
 	}
 
 	/**
+	 * Google font async
+	 *
+	 * @since 2.7.3
+	 * @access private
+	 */
+	private function _async_ggfonts()
+	{
+		if ( ! $this->cfg_ggfonts_async || ! $this->_ggfonts_urls ) {
+			return ;
+		}
+
+		LiteSpeed_Cache_Log::debug( '[Optm] google fonts async found: ', $this->_ggfonts_urls ) ;
+
+		$html = '<link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin />' ;
+
+		/**
+		 * Append fonts
+		 *
+		 * Could be multiple fonts
+		 *
+		 * 	<link rel='stylesheet' href='//fonts.googleapis.com/css?family=Open+Sans%3A400%2C600%2C700%2C800%2C300&#038;ver=4.9.8' type='text/css' media='all' />
+		 *	<link rel='stylesheet' href='//fonts.googleapis.com/css?family=PT+Sans%3A400%2C700%7CPT+Sans+Narrow%3A400%7CMontserrat%3A600&#038;subset=latin&#038;ver=4.9.8' type='text/css' media='all' />
+		 *		-> family: PT Sans:400,700|PT Sans Narrow:400|Montserrat:600
+		 *	<link rel='stylesheet' href='https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,300,300italic,400italic,600,700,900&#038;subset=latin%2Clatin-ext' />
+		 */
+		$html .='<script type="text/javascript">WebFontConfig={google:{families:[' ;
+
+		$families = array() ;
+		foreach ( $this->_ggfonts_urls as $v ) {
+			$qs = wp_specialchars_decode( $v ) ;
+			$qs = urldecode( $qs ) ;
+			$qs = parse_url( $qs, PHP_URL_QUERY ) ;
+			parse_str( $qs, $qs ) ;
+
+			if ( empty( $qs[ 'family' ] ) ) {
+				LiteSpeed_Cache_Log::debug( '[Optm] ERR ggfonts failed to find family: ' . $v ) ;
+				continue ;
+			}
+
+			$subset = empty( $qs[ 'subset' ] ) ? '' : ':' . $qs[ 'subset' ] ;
+
+			foreach ( array_filter( explode( '|', $qs[ 'family' ] ) ) as $v2 ) {
+				$families[] = $v2 . $subset ;
+			}
+
+		}
+
+		$html .= "'" . implode( "','", $families ) . "'" ;
+
+		$html .= ']}};</script>' ;
+
+		// https://cdnjs.cloudflare.com/ajax/libs/webfont/1.6.28/webfontloader.js
+		$webfont_lib_url = LSWCP_PLUGIN_URL . self::LIB_FILE_WEBFONTLOADER ;
+
+		$html .= '<script id="litespeed-webfont-lib" src="' . $webfont_lib_url . '" async></script>' ;
+		$this->append_http2( $webfont_lib_url, 'js' ) ; // async lib will be http/2 pushed always
+
+		// Put this in the very beginning for preconnect
+		$this->html_head = $html . $this->html_head ;
+
+	}
+
+	/**
 	 * Prefetch DNS
 	 *
 	 * @since 1.7.1
@@ -650,7 +665,7 @@ class LiteSpeed_Cache_Optimize
 	 */
 	private function _dns_prefetch_init()
 	{
-		$this->dns_prefetch = get_option( LiteSpeed_Cache_Config::ITEM_DNS_PREFETCH ) ;
+		$this->dns_prefetch = LiteSpeed_Cache_Config::get_instance()->get_item( LiteSpeed_Cache_Config::ITEM_DNS_PREFETCH ) ;
 		if ( ! $this->dns_prefetch ) {
 			return ;
 		}
@@ -675,7 +690,7 @@ class LiteSpeed_Cache_Optimize
 			return $urls ;
 		}
 
-		foreach ( explode( "\n", $this->dns_prefetch ) as $v ) {
+		foreach ( $this->dns_prefetch as $v ) {
 			if ( $v ) {
 				$urls[] = $v ;
 			}
@@ -692,7 +707,7 @@ class LiteSpeed_Cache_Optimize
 	 */
 	public function dns_prefetch_output()
 	{
-		foreach ( explode( "\n", $this->dns_prefetch ) as $v ) {
+		foreach ( $this->dns_prefetch as $v ) {
 			if ( $v ) {
 				$this->html_head .= "<link rel='dns-prefetch' href='$v' />" ;
 			}
@@ -988,7 +1003,7 @@ class LiteSpeed_Cache_Optimize
 			$excludes = explode( "\n", $excludes ) ;
 		}
 
-		$this->css_to_be_removed = apply_filters( 'litespeed_optm_css_to_be_removed', $this->css_to_be_removed ) ;
+		$css_to_be_removed = apply_filters( 'litespeed_optm_css_to_be_removed', array() ) ;
 
 		$src_list = array() ;
 		$html_list = array() ;
@@ -1024,11 +1039,30 @@ class LiteSpeed_Cache_Optimize
 			}
 
 			// Check if need to remove this css
-			if ( $this->css_to_be_removed && LiteSpeed_Cache_Utility::str_hit_array( $attrs[ 'href' ], $this->css_to_be_removed ) ) {
+			if ( $css_to_be_removed && LiteSpeed_Cache_Utility::str_hit_array( $attrs[ 'href' ], $css_to_be_removed ) ) {
 				LiteSpeed_Cache_Log::debug( '[Optm] rm css snippet ' . $attrs[ 'href' ] ) ;
 				// Delete this css snippet from orig html
 				$this->content = str_replace( $match[ 0 ], '', $this->content ) ;
+
 				continue ;
+			}
+
+			// Check Google fonts hit
+			if ( $this->cfg_ggfonts_rm || $this->cfg_ggfonts_async ) {
+				if ( strpos( $attrs[ 'href' ], 'fonts.googleapis.com' ) !== false ) {
+					LiteSpeed_Cache_Log::debug( '[Optm] rm css snippet [Google fonts] ' . $attrs[ 'href' ] ) ;
+					$this->content = str_replace( $match[ 0 ], '', $this->content ) ;
+
+					/**
+					 * For async gg fonts, will add webfont into head, hence remove it from buffer and store the matches to use later
+					 * @since  2.7.3
+					 */
+					if ( $this->cfg_ggfonts_async ) {
+						$this->_ggfonts_urls[] = $attrs[ 'href' ] ;
+					}
+
+					continue ;
+				}
 			}
 
 			// to avoid multiple replacement

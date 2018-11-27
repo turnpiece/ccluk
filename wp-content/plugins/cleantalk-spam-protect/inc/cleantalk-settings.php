@@ -101,12 +101,6 @@ function apbct_settings__add_page() {
 			'html_before'    => '<hr>',
 			'html_after'     => '',
 			'fields'         => array(
-				'show_link' => array(
-					'type'        => 'checkbox',
-					'title'       => __('Tell others about CleanTalk', 'cleantalk'),
-					'description' => __("Checking this box places a small link under the comment form that lets others know what anti-spam tool protects your site.", 'cleantalk'),
-					'display' => !$apbct->white_label,
-				),
 				'spam_firewall' => array(
 					'type'        => 'checkbox',
 					'title'       => __('SpamFireWall', 'cleantalk'),
@@ -346,7 +340,7 @@ function apbct_settings_page() {
 						echo '<b style="display: inline-block; margin-top: 10px;">'.sprintf(__('Do you like CleanTalk? %sPost your feedback here%s.', 'cleantalk'), '<a href="https://wordpress.org/support/plugin/cleantalk-spam-protect/reviews/#new-post" target="_blank">', '</a>').'</b><br />';
 					apbct_admin__badge__get_premium();
 					echo '<div id="gdpr_dialog" style="display: none; padding: 7px;">';
-						apbct_gdpr__show_text();
+						apbct_gdpr__show_text('print');
 					echo '</div>';
 				echo '</div>';
 			}
@@ -619,7 +613,7 @@ function apbct_settings__field__api_key(){
 			if((apbct_api_key__is_correct($apbct->api_key) || $apbct->key_is_ok) && isset($apbct->data['account_name_ob']) && $apbct->data['account_name_ob'] != ''){
 				echo '<br>'
 				.sprintf(
-					__('Account at cleantalk.org is %s', 'cleantalk'),
+					__('Account at cleantalk.org is %s.', 'cleantalk'),
 					'<b>'.$apbct->data['account_name_ob'].'</b>'
 				);
 			}
@@ -815,7 +809,7 @@ function apbct_settings__validate($settings) {
 	// Auto getting key
 	if (isset($_POST['submit']) && $_POST['submit'] == 'get_key_auto'){
 		
-		$website = parse_url(get_option('siteurl'),PHP_URL_HOST);
+		$website = parse_url(get_option('siteurl'), PHP_URL_HOST).parse_url(get_option('siteurl'), PHP_URL_PATH);
 		$platform = 'wordpress';
 		$timezone = isset($_POST['ct_admin_timezone']) ? $_POST['ct_admin_timezone'] : null;
 		$language = !empty($_SERVER['HTTP_ACCEPT_LANGUAGE']) ? $_SERVER['HTTP_ACCEPT_LANGUAGE'] : null;
@@ -907,27 +901,23 @@ function apbct_settings__validate($settings) {
 	return $settings;
 }
 
-function apbct_gdpr__show_text(){
-?>
-	<p>The notice requirements remain and are expanded. They must include the retention time for personal data, and contact information for data controller and data protection officer has to be provided.</p>
-
-	<p>Automated individual decision-making, including profiling (Article 22) is contestable, similarly to the Data Protection Directive (Article 15). Citizens have rights to question and fight significant decisions that affect them that have been made on a solely-algorithmic basis. Many media outlets have commented on the introduction of a "right to explanation" of algorithmic decisions, but legal scholars have since argued that the existence of such a right is highly unclear without judicial tests and is limited at best.</p>
-
-	<p>To be able to demonstrate compliance with the GDPR, the data controller should implement measures, which meet the principles of data protection by design and data protection by default. Privacy by design and by default (Article 25) require data protection measures to be designed into the development of business processes for products and services. Such measures include pseudonymising personal data, by the controller, as soon as possible (Recital 78).</p>
-
-	<p>It is the responsibility and the liability of the data controller to implement effective measures and be able to demonstrate the compliance of processing activities even if the processing is carried out by a data processor on behalf of the controller (Recital 74).</p>
-
-	<p>Data Protection Impact Assessments (Article 35) have to be conducted when specific risks occur to the rights and freedoms of data subjects. Risk assessment and mitigation is required and prior approval of the national data protection authorities (DPAs) is required for high risks. Data protection officers (Articles 37–39) are required to ensure compliance within organisations.</p>
-
-	<p>They have to be appointed:</p>
-	<ul style="padding: 0px 25px; list-style: disc;">
-		<li>for all public authorities, except for courts acting in their judicial capacity</li>
-		<li>if the core activities of the controller or the processor are:</li>
-			<ul style="padding: 0px 25px; list-style: disc;">
-				<li>processing operations, which, by virtue of their nature, their scope and/or their purposes, require regular and systematic monitoring of data subjects on a large scale</li>
-				<li>processing on a large scale of special categories of data pursuant to Article 9 and personal data relating to criminal convictions and offences referred to in Article 10';</li>
-			</ul>
-		</li>
-	</ul>
-	<?php
+function apbct_gdpr__show_text($print = false){
+	
+	$out = wpautop('The notice requirements remain and are expanded. They must include the retention time for personal data, and contact information for data controller and data protection officer has to be provided.
+	Automated individual decision-making, including profiling (Article 22) is contestable, similarly to the Data Protection Directive (Article 15). Citizens have rights to question and fight significant decisions that affect them that have been made on a solely-algorithmic basis. Many media outlets have commented on the introduction of a "right to explanation" of algorithmic decisions, but legal scholars have since argued that the existence of such a right is highly unclear without judicial tests and is limited at best.
+	To be able to demonstrate compliance with the GDPR, the data controller should implement measures, which meet the principles of data protection by design and data protection by default. Privacy by design and by default (Article 25) require data protection measures to be designed into the development of business processes for products and services. Such measures include pseudonymising personal data, by the controller, as soon as possible (Recital 78).
+	It is the responsibility and the liability of the data controller to implement effective measures and be able to demonstrate the compliance of processing activities even if the processing is carried out by a data processor on behalf of the controller (Recital 74).
+	Data Protection Impact Assessments (Article 35) have to be conducted when specific risks occur to the rights and freedoms of data subjects. Risk assessment and mitigation is required and prior approval of the national data protection authorities (DPAs) is required for high risks. Data protection officers (Articles 37–39) are required to ensure compliance within organisations.
+	They have to be appointed:')
+	.'<ul style="padding: 0px 25px; list-style: disc;">'
+		.'<li>for all public authorities, except for courts acting in their judicial capacity</li>'
+		.'<li>if the core activities of the controller or the processor are:</li>'
+			.'<ul style="padding: 0px 25px; list-style: disc;">'
+				.'<li>processing operations, which, by virtue of their nature, their scope and/or their purposes, require regular and systematic monitoring of data subjects on a large scale</li>'
+				.'<li>processing on a large scale of special categories of data pursuant to Article 9 and personal data relating to criminal convictions and offences referred to in Article 10;</li>'
+			.'</ul>'
+		.'</li>'
+	.'</ul>';
+	
+	if($print) echo $out; else return $out;
 }

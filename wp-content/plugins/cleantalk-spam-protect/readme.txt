@@ -3,7 +3,7 @@ Contributors: safronik
 Tags: spam, antispam, protection, comments, firewall 
 Requires at least: 3.0
 Tested up to: 5.0
-Stable tag: 5.108.1
+Stable tag: 5.109
 License: GPLv2
 
 Spam protection, antispam, all-in-one, premium plugin. No spam comments & users, no spam contact form & WooCommerce anti-spam.
@@ -12,21 +12,24 @@ Spam protection, antispam, all-in-one, premium plugin. No spam comments & users,
 
 **Supports: Contact Form 7, Ninja Forms, Gravity Forms, MailChimp, Formidable forms, WooCommerce, JetPack comments and contact form, BuddyPress, bbPress, Fast Secure Contact form, S2Member, MailPoet, any WordPress registrations & contact forms and themes. Just setup and forget the spam!** 
 
-No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bots. Universal AntiSpam plugin.
+No CAPTCHA, no questions, no animal counting, no puzzles, no math and no spam bots. Universal AntiSpam plugin. 
 
 = AntiSpam features =
 1. Stops spam comments.
-1. Stops spam registrations.
-1. Stops spam contact emails.
-1. Stops spam orders.
-1. Stops spam bookings.
-1. Stops spam subscriptions.
-1. Stops spam surveys, polls.
-1. Stops spam in widgets.
-1. Stops spam in WooCommerce.
-1. Checks and removes the existing spam comments and spam users.
-1. Compatible with mobile users and devices. 
-1. Compatible with General Data Protection Regulation (GDPR) (EU). 
+2. Stops spam registrations.
+3. Stops spam contact emails.
+4. Stops spam orders.
+5. Stops spam bookings.
+6. Stops spam subscriptions.
+7. Stops spam surveys, polls.
+8. Stops spam in widgets.
+9. Stops spam in WooCommerce.
+10. Checks and removes the existing spam comments and spam users.
+11. Compatible with mobile users and devices. 
+12. Compatible with General Data Protection Regulation (GDPR) (EU). 
+13. Real-time email validation. Is email real or Not.
+14. No Spam - No Google Penalties. Give your SEO boost.
+
 
 = Public reviews =
 > CleanTalk - Cloud-Based Anti-Spam Service to Keep Your Site Bot-Free.
@@ -208,9 +211,11 @@ CleanTalk has an advanced option "Spam FireWall". This option allows you to bloc
 
 To switch the plugin work in the white-label mode you must insert this code to your wp-config.php: 
 
-	define('APBCT_WHITELABLE',     true);
+	define('APBCT_WHITELABEL',     true);
+	define('APBCT_WHITELABEL_NAME', 'YOUR_PLUGIN_NAME');
 	define('APBCT_HOSTER_API_KEY', 'YOUR_HOSTER_API_KEY');
-	
+
+Where APBCT_WHITELABEL_NAME is any name you want for the plugin.
 Where YOUR_HOSTER_API_KEY is a key from CleanTalk's hoster panel.
 
 The plugin will do everything rest.
@@ -222,6 +227,17 @@ CleanTalk Dashboard allows you to set auto-update plugin and select several webs
 Note: there is 24 hours delay before auto-update will do. This delay allows needing to avoid any issues. All updates that made through CleanTalk Dashboard manually will do immediately. 
 
 Auto-updating system will work from CleanTalk AntiSpam version 5.88
+
+= Real-time email validation. Is email real or Not. =
+It is very important to be sure that the user used his real email address. Spambots very often use fake email addresses, i.e. which addresses do not exist.
+
+CleanTalk will check email addresses for existence in real time.
+
+Non-existing email addresses also entail several other problems for website owners.
+
+* You can never contact them by email,
+* the client will never receive any notifications from you (account activation letter, password recovery, email distribution, notifications, etc.),
+* if you use email marketing for your clients, then a large number of nonexistent emails in the mailing list may result in your IP address being added to various blacklists of email servers.
 
 = Translations = 
 * Albanian (sq_AL) - thanks to fjalaime https://wordpress.org/support/users/fjalaime/ 
@@ -254,10 +270,11 @@ WordPress 3.0 at least. PHP 5 with CURL or file_get_contents() function and enab
 **Important!** To test spam protection you must post a dummy submissions as website visitor (use must logged out from WordPress console), because the plugin doesn't filter submissions from WordPress administrators.
 
 = How can setup plugin in WPMU version? =
-In WordPress multisite version you can switch the plugin to use Global Access key. In this way the plugin doesn't show any options to enter Access key in plugin settings and doesn't show Trial banner in WordPress backend. To setup global CleanTalk access key for all websites in WPMU, define constant in your wp-config.php file before defining database constants:
+In WordPress multisite version you can switch the plugin to use Global Access key. In this way the plugin doesn't show any options to enter Access key in plugin settings and doesn't show Trial banner in WordPress backend. To setup global CleanTalk access key for all websites in WPMS, define constant in your wp-config.php file before defining database constants:
 
     define('CLEANTALK_ACCESS_KEY', 'place your key here');
 
+**Make it before you activated the plugin. If the plugin already activated, deactivate it and add the code and active it again.**
 Now, all subsites will have this access key.
 
 = Manage and control spam protection =
@@ -445,7 +462,7 @@ Yes, it does. But you have to turn off the option 'Use AJAX for JavaScript check
 To close the notice please save the plugin settings again or it will be closed automatically within 60 minutes after the renewal. 
 
 = I'm using PHP 4.2 version and i'm getting errors related with JSON. Why does it happens? =
-ÑleanTalk is no longer supports PHP lower than 5.2 version because the support code have incompatibility with PHP 7 version. Please, upgrade your PHP. If you couldn't perform that, let us know about it via support ticket here: https://cleantalk.org/my/support.
+Ð¡leanTalk is no longer supports PHP lower than 5.2 version because the support code have incompatibility with PHP 7 version. Please, upgrade your PHP. If you couldn't perform that, let us know about it via support ticket here: https://cleantalk.org/my/support.
 
 = Should I change anything in the plugin's settings or in my CleanTalk Control Panel when I switch my website from HTTP to HTTPS or vice versa? =
 No. You don't need to change anything in the plugin's settings or in your CleanTalk Control Panel. The plugin will work regardless of the protocol.
@@ -530,6 +547,14 @@ Yes, it is. Please read this article,
 10. Website's options.
 
 == Changelog ==
+= 5.109 November 15 2018 =
+  Fix: Added URL and IP exclusions to Contact Form 7.
+  Fix: js error when responseText is not exists
+  Fix: Sitename when getting key automatically under WPMS.
+  Mod: SpamFireWall is now fully compatible with WPMS.
+  Mod: Setting 'Tell others about CleanTalk' was deleted.
+  Mod: Protection from spam improved.
+  
 = 5.108.1 November 8 2018 =
   * Fix: Errors with integration class.
 
@@ -1705,6 +1730,14 @@ Yes, it is. Please read this article,
   * First version
   
 == Upgrade Notice ==
+= 5.109 November 15 2018 =
+  Fix: Added URL and IP exclusions to Contact Form 7.
+  Fix: js error when responseText is not exists
+  Fix: Sitename when getting key automatically under WPMS.
+  Mod: SpamFireWall is now fully compatible with WPMS.
+  Mod: Setting 'Tell others about CleanTalk' was deleted.
+  Mod: Protection from spam improved.
+
 = 5.108.1 November 8 2018 =
   * Fix: Errors with integration class.
 
